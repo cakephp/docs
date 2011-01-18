@@ -36,3 +36,21 @@ The Test cases
 If you ever feel the information provided in the API is not sufficient, check out the code of the test cases provided with CakePHP 1.3. They can serve as practical examples for function and data member usage for a class. To get the core test cases you need to download or checkout 1.3 branch from a git repository. The test cases will be located under::
 
     cake/tests/cases
+
+IRC
+===
+
+**IRC Channels on irc.freenode.net:**
+
+* #cakephp -- General Discussion
+* #cakephp-docs -- Documentation
+* #cakephp-bakery -- Bakery
+
+If you’re stumped, give us a holler in the CakePHP IRC channel. Someone from the development team is usually there, especially during the daylight hours for North and South America users. We’d love to hear from you, whether you need some help, want to find users in your area, or would like to donate your brand new sports car.
+
+Google Groups
+=============
+
+http://groups.google.com/group/cake-php
+
+CakePHP also has a very active Google Group. It can be a great resource for finding archived answers, frequently asked questions, and getting answers to immediate problems.
