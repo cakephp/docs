@@ -10,10 +10,11 @@ Contents:
 
 .. toctree::
    :maxdepth: 2
+   :glob:
 
    intro
-   beginning-with-cakephp/what-is-cakephp
-   beginning-with-cakephp/where-to-get-help
+   beginning-with-cakephp/*
+
 
 Indices and tables
 ==================
