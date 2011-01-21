@@ -9,7 +9,6 @@ class ImportShell extends Shell {
 		App::import('Core', 'HttpSocket');
 		$this->Socket = new HttpSocket();
 
-
 		while($this->_urlStack) {
 			$url = array_shift($this->_urlStack);
 			$this->_crawl($url);
