@@ -60,7 +60,7 @@ class ImportShell extends Shell {
 	}
 
 	protected function _fileContents($contents) {
-		$contents = preg_replace('@<div class="options">.*?</div>@s', '', $contents);
+		$contents = preg_replace('@<div class="(options|comment)">.*?</div>@s', '', $contents);
 		preg_match('@<div class="nodes view">(.*?)<div class="node-nav">@s', $contents, $contents);
 
 		$contents = $this->_convertHtmlToReST($contents);
