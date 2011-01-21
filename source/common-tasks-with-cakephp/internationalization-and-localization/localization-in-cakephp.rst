@@ -8,9 +8,6 @@ do is the following:
 
     Configure::write('Config.language', 'fre');
 
-
-#. ``Configure::write('Config.language', 'fre');``
-
 This tells Cake which locale to use (if you use a regional locale,
 such as fr\_FR, it will use the
 `ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_
@@ -26,9 +23,6 @@ Session object, like this:
 ::
 
     $this->Session->write('Config.language', 'fre');
-
-
-#. ``$this->Session->write('Config.language', 'fre');``
 
 It's a good idea to serve up public content available in multiple
 languages from a unique url - this makes it easy for users (and
@@ -59,15 +53,6 @@ example:
     );
     ?>
 
-
-#. ``<?php``
-#. ``echo $form->error(``
-#. ``'Card.cardNumber',``
-#. ``__("errorCardNumber", true),``
-#. ``array('escape' => false)``
-#. ``);``
-#. ``?>``
-
 If you would like to have all of your validation error messages
 translated by default, a simple solution would be to add the
 following code in you app\_model.php:
@@ -77,11 +62,6 @@ following code in you app\_model.php:
     function invalidate($field, $value = true) {
         return parent::invalidate($field, __($value, true));
     }
-
-
-#. ``function invalidate($field, $value = true) {``
-#. ``return parent::invalidate($field, __($value, true));``
-#. ``}``
 
 The i18n console task will not be able to determine the message id
 from the above example, which means you'll need to add the entries
@@ -94,11 +74,6 @@ console task, you can use a different domain such as:
     function invalidate($field, $value = true) {
         return parent::invalidate($field, __d('validation_errors', $value, true));
     }
-
-
-#. ``function invalidate($field, $value = true) {``
-#. ``return parent::invalidate($field, __d('validation_errors', $value, true));``
-#. ``}``
 
 This will look for ``$value`` in the validation\_errors.po file.
 
@@ -123,9 +98,6 @@ do is the following:
 
     Configure::write('Config.language', 'fre');
 
-
-#. ``Configure::write('Config.language', 'fre');``
-
 This tells Cake which locale to use (if you use a regional locale,
 such as fr\_FR, it will use the
 `ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_
@@ -141,9 +113,6 @@ Session object, like this:
 ::
 
     $this->Session->write('Config.language', 'fre');
-
-
-#. ``$this->Session->write('Config.language', 'fre');``
 
 It's a good idea to serve up public content available in multiple
 languages from a unique url - this makes it easy for users (and
@@ -174,15 +143,6 @@ example:
     );
     ?>
 
-
-#. ``<?php``
-#. ``echo $form->error(``
-#. ``'Card.cardNumber',``
-#. ``__("errorCardNumber", true),``
-#. ``array('escape' => false)``
-#. ``);``
-#. ``?>``
-
 If you would like to have all of your validation error messages
 translated by default, a simple solution would be to add the
 following code in you app\_model.php:
@@ -192,11 +152,6 @@ following code in you app\_model.php:
     function invalidate($field, $value = true) {
         return parent::invalidate($field, __($value, true));
     }
-
-
-#. ``function invalidate($field, $value = true) {``
-#. ``return parent::invalidate($field, __($value, true));``
-#. ``}``
 
 The i18n console task will not be able to determine the message id
 from the above example, which means you'll need to add the entries
@@ -209,11 +164,6 @@ console task, you can use a different domain such as:
     function invalidate($field, $value = true) {
         return parent::invalidate($field, __d('validation_errors', $value, true));
     }
-
-
-#. ``function invalidate($field, $value = true) {``
-#. ``return parent::invalidate($field, __d('validation_errors', $value, true));``
-#. ``}``
 
 This will look for ``$value`` in the validation\_errors.po file.
 

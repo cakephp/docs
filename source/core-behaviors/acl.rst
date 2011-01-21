@@ -16,11 +16,6 @@ AROs.
         var $actsAs = array('Acl' => array('type' => 'requester'));
     }
 
-
-#. ``class User extends AppModel {``
-#. ``var $actsAs = array('Acl' => array('type' => 'requester'));``
-#. ``}``
-
 This would attach the Acl behavior in ARO mode. To join the ACL
 behavior in ACO mode use:
 
@@ -30,19 +25,11 @@ behavior in ACO mode use:
         var $actsAs = array('Acl' => array('type' => 'controlled'));
     }
 
-
-#. ``class Post extends AppModel {``
-#. ``var $actsAs = array('Acl' => array('type' => 'controlled'));``
-#. ``}``
-
 You can also attach the behavior on the fly like so:
 
 ::
 
         $this->Post->Behaviors->attach('Acl', array('type' => 'controlled'));
-
-
-#. ``$this->Post->Behaviors->attach('Acl', array('type' => 'controlled'));``
 
 6.1 ACL
 -------
@@ -62,11 +49,6 @@ AROs.
         var $actsAs = array('Acl' => array('type' => 'requester'));
     }
 
-
-#. ``class User extends AppModel {``
-#. ``var $actsAs = array('Acl' => array('type' => 'requester'));``
-#. ``}``
-
 This would attach the Acl behavior in ARO mode. To join the ACL
 behavior in ACO mode use:
 
@@ -76,16 +58,8 @@ behavior in ACO mode use:
         var $actsAs = array('Acl' => array('type' => 'controlled'));
     }
 
-
-#. ``class Post extends AppModel {``
-#. ``var $actsAs = array('Acl' => array('type' => 'controlled'));``
-#. ``}``
-
 You can also attach the behavior on the fly like so:
 
 ::
 
         $this->Post->Behaviors->attach('Acl', array('type' => 'controlled'));
-
-
-#. ``$this->Post->Behaviors->attach('Acl', array('type' => 'controlled'));``

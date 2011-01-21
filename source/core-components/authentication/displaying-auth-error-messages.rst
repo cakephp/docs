@@ -17,12 +17,6 @@ before the content\_for\_layout line.
         echo $session->flash('auth');
     ?>
 
-
-#. ``<?php``
-#. ``echo $session->flash();``
-#. ``echo $session->flash('auth');``
-#. ``?>``
-
 To customize the Auth error messages, place the following code in
 the AppController or wherever you have placed Auth's settings:
 /p
@@ -32,12 +26,6 @@ the AppController or wherever you have placed Auth's settings:
         $this->Auth->loginError = "This message shows up when the wrong credentials are used";
         $this->Auth->authError = "This error shows up with the user tries to access a part of the website that is protected.";
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->loginError = "This message shows up when the wrong credentials are used";``
-#. ``$this->Auth->authError = "This error shows up with the user tries to access a part of the website that is protected.";``
-#. ``?>``
 
 5.2.2 Displaying Auth Error Messages
 ------------------------------------
@@ -58,12 +46,6 @@ before the content\_for\_layout line.
         echo $session->flash('auth');
     ?>
 
-
-#. ``<?php``
-#. ``echo $session->flash();``
-#. ``echo $session->flash('auth');``
-#. ``?>``
-
 To customize the Auth error messages, place the following code in
 the AppController or wherever you have placed Auth's settings:
 /p
@@ -73,9 +55,3 @@ the AppController or wherever you have placed Auth's settings:
         $this->Auth->loginError = "This message shows up when the wrong credentials are used";
         $this->Auth->authError = "This error shows up with the user tries to access a part of the website that is protected.";
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->loginError = "This message shows up when the wrong credentials are used";``
-#. ``$this->Auth->authError = "This error shows up with the user tries to access a part of the website that is protected.";``
-#. ``?>``

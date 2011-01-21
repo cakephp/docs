@@ -12,9 +12,6 @@ looks like:
 
     $this->Number->format($number, $options);
 
-
-#. ``$this->Number->format($number, $options);``
-
 The $number parameter is the number that you are planning on
 formatting for output. With no $options supplied, the number
 1236.334 would output as 1,236. Note that the default precision is
@@ -47,16 +44,6 @@ resides.
         'thousands' => ','
     ));
     // output '¥ 123,456.79'
-
-
-#. ``echo $this->Number->format('123456.7890', array(``
-#. ``'places' => 2,``
-#. ``'before' => '¥ ',``
-#. ``'escape' => false,``
-#. ``'decimals' => '.',``
-#. ``'thousands' => ','``
-#. ``));``
-#. ``// output '¥ 123,456.79'``
 
 7.7.5 format
 ------------
@@ -72,9 +59,6 @@ looks like:
 
     $this->Number->format($number, $options);
 
-
-#. ``$this->Number->format($number, $options);``
-
 The $number parameter is the number that you are planning on
 formatting for output. With no $options supplied, the number
 1236.334 would output as 1,236. Note that the default precision is
@@ -107,13 +91,3 @@ resides.
         'thousands' => ','
     ));
     // output '¥ 123,456.79'
-
-
-#. ``echo $this->Number->format('123456.7890', array(``
-#. ``'places' => 2,``
-#. ``'before' => '¥ ',``
-#. ``'escape' => false,``
-#. ``'decimals' => '.',``
-#. ``'thousands' => ','``
-#. ``));``
-#. ``// output '¥ 123,456.79'``

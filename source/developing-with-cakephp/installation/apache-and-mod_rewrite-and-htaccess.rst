@@ -31,31 +31,12 @@ httpd.conf rather than a user- or site-specific httpd.conf).
        #    Deny from all
        </Directory>
 
-   
-   #. ``#``
-   #. ``# Each directory to which Apache has access can be configured with respect``
-   #. ``# to which services and features are allowed and/or disabled in that``
-   #. ``# directory (and its subdirectories).``
-   #. ``#``
-   #. ``# First, we configure the "default" to be a very restrictive set of``
-   #. ``# features.``
-   #. ``#``
-   #. ``<Directory />``
-   #. ``Options FollowSymLinks``
-   #. ``AllowOverride All``
-   #. ``#    Order deny,allow``
-   #. ``#    Deny from all``
-   #. ``</Directory>``
-
 #. Make sure you are loading up mod\_rewrite correctly. You should
    see something like:
 
    ::
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
-
-   
-   #. ``LoadModule rewrite_module libexec/apache2/mod_rewrite.so``
 
    In many systems these will be commented out (by being prepended
    with a #) by default, so you may just need to remove those leading
@@ -86,13 +67,6 @@ httpd.conf rather than a user- or site-specific httpd.conf).
           RewriteRule    (.*) app/webroot/$1 [L]
        </IfModule>
 
-   
-   #. ``<IfModule mod_rewrite.c>``
-   #. ``RewriteEngine on``
-   #. ``RewriteRule    ^$ app/webroot/    [L]``
-   #. ``RewriteRule    (.*) app/webroot/$1 [L]``
-   #. ``</IfModule>``
-
    Cake app directory (will be copied to the top directory of your
    application by bake):
 
@@ -103,13 +77,6 @@ httpd.conf rather than a user- or site-specific httpd.conf).
            RewriteRule    ^$    webroot/    [L]
            RewriteRule    (.*) webroot/$1    [L]
         </IfModule>
-
-   
-   #. ``<IfModule mod_rewrite.c>``
-   #. ``RewriteEngine on``
-   #. ``RewriteRule    ^$    webroot/    [L]``
-   #. ``RewriteRule    (.*) webroot/$1    [L]``
-   #. ``</IfModule>``
 
    Cake webroot directory (will be copied to your application's web
    root by bake):
@@ -122,14 +89,6 @@ httpd.conf rather than a user- or site-specific httpd.conf).
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
        </IfModule>
-
-   
-   #. ``<IfModule mod_rewrite.c>``
-   #. ``RewriteEngine On``
-   #. ``RewriteCond %{REQUEST_FILENAME} !-d``
-   #. ``RewriteCond %{REQUEST_FILENAME} !-f``
-   #. ``RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]``
-   #. ``</IfModule>``
 
    For many hosting services (GoDaddy, 1and1), your web server is
    actually being served from a user directory that already uses
@@ -152,15 +111,6 @@ httpd.conf rather than a user- or site-specific httpd.conf).
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
        </IfModule>
-
-   
-   #. ``<IfModule mod_rewrite.c>``
-   #. ``RewriteEngine On``
-   #. ``RewriteBase /path/to/cake/app``
-   #. ``RewriteCond %{REQUEST_FILENAME} !-d``
-   #. ``RewriteCond %{REQUEST_FILENAME} !-f``
-   #. ``RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]``
-   #. ``</IfModule>``
 
    The details of those changes will depend on your setup, and can
    include additional things that are not Cake related. Please refer
@@ -200,31 +150,12 @@ httpd.conf rather than a user- or site-specific httpd.conf).
        #    Deny from all
        </Directory>
 
-   
-   #. ``#``
-   #. ``# Each directory to which Apache has access can be configured with respect``
-   #. ``# to which services and features are allowed and/or disabled in that``
-   #. ``# directory (and its subdirectories).``
-   #. ``#``
-   #. ``# First, we configure the "default" to be a very restrictive set of``
-   #. ``# features.``
-   #. ``#``
-   #. ``<Directory />``
-   #. ``Options FollowSymLinks``
-   #. ``AllowOverride All``
-   #. ``#    Order deny,allow``
-   #. ``#    Deny from all``
-   #. ``</Directory>``
-
 #. Make sure you are loading up mod\_rewrite correctly. You should
    see something like:
 
    ::
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
-
-   
-   #. ``LoadModule rewrite_module libexec/apache2/mod_rewrite.so``
 
    In many systems these will be commented out (by being prepended
    with a #) by default, so you may just need to remove those leading
@@ -255,13 +186,6 @@ httpd.conf rather than a user- or site-specific httpd.conf).
           RewriteRule    (.*) app/webroot/$1 [L]
        </IfModule>
 
-   
-   #. ``<IfModule mod_rewrite.c>``
-   #. ``RewriteEngine on``
-   #. ``RewriteRule    ^$ app/webroot/    [L]``
-   #. ``RewriteRule    (.*) app/webroot/$1 [L]``
-   #. ``</IfModule>``
-
    Cake app directory (will be copied to the top directory of your
    application by bake):
 
@@ -272,13 +196,6 @@ httpd.conf rather than a user- or site-specific httpd.conf).
            RewriteRule    ^$    webroot/    [L]
            RewriteRule    (.*) webroot/$1    [L]
         </IfModule>
-
-   
-   #. ``<IfModule mod_rewrite.c>``
-   #. ``RewriteEngine on``
-   #. ``RewriteRule    ^$    webroot/    [L]``
-   #. ``RewriteRule    (.*) webroot/$1    [L]``
-   #. ``</IfModule>``
 
    Cake webroot directory (will be copied to your application's web
    root by bake):
@@ -291,14 +208,6 @@ httpd.conf rather than a user- or site-specific httpd.conf).
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
        </IfModule>
-
-   
-   #. ``<IfModule mod_rewrite.c>``
-   #. ``RewriteEngine On``
-   #. ``RewriteCond %{REQUEST_FILENAME} !-d``
-   #. ``RewriteCond %{REQUEST_FILENAME} !-f``
-   #. ``RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]``
-   #. ``</IfModule>``
 
    For many hosting services (GoDaddy, 1and1), your web server is
    actually being served from a user directory that already uses
@@ -321,15 +230,6 @@ httpd.conf rather than a user- or site-specific httpd.conf).
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
        </IfModule>
-
-   
-   #. ``<IfModule mod_rewrite.c>``
-   #. ``RewriteEngine On``
-   #. ``RewriteBase /path/to/cake/app``
-   #. ``RewriteCond %{REQUEST_FILENAME} !-d``
-   #. ``RewriteCond %{REQUEST_FILENAME} !-f``
-   #. ``RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]``
-   #. ``</IfModule>``
 
    The details of those changes will depend on your setup, and can
    include additional things that are not Cake related. Please refer

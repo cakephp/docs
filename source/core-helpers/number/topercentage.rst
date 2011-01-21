@@ -15,12 +15,6 @@ and prepends the output with a percent sign.
     //Outputs: 
     45.69%
 
-
-#. ``<?php echo $this->Number->toPercentage(45.691873645); ?>``
-#. ````
-#. ``//Outputs:``
-#. ``45.69%``
-
 7.7.3 toPercentage
 ------------------
 
@@ -37,9 +31,3 @@ and prepends the output with a percent sign.
      
     //Outputs: 
     45.69%
-
-
-#. ``<?php echo $this->Number->toPercentage(45.691873645); ?>``
-#. ````
-#. ``//Outputs:``
-#. ``45.69%``

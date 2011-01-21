@@ -27,16 +27,6 @@ Example:
     ); 
     ?>
 
-
-#. ``<div id="post">``
-#. ``</div>``
-#. ``<?php echo $ajax->link(``
-#. ``'View Post',``
-#. ``array( 'controller' => 'posts', 'action' => 'view', 1 ),``
-#. ``array( 'update' => 'post' )``
-#. ``);``
-#. ``?>``
-
 By default, these remote requests are processed asynchronously
 during which various callbacks can be triggered
 
@@ -52,16 +42,6 @@ Example:
         array( 'update' => 'post', 'complete' => 'alert( "Hello World" )'  )
     ); 
     ?>
-
-
-#. ``<div id="post">``
-#. ``</div>``
-#. ``<?php echo $ajax->link(``
-#. ``'View Post',``
-#. ``array( 'controller' => 'posts', 'action' => 'post', 1 ),``
-#. ``array( 'update' => 'post', 'complete' => 'alert( "Hello World" )'  )``
-#. ``);``
-#. ``?>``
 
 To use synchronous processing specify
 ``$options['type'] = 'synchronous'``.
@@ -85,16 +65,6 @@ Example:
     ); 
     ?>
 
-
-#. ``<div id="post">``
-#. ``</div>``
-#. ``<?php echo $ajax->link(``
-#. ``'View Post',``
-#. ``array( 'controller' => 'posts', 'action' => 'view', 1),``
-#. ``array( 'update' => 'post', 'position' => 'top'  )``
-#. ``);``
-#. ``?>``
-
 ``$confirm`` can be used to call up a JavaScript confirm() message
 before the request is run. Allowing the user to prevent execution.
 
@@ -111,17 +81,6 @@ Example:
         'Do you want to delete this post?'
     ); 
     ?>
-
-
-#. ``<div id="post">``
-#. ``</div>``
-#. ``<?php echo $ajax->link(``
-#. ``'Delete Post',``
-#. ``array( 'controller' => 'posts', 'action' => 'delete', 1 ),``
-#. ``array( 'update' => 'post' ),``
-#. ``'Do you want to delete this post?'``
-#. ``);``
-#. ``?>``
 
 remoteFunction
 ~~~~~~~~~~~~~~
@@ -150,18 +109,6 @@ Example:
     ); ?>
     </script>
 
-
-#. ``<div id="post">``
-#. ``</div>``
-#. ``<script type="text/javascript">``
-#. ``<?php echo $ajax->remoteFunction(``
-#. ``array(``
-#. ``'url' => array( 'controller' => 'posts', 'action' => 'view', 1 ),``
-#. ``'update' => 'post'``
-#. ``)``
-#. ``); ?>``
-#. ``</script>``
-
 It can also be assigned to HTML Event Attributes:
 
 ::
@@ -176,18 +123,6 @@ It can also be assigned to HTML Event Attributes:
     <div id="post" onmouseover="<?php echo $remoteFunction; ?>" >
     Mouse Over This
     </div>
-
-
-#. ``<?php``
-#. ``$remoteFunction = $ajax->remoteFunction(``
-#. ``array(``
-#. ``'url' => array( 'controller' => 'posts', 'action' => 'view', 1 ),``
-#. ``'update' => 'post' )``
-#. ``);``
-#. ``?>``
-#. ``<div id="post" onmouseover="<?php echo $remoteFunction; ?>" >``
-#. ``Mouse Over This``
-#. ``</div>``
 
 If ``$options['update']`` is not passed, the browser will ignore
 the server response.
@@ -221,19 +156,6 @@ Example:
     );
     ?>
 
-
-#. ``<div id="post">``
-#. ``</div>``
-#. ``<?php``
-#. ``echo $ajax->remoteTimer(``
-#. ``array(``
-#. ``'url' => array( 'controller' => 'posts', 'action' => 'view', 1 ),``
-#. ``'update' => 'post', 'complete' => 'alert( "request completed" )',``
-#. ``'position' => 'bottom', 'frequency' => 5``
-#. ``)``
-#. ``);``
-#. ``?>``
-
 The default ``$options['frequency']`` is 10 seconds
 
 form
@@ -253,9 +175,6 @@ The options array should include the model name e.g.
 
     $ajax->form('edit','post',array('model'=>'User','update'=>'UserInfoDiv'));
 
-
-#. ``$ajax->form('edit','post',array('model'=>'User','update'=>'UserInfoDiv'));``
-
 Alternatively, if you need to cross post to another controller from
 your form:
 ::
@@ -270,18 +189,6 @@ your form:
             )
         )
     ));
-
-
-#. ``$ajax->form(array('type' => 'post',``
-#. ``'options' => array(``
-#. ``'model'=>'User',``
-#. ``'update'=>'UserInfoDiv',``
-#. ``'url' => array(``
-#. ``'controller' => 'comments',``
-#. ``'action' => 'edit'``
-#. ``)``
-#. ``)``
-#. ``));``
 
 You should not use the ``$ajax->form()`` and ``$ajax->submit()`` in
 the same form. If you want the form validation to work properly use
@@ -307,17 +214,6 @@ Returns a submit button that submits the form to
     echo $form->end();
     ?>
     </div>
-
-
-#. ``<div id='testdiv'>``
-#. ``<?php``
-#. ``echo $form->create('User');``
-#. ``echo $form->input('email');``
-#. ``echo $form->input('name');``
-#. ``echo $ajax->submit('Submit', array('url'=> array('controller'=>'users', 'action'=>'add'), 'update' => 'testdiv'));``
-#. ``echo $form->end();``
-#. ``?>``
-#. ``</div>``
 
 Use the ``$ajax->submit()`` method if you want form validation to
 work properly. i.e. You want the messages you specify in your
@@ -347,20 +243,6 @@ its contents have changed.
         ) 
     ); 
     ?>
-
-
-#. ``<?php echo $form->create( 'Post' ); ?>``
-#. ``<?php $titles = array( 1 => 'Tom', 2 => 'Dick', 3 => 'Harry' ); ?>``
-#. ``<?php echo $form->input( 'title', array( 'options' => $titles ) ) ?>``
-#. ``</form>``
-#. ``<?php``
-#. ``echo $ajax->observeField( 'PostTitle',``
-#. ``array(``
-#. ``'url' => array( 'action' => 'edit' ),``
-#. ``'frequency' => 0.2,``
-#. ``)``
-#. ``);``
-#. ``?>``
 
 ``observeField`` uses the same options as ``link``
 
@@ -408,19 +290,6 @@ for your list, based on user input:
         $this->layout = 'ajax';
     }
 
-
-#. ``function autoComplete() {``
-#. ``//Partial strings will come from the autocomplete field as``
-#. ``//$this->data['Post']['subject']``
-#. ``$this->set('posts', $this->Post->find('all', array(``
-#. ``'conditions' => array(``
-#. ``'Post.subject LIKE' => $this->data['Post']['subject'].'%'``
-#. ``),``
-#. ``'fields' => array('subject')``
-#. ``)));``
-#. ``$this->layout = 'ajax';``
-#. ``}``
-
 Next, create ``app/views/posts/auto_complete.ctp`` that uses that
 data and creates an unordered list in (X)HTML:
 
@@ -432,13 +301,6 @@ data and creates an unordered list in (X)HTML:
      <?php endforeach; ?>
     </ul> 
 
-
-#. ``<ul>``
-#. ``<?php foreach($posts as $post): ?>``
-#. ``<li><?php echo $post['Post']['subject']; ?></li>``
-#. ``<?php endforeach; ?>``
-#. ``</ul>``
-
 Finally, utilize autoComplete() in a view to create your
 auto-completing form field:
 
@@ -447,11 +309,6 @@ auto-completing form field:
     <?php echo $form->create('User', array('url' => '/users/index')); ?>
         <?php echo $ajax->autoComplete('Post.subject', '/posts/autoComplete')?>
     <?php echo $form->end('View Post')?>
-
-
-#. ``<?php echo $form->create('User', array('url' => '/users/index')); ?>``
-#. ``<?php echo $ajax->autoComplete('Post.subject', '/posts/autoComplete')?>``
-#. ``<?php echo $form->end('View Post')?>``
 
 Once you've got the autoComplete() call working correctly, use CSS
 to style the auto-complete suggestion box. You might end up using
@@ -682,20 +539,6 @@ Example
         array()
     );
     ?>
-
-
-#. ``<div id="in_place_editor_id">Text To Edit</div>``
-#. ``<?php``
-#. ``echo $ajax->editor(``
-#. ``"in_place_editor_id",``
-#. ``array(``
-#. ``'controller' => 'Posts',``
-#. ``'action' => 'update_title',``
-#. ``$id``
-#. ``),``
-#. ``array()``
-#. ``);``
-#. ``?>``
 
 sortable
 ~~~~~~~~
@@ -780,16 +623,6 @@ Example:
     ); 
     ?>
 
-
-#. ``<div id="post">``
-#. ``</div>``
-#. ``<?php echo $ajax->link(``
-#. ``'View Post',``
-#. ``array( 'controller' => 'posts', 'action' => 'view', 1 ),``
-#. ``array( 'update' => 'post' )``
-#. ``);``
-#. ``?>``
-
 By default, these remote requests are processed asynchronously
 during which various callbacks can be triggered
 
@@ -805,16 +638,6 @@ Example:
         array( 'update' => 'post', 'complete' => 'alert( "Hello World" )'  )
     ); 
     ?>
-
-
-#. ``<div id="post">``
-#. ``</div>``
-#. ``<?php echo $ajax->link(``
-#. ``'View Post',``
-#. ``array( 'controller' => 'posts', 'action' => 'post', 1 ),``
-#. ``array( 'update' => 'post', 'complete' => 'alert( "Hello World" )'  )``
-#. ``);``
-#. ``?>``
 
 To use synchronous processing specify
 ``$options['type'] = 'synchronous'``.
@@ -838,16 +661,6 @@ Example:
     ); 
     ?>
 
-
-#. ``<div id="post">``
-#. ``</div>``
-#. ``<?php echo $ajax->link(``
-#. ``'View Post',``
-#. ``array( 'controller' => 'posts', 'action' => 'view', 1),``
-#. ``array( 'update' => 'post', 'position' => 'top'  )``
-#. ``);``
-#. ``?>``
-
 ``$confirm`` can be used to call up a JavaScript confirm() message
 before the request is run. Allowing the user to prevent execution.
 
@@ -864,17 +677,6 @@ Example:
         'Do you want to delete this post?'
     ); 
     ?>
-
-
-#. ``<div id="post">``
-#. ``</div>``
-#. ``<?php echo $ajax->link(``
-#. ``'Delete Post',``
-#. ``array( 'controller' => 'posts', 'action' => 'delete', 1 ),``
-#. ``array( 'update' => 'post' ),``
-#. ``'Do you want to delete this post?'``
-#. ``);``
-#. ``?>``
 
 remoteFunction
 ~~~~~~~~~~~~~~
@@ -903,18 +705,6 @@ Example:
     ); ?>
     </script>
 
-
-#. ``<div id="post">``
-#. ``</div>``
-#. ``<script type="text/javascript">``
-#. ``<?php echo $ajax->remoteFunction(``
-#. ``array(``
-#. ``'url' => array( 'controller' => 'posts', 'action' => 'view', 1 ),``
-#. ``'update' => 'post'``
-#. ``)``
-#. ``); ?>``
-#. ``</script>``
-
 It can also be assigned to HTML Event Attributes:
 
 ::
@@ -929,18 +719,6 @@ It can also be assigned to HTML Event Attributes:
     <div id="post" onmouseover="<?php echo $remoteFunction; ?>" >
     Mouse Over This
     </div>
-
-
-#. ``<?php``
-#. ``$remoteFunction = $ajax->remoteFunction(``
-#. ``array(``
-#. ``'url' => array( 'controller' => 'posts', 'action' => 'view', 1 ),``
-#. ``'update' => 'post' )``
-#. ``);``
-#. ``?>``
-#. ``<div id="post" onmouseover="<?php echo $remoteFunction; ?>" >``
-#. ``Mouse Over This``
-#. ``</div>``
 
 If ``$options['update']`` is not passed, the browser will ignore
 the server response.
@@ -974,19 +752,6 @@ Example:
     );
     ?>
 
-
-#. ``<div id="post">``
-#. ``</div>``
-#. ``<?php``
-#. ``echo $ajax->remoteTimer(``
-#. ``array(``
-#. ``'url' => array( 'controller' => 'posts', 'action' => 'view', 1 ),``
-#. ``'update' => 'post', 'complete' => 'alert( "request completed" )',``
-#. ``'position' => 'bottom', 'frequency' => 5``
-#. ``)``
-#. ``);``
-#. ``?>``
-
 The default ``$options['frequency']`` is 10 seconds
 
 form
@@ -1006,9 +771,6 @@ The options array should include the model name e.g.
 
     $ajax->form('edit','post',array('model'=>'User','update'=>'UserInfoDiv'));
 
-
-#. ``$ajax->form('edit','post',array('model'=>'User','update'=>'UserInfoDiv'));``
-
 Alternatively, if you need to cross post to another controller from
 your form:
 ::
@@ -1023,18 +785,6 @@ your form:
             )
         )
     ));
-
-
-#. ``$ajax->form(array('type' => 'post',``
-#. ``'options' => array(``
-#. ``'model'=>'User',``
-#. ``'update'=>'UserInfoDiv',``
-#. ``'url' => array(``
-#. ``'controller' => 'comments',``
-#. ``'action' => 'edit'``
-#. ``)``
-#. ``)``
-#. ``));``
 
 You should not use the ``$ajax->form()`` and ``$ajax->submit()`` in
 the same form. If you want the form validation to work properly use
@@ -1060,17 +810,6 @@ Returns a submit button that submits the form to
     echo $form->end();
     ?>
     </div>
-
-
-#. ``<div id='testdiv'>``
-#. ``<?php``
-#. ``echo $form->create('User');``
-#. ``echo $form->input('email');``
-#. ``echo $form->input('name');``
-#. ``echo $ajax->submit('Submit', array('url'=> array('controller'=>'users', 'action'=>'add'), 'update' => 'testdiv'));``
-#. ``echo $form->end();``
-#. ``?>``
-#. ``</div>``
 
 Use the ``$ajax->submit()`` method if you want form validation to
 work properly. i.e. You want the messages you specify in your
@@ -1100,20 +839,6 @@ its contents have changed.
         ) 
     ); 
     ?>
-
-
-#. ``<?php echo $form->create( 'Post' ); ?>``
-#. ``<?php $titles = array( 1 => 'Tom', 2 => 'Dick', 3 => 'Harry' ); ?>``
-#. ``<?php echo $form->input( 'title', array( 'options' => $titles ) ) ?>``
-#. ``</form>``
-#. ``<?php``
-#. ``echo $ajax->observeField( 'PostTitle',``
-#. ``array(``
-#. ``'url' => array( 'action' => 'edit' ),``
-#. ``'frequency' => 0.2,``
-#. ``)``
-#. ``);``
-#. ``?>``
 
 ``observeField`` uses the same options as ``link``
 
@@ -1161,19 +886,6 @@ for your list, based on user input:
         $this->layout = 'ajax';
     }
 
-
-#. ``function autoComplete() {``
-#. ``//Partial strings will come from the autocomplete field as``
-#. ``//$this->data['Post']['subject']``
-#. ``$this->set('posts', $this->Post->find('all', array(``
-#. ``'conditions' => array(``
-#. ``'Post.subject LIKE' => $this->data['Post']['subject'].'%'``
-#. ``),``
-#. ``'fields' => array('subject')``
-#. ``)));``
-#. ``$this->layout = 'ajax';``
-#. ``}``
-
 Next, create ``app/views/posts/auto_complete.ctp`` that uses that
 data and creates an unordered list in (X)HTML:
 
@@ -1185,13 +897,6 @@ data and creates an unordered list in (X)HTML:
      <?php endforeach; ?>
     </ul> 
 
-
-#. ``<ul>``
-#. ``<?php foreach($posts as $post): ?>``
-#. ``<li><?php echo $post['Post']['subject']; ?></li>``
-#. ``<?php endforeach; ?>``
-#. ``</ul>``
-
 Finally, utilize autoComplete() in a view to create your
 auto-completing form field:
 
@@ -1200,11 +905,6 @@ auto-completing form field:
     <?php echo $form->create('User', array('url' => '/users/index')); ?>
         <?php echo $ajax->autoComplete('Post.subject', '/posts/autoComplete')?>
     <?php echo $form->end('View Post')?>
-
-
-#. ``<?php echo $form->create('User', array('url' => '/users/index')); ?>``
-#. ``<?php echo $ajax->autoComplete('Post.subject', '/posts/autoComplete')?>``
-#. ``<?php echo $form->end('View Post')?>``
 
 Once you've got the autoComplete() call working correctly, use CSS
 to style the auto-complete suggestion box. You might end up using
@@ -1435,20 +1135,6 @@ Example
         array()
     );
     ?>
-
-
-#. ``<div id="in_place_editor_id">Text To Edit</div>``
-#. ``<?php``
-#. ``echo $ajax->editor(``
-#. ``"in_place_editor_id",``
-#. ``array(``
-#. ``'controller' => 'Posts',``
-#. ``'action' => 'update_title',``
-#. ``$id``
-#. ``),``
-#. ``array()``
-#. ``);``
-#. ``?>``
 
 sortable
 ~~~~~~~~

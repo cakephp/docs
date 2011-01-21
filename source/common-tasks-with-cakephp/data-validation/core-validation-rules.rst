@@ -21,14 +21,6 @@ The data for the field must only contain letters and numbers.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'rule' => 'alphaNumeric',``
-#. ``'message' => 'Usernames must only contain letters and numbers.'``
-#. ``)``
-#. ``);``
-
 between
 ~~~~~~~
 
@@ -45,14 +37,6 @@ Uses
             'message' => 'Passwords must be between 5 and 15 characters long.'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'password' => array(``
-#. ``'rule' => array('between', 5, 15),``
-#. ``'message' => 'Passwords must be between 5 and 15 characters long.'``
-#. ``)``
-#. ``);``
 
 The length of data is "the number of bytes in the string
 representation of the data". Be careful that it may be larger than
@@ -74,14 +58,6 @@ characters include space, tab, carriage return, and newline.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'id' => array(``
-#. ``'rule' => 'blank',``
-#. ``'on' => 'create'``
-#. ``)``
-#. ``);``
-
 boolean
 ~~~~~~~
 
@@ -96,14 +72,6 @@ true or false, integers 0 or 1 or strings '0' or '1'.
             'message' => 'Incorrect value for myCheckbox'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'myCheckbox' => array(``
-#. ``'rule' => array('boolean'),``
-#. ``'message' => 'Incorrect value for myCheckbox'``
-#. ``)``
-#. ``);``
 
 cc
 ~~
@@ -152,14 +120,6 @@ that will be used to validate the credit card number.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'ccnumber' => array(``
-#. ``'rule' => array('cc', array('visa', 'maestro'), false, null),``
-#. ``'message' => 'The credit card number you supplied was invalid.'``
-#. ``)``
-#. ``);``
-
 comparison
 ~~~~~~~~~~
 
@@ -182,20 +142,6 @@ to”, and “not equal”. Some examples are shown below:
             'message' => 'Must be at least 18 years old to qualify.'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'age' => array(``
-#. ``'rule' => array('comparison', '>=', 18),``
-#. ``'message' => 'Must be at least 18 years old to qualify.'``
-#. ``)``
-#. ``);``
-#. ``var $validate = array(``
-#. ``'age' => array(``
-#. ``'rule' => array('comparison', 'greater or equal', 18),``
-#. ``'message' => 'Must be at least 18 years old to qualify.'``
-#. ``)``
-#. ``);``
 
 date
 ~~~~
@@ -231,15 +177,6 @@ If no keys are supplied, the default key that will be used is
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'born' => array(``
-#. ``'rule' => array('date','ymd'),``
-#. ``'message' => 'Enter a valid date in YY-MM-DD format.',``
-#. ``'allowEmpty' => true``
-#. ``)``
-#. ``);``
-
 While many data stores require a certain date format, you might
 consider doing the heavy lifting by accepting a wide-array of date
 formats and trying to convert them, rather than forcing users to
@@ -263,13 +200,6 @@ fail if no digits are found after the decimal point.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'price' => array(``
-#. ``'rule' => array('decimal', 2)``
-#. ``)``
-#. ``);``
-
 email
 ~~~~~
 
@@ -288,16 +218,6 @@ attempt to verify that the host for the address is valid.
         )
     );
 
-
-#. ``var $validate = array('email' => array('rule' => 'email'));``
-#. ````
-#. ``var $validate = array(``
-#. ``'email' => array(``
-#. ``'rule' => array('email', true),``
-#. ``'message' => 'Please supply a valid email address.'``
-#. ``)``
-#. ``);``
-
 equalTo
 ~~~~~~~
 
@@ -313,14 +233,6 @@ type as the given value.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'food' => array(``
-#. ``'rule' => array('equalTo', 'cake'),``
-#. ``'message' => 'This value must be the string cake'``
-#. ``)``
-#. ``);``
-
 extension
 ~~~~~~~~~
 
@@ -335,14 +247,6 @@ multiple extensions by passing them in array form.
             'message' => 'Please supply a valid image.'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'image' => array(``
-#. ``'rule' => array('extension', array('gif', 'jpeg', 'png', 'jpg')),``
-#. ``'message' => 'Please supply a valid image.'``
-#. ``)``
-#. ``);``
 
 file
 ~~~~
@@ -365,14 +269,6 @@ submitted. Accepts as option 'both' (default), 'IPv4' or 'IPv6'.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'clientip' => array(``
-#. ``'rule' => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)``
-#. ``'message' => 'Please supply a valid IP address.'``
-#. ``)``
-#. ``);``
-
 isUnique
 ~~~~~~~~
 
@@ -388,14 +284,6 @@ other rows.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'rule' => 'isUnique',``
-#. ``'message' => 'This username has already been taken.'``
-#. ``)``
-#. ``);``
-
 minLength
 ~~~~~~~~~
 
@@ -410,14 +298,6 @@ requirement.
             'message' => 'Usernames must be at least 8 characters long.'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'rule' => array('minLength', 8),``
-#. ``'message' => 'Usernames must be at least 8 characters long.'``
-#. ``)``
-#. ``);``
 
 The length here is "the number of bytes in the string
 representation of the data". Be careful that it may be larger than
@@ -437,14 +317,6 @@ requirement.
             'message' => 'Usernames must be no larger than 15 characters long.'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'rule' => array('maxLength', 15),``
-#. ``'message' => 'Usernames must be no larger than 15 characters long.'``
-#. ``)``
-#. ``);``
 
 The length here is "the number of bytes in the string
 representation of the data". Be careful that it may be larger than
@@ -467,14 +339,6 @@ Second parameter defines where symbol is located (left/right).
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'salary' => array(``
-#. ``'rule' => array('money', 'left'),``
-#. ``'message' => 'Please supply a valid monetary amount.'``
-#. ``)``
-#. ``);``
-
 multiple
 ~~~~~~~~
 
@@ -489,14 +353,6 @@ parameters "in", "max" and "min".
             'message' => 'Please select one, two or three options'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'multiple' => array(``
-#. ``'rule' => array('multiple', array('in' => array('do', 'ray', 'me', 'fa', 'so', 'la', 'ti'), 'min' => 1, 'max' => 3)),``
-#. ``'message' => 'Please select one, two or three options'``
-#. ``)``
-#. ``);``
 
 inList
 ~~~~~~
@@ -517,16 +373,6 @@ Example:
           )
         );
 
-
-#. ``var $validate = array(``
-#. ``'function' => array(``
-#. ``'allowedChoice' => array(``
-#. ``'rule' => array('inList', array('Foo', 'Bar')),``
-#. ``'message' => 'Enter either Foo or Bar.'``
-#. ``)``
-#. ``)``
-#. ``);``
-
 numeric
 ~~~~~~~
 
@@ -541,14 +387,6 @@ Checks if the data passed is a valid number.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'cars' => array(``
-#. ``'rule' => 'numeric',``
-#. ``'message' => 'Please supply the number of cars.'``
-#. ``)``
-#. ``);``
-
 notEmpty
 ~~~~~~~~
 
@@ -562,14 +400,6 @@ The basic rule to ensure that a field is not empty.
             'message' => 'This field cannot be left blank'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'title' => array(``
-#. ``'rule' => 'notEmpty',``
-#. ``'message' => 'This field cannot be left blank'``
-#. ``)``
-#. ``);``
 
 Do not use this for a multiple select input as it will cause an
 error. Instead, use "multiple".
@@ -589,13 +419,6 @@ parameter to cover additional number formats.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'phone' => array(``
-#. ``'rule' => array('phone', null, 'us')``
-#. ``)``
-#. ``);``
-
 postal
 ~~~~~~
 
@@ -612,13 +435,6 @@ second parameter.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'zipcode' => array(``
-#. ``'rule' => array('postal', null, 'us')``
-#. ``)``
-#. ``);``
-
 range
 ~~~~~
 
@@ -634,14 +450,6 @@ finite on the current platform.
             'message' => 'Please enter a number between 0 and 10'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'number' => array(``
-#. ``'rule' => array('range', -1, 11),``
-#. ``'message' => 'Please enter a number between 0 and 10'``
-#. ``)``
-#. ``);``
 
 The above example will accept any value which is larger than 0
 (e.g., 0.01) and less than 10 (e.g., 9.99). Note: The range
@@ -662,13 +470,6 @@ formats, you may provide a regular expression.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'ssn' => array(``
-#. ``'rule' => array('ssn', null, 'us')``
-#. ``)``
-#. ``);``
-
 url
 ~~~
 
@@ -683,13 +484,6 @@ file, news, and gopher protocols.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'website' => array(``
-#. ``'rule' => 'url'``
-#. ``)``
-#. ``);``
-
 To ensure that a protocol is in the url, strict mode can be enabled
 like so.
 
@@ -700,13 +494,6 @@ like so.
             'rule' => array('url', true)
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'website' => array(``
-#. ``'rule' => array('url', true)``
-#. ``)``
-#. ``);``
 
 4.1.4 Core Validation Rules
 ---------------------------
@@ -731,14 +518,6 @@ The data for the field must only contain letters and numbers.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'rule' => 'alphaNumeric',``
-#. ``'message' => 'Usernames must only contain letters and numbers.'``
-#. ``)``
-#. ``);``
-
 between
 ~~~~~~~
 
@@ -755,14 +534,6 @@ Uses
             'message' => 'Passwords must be between 5 and 15 characters long.'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'password' => array(``
-#. ``'rule' => array('between', 5, 15),``
-#. ``'message' => 'Passwords must be between 5 and 15 characters long.'``
-#. ``)``
-#. ``);``
 
 The length of data is "the number of bytes in the string
 representation of the data". Be careful that it may be larger than
@@ -784,14 +555,6 @@ characters include space, tab, carriage return, and newline.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'id' => array(``
-#. ``'rule' => 'blank',``
-#. ``'on' => 'create'``
-#. ``)``
-#. ``);``
-
 boolean
 ~~~~~~~
 
@@ -806,14 +569,6 @@ true or false, integers 0 or 1 or strings '0' or '1'.
             'message' => 'Incorrect value for myCheckbox'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'myCheckbox' => array(``
-#. ``'rule' => array('boolean'),``
-#. ``'message' => 'Incorrect value for myCheckbox'``
-#. ``)``
-#. ``);``
 
 cc
 ~~
@@ -862,14 +617,6 @@ that will be used to validate the credit card number.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'ccnumber' => array(``
-#. ``'rule' => array('cc', array('visa', 'maestro'), false, null),``
-#. ``'message' => 'The credit card number you supplied was invalid.'``
-#. ``)``
-#. ``);``
-
 comparison
 ~~~~~~~~~~
 
@@ -892,20 +639,6 @@ to”, and “not equal”. Some examples are shown below:
             'message' => 'Must be at least 18 years old to qualify.'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'age' => array(``
-#. ``'rule' => array('comparison', '>=', 18),``
-#. ``'message' => 'Must be at least 18 years old to qualify.'``
-#. ``)``
-#. ``);``
-#. ``var $validate = array(``
-#. ``'age' => array(``
-#. ``'rule' => array('comparison', 'greater or equal', 18),``
-#. ``'message' => 'Must be at least 18 years old to qualify.'``
-#. ``)``
-#. ``);``
 
 date
 ~~~~
@@ -941,15 +674,6 @@ If no keys are supplied, the default key that will be used is
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'born' => array(``
-#. ``'rule' => array('date','ymd'),``
-#. ``'message' => 'Enter a valid date in YY-MM-DD format.',``
-#. ``'allowEmpty' => true``
-#. ``)``
-#. ``);``
-
 While many data stores require a certain date format, you might
 consider doing the heavy lifting by accepting a wide-array of date
 formats and trying to convert them, rather than forcing users to
@@ -973,13 +697,6 @@ fail if no digits are found after the decimal point.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'price' => array(``
-#. ``'rule' => array('decimal', 2)``
-#. ``)``
-#. ``);``
-
 email
 ~~~~~
 
@@ -998,16 +715,6 @@ attempt to verify that the host for the address is valid.
         )
     );
 
-
-#. ``var $validate = array('email' => array('rule' => 'email'));``
-#. ````
-#. ``var $validate = array(``
-#. ``'email' => array(``
-#. ``'rule' => array('email', true),``
-#. ``'message' => 'Please supply a valid email address.'``
-#. ``)``
-#. ``);``
-
 equalTo
 ~~~~~~~
 
@@ -1023,14 +730,6 @@ type as the given value.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'food' => array(``
-#. ``'rule' => array('equalTo', 'cake'),``
-#. ``'message' => 'This value must be the string cake'``
-#. ``)``
-#. ``);``
-
 extension
 ~~~~~~~~~
 
@@ -1045,14 +744,6 @@ multiple extensions by passing them in array form.
             'message' => 'Please supply a valid image.'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'image' => array(``
-#. ``'rule' => array('extension', array('gif', 'jpeg', 'png', 'jpg')),``
-#. ``'message' => 'Please supply a valid image.'``
-#. ``)``
-#. ``);``
 
 file
 ~~~~
@@ -1075,14 +766,6 @@ submitted. Accepts as option 'both' (default), 'IPv4' or 'IPv6'.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'clientip' => array(``
-#. ``'rule' => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)``
-#. ``'message' => 'Please supply a valid IP address.'``
-#. ``)``
-#. ``);``
-
 isUnique
 ~~~~~~~~
 
@@ -1098,14 +781,6 @@ other rows.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'rule' => 'isUnique',``
-#. ``'message' => 'This username has already been taken.'``
-#. ``)``
-#. ``);``
-
 minLength
 ~~~~~~~~~
 
@@ -1120,14 +795,6 @@ requirement.
             'message' => 'Usernames must be at least 8 characters long.'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'rule' => array('minLength', 8),``
-#. ``'message' => 'Usernames must be at least 8 characters long.'``
-#. ``)``
-#. ``);``
 
 The length here is "the number of bytes in the string
 representation of the data". Be careful that it may be larger than
@@ -1147,14 +814,6 @@ requirement.
             'message' => 'Usernames must be no larger than 15 characters long.'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'rule' => array('maxLength', 15),``
-#. ``'message' => 'Usernames must be no larger than 15 characters long.'``
-#. ``)``
-#. ``);``
 
 The length here is "the number of bytes in the string
 representation of the data". Be careful that it may be larger than
@@ -1177,14 +836,6 @@ Second parameter defines where symbol is located (left/right).
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'salary' => array(``
-#. ``'rule' => array('money', 'left'),``
-#. ``'message' => 'Please supply a valid monetary amount.'``
-#. ``)``
-#. ``);``
-
 multiple
 ~~~~~~~~
 
@@ -1199,14 +850,6 @@ parameters "in", "max" and "min".
             'message' => 'Please select one, two or three options'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'multiple' => array(``
-#. ``'rule' => array('multiple', array('in' => array('do', 'ray', 'me', 'fa', 'so', 'la', 'ti'), 'min' => 1, 'max' => 3)),``
-#. ``'message' => 'Please select one, two or three options'``
-#. ``)``
-#. ``);``
 
 inList
 ~~~~~~
@@ -1227,16 +870,6 @@ Example:
           )
         );
 
-
-#. ``var $validate = array(``
-#. ``'function' => array(``
-#. ``'allowedChoice' => array(``
-#. ``'rule' => array('inList', array('Foo', 'Bar')),``
-#. ``'message' => 'Enter either Foo or Bar.'``
-#. ``)``
-#. ``)``
-#. ``);``
-
 numeric
 ~~~~~~~
 
@@ -1251,14 +884,6 @@ Checks if the data passed is a valid number.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'cars' => array(``
-#. ``'rule' => 'numeric',``
-#. ``'message' => 'Please supply the number of cars.'``
-#. ``)``
-#. ``);``
-
 notEmpty
 ~~~~~~~~
 
@@ -1272,14 +897,6 @@ The basic rule to ensure that a field is not empty.
             'message' => 'This field cannot be left blank'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'title' => array(``
-#. ``'rule' => 'notEmpty',``
-#. ``'message' => 'This field cannot be left blank'``
-#. ``)``
-#. ``);``
 
 Do not use this for a multiple select input as it will cause an
 error. Instead, use "multiple".
@@ -1299,13 +916,6 @@ parameter to cover additional number formats.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'phone' => array(``
-#. ``'rule' => array('phone', null, 'us')``
-#. ``)``
-#. ``);``
-
 postal
 ~~~~~~
 
@@ -1322,13 +932,6 @@ second parameter.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'zipcode' => array(``
-#. ``'rule' => array('postal', null, 'us')``
-#. ``)``
-#. ``);``
-
 range
 ~~~~~
 
@@ -1344,14 +947,6 @@ finite on the current platform.
             'message' => 'Please enter a number between 0 and 10'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'number' => array(``
-#. ``'rule' => array('range', -1, 11),``
-#. ``'message' => 'Please enter a number between 0 and 10'``
-#. ``)``
-#. ``);``
 
 The above example will accept any value which is larger than 0
 (e.g., 0.01) and less than 10 (e.g., 9.99). Note: The range
@@ -1372,13 +967,6 @@ formats, you may provide a regular expression.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'ssn' => array(``
-#. ``'rule' => array('ssn', null, 'us')``
-#. ``)``
-#. ``);``
-
 url
 ~~~
 
@@ -1393,13 +981,6 @@ file, news, and gopher protocols.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'website' => array(``
-#. ``'rule' => 'url'``
-#. ``)``
-#. ``);``
-
 To ensure that a protocol is in the url, strict mode can be enabled
 like so.
 
@@ -1410,10 +991,3 @@ like so.
             'rule' => array('url', true)
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'website' => array(``
-#. ``'rule' => array('url', true)``
-#. ``)``
-#. ``);``

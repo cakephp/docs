@@ -16,15 +16,6 @@ configuration should look something like this.
                          'database'    => 'my_cakephp_project',
                          'prefix'      => '');
 
-
-#. ``var $default = array('driver'      => 'mysql',``
-#. ``'persistent'  => false,``
-#. ``'host'        => 'localhost',``
-#. ``'login'       => 'cakephpuser',``
-#. ``'password'    => 'c4k3roxx!',``
-#. ``'database'    => 'my_cakephp_project',``
-#. ``'prefix'      => '');``
-
 The $default connection array is used unless another connection is
 specified by the $useDbConfig property in a model. For example, if
 my application has an additional legacy database in addition to the
@@ -101,15 +92,6 @@ configuration should look something like this.
                          'password'    => 'c4k3roxx!',
                          'database'    => 'my_cakephp_project',
                          'prefix'      => '');
-
-
-#. ``var $default = array('driver'      => 'mysql',``
-#. ``'persistent'  => false,``
-#. ``'host'        => 'localhost',``
-#. ``'login'       => 'cakephpuser',``
-#. ``'password'    => 'c4k3roxx!',``
-#. ``'database'    => 'my_cakephp_project',``
-#. ``'prefix'      => '');``
 
 The $default connection array is used unless another connection is
 specified by the $useDbConfig property in a model. For example, if

@@ -14,12 +14,6 @@ CakePHP core library. As such, AppController is defined in
     }
     ?>
 
-
-#. ``<?php``
-#. ``class AppController extends Controller {``
-#. ``}``
-#. ``?>``
-
 Controller attributes and methods created in your AppController
 will be available to all of your application's controllers. It is
 the ideal place to create code that is common to all of your
@@ -52,11 +46,6 @@ controller callbacks for best results:
     function beforeFilter(){
         parent::beforeFilter();
     }
-
-
-#. ``function beforeFilter(){``
-#. ``parent::beforeFilter();``
-#. ``}``
 
 3.5.1 The App Controller
 ------------------------
@@ -74,12 +63,6 @@ CakePHP core library. As such, AppController is defined in
     }
     ?>
 
-
-#. ``<?php``
-#. ``class AppController extends Controller {``
-#. ``}``
-#. ``?>``
-
 Controller attributes and methods created in your AppController
 will be available to all of your application's controllers. It is
 the ideal place to create code that is common to all of your
@@ -112,8 +95,3 @@ controller callbacks for best results:
     function beforeFilter(){
         parent::beforeFilter();
     }
-
-
-#. ``function beforeFilter(){``
-#. ``parent::beforeFilter();``
-#. ``}``

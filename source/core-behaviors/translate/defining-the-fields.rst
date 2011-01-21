@@ -17,18 +17,6 @@ value with another array, like so:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ``var $actsAs = array(``
-#. ``'Translate' => array(``
-#. ``'fieldOne', 'fieldTwo', 'and_so_on'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
-
 After you have done that (for example putting "name" as one of the
 fields) you already finished the basic setup. Great! According to
 our current example the model should now look something like this:
@@ -45,18 +33,6 @@ our current example the model should now look something like this:
         );
     }
     ?>
-
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ``var $actsAs = array(``
-#. ``'Translate' => array(``
-#. ``'name'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 When defining fields for TranslateBehavior to translate, be sure to
 omit those fields from the translated model's schema. If you leave
@@ -82,18 +58,6 @@ value with another array, like so:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ``var $actsAs = array(``
-#. ``'Translate' => array(``
-#. ``'fieldOne', 'fieldTwo', 'and_so_on'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
-
 After you have done that (for example putting "name" as one of the
 fields) you already finished the basic setup. Great! According to
 our current example the model should now look something like this:
@@ -110,18 +74,6 @@ our current example the model should now look something like this:
         );
     }
     ?>
-
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ``var $actsAs = array(``
-#. ``'Translate' => array(``
-#. ``'name'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 When defining fields for TranslateBehavior to translate, be sure to
 omit those fields from the translated model's schema. If you leave

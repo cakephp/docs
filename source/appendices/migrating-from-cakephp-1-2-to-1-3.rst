@@ -61,22 +61,6 @@ There is a new way to add those paths. As of 1.3 RC1 the
         'libs' => array('/full/path/to/libs/', '/next/full/path/to/libs/')
     ));
 
-
-#. ``App::build(array(``
-#. ``'plugins' => array('/full/path/to/plugins/', '/next/full/path/to/plugins/'),``
-#. ``'models' =>  array('/full/path/to/models/', '/next/full/path/to/models/'),``
-#. ``'views' => array('/full/path/to/views/', '/next/full/path/to/views/'),``
-#. ``'controllers' => array('/full/path/to/controllers/', '/next/full/path/to/controllers/'),``
-#. ``'datasources' => array('/full/path/to/datasources/', '/next/full/path/to/datasources/'),``
-#. ``'behaviors' => array('/full/path/to/behaviors/', '/next/full/path/to/behaviors/'),``
-#. ``'components' => array('/full/path/to/components/', '/next/full/path/to/components/'),``
-#. ``'helpers' => array('/full/path/to/helpers/', '/next/full/path/to/helpers/'),``
-#. ``'vendors' => array('/full/path/to/vendors/', '/next/full/path/to/vendors/'),``
-#. ``'shells' => array('/full/path/to/shells/', '/next/full/path/to/shells/'),``
-#. ``'locales' => array('/full/path/to/locale/', '/next/full/path/to/locale/'),``
-#. ``'libs' => array('/full/path/to/libs/', '/next/full/path/to/libs/')``
-#. ``));``
-
 Also changed is the order in which bootstrapping occurs. In the
 past ``app/config/core.php`` was loaded **after**
 ``app/config/bootstrap.php``. This caused any ``App::import()`` in
@@ -98,13 +82,6 @@ load custom inflections.
         'uninflected' => array('singulars'),
         'irregular' => array('spins' => 'spinor')
     ));
-
-
-#. ``Inflector::rules('singular', array(``
-#. ``'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),``
-#. ``'uninflected' => array('singulars'),``
-#. ``'irregular' => array('spins' => 'spinor')``
-#. ``));``
 
 Will merge the supplied rules into the infection sets, with the
 added rules taking precedence over the core rules.
@@ -212,12 +189,6 @@ past given the structure:
               Users/
                     edit
 
-
-#. ``ROOT/``
-#. ``Users/``
-#. ``Users/``
-#. ``edit``
-
 The path ``ROOT/Users`` would match the last Users node instead of
 the first. In 1.3, if you were expecting to get the last node you
 would need to use the path ``ROOT/Users/Users``
@@ -256,10 +227,6 @@ include these classes to retain existing behavior.
 
     var $components = array('Session', 'Auth', ...);
     var $helpers = array('Session', 'Html', 'Form' ...);
-
-
-#. ``var $components = array('Session', 'Auth', ...);``
-#. ``var $helpers = array('Session', 'Html', 'Form' ...);``
 
 These change were done to make CakePHP more explicit and
 declarative in what classes you the application developer want to
@@ -321,12 +288,6 @@ update simply change your core.php.
     //to:
     Configure::write('Routing.prefixes', array('admin'));
 
-
-#. ``//from:``
-#. ``Configure::write('Routing.admin', 'admin');``
-#. ``//to:``
-#. ``Configure::write('Routing.prefixes', array('admin'));``
-
 See the New features guide for more information on using prefix
 routes. A small change has also been done to routing params. Routed
 params should now only consist of alphanumeric chars, - and \_ or
@@ -336,10 +297,6 @@ params should now only consist of alphanumeric chars, - and \_ or
 
     Router::connect('/:$%@#param/:action/*', array(...)); // BAD
     Router::connect('/:can/:anybody/:see/:m-3/*', array(...)); //Acceptable
-
-
-#. ``Router::connect('/:$%@#param/:action/*', array(...)); // BAD``
-#. ``Router::connect('/:can/:anybody/:see/:m-3/*', array(...)); //Acceptable``
 
 For 1.3 the internals of the Router were heavily refactored to
 increase performance and reduce code clutter. The side effect of
@@ -351,9 +308,6 @@ longer create routes like
 ::
 
     Router::connect('/([0-9]+)-p-(.*)/', array('controller' => 'products', 'action' => 'show'));
-
-
-#. ``Router::connect('/([0-9]+)-p-(.*)/', array('controller' => 'products', 'action' => 'show'));``
 
 These routes complicated route compilation and impossible to
 reverse route. If you need routes like this, it is recommended that
@@ -368,13 +322,6 @@ use a greedy star in the middle of a route.
         array('controller' => 'pages', 'action' => 'display'), 
         array('event' => '[a-z0-9_-]+')
     );
-
-
-#. ``Router::connect(``
-#. ``'/pages/*/:event',``
-#. ``array('controller' => 'pages', 'action' => 'display'),``
-#. ``array('event' => '[a-z0-9_-]+')``
-#. ``);``
 
 This is no longer supported as mid-route greedy stars behaved
 erratically, and complicated route compiling. Outside of these two
@@ -401,20 +348,6 @@ $this->redirect() calls to reflect this change.
     /posts/view/id:123
     // correct format:
     $url = array('controller' => 'posts', 'action' => 'view', $id);
-
-
-#. ``// old format:``
-#. ``$url = array('controller' => 'posts', 'action' => 'view', 'id' => $id);``
-#. ``// use cases:``
-#. ``Router::url($url);``
-#. ``$html->link($url);``
-#. ``$this->redirect($url);``
-#. ``// 1.2 result:``
-#. ``/posts/view/123``
-#. ``// 1.3 result:``
-#. ``/posts/view/id:123``
-#. ``// correct format:``
-#. ``$url = array('controller' => 'posts', 'action' => 'view', $id);``
 
 **Dispatcher**
 
@@ -560,9 +493,6 @@ automatically outputs SQL logs. If you want to output SQL logs in
 ::
 
     <?php echo $this->element('sql_dump'); ?>
-
-
-#. ``<?php echo $this->element('sql_dump'); ?>``
 
 You can place this element anywhere in your layout or view. The
 ``sql_dump`` element will only generate output when
@@ -775,13 +705,6 @@ different formatting.
     Error: Invalid Foo
     Please provide bar.
     // exits with status code 1
-
-
-#. ``$this->error('Invalid Foo', 'Please provide bar.');``
-#. ``// outputs:``
-#. ``Error: Invalid Foo``
-#. ``Please provide bar.``
-#. ``// exits with status code 1``
 
 ``ShellDispatcher::stderr()`` has been modified to not prepend
 Error: to the message anymore. It's signature is now similar to
@@ -882,22 +805,6 @@ There is a new way to add those paths. As of 1.3 RC1 the
         'libs' => array('/full/path/to/libs/', '/next/full/path/to/libs/')
     ));
 
-
-#. ``App::build(array(``
-#. ``'plugins' => array('/full/path/to/plugins/', '/next/full/path/to/plugins/'),``
-#. ``'models' =>  array('/full/path/to/models/', '/next/full/path/to/models/'),``
-#. ``'views' => array('/full/path/to/views/', '/next/full/path/to/views/'),``
-#. ``'controllers' => array('/full/path/to/controllers/', '/next/full/path/to/controllers/'),``
-#. ``'datasources' => array('/full/path/to/datasources/', '/next/full/path/to/datasources/'),``
-#. ``'behaviors' => array('/full/path/to/behaviors/', '/next/full/path/to/behaviors/'),``
-#. ``'components' => array('/full/path/to/components/', '/next/full/path/to/components/'),``
-#. ``'helpers' => array('/full/path/to/helpers/', '/next/full/path/to/helpers/'),``
-#. ``'vendors' => array('/full/path/to/vendors/', '/next/full/path/to/vendors/'),``
-#. ``'shells' => array('/full/path/to/shells/', '/next/full/path/to/shells/'),``
-#. ``'locales' => array('/full/path/to/locale/', '/next/full/path/to/locale/'),``
-#. ``'libs' => array('/full/path/to/libs/', '/next/full/path/to/libs/')``
-#. ``));``
-
 Also changed is the order in which bootstrapping occurs. In the
 past ``app/config/core.php`` was loaded **after**
 ``app/config/bootstrap.php``. This caused any ``App::import()`` in
@@ -919,13 +826,6 @@ load custom inflections.
         'uninflected' => array('singulars'),
         'irregular' => array('spins' => 'spinor')
     ));
-
-
-#. ``Inflector::rules('singular', array(``
-#. ``'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),``
-#. ``'uninflected' => array('singulars'),``
-#. ``'irregular' => array('spins' => 'spinor')``
-#. ``));``
 
 Will merge the supplied rules into the infection sets, with the
 added rules taking precedence over the core rules.
@@ -1033,12 +933,6 @@ past given the structure:
               Users/
                     edit
 
-
-#. ``ROOT/``
-#. ``Users/``
-#. ``Users/``
-#. ``edit``
-
 The path ``ROOT/Users`` would match the last Users node instead of
 the first. In 1.3, if you were expecting to get the last node you
 would need to use the path ``ROOT/Users/Users``
@@ -1077,10 +971,6 @@ include these classes to retain existing behavior.
 
     var $components = array('Session', 'Auth', ...);
     var $helpers = array('Session', 'Html', 'Form' ...);
-
-
-#. ``var $components = array('Session', 'Auth', ...);``
-#. ``var $helpers = array('Session', 'Html', 'Form' ...);``
 
 These change were done to make CakePHP more explicit and
 declarative in what classes you the application developer want to
@@ -1142,12 +1032,6 @@ update simply change your core.php.
     //to:
     Configure::write('Routing.prefixes', array('admin'));
 
-
-#. ``//from:``
-#. ``Configure::write('Routing.admin', 'admin');``
-#. ``//to:``
-#. ``Configure::write('Routing.prefixes', array('admin'));``
-
 See the New features guide for more information on using prefix
 routes. A small change has also been done to routing params. Routed
 params should now only consist of alphanumeric chars, - and \_ or
@@ -1157,10 +1041,6 @@ params should now only consist of alphanumeric chars, - and \_ or
 
     Router::connect('/:$%@#param/:action/*', array(...)); // BAD
     Router::connect('/:can/:anybody/:see/:m-3/*', array(...)); //Acceptable
-
-
-#. ``Router::connect('/:$%@#param/:action/*', array(...)); // BAD``
-#. ``Router::connect('/:can/:anybody/:see/:m-3/*', array(...)); //Acceptable``
 
 For 1.3 the internals of the Router were heavily refactored to
 increase performance and reduce code clutter. The side effect of
@@ -1172,9 +1052,6 @@ longer create routes like
 ::
 
     Router::connect('/([0-9]+)-p-(.*)/', array('controller' => 'products', 'action' => 'show'));
-
-
-#. ``Router::connect('/([0-9]+)-p-(.*)/', array('controller' => 'products', 'action' => 'show'));``
 
 These routes complicated route compilation and impossible to
 reverse route. If you need routes like this, it is recommended that
@@ -1189,13 +1066,6 @@ use a greedy star in the middle of a route.
         array('controller' => 'pages', 'action' => 'display'), 
         array('event' => '[a-z0-9_-]+')
     );
-
-
-#. ``Router::connect(``
-#. ``'/pages/*/:event',``
-#. ``array('controller' => 'pages', 'action' => 'display'),``
-#. ``array('event' => '[a-z0-9_-]+')``
-#. ``);``
 
 This is no longer supported as mid-route greedy stars behaved
 erratically, and complicated route compiling. Outside of these two
@@ -1222,20 +1092,6 @@ $this->redirect() calls to reflect this change.
     /posts/view/id:123
     // correct format:
     $url = array('controller' => 'posts', 'action' => 'view', $id);
-
-
-#. ``// old format:``
-#. ``$url = array('controller' => 'posts', 'action' => 'view', 'id' => $id);``
-#. ``// use cases:``
-#. ``Router::url($url);``
-#. ``$html->link($url);``
-#. ``$this->redirect($url);``
-#. ``// 1.2 result:``
-#. ``/posts/view/123``
-#. ``// 1.3 result:``
-#. ``/posts/view/id:123``
-#. ``// correct format:``
-#. ``$url = array('controller' => 'posts', 'action' => 'view', $id);``
 
 **Dispatcher**
 
@@ -1381,9 +1237,6 @@ automatically outputs SQL logs. If you want to output SQL logs in
 ::
 
     <?php echo $this->element('sql_dump'); ?>
-
-
-#. ``<?php echo $this->element('sql_dump'); ?>``
 
 You can place this element anywhere in your layout or view. The
 ``sql_dump`` element will only generate output when
@@ -1596,13 +1449,6 @@ different formatting.
     Error: Invalid Foo
     Please provide bar.
     // exits with status code 1
-
-
-#. ``$this->error('Invalid Foo', 'Please provide bar.');``
-#. ``// outputs:``
-#. ``Error: Invalid Foo``
-#. ``Please provide bar.``
-#. ``// exits with status code 1``
 
 ``ShellDispatcher::stderr()`` has been modified to not prepend
 Error: to the message anymore. It's signature is now similar to

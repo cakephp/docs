@@ -58,17 +58,6 @@ a secure connection, is available on the path
       $this->Cookie->key = 'qSI232qs*&sXOw!';
     }
 
-
-#. ``var $components    = array('Cookie');``
-#. ``function beforeFilter() {``
-#. ``$this->Cookie->name = 'baker_id';``
-#. ``$this->Cookie->time =  3600;  // or '1 hour'``
-#. ``$this->Cookie->path = '/bakers/preferences/';``
-#. ``$this->Cookie->domain = 'example.com';``
-#. ``$this->Cookie->secure = true;  //i.e. only sent if using secure HTTPS``
-#. ``$this->Cookie->key = 'qSI232qs*&sXOw!';``
-#. ``}``
-
 Next, let’s look at how to use the different methods of the Cookie
 Component.
 
@@ -131,17 +120,6 @@ a secure connection, is available on the path
       $this->Cookie->secure = true;  //i.e. only sent if using secure HTTPS
       $this->Cookie->key = 'qSI232qs*&sXOw!';
     }
-
-
-#. ``var $components    = array('Cookie');``
-#. ``function beforeFilter() {``
-#. ``$this->Cookie->name = 'baker_id';``
-#. ``$this->Cookie->time =  3600;  // or '1 hour'``
-#. ``$this->Cookie->path = '/bakers/preferences/';``
-#. ``$this->Cookie->domain = 'example.com';``
-#. ``$this->Cookie->secure = true;  //i.e. only sent if using secure HTTPS``
-#. ``$this->Cookie->key = 'qSI232qs*&sXOw!';``
-#. ``}``
 
 Next, let’s look at how to use the different methods of the Cookie
 Component.

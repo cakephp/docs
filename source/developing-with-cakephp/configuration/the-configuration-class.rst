@@ -24,9 +24,6 @@ anywhere within your application, in a static context.
 
     <?php Configure::read('debug'); ?>
 
-
-#. ``<?php Configure::read('debug'); ?>``
-
 Configure Methods
 ~~~~~~~~~~~~~~~~~
 
@@ -42,10 +39,6 @@ Use ``write()`` to store data in the application’s configuration.
     Configure::write('Company.name','Pizza, Inc.');
     Configure::write('Company.slogan','Pizza for your body and soul');
 
-
-#. ``Configure::write('Company.name','Pizza, Inc.');``
-#. ``Configure::write('Company.slogan','Pizza for your body and soul');``
-
 The dot notation used in the ``$key`` parameter can be used to
 organize your configuration settings into logical groups.
 
@@ -56,11 +49,6 @@ The above example could also be written in a single call:
     Configure::write(
         'Company',array('name'=>'Pizza, Inc.','slogan'=>'Pizza for your body and soul')
     );
-
-
-#. ``Configure::write(``
-#. ``'Company',array('name'=>'Pizza, Inc.','slogan'=>'Pizza for your body and soul')``
-#. ``);``
 
 You can use ``Configure::write('debug', $int)`` to switch between
 debug and production modes on the fly. This is especially handy for
@@ -87,15 +75,6 @@ data back:
     //yields: 
     array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
 
-
-#. ``Configure::read('Company.name');    //yields: 'Pizza, Inc.'``
-#. ``Configure::read('Company.slogan');  //yields: 'Pizza for your body and soul'``
-#. ````
-#. ``Configure::read('Company');``
-#. ````
-#. ``//yields:``
-#. ``array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');``
-
 delete
 ^^^^^^
 
@@ -106,9 +85,6 @@ Used to delete information from the application’s configuration.
 ::
 
     Configure::delete('Company.name');
-
-
-#. ``Configure::delete('Company.name');``
 
 load
 ^^^^
@@ -131,19 +107,6 @@ file.
     Configure::load('messages');
     Configure::read('Company.name');
     ?>
-
-
-#. ``// /app/config/messages.php:``
-#. ``<?php``
-#. ``$config['Company']['name'] = 'Pizza, Inc.';``
-#. ``$config['Company']['slogan'] = 'Pizza for your body and soul';``
-#. ``$config['Company']['phone'] = '555-55-55';``
-#. ``?>``
-#. ````
-#. ``<?php``
-#. ``Configure::load('messages');``
-#. ``Configure::read('Company.name');``
-#. ``?>``
 
 Every configure key-value pair is represented in the file with the
 ``$config`` array. Any other variables in the file will be ignored
@@ -289,9 +252,6 @@ anywhere within your application, in a static context.
 
     <?php Configure::read('debug'); ?>
 
-
-#. ``<?php Configure::read('debug'); ?>``
-
 Configure Methods
 ~~~~~~~~~~~~~~~~~
 
@@ -307,10 +267,6 @@ Use ``write()`` to store data in the application’s configuration.
     Configure::write('Company.name','Pizza, Inc.');
     Configure::write('Company.slogan','Pizza for your body and soul');
 
-
-#. ``Configure::write('Company.name','Pizza, Inc.');``
-#. ``Configure::write('Company.slogan','Pizza for your body and soul');``
-
 The dot notation used in the ``$key`` parameter can be used to
 organize your configuration settings into logical groups.
 
@@ -321,11 +277,6 @@ The above example could also be written in a single call:
     Configure::write(
         'Company',array('name'=>'Pizza, Inc.','slogan'=>'Pizza for your body and soul')
     );
-
-
-#. ``Configure::write(``
-#. ``'Company',array('name'=>'Pizza, Inc.','slogan'=>'Pizza for your body and soul')``
-#. ``);``
 
 You can use ``Configure::write('debug', $int)`` to switch between
 debug and production modes on the fly. This is especially handy for
@@ -352,15 +303,6 @@ data back:
     //yields: 
     array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
 
-
-#. ``Configure::read('Company.name');    //yields: 'Pizza, Inc.'``
-#. ``Configure::read('Company.slogan');  //yields: 'Pizza for your body and soul'``
-#. ````
-#. ``Configure::read('Company');``
-#. ````
-#. ``//yields:``
-#. ``array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');``
-
 delete
 ^^^^^^
 
@@ -371,9 +313,6 @@ Used to delete information from the application’s configuration.
 ::
 
     Configure::delete('Company.name');
-
-
-#. ``Configure::delete('Company.name');``
 
 load
 ^^^^
@@ -396,19 +335,6 @@ file.
     Configure::load('messages');
     Configure::read('Company.name');
     ?>
-
-
-#. ``// /app/config/messages.php:``
-#. ``<?php``
-#. ``$config['Company']['name'] = 'Pizza, Inc.';``
-#. ``$config['Company']['slogan'] = 'Pizza for your body and soul';``
-#. ``$config['Company']['phone'] = '555-55-55';``
-#. ``?>``
-#. ````
-#. ``<?php``
-#. ``Configure::load('messages');``
-#. ``Configure::read('Company.name');``
-#. ``?>``
 
 Every configure key-value pair is represented in the file with the
 ``$config`` array. Any other variables in the file will be ignored

@@ -124,9 +124,6 @@ ACL Component in your controller's $components array:
 
     var $components = array('Acl');
 
-
-#. ``var $components = array('Acl');``
-
 Once we've got that done, let's see what some examples of creating
 these objects might look like. The following code could be placed
 in a controller action somewhere:
@@ -179,39 +176,6 @@ models to save data like we always do:
     
         //Other action logic goes here...
     }
-
-
-#. ``function anyAction()``
-#. ``{``
-#. ``$aro =& $this->Acl->Aro;``
-#. ````
-#. ``//Here's all of our group info in an array we can iterate through``
-#. ``$groups = array(``
-#. ``0 => array(``
-#. ``'alias' => 'warriors'``
-#. ``),``
-#. ``1 => array(``
-#. ``'alias' => 'wizards'``
-#. ``),``
-#. ``2 => array(``
-#. ``'alias' => 'hobbits'``
-#. ``),``
-#. ``3 => array(``
-#. ``'alias' => 'visitors'``
-#. ``),``
-#. ``);``
-#. ````
-#. ``//Iterate and create ARO groups``
-#. ``foreach($groups as $data)``
-#. ``{``
-#. ``//Remember to call create() when saving in loops...``
-#. ``$aro->create();``
-#. ````
-#. ``//Save data``
-#. ``$aro->save($data);``
-#. ``}``
-#. ``//Other action logic goes here...``
-#. ``}``
 
 Once we've got them in there, we can use the ACL console
 application to verify the tree structure.
@@ -322,84 +286,6 @@ ID, rather than a foreign\_key value.
         //Other action logic goes here...
     }
 
-
-#. ``function anyAction()``
-#. ``{``
-#. ``$aro = new Aro();``
-#. ````
-#. ``//Here are our user records, ready to be linked up to new ARO records``
-#. ``//This data could come from a model and modified, but we're using static``
-#. ``//arrays here for demonstration purposes.``
-#. ````
-#. ``$users = array(``
-#. ``0 => array(``
-#. ``'alias' => 'Aragorn',``
-#. ``'parent_id' => 1,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 2356,``
-#. ``),``
-#. ``1 => array(``
-#. ``'alias' => 'Legolas',``
-#. ``'parent_id' => 1,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 6342,``
-#. ``),``
-#. ``2 => array(``
-#. ``'alias' => 'Gimli',``
-#. ``'parent_id' => 1,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 1564,``
-#. ``),``
-#. ``3 => array(``
-#. ``'alias' => 'Gandalf',``
-#. ``'parent_id' => 2,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 7419,``
-#. ``),``
-#. ``4 => array(``
-#. ``'alias' => 'Frodo',``
-#. ``'parent_id' => 3,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 7451,``
-#. ``),``
-#. ``5 => array(``
-#. ``'alias' => 'Bilbo',``
-#. ``'parent_id' => 3,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 5126,``
-#. ``),``
-#. ``6 => array(``
-#. ``'alias' => 'Merry',``
-#. ``'parent_id' => 3,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 5144,``
-#. ``),``
-#. ``7 => array(``
-#. ``'alias' => 'Pippin',``
-#. ``'parent_id' => 3,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 1211,``
-#. ``),``
-#. ``8 => array(``
-#. ``'alias' => 'Gollum',``
-#. ``'parent_id' => 4,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 1337,``
-#. ``),``
-#. ``);``
-#. ````
-#. ``//Iterate and create AROs (as children)``
-#. ``foreach($users as $data)``
-#. ``{``
-#. ``//Remember to call create() when saving in loops...``
-#. ``$aro->create();``
-#. ``//Save data``
-#. ``$aro->save($data);``
-#. ``}``
-#. ````
-#. ``//Other action logic goes here...``
-#. ``}``
-
 Typically you won't supply both an alias and a model/foreign\_key,
 but we're using both here to make the structure of the tree easier
 to read for demonstration purposes.
@@ -497,14 +383,6 @@ because permissions are managed by the Acl Component.
     
     }
 
-
-#. ``class SomethingsController extends AppController``
-#. ``{``
-#. ``// You might want to place this in the AppController``
-#. ``// instead, but here works great too.``
-#. ``var $components = array('Acl');``
-#. ``}``
-
 Let's set up some basic permissions using the AclComponent in an
 action inside this controller.
 
@@ -523,21 +401,6 @@ action inside this controller.
         
         die(print_r('done', 1));
     }
-
-
-#. ``function index()``
-#. ``{``
-#. ``//Allow warriors complete access to weapons``
-#. ``//Both these examples use the alias syntax``
-#. ``$this->Acl->allow('warriors', 'Weapons');``
-#. ````
-#. ``//Though the King may not want to let everyone``
-#. ``//have unfettered access``
-#. ``$this->Acl->deny('warriors/Legolas', 'Weapons', 'delete');``
-#. ``$this->Acl->deny('warriors/Gimli',   'Weapons', 'delete');``
-#. ````
-#. ``die(print_r('done', 1));``
-#. ``}``
 
 The first call we make to the AclComponent allows any user under
 the 'warriors' ARO group full access to anything under the
@@ -566,12 +429,6 @@ yourself. What we have above is equivalent to this:
     $this->Acl->deny(array('model' => 'User', 'foreign_key' => 6342), 'Weapons', 'delete');
     $this->Acl->deny(array('model' => 'User', 'foreign_key' => 1564), 'Weapons', 'delete');
 
-
-#. ``// 6342 = Legolas``
-#. ``// 1564 = Gimli``
-#. ``$this->Acl->deny(array('model' => 'User', 'foreign_key' => 6342), 'Weapons', 'delete');``
-#. ``$this->Acl->deny(array('model' => 'User', 'foreign_key' => 1564), 'Weapons', 'delete');``
-
 Addressing a node using the alias syntax uses a slash-delimited
 string ('/users/employees/developers'). Addressing a node using
 model/foreign key syntax uses an array with two parameters:
@@ -591,9 +448,6 @@ we've created. The basic syntax for making a permissions check is:
 ::
 
     $this->Acl->check( $aro, $aco, $action = '*');
-
-
-#. ``$this->Acl->check( $aro, $aco, $action = '*');``
 
 Let's give it a try inside a controller action:
 
@@ -620,29 +474,6 @@ Let's give it a try inside a controller action:
         $result = $this->Acl->check('warriors/Legolas', 'Weapons', 'delete');
         $result = $this->Acl->check('warriors/Gimli', 'Weapons', 'delete');
     }
-
-
-#. ``function index()``
-#. ``{``
-#. ``//These all return true:``
-#. ``$this->Acl->check('warriors/Aragorn', 'Weapons');``
-#. ``$this->Acl->check('warriors/Aragorn', 'Weapons', 'create');``
-#. ``$this->Acl->check('warriors/Aragorn', 'Weapons', 'read');``
-#. ``$this->Acl->check('warriors/Aragorn', 'Weapons', 'update');``
-#. ``$this->Acl->check('warriors/Aragorn', 'Weapons', 'delete');``
-#. ````
-#. ``//Remember, we can use the model/foreign key syntax``
-#. ``//for our user AROs``
-#. ``$this->Acl->check(array('model' => 'User', 'foreign_key' => 2356), 'Weapons');``
-#. ````
-#. ``//These also return true:``
-#. ``$result = $this->Acl->check('warriors/Legolas', 'Weapons', 'create');``
-#. ``$result = $this->Acl->check('warriors/Gimli', 'Weapons', 'read');``
-#. ````
-#. ``//But these return false:``
-#. ``$result = $this->Acl->check('warriors/Legolas', 'Weapons', 'delete');``
-#. ``$result = $this->Acl->check('warriors/Gimli', 'Weapons', 'delete');``
-#. ``}``
 
 The usage here is demonstrational, but hopefully you can see how
 checking like this can be used to decide whether or not to allow
@@ -775,9 +606,6 @@ ACL Component in your controller's $components array:
 
     var $components = array('Acl');
 
-
-#. ``var $components = array('Acl');``
-
 Once we've got that done, let's see what some examples of creating
 these objects might look like. The following code could be placed
 in a controller action somewhere:
@@ -830,39 +658,6 @@ models to save data like we always do:
     
         //Other action logic goes here...
     }
-
-
-#. ``function anyAction()``
-#. ``{``
-#. ``$aro =& $this->Acl->Aro;``
-#. ````
-#. ``//Here's all of our group info in an array we can iterate through``
-#. ``$groups = array(``
-#. ``0 => array(``
-#. ``'alias' => 'warriors'``
-#. ``),``
-#. ``1 => array(``
-#. ``'alias' => 'wizards'``
-#. ``),``
-#. ``2 => array(``
-#. ``'alias' => 'hobbits'``
-#. ``),``
-#. ``3 => array(``
-#. ``'alias' => 'visitors'``
-#. ``),``
-#. ``);``
-#. ````
-#. ``//Iterate and create ARO groups``
-#. ``foreach($groups as $data)``
-#. ``{``
-#. ``//Remember to call create() when saving in loops...``
-#. ``$aro->create();``
-#. ````
-#. ``//Save data``
-#. ``$aro->save($data);``
-#. ``}``
-#. ``//Other action logic goes here...``
-#. ``}``
 
 Once we've got them in there, we can use the ACL console
 application to verify the tree structure.
@@ -973,84 +768,6 @@ ID, rather than a foreign\_key value.
         //Other action logic goes here...
     }
 
-
-#. ``function anyAction()``
-#. ``{``
-#. ``$aro = new Aro();``
-#. ````
-#. ``//Here are our user records, ready to be linked up to new ARO records``
-#. ``//This data could come from a model and modified, but we're using static``
-#. ``//arrays here for demonstration purposes.``
-#. ````
-#. ``$users = array(``
-#. ``0 => array(``
-#. ``'alias' => 'Aragorn',``
-#. ``'parent_id' => 1,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 2356,``
-#. ``),``
-#. ``1 => array(``
-#. ``'alias' => 'Legolas',``
-#. ``'parent_id' => 1,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 6342,``
-#. ``),``
-#. ``2 => array(``
-#. ``'alias' => 'Gimli',``
-#. ``'parent_id' => 1,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 1564,``
-#. ``),``
-#. ``3 => array(``
-#. ``'alias' => 'Gandalf',``
-#. ``'parent_id' => 2,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 7419,``
-#. ``),``
-#. ``4 => array(``
-#. ``'alias' => 'Frodo',``
-#. ``'parent_id' => 3,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 7451,``
-#. ``),``
-#. ``5 => array(``
-#. ``'alias' => 'Bilbo',``
-#. ``'parent_id' => 3,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 5126,``
-#. ``),``
-#. ``6 => array(``
-#. ``'alias' => 'Merry',``
-#. ``'parent_id' => 3,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 5144,``
-#. ``),``
-#. ``7 => array(``
-#. ``'alias' => 'Pippin',``
-#. ``'parent_id' => 3,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 1211,``
-#. ``),``
-#. ``8 => array(``
-#. ``'alias' => 'Gollum',``
-#. ``'parent_id' => 4,``
-#. ``'model' => 'User',``
-#. ``'foreign_key' => 1337,``
-#. ``),``
-#. ``);``
-#. ````
-#. ``//Iterate and create AROs (as children)``
-#. ``foreach($users as $data)``
-#. ``{``
-#. ``//Remember to call create() when saving in loops...``
-#. ``$aro->create();``
-#. ``//Save data``
-#. ``$aro->save($data);``
-#. ``}``
-#. ````
-#. ``//Other action logic goes here...``
-#. ``}``
-
 Typically you won't supply both an alias and a model/foreign\_key,
 but we're using both here to make the structure of the tree easier
 to read for demonstration purposes.
@@ -1148,14 +865,6 @@ because permissions are managed by the Acl Component.
     
     }
 
-
-#. ``class SomethingsController extends AppController``
-#. ``{``
-#. ``// You might want to place this in the AppController``
-#. ``// instead, but here works great too.``
-#. ``var $components = array('Acl');``
-#. ``}``
-
 Let's set up some basic permissions using the AclComponent in an
 action inside this controller.
 
@@ -1174,21 +883,6 @@ action inside this controller.
         
         die(print_r('done', 1));
     }
-
-
-#. ``function index()``
-#. ``{``
-#. ``//Allow warriors complete access to weapons``
-#. ``//Both these examples use the alias syntax``
-#. ``$this->Acl->allow('warriors', 'Weapons');``
-#. ````
-#. ``//Though the King may not want to let everyone``
-#. ``//have unfettered access``
-#. ``$this->Acl->deny('warriors/Legolas', 'Weapons', 'delete');``
-#. ``$this->Acl->deny('warriors/Gimli',   'Weapons', 'delete');``
-#. ````
-#. ``die(print_r('done', 1));``
-#. ``}``
 
 The first call we make to the AclComponent allows any user under
 the 'warriors' ARO group full access to anything under the
@@ -1217,12 +911,6 @@ yourself. What we have above is equivalent to this:
     $this->Acl->deny(array('model' => 'User', 'foreign_key' => 6342), 'Weapons', 'delete');
     $this->Acl->deny(array('model' => 'User', 'foreign_key' => 1564), 'Weapons', 'delete');
 
-
-#. ``// 6342 = Legolas``
-#. ``// 1564 = Gimli``
-#. ``$this->Acl->deny(array('model' => 'User', 'foreign_key' => 6342), 'Weapons', 'delete');``
-#. ``$this->Acl->deny(array('model' => 'User', 'foreign_key' => 1564), 'Weapons', 'delete');``
-
 Addressing a node using the alias syntax uses a slash-delimited
 string ('/users/employees/developers'). Addressing a node using
 model/foreign key syntax uses an array with two parameters:
@@ -1242,9 +930,6 @@ we've created. The basic syntax for making a permissions check is:
 ::
 
     $this->Acl->check( $aro, $aco, $action = '*');
-
-
-#. ``$this->Acl->check( $aro, $aco, $action = '*');``
 
 Let's give it a try inside a controller action:
 
@@ -1271,29 +956,6 @@ Let's give it a try inside a controller action:
         $result = $this->Acl->check('warriors/Legolas', 'Weapons', 'delete');
         $result = $this->Acl->check('warriors/Gimli', 'Weapons', 'delete');
     }
-
-
-#. ``function index()``
-#. ``{``
-#. ``//These all return true:``
-#. ``$this->Acl->check('warriors/Aragorn', 'Weapons');``
-#. ``$this->Acl->check('warriors/Aragorn', 'Weapons', 'create');``
-#. ``$this->Acl->check('warriors/Aragorn', 'Weapons', 'read');``
-#. ``$this->Acl->check('warriors/Aragorn', 'Weapons', 'update');``
-#. ``$this->Acl->check('warriors/Aragorn', 'Weapons', 'delete');``
-#. ````
-#. ``//Remember, we can use the model/foreign key syntax``
-#. ``//for our user AROs``
-#. ``$this->Acl->check(array('model' => 'User', 'foreign_key' => 2356), 'Weapons');``
-#. ````
-#. ``//These also return true:``
-#. ``$result = $this->Acl->check('warriors/Legolas', 'Weapons', 'create');``
-#. ``$result = $this->Acl->check('warriors/Gimli', 'Weapons', 'read');``
-#. ````
-#. ``//But these return false:``
-#. ``$result = $this->Acl->check('warriors/Legolas', 'Weapons', 'delete');``
-#. ``$result = $this->Acl->check('warriors/Gimli', 'Weapons', 'delete');``
-#. ``}``
 
 The usage here is demonstrational, but hopefully you can see how
 checking like this can be used to decide whether or not to allow

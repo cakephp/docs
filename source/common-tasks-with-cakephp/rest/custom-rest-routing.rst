@@ -21,13 +21,6 @@ route would look like, without using mapResources():
         array("id" => "[0-9]+")
     )
 
-
-#. ``Router::connect(``
-#. ``"/:controller/:id",``
-#. ``array("action" => "edit", "[method]" => "PUT"),``
-#. ``array("id" => "[0-9]+")``
-#. ``)``
-
 Advanced routing techniques are covered elsewhere, so we'll focus
 on the most important point for our purposes here: the [method] key
 of the options array in the second parameter. Once that key has
@@ -56,13 +49,6 @@ route would look like, without using mapResources():
         array("action" => "edit", "[method]" => "PUT"),
         array("id" => "[0-9]+")
     )
-
-
-#. ``Router::connect(``
-#. ``"/:controller/:id",``
-#. ``array("action" => "edit", "[method]" => "PUT"),``
-#. ``array("id" => "[0-9]+")``
-#. ``)``
 
 Advanced routing techniques are covered elsewhere, so we'll focus
 on the most important point for our purposes here: the [method] key

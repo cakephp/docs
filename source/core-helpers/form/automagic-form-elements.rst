@@ -42,18 +42,6 @@ create appropriate inputs for all of these form fields.
      
     <?php echo $this->Form->end('Add'); ?>
 
-
-#. ``<?php echo $this->Form->create(); ?>``
-#. ````
-#. ``<?php``
-#. ``echo $this->Form->input('username');   //text``
-#. ``echo $this->Form->input('password');   //password``
-#. ``echo $this->Form->input('approved');   //day, month, year, hour, minute, meridian``
-#. ``echo $this->Form->input('quote');      //textarea``
-#. ``?>``
-#. ````
-#. ``<?php echo $this->Form->end('Add'); ?>``
-
 A more extensive example showing some options for a date field:
 
 ::
@@ -62,12 +50,6 @@ A more extensive example showing some options for a date field:
                                         , 'dateFormat' => 'DMY'
                                         , 'minYear' => date('Y') - 70
                                         , 'maxYear' => date('Y') - 18 ));
-
-
-#. ``echo $this->Form->input('birth_dt', array( 'label' => 'Date of birth'``
-#. ``, 'dateFormat' => 'DMY'``
-#. ``, 'minYear' => date('Y') - 70``
-#. ``, 'maxYear' => date('Y') - 18 ));``
 
 Besides the specific input options found below you can specify any
 html attribute (for instance onfocus). For more information on
@@ -84,18 +66,12 @@ following:
 
     $this->set('groups', $this->User->Group->find('list'));
 
-
-#. ``$this->set('groups', $this->User->Group->find('list'));``
-
 And in the view a multiple select can be expected with this simple
 code:
 
 ::
 
     echo $this->Form->input('Group');
-
-
-#. ``echo $this->Form->input('Group');``
 
 If you want to create a select field while using a belongsTo- or
 hasOne-Relation, you can add the following to your Users-controller
@@ -105,17 +81,11 @@ hasOne-Relation, you can add the following to your Users-controller
 
     $this->set('groups', $this->User->Group->find('list'));
 
-
-#. ``$this->set('groups', $this->User->Group->find('list'));``
-
 Afterwards, add the following to your form-view:
 
 ::
 
     echo $this->Form->input('group_id');
-
-
-#. ``echo $this->Form->input('group_id');``
 
 If your model name consists of two or more words, e.g.,
 "UserGroup", when passing the data using set() you should name your
@@ -126,11 +96,6 @@ data in a pluralised and camelCased format as follows:
     $this->set('userGroups', $this->UserGroup->find('list'));
     // or
     $this->set('reallyInappropriateModelNames', $this->ReallyInappropriateModelName->find('list'));
-
-
-#. ``$this->set('userGroups', $this->UserGroup->find('list'));``
-#. ``// or``
-#. ``$this->set('reallyInappropriateModelNames', $this->ReallyInappropriateModelName->find('list'));``
 
 Field naming convention
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -143,18 +108,12 @@ model name to build an input with a format like the following:
 
     <input type="text" id="ModelnameFieldname" name="data[Modelname][fieldname]">
 
-
-#. ``<input type="text" id="ModelnameFieldname" name="data[Modelname][fieldname]">``
-
 You can manually specify the model name by passing in
 Modelname.fieldname as the first parameter.
 
 ::
 
     echo $this->Form->input('Modelname.fieldname');
-
-
-#. ``echo $this->Form->input('Modelname.fieldname');``
 
 If you need to specify multiple fields using the same field name,
 thus creating an array that can be saved in one shot with
@@ -169,15 +128,6 @@ saveAll(), use the following convention:
     
     <input type="text" id="Modelname0Fieldname" name="data[Modelname][0][fieldname]">
     <input type="text" id="Modelname1Fieldname" name="data[Modelname][1][fieldname]">
-
-
-#. ``<?php``
-#. ``echo $this->Form->input('Modelname.0.fieldname');``
-#. ``echo $this->Form->input('Modelname.1.fieldname');``
-#. ``?>``
-#. `` ``
-#. ``<input type="text" id="Modelname0Fieldname" name="data[Modelname][0][fieldname]">``
-#. ``<input type="text" id="Modelname1Fieldname" name="data[Modelname][1][fieldname]">``
 
 $options[‘type’]
 ~~~~~~~~~~~~~~~~
@@ -197,16 +147,6 @@ you can also create ‘file’, and ‘password’ inputs.
         <label for="UserField">Field</label>
         <input type="file" name="data[User][field]" value="" id="UserField" />
     </div>
-
-
-#. ``<?php echo $this->Form->input('field', array('type' => 'file')); ?>``
-#. ````
-#. ``Output:``
-#. ````
-#. ``<div class="input">``
-#. ``<label for="UserField">Field</label>``
-#. ``<input type="file" name="data[User][field]" value="" id="UserField" />``
-#. ``</div>``
 
 $options[‘before’], $options[‘between’], $options[‘separator’] and $options[‘after’]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -231,23 +171,6 @@ of the input() method.
     <input name="data[User][field]" type="text" value="" id="UserField" />
     --after--
     </div>
-
-
-#. ``<?php echo $this->Form->input('field', array(``
-#. ``'before' => '--before--',``
-#. ``'after' => '--after--',``
-#. ``'between' => '--between---'``
-#. ``));?>``
-#. ````
-#. ``Output:``
-#. ````
-#. ``<div class="input">``
-#. ``--before--``
-#. ``<label for="UserField">Field</label>``
-#. ``--between---``
-#. ``<input name="data[User][field]" type="text" value="" id="UserField" />``
-#. ``--after--``
-#. ``</div>``
 
 For radio type input the 'separator' attribute can be used to
 inject markup to separate each input/label pair.
@@ -275,28 +198,6 @@ inject markup to separate each input/label pair.
     --after--
     </div>
 
-
-#. ``<?php echo $this->Form->input('field', array(``
-#. ``'before' => '--before--',``
-#. ``'after' => '--after--',``
-#. ``'between' => '--between---',``
-#. ``'separator' => '--separator--',``
-#. ``'options' => array('1', '2')``
-#. ``));?>``
-#. ````
-#. ``Output:``
-#. ````
-#. ``<div class="input">``
-#. ``--before--``
-#. ``<input name="data[User][field]" type="radio" value="1" id="UserField1" />``
-#. ``<label for="UserField1">1</label>``
-#. ``--separator--``
-#. ``<input name="data[User][field]" type="radio" value="2" id="UserField2" />``
-#. ``<label for="UserField2">2</label>``
-#. ``--between---``
-#. ``--after--``
-#. ``</div>``
-
 For ``date`` and ``datetime`` type elements the 'separator'
 attribute can be used to change the string between select elements.
 Defaults to '-'.
@@ -312,9 +213,6 @@ input.
 ::
 
     <?php echo $this->Form->input('field', array('options' => array(1,2,3,4,5))); ?>
-
-
-#. ``<?php echo $this->Form->input('field', array('options' => array(1,2,3,4,5))); ?>``
 
 Output:
 
@@ -340,13 +238,6 @@ Options can also be supplied as key-value pairs.
         'Value 2'=>'Label 2',
         'Value 3'=>'Label 3'
      ))); ?>
-
-
-#. ``<?php echo $this->Form->input('field', array('options' => array(``
-#. ``'Value 1'=>'Label 1',``
-#. ``'Value 2'=>'Label 2',``
-#. ``'Value 3'=>'Label 3'``
-#. ``))); ?>``
 
 Output:
 
@@ -377,17 +268,6 @@ buttons too, but instead of optgroups wraps elements in fieldsets.
         )
      ))); ?>
 
-
-#. ``<?php echo $this->Form->input('field', array('options' => array(``
-#. ``'Label1' => array(``
-#. ``'Value 1'=>'Label 1',``
-#. ``'Value 2'=>'Label 2'``
-#. ``),``
-#. ``'Label2' => array(``
-#. ``'Value 3'=>'Label 3'``
-#. ``)``
-#. ``))); ?>``
-
 Output:
 
 ::
@@ -415,9 +295,6 @@ select, the select will allow multiple selections.
 
     echo $this->Form->input('Model.field', array( 'type' => 'select', 'multiple' => true ));
 
-
-#. ``echo $this->Form->input('Model.field', array( 'type' => 'select', 'multiple' => true ));``
-
 Alternatively set ‘multiple’ to ‘checkbox’ to output a list of
 related check boxes.
 
@@ -431,16 +308,6 @@ related check boxes.
                 'Value 2' => 'Label 2'
         )
     ));
-
-
-#. ``echo $this->Form->input('Model.field', array(``
-#. ``'type' => 'select',``
-#. ``'multiple' => 'checkbox',``
-#. ``'options' => array(``
-#. ``'Value 1' => 'Label 1',``
-#. ``'Value 2' => 'Label 2'``
-#. ``)``
-#. ``));``
 
 Output:
 
@@ -479,9 +346,6 @@ Setting the class name:
 
         echo $this->Form->input('User.name', array('div' => 'class_name'));
 
-
-#. ``echo $this->Form->input('User.name', array('div' => 'class_name'));``
-
 Output:
 
 ::
@@ -497,9 +361,6 @@ Setting multiple attributes:
 
         echo $this->Form->input('User.name', array('div' => array('id' => 'mainDiv', 'title' => 'Div Title', 'style' => 'display:block')));
 
-
-#. ``echo $this->Form->input('User.name', array('div' => array('id' => 'mainDiv', 'title' => 'Div Title', 'style' => 'display:block')));``
-
 Output:
 
 ::
@@ -514,9 +375,6 @@ Disabling div output:
 ::
 
         <?php echo $this->Form->input('User.name', array('div' => false));?>
-
-
-#. ``<?php echo $this->Form->input('User.name', array('div' => false));?>``
 
 Output:
 
@@ -535,9 +393,6 @@ the label that usually accompanies the input.
 
     <?php echo $this->Form->input( 'User.name', array( 'label' => 'The User Alias' ) );?>
 
-
-#. ``<?php echo $this->Form->input( 'User.name', array( 'label' => 'The User Alias' ) );?>``
-
 Output:
 
 ::
@@ -554,9 +409,6 @@ label.
 
     <?php echo $this->Form->input( 'User.name', array( 'label' => false ) ); ?>
 
-
-#. ``<?php echo $this->Form->input( 'User.name', array( 'label' => false ) ); ?>``
-
 Output:
 
 ::
@@ -572,9 +424,6 @@ the array to customize the label text.
 ::
 
     <?php echo $this->Form->input( 'User.name', array( 'label' => array('class' => 'thingy', 'text' => 'The User Alias') ) ); ?>
-
-
-#. ``<?php echo $this->Form->input( 'User.name', array( 'label' => array('class' => 'thingy', 'text' => 'The User Alias') ) ); ?>``
 
 Output:
 
@@ -613,18 +462,12 @@ To disable error message output set the error key to false.
 
     $this->Form->input('Model.field', array('error' => false));
 
-
-#. ``$this->Form->input('Model.field', array('error' => false));``
-
 To modify the wrapping element type and its class, use the
 following format:
 
 ::
 
     $this->Form->input('Model.field', array('error' => array('wrap' => 'span', 'class' => 'bzzz')));
-
-
-#. ``$this->Form->input('Model.field', array('error' => array('wrap' => 'span', 'class' => 'bzzz')));``
 
 To prevent HTML being automatically escaped in the error message
 output, set the escape suboption to false:
@@ -633,18 +476,12 @@ output, set the escape suboption to false:
 
     $this->Form->input('Model.field', array('error' => array('escape' => false)));
 
-
-#. ``$this->Form->input('Model.field', array('error' => array('escape' => false)));``
-
 To override the model error messages use an associate array with
 the keyname of the validation rule:
 
 ::
 
     $this->Form->input('Model.field', array('error' => array('tooShort' => __('This is not long enough', true) )));
-
-
-#. ``$this->Form->input('Model.field', array('error' => array('tooShort' => __('This is not long enough', true) )));``
 
 As seen above you can set the error message for each validation
 rule you have in your models. In addition you can provide i18n
@@ -665,11 +502,6 @@ Example usage:
         echo $this->Form->input('ingredient', array('default'=>'Sugar')); 
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->input('ingredient', array('default'=>'Sugar'));``
-#. ``?>``
-
 Example with select field (Size "Medium" will be selected as
 default):
 
@@ -679,12 +511,6 @@ default):
         $sizes = array('s'=>'Small', 'm'=>'Medium', 'l'=>'Large');
         echo $this->Form->input('size', array('options'=>$sizes, 'default'=>'m')); 
     ?>
-
-
-#. ``<?php``
-#. ``$sizes = array('s'=>'Small', 'm'=>'Medium', 'l'=>'Large');``
-#. ``echo $this->Form->input('size', array('options'=>$sizes, 'default'=>'m'));``
-#. ``?>``
 
 You cannot use ``default`` to check a checkbox - instead you might
 set the value in ``$this->data`` in your controller,
@@ -706,9 +532,6 @@ rendered.
 
     echo $this->Form->input('close_time', array('type' => 'time', 'selected' => '13:30:00'));
 
-
-#. ``echo $this->Form->input('close_time', array('type' => 'time', 'selected' => '13:30:00'));``
-
 The selected key for date and datetime inputs may also be a UNIX
 timestamp.
 
@@ -722,9 +545,6 @@ input.
 
     echo $this->Form->input('textarea', array('rows' => '5', 'cols' => '5'));
 
-
-#. ``echo $this->Form->input('textarea', array('rows' => '5', 'cols' => '5'));``
-
 Output:
 
 ::
@@ -734,13 +554,6 @@ Output:
         <textarea name="data[Form][textarea]" cols="5" rows="5" id="FormTextarea" >
         </textarea>
     </div>
-
-
-#. ``<div class="input text">``
-#. ``<label for="FormTextarea">Textarea</label>``
-#. ``<textarea name="data[Form][textarea]" cols="5" rows="5" id="FormTextarea" >``
-#. ``</textarea>``
-#. ``</div>``
 
 $options[‘empty’]
 ~~~~~~~~~~~~~~~~~
@@ -755,9 +568,6 @@ string to empty.
 ::
 
     <?php echo $this->Form->input('field', array('options' => array(1,2,3,4,5), 'empty' => '(choose one)')); ?>
-
-
-#. ``<?php echo $this->Form->input('field', array('options' => array(1,2,3,4,5), 'empty' => '(choose one)')); ?>``
 
 Output:
 
@@ -809,9 +619,6 @@ the minutes select box.
 
     <?php echo $this->Form->input('Model.time', array('type' => 'time', 'interval' => 15)); ?>
 
-
-#. ``<?php echo $this->Form->input('Model.time', array('type' => 'time', 'interval' => 15)); ?>``
-
 Would create 4 options in the minute select. One for each 15
 minutes.
 
@@ -825,9 +632,6 @@ You can set the classname for an input field using
 
     echo $this->Form->input('title', array('class' => 'custom-class'));
 
-
-#. ``echo $this->Form->input('title', array('class' => 'custom-class'));``
-
 $options['hiddenField']
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -840,10 +644,6 @@ value specified.
     <input type="hidden" name="data[Post][Published]" id="PostPublished_" value="0" />
     <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
 
-
-#. ``<input type="hidden" name="data[Post][Published]" id="PostPublished_" value="0" />``
-#. ``<input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />``
-
 This can be disabled by setting the
 ``$options['hiddenField'] = false``.
 
@@ -851,17 +651,11 @@ This can be disabled by setting the
 
     echo $this->Form->checkbox('published', array('hiddenField' => false));
 
-
-#. ``echo $this->Form->checkbox('published', array('hiddenField' => false));``
-
 Which outputs:
 
 ::
 
     <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
-
-
-#. ``<input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />``
 
 If you want to create multiple blocks of inputs on a form that are
 all grouped together, you should use this parameter on all inputs
@@ -890,24 +684,6 @@ primary colors would be overridden
     <label for="ColorsPurple">Purple</label>
     <input type="checkbox" name="data[Addon][Addon][]" value="5" id="ColorsOrange" />
     <label for="ColorsOrange">Orange</label>
-
-
-#. ``<h2>Primary Colors</h2>``
-#. ``<input type="hidden" name="data[Color][Color]" id="Colors_" value="0" />``
-#. ``<input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsRed" />``
-#. ``<label for="ColorsRed">Red</label>``
-#. ``<input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsBlue" />``
-#. ``<label for="ColorsBlue">Blue</label>``
-#. ``<input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsYellow" />``
-#. ``<label for="ColorsYellow">Yellow</label>``
-#. ``<h2>Tertiary Colors</h2>``
-#. ``<input type="hidden" name="data[Color][Color]" id="Colors_" value="0" />``
-#. ``<input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsGreen" />``
-#. ``<label for="ColorsGreen">Green</label>``
-#. ``<input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsPurple" />``
-#. ``<label for="ColorsPurple">Purple</label>``
-#. ``<input type="checkbox" name="data[Addon][Addon][]" value="5" id="ColorsOrange" />``
-#. ``<label for="ColorsOrange">Orange</label>``
 
 Disabling the ``'hiddenField'`` on the second input group would
 prevent this behavior
@@ -956,18 +732,6 @@ create appropriate inputs for all of these form fields.
      
     <?php echo $this->Form->end('Add'); ?>
 
-
-#. ``<?php echo $this->Form->create(); ?>``
-#. ````
-#. ``<?php``
-#. ``echo $this->Form->input('username');   //text``
-#. ``echo $this->Form->input('password');   //password``
-#. ``echo $this->Form->input('approved');   //day, month, year, hour, minute, meridian``
-#. ``echo $this->Form->input('quote');      //textarea``
-#. ``?>``
-#. ````
-#. ``<?php echo $this->Form->end('Add'); ?>``
-
 A more extensive example showing some options for a date field:
 
 ::
@@ -976,12 +740,6 @@ A more extensive example showing some options for a date field:
                                         , 'dateFormat' => 'DMY'
                                         , 'minYear' => date('Y') - 70
                                         , 'maxYear' => date('Y') - 18 ));
-
-
-#. ``echo $this->Form->input('birth_dt', array( 'label' => 'Date of birth'``
-#. ``, 'dateFormat' => 'DMY'``
-#. ``, 'minYear' => date('Y') - 70``
-#. ``, 'maxYear' => date('Y') - 18 ));``
 
 Besides the specific input options found below you can specify any
 html attribute (for instance onfocus). For more information on
@@ -998,18 +756,12 @@ following:
 
     $this->set('groups', $this->User->Group->find('list'));
 
-
-#. ``$this->set('groups', $this->User->Group->find('list'));``
-
 And in the view a multiple select can be expected with this simple
 code:
 
 ::
 
     echo $this->Form->input('Group');
-
-
-#. ``echo $this->Form->input('Group');``
 
 If you want to create a select field while using a belongsTo- or
 hasOne-Relation, you can add the following to your Users-controller
@@ -1019,17 +771,11 @@ hasOne-Relation, you can add the following to your Users-controller
 
     $this->set('groups', $this->User->Group->find('list'));
 
-
-#. ``$this->set('groups', $this->User->Group->find('list'));``
-
 Afterwards, add the following to your form-view:
 
 ::
 
     echo $this->Form->input('group_id');
-
-
-#. ``echo $this->Form->input('group_id');``
 
 If your model name consists of two or more words, e.g.,
 "UserGroup", when passing the data using set() you should name your
@@ -1040,11 +786,6 @@ data in a pluralised and camelCased format as follows:
     $this->set('userGroups', $this->UserGroup->find('list'));
     // or
     $this->set('reallyInappropriateModelNames', $this->ReallyInappropriateModelName->find('list'));
-
-
-#. ``$this->set('userGroups', $this->UserGroup->find('list'));``
-#. ``// or``
-#. ``$this->set('reallyInappropriateModelNames', $this->ReallyInappropriateModelName->find('list'));``
 
 Field naming convention
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -1057,18 +798,12 @@ model name to build an input with a format like the following:
 
     <input type="text" id="ModelnameFieldname" name="data[Modelname][fieldname]">
 
-
-#. ``<input type="text" id="ModelnameFieldname" name="data[Modelname][fieldname]">``
-
 You can manually specify the model name by passing in
 Modelname.fieldname as the first parameter.
 
 ::
 
     echo $this->Form->input('Modelname.fieldname');
-
-
-#. ``echo $this->Form->input('Modelname.fieldname');``
 
 If you need to specify multiple fields using the same field name,
 thus creating an array that can be saved in one shot with
@@ -1083,15 +818,6 @@ saveAll(), use the following convention:
     
     <input type="text" id="Modelname0Fieldname" name="data[Modelname][0][fieldname]">
     <input type="text" id="Modelname1Fieldname" name="data[Modelname][1][fieldname]">
-
-
-#. ``<?php``
-#. ``echo $this->Form->input('Modelname.0.fieldname');``
-#. ``echo $this->Form->input('Modelname.1.fieldname');``
-#. ``?>``
-#. `` ``
-#. ``<input type="text" id="Modelname0Fieldname" name="data[Modelname][0][fieldname]">``
-#. ``<input type="text" id="Modelname1Fieldname" name="data[Modelname][1][fieldname]">``
 
 $options[‘type’]
 ~~~~~~~~~~~~~~~~
@@ -1111,16 +837,6 @@ you can also create ‘file’, and ‘password’ inputs.
         <label for="UserField">Field</label>
         <input type="file" name="data[User][field]" value="" id="UserField" />
     </div>
-
-
-#. ``<?php echo $this->Form->input('field', array('type' => 'file')); ?>``
-#. ````
-#. ``Output:``
-#. ````
-#. ``<div class="input">``
-#. ``<label for="UserField">Field</label>``
-#. ``<input type="file" name="data[User][field]" value="" id="UserField" />``
-#. ``</div>``
 
 $options[‘before’], $options[‘between’], $options[‘separator’] and $options[‘after’]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1145,23 +861,6 @@ of the input() method.
     <input name="data[User][field]" type="text" value="" id="UserField" />
     --after--
     </div>
-
-
-#. ``<?php echo $this->Form->input('field', array(``
-#. ``'before' => '--before--',``
-#. ``'after' => '--after--',``
-#. ``'between' => '--between---'``
-#. ``));?>``
-#. ````
-#. ``Output:``
-#. ````
-#. ``<div class="input">``
-#. ``--before--``
-#. ``<label for="UserField">Field</label>``
-#. ``--between---``
-#. ``<input name="data[User][field]" type="text" value="" id="UserField" />``
-#. ``--after--``
-#. ``</div>``
 
 For radio type input the 'separator' attribute can be used to
 inject markup to separate each input/label pair.
@@ -1189,28 +888,6 @@ inject markup to separate each input/label pair.
     --after--
     </div>
 
-
-#. ``<?php echo $this->Form->input('field', array(``
-#. ``'before' => '--before--',``
-#. ``'after' => '--after--',``
-#. ``'between' => '--between---',``
-#. ``'separator' => '--separator--',``
-#. ``'options' => array('1', '2')``
-#. ``));?>``
-#. ````
-#. ``Output:``
-#. ````
-#. ``<div class="input">``
-#. ``--before--``
-#. ``<input name="data[User][field]" type="radio" value="1" id="UserField1" />``
-#. ``<label for="UserField1">1</label>``
-#. ``--separator--``
-#. ``<input name="data[User][field]" type="radio" value="2" id="UserField2" />``
-#. ``<label for="UserField2">2</label>``
-#. ``--between---``
-#. ``--after--``
-#. ``</div>``
-
 For ``date`` and ``datetime`` type elements the 'separator'
 attribute can be used to change the string between select elements.
 Defaults to '-'.
@@ -1226,9 +903,6 @@ input.
 ::
 
     <?php echo $this->Form->input('field', array('options' => array(1,2,3,4,5))); ?>
-
-
-#. ``<?php echo $this->Form->input('field', array('options' => array(1,2,3,4,5))); ?>``
 
 Output:
 
@@ -1254,13 +928,6 @@ Options can also be supplied as key-value pairs.
         'Value 2'=>'Label 2',
         'Value 3'=>'Label 3'
      ))); ?>
-
-
-#. ``<?php echo $this->Form->input('field', array('options' => array(``
-#. ``'Value 1'=>'Label 1',``
-#. ``'Value 2'=>'Label 2',``
-#. ``'Value 3'=>'Label 3'``
-#. ``))); ?>``
 
 Output:
 
@@ -1291,17 +958,6 @@ buttons too, but instead of optgroups wraps elements in fieldsets.
         )
      ))); ?>
 
-
-#. ``<?php echo $this->Form->input('field', array('options' => array(``
-#. ``'Label1' => array(``
-#. ``'Value 1'=>'Label 1',``
-#. ``'Value 2'=>'Label 2'``
-#. ``),``
-#. ``'Label2' => array(``
-#. ``'Value 3'=>'Label 3'``
-#. ``)``
-#. ``))); ?>``
-
 Output:
 
 ::
@@ -1329,9 +985,6 @@ select, the select will allow multiple selections.
 
     echo $this->Form->input('Model.field', array( 'type' => 'select', 'multiple' => true ));
 
-
-#. ``echo $this->Form->input('Model.field', array( 'type' => 'select', 'multiple' => true ));``
-
 Alternatively set ‘multiple’ to ‘checkbox’ to output a list of
 related check boxes.
 
@@ -1345,16 +998,6 @@ related check boxes.
                 'Value 2' => 'Label 2'
         )
     ));
-
-
-#. ``echo $this->Form->input('Model.field', array(``
-#. ``'type' => 'select',``
-#. ``'multiple' => 'checkbox',``
-#. ``'options' => array(``
-#. ``'Value 1' => 'Label 1',``
-#. ``'Value 2' => 'Label 2'``
-#. ``)``
-#. ``));``
 
 Output:
 
@@ -1393,9 +1036,6 @@ Setting the class name:
 
         echo $this->Form->input('User.name', array('div' => 'class_name'));
 
-
-#. ``echo $this->Form->input('User.name', array('div' => 'class_name'));``
-
 Output:
 
 ::
@@ -1411,9 +1051,6 @@ Setting multiple attributes:
 
         echo $this->Form->input('User.name', array('div' => array('id' => 'mainDiv', 'title' => 'Div Title', 'style' => 'display:block')));
 
-
-#. ``echo $this->Form->input('User.name', array('div' => array('id' => 'mainDiv', 'title' => 'Div Title', 'style' => 'display:block')));``
-
 Output:
 
 ::
@@ -1428,9 +1065,6 @@ Disabling div output:
 ::
 
         <?php echo $this->Form->input('User.name', array('div' => false));?>
-
-
-#. ``<?php echo $this->Form->input('User.name', array('div' => false));?>``
 
 Output:
 
@@ -1449,9 +1083,6 @@ the label that usually accompanies the input.
 
     <?php echo $this->Form->input( 'User.name', array( 'label' => 'The User Alias' ) );?>
 
-
-#. ``<?php echo $this->Form->input( 'User.name', array( 'label' => 'The User Alias' ) );?>``
-
 Output:
 
 ::
@@ -1468,9 +1099,6 @@ label.
 
     <?php echo $this->Form->input( 'User.name', array( 'label' => false ) ); ?>
 
-
-#. ``<?php echo $this->Form->input( 'User.name', array( 'label' => false ) ); ?>``
-
 Output:
 
 ::
@@ -1486,9 +1114,6 @@ the array to customize the label text.
 ::
 
     <?php echo $this->Form->input( 'User.name', array( 'label' => array('class' => 'thingy', 'text' => 'The User Alias') ) ); ?>
-
-
-#. ``<?php echo $this->Form->input( 'User.name', array( 'label' => array('class' => 'thingy', 'text' => 'The User Alias') ) ); ?>``
 
 Output:
 
@@ -1527,18 +1152,12 @@ To disable error message output set the error key to false.
 
     $this->Form->input('Model.field', array('error' => false));
 
-
-#. ``$this->Form->input('Model.field', array('error' => false));``
-
 To modify the wrapping element type and its class, use the
 following format:
 
 ::
 
     $this->Form->input('Model.field', array('error' => array('wrap' => 'span', 'class' => 'bzzz')));
-
-
-#. ``$this->Form->input('Model.field', array('error' => array('wrap' => 'span', 'class' => 'bzzz')));``
 
 To prevent HTML being automatically escaped in the error message
 output, set the escape suboption to false:
@@ -1547,18 +1166,12 @@ output, set the escape suboption to false:
 
     $this->Form->input('Model.field', array('error' => array('escape' => false)));
 
-
-#. ``$this->Form->input('Model.field', array('error' => array('escape' => false)));``
-
 To override the model error messages use an associate array with
 the keyname of the validation rule:
 
 ::
 
     $this->Form->input('Model.field', array('error' => array('tooShort' => __('This is not long enough', true) )));
-
-
-#. ``$this->Form->input('Model.field', array('error' => array('tooShort' => __('This is not long enough', true) )));``
 
 As seen above you can set the error message for each validation
 rule you have in your models. In addition you can provide i18n
@@ -1579,11 +1192,6 @@ Example usage:
         echo $this->Form->input('ingredient', array('default'=>'Sugar')); 
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->input('ingredient', array('default'=>'Sugar'));``
-#. ``?>``
-
 Example with select field (Size "Medium" will be selected as
 default):
 
@@ -1593,12 +1201,6 @@ default):
         $sizes = array('s'=>'Small', 'm'=>'Medium', 'l'=>'Large');
         echo $this->Form->input('size', array('options'=>$sizes, 'default'=>'m')); 
     ?>
-
-
-#. ``<?php``
-#. ``$sizes = array('s'=>'Small', 'm'=>'Medium', 'l'=>'Large');``
-#. ``echo $this->Form->input('size', array('options'=>$sizes, 'default'=>'m'));``
-#. ``?>``
 
 You cannot use ``default`` to check a checkbox - instead you might
 set the value in ``$this->data`` in your controller,
@@ -1620,9 +1222,6 @@ rendered.
 
     echo $this->Form->input('close_time', array('type' => 'time', 'selected' => '13:30:00'));
 
-
-#. ``echo $this->Form->input('close_time', array('type' => 'time', 'selected' => '13:30:00'));``
-
 The selected key for date and datetime inputs may also be a UNIX
 timestamp.
 
@@ -1636,9 +1235,6 @@ input.
 
     echo $this->Form->input('textarea', array('rows' => '5', 'cols' => '5'));
 
-
-#. ``echo $this->Form->input('textarea', array('rows' => '5', 'cols' => '5'));``
-
 Output:
 
 ::
@@ -1648,13 +1244,6 @@ Output:
         <textarea name="data[Form][textarea]" cols="5" rows="5" id="FormTextarea" >
         </textarea>
     </div>
-
-
-#. ``<div class="input text">``
-#. ``<label for="FormTextarea">Textarea</label>``
-#. ``<textarea name="data[Form][textarea]" cols="5" rows="5" id="FormTextarea" >``
-#. ``</textarea>``
-#. ``</div>``
 
 $options[‘empty’]
 ~~~~~~~~~~~~~~~~~
@@ -1669,9 +1258,6 @@ string to empty.
 ::
 
     <?php echo $this->Form->input('field', array('options' => array(1,2,3,4,5), 'empty' => '(choose one)')); ?>
-
-
-#. ``<?php echo $this->Form->input('field', array('options' => array(1,2,3,4,5), 'empty' => '(choose one)')); ?>``
 
 Output:
 
@@ -1723,9 +1309,6 @@ the minutes select box.
 
     <?php echo $this->Form->input('Model.time', array('type' => 'time', 'interval' => 15)); ?>
 
-
-#. ``<?php echo $this->Form->input('Model.time', array('type' => 'time', 'interval' => 15)); ?>``
-
 Would create 4 options in the minute select. One for each 15
 minutes.
 
@@ -1739,9 +1322,6 @@ You can set the classname for an input field using
 
     echo $this->Form->input('title', array('class' => 'custom-class'));
 
-
-#. ``echo $this->Form->input('title', array('class' => 'custom-class'));``
-
 $options['hiddenField']
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1754,10 +1334,6 @@ value specified.
     <input type="hidden" name="data[Post][Published]" id="PostPublished_" value="0" />
     <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
 
-
-#. ``<input type="hidden" name="data[Post][Published]" id="PostPublished_" value="0" />``
-#. ``<input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />``
-
 This can be disabled by setting the
 ``$options['hiddenField'] = false``.
 
@@ -1765,17 +1341,11 @@ This can be disabled by setting the
 
     echo $this->Form->checkbox('published', array('hiddenField' => false));
 
-
-#. ``echo $this->Form->checkbox('published', array('hiddenField' => false));``
-
 Which outputs:
 
 ::
 
     <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
-
-
-#. ``<input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />``
 
 If you want to create multiple blocks of inputs on a form that are
 all grouped together, you should use this parameter on all inputs
@@ -1804,24 +1374,6 @@ primary colors would be overridden
     <label for="ColorsPurple">Purple</label>
     <input type="checkbox" name="data[Addon][Addon][]" value="5" id="ColorsOrange" />
     <label for="ColorsOrange">Orange</label>
-
-
-#. ``<h2>Primary Colors</h2>``
-#. ``<input type="hidden" name="data[Color][Color]" id="Colors_" value="0" />``
-#. ``<input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsRed" />``
-#. ``<label for="ColorsRed">Red</label>``
-#. ``<input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsBlue" />``
-#. ``<label for="ColorsBlue">Blue</label>``
-#. ``<input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsYellow" />``
-#. ``<label for="ColorsYellow">Yellow</label>``
-#. ``<h2>Tertiary Colors</h2>``
-#. ``<input type="hidden" name="data[Color][Color]" id="Colors_" value="0" />``
-#. ``<input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsGreen" />``
-#. ``<label for="ColorsGreen">Green</label>``
-#. ``<input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsPurple" />``
-#. ``<label for="ColorsPurple">Purple</label>``
-#. ``<input type="checkbox" name="data[Addon][Addon][]" value="5" id="ColorsOrange" />``
-#. ``<label for="ColorsOrange">Orange</label>``
 
 Disabling the ``'hiddenField'`` on the second input group would
 prevent this behavior

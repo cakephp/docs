@@ -26,16 +26,6 @@ something like the following:
         index.php
         README
 
-
-#. ``/path_to_document_root``
-#. ``/app``
-#. ``/cake``
-#. ``/plugins``
-#. ``/vendors``
-#. ``.htaccess``
-#. ``index.php``
-#. ``README``
-
 Now might be a good time to learn a bit about how Cake's directory
 structure works: check out Chapter "Basic Principles of CakePHP",
 Section :
@@ -68,16 +58,6 @@ something like the following:
         .htaccess
         index.php
         README
-
-
-#. ``/path_to_document_root``
-#. ``/app``
-#. ``/cake``
-#. ``/plugins``
-#. ``/vendors``
-#. ``.htaccess``
-#. ``index.php``
-#. ``README``
 
 Now might be a good time to learn a bit about how Cake's directory
 structure works: check out Chapter "Basic Principles of CakePHP",

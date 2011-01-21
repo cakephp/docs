@@ -388,22 +388,6 @@ it for you:-
     //
     }
 
-
-#. ``class AppModel extends Model {``
-#. ``//``
-#. ``//``
-#. ``function save($data = null, $validate = true, $fieldList = array()) {``
-#. ``//clear modified field value before each save``
-#. ``if (isset($this->data) && isset($this->data[$this->name]))``
-#. ``unset($this->data[$this->name]['modified']);``
-#. ``if (isset($data) && isset($data[$this->name]))``
-#. ``unset($data[$this->name]['modified']);``
-#. ``return parent::save($data, $validate, $fieldList);``
-#. ``}``
-#. ``//``
-#. ``//``
-#. ``}``
-
 Using UUIDs as Primary Keys
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -814,22 +798,6 @@ it for you:-
     //
     //
     }
-
-
-#. ``class AppModel extends Model {``
-#. ``//``
-#. ``//``
-#. ``function save($data = null, $validate = true, $fieldList = array()) {``
-#. ``//clear modified field value before each save``
-#. ``if (isset($this->data) && isset($this->data[$this->name]))``
-#. ``unset($this->data[$this->name]['modified']);``
-#. ``if (isset($data) && isset($data[$this->name]))``
-#. ``unset($data[$this->name]['modified']);``
-#. ``return parent::save($data, $validate, $fieldList);``
-#. ``}``
-#. ``//``
-#. ``//``
-#. ``}``
 
 Using UUIDs as Primary Keys
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -26,24 +26,6 @@ of another.
     $result = Set::contains($b, $a);
     // True
 
-
-#. ``$a = array(``
-#. ``0 => array('name' => 'main'),``
-#. ``1 => array('name' => 'about')``
-#. ``);``
-#. ``$b = array(``
-#. ``0 => array('name' => 'main'),``
-#. ``1 => array('name' => 'about'),``
-#. ``2 => array('name' => 'contact'),``
-#. ``'a' => 'b'``
-#. ``);``
-#. ``$result = Set::contains($a, $a);``
-#. ``// True``
-#. ``$result = Set::contains($a, $b);``
-#. ``// False``
-#. ``$result = Set::contains($b, $a);``
-#. ``// True``
-
 8.5.21 contains
 ---------------
 
@@ -71,21 +53,3 @@ of another.
     // False
     $result = Set::contains($b, $a);
     // True
-
-
-#. ``$a = array(``
-#. ``0 => array('name' => 'main'),``
-#. ``1 => array('name' => 'about')``
-#. ``);``
-#. ``$b = array(``
-#. ``0 => array('name' => 'main'),``
-#. ``1 => array('name' => 'about'),``
-#. ``2 => array('name' => 'contact'),``
-#. ``'a' => 'b'``
-#. ``);``
-#. ``$result = Set::contains($a, $a);``
-#. ``// True``
-#. ``$result = Set::contains($a, $b);``
-#. ``// False``
-#. ``$result = Set::contains($b, $a);``
-#. ``// True``

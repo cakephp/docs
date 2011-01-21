@@ -8,9 +8,6 @@ the CacheHelper in their $helpers array.
 
     var $helpers = array('Cache');
 
-
-#. ``var $helpers = array('Cache');``
-
 You also need to indicate which actions need caching, and how long
 each action will be cached. This is done through the $cacheAction
 variable in your controllers. $cacheAction should be set to an
@@ -31,13 +28,6 @@ Cache frequently visited Articles for varying lengths of time
         'view/52'  => 48000
     );
 
-
-#. ``var $cacheAction = array(``
-#. ``'view/23' => 21600,``
-#. ``'view/48' => 36000,``
-#. ``'view/52'  => 48000``
-#. ``);``
-
 Remember to use your routes in the $cacheAction if you have any.
 
 Cache an entire action in this case a large listing of articles
@@ -48,20 +38,12 @@ Cache an entire action in this case a large listing of articles
         'archives/' => '60000'
     );
 
-
-#. ``var $cacheAction = array(``
-#. ``'archives/' => '60000'``
-#. ``);``
-
 Cache every action in the controller using a strtotime() friendly
 time to indicate Controller wide caching time.
 
 ::
 
     var $cacheAction = "1 hour";
-
-
-#. ``var $cacheAction = "1 hour";``
 
 You can also enable controller/component callbacks for cached views
 created with ``CacheHelper``. To do so you must use the array
@@ -73,13 +55,6 @@ format for ``$cacheAction`` and create an array like the following:
         'add' => array('callbacks' => true, 'duration' => 36000),
         'index'  => array('callbacks' => true, 'duration' => 48000)
     );
-
-
-#. ``var $cacheAction = array(``
-#. ``'view' => array('callbacks' => true, 'duration' => 21600),``
-#. ``'add' => array('callbacks' => true, 'duration' => 36000),``
-#. ``'index'  => array('callbacks' => true, 'duration' => 48000)``
-#. ``);``
 
 By setting ``callbacks => true`` you tell CacheHelper that you want
 the generated files to create the components and models for the
@@ -99,9 +74,6 @@ the CacheHelper in their $helpers array.
 
     var $helpers = array('Cache');
 
-
-#. ``var $helpers = array('Cache');``
-
 You also need to indicate which actions need caching, and how long
 each action will be cached. This is done through the $cacheAction
 variable in your controllers. $cacheAction should be set to an
@@ -122,13 +94,6 @@ Cache frequently visited Articles for varying lengths of time
         'view/52'  => 48000
     );
 
-
-#. ``var $cacheAction = array(``
-#. ``'view/23' => 21600,``
-#. ``'view/48' => 36000,``
-#. ``'view/52'  => 48000``
-#. ``);``
-
 Remember to use your routes in the $cacheAction if you have any.
 
 Cache an entire action in this case a large listing of articles
@@ -139,20 +104,12 @@ Cache an entire action in this case a large listing of articles
         'archives/' => '60000'
     );
 
-
-#. ``var $cacheAction = array(``
-#. ``'archives/' => '60000'``
-#. ``);``
-
 Cache every action in the controller using a strtotime() friendly
 time to indicate Controller wide caching time.
 
 ::
 
     var $cacheAction = "1 hour";
-
-
-#. ``var $cacheAction = "1 hour";``
 
 You can also enable controller/component callbacks for cached views
 created with ``CacheHelper``. To do so you must use the array
@@ -164,13 +121,6 @@ format for ``$cacheAction`` and create an array like the following:
         'add' => array('callbacks' => true, 'duration' => 36000),
         'index'  => array('callbacks' => true, 'duration' => 48000)
     );
-
-
-#. ``var $cacheAction = array(``
-#. ``'view' => array('callbacks' => true, 'duration' => 21600),``
-#. ``'add' => array('callbacks' => true, 'duration' => 36000),``
-#. ``'index'  => array('callbacks' => true, 'duration' => 48000)``
-#. ``);``
 
 By setting ``callbacks => true`` you tell CacheHelper that you want
 the generated files to create the components and models for the

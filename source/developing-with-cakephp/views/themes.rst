@@ -13,11 +13,6 @@ ThemeView class instead of the default View class.
         var $view = 'Theme';
     }
 
-
-#. ``class ExampleController extends AppController {``
-#. ``var $view = 'Theme';``
-#. ``}``
-
 To declare which theme to use by default, specify the theme name in
 your controller.
 
@@ -28,12 +23,6 @@ your controller.
         var $theme = 'example';
     }
 
-
-#. ``class ExampleController extends AppController {``
-#. ``var $view = 'Theme';``
-#. ``var $theme = 'example';``
-#. ``}``
-
 You can also set or change the theme name within an action or
 within the ``beforeFilter`` or ``beforeRender`` callback
 functions.
@@ -41,9 +30,6 @@ functions.
 ::
 
     $this->theme = 'another_example';
-
-
-#. ``$this->theme = 'another_example';``
 
 Theme view files need to be within the /app/views/themed/ folder.
 Within the themed folder, create a folder using the same name as
@@ -99,16 +85,6 @@ folder.
      
     //and links to
     app/views/themed/purple_cupcake/webroot/css/main.css 
-
-
-#. ``//When in a theme with the name of 'purple_cupcake'``
-#. ``$this->Html->css('main.css');``
-#. ````
-#. ``//creates a path like``
-#. ``/theme/purple_cupcake/css/main.css``
-#. ````
-#. ``//and links to``
-#. ``app/views/themed/purple_cupcake/webroot/css/main.css``
 
 Increasing performance of plugin and theme assets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -142,11 +118,6 @@ ThemeView class instead of the default View class.
         var $view = 'Theme';
     }
 
-
-#. ``class ExampleController extends AppController {``
-#. ``var $view = 'Theme';``
-#. ``}``
-
 To declare which theme to use by default, specify the theme name in
 your controller.
 
@@ -157,12 +128,6 @@ your controller.
         var $theme = 'example';
     }
 
-
-#. ``class ExampleController extends AppController {``
-#. ``var $view = 'Theme';``
-#. ``var $theme = 'example';``
-#. ``}``
-
 You can also set or change the theme name within an action or
 within the ``beforeFilter`` or ``beforeRender`` callback
 functions.
@@ -170,9 +135,6 @@ functions.
 ::
 
     $this->theme = 'another_example';
-
-
-#. ``$this->theme = 'another_example';``
 
 Theme view files need to be within the /app/views/themed/ folder.
 Within the themed folder, create a folder using the same name as
@@ -228,16 +190,6 @@ folder.
      
     //and links to
     app/views/themed/purple_cupcake/webroot/css/main.css 
-
-
-#. ``//When in a theme with the name of 'purple_cupcake'``
-#. ``$this->Html->css('main.css');``
-#. ````
-#. ``//creates a path like``
-#. ``/theme/purple_cupcake/css/main.css``
-#. ````
-#. ``//and links to``
-#. ``app/views/themed/purple_cupcake/webroot/css/main.css``
 
 Increasing performance of plugin and theme assets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

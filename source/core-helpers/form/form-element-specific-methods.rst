@@ -11,9 +11,6 @@ the value or DOM id of an element in the form).
 
     <?php echo $this->Form->text('username', array('class' => 'users')); ?>
 
-
-#. ``<?php echo $this->Form->text('username', array('class' => 'users')); ?>``
-
 Will output:
 
 ::
@@ -34,9 +31,6 @@ the specified field.
 
     <?php echo $this->Form->checkbox('done'); ?>
 
-
-#. ``<?php echo $this->Form->checkbox('done'); ?>``
-
 Will output:
 
 ::
@@ -51,9 +45,6 @@ $options array:
 
     <?php echo $this->Form->checkbox('done', array('value' => 555)); ?>
 
-
-#. ``<?php echo $this->Form->checkbox('done', array('value' => 555)); ?>``
-
 Will output:
 
 ::
@@ -66,9 +57,6 @@ If you don't want the Form helper to create a hidden input:
 ::
 
     <?php echo $this->Form->checkbox('done', array('hiddenField' => false)); ?>
-
-
-#. ``<?php echo $this->Form->checkbox('done', array('hiddenField' => false)); ?>``
 
 Will output:
 
@@ -100,14 +88,6 @@ three possible button types:
     echo $this->Form->button('Submit Form', array('type'=>'submit'));
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->button('A Button');``
-#. ``echo $this->Form->button('Another Button', array('type'=>'button'));``
-#. ``echo $this->Form->button('Reset the Form', array('type'=>'reset'));``
-#. ``echo $this->Form->button('Submit Form', array('type'=>'submit'));``
-#. ``?>``
-
 Will output:
 
 ::
@@ -128,11 +108,6 @@ false.
         echo $this->Form->button('Submit Form', array('type'=>'submit','escape'=>true));
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->button('Submit Form', array('type'=>'submit','escape'=>true));``
-#. ``?>``
-
 year
 ~~~~
 
@@ -149,11 +124,6 @@ empty option.
     <?php
     echo $this->Form->year('purchased',2000,date('Y'));
     ?>
-
-
-#. ``<?php``
-#. ``echo $this->Form->year('purchased',2000,date('Y'));``
-#. ``?>``
 
 Will output:
 
@@ -187,11 +157,6 @@ Creates a select element populated with month names.
     echo $this->Form->month('mob');
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->month('mob');``
-#. ``?>``
-
 Will output:
 
 ::
@@ -222,11 +187,6 @@ can be translated using localization.)
     <?php
     echo $this->Form->month('mob', null, array('monthNames' => false));
     ?>
-
-
-#. ``<?php``
-#. ``echo $this->Form->month('mob', null, array('monthNames' => false));``
-#. ``?>``
 
 dateTime
 ~~~~~~~~
@@ -259,11 +219,6 @@ parameter as follows:
     <?php
     echo $this->Form->day('created');
     ?>
-
-
-#. ``<?php``
-#. ``echo $this->Form->day('created');``
-#. ``?>``
 
 Will output:
 
@@ -330,12 +285,6 @@ Creates a file input.
     echo $this->Form->file('avatar');
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->create('User',array('type'=>'file'));``
-#. ``echo $this->Form->file('avatar');``
-#. ``?>``
-
 Will output:
 
 ::
@@ -359,11 +308,6 @@ Creates a hidden form input. Example:
     echo $this->Form->hidden('id');
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->hidden('id');``
-#. ``?>``
-
 Will output:
 
 ::
@@ -386,13 +330,6 @@ error.
     }
     ?>
 
-
-#. ``<?php``
-#. ``if ($this->Form->isFieldError('gender')){``
-#. ``echo $this->Form->error('gender');``
-#. ``}``
-#. ``?>``
-
 When using ``$this->Form->input()``, errors are rendered by
 default.
 label
@@ -407,11 +344,6 @@ Creates a label tag, populated with $text.
     <?php
     echo $this->Form->label('status');
     ?>
-
-
-#. ``<?php``
-#. ``echo $this->Form->label('status');``
-#. ``?>``
 
 Will output:
 
@@ -431,11 +363,6 @@ Creates a password field.
     <?php
     echo $this->Form->password('password');
     ?>
-
-
-#. ``<?php``
-#. ``echo $this->Form->password('password');``
-#. ``?>``
 
 Will output:
 
@@ -464,13 +391,6 @@ Set ``$attributes['legend']`` to false to remove them.
     $attributes=array('legend'=>false);
     echo $this->Form->radio('gender',$options,$attributes);
     ?>
-
-
-#. ``<?php``
-#. ``$options=array('M'=>'Male','F'=>'Female');``
-#. ``$attributes=array('legend'=>false);``
-#. ``echo $this->Form->radio('gender',$options,$attributes);``
-#. ``?>``
 
 Will output:
 
@@ -504,12 +424,6 @@ set it to false to turn off the default empty option
     echo $this->Form->select('gender', $options)
     ?>
 
-
-#. ``<?php``
-#. ``$options = array('M' => 'Male', 'F' => 'Female');``
-#. ``echo $this->Form->select('gender', $options)``
-#. ``?>``
-
 Will output:
 
 ::
@@ -532,12 +446,6 @@ Defaults to true.
     echo $this->Form->select('gender', $options, null, array('escape' => false));
     ?>
 
-
-#. ``<?php``
-#. ``$options = array('M' => 'Male', 'F' => 'Female');``
-#. ``echo $this->Form->select('gender', $options, null, array('escape' => false));``
-#. ``?>``
-
 submit
 ~~~~~~
 
@@ -556,11 +464,6 @@ by declaring ``$options['div'] = false``.
     echo $this->Form->submit();
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->submit();``
-#. ``?>``
-
 Will output:
 
 ::
@@ -575,11 +478,6 @@ caption parameter instead of caption text.
     <?php
     echo $this->Form->submit('ok.png');
     ?>
-
-
-#. ``<?php``
-#. ``echo $this->Form->submit('ok.png');``
-#. ``?>``
 
 Will output:
 
@@ -600,11 +498,6 @@ Creates a text input field.
     echo $this->Form->text('first_name');
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->text('first_name');``
-#. ``?>``
-
 Will output:
 
 ::
@@ -624,11 +517,6 @@ Creates a textarea input field.
     echo $this->Form->textarea('notes');
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->textarea('notes');``
-#. ``?>``
-
 Will output:
 
 ::
@@ -645,13 +533,6 @@ textarea should be escaped. Defaults to ``true``.
     // OR....
     echo $this->Form->input('notes', array('type' => 'textarea', 'escape' => false);
     ?>
-
-
-#. ``<?php``
-#. ``echo $this->Form->textarea('notes', array('escape' => false);``
-#. ``// OR....``
-#. ``echo $this->Form->input('notes', array('type' => 'textarea', 'escape' => false);``
-#. ``?>``
 
 7.3.5 Form Element-Specific Methods
 -----------------------------------
@@ -666,9 +547,6 @@ the value or DOM id of an element in the form).
 
     <?php echo $this->Form->text('username', array('class' => 'users')); ?>
 
-
-#. ``<?php echo $this->Form->text('username', array('class' => 'users')); ?>``
-
 Will output:
 
 ::
@@ -689,9 +567,6 @@ the specified field.
 
     <?php echo $this->Form->checkbox('done'); ?>
 
-
-#. ``<?php echo $this->Form->checkbox('done'); ?>``
-
 Will output:
 
 ::
@@ -706,9 +581,6 @@ $options array:
 
     <?php echo $this->Form->checkbox('done', array('value' => 555)); ?>
 
-
-#. ``<?php echo $this->Form->checkbox('done', array('value' => 555)); ?>``
-
 Will output:
 
 ::
@@ -721,9 +593,6 @@ If you don't want the Form helper to create a hidden input:
 ::
 
     <?php echo $this->Form->checkbox('done', array('hiddenField' => false)); ?>
-
-
-#. ``<?php echo $this->Form->checkbox('done', array('hiddenField' => false)); ?>``
 
 Will output:
 
@@ -755,14 +624,6 @@ three possible button types:
     echo $this->Form->button('Submit Form', array('type'=>'submit'));
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->button('A Button');``
-#. ``echo $this->Form->button('Another Button', array('type'=>'button'));``
-#. ``echo $this->Form->button('Reset the Form', array('type'=>'reset'));``
-#. ``echo $this->Form->button('Submit Form', array('type'=>'submit'));``
-#. ``?>``
-
 Will output:
 
 ::
@@ -783,11 +644,6 @@ false.
         echo $this->Form->button('Submit Form', array('type'=>'submit','escape'=>true));
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->button('Submit Form', array('type'=>'submit','escape'=>true));``
-#. ``?>``
-
 year
 ~~~~
 
@@ -804,11 +660,6 @@ empty option.
     <?php
     echo $this->Form->year('purchased',2000,date('Y'));
     ?>
-
-
-#. ``<?php``
-#. ``echo $this->Form->year('purchased',2000,date('Y'));``
-#. ``?>``
 
 Will output:
 
@@ -842,11 +693,6 @@ Creates a select element populated with month names.
     echo $this->Form->month('mob');
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->month('mob');``
-#. ``?>``
-
 Will output:
 
 ::
@@ -877,11 +723,6 @@ can be translated using localization.)
     <?php
     echo $this->Form->month('mob', null, array('monthNames' => false));
     ?>
-
-
-#. ``<?php``
-#. ``echo $this->Form->month('mob', null, array('monthNames' => false));``
-#. ``?>``
 
 dateTime
 ~~~~~~~~
@@ -914,11 +755,6 @@ parameter as follows:
     <?php
     echo $this->Form->day('created');
     ?>
-
-
-#. ``<?php``
-#. ``echo $this->Form->day('created');``
-#. ``?>``
 
 Will output:
 
@@ -985,12 +821,6 @@ Creates a file input.
     echo $this->Form->file('avatar');
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->create('User',array('type'=>'file'));``
-#. ``echo $this->Form->file('avatar');``
-#. ``?>``
-
 Will output:
 
 ::
@@ -1014,11 +844,6 @@ Creates a hidden form input. Example:
     echo $this->Form->hidden('id');
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->hidden('id');``
-#. ``?>``
-
 Will output:
 
 ::
@@ -1041,13 +866,6 @@ error.
     }
     ?>
 
-
-#. ``<?php``
-#. ``if ($this->Form->isFieldError('gender')){``
-#. ``echo $this->Form->error('gender');``
-#. ``}``
-#. ``?>``
-
 When using ``$this->Form->input()``, errors are rendered by
 default.
 label
@@ -1062,11 +880,6 @@ Creates a label tag, populated with $text.
     <?php
     echo $this->Form->label('status');
     ?>
-
-
-#. ``<?php``
-#. ``echo $this->Form->label('status');``
-#. ``?>``
 
 Will output:
 
@@ -1086,11 +899,6 @@ Creates a password field.
     <?php
     echo $this->Form->password('password');
     ?>
-
-
-#. ``<?php``
-#. ``echo $this->Form->password('password');``
-#. ``?>``
 
 Will output:
 
@@ -1119,13 +927,6 @@ Set ``$attributes['legend']`` to false to remove them.
     $attributes=array('legend'=>false);
     echo $this->Form->radio('gender',$options,$attributes);
     ?>
-
-
-#. ``<?php``
-#. ``$options=array('M'=>'Male','F'=>'Female');``
-#. ``$attributes=array('legend'=>false);``
-#. ``echo $this->Form->radio('gender',$options,$attributes);``
-#. ``?>``
 
 Will output:
 
@@ -1159,12 +960,6 @@ set it to false to turn off the default empty option
     echo $this->Form->select('gender', $options)
     ?>
 
-
-#. ``<?php``
-#. ``$options = array('M' => 'Male', 'F' => 'Female');``
-#. ``echo $this->Form->select('gender', $options)``
-#. ``?>``
-
 Will output:
 
 ::
@@ -1187,12 +982,6 @@ Defaults to true.
     echo $this->Form->select('gender', $options, null, array('escape' => false));
     ?>
 
-
-#. ``<?php``
-#. ``$options = array('M' => 'Male', 'F' => 'Female');``
-#. ``echo $this->Form->select('gender', $options, null, array('escape' => false));``
-#. ``?>``
-
 submit
 ~~~~~~
 
@@ -1211,11 +1000,6 @@ by declaring ``$options['div'] = false``.
     echo $this->Form->submit();
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->submit();``
-#. ``?>``
-
 Will output:
 
 ::
@@ -1230,11 +1014,6 @@ caption parameter instead of caption text.
     <?php
     echo $this->Form->submit('ok.png');
     ?>
-
-
-#. ``<?php``
-#. ``echo $this->Form->submit('ok.png');``
-#. ``?>``
 
 Will output:
 
@@ -1255,11 +1034,6 @@ Creates a text input field.
     echo $this->Form->text('first_name');
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->text('first_name');``
-#. ``?>``
-
 Will output:
 
 ::
@@ -1279,11 +1053,6 @@ Creates a textarea input field.
     echo $this->Form->textarea('notes');
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Form->textarea('notes');``
-#. ``?>``
-
 Will output:
 
 ::
@@ -1300,10 +1069,3 @@ textarea should be escaped. Defaults to ``true``.
     // OR....
     echo $this->Form->input('notes', array('type' => 'textarea', 'escape' => false);
     ?>
-
-
-#. ``<?php``
-#. ``echo $this->Form->textarea('notes', array('escape' => false);``
-#. ``// OR....``
-#. ``echo $this->Form->input('notes', array('type' => 'textarea', 'escape' => false);``
-#. ``?>``

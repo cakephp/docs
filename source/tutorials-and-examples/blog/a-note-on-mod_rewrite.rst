@@ -41,9 +41,6 @@ uncomment the line that looks like:
 
     Configure::write('App.baseUrl', env('SCRIPT_NAME'));
 
-
-#. ``Configure::write('App.baseUrl', env('SCRIPT_NAME'));``
-
 Also remove these .htaccess files:
 
 ::
@@ -52,12 +49,6 @@ Also remove these .htaccess files:
             /app/.htaccess
             /app/webroot/.htaccess
             
-
-
-#. ``/.htaccess``
-#. ``/app/.htaccess``
-#. ``/app/webroot/.htaccess``
-#. ````
 
 This will make your URLs look like
 www.example.com/index.php/controllername/actionname/param rather
@@ -112,9 +103,6 @@ uncomment the line that looks like:
 
     Configure::write('App.baseUrl', env('SCRIPT_NAME'));
 
-
-#. ``Configure::write('App.baseUrl', env('SCRIPT_NAME'));``
-
 Also remove these .htaccess files:
 
 ::
@@ -123,12 +111,6 @@ Also remove these .htaccess files:
             /app/.htaccess
             /app/webroot/.htaccess
             
-
-
-#. ``/.htaccess``
-#. ``/app/.htaccess``
-#. ``/app/webroot/.htaccess``
-#. ````
 
 This will make your URLs look like
 www.example.com/index.php/controllername/actionname/param rather

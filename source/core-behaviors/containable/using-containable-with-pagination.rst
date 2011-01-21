@@ -20,13 +20,6 @@ Here's an example of how to contain associations when paginating.
     
     $users = $this->paginate('User');
 
-
-#. ``$this->paginate['User'] = array(``
-#. ``'contain' => array('Profile', 'Account'),``
-#. ``'order' => 'User.username'``
-#. ``);``
-#. ``$users = $this->paginate('User');``
-
 6.2.1 Using Containable with pagination
 ---------------------------------------
 
@@ -48,10 +41,3 @@ Here's an example of how to contain associations when paginating.
     );
     
     $users = $this->paginate('User');
-
-
-#. ``$this->paginate['User'] = array(``
-#. ``'contain' => array('Profile', 'Account'),``
-#. ``'order' => 'User.username'``
-#. ``);``
-#. ``$users = $this->paginate('User');``

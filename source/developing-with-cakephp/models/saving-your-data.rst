@@ -43,23 +43,6 @@ model to save data to a database table:
         $this->set('recipe', $this->Recipe->findById($id));
     }
 
-
-#. ``function edit($id) {``
-#. ``//Has any form data been POSTed?``
-#. ``if(!empty($this->data)) {``
-#. ``//If the form data can be validated and saved...``
-#. ``if($this->Recipe->save($this->data)) {``
-#. ``//Set a session flash message and redirect.``
-#. ``$this->Session->setFlash("Recipe Saved!");``
-#. ``$this->redirect('/recipes');``
-#. ``}``
-#. ``}``
-#. ````
-#. ``//If no form data, find the recipe to be edited``
-#. ``//and hand it to the view.``
-#. ``$this->set('recipe', $this->Recipe->findById($id));``
-#. ``}``
-
 One additional note: when save is called, the data passed to it in
 the first parameter is validated using CakePHP validation mechanism
 (see the Data Validation chapter for more information). If for some
@@ -81,11 +64,6 @@ the ActiveRecord features offered by Model.
     $this->Post->set('title', 'New title for the article');
     $this->Post->save();
 
-
-#. ``$this->Post->read(null, 1);``
-#. ``$this->Post->set('title', 'New title for the article');``
-#. ``$this->Post->save();``
-
 Is an example of how you can use ``set()`` to update and save
 single fields, in an ActiveRecord approach. You can also use
 ``set()`` to assign new values to multiple fields.
@@ -98,14 +76,6 @@ single fields, in an ActiveRecord approach. You can also use
         'published' => false
     ));
     $this->Post->save();
-
-
-#. ``$this->Post->read(null, 1);``
-#. ``$this->Post->set(array(``
-#. ``'title' => 'New title',``
-#. ``'published' => false``
-#. ``));``
-#. ``$this->Post->save();``
 
 The above would update the title and published fields and save them
 to the database.
@@ -138,13 +108,6 @@ as keys:
         'callbacks' => true //other possible values are false, 'before', 'after'
     )
 
-
-#. ``array(``
-#. ``'validate' => true,``
-#. ``'fieldList' => array(),``
-#. ``'callbacks' => true //other possible values are false, 'before', 'after'``
-#. ``)``
-
 More information about model callbacks is available
 `here </view/76/Callback-Methods>`_
 
@@ -161,10 +124,6 @@ handy when creating new objects.
     
     $newIngredientId = $this->Ingredient->id;
 
-
-#. ``$this->Ingredient->save($newData);``
-#. ``$newIngredientId = $this->Ingredient->id;``
-
 Creating or updating is controlled by the model's ``id`` field. If
 ``$Model->id`` is set, the record with this primary key is updated.
 Otherwise a new record is created.
@@ -178,14 +137,6 @@ Otherwise a new record is created.
     //Update: id is set to a numerical value 
     $this->Recipe->id = 2;
     $this->Recipe->save($this->data);
-
-
-#. ``//Create: id isn't set or is null``
-#. ``$this->Recipe->create();``
-#. ``$this->Recipe->save($this->data);``
-#. ``//Update: id is set to a numerical value``
-#. ``$this->Recipe->id = 2;``
-#. ``$this->Recipe->save($this->data);``
 
 When calling save in a loop, don't forget to call ``create()``.
 
@@ -218,9 +169,6 @@ For example, to update the title of a blog post, the call to
 
     $this->Post->saveField('title', 'A New Title for a New Day');
 
-
-#. ``$this->Post->saveField('title', 'A New Title for a New Day');``
-
 You cant stop the updated field being updated with this method, you
 need to use the save() method.
 
@@ -242,13 +190,6 @@ year, the update call might look something like:
         array('Baker.created <=' => $this_year)
     );
 
-
-#. ``$this_year = date('Y-m-d h:i:s', strtotime('-1 year'));``
-#. ``$this->Baker->updateAll(``
-#. ``array('Baker.approved' => true),``
-#. ``array('Baker.created <=' => $this_year)``
-#. ``);``
-
 The $fields array accepts SQL expressions. Literal values should be
 quoted manually.
 
@@ -265,12 +206,6 @@ customer:
         array('Ticket.status' => "'closed'"),
         array('Ticket.customer_id' => 453)
     );
-
-
-#. ``$this->Ticket->updateAll(``
-#. ``array('Ticket.status' => "'closed'"),``
-#. ``array('Ticket.customer_id' => 453)``
-#. ``);``
 
 By default, updateAll() will automatically join any belongsTo
 association for databases that support joins. To prevent this,
@@ -322,9 +257,6 @@ The command for saving the above $data array would look like this:
 
     $this->Article->saveAll($data['Article']);
 
-
-#. ``$this->Article->saveAll($data['Article']);``
-
 Note that we are passing ``$data['Article']`` instead of usual
 ``$data``. When saving multiple records of same model the records
 arrays should be just numerically indexed without the model key.
@@ -352,9 +284,6 @@ The command for saving the above $data array would look like this:
 ::
 
     $this->Article->saveAll($data);
-
-
-#. ``$this->Article->saveAll($data);``
 
 For saving a record along with its related records having hasMany
 association, the data array should be like this:
@@ -387,9 +316,6 @@ The command for saving the above $data array would look like this:
 ::
 
     $this->Article->saveAll($data);
-
-
-#. ``$this->Article->saveAll($data);``
 
 Saving related data with ``saveAll()`` will only work for directly
 associated models.
@@ -444,29 +370,6 @@ single User and a single Profile.
     }
     ?>
 
-
-#. ``<?php``
-#. ``function add() {``
-#. ``if (!empty($this->data)) {``
-#. ``// We can save the User data:``
-#. ``// it should be in $this->data['User']``
-#. ````
-#. ``$user = $this->User->save($this->data);``
-#. ``// If the user was saved, Now we add this information to the data``
-#. ``// and save the Profile.``
-#. ````
-#. ``if (!empty($user)) {``
-#. ``// The ID of the newly created user has been set``
-#. ``// as $this->User->id.``
-#. ``$this->data['Profile']['user_id'] = $this->User->id;``
-#. ``// Because our User hasOne Profile, we can access``
-#. ``// the Profile model through the User model:``
-#. ``$this->User->Profile->save($this->data);``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 As a rule, when working with hasOne, hasMany, and belongsTo
 associations, its all about keying. The basic idea is to get the
 key from one model and place it in the foreign key field on the
@@ -506,16 +409,6 @@ models (we'll assume that Company hasMany Account).
     
     echo $form->end('Add');
 
-
-#. ``echo $form->create('Company', array('action'=>'add'));``
-#. ``echo $form->input('Company.name', array('label'=>'Company name'));``
-#. ``echo $form->input('Company.description');``
-#. ``echo $form->input('Company.location');``
-#. ``echo $form->input('Account.0.name', array('label'=>'Account name'));``
-#. ``echo $form->input('Account.0.username');``
-#. ``echo $form->input('Account.0.email');``
-#. ``echo $form->end('Add');``
-
 Take a look at the way we named the form fields for the Account
 model. If Company is our main model, ``saveAll()`` will expect the
 related model's (Account) data to arrive in a specific format. And
@@ -539,15 +432,6 @@ action:
        }
     }
 
-
-#. ``function add() {``
-#. ``if(!empty($this->data)) {``
-#. ``//Use the following to avoid   validation errors:``
-#. ``unset($this->Company->Account->validate['company_id']);``
-#. ``$this->Company->saveAll($this->data, array('validate'=>'first'));``
-#. ``}``
-#. ``}``
-
 That's all there is to it. Now our Company and Account models will
 be validated and saved all at the same time. A quick thing to point
 out here is the use of ``array('validate'=>'first')``; this option
@@ -570,9 +454,6 @@ by a underscore and the word "count".
 ::
 
     my_model_count
-
-
-#. ``my_model_count``
 
 Let's say you have a model called ``ImageComment`` and a model
 called ``Image``, you would add a new INT-field to the ``image``
@@ -604,13 +485,6 @@ and set the value to ``true``.
         );
     }
 
-
-#. ``class Image extends AppModel {``
-#. ``var $belongsTo = array(``
-#. ``'ImageAlbum' => array('counterCache' => true)``
-#. ``);``
-#. ``}``
-
 From now on, every time you add or remove a ``Image`` associated to
 ``ImageAlbum``, the number within ``image_count`` is adjusted
 automatically.
@@ -630,15 +504,6 @@ Using our Image model example, we can specify it like so:
                 'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1
         ));
     }
-
-
-#. ``class Image extends AppModel {``
-#. ``var $belongsTo = array(``
-#. ``'ImageAlbum' => array(``
-#. ``'counterCache' => true,``
-#. ``'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1``
-#. ``));``
-#. ``}``
 
 Saving Related Model Data (HABTM)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -665,14 +530,6 @@ $recipe\_id is already set to something):
         <?php echo $form->input('Tag.name'); ?>
         <?php echo $form->end('Add Tag'); ?>
 
-
-#. ``<?php echo $form->create('Tag');?>``
-#. ``<?php echo $form->input(``
-#. ``'Recipe.id',``
-#. ``array('type'=>'hidden', 'value' => $recipe_id)); ?>``
-#. ``<?php echo $form->input('Tag.name'); ?>``
-#. ``<?php echo $form->end('Add Tag'); ?>``
-
 In this example, you can see the ``Recipe.id`` hidden field whose
 value is set to the ID of the recipe we want to link the tag to.
 
@@ -688,15 +545,6 @@ automatically save the HABTM data to the database.
             //do something on success            
         }
     }
-
-
-#. ``function add() {``
-#. ````
-#. ``//Save the association``
-#. ``if ($this->Tag->save($this->data)) {``
-#. ``//do something on success``
-#. ``}``
-#. ``}``
 
 With the preceding code, our new Tag is created and associated with
 a Recipe, whose ID was set in $this->data['Recipe']['id'].
@@ -715,12 +563,6 @@ pull in this data into a ``<select>``.
     // in the view:
     $form->input('tags');
 
-
-#. ``// in the controller:``
-#. ``$this->set('tags', $this->Recipe->Tag->find('list'));``
-#. ``// in the view:``
-#. ``$form->input('tags');``
-
 A more likely scenario with a HABTM relationship would include a
 ``<select>`` set to allow multiple selections. For example, a
 Recipe can have multiple Tags assigned to it. In this case, the
@@ -735,12 +577,6 @@ declared slightly different. The tag name is defined using the
     
     // in the view:
     $form->input('Tag');
-
-
-#. ``// in the controller:``
-#. ``$this->set('tags', $this->Recipe->Tag->find('list'));``
-#. ``// in the view:``
-#. ``$form->input('Tag');``
 
 Using the preceding code, a multiple select drop down is created,
 allowing for multiple choices to automatically be saved to the
@@ -769,9 +605,6 @@ Consider this example:
 
     Child hasAndBelongsToMany Club
 
-
-#. ``Child hasAndBelongsToMany Club``
-
 Another way to look at this is adding a Membership model:
 
 ::
@@ -779,11 +612,6 @@ Another way to look at this is adding a Membership model:
     Child hasMany Membership
     Membership belongsTo Child, Club
     Club hasMany Membership.
-
-
-#. ``Child hasMany Membership``
-#. ``Membership belongsTo Child, Club``
-#. ``Club hasMany Membership.``
 
 These two examples are almost the exact same. They use the same
 amount and named fields in the database and the same amount of
@@ -839,23 +667,6 @@ model to save data to a database table:
         $this->set('recipe', $this->Recipe->findById($id));
     }
 
-
-#. ``function edit($id) {``
-#. ``//Has any form data been POSTed?``
-#. ``if(!empty($this->data)) {``
-#. ``//If the form data can be validated and saved...``
-#. ``if($this->Recipe->save($this->data)) {``
-#. ``//Set a session flash message and redirect.``
-#. ``$this->Session->setFlash("Recipe Saved!");``
-#. ``$this->redirect('/recipes');``
-#. ``}``
-#. ``}``
-#. ````
-#. ``//If no form data, find the recipe to be edited``
-#. ``//and hand it to the view.``
-#. ``$this->set('recipe', $this->Recipe->findById($id));``
-#. ``}``
-
 One additional note: when save is called, the data passed to it in
 the first parameter is validated using CakePHP validation mechanism
 (see the Data Validation chapter for more information). If for some
@@ -877,11 +688,6 @@ the ActiveRecord features offered by Model.
     $this->Post->set('title', 'New title for the article');
     $this->Post->save();
 
-
-#. ``$this->Post->read(null, 1);``
-#. ``$this->Post->set('title', 'New title for the article');``
-#. ``$this->Post->save();``
-
 Is an example of how you can use ``set()`` to update and save
 single fields, in an ActiveRecord approach. You can also use
 ``set()`` to assign new values to multiple fields.
@@ -894,14 +700,6 @@ single fields, in an ActiveRecord approach. You can also use
         'published' => false
     ));
     $this->Post->save();
-
-
-#. ``$this->Post->read(null, 1);``
-#. ``$this->Post->set(array(``
-#. ``'title' => 'New title',``
-#. ``'published' => false``
-#. ``));``
-#. ``$this->Post->save();``
 
 The above would update the title and published fields and save them
 to the database.
@@ -934,13 +732,6 @@ as keys:
         'callbacks' => true //other possible values are false, 'before', 'after'
     )
 
-
-#. ``array(``
-#. ``'validate' => true,``
-#. ``'fieldList' => array(),``
-#. ``'callbacks' => true //other possible values are false, 'before', 'after'``
-#. ``)``
-
 More information about model callbacks is available
 `here </view/76/Callback-Methods>`_
 
@@ -957,10 +748,6 @@ handy when creating new objects.
     
     $newIngredientId = $this->Ingredient->id;
 
-
-#. ``$this->Ingredient->save($newData);``
-#. ``$newIngredientId = $this->Ingredient->id;``
-
 Creating or updating is controlled by the model's ``id`` field. If
 ``$Model->id`` is set, the record with this primary key is updated.
 Otherwise a new record is created.
@@ -974,14 +761,6 @@ Otherwise a new record is created.
     //Update: id is set to a numerical value 
     $this->Recipe->id = 2;
     $this->Recipe->save($this->data);
-
-
-#. ``//Create: id isn't set or is null``
-#. ``$this->Recipe->create();``
-#. ``$this->Recipe->save($this->data);``
-#. ``//Update: id is set to a numerical value``
-#. ``$this->Recipe->id = 2;``
-#. ``$this->Recipe->save($this->data);``
 
 When calling save in a loop, don't forget to call ``create()``.
 
@@ -1014,9 +793,6 @@ For example, to update the title of a blog post, the call to
 
     $this->Post->saveField('title', 'A New Title for a New Day');
 
-
-#. ``$this->Post->saveField('title', 'A New Title for a New Day');``
-
 You cant stop the updated field being updated with this method, you
 need to use the save() method.
 
@@ -1038,13 +814,6 @@ year, the update call might look something like:
         array('Baker.created <=' => $this_year)
     );
 
-
-#. ``$this_year = date('Y-m-d h:i:s', strtotime('-1 year'));``
-#. ``$this->Baker->updateAll(``
-#. ``array('Baker.approved' => true),``
-#. ``array('Baker.created <=' => $this_year)``
-#. ``);``
-
 The $fields array accepts SQL expressions. Literal values should be
 quoted manually.
 
@@ -1061,12 +830,6 @@ customer:
         array('Ticket.status' => "'closed'"),
         array('Ticket.customer_id' => 453)
     );
-
-
-#. ``$this->Ticket->updateAll(``
-#. ``array('Ticket.status' => "'closed'"),``
-#. ``array('Ticket.customer_id' => 453)``
-#. ``);``
 
 By default, updateAll() will automatically join any belongsTo
 association for databases that support joins. To prevent this,
@@ -1118,9 +881,6 @@ The command for saving the above $data array would look like this:
 
     $this->Article->saveAll($data['Article']);
 
-
-#. ``$this->Article->saveAll($data['Article']);``
-
 Note that we are passing ``$data['Article']`` instead of usual
 ``$data``. When saving multiple records of same model the records
 arrays should be just numerically indexed without the model key.
@@ -1148,9 +908,6 @@ The command for saving the above $data array would look like this:
 ::
 
     $this->Article->saveAll($data);
-
-
-#. ``$this->Article->saveAll($data);``
 
 For saving a record along with its related records having hasMany
 association, the data array should be like this:
@@ -1183,9 +940,6 @@ The command for saving the above $data array would look like this:
 ::
 
     $this->Article->saveAll($data);
-
-
-#. ``$this->Article->saveAll($data);``
 
 Saving related data with ``saveAll()`` will only work for directly
 associated models.
@@ -1240,29 +994,6 @@ single User and a single Profile.
     }
     ?>
 
-
-#. ``<?php``
-#. ``function add() {``
-#. ``if (!empty($this->data)) {``
-#. ``// We can save the User data:``
-#. ``// it should be in $this->data['User']``
-#. ````
-#. ``$user = $this->User->save($this->data);``
-#. ``// If the user was saved, Now we add this information to the data``
-#. ``// and save the Profile.``
-#. ````
-#. ``if (!empty($user)) {``
-#. ``// The ID of the newly created user has been set``
-#. ``// as $this->User->id.``
-#. ``$this->data['Profile']['user_id'] = $this->User->id;``
-#. ``// Because our User hasOne Profile, we can access``
-#. ``// the Profile model through the User model:``
-#. ``$this->User->Profile->save($this->data);``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 As a rule, when working with hasOne, hasMany, and belongsTo
 associations, its all about keying. The basic idea is to get the
 key from one model and place it in the foreign key field on the
@@ -1302,16 +1033,6 @@ models (we'll assume that Company hasMany Account).
     
     echo $form->end('Add');
 
-
-#. ``echo $form->create('Company', array('action'=>'add'));``
-#. ``echo $form->input('Company.name', array('label'=>'Company name'));``
-#. ``echo $form->input('Company.description');``
-#. ``echo $form->input('Company.location');``
-#. ``echo $form->input('Account.0.name', array('label'=>'Account name'));``
-#. ``echo $form->input('Account.0.username');``
-#. ``echo $form->input('Account.0.email');``
-#. ``echo $form->end('Add');``
-
 Take a look at the way we named the form fields for the Account
 model. If Company is our main model, ``saveAll()`` will expect the
 related model's (Account) data to arrive in a specific format. And
@@ -1335,15 +1056,6 @@ action:
        }
     }
 
-
-#. ``function add() {``
-#. ``if(!empty($this->data)) {``
-#. ``//Use the following to avoid   validation errors:``
-#. ``unset($this->Company->Account->validate['company_id']);``
-#. ``$this->Company->saveAll($this->data, array('validate'=>'first'));``
-#. ``}``
-#. ``}``
-
 That's all there is to it. Now our Company and Account models will
 be validated and saved all at the same time. A quick thing to point
 out here is the use of ``array('validate'=>'first')``; this option
@@ -1366,9 +1078,6 @@ by a underscore and the word "count".
 ::
 
     my_model_count
-
-
-#. ``my_model_count``
 
 Let's say you have a model called ``ImageComment`` and a model
 called ``Image``, you would add a new INT-field to the ``image``
@@ -1400,13 +1109,6 @@ and set the value to ``true``.
         );
     }
 
-
-#. ``class Image extends AppModel {``
-#. ``var $belongsTo = array(``
-#. ``'ImageAlbum' => array('counterCache' => true)``
-#. ``);``
-#. ``}``
-
 From now on, every time you add or remove a ``Image`` associated to
 ``ImageAlbum``, the number within ``image_count`` is adjusted
 automatically.
@@ -1426,15 +1128,6 @@ Using our Image model example, we can specify it like so:
                 'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1
         ));
     }
-
-
-#. ``class Image extends AppModel {``
-#. ``var $belongsTo = array(``
-#. ``'ImageAlbum' => array(``
-#. ``'counterCache' => true,``
-#. ``'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1``
-#. ``));``
-#. ``}``
 
 Saving Related Model Data (HABTM)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1461,14 +1154,6 @@ $recipe\_id is already set to something):
         <?php echo $form->input('Tag.name'); ?>
         <?php echo $form->end('Add Tag'); ?>
 
-
-#. ``<?php echo $form->create('Tag');?>``
-#. ``<?php echo $form->input(``
-#. ``'Recipe.id',``
-#. ``array('type'=>'hidden', 'value' => $recipe_id)); ?>``
-#. ``<?php echo $form->input('Tag.name'); ?>``
-#. ``<?php echo $form->end('Add Tag'); ?>``
-
 In this example, you can see the ``Recipe.id`` hidden field whose
 value is set to the ID of the recipe we want to link the tag to.
 
@@ -1484,15 +1169,6 @@ automatically save the HABTM data to the database.
             //do something on success            
         }
     }
-
-
-#. ``function add() {``
-#. ````
-#. ``//Save the association``
-#. ``if ($this->Tag->save($this->data)) {``
-#. ``//do something on success``
-#. ``}``
-#. ``}``
 
 With the preceding code, our new Tag is created and associated with
 a Recipe, whose ID was set in $this->data['Recipe']['id'].
@@ -1511,12 +1187,6 @@ pull in this data into a ``<select>``.
     // in the view:
     $form->input('tags');
 
-
-#. ``// in the controller:``
-#. ``$this->set('tags', $this->Recipe->Tag->find('list'));``
-#. ``// in the view:``
-#. ``$form->input('tags');``
-
 A more likely scenario with a HABTM relationship would include a
 ``<select>`` set to allow multiple selections. For example, a
 Recipe can have multiple Tags assigned to it. In this case, the
@@ -1531,12 +1201,6 @@ declared slightly different. The tag name is defined using the
     
     // in the view:
     $form->input('Tag');
-
-
-#. ``// in the controller:``
-#. ``$this->set('tags', $this->Recipe->Tag->find('list'));``
-#. ``// in the view:``
-#. ``$form->input('Tag');``
 
 Using the preceding code, a multiple select drop down is created,
 allowing for multiple choices to automatically be saved to the
@@ -1565,9 +1229,6 @@ Consider this example:
 
     Child hasAndBelongsToMany Club
 
-
-#. ``Child hasAndBelongsToMany Club``
-
 Another way to look at this is adding a Membership model:
 
 ::
@@ -1575,11 +1236,6 @@ Another way to look at this is adding a Membership model:
     Child hasMany Membership
     Membership belongsTo Child, Club
     Club hasMany Membership.
-
-
-#. ``Child hasMany Membership``
-#. ``Membership belongsTo Child, Club``
-#. ``Club hasMany Membership.``
 
 These two examples are almost the exact same. They use the same
 amount and named fields in the database and the same amount of

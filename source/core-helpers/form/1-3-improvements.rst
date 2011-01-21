@@ -36,14 +36,6 @@ of default options for ``input()`` with the ``inputDefaults`` key.
             )
         ));
 
-
-#. ``echo $this->Form->create('User', array(``
-#. ``'inputDefaults' => array(``
-#. ``'label' => false,``
-#. ``'div' => false``
-#. ``)``
-#. ``));``
-
 All inputs created from that point forward would inherit the
 options declared in inputDefaults. You can override the
 defaultOptions by declaring the option in the input() call.
@@ -52,10 +44,6 @@ defaultOptions by declaring the option in the input() call.
 
     echo $this->Form->input('password'); // No div, no label
     echo $this->Form->input('username', array('label' => 'Username')); // has a label element
-
-
-#. ``echo $this->Form->input('password'); // No div, no label``
-#. ``echo $this->Form->input('username', array('label' => 'Username')); // has a label element``
 
 **Omit attributes**
 
@@ -69,11 +57,6 @@ html tag.
         'div' => array('class' => false)
     )); // Omits the 'class' attribute added by default to div tag
 
-
-#. ``echo $this->Form->input('username', array(``
-#. ``'div' => array('class' => false)``
-#. ``)); // Omits the 'class' attribute added by default to div tag``
-
 **Accept-charset**
 
 Forms now get an accept-charset set automatically, it will match
@@ -84,10 +67,6 @@ using the 'encoding' option when calling create().
 
     // To remove the accept-charset attribute.
     echo $this->Form->create('User', array('encoding' => null));
-
-
-#. ``// To remove the accept-charset attribute.``
-#. ``echo $this->Form->create('User', array('encoding' => null));``
 
 **Removed parameters**
 
@@ -173,14 +152,6 @@ of default options for ``input()`` with the ``inputDefaults`` key.
             )
         ));
 
-
-#. ``echo $this->Form->create('User', array(``
-#. ``'inputDefaults' => array(``
-#. ``'label' => false,``
-#. ``'div' => false``
-#. ``)``
-#. ``));``
-
 All inputs created from that point forward would inherit the
 options declared in inputDefaults. You can override the
 defaultOptions by declaring the option in the input() call.
@@ -189,10 +160,6 @@ defaultOptions by declaring the option in the input() call.
 
     echo $this->Form->input('password'); // No div, no label
     echo $this->Form->input('username', array('label' => 'Username')); // has a label element
-
-
-#. ``echo $this->Form->input('password'); // No div, no label``
-#. ``echo $this->Form->input('username', array('label' => 'Username')); // has a label element``
 
 **Omit attributes**
 
@@ -206,11 +173,6 @@ html tag.
         'div' => array('class' => false)
     )); // Omits the 'class' attribute added by default to div tag
 
-
-#. ``echo $this->Form->input('username', array(``
-#. ``'div' => array('class' => false)``
-#. ``)); // Omits the 'class' attribute added by default to div tag``
-
 **Accept-charset**
 
 Forms now get an accept-charset set automatically, it will match
@@ -221,10 +183,6 @@ using the 'encoding' option when calling create().
 
     // To remove the accept-charset attribute.
     echo $this->Form->create('User', array('encoding' => null));
-
-
-#. ``// To remove the accept-charset attribute.``
-#. ``echo $this->Form->create('User', array('encoding' => null));``
 
 **Removed parameters**
 

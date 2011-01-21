@@ -21,11 +21,6 @@ implement output() in your AppHelper.
         echo $str;
     }
 
-
-#. ``function output($str) {``
-#. ``echo $str;``
-#. ``}``
-
 Doing this will remove the need to add echo statements to your view
 code.
 
@@ -40,13 +35,6 @@ are a few examples of how to use the $htmlAttributes parameter:
      
     Desired attributes: <tag name="foo" value="bar" />  
     Array parameter:  array('name' => 'foo', 'value' => 'bar')
-
-
-#. ``Desired attributes: <tag class="someClass" />``
-#. ``Array parameter: array('class'=>'someClass')``
-#. ````
-#. ``Desired attributes: <tag name="foo" value="bar" />``
-#. ``Array parameter:  array('name' => 'foo', 'value' => 'bar')``
 
 The HtmlHelper is available in all views by default. If you're
 getting an error informing you that it isn't there, it's usually
@@ -76,11 +64,6 @@ implement output() in your AppHelper.
         echo $str;
     }
 
-
-#. ``function output($str) {``
-#. ``echo $str;``
-#. ``}``
-
 Doing this will remove the need to add echo statements to your view
 code.
 
@@ -95,13 +78,6 @@ are a few examples of how to use the $htmlAttributes parameter:
      
     Desired attributes: <tag name="foo" value="bar" />  
     Array parameter:  array('name' => 'foo', 'value' => 'bar')
-
-
-#. ``Desired attributes: <tag class="someClass" />``
-#. ``Array parameter: array('class'=>'someClass')``
-#. ````
-#. ``Desired attributes: <tag name="foo" value="bar" />``
-#. ``Array parameter:  array('name' => 'foo', 'value' => 'bar')``
 
 The HtmlHelper is available in all views by default. If you're
 getting an error informing you that it isn't there, it's usually

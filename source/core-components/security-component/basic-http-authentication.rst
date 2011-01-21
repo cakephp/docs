@@ -39,28 +39,6 @@ lines of code inside the controller's beforeFilter method.
         }
     }
 
-
-#. ``class ApiController extends AppController {``
-#. ``var $name = 'Api';``
-#. ``var $uses = array();``
-#. ``var $components = array('Security');``
-#. ``function beforeFilter() {``
-#. ``$this->Security->loginOptions = array(``
-#. ``'type'=>'basic',``
-#. ``'realm'=>'MyRealm'``
-#. ``);``
-#. ``$this->Security->loginUsers = array(``
-#. ``'john'=>'johnspassword',``
-#. ``'jane'=>'janespassword'``
-#. ``);``
-#. ``$this->Security->requireLogin();``
-#. ``}``
-#. ````
-#. ``function index() {``
-#. ``//protected application logic goes here...``
-#. ``}``
-#. ``}``
-
 The loginOptions property of the SecurityComponent is an
 associative array specifying how logins should be handled. You only
 need to specify the **type** as **basic** to get going. Specify the
@@ -118,28 +96,6 @@ lines of code inside the controller's beforeFilter method.
             //protected application logic goes here...
         }
     }
-
-
-#. ``class ApiController extends AppController {``
-#. ``var $name = 'Api';``
-#. ``var $uses = array();``
-#. ``var $components = array('Security');``
-#. ``function beforeFilter() {``
-#. ``$this->Security->loginOptions = array(``
-#. ``'type'=>'basic',``
-#. ``'realm'=>'MyRealm'``
-#. ``);``
-#. ``$this->Security->loginUsers = array(``
-#. ``'john'=>'johnspassword',``
-#. ``'jane'=>'janespassword'``
-#. ``);``
-#. ``$this->Security->requireLogin();``
-#. ``}``
-#. ````
-#. ``function index() {``
-#. ``//protected application logic goes here...``
-#. ``}``
-#. ``}``
 
 The loginOptions property of the SecurityComponent is an
 associative array specifying how logins should be handled. You only

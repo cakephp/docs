@@ -22,17 +22,6 @@ For example, to change the field name used for passwords from
         }
     }
 
-
-#. ``class UsersController extends AppController {``
-#. ``var $components = array('Auth');``
-#. ``function beforeFilter() {``
-#. ``$this->Auth->fields = array(``
-#. ``'username' => 'username',``
-#. ``'password' => 'secretword'``
-#. ``);``
-#. ``}``
-#. ``}``
-
 In this particular situation, you would also need to remember to
 change the field name in the view template!
 
@@ -58,24 +47,6 @@ inside the controller's $components property.
              );
     }
 
-
-#. ``class AppController extends Controller {``
-#. ``var $components = array(``
-#. ``'Auth' => array(``
-#. ``'authorize' => 'actions',``
-#. ``'actionPath' => 'controllers/',``
-#. ``'loginAction' => array(``
-#. ``'controller' => 'users',``
-#. ``'action' => 'login',``
-#. ``'plugin' => false,``
-#. ``'admin' => false,``
-#. ``),``
-#. ``),``
-#. ``'Acl',``
-#. ``'Session',``
-#. ``);``
-#. ``}``
-
 Another common use of Auth component variables is to allow access
 to certain methods without the user being logged in (by default
 Auth restricts access to every action except the login and logout
@@ -89,11 +60,6 @@ view methods ( but not any other), we would do the following:
     function beforeFilter() {
             $this->Auth->allow('index','view');
     }
-
-
-#. ``function beforeFilter() {``
-#. ``$this->Auth->allow('index','view');``
-#. ``}``
 
 5.2.1 Setting Auth Component Variables
 --------------------------------------
@@ -119,17 +85,6 @@ For example, to change the field name used for passwords from
         }
     }
 
-
-#. ``class UsersController extends AppController {``
-#. ``var $components = array('Auth');``
-#. ``function beforeFilter() {``
-#. ``$this->Auth->fields = array(``
-#. ``'username' => 'username',``
-#. ``'password' => 'secretword'``
-#. ``);``
-#. ``}``
-#. ``}``
-
 In this particular situation, you would also need to remember to
 change the field name in the view template!
 
@@ -155,24 +110,6 @@ inside the controller's $components property.
              );
     }
 
-
-#. ``class AppController extends Controller {``
-#. ``var $components = array(``
-#. ``'Auth' => array(``
-#. ``'authorize' => 'actions',``
-#. ``'actionPath' => 'controllers/',``
-#. ``'loginAction' => array(``
-#. ``'controller' => 'users',``
-#. ``'action' => 'login',``
-#. ``'plugin' => false,``
-#. ``'admin' => false,``
-#. ``),``
-#. ``),``
-#. ``'Acl',``
-#. ``'Session',``
-#. ``);``
-#. ``}``
-
 Another common use of Auth component variables is to allow access
 to certain methods without the user being logged in (by default
 Auth restricts access to every action except the login and logout
@@ -186,8 +123,3 @@ view methods ( but not any other), we would do the following:
     function beforeFilter() {
             $this->Auth->allow('index','view');
     }
-
-
-#. ``function beforeFilter() {``
-#. ``$this->Auth->allow('index','view');``
-#. ``}``

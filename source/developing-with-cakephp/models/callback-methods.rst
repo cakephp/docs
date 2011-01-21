@@ -45,16 +45,6 @@ results from the model's find operation, i.e. something like:
       ),
     );
 
-
-#. ``$results = array(``
-#. ``0 => array(``
-#. ``'ModelName' => array(``
-#. ``'field1' => 'value1',``
-#. ``'field2' => 'value2',``
-#. ``),``
-#. ``),``
-#. ``);``
-
 The return value for this callback should be the (possibly
 modified) results for the find operation that triggered this
 callback.
@@ -72,12 +62,6 @@ this:
       'field_1' => 'value1',
       'field_2' => 'value2'
     );
-
-
-#. ``$results = array(``
-#. ``'field_1' => 'value1',``
-#. ``'field_2' => 'value2'``
-#. ``);``
 
 Code expecting ``$primary`` to be true will probably get a "Cannot
 use string offset as an array" fatal error from PHP if a recursive
@@ -100,19 +84,6 @@ formating.
     function dateFormatAfterFind($dateString) {
         return date('d-m-Y', strtotime($dateString));
     }
-
-
-#. ``function afterFind($results) {``
-#. ``foreach ($results as $key => $val) {``
-#. ``if (isset($val['Event']['begindate'])) {``
-#. ``$results[$key]['Event']['begindate'] = $this->dateFormatAfterFind($val['Event']['begindate']);``
-#. ``}``
-#. ``}``
-#. ``return $results;``
-#. ``}``
-#. ``function dateFormatAfterFind($dateString) {``
-#. ``return date('d-m-Y', strtotime($dateString));``
-#. ``}``
 
 beforeValidate
 ~~~~~~~~~~~~~~
@@ -157,18 +128,6 @@ changed very easily. Use the code below in the appropriate model.
     function dateFormatBeforeSave($dateString) {
         return date('Y-m-d', strtotime($dateString)); // Direction is from 
     }
-
-
-#. ``function beforeSave() {``
-#. ``if (!empty($this->data['Event']['begindate']) && !empty($this->data['Event']['enddate'])) {``
-#. ``$this->data['Event']['begindate'] = $this->dateFormatBeforeSave($this->data['Event']['begindate']);``
-#. ``$this->data['Event']['enddate'] = $this->dateFormatBeforeSave($this->data['Event']['enddate']);``
-#. ``}``
-#. ``return true;``
-#. ``}``
-#. ``function dateFormatBeforeSave($dateString) {``
-#. ``return date('Y-m-d', strtotime($dateString)); // Direction is from``
-#. ``}``
 
 Be sure that beforeSave() returns true, or your save is going to
 fail.
@@ -216,23 +175,6 @@ to fail.
             return false;
         }
     }
-
-
-#. ``// using app/models/ProductCategory.php``
-#. ``// In the following example, do not let a product category be deleted if it still contains products.``
-#. ``// A call of $this->Product->delete($id) from ProductsController.php has set $this->id .``
-#. ``// Assuming 'ProductCategory hasMany Product', we can access $this->Product in the model.``
-#. ``function beforeDelete()``
-#. ``{``
-#. ``$count = $this->Product->find("count", array(``
-#. ``"conditions" => array("product_category_id" => $this->id)``
-#. ``));``
-#. ``if ($count == 0) {``
-#. ``return true;``
-#. ``} else {``
-#. ``return false;``
-#. ``}``
-#. ``}``
 
 afterDelete
 ~~~~~~~~~~~
@@ -296,16 +238,6 @@ results from the model's find operation, i.e. something like:
       ),
     );
 
-
-#. ``$results = array(``
-#. ``0 => array(``
-#. ``'ModelName' => array(``
-#. ``'field1' => 'value1',``
-#. ``'field2' => 'value2',``
-#. ``),``
-#. ``),``
-#. ``);``
-
 The return value for this callback should be the (possibly
 modified) results for the find operation that triggered this
 callback.
@@ -323,12 +255,6 @@ this:
       'field_1' => 'value1',
       'field_2' => 'value2'
     );
-
-
-#. ``$results = array(``
-#. ``'field_1' => 'value1',``
-#. ``'field_2' => 'value2'``
-#. ``);``
 
 Code expecting ``$primary`` to be true will probably get a "Cannot
 use string offset as an array" fatal error from PHP if a recursive
@@ -351,19 +277,6 @@ formating.
     function dateFormatAfterFind($dateString) {
         return date('d-m-Y', strtotime($dateString));
     }
-
-
-#. ``function afterFind($results) {``
-#. ``foreach ($results as $key => $val) {``
-#. ``if (isset($val['Event']['begindate'])) {``
-#. ``$results[$key]['Event']['begindate'] = $this->dateFormatAfterFind($val['Event']['begindate']);``
-#. ``}``
-#. ``}``
-#. ``return $results;``
-#. ``}``
-#. ``function dateFormatAfterFind($dateString) {``
-#. ``return date('d-m-Y', strtotime($dateString));``
-#. ``}``
 
 beforeValidate
 ~~~~~~~~~~~~~~
@@ -408,18 +321,6 @@ changed very easily. Use the code below in the appropriate model.
     function dateFormatBeforeSave($dateString) {
         return date('Y-m-d', strtotime($dateString)); // Direction is from 
     }
-
-
-#. ``function beforeSave() {``
-#. ``if (!empty($this->data['Event']['begindate']) && !empty($this->data['Event']['enddate'])) {``
-#. ``$this->data['Event']['begindate'] = $this->dateFormatBeforeSave($this->data['Event']['begindate']);``
-#. ``$this->data['Event']['enddate'] = $this->dateFormatBeforeSave($this->data['Event']['enddate']);``
-#. ``}``
-#. ``return true;``
-#. ``}``
-#. ``function dateFormatBeforeSave($dateString) {``
-#. ``return date('Y-m-d', strtotime($dateString)); // Direction is from``
-#. ``}``
 
 Be sure that beforeSave() returns true, or your save is going to
 fail.
@@ -467,23 +368,6 @@ to fail.
             return false;
         }
     }
-
-
-#. ``// using app/models/ProductCategory.php``
-#. ``// In the following example, do not let a product category be deleted if it still contains products.``
-#. ``// A call of $this->Product->delete($id) from ProductsController.php has set $this->id .``
-#. ``// Assuming 'ProductCategory hasMany Product', we can access $this->Product in the model.``
-#. ``function beforeDelete()``
-#. ``{``
-#. ``$count = $this->Product->find("count", array(``
-#. ``"conditions" => array("product_category_id" => $this->id)``
-#. ``));``
-#. ``if ($count == 0) {``
-#. ``return true;``
-#. ``} else {``
-#. ``return false;``
-#. ``}``
-#. ``}``
 
 afterDelete
 ~~~~~~~~~~~

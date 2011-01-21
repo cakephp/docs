@@ -17,12 +17,6 @@ model finds.
             Cache::write('posts', $posts);
         }
 
-
-#. ``if (($posts = Cache::read('posts')) === false) {``
-#. ``$posts = $this->Post->find('all');``
-#. ``Cache::write('posts', $posts);``
-#. ``}``
-
 Using Cache::write() and Cache::read() to easily reduce the number
 of trips made to the database to fetch posts.
 
@@ -44,12 +38,6 @@ model finds.
             $posts = $this->Post->find('all');
             Cache::write('posts', $posts);
         }
-
-
-#. ``if (($posts = Cache::read('posts')) === false) {``
-#. ``$posts = $this->Post->find('all');``
-#. ``Cache::write('posts', $posts);``
-#. ``}``
 
 Using Cache::write() and Cache::read() to easily reduce the number
 of trips made to the database to fetch posts.

@@ -22,15 +22,6 @@ structure for the component would look something like this:
     
     ?>
 
-
-#. ``<?php``
-#. ``class MathComponent extends Object {``
-#. ``function doComplexOperation($amount1, $amount2) {``
-#. ``return $amount1 + $amount2;``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 Take notice that our MathComponent extends Object and not
 Component. Extending Component can create infinite redirect issues,
 when combined with other Components.
@@ -50,11 +41,6 @@ through which we can access an instance of it:
     as well as the standard $this->Session */
     var $components = array('Math', 'Session');
 
-
-#. ``/* Make the new component available at $this->Math,``
-#. ``as well as the standard $this->Session */``
-#. ``var $components = array('Math', 'Session');``
-
 Components declared in ``AppController`` will be merged with those
 in your other controllers. So there is no need to re-declare the
 same component twice.
@@ -73,15 +59,6 @@ the Component.
         ),
         'Session', 'Auth'
     );
-
-
-#. ``var $components = array(``
-#. ``'Math' => array(``
-#. ``'precision' => 2,``
-#. ``'randomGenerator' => 'srand'``
-#. ``),``
-#. ``'Session', 'Auth'``
-#. ``);``
 
 The above would pass the array containing precision and
 randomGenerator to MathComponent's initialize() method as the
@@ -164,33 +141,6 @@ custom components.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class SkeletonComponent extends Object {``
-#. ``//called before Controller::beforeFilter()``
-#. ``function initialize(&$controller, $settings = array()) {``
-#. ``// saving the controller reference for later use``
-#. ``$this->controller =& $controller;``
-#. ``}``
-#. ``//called after Controller::beforeFilter()``
-#. ``function startup(&$controller) {``
-#. ``}``
-#. ``//called after Controller::beforeRender()``
-#. ``function beforeRender(&$controller) {``
-#. ``}``
-#. ``//called after Controller::render()``
-#. ``function shutdown(&$controller) {``
-#. ``}``
-#. ``//called before Controller::redirect()``
-#. ``function beforeRedirect(&$controller, $url, $status=null, $exit=true) {``
-#. ``}``
-#. ``function redirectSomewhere($value) {``
-#. ``// utilizing a controller method``
-#. ``$this->controller->redirect($value);``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 You might also want to utilize other components inside a custom
 component. To do so, just create a $components class variable (just
 like you would in a controller) as an array that holds the names of
@@ -212,18 +162,6 @@ components you wish to utilize.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class MyComponent extends Object {``
-#. ``// This component uses other components``
-#. ``var $components = array('Session', 'Math');``
-#. ``function doStuff() {``
-#. ``$result = $this->Math->doComplexOperation(1, 2);``
-#. ``$this->Session->write('stuff', $result);``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 To access/use a model in a component is not generally recommended;
 If you end up needing one, you'll need to instantiate your model
 class and use it manually. Here's an example:
@@ -243,20 +181,6 @@ class and use it manually. Here's an example:
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class MathComponent extends Object {``
-#. ``function doComplexOperation($amount1, $amount2) {``
-#. ``return $amount1 + $amount2;``
-#. ``}``
-#. ``function doReallyComplexOperation ($amount1, $amount2) {``
-#. ``$userInstance = ClassRegistry::init('User');``
-#. ``$totalUsers = $userInstance->find('count');``
-#. ``return ($amount1 + $amount2) / $totalUsers;``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 Using other Components in your Component
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -283,20 +207,6 @@ way you include them in controllers: Use the ``$components`` var.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class CustomComponent extends Object {``
-#. ``var $name = 'Custom'; // the name of your component``
-#. ``var $components = array('Existing'); // the other component your component uses``
-#. ``function initialize(&$controller) {``
-#. ``$this->Existing->foo();``
-#. ``}``
-#. ``function bar() {``
-#. ``// ...``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 ::
 
     <?php
@@ -312,20 +222,6 @@ way you include them in controllers: Use the ``$components`` var.
        }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class ExistingComponent extends Object {``
-#. ``var $name = 'Existing';``
-#. ``function initialize(&$controller) {``
-#. ``$this->Parent->bar();``
-#. ``}``
-#. ````
-#. ``function foo() {``
-#. ``// ...``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 3.6.3 Creating Components
 -------------------------
@@ -351,15 +247,6 @@ structure for the component would look something like this:
     
     ?>
 
-
-#. ``<?php``
-#. ``class MathComponent extends Object {``
-#. ``function doComplexOperation($amount1, $amount2) {``
-#. ``return $amount1 + $amount2;``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 Take notice that our MathComponent extends Object and not
 Component. Extending Component can create infinite redirect issues,
 when combined with other Components.
@@ -379,11 +266,6 @@ through which we can access an instance of it:
     as well as the standard $this->Session */
     var $components = array('Math', 'Session');
 
-
-#. ``/* Make the new component available at $this->Math,``
-#. ``as well as the standard $this->Session */``
-#. ``var $components = array('Math', 'Session');``
-
 Components declared in ``AppController`` will be merged with those
 in your other controllers. So there is no need to re-declare the
 same component twice.
@@ -402,15 +284,6 @@ the Component.
         ),
         'Session', 'Auth'
     );
-
-
-#. ``var $components = array(``
-#. ``'Math' => array(``
-#. ``'precision' => 2,``
-#. ``'randomGenerator' => 'srand'``
-#. ``),``
-#. ``'Session', 'Auth'``
-#. ``);``
 
 The above would pass the array containing precision and
 randomGenerator to MathComponent's initialize() method as the
@@ -493,33 +366,6 @@ custom components.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class SkeletonComponent extends Object {``
-#. ``//called before Controller::beforeFilter()``
-#. ``function initialize(&$controller, $settings = array()) {``
-#. ``// saving the controller reference for later use``
-#. ``$this->controller =& $controller;``
-#. ``}``
-#. ``//called after Controller::beforeFilter()``
-#. ``function startup(&$controller) {``
-#. ``}``
-#. ``//called after Controller::beforeRender()``
-#. ``function beforeRender(&$controller) {``
-#. ``}``
-#. ``//called after Controller::render()``
-#. ``function shutdown(&$controller) {``
-#. ``}``
-#. ``//called before Controller::redirect()``
-#. ``function beforeRedirect(&$controller, $url, $status=null, $exit=true) {``
-#. ``}``
-#. ``function redirectSomewhere($value) {``
-#. ``// utilizing a controller method``
-#. ``$this->controller->redirect($value);``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 You might also want to utilize other components inside a custom
 component. To do so, just create a $components class variable (just
 like you would in a controller) as an array that holds the names of
@@ -541,18 +387,6 @@ components you wish to utilize.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class MyComponent extends Object {``
-#. ``// This component uses other components``
-#. ``var $components = array('Session', 'Math');``
-#. ``function doStuff() {``
-#. ``$result = $this->Math->doComplexOperation(1, 2);``
-#. ``$this->Session->write('stuff', $result);``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 To access/use a model in a component is not generally recommended;
 If you end up needing one, you'll need to instantiate your model
 class and use it manually. Here's an example:
@@ -572,20 +406,6 @@ class and use it manually. Here's an example:
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class MathComponent extends Object {``
-#. ``function doComplexOperation($amount1, $amount2) {``
-#. ``return $amount1 + $amount2;``
-#. ``}``
-#. ``function doReallyComplexOperation ($amount1, $amount2) {``
-#. ``$userInstance = ClassRegistry::init('User');``
-#. ``$totalUsers = $userInstance->find('count');``
-#. ``return ($amount1 + $amount2) / $totalUsers;``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 Using other Components in your Component
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -612,20 +432,6 @@ way you include them in controllers: Use the ``$components`` var.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class CustomComponent extends Object {``
-#. ``var $name = 'Custom'; // the name of your component``
-#. ``var $components = array('Existing'); // the other component your component uses``
-#. ``function initialize(&$controller) {``
-#. ``$this->Existing->foo();``
-#. ``}``
-#. ``function bar() {``
-#. ``// ...``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 ::
 
     <?php
@@ -641,17 +447,3 @@ way you include them in controllers: Use the ``$components`` var.
        }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class ExistingComponent extends Object {``
-#. ``var $name = 'Existing';``
-#. ``function initialize(&$controller) {``
-#. ``$this->Parent->bar();``
-#. ``}``
-#. ````
-#. ``function foo() {``
-#. ``// ...``
-#. ``}``
-#. ``}``
-#. ``?>``

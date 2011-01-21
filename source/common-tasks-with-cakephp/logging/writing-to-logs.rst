@@ -8,9 +8,6 @@ is to use the static ``CakeLog::write()`` method.
 
     CakeLog::write('debug', 'Something did not work');
 
-
-#. ``CakeLog::write('debug', 'Something did not work');``
-
 The second is to use the log() shortcut function available on any
 class that extends ``Object``. Calling log() will internally call
 CakeLog::write().
@@ -19,10 +16,6 @@ CakeLog::write().
 
     //Executing this inside a CakePHP class:
     $this->log("Something did not work!", 'debug');
-
-
-#. ``//Executing this inside a CakePHP class:``
-#. ``$this->log("Something did not work!", 'debug');``
 
 All configured log streams are written to sequentially each time
 ``CakeLog::write()`` is called. You do not need to configure a
@@ -41,9 +34,6 @@ is to use the static ``CakeLog::write()`` method.
 
     CakeLog::write('debug', 'Something did not work');
 
-
-#. ``CakeLog::write('debug', 'Something did not work');``
-
 The second is to use the log() shortcut function available on any
 class that extends ``Object``. Calling log() will internally call
 CakeLog::write().
@@ -52,10 +42,6 @@ CakeLog::write().
 
     //Executing this inside a CakePHP class:
     $this->log("Something did not work!", 'debug');
-
-
-#. ``//Executing this inside a CakePHP class:``
-#. ``$this->log("Something did not work!", 'debug');``
 
 All configured log streams are written to sequentially each time
 ``CakeLog::write()`` is called. You do not need to configure a

@@ -14,9 +14,6 @@ own).
 
     echo $this->Html->script('jquery'); // Include jQuery library
 
-
-#. ``echo $this->Html->script('jquery'); // Include jQuery library``
-
 Replace ``jquery`` with the name of your library file (.js will be
 added to the name).
 
@@ -27,9 +24,6 @@ just before the ending ``</body>`` tag
 ::
 
     echo $this->Js->writeBuffer(); // Write cached scripts
-
-
-#. ``echo $this->Js->writeBuffer(); // Write cached scripts``
 
 You must include the library in your page and print the cache for
 the helper to function.
@@ -42,9 +36,6 @@ in your controller.
 ::
 
     var $helpers = array('Js' => array('Jquery'));
-
-
-#. ``var $helpers = array('Js' => array('Jquery'));``
 
 The above would use the Jquery Engine in the instances of JsHelper
 in your views. If you do not declare a specific engine, the jQuery
@@ -72,11 +63,6 @@ To override the "$" shortcut, use the jQueryObject variable.
     print $this->Html->scriptBlock('var $j = jQuery.noConflict();', 
         array('inline' => false)); //Tell jQuery to go into noconflict mode
 
-
-#. ``$this->Js->JqueryEngine->jQueryObject = '$j';``
-#. ``print $this->Html->scriptBlock('var $j = jQuery.noConflict();',``
-#. ``array('inline' => false)); //Tell jQuery to go into noconflict mode``
-
 Using the JsHelper inside customHelpers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -86,9 +72,6 @@ customHelper.
 ::
 
     var $helpers = array('Js');
-
-
-#. ``var $helpers = array('Js');``
 
 It is not possible to declare a javascript engine inside a custom
 helper. Doing that will have no effect.
@@ -102,12 +85,6 @@ default, do the helper setup in your controller as follows:
         'Js' => array('Prototype'),
         'CustomHelper'
     );
-
-
-#. ``var $helpers = array(``
-#. ``'Js' => array('Prototype'),``
-#. ``'CustomHelper'``
-#. ``);``
 
 Be sure to declare the JsHelper and its engine **on top** of the
 ``$helpers`` array in your controller.
@@ -133,9 +110,6 @@ own).
 
     echo $this->Html->script('jquery'); // Include jQuery library
 
-
-#. ``echo $this->Html->script('jquery'); // Include jQuery library``
-
 Replace ``jquery`` with the name of your library file (.js will be
 added to the name).
 
@@ -146,9 +120,6 @@ just before the ending ``</body>`` tag
 ::
 
     echo $this->Js->writeBuffer(); // Write cached scripts
-
-
-#. ``echo $this->Js->writeBuffer(); // Write cached scripts``
 
 You must include the library in your page and print the cache for
 the helper to function.
@@ -161,9 +132,6 @@ in your controller.
 ::
 
     var $helpers = array('Js' => array('Jquery'));
-
-
-#. ``var $helpers = array('Js' => array('Jquery'));``
 
 The above would use the Jquery Engine in the instances of JsHelper
 in your views. If you do not declare a specific engine, the jQuery
@@ -191,11 +159,6 @@ To override the "$" shortcut, use the jQueryObject variable.
     print $this->Html->scriptBlock('var $j = jQuery.noConflict();', 
         array('inline' => false)); //Tell jQuery to go into noconflict mode
 
-
-#. ``$this->Js->JqueryEngine->jQueryObject = '$j';``
-#. ``print $this->Html->scriptBlock('var $j = jQuery.noConflict();',``
-#. ``array('inline' => false)); //Tell jQuery to go into noconflict mode``
-
 Using the JsHelper inside customHelpers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -205,9 +168,6 @@ customHelper.
 ::
 
     var $helpers = array('Js');
-
-
-#. ``var $helpers = array('Js');``
 
 It is not possible to declare a javascript engine inside a custom
 helper. Doing that will have no effect.
@@ -221,12 +181,6 @@ default, do the helper setup in your controller as follows:
         'Js' => array('Prototype'),
         'CustomHelper'
     );
-
-
-#. ``var $helpers = array(``
-#. ``'Js' => array('Prototype'),``
-#. ``'CustomHelper'``
-#. ``);``
 
 Be sure to declare the JsHelper and its engine **on top** of the
 ``$helpers`` array in your controller.

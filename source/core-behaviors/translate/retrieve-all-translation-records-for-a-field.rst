@@ -18,18 +18,6 @@ setup as shown below. The naming is completely up to you.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ``var $actsAs = array(``
-#. ``'Translate' => array(``
-#. ``'name' => 'nameTranslation'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
-
 With this setup the result of $this->Post->find() should look
 something like this:
 
@@ -70,39 +58,6 @@ something like this:
              )
     )
 
-
-#. ``Array``
-#. ``(``
-#. ``[Post] => Array``
-#. ``(``
-#. ``[id] => 1``
-#. ``[name] => Beispiel Eintrag``
-#. ``[body] => lorem ipsum...``
-#. ``[locale] => de_de``
-#. ``)``
-#. ``[nameTranslation] => Array``
-#. ``(``
-#. ``[0] => Array``
-#. ``(``
-#. ``[id] => 1``
-#. ``[locale] => en_us``
-#. ``[model] => Post``
-#. ``[foreign_key] => 1``
-#. ``[field] => name``
-#. ``[content] => Example entry``
-#. ``)``
-#. ``[1] => Array``
-#. ``(``
-#. ``[id] => 2``
-#. ``[locale] => de_de``
-#. ``[model] => Post``
-#. ``[foreign_key] => 1``
-#. ``[field] => name``
-#. ``[content] => Beispiel Eintrag``
-#. ``)``
-#. ``)``
-#. ``)``
-
 **Note**: The model record contains a *virtual* field called
 "locale". It indicates which locale is used in this result.
 
@@ -127,10 +82,6 @@ association name.
 
     $this->Post->bindTranslation(array ('name' => 'nameTranslation'));
     $this->Post->find('all', array ('recursive'=>1)); // need at least recursive 1 for this to work.
-
-
-#. ``$this->Post->bindTranslation(array ('name' => 'nameTranslation'));``
-#. ``$this->Post->find('all', array ('recursive'=>1)); // need at least recursive 1 for this to work.``
 
 With this setup the result of your find() should look something
 like this:
@@ -171,39 +122,6 @@ like this:
     
              )
     )
-
-
-#. ``Array``
-#. ``(``
-#. ``[Post] => Array``
-#. ``(``
-#. ``[id] => 1``
-#. ``[name] => Beispiel Eintrag``
-#. ``[body] => lorem ipsum...``
-#. ``[locale] => de_de``
-#. ``)``
-#. ``[nameTranslation] => Array``
-#. ``(``
-#. ``[0] => Array``
-#. ``(``
-#. ``[id] => 1``
-#. ``[locale] => en_us``
-#. ``[model] => Post``
-#. ``[foreign_key] => 1``
-#. ``[field] => name``
-#. ``[content] => Example entry``
-#. ``)``
-#. ``[1] => Array``
-#. ``(``
-#. ``[id] => 2``
-#. ``[locale] => de_de``
-#. ``[model] => Post``
-#. ``[foreign_key] => 1``
-#. ``[field] => name``
-#. ``[content] => Beispiel Eintrag``
-#. ``)``
-#. ``)``
-#. ``)``
 
 6.3.5 Retrieve all translation records for a field
 --------------------------------------------------
@@ -225,18 +143,6 @@ setup as shown below. The naming is completely up to you.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ``var $actsAs = array(``
-#. ``'Translate' => array(``
-#. ``'name' => 'nameTranslation'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
-
 With this setup the result of $this->Post->find() should look
 something like this:
 
@@ -277,39 +183,6 @@ something like this:
              )
     )
 
-
-#. ``Array``
-#. ``(``
-#. ``[Post] => Array``
-#. ``(``
-#. ``[id] => 1``
-#. ``[name] => Beispiel Eintrag``
-#. ``[body] => lorem ipsum...``
-#. ``[locale] => de_de``
-#. ``)``
-#. ``[nameTranslation] => Array``
-#. ``(``
-#. ``[0] => Array``
-#. ``(``
-#. ``[id] => 1``
-#. ``[locale] => en_us``
-#. ``[model] => Post``
-#. ``[foreign_key] => 1``
-#. ``[field] => name``
-#. ``[content] => Example entry``
-#. ``)``
-#. ``[1] => Array``
-#. ``(``
-#. ``[id] => 2``
-#. ``[locale] => de_de``
-#. ``[model] => Post``
-#. ``[foreign_key] => 1``
-#. ``[field] => name``
-#. ``[content] => Beispiel Eintrag``
-#. ``)``
-#. ``)``
-#. ``)``
-
 **Note**: The model record contains a *virtual* field called
 "locale". It indicates which locale is used in this result.
 
@@ -334,10 +207,6 @@ association name.
 
     $this->Post->bindTranslation(array ('name' => 'nameTranslation'));
     $this->Post->find('all', array ('recursive'=>1)); // need at least recursive 1 for this to work.
-
-
-#. ``$this->Post->bindTranslation(array ('name' => 'nameTranslation'));``
-#. ``$this->Post->find('all', array ('recursive'=>1)); // need at least recursive 1 for this to work.``
 
 With this setup the result of your find() should look something
 like this:
@@ -378,36 +247,3 @@ like this:
     
              )
     )
-
-
-#. ``Array``
-#. ``(``
-#. ``[Post] => Array``
-#. ``(``
-#. ``[id] => 1``
-#. ``[name] => Beispiel Eintrag``
-#. ``[body] => lorem ipsum...``
-#. ``[locale] => de_de``
-#. ``)``
-#. ``[nameTranslation] => Array``
-#. ``(``
-#. ``[0] => Array``
-#. ``(``
-#. ``[id] => 1``
-#. ``[locale] => en_us``
-#. ``[model] => Post``
-#. ``[foreign_key] => 1``
-#. ``[field] => name``
-#. ``[content] => Example entry``
-#. ``)``
-#. ``[1] => Array``
-#. ``(``
-#. ``[id] => 2``
-#. ``[locale] => de_de``
-#. ``[model] => Post``
-#. ``[foreign_key] => 1``
-#. ``[field] => name``
-#. ``[content] => Beispiel Eintrag``
-#. ``)``
-#. ``)``
-#. ``)``

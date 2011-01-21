@@ -9,9 +9,6 @@ are logged when debug is off. By default all errors are logged.
 
     Configure::write('log', E_WARNING);
 
-
-#. ``Configure::write('log', E_WARNING);``
-
 Would log only warning and fatal errors. Setting
 ``Configure::write('log', false);`` will disable error logging when
 debug = 0.
@@ -26,9 +23,6 @@ are logged when debug is off. By default all errors are logged.
 ::
 
     Configure::write('log', E_WARNING);
-
-
-#. ``Configure::write('log', E_WARNING);``
 
 Would log only warning and fatal errors. Setting
 ``Configure::write('log', false);`` will disable error logging when

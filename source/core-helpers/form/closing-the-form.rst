@@ -14,13 +14,6 @@ form elements other methods may be depending on.
      
     <?php echo $this->Form->end(); ?>
 
-
-#. ``<?php echo $this->Form->create(); ?>``
-#. ````
-#. ``<!-- Form elements go here -->``
-#. ````
-#. ``<?php echo $this->Form->end(); ?>``
-
 If a string is supplied as the first parameter to ``end()``, the
 FormHelper outputs a submit button named accordingly along with the
 closing form tag.
@@ -29,9 +22,6 @@ closing form tag.
 
     <?php echo $this->Form->end('Finish'); ?>
      
-
-
-#. ``<?php echo $this->Form->end('Finish'); ?>``
 
 Will output:
 
@@ -56,17 +46,6 @@ You can specify detail settings by passing an array to ``end()``.
         )
     );
     echo $this->Form->end($options);
-
-
-#. ``<?php``
-#. ``$options = array(``
-#. ``'label' => 'Update',``
-#. ``'value' => 'Update!',``
-#. ``'div' => array(``
-#. ``'class' => 'glass-pill',``
-#. ``)``
-#. ``);``
-#. ``echo $this->Form->end($options);``
 
 Will output:
 
@@ -92,13 +71,6 @@ form elements other methods may be depending on.
      
     <?php echo $this->Form->end(); ?>
 
-
-#. ``<?php echo $this->Form->create(); ?>``
-#. ````
-#. ``<!-- Form elements go here -->``
-#. ````
-#. ``<?php echo $this->Form->end(); ?>``
-
 If a string is supplied as the first parameter to ``end()``, the
 FormHelper outputs a submit button named accordingly along with the
 closing form tag.
@@ -107,9 +79,6 @@ closing form tag.
 
     <?php echo $this->Form->end('Finish'); ?>
      
-
-
-#. ``<?php echo $this->Form->end('Finish'); ?>``
 
 Will output:
 
@@ -134,17 +103,6 @@ You can specify detail settings by passing an array to ``end()``.
         )
     );
     echo $this->Form->end($options);
-
-
-#. ``<?php``
-#. ``$options = array(``
-#. ``'label' => 'Update',``
-#. ``'value' => 'Update!',``
-#. ``'div' => array(``
-#. ``'class' => 'glass-pill',``
-#. ``)``
-#. ``);``
-#. ``echo $this->Form->end($options);``
 
 Will output:
 

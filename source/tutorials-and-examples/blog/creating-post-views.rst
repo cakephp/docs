@@ -90,29 +90,6 @@ nice table, our view code might look something like this:
     
     </table>
 
-
-#. ``<!-- File: /app/views/posts/index.ctp -->``
-#. ``<h1>Blog posts</h1>``
-#. ``<table>``
-#. ``<tr>``
-#. ``<th>Id</th>``
-#. ``<th>Title</th>``
-#. ``<th>Created</th>``
-#. ``</tr>``
-#. ``<!-- Here is where we loop through our $posts array, printing out post info -->``
-#. ``<?php foreach ($posts as $post): ?>``
-#. ``<tr>``
-#. ``<td><?php echo $post['Post']['id']; ?></td>``
-#. ``<td>``
-#. ``<?php echo $this->Html->link($post['Post']['title'],``
-#. ``array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>``
-#. ``</td>``
-#. ``<td><?php echo $post['Post']['created']; ?></td>``
-#. ``</tr>``
-#. ``<?php endforeach; ?>``
-#. `` ``
-#. ``</table>``
-
 Hopefully this should look somewhat simple.
 
 You might have noticed the use of an object called ``$this->Html``.
@@ -161,21 +138,6 @@ PostsController now:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class PostsController extends AppController {``
-#. ``var $helpers = array('Html', 'Form');``
-#. ``var $name = 'Posts';``
-#. ``function index() {``
-#. ``$this->set('posts', $this->Post->find('all'));``
-#. ``}``
-#. ``function view($id = null) {``
-#. ``$this->Post->id = $id;``
-#. ``$this->set('post', $this->Post->read());``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 The ``set()`` call should look familiar. Notice we're using
 ``read()`` rather than ``find('all')`` because we only really want
 a single post's information.
@@ -197,12 +159,6 @@ Now let's create the view for our new 'view' action and place it in
     <p><small>Created: <?php echo $post['Post']['created']?></small></p>
     
     <p><?php echo $post['Post']['body']?></p>
-
-
-#. ``<!-- File: /app/views/posts/view.ctp -->``
-#. ``<h1><?php echo $post['Post']['title']?></h1>``
-#. ``<p><small>Created: <?php echo $post['Post']['created']?></small></p>``
-#. ``<p><?php echo $post['Post']['body']?></p>``
 
 Verify that this is working by trying the links at /posts/index or
 manually requesting a post by accessing /posts/view/1.
@@ -299,29 +255,6 @@ nice table, our view code might look something like this:
     
     </table>
 
-
-#. ``<!-- File: /app/views/posts/index.ctp -->``
-#. ``<h1>Blog posts</h1>``
-#. ``<table>``
-#. ``<tr>``
-#. ``<th>Id</th>``
-#. ``<th>Title</th>``
-#. ``<th>Created</th>``
-#. ``</tr>``
-#. ``<!-- Here is where we loop through our $posts array, printing out post info -->``
-#. ``<?php foreach ($posts as $post): ?>``
-#. ``<tr>``
-#. ``<td><?php echo $post['Post']['id']; ?></td>``
-#. ``<td>``
-#. ``<?php echo $this->Html->link($post['Post']['title'],``
-#. ``array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>``
-#. ``</td>``
-#. ``<td><?php echo $post['Post']['created']; ?></td>``
-#. ``</tr>``
-#. ``<?php endforeach; ?>``
-#. `` ``
-#. ``</table>``
-
 Hopefully this should look somewhat simple.
 
 You might have noticed the use of an object called ``$this->Html``.
@@ -370,21 +303,6 @@ PostsController now:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class PostsController extends AppController {``
-#. ``var $helpers = array('Html', 'Form');``
-#. ``var $name = 'Posts';``
-#. ``function index() {``
-#. ``$this->set('posts', $this->Post->find('all'));``
-#. ``}``
-#. ``function view($id = null) {``
-#. ``$this->Post->id = $id;``
-#. ``$this->set('post', $this->Post->read());``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 The ``set()`` call should look familiar. Notice we're using
 ``read()`` rather than ``find('all')`` because we only really want
 a single post's information.
@@ -406,12 +324,6 @@ Now let's create the view for our new 'view' action and place it in
     <p><small>Created: <?php echo $post['Post']['created']?></small></p>
     
     <p><?php echo $post['Post']['body']?></p>
-
-
-#. ``<!-- File: /app/views/posts/view.ctp -->``
-#. ``<h1><?php echo $post['Post']['title']?></h1>``
-#. ``<p><small>Created: <?php echo $post['Post']['created']?></small></p>``
-#. ``<p><?php echo $post['Post']['body']?></p>``
 
 Verify that this is working by trying the links at /posts/index or
 manually requesting a post by accessing /posts/view/1.

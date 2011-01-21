@@ -20,9 +20,6 @@ Defaults to UTF-8.
      
     <?php echo $this->Html->charset(); ?> 
 
-
-#. ``<?php echo $this->Html->charset(); ?>``
-
 Will output:
 
 ::
@@ -34,9 +31,6 @@ Alternatively,
 ::
 
     <?php echo $this->Html->charset('ISO-8859-1'); ?>
-
-
-#. ``<?php echo $this->Html->charset('ISO-8859-1'); ?>``
 
 Will output:
 
@@ -61,9 +55,6 @@ resides inside the /app/webroot/css directory.
 
     <?php echo $this->Html->css('forms'); ?> 
 
-
-#. ``<?php echo $this->Html->css('forms'); ?>``
-
 Will output:
 
 ::
@@ -75,9 +66,6 @@ The first parameter can be an array to include multiple files.
 ::
 
     <?php echo $this->Html->css(array('forms','tables','menu')); ?>
-
-
-#. ``<?php echo $this->Html->css(array('forms','tables','menu')); ?>``
 
 Will output:
 
@@ -138,32 +126,6 @@ image/x-icon
         rel="alternate"
     />
 
-
-#. ``<?php echo $this->Html->meta(``
-#. ``'favicon.ico',``
-#. ``'/favicon.ico',``
-#. ``array('type' => 'icon')``
-#. ``);?> //Output (line breaks added) </p>``
-#. ``<link``
-#. ``href="http://example.com/favicon.ico"``
-#. ``title="favicon.ico" type="image/x-icon"``
-#. ``rel="alternate"``
-#. ``/>``
-#. ````
-#. ``<?php echo $this->Html->meta(``
-#. ``'Comments',``
-#. ``'/comments/index.rss',``
-#. ``array('type' => 'rss'));``
-#. ``?>``
-#. ````
-#. ``//Output (line breaks added)``
-#. ``<link``
-#. ``href="http://example.com/comments/index.rss"``
-#. ``title="Comments"``
-#. ``type="application/rss+xml"``
-#. ``rel="alternate"``
-#. ``/>``
-
 This method can also be used to add the meta keywords and
 descriptions. Example:
 
@@ -183,19 +145,6 @@ descriptions. Example:
     
     //Output <meta name="description" content="enter any meta description here"/>
 
-
-#. ``<?php echo $this->Html->meta(``
-#. ``'keywords',``
-#. ``'enter any meta keyword here'``
-#. ``);?>``
-#. ``//Output <meta name="keywords" content="enter any meta keyword here"/>``
-#. ``//``
-#. ``<?php echo $this->Html->meta(``
-#. ``'description',``
-#. ``'enter any meta description here'``
-#. ``);?>``
-#. ``//Output <meta name="description" content="enter any meta description here"/>``
-
 If you want to add a custom meta tag then the first parameter
 should be set to an array. To output a robots noindex tag use the
 following code:
@@ -203,9 +152,6 @@ following code:
 ::
 
      echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex')); 
-
-
-#. ``echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex'));``
 
 docType
 ~~~~~~~
@@ -241,12 +187,6 @@ XHTML 1.1
     <?php echo $this->Html->docType('html4-trans'); ?> 
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-
-#. ``<?php echo $this->Html->docType(); ?>``
-#. ``<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">``
-#. ``<?php echo $this->Html->docType('html4-trans'); ?>``
-#. ``<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">``
-
 style
 ~~~~~
 
@@ -263,13 +203,6 @@ dynamic.
         'border-bottom' => '1px solid #000',
         'padding' => '10px'
     )); ?>
-
-
-#. ``<?php echo $this->Html->style(array(``
-#. ``'background'     => '#633',``
-#. ``'border-bottom' => '1px solid #000',``
-#. ``'padding' => '10px'``
-#. ``)); ?>``
 
 Will output:
 
@@ -289,9 +222,6 @@ to /app/webroot/img/.
 
     <?php echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'))?> 
 
-
-#. ``<?php echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'))?>``
-
 Will output:
 
 ::
@@ -307,12 +237,6 @@ To create an image link specify the link destination using the
         "alt" => "Brownies",
         'url' => array('controller' => 'recipes', 'action' => 'view', 6)
     )); ?>
-
-
-#. ``<?php echo $this->Html->image("recipes/6.jpg", array(``
-#. ``"alt" => "Brownies",``
-#. ``'url' => array('controller' => 'recipes', 'action' => 'view', 6)``
-#. ``)); ?>``
 
 Will output:
 
@@ -335,9 +259,6 @@ specify attributes for the element and whether or not the
 
     <?php echo $this->Html->link('Enter', '/pages/home', array('class' => 'button', 'target' => '_blank')); ?>
 
-
-#. ``<?php echo $this->Html->link('Enter', '/pages/home', array('class' => 'button', 'target' => '_blank')); ?>``
-
 Will output:
 
 ::
@@ -357,14 +278,6 @@ dialog.
         "Are you sure you wish to delete this recipe?"
     );?>
 
-
-#. ``<?php echo $this->Html->link(``
-#. ``'Delete',``
-#. ``array('controller' => 'recipes', 'action' => 'delete', 6),``
-#. ``array(),``
-#. ``"Are you sure you wish to delete this recipe?"``
-#. ``);?>``
-
 Will output:
 
 ::
@@ -382,14 +295,6 @@ Query strings can also be created with ``link()``.
         1,
         '?' => array('height' => 400, 'width' => 500))
     );
-
-
-#. ``<?php echo $this->Html->link('View image', array(``
-#. ``'controller' => 'images',``
-#. ``'action' => 'view',``
-#. ``1,``
-#. ``'?' => array('height' => 400, 'width' => 500))``
-#. ``);``
 
 Will output:
 
@@ -412,15 +317,6 @@ false in the ``$options`` array.
     );
     
     ?>
-
-
-#. ``<?php``
-#. ``echo $this->Html->link(``
-#. ``$this->Html->image("recipes/6.jpg", array("alt" => "Brownies")),``
-#. ``"recipes/view/6",``
-#. ``array('escape' => false)``
-#. ``);``
-#. ``?>``
 
 Will output:
 
@@ -455,18 +351,6 @@ then only the opening <tag> is returned.
     //Output
     <span class="welcome">
 
-
-#. ``<?php echo $this->Html->tag('span', 'Hello World.', array('class' => 'welcome'));?>``
-#. ````
-#. ``//Output``
-#. ``<span class="welcome">Hello World</span>``
-#. ````
-#. ``//No text specified.``
-#. ``<?php echo $this->Html->tag('span', null, array('class' => 'welcome'));?>``
-#. ````
-#. ``//Output``
-#. ``<span class="welcome">``
-
 Text is not escaped by default but you may use
 ``$htmlOptions['escape'] = true`` to escape your text. This
 replaces a fourth parameter ``boolean $escape = false`` that was
@@ -492,12 +376,6 @@ If no text is specified, only an opening div tag is returned.
     //Output
     <div class="error">Please enter your credit card number.</div>
 
-
-#. ``<?php echo $this->Html->div('error', 'Please enter your credit card number.');?>``
-#. `` ``
-#. ``//Output``
-#. ``<div class="error">Please enter your credit card number.</div>``
-
 para
 ~~~~
 
@@ -511,12 +389,6 @@ supplied, only a starting <p> tag is returned.
      
     //Output
     <p>Hello World.</p>
-
-
-#. ``<?php echo $this->Html->para(null, 'Hello World.');?>``
-#. ````
-#. ``//Output``
-#. ``<p>Hello World.</p>``
 
 script
 ~~~~~~
@@ -546,9 +418,6 @@ directory.
 
     <?php echo $this->Html->script('scripts'); ?> 
 
-
-#. ``<?php echo $this->Html->script('scripts'); ?>``
-
 Will output:
 
 ::
@@ -562,17 +431,11 @@ that are not in ``app/webroot/js``
 
     <?php echo $this->Html->script('/otherdir/script_file'); ?> 
 
-
-#. ``<?php echo $this->Html->script('/otherdir/script_file'); ?>``
-
 The first parameter can be an array to include multiple files.
 
 ::
 
     <?php echo $this->Html->script(array('jquery','wysiwyg','scripts')); ?>
-
-
-#. ``<?php echo $this->Html->script(array('jquery','wysiwyg','scripts')); ?>``
 
 Will output:
 
@@ -622,11 +485,6 @@ be:
     
     $this->Html->scriptEnd();
 
-
-#. ``$this->Html->scriptStart(array('inline' => false));``
-#. ``echo $this->Js->alert('I am in the javascript');``
-#. ``$this->Html->scriptEnd();``
-
 tableHeaders
 ~~~~~~~~~~~~
 
@@ -657,29 +515,6 @@ tags.
          <th class="product_table">Title</th>
          <th class="product_table">Active</th>
     </tr>
-
-
-#. ``<?php echo $this->Html->tableHeaders(array('Date','Title','Active'));?>``
-#. `` ``
-#. ``//Output``
-#. ``<tr>``
-#. ``<th>Date</th>``
-#. ``<th>Title</th>``
-#. ``<th>Active</th>``
-#. ``</tr>``
-#. ````
-#. ``<?php echo $this->Html->tableHeaders(``
-#. ``array('Date','Title','Active'),``
-#. ``array('class' => 'status'),``
-#. ``array('class' => 'product_table')``
-#. ``);?>``
-#. ````
-#. ``//Output``
-#. ``<tr class="status">``
-#. ``<th class="product_table">Date</th>``
-#. ``<th class="product_table">Title</th>``
-#. ``<th class="product_table">Active</th>``
-#. ``</tr>``
 
 tableCells
 ~~~~~~~~~~
@@ -731,46 +566,6 @@ array() for specific <td>-attributes.
     <tr><td>Orange</td><td>Orange</td></tr>
     <tr class="darker"><td>Yellow</td><td>Banana</td></tr>
 
-
-#. ``<?php echo $this->Html->tableCells(array(``
-#. ``array('Jul 7th, 2007', 'Best Brownies', 'Yes'),``
-#. ``array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),``
-#. ``array('Aug 1st, 2006', 'Anti-Java Cake', 'No'),``
-#. ``));``
-#. ``?>``
-#. ````
-#. ``//Output``
-#. ``<tr><td>Jul 7th, 2007</td><td>Best Brownies</td><td>Yes</td></tr>``
-#. ``<tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>``
-#. ``<tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td>No</td></tr>``
-#. ````
-#. ``<?php echo $this->Html->tableCells(array(``
-#. ``array('Jul 7th, 2007', array('Best Brownies', array('class'=>'highlight')) , 'Yes'),``
-#. ``array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),``
-#. ``array('Aug 1st, 2006', 'Anti-Java Cake', array('No', array('id'=>'special'))),``
-#. ``));``
-#. ``?>``
-#. ````
-#. ``//Output``
-#. ``<tr><td>Jul 7th, 2007</td><td class="highlight">Best Brownies</td><td>Yes</td></tr>``
-#. ``<tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>``
-#. ``<tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td id="special">No</td></tr>``
-#. ````
-#. ``<?php echo $this->Html->tableCells(``
-#. ``array(``
-#. ``array('Red', 'Apple'),``
-#. ``array('Orange', 'Orange'),``
-#. ``array('Yellow', 'Banana'),``
-#. ``),``
-#. ``array('class' => 'darker')``
-#. ``);``
-#. ``?>``
-#. ````
-#. ``//Output``
-#. ``<tr class="darker"><td>Red</td><td>Apple</td></tr>``
-#. ``<tr><td>Orange</td><td>Orange</td></tr>``
-#. ``<tr class="darker"><td>Yellow</td><td>Banana</td></tr>``
-
 url
 ~~~
 
@@ -791,15 +586,6 @@ true, the full base URL will be prepended to the result.
     // Output
     /posts/view/bar
 
-
-#. ``<?php echo $this->Html->url(array(``
-#. ``"controller" => "posts",``
-#. ``"action" => "view",``
-#. ``"bar"));?>``
-#. ````
-#. ``// Output``
-#. ``/posts/view/bar``
-
 Here are a few more usage examples:
 
 URL with named parameters
@@ -815,16 +601,6 @@ URL with named parameters
     // Output
     /posts/view/foo:bar
 
-
-#. ``<?php echo $this->Html->url(array(``
-#. ``"controller" => "posts",``
-#. ``"action" => "view",``
-#. ``"foo" => "bar"));``
-#. ``?>``
-#. ````
-#. ``// Output``
-#. ``/posts/view/foo:bar``
-
 URL with extension
 
 ::
@@ -838,16 +614,6 @@ URL with extension
     // Output
     /posts/list.rss
 
-
-#. ``<?php echo $this->Html->url(array(``
-#. ``"controller" => "posts",``
-#. ``"action" => "list",``
-#. ``"ext" => "rss"));``
-#. ``?>``
-#. ````
-#. ``// Output``
-#. ``/posts/list.rss``
-
 URL (starting with '/') with the full base URL prepended.
 
 ::
@@ -856,12 +622,6 @@ URL (starting with '/') with the full base URL prepended.
     
     //Output
     http://somedomain.com/posts
-
-
-#. ``<?php echo $this->Html->url('/posts', true); ?>``
-#. `` ``
-#. ``//Output``
-#. ``http://somedomain.com/posts``
 
 URL with GET params and named anchor
 
@@ -876,17 +636,6 @@ URL with GET params and named anchor
     
     //Output
     /posts/search?foo=bar#first
-
-
-#. ``<?php echo $this->Html->url(array(``
-#. ``"controller" => "posts",``
-#. ``"action" => "search",``
-#. ``"?" => array("foo" => "bar"),``
-#. ``"#" => "first"));``
-#. ``?>``
-#. `` ``
-#. ``//Output``
-#. ``/posts/search?foo=bar#first``
 
 For further information check
 `Router::url <http://api.cakephp.org/class/router#method-Routerurl>`_
@@ -914,9 +663,6 @@ Defaults to UTF-8.
      
     <?php echo $this->Html->charset(); ?> 
 
-
-#. ``<?php echo $this->Html->charset(); ?>``
-
 Will output:
 
 ::
@@ -928,9 +674,6 @@ Alternatively,
 ::
 
     <?php echo $this->Html->charset('ISO-8859-1'); ?>
-
-
-#. ``<?php echo $this->Html->charset('ISO-8859-1'); ?>``
 
 Will output:
 
@@ -955,9 +698,6 @@ resides inside the /app/webroot/css directory.
 
     <?php echo $this->Html->css('forms'); ?> 
 
-
-#. ``<?php echo $this->Html->css('forms'); ?>``
-
 Will output:
 
 ::
@@ -969,9 +709,6 @@ The first parameter can be an array to include multiple files.
 ::
 
     <?php echo $this->Html->css(array('forms','tables','menu')); ?>
-
-
-#. ``<?php echo $this->Html->css(array('forms','tables','menu')); ?>``
 
 Will output:
 
@@ -1032,32 +769,6 @@ image/x-icon
         rel="alternate"
     />
 
-
-#. ``<?php echo $this->Html->meta(``
-#. ``'favicon.ico',``
-#. ``'/favicon.ico',``
-#. ``array('type' => 'icon')``
-#. ``);?> //Output (line breaks added) </p>``
-#. ``<link``
-#. ``href="http://example.com/favicon.ico"``
-#. ``title="favicon.ico" type="image/x-icon"``
-#. ``rel="alternate"``
-#. ``/>``
-#. ````
-#. ``<?php echo $this->Html->meta(``
-#. ``'Comments',``
-#. ``'/comments/index.rss',``
-#. ``array('type' => 'rss'));``
-#. ``?>``
-#. ````
-#. ``//Output (line breaks added)``
-#. ``<link``
-#. ``href="http://example.com/comments/index.rss"``
-#. ``title="Comments"``
-#. ``type="application/rss+xml"``
-#. ``rel="alternate"``
-#. ``/>``
-
 This method can also be used to add the meta keywords and
 descriptions. Example:
 
@@ -1077,19 +788,6 @@ descriptions. Example:
     
     //Output <meta name="description" content="enter any meta description here"/>
 
-
-#. ``<?php echo $this->Html->meta(``
-#. ``'keywords',``
-#. ``'enter any meta keyword here'``
-#. ``);?>``
-#. ``//Output <meta name="keywords" content="enter any meta keyword here"/>``
-#. ``//``
-#. ``<?php echo $this->Html->meta(``
-#. ``'description',``
-#. ``'enter any meta description here'``
-#. ``);?>``
-#. ``//Output <meta name="description" content="enter any meta description here"/>``
-
 If you want to add a custom meta tag then the first parameter
 should be set to an array. To output a robots noindex tag use the
 following code:
@@ -1097,9 +795,6 @@ following code:
 ::
 
      echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex')); 
-
-
-#. ``echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex'));``
 
 docType
 ~~~~~~~
@@ -1135,12 +830,6 @@ XHTML 1.1
     <?php echo $this->Html->docType('html4-trans'); ?> 
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-
-#. ``<?php echo $this->Html->docType(); ?>``
-#. ``<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">``
-#. ``<?php echo $this->Html->docType('html4-trans'); ?>``
-#. ``<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">``
-
 style
 ~~~~~
 
@@ -1157,13 +846,6 @@ dynamic.
         'border-bottom' => '1px solid #000',
         'padding' => '10px'
     )); ?>
-
-
-#. ``<?php echo $this->Html->style(array(``
-#. ``'background'     => '#633',``
-#. ``'border-bottom' => '1px solid #000',``
-#. ``'padding' => '10px'``
-#. ``)); ?>``
 
 Will output:
 
@@ -1183,9 +865,6 @@ to /app/webroot/img/.
 
     <?php echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'))?> 
 
-
-#. ``<?php echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'))?>``
-
 Will output:
 
 ::
@@ -1201,12 +880,6 @@ To create an image link specify the link destination using the
         "alt" => "Brownies",
         'url' => array('controller' => 'recipes', 'action' => 'view', 6)
     )); ?>
-
-
-#. ``<?php echo $this->Html->image("recipes/6.jpg", array(``
-#. ``"alt" => "Brownies",``
-#. ``'url' => array('controller' => 'recipes', 'action' => 'view', 6)``
-#. ``)); ?>``
 
 Will output:
 
@@ -1229,9 +902,6 @@ specify attributes for the element and whether or not the
 
     <?php echo $this->Html->link('Enter', '/pages/home', array('class' => 'button', 'target' => '_blank')); ?>
 
-
-#. ``<?php echo $this->Html->link('Enter', '/pages/home', array('class' => 'button', 'target' => '_blank')); ?>``
-
 Will output:
 
 ::
@@ -1251,14 +921,6 @@ dialog.
         "Are you sure you wish to delete this recipe?"
     );?>
 
-
-#. ``<?php echo $this->Html->link(``
-#. ``'Delete',``
-#. ``array('controller' => 'recipes', 'action' => 'delete', 6),``
-#. ``array(),``
-#. ``"Are you sure you wish to delete this recipe?"``
-#. ``);?>``
-
 Will output:
 
 ::
@@ -1276,14 +938,6 @@ Query strings can also be created with ``link()``.
         1,
         '?' => array('height' => 400, 'width' => 500))
     );
-
-
-#. ``<?php echo $this->Html->link('View image', array(``
-#. ``'controller' => 'images',``
-#. ``'action' => 'view',``
-#. ``1,``
-#. ``'?' => array('height' => 400, 'width' => 500))``
-#. ``);``
 
 Will output:
 
@@ -1306,15 +960,6 @@ false in the ``$options`` array.
     );
     
     ?>
-
-
-#. ``<?php``
-#. ``echo $this->Html->link(``
-#. ``$this->Html->image("recipes/6.jpg", array("alt" => "Brownies")),``
-#. ``"recipes/view/6",``
-#. ``array('escape' => false)``
-#. ``);``
-#. ``?>``
 
 Will output:
 
@@ -1349,18 +994,6 @@ then only the opening <tag> is returned.
     //Output
     <span class="welcome">
 
-
-#. ``<?php echo $this->Html->tag('span', 'Hello World.', array('class' => 'welcome'));?>``
-#. ````
-#. ``//Output``
-#. ``<span class="welcome">Hello World</span>``
-#. ````
-#. ``//No text specified.``
-#. ``<?php echo $this->Html->tag('span', null, array('class' => 'welcome'));?>``
-#. ````
-#. ``//Output``
-#. ``<span class="welcome">``
-
 Text is not escaped by default but you may use
 ``$htmlOptions['escape'] = true`` to escape your text. This
 replaces a fourth parameter ``boolean $escape = false`` that was
@@ -1386,12 +1019,6 @@ If no text is specified, only an opening div tag is returned.
     //Output
     <div class="error">Please enter your credit card number.</div>
 
-
-#. ``<?php echo $this->Html->div('error', 'Please enter your credit card number.');?>``
-#. `` ``
-#. ``//Output``
-#. ``<div class="error">Please enter your credit card number.</div>``
-
 para
 ~~~~
 
@@ -1405,12 +1032,6 @@ supplied, only a starting <p> tag is returned.
      
     //Output
     <p>Hello World.</p>
-
-
-#. ``<?php echo $this->Html->para(null, 'Hello World.');?>``
-#. ````
-#. ``//Output``
-#. ``<p>Hello World.</p>``
 
 script
 ~~~~~~
@@ -1440,9 +1061,6 @@ directory.
 
     <?php echo $this->Html->script('scripts'); ?> 
 
-
-#. ``<?php echo $this->Html->script('scripts'); ?>``
-
 Will output:
 
 ::
@@ -1456,17 +1074,11 @@ that are not in ``app/webroot/js``
 
     <?php echo $this->Html->script('/otherdir/script_file'); ?> 
 
-
-#. ``<?php echo $this->Html->script('/otherdir/script_file'); ?>``
-
 The first parameter can be an array to include multiple files.
 
 ::
 
     <?php echo $this->Html->script(array('jquery','wysiwyg','scripts')); ?>
-
-
-#. ``<?php echo $this->Html->script(array('jquery','wysiwyg','scripts')); ?>``
 
 Will output:
 
@@ -1516,11 +1128,6 @@ be:
     
     $this->Html->scriptEnd();
 
-
-#. ``$this->Html->scriptStart(array('inline' => false));``
-#. ``echo $this->Js->alert('I am in the javascript');``
-#. ``$this->Html->scriptEnd();``
-
 tableHeaders
 ~~~~~~~~~~~~
 
@@ -1551,29 +1158,6 @@ tags.
          <th class="product_table">Title</th>
          <th class="product_table">Active</th>
     </tr>
-
-
-#. ``<?php echo $this->Html->tableHeaders(array('Date','Title','Active'));?>``
-#. `` ``
-#. ``//Output``
-#. ``<tr>``
-#. ``<th>Date</th>``
-#. ``<th>Title</th>``
-#. ``<th>Active</th>``
-#. ``</tr>``
-#. ````
-#. ``<?php echo $this->Html->tableHeaders(``
-#. ``array('Date','Title','Active'),``
-#. ``array('class' => 'status'),``
-#. ``array('class' => 'product_table')``
-#. ``);?>``
-#. ````
-#. ``//Output``
-#. ``<tr class="status">``
-#. ``<th class="product_table">Date</th>``
-#. ``<th class="product_table">Title</th>``
-#. ``<th class="product_table">Active</th>``
-#. ``</tr>``
 
 tableCells
 ~~~~~~~~~~
@@ -1625,46 +1209,6 @@ array() for specific <td>-attributes.
     <tr><td>Orange</td><td>Orange</td></tr>
     <tr class="darker"><td>Yellow</td><td>Banana</td></tr>
 
-
-#. ``<?php echo $this->Html->tableCells(array(``
-#. ``array('Jul 7th, 2007', 'Best Brownies', 'Yes'),``
-#. ``array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),``
-#. ``array('Aug 1st, 2006', 'Anti-Java Cake', 'No'),``
-#. ``));``
-#. ``?>``
-#. ````
-#. ``//Output``
-#. ``<tr><td>Jul 7th, 2007</td><td>Best Brownies</td><td>Yes</td></tr>``
-#. ``<tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>``
-#. ``<tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td>No</td></tr>``
-#. ````
-#. ``<?php echo $this->Html->tableCells(array(``
-#. ``array('Jul 7th, 2007', array('Best Brownies', array('class'=>'highlight')) , 'Yes'),``
-#. ``array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),``
-#. ``array('Aug 1st, 2006', 'Anti-Java Cake', array('No', array('id'=>'special'))),``
-#. ``));``
-#. ``?>``
-#. ````
-#. ``//Output``
-#. ``<tr><td>Jul 7th, 2007</td><td class="highlight">Best Brownies</td><td>Yes</td></tr>``
-#. ``<tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>``
-#. ``<tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td id="special">No</td></tr>``
-#. ````
-#. ``<?php echo $this->Html->tableCells(``
-#. ``array(``
-#. ``array('Red', 'Apple'),``
-#. ``array('Orange', 'Orange'),``
-#. ``array('Yellow', 'Banana'),``
-#. ``),``
-#. ``array('class' => 'darker')``
-#. ``);``
-#. ``?>``
-#. ````
-#. ``//Output``
-#. ``<tr class="darker"><td>Red</td><td>Apple</td></tr>``
-#. ``<tr><td>Orange</td><td>Orange</td></tr>``
-#. ``<tr class="darker"><td>Yellow</td><td>Banana</td></tr>``
-
 url
 ~~~
 
@@ -1685,15 +1229,6 @@ true, the full base URL will be prepended to the result.
     // Output
     /posts/view/bar
 
-
-#. ``<?php echo $this->Html->url(array(``
-#. ``"controller" => "posts",``
-#. ``"action" => "view",``
-#. ``"bar"));?>``
-#. ````
-#. ``// Output``
-#. ``/posts/view/bar``
-
 Here are a few more usage examples:
 
 URL with named parameters
@@ -1709,16 +1244,6 @@ URL with named parameters
     // Output
     /posts/view/foo:bar
 
-
-#. ``<?php echo $this->Html->url(array(``
-#. ``"controller" => "posts",``
-#. ``"action" => "view",``
-#. ``"foo" => "bar"));``
-#. ``?>``
-#. ````
-#. ``// Output``
-#. ``/posts/view/foo:bar``
-
 URL with extension
 
 ::
@@ -1732,16 +1257,6 @@ URL with extension
     // Output
     /posts/list.rss
 
-
-#. ``<?php echo $this->Html->url(array(``
-#. ``"controller" => "posts",``
-#. ``"action" => "list",``
-#. ``"ext" => "rss"));``
-#. ``?>``
-#. ````
-#. ``// Output``
-#. ``/posts/list.rss``
-
 URL (starting with '/') with the full base URL prepended.
 
 ::
@@ -1750,12 +1265,6 @@ URL (starting with '/') with the full base URL prepended.
     
     //Output
     http://somedomain.com/posts
-
-
-#. ``<?php echo $this->Html->url('/posts', true); ?>``
-#. `` ``
-#. ``//Output``
-#. ``http://somedomain.com/posts``
 
 URL with GET params and named anchor
 
@@ -1770,17 +1279,6 @@ URL with GET params and named anchor
     
     //Output
     /posts/search?foo=bar#first
-
-
-#. ``<?php echo $this->Html->url(array(``
-#. ``"controller" => "posts",``
-#. ``"action" => "search",``
-#. ``"?" => array("foo" => "bar"),``
-#. ``"#" => "first"));``
-#. ``?>``
-#. `` ``
-#. ``//Output``
-#. ``/posts/search?foo=bar#first``
 
 For further information check
 `Router::url <http://api.cakephp.org/class/router#method-Routerurl>`_

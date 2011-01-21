@@ -15,9 +15,6 @@ be activated, this is done in app/config/routes.php
 
           Router::parseExtensions('rss');
 
-
-#. ``Router::parseExtensions('rss');``
-
 In the call above we’ve activated the .rss extension. When using
 Router::parseExtensions() you can pass as many arguments or
 extensions as you want. This will activate each
@@ -36,18 +33,12 @@ $components array. This will allow a lot of automagic to occur.
 
         var $components = array('RequestHandler');
 
-
-#. ``var $components = array('RequestHandler');``
-
 Our view will also use the TextHelper for formatting, so that
 should be added to the controller as well.
 
 ::
 
         var $helpers = array('Text');
-
-
-#. ``var $helpers = array('Text');``
 
 Before we can make an RSS version of our posts/index we need to get
 a few things in order. It may be tempting to put the channel
@@ -79,23 +70,6 @@ the same.
         $this->set(compact('posts'));
     }
 
-
-#. ``// Modify the Posts Controller action that corresponds to``
-#. ``// the action which deliver the rss feed, which is the``
-#. ``// index action in our example``
-#. ``public function index(){``
-#. ``if( $this->RequestHandler->isRss() ){``
-#. ``$posts = $this->Post->find('all', array('limit' => 20, 'order' => 'Post.created DESC'));``
-#. ``return $this->set(compact('posts'));``
-#. ``}``
-#. ``// this is not an Rss request, so deliver``
-#. ``// data used by website's interface``
-#. ``$this->paginate['Post'] = array('order' => 'Post.created DESC', 'limit' => 10);``
-#. ````
-#. ``$posts = $this->paginate();``
-#. ``$this->set(compact('posts'));``
-#. ``}``
-
 With all the View variables set we need to create an rss layout.
 
 Layout
@@ -118,20 +92,6 @@ app/views/layouts/rss/default.ctp:
     } 
     $channel = $this->Rss->channel(array(), $channelData, $content_for_layout);
     echo $this->Rss->document($documentData,$channel);
-
-
-#. ``echo $this->Rss->header();``
-#. ``if (!isset($documentData)) {``
-#. ``$documentData = array();``
-#. ``}``
-#. ``if (!isset($channelData)) {``
-#. ``$channelData = array();``
-#. ``}``
-#. ``if (!isset($channelData['title'])) {``
-#. ``$channelData['title'] = $title_for_layout;``
-#. ``}``
-#. ``$channel = $this->Rss->channel(array(), $channelData, $content_for_layout);``
-#. ``echo $this->Rss->document($documentData,$channel);``
 
 It doesn't look like much but thanks to the power in the RssHelper
 its doing a lot of lifting for us. We haven't set $documentData or
@@ -165,15 +125,6 @@ metadata back to the layout.
             'link' => $this->Html->url('/', true),
             'description' => __("Most recent posts.", true),
             'language' => 'en-us'));
-
-
-#. ``$this->set('documentData', array(``
-#. ``'xmlns:dc' => 'http://purl.org/dc/elements/1.1/'));``
-#. ``$this->set('channelData', array(``
-#. ``'title' => __("Most Recent Posts", true),``
-#. ``'link' => $this->Html->url('/', true),``
-#. ``'description' => __("Most recent posts.", true),``
-#. ``'language' => 'en-us'));``
 
 The second part of the view generates the elements for the actual
 records of the feed. This is accomplished by looping through the
@@ -225,39 +176,6 @@ your application.
                 'dc:creator' => $post['Post']['author'],
                 'pubDate' => $post['Post']['created']));
         }
-
-
-#. ``foreach ($posts as $post) {``
-#. ``$postTime = strtotime($post['Post']['created']);``
-#. ````
-#. ``$postLink = array(``
-#. ``'controller' => 'posts',``
-#. ``'action' => 'view',``
-#. ``'year' => date('Y', $postTime),``
-#. ``'month' => date('m', $postTime),``
-#. ``'day' => date('d', $postTime),``
-#. ``$post['Post']['slug']);``
-#. ``// You should import Sanitize``
-#. ``App::import('Sanitize');``
-#. ``// This is the part where we clean the body text for output as the description``
-#. ``// of the rss item, this needs to have only text to make sure the feed validates``
-#. ``$bodyText = preg_replace('=\(.*?\)=is', '', $post['Post']['body']);``
-#. ``$bodyText = $this->Text->stripLinks($bodyText);``
-#. ``$bodyText = Sanitize::stripAll($bodyText);``
-#. ``$bodyText = $this->Text->truncate($bodyText, 400, array(``
-#. ``'ending' => '...',``
-#. ``'exact'  => true,``
-#. ``'html'   => true,``
-#. ``));``
-#. ````
-#. ``echo  $this->Rss->item(array(), array(``
-#. ``'title' => $post['Post']['title'],``
-#. ``'link' => $postLink,``
-#. ``'guid' => array('url' => $postLink, 'isPermaLink' => 'true'),``
-#. ``'description' =>  $bodyText,``
-#. ``'dc:creator' => $post['Post']['author'],``
-#. ``'pubDate' => $post['Post']['created']));``
-#. ``}``
 
 You can see above that we can use the loop to prepare the data to
 be transformed into XML elements. It is important to filter out any
@@ -295,9 +213,6 @@ be activated, this is done in app/config/routes.php
 
           Router::parseExtensions('rss');
 
-
-#. ``Router::parseExtensions('rss');``
-
 In the call above we’ve activated the .rss extension. When using
 Router::parseExtensions() you can pass as many arguments or
 extensions as you want. This will activate each
@@ -316,18 +231,12 @@ $components array. This will allow a lot of automagic to occur.
 
         var $components = array('RequestHandler');
 
-
-#. ``var $components = array('RequestHandler');``
-
 Our view will also use the TextHelper for formatting, so that
 should be added to the controller as well.
 
 ::
 
         var $helpers = array('Text');
-
-
-#. ``var $helpers = array('Text');``
 
 Before we can make an RSS version of our posts/index we need to get
 a few things in order. It may be tempting to put the channel
@@ -359,23 +268,6 @@ the same.
         $this->set(compact('posts'));
     }
 
-
-#. ``// Modify the Posts Controller action that corresponds to``
-#. ``// the action which deliver the rss feed, which is the``
-#. ``// index action in our example``
-#. ``public function index(){``
-#. ``if( $this->RequestHandler->isRss() ){``
-#. ``$posts = $this->Post->find('all', array('limit' => 20, 'order' => 'Post.created DESC'));``
-#. ``return $this->set(compact('posts'));``
-#. ``}``
-#. ``// this is not an Rss request, so deliver``
-#. ``// data used by website's interface``
-#. ``$this->paginate['Post'] = array('order' => 'Post.created DESC', 'limit' => 10);``
-#. ````
-#. ``$posts = $this->paginate();``
-#. ``$this->set(compact('posts'));``
-#. ``}``
-
 With all the View variables set we need to create an rss layout.
 
 Layout
@@ -398,20 +290,6 @@ app/views/layouts/rss/default.ctp:
     } 
     $channel = $this->Rss->channel(array(), $channelData, $content_for_layout);
     echo $this->Rss->document($documentData,$channel);
-
-
-#. ``echo $this->Rss->header();``
-#. ``if (!isset($documentData)) {``
-#. ``$documentData = array();``
-#. ``}``
-#. ``if (!isset($channelData)) {``
-#. ``$channelData = array();``
-#. ``}``
-#. ``if (!isset($channelData['title'])) {``
-#. ``$channelData['title'] = $title_for_layout;``
-#. ``}``
-#. ``$channel = $this->Rss->channel(array(), $channelData, $content_for_layout);``
-#. ``echo $this->Rss->document($documentData,$channel);``
 
 It doesn't look like much but thanks to the power in the RssHelper
 its doing a lot of lifting for us. We haven't set $documentData or
@@ -445,15 +323,6 @@ metadata back to the layout.
             'link' => $this->Html->url('/', true),
             'description' => __("Most recent posts.", true),
             'language' => 'en-us'));
-
-
-#. ``$this->set('documentData', array(``
-#. ``'xmlns:dc' => 'http://purl.org/dc/elements/1.1/'));``
-#. ``$this->set('channelData', array(``
-#. ``'title' => __("Most Recent Posts", true),``
-#. ``'link' => $this->Html->url('/', true),``
-#. ``'description' => __("Most recent posts.", true),``
-#. ``'language' => 'en-us'));``
 
 The second part of the view generates the elements for the actual
 records of the feed. This is accomplished by looping through the
@@ -505,39 +374,6 @@ your application.
                 'dc:creator' => $post['Post']['author'],
                 'pubDate' => $post['Post']['created']));
         }
-
-
-#. ``foreach ($posts as $post) {``
-#. ``$postTime = strtotime($post['Post']['created']);``
-#. ````
-#. ``$postLink = array(``
-#. ``'controller' => 'posts',``
-#. ``'action' => 'view',``
-#. ``'year' => date('Y', $postTime),``
-#. ``'month' => date('m', $postTime),``
-#. ``'day' => date('d', $postTime),``
-#. ``$post['Post']['slug']);``
-#. ``// You should import Sanitize``
-#. ``App::import('Sanitize');``
-#. ``// This is the part where we clean the body text for output as the description``
-#. ``// of the rss item, this needs to have only text to make sure the feed validates``
-#. ``$bodyText = preg_replace('=\(.*?\)=is', '', $post['Post']['body']);``
-#. ``$bodyText = $this->Text->stripLinks($bodyText);``
-#. ``$bodyText = Sanitize::stripAll($bodyText);``
-#. ``$bodyText = $this->Text->truncate($bodyText, 400, array(``
-#. ``'ending' => '...',``
-#. ``'exact'  => true,``
-#. ``'html'   => true,``
-#. ``));``
-#. ````
-#. ``echo  $this->Rss->item(array(), array(``
-#. ``'title' => $post['Post']['title'],``
-#. ``'link' => $postLink,``
-#. ``'guid' => array('url' => $postLink, 'isPermaLink' => 'true'),``
-#. ``'description' =>  $bodyText,``
-#. ``'dc:creator' => $post['Post']['author'],``
-#. ``'pubDate' => $post['Post']['created']));``
-#. ``}``
 
 You can see above that we can use the loop to prepare the data to
 be transformed into XML elements. It is important to filter out any

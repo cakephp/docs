@@ -28,14 +28,6 @@ Model definition, for example:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $validate = array();``
-#. ``}``
-#. ``?>``
-
 In the example above, the $validate array is added to the User
 Model, but the array contains no validation rules. Assuming that
 the users table has login, password, email and born fields, the
@@ -54,18 +46,6 @@ those fields:
         );
     }
     ?>
-
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $validate = array(``
-#. ``'login' => 'alphaNumeric',``
-#. ``'email' => 'email',``
-#. ``'born' => 'date'``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 This last example shows how validation rules can be added to model
 fields. For the login field, only letters and numbers will be
@@ -112,36 +92,6 @@ some of these built-in validation rules:
         );
     }
     ?>
-
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'alphaNumeric' => array(``
-#. ``'rule' => 'alphaNumeric',``
-#. ``'required' => true,``
-#. ``'message' => 'Alphabets and numbers only'``
-#. ``),``
-#. ``'between' => array(``
-#. ``'rule' => array('between', 5, 15),``
-#. ``'message' => 'Between 5 to 15 characters'``
-#. ``)``
-#. ``),``
-#. ``'password' => array(``
-#. ``'rule' => array('minLength', '8'),``
-#. ``'message' => 'Mimimum 8 characters long'``
-#. ``),``
-#. ``'email' => 'email',``
-#. ``'born' => array(``
-#. ``'rule' => 'date',``
-#. ``'message' => 'Enter a valid date',``
-#. ``'allowEmpty' => true``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 Two validation rules are defined for login: it should contain
 letters and numbers only, and its length should be between 5 and
@@ -190,14 +140,6 @@ Model definition, for example:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $validate = array();``
-#. ``}``
-#. ``?>``
-
 In the example above, the $validate array is added to the User
 Model, but the array contains no validation rules. Assuming that
 the users table has login, password, email and born fields, the
@@ -216,18 +158,6 @@ those fields:
         );
     }
     ?>
-
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $validate = array(``
-#. ``'login' => 'alphaNumeric',``
-#. ``'email' => 'email',``
-#. ``'born' => 'date'``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 This last example shows how validation rules can be added to model
 fields. For the login field, only letters and numbers will be
@@ -274,36 +204,6 @@ some of these built-in validation rules:
         );
     }
     ?>
-
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'alphaNumeric' => array(``
-#. ``'rule' => 'alphaNumeric',``
-#. ``'required' => true,``
-#. ``'message' => 'Alphabets and numbers only'``
-#. ``),``
-#. ``'between' => array(``
-#. ``'rule' => array('between', 5, 15),``
-#. ``'message' => 'Between 5 to 15 characters'``
-#. ``)``
-#. ``),``
-#. ``'password' => array(``
-#. ``'rule' => array('minLength', '8'),``
-#. ``'message' => 'Mimimum 8 characters long'``
-#. ``),``
-#. ``'email' => 'email',``
-#. ``'born' => array(``
-#. ``'rule' => 'date',``
-#. ``'message' => 'Enter a valid date',``
-#. ``'allowEmpty' => true``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 Two validation rules are defined for login: it should contain
 letters and numbers only, and its length should be between 5 and

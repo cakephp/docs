@@ -18,13 +18,6 @@ and refer to it using the plugin notation:
         'password' => 'hi_mom',
     );
 
-
-#. ``var $twitter = array(``
-#. ``'datasource' => 'Twitter.Twitter',``
-#. ``'username' => 'test@example.com',``
-#. ``'password' => 'hi_mom',``
-#. ``);``
-
 Plugin DBO Drivers
 ~~~~~~~~~~~~~~~~~~
 
@@ -42,12 +35,6 @@ and again use plugin notation:
         ...
     );
 
-
-#. ``var $twitter = array(``
-#. ``'driver' => 'Twitter.Twitter',``
-#. ``...``
-#. ``);``
-
 Combining the Two
 ~~~~~~~~~~~~~~~~~
 
@@ -64,14 +51,6 @@ create your main class you plan to extend:
     }
     ?>
 
-
-#. ``plugins/[social_network]/models/datasources/[social_network]_source.php :``
-#. ``<?php``
-#. ``class SocialNetworkSource extends DataSource {``
-#. ``// general functionality here``
-#. ``}``
-#. ``?>``
-
 And now create your drivers in a sub folder:
 
 ::
@@ -82,14 +61,6 @@ And now create your drivers in a sub folder:
         // Unique functionality here
     }
     ?>
-
-
-#. ``plugins/[social_network]/models/datasources/[social_network]/[twitter].php``
-#. ``<?php``
-#. ``class Twitter extends SocialNetworkSource {``
-#. ``// Unique functionality here``
-#. ``}``
-#. ``?>``
 
 And finally setup your ``database.php`` settings accordingly:
 
@@ -103,16 +74,6 @@ And finally setup your ``database.php`` settings accordingly:
         'driver' => 'SocialNetwork.Facebook',
         'datasource' => 'SocialNetwork.SocialNetwork',
     );
-
-
-#. ``var $twitter = array(``
-#. ``'driver' => 'SocialNetwork.Twitter',``
-#. ``'datasource' => 'SocialNetwork.SocialNetwork',``
-#. ``);``
-#. ``var $facebook = array(``
-#. ``'driver' => 'SocialNetwork.Facebook',``
-#. ``'datasource' => 'SocialNetwork.SocialNetwork',``
-#. ``);``
 
 Just like that, all your files are included **Automagically!** No
 need to place ``App::import()`` at the top of all your files.
@@ -137,13 +98,6 @@ and refer to it using the plugin notation:
         'password' => 'hi_mom',
     );
 
-
-#. ``var $twitter = array(``
-#. ``'datasource' => 'Twitter.Twitter',``
-#. ``'username' => 'test@example.com',``
-#. ``'password' => 'hi_mom',``
-#. ``);``
-
 Plugin DBO Drivers
 ~~~~~~~~~~~~~~~~~~
 
@@ -161,12 +115,6 @@ and again use plugin notation:
         ...
     );
 
-
-#. ``var $twitter = array(``
-#. ``'driver' => 'Twitter.Twitter',``
-#. ``...``
-#. ``);``
-
 Combining the Two
 ~~~~~~~~~~~~~~~~~
 
@@ -183,14 +131,6 @@ create your main class you plan to extend:
     }
     ?>
 
-
-#. ``plugins/[social_network]/models/datasources/[social_network]_source.php :``
-#. ``<?php``
-#. ``class SocialNetworkSource extends DataSource {``
-#. ``// general functionality here``
-#. ``}``
-#. ``?>``
-
 And now create your drivers in a sub folder:
 
 ::
@@ -201,14 +141,6 @@ And now create your drivers in a sub folder:
         // Unique functionality here
     }
     ?>
-
-
-#. ``plugins/[social_network]/models/datasources/[social_network]/[twitter].php``
-#. ``<?php``
-#. ``class Twitter extends SocialNetworkSource {``
-#. ``// Unique functionality here``
-#. ``}``
-#. ``?>``
 
 And finally setup your ``database.php`` settings accordingly:
 
@@ -222,16 +154,6 @@ And finally setup your ``database.php`` settings accordingly:
         'driver' => 'SocialNetwork.Facebook',
         'datasource' => 'SocialNetwork.SocialNetwork',
     );
-
-
-#. ``var $twitter = array(``
-#. ``'driver' => 'SocialNetwork.Twitter',``
-#. ``'datasource' => 'SocialNetwork.SocialNetwork',``
-#. ``);``
-#. ``var $facebook = array(``
-#. ``'driver' => 'SocialNetwork.Facebook',``
-#. ``'datasource' => 'SocialNetwork.SocialNetwork',``
-#. ``);``
 
 Just like that, all your files are included **Automagically!** No
 need to place ``App::import()`` at the top of all your files.

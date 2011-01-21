@@ -26,10 +26,6 @@ components in your controller:
     class FooController extends AppController {
         var $components = array('Auth');
 
-
-#. ``class FooController extends AppController {``
-#. ``var $components = array('Auth');``
-
 Or add it to your AppController so all of your controllers will use
 it:
 
@@ -39,12 +35,6 @@ it:
         // AppController's components are NOT merged with defaults,
         // so session component is lost if it's not included here!
         var $components = array('Auth', 'Session');
-
-
-#. ``class AppController extends Controller {``
-#. ``// AppController's components are NOT merged with defaults,``
-#. ``// so session component is lost if it's not included here!``
-#. ``var $components = array('Auth', 'Session');``
 
 Now, there are a few conventions to think about when using
 AuthComponent. By default, the AuthComponent expects you to have a
@@ -67,14 +57,6 @@ Let's set up our users table using the following SQL:
         password char(40),
         PRIMARY KEY (id)
     );
-
-
-#. ``CREATE TABLE users (``
-#. ``id integer auto_increment,``
-#. ``username char(50),``
-#. ``password char(40),``
-#. ``PRIMARY KEY (id)``
-#. ``);``
 
 Something to keep in mind when creating a table to store all your
 user authentication data is that the AuthComponent expects the
@@ -109,22 +91,6 @@ your controller:
         }
     }
 
-
-#. ``class UsersController extends AppController {``
-#. ``var $name = 'Users';``
-#. ``var $components = array('Auth'); // Not necessary if declared in your app controller``
-#. ````
-#. ``/**``
-#. ``*  The AuthComponent provides the needed functionality``
-#. ``*  for login, so you can leave this function blank.``
-#. ``*/``
-#. ``function login() {``
-#. ``}``
-#. ``function logout() {``
-#. ``$this->redirect($this->Auth->logout());``
-#. ``}``
-#. ``}``
-
 While you can leave the login() function blank, you do need to
 create the login view template (saved in
 app/views/users/login.ctp). This is the only UsersController view
@@ -140,15 +106,6 @@ are already using the Form helper:
         echo $this->Form->input('password');
         echo $this->Form->end('Login');
     ?>
-
-
-#. ``<?php``
-#. ``echo $session->flash('auth');``
-#. ``echo $this->Form->create('User', array('action' => 'login'));``
-#. ``echo $this->Form->input('username');``
-#. ``echo $this->Form->input('password');``
-#. ``echo $this->Form->end('Login');``
-#. ``?>``
 
 This view creates a simple login form where you enter a username
 and password. Once you submit this form, the AuthComponent takes
@@ -190,10 +147,6 @@ components in your controller:
     class FooController extends AppController {
         var $components = array('Auth');
 
-
-#. ``class FooController extends AppController {``
-#. ``var $components = array('Auth');``
-
 Or add it to your AppController so all of your controllers will use
 it:
 
@@ -203,12 +156,6 @@ it:
         // AppController's components are NOT merged with defaults,
         // so session component is lost if it's not included here!
         var $components = array('Auth', 'Session');
-
-
-#. ``class AppController extends Controller {``
-#. ``// AppController's components are NOT merged with defaults,``
-#. ``// so session component is lost if it's not included here!``
-#. ``var $components = array('Auth', 'Session');``
 
 Now, there are a few conventions to think about when using
 AuthComponent. By default, the AuthComponent expects you to have a
@@ -231,14 +178,6 @@ Let's set up our users table using the following SQL:
         password char(40),
         PRIMARY KEY (id)
     );
-
-
-#. ``CREATE TABLE users (``
-#. ``id integer auto_increment,``
-#. ``username char(50),``
-#. ``password char(40),``
-#. ``PRIMARY KEY (id)``
-#. ``);``
 
 Something to keep in mind when creating a table to store all your
 user authentication data is that the AuthComponent expects the
@@ -273,22 +212,6 @@ your controller:
         }
     }
 
-
-#. ``class UsersController extends AppController {``
-#. ``var $name = 'Users';``
-#. ``var $components = array('Auth'); // Not necessary if declared in your app controller``
-#. ````
-#. ``/**``
-#. ``*  The AuthComponent provides the needed functionality``
-#. ``*  for login, so you can leave this function blank.``
-#. ``*/``
-#. ``function login() {``
-#. ``}``
-#. ``function logout() {``
-#. ``$this->redirect($this->Auth->logout());``
-#. ``}``
-#. ``}``
-
 While you can leave the login() function blank, you do need to
 create the login view template (saved in
 app/views/users/login.ctp). This is the only UsersController view
@@ -304,15 +227,6 @@ are already using the Form helper:
         echo $this->Form->input('password');
         echo $this->Form->end('Login');
     ?>
-
-
-#. ``<?php``
-#. ``echo $session->flash('auth');``
-#. ``echo $this->Form->create('User', array('action' => 'login'));``
-#. ``echo $this->Form->input('username');``
-#. ``echo $this->Form->input('password');``
-#. ``echo $this->Form->end('Login');``
-#. ``?>``
 
 This view creates a simple login form where you enter a username
 and password. Once you submit this form, the AuthComponent takes

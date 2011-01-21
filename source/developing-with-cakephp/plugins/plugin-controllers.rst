@@ -28,16 +28,6 @@ So, we place our new PizzaOrdersController in
         }
     }
 
-
-#. ``// /app/plugins/pizza/controllers/pizza_orders_controller.php``
-#. ``class PizzaOrdersController extends PizzaAppController {``
-#. ``var $name = 'PizzaOrders';``
-#. ``var $uses = array('Pizza.PizzaOrder');``
-#. ``function index() {``
-#. ``//...``
-#. ``}``
-#. ``}``
-
 This controller extends the plugin's AppController (called
 PizzaAppController) rather than the parent application's
 AppController.
@@ -79,16 +69,6 @@ So, we place our new PizzaOrdersController in
             //...
         }
     }
-
-
-#. ``// /app/plugins/pizza/controllers/pizza_orders_controller.php``
-#. ``class PizzaOrdersController extends PizzaAppController {``
-#. ``var $name = 'PizzaOrders';``
-#. ``var $uses = array('Pizza.PizzaOrder');``
-#. ``function index() {``
-#. ``//...``
-#. ``}``
-#. ``}``
 
 This controller extends the plugin's AppController (called
 PizzaAppController) rather than the parent application's

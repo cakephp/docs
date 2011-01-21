@@ -35,16 +35,6 @@ can be accessed in your view.
     
     You have selected <?php echo $color; ?> icing for the cake.
 
-
-#. ``<?php``
-#. ````
-#. ``//First you pass data from the controller:``
-#. ``$this->set('color', 'pink');``
-#. ``//Then, in the view, you can utilize the data:``
-#. ``?>``
-#. `` ``
-#. ``You have selected <?php echo $color; ?> icing for the cake.``
-
 The ``set()`` method also takes an associative array as its first
 parameter. This can often be a quick way to assign a set of
 information to the view.
@@ -70,19 +60,6 @@ anymore, etc.):
     
     ?>
 
-
-#. ``<?php``
-#. ````
-#. ``$data = array(``
-#. ``'color' => 'pink',``
-#. ``'type' => 'sugar',``
-#. ``'base_price' => 23.95``
-#. ``);``
-#. ``//make $color, $type, and $base_price``
-#. ``//available to the view:``
-#. ``$this->set($data);``
-#. ``?>``
-
 The attribute ``$pageTitle`` no longer exists, use ``set()`` to set
 the title
 
@@ -91,11 +68,6 @@ the title
     <?php
     $this->set('title_for_layout', 'This is the page title');
     ?>
-
-
-#. ``<?php``
-#. ``$this->set('title_for_layout', 'This is the page title');``
-#. ``?>``
 
 render
 ^^^^^^
@@ -123,16 +95,6 @@ the view file in /app/views/recipes/search.ctp will be rendered.
     ...
     }
 
-
-#. ``class RecipesController extends AppController {``
-#. ``...``
-#. ``function search() {``
-#. ``// Render the view in /views/recipes/search.ctp``
-#. ``$this->render();``
-#. ``}``
-#. ``...``
-#. ``}``
-
 Although CakePHP will automatically call it (unless you’ve set
 ``$this->autoRender`` to false) after every action’s logic, you can
 use it to specify an alternate view file by specifying an action
@@ -145,10 +107,6 @@ direct rendering of elements, very useful in ajax calls.
 
     // Render the element in /views/elements/ajaxreturn.ctp
     $this->render('/elements/ajaxreturn');
-
-
-#. ``// Render the element in /views/elements/ajaxreturn.ctp``
-#. ``$this->render('/elements/ajaxreturn');``
 
 You can also specify an alternate view or element file using the
 third parameter, ``$file``. When using ``$file``, don't forget to
@@ -172,13 +130,6 @@ will not try to re-render the view.
             $this->render('custom_file');
         }
     }
-
-
-#. ``class PostsController extends AppController {``
-#. ``function my_action() {``
-#. ``$this->render('custom_file');``
-#. ``}``
-#. ``}``
 
 This would render ``app/views/posts/custom_file.ctp`` instead of
 ``app/views/posts/my_action.ctp``
@@ -209,16 +160,6 @@ you might wish to redirect them to a receipt screen.
         }
     }
 
-
-#. ``function placeOrder() {``
-#. ``//Logic for finalizing order goes here``
-#. ``if($success) {``
-#. ``$this->redirect(array('controller' => 'orders', 'action' => 'thanks'));``
-#. ``} else {``
-#. ``$this->redirect(array('controller' => 'orders', 'action' => 'confirm'));``
-#. ``}``
-#. ``}``
-
 You can also use a relative or absolute URL as the $url argument:
 
 ::
@@ -226,18 +167,11 @@ You can also use a relative or absolute URL as the $url argument:
     $this->redirect('/orders/thanks'));
     $this->redirect('http://www.example.com');
 
-
-#. ``$this->redirect('/orders/thanks'));``
-#. ``$this->redirect('http://www.example.com');``
-
 You can also pass data to the action:
 
 ::
 
     $this->redirect(array('action' => 'edit', $id));
-
-
-#. ``$this->redirect(array('action' => 'edit', $id));``
 
 The second parameter of ``redirect()`` allows you to define an HTTP
 status code to accompany the redirect. You may want to use 301
@@ -251,9 +185,6 @@ If you need to redirect to the referer page you can use:
 ::
 
     $this->redirect($this->referer());
-
-
-#. ``$this->redirect($this->referer());``
 
 flash
 ^^^^^
@@ -355,20 +286,6 @@ this:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class UserController extends AppController {``
-#. ``function delete($id) {``
-#. ``// delete code goes here, and then...``
-#. ``if ($this->referer() != '/') {``
-#. ``$this->redirect($this->referer());``
-#. ``} else {``
-#. ``$this->redirect(array('action' => 'index'));``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 you can do this:
 
 ::
@@ -381,16 +298,6 @@ you can do this:
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class UserController extends AppController {``
-#. ``function delete($id) {``
-#. ``// delete code goes here, and then...``
-#. ``$this->redirect($this->referer(array('action' => 'index')));``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 If ``$default`` is not set, the function defaults to the root of
 your domain - '/'.
@@ -434,13 +341,6 @@ posted from that form to craft find conditions:
         $this->set('orders', $orders);
     }
 
-
-#. ``function index() {``
-#. ``$conditions = $this->postConditions($this->data);``
-#. ``$orders = $this->Order->find("all",compact('conditions'));``
-#. ``$this->set('orders', $orders);``
-#. ``}``
-
 If $this->data[‘Order’][‘destination’] equals “Old Towne Bakery”,
 postConditions converts that condition to an array compatible for
 use in a Model->find() method. In this case,
@@ -470,26 +370,6 @@ using the second parameter.
         )
     );
     $orders = $this->Order->find("all",compact('condtions'));
-
-
-#. ``/*``
-#. ``Contents of $this->data``
-#. ``array(``
-#. ``'Order' => array(``
-#. ``'num_items' => '4',``
-#. ``'referrer' => 'Ye Olde'``
-#. ``)``
-#. ``)``
-#. ``*/``
-#. ``//Let’s get orders that have at least 4 items and contain ‘Ye Olde’``
-#. ``$condtions=$this->postConditions(``
-#. ``$this->data,``
-#. ``array(``
-#. ``'num_items' => '>=',``
-#. ``'referrer' => 'LIKE'``
-#. ``)``
-#. ``);``
-#. ``$orders = $this->Order->find("all",compact('condtions'));``
 
 The third parameter allows you to tell CakePHP what SQL boolean
 operator to use between the find conditions. String like ‘AND’,
@@ -543,14 +423,6 @@ return the data.
         }
     }
 
-
-#. ``// controllers/comments_controller.php``
-#. ``class CommentsController extends AppController {``
-#. ``function latest() {``
-#. ``return $this->Comment->find('all', array('order' => 'Comment.created DESC', 'limit' => 10));``
-#. ``}``
-#. ``}``
-
 If we now create a simple element to call that function:
 
 ::
@@ -562,22 +434,12 @@ If we now create a simple element to call that function:
         echo $comment['Comment']['title'];
     }
 
-
-#. ``// views/elements/latest_comments.ctp``
-#. ``$comments = $this->requestAction('/comments/latest');``
-#. ``foreach($comments as $comment) {``
-#. ``echo $comment['Comment']['title'];``
-#. ``}``
-
 We can then place that element anywhere at all to get the output
 using:
 
 ::
 
     echo $this->element('latest_comments');
-
-
-#. ``echo $this->element('latest_comments');``
 
 Written in this way, whenever the element is rendered, a request
 will be made to the controller to get the data, the data will be
@@ -589,9 +451,6 @@ processing. By modifying the call to element to look like this:
 
     echo $this->element('latest_comments', array('cache' => '+1 hour'));
 
-
-#. ``echo $this->element('latest_comments', array('cache' => '+1 hour'));``
-
 The ``requestAction`` call will not be made while the cached
 element view file exists and is valid.
 
@@ -600,9 +459,6 @@ In addition, requestAction now takes array based cake style urls:
 ::
 
     echo $this->requestAction(array('controller' => 'articles', 'action' => 'featured'), array('return'));
-
-
-#. ``echo $this->requestAction(array('controller' => 'articles', 'action' => 'featured'), array('return'));``
 
 This allows the requestAction call to bypass the usage of
 Router::url which can increase performance. The url based arrays
@@ -620,10 +476,6 @@ made available in the requested action's Controller::params array.
     echo $this->requestAction('/articles/featured/limit:3');
     echo $this->requestAction('/articles/view/5');
 
-
-#. ``echo $this->requestAction('/articles/featured/limit:3');``
-#. ``echo $this->requestAction('/articles/view/5');``
-
 As an array in the requestAction would then be:
 
 ::
@@ -631,10 +483,6 @@ As an array in the requestAction would then be:
     echo $this->requestAction(array('controller' => 'articles', 'action' => 'featured'), array('named' => array('limit' => 3)));
     
     echo $this->requestAction(array('controller' => 'articles', 'action' => 'view'), array('pass' => array(5)));
-
-
-#. ``echo $this->requestAction(array('controller' => 'articles', 'action' => 'featured'), array('named' => array('limit' => 3)));``
-#. ``echo $this->requestAction(array('controller' => 'articles', 'action' => 'view'), array('pass' => array(5)));``
 
 Unlike other places where array urls are analogous to string urls,
 requestAction treats them differently.
@@ -660,18 +508,10 @@ model.
     $this->loadModel('Article');
     $recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));
 
-
-#. ``$this->loadModel('Article');``
-#. ``$recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));``
-
 ::
 
     $this->loadModel('User', 2);
     $user = $this->User->read();
-
-
-#. ``$this->loadModel('User', 2);``
-#. ``$user = $this->User->read();``
 
 3.5.4 Controller Methods
 ------------------------
@@ -710,16 +550,6 @@ can be accessed in your view.
     
     You have selected <?php echo $color; ?> icing for the cake.
 
-
-#. ``<?php``
-#. ````
-#. ``//First you pass data from the controller:``
-#. ``$this->set('color', 'pink');``
-#. ``//Then, in the view, you can utilize the data:``
-#. ``?>``
-#. `` ``
-#. ``You have selected <?php echo $color; ?> icing for the cake.``
-
 The ``set()`` method also takes an associative array as its first
 parameter. This can often be a quick way to assign a set of
 information to the view.
@@ -745,19 +575,6 @@ anymore, etc.):
     
     ?>
 
-
-#. ``<?php``
-#. ````
-#. ``$data = array(``
-#. ``'color' => 'pink',``
-#. ``'type' => 'sugar',``
-#. ``'base_price' => 23.95``
-#. ``);``
-#. ``//make $color, $type, and $base_price``
-#. ``//available to the view:``
-#. ``$this->set($data);``
-#. ``?>``
-
 The attribute ``$pageTitle`` no longer exists, use ``set()`` to set
 the title
 
@@ -766,11 +583,6 @@ the title
     <?php
     $this->set('title_for_layout', 'This is the page title');
     ?>
-
-
-#. ``<?php``
-#. ``$this->set('title_for_layout', 'This is the page title');``
-#. ``?>``
 
 render
 ^^^^^^
@@ -798,16 +610,6 @@ the view file in /app/views/recipes/search.ctp will be rendered.
     ...
     }
 
-
-#. ``class RecipesController extends AppController {``
-#. ``...``
-#. ``function search() {``
-#. ``// Render the view in /views/recipes/search.ctp``
-#. ``$this->render();``
-#. ``}``
-#. ``...``
-#. ``}``
-
 Although CakePHP will automatically call it (unless you’ve set
 ``$this->autoRender`` to false) after every action’s logic, you can
 use it to specify an alternate view file by specifying an action
@@ -820,10 +622,6 @@ direct rendering of elements, very useful in ajax calls.
 
     // Render the element in /views/elements/ajaxreturn.ctp
     $this->render('/elements/ajaxreturn');
-
-
-#. ``// Render the element in /views/elements/ajaxreturn.ctp``
-#. ``$this->render('/elements/ajaxreturn');``
 
 You can also specify an alternate view or element file using the
 third parameter, ``$file``. When using ``$file``, don't forget to
@@ -847,13 +645,6 @@ will not try to re-render the view.
             $this->render('custom_file');
         }
     }
-
-
-#. ``class PostsController extends AppController {``
-#. ``function my_action() {``
-#. ``$this->render('custom_file');``
-#. ``}``
-#. ``}``
 
 This would render ``app/views/posts/custom_file.ctp`` instead of
 ``app/views/posts/my_action.ctp``
@@ -884,16 +675,6 @@ you might wish to redirect them to a receipt screen.
         }
     }
 
-
-#. ``function placeOrder() {``
-#. ``//Logic for finalizing order goes here``
-#. ``if($success) {``
-#. ``$this->redirect(array('controller' => 'orders', 'action' => 'thanks'));``
-#. ``} else {``
-#. ``$this->redirect(array('controller' => 'orders', 'action' => 'confirm'));``
-#. ``}``
-#. ``}``
-
 You can also use a relative or absolute URL as the $url argument:
 
 ::
@@ -901,18 +682,11 @@ You can also use a relative or absolute URL as the $url argument:
     $this->redirect('/orders/thanks'));
     $this->redirect('http://www.example.com');
 
-
-#. ``$this->redirect('/orders/thanks'));``
-#. ``$this->redirect('http://www.example.com');``
-
 You can also pass data to the action:
 
 ::
 
     $this->redirect(array('action' => 'edit', $id));
-
-
-#. ``$this->redirect(array('action' => 'edit', $id));``
 
 The second parameter of ``redirect()`` allows you to define an HTTP
 status code to accompany the redirect. You may want to use 301
@@ -926,9 +700,6 @@ If you need to redirect to the referer page you can use:
 ::
 
     $this->redirect($this->referer());
-
-
-#. ``$this->redirect($this->referer());``
 
 flash
 ^^^^^
@@ -1030,20 +801,6 @@ this:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class UserController extends AppController {``
-#. ``function delete($id) {``
-#. ``// delete code goes here, and then...``
-#. ``if ($this->referer() != '/') {``
-#. ``$this->redirect($this->referer());``
-#. ``} else {``
-#. ``$this->redirect(array('action' => 'index'));``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 you can do this:
 
 ::
@@ -1056,16 +813,6 @@ you can do this:
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class UserController extends AppController {``
-#. ``function delete($id) {``
-#. ``// delete code goes here, and then...``
-#. ``$this->redirect($this->referer(array('action' => 'index')));``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 If ``$default`` is not set, the function defaults to the root of
 your domain - '/'.
@@ -1109,13 +856,6 @@ posted from that form to craft find conditions:
         $this->set('orders', $orders);
     }
 
-
-#. ``function index() {``
-#. ``$conditions = $this->postConditions($this->data);``
-#. ``$orders = $this->Order->find("all",compact('conditions'));``
-#. ``$this->set('orders', $orders);``
-#. ``}``
-
 If $this->data[‘Order’][‘destination’] equals “Old Towne Bakery”,
 postConditions converts that condition to an array compatible for
 use in a Model->find() method. In this case,
@@ -1145,26 +885,6 @@ using the second parameter.
         )
     );
     $orders = $this->Order->find("all",compact('condtions'));
-
-
-#. ``/*``
-#. ``Contents of $this->data``
-#. ``array(``
-#. ``'Order' => array(``
-#. ``'num_items' => '4',``
-#. ``'referrer' => 'Ye Olde'``
-#. ``)``
-#. ``)``
-#. ``*/``
-#. ``//Let’s get orders that have at least 4 items and contain ‘Ye Olde’``
-#. ``$condtions=$this->postConditions(``
-#. ``$this->data,``
-#. ``array(``
-#. ``'num_items' => '>=',``
-#. ``'referrer' => 'LIKE'``
-#. ``)``
-#. ``);``
-#. ``$orders = $this->Order->find("all",compact('condtions'));``
 
 The third parameter allows you to tell CakePHP what SQL boolean
 operator to use between the find conditions. String like ‘AND’,
@@ -1218,14 +938,6 @@ return the data.
         }
     }
 
-
-#. ``// controllers/comments_controller.php``
-#. ``class CommentsController extends AppController {``
-#. ``function latest() {``
-#. ``return $this->Comment->find('all', array('order' => 'Comment.created DESC', 'limit' => 10));``
-#. ``}``
-#. ``}``
-
 If we now create a simple element to call that function:
 
 ::
@@ -1237,22 +949,12 @@ If we now create a simple element to call that function:
         echo $comment['Comment']['title'];
     }
 
-
-#. ``// views/elements/latest_comments.ctp``
-#. ``$comments = $this->requestAction('/comments/latest');``
-#. ``foreach($comments as $comment) {``
-#. ``echo $comment['Comment']['title'];``
-#. ``}``
-
 We can then place that element anywhere at all to get the output
 using:
 
 ::
 
     echo $this->element('latest_comments');
-
-
-#. ``echo $this->element('latest_comments');``
 
 Written in this way, whenever the element is rendered, a request
 will be made to the controller to get the data, the data will be
@@ -1264,9 +966,6 @@ processing. By modifying the call to element to look like this:
 
     echo $this->element('latest_comments', array('cache' => '+1 hour'));
 
-
-#. ``echo $this->element('latest_comments', array('cache' => '+1 hour'));``
-
 The ``requestAction`` call will not be made while the cached
 element view file exists and is valid.
 
@@ -1275,9 +974,6 @@ In addition, requestAction now takes array based cake style urls:
 ::
 
     echo $this->requestAction(array('controller' => 'articles', 'action' => 'featured'), array('return'));
-
-
-#. ``echo $this->requestAction(array('controller' => 'articles', 'action' => 'featured'), array('return'));``
 
 This allows the requestAction call to bypass the usage of
 Router::url which can increase performance. The url based arrays
@@ -1295,10 +991,6 @@ made available in the requested action's Controller::params array.
     echo $this->requestAction('/articles/featured/limit:3');
     echo $this->requestAction('/articles/view/5');
 
-
-#. ``echo $this->requestAction('/articles/featured/limit:3');``
-#. ``echo $this->requestAction('/articles/view/5');``
-
 As an array in the requestAction would then be:
 
 ::
@@ -1306,10 +998,6 @@ As an array in the requestAction would then be:
     echo $this->requestAction(array('controller' => 'articles', 'action' => 'featured'), array('named' => array('limit' => 3)));
     
     echo $this->requestAction(array('controller' => 'articles', 'action' => 'view'), array('pass' => array(5)));
-
-
-#. ``echo $this->requestAction(array('controller' => 'articles', 'action' => 'featured'), array('named' => array('limit' => 3)));``
-#. ``echo $this->requestAction(array('controller' => 'articles', 'action' => 'view'), array('pass' => array(5)));``
 
 Unlike other places where array urls are analogous to string urls,
 requestAction treats them differently.
@@ -1335,15 +1023,7 @@ model.
     $this->loadModel('Article');
     $recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));
 
-
-#. ``$this->loadModel('Article');``
-#. ``$recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));``
-
 ::
 
     $this->loadModel('User', 2);
     $user = $this->User->read();
-
-
-#. ``$this->loadModel('User', 2);``
-#. ``$user = $this->User->read();``

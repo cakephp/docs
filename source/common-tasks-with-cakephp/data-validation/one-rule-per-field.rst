@@ -17,17 +17,6 @@ general usage pattern adding a rule for a single field:
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'fieldName1' => array(``
-#. ``'rule' => 'ruleName', // or: array('ruleName', 'param1', 'param2' ...)``
-#. ``'required' => true,``
-#. ``'allowEmpty' => false,``
-#. ``'on' => 'create', // or: 'update'``
-#. ``'message' => 'Your Error Message'``
-#. ``)``
-#. ``);``
-
 The 'rule' key is required. If you only set 'required' => true, the
 form validation will not function correctly. This is because
 'required' is not actually a rule.
@@ -58,13 +47,6 @@ value e.g.:
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'rule' => 'alphaNumeric'``
-#. ``)``
-#. ``);``
-
 If the rule requires some parameters (like the max, min or range),
 'rule' should be an array:
 
@@ -75,13 +57,6 @@ If the rule requires some parameters (like the max, min or range),
             'rule' => array('minLength', 8)
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'password' => array(``
-#. ``'rule' => array('minLength', 8)``
-#. ``)``
-#. ``);``
 
 Remember, the 'rule' key is required for array-based rule
 definitions.
@@ -101,14 +76,6 @@ the validation rule has been defined as follows:
             'required' => true
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'rule' => 'alphaNumeric',``
-#. ``'required' => true``
-#. ``)``
-#. ``);``
 
 The data sent to the model’s save() method must contain data for
 the login field. If it doesn’t, validation will fail. The default
@@ -165,14 +132,6 @@ message for the rule:
             'message' => 'Password must be at least 8 characters long'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'password' => array(``
-#. ``'rule' => array('minLength', 8),``
-#. ``'message' => 'Password must be at least 8 characters long'``
-#. ``)``
-#. ``);``
 
 4.1.2 One Rule Per Field
 ------------------------
@@ -193,17 +152,6 @@ general usage pattern adding a rule for a single field:
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'fieldName1' => array(``
-#. ``'rule' => 'ruleName', // or: array('ruleName', 'param1', 'param2' ...)``
-#. ``'required' => true,``
-#. ``'allowEmpty' => false,``
-#. ``'on' => 'create', // or: 'update'``
-#. ``'message' => 'Your Error Message'``
-#. ``)``
-#. ``);``
-
 The 'rule' key is required. If you only set 'required' => true, the
 form validation will not function correctly. This is because
 'required' is not actually a rule.
@@ -234,13 +182,6 @@ value e.g.:
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'rule' => 'alphaNumeric'``
-#. ``)``
-#. ``);``
-
 If the rule requires some parameters (like the max, min or range),
 'rule' should be an array:
 
@@ -251,13 +192,6 @@ If the rule requires some parameters (like the max, min or range),
             'rule' => array('minLength', 8)
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'password' => array(``
-#. ``'rule' => array('minLength', 8)``
-#. ``)``
-#. ``);``
 
 Remember, the 'rule' key is required for array-based rule
 definitions.
@@ -277,14 +211,6 @@ the validation rule has been defined as follows:
             'required' => true
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'rule' => 'alphaNumeric',``
-#. ``'required' => true``
-#. ``)``
-#. ``);``
 
 The data sent to the model’s save() method must contain data for
 the login field. If it doesn’t, validation will fail. The default
@@ -341,11 +267,3 @@ message for the rule:
             'message' => 'Password must be at least 8 characters long'
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'password' => array(``
-#. ``'rule' => array('minLength', 8),``
-#. ``'message' => 'Password must be at least 8 characters long'``
-#. ``)``
-#. ``);``

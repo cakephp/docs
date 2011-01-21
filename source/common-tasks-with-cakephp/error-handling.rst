@@ -24,18 +24,12 @@ that is more useful to the application developer is the good old
 
     $this->cakeError('error404');
 
-
-#. ``$this->cakeError('error404');``
-
 Or alternatively, you can cause the page to report the error was at
 a specific URL by passing the ``url`` parameter:
 
 ::
 
     $this->cakeError('error404', array('url' => 'some/other.url'));
-
-
-#. ``$this->cakeError('error404', array('url' => 'some/other.url'));``
 
 This all starts being a lot more useful by extending the error
 handler to use your own error-types. Application error handlers are
@@ -50,12 +44,6 @@ Create a file ``app/app_error.php`` with the following definition.
     class AppError extends ErrorHandler {
     }   
     ?>
-
-
-#. ``<?php``
-#. ``class AppError extends ErrorHandler {``
-#. ``}``
-#. ``?>``
 
 Handlers for new error-types can be implemented by adding methods
 to this class. Simply create a new method with the name you want to
@@ -78,12 +66,6 @@ failed to write.
       $this->_outputMessage('cannot_write_file');
     }
 
-
-#. ``function cannotWriteFile($params) {``
-#. ``$this->controller->set('file', $params['file']);``
-#. ``$this->_outputMessage('cannot_write_file');``
-#. ``}``
-
 Create the view in ``app/views/errors/cannot_write_file.ctp``
 
 ::
@@ -91,18 +73,11 @@ Create the view in ``app/views/errors/cannot_write_file.ctp``
     <h2>Unable to write file</h2>
     <p>Could not write file <?php echo $file ?> to the disk.</p>
 
-
-#. ``<h2>Unable to write file</h2>``
-#. ``<p>Could not write file <?php echo $file ?> to the disk.</p>``
-
 and throw the error in your controller/component
 
 ::
 
     $this->cakeError('cannotWriteFile', array('file'=>'somefilename')); 
-
-
-#. ``$this->cakeError('cannotWriteFile', array('file'=>'somefilename'));``
 
 The default implementation of
 ``$this->_outputMessage(<view-filename>)`` will just display the
@@ -136,18 +111,12 @@ that is more useful to the application developer is the good old
 
     $this->cakeError('error404');
 
-
-#. ``$this->cakeError('error404');``
-
 Or alternatively, you can cause the page to report the error was at
 a specific URL by passing the ``url`` parameter:
 
 ::
 
     $this->cakeError('error404', array('url' => 'some/other.url'));
-
-
-#. ``$this->cakeError('error404', array('url' => 'some/other.url'));``
 
 This all starts being a lot more useful by extending the error
 handler to use your own error-types. Application error handlers are
@@ -162,12 +131,6 @@ Create a file ``app/app_error.php`` with the following definition.
     class AppError extends ErrorHandler {
     }   
     ?>
-
-
-#. ``<?php``
-#. ``class AppError extends ErrorHandler {``
-#. ``}``
-#. ``?>``
 
 Handlers for new error-types can be implemented by adding methods
 to this class. Simply create a new method with the name you want to
@@ -190,12 +153,6 @@ failed to write.
       $this->_outputMessage('cannot_write_file');
     }
 
-
-#. ``function cannotWriteFile($params) {``
-#. ``$this->controller->set('file', $params['file']);``
-#. ``$this->_outputMessage('cannot_write_file');``
-#. ``}``
-
 Create the view in ``app/views/errors/cannot_write_file.ctp``
 
 ::
@@ -203,18 +160,11 @@ Create the view in ``app/views/errors/cannot_write_file.ctp``
     <h2>Unable to write file</h2>
     <p>Could not write file <?php echo $file ?> to the disk.</p>
 
-
-#. ``<h2>Unable to write file</h2>``
-#. ``<p>Could not write file <?php echo $file ?> to the disk.</p>``
-
 and throw the error in your controller/component
 
 ::
 
     $this->cakeError('cannotWriteFile', array('file'=>'somefilename')); 
-
-
-#. ``$this->cakeError('cannotWriteFile', array('file'=>'somefilename'));``
 
 The default implementation of
 ``$this->_outputMessage(<view-filename>)`` will just display the

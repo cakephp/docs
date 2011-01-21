@@ -28,21 +28,6 @@ you need to setup your model like this:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ``var $actsAs = array(``
-#. ``'Translate' => array(``
-#. ``'name'``
-#. ``)``
-#. ``);``
-#. ````
-#. ``// Use a different model (and table)``
-#. ``var $translateModel = 'PostI18n';``
-#. ``}``
-#. ``?>``
-
 **Important** is that you have to pluralize the table. It is now a
 usual model and can be treated as such and thus comes with the
 conventions involved. The table schema itself must be identical
@@ -67,14 +52,6 @@ Make sure that you change the ``$displayField`` to ``'field'``.
     }
     // filename: post_i18n.php
     ?>
-
-
-#. ``<?php``
-#. ``class PostI18n extends AppModel {``
-#. ``var $displayField = 'field'; // important``
-#. ``}``
-#. ``// filename: post_i18n.php``
-#. ``?>``
 
 That's all it takes. You can also add all other model stuff here
 like $useTable. But for better consistency we could do that in the
@@ -105,24 +82,6 @@ $translateTable in your model, like so:
         var $translateTable = 'post_translations';
     }
     ?>
-
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ``var $actsAs = array(``
-#. ``'Translate' => array(``
-#. ``'name'``
-#. ``)``
-#. ``);``
-#. ````
-#. ``// Use a different model``
-#. ``var $translateModel = 'PostI18n';``
-#. ````
-#. ``// Use a different table for translateModel``
-#. ``var $translateTable = 'post_translations';``
-#. ``}``
-#. ``?>``
 
 Please note that **you can't use $translateTable alone**. If you
 don't intend to use a custom ``$translateModel`` then leave this
@@ -160,21 +119,6 @@ you need to setup your model like this:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ``var $actsAs = array(``
-#. ``'Translate' => array(``
-#. ``'name'``
-#. ``)``
-#. ``);``
-#. ````
-#. ``// Use a different model (and table)``
-#. ``var $translateModel = 'PostI18n';``
-#. ``}``
-#. ``?>``
-
 **Important** is that you have to pluralize the table. It is now a
 usual model and can be treated as such and thus comes with the
 conventions involved. The table schema itself must be identical
@@ -199,14 +143,6 @@ Make sure that you change the ``$displayField`` to ``'field'``.
     }
     // filename: post_i18n.php
     ?>
-
-
-#. ``<?php``
-#. ``class PostI18n extends AppModel {``
-#. ``var $displayField = 'field'; // important``
-#. ``}``
-#. ``// filename: post_i18n.php``
-#. ``?>``
 
 That's all it takes. You can also add all other model stuff here
 like $useTable. But for better consistency we could do that in the
@@ -237,24 +173,6 @@ $translateTable in your model, like so:
         var $translateTable = 'post_translations';
     }
     ?>
-
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ``var $actsAs = array(``
-#. ``'Translate' => array(``
-#. ``'name'``
-#. ``)``
-#. ``);``
-#. ````
-#. ``// Use a different model``
-#. ``var $translateModel = 'PostI18n';``
-#. ````
-#. ``// Use a different table for translateModel``
-#. ``var $translateTable = 'post_translations';``
-#. ``}``
-#. ``?>``
 
 Please note that **you can't use $translateTable alone**. If you
 don't intend to use a custom ``$translateModel`` then leave this

@@ -66,21 +66,6 @@ multidimensional array used to define association specifics.
     
     ?>
 
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $hasOne = 'Profile';``
-#. ``var $hasMany = array(``
-#. ``'Recipe' => array(``
-#. ``'className'  => 'Recipe',``
-#. ``'conditions' => array('Recipe.approved' => '1'),``
-#. ``'order'      => 'Recipe.created DESC'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
-
 In the above example, the first instance of the word 'Recipe' is
 what is termed an 'Alias'. This is an identifier for the
 relationship and can be anything you choose. Usually, you will
@@ -109,26 +94,6 @@ appropriate to have
     }
     ?>
 
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $hasMany = array(``
-#. ``'MyRecipe' => 'Recipe',``
-#. ``);``
-#. ``var $hasAndBelongsToMany => array('Member' => 'User');``
-#. ``}``
-#. ``class Group extends AppModel {``
-#. ``var $name = 'Group';``
-#. ``var $hasMany = array(``
-#. ``'MyRecipe' => array(``
-#. ``'className'  => 'Recipe',``
-#. ``)``
-#. ``);``
-#. ``var $hasAndBelongsToMany => array('MemberOf' => 'Group');``
-#. ``}``
-#. ``?>``
-
 but the following will not work well in all circumstances:
 ::
 
@@ -152,26 +117,6 @@ but the following will not work well in all circumstances:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $hasMany = array(``
-#. ``'MyRecipe' => 'Recipe',``
-#. ``);``
-#. ``var $hasAndBelongsToMany => array('Member' => 'User');``
-#. ``}``
-#. ``class Group extends AppModel {``
-#. ``var $name = 'Group';``
-#. ``var $hasMany = array(``
-#. ``'MyRecipe' => array(``
-#. ``'className'  => 'Recipe',``
-#. ``)``
-#. ``);``
-#. ``var $hasAndBelongsToMany => array('Member' => 'Group');``
-#. ``}``
-#. ``?>``
-
 because here we have the alias 'Member' referring to both the User
 (in Group) and the Group (in User) model in the HABTM associations.
 Choosing non-unique names for model aliases across models can cause
@@ -183,9 +128,6 @@ objects. So for example in your ``User`` model you can access the
 
     $this->Recipe->someFunction();
 
-
-#. ``$this->Recipe->someFunction();``
-
 Similarly in your controller you can access an associated model
 simply by following your model associations and without adding it
 to the ``$uses`` array:
@@ -193,9 +135,6 @@ to the ``$uses`` array:
 ::
 
     $this->User->Recipe->someFunction();
-
-
-#. ``$this->User->Recipe->someFunction();``
 
 Remember that associations are defined 'one way'. If you define
 User hasMany Recipe that has no effect on the Recipe Model. You
@@ -237,14 +176,6 @@ property to the model class. Remember to have a Profile model in
     }
     ?>
 
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $hasOne = 'Profile';``
-#. ``}``
-#. ``?>``
-
 There are two ways to describe this relationship in your model
 files. The simplest method is to set the $hasOne attribute to a
 string containing the classname of the associated model, as we’ve
@@ -269,20 +200,6 @@ to include only certain records.
         );    
     }
     ?>
-
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $hasOne = array(``
-#. ``'Profile' => array(``
-#. ``'className'    => 'Profile',``
-#. ``'conditions'   => array('Profile.published' => '1'),``
-#. ``'dependent'    => true``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 Possible keys for hasOne association arrays include:
 
@@ -369,14 +286,6 @@ We can define the belongsTo association in our Profile model at
     }
     ?>
 
-
-#. ``<?php``
-#. ``class Profile extends AppModel {``
-#. ``var $name = 'Profile';``
-#. ``var $belongsTo = 'User';``
-#. ``}``
-#. ``?>``
-
 We can also define a more specific relationship using array
 syntax:
 
@@ -394,19 +303,6 @@ syntax:
         );  
     }
     ?>
-
-
-#. ``<?php``
-#. ``class Profile extends AppModel {``
-#. ``var $name = 'Profile';``
-#. ``var $belongsTo = array(``
-#. ``'User' => array(``
-#. ``'className'    => 'User',``
-#. ``'foreignKey'    => 'user_id'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 Possible keys for belongsTo association arrays include:
 
@@ -497,14 +393,6 @@ We can define the hasMany association in our User model at
     }
     ?>
 
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $hasMany = 'Comment';``
-#. ``}``
-#. ``?>``
-
 We can also define a more specific relationship using array
 syntax:
 
@@ -526,23 +414,6 @@ syntax:
         );  
     }
     ?>
-
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $hasMany = array(``
-#. ``'Comment' => array(``
-#. ``'className'     => 'Comment',``
-#. ``'foreignKey'    => 'user_id',``
-#. ``'conditions'    => array('Comment.status' => '1'),``
-#. ``'order'    => 'Comment.created DESC',``
-#. ``'limit'        => '5',``
-#. ``'dependent'=> true``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 Possible keys for hasMany association arrays include:
 
@@ -583,9 +454,6 @@ Possible keys for hasMany association arrays include:
    ::
 
        SELECT Orange.* from oranges as Orange WHERE Orange.apple_id = {$__cakeID__$};
-
-   
-   #. ``SELECT Orange.* from oranges as Orange WHERE Orange.apple_id = {$__cakeID__$};``
 
 
 Once this association has been defined, find operations on the User
@@ -716,31 +584,6 @@ array syntax this time:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class Recipe extends AppModel {``
-#. ``var $name = 'Recipe';``
-#. ``var $hasAndBelongsToMany = array(``
-#. ``'Tag' =>``
-#. ``array(``
-#. ``'className'              => 'Tag',``
-#. ``'joinTable'              => 'recipes_tags',``
-#. ``'foreignKey'             => 'recipe_id',``
-#. ``'associationForeignKey'  => 'tag_id',``
-#. ``'unique'                 => true,``
-#. ``'conditions'             => '',``
-#. ``'fields'                 => '',``
-#. ``'order'                  => '',``
-#. ``'limit'                  => '',``
-#. ``'offset'                 => '',``
-#. ``'finderQuery'            => '',``
-#. ``'deleteQuery'            => '',``
-#. ``'insertQuery'            => ''``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
-
 Possible keys for HABTM association arrays include:
 
 
@@ -842,13 +685,6 @@ apply a condition to the association itself:
     )));
     $this->Recipe->find('all');
 
-
-#. ``$this->Recipe->bindModel(array(``
-#. ``'hasAndBelongsToMany' => array(``
-#. ``'Tag' => array('conditions'=>array('Tag.name'=>'Dessert'))``
-#. ``)));``
-#. ``$this->Recipe->find('all');``
-
 ::
 
     //Data Returned
@@ -896,9 +732,6 @@ which will also give us all of the associated Recipes.
 
     $this->Recipe->Tag->find('all', array('conditions'=>array('Tag.name'=>'Dessert')));
 
-
-#. ``$this->Recipe->Tag->find('all', array('conditions'=>array('Tag.name'=>'Dessert')));``
-
 We could also use the join table model (which CakePHP provides for
 us), to search for a given ID.
 
@@ -909,13 +742,6 @@ us), to search for a given ID.
             'fields' => array('Recipe.*'),
             'conditions'=>array('RecipesTag.tag_id'=>124) // id of Dessert
     ));
-
-
-#. ``$this->Recipe->bindModel(array('hasOne' => array('RecipesTag')));``
-#. ``$this->Recipe->find('all', array(``
-#. ``'fields' => array('Recipe.*'),``
-#. ``'conditions'=>array('RecipesTag.tag_id'=>124) // id of Dessert``
-#. ``));``
 
 It's also possible to create an exotic association for the purpose
 of creating as many joins as necessary to allow filtering, for
@@ -935,20 +761,6 @@ example:
             'fields' => array('Recipe.*'),
             'conditions'=>array('FilterTag.name'=>'Dessert')
     ));
-
-
-#. ``$this->Recipe->bindModel(array(``
-#. ``'hasOne' => array(``
-#. ``'RecipesTag',``
-#. ``'FilterTag' => array(``
-#. ``'className' => 'Tag',``
-#. ``'foreignKey' => false,``
-#. ``'conditions' => array('FilterTag.id = RecipesTag.tag_id')``
-#. ``))));``
-#. ``$this->Recipe->find('all', array(``
-#. ``'fields' => array('Recipe.*'),``
-#. ``'conditions'=>array('FilterTag.name'=>'Dessert')``
-#. ``));``
 
 Both of which will return the following data:
 
@@ -1095,59 +907,6 @@ model CourseMembership. Take a look at the following models.
                 );
             }   
 
-
-#. ``student.php``
-#. ````
-#. ``class Student extends AppModel``
-#. ``{``
-#. ``public $hasMany = array(``
-#. ``'CourseMembership'``
-#. ``);``
-#. ``public $validate = array(``
-#. ``'first_name' => array(``
-#. ``'rule' => 'notEmpty',``
-#. ``'message' => 'A first name is required'``
-#. ``),``
-#. ``'last_name' => array(``
-#. ``'rule' => 'notEmpty',``
-#. ``'message' => 'A last name is required'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ````
-#. ``course.php``
-#. ````
-#. ``class Course extends AppModel``
-#. ``{``
-#. ``public $hasMany = array(``
-#. ``'CourseMembership'``
-#. ``);``
-#. ``public $validate = array(``
-#. ``'name' => array(``
-#. ``'rule' => 'notEmpty',``
-#. ``'message' => 'A course name is required'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ````
-#. ``course_membership.php``
-#. ``class CourseMembership extends AppModel``
-#. ``{``
-#. ``public $belongsTo = array(``
-#. ``'Student', 'Course'``
-#. ``);``
-#. ``public $validate = array(``
-#. ``'days_attended' => array(``
-#. ``'rule' => 'numeric',``
-#. ``'message' => 'Enter the number of days the student attended'``
-#. ``),``
-#. ``'grade' => array(``
-#. ``'rule' => 'notEmpty',``
-#. ``'message' => 'Select the grade the student received'``
-#. ``)``
-#. ``);``
-#. ``}``
-
 The CourseMembership join model uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
@@ -1198,40 +957,6 @@ a look at the following code.
             <button type="submit">Save</button>
         <?php echo $form->end(); ?>
         
-
-
-#. ``controllers/course_membership_controller.php``
-#. ````
-#. ``class CourseMembershipsController extends AppController``
-#. ``{``
-#. ``public $uses = array('CourseMembership');``
-#. ````
-#. ``public function index() {``
-#. ``$this->set('course_memberships_list', $this->CourseMembership->find('all'));``
-#. ``}``
-#. ````
-#. ``public function add() {``
-#. ````
-#. ``if (! empty($this->data)) {``
-#. ````
-#. ``if ($this->CourseMembership->saveAll(``
-#. ``$this->data, array('validate' => 'first'))) {``
-#. ````
-#. ``$this->redirect(array('action' => 'index'));``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ````
-#. ``views/course_memberships/add.ctp``
-#. ``<?php echo $form->create('CourseMembership'); ?>``
-#. ``<?php echo $form->input('Student.first_name'); ?>``
-#. ``<?php echo $form->input('Student.last_name'); ?>``
-#. ``<?php echo $form->input('Course.name'); ?>``
-#. ``<?php echo $form->input('CourseMembership.days_attended'); ?>``
-#. ``<?php echo $form->input('CourseMembership.grade'); ?>``
-#. ``<button type="submit">Save</button>``
-#. ``<?php echo $form->end(); ?>``
 
 You can see that the form uses the form helper's dot notation to
 build up the data array for the controller's save which looks a bit
@@ -1319,17 +1044,6 @@ then the two meta-fields for the CourseMembership, e.g.
             <button type="submit">Save</button>
         <?php echo $form->end(); ?>
 
-
-#. ``views/course_memberships/add.ctp``
-#. ````
-#. ``<?php echo $form->create('CourseMembership'); ?>``
-#. ``<?php echo $form->input('Student.id', array('type' => 'text', 'label' => 'Student ID', 'default' => 1)); ?>``
-#. ``<?php echo $form->input('Course.id', array('type' => 'text', 'label' => 'Course ID', 'default' => 1)); ?>``
-#. ``<?php echo $form->input('CourseMembership.days_attended'); ?>``
-#. ``<?php echo $form->input('CourseMembership.grade'); ?>``
-#. ``<button type="submit">Save</button>``
-#. ``<?php echo $form->end(); ?>``
-
 And the resultant POST
 
 ::
@@ -1408,26 +1122,6 @@ work. We'll start with two models:
     
     ?>
 
-
-#. ``<?php``
-#. ``class Leader extends AppModel {``
-#. ``var $name = 'Leader';``
-#. ````
-#. ``var $hasMany = array(``
-#. ``'Follower' => array(``
-#. ``'className' => 'Follower',``
-#. ``'order'     => 'Follower.rank'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
-#. `` ``
-#. ``<?php``
-#. ``class Follower extends AppModel {``
-#. ``var $name = 'Follower';``
-#. ``}``
-#. ``?>``
-
 Now, in the LeadersController, we can use the find() method in the
 Leader model to fetch a Leader and its associated followers. As you
 can see above, the association array in the Leader model defines a
@@ -1460,30 +1154,6 @@ controller action.
         $this->Leader->find('all');
     }
 
-
-#. ``function someAction() {``
-#. ``// This fetches Leaders, and their associated Followers``
-#. ``$this->Leader->find('all');``
-#. ````
-#. ``// Let's remove the hasMany...``
-#. ``$this->Leader->unbindModel(``
-#. ``array('hasMany' => array('Follower'))``
-#. ``);``
-#. ````
-#. ``// Now using a find function will return``
-#. ``// Leaders, with no Followers``
-#. ``$this->Leader->find('all');``
-#. ````
-#. ``// NOTE: unbindModel only affects the very next``
-#. ``// find function. An additional find call will use``
-#. ``// the configured association information.``
-#. ````
-#. ``// We've already used find('all') after unbindModel(),``
-#. ``// so this will fetch Leaders with associated``
-#. ``// Followers once again...``
-#. ``$this->Leader->find('all');``
-#. ``}``
-
 Removing or adding associations using bind- and unbindModel() only
 works for the *next* find operation only unless the second
 parameter has been set to false. If the second parameter has been
@@ -1497,11 +1167,6 @@ Here’s the basic usage pattern for unbindModel():
     $this->Model->unbindModel(
         array('associationType' => array('associatedModelClassName'))
     );
-
-
-#. ``$this->Model->unbindModel(``
-#. ``array('associationType' => array('associatedModelClassName'))``
-#. ``);``
 
 Now that we've successfully removed an association on the fly,
 let's add one. Our as-of-yet unprincipled Leader needs some
@@ -1536,30 +1201,6 @@ LeadersController:
         $this->Leader->find('all');
     }
 
-
-#. ``function anotherAction() {``
-#. ``// There is no Leader hasMany Principles in``
-#. ``// the leader.php model file, so a find here,``
-#. ``// only fetches Leaders.``
-#. ``$this->Leader->find('all');``
-#. ````
-#. ``// Let's use bindModel() to add a new association``
-#. ``// to the Leader model:``
-#. ``$this->Leader->bindModel(``
-#. ``array('hasMany' => array(``
-#. ``'Principle' => array(``
-#. ``'className' => 'Principle'``
-#. ``)``
-#. ``)``
-#. ``)``
-#. ``);``
-#. ````
-#. ``// Now that we're associated correctly,``
-#. ``// we can use a single find function to fetch``
-#. ``// Leaders with their associated principles:``
-#. ``$this->Leader->find('all');``
-#. ``}``
-
 There you have it. The basic usage for bindModel() is the
 encapsulation of a normal association array inside an array whose
 key is named after the type of association you are trying to
@@ -1575,16 +1216,6 @@ create:
                 )
             )
         );
-
-
-#. ``$this->Model->bindModel(``
-#. ``array('associationName' => array(``
-#. ``'associatedModelClassName' => array(``
-#. ``// normal association keys go here...``
-#. ``)``
-#. ``)``
-#. ``)``
-#. ``);``
 
 Even though the newly bound model doesn't need any sort of
 association definition in its model file, it will still need to be
@@ -1618,23 +1249,6 @@ recipient\_id. Now your Message model can look something like:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class Message extends AppModel {``
-#. ``var $name = 'Message';``
-#. ``var $belongsTo = array(``
-#. ``'Sender' => array(``
-#. ``'className' => 'User',``
-#. ``'foreignKey' => 'user_id'``
-#. ``),``
-#. ``'Recipient' => array(``
-#. ``'className' => 'User',``
-#. ``'foreignKey' => 'recipient_id'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
-
 Recipient is an alias for the User model. Now let's see what the
 User model would look like.
 
@@ -1655,23 +1269,6 @@ User model would look like.
         );
     }
     ?>
-
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $hasMany = array(``
-#. ``'MessageSent' => array(``
-#. ``'className' => 'Message',``
-#. ``'foreignKey' => 'user_id'``
-#. ``),``
-#. ``'MessageReceived' => array(``
-#. ``'className' => 'Message',``
-#. ``'foreignKey' => 'recipient_id'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 It is also possible to create self associations as shown below.
 
@@ -1696,26 +1293,6 @@ It is also possible to create self associations as shown below.
         );
     }
     ?>
-
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ````
-#. ``var $belongsTo = array(``
-#. ``'Parent' => array(``
-#. ``'className' => 'Post',``
-#. ``'foreignKey' => 'parent_id'``
-#. ``)``
-#. ``);``
-#. ``var $hasMany = array(``
-#. ``'Children' => array(``
-#. ``'className' => 'Post',``
-#. ``'foreignKey' => 'parent_id'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 **An alternate method** of associating a model with itself (without
 assuming a parent/child relationship) is to have both the
@@ -1761,43 +1338,6 @@ declare an identical alias, className, and foreignKey [property].
         );
     }
     ?>
-
-
-#. ``<?php``
-#. ``class MySchema extends CakeSchema {``
-#. ``public $users = array (``
-#. ``'id' => array ('type' => 'integer', 'default' => null, 'key' => 'primary'),``
-#. ``'username' => array ('type' => 'string', 'null' => false, 'key' => 'index'),``
-#. ``// more schema properties...``
-#. ``'last_user_id' => array ('type' => 'integer', 'default' => null, 'key' => 'index'),``
-#. ``'indexes' => array (``
-#. ``'PRIMARY' => array ('column' => 'id', 'unique' => true),``
-#. ``// more keys...``
-#. ``'last_user' => array ('column' => 'last_user_id', 'unique' => false)``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``class User extends AppModel {``
-#. ``public $hasMany = array (``
-#. ``'Tag' => array (``
-#. ``'foreignKey' => 'last_user_id'``
-#. ``),``
-#. ``// more hasMany relationships...``
-#. ``'LastUser' => array (``
-#. ``'className' => 'User',``
-#. ``'foreignKey' => 'last_user_id'``
-#. ``)``
-#. ``);``
-#. ``public $belongsTo = array (``
-#. ``// in most cases this would be the only belongsTo relationship for this model``
-#. ``'LastUser' => array (``
-#. ``'className' => 'User',``
-#. ``'foreignKey' => 'last_user_id',``
-#. ``'dependent' => true``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 **Reasoning** [for this particular self-association method]: Say
 there are many models which contain the property
@@ -1852,18 +1392,6 @@ example:
     
     $Item->find('all', $options);
 
-
-#. ``$options['joins'] = array(``
-#. ``array('table' => 'channels',``
-#. ``'alias' => 'Channel',``
-#. ``'type' => 'LEFT',``
-#. ``'conditions' => array(``
-#. ``'Channel.id = Item.channel_id',``
-#. ``)``
-#. ``)``
-#. ``);``
-#. ``$Item->find('all', $options);``
-
 Note that the 'join' arrays are not keyed.
 
 In the above example, a model called Item is left joined to the
@@ -1900,21 +1428,6 @@ fields:
     
     $privateItems = $Item->find('all', $options);
 
-
-#. ``$options['joins'] = array(``
-#. ``array('table' => 'channels',``
-#. ``'alias' => 'Channel',``
-#. ``'type' => 'LEFT',``
-#. ``'conditions' => array(``
-#. ``'Channel.id = Item.channel_id',``
-#. ``)``
-#. ``)``
-#. ``);``
-#. ``$options['conditions'] = array(``
-#. ``'Channel.private' => 1``
-#. ``);``
-#. ``$privateItems = $Item->find('all', $options);``
-
 You could perform several joins as needed in hasBelongsToMany:
 
 Suppose a Book hasAndBelongsToMany Tag association. This relation
@@ -1946,28 +1459,6 @@ table:
     );
     
     $books = $Book->find('all', $options);
-
-
-#. ``$options['joins'] = array(``
-#. ``array('table' => 'books_tags',``
-#. ``'alias' => 'BooksTag',``
-#. ``'type' => 'inner',``
-#. ``'conditions' => array(``
-#. ``'Books.id = BooksTag.books_id'``
-#. ``)``
-#. ``),``
-#. ``array('table' => 'tags',``
-#. ``'alias' => 'Tag',``
-#. ``'type' => 'inner',``
-#. ``'conditions' => array(``
-#. ``'BooksTag.tag_id = Tag.id'``
-#. ``)``
-#. ``)``
-#. ``);``
-#. ``$options['conditions'] = array(``
-#. ``'Tag.tag' => 'Novel'``
-#. ``);``
-#. ``$books = $Book->find('all', $options);``
 
 Using joins with Containable behavior could lead to some SQL errors
 (duplicate tables), so you need to use the joins method as an
@@ -2044,21 +1535,6 @@ multidimensional array used to define association specifics.
     
     ?>
 
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $hasOne = 'Profile';``
-#. ``var $hasMany = array(``
-#. ``'Recipe' => array(``
-#. ``'className'  => 'Recipe',``
-#. ``'conditions' => array('Recipe.approved' => '1'),``
-#. ``'order'      => 'Recipe.created DESC'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
-
 In the above example, the first instance of the word 'Recipe' is
 what is termed an 'Alias'. This is an identifier for the
 relationship and can be anything you choose. Usually, you will
@@ -2087,26 +1563,6 @@ appropriate to have
     }
     ?>
 
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $hasMany = array(``
-#. ``'MyRecipe' => 'Recipe',``
-#. ``);``
-#. ``var $hasAndBelongsToMany => array('Member' => 'User');``
-#. ``}``
-#. ``class Group extends AppModel {``
-#. ``var $name = 'Group';``
-#. ``var $hasMany = array(``
-#. ``'MyRecipe' => array(``
-#. ``'className'  => 'Recipe',``
-#. ``)``
-#. ``);``
-#. ``var $hasAndBelongsToMany => array('MemberOf' => 'Group');``
-#. ``}``
-#. ``?>``
-
 but the following will not work well in all circumstances:
 ::
 
@@ -2130,26 +1586,6 @@ but the following will not work well in all circumstances:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $hasMany = array(``
-#. ``'MyRecipe' => 'Recipe',``
-#. ``);``
-#. ``var $hasAndBelongsToMany => array('Member' => 'User');``
-#. ``}``
-#. ``class Group extends AppModel {``
-#. ``var $name = 'Group';``
-#. ``var $hasMany = array(``
-#. ``'MyRecipe' => array(``
-#. ``'className'  => 'Recipe',``
-#. ``)``
-#. ``);``
-#. ``var $hasAndBelongsToMany => array('Member' => 'Group');``
-#. ``}``
-#. ``?>``
-
 because here we have the alias 'Member' referring to both the User
 (in Group) and the Group (in User) model in the HABTM associations.
 Choosing non-unique names for model aliases across models can cause
@@ -2161,9 +1597,6 @@ objects. So for example in your ``User`` model you can access the
 
     $this->Recipe->someFunction();
 
-
-#. ``$this->Recipe->someFunction();``
-
 Similarly in your controller you can access an associated model
 simply by following your model associations and without adding it
 to the ``$uses`` array:
@@ -2171,9 +1604,6 @@ to the ``$uses`` array:
 ::
 
     $this->User->Recipe->someFunction();
-
-
-#. ``$this->User->Recipe->someFunction();``
 
 Remember that associations are defined 'one way'. If you define
 User hasMany Recipe that has no effect on the Recipe Model. You
@@ -2215,14 +1645,6 @@ property to the model class. Remember to have a Profile model in
     }
     ?>
 
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $hasOne = 'Profile';``
-#. ``}``
-#. ``?>``
-
 There are two ways to describe this relationship in your model
 files. The simplest method is to set the $hasOne attribute to a
 string containing the classname of the associated model, as we’ve
@@ -2247,20 +1669,6 @@ to include only certain records.
         );    
     }
     ?>
-
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $hasOne = array(``
-#. ``'Profile' => array(``
-#. ``'className'    => 'Profile',``
-#. ``'conditions'   => array('Profile.published' => '1'),``
-#. ``'dependent'    => true``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 Possible keys for hasOne association arrays include:
 
@@ -2347,14 +1755,6 @@ We can define the belongsTo association in our Profile model at
     }
     ?>
 
-
-#. ``<?php``
-#. ``class Profile extends AppModel {``
-#. ``var $name = 'Profile';``
-#. ``var $belongsTo = 'User';``
-#. ``}``
-#. ``?>``
-
 We can also define a more specific relationship using array
 syntax:
 
@@ -2372,19 +1772,6 @@ syntax:
         );  
     }
     ?>
-
-
-#. ``<?php``
-#. ``class Profile extends AppModel {``
-#. ``var $name = 'Profile';``
-#. ``var $belongsTo = array(``
-#. ``'User' => array(``
-#. ``'className'    => 'User',``
-#. ``'foreignKey'    => 'user_id'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 Possible keys for belongsTo association arrays include:
 
@@ -2475,14 +1862,6 @@ We can define the hasMany association in our User model at
     }
     ?>
 
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $hasMany = 'Comment';``
-#. ``}``
-#. ``?>``
-
 We can also define a more specific relationship using array
 syntax:
 
@@ -2504,23 +1883,6 @@ syntax:
         );  
     }
     ?>
-
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $hasMany = array(``
-#. ``'Comment' => array(``
-#. ``'className'     => 'Comment',``
-#. ``'foreignKey'    => 'user_id',``
-#. ``'conditions'    => array('Comment.status' => '1'),``
-#. ``'order'    => 'Comment.created DESC',``
-#. ``'limit'        => '5',``
-#. ``'dependent'=> true``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 Possible keys for hasMany association arrays include:
 
@@ -2561,9 +1923,6 @@ Possible keys for hasMany association arrays include:
    ::
 
        SELECT Orange.* from oranges as Orange WHERE Orange.apple_id = {$__cakeID__$};
-
-   
-   #. ``SELECT Orange.* from oranges as Orange WHERE Orange.apple_id = {$__cakeID__$};``
 
 
 Once this association has been defined, find operations on the User
@@ -2694,31 +2053,6 @@ array syntax this time:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class Recipe extends AppModel {``
-#. ``var $name = 'Recipe';``
-#. ``var $hasAndBelongsToMany = array(``
-#. ``'Tag' =>``
-#. ``array(``
-#. ``'className'              => 'Tag',``
-#. ``'joinTable'              => 'recipes_tags',``
-#. ``'foreignKey'             => 'recipe_id',``
-#. ``'associationForeignKey'  => 'tag_id',``
-#. ``'unique'                 => true,``
-#. ``'conditions'             => '',``
-#. ``'fields'                 => '',``
-#. ``'order'                  => '',``
-#. ``'limit'                  => '',``
-#. ``'offset'                 => '',``
-#. ``'finderQuery'            => '',``
-#. ``'deleteQuery'            => '',``
-#. ``'insertQuery'            => ''``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
-
 Possible keys for HABTM association arrays include:
 
 
@@ -2820,13 +2154,6 @@ apply a condition to the association itself:
     )));
     $this->Recipe->find('all');
 
-
-#. ``$this->Recipe->bindModel(array(``
-#. ``'hasAndBelongsToMany' => array(``
-#. ``'Tag' => array('conditions'=>array('Tag.name'=>'Dessert'))``
-#. ``)));``
-#. ``$this->Recipe->find('all');``
-
 ::
 
     //Data Returned
@@ -2874,9 +2201,6 @@ which will also give us all of the associated Recipes.
 
     $this->Recipe->Tag->find('all', array('conditions'=>array('Tag.name'=>'Dessert')));
 
-
-#. ``$this->Recipe->Tag->find('all', array('conditions'=>array('Tag.name'=>'Dessert')));``
-
 We could also use the join table model (which CakePHP provides for
 us), to search for a given ID.
 
@@ -2887,13 +2211,6 @@ us), to search for a given ID.
             'fields' => array('Recipe.*'),
             'conditions'=>array('RecipesTag.tag_id'=>124) // id of Dessert
     ));
-
-
-#. ``$this->Recipe->bindModel(array('hasOne' => array('RecipesTag')));``
-#. ``$this->Recipe->find('all', array(``
-#. ``'fields' => array('Recipe.*'),``
-#. ``'conditions'=>array('RecipesTag.tag_id'=>124) // id of Dessert``
-#. ``));``
 
 It's also possible to create an exotic association for the purpose
 of creating as many joins as necessary to allow filtering, for
@@ -2913,20 +2230,6 @@ example:
             'fields' => array('Recipe.*'),
             'conditions'=>array('FilterTag.name'=>'Dessert')
     ));
-
-
-#. ``$this->Recipe->bindModel(array(``
-#. ``'hasOne' => array(``
-#. ``'RecipesTag',``
-#. ``'FilterTag' => array(``
-#. ``'className' => 'Tag',``
-#. ``'foreignKey' => false,``
-#. ``'conditions' => array('FilterTag.id = RecipesTag.tag_id')``
-#. ``))));``
-#. ``$this->Recipe->find('all', array(``
-#. ``'fields' => array('Recipe.*'),``
-#. ``'conditions'=>array('FilterTag.name'=>'Dessert')``
-#. ``));``
 
 Both of which will return the following data:
 
@@ -3073,59 +2376,6 @@ model CourseMembership. Take a look at the following models.
                 );
             }   
 
-
-#. ``student.php``
-#. ````
-#. ``class Student extends AppModel``
-#. ``{``
-#. ``public $hasMany = array(``
-#. ``'CourseMembership'``
-#. ``);``
-#. ``public $validate = array(``
-#. ``'first_name' => array(``
-#. ``'rule' => 'notEmpty',``
-#. ``'message' => 'A first name is required'``
-#. ``),``
-#. ``'last_name' => array(``
-#. ``'rule' => 'notEmpty',``
-#. ``'message' => 'A last name is required'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ````
-#. ``course.php``
-#. ````
-#. ``class Course extends AppModel``
-#. ``{``
-#. ``public $hasMany = array(``
-#. ``'CourseMembership'``
-#. ``);``
-#. ``public $validate = array(``
-#. ``'name' => array(``
-#. ``'rule' => 'notEmpty',``
-#. ``'message' => 'A course name is required'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ````
-#. ``course_membership.php``
-#. ``class CourseMembership extends AppModel``
-#. ``{``
-#. ``public $belongsTo = array(``
-#. ``'Student', 'Course'``
-#. ``);``
-#. ``public $validate = array(``
-#. ``'days_attended' => array(``
-#. ``'rule' => 'numeric',``
-#. ``'message' => 'Enter the number of days the student attended'``
-#. ``),``
-#. ``'grade' => array(``
-#. ``'rule' => 'notEmpty',``
-#. ``'message' => 'Select the grade the student received'``
-#. ``)``
-#. ``);``
-#. ``}``
-
 The CourseMembership join model uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
@@ -3176,40 +2426,6 @@ a look at the following code.
             <button type="submit">Save</button>
         <?php echo $form->end(); ?>
         
-
-
-#. ``controllers/course_membership_controller.php``
-#. ````
-#. ``class CourseMembershipsController extends AppController``
-#. ``{``
-#. ``public $uses = array('CourseMembership');``
-#. ````
-#. ``public function index() {``
-#. ``$this->set('course_memberships_list', $this->CourseMembership->find('all'));``
-#. ``}``
-#. ````
-#. ``public function add() {``
-#. ````
-#. ``if (! empty($this->data)) {``
-#. ````
-#. ``if ($this->CourseMembership->saveAll(``
-#. ``$this->data, array('validate' => 'first'))) {``
-#. ````
-#. ``$this->redirect(array('action' => 'index'));``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ````
-#. ``views/course_memberships/add.ctp``
-#. ``<?php echo $form->create('CourseMembership'); ?>``
-#. ``<?php echo $form->input('Student.first_name'); ?>``
-#. ``<?php echo $form->input('Student.last_name'); ?>``
-#. ``<?php echo $form->input('Course.name'); ?>``
-#. ``<?php echo $form->input('CourseMembership.days_attended'); ?>``
-#. ``<?php echo $form->input('CourseMembership.grade'); ?>``
-#. ``<button type="submit">Save</button>``
-#. ``<?php echo $form->end(); ?>``
 
 You can see that the form uses the form helper's dot notation to
 build up the data array for the controller's save which looks a bit
@@ -3297,17 +2513,6 @@ then the two meta-fields for the CourseMembership, e.g.
             <button type="submit">Save</button>
         <?php echo $form->end(); ?>
 
-
-#. ``views/course_memberships/add.ctp``
-#. ````
-#. ``<?php echo $form->create('CourseMembership'); ?>``
-#. ``<?php echo $form->input('Student.id', array('type' => 'text', 'label' => 'Student ID', 'default' => 1)); ?>``
-#. ``<?php echo $form->input('Course.id', array('type' => 'text', 'label' => 'Course ID', 'default' => 1)); ?>``
-#. ``<?php echo $form->input('CourseMembership.days_attended'); ?>``
-#. ``<?php echo $form->input('CourseMembership.grade'); ?>``
-#. ``<button type="submit">Save</button>``
-#. ``<?php echo $form->end(); ?>``
-
 And the resultant POST
 
 ::
@@ -3386,26 +2591,6 @@ work. We'll start with two models:
     
     ?>
 
-
-#. ``<?php``
-#. ``class Leader extends AppModel {``
-#. ``var $name = 'Leader';``
-#. ````
-#. ``var $hasMany = array(``
-#. ``'Follower' => array(``
-#. ``'className' => 'Follower',``
-#. ``'order'     => 'Follower.rank'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
-#. `` ``
-#. ``<?php``
-#. ``class Follower extends AppModel {``
-#. ``var $name = 'Follower';``
-#. ``}``
-#. ``?>``
-
 Now, in the LeadersController, we can use the find() method in the
 Leader model to fetch a Leader and its associated followers. As you
 can see above, the association array in the Leader model defines a
@@ -3438,30 +2623,6 @@ controller action.
         $this->Leader->find('all');
     }
 
-
-#. ``function someAction() {``
-#. ``// This fetches Leaders, and their associated Followers``
-#. ``$this->Leader->find('all');``
-#. ````
-#. ``// Let's remove the hasMany...``
-#. ``$this->Leader->unbindModel(``
-#. ``array('hasMany' => array('Follower'))``
-#. ``);``
-#. ````
-#. ``// Now using a find function will return``
-#. ``// Leaders, with no Followers``
-#. ``$this->Leader->find('all');``
-#. ````
-#. ``// NOTE: unbindModel only affects the very next``
-#. ``// find function. An additional find call will use``
-#. ``// the configured association information.``
-#. ````
-#. ``// We've already used find('all') after unbindModel(),``
-#. ``// so this will fetch Leaders with associated``
-#. ``// Followers once again...``
-#. ``$this->Leader->find('all');``
-#. ``}``
-
 Removing or adding associations using bind- and unbindModel() only
 works for the *next* find operation only unless the second
 parameter has been set to false. If the second parameter has been
@@ -3475,11 +2636,6 @@ Here’s the basic usage pattern for unbindModel():
     $this->Model->unbindModel(
         array('associationType' => array('associatedModelClassName'))
     );
-
-
-#. ``$this->Model->unbindModel(``
-#. ``array('associationType' => array('associatedModelClassName'))``
-#. ``);``
 
 Now that we've successfully removed an association on the fly,
 let's add one. Our as-of-yet unprincipled Leader needs some
@@ -3514,30 +2670,6 @@ LeadersController:
         $this->Leader->find('all');
     }
 
-
-#. ``function anotherAction() {``
-#. ``// There is no Leader hasMany Principles in``
-#. ``// the leader.php model file, so a find here,``
-#. ``// only fetches Leaders.``
-#. ``$this->Leader->find('all');``
-#. ````
-#. ``// Let's use bindModel() to add a new association``
-#. ``// to the Leader model:``
-#. ``$this->Leader->bindModel(``
-#. ``array('hasMany' => array(``
-#. ``'Principle' => array(``
-#. ``'className' => 'Principle'``
-#. ``)``
-#. ``)``
-#. ``)``
-#. ``);``
-#. ````
-#. ``// Now that we're associated correctly,``
-#. ``// we can use a single find function to fetch``
-#. ``// Leaders with their associated principles:``
-#. ``$this->Leader->find('all');``
-#. ``}``
-
 There you have it. The basic usage for bindModel() is the
 encapsulation of a normal association array inside an array whose
 key is named after the type of association you are trying to
@@ -3553,16 +2685,6 @@ create:
                 )
             )
         );
-
-
-#. ``$this->Model->bindModel(``
-#. ``array('associationName' => array(``
-#. ``'associatedModelClassName' => array(``
-#. ``// normal association keys go here...``
-#. ``)``
-#. ``)``
-#. ``)``
-#. ``);``
 
 Even though the newly bound model doesn't need any sort of
 association definition in its model file, it will still need to be
@@ -3596,23 +2718,6 @@ recipient\_id. Now your Message model can look something like:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class Message extends AppModel {``
-#. ``var $name = 'Message';``
-#. ``var $belongsTo = array(``
-#. ``'Sender' => array(``
-#. ``'className' => 'User',``
-#. ``'foreignKey' => 'user_id'``
-#. ``),``
-#. ``'Recipient' => array(``
-#. ``'className' => 'User',``
-#. ``'foreignKey' => 'recipient_id'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
-
 Recipient is an alias for the User model. Now let's see what the
 User model would look like.
 
@@ -3633,23 +2738,6 @@ User model would look like.
         );
     }
     ?>
-
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $hasMany = array(``
-#. ``'MessageSent' => array(``
-#. ``'className' => 'Message',``
-#. ``'foreignKey' => 'user_id'``
-#. ``),``
-#. ``'MessageReceived' => array(``
-#. ``'className' => 'Message',``
-#. ``'foreignKey' => 'recipient_id'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 It is also possible to create self associations as shown below.
 
@@ -3674,26 +2762,6 @@ It is also possible to create self associations as shown below.
         );
     }
     ?>
-
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ````
-#. ``var $belongsTo = array(``
-#. ``'Parent' => array(``
-#. ``'className' => 'Post',``
-#. ``'foreignKey' => 'parent_id'``
-#. ``)``
-#. ``);``
-#. ``var $hasMany = array(``
-#. ``'Children' => array(``
-#. ``'className' => 'Post',``
-#. ``'foreignKey' => 'parent_id'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 **An alternate method** of associating a model with itself (without
 assuming a parent/child relationship) is to have both the
@@ -3739,43 +2807,6 @@ declare an identical alias, className, and foreignKey [property].
         );
     }
     ?>
-
-
-#. ``<?php``
-#. ``class MySchema extends CakeSchema {``
-#. ``public $users = array (``
-#. ``'id' => array ('type' => 'integer', 'default' => null, 'key' => 'primary'),``
-#. ``'username' => array ('type' => 'string', 'null' => false, 'key' => 'index'),``
-#. ``// more schema properties...``
-#. ``'last_user_id' => array ('type' => 'integer', 'default' => null, 'key' => 'index'),``
-#. ``'indexes' => array (``
-#. ``'PRIMARY' => array ('column' => 'id', 'unique' => true),``
-#. ``// more keys...``
-#. ``'last_user' => array ('column' => 'last_user_id', 'unique' => false)``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``class User extends AppModel {``
-#. ``public $hasMany = array (``
-#. ``'Tag' => array (``
-#. ``'foreignKey' => 'last_user_id'``
-#. ``),``
-#. ``// more hasMany relationships...``
-#. ``'LastUser' => array (``
-#. ``'className' => 'User',``
-#. ``'foreignKey' => 'last_user_id'``
-#. ``)``
-#. ``);``
-#. ``public $belongsTo = array (``
-#. ``// in most cases this would be the only belongsTo relationship for this model``
-#. ``'LastUser' => array (``
-#. ``'className' => 'User',``
-#. ``'foreignKey' => 'last_user_id',``
-#. ``'dependent' => true``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 **Reasoning** [for this particular self-association method]: Say
 there are many models which contain the property
@@ -3830,18 +2861,6 @@ example:
     
     $Item->find('all', $options);
 
-
-#. ``$options['joins'] = array(``
-#. ``array('table' => 'channels',``
-#. ``'alias' => 'Channel',``
-#. ``'type' => 'LEFT',``
-#. ``'conditions' => array(``
-#. ``'Channel.id = Item.channel_id',``
-#. ``)``
-#. ``)``
-#. ``);``
-#. ``$Item->find('all', $options);``
-
 Note that the 'join' arrays are not keyed.
 
 In the above example, a model called Item is left joined to the
@@ -3878,21 +2897,6 @@ fields:
     
     $privateItems = $Item->find('all', $options);
 
-
-#. ``$options['joins'] = array(``
-#. ``array('table' => 'channels',``
-#. ``'alias' => 'Channel',``
-#. ``'type' => 'LEFT',``
-#. ``'conditions' => array(``
-#. ``'Channel.id = Item.channel_id',``
-#. ``)``
-#. ``)``
-#. ``);``
-#. ``$options['conditions'] = array(``
-#. ``'Channel.private' => 1``
-#. ``);``
-#. ``$privateItems = $Item->find('all', $options);``
-
 You could perform several joins as needed in hasBelongsToMany:
 
 Suppose a Book hasAndBelongsToMany Tag association. This relation
@@ -3924,28 +2928,6 @@ table:
     );
     
     $books = $Book->find('all', $options);
-
-
-#. ``$options['joins'] = array(``
-#. ``array('table' => 'books_tags',``
-#. ``'alias' => 'BooksTag',``
-#. ``'type' => 'inner',``
-#. ``'conditions' => array(``
-#. ``'Books.id = BooksTag.books_id'``
-#. ``)``
-#. ``),``
-#. ``array('table' => 'tags',``
-#. ``'alias' => 'Tag',``
-#. ``'type' => 'inner',``
-#. ``'conditions' => array(``
-#. ``'BooksTag.tag_id = Tag.id'``
-#. ``)``
-#. ``)``
-#. ``);``
-#. ``$options['conditions'] = array(``
-#. ``'Tag.tag' => 'Novel'``
-#. ``);``
-#. ``$books = $Book->find('all', $options);``
 
 Using joins with Containable behavior could lead to some SQL errors
 (duplicate tables), so you need to use the joins method as an

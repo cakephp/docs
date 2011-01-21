@@ -39,16 +39,6 @@ connection to contain any test tables like the one below:
             'database' => 'databaseName'
         );
 
-
-#. ``var $test = array(``
-#. ``'driver' => 'mysql',``
-#. ``'persistent' => false,``
-#. ``'host' => 'dbhost',``
-#. ``'login' => 'dblogin',``
-#. ``'password' => 'dbpassword',``
-#. ``'database' => 'databaseName'``
-#. ``);``
-
 If the test database is available and CakePHP can connect to it,
 all tables will be created in this database.
 
@@ -113,16 +103,6 @@ connection to contain any test tables like the one below:
             'password' => 'dbpassword',
             'database' => 'databaseName'
         );
-
-
-#. ``var $test = array(``
-#. ``'driver' => 'mysql',``
-#. ``'persistent' => false,``
-#. ``'host' => 'dbhost',``
-#. ``'login' => 'dblogin',``
-#. ``'password' => 'dbpassword',``
-#. ``'database' => 'databaseName'``
-#. ``);``
 
 If the test database is available and CakePHP can connect to it,
 all tables will be created in this database.

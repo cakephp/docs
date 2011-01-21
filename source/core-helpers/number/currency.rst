@@ -10,9 +10,6 @@ This method is used to display a number in common currency formats
 
     <?php echo $this->Number->currency($number,$currency); ?>
 
-
-#. ``<?php echo $this->Number->currency($number,$currency); ?>``
-
 The first parameter, $number, should be a floating point number
 that represents the amount of money you are expressing. The second
 parameter is used to choose a predefined currency formatting
@@ -59,12 +56,6 @@ a USD formatted number. For example:
      
     //Outputs: 
     FOO 1,234.56
-
-
-#. ``<?php echo $this->Number->currency('1234.56', 'FOO'); ?>``
-#. ````
-#. ``//Outputs:``
-#. ``FOO 1,234.56``
 
 7.7.1 currency
 --------------
@@ -78,9 +69,6 @@ This method is used to display a number in common currency formats
 
     <?php echo $this->Number->currency($number,$currency); ?>
 
-
-#. ``<?php echo $this->Number->currency($number,$currency); ?>``
-
 The first parameter, $number, should be a floating point number
 that represents the amount of money you are expressing. The second
 parameter is used to choose a predefined currency formatting
@@ -127,9 +115,3 @@ a USD formatted number. For example:
      
     //Outputs: 
     FOO 1,234.56
-
-
-#. ``<?php echo $this->Number->currency('1234.56', 'FOO'); ?>``
-#. ````
-#. ``//Outputs:``
-#. ``FOO 1,234.56``

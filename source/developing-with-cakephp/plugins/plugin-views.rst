@@ -14,12 +14,6 @@ well:
     <p>Nothing goes better with Cake than a good pizza!</p>
     <!-- An order form of some sort might go here....-->
 
-
-#. ``// /app/plugins/pizza/views/pizza_orders/index.ctp:``
-#. ``<h1>Order A Pizza</h1>``
-#. ``<p>Nothing goes better with Cake than a good pizza!</p>``
-#. ``<!-- An order form of some sort might go here....-->``
-
 For information on how to use elements from a plugin, look up
 `Requesting Elements from a Plugin </view/1081/Elements>`_
 
@@ -36,9 +30,6 @@ controller you could make the following file:
 ::
 
     /app/views/plugins/pizza/pizza_orders/index.ctp
-
-
-#. ``/app/views/plugins/pizza/pizza_orders/index.ctp``
 
 Creating this file, would allow you to override
 "/app/plugins/pizza/views/pizza\_orders/index.ctp".
@@ -59,12 +50,6 @@ well:
     <p>Nothing goes better with Cake than a good pizza!</p>
     <!-- An order form of some sort might go here....-->
 
-
-#. ``// /app/plugins/pizza/views/pizza_orders/index.ctp:``
-#. ``<h1>Order A Pizza</h1>``
-#. ``<p>Nothing goes better with Cake than a good pizza!</p>``
-#. ``<!-- An order form of some sort might go here....-->``
-
 For information on how to use elements from a plugin, look up
 `Requesting Elements from a Plugin </view/1081/Elements>`_
 
@@ -81,9 +66,6 @@ controller you could make the following file:
 ::
 
     /app/views/plugins/pizza/pizza_orders/index.ctp
-
-
-#. ``/app/views/plugins/pizza/pizza_orders/index.ctp``
 
 Creating this file, would allow you to override
 "/app/plugins/pizza/views/pizza\_orders/index.ctp".

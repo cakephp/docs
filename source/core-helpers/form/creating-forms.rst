@@ -21,9 +21,6 @@ output in the rendered view:
 
     <form id="UserAddForm" method="post" action="/users/add">
 
-
-#. ``<form id="UserAddForm" method="post" action="/users/add">``
-
 You can also pass ``false`` for ``$model``. This will place your
 form data into the array: ``$this->data`` (instead of in the
 sub-array: ``$this->data['Model']``). This can be handy for short
@@ -43,12 +40,6 @@ you are using the default model for the current controller.
      
     //Output:
     <form id="RecipeAddForm" method="post" action="/recipes/add">
-
-
-#. ``<?php echo $this->Form->create('Recipe'); ?>``
-#. ````
-#. ``//Output:``
-#. ``<form id="RecipeAddForm" method="post" action="/recipes/add">``
 
 This will POST the form data to the ``add()`` action of
 RecipesController. However, you can also use the same logic to
@@ -82,26 +73,6 @@ http://site.com/recipes/edit/5, we might get the following:
     <form id="RecipeEditForm" method="post" action="/recipes/edit/5">
     <input type="hidden" name="_method" value="PUT" />
 
-
-#. ``// controllers/recipes_controller.php:``
-#. ``<?php``
-#. ``function edit($id = null) {``
-#. ``if (empty($this->data)) {``
-#. ``$this->data = $this->Recipe->findById($id);``
-#. ``} else {``
-#. ``// Save logic goes here``
-#. ``}``
-#. ``}``
-#. ``?>``
-#. `` ``
-#. ``// views/recipes/edit.ctp:``
-#. ``// Since $this->data['Recipe']['id'] = 5, we should get an edit form``
-#. ``<?php echo $this->Form->create('Recipe'); ?>``
-#. `` ``
-#. ``//Output:``
-#. ``<form id="RecipeEditForm" method="post" action="/recipes/edit/5">``
-#. ``<input type="hidden" name="_method" value="PUT" />``
-
 Since this is an edit form, a hidden input field is generated to
 override the default HTTP method.
 
@@ -125,12 +96,6 @@ accordingly.
     //Output:
     <form id="UserAddForm" method="get" action="/users/add">
 
-
-#. ``<?php echo $this->Form->create('User', array('type' => 'get')); ?>``
-#. ````
-#. ``//Output:``
-#. ``<form id="UserAddForm" method="get" action="/users/add">``
-
 Specifying ‘file’ changes the form submission method to ‘post’, and
 includes an enctype of “multipart/form-data” on the form tag. This
 is to be used if there are any file elements inside the form. The
@@ -143,12 +108,6 @@ not to function.
      
     //Output:
     <form id="UserAddForm" enctype="multipart/form-data" method="post" action="/users/add">
-
-
-#. ``<?php echo $this->Form->create('User', array('type' => 'file')); ?>``
-#. ````
-#. ``//Output:``
-#. ``<form id="UserAddForm" enctype="multipart/form-data" method="post" action="/users/add">``
 
 When using ‘put’ or ‘delete’, your form will be functionally
 equivalent to a 'post' form, but when submitted, the HTTP request
@@ -171,13 +130,6 @@ supply an $options array like the following:
     //Output:
     <form id="UserLoginForm" method="post" action="/users/login">
     </form>
-
-
-#. ``<?php echo $this->Form->create('User', array('action' => 'login')); ?>``
-#. ````
-#. ``//Output:``
-#. ``<form id="UserLoginForm" method="post" action="/users/login">``
-#. ``</form>``
 
 $options[‘url’]
 ~~~~~~~~~~~~~~~
@@ -204,22 +156,6 @@ application, or can point to an external domain.
      
     //Output:
     <form method="get" action="http://www.google.com/search">
-
-
-#. ``<?php echo $this->Form->create(null, array('url' => '/recipes/add')); ?>``
-#. ``// or``
-#. ``<?php echo $this->Form->create(null, array('url' => array('controller' => 'recipes', 'action' => 'add'))); ?>``
-#. `` ``
-#. ``//Output:``
-#. ``<form method="post" action="/recipes/add">``
-#. ````
-#. ``<?php echo $this->Form->create(null, array(``
-#. ``'url' => 'http://www.google.com/search',``
-#. ``'type' => 'get'``
-#. ``)); ?>``
-#. ````
-#. ``//Output:``
-#. ``<form method="get" action="http://www.google.com/search">``
 
 Also check
 `HtmlHelper::url <http://book.cakephp.org/view/1448/url>`_ method
@@ -249,14 +185,6 @@ You can declare a set of default options for ``input()`` with the
             )
         ));
 
-
-#. ``echo $this->Form->create('User', array(``
-#. ``'inputDefaults' => array(``
-#. ``'label' => false,``
-#. ``'div' => false``
-#. ``)``
-#. ``));``
-
 All inputs created from that point forward would inherit the
 options declared in inputDefaults. You can override the
 defaultOptions by declaring the option in the input() call.
@@ -265,10 +193,6 @@ defaultOptions by declaring the option in the input() call.
 
     echo $this->Form->input('password'); // No div, no label
     echo $this->Form->input('username', array('label' => 'Username')); // has a label element
-
-
-#. ``echo $this->Form->input('password'); // No div, no label``
-#. ``echo $this->Form->input('username', array('label' => 'Username')); // has a label element``
 
 7.3.1 Creating Forms
 --------------------
@@ -293,9 +217,6 @@ output in the rendered view:
 
     <form id="UserAddForm" method="post" action="/users/add">
 
-
-#. ``<form id="UserAddForm" method="post" action="/users/add">``
-
 You can also pass ``false`` for ``$model``. This will place your
 form data into the array: ``$this->data`` (instead of in the
 sub-array: ``$this->data['Model']``). This can be handy for short
@@ -315,12 +236,6 @@ you are using the default model for the current controller.
      
     //Output:
     <form id="RecipeAddForm" method="post" action="/recipes/add">
-
-
-#. ``<?php echo $this->Form->create('Recipe'); ?>``
-#. ````
-#. ``//Output:``
-#. ``<form id="RecipeAddForm" method="post" action="/recipes/add">``
 
 This will POST the form data to the ``add()`` action of
 RecipesController. However, you can also use the same logic to
@@ -354,26 +269,6 @@ http://site.com/recipes/edit/5, we might get the following:
     <form id="RecipeEditForm" method="post" action="/recipes/edit/5">
     <input type="hidden" name="_method" value="PUT" />
 
-
-#. ``// controllers/recipes_controller.php:``
-#. ``<?php``
-#. ``function edit($id = null) {``
-#. ``if (empty($this->data)) {``
-#. ``$this->data = $this->Recipe->findById($id);``
-#. ``} else {``
-#. ``// Save logic goes here``
-#. ``}``
-#. ``}``
-#. ``?>``
-#. `` ``
-#. ``// views/recipes/edit.ctp:``
-#. ``// Since $this->data['Recipe']['id'] = 5, we should get an edit form``
-#. ``<?php echo $this->Form->create('Recipe'); ?>``
-#. `` ``
-#. ``//Output:``
-#. ``<form id="RecipeEditForm" method="post" action="/recipes/edit/5">``
-#. ``<input type="hidden" name="_method" value="PUT" />``
-
 Since this is an edit form, a hidden input field is generated to
 override the default HTTP method.
 
@@ -397,12 +292,6 @@ accordingly.
     //Output:
     <form id="UserAddForm" method="get" action="/users/add">
 
-
-#. ``<?php echo $this->Form->create('User', array('type' => 'get')); ?>``
-#. ````
-#. ``//Output:``
-#. ``<form id="UserAddForm" method="get" action="/users/add">``
-
 Specifying ‘file’ changes the form submission method to ‘post’, and
 includes an enctype of “multipart/form-data” on the form tag. This
 is to be used if there are any file elements inside the form. The
@@ -415,12 +304,6 @@ not to function.
      
     //Output:
     <form id="UserAddForm" enctype="multipart/form-data" method="post" action="/users/add">
-
-
-#. ``<?php echo $this->Form->create('User', array('type' => 'file')); ?>``
-#. ````
-#. ``//Output:``
-#. ``<form id="UserAddForm" enctype="multipart/form-data" method="post" action="/users/add">``
 
 When using ‘put’ or ‘delete’, your form will be functionally
 equivalent to a 'post' form, but when submitted, the HTTP request
@@ -443,13 +326,6 @@ supply an $options array like the following:
     //Output:
     <form id="UserLoginForm" method="post" action="/users/login">
     </form>
-
-
-#. ``<?php echo $this->Form->create('User', array('action' => 'login')); ?>``
-#. ````
-#. ``//Output:``
-#. ``<form id="UserLoginForm" method="post" action="/users/login">``
-#. ``</form>``
 
 $options[‘url’]
 ~~~~~~~~~~~~~~~
@@ -476,22 +352,6 @@ application, or can point to an external domain.
      
     //Output:
     <form method="get" action="http://www.google.com/search">
-
-
-#. ``<?php echo $this->Form->create(null, array('url' => '/recipes/add')); ?>``
-#. ``// or``
-#. ``<?php echo $this->Form->create(null, array('url' => array('controller' => 'recipes', 'action' => 'add'))); ?>``
-#. `` ``
-#. ``//Output:``
-#. ``<form method="post" action="/recipes/add">``
-#. ````
-#. ``<?php echo $this->Form->create(null, array(``
-#. ``'url' => 'http://www.google.com/search',``
-#. ``'type' => 'get'``
-#. ``)); ?>``
-#. ````
-#. ``//Output:``
-#. ``<form method="get" action="http://www.google.com/search">``
 
 Also check
 `HtmlHelper::url <http://book.cakephp.org/view/1448/url>`_ method
@@ -521,14 +381,6 @@ You can declare a set of default options for ``input()`` with the
             )
         ));
 
-
-#. ``echo $this->Form->create('User', array(``
-#. ``'inputDefaults' => array(``
-#. ``'label' => false,``
-#. ``'div' => false``
-#. ``)``
-#. ``));``
-
 All inputs created from that point forward would inherit the
 options declared in inputDefaults. You can override the
 defaultOptions by declaring the option in the input() call.
@@ -537,7 +389,3 @@ defaultOptions by declaring the option in the input() call.
 
     echo $this->Form->input('password'); // No div, no label
     echo $this->Form->input('username', array('label' => 'Username')); // has a label element
-
-
-#. ``echo $this->Form->input('password'); // No div, no label``
-#. ``echo $this->Form->input('username', array('label' => 'Username')); // has a label element``

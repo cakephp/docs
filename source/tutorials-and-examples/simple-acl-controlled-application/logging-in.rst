@@ -17,15 +17,6 @@ so already.
     echo $this->Form->end('Login');
     ?>
 
-
-#. ``<h2>Login</h2>``
-#. ``<?php``
-#. ``echo $this->Form->create('User', array('url' => array('controller' => 'users', 'action' =>'login')));``
-#. ``echo $this->Form->input('User.username');``
-#. ``echo $this->Form->input('User.password');``
-#. ``echo $this->Form->end('Login');``
-#. ``?>``
-
 If a user is already logged in, redirect him by adding this to your
 UsersController:
 
@@ -38,14 +29,6 @@ UsersController:
         }
     }       
 
-
-#. ``function login() {``
-#. ``if ($this->Session->read('Auth.User')) {``
-#. ``$this->Session->setFlash('You are logged in!');``
-#. ``$this->redirect('/', null, false);``
-#. ``}``
-#. ``}``
-
 You may also want to add a flash() for Auth messages to your
 layout. Copy the default core layout - found at
 ``cake/libs/view/layouts/default.ctp`` - to your app layouts folder
@@ -55,9 +38,6 @@ if you haven't done so already. In
 ::
 
     echo $this->Session->flash('auth');
-
-
-#. ``echo $this->Session->flash('auth');``
 
 You should now be able to login and everything should work
 auto-magically. When access is denied Auth messages will be
@@ -82,15 +62,6 @@ so already.
     echo $this->Form->end('Login');
     ?>
 
-
-#. ``<h2>Login</h2>``
-#. ``<?php``
-#. ``echo $this->Form->create('User', array('url' => array('controller' => 'users', 'action' =>'login')));``
-#. ``echo $this->Form->input('User.username');``
-#. ``echo $this->Form->input('User.password');``
-#. ``echo $this->Form->end('Login');``
-#. ``?>``
-
 If a user is already logged in, redirect him by adding this to your
 UsersController:
 
@@ -103,14 +74,6 @@ UsersController:
         }
     }       
 
-
-#. ``function login() {``
-#. ``if ($this->Session->read('Auth.User')) {``
-#. ``$this->Session->setFlash('You are logged in!');``
-#. ``$this->redirect('/', null, false);``
-#. ``}``
-#. ``}``
-
 You may also want to add a flash() for Auth messages to your
 layout. Copy the default core layout - found at
 ``cake/libs/view/layouts/default.ctp`` - to your app layouts folder
@@ -120,9 +83,6 @@ if you haven't done so already. In
 ::
 
     echo $this->Session->flash('auth');
-
-
-#. ``echo $this->Session->flash('auth');``
 
 You should now be able to login and everything should work
 auto-magically. When access is denied Auth messages will be

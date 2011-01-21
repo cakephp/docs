@@ -25,12 +25,6 @@ it create the following:
         //methods go here.
     }
 
-
-#. ``require_once CAKE_TEST_LIB . 'reporter' . DS . 'cake_base_reporter.php';``
-#. ``class MyReporter extends CakeBaseReporter {``
-#. ``//methods go here.``
-#. ``}``
-
 Extending ``CakeBaseReporter`` or one of its subclasses is not
 required, but strongly suggested as you may get missing errors
 otherwise. ``CakeBaseReporter`` encapsulates a few common test
@@ -100,16 +94,6 @@ In this file, extend **TestSuite** and import test as follows:
       } 
     } 
     ?> 
-
-
-#. ``<?php``
-#. ``class TryGroupTest extends TestSuite {``
-#. ``var $label = 'try';``
-#. ``function tryGroupTest() {``
-#. ``TestManager::addTestCasesFromDirectory($this, APP_TEST_CASES . DS . 'models');``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 The code above will group all test cases found in the
 **/app/tests/cases/models/** folder. To add an individual file, use
@@ -142,12 +126,6 @@ it create the following:
         //methods go here.
     }
 
-
-#. ``require_once CAKE_TEST_LIB . 'reporter' . DS . 'cake_base_reporter.php';``
-#. ``class MyReporter extends CakeBaseReporter {``
-#. ``//methods go here.``
-#. ``}``
-
 Extending ``CakeBaseReporter`` or one of its subclasses is not
 required, but strongly suggested as you may get missing errors
 otherwise. ``CakeBaseReporter`` encapsulates a few common test
@@ -217,16 +195,6 @@ In this file, extend **TestSuite** and import test as follows:
       } 
     } 
     ?> 
-
-
-#. ``<?php``
-#. ``class TryGroupTest extends TestSuite {``
-#. ``var $label = 'try';``
-#. ``function tryGroupTest() {``
-#. ``TestManager::addTestCasesFromDirectory($this, APP_TEST_CASES . DS . 'models');``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 The code above will group all test cases found in the
 **/app/tests/cases/models/** folder. To add an individual file, use

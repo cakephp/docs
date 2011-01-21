@@ -28,23 +28,6 @@ reading the ``smtpError`` property of the component.
         /* Check for SMTP errors. */
         $this->set('smtp_errors', $this->Email->smtpError);
 
-
-#. ``/* SMTP Options */``
-#. ``$this->Email->smtpOptions = array(``
-#. ``'port'=>'25',``
-#. ``'timeout'=>'30',``
-#. ``'host' => 'your.smtp.server',``
-#. ``'username'=>'your_smtp_username',``
-#. ``'password'=>'your_smtp_password',``
-#. ``'client' => 'smtp_helo_hostname'``
-#. ``);``
-#. ``/* Set delivery method */``
-#. ``$this->Email->delivery = 'smtp';``
-#. ``/* Do not pass any args to send() */``
-#. ``$this->Email->send();``
-#. ``/* Check for SMTP errors. */``
-#. ``$this->set('smtp_errors', $this->Email->smtpError);``
-
 If your SMTP server requires authentication, be sure to specify the
 username and password parameters for ``smtpOptions`` as shown in
 the example.
@@ -66,16 +49,6 @@ Here are example options for using Gmail's SMTP server.
             'username'=>'your_username@gmail.com',
             'password'=>'your_gmail_password',
        );
-
-
-#. ``/* SMTP Options */``
-#. ``$this->Email->smtpOptions = array(``
-#. ``'port'=>'465',``
-#. ``'timeout'=>'30',``
-#. ``'host' => 'ssl://smtp.gmail.com',``
-#. ``'username'=>'your_username@gmail.com',``
-#. ``'password'=>'your_gmail_password',``
-#. ``);``
 
 5.4.3 Sending A Message Using SMTP
 ----------------------------------
@@ -107,23 +80,6 @@ reading the ``smtpError`` property of the component.
         /* Check for SMTP errors. */
         $this->set('smtp_errors', $this->Email->smtpError);
 
-
-#. ``/* SMTP Options */``
-#. ``$this->Email->smtpOptions = array(``
-#. ``'port'=>'25',``
-#. ``'timeout'=>'30',``
-#. ``'host' => 'your.smtp.server',``
-#. ``'username'=>'your_smtp_username',``
-#. ``'password'=>'your_smtp_password',``
-#. ``'client' => 'smtp_helo_hostname'``
-#. ``);``
-#. ``/* Set delivery method */``
-#. ``$this->Email->delivery = 'smtp';``
-#. ``/* Do not pass any args to send() */``
-#. ``$this->Email->send();``
-#. ``/* Check for SMTP errors. */``
-#. ``$this->set('smtp_errors', $this->Email->smtpError);``
-
 If your SMTP server requires authentication, be sure to specify the
 username and password parameters for ``smtpOptions`` as shown in
 the example.
@@ -145,13 +101,3 @@ Here are example options for using Gmail's SMTP server.
             'username'=>'your_username@gmail.com',
             'password'=>'your_gmail_password',
        );
-
-
-#. ``/* SMTP Options */``
-#. ``$this->Email->smtpOptions = array(``
-#. ``'port'=>'465',``
-#. ``'timeout'=>'30',``
-#. ``'host' => 'ssl://smtp.gmail.com',``
-#. ``'username'=>'your_username@gmail.com',``
-#. ``'password'=>'your_gmail_password',``
-#. ``);``

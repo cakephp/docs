@@ -25,10 +25,6 @@ While using the AclComponent would look like:
     $this->Acl->Aco->create(array('parent_id' => null, 'alias' => 'controllers'));
     $this->Acl->Aco->save();
 
-
-#. ``$this->Acl->Aco->create(array('parent_id' => null, 'alias' => 'controllers'));``
-#. ``$this->Acl->Aco->save();``
-
 Both of these examples would create our 'root' or top level ACO
 which is going to be called 'controllers'. The purpose of this root
 node is to make it easy to allow/deny access on a global
@@ -44,9 +40,6 @@ the following to the ``beforeFilter``:
 ::
 
     $this->Auth->actionPath = 'controllers/';
-
-
-#. ``$this->Auth->actionPath = 'controllers/';``
 
 11.2.5 Creating ACOs (Access Control Objects)
 ---------------------------------------------
@@ -75,10 +68,6 @@ While using the AclComponent would look like:
     $this->Acl->Aco->create(array('parent_id' => null, 'alias' => 'controllers'));
     $this->Acl->Aco->save();
 
-
-#. ``$this->Acl->Aco->create(array('parent_id' => null, 'alias' => 'controllers'));``
-#. ``$this->Acl->Aco->save();``
-
 Both of these examples would create our 'root' or top level ACO
 which is going to be called 'controllers'. The purpose of this root
 node is to make it easy to allow/deny access on a global
@@ -94,6 +83,3 @@ the following to the ``beforeFilter``:
 ::
 
     $this->Auth->actionPath = 'controllers/';
-
-
-#. ``$this->Auth->actionPath = 'controllers/';``

@@ -39,9 +39,6 @@ Usage of clean() with options looks something like the following:
 
     $this->data = Sanitize::clean($this->data, array('encode' => false));
 
-
-#. ``$this->data = Sanitize::clean($this->data, array('encode' => false));``
-
 4.2.4 clean
 -----------
 
@@ -82,6 +79,3 @@ Usage of clean() with options looks something like the following:
 ::
 
     $this->data = Sanitize::clean($this->data, array('encode' => false));
-
-
-#. ``$this->data = Sanitize::clean($this->data, array('encode' => false));``

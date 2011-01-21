@@ -30,27 +30,6 @@ our ``User`` model we will add the following.
         }
     }
 
-
-#. ``var $name = 'User';``
-#. ``var $belongsTo = array('Group');``
-#. ``var $actsAs = array('Acl' => array('type' => 'requester'));``
-#. ````
-#. ``function parentNode() {``
-#. ``if (!$this->id && empty($this->data)) {``
-#. ``return null;``
-#. ``}``
-#. ``if (isset($this->data['User']['group_id'])) {``
-#. ``$groupId = $this->data['User']['group_id'];``
-#. ``} else {``
-#. ``$groupId = $this->field('group_id');``
-#. ``}``
-#. ``if (!$groupId) {``
-#. ``return null;``
-#. ``} else {``
-#. ``return array('Group' => array('id' => $groupId));``
-#. ``}``
-#. ``}``
-
 Then in our ``Group`` Model Add the following:
 
 ::
@@ -60,13 +39,6 @@ Then in our ``Group`` Model Add the following:
     function parentNode() {
         return null;
     }
-
-
-#. ``var $actsAs = array('Acl' => array('type' => 'requester'));``
-#. ````
-#. ``function parentNode() {``
-#. ``return null;``
-#. ``}``
 
 What this does, is tie the ``Group`` and ``User`` models to the
 Acl, and tell CakePHP that every-time you make a User or Group you
@@ -121,11 +93,6 @@ implement ``bindNode()`` in ``User`` model.
     function bindNode($user) {
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
     }
-
-
-#. ``function bindNode($user) {``
-#. ``return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);``
-#. ``}``
 
 This method will tell ACL to skip checking ``User`` Aro's and to
 check only ``Group`` Aro's.
@@ -177,27 +144,6 @@ our ``User`` model we will add the following.
         }
     }
 
-
-#. ``var $name = 'User';``
-#. ``var $belongsTo = array('Group');``
-#. ``var $actsAs = array('Acl' => array('type' => 'requester'));``
-#. ````
-#. ``function parentNode() {``
-#. ``if (!$this->id && empty($this->data)) {``
-#. ``return null;``
-#. ``}``
-#. ``if (isset($this->data['User']['group_id'])) {``
-#. ``$groupId = $this->data['User']['group_id'];``
-#. ``} else {``
-#. ``$groupId = $this->field('group_id');``
-#. ``}``
-#. ``if (!$groupId) {``
-#. ``return null;``
-#. ``} else {``
-#. ``return array('Group' => array('id' => $groupId));``
-#. ``}``
-#. ``}``
-
 Then in our ``Group`` Model Add the following:
 
 ::
@@ -207,13 +153,6 @@ Then in our ``Group`` Model Add the following:
     function parentNode() {
         return null;
     }
-
-
-#. ``var $actsAs = array('Acl' => array('type' => 'requester'));``
-#. ````
-#. ``function parentNode() {``
-#. ``return null;``
-#. ``}``
 
 What this does, is tie the ``Group`` and ``User`` models to the
 Acl, and tell CakePHP that every-time you make a User or Group you
@@ -268,11 +207,6 @@ implement ``bindNode()`` in ``User`` model.
     function bindNode($user) {
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
     }
-
-
-#. ``function bindNode($user) {``
-#. ``return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);``
-#. ``}``
 
 This method will tell ACL to skip checking ``User`` Aro's and to
 check only ``Group`` Aro's.

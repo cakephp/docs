@@ -42,23 +42,6 @@ prefix your plugin fixtures with '``plugin.plugin_name.``'.
     }
     ?>
 
-
-#. ``<?php``
-#. ``App::import('Model', 'Pizza.PizzaOrder');``
-#. ``class PizzaOrderCase extends CakeTestCase {``
-#. ``// Plugin fixtures located in /app/plugins/pizza/tests/fixtures/``
-#. ``var $fixtures = array('plugin.pizza.pizza_order');``
-#. ``var $PizzaOrderTest;``
-#. ````
-#. ``function testSomething() {``
-#. ``// ClassRegistry makes the model use the test database connection``
-#. ``$this->PizzaOrderTest =& ClassRegistry::init('PizzaOrder');``
-#. ``// do some useful test here``
-#. ``$this->assertTrue(is_object($this->PizzaOrderTest));``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 If you want to use plugin fixtures in the app tests you can
 reference them using 'plugin.pluginName.fixtureName' syntax in the
 $fixtures array.
@@ -108,23 +91,6 @@ prefix your plugin fixtures with '``plugin.plugin_name.``'.
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``App::import('Model', 'Pizza.PizzaOrder');``
-#. ``class PizzaOrderCase extends CakeTestCase {``
-#. ``// Plugin fixtures located in /app/plugins/pizza/tests/fixtures/``
-#. ``var $fixtures = array('plugin.pizza.pizza_order');``
-#. ``var $PizzaOrderTest;``
-#. ````
-#. ``function testSomething() {``
-#. ``// ClassRegistry makes the model use the test database connection``
-#. ``$this->PizzaOrderTest =& ClassRegistry::init('PizzaOrder');``
-#. ``// do some useful test here``
-#. ``$this->assertTrue(is_object($this->PizzaOrderTest));``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 If you want to use plugin fixtures in the app tests you can
 reference them using 'plugin.pluginName.fixtureName' syntax in the

@@ -33,13 +33,6 @@ the data. This is commonly used for serializing model data.
      <model_name id="1" field_name="content" />
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Xml->serialize($data);``
-#. ``format will be similar to:``
-#. ``<model_name id="1" field_name="content" />``
-#. ``?>``
-
 The serialize method acts as a shortcut to instantiating the XML
 built-in class and using the toString method of that. If you need
 more control over serialization, you may wish to invoke the XML
@@ -53,9 +46,6 @@ tags.
 ::
 
     pr($data);
-
-
-#. ``pr($data);``
 
 ::
 
@@ -80,9 +70,6 @@ tags.
 
     pr($this->Xml->serialize($data));
 
-
-#. ``pr($this->Xml->serialize($data));``
-
 ::
 
     <baker>
@@ -93,9 +80,6 @@ tags.
 ::
 
     pr($this->Xml->serialize($data, array('format' => 'tags')));
-
-
-#. ``pr($this->Xml->serialize($data, array('format' => 'tags')));``
 
 ::
 
@@ -145,13 +129,6 @@ the data. This is commonly used for serializing model data.
      <model_name id="1" field_name="content" />
     ?>
 
-
-#. ``<?php``
-#. ``echo $this->Xml->serialize($data);``
-#. ``format will be similar to:``
-#. ``<model_name id="1" field_name="content" />``
-#. ``?>``
-
 The serialize method acts as a shortcut to instantiating the XML
 built-in class and using the toString method of that. If you need
 more control over serialization, you may wish to invoke the XML
@@ -165,9 +142,6 @@ tags.
 ::
 
     pr($data);
-
-
-#. ``pr($data);``
 
 ::
 
@@ -192,9 +166,6 @@ tags.
 
     pr($this->Xml->serialize($data));
 
-
-#. ``pr($this->Xml->serialize($data));``
-
 ::
 
     <baker>
@@ -205,9 +176,6 @@ tags.
 ::
 
     pr($this->Xml->serialize($data, array('format' => 'tags')));
-
-
-#. ``pr($this->Xml->serialize($data, array('format' => 'tags')));``
 
 ::
 

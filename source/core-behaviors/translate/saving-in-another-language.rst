@@ -28,23 +28,6 @@ your controller or you can define it directly in the model.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class PostsController extends AppController {``
-#. ``var $name = 'Posts';``
-#. ````
-#. ``function add() {``
-#. ``if ($this->data) {``
-#. ``$this->Post->locale = 'de_de'; // we are going to save the german version``
-#. ``$this->Post->create();``
-#. ``if ($this->Post->save($this->data)) {``
-#. ``$this->redirect(array('action' => 'index'));``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 **Example B:** In your model
 ::
 
@@ -66,26 +49,6 @@ your controller or you can define it directly in the model.
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ``var $actsAs = array(``
-#. ``'Translate' => array(``
-#. ``'name'``
-#. ``)``
-#. ``);``
-#. ````
-#. ``// Option 1) just define the property directly``
-#. ``var $locale = 'en_us';``
-#. ````
-#. ``// Option 2) create a simple method``
-#. ``function setLanguage($locale) {``
-#. ``$this->locale = $locale;``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 6.3.6 Saving in another language
 --------------------------------
@@ -117,23 +80,6 @@ your controller or you can define it directly in the model.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class PostsController extends AppController {``
-#. ``var $name = 'Posts';``
-#. ````
-#. ``function add() {``
-#. ``if ($this->data) {``
-#. ``$this->Post->locale = 'de_de'; // we are going to save the german version``
-#. ``$this->Post->create();``
-#. ``if ($this->Post->save($this->data)) {``
-#. ``$this->redirect(array('action' => 'index'));``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 **Example B:** In your model
 ::
 
@@ -155,23 +101,3 @@ your controller or you can define it directly in the model.
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ``var $actsAs = array(``
-#. ``'Translate' => array(``
-#. ``'name'``
-#. ``)``
-#. ``);``
-#. ````
-#. ``// Option 1) just define the property directly``
-#. ``var $locale = 'en_us';``
-#. ````
-#. ``// Option 2) create a simple method``
-#. ``function setLanguage($locale) {``
-#. ``$this->locale = $locale;``
-#. ``}``
-#. ``}``
-#. ``?>``

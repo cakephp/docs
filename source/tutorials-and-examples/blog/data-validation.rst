@@ -23,26 +23,12 @@ Here's our add view:
     echo $this->Form->end('Save Post');
     ?>
 
-
-#. ``<!-- File: /app/views/posts/add.ctp -->``
-#. ````
-#. ``<h1>Add Post</h1>``
-#. ``<?php``
-#. ``echo $this->Form->create('Post');``
-#. ``echo $this->Form->input('title');``
-#. ``echo $this->Form->input('body', array('rows' => '3'));``
-#. ``echo $this->Form->end('Save Post');``
-#. ``?>``
-
 Here, we use the FormHelper to generate the opening tag for an HTML
 form. Here's the HTML that ``$this->Form->create()`` generates:
 
 ::
 
     <form id="PostAddForm" method="post" action="/posts/add">
-
-
-#. ``<form id="PostAddForm" method="post" action="/posts/add">``
 
 If ``create()`` is called with no parameters supplied, it assumes
 you are building a form that submits to the current controller's
@@ -70,9 +56,6 @@ the following line:
 
     <?php echo $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add')); ?>
 
-
-#. ``<?php echo $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add')); ?>``
-
 You may be wondering: how do I tell CakePHP about my validation
 requirements? Validation rules are defined in the model. Let's look
 back at our Post model and make a few adjustments:
@@ -94,22 +77,6 @@ back at our Post model and make a few adjustments:
         );
     }
     ?>
-
-
-#. ``<?php``
-#. ``class Post extends AppModel``
-#. ``{``
-#. ``var $name = 'Post';``
-#. ``var $validate = array(``
-#. ``'title' => array(``
-#. ``'rule' => 'notEmpty'``
-#. ``),``
-#. ``'body' => array(``
-#. ``'rule' => 'notEmpty'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 The ``$validate`` array tells CakePHP how to validate your data
 when the ``save()`` method is called. Here, I've specified that
@@ -151,26 +118,12 @@ Here's our add view:
     echo $this->Form->end('Save Post');
     ?>
 
-
-#. ``<!-- File: /app/views/posts/add.ctp -->``
-#. ````
-#. ``<h1>Add Post</h1>``
-#. ``<?php``
-#. ``echo $this->Form->create('Post');``
-#. ``echo $this->Form->input('title');``
-#. ``echo $this->Form->input('body', array('rows' => '3'));``
-#. ``echo $this->Form->end('Save Post');``
-#. ``?>``
-
 Here, we use the FormHelper to generate the opening tag for an HTML
 form. Here's the HTML that ``$this->Form->create()`` generates:
 
 ::
 
     <form id="PostAddForm" method="post" action="/posts/add">
-
-
-#. ``<form id="PostAddForm" method="post" action="/posts/add">``
 
 If ``create()`` is called with no parameters supplied, it assumes
 you are building a form that submits to the current controller's
@@ -198,9 +151,6 @@ the following line:
 
     <?php echo $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add')); ?>
 
-
-#. ``<?php echo $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add')); ?>``
-
 You may be wondering: how do I tell CakePHP about my validation
 requirements? Validation rules are defined in the model. Let's look
 back at our Post model and make a few adjustments:
@@ -222,22 +172,6 @@ back at our Post model and make a few adjustments:
         );
     }
     ?>
-
-
-#. ``<?php``
-#. ``class Post extends AppModel``
-#. ``{``
-#. ``var $name = 'Post';``
-#. ``var $validate = array(``
-#. ``'title' => array(``
-#. ``'rule' => 'notEmpty'``
-#. ``),``
-#. ``'body' => array(``
-#. ``'rule' => 'notEmpty'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 The ``$validate`` array tells CakePHP how to validate your data
 when the ``save()`` method is called. Here, I've specified that

@@ -19,11 +19,6 @@ want to use.
         $this->Auth->userModel = 'Member';
     ?>
 
-
-#. ``<?php``
-#. ``$this->Auth->userModel = 'Member';``
-#. ``?>``
-
 fields
 ~~~~~~
 
@@ -35,11 +30,6 @@ authentication.
     <?php
         $this->Auth->fields = array('username' => 'email', 'password' => 'passwd');
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->fields = array('username' => 'email', 'password' => 'passwd');``
-#. ``?>``
 
 userScope
 ~~~~~~~~~
@@ -53,11 +43,6 @@ succeed.
         $this->Auth->userScope = array('User.active' => true);
     ?>
 
-
-#. ``<?php``
-#. ``$this->Auth->userScope = array('User.active' => true);``
-#. ``?>``
-
 loginAction
 ~~~~~~~~~~~
 
@@ -69,11 +54,6 @@ action of your choice.
     <?php
         $this->Auth->loginAction = array('admin' => false, 'controller' => 'members', 'action' => 'login');
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->loginAction = array('admin' => false, 'controller' => 'members', 'action' => 'login');``
-#. ``?>``
 
 loginRedirect
 ~~~~~~~~~~~~~
@@ -93,11 +73,6 @@ Example:
         $this->Auth->loginRedirect = array('controller' => 'members', 'action' => 'home');
     ?>
 
-
-#. ``<?php``
-#. ``$this->Auth->loginRedirect = array('controller' => 'members', 'action' => 'home');``
-#. ``?>``
-
 logoutRedirect
 ~~~~~~~~~~~~~~
 
@@ -109,11 +84,6 @@ logged out, with the default being the login action.
     <?php
         $this->Auth->logoutRedirect = array(Configure::read('Routing.admin') => false, 'controller' => 'members', 'action' => 'logout');
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->logoutRedirect = array(Configure::read('Routing.admin') => false, 'controller' => 'members', 'action' => 'logout');``
-#. ``?>``
 
 loginError
 ~~~~~~~~~~
@@ -127,11 +97,6 @@ successfully log in.
         $this->Auth->loginError = "No, you fool!  That's not the right password!";
     ?>
 
-
-#. ``<?php``
-#. ``$this->Auth->loginError = "No, you fool!  That's not the right password!";``
-#. ``?>``
-
 authError
 ~~~~~~~~~
 
@@ -143,11 +108,6 @@ access an object or action to which they do not have access.
     <?php
         $this->Auth->authError = "Sorry, you are lacking access.";
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->authError = "Sorry, you are lacking access.";``
-#. ``?>``
 
 autoRedirect
 ~~~~~~~~~~~~
@@ -191,38 +151,6 @@ before you redirect users:
         }
     ?>
 
-
-#. ``<?php``
-#. ``function beforeFilter() {``
-#. ``...``
-#. ``$this->Auth->autoRedirect = false;``
-#. ``}``
-#. ``...``
-#. ``function login() {``
-#. ``//-- code inside this function will execute only when autoRedirect was set to false (i.e. in a beforeFilter).``
-#. ``if ($this->Auth->user()) {``
-#. ``if (!empty($this->data['User']['remember_me'])) {``
-#. ``$cookie = array();``
-#. ``$cookie['username'] = $this->data['User']['username'];``
-#. ``$cookie['password'] = $this->data['User']['password'];``
-#. ``$this->Cookie->write('Auth.User', $cookie, true, '+2 weeks');``
-#. ``unset($this->data['User']['remember_me']);``
-#. ``}``
-#. ``$this->redirect($this->Auth->redirect());``
-#. ``}``
-#. ``if (empty($this->data)) {``
-#. ``$cookie = $this->Cookie->read('Auth.User');``
-#. ``if (!is_null($cookie)) {``
-#. ``if ($this->Auth->login($cookie)) {``
-#. ``//  Clear auth message, just in case we use it.``
-#. ``$this->Session->delete('Message.auth');``
-#. ``$this->redirect($this->Auth->redirect());``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 The code in the login function will not execute *unless* you set
 $autoRedirect to false in a beforeFilter. The code present in the
 login function will only execute *after* authentication was
@@ -245,17 +173,6 @@ such as keeping track of the last successful login timestamp
         }
     ?>
 
-
-#. ``<?php``
-#. ``function login() {``
-#. ``if( !(empty($this->data)) && $this->Auth->user() ){``
-#. ``$this->User->id = $this->Auth->user('id');``
-#. ``$this->User->saveField('last_login', date('Y-m-d H:i:s') );``
-#. ``$this->redirect($this->Auth->redirect());``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 authorize
 ~~~~~~~~~
 
@@ -272,11 +189,6 @@ common ones you might want to use.
     <?php
         $this->Auth->authorize = 'controller';
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->authorize = 'controller';``
-#. ``?>``
 
 When authorize is set to 'controller', you'll need to add a method
 called isAuthorized() to your controller. This method allows you to
@@ -299,20 +211,6 @@ false.
         }
     ?>
 
-
-#. ``<?php``
-#. ``function isAuthorized() {``
-#. ``if ($this->action == 'delete') {``
-#. ``if ($this->Auth->user('role') == 'admin') {``
-#. ``return true;``
-#. ``} else {``
-#. ``return false;``
-#. ``}``
-#. ``}``
-#. ``return true;``
-#. ``}``
-#. ``?>``
-
 Remember that this method will be checked after you have already
 passed the basic authentication check against the user model.
 
@@ -321,11 +219,6 @@ passed the basic authentication check against the user model.
     <?php
         $this->Auth->authorize = array('model'=>'User');
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->authorize = array('model'=>'User');``
-#. ``?>``
 
 Don't want to add anything to your controller and might be using
 ACO's? You can get the AuthComponent to call a method in your user
@@ -353,25 +246,6 @@ model called isAuthorized() to do the same sort of thing:
         }
     ?>
 
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``...``
-#. ``function isAuthorized($user, $controller, $action) {``
-#. ``switch ($action) {``
-#. ``case 'default':``
-#. ``return false;``
-#. ``break;``
-#. ``case 'delete':``
-#. ``if ($user['User']['role'] == 'admin') {``
-#. ``return true;``
-#. ``}``
-#. ``break;``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 Lastly, you can use authorize with actions such as below
 
 ::
@@ -379,11 +253,6 @@ Lastly, you can use authorize with actions such as below
     <?php
         $this->Auth->authorize = 'actions';
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->authorize = 'actions';``
-#. ``?>``
 
 By using actions, Auth will make use of ACL and check with
 AclComponent::check(). An isAuthorized function is not needed.
@@ -393,11 +262,6 @@ AclComponent::check(). An isAuthorized function is not needed.
     <?php
         $this->Auth->authorize = 'crud';
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->authorize = 'crud';``
-#. ``?>``
 
 By using crud, Auth will make use of ACL and check with
 AclComponent::check(). Actions should be mapped to CRUD (see
@@ -417,11 +281,6 @@ Defaults to "Auth", so if unspecified, the record is stored in
     <?php
         $this->Auth->sessionKey = 'Authorized';
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->sessionKey = 'Authorized';``
-#. ``?>``
 
 ajaxLogin
 ~~~~~~~~~
@@ -464,11 +323,6 @@ variable that another element will be used for display.
     <?php
         $this->Auth->flashElement    = "message_error";
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->flashElement    = "message_error";``
-#. ``?>``
 
 5.2.6 AuthComponent Variables
 -----------------------------
@@ -491,11 +345,6 @@ want to use.
         $this->Auth->userModel = 'Member';
     ?>
 
-
-#. ``<?php``
-#. ``$this->Auth->userModel = 'Member';``
-#. ``?>``
-
 fields
 ~~~~~~
 
@@ -507,11 +356,6 @@ authentication.
     <?php
         $this->Auth->fields = array('username' => 'email', 'password' => 'passwd');
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->fields = array('username' => 'email', 'password' => 'passwd');``
-#. ``?>``
 
 userScope
 ~~~~~~~~~
@@ -525,11 +369,6 @@ succeed.
         $this->Auth->userScope = array('User.active' => true);
     ?>
 
-
-#. ``<?php``
-#. ``$this->Auth->userScope = array('User.active' => true);``
-#. ``?>``
-
 loginAction
 ~~~~~~~~~~~
 
@@ -541,11 +380,6 @@ action of your choice.
     <?php
         $this->Auth->loginAction = array('admin' => false, 'controller' => 'members', 'action' => 'login');
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->loginAction = array('admin' => false, 'controller' => 'members', 'action' => 'login');``
-#. ``?>``
 
 loginRedirect
 ~~~~~~~~~~~~~
@@ -565,11 +399,6 @@ Example:
         $this->Auth->loginRedirect = array('controller' => 'members', 'action' => 'home');
     ?>
 
-
-#. ``<?php``
-#. ``$this->Auth->loginRedirect = array('controller' => 'members', 'action' => 'home');``
-#. ``?>``
-
 logoutRedirect
 ~~~~~~~~~~~~~~
 
@@ -581,11 +410,6 @@ logged out, with the default being the login action.
     <?php
         $this->Auth->logoutRedirect = array(Configure::read('Routing.admin') => false, 'controller' => 'members', 'action' => 'logout');
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->logoutRedirect = array(Configure::read('Routing.admin') => false, 'controller' => 'members', 'action' => 'logout');``
-#. ``?>``
 
 loginError
 ~~~~~~~~~~
@@ -599,11 +423,6 @@ successfully log in.
         $this->Auth->loginError = "No, you fool!  That's not the right password!";
     ?>
 
-
-#. ``<?php``
-#. ``$this->Auth->loginError = "No, you fool!  That's not the right password!";``
-#. ``?>``
-
 authError
 ~~~~~~~~~
 
@@ -615,11 +434,6 @@ access an object or action to which they do not have access.
     <?php
         $this->Auth->authError = "Sorry, you are lacking access.";
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->authError = "Sorry, you are lacking access.";``
-#. ``?>``
 
 autoRedirect
 ~~~~~~~~~~~~
@@ -663,38 +477,6 @@ before you redirect users:
         }
     ?>
 
-
-#. ``<?php``
-#. ``function beforeFilter() {``
-#. ``...``
-#. ``$this->Auth->autoRedirect = false;``
-#. ``}``
-#. ``...``
-#. ``function login() {``
-#. ``//-- code inside this function will execute only when autoRedirect was set to false (i.e. in a beforeFilter).``
-#. ``if ($this->Auth->user()) {``
-#. ``if (!empty($this->data['User']['remember_me'])) {``
-#. ``$cookie = array();``
-#. ``$cookie['username'] = $this->data['User']['username'];``
-#. ``$cookie['password'] = $this->data['User']['password'];``
-#. ``$this->Cookie->write('Auth.User', $cookie, true, '+2 weeks');``
-#. ``unset($this->data['User']['remember_me']);``
-#. ``}``
-#. ``$this->redirect($this->Auth->redirect());``
-#. ``}``
-#. ``if (empty($this->data)) {``
-#. ``$cookie = $this->Cookie->read('Auth.User');``
-#. ``if (!is_null($cookie)) {``
-#. ``if ($this->Auth->login($cookie)) {``
-#. ``//  Clear auth message, just in case we use it.``
-#. ``$this->Session->delete('Message.auth');``
-#. ``$this->redirect($this->Auth->redirect());``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 The code in the login function will not execute *unless* you set
 $autoRedirect to false in a beforeFilter. The code present in the
 login function will only execute *after* authentication was
@@ -717,17 +499,6 @@ such as keeping track of the last successful login timestamp
         }
     ?>
 
-
-#. ``<?php``
-#. ``function login() {``
-#. ``if( !(empty($this->data)) && $this->Auth->user() ){``
-#. ``$this->User->id = $this->Auth->user('id');``
-#. ``$this->User->saveField('last_login', date('Y-m-d H:i:s') );``
-#. ``$this->redirect($this->Auth->redirect());``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 authorize
 ~~~~~~~~~
 
@@ -744,11 +515,6 @@ common ones you might want to use.
     <?php
         $this->Auth->authorize = 'controller';
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->authorize = 'controller';``
-#. ``?>``
 
 When authorize is set to 'controller', you'll need to add a method
 called isAuthorized() to your controller. This method allows you to
@@ -771,20 +537,6 @@ false.
         }
     ?>
 
-
-#. ``<?php``
-#. ``function isAuthorized() {``
-#. ``if ($this->action == 'delete') {``
-#. ``if ($this->Auth->user('role') == 'admin') {``
-#. ``return true;``
-#. ``} else {``
-#. ``return false;``
-#. ``}``
-#. ``}``
-#. ``return true;``
-#. ``}``
-#. ``?>``
-
 Remember that this method will be checked after you have already
 passed the basic authentication check against the user model.
 
@@ -793,11 +545,6 @@ passed the basic authentication check against the user model.
     <?php
         $this->Auth->authorize = array('model'=>'User');
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->authorize = array('model'=>'User');``
-#. ``?>``
 
 Don't want to add anything to your controller and might be using
 ACO's? You can get the AuthComponent to call a method in your user
@@ -825,25 +572,6 @@ model called isAuthorized() to do the same sort of thing:
         }
     ?>
 
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``...``
-#. ``function isAuthorized($user, $controller, $action) {``
-#. ``switch ($action) {``
-#. ``case 'default':``
-#. ``return false;``
-#. ``break;``
-#. ``case 'delete':``
-#. ``if ($user['User']['role'] == 'admin') {``
-#. ``return true;``
-#. ``}``
-#. ``break;``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 Lastly, you can use authorize with actions such as below
 
 ::
@@ -851,11 +579,6 @@ Lastly, you can use authorize with actions such as below
     <?php
         $this->Auth->authorize = 'actions';
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->authorize = 'actions';``
-#. ``?>``
 
 By using actions, Auth will make use of ACL and check with
 AclComponent::check(). An isAuthorized function is not needed.
@@ -865,11 +588,6 @@ AclComponent::check(). An isAuthorized function is not needed.
     <?php
         $this->Auth->authorize = 'crud';
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->authorize = 'crud';``
-#. ``?>``
 
 By using crud, Auth will make use of ACL and check with
 AclComponent::check(). Actions should be mapped to CRUD (see
@@ -889,11 +607,6 @@ Defaults to "Auth", so if unspecified, the record is stored in
     <?php
         $this->Auth->sessionKey = 'Authorized';
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->sessionKey = 'Authorized';``
-#. ``?>``
 
 ajaxLogin
 ~~~~~~~~~
@@ -936,8 +649,3 @@ variable that another element will be used for display.
     <?php
         $this->Auth->flashElement    = "message_error";
     ?>
-
-
-#. ``<?php``
-#. ``$this->Auth->flashElement    = "message_error";``
-#. ``?>``

@@ -26,14 +26,6 @@ classname oddities and helps CakePHP resolve naming.
     
     ?>   
 
-
-#. ``<?php``
-#. ``#   $name controller attribute usage example``
-#. ``class RecipesController extends AppController {``
-#. ``var $name = 'Recipes';``
-#. ``}``
-#. ``?>``
-
 $components, $helpers and $uses
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -78,16 +70,6 @@ additional MVC classes.
     }
     ?>   
 
-
-#. ``<?php``
-#. ``class RecipesController extends AppController {``
-#. ``var $name = 'Recipes';``
-#. ``var $uses = array('Recipe', 'User');``
-#. ``var $helpers = array('Ajax');``
-#. ``var $components = array('Email');``
-#. ``}``
-#. ``?>``
-
 Each of these variables are merged with their inherited values,
 therefore it is not necessary (for example) to redeclare the Form
 helper, or anything that is declared in your App controller.
@@ -95,16 +77,6 @@ helper, or anything that is declared in your App controller.
 If you do not wish to use a Model in your controller, set
 ``var $uses = array()``. This will allow you to use a controller
 without a need for a corresponding Model file.
-
-#. ``<?php``
-#. ``//   Using $layout to define an alternate layout``
-#. ``class RecipesController extends AppController {``
-#. ``function quickSave() {``
-#. ``$this->layout = 'ajax';``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 The Parameters Attribute ($params)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -213,10 +185,6 @@ controller.
     // The FormHelper is used to create a form element:
     $form->text('User.first_name');
 
-
-#. ``// The FormHelper is used to create a form element:``
-#. ``$form->text('User.first_name');``
-
 Which when rendered, looks something like:
 
 ::
@@ -232,11 +200,6 @@ shows up in ``this->data``
      
     //The submitted first name can be found here:
     $this->data['User']['first_name'];
-
-
-#. ````
-#. ``//The submitted first name can be found here:``
-#. ``$this->data['User']['first_name'];``
 
 prefix
 ^^^^^^
@@ -314,14 +277,6 @@ classname oddities and helps CakePHP resolve naming.
     
     ?>   
 
-
-#. ``<?php``
-#. ``#   $name controller attribute usage example``
-#. ``class RecipesController extends AppController {``
-#. ``var $name = 'Recipes';``
-#. ``}``
-#. ``?>``
-
 $components, $helpers and $uses
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -366,16 +321,6 @@ additional MVC classes.
     }
     ?>   
 
-
-#. ``<?php``
-#. ``class RecipesController extends AppController {``
-#. ``var $name = 'Recipes';``
-#. ``var $uses = array('Recipe', 'User');``
-#. ``var $helpers = array('Ajax');``
-#. ``var $components = array('Email');``
-#. ``}``
-#. ``?>``
-
 Each of these variables are merged with their inherited values,
 therefore it is not necessary (for example) to redeclare the Form
 helper, or anything that is declared in your App controller.
@@ -383,16 +328,6 @@ helper, or anything that is declared in your App controller.
 If you do not wish to use a Model in your controller, set
 ``var $uses = array()``. This will allow you to use a controller
 without a need for a corresponding Model file.
-
-#. ``<?php``
-#. ``//   Using $layout to define an alternate layout``
-#. ``class RecipesController extends AppController {``
-#. ``function quickSave() {``
-#. ``$this->layout = 'ajax';``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 The Parameters Attribute ($params)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -501,10 +436,6 @@ controller.
     // The FormHelper is used to create a form element:
     $form->text('User.first_name');
 
-
-#. ``// The FormHelper is used to create a form element:``
-#. ``$form->text('User.first_name');``
-
 Which when rendered, looks something like:
 
 ::
@@ -520,11 +451,6 @@ shows up in ``this->data``
      
     //The submitted first name can be found here:
     $this->data['User']['first_name'];
-
-
-#. ````
-#. ``//The submitted first name can be found here:``
-#. ``$this->data['User']['first_name'];``
 
 prefix
 ^^^^^^

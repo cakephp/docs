@@ -26,14 +26,6 @@ $list defaults to 0 = no 1 = yes if param is not passed
     $res = Set::enum('first', array('first' => 'one', 'second' => 'two'));
     // $res is 'one'
 
-
-#. ``$res = Set::enum(1, 'one, two');``
-#. ``// $res is 'two'``
-#. ``$res = Set::enum('no', array('no' => 0, 'yes' => 1));``
-#. ``// $res is 0``
-#. ``$res = Set::enum('first', array('first' => 'one', 'second' => 'two'));``
-#. ``// $res is 'one'``
-
 8.5.15 enum
 -----------
 
@@ -61,11 +53,3 @@ $list defaults to 0 = no 1 = yes if param is not passed
     
     $res = Set::enum('first', array('first' => 'one', 'second' => 'two'));
     // $res is 'one'
-
-
-#. ``$res = Set::enum(1, 'one, two');``
-#. ``// $res is 'two'``
-#. ``$res = Set::enum('no', array('no' => 0, 'yes' => 1));``
-#. ``// $res is 0``
-#. ``$res = Set::enum('first', array('first' => 'one', 'second' => 'two'));``
-#. ``// $res is 'one'``

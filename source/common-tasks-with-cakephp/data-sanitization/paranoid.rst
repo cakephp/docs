@@ -15,13 +15,6 @@ array.
     echo Sanitize::paranoid($badString, array(' ', '@'));
     // output: scripthtml    @@
 
-
-#. ``$badString = ";:<script><html><   // >@@#";``
-#. ``echo Sanitize::paranoid($badString);``
-#. ``// output: scripthtml``
-#. ``echo Sanitize::paranoid($badString, array(' ', '@'));``
-#. ``// output: scripthtml    @@``
-
 4.2.1 paranoid
 --------------
 
@@ -38,10 +31,3 @@ array.
     // output: scripthtml
     echo Sanitize::paranoid($badString, array(' ', '@'));
     // output: scripthtml    @@
-
-
-#. ``$badString = ";:<script><html><   // >@@#";``
-#. ``echo Sanitize::paranoid($badString);``
-#. ``// output: scripthtml``
-#. ``echo Sanitize::paranoid($badString, array(' ', '@'));``
-#. ``// output: scripthtml    @@``

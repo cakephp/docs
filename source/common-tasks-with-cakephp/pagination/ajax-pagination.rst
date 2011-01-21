@@ -19,10 +19,6 @@ changing the ``$helpers`` array in your controller. After running
     $this->set('posts', $this->paginate());
     $this->helpers['Paginator'] = array('ajax' => 'Ajax');
 
-
-#. ``$this->set('posts', $this->paginate());``
-#. ``$this->helpers['Paginator'] = array('ajax' => 'Ajax');``
-
 Will change the ``PaginatorHelper`` to use the ``AjaxHelper`` for
 ajax operations. You could also set the 'ajax' key to be any
 helper, as long as that class implements a ``link()`` method that
@@ -48,10 +44,6 @@ changing the ``$helpers`` array in your controller. After running
 
     $this->set('posts', $this->paginate());
     $this->helpers['Paginator'] = array('ajax' => 'Ajax');
-
-
-#. ``$this->set('posts', $this->paginate());``
-#. ``$this->helpers['Paginator'] = array('ajax' => 'Ajax');``
 
 Will change the ``PaginatorHelper`` to use the ``AjaxHelper`` for
 ajax operations. You could also set the 'ajax' key to be any

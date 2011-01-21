@@ -65,15 +65,6 @@ for more information.
         }
     }
 
-
-#. ``CalendarsController extends AppController{``
-#. ``function view($arg1, $arg2){``
-#. ``debug($arg1);``
-#. ``debug($arg2);``
-#. ``debug(func_get_args());``
-#. ``}``
-#. ``}``
-
 For this, you will have...
 ::
 
@@ -97,9 +88,6 @@ For this, you will have...
 
     debug($this->params['pass'])
 
-
-#. ``debug($this->params['pass'])``
-
 For this, you will have...
 ::
 
@@ -114,9 +102,6 @@ For this, you will have...
 ::
 
     debug($this->passedArgs)
-
-
-#. ``debug($this->passedArgs)``
 
 ::
 
@@ -179,9 +164,6 @@ in the router use ``Router::connectNamed()``.
 
     Router::connectNamed(array('chapter', 'section'));
 
-
-#. ``Router::connectNamed(array('chapter', 'section'));``
-
 Will ensure that your chapter and section parameters reverse route
 correctly.
 
@@ -208,13 +190,6 @@ The basic format for a route definition is:
         array('paramName' => 'matchingRegex')
     )
 
-
-#. ``Router::connect(``
-#. ``'URL',``
-#. ``array('paramName' => 'defaultValue'),``
-#. ``array('paramName' => 'matchingRegex')``
-#. ``)``
-
 The first parameter is used to tell the router what sort of URL
 you're trying to control. The URL is a normal slash delimited
 string, but can also contain a wildcard (\*) or route elements
@@ -239,12 +214,6 @@ parameter of connect().
         array('controller' => 'pages', 'action' => 'display')
     );
 
-
-#. ``Router::connect(``
-#. ``'/pages/*',``
-#. ``array('controller' => 'pages', 'action' => 'display')``
-#. ``);``
-
 This route is found in the routes.php file distributed with CakePHP
 (line 40). This route matches any URL starting with /pages/ and
 hands it to the ``display()`` method of the ``PagesController();``
@@ -257,12 +226,6 @@ The request /pages/products would be mapped to
         '/government',
         array('controller' => 'products', 'action' => 'display', 5)
     );
-
-
-#. ``Router::connect(``
-#. ``'/government',``
-#. ``array('controller' => 'products', 'action' => 'display', 5)``
-#. ``);``
 
 This second example shows how you can use the second parameter of
 ``connect()`` to define default parameters. If you built a site
@@ -281,11 +244,6 @@ that:
     Router::connect(
         '/cooks/:action/*', array('controller' => 'users', 'action' => 'index')
     );
-
-
-#. ``Router::connect(``
-#. ``'/cooks/:action/*', array('controller' => 'users', 'action' => 'index')``
-#. ``);``
 
 This is telling the Router that any url beginning with /cooks/
 should be sent to the users controller.
@@ -307,12 +265,6 @@ to match urls like ``/cooks/someAction/type:chef`` we do:
         '/cooks/:action/*', array('controller' => 'users', 'action' => 'index')
     );
 
-
-#. ``Router::connectNamed(array('type'));``
-#. ``Router::connect(``
-#. ``'/cooks/:action/*', array('controller' => 'users', 'action' => 'index')``
-#. ``);``
-
 You can specify your own route elements, doing so gives you the
 power to define places in the URL where parameters for controller
 actions should lie. When a request is made, the values for these
@@ -331,13 +283,6 @@ to know if the URL is correctly formed or not.
         array('action' => 'view'),
         array('id' => '[0-9]+')
     );
-
-
-#. ``Router::connect(``
-#. ``'/:controller/:id',``
-#. ``array('action' => 'view'),``
-#. ``array('id' => '[0-9]+')``
-#. ``);``
 
 This simple example illustrates how to create a quick way to view
 models from any controller by crafting a URL that looks like
@@ -363,9 +308,6 @@ that controller name does not appear in url, e.g have urls like
 
      Router::connect('/:action', array('controller' => 'home')); 
 
-
-#. ``Router::connect('/:action', array('controller' => 'home'));``
-
 One more example, and you'll be a routing pro.
 
 ::
@@ -379,17 +321,6 @@ One more example, and you'll be a routing pro.
             'day' => '0[1-9]|[12][0-9]|3[01]'
         )
     );
-
-
-#. ``Router::connect(``
-#. ``'/:controller/:year/:month/:day',``
-#. ``array('action' => 'index', 'day' => null),``
-#. ``array(``
-#. ``'year' => '[12][0-9]{3}',``
-#. ``'month' => '0[1-9]|1[012]',``
-#. ``'day' => '0[1-9]|[12][0-9]|3[01]'``
-#. ``)``
-#. ``);``
 
 This is rather involved, but shows how powerful routes can really
 become. The URL supplied has four route elements. The first is
@@ -439,23 +370,6 @@ parameter of ``Router::connect()``.
         )
     );
 
-
-#. ``// some_controller.php``
-#. ``function view($articleID = null, $slug = null) {``
-#. ``// some code here...``
-#. ``}``
-#. ``// routes.php``
-#. ``Router::connect(``
-#. ``// E.g. /blog/3-CakePHP_Rocks``
-#. ``'/blog/:id-:slug',``
-#. ``array('controller' => 'blog', 'action' => 'view'),``
-#. ``array(``
-#. ``// order matters since this will simply map ":id" to $articleID in your action``
-#. ``'pass' => array('id', 'slug'),``
-#. ``'id' => '[0-9]+'``
-#. ``)``
-#. ``);``
-
 And now, thanks to the reverse routing capabilities, you can pass
 in the url array like below and Cake will know how to form the URL
 as defined in the routes.
@@ -470,16 +384,6 @@ as defined in the routes.
         'id' => 3,
         'slug' => Inflector::slug('CakePHP Rocks')
     )); ?>
-
-
-#. ``// view.ctp``
-#. ``// this will return a link to /blog/3-CakePHP_Rocks``
-#. ``<?php echo $html->link('CakePHP Rocks', array(``
-#. ``'controller' => 'blog',``
-#. ``'action' => 'view',``
-#. ``'id' => 3,``
-#. ``'slug' => Inflector::slug('CakePHP Rocks')``
-#. ``)); ?>``
 
 Prefix Routing
 ~~~~~~~~~~~~~~
@@ -496,9 +400,6 @@ related to the router, are to be configured in
 
     Configure::write('Routing.prefixes', array('admin'));
 
-
-#. ``Configure::write('Routing.prefixes', array('admin'));``
-
 In your controller, any action with an ``admin_`` prefix will be
 called. Using our users example, accessing the url
 /admin/users/edit/5 would call the method ``admin_edit`` of our
@@ -512,18 +413,12 @@ controller using following route
 
     Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true)); 
 
-
-#. ``Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true));``
-
 You can configure the Router to use multiple prefixes too. By
 adding additional values to ``Routing.prefixes``. If you set
 
 ::
 
     Configure::write('Routing.prefixes', array('admin', 'manager'));
-
-
-#. ``Configure::write('Routing.prefixes', array('admin', 'manager'));``
 
 Cake will automatically generate routes for both the admin and
 manager prefixes. Each configured prefix will have the following
@@ -535,12 +430,6 @@ routes generated for it.
     $this->connect("/{$prefix}/:plugin/:controller/:action/*", array('prefix' => $prefix, $prefix => true));
     Router::connect("/{$prefix}/:controller", array('action' => 'index', 'prefix' => $prefix, $prefix => true));
     Router::connect("/{$prefix}/:controller/:action/*", array('prefix' => $prefix, $prefix => true));
-
-
-#. ``$this->connect("/{$prefix}/:plugin/:controller", array('action' => 'index', 'prefix' => $prefix, $prefix => true));``
-#. ``$this->connect("/{$prefix}/:plugin/:controller/:action/*", array('prefix' => $prefix, $prefix => true));``
-#. ``Router::connect("/{$prefix}/:controller", array('action' => 'index', 'prefix' => $prefix, $prefix => true));``
-#. ``Router::connect("/{$prefix}/:controller/:action/*", array('prefix' => $prefix, $prefix => true));``
 
 Much like admin routing all prefix actions should be prefixed with
 the prefix name. So ``/manager/posts/add`` would map to
@@ -558,12 +447,6 @@ Here's how to build this link using the HTML helper:
     // leave a prefix
     echo $html->link('View Post', array('manager' => false, 'controller' => 'posts', 'action' => 'view', 5));
 
-
-#. ``// Go into a prefixed route.``
-#. ``echo $html->link('Manage posts', array('manager' => true, 'controller' => 'posts', 'action' => 'add'));``
-#. ``// leave a prefix``
-#. ``echo $html->link('View Post', array('manager' => false, 'controller' => 'posts', 'action' => 'view', 5));``
-
 Plugin routing
 ~~~~~~~~~~~~~~
 
@@ -574,18 +457,12 @@ point to a plugin, but adding the plugin key to your url array.
 
     echo $html->link('New todo', array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'));
 
-
-#. ``echo $html->link('New todo', array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'));``
-
 Conversely if the active request is a plugin request and you want
 to create a link that has no plugin you can do the following.
 
 ::
 
     echo $html->link('New todo', array('plugin' => null, 'controller' => 'users', 'action' => 'profile'));
-
-
-#. ``echo $html->link('New todo', array('plugin' => null, 'controller' => 'users', 'action' => 'profile'));``
 
 By setting ``plugin => null`` you tell the Router that you want to
 create a link that is not part of a plugin.
@@ -599,9 +476,6 @@ extra line in your routes config file:
 ::
 
     Router::parseExtensions('html', 'rss');
-
-
-#. ``Router::parseExtensions('html', 'rss');``
 
 This will tell the router to remove any matching file extensions,
 and then parse what remains.
@@ -619,23 +493,11 @@ would create your route as illustrated below:
             )
         );  
 
-
-#. ``Router::connect(``
-#. ``'/page/:title',``
-#. ``array('controller' => 'pages', 'action' => 'view'),``
-#. ``array(``
-#. ``'pass' => array('title')``
-#. ``)``
-#. ``);``
-
 Then to create links which map back to the routes simply use:
 
 ::
 
     $html->link('Link title', array('controller' => 'pages', 'action' => 'view', 'title' => Inflector::slug('text to slug', '-'), 'ext' => 'html'))
-
-
-#. ``$html->link('Link title', array('controller' => 'pages', 'action' => 'view', 'title' => Inflector::slug('text to slug', '-'), 'ext' => 'html'))``
 
 Custom Route classes
 ~~~~~~~~~~~~~~~~~~~~
@@ -657,13 +519,6 @@ before trying to use it.
          array('controller' => 'posts', 'action' => 'view'),
          array('routeClass' => 'SlugRoute')
     );
-
-
-#. ``Router::connect(``
-#. ``'/:slug',``
-#. ``array('controller' => 'posts', 'action' => 'view'),``
-#. ``array('routeClass' => 'SlugRoute')``
-#. ``);``
 
 This route would create an instance of ``SlugRoute`` and allow you
 to implement custom parameter handling
@@ -735,15 +590,6 @@ for more information.
         }
     }
 
-
-#. ``CalendarsController extends AppController{``
-#. ``function view($arg1, $arg2){``
-#. ``debug($arg1);``
-#. ``debug($arg2);``
-#. ``debug(func_get_args());``
-#. ``}``
-#. ``}``
-
 For this, you will have...
 ::
 
@@ -767,9 +613,6 @@ For this, you will have...
 
     debug($this->params['pass'])
 
-
-#. ``debug($this->params['pass'])``
-
 For this, you will have...
 ::
 
@@ -784,9 +627,6 @@ For this, you will have...
 ::
 
     debug($this->passedArgs)
-
-
-#. ``debug($this->passedArgs)``
 
 ::
 
@@ -849,9 +689,6 @@ in the router use ``Router::connectNamed()``.
 
     Router::connectNamed(array('chapter', 'section'));
 
-
-#. ``Router::connectNamed(array('chapter', 'section'));``
-
 Will ensure that your chapter and section parameters reverse route
 correctly.
 
@@ -878,13 +715,6 @@ The basic format for a route definition is:
         array('paramName' => 'matchingRegex')
     )
 
-
-#. ``Router::connect(``
-#. ``'URL',``
-#. ``array('paramName' => 'defaultValue'),``
-#. ``array('paramName' => 'matchingRegex')``
-#. ``)``
-
 The first parameter is used to tell the router what sort of URL
 you're trying to control. The URL is a normal slash delimited
 string, but can also contain a wildcard (\*) or route elements
@@ -909,12 +739,6 @@ parameter of connect().
         array('controller' => 'pages', 'action' => 'display')
     );
 
-
-#. ``Router::connect(``
-#. ``'/pages/*',``
-#. ``array('controller' => 'pages', 'action' => 'display')``
-#. ``);``
-
 This route is found in the routes.php file distributed with CakePHP
 (line 40). This route matches any URL starting with /pages/ and
 hands it to the ``display()`` method of the ``PagesController();``
@@ -927,12 +751,6 @@ The request /pages/products would be mapped to
         '/government',
         array('controller' => 'products', 'action' => 'display', 5)
     );
-
-
-#. ``Router::connect(``
-#. ``'/government',``
-#. ``array('controller' => 'products', 'action' => 'display', 5)``
-#. ``);``
 
 This second example shows how you can use the second parameter of
 ``connect()`` to define default parameters. If you built a site
@@ -951,11 +769,6 @@ that:
     Router::connect(
         '/cooks/:action/*', array('controller' => 'users', 'action' => 'index')
     );
-
-
-#. ``Router::connect(``
-#. ``'/cooks/:action/*', array('controller' => 'users', 'action' => 'index')``
-#. ``);``
 
 This is telling the Router that any url beginning with /cooks/
 should be sent to the users controller.
@@ -977,12 +790,6 @@ to match urls like ``/cooks/someAction/type:chef`` we do:
         '/cooks/:action/*', array('controller' => 'users', 'action' => 'index')
     );
 
-
-#. ``Router::connectNamed(array('type'));``
-#. ``Router::connect(``
-#. ``'/cooks/:action/*', array('controller' => 'users', 'action' => 'index')``
-#. ``);``
-
 You can specify your own route elements, doing so gives you the
 power to define places in the URL where parameters for controller
 actions should lie. When a request is made, the values for these
@@ -1001,13 +808,6 @@ to know if the URL is correctly formed or not.
         array('action' => 'view'),
         array('id' => '[0-9]+')
     );
-
-
-#. ``Router::connect(``
-#. ``'/:controller/:id',``
-#. ``array('action' => 'view'),``
-#. ``array('id' => '[0-9]+')``
-#. ``);``
 
 This simple example illustrates how to create a quick way to view
 models from any controller by crafting a URL that looks like
@@ -1033,9 +833,6 @@ that controller name does not appear in url, e.g have urls like
 
      Router::connect('/:action', array('controller' => 'home')); 
 
-
-#. ``Router::connect('/:action', array('controller' => 'home'));``
-
 One more example, and you'll be a routing pro.
 
 ::
@@ -1049,17 +846,6 @@ One more example, and you'll be a routing pro.
             'day' => '0[1-9]|[12][0-9]|3[01]'
         )
     );
-
-
-#. ``Router::connect(``
-#. ``'/:controller/:year/:month/:day',``
-#. ``array('action' => 'index', 'day' => null),``
-#. ``array(``
-#. ``'year' => '[12][0-9]{3}',``
-#. ``'month' => '0[1-9]|1[012]',``
-#. ``'day' => '0[1-9]|[12][0-9]|3[01]'``
-#. ``)``
-#. ``);``
 
 This is rather involved, but shows how powerful routes can really
 become. The URL supplied has four route elements. The first is
@@ -1109,23 +895,6 @@ parameter of ``Router::connect()``.
         )
     );
 
-
-#. ``// some_controller.php``
-#. ``function view($articleID = null, $slug = null) {``
-#. ``// some code here...``
-#. ``}``
-#. ``// routes.php``
-#. ``Router::connect(``
-#. ``// E.g. /blog/3-CakePHP_Rocks``
-#. ``'/blog/:id-:slug',``
-#. ``array('controller' => 'blog', 'action' => 'view'),``
-#. ``array(``
-#. ``// order matters since this will simply map ":id" to $articleID in your action``
-#. ``'pass' => array('id', 'slug'),``
-#. ``'id' => '[0-9]+'``
-#. ``)``
-#. ``);``
-
 And now, thanks to the reverse routing capabilities, you can pass
 in the url array like below and Cake will know how to form the URL
 as defined in the routes.
@@ -1140,16 +909,6 @@ as defined in the routes.
         'id' => 3,
         'slug' => Inflector::slug('CakePHP Rocks')
     )); ?>
-
-
-#. ``// view.ctp``
-#. ``// this will return a link to /blog/3-CakePHP_Rocks``
-#. ``<?php echo $html->link('CakePHP Rocks', array(``
-#. ``'controller' => 'blog',``
-#. ``'action' => 'view',``
-#. ``'id' => 3,``
-#. ``'slug' => Inflector::slug('CakePHP Rocks')``
-#. ``)); ?>``
 
 Prefix Routing
 ~~~~~~~~~~~~~~
@@ -1166,9 +925,6 @@ related to the router, are to be configured in
 
     Configure::write('Routing.prefixes', array('admin'));
 
-
-#. ``Configure::write('Routing.prefixes', array('admin'));``
-
 In your controller, any action with an ``admin_`` prefix will be
 called. Using our users example, accessing the url
 /admin/users/edit/5 would call the method ``admin_edit`` of our
@@ -1182,18 +938,12 @@ controller using following route
 
     Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true)); 
 
-
-#. ``Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true));``
-
 You can configure the Router to use multiple prefixes too. By
 adding additional values to ``Routing.prefixes``. If you set
 
 ::
 
     Configure::write('Routing.prefixes', array('admin', 'manager'));
-
-
-#. ``Configure::write('Routing.prefixes', array('admin', 'manager'));``
 
 Cake will automatically generate routes for both the admin and
 manager prefixes. Each configured prefix will have the following
@@ -1205,12 +955,6 @@ routes generated for it.
     $this->connect("/{$prefix}/:plugin/:controller/:action/*", array('prefix' => $prefix, $prefix => true));
     Router::connect("/{$prefix}/:controller", array('action' => 'index', 'prefix' => $prefix, $prefix => true));
     Router::connect("/{$prefix}/:controller/:action/*", array('prefix' => $prefix, $prefix => true));
-
-
-#. ``$this->connect("/{$prefix}/:plugin/:controller", array('action' => 'index', 'prefix' => $prefix, $prefix => true));``
-#. ``$this->connect("/{$prefix}/:plugin/:controller/:action/*", array('prefix' => $prefix, $prefix => true));``
-#. ``Router::connect("/{$prefix}/:controller", array('action' => 'index', 'prefix' => $prefix, $prefix => true));``
-#. ``Router::connect("/{$prefix}/:controller/:action/*", array('prefix' => $prefix, $prefix => true));``
 
 Much like admin routing all prefix actions should be prefixed with
 the prefix name. So ``/manager/posts/add`` would map to
@@ -1228,12 +972,6 @@ Here's how to build this link using the HTML helper:
     // leave a prefix
     echo $html->link('View Post', array('manager' => false, 'controller' => 'posts', 'action' => 'view', 5));
 
-
-#. ``// Go into a prefixed route.``
-#. ``echo $html->link('Manage posts', array('manager' => true, 'controller' => 'posts', 'action' => 'add'));``
-#. ``// leave a prefix``
-#. ``echo $html->link('View Post', array('manager' => false, 'controller' => 'posts', 'action' => 'view', 5));``
-
 Plugin routing
 ~~~~~~~~~~~~~~
 
@@ -1244,18 +982,12 @@ point to a plugin, but adding the plugin key to your url array.
 
     echo $html->link('New todo', array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'));
 
-
-#. ``echo $html->link('New todo', array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'));``
-
 Conversely if the active request is a plugin request and you want
 to create a link that has no plugin you can do the following.
 
 ::
 
     echo $html->link('New todo', array('plugin' => null, 'controller' => 'users', 'action' => 'profile'));
-
-
-#. ``echo $html->link('New todo', array('plugin' => null, 'controller' => 'users', 'action' => 'profile'));``
 
 By setting ``plugin => null`` you tell the Router that you want to
 create a link that is not part of a plugin.
@@ -1269,9 +1001,6 @@ extra line in your routes config file:
 ::
 
     Router::parseExtensions('html', 'rss');
-
-
-#. ``Router::parseExtensions('html', 'rss');``
 
 This will tell the router to remove any matching file extensions,
 and then parse what remains.
@@ -1289,23 +1018,11 @@ would create your route as illustrated below:
             )
         );  
 
-
-#. ``Router::connect(``
-#. ``'/page/:title',``
-#. ``array('controller' => 'pages', 'action' => 'view'),``
-#. ``array(``
-#. ``'pass' => array('title')``
-#. ``)``
-#. ``);``
-
 Then to create links which map back to the routes simply use:
 
 ::
 
     $html->link('Link title', array('controller' => 'pages', 'action' => 'view', 'title' => Inflector::slug('text to slug', '-'), 'ext' => 'html'))
-
-
-#. ``$html->link('Link title', array('controller' => 'pages', 'action' => 'view', 'title' => Inflector::slug('text to slug', '-'), 'ext' => 'html'))``
 
 Custom Route classes
 ~~~~~~~~~~~~~~~~~~~~
@@ -1327,13 +1044,6 @@ before trying to use it.
          array('controller' => 'posts', 'action' => 'view'),
          array('routeClass' => 'SlugRoute')
     );
-
-
-#. ``Router::connect(``
-#. ``'/:slug',``
-#. ``array('controller' => 'posts', 'action' => 'view'),``
-#. ``array('routeClass' => 'SlugRoute')``
-#. ``);``
 
 This route would create an instance of ``SlugRoute`` and allow you
 to implement custom parameter handling

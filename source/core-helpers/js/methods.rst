@@ -30,9 +30,6 @@ script tags.
 
     $json = $this->Js->object($data);
 
-
-#. ``$json = $this->Js->object($data);``
-
 sortable($options = array())
 
 Sortable generates a javascript snippet to make a set of elements
@@ -77,26 +74,12 @@ detailed information on its options and parameters.
             'wrapCallbacks' => false
         ));
 
-
-#. ``$this->Js->get('#my-list');``
-#. ``$this->Js->sortable(array(``
-#. ``'distance' => 5,``
-#. ``'containment' => 'parent',``
-#. ``'start' => 'onStart',``
-#. ``'complete' => 'onStop',``
-#. ``'sort' => 'onSort',``
-#. ``'wrapCallbacks' => false``
-#. ``));``
-
 Assuming you were using the jQuery engine, you would get the
 following code in your generated Javascript block:
 
 ::
 
     $("#myList").sortable({containment:"parent", distance:5, sort:onSort, start:onStart, stop:onStop});
-
-
-#. ``$("#myList").sortable({containment:"parent", distance:5, sort:onSort, start:onStart, stop:onStop});``
 
 request($url, $options = array())
 
@@ -137,13 +120,6 @@ Generate a javascript snippet to create an ``XmlHttpRequest`` or
     'async' => true,
     'update' => '#element')));
 
-
-#. ``$this->Js->event('click',``
-#. ``$this->Js->request(array(``
-#. ``'action' => 'foo', param1), array(``
-#. ``'async' => true,``
-#. ``'update' => '#element')));``
-
 get($selector)
 
 Set the internal 'selection' to a CSS selector. The active
@@ -153,9 +129,6 @@ made.
 ::
 
     $this->Js->get('#element');
-
-
-#. ``$this->Js->get('#element');``
 
 The ``JsHelper`` now will reference all other element based methods
 on the selection of ``#element``. To change the active selection,
@@ -195,26 +168,12 @@ Make an element draggable.
         'wrapCallbacks' => false
     ));
 
-
-#. ``$this->Js->get('#element');``
-#. ``$this->Js->drag(array(``
-#. ``'container' => '#content',``
-#. ``'start' => 'onStart',``
-#. ``'drag' => 'onDrag',``
-#. ``'stop' => 'onStop',``
-#. ``'snapGrid' => array(10, 10),``
-#. ``'wrapCallbacks' => false``
-#. ``));``
-
 If you were using the jQuery engine the following code would be
 added to the buffer.
 
 ::
 
     $("#element").draggable({containment:"#content", drag:onDrag, grid:[10,10], start:onStart, stop:onStop});
-
-
-#. ``$("#element").draggable({containment:"#content", drag:onDrag, grid:[10,10], start:onStart, stop:onStop});``
 
 drop($options = array())
 
@@ -250,16 +209,6 @@ dragged elements.
         'wrapCallbacks' => false
     ));
 
-
-#. ``$this->Js->get('#element');``
-#. ``$this->Js->drop(array(``
-#. ``'accept' => '.items',``
-#. ``'hover' => 'onHover',``
-#. ``'leave' => 'onExit',``
-#. ``'drop' => 'onDrop',``
-#. ``'wrapCallbacks' => false``
-#. ``));``
-
 If you were using the jQuery engine the following code would be
 added to the buffer:
 
@@ -267,10 +216,6 @@ added to the buffer:
 
     <code class=
     "php">$("#element").droppable({accept:".items", drop:onDrop, out:onExit, over:onHover});</code>
-
-
-#. ``<code class=``
-#. ``"php">$("#element").droppable({accept:".items", drop:onDrop, out:onExit, over:onHover});</code>``
 
 **''Note'' about MootoolsEngine::drop**
 
@@ -318,27 +263,12 @@ and features.
         'wrapCallbacks' => false
     ));
 
-
-#. ``$this->Js->get('#element');``
-#. ``$this->Js->slider(array(``
-#. ``'complete' => 'onComplete',``
-#. ``'change' => 'onChange',``
-#. ``'min' => 0,``
-#. ``'max' => 10,``
-#. ``'value' => 2,``
-#. ``'direction' => 'vertical',``
-#. ``'wrapCallbacks' => false``
-#. ``));``
-
 If you were using the jQuery engine the following code would be
 added to the buffer:
 
 ::
 
     $("#element").slider({change:onChange, max:10, min:0, orientation:"vertical", stop:onComplete, value:2});
-
-
-#. ``$("#element").slider({change:onChange, max:10, min:0, orientation:"vertical", stop:onComplete, value:2});``
 
 effect($name, $options = array())
 
@@ -374,11 +304,6 @@ If you were using the jQuery engine.
     
     //$result contains $("#foo").fadeIn();
 
-
-#. ``$this->Js->get('#element');``
-#. ``$result = $this->Js->effect('fadeIn');``
-#. ``//$result contains $("#foo").fadeIn();``
-
 event($type, $content, $options = array())
 
 Bind an event to the current selection. ``$type`` can be any of the
@@ -403,10 +328,6 @@ callback. Callbacks will be wrapped with
     $this->Js->get('#some-link');
     $this->Js->event('click', $this->Js->alert('hey you!'));
 
-
-#. ``$this->Js->get('#some-link');``
-#. ``$this->Js->event('click', $this->Js->alert('hey you!'));``
-
 If you were using the jQuery library you would get the following
 Javascript code.
 
@@ -417,12 +338,6 @@ Javascript code.
         return false;
     });
 
-
-#. ``$('#some-link').bind('click', function (event) {``
-#. ``alert('hey you!');``
-#. ``return false;``
-#. ``});``
-
 You can remove the ``return false;`` by passing setting the
 ``stop`` option to false.
 
@@ -430,10 +345,6 @@ You can remove the ``return false;`` by passing setting the
 
     $this->Js->get('#some-link');
     $this->Js->event('click', $this->Js->alert('hey you!'), array('stop' => false));
-
-
-#. ``$this->Js->get('#some-link');``
-#. ``$this->Js->event('click', $this->Js->alert('hey you!'), array('stop' => false));``
 
 If you were using the jQuery library you would the following
 Javascript code would be added to the buffer. Note that the default
@@ -444,11 +355,6 @@ browser event is not cancelled.
     $('#some-link').bind('click', function (event) {
         alert('hey you!');
     });
-
-
-#. ``$('#some-link').bind('click', function (event) {``
-#. ``alert('hey you!');``
-#. ``});``
 
 domReady($callback)
 
@@ -467,18 +373,11 @@ elements, and inserts ``$callback``.
     $this->Js->get('div.message');
     $this->Js->each('$(this).css({color: "red"});');
 
-
-#. ``$this->Js->get('div.message');``
-#. ``$this->Js->each('$(this).css({color: "red"});');``
-
 Using the jQuery engine would create the following Javascript
 
 ::
 
     $('div.message').each(function () { $(this).css({color: "red"});});
-
-
-#. ``$('div.message').each(function () { $(this).css({color: "red"});});``
 
 alert($message)
 
@@ -490,9 +389,6 @@ snippet.
 
     $alert = $this->Js->alert('Hey there');
 
-
-#. ``$alert = $this->Js->alert('Hey there');``
-
 confirm($message)
 
 Create a javascript snippet containing a ``confirm()`` snippet. By
@@ -503,9 +399,6 @@ snippet.
 
     $alert = $this->Js->confirm('Are you sure?');
 
-
-#. ``$alert = $this->Js->confirm('Are you sure?');``
-
 prompt($message, $default)
 
 Create a javascript snippet containing a ``prompt()`` snippet. By
@@ -515,9 +408,6 @@ snippet.
 ::
 
     $prompt = $this->Js->prompt('What is your favorite color?', 'blue');
-
-
-#. ``$prompt = $this->Js->prompt('What is your favorite color?', 'blue');``
 
 submit()
 
@@ -548,18 +438,12 @@ beyond the scope of this helper.
 
     echo $this->Js->submit('Save', array('update' => '#content'));
 
-
-#. ``echo $this->Js->submit('Save', array('update' => '#content'));``
-
 Will create a submit button with an attached onclick event. The
 click event will be buffered by default.
 
 ::
 
     echo $this->Js->submit('Save', array('update' => '#content', 'div' => false, 'type' => 'json', 'async' => false));
-
-
-#. ``echo $this->Js->submit('Save', array('update' => '#content', 'div' => false, 'type' => 'json', 'async' => false));``
 
 Shows how you can combine options that both
 ``FormHelper::submit()`` and ``Js::request()`` when using submit.
@@ -593,9 +477,6 @@ generated one will be created for each link generated.
 
     echo $this->Js->link('Page 2', array('page' => 2), array('update' => '#content'));
 
-
-#. ``echo $this->Js->link('Page 2', array('page' => 2), array('update' => '#content'));``
-
 Will create a link pointing to ``/page:2`` and updating #content
 with the response.
 
@@ -612,14 +493,6 @@ custom attributes.
     
     //Creates the following html
     <a href="/posts/index/page:2" other="value">Page 2</a>
-
-
-#. ``echo $this->Js->link('Page 2', array('page' => 2), array(``
-#. ``'update' =&gt; '#content',``
-#. ``'htmlAttributes' =&gt; array('other' =&gt; 'value')``
-#. ``));``
-#. ``//Creates the following html``
-#. ``<a href="/posts/index/page:2" other="value">Page 2</a>``
 
 serializeForm($options = array())
 
@@ -684,9 +557,6 @@ script tags.
 
     $json = $this->Js->object($data);
 
-
-#. ``$json = $this->Js->object($data);``
-
 sortable($options = array())
 
 Sortable generates a javascript snippet to make a set of elements
@@ -731,26 +601,12 @@ detailed information on its options and parameters.
             'wrapCallbacks' => false
         ));
 
-
-#. ``$this->Js->get('#my-list');``
-#. ``$this->Js->sortable(array(``
-#. ``'distance' => 5,``
-#. ``'containment' => 'parent',``
-#. ``'start' => 'onStart',``
-#. ``'complete' => 'onStop',``
-#. ``'sort' => 'onSort',``
-#. ``'wrapCallbacks' => false``
-#. ``));``
-
 Assuming you were using the jQuery engine, you would get the
 following code in your generated Javascript block:
 
 ::
 
     $("#myList").sortable({containment:"parent", distance:5, sort:onSort, start:onStart, stop:onStop});
-
-
-#. ``$("#myList").sortable({containment:"parent", distance:5, sort:onSort, start:onStart, stop:onStop});``
 
 request($url, $options = array())
 
@@ -791,13 +647,6 @@ Generate a javascript snippet to create an ``XmlHttpRequest`` or
     'async' => true,
     'update' => '#element')));
 
-
-#. ``$this->Js->event('click',``
-#. ``$this->Js->request(array(``
-#. ``'action' => 'foo', param1), array(``
-#. ``'async' => true,``
-#. ``'update' => '#element')));``
-
 get($selector)
 
 Set the internal 'selection' to a CSS selector. The active
@@ -807,9 +656,6 @@ made.
 ::
 
     $this->Js->get('#element');
-
-
-#. ``$this->Js->get('#element');``
 
 The ``JsHelper`` now will reference all other element based methods
 on the selection of ``#element``. To change the active selection,
@@ -849,26 +695,12 @@ Make an element draggable.
         'wrapCallbacks' => false
     ));
 
-
-#. ``$this->Js->get('#element');``
-#. ``$this->Js->drag(array(``
-#. ``'container' => '#content',``
-#. ``'start' => 'onStart',``
-#. ``'drag' => 'onDrag',``
-#. ``'stop' => 'onStop',``
-#. ``'snapGrid' => array(10, 10),``
-#. ``'wrapCallbacks' => false``
-#. ``));``
-
 If you were using the jQuery engine the following code would be
 added to the buffer.
 
 ::
 
     $("#element").draggable({containment:"#content", drag:onDrag, grid:[10,10], start:onStart, stop:onStop});
-
-
-#. ``$("#element").draggable({containment:"#content", drag:onDrag, grid:[10,10], start:onStart, stop:onStop});``
 
 drop($options = array())
 
@@ -904,16 +736,6 @@ dragged elements.
         'wrapCallbacks' => false
     ));
 
-
-#. ``$this->Js->get('#element');``
-#. ``$this->Js->drop(array(``
-#. ``'accept' => '.items',``
-#. ``'hover' => 'onHover',``
-#. ``'leave' => 'onExit',``
-#. ``'drop' => 'onDrop',``
-#. ``'wrapCallbacks' => false``
-#. ``));``
-
 If you were using the jQuery engine the following code would be
 added to the buffer:
 
@@ -921,10 +743,6 @@ added to the buffer:
 
     <code class=
     "php">$("#element").droppable({accept:".items", drop:onDrop, out:onExit, over:onHover});</code>
-
-
-#. ``<code class=``
-#. ``"php">$("#element").droppable({accept:".items", drop:onDrop, out:onExit, over:onHover});</code>``
 
 **''Note'' about MootoolsEngine::drop**
 
@@ -972,27 +790,12 @@ and features.
         'wrapCallbacks' => false
     ));
 
-
-#. ``$this->Js->get('#element');``
-#. ``$this->Js->slider(array(``
-#. ``'complete' => 'onComplete',``
-#. ``'change' => 'onChange',``
-#. ``'min' => 0,``
-#. ``'max' => 10,``
-#. ``'value' => 2,``
-#. ``'direction' => 'vertical',``
-#. ``'wrapCallbacks' => false``
-#. ``));``
-
 If you were using the jQuery engine the following code would be
 added to the buffer:
 
 ::
 
     $("#element").slider({change:onChange, max:10, min:0, orientation:"vertical", stop:onComplete, value:2});
-
-
-#. ``$("#element").slider({change:onChange, max:10, min:0, orientation:"vertical", stop:onComplete, value:2});``
 
 effect($name, $options = array())
 
@@ -1028,11 +831,6 @@ If you were using the jQuery engine.
     
     //$result contains $("#foo").fadeIn();
 
-
-#. ``$this->Js->get('#element');``
-#. ``$result = $this->Js->effect('fadeIn');``
-#. ``//$result contains $("#foo").fadeIn();``
-
 event($type, $content, $options = array())
 
 Bind an event to the current selection. ``$type`` can be any of the
@@ -1057,10 +855,6 @@ callback. Callbacks will be wrapped with
     $this->Js->get('#some-link');
     $this->Js->event('click', $this->Js->alert('hey you!'));
 
-
-#. ``$this->Js->get('#some-link');``
-#. ``$this->Js->event('click', $this->Js->alert('hey you!'));``
-
 If you were using the jQuery library you would get the following
 Javascript code.
 
@@ -1071,12 +865,6 @@ Javascript code.
         return false;
     });
 
-
-#. ``$('#some-link').bind('click', function (event) {``
-#. ``alert('hey you!');``
-#. ``return false;``
-#. ``});``
-
 You can remove the ``return false;`` by passing setting the
 ``stop`` option to false.
 
@@ -1084,10 +872,6 @@ You can remove the ``return false;`` by passing setting the
 
     $this->Js->get('#some-link');
     $this->Js->event('click', $this->Js->alert('hey you!'), array('stop' => false));
-
-
-#. ``$this->Js->get('#some-link');``
-#. ``$this->Js->event('click', $this->Js->alert('hey you!'), array('stop' => false));``
 
 If you were using the jQuery library you would the following
 Javascript code would be added to the buffer. Note that the default
@@ -1098,11 +882,6 @@ browser event is not cancelled.
     $('#some-link').bind('click', function (event) {
         alert('hey you!');
     });
-
-
-#. ``$('#some-link').bind('click', function (event) {``
-#. ``alert('hey you!');``
-#. ``});``
 
 domReady($callback)
 
@@ -1121,18 +900,11 @@ elements, and inserts ``$callback``.
     $this->Js->get('div.message');
     $this->Js->each('$(this).css({color: "red"});');
 
-
-#. ``$this->Js->get('div.message');``
-#. ``$this->Js->each('$(this).css({color: "red"});');``
-
 Using the jQuery engine would create the following Javascript
 
 ::
 
     $('div.message').each(function () { $(this).css({color: "red"});});
-
-
-#. ``$('div.message').each(function () { $(this).css({color: "red"});});``
 
 alert($message)
 
@@ -1144,9 +916,6 @@ snippet.
 
     $alert = $this->Js->alert('Hey there');
 
-
-#. ``$alert = $this->Js->alert('Hey there');``
-
 confirm($message)
 
 Create a javascript snippet containing a ``confirm()`` snippet. By
@@ -1157,9 +926,6 @@ snippet.
 
     $alert = $this->Js->confirm('Are you sure?');
 
-
-#. ``$alert = $this->Js->confirm('Are you sure?');``
-
 prompt($message, $default)
 
 Create a javascript snippet containing a ``prompt()`` snippet. By
@@ -1169,9 +935,6 @@ snippet.
 ::
 
     $prompt = $this->Js->prompt('What is your favorite color?', 'blue');
-
-
-#. ``$prompt = $this->Js->prompt('What is your favorite color?', 'blue');``
 
 submit()
 
@@ -1202,18 +965,12 @@ beyond the scope of this helper.
 
     echo $this->Js->submit('Save', array('update' => '#content'));
 
-
-#. ``echo $this->Js->submit('Save', array('update' => '#content'));``
-
 Will create a submit button with an attached onclick event. The
 click event will be buffered by default.
 
 ::
 
     echo $this->Js->submit('Save', array('update' => '#content', 'div' => false, 'type' => 'json', 'async' => false));
-
-
-#. ``echo $this->Js->submit('Save', array('update' => '#content', 'div' => false, 'type' => 'json', 'async' => false));``
 
 Shows how you can combine options that both
 ``FormHelper::submit()`` and ``Js::request()`` when using submit.
@@ -1247,9 +1004,6 @@ generated one will be created for each link generated.
 
     echo $this->Js->link('Page 2', array('page' => 2), array('update' => '#content'));
 
-
-#. ``echo $this->Js->link('Page 2', array('page' => 2), array('update' => '#content'));``
-
 Will create a link pointing to ``/page:2`` and updating #content
 with the response.
 
@@ -1266,14 +1020,6 @@ custom attributes.
     
     //Creates the following html
     <a href="/posts/index/page:2" other="value">Page 2</a>
-
-
-#. ``echo $this->Js->link('Page 2', array('page' => 2), array(``
-#. ``'update' =&gt; '#content',``
-#. ``'htmlAttributes' =&gt; array('other' =&gt; 'value')``
-#. ``));``
-#. ``//Creates the following html``
-#. ``<a href="/posts/index/page:2" other="value">Page 2</a>``
 
 serializeForm($options = array())
 

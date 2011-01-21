@@ -15,13 +15,6 @@ containing:
         //...
     );
 
-
-#. ``$tags = array(``
-#. ``'metalink' => '<link href="%s"%s >',``
-#. ``'input' => '<input name="%s" %s >',``
-#. ``//...``
-#. ``);``
-
 You can then load this tag set by calling
 ``$html->loadConfig('tags');``
 
@@ -41,13 +34,6 @@ containing:
         'input' => '<input name="%s" %s >',
         //...
     );
-
-
-#. ``$tags = array(``
-#. ``'metalink' => '<link href="%s"%s >',``
-#. ``'input' => '<input name="%s" %s >',``
-#. ``//...``
-#. ``);``
 
 You can then load this tag set by calling
 ``$html->loadConfig('tags');``

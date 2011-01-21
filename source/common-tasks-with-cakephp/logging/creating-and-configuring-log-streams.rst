@@ -27,20 +27,6 @@ DataBaseLogger would look like
         ...
     ));
 
-
-#. ``//for app/libs``
-#. ``CakeLog::config('otherFile', array(``
-#. ``'engine' => 'DataBaseLogger',``
-#. ``'model' => 'LogEntry',``
-#. ``...``
-#. ``));``
-#. ``//for plugin called LoggingPack``
-#. ``CakeLog::config('otherFile', array(``
-#. ``'engine' => 'LoggingPack.DataBaseLogger',``
-#. ``'model' => 'LogEntry',``
-#. ``...``
-#. ``));``
-
 When configuring a log stream the ``engine`` parameter is used to
 locate and load the log handler. All of the other configuration
 properties are passed to the log stream's constructor as an array.
@@ -52,13 +38,6 @@ properties are passed to the log stream's constructor as an array.
             //...
         }
     }
-
-
-#. ``class DataBaseLogger {``
-#. ``function __construct($options = array()) {``
-#. ``//...``
-#. ``}``
-#. ``}``
 
 CakePHP has no requirements for Log streams other than that they
 must implement a ``write`` method. This write method must take two
@@ -102,20 +81,6 @@ DataBaseLogger would look like
         ...
     ));
 
-
-#. ``//for app/libs``
-#. ``CakeLog::config('otherFile', array(``
-#. ``'engine' => 'DataBaseLogger',``
-#. ``'model' => 'LogEntry',``
-#. ``...``
-#. ``));``
-#. ``//for plugin called LoggingPack``
-#. ``CakeLog::config('otherFile', array(``
-#. ``'engine' => 'LoggingPack.DataBaseLogger',``
-#. ``'model' => 'LogEntry',``
-#. ``...``
-#. ``));``
-
 When configuring a log stream the ``engine`` parameter is used to
 locate and load the log handler. All of the other configuration
 properties are passed to the log stream's constructor as an array.
@@ -127,13 +92,6 @@ properties are passed to the log stream's constructor as an array.
             //...
         }
     }
-
-
-#. ``class DataBaseLogger {``
-#. ``function __construct($options = array()) {``
-#. ``//...``
-#. ``}``
-#. ``}``
 
 CakePHP has no requirements for Log streams other than that they
 must implement a ``write`` method. This write method must take two

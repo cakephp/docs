@@ -19,12 +19,6 @@ made; ``$query`` is the data to be posted, either in string form:
     $results = $HttpSocket->post('www.somesite.com/add', array('name' => 'test', 'type' => 'user'));  
     //$results contains what is returned from the post.
 
-
-#. ``App::import('Core', 'HttpSocket');``
-#. ``$HttpSocket = new HttpSocket();``
-#. ``$results = $HttpSocket->post('www.somesite.com/add', array('name' => 'test', 'type' => 'user'));``
-#. ``//$results contains what is returned from the post.``
-
 8.8.2 post
 ----------
 
@@ -45,9 +39,3 @@ made; ``$query`` is the data to be posted, either in string form:
     $HttpSocket = new HttpSocket();
     $results = $HttpSocket->post('www.somesite.com/add', array('name' => 'test', 'type' => 'user'));  
     //$results contains what is returned from the post.
-
-
-#. ``App::import('Core', 'HttpSocket');``
-#. ``$HttpSocket = new HttpSocket();``
-#. ``$results = $HttpSocket->post('www.somesite.com/add', array('name' => 'test', 'type' => 'user'));``
-#. ``//$results contains what is returned from the post.``

@@ -34,14 +34,6 @@ look like for our pizza example:
     }
     ?>
 
-
-#. ``// /app/plugins/pizza/pizza_app_controller.php:``
-#. ``<?php``
-#. ``class PizzaAppController extends AppController {``
-#. ``//...``
-#. ``}``
-#. ``?>``
-
 ::
 
     // /app/plugins/pizza/pizza_app_model.php:
@@ -50,14 +42,6 @@ look like for our pizza example:
            //...
     }
     ?>
-
-
-#. ``// /app/plugins/pizza/pizza_app_model.php:``
-#. ``<?php``
-#. ``class PizzaAppModel extends AppModel {``
-#. ``//...``
-#. ``}``
-#. ``?>``
 
 If you forgot to define these special classes, CakePHP will hand
 you "Missing Controller" errors until you’ve done so.
@@ -118,14 +102,6 @@ look like for our pizza example:
     }
     ?>
 
-
-#. ``// /app/plugins/pizza/pizza_app_controller.php:``
-#. ``<?php``
-#. ``class PizzaAppController extends AppController {``
-#. ``//...``
-#. ``}``
-#. ``?>``
-
 ::
 
     // /app/plugins/pizza/pizza_app_model.php:
@@ -134,14 +110,6 @@ look like for our pizza example:
            //...
     }
     ?>
-
-
-#. ``// /app/plugins/pizza/pizza_app_model.php:``
-#. ``<?php``
-#. ``class PizzaAppModel extends AppModel {``
-#. ``//...``
-#. ``}``
-#. ``?>``
 
 If you forgot to define these special classes, CakePHP will hand
 you "Missing Controller" errors until you’ve done so.

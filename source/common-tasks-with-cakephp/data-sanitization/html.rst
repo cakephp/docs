@@ -16,13 +16,6 @@ is removed rather than rendered as HTML entities.
     echo Sanitize::html($badString, array('remove' => true));
     // output: HEY...
 
-
-#. ``$badString = '<font size="99" color="#FF0000">HEY</font><script>...</script>';``
-#. ``echo Sanitize::html($badString);``
-#. ``// output: &lt;font size=&quot;99&quot; color=&quot;#FF0000&quot;&gt;HEY&lt;/font&gt;&lt;script&gt;...&lt;/script&gt;``
-#. ``echo Sanitize::html($badString, array('remove' => true));``
-#. ``// output: HEY...``
-
 4.2.2 html
 ----------
 
@@ -40,10 +33,3 @@ is removed rather than rendered as HTML entities.
     // output: &lt;font size=&quot;99&quot; color=&quot;#FF0000&quot;&gt;HEY&lt;/font&gt;&lt;script&gt;...&lt;/script&gt;
     echo Sanitize::html($badString, array('remove' => true));
     // output: HEY...
-
-
-#. ``$badString = '<font size="99" color="#FF0000">HEY</font><script>...</script>';``
-#. ``echo Sanitize::html($badString);``
-#. ``// output: &lt;font size=&quot;99&quot; color=&quot;#FF0000&quot;&gt;HEY&lt;/font&gt;&lt;script&gt;...&lt;/script&gt;``
-#. ``echo Sanitize::html($badString, array('remove' => true));``
-#. ``// output: HEY...``

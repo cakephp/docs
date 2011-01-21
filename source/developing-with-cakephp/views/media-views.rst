@@ -29,21 +29,6 @@ located.
         }
     }
 
-
-#. ``class ExampleController extends AppController {``
-#. ``function download () {``
-#. ``$this->view = 'Media';``
-#. ``$params = array(``
-#. ``'id' => 'example.zip',``
-#. ``'name' => 'example',``
-#. ``'download' => true,``
-#. ``'extension' => 'zip',``
-#. ``'path' => APP . 'files' . DS``
-#. ``);``
-#. ``$this->set($params);``
-#. ``}``
-#. ``}``
-
 Here's an example of rendering a file whose mime type is not
 included in the MediaView's ``$mimeType`` array.
 
@@ -60,19 +45,6 @@ included in the MediaView's ``$mimeType`` array.
        );
        $this->set($params);
     }
-
-
-#. ``function download () {``
-#. ``$this->view = 'Media';``
-#. ``$params = array(``
-#. ``'id' => 'example.docx',``
-#. ``'name' => 'example',``
-#. ``'extension' => 'docx',``
-#. ``'mimeType' => array('docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'),``
-#. ``'path' => APP . 'files' . DS``
-#. ``);``
-#. ``$this->set($params);``
-#. ``}``
 
 Parameters
 Description
@@ -133,21 +105,6 @@ located.
         }
     }
 
-
-#. ``class ExampleController extends AppController {``
-#. ``function download () {``
-#. ``$this->view = 'Media';``
-#. ``$params = array(``
-#. ``'id' => 'example.zip',``
-#. ``'name' => 'example',``
-#. ``'download' => true,``
-#. ``'extension' => 'zip',``
-#. ``'path' => APP . 'files' . DS``
-#. ``);``
-#. ``$this->set($params);``
-#. ``}``
-#. ``}``
-
 Here's an example of rendering a file whose mime type is not
 included in the MediaView's ``$mimeType`` array.
 
@@ -164,19 +121,6 @@ included in the MediaView's ``$mimeType`` array.
        );
        $this->set($params);
     }
-
-
-#. ``function download () {``
-#. ``$this->view = 'Media';``
-#. ``$params = array(``
-#. ``'id' => 'example.docx',``
-#. ``'name' => 'example',``
-#. ``'extension' => 'docx',``
-#. ``'mimeType' => array('docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'),``
-#. ``'path' => APP . 'files' . DS``
-#. ``);``
-#. ``$this->set($params);``
-#. ``}``
 
 Parameters
 Description

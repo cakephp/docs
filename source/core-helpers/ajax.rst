@@ -27,12 +27,6 @@ controller:
         var $helpers = array('Html','Ajax','Javascript');
     }
 
-
-#. ``class WidgetsController extends AppController {``
-#. ``var $name = 'Widgets';``
-#. ``var $helpers = array('Html','Ajax','Javascript');``
-#. ``}``
-
 Once you have the javascript helper included in your controller,
 you can use the javascript helper link() method to include
 Prototype and Scriptaculous:
@@ -42,18 +36,11 @@ Prototype and Scriptaculous:
     echo $html->script('prototype');
     echo $html->script('scriptaculous'); 
 
-
-#. ``echo $html->script('prototype');``
-#. ``echo $html->script('scriptaculous');``
-
 Now you can use the Ajax helper in your view:
 
 ::
 
     $ajax->whatever();
-
-
-#. ``$ajax->whatever();``
 
 If the `RequestHandler Component </view/174/request-handling>`_ is
 included in the controller then CakePHP will automatically apply
@@ -66,13 +53,6 @@ the Ajax layout when an action is requested via AJAX
         var $helpers = array('Html','Ajax','Javascript');
         var $components = array( 'RequestHandler' );
     }
-
-
-#. ``class WidgetsController extends AppController {``
-#. ``var $name = 'Widgets';``
-#. ``var $helpers = array('Html','Ajax','Javascript');``
-#. ``var $components = array( 'RequestHandler' );``
-#. ``}``
 
 7.1 AJAX
 --------
@@ -103,12 +83,6 @@ controller:
         var $helpers = array('Html','Ajax','Javascript');
     }
 
-
-#. ``class WidgetsController extends AppController {``
-#. ``var $name = 'Widgets';``
-#. ``var $helpers = array('Html','Ajax','Javascript');``
-#. ``}``
-
 Once you have the javascript helper included in your controller,
 you can use the javascript helper link() method to include
 Prototype and Scriptaculous:
@@ -118,18 +92,11 @@ Prototype and Scriptaculous:
     echo $html->script('prototype');
     echo $html->script('scriptaculous'); 
 
-
-#. ``echo $html->script('prototype');``
-#. ``echo $html->script('scriptaculous');``
-
 Now you can use the Ajax helper in your view:
 
 ::
 
     $ajax->whatever();
-
-
-#. ``$ajax->whatever();``
 
 If the `RequestHandler Component </view/174/request-handling>`_ is
 included in the controller then CakePHP will automatically apply
@@ -142,10 +109,3 @@ the Ajax layout when an action is requested via AJAX
         var $helpers = array('Html','Ajax','Javascript');
         var $components = array( 'RequestHandler' );
     }
-
-
-#. ``class WidgetsController extends AppController {``
-#. ``var $name = 'Widgets';``
-#. ``var $helpers = array('Html','Ajax','Javascript');``
-#. ``var $components = array( 'RequestHandler' );``
-#. ``}``

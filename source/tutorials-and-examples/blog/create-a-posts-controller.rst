@@ -17,14 +17,6 @@ directory. Here's what the basic controller should look like:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class PostsController extends AppController {``
-#. ``var $helpers = array ('Html','Form');``
-#. ``var $name = 'Posts';``
-#. ``}``
-#. ``?>``
-
 Now, lets add an action to our controller. Actions often represent
 a single function or interface in an application. For example, when
 users request www.example.com/posts/index (which is also the same
@@ -43,17 +35,6 @@ posts. The code for that action would look something like this:
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class PostsController extends AppController {``
-#. ``var $helpers = array ('Html','Form');``
-#. ``var $name = 'Posts';``
-#. ``function index() {``
-#. ``$this->set('posts', $this->Post->find('all'));``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 Let me explain the action a bit. By defining function ``index()``
 in our PostsController, users can now access the logic there by
@@ -96,14 +77,6 @@ directory. Here's what the basic controller should look like:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class PostsController extends AppController {``
-#. ``var $helpers = array ('Html','Form');``
-#. ``var $name = 'Posts';``
-#. ``}``
-#. ``?>``
-
 Now, lets add an action to our controller. Actions often represent
 a single function or interface in an application. For example, when
 users request www.example.com/posts/index (which is also the same
@@ -122,17 +95,6 @@ posts. The code for that action would look something like this:
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class PostsController extends AppController {``
-#. ``var $helpers = array ('Html','Form');``
-#. ``var $name = 'Posts';``
-#. ``function index() {``
-#. ``$this->set('posts', $this->Post->find('all'));``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 Let me explain the action a bit. By defining function ``index()``
 in our PostsController, users can now access the logic there by

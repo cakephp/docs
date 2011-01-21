@@ -12,12 +12,6 @@ method. For example:
     $this->Email->subject = 'Test';
     $this->Email->send('Hello message body!');
 
-
-#. ``$this->Email->from    = 'Somebody <somebody@example.com>';``
-#. ``$this->Email->to      = 'Somebody Else <somebody.else@example.com>';``
-#. ``$this->Email->subject = 'Test';``
-#. ``$this->Email->send('Hello message body!');``
-
 Setting up the Layouts
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -36,13 +30,6 @@ structure
             text/
                 default.ctp
 
-
-#. ``email/``
-#. ``html/``
-#. ``default.ctp``
-#. ``text/``
-#. ``default.ctp``
-
 These are the files that hold the layout templates for your default
 messages. Some example content is below
 
@@ -50,9 +37,6 @@ messages. Some example content is below
 ::
 
         <?php echo $content_for_layout; ?>
-
-
-#. ``<?php echo $content_for_layout; ?>``
 
 ``email/html/default.ctp``
 ::
@@ -63,14 +47,6 @@ messages. Some example content is below
             <?php echo $content_for_layout; ?>
         </body>
     </html>
-
-
-#. ``<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">``
-#. ``<html>``
-#. ``<body>``
-#. ``<?php echo $content_for_layout; ?>``
-#. ``</body>``
-#. ``</html>``
 
 Setup an email element for the message body
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -90,19 +66,11 @@ simple\_message.ctp
      Dear <?php echo $User['User']['first']. ' ' . $User['User']['last'] ?>,
        Thank you for your interest.
 
-
-#. ``Dear <?php echo $User['User']['first']. ' ' . $User['User']['last'] ?>,``
-#. ``Thank you for your interest.``
-
 ``html``
 ::
 
      <p>Dear <?php echo $User['User']['first']. ' ' . $User['User']['last'] ?>,<br />
      &nbsp;&nbsp;&nbsp;Thank you for your interest.</p>
-
-
-#. ``<p>Dear <?php echo $User['User']['first']. ' ' . $User['User']['last'] ?>,<br />``
-#. ``&nbsp;&nbsp;&nbsp;Thank you for your interest.</p>``
 
 The ``$content`` parameter for the send() method is sent to any
 templates as ``$content``.
@@ -118,11 +86,6 @@ like:
     <?php
     var $components = array('Email');
     ?>
-
-
-#. ``<?php``
-#. ``var $components = array('Email');``
-#. ``?>``
 
 In this example we will set up a private method to handle sending
 the email messages to a user identified by an $id. In our
@@ -149,35 +112,12 @@ controller (let's use the User controller in this example)
      }
     ?>
 
-
-#. ``<?php``
-#. ``function _sendNewUserMail($id) {``
-#. ``$User = $this->User->read(null,$id);``
-#. ``$this->Email->to = $User['User']['email'];``
-#. ``$this->Email->bcc = array('secret@example.com');``
-#. ``$this->Email->subject = 'Welcome to our really cool thing';``
-#. ``$this->Email->replyTo = 'support@example.com';``
-#. ``$this->Email->from = 'Cool Web App <app@example.com>';``
-#. ``$this->Email->template = 'simple_message'; // note no '.ctp'``
-#. ``//Send as 'html', 'text' or 'both' (default is 'text')``
-#. ``$this->Email->sendAs = 'both'; // because we like to send pretty mail``
-#. ``//Set view variables as normal``
-#. ``$this->set('User', $User);``
-#. ``//Do not pass any args to send()``
-#. ``$this->Email->send();``
-#. ``}``
-#. ``?>``
-
 You have sent a message, you could call this from another method
 like
 ::
 
      
     $this->_sendNewUserMail( $this->User->id );
-
-
-#. ````
-#. ``$this->_sendNewUserMail( $this->User->id );``
 
 Attachments
 ~~~~~~~~~~~
@@ -192,12 +132,6 @@ You set an array containing the paths to the files to attach to the
         TMP . 'foo.doc',
         'bar.doc' => TMP . 'some-temp-name'
     );
-
-
-#. ``$this->Email->attachments = array(``
-#. ``TMP . 'foo.doc',``
-#. ``'bar.doc' => TMP . 'some-temp-name'``
-#. ``);``
 
 The first file ``foo.doc`` will be attached with the same filename.
 For the second file we specify an alias ``bar.doc`` will be be used
@@ -217,12 +151,6 @@ method. For example:
     $this->Email->subject = 'Test';
     $this->Email->send('Hello message body!');
 
-
-#. ``$this->Email->from    = 'Somebody <somebody@example.com>';``
-#. ``$this->Email->to      = 'Somebody Else <somebody.else@example.com>';``
-#. ``$this->Email->subject = 'Test';``
-#. ``$this->Email->send('Hello message body!');``
-
 Setting up the Layouts
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -241,13 +169,6 @@ structure
             text/
                 default.ctp
 
-
-#. ``email/``
-#. ``html/``
-#. ``default.ctp``
-#. ``text/``
-#. ``default.ctp``
-
 These are the files that hold the layout templates for your default
 messages. Some example content is below
 
@@ -255,9 +176,6 @@ messages. Some example content is below
 ::
 
         <?php echo $content_for_layout; ?>
-
-
-#. ``<?php echo $content_for_layout; ?>``
 
 ``email/html/default.ctp``
 ::
@@ -268,14 +186,6 @@ messages. Some example content is below
             <?php echo $content_for_layout; ?>
         </body>
     </html>
-
-
-#. ``<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">``
-#. ``<html>``
-#. ``<body>``
-#. ``<?php echo $content_for_layout; ?>``
-#. ``</body>``
-#. ``</html>``
 
 Setup an email element for the message body
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -295,19 +205,11 @@ simple\_message.ctp
      Dear <?php echo $User['User']['first']. ' ' . $User['User']['last'] ?>,
        Thank you for your interest.
 
-
-#. ``Dear <?php echo $User['User']['first']. ' ' . $User['User']['last'] ?>,``
-#. ``Thank you for your interest.``
-
 ``html``
 ::
 
      <p>Dear <?php echo $User['User']['first']. ' ' . $User['User']['last'] ?>,<br />
      &nbsp;&nbsp;&nbsp;Thank you for your interest.</p>
-
-
-#. ``<p>Dear <?php echo $User['User']['first']. ' ' . $User['User']['last'] ?>,<br />``
-#. ``&nbsp;&nbsp;&nbsp;Thank you for your interest.</p>``
 
 The ``$content`` parameter for the send() method is sent to any
 templates as ``$content``.
@@ -323,11 +225,6 @@ like:
     <?php
     var $components = array('Email');
     ?>
-
-
-#. ``<?php``
-#. ``var $components = array('Email');``
-#. ``?>``
 
 In this example we will set up a private method to handle sending
 the email messages to a user identified by an $id. In our
@@ -354,35 +251,12 @@ controller (let's use the User controller in this example)
      }
     ?>
 
-
-#. ``<?php``
-#. ``function _sendNewUserMail($id) {``
-#. ``$User = $this->User->read(null,$id);``
-#. ``$this->Email->to = $User['User']['email'];``
-#. ``$this->Email->bcc = array('secret@example.com');``
-#. ``$this->Email->subject = 'Welcome to our really cool thing';``
-#. ``$this->Email->replyTo = 'support@example.com';``
-#. ``$this->Email->from = 'Cool Web App <app@example.com>';``
-#. ``$this->Email->template = 'simple_message'; // note no '.ctp'``
-#. ``//Send as 'html', 'text' or 'both' (default is 'text')``
-#. ``$this->Email->sendAs = 'both'; // because we like to send pretty mail``
-#. ``//Set view variables as normal``
-#. ``$this->set('User', $User);``
-#. ``//Do not pass any args to send()``
-#. ``$this->Email->send();``
-#. ``}``
-#. ``?>``
-
 You have sent a message, you could call this from another method
 like
 ::
 
      
     $this->_sendNewUserMail( $this->User->id );
-
-
-#. ````
-#. ``$this->_sendNewUserMail( $this->User->id );``
 
 Attachments
 ~~~~~~~~~~~
@@ -397,12 +271,6 @@ You set an array containing the paths to the files to attach to the
         TMP . 'foo.doc',
         'bar.doc' => TMP . 'some-temp-name'
     );
-
-
-#. ``$this->Email->attachments = array(``
-#. ``TMP . 'foo.doc',``
-#. ``'bar.doc' => TMP . 'some-temp-name'``
-#. ``);``
 
 The first file ``foo.doc`` will be attached with the same filename.
 For the second file we specify an alias ``bar.doc`` will be be used

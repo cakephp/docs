@@ -22,22 +22,12 @@ would be:
         'full_name' => 'CONCAT(User.first_name, " ", User.last_name)'
     );
 
-
-#. ``var $virtualFields = array(``
-#. ``'full_name' => 'CONCAT(User.first_name, " ", User.last_name)'``
-#. ``);``
-
 And with PostgreSQL:
 ::
 
     var $virtualFields = array(
         'name' => 'User.first_name || \' \' || User.last_name'
     );
-
-
-#. ``var $virtualFields = array(``
-#. ``'name' => 'User.first_name || \' \' || User.last_name'``
-#. ``);``
 
 In subsequent find operations, your User results would contain a
 ``name`` key with the result of the concatenation. It is not
@@ -70,10 +60,6 @@ field above,
     $this->User->hasField('name'); // Will return false, as there is no concrete field called name
     $this->User->hasField('name', true); // Will return true as there is a virtual field called name
 
-
-#. ``$this->User->hasField('name'); // Will return false, as there is no concrete field called name``
-#. ``$this->User->hasField('name', true); // Will return true as there is a virtual field called name``
-
 Model::isVirtualField()
 
 This method can be used to check if a field/column is a virtual
@@ -85,10 +71,6 @@ virtual.
     $this->User->isVirtualField('name'); //true
     $this->User->isVirtualField('first_name'); //false
 
-
-#. ``$this->User->isVirtualField('name'); //true``
-#. ``$this->User->isVirtualField('first_name'); //false``
-
 Model::getVirtualField()
 
 This method can be used to access the SQL expression that comprises
@@ -98,9 +80,6 @@ virtual fields in a Model.
 ::
 
     $this->User->getVirtualField('name'); //returns 'CONCAT(User.first_name, ' ', User.last_name)'
-
-
-#. ``$this->User->getVirtualField('name'); //returns 'CONCAT(User.first_name, ' ', User.last_name)'``
 
 Model::find() and virtual fields
 
@@ -122,18 +101,6 @@ behavior of calculated fields in 1.2
             //more fields.
         )
     );
-
-
-#. ``$results = $this->User->find('first');``
-#. ``// results contains the following``
-#. ``array(``
-#. ``'User' => array(``
-#. ``'first_name' => 'Mark',``
-#. ``'last_name' => 'Story',``
-#. ``'name' => 'Mark Story',``
-#. ``//more fields.``
-#. ``)``
-#. ``);``
 
 **Pagination and virtual fields**
 
@@ -157,12 +124,6 @@ best to define the virtualFields in your model's constructor
         $this->virtualFields['name'] = sprintf('CONCAT(%s.first_name, " ", %s.last_name)', $this->alias, $this->alias);
     }
 
-
-#. ``function __construct($id = false, $table = null, $ds = null) {``
-#. ``parent::__construct($id, $table, $ds);``
-#. ``$this->virtualFields['name'] = sprintf('CONCAT(%s.first_name, " ", %s.last_name)', $this->alias, $this->alias);``
-#. ``}``
-
 This will allow your virtualFields to work for any alias you give a
 model.
 
@@ -184,9 +145,6 @@ need to access them.
 
     $this->virtualFields['full_name'] = $this->Author->virtualFields['full_name'];
 
-
-#. ``$this->virtualFields['full_name'] = $this->Author->virtualFields['full_name'];``
-
 Alternatively, you can define ``$virtualFields`` in your model's
 constructor, using ``$this->alias``, like so:
 
@@ -198,14 +156,6 @@ constructor, using ``$this->alias``, like so:
         'name'=>"CONCAT(`{$this->alias}`.`first_name`,' ',`{$this->alias}`.`last_name`)"
       );
     }
-
-
-#. ``public function __construct($id=false,$table=null,$ds=null){``
-#. ``parent::__construct($id,$table,$ds);``
-#. ``$this->virtualFields = array(``
-#. ``'name'=>"CONCAT(`{$this->alias}`.`first_name`,' ',`{$this->alias}`.`last_name`)"``
-#. ``);``
-#. ``}``
 
 3.7.10 Virtual fields
 ---------------------
@@ -231,22 +181,12 @@ would be:
         'full_name' => 'CONCAT(User.first_name, " ", User.last_name)'
     );
 
-
-#. ``var $virtualFields = array(``
-#. ``'full_name' => 'CONCAT(User.first_name, " ", User.last_name)'``
-#. ``);``
-
 And with PostgreSQL:
 ::
 
     var $virtualFields = array(
         'name' => 'User.first_name || \' \' || User.last_name'
     );
-
-
-#. ``var $virtualFields = array(``
-#. ``'name' => 'User.first_name || \' \' || User.last_name'``
-#. ``);``
 
 In subsequent find operations, your User results would contain a
 ``name`` key with the result of the concatenation. It is not
@@ -279,10 +219,6 @@ field above,
     $this->User->hasField('name'); // Will return false, as there is no concrete field called name
     $this->User->hasField('name', true); // Will return true as there is a virtual field called name
 
-
-#. ``$this->User->hasField('name'); // Will return false, as there is no concrete field called name``
-#. ``$this->User->hasField('name', true); // Will return true as there is a virtual field called name``
-
 Model::isVirtualField()
 
 This method can be used to check if a field/column is a virtual
@@ -294,10 +230,6 @@ virtual.
     $this->User->isVirtualField('name'); //true
     $this->User->isVirtualField('first_name'); //false
 
-
-#. ``$this->User->isVirtualField('name'); //true``
-#. ``$this->User->isVirtualField('first_name'); //false``
-
 Model::getVirtualField()
 
 This method can be used to access the SQL expression that comprises
@@ -307,9 +239,6 @@ virtual fields in a Model.
 ::
 
     $this->User->getVirtualField('name'); //returns 'CONCAT(User.first_name, ' ', User.last_name)'
-
-
-#. ``$this->User->getVirtualField('name'); //returns 'CONCAT(User.first_name, ' ', User.last_name)'``
 
 Model::find() and virtual fields
 
@@ -331,18 +260,6 @@ behavior of calculated fields in 1.2
             //more fields.
         )
     );
-
-
-#. ``$results = $this->User->find('first');``
-#. ``// results contains the following``
-#. ``array(``
-#. ``'User' => array(``
-#. ``'first_name' => 'Mark',``
-#. ``'last_name' => 'Story',``
-#. ``'name' => 'Mark Story',``
-#. ``//more fields.``
-#. ``)``
-#. ``);``
 
 **Pagination and virtual fields**
 
@@ -366,12 +283,6 @@ best to define the virtualFields in your model's constructor
         $this->virtualFields['name'] = sprintf('CONCAT(%s.first_name, " ", %s.last_name)', $this->alias, $this->alias);
     }
 
-
-#. ``function __construct($id = false, $table = null, $ds = null) {``
-#. ``parent::__construct($id, $table, $ds);``
-#. ``$this->virtualFields['name'] = sprintf('CONCAT(%s.first_name, " ", %s.last_name)', $this->alias, $this->alias);``
-#. ``}``
-
 This will allow your virtualFields to work for any alias you give a
 model.
 
@@ -393,9 +304,6 @@ need to access them.
 
     $this->virtualFields['full_name'] = $this->Author->virtualFields['full_name'];
 
-
-#. ``$this->virtualFields['full_name'] = $this->Author->virtualFields['full_name'];``
-
 Alternatively, you can define ``$virtualFields`` in your model's
 constructor, using ``$this->alias``, like so:
 
@@ -407,11 +315,3 @@ constructor, using ``$this->alias``, like so:
         'name'=>"CONCAT(`{$this->alias}`.`first_name`,' ',`{$this->alias}`.`last_name`)"
       );
     }
-
-
-#. ``public function __construct($id=false,$table=null,$ds=null){``
-#. ``parent::__construct($id,$table,$ds);``
-#. ``$this->virtualFields = array(``
-#. ``'name'=>"CONCAT(`{$this->alias}`.`first_name`,' ',`{$this->alias}`.`last_name`)"``
-#. ``);``
-#. ``}``

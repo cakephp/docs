@@ -15,14 +15,6 @@ functionality that would be available to all helpers, create
     }
     ?>
 
-
-#. ``<?php``
-#. ``class AppHelper extends Helper {``
-#. ``function customMethod () {``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 3.11.3 Creating Functionality for All Helpers
 ---------------------------------------------
 
@@ -39,11 +31,3 @@ functionality that would be available to all helpers, create
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class AppHelper extends Helper {``
-#. ``function customMethod () {``
-#. ``}``
-#. ``}``
-#. ``?>``

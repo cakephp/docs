@@ -22,9 +22,6 @@ In your view file you can do
 
         $this->set('activeMenuButton', 'posts');
 
-
-#. ``$this->set('activeMenuButton', 'posts');``
-
 Then in your layout the ``$activeMenuButton`` variable will be
 available and contain the value 'posts'.
 
@@ -55,9 +52,6 @@ render the page.
 
         $this->error(404, 'Not found', 'This page was not found, sorry');
 
-
-#. ``$this->error(404, 'Not found', 'This page was not found, sorry');``
-
 This will render an error page with the title and messages
 specified. Its important to note that script execution is not
 stopped by ``View::error()`` So you will have to stop code
@@ -85,10 +79,6 @@ to generate unique DOM ID's for elements such as the AjaxHelper.
 
         $uuid = $this->uuid('form', array('controller' => 'posts', 'action' => 'index'));
         //$uuid contains 'form0425fe3bad'
-
-
-#. ``$uuid = $this->uuid('form', array('controller' => 'posts', 'action' => 'index'));``
-#. ``//$uuid contains 'form0425fe3bad'``
 
 addScript()
 ~~~~~~~~~~~
@@ -128,9 +118,6 @@ In your view file you can do
 
         $this->set('activeMenuButton', 'posts');
 
-
-#. ``$this->set('activeMenuButton', 'posts');``
-
 Then in your layout the ``$activeMenuButton`` variable will be
 available and contain the value 'posts'.
 
@@ -161,9 +148,6 @@ render the page.
 
         $this->error(404, 'Not found', 'This page was not found, sorry');
 
-
-#. ``$this->error(404, 'Not found', 'This page was not found, sorry');``
-
 This will render an error page with the title and messages
 specified. Its important to note that script execution is not
 stopped by ``View::error()`` So you will have to stop code
@@ -191,10 +175,6 @@ to generate unique DOM ID's for elements such as the AjaxHelper.
 
         $uuid = $this->uuid('form', array('controller' => 'posts', 'action' => 'index'));
         //$uuid contains 'form0425fe3bad'
-
-
-#. ``$uuid = $this->uuid('form', array('controller' => 'posts', 'action' => 'index'));``
-#. ``//$uuid contains 'form0425fe3bad'``
 
 addScript()
 ~~~~~~~~~~~

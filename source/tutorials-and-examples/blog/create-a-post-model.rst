@@ -20,13 +20,6 @@ completed file should look like this:
     
     ?>
 
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ``}``
-#. ``?>``
-
 Naming convention is very important in CakePHP. By naming our model
 Post, CakePHP can automatically infer that this model will be used
 in the PostsController, and will be tied to a database table called
@@ -66,13 +59,6 @@ completed file should look like this:
     }
     
     ?>
-
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ``}``
-#. ``?>``
 
 Naming convention is very important in CakePHP. By naming our model
 Post, CakePHP can automatically infer that this model will be used

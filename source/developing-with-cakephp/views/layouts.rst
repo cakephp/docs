@@ -45,30 +45,6 @@ might look like:
     </body>
     </html>
 
-
-#. ``<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"``
-#. ``"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">``
-#. ``<html xmlns="http://www.w3.org/1999/xhtml">``
-#. ``<head>``
-#. ``<title><?php echo $title_for_layout?></title>``
-#. ``<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">``
-#. ``<!-- Include external files and scripts here (See HTML helper for more info.) -->``
-#. ``<?php echo $scripts_for_layout ?>``
-#. ``</head>``
-#. ``<body>``
-#. ``<!-- If you'd like some sort of menu to``
-#. ``show up on all of your views, include it here -->``
-#. ``<div id="header">``
-#. ``<div id="menu">...</div>``
-#. ``</div>``
-#. ``<!-- Here's where I want my views to be displayed -->``
-#. ``<?php echo $content_for_layout ?>``
-#. `` ``
-#. ``<!-- Add a footer to each displayed page -->``
-#. ``<div id="footer">...</div>``
-#. ``</body>``
-#. ``</html>``
-
 ``$scripts_for_layout`` contains any external files and scripts
 included with the built-in HTML helper. Useful for including
 javascript and CSS files from views.
@@ -97,15 +73,6 @@ controller, setting the $title\_for\_layout variable.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class UsersController extends AppController {``
-#. ``function viewActive() {``
-#. ``$this->set('title_for_layout', 'View Active Users');``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 You can create as many layouts as you wish: just place them in the
 app/views/layouts directory, and switch between them inside of your
 controller actions using the controller's $layout variable, or
@@ -133,20 +100,6 @@ using something like:
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class UsersController extends AppController {``
-#. ``function viewActive() {``
-#. ``$this->set('title_for_layout', 'View Active Users');``
-#. ``$this->layout = 'default_small_ad';``
-#. ``}``
-#. ``function viewImage() {``
-#. ``$this->layout = 'image';``
-#. ``//output user image``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 CakePHP features two core layouts (besides CakePHP’s default
 layout) you can use in your own application: ‘ajax’ and ‘flash’.
@@ -205,30 +158,6 @@ might look like:
     </body>
     </html>
 
-
-#. ``<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"``
-#. ``"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">``
-#. ``<html xmlns="http://www.w3.org/1999/xhtml">``
-#. ``<head>``
-#. ``<title><?php echo $title_for_layout?></title>``
-#. ``<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">``
-#. ``<!-- Include external files and scripts here (See HTML helper for more info.) -->``
-#. ``<?php echo $scripts_for_layout ?>``
-#. ``</head>``
-#. ``<body>``
-#. ``<!-- If you'd like some sort of menu to``
-#. ``show up on all of your views, include it here -->``
-#. ``<div id="header">``
-#. ``<div id="menu">...</div>``
-#. ``</div>``
-#. ``<!-- Here's where I want my views to be displayed -->``
-#. ``<?php echo $content_for_layout ?>``
-#. `` ``
-#. ``<!-- Add a footer to each displayed page -->``
-#. ``<div id="footer">...</div>``
-#. ``</body>``
-#. ``</html>``
-
 ``$scripts_for_layout`` contains any external files and scripts
 included with the built-in HTML helper. Useful for including
 javascript and CSS files from views.
@@ -257,15 +186,6 @@ controller, setting the $title\_for\_layout variable.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class UsersController extends AppController {``
-#. ``function viewActive() {``
-#. ``$this->set('title_for_layout', 'View Active Users');``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 You can create as many layouts as you wish: just place them in the
 app/views/layouts directory, and switch between them inside of your
 controller actions using the controller's $layout variable, or
@@ -293,20 +213,6 @@ using something like:
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class UsersController extends AppController {``
-#. ``function viewActive() {``
-#. ``$this->set('title_for_layout', 'View Active Users');``
-#. ``$this->layout = 'default_small_ad';``
-#. ``}``
-#. ``function viewImage() {``
-#. ``$this->layout = 'image';``
-#. ``//output user image``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 CakePHP features two core layouts (besides CakePHP’s default
 layout) you can use in your own application: ‘ajax’ and ‘flash’.

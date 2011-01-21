@@ -11,9 +11,6 @@ layout.
 
     ./cake i18n
 
-
-#. ``./cake i18n``
-
 Select ``[I]`` which will run the i18n database intialization
 script. You will be asked if you want to drop any existing and if
 you want to create it. Answer with yes if you are sure there is no
@@ -31,9 +28,6 @@ layout.
 ::
 
     ./cake i18n
-
-
-#. ``./cake i18n``
 
 Select ``[I]`` which will run the i18n database intialization
 script. You will be asked if you want to drop any existing and if

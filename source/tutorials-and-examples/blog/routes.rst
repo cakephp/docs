@@ -23,9 +23,6 @@ route. It looks like this:
 
     Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
-
-#. ``Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));``
-
 This line connects the URL '/' with the default CakePHP home page.
 We want it to connect with our own controller, so replace that line
 with this one:
@@ -33,9 +30,6 @@ with this one:
 ::
 
     Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
-
-
-#. ``Router::connect('/', array('controller' => 'posts', 'action' => 'index'));``
 
 This should connect users requesting '/' to the index() action of
 our PostsController.
@@ -73,9 +67,6 @@ route. It looks like this:
 
     Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
-
-#. ``Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));``
-
 This line connects the URL '/' with the default CakePHP home page.
 We want it to connect with our own controller, so replace that line
 with this one:
@@ -83,9 +74,6 @@ with this one:
 ::
 
     Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
-
-
-#. ``Router::connect('/', array('controller' => 'posts', 'action' => 'index'));``
 
 This should connect users requesting '/' to the index() action of
 our PostsController.

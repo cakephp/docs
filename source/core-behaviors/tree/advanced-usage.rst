@@ -37,25 +37,6 @@ Categories) that moves a specified node down the tree:
             $this->redirect(array('action' => 'index'), null, true);
         }
 
-
-#. ``function movedown($name = null, $delta = null) {``
-#. ``$cat = $this->Category->findByName($name);``
-#. ``if (empty($cat)) {``
-#. ``$this->Session->setFlash('There is no category named ' . $name);``
-#. ``$this->redirect(array('action' => 'index'), null, true);``
-#. ``}``
-#. ````
-#. ``$this->Category->id = $cat['Category']['id'];``
-#. ````
-#. ``if ($delta > 0) {``
-#. ``$this->Category->moveDown($this->Category->id, abs($delta));``
-#. ``} else {``
-#. ``$this->Session->setFlash('Please provide the number of positions the field should be moved down.');``
-#. ``}``
-#. ````
-#. ``$this->redirect(array('action' => 'index'), null, true);``
-#. ``}``
-
 For example, if you'd like to move the "Sport" category one
 position down, you would request: /categories/movedown/Sport/1.
 
@@ -90,26 +71,6 @@ Categories) that moves a node up the tree:
             $this->redirect(array('action' => 'index'), null, true);
         
         }
-
-
-#. ``function moveup($name = null, $delta = null){``
-#. ``$cat = $this->Category->findByName($name);``
-#. ``if (empty($cat)) {``
-#. ``$this->Session->setFlash('There is no category named ' . $name);``
-#. ``$this->redirect(array('action' => 'index'), null, true);``
-#. ``}``
-#. ````
-#. ``$this->Category->id = $cat['Category']['id'];``
-#. ````
-#. ``if ($delta > 0) {``
-#. ``$this->Category->moveUp($this->Category->id, abs($delta));``
-#. ``} else {``
-#. ``$this->Session->setFlash('Please provide a number of positions the category should be moved up.');``
-#. ``}``
-#. ````
-#. ``$this->redirect(array('action' => 'index'), null, true);``
-#. ````
-#. ``}``
 
 For example, if you would like to move the category "Gwendolyn" up
 one position you would request /categories/moveup/Gwendolyn/1. Now
@@ -148,9 +109,6 @@ Running the following code with the id for 'Sport'
 
     $this->Node->removeFromTree($id); 
 
-
-#. ``$this->Node->removeFromTree($id);``
-
 The Sport node will be become a top level node:
 
 
@@ -174,9 +132,6 @@ If however the following code snippet was used with the id for
 ::
 
     $this->Node->removeFromTree($id,true); 
-
-
-#. ``$this->Node->removeFromTree($id,true);``
 
 The tree would become
 
@@ -211,14 +166,6 @@ not change the parent of any node.
         'order' => , //direction to order, default: 'ASC'
         'verify' =>  //whether or not to verify the tree before reorder, default: true
     ));
-
-
-#. ``$model->reorder(array(``
-#. ``'id' => ,    //id of record to use as top node for reordering, default: $Model->id``
-#. ``'field' => , //which field to use in reordering, default: $Model->displayField``
-#. ``'order' => , //direction to order, default: 'ASC'``
-#. ``'verify' =>  //whether or not to verify the tree before reorder, default: true``
-#. ``));``
 
 If you have saved your data or made other operations on the model,
 you might want to set ``$model->id = null`` before calling
@@ -264,25 +211,6 @@ Categories) that moves a specified node down the tree:
             $this->redirect(array('action' => 'index'), null, true);
         }
 
-
-#. ``function movedown($name = null, $delta = null) {``
-#. ``$cat = $this->Category->findByName($name);``
-#. ``if (empty($cat)) {``
-#. ``$this->Session->setFlash('There is no category named ' . $name);``
-#. ``$this->redirect(array('action' => 'index'), null, true);``
-#. ``}``
-#. ````
-#. ``$this->Category->id = $cat['Category']['id'];``
-#. ````
-#. ``if ($delta > 0) {``
-#. ``$this->Category->moveDown($this->Category->id, abs($delta));``
-#. ``} else {``
-#. ``$this->Session->setFlash('Please provide the number of positions the field should be moved down.');``
-#. ``}``
-#. ````
-#. ``$this->redirect(array('action' => 'index'), null, true);``
-#. ``}``
-
 For example, if you'd like to move the "Sport" category one
 position down, you would request: /categories/movedown/Sport/1.
 
@@ -317,26 +245,6 @@ Categories) that moves a node up the tree:
             $this->redirect(array('action' => 'index'), null, true);
         
         }
-
-
-#. ``function moveup($name = null, $delta = null){``
-#. ``$cat = $this->Category->findByName($name);``
-#. ``if (empty($cat)) {``
-#. ``$this->Session->setFlash('There is no category named ' . $name);``
-#. ``$this->redirect(array('action' => 'index'), null, true);``
-#. ``}``
-#. ````
-#. ``$this->Category->id = $cat['Category']['id'];``
-#. ````
-#. ``if ($delta > 0) {``
-#. ``$this->Category->moveUp($this->Category->id, abs($delta));``
-#. ``} else {``
-#. ``$this->Session->setFlash('Please provide a number of positions the category should be moved up.');``
-#. ``}``
-#. ````
-#. ``$this->redirect(array('action' => 'index'), null, true);``
-#. ````
-#. ``}``
 
 For example, if you would like to move the category "Gwendolyn" up
 one position you would request /categories/moveup/Gwendolyn/1. Now
@@ -375,9 +283,6 @@ Running the following code with the id for 'Sport'
 
     $this->Node->removeFromTree($id); 
 
-
-#. ``$this->Node->removeFromTree($id);``
-
 The Sport node will be become a top level node:
 
 
@@ -401,9 +306,6 @@ If however the following code snippet was used with the id for
 ::
 
     $this->Node->removeFromTree($id,true); 
-
-
-#. ``$this->Node->removeFromTree($id,true);``
 
 The tree would become
 
@@ -438,14 +340,6 @@ not change the parent of any node.
         'order' => , //direction to order, default: 'ASC'
         'verify' =>  //whether or not to verify the tree before reorder, default: true
     ));
-
-
-#. ``$model->reorder(array(``
-#. ``'id' => ,    //id of record to use as top node for reordering, default: $Model->id``
-#. ``'field' => , //which field to use in reordering, default: $Model->displayField``
-#. ``'order' => , //direction to order, default: 'ASC'``
-#. ``'verify' =>  //whether or not to verify the tree before reorder, default: true``
-#. ``));``
 
 If you have saved your data or made other operations on the model,
 you might want to set ``$model->id = null`` before calling

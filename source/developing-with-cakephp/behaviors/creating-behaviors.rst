@@ -31,14 +31,6 @@ passed from the model to the behavior:
                 'option1_key' => 'option1_value'));
     }
 
-
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post'``
-#. ``var $actsAs = array(``
-#. ``'YourBehavior' => array(``
-#. ``'option1_key' => 'option1_value'));``
-#. ``}``
-
 As of 1.2.8004, CakePHP adds those settings once per model/alias
 only. To keep your behavior upgradable you should respect aliases
 (or models).
@@ -58,19 +50,6 @@ An upgrade-friendly function setup would look something like this:
         $this->settings[$Model->alias] = array_merge(
             $this->settings[$Model->alias], (array)$settings);
     }
-
-
-#. ``function setup(&$Model, $settings) {``
-#. ``if (!isset($this->settings[$Model->alias])) {``
-#. ``$this->settings[$Model->alias] = array(``
-#. ``'option1_key' => 'option1_default_value',``
-#. ``'option2_key' => 'option2_default_value',``
-#. ``'option3_key' => 'option3_default_value',``
-#. ``);``
-#. ``}``
-#. ``$this->settings[$Model->alias] = array_merge(``
-#. ``$this->settings[$Model->alias], (array)$settings);``
-#. ``}``
 
 3.8.2 Creating Behaviors
 ------------------------
@@ -105,14 +84,6 @@ passed from the model to the behavior:
                 'option1_key' => 'option1_value'));
     }
 
-
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post'``
-#. ``var $actsAs = array(``
-#. ``'YourBehavior' => array(``
-#. ``'option1_key' => 'option1_value'));``
-#. ``}``
-
 As of 1.2.8004, CakePHP adds those settings once per model/alias
 only. To keep your behavior upgradable you should respect aliases
 (or models).
@@ -132,16 +103,3 @@ An upgrade-friendly function setup would look something like this:
         $this->settings[$Model->alias] = array_merge(
             $this->settings[$Model->alias], (array)$settings);
     }
-
-
-#. ``function setup(&$Model, $settings) {``
-#. ``if (!isset($this->settings[$Model->alias])) {``
-#. ``$this->settings[$Model->alias] = array(``
-#. ``'option1_key' => 'option1_default_value',``
-#. ``'option2_key' => 'option2_default_value',``
-#. ``'option3_key' => 'option3_default_value',``
-#. ``);``
-#. ``}``
-#. ``$this->settings[$Model->alias] = array_merge(``
-#. ``$this->settings[$Model->alias], (array)$settings);``
-#. ``}``

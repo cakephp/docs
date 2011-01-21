@@ -28,21 +28,6 @@ File.
         'path' => CACHE . 'long' . DS,  
     ));
 
-
-#. ``Cache::config('short', array(``
-#. ``'engine' => 'File',``
-#. ``'duration'=> '+1 hours',``
-#. ``'path' => CACHE,``
-#. ``'prefix' => 'cake_short_'``
-#. ``));``
-#. ``// long``
-#. ``Cache::config('long', array(``
-#. ``'engine' => 'File',``
-#. ``'duration'=> '+1 week',``
-#. ``'probability'=> 100,``
-#. ``'path' => CACHE . 'long' . DS,``
-#. ``));``
-
 By placing the above code in your ``app/config/core.php`` you will
 have two additional Cache configurations. The name of these
 configurations 'short' or 'long' is used as the ``$config``
@@ -63,12 +48,6 @@ dot syntax.
         'engine' => 'CachePack.MyCustomCache',
         ...
     ));
-
-
-#. ``Cache::config('custom', array(``
-#. ``'engine' => 'CachePack.MyCustomCache',``
-#. ``...``
-#. ``));``
 
 App and Plugin cache engines should be configured in
 ``app/bootstrap.php``. If you try to configure them in core.php
@@ -104,21 +83,6 @@ File.
         'path' => CACHE . 'long' . DS,  
     ));
 
-
-#. ``Cache::config('short', array(``
-#. ``'engine' => 'File',``
-#. ``'duration'=> '+1 hours',``
-#. ``'path' => CACHE,``
-#. ``'prefix' => 'cake_short_'``
-#. ``));``
-#. ``// long``
-#. ``Cache::config('long', array(``
-#. ``'engine' => 'File',``
-#. ``'duration'=> '+1 week',``
-#. ``'probability'=> 100,``
-#. ``'path' => CACHE . 'long' . DS,``
-#. ``));``
-
 By placing the above code in your ``app/config/core.php`` you will
 have two additional Cache configurations. The name of these
 configurations 'short' or 'long' is used as the ``$config``
@@ -139,12 +103,6 @@ dot syntax.
         'engine' => 'CachePack.MyCustomCache',
         ...
     ));
-
-
-#. ``Cache::config('custom', array(``
-#. ``'engine' => 'CachePack.MyCustomCache',``
-#. ``...``
-#. ``));``
 
 App and Plugin cache engines should be configured in
 ``app/bootstrap.php``. If you try to configure them in core.php

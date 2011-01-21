@@ -37,19 +37,6 @@ internal use. For example:
     
     ?>
 
-
-#. ``<?php``
-#. ``class NewsController extends AppController {``
-#. ``function latest() {``
-#. ``$this->_findNewArticles();``
-#. ``}``
-#. ````
-#. ``function _findNewArticles() {``
-#. ``//Logic to find latest news articles``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 While the page http://www.example.com/news/latest/ would be
 accessible to the user as usual, someone trying to get to the page
 http://www.example.com/news/\_findNewArticles/ would get an error,
@@ -118,19 +105,6 @@ internal use. For example:
     }
     
     ?>
-
-
-#. ``<?php``
-#. ``class NewsController extends AppController {``
-#. ``function latest() {``
-#. ``$this->_findNewArticles();``
-#. ``}``
-#. ````
-#. ``function _findNewArticles() {``
-#. ``//Logic to find latest news articles``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 While the page http://www.example.com/news/latest/ would be
 accessible to the user as usual, someone trying to get to the page

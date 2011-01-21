@@ -22,23 +22,12 @@ special reference.
     // within your Plugin controllers:
     var $components = array('Example'); 
 
-
-#. ``// Component``
-#. ``class ExampleComponent extends Object {``
-#. ``}``
-#. ``// within your Plugin controllers:``
-#. ``var $components = array('Example');``
-
 To reference the Component from outside the plugin requires the
 plugin name to be referenced.
 ::
 
     var $components = array('PluginName.Example');
     var $components = array('Pizza.Example'); // references ExampleComponent in Pizza plugin.
-
-
-#. ``var $components = array('PluginName.Example');``
-#. ``var $components = array('Pizza.Example'); // references ExampleComponent in Pizza plugin.``
 
 The same technique applies to Helpers and Behaviors.
 
@@ -66,22 +55,11 @@ special reference.
     // within your Plugin controllers:
     var $components = array('Example'); 
 
-
-#. ``// Component``
-#. ``class ExampleComponent extends Object {``
-#. ``}``
-#. ``// within your Plugin controllers:``
-#. ``var $components = array('Example');``
-
 To reference the Component from outside the plugin requires the
 plugin name to be referenced.
 ::
 
     var $components = array('PluginName.Example');
     var $components = array('Pizza.Example'); // references ExampleComponent in Pizza plugin.
-
-
-#. ``var $components = array('PluginName.Example');``
-#. ``var $components = array('Pizza.Example'); // references ExampleComponent in Pizza plugin.``
 
 The same technique applies to Helpers and Behaviors.

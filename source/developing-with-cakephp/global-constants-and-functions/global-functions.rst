@@ -40,14 +40,6 @@ function.
        [1] => 'bar'
     )
 
-
-#. ``print_r(a('foo', 'bar'));``
-#. ``// output:``
-#. ``array(``
-#. ``[0] => 'foo',``
-#. ``[1] => 'bar'``
-#. ``)``
-
 This has been Deprecated and will be removed in 2.0 version. Use
 **array()** instead.
 aa
@@ -66,13 +58,6 @@ to call the wrapping function.
     array(
         'a' => 'b'
     )
-
-
-#. ``print_r(aa('a','b'));``
-#. ``// output:``
-#. ``array(``
-#. ``'a' => 'b'``
-#. ``)``
 
 This has been Deprecated and will be removed in 2.0 version.
 am
@@ -253,14 +238,6 @@ function.
        [1] => 'bar'
     )
 
-
-#. ``print_r(a('foo', 'bar'));``
-#. ``// output:``
-#. ``array(``
-#. ``[0] => 'foo',``
-#. ``[1] => 'bar'``
-#. ``)``
-
 This has been Deprecated and will be removed in 2.0 version. Use
 **array()** instead.
 aa
@@ -279,13 +256,6 @@ to call the wrapping function.
     array(
         'a' => 'b'
     )
-
-
-#. ``print_r(aa('a','b'));``
-#. ``// output:``
-#. ``array(``
-#. ``'a' => 'b'``
-#. ``)``
 
 This has been Deprecated and will be removed in 2.0 version.
 am

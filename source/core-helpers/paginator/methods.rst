@@ -37,13 +37,6 @@ results, for example:
                          starting on record %start%, ending on %end%'
     )); 
 
-
-#. ``echo $this->Paginator->counter(array(``
-#. ``'format' => 'Page %page% of %pages%,``
-#. ``showing %current% records out of %count% total,``
-#. ``starting on record %start%, ending on %end%'``
-#. ``));``
-
 **separator**
 The separator between the actual page and the number of pages.
 Defaults to ' of '. This is used in conjunction with format =
@@ -86,10 +79,6 @@ Creates a regular or AJAX link with pagination parameters
 
     echo $this->Paginator->link('Sort by title on page 5', 
             array('sort' => 'title', 'page' => 5, 'direction' => 'desc'));
-
-
-#. ``echo $this->Paginator->link('Sort by title on page 5',``
-#. ``array('sort' => 'title', 'page' => 5, 'direction' => 'desc'));``
 
 If created in the view for ``/posts/index`` Would create a link
 pointing at '/posts/index/page:5/sort:title/direction:desc'
@@ -133,13 +122,6 @@ results, for example:
                          starting on record %start%, ending on %end%'
     )); 
 
-
-#. ``echo $this->Paginator->counter(array(``
-#. ``'format' => 'Page %page% of %pages%,``
-#. ``showing %current% records out of %count% total,``
-#. ``starting on record %start%, ending on %end%'``
-#. ``));``
-
 **separator**
 The separator between the actual page and the number of pages.
 Defaults to ' of '. This is used in conjunction with format =
@@ -182,10 +164,6 @@ Creates a regular or AJAX link with pagination parameters
 
     echo $this->Paginator->link('Sort by title on page 5', 
             array('sort' => 'title', 'page' => 5, 'direction' => 'desc'));
-
-
-#. ``echo $this->Paginator->link('Sort by title on page 5',``
-#. ``array('sort' => 'title', 'page' => 5, 'direction' => 'desc'));``
 
 If created in the view for ``/posts/index`` Would create a link
 pointing at '/posts/index/page:5/sort:title/direction:desc'

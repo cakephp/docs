@@ -22,14 +22,6 @@ expression as a field validation rule.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'rule' => '/^[a-z0-9]{3,}$/i',``
-#. ``'message' => 'Only letters and integers, min 3 characters'``
-#. ``)``
-#. ``);``
-
 The example above checks if the login contains only letters and
 integers, with a minimum of three characters.
 
@@ -66,27 +58,6 @@ function, as shown below:
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ````
-#. ``var $validate = array(``
-#. ``'promotion_code' => array(``
-#. ``'rule' => array('limitDuplicates', 25),``
-#. ``'message' => 'This code has been used too many times.'``
-#. ``)``
-#. ``);``
-#. ````
-#. ``function limitDuplicates($check, $limit){``
-#. ``//$check will have value: array('promomotion_code' => 'some-value')``
-#. ``//$limit will have value: 25``
-#. ``$existing_promo_count = $this->find( 'count', array('conditions' => $check, 'recursive' => -1) );``
-#. ``return $existing_promo_count < $limit;``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 The current field to be validated is passed into the function as
 first parameter as an associated array with field name as key and
@@ -135,29 +106,6 @@ stored in $this->data member variable.
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ````
-#. ``var $validate = array(``
-#. ``'slug' => array(``
-#. ``'rule' => 'alphaNumericDashUnderscore',``
-#. ``'message' => 'Slug can only be letters, numbers, dash and underscore'``
-#. ``)``
-#. ``);``
-#. ````
-#. ``function alphaNumericDashUnderscore($check) {``
-#. ``// $data array is passed using the form field name as the key``
-#. ``// have to extract the value to make the function generic``
-#. ``$value = array_values($check);``
-#. ``$value = $value[0];``
-#. ````
-#. ``return preg_match('|^[0-9a-zA-Z_-]*$|', $value);``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 4.1.5 Custom Validation Rules
 -----------------------------
@@ -183,14 +131,6 @@ expression as a field validation rule.
         )
     );
 
-
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'rule' => '/^[a-z0-9]{3,}$/i',``
-#. ``'message' => 'Only letters and integers, min 3 characters'``
-#. ``)``
-#. ``);``
-
 The example above checks if the login contains only letters and
 integers, with a minimum of three characters.
 
@@ -227,27 +167,6 @@ function, as shown below:
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ````
-#. ``var $validate = array(``
-#. ``'promotion_code' => array(``
-#. ``'rule' => array('limitDuplicates', 25),``
-#. ``'message' => 'This code has been used too many times.'``
-#. ``)``
-#. ``);``
-#. ````
-#. ``function limitDuplicates($check, $limit){``
-#. ``//$check will have value: array('promomotion_code' => 'some-value')``
-#. ``//$limit will have value: 25``
-#. ``$existing_promo_count = $this->find( 'count', array('conditions' => $check, 'recursive' => -1) );``
-#. ``return $existing_promo_count < $limit;``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 The current field to be validated is passed into the function as
 first parameter as an associated array with field name as key and
@@ -296,26 +215,3 @@ stored in $this->data member variable.
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class Post extends AppModel {``
-#. ``var $name = 'Post';``
-#. ````
-#. ``var $validate = array(``
-#. ``'slug' => array(``
-#. ``'rule' => 'alphaNumericDashUnderscore',``
-#. ``'message' => 'Slug can only be letters, numbers, dash and underscore'``
-#. ``)``
-#. ``);``
-#. ````
-#. ``function alphaNumericDashUnderscore($check) {``
-#. ``// $data array is passed using the form field name as the key``
-#. ``// have to extract the value to make the function generic``
-#. ``$value = array_values($check);``
-#. ``$value = $value[0];``
-#. ````
-#. ``return preg_match('|^[0-9a-zA-Z_-]*$|', $value);``
-#. ``}``
-#. ``}``
-#. ``?>``

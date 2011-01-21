@@ -14,12 +14,6 @@ level of precision defined.
     //Outputs: 
     456.92
 
-
-#. ``<?php echo $this->Number->precision(456.91873645, 2 ); ?>``
-#. ````
-#. ``//Outputs:``
-#. ``456.92``
-
 7.7.2 precision
 ---------------
 
@@ -35,9 +29,3 @@ level of precision defined.
      
     //Outputs: 
     456.92
-
-
-#. ``<?php echo $this->Number->precision(456.91873645, 2 ); ?>``
-#. ````
-#. ``//Outputs:``
-#. ``456.92``

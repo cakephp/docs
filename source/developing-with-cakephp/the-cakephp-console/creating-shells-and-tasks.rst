@@ -16,13 +16,6 @@ First, create report.php in /vendors/shells/.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class ReportShell extends Shell {``
-#. ``function main() {}``
-#. ``}``
-#. ``?>``
-
 From this point, we can run the shell, but it won't do much. Let's
 add some models to the shell so that we can create a report of some
 sort. This is done just as it is in the controller: by adding the
@@ -38,15 +31,6 @@ names of models to the $uses variable.
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class ReportShell extends Shell {``
-#. ``var $uses = array('Order');``
-#. ``function main() {``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 Once we've added our model to the $uses array, we can use it in the
 main() method. In this example, our Order model should now be
@@ -76,26 +60,6 @@ Here's a simple example of the logic we might use in this shell:
             $this->out("Total: $" .    number_format($total, 2) . "\n"); 
         }
     }
-
-
-#. ``class ReportShell extends Shell {``
-#. ``var $uses = array('Order');``
-#. ``function main() {``
-#. ``//Get orders shipped in the last    month``
-#. ``$month_ago = date('Y-m-d H:i:s',    strtotime('-1 month'));``
-#. ``$orders =    $this->Order->find("all",array('conditions'=>"Order.shipped >= '$month_ago'"));``
-#. ``//Print out each order's information``
-#. ``foreach($orders as $order) {``
-#. ``$this->out('Order date:    ' .    $order['Order']['created'] . "\n");``
-#. ``$this->out('Amount: $' .    number_format($order['Order']['amount'], 2) . "\n");``
-#. ``$this->out('----------------------------------------' .    "\n");``
-#. ````
-#. ``$total += $order['Order']['amount'];``
-#. ``}``
-#. ``//Print out total for the selected orders``
-#. ``$this->out("Total: $" .    number_format($total, 2) . "\n");``
-#. ``}``
-#. ``}``
 
 You would be able to run this report by executing this command (if
 the cake command is in your PATH):
@@ -148,13 +112,6 @@ number of tasks defined:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class BakeShell extends Shell {``
-#. ``var $tasks = array('Project', 'DbConfig', 'Model', 'View', 'Controller');``
-#. ``}``
-#. ``?>``
-
 Tasks are stored in /vendors/shells/tasks/ in files named after
 their classes. So if we were to create a new ‘cool’ task. Class
 CoolTask (which extends Shell) would be placed in
@@ -173,14 +130,6 @@ call this method to start the task logic.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class SoundTask extends Shell {``
-#. ``var $uses = array('Model'); // same as controller var $uses``
-#. ``function execute() {}``
-#. ``}``
-#. ``?>``
-
 You can access tasks inside your shell classes and execute them
 there:
 
@@ -194,16 +143,6 @@ there:
        }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class SeaShell extends Shell { // found in /vendors/shells/sea.php``
-#. ``var $tasks = array('Sound'); //found in /vendors/shells/tasks/sound.php``
-#. ``function main() {``
-#. ``$this->Sound->execute();``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 You can also access tasks directly from the command line:
 
@@ -235,13 +174,6 @@ First, create report.php in /vendors/shells/.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class ReportShell extends Shell {``
-#. ``function main() {}``
-#. ``}``
-#. ``?>``
-
 From this point, we can run the shell, but it won't do much. Let's
 add some models to the shell so that we can create a report of some
 sort. This is done just as it is in the controller: by adding the
@@ -257,15 +189,6 @@ names of models to the $uses variable.
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class ReportShell extends Shell {``
-#. ``var $uses = array('Order');``
-#. ``function main() {``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 Once we've added our model to the $uses array, we can use it in the
 main() method. In this example, our Order model should now be
@@ -295,26 +218,6 @@ Here's a simple example of the logic we might use in this shell:
             $this->out("Total: $" .    number_format($total, 2) . "\n"); 
         }
     }
-
-
-#. ``class ReportShell extends Shell {``
-#. ``var $uses = array('Order');``
-#. ``function main() {``
-#. ``//Get orders shipped in the last    month``
-#. ``$month_ago = date('Y-m-d H:i:s',    strtotime('-1 month'));``
-#. ``$orders =    $this->Order->find("all",array('conditions'=>"Order.shipped >= '$month_ago'"));``
-#. ``//Print out each order's information``
-#. ``foreach($orders as $order) {``
-#. ``$this->out('Order date:    ' .    $order['Order']['created'] . "\n");``
-#. ``$this->out('Amount: $' .    number_format($order['Order']['amount'], 2) . "\n");``
-#. ``$this->out('----------------------------------------' .    "\n");``
-#. ````
-#. ``$total += $order['Order']['amount'];``
-#. ``}``
-#. ``//Print out total for the selected orders``
-#. ``$this->out("Total: $" .    number_format($total, 2) . "\n");``
-#. ``}``
-#. ``}``
 
 You would be able to run this report by executing this command (if
 the cake command is in your PATH):
@@ -367,13 +270,6 @@ number of tasks defined:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class BakeShell extends Shell {``
-#. ``var $tasks = array('Project', 'DbConfig', 'Model', 'View', 'Controller');``
-#. ``}``
-#. ``?>``
-
 Tasks are stored in /vendors/shells/tasks/ in files named after
 their classes. So if we were to create a new ‘cool’ task. Class
 CoolTask (which extends Shell) would be placed in
@@ -392,14 +288,6 @@ call this method to start the task logic.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class SoundTask extends Shell {``
-#. ``var $uses = array('Model'); // same as controller var $uses``
-#. ``function execute() {}``
-#. ``}``
-#. ``?>``
-
 You can access tasks inside your shell classes and execute them
 there:
 
@@ -413,16 +301,6 @@ there:
        }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class SeaShell extends Shell { // found in /vendors/shells/sea.php``
-#. ``var $tasks = array('Sound'); //found in /vendors/shells/tasks/sound.php``
-#. ``function main() {``
-#. ``$this->Sound->execute();``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 You can also access tasks directly from the command line:
 

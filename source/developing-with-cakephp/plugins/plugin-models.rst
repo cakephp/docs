@@ -15,13 +15,6 @@ of pre-pending all of our plugin classes with Pizza.
     }
     ?>
 
-
-#. ``// /app/plugins/pizza/models/pizza_order.php:``
-#. ``class PizzaOrder extends PizzaAppModel {``
-#. ``var $name = 'PizzaOrder';``
-#. ``}``
-#. ``?>``
-
 Visiting /pizza/pizzaOrders now (given you’ve got a table in your
 database called ‘pizza\_orders’) should give us a “Missing View”
 error. Let’s create that next.
@@ -40,14 +33,6 @@ For example:
     }
     ?>
 
-
-#. ``// /app/plugins/pizza/models/example_model.php:``
-#. ``class ExampleModel extends PizzaAppModel {``
-#. ``var $name = 'ExampleModel';``
-#. ``var $hasMany = array('Pizza.PizzaOrder');``
-#. ``}``
-#. ``?>``
-
 If you would prefer that the array keys for the association not
 have the plugin prefix on them, use the alternative syntax:
 
@@ -63,18 +48,6 @@ have the plugin prefix on them, use the alternative syntax:
             );
     }
     ?>
-
-
-#. ``// /app/plugins/pizza/models/example_model.php:``
-#. ``class ExampleModel extends PizzaAppModel {``
-#. ``var $name = 'ExampleModel';``
-#. ``var $hasMany = array(``
-#. ``'PizzaOrder' => array(``
-#. ``'className' => 'Pizza.PizzaOrder'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 3.14.3 Plugin Models
 --------------------
@@ -93,13 +66,6 @@ of pre-pending all of our plugin classes with Pizza.
     }
     ?>
 
-
-#. ``// /app/plugins/pizza/models/pizza_order.php:``
-#. ``class PizzaOrder extends PizzaAppModel {``
-#. ``var $name = 'PizzaOrder';``
-#. ``}``
-#. ``?>``
-
 Visiting /pizza/pizzaOrders now (given you’ve got a table in your
 database called ‘pizza\_orders’) should give us a “Missing View”
 error. Let’s create that next.
@@ -118,14 +84,6 @@ For example:
     }
     ?>
 
-
-#. ``// /app/plugins/pizza/models/example_model.php:``
-#. ``class ExampleModel extends PizzaAppModel {``
-#. ``var $name = 'ExampleModel';``
-#. ``var $hasMany = array('Pizza.PizzaOrder');``
-#. ``}``
-#. ``?>``
-
 If you would prefer that the array keys for the association not
 have the plugin prefix on them, use the alternative syntax:
 
@@ -141,15 +99,3 @@ have the plugin prefix on them, use the alternative syntax:
             );
     }
     ?>
-
-
-#. ``// /app/plugins/pizza/models/example_model.php:``
-#. ``class ExampleModel extends PizzaAppModel {``
-#. ``var $name = 'ExampleModel';``
-#. ``var $hasMany = array(``
-#. ``'PizzaOrder' => array(``
-#. ``'className' => 'Pizza.PizzaOrder'``
-#. ``)``
-#. ``);``
-#. ``}``
-#. ``?>``

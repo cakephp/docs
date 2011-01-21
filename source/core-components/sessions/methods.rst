@@ -15,11 +15,6 @@ following:
                 array('username' => 'clarkKent@dailyplanet.com')
         );
 
-
-#. ``array('User' =>``
-#. ``array('username' => 'clarkKent@dailyplanet.com')``
-#. ``);``
-
 Dots are used to indicate nested arrays. This notation is used for
 all Session component methods wherever a $name is used.
 
@@ -34,9 +29,6 @@ separated array. For example:
 ::
 
     $this->Session->write('Person.eyeColor', 'Green');
-
-
-#. ``$this->Session->write('Person.eyeColor', 'Green');``
 
 This writes the value 'Green' to the session under Person =>
 eyeColor.
@@ -56,9 +48,6 @@ wrapped with the following:
 
     <div id="flashMessage" class="message"> [message] </div>
 
-
-#. ``<div id="flashMessage" class="message"> [message] </div>``
-
 $params allows you to pass additional view variables to the
 rendered layout. $key sets the $messages index in the Message
 array. Default is 'flash'.
@@ -70,18 +59,12 @@ adding "class" in the $params array will apply a class to the
 
     $this->Session->setFlash('Example message text', 'default', array('class' => 'example_class'))
 
-
-#. ``$this->Session->setFlash('Example message text', 'default', array('class' => 'example_class'))``
-
 The output from using ``$session->flash()`` with the above example
 would be:
 
 ::
 
     <div id="flashMessage" class="example_class">Example message text</div>
-
-
-#. ``<div id="flashMessage" class="example_class">Example message text</div>``
 
 read
 ~~~~
@@ -94,9 +77,6 @@ entire session will be returned. E.g.
 ::
 
     $green = $this->Session->read('Person.eyeColor');
-
-
-#. ``$green = $this->Session->read('Person.eyeColor');``
 
 Retrieve the value Green from the session.
 
@@ -119,9 +99,6 @@ Clear the session data at $name. E.g.
 
     $this->Session->delete('Person.eyeColor');
 
-
-#. ``$this->Session->delete('Person.eyeColor');``
-
 Our session data no longer has the value 'Green', or the index
 eyeColor set. However, Person is still in the Session. To delete
 the entire Person information from the session use.
@@ -129,9 +106,6 @@ the entire Person information from the session use.
 ::
 
     $this->Session->delete('Person');
-
-
-#. ``$this->Session->delete('Person');``
 
 destroy
 ~~~~~~~
@@ -143,9 +117,6 @@ destroy the PHP session and then create a fresh session.
 ::
 
     $this->Session->destroy()
-
-
-#. ``$this->Session->destroy()``
 
 error
 ~~~~~
@@ -171,11 +142,6 @@ following:
                 array('username' => 'clarkKent@dailyplanet.com')
         );
 
-
-#. ``array('User' =>``
-#. ``array('username' => 'clarkKent@dailyplanet.com')``
-#. ``);``
-
 Dots are used to indicate nested arrays. This notation is used for
 all Session component methods wherever a $name is used.
 
@@ -190,9 +156,6 @@ separated array. For example:
 ::
 
     $this->Session->write('Person.eyeColor', 'Green');
-
-
-#. ``$this->Session->write('Person.eyeColor', 'Green');``
 
 This writes the value 'Green' to the session under Person =>
 eyeColor.
@@ -212,9 +175,6 @@ wrapped with the following:
 
     <div id="flashMessage" class="message"> [message] </div>
 
-
-#. ``<div id="flashMessage" class="message"> [message] </div>``
-
 $params allows you to pass additional view variables to the
 rendered layout. $key sets the $messages index in the Message
 array. Default is 'flash'.
@@ -226,18 +186,12 @@ adding "class" in the $params array will apply a class to the
 
     $this->Session->setFlash('Example message text', 'default', array('class' => 'example_class'))
 
-
-#. ``$this->Session->setFlash('Example message text', 'default', array('class' => 'example_class'))``
-
 The output from using ``$session->flash()`` with the above example
 would be:
 
 ::
 
     <div id="flashMessage" class="example_class">Example message text</div>
-
-
-#. ``<div id="flashMessage" class="example_class">Example message text</div>``
 
 read
 ~~~~
@@ -250,9 +204,6 @@ entire session will be returned. E.g.
 ::
 
     $green = $this->Session->read('Person.eyeColor');
-
-
-#. ``$green = $this->Session->read('Person.eyeColor');``
 
 Retrieve the value Green from the session.
 
@@ -275,9 +226,6 @@ Clear the session data at $name. E.g.
 
     $this->Session->delete('Person.eyeColor');
 
-
-#. ``$this->Session->delete('Person.eyeColor');``
-
 Our session data no longer has the value 'Green', or the index
 eyeColor set. However, Person is still in the Session. To delete
 the entire Person information from the session use.
@@ -285,9 +233,6 @@ the entire Person information from the session use.
 ::
 
     $this->Session->delete('Person');
-
-
-#. ``$this->Session->delete('Person');``
 
 destroy
 ~~~~~~~
@@ -299,9 +244,6 @@ destroy the PHP session and then create a fresh session.
 ::
 
     $this->Session->destroy()
-
-
-#. ``$this->Session->destroy()``
 
 error
 ~~~~~

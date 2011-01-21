@@ -66,9 +66,6 @@ that builds everything at once and makes speedy rebuilds easy.
 
     cake bake model all
 
-
-#. ``cake bake model all``
-
 Would bake all the models for an application in one shot. Similarly
 ``cake bake controller all`` would bake all controllers and
 ``cake bake view all`` would generate all view files. Parameters on
@@ -189,9 +186,6 @@ that builds everything at once and makes speedy rebuilds easy.
 ::
 
     cake bake model all
-
-
-#. ``cake bake model all``
 
 Would bake all the models for an application in one shot. Similarly
 ``cake bake controller all`` would bake all controllers and

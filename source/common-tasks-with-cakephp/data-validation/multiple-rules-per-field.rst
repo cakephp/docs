@@ -26,21 +26,6 @@ field, this is basically how it should look:
         )
     );
 
-
-#. ````
-#. ``var $validate = array(``
-#. ``'fieldName' => array(``
-#. ``'ruleName' => array(``
-#. ``'rule' => 'ruleName',``
-#. ``// extra keys like on, required, etc. go here...``
-#. ``),``
-#. ``'ruleName2' => array(``
-#. ``'rule' => 'ruleName2',``
-#. ``// extra keys like on, required, etc. go here...``
-#. ``)``
-#. ``)``
-#. ``);``
-
 As you can see, this is quite similar to what we did in the
 previous section. There, for each field we had only one array of
 validation parameters. In this case, each ‘fieldName’ consists of
@@ -64,21 +49,6 @@ This is better explained with a practical example:
             )  
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'loginRule-1' => array(``
-#. ``'rule' => 'alphaNumeric',``
-#. ``'message' => 'Only alphabets and numbers allowed',``
-#. ``'last' => true``
-#. ``),``
-#. ``'loginRule-2' => array(``
-#. ``'rule' => array('minLength', 8),``
-#. ``'message' => 'Minimum length of 8 characters'``
-#. ``)``
-#. ``)``
-#. ``);``
 
 The above example defines two rules for the login field:
 loginRule-1 and loginRule-2. As you can see, each rule is
@@ -108,16 +78,6 @@ to specify error messages in your view instead:
             )
         )
     );
-
-
-#. ``echo $form->input('login', array(``
-#. ``'label' => __('Login', true),``
-#. ``'error' => array(``
-#. ``'loginRule-1' => __('Only alphabets and numbers allowed', true),``
-#. ``'loginRule-2' => __('Minimum length of 8 characters', true)``
-#. ``)``
-#. ``)``
-#. ``);``
 
 The field is now fully internationalized, and you are able to
 remove the messages from the model. For more information on the
@@ -151,21 +111,6 @@ field, this is basically how it should look:
         )
     );
 
-
-#. ````
-#. ``var $validate = array(``
-#. ``'fieldName' => array(``
-#. ``'ruleName' => array(``
-#. ``'rule' => 'ruleName',``
-#. ``// extra keys like on, required, etc. go here...``
-#. ``),``
-#. ``'ruleName2' => array(``
-#. ``'rule' => 'ruleName2',``
-#. ``// extra keys like on, required, etc. go here...``
-#. ``)``
-#. ``)``
-#. ``);``
-
 As you can see, this is quite similar to what we did in the
 previous section. There, for each field we had only one array of
 validation parameters. In this case, each ‘fieldName’ consists of
@@ -189,21 +134,6 @@ This is better explained with a practical example:
             )  
         )
     );
-
-
-#. ``var $validate = array(``
-#. ``'login' => array(``
-#. ``'loginRule-1' => array(``
-#. ``'rule' => 'alphaNumeric',``
-#. ``'message' => 'Only alphabets and numbers allowed',``
-#. ``'last' => true``
-#. ``),``
-#. ``'loginRule-2' => array(``
-#. ``'rule' => array('minLength', 8),``
-#. ``'message' => 'Minimum length of 8 characters'``
-#. ``)``
-#. ``)``
-#. ``);``
 
 The above example defines two rules for the login field:
 loginRule-1 and loginRule-2. As you can see, each rule is
@@ -233,16 +163,6 @@ to specify error messages in your view instead:
             )
         )
     );
-
-
-#. ``echo $form->input('login', array(``
-#. ``'label' => __('Login', true),``
-#. ``'error' => array(``
-#. ``'loginRule-1' => __('Only alphabets and numbers allowed', true),``
-#. ``'loginRule-2' => __('Minimum length of 8 characters', true)``
-#. ``)``
-#. ``)``
-#. ``);``
 
 The field is now fully internationalized, and you are able to
 remove the messages from the model. For more information on the

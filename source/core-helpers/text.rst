@@ -21,10 +21,6 @@ to any options defined in ``$htmlOptions`` (see
     $my_text = 'For more information regarding our world-famous pastries and desserts, contact info@example.com';
     $linked_text = $this->Text->autoLinkEmails($my_text);
 
-
-#. ``$my_text = 'For more information regarding our world-famous pastries and desserts, contact info@example.com';``
-#. ``$linked_text = $this->Text->autoLinkEmails($my_text);``
-
 Output:
 
 ::
@@ -65,9 +61,6 @@ the resulting document.
 
         echo $this->Text->excerpt($last_paragraph, 'method', 50);
 
-
-#. ``echo $this->Text->excerpt($last_paragraph, 'method', 50);``
-
 Output:
 
 ::
@@ -95,9 +88,6 @@ Options
 
         echo $this->Text->highlight($last_sentence, 'using',array('format'=>'<span class="highlight">\1</span>');
 
-
-#. ``echo $this->Text->highlight($last_sentence, 'using',array('format'=>'<span class="highlight">\1</span>');``
-
 Output:
 
 ::
@@ -123,9 +113,6 @@ with ‘and’.
 ::
 
         echo $this->Text->toList($colors);
-
-
-#. ``echo $this->Text->toList($colors);``
 
 Output:
 
@@ -155,13 +142,6 @@ following possible keys by default, all of which are optional:
         'html' => false
     )
 
-
-#. ``array(``
-#. ``'ending' => '...',``
-#. ``'exact' => true,``
-#. ``'html' => false``
-#. ``)``
-
 ::
 
     echo $this->Text->truncate(
@@ -172,16 +152,6 @@ following possible keys by default, all of which are optional:
             'exact' => false
         )
     );
-
-
-#. ``echo $this->Text->truncate(``
-#. ``'The killer crept forward and tripped on the rug.',``
-#. ``22,``
-#. ``array(``
-#. ``'ending' => '...',``
-#. ``'exact' => false``
-#. ``)``
-#. ``);``
 
 Output:
 
@@ -219,10 +189,6 @@ to any options defined in ``$htmlOptions`` (see
     $my_text = 'For more information regarding our world-famous pastries and desserts, contact info@example.com';
     $linked_text = $this->Text->autoLinkEmails($my_text);
 
-
-#. ``$my_text = 'For more information regarding our world-famous pastries and desserts, contact info@example.com';``
-#. ``$linked_text = $this->Text->autoLinkEmails($my_text);``
-
 Output:
 
 ::
@@ -263,9 +229,6 @@ the resulting document.
 
         echo $this->Text->excerpt($last_paragraph, 'method', 50);
 
-
-#. ``echo $this->Text->excerpt($last_paragraph, 'method', 50);``
-
 Output:
 
 ::
@@ -293,9 +256,6 @@ Options
 
         echo $this->Text->highlight($last_sentence, 'using',array('format'=>'<span class="highlight">\1</span>');
 
-
-#. ``echo $this->Text->highlight($last_sentence, 'using',array('format'=>'<span class="highlight">\1</span>');``
-
 Output:
 
 ::
@@ -321,9 +281,6 @@ with ‘and’.
 ::
 
         echo $this->Text->toList($colors);
-
-
-#. ``echo $this->Text->toList($colors);``
 
 Output:
 
@@ -353,13 +310,6 @@ following possible keys by default, all of which are optional:
         'html' => false
     )
 
-
-#. ``array(``
-#. ``'ending' => '...',``
-#. ``'exact' => true,``
-#. ``'html' => false``
-#. ``)``
-
 ::
 
     echo $this->Text->truncate(
@@ -370,16 +320,6 @@ following possible keys by default, all of which are optional:
             'exact' => false
         )
     );
-
-
-#. ``echo $this->Text->truncate(``
-#. ``'The killer crept forward and tripped on the rug.',``
-#. ``22,``
-#. ``array(``
-#. ``'ending' => '...',``
-#. ``'exact' => false``
-#. ``)``
-#. ``);``
 
 Output:
 

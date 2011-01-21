@@ -20,11 +20,6 @@ dot separated array structures.
                 array('username' => 'super@example.com')
         );
 
-
-#. ``array('User' =>``
-#. ``array('username' => 'super@example.com')``
-#. ``);``
-
 Given the previous array structure, the node would be accessed by
 User.username, with the dot indicating the nested array. This
 notation is used for all Session helper methods wherever a $key is
@@ -57,11 +52,6 @@ dot separated array structures.
         array('User' => 
                 array('username' => 'super@example.com')
         );
-
-
-#. ``array('User' =>``
-#. ``array('username' => 'super@example.com')``
-#. ``);``
 
 Given the previous array structure, the node would be accessed by
 User.username, with the dot indicating the nested array. This

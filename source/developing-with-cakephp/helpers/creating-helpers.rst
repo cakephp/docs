@@ -24,16 +24,6 @@ actual PHP class file would look something like this:
     
     ?>
 
-
-#. ``<?php``
-#. ``/* /app/views/helpers/link.php */``
-#. ``class LinkHelper extends AppHelper {``
-#. ``function makeEdit($title, $url) {``
-#. ``// Logic to create specially formatted link goes here...``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 Including other Helpers
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -58,20 +48,6 @@ $helpers array, formatted just as you would in a controller.
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``/* /app/views/helpers/link.php (using other helpers) */``
-#. ``class LinkHelper extends AppHelper {``
-#. ``var $helpers = array('Html');``
-#. ``function makeEdit($title, $url) {``
-#. ``// Use the HTML helper to output``
-#. ``// formatted data:``
-#. ``$link = $this->Html->link($title, $url, array('class' => 'edit'));``
-#. ``return "<div class=\"editOuter\">$link</div>";``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 Callback method
 ~~~~~~~~~~~~~~~
@@ -99,10 +75,6 @@ helper:
 
     <!-- make a link using the new helper -->
     <?php echo $this->Link->makeEdit('Change this Recipe', '/recipes/edit/5'); ?>
-
-
-#. ``<!-- make a link using the new helper -->``
-#. ``<?php echo $this->Link->makeEdit('Change this Recipe', '/recipes/edit/5'); ?>``
 
 This is the new syntax introduced in 1.3. You can also access
 helpers using the form $link->makeEdit(), however the newer format
@@ -138,16 +110,6 @@ actual PHP class file would look something like this:
     
     ?>
 
-
-#. ``<?php``
-#. ``/* /app/views/helpers/link.php */``
-#. ``class LinkHelper extends AppHelper {``
-#. ``function makeEdit($title, $url) {``
-#. ``// Logic to create specially formatted link goes here...``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 Including other Helpers
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -172,20 +134,6 @@ $helpers array, formatted just as you would in a controller.
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``/* /app/views/helpers/link.php (using other helpers) */``
-#. ``class LinkHelper extends AppHelper {``
-#. ``var $helpers = array('Html');``
-#. ``function makeEdit($title, $url) {``
-#. ``// Use the HTML helper to output``
-#. ``// formatted data:``
-#. ``$link = $this->Html->link($title, $url, array('class' => 'edit'));``
-#. ``return "<div class=\"editOuter\">$link</div>";``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 Callback method
 ~~~~~~~~~~~~~~~
@@ -213,10 +161,6 @@ helper:
 
     <!-- make a link using the new helper -->
     <?php echo $this->Link->makeEdit('Change this Recipe', '/recipes/edit/5'); ?>
-
-
-#. ``<!-- make a link using the new helper -->``
-#. ``<?php echo $this->Link->makeEdit('Change this Recipe', '/recipes/edit/5'); ?>``
 
 This is the new syntax introduced in 1.3. You can also access
 helpers using the form $link->makeEdit(), however the newer format

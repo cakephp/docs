@@ -15,12 +15,6 @@ something like this:
     Router::mapResources('recipes');
     Router::parseExtensions();
 
-
-#. ``//In app/config/routes.php...``
-#. ````
-#. ``Router::mapResources('recipes');``
-#. ``Router::parseExtensions();``
-
 The first line sets up a number of default routes for easy REST
 access where method specifies the desired result format (e.g. xml,
 json, rss). These routes are HTTP Request Method sensitive.
@@ -103,37 +97,6 @@ this:
         }
     }
 
-
-#. ``// controllers/recipes_controller.php``
-#. ``class RecipesController extends AppController {``
-#. ``var $components = array('RequestHandler');``
-#. ``function index() {``
-#. ``$recipes = $this->Recipe->find('all');``
-#. ``$this->set(compact('recipes'));``
-#. ``}``
-#. ``function view($id) {``
-#. ``$recipe = $this->Recipe->findById($id);``
-#. ``$this->set(compact('recipe'));``
-#. ``}``
-#. ``function edit($id) {``
-#. ``$this->Recipe->id = $id;``
-#. ``if ($this->Recipe->save($this->data)) {``
-#. ``$message = 'Saved';``
-#. ``} else {``
-#. ``$message = 'Error';``
-#. ``}``
-#. ``$this->set(compact("message"));``
-#. ``}``
-#. ``function delete($id) {``
-#. ``if($this->Recipe->delete($id)) {``
-#. ``$message = 'Deleted';``
-#. ``} else {``
-#. ``$message = 'Error';``
-#. ``}``
-#. ``$this->set(compact("message"));``
-#. ``}``
-#. ``}``
-
 Since we've added a call to Router::parseExtensions(), the CakePHP
 router is already primed to serve up different views based on
 different kinds of requests. Since we're dealing with REST
@@ -149,12 +112,6 @@ our index view might look like:
     <recipes>
         <?php echo $xml->serialize($recipes); ?>
     </recipes>
-
-
-#. ``// app/views/recipes/xml/index.ctp``
-#. ``<recipes>``
-#. ``<?php echo $xml->serialize($recipes); ?>``
-#. ``</recipes>``
 
 Experienced CakePHP users might notice that we haven't included the
 XmlHelper in our RecipesController $helpers array. This is on
@@ -178,18 +135,6 @@ The rendered XML will end up looking something like this:
             <comment id="654" body="This is a comment for this post."></comment>
         </post>
     </posts>
-
-
-#. ``<posts>``
-#. ``<post id="234" created="2008-06-13" modified="2008-06-14">``
-#. ``<author id="23423" first_name="Billy" last_name="Bob"></author>``
-#. ``<comment id="245" body="This is a comment for this post."></comment>``
-#. ``</post>``
-#. ``<post id="3247" created="2008-06-15" modified="2008-06-15">``
-#. ``<author id="625" first_name="Nate" last_name="Johnson"></author>``
-#. ``<comment id="654" body="This is a comment for this post."></comment>``
-#. ``</post>``
-#. ``</posts>``
 
 Creating the logic for the edit action is a bit trickier, but not
 by much. Since you're providing an API that outputs XML, it's a
@@ -229,12 +174,6 @@ something like this:
     Router::mapResources('recipes');
     Router::parseExtensions();
 
-
-#. ``//In app/config/routes.php...``
-#. ````
-#. ``Router::mapResources('recipes');``
-#. ``Router::parseExtensions();``
-
 The first line sets up a number of default routes for easy REST
 access where method specifies the desired result format (e.g. xml,
 json, rss). These routes are HTTP Request Method sensitive.
@@ -317,37 +256,6 @@ this:
         }
     }
 
-
-#. ``// controllers/recipes_controller.php``
-#. ``class RecipesController extends AppController {``
-#. ``var $components = array('RequestHandler');``
-#. ``function index() {``
-#. ``$recipes = $this->Recipe->find('all');``
-#. ``$this->set(compact('recipes'));``
-#. ``}``
-#. ``function view($id) {``
-#. ``$recipe = $this->Recipe->findById($id);``
-#. ``$this->set(compact('recipe'));``
-#. ``}``
-#. ``function edit($id) {``
-#. ``$this->Recipe->id = $id;``
-#. ``if ($this->Recipe->save($this->data)) {``
-#. ``$message = 'Saved';``
-#. ``} else {``
-#. ``$message = 'Error';``
-#. ``}``
-#. ``$this->set(compact("message"));``
-#. ``}``
-#. ``function delete($id) {``
-#. ``if($this->Recipe->delete($id)) {``
-#. ``$message = 'Deleted';``
-#. ``} else {``
-#. ``$message = 'Error';``
-#. ``}``
-#. ``$this->set(compact("message"));``
-#. ``}``
-#. ``}``
-
 Since we've added a call to Router::parseExtensions(), the CakePHP
 router is already primed to serve up different views based on
 different kinds of requests. Since we're dealing with REST
@@ -363,12 +271,6 @@ our index view might look like:
     <recipes>
         <?php echo $xml->serialize($recipes); ?>
     </recipes>
-
-
-#. ``// app/views/recipes/xml/index.ctp``
-#. ``<recipes>``
-#. ``<?php echo $xml->serialize($recipes); ?>``
-#. ``</recipes>``
 
 Experienced CakePHP users might notice that we haven't included the
 XmlHelper in our RecipesController $helpers array. This is on
@@ -392,18 +294,6 @@ The rendered XML will end up looking something like this:
             <comment id="654" body="This is a comment for this post."></comment>
         </post>
     </posts>
-
-
-#. ``<posts>``
-#. ``<post id="234" created="2008-06-13" modified="2008-06-14">``
-#. ``<author id="23423" first_name="Billy" last_name="Bob"></author>``
-#. ``<comment id="245" body="This is a comment for this post."></comment>``
-#. ``</post>``
-#. ``<post id="3247" created="2008-06-15" modified="2008-06-15">``
-#. ``<author id="625" first_name="Nate" last_name="Johnson"></author>``
-#. ``<comment id="654" body="This is a comment for this post."></comment>``
-#. ``</post>``
-#. ``</posts>``
 
 Creating the logic for the edit action is a bit trickier, but not
 by much. Since you're providing an API that outputs XML, it's a

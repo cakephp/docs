@@ -61,27 +61,6 @@ model. Create a file named **article\_fixture.php** in your
      } 
      ?> 
 
-
-#. ``<?php``
-#. ``class ArticleFixture extends CakeTestFixture {``
-#. ``var $name = 'Article';``
-#. ````
-#. ``var $fields = array(``
-#. ``'id' => array('type' => 'integer', 'key' => 'primary'),``
-#. ``'title' => array('type' => 'string', 'length' => 255, 'null' => false),``
-#. ``'body' => 'text',``
-#. ``'published' => array('type' => 'integer', 'default' => '0', 'null' => false),``
-#. ``'created' => 'datetime',``
-#. ``'updated' => 'datetime'``
-#. ``);``
-#. ``var $records = array(``
-#. ``array ('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),``
-#. ``array ('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),``
-#. ``array ('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')``
-#. ``);``
-#. ``}``
-#. ``?>``
-
 The ``$name`` variable is extremely significant. If you omit it,
 cake will use the wrong table names when it sets up your test
 database, and you'll get strange errors that are difficult to
@@ -144,14 +123,6 @@ articles), change the example fixture given in the previous section
        ?> 
      
 
-
-#. ``<?php``
-#. ``class ArticleFixture extends CakeTestFixture {``
-#. ``var $name = 'Article';``
-#. ``var $import = 'Article';``
-#. ``}``
-#. ``?>``
-
 This statement tells the test suite to import your table definition
 from the table linked to the model called Article. You can use any
 model available in your application. The statement above does not
@@ -166,14 +137,6 @@ import records, you can do so by changing it to:
     }
     ?> 
 
-
-#. ``<?php``
-#. ``class ArticleFixture extends CakeTestFixture {``
-#. ``var $name = 'Article';``
-#. ``var $import = array('model' => 'Article', 'records' => true);``
-#. ``}``
-#. ``?>``
-
 If on the other hand you have a table created but no model
 available for it, you can specify that your import will take place
 by reading that table information instead. For example:
@@ -187,14 +150,6 @@ by reading that table information instead. For example:
        } 
      ?> 
 
-
-#. ``<?php``
-#. ``class ArticleFixture extends CakeTestFixture {``
-#. ``var $name = 'Article';``
-#. ``var $import = array('table' => 'articles');``
-#. ``}``
-#. ``?>``
-
 Will import table definition from a table called 'articles' using
 your CakePHP database connection named 'default'. If you want to
 change the connection to use just do:
@@ -207,14 +162,6 @@ change the connection to use just do:
        var $import = array('table' => 'articles', 'connection' => 'other'); 
        } 
        ?> 
-
-
-#. ``<?php``
-#. ``class ArticleFixture extends CakeTestFixture {``
-#. ``var $name = 'Article';``
-#. ``var $import = array('table' => 'articles', 'connection' => 'other');``
-#. ``}``
-#. ``?>``
 
 Since it uses your CakePHP database connection, if there's any
 table prefix declared it will be automatically used when fetching
@@ -230,14 +177,6 @@ change it to:
               var $import = array('table' => 'articles', 'records' => true); 
        } 
      ?> 
-
-
-#. ``<?php``
-#. ``class ArticleFixture extends CakeTestFixture {``
-#. ``var $name = 'Article';``
-#. ``var $import = array('table' => 'articles', 'records' => true);``
-#. ``}``
-#. ``?>``
 
 You can naturally import your table definition from an existing
 model/table, but have your records defined directly on the fixture
@@ -257,20 +196,6 @@ as it was shown on previous section. For example:
               ); 
        } 
      ?> 
-
-
-#. ``<?php``
-#. ``class ArticleFixture extends CakeTestFixture {``
-#. ``var $name = 'Article';``
-#. ``var $import = 'Article';``
-#. ````
-#. ``var $records = array(``
-#. ``array ('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),``
-#. ``array ('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),``
-#. ``array ('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')``
-#. ``);``
-#. ``}``
-#. ``?>``
 
 4.7.3 Preparing test data
 -------------------------
@@ -335,27 +260,6 @@ model. Create a file named **article\_fixture.php** in your
      } 
      ?> 
 
-
-#. ``<?php``
-#. ``class ArticleFixture extends CakeTestFixture {``
-#. ``var $name = 'Article';``
-#. ````
-#. ``var $fields = array(``
-#. ``'id' => array('type' => 'integer', 'key' => 'primary'),``
-#. ``'title' => array('type' => 'string', 'length' => 255, 'null' => false),``
-#. ``'body' => 'text',``
-#. ``'published' => array('type' => 'integer', 'default' => '0', 'null' => false),``
-#. ``'created' => 'datetime',``
-#. ``'updated' => 'datetime'``
-#. ``);``
-#. ``var $records = array(``
-#. ``array ('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),``
-#. ``array ('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),``
-#. ``array ('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')``
-#. ``);``
-#. ``}``
-#. ``?>``
-
 The ``$name`` variable is extremely significant. If you omit it,
 cake will use the wrong table names when it sets up your test
 database, and you'll get strange errors that are difficult to
@@ -418,14 +322,6 @@ articles), change the example fixture given in the previous section
        ?> 
      
 
-
-#. ``<?php``
-#. ``class ArticleFixture extends CakeTestFixture {``
-#. ``var $name = 'Article';``
-#. ``var $import = 'Article';``
-#. ``}``
-#. ``?>``
-
 This statement tells the test suite to import your table definition
 from the table linked to the model called Article. You can use any
 model available in your application. The statement above does not
@@ -440,14 +336,6 @@ import records, you can do so by changing it to:
     }
     ?> 
 
-
-#. ``<?php``
-#. ``class ArticleFixture extends CakeTestFixture {``
-#. ``var $name = 'Article';``
-#. ``var $import = array('model' => 'Article', 'records' => true);``
-#. ``}``
-#. ``?>``
-
 If on the other hand you have a table created but no model
 available for it, you can specify that your import will take place
 by reading that table information instead. For example:
@@ -461,14 +349,6 @@ by reading that table information instead. For example:
        } 
      ?> 
 
-
-#. ``<?php``
-#. ``class ArticleFixture extends CakeTestFixture {``
-#. ``var $name = 'Article';``
-#. ``var $import = array('table' => 'articles');``
-#. ``}``
-#. ``?>``
-
 Will import table definition from a table called 'articles' using
 your CakePHP database connection named 'default'. If you want to
 change the connection to use just do:
@@ -481,14 +361,6 @@ change the connection to use just do:
        var $import = array('table' => 'articles', 'connection' => 'other'); 
        } 
        ?> 
-
-
-#. ``<?php``
-#. ``class ArticleFixture extends CakeTestFixture {``
-#. ``var $name = 'Article';``
-#. ``var $import = array('table' => 'articles', 'connection' => 'other');``
-#. ``}``
-#. ``?>``
 
 Since it uses your CakePHP database connection, if there's any
 table prefix declared it will be automatically used when fetching
@@ -504,14 +376,6 @@ change it to:
               var $import = array('table' => 'articles', 'records' => true); 
        } 
      ?> 
-
-
-#. ``<?php``
-#. ``class ArticleFixture extends CakeTestFixture {``
-#. ``var $name = 'Article';``
-#. ``var $import = array('table' => 'articles', 'records' => true);``
-#. ``}``
-#. ``?>``
 
 You can naturally import your table definition from an existing
 model/table, but have your records defined directly on the fixture
@@ -531,17 +395,3 @@ as it was shown on previous section. For example:
               ); 
        } 
      ?> 
-
-
-#. ``<?php``
-#. ``class ArticleFixture extends CakeTestFixture {``
-#. ``var $name = 'Article';``
-#. ``var $import = 'Article';``
-#. ````
-#. ``var $records = array(``
-#. ``array ('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),``
-#. ``array ('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),``
-#. ``array ('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')``
-#. ``);``
-#. ``}``
-#. ``?>``

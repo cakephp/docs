@@ -27,20 +27,10 @@ app/config/bootstrap.php to load custom inflections.
         'irregular' => array('spins' => 'spinor')
     ));
 
-
-#. ``Inflector::rules('singular', array(``
-#. ``'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),``
-#. ``'uninflected' => array('singulars'),``
-#. ``'irregular' => array('spins' => 'spinor')``
-#. ``));``
-
 or
 ::
 
     Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));
-
-
-#. ``Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));``
 
 Will merge the supplied rules into the inflection sets defined in
 cake/libs/inflector.php, with the added rules taking precedence
@@ -75,20 +65,10 @@ app/config/bootstrap.php to load custom inflections.
         'irregular' => array('spins' => 'spinor')
     ));
 
-
-#. ``Inflector::rules('singular', array(``
-#. ``'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),``
-#. ``'uninflected' => array('singulars'),``
-#. ``'irregular' => array('spins' => 'spinor')``
-#. ``));``
-
 or
 ::
 
     Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));
-
-
-#. ``Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));``
 
 Will merge the supplied rules into the inflection sets defined in
 cake/libs/inflector.php, with the added rules taking precedence

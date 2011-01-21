@@ -29,22 +29,6 @@ content-types that the client accepts. For example:
         }
     }
 
-
-#. ``class PostsController extends AppController {``
-#. ````
-#. ``var $components = array('RequestHandler');``
-#. ``function beforeFilter () {``
-#. ``if ($this->RequestHandler->accepts('html')) {``
-#. ``// Execute code only if client accepts an HTML (text/html) response``
-#. ``} elseif ($this->RequestHandler->accepts('xml')) {``
-#. ``// Execute XML-only code``
-#. ``}``
-#. ``if ($this->RequestHandler->accepts(array('xml', 'rss', 'atom'))) {``
-#. ``// Executes if the client accepts any of the above: XML, RSS or Atom``
-#. ``}``
-#. ``}``
-#. ``}``
-
 Other request 'type' detection methods include:
 
 isAjax()
@@ -111,15 +95,6 @@ following would accomplish that:
         }
         //Continue Controller action
 
-
-#. ``if ($this->RequestHandler->isAjax()) {``
-#. ``Configure::write('debug', 0);``
-#. ``$this->header('Pragma: no-cache');``
-#. ``$this->header('Cache-control: no-cache');``
-#. ``$this->header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");``
-#. ``}``
-#. ``//Continue Controller action``
-
 You could also disable caching with the functionally analogous
 ``Controller::disableCache``
 
@@ -129,12 +104,6 @@ You could also disable caching with the functionally analogous
             $this->disableCache();
         }
         //Continue Controller action
-
-
-#. ``if ($this->RequestHandler->isAjax()) {``
-#. ``$this->disableCache();``
-#. ``}``
-#. ``//Continue Controller action``
 
 5.5.1 Obtaining Request Information
 -----------------------------------
@@ -167,22 +136,6 @@ content-types that the client accepts. For example:
         }
     }
 
-
-#. ``class PostsController extends AppController {``
-#. ````
-#. ``var $components = array('RequestHandler');``
-#. ``function beforeFilter () {``
-#. ``if ($this->RequestHandler->accepts('html')) {``
-#. ``// Execute code only if client accepts an HTML (text/html) response``
-#. ``} elseif ($this->RequestHandler->accepts('xml')) {``
-#. ``// Execute XML-only code``
-#. ``}``
-#. ``if ($this->RequestHandler->accepts(array('xml', 'rss', 'atom'))) {``
-#. ``// Executes if the client accepts any of the above: XML, RSS or Atom``
-#. ``}``
-#. ``}``
-#. ``}``
-
 Other request 'type' detection methods include:
 
 isAjax()
@@ -249,15 +202,6 @@ following would accomplish that:
         }
         //Continue Controller action
 
-
-#. ``if ($this->RequestHandler->isAjax()) {``
-#. ``Configure::write('debug', 0);``
-#. ``$this->header('Pragma: no-cache');``
-#. ``$this->header('Cache-control: no-cache');``
-#. ``$this->header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");``
-#. ``}``
-#. ``//Continue Controller action``
-
 You could also disable caching with the functionally analogous
 ``Controller::disableCache``
 
@@ -267,9 +211,3 @@ You could also disable caching with the functionally analogous
             $this->disableCache();
         }
         //Continue Controller action
-
-
-#. ``if ($this->RequestHandler->isAjax()) {``
-#. ``$this->disableCache();``
-#. ``}``
-#. ``//Continue Controller action``

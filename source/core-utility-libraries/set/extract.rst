@@ -19,13 +19,6 @@ Set::classicExtract.
     // results returns:
     // array(1,2,3,4,5,...);
 
-
-#. ``// Common Usage:``
-#. ``$users = $this->User->find("all");``
-#. ``$results = Set::extract('/User/id', $users);``
-#. ``// results returns:``
-#. ``// array(1,2,3,4,5,...);``
-
 Currently implemented selectors:
 
 Selector
@@ -81,13 +74,6 @@ Set::classicExtract.
     $results = Set::extract('/User/id', $users);
     // results returns:
     // array(1,2,3,4,5,...);
-
-
-#. ``// Common Usage:``
-#. ``$users = $this->User->find("all");``
-#. ``$results = Set::extract('/User/id', $users);``
-#. ``// results returns:``
-#. ``// array(1,2,3,4,5,...);``
 
 Currently implemented selectors:
 

@@ -19,15 +19,6 @@ method.
         'Cookie' => array('name' => 'CookieMonster')
     );
 
-
-#. ``var $components = array(``
-#. ``'Auth' => array(``
-#. ``'authorize' => 'controller',``
-#. ``'loginAction' => array('controller' => 'users', 'action' => 'login')``
-#. ``),``
-#. ``'Cookie' => array('name' => 'CookieMonster')``
-#. ``);``
-
 Would be an example of configuring a component with the
 ``$components`` array. All core components allow their
 configuration settings to be set in this way. In addition you can
@@ -45,14 +36,6 @@ as:
         $this->Cookie->name = 'CookieMonster';
     }
 
-
-#. ``function beforeFilter() {``
-#. ``$this->Auth->authorize = 'controller';``
-#. ``$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');``
-#. ````
-#. ``$this->Cookie->name = 'CookieMonster';``
-#. ``}``
-
 It's possible, however, that a component requires certain
 configuration options to be set before the controller's
 ``beforeFilter()`` is run. To this end, some components allow
@@ -61,9 +44,6 @@ configuration options be set in the ``$components`` array.
 ::
 
     var $components = array('DebugKit.toolbar' => array('panels' => array('history', 'session')));
-
-
-#. ``var $components = array('DebugKit.toolbar' => array('panels' => array('history', 'session')));``
 
 Consult the relevant documentation to determine what configuration
 options each component provides.
@@ -89,15 +69,6 @@ method.
         'Cookie' => array('name' => 'CookieMonster')
     );
 
-
-#. ``var $components = array(``
-#. ``'Auth' => array(``
-#. ``'authorize' => 'controller',``
-#. ``'loginAction' => array('controller' => 'users', 'action' => 'login')``
-#. ``),``
-#. ``'Cookie' => array('name' => 'CookieMonster')``
-#. ``);``
-
 Would be an example of configuring a component with the
 ``$components`` array. All core components allow their
 configuration settings to be set in this way. In addition you can
@@ -115,14 +86,6 @@ as:
         $this->Cookie->name = 'CookieMonster';
     }
 
-
-#. ``function beforeFilter() {``
-#. ``$this->Auth->authorize = 'controller';``
-#. ``$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');``
-#. ````
-#. ``$this->Cookie->name = 'CookieMonster';``
-#. ``}``
-
 It's possible, however, that a component requires certain
 configuration options to be set before the controller's
 ``beforeFilter()`` is run. To this end, some components allow
@@ -131,9 +94,6 @@ configuration options be set in the ``$components`` array.
 ::
 
     var $components = array('DebugKit.toolbar' => array('panels' => array('history', 'session')));
-
-
-#. ``var $components = array('DebugKit.toolbar' => array('panels' => array('history', 'session')));``
 
 Consult the relevant documentation to determine what configuration
 options each component provides.

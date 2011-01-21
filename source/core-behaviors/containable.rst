@@ -24,19 +24,11 @@ your model:
         var $actsAs = array('Containable');
     }
 
-
-#. ``class Post extends AppModel {``
-#. ``var $actsAs = array('Containable');``
-#. ``}``
-
 You can also attach the behavior on the fly:
 
 ::
 
     $this->Post->Behaviors->attach('Containable');
-
-
-#. ``$this->Post->Behaviors->attach('Containable');``
 
 Using Containable
 ~~~~~~~~~~~~~~~~~
@@ -50,9 +42,6 @@ extensive:
 ::
 
     debug($this->Post->find('all'));
-
-
-#. ``debug($this->Post->find('all'));``
 
 ::
 
@@ -120,19 +109,12 @@ the following:
     $this->Post->contain();
     $this->Post->find('all');
 
-
-#. ``$this->Post->contain();``
-#. ``$this->Post->find('all');``
-
 You can also invoke Containable's magic from inside the find()
 call:
 
 ::
 
     $this->Post->find('all', array('contain' => false));
-
-
-#. ``$this->Post->find('all', array('contain' => false));``
 
 Having done that, you end up with something a lot more concise:
 
@@ -167,10 +149,6 @@ This sort of help isn't new: in fact, you can do that without the
     $this->Post->recursive = -1;
     $this->Post->find('all');
 
-
-#. ``$this->Post->recursive = -1;``
-#. ``$this->Post->find('all');``
-
 Containable really shines when you have complex associations, and
 you want to pare down things that sit at the same level. The
 model's ``$recursive`` property is helpful if you want to hack off
@@ -188,18 +166,11 @@ information), we'd try something like this:
     $this->Post->contain('Tag');
     $this->Post->find('all');
 
-
-#. ``$this->Post->contain('Tag');``
-#. ``$this->Post->find('all');``
-
 Again, we can use the contain key inside a find() call:
 
 ::
 
     $this->Post->find('all', array('contain' => 'Tag'));
-
-
-#. ``$this->Post->find('all', array('contain' => 'Tag'));``
 
 Without Containable, you'd end up needing to use the
 ``unbindModel()`` method of the model, multiple times if you're
@@ -223,12 +194,6 @@ and nothing else — you could do something like the following:
     //or..
     
     $this->Post->find('all', array('contain' => 'Comment.author'));
-
-
-#. ``$this->Post->contain('Comment.author');``
-#. ``$this->Post->find('all');``
-#. ``//or..``
-#. ``$this->Post->find('all', array('contain' => 'Comment.author'));``
 
 Here, we've told Containable to give us our post information, and
 just the author field of the associated Comment model. The output
@@ -277,12 +242,6 @@ condition:
     
     $this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
 
-
-#. ``$this->Post->contain('Comment.author = "Daniel"');``
-#. ``$this->Post->find('all');``
-#. ``//or...``
-#. ``$this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));``
-
 This gives us a result that gives us posts with comments authored
 by Daniel:
 
@@ -324,14 +283,6 @@ Additional filtering can be performed by supplying the standard
         )
     )));
 
-
-#. ``$this->Post->find('all', array('contain' => array(``
-#. ``'Comment' => array(``
-#. ``'conditions' => array('Comment.author =' => "Daniel"),``
-#. ``'order' => 'Comment.created DESC'``
-#. ``)``
-#. ``)));``
-
 Here's an example of using the ``ContainableBehavior`` when you've
 got deep and complex model relationships.
 
@@ -369,29 +320,6 @@ This is how we retrieve the above associations with Containable:
             )
         )
     ));
-
-
-#. ``$this->User->find('all', array(``
-#. ``'contain'=>array(``
-#. ``'Profile',``
-#. ``'Account' => array(``
-#. ``'AccountSummary'``
-#. ``),``
-#. ``'Post' => array(``
-#. ``'PostAttachment' => array(``
-#. ``'fields' => array('id', 'name'),``
-#. ``'PostAttachmentHistory' => array(``
-#. ``'HistoryNotes' => array(``
-#. ``'fields' => array('id', 'note')``
-#. ``)``
-#. ``)``
-#. ``),``
-#. ``'Tag' => array(``
-#. ``'conditions' => array('Tag.name LIKE' => '%happy%')``
-#. ``)``
-#. ``)``
-#. ``)``
-#. ``));``
 
 Keep in mind that ``contain`` key is only used once in the main
 model, you don't need to use 'contain' again for related models
@@ -434,9 +362,6 @@ non-aggregate fields, try disabling the ``autoFields`` setting.
 ::
 
     $this->Post->Behaviors->attach('Containable', array('autoFields' => false));
-
-
-#. ``$this->Post->Behaviors->attach('Containable', array('autoFields' => false));``
 
 6.2 Containable
 ---------------
@@ -464,19 +389,11 @@ your model:
         var $actsAs = array('Containable');
     }
 
-
-#. ``class Post extends AppModel {``
-#. ``var $actsAs = array('Containable');``
-#. ``}``
-
 You can also attach the behavior on the fly:
 
 ::
 
     $this->Post->Behaviors->attach('Containable');
-
-
-#. ``$this->Post->Behaviors->attach('Containable');``
 
 Using Containable
 ~~~~~~~~~~~~~~~~~
@@ -490,9 +407,6 @@ extensive:
 ::
 
     debug($this->Post->find('all'));
-
-
-#. ``debug($this->Post->find('all'));``
 
 ::
 
@@ -560,19 +474,12 @@ the following:
     $this->Post->contain();
     $this->Post->find('all');
 
-
-#. ``$this->Post->contain();``
-#. ``$this->Post->find('all');``
-
 You can also invoke Containable's magic from inside the find()
 call:
 
 ::
 
     $this->Post->find('all', array('contain' => false));
-
-
-#. ``$this->Post->find('all', array('contain' => false));``
 
 Having done that, you end up with something a lot more concise:
 
@@ -607,10 +514,6 @@ This sort of help isn't new: in fact, you can do that without the
     $this->Post->recursive = -1;
     $this->Post->find('all');
 
-
-#. ``$this->Post->recursive = -1;``
-#. ``$this->Post->find('all');``
-
 Containable really shines when you have complex associations, and
 you want to pare down things that sit at the same level. The
 model's ``$recursive`` property is helpful if you want to hack off
@@ -628,18 +531,11 @@ information), we'd try something like this:
     $this->Post->contain('Tag');
     $this->Post->find('all');
 
-
-#. ``$this->Post->contain('Tag');``
-#. ``$this->Post->find('all');``
-
 Again, we can use the contain key inside a find() call:
 
 ::
 
     $this->Post->find('all', array('contain' => 'Tag'));
-
-
-#. ``$this->Post->find('all', array('contain' => 'Tag'));``
 
 Without Containable, you'd end up needing to use the
 ``unbindModel()`` method of the model, multiple times if you're
@@ -663,12 +559,6 @@ and nothing else — you could do something like the following:
     //or..
     
     $this->Post->find('all', array('contain' => 'Comment.author'));
-
-
-#. ``$this->Post->contain('Comment.author');``
-#. ``$this->Post->find('all');``
-#. ``//or..``
-#. ``$this->Post->find('all', array('contain' => 'Comment.author'));``
 
 Here, we've told Containable to give us our post information, and
 just the author field of the associated Comment model. The output
@@ -717,12 +607,6 @@ condition:
     
     $this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
 
-
-#. ``$this->Post->contain('Comment.author = "Daniel"');``
-#. ``$this->Post->find('all');``
-#. ``//or...``
-#. ``$this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));``
-
 This gives us a result that gives us posts with comments authored
 by Daniel:
 
@@ -764,14 +648,6 @@ Additional filtering can be performed by supplying the standard
         )
     )));
 
-
-#. ``$this->Post->find('all', array('contain' => array(``
-#. ``'Comment' => array(``
-#. ``'conditions' => array('Comment.author =' => "Daniel"),``
-#. ``'order' => 'Comment.created DESC'``
-#. ``)``
-#. ``)));``
-
 Here's an example of using the ``ContainableBehavior`` when you've
 got deep and complex model relationships.
 
@@ -809,29 +685,6 @@ This is how we retrieve the above associations with Containable:
             )
         )
     ));
-
-
-#. ``$this->User->find('all', array(``
-#. ``'contain'=>array(``
-#. ``'Profile',``
-#. ``'Account' => array(``
-#. ``'AccountSummary'``
-#. ``),``
-#. ``'Post' => array(``
-#. ``'PostAttachment' => array(``
-#. ``'fields' => array('id', 'name'),``
-#. ``'PostAttachmentHistory' => array(``
-#. ``'HistoryNotes' => array(``
-#. ``'fields' => array('id', 'note')``
-#. ``)``
-#. ``)``
-#. ``),``
-#. ``'Tag' => array(``
-#. ``'conditions' => array('Tag.name LIKE' => '%happy%')``
-#. ``)``
-#. ``)``
-#. ``)``
-#. ``));``
 
 Keep in mind that ``contain`` key is only used once in the main
 model, you don't need to use 'contain' again for related models
@@ -874,6 +727,3 @@ non-aggregate fields, try disabling the ``autoFields`` setting.
 ::
 
     $this->Post->Behaviors->attach('Containable', array('autoFields' => false));
-
-
-#. ``$this->Post->Behaviors->attach('Containable', array('autoFields' => false));``

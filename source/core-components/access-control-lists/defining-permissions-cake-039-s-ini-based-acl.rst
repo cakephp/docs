@@ -22,14 +22,6 @@ updating the following lines in app/config/core.php
     Configure::write('Acl.classname', 'IniAcl');
     //Configure::write('Acl.database', 'default');
 
-
-#. ``//Change these lines:``
-#. ``Configure::write('Acl.classname', 'DbAcl');``
-#. ``Configure::write('Acl.database', 'default');``
-#. ``//To look like this:``
-#. ``Configure::write('Acl.classname', 'IniAcl');``
-#. ``//Configure::write('Acl.database', 'default');``
-
 ARO/ACO permissions are specified in **/app/config/acl.ini.php**.
 The basic idea is that AROs are specified in an INI section that
 has three properties: groups, allow, and deny.
@@ -122,14 +114,6 @@ updating the following lines in app/config/core.php
     //To look like this:
     Configure::write('Acl.classname', 'IniAcl');
     //Configure::write('Acl.database', 'default');
-
-
-#. ``//Change these lines:``
-#. ``Configure::write('Acl.classname', 'DbAcl');``
-#. ``Configure::write('Acl.database', 'default');``
-#. ``//To look like this:``
-#. ``Configure::write('Acl.classname', 'IniAcl');``
-#. ``//Configure::write('Acl.database', 'default');``
 
 ARO/ACO permissions are specified in **/app/config/acl.ini.php**.
 The basic idea is that AROs are specified in an INI section that

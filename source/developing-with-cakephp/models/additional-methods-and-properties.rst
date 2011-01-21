@@ -21,24 +21,11 @@ the fat model.
        }
     }
 
-
-#. ``class Example extends AppModel {``
-#. ``function getRecent() {``
-#. ``$conditions = array(``
-#. ``'created BETWEEN (curdate() - interval 7 day) and (curdate() - interval 0 day))'``
-#. ``);``
-#. ``return $this->find('all', compact('conditions'));``
-#. ``}``
-#. ``}``
-
 This ``getRecent()`` method can now be used within the controller.
 
 ::
 
     $recent = $this->Example->getRecent();
-
-
-#. ``$recent = $this->Example->getRecent();``
 
 Using virtualFields
 ~~~~~~~~~~~~~~~~~~~
@@ -62,11 +49,6 @@ would be:
         'name' => 'CONCAT(User.first_name, " ", User.last_name)'
     );
 
-
-#. ``var $virtualFields = array(``
-#. ``'name' => 'CONCAT(User.first_name, " ", User.last_name)'``
-#. ``);``
-
 In subsequent find operations, your User results would contain a
 ``name`` key with the result of the concatenation. It is not
 advisable to create virtual fields with the same names as columns
@@ -87,10 +69,6 @@ a field. Using the example field above,
     $this->User->hasField('name'); // Will return false, as there is no concrete field called name
     $this->User->hasField('name', true); // Will return true as there is a virtual field called name
 
-
-#. ``$this->User->hasField('name'); // Will return false, as there is no concrete field called name``
-#. ``$this->User->hasField('name', true); // Will return true as there is a virtual field called name``
-
 **``Model::isVirtualField()``**
 This method can be used to check if a field/column is a virtual
 field or a concrete field. Will return true if the column is
@@ -101,10 +79,6 @@ virtual.
     $this->User->isVirtualField('name'); //true
     $this->User->isVirtualField('first_name'); //false
 
-
-#. ``$this->User->isVirtualField('name'); //true``
-#. ``$this->User->isVirtualField('first_name'); //false``
-
 **``Model::getVirtualField()``**
 This method can be used to access the SQL expression that comprises
 a virtual field. If no argument is supplied it will return all
@@ -113,9 +87,6 @@ virtual fields in a Model.
 ::
 
     $this->User->getVirtualField('name'); //returns 'CONCAT(User.first_name, ' ', User.last_name)'
-
-
-#. ``$this->User->getVirtualField('name'); //returns 'CONCAT(User.first_name, ' ', User.last_name)'``
 
 **``Model::find()`` and virtual fields**
 As stated earlier ``Model::find()`` will treat virtual fields much
@@ -136,18 +107,6 @@ behavior of calculated fields in 1.2
             //more fields.
         )
     );
-
-
-#. ``$results = $this->User->find('first');``
-#. ``// results contains the following``
-#. ``array(``
-#. ``'User' => array(``
-#. ``'first_name' => 'Mark',``
-#. ``'last_name' => 'Story',``
-#. ``'name' => 'Mark Story',``
-#. ``//more fields.``
-#. ``)``
-#. ``);``
 
 **Pagination and virtual fields**
 Since virtual fields behave much like regular fields when doing
@@ -177,24 +136,11 @@ the fat model.
        }
     }
 
-
-#. ``class Example extends AppModel {``
-#. ``function getRecent() {``
-#. ``$conditions = array(``
-#. ``'created BETWEEN (curdate() - interval 7 day) and (curdate() - interval 0 day))'``
-#. ``);``
-#. ``return $this->find('all', compact('conditions'));``
-#. ``}``
-#. ``}``
-
 This ``getRecent()`` method can now be used within the controller.
 
 ::
 
     $recent = $this->Example->getRecent();
-
-
-#. ``$recent = $this->Example->getRecent();``
 
 Using virtualFields
 ~~~~~~~~~~~~~~~~~~~
@@ -218,11 +164,6 @@ would be:
         'name' => 'CONCAT(User.first_name, " ", User.last_name)'
     );
 
-
-#. ``var $virtualFields = array(``
-#. ``'name' => 'CONCAT(User.first_name, " ", User.last_name)'``
-#. ``);``
-
 In subsequent find operations, your User results would contain a
 ``name`` key with the result of the concatenation. It is not
 advisable to create virtual fields with the same names as columns
@@ -243,10 +184,6 @@ a field. Using the example field above,
     $this->User->hasField('name'); // Will return false, as there is no concrete field called name
     $this->User->hasField('name', true); // Will return true as there is a virtual field called name
 
-
-#. ``$this->User->hasField('name'); // Will return false, as there is no concrete field called name``
-#. ``$this->User->hasField('name', true); // Will return true as there is a virtual field called name``
-
 **``Model::isVirtualField()``**
 This method can be used to check if a field/column is a virtual
 field or a concrete field. Will return true if the column is
@@ -257,10 +194,6 @@ virtual.
     $this->User->isVirtualField('name'); //true
     $this->User->isVirtualField('first_name'); //false
 
-
-#. ``$this->User->isVirtualField('name'); //true``
-#. ``$this->User->isVirtualField('first_name'); //false``
-
 **``Model::getVirtualField()``**
 This method can be used to access the SQL expression that comprises
 a virtual field. If no argument is supplied it will return all
@@ -269,9 +202,6 @@ virtual fields in a Model.
 ::
 
     $this->User->getVirtualField('name'); //returns 'CONCAT(User.first_name, ' ', User.last_name)'
-
-
-#. ``$this->User->getVirtualField('name'); //returns 'CONCAT(User.first_name, ' ', User.last_name)'``
 
 **``Model::find()`` and virtual fields**
 As stated earlier ``Model::find()`` will treat virtual fields much
@@ -292,18 +222,6 @@ behavior of calculated fields in 1.2
             //more fields.
         )
     );
-
-
-#. ``$results = $this->User->find('first');``
-#. ``// results contains the following``
-#. ``array(``
-#. ``'User' => array(``
-#. ``'first_name' => 'Mark',``
-#. ``'last_name' => 'Story',``
-#. ``'name' => 'Mark Story',``
-#. ``//more fields.``
-#. ``)``
-#. ``);``
 
 **Pagination and virtual fields**
 Since virtual fields behave much like regular fields when doing

@@ -12,9 +12,6 @@ single-language application:
 
     <h2>Posts</h2>
 
-
-#. ``<h2>Posts</h2>``
-
 To internationalize your code, all you need to do is to wrap
 strings in
 `the translate function <http://api.cakephp.org/file/cake/basics.php#function-__>`_
@@ -23,9 +20,6 @@ like so:
 ::
 
     <h2><?php __('Posts') ?></h2>
-
-
-#. ``<h2><?php __('Posts') ?></h2>``
 
 If you do nothing further, these two code examples are functionally
 identical - they will both send the same content to the browser.
@@ -59,9 +53,6 @@ location:
 
     /app/locale/<locale>/LC_MESSAGES/<domain>.po
 
-
-#. ``/app/locale/<locale>/LC_MESSAGES/<domain>.po``
-
 The default domain is 'default', therefore your locale folder would
 look something like this:
 
@@ -70,11 +61,6 @@ look something like this:
     /app/locale/eng/LC_MESSAGES/default.po (English)   
     /app/locale/fre/LC_MESSAGES/default.po (French)   
     /app/locale/por/LC_MESSAGES/default.po (Portuguese) 
-
-
-#. ``/app/locale/eng/LC_MESSAGES/default.po (English)``
-#. ``/app/locale/fre/LC_MESSAGES/default.po (French)``
-#. ``/app/locale/por/LC_MESSAGES/default.po (Portuguese)``
 
 To create or edit your po files it's recommended that you do *not*
 use your favorite editor. To create a po file for the first time it
@@ -110,26 +96,12 @@ should consider implementing a different solution. e.g.:
         }
     }
 
-
-#. ``// App Controller Code.``
-#. ``function beforeFilter() {``
-#. ``$locale = Configure::read('Config.language');``
-#. ``if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath)) {``
-#. ``// e.g. use /app/views/fre/pages/tos.ctp instead of /app/views/pages/tos.ctp``
-#. ``$this->viewPath = $locale . DS . $this->viewPath;``
-#. ``}``
-#. ``}``
-
 or
 
 ::
 
     // View code
     echo $this->element(Configure::read('Config.language') . '/tos')
-
-
-#. ``// View code``
-#. ``echo $this->element(Configure::read('Config.language') . '/tos')``
 
 4.8.1 Internationalizing Your Application
 -----------------------------------------
@@ -145,9 +117,6 @@ single-language application:
 
     <h2>Posts</h2>
 
-
-#. ``<h2>Posts</h2>``
-
 To internationalize your code, all you need to do is to wrap
 strings in
 `the translate function <http://api.cakephp.org/file/cake/basics.php#function-__>`_
@@ -156,9 +125,6 @@ like so:
 ::
 
     <h2><?php __('Posts') ?></h2>
-
-
-#. ``<h2><?php __('Posts') ?></h2>``
 
 If you do nothing further, these two code examples are functionally
 identical - they will both send the same content to the browser.
@@ -192,9 +158,6 @@ location:
 
     /app/locale/<locale>/LC_MESSAGES/<domain>.po
 
-
-#. ``/app/locale/<locale>/LC_MESSAGES/<domain>.po``
-
 The default domain is 'default', therefore your locale folder would
 look something like this:
 
@@ -203,11 +166,6 @@ look something like this:
     /app/locale/eng/LC_MESSAGES/default.po (English)   
     /app/locale/fre/LC_MESSAGES/default.po (French)   
     /app/locale/por/LC_MESSAGES/default.po (Portuguese) 
-
-
-#. ``/app/locale/eng/LC_MESSAGES/default.po (English)``
-#. ``/app/locale/fre/LC_MESSAGES/default.po (French)``
-#. ``/app/locale/por/LC_MESSAGES/default.po (Portuguese)``
 
 To create or edit your po files it's recommended that you do *not*
 use your favorite editor. To create a po file for the first time it
@@ -243,23 +201,9 @@ should consider implementing a different solution. e.g.:
         }
     }
 
-
-#. ``// App Controller Code.``
-#. ``function beforeFilter() {``
-#. ``$locale = Configure::read('Config.language');``
-#. ``if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath)) {``
-#. ``// e.g. use /app/views/fre/pages/tos.ctp instead of /app/views/pages/tos.ctp``
-#. ``$this->viewPath = $locale . DS . $this->viewPath;``
-#. ``}``
-#. ``}``
-
 or
 
 ::
 
     // View code
     echo $this->element(Configure::read('Config.language') . '/tos')
-
-
-#. ``// View code``
-#. ``echo $this->element(Configure::read('Config.language') . '/tos')``

@@ -57,9 +57,6 @@ again.
 
     $this->Email->reset()
 
-
-#. ``$this->Email->reset()``
-
 Debugging Emails
 ~~~~~~~~~~~~~~~~
 
@@ -70,9 +67,6 @@ option:
 
     $this->Email->delivery = 'debug';
 
-
-#. ``$this->Email->delivery = 'debug';``
-
 In order to view those debugging information you need to create an
 extra line in your view or layout file (e.g. underneath your normal
 flash message in /layouts/default.ctp):
@@ -80,10 +74,6 @@ flash message in /layouts/default.ctp):
 
     <?php echo $this->Session->flash(); ?>
     <?php echo $this->Session->flash('email'); ?>
-
-
-#. ``<?php echo $this->Session->flash(); ?>``
-#. ``<?php echo $this->Session->flash('email'); ?>``
 
 5.4.1 Class Attributes and Variables
 ------------------------------------
@@ -144,9 +134,6 @@ again.
 
     $this->Email->reset()
 
-
-#. ``$this->Email->reset()``
-
 Debugging Emails
 ~~~~~~~~~~~~~~~~
 
@@ -157,9 +144,6 @@ option:
 
     $this->Email->delivery = 'debug';
 
-
-#. ``$this->Email->delivery = 'debug';``
-
 In order to view those debugging information you need to create an
 extra line in your view or layout file (e.g. underneath your normal
 flash message in /layouts/default.ctp):
@@ -167,7 +151,3 @@ flash message in /layouts/default.ctp):
 
     <?php echo $this->Session->flash(); ?>
     <?php echo $this->Session->flash('email'); ?>
-
-
-#. ``<?php echo $this->Session->flash(); ?>``
-#. ``<?php echo $this->Session->flash('email'); ?>``

@@ -19,13 +19,6 @@ Here is a simple example of a model definition in CakePHP:
     
     ?>
 
-
-#. ``<?php``
-#. ``class Ingredient extends AppModel {``
-#. ``var $name = 'Ingredient';``
-#. ``}``
-#. ``?>``
-
 With just this simple declaration, the Ingredient model is bestowed
 with all the functionality you need to create queries along with
 saving and deleting data. These magic methods come from CakePHP's
@@ -85,17 +78,6 @@ model and attach it to the controller at ``$this->Ingredient``.
     
     ?>
 
-
-#. ``<?php``
-#. ``class IngredientsController extends AppController {``
-#. ``function index() {``
-#. ``//grab all ingredients and pass it to the view:``
-#. ``$ingredients = $this->Ingredient->find('all');``
-#. ``$this->set('ingredients', $ingredients);``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 Associated models are available through the main model. In the
 following example, Recipe has an association with the Ingredient
 model.
@@ -110,16 +92,6 @@ model.
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class RecipesController extends AppController {``
-#. ``function index() {``
-#. ``$ingredients = $this->Recipe->Ingredient->find('all');``
-#. ``$this->set('ingredients', $ingredients);``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 If models have absolutely NO association between them, you can use
 Controller::loadModel() to get the model.
@@ -138,20 +110,6 @@ Controller::loadModel() to get the model.
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class RecipesController extends AppController {``
-#. ``function index() {``
-#. ``$recipes = $this->Recipe->find('all');``
-#. ````
-#. ``$this->loadModel('Car');``
-#. ``$cars = $this->Car->find('all');``
-#. ````
-#. ``$this->set(compact('recipes', 'cars'));``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 Some class names are not usable for model names. For instance
 "File" cannot be used as "File" is a class already existing in the
@@ -178,13 +136,6 @@ Here is a simple example of a model definition in CakePHP:
     
     ?>
 
-
-#. ``<?php``
-#. ``class Ingredient extends AppModel {``
-#. ``var $name = 'Ingredient';``
-#. ``}``
-#. ``?>``
-
 With just this simple declaration, the Ingredient model is bestowed
 with all the functionality you need to create queries along with
 saving and deleting data. These magic methods come from CakePHP's
@@ -244,17 +195,6 @@ model and attach it to the controller at ``$this->Ingredient``.
     
     ?>
 
-
-#. ``<?php``
-#. ``class IngredientsController extends AppController {``
-#. ``function index() {``
-#. ``//grab all ingredients and pass it to the view:``
-#. ``$ingredients = $this->Ingredient->find('all');``
-#. ``$this->set('ingredients', $ingredients);``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 Associated models are available through the main model. In the
 following example, Recipe has an association with the Ingredient
 model.
@@ -269,16 +209,6 @@ model.
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class RecipesController extends AppController {``
-#. ``function index() {``
-#. ``$ingredients = $this->Recipe->Ingredient->find('all');``
-#. ``$this->set('ingredients', $ingredients);``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 If models have absolutely NO association between them, you can use
 Controller::loadModel() to get the model.
@@ -297,20 +227,6 @@ Controller::loadModel() to get the model.
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``class RecipesController extends AppController {``
-#. ``function index() {``
-#. ``$recipes = $this->Recipe->find('all');``
-#. ````
-#. ``$this->loadModel('Car');``
-#. ``$cars = $this->Car->find('all');``
-#. ````
-#. ``$this->set(compact('recipes', 'cars'));``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 Some class names are not usable for model names. For instance
 "File" cannot be used as "File" is a class already existing in the

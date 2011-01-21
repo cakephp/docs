@@ -30,9 +30,6 @@ Pass the skeleton path parameter to the project task
 
     cake bake project -skel vendors/shells/templates/skel
 
-
-#. ``cake bake project -skel vendors/shells/templates/skel``
-
 Notes
 
 -  You must run the specific project task ``cake bake project`` so
@@ -75,9 +72,6 @@ Pass the skeleton path parameter to the project task
 ::
 
     cake bake project -skel vendors/shells/templates/skel
-
-
-#. ``cake bake project -skel vendors/shells/templates/skel``
 
 Notes
 

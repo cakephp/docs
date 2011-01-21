@@ -27,25 +27,6 @@ app/models/article.php, which looks like this:
        } 
      ?> 
 
-
-#. ``<?php``
-#. ``class Article extends AppModel {``
-#. ``var $name = 'Article';``
-#. ````
-#. ``function published($fields = null) {``
-#. ``$params = array(``
-#. ``'conditions' => array(``
-#. ``$this->name . '.published' => 1``
-#. ``),``
-#. ``'fields' => $fields``
-#. ``);``
-#. ````
-#. ``return $this->find('all',$params);``
-#. ``}``
-#. ````
-#. ``}``
-#. ``?>``
-
 We now want to set up a test that will use this model definition,
 but through fixtures, to test some functionality in the model.
 CakePHP test suite loads a very minimum set of files (to keep tests
@@ -76,15 +57,6 @@ with the following contents:
               var $fixtures = array( 'app.article' ); 
        } 
      ?> 
-
-
-#. ``<?php``
-#. ``App::import('Model','Article');``
-#. ````
-#. ``class ArticleTestCase extends CakeTestCase {``
-#. ``var $fixtures = array( 'app.article' );``
-#. ``}``
-#. ``?>``
 
 We have created the ArticleTestCase. In variable **$fixtures** we
 define the set of fixtures that we'll use.
@@ -124,28 +96,6 @@ this:
             }
         }
         ?>    
-
-
-#. ``<?php``
-#. ``App::import('Model', 'Article');``
-#. ````
-#. ``class ArticleTestCase extends CakeTestCase {``
-#. ``var $fixtures = array( 'app.article' );``
-#. ````
-#. ``function testPublished() {``
-#. ``$this->Article =& ClassRegistry::init('Article');``
-#. ````
-#. ``$result = $this->Article->published(array('id', 'title'));``
-#. ``$expected = array(``
-#. ``array('Article' => array( 'id' => 1, 'title' => 'First Article' )),``
-#. ``array('Article' => array( 'id' => 2, 'title' => 'Second Article' )),``
-#. ``array('Article' => array( 'id' => 3, 'title' => 'Third Article' ))``
-#. ``);``
-#. ````
-#. ``$this->assertEqual($result, $expected);``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 You can see we have added a method called **testPublished()**. We
 start by creating an instance of our fixture based **Article**
@@ -185,25 +135,6 @@ app/models/article.php, which looks like this:
        } 
      ?> 
 
-
-#. ``<?php``
-#. ``class Article extends AppModel {``
-#. ``var $name = 'Article';``
-#. ````
-#. ``function published($fields = null) {``
-#. ``$params = array(``
-#. ``'conditions' => array(``
-#. ``$this->name . '.published' => 1``
-#. ``),``
-#. ``'fields' => $fields``
-#. ``);``
-#. ````
-#. ``return $this->find('all',$params);``
-#. ``}``
-#. ````
-#. ``}``
-#. ``?>``
-
 We now want to set up a test that will use this model definition,
 but through fixtures, to test some functionality in the model.
 CakePHP test suite loads a very minimum set of files (to keep tests
@@ -234,15 +165,6 @@ with the following contents:
               var $fixtures = array( 'app.article' ); 
        } 
      ?> 
-
-
-#. ``<?php``
-#. ``App::import('Model','Article');``
-#. ````
-#. ``class ArticleTestCase extends CakeTestCase {``
-#. ``var $fixtures = array( 'app.article' );``
-#. ``}``
-#. ``?>``
 
 We have created the ArticleTestCase. In variable **$fixtures** we
 define the set of fixtures that we'll use.
@@ -282,28 +204,6 @@ this:
             }
         }
         ?>    
-
-
-#. ``<?php``
-#. ``App::import('Model', 'Article');``
-#. ````
-#. ``class ArticleTestCase extends CakeTestCase {``
-#. ``var $fixtures = array( 'app.article' );``
-#. ````
-#. ``function testPublished() {``
-#. ``$this->Article =& ClassRegistry::init('Article');``
-#. ````
-#. ``$result = $this->Article->published(array('id', 'title'));``
-#. ``$expected = array(``
-#. ``array('Article' => array( 'id' => 1, 'title' => 'First Article' )),``
-#. ``array('Article' => array( 'id' => 2, 'title' => 'Second Article' )),``
-#. ``array('Article' => array( 'id' => 3, 'title' => 'Third Article' ))``
-#. ``);``
-#. ````
-#. ``$this->assertEqual($result, $expected);``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 You can see we have added a method called **testPublished()**. We
 start by creating an instance of our fixture based **Article**

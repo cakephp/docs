@@ -15,15 +15,6 @@ a lot.
     App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));
     App::import('Vendor', 'WellNamed', array('file' => 'services'.DS.'well.named.php'));
 
-
-#. ``// examples``
-#. ``App::Import('Core','File');``
-#. ``App::Import('Model','Post');``
-#. ``App::import('Vendor', 'geshi');``
-#. ``App::import('Vendor', 'flickr/flickr');``
-#. ``App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));``
-#. ``App::import('Vendor', 'WellNamed', array('file' => 'services'.DS.'well.named.php'));``
-
 You can read more about it in
 `the book <http://book.cakephp.org/view/936/Importing-Controllers-Models-Components-Behaviors->`_
 or
@@ -45,15 +36,6 @@ a lot.
     App::import('Vendor', 'flickr/flickr');
     App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));
     App::import('Vendor', 'WellNamed', array('file' => 'services'.DS.'well.named.php'));
-
-
-#. ``// examples``
-#. ``App::Import('Core','File');``
-#. ``App::Import('Model','Post');``
-#. ``App::import('Vendor', 'geshi');``
-#. ``App::import('Vendor', 'flickr/flickr');``
-#. ``App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));``
-#. ``App::import('Vendor', 'WellNamed', array('file' => 'services'.DS.'well.named.php'));``
 
 You can read more about it in
 `the book <http://book.cakephp.org/view/936/Importing-Controllers-Models-Components-Behaviors->`_

@@ -18,15 +18,6 @@ data array.
         ));
         $node = $this->User->node($user);
 
-
-#. ``$this->User->id = 1;``
-#. ``$node = $this->User->node();``
-#. ````
-#. ``$user = array('User' => array(``
-#. ``'id' => 1``
-#. ``));``
-#. ``$node = $this->User->node($user);``
-
 Will both return the same Acl Node information.
 
 6.1.2 node()
@@ -48,14 +39,5 @@ data array.
             'id' => 1
         ));
         $node = $this->User->node($user);
-
-
-#. ``$this->User->id = 1;``
-#. ``$node = $this->User->node();``
-#. ````
-#. ``$user = array('User' => array(``
-#. ``'id' => 1``
-#. ``));``
-#. ``$node = $this->User->node($user);``
 
 Will both return the same Acl Node information.

@@ -18,9 +18,6 @@ as a collection of string names.
 
     $this->Security->requirePost(array('edit', 'update'));
 
-
-#. ``$this->Security->requirePost(array('edit', 'update'));``
-
 **Component settings**
 
 Component settings for all core components can now be set from the
@@ -38,17 +35,6 @@ settings for components when you declare the component.
             'loginAction' => array('controller' => 'users', 'action' => 'login')
         )
     );
-
-
-#. ``var $components = array(``
-#. ``'Cookie' => array(``
-#. ``'name' => 'MyCookie'``
-#. ``),``
-#. ``'Auth' => array(``
-#. ``'userModel' => 'MyUser',``
-#. ``'loginAction' => array('controller' => 'users', 'action' => 'login')``
-#. ``)``
-#. ``);``
 
 This should reduce clutter in your Controller's ``beforeFilter()``
 methods.
@@ -102,11 +88,6 @@ available to all helpers. Assuming ``Asset.timestamp == force``
     
     //$stamped contains 'css/cake.generic.css?5632934892'
 
-
-#. ``$path = 'css/cake.generic.css'``
-#. ``$stamped = $this->Html->assetTimestamp($path);``
-#. ``//$stamped contains 'css/cake.generic.css?5632934892'``
-
 The appended timestamp contains the last modification time of the
 file. Since this method is defined in ``Helper`` it is available to
 all subclasses.
@@ -124,10 +105,6 @@ to set currency parameter sets, so you don't have to retype them.
 
     $this->Number->addFormat('NOK', array('before' => 'Kr. '));
     $formatted = $this->Number->currency(1000, 'NOK');
-
-
-#. ``$this->Number->addFormat('NOK', array('before' => 'Kr. '));``
-#. ``$formatted = $this->Number->currency(1000, 'NOK');``
 
 **FormHelper**
 
@@ -162,12 +139,6 @@ dot syntax.
         'engine' => 'CachePack.MyCustomCache',
         ...
     ));
-
-
-#. ``Cache::config('custom', array(``
-#. ``'engine' => 'CachePack.MyCustomCache',``
-#. ``...``
-#. ``));``
 
 App and Plugin cache engines should be configured in
 ``app/bootstrap.php``. If you try to configure them in core.php
@@ -212,11 +183,6 @@ could do:
     var $lastFm = array(
         'datasource' => 'WebservicePack.LastFm'
         ...
-
-
-#. ``var $lastFm = array(``
-#. ``'datasource' => 'WebservicePack.LastFm'``
-#. ``...``
 
 **Model**
 
@@ -291,22 +257,6 @@ schema file. Much like ``indexes``:
         )
     );
 
-
-#. ``var $comments => array(``
-#. ``'id' => array('type' => 'integer', 'null' => false, 'default' => 0, 'key' => 'primary'),``
-#. ``'post_id' => array('type' => 'integer', 'null' => false, 'default' => 0),``
-#. ``'comment' => array('type' => 'text'),``
-#. ``'indexes' => array(``
-#. ``'PRIMARY' => array('column' => 'id', 'unique' => true),``
-#. ``'post_id' => array('column' => 'post_id'),``
-#. ``),``
-#. ``'tableParameters' => array(``
-#. ``'engine' => 'InnoDB',``
-#. ``'charset' => 'latin1',``
-#. ``'collate' => 'latin1_general_ci'``
-#. ``)``
-#. ``);``
-
 is an example of a table using ``tableParameters`` to set some
 database specific settings. If you use a schema file that contains
 options and features your database does not implement, those
@@ -374,10 +324,6 @@ non-prefixed url:
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => true));
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => true));
 
-
-#. ``$this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => true));``
-#. ``$this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => true));``
-
 Likewise, if you are in a prefixed url and want to go to a
 non-prefixed url, do the following:
 
@@ -385,10 +331,6 @@ non-prefixed url, do the following:
 
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => false));
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => false));
-
-
-#. ``$this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => false));``
-#. ``$this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => false));``
 
 **Route classes**
 
@@ -431,9 +373,6 @@ Set has a new method ``Set::apply()``, which allows you to apply
 
     Set::apply('/Movie/rating', $data, 'array_sum');
 
-
-#. ``Set::apply('/Movie/rating', $data, 'array_sum');``
-
 Would return the sum of all Movie ratings in ``$data``.
 
 **L10N**
@@ -471,17 +410,11 @@ updated to import from libs directories.
 
     App::import('Lib', 'ImageManipulation'); //imports app/libs/image_manipulation.php
 
-
-#. ``App::import('Lib', 'ImageManipulation'); //imports app/libs/image_manipulation.php``
-
 You can also import libs files from plugins
 
 ::
 
     App::import('Lib', 'Geocoding.Geocode'); //imports app/plugins/geocoding/libs/geocode.php
-
-
-#. ``App::import('Lib', 'Geocoding.Geocode'); //imports app/plugins/geocoding/libs/geocode.php``
 
 The remainder of lib importing syntax is identical to vendor files.
 So if you know how to import vendor files with unique names, you
@@ -517,11 +450,6 @@ the time preferences for French language this way:
     $monthNames = __c('mon',LC_TIME,true); // returns an array with the month names in French
     $dateFormat = __c('d_fmt',LC_TIME,true); // return the preferred dates format for France
 
-
-#. ``Configure::write('Config.language','fr-fr'); // set the current language``
-#. ``$monthNames = __c('mon',LC_TIME,true); // returns an array with the month names in French``
-#. ``$dateFormat = __c('d_fmt',LC_TIME,true); // return the preferred dates format for France``
-
 You can read a complete guide of possible values in LC\_TIME
 definition file in
 `this page <http://sunsson.iptime.org/susv3/basedefs/xbd_chap07.html>`_
@@ -552,12 +480,6 @@ updated to allow the scaffolding of any one prefix.
         var $scaffold = 'member';
     }
 
-
-#. ``Configure::write('Routing.prefixes', array('admin', 'member'));``
-#. ``class PostsController extends AppController {``
-#. ``var $scaffold = 'member';``
-#. ``}``
-
 Would use scaffolding for member prefixed urls.
 
 **Validation**
@@ -583,16 +505,6 @@ you would create a class like
         }
     }
 
-
-#. ``class NlValidation {``
-#. ``function phone($check) {``
-#. ``...``
-#. ``}``
-#. ``function postal($check) {``
-#. ``...``
-#. ``}``
-#. ``}``
-
 This file could be placed anywhere in your application, but must be
 imported before attempting to use it. In your model validation you
 could use your NlValidation class by doing the following.
@@ -603,12 +515,6 @@ could use your NlValidation class by doing the following.
         'phone_no' => array('rule' => array('phone', null, 'nl')),
         'postal_code' => array('rule' => array('postal', null, 'nl'))
     );
-
-
-#. ``var $validate = array(``
-#. ``'phone_no' => array('rule' => array('phone', null, 'nl')),``
-#. ``'postal_code' => array('rule' => array('postal', null, 'nl'))``
-#. ``);``
 
 When your model data is validated, Validation will see that it
 cannot handle the 'nl' locale and will attempt to delegate out to
@@ -630,11 +536,6 @@ native validation mechanisms if available.
     Validation::ip($someAddress);         // Validates both IPv4 and IPv6
     Validation::ip($someAddress, 'IPv4'); // Validates IPv4 Addresses only
     Validation::ip($someAddress, 'IPv6'); // Validates IPv6 Addresses only
-
-
-#. ``Validation::ip($someAddress);         // Validates both IPv4 and IPv6``
-#. ``Validation::ip($someAddress, 'IPv4'); // Validates IPv4 Addresses only``
-#. ``Validation::ip($someAddress, 'IPv6'); // Validates IPv6 Addresses only``
 
 **Validation::uuid()**
 
@@ -662,9 +563,6 @@ as a collection of string names.
 
     $this->Security->requirePost(array('edit', 'update'));
 
-
-#. ``$this->Security->requirePost(array('edit', 'update'));``
-
 **Component settings**
 
 Component settings for all core components can now be set from the
@@ -682,17 +580,6 @@ settings for components when you declare the component.
             'loginAction' => array('controller' => 'users', 'action' => 'login')
         )
     );
-
-
-#. ``var $components = array(``
-#. ``'Cookie' => array(``
-#. ``'name' => 'MyCookie'``
-#. ``),``
-#. ``'Auth' => array(``
-#. ``'userModel' => 'MyUser',``
-#. ``'loginAction' => array('controller' => 'users', 'action' => 'login')``
-#. ``)``
-#. ``);``
 
 This should reduce clutter in your Controller's ``beforeFilter()``
 methods.
@@ -746,11 +633,6 @@ available to all helpers. Assuming ``Asset.timestamp == force``
     
     //$stamped contains 'css/cake.generic.css?5632934892'
 
-
-#. ``$path = 'css/cake.generic.css'``
-#. ``$stamped = $this->Html->assetTimestamp($path);``
-#. ``//$stamped contains 'css/cake.generic.css?5632934892'``
-
 The appended timestamp contains the last modification time of the
 file. Since this method is defined in ``Helper`` it is available to
 all subclasses.
@@ -768,10 +650,6 @@ to set currency parameter sets, so you don't have to retype them.
 
     $this->Number->addFormat('NOK', array('before' => 'Kr. '));
     $formatted = $this->Number->currency(1000, 'NOK');
-
-
-#. ``$this->Number->addFormat('NOK', array('before' => 'Kr. '));``
-#. ``$formatted = $this->Number->currency(1000, 'NOK');``
 
 **FormHelper**
 
@@ -806,12 +684,6 @@ dot syntax.
         'engine' => 'CachePack.MyCustomCache',
         ...
     ));
-
-
-#. ``Cache::config('custom', array(``
-#. ``'engine' => 'CachePack.MyCustomCache',``
-#. ``...``
-#. ``));``
 
 App and Plugin cache engines should be configured in
 ``app/bootstrap.php``. If you try to configure them in core.php
@@ -856,11 +728,6 @@ could do:
     var $lastFm = array(
         'datasource' => 'WebservicePack.LastFm'
         ...
-
-
-#. ``var $lastFm = array(``
-#. ``'datasource' => 'WebservicePack.LastFm'``
-#. ``...``
 
 **Model**
 
@@ -935,22 +802,6 @@ schema file. Much like ``indexes``:
         )
     );
 
-
-#. ``var $comments => array(``
-#. ``'id' => array('type' => 'integer', 'null' => false, 'default' => 0, 'key' => 'primary'),``
-#. ``'post_id' => array('type' => 'integer', 'null' => false, 'default' => 0),``
-#. ``'comment' => array('type' => 'text'),``
-#. ``'indexes' => array(``
-#. ``'PRIMARY' => array('column' => 'id', 'unique' => true),``
-#. ``'post_id' => array('column' => 'post_id'),``
-#. ``),``
-#. ``'tableParameters' => array(``
-#. ``'engine' => 'InnoDB',``
-#. ``'charset' => 'latin1',``
-#. ``'collate' => 'latin1_general_ci'``
-#. ``)``
-#. ``);``
-
 is an example of a table using ``tableParameters`` to set some
 database specific settings. If you use a schema file that contains
 options and features your database does not implement, those
@@ -1018,10 +869,6 @@ non-prefixed url:
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => true));
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => true));
 
-
-#. ``$this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => true));``
-#. ``$this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => true));``
-
 Likewise, if you are in a prefixed url and want to go to a
 non-prefixed url, do the following:
 
@@ -1029,10 +876,6 @@ non-prefixed url, do the following:
 
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => false));
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => false));
-
-
-#. ``$this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => false));``
-#. ``$this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => false));``
 
 **Route classes**
 
@@ -1075,9 +918,6 @@ Set has a new method ``Set::apply()``, which allows you to apply
 
     Set::apply('/Movie/rating', $data, 'array_sum');
 
-
-#. ``Set::apply('/Movie/rating', $data, 'array_sum');``
-
 Would return the sum of all Movie ratings in ``$data``.
 
 **L10N**
@@ -1115,17 +955,11 @@ updated to import from libs directories.
 
     App::import('Lib', 'ImageManipulation'); //imports app/libs/image_manipulation.php
 
-
-#. ``App::import('Lib', 'ImageManipulation'); //imports app/libs/image_manipulation.php``
-
 You can also import libs files from plugins
 
 ::
 
     App::import('Lib', 'Geocoding.Geocode'); //imports app/plugins/geocoding/libs/geocode.php
-
-
-#. ``App::import('Lib', 'Geocoding.Geocode'); //imports app/plugins/geocoding/libs/geocode.php``
 
 The remainder of lib importing syntax is identical to vendor files.
 So if you know how to import vendor files with unique names, you
@@ -1161,11 +995,6 @@ the time preferences for French language this way:
     $monthNames = __c('mon',LC_TIME,true); // returns an array with the month names in French
     $dateFormat = __c('d_fmt',LC_TIME,true); // return the preferred dates format for France
 
-
-#. ``Configure::write('Config.language','fr-fr'); // set the current language``
-#. ``$monthNames = __c('mon',LC_TIME,true); // returns an array with the month names in French``
-#. ``$dateFormat = __c('d_fmt',LC_TIME,true); // return the preferred dates format for France``
-
 You can read a complete guide of possible values in LC\_TIME
 definition file in
 `this page <http://sunsson.iptime.org/susv3/basedefs/xbd_chap07.html>`_
@@ -1196,12 +1025,6 @@ updated to allow the scaffolding of any one prefix.
         var $scaffold = 'member';
     }
 
-
-#. ``Configure::write('Routing.prefixes', array('admin', 'member'));``
-#. ``class PostsController extends AppController {``
-#. ``var $scaffold = 'member';``
-#. ``}``
-
 Would use scaffolding for member prefixed urls.
 
 **Validation**
@@ -1227,16 +1050,6 @@ you would create a class like
         }
     }
 
-
-#. ``class NlValidation {``
-#. ``function phone($check) {``
-#. ``...``
-#. ``}``
-#. ``function postal($check) {``
-#. ``...``
-#. ``}``
-#. ``}``
-
 This file could be placed anywhere in your application, but must be
 imported before attempting to use it. In your model validation you
 could use your NlValidation class by doing the following.
@@ -1247,12 +1060,6 @@ could use your NlValidation class by doing the following.
         'phone_no' => array('rule' => array('phone', null, 'nl')),
         'postal_code' => array('rule' => array('postal', null, 'nl'))
     );
-
-
-#. ``var $validate = array(``
-#. ``'phone_no' => array('rule' => array('phone', null, 'nl')),``
-#. ``'postal_code' => array('rule' => array('postal', null, 'nl'))``
-#. ``);``
 
 When your model data is validated, Validation will see that it
 cannot handle the 'nl' locale and will attempt to delegate out to
@@ -1274,11 +1081,6 @@ native validation mechanisms if available.
     Validation::ip($someAddress);         // Validates both IPv4 and IPv6
     Validation::ip($someAddress, 'IPv4'); // Validates IPv4 Addresses only
     Validation::ip($someAddress, 'IPv6'); // Validates IPv6 Addresses only
-
-
-#. ``Validation::ip($someAddress);         // Validates both IPv4 and IPv6``
-#. ``Validation::ip($someAddress, 'IPv4'); // Validates IPv4 Addresses only``
-#. ``Validation::ip($someAddress, 'IPv6'); // Validates IPv6 Addresses only``
 
 **Validation::uuid()**
 

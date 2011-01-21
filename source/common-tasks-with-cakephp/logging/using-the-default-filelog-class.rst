@@ -22,13 +22,6 @@ which writes to the error log. The default log location is
     //Results in this being appended to app/tmp/logs/error.log
     2007-11-02 10:22:02 Error: Something didn't work!
 
-
-#. ``//Executing this inside a CakePHP class:``
-#. ``$this->log("Something didn't work!");``
-#. ````
-#. ``//Results in this being appended to app/tmp/logs/error.log``
-#. ``2007-11-02 10:22:02 Error: Something didnt work!``
-
 You can specify a custom log names, using the second parameter. The
 default built-in FileLog class will treat this log name as the file
 you wish to write logs to.
@@ -40,13 +33,6 @@ you wish to write logs to.
      
     //Results in this being appended to app/tmp/logs/activity.log (rather than error.log)
     2007-11-02 10:22:02 Activity: A special message for activity logging
-
-
-#. ``//called statically``
-#. ``CakeLog::write('activity', 'A special message for activity logging');``
-#. ````
-#. ``//Results in this being appended to app/tmp/logs/activity.log (rather than error.log)``
-#. ``2007-11-02 10:22:02 Activity: A special message for activity logging``
 
 The configured directory must be writable by the web server user in
 order for logging to work correctly.
@@ -61,12 +47,6 @@ custom paths to be used.
         'engine' => 'FileLog',
         'path' => '/path/to/custom/place/'
     ));
-
-
-#. ``CakeLog::config('custom_path', array(``
-#. ``'engine' => 'FileLog',``
-#. ``'path' => '/path/to/custom/place/'``
-#. ``));``
 
 4.6.2 Using the default FileLog class
 -------------------------------------
@@ -92,13 +72,6 @@ which writes to the error log. The default log location is
     //Results in this being appended to app/tmp/logs/error.log
     2007-11-02 10:22:02 Error: Something didn't work!
 
-
-#. ``//Executing this inside a CakePHP class:``
-#. ``$this->log("Something didn't work!");``
-#. ````
-#. ``//Results in this being appended to app/tmp/logs/error.log``
-#. ``2007-11-02 10:22:02 Error: Something didnt work!``
-
 You can specify a custom log names, using the second parameter. The
 default built-in FileLog class will treat this log name as the file
 you wish to write logs to.
@@ -110,13 +83,6 @@ you wish to write logs to.
      
     //Results in this being appended to app/tmp/logs/activity.log (rather than error.log)
     2007-11-02 10:22:02 Activity: A special message for activity logging
-
-
-#. ``//called statically``
-#. ``CakeLog::write('activity', 'A special message for activity logging');``
-#. ````
-#. ``//Results in this being appended to app/tmp/logs/activity.log (rather than error.log)``
-#. ``2007-11-02 10:22:02 Activity: A special message for activity logging``
 
 The configured directory must be writable by the web server user in
 order for logging to work correctly.
@@ -131,9 +97,3 @@ custom paths to be used.
         'engine' => 'FileLog',
         'path' => '/path/to/custom/place/'
     ));
-
-
-#. ``CakeLog::config('custom_path', array(``
-#. ``'engine' => 'FileLog',``
-#. ``'path' => '/path/to/custom/place/'``
-#. ``));``

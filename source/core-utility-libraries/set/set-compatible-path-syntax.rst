@@ -33,32 +33,6 @@ Usage example (using Set::sort()):
         )
     */
 
-
-#. ``$a = array(``
-#. ``0 => array('Person' => array('name' => 'Jeff')),``
-#. ``1 => array('Shirt' => array('color' => 'black'))``
-#. ``);``
-#. ``$result = Set::sort($a, '{n}.Person.name', 'asc');``
-#. ``/* $result now looks like:``
-#. ``Array``
-#. ``(``
-#. ``[0] => Array``
-#. ``(``
-#. ``[Shirt] => Array``
-#. ``(``
-#. ``[color] => black``
-#. ``)``
-#. ``)``
-#. ``[1] => Array``
-#. ``(``
-#. ``[Person] => Array``
-#. ``(``
-#. ``[name] => Jeff``
-#. ``)``
-#. ``)``
-#. ``)``
-#. ``*/``
-
 As you can see in the example above, some things are wrapped in
 {}'s, others not. In the table below, you can see which options are
 available.
@@ -110,32 +84,6 @@ Usage example (using Set::sort()):
                 )
         )
     */
-
-
-#. ``$a = array(``
-#. ``0 => array('Person' => array('name' => 'Jeff')),``
-#. ``1 => array('Shirt' => array('color' => 'black'))``
-#. ``);``
-#. ``$result = Set::sort($a, '{n}.Person.name', 'asc');``
-#. ``/* $result now looks like:``
-#. ``Array``
-#. ``(``
-#. ``[0] => Array``
-#. ``(``
-#. ``[Shirt] => Array``
-#. ``(``
-#. ``[color] => black``
-#. ``)``
-#. ``)``
-#. ``[1] => Array``
-#. ``(``
-#. ``[Person] => Array``
-#. ``(``
-#. ``[name] => Jeff``
-#. ``)``
-#. ``)``
-#. ``)``
-#. ``*/``
 
 As you can see in the example above, some things are wrapped in
 {}'s, others not. In the table below, you can see which options are

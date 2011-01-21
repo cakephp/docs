@@ -27,17 +27,6 @@ For example:
     Cache::write('cloud', $cloud);
     return $cloud;
 
-
-#. ``$cloud = Cache::read('cloud');``
-#. ``if ($cloud !== false) {``
-#. ``return $cloud;``
-#. ``}``
-#. ``// generate cloud data``
-#. ``// ...``
-#. ``// store data in cache``
-#. ``Cache::write('cloud', $cloud);``
-#. ``return $cloud;``
-
 8.7.1 Cache::read()
 -------------------
 
@@ -66,14 +55,3 @@ For example:
     // store data in cache
     Cache::write('cloud', $cloud);
     return $cloud;
-
-
-#. ``$cloud = Cache::read('cloud');``
-#. ``if ($cloud !== false) {``
-#. ``return $cloud;``
-#. ``}``
-#. ``// generate cloud data``
-#. ``// ...``
-#. ``// store data in cache``
-#. ``Cache::write('cloud', $cloud);``
-#. ``return $cloud;``

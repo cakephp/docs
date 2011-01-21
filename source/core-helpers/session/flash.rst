@@ -18,15 +18,6 @@ key
     // output the AuthComponent Session message, if set.
     echo $this->Session->flash('auth');
 
-
-#. ``// Controller code``
-#. ``$this->Session->setFlash('My Message');``
-#. ``// In view``
-#. ``echo $this->Session->flash();``
-#. ``// outputs "<div id='flashMessage' class='message'>My Message</div>"``
-#. ``// output the AuthComponent Session message, if set.``
-#. ``echo $this->Session->flash('auth');``
-
 Using Flash for Success and Failure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -51,13 +42,6 @@ In the controller you might typically have code:
         $this->Session->setFlash('The user could not be deleted.', 'flash_failure');
     }
 
-
-#. ``if ($user_was_deleted) {``
-#. ``$this->Session->setFlash('The user was deleted successfully.', 'flash_success');``
-#. ``} else {``
-#. ``$this->Session->setFlash('The user could not be deleted.', 'flash_failure');``
-#. ``}``
-
 The flash\_success and flash\_failure parameter represents an
 element file to place in the root app/views/elements folder, e.g.
 app/views/elements/flash\_success.ctp,
@@ -72,20 +56,12 @@ this:
         <?php echo $message ?>
     </div>
 
-
-#. ``<div class="flash flash_success">``
-#. ``<?php echo $message ?>``
-#. ``</div>``
-
 The final step is in your main view file where the result is to be
 displayed to add simply
 
 ::
 
     <?php echo $this->Session->flash(); ?>
-
-
-#. ``<?php echo $this->Session->flash(); ?>``
 
 And of course you can then add to your CSS a selector for
 div.flash, div.flash\_success and div.flash\_failure
@@ -110,15 +86,6 @@ key
     // output the AuthComponent Session message, if set.
     echo $this->Session->flash('auth');
 
-
-#. ``// Controller code``
-#. ``$this->Session->setFlash('My Message');``
-#. ``// In view``
-#. ``echo $this->Session->flash();``
-#. ``// outputs "<div id='flashMessage' class='message'>My Message</div>"``
-#. ``// output the AuthComponent Session message, if set.``
-#. ``echo $this->Session->flash('auth');``
-
 Using Flash for Success and Failure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -143,13 +110,6 @@ In the controller you might typically have code:
         $this->Session->setFlash('The user could not be deleted.', 'flash_failure');
     }
 
-
-#. ``if ($user_was_deleted) {``
-#. ``$this->Session->setFlash('The user was deleted successfully.', 'flash_success');``
-#. ``} else {``
-#. ``$this->Session->setFlash('The user could not be deleted.', 'flash_failure');``
-#. ``}``
-
 The flash\_success and flash\_failure parameter represents an
 element file to place in the root app/views/elements folder, e.g.
 app/views/elements/flash\_success.ctp,
@@ -164,20 +124,12 @@ this:
         <?php echo $message ?>
     </div>
 
-
-#. ``<div class="flash flash_success">``
-#. ``<?php echo $message ?>``
-#. ``</div>``
-
 The final step is in your main view file where the result is to be
 displayed to add simply
 
 ::
 
     <?php echo $this->Session->flash(); ?>
-
-
-#. ``<?php echo $this->Session->flash(); ?>``
 
 And of course you can then add to your CSS a selector for
 div.flash, div.flash\_success and div.flash\_failure

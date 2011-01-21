@@ -50,17 +50,6 @@ tree to see what it looks like. With a simple controller:
     }
     ?>
 
-
-#. ``<?php``
-#. ``class CategoriesController extends AppController {``
-#. ``var $name = 'Categories';``
-#. ``function index() {``
-#. ``$this->data = $this->Category->generatetreelist(null, null, null, '&nbsp;&nbsp;&nbsp;');``
-#. ``debug ($this->data); die;``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 and an even simpler model definition:
 
 ::
@@ -72,15 +61,6 @@ and an even simpler model definition:
         var $actsAs = array('Tree');
     }
     ?>
-
-
-#. ``<?php``
-#. ``// app/models/category.php``
-#. ``class Category extends AppModel {``
-#. ``var $name = 'Category';``
-#. ``var $actsAs = array('Tree');``
-#. ``}``
-#. ``?>``
 
 We can check what our category tree data looks like by visiting
 /categories You should see something like this:
@@ -131,12 +111,6 @@ would for any model. For example:
     $data['Category']['name'] =  'Skating';
     $this->Category->save($data);
 
-
-#. ``// pseudo controller code``
-#. ``$data['Category']['parent_id'] =  3;``
-#. ``$data['Category']['name'] =  'Skating';``
-#. ``$this->Category->save($data);``
-
 When using the tree behavior its not necessary to do any more than
 set the parent\_id, and the tree behavior will take care of the
 rest. If you don't set the parent\_id, the tree behavior will add
@@ -148,12 +122,6 @@ to the tree making your new addition a new top level entry:
     $data = array();
     $data['Category']['name'] =  'Other People\'s Categories';
     $this->Category->save($data);
-
-
-#. ``// pseudo controller code``
-#. ``$data = array();``
-#. ``$data['Category']['name'] =  'Other People\'s Categories';``
-#. ``$this->Category->save($data);``
 
 Running the above two code snippets would alter your tree as
 follows:
@@ -203,11 +171,6 @@ follows:
        $this->Category->id = 5; // id of Extreme knitting
        $this->Category->save(array('name' =>'Extreme fishing'));
 
-   
-   #. ``// pseudo controller code``
-   #. ``$this->Category->id = 5; // id of Extreme knitting``
-   #. ``$this->Category->save(array('name' =>'Extreme fishing'));``
-
    The above code did not affect the parent\_id field - even if the
    parent\_id is included in the data that is passed to save if the
    value doesn't change, neither does the data structure. Therefore
@@ -256,12 +219,6 @@ follows:
           $this->Category->id = 5; // id of Extreme fishing
           $newParentId = $this->Category->field('id', array('name' => 'Other People\'s Categories'));
           $this->Category->save(array('parent_id' => $newParentId)); 
-
-      
-      #. ``// pseudo controller code``
-      #. ``$this->Category->id = 5; // id of Extreme fishing``
-      #. ``$newParentId = $this->Category->field('id', array('name' => 'Other People\'s Categories'));``
-      #. ``$this->Category->save(array('parent_id' => $newParentId));``
 
       As would be expected the structure would be modified to:
 
@@ -314,11 +271,6 @@ follows:
           // pseudo controller code
           $this->Category->id = 10;
           $this->Category->delete();
-
-      
-      #. ``// pseudo controller code``
-      #. ``$this->Category->id = 10;``
-      #. ``$this->Category->delete();``
 
       The category tree would be modified as follows:
 
@@ -383,14 +335,6 @@ follows:
           // Only return direct children
           $directChildren = $this->Category->children(1, true); // a flat array with 2 items
 
-      
-      #. ``$allChildren = $this->Category->children(1); // a flat array with 11 items``
-      #. ``// -- or --``
-      #. ``$this->Category->id = 1;``
-      #. ``$allChildren = $this->Category->children(); // a flat array with 11 items``
-      #. ``// Only return direct children``
-      #. ``$directChildren = $this->Category->children(1, true); // a flat array with 2 items``
-
       If you want a recursive array use ``find('threaded')``
 
       **Parameters for this function include:**
@@ -423,14 +367,6 @@ follows:
           
           // Only counts the direct descendants of this category
           $numChildren = $this->Category->childCount(1, true); // will output 2
-
-      
-      #. ``$totalChildren = $this->Category->childCount(1); // will output 11``
-      #. ``// -- or --``
-      #. ``$this->Category->id = 1;``
-      #. ``$directChildren = $this->Category->childCount(); // will output 11``
-      #. ``// Only counts the direct descendants of this category``
-      #. ``$numChildren = $this->Category->childCount(1, true); // will output 2``
 
       generatetreelist
       ^^^^^^^^^^^^^^^^
@@ -466,9 +402,6 @@ follows:
 
           $treelist = $this->Category->generatetreelist();
 
-      
-      #. ``$treelist = $this->Category->generatetreelist();``
-
       Output:
 
       ::
@@ -502,10 +435,6 @@ follows:
           $parent = $this->Category->getparentnode(2); //<- id for fun
           // $parent contains All categories
 
-      
-      #. ``$parent = $this->Category->getparentnode(2); //<- id for fun``
-      #. ``// $parent contains All categories``
-
       getpath
       ^^^^^^^
 
@@ -535,9 +464,6 @@ follows:
       ::
 
           $parents = $this->Category->getpath(15);
-
-      
-      #. ``$parents = $this->Category->getpath(15);``
 
       ::
 
@@ -601,17 +527,6 @@ follows:
           }
           ?>
 
-      
-      #. ``<?php``
-      #. ``class CategoriesController extends AppController {``
-      #. ``var $name = 'Categories';``
-      #. ``function index() {``
-      #. ``$this->data = $this->Category->generatetreelist(null, null, null, '&nbsp;&nbsp;&nbsp;');``
-      #. ``debug ($this->data); die;``
-      #. ``}``
-      #. ``}``
-      #. ``?>``
-
       and an even simpler model definition:
 
       ::
@@ -623,15 +538,6 @@ follows:
               var $actsAs = array('Tree');
           }
           ?>
-
-      
-      #. ``<?php``
-      #. ``// app/models/category.php``
-      #. ``class Category extends AppModel {``
-      #. ``var $name = 'Category';``
-      #. ``var $actsAs = array('Tree');``
-      #. ``}``
-      #. ``?>``
 
       We can check what our category tree data looks like by visiting
       /categories You should see something like this:
@@ -682,12 +588,6 @@ follows:
           $data['Category']['name'] =  'Skating';
           $this->Category->save($data);
 
-      
-      #. ``// pseudo controller code``
-      #. ``$data['Category']['parent_id'] =  3;``
-      #. ``$data['Category']['name'] =  'Skating';``
-      #. ``$this->Category->save($data);``
-
       When using the tree behavior its not necessary to do any more than
       set the parent\_id, and the tree behavior will take care of the
       rest. If you don't set the parent\_id, the tree behavior will add
@@ -699,12 +599,6 @@ follows:
           $data = array();
           $data['Category']['name'] =  'Other People\'s Categories';
           $this->Category->save($data);
-
-      
-      #. ``// pseudo controller code``
-      #. ``$data = array();``
-      #. ``$data['Category']['name'] =  'Other People\'s Categories';``
-      #. ``$this->Category->save($data);``
 
       Running the above two code snippets would alter your tree as
       follows:
@@ -754,11 +648,6 @@ follows:
              $this->Category->id = 5; // id of Extreme knitting
              $this->Category->save(array('name' =>'Extreme fishing'));
 
-         
-         #. ``// pseudo controller code``
-         #. ``$this->Category->id = 5; // id of Extreme knitting``
-         #. ``$this->Category->save(array('name' =>'Extreme fishing'));``
-
          The above code did not affect the parent\_id field - even if the
          parent\_id is included in the data that is passed to save if the
          value doesn't change, neither does the data structure. Therefore
@@ -807,12 +696,6 @@ follows:
                 $this->Category->id = 5; // id of Extreme fishing
                 $newParentId = $this->Category->field('id', array('name' => 'Other People\'s Categories'));
                 $this->Category->save(array('parent_id' => $newParentId)); 
-
-            
-            #. ``// pseudo controller code``
-            #. ``$this->Category->id = 5; // id of Extreme fishing``
-            #. ``$newParentId = $this->Category->field('id', array('name' => 'Other People\'s Categories'));``
-            #. ``$this->Category->save(array('parent_id' => $newParentId));``
 
             As would be expected the structure would be modified to:
 
@@ -865,11 +748,6 @@ follows:
                 // pseudo controller code
                 $this->Category->id = 10;
                 $this->Category->delete();
-
-            
-            #. ``// pseudo controller code``
-            #. ``$this->Category->id = 10;``
-            #. ``$this->Category->delete();``
 
             The category tree would be modified as follows:
 
@@ -934,14 +812,6 @@ follows:
                 // Only return direct children
                 $directChildren = $this->Category->children(1, true); // a flat array with 2 items
 
-            
-            #. ``$allChildren = $this->Category->children(1); // a flat array with 11 items``
-            #. ``// -- or --``
-            #. ``$this->Category->id = 1;``
-            #. ``$allChildren = $this->Category->children(); // a flat array with 11 items``
-            #. ``// Only return direct children``
-            #. ``$directChildren = $this->Category->children(1, true); // a flat array with 2 items``
-
             If you want a recursive array use ``find('threaded')``
 
             **Parameters for this function include:**
@@ -974,14 +844,6 @@ follows:
                 
                 // Only counts the direct descendants of this category
                 $numChildren = $this->Category->childCount(1, true); // will output 2
-
-            
-            #. ``$totalChildren = $this->Category->childCount(1); // will output 11``
-            #. ``// -- or --``
-            #. ``$this->Category->id = 1;``
-            #. ``$directChildren = $this->Category->childCount(); // will output 11``
-            #. ``// Only counts the direct descendants of this category``
-            #. ``$numChildren = $this->Category->childCount(1, true); // will output 2``
 
             generatetreelist
             ^^^^^^^^^^^^^^^^
@@ -1017,9 +879,6 @@ follows:
 
                 $treelist = $this->Category->generatetreelist();
 
-            
-            #. ``$treelist = $this->Category->generatetreelist();``
-
             Output:
 
             ::
@@ -1053,10 +912,6 @@ follows:
                 $parent = $this->Category->getparentnode(2); //<- id for fun
                 // $parent contains All categories
 
-            
-            #. ``$parent = $this->Category->getparentnode(2); //<- id for fun``
-            #. ``// $parent contains All categories``
-
             getpath
             ^^^^^^^
 
@@ -1086,9 +941,6 @@ follows:
             ::
 
                 $parents = $this->Category->getpath(15);
-
-            
-            #. ``$parents = $this->Category->getpath(15);``
 
             ::
 

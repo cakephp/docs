@@ -59,23 +59,6 @@ controller would be found in
     
         ?>
 
-
-#. ``<?php``
-#. ````
-#. ``# /app/controllers/recipes_controller.php``
-#. ``class RecipesController extends AppController {``
-#. ``function view($id)     {``
-#. ``//action logic goes here..``
-#. ``}``
-#. ``function share($customer_id, $recipe_id) {``
-#. ``//action logic goes here..``
-#. ``}``
-#. ``function search($query) {``
-#. ``//action logic goes here..``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 In order for you to use a controller effectively in your own
 application, we’ll cover some of the core attributes and methods
 provided by CakePHP’s controllers.
@@ -140,23 +123,6 @@ controller would be found in
         }
     
         ?>
-
-
-#. ``<?php``
-#. ````
-#. ``# /app/controllers/recipes_controller.php``
-#. ``class RecipesController extends AppController {``
-#. ``function view($id)     {``
-#. ``//action logic goes here..``
-#. ``}``
-#. ``function share($customer_id, $recipe_id) {``
-#. ``//action logic goes here..``
-#. ``}``
-#. ``function search($query) {``
-#. ``//action logic goes here..``
-#. ``}``
-#. ``}``
-#. ``?>``
 
 In order for you to use a controller effectively in your own
 application, we’ll cover some of the core attributes and methods

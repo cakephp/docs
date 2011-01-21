@@ -20,9 +20,6 @@ following code syntax in a custom method:
 
     $this->Acl->allow($aroAlias, $acoAlias);
 
-
-#. ``$this->Acl->allow($aroAlias, $acoAlias);``
-
 We are going to add in a few allow/deny statements now. Add the
 following to a temporary function in your ``UsersController`` and
 visit the address in your browser to run them (e.g.
@@ -57,31 +54,6 @@ function.
         exit;
     }
 
-
-#. ``function initDB() {``
-#. ``$group =& $this->User->Group;``
-#. ``//Allow admins to everything``
-#. ``$group->id = 1;``
-#. ``$this->Acl->allow($group, 'controllers');``
-#. ````
-#. ``//allow managers to posts and widgets``
-#. ``$group->id = 2;``
-#. ``$this->Acl->deny($group, 'controllers');``
-#. ``$this->Acl->allow($group, 'controllers/Posts');``
-#. ``$this->Acl->allow($group, 'controllers/Widgets');``
-#. ````
-#. ``//allow users to only add and edit on posts and widgets``
-#. ``$group->id = 3;``
-#. ``$this->Acl->deny($group, 'controllers');``
-#. ``$this->Acl->allow($group, 'controllers/Posts/add');``
-#. ``$this->Acl->allow($group, 'controllers/Posts/edit');``
-#. ``$this->Acl->allow($group, 'controllers/Widgets/add');``
-#. ``$this->Acl->allow($group, 'controllers/Widgets/edit');``
-#. ``//we add an exit to avoid an ugly "missing views" error message``
-#. ``echo "all done";``
-#. ``exit;``
-#. ``}``
-
 We now have set up some basic access rules. We've allowed
 administrators to everything. Managers can access everything in
 posts and widgets. While users can only access add and edit in
@@ -112,12 +84,6 @@ your posts and widgets controllers:
         $this->Auth->allowedActions = array('index', 'view');
     }
 
-
-#. ``function beforeFilter() {``
-#. ``parent::beforeFilter();``
-#. ``$this->Auth->allowedActions = array('index', 'view');``
-#. ``}``
-
 This removes the 'off switches' we put in earlier on the users and
 groups controllers, and gives public access on the index and view
 actions in posts and widgets controllers. In
@@ -126,9 +92,6 @@ actions in posts and widgets controllers. In
 ::
 
      $this->Auth->allowedActions = array('display');
-
-
-#. ``$this->Auth->allowedActions = array('display');``
 
 This makes the 'display' action public. This will keep our
 PagesController::display() public. This is important as often the
@@ -157,9 +120,6 @@ following code syntax in a custom method:
 
     $this->Acl->allow($aroAlias, $acoAlias);
 
-
-#. ``$this->Acl->allow($aroAlias, $acoAlias);``
-
 We are going to add in a few allow/deny statements now. Add the
 following to a temporary function in your ``UsersController`` and
 visit the address in your browser to run them (e.g.
@@ -194,31 +154,6 @@ function.
         exit;
     }
 
-
-#. ``function initDB() {``
-#. ``$group =& $this->User->Group;``
-#. ``//Allow admins to everything``
-#. ``$group->id = 1;``
-#. ``$this->Acl->allow($group, 'controllers');``
-#. ````
-#. ``//allow managers to posts and widgets``
-#. ``$group->id = 2;``
-#. ``$this->Acl->deny($group, 'controllers');``
-#. ``$this->Acl->allow($group, 'controllers/Posts');``
-#. ``$this->Acl->allow($group, 'controllers/Widgets');``
-#. ````
-#. ``//allow users to only add and edit on posts and widgets``
-#. ``$group->id = 3;``
-#. ``$this->Acl->deny($group, 'controllers');``
-#. ``$this->Acl->allow($group, 'controllers/Posts/add');``
-#. ``$this->Acl->allow($group, 'controllers/Posts/edit');``
-#. ``$this->Acl->allow($group, 'controllers/Widgets/add');``
-#. ``$this->Acl->allow($group, 'controllers/Widgets/edit');``
-#. ``//we add an exit to avoid an ugly "missing views" error message``
-#. ``echo "all done";``
-#. ``exit;``
-#. ``}``
-
 We now have set up some basic access rules. We've allowed
 administrators to everything. Managers can access everything in
 posts and widgets. While users can only access add and edit in
@@ -249,12 +184,6 @@ your posts and widgets controllers:
         $this->Auth->allowedActions = array('index', 'view');
     }
 
-
-#. ``function beforeFilter() {``
-#. ``parent::beforeFilter();``
-#. ``$this->Auth->allowedActions = array('index', 'view');``
-#. ``}``
-
 This removes the 'off switches' we put in earlier on the users and
 groups controllers, and gives public access on the index and view
 actions in posts and widgets controllers. In
@@ -263,9 +192,6 @@ actions in posts and widgets controllers. In
 ::
 
      $this->Auth->allowedActions = array('display');
-
-
-#. ``$this->Auth->allowedActions = array('display');``
 
 This makes the 'display' action public. This will keep our
 PagesController::display() public. This is important as often the

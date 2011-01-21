@@ -17,14 +17,6 @@ should contain any and all public accessible files for your plugin
                                     flash/
                                     pdf/
 
-
-#. ``app/plugins/debug_kit/webroot/``
-#. ``css/``
-#. ``js/``
-#. ``img/``
-#. ``flash/``
-#. ``pdf/``
-
 And so on. You are no longer restricted to the three directories in
 the past, and you may put any type of file in any directory, just
 like a regular webroot. The only restriction is that ``MediaView``
@@ -58,14 +50,6 @@ should contain any and all public accessible files for your plugin
                                     img/
                                     flash/
                                     pdf/
-
-
-#. ``app/plugins/debug_kit/webroot/``
-#. ``css/``
-#. ``js/``
-#. ``img/``
-#. ``flash/``
-#. ``pdf/``
 
 And so on. You are no longer restricted to the three directories in
 the past, and you may put any type of file in any directory, just

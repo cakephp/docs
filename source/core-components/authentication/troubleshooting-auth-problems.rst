@@ -29,18 +29,6 @@ compare the two. Here's some sample code:
     }
     ?>
 
-
-#. ``<?php``
-#. ``function register() {``
-#. ``if ($this->data) {``
-#. ``if ($this->data['User']['password'] == $this->Auth->password($this->data['User']['password_confirm'])) {``
-#. ``$this->User->create();``
-#. ``$this->User->save($this->data);``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 5.2.3 Troubleshooting Auth Problems
 -----------------------------------
 
@@ -71,15 +59,3 @@ compare the two. Here's some sample code:
         }
     }
     ?>
-
-
-#. ``<?php``
-#. ``function register() {``
-#. ``if ($this->data) {``
-#. ``if ($this->data['User']['password'] == $this->Auth->password($this->data['User']['password_confirm'])) {``
-#. ``$this->User->create();``
-#. ``$this->User->save($this->data);``
-#. ``}``
-#. ``}``
-#. ``}``
-#. ``?>``

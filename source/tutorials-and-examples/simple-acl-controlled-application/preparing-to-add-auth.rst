@@ -17,15 +17,6 @@ Acl components. First add a login and logout action to your
         //Leave empty for now.
     }
 
-
-#. ``function login() {``
-#. ``//Auth Magic``
-#. ``}``
-#. ````
-#. ``function logout() {``
-#. ``//Leave empty for now.``
-#. ``}``
-
 Then create the following view file for login at
 app/views/users/login.ctp:
 
@@ -41,18 +32,6 @@ app/views/users/login.ctp:
     ));
     echo $this->Form->end('Login');
     ?>
-
-
-#. ``<?php``
-#. ``$this->Session->flash('auth');``
-#. ``echo $this->Form->create('User', array('action' => 'login'));``
-#. ``echo $this->Form->inputs(array(``
-#. ``'legend' => __('Login', true),``
-#. ``'username',``
-#. ``'password'``
-#. ``));``
-#. ``echo $this->Form->end('Login');``
-#. ``?>``
 
 We don't need to worry about adding anything to hash passwords, as
 AuthComponent will do this for us automatically when
@@ -83,21 +62,6 @@ site controlled with Auth and Acl, we will set them up in
     }
     ?>
 
-
-#. ``<?php``
-#. ``class AppController extends Controller {``
-#. ``var $components = array('Acl', 'Auth', 'Session');``
-#. ``var $helpers = array('Html', 'Form', 'Session');``
-#. ``function beforeFilter() {``
-#. ``//Configure AuthComponent``
-#. ``$this->Auth->authorize = 'actions';``
-#. ``$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');``
-#. ``$this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');``
-#. ``$this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'add');``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 Before we set up the ACL at all we will need to add some users and
 groups. With ``AuthComponent`` in use we will not be able to access
 any of our actions, as we are not logged in. We will now add some
@@ -111,12 +75,6 @@ and users. In **both** your ``GroupsController`` and your
         parent::beforeFilter(); 
         $this->Auth->allow(array('*'));
     }
-
-
-#. ``function beforeFilter() {``
-#. ``parent::beforeFilter();``
-#. ``$this->Auth->allow(array('*'));``
-#. ``}``
 
 These statements tell AuthComponent to allow public access to all
 actions. This is only temporary and will be removed once we get a
@@ -142,15 +100,6 @@ Acl components. First add a login and logout action to your
         //Leave empty for now.
     }
 
-
-#. ``function login() {``
-#. ``//Auth Magic``
-#. ``}``
-#. ````
-#. ``function logout() {``
-#. ``//Leave empty for now.``
-#. ``}``
-
 Then create the following view file for login at
 app/views/users/login.ctp:
 
@@ -166,18 +115,6 @@ app/views/users/login.ctp:
     ));
     echo $this->Form->end('Login');
     ?>
-
-
-#. ``<?php``
-#. ``$this->Session->flash('auth');``
-#. ``echo $this->Form->create('User', array('action' => 'login'));``
-#. ``echo $this->Form->inputs(array(``
-#. ``'legend' => __('Login', true),``
-#. ``'username',``
-#. ``'password'``
-#. ``));``
-#. ``echo $this->Form->end('Login');``
-#. ``?>``
 
 We don't need to worry about adding anything to hash passwords, as
 AuthComponent will do this for us automatically when
@@ -208,21 +145,6 @@ site controlled with Auth and Acl, we will set them up in
     }
     ?>
 
-
-#. ``<?php``
-#. ``class AppController extends Controller {``
-#. ``var $components = array('Acl', 'Auth', 'Session');``
-#. ``var $helpers = array('Html', 'Form', 'Session');``
-#. ``function beforeFilter() {``
-#. ``//Configure AuthComponent``
-#. ``$this->Auth->authorize = 'actions';``
-#. ``$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');``
-#. ``$this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');``
-#. ``$this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'add');``
-#. ``}``
-#. ``}``
-#. ``?>``
-
 Before we set up the ACL at all we will need to add some users and
 groups. With ``AuthComponent`` in use we will not be able to access
 any of our actions, as we are not logged in. We will now add some
@@ -236,12 +158,6 @@ and users. In **both** your ``GroupsController`` and your
         parent::beforeFilter(); 
         $this->Auth->allow(array('*'));
     }
-
-
-#. ``function beforeFilter() {``
-#. ``parent::beforeFilter();``
-#. ``$this->Auth->allow(array('*'));``
-#. ``}``
 
 These statements tell AuthComponent to allow public access to all
 actions. This is only temporary and will be removed once we get a

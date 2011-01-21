@@ -29,20 +29,6 @@ like the following:
         'encoding' => ''
     );
 
-
-#. ``var $default = array(``
-#. ``'driver' => 'mysql',``
-#. ``'persistent' => 'false',``
-#. ``'host' => 'localhost',``
-#. ``'port' => '',``
-#. ``'login' => 'cakeBlog',``
-#. ``'password' => 'c4k3-rUl3Z',``
-#. ``'database' => 'cake_blog_tutorial',``
-#. ``'schema' => '',``
-#. ``'prefix' => '',``
-#. ``'encoding' => ''``
-#. ``);``
-
 Once you've saved your new ``database.php`` file, you should be
 able to open your browser and see the Cake welcome page. It should
 also tell you that your database connection file was found, and
@@ -78,20 +64,6 @@ like the following:
         'prefix' => '',
         'encoding' => ''
     );
-
-
-#. ``var $default = array(``
-#. ``'driver' => 'mysql',``
-#. ``'persistent' => 'false',``
-#. ``'host' => 'localhost',``
-#. ``'port' => '',``
-#. ``'login' => 'cakeBlog',``
-#. ``'password' => 'c4k3-rUl3Z',``
-#. ``'database' => 'cake_blog_tutorial',``
-#. ``'schema' => '',``
-#. ``'prefix' => '',``
-#. ``'encoding' => ''``
-#. ``);``
 
 Once you've saved your new ``database.php`` file, you should be
 able to open your browser and see the Cake welcome page. It should

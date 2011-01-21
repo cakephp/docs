@@ -14,9 +14,6 @@ pair:
 
         $acoNode = $this->Auth->action('users/delete');
 
-
-#. ``$acoNode = $this->Auth->action('users/delete');``
-
 If you don't pass in any values, it uses the current controller /
 action pair
 
@@ -35,12 +32,6 @@ example shows how to allow an action named 'register'.
             $this->Auth->allow('register');
         }
 
-
-#. ``function beforeFilter() {``
-#. ``...``
-#. ``$this->Auth->allow('register');``
-#. ``}``
-
 If you wish to allow multiple actions to skip authentication, you
 supply them as parameters to the allow() method:
 
@@ -51,12 +42,6 @@ supply them as parameters to the allow() method:
             $this->Auth->allow('foo', 'bar', 'baz');
         }
 
-
-#. ``function beforeFilter() {``
-#. ``...``
-#. ``$this->Auth->allow('foo', 'bar', 'baz');``
-#. ``}``
-
 Shortcut: you may also allow all the actions in a controller by
 using '\*'.
 
@@ -66,12 +51,6 @@ using '\*'.
             ...
             $this->Auth->allow('*');
         }
-
-
-#. ``function beforeFilter() {``
-#. ``...``
-#. ``$this->Auth->allow('*');``
-#. ``}``
 
 If you are using requestAction in your layout or elements you
 should allow those actions in order to be able to open login page
@@ -102,18 +81,6 @@ example:
     
             ...
         }
-
-
-#. ``function beforeFilter() {``
-#. ``$this->Auth->authorize = 'controller';``
-#. ``$this->Auth->allow('delete');``
-#. ``}``
-#. ``function isAuthorized() {``
-#. ``if ($this->Auth->user('role') != 'admin') {``
-#. ``$this->Auth->deny('delete');``
-#. ``}``
-#. ``...``
-#. ``}``
 
 hashPasswords
 ~~~~~~~~~~~~~
@@ -146,22 +113,6 @@ calls of the user when the password field is affected.
     
         */
 
-
-#. ``$data['User']['username'] = 'me@me.com';``
-#. ``$data['User']['password'] = 'changeme';``
-#. ``$hashedPasswords = $this->Auth->hashPasswords($data);``
-#. ``pr($hashedPasswords);``
-#. ``/* returns:``
-#. ``Array``
-#. ``(``
-#. ``[User] => Array``
-#. ``(``
-#. ``[username] => me@me.com``
-#. ``[password] => 8ed3b7e8ced419a679a7df93eff22fae``
-#. ``)``
-#. ``)``
-#. ``*/``
-
 The *$hashedPasswords['User']['password']* field would now be
 hashed using the ``password`` function of the component.
 
@@ -186,16 +137,6 @@ non-default actions to each part of CRUD.
         )
     );
 
-
-#. ``$this->Auth->mapActions(``
-#. ``array(``
-#. ``'create' => array('someAction'),``
-#. ``'read' => array('someAction', 'someAction2'),``
-#. ``'update' => array('someAction'),``
-#. ``'delete' => array('someAction')``
-#. ``)``
-#. ``);``
-
 login
 ~~~~~
 
@@ -217,11 +158,6 @@ View:
     echo $this->Form->input('username');
     echo $this->Form->end('Register');
 
-
-#. ``echo $this->Form->create('User',array('action'=>'register'));``
-#. ``echo $this->Form->input('username');``
-#. ``echo $this->Form->end('Register');``
-
 Controller:
 ::
 
@@ -236,19 +172,6 @@ Controller:
                 $this->redirect('home');
         }
     }
-
-
-#. ``function register() {``
-#. ``if(!empty($this->data)) {``
-#. ``$this->User->create();``
-#. ``$assigned_password = 'password';``
-#. ``$this->data['User']['password'] = $assigned_password;``
-#. ``if($this->User->save($this->data)) {``
-#. ``// send signup email containing password to the user``
-#. ``$this->Auth->login($this->data);``
-#. ``$this->redirect('home');``
-#. ``}``
-#. ``}``
 
 One thing to note is that you must manually redirect the user after
 login as loginRedirect is not called.
@@ -270,9 +193,6 @@ Example:
 
     $this->redirect($this->Auth->logout());
 
-
-#. ``$this->redirect($this->Auth->logout());``
-
 password
 ~~~~~~~~
 
@@ -293,15 +213,6 @@ a second time to confirm it.
     } else {
         $this->flash('Typed passwords did not match', 'users/register');
     }
-
-
-#. ``if ($this->data['User']['password'] ==``
-#. ``$this->Auth->password($this->data['User']['password2'])) {``
-#. ``// Passwords match, continue processing``
-#. ``...``
-#. ``} else {``
-#. ``$this->flash('Typed passwords did not match', 'users/register');``
-#. ``}``
 
 The auth component will automatically hash the password field if
 the username field is also present in the submitted data
@@ -327,19 +238,11 @@ user. The information is taken from the session. For example:
         $this->flash('You have admin access');
     }
 
-
-#. ``if ($this->Auth->user('role') == 'admin') {``
-#. ``$this->flash('You have admin access');``
-#. ``}``
-
 It can also be used to return the whole user session data like so:
 
 ::
 
     $data['User'] = $this->Auth->user();
-
-
-#. ``$data['User'] = $this->Auth->user();``
 
 If this method returns null, the user is not logged in.
 
@@ -350,10 +253,6 @@ currently authenticated user's information:
 
     $session->read('Auth.User'); // returns complete user record
     $session->read('Auth.User.first_name') //returns particular field value
-
-
-#. ``$session->read('Auth.User'); // returns complete user record``
-#. ``$session->read('Auth.User.first_name') //returns particular field value``
 
 The session key can be different depending on which model Auth is
 configured to use. Eg. If you use model ``Account`` instead of
@@ -375,9 +274,6 @@ pair:
 
         $acoNode = $this->Auth->action('users/delete');
 
-
-#. ``$acoNode = $this->Auth->action('users/delete');``
-
 If you don't pass in any values, it uses the current controller /
 action pair
 
@@ -396,12 +292,6 @@ example shows how to allow an action named 'register'.
             $this->Auth->allow('register');
         }
 
-
-#. ``function beforeFilter() {``
-#. ``...``
-#. ``$this->Auth->allow('register');``
-#. ``}``
-
 If you wish to allow multiple actions to skip authentication, you
 supply them as parameters to the allow() method:
 
@@ -412,12 +302,6 @@ supply them as parameters to the allow() method:
             $this->Auth->allow('foo', 'bar', 'baz');
         }
 
-
-#. ``function beforeFilter() {``
-#. ``...``
-#. ``$this->Auth->allow('foo', 'bar', 'baz');``
-#. ``}``
-
 Shortcut: you may also allow all the actions in a controller by
 using '\*'.
 
@@ -427,12 +311,6 @@ using '\*'.
             ...
             $this->Auth->allow('*');
         }
-
-
-#. ``function beforeFilter() {``
-#. ``...``
-#. ``$this->Auth->allow('*');``
-#. ``}``
 
 If you are using requestAction in your layout or elements you
 should allow those actions in order to be able to open login page
@@ -463,18 +341,6 @@ example:
     
             ...
         }
-
-
-#. ``function beforeFilter() {``
-#. ``$this->Auth->authorize = 'controller';``
-#. ``$this->Auth->allow('delete');``
-#. ``}``
-#. ``function isAuthorized() {``
-#. ``if ($this->Auth->user('role') != 'admin') {``
-#. ``$this->Auth->deny('delete');``
-#. ``}``
-#. ``...``
-#. ``}``
 
 hashPasswords
 ~~~~~~~~~~~~~
@@ -507,22 +373,6 @@ calls of the user when the password field is affected.
     
         */
 
-
-#. ``$data['User']['username'] = 'me@me.com';``
-#. ``$data['User']['password'] = 'changeme';``
-#. ``$hashedPasswords = $this->Auth->hashPasswords($data);``
-#. ``pr($hashedPasswords);``
-#. ``/* returns:``
-#. ``Array``
-#. ``(``
-#. ``[User] => Array``
-#. ``(``
-#. ``[username] => me@me.com``
-#. ``[password] => 8ed3b7e8ced419a679a7df93eff22fae``
-#. ``)``
-#. ``)``
-#. ``*/``
-
 The *$hashedPasswords['User']['password']* field would now be
 hashed using the ``password`` function of the component.
 
@@ -547,16 +397,6 @@ non-default actions to each part of CRUD.
         )
     );
 
-
-#. ``$this->Auth->mapActions(``
-#. ``array(``
-#. ``'create' => array('someAction'),``
-#. ``'read' => array('someAction', 'someAction2'),``
-#. ``'update' => array('someAction'),``
-#. ``'delete' => array('someAction')``
-#. ``)``
-#. ``);``
-
 login
 ~~~~~
 
@@ -578,11 +418,6 @@ View:
     echo $this->Form->input('username');
     echo $this->Form->end('Register');
 
-
-#. ``echo $this->Form->create('User',array('action'=>'register'));``
-#. ``echo $this->Form->input('username');``
-#. ``echo $this->Form->end('Register');``
-
 Controller:
 ::
 
@@ -597,19 +432,6 @@ Controller:
                 $this->redirect('home');
         }
     }
-
-
-#. ``function register() {``
-#. ``if(!empty($this->data)) {``
-#. ``$this->User->create();``
-#. ``$assigned_password = 'password';``
-#. ``$this->data['User']['password'] = $assigned_password;``
-#. ``if($this->User->save($this->data)) {``
-#. ``// send signup email containing password to the user``
-#. ``$this->Auth->login($this->data);``
-#. ``$this->redirect('home');``
-#. ``}``
-#. ``}``
 
 One thing to note is that you must manually redirect the user after
 login as loginRedirect is not called.
@@ -631,9 +453,6 @@ Example:
 
     $this->redirect($this->Auth->logout());
 
-
-#. ``$this->redirect($this->Auth->logout());``
-
 password
 ~~~~~~~~
 
@@ -654,15 +473,6 @@ a second time to confirm it.
     } else {
         $this->flash('Typed passwords did not match', 'users/register');
     }
-
-
-#. ``if ($this->data['User']['password'] ==``
-#. ``$this->Auth->password($this->data['User']['password2'])) {``
-#. ``// Passwords match, continue processing``
-#. ``...``
-#. ``} else {``
-#. ``$this->flash('Typed passwords did not match', 'users/register');``
-#. ``}``
 
 The auth component will automatically hash the password field if
 the username field is also present in the submitted data
@@ -688,19 +498,11 @@ user. The information is taken from the session. For example:
         $this->flash('You have admin access');
     }
 
-
-#. ``if ($this->Auth->user('role') == 'admin') {``
-#. ``$this->flash('You have admin access');``
-#. ``}``
-
 It can also be used to return the whole user session data like so:
 
 ::
 
     $data['User'] = $this->Auth->user();
-
-
-#. ``$data['User'] = $this->Auth->user();``
 
 If this method returns null, the user is not logged in.
 
@@ -711,10 +513,6 @@ currently authenticated user's information:
 
     $session->read('Auth.User'); // returns complete user record
     $session->read('Auth.User.first_name') //returns particular field value
-
-
-#. ``$session->read('Auth.User'); // returns complete user record``
-#. ``$session->read('Auth.User.first_name') //returns particular field value``
 
 The session key can be different depending on which model Auth is
 configured to use. Eg. If you use model ``Account`` instead of

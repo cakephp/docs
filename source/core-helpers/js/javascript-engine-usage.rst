@@ -25,9 +25,6 @@ method chaining **Will not** work in PHP4.
 
     $this->Js->get('#foo')->event('click', $eventCode);
 
-
-#. ``$this->Js->get('#foo')->event('click', $eventCode);``
-
 Is an example of method chaining. Method chaining is not possible
 in PHP4 and the above sample would be written like:
 
@@ -35,10 +32,6 @@ in PHP4 and the above sample would be written like:
 
     $this->Js->get('#foo');
     $this->Js->event('click', $eventCode);
-
-
-#. ``$this->Js->get('#foo');``
-#. ``$this->Js->event('click', $eventCode);``
 
 Common options
 ~~~~~~~~~~~~~~
@@ -124,9 +117,6 @@ can force other methods to go into the buffer. For example the
 
     $this->Js->each('alert("whoa!");', true);
 
-
-#. ``$this->Js->each('alert("whoa!");', true);``
-
 The above would force the ``each()`` method to use the buffer.
 Conversely if you want a method that does buffer to not buffer, you
 can pass a ``false`` in as the last argument.
@@ -134,9 +124,6 @@ can pass a ``false`` in as the last argument.
 ::
 
     $this->Js->event('click', 'alert("whoa!");', false);
-
-
-#. ``$this->Js->event('click', 'alert("whoa!");', false);``
 
 This would force the event function which normally buffers to
 return its result.
@@ -168,9 +155,6 @@ method chaining **Will not** work in PHP4.
 
     $this->Js->get('#foo')->event('click', $eventCode);
 
-
-#. ``$this->Js->get('#foo')->event('click', $eventCode);``
-
 Is an example of method chaining. Method chaining is not possible
 in PHP4 and the above sample would be written like:
 
@@ -178,10 +162,6 @@ in PHP4 and the above sample would be written like:
 
     $this->Js->get('#foo');
     $this->Js->event('click', $eventCode);
-
-
-#. ``$this->Js->get('#foo');``
-#. ``$this->Js->event('click', $eventCode);``
 
 Common options
 ~~~~~~~~~~~~~~
@@ -267,9 +247,6 @@ can force other methods to go into the buffer. For example the
 
     $this->Js->each('alert("whoa!");', true);
 
-
-#. ``$this->Js->each('alert("whoa!");', true);``
-
 The above would force the ``each()`` method to use the buffer.
 Conversely if you want a method that does buffer to not buffer, you
 can pass a ``false`` in as the last argument.
@@ -277,9 +254,6 @@ can pass a ``false`` in as the last argument.
 ::
 
     $this->Js->event('click', 'alert("whoa!");', false);
-
-
-#. ``$this->Js->event('click', 'alert("whoa!");', false);``
 
 This would force the event function which normally buffers to
 return its result.

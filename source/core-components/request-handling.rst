@@ -31,16 +31,6 @@ Request Handler it must be included in your $components array.
     }
     ?>
 
-
-#. ``<?php``
-#. ``class WidgetController extends AppController {``
-#. ````
-#. ``var $components = array('RequestHandler');``
-#. ````
-#. ``//rest of controller``
-#. ``}``
-#. ``?>``
-
 5.5 Request Handling
 --------------------
 
@@ -73,13 +63,3 @@ Request Handler it must be included in your $components array.
         //rest of controller
     }
     ?>
-
-
-#. ``<?php``
-#. ``class WidgetController extends AppController {``
-#. ````
-#. ``var $components = array('RequestHandler');``
-#. ````
-#. ``//rest of controller``
-#. ``}``
-#. ``?>``

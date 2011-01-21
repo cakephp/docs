@@ -68,18 +68,6 @@ example) to look like the following:
         define('CAKE_CORE_INCLUDE_PATH', DS.'usr'.DS.'lib');
     }
 
-
-#. ``// /app/webroot/index.php (partial, comments removed)``
-#. ``if (!defined('ROOT')) {``
-#. ``define('ROOT', DS.'home'.DS.'me');``
-#. ``}``
-#. ``if (!defined('APP_DIR')) {``
-#. ``define ('APP_DIR', 'myapp');``
-#. ``}``
-#. ``if (!defined('CAKE_CORE_INCLUDE_PATH')) {``
-#. ``define('CAKE_CORE_INCLUDE_PATH', DS.'usr'.DS.'lib');``
-#. ``}``
-
 It is recommended to use the ``DS`` constant rather than slashes to
 delimit file paths. This prevents any missing file errors you might
 get as a result of using the wrong delimiter, and it makes your
@@ -112,22 +100,6 @@ CakePHP aware of other places to look for MVC classes:
         'locales' => array('/full/path/to/locale/', '/next/full/path/to/locale/'),
         'libs' => array('/full/path/to/libs/', '/next/full/path/to/libs/')
     ));
-
-
-#. ``App::build(array(``
-#. ``'plugins' => array('/full/path/to/plugins/', '/next/full/path/to/plugins/'),``
-#. ``'models' =>  array('/full/path/to/models/', '/next/full/path/to/models/'),``
-#. ``'views' => array('/full/path/to/views/', '/next/full/path/to/views/'),``
-#. ``'controllers' => array('/full/path/to/controllers/', '/next/full/path/to/controllers/'),``
-#. ``'datasources' => array('/full/path/to/datasources/', '/next/full/path/to/datasources/'),``
-#. ``'behaviors' => array('/full/path/to/behaviors/', '/next/full/path/to/behaviors/'),``
-#. ``'components' => array('/full/path/to/components/', '/next/full/path/to/components/'),``
-#. ``'helpers' => array('/full/path/to/helpers/', '/next/full/path/to/helpers/'),``
-#. ``'vendors' => array('/full/path/to/vendors/', '/next/full/path/to/vendors/'),``
-#. ``'shells' => array('/full/path/to/shells/', '/next/full/path/to/shells/'),``
-#. ``'locales' => array('/full/path/to/locale/', '/next/full/path/to/locale/'),``
-#. ``'libs' => array('/full/path/to/libs/', '/next/full/path/to/libs/')``
-#. ``));``
 
 Also changed is the order in which boostrapping occurs. In the past
 ``app/config/core.php`` was loaded **after**
@@ -206,18 +178,6 @@ example) to look like the following:
         define('CAKE_CORE_INCLUDE_PATH', DS.'usr'.DS.'lib');
     }
 
-
-#. ``// /app/webroot/index.php (partial, comments removed)``
-#. ``if (!defined('ROOT')) {``
-#. ``define('ROOT', DS.'home'.DS.'me');``
-#. ``}``
-#. ``if (!defined('APP_DIR')) {``
-#. ``define ('APP_DIR', 'myapp');``
-#. ``}``
-#. ``if (!defined('CAKE_CORE_INCLUDE_PATH')) {``
-#. ``define('CAKE_CORE_INCLUDE_PATH', DS.'usr'.DS.'lib');``
-#. ``}``
-
 It is recommended to use the ``DS`` constant rather than slashes to
 delimit file paths. This prevents any missing file errors you might
 get as a result of using the wrong delimiter, and it makes your
@@ -250,22 +210,6 @@ CakePHP aware of other places to look for MVC classes:
         'locales' => array('/full/path/to/locale/', '/next/full/path/to/locale/'),
         'libs' => array('/full/path/to/libs/', '/next/full/path/to/libs/')
     ));
-
-
-#. ``App::build(array(``
-#. ``'plugins' => array('/full/path/to/plugins/', '/next/full/path/to/plugins/'),``
-#. ``'models' =>  array('/full/path/to/models/', '/next/full/path/to/models/'),``
-#. ``'views' => array('/full/path/to/views/', '/next/full/path/to/views/'),``
-#. ``'controllers' => array('/full/path/to/controllers/', '/next/full/path/to/controllers/'),``
-#. ``'datasources' => array('/full/path/to/datasources/', '/next/full/path/to/datasources/'),``
-#. ``'behaviors' => array('/full/path/to/behaviors/', '/next/full/path/to/behaviors/'),``
-#. ``'components' => array('/full/path/to/components/', '/next/full/path/to/components/'),``
-#. ``'helpers' => array('/full/path/to/helpers/', '/next/full/path/to/helpers/'),``
-#. ``'vendors' => array('/full/path/to/vendors/', '/next/full/path/to/vendors/'),``
-#. ``'shells' => array('/full/path/to/shells/', '/next/full/path/to/shells/'),``
-#. ``'locales' => array('/full/path/to/locale/', '/next/full/path/to/locale/'),``
-#. ``'libs' => array('/full/path/to/libs/', '/next/full/path/to/libs/')``
-#. ``));``
 
 Also changed is the order in which boostrapping occurs. In the past
 ``app/config/core.php`` was loaded **after**

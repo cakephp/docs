@@ -21,13 +21,6 @@ uncomment one line in app/config/core.php.
      */
         date_default_timezone_set('UTC');
 
-
-#. ``/**``
-#. ``* If you are on PHP 5.3 uncomment this line and correct your server timezone``
-#. ``* to fix the date & time related errors.``
-#. ``*/``
-#. ``date_default_timezone_set('UTC');``
-
 3.3.8 Fire It Up
 ----------------
 
@@ -50,10 +43,3 @@ uncomment one line in app/config/core.php.
      * to fix the date & time related errors.
      */
         date_default_timezone_set('UTC');
-
-
-#. ``/**``
-#. ``* If you are on PHP 5.3 uncomment this line and correct your server timezone``
-#. ``* to fix the date & time related errors.``
-#. ``*/``
-#. ``date_default_timezone_set('UTC');``

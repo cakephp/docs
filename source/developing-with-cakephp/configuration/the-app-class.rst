@@ -28,9 +28,6 @@ Core libraries such as Sanitize, and Xml can be loaded by:
 
     App::import('Core', 'Sanitize');
 
-
-#. ``App::import('Core', 'Sanitize');``
-
 The above would make the Sanitize class available for use.
 
 Importing Controllers, Models, Components, Behaviors, and Helpers
@@ -61,16 +58,6 @@ initialized.
     $Users->constructClasses();
     ?>
 
-
-#. ``<?php``
-#. ``// The same as require('controllers/users_controller.php');``
-#. ``App::import('Controller', 'Users');``
-#. ``// We need to load the class``
-#. ``$Users = new UsersController;``
-#. ``// If we want the model associations, components, etc to be loaded``
-#. ``$Users->constructClasses();``
-#. ``?>``
-
 Loading Models
 ^^^^^^^^^^^^^^
 
@@ -90,13 +77,6 @@ Loading Components
     $Mailer = new MailerComponent();
     
     ?>
-
-
-#. ``<?php``
-#. ``App::import('Component', 'Mailer');``
-#. ``// We need to load the class``
-#. ``$Mailer = new MailerComponent();``
-#. ``?>``
 
 Loading Behaviors
 ^^^^^^^^^^^^^^^^^
@@ -119,17 +99,11 @@ from.
 
     App::import('Model', 'PluginName.Comment');
 
-
-#. ``App::import('Model', 'PluginName.Comment');``
-
 To load APP/plugins/plugin\_name/vendors/flickr/flickr.php
 
 ::
 
     App::import('Vendor', 'PluginName.flickr/flickr');
-
-
-#. ``App::import('Vendor', 'PluginName.flickr/flickr');``
 
 Loading Vendor Files
 ~~~~~~~~~~~~~~~~~~~~
@@ -154,9 +128,6 @@ To load **vendors/geshi.php**
 
     App::import('Vendor', 'geshi');
 
-
-#. ``App::import('Vendor', 'geshi');``
-
 The geishi file must be a lower-case file name as Cake will not
 find it otherwise.
 
@@ -166,26 +137,17 @@ To load **vendors/flickr/flickr.php**
 
     App::import('Vendor', 'flickr/flickr');
 
-
-#. ``App::import('Vendor', 'flickr/flickr');``
-
 To load **vendors/some.name.php**
 
 ::
 
     App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));
 
-
-#. ``App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));``
-
 To load **vendors/services/well.named.php**
 
 ::
 
     App::import('Vendor', 'WellNamed', array('file' => 'services'.DS.'well.named.php'));
-
-
-#. ``App::import('Vendor', 'WellNamed', array('file' => 'services'.DS.'well.named.php'));``
 
 It wouldn't make a difference if your vendor files are inside your
 /app/vendors directory. Cake will automatically find it.
@@ -195,9 +157,6 @@ To load **app/vendors/vendorName/libFile.php**
 ::
 
     App::import('Vendor', 'aUniqueIdentifier', array('file' =>'vendorName'.DS.'libFile.php'));
-
-
-#. ``App::import('Vendor', 'aUniqueIdentifier', array('file' =>'vendorName'.DS.'libFile.php'));``
 
 3.4.4 The App Class
 -------------------
@@ -229,9 +188,6 @@ Core libraries such as Sanitize, and Xml can be loaded by:
 
     App::import('Core', 'Sanitize');
 
-
-#. ``App::import('Core', 'Sanitize');``
-
 The above would make the Sanitize class available for use.
 
 Importing Controllers, Models, Components, Behaviors, and Helpers
@@ -262,16 +218,6 @@ initialized.
     $Users->constructClasses();
     ?>
 
-
-#. ``<?php``
-#. ``// The same as require('controllers/users_controller.php');``
-#. ``App::import('Controller', 'Users');``
-#. ``// We need to load the class``
-#. ``$Users = new UsersController;``
-#. ``// If we want the model associations, components, etc to be loaded``
-#. ``$Users->constructClasses();``
-#. ``?>``
-
 Loading Models
 ^^^^^^^^^^^^^^
 
@@ -291,13 +237,6 @@ Loading Components
     $Mailer = new MailerComponent();
     
     ?>
-
-
-#. ``<?php``
-#. ``App::import('Component', 'Mailer');``
-#. ``// We need to load the class``
-#. ``$Mailer = new MailerComponent();``
-#. ``?>``
 
 Loading Behaviors
 ^^^^^^^^^^^^^^^^^
@@ -320,17 +259,11 @@ from.
 
     App::import('Model', 'PluginName.Comment');
 
-
-#. ``App::import('Model', 'PluginName.Comment');``
-
 To load APP/plugins/plugin\_name/vendors/flickr/flickr.php
 
 ::
 
     App::import('Vendor', 'PluginName.flickr/flickr');
-
-
-#. ``App::import('Vendor', 'PluginName.flickr/flickr');``
 
 Loading Vendor Files
 ~~~~~~~~~~~~~~~~~~~~
@@ -355,9 +288,6 @@ To load **vendors/geshi.php**
 
     App::import('Vendor', 'geshi');
 
-
-#. ``App::import('Vendor', 'geshi');``
-
 The geishi file must be a lower-case file name as Cake will not
 find it otherwise.
 
@@ -367,26 +297,17 @@ To load **vendors/flickr/flickr.php**
 
     App::import('Vendor', 'flickr/flickr');
 
-
-#. ``App::import('Vendor', 'flickr/flickr');``
-
 To load **vendors/some.name.php**
 
 ::
 
     App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));
 
-
-#. ``App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));``
-
 To load **vendors/services/well.named.php**
 
 ::
 
     App::import('Vendor', 'WellNamed', array('file' => 'services'.DS.'well.named.php'));
-
-
-#. ``App::import('Vendor', 'WellNamed', array('file' => 'services'.DS.'well.named.php'));``
 
 It wouldn't make a difference if your vendor files are inside your
 /app/vendors directory. Cake will automatically find it.
@@ -396,6 +317,3 @@ To load **app/vendors/vendorName/libFile.php**
 ::
 
     App::import('Vendor', 'aUniqueIdentifier', array('file' =>'vendorName'.DS.'libFile.php'));
-
-
-#. ``App::import('Vendor', 'aUniqueIdentifier', array('file' =>'vendorName'.DS.'libFile.php'));``

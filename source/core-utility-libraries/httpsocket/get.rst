@@ -18,12 +18,6 @@ results.
     $results = $HttpSocket->get('http://www.google.com/search', 'q=cakephp');  
     //returns html for Google's search results for the query "cakephp"
 
-
-#. ``App::import('Core', 'HttpSocket');``
-#. ``$HttpSocket = new HttpSocket();``
-#. ``$results = $HttpSocket->get('http://www.google.com/search', 'q=cakephp');``
-#. ``//returns html for Google's search results for the query "cakephp"``
-
 8.8.1 get
 ---------
 
@@ -43,9 +37,3 @@ results.
     $HttpSocket = new HttpSocket();
     $results = $HttpSocket->get('http://www.google.com/search', 'q=cakephp');  
     //returns html for Google's search results for the query "cakephp"
-
-
-#. ``App::import('Core', 'HttpSocket');``
-#. ``$HttpSocket = new HttpSocket();``
-#. ``$results = $HttpSocket->get('http://www.google.com/search', 'q=cakephp');``
-#. ``//returns html for Google's search results for the query "cakephp"``

@@ -19,13 +19,6 @@ is read.
     Cache::set(array('duration' => '+30 days'));
     $results = Cache::read('results');
 
-
-#. ``Cache::set(array('duration' => '+30 days'));``
-#. ``Cache::write('results', $data);``
-#. ``// Later on``
-#. ``Cache::set(array('duration' => '+30 days'));``
-#. ``$results = Cache::read('results');``
-
 If you find yourself repeatedly calling ``Cache::set()`` perhaps
 you should create a new
 `Cache configuration </view/1515/Cache-config>`_. This will remove
@@ -51,13 +44,6 @@ is read.
     
     Cache::set(array('duration' => '+30 days'));
     $results = Cache::read('results');
-
-
-#. ``Cache::set(array('duration' => '+30 days'));``
-#. ``Cache::write('results', $data);``
-#. ``// Later on``
-#. ``Cache::set(array('duration' => '+30 days'));``
-#. ``$results = Cache::read('results');``
 
 If you find yourself repeatedly calling ``Cache::set()`` perhaps
 you should create a new

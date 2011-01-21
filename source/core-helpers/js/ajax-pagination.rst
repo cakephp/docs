@@ -20,19 +20,12 @@ following to your controller:
     var $components = array('RequestHandler');
     var $helpers = array('Js');
 
-
-#. ``var $components = array('RequestHandler');``
-#. ``var $helpers = array('Js');``
-
 Next link in the javascript library you want to use. For this
 example we'll be using jQuery.
 
 ::
 
     echo $this->Html->script('jquery');
-
-
-#. ``echo $this->Html->script('jquery');``
 
 Similar to 1.2 you need to tell the ``PaginatorHelper`` that you
 want to make Javascript enhanced links instead of plain HTML ones.
@@ -44,12 +37,6 @@ To do so you use ``options()``
         'update' => '#content',
         'evalScripts' => true
     ));
-
-
-#. ``$this->Paginator->options(array(``
-#. ``'update' => '#content',``
-#. ``'evalScripts' => true``
-#. ``));``
 
 The ``PaginatorHelper`` now knows to make javascript enhanced
 links, and that those links should update the ``#content`` element.
@@ -70,9 +57,6 @@ bottom of your view file. Be sure to include:
 ::
 
     echo $this->Js->writeBuffer();
-
-
-#. ``echo $this->Js->writeBuffer();``
 
 If you omit this you will **not** be able to chain ajax pagination
 links. When you write the buffer, it is also cleared, so you don't
@@ -99,20 +83,6 @@ indicator effects yourself.
         </body>
     </html>
 
-
-#. ``<html>``
-#. ``<head>``
-#. ``<?php echo $this->Html->script('jquery'); ?>``
-#. ``//more stuff here.``
-#. ``</head>``
-#. ``<body>``
-#. ``<div id="content">``
-#. ``<?php echo $content_for_layout; ?>``
-#. ``</div>``
-#. ``<?php echo $this->Html->image('indicator.gif', array('id' => 'busy-indicator')); ?>``
-#. ``</body>``
-#. ``</html>``
-
 Remember to place the indicator.gif file inside app/webroot/img
 folder. You may see a situation where the indicator.gif displays
 immediately upon the page load. You need to put in this css
@@ -131,14 +101,6 @@ with the ``JsHelper``. To do that we need to update our
         'before' => $this->Js->get('#busy-indicator')->effect('fadeIn', array('buffer' => false)),
         'complete' => $this->Js->get('#busy-indicator')->effect('fadeOut', array('buffer' => false)),
     ));
-
-
-#. ``$this->Paginator->options(array(``
-#. ``'update' => '#content',``
-#. ``'evalScripts' => true,``
-#. ``'before' => $this->Js->get('#busy-indicator')->effect('fadeIn', array('buffer' => false)),``
-#. ``'complete' => $this->Js->get('#busy-indicator')->effect('fadeOut', array('buffer' => false)),``
-#. ``));``
 
 This will show/hide the busy-indicator element before and after the
 ``#content`` div is updated. Although ``indicator`` has been
@@ -167,19 +129,12 @@ following to your controller:
     var $components = array('RequestHandler');
     var $helpers = array('Js');
 
-
-#. ``var $components = array('RequestHandler');``
-#. ``var $helpers = array('Js');``
-
 Next link in the javascript library you want to use. For this
 example we'll be using jQuery.
 
 ::
 
     echo $this->Html->script('jquery');
-
-
-#. ``echo $this->Html->script('jquery');``
 
 Similar to 1.2 you need to tell the ``PaginatorHelper`` that you
 want to make Javascript enhanced links instead of plain HTML ones.
@@ -191,12 +146,6 @@ To do so you use ``options()``
         'update' => '#content',
         'evalScripts' => true
     ));
-
-
-#. ``$this->Paginator->options(array(``
-#. ``'update' => '#content',``
-#. ``'evalScripts' => true``
-#. ``));``
 
 The ``PaginatorHelper`` now knows to make javascript enhanced
 links, and that those links should update the ``#content`` element.
@@ -217,9 +166,6 @@ bottom of your view file. Be sure to include:
 ::
 
     echo $this->Js->writeBuffer();
-
-
-#. ``echo $this->Js->writeBuffer();``
 
 If you omit this you will **not** be able to chain ajax pagination
 links. When you write the buffer, it is also cleared, so you don't
@@ -246,20 +192,6 @@ indicator effects yourself.
         </body>
     </html>
 
-
-#. ``<html>``
-#. ``<head>``
-#. ``<?php echo $this->Html->script('jquery'); ?>``
-#. ``//more stuff here.``
-#. ``</head>``
-#. ``<body>``
-#. ``<div id="content">``
-#. ``<?php echo $content_for_layout; ?>``
-#. ``</div>``
-#. ``<?php echo $this->Html->image('indicator.gif', array('id' => 'busy-indicator')); ?>``
-#. ``</body>``
-#. ``</html>``
-
 Remember to place the indicator.gif file inside app/webroot/img
 folder. You may see a situation where the indicator.gif displays
 immediately upon the page load. You need to put in this css
@@ -278,14 +210,6 @@ with the ``JsHelper``. To do that we need to update our
         'before' => $this->Js->get('#busy-indicator')->effect('fadeIn', array('buffer' => false)),
         'complete' => $this->Js->get('#busy-indicator')->effect('fadeOut', array('buffer' => false)),
     ));
-
-
-#. ``$this->Paginator->options(array(``
-#. ``'update' => '#content',``
-#. ``'evalScripts' => true,``
-#. ``'before' => $this->Js->get('#busy-indicator')->effect('fadeIn', array('buffer' => false)),``
-#. ``'complete' => $this->Js->get('#busy-indicator')->effect('fadeOut', array('buffer' => false)),``
-#. ``));``
 
 This will show/hide the busy-indicator element before and after the
 ``#content`` div is updated. Although ``indicator`` has been

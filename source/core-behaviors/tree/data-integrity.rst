@@ -48,15 +48,6 @@ Available ``missingParentActions`` options when using
     // Rebuild all the parent_id's based on the lft and rght fields
     $this->Category->recover('tree');
 
-
-#. ``// Rebuild all the left and right fields based on the parent_id``
-#. ``$this->Category->recover();``
-#. ``// or``
-#. ``$this->Category->recover('parent');``
-#. ````
-#. ``// Rebuild all the parent_id's based on the lft and rght fields``
-#. ``$this->Category->recover('tree');``
-
 Reorder
 ~~~~~~~
 
@@ -92,14 +83,6 @@ following possible keys by default, all of which are optional:
         'verify' => true
     )
 
-
-#. ``array(``
-#. ``'id' => null,``
-#. ``'field' => $model->displayField,``
-#. ``'order' => 'ASC',``
-#. ``'verify' => true``
-#. ``)``
-
 Verify
 ~~~~~~
 
@@ -121,9 +104,6 @@ message)
 ::
 
         $this->Categories->verify();
-
-
-#. ``$this->Categories->verify();``
 
 Example output:
 
@@ -208,15 +188,6 @@ Available ``missingParentActions`` options when using
     // Rebuild all the parent_id's based on the lft and rght fields
     $this->Category->recover('tree');
 
-
-#. ``// Rebuild all the left and right fields based on the parent_id``
-#. ``$this->Category->recover();``
-#. ``// or``
-#. ``$this->Category->recover('parent');``
-#. ````
-#. ``// Rebuild all the parent_id's based on the lft and rght fields``
-#. ``$this->Category->recover('tree');``
-
 Reorder
 ~~~~~~~
 
@@ -252,14 +223,6 @@ following possible keys by default, all of which are optional:
         'verify' => true
     )
 
-
-#. ``array(``
-#. ``'id' => null,``
-#. ``'field' => $model->displayField,``
-#. ``'order' => 'ASC',``
-#. ``'verify' => true``
-#. ``)``
-
 Verify
 ~~~~~~
 
@@ -281,9 +244,6 @@ message)
 ::
 
         $this->Categories->verify();
-
-
-#. ``$this->Categories->verify();``
 
 Example output:
 

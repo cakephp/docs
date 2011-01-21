@@ -28,11 +28,6 @@ Example usage:
        var $useDbConfig = 'alternate';
     }
 
-
-#. ``class Example extends AppModel {``
-#. ``var $useDbConfig = 'alternate';``
-#. ``}``
-
 useTable
 ~~~~~~~~
 
@@ -50,11 +45,6 @@ Example usage:
        var $useTable = false; // This model does not use a database table
     }
 
-
-#. ``class Example extends AppModel {``
-#. ``var $useTable = false; // This model does not use a database table``
-#. ``}``
-
 Alternatively:
 
 ::
@@ -62,11 +52,6 @@ Alternatively:
     class Example extends AppModel {
        var $useTable = 'exmp'; // This model uses a database table 'exmp'
     }
-
-
-#. ``class Example extends AppModel {``
-#. ``var $useTable = 'exmp'; // This model uses a database table 'exmp'``
-#. ``}``
 
 tablePrefix
 ~~~~~~~~~~~
@@ -85,11 +70,6 @@ Example usage:
        var $tablePrefix = 'alternate_'; // will look for 'alternate_examples'
     }
 
-
-#. ``class Example extends AppModel {``
-#. ``var $tablePrefix = 'alternate_'; // will look for 'alternate_examples'``
-#. ``}``
-
 primaryKey
 ~~~~~~~~~~
 
@@ -104,11 +84,6 @@ Example usage:
     class Example extends AppModel {
         var $primaryKey = 'example_id'; // example_id is the field name in the database
     }
-
-
-#. ``class Example extends AppModel {``
-#. ``var $primaryKey = 'example_id'; // example_id is the field name in the database``
-#. ``}``
 
 displayField
 ~~~~~~~~~~~~
@@ -125,11 +100,6 @@ For example, to use the ``username`` field:
     class User extends AppModel {
        var $displayField = 'username';
     }
-
-
-#. ``class User extends AppModel {``
-#. ``var $displayField = 'username';``
-#. ``}``
 
 Multiple field names cannot be combined into a single display
 field. For example, you cannot specify,
@@ -183,14 +153,6 @@ values include:
     $order = "Model.field DESC";
     $order = array("Model.field" => "asc", "Model.field2" => "DESC");
 
-
-#. ``$order = "field"``
-#. ``$order = "Model.field";``
-#. ``$order = "Model.field asc";``
-#. ``$order = "Model.field ASC";``
-#. ``$order = "Model.field DESC";``
-#. ``$order = array("Model.field" => "asc", "Model.field2" => "DESC");``
-
 data
 ~~~~
 
@@ -231,23 +193,6 @@ Example Usage:
         'message' => array('type' => 'text')
     );
 
-
-#. ``var $_schema = array(``
-#. ``'first_name' => array(``
-#. ``'type' => 'string',``
-#. ``'length' => 30``
-#. ``),``
-#. ``'last_name' => array(``
-#. ``'type' => 'string',``
-#. ``'length' => 30``
-#. ``),``
-#. ``'email' => array(``
-#. ``'type' => 'string',``
-#. ``'length' => 30``
-#. ``),``
-#. ``'message' => array('type' => 'text')``
-#. ``);``
-
 validate
 ~~~~~~~~
 
@@ -277,11 +222,6 @@ Example usage for MySQL:
         'name' => "CONCAT(User.first_name, ' ', User.last_name)"
     );
 
-
-#. ``var $virtualFields = array(``
-#. ``'name' => "CONCAT(User.first_name, ' ', User.last_name)"``
-#. ``);``
-
 In subsequent find operations, your User results would contain a
 ``name`` key with the result of the concatenation. It is not
 advisable to create virtual fields with the same names as columns
@@ -305,11 +245,6 @@ Example usage:
     class Example extends AppModel {
        var $name = 'Example';
     }
-
-
-#. ``class Example extends AppModel {``
-#. ``var $name = 'Example';``
-#. ``}``
 
 cacheQueries
 ~~~~~~~~~~~~
@@ -349,11 +284,6 @@ Example usage:
        var $useDbConfig = 'alternate';
     }
 
-
-#. ``class Example extends AppModel {``
-#. ``var $useDbConfig = 'alternate';``
-#. ``}``
-
 useTable
 ~~~~~~~~
 
@@ -371,11 +301,6 @@ Example usage:
        var $useTable = false; // This model does not use a database table
     }
 
-
-#. ``class Example extends AppModel {``
-#. ``var $useTable = false; // This model does not use a database table``
-#. ``}``
-
 Alternatively:
 
 ::
@@ -383,11 +308,6 @@ Alternatively:
     class Example extends AppModel {
        var $useTable = 'exmp'; // This model uses a database table 'exmp'
     }
-
-
-#. ``class Example extends AppModel {``
-#. ``var $useTable = 'exmp'; // This model uses a database table 'exmp'``
-#. ``}``
 
 tablePrefix
 ~~~~~~~~~~~
@@ -406,11 +326,6 @@ Example usage:
        var $tablePrefix = 'alternate_'; // will look for 'alternate_examples'
     }
 
-
-#. ``class Example extends AppModel {``
-#. ``var $tablePrefix = 'alternate_'; // will look for 'alternate_examples'``
-#. ``}``
-
 primaryKey
 ~~~~~~~~~~
 
@@ -425,11 +340,6 @@ Example usage:
     class Example extends AppModel {
         var $primaryKey = 'example_id'; // example_id is the field name in the database
     }
-
-
-#. ``class Example extends AppModel {``
-#. ``var $primaryKey = 'example_id'; // example_id is the field name in the database``
-#. ``}``
 
 displayField
 ~~~~~~~~~~~~
@@ -446,11 +356,6 @@ For example, to use the ``username`` field:
     class User extends AppModel {
        var $displayField = 'username';
     }
-
-
-#. ``class User extends AppModel {``
-#. ``var $displayField = 'username';``
-#. ``}``
 
 Multiple field names cannot be combined into a single display
 field. For example, you cannot specify,
@@ -504,14 +409,6 @@ values include:
     $order = "Model.field DESC";
     $order = array("Model.field" => "asc", "Model.field2" => "DESC");
 
-
-#. ``$order = "field"``
-#. ``$order = "Model.field";``
-#. ``$order = "Model.field asc";``
-#. ``$order = "Model.field ASC";``
-#. ``$order = "Model.field DESC";``
-#. ``$order = array("Model.field" => "asc", "Model.field2" => "DESC");``
-
 data
 ~~~~
 
@@ -552,23 +449,6 @@ Example Usage:
         'message' => array('type' => 'text')
     );
 
-
-#. ``var $_schema = array(``
-#. ``'first_name' => array(``
-#. ``'type' => 'string',``
-#. ``'length' => 30``
-#. ``),``
-#. ``'last_name' => array(``
-#. ``'type' => 'string',``
-#. ``'length' => 30``
-#. ``),``
-#. ``'email' => array(``
-#. ``'type' => 'string',``
-#. ``'length' => 30``
-#. ``),``
-#. ``'message' => array('type' => 'text')``
-#. ``);``
-
 validate
 ~~~~~~~~
 
@@ -598,11 +478,6 @@ Example usage for MySQL:
         'name' => "CONCAT(User.first_name, ' ', User.last_name)"
     );
 
-
-#. ``var $virtualFields = array(``
-#. ``'name' => "CONCAT(User.first_name, ' ', User.last_name)"``
-#. ``);``
-
 In subsequent find operations, your User results would contain a
 ``name`` key with the result of the concatenation. It is not
 advisable to create virtual fields with the same names as columns
@@ -626,11 +501,6 @@ Example usage:
     class Example extends AppModel {
        var $name = 'Example';
     }
-
-
-#. ``class Example extends AppModel {``
-#. ``var $name = 'Example';``
-#. ``}``
 
 cacheQueries
 ~~~~~~~~~~~~

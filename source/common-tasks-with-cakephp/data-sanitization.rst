@@ -25,13 +25,6 @@ before the controller class definition):
         ...
     }
 
-
-#. ``App::import('Sanitize');``
-#. ``class MyController extends AppController {``
-#. ``...``
-#. ``...``
-#. ``}``
-
 Once you've done that, you can make calls to Sanitize statically.
 
 4.2 Data Sanitization
@@ -60,12 +53,5 @@ before the controller class definition):
         ...
         ...
     }
-
-
-#. ``App::import('Sanitize');``
-#. ``class MyController extends AppController {``
-#. ``...``
-#. ``...``
-#. ``}``
 
 Once you've done that, you can make calls to Sanitize statically.

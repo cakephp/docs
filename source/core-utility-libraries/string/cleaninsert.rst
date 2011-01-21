@@ -21,15 +21,6 @@ You can use the following options in the options array:
         'after' => ''
     );
 
-
-#. ``$options = array(``
-#. ``'clean' => array(``
-#. ``'method' => 'text', // or html``
-#. ``),``
-#. ``'before' => '',``
-#. ``'after' => ''``
-#. ``);``
-
 8.3.4 cleanInsert
 -----------------
 
@@ -52,12 +43,3 @@ You can use the following options in the options array:
         'before' => '',
         'after' => ''
     );
-
-
-#. ``$options = array(``
-#. ``'clean' => array(``
-#. ``'method' => 'text', // or html``
-#. ``),``
-#. ``'before' => '',``
-#. ``'after' => ''``
-#. ``);``

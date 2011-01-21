@@ -11,9 +11,6 @@ object. To get a model's DataSource from within the model, use:
 
         $dataSource = $this->getDataSource();
 
-
-#. ``$dataSource = $this->getDataSource();``
-
 You can then use the data source to start, commit, or roll back
 transactions.
 
@@ -28,16 +25,6 @@ transactions.
         } else {
             $dataSource->rollback($this);
         }
-
-
-#. ``$dataSource->begin($this);``
-#. ````
-#. ``//Perform some tasks``
-#. ``if(/*all's well*/) {``
-#. ``$dataSource->commit($this);``
-#. ``} else {``
-#. ``$dataSource->rollback($this);``
-#. ``}``
 
 Nested transactions are currently not supported. If a nested
 transaction is started, a commit will return false on the parent
@@ -56,9 +43,6 @@ object. To get a model's DataSource from within the model, use:
 
         $dataSource = $this->getDataSource();
 
-
-#. ``$dataSource = $this->getDataSource();``
-
 You can then use the data source to start, commit, or roll back
 transactions.
 
@@ -73,16 +57,6 @@ transactions.
         } else {
             $dataSource->rollback($this);
         }
-
-
-#. ``$dataSource->begin($this);``
-#. ````
-#. ``//Perform some tasks``
-#. ``if(/*all's well*/) {``
-#. ``$dataSource->commit($this);``
-#. ``} else {``
-#. ``$dataSource->rollback($this);``
-#. ``}``
 
 Nested transactions are currently not supported. If a nested
 transaction is started, a commit will return false on the parent

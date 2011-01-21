@@ -47,13 +47,6 @@ $scaffold variable:
     
     ?>
 
-
-#. ``<?php``
-#. ``class CategoriesController extends AppController {``
-#. ``var $scaffold;``
-#. ``}``
-#. ``?>``
-
 Assuming you’ve created even the most basic Category model class
 file (in /app/models/category.php), you’re ready to go. Visit
 http://example.com/categories to see your new scaffold.
@@ -81,12 +74,6 @@ or names from the Group table in the New User form.
     // In user.php
     var $belongsTo = 'Group';
 
-
-#. ``// In group.php``
-#. ``var $hasMany = 'User';``
-#. ``// In user.php``
-#. ``var $belongsTo = 'Group';``
-
 If you’d rather see something besides an ID (like the user’s first
 name), you can set the $displayField variable in the model. Let’s
 set the $displayField variable in our User class so that users
@@ -104,14 +91,6 @@ in many instances.
     }
     
     ?>
-
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $displayField = 'first_name';``
-#. ``}``
-#. ``?>``
 
 3.12 Scaffolding
 ----------------
@@ -162,13 +141,6 @@ $scaffold variable:
     
     ?>
 
-
-#. ``<?php``
-#. ``class CategoriesController extends AppController {``
-#. ``var $scaffold;``
-#. ``}``
-#. ``?>``
-
 Assuming you’ve created even the most basic Category model class
 file (in /app/models/category.php), you’re ready to go. Visit
 http://example.com/categories to see your new scaffold.
@@ -196,12 +168,6 @@ or names from the Group table in the New User form.
     // In user.php
     var $belongsTo = 'Group';
 
-
-#. ``// In group.php``
-#. ``var $hasMany = 'User';``
-#. ``// In user.php``
-#. ``var $belongsTo = 'Group';``
-
 If you’d rather see something besides an ID (like the user’s first
 name), you can set the $displayField variable in the model. Let’s
 set the $displayField variable in our User class so that users
@@ -219,11 +185,3 @@ in many instances.
     }
     
     ?>
-
-
-#. ``<?php``
-#. ``class User extends AppModel {``
-#. ``var $name = 'User';``
-#. ``var $displayField = 'first_name';``
-#. ``}``
-#. ``?>``

@@ -10,10 +10,6 @@ following:
     $this->Session->setFlash('Good-Bye');
     $this->redirect($this->Auth->logout());
 
-
-#. ``$this->Session->setFlash('Good-Bye');``
-#. ``$this->redirect($this->Auth->logout());``
-
 This sets a Session flash message and logs out the User using
 Auth's logout method. Auth's logout method basically deletes the
 Auth Session Key and returns a url that can be used in a redirect.
@@ -31,10 +27,6 @@ following:
 
     $this->Session->setFlash('Good-Bye');
     $this->redirect($this->Auth->logout());
-
-
-#. ``$this->Session->setFlash('Good-Bye');``
-#. ``$this->redirect($this->Auth->logout());``
 
 This sets a Session flash message and logs out the User using
 Auth's logout method. Auth's logout method basically deletes the

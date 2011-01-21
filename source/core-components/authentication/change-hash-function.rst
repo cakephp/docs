@@ -11,9 +11,6 @@ only parameter.
 
     Security::setHash('md5'); // or sha1 or sha256. 
 
-
-#. ``Security::setHash('md5'); // or sha1 or sha256.``
-
 The Security class uses a salt value (set in /app/config/core.php)
 to hash the password.
 
@@ -37,13 +34,6 @@ so:
        parent::beforeFilter();
     }
 
-
-#. ``function beforeFilter() {``
-#. ``$this->Auth->authenticate = ClassRegistry::init('User');``
-#. ``...``
-#. ``parent::beforeFilter();``
-#. ``}``
-
 With the above code, the User model hashPasswords() method will be
 called each time Cake calls AuthComponent::hashPasswords(). Here's
 an example hashPassword function, appropriate if you've already got
@@ -60,17 +50,6 @@ a users table full of plain md5-hashed passwords:
             return $data;
         }
     }
-
-
-#. ``class User extends AppModel {``
-#. ``function hashPasswords($data) {``
-#. ``if (isset($data['User']['password'])) {``
-#. ``$data['User']['password'] = md5($data['User']['password']);``
-#. ``return $data;``
-#. ``}``
-#. ``return $data;``
-#. ``}``
-#. ``}``
 
 5.2.4 Change Hash Function
 --------------------------
@@ -85,9 +64,6 @@ only parameter.
 
     Security::setHash('md5'); // or sha1 or sha256. 
 
-
-#. ``Security::setHash('md5'); // or sha1 or sha256.``
-
 The Security class uses a salt value (set in /app/config/core.php)
 to hash the password.
 
@@ -111,13 +87,6 @@ so:
        parent::beforeFilter();
     }
 
-
-#. ``function beforeFilter() {``
-#. ``$this->Auth->authenticate = ClassRegistry::init('User');``
-#. ``...``
-#. ``parent::beforeFilter();``
-#. ``}``
-
 With the above code, the User model hashPasswords() method will be
 called each time Cake calls AuthComponent::hashPasswords(). Here's
 an example hashPassword function, appropriate if you've already got
@@ -134,14 +103,3 @@ a users table full of plain md5-hashed passwords:
             return $data;
         }
     }
-
-
-#. ``class User extends AppModel {``
-#. ``function hashPasswords($data) {``
-#. ``if (isset($data['User']['password'])) {``
-#. ``$data['User']['password'] = md5($data['User']['password']);``
-#. ``return $data;``
-#. ``}``
-#. ``return $data;``
-#. ``}``
-#. ``}``
