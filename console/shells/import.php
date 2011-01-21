@@ -33,6 +33,7 @@ class ImportShell extends Shell {
 
 		$filename = $this->_fileName($fullContents);
 		$contents = $this->_fileContents($fullContents);
+		$this->out('Writing ' . $filename);
 		exec('mkdir -p ' . dirname($filename));
 		file_put_contents($filename, $contents);
 	}
@@ -49,7 +50,13 @@ class ImportShell extends Shell {
 		if (!$crumbs || !trim($crumbs[1])) {
 			return 'source/index.rst';
 		}
-		return 'source/' . strtolower(str_replace(array(' ', '&raquo;', '&amp;'), array('-', '/', 'and'), strip_tags($crumbs[1]))) . '.rst';
+		$input = strip_tags(str_replace(array('&raquo;', '&amp;'), array('/', 'and'), $crumbs[1]));
+
+		$pattern = '\x00-\x1f\x26\x3c\x7f-\x9f\x{d800}-\x{dfff}\x{fffe}-\x{ffff}';
+		$pattern .= preg_quote(' \'"?!<>\(\).$:;?@=+&%\#', '@');
+
+		$return = preg_replace('@[' . $pattern . ']@Su', '-', $input);
+		return 'source/' . trim(mb_strtolower(preg_replace('/-+/', '-', $return), 'UTF-8'), '-') . '.rst';
 	}
 
 	protected function _fileContents($contents) {
