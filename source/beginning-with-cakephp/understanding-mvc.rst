@@ -8,7 +8,7 @@ CakePHP follows the MVC software design pattern. Programming using MVC separates
 2. The View renders a presentation of model data
 3. The Controller handles and routes requests made by the client
 
-.. figure:: /_static/img/basic_mvc.png
+.. figure:: ../_static/img/basic_mvc.png
     :alt: Basic MVC flow chart
     
     Figure: 1: A Basic MVC Request
