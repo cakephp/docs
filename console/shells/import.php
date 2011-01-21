@@ -68,7 +68,14 @@ class ImportShell extends Shell {
 	}
 
 	protected function _convertHtmlToReST($html) {
-		#@TODO
+		$input = TMP . 'sample.html';
+		$output = TMP . 'sample.rst';
+
+		file_put_contents($input, $html);
+		exec("pandoc -s --from=html --to=rst --output=$output $input");
+		if (file_exists($output)) {
+			return file_get_contents($output);
+		}
 		return $html;
 	}
 }
