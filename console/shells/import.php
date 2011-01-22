@@ -110,17 +110,19 @@ class ImportShell extends Shell {
 
 		$didSomething = false;
 		foreach($matches[1] as $i => $url) {
-			if (empty($this->_referenceMap[$url])) {
-				continue;
+			if (!empty($this->_referenceMap[$url])) {
+				$didSomething = true;
+				$contents = str_replace($matches[0][$i], ':doc:`/' . $this->_referenceMap[$url] . '`', $contents);
+			} else {
+				$replace = str_replace('</', '<http://docs.cakephp.org/', $matches[0][$i]);
+				$contents = str_replace($matches[0][$i], $replace, $contents);
 			}
-			$contents = str_replace($matches[0][$i], ':doc:`/' . $this->_referenceMap[$url] . '`', $contents);
-			$didSomething = true;
 		}
 
 		if ($didSomething) {
 			$this->out('Rewrote internal links in ' . $reference);
 			return file_put_contents("source/$reference.rst", $contents);
 		}
-		$this->out('Couldn\'t identifity internal references in ' . $reference);
+		$this->out('Couldn\'t identifity any internal references in ' . $reference);
 	}
 }
