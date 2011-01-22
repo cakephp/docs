@@ -7,8 +7,7 @@ class ImportShell extends Shell {
 
 	protected $_revisit = array();
 
-	protected $_urlMap = array();
-
+	protected $_referenceMap = array();
 
 	public function main() {
 		App::import('Core', 'HttpSocket');
@@ -19,7 +18,9 @@ class ImportShell extends Shell {
 			$this->_crawl($url);
 		}
 
+		$this->hr();
 		foreach($this->_revisit as $reference) {
+			$this->_replaceXRefs($reference);
 		}
 	}
 
@@ -38,7 +39,11 @@ class ImportShell extends Shell {
 		$this->_addNextPage($fullContents);
 
 		$reference = $this->_reference($fullContents);
-		$this->_urlMap[preg_replace('@/[^/]*$@', '', $url)] = $reference;
+		$foundUrl = preg_replace('@/[^/]*$@', '', $url);
+		if (!$foundUrl) {
+			$foundUrl = '/';
+		}
+		$this->_referenceMap[$foundUrl] = $reference;
 
 		$filename = 'source/' . $reference . '.rst';
 
@@ -96,5 +101,26 @@ class ImportShell extends Shell {
 			return file_get_contents($output);
 		}
 		return $html;
+	}
+
+	protected function _replaceXRefs($reference) {
+		$contents = file_get_contents("source/$reference.rst");
+
+		preg_match_all('@`.*?<(/view/\d+).*`_@', $contents, $matches);
+
+		$didSomething = false;
+		foreach($matches[1] as $i => $url) {
+			if (empty($this->_referenceMap[$url])) {
+				continue;
+			}
+			$contents = str_replace($matches[0][$i], ':doc:`/' . $this->_referenceMap[$url] . '`', $contents);
+			$didSomething = true;
+		}
+
+		if ($didSomething) {
+			$this->out('Rewrote internal links in ' . $reference);
+			return file_put_contents("source/$reference.rst", $contents);
+		}
+		$this->out('Couldn\'t identifity internal references in ' . $reference);
 	}
 }
