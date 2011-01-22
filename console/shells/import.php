@@ -17,9 +17,9 @@ class ImportShell extends Shell {
 		while($this->_urlStack) {
 			$url = array_shift($this->_urlStack);
 			$this->_crawl($url);
-			if (!$this->_urlStack) {
-				$this->_urlStack = $this->_revisit;
-			}
+		}
+
+		foreach($this->_revisit as $reference) {
 		}
 	}
 
@@ -42,11 +42,8 @@ class ImportShell extends Shell {
 
 		$filename = 'source/' . $reference . '.rst';
 
-		if (!$contents = $this->_fileContents($fullContents)) {
-			$this->_revisit[] = $url;
-			return;
-		}
 		$this->out('Writing ' . $filename);
+		$contents = $this->_fileContents($fullContents, $reference);
 		exec('mkdir -p ' . dirname($filename));
 		file_put_contents($filename, $contents);
 	}
@@ -72,21 +69,18 @@ class ImportShell extends Shell {
 		return trim(mb_strtolower(preg_replace('/-+/', '-', $return), 'UTF-8'), '-');
 	}
 
-	protected function _fileContents($contents) {
+	protected function _fileContents($contents, $reference) {
 		$contents = preg_replace('@<div class="(options|comment)">.*?</div>@s', '', $contents);
 		$contents = preg_replace('@<a href="#.*?">.*?</a>@s', '', $contents);
 		$contents = preg_replace('@<ol class="code".*?>.*?</ol>@s', '', $contents);
-		preg_match('@<div class="nodes view">(.*?)<div class="node-nav">@s', $contents, $contents);
-		$contents = $contents[1];
+		preg_match('@<div class="nodes view">(.*?)<div class="node-nav">@s', $contents, $node);
+		if ($node) {
+			$contents = $node[1];
+		}
 
 		preg_match_all('@<a href="(/view/\d+)/?.*?">(.*?)</a>@s', $contents, $links);
 		if ($links[1]) {
-			foreach($links[1] as $i => $link) {
-				if (empty($this->_urlMap[$link])) {
-					return false;
-				}
-			}
-			$contents = str_replace($links[0][$i], '<a href="/' . $this->_urlMap[$link] . '">' . $links[2][$i] . '</a>', $contents);
+			$this->_revisit[] = $reference;
 		}
 
 		return $this->_convertHtmlToReST($contents);
