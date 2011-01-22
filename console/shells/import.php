@@ -106,23 +106,20 @@ class ImportShell extends Shell {
 	protected function _replaceXRefs($reference) {
 		$contents = file_get_contents("source/$reference.rst");
 
-		preg_match_all('@`.*?<(/view/\d+).*`_@', $contents, $matches);
+		preg_match_all('@`.*?<(/view/\d+).*?`_@', $contents, $matches);
 
-		$didSomething = false;
+		$this->out('Rewriting internal links in ' . $reference);
+
 		foreach($matches[1] as $i => $url) {
 			if (!empty($this->_referenceMap[$url])) {
-				$didSomething = true;
 				$contents = str_replace($matches[0][$i], ':doc:`/' . $this->_referenceMap[$url] . '`', $contents);
 			} else {
+				$this->out('No reference found for ' . $url);
 				$replace = str_replace('</', '<http://docs.cakephp.org/', $matches[0][$i]);
 				$contents = str_replace($matches[0][$i], $replace, $contents);
 			}
 		}
 
-		if ($didSomething) {
-			$this->out('Rewrote internal links in ' . $reference);
-			return file_put_contents("source/$reference.rst", $contents);
-		}
-		$this->out('Couldn\'t identifity any internal references in ' . $reference);
+		return file_put_contents("source/$reference.rst", $contents);
 	}
 }
