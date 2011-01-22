@@ -29,35 +29,3 @@ transactions.
 Nested transactions are currently not supported. If a nested
 transaction is started, a commit will return false on the parent
 transaction.
-
-3.7.11 Transactions
--------------------
-
-To perform a transaction, a model's tables must be of a type that
-supports transactions.
-
-All transaction methods must be performed on a model's DataSource
-object. To get a model's DataSource from within the model, use:
-
-::
-
-        $dataSource = $this->getDataSource();
-
-You can then use the data source to start, commit, or roll back
-transactions.
-
-::
-
-        $dataSource->begin($this);
-        
-        //Perform some tasks
-    
-        if(/*all's well*/) {
-            $dataSource->commit($this);
-        } else {
-            $dataSource->rollback($this);
-        }
-
-Nested transactions are currently not supported. If a nested
-transaction is started, a commit will return false on the parent
-transaction.
