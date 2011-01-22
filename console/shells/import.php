@@ -5,6 +5,11 @@ class ImportShell extends Shell {
 
 	protected $_crawled = array();
 
+	protected $_revisit = array();
+
+	protected $_urlMap = array();
+
+
 	public function main() {
 		App::import('Core', 'HttpSocket');
 		$this->Socket = new HttpSocket();
@@ -12,27 +17,35 @@ class ImportShell extends Shell {
 		while($this->_urlStack) {
 			$url = array_shift($this->_urlStack);
 			$this->_crawl($url);
+			if (!$this->_urlStack) {
+				$this->_urlStack = $this->_revisit;
+			}
 		}
 	}
 
 	protected function _crawl($url = '') {
 		$this->_crawled[] = $url;
 		$this->out('Crawling ' . $url);
-		if ($url[0] === '/') {
-			$url = 'http://book.cakephp.org' . $url;
-		}
 		$cacheFile = TMP . '/stash/' . md5($url);
 		if (file_exists($cacheFile)) {
 			$fullContents = file_get_contents($cacheFile);
 		} else {
-			$fullContents = $this->Socket->get($url);
+			$fullContents = $this->Socket->get('http://book.cakephp.org' . $url);
 			exec('mkdir -p ' . dirname($cacheFile));
 			file_put_contents($cacheFile, $fullContents);
 		}
+
 		$this->_addNextPage($fullContents);
 
-		$filename = $this->_fileName($fullContents);
-		$contents = $this->_fileContents($fullContents);
+		$reference = $this->_reference($fullContents);
+		$this->_urlMap[preg_replace('@/[^/]*$@', '', $url)] = $reference;
+
+		$filename = 'source/' . $reference . '.rst';
+
+		if (!$contents = $this->_fileContents($fullContents)) {
+			$this->_revisit[] = $url;
+			return;
+		}
 		$this->out('Writing ' . $filename);
 		exec('mkdir -p ' . dirname($filename));
 		file_put_contents($filename, $contents);
@@ -45,10 +58,10 @@ class ImportShell extends Shell {
 		}
 	}
 
-	protected function _fileName($contents) {
+	protected function _reference($contents) {
 		preg_match('@<div class="crumbs">\s*<a href="/.*?">.*?</a>&raquo;(.*?)</div>@s', $contents, $crumbs);
 		if (!$crumbs || !trim($crumbs[1])) {
-			return 'source/index.rst';
+			return 'index';
 		}
 		$input = strip_tags(str_replace(array('&raquo;', '&amp;'), array('/', 'and'), $crumbs[1]));
 
@@ -56,7 +69,7 @@ class ImportShell extends Shell {
 		$pattern .= preg_quote(' \'"?!<>\(\).$:;?@=+&%\#', '@');
 
 		$return = preg_replace('@[' . $pattern . ']@Su', '-', $input);
-		return 'source/' . trim(mb_strtolower(preg_replace('/-+/', '-', $return), 'UTF-8'), '-') . '.rst';
+		return trim(mb_strtolower(preg_replace('/-+/', '-', $return), 'UTF-8'), '-');
 	}
 
 	protected function _fileContents($contents) {
@@ -64,6 +77,17 @@ class ImportShell extends Shell {
 		$contents = preg_replace('@<a href="#.*?">.*?</a>@s', '', $contents);
 		$contents = preg_replace('@<ol class="code".*?>.*?</ol>@s', '', $contents);
 		preg_match('@<div class="nodes view">(.*?)<div class="node-nav">@s', $contents, $contents);
+		$contents = $contents[1];
+
+		preg_match_all('@<a href="(/view/\d+)/?.*?">(.*?)</a>@s', $contents, $links);
+		if ($links[1]) {
+			foreach($links[1] as $i => $link) {
+				if (empty($this->_urlMap[$link])) {
+					return false;
+				}
+			}
+			$contents = str_replace($links[0][$i], '<a href="/' . $this->_urlMap[$link] . '">' . $links[2][$i] . '</a>', $contents);
+		}
 
 		return $this->_convertHtmlToReST($contents);
 	}
