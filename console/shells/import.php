@@ -45,7 +45,7 @@ class ImportShell extends Shell {
 		}
 		$this->_referenceMap[$foundUrl] = $reference;
 
-		$filename = 'source/' . $reference . '.rst';
+		$filename = 'import/' . $reference . '.rst';
 
 		$this->out('Writing ' . $filename);
 		$contents = $this->_fileContents($fullContents, $reference);
@@ -104,7 +104,7 @@ class ImportShell extends Shell {
 	}
 
 	protected function _replaceXRefs($reference) {
-		$contents = file_get_contents("source/$reference.rst");
+		$contents = file_get_contents("import/$reference.rst");
 
 		preg_match_all('@`.*?<(/view/\d+).*?`_@', $contents, $matches);
 
@@ -120,6 +120,6 @@ class ImportShell extends Shell {
 			}
 		}
 
-		return file_put_contents("source/$reference.rst", $contents);
+		return file_put_contents("import/$reference.rst", $contents);
 	}
 }
