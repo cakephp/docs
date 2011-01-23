@@ -96,5 +96,5 @@ In this file, extend **TestSuite** and import test as follows:
     ?> 
 
 The code above will group all test cases found in the
-**/app/tests/cases/models/** folder. To add an individual file, use
-**TestManager::addTestFile**($this, filename).
+``/app/tests/cases/models/`` folder. To add an individual file, use
+``TestManager::addTestFile($this, filename)``.
