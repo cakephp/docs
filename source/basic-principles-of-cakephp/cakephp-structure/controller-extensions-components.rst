@@ -1,5 +1,5 @@
-2.1.1 Controller Extensions ("Components")
-------------------------------------------
+Controller Extensions ("Components")
+####################################
 
 A Component is a class that aids in controller logic. If you have
 some logic you want to share between controllers (or applications),

@@ -1,5 +1,5 @@
-2.1.4 Application Extensions
-----------------------------
+Application Extensions
+######################
 
 Controllers, helpers and models each have a parent class you can
 use to define application-wide changes. AppController (located at

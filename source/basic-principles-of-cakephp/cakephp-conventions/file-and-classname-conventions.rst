@@ -1,5 +1,5 @@
-2.4.1 File and Classname Conventions
-------------------------------------
+File and Classname Conventions
+###############################
 
 In general, filenames are underscored while classnames are
 CamelCased. So if you have a class **MyNiftyClass**, then in Cake,

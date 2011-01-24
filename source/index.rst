@@ -10,6 +10,7 @@ Contents:
 
 .. toctree::
    :glob:
+   :numbered:
 
    intro
    basic-principles-of-cakephp/index

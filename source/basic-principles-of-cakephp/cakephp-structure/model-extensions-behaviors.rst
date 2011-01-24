@@ -1,5 +1,5 @@
-2.1.3 Model Extensions ("Behaviors")
-------------------------------------
+Model Extensions ("Behaviors")
+###############################
 
 Similarly, Behaviors work as ways to add common functionality
 between models. For example, if you store user data in a tree

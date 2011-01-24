@@ -1,5 +1,5 @@
-2.4.3 Controller Conventions
-----------------------------
+Controller Conventions
+######################
 
 Controller classnames are plural, CamelCased, and end in
 ``Controller``. ``PeopleController`` and

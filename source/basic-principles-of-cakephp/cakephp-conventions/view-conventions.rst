@@ -1,5 +1,5 @@
-2.4.4 View Conventions
-----------------------
+View Conventions
+################
 
 View template files are named after the controller functions they
 display, in an underscored form. The getReady() function of the

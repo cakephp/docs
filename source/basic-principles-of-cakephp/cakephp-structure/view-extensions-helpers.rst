@@ -1,5 +1,5 @@
-2.1.2 View Extensions ("Helpers")
----------------------------------
+View Extensions ("Helpers")
+###########################
 
 A Helper is a class that aids in view logic. Much like a component
 used among controllers, helpers allow presentational logic to be

@@ -1,5 +1,5 @@
-2.4.2 Model and Database Conventions
-------------------------------------
+Model and Database Conventions
+###############################
 
 Model classnames are singular and CamelCased. Person, BigPerson,
 and ReallyBigPerson are all examples of conventional model names.

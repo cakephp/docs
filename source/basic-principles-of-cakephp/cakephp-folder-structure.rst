@@ -1,5 +1,5 @@
-2.3 CakePHP Folder Structure
-----------------------------
+CakePHP Folder Structure
+########################
 
 After you've downloaded and extracted CakePHP, these are the files
 and folders you should see:
