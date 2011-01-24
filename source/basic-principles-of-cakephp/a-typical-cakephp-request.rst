@@ -1,5 +1,5 @@
-2.2 A Typical CakePHP Request
------------------------------
+A Typical CakePHP Request
+#########################
 
 We’ve covered the basic ingredients in CakePHP, so let’s look at
 how objects work together to complete a basic request. Continuing

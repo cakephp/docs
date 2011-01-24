@@ -1,5 +1,12 @@
-2 Basic Principles of CakePHP
------------------------------
+Basic Principles of CakePHP
+###########################
+
+.. toctree::
+
+    a-typical-cakephp-request
+    cakephp-conventions/index
+    cakephp-folder-structure
+    cakephp-structure/index
 
 The CakePHP framework provides a robust base for your application.
 It can handle every aspect, from the user’s initial request all the

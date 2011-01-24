@@ -12,8 +12,8 @@ Contents:
    :glob:
 
    intro
-   basic-principles-of-cakephp
-   basic-principles-of-cakephp/**
+   basic-principles-of-cakephp/index
+   basic-principles-of-cakephp/cakephp-conventions/index
    beginning-with-cakephp
    beginning-with-cakephp/**
    common-tasks-with-cakephp

@@ -1,5 +1,12 @@
-2.1 CakePHP Structure
----------------------
+CakePHP Structure
+#################
+
+.. toctree::
+
+    application-extensions
+    controller-extensions-components
+    model-extensions-behaviors
+    view-extensions-helpers
 
 CakePHP features Controller, Model, and View classes, but it also
 features some additional classes and objects that make development

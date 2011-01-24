@@ -1,5 +1,12 @@
-2.4 CakePHP Conventions
------------------------
+CakePHP Conventions
+###################
+
+.. toctree::
+    
+    controller-conventions
+    file-and-classname-conventions
+    model-and-database-conventions
+    view-conventions
 
 We are big fans of convention over configuration. While it takes a
 bit of time to learn CakePHP’s conventions, you save time in the
