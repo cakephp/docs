@@ -66,4 +66,4 @@ getting used to, but we're confident that once you've built your
 first application using CakePHP, you won't want to do it any other
 way.
 
-.. |Figure 1| image:: /img/basic_mvc.png
+.. |Figure 1| image:: /_static/img/basic_mvc.png
