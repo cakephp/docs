@@ -14,7 +14,7 @@ Contents:
 
    intro
    basic-principles-of-cakephp/index
-   basic-principles-of-cakephp/cakephp-conventions/index
+   basic-principles-of-cakephp/cakephp-conventions
    beginning-with-cakephp
    beginning-with-cakephp/**
    common-tasks-with-cakephp

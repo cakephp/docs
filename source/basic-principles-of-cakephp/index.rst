@@ -4,7 +4,7 @@ Basic Principles of CakePHP
 .. toctree::
 
     a-typical-cakephp-request
-    cakephp-conventions/index
+    cakephp-conventions
     cakephp-folder-structure
     cakephp-structure/index
 
