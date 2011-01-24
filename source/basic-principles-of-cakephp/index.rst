@@ -6,7 +6,7 @@ Basic Principles of CakePHP
     a-typical-cakephp-request
     cakephp-conventions
     cakephp-folder-structure
-    cakephp-structure/index
+    cakephp-structure
 
 The CakePHP framework provides a robust base for your application.
 It can handle every aspect, from the user’s initial request all the
