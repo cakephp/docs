@@ -1,5 +1,5 @@
-4.3 Error Handling
-------------------
+Error Handling
+##############
 
 In the event of an unrecoverable error in your application, it is
 common to stop processing and show an error page to the user. To
