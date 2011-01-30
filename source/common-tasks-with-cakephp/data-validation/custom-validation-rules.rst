@@ -1,5 +1,5 @@
-4.1.5 Custom Validation Rules
------------------------------
+Custom Validation Rules
+=======================
 
 If you haven’t found what you need thus far, you can always create
 your own validation rules. There are two ways you can do this: by

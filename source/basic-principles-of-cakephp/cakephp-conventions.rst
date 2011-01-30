@@ -83,6 +83,7 @@ therefore /red\_apples/go\_pick is the correct form to access the
 For more information on CakePHP URLs and parameter handling, see
 :doc:`/developing-with-cakephp/configuration/routes-configuration`.
 
+.. _file-and-classname-conventions:
 
 File and Classname Conventions
 ==============================

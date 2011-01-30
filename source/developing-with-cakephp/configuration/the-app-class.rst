@@ -10,7 +10,8 @@ that a class is only loaded once, that the appropriate parent class
 has been loaded, and resolves paths automatically in most cases.
 
 Make sure you follow the
-:doc:`/basic-principles-of-cakephp/cakephp-conventions/file-and-classname-conventions`.
+:ref:`file-and-classname-conventions`.
+
 Using App::import()
 ~~~~~~~~~~~~~~~~~~~
 

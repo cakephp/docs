@@ -1,4 +1,4 @@
-4.1.2 One Rule Per Field
+One Rule Per Field
 ------------------------
 
 This definition technique allows for better control of how the
@@ -34,7 +34,7 @@ single value or an array. The specified 'rule' may be the name of a
 method in your model, a method of the core Validation class, or a
 regular expression. For more information on the rules available by
 default, see
-:doc:`/common-tasks-with-cakephp/data-validation/core-validation-rules`.
+:ref:`core-validation-rules`.
 
 If the rule does not require any parameters, 'rule' can be a single
 value e.g.:
