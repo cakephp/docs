@@ -3,6 +3,8 @@
 
 These methods can be used to remove data.
 
+.. _model-delete:
+
 delete
 ~~~~~~
 
@@ -19,6 +21,8 @@ Recipe records (User 'hasMany' or 'hasAndBelongsToMany' Recipes):
    deleted if the models dependent-value is set to true.
 -  if $cascade is set to false, the Recipe records will remain
    after the User has been deleted.
+
+.. _model-deleteall:
 
 deleteAll
 ~~~~~~~~~

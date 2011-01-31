@@ -1,5 +1,5 @@
-6.2 Containable
----------------
+Containable
+###########
 
 A new addition to the CakePHP 1.2 core is the
 ``ContainableBehavior``. This model behavior allows you to filter
@@ -29,6 +29,8 @@ You can also attach the behavior on the fly:
 ::
 
     $this->Post->Behaviors->attach('Containable');
+
+.. _using-containable:
 
 Using Containable
 ~~~~~~~~~~~~~~~~~
@@ -271,8 +273,7 @@ by Daniel:
                     )
             )
 
-Additional filtering can be performed by supplying the standard
-``<a href="/view/66/models#find-449">Model->find()</a>`` options:
+Additional filtering can be performed by supplying the standard :ref:`model-find` options:
 
 ::
 
@@ -362,3 +363,23 @@ non-aggregate fields, try disabling the ``autoFields`` setting.
 ::
 
     $this->Post->Behaviors->attach('Containable', array('autoFields' => false));
+
+Using Containable with pagination
+=================================
+
+By including the 'contain' parameter in the ``$paginate`` property
+it will apply to both the find('count') and the find('all') done on
+the model
+
+See the section :ref:`using-containable` for further details.
+
+Here's an example of how to contain associations when paginating.
+
+::
+
+    $this->paginate['User'] = array(
+        'contain' => array('Profile', 'Account'),
+        'order' => 'User.username'
+    );
+
+    $users = $this->paginate('User');

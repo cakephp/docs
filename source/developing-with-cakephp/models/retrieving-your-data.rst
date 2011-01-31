@@ -1,6 +1,8 @@
 3.7.3 Retrieving Your Data
 --------------------------
 
+.. _model-find:
+
 find
 ~~~~
 
@@ -37,6 +39,8 @@ own model methods
 
 More information about model callbacks is available
 :doc:`/developing-with-cakephp/models/callback-methods`
+
+.. _model-find-first:
 
 find('first')
 ^^^^^^^^^^^^^
@@ -87,6 +91,8 @@ returned from ``find('first')`` call is of the form:
 
 There are no additional parameters used by ``find('first')``.
 
+.. _model-find-count:
+
 find('count')
 ^^^^^^^^^^^^^
 
@@ -114,6 +120,8 @@ only need to specify fields for a DISTINCT count (since otherwise,
 the count is always the same - dictated by the conditions).
 
 There are no additional parameters used by ``find('count')``.
+
+.. _model-find-all:
 
 find('all')
 ^^^^^^^^^^^
@@ -169,6 +177,8 @@ form:
     )
 
 There are no additional parameters used by ``find('all')``.
+
+.. _model-find-list:
 
 find('list')
 ^^^^^^^^^^^^
@@ -277,6 +287,8 @@ something like this:
     
     )
 
+.. _model-find-threaded:
+
 find('threaded')
 ^^^^^^^^^^^^^^^^
 
@@ -372,6 +384,8 @@ inbuilt requirement of this method for the top result to be
 returned first.
 
 There are no additional parameters used by ``find('threaded')``.
+
+.. _model-find-neighbors:
 
 find('neighbors')
 ^^^^^^^^^^^^^^^^^
