@@ -3,7 +3,7 @@
 
 Many of the core components require configuration. Some examples of
 components requiring configuration are
-:doc:`/core-components/authentication`, :doc:`/core-components/cookies`
+:doc:`/core-components/authentication`, :doc:`/core-components/cookie`
 and :doc:`/core-components/email`. Configuration for these
 components, and for components in general, is usually done in the
 ``$components`` array or your controller's ``beforeFilter()``
