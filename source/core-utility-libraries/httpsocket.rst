@@ -88,3 +88,8 @@ and default settings:
         'raw' => null,
         'cookies' => array()
     );
+
+
+.. todo:: 
+
+	This class changed quite a bit in 2.0, update the docs, and include all the missing methods + examples.

@@ -49,4 +49,5 @@ slug
 
 
 .. todo::
+
 	Add how to customize inflections, add slug mappings.
