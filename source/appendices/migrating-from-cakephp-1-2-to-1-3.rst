@@ -591,9 +591,8 @@ being sorted, either asc or desc.
    create hidden fieldset elements. Instead they create hidden div
    elements. This improves validation with HTML4.
 
-Also be sure to check the
-:doc:`/core-helpers/form/1-3-improvements` for
-additional changes and new features in the FormHelper.
+Also be sure to check the :ref:`form-improvements-1-3` for additional changes and 
+new features in the FormHelper.
 
 **HtmlHelper**
 

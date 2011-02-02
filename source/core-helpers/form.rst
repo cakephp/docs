@@ -1561,6 +1561,8 @@ textarea should be escaped. Defaults to ``true``.
     echo $this->Form->input('notes', array('type' => 'textarea', 'escape' => false);
     ?>
 
+.. _form-improvements-1-3:
+
 1.3 improvements
 ================
 

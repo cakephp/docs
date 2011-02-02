@@ -1,5 +1,5 @@
-3.12 Scaffolding
-----------------
+Scaffolding
+###########
 
 Application scaffolding is a technique that allows a developer to
 define and create a basic application that can create, retrieve,
@@ -84,10 +84,76 @@ in many instances.
 ::
 
     <?php
-    
+
     class User extends AppModel {
         var $name = 'User';
         var $displayField = 'first_name';
     }
-    
+
     ?>
+
+
+Creating a simple admin interface with scaffolding
+==================================================
+
+If you have enabled admin routing in your app/config/core.php, with
+``Configure::write('Routing.prefixes', array('admin'));`` you can
+use scaffolding to generate an admin interface.
+
+Once you have enabled admin routing assign your admin prefix to the
+scaffolding variable.
+
+::
+
+    var $scaffold = 'admin';
+
+You will now be able to access admin scaffolded actions:
+::
+
+    http://example.com/admin/controller/index
+    http://example.com/admin/controller/view
+    http://example.com/admin/controller/edit
+    http://example.com/admin/controller/add
+    http://example.com/admin/controller/delete
+
+This is an easy way to create a simple backend interface quickly.
+Keep in mind that you cannot have both admin and non-admin methods
+scaffolded at the same time. As with normal scaffolding you can
+override individual methods and replace them with your own.
+
+::
+
+    function admin_view($id = null) {
+      //custom code here
+    }
+
+Once you have replaced a scaffolded action you will need to create
+a view file for the action as well.
+
+Customizing Scaffold Views
+==========================
+
+If you're looking for something a little different in your
+scaffolded views, you can create templates. We still don't
+recommend using this technique for production applications, but
+such a customization may be useful during prototyping iterations.
+
+Customization is done by creating view templates:
+
+::
+
+    Custom scaffolding views for a specific controller 
+    (PostsController in this example) should be placed like so:
+    
+    /app/views/posts/scaffold.index.ctp
+    /app/views/posts/scaffold.show.ctp
+    /app/views/posts/scaffold.edit.ctp
+    /app/views/posts/scaffold.new.ctp
+    
+    Custom scaffolding views for all controllers should be placed like so:
+    
+    /app/views/scaffolds/index.ctp
+    /app/views/scaffolds/show.ctp
+    /app/views/scaffolds/edit.ctp
+    /app/views/scaffolds/new.ctp
+    /app/views/scaffolds/add.ctp
