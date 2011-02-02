@@ -64,3 +64,7 @@ You can use the following options in the options array:
         'after' => ''
     );
 
+
+.. todo::
+
+	This is missing a few methods still, and useful examples.
