@@ -244,7 +244,8 @@ code example below includes the SecurityComponent and adds a few
 lines of code inside the controller's beforeFilter method.
 
 ::
-	<?php
+
+    <?php
     class ApiController extends AppController {
         var $name = 'Api';
         var $uses = array();

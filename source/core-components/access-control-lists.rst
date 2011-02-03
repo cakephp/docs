@@ -1,5 +1,5 @@
-5.1 Access Control Lists
-------------------------
+Access Control Lists
+####################
 
 CakePHP's access control list functionality is one of the most
 oft-discussed, most likely because it is the most sought after, but
