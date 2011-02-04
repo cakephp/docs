@@ -139,6 +139,8 @@ The beforeRender method is called after the controller's
 beforeRender method but before the controller's renders views and
 layout.
 
+.. _using-helpers:
+
 Using your Helper
 ~~~~~~~~~~~~~~~~~
 
