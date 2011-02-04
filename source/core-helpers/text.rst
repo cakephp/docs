@@ -1,5 +1,5 @@
-7.11 Text
----------
+Text
+####
 
 The TextHelper contains methods to make text more usable and
 friendly in your views. It aids in enabling links, formatting urls,
@@ -8,7 +8,7 @@ highlighting key words in blocks of text, and to gracefully
 truncating long stretches of text.
 
 autoLinkEmails
-~~~~~~~~~~~~~~
+==============
 
 ``autoLinkEmails(string $text, array $htmlOptions=array())``
 
@@ -29,7 +29,7 @@ Output:
     contact <a href="mailto:info@example.com">info@example.com</a>
 
 autoLinkUrls
-~~~~~~~~~~~~
+============
 
 ``autoLinkUrls(string $text, array $htmlOptions=array())``
 
@@ -38,7 +38,7 @@ strings that start with https, http, ftp, or nntp and links them
 appropriately.
 
 autoLink
-~~~~~~~~
+========
 
 ``autoLink(string $text, array $htmlOptions=array())``
 
@@ -47,7 +47,7 @@ Performs the functionality in both ``autoLinkUrls()`` and
 are linked appropriately given the supplied ``$htmlOptions``.
 
 excerpt
-~~~~~~~
+=======
 
 ``excerpt(string $haystack, string $needle, int $radius=100, string $ending="...")``
 
@@ -69,7 +69,7 @@ Output:
     search results. The query...
 
 highlight
-~~~~~~~~~
+=========
 
 ``highlight(string $haystack, string $needle, array $options = array() )``
 
@@ -96,14 +96,14 @@ Output:
     the $options['format'] string specified  or a default string.
 
 stripLinks
-~~~~~~~~~~
+==========
 
 ``stripLinks($text)``
 
 Strips the supplied ``$text`` of any HTML links.
 
 toList
-~~~~~~
+======
 
 ``toList(array $list, $and='and')``
 
@@ -121,7 +121,7 @@ Output:
     red, orange, yellow, green, blue, indigo and violet
 
 truncate
-~~~~~~~~
+========
 
 ``truncate(string $text, int $length=100, array $options)``
 
@@ -160,7 +160,7 @@ Output:
     The killer crept...
 
 trim
-~~~~
+====
 
 ``trim()``
 
