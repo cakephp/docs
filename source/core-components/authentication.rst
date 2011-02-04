@@ -1,5 +1,5 @@
-5.2 Authentication
-------------------
+Authentication
+##############
 
 User authentication systems are a common part of many web
 applications. In CakePHP there are several systems for
@@ -118,3 +118,442 @@ Believe it or not, we're done! That's how to implement an
 incredibly simple, database-driven authentication system using the
 Auth component. However, there is a lot more we can do. Let's take
 a look at some more advanced usage of the component.
+
+Setting Auth Component Variables
+================================
+
+Whenever you want to alter a default option for AuthComponent, you
+do that by creating a beforeFilter() method for your controller,
+and then calling various built-in methods or setting component
+variables.
+
+For example, to change the field name used for passwords from
+'password' to 'secretword', you would do the following:
+
+::
+
+    class UsersController extends AppController {
+        var $components = array('Auth');
+    
+        function beforeFilter() {
+            $this->Auth->fields = array(
+                'username' => 'username', 
+                'password' => 'secretword'
+                );
+        }
+    }
+
+In this particular situation, you would also need to remember to
+change the field name in the view template!
+
+Alternately, you can specify settings for Auth by placing them
+inside the controller's $components property.
+
+::
+
+    class AppController extends Controller {
+        var $components = array(
+            'Auth' => array(
+                'authorize' => 'actions',
+                'actionPath' => 'controllers/',
+                'loginAction' => array(
+                    'controller' => 'users',
+                    'action' => 'login',
+                    'plugin' => false,
+                   'admin' => false,
+                    ),
+                 ),
+             'Acl',
+             'Session',
+             );
+    }
+
+Another common use of Auth component variables is to allow access
+to certain methods without the user being logged in (by default
+Auth restricts access to every action except the login and logout
+methods).
+
+For example if we want to allow all users access to the index and
+view methods ( but not any other), we would do the following:
+
+::
+
+    function beforeFilter() {
+            $this->Auth->allow('index','view');
+    }
+
+
+Displaying Auth Error Messages
+==============================
+
+In order to display the error messages that Auth spits out you need
+to add the following code to your view. In this case, the message
+will appear below the regular flash messages:
+
+In order to show all normal flash messages and auth flash messages
+for all views add the following two lines to the
+views/layouts/default.ctp file in the body section preferable
+before the content\_for\_layout line.
+
+::
+
+    <?php
+        echo $session->flash();
+        echo $session->flash('auth');
+    ?>
+
+To customize the Auth error messages, place the following code in
+the AppController or wherever you have placed Auth's settings:
+
+::
+
+    <?php
+        $this->Auth->loginError = "This message shows up when the wrong credentials are used";
+        $this->Auth->authError = "This error shows up with the user tries to access a part of the website that is protected.";
+    ?>
+
+
+
+Troubleshooting Auth Problems
+=============================
+
+It can sometimes be quite difficult to diagnose problems when it's
+not behaving as expected, so here are a few pointers to remember.
+
+*Password hashing*
+
+The automatic hashing of your password input field happens **only**
+if posted data contains both username and password fields
+
+When posting information to an action via a form, the Auth
+component automatically hashes the contents of your password input
+field if posted data also contains username field. So, if you are
+trying to create some sort of registration page, make sure to have
+the user fill out a 'confirm password' field so that you can
+compare the two. Here's some sample code:
+
+::
+
+    <?php
+    function register() {
+        if ($this->data) {
+            if ($this->data['User']['password'] == $this->Auth->password($this->data['User']['password_confirm'])) {
+                $this->User->create();
+                $this->User->save($this->data);
+            }
+        }
+    }
+    ?>
+
+Change Hash Function
+====================
+
+The AuthComponent uses the Security class to hash a password. The
+Security class uses the SHA1 scheme by default. To change another
+hash function used by the Auth component, use the ``setHash``
+method passing it ``md5``, ``sha1`` or ``sha256`` as its first and
+only parameter.
+
+::
+
+    Security::setHash('md5'); // or sha1 or sha256. 
+
+The Security class uses a salt value (set in /app/config/core.php)
+to hash the password.
+
+If you want to use different password hashing logic beyond md5/sha1
+with the application salt, you will need to override the standard
+hashPassword mechanism - You may need to do this if for example you
+have an existing database that previously used a hashing scheme
+without a salt. To do this, create the method
+``<a href="/view/1259/hashPasswords">hashPasswords</a>`` in the
+class you want to be responsible for hashing your passwords
+(usually the User model) and set
+``<a href="/view/1278/authenticate">authenticate</a>`` to the
+object you're authenticating against (usually this is User) like
+so:
+
+::
+
+    function beforeFilter() {
+       $this->Auth->authenticate = ClassRegistry::init('User');
+       ...
+       parent::beforeFilter();
+    }
+
+With the above code, the User model hashPasswords() method will be
+called each time Cake calls AuthComponent::hashPasswords(). Here's
+an example hashPassword function, appropriate if you've already got
+a users table full of plain md5-hashed passwords:
+
+::
+
+    class User extends AppModel {
+        function hashPasswords($data) {
+            if (isset($data['User']['password'])) {
+                $data['User']['password'] = md5($data['User']['password']);
+                return $data;
+            }
+            return $data;
+        }
+    }
+
+AuthComponent Methods
+=====================
+
+action
+------
+
+``action (string $action = ':controller/:action')``
+
+If you are using ACO's as part of your ACL structure, you can get
+the path to the ACO node bound to a particular controller/action
+pair:
+
+::
+
+        $acoNode = $this->Auth->action('users/delete');
+
+If you don't pass in any values, it uses the current controller /
+action pair
+
+allow
+-----
+
+If you have some actions in your controller that you don't have to
+authenticate against (such as a user registration action), you can
+add methods that the AuthComponent should ignore. The following
+example shows how to allow an action named 'register'.
+
+::
+
+        function beforeFilter() {
+            ...
+            $this->Auth->allow('register');
+        }
+
+If you wish to allow multiple actions to skip authentication, you
+supply them as parameters to the allow() method:
+
+::
+
+        function beforeFilter() {
+            ...
+            $this->Auth->allow('foo', 'bar', 'baz');
+        }
+
+Shortcut: you may also allow all the actions in a controller by
+using '\*'.
+
+::
+
+        function beforeFilter() {
+            ...
+            $this->Auth->allow('*');
+        }
+
+If you are using requestAction in your layout or elements you
+should allow those actions in order to be able to open login page
+properly.
+
+The auth component assumes that your actions names
+`follow conventions <http://docs.cakephp.org/view/905/URL-Considerations-for-Controller-Names>`_
+and are underscored.
+
+deny
+----
+
+There may be times where you will want to remove actions from the
+list of allowed actions (set using $this->Auth->allow()). Here's an
+example:
+
+::
+
+        function beforeFilter() {
+            $this->Auth->authorize = 'controller';
+            $this->Auth->allow('delete');
+        }
+    
+        function isAuthorized() {
+            if ($this->Auth->user('role') != 'admin') {
+                $this->Auth->deny('delete');
+            }
+    
+            ...
+        }
+
+hashPasswords
+-------------
+
+``hashPasswords ($data)``
+
+This method checks if the ``$data`` contains the username and
+password fields as specified by the variable ``$fields`` indexed by
+the model name as specified by ``$userModel``. If the ``$data``
+array contains both the username and password, it hashes the
+password field in the array and returns the ``data`` array in the
+same format. This function should be used prior to insert or update
+calls of the user when the password field is affected.
+
+::
+
+        $data['User']['username'] = 'me@me.com';
+        $data['User']['password'] = 'changeme';
+        $hashedPasswords = $this->Auth->hashPasswords($data);
+        pr($hashedPasswords);
+        /* returns:
+        Array
+        (
+            [User] => Array
+            (
+                [username] => me@me.com
+                [password] => 8ed3b7e8ced419a679a7df93eff22fae
+            )
+        )
+    
+        */
+
+The *$hashedPasswords['User']['password']* field would now be
+hashed using the ``password`` function of the component.
+
+If your controller uses the Auth component and posted data contains
+the fields as explained above, it will automatically hash the
+password field using this function.
+
+mapActions
+----------
+
+If you are using Acl in CRUD mode, you may want to assign certain
+non-default actions to each part of CRUD.
+
+::
+
+    $this->Auth->mapActions(
+        array(
+            'create' => array('someAction'),
+            'read' => array('someAction', 'someAction2'),
+            'update' => array('someAction'),
+            'delete' => array('someAction')
+        )
+    );
+
+login
+-----
+
+``login($data = null)``
+
+If you are doing some sort of Ajax-based login, you can use this
+method to manually log someone into the system. If you don't pass
+any value for ``$data``, it will automatically use POST data passed
+into the controller.
+
+for example, in an application you may wish to assign a user a
+password and auto log them in after registration. In an over
+simplified example:
+
+View:
+::
+
+    echo $this->Form->create('User',array('action'=>'register'));
+    echo $this->Form->input('username');
+    echo $this->Form->end('Register');
+
+Controller:
+::
+
+    function register() {
+        if(!empty($this->data)) {
+            $this->User->create();
+            $assigned_password = 'password';
+            $this->data['User']['password'] = $assigned_password;
+            if($this->User->save($this->data)) {
+                // send signup email containing password to the user
+                $this->Auth->login($this->data);
+                $this->redirect('home');
+        }
+    }
+
+One thing to note is that you must manually redirect the user after
+login as loginRedirect is not called.
+
+``$this->Auth->login($data)`` returns 1 on successful login, 0 on a
+failure
+
+logout
+------
+
+Provides a quick way to de-authenticate someone, and redirect them
+to where they need to go. This method is also useful if you want to
+provide a 'Log me out' link inside a members' area of your
+application.
+
+Example:
+
+::
+
+    $this->redirect($this->Auth->logout());
+
+password
+--------
+
+``password (string $password)``
+
+Pass in a string, and you can get what the hashed password would
+look like. This is an essential functionality if you are creating a
+user registration screen where you have users enter their password
+a second time to confirm it.
+
+::
+
+    if ($this->data['User']['password'] ==
+        $this->Auth->password($this->data['User']['password2'])) {
+    
+        // Passwords match, continue processing
+        ...
+    } else {
+        $this->flash('Typed passwords did not match', 'users/register');
+    }
+
+The auth component will automatically hash the password field if
+the username field is also present in the submitted data
+
+Cake appends your password string to a salt value and then hashes
+it. The hashing function used depends on the one set by the core
+utility class ``Security`` (sha1 by default). You can use the
+``Security::setHash`` function to change the hashing method. The
+salt value is used from your application's configuration defined in
+your ``core.php``
+
+user
+----
+
+``user(string $key = null)``
+
+This method provides information about the currently authenticated
+user. The information is taken from the session. For example:
+
+::
+
+    if ($this->Auth->user('role') == 'admin') {
+        $this->flash('You have admin access');
+    }
+
+It can also be used to return the whole user session data like so:
+
+::
+
+    $data['User'] = $this->Auth->user();
+
+If this method returns null, the user is not logged in.
+
+In the view you can use the Session helper to retrieve the
+currently authenticated user's information:
+
+::
+
+    $session->read('Auth.User'); // returns complete user record
+    $session->read('Auth.User.first_name') //returns particular field value
+
+The session key can be different depending on which model Auth is
+configured to use. Eg. If you use model ``Account`` instead of
+``User``, then the session key would be ``Auth.Account``
