@@ -81,7 +81,7 @@ therefore /red\_apples/go\_pick is the correct form to access the
 ``RedApplesController::go_pick`` action.
 
 For more information on CakePHP URLs and parameter handling, see
-:doc:`/developing-with-cakephp/configuration/routes-configuration`.
+:ref:`routes-configuration`.
 
 .. _file-and-classname-conventions:
 
