@@ -193,7 +193,7 @@ well:
     <!-- An order form of some sort might go here....-->
 
 For information on how to use elements from a plugin, look up
-:doc:`/developing-with-cakephp/views/elements`
+:ref:`view-elements`
 
 Overriding plugin views from inside your application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -212,6 +212,7 @@ controller you could make the following file:
 Creating this file, would allow you to override
 "/app/plugins/pizza/views/pizza\_orders/index.ctp".
 
+.. _plugin-assets:
 
 Plugin assets
 --------------

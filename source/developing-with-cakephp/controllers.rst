@@ -25,7 +25,7 @@ display views. An action is a single method of a controller.
 
 CakePHP’s dispatcher calls actions when an incoming request matches
 a URL to a controller’s action (refer to
-:doc:`/developing-with-cakephp/configuration/routes-configuration` for an
+:ref:`routes-configuration` for an
 explanation on how controller actions and parameters are mapped
 from the URL).
 

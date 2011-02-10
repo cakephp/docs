@@ -262,6 +262,8 @@ Will output:
 
 See the `API <http://api.cakephp.org>`_ for further details.
 
+.. _automagic-form-elements:
+
 Automagic Form Elements
 =======================
 
@@ -401,7 +403,7 @@ $options[‘type’]
 
 You can force the type of an input (and override model
 introspection) by specifying a type. In addition to the field types
-found in the :doc:`/core-helpers/form/automagic-form-elements`,
+found in the :ref:`automagic-form-elements`,
 you can also create ‘file’, and ‘password’ inputs.
 
 ::
