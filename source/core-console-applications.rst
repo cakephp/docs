@@ -1,5 +1,5 @@
-9 Core Console Applications
----------------------------
+Core Console Applications
+#########################
 
 CakePHP features a number of console applications out of the box.
 Some of these applications are used in concert with other CakePHP

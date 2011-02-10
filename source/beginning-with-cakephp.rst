@@ -1,5 +1,5 @@
-1 Beginning With CakePHP
-------------------------
+Beginning With CakePHP
+######################
 
 Welcome to the Cookbook, the manual for the CakePHP web application
 framework that makes developing a piece of cake!

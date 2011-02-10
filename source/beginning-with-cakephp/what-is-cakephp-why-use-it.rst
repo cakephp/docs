@@ -1,5 +1,5 @@
-1.1 What is CakePHP? Why Use it?
---------------------------------
+What is CakePHP? Why Use it?
+############################
 
 `CakePHP <http://www.cakephp.org/>`_ is a
 `free <http://en.wikipedia.org/wiki/MIT_License>`_,

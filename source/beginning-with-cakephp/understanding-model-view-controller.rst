@@ -1,5 +1,5 @@
-1.3 Understanding Model-View-Controller
----------------------------------------
+Understanding Model-View-Controller
+###################################
 
 CakePHP follows the
 `MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_
@@ -47,7 +47,7 @@ pattern. We'll add some details later on which are specific to
 CakePHP, so keep this in mind as we proceed.
 
 Benefits
-~~~~~~~~
+========
 
 Why use MVC? Because it is a tried and true software design pattern
 that turns an application into a maintainable, modular, rapidly

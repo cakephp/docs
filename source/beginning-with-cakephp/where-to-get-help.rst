@@ -1,8 +1,8 @@
-1.2 Where to Get Help
----------------------
+Where to Get Help
+#################
 
 The Official CakePHP website
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+============================
 
 `http://www.cakephp.org <http://www.cakephp.org>`_
 
@@ -11,7 +11,7 @@ features links to oft-used developer tools, screencasts, donation
 opportunities, and downloads.
 
 The Cookbook
-~~~~~~~~~~~~
+============
 
 `http://book.cakephp.org </>`_
 
@@ -23,7 +23,7 @@ also be lightening our support load. Both the manual and the API
 have an online component.
 
 The Bakery
-~~~~~~~~~~
+==========
 
 `http://bakery.cakephp.org <http://bakery.cakephp.org>`_
 
@@ -33,7 +33,7 @@ you’re acquainted with CakePHP, log on and share your knowledge
 with the community and gain instant fame and fortune.
 
 The API
-~~~~~~~
+=======
 
 `http://api.cakephp.org/ <http://api.cakephp.org/>`_
 
@@ -44,7 +44,7 @@ of the internal workings of the framework. Its a straight forward
 code reference, so bring your propeller hat.
 
 CakeForge
-~~~~~~~~~
+=========
 
 `http://www.cakeforge.org <http://www.cakeforge.org>`_
 
@@ -54,7 +54,7 @@ want to share) a killer component or a praiseworthy plugin, check
 out CakeForge.
 
 The Test Cases
-~~~~~~~~~~~~~~
+==============
 
 `http://api.cakephp.org/tests <http://api.cakephp.org/tests>`_
 
@@ -70,7 +70,7 @@ cases will be located under
     cake/tests/cases
 
 The IRC channel
-~~~~~~~~~~~~~~~
+===============
 
 **IRC Channels on irc.freenode.net:**
 
@@ -90,7 +90,7 @@ users in your area, or would like to donate your brand new sports
 car.
 
 The Google Group
-~~~~~~~~~~~~~~~~
+================
 
 `http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
 

@@ -1,5 +1,5 @@
-4.1.1 Simple Rules
-------------------
+Simple Rules
+############
 
 As the name suggests, this is the simplest way to define a
 validation rule. The general syntax for defining rules this way

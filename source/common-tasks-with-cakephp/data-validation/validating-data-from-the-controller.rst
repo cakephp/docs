@@ -1,5 +1,5 @@
-4.1.6 Validating Data from the Controller
------------------------------------------
+Validating Data from the Controller
+###################################
 
 While normally you would just use the save method of the model,
 there may be times where you wish to validate the data without

@@ -1,5 +1,5 @@
-4.5 Caching
------------
+Caching
+#######
 
 Caching can be made use of on various levels within a CakePHP
 application. See
