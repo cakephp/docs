@@ -202,5 +202,5 @@ files that you’d need to create anyway.
 
 Now that you've been introduced to CakePHP's fundamentals, you
 might try a run through the
-:doc:`/tutorials-and-examples/blog` to see how things fit
+:doc:`/tutorials-and-examples/blog/blog` to see how things fit
 together.

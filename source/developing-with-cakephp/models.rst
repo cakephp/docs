@@ -1,5 +1,5 @@
-3.7 Models
-----------
+Models
+######
 
 Models represent data and are used in CakePHP applications for data
 access. A model usually represents a database table but can be used

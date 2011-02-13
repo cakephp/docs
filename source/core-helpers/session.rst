@@ -50,6 +50,8 @@ Check to see if a key is in the Session. Returns a boolean on the
 key's existence.
 
 
+.. _sessionhelper-flash:
+
 flash()
 ------------
 
