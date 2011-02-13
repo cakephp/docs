@@ -42,6 +42,8 @@ chapter:
    CakePHP can help you build forms, build AJAX functionality,
    paginate model data, or serve RSS feeds.
 
+.. _view-layouts:
+
 Layouts
 =======
 
@@ -334,7 +336,7 @@ Views have a ``set()`` method that is analogous to the ``set()``
 found in Controller objects. It allows you to add variables to the
 . Using set() from your view file will add the variables to the
 layout and elements that will be rendered later. See
-:doc:`/developing-with-cakephp/controllers/controller-methods` for more
+:ref:`controller-methods` for more
 information on using set().
 
 In your view file you can do

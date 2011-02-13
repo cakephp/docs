@@ -28,11 +28,13 @@ Post, CakePHP can automatically infer that this model will be used
 in the PostsController, and will be tied to a database table called
 ``posts``.
 
-CakePHP will dynamically create a model object for you, if it
-cannot find a corresponding file in /app/models. This also means,
-that if you accidentally name your file wrong (i.e. Post.php or
-posts.php) CakePHP will not recognize any of your settings and will
-use the defaults instead.
+.. note::
+
+    CakePHP will dynamically create a model object for you, if it
+    cannot find a corresponding file in /app/models. This also means,
+    that if you accidentally name your file wrong (i.e. Post.php or
+    posts.php) CakePHP will not recognize any of your settings and will
+    use the defaults instead.
 
 The ``$name`` variable is always a good idea to add, and is used to
 overcome some class name oddness in PHP4.
@@ -86,11 +88,13 @@ requesting www.example.com/posts/index. Similarly, if we were to
 define a function called ``foobar()``, users would be able to
 access that at www.example.com/posts/foobar.
 
-You may be tempted to name your controllers and actions a certain
-way to obtain a certain URL. Resist that temptation. Follow CakePHP
-conventions (plural controller names, etc.) and create readable,
-understandable action names. You can map URLs to your code using
-"routes" covered later on.
+.. warning::
+
+    You may be tempted to name your controllers and actions a certain
+    way to obtain a certain URL. Resist that temptation. Follow CakePHP
+    conventions (plural controller names, etc.) and create readable,
+    understandable action names. You can map URLs to your code using
+    "routes" covered later on.
 
 The single instruction in the action uses ``set()`` to pass data
 from the controller to the view (which we'll create next). The line
@@ -304,9 +308,11 @@ PostsController:
     }
     ?>
 
-You need to include the SessionComponent - and SessionHelper - in
-any controller where you will use it. If necessary, include it in
-your AppController.
+.. note::
+
+    You need to include the SessionComponent - and SessionHelper - in
+    any controller where you will use it. If necessary, include it in
+    your AppController.
 
 Here's what the ``add()`` action does: if the submitted form data
 isn't empty, try to save the data using the Post model. If for some
@@ -575,9 +581,11 @@ links that allow users to delete posts, however:
     
     </table>
 
-This view code also uses the HtmlHelper to prompt the user with a
-JavaScript confirmation dialog before they attempt to delete a
-post.
+.. note::
+
+    This view code also uses the HtmlHelper to prompt the user with a
+    JavaScript confirmation dialog before they attempt to delete a
+    post.
 
 Routes
 ======
@@ -615,13 +623,15 @@ with this one:
 This should connect users requesting '/' to the index() action of
 our PostsController.
 
-CakePHP also makes use of 'reverse routing' - if with the above
-route defined you pass
-``array('controller' => 'posts', 'action' => 'index')`` to a
-function expecting an array, the resultant URL used will be '/'.
-It's therefore a good idea to always use arrays for URLs as this
-means your routes define where a URL goes, and also ensures that
-links point to the same place too.
+.. note::
+
+    CakePHP also makes use of 'reverse routing' - if with the above
+    route defined you pass
+    ``array('controller' => 'posts', 'action' => 'index')`` to a
+    function expecting an array, the resultant URL used will be '/'.
+    It's therefore a good idea to always use arrays for URLs as this
+    means your routes define where a URL goes, and also ensures that
+    links point to the same place too.
 
 Conclusion
 ==========
@@ -639,3 +649,13 @@ the real thing. Start your own project, read the rest of the
 
 If you need help, come see us in #cakephp. Welcome to CakePHP!
 
+Suggested Follow-up Reading
+---------------------------
+
+These are common tasks people learning CakePHP usually want to study next:
+
+1. :ref:`view-layouts`: Customizing your website layout
+2. :ref:`view-elements` Including and reusing view snippets
+3. :doc:`/developing-with-cakephp/scaffolding`: Prototyping before creating code
+4. :doc:`/core-console-applications/code-generation-with-bake` Generating basic CRUD code
+5. :doc:`/core-components/authentication`: User registration and login

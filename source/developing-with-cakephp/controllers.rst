@@ -110,6 +110,8 @@ controller callbacks for best results:
     }
 
 
+.. _controller-methods:
+
 Controller Methods
 ------------------
 
