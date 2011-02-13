@@ -20,7 +20,6 @@ Contents:
    common-tasks-with-cakephp
    common-tasks-with-cakephp/**
    core-behaviors
-   core-behaviors/**
    core-components
    core-console-applications
    core-console-applications/**
