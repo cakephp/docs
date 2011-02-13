@@ -10,3 +10,10 @@ Different functionality within the framework makes use of different
 technologies – such as SQL, JavaScript, and XML – and this manual
 does not attempt to explain those technologies, only how they are
 used in context.
+
+.. toctree::
+    :maxdepth: 1
+    
+    beginning-with-cakephp/what-is-cakephp-why-use-it
+    beginning-with-cakephp/understanding-model-view-controller
+    beginning-with-cakephp/where-to-get-help

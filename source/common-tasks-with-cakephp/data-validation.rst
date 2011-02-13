@@ -1,5 +1,5 @@
-4.1 Data Validation
--------------------
+Data Validation
+###############
 
 Data validation is an important part of any application, as it
 helps to make sure that the data in a Model conforms to the
@@ -122,7 +122,7 @@ own. Below, you'll find a complete list of all the rules, along
 with usage examples.
 
 alphaNumeric
-~~~~~~~~~~~~
+------------
 
 The data for the field must only contain letters and numbers.
 
@@ -136,7 +136,7 @@ The data for the field must only contain letters and numbers.
     );
 
 between
-~~~~~~~
+-------
 
 The length of the data for the field must fall within the specified
 numeric range. Both minimum and maximum values must be supplied.
@@ -157,7 +157,7 @@ representation of the data". Be careful that it may be larger than
 the number of characters when handling non-ASCII characters.
 
 blank
-~~~~~
+-----
 
 This rule is used to make sure that the field is left blank or only
 white space characters are present in its value. White space
@@ -173,7 +173,7 @@ characters include space, tab, carriage return, and newline.
     );
 
 boolean
-~~~~~~~
+-------
 
 The data for the field must be a boolean value. Valid values are
 true or false, integers 0 or 1 or strings '0' or '1'.
@@ -188,7 +188,7 @@ true or false, integers 0 or 1 or strings '0' or '1'.
     );
 
 cc
-~~
+--
 
 This rule is used to check whether the data is a valid credit card
 number. It takes three parameters: ‘type’, ‘deep’ and ‘regex’.
@@ -235,7 +235,7 @@ that will be used to validate the credit card number.
     );
 
 comparison
-~~~~~~~~~~
+----------
 
 Comparison is used to compare numeric values. It supports “is
 greater”, “is less”, “greater or equal”, “less or equal”, “equal
@@ -258,7 +258,7 @@ to”, and “not equal”. Some examples are shown below:
     );
 
 date
-~~~~
+----
 
 This rule ensures that data is submitted in valid date formats. A
 single parameter (which can be an array) can be passed that will be
@@ -298,7 +298,7 @@ supply a given format. The more work you can do for your users, the
 better.
 
 decimal
-~~~~~~~
+-------
 
 This rule ensures that the data is a valid decimal number. A
 parameter can be passed to specify the number of digits required
@@ -315,7 +315,7 @@ fail if no digits are found after the decimal point.
     );
 
 email
-~~~~~
+-----
 
 This checks whether the data is a valid email address. Passing a
 boolean true as the second parameter for this rule will also
@@ -333,7 +333,7 @@ attempt to verify that the host for the address is valid.
     );
 
 equalTo
-~~~~~~~
+-------
 
 This rule will ensure that the value is equal to, and of the same
 type as the given value.
@@ -348,7 +348,7 @@ type as the given value.
     );
 
 extension
-~~~~~~~~~
+---------
 
 This rule checks for valid file extensions like .jpg or .png. Allow
 multiple extensions by passing them in array form.
@@ -363,13 +363,13 @@ multiple extensions by passing them in array form.
     );
 
 file
-~~~~
+----
 
 This rule ensures that the value is a valid file name. This
 validation rule is currently non-functional.
 
 ip
-~~
+--
 
 This rule will ensure that a valid IPv4 or IPv6 address has been
 submitted. Accepts as option 'both' (default), 'IPv4' or 'IPv6'.
@@ -384,7 +384,7 @@ submitted. Accepts as option 'both' (default), 'IPv4' or 'IPv6'.
     );
 
 isUnique
-~~~~~~~~
+--------
 
 The data for the field must be unique, it cannot be used by any
 other rows.
@@ -399,7 +399,7 @@ other rows.
     );
 
 minLength
-~~~~~~~~~
+---------
 
 This rule ensures that the data meets a minimum length
 requirement.
@@ -418,7 +418,7 @@ representation of the data". Be careful that it may be larger than
 the number of characters when handling non-ASCII characters.
 
 maxLength
-~~~~~~~~~
+---------
 
 This rule ensures that the data stays within a maximum length
 requirement.
@@ -437,7 +437,7 @@ representation of the data". Be careful that it may be larger than
 the number of characters when handling non-ASCII characters.
 
 money
-~~~~~
+-----
 
 This rule will ensure that the value is in a valid monetary
 amount.
@@ -454,7 +454,7 @@ Second parameter defines where symbol is located (left/right).
     );
 
 multiple
-~~~~~~~~
+--------
 
 Use this for validating a multiple select input. It supports
 parameters "in", "max" and "min".
@@ -469,7 +469,7 @@ parameters "in", "max" and "min".
     );
 
 inList
-~~~~~~
+------
 
 This rule will ensure that the value is in a given set. It needs an
 array of values. The field is valid if the field's value matches
@@ -488,7 +488,7 @@ Example:
         );
 
 numeric
-~~~~~~~
+-------
 
 Checks if the data passed is a valid number.
 
@@ -502,7 +502,7 @@ Checks if the data passed is a valid number.
     );
 
 notEmpty
-~~~~~~~~
+--------
 
 The basic rule to ensure that a field is not empty.
 
@@ -519,7 +519,7 @@ Do not use this for a multiple select input as it will cause an
 error. Instead, use "multiple".
 
 phone
-~~~~~
+-----
 
 Phone validates US phone numbers. If you want to validate non-US
 phone numbers, you can provide a regular expression as the second
@@ -534,7 +534,7 @@ parameter to cover additional number formats.
     );
 
 postal
-~~~~~~
+------
 
 Postal is used to validate ZIP codes from the U.S. (us), Canada
 (ca), U.K (uk), Italy (it), Germany (de) and Belgium (be). For
@@ -550,7 +550,7 @@ second parameter.
     );
 
 range
-~~~~~
+-----
 
 This rule ensures that the value is in a given range. If no range
 is supplied, the rule will check to ensure the value is a legal
@@ -570,7 +570,7 @@ The above example will accept any value which is larger than 0
 lower/upper are not inclusive!!!
 
 ssn
-~~~
+---
 
 Ssn validates social security numbers from the U.S. (us), Denmark
 (dk), and the Netherlands (nl). For other social security number
@@ -585,7 +585,7 @@ formats, you may provide a regular expression.
     );
 
 url
-~~~
+---
 
 This rule checks for valid URL formats. Supports http(s), ftp(s),
 file, news, and gopher protocols.
@@ -608,3 +608,12 @@ like so.
             'rule' => array('url', true)
         )
     );
+
+
+.. toctree::
+
+    data-validation/simple-rules
+    data-validation/one-rule-per-field
+    data-validation/multiple-rules-per-field
+    data-validation/custom-validation-rules
+    data-validation/validating-data-from-the-controller

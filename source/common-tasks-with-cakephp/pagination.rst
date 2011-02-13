@@ -24,7 +24,7 @@ AJAX Pagination
 It's very easy to incorporate Ajax functionality into pagination.
 Using the JsHelper and RequestHandlerComponent you can easily add
 Ajax pagination to your application.
-:doc:`/core-helpers/js/ajax-pagination`
+:ref:`ajax-pagination`
 
 Configuring the PaginatorHelper to use a custom helper
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -799,6 +799,8 @@ Converts a PHP-native variable of any type to a JSON-equivalent
 representation. Escapes any string values into JSON compatible
 strings. UTF-8 characters will be escaped.
 
+.. _ajax-pagination:
+
 Ajax Pagination
 =====================
 

@@ -2,7 +2,8 @@ Basic Principles of CakePHP
 ###########################
 
 .. toctree::
-
+    :maxdepth: 1
+    
     a-typical-cakephp-request
     cakephp-conventions
     cakephp-folder-structure
