@@ -43,7 +43,7 @@ to be used.
 
 In some situations, databases don't let you use 'password' as a
 column name. See
-:doc:`/core-components/authentication/setting-auth-component-variables`
+:ref:`setting-auth-component-variables`
 for an example how to change the default field names to work with
 your own environment.
 
@@ -118,6 +118,9 @@ Believe it or not, we're done! That's how to implement an
 incredibly simple, database-driven authentication system using the
 Auth component. However, there is a lot more we can do. Let's take
 a look at some more advanced usage of the component.
+
+
+.. _setting-auth-component-variables:
 
 Setting Auth Component Variables
 ================================

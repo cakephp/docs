@@ -1,4 +1,4 @@
-12.2 New features in CakePHP 1.3
+New features in CakePHP 1.3
 --------------------------------
 
 CakePHP 1.3 introduced a number of new features. This guide

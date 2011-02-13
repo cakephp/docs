@@ -22,20 +22,16 @@ Contents:
    core-behaviors
    core-behaviors/**
    core-components
-   core-components/**
    core-console-applications
    core-console-applications/**
    core-helpers
-   core-helpers/**
    core-utility-libraries
    core-utility-libraries/**
    developing-with-cakephp
    developing-with-cakephp/**
    deployment
    tutorials-and-examples
-   tutorials-and-examples/**
    appendices
-   appendices/**
 
 .. todolist::
 

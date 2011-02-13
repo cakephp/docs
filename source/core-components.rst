@@ -1,5 +1,5 @@
-5 Core Components
------------------
+Core Components
+###############
 
 CakePHP has a number of built-in components. They provide out of
 the box functionality for several commonly used tasks.
@@ -11,7 +11,7 @@ and ini based access control lists.
 The auth component provides an easy to use authentication system
 using a variety of authentication processes, such as controller
 callbacks, Acl, or Object callbacks.
-:doc:`/core-components/cookies`
+:doc:`/core-components/cookie`
 The cookie component behaves in a similar fashion to the
 SessionComponent in that it provides a wrapper for PHP's native
 cookie support.
@@ -28,8 +28,8 @@ and manage HTTP authentication.
 :doc:`/core-components/sessions`
 The session component provides a storage independent wrapper to
 PHP's sessions.
-To learn more about each component see the menu on the left, or
-learn more about
+
+To learn more about each component see the menu below, or learn more about
 `creating your own components <http://docs.cakephp.org/view/62/components>`_.
 
 All core components now can be configured in the ``$components``
@@ -60,8 +60,23 @@ You can override the settings in the controller's
 
     <?php
     class MembersController extends AppController {
-    
+
         function beforeFilter() {
             $this->Email->from = 'support@domain.com';
         }
     }
+
+
+Core Components
+===============
+
+.. toctree::
+    :maxdepth: 2
+
+    core-components/access-control-lists
+    core-components/authentication
+    core-components/cookie
+    core-components/email
+    core-components/request-handling
+    core-components/security-component
+    core-components/sessions
