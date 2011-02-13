@@ -252,6 +252,4 @@ than www.example.com/controllername/actionname/param.
 
 If you are installing CakePHP on a webserver besides Apache, you
 can find instructions for getting URL rewriting working for other
-servers under the
-`Installation <http://book.cakephp.org/view/912/Installation>`_
-section.
+servers under the :doc:`/developing-with-cakephp/installation` section.
