@@ -51,10 +51,12 @@ Assuming you’ve created even the most basic Category model class
 file (in /app/models/category.php), you’re ready to go. Visit
 http://example.com/categories to see your new scaffold.
 
-Creating methods in controllers that are scaffolded can cause
-unwanted results. For example, if you create an index() method in a
-scaffolded controller, your index method will be rendered rather
-than the scaffolding functionality.
+.. note::
+
+    Creating methods in controllers that are scaffolded can cause
+    unwanted results. For example, if you create an index() method in a
+    scaffolded controller, your index method will be rendered rather
+    than the scaffolding functionality.
 
 Scaffolding is knowledgeable about model associations, so if your
 Category model belongsTo a User, you’ll see related User IDs in the

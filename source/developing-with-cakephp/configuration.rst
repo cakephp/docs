@@ -72,6 +72,9 @@ schema
     Used in PostgreSQL database setups to specify which schema to use.
 datasource
     non-DBO datasource to use, e.g. 'ldap', 'twitter'
+    
+.. note::
+
     The prefix setting is for tables, **not** models. For example, if
     you create a join table for your Apple and Flavor models, you name
     it prefix\_apples\_flavors (**not**
@@ -139,8 +142,10 @@ Use ``write()`` to store data in the application’s configuration.
     Configure::write('Company.name','Pizza, Inc.');
     Configure::write('Company.slogan','Pizza for your body and soul');
 
-The dot notation used in the ``$key`` parameter can be used to
-organize your configuration settings into logical groups.
+.. note::
+
+    The dot notation used in the ``$key`` parameter can be used to
+    organize your configuration settings into logical groups.
 
 The above example could also be written in a single call:
 
@@ -208,9 +213,11 @@ file.
     Configure::read('Company.name');
     ?>
 
-Every configure key-value pair is represented in the file with the
-``$config`` array. Any other variables in the file will be ignored
-by the ``load()`` function.
+.. note::
+
+    Every configure key-value pair is represented in the file with the
+    ``$config`` array. Any other variables in the file will be ignored
+    by the ``load()`` function.
 
 version
 ~~~~~~~
@@ -297,6 +304,34 @@ Asset.timestamp
     Appends a timestamp which is last modified time of the particular
     file at the end of asset files urls (CSS, JavaScript, Image) when
     using proper helpers.
+    Valid values:
+    (bool) false - Doesn't do anything (default)
+    (bool) true - Appends the timestamp when debug > 0
+    (string) 'force' - Appends the timestamp when debug >= 0
+Acl.classname, Acl.database
+    Constants used for CakePHP’s Access Control List functionality. See
+    the Access Control Lists chapter for more information.
+
+.. note::
+    Cache configuration is also found in core.php — We’ll be covering
+    that later on, so stay tuned.
+
+The Configure class can be used to read and write core
+configuration settings on the fly. This can be especially handy if
+you want to turn the debug setting on for a limited section of
+logic in your application, for instance.
+
+Configuration Constants
+-----------------------
+
+While most configuration options are handled by Configure, there
+are a few constants that CakePHP uses during runtime.
+
+Constant
+    Description
+LOG\_ERROR
+    Error constant. Used for differentiating error logging and
+    debugging. Currently PHP supports LOG\_DEBUG.
 
 The App Class
 =============
@@ -429,8 +464,10 @@ To load **vendors/geshi.php**
 
     App::import('Vendor', 'geshi');
 
-The geishi file must be a lower-case file name as Cake will not
-find it otherwise.
+.. note::
+
+    The geishi file must be a lower-case file name as Cake will not
+    find it otherwise.
 
 To load **vendors/flickr/flickr.php**
 
@@ -458,34 +495,6 @@ To load **app/vendors/vendorName/libFile.php**
 ::
 
     App::import('Vendor', 'aUniqueIdentifier', array('file' =>'vendorName'.DS.'libFile.php'));
-
-Valid values:
-(bool) false - Doesn't do anything (default)
-(bool) true - Appends the timestamp when debug > 0
-(string) 'force' - Appends the timestamp when debug >= 0
-
-Acl.classname, Acl.database
-Constants used for CakePHP’s Access Control List functionality. See
-the Access Control Lists chapter for more information.
-Cache configuration is also found in core.php — We’ll be covering
-that later on, so stay tuned.
-
-The Configure class can be used to read and write core
-configuration settings on the fly. This can be especially handy if
-you want to turn the debug setting on for a limited section of
-logic in your application, for instance.
-
-Configuration Constants
------------------------
-
-While most configuration options are handled by Configure, there
-are a few constants that CakePHP uses during runtime.
-
-Constant
-    Description
-LOG\_ERROR
-    Error constant. Used for differentiating error logging and
-    debugging. Currently PHP supports LOG\_DEBUG.
 
 .. _routes-configuration:
 
@@ -602,8 +611,10 @@ For this, you will have...
         [1] => mark
     )
 
-$this->passedArgs may also contain Named parameters as a named
-array mixed with Passed arguments.
+.. note::
+
+    $this->passedArgs may also contain Named parameters as a named
+    array mixed with Passed arguments.
 
 Named parameters
 ----------------

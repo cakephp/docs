@@ -162,8 +162,9 @@ helpers using the form $link->makeEdit(), however the newer format
 allows view variables and helpers to share names and not create
 collisions.
 
-The Html, Form and Session (If sessions are enabled) helpers are
-always available.
+.. note::
+
+    The Html, Form helpers are always available.
 
 Creating Functionality for All Helpers
 ======================================

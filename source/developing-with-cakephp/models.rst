@@ -59,22 +59,21 @@ subdirectory of /app/models. CakePHP will find it anywhere in the
 directory. By convention it should have the same name as the class;
 for this example ingredient.php.
 
-CakePHP will dynamically create a model object for you if it cannot
-find a corresponding file in /app/models. This also means that if
-your model file isn't named correctly (i.e. Ingredient.php or
-ingredients.php) CakePHP will use a instance of AppModel rather
-than your missing (from CakePHP's perspective) model file. If
-you're trying to use a method you've defined in your model, or a
-behavior attached to your model and you're getting SQL errors that
-are the name of the method you're calling - it's a sure sign
-CakePHP can't find your model and you either need to check the file
-names, clear your tmp files, or both.
+.. note::
+
+    CakePHP will dynamically create a model object for you if it cannot
+    find a corresponding file in /app/models. This also means that if
+    your model file isn't named correctly (i.e. Ingredient.php or
+    ingredients.php) CakePHP will use a instance of AppModel rather
+    than your missing (from CakePHP's perspective) model file. If
+    you're trying to use a method you've defined in your model, or a
+    behavior attached to your model and you're getting SQL errors that
+    are the name of the method you're calling - it's a sure sign
+    CakePHP can't find your model and you either need to check the file
+    names, clear your tmp files, or both.
 
 See also `Behaviors <http://docs.cakephp.org/view/88/behaviors>`_ for more information on
 how to apply similar logic to multiple models.
-
-The ``$name`` property is necessary for PHP4 but optional for
-PHP5.
 
 With your model defined, it can be accessed from within your
 `Controller <http://docs.cakephp.org/view/49/controllers>`_. CakePHP will automatically
@@ -129,9 +128,11 @@ Controller::loadModel() to get the model.
     }
     ?>
 
-Some class names are not usable for model names. For instance
-"File" cannot be used as "File" is a class already existing in the
-CakePHP core.
+.. note::
+
+    Some class names are not usable for model names. For instance
+    "File" cannot be used as "File" is a class already existing in the
+    CakePHP core.
 
 
 More on models

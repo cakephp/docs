@@ -33,49 +33,11 @@ parameter allows you to have the function automatically echo the
 string (the default behavior), or return it for further processing
 (pass a boolean true to enable this behavior).
 
-Check out the
-:doc:`/common-tasks-with-cakephp/internationalization-and-localization`
-section for more information.
+.. note::
 
-a
--
-
-``a(mixed $one, $two, $three...)``
-
-Returns an array of the parameters used to call the wrapping
-function.
-
-::
-
-    print_r(a('foo', 'bar')); 
-    
-    // output:
-    array(
-       [0] => 'foo',
-       [1] => 'bar'
-    )
-
-This has been Deprecated and will be removed in 2.0 version. Use
-**array()** instead.
-
-aa
---
-
-``aa(string $one, $two, $three...)``
-
-Used to create associative arrays formed from the parameters used
-to call the wrapping function.
-
-::
-
-    print_r(aa('a','b')); 
-    
-    // output:
-    array(
-        'a' => 'b'
-    )
-
-This has been Deprecated and will be removed in 2.0 version.
+    Check out the
+    :doc:`/common-tasks-with-cakephp/internationalization-and-localization`
+    section for more information.
 
 am
 --
@@ -113,15 +75,7 @@ browser-friendly.
 
 Also see
 `Basic Debugging <http://book.cakephp.org/view/1190/Basic-Debugging>`_
-e
--
 
-``e(mixed $data)``
-
-Convenience wrapper for ``echo()``.
-
-This has been Deprecated and will be removed in 2.0 version. Use
-**echo()** instead
 
 env
 ---
@@ -152,27 +106,6 @@ h
 
 Convenience wrapper for ``htmlspecialchars()``.
 
-ife
----
-
-``ife($condition, $ifNotEmpty, $ifEmpty)``
-
-Used for ternary-like operations. If the ``$condition`` is
-non-empty, ``$ifNotEmpty`` is returned, else ``$ifEmpty`` is
-returned.
-
-This has been Deprecated and will be removed in 2.0 version.
-
-low
----
-
-``low(string $string)``
-
-Convenience wrapper for ``strtolower()``.
-
-This has been Deprecated and will be removed in 2.0 version. Use
-**strtolower()** instead
-
 pr
 --
 
@@ -181,16 +114,6 @@ pr
 Convenience wrapper for ``print_r()``, with the addition of
 wrapping <pre> tags around the output.
 
-r
--
-
-``r(string $search, string $replace, string  $subject)``
-
-Convenience wrapper for ``str_replace()``.
-
-This has been Deprecated and will be removed in 2.0 version. Use
-**str\_replace()** instead
-
 stripslashes\_deep
 ------------------
 
@@ -198,16 +121,6 @@ stripslashes\_deep
 
 Recursively strips slashes from the supplied ``$value``. Returns
 the modified array.
-
-up
---
-
-``up(string $string)``
-
-Convenience wrapper for ``strtoupper()``.
-
-This has been Deprecated and will be removed in 2.0 version. Use
-**strtoupper()** instead
 
 uses
 ----

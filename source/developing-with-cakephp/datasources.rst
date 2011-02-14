@@ -16,9 +16,11 @@ of which is listed here for your convenience:
 -  dbo\_postgres.php
 -  dbo\_sqlite.php
 
-Additional DataSources and those that were removed from the core in
-1.3 can be found in the community-maintained
-`CakePHP DataSources repository at github <http://github.com/cakephp/datasources>`_.
+.. note::
+
+    Additional DataSources and those that were removed from the core in
+    1.3 can be found in the community-maintained
+    `CakePHP DataSources repository at github <http://github.com/cakephp/datasources>`_.
 
 When specifying a database connection configuration in
 app/config/database.php, CakePHP transparently uses the
@@ -83,9 +85,6 @@ Here is a simple example of how to use Datasources and
 `Twitter <http://twitter.com>`_ source that allows querying the
 Twitter API as well as posting new status updates to a configured
 account.
-
-**This example will only work in PHP 5.2 and above**, due to the
-use of ``json_decode`` for the parsing of JSON formatted data.
 
 You would place the Twitter datasource in
 app/models/datasources/twitter\_source.php:
@@ -189,8 +188,10 @@ Your model implementation could be as simple as:
     }
     ?>
 
-If we had not defined our schema in the datasource itself, you
-would get an error message to that effect here.
+.. note::
+
+    If we had not defined our schema in the datasource itself, you
+    would get an error message to that effect here.
 
 And the configuration settings in your ``app/config/database.php``
 would resemble something like this:

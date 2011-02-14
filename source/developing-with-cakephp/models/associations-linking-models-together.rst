@@ -1,5 +1,5 @@
-3.7.6 Associations: Linking Models Together
--------------------------------------------
+Associations: Linking Models Together
+#####################################
 
 One of the most powerful features of CakePHP is the ability to link
 relational mapping provided by the model. In CakePHP, the links
@@ -43,6 +43,7 @@ Many recipes belong to a user.
 many to many
 hasAndBelongsToMany
 Recipes have, and belong to many tags.
+
 Associations are defined by creating a class variable named after
 the association you are defining. The class variable can sometimes
 be as simple as a string, but can be as complete as a

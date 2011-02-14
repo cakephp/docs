@@ -1,5 +1,5 @@
-3.7.9 Additional Methods and Properties
----------------------------------------
+Additional Methods and Properties
+#################################
 
 While CakePHP’s model functions should get you where you need to
 go, don’t forget that model classes are just that: classes that

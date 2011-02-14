@@ -34,11 +34,13 @@ how the setup will eventually look:
                  /pizza_app_controller.php   <- plugin's AppController
                  /pizza_app_model.php        <- plugin's AppModel 
 
-If you want to be able to access your plugin with a URL, defining
-an AppController and AppModel for a plugin is required. These two
-special classes are named after the plugin, and extend the parent
-application's AppController and AppModel. Here's what they should
-look like for our pizza example:
+.. note::
+
+    If you want to be able to access your plugin with a URL, defining
+    an AppController and AppModel for a plugin is required. These two
+    special classes are named after the plugin, and extend the parent
+    application's AppController and AppModel. Here's what they should
+    look like for our pizza example:
 
 ::
 
@@ -112,9 +114,11 @@ So, we place our new PizzaOrdersController in
         }
     }
 
-This controller extends the plugin's AppController (called
-PizzaAppController) rather than the parent application's
-AppController.
+.. note::
+
+    This controller extends the plugin's AppController (called
+    PizzaAppController) rather than the parent application's
+    AppController.
 
 Also note how the name of the model is prefixed with the name of
 the plugin. This line of code is added for clarity but is not
@@ -146,8 +150,10 @@ Visiting /pizza/pizzaOrders now (given you’ve got a table in your
 database called ‘pizza\_orders’) should give us a “Missing View”
 error. Let’s create that next.
 
-If you need to reference a model within your plugin, you need to
-include the plugin name with the model name, separated with a dot.
+.. note::
+
+    If you need to reference a model within your plugin, you need to
+    include the plugin name with the model name, separated with a dot.
 
 For example:
 
@@ -192,8 +198,10 @@ well:
     <p>Nothing goes better with Cake than a good pizza!</p>
     <!-- An order form of some sort might go here....-->
 
-For information on how to use elements from a plugin, look up
-:ref:`view-elements`
+.. note::
+
+    For information on how to use elements from a plugin, look up
+    :ref:`view-elements`
 
 Overriding plugin views from inside your application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -246,8 +254,10 @@ The urls to plugin assets remains the same. In the past you used
 ``app/plugins/debug_kit/vendors/js/my_file.js``. It now links to
 ``app/plugins/debug_kit/webroot/js/my_file.js``
 
-It is important to note the **/your\_plugin/** prefix before the
-img, js or css path. That makes the magic happen!
+.. note::
+
+    It is important to note the **/your\_plugin/** prefix before the
+    img, js or css path. That makes the magic happen!
 
 
 Components, Helpers and Behaviors

@@ -1,5 +1,5 @@
-3.7.7 Callback Methods
-----------------------
+Callback Methods
+################
 
 If you want to sneak in some logic just before or after a CakePHP
 model operation, use model callbacks. These functions can be

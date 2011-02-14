@@ -89,13 +89,15 @@ attributes, like the list of components or helpers used by a
 controller. In these cases, AppController value arrays are merged
 with child controller class arrays.
 
-CakePHP merges the following variables from the AppController to
-your application's controllers:
 
+.. note::
 
--  $components
--  $helpers
--  $uses
+    CakePHP merges the following variables from the AppController to
+    your application's controllers:
+
+    -  $components
+    -  $helpers
+    -  $uses
 
 Remember to add the default Html and Form helpers, if you define
 var $helpers in your AppController
@@ -153,9 +155,10 @@ The ``set()`` method also takes an associative array as its first
 parameter. This can often be a quick way to assign a set of
 information to the view.
 
-Array keys will be no longer be inflected before they are assigned
-to the view ('underscored\_key' does not become 'underscoredKey'
-anymore, etc.):
+.. versionchanged:: 1.3
+    Array keys will be no longer be inflected before they are assigned
+    to the view ('underscored\_key' does not become 'underscoredKey'
+    anymore, etc.):
 
 ::
 
@@ -513,15 +516,19 @@ CakePHP-relative URL (/controllername/actionname/params). To pass
 extra data to the receiving controller action add to the $options
 array.
 
-You can use ``requestAction()`` to retrieve a fully rendered view
-by passing 'return' in the options:
-``requestAction($url, array('return'));``. It is important to note
-that making a requestAction using 'return' from a controller method
-can cause script and css tags to not work correctly.
+.. note::
 
-If used without caching ``requestAction`` can lead to poor
-performance. It is rarely appropriate to use in a controller or
-model.
+    You can use ``requestAction()`` to retrieve a fully rendered view
+    by passing 'return' in the options:
+    ``requestAction($url, array('return'));``. It is important to note
+    that making a requestAction using 'return' from a controller method
+    can cause script and css tags to not work correctly.
+
+.. warning::
+
+    If used without caching ``requestAction`` can lead to poor
+    performance. It is rarely appropriate to use in a controller or
+    model.
 
 ``requestAction`` is best used in conjunction with (cached)
 elements – as a way to fetch data for an element before rendering.
@@ -599,8 +606,10 @@ As an array in the requestAction would then be:
 
     echo $this->requestAction(array('controller' => 'articles', 'action' => 'view'), array('pass' => array(5)));
 
-Unlike other places where array urls are analogous to string urls,
-requestAction treats them differently.
+.. note::
+
+    Unlike other places where array urls are analogous to string urls,
+    requestAction treats them differently.
 
 When using an array url in conjunction with requestAction() you
 must specify **all** parameters that you will need in the requested
@@ -668,8 +677,10 @@ as class variables (``$this->ModelName``, for example) and those
 given by ``$helpers`` to the view as an object reference variable
 (``$helpername``).
 
-Each controller has some of these classes available by default, so
-you may not need to configure your controller at all.
+.. note::
+
+    Each controller has some of these classes available by default, so
+    you may not need to configure your controller at all.
 
 Controllers have access to their primary model available by
 default. Our RecipesController will have the Recipe model class
@@ -875,7 +886,9 @@ their respective sections later on in this manual.
 persistModel
 ~~~~~~~~~~~~
 
-Stub. Update Me!
+.. todo::
+
+    Stub. Update Me!
 
 Used to create cached instances of models a controller uses. When
 set to true, all models related to the controller will be cached.
@@ -897,11 +910,13 @@ controller is copied to your app/controllers/ folder and you can
 modify it to your needs if required. Or you could just copy the
 pages\_controller.php from core to your app.
 
-Do not directly modify ANY file under the ``cake`` folder to avoid
-issues when updating the core in future
+.. warning::
+
+    Do not directly modify ANY file under the ``cake`` folder to avoid
+    issues when updating the core in future
 
 
 .. todo::
 
-	This chaptser should be less about the controller api and more about examples, the controller attributes section is overwhelming
+	This chapter should be less about the controller api and more about examples, the controller attributes section is overwhelming
 	and difficult to understand at first. The chapter should start with some example controllers and what they do.

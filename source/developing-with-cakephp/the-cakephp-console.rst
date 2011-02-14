@@ -12,8 +12,10 @@ provides a framework for creating shell scripts. The Console uses a
 dispatcher-type setup to load a shell or task, and hand it its
 parameters.
 
-A command-line (CLI) build of PHP must be available on the system
-if you plan to use the Console.
+.. note::
+
+    A command-line (CLI) build of PHP must be available on the system
+    if you plan to use the Console.
 
 Before we get into specifics, let’s make sure we can run the
 CakePHP Console. First, you’ll need to bring up a system shell. The
@@ -243,11 +245,13 @@ You can also access tasks directly from the command line:
 
     $ cake sea sound
 
-In order to access tasks directly from the command line, the task
-**must** be included in the shell class' $tasks property.
-Therefore, be warned that a method called “sound” in the SeaShell
-class would override the ability to access the functionality in the
-Sound task specified in the $tasks array.
+.. note::
+
+    In order to access tasks directly from the command line, the task
+    **must** be included in the shell class' $tasks property.
+    Therefore, be warned that a method called “sound” in the SeaShell
+    class would override the ability to access the functionality in the
+    Sound task specified in the $tasks array.
 
 
 Running Shells as cronjobs

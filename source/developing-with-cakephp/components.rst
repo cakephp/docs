@@ -142,8 +142,6 @@ The above would pass the array containing precision and
 randomGenerator to MathComponent's initialize() method as the
 second parameter.
 
-This syntax is not implemented by any of the Core Components at
-this time
 
 MVC Class Access Within Components
 ----------------------------------

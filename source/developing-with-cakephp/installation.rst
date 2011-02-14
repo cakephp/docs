@@ -380,8 +380,10 @@ in /etc/lighttpd/cake.
     -- fallthrough will put it back into the lighty request loop
     -- that means we get the 304 handling for free. ;)
 
-If you run your CakePHP installation from a subdirectory, you must
-set prefix = 'subdirectory\_name' in the above script.
+.. note::
+
+    If you run your CakePHP installation from a subdirectory, you must
+    set prefix = 'subdirectory\_name' in the above script.
 
 Then tell Lighttpd about your vhost:
 

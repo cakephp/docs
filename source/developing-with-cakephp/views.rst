@@ -95,10 +95,12 @@ might look like:
 included with the built-in HTML helper. Useful for including
 javascript and CSS files from views.
 
-When using ``$html->css()`` or ``$javascript->link()`` in view
-files, specify 'false' for the 'in-line' argument to place the html
-source in ``$scripts_for_layout``. (See API for more details on
-usage).
+.. note::
+
+    When using ``$html->css()`` or ``$javascript->link()`` in view
+    files, specify 'false' for the 'in-line' argument to place the html
+    source in ``$scripts_for_layout``. (See API for more details on
+    usage).
 
 ``$content_for_layout`` contains the view. This is where the view
 code will be placed.
