@@ -416,7 +416,7 @@ helpful when creating helpers that need to add javascript or css
 directly to the layout. Keep in mind that scripts added from the
 layout, or elements in the layout will not be added to
 ``$scripts_for_layout``. This method is most often used from inside
-helpers, like the :doc:`/core-helpers/javascript` and
+helpers, like the :doc:`/core-helpers/js` and
 :doc:`/core-helpers/html` Helpers.
 
 Themes

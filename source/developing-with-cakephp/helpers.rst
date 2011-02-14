@@ -194,10 +194,6 @@ information, check out :doc:`/core-helpers`.
 
 CakePHP Helper
 	Description
-:doc:`/core-helpers/ajax`
-    Used in tandem with the Prototype JavaScript library to create Ajax
-    functionality in views. Contains shortcut methods for drag/drop,
-    ajax forms & links, observers, and more.
 :doc:`/core-utility-libraries/cache`
     Used by the core to cache view content.
 :doc:`/core-helpers/form`
@@ -210,9 +206,6 @@ CakePHP Helper
     Used to create Javascript compatible with various Javascript
     libraries. Replaces JavascriptHelper and AjaxHelper with a more
     flexible solution.
-:doc:`/core-helpers/javascript`
-    Used to escape values for use in JavaScripts, write out data to
-    JSON objects, and format code blocks.
 :doc:`/core-helpers/number`
     Number and currency formatting.
 :doc:`/core-helpers/paginator`
