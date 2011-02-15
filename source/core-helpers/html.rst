@@ -36,10 +36,13 @@ are a few examples of how to use the $htmlAttributes parameter:
     Desired attributes: <tag name="foo" value="bar" />  
     Array parameter:  array('name' => 'foo', 'value' => 'bar')
 
-The HtmlHelper is available in all views by default. If you're
-getting an error informing you that it isn't there, it's usually
-due to its name being missing from a manually configured $helpers
-controller variable.
+
+.. note::
+
+    The HtmlHelper is available in all views by default. If you're
+    getting an error informing you that it isn't there, it's usually
+    due to its name being missing from a manually configured $helpers
+    controller variable.
 
 Inserting Well-Formatted elements
 =================================
@@ -51,7 +54,7 @@ being rendered and delivered. This section will cover some of the
 methods of the HtmlHelper and how to use them.
 
 charset
-~~~~~~~
+-------
 
 ``charset(string $charset=null)``
 
@@ -82,7 +85,7 @@ Will output:
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
 css
-~~~
+---
 
 ``css(mixed $path, string $rel = null, array $options = array())``
 
@@ -119,7 +122,7 @@ Will output:
     <link rel="stylesheet" type="text/css" href="/css/menu.css" />
 
 meta
-~~~~
+----
 
 ``meta(string $type, string $url = null, array $attributes = array())``
 
@@ -197,7 +200,7 @@ following code:
      echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex')); 
 
 docType
-~~~~~~~
+-------
 
 ``docType(string $type = 'xhtml-strict')``
 
@@ -231,7 +234,7 @@ XHTML 1.1
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 style
-~~~~~
+-----
 
 ``style(array $data, boolean $oneline = true)``
 
@@ -254,7 +257,7 @@ Will output:
       background:#633; border-bottom:1px solid #000; padding:10px;
 
 image
-~~~~~
+-----
 
 ``image(string $path, array $htmlAttributes = array())``
 
@@ -290,7 +293,7 @@ Will output:
     </a>
 
 link
-~~~~
+----
 
 ``link(string $title, mixed $url = null, array $options = array(), string $confirmMessage = false)``
 
@@ -374,7 +377,7 @@ Also check
 for more examples of different types of urls.
 
 tag
-~~~
+---
 
 ``tag(string $tag, string $text, array $htmlAttributes)``
 
@@ -394,13 +397,15 @@ then only the opening <tag> is returned.
     //Output
     <span class="welcome">
 
-Text is not escaped by default but you may use
-``$htmlOptions['escape'] = true`` to escape your text. This
-replaces a fourth parameter ``boolean $escape = false`` that was
-available in previous versions.
+.. note::
+
+    Text is not escaped by default but you may use
+    ``$htmlOptions['escape'] = true`` to escape your text. This
+    replaces a fourth parameter ``boolean $escape = false`` that was
+    available in previous versions.
 
 div
-~~~
+---
 
 ``div(string $class, string $text, array $options)``
 
@@ -420,7 +425,7 @@ If no text is specified, only an opening div tag is returned.
     <div class="error">Please enter your credit card number.</div>
 
 para
-~~~~
+----
 
 ``para(string $class, string $text, array $htmlAttributes, boolean $escape = false)``
 
@@ -434,7 +439,7 @@ supplied, only a starting <p> tag is returned.
     <p>Hello World.</p>
 
 script
-~~~~~~
+------
 
 script(mixed $url, mixed $options)
 
@@ -489,7 +494,7 @@ Will output:
     <script type="text/javascript" href="/js/scripts.js"></script>
 
 scriptBlock
-~~~~~~~~~~~
+-----------
 
 scriptBlock($code, $options = array())
 
@@ -501,7 +506,7 @@ to script tags.
 create a script tag with ``defer="defer"`` attribute.
 
 scriptStart
-~~~~~~~~~~~
+-----------
 
 scriptStart($options = array())
 
@@ -510,7 +515,7 @@ output between ``scriptStart()`` and ``scriptEnd()`` and create an
 script tag. Options are the same as ``scriptBlock()``
 
 scriptEnd
-~~~~~~~~~
+---------
 
 scriptEnd()
 
@@ -529,7 +534,7 @@ be:
     $this->Html->scriptEnd();
 
 tableHeaders
-~~~~~~~~~~~~
+------------
 
 ``tableHeaders(array $names, array $trOptions = null, array $thOptions = null)``
 
@@ -560,7 +565,7 @@ tags.
     </tr>
 
 tableCells
-~~~~~~~~~~
+----------
 
 ``tableCells(array $data, array $oddTrOptions = null, array $evenTrOptions = null, $useCount = false, $continueOddEven = true)``
 
@@ -610,7 +615,7 @@ array() for specific <td>-attributes.
     <tr class="darker"><td>Yellow</td><td>Banana</td></tr>
 
 url
-~~~
+---
 
 ``url(mixed $url = NULL, boolean $full = false)``
 

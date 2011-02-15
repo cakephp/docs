@@ -25,12 +25,17 @@ User.username, with the dot indicating the nested array. This
 notation is used for all Session helper methods wherever a $key is
 used.
 
-If you have ``Session.start`` set to false in your config/core.php,
-you need to call ``$session->activate();`` in your view before you
-can use any other method of Session helper. Just like you need to
-call ``$this->Session->activate();`` in your controller to activate
-Session component.
+.. note::
 
+    If you have ``Session.start`` set to false in your config/core.php,
+    you need to call ``$session->activate();`` in your view before you
+    can use any other method of Session helper. Just like you need to
+    call ``$this->Session->activate();`` in your controller to activate
+    Session component.
+
+.. todo::
+
+    Review this section, its kind of pointless right now.
 
 read()
 ------

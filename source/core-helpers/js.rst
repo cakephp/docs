@@ -47,8 +47,10 @@ just before the ending ``</body>`` tag
 
     echo $this->Js->writeBuffer(); // Write cached scripts
 
-You must include the library in your page and print the cache for
-the helper to function.
+.. warning::
+
+    You must include the library in your page and print the cache for
+    the helper to function.
 
 Javascript engine selection is declared when you include the helper
 in your controller.
@@ -93,8 +95,11 @@ customHelper.
 
     var $helpers = array('Js');
 
-It is not possible to declare a javascript engine inside a custom
-helper. Doing that will have no effect.
+
+.. info::
+
+    It is not possible to declare a javascript engine inside a custom
+    helper. Doing that will have no effect.
 
 If you are willing to use an other javascript engine than the
 default, do the helper setup in your controller as follows:
@@ -106,8 +111,11 @@ default, do the helper setup in your controller as follows:
         'CustomHelper'
     );
 
-Be sure to declare the JsHelper and its engine **on top** of the
-``$helpers`` array in your controller.
+
+.. warning::
+
+    Be sure to declare the JsHelper and its engine **on top** of the
+    ``$helpers`` array in your controller.
 
 The selected javascript engine may disappear (replaced by the
 default) from the jsHelper object in your helper, if you miss to do

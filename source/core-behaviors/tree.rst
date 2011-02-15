@@ -34,10 +34,12 @@ field exists - quite simply it's easier to do certain tasks if a
 direct parent link is stored on the database - such as finding
 direct children.
 
-The ``parent`` field must be able to have a NULL value! It might
-seem to work, if you just give the top elements a parent value of
-zero, but reordering the tree (and possible other operations) will
-fail.
+.. note::
+
+    The ``parent`` field must be able to have a NULL value! It might
+    seem to work, if you just give the top elements a parent value of
+    zero, but reordering the tree (and possible other operations) will
+    fail.
 
 Basic Usage
 ===========
@@ -138,7 +140,7 @@ We can check what our category tree data looks like by visiting
 
 
 Adding data
-~~~~~~~~~~~
+-----------
 
 In the previous section, we used existing data and checked that it
 looked hierarchal via the method ``generatetreelist``. However,
@@ -201,7 +203,7 @@ follows:
 -  Other People's Categories **New**
 
 Modifying data
-~~~~~~~~~~~~~~
+--------------
 
 Modifying data is as transparent as adding new data. If you modify
 something, but do not change the parent\_id field - the structure
@@ -301,7 +303,7 @@ As would be expected the structure would be modified to:
 
 
 Deleting data
-~~~~~~~~~~~~~
+-------------
 
 The tree behavior provides a number of ways to manage deleting
 data. To start with the simplest example; let's say that the
@@ -349,20 +351,22 @@ The category tree would be modified as follows:
 
 
 Querying and using your data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 
 Using and manipulating hierarchical data can be a tricky business.
 In addition to the core find methods, with the tree behavior there
 are a few more tree-orientated permutations at your disposal.
 
-Most tree behavior methods return and rely on data being sorted by
-the ``lft`` field. If you call ``find()`` and do not order by
-``lft``, or call a tree behavior method and pass a sort order, you
-may get undesirable results.
+.. note::
+
+    Most tree behavior methods return and rely on data being sorted by
+    the ``lft`` field. If you call ``find()`` and do not order by
+    ``lft``, or call a tree behavior method and pass a sort order, you
+    may get undesirable results.
 
 
 Children
-^^^^^^^^
+~~~~~~~~
 
 The ``children`` method takes the primary key value (the id) of a
 row and returns the children, by default in the order they appear
@@ -380,7 +384,9 @@ from the previous section:
   // Only return direct children
   $directChildren = $this->Category->children(1, true); // a flat array with 2 items
 
-If you want a recursive array use ``find('threaded')``
+.. note::
+
+    If you want a recursive array use ``find('threaded')``
 
 **Parameters for this function include:**
 
@@ -395,7 +401,7 @@ If you want a recursive array use ``find('threaded')``
    Models
 
 Counting children
-^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~
 
 As with the method ``children``, ``childCount`` takes the primary
 key value (the id) of a row and returns how many children it has.
@@ -414,7 +420,7 @@ section:
   $numChildren = $this->Category->childCount(1, true); // will output 2
 
 generatetreelist
-^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~
 
 ``generatetreelist ($conditions=null, $keyPath=null, $valuePath=null, $spacer= '_', $recursive=null)``
 
@@ -469,7 +475,7 @@ Output:
   )
 
 getparentnode
-^^^^^^^^^^^^^
+~~~~~~~~~~~~~
 
 This convenience function will, as the name suggests, return the
 parent node for any node, or *false* if the node has no parent (its
@@ -481,7 +487,7 @@ the root node). For example:
   // $parent contains All categories
 
 getpath
-^^^^^^^
+~~~~~~~
 
 ``getpath( $id = null, $fields = null, $recursive = null )``
 
@@ -530,7 +536,7 @@ your hierarchical data needs, and any unexpected problems that
 might arise in the process.
 
 moveDown
-~~~~~~~~
+--------
 
 Used to move a single node down the tree. You need to provide the
 ID of the element to be moved and a positive number of how many
@@ -564,7 +570,7 @@ For example, if you'd like to move the "Sport" category one
 position down, you would request: /categories/movedown/Sport/1.
 
 moveUp
-~~~~~~
+------
 
 Used to move a single node up the tree. You need to provide the ID
 of the element to be moved and a positive number of how many
@@ -600,7 +606,7 @@ one position you would request /categories/moveup/Gwendolyn/1. Now
 the order of Friends will be Gwendolyn, Gerald.
 
 removeFromTree
-~~~~~~~~~~~~~~
+--------------
 
 ``removeFromTree($id=null, $delete=false)``
 
@@ -673,7 +679,7 @@ This demonstrates the alternate use for ``removeFromTree``, the
 children have been reparented and 'Sport' has been deleted.
 
 reorder
-~~~~~~~
+-------
 
 ``reorder ( array('id' => null, 'field' => $Model->displayField, 'order' => 'ASC', 'verify' => true) )``
 
@@ -690,10 +696,12 @@ not change the parent of any node.
         'verify' =>  //whether or not to verify the tree before reorder, default: true
     ));
 
-If you have saved your data or made other operations on the model,
-you might want to set ``$model->id = null`` before calling
-``reorder``. Otherwise only the current node and it's children will
-be reordered.
+.. note::
+
+    If you have saved your data or made other operations on the model,
+    you might want to set ``$model->id = null`` before calling
+    ``reorder``. Otherwise only the current node and it's children will
+    be reordered.
 
 Data Integrity
 ==============
@@ -705,7 +713,7 @@ contains several previously undocumented features designed to
 recover from such situations.
 
 Recover
-~~~~~~~
+-------
 
 ``recover(&$model, $mode = 'parent', $missingParentAction = null)``
 
@@ -746,7 +754,7 @@ Available ``missingParentActions`` options when using
     $this->Category->recover('tree');
 
 Reorder
-~~~~~~~
+-------
 
 ``reorder(&$model, $options = array())``
 
@@ -781,7 +789,7 @@ following possible keys by default, all of which are optional:
     )
 
 Verify
-~~~~~~
+------
 
 ``verify(&$model)``
 

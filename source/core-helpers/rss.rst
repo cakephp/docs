@@ -29,7 +29,7 @@ your posts/index. However, first we need to edit the controller to
 add in the rss-specific code.
 
 Controller Code
-~~~~~~~~~~~~~~~
+---------------
 
 It is a good idea to add RequestHandler to your PostsController's
 $components array. This will allow a lot of automagic to occur.
@@ -78,7 +78,7 @@ the same.
 With all the View variables set we need to create an rss layout.
 
 Layout
-^^^^^^
+~~~~~~
 
 An Rss layout is very simple, put the following contents in
 app/views/layouts/rss/default.ctp:
@@ -111,7 +111,7 @@ create a new index.ctp inside that folder. The contents of the file
 are below.
 
 View
-^^^^
+~~~~
 
 Our view, located at ``app/views/posts/rss/index.ctp``, begins by
 setting the $documentData and $channelData variables for the
@@ -145,8 +145,10 @@ inside, thus not giving access to the TimeHelper or any other
 helper that you may need. The RssHelper::item() transforms the
 associative array into an element for each key value pair.
 
-You will need to modify the $postLink variable as appropriate to
-your application.
+.. note::
+
+    You will need to modify the $postLink variable as appropriate to
+    your application.
 
 ::
 
@@ -197,7 +199,9 @@ important that you validate your RSS feed before making it live.
 This can be done by visiting sites that validate the XML such as
 Feed Validator or the w3c site at http://validator.w3.org/feed/.
 
-You may need to set the value of 'debug' in your core configuration
-to 1 or to 0 to get a valid feed, because of the various debug
-information added automagically under higher debug settings that
-break XML syntax or feed validation rules.
+.. note::
+
+    You may need to set the value of 'debug' in your core configuration
+    to 1 or to 0 to get a valid feed, because of the various debug
+    information added automagically under higher debug settings that
+    break XML syntax or feed validation rules.

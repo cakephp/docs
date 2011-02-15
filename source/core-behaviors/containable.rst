@@ -325,11 +325,13 @@ This is how we retrieve the above associations with Containable:
 Keep in mind that ``contain`` key is only used once in the main
 model, you don't need to use 'contain' again for related models
 
-When using 'fields' and 'contain' options - be careful to include
-all foreign keys that your query directly or indirectly requires.
-Please also note that because Containable must to be attached to
-all models used in containment, you may consider attaching it to
-your AppModel.
+.. note::
+
+    When using 'fields' and 'contain' options - be careful to include
+    all foreign keys that your query directly or indirectly requires.
+    Please also note that because Containable must to be attached to
+    all models used in containment, you may consider attaching it to
+    your AppModel.
 
 ContainableBehavior options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

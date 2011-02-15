@@ -32,10 +32,12 @@ output in the rendered view:
 
     <form id="UserAddForm" method="post" action="/users/add">
 
-You can also pass ``false`` for ``$model``. This will place your
-form data into the array: ``$this->data`` (instead of in the
-sub-array: ``$this->data['Model']``). This can be handy for short
-forms that may not represent anything in your database.
+.. note::
+
+    You can also pass ``false`` for ``$model``. This will place your
+    form data into the array: ``$this->data`` (instead of in the
+    sub-array: ``$this->data['Model']``). This can be handy for short
+    forms that may not represent anything in your database.
 
 The ``create()`` method allows us to customize much more using the
 parameters, however. First, you can specify a model name. By
@@ -84,8 +86,10 @@ http://site.com/recipes/edit/5, we might get the following:
     <form id="RecipeEditForm" method="post" action="/recipes/edit/5">
     <input type="hidden" name="_method" value="PUT" />
 
-Since this is an edit form, a hidden input field is generated to
-override the default HTTP method.
+.. note::
+
+    Since this is an edit form, a hidden input field is generated to
+    override the default HTTP method.
 
 The ``$options`` array is where most of the form configuration
 happens. This special array can contain a number of different
@@ -781,13 +785,17 @@ default):
         echo $this->Form->input('size', array('options'=>$sizes, 'default'=>'m')); 
     ?>
 
-You cannot use ``default`` to check a checkbox - instead you might
-set the value in ``$this->data`` in your controller,
-``$this->Form->data`` in your view, or set the input option
-``checked`` to true.
+.. note::
 
-Date and datetime fields' default values can be set by using the
-'selected' key.
+    You cannot use ``default`` to check a checkbox - instead you might
+    set the value in ``$this->data`` in your controller,
+    ``$this->Form->data`` in your view, or set the input option
+    ``checked`` to true.
+
+.. note::
+
+    Date and datetime fields' default values can be set by using the
+    'selected' key.
 
 $options[‘selected’]
 --------------------
@@ -801,8 +809,10 @@ rendered.
 
     echo $this->Form->input('close_time', array('type' => 'time', 'selected' => '13:30:00'));
 
-The selected key for date and datetime inputs may also be a UNIX
-timestamp.
+.. note::
+
+    The selected key for date and datetime inputs may also be a UNIX
+    timestamp.
 
 $options[‘rows’], $options[‘cols’]
 ----------------------------------
@@ -854,8 +864,10 @@ Output:
         </select>
     </div>
 
-If you need to set the default value in a password field to blank,
-use 'value' => '' instead.
+.. note::
+
+    If you need to set the default value in a password field to blank,
+    use 'value' => '' instead.
 
 Options can also supplied as key-value pairs.
 
@@ -1126,10 +1138,12 @@ Will output:
     <button type="reset">Reset the Form</button>
     <button type="submit">Submit Form</button>
 
-The ``button`` input type allows for a special ``$option``
-attribute called ``'escape'`` which accepts a bool and determines
-whether to HTML entity encode the $title of the button. Defaults to
-false.
+.. note::
+
+    The ``button`` input type allows for a special ``$option``
+    attribute called ``'escape'`` which accepts a bool and determines
+    whether to HTML entity encode the $title of the button. Defaults to
+    false.
 
 ::
 
@@ -1283,6 +1297,11 @@ meridian
 
 Creates a select element populated with ‘am’ and ‘pm’.
 
+.. todo::
+
+    All the date related functions need to be updated for 2.0
+
+
 error
 -----
 
@@ -1321,9 +1340,12 @@ Will output:
     <form enctype="multipart/form-data" method="post" action="/users/add">
     <input name="data[User][avatar]" value="" id="UserAvatar" type="file">
 
-When using ``$this->Form->file()``, remember to set the form
-encoding-type, by setting the type option to 'file' in
-``$this->Form->create()``
+.. note::
+
+    When using ``$this->Form->file()``, remember to set the form
+    encoding-type, by setting the type option to 'file' in
+    ``$this->Form->create()``
+
 hidden
 ------
 
@@ -1359,8 +1381,10 @@ error.
     }
     ?>
 
-When using ``$this->Form->input()``, errors are rendered by
-default.
+.. note::
+
+    When using ``$this->Form->input()``, errors are rendered by default.
+
 label
 -----
 
@@ -1463,10 +1487,12 @@ Will output:
     <option value="F">Female</option>
     </select>
 
-The ``select`` input type allows for a special ``$option``
-attribute called ``'escape'`` which accepts a bool and determines
-whether to HTML entity encode the contents of the select options.
-Defaults to true.
+.. note::
+
+    The ``select`` input type allows for a special ``$option``
+    attribute called ``'escape'`` which accepts a bool and determines
+    whether to HTML entity encode the contents of the select options.
+    Defaults to true.
 
 ::
 
@@ -1552,9 +1578,12 @@ Will output:
 
     <textarea name="data[User][notes]" id="UserNotes"></textarea>
 
-The ``textarea`` input type allows for the ``$options`` attribute
-of ``'escape'`` which determines whether or not the contents of the
-textarea should be escaped. Defaults to ``true``.
+.. note::
+
+    The ``textarea`` input type allows for the ``$options`` attribute
+    of ``'escape'`` which determines whether or not the contents of the
+    textarea should be escaped. Defaults to ``true``.
+    
 ::
 
     <?php

@@ -103,9 +103,11 @@ the generated files to create the components and models for the
 controller. As well as, fire the component initialize, controller
 beforeFilter, and component startup callbacks.
 
-p class="note"Setting ``callbacks => true`` partly defeats the
-purpose of caching. This is also the reason it is disabled by
-default.
+.. note::
+
+    Setting ``callbacks => true`` partly defeats the
+    purpose of caching. This is also the reason it is disabled by
+    default.
 
 Marking Non-Cached Content in Views
 ===================================

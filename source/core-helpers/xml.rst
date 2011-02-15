@@ -38,10 +38,12 @@ the data. This is commonly used for serializing model data.
      <model_name id="1" field_name="content" />
     ?>
 
-The serialize method acts as a shortcut to instantiating the XML
-built-in class and using the toString method of that. If you need
-more control over serialization, you may wish to invoke the XML
-class directly.
+.. note::
+
+    The serialize method acts as a shortcut to instantiating the XML
+    built-in class and using the toString method of that. If you need
+    more control over serialization, you may wish to invoke the XML
+    class directly.
 
 You can modify how a data is serialized by using the *format*
 attribute. By default the data will be serialized as attributes. If
