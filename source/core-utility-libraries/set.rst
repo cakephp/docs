@@ -61,7 +61,7 @@ Foo
     Any string enclosed in brackets (besides {n} and {s}) is
     interpreted as a regular expression.
     This section needs to be expanded.
-        
+
 
 insert
 ======
@@ -1129,8 +1129,10 @@ data from a find or a find all. This function allows you to
 retrieve your data quickly without having to loop through multi
 dimentional arrays or traverse through tree structures.
 
-If $path is an array or $data is empty it the call is delegated to
-Set::classicExtract.
+.. note::
+
+    If $path is an array or $data is empty it the call is delegated to
+    Set::classicExtract.
 
 ::
 
@@ -1514,8 +1516,10 @@ behaves recursive (unlike array\_merge) but does not do if for keys
 containing strings (unlike array\_merge\_recursive). See the unit
 test for more information.
 
-This function will work with an unlimited amount of arguments and
-typecasts non-array parameters into arrays.
+.. note::
+
+    This function will work with an unlimited amount of arguments and
+    typecasts non-array parameters into arrays.
 
 ::
 
@@ -1589,3 +1593,8 @@ of another.
     // False
     $result = Set::contains($b, $a);
     // True
+
+
+.. todo::
+
+    Missing info about apply().

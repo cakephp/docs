@@ -17,8 +17,10 @@ config. Using multiple cache configurations can help reduce the
 number of times you need to use ``Cache::set()`` as well as
 centralize all your cache settings.
 
-You must specify which engine to use. It does **not** default to
-File.
+.. note::
+
+    You must specify which engine to use. It does **not** default to
+    File.
 
 ::
 
