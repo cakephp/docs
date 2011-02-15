@@ -96,7 +96,7 @@ customHelper.
     var $helpers = array('Js');
 
 
-.. info::
+.. note::
 
     It is not possible to declare a javascript engine inside a custom
     helper. Doing that will have no effect.

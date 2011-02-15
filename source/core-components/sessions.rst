@@ -82,7 +82,7 @@ Dots are used to indicate nested arrays. This notation is used for
 all Session component methods wherever a $name is used.
 
 write
-~~~~~
+-----
 
 ``write($name, $value)``
 
@@ -97,7 +97,7 @@ This writes the value 'Green' to the session under Person =>
 eyeColor.
 
 setFlash
-~~~~~~~~
+--------
 
 ``setFlash($message, $element = 'default', $params = array(), $key = 'flash')``
 
@@ -130,7 +130,7 @@ would be:
     <div id="flashMessage" class="example_class">Example message text</div>
 
 read
-~~~~
+----
 
 ``read($name)``
 
@@ -144,7 +144,7 @@ entire session will be returned. E.g.
 Retrieve the value Green from the session.
 
 check
-~~~~~
+-----
 
 ``check($name)``
 
@@ -152,7 +152,7 @@ Used to check if a Session variable has been set. Returns true on
 existence and false on non-existence.
 
 delete
-~~~~~~
+------
 
 ``delete($name)``
 
@@ -171,7 +171,7 @@ the entire Person information from the session use.
     $this->Session->delete('Person');
 
 destroy
-~~~~~~~
+-------
 
 The ``destroy`` method will delete the session cookie and all
 session data stored in the temporary file system. It will then
@@ -182,7 +182,7 @@ destroy the PHP session and then create a fresh session.
     $this->Session->destroy()
 
 error
-~~~~~
+-----
 
 ``error()``
 
