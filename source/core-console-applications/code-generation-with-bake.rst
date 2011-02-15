@@ -96,16 +96,16 @@ Pass the skeleton path parameter to the project task
 
     cake bake project -skel vendors/shells/templates/skel
 
-Notes
+.. note::
 
--  You must run the specific project task ``cake bake project`` so
-   that the path parameter can be passed.
--  The template path is relative to the current path of the Command
-   Line Interface.
--  Since the full path to the skeleton needs to be manually
-   entered, you can specify any directory holding your template build
-   you want, including using multiple templates. (Unless Cake starts
-   supporting overriding the skel folder like it does for views)
+    -  You must run the specific project task ``cake bake project`` so
+       that the path parameter can be passed.
+    -  The template path is relative to the current path of the Command
+       Line Interface.
+    -  Since the full path to the skeleton needs to be manually
+       entered, you can specify any directory holding your template build
+       you want, including using multiple templates. (Unless Cake starts
+       supporting overriding the skel folder like it does for views)
 
 
 Bake improvements in 1.3

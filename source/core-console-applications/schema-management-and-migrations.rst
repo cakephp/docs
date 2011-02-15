@@ -19,9 +19,11 @@ using:
 This will generate a schema.php file in your ``app/config/schema``
 directory.
 
-The schema shell will only process tables for which there are
-models defined. To force the schema shell to process all the
-tables, you must add the ``-f`` option in the command line.
+.. note::
+
+    The schema shell will only process tables for which there are
+    models defined. To force the schema shell to process all the
+    tables, you must add the ``-f`` option in the command line.
 
 To later rebuild the database schema from your previously made
 schema.php file run:
