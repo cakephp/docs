@@ -1,6 +1,10 @@
 Authentication
 ##############
 
+.. todo::
+
+    Scrap and start over again.
+
 User authentication systems are a common part of many web
 applications. In CakePHP there are several systems for
 authenticating users, each of which provides different options. At

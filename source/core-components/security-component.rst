@@ -32,14 +32,16 @@ other components that process form data in their ``startup()``
 callbacks, be sure to place Security Component before those
 components in your ``$components`` array.
 
-When using the Security Component you **must** use the FormHelper
-to create your forms. The Security Component looks for certain
-indicators that are created and managed by the FormHelper
-(especially those created in create() and end()). Dynamically
-altering the fields that are submitted in a POST request (e.g.
-disabling, deleting or creating new fields via JavaScript) is
-likely to trigger a black-holing of the request. See the
-``$validatePost`` or ``$disabledFields`` configuration parameters.
+.. note::
+
+    When using the Security Component you **must** use the FormHelper
+    to create your forms. The Security Component looks for certain
+    indicators that are created and managed by the FormHelper
+    (especially those created in create() and end()). Dynamically
+    altering the fields that are submitted in a POST request (e.g.
+    disabling, deleting or creating new fields via JavaScript) is
+    likely to trigger a black-holing of the request. See the
+    ``$validatePost`` or ``$disabledFields`` configuration parameters.
 
 Configuration
 =============
@@ -90,6 +92,10 @@ $validatePost
 
 Methods
 =======
+
+.. todo::
+
+    Update to reflect API changes in 2.0
 
 requirePost()
 -------------
@@ -228,6 +234,10 @@ non-secure requests to secure requests automatically.
 
 Basic HTTP Authentication
 =========================
+
+.. todo::
+
+    Update to reflect API changes in 2.0
 
 The SecurityComponent has some very powerful authentication
 features. Sometimes you may need to protect some functionality

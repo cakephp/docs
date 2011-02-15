@@ -206,9 +206,11 @@ Hobbits                 Allow 'ale'      Allowing access to ale!
 Pippin                  --               Still allowing ale!    
 ======================= ================ =======================
 
-Since the 'Pippin' node in the ACL tree doesn't specifically deny
-access to the ale ACO, the final result is that we allow access to
-that ACO.
+..note::
+
+    Since the 'Pippin' node in the ACL tree doesn't specifically deny
+    access to the ale ACO, the final result is that we allow access to
+    that ACO.
 
 The tree also allows us to make finer adjustments for more granular
 control - while still keeping the ability to make sweeping changes
@@ -365,6 +367,7 @@ Defining Permissions: Cake's Database ACL
 
 Now that we've covered INI-based ACL permissions, let's move on to
 the (more commonly used) database ACL.
+
 Getting Started
 ---------------
 
@@ -421,7 +424,9 @@ console application should look something like the following:
     aros_acos updated.
     End create.
 
-This replaces an older deprecated command, "initdb".
+.. note::
+
+    This replaces an older deprecated command, "initdb".
 
 You can also use the SQL file found in
 ``app/config/sql/db_acl.sql``, but that's nowhere near as fun.
@@ -430,12 +435,14 @@ When finished, you should have three new database tables in your
 system: acos, aros, and aros\_acos (the join table to create
 permissions information between the two trees).
 
-If you're curious about how Cake stores tree information in these
-tables, read up on modified database tree traversal. The ACL
-component uses CakePHP's `Tree Behavior <http://docs.cakephp.org/view/91/tree-behavior>`_
-to manage the trees' inheritances. The model class files for ACL
-are all compiled in a single file
-`db\_acl.php <http://api.cakephp.org/file/cake/libs/model/db_acl.php>`_.
+.. note::
+
+    If you're curious about how Cake stores tree information in these
+    tables, read up on modified database tree traversal. The ACL
+    component uses CakePHP's :doc:`/core-behaviors/tree`
+    to manage the trees' inheritances. The model class files for ACL
+    are all compiled in a single file
+    `db\_acl.php <http://api.cakephp.org/file/cake/libs/model/db_acl.php>`_.
 
 Now that we're all set up, let's work on creating some ARO and ACO
 trees.
@@ -450,9 +457,11 @@ specifying a model name and foreign key value. The *second* method
 can be used when an object has no direct relation to a record in
 your database - you can provide a textual alias for the object.
 
-In general, when you're creating a group or higher level object,
-use an alias. If you're managing access to a specific item or
-record in the database, use the model/foreign key method.
+.. note::
+
+    In general, when you're creating a group or higher level object,
+    use an alias. If you're managing access to a specific item or
+    record in the database, use the model/foreign key method.
 
 You create new ACL objects using the core CakePHP ACL models. In
 doing so, there are a number of fields you'll want to use when
@@ -490,8 +499,10 @@ Once we've got that done, let's see what some examples of creating
 these objects might look like. The following code could be placed
 in a controller action somewhere:
 
-While the examples here focus on ARO creation, the same techniques
-can be used to create an ACO tree.
+.. note::
+
+    While the examples here focus on ARO creation, the same techniques
+    can be used to create an ACO tree.
 
 Keeping with our Fellowship setup, let's first create our ARO
 groups. Because our groups won't really have specific records tied
@@ -565,8 +576,10 @@ AROs under these groups. Every good citizen of Middle Earth has an
 account in our new system, so we'll tie these ARO records to
 specific model records in our database.
 
-When adding child nodes to a tree, make sure to use the ACL node
-ID, rather than a foreign\_key value.
+.. note::
+
+    When adding child nodes to a tree, make sure to use the ACL node
+    ID, rather than a foreign\_key value.
 
 ::
 
@@ -648,9 +661,11 @@ ID, rather than a foreign\_key value.
         //Other action logic goes here...
     }
 
-Typically you won't supply both an alias and a model/foreign\_key,
-but we're using both here to make the structure of the tree easier
-to read for demonstration purposes.
+.. note::
+
+    Typically you won't supply both an alias and a model/foreign\_key,
+    but we're using both here to make the structure of the tree easier
+    to read for demonstration purposes.
 
 The output of that console application command should now be a
 little more interesting. Let's give it a try:
@@ -791,10 +806,12 @@ yourself. What we have above is equivalent to this:
     $this->Acl->deny(array('model' => 'User', 'foreign_key' => 6342), 'Weapons', 'delete');
     $this->Acl->deny(array('model' => 'User', 'foreign_key' => 1564), 'Weapons', 'delete');
 
-Addressing a node using the alias syntax uses a slash-delimited
-string ('/users/employees/developers'). Addressing a node using
-model/foreign key syntax uses an array with two parameters:
-``array('model' => 'User', 'foreign_key' => 8282)``.
+.. note::
+
+    Addressing a node using the alias syntax uses a slash-delimited
+    string ('/users/employees/developers'). Addressing a node using
+    model/foreign key syntax uses an array with two parameters:
+    ``array('model' => 'User', 'foreign_key' => 8282)``.
 
 The next section will help us validate our setup by using the
 AclComponent to check the permissions we've just set up.
