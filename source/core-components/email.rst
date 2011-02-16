@@ -266,7 +266,7 @@ the example.
 If you don't know what an SMTP HELO is, then you most likely will
 not need to set the ``client`` parameter for the ``smtpOptions``.
 This is only needed for compatibility with SMTP servers which do
-not fully respect RFC 821 (SMTP HELO).
+not fully respect :rfc:`821` (SMTP HELO).
 
 Here are example options for using Gmail's SMTP server.
 
