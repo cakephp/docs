@@ -1,6 +1,5 @@
-3.1 Requirements
-----------------
-
+Requirements
+############
 
 -  HTTP Server. For example: Apache. mod\_rewrite is preferred, but
    by no means required.
@@ -9,7 +8,6 @@
 Technically a database engine isn’t required, but we imagine that
 most applications will utilize one. CakePHP supports a variety of
 database storage engines:
-
 
 -  MySQL (4 or greater)
 -  PostgreSQL
