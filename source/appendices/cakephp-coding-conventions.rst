@@ -9,7 +9,7 @@ standards.
 Adding new features
 ===================
 
-No new features should be added, without having their own tests = which
+No new features should be added, without having their own tests – which
 should be passed before committing them to the repository.
 
 Indentation
@@ -60,13 +60,13 @@ Control structures are for example "``if``", "``for``", "``foreach``",
     } 
     ?>
 
-=  In the control structures there should be 1 (one) space before the
+*  In the control structures there should be 1 (one) space before the
    first parenthesis and 1 (one) space between the last parenthesis and
    the opening bracket.
-=  Always use curly brackets in control structures, even if they are not
+*  Always use curly brackets in control structures, even if they are not
    needed. They increase the readability of the code, and they give you
    fewer logical errors.
-=  Opening curly brackets should be placed on the same line as the
+*  Opening curly brackets should be placed on the same line as the
    control structure. Closing curly brackets should be placed on new
    lines, and they should have same indentation level as the control
    structure. The statement included in curly brackets should begin on a
@@ -171,24 +171,21 @@ describe the commented block of code.
 Comments can include the following `phpDocumentor <http://phpdoc.org>`_
 tags:
 
-=  `@access <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.access.pkg.html>`_
-=  `@author <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.author.pkg.html>`_
-=  `@copyright <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.copyright.pkg.html>`_
-=  `@deprecated <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.deprecated.pkg.html>`_
-=  `@example <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.example.pkg.html>`_
-=  `@ignore <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.ignore.pkg.html>`_
-=  `@internal <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.internal.pkg.html>`_
-=  `@link <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.link.pkg.html>`_
-=  `@see <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.see.pkg.html>`_
-=  `@since <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.since.pkg.html>`_
-=  `@tutorial <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.tutorial.pkg.html>`_
-=  `@version <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.version.pkg.html>`_
-=  `inline
-   {@internal}} <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.inlineinternal.pkg.html>`_
-=  `inline
-   {@inheritdoc}} <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.inlineinheritdoc.pkg.html>`_
-=  `inline
-   {@link}} <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.inlinelink.pkg.html>`_
+*  `@access <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.access.pkg.html>`_
+*  `@author <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.author.pkg.html>`_
+*  `@copyright <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.copyright.pkg.html>`_
+*  `@deprecated <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.deprecated.pkg.html>`_
+*  `@example <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.example.pkg.html>`_
+*  `@ignore <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.ignore.pkg.html>`_
+*  `@internal <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.internal.pkg.html>`_
+*  `@link <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.link.pkg.html>`_
+*  `@see <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.see.pkg.html>`_
+*  `@since <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.since.pkg.html>`_
+*  `@tutorial <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.tutorial.pkg.html>`_
+*  `@version <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.version.pkg.html>`_
+*  `inline {@internal}} <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.inlineinternal.pkg.html>`_
+*  `inline {@inheritdoc}} <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.inlineinheritdoc.pkg.html>`_
+*  `inline {@link}} <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.inlinelink.pkg.html>`_
 
 PhpDoc tags are very much like JavaDoc tags in Java. Tags are only
 processed if they are the first thing in a DocBlock line, for example:
@@ -308,7 +305,7 @@ Private method or variable name start with double underscore ("\_\_"). Example::
     class A {
         private $__iAmAPrivateVariable;
 
-        private function _iAmAPrivateMethod() {
+        private function __iAmAPrivateMethod() {
             /*...*/
         }
     }
@@ -317,7 +314,7 @@ Private method or variable name start with double underscore ("\_\_"). Example::
 Method Chaining
 ---------------
 
-....
+todo
 
 Example addresses
 -----------------
@@ -325,12 +322,11 @@ Example addresses
 For all example URL and mail addresses use "example.com", "example.org"
 and "example.net", for example:
 
-=  Email: someone@example.com
-=  WWW: `http://www.example.com <http://www.example.com>`_
-=  FTP: `ftp://ftp.example.com <ftp://ftp.example.com>`_
+*  Email: someone@example.com
+*  WWW: `http://www.example.com <http://www.example.com>`_
+*  FTP: `ftp://ftp.example.com <ftp://ftp.example.com>`_
 
-The ``example.com`` domain name has been reserved for this (see `RFC
-2606 <http://www.rfc=editor.org/rfc/rfc2606.txt>`_) and is recommended
+The ``example.com`` domain name has been reserved for this (see :rfc:`2606`) and is recommended
 for use in documentation or as examples.
 
 Files
