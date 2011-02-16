@@ -27,7 +27,7 @@ integers, with a minimum of three characters.
 
 The regular expression in the ``rule`` must be delimited by
 slashes. The optional trailing 'i' after the last slash means the
-reg-exp is case *i*nsensitive.
+reg-exp is case *i*\ nsensitive.
 
 Adding your own Validation Methods
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

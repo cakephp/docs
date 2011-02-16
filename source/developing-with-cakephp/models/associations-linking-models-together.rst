@@ -20,29 +20,25 @@ of storage in web applications is a relational database. Most of
 what this section covers will be in that context.
 
 For information on associations with Plugin models, see
-:doc:`/developing-with-cakephp/plugins/plugin-models`.
+:ref:`plugin-models`.
 
 Relationship Types
-~~~~~~~~~~~~~~~~~~
+------------------
 
 The four association types in CakePHP are: hasOne, hasMany,
 belongsTo, and hasAndBelongsToMany (HABTM).
 
-Relationship
-Association Type
-Example
-one to one
-hasOne
-A user has one profile.
-one to many
-hasMany
-A user can have multiple recipes.
-many to one
-belongsTo
-Many recipes belong to a user.
-many to many
-hasAndBelongsToMany
-Recipes have, and belong to many tags.
+============= ===================== =======================================
+Relationship  Association Type      Example
+============= ===================== =======================================
+one to one    hasOne                A user has one profile.
+------------- --------------------- ---------------------------------------
+one to many   hasMany               A user can have multiple recipes.
+------------- --------------------- ---------------------------------------
+many to one   belongsTo             Many recipes belong to a user.
+------------- --------------------- ---------------------------------------
+many to many  hasAndBelongsToMany   Recipes have, and belong to many tags.
+============= ===================== =======================================
 
 Associations are defined by creating a class variable named after
 the association you are defining. The class variable can sometimes
@@ -143,7 +139,7 @@ need to define Recipe belongsTo User to be able to access the User
 model from your Recipe model
 
 hasOne
-~~~~~~
+------
 
 Let’s set up a User model with a hasOne relationship to a Profile
 model.
@@ -251,7 +247,7 @@ model will also fetch a related Profile record if it exists:
     )
 
 belongsTo
-~~~~~~~~~
+---------
 
 Now that we have Profile data access from the User model, let’s
 define a belongsTo association in the Profile model in order to get
@@ -363,7 +359,7 @@ Profile model will also fetch a related User record if it exists:
     )
 
 hasMany
-~~~~~~~
+-------
 
 Next step: defining a “User hasMany Comment” association. A hasMany
 association will allow us to fetch a user’s comments when we fetch
@@ -452,15 +448,11 @@ Possible keys for hasMany association arrays include:
    model ID, use the special ``{$__cakeID__$}`` marker in the query.
    For example, if your Apple model hasMany Orange, the query should
    look something like this:
-   ::
-
-       SELECT Orange.* from oranges as Orange WHERE Orange.apple_id = {$__cakeID__$};
+   ``SELECT Orange.* from oranges as Orange WHERE Orange.apple_id = {$__cakeID__$};``
 
 
 Once this association has been defined, find operations on the User
-model will also fetch related Comment records if they exist:
-
-::
+model will also fetch related Comment records if they exist::
 
     //Sample results from a $this->User->find() call.
     
@@ -502,7 +494,7 @@ the Comment model - completing the connection and allowing the flow
 of information from either model’s perspective.
 
 hasAndBelongsToMany (HABTM)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
 Alright. At this point, you can already call yourself a CakePHP
 model associations professional. You're already well versed in the
@@ -539,26 +531,28 @@ a good idea to add an additional primary key field (by convention
 names.
 
 Relation
-Schema (HABTM table in bold)
+    Schema (HABTM table in bold)
+
 Recipe HABTM Tag
-**recipes\_tags.**id, **recipes\_tags.**recipe\_id,
-**recipes\_tags.**tag\_id
+    ``recipes_tags.id``, ``recipes_tags.recipe_id``,
+    ``recipes_tags.tag_id``
+
 Cake HABTM Fan
-**cakes\_fans.**id, **cakes\_fans.**cake\_id,
-**cakes\_fans.**fan\_id
+    ``cakes_fans.id``, ``cakes_fans.cake_id``,
+    ``cakes_fans.fan_id``
+
 Foo HABTM Bar
-**bars\_foos.**id, **bars\_foos.**foo\_id, **bars\_foos.**bar\_id
+    ``bars_foos.id``, ``bars_foos.foo_id``, ``bars_foos.bar_id``
+
 Table names are by convention in alphabetical order.
 
 Make sure primary keys in tables **cakes** and **recipes** have
 "id" fields as assumed by convention. If they're different than
-assumed, it `has to be changed in model <http://docs.cakephp.org/view/1061/primaryKey>`_
+assumed, it has to be changed in model's :ref:`model-primaryKey`
 
 Once this new table has been created, we can define the HABTM
 association in the model files. We're gonna skip straight to the
-array syntax this time:
-
-::
+array syntax this time::
 
     <?php
     
@@ -630,9 +624,7 @@ Possible keys for HABTM association arrays include:
    results.
 
 Once this association has been defined, find operations on the
-Recipe model will also fetch related Tag records if they exist:
-
-::
+Recipe model will also fetch related Tag records if they exist::
 
     //Sample results from a $this->Recipe->find() call.
     
@@ -727,16 +719,12 @@ apply a condition to the association itself:
 Notice that this example returns ALL recipes but only the "Dessert"
 tags. To properly achieve our goal, there are a number of ways to
 do it. One option is to search the Tag model (instead of Recipe),
-which will also give us all of the associated Recipes.
-
-::
+which will also give us all of the associated Recipes::
 
     $this->Recipe->Tag->find('all', array('conditions'=>array('Tag.name'=>'Dessert')));
 
 We could also use the join table model (which CakePHP provides for
-us), to search for a given ID.
-
-::
+us), to search for a given ID::
 
     $this->Recipe->bindModel(array('hasOne' => array('RecipesTag')));
     $this->Recipe->find('all', array(
@@ -746,9 +734,7 @@ us), to search for a given ID.
 
 It's also possible to create an exotic association for the purpose
 of creating as many joins as necessary to allow filtering, for
-example:
-
-::
+example::
 
     $this->Recipe->bindModel(array(
         'hasOne' => array(
@@ -763,9 +749,7 @@ example:
             'conditions'=>array('FilterTag.name'=>'Dessert')
     ));
 
-Both of which will return the following data:
-
-::
+Both of which will return the following data::
 
     //Data Returned
     Array
@@ -816,7 +800,7 @@ For more information on binding model associations on the fly see
 Mix and match techniques to achieve your specific objective.
 
 hasMany through (The Join Model)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------
 
 It is sometimes desirable to store additional data with a many to
 many association. Consider the following
@@ -826,17 +810,13 @@ Student
 
 In other words, a Student can take many Courses and a Course can be
 taken my many Students. This is a simple many to many association
-demanding a table such as this
-
-::
+demanding a table such as this::
 
     id | student_id | course_id
 
 Now what if we want to store the number of days that were attended
 by the student on the course and their final grade? The table we'd
-want would be
-
-::
+want would be::
 
     id | student_id | course_id | days_attended | grade
 
@@ -848,9 +828,7 @@ the columns as it is not replaced in the new insert.
 The way to implement our requirement is to use a **join model**,
 otherwise known (in Rails) as a **hasMany through** association.
 That is, the association is a model itself. So, we can create a new
-model CourseMembership. Take a look at the following models.
-
-::
+model CourseMembership. Take a look at the following models.::
 
             student.php
             
@@ -913,15 +891,13 @@ Student's participation on a Course in addition to extra
 meta-information.
 
 Working with join model data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 
 Now that the models have been defined, let's see how we can save
 all of this. Let's say the Head of Cake School has asked us the
 developer to write an application that allows him to log a
 student's attendance on a course with days attended and grade. Take
-a look at the following code.
-
-::
+a look at the following code.::
 
         controllers/course_membership_controller.php
         
@@ -961,9 +937,7 @@ a look at the following code.
 
 You can see that the form uses the form helper's dot notation to
 build up the data array for the controller's save which looks a bit
-like this when submitted.
-
-::
+like this when submitted.::
 
         Array
         (
@@ -990,9 +964,7 @@ Cake will happily be able to save the lot together and assigning
 the foreign keys of the Student and Course into CourseMembership
 with a saveAll call with this data structure. If we run the index
 action of our CourseMembershipsController the data structure
-received now from a find('all') is:
-
-::
+received now from a find('all') is::
 
         Array
         (
@@ -1030,9 +1002,7 @@ will be cases where you want to create the Student and Course
 independently and at a later point associate the two together with
 a CourseMembership. So you might have a form that allows selection
 of existing students and courses from picklists or ID entry and
-then the two meta-fields for the CourseMembership, e.g.
-
-::
+then the two meta-fields for the CourseMembership, e.g.::
 
         
         views/course_memberships/add.ctp
@@ -1045,9 +1015,7 @@ then the two meta-fields for the CourseMembership, e.g.
             <button type="submit">Save</button>
         <?php echo $form->end(); ?>
 
-And the resultant POST
-
-::
+And the resultant POST::
 
      
         Array
@@ -1080,7 +1048,7 @@ makes it easy to do so with its built-in hasMany and belongsTo
 associations and saveAll feature.
 
 Creating and Destroying Associations on the Fly
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------------
 
 Sometimes it becomes necessary to create and destroy model
 associations on the fly. This may be for any number of reasons:
@@ -1223,7 +1191,7 @@ association definition in its model file, it will still need to be
 correctly keyed in order for the new association to work properly.
 
 Multiple relations to the same model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------
 
 There are cases where a Model has more than one relation to another
 Model. For example you might have a Message model that has two
@@ -1356,8 +1324,9 @@ If your table has ``parent_id`` field you can also use
 ```find('threaded')`` <http://book.cakephp.org/view/1023/find-threaded>`_
 to fetch nested array of records using a single query without
 setting up any associations.
+
 Joining tables
-~~~~~~~~~~~~~~
+--------------
 
 In SQL you can combine related tables using the JOIN statement.
 This allows you to perform complex searches across multiples tables

@@ -1,5 +1,5 @@
-3.7.8 Model Attributes
-----------------------
+Model Attributes
+################
 
 Model attributes allow you to set properties that can override the
 default model behavior.
@@ -69,6 +69,8 @@ Example usage:
     class Example extends AppModel {
        var $tablePrefix = 'alternate_'; // will look for 'alternate_examples'
     }
+
+.. _model-primaryKey:
 
 primaryKey
 ~~~~~~~~~~

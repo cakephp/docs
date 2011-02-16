@@ -128,6 +128,7 @@ If you want to access what we’ve got going thus far, visit
 /pizza/pizza\_orders. You should get a “Missing Model” error
 because we don’t have a PizzaOrder model defined yet.
 
+.. _plugin-models:
 
 Plugin Models
 ----------------
