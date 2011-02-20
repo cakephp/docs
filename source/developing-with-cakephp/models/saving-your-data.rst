@@ -23,6 +23,7 @@ quick usage.
 Here's a quick example of a controller action that uses a CakePHP
 model to save data to a database table::
 
+    <?php
     function edit($id) {
         //Has any form data been POSTed?
         if(!empty($this->data)) {
@@ -57,6 +58,7 @@ the ActiveRecord features offered by Model.
 
 ::
 
+    <?php
     $this->Post->read(null, 1);
     $this->Post->set('title', 'New title for the article');
     $this->Post->save();
@@ -67,6 +69,7 @@ single fields, in an ActiveRecord approach. You can also use
 
 ::
 
+    <?php
     $this->Post->read(null, 1);
     $this->Post->set(array(
         'title' => 'New title',
@@ -131,6 +134,7 @@ Creating or updating is controlled by the model's ``id`` field. If
 ``$Model->id`` is set, the record with this primary key is updated.
 Otherwise a new record is created::
 
+    <?php
     //Create: id isn't set or is null
     $this->Recipe->create();
     $this->Recipe->save($this->data);
@@ -187,6 +191,7 @@ along with their values, are identified by the ``$fields`` array.
 For example, to approve all bakers who have been members for over a
 year, the update call might look something like::
 
+    <?php
     $this_year = date('Y-m-d h:i:s', strtotime('-1 year'));
     
     $this->Baker->updateAll(
@@ -208,6 +213,7 @@ year, the update call might look something like::
 For example, to close all tickets that belong to a certain
 customer::
 
+    <?php
     $this->Ticket->updateAll(
         array('Ticket.status' => "'closed'"),
         array('Ticket.customer_id' => 453)
@@ -393,7 +399,7 @@ models at the same time.
 First, you need to build your form for both Company and Account
 models (we'll assume that Company hasMany Account)::
 
-    
+    <?php
     echo $form->create('Company', array('action'=>'add'));
     echo $form->input('Company.name', array('label'=>'Company name'));
     echo $form->input('Company.description');
@@ -419,7 +425,7 @@ having ``Account.0.fieldName`` is exactly what we need.
 Now, in our companies\_controller we can create an ``add()``
 action::
 
-    
+    <?php
     function add() {
        if(!empty($this->data)) {
           //Use the following to avoid   validation errors:
@@ -471,6 +477,7 @@ Once you have added the counter field you are good to go. Activate
 counter-cache in your association by adding a ``counterCache`` key
 and set the value to ``true``::
 
+    <?php
     class Image extends AppModel {
         var $belongsTo = array(
             'ImageAlbum' => array('counterCache' => true)
@@ -487,6 +494,7 @@ to, depending on how you look at it) the counter value.
 
 Using our Image model example, we can specify it like so::
 
+    <?php
     class Image extends AppModel {
         var $belongsTo = array(
             'ImageAlbum' => array(
@@ -494,6 +502,8 @@ Using our Image model example, we can specify it like so::
                 'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1
         ));
     }
+
+.. _saving-habtm:
 
 Saving Related Model Data (HABTM)
 ---------------------------------
@@ -526,6 +536,7 @@ automatically save the HABTM data to the database.
 
 ::
 
+    <?php
     function add() {
         
         //Save the association
@@ -543,6 +554,7 @@ using the ``find('list')`` method and assigned to a view variable
 of the model name. An input with the same name will automatically
 pull in this data into a ``<select>``::
 
+    <?php
     // in the controller:
     $this->set('tags', $this->Recipe->Tag->find('list'));
     
@@ -554,10 +566,9 @@ A more likely scenario with a HABTM relationship would include a
 Recipe can have multiple Tags assigned to it. In this case, the
 data is pulled out of the model the same way, but the form input is
 declared slightly different. The tag name is defined using the
-``ModelName`` convention.
+``ModelName`` convention::
 
-::
-
+    <?php
     // in the controller:
     $this->set('tags', $this->Recipe->Tag->find('list'));
     

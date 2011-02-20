@@ -9,7 +9,7 @@ visit the CakePHP API. Check out
 `http://api.cakephp.org/class/model <http://api.cakephp.org/class/model>`_.
 
 useDbConfig
-~~~~~~~~~~~
+===========
 
 The ``useDbConfig`` property is a string that specifies the name of
 the database connection to use to bind your model class to the
@@ -24,12 +24,13 @@ Example usage:
 
 ::
 
+    <?php
     class Example extends AppModel {
        var $useDbConfig = 'alternate';
     }
 
 useTable
-~~~~~~~~
+========
 
 The ``useTable`` property specifies the database table name. By
 default, the model uses the lowercase, plural form of the model's
@@ -37,24 +38,22 @@ class name. Set this attribute to the name of an alternate table,
 or set it to ``false`` if you wish the model to use no database
 table.
 
-Example usage:
+Example usage::
 
-::
-
+    <?php
     class Example extends AppModel {
        var $useTable = false; // This model does not use a database table
     }
 
-Alternatively:
+Alternatively::
 
-::
-
+    <?php
     class Example extends AppModel {
        var $useTable = 'exmp'; // This model uses a database table 'exmp'
     }
 
 tablePrefix
-~~~~~~~~~~~
+===========
 
 The name of the table prefix used for the model. The table prefix
 is initially set in the database connection file at
@@ -62,9 +61,7 @@ is initially set in the database connection file at
 override the default by setting the ``tablePrefix`` attribute in
 the model.
 
-Example usage:
-
-::
+Example usage::
 
     class Example extends AppModel {
        var $tablePrefix = 'alternate_'; // will look for 'alternate_examples'
@@ -73,32 +70,33 @@ Example usage:
 .. _model-primaryKey:
 
 primaryKey
-~~~~~~~~~~
+==========
 
 Each table normally has a primary key, ``id``. You may change which
 field name the model uses as its primary key. This is common when
 setting CakePHP to use an existing database table.
 
-Example usage:
+Example usage::
 
-::
-
+    <?php
     class Example extends AppModel {
         var $primaryKey = 'example_id'; // example_id is the field name in the database
     }
+    
+
+.. _model-displayField:
 
 displayField
-~~~~~~~~~~~~
+============
 
 The ``displayField`` attribute specifies which database field
 should be used as a label for the record. The label is used in
 scaffolding and in ``find('list')`` calls. The model will use
 ``name`` or ``title``, by default.
 
-For example, to use the ``username`` field:
+For example, to use the ``username`` field::
 
-::
-
+    <?php
     class User extends AppModel {
        var $displayField = 'username';
     }
@@ -109,7 +107,7 @@ field. For example, you cannot specify,
 create a virtual field with the Model attribute virtualFields
 
 recursive
-~~~~~~~~~
+=========
 
 The recursive property defines how deep CakePHP should go to fetch
 associated model data via ``find()``, ``findAll()`` and ``read()``
@@ -120,34 +118,30 @@ and have many Users which in turn have many Articles. You can set
 $recursive to different values based on the amount of data you want
 back from a $this->Group->find() call:
 
-Depth
-Description
--1
-Cake fetches Group data only, no joins.
-0
-Cake fetches Group data and its domain
-1
-Cake fetches a Group, its domain and its associated Users
-2
-Cake fetches a Group, its domain, its associated Users, and the
-Users' associated Articles
+* -1 Cake fetches Group data only, no joins.
+* 0  Cake fetches Group data and its domain
+* 1  Cake fetches a Group, its domain and its associated Users
+* 2  Cake fetches a Group, its domain, its associated Users, and the
+  Users' associated Articles
+
 Set it no higher than you need. Having CakePHP fetch data you
 aren’t going to use slows your app unnecessarily. Also note that
 the default recursive level is 1.
 
-If you want to combine $recursive with the ``fields``
-functionality, you will have to add the columns containing the
-required foreign keys to the ``fields`` array manually. In the
-example above, this could mean adding ``domain_id``.
+.. note::
+
+    If you want to combine $recursive with the ``fields``
+    functionality, you will have to add the columns containing the
+    required foreign keys to the ``fields`` array manually. In the
+    example above, this could mean adding ``domain_id``.
 
 order
-~~~~~
+=====
 
 The default ordering of data for any find operation. Possible
-values include:
+values include::
 
-::
-
+    <?php
     $order = "field"
     $order = "Model.field";
     $order = "Model.field asc";
@@ -156,7 +150,7 @@ values include:
     $order = array("Model.field" => "asc", "Model.field2" => "DESC");
 
 data
-~~~~
+====
 
 The container for the model’s fetched data. While data returned
 from a model class is normally used as returned from a find() call,
@@ -164,11 +158,10 @@ you may need to access information stored in $data inside of model
 callbacks.
 
 \_schema
-~~~~~~~~
+========
 
 Contains metadata describing the model’s database table fields.
 Each field is described by:
-
 
 -  name
 -  type (integer, string, datetime, etc.)
@@ -176,9 +169,9 @@ Each field is described by:
 -  default value
 -  length
 
-Example Usage:
-::
+Example Usage::
 
+    <?php
     var $_schema = array(
         'first_name' => array(
             'type' => 'string', 
@@ -196,30 +189,30 @@ Example Usage:
     );
 
 validate
-~~~~~~~~
+========
 
 This attribute holds rules that allow the model to make data
 validation decisions before saving. Keys named after fields hold
 regex values allowing the model to try to make matches.
 
-It is not necessary to call validate() before save() as save() will
-automatically validate your data before actually saving.
+.. note::
 
-For more information on validation, see the
-`Data Validation chapter <http://docs.cakephp.org/view/125/data-validation>`_ later on in
-this manual.
+    It is not necessary to call validate() before save() as save() will
+    automatically validate your data before actually saving.
+
+For more information on validation, see the :doc:`/common-tasks-with-cakephp/data-validation`
+later on in this manual.
 
 virtualFields
-~~~~~~~~~~~~~
+=============
 
 Array of virtual fields this model has. Virtual fields are aliased
 SQL expressions. Fields added to this property will be read as
 other fields in a model but will not be saveable.
 
-Example usage for MySQL:
+Example usage for MySQL::
 
-::
-
+    <?php
     var $virtualFields = array(
         'name' => "CONCAT(User.first_name, ' ', User.last_name)"
     );
@@ -234,22 +227,21 @@ usage, as well as limitations, see
 :doc:`/developing-with-cakephp/models/virtual-fields`.
 
 name
-~~~~
+====
 
 As you saw earlier in this chapter, the name attribute is a
 compatibility feature for PHP4 users and is set to the same value
 as the model name.
 
-Example usage:
+Example usage::
 
-::
-
+    <?php
     class Example extends AppModel {
        var $name = 'Example';
     }
 
 cacheQueries
-~~~~~~~~~~~~
+============
 
 If set to true, data fetched by the model during a single request
 is cached. This caching is in-memory only, and only lasts for the

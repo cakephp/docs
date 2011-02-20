@@ -1,10 +1,10 @@
-3.7.3 Retrieving Your Data
---------------------------
+Retrieving Your Data
+####################
 
 .. _model-find:
 
 find
-~~~~
+====
 
 ``find($type, $params)``
 
@@ -17,9 +17,7 @@ case sensitive. Using a upper case character (for example
 
 ``$params`` is used to pass all parameters to the various finds,
 and has the following possible keys by default - all of which are
-optional:
-
-::
+optional::
 
     array(
         'conditions' => array('Model.field' => $thisValue), //array of conditions
@@ -43,16 +41,15 @@ More information about model callbacks is available
 .. _model-find-first:
 
 find('first')
-^^^^^^^^^^^^^
+=============
 
 ``find('first', $params)``
 
 'first' is the default find type, and will return one result, you'd
 use this for any use where you expect only one result. Below are a
-couple of simple (controller code) examples:
+couple of simple (controller code) examples::
 
-::
-
+    <?php
     function some_function() {
        ...
        $this->Article->order = null; // resetting if it's set
@@ -66,9 +63,7 @@ couple of simple (controller code) examples:
 
 In the first example, no parameters at all are passed to find -
 therefore no conditions or sort order will be used. The format
-returned from ``find('first')`` call is of the form:
-
-::
+returned from ``find('first')`` call is of the form::
 
     Array
     (
@@ -94,15 +89,14 @@ There are no additional parameters used by ``find('first')``.
 .. _model-find-count:
 
 find('count')
-^^^^^^^^^^^^^
+=============
 
 ``find('count', $params)``
 
 ``find('count', $params)`` returns an integer value. Below are a
-couple of simple (controller code) examples:
+couple of simple (controller code) examples::
 
-::
-
+    <?php
     function some_function() {
        ...
        $total = $this->Article->find('count');
@@ -115,26 +109,27 @@ couple of simple (controller code) examples:
        ...
     }
 
-Don't pass ``fields`` as an array to ``find('count')``. You would
-only need to specify fields for a DISTINCT count (since otherwise,
-the count is always the same - dictated by the conditions).
+.. note::
+
+    Don't pass ``fields`` as an array to ``find('count')``. You would
+    only need to specify fields for a DISTINCT count (since otherwise,
+    the count is always the same - dictated by the conditions).
 
 There are no additional parameters used by ``find('count')``.
 
 .. _model-find-all:
 
 find('all')
-^^^^^^^^^^^
+===========
 
 ``find('all', $params)``
 
 ``find('all')`` returns an array of (potentially multiple) results.
 It is in fact the mechanism used by all ``find()`` variants, as
 well as ``paginate``. Below are a couple of simple (controller
-code) examples:
+code) examples::
 
-::
-
+    <?php
     function some_function() {
        ...
        $allArticles = $this->Article->find('all');
@@ -144,14 +139,14 @@ code) examples:
        ...
     }
 
-In the above example ``$allAuthors`` will contain every user in the
-users table, there will be no condition applied to the find as none
-were passed.
+.. note::
+
+    In the above example ``$allAuthors`` will contain every user in the
+    users table, there will be no condition applied to the find as none
+    were passed.
 
 The results of a call to ``find('all')`` will be of the following
-form:
-
-::
+form::
 
     Array
     (
@@ -181,16 +176,15 @@ There are no additional parameters used by ``find('all')``.
 .. _model-find-list:
 
 find('list')
-^^^^^^^^^^^^
+============
 
 ``find('list', $params)``
 
 ``find('list', $params)`` returns an indexed array, useful for any
 use where you would want a list such as for populating input select
-boxes. Below are a couple of simple (controller code) examples:
+boxes. Below are a couple of simple (controller code) examples::
 
-::
-
+    <?php
     function some_function() {
        ...
         $allArticles = $this->Article->find('list');
@@ -206,14 +200,14 @@ boxes. Below are a couple of simple (controller code) examples:
        ...
     }
 
-In the above example ``$allAuthors`` will contain every user in the
-users table, there will be no condition applied to the find as none
-were passed.
+.. note::
+
+    In the above example ``$allAuthors`` will contain every user in the
+    users table, there will be no condition applied to the find as none
+    were passed.
 
 The results of a call to ``find('list')`` will be in the following
-form:
-
-::
+form::
 
     Array
     (
@@ -231,11 +225,10 @@ determine what should be used as the array key, value and
 optionally what to group the results by. By default the primary key
 for the model is used for the key, and the display field (which can
 be configured using the model attribute
-`displayField <http://docs.cakephp.org/view/1062/displayField>`_) is used for the value.
-Some further examples to clarify:.
+:ref:`model-displayField`) is used for the value.
+Some further examples to clarify::
 
-::
-
+    <?php
     function some_function() {
        ...
        $justusernames = $this->Article->User->find('list', array('fields' => array('User.username')));
@@ -245,9 +238,7 @@ Some further examples to clarify:.
     }
 
 With the above code example, the resultant vars would look
-something like this:
-
-::
+something like this::
 
     
     $justusernames = Array
@@ -290,17 +281,16 @@ something like this:
 .. _model-find-threaded:
 
 find('threaded')
-^^^^^^^^^^^^^^^^
+================
 
 ``find('threaded', $params)``
 
 ``find('threaded', $params)`` returns a nested array, and is
 appropriate if you want to use the ``parent_id`` field of your
 model data to build nested results. Below are a couple of simple
-(controller code) examples:
+(controller code) examples::
 
-::
-
+    <?php
     function some_function() {
        ...
        $allCategories = $this->Category->find('threaded');
@@ -314,18 +304,18 @@ model data to build nested results. Below are a couple of simple
        ...
     }
 
-It is not necessary to use :doc:`/core-behaviors/tree`
-to use this method - but all desired results must be possible to be
-found in a single query.
+.. tip::
+
+    It is not necessary to use :doc:`/core-behaviors/tree`
+    to use this method - but all desired results must be possible to be
+    found in a single query.
 
 In the above code example, ``$allCategories`` will contain a nested
 array representing the whole category structure. The second example
 makes use of the data structure used by the
 :doc:`/core-behaviors/tree` the return a partial, nested,
 result for ``$aCategory`` and everything below it. The results of a
-call to ``find('threaded')`` will be of the following form:
-
-::
+call to ``find('threaded')`` will be of the following form::
 
     Array
     (
@@ -388,7 +378,7 @@ There are no additional parameters used by ``find('threaded')``.
 .. _model-find-neighbors:
 
 find('neighbors')
-^^^^^^^^^^^^^^^^^
+=================
 
 ``find('neighbors', $params)``
 
@@ -398,6 +388,7 @@ the row before and after the one you request. Below is a simple
 
 ::
 
+    <?php
     function some_function() {
        $neighbors = $this->Article->find('neighbors', array('field' => 'id', 'value' => 3));
     }
@@ -448,16 +439,15 @@ format returned from a ``find('neighbors')`` call is in the form:
             )
     )
 
-Note how the result always contains only two root elements: prev
-and next. This function does not honor a model's default recursive
-var. The recursive setting must be passed in the parameters on each
-call.
+.. note::
 
-Does not honor the recursive attribute on a model. You must set the
-recursive param to utilize the recursive feature.
+    Note how the result always contains only two root elements: prev
+    and next. This function does not honor a model's default recursive
+    var. The recursive setting must be passed in the parameters on each
+    call.
 
 findAllBy
-~~~~~~~~~
+=========
 
 ``findAllBy<fieldName>(string $value, array $fields, array $order, int $limit, int $page, int $rercursive)``
 
@@ -466,39 +456,24 @@ tables by a certain field. Just add the name of the field (in
 CamelCase format) to the end of these functions, and supply the
 criteria for that field as the first parameter.
 
-PHP5 findAllBy<x> Example
-Corresponding SQL Fragment
+findAllBy<x> Example
+    Corresponding SQL Fragment
 $this->Product->findAllByOrderStatus(‘3’);
-Product.order\_status = 3
+    Product.order\_status = 3
 $this->Recipe->findAllByType(‘Cookie’);
-Recipe.type = ‘Cookie’
+    Recipe.type = ‘Cookie’
 $this->User->findAllByLastName(‘Anderson’);
-User.last\_name = ‘Anderson’
+    User.last\_name = ‘Anderson’
 $this->Cake->findAllById(7);
-Cake.id = 7
-$this->User->findAllByUserName(‘psychic’, array(),
-array('User.user\_name => 'asc'));
-User.user\_name = ‘psychic’ ORDER BY User.user\_name ASC
-PHP4 users have to use this function a little differently due to
-some case-insensitivity in PHP4:
+    Cake.id = 7
+$this->User->findAllByUserName(‘psychic’, array(), array('User.user\_name => 'asc'));
+    User.user\_name = ‘psychic’ ORDER BY User.user\_name ASC
 
-PHP4 findAllBy<x> Example
-Corresponding SQL Fragment
-$this->Product->findAllByOrder\_status(‘3’);
-Product.order\_status = 3
-$this->Recipe->findAllByType(‘Cookie’);
-Recipe.type = ‘Cookie’
-$this->User->findAllByLast\_name(‘Anderson’);
-User.last\_name = ‘Anderson’
-$this->Cake->findAllById(7);
-Cake.id = 7
-$this->User->findAllByUser\_name(‘psychic’);
-User.user\_name = ‘psychic’
 The returned result is an array formatted just as it would be from
 findAll().
 
 findBy
-~~~~~~
+======
 
 ``findBy<fieldName>(string $value);``
 
@@ -511,33 +486,19 @@ tables by a certain field. Just add the name of the field (in
 CamelCase format) to the end of these functions, and supply the
 criteria for that field as the first parameter.
 
-PHP5 findBy<x> Example
-Corresponding SQL Fragment
+findBy<x> Example
+    Corresponding SQL Fragment
 $this->Product->findByOrderStatus(‘3’);
-Product.order\_status = 3
+    Product.order\_status = 3
 $this->Recipe->findByType(‘Cookie’);
-Recipe.type = ‘Cookie’
+    Recipe.type = ‘Cookie’
 $this->User->findByLastName(‘Anderson’);
-User.last\_name = ‘Anderson’
+    User.last\_name = ‘Anderson’
 $this->Cake->findById(7);
-Cake.id = 7
+    Cake.id = 7
 $this->User->findByUserName(‘psychic’);
-User.user\_name = ‘psychic’
-PHP4 users have to use this function a little differently due to
-some case-insensitivity in PHP4:
+    User.user\_name = ‘psychic’
 
-PHP4 findBy<x> Example
-Corresponding SQL Fragment
-$this->Product->findByOrder\_status(‘3’);
-Product.order\_status = 3
-$this->Recipe->findByType(‘Cookie’);
-Recipe.type = ‘Cookie’
-$this->User->findByLast\_name(‘Anderson’);
-User.last\_name = ‘Anderson’
-$this->Cake->findById(7);
-Cake.id = 7
-$this->User->findByUser\_name(‘psychic’);
-User.user\_name = ‘psychic’
 findBy() functions like find('first',...), while findAllBy()
 functions like find('all',...).
 
@@ -545,7 +506,7 @@ In either case, the returned result is an array formatted just as
 it would be from find() or findAll(), respectively.
 
 query
-~~~~~
+=====
 
 ``query(string $query)``
 
@@ -559,21 +520,19 @@ check out CakePHP’s
 cleaning up user-provided data from injection and cross-site
 scripting attacks.
 
-``query()`` does not honour $Model->cachequeries as its
-functionality is inherently disjoint from that of the calling
-model. To avoid caching calls to query, supply a second argument of
-false, ie: ``query($query, $cachequeries = false)``
+.. note::
+
+    ``query()`` does not honour $Model->cachequeries as its
+    functionality is inherently disjoint from that of the calling
+    model. To avoid caching calls to query, supply a second argument of
+    false, ie: ``query($query, $cachequeries = false)``
 
 ``query()`` uses the table name in the query as the array key for
-the returned data, rather than the model name. For example,
-
-::
+the returned data, rather than the model name. For example::
 
     $this->Picture->query("SELECT * FROM pictures LIMIT 2;");
 
-might return
-
-::
+might return::
 
     Array
     (
@@ -598,15 +557,11 @@ might return
 
 To use the model name as the array key, and get a result consistent
 with that returned by the Find methods, the query can be
-rewritten:
-
-::
+rewritten::
 
     $this->Picture->query("SELECT * FROM pictures AS Picture LIMIT 2;");
 
-which returns
-
-::
+which returns::
 
     Array
     (
@@ -629,12 +584,14 @@ which returns
             )
     )
 
-This syntax and the corresponding array structure is valid for
-MySQL only. Cake does not provide any data abstraction when running
-queries manually, so exact results will vary between databases.
+.. note::
+
+    This syntax and the corresponding array structure is valid for
+    MySQL only. Cake does not provide any data abstraction when running
+    queries manually, so exact results will vary between databases.
 
 field
-~~~~~
+=====
 
 ``field(string $name, array $conditions = null, string $order = null)``
 
@@ -646,13 +603,14 @@ found returns false.
 
 ::
 
+    <?php
     $this->Post->id = 22;
     echo $this->Post->field('name'); // echo the name for row id 22
     
     echo $this->Post->field('name', array('created <' => date('Y-m-d H:i:s')), 'created DESC'); // echo the name of the last created instance
 
 read()
-~~~~~~
+======
 
 ``read($fields, $id)``
 
@@ -675,6 +633,7 @@ field.
 
 ::
 
+    <?php
     function beforeDelete($cascade) {
        ...
        $rating = $this->read('rating'); // gets the rating of the record being deleted.
@@ -694,7 +653,7 @@ demonstrate how ``read()`` changes the current model data.
 you would like to keep them, use ``find('first')`` instead.
 
 Complex Find Conditions
-~~~~~~~~~~~~~~~~~~~~~~~
+=======================
 
 Most of the model's find calls involve passing sets of conditions
 in one way or another. The simplest approach to this is to use a
@@ -708,10 +667,9 @@ manipulatable parts. This allows CakePHP to generate the most
 efficient query possible, ensure proper SQL syntax, and properly
 escape each individual part of the query.
 
-At it's most basic, an array-based query looks like this:
+At it's most basic, an array-based query looks like this::
 
-::
-
+    <?php
     $conditions = array("Post.title" => "This is a post");
     //Example usage with a model:
     $this->Post->find('first', array('conditions' => $conditions));
@@ -725,10 +683,9 @@ in the future, should you choose to change your schema.
 
 What about other types of matches? These are equally simple. Let's
 say we wanted to find all the posts where the title is not "This is
-a post":
+a post"::
 
-::
-
+    <?php
     array("Post.title <>" => "This is a post")
 
 Notice the '<>' that follows the field name. CakePHP can parse out
@@ -736,36 +693,31 @@ any valid SQL comparison operator, including match expressions
 using LIKE, BETWEEN, or REGEX, as long as you leave a space between
 field name and the operator. The one exception here is IN
 (...)-style matches. Let's say you wanted to find posts where the
-title was in a given set of values:
+title was in a given set of values::
 
-::
-
+    <?php
     array(
         "Post.title" => array("First post", "Second post", "Third post")
     )
 
 To do a NOT IN(...) match to find posts where the title is not in
-the given set of values:
+the given set of values::
 
-::
-
+    <?php
     array(
         "NOT" => array("Post.title" => array("First post", "Second post", "Third post"))
     )
 
 Adding additional filters to the conditions is as simple as adding
-additional key/value pairs to the array:
+additional key/value pairs to the array::
 
-::
-
+    <?php
     array (
         "Post.title" => array("First post", "Second post", "Third post"),
         "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
     )
 
-You can also create finds that compare two fields in the database
-
-::
+You can also create finds that compare two fields in the database::
 
     array("Post.created = Post.modified")
 
@@ -775,10 +727,9 @@ been modified).
 
 Remember that if you find yourself unable to form a WHERE clause in
 this method (ex. boolean operations), you can always specify it as
-a string like:
+a string like::
 
-::
-
+    <?php
     array(
         'Model.field & 8 = 1',
         //other conditions as usual
@@ -788,10 +739,9 @@ By default, CakePHP joins multiple conditions with boolean AND;
 which means, the snippet above would only match posts that have
 been created in the past two weeks, and have a title that matches
 one in the given set. However, we could just as easily find posts
-that match either condition:
+that match either condition::
 
-::
-
+    <?php
     array( "OR" => array (
         "Post.title" => array("First post", "Second post", "Third post"),
         "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
@@ -804,10 +754,9 @@ prefer. These conditions are also infinitely nest-able. Let's say
 you had a belongsTo relationship between Posts and Authors. Let's
 say you wanted to find all the posts that contained a certain
 keyword (“magic”) or were created in the past two weeks, but you
-want to restrict your search to posts written by Bob:
+want to restrict your search to posts written by Bob::
 
-::
-
+    <?php
     array (
         "Author.name" => "Bob", 
         "OR" => array (
@@ -818,9 +767,9 @@ want to restrict your search to posts written by Bob:
 
 If you need to set multiple conditions on the same field, like when
 you want to do a LIKE search with multiple terms, you can do so by
-using conditions similar to:
-::
+using conditions similar to::
 
+    <?php
      array(
         'OR' => array(
         array('Post.title LIKE' => '%one%'),
@@ -829,33 +778,30 @@ using conditions similar to:
     );
 
 Cake can also check for null fields. In this example, the query
-will return records where the post title is not null:
+will return records where the post title is not null::
 
-::
-
+    <?php
     array ("NOT" => array (
             "Post.title" => null
         )
     )
 
-To handle BETWEEN queries, you can use the following:
+To handle BETWEEN queries, you can use the following::
 
-::
-
+    <?php
     array('Post.id BETWEEN ? AND ?' => array(1,10))
 
-Note: CakePHP will quote the numeric values depending on the field
-type in your DB.
+.. note::
 
-How about GROUP BY?
+    CakePHP will quote the numeric values depending on the field
+    type in your DB.
 
-::
+How about GROUP BY?::
 
+    <?php
     array('fields'=>array('Product.type','MIN(Product.price) as price'), 'group' => 'Product.type');
 
-The data returned for this would be in the following format:
-
-::
+The data returned for this would be in the following format::
 
     Array
     (
@@ -873,17 +819,15 @@ The data returned for this would be in the following format:
         [1] => Array....
 
 A quick example of doing a DISTINCT query. You can use other
-operators, such as MIN(), MAX(), etc., in a similar fashion
+operators, such as MIN(), MAX(), etc., in a similar fashion::
 
-::
-
+    <?php
     array('fields'=>array('DISTINCT (User.name) AS my_column_name'), 'order'=>array('User.id DESC'));
 
 You can create very complex conditions, by nesting multiple
-condition arrays:
+condition arrays::
 
-::
-
+    <?php
     array(
        'OR' => array(
           array('Company.name' => 'Future Holdings'),
@@ -901,14 +845,12 @@ condition arrays:
        )
     );
 
-Which produces the following SQL:
+Which produces the following SQL::
 
-::
-
-    SELECT `Company`.`id`, `Company`.`name`, 
-    `Company`.`description`, `Company`.`location`, 
+    SELECT `Company`.`id`, `Company`.`name`,
+    `Company`.`description`, `Company`.`location`,
     `Company`.`created`, `Company`.`status`, `Company`.`size`
-    
+
     FROM
        `companies` AS `Company`
     WHERE
@@ -919,7 +861,8 @@ Which produces the following SQL:
        ((`Company`.`status` = 'active')
        OR (NOT (`Company`.`status` IN ('inactive', 'suspended'))))
 
-**Sub-queries**
+Sub-queries
+-----------
 
 For the example, imagine we have a "users" table with "id", "name"
 and "status". The status can be "A", "B" or "C". And we want to get
@@ -928,10 +871,9 @@ all the users that have status different than "B" using sub-query.
 In order to achieve that we are going to get the model data source
 and ask it to build the query as if we were calling a find method,
 but it will just return the SQL statement. After that we make an
-expression and add it to the conditions array.
+expression and add it to the conditions array::
 
-::
-
+    <?php
     $conditionsSubQuery['"User2"."status"'] = 'B';
     
     $dbo = $this->User->getDataSource();
@@ -956,9 +898,7 @@ expression and add it to the conditions array.
     
     $this->User->find('all', compact('conditions'));
 
-This should generate the following SQL:
-
-::
+This should generate the following SQL::
 
     SELECT 
         "User"."id" AS "User__id", 

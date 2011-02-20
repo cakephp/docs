@@ -133,10 +133,12 @@ to the ``$uses`` array:
 
     $this->User->Recipe->someFunction();
 
-Remember that associations are defined 'one way'. If you define
-User hasMany Recipe that has no effect on the Recipe Model. You
-need to define Recipe belongsTo User to be able to access the User
-model from your Recipe model
+.. note::
+
+    Remember that associations are defined 'one way'. If you define
+    User hasMany Recipe that has no effect on the Recipe Model. You
+    need to define Recipe belongsTo User to be able to access the User
+    model from your Recipe model
 
 hasOne
 ------
@@ -150,20 +152,21 @@ that points to a record in the other. In this case the profiles
 table will contain a field called user\_id. The basic pattern is:
 
 **hasOne:** the *other* model contains the foreign key.
-Relation
-Schema
-Apple hasOne Banana
-bananas.apple\_id
-User hasOne Profile
-profiles.user\_id
-Doctor hasOne Mentor
-mentors.doctor\_id
+
+==================== ==================
+Relation             Schema            
+==================== ==================
+Apple hasOne Banana  bananas.apple\_id 
+-------------------- ------------------
+User hasOne Profile  profiles.user\_id 
+-------------------- ------------------
+Doctor hasOne Mentor mentors.doctor\_id
+==================== ==================
+
 The User model file will be saved in /app/models/user.php. To
 define the ‘User hasOne Profile’ association, add the $hasOne
 property to the model class. Remember to have a Profile model in
-/app/models/profile.php, or the association won’t work.
-
-::
+/app/models/profile.php, or the association won’t work::
 
     <?php
     
@@ -259,21 +262,24 @@ When keying your database tables for a belongsTo relationship,
 follow this convention:
 
 **belongsTo:** the *current* model contains the foreign key.
-Relation
-Schema
-Banana belongsTo Apple
-bananas.apple\_id
-Profile belongsTo User
-profiles.user\_id
-Mentor belongsTo Doctor
-mentors.doctor\_id
-If a model(table) contains a foreign key, it belongsTo the other
-model(table).
+
+======================= ==================
+Relation                Schema
+======================= ==================
+Banana belongsTo Apple  bananas.apple\_id
+----------------------- ------------------
+Profile belongsTo User  profiles.user\_id
+----------------------- ------------------
+Mentor belongsTo Doctor mentors.doctor\_id
+======================= ==================
+
+.. tip::
+
+    If a model(table) contains a foreign key, it belongsTo the other
+    model(table).
 
 We can define the belongsTo association in our Profile model at
-/app/models/profile.php using the string syntax as follows:
-
-::
+/app/models/profile.php using the string syntax as follows::
 
     <?php
     
@@ -284,9 +290,7 @@ We can define the belongsTo association in our Profile model at
     ?>
 
 We can also define a more specific relationship using array
-syntax:
-
-::
+syntax::
 
     <?php
     
@@ -335,9 +339,7 @@ Possible keys for belongsTo association arrays include:
    counter cache field.
 
 Once this association has been defined, find operations on the
-Profile model will also fetch a related User record if it exists:
-
-::
+Profile model will also fetch a related User record if it exists::
 
     //Sample results from a $this->Profile->find() call.
     
@@ -369,18 +371,19 @@ When keying your database tables for a hasMany relationship, follow
 this convention:
 
 **hasMany:** the *other* model contains the foreign key.
-Relation
-Schema
-User hasMany Comment
-Comment.user\_id
-Cake hasMany Virtue
-Virtue.cake\_id
-Product hasMany Option
-Option.product\_id
-We can define the hasMany association in our User model at
-/app/models/user.php using the string syntax as follows:
 
-::
+======================= ==================
+Relation                Schema
+======================= ==================
+User hasMany Comment    Comment.user\_id
+----------------------- ------------------
+Cake hasMany Virtue     Virtue.cake\_id
+----------------------- ------------------
+Product hasMany Option  Option.product\_id
+======================= ==================
+
+We can define the hasMany association in our User model at
+/app/models/user.php using the string syntax as follows::
 
     <?php
     
@@ -391,9 +394,7 @@ We can define the hasMany association in our User model at
     ?>
 
 We can also define a more specific relationship using array
-syntax:
-
-::
+syntax::
 
     <?php
     
@@ -544,7 +545,9 @@ Cake HABTM Fan
 Foo HABTM Bar
     ``bars_foos.id``, ``bars_foos.foo_id``, ``bars_foos.bar_id``
 
-Table names are by convention in alphabetical order.
+.. note::
+
+    Table names are by convention in alphabetical order.
 
 Make sure primary keys in tables **cakes** and **recipes** have
 "id" fields as assumed by convention. If they're different than
@@ -791,11 +794,14 @@ which essentially tells CakePHP to keep the binding persistent over
 multiple queries, rather than just one as in the default behavior.
 Please refer to the API for more details.
 
-For more information on saving HABTM objects see
-`Saving Related Model Data (HABTM) <http://docs.cakephp.org/view/1034/Saving-Related-Model-Data-HABTM>`_
+.. tip::
 
-For more information on binding model associations on the fly see
-`Creating and destroying associations on the fly <http://docs.cakephp.org/view/1045/Creating-and-Destroying-Associations-on-the-Fly>`_
+    For more information on saving HABTM objects see :ref:`saving-habtm`
+
+.. tip::
+
+    For more information on binding model associations on the fly see
+    :ref:`dynamic-associations`
 
 Mix and match techniques to achieve your specific objective.
 
@@ -830,8 +836,8 @@ otherwise known (in Rails) as a **hasMany through** association.
 That is, the association is a model itself. So, we can create a new
 model CourseMembership. Take a look at the following models.::
 
-            student.php
-            
+            <?php
+            //student.php
             class Student extends AppModel
             {
                 public $hasMany = array(
@@ -850,7 +856,7 @@ model CourseMembership. Take a look at the following models.::
                 );
             }      
             
-            course.php
+            //course.php
             
             class Course extends AppModel
             {
@@ -866,7 +872,7 @@ model CourseMembership. Take a look at the following models.::
                 );
             }
             
-            course_membership.php
+            //course_membership.php
     
             class CourseMembership extends AppModel
             {
@@ -899,40 +905,41 @@ developer to write an application that allows him to log a
 student's attendance on a course with days attended and grade. Take
 a look at the following code.::
 
-        controllers/course_membership_controller.php
-        
-        class CourseMembershipsController extends AppController
-        {
-            public $uses = array('CourseMembership');
-            
-            public function index() {
-                $this->set('course_memberships_list', $this->CourseMembership->find('all'));
-            }
-            
-            public function add() {
-                
-                if (! empty($this->data)) {
-                    
-                    if ($this->CourseMembership->saveAll(
-                        $this->data, array('validate' => 'first'))) {
+   <?php
+    //controllers/course_membership_controller.php
     
-                        
-                        $this->redirect(array('action' => 'index'));
-                    }
+    class CourseMembershipsController extends AppController
+    {
+        public $uses = array('CourseMembership');
+        
+        public function index() {
+            $this->set('course_memberships_list', $this->CourseMembership->find('all'));
+        }
+        
+        public function add() {
+            
+            if (! empty($this->data)) {
+                
+                if ($this->CourseMembership->saveAll(
+                    $this->data, array('validate' => 'first'))) {
+
+                    
+                    $this->redirect(array('action' => 'index'));
                 }
             }
         }
-        
-        views/course_memberships/add.ctp
+    }
     
-        <?php echo $form->create('CourseMembership'); ?>
-            <?php echo $form->input('Student.first_name'); ?>
-            <?php echo $form->input('Student.last_name'); ?>
-            <?php echo $form->input('Course.name'); ?>
-            <?php echo $form->input('CourseMembership.days_attended'); ?>
-            <?php echo $form->input('CourseMembership.grade'); ?>
-            <button type="submit">Save</button>
-        <?php echo $form->end(); ?>
+    //views/course_memberships/add.ctp
+
+    <?php echo $form->create('CourseMembership'); ?>
+        <?php echo $form->input('Student.first_name'); ?>
+        <?php echo $form->input('Student.last_name'); ?>
+        <?php echo $form->input('Course.name'); ?>
+        <?php echo $form->input('CourseMembership.days_attended'); ?>
+        <?php echo $form->input('CourseMembership.grade'); ?>
+        <button type="submit">Save</button>
+    <?php echo $form->end(); ?>
         
 
 You can see that the form uses the form helper's dot notation to
@@ -1005,7 +1012,7 @@ of existing students and courses from picklists or ID entry and
 then the two meta-fields for the CourseMembership, e.g.::
 
         
-        views/course_memberships/add.ctp
+        //views/course_memberships/add.ctp
         
         <?php echo $form->create('CourseMembership'); ?>
             <?php echo $form->input('Student.id', array('type' => 'text', 'label' => 'Student ID', 'default' => 1)); ?>
@@ -1041,11 +1048,11 @@ And the resultant POST::
 Again Cake is good to us and pulls the Student id and Course id
 into the CourseMembership with the saveAll.
 
-
-
 Join models are pretty useful things to be able to use and Cake
 makes it easy to do so with its built-in hasMany and belongsTo
 associations and saveAll feature.
+
+.. _dynamic-associations:
 
 Creating and Destroying Associations on the Fly
 -----------------------------------------------
@@ -1064,9 +1071,7 @@ model bindModel() and unbindModel() methods. (There is also a very
 helpful behavior called "Containable", please refer to manual
 section about Built-in behaviors for more information). Let's set
 up a few models so we can see how bindModel() and unbindModel()
-work. We'll start with two models:
-
-::
+work. We'll start with two models::
 
     <?php
     
@@ -1096,10 +1101,9 @@ Leader model to fetch a Leader and its associated followers. As you
 can see above, the association array in the Leader model defines a
 "Leader hasMany Followers" relationship. For demonstration
 purposes, let's use unbindModel() to remove that association in a
-controller action.
+controller action::
 
-::
-
+    <?php
     function someAction() {
         // This fetches Leaders, and their associated Followers
         $this->Leader->find('all');
@@ -1123,16 +1127,17 @@ controller action.
         $this->Leader->find('all');
     }
 
-Removing or adding associations using bind- and unbindModel() only
-works for the *next* find operation only unless the second
-parameter has been set to false. If the second parameter has been
-set to *false*, the bind remains in place for the remainder of the
-request.
+.. note::
 
-Here’s the basic usage pattern for unbindModel():
+    Removing or adding associations using bind- and unbindModel() only
+    works for the *next* find operation only unless the second
+    parameter has been set to false. If the second parameter has been
+    set to *false*, the bind remains in place for the remainder of the
+    request.
 
-::
+Here’s the basic usage pattern for unbindModel()::
 
+    <?php
     $this->Model->unbindModel(
         array('associationType' => array('associatedModelClassName'))
     );
@@ -1143,10 +1148,9 @@ associated Principles. The model file for our Principle model is
 bare, except for the var $name statement. Let's associate some
 Principles to our Leader on the fly (but remember–only for just the
 following find operation). This function appears in the
-LeadersController:
+LeadersController::
 
-::
-
+    <?php
     function anotherAction() {
         // There is no Leader hasMany Principles in 
         // the leader.php model file, so a find here, 
@@ -1173,10 +1177,9 @@ LeadersController:
 There you have it. The basic usage for bindModel() is the
 encapsulation of a normal association array inside an array whose
 key is named after the type of association you are trying to
-create:
+create::
 
-::
-
+    <?php
     $this->Model->bindModel(
             array('associationName' => array(
                     'associatedModelClassName' => array(
@@ -1198,9 +1201,7 @@ Model. For example you might have a Message model that has two
 relations to the User model. One relation to the user that sends a
 message, and a second to the user that receives the message. The
 messages table will have a field user\_id, but also a field
-recipient\_id. Now your Message model can look something like:
-
-::
+recipient\_id. Now your Message model can look something like::
 
     <?php
     class Message extends AppModel {
@@ -1219,9 +1220,7 @@ recipient\_id. Now your Message model can look something like:
     ?>
 
 Recipient is an alias for the User model. Now let's see what the
-User model would look like.
-
-::
+User model would look like::
 
     <?php
     class User extends AppModel {
@@ -1239,9 +1238,7 @@ User model would look like.
     }
     ?>
 
-It is also possible to create self associations as shown below.
-
-::
+It is also possible to create self associations as shown below::
 
     <?php
     class Post extends AppModel {
@@ -1266,9 +1263,7 @@ It is also possible to create self associations as shown below.
 **An alternate method** of associating a model with itself (without
 assuming a parent/child relationship) is to have both the
 ``$belongsTo`` and ``$hasMany`` relationships of a model each to
-declare an identical alias, className, and foreignKey [property].
-
-::
+declare an identical alias, className, and foreignKey [property]::
 
     <?php
     class MySchema extends CakeSchema {
@@ -1341,15 +1336,16 @@ associations. Here is where forcing joins comes to the rescue. You
 only have to define the necessary joins to combine tables and get
 the desired results for your query.
 
-Remember you need to set the recursion to -1 for this to work. I.e:
-$this->Channel->recursive = -1;
+.. note::
+
+    Remember you need to set the recursion to -1 for this to work. I.e:
+    $this->Channel->recursive = -1;
 
 To force a join between tables you need to use the "modern" syntax
 for Model::find(), adding a 'joins' key to the $options array. For
-example:
+example::
 
-::
-
+    <?php
     $options['joins'] = array(
         array('table' => 'channels',
             'alias' => 'Channel',
@@ -1362,7 +1358,9 @@ example:
     
     $Item->find('all', $options);
 
-Note that the 'join' arrays are not keyed.
+.. note::
+
+    Note that the 'join' arrays are not keyed.
 
 In the above example, a model called Item is left joined to the
 channels table. You can alias the table with the Model name, so the
@@ -1378,10 +1376,9 @@ The keys that define the join are the following:
 -  **conditions**: The conditions to perform the join.
 
 With joins, you could add conditions based on Related model
-fields:
+fields::
 
-::
-
+    <?php
     $options['joins'] = array(
         array('table' => 'channels',
             'alias' => 'Channel',
@@ -1403,10 +1400,9 @@ You could perform several joins as needed in hasBelongsToMany:
 Suppose a Book hasAndBelongsToMany Tag association. This relation
 uses a books\_tags table as join table, so you need to join the
 books table to the books\_tags table, and this with the tags
-table:
+table::
 
-::
-
+    <?php
     $options['joins'] = array(
         array('table' => 'books_tags',
             'alias' => 'BooksTag',

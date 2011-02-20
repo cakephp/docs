@@ -1,12 +1,12 @@
-3.7.5 Deleting Data
--------------------
+Deleting Data
+#############
 
 These methods can be used to remove data.
 
 .. _model-delete:
 
 delete
-~~~~~~
+======
 
 ``delete(int $id = null, boolean $cascade = true);``
 
@@ -25,7 +25,7 @@ Recipe records (User 'hasMany' or 'hasAndBelongsToMany' Recipes):
 .. _model-deleteall:
 
 deleteAll
-~~~~~~~~~
+=========
 
 ``deleteAll(mixed $conditions, $cascade = true, $callbacks = false)``
 
@@ -34,8 +34,8 @@ Same as with ``delete()`` and ``remove()``, except that
 conditions. The ``$conditions`` array should be supplied as an SQL
 fragment or array.
 
-**conditions** Conditions to match
-**cascade** Boolean, Set to true to delete records that depend on
-this record
-**callbacks** Boolean, Run callbacks
-Return boolean True on success, false on failure
+* **conditions** Conditions to match
+* **cascade** Boolean, Set to true to delete records that depend on
+  this record
+* **callbacks** Boolean, Run callbacks
+  Return boolean True on success, false on failure

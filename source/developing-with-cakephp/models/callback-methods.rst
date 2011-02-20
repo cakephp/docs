@@ -8,7 +8,7 @@ to note the expected return values for each of these special
 functions.
 
 beforeFind
-~~~~~~~~~~
+==========
 
 ``beforeFind(mixed $queryData)``
 
@@ -25,16 +25,14 @@ You might use this callback to restrict find operations based on a
 user’s role, or make caching decisions based on the current load.
 
 afterFind
-~~~~~~~~~
+=========
 
 ``afterFind(array $results, bool $primary)``
 
 Use this callback to modify results that have been returned from a
 find operation, or to perform any other post-find logic. The
 $results parameter passed to this callback contains the returned
-results from the model's find operation, i.e. something like:
-
-::
+results from the model's find operation, i.e. something like::
 
     $results = array(
       0 => array(
@@ -54,24 +52,23 @@ model was the model that the query originated on or whether or not
 this model was queried as an association. If a model is queried as
 an assocation the format of ``$results`` can differ; instead of the
 result you would normally get from a find operation, you may get
-this:
-
-::
+this::
 
     $results = array(
       'field_1' => 'value1',
       'field_2' => 'value2'
     );
 
-Code expecting ``$primary`` to be true will probably get a "Cannot
-use string offset as an array" fatal error from PHP if a recursive
-find is used.
+.. warning::
+
+    Code expecting ``$primary`` to be true will probably get a "Cannot
+    use string offset as an array" fatal error from PHP if a recursive
+    find is used.
 
 Below is an example of how afterfind can be used for date
-formating.
+formating::
 
-::
-
+    <?php
     function afterFind($results) {
         foreach ($results as $key => $val) {
             if (isset($val['Event']['begindate'])) {
@@ -86,7 +83,7 @@ formating.
     }
 
 beforeValidate
-~~~~~~~~~~~~~~
+==============
 
 ``beforeValidate()``
 
@@ -95,7 +92,7 @@ to modify validation rules if required. This function must also
 return *true*, otherwise the current save() execution will abort.
 
 beforeSave
-~~~~~~~~~~
+==========
 
 ``beforeSave()``
 
@@ -129,11 +126,13 @@ changed very easily. Use the code below in the appropriate model.
         return date('Y-m-d', strtotime($dateString)); // Direction is from 
     }
 
-Be sure that beforeSave() returns true, or your save is going to
-fail.
+.. tip::
+
+    Be sure that beforeSave() returns true, or your save is going to
+    fail.
 
 afterSave
-~~~~~~~~~
+=========
 
 ``afterSave(boolean $created)``
 
@@ -144,7 +143,7 @@ The value of ``$created`` will be true if a new record was created
 (rather than an update).
 
 beforeDelete
-~~~~~~~~~~~~
+============
 
 ``beforeDelete(boolean $cascade)``
 
@@ -155,11 +154,14 @@ want to abort.
 The value of ``$cascade`` will be ``true`` if records that depend
 on this record will also be deleted.
 
-Be sure that beforeDelete() returns true, or your delete is going
-to fail.
+.. tip::
+
+    Be sure that beforeDelete() returns true, or your delete is going
+    to fail.
 
 ::
 
+    <?php
     // using app/models/ProductCategory.php
     // In the following example, do not let a product category be deleted if it still contains products.
     // A call of $this->Product->delete($id) from ProductsController.php has set $this->id .
@@ -177,7 +179,7 @@ to fail.
     }
 
 afterDelete
-~~~~~~~~~~~
+===========
 
 ``afterDelete()``
 
@@ -185,7 +187,7 @@ Place any logic that you want to be executed after every deletion
 in this callback method.
 
 onError
-~~~~~~~
+=======
 
 ``onError()``
 
