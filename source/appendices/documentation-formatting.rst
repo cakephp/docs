@@ -85,17 +85,44 @@ There are several kinds of links, each with their own uses.
 External links
 --------------
 
-..
+Links to external documents can be with the following::
+
+    `External Link <http://example.com>`_
+
+The above would generate a link pointing to http://example.com
 
 Links to other pages
 --------------------
 
-...
+.. rst:role:: doc
+
+    Other pages in the documentation can be linked to using the ``:doc:`` role. 
+    You can link to the specified document using either an absolute or relative path reference.  
+    You should omit the ``.rst`` extension.  For example, if the reference ``:doc:`form``` appears in 
+    the document ``core-helpers/html``, then the link references ``core-helpers/form``.  
+    If the reference was ``:doc:`/core-helpers```, it would always reference ``/core-helpers`` regardless
+    of where it was used.
 
 Cross referencing links
 -----------------------
 
-...
+.. rst:role:: ref
+
+    You can cross reference any arbitrary title in any document using the ``:ref:`` role.  Link label targets
+    must be unique across the entire documentation.  When creating labels for class methods, its best to use 
+    ``class-method`` as the format for your link label.
+    
+    The most common use of labels is above a title.  Example::
+    
+        .. _label-name:
+        
+        Section heading
+        ---------------
+        
+        More content here.
+    
+    Elsewhere you could reference the above section using ``:ref:`label-name```.  The link's text would be the
+    title that the link preceeded.  You can also provide custom link text using ``:ref:`Link text <label-name>```.
 
 
 Source code
@@ -117,3 +144,21 @@ Literal text is not modified or formatted, save that one level of indentation is
 
 Notes and warnings
 ==================
+
+There are often times when you want to inform the reader of an important tip, special note or a potential hazard. Admonitions in sphinx are used for just that.  There are three kinds of admonitions. 
+
+* ``.. tip::`` Tips are used to document or re-iterate interesting or important information. 
+  The content of the directive should be written in complete sentences and include all appropriate punctuation.
+* ``.. note::`` Notes are used to document an especially important piece of information. 
+  The content of the directive should be written in complete sentences and include all appropriate punctuation.
+* ``.. warning::`` Warnings are used to document potential stumbling blocks, or information pertaining to security.
+  The content of the directive should be written in complete sentences and include all appropriate punctuation.
+  
+All admonitions are made the same::
+
+    .. note::
+    
+        Indented and preceeded and followed by a blank line. Just like a paragraph.
+    
+    This text is not part of the note.
+
