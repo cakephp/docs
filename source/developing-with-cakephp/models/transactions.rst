@@ -1,5 +1,5 @@
-3.7.11 Transactions
--------------------
+Transactions
+############
 
 To perform a transaction, a model's tables must be of a type that
 supports transactions.

@@ -1,5 +1,5 @@
-3.7.10 Virtual fields
----------------------
+Virtual fields
+##############
 
 Virtual fields are a new feature in the Model for CakePHP 1.3.
 Virtual fields allow you to create arbitrary SQL expressions and
@@ -9,7 +9,7 @@ will be indexed under the model's key alongside other model
 fields.
 
 Creating virtual fields
-~~~~~~~~~~~~~~~~~~~~~~~
+=======================
 
 Creating virtual fields is easy. In each model you can define a
 ``$virtualFields`` property that contains an array of field =>
@@ -42,12 +42,13 @@ In this case it may be better to just use
 Name.
 
 Using virtual fields
-~~~~~~~~~~~~~~~~~~~~
+====================
 
 Creating virtual fields is straightforward and easy, interacting
 with virtual fields can be done through a few different methods.
 
 Model::hasField()
+-----------------
 
 Model::hasField() has been updated so that it can return true if
 the model has a virtualField with the correct name. By setting the
@@ -61,6 +62,7 @@ field above,
     $this->User->hasField('name', true); // Will return true as there is a virtual field called name
 
 Model::isVirtualField()
+-----------------------
 
 This method can be used to check if a field/column is a virtual
 field or a concrete field. Will return true if the column is
@@ -72,6 +74,7 @@ virtual.
     $this->User->isVirtualField('first_name'); //false
 
 Model::getVirtualField()
+------------------------
 
 This method can be used to access the SQL expression that comprises
 a virtual field. If no argument is supplied it will return all
@@ -82,6 +85,7 @@ virtual fields in a Model.
     $this->User->getVirtualField('name'); //returns 'CONCAT(User.first_name, ' ', User.last_name)'
 
 Model::find() and virtual fields
+--------------------------------
 
 As stated earlier ``Model::find()`` will treat virtual fields much
 like any other field in a model. The value of a virtual field will
@@ -91,7 +95,7 @@ behavior of calculated fields in 1.2
 ::
 
     $results = $this->User->find('first');
-    
+
     // results contains the following
     array(
         'User' => array(
@@ -102,14 +106,15 @@ behavior of calculated fields in 1.2
         )
     );
 
-**Pagination and virtual fields**
+Pagination and virtual fields
+-----------------------------
 
 Since virtual fields behave much like regular fields when doing
 find's, ``Controller::paginate()`` has been updated to allows
 sorting by virtual fields.
 
 Virtual fields and model aliases
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+================================
 
 When you are using virtualFields and models with aliases that are
 not the same as their name, you can run into problems as
@@ -128,7 +133,7 @@ This will allow your virtualFields to work for any alias you give a
 model.
 
 Limitations of virtualFields
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+============================
 
 The implementation of ``virtualFields`` in 1.3 has a few
 limitations. First you cannot use ``virtualFields`` on associated
