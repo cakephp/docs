@@ -19,5 +19,17 @@ html: $(SPHINX_DEPENDENCIES)
 	cd en && make html LANG=en
 	cd es && make html LANG=es
 
+htmlhelp: $(SPHINX_DEPENDENCIES)
+	cd en && make htmlhelp LANG=en
+	cd es && make htmlhelp LANG=es
+
+epub: $(SPHINX_DEPENDENCIES)
+	cd en && make epub LANG=en
+	cd es && make epub LANG=es
+
+latexpdf: $(SPHINX_DEPENDENCIES)
+	cd en && make latexpdf LANG=en
+	cd es && make latexpdf LANG=es
+
 clean:
 	rm -rf build/*
