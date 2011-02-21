@@ -10,17 +10,14 @@ PYTHON = python
 SPHINX_DEPENDENCIES = \
 	es/Makefile
 
+# Copy-paste the english Makefile everwhere its needed.
 %/Makefile : en/Makefile
 	$(PYTHON) -c "import shutil; shutil.copyfile('$<', '$@')"
 
+# Make the HTML version of the documentation with correctly nested language folders.
 html: $(SPHINX_DEPENDENCIES)
-	cd en && make html
-	cd es && make html
-
-website: html
-	mkdir -p build/html/{en,es}
-	cp -R en/_build/html/* build/html/en
-	cp -R es/_build/html/* build/html/es
+	cd en && make html LANG=en
+	cd es && make html LANG=es
 
 clean:
 	rm -rf build/*
