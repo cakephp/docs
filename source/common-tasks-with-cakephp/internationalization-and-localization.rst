@@ -53,7 +53,7 @@ With your code ready to be multilingual, the next step is to create
 your `pot file <http://en.wikipedia.org/wiki/Gettext>`_, which is
 the template for all translatable strings in your application. To
 generate your pot file(s), all you need to do is run the
-`i18n console task <http://book.cakephp.org/view/1521/Core-Console-Applications>`_,
+:doc:`i18n console task </core-console-applications>`,
 which will look for where you've used a translate function in your
 code and generate your pot file(s) for you. You can and should
 re-run this console task any time you change the translations in

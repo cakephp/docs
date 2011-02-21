@@ -347,6 +347,8 @@ has been loaded, and resolves paths automatically in most cases.
 Make sure you follow the
 :ref:`file-and-classname-conventions`.
 
+.. _app-import:
+
 Using App::import()
 -------------------
 

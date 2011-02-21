@@ -73,8 +73,7 @@ If the application's DEBUG level is non-zero, $var is printed out.
 If ``$showHTML`` is true, the data is rendered to be
 browser-friendly.
 
-Also see
-`Basic Debugging <http://book.cakephp.org/view/1190/Basic-Debugging>`_
+Also see :doc:`Basic Debugging </common-tasks-with-cakephp/debugging>`_
 
 
 env

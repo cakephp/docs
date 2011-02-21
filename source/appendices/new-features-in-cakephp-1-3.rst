@@ -62,9 +62,7 @@ helpers to share names and not create collisions.
 
 **New JsHelper and new features in HtmlHelper**
 
-See
-`JsHelper documentation <http://book.cakephp.org/view/1592/Js>`_
-for more information
+See :doc:`JsHelper documentation </core-helpers/js>` for more information
 
 **Pagination Helper**
 

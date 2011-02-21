@@ -208,23 +208,24 @@ Returns a (X)HTML doctype tag. Supply the doctype according to the
 following table:
 
 type
-translated value
+    translated value
 html
-text/html
+    text/html
 html4-strict
-HTML4 Strict
+    HTML4 Strict
 html4-trans
-HTML4 Transitional
+    HTML4 Transitional
 html4-frame
-HTML4 Frameset
+    HTML4 Frameset
 xhtml-strict
-XHTML1 Strict
+    XHTML1 Strict
 xhtml-trans
-XHTML1 Transitional
+    XHTML1 Transitional
 xhtml-frame
-XHTML1 Frameset
+    XHTML1 Frameset
 xhtml11
-XHTML 1.1
+    XHTML 1.1
+    
 ::
 
     <?php echo $this->Html->docType(); ?> 
@@ -268,9 +269,7 @@ to /app/webroot/img/.
 
     <?php echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'))?> 
 
-Will output:
-
-::
+Will output::
 
     <img src="/img/cake_logo.png" alt="CakePHP" /> 
 
@@ -284,9 +283,7 @@ To create an image link specify the link destination using the
         'url' => array('controller' => 'recipes', 'action' => 'view', 6)
     )); ?>
 
-Will output:
-
-::
+Will output::
 
     <a href="/recipes/view/6">
         <img src="/img/recipes/6.jpg" alt="Brownies" />
@@ -305,17 +302,13 @@ specify attributes for the element and whether or not the
 
     <?php echo $this->Html->link('Enter', '/pages/home', array('class' => 'button', 'target' => '_blank')); ?>
 
-Will output:
-
-::
+Will output::
 
       
     <a href="/pages/home" class="button" target="_blank">Enter</a>
 
 Specify ``$confirmMessage`` to display a javascript ``confirm()``
-dialog.
-
-::
+dialog::
 
     <?php echo $this->Html->link(
         'Delete',
@@ -324,9 +317,7 @@ dialog.
         "Are you sure you wish to delete this recipe?"
     );?>
 
-Will output:
-
-::
+Will output::
 
       
     <a href="/recipes/delete/6" onclick="return confirm('Are you sure you wish to delete this recipe?');">Delete</a>
@@ -342,9 +333,7 @@ Query strings can also be created with ``link()``.
         '?' => array('height' => 400, 'width' => 500))
     );
 
-Will output:
-
-::
+Will output::
 
       
     <a href="/images/view/1?height=400&width=500">View image</a>
@@ -364,16 +353,13 @@ false in the ``$options`` array.
     
     ?>
 
-Will output:
-
-::
+Will output::
 
     <a href="/recipes/view/6">
         <img src="/img/recipes/6.jpg" alt="Brownies" />
     </a>
 
-Also check
-`HtmlHelper::url <http://book.cakephp.org/view/1448/url>`_ method
+Also check :ref:`HtmlHelper::url <html-url>` method
 for more examples of different types of urls.
 
 tag
@@ -466,9 +452,7 @@ directory.
 
     <?php echo $this->Html->script('scripts'); ?> 
 
-Will output:
-
-::
+Will output::
 
     <script type="text/javascript" href="/js/scripts.js"></script>
 
@@ -485,9 +469,7 @@ The first parameter can be an array to include multiple files.
 
     <?php echo $this->Html->script(array('jquery','wysiwyg','scripts')); ?>
 
-Will output:
-
-::
+Will output::
 
     <script type="text/javascript" href="/js/jquery.js"></script>
     <script type="text/javascript" href="/js/wysiwyg.js"></script>
@@ -523,9 +505,7 @@ End a buffering script block, returns the generated script element
 or null if the script block was opened with inline = false.
 
 An example of using ``scriptStart()`` and ``scriptEnd()`` would
-be:
-
-::
+be::
 
     $this->Html->scriptStart(array('inline' => false));
     
@@ -614,6 +594,8 @@ array() for specific <td>-attributes.
     <tr><td>Orange</td><td>Orange</td></tr>
     <tr class="darker"><td>Yellow</td><td>Banana</td></tr>
 
+.. _html-url:
+
 url
 ---
 
@@ -636,9 +618,7 @@ true, the full base URL will be prepended to the result.
 
 Here are a few more usage examples:
 
-URL with named parameters
-
-::
+URL with named parameters::
 
     <?php echo $this->Html->url(array(
         "controller" => "posts",
@@ -649,9 +629,7 @@ URL with named parameters
     // Output
     /posts/view/foo:bar
 
-URL with extension
-
-::
+URL with extension::
 
     <?php echo $this->Html->url(array(
         "controller" => "posts",
@@ -671,9 +649,7 @@ URL (starting with '/') with the full base URL prepended.
     //Output
     http://somedomain.com/posts
 
-URL with GET params and named anchor
-
-::
+URL with GET params and named anchor::
 
     <?php echo $this->Html->url(array(
         "controller" => "posts",
@@ -696,9 +672,7 @@ The built in tag sets for ``HtmlHelper`` are XHTML compliant,
 however if you need to generate HTML for HTML4 you will need to
 create and load a new tags config file containing the tags you'd
 like to use. To change the tags used create ``app/config/tags.php``
-containing:
-
-::
+containing::
 
     $tags = array(
         'metalink' => '<link href="%s"%s >',

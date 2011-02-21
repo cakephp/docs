@@ -172,8 +172,7 @@ application, or can point to an external domain.
     //Output:
     <form method="get" action="http://www.google.com/search">
 
-Also check
-`HtmlHelper::url <http://book.cakephp.org/view/1448/url>`_ method
+Also check :ref:`HtmlHelper::url <html-url>` method
 for more examples of different types of urls.
 
 $options[‘default’]

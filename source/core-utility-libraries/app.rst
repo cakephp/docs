@@ -15,9 +15,7 @@ a lot.
     App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));
     App::import('Vendor', 'WellNamed', array('file' => 'services'.DS.'well.named.php'));
 
-You can read more about it in
-`the book <http://book.cakephp.org/view/936/Importing-Controllers-Models-Components-Behaviors->`_
-or
+You can read more about it in :ref:`the book <app-import>` or
 `the API documentation <http://api13.cakephp.org/class/app#method-Appimport>`_
 
 
