@@ -30,10 +30,9 @@ would be placed in
 ``app/plugins/my_plugin/libs/log/data_base_logger.php``. When
 configured ``CakeLog`` will attempt to load Configuring log streams
 is done by calling ``CakeLog::config()``. Configuring our
-DataBaseLogger would look like
-
-::
-
+DataBaseLogger would look like::
+    
+    <?php
     //for app/libs
     CakeLog::config('otherFile', array(
         'engine' => 'DataBaseLogger',
@@ -50,10 +49,9 @@ DataBaseLogger would look like
 
 When configuring a log stream the ``engine`` parameter is used to
 locate and load the log handler. All of the other configuration
-properties are passed to the log stream's constructor as an array.
+properties are passed to the log stream's constructor as an array.::
 
-::
-
+    <?php
     class DataBaseLogger {
         function __construct($options = array()) {
             //...
@@ -78,9 +76,7 @@ Error logging
 
 Errors are now logged when ``Configure::write('debug', 0);``. You
 can use ``Configure::write('log', $val)``, to control which errors
-are logged when debug is off. By default all errors are logged.
-
-::
+are logged when debug is off. By default all errors are logged.::
 
     Configure::write('log', E_WARNING);
 
@@ -113,9 +109,9 @@ As its name implies FileLog writes log messages to files. The type
 of log message being written determines the name of the file the
 message is stored in. If a type is not supplied, LOG\_ERROR is used
 which writes to the error log. The default log location is
-``app/tmp/logs/$type.log``
-::
+``app/tmp/logs/$type.log``::
 
+    <?php
     //Executing this inside a CakePHP class:
      $this->log("Something didn't work!");
      
@@ -124,10 +120,9 @@ which writes to the error log. The default log location is
 
 You can specify a custom log names, using the second parameter. The
 default built-in FileLog class will treat this log name as the file
-you wish to write logs to.
+you wish to write logs to::
 
-::
-
+    <?php
     //called statically
     CakeLog::write('activity', 'A special message for activity logging');
      
@@ -139,10 +134,9 @@ order for logging to work correctly.
 
 You can configure additional/alternate FileLog locations using
 ``CakeLog::config()``. FileLog accepts a ``path`` which allows for
-custom paths to be used.
+custom paths to be used::
 
-::
-
+    <?php
     CakeLog::config('custom_path', array(
         'engine' => 'FileLog',
         'path' => '/path/to/custom/place/'
@@ -162,10 +156,9 @@ is to use the static ``CakeLog::write()`` method.
 
 The second is to use the log() shortcut function available on any
 class that extends ``Object``. Calling log() will internally call
-CakeLog::write().
+CakeLog::write()::
 
-::
-
+    <?php
     //Executing this inside a CakePHP class:
     $this->log("Something did not work!", 'debug');
 
