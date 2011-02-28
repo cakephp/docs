@@ -192,14 +192,19 @@ div.admonition ul, div.admonition ol {
     margin-bottom: 5px;
 }
 
+div.tip {
+	background: #cde9f9;
+	border: 1px solid #4da0cc;
+}
+
 div.note {
-    background-color: #eee;
-    border: 1px solid #ccc;
+    background-color: #ffffbb;
+    border: 1px solid #cccc66;
 }
 
 div.seealso {
     background-color: #ffc;
-    border: 1px solid #ff6;
+    border: 1px solid #cccc66;
 }
 
 div.topic {
@@ -207,8 +212,16 @@ div.topic {
 }
 
 div.warning {
-    background-color: #ffe4e4;
-    border: 1px solid #f66;
+    background-color: #ffeeee;
+    border: 1px solid #990000;
+}
+
+div.tip,
+div.note,
+div.seealso,
+div.warning {
+	border-left: 0;
+    border-right: 0;
 }
 
 p.admonition-title {
@@ -240,9 +253,15 @@ dl tt {
 	border-bottom: none;
 }
 
-th {
-    background-color: #ede;
+table.docutils th {
+    border-bottom: 2px solid #000;
 }
+table.docutils td,
+table.docutils th {
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
 
 .warning tt {
     background: #efc2c2;
