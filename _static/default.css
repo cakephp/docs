@@ -1,3 +1,5 @@
+/* @override http://localhost/cake_docs/build/html/en/_static/default.css */
+
 /*
  * default.css_t
  * ~~~~~~~~~~~~~
@@ -68,7 +70,7 @@ div.sphinxsidebar {
 }
 
 div.sphinxsidebar h3 {
-    font-family: 'Trebuchet MS', sans-serif;
+    font-family: HelveticaNeue-Light, HelveticaNeue, Helvetica, Arial, sans-serif;
     color: #000;
     font-size: 1.4em;
     font-weight: normal;
@@ -81,7 +83,7 @@ div.sphinxsidebar h3 a {
 }
 
 div.sphinxsidebar h4 {
-    font-family: 'Trebuchet MS', sans-serif;
+    font-family: HelveticaNeue-Light, HelveticaNeue, Helvetica, Arial, sans-serif;
     color: #000;
     font-size: 1.3em;
     font-weight: normal;
@@ -118,12 +120,12 @@ div.sphinxsidebar input {
 /* -- hyperlink styles ------------------------------------------------------ */
 
 a {
-    color: #355f7c;
+    color: #088;
     text-decoration: none;
 }
 
 a:visited {
-    color: #355f7c;
+    color: #005353;
     text-decoration: none;
 }
 
@@ -141,11 +143,11 @@ div.body h3,
 div.body h4,
 div.body h5,
 div.body h6 {
-    font-family: 'Trebuchet MS', sans-serif;
-    background-color: #f2f2f2;
+    font-family: HelveticaNeue-Light, HelveticaNeue, Helvetica, Arial, sans-serif;
+    background-color: #f9f9ff;
     font-weight: normal;
-    color: #20435c;
-    border-bottom: 1px solid #ccc;
+    color: #333;
+    border-bottom: 1px dashed #ccc;
     margin: 20px -20px 10px -20px;
     padding: 3px 0 3px 10px;
 }
@@ -219,18 +221,23 @@ p.admonition-title:after {
 
 pre {
     padding: 5px;
-    background-color: #eeffcc;
-    color: #333333;
+    background-color: #efefef;
+    color: #222;
     line-height: 120%;
-    border: 1px solid #ac9;
+    border: 1px solid #b0b9c5;
     border-left: none;
     border-right: none;
 }
 
 tt {
-    background-color: #ecf0f3;
+	background: #f9f9f9;
     padding: 0 1px 0 1px;
-    font-size: 0.95em;
+    font-family: monospace;
+	font-size: 110%;
+	border-bottom: 1px solid #aabdd0;
+}
+dl tt {
+	border-bottom: none;
 }
 
 th {
