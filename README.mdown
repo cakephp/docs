@@ -1,0 +1,31 @@
+CakePHP Experimental Docs
+=========================
+
+This documentation will hopefully one day replace the existing cookbook.  Hopefully enabling community contributions and enabling multiple format documentation generation.
+
+Requirements
+------------
+
+You can read all of the documentation within as its just in plain text files, marked up with ReST text formatting.  To build the documentation you'll need the following:
+
+* Make
+* Python
+* Sphinx
+* PhpDomain for sphinx
+
+You can install sphinx using:
+
+	easy_install sphinx
+
+You can install the phpdomain using:
+
+	easy_install sphinxcontrib-phpdomain
+
+Building the documentation
+--------------------------
+
+
+Contributing
+------------
+
+
