@@ -22,172 +22,194 @@ convenience wrappers for long-named PHP functions, but some of them
 useful functions. Chances are if you're constantly wanting a
 function to accomplish an oft-used task, it's here.
 
-\_\_
-----
+.. php:function:: \_\_(string $string_id, boolean $return =  false)
 
-``__(string $string_id, boolean $return =  false)``
+    This function handles localization in CakePHP applications. The
+    ``$string_id`` identifies the ID for a translation, and the second
+    parameter allows you to have the function automatically echo the
+    string (the default behavior), or return it for further processing
+    (pass a boolean true to enable this behavior).
 
-This function handles localization in CakePHP applications. The
-``$string_id`` identifies the ID for a translation, and the second
-parameter allows you to have the function automatically echo the
-string (the default behavior), or return it for further processing
-(pass a boolean true to enable this behavior).
+    .. note::
 
-.. note::
+        Check out the
+        :doc:`/common-tasks-with-cakephp/internationalization-and-localization`
+        section for more information.
 
-    Check out the
-    :doc:`/common-tasks-with-cakephp/internationalization-and-localization`
-    section for more information.
+.. php:function:: am(array $one, $two, $three...)
 
-am
---
+    Merges all the arrays passed as parameters and returns the merged
+    array.
 
-``am(array $one, $two, $three...)``
+.. php:function:: config()
 
-Merges all the arrays passed as parameters and returns the merged
-array.
+    Can be used to load files from your application ``config``-folder
+    via include\_once. Function checks for existance before include and
+    returns boolean. Takes an optional number of arguments.
 
-config
-------
+    Example: ``config('some_file', 'myconfig');``
 
-Can be used to load files from your application ``config``-folder
-via include\_once. Function checks for existance before include and
-returns boolean. Takes an optional number of arguments.
+.. php:function:: convertSlash(string $string)
 
-Example: ``config('some_file', 'myconfig');``
+    Converts forward slashes to underscores and removes the first and
+    last underscores in a string. Returns the converted string.
 
-convertSlash
-------------
+.. php:function:: debug(mixed $var, boolean $showHtml = false)``
 
-``convertSlash(string $string)``
+    If the application's DEBUG level is non-zero, $var is printed out.
+    If ``$showHTML`` is true, the data is rendered to be
+    browser-friendly.
 
-Converts forward slashes to underscores and removes the first and
-last underscores in a string. Returns the converted string.
+    Also see :doc:`/common-tasks-with-cakephp/debugging`
 
-debug
------
+.. php:function:: env(string $key)
 
-``debug(mixed $var, boolean $showHtml = false)``
+    Gets an environment variable from available sources. Used as a
+    backup if ``$_SERVER`` or ``$_ENV`` are disabled.
 
-If the application's DEBUG level is non-zero, $var is printed out.
-If ``$showHTML`` is true, the data is rendered to be
-browser-friendly.
+    This function also emulates PHP\_SELF and DOCUMENT\_ROOT on
+    unsupporting servers. In fact, it's a good idea to always use
+    ``env()`` instead of ``$_SERVER`` or ``getenv()`` (especially if
+    you plan to distribute the code), since it's a full emulation
+    wrapper.
 
-Also see :doc:`Basic Debugging </common-tasks-with-cakephp/debugging>`_
+.. php:function:: fileExistsInPath(string $file)
+
+    Checks to make sure that the supplied file is within the current
+    PHP include\_path. Returns a boolean result.
+
+.. php:function:: h(string $text, string $charset = null)
+
+    Convenience wrapper for ``htmlspecialchars()``.
 
 
-env
----
+.. php:function:: pr(mixed $var)
 
-``env(string $key)``
+    Convenience wrapper for ``print_r()``, with the addition of
+    wrapping <pre> tags around the output.
 
-Gets an environment variable from available sources. Used as a
-backup if ``$_SERVER`` or ``$_ENV`` are disabled.
+.. php:function:: stripslashes_deep(array $value)
 
-This function also emulates PHP\_SELF and DOCUMENT\_ROOT on
-unsupporting servers. In fact, it's a good idea to always use
-``env()`` instead of ``$_SERVER`` or ``getenv()`` (especially if
-you plan to distribute the code), since it's a full emulation
-wrapper.
+    Recursively strips slashes from the supplied ``$value``. Returns
+    the modified array.
 
-fileExistsInPath
-----------------
+.. php:function:: uses(string $lib1, $lib2, $lib3...)
 
-``fileExistsInPath(string $file)``
+    Used to load CakePHP's core libraries (found in cake/libs/). Supply
+    the name of the library's file name without the '.php' extension.
 
-Checks to make sure that the supplied file is within the current
-PHP include\_path. Returns a boolean result.
-
-h
--
-
-``h(string $text, string $charset = null)``
-
-Convenience wrapper for ``htmlspecialchars()``.
-
-pr
---
-
-``pr(mixed $var)``
-
-Convenience wrapper for ``print_r()``, with the addition of
-wrapping <pre> tags around the output.
-
-stripslashes\_deep
-------------------
-
-``stripslashes_deep(array $value)``
-
-Recursively strips slashes from the supplied ``$value``. Returns
-the modified array.
-
-uses
-----
-
-``uses(string $lib1, $lib2, $lib3...)``
-
-Used to load CakePHP's core libraries (found in cake/libs/). Supply
-the name of the library's file name without the '.php' extension.
-
-This has been Deprecated and will be removed in 2.0 version.
+    This has been Deprecated and will be removed in 2.0 version.
 
 
 Core Definition Constants
 =========================
 
-constant
-	Absolute path to the application’s...
-APP
-	root directory.
-APP\_PATH
-	app directory.
-CACHE
-	cache files directory.
-CAKE
-	cake directory.
-COMPONENTS
-	components directory.
-CONFIGS
-	configuration files directory.
-CONTROLLER\_TESTS
-	controller tests directory.
-CONTROLLERS
-	controllers directory.
-CSS
-	CSS files directory.
-DS
-	Short for PHP's DIRECTORY\_SEPARATOR, which is / on Linux and \\ on windows.
-ELEMENTS
-	elements directory.
-HELPER\_TESTS
-	helper tests directory.
-HELPERS
-	helpers directory.
-IMAGES
-	images directory.
-JS
-	JavaScript files directory (in the webroot).
-LAYOUTS
-	layouts directory.
-LIB\_TESTS
-	CakePHP Library tests directory.
-LIBS
-	CakePHP libs directory.
-LOGS
-	logs directory (in app).
-MODEL\_TESTS
-	model tests directory.
-MODELS
-	models directory.
-SCRIPTS
-	Cake scripts directory.
-TESTS
-	tests directory (parent for the models, controllers, etc. test directories)
-TMP
-	tmp directory.
-VENDORS
-	vendors directory.
-VIEWS
-	views directory.
-WWW\_ROOT
-	full path to the webroot.
+Most of the following constants refer to paths in your application.
+
+.. php:const:: APP
+
+   root directory.
+
+.. php:const:: APP\_PATH
+
+   app directory.
+
+.. php:const:: CACHE
+
+    cache files directory.
+
+.. php:const:: CAKE
+
+    cake directory.
+
+.. php:const:: COMPONENTS
+
+    components directory.
+
+.. php:const:: CONFIGS
+
+    configuration files directory.
+
+.. php:const:: CONTROLLER\_TESTS
+
+    controller tests directory.
+
+.. php:const:: CONTROLLERS
+
+    controllers directory.
+
+.. php:const:: CSS
+
+    CSS files directory.
+
+.. php:const:: DS
+
+    Short for PHP's DIRECTORY\_SEPARATOR, which is / on Linux and \\ on windows.
+
+.. php:const:: ELEMENTS
+
+    elements directory.
+
+.. php:const:: HELPER\_TESTS
+
+    helper tests directory.
+
+.. php:const:: HELPERS
+
+    helpers directory.
+
+.. php:const:: IMAGES
+
+    images directory.
+
+.. php:const:: JS
+
+    JavaScript files directory (in the webroot).
+
+.. php:const:: LAYOUTS
+
+    layouts directory.
+
+.. php:const:: LIB\_TESTS
+
+    CakePHP Library tests directory.
+
+.. php:const:: LIBS
+
+    CakePHP libs directory.
+
+.. php:const:: LOGS
+
+    logs directory (in app).
+
+.. php:const:: MODEL\_TESTS
+
+    model tests directory.
+
+.. php:const:: MODELS
+
+    models directory.
+
+.. php:const:: SCRIPTS
+
+    Cake scripts directory.
+
+.. php:const:: TESTS
+
+    tests directory (parent for the models, controllers, etc. test directories)
+
+.. php:const:: TMP
+
+    tmp directory.
+
+.. php:const:: VENDORS
+
+    vendors directory.
+
+.. php:const:: VIEWS
+
+    views directory.
+
+.. php:const:: WWW\_ROOT
+
+    full path to the webroot.
