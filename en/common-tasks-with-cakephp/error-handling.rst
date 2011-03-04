@@ -84,3 +84,7 @@ The default implementation of
 view in ``views/errors/<view-filename>.ctp``. If you wish to
 override this behaviour, you can redefine
 ``_outputMessage($template)`` in your AppError class.
+
+.. todo::
+
+    Rewrite this, it doesn't reflect 2.0 changes.

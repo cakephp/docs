@@ -19,35 +19,23 @@ Internationalizing Your Application
 
 There are only a few steps to go from a single-language application
 to a multi-lingual application, the first of which is to make use
-of the
-`__() <http://api.cakephp.org/file/cake/basics.php#function-__>`_
-function in your code. Below is an example of some code for a
-single-language application:
-
-::
+of the :php:func:`__()` function in your code. Below is an example of some code for a
+single-language application::
 
     <h2>Posts</h2>
 
 To internationalize your code, all you need to do is to wrap
-strings in
-`the translate function <http://api.cakephp.org/file/cake/basics.php#function-__>`_
-like so:
-
-::
+strings in :php:func:`__()` like so::
 
     <h2><?php __('Posts') ?></h2>
 
 If you do nothing further, these two code examples are functionally
 identical - they will both send the same content to the browser.
-The
-`__() function <http://api.cakephp.org/file/cake/basics.php#function-__>`_
-will translate the passed string if a translation is available, or
-return it unmodified. It works similar to other
-`Gettext <http://en.wikipedia.org/wiki/Gettext>`_ implementations
+The :php:func:`__()` function will translate the passed string 
+if a translation is available, or return it unmodified. It works similar 
+to other `Gettext <http://en.wikipedia.org/wiki/Gettext>`_ implementations
 (as do the other translate functions, such as
-`__d() <http://api.cakephp.org/file/cake/basics.php#function-__d>`_,
-`__n() <http://api.cakephp.org/file/cake/basics.php#function-__n>`_
-etc)
+:php:func:`__d()` , :php:func:`__n()` etc)
 
 With your code ready to be multilingual, the next step is to create
 your `pot file <http://en.wikipedia.org/wiki/Gettext>`_, which is
@@ -63,16 +51,12 @@ The pot file(s) themselves are not used by CakePHP, they are the
 templates used to create or update your
 `po files <http://en.wikipedia.org/wiki/Gettext>`_, which contain
 the translations. Cake will look for your po files in the following
-location:
-
-::
+location::
 
     /app/locale/<locale>/LC_MESSAGES/<domain>.po
 
 The default domain is 'default', therefore your locale folder would
-look something like this:
-
-::
+look something like this::
 
     /app/locale/eng/LC_MESSAGES/default.po (English)   
     /app/locale/fre/LC_MESSAGES/default.po (French)   
@@ -99,10 +83,9 @@ needed).
 
 Remember that po files are useful for short messages, if you find
 you want to translate long paragraphs, or even whole pages - you
-should consider implementing a different solution. e.g.:
+should consider implementing a different solution. e.g.::
 
-::
-
+    <?php
     // App Controller Code.
     function beforeFilter() {
         $locale = Configure::read('Config.language');
@@ -112,10 +95,9 @@ should consider implementing a different solution. e.g.:
         }
     }
 
-or
+or::
 
-::
-
+    <?php
     // View code
     echo $this->element(Configure::read('Config.language') . '/tos')
 
@@ -124,9 +106,7 @@ Localization in CakePHP
 =======================
 
 To change or set the language for your application, all you need to
-do is the following:
-
-::
+do is the following::
 
     Configure::write('Config.language', 'fre');
 
@@ -140,9 +120,7 @@ if it's specific to the request or user, or in fact anytime at all
 before you want a message in a different language.
 
 To set the language for the current user, store the setting in the
-Session object, like this:
-
-::
+Session object, like this::
 
     $this->Session->write('Config.language', 'fre');
 
@@ -156,45 +134,29 @@ done with this application. You may also wish to glean the
 information from the browser’s user-agent, among other things.
 
 As mentioned in the previous section, displaying localized content
-is done using the \_\_() convenience function, or one of the other
+is done using the :php:func:`__()` convenience function, or one of the other
 translation functions all of which are globally available, but
 probably be best utilized in your views. The first parameter of the
 function is used as the msgid defined in the .po files.
 
-Remember to use the return parameter for the various ``__*``
-methods if you don't want the string echo'ed directly. For
-example:
-
-::
-
-    <?php
-    echo $form->error(
-        'Card.cardNumber',
-        __("errorCardNumber", true),
-        array('escape' => false)
-    );
-    ?>
-
 If you would like to have all of your validation error messages
 translated by default, a simple solution would be to add the
-following code in you app\_model.php:
+following code in you app\_model.php::
 
-::
-
+    <?php
     function invalidate($field, $value = true) {
-        return parent::invalidate($field, __($value, true));
+        return parent::invalidate($field, __($value));
     }
 
 The i18n console task will not be able to determine the message id
 from the above example, which means you'll need to add the entries
 to your pot file manually (or via your own script). To prevent the
 need to edit your default.po(t) file every time you run the i18n
-console task, you can use a different domain such as:
+console task, you can use a different domain such as::
 
-::
-
+    <?php
     function invalidate($field, $value = true) {
-        return parent::invalidate($field, __d('validation_errors', $value, true));
+        return parent::invalidate($field, __d('validation_errors', $value));
     }
 
 This will look for ``$value`` in the validation\_errors.po file.
