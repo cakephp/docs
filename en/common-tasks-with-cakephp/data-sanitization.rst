@@ -2,6 +2,8 @@
 Data Sanitization
 #################
 
+.. php:class:: Sanitize
+
 The CakePHP Sanitize class can be used to rid user-submitted data
 of malicious data and other unwanted information. Sanitize is a
 core library, so it can be used anywhere inside of your code, but
@@ -27,8 +29,7 @@ before the controller class definition)::
 
 Once you've done that, you can make calls to Sanitize statically.
 
-
-.. php:method:: Sanitize::clean($data, $options)
+.. php:staticmethod:: Sanitize::clean($data, $options)
 
     :param mixed $data: Data to clean.
     :param mixed $options: Options to use when cleaning, see below.
@@ -68,7 +69,7 @@ Once you've done that, you can make calls to Sanitize statically.
         $this->data = Sanitize::clean($this->data, array('encode' => false));
 
 
-.. php:method:: Sanitize::escape($string, $connection)
+.. php:staticmethod:: Sanitize::escape($string, $connection)
 
     :param string $string: Data to clean.
     :param string $connection: The name of the database to quote the string for, 
@@ -78,7 +79,7 @@ Once you've done that, you can make calls to Sanitize statically.
     system's current magic\_quotes\_gpc setting,
 
 
-.. php:method:: Sanitize::html($string, $options = array())
+.. php:staticmethod:: Sanitize::html($string, $options = array())
 
     :param string $string: Data to clean.
     :param array $options: An array of options to use, see below.
@@ -100,7 +101,7 @@ Once you've done that, you can make calls to Sanitize statically.
     for error, and isn't vulnerable to new types of attacks, the stripping 
     function does not know about.
 
-.. php:method:: Sanitize::paranoid($string, $allowedChars)
+.. php:staticmethod:: Sanitize::paranoid($string, $allowedChars)
 
     :param string $string: Data to clean.
     :param string $allowedChars: An array of non alpha numeric characters allowed.

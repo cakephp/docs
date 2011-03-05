@@ -34,18 +34,17 @@ with CakePHP. Please use 1.0.1.
 If you have no test database connection defined in your
 app/config/database.php, test tables will be created with a
 ``test_suite_`` prefix. You can create a ``$test`` database
-connection to contain any test tables like the one below:
+connection to contain any test tables like the one below::
 
-::
-
-        var $test = array(
-            'driver' => 'mysql',
-            'persistent' => false,
-            'host' => 'dbhost',
-            'login' => 'dblogin',
-            'password' => 'dbpassword',
-            'database' => 'databaseName'
-        );
+    <?php
+    var $test = array(
+        'driver' => 'mysql',
+        'persistent' => false,
+        'host' => 'dbhost',
+        'login' => 'dblogin',
+        'password' => 'dbpassword',
+        'database' => 'databaseName'
+    );
 
 If the test database is available and CakePHP can connect to it,
 all tables will be created in this database.
@@ -118,9 +117,7 @@ table is created (which fields are part of the table), and which
 records will be initially populated to the test table. Let's then
 create our first fixture, that will be used to test our own Article
 model. Create a file named **article\_fixture.php** in your
-**app/tests/fixtures** directory, with the following content:
-
-::
+**app/tests/fixtures** directory, with the following content::
 
     <?php  
      class ArticleFixture extends CakeTestFixture { 
@@ -148,6 +145,7 @@ database, and you'll get strange errors that are difficult to
 debug. If you use PHP 5.2, you might be used to writing model
 classes without ``$name``, but you must remember to include it in
 your fixture files.
+
 We use $fields to specify which fields will be part of this table,
 on how they are defined. The format used to define these fields is
 the same used in the function **generateColumnSchema()** defined on
@@ -192,24 +190,20 @@ existing table.
 Let's start with an example. Assuming you have a model named
 Article available in your application (that maps to a table named
 articles), change the example fixture given in the previous section
-(**app/tests/fixtures/article\_fixture.php**) to:
+(**app/tests/fixtures/article\_fixture.php**) to:::
 
-::
-
-     <?php  
-       class ArticleFixture extends CakeTestFixture { 
-              var $name = 'Article'; 
-              var $import = 'Article'; 
-       } 
-       ?> 
+    <?php  
+    class ArticleFixture extends CakeTestFixture { 
+          var $name = 'Article'; 
+          var $import = 'Article'; 
+    } 
+    ?> 
      
 
 This statement tells the test suite to import your table definition
 from the table linked to the model called Article. You can use any
 model available in your application. The statement above does not
-import records, you can do so by changing it to:
-
-::
+import records, you can do so by changing it to::
 
     <?php   
     class ArticleFixture extends CakeTestFixture {
@@ -220,9 +214,7 @@ import records, you can do so by changing it to:
 
 If on the other hand you have a table created but no model
 available for it, you can specify that your import will take place
-by reading that table information instead. For example:
-
-::
+by reading that table information instead. For example::
 
      <?php  
        class ArticleFixture extends CakeTestFixture { 
@@ -233,9 +225,7 @@ by reading that table information instead. For example:
 
 Will import table definition from a table called 'articles' using
 your CakePHP database connection named 'default'. If you want to
-change the connection to use just do:
-
-::
+change the connection to use just do::
 
      <?php  
        class ArticleFixture extends CakeTestFixture { 
@@ -248,9 +238,7 @@ Since it uses your CakePHP database connection, if there's any
 table prefix declared it will be automatically used when fetching
 table information. The two snippets above do not import records
 from the table. To force the fixture to also import its records,
-change it to:
-
-::
+change it to::
 
      <?php  
        class ArticleFixture extends CakeTestFixture { 
@@ -261,9 +249,7 @@ change it to:
 
 You can naturally import your table definition from an existing
 model/table, but have your records defined directly on the fixture
-as it was shown on previous section. For example:
-
-::
+as it was shown on previous section. For example::
 
      <?php
        class ArticleFixture extends CakeTestFixture {
@@ -330,14 +316,16 @@ Called just before a *test method* is executed.
 **endTest($method)**
 Called just after a *test method* has completed.
 
+.. todo::
+
+    Update this to reflect PHPUnit's API's
+
 
 Testing models
 ==============
 
 Let's say we already have our Article model defined on
-app/models/article.php, which looks like this:
-
-::
+app/models/article.php, which looks like this::
 
      <?php  
        class Article extends AppModel { 
@@ -376,8 +364,7 @@ Since we also want to reuse all our existing model code we will
 create a test model that will extend from Article, set $useDbConfig
 and $name appropiately. Let's now create a file named
 **article.test.php** in your **app/tests/cases/models** directory,
-with the following contents:
-::
+with the following contents::
 
      <?php  
        App::import('Model','Article'); 
@@ -402,9 +389,7 @@ Creating a test method
 Let's now add a method to test the function published() in the
 Article model. Edit the file
 **app/tests/cases/models/article.test.php** so it now looks like
-this:
-
-::
+this::
 
       <?php
         App::import('Model', 'Article');
@@ -440,9 +425,7 @@ Testing controllers
 ===================
 
 Say you have a typical articles controller, with its corresponding
-model, and it looks like this:
-
-::
+model, and it looks like this::
 
     <?php 
     class ArticlesController extends AppController { 
@@ -472,9 +455,7 @@ model, and it looks like this:
 
 Create a file named articles\_controller.test.php in your
 app/tests/cases/controllers directory and put the following
-inside:
-
-::
+inside::
 
     <?php 
     class ArticlesControllerTest extends CakeTestCase { 
@@ -597,15 +578,11 @@ decimal digits filling empty space with zeros and prefix 'USD'.
 function euro($amount)
 This function will do the same as usd() but prefix the output with
 'EUR'. Just to make it a bit more complex, we will also wrap the
-result in span tags:
-
-::
+result in span tags::
 
     <span class="euro"></span> 
 
-Let's create the tests first:
-
-::
+Let's create the tests first::
 
     <?php
     
@@ -642,9 +619,7 @@ currencyRendererHelper doesn't even exist yet) showing that we have
 3 fails.
 
 Once we know what our method should do, we can write the method
-itself:
-
-::
+itself::
 
     <?php
     class CurrencyRendererHelper extends AppHelper {
@@ -682,28 +657,23 @@ files:
 Initializing the component
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Since
-:doc:`/developing-with-cakephp/components`
+Since :doc:`/developing-with-cakephp/components`
 we need a controller to access the data in the model.
 
-If the startup() function of the component looks like this:
+If the startup() function of the component looks like this:::
 
-::
-
+    <?php
     public function startup(&$controller){ 
               $this->Transporter = $controller->Transporter;  
      }
 
-then we can just design a really simple fake class:
-
-::
+then we can just design a really simple fake class::
 
     class FakeTransporterController {} 
 
-and assign values into it like this:
+and assign values into it like this::
 
-::
-
+    <?php
     $this->TransporterComponentTest = new TransporterComponent(); 
     $controller = new FakeTransporterController(); 
     $controller->Transporter = new TransporterTest(); 
@@ -716,7 +686,7 @@ Just create a class that extends CakeTestCase and start writing
 tests!
 
 ::
-
+    <?php
     class TransporterTestCase extends CakeTestCase {
         var $fixtures = array('transporter');
         function testGetTransporter() {
@@ -744,9 +714,7 @@ Testing plugins
 ===============
 
 Tests for plugins are created in their own directory inside the
-plugins folder.
-
-::
+plugins folder.::
 
     /app
          /plugins
@@ -789,30 +757,6 @@ reference them using 'plugin.pluginName.fixtureName' syntax in the
 $fixtures array.
 
 
-Web testing - Testing views
-===========================
-
-Most, if not all, CakePHP projects result in a web application.
-While unit tests are an excellent way to test small parts of
-functionality, you might also want to test the functionality on a
-large scale. The **CakeWebTestCase** class provides a good way of
-doing this testing from a user point-of-view.
-
-About CakeWebTestCase
-~~~~~~~~~~~~~~~~~~~~~
-
-**CakeWebTestCase** is a direct extension of the SimpleTest
-WebTestCase, without any extra functionality. All the functionality
-found in the
-`SimpleTest documentation for Web testing <http://simpletest.sourceforge.net/en/web_tester_documentation.html>`_
-is also available here. This also means that no functionality other
-than that of SimpleTest is available. This means that you cannot
-use fixtures, and
-**all web test cases involving updating/saving to the database will permanently change your database values**.
-Test results are often based on what values the database holds, so
-making sure the database contains the values you expect is part of
-the testing procedure.
-
 Creating a test
 ~~~~~~~~~~~~~~~
 
@@ -830,10 +774,9 @@ extend **CakeWebTestCase** instead of CakeTestCase:
     class CompleteWebTestCase extends CakeWebTestCase
 
 If you need to do some preparation before you start the test,
-create a constructor:
+create a constructor::
 
-::
-
+    <?php
     function CompleteWebTestCase(){
       //Do stuff here
     }
@@ -843,24 +786,21 @@ is get some output to look at. This can be done by doing a **get**
 or **post** request, using **get()**or **post()** respectively.
 Both these methods take a full url as the first parameter. This can
 be dynamically fetched if we assume that the test script is located
-under http://your.domain/cake/folder/webroot/test.php by typing:
+under http://your.domain/cake/folder/webroot/test.php by typing::
 
-::
-
+    <?php
     $this->baseurl = current(split("webroot", $_SERVER['PHP_SELF']));
 
-You can then do gets and posts using Cake urls, like this:
+You can then do gets and posts using Cake urls, like this::
 
-::
-
+    <?php
     $this->get($this->baseurl."/products/index/");
     $this->post($this->baseurl."/customers/login", $data);
 
 The second parameter to the post method, **$data**, is an
-associative array containing the post data in Cake format:
+associative array containing the post data in Cake format::
 
-::
-
+    <?php
     $data = array(
       "data[Customer][mail]" => "user@user.com",
       "data[Customer][password]" => "userpass");
@@ -879,6 +819,10 @@ on that.
 
 Miscellaneous
 =============
+
+.. todo::
+
+    Rewrite.  This is incorrect.
 
 Customizing the test reporter
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

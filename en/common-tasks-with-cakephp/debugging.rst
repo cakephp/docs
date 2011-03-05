@@ -51,10 +51,12 @@ error-causing lines.
 Using the Debugger Class
 ========================
 
+.. php:class:: Debugger
+
 To use the debugger, first ensure that Configure::read('debug') is
 set to a value greater than 0.
 
-.. php:method:: Debugger::dump($var)
+.. php:staticmethod:: Debugger::dump($var)
 
     Dump prints out the contents of a variable. It will print out all
     properties and methods (if any) of the supplied variable::
@@ -86,7 +88,7 @@ set to a value greater than 0.
         Car::decelerate()
         Car::stop()
 
-.. php:method:: Debugger::log($var, $level = 7)
+.. php:staticmethod:: Debugger::log($var, $level = 7)
 
     Creates a detailed stack trace log at the time of invocation. The
     log() method prints out data similar to that done by
@@ -94,7 +96,7 @@ set to a value greater than 0.
     buffer. Note your app/tmp directory (and its contents) must be
     writable by the web server for log() to work correctly.
 
-.. php:method:: Debugger::trace($options)
+.. php:staticmethod:: Debugger::trace($options)
 
     Returns the current stack trace. Each line of the trace includes
     the calling method, including which file and line the call
@@ -119,7 +121,7 @@ set to a value greater than 0.
     working with recursive operations or deep stacks, as it identifies
     which functions are currently running at the time of the trace().
 
-.. php:method:: Debugger::excerpt($file, $line, $context)
+.. php:staticmethod:: Debugger::excerpt($file, $line, $context)
 
     Grab an excerpt from the file at $path (which is an absolute
     filepath), highlights line number $line with $context number of
@@ -143,13 +145,13 @@ set to a value greater than 0.
     creating your own error messages or log entries for custom
     situations.
 
-.. php:method:: Debugger::exportVar($var, $recursion = 0)
+.. php:staticmethod:: Debugger::exportVar($var, $recursion = 0)
 
     Converts a variable of any type to a string for use in debug
     output. This method is also used by most of Debugger for internal
     variable conversions, and can be used in your own Debuggers as
     well.
 
-.. php:method:: Debugger::invoke($debugger)
+.. php:staticmethod:: Debugger::invoke($debugger)
 
     Replace the CakePHP Debugger with a new Error Handler.

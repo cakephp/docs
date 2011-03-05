@@ -79,7 +79,7 @@ Using the Component
     The CookieComponent offers a number of methods for working with
     Cookies.
 
-    .. php:method:: write(mixed $key, mixed $value, boolean $encrypt, mixed $expires)
+.. php:method:: write(mixed $key, mixed $value, boolean $encrypt, mixed $expires)
 
     The write() method is the heart of cookie component, $key is the
     cookie variable name you want, and the $value is the information to
@@ -125,7 +125,7 @@ Using the Component
           $this->Cookie->write('first_name','Larry',false, 3600);
           $this->Cookie->write('last_name','Masters',false, '1 hour');
 
-    .. php:method:: read(mixed $key)
+.. php:method:: read(mixed $key)
 
     This method is used to read the value of a cookie variable with the
     name specified by $key.::
@@ -133,17 +133,17 @@ Using the Component
         <?php
         // Outputs “Larry”
         echo $this->Cookie->read('name');
-      
+  
         //You can also use the dot notation for read
         echo $this->Cookie->read('User.name');
-        
+    
         //To get the variables which you had grouped
         //using the dot notation as an array use something like  
         $this->Cookie->read('User');
-        
+    
         // this outputs something like array('name' => 'Larry', 'role'=>'Lead')
 
-    .. php:method:: delete(mixed $key)
+.. php:method:: delete(mixed $key)
 
     Deletes a cookie variable of the name in $key. Works with dot
     notation::
@@ -151,11 +151,11 @@ Using the Component
         <?php
         //Delete a variable
         $this->Cookie->delete('bar')
-        
+    
         //Delete the cookie variable bar, but not all under foo
         $this->Cookie->delete('foo.bar')
-     
+ 
 
-    .. php:method:: destroy()
+.. php:method:: destroy()
 
     Destroys the current cookie.
