@@ -328,7 +328,7 @@ We use the ``Session`` component's
 ```setFlash()`` <http://docs.cakephp.org/view/1313/setFlash>`_ function to set a message
 to a session variable to be displayed on the page after
 redirection. In the layout we have
-:ref:`sessionhelper-flash` which displays the
+:php:func:`SessionHelper::flash` which displays the
 message and clears the corresponding session variable. The
 controller's ```redirect`` <http://docs.cakephp.org/view/982/redirect>`_ function
 redirects to another URL. The param ``array('action'=>'index)``

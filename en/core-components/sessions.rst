@@ -83,7 +83,7 @@ Methods
     Dots are used to indicate nested arrays. This notation is used for
     all Session component methods wherever a $name is used.
 
-    .. php:method:: write($name, $value)
+.. php:method:: write($name, $value)
 
     Write to the Session puts $value into $name. $name can be a dot
     separated array. For example::
@@ -94,7 +94,7 @@ Methods
     This writes the value 'Green' to the session under Person =>
     eyeColor.
 
-    .. php:method:: setFlash($message, $element = 'default', $params = array(), $key = 'flash')
+.. php:method:: setFlash($message, $element = 'default', $params = array(), $key = 'flash')
 
     Used to set a session variable that can be used for output in the
     View. $element allows you to control which element (located in
@@ -120,7 +120,7 @@ Methods
 
         <div id="flashMessage" class="example_class">Example message text</div>
 
-    .. php:method:: read($name)
+.. php:method:: read($name)
 
     Returns the value at $name in the Session. If $name is null the
     entire session will be returned. E.g::
@@ -130,12 +130,12 @@ Methods
 
     Retrieve the value Green from the session.
 
-    .. php:method:: check($name)
+.. php:method:: check($name)
 
     Used to check if a Session variable has been set. Returns true on
     existence and false on non-existence.
 
-    .. php:method:: delete($name)
+.. php:method:: delete($name)
 
     Clear the session data at $name. E.g::
 
@@ -149,7 +149,7 @@ Methods
         <?php
         $this->Session->delete('Person');
 
-    .. php:method:: destroy()
+.. php:method:: destroy()
 
     The ``destroy`` method will delete the session cookie and all
     session data stored in the temporary file system. It will then
@@ -158,6 +158,6 @@ Methods
         <?php
         $this->Session->destroy()
 
-    .. php:method:: error()
+.. php:method:: error()
 
     Used to determine the last error in a session.

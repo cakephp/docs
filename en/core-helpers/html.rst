@@ -36,16 +36,16 @@ Inserting Well-Formatted elements
     being rendered and delivered. This section will cover some of the
     methods of the HtmlHelper and how to use them.
 
-    .. php:method:: charset($charset=null)
+.. php:method:: charset($charset=null)
 
     :param string $charset: Desired character set.  If null, the value of 
        ``App.encoding`` will be used.
 
     Used to create a meta tag specifying the document's character.
     Defaults to UTF-8
-    
+
     Example use::
-     
+ 
         <?php echo $this->Html->charset(); ?> 
 
     Will output::
@@ -60,8 +60,8 @@ Inserting Well-Formatted elements
 
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-    .. php:method:: css(mixed $path, string $rel = null, array $options = array())
-    
+.. php:method:: css(mixed $path, string $rel = null, array $options = array())
+
     :param mixed $path: Either a string of the css file to link, or an array with multiple files
     :param string $rel: The value of the generated tag's rel attribute.  If null, 'stylesheet'
        will be used.
@@ -91,7 +91,7 @@ Inserting Well-Formatted elements
         <link rel="stylesheet" type="text/css" href="/css/tables.css" />
         <link rel="stylesheet" type="text/css" href="/css/menu.css" />
 
-    .. php:method:: meta(string $type, string $url = null, array $options = array())
+.. php:method:: meta(string $type, string $url = null, array $options = array())
 
     :param string $type: The type meta tag you want.
     :param mixed $url: The url for the meta tag, either a string or a :term:`routing array`.
@@ -127,13 +127,13 @@ Inserting Well-Formatted elements
             title="favicon.ico" type="image/x-icon"
             rel="alternate"
         />
-     
+ 
         <?php echo $this->Html->meta(
             'Comments',
             '/comments/index.rss',
             array('type' => 'rss'));
         ?>
-     
+ 
         //Output (line breaks added)
         <link
             href="http://example.com/comments/index.rss"
@@ -151,12 +151,12 @@ Inserting Well-Formatted elements
         );?>
         //Output <meta name="keywords" content="enter any meta keyword here"/>
         //
-    
+
         <?php echo $this->Html->meta(
             'description',
             'enter any meta description here'
            );?> 
-    
+
         //Output <meta name="description" content="enter any meta description here"/>
 
     If you want to add a custom meta tag then the first parameter
@@ -165,8 +165,8 @@ Inserting Well-Formatted elements
 
          echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex')); 
 
-    .. php:method:: docType(string $type = 'xhtml-strict')
-    
+.. php:method:: docType(string $type = 'xhtml-strict')
+
     :param string $type: The type of doctype being made.
 
     Returns a (X)HTML doctype tag. Supply the doctype according to the
@@ -190,18 +190,18 @@ Inserting Well-Formatted elements
         XHTML1 Frameset
     xhtml11
         XHTML 1.1
-    
+
     ::
 
         <?php echo $this->Html->docType(); ?> 
         <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-    
+
         <?php echo $this->Html->docType('html4-trans'); ?> 
         <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
-    .. php:method:: style(array $data, boolean $oneline = true)
-    
+.. php:method:: style(array $data, boolean $oneline = true)
+
     :param array $data: A set of key => values with CSS properties.
     :param boolean $oneline: Should the contents be on one line.
 
@@ -219,8 +219,8 @@ Inserting Well-Formatted elements
 
           background:#633; border-bottom:1px solid #000; padding:10px;
 
-    .. php:method:: image(string $path, array $options = array())
-    
+.. php:method:: image(string $path, array $options = array())
+
     :param string $path: Path to the image.
     :param array $options: An array of :term:`html attributes`.
 
@@ -247,7 +247,7 @@ Inserting Well-Formatted elements
             <img src="/img/recipes/6.jpg" alt="Brownies" />
         </a>
 
-    .. php:method:: link(string $title, mixed $url = null, array $options = array(), string $confirmMessage = false)
+.. php:method:: link(string $title, mixed $url = null, array $options = array(), string $confirmMessage = false)
 
     :param string $title: The text to display as the body of the link.
     :param mixed $url: Either the string location, or a :term:`routing array`.
@@ -261,7 +261,7 @@ Inserting Well-Formatted elements
 
     Will output::
 
-      
+  
         <a href="/pages/home" class="button" target="_blank">Enter</a>
 
     Specify ``$confirmMessage`` to display a javascript ``confirm()``
@@ -276,7 +276,7 @@ Inserting Well-Formatted elements
 
     Will output::
 
-      
+  
         <a href="/recipes/delete/6" onclick="return confirm('Are you sure you wish to delete this recipe?');">Delete</a>
 
     Query strings can also be created with ``link()``.::
@@ -289,7 +289,7 @@ Inserting Well-Formatted elements
         );
 
     Will output::
-      
+  
         <a href="/images/view/1?height=400&width=500">View image</a>
 
     HTML special characters in ``$title`` will be converted to HTML
@@ -302,7 +302,7 @@ Inserting Well-Formatted elements
             "recipes/view/6",
             array('escape' => false)
         );
-    
+
         ?>
 
     Will output::
@@ -314,8 +314,8 @@ Inserting Well-Formatted elements
     Also check :php:meth:`HtmlHelper::url` method
     for more examples of different types of urls.
 
-    .. php:method:: tag(string $tag, string $text, array $htmlAttributes)
-    
+.. php:method:: tag(string $tag, string $text, array $htmlAttributes)
+
     :param string $tag: The tag name being generated.
     :param string $text: The contents for the tag.
     :param array $options: An array of :term:`html attributes`.
@@ -324,13 +324,13 @@ Inserting Well-Formatted elements
     then only the opening <tag> is returned.::
 
         <?php echo $this->Html->tag('span', 'Hello World.', array('class' => 'welcome'));?>
-     
+ 
         //Output
         <span class="welcome">Hello World</span>
-     
+ 
         //No text specified.
         <?php echo $this->Html->tag('span', null, array('class' => 'welcome'));?>
-     
+ 
         //Output
         <span class="welcome">
 
@@ -341,8 +341,8 @@ Inserting Well-Formatted elements
         replaces a fourth parameter ``boolean $escape = false`` that was
         available in previous versions.
 
-    .. php:method:: div(string $class, string $text, array $options)
-    
+.. php:method:: div(string $class, string $text, array $options)
+
     :param string $class: The classname for the div.
     :param string $text: The content inside the div.
     :param array $options: An array of :term:`html attributes`.
@@ -353,14 +353,14 @@ Inserting Well-Formatted elements
     set to true, $text will be printed HTML-escaped.
 
     If no text is specified, only an opening div tag is returned.::
-     
+ 
         <?php echo $this->Html->div('error', 'Please enter your credit card number.');?>
-    
+
         //Output
         <div class="error">Please enter your credit card number.</div>
 
-    .. php:method::  para(string $class, string $text, array $options)
-    
+.. php:method::  para(string $class, string $text, array $options)
+
     :param string $class: The classname for the paragraph.
     :param string $text: The content inside the paragraph.
     :param array $options: An array of :term:`html attributes`.
@@ -369,12 +369,12 @@ Inserting Well-Formatted elements
     supplied, only a starting <p> tag is returned.::
 
         <?php echo $this->Html->para(null, 'Hello World.');?>
-     
+ 
         //Output
         <p>Hello World.</p>
 
-    .. php:method:: script(mixed $url, mixed $options)
-    
+.. php:method:: script(mixed $url, mixed $options)
+
     :param mixed $url: Either a string to a single Javascript file, or an
        array of strings for multiple files.
     :param array $options: An array of :term:`html attributes`.
@@ -419,7 +419,7 @@ Inserting Well-Formatted elements
         <script type="text/javascript" href="/js/wysiwyg.js"></script>
         <script type="text/javascript" href="/js/scripts.js"></script>
 
-    .. php:method::  scriptBlock($code, $options = array())
+.. php:method::  scriptBlock($code, $options = array())
 
     :param string $code: The code to go in the script tag.
     :param array $options: An array of :term:`html attributes`.
@@ -431,8 +431,8 @@ Inserting Well-Formatted elements
     ``$this->html->scriptBlock('stuff', array('defer' => true));`` will
     create a script tag with ``defer="defer"`` attribute.
 
-    .. php:method:: scriptStart($options = array())
-    
+.. php:method:: scriptStart($options = array())
+
     :param array $options: An array of :term:`html attributes` to be used when 
         scriptEnd is called.
 
@@ -449,13 +449,13 @@ Inserting Well-Formatted elements
     be::
 
         $this->Html->scriptStart(array('inline' => false));
-    
+
         echo $this->Js->alert('I am in the javascript');
-    
+
         $this->Html->scriptEnd();
 
     .. php:method:: tableHeaders(array $names, array $trOptions = null, array $thOptions = null)
-    
+
     :param array $names: An array of strings to create table headings.
     :param array $trOptions: An array of :term:`html attributes` for the <tr>
     :param array $thOptions: An array of :term:`html attributes` for the <th> elements
@@ -464,20 +464,20 @@ Inserting Well-Formatted elements
     tags.::
 
         <?php echo $this->Html->tableHeaders(array('Date','Title','Active'));?>
-    
+
         //Output 
         <tr>
             <th>Date</th>
             <th>Title</th>
             <th>Active</th>
         </tr>
-     
+ 
         <?php echo $this->Html->tableHeaders(
             array('Date','Title','Active'),
             array('class' => 'status'),
             array('class' => 'product_table')
         );?>
-     
+ 
         //Output
         <tr class="status">
              <th class="product_table">Date</th>
@@ -485,8 +485,8 @@ Inserting Well-Formatted elements
              <th class="product_table">Active</th>
         </tr>
 
-    .. php:method:: tableCells(array $data, array $oddTrOptions = null, array $evenTrOptions = null, $useCount = false, $continueOddEven = true)
-    
+.. php:method:: tableCells(array $data, array $oddTrOptions = null, array $evenTrOptions = null, $useCount = false, $continueOddEven = true)
+
     :param array $data: A two dimensional array with data for the rows.
     :param array $oddTrOptions: An array of :term:`html attributes` for the odd <tr>'s.
     :param array $evenTrOptions: An array of :term:`html attributes` for the even <tr>'s.
@@ -504,24 +504,24 @@ Inserting Well-Formatted elements
             array('Aug 1st, 2006', 'Anti-Java Cake', 'No'),
         ));
         ?>
-     
+ 
         //Output
         <tr><td>Jul 7th, 2007</td><td>Best Brownies</td><td>Yes</td></tr>
         <tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>
         <tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td>No</td></tr>
-     
+ 
         <?php echo $this->Html->tableCells(array(
             array('Jul 7th, 2007', array('Best Brownies', array('class'=>'highlight')) , 'Yes'),
             array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),
             array('Aug 1st, 2006', 'Anti-Java Cake', array('No', array('id'=>'special'))),
         ));
         ?>
-     
+ 
         //Output
         <tr><td>Jul 7th, 2007</td><td class="highlight">Best Brownies</td><td>Yes</td></tr>
         <tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>
         <tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td id="special">No</td></tr>
-     
+ 
         <?php echo $this->Html->tableCells(
             array(
                 array('Red', 'Apple'),
@@ -531,14 +531,14 @@ Inserting Well-Formatted elements
             array('class' => 'darker')
         );
         ?>
-     
+ 
         //Output
         <tr class="darker"><td>Red</td><td>Apple</td></tr>
         <tr><td>Orange</td><td>Orange</td></tr>
         <tr class="darker"><td>Yellow</td><td>Banana</td></tr>
 
-    .. php:method:: url(mixed $url = NULL, boolean $full = false)
-    
+.. php:method:: url(mixed $url = NULL, boolean $full = false)
+
     :param mixed $url: A :term:`routing array`.
     :param mixed $full: Either a boolean to indicate whether or not the base path should 
         be included on an array of options for :php:meth:`Router::url()`
@@ -552,7 +552,7 @@ Inserting Well-Formatted elements
             "controller" => "posts",
             "action" => "view",
             "bar"));?>
-     
+ 
         // Output
         /posts/view/bar
 
@@ -565,7 +565,7 @@ Inserting Well-Formatted elements
             "action" => "view",
             "foo" => "bar"));
         ?>
-     
+ 
         // Output
         /posts/view/foo:bar
 
@@ -576,7 +576,7 @@ Inserting Well-Formatted elements
             "action" => "list",
             "ext" => "rss"));
         ?>
-     
+ 
         // Output
         /posts/list.rss
 
@@ -585,7 +585,7 @@ Inserting Well-Formatted elements
     ::
 
         <?php echo $this->Html->url('/posts', true); ?>
-    
+
         //Output
         http://somedomain.com/posts
 
@@ -597,7 +597,7 @@ Inserting Well-Formatted elements
             "?" => array("foo" => "bar"),
             "#" => "first"));
         ?>
-    
+
         //Output
         /posts/search?foo=bar#first
 

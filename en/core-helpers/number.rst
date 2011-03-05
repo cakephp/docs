@@ -12,7 +12,7 @@ NumberHelper
     All of these functions return the formatted number; They do not
     automatically echo the output into the view.
 
-    .. php:method:: currency(mixed $number, string $currency= 'USD', $options = array())
+.. php:method:: currency(mixed $number, string $currency= 'USD', $options = array())
     
     :param float $number: The value to covert.
     :param string $currency: The known currency format to use.
@@ -67,13 +67,13 @@ NumberHelper
         //Outputs:
         FOO 1,234.56
 
-    .. php:method:: addFormat($formatName, $options)
+.. php:method:: addFormat($formatName, $options)
     
     .. todo::
     
         Incomplete, write me.
 
-    .. php:method:: precision(mixed $number, int $precision = 3)
+.. php:method:: precision(mixed $number, int $precision = 3)
 
     :param float $number: The value to covert
     :param integer $precision: The number of decimal places to display
@@ -88,7 +88,7 @@ NumberHelper
         456.92
 
 
-    .. php:method:: toPercentage(mixed $number, int $precision = 2)
+.. php:method:: toPercentage(mixed $number, int $precision = 2)
     
     :param float $number: The value to covert
     :param integer $precision: The number of decimal places to display
@@ -103,7 +103,7 @@ NumberHelper
         //Outputs:
         45.69%
 
-    .. php:method:: toReadableSize(string $data_size)
+.. php:method:: toReadableSize(string $data_size)
     
     :param string $data_size: The number of bytes to make readable. 
 
@@ -120,7 +120,7 @@ NumberHelper
         echo $this->Number->toReadableSize(5368709120); // 5.00 GB
 
 
-    .. php:method:: format(mixed $number, mixed $options=false)
+.. php:method:: format(mixed $number, mixed $options=false)
 
     This method gives you much more control over the formatting of
     numbers for use in your views (and is used as the main method by
