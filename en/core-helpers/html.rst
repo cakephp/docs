@@ -36,10 +36,15 @@ Inserting Well-Formatted elements
     being rendered and delivered. This section will cover some of the
     methods of the HtmlHelper and how to use them.
 
-    .. php:method:: charset(string $charset=null)
+    .. php:method:: charset($charset=null)
+
+    :param string $charset: Desired character set.  If null, the value of 
+       ``App.encoding`` will be used.
 
     Used to create a meta tag specifying the document's character.
-    Defaults to UTF-8::
+    Defaults to UTF-8
+    
+    Example use::
      
         <?php echo $this->Html->charset(); ?> 
 
@@ -47,7 +52,7 @@ Inserting Well-Formatted elements
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    Alternatively,  ::
+    Alternatively, ::
 
         <?php echo $this->Html->charset('ISO-8859-1'); ?>
 
@@ -56,6 +61,11 @@ Inserting Well-Formatted elements
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
     .. php:method:: css(mixed $path, string $rel = null, array $options = array())
+    
+    :param mixed $path: Either a string of the css file to link, or an array with multiple files
+    :param string $rel: The value of the generated tag's rel attribute.  If null, 'stylesheet'
+       will be used.
+    :param array $options: An array of :term:`html attributes`.
 
     Creates a link(s) to a CSS style-sheet. If key 'inline' is set to
     false in $options parameter, the link tags are added to the
@@ -81,7 +91,11 @@ Inserting Well-Formatted elements
         <link rel="stylesheet" type="text/css" href="/css/tables.css" />
         <link rel="stylesheet" type="text/css" href="/css/menu.css" />
 
-    .. php:method:: meta(string $type, string $url = null, array $attributes = array())
+    .. php:method:: meta(string $type, string $url = null, array $options = array())
+
+    :param string $type: The type meta tag you want.
+    :param mixed $url: The url for the meta tag, either a string or a :term:`routing array`.
+    :param array $options: An array of :term:`html attributes`.
 
     This method is handy for linking to external resources like
     RSS/Atom feeds and favicons. Like css(), you can specify whether or
@@ -152,6 +166,8 @@ Inserting Well-Formatted elements
          echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex')); 
 
     .. php:method:: docType(string $type = 'xhtml-strict')
+    
+    :param string $type: The type of doctype being made.
 
     Returns a (X)HTML doctype tag. Supply the doctype according to the
     following table:
@@ -185,6 +201,9 @@ Inserting Well-Formatted elements
 
 
     .. php:method:: style(array $data, boolean $oneline = true)
+    
+    :param array $data: A set of key => values with CSS properties.
+    :param boolean $oneline: Should the contents be on one line.
 
     Builds CSS style definitions based on the keys and values of the
     array passed to the method. Especially handy if your CSS file is
@@ -200,7 +219,10 @@ Inserting Well-Formatted elements
 
           background:#633; border-bottom:1px solid #000; padding:10px;
 
-    .. php:method:: image(string $path, array $htmlAttributes = array())
+    .. php:method:: image(string $path, array $options = array())
+    
+    :param string $path: Path to the image.
+    :param array $options: An array of :term:`html attributes`.
 
     Creates a formatted image tag. The path supplied should be relative
     to /app/webroot/img/.::
@@ -226,6 +248,10 @@ Inserting Well-Formatted elements
         </a>
 
     .. php:method:: link(string $title, mixed $url = null, array $options = array(), string $confirmMessage = false)
+
+    :param string $title: The text to display as the body of the link.
+    :param mixed $url: Either the string location, or a :term:`routing array`.
+    :param array $options: An array of :term:`html attributes`.
 
     General purpose method for creating HTML links. Use ``$options`` to
     specify attributes for the element and whether or not the
@@ -289,6 +315,10 @@ Inserting Well-Formatted elements
     for more examples of different types of urls.
 
     .. php:method:: tag(string $tag, string $text, array $htmlAttributes)
+    
+    :param string $tag: The tag name being generated.
+    :param string $text: The contents for the tag.
+    :param array $options: An array of :term:`html attributes`.
 
     Returns text wrapped in a specified tag. If no text is specified
     then only the opening <tag> is returned.::
@@ -312,6 +342,10 @@ Inserting Well-Formatted elements
         available in previous versions.
 
     .. php:method:: div(string $class, string $text, array $options)
+    
+    :param string $class: The classname for the div.
+    :param string $text: The content inside the div.
+    :param array $options: An array of :term:`html attributes`.
 
     Used for creating div-wrapped sections of markup. The first
     parameter specifies a CSS class, and the second is used to supply
@@ -325,7 +359,11 @@ Inserting Well-Formatted elements
         //Output
         <div class="error">Please enter your credit card number.</div>
 
-    .. php:method::  para(string $class, string $text, array $htmlAttributes, boolean $escape = false)
+    .. php:method::  para(string $class, string $text, array $options)
+    
+    :param string $class: The classname for the paragraph.
+    :param string $text: The content inside the paragraph.
+    :param array $options: An array of :term:`html attributes`.
 
     Returns a text wrapped in a CSS-classed <p> tag. If no text is
     supplied, only a starting <p> tag is returned.::
@@ -336,6 +374,10 @@ Inserting Well-Formatted elements
         <p>Hello World.</p>
 
     .. php:method:: script(mixed $url, mixed $options)
+    
+    :param mixed $url: Either a string to a single Javascript file, or an
+       array of strings for multiple files.
+    :param array $options: An array of :term:`html attributes`.
 
     Creates link(s) to a javascript file. If key ``inline`` is set to
     false in $options, the link tags are added to the
@@ -379,6 +421,9 @@ Inserting Well-Formatted elements
 
     .. php:method::  scriptBlock($code, $options = array())
 
+    :param string $code: The code to go in the script tag.
+    :param array $options: An array of :term:`html attributes`.
+
     Generate a code block containing ``$code`` set
     ``$options['inline']`` to false to have the script block appear in
     ``$scripts_for_layout``. Also new is the ability to add attributes
@@ -387,6 +432,9 @@ Inserting Well-Formatted elements
     create a script tag with ``defer="defer"`` attribute.
 
     .. php:method:: scriptStart($options = array())
+    
+    :param array $options: An array of :term:`html attributes` to be used when 
+        scriptEnd is called.
 
     Begin a buffering code block. This code block will capture all
     output between ``scriptStart()`` and ``scriptEnd()`` and create an
@@ -407,6 +455,10 @@ Inserting Well-Formatted elements
         $this->Html->scriptEnd();
 
     .. php:method:: tableHeaders(array $names, array $trOptions = null, array $thOptions = null)
+    
+    :param array $names: An array of strings to create table headings.
+    :param array $trOptions: An array of :term:`html attributes` for the <tr>
+    :param array $thOptions: An array of :term:`html attributes` for the <th> elements
 
     Creates a row of table header cells to be placed inside of <table>
     tags.::
@@ -434,6 +486,13 @@ Inserting Well-Formatted elements
         </tr>
 
     .. php:method:: tableCells(array $data, array $oddTrOptions = null, array $evenTrOptions = null, $useCount = false, $continueOddEven = true)
+    
+    :param array $data: A two dimensional array with data for the rows.
+    :param array $oddTrOptions: An array of :term:`html attributes` for the odd <tr>'s.
+    :param array $evenTrOptions: An array of :term:`html attributes` for the even <tr>'s.
+    :param boolean $useCount: Adds class "column-$i".
+    :param boolean $continueOddEven: If false, will use a non-static $count variable,
+        so that the odd/even count is reset to zero just for that call.
 
     Creates table cells, in rows, assigning <tr> attributes differently
     for odd- and even-numbered rows. Wrap a single table cell within an
@@ -478,12 +537,11 @@ Inserting Well-Formatted elements
         <tr><td>Orange</td><td>Orange</td></tr>
         <tr class="darker"><td>Yellow</td><td>Banana</td></tr>
 
-    .. _html-url:
-
-url
----
-
     .. php:method:: url(mixed $url = NULL, boolean $full = false)
+    
+    :param mixed $url: A :term:`routing array`.
+    :param mixed $full: Either a boolean to indicate whether or not the base path should 
+        be included on an array of options for :php:meth:`Router::url()`
 
     Returns an URL pointing to a combination of controller and action.
     If $url is empty, it returns the REQUEST\_URI, otherwise it

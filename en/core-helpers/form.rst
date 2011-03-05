@@ -172,7 +172,7 @@ application, or can point to an external domain.
     //Output:
     <form method="get" action="http://www.google.com/search">
 
-Also check :ref:`HtmlHelper::url <html-url>` method
+Also check :php:meth:`HtmlHelper::url()` method
 for more examples of different types of urls.
 
 $options[‘default’]
