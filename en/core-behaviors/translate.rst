@@ -16,9 +16,7 @@ You can either use the CakePHP console or you can manually create
 it. It is advised to use the console for this, because it might
 happen that the layout changes in future versions of CakePHP.
 Sticking to the console will make sure that you have the correct
-layout.
-
-::
+layout.::
 
     ./cake i18n
 
@@ -31,9 +29,7 @@ Attaching the Translate Behavior to your Models
 ===============================================
 
 Add it to your model by using the ``$actsAs`` property like in the
-following example.
-
-::
+following example.::
 
     <?php
     class Post extends AppModel {
@@ -53,9 +49,7 @@ Defining the Fields
 ===================
 
 You can set the fields by simply extending the ``'Translate'``
-value with another array, like so:
-
-::
+value with another array, like so::
 
     <?php
     class Post extends AppModel {
@@ -70,9 +64,7 @@ value with another array, like so:
 
 After you have done that (for example putting "name" as one of the
 fields) you already finished the basic setup. Great! According to
-our current example the model should now look something like this:
-
-::
+our current example the model should now look something like this::
 
     <?php
     class Post extends AppModel {
@@ -111,9 +103,7 @@ Retrieve all translation records for a field
 
 If you want to have all translation records attached to the current
 model record you simply extend the *field array* in your behavior
-setup as shown below. The naming is completely up to you.
-
-::
+setup as shown below. The naming is completely up to you.::
 
     <?php
     class Post extends AppModel {
@@ -127,9 +117,7 @@ setup as shown below. The naming is completely up to you.
     ?>
 
 With this setup the result of $this->Post->find() should look
-something like this:
-
-::
+something like this::
 
     Array
     (
@@ -184,17 +172,14 @@ using the bindTranslation method
 
 ``$fields`` is a named-key array of field and association name,
 where the key is the translatable field and the value is the fake
-association name.
+association name.::
 
-::
-
+    <?php
     $this->Post->bindTranslation(array ('name' => 'nameTranslation'));
     $this->Post->find('all', array ('recursive'=>1)); // need at least recursive 1 for this to work.
 
 With this setup the result of your find() should look something
-like this:
-
-::
+like this::
 
     Array
     (
@@ -242,8 +227,7 @@ simply change the value of the ``$locale`` property on the model
 before you save the data to the database. You can do that either in
 your controller or you can define it directly in the model.
 
-**Example A:** In your controller
-::
+**Example A:** In your controller::
 
     <?php
     class PostsController extends AppController {
@@ -261,8 +245,7 @@ your controller or you can define it directly in the model.
     }
     ?>
 
-**Example B:** In your model
-::
+**Example B:** In your model::
 
     <?php
     class Post extends AppModel {
@@ -295,9 +278,7 @@ These are **$translateModel** and **$translateTable**.
 
 Lets say we want to save our translations for all posts in the
 table "post\_i18ns" instead of the default "i18n" table. To do so
-you need to setup your model like this:
-
-::
+you need to setup your model like this::
 
     <?php
     class Post extends AppModel {
@@ -327,9 +308,7 @@ For this to work you need to create the actual model file in your
 models folder. Reason is that there is no property to set the
 displayField directly in the model using this behavior yet.
 
-Make sure that you change the ``$displayField`` to ``'field'``.
-
-::
+Make sure that you change the ``$displayField`` to ``'field'``.::
 
     <?php
     class PostI18n extends AppModel { 
@@ -347,9 +326,7 @@ Changing the Table
 ~~~~~~~~~~~~~~~~~~
 
 If you want to change the name of the table you simply define
-$translateTable in your model, like so:
-
-::
+$translateTable in your model, like so::
 
     <?php
     class Post extends AppModel {

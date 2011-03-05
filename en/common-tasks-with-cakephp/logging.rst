@@ -148,9 +148,7 @@ Writing to logs
 ===============
 
 Writing to the log files can be done in 2 different ways. The first
-is to use the static ``CakeLog::write()`` method.
-
-::
+is to use the static ``CakeLog::write()`` method::
 
     CakeLog::write('debug', 'Something did not work');
 

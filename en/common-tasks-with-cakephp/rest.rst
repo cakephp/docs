@@ -21,10 +21,9 @@ lines to your routes.php file, found in app/config. The Router
 object features a method called mapResources(), that is used to set
 up a number of default routes for REST access to your controllers.
 If we wanted to allow REST access to a recipe database, we'd do
-something like this:
+something like this::
 
-::
-
+    <?php
     //In app/config/routes.php...
         
     Router::mapResources('recipes');
@@ -72,10 +71,9 @@ wish to emulate.
 Once the router has been set up to map REST requests to certain
 controller actions, we can move on to creating the logic in our
 controller actions. A basic controller might look something like
-this:
+this::
 
-::
-
+    <?php
     // controllers/recipes_controller.php
     
     class RecipesController extends AppController {
@@ -118,9 +116,7 @@ different kinds of requests. Since we're dealing with REST
 requests, the view type is XML. We place the REST views for our
 RecipesController inside app/views/recipes/xml. We can also use the
 XmlHelper for quick-and-easy XML output in those views. Here's what
-our index view might look like:
-
-::
+our index view might look like::
 
     // app/views/recipes/xml/index.ctp
     
@@ -136,9 +132,7 @@ that matches the type. Since we're using XML as the content type,
 the XmlHelper is automatically loaded up for our use in those
 views.
 
-The rendered XML will end up looking something like this:
-
-::
+The rendered XML will end up looking something like this::
 
     <posts>
         <post id="234" created="2008-06-13" modified="2008-06-14">
@@ -185,10 +179,9 @@ to help CakePHP identify certain markers in the specified URL.
 
 We'll provide a simple example here, and allow you to tailor this
 route for your other RESTful purposes. Here's what our edit REST
-route would look like, without using mapResources():
+route would look like, without using mapResources()::
 
-::
-
+    <?php
     Router::connect(
         "/:controller/:id",
         array("action" => "edit", "[method]" => "PUT"),

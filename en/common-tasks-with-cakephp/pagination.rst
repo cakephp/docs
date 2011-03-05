@@ -29,31 +29,28 @@ Ajax pagination to your application.
 Configuring the PaginatorHelper to use a custom helper
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default in 1.3 the ``PaginatorHelper`` uses JsHelper to do ajax
-features. However, if you don't want that and want to use the
-``AjaxHelper`` or a custom helper for ajax links, you can do so by
-changing the ``$helpers`` array in your controller. After running
-``paginate()`` do the following.
+By default the ``PaginatorHelper`` uses JsHelper to do ajax
+features. However, if you don't want that and want to use a custom helper 
+for ajax links, you can do so by changing the ``$helpers`` array in your controller. 
+After running ``paginate()`` do the following::
 
-::
-
+    <?php
     $this->set('posts', $this->paginate());
-    $this->helpers['Paginator'] = array('ajax' => 'Ajax');
+    $this->helpers['Paginator'] = array('ajax' => 'CustomJs');
 
-Will change the ``PaginatorHelper`` to use the ``AjaxHelper`` for
+Will change the ``PaginatorHelper`` to use the ``CustomJs`` for
 ajax operations. You could also set the 'ajax' key to be any
 helper, as long as that class implements a ``link()`` method that
-behaves like ``HtmlHelper::link()``
+behaves like :php:meth:`HtmlHelper::link()`
 
 Controller Setup
 ================
 
 In the controller, we start by defining the pagination defaults in
 the *$paginate* controller variable. It is important to note here
-that the order key must be defined in the array structure given.
+that the order key must be defined in the array structure given::
 
-::
-
+    <?php
     class RecipesController extends AppController {
     
         var $paginate = array(
@@ -64,10 +61,9 @@ that the order key must be defined in the array structure given.
         );
     }
 
-You can also include other find() options, such as *fields*:
+You can also include other find() options, such as *fields*::
 
-::
-
+    <?php
     class RecipesController extends AppController {
     
         var $paginate = array(
@@ -84,10 +80,9 @@ similar to the parameters of the *Model->find('all')* method, that
 is: *conditions*, *fields*, *order*, *limit*, *page*, *contain*,
 *joins*, and *recursive*. In fact, you can define more than one set
 of pagination defaults in the controller, you just name the pieces
-of the array after the model you wish to configure:
+of the array after the model you wish to configure::
 
-::
-
+    <?php
     class RecipesController extends AppController {
     
         var $paginate = array(
@@ -96,10 +91,9 @@ of the array after the model you wish to configure:
         );
     }
 
-Example of syntax using Containable Behavior:
+Example of syntax using Containable Behavior::
 
-::
-
+    <?php
     class RecipesController extends AppController {
     
         var $paginate = array(
@@ -113,10 +107,9 @@ Once the *$paginate* variable has been defined, we can call the
 paged *find()* results from the model, and grabs some additional
 paging statistics, which are passed to the View behind the scenes.
 This method also adds PaginatorHelper to the list of helpers in
-your controller, if it has not been added already.
+your controller, if it has not been added already.::
 
-::
-
+    <?php
     function list_recipes() {
         // similar to findAll(), but fetches paged results
         $data = $this->paginate('Recipe');
@@ -124,15 +117,15 @@ your controller, if it has not been added already.
     }
 
 You can filter the records by passing conditions as second
-parameter to the ``paginate()`` function.
-::
+parameter to the ``paginate()`` function.::
 
+    <?php
     $data = $this->paginate('Recipe', array('Recipe.title LIKE' => 'a%'));
 
 Or you can also set *conditions* and other keys in the
-``$paginate`` array inside your action.
-::
+``$paginate`` array inside your action.::
 
+    <?php
     function list_recipes() {
         $this->paginate = array(
             'conditions' => array('Recipe.title LIKE' => 'a%'),
@@ -163,10 +156,9 @@ model methods.
 
 The ``paginate()`` method uses the same parameters as
 ``Model::find()``. To use your own method/logic override it in the
-model you wish to get the data from.
+model you wish to get the data from::
 
-::
-
+    <?php
     /**
      * Overridden paginate method - group by week, away_team_id and home_team_id
      */
@@ -179,10 +171,9 @@ model you wish to get the data from.
 You also need to override the core ``paginateCount()``, this method
 expects the same arguments as ``Model::find('count')``. The example
 below uses some Postgres-specifc features, so please adjust
-accordingly depending on what database you are using.
+accordingly depending on what database you are using::
 
-::
-
+    <?php
     /**
      * Overridden paginateCount method
      */
@@ -195,10 +186,9 @@ accordingly depending on what database you are using.
 
 The observant reader will have noticed that the paginate method
 we've defined wasn't actually necessary - All you have to do is add
-the keyword in controller's ``$paginate`` class variable.
+the keyword in controller's ``$paginate`` class variable::
 
-::
-
+    <?php
     /**
     * Add GROUP BY clause
     */
@@ -232,9 +222,7 @@ See the details on
 `PaginatorHelper <http://api.cakephp.org/class/paginator-helper>`_
 in the API.
 As mentioned, the PaginatorHelper also offers sorting features
-which can be easily integrated into your table column headers:
-
-::
+which can be easily integrated into your table column headers::
 
     // app/views/recipes/list_recipes.ctp
     <table>
@@ -254,9 +242,7 @@ The links output from the sort() method of the PaginatorHelper
 allow users to click on table headers to toggle the sorting of the
 data by a given field.
 
-It is also possible to sort a column based on associations:
-
-::
+It is also possible to sort a column based on associations::
 
     <table>
         <tr> 
@@ -272,22 +258,20 @@ It is also possible to sort a column based on associations:
     </table> 
 
 The final ingredient to pagination display in views is the addition
-of page navigation, also supplied by the PaginationHelper.
-
-::
+of page navigation, also supplied by the PaginationHelper::
 
     <!-- Shows the page numbers -->
     <?php echo $this->Paginator->numbers(); ?>
+    
     <!-- Shows the next and previous links -->
     <?php echo $this->Paginator->prev('« Previous', null, null, array('class' => 'disabled')); ?>
     <?php echo $this->Paginator->next('Next »', null, null, array('class' => 'disabled')); ?> 
+    
     <!-- prints X of Y, where X is current page and Y is number of pages -->
     <?php echo $this->Paginator->counter(); ?>
 
 The wording output by the counter() method can also be customized
-using special markers:
-
-::
+using special markers::
 
     <?php
     echo $this->Paginator->counter(array(
@@ -297,23 +281,20 @@ using special markers:
     ?>
 
 To pass all URL arguments to paginator functions, add the following
-to your view:
+to your view::
 
-::
-
+    <?php
     $this->Paginator->options(array('url' => $this->passedArgs));
 
 Route elements that are not named arguments should manually be
-merged with ``$this->passedArgs``:
+merged with ``$this->passedArgs``::
 
-::
-
+    <?php
     //for urls like http://www.example.com/en/controller/action
     //that are routed as Router::connect('/:lang/:controller/:action/*', array(), array('lang' => 'ta|en'));
     $this->Paginator->options(array('url' => array_merge(array('lang' => $lang), $this->passedArgs)));
 
-Or you can specify which params to pass manually:
+Or you can specify which params to pass manually::
 
-::
-
+    <?php
     $this->Paginator->options(array('url' => array("0", "1")));
