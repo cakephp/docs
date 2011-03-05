@@ -56,7 +56,8 @@ a secure connection, is available on the path
 ‘/bakers/preferences/’, and expires in one hour.
 
 ::
-
+    
+    <?php
     var $components    = array('Cookie');
     function beforeFilter() {
       $this->Cookie->name = 'baker_id';
@@ -73,90 +74,88 @@ Component.
 Using the Component
 ===================
 
-The CookieComponent offers a number of methods for working with
-Cookies.
+.. php:class:: CookieComponent
 
-**write(mixed $key, mixed $value, boolean $encrypt, mixed $expires)**
-The write() method is the heart of cookie component, $key is the
-cookie variable name you want, and the $value is the information to
-be stored.
+    The CookieComponent offers a number of methods for working with
+    Cookies.
 
-::
+    .. php:method:: write(mixed $key, mixed $value, boolean $encrypt, mixed $expires)
 
-    $this->Cookie->write('name','Larry');
+    The write() method is the heart of cookie component, $key is the
+    cookie variable name you want, and the $value is the information to
+    be stored::
 
-You can also group your variables by supplying dot notation in the
-key parameter.
+        <?php
+        $this->Cookie->write('name','Larry');
 
-::
+    You can also group your variables by supplying dot notation in the
+    key parameter::
 
-    $this->Cookie->write('User.name', 'Larry');
-      $this->Cookie->write('User.role','Lead');  
+        <?php
+        $this->Cookie->write('User.name', 'Larry');
+        $this->Cookie->write('User.role','Lead');  
 
-If you want to write more than one value to the cookie at a time,
-you can pass an array:
+    If you want to write more than one value to the cookie at a time,
+    you can pass an array::
 
-::
+        <?php
+        $this->Cookie->write('User',
+            array('name'=>'Larry','role'=>'Lead')
+        );
 
-    $this->Cookie->write('User',
-        array('name'=>'Larry','role'=>'Lead')
-    );
+    All values in the cookie are encrypted by default. If you want to
+    store the values as plain-text, set the third parameter of the
+    write() method to false. The encryption performed on cookie values
+    is fairly uncomplicated encryption system. It uses
+    ``Security.salt`` and a predefined Configure class var
+    ``Security.cipherSeed`` to encrypt values. To make your cookies
+    more secure you should change ``Security.cipherSeed`` in
+    app/config/core.php to ensure a better encryption.::
 
-All values in the cookie are encrypted by default. If you want to
-store the values as plain-text, set the third parameter of the
-write() method to false. The encryption performed on cookie values
-is fairly uncomplicated encryption system. It uses
-``Security.salt`` and a predefined Configure class var
-``Security.cipherSeed`` to encrypt values. To make your cookies
-more secure you should change ``Security.cipherSeed`` in
-app/config/core.php to ensure a better encryption.
+        <?php
+        $this->Cookie->write('name','Larry',false);
 
-::
+    The last parameter to write is $expires – the number of seconds
+    before your cookie will expire. For convenience, this parameter can
+    also be passed as a string that the php strtotime() function
+    understands::
 
-    $this->Cookie->write('name','Larry',false);
+        <?php
+        //Both cookies expire in one hour.
+          $this->Cookie->write('first_name','Larry',false, 3600);
+          $this->Cookie->write('last_name','Masters',false, '1 hour');
 
-The last parameter to write is $expires – the number of seconds
-before your cookie will expire. For convenience, this parameter can
-also be passed as a string that the php strtotime() function
-understands:
+    .. php:method:: read(mixed $key)
 
-::
+    This method is used to read the value of a cookie variable with the
+    name specified by $key.::
 
-    //Both cookies expire in one hour.
-      $this->Cookie->write('first_name','Larry',false, 3600);
-      $this->Cookie->write('last_name','Masters',false, '1 hour');
-
-**read(mixed $key)**
-
-This method is used to read the value of a cookie variable with the
-name specified by $key.
-
-::
-
-    // Outputs “Larry”
-      echo $this->Cookie->read('name');
+        <?php
+        // Outputs “Larry”
+        echo $this->Cookie->read('name');
       
-      //You can also use the dot notation for read
-      echo $this->Cookie->read('User.name');
-      
-      //To get the variables which you had grouped
-      //using the dot notation as an array use something like  
-      $this->Cookie->read('User');
-      
-      // this outputs something like array('name' => 'Larry', 'role'=>'Lead')
+        //You can also use the dot notation for read
+        echo $this->Cookie->read('User.name');
+        
+        //To get the variables which you had grouped
+        //using the dot notation as an array use something like  
+        $this->Cookie->read('User');
+        
+        // this outputs something like array('name' => 'Larry', 'role'=>'Lead')
 
-**delete(mixed $key)**
-Deletes a cookie variable of the name in $key. Works with dot
-notation.
+    .. php:method:: delete(mixed $key)
 
-::
+    Deletes a cookie variable of the name in $key. Works with dot
+    notation::
 
-      //Delete a variable
-      $this->Cookie->delete('bar')
-      
-      //Delete the cookie variable bar, but not all under foo
-      $this->Cookie->delete('foo.bar')
+        <?php
+        //Delete a variable
+        $this->Cookie->delete('bar')
+        
+        //Delete the cookie variable bar, but not all under foo
+        $this->Cookie->delete('foo.bar')
      
 
-**destroy()**
-Destroys the current cookie.
+    .. php:method:: destroy()
+
+    Destroys the current cookie.

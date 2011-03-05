@@ -23,18 +23,16 @@ and quickly. Let's take a look at how you would build a very simple
 authentication system.
 
 Like all components, you use it by adding 'Auth' to the list of
-components in your controller:
+components in your controller::
 
-::
-
+    <?php
     class FooController extends AppController {
         var $components = array('Auth');
 
 Or add it to your AppController so all of your controllers will use
-it:
+it::
 
-::
-
+    <?php
     class AppController extends Controller {
         // AppController's components are NOT merged with defaults,
         // so session component is lost if it's not included here!
@@ -51,9 +49,7 @@ column name. See
 for an example how to change the default field names to work with
 your own environment.
 
-Let's set up our users table using the following SQL:
-
-::
+Let's set up our users table using the following SQL::
 
     CREATE TABLE users (
         id integer auto_increment,
@@ -74,10 +70,9 @@ method to get the right data is to attempt to log in and look at
 the SQL log.
 
 For the most basic setup, you'll only need to create two actions in
-your controller:
+your controller::
 
-::
-
+    <?php
     class UsersController extends AppController {
     
         var $name = 'Users';    
@@ -99,9 +94,7 @@ While you can leave the login() function blank, you do need to
 create the login view template (saved in
 app/views/users/login.ctp). This is the only UsersController view
 template you need to create, however. The example below assumes you
-are already using the Form helper:
-
-::
+are already using the Form helper::
 
     <?php
         echo $session->flash('auth');
@@ -135,10 +128,9 @@ and then calling various built-in methods or setting component
 variables.
 
 For example, to change the field name used for passwords from
-'password' to 'secretword', you would do the following:
+'password' to 'secretword', you would do the following:::
 
-::
-
+    <?php
     class UsersController extends AppController {
         var $components = array('Auth');
     
@@ -154,10 +146,9 @@ In this particular situation, you would also need to remember to
 change the field name in the view template!
 
 Alternately, you can specify settings for Auth by placing them
-inside the controller's $components property.
+inside the controller's $components property.::
 
-::
-
+    <?php
     class AppController extends Controller {
         var $components = array(
             'Auth' => array(
@@ -181,10 +172,9 @@ Auth restricts access to every action except the login and logout
 methods).
 
 For example if we want to allow all users access to the index and
-view methods ( but not any other), we would do the following:
+view methods ( but not any other), we would do the following::
 
-::
-
+    <?php
     function beforeFilter() {
             $this->Auth->allow('index','view');
     }
@@ -564,3 +554,7 @@ currently authenticated user's information:
 The session key can be different depending on which model Auth is
 configured to use. Eg. If you use model ``Account`` instead of
 ``User``, then the session key would be ``Auth.Account``
+
+.. todo::
+
+    Rewrite this section.  Auth has totally changed.
