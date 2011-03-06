@@ -105,7 +105,9 @@ html_theme = 'default'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = [
  '../_static/default.css',
- '../_static/sidebar-background.jpg'
+ '../_static/sidebar-background.jpg',
+ '../_static/csf-navbar.css',
+ '../_static/main-link.png'
 ]
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,

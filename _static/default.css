@@ -60,6 +60,7 @@ div.related {
     background-color: #133f52;
     line-height: 30px;
     color: #ffffff;
+	clear: both;
 }
 
 div.related a {
