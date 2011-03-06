@@ -34,7 +34,7 @@ div.documentwrapper {
 }
 
 div.bodywrapper {
-    margin: 0 0 0 230px;
+    margin: 0 0 0 270px;
 }
 
 div.body {
@@ -68,6 +68,7 @@ div.related a {
 }
 
 div.sphinxsidebar {
+    width: 270px;
 }
 
 div.sphinxsidebar h3 {
@@ -280,4 +281,27 @@ div.viewcode-block:target {
     background-color: #f4debf;
     border-top: 1px solid #ac9;
     border-bottom: 1px solid #ac9;
+}
+
+/* Searchbox */
+#searchform {
+	background: url('./search-field.png') top left no-repeat;
+	height: 50px;
+	position: relative;
+}
+#searchform .search-input {
+	position: absolute;
+	top: 11px;
+	left: 14px;
+	width: 185px;
+	height: 24px;
+	border: none;
+	-webkit-appearance: textfield;
+	padding: 0;
+}
+#searchform .search-submit {
+	position: absolute;
+	top: 9px;
+	right: 17px;
+	border: 0;
 }

@@ -9,9 +9,9 @@
 #}
 {%- if pagename != "search" %}
 <div id="searchbox" style="display: none">
-    <form class="search" action="{{ pathto('search') }}" method="get">
-      <input type="search" name="q" size="18" />
-      <input type="submit" value="{{ _('Go') }}" />
+    <form id="searchform" class="search" action="{{ pathto('search') }}" method="get">
+      <input class="search-input" type="search" name="q" size="18" />
+      <input class="search-submit" type="image" src="{{ pathto('_static/search-submit.png', 1) }}" alt="{{ _('Go') }}" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
