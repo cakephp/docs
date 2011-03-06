@@ -122,7 +122,133 @@ Cross referencing links
         More content here.
     
     Elsewhere you could reference the above section using ``:ref:`label-name```.  The link's text would be the
-    title that the link preceeded.  You can also provide custom link text using ``:ref:`Link text <label-name>```.
+    title that the link preceded.  You can also provide custom link text using ``:ref:`Link text <label-name>```.
+
+Describing classes and their contents
+=====================================
+
+The CakePHP documentation, uses the `phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdomain>` 
+to provide custom directives for describing PHP objects and constructs.  Using these directives
+and roles is required to give proper indexing and cross referencing features.
+
+Describing classes and constructs
+---------------------------------
+
+Each directive populates the index, and or the namespace index.
+
+.. rst:directive:: .. php:global:: name
+
+   This directive declares a new PHP global variable.
+
+.. rst:directive:: .. php:function:: name(signature)
+
+   Defines a new global function outside of a class.
+
+.. rst:directive:: .. php:const:: name
+
+   This directive declares a new PHP constant, you can also used it nested 
+   inside a class directive to create class constants.
+   
+.. rst:directive:: .. php:exception:: name
+
+   This directive declares a new Exception in the current namespace. The 
+   signature can include constructor arguments.
+
+.. rst:directive:: .. php:class:: name
+
+   Describes a class.  Methods, attributes, and constants belonging to the class
+   should be inside this directive's body::
+
+        .. php:class:: MyClass
+        
+            Class description
+        
+           .. php:method:: method($argument)
+        
+           Method description
+
+
+   Attributes, methods and constants don't need to be nested.  They can also just 
+   follow the class declaration::
+
+        .. php:class:: MyClass
+        
+            Text about the class
+        
+        .. php:method:: methodName()
+        
+            Text about the method
+        
+
+   .. seealso:: .. php:method:: name
+                .. php:attr:: name
+                .. php:const:: name
+
+.. rst:directive:: .. php:method:: name(signature)
+
+   Describe a class method, its arguments, return value, and exceptions::
+   
+        .. php:method:: instanceMethod($one, $two)
+        
+            :param string $one: The first parameter.
+            :param string $two: The second parameter.
+            :returns: An array of stuff.
+            :throws: InvalidArgumentException
+        
+           This is an instance method.
+
+.. rst:directive:: .. php:staticmethod:: ClassName::methodName(signature)
+
+    Describe a static method, its arguments, return value and exceptions,
+    see :rst:dir:`php:method` for options.
+
+.. rst:directive:: .. php:attr:: name
+
+   Describe an property/attribute on a class.
+
+Cross Referencing
+-----------------
+
+The following roles refer to php objects and are links are generated if a 
+matching directive is found:
+
+.. rst:role:: php:func
+
+   Reference a PHP function.
+
+.. rst:role:: php:global
+
+   Reference a global variable whose name has ``$`` prefix.
+   
+.. rst:role:: php:const
+
+   Reference either a global constant, or a class constant.  Class constants should
+   be preceded by the owning class::
+   
+        DateTime has an :php:const:`DateTime::ATOM` constant.
+
+.. rst:role:: php:class
+
+   Reference a class by name::
+   
+     :php:class:`ClassName`
+
+.. rst:role:: php:meth
+
+   Reference a method of a class. This role supports both kinds of methods::
+   
+     :php:meth:`DateTime::setDate`
+     :php:meth:`Classname::staticMethod`
+
+.. rst:role:: php:attr
+
+   Reference a property on an object::
+   
+      :php:attr:`ClassName::$propertyName`
+
+.. rst:role:: php:exc
+
+   Reference an exception.
 
 
 Source code
