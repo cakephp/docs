@@ -39,9 +39,7 @@ Using Behaviors
 ======================
 
 Behaviors are attached to models through the $actsAs model class
-variable:
-
-::
+variable::
 
     <?php
     
@@ -55,10 +53,9 @@ variable:
 This example shows how a Category model could be managed in a tree
 structure using the TreeBehavior. Once a behavior has been
 specified, use the methods added by the behavior as if they always
-existed as part of the original model:
+existed as part of the original model::
 
-::
-
+    <?php
     // Set ID
     $this->Category->id = 42;
     
@@ -86,9 +83,7 @@ database table:
 
 We can also attach several behaviors to a model. There's no reason
 why, for example, our Category model should only behave as a tree,
-it may also need internationalization support:
-
-::
+it may also need internationalization support::
 
     <?php
     

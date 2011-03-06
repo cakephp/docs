@@ -90,3 +90,8 @@ Creates a regular or AJAX link with pagination parameters
 
 If created in the view for ``/posts/index`` Would create a link
 pointing at '/posts/index/page:5/sort:title/direction:desc'
+
+.. todo::
+
+    This section needs a lot of expanding, perhaps roll the pagination docs
+    into one place though.

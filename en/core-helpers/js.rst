@@ -151,11 +151,11 @@ buffering wholesale with the ``$bufferScripts`` property or setting
 Since most methods in Javascript begin with a selection of elements
 in the DOM, ``$this->Js->get()`` returns a $this, allowing you to
 chain the methods using the selection. Method chaining allows you
-to write shorter, more expressive code. It should be noted that
-method chaining **Will not** work in PHP4.
+to write shorter, more expressive code.
 
 ::
-
+    
+    <?php
     $this->Js->get('#foo')->event('click', $eventCode);
 
 Is an example of method chaining. Method chaining is not possible
@@ -163,6 +163,7 @@ in PHP4 and the above sample would be written like:
 
 ::
 
+    <?php
     $this->Js->get('#foo');
     $this->Js->event('click', $eventCode);
 
@@ -248,6 +249,7 @@ can force other methods to go into the buffer. For example the
 
 ::
 
+    <?php
     $this->Js->each('alert("whoa!");', true);
 
 The above would force the ``each()`` method to use the buffer.
@@ -256,6 +258,7 @@ can pass a ``false`` in as the last argument.
 
 ::
 
+    <?php
     $this->Js->event('click', 'alert("whoa!");', false);
 
 This would force the event function which normally buffers to
@@ -264,548 +267,494 @@ return its result.
 Methods
 =======
 
-The core Javascript Engines provide the same feature set across all
-libraries, there is also a subset of common options that are
-translated into library specific options. This is done to provide
-end developers with as unified an API as possible. The following
-list of methods are supported by all the Engines included in the
-CakePHP core. Whenever you see separate lists for ``Options`` and
-``Event Options`` both sets of parameters are supplied in the
-``$options`` array for the method.
+.. php:class:: JsHelper
 
-object($data, $options = array())
----------------------------------
+    The core Javascript Engines provide the same feature set across all
+    libraries, there is also a subset of common options that are
+    translated into library specific options. This is done to provide
+    end developers with as unified an API as possible. The following
+    list of methods are supported by all the Engines included in the
+    CakePHP core. Whenever you see separate lists for ``Options`` and
+    ``Event Options`` both sets of parameters are supplied in the
+    ``$options`` array for the method.
 
-Converts values into JSON. There are a few differences between this
-method and JavascriptHelper::object(). Most notably there is no
-affordance for ``stringKeys`` or ``q`` options found in the
-JavascriptHelper. Furthermore ``$this->Js->object();`` cannot make
-script tags.
+.. php:method:: object($data, $options = array())
 
-**Options:**
+    Converts values into JSON. There are a few differences between this
+    method and JavascriptHelper::object(). Most notably there is no
+    affordance for ``stringKeys`` or ``q`` options found in the
+    JavascriptHelper. Furthermore ``$this->Js->object();`` cannot make
+    script tags.
 
+    **Options:**
 
--  ``prefix`` - String prepended to the returned data.
--  ``postfix`` - String appended to the returned data.
+    -  ``prefix`` - String prepended to the returned data.
+    -  ``postfix`` - String appended to the returned data.
 
-**Example Use:**
+    **Example Use**::
+        
+        <?php
+        $json = $this->Js->object($data);
 
-::
+.. php:method:: sortable($options = array())
 
-    $json = $this->Js->object($data);
+    Sortable generates a javascript snippet to make a set of elements
+    (usually a list) drag and drop sortable.
 
-sortable($options = array())
-----------------------------
+    The normalized options are:
 
-Sortable generates a javascript snippet to make a set of elements
-(usually a list) drag and drop sortable.
+    **Options**
 
-The normalized options are:
+    -  ``containment`` - Container for move action
+    -  ``handle`` - Selector to handle element. Only this element will
+       start sort action.
+    -  ``revert`` - Whether or not to use an effect to move sortable
+       into final position.
+    -  ``opacity`` - Opacity of the placeholder
+    -  ``distance`` - Distance a sortable must be dragged before
+       sorting starts.
 
-**Options**
+    **Event Options**
 
+    -  ``start`` - Event fired when sorting starts
+    -  ``sort`` - Event fired during sorting
+    -  ``complete`` - Event fired when sorting completes.
 
--  ``containment`` - Container for move action
--  ``handle`` - Selector to handle element. Only this element will
-   start sort action.
--  ``revert`` - Whether or not to use an effect to move sortable
-   into final position.
--  ``opacity`` - Opacity of the placeholder
--  ``distance`` - Distance a sortable must be dragged before
-   sorting starts.
+    Other options are supported by each Javascript library, and you
+    should check the documentation for your javascript library for more
+    detailed information on its options and parameters.
 
-**Event Options**
+    **Example Use**::
+    
+        <?php
+        $this->Js->get('#my-list');
+            $this->Js->sortable(array(
+                'distance' => 5,
+                'containment' => 'parent',
+                'start' => 'onStart',
+                'complete' => 'onStop',
+                'sort' => 'onSort',
+                'wrapCallbacks' => false
+            ));
 
+    Assuming you were using the jQuery engine, you would get the
+    following code in your generated Javascript block
+    
+    .. code-block:: javascript
 
--  ``start`` - Event fired when sorting starts
--  ``sort`` - Event fired during sorting
--  ``complete`` - Event fired when sorting completes.
+        $("#myList").sortable({containment:"parent", distance:5, sort:onSort, start:onStart, stop:onStop});
 
-Other options are supported by each Javascript library, and you
-should check the documentation for your javascript library for more
-detailed information on its options and parameters.
+.. php:method:: request($url, $options = array())
 
-**Example use:**
+    Generate a javascript snippet to create an ``XmlHttpRequest`` or
+    'AJAX' request.
 
-::
+    **Event Options**
 
-    $this->Js->get('#my-list');
-        $this->Js->sortable(array(
-            'distance' => 5,
-            'containment' => 'parent',
+    -  ``complete`` - Callback to fire on complete.
+    -  ``success`` - Callback to fire on success.
+    -  ``before`` - Callback to fire on request initialization.
+    -  ``error`` - Callback to fire on request failure.
+
+    **Options**
+
+    -  ``method`` - The method to make the request with defaults to GET
+       in more libraries
+    -  ``async`` - Whether or not you want an asynchronous request.
+    -  ``data`` - Additional data to send.
+    -  ``update`` - Dom id to update with the content of the request.
+    -  ``type`` - Data type for response. 'json' and 'html' are
+       supported. Default is html for most libraries.
+    -  ``evalScripts`` - Whether or not <script> tags should be
+       eval'ed.
+    -  ``dataExpression`` - Should the ``data`` key be treated as a
+       callback. Useful for supplying ``$options['data']`` as another
+       Javascript expression.
+
+    **Example use**::
+
+        <?php
+        $this->Js->event('click',
+        $this->Js->request(array(
+        'action' => 'foo', param1), array(
+        'async' => true,
+        'update' => '#element')));
+
+.. php:method:: get($selector)
+
+    Set the internal 'selection' to a CSS selector. The active
+    selection is used in subsequent operations until a new selection is
+    made::
+    
+        <?php
+        $this->Js->get('#element');
+
+    The ``JsHelper`` now will reference all other element based methods
+    on the selection of ``#element``. To change the active selection,
+    call ``get()`` again with a new element.
+
+.. php:method:: drag($options = array())
+
+    Make an element draggable.
+
+    **Options**
+
+    -  ``handle`` - selector to the handle element.
+    -  ``snapGrid`` - The pixel grid that movement snaps to, an
+       array(x, y)
+    -  ``container`` - The element that acts as a bounding box for the
+       draggable element.
+
+    **Event Options**
+
+    -  ``start`` - Event fired when the drag starts
+    -  ``drag`` - Event fired on every step of the drag
+    -  ``stop`` - Event fired when dragging stops (mouse release)
+
+    **Example use**::
+
+        <?php
+        $this->Js->get('#element');
+        $this->Js->drag(array(
+            'container' => '#content',
             'start' => 'onStart',
-            'complete' => 'onStop',
-            'sort' => 'onSort',
+            'drag' => 'onDrag',
+            'stop' => 'onStop',
+            'snapGrid' => array(10, 10),
             'wrapCallbacks' => false
         ));
 
-Assuming you were using the jQuery engine, you would get the
-following code in your generated Javascript block:
+    If you were using the jQuery engine the following code would be
+    added to the buffer
+    
+    .. code-block:: javascript
 
-::
+        $("#element").draggable({containment:"#content", drag:onDrag, grid:[10,10], start:onStart, stop:onStop});
 
-    $("#myList").sortable({containment:"parent", distance:5, sort:onSort, start:onStart, stop:onStop});
+.. php:method:: drop($options = array())
 
-request($url, $options = array())
----------------------------------
+    Make an element accept draggable elements and act as a dropzone for
+    dragged elements.
 
-Generate a javascript snippet to create an ``XmlHttpRequest`` or
-'AJAX' request.
+    **Options**
 
-**Event Options**
+    -  ``accept`` - Selector for elements this droppable will accept.
+    -  ``hoverclass`` - Class to add to droppable when a draggable is
+       over.
 
+    **Event Options**
 
--  ``complete`` - Callback to fire on complete.
--  ``success`` - Callback to fire on success.
--  ``before`` - Callback to fire on request initialization.
--  ``error`` - Callback to fire on request failure.
+    -  ``drop`` - Event fired when an element is dropped into the drop
+       zone.
+    -  ``hover`` - Event fired when a drag enters a drop zone.
+    -  ``leave`` - Event fired when a drag is removed from a drop zone
+       without being dropped.
 
-**Options**
+    **Example use**::
 
+        <?php
+        $this->Js->get('#element');
+        $this->Js->drop(array(
+            'accept' => '.items',
+            'hover' => 'onHover',
+            'leave' => 'onExit',
+            'drop' => 'onDrop',
+            'wrapCallbacks' => false
+        ));
 
--  ``method`` - The method to make the request with defaults to GET
-   in more libraries
--  ``async`` - Whether or not you want an asynchronous request.
--  ``data`` - Additional data to send.
--  ``update`` - Dom id to update with the content of the request.
--  ``type`` - Data type for response. 'json' and 'html' are
-   supported. Default is html for most libraries.
--  ``evalScripts`` - Whether or not <script> tags should be
-   eval'ed.
--  ``dataExpression`` - Should the ``data`` key be treated as a
-   callback. Useful for supplying ``$options['data']`` as another
-   Javascript expression.
+    If you were using the jQuery engine the following code would be
+    added to the buffer
+    
+    .. code-block:: javascript
 
-**Example use**
+        $("#element").droppable({accept:".items", drop:onDrop, out:onExit, over:onHover});
 
-::
+    .. note::
 
-    $this->Js->event('click',
-    $this->Js->request(array(
-    'action' => 'foo', param1), array(
-    'async' => true,
-    'update' => '#element')));
+        Droppables in Mootools function differently from other libraries.
+        Droppables are implemented as an extension of Drag. So in addtion
+        to making a get() selection for the droppable element. You must
+        also provide a selector rule to the draggable element. Furthermore,
+        Mootools droppables inherit all options from Drag.
 
-get($selector)
---------------
+.. php:method:: slider($options = array())
 
-Set the internal 'selection' to a CSS selector. The active
-selection is used in subsequent operations until a new selection is
-made.
+    Create snippet of Javascript that converts an element into a slider
+    ui widget. See your libraries implementation for additional usage
+    and features.
 
-::
+    **Options**
 
-    $this->Js->get('#element');
+    -  ``handle`` - The id of the element used in sliding.
+    -  ``direction`` - The direction of the slider either 'vertical' or
+       'horizontal'
+    -  ``min`` - The min value for the slider.
+    -  ``max`` - The max value for the slider.
+    -  ``step`` - The number of steps or ticks the slider will have.
+    -  ``value`` - The initial offset of the slider.
 
-The ``JsHelper`` now will reference all other element based methods
-on the selection of ``#element``. To change the active selection,
-call ``get()`` again with a new element.
+    **Events**
 
-drag($options = array())
-------------------------
+    -  ``change`` - Fired when the slider's value is updated
+    -  ``complete`` - Fired when the user stops sliding the handle
 
-Make an element draggable.
+    **Example use**::
 
-**Options**
+        <?php
+        $this->Js->get('#element');
+        $this->Js->slider(array(
+            'complete' => 'onComplete',
+            'change' => 'onChange',
+            'min' => 0,
+            'max' => 10,
+            'value' => 2,
+            'direction' => 'vertical',
+            'wrapCallbacks' => false
+        ));
 
+    If you were using the jQuery engine the following code would be
+    added to the buffer
+    
+    .. code-block:: javascript
 
--  ``handle`` - selector to the handle element.
--  ``snapGrid`` - The pixel grid that movement snaps to, an
-   array(x, y)
--  ``container`` - The element that acts as a bounding box for the
-   draggable element.
+        $("#element").slider({change:onChange, max:10, min:0, orientation:"vertical", stop:onComplete, value:2});
 
-**Event Options**
+.. php:method:: effect($name, $options = array())
 
+    Creates a basic effect. By default this method is not buffered and
+    returns its result.
 
--  ``start`` - Event fired when the drag starts
--  ``drag`` - Event fired on every step of the drag
--  ``stop`` - Event fired when dragging stops (mouse release)
+    **Supported effect names**
 
-**Example use**
+    The following effects are supported by all JsEngines
 
-::
+    -  ``show`` - reveal an element.
+    -  ``hide`` - hide an element.
+    -  ``fadeIn`` - Fade in an element.
+    -  ``fadeOut`` - Fade out an element.
+    -  ``slideIn`` - Slide an element in.
+    -  ``slideOut`` - Slide an element out.
 
-    $this->Js->get('#element');
-    $this->Js->drag(array(
-        'container' => '#content',
-        'start' => 'onStart',
-        'drag' => 'onDrag',
-        'stop' => 'onStop',
-        'snapGrid' => array(10, 10),
-        'wrapCallbacks' => false
-    ));
+    **Options**
 
-If you were using the jQuery engine the following code would be
-added to the buffer.
+    -  ``speed`` - Speed at which the animation should occur. Accepted
+       values are 'slow', 'fast'. Not all effects use the speed option.
 
-::
+    **Example use**
 
-    $("#element").draggable({containment:"#content", drag:onDrag, grid:[10,10], start:onStart, stop:onStop});
+    If you were using the jQuery engine::
 
-drop($options = array())
-------------------------
+        <?php
+        $this->Js->get('#element');
+        $result = $this->Js->effect('fadeIn');
 
-Make an element accept draggable elements and act as a dropzone for
-dragged elements.
+        //$result contains $("#foo").fadeIn();
 
-**Options**
+.. php:method:: event($type, $content, $options = array())
 
+    Bind an event to the current selection. ``$type`` can be any of the
+    normal DOM events or a custom event type if your library supports
+    them. ``$content`` should contain the function body for the
+    callback. Callbacks will be wrapped with
+    ``function (event) { ... }`` unless disabled with the
+    ``$options``.
 
--  ``accept`` - Selector for elements this droppable will accept.
--  ``hoverclass`` - Class to add to droppable when a draggable is
-   over.
+    **Options**
 
-**Event Options**
+    -  ``wrap`` - Whether you want the callback wrapped in an anonymous
+       function. (defaults to true)
+    -  ``stop`` - Whether you want the event to stopped. (defaults to
+       true)
 
+    **Example use**::
+    
+        <?php
+        $this->Js->get('#some-link');
+        $this->Js->event('click', $this->Js->alert('hey you!'));
 
--  ``drop`` - Event fired when an element is dropped into the drop
-   zone.
--  ``hover`` - Event fired when a drag enters a drop zone.
--  ``leave`` - Event fired when a drag is removed from a drop zone
-   without being dropped.
+    If you were using the jQuery library you would get the following
+    Javascript code:
+    
+    .. code-block:: javascript
 
-**Example use**
+        $('#some-link').bind('click', function (event) {
+            alert('hey you!');
+            return false;
+        });
 
-::
+    You can remove the ``return false;`` by passing setting the
+    ``stop`` option to false::
 
-    $this->Js->get('#element');
-    $this->Js->drop(array(
-        'accept' => '.items',
-        'hover' => 'onHover',
-        'leave' => 'onExit',
-        'drop' => 'onDrop',
-        'wrapCallbacks' => false
-    ));
+        <?php
+        $this->Js->get('#some-link');
+        $this->Js->event('click', $this->Js->alert('hey you!'), array('stop' => false));
 
-If you were using the jQuery engine the following code would be
-added to the buffer:
+    If you were using the jQuery library you would the following
+    Javascript code would be added to the buffer. Note that the default
+    browser event is not cancelled:
+    
+    .. code-block:: javascript
 
-::
+        $('#some-link').bind('click', function (event) {
+            alert('hey you!');
+        });
 
-    <code class=
-    "php">$("#element").droppable({accept:".items", drop:onDrop, out:onExit, over:onHover});</code>
+.. php:method:: domReady($callback)
 
-**''Note'' about MootoolsEngine::drop**
+    Creates the special 'DOM ready' event. :php:func:`JsHelper::writeBuffer()`
+    automatically wraps the buffered scripts in a domReady method.
 
-Droppables in Mootools function differently from other libraries.
-Droppables are implemented as an extension of Drag. So in addtion
-to making a get() selection for the droppable element. You must
-also provide a selector rule to the draggable element. Furthermore,
-Mootools droppables inherit all options from Drag.
+.. php:method:: each($callback)
 
-slider()
---------
+    Create a snippet that iterates over the currently selected
+    elements, and inserts ``$callback``.
 
-Create snippet of Javascript that converts an element into a slider
-ui widget. See your libraries implementation for additional usage
-and features.
+    **Example**::
 
-**Options**
+        <?php
+        $this->Js->get('div.message');
+        $this->Js->each('$(this).css({color: "red"});');
 
+    Using the jQuery engine would create the following Javascript:
+    
+    .. code-block:: javascript
 
--  ``handle`` - The id of the element used in sliding.
--  ``direction`` - The direction of the slider either 'vertical' or
-   'horizontal'
--  ``min`` - The min value for the slider.
--  ``max`` - The max value for the slider.
--  ``step`` - The number of steps or ticks the slider will have.
--  ``value`` - The initial offset of the slider.
+        $('div.message').each(function () { $(this).css({color: "red"});});
 
-**Events**
+.. php:method:: alert($message)
 
+    Create a javascript snippet containing an ``alert()`` snippet. By
+    default, ``alert`` does not buffer, and returns the script
+    snippet.::
 
--  ``change`` - Fired when the slider's value is updated
--  ``complete`` - Fired when the user stops sliding the handle
+        <?php
+        $alert = $this->Js->alert('Hey there');
 
-**Example use**
+.. php:method:: confirm($message)
 
-::
+    Create a javascript snippet containing a ``confirm()`` snippet. By
+    default, ``confirm`` does not buffer, and returns the script
+    snippet.::
 
-    $this->Js->get('#element');
-    $this->Js->slider(array(
-        'complete' => 'onComplete',
-        'change' => 'onChange',
-        'min' => 0,
-        'max' => 10,
-        'value' => 2,
-        'direction' => 'vertical',
-        'wrapCallbacks' => false
-    ));
+        <?php
+        $alert = $this->Js->confirm('Are you sure?');
 
-If you were using the jQuery engine the following code would be
-added to the buffer:
+.. php:method:: prompt($message, $default)
 
-::
+    Create a javascript snippet containing a ``prompt()`` snippet. By
+    default, ``prompt`` does not buffer, and returns the script
+    snippet.::
 
-    $("#element").slider({change:onChange, max:10, min:0, orientation:"vertical", stop:onComplete, value:2});
+        <?php
+        $prompt = $this->Js->prompt('What is your favorite color?', 'blue');
 
-effect($name, $options = array())
----------------------------------
+.. php:method:: submit($caption = null, $options = array())
 
-Creates a basic effect. By default this method is not buffered and
-returns its result.
+    Create a submit input button that enables ``XmlHttpRequest``
+    submitted forms. Options can include
+    both those for :php:func:`FormHelper::submit()` and JsBaseEngine::request(),
+    JsBaseEngine::event();
 
-**Supported effect names**
+    Forms submitting with this method, cannot send files. Files do not
+    transfer over ``XmlHttpRequest``
+    and require an iframe, or other more specialized setups that are
+    beyond the scope of this helper.
 
-The following effects are supported by all JsEngines
+    **Options**
 
+    -  ``confirm`` - Confirm message displayed before sending the
+       request. Using confirm, does not replace any ``before`` callback
+       methods in the generated XmlHttpRequest.
+    -  ``buffer`` - Disable the buffering and return a script tag in
+       addition to the link.
+    -  ``wrapCallbacks`` - Set to false to disable automatic callback
+       wrapping.
 
--  ``show`` - reveal an element.
--  ``hide`` - hide an element.
--  ``fadeIn`` - Fade in an element.
--  ``fadeOut`` - Fade out an element.
--  ``slideIn`` - Slide an element in.
--  ``slideOut`` - Slide an element out.
+    **Example use**::
 
-**Options**
+        <?php
+        echo $this->Js->submit('Save', array('update' => '#content'));
 
+    Will create a submit button with an attached onclick event. The
+    click event will be buffered by default.::
 
--  ``speed`` - Speed at which the animation should occur. Accepted
-   values are 'slow', 'fast'. Not all effects use the speed option.
+        <?php
+        echo $this->Js->submit('Save', array('update' => '#content', 'div' => false, 'type' => 'json', 'async' => false));
 
-**Example use**
+    Shows how you can combine options that both
+    :php:func:`FormHelper::submit()` and :php:func:`JsHelper::request()` when using submit.
 
-If you were using the jQuery engine.
+.. php:method:: link($title, $url = null, $options = array())
 
-::
+    Create an html anchor element that has a click event bound to it.
+    Options can include both those for :php:func:`HtmlHelper::link()` and
+    :php:func:`JsHelper::request()`, :php:func:`JsHelper::event()`, ``$options``
+    is a :term:`html attributes` array that are appended to the generated 
+    anchor element. If an option is not part of the standard attributes 
+    or ``$htmlAttributes`` it will be passed to :php:func:`JsHelper::request()` 
+    as an option. If an id is not supplied, a randomly generated one will be
+     created for each link generated.
 
-    $this->Js->get('#element');
-    $result = $this->Js->effect('fadeIn');
+    **Options**
 
-    //$result contains $("#foo").fadeIn();
+    -  ``confirm`` - Generate a confirm() dialog before sending the
+       event.
+    -  ``id`` - use a custom id.
+    -  ``htmlAttributes`` - additional non-standard htmlAttributes.
+       Standard attributes are class, id, rel, title, escape, onblur and
+       onfocus.
+    -  ``buffer`` - Disable the buffering and return a script tag in
+       addition to the link.
 
-event($type, $content, $options = array())
-------------------------------------------
+    **Example use**::
 
-Bind an event to the current selection. ``$type`` can be any of the
-normal DOM events or a custom event type if your library supports
-them. ``$content`` should contain the function body for the
-callback. Callbacks will be wrapped with
-``function (event) { ... }`` unless disabled with the
-``$options``.
+        <?php
+        echo $this->Js->link('Page 2', array('page' => 2), array('update' => '#content'));
 
-**Options**
+    Will create a link pointing to ``/page:2`` and updating #content
+    with the response.
 
+    You can use the ``htmlAttributes`` option to add in additional
+    custom attributes.::
 
--  ``wrap`` - Whether you want the callback wrapped in an anonymous
-   function. (defaults to true)
--  ``stop`` - Whether you want the event to stopped. (defaults to
-   true)
+        <?php
+        echo $this->Js->link('Page 2', array('page' => 2), array(
+            'update' =>; '#content',
+            'htmlAttributes' =>; array('other' => 'value')
+        ));
 
-**Example use**
+        //Creates the following html
+        <a href="/posts/index/page:2" other="value">Page 2</a>
 
-::
+.. php:method:: serializeForm($options = array())
 
-    $this->Js->get('#some-link');
-    $this->Js->event('click', $this->Js->alert('hey you!'));
+    Serialize the form attached to $selector. Pass ``true`` for $isForm
+    if the current selection is a form element. Converts the form or
+    the form element attached to the current selection into a
+    string/json object (depending on the library implementation) for
+    use with XHR operations.
 
-If you were using the jQuery library you would get the following
-Javascript code.
+    **Options**
 
-::
+    -  ``isForm`` - is the current selection a form, or an input?
+       (defaults to false)
+    -  ``inline`` - is the rendered statement going to be used inside
+       another JS statement? (defaults to false)
 
-    $('#some-link').bind('click', function (event) {
-        alert('hey you!');
-        return false;
-    });
+    Setting inline == false allows you to remove the trailing ``;``.
+    This is useful when you need to serialize a form element as part of
+    another Javascript operation, or use the serialize method in an
+    Object literal.
 
-You can remove the ``return false;`` by passing setting the
-``stop`` option to false.
+.. php:method:: redirect($url)
 
-::
+    Redirect the page to ``$url`` using ``window.location``.
 
-    $this->Js->get('#some-link');
-    $this->Js->event('click', $this->Js->alert('hey you!'), array('stop' => false));
+.. php:method:: value($value)
 
-If you were using the jQuery library you would the following
-Javascript code would be added to the buffer. Note that the default
-browser event is not cancelled.
-
-::
-
-    $('#some-link').bind('click', function (event) {
-        alert('hey you!');
-    });
-
-domReady($callback)
--------------------
-
-Creates the special 'DOM ready' event. ``writeBuffer()``
-automatically wraps the buffered scripts in a domReady method.
-
-each($callback)
----------------
-
-Create a snippet that iterates over the currently selected
-elements, and inserts ``$callback``.
-
-**Example**
-
-::
-
-    $this->Js->get('div.message');
-    $this->Js->each('$(this).css({color: "red"});');
-
-Using the jQuery engine would create the following Javascript
-
-::
-
-    $('div.message').each(function () { $(this).css({color: "red"});});
-
-alert($message)
----------------
-
-Create a javascript snippet containing an ``alert()`` snippet. By
-default, ``alert`` does not buffer, and returns the script
-snippet.
-
-::
-
-    $alert = $this->Js->alert('Hey there');
-
-confirm($message)
------------------
-
-Create a javascript snippet containing a ``confirm()`` snippet. By
-default, ``confirm`` does not buffer, and returns the script
-snippet.
-
-::
-
-    $alert = $this->Js->confirm('Are you sure?');
-
-prompt($message, $default)
---------------------------
-
-Create a javascript snippet containing a ``prompt()`` snippet. By
-default, ``prompt`` does not buffer, and returns the script
-snippet.
-
-::
-
-    $prompt = $this->Js->prompt('What is your favorite color?', 'blue');
-
-submit()
---------
-
-Create a submit input button that enables ``XmlHttpRequest``
-submitted forms. Options can include
-both those for FormHelper::submit() and JsBaseEngine::request(),
-JsBaseEngine::event();
-
-Forms submitting with this method, cannot send files. Files do not
-transfer over ``XmlHttpRequest``
-and require an iframe, or other more specialized setups that are
-beyond the scope of this helper.
-
-**Options**
-
-
--  ``confirm`` - Confirm message displayed before sending the
-   request. Using confirm, does not replace any ``before`` callback
-   methods in the generated XmlHttpRequest.
--  ``buffer`` - Disable the buffering and return a script tag in
-   addition to the link.
--  ``wrapCallbacks`` - Set to false to disable automatic callback
-   wrapping.
-
-**Example use**
-
-::
-
-    echo $this->Js->submit('Save', array('update' => '#content'));
-
-Will create a submit button with an attached onclick event. The
-click event will be buffered by default.
-
-::
-
-    echo $this->Js->submit('Save', array('update' => '#content', 'div' => false, 'type' => 'json', 'async' => false));
-
-Shows how you can combine options that both
-``FormHelper::submit()`` and ``Js::request()`` when using submit.
-
-link($title, $url = null, $options = array())
----------------------------------------------
-
-Create an html anchor element that has a click event bound to it.
-Options can include both those for HtmlHelper::link() and
-JsBaseEngine::request(), JsBaseEngine::event(); ``$htmlAttributes``
-is used to specify additional options that are supposed to be
-appended to the generated anchor element. If an option is not part
-of the standard attributes or ``$htmlAttributes`` it will be passed
-to ``request()`` as an option. If an id is not supplied, a randomly
-generated one will be created for each link generated.
-
-**Options**
-
-
--  ``confirm`` - Generate a confirm() dialog before sending the
-   event.
--  ``id`` - use a custom id.
--  ``htmlAttributes`` - additional non-standard htmlAttributes.
-   Standard attributes are class, id, rel, title, escape, onblur and
-   onfocus.
--  ``buffer`` - Disable the buffering and return a script tag in
-   addition to the link.
-
-**Example use**
-
-::
-
-    echo $this->Js->link('Page 2', array('page' => 2), array('update' => '#content'));
-
-Will create a link pointing to ``/page:2`` and updating #content
-with the response.
-
-You can use the ``htmlAttributes`` option to add in additional
-custom attributes.
-
-::
-
-    echo $this->Js->link('Page 2', array('page' => 2), array(
-        'update' =&gt; '#content',
-        'htmlAttributes' =&gt; array('other' =&gt; 'value')
-    ));
-
-
-    //Creates the following html
-    <a href="/posts/index/page:2" other="value">Page 2</a>
-
-serializeForm($options = array())
----------------------------------
-
-Serialize the form attached to $selector. Pass ``true`` for $isForm
-if the current selection is a form element. Converts the form or
-the form element attached to the current selection into a
-string/json object (depending on the library implementation) for
-use with XHR operations.
-
-**Options**
-
-
--  ``isForm`` - is the current selection a form, or an input?
-   (defaults to false)
--  ``inline`` - is the rendered statement going to be used inside
-   another JS statement? (defaults to false)
-
-Setting inline == false allows you to remove the trailing ``;``.
-This is useful when you need to serialize a form element as part of
-another Javascript operation, or use the serialize method in an
-Object literal.
-
-redirect($url)
---------------
-
-Redirect the page to ``$url`` using ``window.location``.
-
-value($value)
--------------
-
-Converts a PHP-native variable of any type to a JSON-equivalent
-representation. Escapes any string values into JSON compatible
-strings. UTF-8 characters will be escaped.
+    Converts a PHP-native variable of any type to a JSON-equivalent
+    representation. Escapes any string values into JSON compatible
+    strings. UTF-8 characters will be escaped.
 
 .. _ajax-pagination:
 
@@ -824,10 +773,9 @@ library that matches the adapter you are using with ``JsHelper``.
 By default the ``JsHelper`` uses jQuery. So in your layout include
 jQuery (or whichever library you are using). Also make sure to
 include ``RequestHandlerComponent`` in your components. Add the
-following to your controller:
+following to your controller::
 
-::
-
+    <?php
     var $components = array('RequestHandler');
     var $helpers = array('Js');
 
@@ -836,6 +784,7 @@ example we'll be using jQuery.
 
 ::
 
+    <?php
     echo $this->Html->script('jquery');
 
 Similar to 1.2 you need to tell the ``PaginatorHelper`` that you
@@ -843,13 +792,14 @@ want to make Javascript enhanced links instead of plain HTML ones.
 To do so you use ``options()``
 
 ::
-
+    
+    <?php
     $this->Paginator->options(array(
         'update' => '#content',
         'evalScripts' => true
     ));
 
-The ``PaginatorHelper`` now knows to make javascript enhanced
+The :php:class:`PaginatorHelper` now knows to make javascript enhanced
 links, and that those links should update the ``#content`` element.
 Of course this element must exist, and often times you want to wrap
 ``$content_for_layout`` with a div matching the id used for the
@@ -863,10 +813,9 @@ You then create all the links as needed for your pagination
 features. Since the ``JsHelper`` automatically buffers all
 generated script content to reduce the number of ``<script>`` tags
 in your source code you **must** call write the buffer out. At the
-bottom of your view file. Be sure to include:
+bottom of your view file. Be sure to include::
 
-::
-
+    <?php
     echo $this->Js->writeBuffer();
 
 If you omit this you will **not** be able to chain ajax pagination
@@ -877,9 +826,7 @@ Adding effects and transitions
 ------------------------------
 
 Since ``indicator`` is no longer supported, you must add any
-indicator effects yourself.
-
-::
+indicator effects yourself.::
 
     <html>
         <head>
@@ -906,6 +853,7 @@ with the ``JsHelper``. To do that we need to update our
 
 ::
 
+    <?php
     $this->Paginator->options(array(
         'update' => '#content',
         'evalScripts' => true,

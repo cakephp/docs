@@ -326,98 +326,63 @@ in the plugin, it will look in the main APP folder.
 View methods
 ============
 
+.. php:class:: View
+
 View methods are accessible in all view, element and layout files.
 To call any view method use ``$this->method()``
 
-set()
------
+.. php:method:: set(string $var, mixed $value)
 
-``set(string $var, mixed $value)``
+    Views have a ``set()`` method that is analogous to the ``set()``
+    found in Controller objects. It allows you to add variables to the
+    . Using set() from your view file will add the variables to the
+    layout and elements that will be rendered later. See
+    :ref:`controller-methods` for more
+    information on using set().
 
-Views have a ``set()`` method that is analogous to the ``set()``
-found in Controller objects. It allows you to add variables to the
-. Using set() from your view file will add the variables to the
-layout and elements that will be rendered later. See
-:ref:`controller-methods` for more
-information on using set().
+    In your view file you can do::
 
-In your view file you can do
-
-::
-
+        <?php
         $this->set('activeMenuButton', 'posts');
 
-Then in your layout the ``$activeMenuButton`` variable will be
-available and contain the value 'posts'.
+    Then in your layout the ``$activeMenuButton`` variable will be
+    available and contain the value 'posts'.
 
-getVar()
---------
+.. php:method:: getVar(string $var)
 
-``getVar(string $var)``
+    Gets the value of the viewVar with the name $var
 
-Gets the value of the viewVar with the name $var
+.. php:method:: getVars()
 
-getVars()
----------
+    Gets a list of all the available view variables in the current
+    rendering scope. Returns an array of variable names.
 
-``getVars()``
+.. php:method:: element(string $elementPath, array $data, bool $loadHelpers)
 
-Gets a list of all the available view variables in the current
-rendering scope. Returns an array of variable names.
+    Renders an element or view partial. See the section on
+    :ref:`view-elements` for more information and
+    examples.
 
-error()
--------
+.. php:method:: uuid(string $object, mixed $url)
 
-``error(int $code, string $name, string $message)``
+    Generates a unique non-random DOM ID for an object, based on the
+    object type and url. This method is often used by helpers that need
+    to generate unique DOM ID's for elements such as the :php:class:`JsHelper`::
 
-Displays an error page to the user. Uses layouts/error.ctp to
-render the page.
-
-::
-
-        $this->error(404, 'Not found', 'This page was not found, sorry');
-
-This will render an error page with the title and messages
-specified. Its important to note that script execution is not
-stopped by ``View::error()`` So you will have to stop code
-execution yourself if you want to halt the script.
-
-element()
----------
-
-``element(string $elementPath, array $data, bool $loadHelpers)``
-
-Renders an element or view partial. See the section on
-:ref:`view-elements` for more information and
-examples.
-
-uuid
-----
-
-``uuid(string $object, mixed $url)``
-
-Generates a unique non-random DOM ID for an object, based on the
-object type and url. This method is often used by helpers that need
-to generate unique DOM ID's for elements such as the AjaxHelper.
-
-::
-
+        <?php
         $uuid = $this->uuid('form', array('controller' => 'posts', 'action' => 'index'));
         //$uuid contains 'form0425fe3bad'
 
-addScript()
------------
+.. php:method:: addScript(string $name, string $content)
 
-``addScript(string $name, string $content)``
-
-Adds content to the internal scripts buffer. This buffer is made
-available in the layout as ``$scripts_for_layout``. This method is
-helpful when creating helpers that need to add javascript or css
-directly to the layout. Keep in mind that scripts added from the
-layout, or elements in the layout will not be added to
-``$scripts_for_layout``. This method is most often used from inside
-helpers, like the :doc:`/core-helpers/js` and
-:doc:`/core-helpers/html` Helpers.
+    Adds content to the internal scripts buffer. This buffer is made
+    available in the layout as ``$scripts_for_layout``. This method is
+    helpful when creating helpers that need to add javascript or css
+    directly to the layout. Keep in mind that scripts added from the
+    layout, or elements in the layout will not be added to
+    ``$scripts_for_layout``. This method is most often used from inside
+    helpers, like the :doc:`/core-helpers/js` and
+    :doc:`/core-helpers/html` Helpers.
 
 Themes
 ======
@@ -426,19 +391,17 @@ You can take advantage of themes, making it easy to switch the look
 and feel of your page quickly and easily.
 
 To use themes, you need to tell your controller to use the
-ThemeView class instead of the default View class.
+ThemeView class instead of the default View class::
 
-::
-
+    <?php
     class ExampleController extends AppController {
         var $view = 'Theme';
     }
 
 To declare which theme to use by default, specify the theme name in
-your controller.
+your controller::
 
-::
-
+    <?php
     class ExampleController extends AppController {
         var $view = 'Theme';
         var $theme = 'example';
@@ -450,6 +413,7 @@ functions.
 
 ::
 
+    <?php
     $this->theme = 'another_example';
 
 Theme view files need to be within the /app/views/themed/ folder.
@@ -499,6 +463,7 @@ folder.
 
 ::
 
+    <?php
     //When in a theme with the name of 'purple_cupcake'
     $this->Html->css('main.css');
      
@@ -542,6 +507,7 @@ located.
 
 ::
 
+    <?php
     class ExampleController extends AppController {
         function download () {
             $this->view = 'Media';
@@ -561,6 +527,7 @@ included in the MediaView's ``$mimeType`` array.
 
 ::
 
+    <?php
     function download () {
         $this->view = 'Media';
         $params = array(

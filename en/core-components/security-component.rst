@@ -1,6 +1,8 @@
 Security Component
 ##################
 
+.. php:class:: SecurityComponent
+
 The Security Component creates an easy way to integrate tighter
 security in your application. An interface for managing
 HTTP-authenticated requests can be created with Security Component.
@@ -46,49 +48,74 @@ components in your ``$components`` array.
 Configuration
 =============
 
-$blackHoleCallback
+.. php:attr:: blackHoleCallback
+
     A Controller callback that will handle and requests that are
     blackholed.
-$requirePost
+
+.. php:attr:: requirePost
+
     A List of controller actions that require a POST request to occur.
     An array of controller actions or '\*' to force all actions to
     require a POST.
-$requireSecure
+
+.. php:attr:: requireSecure
+
     List of actions that require an SSL connection to occur. An array
     of controller actions or '\*' to force all actions to require a SSL
     connection.
-$requireAuth
+
+.. php:attr:: requireAuth
+
     List of actions that requires a valid authentication key. This
     validation key is set by Security Component.
-$requireLogin
+
+.. php:attr:: requireLogin
+
     List of actions that require HTTP-Authenticated logins (basic or
     digest). Also accepts '\*' indicating that all actions of this
     controller require HTTP-authentication.
-$loginOptions
+
+.. php:attr:: loginOptions
+
     Options for HTTP-Authenticate login requests. Allows you to set the
     type of authentication and the controller callback for the
     authentication process.
-$loginUsers
+
+.. php:attr:: loginUsers
+
     An associative array of usernames => passwords that are used for
     HTTP-authenticated logins. If you are using digest authentication,
     your passwords should be MD5-hashed.
-$allowedControllers
+
+.. php:attr:: allowedControllers
+
     A List of Controller from which the actions of the current
     controller are allowed to receive requests from. This can be used
     to control cross controller requests.
-$allowedActions
+
+.. php:attr:: allowedActions
+
     Actions from which actions of the current controller are allowed to
     receive requests. This can be used to control cross controller
     requests.
-$disabledFields
+
+.. php:attr:: disabledFields
+
     List of form fields that shall be ignored when validating POST -
     The value, presence or absence of these form fields will not be
     taken into account when evaluating whether a form submission is
     valid. Specify fields as you do for the Form Helper
     (``Model.fieldname``).
-$validatePost
+
+.. php:attr:: validatePost
+
     Set to ``false`` to completely skip the validation of POST
     requests, essentially turning CSRF protection off.
+
+.. todo::
+
+    Missing CSRF properties added in 2.0
 
 Methods
 =======
@@ -97,74 +124,65 @@ Methods
 
     Update to reflect API changes in 2.0
 
-requirePost()
--------------
+.. php:method:: requirePost()
 
-Sets the actions that require a POST request. Takes any number of
-arguments. Can be called with no arguments to force all actions to
-require a POST.
+    Sets the actions that require a POST request. Takes any number of
+    arguments. Can be called with no arguments to force all actions to
+    require a POST.
 
-requireSecure()
----------------
+.. php:method:: requireSecure()
 
-Sets the actions that require a SSL-secured request. Takes any
-number of arguments. Can be called with no arguments to force all
-actions to require a SSL-secured.
+    Sets the actions that require a SSL-secured request. Takes any
+    number of arguments. Can be called with no arguments to force all
+    actions to require a SSL-secured.
 
-requireAuth()
--------------
+.. php:method:: requireAuth()
 
-Sets the actions that require a valid Security Component generated
-token. Takes any number of arguments. Can be called with no
-arguments to force all actions to require a valid authentication.
+    Sets the actions that require a valid Security Component generated
+    token. Takes any number of arguments. Can be called with no
+    arguments to force all actions to require a valid authentication.
 
-requireLogin()
---------------
+.. php:method:: requireLogin()
 
-Sets the actions that require a valid HTTP-Authenticated request.
-Takes any number of arguments. Can be called with no arguments to
-force all actions to require valid HTTP-authentication.
+    Sets the actions that require a valid HTTP-Authenticated request.
+    Takes any number of arguments. Can be called with no arguments to
+    force all actions to require valid HTTP-authentication.
 
-loginCredentials(string $type)
-------------------------------
+.. php:method:: loginCredentials(string $type)
 
-Attempt to validate login credentials for a HTTP-authenticated
-request. $type is the type of HTTP-Authentication you want to
-check. Either 'basic', or 'digest'. If left null/empty both will be
-tried. Returns an array with login name and password if
-successful.
+    Attempt to validate login credentials for a HTTP-authenticated
+    request. $type is the type of HTTP-Authentication you want to
+    check. Either 'basic', or 'digest'. If left null/empty both will be
+    tried. Returns an array with login name and password if
+    successful.
 
-loginRequest(array $options)
-----------------------------
+.. php:method:: loginRequest(array $options)
 
-Generates the text for an HTTP-Authenticate request header from an
-array of $options.
+    Generates the text for an HTTP-Authenticate request header from an
+    array of $options.
 
-$options generally contains a 'type', 'realm' . Type indicate which
-HTTP-Authenticate method to use. Realm defaults to the current HTTP
-server environment.
+    $options generally contains a 'type', 'realm' . Type indicate which
+    HTTP-Authenticate method to use. Realm defaults to the current HTTP
+    server environment.
 
-parseDigestAuthData(string $digest)
------------------------------------
+.. php:method::  parseDigestAuthData(string $digest)
 
-Parse an HTTP digest authentication request. Returns and array of
-digest data as an associative array if successful, and null on
-failure.
+    Parse an HTTP digest authentication request. Returns and array of
+    digest data as an associative array if successful, and null on
+    failure.
 
-generateDigestResponseHash(array $data)
----------------------------------------
+.. php:method:: generateDigestResponseHash(array $data)
 
-Creates a hash that to be compared with an HTTP
-digest-authenticated response. $data should be an array created by
-SecurityComponent::parseDigestAuthData().
+    Creates a hash that to be compared with an HTTP
+    digest-authenticated response. $data should be an array created by
+    SecurityComponent::parseDigestAuthData().
 
-blackHole(object $controller, string $error)
---------------------------------------------
+.. php:method:: blackHole(object $controller, string $error)
 
-Black-hole an invalid request with a 404 error or a custom
-callback. With no callback, the request will be exited. If a
-controller callback is set to SecurityComponent::blackHoleCallback,
-it will be called and passed any error information.
+    Black-hole an invalid request with a 404 error or a custom
+    callback. With no callback, the request will be exited. If a
+    controller callback is set to SecurityComponent::blackHoleCallback,
+    it will be called and passed any error information.
 
 Usage
 =====

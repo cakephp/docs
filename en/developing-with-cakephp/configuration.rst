@@ -17,17 +17,18 @@ Database Configuration
 CakePHP expects database configuration details to be in a file at
 app/config/database.php. An example database configuration file can
 be found at app/config/database.php.default. A finished
-configuration should look something like this.
+configuration should look something like this::
 
-::
-
-    var $default = array('driver'      => 'mysql',
-                         'persistent'  => false,
-                         'host'        => 'localhost',
-                         'login'       => 'cakephpuser',
-                         'password'    => 'c4k3roxx!',
-                         'database'    => 'my_cakephp_project',
-                         'prefix'      => '');
+    <?php
+    var $default = array(
+        'driver'      => 'mysql',
+        'persistent'  => false,
+        'host'        => 'localhost',
+        'login'       => 'cakephpuser',
+        'password'    => 'c4k3roxx!',
+        'database'    => 'my_cakephp_project',
+        'prefix'      => ''
+    );
 
 The $default connection array is used unless another connection is
 specified by the $useDbConfig property in a model. For example, if
@@ -100,131 +101,6 @@ variable definitions and constant definitions that determine how
 your application behaves. Before we dive into those particular
 variables, you’ll need to be familiar with Configure, CakePHP’s
 configuration registry class.
-
-The Configuration Class
-=======================
-
-Despite few things needing to be configured in CakePHP, it’s
-sometimes useful to have your own configuration rules for your
-application. In the past you may have defined custom configuration
-values by defining variable or constants in some files. Doing so
-forces you to include that configuration file every time you needed
-to use those values.
-
-CakePHP’s new Configure class can be used to store and retrieve
-application or runtime specific values. Be careful, this class
-allows you to store anything in it, then use it in any other part
-of your code: a sure temptation to break the MVC pattern CakePHP
-was designed for. The main goal of Configure class is to keep
-centralized variables that can be shared between many objects.
-Remember to try to live by "convention over configuration" and you
-won't end up breaking the MVC structure we’ve set in place.
-
-This class acts as a singleton and its methods can be called from
-anywhere within your application, in a static context.
-
-::
-
-    <?php Configure::read('debug'); ?>
-
-Configure Methods
------------------
-
-write
-~~~~~
-
-``write(string $key, mixed $value)``
-
-Use ``write()`` to store data in the application’s configuration.
-
-::
-
-    Configure::write('Company.name','Pizza, Inc.');
-    Configure::write('Company.slogan','Pizza for your body and soul');
-
-.. note::
-
-    The dot notation used in the ``$key`` parameter can be used to
-    organize your configuration settings into logical groups.
-
-The above example could also be written in a single call:
-
-::
-
-    Configure::write(
-        'Company',array('name'=>'Pizza, Inc.','slogan'=>'Pizza for your body and soul')
-    );
-
-You can use ``Configure::write('debug', $int)`` to switch between
-debug and production modes on the fly. This is especially handy for
-AMF or SOAP interactions where debugging information can cause
-parsing problems.
-
-read
-~~~~
-
-``read(string $key = 'debug')``
-
-Used to read configuration data from the application. Defaults to
-CakePHP’s important debug value. If a key is supplied, the data is
-returned. Using our examples from write() above, we can read that
-data back:
-
-::
-
-    Configure::read('Company.name');    //yields: 'Pizza, Inc.'
-    Configure::read('Company.slogan');  //yields: 'Pizza for your body and soul'
-     
-    Configure::read('Company');
-     
-    //yields: 
-    array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
-
-delete
-~~~~~~
-
-``delete(string $key)``
-
-Used to delete information from the application’s configuration.
-
-::
-
-    Configure::delete('Company.name');
-
-load
-~~~~
-
-``load(string $path)``
-
-Use this method to load configuration information from a specific
-file.
-
-::
-
-    // /app/config/messages.php:
-    <?php
-    $config['Company']['name'] = 'Pizza, Inc.';
-    $config['Company']['slogan'] = 'Pizza for your body and soul';
-    $config['Company']['phone'] = '555-55-55';
-    ?>
-     
-    <?php
-    Configure::load('messages');
-    Configure::read('Company.name');
-    ?>
-
-.. note::
-
-    Every configure key-value pair is represented in the file with the
-    ``$config`` array. Any other variables in the file will be ignored
-    by the ``load()`` function.
-
-version
-~~~~~~~
-
-``version()``
-
-Returns the CakePHP version for the current application.
 
 CakePHP Core Configuration Variables
 ------------------------------------
@@ -327,11 +203,122 @@ Configuration Constants
 While most configuration options are handled by Configure, there
 are a few constants that CakePHP uses during runtime.
 
-Constant
-    Description
-LOG\_ERROR
+.. php:const:: LOG_ERROR
+
     Error constant. Used for differentiating error logging and
     debugging. Currently PHP supports LOG\_DEBUG.
+
+The Configuration Class
+=======================
+
+.. php:class:: Configure
+
+Despite few things needing to be configured in CakePHP, it’s
+sometimes useful to have your own configuration rules for your
+application. In the past you may have defined custom configuration
+values by defining variable or constants in some files. Doing so
+forces you to include that configuration file every time you needed
+to use those values.
+
+CakePHP’s new Configure class can be used to store and retrieve
+application or runtime specific values. Be careful, this class
+allows you to store anything in it, then use it in any other part
+of your code: a sure temptation to break the MVC pattern CakePHP
+was designed for. The main goal of Configure class is to keep
+centralized variables that can be shared between many objects.
+Remember to try to live by "convention over configuration" and you
+won't end up breaking the MVC structure we’ve set in place.
+
+This class acts as a singleton and its methods can be called from
+anywhere within your application, in a static context.
+
+::
+
+    <?php Configure::read('debug'); ?>
+
+
+.. php:staticmethod:: write(string $key, mixed $value)
+
+    Use ``write()`` to store data in the application’s configuration::
+
+        <?php
+        Configure::write('Company.name','Pizza, Inc.');
+        Configure::write('Company.slogan','Pizza for your body and soul');
+
+    .. note::
+
+        The dot notation used in the ``$key`` parameter can be used to
+        organize your configuration settings into logical groups.
+
+    The above example could also be written in a single call::
+
+        <?php
+        Configure::write(
+            'Company',array('name'=>'Pizza, Inc.','slogan'=>'Pizza for your body and soul')
+        );
+
+    You can use ``Configure::write('debug', $int)`` to switch between
+    debug and production modes on the fly. This is especially handy for
+    AMF or SOAP interactions where debugging information can cause
+    parsing problems.
+
+.. php:staticmethod:: read(string $key = 'debug')
+
+    Used to read configuration data from the application. Defaults to
+    CakePHP’s important debug value. If a key is supplied, the data is
+    returned. Using our examples from write() above, we can read that
+    data back::
+        
+        <?php
+        Configure::read('Company.name');    //yields: 'Pizza, Inc.'
+        Configure::read('Company.slogan');  //yields: 'Pizza for your body and soul'
+     
+        Configure::read('Company');
+     
+        //yields: 
+        array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
+
+.. php:staticmethod:: delete(string $key)
+
+    Used to delete information from the application’s configuration.
+    
+    ::
+
+        <?php
+        Configure::delete('Company.name');
+
+.. php:staticmethod:: load(string $path)
+
+    Use this method to load configuration information from a specific
+    file.
+
+    ::
+
+        // /app/config/messages.php:
+        <?php
+        $config['Company']['name'] = 'Pizza, Inc.';
+        $config['Company']['slogan'] = 'Pizza for your body and soul';
+        $config['Company']['phone'] = '555-55-55';
+        ?>
+     
+        <?php
+        Configure::load('messages');
+        Configure::read('Company.name');
+        ?>
+
+    .. note::
+
+        Every configure key-value pair is represented in the file with the
+        ``$config`` array. Any other variables in the file will be ignored
+        by the ``load()`` function.
+    
+    .. todo::
+    
+        Update configuration loading, as its not right anymore.
+
+.. php:staticmethod:: version()
+
+    Returns the CakePHP version for the current application.
 
 The App Class
 =============

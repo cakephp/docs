@@ -117,6 +117,8 @@ controller callbacks for best results:
 Controller Methods
 ------------------
 
+.. php:class:: Controller
+
 For a complete list of controller methods and their descriptions
 visit the CakePHP API. Check out
 `http://api13.cakephp.org/class/controller <http://api13.cakephp.org/class/controller>`_.
@@ -129,108 +131,101 @@ are able to pass data to the views, using ``set()``. You can also
 decide which view class to use, and which view file should be
 rendered from the controller.
 
-set
-^^^
+.. php:method:: set(string $var, mixed $value)
 
-``set(string $var, mixed $value)``
+    The ``set()`` method is the main way to send data from your
+    controller to your view. Once you've used ``set()``, the variable
+    can be accessed in your view.
 
-The ``set()`` method is the main way to send data from your
-controller to your view. Once you've used ``set()``, the variable
-can be accessed in your view.
+    ::
 
-::
+        <?php
 
-    <?php
+        //First you pass data from the controller:
 
-    //First you pass data from the controller:
+        $this->set('color', 'pink');
 
-    $this->set('color', 'pink');
+        //Then, in the view, you can utilize the data:
+        ?>
 
-    //Then, in the view, you can utilize the data:
-    ?>
+        You have selected <?php echo $color; ?> icing for the cake.
 
-    You have selected <?php echo $color; ?> icing for the cake.
+    The ``set()`` method also takes an associative array as its first
+    parameter. This can often be a quick way to assign a set of
+    information to the view.
 
-The ``set()`` method also takes an associative array as its first
-parameter. This can often be a quick way to assign a set of
-information to the view.
+    .. versionchanged:: 1.3
+        Array keys will be no longer be inflected before they are assigned
+        to the view ('underscored\_key' does not become 'underscoredKey'
+        anymore, etc.):
 
-.. versionchanged:: 1.3
-    Array keys will be no longer be inflected before they are assigned
-    to the view ('underscored\_key' does not become 'underscoredKey'
-    anymore, etc.):
+    ::
 
-::
+        <?php
 
-    <?php
+        $data = array(
+            'color' => 'pink',
+            'type' => 'sugar',
+            'base_price' => 23.95
+        );
 
-    $data = array(
-        'color' => 'pink',
-        'type' => 'sugar',
-        'base_price' => 23.95
-    );
+        //make $color, $type, and $base_price 
+        //available to the view:
 
-    //make $color, $type, and $base_price 
-    //available to the view:
+        $this->set($data);  
 
-    $this->set($data);  
+        ?>
 
-    ?>
+    The attribute ``$pageTitle`` no longer exists, use ``set()`` to set
+    the title::
 
-The attribute ``$pageTitle`` no longer exists, use ``set()`` to set
-the title
+        <?php
+        $this->set('title_for_layout', 'This is the page title');
+        ?>
 
-::
 
-    <?php
-    $this->set('title_for_layout', 'This is the page title');
-    ?>
+.. php:method:: render(string $action, string $layout, string $file)
 
-render
-^^^^^^
+    The ``render()`` method is automatically called at the end of each
+    requested controller action. This method performs all the view
+    logic (using the data you’ve given in using the ``set()`` method),
+    places the view inside its layout and serves it back to the end
+    user.
 
-``render(string $action, string $layout, string $file)``
+    The default view file used by render is determined by convention.
+    If the ``search()`` action of the RecipesController is requested,
+    the view file in /app/views/recipes/search.ctp will be rendered.
 
-The ``render()`` method is automatically called at the end of each
-requested controller action. This method performs all the view
-logic (using the data you’ve given in using the ``set()`` method),
-places the view inside its layout and serves it back to the end
-user.
+    ::
 
-The default view file used by render is determined by convention.
-If the ``search()`` action of the RecipesController is requested,
-the view file in /app/views/recipes/search.ctp will be rendered.
-
-::
-
-    class RecipesController extends AppController {
-    ...
-        function search() {
-            // Render the view in /views/recipes/search.ctp
-            $this->render();
+        class RecipesController extends AppController {
+        ...
+            function search() {
+                // Render the view in /views/recipes/search.ctp
+                $this->render();
+            }
+        ...
         }
-    ...
-    }
 
-Although CakePHP will automatically call it (unless you’ve set
-``$this->autoRender`` to false) after every action’s logic, you can
-use it to specify an alternate view file by specifying an action
-name in the controller using ``$action``.
+    Although CakePHP will automatically call it (unless you’ve set
+    ``$this->autoRender`` to false) after every action’s logic, you can
+    use it to specify an alternate view file by specifying an action
+    name in the controller using ``$action``.
 
-If ``$action`` starts with '/' it is assumed to be a view or
-element file relative to the ``/app/views`` folder. This allows
-direct rendering of elements, very useful in ajax calls.
-::
+    If ``$action`` starts with '/' it is assumed to be a view or
+    element file relative to the ``/app/views`` folder. This allows
+    direct rendering of elements, very useful in ajax calls.
+    ::
 
-    // Render the element in /views/elements/ajaxreturn.ctp
-    $this->render('/elements/ajaxreturn');
+        // Render the element in /views/elements/ajaxreturn.ctp
+        $this->render('/elements/ajaxreturn');
 
-You can also specify an alternate view or element file using the
-third parameter, ``$file``. When using ``$file``, don't forget to
-utilize a few of CakePHP’s global constants (such as ``VIEWS``).
+    You can also specify an alternate view or element file using the
+    third parameter, ``$file``. When using ``$file``, don't forget to
+    utilize a few of CakePHP’s global constants (such as ``VIEWS``).
 
-The ``$layout`` parameter allows you to specify the layout the view
-is rendered in.
+    The ``$layout`` parameter allows you to specify the layout the view
+    is rendered in.
 
 Rendering a specific view
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -254,76 +249,65 @@ This would render ``app/views/posts/custom_file.ctp`` instead of
 Flow Control
 ~~~~~~~~~~~~
 
-redirect
-^^^^^^^^
+.. php:method:: redirect(mixed $url, integer $status, boolean $exit)
 
-``redirect(mixed $url, integer $status, boolean $exit)``
+    The flow control method you’ll use most often is ``redirect()``.
+    This method takes its first parameter in the form of a
+    CakePHP-relative URL. When a user has successfully placed an order,
+    you might wish to redirect them to a receipt screen.::
 
-The flow control method you’ll use most often is ``redirect()``.
-This method takes its first parameter in the form of a
-CakePHP-relative URL. When a user has successfully placed an order,
-you might wish to redirect them to a receipt screen.
-
-::
-
-    function placeOrder() {
-
-        //Logic for finalizing order goes here
-
-        if($success) {
-            $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));
-        } else {
-            $this->redirect(array('controller' => 'orders', 'action' => 'confirm'));
+        <?php
+        function placeOrder() {
+            //Logic for finalizing order goes here
+            if($success) {
+                $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));
+            } else {
+                $this->redirect(array('controller' => 'orders', 'action' => 'confirm'));
+            }
         }
-    }
 
-You can also use a relative or absolute URL as the $url argument:
+    You can also use a relative or absolute URL as the $url argument::
 
-::
+        <?php
+        $this->redirect('/orders/thanks'));
+        $this->redirect('http://www.example.com');
 
-    $this->redirect('/orders/thanks'));
-    $this->redirect('http://www.example.com');
+    You can also pass data to the action::
 
-You can also pass data to the action:
+        <?php
+        $this->redirect(array('action' => 'edit', $id));
 
-::
+    The second parameter of ``redirect()`` allows you to define an HTTP
+    status code to accompany the redirect. You may want to use 301
+    (moved permanently) or 303 (see other), depending on the nature of
+    the redirect.
 
-    $this->redirect(array('action' => 'edit', $id));
+    The method will issue an ``exit()`` after the redirect unless you
+    set the third parameter to ``false``.
 
-The second parameter of ``redirect()`` allows you to define an HTTP
-status code to accompany the redirect. You may want to use 301
-(moved permanently) or 303 (see other), depending on the nature of
-the redirect.
+    If you need to redirect to the referer page you can use::
 
-The method will issue an ``exit()`` after the redirect unless you
-set the third parameter to ``false``.
+        <?php
+        $this->redirect($this->referer());
 
-If you need to redirect to the referer page you can use:
-::
+.. php:method:: flash(string $message, string $url, integer $pause, string $layout)
 
-    $this->redirect($this->referer());
+    Like ``redirect()``, the ``flash()`` method is used to direct a
+    user to a new page after an operation. The ``flash()`` method is
+    different in that it shows a message before passing the user on to
+    another URL.
 
-flash
-^^^^^
+    The first parameter should hold the message to be displayed, and
+    the second parameter is a CakePHP-relative URL. CakePHP will
+    display the ``$message`` for ``$pause`` seconds before forwarding
+    the user on.
 
-``flash(string $message, string $url, integer $pause, string $layout)``
+    If there's a particular template you'd like your flashed message to
+    use, you may specify the name of that layout in the ``$layout``
+    parameter.
 
-Like ``redirect()``, the ``flash()`` method is used to direct a
-user to a new page after an operation. The ``flash()`` method is
-different in that it shows a message before passing the user on to
-another URL.
-
-The first parameter should hold the message to be displayed, and
-the second parameter is a CakePHP-relative URL. CakePHP will
-display the ``$message`` for ``$pause`` seconds before forwarding
-the user on.
-
-If there's a particular template you'd like your flashed message to
-use, you may specify the name of that layout in the ``$layout``
-parameter.
-
-For in-page flash messages, be sure to check out SessionComponent’s
-setFlash() method.
+    For in-page flash messages, be sure to check out SessionComponent’s
+    setFlash() method.
 
 Callbacks
 ~~~~~~~~~
@@ -369,273 +353,251 @@ $method name of method called example index, edit, etc.
 Other Useful Methods
 ~~~~~~~~~~~~~~~~~~~~
 
-constructClasses
-^^^^^^^^^^^^^^^^
+.. php:method:: constructClasses
 
-This method loads the models required by the controller. This
-loading process is done by CakePHP normally, but this method is
-handy to have when accessing controllers from a different
-perspective. If you need CakePHP in a command-line script or some
-other outside use, constructClasses() may come in handy.
+    This method loads the models required by the controller. This
+    loading process is done by CakePHP normally, but this method is
+    handy to have when accessing controllers from a different
+    perspective. If you need CakePHP in a command-line script or some
+    other outside use, constructClasses() may come in handy.
 
-referer
-^^^^^^^
+.. php:method:: referer(mixed $default = null, boolean $local = false)
 
-``string referer(mixed $default = null, boolean $local = false)``
+    Returns the referring URL for the current request. Parameter
+    ``$default`` can be used to supply a default URL to use if
+    HTTP\_REFERER cannot be read from headers. So, instead of doing
+    this::
 
-Returns the referring URL for the current request. Parameter
-``$default`` can be used to supply a default URL to use if
-HTTP\_REFERER cannot be read from headers. So, instead of doing
-this:
-
-::
-
-    <?php
-    class UserController extends AppController {
-        function delete($id) {
-            // delete code goes here, and then...
-            if ($this->referer() != '/') {
-                $this->redirect($this->referer());
-            } else {
-                $this->redirect(array('action' => 'index'));
+        <?php
+        class UserController extends AppController {
+            function delete($id) {
+                // delete code goes here, and then...
+                if ($this->referer() != '/') {
+                    $this->redirect($this->referer());
+                } else {
+                    $this->redirect(array('action' => 'index'));
+                }
             }
         }
-    }
-    ?>
+        ?>
 
-you can do this:
+    you can do this::
 
-::
-
-    <?php
-    class UserController extends AppController {
-        function delete($id) {
-            // delete code goes here, and then...
-            $this->redirect($this->referer(array('action' => 'index')));
+        <?php
+        class UserController extends AppController {
+            function delete($id) {
+                // delete code goes here, and then...
+                $this->redirect($this->referer(array('action' => 'index')));
+            }
         }
-    }
-    ?>
+        ?>
 
-If ``$default`` is not set, the function defaults to the root of
-your domain - '/'.
+    If ``$default`` is not set, the function defaults to the root of
+    your domain - '/'.
 
-Parameter ``$local`` if set to ``true``, restricts referring URLs
-to local server.
+    Parameter ``$local`` if set to ``true``, restricts referring URLs
+    to local server.
 
-disableCache
-^^^^^^^^^^^^
+.. php:method:: disableCache
 
-Used to tell the user’s **browser** not to cache the results of the
-current request. This is different than view caching, covered in a
-later chapter.
+    Used to tell the user’s **browser** not to cache the results of the
+    current request. This is different than view caching, covered in a
+    later chapter.
 
-The headers sent to this effect are:
+    The headers sent to this effect are:
 
-``Expires: Mon, 26 Jul 1997 05:00:00 GMT``
-``Last-Modified: [current datetime] GMT``
-``Cache-Control: no-store, no-cache, must-revalidate``
-``Cache-Control: post-check=0, pre-check=0``
-``Pragma: no-cache``
+    ``Expires: Mon, 26 Jul 1997 05:00:00 GMT``
+    ``Last-Modified: [current datetime] GMT``
+    ``Cache-Control: no-store, no-cache, must-revalidate``
+    ``Cache-Control: post-check=0, pre-check=0``
+    ``Pragma: no-cache``
 
-postConditions
-^^^^^^^^^^^^^^
+.. php:method:: postConditions(array $data, mixed $op, string $bool, boolean $exclusive)
 
-``postConditions(array $data, mixed $op, string $bool, boolean $exclusive)``
+    Use this method to turn a set of POSTed model data (from
+    HtmlHelper-compatible inputs) into a set of find conditions for a
+    model. This function offers a quick shortcut on building search
+    logic. For example, an administrative user may want to be able to
+    search orders in order to know which items need to be shipped. You
+    can use CakePHP’s Form- and HtmlHelpers to create a quick form
+    based on the Order model. Then a controller action can use the data
+    posted from that form to craft find conditions::
 
-Use this method to turn a set of POSTed model data (from
-HtmlHelper-compatible inputs) into a set of find conditions for a
-model. This function offers a quick shortcut on building search
-logic. For example, an administrative user may want to be able to
-search orders in order to know which items need to be shipped. You
-can use CakePHP’s Form- and HtmlHelpers to create a quick form
-based on the Order model. Then a controller action can use the data
-posted from that form to craft find conditions:
+        <?php
+        function index() {
+            $conditions = $this->postConditions($this->data);
+            $orders = $this->Order->find("all",compact('conditions'));
+            $this->set('orders', $orders);
+        }
 
-::
+    If $this->data[‘Order’][‘destination’] equals “Old Towne Bakery”,
+    postConditions converts that condition to an array compatible for
+    use in a Model->find() method. In this case,
+    array(“Order.destination” => “Old Towne Bakery”).
 
-    function index() {
-        $conditions = $this->postConditions($this->data);
-        $orders = $this->Order->find("all",compact('conditions'));
-        $this->set('orders', $orders);
-    }
+    If you want use a different SQL operator between terms, supply them
+    using the second parameter.
 
-If $this->data[‘Order’][‘destination’] equals “Old Towne Bakery”,
-postConditions converts that condition to an array compatible for
-use in a Model->find() method. In this case,
-array(“Order.destination” => “Old Towne Bakery”).
+    ::
 
-If you want use a different SQL operator between terms, supply them
-using the second parameter.
-
-::
-
-    /*
-    Contents of $this->data
-    array(
-        'Order' => array(
-            'num_items' => '4',
-            'referrer' => 'Ye Olde'
-        )
-    )
-    */
-
-    //Let’s get orders that have at least 4 items and contain ‘Ye Olde’
-    $condtions=$this->postConditions(
-        $this->data,
+        <?php
+        /*
+        Contents of $this->data
         array(
-            'num_items' => '>=', 
-            'referrer' => 'LIKE'
+            'Order' => array(
+                'num_items' => '4',
+                'referrer' => 'Ye Olde'
+            )
         )
-    );
-    $orders = $this->Order->find("all",compact('condtions'));
+        */
 
-The third parameter allows you to tell CakePHP what SQL boolean
-operator to use between the find conditions. String like ‘AND’,
-‘OR’ and ‘XOR’ are all valid values.
+        //Let’s get orders that have at least 4 items and contain ‘Ye Olde’
+        $condtions=$this->postConditions(
+            $this->data,
+            array(
+                'num_items' => '>=', 
+                'referrer' => 'LIKE'
+            )
+        );
+        $orders = $this->Order->find("all",compact('condtions'));
 
-Finally, if the last parameter is set to true, and the $op
-parameter is an array, fields not included in $op will not be
-included in the returned conditions.
+    The third parameter allows you to tell CakePHP what SQL boolean
+    operator to use between the find conditions. String like ‘AND’,
+    ‘OR’ and ‘XOR’ are all valid values.
 
-paginate
-^^^^^^^^
+    Finally, if the last parameter is set to true, and the $op
+    parameter is an array, fields not included in $op will not be
+    included in the returned conditions.
 
-This method is used for paginating results fetched by your models.
-You can specify page sizes, model find conditions and more. See the
-`pagination <http://docs.cakephp.org/view/164/pagination>`_ section for more details on
-how to use paginate.
+.. php:method:: paginate()
 
-requestAction
-^^^^^^^^^^^^^
+    This method is used for paginating results fetched by your models.
+    You can specify page sizes, model find conditions and more. See the
+    `pagination <http://docs.cakephp.org/view/164/pagination>`_ section for more details on
+    how to use paginate.
 
-``requestAction(string $url, array $options)``
+.. php:method:: requestAction(string $url, array $options)
 
-This function calls a controller's action from any location and
-returns data from the action. The ``$url`` passed is a
-CakePHP-relative URL (/controllername/actionname/params). To pass
-extra data to the receiving controller action add to the $options
-array.
+    This function calls a controller's action from any location and
+    returns data from the action. The ``$url`` passed is a
+    CakePHP-relative URL (/controllername/actionname/params). To pass
+    extra data to the receiving controller action add to the $options
+    array.
 
-.. note::
+    .. note::
 
-    You can use ``requestAction()`` to retrieve a fully rendered view
-    by passing 'return' in the options:
-    ``requestAction($url, array('return'));``. It is important to note
-    that making a requestAction using 'return' from a controller method
-    can cause script and css tags to not work correctly.
+        You can use ``requestAction()`` to retrieve a fully rendered view
+        by passing 'return' in the options:
+        ``requestAction($url, array('return'));``. It is important to note
+        that making a requestAction using 'return' from a controller method
+        can cause script and css tags to not work correctly.
 
-.. warning::
+    .. warning::
 
-    If used without caching ``requestAction`` can lead to poor
-    performance. It is rarely appropriate to use in a controller or
+        If used without caching ``requestAction`` can lead to poor
+        performance. It is rarely appropriate to use in a controller or
+        model.
+
+    ``requestAction`` is best used in conjunction with (cached)
+    elements – as a way to fetch data for an element before rendering.
+    Let's use the example of putting a "latest comments" element in the
+    layout. First we need to create a controller function that will
+    return the data.
+
+    ::
+
+        <?php
+        // controllers/comments_controller.php
+        class CommentsController extends AppController {
+            function latest() {
+                return $this->Comment->find('all', array('order' => 'Comment.created DESC', 'limit' => 10));
+            }
+        }
+
+    If we now create a simple element to call that function::
+
+        <?php
+        // views/elements/latest_comments.ctp
+
+        $comments = $this->requestAction('/comments/latest');
+        foreach($comments as $comment) {
+            echo $comment['Comment']['title'];
+        }
+
+    We can then place that element anywhere at all to get the output
+    using::
+
+        <?php
+        echo $this->element('latest_comments');
+
+    Written in this way, whenever the element is rendered, a request
+    will be made to the controller to get the data, the data will be
+    processed, and returned. However in accordance with the warning
+    above it's best to make use of element caching to prevent needless
+    processing. By modifying the call to element to look like this::
+
+        <?php
+        echo $this->element('latest_comments', array('cache' => '+1 hour'));
+
+    The ``requestAction`` call will not be made while the cached
+    element view file exists and is valid.
+
+    In addition, requestAction now takes array based cake style urls::
+
+        <?php
+        echo $this->requestAction(array('controller' => 'articles', 'action' => 'featured'), array('return'));
+
+    This allows the requestAction call to bypass the usage of
+    Router::url which can increase performance. The url based arrays
+    are the same as the ones that HtmlHelper::link uses with one
+    difference - if you are using named or passed parameters, you must
+    put them in a second array and wrap them with the correct key. This
+    is because requestAction merges the named args array
+    (requestAction's 2nd parameter) with the Controller::params member
+    array and does not explicitly place the named args array into the
+    key 'named'; Additional members in the $option array will also be
+    made available in the requested action's Controller::params array.
+
+    ::
+        
+        <?php
+        echo $this->requestAction('/articles/featured/limit:3');
+        echo $this->requestAction('/articles/view/5');
+
+    As an array in the requestAction would then be::
+
+        <?php
+        echo $this->requestAction(array('controller' => 'articles', 'action' => 'featured'), array('named' => array('limit' => 3)));
+
+        echo $this->requestAction(array('controller' => 'articles', 'action' => 'view'), array('pass' => array(5)));
+
+    .. note::
+
+        Unlike other places where array urls are analogous to string urls,
+        requestAction treats them differently.
+
+    When using an array url in conjunction with requestAction() you
+    must specify **all** parameters that you will need in the requested
+    action. This includes parameters like ``$this->data`` and
+    ``$this->params['form']``. In addition to passing all required
+    parameters, named and pass parameters must be done in the second
+    array as seen above.
+
+
+.. php:method:: loadModel(string $modelClass, mixed $id)
+
+    The ``loadModel`` function comes handy when you need to use a model
+    which is not the controller's default model or its associated
     model.
 
-``requestAction`` is best used in conjunction with (cached)
-elements – as a way to fetch data for an element before rendering.
-Let's use the example of putting a "latest comments" element in the
-layout. First we need to create a controller function that will
-return the data.
+    ::
+    
+        <?php
+        $this->loadModel('Article');
+        $recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));
 
-::
-
-    // controllers/comments_controller.php
-    class CommentsController extends AppController {
-        function latest() {
-            return $this->Comment->find('all', array('order' => 'Comment.created DESC', 'limit' => 10));
-        }
-    }
-
-If we now create a simple element to call that function:
-
-::
-
-    // views/elements/latest_comments.ctp
-
-    $comments = $this->requestAction('/comments/latest');
-    foreach($comments as $comment) {
-        echo $comment['Comment']['title'];
-    }
-
-We can then place that element anywhere at all to get the output
-using:
-
-::
-
-    echo $this->element('latest_comments');
-
-Written in this way, whenever the element is rendered, a request
-will be made to the controller to get the data, the data will be
-processed, and returned. However in accordance with the warning
-above it's best to make use of element caching to prevent needless
-processing. By modifying the call to element to look like this:
-
-::
-
-    echo $this->element('latest_comments', array('cache' => '+1 hour'));
-
-The ``requestAction`` call will not be made while the cached
-element view file exists and is valid.
-
-In addition, requestAction now takes array based cake style urls:
-
-::
-
-    echo $this->requestAction(array('controller' => 'articles', 'action' => 'featured'), array('return'));
-
-This allows the requestAction call to bypass the usage of
-Router::url which can increase performance. The url based arrays
-are the same as the ones that HtmlHelper::link uses with one
-difference - if you are using named or passed parameters, you must
-put them in a second array and wrap them with the correct key. This
-is because requestAction merges the named args array
-(requestAction's 2nd parameter) with the Controller::params member
-array and does not explicitly place the named args array into the
-key 'named'; Additional members in the $option array will also be
-made available in the requested action's Controller::params array.
-
-::
-
-    echo $this->requestAction('/articles/featured/limit:3');
-    echo $this->requestAction('/articles/view/5');
-
-As an array in the requestAction would then be:
-
-::
-
-    echo $this->requestAction(array('controller' => 'articles', 'action' => 'featured'), array('named' => array('limit' => 3)));
-
-    echo $this->requestAction(array('controller' => 'articles', 'action' => 'view'), array('pass' => array(5)));
-
-.. note::
-
-    Unlike other places where array urls are analogous to string urls,
-    requestAction treats them differently.
-
-When using an array url in conjunction with requestAction() you
-must specify **all** parameters that you will need in the requested
-action. This includes parameters like ``$this->data`` and
-``$this->params['form']``. In addition to passing all required
-parameters, named and pass parameters must be done in the second
-array as seen above.
-
-loadModel
-^^^^^^^^^
-
-``loadModel(string $modelClass, mixed $id)``
-
-The ``loadModel`` function comes handy when you need to use a model
-which is not the controller's default model or its associated
-model.
-
-::
-
-    $this->loadModel('Article');
-    $recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));
-
-::
-
-    $this->loadModel('User', 2);
-    $user = $this->User->read();
+        $this->loadModel('User', 2);
+        $user = $this->User->read();
 
 
 Controller Attributes
@@ -645,26 +607,23 @@ For a complete list of controller attributes and their descriptions
 visit the CakePHP API. Check out
 `http://api.cakephp.org/class/controller <http://api13.cakephp.org/class/controller>`_.
 
-$name
-~~~~~
+.. php:attr:: name
 
-PHP4 users should start out their controller definitions using the
-``$name`` attribute. The ``$name`` attribute should be set to the
-name of the controller. Usually this is just the plural form of the
-primary model the controller uses. This takes care of some PHP4
-classname oddities and helps CakePHP resolve naming.
+    PHP4 users should start out their controller definitions using the
+    ``$name`` attribute. The ``$name`` attribute should be set to the
+    name of the controller. Usually this is just the plural form of the
+    primary model the controller uses. This takes care of some PHP4
+    classname oddities and helps CakePHP resolve naming.::
 
-::
+        <?php
 
-    <?php
+        #   $name controller attribute usage example
 
-    #   $name controller attribute usage example
+        class RecipesController extends AppController {
+           var $name = 'Recipes';
+        }
 
-    class RecipesController extends AppController {
-       var $name = 'Recipes';
-    }
-
-    ?>   
+        ?>   
 
 $components, $helpers and $uses
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -720,8 +679,7 @@ If you do not wish to use a Model in your controller, set
 ``var $uses = array()``. This will allow you to use a controller
 without a need for a corresponding Model file.
 
-The Parameters Attribute ($params)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. php:attr:: params
 
 Controller parameters are available at ``$this->params`` in your
 CakePHP controller. This variable is used to provide access to
@@ -883,8 +841,7 @@ attribute is used to set pagination defaults for the controller.
 For more information on how to use these attributes, check out
 their respective sections later on in this manual.
 
-persistModel
-~~~~~~~~~~~~
+.. php:attr:: persistModel
 
 .. todo::
 
