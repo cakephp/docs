@@ -47,9 +47,7 @@ will present you with the following options:
     >  
 
 Alternatively, you can run any of these commands directly from the
-command line:
-
-::
+command line::
 
     $ cake bake db_config
     $ cake bake model
