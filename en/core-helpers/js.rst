@@ -693,7 +693,7 @@ Methods
     anchor element. If an option is not part of the standard attributes 
     or ``$htmlAttributes`` it will be passed to :php:func:`JsHelper::request()` 
     as an option. If an id is not supplied, a randomly generated one will be
-     created for each link generated.
+    created for each link generated.
 
     **Options**
 

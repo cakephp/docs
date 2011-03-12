@@ -65,6 +65,8 @@ div.related {
 
 div.related a {
     color: #ffffff;
+	text-shadow: 0 1px 0 #000;
+	-webkit-text-shadow: 0 1px 0 #000;
 }
 
 div.sphinxsidebar {
@@ -148,7 +150,7 @@ div.body h6 {
     font-family: HelveticaNeue-Light, HelveticaNeue, Helvetica, Arial, sans-serif;
     background-color: #f9f9ff;
     font-weight: normal;
-    color: #333;
+    color: #222;
     border-bottom: 1px dashed #ccc;
     margin: 20px -20px 10px -20px;
     padding: 3px 0 3px 10px;
@@ -178,6 +180,7 @@ div.body p, div.body dd, div.body li {
     line-height: 130%;
 }
 
+/* Admonitions */
 div.admonition p.admonition-title + p {
     display: inline;
 }
@@ -264,7 +267,6 @@ table.docutils th {
 	padding-bottom: 3px;
 }
 
-
 .warning tt {
     background: #efc2c2;
 }
@@ -281,6 +283,22 @@ div.viewcode-block:target {
     background-color: #f4debf;
     border-top: 1px solid #ac9;
     border-bottom: 1px solid #ac9;
+}
+
+/* type flags */
+dl.class em.property,
+dl.method em.property,
+dl.staticmethod em.property,
+dl.const em.property {
+	background: #efefef;
+	color: #444;
+	font-size: 90%;
+	font-style: normal;
+	padding: 2px 0px 2px 4px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	text-shadow: 0px 1px #fff;
 }
 
 /* Searchbox */

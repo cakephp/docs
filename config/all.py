@@ -32,10 +32,10 @@ copyright = u'2011, CakePHP'
 # built documents.
 #
 # The short X.Y version.
-version = '0.0.1'
+version = '2.0'
 
 # The full version, including alpha/beta/rc tags.
-release = '0.0.1'
+release = '2.0.0-alpha'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
