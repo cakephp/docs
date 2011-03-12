@@ -72,21 +72,3 @@ it has ever been. We hope you'll join us by using the Cookbook and
 giving back to a project that we've all benefited so much from.
 
 
-Contents
-========
-
-.. toctree::
-   :numbered:
-
-   deployment
-
-.. todolist::
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-

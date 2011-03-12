@@ -21,7 +21,7 @@ source_suffix = '.rst'
 #source_encoding = 'utf-8-sig'
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = 'contents'
 
 # General information about the project.
 project = u'CakePHP Cookbook'
@@ -122,7 +122,7 @@ html_static_path = [
 
 # Custom sidebar templates, maps document names to template names.
 html_sidebars = {
- '**' : ['searchbox.html', 'localtoc.html', 'relations.html', 'sourcelink.html']
+ '**' : ['searchbox.html', 'globaltoc.html', 'relations.html', 'sourcelink.html']
 }
 
 # Additional templates that should be rendered to pages, maps page names to
