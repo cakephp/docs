@@ -5,8 +5,8 @@ Contents
    :glob:
 
    basic-info
+   cakephp-overview
    basic-principles-of-cakephp/index
-   beginning-with-cakephp
    common-tasks-with-cakephp
    core-behaviors
    core-components

@@ -30,28 +30,28 @@ Here’s a quick list of features you’ll enjoy when using CakePHP:
 
 -  Active, friendly `community <http://cakephp.org/feeds>`_
 -  Flexible `licensing <http://en.wikipedia.org/wiki/MIT_License>`_
--  Compatible with versions 4 and 5 of PHP
+-  Compatible with versions PHP 5.2.9 and greater.
 -  Integrated
    `CRUD <http://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_
-   for database interaction
+   for database interaction.
 -  Application
-   `scaffolding <http://en.wikipedia.org/wiki/Scaffold_(programming)>`_
--  Code generation
+   `scaffolding <http://en.wikipedia.org/wiki/Scaffold_(programming)>`_.
+-  Code generation.
 -  `MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_
-   architecture
--  Request dispatcher with clean, custom URLs and routes
+   architecture.
+-  Request dispatcher with clean, custom URLs and routes.
 -  Built-in
-   `validation <http://en.wikipedia.org/wiki/Data_validation>`_
+   `validation <http://en.wikipedia.org/wiki/Data_validation>`_.
 -  Fast and flexible
    `templating <http://en.wikipedia.org/wiki/Web_template_system>`_
-   (PHP syntax, with helpers)
--  View Helpers for AJAX, JavaScript, HTML Forms and more
+   (PHP syntax, with helpers).
+-  View Helpers for AJAX, JavaScript, HTML Forms and more.
 -  Email, Cookie, Security, Session, and Request Handling
-   Components
+   Components.
 -  Flexible
-   `ACL <http://en.wikipedia.org/wiki/Access_control_list>`_
--  Data Sanitization
--  Flexible `Caching <http://en.wikipedia.org/wiki/Web_cache>`_
--  Localization
+   `ACL <http://en.wikipedia.org/wiki/Access_control_list>`_.
+-  Data Sanitization.
+-  Flexible `Caching <http://en.wikipedia.org/wiki/Web_cache>`_.
+-  Localization.
 -  Works from any web site directory, with little to no
-   `Apache <http://httpd.apache.org/>`_ configuration involved
+   `Apache <http://httpd.apache.org/>`_ configuration involved.

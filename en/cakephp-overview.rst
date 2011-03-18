@@ -1,5 +1,5 @@
-Beginning With CakePHP
-######################
+CakePHP Overview
+################
 
 Welcome to the Cookbook, the manual for the CakePHP web application
 framework that makes developing a piece of cake!
@@ -14,6 +14,6 @@ used in context.
 .. toctree::
     :maxdepth: 1
     
-    beginning-with-cakephp/what-is-cakephp-why-use-it
-    beginning-with-cakephp/understanding-model-view-controller
-    beginning-with-cakephp/where-to-get-help
+    cakephp-overview/what-is-cakephp-why-use-it
+    cakephp-overview/understanding-model-view-controller
+    cakephp-overview/where-to-get-help
