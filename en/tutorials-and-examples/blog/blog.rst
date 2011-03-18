@@ -1,5 +1,6 @@
+#####
 Blog
-####
+#####
 
 Welcome to CakePHP. You're probably checking out this tutorial
 because you want to learn more about how CakePHP works. It's our
@@ -25,10 +26,8 @@ Here's what you'll need:
 #. Basic PHP knowledge. The more object-oriented programming you've
    done, the better: but fear not if you're a procedural fan.
 #. Finally, you'll need a basic knowledge of the MVC programming
-   pattern. A quick overview can be found in Chapter "Beginning With
-   CakePHP", Section :
-   :doc:`/beginning-with-cakephp/understanding-model-view-controller`. Don't worry:
-   its only a half a page or so.
+   pattern. A quick overview can be found in :doc:`/cakephp-overview/understanding-model-view-controller`. 
+   Don't worry, its only a half a page or so.
 
 Let's get started!
 
@@ -39,7 +38,7 @@ First, let's get a copy of fresh Cake code.
 
 To get a fresh download, visit the CakePHP project on github:
 `http://github.com/cakephp/cakephp/downloads <http://github.com/cakephp/cakephp/downloads>`_
-and download the latest release of 1.3
+and download the latest release of 2.0
 
 You can also clone the the repository using
 `git <http://git-scm.com/>`_.
@@ -61,9 +60,9 @@ something like the following:
         README
 
 Now might be a good time to learn a bit about how Cake's directory
-structure works: check out Chapter "Basic Principles of CakePHP",
+structure works: check out "CakePHP Folder Structure",
 Section :
-:doc:`/basic-principles-of-cakephp/cakephp-folder-structure`.
+:doc:`/getting-started/cakephp-folder-structure`.
 
 Creating the Blog Database
 ==========================
@@ -97,12 +96,12 @@ statements into your database:
 The choices on table and column names are not arbitrary. If you
 follow Cake's database naming conventions, and Cake's class naming
 conventions (both outlined in
-:doc:`/basic-principles-of-cakephp/cakephp-conventions`), you'll be able to take
+:doc:`/getting-started/cakephp-conventions`), you'll be able to take
 advantage of a lot of free functionality and avoid configuration.
-Cake is flexible enough to accomodate even the worst legacy
+Cake is flexible enough to accommodate even the worst legacy
 database schema, but adhering to convention will save you time.
 
-Check out :doc:`/basic-principles-of-cakephp/cakephp-conventions` for more
+Check out :doc:`/getting-started/cakephp-conventions` for more
 information, but suffice it to say that naming our table 'posts'
 automatically hooks it to our Post model, and having fields called
 'modified' and 'created' will be automagically managed by Cake.
@@ -252,4 +251,4 @@ than www.example.com/controllername/actionname/param.
 
 If you are installing CakePHP on a webserver besides Apache, you
 can find instructions for getting URL rewriting working for other
-servers under the :doc:`/developing-with-cakephp/installation` section.
+servers under the :doc:`/installation/advanced-installation` section.

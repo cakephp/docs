@@ -6,7 +6,7 @@ Contents
    basic-info
    cakephp-overview
    installation
-   basic-principles-of-cakephp/index
+   getting-started
    common-tasks-with-cakephp
    core-behaviors
    core-components
