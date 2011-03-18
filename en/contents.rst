@@ -2,7 +2,9 @@ Contents
 ########
 
 .. toctree::
+   :glob:
 
+   basic-info
    basic-principles-of-cakephp/index
    beginning-with-cakephp
    common-tasks-with-cakephp
