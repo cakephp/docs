@@ -334,6 +334,42 @@ has been loaded, and resolves paths automatically in most cases.
 Make sure you follow the
 :ref:`file-and-classname-conventions`.
 
+
+Additional Class Paths
+======================
+
+It’s occasionally useful to be able to share MVC classes between
+applications on the same system. If you want the same controller in
+both applications, you can use CakePHP’s bootstrap.php to bring
+these additional classes into view.
+
+In bootstrap.php, define some specially-named variables to make
+CakePHP aware of other places to look for MVC classes:
+
+::
+
+    App::build(array(
+        'plugins' => array('/full/path/to/plugins/', '/next/full/path/to/plugins/'),
+        'models' =>  array('/full/path/to/models/', '/next/full/path/to/models/'),
+        'views' => array('/full/path/to/views/', '/next/full/path/to/views/'),
+        'controllers' => array('/full/path/to/controllers/', '/next/full/path/to/controllers/'),
+        'datasources' => array('/full/path/to/datasources/', '/next/full/path/to/datasources/'),
+        'behaviors' => array('/full/path/to/behaviors/', '/next/full/path/to/behaviors/'),
+        'components' => array('/full/path/to/components/', '/next/full/path/to/components/'),
+        'helpers' => array('/full/path/to/helpers/', '/next/full/path/to/helpers/'),
+        'vendors' => array('/full/path/to/vendors/', '/next/full/path/to/vendors/'),
+        'shells' => array('/full/path/to/shells/', '/next/full/path/to/shells/'),
+        'locales' => array('/full/path/to/locale/', '/next/full/path/to/locale/'),
+        'libs' => array('/full/path/to/libs/', '/next/full/path/to/libs/')
+    ));
+
+Also changed is the order in which boostrapping occurs. In the past
+``app/config/core.php`` was loaded **after**
+``app/config/bootstrap.php``. This caused any ``App::import()`` in
+an application bootstrap to be un-cached and considerably slower
+than a cached include. In 2.0 core.php is loaded and the core cache
+configs are created **before** bootstrap.php is loaded.
+
 .. _app-import:
 
 Using App::import()

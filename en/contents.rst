@@ -2,10 +2,10 @@ Contents
 ########
 
 .. toctree::
-   :glob:
 
    basic-info
    cakephp-overview
+   installation
    basic-principles-of-cakephp/index
    common-tasks-with-cakephp
    core-behaviors

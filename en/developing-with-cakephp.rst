@@ -7,8 +7,6 @@ Developing with CakePHP
 .. toctree::
     :maxdepth: 1
 
-    developing-with-cakephp/installation-preparation
-    developing-with-cakephp/installation
     developing-with-cakephp/global-constants-and-functions
     developing-with-cakephp/configuration
     developing-with-cakephp/controllers
