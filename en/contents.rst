@@ -8,6 +8,8 @@ Contents
    installation
    getting-started
    controllers
+   views
+   models
    common-tasks-with-cakephp
    core-behaviors
    core-components

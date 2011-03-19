@@ -136,7 +136,7 @@ Controller::loadModel() to get the model.
 
 
 More on models
---------------
+==============
 
 .. toctree::
 
@@ -149,3 +149,5 @@ More on models
     models/additional-methods-and-properties
     models/virtual-fields
     models/transactions
+    models/behaviors
+    models/datasources

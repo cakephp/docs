@@ -105,7 +105,7 @@ automatically available at ``$this->Post`` because we've followed
 Cake's naming conventions.
 
 To learn more about Cake's controllers, check out Chapter
-"Developing with CakePHP" section: :doc:`/developing-with-cakephp/controllers`.
+"Developing with CakePHP" section: :doc:`controllers`.
 
 Creating Post Views
 ===================
@@ -205,7 +205,7 @@ You might have noticed the use of an object called ``$this->Html``.
 This is an instance of the CakePHP ``HtmlHelper`` class. CakePHP
 comes with a set of view helpers that make things like linking,
 form output, JavaScript and Ajax a snap. You can learn more about
-how to use them in :doc:`/developing-with-cakephp/helpers`, but
+how to use them in :doc:`/views/helpers`, but
 what's important to note here is that the ``link()`` method will
 generate an HTML link with the given title (the first parameter)
 and URL (the second parameter).
@@ -657,6 +657,6 @@ These are common tasks people learning CakePHP usually want to study next:
 
 1. :ref:`view-layouts`: Customizing your website layout
 2. :ref:`view-elements` Including and reusing view snippets
-3. :doc:`/developing-with-cakephp/scaffolding`: Prototyping before creating code
+3. :doc:`/controllers/scaffolding`: Prototyping before creating code
 4. :doc:`/core-console-applications/code-generation-with-bake` Generating basic CRUD code
 5. :doc:`/core-components/authentication`: User registration and login
