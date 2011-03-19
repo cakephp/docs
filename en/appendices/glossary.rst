@@ -25,4 +25,8 @@ Glossary
             
             // Would generate
             checked="checked"
-            
+    
+    plugin syntax
+        Plugin syntax refers to the dot separated classname indicating classes
+        are part of a plugin.  E.g. ``DebugKit.Toolbar`` The plugin is DebugKit,
+        and the classname is Toolbar.

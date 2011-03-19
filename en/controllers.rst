@@ -63,6 +63,8 @@ In order for you to use a controller effectively in your own
 application, we’ll cover some of the core attributes and methods
 provided by CakePHP’s controllers.
 
+.. _app-controller:
+
 The App Controller
 ------------------------
 
