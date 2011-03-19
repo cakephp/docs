@@ -390,7 +390,7 @@ Configuring options and generating help
 =======================================
 
 Console option parsing in CakePHP has always been a little bit different 
-from everything else on the command line.  For 2.0 `ConsoleOptionParser` 
+from everything else on the command line.  For 2.0 ``ConsoleOptionParser`` 
 helps provide a more familiar command line option and argument parser. 
 It greatly enhances the option parsing in CakePHP and allows you to 
 easily generate help output which has always been another sore point 
@@ -400,7 +400,7 @@ Configuring the ConsoleOptionParser
 -----------------------------------
 
 The console framework gets your shell's option parser by calling 
-`$this->getOptionParser()`.  Overriding this method allows you to 
+``$this->getOptionParser()``.  Overriding this method allows you to 
 configure the OptionParser to match the expected inputs of your shell.  
 You can also configure subcommand option parsers, which allow you to 
 have different option parsers for subcommands and tasks.  
@@ -418,22 +418,22 @@ Adding arguments
 ----------------
 
 Positional arguments are frequently used in command line tools, 
-and `ConsoleOptionParser` allows you to define positional 
+and ``ConsoleOptionParser`` allows you to define positional 
 arguments as well as make them required.  You can add arguments 
-one at a time with `$parser->addArgument();` or multiple at once 
-with `$parser->addArguments();`::
+one at a time with ``$parser->addArgument();`` or multiple at once 
+with ``$parser->addArguments();``::
 
     <?php
 	$parser->addArgument('model', array('help' => 'The model to bake'));
 
 You can use the following options when creating an argument:
 
-* `help` The help text to display for this argument.
-* `required` Whether this parameter is required.
-* `index` The index for the arg, if left undefined the argument will be put
+* ``help`` The help text to display for this argument.
+* ``required`` Whether this parameter is required.
+* ``index`` The index for the arg, if left undefined the argument will be put
    onto the end of the arguments. If you define the same index twice the 
    first option will be overwritten.
-* `choices` A array of valid choices for this argument.  If left empty all
+* ``choices`` A array of valid choices for this argument.  If left empty all
    values are valid. An exception will be raised when parse() encounters an
    invalid value.
 
@@ -441,8 +441,7 @@ Arguments that have been marked as required will throw an exception when
 parsing the command if they have been omitted. So you don't have to 
 handle that in your shell.
 
-If you have an array with multiple arguments you can use `$parser->addArguments()`
-to add multiple arguments at once.::
+If you have an array with multiple arguments you can use ``$parser->addArguments()`` to add multiple arguments at once.::
 
     <?php
 	$parser->addArguments(array(
@@ -456,11 +455,11 @@ can be used as part of a fluent method chain.
 Validating arguments
 --------------------
 
-In the past you could use `Shell::_checkArgs()` to check that you had 
+In the past you could use ``Shell::_checkArgs()`` to check that you had 
 received the correct number of arguments.  In 2.0 Shell::_checkArgs() 
-has been removed. Instead you should use the `required` flag when 
+has been removed. Instead you should use the ``required`` flag when 
 creating arguments, and use sub-parsers for individual commands on 
-your shell.  Additional you can use `choices` to force an argument to 
+your shell.  Additional you can use ``choices`` to force an argument to 
 be from a list of valid choices::
 
     <?php
@@ -478,12 +477,12 @@ Adding Options
 --------------
 
 Options or flags are also frequently used in command line tools.  
-In the past CakePHP only supported one format of option `-foo`.  
+In the past CakePHP only supported one format of option ``-foo``.  
 This style of option is unlike most other command line tools, and 
-no support for short aliases was provided.  `ConsoleOptionParser` 
+no support for short aliases was provided.  ``ConsoleOptionParser`` 
 supports creating options with short aliases, supplying defaults 
 and creating boolean switches. Options are created with either 
-`$parser->addOption()` or `$parser->addOptions()`.::
+``$parser->addOption()`` or ``$parser->addOptions()``.::
 
     <?php
 	$parser->addOption('connection', array(
@@ -492,8 +491,8 @@ and creating boolean switches. Options are created with either
 		'default' => 'default'
 	));
 
-The above would allow you to use either `cake myshell --connection=other`, `cake myshell --connection other`, 
-or `cake myshell -c other` when invoking the shell.  
+The above would allow you to use either ``cake myshell --connection=other``, ``cake myshell --connection other``, 
+or ``cake myshell -c other`` when invoking the shell.  
 You can also create boolean switches, these switches do not 
 consume values, and their presence just enables them in the 
 parsed parameters.::
@@ -501,23 +500,23 @@ parsed parameters.::
     <?php
 	$parser->addOption('no-commit', array('boolean' => true));
 
-With this option, when calling a shell like `cake myshell --no-commit something` 
+With this option, when calling a shell like ``cake myshell --no-commit something`` 
 the no-commit param would have a value of true, and 'something' 
 would be a treated as a positional argument.  
-The built-in `--help`, `--verbose`, and `--quiet` options use this feature.
+The built-in ``--help``, ``--verbose``, and ``--quiet`` options use this feature.
 
 When creating options you can use the following options to 
 define the behavior of the option:
 
-* `short` - The single letter variant for this option, leave undefined for none.
-* `help` - Help text for this option.  Used when generating help for the option.
-* `default` - The default value for this option.  If not defined the default will be true.
-* `boolean` - The option uses no value, its just a boolean switch. 
-   Defaults to false.
-* `choices` An array of valid choices for this option.  If left empty all
-   values are valid. An exception will be raised when parse() encounters an invalid value.
+* ``short`` - The single letter variant for this option, leave undefined for none.
+* ``help`` - Help text for this option.  Used when generating help for the option.
+* ``default`` - The default value for this option.  If not defined the default will be true.
+* ``boolean`` - The option uses no value, its just a boolean switch. 
+  Defaults to false.
+* ``choices`` An array of valid choices for this option.  If left empty all
+  values are valid. An exception will be raised when parse() encounters an invalid value.
 
-If you have an array with multiple options you can use `$parser->addOptions()` 
+If you have an array with multiple options you can use ``$parser->addOptions()`` 
 to add multiple options at once.::
 
     <?php
@@ -534,7 +533,7 @@ Validating options
 
 Options can be provided with a set of choices much like positional arguments
 can be.  When an option has defined choices, those are the only valid choices
-for an option.  All other values will raise an `InvalidArgumentException`::
+for an option.  All other values will raise an ``InvalidArgumentException``::
 
     <?php
 	$parser->addOption('accept', array(
@@ -556,24 +555,24 @@ to true, when they are absent false::
 		'boolean' => true
 	));
 
-The following option would result in `$this->params['verbose']` always 
-being available.  This lets you omit `empty()` or `isset()` 
+The following option would result in ``$this->params['verbose']`` always 
+being available.  This lets you omit ``empty()`` or ``isset()`` 
 checks for boolean flags::
 
 	if ($this->params['verbose']) {
 		// do something
 	}
 
-Since the boolean options are always defined as `true` or 
-`false` you can omit additional check methods.
+Since the boolean options are always defined as ``true`` or 
+``false`` you can omit additional check methods.
 
 Adding subcommands
 ------------------
 
 Console applications are often made of subcommands, and these subcommands 
 may require special option parsing and have their own help.  A perfect 
-example of this is `bake`.  Bake is made of many separate tasks that all 
-have their own help and options.  `ConsoleOptionParser` allows you to 
+example of this is ``bake``.  Bake is made of many separate tasks that all 
+have their own help and options. ``ConsoleOptionParser`` allows you to 
 define subcommands and provide command specific option parsers so the 
 shell knows how to parse commands for its tasks::
 
@@ -584,24 +583,24 @@ shell knows how to parse commands for its tasks::
 	));
 
 The above is an example of how could provide help and a specialized 
-option parser for a shell's task. By calling the Task's `getOptionParser()` 
+option parser for a shell's task. By calling the Task's ``getOptionParser()`` 
 we don't have to duplicate the option parser generation, or mix concerns 
 in our shell.  Adding subcommands in this way has two advantages.  
 First it lets your shell easily document its subcommands in the 
 generated help, and it also allows easy access to the subcommand 
 help.  With the above subcommand created you could call 
-`cake myshell --help` and see the list of subcommands, and 
-also run `cake myshell model --help` to view the help for 
+``cake myshell --help`` and see the list of subcommands, and 
+also run ``cake myshell model --help`` to view the help for 
 just the model task.
 
 When defining a subcommand you can use the following options:
 
-* `help` - Help text for the subcommand.
-* `parser` - A ConsoleOptionParser for the subcommand.  This allows you 
-   to create method specific option parsers.  When help is generated for a 
-   subcommand, if a parser is present it will be used. You can also 
-   supply the parser as an array that is compatible with 
-   `ConsoleOptionParser::buildFromArray()`
+* ``help`` - Help text for the subcommand.
+* ``parser`` - A ConsoleOptionParser for the subcommand.  This allows you 
+  to create method specific option parsers.  When help is generated for a 
+  subcommand, if a parser is present it will be used. You can also 
+  supply the parser as an array that is compatible with 
+  ``ConsoleOptionParser::buildFromArray()`` 
 
 Adding subcommands can be done as part of a fluent method chain.
 
@@ -610,7 +609,7 @@ Building a ConsoleOptionParser from an array
 
 As previously mentioned, when creating subcommand option parsers 
 you can define the parser spec as an array and use 
-`ConsoleOptionParser::buildFromArray($spec);`.  This can help 
+``ConsoleOptionParser::buildFromArray($spec);``.  This can help 
 make building subcommand parsers easier, as everything is an array::
 
     <?php
@@ -630,10 +629,10 @@ make building subcommand parsers easier, as everything is an array::
 		)
 	));
 
-Inside the parser spec, you can define keys for `definition`, 
-`arguments`, `options`, and `epilog`.  You cannot define 
+Inside the parser spec, you can define keys for ``definition``, 
+``arguments``, ``options``, and ``epilog``.  You cannot define 
 subcommands inside an array style builder.  The values for 
-rguments, and options, should follow the format that 
+arguments, and options, should follow the format that 
 ConsoleOptionParser::addArguments() and ConsoleOptionParser::addOptions 
 use.  You can also use buildFromArray on its own, to build an option parser::
 
@@ -685,7 +684,7 @@ Getting help from shells
 ------------------------
 
 With the addition of ConsoleOptionParser getting help from shells is done 
-in a consistent and uniform way. By using the `--help` or -`h` option you 
+in a consistent and uniform way. By using the ``--help`` or -``h`` option you 
 can view the help for any core shell, and any shell that implements a ConsoleOptionParser::
 
     cake bake --help
@@ -712,12 +711,15 @@ additional argument::
 
 The above would return an XML document with the generated help, options, 
 arguments and subcommands for the selected shell.  A sample XML document 
-would look like::
+would look like:
+
+.. code-block:: xml
 
     <?xml version="1.0"?>
     <shell>
     	<commmand>bake fixture</commmand>
-    	<description>Generate fixtures for use with the test suite. You can use `bake fixture all` to bake all fixtures.</description>
+    	<description>Generate fixtures for use with the test suite. You can use 
+    	   `bake fixture all` to bake all fixtures.</description>
     	<epilog>Omitting all arguments and options will enter into an interactive mode.</epilog>
     	<subcommands/>
     	<options>
@@ -751,7 +753,8 @@ would look like::
     		</option>
     	</options>
     	<arguments>
-    		<argument name="name" help="Name of the fixture to bake. Can use Plugin.name to bake plugin fixtures." required="">
+    		<argument name="name" help="Name of the fixture to bake. 
+    		    Can use Plugin.name to bake plugin fixtures." required="">
     			<choices/>
     		</argument>
     	</arguments>
