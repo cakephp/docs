@@ -657,7 +657,7 @@ files:
 Initializing the component
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Since :doc:`/developing-with-cakephp/components`
+Since :doc:`/controllers/components`
 we need a controller to access the data in the model.
 
 If the startup() function of the component looks like this:::

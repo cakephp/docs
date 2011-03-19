@@ -83,7 +83,7 @@ datasource
     'prefix\_'.
 
 At this point, you might want to take a look at the
-:doc:`/basic-principles-of-cakephp/cakephp-conventions`. The correct
+:doc:`/getting-started/cakephp-conventions`. The correct
 naming for your tables (and the addition of some columns) can score
 you some free functionality and help you avoid configuration. For
 example, if you name your database table big\_boxes, your model

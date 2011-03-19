@@ -177,7 +177,7 @@ Behaviors that are attached to Models get their callbacks called
 automatically. The callbacks are similar to those found in Models:
 beforeFind, afterFind, beforeSave, afterSave, beforeDelete,
 afterDelete and onError - see
-:doc:`/developing-with-cakephp/models/callback-methods`.
+:doc:`/models/callback-methods`.
 
 Your behaviors should be placed in ``app/models/behaviors``. It's
 often helpful to use a core behavior as a template when creating

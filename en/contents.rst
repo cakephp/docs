@@ -10,11 +10,9 @@ Contents
    controllers
    views
    models
+   core-libraries
    common-tasks-with-cakephp
-   core-behaviors
-   core-components
    core-console-applications
-   core-helpers
    core-utility-libraries
    developing-with-cakephp
    deployment

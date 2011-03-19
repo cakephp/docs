@@ -318,7 +318,7 @@ field.
 
     Besides the specific input options found below you can specify any
     html attribute (for instance onfocus). For more information on
-    $options and $htmlAttributes see :doc:`/core-helpers/html`.
+    $options and $htmlAttributes see :doc:`/core-libraries/core-helpers/html`.
 
     And to round off, here's an example for creating a
     hasAndBelongsToMany select. Assume that User hasAndBelongsToMany

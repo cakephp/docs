@@ -7,7 +7,6 @@ Developing with CakePHP
 .. toctree::
     :maxdepth: 1
 
-    developing-with-cakephp/global-constants-and-functions
     developing-with-cakephp/configuration
     developing-with-cakephp/the-cakephp-console
     developing-with-cakephp/plugins

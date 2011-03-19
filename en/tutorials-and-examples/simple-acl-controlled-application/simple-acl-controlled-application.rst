@@ -2,8 +2,8 @@ Simple Acl controlled Application
 #################################
 
 In this tutorial you will create a simple application with
-:doc:`/core-components/authentication` and
-:doc:`/core-components/access-control-lists`. This
+:doc:`/core-libraries/core-components/authentication` and
+:doc:`/core-libraries/core-components/access-control-lists`. This
 tutorial assumes you have read the :doc:`/tutorials-and-examples/blog/blog`
 tutorial, and you are familiar with
 :doc:`/core-console-applications/code-generation-with-bake`. You should have

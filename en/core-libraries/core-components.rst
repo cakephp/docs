@@ -4,28 +4,28 @@ Core Components
 CakePHP has a number of built-in components. They provide out of
 the box functionality for several commonly used tasks.
 
-:doc:`/core-components/access-control-lists`
+:doc:`/core-libraries/core-components/access-control-lists`
 The Acl component provides an easy to use interface for database
 and ini based access control lists.
-:doc:`/core-components/authentication`
+:doc:`/core-libraries/core-components/authentication`
 The auth component provides an easy to use authentication system
 using a variety of authentication processes, such as controller
 callbacks, Acl, or Object callbacks.
-:doc:`/core-components/cookie`
+:doc:`/core-libraries/core-components/cookie`
 The cookie component behaves in a similar fashion to the
 SessionComponent in that it provides a wrapper for PHP's native
 cookie support.
-:doc:`/core-components/email`
+:doc:`/core-libraries/core-components/email`
 An interface that can be used to send emails using one of several
 mail transfer agents including php's mail() and smtp.
-:doc:`/core-components/request-handling`
+:doc:`/core-libraries/core-components/request-handling`
 The request handler allows you to introspect further into the
 requests your visitors and inform your application about the
 content types and requested information.
-:doc:`/core-components/security-component`
+:doc:`/core-libraries/core-components/security-component`
 The security component allows you to set tighter security and use
 and manage HTTP authentication.
-:doc:`/core-components/sessions`
+:doc:`/core-libraries/core-components/sessions`
 The session component provides a storage independent wrapper to
 PHP's sessions.
 

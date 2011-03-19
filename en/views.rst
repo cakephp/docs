@@ -287,7 +287,7 @@ Caching Elements
 You can take advantage of CakePHP view caching if you supply a
 cache parameter. If set to true, it will cache for 1 day.
 Otherwise, you can set alternative expiration times. See
-:doc:`/common-tasks-with-cakephp/caching` for more information on setting
+:doc:`/core-libraries/caching` for more information on setting
 expiration.
 
 ::
@@ -381,8 +381,8 @@ To call any view method use ``$this->method()``
     directly to the layout. Keep in mind that scripts added from the
     layout, or elements in the layout will not be added to
     ``$scripts_for_layout``. This method is most often used from inside
-    helpers, like the :doc:`/core-helpers/js` and
-    :doc:`/core-helpers/html` Helpers.
+    helpers, like the :doc:`/core-libraries/core-helpers/js` and
+    :doc:`/core-libraries/core-helpers/html` Helpers.
 
 More about Views
 ================

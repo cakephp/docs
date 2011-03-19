@@ -368,7 +368,7 @@ This feature was also undocumented, and untested.
 
 
 -  ``Object::$_log`` has been removed. ``CakeLog::write`` is now
-   called statically. See :doc:`/common-tasks-with-cakephp/logging`
+   called statically. See :doc:`/core-libraries/logging`
    for more information on changes made to logging.
 
 **Sanitize**

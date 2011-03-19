@@ -41,7 +41,7 @@ The ``$name`` variable is always a good idea to add, and is used to
 overcome some class name oddness in PHP4.
 
 For more on models, such as table prefixes, callbacks, and
-validation, check out the :doc:`/developing-with-cakephp/models` chapter of the
+validation, check out the :doc:`/models` chapter of the
 Manual.
 
 
@@ -105,7 +105,7 @@ automatically available at ``$this->Post`` because we've followed
 Cake's naming conventions.
 
 To learn more about Cake's controllers, check out Chapter
-"Developing with CakePHP" section: :doc:`controllers`.
+"Developing with CakePHP" section: :doc:`/controllers`.
 
 Creating Post Views
 ===================
@@ -392,7 +392,7 @@ The ``$this->Form->end()`` call generates a submit button and ends
 the form. If a string is supplied as the first parameter to
 ``end()``, the FormHelper outputs a submit button named accordingly
 along with the closing form tag. Again, refer to
-:doc:`/developing-with-cakephp/helpers` for more on helpers.
+:doc:`/views/helpers` for more on helpers.
 
 Now let's go back and update our ``/app/views/posts/index.ctp``
 view to include a new "Add Post" link. Before the ``<table>``, add
@@ -659,4 +659,4 @@ These are common tasks people learning CakePHP usually want to study next:
 2. :ref:`view-elements` Including and reusing view snippets
 3. :doc:`/controllers/scaffolding`: Prototyping before creating code
 4. :doc:`/core-console-applications/code-generation-with-bake` Generating basic CRUD code
-5. :doc:`/core-components/authentication`: User registration and login
+5. :doc:`/core-libraries/core-components/authentication`: User registration and login

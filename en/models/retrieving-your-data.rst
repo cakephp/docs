@@ -36,7 +36,7 @@ of by some find types, behaviors and of course possible with your
 own model methods
 
 More information about model callbacks is available
-:doc:`/developing-with-cakephp/models/callback-methods`
+:doc:`/models/callback-methods`
 
 .. _model-find-first:
 
@@ -306,14 +306,14 @@ model data to build nested results. Below are a couple of simple
 
 .. tip::
 
-    It is not necessary to use :doc:`/core-behaviors/tree`
+    It is not necessary to use :doc:`/core-libraries/core-behaviors/tree`
     to use this method - but all desired results must be possible to be
     found in a single query.
 
 In the above code example, ``$allCategories`` will contain a nested
 array representing the whole category structure. The second example
 makes use of the data structure used by the
-:doc:`/core-behaviors/tree` the return a partial, nested,
+:doc:`/core-libraries/core-behaviors/tree` the return a partial, nested,
 result for ``$aCategory`` and everything below it. The results of a
 call to ``find('threaded')`` will be of the following form::
 

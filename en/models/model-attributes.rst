@@ -224,7 +224,7 @@ on the database, this can cause SQL errors.
 
 For more information on the ``virtualFields`` property, its proper
 usage, as well as limitations, see
-:doc:`/developing-with-cakephp/models/virtual-fields`.
+:doc:`/models/virtual-fields`.
 
 name
 ====

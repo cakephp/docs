@@ -33,7 +33,7 @@ function to accomplish an oft-used task, it's here.
     .. note::
 
         Check out the
-        :doc:`/common-tasks-with-cakephp/internationalization-and-localization`
+        :doc:`/core-libraries/internationalization-and-localization`
         section for more information.
 
 .. php:function:: am(array $one, $two, $three...)
