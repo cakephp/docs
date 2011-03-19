@@ -11,9 +11,10 @@ Contents
    views
    models
    core-libraries
-   common-tasks-with-cakephp
-   core-console-applications
    core-utility-libraries
+   plugins
+   console-and-shells
+   common-tasks-with-cakephp
    developing-with-cakephp
    deployment
    tutorials-and-examples

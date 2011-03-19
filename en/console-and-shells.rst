@@ -20,5 +20,5 @@ packaged with CakePHP.
 .. toctree::
     :maxdepth: 1
     
-    core-console-applications/code-generation-with-bake
-    core-console-applications/schema-management-and-migrations
+    console-and-shells/code-generation-with-bake
+    console-and-shells/schema-management-and-migrations
