@@ -516,7 +516,7 @@ the model's ``query()`` method.
 
 If you’re ever using this method in your application, be sure to
 check out CakePHP’s
-:doc:`/common-tasks-with-cakephp/data-sanitization`, which aids in
+:doc:`/core-utility-libraries/sanitize`, which aids in
 cleaning up user-provided data from injection and cross-site
 scripting attacks.
 

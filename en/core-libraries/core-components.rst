@@ -78,5 +78,6 @@ Core Components
     core-components/cookie
     core-components/email
     core-components/request-handling
+    core-components/pagination
     core-components/security-component
     core-components/sessions

@@ -140,6 +140,7 @@ More on models
 
 .. toctree::
 
+    models/data-validation
     models/retrieving-your-data
     models/saving-your-data
     models/deleting-data

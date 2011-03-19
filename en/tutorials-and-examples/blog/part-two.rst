@@ -430,7 +430,7 @@ validation engine is strong, with a number of pre-built rules
 (credit card numbers, email addresses, etc.) and flexibility for
 adding your own validation rules. For more information on that
 setup, check the
-:doc:`/common-tasks-with-cakephp/data-validation`.
+:doc:`/models/data-validation`.
 
 Now that you have your validation rules in place, use the app to
 try to add a post with an empty title or body to see how it works.
@@ -658,5 +658,5 @@ These are common tasks people learning CakePHP usually want to study next:
 1. :ref:`view-layouts`: Customizing your website layout
 2. :ref:`view-elements` Including and reusing view snippets
 3. :doc:`/controllers/scaffolding`: Prototyping before creating code
-4. :doc:`/core-console-applications/code-generation-with-bake` Generating basic CRUD code
+4. :doc:`/console-and-shells/code-generation-with-bake` Generating basic CRUD code
 5. :doc:`/core-libraries/core-components/authentication`: User registration and login

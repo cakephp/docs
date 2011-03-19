@@ -80,7 +80,7 @@ of your app. For example - baking controllers:
     user@host$ cake bake plugin pizza controller ingredients
 
 Please refer to the chapter
-:doc:`/core-console-applications/code-generation-with-bake` if you
+:doc:`/console-and-shells/code-generation-with-bake` if you
 have any problems with using the command line.
 
 

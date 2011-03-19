@@ -200,7 +200,7 @@ regex values allowing the model to try to make matches.
     It is not necessary to call validate() before save() as save() will
     automatically validate your data before actually saving.
 
-For more information on validation, see the :doc:`/common-tasks-with-cakephp/data-validation`
+For more information on validation, see the :doc:`/models/data-validation`
 later on in this manual.
 
 virtualFields

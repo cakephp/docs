@@ -60,7 +60,7 @@ function to accomplish an oft-used task, it's here.
     If ``$showHTML`` is true, the data is rendered to be
     browser-friendly.
 
-    Also see :doc:`/common-tasks-with-cakephp/debugging`
+    Also see :doc:`/development/debugging`
 
 .. php:function:: env(string $key)
 

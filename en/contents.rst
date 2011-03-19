@@ -14,8 +14,7 @@ Contents
    core-utility-libraries
    plugins
    console-and-shells
-   common-tasks-with-cakephp
-   developing-with-cakephp
+   development
    deployment
    tutorials-and-examples
    appendices
