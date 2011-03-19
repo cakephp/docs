@@ -18,4 +18,5 @@ HttpSocket.
     core-utility-libraries/httpsocket
     core-utility-libraries/router
     core-utility-libraries/security
+    core-utility-libraries/sanitize
     
