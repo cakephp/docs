@@ -7,6 +7,7 @@ Contents
    cakephp-overview
    installation
    getting-started
+   controllers
    common-tasks-with-cakephp
    core-behaviors
    core-components

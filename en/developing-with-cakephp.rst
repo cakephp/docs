@@ -9,9 +9,6 @@ Developing with CakePHP
 
     developing-with-cakephp/global-constants-and-functions
     developing-with-cakephp/configuration
-    developing-with-cakephp/controllers
-    developing-with-cakephp/components
-    developing-with-cakephp/scaffolding
     developing-with-cakephp/models
     developing-with-cakephp/behaviors
     developing-with-cakephp/datasources

@@ -14,7 +14,7 @@ model is handled by the ProductsController, and so on.
 
 Your application's controllers are classes that extend the CakePHP
 AppController class, which in turn extends a core Controller class,
-which are part of the CakePHP library. The AppController class can
+which is part of CakePHP. The AppController class can
 be defined in /app/app\_controller.php and it should contain
 methods that are shared between all of your application’s
 controllers.
@@ -28,6 +28,9 @@ a URL to a controller’s action (refer to
 :ref:`routes-configuration` for an
 explanation on how controller actions and parameters are mapped
 from the URL).
+
+Controller actions
+==================
 
 Returning to our online bakery example, our RecipesController might
 contain the ``view()``, ``share()``, and ``search()`` actions. The
@@ -436,9 +439,7 @@ Other Useful Methods
     array(“Order.destination” => “Old Towne Bakery”).
 
     If you want use a different SQL operator between terms, supply them
-    using the second parameter.
-
-    ::
+    using the second parameter::
 
         <?php
         /*
@@ -502,9 +503,7 @@ Other Useful Methods
     elements – as a way to fetch data for an element before rendering.
     Let's use the example of putting a "latest comments" element in the
     layout. First we need to create a controller function that will
-    return the data.
-
-    ::
+    return the data::
 
         <?php
         // controllers/comments_controller.php
@@ -616,14 +615,14 @@ visit the CakePHP API. Check out
     classname oddities and helps CakePHP resolve naming.::
 
         <?php
-
+        
         #   $name controller attribute usage example
-
+        
         class RecipesController extends AppController {
            var $name = 'Recipes';
         }
-
-        ?>   
+        
+        
 
 $components, $helpers and $uses
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -657,9 +656,7 @@ in your own Controllers. To learn more about these classes, be sure
 to check out their respective sections later in this manual.
 
 Let’s look at how to tell a CakePHP controller that you plan to use
-additional MVC classes.
-
-::
+additional MVC classes::
 
     <?php
     class RecipesController extends AppController {
@@ -679,155 +676,6 @@ If you do not wish to use a Model in your controller, set
 ``var $uses = array()``. This will allow you to use a controller
 without a need for a corresponding Model file.
 
-.. php:attr:: params
-
-Controller parameters are available at ``$this->params`` in your
-CakePHP controller. This variable is used to provide access to
-information about the current request. The most common usage of
-``$this->params`` is to get access to information that has been
-handed to the controller via POST or GET operations.
-
-form
-^^^^
-
-``$this->params['form']``
-
-Any POST data from any form is stored here, including information
-also found in ``$_FILES``.
-
-admin
-^^^^^
-
-``$this->params['admin']``
-
-Is set to 1 if the current action was invoked via admin routing.
-
-bare
-^^^^
-
-``$this->params['bare']``
-
-Stores 1 if the current layout is empty, 0 if not.
-
-isAjax
-^^^^^^
-
-``$this->params['isAjax']``
-
-Stores 1 if the current request is an ajax call, 0 if not. This
-variable is only set if the RequestHandler Component is being used
-in the controller.
-
-controller
-^^^^^^^^^^
-
-``$this->params['controller']``
-
-Stores the name of the current controller handling the request. For
-example, if the URL /posts/view/1 was requested,
-``$this->params['controller']`` would equal "posts".
-
-action
-^^^^^^
-
-``$this->params['action']``
-
-Stores the name of the current action handling the request. For
-example, if the URL /posts/view/1 was requested,
-``$this->params['action']`` would equal "view".
-
-pass
-^^^^
-
-``$this->params['pass']``
-
-Returns an array (numerically indexed) of URL parameters after the
-Action.
-
-::
-
-    // URL: /posts/view/12/print/narrow
-
-    Array
-    (
-        [0] => 12
-        [1] => print
-        [2] => narrow
-    )
-
-url
-^^^
-
-``$this->params['url']``
-
-Stores the current URL requested, along with key-value pairs of get
-variables. For example, if the URL /posts/view/?var1=3&var2=4 was
-called, ``$this->params['url']`` would contain:
-
-::
-
-    [url] => Array
-    (
-        [url] => posts/view
-        [var1] => 3
-        [var2] => 4
-    )
-
-data
-^^^^
-
-``$this->data``
-
-Used to handle POST data sent from the FormHelper forms to the
-controller.
-
-::
-
-    // The FormHelper is used to create a form element:
-    $form->text('User.first_name');
-
-Which when rendered, looks something like:
-
-::
-
-
-    <input name="data[User][first_name]" value="" type="text" />
-
-When the form is submitted to the controller via POST, the data
-shows up in ``this->data``
-
-::
-
-
-    //The submitted first name can be found here:
-    $this->data['User']['first_name'];
-
-prefix
-^^^^^^
-
-``$this->params['prefix']``
-
-Set to the routing prefix. For example, this attribute would
-contain the string "admin" during a request to
-/admin/posts/someaction.
-
-named
-^^^^^
-
-``$this->params['named']``
-
-Stores any named parameters in the url query string in the form
-/key:value/. For example, if the URL /posts/view/var1:3/var2:4 was
-requested, ``$this->params['named']`` would be an array
-containing:
-
-::
-
-    [named] => Array
-    (
-        [var1] => 3
-        [var2] => 4
-    )
 
 Other Attributes
 ~~~~~~~~~~~~~~~~
@@ -852,28 +700,16 @@ set to true, all models related to the controller will be cached.
 This can increase performance in many cases.
 
 
-The Pages Controller
---------------------------
-
-CakePHP core ships with a default controller called the Pages
-Controller (cake/libs/controller/pages\_controller.php). The home
-page you see after installation is generated using this controller.
-It is generally used to serve static pages. Eg. If you make a view
-file app/views/pages/about\_us.ctp you can access it using url
-http://example.com/pages/about\_us
-
-When you "bake" an app using CakePHP's console utility the pages
-controller is copied to your app/controllers/ folder and you can
-modify it to your needs if required. Or you could just copy the
-pages\_controller.php from core to your app.
-
-.. warning::
-
-    Do not directly modify ANY file under the ``cake`` folder to avoid
-    issues when updating the core in future
-
-
 .. todo::
 
 	This chapter should be less about the controller api and more about examples, the controller attributes section is overwhelming
 	and difficult to understand at first. The chapter should start with some example controllers and what they do.
+
+
+.. toctree::
+
+    controllers/request-response
+    controllers/scaffolding
+    controllers/pages-controller
+    controllers/scaffolding
+    controllers/components
