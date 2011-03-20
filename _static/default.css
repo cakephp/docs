@@ -286,6 +286,7 @@ div.viewcode-block:target {
 }
 
 /* type flags */
+dl.attr em.property,
 dl.class em.property,
 dl.method em.property,
 dl.staticmethod em.property,
