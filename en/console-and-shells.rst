@@ -920,3 +920,6 @@ More topics
     console-and-shells/cron-jobs
     console-and-shells/code-generation-with-bake
     console-and-shells/schema-management-and-migrations
+    console-and-shells/i18n-shell
+    console-and-shells/acl-shell
+    console-and-shells/testsuite-shell
