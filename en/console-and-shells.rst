@@ -917,6 +917,6 @@ More topics
 .. toctree::
     :maxdepth: 1
     
-    console-and-shells/the-cakephp-console
+    console-and-shells/cron-jobs
     console-and-shells/code-generation-with-bake
     console-and-shells/schema-management-and-migrations
