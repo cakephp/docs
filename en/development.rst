@@ -8,7 +8,9 @@ Development
     :maxdepth: 1
 
     development/configuration
-    development/error-handling
+    development/routing
+    development/exceptions
+    development/errors
     development/debugging
     development/testing
     development/rest

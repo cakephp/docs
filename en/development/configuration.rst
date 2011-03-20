@@ -11,12 +11,14 @@ can easily add to the functionality inherited from the CakePHP
 core, configure additional/different URL mappings (routes), and
 define additional/different inflections.
 
+.. index:: database.php, database.php.default
+
 Database Configuration
 ======================
 
 CakePHP expects database configuration details to be in a file at
-app/config/database.php. An example database configuration file can
-be found at app/config/database.php.default. A finished
+``app/config/database.php``. An example database configuration file can
+be found at ``app/config/database.php.default``. A finished
 configuration should look something like this::
 
     <?php
