@@ -30,3 +30,19 @@ Glossary
         Plugin syntax refers to the dot separated classname indicating classes
         are part of a plugin.  E.g. ``DebugKit.Toolbar`` The plugin is DebugKit,
         and the classname is Toolbar.
+    
+    dot notation
+        Dot notation defines an array path, by separating nested levels with ``.``
+        For example::
+        
+            Asset.filter.css
+        
+        Would point to the following value::
+        
+            array(
+                'Asset' => array(
+                    'filter' => array(
+                        'css' => 'got me'
+                    )
+                )
+            )

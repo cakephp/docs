@@ -208,8 +208,8 @@ are a few constants that CakePHP uses during runtime.
     Error constant. Used for differentiating error logging and
     debugging. Currently PHP supports LOG\_DEBUG.
 
-The Configuration Class
-=======================
+Configure Class
+===============
 
 .. php:class:: Configure
 
@@ -229,15 +229,15 @@ centralized variables that can be shared between many objects.
 Remember to try to live by "convention over configuration" and you
 won't end up breaking the MVC structure we’ve set in place.
 
-This class acts as a singleton and its methods can be called from
-anywhere within your application, in a static context.
-
-::
+This class can be called from
+anywhere within your application, in a static context::
 
     <?php Configure::read('debug'); ?>
 
-
-.. php:staticmethod:: write(string $key, mixed $value)
+.. php:staticmethod:: write($key, $value)
+    
+    :param string $key: The key to write, can use be a :term:`dot notation` value.
+    :param mixed $value: The value to store.
 
     Use ``write()`` to store data in the application’s configuration::
 
@@ -247,7 +247,7 @@ anywhere within your application, in a static context.
 
     .. note::
 
-        The dot notation used in the ``$key`` parameter can be used to
+        The :term:`dot notation` used in the ``$key`` parameter can be used to
         organize your configuration settings into logical groups.
 
     The above example could also be written in a single call::
@@ -262,7 +262,9 @@ anywhere within your application, in a static context.
     AMF or SOAP interactions where debugging information can cause
     parsing problems.
 
-.. php:staticmethod:: read(string $key = 'debug')
+.. php:staticmethod:: read($key = null)
+
+    :param string $key: The key to read, can use be a :term:`dot notation` value
 
     Used to read configuration data from the application. Defaults to
     CakePHP’s important debug value. If a key is supplied, the data is
@@ -277,48 +279,212 @@ anywhere within your application, in a static context.
      
         //yields: 
         array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
-
-.. php:staticmethod:: delete(string $key)
-
-    Used to delete information from the application’s configuration.
     
-    ::
+    If $key is left null, all values in Configure will be returned.
+
+.. php:staticmethod:: delete($key)
+
+    :param string $key: The key to delete, can use be a :term:`dot notation` value
+
+    Used to delete information from the application’s configuration::
 
         <?php
         Configure::delete('Company.name');
 
-.. php:staticmethod:: load(string $path)
-
-    Use this method to load configuration information from a specific
-    file.
-
-    ::
-
-        // /app/config/messages.php:
-        <?php
-        $config['Company']['name'] = 'Pizza, Inc.';
-        $config['Company']['slogan'] = 'Pizza for your body and soul';
-        $config['Company']['phone'] = '555-55-55';
-        ?>
-     
-        <?php
-        Configure::load('messages');
-        Configure::read('Company.name');
-        ?>
-
-    .. note::
-
-        Every configure key-value pair is represented in the file with the
-        ``$config`` array. Any other variables in the file will be ignored
-        by the ``load()`` function.
-    
-    .. todo::
-    
-        Update configuration loading, as its not right anymore.
-
 .. php:staticmethod:: version()
 
     Returns the CakePHP version for the current application.
+
+.. php:staticmethod:: config($name, $reader)
+
+    :param string $name: The name of the reader being attached.
+    :param ConfigReaderInterface $reader: The reader instance being attached.
+    
+    Attach a configuration reader to Configure.  Attached readers can
+    then be used to load configuration files. See :ref:`loading-configuration-files`
+    for more information on how to read configuration files.
+
+.. php:staticmethod:: configured($name = null)
+    
+    :param string $name: The name of the reader to check, if null
+        a list of all attached readers will be returned.
+    
+    Either check that a reader with a given name is attached, or get
+    the list of attached readers.
+
+.. php:staticmethod:: drop($name)
+
+    Drops a connected reader object.
+
+.. _loading-configuration-files:
+
+Loading configuration files
+===========================
+
+CakePHP comes with two built-in configuration file readers.  
+:php:class:`PhpReader` is able to read PHP config files, in the same 
+format that Configure has historically read.  :php:class:`IniReader` is
+able to read ini config files.  See the `PHP documentation <http://php.net/parse_ini_file>`_ 
+for more information on the specifics of ini files. 
+To use a core config reader, you'll need to attach it to Configure 
+using :php:meth:`Configure::config()`::
+
+    <?php
+	App::import('Core', 'config/PhpReader');
+	// Read config files from app/config
+	Configure::config('default', new PhpReader());
+	
+	// Read config files from another path.
+	Configure::config('default', new PhpReader('/path/to/your/config/files/'));
+
+You can have multiple readers attached to Configure, each reading
+different kinds of configuration files, or reading from 
+different types of sources.  You can interact with attached readers 
+using a few other methods on Configure. To see check which reader 
+aliases are attached you can use :php:meth:`Configure::configured()`::
+
+    <?php
+	// Get the array of aliases for attached readers.
+	Configure::configured()
+	
+	// Check if a specific reader is attached
+	Configure::configured('default');
+
+You can also remove attached readers.  ``Configure::drop('default')``
+would remove the default reader alias. Any future attempts to load configuration 
+files with that reader would fail.
+
+.. php:staticmethod:: load($key, $config = 'default')
+    
+    :param string $key: The identifier of the configuration file to load.
+    :param string $config: The alias of the configured reader.
+
+Once you've attached a config reader to Configure you can load configuration files::
+
+    <?php
+	// Load my_file.php using the 'default' reader object.
+	Configure::load('my_file', 'default');
+
+Loaded configuration files merge their data with the existing runtime configuration 
+in Configure.  This allows you to overwrite and add new values 
+into the existing runtime configuration.
+
+Storing runtime configuration
+-----------------------------
+
+.. php:staticmethod:: store($name, $cacheConfig = 'default', $data = null)
+
+    :param string $name: The storage key for the cache file.
+    :param string $cacheConfig: The name of the cache configuration to store the
+        configuration data with.
+    :param mixed $data: Either the data to store, or leave null to store all data
+        in Configure.
+
+You can also store runtime configuration values for use in a future request.  
+Since configure only remembers values for the current request, you will 
+need to store any modified configuration information if you want to 
+use it in subsequent requests::
+
+    <?php
+	// Store the current configuration in the 'user_1234' key in the 'default' cache.
+	Configure::store('user_1234', 'default');
+
+Stored configuration data is persisted in the :php:class:`Cache` class. This allows 
+you to store Configuration information in any storage engine that :php:class:`Cache` can talk to.
+
+Restoring runtime configuration
+-------------------------------
+
+.. php:staticmethod:: restore($name, $cacheConfig = 'default')
+
+    :param string $name: The storage key to load.
+    :param string $cacheConfig: The cache configuration to load the data from.
+
+Once you've stored runtime configuration, you'll probably need to restore it 
+so you can access it again.  ``Configure::restore()`` does exactly that::
+
+    <?php
+	// restore runtime configuration from the cache.
+	Configure::restore('user_1234', 'default');
+
+When restoring configuration information its important to restore it with
+the same key, and cache configuration as was used to store it.  Restored 
+information is merged on top of the existing runtime configuration.
+
+Creating your own Configuration readers
+=======================================
+
+Since configuration readers are an extensible part of CakePHP, 
+you can create configuration readers in your application and plugins.  
+Configuration readers need to implement the :php:interface:`ConfigReaderInterface`.  
+This interface defines a read method, as the only required method. 
+If you really like XML files, you could create a simple Xml config 
+reader for you application::
+
+    <?php
+	// in app/libs/config/xml_reader.php
+	App::import('Core', 'Xml');
+	class XmlReader implements ConfigReaderInterface {
+		function __construct($path = CONFIGS) {
+			$this->_path = $path;
+		}
+		
+		function read($key) {
+			$xml = Xml::build($this->_path . $key . '.xml');
+			return Xml::toArray($xml);
+		}
+	}
+
+In your ``app/config/bootstrap.php`` you could attach this reader and use it::
+
+    <?php
+	App::import('Libs', 'config/XmlReader');
+	Configure::config('xml', new XmlReader());
+	...
+	
+	Configure::load('my_xml');
+
+The ``read()`` method of a config reader, must return an array of the configuration information 
+that the resource named ``$key`` contains.
+
+.. php:interface:: ConfigReaderInterface
+
+    Defines the interface used by classes that read configuration data and
+    store it in :php:class:`Configure`
+
+.. php:method:: read($key)
+
+    :param string $key: The key name or identifier to load.
+
+.. php:exception:: ConfigureException
+
+    Thrown when errors occur when loading/storing/restoring configuration data.
+
+Built-in Configuration readers
+------------------------------
+
+.. php:class:: PhpReader
+
+    Allows you to read configuration files that are stored as plain PHP files.
+    You can read either files from your ``app/configs`` or from plugin configs
+    directories by using :term:`plugin syntax`.  Files **must** contain a ``$config``
+    variable::
+    
+        <?php
+        $config = array(
+            // config data goes here.
+        );
+    
+    Files without ``$config`` will cause an :php:exc:`ConfigureException`
+    
+.. php:class:: IniReader
+
+    Allows you to read configuration files that are stored as plain .ini files.
+    The ini files must be compatible with php's ``parse_ini_file`` function, and 
+    benefit from the following improvements
+    
+    * dot separated values are expanded into arrays.
+    * boolean-ish values like 'on' and 'off' are converted to booleans.
 
 The App Class
 =============

@@ -3,9 +3,6 @@ Core Libraries
 
 Talk about how CakePHP comes with a bunch of batteries included that provide a good set of re-usable and common code.
 
-Contents
-========
-
 .. toctree::
     
     core-libraries/global-constants-and-functions

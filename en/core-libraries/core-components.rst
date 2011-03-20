@@ -67,9 +67,6 @@ You can override the settings in the controller's
     }
 
 
-Core Components
-===============
-
 .. toctree::
     :maxdepth: 2
 
