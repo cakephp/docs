@@ -92,74 +92,156 @@ together automatically. By convention, use underscores, lower case,
 and plural forms for your database table names - for example:
 bakers, pastry\_stores, and savory\_cakes.
 
+Additional Class Paths
+======================
+
+It’s occasionally useful to be able to share MVC classes between
+applications on the same system. If you want the same controller in
+both applications, you can use CakePHP’s bootstrap.php to bring
+these additional classes into view.
+
+In bootstrap.php, define some specially-named variables to make
+CakePHP aware of other places to look for MVC classes:
+
+::
+
+    <?php
+    App::build(array(
+        'plugins' => array('/full/path/to/plugins/', '/next/full/path/to/plugins/'),
+        'models' =>  array('/full/path/to/models/', '/next/full/path/to/models/'),
+        'views' => array('/full/path/to/views/', '/next/full/path/to/views/'),
+        'controllers' => array('/full/path/to/controllers/', '/next/full/path/to/controllers/'),
+        'datasources' => array('/full/path/to/datasources/', '/next/full/path/to/datasources/'),
+        'behaviors' => array('/full/path/to/behaviors/', '/next/full/path/to/behaviors/'),
+        'components' => array('/full/path/to/components/', '/next/full/path/to/components/'),
+        'helpers' => array('/full/path/to/helpers/', '/next/full/path/to/helpers/'),
+        'vendors' => array('/full/path/to/vendors/', '/next/full/path/to/vendors/'),
+        'shells' => array('/full/path/to/shells/', '/next/full/path/to/shells/'),
+        'locales' => array('/full/path/to/locale/', '/next/full/path/to/locale/'),
+        'libs' => array('/full/path/to/libs/', '/next/full/path/to/libs/')
+    ));
+
+All additional path configuration should be done at the top of your application's
+bootstrap.php. This will ensure that the paths are available for the rest of your
+application.
+
+
+.. index:: core.php, configuration
+
 Core Configuration
 ==================
 
-Application configuration in CakePHP is found in
-/app/config/core.php. This file is a collection of Configure class
+Each application in CakePHP contains a configuration file to 
+determine CakePHP's internal behavior.
+``app/config/core.php``. This file is a collection of Configure class
 variable definitions and constant definitions that determine how
 your application behaves. Before we dive into those particular
-variables, you’ll need to be familiar with Configure, CakePHP’s
+variables, you’ll need to be familiar with :php:class:`Configure`, CakePHP’s
 configuration registry class.
 
-CakePHP Core Configuration Variables
-------------------------------------
+CakePHP Core Configuration
+--------------------------
 
 The Configure class is used to manage a set of core CakePHP
 configuration variables. These variables can be found in
-app/config/core.php. Below is a description of each variable and
+``app/config/core.php``. Below is a description of each variable and
 how it affects your CakePHP application.
 
-Configure Variable
-    Description
 debug
     Changes CakePHP debugging output.
     0 = Production mode. No output.
     1 = Show errors and warnings.
     2 = Show errors, warnings, and SQL. [SQL log is only shown when you
     add $this->element('sql\_dump') to your view or layout.]
+
+Error
+    Configure the Error handler used to handle errors for your application.  
+    By default :php:meth:`ErrorHandler::handleError()` is used.  It will display 
+    errors using :php:class:`Debugger`, when debug > 0
+    and log errors with :php:class:`CakeLog` when debug = 0.
+    
+    Sub-keys:
+    
+    * ``handler`` - callback - The callback to handle errors. You can set this to any 
+      callback type, including anonymous functions.
+    * ``level`` - int - The level of errors you are interested in capturing.
+    * ``trace`` - boolean - Include stack traces for errors in log files.
+
+Exception
+    Configure the Exception handler used for uncaught exceptions.  By default, 
+    ErrorHandler::handleException() is used. It will display a HTML page for 
+    the exception, and while debug > 0, framework errors like 
+    Missing Controller will be displayed.  When debug = 0, 
+    framework errors will be coerced into generic HTTP errors.
+     
+    Sub-keys:
+     
+    * ``handler`` - callback - The callback to handle exceptions. 
+      You can set this to any callback type, including anonymous functions.
+    * ``renderer`` - string - The class responsible for rendering uncaught exceptions.
+      If you choose a custom class you should place the file for that class 
+      in app/libs. This class needs to implement a render method.
+    * ``log`` - boolean - Should Exceptions be logged?  If true exceptions
+      will be logged with their stack traces.
+
 App.baseUrl
     Un-comment this definition if you **don’t** plan to use Apache’s
     mod\_rewrite with CakePHP. Don’t forget to remove your .htaccess
     files too.
+App.encoding
+    Define what encoding your application uses.  This encoding
+    is used to generate the charset in the layout, and encode entities.
+    It should match the encoding values specified for your database.
 Routing.prefixes
     Un-comment this definition if you’d like to take advantage of
     CakePHP prefixed routes like admin. Set this variable with an array
     of prefix names of the routes you’d like to use. More on this
     later.
 Cache.disable
-    When set to true, caching is disabled site-wide.
+    When set to true, persistent caching is disabled site-wide.
+    This will make all read/writes to :php:class:`Cache` fail.
 Cache.check
     If set to true, enables view caching. Enabling is still needed in
     the controllers, but this variable enables the detection of those
     settings.
-Session.save
-    Tells CakePHP which session storage mechanism to use.
-    php = Use the default PHP session storage.
-    cache = Use the caching engine configured by Cache::config(). Very
-    usœΩeful in conjunction with Memcache (in setups with multiple
-    application servers) to store both cached data and sessions.
-    cake = Store session data in /app/tmp
-    database = store session data in a database table. Make sure to set
-    up the table using the SQL file located at
-    /app/config/sql/sessions.sql.
-Session.model
-    The model name to be used for the session model. The model name set
-    here should \*not\* be used elsewhere in your application.
-Session.table
-    This value has been deprecated as of CakePHP 1.3
-Session.database
-    The name of the database that stores session information.
-Session.cookie
-    The name of the cookie used to track sessions.
-Session.timeout
-    Base session timeout in seconds. Actual value depends on
-    Security.level.
-Session.start
-    Automatically starts sessions when set to true.
-Session.checkAgent
-    When set to false, CakePHP sessions will not check to ensure the
-    user agent does not change between requests.
+Session
+    Contains an array of settings to use for session configuration. The defaults key is 
+    used to define a default preset to use for sessions, any settings declared here will override
+    the settings of the default config.
+    
+    Sub-keys
+    
+    * ``name`` - The name of the cookie to use. Defaults to 'CAKEPHP'
+    * ``timeout`` - The number of minutes you want sessions to live for. 
+      This timeout is handled by CakePHP
+    * ``cookieTimeout`` - The number of minutes you want session cookies to live for.
+    * ``checkAgent`` - Do you want the user agent to be checked when starting sessions? 
+      You might want to set the value to false, when dealing with older versions of 
+      IE, Chrome Frame or certain web-browsing devices and AJAX
+    * ``defaults`` - The default configuration set to use as a basis for your session.
+      There are four builtins: php, cake, cache, database.
+    * ``handler`` - Can be used to enable a custom session handler. 
+      Expects an array of callables, that can be used with `session_save_handler`.  
+      Using this option will automatically add `session.save_handler` to the ini array.
+    * ``autoRegenerate`` - Enabling this setting, turns on automatic renewal 
+      of sessions, and sessionids that change frequently. 
+      See :php:attr:`CakeSession::$requestCountdown`.
+    * ``ini`` - An associative array of additional ini values to set.
+    
+    The built in defaults are:
+
+    * 'php' - Uses settings defined in your php.ini.
+    * 'cake' - Saves session files in CakePHP's /tmp directory.
+    * 'database' - Uses CakePHP's database sessions.
+    * 'cache' - Use the Cache class to save sessions.
+    
+    To define a custom session handler, save it at ``app/libs/session/<name>.php``.
+    Make sure the class implements :php:interface:`CakeSessionHandlerInterface` 
+    and set Session.handler to <name>
+
+    To use database sessions, run the ``app/config/schema/sessions.php`` schema using
+    the cake shell command: ``cake schema create Sessions``
+
 Security.level
     The level of CakePHP security. The session timeout time defined in
     'Session.timeout' is multiplied according to the settings here.
@@ -192,7 +274,7 @@ Acl.classname, Acl.database
     Cache configuration is also found in core.php — We’ll be covering
     that later on, so stay tuned.
 
-The Configure class can be used to read and write core
+The :php:class:`Configure` class can be used to read and write core
 configuration settings on the fly. This can be especially handy if
 you want to turn the debug setting on for a limited section of
 logic in your application, for instance.
@@ -207,6 +289,20 @@ are a few constants that CakePHP uses during runtime.
 
     Error constant. Used for differentiating error logging and
     debugging. Currently PHP supports LOG\_DEBUG.
+
+Core Cache Configuration
+------------------------
+
+CakePHP uses two cache configurations internally.  ``_cake_model_`` and ``_cake_core_``.
+``_cake_core_`` is used to store file paths, and object locations.  ``_cake_model_`` is
+used to store schema descriptions, and source listings for datasources.  Using a fast
+cache storage like APC or Memcached is recommended for these configurations, as
+they are read on every request.  By default both of these configurations expire every
+10 seconds when debug is greater than 0.
+
+As with all cached data stored in :php:class:`Cache` you can clear data using
+:php:meth:`Cache::clear()`.
+
 
 Configure Class
 ===============
@@ -455,10 +551,15 @@ that the resource named ``$key`` contains.
 .. php:method:: read($key)
 
     :param string $key: The key name or identifier to load.
+    
+    This method should load/parse the configuration data identified by ``$key``
+    and return an array of data in the file.
 
 .. php:exception:: ConfigureException
 
     Thrown when errors occur when loading/storing/restoring configuration data.
+    :php:interface:`ConfigReaderInterface` implementations should throw this
+    error when they encounter an error.
 
 Built-in Configuration readers
 ------------------------------
@@ -468,11 +569,19 @@ Built-in Configuration readers
     Allows you to read configuration files that are stored as plain PHP files.
     You can read either files from your ``app/configs`` or from plugin configs
     directories by using :term:`plugin syntax`.  Files **must** contain a ``$config``
-    variable::
+    variable.  An example configuration file would look like::
     
         <?php
         $config = array(
-            // config data goes here.
+            'debug' => 0,
+            'Security' => array(
+                'salt' => 'its-secret'
+            ),
+            'Exception' => array(
+                'handler' => 'ErrorHandler::handleException',
+                'renderer' => 'ExceptionRenderer',
+                'log' => true
+            )
         );
     
     Files without ``$config`` will cause an :php:exc:`ConfigureException`
@@ -485,207 +594,22 @@ Built-in Configuration readers
     
     * dot separated values are expanded into arrays.
     * boolean-ish values like 'on' and 'off' are converted to booleans.
-
-The App Class
-=============
-
-Loading additional classes has become more streamlined in CakePHP.
-In previous versions there were different functions for loading a
-needed class based on the type of class you wanted to load. These
-functions have been deprecated, all class and library loading
-should be done through App::import() now. App::import() ensures
-that a class is only loaded once, that the appropriate parent class
-has been loaded, and resolves paths automatically in most cases.
-
-Make sure you follow the
-:ref:`file-and-classname-conventions`.
-
-
-Additional Class Paths
-======================
-
-It’s occasionally useful to be able to share MVC classes between
-applications on the same system. If you want the same controller in
-both applications, you can use CakePHP’s bootstrap.php to bring
-these additional classes into view.
-
-In bootstrap.php, define some specially-named variables to make
-CakePHP aware of other places to look for MVC classes:
-
-::
-
-    App::build(array(
-        'plugins' => array('/full/path/to/plugins/', '/next/full/path/to/plugins/'),
-        'models' =>  array('/full/path/to/models/', '/next/full/path/to/models/'),
-        'views' => array('/full/path/to/views/', '/next/full/path/to/views/'),
-        'controllers' => array('/full/path/to/controllers/', '/next/full/path/to/controllers/'),
-        'datasources' => array('/full/path/to/datasources/', '/next/full/path/to/datasources/'),
-        'behaviors' => array('/full/path/to/behaviors/', '/next/full/path/to/behaviors/'),
-        'components' => array('/full/path/to/components/', '/next/full/path/to/components/'),
-        'helpers' => array('/full/path/to/helpers/', '/next/full/path/to/helpers/'),
-        'vendors' => array('/full/path/to/vendors/', '/next/full/path/to/vendors/'),
-        'shells' => array('/full/path/to/shells/', '/next/full/path/to/shells/'),
-        'locales' => array('/full/path/to/locale/', '/next/full/path/to/locale/'),
-        'libs' => array('/full/path/to/libs/', '/next/full/path/to/libs/')
-    ));
-
-Also changed is the order in which boostrapping occurs. In the past
-``app/config/core.php`` was loaded **after**
-``app/config/bootstrap.php``. This caused any ``App::import()`` in
-an application bootstrap to be un-cached and considerably slower
-than a cached include. In 2.0 core.php is loaded and the core cache
-configs are created **before** bootstrap.php is loaded.
-
-.. _app-import:
-
-Using App::import()
--------------------
-
-``App::import($type, $name, $parent, $search, $file, $return);``
-
-At first glance ``App::import`` seems complex, however in most use
-cases only 2 arguments are required.
-
-Importing Core Libs
--------------------
-
-Core libraries such as Sanitize, and Xml can be loaded by:
-
-::
-
-    App::import('Core', 'Sanitize');
-
-The above would make the Sanitize class available for use.
-
-Importing Controllers, Models, Components, Behaviors, and Helpers
------------------------------------------------------------------
-
-All application related classes should also be loaded with
-App::import(). The following examples illustrate how to do so.
-
-Loading Controllers
-~~~~~~~~~~~~~~~~~~~
-
-``App::import('Controller', 'MyController');``
-
-Calling ``App::import`` is equivalent to ``require``'ing the file.
-It is important to realize that the class subsequently needs to be
-initialized.
-
-::
-
-    <?php
-    // The same as require('controllers/users_controller.php');
-    App::import('Controller', 'Users');
     
-    // We need to load the class
-    $Users = new UsersController;
+    An example ini file would look like::
     
-    // If we want the model associations, components, etc to be loaded
-    $Users->constructClasses();
-    ?>
-
-Loading Models
-~~~~~~~~~~~~~~
-
-``App::import('Model', 'MyModel');``
-
-Loading Components
-~~~~~~~~~~~~~~~~~~
-
-``App::import('Component', 'Auth');``
-
-::
-
-    <?php
-    App::import('Component', 'Mailer');
+        debug = 0
+        
+        Security.salt = its-secret
+        
+        [Exception]
+        handler = ErrorHandler::handleException
+        renderer = ExceptionRenderer
+        log = true
     
-    // We need to load the class
-    $Mailer = new MailerComponent();
-    
-    ?>
-
-Loading Behaviors
-~~~~~~~~~~~~~~~~~
-
-``App::import('Behavior', 'Tree');``
-
-Loading Helpers
-~~~~~~~~~~~~~~~
-
-``App::import('Helper', 'Html');``
-
-Loading from Plugins
---------------------
-
-Loading classes in plugins works much the same as loading app and
-core classes except you must specify the plugin you are loading
-from.
-
-::
-
-    App::import('Model', 'PluginName.Comment');
-
-To load APP/plugins/plugin\_name/vendors/flickr/flickr.php
-
-::
-
-    App::import('Vendor', 'PluginName.flickr/flickr');
-
-Loading Vendor Files
---------------------
-
-The vendor() function has been deprecated. Vendor files should now
-be loaded through App::import() as well. The syntax and additional
-arguments are slightly different, as vendor file structures can
-differ greatly, and not all vendor files contain classes.
-
-
-
-The following examples illustrate how to load vendor files from a
-number of path structures. These vendor files could be located in
-any of the vendor folders.
-
-Vendor examples
-~~~~~~~~~~~~~~~
-
-To load **vendors/geshi.php**
-
-::
-
-    App::import('Vendor', 'geshi');
-
-.. note::
-
-    The geishi file must be a lower-case file name as Cake will not
-    find it otherwise.
-
-To load **vendors/flickr/flickr.php**
-
-::
-
-    App::import('Vendor', 'flickr/flickr');
-
-To load **vendors/some.name.php**
-
-::
-
-    App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));
-
-To load **vendors/services/well.named.php**
-
-::
-
-    App::import('Vendor', 'WellNamed', array('file' => 'services'.DS.'well.named.php'));
-
-It wouldn't make a difference if your vendor files are inside your
-/app/vendors directory. Cake will automatically find it.
-
-To load **app/vendors/vendorName/libFile.php**
-
-::
-
-    App::import('Vendor', 'aUniqueIdentifier', array('file' =>'vendorName'.DS.'libFile.php'));
+    The above ini file, would result in the same end configuration data
+    as the PHP example above.  Array structures can be created either
+    through dot separated values, or sections.  Sections can contain
+    dot separated keys for deeper nesting.
 
 .. _routes-configuration:
 
