@@ -389,15 +389,16 @@ variable is present.
 Configuring options and generating help
 =======================================
 
-Console option parsing in CakePHP has always been a little bit different 
-from everything else on the command line.  For 2.0 ``ConsoleOptionParser`` 
-helps provide a more familiar command line option and argument parser. 
-It greatly enhances the option parsing in CakePHP and allows you to 
-easily generate help output which has always been another sore point 
-for CakePHP console applications.
+.. php:class:: ConsoleOptionParser
 
-Configuring the ConsoleOptionParser
------------------------------------
+Console option parsing in CakePHP has always been a little bit different 
+from everything else on the command line.  In 2.0 ``ConsoleOptionParser`` 
+helps provide a more familiar command line option and argument parser.
+
+OptionParsers allow you to accomplish two goals at the same time.
+First they allow you to define the options and arguments, separating
+basic input validation and your code.  Secondly, it allows you to provide
+documentation, that is used to generate well formatted help file.
 
 The console framework gets your shell's option parser by calling 
 ``$this->getOptionParser()``.  Overriding this method allows you to 
@@ -414,8 +415,70 @@ methods for easily setting multiple options/arguments at once.::
 		return $parser;
 	}
 
+Configuring an option parser with the fluent interface
+------------------------------------------------------
+
+All of the methods that configure an option parser can be chained, 
+allowing you to define an entire option parser in one series of method calls::
+
+    <?php
+	$parser->addArgument('type', array(
+		'help' => 'Either a full path or type of class.'
+	))->addArgument('className', array(
+		'help' => 'A CakePHP core class name (e.g: Component, HtmlHelper).'
+	))->addOption('method', array(
+		'short' => 'm',
+		'help' => __('The specific method you want help on.')
+	))->description(__('Lookup doc block comments for classes in CakePHP.'));
+
+The methods that allow chaining are:
+
+- description()
+- epilog()
+- command()
+- addArgument()
+- addArguments()
+- addOption()
+- addOptions()
+- addSubcommand()
+- addSubcommands()
+
+.. php:method:: description($text = null)
+
+Gets or sets the description for the option parser.  The description
+displays above the argument and option information. By passing in
+either an array or a string, you can set the value of the description.
+Calling with no arguments will return the current value.
+
+::
+
+    <?php
+    // Set multiple lines at once
+    $parser->description(array('line one', 'line two'));
+    
+    // read the current value
+    $parser->description()
+
+.. php:method:: epilog($text = null)
+
+Gets or sets the epilog for the option parser.  The epilog
+is displayed after the argument and option information. By passing in
+either an array or a string, you can set the value of the epilog.
+Calling with no arguments will return the current value.
+
+::
+
+    <?php
+    // Set multiple lines at once
+    $parser->epilog(array('line one', 'line two'));
+    
+    // read the current value
+    $parser->epilog()
+
 Adding arguments
 ----------------
+
+.. php:method:: addArgument($name, $params = array())
 
 Positional arguments are frequently used in command line tools, 
 and ``ConsoleOptionParser`` allows you to define positional 
@@ -441,7 +504,10 @@ Arguments that have been marked as required will throw an exception when
 parsing the command if they have been omitted. So you don't have to 
 handle that in your shell.
 
-If you have an array with multiple arguments you can use ``$parser->addArguments()`` to add multiple arguments at once.::
+.. php:method:: addArguments(array $args)
+
+If you have an array with multiple arguments you can use ``$parser->addArguments()`` 
+to add multiple arguments at once.::
 
     <?php
 	$parser->addArguments(array(
@@ -455,11 +521,9 @@ can be used as part of a fluent method chain.
 Validating arguments
 --------------------
 
-In the past you could use ``Shell::_checkArgs()`` to check that you had 
-received the correct number of arguments.  In 2.0 Shell::_checkArgs() 
-has been removed. Instead you should use the ``required`` flag when 
-creating arguments, and use sub-parsers for individual commands on 
-your shell.  Additional you can use ``choices`` to force an argument to 
+When creating positional arguments, you can use the ``required`` flag, to
+indicate that an argument must be present when a shell is called. 
+Additionally you can use ``choices`` to force an argument to 
 be from a list of valid choices::
 
     <?php
@@ -476,11 +540,11 @@ value an exception will be raised and the shell will be stopped.
 Adding Options
 --------------
 
+.. php:method:: addOption($name, $options = array())
+
 Options or flags are also frequently used in command line tools.  
-In the past CakePHP only supported one format of option ``-foo``.  
-This style of option is unlike most other command line tools, and 
-no support for short aliases was provided.  ``ConsoleOptionParser`` 
-supports creating options with short aliases, supplying defaults 
+``ConsoleOptionParser`` supports creating options 
+with both verbose and short aliases, supplying defaults 
 and creating boolean switches. Options are created with either 
 ``$parser->addOption()`` or ``$parser->addOptions()``.::
 
@@ -491,9 +555,9 @@ and creating boolean switches. Options are created with either
 		'default' => 'default'
 	));
 
-The above would allow you to use either ``cake myshell --connection=other``, ``cake myshell --connection other``, 
-or ``cake myshell -c other`` when invoking the shell.  
-You can also create boolean switches, these switches do not 
+The above would allow you to use either ``cake myshell --connection=other``, 
+``cake myshell --connection other``, or ``cake myshell -c other`` 
+when invoking the shell. You can also create boolean switches, these switches do not 
 consume values, and their presence just enables them in the 
 parsed parameters.::
 
@@ -503,7 +567,8 @@ parsed parameters.::
 With this option, when calling a shell like ``cake myshell --no-commit something`` 
 the no-commit param would have a value of true, and 'something' 
 would be a treated as a positional argument.  
-The built-in ``--help``, ``--verbose``, and ``--quiet`` options use this feature.
+The built-in ``--help``, ``--verbose``, and ``--quiet`` options 
+use this feature.
 
 When creating options you can use the following options to 
 define the behavior of the option:
@@ -515,6 +580,8 @@ define the behavior of the option:
   Defaults to false.
 * ``choices`` An array of valid choices for this option.  If left empty all
   values are valid. An exception will be raised when parse() encounters an invalid value.
+
+.. php:method:: addOptions(array $options)
 
 If you have an array with multiple options you can use ``$parser->addOptions()`` 
 to add multiple options at once.::
@@ -569,6 +636,8 @@ Since the boolean options are always defined as ``true`` or
 Adding subcommands
 ------------------
 
+.. php:method:: addSubcommand($name, $options = array())
+
 Console applications are often made of subcommands, and these subcommands 
 may require special option parsing and have their own help.  A perfect 
 example of this is ``bake``.  Bake is made of many separate tasks that all 
@@ -582,7 +651,7 @@ shell knows how to parse commands for its tasks::
 		'parser' => $this->Model->getOptionParser()
 	));
 
-The above is an example of how could provide help and a specialized 
+The above is an example of how you could provide help and a specialized 
 option parser for a shell's task. By calling the Task's ``getOptionParser()`` 
 we don't have to duplicate the option parser generation, or mix concerns 
 in our shell.  Adding subcommands in this way has two advantages.  
@@ -600,16 +669,17 @@ When defining a subcommand you can use the following options:
   to create method specific option parsers.  When help is generated for a 
   subcommand, if a parser is present it will be used. You can also 
   supply the parser as an array that is compatible with 
-  ``ConsoleOptionParser::buildFromArray()`` 
+  :php:meth:`ConsoleOptionParser::buildFromArray()`
 
 Adding subcommands can be done as part of a fluent method chain.
 
 Building a ConsoleOptionParser from an array
 --------------------------------------------
 
+.. php:method:: buildFromArray($spec)
+
 As previously mentioned, when creating subcommand option parsers 
-you can define the parser spec as an array and use 
-``ConsoleOptionParser::buildFromArray($spec);``.  This can help 
+you can define the parser spec as an array this method.  This can help 
 make building subcommand parsers easier, as everything is an array::
 
     <?php
@@ -633,7 +703,7 @@ Inside the parser spec, you can define keys for ``definition``,
 ``arguments``, ``options``, and ``epilog``.  You cannot define 
 subcommands inside an array style builder.  The values for 
 arguments, and options, should follow the format that 
-ConsoleOptionParser::addArguments() and ConsoleOptionParser::addOptions 
+:php:func:`ConsoleOptionParser::addArguments()` and :php:func:`ConsoleOptionParser::addOptions()`
 use.  You can also use buildFromArray on its own, to build an option parser::
 
     <?php
@@ -651,34 +721,6 @@ use.  You can also use buildFromArray on its own, to build an option parser::
 			)
 		));
 	}
-
-Configuring an option parser with the fluent interface
-------------------------------------------------------
-
-All of the methods that configure an option parser can be chained, 
-allowing you to define an entire option parser in one series of method calls::
-
-    <?php
-	$parser->addArgument('type', array(
-		'help' => 'Either a full path or type of class (model, behavior, controller, component, view, helper)'
-	))->addArgument('className', array(
-		'help' => 'A CakePHP core class name (e.g: Component, HtmlHelper).'
-	))->addOption('method', array(
-		'short' => 'm',
-		'help' => __('The specific method you want help on.')
-	))->description(__('Lookup doc block comments for classes in CakePHP.'));
-
-The methods that allow chaining are:
-
-- description()
-- epilog()
-- command()
-- addArgument()
-- addArguments()
-- addOption()
-- addOptions()
-- addSubcommand()
-- addSubcommands()
 
 Getting help from shells
 ------------------------
@@ -863,6 +905,11 @@ Shell API
     generated, and the user asked if they want to overwrite the file if it already exists.
     If the shell's interactive property is false, no question will be asked and the file 
     will simply be overwritten.
+
+.. php:method:: getOptionParser()
+
+    Should return a :php:class:`ConsoleOptionParser` object, with any sub-parsers for
+    the shell.
 
 More topics
 ===========
