@@ -5,6 +5,9 @@ Glossary
 
     routing array
         An array of attributes that are passed to :php:meth:`Router::url()`.
+        They typically look like::
+        
+            array('controller' => 'posts', 'action' => 'view', 5)
 
     html attributes
         An array of key => values that are composed into html attributes. For example::
