@@ -613,8 +613,10 @@ Built-in Configuration readers
     through dot separated values, or sections.  Sections can contain
     dot separated keys for deeper nesting.
 
-Inflections
-===========
+.. _inflection-configuration:
+
+Inflection Configuration
+========================
 
 Cake's naming conventions can be really nice - you can name your
 database table big\_boxes, your model BigBox, your controller
