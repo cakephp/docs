@@ -24,8 +24,29 @@ You can install the phpdomain using:
 Building the documentation
 --------------------------
 
+After installing the require packages you can build the documentation using `Make`
+
+	make html
+
+This will generate all the documentation in an html form.  Other output such as 'epub', 'pdf' and 'htmlhelp' are not fully complete at this time.
+
+After making changes to the documentation, you can build the html version of the docs by using `make html` again.  This will build only the html files that have had changes made to them.
+
 
 Contributing
 ------------
+
+Contributing to the documentation is pretty simple. There are currently a number of outstanding issues that need to be addressed.  We've tried to flag these with `.. todo::` where possible.  To see all the outstanding todo's add the following to your `config/all.py`
+
+	todo_include_todos = True
+
+After rebuilding the html content, you should see a list of existing todo items at the bottom of the table of contents.
+
+You are also welcome to make and suggestions for new content as commits in a github fork.  Please make any totally new sections in a separate branch.  This makes changes far easier to integrate later on.
+
+Translations
+------------
+
+Contributing translations requires that you make a new directory using the two letter name for your language.  As content is translated, directories mirroring the english content should be created with localized content.
 
 
