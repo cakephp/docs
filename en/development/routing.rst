@@ -18,7 +18,14 @@ Routes Configuration
 
 Routes in an application are configured in ``app/config/routes.php``
 this file is included by the :php:class:`Dispatcher` when handling routes
-and allows you to define application specific routes you want used.
+and allows you to define application specific routes you want used. Routes 
+declared in this file are processed top to bottom when incoming requests
+are matched.  This means that the order you place routes can affect how
+routes are parsed.  Its generally a good idea to place most frequently
+visited routes at the top of the routes file if possible.  This will
+save having to check a number of routes that won't match on each request.
+After connecting routes you can manipulate the order of routes using
+:php:meth:`Router::promote()`.
 
 CakePHP also comes with a few default routes to get you started. These
 can be disabled later on once you are sure you don't need them. 
@@ -46,7 +53,8 @@ specified in the URL, the index() method is assumed.
 The default routing setup also allows you to pass parameters to
 your actions using the URL. A request for /posts/view/25 would be
 equivalent to calling view(25) on the PostsController, for
-example.
+example.  The default routing also provides routes for plugins,
+and prefix routes should you choose to use those features.
 
 .. index:: :controller, :action, :plugin
 
@@ -101,7 +109,8 @@ The request /pages/products would be mapped to
 ``PagesController->display('products')``.
 
 You can use the second parameter of :php:meth:`Router::connect()`
-to provide any routing parameters that are part of the route for example::
+to provide any routing parameters that are compose the default values
+of the route::
 
     <?php
     Router::connect(
@@ -134,7 +143,14 @@ that::
     );
 
 This is telling the Router that any url beginning with ``/cooks/``
-should be sent to the users controller.
+should be sent to the users controller.  The action called will
+depend on the value of the ``:action`` parameter.  By using 
+:ref:`route-elements`, you can create variable routes, that accept 
+user input or variables.  The above route also uses the greedy star.
+The greedy star indicates to :php:class:`Router` that this route
+should accept any additional positional arguments given.  These
+arguments will be made available in the :ref:`passed-arguments`
+array.
 
 When generating urls, routes are used too. Using
 ``array('controller' => 'users', 'action' => 'some_action', 5)`` as
@@ -314,7 +330,7 @@ one-by-one:
 If a named parameter is used and it does not match the provided criteria, it will
 be treated as a passed argument instead of a named parameter.
 
-.. index: admin routing, prefix routing
+.. index:: admin routing, prefix routing
 
 Prefix Routing
 --------------
@@ -373,6 +389,8 @@ Here's how to build this link using the HTML helper::
     // leave a prefix
     echo $html->link('View Post', array('manager' => false, 'controller' => 'posts', 'action' => 'view', 5));
 
+.. index:: plugin routing
+
 Plugin routing
 --------------
 
@@ -390,6 +408,8 @@ to create a link that has no plugin you can do the following::
 
 By setting ``plugin => null`` you tell the Router that you want to
 create a link that is not part of a plugin.
+
+.. index:: file extensions
 
 File extensions
 ---------------
@@ -426,6 +446,10 @@ Then to create links which map back to the routes simply use::
 File extensions are used by :php:class:`RequestHandlerComponent` to do automatic 
 view switching based on content types.  See the RequestHandlerComponent for 
 more information.
+
+
+.. index:: passed arguments
+.. _passed-arguments:
 
 Passed arguments
 ================
@@ -493,6 +517,8 @@ arguments as values without string keys in the array::
     array('controller' => 'posts', 'action' => 'view', 5)
 
 Since ``5`` has a numeric key, it is treated as a passed argument.
+
+.. index:: named parameters
 
 Named parameters
 ================
