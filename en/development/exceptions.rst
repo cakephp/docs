@@ -44,7 +44,7 @@ Creating your own application exceptions
 ========================================
 
 You can create your own application exceptions using any of the built
-in `SPL exceptions <http://php.net/manual/en/spl.exceptions.php`_, ``Exception`` 
+in `SPL exceptions <http://php.net/manual/en/spl.exceptions.php>`_, ``Exception`` 
 itself, or :php:exc:`CakeException`.  Application exceptions that extend
 Exception or the SPL exceptions will be treated as 500 error in production mode.
 :php:exc:`CakeException` is special in that all :php:exc:`CakeException` objects
@@ -53,6 +53,7 @@ When in development mode :php:exc:`CakeException` objects simply need a new temp
 that matches the class name in order to provide useful information.  If your
 application contained the following exception::
 
+    <?php
     class MissingWidgetException extends CakeException {};
 
 You could provide nice development errors, by creating 
@@ -86,6 +87,7 @@ Creating custom status codes
 You can create custom HTTP status codes by changing the code used when
 creating an exception::
 
+    <?php
     throw new MissingWidgetHelperException('Its not here', 501);
 
 Will create a ``501`` response code, you can use any HTTP status code
@@ -404,5 +406,5 @@ to indicate failure states.  For example::
 	}
 
 The above would cause the configured ``Exception.handler`` to catch and
-process the :php:exc`NotFoundException`.  By default this will create an error page,
+process the :php:exc:`NotFoundException`.  By default this will create an error page,
 and log the exception.
