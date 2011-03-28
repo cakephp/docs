@@ -253,6 +253,15 @@ parameter is optional as it has a default), handing the requests to
 the index() actions of their respective controllers, with the date
 parameters in ``$this->request->params``.
 
+There are several route elements that have special meaning in 
+CakePHP, and should not be used unless you want the special meaning
+
+* ``controller`` Used to name the controller for a route.
+* ``action`` Used to name the controller action for a route.
+* ``plugin`` Used to name the plugin a controller is located in.
+* ``prefix`` Used for :ref:`prefix-routing`
+* ``ext`` Used for :ref:`file-extensions` routing.
+
 Passing parameters to action
 ----------------------------
 
@@ -331,6 +340,7 @@ If a named parameter is used and it does not match the provided criteria, it wil
 be treated as a passed argument instead of a named parameter.
 
 .. index:: admin routing, prefix routing
+.. _prefix-routing:
 
 Prefix Routing
 --------------
@@ -410,6 +420,7 @@ By setting ``plugin => null`` you tell the Router that you want to
 create a link that is not part of a plugin.
 
 .. index:: file extensions
+.. _file-extensions:
 
 File extensions
 ---------------
@@ -467,8 +478,7 @@ action method called, and secondly they are available in
 ``$this->request->params['pass']`` as a numerically indexed array. Lastly
 there is ``$this->passedArgs`` available in the same way as the
 second one. When using custom routes you can force particular
-parameters to go into the passed arguments as well. See
-:ref:`routes-configuration` for more information.
+parameters to go into the passed arguments as well.
 
 If you were to visit the previously mentioned url, and you
 had a controller action that looked like::
@@ -899,6 +909,10 @@ Router API
     Creates REST resource routes for the given controller(s).  See
     the :doc:`/development/rest` section for more information.
 
+.. php:staticmethod:: parseExtensions($types)
+
+    Used in routes.php to declare which :ref:`file-extensions` your application
+    supports.  By providing no arguments, all file extensions will be supported.
 
 .. php:class:: CakeRoute
 
