@@ -175,16 +175,8 @@ Exception
     the exception, and while debug > 0, framework errors like 
     Missing Controller will be displayed.  When debug = 0, 
     framework errors will be coerced into generic HTTP errors.
-     
-    Sub-keys:
-     
-    * ``handler`` - callback - The callback to handle exceptions. 
-      You can set this to any callback type, including anonymous functions.
-    * ``renderer`` - string - The class responsible for rendering uncaught exceptions.
-      If you choose a custom class you should place the file for that class 
-      in app/libs. This class needs to implement a render method.
-    * ``log`` - boolean - Should Exceptions be logged?  If true exceptions
-      will be logged with their stack traces.
+    For more information on Exception handling, see the :doc:`exceptions`
+    section.
 
 App.baseUrl
     Un-comment this definition if you **don’t** plan to use Apache’s
