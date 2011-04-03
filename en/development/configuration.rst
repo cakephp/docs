@@ -444,10 +444,12 @@ You can also remove attached readers.  ``Configure::drop('default')``
 would remove the default reader alias. Any future attempts to load configuration 
 files with that reader would fail.
 
-.. php:staticmethod:: load($key, $config = 'default')
+.. php:staticmethod:: load($key, $config = 'default', $merge = true)
     
     :param string $key: The identifier of the configuration file to load.
     :param string $config: The alias of the configured reader.
+    :param boolean $merge: Whether or not the contents of the read file
+        should be merged, or overwrite the existing values.
 
 Once you've attached a config reader to Configure you can load configuration files::
 
@@ -457,7 +459,8 @@ Once you've attached a config reader to Configure you can load configuration fil
 
 Loaded configuration files merge their data with the existing runtime configuration 
 in Configure.  This allows you to overwrite and add new values 
-into the existing runtime configuration.
+into the existing runtime configuration. By setting ``$merge`` to true, values
+will not ever overwrite the existing configuration.
 
 Storing runtime configuration
 -----------------------------
