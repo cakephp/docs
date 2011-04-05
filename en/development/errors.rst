@@ -1,90 +1,79 @@
 Error Handling
 ##############
 
-In the event of an unrecoverable error in your application, it is
-common to stop processing and show an error page to the user. To
-save you from having to code error handling for this in each of
-your controllers and components, you can use the provided method:
+For 2.0 ``Object::cakeError()`` has been removed. Instead it has been replaced with
+a number of exceptions.  All of the core classes that previously called cakeError
+are now throwing exceptions.  This lets you either choose to handle the errors
+in your application code, or let the built in exception handling deal with them.
 
-``$this->cakeError(string $errorType [, array $parameters]);``
+There is more control than ever for error and exception handling in CakePHP 2.0.
+You can configure which methods you want to set as the default error handler,
+and exception handler using configure.
 
-Calling this method will show an error page to the user and halt
-any further processing in your application.
+Error configuration
+===================
 
-``parameters`` must be an array of strings. If the array contains
-objects (including Exception objects), they will be cast into
-strings.
+Error configuration is done inside your application's ``app/config/core.php``
+file.  You can define a callback to be fired each time your application triggers
+any PHP error - exceptions are handled :doc:`development/exceptions` separately.
+The callback can be any PHP callable, including an anonymous function.  The 
+default error handling configuration looks like::
 
-CakePHP pre-defines a set of error-types, but at the time of
-writing, most are only really useful by the framework itself. One
-that is more useful to the application developer is the good old
-404 error. This can be called with no parameters as follows:
+	Configure::write('Error', array(
+		'handler' => 'ErrorHandler::handleError',
+		'level' => E_ALL & ~E_DEPRECATED,
+		'trace' => true
+	));
 
-::
+You have 3 built-in options when configuring error handlers:
 
-    $this->cakeError('error404');
+* ``handler`` - callback - The callback to handle errors. You can set this to any
+  callback type, including anonymous functions.
+* ``level`` - int - The level of errors you are interested in capturing. Use the 
+  built-in php error constants, and bitmasks to select the level of error you 
+  are interested in.
+* ``trace`` - boolean - Include stack traces for errors in log files.  Stack traces 
+  will be included in the log after each error.  This is helpful for finding 
+  where/when errors are being raised.
 
-Or alternatively, you can cause the page to report the error was at
-a specific URL by passing the ``url`` parameter:
+ErrorHandler by default, displays errors when ``debug`` > 0, and logs errors when 
+debug = 0.  The type of errors captured in both cases is controlled by ``Error.level``.
 
-::
+.. note::
 
-    $this->cakeError('error404', array('url' => 'some/other.url'));
+    If you use a custom error handler, the trace setting will have no effect, 
+    unless you refer to it in your error handling function.
 
-This all starts being a lot more useful by extending the error
-handler to use your own error-types. Application error handlers are
-largely like controller actions; You typically will set() any
-passed parameters to be available to the view and then render a
-view file from your ``app/views/errors`` directory.
+Creating your own error handler
+===============================
 
-Create a file ``app/app_error.php`` with the following definition.
-::
+You can create an error handler out of any callback type.  For example you could 
+use a class called ``AppError`` to handle your errors.  The following would 
+need to be done::
 
     <?php
-    class AppError extends ErrorHandler {
-    }   
-    ?>
+	//in app/config/core.php
+	Configure::write('Error.handler', 'AppError::handleError');
+	
+	//in app/config/bootstrap.php
+	App::import('Lib', 'AppError');
+	
+	//in app/libs/app_error.php
+	class AppError {
+		public static function handleError($code, $description, $file = null, $line = null, $context = null) {
+			echo 'There has been an error!';
+		}
+	}
 
-Handlers for new error-types can be implemented by adding methods
-to this class. Simply create a new method with the name you want to
-use as your error-type.
+This class/method will print out 'There has been an error!' each time an error 
+occurs.  Since you can define an error handler as any callback type, you could
+use an anonymous function if you are using PHP5.3 or greater.::
 
-Let's say we have an application that writes a number of files to
-disk and that it is appropriate to report write errors to the user.
-We don't want to add code for this all over the different parts of
-our application, so this is a great case for using a new error
-type.
+    <?php
+	Configure::write('Error.handler', function($code, $description, $file = null, $line = null, $context = null) {
+		echo 'Oh no something bad happened';
+	});
 
-Add a new method to your ``AppError`` class. We'll take one
-parameter called ``file`` that will be the path to the file we
-failed to write.
-
-::
-
-    function cannotWriteFile($params) {
-      $this->controller->set('file', $params['file']);
-      $this->_outputMessage('cannot_write_file');
-    }
-
-Create the view in ``app/views/errors/cannot_write_file.ctp``
-
-::
-
-    <h2>Unable to write file</h2>
-    <p>Could not write file <?php echo $file ?> to the disk.</p>
-
-and throw the error in your controller/component
-
-::
-
-    $this->cakeError('cannotWriteFile', array('file'=>'somefilename')); 
-
-The default implementation of
-``$this->_outputMessage(<view-filename>)`` will just display the
-view in ``views/errors/<view-filename>.ctp``. If you wish to
-override this behaviour, you can redefine
-``_outputMessage($template)`` in your AppError class.
-
-.. todo::
-
-    Rewrite this, it doesn't reflect 2.0 changes.
+It is important to remember that errors captured by the configured error handler will be php
+errors, and that if you need custom error handling, you probably also want to configure
+:doc:`development/exceptions` handling as well.
