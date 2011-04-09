@@ -7,6 +7,8 @@ pluggable way to do these tasks.  AuthComponent allows you to combine
 authentication objects, and authorization objects to create flexible
 ways of identifying and checking user authorization.
 
+.. _authentication-objects:
+
 Authentication
 ==============
 
@@ -279,7 +281,7 @@ to generate digest hashes.
 
 
 Hashing passwords for digest authentication
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Because Digest authentication requires a password hashed in the format
 defined by the RFC.  In order to correctly hash a password for use with
@@ -365,6 +367,7 @@ for the duration they are still open.  Some clients can be forced to
 logout by sending a 401 status code.  Changing the authentication realm
 is another solution that works for some clients.
 
+.. _authorization-objects:
 
 Authorization
 =============
@@ -610,6 +613,42 @@ AuthComponent API
     AuthComponent is the primary interface to the built-in authorization
     and authentication mechanics in CakePHP.
 
+.. php:attr:: authenticate
+
+    Set to an array of Authentication objects you want to use when
+    logging users in.  There are several core authentication objects,
+    see the section on :ref:`authentication-objects`
+
+.. php:attr:: authorize
+
+    Set to an array of Authorization objects you want to use when
+    authorizing users on each request, see the section on 
+    :ref:`authorization-objects`
+
+.. php:attr:: ajaxLogin
+
+    The name of an optional view element to render when an Ajax request is made
+    with an invalid or expired session
+
+.. php:attr:: flash
+
+    Settings to use when Auth needs to do a flash message with :php:meth:`SessionComponent::setFlash()`.
+    Available keys are:
+
+    - ``element`` - The element to use, defaults to 'default'.
+    - ``key`` - The key to use, defaults to 'auth'
+    - ``params`` - The array of additional params to use, defaults to array()
+
+.. php:attr:: loginAction
+
+    A URL (defined as a string or array) to the controller action that handles
+    logins.  Defaults to `/users/login`
+
+.. php:attr:: authError
+
+    Error to display when user attempts to access an object or action to which they do not have
+    acccess.
+
 .. php:method:: allow($action, [$action, ...])
 
     Set one or more actions as public actions, this means that no
@@ -631,7 +670,9 @@ AuthComponent API
 
     Takes an array of user data to login with.  Allows for manual
     logging of users.  Calling user() will populate the session value
-    with the provided information.
+    with the provided information.  If no user is provided,
+    AuthComponent will try to identify a user using the current request
+    information.  See :php:meth:`AuthComponent::identify()`
 
 .. php:method:: logout()
     
@@ -650,3 +691,24 @@ AuthComponent API
     :param CakeResponse $response: The response to use, headers can be
         sent if authentication fails.
 
+    This method is used by AuthComponent to identify a user based on the
+    information contained in the current request.
+
+.. php:staticmethod:: user($key = null)
+
+    :param string $key:  The user data key you want to fetch if null,
+        all user data will be returned.  Can also be called as an instance
+        method.
+    
+    Get data concerning the currently logged in user, you can use a
+    property key to fetch specific data about the user::
+
+        <?php
+        $id = $this->Auth->user('id');
+
+    If the current user is not logged in or the key doesn't exist, null will
+    be returned.
+
+.. php:staticmethod:: password($pass)
+
+    Hash a password with the application's salt value.
