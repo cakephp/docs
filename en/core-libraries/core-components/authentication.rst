@@ -602,3 +602,51 @@ then be for the ``posts`` controller with the ``read`` permission.  This
 allows you to create permission systems that focus more on what is being
 done to resources, rather than the specific actions being visited.
 
+AuthComponent API
+=================
+
+.. php:class:: AuthComponent
+
+    AuthComponent is the primary interface to the built-in authorization
+    and authentication mechanics in CakePHP.
+
+.. php:method:: allow($action, [$action, ...])
+
+    Set one or more actions as public actions, this means that no
+    authorization checks will be performed for the specified actions.
+    The special value of ``'*'`` will mark all the current controllers
+    actions as public. Best used in your controller's beforeFilter
+    method.
+
+.. php:method:: deny($action, [$action, ...])
+
+    Toggle one more more actions previously declared as public actions,
+    as non-public methods.  These methods will now require
+    authorization.  Best used inside your controller's beforeFilter
+    method.
+
+.. php:method:: login($user)
+
+    :param array $user: Array of logged in user data.
+
+    Takes an array of user data to login with.  Allows for manual
+    logging of users.  Calling user() will populate the session value
+    with the provided information.
+
+.. php:method:: logout()
+    
+    :return: A string url to redirect the logged out user to.
+
+    Logs out the current user.
+
+.. php:method:: loggedIn()
+
+    Returns true if the current client is a logged in user, or false if
+    they are not.
+
+.. php:method:: identify($request, $response)
+
+    :param CakeRequest $request: The request to use.
+    :param CakeResponse $response: The response to use, headers can be
+        sent if authentication fails.
+
