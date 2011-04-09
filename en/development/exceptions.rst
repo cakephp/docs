@@ -1,6 +1,14 @@
 Exceptions
 ##########
 
+Exceptions can be used for a variety of uses in your application.  CakePHP uses 
+exceptions internally to indicate logic errors or misuse.  All of the exceptions 
+CakePHP raises extend :php:exc:`CakeException`, and there are class/task
+specific exceptions that extend this base class.
+
+CakePHP also provides a number of exception classes that you can use for HTTP
+errors.  See the section on :ref:`built-in-exceptions` for more information.
+
 Exception configuration
 =======================
 
@@ -260,6 +268,7 @@ and the configured loggers.
     If you are using a custom ``Exception.handler`` this setting will have
     no effect. Unless you reference it inside your implementation.
 
+. _built-in-exceptions:
 
 Built in Exceptions for CakePHP
 ===============================
@@ -292,7 +301,22 @@ exceptions for HTTP methods
 
     Used for doing a 500 Internal Server Error.
 
-You can throw these exceptions from you controllers to indicate failure states.
+You can throw these exceptions from you controllers to indicate failure states,
+or HTTP errors. An example use of the HTTP exceptions could be rendering 404
+pages for items that have not been found::
+
+    <?php 
+    function view ($id) {
+        $post = $this->Post->findById($id);
+        if (!$post) {
+            throw new NotFoundException('Could not find that post');
+        }
+        $this->set('post', $post);
+    }
+
+By using exceptions for HTTP errors, you can keep your code both clean, and give
+RESTful responses to client applications and users.
+
 In addition, the following framework layer exceptions are available, and will
 be thrown from a number of CakePHP core components:
 
