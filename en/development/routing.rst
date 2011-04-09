@@ -600,6 +600,82 @@ as a named parameter.
     Its best to avoid re-using a key for both a route element, and a named
     parameter.
 
+Named parameters also support arrays both in generation of urls, and
+parsing of urls.  The syntax works very similar to the array syntax used
+for GET parameters.  When generating urls you can use the following
+syntax::
+
+    <?php
+    $url = Router::url(array(
+      'controller' => 'posts',
+      'action' => 'index',
+      'filter' => array(
+        'published' => 1
+        'frontpage' => 1
+      )
+    ));
+
+The above would generate the url ``/posts/index/filter[published]:1/filter[frontpage]:1``. 
+The parameters are then parsed and stored in your controller's passedArgs variable
+as an array, just as you sent them to :php:meth:`Router::url`::
+
+    <?php
+    $this->passedArgs['filter'] = array(
+      'published' => 1
+      'frontpage' => 1
+    );
+
+Arrays can be deeply nested as well, allowing you even more flexibility in 
+passing arguments::
+
+    <?php
+    $url = Router::url(array(
+      'controller' => 'posts',
+      'action' => 'search',
+      'models' => array(
+        'post' => array(
+          'order' => 'asc',
+          'filter' => array(
+            'published' => 1
+          )
+        ),
+        'comment' => array(
+          'order' => 'desc',
+          'filter' => array(
+            'spam' => 0
+          )
+        ),
+      ),
+      'users' => array(1, 2, 3)
+    ));
+
+You would end up with a pretty long url like this (wrapped for easy of reading)::
+
+    posts/search
+      /models[post][order]:asc/models[post][filter][published]:1
+      /models[comment][order]:desc/models[comment][filter][spam]:0
+      /users[]:1/users[]:2/users[]:3
+
+And the resulting array that would be passed to the controller would match that
+which you passed to the router::
+
+    <?php
+    $this->passedArgs['models'] = array(
+        'post' => array(
+          'order' => 'asc',
+          'filter' => array(
+            'published' => 1
+          )
+        ),
+        'comment' => array(
+          'order' => 'desc',
+          'filter' => array(
+            'spam' => 0
+          )
+        ),
+      ),
+    );
+
 .. _controlling-named-parameters:
 
 Controlling named parameters
