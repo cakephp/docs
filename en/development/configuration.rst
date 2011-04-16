@@ -23,7 +23,7 @@ configuration should look something like this::
 
     <?php
     var $default = array(
-        'driver'      => 'mysql',
+        'datasource'  => 'Database/Mysql',
         'persistent'  => false,
         'host'        => 'localhost',
         'login'       => 'cakephpuser',
@@ -44,12 +44,10 @@ suit your needs.
 
 Key
     Value
-driver
-    The name of the database driver this configuration array is for.
-    Examples: mysql, postgres, sqlite, pear-drivername,
-    adodb-drivername, mssql, oracle, or odbc. Note that for
-    non-database sources (e.g. LDAP, Twitter), leave this blank and use
-    "datasource".
+datasource
+    The name of the datasource this configuration array is for.
+    Examples: Database/Mysql, Database/Postgres, Database/Sqlite.  
+    You can use :term:`plugin syntax` to indicate plugin datasource to use.
 persistent
     Whether or not to use a persistent connection to the database.
 host
@@ -110,15 +108,15 @@ CakePHP aware of other places to look for MVC classes:
     <?php
     App::build(array(
         'plugins' => array('/full/path/to/plugins/', '/next/full/path/to/plugins/'),
-        'models' =>  array('/full/path/to/models/', '/next/full/path/to/models/'),
-        'views' => array('/full/path/to/views/', '/next/full/path/to/views/'),
-        'controllers' => array('/full/path/to/controllers/', '/next/full/path/to/controllers/'),
-        'datasources' => array('/full/path/to/datasources/', '/next/full/path/to/datasources/'),
-        'behaviors' => array('/full/path/to/behaviors/', '/next/full/path/to/behaviors/'),
-        'components' => array('/full/path/to/components/', '/next/full/path/to/components/'),
-        'helpers' => array('/full/path/to/helpers/', '/next/full/path/to/helpers/'),
+        'Model' =>  array('/full/path/to/models/', '/next/full/path/to/models/'),
+        'View' => array('/full/path/to/views/', '/next/full/path/to/views/'),
+        'Controller' => array('/full/path/to/controllers/', '/next/full/path/to/controllers/'),
+        'Model/Datasource' => array('/full/path/to/datasources/', '/next/full/path/to/datasources/'),
+        'Model/Behavior' => array('/full/path/to/behaviors/', '/next/full/path/to/behaviors/'),
+        'Contorller/Component' => array('/full/path/to/components/', '/next/full/path/to/components/'),
+        'View/Helper' => array('/full/path/to/helpers/', '/next/full/path/to/helpers/'),
         'vendors' => array('/full/path/to/vendors/', '/next/full/path/to/vendors/'),
-        'shells' => array('/full/path/to/shells/', '/next/full/path/to/shells/'),
+        'Console/Command' => array('/full/path/to/shells/', '/next/full/path/to/shells/'),
         'locales' => array('/full/path/to/locale/', '/next/full/path/to/locale/'),
         'libs' => array('/full/path/to/libs/', '/next/full/path/to/libs/')
     ));
