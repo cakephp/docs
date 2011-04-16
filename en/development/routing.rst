@@ -271,7 +271,7 @@ argument of :php:meth:`Router::connect()` you can define which route
 elements should also be made available as passed arguments::
 
     <?php
-    // some_controller.php
+    // SomeController.php
     function view($articleId = null, $slug = null) {
         // some code here...
     }
@@ -534,7 +534,7 @@ Named parameters
 ================
 
 You can name parameters and send their values using the URL. A
-request for /posts/view/title:first/category:general would result
+request for ``/posts/view/title:first/category:general`` would result
 in a call to the view() action of the PostsController. In that
 action, you’d find the values of the title and category parameters
 inside ``$this->params['named']``.  They are also available inside

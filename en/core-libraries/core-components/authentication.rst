@@ -100,11 +100,11 @@ Creating Custom Authentication objects
 Because authentication objects are pluggable, you can create custom
 authentication objects in your application or plugins.  If for example
 you wanted to create an OpenID authentication object.  In
-``app/controller/components/auth/openid_authenticate.php`` you could put
+``app/Controller/Component/Auth/OpenidAuthenticate.php`` you could put
 the following::
 
 	<?php
-	App::import('Component', 'auth/base_authenticate');
+	App::uses('BaseAuthenticate', 'Controller/Component/Auth');
 	
 	class OpenidAuthenticate extends BaseAuthenticate {
 		public function authenticate(CakeRequest $request, CakeResponse $response) {
@@ -160,7 +160,7 @@ working with a login form could look like::
 
 The above code, will attempt to log a user in using the POST data, and
 if successful redirect the user to either the last page they were
-visiting, or ``AuthComponent::$loginRedirect``.  If the login is
+visiting, or :php:attr:`AuthComponent::$loginRedirect`.  If the login is
 unsuccessful, a flash message is set.
 
 Using Digest and Basic Authentication for logging in
@@ -448,11 +448,11 @@ Creating Custom Authorize objects
 Because authorize objects are pluggable, you can create custom authorize
 objects in your application or plugins.  If for example you wanted to
 create an LDAP authorize object.  In
-``app/controller/components/auth/ldap_authorize.php`` you could put the
+``app/Controller/Component/Auth/LdapAuthorize.php`` you could put the
 following::
 
 	<?php
-	App::import('Component', 'auth/base_authorize');
+	App::uses('BaseAuthorize', 'Controller/Component/Auth');
 	
 	class LdapAuthorize extends BaseAuthorize {
 		public function authorize($user, CakeRequest $request); {
@@ -643,6 +643,12 @@ AuthComponent API
 
     A URL (defined as a string or array) to the controller action that handles
     logins.  Defaults to `/users/login`
+
+.. php:attr:: loginRedirect
+
+    The URL (defined as a string or array) to the controller action users should be redirected to
+    after logging in.  This value will be ignored if the user has an ``Auth.redirect`` value in their
+    session.
 
 .. php:attr:: authError
 
