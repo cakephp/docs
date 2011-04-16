@@ -136,9 +136,9 @@ could look like::
     Configure::write('Exception.handler', 'AppExceptionHandler::handle');
 
     // in app/config/bootstrap.php
-    App::import('Lib', 'AppExceptionHandler');
+    App::uses('AppExceptionHandler', 'Lib');
 
-    // in app/libs/app_exception_handler.php
+    // in app/Lib/AppExceptionHandler.php
     class AppExceptionHandler {
         public static function handle($error) {
             echo 'Oh noes! ' . $error->getMessage();
@@ -162,7 +162,7 @@ application exceptions. In the method provided as the exception handler you
 could do the following::
 
     <?php
-    // in app/libs/app_error_handler.php
+    // in app/Lib/AppErrorHandler.php
     class AppErrorHandler {
         public static handleException($error) {
             if ($error instanceof MissingWidgetException) {
@@ -199,11 +199,11 @@ If you don't want to take control of the exception handling, but want to change
 how exceptions are rendered you can use 
 ``Configure::write('Exception.renderer', 'AppExceptionRenderer');`` to choose a
 class that will render exception pages.  By default :php:class`ExceptionRenderer`
-is used.  Your custom exception renderer class should be placed in ``app/libs``.
+is used.  Your custom exception renderer class should be placed in ``app/Lib``.
 In a custom exception rendering class you can provide specialized handling for 
 application specific errors::
 
-	// in app/libs/app_exception_renderer.php
+	// in app/Lib/AppExceptionRenderer.php
 	<?php
 	App::import('Core', 'ExceptionRenderer');
 	
@@ -249,7 +249,7 @@ controller you want::
 	}
 
 Alternatively, you could just override the core CakeErrorController,
-by including one in ``app/controllers``.  If you are using a custom
+by including one in ``app/Controller``.  If you are using a custom
 controller for error handling, make sure you do all the setup you need
 in your constructor, or the render method.  As those are the only methods
 that the built-in ``ErrorHandler`` class directly call.

@@ -56,9 +56,9 @@ need to be done::
 	Configure::write('Error.handler', 'AppError::handleError');
 	
 	//in app/config/bootstrap.php
-	App::import('Lib', 'AppError');
+	App::uses('AppError', 'Lib');
 	
-	//in app/libs/app_error.php
+	//in app/Lib/AppError.php
 	class AppError {
 		public static function handleError($code, $description, $file = null, $line = null, $context = null) {
 			echo 'There has been an error!';
