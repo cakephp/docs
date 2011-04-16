@@ -205,7 +205,7 @@ application specific errors::
 
 	// in app/Lib/AppExceptionRenderer.php
 	<?php
-	App::import('Core', 'ExceptionRenderer');
+	App::uses('ExceptionRenderer', 'Error');
 	
 	class AppExceptionRenderer extends ExceptionRenderer {
 		public function missingWidget($error) {
@@ -243,7 +243,7 @@ controller you want::
     <?php
 	class AppExceptionRenderer extends ExceptionRenderer {
 		protected function _getController($exception) {
-			App::import('Controller', 'SuperCustomError');
+			App::uses('SuperCustomError', 'Controller');
 			return new SuperCustomErrorController();
 		}
 	}

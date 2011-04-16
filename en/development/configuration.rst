@@ -418,7 +418,7 @@ To use a core config reader, you'll need to attach it to Configure
 using :php:meth:`Configure::config()`::
 
     <?php
-	App::import('Core', 'config/PhpReader');
+	App::uses('PhpReader', 'Configure');
 	// Read config files from app/config
 	Configure::config('default', new PhpReader());
 	
@@ -513,8 +513,8 @@ If you really like XML files, you could create a simple Xml config
 reader for you application::
 
     <?php
-	// in app/libs/config/xml_reader.php
-	App::import('Core', 'Xml');
+	// in app/Lib/Config/XmlReader.php
+	App::uses('Xml', 'Utility');
 	class XmlReader implements ConfigReaderInterface {
 		function __construct($path = CONFIGS) {
 			$this->_path = $path;
@@ -529,7 +529,7 @@ reader for you application::
 In your ``app/config/bootstrap.php`` you could attach this reader and use it::
 
     <?php
-	App::import('Libs', 'config/XmlReader');
+	App::uses('XmlReader', 'Lib/Config');
 	Configure::config('xml', new XmlReader());
 	...
 	

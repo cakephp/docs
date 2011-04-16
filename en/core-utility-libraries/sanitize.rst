@@ -1,4 +1,3 @@
-#################
 Data Sanitization
 #################
 
@@ -20,7 +19,7 @@ All you need to do is include the Sanitize core library (e.g.
 before the controller class definition)::
 
     <?php
-    App::import('Sanitize');
+    App::uses('Sanitize', 'Utility');
     
     class MyController extends AppController {
         ...
