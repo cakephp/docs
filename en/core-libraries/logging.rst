@@ -24,10 +24,10 @@ Creating and configuring log streams
 
 Log stream handlers can be part of your application, or part of
 plugins. If for example you had a database logger called
-``DataBaseLogger``. As part of your application it would be placed
-in ``app/libs/log/data_base_logger.php``. As part of a plugin it
+``DatabaseLogger``. As part of your application it would be placed
+in ``app/Lib/Log/DatabaseLogger.php``. As part of a plugin it
 would be placed in
-``app/plugins/my_plugin/libs/log/data_base_logger.php``. When
+``app/plugins/logging_pack/Lib/Log/DatabaseLogger.php``. When
 configured ``CakeLog`` will attempt to load Configuring log streams
 is done by calling ``CakeLog::config()``. Configuring our
 DataBaseLogger would look like::
@@ -35,14 +35,14 @@ DataBaseLogger would look like::
     <?php
     //for app/libs
     CakeLog::config('otherFile', array(
-        'engine' => 'DataBaseLogger',
+        'engine' => 'DatabaseLogger',
         'model' => 'LogEntry',
         ...
     ));
     
     //for plugin called LoggingPack
     CakeLog::config('otherFile', array(
-        'engine' => 'LoggingPack.DataBaseLogger',
+        'engine' => 'LoggingPack.DatabaseLogger',
         'model' => 'LogEntry',
         ...
     ));
@@ -52,7 +52,9 @@ locate and load the log handler. All of the other configuration
 properties are passed to the log stream's constructor as an array.::
 
     <?php
-    class DataBaseLogger {
+    App::uses('CakeLogInterface', 'Log');
+
+    class DatabaseLogger implements CakeLogInterface {
         function __construct($options = array()) {
             //...
         }
@@ -71,26 +73,22 @@ This is because paths are not yet bootstrapped. Configuring of
 loggers should be done in ``app/config/bootstrap.php`` to ensure
 classes are properly loaded.
 
-Error logging
-=============
+Error and Exception logging
+===========================
 
-Errors are now logged when ``Configure::write('debug', 0);``. You
-can use ``Configure::write('log', $val)``, to control which errors
-are logged when debug is off. By default all errors are logged.::
-
-    Configure::write('log', E_WARNING);
-
-Would log only warning and fatal errors. Setting
-``Configure::write('log', false);`` will disable error logging when
-debug = 0.
+Errors and Exceptions can also be logged.  By configuring the 
+co-responding values in your core.php file.  Set ``Error.log`` to 
+true to log errors, and ``Exception.log`` to true to log 
+uncaught exceptions. See :doc:`/development/configuration` for more
+information.
 
 Interacting with log streams
 ============================
 
 You can introspect the configured streams with
-``CakeLog::configured()``. The return of ``configured()`` is an
+:php:meth:`CakeLog::configured()`. The return of ``configured()`` is an
 array of all the currently configured streams. You can remove
-streams using ``CakeLog::drop($key)``. Once a log stream has been
+streams using :php:meth:`CakeLog::drop()`. Once a log stream has been
 dropped it will no longer receive messages.
 
 
@@ -99,8 +97,7 @@ Using the default FileLog class
 
 While CakeLog can be configured to write to a number of user
 configured logging adapters, it also comes with a default logging
-configuration. This configuration is identical to how CakeLog
-behaved in CakePHP 1.2. The default logging configuration will be
+configuration.  The default logging configuration will be
 used any time there are *no other* logging adapters configured.
 Once a logging adapter has been configured you will need to also
 configure FileLog if you want file logging to continue.
@@ -133,7 +130,7 @@ The configured directory must be writable by the web server user in
 order for logging to work correctly.
 
 You can configure additional/alternate FileLog locations using
-``CakeLog::config()``. FileLog accepts a ``path`` which allows for
+:php:meth:`CakeLog::config()`. FileLog accepts a ``path`` which allows for
 custom paths to be used::
 
     <?php
@@ -148,7 +145,7 @@ Writing to logs
 ===============
 
 Writing to the log files can be done in 2 different ways. The first
-is to use the static ``CakeLog::write()`` method::
+is to use the static :php:meth:`CakeLog::write()` method::
 
     CakeLog::write('debug', 'Something did not work');
 
@@ -161,8 +158,43 @@ CakeLog::write()::
     $this->log("Something did not work!", 'debug');
 
 All configured log streams are written to sequentially each time
-``CakeLog::write()`` is called. You do not need to configure a
+:php:meth:`CakeLog::write()` is called. You do not need to configure a
 stream in order to use logging. If no streams are configured when
 the log is written to, a ``default`` stream using the core
 ``FileLog`` class will be configured to output into
-``app/tmp/logs/`` just as CakeLog did in CakePHP 1.2
+``app/tmp/logs/`` just as CakeLog did in previous versions.
+
+CakeLog API
+===========
+
+.. php:class:: CakeLog
+
+    A simple class for writing to logs.
+
+.. php:staticmethod:: config($name, $config)
+
+    :param string $name: Name for the logger being connected, used
+        to drop a logger later on.
+    :param array $config: Array of configuration information and 
+        constructor arguments for the logger.
+
+    Connect a new logger to CakeLog.  Each connected logger
+    receives all log messages each time a log message is written.
+
+.. php:staticmethod:: configured()
+
+    :returns: An array of configured loggers.
+
+    Get the names of the configured loggers.
+
+.. php:staticmethod:: drop($name)
+
+    :param string $name: Name of the logger you wish to no longer recieve
+        messages.
+
+.. php:staticmethod:: write($log, $message)
+
+    Write a message into all the configured loggers.
+    $log indicates the type of log message being created.
+    $message is the message of the log entry being written to.
+
