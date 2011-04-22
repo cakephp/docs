@@ -58,6 +58,10 @@ properties are passed to the log stream's constructor as an array.::
         function __construct($options = array()) {
             //...
         }
+
+        function write($type, $message) {
+            // write to the database.
+        }
     }
 
 CakePHP has no requirements for Log streams other than that they
