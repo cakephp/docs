@@ -176,6 +176,29 @@ That is an exercise you can do though.
 Using Cache to store counters
 =============================
 
+Counters for various things are easily stored in a cache.  For example a simple
+countdown for remaining 'slots' in a contest could be store in Cache.  The
+Cache class exposes atomic ways to increment/decrement counter values in an easy
+way.  Atomic operations are important for these values as it reduces the risk of
+contention, and ability for two users to simultaneously lower the value by one
+resulting in an incorrect value.
+
+After setting an integer value you can manipulate it using 
+:php:meth:`Cache::increment()` and :php:meth:`Cache::decrement()`::
+
+    <?php
+    Cache::write('initial_count', 10);
+
+    // Later on
+    Cache::decrement('initial_count');
+
+    //or 
+    Cache::increment('initial_count');
+
+.. note::
+
+    Incrementing and decrementing do not work with FileEngine. You should use
+    APC or Memcache instead.
 
 
 Cache API
