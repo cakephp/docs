@@ -15,8 +15,8 @@ model is handled by the ProductsController, and so on.
 Your application's controllers are classes that extend the CakePHP
 AppController class, which in turn extends a core Controller class,
 which is part of CakePHP. The AppController class can
-be defined in /app/app\_controller.php and it should contain
-methods that are shared between all of your application’s
+be defined in ``/app/Controller/AppController.php`` and it should 
+contain methods that are shared between all of your application’s
 controllers.
 
 Controllers can include any number of methods which are usually
@@ -29,57 +29,21 @@ a URL to a controller’s action (refer to
 explanation on how controller actions and parameters are mapped
 from the URL).
 
-Controller actions
-==================
-
-Returning to our online bakery example, our RecipesController might
-contain the ``view()``, ``share()``, and ``search()`` actions. The
-controller would be found in
-/app/controllers/recipes\_controller.php and contain:
-
-::
-
-        <?php
-        
-        # /app/controllers/recipes_controller.php
-    
-        class RecipesController extends AppController {
-            function view($id)     {
-                //action logic goes here..
-            }
-    
-            function share($customer_id, $recipe_id) {
-                //action logic goes here..
-            }
-    
-            function search($query) {
-                //action logic goes here..
-            }
-        }
-    
-        ?>
-
-In order for you to use a controller effectively in your own
-application, we’ll cover some of the core attributes and methods
-provided by CakePHP’s controllers.
-
 .. _app-controller:
 
 The App Controller
-------------------------
+========================
 
 As stated in the introduction, the AppController class is the
 parent class to all of your application's controllers.
 AppController itself extends the Controller class included in the
 CakePHP core library. As such, AppController is defined in
-/app/app\_controller.php like so:
-
-::
+/app/Controller/AppController.php like so::
 
     <?php
     class AppController extends Controller {
     }
-    ?>
+    
 
 Controller attributes and methods created in your AppController
 will be available to all of your application's controllers. It is
@@ -108,19 +72,49 @@ Remember to add the default Html and Form helpers, if you define
 var $helpers in your AppController
 
 Please also remember to call AppController's callbacks within child
-controller callbacks for best results:
+controller callbacks for best results::
 
-::
-
+    <?php
     function beforeFilter(){
         parent::beforeFilter();
     }
+ 
+Controller actions
+==================
 
+Returning to our online bakery example, our RecipesController might
+contain the ``view()``, ``share()``, and ``search()`` actions. The
+controller would be found in
+/app/Controller/RecipesController.php and contain::
+
+        <?php
+        
+        # /app/controllers/recipes_controller.php
+    
+        class RecipesController extends AppController {
+            function view($id)     {
+                //action logic goes here..
+            }
+    
+            function share($customer_id, $recipe_id) {
+                //action logic goes here..
+            }
+    
+            function search($query) {
+                //action logic goes here..
+            }
+        }
+    
+        ?>
+
+In order for you to use a controller effectively in your own
+application, we’ll cover some of the core attributes and methods
+provided by CakePHP’s controllers.
 
 .. _controller-methods:
 
 Controller Methods
-------------------
+==================
 
 .. php:class:: Controller
 
@@ -129,7 +123,7 @@ visit the CakePHP API. Check out
 `http://api13.cakephp.org/class/controller <http://api13.cakephp.org/class/controller>`_.
 
 Interacting with Views
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 Controllers interact with the view in a number of ways. First they
 are able to pass data to the views, using ``set()``. You can also
@@ -140,9 +134,7 @@ rendered from the controller.
 
     The ``set()`` method is the main way to send data from your
     controller to your view. Once you've used ``set()``, the variable
-    can be accessed in your view.
-
-    ::
+    can be accessed in your view::
 
         <?php
 
@@ -179,7 +171,7 @@ rendered from the controller.
 
         $this->set($data);  
 
-        ?>
+        
 
     The attribute ``$pageTitle`` no longer exists, use ``set()`` to set
     the title::
@@ -199,10 +191,9 @@ rendered from the controller.
 
     The default view file used by render is determined by convention.
     If the ``search()`` action of the RecipesController is requested,
-    the view file in /app/views/recipes/search.ctp will be rendered.
+    the view file in /app/View/recipes/search.ctp will be rendered::
 
-    ::
-
+        <?php
         class RecipesController extends AppController {
         ...
             function search() {
@@ -218,41 +209,38 @@ rendered from the controller.
     name in the controller using ``$action``.
 
     If ``$action`` starts with '/' it is assumed to be a view or
-    element file relative to the ``/app/views`` folder. This allows
+    element file relative to the ``/app/View`` folder. This allows
     direct rendering of elements, very useful in ajax calls.
     ::
 
-        // Render the element in /views/elements/ajaxreturn.ctp
+        <?php
+        // Render the element in /View/elements/ajaxreturn.ctp
         $this->render('/elements/ajaxreturn');
 
     You can also specify an alternate view or element file using the
-    third parameter, ``$file``. When using ``$file``, don't forget to
-    utilize a few of CakePHP’s global constants (such as ``VIEWS``).
-
-    The ``$layout`` parameter allows you to specify the layout the view
-    is rendered in.
+    third parameter, ``$file``. The ``$layout`` parameter allows you to specify
+    the layout the view is rendered in.
 
 Rendering a specific view
-^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In your controller you may want to render a different view than
 what would conventionally be done. You can do this by calling
 ``render()`` directly. Once you have called ``render()`` CakePHP
-will not try to re-render the view.
+will not try to re-render the view::
 
-::
-
+    <?php
     class PostsController extends AppController {
         function my_action() {
             $this->render('custom_file');
         }
     }
 
-This would render ``app/views/posts/custom_file.ctp`` instead of
-``app/views/posts/my_action.ctp``
+This would render ``app/View/posts/custom_file.ctp`` instead of
+``app/View/posts/my_action.ctp``
 
 Flow Control
-~~~~~~~~~~~~
+------------
 
 .. php:method:: redirect(mixed $url, integer $status, boolean $exit)
 
@@ -315,48 +303,48 @@ Flow Control
     setFlash() method.
 
 Callbacks
-~~~~~~~~~
+---------
 
 CakePHP controllers come fitted with callbacks you can use to
 insert logic just before or after controller actions are rendered.
 
-``beforeFilter()``
+.. php:method:: beforeFilter()
 
-This function is executed before every action in the controller.
-It's a handy place to check for an active session or inspect user
-permissions.
+    This function is executed before every action in the controller.
+    It's a handy place to check for an active session or inspect user
+    permissions.
 
-``beforeRender()``
+.. php:method:: beforeRender()
 
-Called after controller action logic, but before the view is
-rendered. This callback is not used often, but may be needed if you
-are calling render() manually before the end of a given action.
+    Called after controller action logic, but before the view is
+    rendered. This callback is not used often, but may be needed if you
+    are calling render() manually before the end of a given action.
 
-``afterFilter()``
+.. php:method:: afterFilter()
 
-Called after every controller action, and after rendering is
-complete. This is the last controller method to run.
+    Called after every controller action, and after rendering is
+    complete. This is the last controller method to run.
 
-CakePHP also supports callbacks related to scaffolding.
+    CakePHP also supports callbacks related to scaffolding.
 
-``_beforeScaffold($method)``
+.. php:method:: _beforeScaffold($method)
 
-$method name of method called example index, edit, etc.
+    $method name of method called example index, edit, etc.
 
-``_afterScaffoldSave($method)``
+.. php:method:: _afterScaffoldSave($method)
 
-$method name of method called either edit or update.
+    $method name of method called either edit or update.
 
-``_afterScaffoldSaveError($method)``
+.. php:method:: _afterScaffoldSaveError($method)
 
-$method name of method called either edit or update.
+    $method name of method called either edit or update.
 
-``_scaffoldError($method)``
+.. php:method:: _scaffoldError($method)
 
-$method name of method called example index, edit, etc.
+    $method name of method called example index, edit, etc.
 
 Other Useful Methods
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 .. php:method:: constructClasses
 
@@ -508,7 +496,7 @@ Other Useful Methods
     return the data::
 
         <?php
-        // controllers/comments_controller.php
+        // Controller/CommentsController.php
         class CommentsController extends AppController {
             function latest() {
                 return $this->Comment->find('all', array('order' => 'Comment.created DESC', 'limit' => 10));
@@ -518,7 +506,7 @@ Other Useful Methods
     If we now create a simple element to call that function::
 
         <?php
-        // views/elements/latest_comments.ctp
+        // View/elements/latest_comments.ctp
 
         $comments = $this->requestAction('/comments/latest');
         foreach($comments as $comment) {
@@ -602,7 +590,7 @@ Other Useful Methods
 
 
 Controller Attributes
----------------------
+=====================
 
 For a complete list of controller attributes and their descriptions
 visit the CakePHP API. Check out
@@ -627,7 +615,7 @@ visit the CakePHP API. Check out
         
 
 $components, $helpers and $uses
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
 
 The next most often used controller attributes tell CakePHP what
 helpers, components, and models you’ll be using in conjunction with
@@ -680,7 +668,7 @@ without a need for a corresponding Model file.
 
 
 Other Attributes
-~~~~~~~~~~~~~~~~
+----------------
 
 While you can check out the details for all controller attributes
 in the API, there are other controller attributes that merit their
@@ -707,6 +695,8 @@ This can increase performance in many cases.
 	This chapter should be less about the controller api and more about examples, the controller attributes section is overwhelming
 	and difficult to understand at first. The chapter should start with some example controllers and what they do.
 
+More on controllers
+===================
 
 .. toctree::
 

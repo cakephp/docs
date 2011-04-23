@@ -1,154 +1,321 @@
 Request and Response objects
 ############################
 
-Request properties
+New in CakePHP 2.0 are request and response objects.  In previous versions these
+objects were represented through arrays, and the related methods were spread 
+across :php:class:`RequestHandlerComponent`, :php:class:`Router`, 
+:php:class:`Dispatcher` and :php:class:`Controller`.  There was no authoritative 
+object on what information the request contained.  For 2.0,
+:php:class:`CakeRequest` and :php:class:`CakeResponse` are used for this
+purpose.
+
+.. index:: $this->request
+
+CakeRequest
+===========
+
+:php:class:`CakeRequest` is the default request object used in CakePHP.  It centralizes
+a number of features for interogatting and interacting with request data.  
+On each request one CakeRequest is created and then passed by reference to the various 
+layers of an application that use request data.  By default ``CakeRequest`` is assigned to
+``$this->request``, and is available in Controller, Views and Helpers.  You can
+also access it in Components by using the controller reference. Some of the duties 
+``CakeRequest`` performs include:
+
+* Process the GET, POST, and FILES arrays into the data structures you are
+  familiar with.
+* Provide environment introspection pertaining to the request.  Things like the
+  headers sent, the client's IP address, and the subdomain/domain information
+  about the application the server is running on.
+* Provide access to request parameters both as array indices and object
+  properties.
+
+Accessing request parameters
+============================
+
+CakeRequest exposes several interfaces for accessing request parameters.  The first
+is as array indexes, the second is through ``$this->request->params``, and the
+third is as object properties::
+
+    <?php
+    $this->request['controller'];
+    $this->request->controller;
+    $this->request->params['controller']
+
+All of the above will both access the same value. Multiple ways of accessing the
+parameters was done to ease migration for existing applications. All 
+:ref:`route-elements` are accessed through this interface.
+
+In addition to :ref:`route-elements` you also often need access to 
+:ref:`passed-arguments` and :ref:`named-parameters`.  These are both available
+on the request object as well::
+
+    <?php
+    // Passed arguments
+    $this->request['pass'];
+    $this->request->pass;
+    $this->request->params['pass'];
+
+    // named parameters
+    $this->request['named'];
+    $this->request->named;
+    $this->request->params['named'];
+
+Will all provide you access to the passed arguments and named parameters. There
+are several important/useful parameters that CakePHP uses internally, these 
+are also all found in the request parameters:
+
+* ``plugin`` The plugin handling the request, will be null for no plugin.
+* ``controller`` The controller handling the current request.
+* ``action`` The action handling the current request.
+* ``prefix`` The prefix for the current action.  See :ref:`prefix-routing` for
+  more information.
+* ``form`` The raw POST data including POST data that did not have the ``data``
+  prefix.
+* ``bare`` Present when the request came from requestAction() and included the
+  bare option.  Bare requests do not have layouts rendered.
+* ``requested`` Present and set to true when the action came from requestAction.
+
+
+Accessing Querystring parameters
+================================
+
+Querystring parameters can be read from using :php:attr:`CakeRequest::$query`::
+
+    <?php
+    // url is /posts/index?page=1&sort=title
+    $this->request->query['page'];
+
+    // You can also access it via array access
+    $this->request['url']['page'];
+
+Accessing POST data
+===================
+
+
+Accessing path information
+==========================
+
+CakeRequest also provides useful information about the paths in your
+application.  :php:attr:`CakeRequest::$base` and
+:php:attr:`CakeRequest::$webroot` are useful for generating urls, and
+determining whether or not your application is in a subdirectory.
+
+.. _check-the-request:
+
+Inspeciting the request
+=======================
+
+Detecting various request conditions used to require using
+:php:class:`RequestHandlerComponent`. These methods have been moved to
+``CakeRequest``, and offer a new interface alongside a more backwards compatible
+usage::
+
+    <?php
+    $this->request->is('post');
+    $this->request->isPost();
+
+Both method calls will return the same value.  For the time being the methods
+are still available on RequestHandler, but are deprecated and still might be
+removed before the final release.  You can also easily extend the request
+detectors that are available, by using :php:meth:`CakeRequest::addDetector()` 
+to create new kinds of detectors.  There are four different types of detectors 
+that you can create:
+
+* Environment value comparison - An environment value comparison, compares a
+  value fetched from :php:func:`env()` to a known value the environment value is 
+  equality checked against the provided value.
+* Pattern value comparison - Pattern value comparison allows you to compare a
+  value fetched from :php:func:`env()` to a regular expression.
+* Option based comparison -  Option based comparisons use a list of options to
+  create a regular expression.  Subsequent calls to add an already defined
+  options detector will merge the options.
+* Callback detectors - Callback detectors allow you to provide a 'callback' type
+  to handle the check.  The callback will receive the request object as its only
+  parameter.
+
+Some examples would be::
+
+    <?php
+    // Add a environment detector.
+    $this->request->addDetector('post', array('env' => 'REQUEST_METHOD', 'value' => 'POST'));
+    
+    // Add a pattern value detector.
+    $this->request->addDetector('iphone', array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i'));
+    
+    // Add an option detector
+    $this->request->addDetector('internalIp', array(
+        'env' => 'CLIENT_IP', 
+        'options' => array('192.168.0.101, '192.168.0.100')
+    ));
+    
+    // Add a callback detector. Can either be an anonymous function or a regular callable.
+    $this->request->addDetector('awesome', function ($request) {
+        return isset($request->awesome);
+    });
+
+``CakeRequest`` also includes methods like :php:meth:`CakeRequest::domain()`,
+:php:meth:`CakeRequest::subdomains()` and :php:meth:`CakeRequest::host()` to
+help applications with subdomains, have a slightly easier life.
+
+There are several built-in detectors that you can use:
+
+* ``is('get'l)`` Check to see if the current request is a GET.
+* ``is('put')`` Check to see if the current request is a PUT.
+* ``is('post')`` Check to see if the current request is a POST.
+* ``is('delete')`` Check to see if the current request is a DELETE.
+* ``is('head')`` Check to see if the current request is HEAD.
+* ``is('options')`` Check to see if the current request is OPTIONS.
+* ``is('ajax')`` Check to see of the current request came with 
+  X-Requested-with = XmlHttpRequest.
+* ``is('ssl')`` Check to see if the request is via SSL
+* ``is('flash')`` Check to see if the request has a User-Agent of Flash
+* ``is('mobile')`` Check to see if the request came from a common list
+  of mobile agents.
+
+
+CakeRequest and RequestHandlerComponent
+=======================================
+
+Since many of the features ``CakeRequest`` offers used to be the realm of
+:php:class:`RequestHandlerComponent` some rethinking was required to figure out how it
+still fits into the picture.  For 2.0, :php:class:`RequestHandlerComponent` 
+acts as a sugar daddy.  Providing a layer of sugar on top of the utility 
+`CakeRequest` affords. Sugar like switching layout and views based on content 
+types or ajax is the domain of :php:class:`RequestHandlerComponent`.  
+This separation of utility and sugar between the two classes lets you 
+more easily pick and choose what you want and what you need.
+
+Interacting with other aspects of the request
+=============================================
+
+You can use `CakeRequest` to introspect a variety of things about the request.
+Beyond the detectors, you can also find out other information from various
+properties and methods.
+
+* ``$this->request->webroot`` contains the webroot directory.
+* ``$this->request->base`` contains the base path.
+* ``$this->request->here`` contains the request uri for the current request.
+* ``$this->request->query`` contains the query string parameters.
+
+
+CakeRequest API
+===============
+
+.. php:class:: CakeRequest
+
+    CakeRequest encapsulates request paramter handling, and introspection.
+
+.. php:method:: domain()
+
+    Returns the domain name your application is running on.
+
+.. php:method:: subdomains() 
+
+    Returns the subdomains your application is running on as an array.
+
+.. php:method:: host() 
+
+    Returns the host your application is on.
+
+.. php:method:: method() 
+
+    Returns the HTTP method the request was made with.
+
+.. php:method:: referer() 
+
+    Returns the referring address for the request.
+
+.. php:method:: clientIp() 
+
+    Returns the current visitors IP address.
+
+.. php:method header()
+
+    Allows you to access any of the ``HTTP_*`` headers that were used 
+    for the request::
+
+        <?php
+        $this->request->header('User-Agent');
+
+    Would return the user agent used for the request.
+
+.. php:method:: data($key) 
+
+    Provides dot notation access to request data.  Allows for reading and
+    modification of request data, calls can be chained together as well::
+
+        <?php
+        // Modify some request data, so you can prepopulate some form fields.
+        $this->request->data('Post.title', 'New post')
+            ->data('Comment.1.author', 'Mark');
+            
+        // You can also read out data.
+        $value = $this->request->data('Post.title');
+
+.. php:method:: is($check)
+
+    Check whether or not a Request matches a certain criteria.  Uses
+    the built-in detection rules as well as any additional rules defined
+    with :php:meth:`CakeRequest::addDetector()`.
+
+.. php:method:: addDetector($name, $callback)
+
+    Add a detector to be used with is().  See :ref:`check-the-request`
+    for more information.
+
+.. php:method:: accepts($type)
+
+    Find out which content types the client accepts or check if they accept a 
+    particular type of content.
+
+    Get all types::
+
+        <?php 
+        $this->request->accepts();
+ 
+    Check for a single type::
+
+        <?php
+        $this->request->accepts('json');
+
+.. php:staticmethod:: acceptLanguage($language)
+
+    Get either all the languages accepted by the client,
+    or check if a specific language is accepted.
+
+    Get the list of accepted languages::
+
+        <?php
+        CakeRequest::acceptLanguage(); 
+
+    Check if a specific language is accepted::
+
+        <?php
+        CakeRequest::acceptLanguage('es-es'); 
+
+.. php:attr:: data
+
+    An array of POST data. You can use :php:meth:`CakeRequest::data()`
+    to read this property in a way that supresses notice errors.
+
+.. php:attr:: query
+
+    An array of query string parameters.
 
 .. php:attr:: params
 
-Controller parameters are available at ``$this->params`` in your
-CakePHP controller. This variable is used to provide access to
-information about the current request. The most common usage of
-``$this->params`` is to get access to information that has been
-handed to the controller via POST or GET operations.
+    An array of route elements and request parameters.
 
-form
-^^^^
+.. php:attr:: here
 
-``$this->params['form']``
+.. php:attr:: base
 
-Any POST data from any form is stored here, including information
-also found in ``$_FILES``.
+    The base path to the application, usually ``/`` unless your 
+    application is in a subdirectory.
 
-admin
-^^^^^
+.. php:attr:: webroot
 
-``$this->params['admin']``
-
-Is set to 1 if the current action was invoked via admin routing.
-
-bare
-^^^^
-
-``$this->params['bare']``
-
-Stores 1 if the current layout is empty, 0 if not.
-
-isAjax
-^^^^^^
-
-``$this->params['isAjax']``
-
-Stores 1 if the current request is an ajax call, 0 if not. This
-variable is only set if the RequestHandler Component is being used
-in the controller.
-
-controller
-^^^^^^^^^^
-
-``$this->params['controller']``
-
-Stores the name of the current controller handling the request. For
-example, if the URL /posts/view/1 was requested,
-``$this->params['controller']`` would equal "posts".
-
-action
-^^^^^^
-
-``$this->params['action']``
-
-Stores the name of the current action handling the request. For
-example, if the URL /posts/view/1 was requested,
-``$this->params['action']`` would equal "view".
-
-pass
-^^^^
-
-``$this->params['pass']``
-
-Returns an array (numerically indexed) of URL parameters after the
-Action.
-
-::
-
-    // URL: /posts/view/12/print/narrow
-
-    Array
-    (
-        [0] => 12
-        [1] => print
-        [2] => narrow
-    )
-
-url
-^^^
-
-``$this->params['url']``
-
-Stores the current URL requested, along with key-value pairs of get
-variables. For example, if the URL /posts/view/?var1=3&var2=4 was
-called, ``$this->params['url']`` would contain:
-
-::
-
-    [url] => Array
-    (
-        [url] => posts/view
-        [var1] => 3
-        [var2] => 4
-    )
-
-data
-^^^^
-
-``$this->data``
-
-Used to handle POST data sent from the FormHelper forms to the
-controller.
-
-::
-
-    // The FormHelper is used to create a form element:
-    $form->text('User.first_name');
-
-Which when rendered, looks something like:
-
-::
+    The current webroot.
 
 
-    <input name="data[User][first_name]" value="" type="text" />
-
-When the form is submitted to the controller via POST, the data
-shows up in ``this->data``
-
-::
-
-
-    //The submitted first name can be found here:
-    $this->data['User']['first_name'];
-
-prefix
-^^^^^^
-
-``$this->params['prefix']``
-
-Set to the routing prefix. For example, this attribute would
-contain the string "admin" during a request to
-/admin/posts/someaction.
-
-named
-^^^^^
-
-``$this->params['named']``
-
-Stores any named parameters in the url query string in the form
-/key:value/. For example, if the URL /posts/view/var1:3/var2:4 was
-requested, ``$this->params['named']`` would be an array
-containing:
-
-::
-
-    [named] => Array
-    (
-        [var1] => 3
-        [var2] => 4
-    )

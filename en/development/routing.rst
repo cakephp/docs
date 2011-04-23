@@ -530,6 +530,8 @@ Since ``5`` has a numeric key, it is treated as a passed argument.
 
 .. index:: named parameters
 
+.. _named-parameters:
+
 Named parameters
 ================
 
