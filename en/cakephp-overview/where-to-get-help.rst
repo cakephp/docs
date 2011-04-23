@@ -13,7 +13,7 @@ opportunities, and downloads.
 The Cookbook
 ============
 
-`http://book.cakephp.org </>`_
+`http://book.cakephp.org <http://book.cakephp.org>`_
 
 This manual should probably be the first place you go to get
 answers. As with many other open source projects, we get new folks
@@ -60,14 +60,10 @@ The Test Cases
 
 If you ever feel the information provided in the API is not
 sufficient, check out the code of the test cases provided with
-CakePHP 1.3. They can serve as practical examples for function and
-data member usage for a class. To get the core test cases you need
-to download or checkout 1.3 branch from a git repository. The test
-cases will be located under
+CakePHP. They can serve as practical examples for function and
+data member usage for a class.::
 
-::
-
-    cake/tests/cases
+    lib/Cake/tests/Case
 
 The IRC channel
 ===============

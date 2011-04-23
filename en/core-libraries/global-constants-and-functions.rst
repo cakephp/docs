@@ -22,13 +22,16 @@ convenience wrappers for long-named PHP functions, but some of them
 useful functions. Chances are if you're constantly wanting a
 function to accomplish an oft-used task, it's here.
 
-.. php:function:: \_\_(string $string_id, boolean $return =  false)
+.. php:function:: \_\_(string $string_id, [$formatArgs])
 
     This function handles localization in CakePHP applications. The
-    ``$string_id`` identifies the ID for a translation, and the second
-    parameter allows you to have the function automatically echo the
-    string (the default behavior), or return it for further processing
-    (pass a boolean true to enable this behavior).
+    ``$string_id`` identifies the ID for a translation.  Strings
+    used for translations are treated as format strings for 
+    ``sprintf()``.  You can supply additional arguments to replace
+    placeholders in your string::
+
+        <?php
+        __('You have %s unread messages', $number);
 
     .. note::
 
@@ -93,12 +96,6 @@ function to accomplish an oft-used task, it's here.
     Recursively strips slashes from the supplied ``$value``. Returns
     the modified array.
 
-.. php:function:: uses(string $lib1, $lib2, $lib3...)
-
-    Used to load CakePHP's core libraries (found in cake/libs/). Supply
-    the name of the library's file name without the '.php' extension.
-
-    This has been Deprecated and will be removed in 2.0 version.
 
 
 Core Definition Constants
