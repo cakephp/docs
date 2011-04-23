@@ -24,6 +24,7 @@ body {
     padding: 0;
 }
 
+
 div.document {
     background-image: url('sidebar-background.jpg');
 }
@@ -41,6 +42,8 @@ div.body {
     background-color: #ffffff;
     color: #000000;
     padding: 0 20px 30px 20px;
+    position: relative;
+    z-index: 0;
 }
 
 div.footer {
@@ -181,9 +184,40 @@ div.body p, div.body dd, div.body li {
 }
 
 /* Admonitions */
+div.admonition {
+	position: relative;
+	margin-bottom: 20px;
+}
+div.admonition:before,
+div.admonition:after {
+	content: '';
+	position: absolute;
+	z-index: 0;
+	width: 45%;
+	top: 80%;
+	bottom: 10px;
+	left: 10px;
+	-webkit-box-shadow: 0px 10px 10px #666;
+	-moz-box-shadow: 0px 10px 10px #666;
+	box-shadow: 0px 10px 10px #666;
+	-webkit-transform: rotate(-2deg);
+	-moz-transform: rotate(-2deg);
+	-o-transform: rotate(-2deg);
+	max-width: 400px;
+	z-index: -1
+}
+div.admonition:after {
+	-webkit-transform: rotate(2deg);
+	-moz-transform: rotate(2deg);
+	-o-transform: rotate(2deg);
+	right: 10px;
+	left: auto;
+}
+
 div.admonition p.admonition-title + p {
     display: inline;
 }
+
 div.admonition p {
     margin-bottom: 5px;
 }
@@ -220,12 +254,15 @@ div.warning {
 	border-left: 0;
     border-right: 0;
 }
+
 p.admonition-title {
-    display: inline;
+	display: inline;
 }
+
 p.admonition-title:after {
     content: ":";
 }
+
 
 pre {
     padding: 5px;
