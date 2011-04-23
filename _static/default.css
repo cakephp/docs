@@ -184,38 +184,30 @@ div.body p, div.body dd, div.body li {
 div.admonition p.admonition-title + p {
     display: inline;
 }
-
 div.admonition p {
     margin-bottom: 5px;
 }
-
 div.admonition pre {
     margin-bottom: 5px;
 }
-
 div.admonition ul, div.admonition ol {
     margin-bottom: 5px;
 }
-
 div.tip {
 	background: #cde9f9;
 	border: 1px solid #4da0cc;
 }
-
 div.note {
     background-color: #ffffbb;
     border: 1px solid #cccc66;
 }
-
 div.seealso {
     background-color: #ffc;
     border: 1px solid #cccc66;
 }
-
 div.topic {
     background-color: #eee;
 }
-
 div.warning {
     background-color: #ffeeee;
     border: 1px solid #990000;
@@ -228,11 +220,9 @@ div.warning {
 	border-left: 0;
     border-right: 0;
 }
-
 p.admonition-title {
     display: inline;
 }
-
 p.admonition-title:after {
     content: ":";
 }
@@ -246,13 +236,23 @@ pre {
     border-left: none;
     border-right: none;
 }
+pre::-webkit-scrollbar {
+	height: 10px;
+}
+pre::-webkit-scrollbar-track-piece {
+	background: #ddd;
+}
+pre::-webkit-scrollbar-thumb:horizontal {
+	background: #c0c0c0;
+	border-radius: 5px
+}
+
 
 tt {
-	background: #f9f9f9;
+	background: #f0f0f0;
     padding: 0 1px 0 1px;
     font-family: monospace;
 	font-size: 110%;
-	border-bottom: 1px solid #aabdd0;
 }
 dl tt {
 	border-bottom: none;
@@ -268,11 +268,11 @@ table.docutils th {
 }
 
 .warning tt {
-    background: #efc2c2;
+    background: #efd2d2;
 }
 
 .note tt {
-    background: #d6d6d6;
+    background: #eeee99;
 }
 
 .viewcode-back {
