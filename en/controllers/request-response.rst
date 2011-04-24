@@ -12,7 +12,7 @@ purpose.
 .. index:: $this->request
 
 CakeRequest
-===========
+###########
 
 :php:class:`CakeRequest` is the default request object used in CakePHP.  It centralizes
 a number of features for interogatting and interacting with request data.  
@@ -318,4 +318,211 @@ CakeRequest API
 
     The current webroot.
 
+
+CakeResponse
+############
+
+:php:class:`CakeResponse` is the default response class in CakePHP.  It 
+encapsulates a number of features and functionality for generating HTTP 
+responses in your application. It also assists in testing, as it can be 
+mocked/stubbed allowing you to inspect headers that will be sent.  
+Like :php:class:`CakeRequest`, :php:class:`CakeResponse` consolidates a number
+of methods previously found on :php:class:`Controller`,
+:php:class:`RequestHandlerComponent` and :php:class:`Dispatcher`.  The old
+methods are deprecated in favour of using :php:class:`CakeResponse`.
+
+``CakeResponse`` provides an interface to wrap the common response related 
+tasks such as:
+
+* Sending headers for redirects.
+* Sending content type headers.
+* Sending any header.
+* Sending the response body.
+
+Changing the response class
+===========================
+
+CakePHP uses ``CakeResponse`` by default. In ``CakeResponse`` is a flexible and 
+transparent to use class.  But if you need to replace it with an application 
+specific class, you can override and replace ``CakeResponse`` with
+your own class::
+
+    <?php
+    App::uses('CustomResponse', 'Lib');
+     
+    class AppController extends Controller {
+        protected $_responseClass = 'CustomResponse';
+    }
+
+This will make all the controllers in your application use ``CustomResponse``
+instead of :php:class:`CakeResponse`.  You can also replace the response
+instance used by setting ``$this->response`` in your controllers. Overriding the 
+response objec is handy during testing, as it allows you to stub 
+out the methods that interact with `header()``.  See the section on 
+:ref:`cakeresponse-testing` for more information.
+
+Dealing with content types
+==========================
+
+You can control the Content-Type of your application's responses with using
+:php:meth:`CakeResponse::type()`.  If your application needs to deal with
+content types that are not built into CakeResponse, you can map those types
+with ``type()`` as well::
+
+    <?php
+    // Add a vCard type
+    $this->response->type(array('vcf' => 'text/v-card'));
+
+    // Set the response Content-Type to vcard.
+    $this->response->type('vcf');
+
+Usually you'll want to map additional content types in your controller's
+``beforeFilter`` callback, so you can leverage the automatic view switching 
+features of :php:class:`RequestHandlerComponent` if you are using it.
+
+Sending attachments
+===================
+
+There are times when you want to send Controller responses as files for
+download.  You can either accomplish this using :doc:`/views/media-view`
+or by using the features on ``CakeResponse``.
+:php:meth:`CakeResponse::download()` allows you to send the response as file for
+download::
+
+    <?php
+    function sendFile($id) {
+        $this->autoRender = false;
+
+        $file = $this->Attachment->getFile($id);
+        $this->response->type($file['type']);
+        $this->response->download($file['name']);
+        $this->response->body($file['content']);
+        $this->response->send();
+    }
+
+The above shows how you could use CakeResponse to generate a file download
+response without using :php:class:`MediaView`.  In general you will want to use
+MediaView as it provides a few additional features above what CakeResponse does.
+
+Interacting with browser caching
+================================
+
+You sometimes need to force browsers to not cache the results of a controller
+action.  :php:meth:`CakeResponse::disableCache()` is intended for just that::
+
+    <?php
+    function index() {
+        // do something.
+        $this->response->disableCache();
+    }
+
+.. warning::
+
+    Using disableCache() with downloads from SSL domains while trying to send
+    files to Internet Explorer can result in errors.
+
+You can also tell clients that you want them to cache responses. By using
+:php:meth:`CakeResponse::cache()`::
+
+    <?php
+    function index() {
+        //do something
+        $this->response->cache(time(), '+5 days');
+    }
+
+The above would tell clients to cache the resulting resposne for 5 days,
+hopefully speeding up your visitors experience.
+
+Setting headers
+===============
+
+Setting headers is done with the php:meth:`CakeResponse::header()` method.  It
+can be called with a few different parameter configurations::
+
+    <?php
+    // Set a single header
+    $this->response->header('Location', 'http://example.com');
+
+    // Set multiple headers
+    $this->response->header(array('Location' => 'http://example.com', 'X-Extra' => 'My header'));
+    $this->response->header(array('WWW-Authenticate: Negotiate', 'Content-type: application/pdf'));
+
+Setting the same header multiple times will result in overwriting the previous
+values, just like regular header calls.  Headers are not sent when
+php:meth:`CakeResponse::header()` is called either.  They are just buffered
+until the response is actually sent.
+
+.. _cakeresponse-testing:
+
+CakeResponse and testing
+========================
+
+Probably one of the biggest wins from `CakeRequest` comes from how it makes
+testing controllers and components easier.  Instead of methods spread across
+several objects, you only have a single object to mock as controllers and
+components delegate to `CakeResponse`.  This helps you get closer to a 'unit'
+test and makes testing controllers easier::
+
+    <?php
+    function testSomething() {
+        $this->controller->response = $this->getMock('CakeResponse');
+        $this->controller->response->expects($this->once())->method('header');
+        ...
+    }
+
+Additionally you can more easily run tests from the command line, as you can use
+mocks to avoid the 'headers sent' errors that can come up from trying to set
+headers in CLI.
+
+
+CakeResponse API
+==================
+
+.. php:class:: CakeResponse
+
+    CakeResponse provides a number of useful methods for interacting wit
+    the response you are sending to a client.
+
+.. php:method:: header() 
+
+    Allows you to directly set one or many headers to be sent with the response.
+
+.. php:method:: charset() 
+
+    Sets the charset that will be used in the response.
+
+.. php:method:: type($type) 
+
+    Sets the content type for the response.  You can either use a known content
+    type alias or the full content type name.
+
+.. php:method:: cache()
+
+    Allows you to set caching headers in the response.
+
+.. php:method:: disableCache()
+
+    Sets the headers to disable client caching for the response.
+
+.. php:method:: compress()
+
+    Turns on gzip compression for the request.
+
+.. php:method:: download() 
+
+    Allows you to send the response as an attachment and set the filename.
+
+.. php:method:: statusCode() 
+
+    Allows you to set the status code for the response.
+
+.. php:method:: body()
+
+    Set the content body for the response.
+
+.. php:method:: send()
+
+    Once you are done creating a response, calling send() will send all
+    the set headers as well as the body. This is done automatically at the
+    end of each request by :php:class:`Dispatcher`
 
