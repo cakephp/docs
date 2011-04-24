@@ -318,6 +318,7 @@ CakeRequest API
 
     The current webroot.
 
+.. index:: $this->response
 
 CakeResponse
 ############
@@ -436,7 +437,7 @@ hopefully speeding up your visitors experience.
 Setting headers
 ===============
 
-Setting headers is done with the php:meth:`CakeResponse::header()` method.  It
+Setting headers is done with the :php:meth:`CakeResponse::header()` method.  It
 can be called with a few different parameter configurations::
 
     <?php
@@ -449,7 +450,7 @@ can be called with a few different parameter configurations::
 
 Setting the same header multiple times will result in overwriting the previous
 values, just like regular header calls.  Headers are not sent when
-php:meth:`CakeResponse::header()` is called either.  They are just buffered
+:php:meth:`CakeResponse::header()` is called either.  They are just buffered
 until the response is actually sent.
 
 .. _cakeresponse-testing:
@@ -457,10 +458,10 @@ until the response is actually sent.
 CakeResponse and testing
 ========================
 
-Probably one of the biggest wins from `CakeRequest` comes from how it makes
+Probably one of the biggest wins from ``CakeResponse`` comes from how it makes
 testing controllers and components easier.  Instead of methods spread across
 several objects, you only have a single object to mock as controllers and
-components delegate to `CakeResponse`.  This helps you get closer to a 'unit'
+components delegate to ``CakeResponse``.  This helps you get closer to a 'unit'
 test and makes testing controllers easier::
 
     <?php
