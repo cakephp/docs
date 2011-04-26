@@ -193,23 +193,22 @@ div.admonition:after {
 	content: '';
 	position: absolute;
 	z-index: 0;
-	width: 45%;
+	width: 49%;
 	top: 80%;
 	bottom: 10px;
 	left: 10px;
-	-webkit-box-shadow: 0px 10px 10px #666;
-	-moz-box-shadow: 0px 10px 10px #666;
-	box-shadow: 0px 10px 10px #666;
-	-webkit-transform: rotate(-2deg);
-	-moz-transform: rotate(-2deg);
-	-o-transform: rotate(-2deg);
-	max-width: 400px;
+	-webkit-box-shadow: 0px 10px 10px #333;
+	-moz-box-shadow: 0px 10px 10px #333;
+	box-shadow: 0px 10px 10px #333;
+	-webkit-transform: rotate(-0.5deg);
+	-moz-transform: rotate(-0.5deg);
+	-o-transform: rotate(-0.5deg);
 	z-index: -1
 }
 div.admonition:after {
-	-webkit-transform: rotate(2deg);
-	-moz-transform: rotate(2deg);
-	-o-transform: rotate(2deg);
+	-webkit-transform: rotate(0.5deg);
+	-moz-transform: rotate(0.5deg);
+	-o-transform: rotate(0.5deg);
 	right: 10px;
 	left: auto;
 }
@@ -232,19 +231,17 @@ div.tip {
 	border: 1px solid #4da0cc;
 }
 div.note {
-    background-color: #ffffbb;
-    border: 1px solid #cccc66;
+    background-color: #FFF9D8;
+    min-height:32px;
 }
 div.seealso {
     background-color: #ffc;
-    border: 1px solid #cccc66;
 }
 div.topic {
     background-color: #eee;
 }
 div.warning {
-    background-color: #ffeeee;
-    border: 1px solid #990000;
+    background-color: #F9D9D8;
 }
 
 div.tip,
@@ -254,7 +251,18 @@ div.warning {
 	border-left: 0;
     border-right: 0;
 }
-
+.warning p.admonition-title,
+.note p.admonition-title {
+    float: left;
+    height: 0px;
+    padding-top: 32px;
+    width: 32px;
+    overflow: hidden;
+    background: url(./note.png) top left no-repeat;
+}
+.warning p.admonition-title {
+	background: url(./warning.png) top left no-repeat;
+}
 p.admonition-title {
 	display: inline;
 }
@@ -305,11 +313,11 @@ table.docutils th {
 }
 
 .warning tt {
-    background: #efd2d2;
+    background: #e6c0be;
 }
 
 .note tt {
-    background: #eeee99;
+    background: #f3e7b1;
 }
 
 .viewcode-back {

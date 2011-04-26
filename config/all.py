@@ -109,7 +109,8 @@ html_static_path = [
  '../_static/csf-navbar.css',
  '../_static/main-link.png',
  '../_static/search-field.png',
- '../_static/search-submit.png'
+ '../_static/search-submit.png',
+ '../_static/note.png'
 ]
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
