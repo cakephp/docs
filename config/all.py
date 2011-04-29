@@ -110,7 +110,8 @@ html_static_path = [
  '../_static/main-link.png',
  '../_static/search-field.png',
  '../_static/search-submit.png',
- '../_static/note.png'
+ '../_static/note.png',
+ '../_static/pygments.css'
 ]
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
