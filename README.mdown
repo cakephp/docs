@@ -1,7 +1,7 @@
-CakePHP Experimental Docs
-=========================
+CakePHP Documentation
+=====================
 
-This documentation will hopefully one day replace the existing cookbook.  Hopefully enabling community contributions and enabling multiple format documentation generation.
+This documentation is planned to replace the existing cookbook.  Hopefully enabling community contributions and enabling multiple format documentation generation.
 
 Requirements
 ------------
