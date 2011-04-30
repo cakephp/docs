@@ -70,8 +70,6 @@ are also all found in the request parameters:
 * ``action`` The action handling the current request.
 * ``prefix`` The prefix for the current action.  See :ref:`prefix-routing` for
   more information.
-* ``form`` The raw POST data including POST data that did not have the ``data``
-  prefix.
 * ``bare`` Present when the request came from requestAction() and included the
   bare option.  Bare requests do not have layouts rendered.
 * ``requested`` Present and set to true when the action came from requestAction.
@@ -92,6 +90,41 @@ Querystring parameters can be read from using :php:attr:`CakeRequest::$query`::
 Accessing POST data
 ===================
 
+All POST data can be accesed using :php:attr:`CakeRequest::$data`.  Any form data 
+that contains a ``data`` prefix, will have that data prefix removed.  For example::
+
+    <?php
+    // An input with a name attribute equal to 'data[Post][title]' is accessible at
+    $this->request->data['Post']['title'];
+
+You can either directly access the data property, or you can use 
+:php:meth:`CakeRequest::data()` to read the data array in an error free manner.
+Any keys that do not exist will return ``null``::
+
+    <?php
+    $foo = $this->request->data('Value.that.does.not.exist');
+    // $foo == null
+
+Accessing XML or JSON data
+==========================
+
+Applications employing :doc:`/development/rest` often exchange data in non
+URL encoded post bodies.  You can read input data in any format using
+:php:meth:`CakeRequest::input()`.  By providing a decoding function you can
+receive the content in a deserialized format::
+
+    <?php
+    // Get JSON encoded data submitted to a PUT/POST action
+    $data = $this->request->input('json_decode');
+
+Since some deserializing methods require additional parameters when being called,
+such as the 'as array' parameter on ``json_decode`` or if you want XML converted
+into a DOMDocument object, :php:meth:`CakeRequest::input()` supports passing
+in additional parameters as well::
+
+    <?php
+    // Get Xml encoded data submitted to a PUT/POST action
+    $data = $this->request->input('Xml::build', array('return' => 'domdocument'));
 
 Accessing path information
 ==========================
@@ -239,6 +272,12 @@ CakeRequest API
         $this->request->header('User-Agent');
 
     Would return the user agent used for the request.
+
+.. php:method:: input($callback, [$options])
+
+    Retrieve the input data for a request, and optionally pass it through a
+    decoding function.  Additional parameters for the decoding function
+    can be passed as arguments to input().
 
 .. php:method:: data($key) 
 
