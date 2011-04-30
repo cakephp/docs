@@ -15,7 +15,7 @@ Error configuration
 
 Error configuration is done inside your application's ``app/config/core.php``
 file.  You can define a callback to be fired each time your application triggers
-any PHP error - exceptions are handled :doc:`development/exceptions` separately.
+any PHP error - exceptions are handled :doc:`/development/exceptions` separately.
 The callback can be any PHP callable, including an anonymous function.  The 
 default error handling configuration looks like::
 
@@ -76,4 +76,4 @@ use an anonymous function if you are using PHP5.3 or greater.::
 
 It is important to remember that errors captured by the configured error handler will be php
 errors, and that if you need custom error handling, you probably also want to configure
-:doc:`development/exceptions` handling as well.
+:doc:`/development/exceptions` handling as well.

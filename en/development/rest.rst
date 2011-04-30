@@ -33,27 +33,22 @@ The first line sets up a number of default routes for easy REST
 access where method specifies the desired result format (e.g. xml,
 json, rss). These routes are HTTP Request Method sensitive.
 
-HTTP Method
-URL*.method*
-Controller action invoked
-GET
-/recipes*.method*
-RecipesController::index()
-GET
-/recipes/*123.method*
-RecipesController::view(123)
-POST
-/recipes*.method*
-RecipesController::add()
-PUT
-/recipes/123*.method*
-RecipesController::edit(123)
-DELETE
-/recipes/*123.method*
-RecipesController::delete(123)
-POST
-/recipes/123*.method*
-RecipesController::edit(123)
+=========== ===================== ==============================
+HTTP format URL.format           Controller action invoked    
+=========== ===================== ==============================
+GET         /recipes.format       RecipesController::index()  
+----------- --------------------- ------------------------------
+GET         /recipes/123.format   RecipesController::view(123)
+----------- --------------------- ------------------------------
+POST        /recipes.format       RecipesController::add()
+----------- --------------------- ------------------------------
+PUT         /recipes/123.format   RecipesController::edit(123)
+----------- --------------------- ------------------------------
+DELETE      /recipes/123.format   RecipesController::delete(123)
+----------- --------------------- ------------------------------
+POST        /recipes/123.format   RecipesController::edit(123)
+=========== ===================== ==============================
+
 CakePHP's Router class uses a number of different indicators to
 detect the HTTP method being used. Here they are in order of
 preference:
@@ -110,27 +105,28 @@ this::
         }
     }
 
-Since we've added a call to Router::parseExtensions(), the CakePHP
-router is already primed to serve up different views based on
+Since we've added a call to :php:meth:`Router::parseExtensions()`, 
+the CakePHP router is already primed to serve up different views based on
 different kinds of requests. Since we're dealing with REST
 requests, the view type is XML. We place the REST views for our
-RecipesController inside app/views/recipes/xml. We can also use the
-XmlHelper for quick-and-easy XML output in those views. Here's what
+RecipesController inside app/views/recipes/xml. We can also use
+:php:class:`Xml` for quick-and-easy XML output in those views. Here's what
 our index view might look like::
 
     // app/views/recipes/xml/index.ctp
     
     <recipes>
-        <?php echo $xml->serialize($recipes); ?>
+        <?php
+        $xml = Xml::build($recipes);
+        echo $xml->saveXML();
+        ?>
     </recipes>
 
-Experienced CakePHP users might notice that we haven't included the
-XmlHelper in our RecipesController $helpers array. This is on
-purpose - when serving up a specific content type using
-parseExtensions(), CakePHP automatically looks for a view helper
-that matches the type. Since we're using XML as the content type,
-the XmlHelper is automatically loaded up for our use in those
-views.
+When serving up a specific content type using parseExtensions(), 
+CakePHP automatically looks for a view helper that matches the type. 
+Since we're using XML as the content type, there is no built-in helper,
+however if you were to create one it would automatically be loaded
+for our use in those views.
 
 The rendered XML will end up looking something like this::
 
@@ -156,13 +152,18 @@ feature, handling XML and POST data in parallel is seamless: no
 changes are required to the controller or model code. Everything
 you need should end up in $this->data.
 
+
+.. todo::
+
+    The following content might become wrong soon.
+
 A commonly-required serialization format is JSON, which would be
 requested by using the ".json" extension in paths. Cake will
 automatically attempt to find /views/layouts/json/default.ctp and
 /views/[object]/json/[action].ctp which are not provided by
 default. You will need to create these to accomodate your API's
 specific needs. Additionally, you will need to parse any JSON sent
-to the controller into the $this->data property. While this is not
+to the controller into the ``$this->data`` property. While this is not
 built in to Cake, the Cake developer community has quite a bit of
 sample code out there that should get you started.
 
