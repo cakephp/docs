@@ -34,7 +34,7 @@ access where method specifies the desired result format (e.g. xml,
 json, rss). These routes are HTTP Request Method sensitive.
 
 =========== ===================== ==============================
-HTTP format URL.format           Controller action invoked    
+HTTP format URL.format            Controller action invoked    
 =========== ===================== ==============================
 GET         /recipes.format       RecipesController::index()  
 ----------- --------------------- ------------------------------
