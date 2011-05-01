@@ -151,12 +151,11 @@ div.body h4,
 div.body h5,
 div.body h6 {
     font-family: HelveticaNeue-Light, HelveticaNeue, Helvetica, Arial, sans-serif;
-    background-color: #f9f9ff;
-    font-weight: normal;
+    font-weight: bold;
     color: #222;
-    border-bottom: 1px dashed #ccc;
-    margin: 20px -20px 10px -20px;
-    padding: 3px 0 3px 10px;
+    border-bottom: 1px solid #888;
+    margin: 20px 0px 10px 0px;
+    padding: 3px 0 3px 0px;
 }
 
 div.body h1 { margin-top: 0; font-size: 200%; }
