@@ -143,29 +143,25 @@ The rendered XML will end up looking something like this::
 
 Creating the logic for the edit action is a bit trickier, but not
 by much. Since you're providing an API that outputs XML, it's a
-natural choice to receive XML as input. Not to worry, however: the
-RequestHandler and Router classes make things much easier. If a
-POST or PUT request has an XML content-type, then the input is
-taken and passed to an instance of Cake's Xml object, which is
-assigned to the $data property of the controller. Because of this
-feature, handling XML and POST data in parallel is seamless: no
-changes are required to the controller or model code. Everything
-you need should end up in $this->data.
+natural choice to receive XML as input. Not to worry, the
+:php:class:`RequestHandler` and :php:class:`Router` classes make 
+things much easier. If a POST or PUT request has an XML content-type, 
+then the input is run through  Cake's :php:class:`Xml` class, and the 
+array representation of the data is assigned to `$this->request->data`.
+Because of this feature, handling XML and POST data in parallel 
+is seamless: no changes are required to the controller or model code. 
+Everything you need should end up in ``$this->request->data``.
 
+Accepting input in other formats
+================================
 
-.. todo::
-
-    The following content might become wrong soon.
-
-A commonly-required serialization format is JSON, which would be
-requested by using the ".json" extension in paths. Cake will
-automatically attempt to find /View/layouts/json/default.ctp and
-/View/[object]/json/[action].ctp which are not provided by
-default. You will need to create these to accomodate your API's
-specific needs. Additionally, you will need to parse any JSON sent
-to the controller into the ``$this->data`` property. While this is not
-built in to Cake, the Cake developer community has quite a bit of
-sample code out there that should get you started.
+Typically REST applications not only output content in alternate data formats 
+they also accept data in different formats.  In CakePHP, the 
+:php:class:`RequestHandlerComponent` helps facilitate this.  By default
+it will decode any incoming JSON/XML input data for POST/PUT requests
+and supply the array version of that data in `$this->request->data`.  
+You can also wire in additional deserializers for alternate formats if you 
+need them, using :php:meth:`RequestHandler::addInputType()`
 
 Custom REST Routing
 ===================
