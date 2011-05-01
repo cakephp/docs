@@ -35,9 +35,7 @@ delete and edit buttons, standard forms for editing and standard
 views for inspecting a single item in the database.
 
 To add scaffolding to your application, in the controller, add the
-$scaffold variable:
-
-::
+$scaffold variable::
 
     <?php
     
@@ -45,10 +43,8 @@ $scaffold variable:
         var $scaffold;
     }
     
-    ?>
-
 Assuming you’ve created even the most basic Category model class
-file (in /app/models/category.php), you’re ready to go. Visit
+file (in /app/Model/Category.php), you’re ready to go. Visit
 http://example.com/categories to see your new scaffold.
 
 .. note::
@@ -68,8 +64,7 @@ to manually add the following code in your User and Group models.
 Before you add the following code, the view displays an empty
 select input for Group in the New User form. After you add the
 following code, the view displays a select input populated with IDs
-or names from the Group table in the New User form.
-::
+or names from the Group table in the New User form::
 
     // In group.php
     var $hasMany = 'User';
@@ -81,9 +76,7 @@ name), you can set the $displayField variable in the model. Let’s
 set the $displayField variable in our User class so that users
 related to categories will be shown by first name rather than just
 an ID in scaffolding. This feature makes scaffolding more readable
-in many instances.
-
-::
+in many instances::
 
     <?php
 
@@ -91,8 +84,6 @@ in many instances.
         var $name = 'User';
         var $displayField = 'first_name';
     }
-
-    ?>
 
 
 Creating a simple admin interface with scaffolding
@@ -103,14 +94,11 @@ If you have enabled admin routing in your app/config/core.php, with
 use scaffolding to generate an admin interface.
 
 Once you have enabled admin routing assign your admin prefix to the
-scaffolding variable.
-
-::
+scaffolding variable::
 
     var $scaffold = 'admin';
 
-You will now be able to access admin scaffolded actions:
-::
+You will now be able to access admin scaffolded actions::
 
     http://example.com/admin/controller/index
     http://example.com/admin/controller/view
@@ -121,10 +109,9 @@ You will now be able to access admin scaffolded actions:
 This is an easy way to create a simple backend interface quickly.
 Keep in mind that you cannot have both admin and non-admin methods
 scaffolded at the same time. As with normal scaffolding you can
-override individual methods and replace them with your own.
-
-::
-
+override individual methods and replace them with your own::
+    
+    <?php
     function admin_view($id = null) {
       //custom code here
     }
@@ -140,22 +127,20 @@ scaffolded views, you can create templates. We still don't
 recommend using this technique for production applications, but
 such a customization may be useful during prototyping iterations.
 
-Customization is done by creating view templates:
-
-::
+Customization is done by creating view templates::
 
     Custom scaffolding views for a specific controller 
     (PostsController in this example) should be placed like so:
     
-    /app/views/posts/scaffold.index.ctp
-    /app/views/posts/scaffold.show.ctp
-    /app/views/posts/scaffold.edit.ctp
-    /app/views/posts/scaffold.new.ctp
+    /app/View/posts/scaffold.index.ctp
+    /app/View/posts/scaffold.show.ctp
+    /app/View/posts/scaffold.edit.ctp
+    /app/View/posts/scaffold.new.ctp
     
     Custom scaffolding views for all controllers should be placed like so:
     
-    /app/views/scaffolds/index.ctp
-    /app/views/scaffolds/show.ctp
-    /app/views/scaffolds/edit.ctp
-    /app/views/scaffolds/new.ctp
-    /app/views/scaffolds/add.ctp
+    /app/View/scaffolds/index.ctp
+    /app/View/scaffolds/show.ctp
+    /app/View/scaffolds/edit.ctp
+    /app/View/scaffolds/new.ctp
+    /app/View/scaffolds/add.ctp

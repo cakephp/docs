@@ -13,16 +13,14 @@ when file extensions are enabled.
 By default RequestHandler will automatically detect Ajax requests
 based on the HTTP-X-Requested-With header that many javascript
 libraries use. When used in conjunction with
-Router::parseExtensions() RequestHandler will automatically switch
+:php:meth:`Router::parseExtensions()` RequestHandler will automatically switch
 the layout and view files to those that match the requested type.
 Furthermore, if a helper with the same name as the requested
 extension exists, it will be added to the Controllers Helper array.
-Lastly, if XML data is POST'ed to your Controllers, it will be
-parsed into an XML object which is assigned to Controller::data,
+Lastly, if XML/JSON data is POST'ed to your Controllers, it will be
+parsed into an array which is assigned to ``$this->request->data``,
 and can then be saved as model data. In order to make use of
-Request Handler it must be included in your $components array.
-
-::
+RequestHandler it must be included in your $components array::
 
     <?php
     class WidgetController extends AppController {
@@ -31,8 +29,6 @@ Request Handler it must be included in your $components array.
 
         //rest of controller
     }
-    ?>
-
 
 Obtaining Request Information
 =============================
@@ -46,7 +42,7 @@ the client and its request.
     will return true if the client accepts the content type. If an
     array is specified, accepts return true if any one of the content
     types is accepted by the client. If null returns an array of the
-    content-types that the client accepts. For example:::
+    content-types that the client accepts. For example::
 
         <?php
         class PostsController extends AppController {
@@ -66,16 +62,6 @@ the client and its request.
         }
 
 Other request 'type' detection methods include:
-
-.. php:method:: isAjax()
-
-    Returns true if the request contains the X-Requested-Header equal
-    to XMLHttpRequest.
-
-.. php:method:: isSSL()
-
-    Returns true if the current request was made over an SSL
-    connection.
 
 .. php:method:: isXml()
 
@@ -128,64 +114,55 @@ However, you want to allow caching for non-ajax requests. The
 following would accomplish that::
 
         <?php
-        if ($this->RequestHandler->isAjax()) {
-            Configure::write('debug', 0);
-            $this->header('Pragma: no-cache');
-            $this->header('Cache-control: no-cache');
-            $this->header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        }
-        //Continue Controller action
-
-You could also disable caching with the functionally analogous
-:php:func:`Controller::disableCache`::
-
-        <?php
-        if ($this->RequestHandler->isAjax()) {
+        if ($this->request->is('ajax')) {
             $this->disableCache();
         }
         //Continue Controller action
 
 
-Request Type Detection
-======================
-
-RequestHandler also provides information about what type of HTTP
-request has been made and allowing you to respond to each Request
-Type.
-
-.. php:method:: isPost()
-
-    Returns true if the request is a POST request.
-
-.. php:method:: isPut()
-
-    Returns true if the request is a PUT request.
-
-.. php:method:: isGet()
-
-    Returns true if the request is a GET request.
-
-.. php:method:: isDelete()
-
-    Returns true if the request is a DELETE request.
-
 
 Obtaining Additional Client Information
 =======================================
-
-.. php:method:: getClientIP()
-
-    Get the remote client IP address
-
-.. php:method:: getReferer()
-
-    Returns the domain name from which the request originated
 
 .. php:method:: getAjaxVersion()
 
     Gets Prototype version if call is Ajax, otherwise empty string. The
     Prototype library sets a special "Prototype version" HTTP header.
 
+Automatically decoding request data
+===================================
+
+.. php:method:: addInputType($type, $handler)
+
+    :param string $type: The content type alias this attached decoder is for.
+        e.g. 'json' or 'xml'
+    :param array $handler: The handler information for the type.
+
+    Add a request data decoder. The handler should contain a callback, and any 
+    additional arguments for the callback.  The callback should return
+    an array of data contained in the request input.  For example adding a CSV
+    handler in your controllers' beforeFilter could look like::
+
+        <?php
+        $parser = function ($data) {
+            $rows = str_getcsv($data, "\n");
+            foreach ($rows as &$row) {
+                $row = str_getcsv($row, ',');
+            }
+            return $rows;
+        };
+        $this->RequestHandler->addInputType('csv', array($parser));
+
+    The above example requires PHP 5.3, however you can use any 
+    `callable <http://php.net/callback>`_ for the handling function.  You can 
+    also pass additional arguments to the callback, this is useful for callbacks 
+    like ``json_decode``::
+
+        <?php 
+        $this->RequestHandler->addInputType('json', array('json_decode', true));
+
+    The above will make ``$this->request->data`` an array of the JSON input data,
+    without the additional ``true`` you'd get a set of ``StdClass`` objects.
 
 Responding To Requests
 ======================
@@ -251,8 +228,8 @@ application.
 
 .. php:method:: renderAs($controller, $type)
 
-    -  $controller - Controller Reference
-    -  $type - friendly content type name to render content for ex.
+    :param Controller $controller: Controller Reference
+    :param string $type: friendly content type name to render content for ex.
        xml, rss.
 
     Change the render mode of a controller to the specified type. Will
@@ -261,9 +238,9 @@ application.
 
 .. php:method:: respondAs($type, $options)
 
-    -  $type - Friendly content type name ex. xml, rss or a full
+    :param string $type: Friendly content type name ex. xml, rss or a full
        content type like application/x-shockwave
-    -  $options - If $type is a friendly type name that has more than
+    :param array $options: If $type is a friendly type name that has more than
        one content association, $index is used to select the content
        type.
 
@@ -275,6 +252,3 @@ application.
     Returns the current response type Content-type header or null if
     one has yet to be set.
 
-.. php:method:: mapType($ctype)
-
-    Maps a content-type back to an alias
