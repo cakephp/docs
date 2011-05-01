@@ -290,10 +290,13 @@ pre::-webkit-scrollbar {
 }
 pre::-webkit-scrollbar-track-piece {
 	background: #ddd;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
 pre::-webkit-scrollbar-thumb:horizontal {
 	background: #c0c0c0;
-	border-radius: 5px
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
 
 
