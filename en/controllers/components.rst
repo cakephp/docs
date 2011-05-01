@@ -34,13 +34,12 @@ components requiring configuration are
 and :doc:`/core-libraries/core-components/email`. Configuration for these
 components, and for components in general, is usually done in the
 ``$components`` array or your controller's ``beforeFilter()``
-method.
+method::
 
-::
-
+    <?php
     var $components = array(
         'Auth' => array(
-            'authorize' => 'controller',
+            'authorize' => array('controller'),
             'loginAction' => array('controller' => 'users', 'action' => 'login')
         ),
         'Cookie' => array('name' => 'CookieMonster')
@@ -52,12 +51,11 @@ configuration settings to be set in this way. In addition you can
 configure components in your controller's ``beforeFilter()``
 method. This is useful when you need to assign the results of a
 function to a component property. The above could also be expressed
-as:
+as::
 
-::
-
+    <?php
     function beforeFilter() {
-        $this->Auth->authorize = 'controller';
+        $this->Auth->authorize = array('controller');
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
         
         $this->Cookie->name = 'CookieMonster';
@@ -66,18 +64,49 @@ as:
 It's possible, however, that a component requires certain
 configuration options to be set before the controller's
 ``beforeFilter()`` is run. To this end, some components allow
-configuration options be set in the ``$components`` array.
+configuration options be set in the ``$components`` array::
 
-::
-
+    <?php
     var $components = array('DebugKit.toolbar' => array('panels' => array('history', 'session')));
 
 Consult the relevant documentation to determine what configuration
 options each component provides.
 
+Using Components
+================
 
-Creating Components
+Once you've included some components in your controller, using them is
+pretty simple.  Each component you use is exposed as a property on your
+controller.  If you had loaded up the :php:class:`SessionComponent` and
+the :php:class:`CookieComponent` in your controller, you could access
+them like so::
+
+    <?php
+    class PostsController extends AppController {
+        public $components = array('Session', 'Cookie');
+        
+        public function delete() {
+            if ($this->Post->delete($this->request->data('Post.id')) {
+                $this->Session->setFlash('Post deleted.');
+                $this->redirect(array('action' => 'index'));
+            }
+        }
+
+.. note::
+
+    Since both Models and Components are added to Controllers as
+    properties they share the same 'namespace'.  Be sure to not give a
+    component and a model the same name.
+
+Component Callbacks
 ===================
+
+Components also offer a few request life-cycle callbacks that allow them
+to augment the request cycle.  See the base :ref:`component-api` for
+more information on the callbacks components offer.
+
+Creating a Component
+====================
 
 Suppose our online application needs to perform a complex
 mathematical operation in many different parts of the application.
@@ -85,36 +114,32 @@ We could create a component to house this shared logic for use in
 many different controllers.
 
 The first step is to create a new component file and class. Create
-the file in /app/controllers/components/math.php. The basic
-structure for the component would look something like this:
-
-::
+the file in ``/app/Controller/Component/MathComponent.php``. The basic
+structure for the component would look something like this::
 
     <?php
     
-    class MathComponent extends Object {
+    class MathComponent extends Component {
         function doComplexOperation($amount1, $amount2) {
             return $amount1 + $amount2;
         }
     }
-    
-    ?>
 
-Take notice that our MathComponent extends Object and not
-Component. Extending Component can create infinite redirect issues,
-when combined with other Components.
+.. note::
 
-Including Components in your Controllers
-----------------------------------------
+    All components must extend :php:class:`Component`.  Failing to do this
+    will trigger an exception. 
+
+Including your component in your controllers
+--------------------------------------------
 
 Once our component is finished, we can use it in the application's
 controllers by placing the component's name (minus the "Component"
-part) in the controller's $components array. The controller will
+part) in the controller's ``$components`` array. The controller will
 automatically be given a new attribute named after the component,
-through which we can access an instance of it:
+through which we can access an instance of it::
 
-::
-
+    <?php
     /* Make the new component available at $this->Math,
     as well as the standard $this->Session */
     var $components = array('Math', 'Session');
@@ -125,11 +150,10 @@ same component twice.
 
 When including Components in a Controller you can also declare a
 set of parameters that will be passed on to the Component's
-``initialize()`` method. These parameters can then be handled by
-the Component.
+constructor. These parameters can then be handled by
+the Component::
 
-::
-
+    <?php
     var $components = array(
         'Math' => array(
             'precision' => 2,
@@ -139,141 +163,26 @@ the Component.
     );
 
 The above would pass the array containing precision and
-randomGenerator to MathComponent's initialize() method as the
-second parameter.
+randomGenerator to ``MathComponent::__construct()`` as the
+second parameter.  By convention, any settings that have been passed
+that are also public properties on your component will have the values
+set based on the settings.
 
-
-MVC Class Access Within Components
-----------------------------------
-
-Components feature a number of callbacks used by the parent
-controller class. Judicious use of these callbacks can make
-creating and using components much easier..
-
-``initialize(&$controller, $settings=array())``
-
-The initialize method is called before the controller's
-beforeFilter method.
-
-``startup(&$controller)``
-
-The startup method is called after the controller's beforeFilter
-method but before the controller executes the current action
-handler.
-
-``beforeRender(&$controller)``
-
-The beforeRender method is called after the controller executes the
-requested action's logic but before the controller's renders views
-and layout.
-
-``shutdown(&$controller)``
-
-The shutdown method is called before output is sent to browser.
-
-``beforeRedirect(&$controller, $url, $status=null, $exit=true)``
-
-The beforeRedirect method is invoked when the controller's redirect
-method is called but before any further action. If this method
-returns false the controller will not continue on to redirect the
-request. The $url, $status and $exit variables have same meaning as
-for the controller's method. You can also return a string which
-will be interpreted as the url to redirect to or return associative
-array with key 'url' and optionally 'status' and 'exit'.
-
-Here is a skeleton component you can use as a template for your own
-custom components.
-
-::
-
-    <?php
-    class SkeletonComponent extends Object {
-        //called before Controller::beforeFilter()
-        function initialize(&$controller, $settings = array()) {
-            // saving the controller reference for later use
-            $this->controller =& $controller;
-        }
-    
-        //called after Controller::beforeFilter()
-        function startup(&$controller) {
-        }
-    
-        //called after Controller::beforeRender()
-        function beforeRender(&$controller) {
-        }
-    
-        //called after Controller::render()
-        function shutdown(&$controller) {
-        }
-    
-        //called before Controller::redirect()
-        function beforeRedirect(&$controller, $url, $status=null, $exit=true) {
-        }
-    
-        function redirectSomewhere($value) {
-            // utilizing a controller method
-            $this->controller->redirect($value);
-        }
-    }
-    ?>
-
-You might also want to utilize other components inside a custom
-component. To do so, just create a $components class variable (just
-like you would in a controller) as an array that holds the names of
-components you wish to utilize.
-
-::
-
-    <?php
-    class MyComponent extends Object {
-    
-        // This component uses other components
-        var $components = array('Session', 'Math');
-    
-        function doStuff() {
-            $result = $this->Math->doComplexOperation(1, 2);
-            $this->Session->write('stuff', $result);
-        }
-    
-    }
-    ?>
-
-To access/use a model in a component is not generally recommended;
-If you end up needing one, you'll need to instantiate your model
-class and use it manually. Here's an example:
-
-::
-
-    <?php
-    class MathComponent extends Object {
-        function doComplexOperation($amount1, $amount2) {
-            return $amount1 + $amount2;
-        }
-    
-        function doReallyComplexOperation ($amount1, $amount2) {
-            $userInstance = ClassRegistry::init('User');
-            $totalUsers = $userInstance->find('count');
-            return ($amount1 + $amount2) / $totalUsers;
-        }
-    }
-    ?>
 
 Using other Components in your Component
 ----------------------------------------
 
-Sometimes one of your components may need to use another.
+Sometimes one of your components may need to use another component.
+In this case ou can include other components in your component the exact same
+way you include them in controllers - using the ``$components`` var::
 
-You can include other components in your component the exact same
-way you include them in controllers: Use the ``$components`` var.
-
-::
-
+    // app/Controller/Component/CustomComponent.php
     <?php
-    class CustomComponent extends Object {
-        var $name = 'Custom'; // the name of your component
-        var $components = array('Existing'); // the other component your component uses
+    class CustomComponent extends Component {
+        // the other component your component uses
+        var $components = array('Existing'); 
     
-        function initialize(&$controller) {
+        function initialize($controller) {
             $this->Existing->foo();
         }
     
@@ -281,15 +190,12 @@ way you include them in controllers: Use the ``$components`` var.
             // ...
        }
     }
-    ?>
 
-::
-
+    // app/Controller/Component/ExistingComponent.php
     <?php
-    class ExistingComponent extends Object {
-        var $name = 'Existing';
+    class ExistingComponent extends Component {
     
-        function initialize(&$controller) {
+        function initialize($controller) {
             $this->Parent->bar();
         }
      
@@ -297,4 +203,53 @@ way you include them in controllers: Use the ``$components`` var.
             // ...
        }
     }
-    ?>
+
+.. _component-api:
+
+Component API
+=============
+
+.. php:class:: Component
+
+    The base Component class offers a few methods for lazily loading other
+    Components through :php:class:`ComponentCollection` as well as dealing
+    with common handling of settings.  It also provides prototypes for all
+    the component callbacks.
+
+.. php:method:: __construct(ComponentCollection $collection, $settings = array())
+
+    Constructor for the base component class.  All ``$settings`` that
+    are also public properties will have their values changed to the
+    matching value in ``$settings``.
+
+.. php:method:: initialize($controller)
+
+    The initialize method is called before the controller's
+    beforeFilter method.
+
+.. php:method:: startup($controller)
+
+    The startup method is called after the controller's beforeFilter
+    method but before the controller executes the current action
+    handler.
+
+.. php:method:: beforeRender($controller)
+
+    The beforeRender method is called after the controller executes the
+    requested action's logic but before the controller's renders views
+    and layout.
+
+.. php:method:: shutdown($controller)
+
+    The shutdown method is called before output is sent to browser.
+
+.. php:method:: beforeRedirect($controller, $url, $status=null, $exit=true)
+
+    The beforeRedirect method is invoked when the controller's redirect
+    method is called but before any further action. If this method
+    returns false the controller will not continue on to redirect the
+    request. The $url, $status and $exit variables have same meaning as
+    for the controller's method. You can also return a string which
+    will be interpreted as the url to redirect to or return associative
+    array with key 'url' and optionally 'status' and 'exit'.
+

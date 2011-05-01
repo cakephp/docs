@@ -109,7 +109,7 @@ Since we've added a call to :php:meth:`Router::parseExtensions()`,
 the CakePHP router is already primed to serve up different views based on
 different kinds of requests. Since we're dealing with REST
 requests, the view type is XML. We place the REST views for our
-RecipesController inside app/views/recipes/xml. We can also use
+RecipesController inside ``app/View/recipes/xml``. We can also use
 :php:class:`Xml` for quick-and-easy XML output in those views. Here's what
 our index view might look like::
 
@@ -159,8 +159,8 @@ you need should end up in $this->data.
 
 A commonly-required serialization format is JSON, which would be
 requested by using the ".json" extension in paths. Cake will
-automatically attempt to find /views/layouts/json/default.ctp and
-/views/[object]/json/[action].ctp which are not provided by
+automatically attempt to find /View/layouts/json/default.ctp and
+/View/[object]/json/[action].ctp which are not provided by
 default. You will need to create these to accomodate your API's
 specific needs. Additionally, you will need to parse any JSON sent
 to the controller into the ``$this->data`` property. While this is not
@@ -170,8 +170,8 @@ sample code out there that should get you started.
 Custom REST Routing
 ===================
 
-If the default routes created by mapResources() don't work for you,
-use the Router::connect() method to define a custom set of REST
+If the default routes created by :php:meth:`Router::mapResources()` don't work for you,
+use the :php:meth:`Router::connect()` method to define a custom set of REST
 routes. The connect() method allows you to define a number of
 different options for a given URL. The first parameter is the URL
 itself, and the second parameter allows you to supply those
@@ -180,7 +180,7 @@ to help CakePHP identify certain markers in the specified URL.
 
 We'll provide a simple example here, and allow you to tailor this
 route for your other RESTful purposes. Here's what our edit REST
-route would look like, without using mapResources()::
+route would look like, without using :php:meth:`Router::mapResources()`::
 
     <?php
     Router::connect(
