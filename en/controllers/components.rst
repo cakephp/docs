@@ -37,13 +37,14 @@ components, and for components in general, is usually done in the
 method::
 
     <?php
-    var $components = array(
-        'Auth' => array(
-            'authorize' => array('controller'),
-            'loginAction' => array('controller' => 'users', 'action' => 'login')
-        ),
-        'Cookie' => array('name' => 'CookieMonster')
-    );
+    class PostsController extends Appcontroller {
+        public $components = array(
+            'Auth' => array(
+                'authorize' => array('controller'),
+                'loginAction' => array('controller' => 'users', 'action' => 'login')
+            ),
+            'Cookie' => array('name' => 'CookieMonster')
+        );
 
 Would be an example of configuring a component with the
 ``$components`` array. All core components allow their
@@ -54,7 +55,7 @@ function to a component property. The above could also be expressed
 as::
 
     <?php
-    function beforeFilter() {
+    public function beforeFilter() {
         $this->Auth->authorize = array('controller');
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
         
@@ -67,7 +68,7 @@ configuration options to be set before the controller's
 configuration options be set in the ``$components`` array::
 
     <?php
-    var $components = array('DebugKit.toolbar' => array('panels' => array('history', 'session')));
+    public $components = array('DebugKit.toolbar' => array('panels' => array('history', 'session')));
 
 Consult the relevant documentation to determine what configuration
 options each component provides.

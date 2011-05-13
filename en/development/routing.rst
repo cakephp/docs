@@ -13,6 +13,8 @@ url structure without having to update all your code.
 
 .. index:: routes.php
 
+.. _routes-configuration:
+
 Routes Configuration
 ====================
 

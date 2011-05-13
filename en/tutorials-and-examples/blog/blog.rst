@@ -52,7 +52,7 @@ something like the following:
 
     /path_to_document_root
         /app
-        /cake
+        /lib
         /plugins
         /vendors
         .htaccess
@@ -114,7 +114,7 @@ connect to it. For many, this is the first and last time you
 configure anything.
 
 A copy of CakePHP's database configuration file is found in
-``/app/config/database.php.default``. Make a copy of this file in
+``/app/Config/database.php.default``. Make a copy of this file in
 the same directory, but name it ``database.php``.
 
 The config file should be pretty straightforward: just replace the
@@ -150,10 +150,10 @@ complete these laundry-list items, but they're not required for
 this tutorial. One is defining a custom string (or "salt") for use
 in security hashes. The second is defining a custom number (or
 "seed") for use in encryption. The third item is allowing CakePHP
-write access to its ``tmp`` folder.
+write access to its ``Tmp`` folder.
 
 The security salt is used for generating hashes. Change the default
-salt value by editing ``/app/config/core.php`` line 203. It doesn't
+salt value by editing ``/app/Config/core.php`` line 203. It doesn't
 much matter what the new value is, as long as it's not easily
 guessed.
 
@@ -167,7 +167,7 @@ guessed.
     ?>
 
 The cipher seed is used for encrypt/decrypt strings. Change the
-default seed value by editing ``/app/config/core.php`` line 208. It
+default seed value by editing ``/app/Config/core.php`` line 208. It
 doesn't much matter what the new value is, as long as it's not
 easily guessed.
 
@@ -184,9 +184,7 @@ The final task is to make the ``app/tmp`` directory web-writable.
 The best way to do this is to find out what user your webserver
 runs as (``<?php echo `whoami`; ?>``) and change the ownership of
 the ``app/tmp`` directory to that user. The final command you run
-(in \*nix) might look something like this.
-
-::
+(in \*nix) might look something like this::
 
     $ chown -R www-data app/tmp
 
@@ -221,28 +219,29 @@ to help get you up and running:
    the downloads section of the site or our git repository.
 
 #. Make sure Apache is loading up mod\_rewrite correctly! You
-   should see something like
-   ``LoadModule rewrite_module             libexec/httpd/mod_rewrite.so``
-   or (for Apache 1.3) ``AddModule             mod_rewrite.c`` in your
-   httpd.conf.
+   should see something like::
+
+       LoadModule rewrite_module             libexec/httpd/mod_rewrite.so
+
+   or (for Apache 1.3)::
+
+       AddModule             mod_rewrite.c
+   
+   in your httpd.conf.
 
 
 If you don't want or can't get mod\_rewrite (or some other
 compatible module) up and running on your server, you'll need to
-use Cake's built in pretty URLs. In ``/app/config/core.php``,
-uncomment the line that looks like:
-
-::
+use Cake's built in pretty URLs. In ``/app/Config/core.php``,
+uncomment the line that looks like::
 
     Configure::write('App.baseUrl', env('SCRIPT_NAME'));
 
-Also remove these .htaccess files:
+Also remove these .htaccess files::
 
-::
-
-            /.htaccess
-            /app/.htaccess
-            /app/webroot/.htaccess
+    /.htaccess
+    /app/.htaccess
+    /app/webroot/.htaccess
             
 
 This will make your URLs look like
