@@ -505,6 +505,7 @@ Deleting Posts
 Next, let's make a way for users to delete posts. Start with a
 ``delete()`` action in the PostsController::
 
+    <?php
     function delete($id) {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
@@ -588,12 +589,14 @@ Cake's routing is found in ``/app/Config/routes.php``. You'll want
 to comment out or remove the line that defines the default root
 route. It looks like this::
 
+    <?php
     Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
 This line connects the URL '/' with the default CakePHP home page.
 We want it to connect with our own controller, so replace that line
 with this one::
 
+    <?php
     Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 
 This should connect users requesting '/' to the index() action of
