@@ -84,7 +84,7 @@ Your development setup will look like this on the file system:
   -  /cake\_2\_0
 
      -  /app
-     -  /cake
+     -  /lib
      -  /vendors
      -  /plugins
      -  /.htaccess
@@ -119,7 +119,7 @@ like this on the filesystem:
       -  /webroot (this directory is set as the ``DocumentRoot``
          directive)
 
-   -  /cake
+   -  /lib
    -  /vendors
    -  /.htaccess
    -  /index.php

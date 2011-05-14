@@ -35,9 +35,7 @@ You can also change the visibility of controller methods in CakePHP
 by prefixing controller method names with underscores. If a
 controller method has been prefixed with an underscore, the method
 will not be accessible directly from the web but is available for
-internal use. For example:
-
-::
+internal use. For example::
 
     <?php
     class NewsController extends AppController {
@@ -51,19 +49,20 @@ internal use. For example:
         }
     }
     
-    ?>
 
 While the page http://www.example.com/news/latest/ would be
 accessible to the user as usual, someone trying to get to the page
 http://www.example.com/news/\_findNewArticles/ would get an error,
-because the method is preceded with an underscore.
+because the method is preceded with an underscore. You can also use
+PHP's visbility keywords to indicate whether or not a method can be 
+accessed from a url. Non-public methods cannot be accessed.
 
 URL Considerations for Controller Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 As you've just seen, single word controllers map easily to a simple
 lower case URL path. For example, ``ApplesController`` (which would
-be defined in the file name 'apples\_controller.php') is accessed
+be defined in the file name 'ApplesController.php') is accessed
 from http://example.com/apples.
 
 Multiple word controllers *can* be any 'inflected' form which
@@ -88,29 +87,27 @@ For more information on CakePHP URLs and parameter handling, see
 File and Classname Conventions
 ==============================
 
-In general, filenames are underscored while classnames are
+In general, filenames match the classnames, which are
 CamelCased. So if you have a class **MyNiftyClass**, then in Cake,
-the file should be named **my\_nifty\_class.php**. Below are
+the file should be named **MyNiftyClass.php**. Below are
 examples of how to name the file for each of the different types of
 classes you would typically use in a CakePHP application:
 
 
 -  The Controller class **KissesAndHugsController** would be found
-   in a file named **kisses\_and\_hugs\_controller.php** (notice
-   \_controller in the filename)
+   in a file named **KissesAndHugsController.php** 
 -  The Component class **MyHandyComponent** would be found in a
-   file named **my\_handy.php**
+   file named **MyHandyComponent.php**
 -  The Model class **OptionValue** would be found in a file named
-   **option\_value.php**
+   **OptionValue.php**
 -  The Behavior class **EspeciallyFunkableBehavior** would be found
-   in a file named **especially\_funkable.php**
+   in a file named **EspeciallyFunkableBehavior.php**
 -  The View class **SuperSimpleView** would be found in a file
-   named **super\_simple.php**
+   named **SuperSimpleView.php**
 -  The Helper class **BestEverHelper** would be found in a file
-   named **best\_ever.php**
+   named **BestEverHelper.php**
 
-Each file would be located in or under (can be in a subfolder) the
-appropriate folder in your app folder.
+Each file would be located in the appropriate folder in your app folder.
 
 Model and Database Conventions
 ==============================
@@ -120,10 +117,10 @@ and ReallyBigPerson are all examples of conventional model names.
 
 Table names corresponding to CakePHP models are plural and
 underscored. The underlying tables for the above mentioned models
-would be people, big\_people, and really\_big\_people,
+would be people, ``big\_people``, and ``really\_big\_people``,
 respectively.
 
-You can use the utility library "Inflector" to check the
+You can use the utility library :php:class:`Inflector` to check the
 singular/plural of words. See the
 :doc:`/core-utility-libraries/inflector` for more
 information.
@@ -153,9 +150,7 @@ single-field primary key if you want to use that table's model.
 CakePHP does not support composite primary keys. If you want to
 directly manipulate your join table data, use direct
 `query <http://docs.cakephp.org/view/1027/query>`_ calls or add a primary key to act on it
-as a normal model. E.g.:
-
-::
+as a normal model. E.g.::
 
     CREATE TABLE posts_tags (
     id INT(10) NOT NULL AUTO_INCREMENT,
@@ -174,21 +169,20 @@ View Conventions
 View template files are named after the controller functions they
 display, in an underscored form. The getReady() function of the
 PeopleController class will look for a view template in
-/app/views/people/get\_ready.ctp.
+/app/View/People/get\_ready.ctp.
 
 The basic pattern is
-/app/views/controller/underscored\_function\_name.ctp.
+/app/View/Controller/underscored\_function\_name.ctp.
 
 By naming the pieces of your application using CakePHP conventions,
 you gain functionality without the hassle and maintenance tethers
 of configuration. Here’s a final example that ties the conventions
 
-
 -  Database table: "people"
--  Model class: "Person", found at /app/models/person.php
+-  Model class: "Person", found at /app/Model/Person.php
 -  Controller class: "PeopleController", found at
-   /app/controllers/people\_controller.php
--  View template, found at /app/views/people/index.ctp
+   /app/Controller/PeopleController.php
+-  View template, found at /app/View/People/index.ctp
 
 Using these conventions, CakePHP knows that a request to
 http://example.com/people/ maps to a call on the index() function
@@ -197,8 +191,6 @@ available (and automatically tied to the ‘people’ table in the
 database), and renders to a file. None of these relationships have
 been configured by any means other than by creating classes and
 files that you’d need to create anyway.
-
-
 
 Now that you've been introduced to CakePHP's fundamentals, you
 might try a run through the

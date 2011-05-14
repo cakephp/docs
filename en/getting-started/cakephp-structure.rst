@@ -14,8 +14,8 @@ Application Extensions
 
 Controllers, helpers and models each have a parent class you can
 use to define application-wide changes. AppController (located at
-/app/app\_controller.php), AppHelper (located at
-/app/app\_helper.php) and AppModel (located at /app/app\_model.php)
+/app/Controller/AppController.php), AppHelper (located at
+/app/View/Helper/AppHelper.php) and AppModel (located at /app/Model/AppModel.php)
 are great places to put methods you want to share between all
 controllers, helpers or models.
 
@@ -48,7 +48,6 @@ Controllers are also fitted with callbacks. These callbacks are
 available for your use, just in case you need to insert some logic
 between CakePHP’s core operations. Callbacks available include:
 
-
 -  ``beforeFilter()``, executed before any controller action logic
 -  ``beforeRender()``, executed after controller logic, but before
    the view is rendered
@@ -78,7 +77,6 @@ limited to SQL joins, DataSources allow you to tell your LDAP model
 that it is associated to many iCal events.
 
 Just like controllers, models are featured with callbacks as well:
-
 
 -  beforeFind()
 -  afterFind()
