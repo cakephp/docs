@@ -21,26 +21,27 @@ presentational logic needed to get the data it received from the
 controller in a format that is ready for the audience you’re
 serving to.
 
-View files are stored in /app/views/, in a folder named after the
+View files are stored in /app/View/, in a folder named after the
 controller that uses the files, and named after the action it
 corresponds to. For example, the view file for the Products
 controller's "view()" action, would normally be found in
-/app/views/products/view.ctp.
+/app/View/Products/view.ctp.
 
 The view layer in CakePHP can be made up of a number of different
 parts. Each part has different uses, and will be covered in this
 chapter:
 
-
--  **layouts**: view files that contain presentational code that is
-   found wrapping many interfaces in your application. Most views are
-   rendered inside of a layout.
--  **elements**: smaller, reusable bits of view code. Elements are
-   usually rendered inside of views.
--  **helpers**: these classes encapsulate view logic that is needed
-   in many places in the view layer. Among other things, helpers in
-   CakePHP can help you build forms, build AJAX functionality,
-   paginate model data, or serve RSS feeds.
+- **views**: Views are the part of the page that is unique to the
+  action being run. They form the meat of your application's response.
+- **elements**: smaller, reusable bits of view code. Elements are
+  usually rendered inside of views.
+- **layouts**: view files that contain presentational code that is
+  found wrapping many interfaces in your application. Most views are
+  rendered inside of a layout.
+- **helpers**: these classes encapsulate view logic that is needed
+  in many places in the view layer. Among other things, helpers in
+  CakePHP can help you build forms, build AJAX functionality,
+  paginate model data, or serve RSS feeds.
 
 .. _view-layouts:
 
@@ -51,23 +52,19 @@ A layout contains presentation code that wraps around a view.
 Anything you want to see in all of your views should be placed in a
 layout.
 
-Layout files should be placed in /app/views/layouts. CakePHP's
+Layout files should be placed in /app/View/Layouts. CakePHP's
 default layout can be overridden by creating a new default layout
-at /app/views/layouts/default.ctp. Once a new default layout has
+at /app/View/Layouts/default.ctp. Once a new default layout has
 been created, controller-rendered view code is placed inside of the
 default layout when the page is rendered.
 
 When you create a layout, you need to tell CakePHP where to place
 the code for your views. To do so, make sure your layout includes a
-place for $content\_for\_layout (and optionally,
-$title\_for\_layout). Here's an example of what a default layout
-might look like:
+place for ``$content_for_layout`` Here's an example of what a default layout
+might look like::
 
-::
-
-   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-   <html xmlns="http://www.w3.org/1999/xhtml">
+   <!DOCTYPE html>
+   <html lang="en">
    <head>
    <title><?php echo $title_for_layout?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -97,20 +94,18 @@ javascript and CSS files from views.
 
 .. note::
 
-    When using ``$html->css()`` or ``$javascript->link()`` in view
-    files, specify 'false' for the 'in-line' argument to place the html
-    source in ``$scripts_for_layout``. (See API for more details on
-    usage).
+    When using :php:meth:`HtmlHelper::css()` or :php:meth:`HtmlHelper::script()` 
+    in view files, specify 'false' for the 'inline' option to place the html 
+    source in ``$scripts_for_layout``. (See API for more details on usage).
 
 ``$content_for_layout`` contains the view. This is where the view
 code will be placed.
 
-``$title_for_layout`` contains the page title.
+``$title_for_layout`` contains the page title.  This variable is generated automatically,
+but you can override it by setting it in you controller/view.
 
 To set the title for the layout, it's easiest to do so in the
-controller, setting the $title\_for\_layout variable.
-
-::
+controller, setting the ``$title_for_layout`` variable::
 
    <?php
 
@@ -119,21 +114,32 @@ controller, setting the $title\_for\_layout variable.
            $this->set('title_for_layout', 'View Active Users');
        }
    }
-   ?>
+   
+
+You can also set the title_for_layout variable from inside the view file as well::
+
+    <?php
+
+    $this->set('title_for_layout', $titleContent);
 
 You can create as many layouts as you wish: just place them in the
-app/views/layouts directory, and switch between them inside of your
-controller actions using the controller's $layout variable, or
-setLayout() function.
+app/View/Layouts directory, and switch between them inside of your
+controller actions using the controller or view's $layout property::
+
+    <?php
+    // from a controller
+    function admin_view() {
+        // stuff
+        $this->layout = 'admin';
+    }
+
+    // from a view file
+    $this->layout = 'loggedin';
 
 For example, if a section of my site included a smaller ad banner
 space, I might create a new layout with the smaller advertising
 space and specify it as the layout for all controller's actions
-using something like:
-
-``var $layout = 'default_small_ad';``
-
-::
+using something like::
 
    <?php
    class UsersController extends AppController {
@@ -147,14 +153,13 @@ using something like:
            //output user image
        }
    }
-   ?>
 
-CakePHP features two core layouts (besides CakePHP’s default
-layout) you can use in your own application: ‘ajax’ and ‘flash’.
-The Ajax layout is handy for crafting Ajax responses - it’s an
+CakePHP features two core layouts (besides CakePHP's default
+layout) you can use in your own application: 'ajax' and 'flash'.
+The Ajax layout is handy for crafting Ajax responses - it's an
 empty layout (most ajax calls only require a bit of markup in
 return, rather than a fully-rendered interface). The flash layout
-is used for messages shown by the controllers flash() method.
+is used for messages shown by :php:meth:`Controller::flash()` method.
 
 Three other layouts xml, js, and rss exist in the core for a quick
 and easy way to serve up content that isn’t text/html.
@@ -176,11 +181,9 @@ make a view more readable, placing the rendering of repeating
 elements in its own file. They can also help you re-use content
 fragments in your application.
 
-Elements live in the /app/views/elements/ folder, and have the .ctp
+Elements live in the /app/Views/Elements/ folder, and have the .ctp
 filename extension. They are output using the element method of the
-view.
-
-::
+view::
 
     <?php echo $this->element('helpbox'); ?>
 
@@ -188,56 +191,47 @@ Passing Variables into an Element
 ---------------------------------
 
 You can pass data to an element through the element's second
-argument:
+argument::
 
-::
-
-    <?php echo
-    $this->element('helpbox', 
-        array("helptext" => "Oh, this text is very helpful."));
-    ?>
+    <?php echo $this->element('helpbox', array(
+        "helptext" => "Oh, this text is very helpful."
+    ));
 
 Inside the element file, all the passed variables are available as
-members of the parameter array (in the same way that ``set()`` in
+members of the parameter array (in the same way that :php:meth:`Controller::set()` in
 the controller works with view files). In the above example, the
-/app/views/elements/helpbox.ctp file can use the ``$helptext``
-variable.
-
-::
+/app/View/Elements/helpbox.ctp file can use the ``$helptext``
+variable::
 
     <?php
+    // inside app/View/Elements/helpbox.ctp
     echo $helptext; //outputs "Oh, this text is very helpful."
-    ?>
 
-The ``element()`` function combines options for the element with
-the data for the element to pass. The two options are 'cache' and
-'plugin'. An example:
+The :php:meth:`View::element()` method also supports options for the element.
+The options supported are 'cache', 'callbacks' and 'plugin'. An example::
 
-::
+    <?php echo $this->element('helpbox', array(
+                "helptext" => "This is passed to the element as $helptext",
+                "foobar" => "This is passed to the element as $foobar",
+            ),
+            array(
+                "cache" => "long_view", // uses the "long_view" cache configuration
+                "plugin" => "",  //to render an element from a plugin
+                "callbacks" => true // set to true to have before/afterRender called for the element
+            )
+        );
 
-    <?php echo
-    $this->element('helpbox', 
-        array(
-            "helptext" => "This is passed to the element as $helptext",
-            "foobar" => "This is passed to the element as $foobar",
-            "cache" => "+2 days", //sets the caching to +2 days.
-            "plugin" => "" //to render an element from a plugin
-        )
-    );
-    ?>
-
-To cache different versions of the same element in an application,
-provide a unique cache key value using the following format:
-
-::
+Element caching is facilitated through the :php:class:`Cache` class.  You can
+configure elements to be stored in any Cache configuration you've setup.  This
+gives you a great amount of flexibilty to decide where and for how long elements
+are stored.  To cache different versions of the same element in an application, 
+provide a unique cache key value using the following format::
 
     <?php
-    $this->element('helpbox',
-        array(
-            "cache" => array('time'=> "+7 days",'key'=>'unique value')
+    $this->element('helpbox', array(), array(
+            "cache" => array('config'=> 'short', 'key'=>'unique value')
         )
     );
-    ?>
 
 You can take full advantage of elements by using
 ``requestAction()``. The ``requestAction()`` function fetches view
@@ -249,9 +243,7 @@ of ``element()`` to feed the element the view variables from your
 controller.
 
 To do this, in your controller add something like the following for
-the Post example.
-
-::
+the Post example::
 
     <?php
     class PostsController extends AppController {
@@ -265,13 +257,10 @@ the Post example.
             }
         }
     }
-    ?>
 
 And then in the element we can access the paginated posts model. To
 get the latest five posts in an ordered list we would do something
-like the following:
-
-::
+like the following::
 
     <h2>Latest Posts</h2>
     <?php $posts = $this->requestAction('posts/index/sort:created/direction:asc/limit:5'); ?>
@@ -285,30 +274,36 @@ Caching Elements
 ----------------
 
 You can take advantage of CakePHP view caching if you supply a
-cache parameter. If set to true, it will cache for 1 day.
-Otherwise, you can set alternative expiration times. See
-:doc:`/core-libraries/caching` for more information on setting
-expiration.
+cache parameter. If set to true, it will cache the element in the 
+'default' Cache configuration. Otherwise, you can set which cache configuration 
+should be used. See :doc:`/core-libraries/caching` for more information on
+configuring :php:class:`Cache`. A simple example of caching an element would be::
 
-::
-
-    <?php echo $this->element('helpbox', array('cache' => true)); ?>
+    <?php echo $this->element('helpbox', array(), array('cache' => true)); ?>
 
 If you render the same element more than once in a view and have
 caching enabled be sure to set the 'key' parameter to a different
 name each time. This will prevent each succesive call from
-overwriting the previous element() call's cached result. E.g.
-
-::
+overwriting the previous element() call's cached result. E.g.::
 
     <?php
-    echo $this->element('helpbox', array('cache' => array('key' => 'first_use', 'time' => '+1 day'), 'var' => $var));
+    echo $this->element(
+        'helpbox', 
+        array('var' => $var),
+        array('cache' => array('key' => 'first_use', 'config' => 'view_long')
+    );
     
-    echo $this->element('helpbox', array('cache' => array('key' => 'second_use', 'time' => '+1 day'), 'var' => $differentVar));
-    ?>
+    echo $this->element(
+        'helpbox', 
+        array('var' => $differenVar),
+        array('cache' => array('key' => 'second_use', 'config' => 'view_long')
+    );
 
-The above will ensure that both element results are cached
-separately.
+The above will ensure that both element results are cached separately.  If
+you want all element caching to use the same cache configuration, you can save
+some repetition, by setting :php:attr:`View::$elementCache` to the cache
+configuration you want to use.  CakePHP will use this configuration, when none
+is given.
 
 Requesting Elements from a Plugin
 ---------------------------------
@@ -317,11 +312,9 @@ If you are using a plugin and wish to use elements from within the
 plugin, just specify the plugin parameter. If the view is being
 rendered for a plugin controller/action, it will automatically
 point to the element for the plugin. If the element doesn't exist
-in the plugin, it will look in the main APP folder.
+in the plugin, it will look in the main APP folder.::
 
-::
-
-    <?php echo $this->element('helpbox', array('plugin' => 'pluginname')); ?>
+    <?php echo $this->element('helpbox', array(), array('plugin' => 'pluginname')); ?>
 
 View methods
 ============
@@ -357,7 +350,7 @@ To call any view method use ``$this->method()``
     Gets a list of all the available view variables in the current
     rendering scope. Returns an array of variable names.
 
-.. php:method:: element(string $elementPath, array $data, bool $loadHelpers)
+.. php:method:: element(string $elementPath, array $data, array $options = array())
 
     Renders an element or view partial. See the section on
     :ref:`view-elements` for more information and

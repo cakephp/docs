@@ -56,8 +56,6 @@ out CakeForge.
 The Test Cases
 ==============
 
-`http://api.cakephp.org/tests <http://api.cakephp.org/tests>`_
-
 If you ever feel the information provided in the API is not
 sufficient, check out the code of the test cases provided with
 CakePHP. They can serve as practical examples for function and
