@@ -630,42 +630,53 @@ given by ``$helpers`` to the view as an object reference variable
     Each controller has some of these classes available by default, so
     you may not need to configure your controller at all.
 
-Controllers have access to their primary model available by
-default. Our RecipesController will have the Recipe model class
-available at ``$this->Recipe``, and our ProductsController also
-features the Product model at ``$this->Product``. However, when
-allowing a controller to access additional models through the
-``$uses`` variable, the name of the current controller's model must
-also be included. This is illustrated in the example below.
+.. php:attr:: uses
 
-The Html, Form, and Session Helpers are always available by
-default, as is the SessionComponent. But if you choose to define
-your own $helpers array in AppController, make sure to include
-``Html`` and ``Form`` if you want them still available by default
-in your own Controllers. To learn more about these classes, be sure
-to check out their respective sections later in this manual.
+    Controllers have access to their primary model available by
+    default. Our RecipesController will have the Recipe model class
+    available at ``$this->Recipe``, and our ProductsController also
+    features the Product model at ``$this->Product``. However, when
+    allowing a controller to access additional models through the
+    ``$uses`` variable, the name of the current controller's model must
+    also be included. This is illustrated in the example below.
 
-Let’s look at how to tell a CakePHP controller that you plan to use
-additional MVC classes::
+    If you do not wish to use a Model in your controller, set
+    ``var $uses = array()``. This will allow you to use a controller
+    without a need for a corresponding Model file.
 
-    <?php
-    class RecipesController extends AppController {
-        var $name = 'Recipes';
+.. php:attr:: helpers
 
-        var $uses = array('Recipe', 'User');
-        var $helpers = array('Ajax');
-        var $components = array('Email');
-    }
-    ?>   
+    The Html, Form, and Session Helpers are available by
+    default, as is the SessionComponent. But if you choose to define
+    your own ``$helpers`` array in AppController, make sure to include
+    ``Html`` and ``Form`` if you want them still available by default
+    in your Controllers. To learn more about these classes, be sure
+    to check out their respective sections later in this manual.
 
-Each of these variables are merged with their inherited values,
-therefore it is not necessary (for example) to redeclare the Form
-helper, or anything that is declared in your App controller.
+    Let’s look at how to tell a CakePHP controller that you plan to use
+    additional MVC classes::
 
-If you do not wish to use a Model in your controller, set
-``var $uses = array()``. This will allow you to use a controller
-without a need for a corresponding Model file.
+        <?php
+        class RecipesController extends AppController {
+            var $name = 'Recipes';
 
+            var $uses = array('Recipe', 'User');
+            var $helpers = array('Ajax');
+            var $components = array('Email');
+        }
+        ?>   
+
+    Each of these variables are merged with their inherited values,
+    therefore it is not necessary (for example) to redeclare the Form
+    helper, or anything that is declared in your App controller.
+
+.. php:attr:: components
+
+    The components array allows you to set which :doc:`/controllers/components`
+    a controller will use.  Like ``$helpers`` and ``$uses`` components in your 
+    controllers are merged with those in ``AppController``.  As with
+    ``$helpers`` you can pass settings into components.  See :ref:`configuring-components`
+    for more information.
 
 Other Attributes
 ----------------

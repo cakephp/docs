@@ -223,6 +223,9 @@ Component API
     are also public properties will have their values changed to the
     matching value in ``$settings``.
 
+Callbacks
+---------
+
 .. php:method:: initialize($controller)
 
     The initialize method is called before the controller's
