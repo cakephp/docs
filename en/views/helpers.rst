@@ -247,6 +247,26 @@ Helper API
     The base class for Helpers. It provides a number of utility methods and 
     features for loading other helpers.
 
+.. php:method:: webroot($file)
+
+    Resolve a file name to the webroot of the application. If a theme is active
+    and the file exists in the current theme's webroot, the path to the themed
+    file will be returned.
+
+.. php:method:: url($url, $full = false)
+
+    Generates an HTML escaped URL, delgates to :php:meth:`Router::url()`.
+
+.. php:method:: value($options = array(), $field = null, $key = 'value')
+
+    Get the value for a given input name.
+
+.. php:method:: domId($options = null, $id = 'id')
+
+    Generate a CamelCased id value for the currently selected field. 
+    Overriding this method in your AppHelper will allow you to change 
+    how CakePHP generates ID attributes.
+
 Callbacks
 ---------
 
