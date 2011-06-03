@@ -440,6 +440,8 @@ The core authorize objects support the following configuration keys.
   ACO's in the ACO tree.
 - ``actionMap`` Action -> CRUD mappings.  Used by ``CrudAuthorize`` and
   authorization objects that want to map actions to CRUD roles.
+- ``userModel`` The name of  the ARO/Model node user information can be found 
+  under.  Used with ActionsAuthorize,
 
 
 Creating Custom Authorize objects
