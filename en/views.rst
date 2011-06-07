@@ -15,17 +15,19 @@ the time your views will be showing (X)HTML documents to browsers,
 but you might also need to serve AMF data to a Flash object, reply
 to a remote application via SOAP, or output a CSV file for a user.
 
-CakePHP view files are written in plain PHP and have a default
+By default CakePHP view files are written in plain PHP and have a default
 extension of .ctp (CakePHP Template). These files contain all the
 presentational logic needed to get the data it received from the
 controller in a format that is ready for the audience you’re
-serving to.
+serving to. If you'd prefer to using a templating language like 
+Twig, or Smarty, a subclass of View will bridge your templating
+language and CakePHP
 
-View files are stored in /app/View/, in a folder named after the
+View files are stored in ``/app/View/``, in a folder named after the
 controller that uses the files, and named after the action it
 corresponds to. For example, the view file for the Products
 controller's "view()" action, would normally be found in
-/app/View/Products/view.ctp.
+``/app/View/Products/view.ctp``.
 
 The view layer in CakePHP can be made up of a number of different
 parts. Each part has different uses, and will be covered in this
@@ -52,9 +54,9 @@ A layout contains presentation code that wraps around a view.
 Anything you want to see in all of your views should be placed in a
 layout.
 
-Layout files should be placed in /app/View/Layouts. CakePHP's
+Layout files should be placed in ``/app/View/Layouts``. CakePHP's
 default layout can be overridden by creating a new default layout
-at /app/View/Layouts/default.ctp. Once a new default layout has
+at ``/app/View/Layouts/default.ctp``. Once a new default layout has
 been created, controller-rendered view code is placed inside of the
 default layout when the page is rendered.
 
@@ -116,15 +118,16 @@ controller, setting the ``$title_for_layout`` variable::
    }
    
 
-You can also set the title_for_layout variable from inside the view file as well::
+You can also set the title_for_layout variable from inside the view file::
 
     <?php
 
     $this->set('title_for_layout', $titleContent);
 
 You can create as many layouts as you wish: just place them in the
-app/View/Layouts directory, and switch between them inside of your
-controller actions using the controller or view's $layout property::
+``app/View/Layouts`` directory, and switch between them inside of your
+controller actions using the controller or view's 
+:php:attr:`~View::$layout` property::
 
     <?php
     // from a controller
@@ -143,12 +146,12 @@ using something like::
 
    <?php
    class UsersController extends AppController {
-       function viewActive() {
+       public function viewActive() {
            $this->set('title_for_layout', 'View Active Users');
            $this->layout = 'default_small_ad';
        }
 
-       function viewImage() {
+       public function viewImage() {
            $this->layout = 'image';
            //output user image
        }
@@ -181,7 +184,7 @@ make a view more readable, placing the rendering of repeating
 elements in its own file. They can also help you re-use content
 fragments in your application.
 
-Elements live in the /app/Views/Elements/ folder, and have the .ctp
+Elements live in the ``/app/Views/Elements/`` folder, and have the .ctp
 filename extension. They are output using the element method of the
 view::
 
@@ -200,7 +203,7 @@ argument::
 Inside the element file, all the passed variables are available as
 members of the parameter array (in the same way that :php:meth:`Controller::set()` in
 the controller works with view files). In the above example, the
-/app/View/Elements/helpbox.ctp file can use the ``$helptext``
+``/app/View/Elements/helpbox.ctp`` file can use the ``$helptext``
 variable::
 
     <?php
@@ -316,8 +319,8 @@ in the plugin, it will look in the main APP folder.::
 
     <?php echo $this->element('helpbox', array(), array('plugin' => 'pluginname')); ?>
 
-View methods
-============
+View API
+========
 
 .. php:class:: View
 
@@ -376,6 +379,21 @@ To call any view method use ``$this->method()``
     ``$scripts_for_layout``. This method is most often used from inside
     helpers, like the :doc:`/core-libraries/core-helpers/js` and
     :doc:`/core-libraries/core-helpers/html` Helpers.
+
+.. php:attr:: layout
+
+    Set the layout the current view will be wrapped in.
+
+.. php:attr:: elementCache
+
+    The cache configuration used to cache elements. Setting this
+    property will change the default configuration used to cache elements.
+    This default can be overridden using the 'cache' option.
+
+.. php:attr:: request
+
+    An instance of :php:class:`CakeRequest`.  Use this instance to access
+    information about the current request.
 
 More about Views
 ================
