@@ -23,8 +23,7 @@ information, check out :doc:`/core-libraries/core-helpers`.
     tables, header tags and more.
 :doc:`/core-libraries/core-helpers/js`
     Used to create Javascript compatible with various Javascript
-    libraries. Replaces JavascriptHelper and AjaxHelper with a more
-    flexible solution.
+    libraries.
 :doc:`/core-libraries/core-helpers/number`
     Number and currency formatting.
 :doc:`/core-libraries/core-helpers/paginator`
@@ -183,7 +182,7 @@ actual PHP class file would look something like this::
     in the :ref:`helper-api`.
 
 Including other Helpers
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 You may wish to use some functionality already existing in another
 helper. To do so, you can specify helpers you wish to use with a
@@ -208,11 +207,16 @@ helper. To do so, you can specify helpers you wish to use with a
 .. _using-helpers:
 
 Using your Helper
-~~~~~~~~~~~~~~~~~
+-----------------
 
 Once you've created your helper and placed it in
-/app/View/Helper/, you'll be able to include it in your
-controllers using the special variable $helpers.
+``/app/View/Helper/``, you'll be able to include it in your
+controllers using the special variable :php:attr:`~Controller::$helpers`::
+
+    <?php
+    class PostsController extends AppController {
+        public $helpers = array('Link');
+    }
 
 Once your controller has been made aware of this new class, you can
 use it in your views by accessing an object named after the
