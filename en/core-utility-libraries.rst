@@ -19,4 +19,5 @@ HttpSocket.
     core-utility-libraries/router
     core-utility-libraries/security
     core-utility-libraries/sanitize
-    
+    core-utility-libraries/email
+
