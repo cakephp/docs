@@ -1,24 +1,20 @@
 Media Views
 ===========
 
-Media views allow you to send binary files to the user. For
-example, you may wish to have a directory of files outside of the
-webroot to prevent users from direct linking them. You can use the
-Media view to pull the file from a special folder within /app/,
-allowing you to perform authentication before delivering the file
-to the user.
+Media views allow you to send binary files to the user. For example, you may
+wish to have a directory of files outside of the webroot to prevent users from
+direct linking them. You can use the Media view to pull the file from a special
+folder within /app/, allowing you to perform authentication before delivering
+the file to the user.
 
-To use the Media view, you need to tell your controller to use the
-MediaView class instead of the default View class. After that, just
-pass in additional parameters to specify where your file is
-located.
-
-::
+To use the Media view, you need to tell your controller to use the MediaView
+class instead of the default View class. After that, just pass in additional
+parameters to specify where your file is located::
 
     <?php
     class ExampleController extends AppController {
         function download () {
-            $this->view = 'Media';
+            $this->viewClass = 'Media';
             $params = array(
                   'id' => 'example.zip',
                   'name' => 'example',
@@ -30,19 +26,19 @@ located.
         }
     }
 
-Here's an example of rendering a file whose mime type is not
-included in the MediaView's ``$mimeType`` array.
-
-::
+Here's an example of rendering a file whose mime type is not included in the
+MediaView's ``$mimeType`` array::
 
     <?php
     function download () {
-        $this->view = 'Media';
+        $this->viewClass = 'Media';
         $params = array(
               'id' => 'example.docx',
               'name' => 'example',
               'extension' => 'docx',
-              'mimeType' => array('docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'),
+              'mimeType' => array(
+                'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+               ),
               'path' => APP . 'files' . DS
        );
        $this->set($params);
