@@ -33,15 +33,12 @@ Internationalization / Localization
 __() (Double underscore shortcut function) always returns the translation
 (not echo anymore).
 
-If you want to echo the result of the translation, use:
+If you want to echo the result of the translation, use::
 
-::
-
+    <?php
     echo __('My Message');
     
-This change includes all shortcut translation methods:
-
-::
+This change includes all shortcut translation methods::
 
     __()
     __n()
@@ -53,10 +50,9 @@ This change includes all shortcut translation methods:
 
 Alongside this, if you pass additional parameters, the translation will call
 `sprintf <http://php.net/manual/en/function.sprintf.php>`_  with these
-parameters before returning. For example:
+parameters before returning. For example::
 
-::
-
+    <?php
     // Will return something like "Called: MyClass:myMethod"
     echo __('Called: %s:%s', $className, $methodName);
 
@@ -104,8 +100,17 @@ Basics.php
 -  Global var called ``$TIME_START`` was removed use
    ``$_SERVER['REQUEST_TIME']`` instead.
 
+Removed Constants
+-----------------
+
+A number of constants were removed, as they were no longer accurate, or
+duplicated.
+
+- CONTROLLERS
+- ... more needed ...
+
 CakeRequest
------------
+===========
 
 This new class encapsulates the parameters and functions related to an incoming
 request. It replaces many features inside ``Dispatcher``,
@@ -115,7 +120,7 @@ request. It replaces many features inside ``Dispatcher``,
 change. See the CakeRequest new features for more information.
 
 Request handling, $_GET['url'] and .htaccess files
---------------------------------------------------
+==================================================
 
 CakePHP no longer uses ``$_GET['url']`` for handling application request paths.
 Instead it uses ``$_SERVER['PATH_INFO']``. This provides a more uniform way of
@@ -190,12 +195,14 @@ AuthComponent
 
 The AuthComponent was entirely re-factored for 2.0, this was done to help reduce
 developer confusion and frustration. In addition, AuthComponent was made more
-flexible and extensible. You can find out more in the AuthComponent guide.
+flexible and extensible. You can find out more in 
+the :doc:`/core-libraries/core-components/authentication` guide.
 
 EmailComponent
+--------------
 
 The EmailComponent has been deprecated and has created a new library class to
-send e-mails. See Email changes for more details.
+send e-mails. See :doc:`/core-utility-libraries/email` Email changes for more details.
 
 cakeError removed
 =================
@@ -211,7 +218,7 @@ Error handling
 The error handling implementation has dramatically changed in 2.0. Exceptions
 have been introduced throughout the framework, and error handling has been
 updated to offer more control and flexibility. You can read more in the
-exceptions and error handling section.
+:doc:`/development/exceptions` and :doc:`/development/errors` section.
 
 Lib classes
 ===========
@@ -228,13 +235,13 @@ App
 CakeLog
 -------
 
--  Log streams now need to implement CakeLogInterface. Exceptions will be raised
+-  Log streams now need to implement :php:class:`CakeLogInterface`. Exceptions will be raised
    if a configured logger does not.
 
 Cache
 -----
 
--  Cache is now a static class, it no longer has a getInstance() method.
+-  :php:class:`Cache` is now a static class, it no longer has a getInstance() method.
 -  CacheEngine is now an abstract class. You cannot directly create instances of 
    it anymore.
 -  CacheEngine implementations must extend CacheEngine, exceptions will be
@@ -248,6 +255,7 @@ Cache
 
 ::
 
+    <?php
     Cache::config('something');
     Cache::write('key, $value);
     
@@ -285,10 +293,10 @@ Configure
 -  ``Configure::read()`` with no parameter no longer returns the value of
    'debug' instead it returns all values in Configure. Use
    ``Configure::read('debug');`` if you want the value of debug.
--  ``Configure::load()`` now requires a ConfigReader to be setup. Read Configure
-   updates for more information.
+-  ``Configure::load()`` now requires a ConfigReader to be setup. Read 
+   :ref:`loading-configuration-files` for more information.
 -  ``Configure::store()`` now writes values to a given Cache configuration. Read
-   Configure updates for more information.
+   :ref:`loading-configuration-files` for more information.
 
 Scaffold
 --------
@@ -330,7 +338,7 @@ Xml
 -  ``Xml::toArray()``: static method that returns an array from
    SimpleXMLElement.
 
-You should see the Xml features page for more information on the changes made to
+You should see the :php:class:`Xml` documentation for more information on the changes made to
 the Xml class.
 
 Inflector
@@ -361,9 +369,6 @@ The AjaxHelper and JavascriptHelper have been removed as they were deprecated in
 version 1.3.
 
 They are replaced with the JsHelper and HtmlHelper.
-
-Further documentation can be found in the
-:doc:`migrating-from-cakephp-1-2-to-1-3`.
 
 JsHelper
 --------
@@ -518,25 +523,22 @@ Models
 ======
 
 As now models relationships are lazy loaded. You can run into situation when
-assigning a value to an inexistent model property will throw errors
+assigning a value to an inexistent model property will throw errors::
 
-::
-
+    <?php
     $Post->inexistentProperty[] = 'value';
 
 will throw the error "Notice: Indirect modification of overloaded property
 $inexistentProperty has no effect". Assigning an initial value to the property
-solves the issue:
+solves the issue::
 
-::
-
+    <?php
     $Post->inexistentProperty = array();
     $Post->inexistentProperty[] = 'value';
 
-Or just declare the property in the model class:
+Or just declare the property in the model class::
 
-::
-
+    <?php
     class Post {
         var $inexistantPropert = array();
     }
@@ -563,17 +565,13 @@ Plugins
 
 Plugins no longer magically append their plugin prefix to components, helpers
 and models used within them. You must be explicit with the components, models,
-and helpers you wish to use. In the past:
-
-::
+and helpers you wish to use. In the past::
 
     var $components = array('Session', 'Comments');
 
 Would look in the controller's plugin before checking app/core components, it
 will now only look in the app/core components. If you wish to use objects from a
-plugin you must put the plugin name.
-
-::
+plugin you must put the plugin name::
 
     var $components = array('Session', 'Comment.Comments');
 
@@ -655,10 +653,9 @@ When defining database connections you will need to made some changes to the way
 configs were defined in the past. Basically in the database configuration class,
 the key "driver" is not accepted anymore, only "datasource", in order to make it
 more consistent. Also, as the datasources have been moved to packages you will
-need to pass the package they are located in. Example:
+need to pass the package they are located in. Example::
 
-::
-
+    <?php
     public $default = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,

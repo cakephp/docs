@@ -2,7 +2,7 @@ Appendices
 ##########
 
 Appendices contain information regarding the new features
-introduced in 1.3, migration path from 1.2 to 1.3 and 2.0 migration guide.
+introduced in 2.0, and the migration path from 1.3 to 2.0.
 
 2.0 Migration Guide
 =========================
