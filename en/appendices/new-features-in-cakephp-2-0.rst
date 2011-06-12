@@ -18,19 +18,20 @@ Helpers
 HtmlHelper
 ----------
 
-* :php:meth:`getCrumbsList()` Creates breadcrumb links wrapped in ``<li>`` elements.
+* ``getCrumbsList()`` Creates breadcrumb links wrapped in ``<li>`` elements.
   See `#856 <http://cakephp.lighthouseapp.com/projects/42648/tickets/856>`_.
-* :php:meth:`loadConfig()` has moved from Helper to HtmlHelper class. This
-  method now uses the new reader classes (see 2.0 Configure) to load your
-  config file. As optional you can pass the path as second parameter
+* ``loadConfig()`` has moved from :php:class:`Helper` to :php:class:`HtmlHelper`
+  class. This method now uses the new reader classes (see 2.0 :php:class:`Configure`)
+  to load your config file. As optional you can pass the path as second parameter
   (``app/Config`` is default). To simply, you can set the configuration file
   (and the reader) in ``Controller::$helpers`` (example below) to load on helper
   constructor. In configuration file you can set the below keys:
- * :php:attr:`tags` Should be an array with key value;
- * :php:attr:`minimizedAttributes` Should be a list;
- * :php:attr:`docTypes` Should be an array with key value;
- * :php:attr:`attributeFormat` Should be a string;
- * :php:attr:`minimizedAttributeFormat` Should be a string.
+
+ * ``tags`` Should be an array with key value;
+ * ``minimizedAttributes`` Should be a list;
+ * ``docTypes`` Should be an array with key value;
+ * ``attributeFormat`` Should be a string;
+ * ``minimizedAttributeFormat`` Should be a string.
 
 Example how to set configuration file on controller::
 
@@ -47,11 +48,11 @@ FormHelper
 
 * :php:class:`FormHelper` now supports all HTML5 input types and custom input
   types. Just use the input type you want as the method on the helper. For
-  example :php:meth:`range()` would create an input with type = range.
-* :php:meth:`postLink()` and :php:meth:`postButton()` Creates link/button to
+  example ``range()`` would create an input with type = range.
+* ``postLink()`` and ``postButton()`` Creates link/button to
   access some page using HTTP method POST. With this, in your controller you can
   avoid some action, like delete, to be accessed by GET method.
-* :php:meth:`select()` with multiple = checkbox, now treats the ``'id'``
+* ``select()`` with multiple = checkbox, now treats the ``'id'``
   attribute as a prefix for all the generated options.
 
 Libs
@@ -119,7 +120,8 @@ The above would create a link with http://test.localhost/posts/add as the url.
 Xml
 ---
 
-:php:class:`Xml` has had a number of changes. Read more about Xml class.
+:php:class:`Xml` has had a number of changes. Read more about
+:doc:`/core-utility-libraries/xml` class.
 
 New Lib features
 ================
@@ -127,24 +129,30 @@ New Lib features
 Configure readers
 -----------------
 
-Configure can now be configured to load configuration files from a variety of sources and formats. The new Configure features section contains more information about the changes made to configure.
+:php:class:`Configure` can now be configured to load configuration files from a
+variety of sources and formats. The :doc:`/development/configuration` section
+contains more information about the changes made to configure.
 
-Configure::read() without any arguments allows you to read all values from configure, instead of just the debug value.
+:php:meth:`Configure::read()` without any arguments allows you to read all
+values from configure, instead of just the debug value.
 
 Error and exception handling
 ----------------------------
 
-CakePHP 2.0 has had error and exception handling rebuilt, to be more flexible and give more power to developers.
+CakePHP 2.0 has had :doc:`/development/exceptions` and :doc:`/development/errors`
+handling rebuilt, to be more flexible and give more power to developers.
 
 String::wrap()
 --------------
 
-String::wrap() was added to help making fixed width formatting of text easier. Its used in Shells whenever you use Shell::wrapText()
+:php:meth:`String::wrap()` was added to help making fixed width formatting of
+text easier. Its used in Shells whenever you use :php:meth:`Shell::wrapText()`.
 
 debug()
-------
+-------
 
-:php:func:`debug()` no longer outputs html in the console. Instead it makes output like the following::
+:php:func:`debug()` no longer outputs html in the console. Instead it makes
+output like the following::
 
     ########## DEBUG ##########
     Array
@@ -153,27 +161,29 @@ debug()
     )
     ###########################
 
-This should improve readability of debug() on the command line.
+This should improve readability of ``debug()`` on the command line.
 
 Components
 ==========
 
-Components received a similar treatment to helpers and behvaiors, Component is
-now the base class for components. Read more about the component changes.
+Components received a similar treatment to helpers and behvaiors,
+:php:class:`Component` is now the base class for components. Read more about the
+component changes.
 
 RequestHandler
 --------------
 
-:php:class:`RequestHandler` was heavily refactored do to the introduction of CakeRequest.
-These changes allowed for some new features to be introduced as well.
+:php:class:`RequestHandler` was heavily refactored do to the introduction of
+:php:class:`CakeRequest`. These changes allowed for some new features to be
+introduced as well.
 
 Automatic parsing of Accept headers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If a client sends a single Accept mime type that matches one of the extensions
-enabled in Router, RequestHandler will treat it the same an extension. This
-expands CakePHP's support for REST style endpoints. To use this feature start
-off by enabling extensions in app/Config/routes.php
+enabled in :php:class`Router`, :php:class:`RequestHandler` will treat it the
+same an extension. This expands CakePHP's support for REST style endpoints. To
+use this feature start off by enabling extensions in ``app/Config/routes.php``
 
 ::
 
@@ -218,9 +228,7 @@ csrfExpires on the component.
         )
     );
 
-You can also set this property in your controller's beforeFilter
-
-::
+You can also set this property in your controller's ``beforeFilter``::
 
     <?php
     function beforeFilter() {
