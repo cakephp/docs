@@ -358,7 +358,7 @@ been crafting would look like in INI syntax:
     allow = salted_pork
 
 Now that you've got your permissions defined, you can skip along to
-`the section on checking permissions <http://docs.cakephp.org/view/1249/Checking-Permissions-The-ACL-Component>`_
+:ref:`the section on checking permissions <checking-permissions>`
 using the ACL component.
 
 
@@ -815,6 +815,8 @@ yourself. What we have above is equivalent to this:
 
 The next section will help us validate our setup by using the
 AclComponent to check the permissions we've just set up.
+
+.. _checking-permissions:
 
 Checking Permissions: The ACL Component
 ---------------------------------------

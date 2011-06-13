@@ -30,7 +30,7 @@ the 2.0 Class loading page.
 Internationalization / Localization
 ===================================
 
-__() (Double underscore shortcut function) always returns the translation
+:php:func:`__()` (Double underscore shortcut function) always returns the translation
 (not echo anymore).
 
 If you want to echo the result of the translation, use::
