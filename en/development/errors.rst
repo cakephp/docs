@@ -19,11 +19,11 @@ any PHP error - exceptions are handled :doc:`/development/exceptions` separately
 The callback can be any PHP callable, including an anonymous function.  The 
 default error handling configuration looks like::
 
-	Configure::write('Error', array(
-		'handler' => 'ErrorHandler::handleError',
-		'level' => E_ALL & ~E_DEPRECATED,
-		'trace' => true
-	));
+    Configure::write('Error', array(
+        'handler' => 'ErrorHandler::handleError',
+        'level' => E_ALL & ~E_DEPRECATED,
+        'trace' => true
+    ));
 
 You have 3 built-in options when configuring error handlers:
 
@@ -52,27 +52,27 @@ use a class called ``AppError`` to handle your errors.  The following would
 need to be done::
 
     <?php
-	//in app/config/core.php
-	Configure::write('Error.handler', 'AppError::handleError');
-	
-	//in app/config/bootstrap.php
-	App::uses('AppError', 'Lib');
-	
-	//in app/Lib/AppError.php
-	class AppError {
-		public static function handleError($code, $description, $file = null, $line = null, $context = null) {
-			echo 'There has been an error!';
-		}
-	}
+    //in app/config/core.php
+    Configure::write('Error.handler', 'AppError::handleError');
+
+    //in app/config/bootstrap.php
+    App::uses('AppError', 'Lib');
+
+    //in app/Lib/AppError.php
+    class AppError {
+        public static function handleError($code, $description, $file = null, $line = null, $context = null) {
+            echo 'There has been an error!';
+        }
+    }
 
 This class/method will print out 'There has been an error!' each time an error 
 occurs.  Since you can define an error handler as any callback type, you could
 use an anonymous function if you are using PHP5.3 or greater.::
 
     <?php
-	Configure::write('Error.handler', function($code, $description, $file = null, $line = null, $context = null) {
-		echo 'Oh no something bad happened';
-	});
+    Configure::write('Error.handler', function($code, $description, $file = null, $line = null, $context = null) {
+        echo 'Oh no something bad happened';
+    });
 
 It is important to remember that errors captured by the configured error handler will be php
 errors, and that if you need custom error handling, you probably also want to configure
