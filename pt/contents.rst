@@ -3,6 +3,9 @@ Contents
 
 .. toctree::
 
+   basic-info
+   cakephp-overview
+
 .. todolist::
 
 
