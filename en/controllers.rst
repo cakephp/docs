@@ -464,7 +464,7 @@ Other Useful Methods
 
     This method is used for paginating results fetched by your models.
     You can specify page sizes, model find conditions and more. See the
-    `pagination <http://docs.cakephp.org/view/164/pagination>`_ section for more details on
+    :doc:`pagination <core-libraries/core-components/pagination>` section for more details on
     how to use paginate.
 
 .. php:method:: requestAction(string $url, array $options)
