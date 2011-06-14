@@ -51,7 +51,7 @@ the AppModel allows you to define functionality that should be made
 available to all models within your application. To do so, you need
 to create your own app\_model.php file that resides in the root of
 the /app/ folder. Creating a project using
-`Bake <http://docs.cakephp.org/view/113/code-generation-with-bake>`_ will automatically
+:doc:`Bake <console-and-shells/code-generation-with-bake>` will automatically
 generate this file for you.
 
 Create your model PHP file in the /app/models/ directory or in a
@@ -72,11 +72,11 @@ for this example ingredient.php.
     CakePHP can't find your model and you either need to check the file
     names, clear your tmp files, or both.
 
-See also `Behaviors <http://docs.cakephp.org/view/88/behaviors>`_ for more information on
+See also :doc:`Behaviors <models/behaviors>` for more information on
 how to apply similar logic to multiple models.
 
 With your model defined, it can be accessed from within your
-`Controller <http://docs.cakephp.org/view/49/controllers>`_. CakePHP will automatically
+:doc:`Controller <controllers>`. CakePHP will automatically
 make the model available for access when its name matches that of
 the controller. For example, a controller named
 IngredientsController will automatically initialize the Ingredient

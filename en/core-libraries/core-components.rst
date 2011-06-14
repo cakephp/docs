@@ -30,7 +30,7 @@ The session component provides a storage independent wrapper to
 PHP's sessions.
 
 To learn more about each component see the menu below, or learn more about
-`creating your own components <http://docs.cakephp.org/view/62/components>`_.
+:doc:`creating your own components </controllers/components>`.
 
 All core components now can be configured in the ``$components``
 array of a controller.
