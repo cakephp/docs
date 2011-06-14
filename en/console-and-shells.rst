@@ -64,13 +64,13 @@ Running the Console with no arguments produces this help message::
      -root: /path/to/cake/
      -app: /path/to/cake/app/
      -core: /path/to/cake/
-     
+
     Changing Paths:
-    
+
     your working path should be the same as your application path
     to change your path use the '-app' param.
     Example: -app relative/path/to/myapp or -app /absolute/path/to/myapp
-     
+
     Available Shells:
 
      acl [CORE]                              i18n [CORE]                             
@@ -78,7 +78,7 @@ Running the Console with no arguments produces this help message::
      bake [CORE]                             schema [CORE]                           
      command_list [CORE]                     testsuite [CORE]                        
      console [CORE]
-     
+
     To run a command, type 'cake shell_name [args]'
     To get help on a specific command, type 'cake shell_name help'
 
@@ -113,7 +113,7 @@ cake executable to your system path.
 #. Edit your ``.bashrc`` or ``.bash_profile`` file in your home directory, and add the following::
 
     export PATH="/Users/mark/cakephp/cake/console:$PATH"
-    
+
 #. Reload the bash configuration or open a new terminal, and ``cake`` should work anywhere.
 
 .. todo::
@@ -165,7 +165,7 @@ that does something::
         public function main() {
             $this->out('Hello world.');
         }
-    
+
         public function hey_there() {
             $this->out('Hey there ' . $this->args[0]);
         }
@@ -190,7 +190,7 @@ models attached to it::
     <?php
     class UserShell extends AppShell {
         public $uses = array('User');
-        
+
         public function show() {
             $user = $this->User->findByUsername($this->args[0]);
             $this->out(print_r($user, true));
@@ -225,7 +225,7 @@ will call this method when the task is invoked.  A task class looks like::
     class FileGenerator extends Shell {
        public $uses = array('User');
        public function execute() {
-       
+
        }
     }
 
@@ -275,11 +275,11 @@ There are still many cases where you will want to invoke one shell from another 
 as var args or as a string::
 
     <?php
-	// As a string
-	$this->dispatchShell('schema create Blog --plugin Blog');
+    // As a string
+    $this->dispatchShell('schema create Blog --plugin Blog');
 
-	// As an array
-	$this->dispatchShell('schema', 'create',  'Blog', '--plugin',  'Blog');
+    // As an array
+    $this->dispatchShell('schema', 'create',  'Blog', '--plugin',  'Blog');
 
 The above shows how you can call the schema shell to create the schema for a plugin 
 from inside your plugin's shell.
@@ -336,7 +336,7 @@ You can create additional styles using `$this->stdout->styles()`.  To declare a
 new output style you could do::
 
     <?php
-	$this->stdout->styles('flashy', array('text' => 'magenta', 'blink' => true));
+    $this->stdout->styles('flashy', array('text' => 'magenta', 'blink' => true));
 
 This would then allow you to use a ``<flashy>`` tag in your shell output, and if ansi 
 colours are enabled, the following would be rendered as blinking magenta text 
@@ -370,7 +370,7 @@ Although colouring is pretty awesome, there may be times when you want to turn i
 or force it on::
 
     <?php
-	$this->output->outputAs(ConsoleOutput::RAW);
+    $this->output->outputAs(ConsoleOutput::RAW);
 
 The above will put the output object into raw output mode.  In raw output mode, 
 no styling is done at all.  There are three modes you can use.
@@ -409,11 +409,11 @@ The ConsoleOptionParser implements a fluent interface and includes
 methods for easily setting multiple options/arguments at once.::
 
     <?php
-	public function getOptionParser() {
-		$parser = parent::getOptionParser();
-		//configure parser
-		return $parser;
-	}
+    public function getOptionParser() {
+        $parser = parent::getOptionParser();
+        //configure parser
+        return $parser;
+    }
 
 Configuring an option parser with the fluent interface
 ------------------------------------------------------
@@ -422,14 +422,14 @@ All of the methods that configure an option parser can be chained,
 allowing you to define an entire option parser in one series of method calls::
 
     <?php
-	$parser->addArgument('type', array(
-		'help' => 'Either a full path or type of class.'
-	))->addArgument('className', array(
-		'help' => 'A CakePHP core class name (e.g: Component, HtmlHelper).'
-	))->addOption('method', array(
-		'short' => 'm',
-		'help' => __('The specific method you want help on.')
-	))->description(__('Lookup doc block comments for classes in CakePHP.'));
+    $parser->addArgument('type', array(
+        'help' => 'Either a full path or type of class.'
+    ))->addArgument('className', array(
+        'help' => 'A CakePHP core class name (e.g: Component, HtmlHelper).'
+    ))->addOption('method', array(
+        'short' => 'm',
+        'help' => __('The specific method you want help on.')
+    ))->description(__('Lookup doc block comments for classes in CakePHP.'));
 
 The methods that allow chaining are:
 
@@ -455,7 +455,7 @@ Calling with no arguments will return the current value.
     <?php
     // Set multiple lines at once
     $parser->description(array('line one', 'line two'));
-    
+
     // read the current value
     $parser->description()
 
@@ -471,7 +471,7 @@ Calling with no arguments will return the current value.
     <?php
     // Set multiple lines at once
     $parser->epilog(array('line one', 'line two'));
-    
+
     // read the current value
     $parser->epilog()
 
@@ -487,7 +487,7 @@ one at a time with ``$parser->addArgument();`` or multiple at once
 with ``$parser->addArguments();``::
 
     <?php
-	$parser->addArgument('model', array('help' => 'The model to bake'));
+    $parser->addArgument('model', array('help' => 'The model to bake'));
 
 You can use the following options when creating an argument:
 
@@ -510,10 +510,10 @@ If you have an array with multiple arguments you can use ``$parser->addArguments
 to add multiple arguments at once.::
 
     <?php
-	$parser->addArguments(array(
-		'node', array('help' => 'The node to create', 'required' => true),
-		'parent' => array('help' => 'The parent node', 'required' => true)
-	));
+    $parser->addArguments(array(
+        'node', array('help' => 'The node to create', 'required' => true),
+        'parent' => array('help' => 'The parent node', 'required' => true)
+    ));
 
 As with all the builder methods on ConsoleOptionParser, addArguments
 can be used as part of a fluent method chain.
@@ -527,11 +527,11 @@ Additionally you can use ``choices`` to force an argument to
 be from a list of valid choices::
 
     <?php
-	$parser->addArgument('type', array(
-		'help' => 'The type of node to interact with.',
-		'required' => true,
-		'choices' => array('aro', 'aco')
-	));
+    $parser->addArgument('type', array(
+        'help' => 'The type of node to interact with.',
+        'required' => true,
+        'choices' => array('aro', 'aco')
+    ));
 
 The above will create an argument that is required and has validation 
 on the input.  If the argument is either missing, or has an incorrect 
@@ -549,11 +549,11 @@ and creating boolean switches. Options are created with either
 ``$parser->addOption()`` or ``$parser->addOptions()``.::
 
     <?php
-	$parser->addOption('connection', array(
-		'short' => 'c'
-		'help' => 'connection',
-		'default' => 'default'
-	));
+    $parser->addOption('connection', array(
+        'short' => 'c'
+        'help' => 'connection',
+        'default' => 'default'
+    ));
 
 The above would allow you to use either ``cake myshell --connection=other``, 
 ``cake myshell --connection other``, or ``cake myshell -c other`` 
@@ -562,7 +562,7 @@ consume values, and their presence just enables them in the
 parsed parameters.::
 
     <?php
-	$parser->addOption('no-commit', array('boolean' => true));
+    $parser->addOption('no-commit', array('boolean' => true));
 
 With this option, when calling a shell like ``cake myshell --no-commit something`` 
 the no-commit param would have a value of true, and 'something' 
@@ -587,10 +587,10 @@ If you have an array with multiple options you can use ``$parser->addOptions()``
 to add multiple options at once.::
 
     <?php
-	$parser->addOptions(array(
-		'node', array('short' => 'n', 'help' => 'The node to create'),
-		'parent' => array('short' => 'p', 'help' => 'The parent node')
-	));
+    $parser->addOptions(array(
+        'node', array('short' => 'n', 'help' => 'The node to create'),
+        'parent' => array('short' => 'p', 'help' => 'The parent node')
+    ));
 
 As with all the builder methods on ConsoleOptionParser, addOptions is can be used 
 as part of a fluent method chain.
@@ -603,10 +603,10 @@ can be.  When an option has defined choices, those are the only valid choices
 for an option.  All other values will raise an ``InvalidArgumentException``::
 
     <?php
-	$parser->addOption('accept', array(
-		'help' => 'What version to accept.',
-		'choices' => array('working', 'theirs', 'mine')
-	));
+    $parser->addOption('accept', array(
+        'help' => 'What version to accept.',
+        'choices' => array('working', 'theirs', 'mine')
+    ));
 
 Using boolean options
 ---------------------
@@ -617,18 +617,18 @@ themselves into the parsed parameters.  When the flags are present they are set
 to true, when they are absent false::
 
     <?php
-	$parser->addOption('verbose', array(
-		'help' => 'Enable verbose output.',
-		'boolean' => true
-	));
+    $parser->addOption('verbose', array(
+        'help' => 'Enable verbose output.',
+        'boolean' => true
+    ));
 
 The following option would result in ``$this->params['verbose']`` always 
 being available.  This lets you omit ``empty()`` or ``isset()`` 
 checks for boolean flags::
 
-	if ($this->params['verbose']) {
-		// do something
-	}
+    if ($this->params['verbose']) {
+        // do something
+    }
 
 Since the boolean options are always defined as ``true`` or 
 ``false`` you can omit additional check methods.
@@ -646,10 +646,10 @@ define subcommands and provide command specific option parsers so the
 shell knows how to parse commands for its tasks::
 
     <?php
-	$parser->addSubcommand('model', array(
-		'help' => 'Bake a model',
-		'parser' => $this->Model->getOptionParser()
-	));
+    $parser->addSubcommand('model', array(
+        'help' => 'Bake a model',
+        'parser' => $this->Model->getOptionParser()
+    ));
 
 The above is an example of how you could provide help and a specialized 
 option parser for a shell's task. By calling the Task's ``getOptionParser()`` 
@@ -683,21 +683,21 @@ you can define the parser spec as an array this method.  This can help
 make building subcommand parsers easier, as everything is an array::
 
     <?php
-	$parser->addSubcommand('check', array(
-		'help' => __('Check the permissions between an ACO and ARO.'),
-		'parser' => array(
-			'description' => array(
-				__("Use this command to grant ACL permissions. Once executed, the ARO "),
-				__("specified (and its children, if any) will have ALLOW access to the"),
-				__("specified ACO action (and the ACO's children, if any).")
-			),
-			'arguments' => array(
-				'aro' => array('help' => __('ARO to check.'), 'required' => true),
-				'aco' => array('help' => __('ACO to check.'), 'required' => true),
-				'action' => array('help' => __('Action to check'))
-			)
-		)
-	));
+    $parser->addSubcommand('check', array(
+        'help' => __('Check the permissions between an ACO and ARO.'),
+        'parser' => array(
+            'description' => array(
+                __("Use this command to grant ACL permissions. Once executed, the ARO "),
+                __("specified (and its children, if any) will have ALLOW access to the"),
+                __("specified ACO action (and the ACO's children, if any).")
+            ),
+            'arguments' => array(
+                'aro' => array('help' => __('ARO to check.'), 'required' => true),
+                'aco' => array('help' => __('ACO to check.'), 'required' => true),
+                'action' => array('help' => __('Action to check'))
+            )
+        )
+    ));
 
 Inside the parser spec, you can define keys for ``definition``, 
 ``arguments``, ``options``, and ``epilog``.  You cannot define 
@@ -707,20 +707,20 @@ arguments, and options, should follow the format that
 use.  You can also use buildFromArray on its own, to build an option parser::
 
     <?php
-	public function getOptionParser() {
-		return ConsoleOptionParser::buildFromArray(array(
-			'description' => array(
-				__("Use this command to grant ACL permissions. Once executed, the ARO "),
-				__("specified (and its children, if any) will have ALLOW access to the"),
-				__("specified ACO action (and the ACO's children, if any).")
-			),
-			'arguments' => array(
-				'aro' => array('help' => __('ARO to check.'), 'required' => true),
-				'aco' => array('help' => __('ACO to check.'), 'required' => true),
-				'action' => array('help' => __('Action to check'))
-			)
-		));
-	}
+    public function getOptionParser() {
+        return ConsoleOptionParser::buildFromArray(array(
+            'description' => array(
+                __("Use this command to grant ACL permissions. Once executed, the ARO "),
+                __("specified (and its children, if any) will have ALLOW access to the"),
+                __("specified ACO action (and the ACO's children, if any).")
+            ),
+            'arguments' => array(
+                'aro' => array('help' => __('ARO to check.'), 'required' => true),
+                'aco' => array('help' => __('ACO to check.'), 'required' => true),
+                'action' => array('help' => __('Action to check'))
+            )
+        ));
+    }
 
 Getting help from shells
 ------------------------
@@ -759,47 +759,47 @@ would look like:
 
     <?xml version="1.0"?>
     <shell>
-    	<commmand>bake fixture</commmand>
-    	<description>Generate fixtures for use with the test suite. You can use 
-    	   `bake fixture all` to bake all fixtures.</description>
-    	<epilog>Omitting all arguments and options will enter into an interactive mode.</epilog>
-    	<subcommands/>
-    	<options>
-    		<option name="--help" short="-h" boolean="1">
-    			<default/>
-    			<choices/>
-    		</option>
-    		<option name="--verbose" short="-v" boolean="1">
-    			<default/>
-    			<choices/>
-    		</option>
-    		<option name="--quiet" short="-q" boolean="1">
-    			<default/>
-    			<choices/>
-    		</option>
-    		<option name="--count" short="-n" boolean="">
-    			<default>10</default>
-    			<choices/>
-    		</option>
-    		<option name="--connection" short="-c" boolean="">
-    			<default>default</default>
-    			<choices/>
-    		</option>
-    		<option name="--plugin" short="-p" boolean="">
-    			<default/>
-    			<choices/>
-    		</option>
-    		<option name="--records" short="-r" boolean="1">
-    			<default/>
-    			<choices/>
-    		</option>
-    	</options>
-    	<arguments>
-    		<argument name="name" help="Name of the fixture to bake. 
-    		    Can use Plugin.name to bake plugin fixtures." required="">
-    			<choices/>
-    		</argument>
-    	</arguments>
+        <commmand>bake fixture</commmand>
+        <description>Generate fixtures for use with the test suite. You can use
+           `bake fixture all` to bake all fixtures.</description>
+        <epilog>Omitting all arguments and options will enter into an interactive mode.</epilog>
+        <subcommands/>
+        <options>
+            <option name="--help" short="-h" boolean="1">
+                <default/>
+                <choices/>
+            </option>
+            <option name="--verbose" short="-v" boolean="1">
+                <default/>
+                <choices/>
+            </option>
+            <option name="--quiet" short="-q" boolean="1">
+                <default/>
+                <choices/>
+            </option>
+            <option name="--count" short="-n" boolean="">
+                <default>10</default>
+                <choices/>
+            </option>
+            <option name="--connection" short="-c" boolean="">
+                <default>default</default>
+                <choices/>
+            </option>
+            <option name="--plugin" short="-p" boolean="">
+                <default/>
+                <choices/>
+            </option>
+            <option name="--records" short="-r" boolean="1">
+                <default/>
+                <choices/>
+            </option>
+        </options>
+        <arguments>
+            <argument name="name" help="Name of the fixture to bake.
+                Can use Plugin.name to bake plugin fixtures." required="">
+                <choices/>
+            </argument>
+        </arguments>
     </shell>
 
 
@@ -819,7 +819,7 @@ Shell API
 .. php:attr:: tasks
 
     An array of tasks you want loaded for this shell/task.
-    
+
 .. php:attr:: uses
 
     An array of models that should be loaded for this shell/task.
@@ -830,39 +830,39 @@ Shell API
     :param array $options: An array of valid choices the user can pick from.
        Picking an invalid option will force the user to choose again.
     :param string $default: The default option if there is on.
-    
+
     This method helps you interact with the user, and create interactive shells.
     It will return the users answer to the prompt, and allows you to provide a 
     list of valid options the user can choose from::
-    
+
         <?php
         $selection = $this->in('Red or Green?', array('R', 'G'), 'R');
-    
+
     The selection validation is case-insensitive.
-    
+
 .. php:method:: out($message = null, $newlines = 1, $level = Shell::NORMAL)
-    
+
     :param string $method: The message to print.
     :param integer $newlines: The number of newlines to follow the message.
     :param integer $level: The highest :ref:`shell-output-level` this message 
         should display at.
-    
+
     The primary method for generating output to the user. By using levels, you
     can limit how verbose a shell is.  out() also allows you to use colour formatting
     tags, which will enable coloured output on systems that support it.  There are 
     several built in styles for colouring text, and you can define your own.
-    
+
     * ``error`` Error messages.
     * ``warning`` Warning messages.
     * ``info`` Informational messages.
     * ``comment`` Additional text.
     * ``question`` Magenta text used for user prompts
-    
+
     By formatting messages with style tags you can display styled output::
-    
+
         <?php
         $this->out('<warning>This will remove data from the filesystems.</warning>');
-    
+
     By default on \*nix systems ConsoleOutput objects default to colour output. 
     On windows systems, plain output is the default unless the ``ANSICON`` environment 
     variable is present.
@@ -882,7 +882,7 @@ Shell API
 
     :param string $method: The message to print.
     :param integer $newlines: The number of newlines to follow the message.
-    
+
     Outputs a method to ``stderr``, works similar to :php:meth:`Shell::out()`
 
 .. php:method:: error($title, $message = null)
@@ -900,7 +900,7 @@ Shell API
 
     :param string $path: Absolute path to the file you want to create.
     :param string $contents: Contents to put in the file.
-    
+
     Creates a file at a given path.  If the Shell is interactive, a warning will be
     generated, and the user asked if they want to overwrite the file if it already exists.
     If the shell's interactive property is false, no question will be asked and the file 
@@ -916,7 +916,7 @@ More topics
 
 .. toctree::
     :maxdepth: 1
-    
+
     console-and-shells/cron-jobs
     console-and-shells/code-generation-with-bake
     console-and-shells/schema-management-and-migrations

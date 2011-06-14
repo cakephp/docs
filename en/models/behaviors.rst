@@ -42,12 +42,12 @@ Behaviors are attached to models through the $actsAs model class
 variable::
 
     <?php
-    
+
     class Category extends AppModel {
         var $name   = 'Category';
         var $actsAs = array('Tree');
     }
-    
+
     ?>
 
 This example shows how a Category model could be managed in a tree
@@ -58,7 +58,7 @@ existed as part of the original model::
     <?php
     // Set ID
     $this->Category->id = 42;
-    
+
     // Use behavior method, children():
     $kids = $this->Category->children();
 
@@ -70,7 +70,7 @@ database table:
 ::
 
     <?php
-    
+
     class Category extends AppModel {
         var $name   = 'Category';
         var $actsAs = array('Tree' => array(
@@ -78,7 +78,7 @@ database table:
             'right' => 'right_node'
         ));
     }
-    
+
     ?>
 
 We can also attach several behaviors to a model. There's no reason
@@ -86,7 +86,7 @@ why, for example, our Category model should only behave as a tree,
 it may also need internationalization support::
 
     <?php
-    
+
     class Category extends AppModel {
         var $name   = 'Category';
         var $actsAs = array(
@@ -97,7 +97,7 @@ it may also need internationalization support::
             'Translate'
         );
     }
-    
+
     ?>
 
 So far we have been adding behaviors to models using a model class
@@ -329,4 +329,4 @@ fail.
 
 .. todo::
 
-	Add examples of real use cases for behavior callbacks
+    Add examples of real use cases for behavior callbacks

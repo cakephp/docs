@@ -15,11 +15,11 @@ Exception configuration
 There are a few keys available for configuring exceptions::
 
     <?php
-	Configure::write('Exception', array(
-		'handler' => 'ErrorHandler::handleException',
-		'renderer' => 'ExceptionRenderer',
-		'log' => true
-	));
+    Configure::write('Exception', array(
+        'handler' => 'ErrorHandler::handleException',
+        'renderer' => 'ExceptionRenderer',
+        'log' => true
+    ));
 
 * ``handler`` - callback - The callback to handle exceptions. You can set this to
   any callback type, including anonymous functions.
@@ -76,7 +76,7 @@ template which allows the native ``__toString()`` methods to work as normal::
 
     <?php
     class MissingWidgetException extends CakeException {
-    	protected $_messageTemplate = 'Seems that %s is missing.';
+        protected $_messageTemplate = 'Seems that %s is missing.';
     }
 
     throw new MissingWidgetException(array('widget' => 'Pointy'));
@@ -184,9 +184,9 @@ the default exception rendering.  It receives the thrown exception as its only
 argument.  You should implement your error handling in that method::
 
     <?php
-    
+
     class AppController extends Controller {
-    
+
         function appError($error) {
             // custom logic goes here.
         }
@@ -203,15 +203,15 @@ is used.  Your custom exception renderer class should be placed in ``app/Lib``.
 In a custom exception rendering class you can provide specialized handling for 
 application specific errors::
 
-	// in app/Lib/AppExceptionRenderer.php
-	<?php
-	App::uses('ExceptionRenderer', 'Error');
-	
-	class AppExceptionRenderer extends ExceptionRenderer {
-		public function missingWidget($error) {
-			echo 'Oops that widget is missing!';
-		}
-	}
+    // in app/Lib/AppExceptionRenderer.php
+    <?php
+    App::uses('ExceptionRenderer', 'Error');
+
+    class AppExceptionRenderer extends ExceptionRenderer {
+        public function missingWidget($error) {
+            echo 'Oops that widget is missing!';
+        }
+    }
 
 
 The above would handle any exceptions of the type ``MissingWidgetException``,
@@ -241,12 +241,12 @@ custom error handling controller in your application.  By implementing
 controller you want::
 
     <?php
-	class AppExceptionRenderer extends ExceptionRenderer {
-		protected function _getController($exception) {
-			App::uses('SuperCustomError', 'Controller');
-			return new SuperCustomErrorController();
-		}
-	}
+    class AppExceptionRenderer extends ExceptionRenderer {
+        protected function _getController($exception) {
+            App::uses('SuperCustomError', 'Controller');
+            return new SuperCustomErrorController();
+        }
+    }
 
 Alternatively, you could just override the core CakeErrorController,
 by including one in ``app/Controller``.  If you are using a custom
@@ -284,15 +284,15 @@ exceptions for HTTP methods
 .. php:exception::UnauthorizedException
 
     Used for doing a 401 Not found error.
-    
+
 .. php:exception:: ForbiddenException
-    
+
     Used for doing a 403 Forbidden error.
-    
+
 .. php:exception:: NotFoundException
 
     Used for doing a 404 Not found error.
-    
+
 .. php:exception:: MethodNotAllowedException
 
     Used for doing a 405 Method Not Allowed error.
@@ -403,7 +403,7 @@ be thrown from a number of CakePHP core components:
     Private action access.  Either accessing
     private/protected/_ prefixed actions, or trying
     to access prefixed routes incorrectly.
-    
+
 .. php:exception:: CakeException
 
     Base exception class in CakePHP.  All exceptions thrown by
@@ -421,13 +421,13 @@ You can throw any of the HTTP related exceptions from your controller actions
 to indicate failure states.  For example::
 
     <?php
-	function view($id) {
-		$post = $this->Post->read(null, $id);
-		if (!$post) {
-			throw new NotFoundException();
-		}
-		$this->set(compact('post'));
-	}
+    function view($id) {
+        $post = $this->Post->read(null, $id);
+        if (!$post) {
+            throw new NotFoundException();
+        }
+        $this->set(compact('post'));
+    }
 
 The above would cause the configured ``Exception.handler`` to catch and
 process the :php:exc:`NotFoundException`.  By default this will create an error page,

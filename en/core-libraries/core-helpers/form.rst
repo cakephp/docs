@@ -50,7 +50,7 @@ opening form tag.
     ::
 
         <?php echo $this->Form->create('Recipe'); ?>
-     
+
         //Output:
         <form id="RecipeAddForm" method="post" action="/recipes/add">
 
@@ -76,12 +76,12 @@ opening form tag.
             }
         }
         ?>
-    
+
         // views/recipes/edit.ctp:
-    
+
         // Since $this->data['Recipe']['id'] = 5, we should get an edit form
         <?php echo $this->Form->create('Recipe'); ?>
-    
+
         //Output:
         <form id="RecipeEditForm" method="post" action="/recipes/edit/5">
         <input type="hidden" name="_method" value="PUT" />
@@ -107,7 +107,7 @@ accordingly.
 ::
 
     <?php echo $this->Form->create('User', array('type' => 'get')); ?>
-     
+
     //Output:
     <form id="UserAddForm" method="get" action="/users/add">
 
@@ -120,7 +120,7 @@ not to function.
 ::
 
     <?php echo $this->Form->create('User', array('type' => 'file')); ?>
-     
+
     //Output:
     <form id="UserAddForm" enctype="multipart/form-data" method="post" action="/users/add">
 
@@ -141,7 +141,7 @@ supply an $options array like the following:
 ::
 
     <?php echo $this->Form->create('User', array('action' => 'login')); ?>
-     
+
     //Output:
     <form id="UserLoginForm" method="post" action="/users/login">
     </form>
@@ -159,16 +159,16 @@ application, or can point to an external domain.
     <?php echo $this->Form->create(null, array('url' => '/recipes/add')); ?>
     // or
     <?php echo $this->Form->create(null, array('url' => array('controller' => 'recipes', 'action' => 'add'))); ?>
-    
-    
+
+
     //Output:
     <form method="post" action="/recipes/add">
-     
+
     <?php echo $this->Form->create(null, array(
         'url' => 'http://www.google.com/search',
         'type' => 'get'
     )); ?>
-     
+
     //Output:
     <form method="get" action="http://www.google.com/search">
 
@@ -219,9 +219,9 @@ form elements other methods may be depending on.
 ::
 
     <?php echo $this->Form->create(); ?>
-     
+
     <!-- Form elements go here -->
-     
+
     <?php echo $this->Form->end(); ?>
 
 If a string is supplied as the first parameter to ``end()``, the
@@ -231,11 +231,11 @@ closing form tag.
 ::
 
     <?php echo $this->Form->end('Finish'); ?>
-     
+
 
 Will output::
 
-     
+
     <div class="submit">
         <input type="submit" value="Finish" />
     </div>
@@ -275,21 +275,21 @@ field.
 .. php:method:: input(string $fieldName, array $options = array())
 
     Column Type
-    	Resulting Form Field
+        Resulting Form Field
     string (char, varchar, etc.)
-    	text
+        text
     boolean, tinyint(1)
-    	checkbox
+        checkbox
     text
-    	textarea
+        textarea
     text, with name of password, passwd, or psword
-    	password
+        password
     date
-    	day, month, and year selects
+        day, month, and year selects
     datetime, timestamp
-    	day, month, year, hour, minute, and meridian selects
+        day, month, year, hour, minute, and meridian selects
     time
-    	hour, minute, and meridian selects
+        hour, minute, and meridian selects
 
     For example, let’s assume that my User model includes fields for a
     username (varchar), password (varchar), approved (datetime) and
@@ -299,14 +299,14 @@ field.
     ::
 
         <?php echo $this->Form->create(); ?>
-     
+
             <?php
                 echo $this->Form->input('username');   //text
                 echo $this->Form->input('password');   //password
                 echo $this->Form->input('approved');   //day, month, year, hour, minute, meridian
                 echo $this->Form->input('quote');      //textarea
             ?>
-     
+
         <?php echo $this->Form->end('Add'); ?>
 
     A more extensive example showing some options for a date field::
@@ -382,7 +382,7 @@ saveAll(), use the following convention::
        echo $this->Form->input('Modelname.0.fieldname');
        echo $this->Form->input('Modelname.1.fieldname');
     ?>
-    
+
     <input type="text" id="Modelname0Fieldname" name="data[Modelname][0][fieldname]">
     <input type="text" id="Modelname1Fieldname" name="data[Modelname][1][fieldname]">
 
@@ -397,9 +397,9 @@ you can also create ‘file’, and ‘password’ inputs.
 ::
 
     <?php echo $this->Form->input('field', array('type' => 'file')); ?>
-     
+
     Output:
-     
+
     <div class="input">
         <label for="UserField">Field</label>
         <input type="file" name="data[User][field]" value="" id="UserField" />
@@ -418,9 +418,9 @@ of the input() method.
         'after' => '--after--',
         'between' => '--between---'
     ));?>
-     
+
     Output:
-     
+
     <div class="input">
     --before--
     <label for="UserField">Field</label>
@@ -441,9 +441,9 @@ inject markup to separate each input/label pair.
         'separator' => '--separator--',
         'options' => array('1', '2') 
     ));?>
-     
+
     Output:
-     
+
     <div class="input">
     --before--
     <input name="data[User][field]" type="radio" value="1" id="UserField1" />
@@ -906,7 +906,7 @@ primary colors would be overridden::
     <label for="ColorsBlue">Blue</label>
     <input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsYellow" />
     <label for="ColorsYellow">Yellow</label>
-    
+
     <h2>Tertiary Colors</h2>
     <input type="hidden" name="data[Color][Color]" id="Colors_" value="0" />
     <input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsGreen" />
@@ -939,9 +939,9 @@ Next add either of the two lines to your form view file.
 
     <?php
     echo $this->Form->input('Document.submittedfile', array('between'=>'<br />','type'=>'file'));
-    
+
     // or
-    
+
     echo $this->Form->file('Document.submittedfile');
 
 Due to the limitations of HTML itself, it is not possible to put
@@ -1106,7 +1106,7 @@ Form Element-Specific Methods
         <option value="2005">2005</option>
         <option value="2004">2004</option>
         <option value="2003">2003</option>
-    
+
         <option value="2002">2002</option>
         <option value="2001">2001</option>
         <option value="2000">2000</option>
@@ -1409,7 +1409,7 @@ Form Element-Specific Methods
         The ``textarea`` input type allows for the ``$options`` attribute
         of ``'escape'`` which determines whether or not the contents of the
         textarea should be escaped. Defaults to ``true``.
-    
+
     ::
 
         <?php
