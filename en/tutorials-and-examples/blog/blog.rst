@@ -124,9 +124,9 @@ like the following:
 
 ::
 
-    var $default = array(
-        'driver' => 'mysql',
-        'persistent' => 'false',
+    public $default = array(
+        'datasource' => 'Database/Mysql',
+        'persistent' => false,
         'host' => 'localhost',
         'port' => '',
         'login' => 'cakeBlog',
