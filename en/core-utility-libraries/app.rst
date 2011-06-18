@@ -28,21 +28,9 @@ For instance if you'd like to use your own HttpSocket class, put it under
 
  	app/libs/Network/Http/HttpSocket.php
 
-Inspecting loaded paths
------------------------
-
-You can inspect the currently loaded paths using `App::path('Controller')` for example to see loaded
-controller paths.
-
 It is also possible to inspect paths for plugin classes, for instance, to see a plugin's helpers you would call
 `App::path('View/Helper', 'MyPlugin')`
 
-Locating plugins and themes
----------------------------
-
-Plugins and Themes can be located with App as well.  Using App::pluginPath('DebugKit') for example, will
-give you the full path to the DebugKit plugin.  App::themePath('purple'), would give the full path to the
-`purple` theme.
 
 Inspecting known objects
 ------------------------
@@ -56,15 +44,17 @@ Using App::path()
 
 ``App::path($package, $plugin = null):``
 
-Used to read information stored path.
+Used to read information stored path. 
 
-`App::path('Model'); will return all paths for models`
+::
+
+    App::path('Model'); will return all paths for models
 
 Added in Cake 2.0:
 
-Now supports plugins, App::path('Controller', 'Users') will return the folder location the controllers in the User plugin
+1. The method now supports plugins, App::path('Controller', 'Users') will return the folder location the controllers in the User plugin
 
-Won't core paths anymore, it will only return paths defined in App::build() or default ones in app (or correspondent plugin)
+2. Won't core paths anymore, it will only return paths defined in App::build() or default ones in app (or correspondent plugin)
 
 
 Using App:build()
@@ -73,27 +63,38 @@ Using App:build()
 ``App::build($paths = array(), $mode = App::PREPEND);``
 
 Sets up each package location on the file system. You can configure multiple search paths
-for each package, those will be used to look for files one folder at a time in the specified order
-All paths should be terminated with a Directory separator
+for each package, those will be used to look for files one folder at a time in the specified order.
+All paths should be terminated with a Directory separator.
+
+Adding additional controller paths for example would alter where CakePHP looks for controllers.
+This allows you to split your application up across the filesystem.
 
 Usage:
 
-`App::build(array(Model' => array('/a/full/path/to/models/'))); will setup a new search path for the Model package`
+::
 
-`App::build(array('Model' => array('/path/to/models/')), App::RESET); will setup the path as the only valid path for searching models`
+    App::build(array(Model' => array('/a/full/path/to/models/'))); will setup a new search path for the Model package
+    App::build(array('Model' => array('/path/to/models/')), App::RESET); will setup the path as the only valid path for searching models
+    App::build(array('View/Helper' => array('/path/to/helpers/', '/another/path/))); will setup multiple search paths for helpers
 
-`App::build(array('View/Helper' => array('/path/to/helpers/', '/another/path/))); will setup multiple search paths for helpers`
 
 If reset is set to true, all loaded plugins will be forgotten and they will be needed to be loaded again.
 
 As of Cake 2.0:
 
-Will not merge app patch with core paths anymore.
+    Will not merge app patch with core paths anymore.
 
 Examples:
 
-App::build(array('controllers' => array('/full/path/to/controllers'))) becomes App::build(array('Controller' => array('/full/path/to/Controller')))
-App::build(array('helpers' => array('/full/path/to/controllers'))) becomes App::build(array('View/Helper' => array('/full/path/to/View/Helper')))
+::
+
+    App::build(array('controllers' => array('/full/path/to/controllers'))) 
+    //becomes 
+    App::build(array('Controller' => array('/full/path/to/Controller')))
+
+    App::build(array('helpers' => array('/full/path/to/controllers'))) 
+    //becomes 
+    App::build(array('View/Helper' => array('/full/path/to/View/Helper')))
 
 
 Using App:objects
@@ -119,6 +120,14 @@ As of Cake 2.0
 Returns array() instead of false for empty results or invalid types
 Does not return core objects anymore, App::objects('core') will return array()
 Returns the complete class name
+
+
+Locating plugins and themes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Plugins and Themes can be located with App as well. Using App::pluginPath('DebugKit') for example, will
+give you the full path to the DebugKit plugin.  App::themePath('purple'), would give the full path to the
+`purple` theme.
 
 
 .. _app-import:
