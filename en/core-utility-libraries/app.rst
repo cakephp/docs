@@ -32,13 +32,6 @@ It is also possible to inspect paths for plugin classes, for instance, to see a 
 `App::path('View/Helper', 'MyPlugin')`
 
 
-Inspecting known objects
-------------------------
-
-You can find out which objects App knows about using App::objects('Controller') for example to find
-which application controllers App knows about.
-
-
 Using App::path()
 ~~~~~~~~~~~~~~~~~
 
@@ -104,22 +97,29 @@ Using App:objects
 
 Returns an array of objects of the given type.
 
+You can find out which objects App knows about using App::objects('Controller') for example to find
+which application controllers App knows about.
+
 Example usage:
 
-`App::objects('plugin');` returns `array('DebugKit', 'Blog', 'User');`
+::
 
-`App::objects('Controller');` returns `array('PagesController', 'BlogController');`
+    App::objects('plugin'); //returns array('DebugKit', 'Blog', 'User');
+    App::objects('Controller'); //returns array('PagesController', 'BlogController');
 
-You can also search only within a plugin's objects by using the plugin dot
-syntax.
 
-`App::objects('MyPlugin.Model');` returns `array('MyPluginPost', 'MyPluginComment');`
+You can also search only within a plugin's objects by using the plugin dot syntax.
+
+::
+
+    App::objects('MyPlugin.Model'); //returns array('MyPluginPost', 'MyPluginComment');
+
 
 As of Cake 2.0
 
-Returns array() instead of false for empty results or invalid types
-Does not return core objects anymore, App::objects('core') will return array()
-Returns the complete class name
+    1. Returns array() instead of false for empty results or invalid types
+    2. Does not return core objects anymore, App::objects('core') will return array()
+    3. Returns the complete class name
 
 
 Locating plugins and themes
