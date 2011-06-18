@@ -202,31 +202,10 @@ Using App::import()
 At first glance ``App::import`` seems complex, however in most use
 cases only 2 arguments are required.
 
-Importing Core Libs
--------------------
+.. note::
 
-Core libraries such as Sanitize, and Xml can be loaded by:
-
-::
-
-    App::import('Core', 'Sanitize');
-
-The above would make the Sanitize class available for use.
-
-Importing Controllers, Models, Components, Behaviors, and Helpers
------------------------------------------------------------------
-
-All application related classes should also be loaded with
-App::import(). The following examples illustrate how to do so.
-
-Loading Controllers
-~~~~~~~~~~~~~~~~~~~
-
-``App::import('Controller', 'MyController');``
-
-Calling ``App::import`` is equivalent to ``require``'ing the file.
-It is important to realize that the class subsequently needs to be
-initialized.
+    This method is equivalent to ``require``'ing the file.
+    It is important to realize that the class subsequently needs to be initialized.
 
 ::
 
@@ -241,25 +220,44 @@ initialized.
     $Users->constructClasses();
     ?>
 
+**All classes that were loaded in the past using App::import('Core', $class) will need to be 
+loaded using App::uses() referring to the correct package. This change has provided much
+perfomance gain to the framework.**
+
+As of Cake 2.0:
+
+    o The method no longer looks for classes recursively, it stricty uses the values for the 
+    paths defined in App::build()
+
+    o It will not be able to load App::import('Component', 'Component') use App::uses('Component', 'Controller');
+
+    o Using App::import('Lib', 'CoreClass') to load core classes is no longer possible
+    
+    o Importing a non-existent file, supplying a wrong type or package name, or null values for $name 
+    and $file parameters will result in a false return value
+
+    o App::import('Core', 'CoreClass') is not loger supported, use App::uses() instead and let the class 
+    autoloading do the rest
+
+    o Loading Vendor files does not look recursively in the vendors folder, it will also not convert anymore 
+    the file to underscored as it did on the past
+
+Importing Controllers, Models, Behaviors, and Helpers
+-----------------------------------------------------------------
+
+All application related classes should be loaded with
+App::import(). The following examples illustrate how to do so.
+
+Loading Controllers
+~~~~~~~~~~~~~~~~~~~
+
+``App::import('Controller', 'MyController');``
+
+
 Loading Models
 ~~~~~~~~~~~~~~
 
 ``App::import('Model', 'MyModel');``
-
-Loading Components
-~~~~~~~~~~~~~~~~~~
-
-``App::import('Component', 'Auth');``
-
-::
-
-    <?php
-    App::import('Component', 'Mailer');
-    
-    // We need to load the class
-    $Mailer = new MailerComponent();
-    
-    ?>
 
 Loading Behaviors
 ~~~~~~~~~~~~~~~~~
