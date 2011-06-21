@@ -326,6 +326,6 @@ Cache API
 
 .. php:staticmethod:: gc($config)
 
-    Garbage collects entries in the cache configuration.  This primarily
-    is only used by FileEngine. It should be implemented by any Cache engine
+    Garbage collects entries in the cache configuration.  This is primarily
+    used by FileEngine. It should be implemented by any Cache engine
     that requires manual eviction of cached data.
