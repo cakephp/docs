@@ -48,7 +48,7 @@ manipulating strings and is normally accessed statically. Example:
             'clean' => array(
                 'method' => 'text', // or html
             ),
-    
+
             'before' => '',
             'after' => ''
         );
@@ -56,4 +56,4 @@ manipulating strings and is normally accessed statically. Example:
 
 .. todo::
 
-	This is missing a few methods still, and useful examples.
+    This is missing a few methods still, and useful examples.

@@ -112,7 +112,7 @@ as keys:
     )
 
 More information about model callbacks is available
-`here <http://docs.cakephp.org/view/76/Callback-Methods>`_
+:doc:`here <callback-methods>`
 
 
 .. tip::

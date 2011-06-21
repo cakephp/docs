@@ -15,7 +15,7 @@ making requests, such as those to web services.
 
     The get method makes a simple HTTP GET request returning the
     results::
-    
+
         <?php
         App::import('Core', 'HttpSocket');
         $HttpSocket = new HttpSocket();
@@ -32,7 +32,7 @@ making requests, such as those to web services.
     made; ``$query`` is the data to be posted, either in string form:
     "param1=foo&param2=bar" or as a keyed array: array('param1' =>
     'foo', 'param2' => 'bar').::
-    
+
         <?php
         App::import('Core', 'HttpSocket');
         $HttpSocket = new HttpSocket();
@@ -79,4 +79,4 @@ making requests, such as those to web services.
 
     .. todo:: 
 
-    	This class changed quite a bit in 2.0, update the docs, and include all the missing methods + examples.
+        This class changed quite a bit in 2.0, update the docs, and include all the missing methods + examples.

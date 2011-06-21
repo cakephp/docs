@@ -505,6 +505,8 @@ functions like find('all',...).
 In either case, the returned result is an array formatted just as
 it would be from find() or findAll(), respectively.
 
+.. _model-query:
+
 query
 =====
 

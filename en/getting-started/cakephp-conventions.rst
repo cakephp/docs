@@ -149,7 +149,7 @@ single-field primary key if you want to use that table's model.
 
 CakePHP does not support composite primary keys. If you want to
 directly manipulate your join table data, use direct
-`query <http://docs.cakephp.org/view/1027/query>`_ calls or add a primary key to act on it
+:ref:`query <model-query>` calls or add a primary key to act on it
 as a normal model. E.g.::
 
     CREATE TABLE posts_tags (

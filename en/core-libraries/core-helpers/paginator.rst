@@ -27,12 +27,15 @@ Methods
     available tokens are:
 
 
-    -  %page% - the current page displayed.
-    -  %pages% - total number of pages.
-    -  %current% - current number of records being shown.
-    -  %count% - the total number of records in the result set.
-    -  %start% - number of the first record being displayed.
-    -  %end% - number of the last record being displayed.
+    -  ``{:page}`` - the current page displayed.
+    -  ``{:pages}`` - total number of pages.
+    -  ``{:current}`` - current number of records being shown.
+    -  ``{:count}`` - the total number of records in the result set.
+    -  ``{:start}`` - number of the first record being displayed.
+    -  ``{:end}`` - number of the last record being displayed.
+    -  ``{:model}`` - The pluralized human form of the model name.
+       If your model was 'RecipePage', ``{:model}`` would be 'recipe pages'.
+       This option was added in 2.0.
 
     Now that you know the available tokens you can use the counter()
     method to display all sorts of information about the returned
@@ -52,7 +55,6 @@ Methods
     **url**
     The url of the paginating action. url has a few sub options as
     well
-
 
     -  sort - the key that the records are sorted by
     -  direction - The direction of the sorting. Defaults to 'ASC'
