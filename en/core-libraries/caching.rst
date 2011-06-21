@@ -23,6 +23,9 @@ to implement your own caching systems. The built-in caching engines are:
   This extension uses shared memory on the webserver to store objects.
   This makes it very fast, and able to provide atomic read/write features.
   By default CakePHP will use this cache engine if its available.
+* ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
+  extension.  Wincache is similar to APC in features and performance, but 
+  optimized for windows and IIS.
 * ``XcacheEngine`` Similar to APC, `Xcache <http://xcache.lighttpd.net/>`_
   is a PHP extension that provides similar features to APC.
 * ``MemcacheEngine`` Uses the `Memcache <http://php.net/memcache>`_
@@ -116,29 +119,41 @@ The required API for a CacheEngine is
 
 .. php:method:: write($key, $value, $duration)
 
+    :return: boolean for success.
+
     Write value for a key into cache, $duration specifies
     how long the entry should exist in the cache.
 
 .. php:method:: read($key)
+
+    :return: The cached value or false for failure.
 
     Read a key from the cache.  Return false to indicate
     the entry has expired or does not exist.
 
 .. php:method:: delete($key)
 
+    :return: Boolean true on success.
+
     Delete a key from the cache. Return false to indicate that
     the entry did not exist or could not be deleted.
 
 .. php:method:: clear($check)
+
+    :return: Boolean true on success.
 
     Delete all keys from the cache.  If $check is true, you should
     validate that each value is actually expired.
 
 .. php:method:: decrement($key, $offset = 1)
 
+    :return: Boolean true on success.
+
     Decrement a number under the key and return decremented value
 
 .. php:method:: increment($key, $offset = 1)
+
+    :return: Boolean true on success.
 
     Increment a number under the key and return incremented value
 
@@ -285,12 +300,32 @@ Cache API
         $results = Cache::read('results');
 
     If you find yourself repeatedly calling ``Cache::set()`` perhaps
-    you should create a new :php:func:`Cache::config()`. This will remove the need to call ``Cache::set()``.
+    you should create a new :php:func:`Cache::config()`. This will remove the 
+    need to call ``Cache::set()``.
 
 .. php:staticmethod:: increment($key, $offset = 1, $config = 'default')
 
+    Atomically increment a value stored in the cache engine. Ideal for
+    modifing counters or semaphore type values.
+
 .. php:staticmethod:: decrement($key, $offset = 1, $config = 'default')
+
+    Atomically decrement a value stored in the cache engine. Ideal for
+    modifing counters or semaphore type values.
 
 .. php:staticmethod:: clear($check, $config = 'default')
 
+    Destroy all cached values for a cache configuration.
+
+    .. note::
+ 
+        Some caching engines, notably ``Apc`` and ``Wincache`` have special
+        behavior. If you have more than one configuration that saves to Apc
+        or Wincache calling ``Cache::clear()`` will clear *all* values stored,
+        not just those for the specified configuration.
+
 .. php:staticmethod:: gc($config)
+
+    Garbage collects entries in the cache configuration.  This primarily
+    is only used by FileEngine. It should be implemented by any Cache engine
+    that requires manual eviction of cached data.
