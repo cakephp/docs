@@ -8,7 +8,7 @@ Este manual assume que você tenha um entendimento geral sobre PHP e conheciment
 básicos em programação orientada a objetos. Diferentes funcionalidades dentro do
 framework utilizam diversas tecnologias - como SQL, Javascript e XML - e este
 manual não tenta explicar estas tecnologias, somente aquelas que são utilizadas
-no contexto
+no contexto.
 
 .. toctree::
     :maxdepth: 1
