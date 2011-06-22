@@ -86,6 +86,7 @@ opening form tag.
         <form id="RecipeEditForm" method="post" action="/recipes/edit/5">
         <input type="hidden" name="_method" value="PUT" />
 
+
     .. note::
 
         Since this is an edit form, a hidden input field is generated to
@@ -94,6 +95,13 @@ opening form tag.
     The ``$options`` array is where most of the form configuration
     happens. This special array can contain a number of different
     key-value pairs that affect the way the form tag is generated.
+
+    .. versionchanged:: 2.0
+
+    The default url for all forms, is now the current url including 
+    passed, named, and querystring parameters. You can override this 
+    default by supplying $options['url'] in the second parameter of 
+    $this->Form->create().
 
 $options[‘type’]
 ----------------
@@ -1081,11 +1089,10 @@ Form Element-Specific Methods
             echo $this->Form->button('Submit Form', array('type'=>'submit','escape'=>true));
         ?>
 
-.. php:method:: year(string $fieldName, int $minYear, int $maxYear, mixed $selected, array $attributes)
+.. php:method:: year(string $fieldName, int $minYear, int $maxYear, array $attributes)
 
     Creates a select element populated with the years from ``$minYear``
-    to ``$maxYear``, with the $selected year selected by default. HTML
-    attributes may be supplied in $attributes. If
+    to ``$maxYear``. HTML attributes may be supplied in $attributes. If
     ``$attributes['empty']`` is false, the select will not include an
     empty option.
 
@@ -1112,7 +1119,7 @@ Form Element-Specific Methods
         <option value="2000">2000</option>
         </select>
 
-.. php:method:: month(string $fieldName, mixed $selected, array $attributes)
+.. php:method:: month(string $fieldName, array $attributes)
 
     Creates a select element populated with month names.
 
@@ -1149,18 +1156,17 @@ Form Element-Specific Methods
         echo $this->Form->month('mob', null, array('monthNames' => false));
         ?>
 
-.. php:method:: dateTime($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $selected = null, $attributes = array())
+.. php:method:: dateTime($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $attributes = array())
 
     Creates a set of select inputs for date and time. Valid values for
     $dateformat are ‘DMY’, ‘MDY’, ‘YMD’ or ‘NONE’. Valid values for
     $timeFormat are ‘12’, ‘24’, and null.
 
     You can specify not to display empty values by setting
-    "array('empty' => false)" in the attributes parameter. You also can
-    pre-select the current datetime by setting $selected = null and
-    $attributes = array("empty" => false).
+    "array('empty' => false)" in the attributes parameter. It will also 
+    pre-select the fields with the current datetime. 
 
-.. php:method:: day(string $fieldName, mixed $selected, array $attributes, boolean $showEmpty)
+.. php:method:: day(string $fieldName, array $attributes, boolean $showEmpty)
 
     Creates a select element populated with the (numerical) days of the
     month.
@@ -1184,15 +1190,15 @@ Form Element-Specific Methods
         <option value="31">31</option>
         </select>
 
-.. php:method:: hour(string $fieldName, boolean $format24Hours, mixed $selected, array $attributes, boolean $showEmpty)
+.. php:method:: hour(string $fieldName, boolean $format24Hours, array $attributes, boolean $showEmpty)
 
     Creates a select element populated with the hours of the day.
 
-.. php:method:: minute(string $fieldName, mixed $selected, array $attributes, boolean $showEmpty)
+.. php:method:: minute(string $fieldName, array $attributes, boolean $showEmpty)
 
     Creates a select element populated with the minutes of the hour.
 
-.. php:method:: meridian(string $fieldName, mixed $selected, array $attributes, boolean $showEmpty)
+.. php:method:: meridian(string $fieldName, array $attributes, boolean $showEmpty)
 
     Creates a select element populated with ‘am’ and ‘pm’.
 
@@ -1246,6 +1252,13 @@ Form Element-Specific Methods
     Will output::
 
         <input name="data[User][id]" value="10" id="UserId" type="hidden">
+
+    .. versionchanged:: 2.0
+    
+    Hidden fields no longer remove the class attribute. This means 
+    that if there are validation errors on hidden fields, the 
+    error-field classname will be applied. 
+
 
 .. php:method:: isFieldError(string $fieldName)
 
@@ -1315,13 +1328,12 @@ Form Element-Specific Methods
     ``$attributes['value']`` to a selected value or boolean false will
     do just that.
 
-.. php:method:: select(string $fieldName, array $options, mixed $selected, array $attributes)
+.. php:method:: select(string $fieldName, array $options, array $attributes)
 
     Creates a select element, populated with the items in ``$options``,
-    with the option specified by ``$selected`` shown as selected by
-    default. If you wish to display your own default option, add your
-    string value to the 'empty' key in the ``$attributes`` variable, or
-    set it to false to turn off the default empty option::
+    with the option specified by ``$attributes['value']`` shown as selected by
+    default. Set to false the the 'empty' key in the ``$attributes`` variable
+    to turn off the default empty option::
 
         <?php
         $options = array('M' => 'Male', 'F' => 'Female');
@@ -1419,6 +1431,43 @@ Form Element-Specific Methods
         ?>
 
 .. _form-improvements-1-3:
+
+
+2.0 updates
+================
+
+**$selected parameter removed**
+
+The ``$selected`` parameter was removed from several methods in 
+FormHelper. All methods now support a ``$attributes['value']`` key 
+now which should be used in place of ``$selected``. This change 
+simplifies the FormHelper methods, reducing the number of 
+arguments, and reduces the duplication that ``$selected`` created. 
+The affected methods are:
+
+    * FormHelper::select()
+    * FormHelper::dateTime()
+    * FormHelper::year()
+    * FormHelper::month()
+    * FormHelper::day()
+    * FormHelper::hour()
+    * FormHelper::minute()
+    * FormHelper::meridian()
+
+**Default urls on forms is the current action**
+
+The default url for all forms, is now the current url including 
+passed, named, and querystring parameters. You can override 
+this default by supplying ``$options['url']`` in the second 
+parameter of ``$this->Form->create()``
+
+
+**FormHelper::hidden()**
+
+Hidden fields no longer remove the class attribute. This means 
+that if there are validation errors on hidden fields, 
+the error-field classname will be applied.
+
 
 1.3 improvements
 ================
