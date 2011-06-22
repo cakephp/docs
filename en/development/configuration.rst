@@ -100,10 +100,8 @@ applications on the same system. If you want the same controller in
 both applications, you can use CakePHP’s bootstrap.php to bring
 these additional classes into view.
 
-In bootstrap.php, define some specially-named variables to make
-CakePHP aware of other places to look for MVC classes:
-
-::
+By using :php:meth:`App::build()` in bootstrap.php we can define additional
+paths where CakePHP will look for classes::
 
     <?php
     App::build(array(
@@ -121,9 +119,11 @@ CakePHP aware of other places to look for MVC classes:
         'libs' => array('/full/path/to/libs/', '/next/full/path/to/libs/')
     ));
 
-All additional path configuration should be done at the top of your application's
-bootstrap.php. This will ensure that the paths are available for the rest of your
-application.
+.. note::
+
+    All additional path configuration should be done at the top of your application's
+    bootstrap.php. This will ensure that the paths are available for the rest of your
+    application.
 
 
 .. index:: core.php, configuration
