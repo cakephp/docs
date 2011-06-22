@@ -1081,11 +1081,10 @@ Form Element-Specific Methods
             echo $this->Form->button('Submit Form', array('type'=>'submit','escape'=>true));
         ?>
 
-.. php:method:: year(string $fieldName, int $minYear, int $maxYear, mixed $selected, array $attributes)
+.. php:method:: year(string $fieldName, int $minYear, int $maxYear, array $attributes)
 
     Creates a select element populated with the years from ``$minYear``
-    to ``$maxYear``, with the $selected year selected by default. HTML
-    attributes may be supplied in $attributes. If
+    to ``$maxYear``. HTML attributes may be supplied in $attributes. If
     ``$attributes['empty']`` is false, the select will not include an
     empty option.
 
@@ -1112,7 +1111,7 @@ Form Element-Specific Methods
         <option value="2000">2000</option>
         </select>
 
-.. php:method:: month(string $fieldName, mixed $selected, array $attributes)
+.. php:method:: month(string $fieldName, array $attributes)
 
     Creates a select element populated with month names.
 
@@ -1149,18 +1148,17 @@ Form Element-Specific Methods
         echo $this->Form->month('mob', null, array('monthNames' => false));
         ?>
 
-.. php:method:: dateTime($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $selected = null, $attributes = array())
+.. php:method:: dateTime($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $attributes = array())
 
     Creates a set of select inputs for date and time. Valid values for
     $dateformat are ‘DMY’, ‘MDY’, ‘YMD’ or ‘NONE’. Valid values for
     $timeFormat are ‘12’, ‘24’, and null.
 
     You can specify not to display empty values by setting
-    "array('empty' => false)" in the attributes parameter. You also can
-    pre-select the current datetime by setting $selected = null and
-    $attributes = array("empty" => false).
+    "array('empty' => false)" in the attributes parameter. It will also 
+    pre-select the fields with the current datetime. 
 
-.. php:method:: day(string $fieldName, mixed $selected, array $attributes, boolean $showEmpty)
+.. php:method:: day(string $fieldName, array $attributes, boolean $showEmpty)
 
     Creates a select element populated with the (numerical) days of the
     month.
@@ -1184,15 +1182,15 @@ Form Element-Specific Methods
         <option value="31">31</option>
         </select>
 
-.. php:method:: hour(string $fieldName, boolean $format24Hours, mixed $selected, array $attributes, boolean $showEmpty)
+.. php:method:: hour(string $fieldName, boolean $format24Hours, array $attributes, boolean $showEmpty)
 
     Creates a select element populated with the hours of the day.
 
-.. php:method:: minute(string $fieldName, mixed $selected, array $attributes, boolean $showEmpty)
+.. php:method:: minute(string $fieldName, array $attributes, boolean $showEmpty)
 
     Creates a select element populated with the minutes of the hour.
 
-.. php:method:: meridian(string $fieldName, mixed $selected, array $attributes, boolean $showEmpty)
+.. php:method:: meridian(string $fieldName, array $attributes, boolean $showEmpty)
 
     Creates a select element populated with ‘am’ and ‘pm’.
 
@@ -1315,13 +1313,12 @@ Form Element-Specific Methods
     ``$attributes['value']`` to a selected value or boolean false will
     do just that.
 
-.. php:method:: select(string $fieldName, array $options, mixed $selected, array $attributes)
+.. php:method:: select(string $fieldName, array $options, array $attributes)
 
     Creates a select element, populated with the items in ``$options``,
-    with the option specified by ``$selected`` shown as selected by
-    default. If you wish to display your own default option, add your
-    string value to the 'empty' key in the ``$attributes`` variable, or
-    set it to false to turn off the default empty option::
+    with the option specified by ``$attributes['value']`` shown as selected by
+    default. Set to false the the 'empty' key in the ``$attributes`` variable
+    to turn off the default empty option::
 
         <?php
         $options = array('M' => 'Male', 'F' => 'Female');
