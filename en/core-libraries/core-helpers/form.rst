@@ -1432,6 +1432,43 @@ Form Element-Specific Methods
 
 .. _form-improvements-1-3:
 
+
+2.0 updates
+================
+
+**$selected parameter removed**
+
+The ``$selected`` parameter was removed from several methods in 
+FormHelper. All methods now support a ``$attributes['value']`` key 
+now which should be used in place of ``$selected``. This change 
+simplifies the FormHelper methods, reducing the number of 
+arguments, and reduces the duplication that ``$selected`` created. 
+The affected methods are:
+
+    * FormHelper::select()
+    * FormHelper::dateTime()
+    * FormHelper::year()
+    * FormHelper::month()
+    * FormHelper::day()
+    * FormHelper::hour()
+    * FormHelper::minute()
+    * FormHelper::meridian()
+
+**Default urls on forms is the current action**
+
+The default url for all forms, is now the current url including 
+passed, named, and querystring parameters. You can override 
+this default by supplying ``$options['url']`` in the second 
+parameter of ``$this->Form->create()``
+
+
+**FormHelper::hidden()**
+
+Hidden fields no longer remove the class attribute. This means 
+that if there are validation errors on hidden fields, 
+the error-field classname will be applied.
+
+
 1.3 improvements
 ================
 
