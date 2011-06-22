@@ -86,6 +86,7 @@ opening form tag.
         <form id="RecipeEditForm" method="post" action="/recipes/edit/5">
         <input type="hidden" name="_method" value="PUT" />
 
+
     .. note::
 
         Since this is an edit form, a hidden input field is generated to
@@ -94,6 +95,13 @@ opening form tag.
     The ``$options`` array is where most of the form configuration
     happens. This special array can contain a number of different
     key-value pairs that affect the way the form tag is generated.
+
+    .. versionchanged:: 2.0
+
+    The default url for all forms, is now the current url including 
+    passed, named, and querystring parameters. You can override this 
+    default by supplying $options['url'] in the second parameter of 
+    $this->Form->create().
 
 $options[‘type’]
 ----------------
@@ -1244,6 +1252,13 @@ Form Element-Specific Methods
     Will output::
 
         <input name="data[User][id]" value="10" id="UserId" type="hidden">
+
+    .. versionchanged:: 2.0
+    
+    Hidden fields no longer remove the class attribute. This means 
+    that if there are validation errors on hidden fields, the 
+    error-field classname will be applied. 
+
 
 .. php:method:: isFieldError(string $fieldName)
 
