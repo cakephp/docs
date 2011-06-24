@@ -45,9 +45,7 @@ opening form tag.
     *context*. All fields are assumed to belong to this model (unless
     otherwise specified), and all models referenced are assumed to be
     associated with it. If you do not specify a model, then it assumes
-    you are using the default model for the current controller.
-
-    ::
+    you are using the default model for the current controller::
 
         <?php echo $this->Form->create('Recipe'); ?>
 
@@ -62,14 +60,12 @@ opening form tag.
     form's model, and that array contains a non-empty value of the
     model's primary key, then the FormHelper will create an edit form
     for that record. For example, if we browse to
-    http://site.com/recipes/edit/5, we might get the following:
-
-    ::
+    http://site.com/recipes/edit/5, we might get the following::
 
         // controllers/recipes_controller.php:
         <?php
         function edit($id = null) {
-            if (empty($this->data)) {
+            if (empty($this->request->data)) {
                 $this->data = $this->Recipe->findById($id);
             } else {
                 // Save logic goes here
@@ -79,7 +75,7 @@ opening form tag.
 
         // views/recipes/edit.ctp:
 
-        // Since $this->data['Recipe']['id'] = 5, we should get an edit form
+        // Since $this->request->data['Recipe']['id'] = 5, we should get an edit form
         <?php echo $this->Form->create('Recipe'); ?>
 
         //Output:
@@ -110,9 +106,7 @@ This key is used to specify the type of form to be created. Valid
 values include ‘post’, ‘get’, ‘file’, ‘put’ and ‘delete’.
 
 Supplying either ‘post’ or ‘get’ changes the form submission method
-accordingly.
-
-::
+accordingly::
 
     <?php echo $this->Form->create('User', array('type' => 'get')); ?>
 
@@ -123,9 +117,7 @@ Specifying ‘file’ changes the form submission method to ‘post’, and
 includes an enctype of “multipart/form-data” on the form tag. This
 is to be used if there are any file elements inside the form. The
 absence of the proper enctype attribute will cause the file uploads
-not to function.
-
-::
+not to function::
 
     <?php echo $this->Form->create('User', array('type' => 'file')); ?>
 
@@ -144,9 +136,7 @@ $options[‘action’]
 The action key allows you to point the form to a specific action in
 your current controller. For example, if you’d like to point the
 form to the login() action of the current controller, you would
-supply an $options array like the following:
-
-::
+supply an $options array like the following::
 
     <?php echo $this->Form->create('User', array('action' => 'login')); ?>
 
@@ -160,14 +150,13 @@ $options[‘url’]
 If the desired form action isn’t in the current controller, you can
 specify a URL for the form action using the ‘url’ key of the
 $options array. The supplied URL can be relative to your CakePHP
-application, or can point to an external domain.
-
-::
+application, or can point to an external domain::
 
     <?php echo $this->Form->create(null, array('url' => '/recipes/add')); ?>
     // or
-    <?php echo $this->Form->create(null, array('url' => array('controller' => 'recipes', 'action' => 'add'))); ?>
-
+    <?php echo $this->Form->create(null, array(
+        'url' => array('controller' => 'recipes', 'action' => 'add')
+    )); ?>
 
     //Output:
     <form method="post" action="/recipes/add">
@@ -196,10 +185,9 @@ $options['inputDefaults']
 ---------------------------------
 
 You can declare a set of default options for ``input()`` with the
-``inputDefaults`` key to customize your default input creation.
+``inputDefaults`` key to customize your default input creation::
 
-::
-
+    <?php
     echo $this->Form->create('User', array(
             'inputDefaults' => array(
                 'label' => false,
@@ -209,10 +197,9 @@ You can declare a set of default options for ``input()`` with the
 
 All inputs created from that point forward would inherit the
 options declared in inputDefaults. You can override the
-defaultOptions by declaring the option in the input() call.
+defaultOptions by declaring the option in the input() call::
 
-::
-
+    <?php
     echo $this->Form->input('password'); // No div, no label
     echo $this->Form->input('username', array('label' => 'Username')); // has a label element
 
@@ -222,9 +209,7 @@ Closing the Form
 The FormHelper also includes an ``end()`` method that completes the
 form markup. Often, ``end()`` only outputs a closing form tag, but
 using ``end()`` also allows the FormHelper to insert needed hidden
-form elements other methods may be depending on.
-
-::
+form elements other methods may be depending on::
 
     <?php echo $this->Form->create(); ?>
 
@@ -234,9 +219,7 @@ form elements other methods may be depending on.
 
 If a string is supplied as the first parameter to ``end()``, the
 FormHelper outputs a submit button named accordingly along with the
-closing form tag.
-
-::
+closing form tag::
 
     <?php echo $this->Form->end('Finish'); ?>
 
@@ -249,9 +232,7 @@ Will output::
     </div>
     </form>
 
-You can specify detail settings by passing an array to ``end()``.
-
-::
+You can specify detail settings by passing an array to ``end()``::
 
     <?php 
     $options = array(
@@ -302,27 +283,27 @@ field.
     For example, let’s assume that my User model includes fields for a
     username (varchar), password (varchar), approved (datetime) and
     quote (text). I can use the input() method of the FormHelper to
-    create appropriate inputs for all of these form fields.
+    create appropriate inputs for all of these form fields::
 
-    ::
+        <?php 
+        echo $this->Form->create(); 
 
-        <?php echo $this->Form->create(); ?>
+        echo $this->Form->input('username');   //text
+        echo $this->Form->input('password');   //password
+        echo $this->Form->input('approved');   //day, month, year, hour, minute, meridian
+        echo $this->Form->input('quote');      //textarea
 
-            <?php
-                echo $this->Form->input('username');   //text
-                echo $this->Form->input('password');   //password
-                echo $this->Form->input('approved');   //day, month, year, hour, minute, meridian
-                echo $this->Form->input('quote');      //textarea
-            ?>
-
-        <?php echo $this->Form->end('Add'); ?>
+        echo $this->Form->end('Add'); 
+        ?>
 
     A more extensive example showing some options for a date field::
 
-                echo $this->Form->input('birth_dt', array( 'label' => 'Date of birth'
-                                            , 'dateFormat' => 'DMY'
-                                            , 'minYear' => date('Y') - 70
-                                            , 'maxYear' => date('Y') - 18 ));
+        echo $this->Form->input('birth_dt', array(
+            'label' => 'Date of birth',
+            'dateFormat' => 'DMY',
+            'minYear' => date('Y') - 70,
+            'maxYear' => date('Y') - 18,
+        ));
 
     Besides the specific input options found below you can specify any
     html attribute (for instance onfocus). For more information on
@@ -375,9 +356,7 @@ model name to build an input with a format like the following::
     <input type="text" id="ModelnameFieldname" name="data[Modelname][fieldname]">
 
 You can manually specify the model name by passing in
-Modelname.fieldname as the first parameter.
-
-::
+Modelname.fieldname as the first parameter::
 
     <?php
     echo $this->Form->input('Modelname.fieldname');
@@ -400,13 +379,11 @@ $options[‘type’]
 You can force the type of an input (and override model
 introspection) by specifying a type. In addition to the field types
 found in the :ref:`automagic-form-elements`,
-you can also create ‘file’, and ‘password’ inputs.
-
-::
+you can also create ‘file’, and ‘password’ inputs::
 
     <?php echo $this->Form->input('field', array('type' => 'file')); ?>
 
-    Output:
+    // Output:
 
     <div class="input">
         <label for="UserField">Field</label>
@@ -417,9 +394,7 @@ $options[‘before’], $options[‘between’], $options[‘separator’] and $
 ------------------------------------------------------------------------------------
 
 Use these keys if you need to inject some markup inside the output
-of the input() method.
-
-::
+of the input() method::
 
     <?php echo $this->Form->input('field', array(
         'before' => '--before--',
@@ -438,9 +413,7 @@ of the input() method.
     </div>
 
 For radio type input the 'separator' attribute can be used to
-inject markup to separate each input/label pair.
-
-::
+inject markup to separate each input/label pair::
 
     <?php echo $this->Form->input('field', array(
         'before' => '--before--',
@@ -473,9 +446,7 @@ $options[‘options’]
 This key allows you to manually specify options for a select input,
 or for a radio group. Unless the ‘type’ is specified as ‘radio’,
 the FormHelper will assume that the target output is a select
-input.
-
-::
+input::
 
     <?php echo $this->Form->input('field', array('options' => array(1,2,3,4,5))); ?>
 
@@ -492,9 +463,7 @@ Output::
         </select>
     </div>
 
-Options can also be supplied as key-value pairs.
-
-::
+Options can also be supplied as key-value pairs::
 
     <?php echo $this->Form->input('field', array('options' => array(
         'Value 1'=>'Label 1',
@@ -515,9 +484,7 @@ Output::
 
 If you would like to generate a select with optgroups, just pass
 data in hierarchical format. Works on multiple checkboxes and radio
-buttons too, but instead of optgroups wraps elements in fieldsets.
-
-::
+buttons too, but instead of optgroups wraps elements in fieldsets::
 
     <?php echo $this->Form->input('field', array('options' => array(
         'Label1' => array(
@@ -548,16 +515,12 @@ $options[‘multiple’]
 --------------------
 
 If ‘multiple’ has been set to true for an input that outputs a
-select, the select will allow multiple selections.
-
-::
+select, the select will allow multiple selections::
 
     echo $this->Form->input('Model.field', array( 'type' => 'select', 'multiple' => true ));
 
 Alternatively set ‘multiple’ to ‘checkbox’ to output a list of
-related check boxes.
-
-::
+related check boxes::
 
     echo $this->Form->input('Model.field', array(
         'type' => 'select', 
@@ -634,9 +597,7 @@ $options[‘label’]
 -----------------
 
 Set this key to the string you would like to be displayed within
-the label that usually accompanies the input.
-
-::
+the label that usually accompanies the input::
 
     <?php echo $this->Form->input( 'User.name', array( 'label' => 'The User Alias' ) );?>
 
@@ -648,9 +609,7 @@ Output::
     </div>
 
 Alternatively, set this key to false to disable the output of the
-label.
-
-::
+label::
 
     <?php echo $this->Form->input( 'User.name', array( 'label' => false ) ); ?>
 
@@ -662,9 +621,7 @@ Output::
 
 Set this to an array to provide additional options for the
 ``label`` element. If you do this, you can use a ``text`` key in
-the array to customize the label text.
-
-::
+the array to customize the label text::
 
     <?php echo $this->Form->input( 'User.name', array( 'label' => array('class' => 'thingy', 'text' => 'The User Alias') ) ); ?>
 
@@ -697,9 +654,7 @@ a number of suboptions which control the wrapping element, wrapping
 element class name, and whether HTML in the error message will be
 escaped.
 
-To disable error message output set the error key to false.
-
-::
+To disable error message output set the error key to false::
 
     <?php
     $this->Form->input('Model.field', array('error' => false));
@@ -708,19 +663,25 @@ To modify the wrapping element type and its class, use the
 following format::
 
     <?php
-    $this->Form->input('Model.field', array('error' => array('wrap' => 'span', 'class' => 'bzzz')));
+    $this->Form->input('Model.field', array(
+        'error' => array('wrap' => 'span', 'class' => 'bzzz')
+    ));
 
 To prevent HTML being automatically escaped in the error message
 output, set the escape suboption to false::
 
     <?php
-    $this->Form->input('Model.field', array('error' => array('escape' => false)));
+    $this->Form->input('Model.field', array(
+        'error' => array('escape' => false)
+    ));
 
 To override the model error messages use an associate array with
 the keyname of the validation rule::
 
     <?php
-    $this->Form->input('Model.field', array('error' => array('tooShort' => __('This is not long enough', true) )));
+    $this->Form->input('Model.field', array(
+        'error' => array('tooShort' => __('This is not long enough'))
+    ));
 
 As seen above you can set the error message for each validation
 rule you have in your models. In addition you can provide i18n
@@ -736,16 +697,14 @@ field (or if no data is passed at all).
 Example usage::
 
     <?php 
-        echo $this->Form->input('ingredient', array('default'=>'Sugar')); 
-    ?>
+    echo $this->Form->input('ingredient', array('default' => 'Sugar')); 
 
 Example with select field (Size "Medium" will be selected as
 default)::
 
     <?php 
-        $sizes = array('s'=>'Small', 'm'=>'Medium', 'l'=>'Large');
-        echo $this->Form->input('size', array('options'=>$sizes, 'default'=>'m')); 
-    ?>
+    $sizes = array('s' => 'Small', 'm' => 'Medium', 'l' => 'Large');
+    echo $this->Form->input('size', array('options' => $sizes, 'default' => 'm')); 
 
 .. note::
 
@@ -765,12 +724,13 @@ $options[‘selected’]
 Used in combination with a select-type input (i.e. For types
 select, date, time, datetime). Set ‘selected’ to the value of the
 item you wish to be selected by default when the input is
-rendered.
-
-::
+rendered::
 
     <?php
-    echo $this->Form->input('close_time', array('type' => 'time', 'selected' => '13:30:00'));
+    echo $this->Form->input('close_time', array(
+        'type' => 'time',
+        'selected' => '13:30:00'
+    ));
 
 .. note::
 
@@ -781,9 +741,7 @@ $options[‘rows’], $options[‘cols’]
 ----------------------------------
 
 These two keys specify the number of rows and columns in a textarea
-input.
-
-::
+input::
 
     <?php
     echo $this->Form->input('textarea', array('rows' => '5', 'cols' => '5'));
@@ -804,11 +762,12 @@ If set to true, forces the input to remain empty.
 When passed to a select list, this creates a blank option with an
 empty value in your drop down list. If you want to have a empty
 value with text displayed instead of just a blank option, pass in a
-string to empty.
+string to empty::
 
-::
-
-    <?php echo $this->Form->input('field', array('options' => array(1,2,3,4,5), 'empty' => '(choose one)')); ?>
+    <?php echo $this->Form->input('field', array(
+        'options' => array(1, 2, 3, 4, 5),
+        'empty' => '(choose one)'
+    ));
 
 Output::
 
@@ -854,11 +813,12 @@ $options['interval']
 --------------------
 
 This option specifies the number of minutes between each option in
-the minutes select box.
+the minutes select box::
 
-::
-
-    <?php echo $this->Form->input('Model.time', array('type' => 'time', 'interval' => 15)); ?>
+    <?php echo $this->Form->input('Model.time', array(
+        'type' => 'time',
+        'interval' => 15
+    ));
 
 Would create 4 options in the minute select. One for each 15
 minutes.
@@ -867,9 +827,7 @@ $options['class']
 -----------------
 
 You can set the classname for an input field using
-``$options['class']``
-
-::
+``$options['class']``::
 
     <?php
     echo $this->Form->input('title', array('class' => 'custom-class'));
@@ -879,17 +837,13 @@ $options['hiddenField']
 
 For certain input types (checkboxes, radios) a hidden input is
 created so that the key in $this->data will exist even without a
-value specified.
-
-::
+value specified::
 
     <input type="hidden" name="data[Post][Published]" id="PostPublished_" value="0" />
     <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
 
 This can be disabled by setting the
-``$options['hiddenField'] = false``.
-
-::
+``$options['hiddenField'] = false``::
 
     <?php
     echo $this->Form->checkbox('published', array('hiddenField' => false));
@@ -925,28 +879,27 @@ primary colors would be overridden::
     <label for="ColorsOrange">Orange</label>
 
 Disabling the ``'hiddenField'`` on the second input group would
-prevent this behavior
+prevent this behavior.
 
 File Fields
 ===========
 
 To add a file upload field to a form, you must first make sure that
 the form enctype is set to "multipart/form-data", so start off with
-a create function such as the following.
-
-::
+a create function such as the following::
 
     <?php
     echo $this->Form->create('Document', array('enctype' => 'multipart/form-data') );
     // OR
     echo $this->Form->create('Document', array('type' => 'file'));
 
-Next add either of the two lines to your form view file.
-
-::
+Next add either of the two lines to your form view file::
 
     <?php
-    echo $this->Form->input('Document.submittedfile', array('between'=>'<br />','type'=>'file'));
+    echo $this->Form->input('Document.submittedfile', array(
+        'between' => '<br />',
+        'type'=>'file'
+    ));
 
     // or
 
@@ -962,17 +915,15 @@ script receiving the form data.
 For the example above, the values in the submitted data array would
 be organized as follows, if the CakePHP was installed on a Windows
 server. 'tmp\_name' will have a different path in a Unix
-environment.
-
-::
+environment::
 
     <?php
-    $this->data['Document']['submittedfile'] = array(
-        'name' => conference_schedule.pdf
-        'type' => application/pdf
-        'tmp_name' => C:/WINDOWS/TEMP/php1EE.tmp
-        'error' => 0
-        'size' => 41737
+    $this->request->data['Document']['submittedfile'] = array(
+        'name' => conference_schedule.pdf,
+        'type' => application/pdf,
+        'tmp_name' => C:/WINDOWS/TEMP/php1EE.tmp,
+        'error' => 0,
+        'size' => 41737,
     );
 
 This array is generated by PHP itself, so for more detail on the
@@ -983,9 +934,7 @@ Validating Uploads
 ------------------
 
 Below is an example validation method you could define in your
-model to validate whether a file has been successfully uploaded.
-
-::
+model to validate whether a file has been successfully uploaded::
 
     // Based on comment 8 from: http://bakery.cakephp.org/articles/view/improved-advance-validation-with-parameters
 
@@ -1065,11 +1014,8 @@ Form Element-Specific Methods
         echo $this->Form->button('Another Button', array('type'=>'button'));
         echo $this->Form->button('Reset the Form', array('type'=>'reset'));
         echo $this->Form->button('Submit Form', array('type'=>'submit'));
-        ?>
 
-    Will output:
-
-    ::
+    Will output::
 
         <button type="submit">A Button</button>
         <button type="button">Another Button</button>
@@ -1086,21 +1032,17 @@ Form Element-Specific Methods
     ::
 
         <?php 
-            echo $this->Form->button('Submit Form', array('type'=>'submit','escape'=>true));
-        ?>
+        echo $this->Form->button('Submit Form', array('type'=>'submit','escape'=>true));
 
 .. php:method:: year(string $fieldName, int $minYear, int $maxYear, array $attributes)
 
     Creates a select element populated with the years from ``$minYear``
     to ``$maxYear``. HTML attributes may be supplied in $attributes. If
     ``$attributes['empty']`` is false, the select will not include an
-    empty option.
-
-    ::
+    empty option::
 
         <?php
         echo $this->Form->year('purchased',2000,date('Y'));
-        ?>
 
     Will output::
 
@@ -1121,13 +1063,10 @@ Form Element-Specific Methods
 
 .. php:method:: month(string $fieldName, array $attributes)
 
-    Creates a select element populated with month names.
-
-    ::
+    Creates a select element populated with month names::
 
         <?php
         echo $this->Form->month('mob');
-        ?>
 
     Will output::
 
@@ -1154,7 +1093,6 @@ Form Element-Specific Methods
 
         <?php
         echo $this->Form->month('mob', null, array('monthNames' => false));
-        ?>
 
 .. php:method:: dateTime($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $attributes = array())
 
@@ -1177,7 +1115,6 @@ Form Element-Specific Methods
 
         <?php
         echo $this->Form->day('created');
-        ?>
 
     Will output::
 
@@ -1214,7 +1151,6 @@ Form Element-Specific Methods
 
     Options:
 
-
     -  'escape' bool Whether or not to html escape the contents of the
        error.
     -  'wrap' mixed Whether or not the error message should be wrapped
@@ -1228,7 +1164,6 @@ Form Element-Specific Methods
         <?php
         echo $this->Form->create('User',array('type'=>'file'));
         echo $this->Form->file('avatar');
-        ?>
 
     Will output::
 
@@ -1247,7 +1182,6 @@ Form Element-Specific Methods
 
         <?php
         echo $this->Form->hidden('id');
-        ?>
 
     Will output::
 
@@ -1266,10 +1200,9 @@ Form Element-Specific Methods
     error.::
 
         <?php
-        if ($this->Form->isFieldError('gender')){
+        if ($this->Form->isFieldError('gender')) {
             echo $this->Form->error('gender');
         }
-        ?>
 
     .. note::
 
@@ -1281,7 +1214,6 @@ Form Element-Specific Methods
 
         <?php
         echo $this->Form->label('status');
-        ?>
 
     Will output::
 
@@ -1293,7 +1225,6 @@ Form Element-Specific Methods
 
         <?php
         echo $this->Form->password('password');
-        ?>
 
     Will output::
 
@@ -1311,10 +1242,9 @@ Form Element-Specific Methods
     Set ``$attributes['legend']`` to false to remove them.::
 
         <?php
-        $options=array('M'=>'Male','F'=>'Female');
-        $attributes=array('legend'=>false);
-        echo $this->Form->radio('gender',$options,$attributes);
-        ?>
+        $options = array('M' => 'Male', 'F' => 'Female');
+        $attributes=array('legend' => false);
+        echo $this->Form->radio('gender', $options, $attributes);
 
     Will output::
 
@@ -1338,7 +1268,6 @@ Form Element-Specific Methods
         <?php
         $options = array('M' => 'Male', 'F' => 'Female');
         echo $this->Form->select('gender', $options)
-        ?>
 
     Will output::
 
@@ -1360,7 +1289,6 @@ Form Element-Specific Methods
         <?php
         $options = array('M' => 'Male', 'F' => 'Female');
         echo $this->Form->select('gender', $options, null, array('escape' => false));
-        ?>
 
 .. php:method:: submit(string $caption, array $options)
 
@@ -1369,13 +1297,10 @@ Form Element-Specific Methods
     the submit button will be rendered as an image.
 
     It is enclosed between ``div`` tags by default; you can avoid this
-    by declaring ``$options['div'] = false``.
-
-    ::
+    by declaring ``$options['div'] = false``::
 
         <?php
         echo $this->Form->submit();
-        ?>
 
     Will output::
 
@@ -1386,7 +1311,6 @@ Form Element-Specific Methods
 
         <?php
         echo $this->Form->submit('ok.png');
-        ?>
 
     Will output::
 
@@ -1398,7 +1322,6 @@ Form Element-Specific Methods
 
         <?php
         echo $this->Form->text('first_name');
-        ?>
 
     Will output::
 
@@ -1410,7 +1333,6 @@ Form Element-Specific Methods
 
         <?php
         echo $this->Form->textarea('notes');
-        ?>
 
     Will output::
 
