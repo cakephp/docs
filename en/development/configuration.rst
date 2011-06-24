@@ -17,8 +17,8 @@ Database Configuration
 ======================
 
 CakePHP expects database configuration details to be in a file at
-``app/config/database.php``. An example database configuration file can
-be found at ``app/config/database.php.default``. A finished
+``app/Config/database.php``. An example database configuration file can
+be found at ``app/Config/database.php.default``. A finished
 configuration should look something like this::
 
     <?php
@@ -33,11 +33,11 @@ configuration should look something like this::
     );
 
 The $default connection array is used unless another connection is
-specified by the $useDbConfig property in a model. For example, if
+specified by the ``$useDbConfig`` property in a model. For example, if
 my application has an additional legacy database in addition to the
 default one, I could use it in my models by creating a new $legacy
 database connection array similar to the $default array, and by
-setting var $useDbConfig = ‘legacy’; in the appropriate models.
+setting ``public $useDbConfig = 'legacy';`` in the appropriate models.
 
 Fill out the key/value pairs in the configuration array to best
 suit your needs.
@@ -46,7 +46,7 @@ Key
     Value
 datasource
     The name of the datasource this configuration array is for.
-    Examples: Database/Mysql, Database/Postgres, Database/Sqlite.  
+    Examples: Database/Mysql, Database/Sqlserver, Database/Postgres, Database/Sqlite.
     You can use :term:`plugin syntax` to indicate plugin datasource to use.
 persistent
     Whether or not to use a persistent connection to the database.
@@ -91,6 +91,11 @@ BigBox, your controller BigBoxesController, everything just works
 together automatically. By convention, use underscores, lower case,
 and plural forms for your database table names - for example:
 bakers, pastry\_stores, and savory\_cakes.
+
+.. todo::
+
+    Add information about specific options for different database
+    vendors, such as SQLServer, Postgres and MySQL.
 
 Additional Class Paths
 ======================
