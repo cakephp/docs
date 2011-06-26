@@ -156,6 +156,7 @@ Adding paths for App to find packages in
     be needed to be loaded again.
 
     .. versionchanged:: 2.0
+
     Will not merge app paths with core paths anymore.
 
     Examples::
@@ -194,6 +195,7 @@ Finding which objects CakePHP knows about
         App::objects('MyPlugin.Model'); //returns array('MyPluginPost', 'MyPluginComment');
 
     .. versionchanged:: 2.0
+
     1. Returns ``array()`` instead of false for empty results or invalid types
     2. Does not return core objects anymore, ``App::objects('core')`` will
        return ``array()``.
@@ -249,6 +251,7 @@ Including files with App::import()
     perfomance gains to the framework.**
 
     .. versionchanged:: 2.0
+
     * The method no longer looks for classes recursively, it stricty uses the values for the 
       paths defined in :php:meth:`App::build()`
     * It will not be able to load ``App::import('Component', 'Component')`` use
