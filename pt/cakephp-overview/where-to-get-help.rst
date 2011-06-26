@@ -22,72 +22,68 @@ perguntas primeiro. As respostas podem vir mais lentas, mas vão permanecer mais
 tempo – e também vão oferecer uma ajuda relâmpago. Tanto o manual como a API tem
 um componente online.
 
-The Bakery
-==========
+O Bakery
+========
 
 `http://bakery.cakephp.org <http://bakery.cakephp.org>`_
 
-The CakePHP Bakery is a clearing house for all things CakePHP.
-Check it out for tutorials, case studies, and code examples. Once
-you’re acquainted with CakePHP, log on and share your knowledge
-with the community and gain instant fame and fortune.
+O CakePHP Bakery é um centro de intercâmbio para todas as coisas sobre o
+CakePHP. Locais para tutoriais, estudos de casos, exemplos de códigos. Uma vez
+que você estiver familiarizado com CakePHP, faça logon e compartilhe seus
+conhecimentos com a comunidade e ganhe fama e fortuna.
 
-The API
+A API
 =======
 
 `http://api.cakephp.org/ <http://api.cakephp.org/>`_
 
-Straight to the point and straight from the core developers, the
-CakePHP API (Application Programming Interface) is the most
-comprehensive documentation around for all the nitty gritty details
-of the internal workings of the framework. Its a straight forward
-code reference, so bring your propeller hat.
+Direto ao assunto e diretamente dos desenvolvedores do núcleo, o CakePHP API
+(`Application Programming Interface`) é a mais completa documentação acerca dos
+mínimos detalhes do funcionamento interno do framework.
 
 CakeForge
 =========
 
 `http://www.cakeforge.org <http://www.cakeforge.org>`_
 
-CakeForge is another developer resource you can use to host your
-CakePHP projects to share with others. If you’re looking for (or
-want to share) a killer component or a praiseworthy plugin, check
-out CakeForge.
+CakeForge é outro recurso para o desenvolvedor, você pode usar para hospedar
+seus projetos CakePHP para partilhar com os outros. Se você está procurando
+(ou quiser compartilhar) um componente matador ou um plugin louvável, confira o
+CakeForge.
 
-The Test Cases
-==============
+Casos de Testes
+===============
 
-If you ever feel the information provided in the API is not
-sufficient, check out the code of the test cases provided with
-CakePHP. They can serve as practical examples for function and
-data member usage for a class.::
+Se você sentiu que a informação fornecida na API não é suficiente, verifique o
+código dos casos de testes fornecido com o CakePHP. Eles podem servir como
+exemplos práticos para a utilização de funções e de dados de uma classe::
 
     lib/Cake/tests/Case
 
-The IRC channel
-===============
+O canal IRC
+===========
 
-**IRC Channels on irc.freenode.net:**
+**Canais IRC na rede irc.freenode.net:**
 
 
--  `#cakephp <irc://irc.freenode.net/cakephp>`_ -- General
-   Discussion
--  `#cakephp-docs <irc://irc.freenode.net/cakephp-docs>`_ --
-   Documentation
--  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ --
-   Bakery
+-  `#cakephp <irc://irc.freenode.net/cakephp>`_ -- Discussões gerais
+-  `#cakephp-docs <irc://irc.freenode.net/cakephp-docs>`_ -- Documentação
+-  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ -- Bakery
+-  `#cakephp-pt <irc://irc.freenode.net/cakephp-bakery>`_ -- Discussões gerais
+   em Português
 
-If you’re stumped, give us a holler in the CakePHP IRC channel.
-Someone from the development team is usually there, especially
-during the daylight hours for North and South America users. We’d
-love to hear from you, whether you need some help, want to find
-users in your area, or would like to donate your brand new sports
-car.
+Se você está confuso, dê um grito no canal do CakePHP no IRC. Alguém da equipe
+de desenvolvimento está geralmente lá, especialmente durante o dia para os
+usuários da América do Norte e Sul. Adoraríamos ouvir de você, se você precisar
+de alguma ajuda, se quiser encontrar usuários em sua área, ou gostaria de doar o
+seu novo carro esportivo.
 
-The Google Group
-================
+O Google Group
+==============
 
 `http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
+`http://groups.google.com/group/cakephp-pt <http://groups.google.com/group/cakephp-pt>`_
 
-CakePHP also has a very active Google Group. It can be a great
-resource for finding archived answers, frequently asked questions,
-and getting answers to immediate problems.
+CakePHP também tem um grupo muito ativo no Google. Pode ser um excelente recurso
+para encontrar respostas arquivadas, perguntas freqüentes, e obter respostas
+para problemas imediatos.

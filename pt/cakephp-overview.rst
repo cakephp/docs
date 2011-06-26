@@ -1,5 +1,5 @@
-Resumo CakePHP
-##############
+Resumo do CakePHP
+#################
 
 Bem vindo ao `Cookbook`, o manual para o framework de aplicações web CakePHP que
 torna o desenvolvimento uma parte do bolo!
