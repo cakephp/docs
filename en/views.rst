@@ -395,6 +395,11 @@ To call any view method use ``$this->method()``
     An instance of :php:class:`CakeRequest`.  Use this instance to access
     information about the current request.
 
+.. php:attr:: output
+
+    Contains the last rendered content from a view, either the view file, or the
+    layout content.
+
 More about Views
 ================
 

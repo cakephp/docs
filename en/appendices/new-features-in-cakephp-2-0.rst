@@ -12,6 +12,16 @@ Now models won't require a database connection in the construction process,
 database will be accessed for the first time only when a find operation is
 issued or information for one of the columns is required.
 
+View
+====
+
+View::$output
+-------------
+
+View will now always have the last rendered content (view or layout) accessible
+through ``$this->output``. In helpers you can use ``$this->_View->output``. Modifying
+this property will change the content that comes out of the view rendering.
+
 Helpers
 =======
 
