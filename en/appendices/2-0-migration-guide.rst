@@ -472,6 +472,15 @@ View
 -  ``View::$params`` is deprecated, use the ``$this->request`` instead.
 -  ``View::$loaded`` has been removed. Use the ``HelperCollection`` to access
    loaded helpers.
+- ``View::$model`` has been removed. This behavior is now on :php:class:`Helper`
+- ``View::$modelId`` has been removed. This behavior is now on
+  :php:class:`Helper`
+- ``View::$association`` has been removed. This behavior is now on
+  :php:class:`Helper`
+- ``View::$fieldSuffix`` has been removed. This behavior is now on
+  :php:class:`Helper`
+- ``View::entity()`` has been removed. This behavior is now on
+  :php:class:`Helper`
 -  ``View::_loadHelpers()`` has been removed, used ``View::loadHelpers()``
    instead.
 -  How ``View::element()`` uses caching has changed, see below for more
@@ -579,8 +588,8 @@ Testsuite shell
 The testsuite shell has had its invocation simplified and expanded. You no
 longer need to differentiate between ``case`` and ``group``. It is assumed that
 all tests are cases. In the past you would have done
-``cake testsuite app case models/post`` you can now do``cake testsuite app
-models/post``.
+``cake testsuite app case models/post`` you can now do ``cake testsuite app
+Model/Post``.
 
 
 The testsuite shell have been refactored to use the PHPUnit cli tool, it now

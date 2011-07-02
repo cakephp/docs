@@ -25,10 +25,10 @@ website `http://www.cakephp.org <http://www.cakephp.org>`_ and
 follow the "Download Now" link.
 
 All current releases of CakePHP are hosted on
-`Github <http://github.com/cakephp>`_. Github houses both CakePHP
+`Github <http://github.com/cakephp/cakephp>`_. Github houses both CakePHP
 itself as well as many other plugins for CakePHP. The CakePHP
 releases are available at
-`Github downloads <http://github.com/cakephp/cakephp1x/downloads>`_.
+`Github downloads <http://github.com/cakephp/cakephp/downloads>`_.
 
 Alternatively you can get fresh off the press code, with all the
 bug-fixes and up to the minute(well, to the day) enhancements.
@@ -39,11 +39,11 @@ These can be accessed from github by cloning the repository.
 Permissions
 ===========
 
-CakePHP uses the /app/tmp directory for a number of different
+CakePHP uses the ``/app/tmp`` directory for a number of different
 operations. Model descriptions, cached views, and session
 information are just a few examples.
 
-As such, make sure the /app/tmp directory in your cake installation
+As such, make sure the ``/app/tmp`` directory in your cake installation
 is writable by the web server user.
 
 Setup
@@ -71,9 +71,9 @@ A development installation is the fastest method to setup Cake.
 This example will help you install a CakePHP application and make
 it available at http://www.example.com/cake\_2\_0/. We assume for
 the purposes of this example that your document root is set to
-/var/www/html.
+``/var/www/html``.
 
-Unpack the contents of the Cake archive into /var/www/html. You now
+Unpack the contents of the Cake archive into ``/var/www/html``. You now
 have a folder in your document root named after the release you've
 downloaded (e.g. cake\_2.0.0). Rename this folder to cake\_2\_0.
 Your development setup will look like this on the file system:
@@ -156,9 +156,7 @@ Congratulations! You are ready to create your first CakePHP
 application.
 
 Not working? If you're getting timezone related error from PHP
-uncomment one line in app/config/core.php.
-
-::
+uncomment one line in app/config/core.php::
 
    <?php
    /**
