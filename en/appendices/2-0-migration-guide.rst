@@ -472,6 +472,15 @@ View
 -  ``View::$params`` is deprecated, use the ``$this->request`` instead.
 -  ``View::$loaded`` has been removed. Use the ``HelperCollection`` to access
    loaded helpers.
+- ``View::$model`` has been removed. This behavior is now on :php:class:`Helper`
+- ``View::$modelId`` has been removed. This behavior is now on
+  :php:class:`Helper`
+- ``View::$association`` has been removed. This behavior is now on
+  :php:class:`Helper`
+- ``View::$fieldSuffix`` has been removed. This behavior is now on
+  :php:class:`Helper`
+- ``View::entity()`` has been removed. This behavior is now on
+  :php:class:`Helper`
 -  ``View::_loadHelpers()`` has been removed, used ``View::loadHelpers()``
    instead.
 -  How ``View::element()`` uses caching has changed, see below for more
@@ -483,8 +492,76 @@ The deprecated properties on View will be accessible through a ``__get()``
 method. This method will be removed in future versions, so its recommended that
 you update your application.
 
+Callback positioning changes
+----------------------------
+
+beforeLayout used to fire after scripts_for_layout and content_for_layout were
+prepared. In 2.0, beforeLayout is fired before any of the special variables are
+prepared, allowing you to manipulate them before they are passed to the layout,
+the same was done for beforeRender. It is now fired well before any view
+variables are manipulated. In addition to these changes, helper callbacks always
+receive the name of the file about to be rendered. This combined with helpers
+being able to access the view through ``$this->_View`` and the current view
+content through ``$this->_View->output`` gives you more power than ever before.
+
+Helper callback signature changes
+---------------------------------
+
+Helper callbacks now always get one argument passed in. For beforeRender and
+afterRender it is the view file being rendered. For beforeLayout and afterLayout
+it is the layout file being rendered. Your helpers function signatures should
+look like::
+
+    function beforeRender($viewFile) {
+
+    }
+
+    function afterRender($viewFile) {
+
+    }
+
+    function beforeLayout($layoutFile) {
+
+    }
+
+    function afterLayout($layoutFile) {
+
+    }
+
+
 Element caching, and view callbacks have been changed in 2.0 to help provide you
-with more flexibility and consistency. Read more about those changes.
+with more flexibility and consistency. :ref:`views <Read more about those changes>`.
+
+CacheHelper decoupled
+---------------------
+
+In previous versions there was a tight coupling between :php:class:`CacheHelper`
+and :php:class:`View`. For 2.0 this coupling has been removed and CacheHelper
+just uses callbacks like other helpers to generate full page caches.
+
+
+CacheHelper ``<cake:nocache>`` tags changed
+-------------------------------------------
+
+In previous versions, CacheHelper used a special ``<cake:noncache>`` tag as
+markers for output that should not be part of the full page cache. These tags
+were not part of any XML schema, and were not possible to validate in HTML or
+XML documents. For 2.0, these tags have been replaced with HTML/XML comments::
+
+    <cake:noncache> becomes <!--nocache-->
+    </cake:nocache> becomes <!--/nocache-->
+
+The internal code for full page view caches has also changed, so be sure to
+clear out view cache files when updating.
+
+MediaView changes
+-----------------
+
+:php:func:`MediaView::render()` now forces download of unknown file types
+instead of just returning false. If you want you provide an alternate download
+filename you now specify the full name including extension using key 'name' in
+the array parameter passed to the function.
+
 
 PHPUnit instead of SimpleTest
 =============================
@@ -511,8 +588,8 @@ Testsuite shell
 The testsuite shell has had its invocation simplified and expanded. You no
 longer need to differentiate between ``case`` and ``group``. It is assumed that
 all tests are cases. In the past you would have done
-``cake testsuite app case models/post`` you can now do``cake testsuite app
-models/post``.
+``cake testsuite app case models/post`` you can now do ``cake testsuite app
+Model/Post``.
 
 
 The testsuite shell have been refactored to use the PHPUnit cli tool, it now

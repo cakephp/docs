@@ -59,11 +59,14 @@ and designers to work simultaneously, including the ability to
 rapidly
 `prototype <http://en.wikipedia.org/wiki/Software_prototyping>`_.
 Separation also allows developers to make changes in one part of
-the application without affecting others.
+the application without affecting the others.
 
 If you've never built an application this way, it takes some time
 getting used to, but we're confident that once you've built your
 first application using CakePHP, you won't want to do it any other
 way.
+
+To get started on your first CakePHP application,
+:doc:`try the blog tutorial now </tutorials-and-examples/blog/blog>`
 
 .. |Figure 1| image:: /_static/img/basic_mvc.png
