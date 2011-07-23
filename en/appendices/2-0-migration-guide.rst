@@ -265,27 +265,32 @@ Cache
 Router
 ------
 
--  You can no longer modify named parameter settings with
-   ``Router::setRequestInfo()``. You should use ``Router::connectNamed()`` to
-   configure how named parameters are handled.
--  Router no longer has a ``getInstance()`` method. It is a static class, call
-   its methods and properties statically.
--  ``Router::getNamedExpressions()`` is deprecated. Use the new router
-   constants. ``Router::ACTION``, ``Router::YEAR``, ``Router::MONTH``,
-   ``Router::DAY``, ``Router::ID``, and ``Router::UUID`` instead.
+- You can no longer modify named parameter settings with
+  ``Router::setRequestInfo()``. You should use ``Router::connectNamed()`` to
+  configure how named parameters are handled.
+- Router no longer has a ``getInstance()`` method. It is a static class, call
+  its methods and properties statically.
+- ``Router::getNamedExpressions()`` is deprecated. Use the new router
+  constants. ``Router::ACTION``, ``Router::YEAR``, ``Router::MONTH``,
+  ``Router::DAY``, ``Router::ID``, and ``Router::UUID`` instead.
+- ``Router::defaults()`` has been removed.  Delete the core routes file
+  inclusion from your applications routes.php file to disable default routing.
+  Conversely if you want default routing, you will have add an include to 
+  ``Cake/Config/routes.php`` in your routes file.
 
 Dispatcher
 ----------
 
--  Dispatcher has been moved inside of cake/libs, you will have to update your
-   ``app/webroot/index.php`` file.
--  ``Dispatcher::dispatch()`` now only accepts a ``CakeRequest`` object or a
-   subclass thereof.
--  ``Dispather::parseParams()`` now only accepts a ``CakeRequest`` object.
--  ``Dispatcher::baseUrl()`` has been removed.
--  ``Dispatcher::getUrl()`` has been removed.
--  ``Dispatcher::uri()`` has been removed.
--  ``Dispatcher::$here`` has been removed.
+- Dispatcher has been moved inside of cake/libs, you will have to update your
+  ``app/webroot/index.php`` file.
+- ``Dispatcher::dispatch()`` now takes two parameters.  The request and
+  response objects.  These should be instances of ``CakeRequest`` &
+  ``CakeResponse`` or a subclass thereof.
+- ``Dispather::parseParams()`` now only accepts a ``CakeRequest`` object.
+- ``Dispatcher::baseUrl()`` has been removed.
+- ``Dispatcher::getUrl()`` has been removed.
+- ``Dispatcher::uri()`` has been removed.
+- ``Dispatcher::$here`` has been removed.
 
 Configure
 ---------
