@@ -442,18 +442,19 @@ changes.
 Controller
 ==========
 
--  Controller's constructor now takes an optional CakeRequest object. This
-   object will be used to populate several deprecated properties and will be set
-   to $request inside the controller.
--  ``Controller::$webroot`` is deprecated, use the request object's webroot
-   property.
--  ``Controller::$base`` is deprecated, use the request object's base property.
--  ``Controller::$here`` is deprecated, use the request object's here property.
--  ``Controller::$data`` is deprecated, use the request object's data property.
--  ``Controller::$params`` is deprecated, use the ``$this->request`` instead.
--  ``Controller::$Component`` has been moved to ``Controller::$Components``.
--  ``Controller::$view`` has been renamed to ``Controller::$viewClass``.
-   ``Controller::$view`` is now used to change which view file is rendered.
+- Controller's constructor now takes two parameters. A CakeRequest, and 
+  CakeResponse objects. These objects are used to populate several deprecated 
+  properties and will be set to $request and $response inside the controller.
+- ``Controller::$webroot`` is deprecated, use the request object's webroot
+  property.
+- ``Controller::$base`` is deprecated, use the request object's base property.
+- ``Controller::$here`` is deprecated, use the request object's here property.
+- ``Controller::$data`` is deprecated, use the request object's data property.
+- ``Controller::$params`` is deprecated, use the ``$this->request`` instead.
+- ``Controller::$Component`` has been moved to ``Controller::$Components``.
+- ``Controller::$view`` has been renamed to ``Controller::$viewClass``.
+  ``Controller::$view`` is now used to change which view file is rendered.
+- ``Controller::render()`` now returns a CakeResponse object.
 
 The deprecated properties on Controller will be accessible through a ``__get()``
 method. This method will be removed in future versions, so its recommended that

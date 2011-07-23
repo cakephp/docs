@@ -372,7 +372,6 @@ Other Useful Methods
                 }
             }
         }
-        ?>
 
     you can do this::
 
@@ -383,7 +382,6 @@ Other Useful Methods
                 $this->redirect($this->referer(array('action' => 'index')));
             }
         }
-        ?>
 
     If ``$default`` is not set, the function defaults to the root of
     your domain - '/'.
@@ -577,9 +575,7 @@ Other Useful Methods
 
     The ``loadModel`` function comes handy when you need to use a model
     which is not the controller's default model or its associated
-    model.
-
-    ::
+    model::
     
         <?php
         $this->loadModel('Article');
@@ -664,7 +660,6 @@ given by ``$helpers`` to the view as an object reference variable
             var $helpers = array('Ajax');
             var $components = array('Email');
         }
-        ?>   
 
     Each of these variables are merged with their inherited values,
     therefore it is not necessary (for example) to redeclare the Form
@@ -689,8 +684,6 @@ The $cacheAction attribute aids in caching views, and the $paginate
 attribute is used to set pagination defaults for the controller.
 For more information on how to use these attributes, check out
 their respective sections later on in this manual.
-
-.. php:attr:: persistModel
 
 .. todo::
 

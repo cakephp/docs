@@ -385,19 +385,12 @@ Changing the response class
 CakePHP uses ``CakeResponse`` by default. In ``CakeResponse`` is a flexible and 
 transparent to use class.  But if you need to replace it with an application 
 specific class, you can override and replace ``CakeResponse`` with
-your own class::
-
-    <?php
-    App::uses('CustomResponse', 'Lib');
-     
-    class AppController extends Controller {
-        protected $_responseClass = 'CustomResponse';
-    }
+your own class.  By replacing the CakeResponse used in index.php.
 
 This will make all the controllers in your application use ``CustomResponse``
 instead of :php:class:`CakeResponse`.  You can also replace the response
 instance used by setting ``$this->response`` in your controllers. Overriding the 
-response objec is handy during testing, as it allows you to stub 
+response object is handy during testing, as it allows you to stub 
 out the methods that interact with `header()``.  See the section on 
 :ref:`cakeresponse-testing` for more information.
 
