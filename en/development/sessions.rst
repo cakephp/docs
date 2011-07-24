@@ -41,8 +41,8 @@ level ``Session`` key, and a number of options are available:
   config.  This combined with ``Session.handler`` replace the custom session
   handling features of previous versions.
 
-Using defaults
---------------
+Using built in defaults
+=======================
 
 CakePHP comes with several built in session configurations.  You can either use
 these as the basis for your session configuration, or you can create a fully
@@ -78,7 +78,7 @@ configuration.  The built-in configurations are:
 * ``cache`` - Use the built in cache sessions. See below for more information.
 
 Session Handlers
-================
+----------------
 
 Session handlers can also be defined in the session config array.  When defined
 they allow you to map the various ``session_save_handler`` values to a class or
@@ -200,4 +200,12 @@ changing session ids provide.  To use this feature set
 ``Session.autoRegenerate`` to true.  You can control the number of requests
 needed to regenerate the session by modifying
 ``CakeSession::$requestCountdown``.
+
+Accessing Session data
+======================
+
+..todo::
+
+    Complete this.
+
 
