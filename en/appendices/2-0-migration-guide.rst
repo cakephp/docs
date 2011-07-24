@@ -204,6 +204,15 @@ EmailComponent
 The EmailComponent has been deprecated and has created a new library class to
 send e-mails. See :doc:`/core-utility-libraries/email` Email changes for more details.
 
+SessionComponent
+----------------
+
+Session component has lost the following methods.
+
+* activate()
+* active()
+* __start()
+
 cakeError removed
 =================
 
@@ -352,6 +361,16 @@ Inflector
 -  Inflector no longer has a ``getInstance()`` method.
 -  ``Inflector::slug()`` no longer supports the $map argument. Use
    ``Inflector::rules()`` to define transliteration rules.
+
+CakeSession
+-----------
+
+CakeSession is now a fully static class, both ``SessionHelper`` and
+``SessionComponent`` are wrappers and sugar for it.  It can now easily be used
+in models or other contexts.  All of its methods are called statically.
+
+Session configuration has also changed :doc:`/development/sessions <see the
+session section for more information>`
 
 Helpers
 =======

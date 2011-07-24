@@ -1,14 +1,16 @@
 Development
 #############
 
-*Now you’re cooking.*
-
+In this section we'll cover the various aspects of developing a CakePHP
+application.  Topics like Configuration, handling errors & exceptions,
+debugging, and testing will be covered.
 
 .. toctree::
     :maxdepth: 1
 
     development/configuration
     development/routing
+    development/sessions
     development/exceptions
     development/errors
     development/debugging
