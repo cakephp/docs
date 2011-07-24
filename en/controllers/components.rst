@@ -10,13 +10,13 @@ CakePHP also comes with a fantastic set of core components you can
 use to aid in:
 
 
--  Security
--  Sessions
--  Access control lists
--  Emails
--  Cookies
--  Authentication
--  Request handling
+- Security
+- Sessions
+- Access control lists
+- Emails
+- Cookies
+- Authentication
+- Request handling
 
 Each of these core components are detailed in their own chapters.
 For now, we’ll show you how to create your own components. Creating

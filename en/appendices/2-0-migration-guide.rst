@@ -196,7 +196,7 @@ AuthComponent
 The AuthComponent was entirely re-factored for 2.0, this was done to help reduce
 developer confusion and frustration. In addition, AuthComponent was made more
 flexible and extensible. You can find out more in 
-the :doc:`/core-libraries/core-components/authentication` guide.
+the :doc:`/core-libraries/components/authentication` guide.
 
 EmailComponent
 --------------
@@ -536,7 +536,7 @@ look like::
 
 
 Element caching, and view callbacks have been changed in 2.0 to help provide you
-with more flexibility and consistency. :ref:`views <Read more about those changes>`.
+with more flexibility and consistency. :doc:`views <Read more about those changes>`.
 
 CacheHelper decoupled
 ---------------------
