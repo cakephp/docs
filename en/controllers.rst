@@ -75,7 +75,7 @@ Please also remember to call AppController's callbacks within child
 controller callbacks for best results::
 
     <?php
-    function beforeFilter(){
+    function beforeFilter() {
         parent::beforeFilter();
     }
  
@@ -92,7 +92,7 @@ controller would be found in
         # /app/controllers/recipes_controller.php
     
         class RecipesController extends AppController {
-            function view($id)     {
+            function view($id) {
                 //action logic goes here..
             }
     
