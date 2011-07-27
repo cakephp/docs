@@ -69,7 +69,7 @@ with child controller class arrays.
     -  $uses
 
 Remember to add the default Html and Form helpers, if you define
-var $helpers in your AppController
+var ``$helpers`` in your AppController
 
 Please also remember to call AppController's callbacks within child
 controller callbacks for best results::
@@ -542,7 +542,7 @@ Other Useful Methods
     is because requestAction merges the named args array
     (requestAction's 2nd parameter) with the Controller::params member
     array and does not explicitly place the named args array into the
-    key 'named'; Additional members in the $option array will also be
+    key 'named'; Additional members in the ``$option`` array will also be
     made available in the requested action's Controller::params array.
 
     ::
