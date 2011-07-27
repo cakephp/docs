@@ -193,7 +193,7 @@ help applications with subdomains, have a slightly easier life.
 
 There are several built-in detectors that you can use:
 
-* ``is('get'l)`` Check to see if the current request is a GET.
+* ``is('get')`` Check to see if the current request is a GET.
 * ``is('put')`` Check to see if the current request is a PUT.
 * ``is('post')`` Check to see if the current request is a POST.
 * ``is('delete')`` Check to see if the current request is a DELETE.
