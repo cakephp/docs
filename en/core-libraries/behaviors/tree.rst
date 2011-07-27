@@ -606,7 +606,7 @@ Advanced Usage
     'Sport'::
 
         <?php
-        $this->Node->removeFromTree($id,true); 
+        $this->Node->removeFromTree($id, true); 
 
     The tree would become
 
@@ -735,7 +735,7 @@ Data Integrity
     Example Use::
 
         <?php
-        $this->Categories->verify();
+        $this->Category->verify();
 
     Example output::
 
