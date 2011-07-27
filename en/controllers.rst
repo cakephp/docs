@@ -69,13 +69,13 @@ with child controller class arrays.
     -  $uses
 
 Remember to add the default Html and Form helpers, if you define
-var $helpers in your AppController
+var ``$helpers`` in your AppController
 
 Please also remember to call AppController's callbacks within child
 controller callbacks for best results::
 
     <?php
-    function beforeFilter(){
+    function beforeFilter() {
         parent::beforeFilter();
     }
  
@@ -89,10 +89,10 @@ controller would be found in
 
         <?php
         
-        # /app/controllers/recipes_controller.php
+        # /app/Controller/RecipesController.php
     
         class RecipesController extends AppController {
-            function view($id)     {
+            function view($id) {
                 //action logic goes here..
             }
     
@@ -191,13 +191,13 @@ rendered from the controller.
 
     The default view file used by render is determined by convention.
     If the ``search()`` action of the RecipesController is requested,
-    the view file in /app/View/recipes/search.ctp will be rendered::
+    the view file in /app/View/Recipes/search.ctp will be rendered::
 
         <?php
         class RecipesController extends AppController {
         ...
             function search() {
-                // Render the view in /views/recipes/search.ctp
+                // Render the view in /View/Recipes/search.ctp
                 $this->render();
             }
         ...
@@ -214,8 +214,8 @@ rendered from the controller.
     ::
 
         <?php
-        // Render the element in /View/elements/ajaxreturn.ctp
-        $this->render('/elements/ajaxreturn');
+        // Render the element in /View/Elements/ajaxreturn.ctp
+        $this->render('/Elements/ajaxreturn');
 
     You can also specify an alternate view or element file using the
     third parameter, ``$file``. The ``$layout`` parameter allows you to specify
@@ -236,8 +236,8 @@ will not try to re-render the view::
         }
     }
 
-This would render ``app/View/posts/custom_file.ctp`` instead of
-``app/View/posts/my_action.ctp``
+This would render ``app/View/Posts/custom_file.ctp`` instead of
+``app/View/Posts/my_action.ctp``
 
 Flow Control
 ------------
@@ -417,7 +417,7 @@ Other Useful Methods
         <?php
         function index() {
             $conditions = $this->postConditions($this->data);
-            $orders = $this->Order->find("all",compact('conditions'));
+            $orders = $this->Order->find('all', compact('conditions'));
             $this->set('orders', $orders);
         }
 
@@ -441,14 +441,14 @@ Other Useful Methods
         */
 
         //Let’s get orders that have at least 4 items and contain ‘Ye Olde’
-        $condtions=$this->postConditions(
+        $condtions = $this->postConditions(
             $this->data,
             array(
                 'num_items' => '>=', 
                 'referrer' => 'LIKE'
             )
         );
-        $orders = $this->Order->find("all",compact('condtions'));
+        $orders = $this->Order->find('all', compact('condtions'));
 
     The third parameter allows you to tell CakePHP what SQL boolean
     operator to use between the find conditions. String like ‘AND’,
@@ -504,7 +504,7 @@ Other Useful Methods
     If we now create a simple element to call that function::
 
         <?php
-        // View/elements/latest_comments.ctp
+        // View/Elements/latest_comments.ctp
 
         $comments = $this->requestAction('/comments/latest');
         foreach($comments as $comment) {
@@ -542,7 +542,7 @@ Other Useful Methods
     is because requestAction merges the named args array
     (requestAction's 2nd parameter) with the Controller::params member
     array and does not explicitly place the named args array into the
-    key 'named'; Additional members in the $option array will also be
+    key 'named'; Additional members in the ``$option`` array will also be
     made available in the requested action's Controller::params array.
 
     ::
@@ -602,7 +602,7 @@ visit the CakePHP API. Check out
 
         <?php
         
-        #   $name controller attribute usage example
+        # $name controller attribute usage example
         
         class RecipesController extends AppController {
            var $name = 'Recipes';
@@ -654,8 +654,6 @@ given by ``$helpers`` to the view as an object reference variable
 
         <?php
         class RecipesController extends AppController {
-            var $name = 'Recipes';
-
             var $uses = array('Recipe', 'User');
             var $helpers = array('Ajax');
             var $components = array('Email');

@@ -168,7 +168,7 @@ class in ``/app/View/Helper``. Let's call our helper LinkHelper. The
 actual PHP class file would look something like this::
 
     <?php
-    /* /app/View/Helper/Link.php */
+    /* /app/View/Helper/LinkHelper.php */
     
     class LinkHelper extends AppHelper {
         function makeEdit($title, $url) {
@@ -189,7 +189,7 @@ helper. To do so, you can specify helpers you wish to use with a
 ``$helpers`` array, formatted just as you would in a controller::
 
     <?php
-    /* /app/View/Helper/Link.php (using other helpers) */
+    /* /app/View/Helper/LinkHelper.php (using other helpers) */
     class LinkHelper extends AppHelper {
         public $helpers = array('Html');
     
@@ -199,7 +199,7 @@ helper. To do so, you can specify helpers you wish to use with a
     
             $link = $this->Html->link($title, $url, array('class' => 'edit'));
     
-            return "<div class=\"editOuter\">$link</div>";
+            return '<div class="editOuter">' . $link . '</div>';
         }
     }
 
@@ -232,7 +232,7 @@ Creating Functionality for All Helpers
 All helpers extend a special class, AppHelper (just like models
 extend AppModel and controllers extend AppController). To create
 functionality that would be available to all helpers, create
-``/app/Helper/AppHelper.php``::
+``/app/View/Helper/AppHelper.php``::
 
     <?php
     class AppHelper extends Helper {
