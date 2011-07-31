@@ -50,11 +50,10 @@ custom solution.  To use defaults, simply set the 'defaults' key to the name of
 the default you want to use.  You can then override any sub setting by declaring
 it in your Session config::
 
-
     <?php
-	Configure::write('Session', array(
-		'defaults' => 'php'
-	));
+    Configure::write('Session', array(
+        'defaults' => 'php'
+    ));
 
 The above will use the built-in 'php' session configuration.  You could augment
 part or all of it by doing the following::
@@ -173,7 +172,6 @@ configuration to use. The default cache configuration is ``'default'``.
 More granular controls
 ======================
 
-
 In addition to the new approach on session handlers, there are a few new
 controls in 2.0. First up is the array of ini settings.  This array allows you
 to modify and handle ini configurations that are not afforded by the built in
@@ -201,11 +199,116 @@ changing session ids provide.  To use this feature set
 needed to regenerate the session by modifying
 ``CakeSession::$requestCountdown``.
 
-Accessing Session data
-======================
+Creating a custom session handler
+=================================
 
-..todo::
+Creating a custom session handler is straightforward in CakePHP.  In this
+example we'll create a session handler that stores sessions both in the Cache
+(apc) and the database.  This gives us the best of fast IO of apc,
+without having to worry about sessions evaporating when the cache fills up.
 
-    Complete this.
+First we'll need to create our custom class and put it in
+``app/Model/Datasource/Session/ComboSession.php``.  The class should look
+something like::
 
+    <?php
+    App::uses('DatabaseSession', 'Model/Datasource/Session');
+
+    class ComboSession implements CakeSessionHandlerInterface {
+        public $cacheKey;
+
+        public function __construct() {
+            $this->cacheKey = Configure::read('Session.handler.cache');
+            parent::__construct();
+        }
+
+        // read data from the session.
+        public function read($id) {
+            $result = Cache::read($id, $this->cacheKey);
+            if ($result) {
+                return $result;
+            }
+            reutrn parent::read($id);
+        }
+
+        // write data into the session.
+        public function write($id, $data) {
+            $result = Cache::write($id, $data, $this->cacheKey);
+            if ($result) {
+                return parent::write($id, $data);
+            }
+            return false;
+        }
+
+        // destroy a session.
+        public function destroy($id) {
+            $result = Cache::delete($id, $this->cacheKey);
+            if ($result) {
+                return parent::destroy($id);
+            }
+            return false;
+        }
+
+        // removes expired sessions.
+        public function gc($expires = null) {
+            return Cache::gc($this->cacheKey) && parent::gc($expires);
+        }
+    }
+
+Our class extends the built-in ``DatabaseSession`` so we don't have to duplicate
+all of its logic and behavior. We wrap each operation with a :php:class:`Cache`
+operation.  This lets us fetch sessions from the fast cache, and not have to
+worry about what happens when we fill the cache.  Using this session handler is
+also easy.  In your :ref:`core.php` make the session block look like the following::
+
+    <?php
+    Configure::write('Session', array(
+        'defaults' => 'database',
+        'handler' => array(
+            'engine' => 'ComboSession',
+            'model' => 'Session',
+            'cache' => 'apc'
+        )
+    ));
+
+    // Make sure to add a apc cache config
+    Cache::config('apc', array('Engine' => 'Apc'));
+
+Now our application will start using our custom session handler for reading &
+writing session data.
+
+
+.. php:class:: CakeSession
+
+Reading & writing session data
+==============================
+
+Depending on the context you are in your application you have different classes
+that provide access to the session.  In controllers you can use
+:php:class:`SessionComponent`.  In the view, you can use
+:php:class:`SessionHelper`.  In any part of your application you can use
+``CakeSession`` to access the session as well. Like the other interfaces to the
+session, ``CakeSession`` provides a simple CRUD interface.
+
+.. php:staticmethod:: read($key)
+
+You can read values from the session using :php:meth:`Set::classicExtract()`
+compatible syntax::
+
+    <?php
+    CakeSession::read('Config.language');
+
+.. php:staticmethod:: write($key, $value)
+
+``$key`` should be the dot separated path you wish to write ``$value`` to::
+
+    <?php
+    CakeSession::write('Config.language', 'eng');
+
+.. php:staticmethod:: delete($key)
+
+When you need to delete data from the session, you can use delete::
+
+    <?php
+    CakeSession::delete('Config.language');
 
