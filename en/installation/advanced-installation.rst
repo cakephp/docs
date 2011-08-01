@@ -50,9 +50,7 @@ set up CakePHP to work as follows:
 
 Given this type of setup, I would need to edit my webroot/index.php
 file (which will end up at /var/www/mysite/index.php, in this
-example) to look like the following:
-
-::
+example) to look like the following::
 
     // /app/webroot/index.php (partial, comments removed) 
     
@@ -88,11 +86,8 @@ httpd.conf rather than a user- or site-specific httpd.conf).
 
 #. Make sure that an .htaccess override is allowed and that
    AllowOverride is set to All for the correct DocumentRoot. You
-   should see something similar to:
+   should see something similar to::
 
-   ::
-
-       #
        # Each directory to which Apache has access can be configured with respect
        # to which services and features are allowed and/or disabled in that
        # directory (and its subdirectories). 
@@ -108,9 +103,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
        </Directory>
 
 #. Make sure you are loading up mod\_rewrite correctly. You should
-   see something like:
-
-   ::
+   see something like::
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 
@@ -133,9 +126,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
    checking for .htaccess files.
 
    Cake root directory (needs to be copied to your document, this
-   redirects everything to your Cake app):
-
-   ::
+   redirects everything to your Cake app)::
 
        <IfModule mod_rewrite.c>
           RewriteEngine on
@@ -144,9 +135,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
        </IfModule>
 
    Cake app directory (will be copied to the top directory of your
-   application by bake):
-
-   ::
+   application by bake)::
 
        <IfModule mod_rewrite.c>
            RewriteEngine on
@@ -155,9 +144,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
         </IfModule>
 
    Cake webroot directory (will be copied to your application's web
-   root by bake):
-
-   ::
+   root by bake)::
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -176,9 +163,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
 
    This can be added to the same section with the RewriteEngine
    directive, so for example your webroot .htaccess file would look
-   like:
-
-   ::
+   like::
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -196,7 +181,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
 Pretty URLs and Lighttpd
 ========================
 
-While lighttpd features a rewrite module, it is not an equivalent
+While Lighttpd features a rewrite module, it is not an equivalent
 of Apache's mod\_rewrite. To get 'pretty URLs' while using Lighty,
 you have two options. Option one is using mod\_rewrite, the second
 one is by using a LUA script and mod\_magnet.
@@ -261,9 +246,7 @@ in /etc/lighttpd/cake.
     If you run your CakePHP installation from a subdirectory, you must
     set prefix = 'subdirectory\_name' in the above script.
 
-Then tell Lighttpd about your vhost:
-
-::
+Then tell Lighttpd about your vhost::
 
     $HTTP["host"] =~ "example.com" {
             server.error-handler-404  = "/index.php"
@@ -337,7 +320,7 @@ these steps:
 
 #. Use Microsoft's Web Platform Installer to install the URL
    Rewrite Module 2.0.
-#. Create a new file in your CakePHP folder, called web.config
+#. Create a new file in your CakePHP folder, called web.config.
 #. Using Notepad or another XML-safe editor, copy the following
    code into your new web.config file...
 
@@ -390,28 +373,3 @@ file for you.
 Once the web.config file is created with the correct IIS-friendly
 rewrite rules, CakePHP's links, css, js, and rerouting should work
 correctly.
-
-Fire It Up
-==========
-
-Alright, let's see CakePHP in action. Depending on which setup you
-used, you should point your browser to http://example.com/ or
-http://example.com/cake\_install/. At this point, you'll be
-presented with CakePHP's default home, and a message that tells you
-the status of your current database connection.
-
-Congratulations! You are ready to create your first CakePHP
-application.
-
-Not working? If you're getting timezone related error from PHP
-uncomment one line in app/config/core.php.
-
-::
-
-    /**
-     * If you are on PHP 5.3 uncomment this line and correct your server timezone
-     * to fix the date & time related errors.
-     */
-        date_default_timezone_set('UTC');
-
-
