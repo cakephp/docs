@@ -2,6 +2,7 @@ Contents
 ########
 
 .. toctree::
+   :maxdepth: 3
 
    index
    basic-info
