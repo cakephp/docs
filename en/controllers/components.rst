@@ -30,8 +30,8 @@ Configuring Components
 
 Many of the core components require configuration. Some examples of
 components requiring configuration are
-:doc:`/core-libraries/core-components/authentication`, :doc:`/core-libraries/core-components/cookie`
-and :doc:`/core-libraries/core-components/email`. Configuration for these
+:doc:`/core-libraries/components/authentication`, :doc:`/core-libraries/components/cookie`
+and :doc:`/core-libraries/components/email`. Configuration for these
 components, and for components in general, is usually done in the
 ``$components`` array or your controller's ``beforeFilter()``
 method::

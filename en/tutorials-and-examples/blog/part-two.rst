@@ -637,4 +637,4 @@ These are common tasks people learning CakePHP usually want to study next:
 2. :ref:`view-elements` Including and reusing view snippets
 3. :doc:`/controllers/scaffolding`: Prototyping before creating code
 4. :doc:`/console-and-shells/code-generation-with-bake` Generating basic CRUD code
-5. :doc:`/core-libraries/core-components/authentication`: User registration and login
+5. :doc:`/core-libraries/components/authentication`: User registration and login

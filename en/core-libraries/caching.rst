@@ -35,7 +35,7 @@ to implement your own caching systems. The built-in caching engines are:
 Regardless of the CacheEngine you choose to use, your application interacts with
 :php:class:`Cache` in a consistent manner.  This means you can easily swap cacheengines
 as your application grows. In addition to the :php:class:`Cache` class, the 
-:doc:`/core-libraries/core-helpers/cache` allows for full page caching, which
+:doc:`/core-libraries/helpers/cache` allows for full page caching, which
 can greatly improve performance as well.
 
 
