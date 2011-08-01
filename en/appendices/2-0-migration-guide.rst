@@ -196,13 +196,22 @@ AuthComponent
 The AuthComponent was entirely re-factored for 2.0, this was done to help reduce
 developer confusion and frustration. In addition, AuthComponent was made more
 flexible and extensible. You can find out more in 
-the :doc:`/core-libraries/core-components/authentication` guide.
+the :doc:`/core-libraries/components/authentication` guide.
 
 EmailComponent
 --------------
 
 The EmailComponent has been deprecated and has created a new library class to
 send e-mails. See :doc:`/core-utility-libraries/email` Email changes for more details.
+
+SessionComponent
+----------------
+
+Session component has lost the following methods.
+
+* activate()
+* active()
+* __start()
 
 cakeError removed
 =================
@@ -265,27 +274,32 @@ Cache
 Router
 ------
 
--  You can no longer modify named parameter settings with
-   ``Router::setRequestInfo()``. You should use ``Router::connectNamed()`` to
-   configure how named parameters are handled.
--  Router no longer has a ``getInstance()`` method. It is a static class, call
-   its methods and properties statically.
--  ``Router::getNamedExpressions()`` is deprecated. Use the new router
-   constants. ``Router::ACTION``, ``Router::YEAR``, ``Router::MONTH``,
-   ``Router::DAY``, ``Router::ID``, and ``Router::UUID`` instead.
+- You can no longer modify named parameter settings with
+  ``Router::setRequestInfo()``. You should use ``Router::connectNamed()`` to
+  configure how named parameters are handled.
+- Router no longer has a ``getInstance()`` method. It is a static class, call
+  its methods and properties statically.
+- ``Router::getNamedExpressions()`` is deprecated. Use the new router
+  constants. ``Router::ACTION``, ``Router::YEAR``, ``Router::MONTH``,
+  ``Router::DAY``, ``Router::ID``, and ``Router::UUID`` instead.
+- ``Router::defaults()`` has been removed.  Delete the core routes file
+  inclusion from your applications routes.php file to disable default routing.
+  Conversely if you want default routing, you will have add an include to 
+  ``Cake/Config/routes.php`` in your routes file.
 
 Dispatcher
 ----------
 
--  Dispatcher has been moved inside of cake/libs, you will have to update your
-   ``app/webroot/index.php`` file.
--  ``Dispatcher::dispatch()`` now only accepts a ``CakeRequest`` object or a
-   subclass thereof.
--  ``Dispather::parseParams()`` now only accepts a ``CakeRequest`` object.
--  ``Dispatcher::baseUrl()`` has been removed.
--  ``Dispatcher::getUrl()`` has been removed.
--  ``Dispatcher::uri()`` has been removed.
--  ``Dispatcher::$here`` has been removed.
+- Dispatcher has been moved inside of cake/libs, you will have to update your
+  ``app/webroot/index.php`` file.
+- ``Dispatcher::dispatch()`` now takes two parameters.  The request and
+  response objects.  These should be instances of ``CakeRequest`` &
+  ``CakeResponse`` or a subclass thereof.
+- ``Dispather::parseParams()`` now only accepts a ``CakeRequest`` object.
+- ``Dispatcher::baseUrl()`` has been removed.
+- ``Dispatcher::getUrl()`` has been removed.
+- ``Dispatcher::uri()`` has been removed.
+- ``Dispatcher::$here`` has been removed.
 
 Configure
 ---------
@@ -347,6 +361,16 @@ Inflector
 -  Inflector no longer has a ``getInstance()`` method.
 -  ``Inflector::slug()`` no longer supports the $map argument. Use
    ``Inflector::rules()`` to define transliteration rules.
+
+CakeSession
+-----------
+
+CakeSession is now a fully static class, both ``SessionHelper`` and
+``SessionComponent`` are wrappers and sugar for it.  It can now easily be used
+in models or other contexts.  All of its methods are called statically.
+
+Session configuration has also changed :doc:`/development/sessions <see the
+session section for more information>`
 
 Helpers
 =======
@@ -442,18 +466,19 @@ changes.
 Controller
 ==========
 
--  Controller's constructor now takes an optional CakeRequest object. This
-   object will be used to populate several deprecated properties and will be set
-   to $request inside the controller.
--  ``Controller::$webroot`` is deprecated, use the request object's webroot
-   property.
--  ``Controller::$base`` is deprecated, use the request object's base property.
--  ``Controller::$here`` is deprecated, use the request object's here property.
--  ``Controller::$data`` is deprecated, use the request object's data property.
--  ``Controller::$params`` is deprecated, use the ``$this->request`` instead.
--  ``Controller::$Component`` has been moved to ``Controller::$Components``.
--  ``Controller::$view`` has been renamed to ``Controller::$viewClass``.
-   ``Controller::$view`` is now used to change which view file is rendered.
+- Controller's constructor now takes two parameters. A CakeRequest, and 
+  CakeResponse objects. These objects are used to populate several deprecated 
+  properties and will be set to $request and $response inside the controller.
+- ``Controller::$webroot`` is deprecated, use the request object's webroot
+  property.
+- ``Controller::$base`` is deprecated, use the request object's base property.
+- ``Controller::$here`` is deprecated, use the request object's here property.
+- ``Controller::$data`` is deprecated, use the request object's data property.
+- ``Controller::$params`` is deprecated, use the ``$this->request`` instead.
+- ``Controller::$Component`` has been moved to ``Controller::$Components``.
+- ``Controller::$view`` has been renamed to ``Controller::$viewClass``.
+  ``Controller::$view`` is now used to change which view file is rendered.
+- ``Controller::render()`` now returns a CakeResponse object.
 
 The deprecated properties on Controller will be accessible through a ``__get()``
 method. This method will be removed in future versions, so its recommended that
@@ -530,7 +555,7 @@ look like::
 
 
 Element caching, and view callbacks have been changed in 2.0 to help provide you
-with more flexibility and consistency. :ref:`views <Read more about those changes>`.
+with more flexibility and consistency. :doc:`views <Read more about those changes>`.
 
 CacheHelper decoupled
 ---------------------

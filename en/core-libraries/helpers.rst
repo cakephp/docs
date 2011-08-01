@@ -1,5 +1,5 @@
-Core Helpers
-############
+Helpers
+#######
 
 Helpers are the component-like classes for the presentation layer
 of your application. They contain presentational logic that is
@@ -14,14 +14,14 @@ helpers and how you can build your own helpers.
 .. toctree::
     :maxdepth: 2
 
-    core-helpers/cache
-    core-helpers/form
-    core-helpers/html
-    core-helpers/js
-    core-helpers/number
-    core-helpers/paginator
-    core-helpers/rss
-    core-helpers/session
-    core-helpers/text
-    core-helpers/time
-    core-helpers/xml
+    helpers/cache
+    helpers/form
+    helpers/html
+    helpers/js
+    helpers/number
+    helpers/paginator
+    helpers/rss
+    helpers/session
+    helpers/text
+    helpers/time
+    helpers/xml

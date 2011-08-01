@@ -11,30 +11,30 @@ CakePHP features a number of helpers that aid in view creation.
 They assist in creating well-formed markup (including forms), aid
 in formatting text, times and numbers, and can even speed up Ajax
 functionality. Here is a summary of the built-in helpers. For more
-information, check out :doc:`/core-libraries/core-helpers`.
+information, check out :doc:`/core-libraries/helpers`.
 
-:doc:`/core-libraries/core-helpers/cache`
+:doc:`/core-libraries/helpers/cache`
     Used by the core to cache view content.
-:doc:`/core-libraries/core-helpers/form`
+:doc:`/core-libraries/helpers/form`
     Creates HTML forms and form elements that self populate and handle
     validation problems.
-:doc:`/core-libraries/core-helpers/html`
+:doc:`/core-libraries/helpers/html`
     Convenience methods for crafting well-formed markup. Images, links,
     tables, header tags and more.
-:doc:`/core-libraries/core-helpers/js`
+:doc:`/core-libraries/helpers/js`
     Used to create Javascript compatible with various Javascript
     libraries.
-:doc:`/core-libraries/core-helpers/number`
+:doc:`/core-libraries/helpers/number`
     Number and currency formatting.
-:doc:`/core-libraries/core-helpers/paginator`
+:doc:`/core-libraries/helpers/paginator`
     Model data pagination and sorting.
-:doc:`/core-libraries/core-helpers/rss`
+:doc:`/core-libraries/helpers/rss`
     Convenience methods for outputting RSS feed XML data.
-:doc:`/core-libraries/core-helpers/session`
+:doc:`/core-libraries/helpers/session`
     Access for reading session values in views.
-:doc:`/core-libraries/core-helpers/text`
+:doc:`/core-libraries/helpers/text`
     Smart linking, highlighting, word smart truncation.
-:doc:`/core-libraries/core-helpers/time`
+:doc:`/core-libraries/helpers/time`
     Proximity detection (is this next year?), nice string
     formatting(Today, 10:30 am) and time zone conversion.
 
@@ -168,7 +168,7 @@ class in ``/app/View/Helper``. Let's call our helper LinkHelper. The
 actual PHP class file would look something like this::
 
     <?php
-    /* /app/View/Helper/Link.php */
+    /* /app/View/Helper/LinkHelper.php */
     
     class LinkHelper extends AppHelper {
         function makeEdit($title, $url) {
@@ -189,7 +189,7 @@ helper. To do so, you can specify helpers you wish to use with a
 ``$helpers`` array, formatted just as you would in a controller::
 
     <?php
-    /* /app/View/Helper/Link.php (using other helpers) */
+    /* /app/View/Helper/LinkHelper.php (using other helpers) */
     class LinkHelper extends AppHelper {
         public $helpers = array('Html');
     
@@ -199,7 +199,7 @@ helper. To do so, you can specify helpers you wish to use with a
     
             $link = $this->Html->link($title, $url, array('class' => 'edit'));
     
-            return "<div class=\"editOuter\">$link</div>";
+            return '<div class="editOuter">' . $link . '</div>';
         }
     }
 
@@ -232,7 +232,7 @@ Creating Functionality for All Helpers
 All helpers extend a special class, AppHelper (just like models
 extend AppModel and controllers extend AppController). To create
 functionality that would be available to all helpers, create
-``/app/Helper/AppHelper.php``::
+``/app/View/Helper/AppHelper.php``::
 
     <?php
     class AppHelper extends Helper {

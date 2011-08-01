@@ -58,6 +58,10 @@ equivalent to calling view(25) on the PostsController, for
 example.  The default routing also provides routes for plugins,
 and prefix routes should you choose to use those features.
 
+The built-in routes live in ``Cake/Config/routes.php``.  You can
+disable the default routing by removing them from your application's
+:term:`routes.php` file.
+
 .. index:: :controller, :action, :plugin
 
 Connecting Routes
@@ -817,12 +821,8 @@ Disabling the default routes
 
 If you have fully customized all your routes, and want to avoid any
 possible duplicate content penalties from search engines, you can
-disable the default routes that CakePHP offers using 
-:php:meth:`Router::defaults()` by passing false, you can turn off
-the default routes::
-
-    <?php
-    Router::defaults(false);
+remove the default routes that CakePHP offers by deleting them from your
+application's routes.php file.
 
 This will cause CakePHP to serve errors, when users try to visit
 urls that would normally be provided by CakePHP, and are have not
@@ -979,10 +979,6 @@ Router API
     * ``#`` - Allows you to set url hash fragments.
     * ``full_base`` - If true the :php:const:`FULL_BASE_URL` constant will 
       be prepended to generated urls.
-
-.. php:staticmethod:: defaults($connect = true)
-
-    Either connect or disconnect the default routes provided by CakePHP.
 
 .. php:staticmethod:: mapResources($controller, $options = array())
 

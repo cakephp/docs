@@ -377,8 +377,8 @@ To call any view method use ``$this->method()``
     directly to the layout. Keep in mind that scripts added from the
     layout, or elements in the layout will not be added to
     ``$scripts_for_layout``. This method is most often used from inside
-    helpers, like the :doc:`/core-libraries/core-helpers/js` and
-    :doc:`/core-libraries/core-helpers/html` Helpers.
+    helpers, like the :doc:`/core-libraries/helpers/js` and
+    :doc:`/core-libraries/helpers/html` Helpers.
 
 .. php:attr:: layout
 

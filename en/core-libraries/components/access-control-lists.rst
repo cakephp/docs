@@ -439,7 +439,7 @@ permissions information between the two trees).
 
     If you're curious about how Cake stores tree information in these
     tables, read up on modified database tree traversal. The ACL
-    component uses CakePHP's :doc:`/core-libraries/core-behaviors/tree`
+    component uses CakePHP's :doc:`/core-libraries/behaviors/tree`
     to manage the trees' inheritances. The model class files for ACL
     are all compiled in a single file
     `db\_acl.php <http://api.cakephp.org/file/cake/libs/model/db_acl.php>`_.

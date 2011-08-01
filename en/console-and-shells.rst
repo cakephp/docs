@@ -39,14 +39,14 @@ program from bash. This example assumes that the user is currently
 logged into a bash prompt and is currently at the root of a CakePHP
 application.
 
-CakePHP applications contain a ``console`` directory that contains
+CakePHP applications contain a ``Console`` directory that contains
 all the shells and tasks for an application.  It also comes with an
 executable::
 
     $ cd /my/app_folder
-    $ console/cake
+    $ Console/cake
 
-Its generally preferred to add the core cake executable to your system path
+Its often wise to add the core cake executable to your system path
 so you can use the cake command anywhere.  This comes in handy when you are 
 creating new projects. See :ref:`adding-cake-to-your-path` for how to make ``cake``
 available systemwide.
@@ -83,12 +83,12 @@ Running the Console with no arguments produces this help message::
     To get help on a specific command, type 'cake shell_name help'
 
 The first information printed relates to paths. This is especially
-helpful if you’re running the Console from different parts of the
+helpful if you're running the console from different parts of the
 filesystem.
 
-Since many users add the CakePHP Console to their system’s path so it can
+Since many users add the CakePHP console to their system's path so it can
 be accessed easily. Printing out the working, root, app, and core
-paths allows you to see where the Console will be making changes.
+paths allows you to see where the console will be making changes.
 To change the app folder you wish to work with, you can supply its
 path as the first argument to the cake command. This next example
 shows how to specify an app folder, assuming you’ve already added
@@ -109,10 +109,10 @@ If you are on a \*nix system (linux, MacOSX) the following steps will let you ad
 cake executable to your system path.
 
 #. Locate where your cakephp install, and cake executable are.  For example
-   ``/Users/mark/cakephp/cake/console/cake``
+   ``/Users/mark/cakephp/lib/Cake/Console/cake``
 #. Edit your ``.bashrc`` or ``.bash_profile`` file in your home directory, and add the following::
 
-    export PATH="/Users/mark/cakephp/cake/console:$PATH"
+    export PATH="/Users/mark/cakephp/lib/Cake/Console:$PATH"
 
 #. Reload the bash configuration or open a new terminal, and ``cake`` should work anywhere.
 
@@ -125,7 +125,7 @@ Creating a shell
 
 Let's create a shell for use in the Console. For this example,
 we'll create a simple Hello world shell.  In you applications 
-``console/shells`` directory create ``hello.php``.  Put the following
+``Console/Command`` directory create ``HelloShell.php``.  Put the following
 code inside it::
 
     <?php 
@@ -141,7 +141,7 @@ This method is called when a shell is called with no additional commands.  We'll
 some more commands in a bit, but for now lets just run our shell.  From your application
 directory, run::
 
-    console/cake hello
+    Console/cake hello
 
 You should see the following output::
 
@@ -156,7 +156,7 @@ As mentioned before, the ``main()`` method in shells is a special method called
 whenever there are no other commands or arguments given to a shell.  You may have also
 noticed that HelloShell is extending ``AppShell``.  Much like :ref:`app-controller`, AppShell
 gives you a base class to contain all your common functions or logic.  You can define an AppShell,
-by creating ``app/console/shells/app_shell.php``.  If you don't have one, CakePHP will use the 
+by creating ``app/Console/Command/AppShell.php``.  If you don't have one, CakePHP will use the 
 built-in one. Since our main method wasnn't very interesting lets add another command
 that does something::
 
@@ -171,7 +171,7 @@ that does something::
         }
     }
 
-After saving this file you should be able to run ``console/cake hello hey_there your-name`` 
+After saving this file you should be able to run ``Console/cake hello hey_there your-name`` 
 and see your name printed out.  Any public method not prefixed by an ``_`` is allowed to be
 called from the command line.  In our ``hey_there`` method we also used ``$this->args``, this 
 property contains an array of all the positional arguments provided to a command.  You can 
@@ -214,15 +214,15 @@ almost entirely of tasks.  You define a shell's tasks by using the ``$tasks`` pr
     }
 
 You can use tasks from plugins using the standard :term:`plugin syntax`.
-Tasks are stored in ``console/shells/tasks/`` in files named after
+Tasks are stored in ``Console/Command/Task/`` in files named after
 their classes. So if we were to create a new 'FileGenerator' task, you would create
-``console/shells/tasks/file_generator.php``.
+``Console/Command/Task/FileGeneratorTask.php``.
 
 Each task must at least implement an ``execute()`` method.  The ShellDispatcher, 
 will call this method when the task is invoked.  A task class looks like::
 
     <?php
-    class FileGenerator extends Shell {
+    class FileGeneratorTask extends Shell {
        public $uses = array('User');
        public function execute() {
 
@@ -233,7 +233,7 @@ A shell can also access it's tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
     <?php 
-    // found in console/shells/sea.php
+    // found in Console/Task/SeaShell.php
     class SeaShell extends Shell {
        public $tasks = array('Sound'); //found in console/shells/tasks/sound.php
        public function main() {
@@ -448,9 +448,7 @@ The methods that allow chaining are:
 Gets or sets the description for the option parser.  The description
 displays above the argument and option information. By passing in
 either an array or a string, you can set the value of the description.
-Calling with no arguments will return the current value.
-
-::
+Calling with no arguments will return the current value::
 
     <?php
     // Set multiple lines at once
@@ -464,9 +462,7 @@ Calling with no arguments will return the current value.
 Gets or sets the epilog for the option parser.  The epilog
 is displayed after the argument and option information. By passing in
 either an array or a string, you can set the value of the epilog.
-Calling with no arguments will return the current value.
-
-::
+Calling with no arguments will return the current value::
 
     <?php
     // Set multiple lines at once
@@ -809,7 +805,7 @@ Shell API
 .. php:class:: AppShell
 
     AppShell can be used as a base class for all your shells. It should extend
-    :php:class:`Shell`, and be located in ``console/shells/app_shell.php``
+    :php:class:`Shell`, and be located in ``Console/Command/AppShell.php``
 
 .. php:class:: Shell
 
