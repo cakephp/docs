@@ -181,7 +181,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
 Pretty URLs and Lighttpd
 ========================
 
-While lighttpd features a rewrite module, it is not an equivalent
+While Lighttpd features a rewrite module, it is not an equivalent
 of Apache's mod\_rewrite. To get 'pretty URLs' while using Lighty,
 you have two options. Option one is using mod\_rewrite, the second
 one is by using a LUA script and mod\_magnet.
@@ -320,7 +320,7 @@ these steps:
 
 #. Use Microsoft's Web Platform Installer to install the URL
    Rewrite Module 2.0.
-#. Create a new file in your CakePHP folder, called web.config
+#. Create a new file in your CakePHP folder, called web.config.
 #. Using Notepad or another XML-safe editor, copy the following
    code into your new web.config file...
 
