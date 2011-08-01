@@ -54,7 +54,6 @@ server’s document root, or as complex and flexible as you wish.
 This section will cover the three main installation types for
 CakePHP: development, production, and advanced.
 
-
 -  Development: easy to get going, URLs for the application include
    the CakePHP installation directory name, and less secure.
 -  Production: Requires the ability to configure the web server’s
@@ -127,9 +126,7 @@ like this on the filesystem:
 
 
 Developers using Apache should set the ``DocumentRoot`` directive
-for the domain to:
-
-::
+for the domain to::
 
     DocumentRoot /cake_install/app/webroot
 
@@ -156,7 +153,7 @@ Congratulations! You are ready to create your first CakePHP
 application.
 
 Not working? If you're getting timezone related error from PHP
-uncomment one line in app/config/core.php::
+uncomment one line in app/Config/core.php::
 
    <?php
    /**

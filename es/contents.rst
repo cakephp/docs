@@ -3,6 +3,7 @@ Contents
 
 .. toctree::
 
+   index
    deployment
 
 .. todolist::
