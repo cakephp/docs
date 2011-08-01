@@ -41,8 +41,8 @@ level ``Session`` key, and a number of options are available:
   config.  This combined with ``Session.handler`` replace the custom session
   handling features of previous versions.
 
-Using built in defaults
-=======================
+Built-in Session handlers & configuration
+=========================================
 
 CakePHP comes with several built in session configurations.  You can either use
 these as the basis for your session configuration, or you can create a fully
