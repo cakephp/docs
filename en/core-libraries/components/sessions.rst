@@ -84,6 +84,8 @@ all Session component methods wherever a name/key is used.
         $this->Session->destroy()
 
 
+.. _creating-notification-messages:
+
 Creating notification messages
 ==============================
 
