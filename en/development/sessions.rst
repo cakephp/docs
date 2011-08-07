@@ -27,7 +27,12 @@ level ``Session`` key, and a number of options are available:
 
 * ``Session.autoRegenerate`` - Auto regeneration used to only be available when
   ``Security.level`` was set to high.  Enabling this setting, turns on automatic
-  renewal of sessions, and sessionids that change frequently.
+  renewal of sessions, and sessionids that change frequently. Enabling this
+  value will use the session's ``Config.countdown`` value to keep track of requests.
+  Once the countdown reaches 0, the session id will be regenerated.  This is a
+  good option to use for applications that need frequently
+  changing session ids for security reasons. You can control the number of requests
+  needed to regenerate the session by modifying :php:attr:`CakeSession::$requestCountdown`.
 
 * ``Session.defaults`` - Allows you to use one the built-in default session
   configurations as a base for your session configuration.
@@ -169,14 +174,15 @@ This will configure CakeSession to use the ``CacheSession`` class as the
 delegate for saving the sessions.  You can use the 'config' key which cache
 configuration to use. The default cache configuration is ``'default'``.
 
-More granular controls
+Setting ini directives
 ======================
 
-In addition to the new approach on session handlers, there are a few new
-controls in 2.0. First up is the array of ini settings.  This array allows you
-to modify and handle ini configurations that are not afforded by the built in
-shortcuts.  For example you could use it to control settings like
-``session.gc_divisor``::
+The built-in defaults attempt to provide a common base for session
+configuration. You may need to tweak specific ini flags as well.  CakePHP
+exposes the ability to customize the ini settings for both default
+configurations, as well as custom ones. The ``ini`` key in the session settings,
+allows you to specify individual configuration values. For example you can use
+it to control settings like ``session.gc_divisor``::
 
     <?php
     Configure::write('Session', array(
@@ -187,17 +193,6 @@ shortcuts.  For example you could use it to control settings like
         )
     ));
 
-
-Next up is ``Session.autoRegenerate``.  This configuration value was
-automatically enabled in previous versions by setting ``Security.level`` to
-high. In 2.0 its an independent setting, which is disabled by default.  Enabling
-it will use the session's ``Config.countdown`` value to keep track of requests.
-Once the countdown reaches 0, the session id will be regenerated.  This is a
-good option to use for applications that need the additional security frequently
-changing session ids provide.  To use this feature set
-``Session.autoRegenerate`` to true.  You can control the number of requests
-needed to regenerate the session by modifying
-``CakeSession::$requestCountdown``.
 
 Creating a custom session handler
 =================================
@@ -312,3 +307,7 @@ When you need to delete data from the session, you can use delete::
     <?php
     CakeSession::delete('Config.language');
 
+You should also see the documentation on
+:doc:`/core-libraries/components/sessions` and
+:doc:`/core-libraries/helpers/session` for how to access Session data
+in the controller and view.
