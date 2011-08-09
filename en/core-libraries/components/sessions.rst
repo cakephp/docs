@@ -1,87 +1,36 @@
-Sessions
-########
+SessionComponent
+################
 
-The CakePHP session component provides a way to persist client data
-between page requests. It acts as a wrapper for the $\_SESSION as
-well as providing convenience methods for several $\_SESSION
+The CakePHP SessionComponent provides a way to persist client data
+between page requests. It acts as a wrapper for the ``$_SESSION`` as
+well as providing convenience methods for several ``$_SESSION``
 related functions.
 
-Sessions can be persisted in a few different ways. The default is
-to use the settings provided by PHP; however, other options exist.
+Sessions can be configured in a number of ways in CakePHP.  For more
+information, you should see the :doc:`Session configuration </development/sessions>`
+documentation.
 
-cake
-    Saves the session files in your app's tmp/sessions directory.
-database
-    Uses CakePHP's database sessions.
-cache
-    Use the caching engine configured by Cache::config(). Very useful
-    in conjunction with Memcache (in setups with multiple application
-    servers) to store both cached data and sessions.
-php
-    The default setting. Saves session files as indicated by php.ini
-
-To change the default Session handling method alter the
-Session.save Configuration to reflect the option you desire. If you
-choose 'database' you should also uncomment the Session.database
-settings and run the database session SQL file located in
-app/config
-
-To provide a custom configuration, set Session.save Configuration
-to a filename. CakePHP will use your file in the CONFIGS directory
-for the settings::
-
-    // app/config/core.php
-    Configure::write('Session.save','my_session');
-
-This will allow you to customize the session handling::
-
-    <?php
-    // app/config/my_session.php
-    //
-    // Revert value and get rid of the referrer check even when,
-    // Security.level is medium
-    ini_restore('session.referer_check');
-
-    ini_set('session.use_trans_sid', 0);
-    ini_set('session.name', Configure::read('Session.cookie'));
-
-    // Cookie is now destroyed when browser is closed, doesn't
-    // persist for days as it does by default for security
-    // low and medium
-    ini_set('session.cookie_lifetime', 0);
-
-    // Cookie path is now '/' even if you app is within a sub
-    // directory on the domain
-    $this->path = '/';
-    ini_set('session.cookie_path', $this->path);
-
-    // Session cookie now persists across all subdomains
-    ini_set('session.cookie_domain', env('HTTP_BASE'));
-    
-.. todo::
-
-    This is wrong, update it
-
-Methods
-=======
 
 .. php:class:: SessionComponent
 
-    The Session component is used to interact with session information.
-    It includes basic CRUD functions as well as features for creating
-    feedback messages to users.
+Interacting with Session data
+=============================
 
-    It should be noted that Array structures can be created in the
-    Session by using dot notation. So User.username would reference the
-    following::
+The Session component is used to interact with session information.
+It includes basic CRUD functions as well as features for creating
+feedback messages to users.
 
-        <?php
-        array('User' => 
-                array('username' => 'clarkKent@dailyplanet.com')
-        );
+It should be noted that Array structures can be created in the
+Session by using :term:`dot notation`. So ``User.username`` would
+reference the following::
 
-    Dots are used to indicate nested arrays. This notation is used for
-    all Session component methods wherever a $name is used.
+    <?php
+    array('User' => 
+            array('username' => 'clark-kent@dailyplanet.com')
+    );
+
+Dots are used to indicate nested arrays. This notation is used for
+all Session component methods wherever a name/key is used.
 
 .. php:method:: write($name, $value)
 
@@ -94,31 +43,6 @@ Methods
     This writes the value 'Green' to the session under Person =>
     eyeColor.
 
-.. php:method:: setFlash($message, $element = 'default', $params = array(), $key = 'flash')
-
-    Used to set a session variable that can be used for output in the
-    View. $element allows you to control which element (located in
-    ``/app/views/elements``) should be used to render the message in.
-    In the element the message is available as ``$message``. If you
-    leave the ``$element`` set to 'default', the message will be
-    wrapped with the following:::
-
-        <div id="flashMessage" class="message"> [message] </div>
-
-    $params allows you to pass additional view variables to the
-    rendered layout. $key sets the $messages index in the Message
-    array. Default is 'flash'.
-    Parameters can be passed affecting the rendered div, for example
-    adding "class" in the $params array will apply a class to the
-    ``div`` output using ``$session->flash()`` in your layout or view.::
-
-        <?php
-        $this->Session->setFlash('Example message text', 'default', array('class' => 'example_class'))
-
-    The output from using ``$session->flash()`` with the above example
-    would be::
-
-        <div id="flashMessage" class="example_class">Example message text</div>
 
 .. php:method:: read($name)
 
@@ -128,7 +52,8 @@ Methods
         <?php
         $green = $this->Session->read('Person.eyeColor');
 
-    Retrieve the value Green from the session.
+    Retrieve the value Green from the session. Reading data that does not exist
+    will return null.
 
 .. php:method:: check($name)
 
@@ -158,6 +83,77 @@ Methods
         <?php
         $this->Session->destroy()
 
-.. php:method:: error()
 
-    Used to determine the last error in a session.
+.. _creating-notification-messages:
+
+Creating notification messages
+==============================
+
+.. php:method:: setFlash($message, $element = 'default', $params = array(), $key = 'flash')
+
+    Often in web applications, you will need to display a one-time notification
+    message to the user after processing a form or acknowledging data.
+    In CakePHP, these are referred to as "flash messages".  You can set flash
+    message with the SessionComponent and display them with the
+    :php:class:`SessionHelper`.  To set a message, use ``setFlash``::
+
+        <?php
+        // In the controller.
+        $this->Session->setFlash('Your stuff has been saved.');
+
+    This will create a one-time message that can be displayed to the user,
+    using the SessionHelper::
+
+        <?php
+        // In the view.
+        echo $this->Session->flash();
+
+        // The above will output.
+        <div id="flashMessage" class="message">
+            Your stuff has been saved.
+        </div>
+
+    You can use the additional parameters of ``setFlash()`` to create
+    different kinds of flash messages.  For example, error and positive
+    notifications may look differently.  CakePHP gives you a way to do that.
+    Using the ``$key`` parameter you can store multiple messages, which can be
+    output separately::
+
+        <?php
+        // set a bad message.
+        $this->Session->setFlash('Something bad.', 'default', array(), 'bad');
+
+        // set a good message.
+        $this->Session->setFlash('Something good.', 'default', array(), 'good');
+
+    In the view, these messages can be output and styled differently::
+
+        <?php
+        // in a view.
+        echo $this->Session->flash('good');
+        echo $this->Session->flash('bad');
+
+    The ``$element`` parameter allows you to control which element 
+    (located in ``/app/View/Elements``) should be used to render the
+    message in. In the element the message is available as ``$message``. 
+    If you leave the ``$element`` set to 'default', the message will be wrapped
+    with the following:::
+
+        <div id="flashMessage" class="message"> [message] </div>
+
+    ``$params`` allows you to pass additional view variables to the
+    rendered layout. ``$key`` sets the ``$message`` index in the Message
+    array. The default is 'flash'.
+
+    Parameters can be passed affecting the rendered div, for example
+    adding "class" in the $params array will apply a class to the
+    ``div`` output using ``$this->Session->flash()`` in your layout or view.::
+
+        <?php
+        $this->Session->setFlash('Example message text', 'default', array('class' => 'example_class'))
+
+    The output from using ``$this->Session->flash()`` with the above example
+    would be::
+
+        <div id="flashMessage" class="example_class">Example message text</div>
+
