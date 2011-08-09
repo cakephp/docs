@@ -295,35 +295,28 @@ lines of code inside the controller's beforeFilter method.
         var $components = array('Security');
     
         function beforeFilter() {
-            $this->Security->loginOptions = array(
-                'type'=>'basic',
-                'realm'=>'MyRealm'
-            );
-            $this->Security->loginUsers = array(
-                'john'=>'johnspassword',
-                'jane'=>'janespassword'
-            );
-            $this->Security->requireLogin();
+            $this->Security->blackHoleCallback = 'secure';
+            $this->Security->requireAuth();
         }
         
+        function secure(){
+            $this->redirect(array('controller' => 'pages', 'action' => 'home'));
+        }
+         
         function index() {
             //protected application logic goes here...
         }
     }
 
-The loginOptions property of the SecurityComponent is an
-associative array specifying how logins should be handled. You only
-need to specify the **type** as **basic** to get going. Specify the
-**realm** if you want display a nice message to anyone trying to
-login or if you have several authenticated sections (= realms) of
-your application you want to keep separate.
+The requireAuth() method above would blackhole any non authenticated 
+request to this controller. You can also set only some actions
+of the current controller to require this authentication, just
+pass them as arguments of requireAuth() method. On the
+example below only the edit action requires authentication.
 
-The loginUsers property of the SecurityComponent is an associative
-array containing users and passwords that should have access to
-this realm. The examples here use hard-coded user information, but
-you'll probably want to use a model to make your authentication
-credentials more manageable.
+::
 
-Finally, requireLogin() tells SecurityComponent that this
-Controller requires login. As with requirePost(), above, providing
-method names will protect those methods while keeping others open.
+    <?php
+        $this->Security->requireAuth('edit');
+
+
