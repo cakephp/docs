@@ -59,6 +59,24 @@ Configuration
     An array of controller actions or '\*' to force all actions to
     require a POST.
 
+.. php:attr:: requireGet
+
+    A List of controller actions that require a GET request to occur.
+    An array of controller actions or '\*' to force all actions to
+    require a GET.
+
+.. php:attr:: requirePut
+
+    A List of controller actions that require a PUT request to occur.
+    An array of controller actions or '\*' to force all actions to
+    require a PUT.
+
+.. php:attr:: requireDelete
+
+    A List of controller actions that require a DELETE request to occur.
+    An array of controller actions or '\*' to force all actions to
+    require a DELETE.
+
 .. php:attr:: requireSecure
 
     List of actions that require an SSL connection to occur. An array
@@ -69,24 +87,6 @@ Configuration
 
     List of actions that requires a valid authentication key. This
     validation key is set by Security Component.
-
-.. php:attr:: requireLogin
-
-    List of actions that require HTTP-Authenticated logins (basic or
-    digest). Also accepts '\*' indicating that all actions of this
-    controller require HTTP-authentication.
-
-.. php:attr:: loginOptions
-
-    Options for HTTP-Authenticate login requests. Allows you to set the
-    type of authentication and the controller callback for the
-    authentication process.
-
-.. php:attr:: loginUsers
-
-    An associative array of usernames => passwords that are used for
-    HTTP-authenticated logins. If you are using digest authentication,
-    your passwords should be MD5-hashed.
 
 .. php:attr:: allowedControllers
 
@@ -108,10 +108,42 @@ Configuration
     valid. Specify fields as you do for the Form Helper
     (``Model.fieldname``).
 
+.. note::
+
+    Deprecated property, superseded by unlockedFields
+
+.. php:attr:: unlockedFields
+
+    Form fields to exclude from POST validation. Fields can be unlocked
+    either in the Component, or with FormHelper::unlockField().
+    Fields that have been unlocked are not required to be part of the POST
+    and hidden unlocked fields do not have their values checked.
+    
 .. php:attr:: validatePost
 
     Set to ``false`` to completely skip the validation of POST
     requests, essentially turning CSRF protection off.
+
+.. php:attr:: crsfCheck
+
+    Whether to use CSRF protected forms. Set to ``false`` to disable 
+    CSRF protection on forms.
+
+.. php:attr:: crsfExpires
+
+   The duration from when a CSRF token is created that it will expire on.
+   Each form/page request will generate a new token that can only 
+   be submitted once unless it expires.  Can be any value compatible 
+   with strtotime(). Default is +30 minutes.
+
+.. php:attr:: crsfUseOnce
+
+   Controls whether or not CSRF tokens are use and burn.  Set to 
+   ``false`` to not generate new tokens on each request.  One token 
+   will be reused until it expires. This reduces the chances of 
+   users getting invalid requests because of token consumption.
+   It has the side effect of making CSRF less secure, as tokens are reusable.
+
 
 .. todo::
 
@@ -130,6 +162,24 @@ Methods
     arguments. Can be called with no arguments to force all actions to
     require a POST.
 
+.. php:method:: requireGet()
+
+    Sets the actions that require a GET request. Takes any number of
+    arguments. Can be called with no arguments to force all actions to
+    require a GET.
+
+.. php:method:: requirePut()
+
+    Sets the actions that require a PUT request. Takes any number of
+    arguments. Can be called with no arguments to force all actions to
+    require a PUT.
+
+.. php:method:: requireDelete()
+
+    Sets the actions that require a DELETE request. Takes any number of
+    arguments. Can be called with no arguments to force all actions to
+    require a DELETE.
+
 .. php:method:: requireSecure()
 
     Sets the actions that require a SSL-secured request. Takes any
@@ -141,41 +191,6 @@ Methods
     Sets the actions that require a valid Security Component generated
     token. Takes any number of arguments. Can be called with no
     arguments to force all actions to require a valid authentication.
-
-.. php:method:: requireLogin()
-
-    Sets the actions that require a valid HTTP-Authenticated request.
-    Takes any number of arguments. Can be called with no arguments to
-    force all actions to require valid HTTP-authentication.
-
-.. php:method:: loginCredentials(string $type)
-
-    Attempt to validate login credentials for a HTTP-authenticated
-    request. $type is the type of HTTP-Authentication you want to
-    check. Either 'basic', or 'digest'. If left null/empty both will be
-    tried. Returns an array with login name and password if
-    successful.
-
-.. php:method:: loginRequest(array $options)
-
-    Generates the text for an HTTP-Authenticate request header from an
-    array of $options.
-
-    $options generally contains a 'type', 'realm' . Type indicate which
-    HTTP-Authenticate method to use. Realm defaults to the current HTTP
-    server environment.
-
-.. php:method::  parseDigestAuthData(string $digest)
-
-    Parse an HTTP digest authentication request. Returns and array of
-    digest data as an associative array if successful, and null on
-    failure.
-
-.. php:method:: generateDigestResponseHash(array $data)
-
-    Creates a hash that to be compared with an HTTP
-    digest-authenticated response. $data should be an array created by
-    SecurityComponent::parseDigestAuthData().
 
 .. php:method:: blackHole(object $controller, string $error)
 
@@ -280,35 +295,28 @@ lines of code inside the controller's beforeFilter method.
         var $components = array('Security');
     
         function beforeFilter() {
-            $this->Security->loginOptions = array(
-                'type'=>'basic',
-                'realm'=>'MyRealm'
-            );
-            $this->Security->loginUsers = array(
-                'john'=>'johnspassword',
-                'jane'=>'janespassword'
-            );
-            $this->Security->requireLogin();
+            $this->Security->blackHoleCallback = 'secure';
+            $this->Security->requireAuth();
         }
         
+        function secure(){
+            $this->redirect(array('controller' => 'pages', 'action' => 'home'));
+        }
+         
         function index() {
             //protected application logic goes here...
         }
     }
 
-The loginOptions property of the SecurityComponent is an
-associative array specifying how logins should be handled. You only
-need to specify the **type** as **basic** to get going. Specify the
-**realm** if you want display a nice message to anyone trying to
-login or if you have several authenticated sections (= realms) of
-your application you want to keep separate.
+The requireAuth() method above would blackhole any non authenticated 
+request to this controller. You can also set only some actions
+of the current controller to require this authentication, just
+pass them as arguments of requireAuth() method. On the
+example below only the edit action requires authentication.
 
-The loginUsers property of the SecurityComponent is an associative
-array containing users and passwords that should have access to
-this realm. The examples here use hard-coded user information, but
-you'll probably want to use a model to make your authentication
-credentials more manageable.
+::
 
-Finally, requireLogin() tells SecurityComponent that this
-Controller requires login. As with requirePost(), above, providing
-method names will protect those methods while keeping others open.
+    <?php
+        $this->Security->requireAuth('edit');
+
+
