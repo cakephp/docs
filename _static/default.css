@@ -210,7 +210,8 @@ div.admonition p.admonition-title + p {
     border: 2px solid #ffcb00;
 }
 .seealso {
-    background-color: #ffffe5;
+    background-color: #f9f9f9;
+	border: 2px solid #e2e2e2;
 }
 .topic {
     background-color: #eee;
@@ -220,6 +221,7 @@ div.admonition p.admonition-title + p {
     border: 2px solid red;
 }
 
+.seealso .admonition-title,
 .tip .admonition-title,
 .warning .admonition-title,
 .note .admonition-title {
@@ -230,7 +232,9 @@ div.admonition p.admonition-title + p {
 	background: #df9c00;
 	line-height: 16px;
 	font-weight:normal;
-	-webkit-box-shadow: 1px 2px 2px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 	color: #fff;
 }
 .admonition-title:before {
@@ -243,8 +247,8 @@ div.admonition p.admonition-title + p {
 	left: 0px;
 	background: transparent;
 	z-index: -1;
-	border-top: 45px solid #ffe993;
-	border-left: 25px solid transparent;
+	border-top: 45px solid #eed993;
+	border-left: 45px solid transparent;
 }
 
 .tip .admonition-title:before {
@@ -260,6 +264,12 @@ div.admonition p.admonition-title + p {
 .warning p.admonition-title {
 	background: red;
 	color: #fff;
+}
+.seealso .admonition-title {
+	background: #999;
+}
+.seealso .admonition-title:before {
+	border-top-color: #9d9d9d;
 }
 
 /* preformatted text  */
