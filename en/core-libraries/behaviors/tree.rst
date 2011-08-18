@@ -435,17 +435,17 @@ are a few more tree-orientated permutations at your disposal.
           [5] =>  "_Extreme fishing"
       )
 
-    .. php:method:: getparentnode()
+    .. php:method:: getParentNode()
 
     This convenience function will, as the name suggests, return the
     parent node for any node, or *false* if the node has no parent (its
     the root node). For example::
 
         <?php
-        $parent = $this->Category->getparentnode(2); //<- id for fun
+        $parent = $this->Category->getParentNode(2); //<- id for fun
         // $parent contains All categories
 
-    .. php:method:: getpath( $id = null, $fields = null, $recursive = null )
+    .. php:method:: getPath( $id = null, $fields = null, $recursive = null )
 
     The 'path' when refering to hierachial data is how you get from
     where you are to the top. So for example the path from the category
@@ -465,11 +465,11 @@ are a few more tree-orientated permutations at your disposal.
 
 
 
-    Using the id of "International" getpath will return each of the
+    Using the id of "International" getPath will return each of the
     parents in turn (starting from the top).::
 
         <?php
-        $parents = $this->Category->getpath(15);
+        $parents = $this->Category->getPath(15);
 
     ::
 
