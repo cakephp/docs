@@ -286,6 +286,9 @@ Router
   inclusion from your applications routes.php file to disable default routing.
   Conversely if you want default routing, you will have add an include to 
   ``Cake/Config/routes.php`` in your routes file.
+- When using Router::parseExtensions() the extension parameter is no longer
+  under ``$this->params['url']['ext']``. Instead it is available at
+  ``$this->request->params['ext']``.
 
 Dispatcher
 ----------
@@ -374,6 +377,23 @@ session section for more information>`
 
 Helpers
 =======
+
+Constructor changed
+-------------------
+
+In order to accomodate View being removed from the ClassRegistry, the signature
+of Helper::__construct() was changed.  You should update any subclasses to use
+the following::
+
+    <?php
+    function __construct(View $View, $settings = array())
+
+When overriding the constructor you should always call `parent::__construct` as
+well.  `Helper::__construct` stores the view instance at `$this->_View` for
+later reference.  The settings are not handled by the parent constructor.
+
+Deprecated properties
+---------------------
 
 The following properties on helpers are deprecated, you should use the request
 object properties or Helper methods instead of directly accessing these
@@ -490,6 +510,18 @@ Controller now defines a maxLimit for pagination. This maximum limit is set to
 View
 ====
 
+View no longer registered in ClassRegistry
+------------------------------------------
+
+The view being registered ClassRegistry invited abuse and effectively created a
+global symbol.  In 2.0 each Helper receives the current `View` instance in its
+constructor.  This allows helpers access to the view in a similar fashion as in
+the past, without creating global symbols.  You can access the view instance at
+`$this->_View` in any helper.
+
+Deprecated properties
+---------------------
+
 -  ``View::$webroot`` is deprecated, use the request object's webroot property.
 -  ``View::$base`` is deprecated, use the request object's base property.
 -  ``View::$here`` is deprecated, use the request object's here property.
@@ -516,6 +548,24 @@ View
 The deprecated properties on View will be accessible through a ``__get()``
 method. This method will be removed in future versions, so its recommended that
 you update your application.
+
+Removed methods
+---------------
+
+* `View::_triggerHelpers()` Use `$this->Helpers->trigger()` instead.  
+* `View::_loadHelpers()` Use `$this->loadHelpers()` instead.  Helpers now lazy
+  load their own helpers now.
+
+Added methods
+-------------
+
+* `View::loadHelper($name, $settings = array());` Load a single helper.
+* `View::loadHelpers()` Loads all the helpers indicated in `View::$helpers`.
+
+View->Helpers
+-------------
+
+By default View objects contain a :php:class:`HelperCollection` at `$this->Helpers`.
 
 Callback positioning changes
 ----------------------------
