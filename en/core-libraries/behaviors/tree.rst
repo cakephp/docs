@@ -83,7 +83,7 @@ tree to see what it looks like. With a simple controller::
         var $name = 'Categories';
     
         function index() {
-            $this->data = $this->Category->generatetreelist(null, null, null, '&nbsp;&nbsp;&nbsp;');
+            $this->data = $this->Category->generateTreeList(null, null, null, '&nbsp;&nbsp;&nbsp;');
             debug ($this->data); die;       
         }
     }
@@ -137,7 +137,7 @@ Adding data
 -----------
 
 In the previous section, we used existing data and checked that it
-looked hierarchal via the method ``generatetreelist``. However,
+looked hierarchal via the method ``generateTreeList``. However,
 usually you would add your data in exactly the same way as you
 would for any model. For example::
 
@@ -401,7 +401,7 @@ are a few more tree-orientated permutations at your disposal.
         // Only counts the direct descendants of this category
         $numChildren = $this->Category->childCount(1, true); // will output 2
 
-    .. php:method:: generatetreelist ($conditions=null, $keyPath=null, $valuePath=null, $spacer= '_', $recursive=null)
+    .. php:method:: generateTreeList ($conditions=null, $keyPath=null, $valuePath=null, $spacer= '_', $recursive=null)
 
     :param $conditions: Uses the same conditional options as find().
     :param $keyPath: Path to the field to use for the key.
@@ -414,7 +414,7 @@ are a few more tree-orientated permutations at your disposal.
     to show the structure of your data. Below is an example of what you
     can expect this method to return::
 
-      $treelist = $this->Category->generatetreelist();
+      $treelist = $this->Category->generateTreeList();
 
     Output::
 
@@ -435,17 +435,17 @@ are a few more tree-orientated permutations at your disposal.
           [5] =>  "_Extreme fishing"
       )
 
-    .. php:method:: getparentnode()
+    .. php:method:: getParentNode()
 
     This convenience function will, as the name suggests, return the
     parent node for any node, or *false* if the node has no parent (its
     the root node). For example::
 
         <?php
-        $parent = $this->Category->getparentnode(2); //<- id for fun
+        $parent = $this->Category->getParentNode(2); //<- id for fun
         // $parent contains All categories
 
-    .. php:method:: getpath( $id = null, $fields = null, $recursive = null )
+    .. php:method:: getPath( $id = null, $fields = null, $recursive = null )
 
     The 'path' when refering to hierachial data is how you get from
     where you are to the top. So for example the path from the category
@@ -465,11 +465,11 @@ are a few more tree-orientated permutations at your disposal.
 
 
 
-    Using the id of "International" getpath will return each of the
+    Using the id of "International" getPath will return each of the
     parents in turn (starting from the top).::
 
         <?php
-        $parents = $this->Category->getpath(15);
+        $parents = $this->Category->getPath(15);
 
     ::
 

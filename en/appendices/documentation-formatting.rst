@@ -288,3 +288,17 @@ All admonitions are made the same::
     
     This text is not part of the note.
 
+Samples
+-------
+
+.. tip::
+
+    This is a helpful tid-bit you probably forgot.
+
+.. note::
+
+    You should pay attention here.
+
+.. warning::
+
+    It could be dangerous.
