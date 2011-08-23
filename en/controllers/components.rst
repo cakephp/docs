@@ -37,7 +37,7 @@ components, and for components in general, is usually done in the
 method::
 
     <?php
-    class PostsController extends Appcontroller {
+    class PostsController extends AppController {
         public $components = array(
             'Auth' => array(
                 'authorize' => array('controller'),
