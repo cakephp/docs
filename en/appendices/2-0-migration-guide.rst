@@ -286,6 +286,9 @@ Router
   inclusion from your applications routes.php file to disable default routing.
   Conversely if you want default routing, you will have add an include to 
   ``Cake/Config/routes.php`` in your routes file.
+- When using Router::parseExtensions() the extension parameter is no longer
+  under ``$this->params['url']['ext']``. Instead it is available at
+  ``$this->request->params['ext']``.
 
 Dispatcher
 ----------
