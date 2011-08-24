@@ -133,8 +133,41 @@ you should be using $this->request->url to access the same value.
 Components
 ==========
 
-Component is now the required base class for all components. See the component
-refactor page for more information.
+Component is now the required base class for all components. You should update
+your components and their constructors, as both have changed::
+
+    <?php
+    class PrgComponent extends Component {
+        function __construct(ComponentCollection $collection, $settings = array()) {
+            parent::__construct($collection, $settings);
+        }
+    }
+
+As with helpers is important to call ``parent::__construct()`` in components with
+overridden constructors. Settings for a component are also passed into the
+constructor now, and not the ``initialize()`` callback.  This makes getting well
+constructed objects easier, and allows the base class to handle setting the
+properties up.
+
+Since settings have been moved to the component constructor, the
+``initialize()`` callback no longer receives ``$settings`` as its 2nd parameter.
+You should update your components to use the following method signature::
+
+    function initialize($controller) { }
+
+Additionally, the initialize() method is only called on components that are
+enabled.  This usually means components that are directly attached to the
+controller object.
+
+Deprecated callbacks removed
+----------------------------
+
+All the deprecated callbacks in Component have not been transferred to
+ComponentCollection. Instead you should use the `trigger()` method to interact
+with callbacks.  If you need to trigger a callback you could do so by calling::
+
+    <?php
+    $this->Components->trigger('someCallback', array(&$this));
 
 AclComponent
 ------------
