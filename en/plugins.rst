@@ -27,14 +27,18 @@ app/Config/bootstrap.php.
 
 You can either load them one by one or all of them in a single call.
 
-CakePlugin::loadAll(); // Loads all plugins at once
-CakePlugin::load('ContactManager'); //Loads a single plugin
+::
+
+    CakePlugin::loadAll(); // Loads all plugins at once
+    CakePlugin::load('ContactManager'); //Loads a single plugin
 
 Some plugins need to create one or more tables in your database. In
 those cases, they will often include a schema file which you can
 call from the cake shell like this:
 
-cake schema create -plugin ContactManager
+::
+
+    user@host$ cake schema create -plugin ContactManager
 
 Most plugins will indicate the proper procedure for configuring
 them and setting up the database in their documentation. Some
@@ -52,12 +56,16 @@ ContactInfoHelper to output some pretty contact information in
 one of your views. In your controller, your $helpers array
 could look like this:
 
-public $helpers = array('ContactManager.ContactInfo');
+::
+
+    public $helpers = array('ContactManager.ContactInfo');
 
 You would then be able to access the ContactInfoHelper just like
 any other helper in your view, such as:
 
-echo $this->ContactInfo->address($contact);
+::
+
+    echo $this->ContactInfo->address($contact);
 
 
 Creating Your Own Plugins
@@ -301,11 +309,11 @@ in your application's webroot.
 
 For example, linking to '/contact_manager/js/some_file.js'
 would serve the asset 
-app/Plugin/ContactManager/webroot/js/some_file.js.
+'app/Plugin/ContactManager/webroot/js/some_file.js'.
 
 .. note::
 
-    It is important to note the **/your\_plugin/** prefix before the
+    It is important to note the **/your_plugin/** prefix before the
     asset path. That makes the magic happen!
 
 
