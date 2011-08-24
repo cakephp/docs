@@ -68,10 +68,25 @@ NumberHelper
         FOO 1,234.56
 
 .. php:method:: addFormat($formatName, $options)
+    
+    :param string $formatName: The format name to be used in the future
+    :param array $options: The array of options for this format.
 
-    .. todo::
-
-        Incomplete, write me.
+    Add a currency format to the Number helper.  Makes reusing
+    currency formats easier.::
+    
+        <?php $this->Number->addFormat('BRR', array('before' => 'R$ ')); ?>
+    
+    You can now use `BRR` as a shortform when formatting currency amounts.::
+    
+        <?php echo $this->Number->currency($value, 'BRR'); ?>
+    
+    Added formats are merged with the following defaults.::
+    
+       array(
+       	'before' => '$', 'after' => 'c', 'zero' => 0, 'places' => 2, 'thousands' => ',',
+       	'decimals' => '.', 'negative' => '()', 'escape' => true
+       )
 
 .. php:method:: precision(mixed $number, int $precision = 3)
 
