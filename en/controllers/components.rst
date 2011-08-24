@@ -99,6 +99,19 @@ them like so::
     properties they share the same 'namespace'.  Be sure to not give a
     component and a model the same name.
 
+Loading components on the fly
+-----------------------------
+
+You might not need all of your components available on every controller action.
+In situations like this you can load a component at runtime using the
+:doc:`Component Collection </core-libraries/collections>`.  From inside a
+controller you can do the following::
+    
+    <?php
+    $this->Components->load('OneTimer');
+    $this->OneTimer->getTime();
+
+
 Component Callbacks
 ===================
 

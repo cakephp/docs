@@ -7,7 +7,8 @@ logic for a single model. For example, if you were building a site
 for an online bakery, you might have a RecipesController and a
 IngredientsController managing your recipes and their ingredients.
 In CakePHP, controllers are named after the model they handle, in
-plural form.
+plural form. However, its often required for a controller to use
+more than one model.  This is possible too.
 
 The Recipe model is handled by the RecipesController, the Product
 model is handled by the ProductsController, and so on.
@@ -21,10 +22,10 @@ controllers.
 
 Controllers can include any number of methods which are usually
 referred to as *actions*. Actions are controller methods used to
-display views. An action is a single method of a controller.
+display views. An action is a single public method of a controller.
 
 CakePHP’s dispatcher calls actions when an incoming request matches
-a URL to a controller’s action (refer to
+the route to a controller's action (refer to
 :ref:`routes-configuration` for an
 explanation on how controller actions and parameters are mapped
 from the URL).
@@ -38,7 +39,7 @@ As stated in the introduction, the AppController class is the
 parent class to all of your application's controllers.
 AppController itself extends the Controller class included in the
 CakePHP core library. As such, AppController is defined in
-/app/Controller/AppController.php like so::
+``/app/Controller/AppController.php`` like so::
 
     <?php
     class AppController extends Controller {
@@ -52,12 +53,12 @@ controllers. Components (which you'll learn about later) are best
 used for code that is used in many (but not necessarily all)
 controllers.
 
-While normal object-oriented inheritance rules apply, CakePHP also
+While normal object-oriented inheritance rules apply, CakePHP
 does a bit of extra work when it comes to special controller
-attributes, like the list of components or helpers used by a
-controller. In these cases, AppController value arrays are merged
-with child controller class arrays.
-
+attributes. The list of components and helpers used by a
+controller, are treated specially. In these cases, AppController
+value arrays are merged with child controller class arrays. The values in the
+child class will always override those in AppController.
 
 .. note::
 
@@ -85,7 +86,7 @@ Controller actions
 Returning to our online bakery example, our RecipesController might
 contain the ``view()``, ``share()``, and ``search()`` actions. The
 controller would be found in
-/app/Controller/RecipesController.php and contain::
+``/app/Controller/RecipesController.php`` and contain::
 
         <?php
         
@@ -110,6 +111,39 @@ controller would be found in
 In order for you to use a controller effectively in your own
 application, we’ll cover some of the core attributes and methods
 provided by CakePHP’s controllers.
+
+.. _controller-life-cycle:
+
+Request Life-cycle callbacks
+============================
+
+CakePHP controllers come fitted with callbacks you can use to
+insert logic around the request life-cycle:
+
+.. php:method:: beforeFilter()
+
+    This function is executed before every action in the controller.
+    It's a handy place to check for an active session or inspect user
+    permissions.
+
+    .. note::
+
+        The beforeFilter() method will be called for missing actions,
+        and scaffolded actions.
+
+.. php:method:: beforeRender()
+
+    Called after controller action logic, but before the view is
+    rendered. This callback is not used often, but may be needed if you
+    are calling render() manually before the end of a given action.
+
+.. php:method:: afterFilter()
+
+    Called after every controller action, and after rendering is
+    complete. This is the last controller method to run.
+
+In addition to controller life-cycle callbacks, :doc:`/controllers/components`
+also provide a similar set of callbacks.
 
 .. _controller-methods:
 
@@ -304,27 +338,7 @@ Flow Control
 
 Callbacks
 ---------
-
-CakePHP controllers come fitted with callbacks you can use to
-insert logic just before or after controller actions are rendered.
-
-.. php:method:: beforeFilter()
-
-    This function is executed before every action in the controller.
-    It's a handy place to check for an active session or inspect user
-    permissions.
-
-.. php:method:: beforeRender()
-
-    Called after controller action logic, but before the view is
-    rendered. This callback is not used often, but may be needed if you
-    are calling render() manually before the end of a given action.
-
-.. php:method:: afterFilter()
-
-    Called after every controller action, and after rendering is
-    complete. This is the last controller method to run.
-
+    In addition to the :ref:`controller-life-cycle`.
     CakePHP also supports callbacks related to scaffolding.
 
 .. php:method:: _beforeScaffold($method)
