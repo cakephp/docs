@@ -35,11 +35,11 @@ Methods
             )
         ));
         ?>
-    
+
     When using your own custom routes you will need to manually add the params
-    to the url options array. For example, let's say you want paginate the 
-    result with the url 'matches/worldcups/brazil' which maps to a results 
-    action on a matches controller. This is a way of preserving those params 
+    to the url options array. For example, let's say you want to paginate the
+    result with the url 'matches/worldcups/brazil' which maps to a results
+    action on a matches controller. This is a way of preserving those params
     on every pagination link.::
         
         <?php 
@@ -47,14 +47,31 @@ Methods
                 array('controller' => 'matches', 'action' => 'results', 
                       'worldcups', 'brazil')));
         ?>
-      
+
+    .. note::
+
+        Do not forget to set the url params when using custom routes. If you
+        want to keep those params on all pagination links.
+
     **escape**
     Defines if the title field for links should be HTML escaped.
     Defaults to true.
 
     **update**
     The DOM id of the element to update with the results of AJAX
-    pagination calls. If not specified, regular links will be created.
+    pagination calls. If not specified, regular links will be created.::
+
+        <?php
+        $this->Paginator->options('update' => '#content');
+        ?>
+
+    And please check how easy it is to implement :ref:`ajax-pagination` on
+    CakePHP.
+
+    .. note::
+
+        Do not miss the # character when setting the id of the DOM element,
+        otherwise content will not replaced on the element you set.
 
     **model**
     The name of the model being paginated, defaults to 
@@ -219,9 +236,9 @@ Methods
 
     Supported options are:
 
-    **before** - Content to be inserted before the numbers. Defaults to ' | '
+    **before** - Content to be inserted before the numbers.
 
-    **after** - Content to be inserted after the numbers. Defaults to ' | '
+    **after** - Content to be inserted after the numbers.
 
     **model** - Model to create numbers for, defaults to 
     PaginatorHelper::defaultModel()
