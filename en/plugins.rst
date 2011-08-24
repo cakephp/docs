@@ -18,21 +18,21 @@ Creating a Plugin
 
 As a working example, let's create a new plugin that orders pizza
 for you. To start out, we'll need to place our plugin files inside
-the /app/plugins folder. The name of the parent folder for all the
+the /app/Plugin folder. The name of the parent folder for all the
 plugin files is important, and will be used in many places, so pick
-wisely. For this plugin, let's use the name '**pizza**'. This is
+wisely. For this plugin, let's use the name '**Pizza**'. This is
 how the setup will eventually look:
 
 ::
 
     /app
-         /plugins
-             /pizza
-                 /controllers                <- plugin controllers go    here
-                 /models                     <- plugin models go    here
-                 /views                      <- plugin views go    here
-                 /pizza_app_controller.php   <- plugin's AppController
-                 /pizza_app_model.php        <- plugin's AppModel 
+         /Plugin
+             /Pizza
+                 /Controller                   <- plugin controllers go    here
+                     /PizzaAppController.php   <- plugin's AppController
+                 /Model                        <- plugin models go    here
+                     /PizzaAppModel.php        <- plugin's AppModel
+                 /View                         <- plugin views go    here
 
 .. note::
 
@@ -44,7 +44,7 @@ how the setup will eventually look:
 
 ::
 
-    // /app/plugins/pizza/pizza_app_controller.php:
+    // /app/Plugin/Pizza/Controller/PizzaAppController.php:
     <?php
     class PizzaAppController extends AppController {
          //...
@@ -53,7 +53,7 @@ how the setup will eventually look:
 
 ::
 
-    // /app/plugins/pizza/pizza_app_model.php:
+    // /app/Plugin/Pizza/Model/PizzaAppModel.php:
     <?php
     class PizzaAppModel extends AppModel {
            //...
@@ -88,24 +88,20 @@ Plugin Controllers
 -------------------
 
 Controllers for our pizza plugin will be stored in
-/app/plugins/pizza/controllers/. Since the main thing we'll be
+/app/Plugin/Pizza/Controller/. Since the main thing we'll be
 tracking is pizza orders, we'll need an OrdersController for this
 plugin.
 
-While it isn't required, it is recommended that you name your
-plugin controllers something relatively unique in order to avoid
-namespace conflicts with parent applications. Its not a stretch to
-think that a parent application might have a UsersController,
-OrdersController, or ProductsController: so you might want to be
-creative with controller names, or prepend the name of the plugin
-to the classname (PizzaOrdersController, in this case).
+Make sure to prepend the name of the plugin
+to the classname (PizzaOrdersController, in this case) when 
+referencing the class.
 
 So, we place our new PizzaOrdersController in
-/app/plugins/pizza/controllers and it looks like so:
+/app/Plugin/Pizza/Controller and it looks like so:
 
 ::
 
-    // /app/plugins/pizza/controllers/pizza_orders_controller.php
+    // /app/Plugin/Pizza/Controller/PizzaOrdersController.php
     class PizzaOrdersController extends PizzaAppController {
         var $name = 'PizzaOrders';
         var $uses = array('Pizza.PizzaOrder');
@@ -121,8 +117,8 @@ So, we place our new PizzaOrdersController in
     AppController.
 
 Also note how the name of the model is prefixed with the name of
-the plugin. This line of code is added for clarity but is not
-necessary for this example.
+the plugin. This is required to differentiate between models in 
+the plugin and models in the main application
 
 If you want to access what we’ve got going thus far, visit
 /pizza/pizza\_orders. You should get a “Missing Model” error
@@ -133,7 +129,7 @@ because we don’t have a PizzaOrder model defined yet.
 Plugin Models
 ----------------
 
-Models for the plugin are stored in /app/plugins/pizza/models.
+Models for the plugin are stored in /app/Plugin/Pizza/Model.
 We've already defined a PizzaOrdersController for this plugin, so
 let's create the model for that controller, called PizzaOrder.
 PizzaOrder is consistent with our previously defined naming scheme
@@ -141,13 +137,13 @@ of pre-pending all of our plugin classes with Pizza.
 
 ::
 
-    // /app/plugins/pizza/models/pizza_order.php:
+    // /app/Plugin/Pizza/Model/PizzaOrder.php:
     class PizzaOrder extends PizzaAppModel {
         var $name = 'PizzaOrder';
     }
     ?>
 
-Visiting /pizza/pizzaOrders now (given you’ve got a table in your
+Visiting /pizza/pizza_orders now (given you’ve got a table in your
 database called ‘pizza\_orders’) should give us a “Missing View”
 error. Let’s create that next.
 
@@ -160,7 +156,7 @@ For example:
 
 ::
 
-    // /app/plugins/pizza/models/example_model.php:
+    // /app/Plugin/Pizza/Model/ExampleModel.php:
     class ExampleModel extends PizzaAppModel {
         var $name = 'ExampleModel';
             var $hasMany = array('Pizza.PizzaOrder');
@@ -172,7 +168,7 @@ have the plugin prefix on them, use the alternative syntax:
 
 ::
 
-    // /app/plugins/pizza/models/example_model.php:
+    // /app/Plugin/Pizza/Model/ExampleModel.php:
     class ExampleModel extends PizzaAppModel {
         var $name = 'ExampleModel';
             var $hasMany = array(
@@ -187,14 +183,14 @@ Plugin Views
 ------------
 
 Views behave exactly as they do in normal applications. Just place
-them in the right folder inside of the /app/plugins/[plugin]/views/
+them in the right folder inside of the /app/Plugin/[Plugin]/View/
 folder. For our pizza ordering plugin, we'll need a view for our
 PizzaOrdersController::index() action, so let's include that as
 well:
 
 ::
 
-    // /app/plugins/pizza/views/pizza_orders/index.ctp:
+    // /app/Plugin/Pizza/View/PizzaOrders/index.ctp:
     <h1>Order A Pizza</h1>
     <p>Nothing goes better with Cake than a good pizza!</p>
     <!-- An order form of some sort might go here....-->
@@ -211,31 +207,31 @@ You can override any plugin views from inside your app using
 special paths. If you have a plugin called 'Pizza' you can override
 the view files of the plugin with more application specific view
 logic by creating files using the following template
-"app/views/plugins/$plugin/$controller/$view.ctp". For the pizza
+"app/View/Plugin/[Plugin]/[Controller]/[view].ctp". For the pizza
 controller you could make the following file:
 
 ::
 
-    /app/views/plugins/pizza/pizza_orders/index.ctp
+    /app/View/Plugin/Pizza/PizzaOrders/index.ctp
 
 Creating this file, would allow you to override
-"/app/plugins/pizza/views/pizza\_orders/index.ctp".
+"/app/Plugin/Pizza/View/Pizza\PizzaOrders/index.ctp".
 
 .. _plugin-assets:
 
 Plugin assets
 --------------
 
-New for 1.3 is an improved and simplified plugin webroot directory.
+Version 1.3 introduced an improved and simplified plugin webroot directory.
 In the past plugins could have a vendors directory containing
 ``img``, ``js``, and ``css``. Each of these directories could only
-contain the type of file they shared a name with. In 1.3 both
+contain the type of file they shared a name with. Starting with 1.3, both
 plugins and themes can have a ``webroot`` directory. This directory
 should contain any and all public accessible files for your plugin
 
 ::
 
-    app/plugins/debug_kit/webroot/
+    app/Plugin/DebugKit/webroot/
                                     css/
                                     js/
                                     img/
@@ -253,7 +249,7 @@ Linking to assets in plugins
 The urls to plugin assets remains the same. In the past you used
 ``/debug_kit/js/my_file.js`` to link to
 ``app/plugins/debug_kit/vendors/js/my_file.js``. It now links to
-``app/plugins/debug_kit/webroot/js/my_file.js``
+``app/Plugin/DebugKit/webroot/js/my_file.js``
 
 .. note::
 
@@ -283,10 +279,10 @@ special reference.
     }
     
     // within your Plugin controllers:
-    var $components = array('Example'); 
+    var $components = array('Plugin.Example'); 
 
-To reference the Component from outside the plugin requires the
-plugin name to be referenced.
+Make sure to always prefix the component name with the plugin it
+resides in.
 ::
 
     var $components = array('PluginName.Example');
@@ -302,10 +298,10 @@ So, now that you've built everything, it should be ready to
 distribute (though we'd suggest you also distribute a few extras
 like a readme or SQL file).
 
-Once a plugin has been installed in /app/plugins, you can access it
+Once a plugin has been installed in /app/Plugin, you can access it
 at the URL /pluginname/controllername/action. In our pizza ordering
 plugin example, we'd access our PizzaOrdersController at
-/pizza/pizzaOrders.
+/pizza/pizza_orders.
 
 Some final tips on working with plugins in your CakePHP
 applications:
@@ -321,8 +317,8 @@ applications:
    for them. This was done to fix a number of workarounds inside
    CakePHP
 -  You can define your own layouts for plugins, inside
-   app/plugins/[plugin]/views/layouts. Otherwise, plugins will use the
-   layouts from the /app/views/layouts folder by default.
+   app/Plugin/[Plugin]/View/Layouts. Otherwise, plugins will use the
+   layouts from the /app/View/Layouts folder by default.
 -  You can do inter-plugin communication by using
    $this->requestAction('/plugin/controller/action'); in your
    controllers.
@@ -335,3 +331,6 @@ applications:
 	This chapter feels incredibly outdated, and a bit repetitive. The pizza example is silly, we should change it to
 	something a lot more useful like messages, forum, or users. The tips section dates from the 1.1 times, is not
 	accurate at all.
+
+        This tradition was continued by simply updating the existing page to use CakePHP 2.0 conventions--it still
+        needs to be updated to be more relevant to current CakePHP development.
