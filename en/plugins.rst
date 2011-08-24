@@ -13,50 +13,106 @@ installed into, is the application's configuration (database
 connection, etc.). Otherwise, it operates in its own little space,
 behaving much like it would if it were an application on its own.
 
-Creating a Plugin
+Installing a Plugin
 ------------------
 
-As a working example, let's create a new plugin that orders pizza
-for you. To start out, we'll need to place our plugin files inside
-the /app/Plugin folder. The name of the parent folder for all the
-plugin files is important, and will be used in many places, so pick
-wisely. For this plugin, let's use the name '**Pizza**'. This is
-how the setup will eventually look:
+To install a plugin, start by simply dropping the plugin folder in 
+your app/Plugin folder. If you're installing a plugin named 
+'ContactManager' then you should have a folder in app/Plugin
+named 'ContactManager' under which are the plugin's View, Model, 
+Controller, webroot, and any other directories.
+
+New for CakePHP 2.0, plugins need to be loaded manually in 
+app/Config/bootstrap.php.
+
+You can either load them one by one or all of them in a single call.
+
+CakePlugin::loadAll(); // Loads all plugins at once
+CakePlugin::load('ContactManager'); //Loads a single plugin
+
+Some plugins need to create one or more tables in your database. In
+those cases, they will often include a schema file which you can
+call from the cake shell like this:
+
+cake schema create -plugin ContactManager
+
+Most plugins will indicate the proper procedure for configuring
+them and setting up the database in their documentation. Some
+plugins will require more setup than others.
+
+Using a Plugin
+------------------
+
+You can reference a plugin's controllers, models, components, 
+behaviors, and helpers by prefixing the name of the plugin before
+the class name.
+
+For example, say you wanted to use the ContactManager plugin's
+ContactInfoHelper to output some pretty contact information in
+one of your views. In your controller, your $helpers array
+could look like this:
+
+public $helpers = array('ContactManager.ContactInfo');
+
+You would then be able to access the ContactInfoHelper just like
+any other helper in your view, such as:
+
+echo $this->ContactInfo->address($contact);
+
+
+Creating Your Own Plugins
+------------------
+
+As a working example, let's begin to create the ContactManager
+plugin referenced above. To start out, we'll set up our plugin's
+basic directory structure. It should look like this:
 
 ::
 
     /app
-         /Plugin
-             /Pizza
-                 /Controller                   <- plugin controllers go    here
-                     /PizzaAppController.php   <- plugin's AppController
-                 /Model                        <- plugin models go    here
-                     /PizzaAppModel.php        <- plugin's AppModel
-                 /View                         <- plugin views go    here
+        /Plugin
+            /ContactManager
+                /Controller
+                    /Component
+                /Model
+                    /Behavior
+                /View
+                    /Helper
+                    /Layouts
+                    
+Note the name of the plugin folder, '**ContactManager**'. It is important
+that this folder has the same name as the plugin.
+
+Inside the plugin folder, you'll notice it looks a lot like a CakePHP
+application, and that's basically what it is. You don't actually have to
+include any of those folders if you do not use them. Some plugins might
+only define a Component and a Behavior, and in that case they can completely
+omit the 'View' directory.
+
+A plugin can also have basically any of the other directories that your 
+application can, such as Config, Console, Lib, webroot, etc.
 
 .. note::
 
     If you want to be able to access your plugin with a URL, defining
-    an AppController and AppModel for a plugin is required. These two
-    special classes are named after the plugin, and extend the parent
-    application's AppController and AppModel. Here's what they should
-    look like for our pizza example:
+    an AppController and AppModel for the plugin is required. These 
+    two special classes are named after the plugin, and extend the 
+    parent application's AppController and AppModel. Here's what they 
+    should look like for our ContactManager example:
 
 ::
 
-    // /app/Plugin/Pizza/Controller/PizzaAppController.php:
+    // /app/Plugin/ContactManager/Controller/ContactManagerAppController.php:
     <?php
-    class PizzaAppController extends AppController {
-         //...
+    class ContactManagerAppController extends AppController {
     }
     ?>
 
 ::
 
-    // /app/Plugin/Pizza/Model/PizzaAppModel.php:
+    // /app/Plugin/ContactManager/Model/ContactManagerAppModel.php:
     <?php
-    class PizzaAppModel extends AppModel {
-           //...
+    class ContactManagerAppModel extends AppModel {
     }
     ?>
 
@@ -70,14 +126,14 @@ In order to bake a plugin please use the following command:
 
 ::
 
-    user@host$ cake bake plugin pizza
+    user@host$ cake bake plugin ContactManager
 
 Now you can bake using the same conventions which apply to the rest
 of your app. For example - baking controllers:
 
 ::
 
-    user@host$ cake bake plugin pizza controller ingredients
+    user@host$ cake bake controller Contacts --plugin ContactManager
 
 Please refer to the chapter
 :doc:`/console-and-shells/code-generation-with-bake` if you
@@ -87,24 +143,20 @@ have any problems with using the command line.
 Plugin Controllers
 -------------------
 
-Controllers for our pizza plugin will be stored in
-/app/Plugin/Pizza/Controller/. Since the main thing we'll be
-tracking is pizza orders, we'll need an OrdersController for this
-plugin.
+Controllers for our ContactManager plugin will be stored in
+/app/Plugin/ContactManager/Controller/. Since the main thing we'll 
+be doing is managing contacts, we'll need a ContactsController for 
+this plugin.
 
-Make sure to prepend the name of the plugin
-to the classname (PizzaOrdersController, in this case) when 
-referencing the class.
-
-So, we place our new PizzaOrdersController in
-/app/Plugin/Pizza/Controller and it looks like so:
+So, we place our new ContactsController in
+/app/Plugin/ContactManager/Controller and it looks like so:
 
 ::
 
-    // /app/Plugin/Pizza/Controller/PizzaOrdersController.php
-    class PizzaOrdersController extends PizzaAppController {
-        var $name = 'PizzaOrders';
-        var $uses = array('Pizza.PizzaOrder');
+    // /app/Plugin/ContactManager/Controller/ContactsController.php
+    class ContactsController extends ContactManagerAppController {
+        var $uses = array('ContactManager.Contact');
+
         function index() {
             //...
         }
@@ -113,39 +165,41 @@ So, we place our new PizzaOrdersController in
 .. note::
 
     This controller extends the plugin's AppController (called
-    PizzaAppController) rather than the parent application's
+    ContactManagerAppController) rather than the parent application's
     AppController.
 
-Also note how the name of the model is prefixed with the name of
-the plugin. This is required to differentiate between models in 
-the plugin and models in the main application
+    Also note how the name of the model is prefixed with the name of
+    the plugin. This is required to differentiate between models in 
+    the plugin and models in the main application.
+
+    In this case, the $uses array would not be required as 
+    ContactManager.Contact would be the default model for this
+    controller, however it is included to demonstrate how to
+    properly prepend the plugin name.
 
 If you want to access what we’ve got going thus far, visit
-/pizza/pizza\_orders. You should get a “Missing Model” error
-because we don’t have a PizzaOrder model defined yet.
+/contact_manager/contacts. You should get a “Missing Model” error
+because we don’t have a Contact model defined yet.
 
 .. _plugin-models:
 
 Plugin Models
 ----------------
 
-Models for the plugin are stored in /app/Plugin/Pizza/Model.
-We've already defined a PizzaOrdersController for this plugin, so
-let's create the model for that controller, called PizzaOrder.
-PizzaOrder is consistent with our previously defined naming scheme
-of pre-pending all of our plugin classes with Pizza.
+Models for the plugin are stored in /app/Plugin/ContactManager/Model.
+We've already defined a ContactsController for this plugin, so let's 
+create the model for that controller, called Contact.
 
 ::
 
-    // /app/Plugin/Pizza/Model/PizzaOrder.php:
-    class PizzaOrder extends PizzaAppModel {
-        var $name = 'PizzaOrder';
+    // /app/Plugin/ContactManager/Model/Contact.php:
+    class Contact extends ContactManagerAppModel {
     }
     ?>
 
-Visiting /pizza/pizza_orders now (given you’ve got a table in your
-database called ‘pizza\_orders’) should give us a “Missing View”
-error. Let’s create that next.
+Visiting /contact_manager/contacts now (given you’ve got a table in your
+database called ‘contacts’) should give us a “Missing View” error. 
+Let’s create that next.
 
 .. note::
 
@@ -156,10 +210,9 @@ For example:
 
 ::
 
-    // /app/Plugin/Pizza/Model/ExampleModel.php:
-    class ExampleModel extends PizzaAppModel {
-        var $name = 'ExampleModel';
-            var $hasMany = array('Pizza.PizzaOrder');
+    // /app/Plugin/ContactManager/Model/Contact.php:
+    class Contact extends ContactManagerAppModel {
+        var $hasMany = array('ContactManager.AltName');
     }
     ?>
 
@@ -168,12 +221,11 @@ have the plugin prefix on them, use the alternative syntax:
 
 ::
 
-    // /app/Plugin/Pizza/Model/ExampleModel.php:
-    class ExampleModel extends PizzaAppModel {
-        var $name = 'ExampleModel';
+    // /app/Plugin/ContactManager/Model/Contact.php:
+    class Contact extends ContactManagerAppModel {
             var $hasMany = array(
-                    'PizzaOrder' => array(
-                            'className' => 'Pizza.PizzaOrder'
+                    'AltName' => array(
+                            'className' => 'ContactManager.AltName'
                     )
             );
     }
@@ -183,17 +235,17 @@ Plugin Views
 ------------
 
 Views behave exactly as they do in normal applications. Just place
-them in the right folder inside of the /app/Plugin/[Plugin]/View/
-folder. For our pizza ordering plugin, we'll need a view for our
-PizzaOrdersController::index() action, so let's include that as
+them in the right folder inside of the /app/Plugin/[PluginName]/View/
+folder. For our ContactManager plugin, we'll need a view for our
+ContactsController::index() action, so let's include that as
 well:
 
 ::
 
-    // /app/Plugin/Pizza/View/PizzaOrders/index.ctp:
-    <h1>Order A Pizza</h1>
-    <p>Nothing goes better with Cake than a good pizza!</p>
-    <!-- An order form of some sort might go here....-->
+    // /app/Plugin/ContactManager/View/Contacts/index.ctp:
+    <h1>Contacts</h1>
+    <p>Following is a sortable list of your contacts</p>
+    <!-- A sortable list of contacts would go here....-->
 
 .. note::
 
@@ -204,57 +256,57 @@ Overriding plugin views from inside your application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can override any plugin views from inside your app using
-special paths. If you have a plugin called 'Pizza' you can override
-the view files of the plugin with more application specific view
-logic by creating files using the following template
-"app/View/Plugin/[Plugin]/[Controller]/[view].ctp". For the pizza
-controller you could make the following file:
+special paths. If you have a plugin called 'ContactManager' you 
+can override the view files of the plugin with more application 
+specific view logic by creating files using the following template
+"app/View/Plugin/[Plugin]/[Controller]/[view].ctp". For the 
+Contacts controller you could make the following file:
 
 ::
 
-    /app/View/Plugin/Pizza/PizzaOrders/index.ctp
+    /app/View/Plugin/ContactManager/Contacts/index.ctp
 
 Creating this file, would allow you to override
-"/app/Plugin/Pizza/View/Pizza\PizzaOrders/index.ctp".
+"/app/Plugin/ContactManager/View/Contacts/index.ctp".
 
 .. _plugin-assets:
+
 
 Plugin assets
 --------------
 
-Version 1.3 introduced an improved and simplified plugin webroot directory.
-In the past plugins could have a vendors directory containing
-``img``, ``js``, and ``css``. Each of these directories could only
-contain the type of file they shared a name with. Starting with 1.3, both
-plugins and themes can have a ``webroot`` directory. This directory
-should contain any and all public accessible files for your plugin
+A plugin's web assets (but not PHP files) can be served through the 
+plugin's 'webroot' directory, just like the main application's assets.
 
 ::
 
-    app/Plugin/DebugKit/webroot/
-                                    css/
-                                    js/
-                                    img/
-                                    flash/
-                                    pdf/
+    app/Plugin/ContactManager/webroot/
+                                        css/
+                                        js/
+                                        img/
+                                        flash/
+                                        pdf/
 
-And so on. You are no longer restricted to the three directories in
-the past, and you may put any type of file in any directory, just
-like a regular webroot. The only restriction is that ``MediaView``
-needs to know the mime-type of that asset.
+You may put any type of file in any directory, just like a regular 
+webroot. The only restriction is that ``MediaView`` needs to know 
+the mime-type of that asset.
+
 
 Linking to assets in plugins
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The urls to plugin assets remains the same. In the past you used
-``/debug_kit/js/my_file.js`` to link to
-``app/plugins/debug_kit/vendors/js/my_file.js``. It now links to
-``app/Plugin/DebugKit/webroot/js/my_file.js``
+Simply prepend /plugin_name/ to the beginning of a request for an
+asset within that plugin, and it will work as if the asset were
+in your application's webroot.
+
+For example, linking to '/contact_manager/js/some_file.js'
+would serve the asset 
+app/Plugin/ContactManager/webroot/js/some_file.js.
 
 .. note::
 
     It is important to note the **/your\_plugin/** prefix before the
-    img, js or css path. That makes the magic happen!
+    asset path. That makes the magic happen!
 
 
 Components, Helpers and Behaviors
@@ -262,46 +314,54 @@ Components, Helpers and Behaviors
 
 A plugin can have Components, Helpers and Behaviors just like a
 regular CakePHP application. You can even create plugins that
-consist only of Components, Helpers or Behaviors and can be a great
-way to build reusable components that can easily be dropped into
-any project.
+consist only of Components, Helpers or Behaviors which can be a 
+great way to build reusable components that can easily be 
+dropped into any project.
 
 Building these components is exactly the same as building it within
-a regular application, with no special naming convention. Referring
-to your components from within the plugin also does not require any
-special reference.
+a regular application, with no special naming convention.
+
+Referring to your component from inside or outside of your plugin
+requires only that you prefix the plugin name before the name of the
+component. For example:
 
 ::
 
-    // Component
-    class ExampleComponent extends Object {
-    
+    // Component defined in 'ContactManager' plugin
+    class ExampleComponent extends Component {
     }
     
-    // within your Plugin controllers:
-    var $components = array('Plugin.Example'); 
-
-Make sure to always prefix the component name with the plugin it
-resides in.
-::
-
-    var $components = array('PluginName.Example');
-    var $components = array('Pizza.Example'); // references ExampleComponent in Pizza plugin.
+    // within your controllers:
+    var $components = array('ContactManager.Example'); 
 
 The same technique applies to Helpers and Behaviors.
 
 
+Expand Your Plugin
+------------
+
+This example created a good start for a plugin, but there is a lot
+more that you can do. As a general rule, anything you can do with your
+application, you can do inside of a plugin instead.
+
+Go ahead, include some third-party libraries in 'Vendor', add some 
+new shells to the cake console, and don't forget to create test cases 
+so your plugin users can automatically test your plugin's functionality!
+
+In our ContactManager example, we might create add/remove/edit/delete
+actions in the ContactsController, implement validation in the Contact
+model, and implement the functionality one might expect when managing
+their contacts. It's up to you to decide what to implement in your
+plugins. Just don't forget to share your code with the community so
+that everyone can benefit from your awesome, reusable components!
+
 Plugin Tips
 ------------
 
-So, now that you've built everything, it should be ready to
-distribute (though we'd suggest you also distribute a few extras
-like a readme or SQL file).
-
 Once a plugin has been installed in /app/Plugin, you can access it
-at the URL /pluginname/controllername/action. In our pizza ordering
-plugin example, we'd access our PizzaOrdersController at
-/pizza/pizza_orders.
+at the URL /plugin_name/controller_name/action. In our ContactManager
+plugin example, we'd access our ContactsController at
+/contact_manager/contacts.
 
 Some final tips on working with plugins in your CakePHP
 applications:
@@ -320,7 +380,7 @@ applications:
    app/Plugin/[Plugin]/View/Layouts. Otherwise, plugins will use the
    layouts from the /app/View/Layouts folder by default.
 -  You can do inter-plugin communication by using
-   $this->requestAction('/plugin/controller/action'); in your
+   $this->requestAction('/plugin_name/controller_name/action'); in your
    controllers.
 -  If you use requestAction, make sure controller and model names
    are as unique as possible. Otherwise you might get PHP "redefined
@@ -328,9 +388,6 @@ applications:
 
 .. todo::
 
-	This chapter feels incredibly outdated, and a bit repetitive. The pizza example is silly, we should change it to
-	something a lot more useful like messages, forum, or users. The tips section dates from the 1.1 times, is not
-	accurate at all.
+	Restructure content for less redundancy and easier reading
 
-        This tradition was continued by simply updating the existing page to use CakePHP 2.0 conventions--it still
-        needs to be updated to be more relevant to current CakePHP development.
+        Update 'Tips' section to be more relevant to current versions of CakePHP
