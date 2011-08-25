@@ -14,7 +14,7 @@ connection, etc.). Otherwise, it operates in its own little space,
 behaving much like it would if it were an application on its own.
 
 Installing a Plugin
-------------------
+-------------------
 
 To install a plugin, start by simply dropping the plugin folder in 
 your app/Plugin folder. If you're installing a plugin named 
@@ -25,18 +25,15 @@ Controller, webroot, and any other directories.
 New for CakePHP 2.0, plugins need to be loaded manually in 
 app/Config/bootstrap.php.
 
-You can either load them one by one or all of them in a single call.
+You can either load them one by one or all of them in a single call::
 
-::
-
+    <?php
     CakePlugin::loadAll(); // Loads all plugins at once
     CakePlugin::load('ContactManager'); //Loads a single plugin
 
 Some plugins need to create one or more tables in your database. In
 those cases, they will often include a schema file which you can
-call from the cake shell like this:
-
-::
+call from the cake shell like this::
 
     user@host$ cake schema create -plugin ContactManager
 
@@ -54,28 +51,24 @@ the class name.
 For example, say you wanted to use the ContactManager plugin's
 ContactInfoHelper to output some pretty contact information in
 one of your views. In your controller, your $helpers array
-could look like this:
+could look like this::
 
-::
-
+    <?php
     public $helpers = array('ContactManager.ContactInfo');
 
 You would then be able to access the ContactInfoHelper just like
-any other helper in your view, such as:
+any other helper in your view, such as::
 
-::
-
+    <?php
     echo $this->ContactInfo->address($contact);
 
 
 Creating Your Own Plugins
-------------------
+-------------------------
 
 As a working example, let's begin to create the ContactManager
 plugin referenced above. To start out, we'll set up our plugin's
-basic directory structure. It should look like this:
-
-::
+basic directory structure. It should look like this::
 
     /app
         /Plugin
@@ -114,7 +107,6 @@ application can, such as Config, Console, Lib, webroot, etc.
     <?php
     class ContactManagerAppController extends AppController {
     }
-    ?>
 
 ::
 
@@ -122,7 +114,6 @@ application can, such as Config, Console, Lib, webroot, etc.
     <?php
     class ContactManagerAppModel extends AppModel {
     }
-    ?>
 
 If you forgot to define these special classes, CakePHP will hand
 you "Missing Controller" errors until you’ve done so.
@@ -130,16 +121,12 @@ you "Missing Controller" errors until you’ve done so.
 Please note that the process of creating plugins can be greatly
 simplified by using the Cake shell.
 
-In order to bake a plugin please use the following command:
-
-::
+In order to bake a plugin please use the following command::
 
     user@host$ cake bake plugin ContactManager
 
 Now you can bake using the same conventions which apply to the rest
-of your app. For example - baking controllers:
-
-::
+of your app. For example - baking controllers::
 
     user@host$ cake bake controller Contacts --plugin ContactManager
 
@@ -157,10 +144,9 @@ be doing is managing contacts, we'll need a ContactsController for
 this plugin.
 
 So, we place our new ContactsController in
-/app/Plugin/ContactManager/Controller and it looks like so:
+/app/Plugin/ContactManager/Controller and it looks like so::
 
-::
-
+    <?php
     // /app/Plugin/ContactManager/Controller/ContactsController.php
     class ContactsController extends ContactManagerAppController {
         var $uses = array('ContactManager.Contact');
@@ -196,14 +182,12 @@ Plugin Models
 
 Models for the plugin are stored in /app/Plugin/ContactManager/Model.
 We've already defined a ContactsController for this plugin, so let's 
-create the model for that controller, called Contact.
+create the model for that controller, called Contact::
 
-::
-
+    <?php
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
     }
-    ?>
 
 Visiting /contact_manager/contacts now (given you’ve got a table in your
 database called ‘contacts’) should give us a “Missing View” error. 
@@ -214,30 +198,26 @@ Let’s create that next.
     If you need to reference a model within your plugin, you need to
     include the plugin name with the model name, separated with a dot.
 
-For example:
+For example::
 
-::
-
+    <?php
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
-        var $hasMany = array('ContactManager.AltName');
+        public $hasMany = array('ContactManager.AltName');
     }
-    ?>
 
 If you would prefer that the array keys for the association not
-have the plugin prefix on them, use the alternative syntax:
+have the plugin prefix on them, use the alternative syntax::
 
-::
-
+    <?php
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
-            var $hasMany = array(
+            public $hasMany = array(
                     'AltName' => array(
                             'className' => 'ContactManager.AltName'
                     )
             );
     }
-    ?>
 
 Plugin Views
 ------------
@@ -246,9 +226,7 @@ Views behave exactly as they do in normal applications. Just place
 them in the right folder inside of the /app/Plugin/[PluginName]/View/
 folder. For our ContactManager plugin, we'll need a view for our
 ContactsController::index() action, so let's include that as
-well:
-
-::
+well::
 
     // /app/Plugin/ContactManager/View/Contacts/index.ctp:
     <h1>Contacts</h1>
@@ -268,9 +246,7 @@ special paths. If you have a plugin called 'ContactManager' you
 can override the view files of the plugin with more application 
 specific view logic by creating files using the following template
 "app/View/Plugin/[Plugin]/[Controller]/[view].ctp". For the 
-Contacts controller you could make the following file:
-
-::
+Contacts controller you could make the following file::
 
     /app/View/Plugin/ContactManager/Contacts/index.ctp
 
@@ -284,9 +260,7 @@ Plugin assets
 --------------
 
 A plugin's web assets (but not PHP files) can be served through the 
-plugin's 'webroot' directory, just like the main application's assets.
-
-::
+plugin's 'webroot' directory, just like the main application's assets::
 
     app/Plugin/ContactManager/webroot/
                                         css/
@@ -331,10 +305,9 @@ a regular application, with no special naming convention.
 
 Referring to your component from inside or outside of your plugin
 requires only that you prefix the plugin name before the name of the
-component. For example:
+component. For example::
 
-::
-
+    <?php
     // Component defined in 'ContactManager' plugin
     class ExampleComponent extends Component {
     }
@@ -346,7 +319,7 @@ The same technique applies to Helpers and Behaviors.
 
 
 Expand Your Plugin
-------------
+------------------
 
 This example created a good start for a plugin, but there is a lot
 more that you can do. As a general rule, anything you can do with your
