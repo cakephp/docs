@@ -3,39 +3,65 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-The Manual
-##########
+Welcome
+#######
 
-Welcome to the Cookbook, the CakePHP documentation. The Cookbook is
-a wiki-like system allowing contributions from the public. With an
-open system, we hope to maintain a high level of quality, validity,
-and accuracy for the CakePHP documentation. The Cookbook also makes
-it easy for anybody to contribute.
+The CakePHP cookbook, is an openly developed community editable documentation
+project.  We hope to maintain a high level of quality, validity and accuracy for 
+the documetation.
 
-A ***huge*** thank you to `AD7six <http://www.ad7six.com/>`_, who
-championed the Cookbook by putting in endless hours developing,
-testing and improving this application.
+Getting started
+===============
 
-How You Can Help
-================
+Build a blog
+------------
 
-If you notice an error, something that is incomplete, something
-that hasn't been covered at all, or something that just isn't
-worded to your liking, here's how you can help:
+Get started with the :doc:`blog tutorial</tutorials-and-examples/blog/blog>`.
+You'll learn the basics of CakePHP, and build a basic blog in the process.
 
-#. Click the edit link for the section you want to change.
-#. Log in to Cookbook if prompted using your
-   `Bakery <http://bakery.cakephp.org>`_ account. Anyone can get a
-   bakery account!
-#. Please review
-   `the guidelines for submitting to the Cookbook <http://docs.cakephp.org/view/482/contributing-to-the-cookbook>`_
-   to ensure consistency.
-#. Submit additions/edits for review using valid, semantic HTML.
-#. Follow the progress of your submissions using the rss feeds or
-   check back in the next day or so to see your changes approved.
+Conventions
+-----------
+
+Learn about a typical :doc:`CakePHP request
+</getting-started/a-typical-cakephp-request>` and the :doc:`conventions
+</getting-started/cakephp-conventions>` that power CakePHP.
+
+Controllers
+-----------
+
+Controllers handle requests, and help co-ordinatea and prepare
+the response for the client.  Read more about :doc:`/controllers`
+
+Views
+-----
+
+Views are the presentation layer in CakePHP.  They convert
+the data fetched from Models, into the output format the client
+requested.  Read more about :doc:`/views`
+
+Models
+------
+
+Models are the heart of your application, they handle the validation,
+storage and retrival of your data.  Read more about :doc:`/models`
+
+Getting Help
+============
+
+If you're stuck, there are a number of places :doc:`you can get help
+</cakephp-overview/where-to-get-help>`
+
+Contributing
+============
+
+Contributing to the documentation is simple.  The files are hosted on
+http://github.com/cakephp/docs.  Feel free to fork the repo, add your
+changes/improvements/translations and give back by issuing a pull request.
+You can even edit the docs online with github, without ever downloading the
+files.
 
 Translations
-============
+------------
 
 Email the docs team (docs at cakephp dot org) or hop on IRC
 (#cakephp on freenode) to discuss any translation efforts you would
@@ -67,6 +93,3 @@ Translator tips:
 - If the original content is missing some info, submit an edit for
   that first.
 
-We're committed to making the documentation for CakePHP better than
-it has ever been. We hope you'll join us by using the Cookbook and
-giving back to a project that we've all benefited so much from.
