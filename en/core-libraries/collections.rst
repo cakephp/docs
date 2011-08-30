@@ -48,156 +48,76 @@ from memory, and will not have additional callbacks triggered on them::
 Triggering callbacks
 ====================
 
+Callbacks are supported by collection objects.  When a collection has a callback
+triggered, that method will be called on all enabled objects in the collection.
+You can pass parameters to the callback loop as well::
 
-Lazy Loading and on-demand loading
-==================================
+    <?php
+    $this->Behaviors->trigger('afterFind', array($this, $results, $primary));
 
+In the above ``$viewFile`` would be passed as the first argument to every
+helper's beforeRender method. There are several options that can be used to
+control how callbacks are fired:
 
-Helper, Behavior, Component and Task refactor
-=============================================
+- ``breakOn`` Set to the value or values you want the callback propagation to stop on.
+   Can either be a scalar value, or an array of values to break on. Defaults to ``false``.
 
-Helpers, behaviors, components, and tasks were restructured for 2.0. After examining the various things these objects did, there were some striking similarities.  All the object types except Tasks provided callbacks and custom methods.  However, the loading and usage of callbacks was slightly different in each case.  For 2.0 these different loading/callback triggering API's were simplified and made uniform.  Using `BehaviorCollection` as the base of how things should work.  Each object type now has a Collection object.  This collection object is responsible for loading, unloading and triggering callbacks.  The Collection object API looks like:
+- ``break`` Set to true to enabled breaking. When a trigger is broken, the last returned value
+   will be returned.  If used in combination with ``collectReturn`` the collected results will be returned.
+   Defaults to ``false``.
 
-* `load()` - Load a new object, and add it to the collection
-* `unload()` - Remove an object from the collection
-* `trigger()` - Trigger a callback on all objects in the collection.
-* `enable()` - Enables a disabled object in the collection
-* `disable()` - Disable an object in the collection
-* `attached()` - Get the names of the attached objects, or find out if a specific object is attached.
-* `enabled()` - Get the names of the enabled objects, or find out if a specific object is enabled.
+- ``collectReturn`` Set to true to collect the return of each object into an array.
+   This array of return values will be returned from the trigger() call. Defaults to ``false``.
 
-Helpers, behaviors and components can also be aliased. You can read more about aliasing under "Aliasing" on the [2.0 New Features](http://cakephp.lighthouseapp.com/projects/42648/20-new-features) page.
+- ``triggerDisabled`` Will trigger the callback on all objects in the collection even the non-enabled
+   objects. Defaults to false.
 
-### HelperCollection
+- ``modParams`` Allows each object the callback gets called on to modify the parameters to the next object.
+   Setting modParams to an integer value will allow you to modify the parameter with that index.
+   Any non-null value will modify the parameter index indicated.
+   Defaults to false.
 
-After examining the responsibilities of each class involved in the View layer, it became clear that View was handling much more than a single task. The responsibility of creating helpers, is not central to what View does, and was moved into HelperCollection. HelperCollection is responsible for loading and constructing helpers, as well as triggering callbacks on helpers.  By default View creates a HelperCollection in its constructor, and uses it for subsequent operations.  The HelperCollection for a view can be found at `$this->Helpers`
+Cancelling a callback loop
+--------------------------
 
-The motivations for refactoring this functionality came from a few issues.
+Using the ``break`` and ``breakOn`` options you can cancel a callback loop
+midway similar to stopping event propagation in JavaScript::
 
-* View being registered in ClassRegistry could cause registry poisoning issues when requestAction or the EmailComponent were used.
-* View being accessible as a global symbol invited abuse.
-* Helpers were not self contained.  After constructing a helper, you had to manually construct several other objects in order to get a functioning object.
+    <?php
+    $this->Behaviors->trigger(
+        'beforeFind', 
+        array($this, $query), 
+        array('break' => true, 'breakOn' => false
+    ));
 
-The refactoring to HelperCollection solved all of the above issues as well as provided additional new features, such as lazy loading.
+In the above example, if any behavior returns ``false`` from its beforeFind
+method, no further callbacks will be called. In addition the return of
+``trigger()`` will be false.
 
-### Using HelperCollection
+Enabling and disabling objects
+==============================
 
-HelperCollection provides an API similar to `BehaviorCollection`, but for managing helpers.
+Once an object is loaded into a collection you may need to disable it.
+Disabling an object in a collection prevents future callbacks from being fired
+on that object unless the ``triggerDisabled`` option is used::
 
-* `load($name, $settings = array())`  Load is used to load individual helpers, and provide them with settings.
-* `unload($name)` Remove a helper from the collection.
-* `attached()` Get a list of attached helpers.
-* `enabled($name)` Get a list of enabled helpers.  Helpers that are not enabled will not have callbacks fired on them. If a name is passed in a boolean will be returned indicating whether or not the helper is enabled.
-* `enable($name)` Re-enables a helper.  Enabled helpers have callbacks fired on them.
-* `disable($name)` Disables a helper.  Disabled helpers do not have callbacks fired on them.
-* `trigger($callback, $params)` Trigger a callback on all the enabled helpers.
-
-All of the following are run from inside a view/element/layout.
-
-#### Loading helpers on demand in the View
-
-You can now load individual Helpers on-demand using `View::loadHelper()`.  This method attaches the Helper to the HelperCollection and returns the helper as well.
-
-<pre>
-$Media = $this->loadHelper('Media.Media');
-// or
-$Media = $this->Helpers->load('Media');
-</pre>
-
-The Media helper will now be inside `$Media` and available as `$this->Media`.  View::loadHelper() is provided as a wrapper method to be used by helpers to load additional helpers.  Both load methods also takes an array of settings as the second parameter for helpers that need configuration arrays.
-
-#### Disabling callbacks on a helper
-
-<pre>
-$this->Helpers->disable('Html');
-</pre>
-
-The HtmlHelper will no longer have view callbacks triggered on it.  You will however be able to use its methods normally.
-
-### Helpers attributes format is more flexible
-
-The Helper class have more 3 protected attributes:
-
-* `Helper::_minimizedAttributes`: array with minimized attributes (ie: `array('checked', 'selected', ...)`);
-* `Helper::_attributeFormat`: how attributes will be generated (ie: `%s="%s"`);
-* `Helper::_minimizedAttributeFormat`: how minimized attributes will be generated: (ie `%s="%s")
-
-By default the values used in CakePHP 1.3 do not was changed. But now you can use boolean attributes from HTML, like `<input type="checkbox" checked />`. To this, just change `$_minimizedAttributeFormat` in your AppHelper to `%s`.
-
-To use with Html/Form helpers and others, you can write:
-@@@
-$this->Form->checkbox('field', array('checked' => true, 'value' => 'some_value'));
-@@@
-
-Other facility is that minimized attributes can be passed as item and not as key. For example:
-@@@
-$this->Form->checkbox('field', array('checked', 'value' => 'some_value'));
-@@@
-Note that `checked` have a numeric key.
-
-### Helper of helpers load lazily
-
-A benefit from using HelperCollection to manage Helpers, is that Helpers inside helpers now load lazily.  This should help create faster running scripts when all the inner helpers are not accessed.  The first time a helper's helper is accessed it will be created/loaded from the View's HelperCollection.  These changes do not affect that only one of each helper is loaded per HelperCollection.  As in previous versions of CakePHP, all helpers of the same name are references to one another.
+    <?php
+    // Disable the HtmlHelper
+    $this->Helpers->disable('Html');
+    
+    // Re-enable the helper later on
+    $this->Helpers->enable('Html');
 
 
+Disabled objects can still have their normal methods and properties used. The
+primary difference between an enabled and disabled object is with regards to
+callbacks. You can interogate a collection about the enabled objects, or check
+if a specific object is still enabled using ``enabled()``::
 
-## Component Refactor
+    <?php
+    // Check whether or not a specific helper is enabled.
+    $this->Helpers->enabled('Html');
 
-Components were refactored in 2.0 to solve a number of inconsistencies and provide a more uniform API.  In the past `Component` was the loader and manager of Components for a Controller.  In 2.0 `ComponentCollection` takes over that responsibility and `Component` is now a base class for components.  This unifies the API between Helpers and Components as a collection.
-
-### $this->Component --> $this->Components
-
-Inside a controller `$this->Component` has been renamed to `$this->Components` this makes it more uniform with Behaviors and Helpers.  `$this->Components` is a ComponentCollection instance.  ComponentCollection provides the following methods.
-
-* `load($name, $settings = array())`  Load is used to load individual components, and provide them with settings.
-* `unload($name)` Remove a component from the collection.
-* `attached()` Get a list of attached components.
-* `enabled($name)` Get a list of enabled components.  Components that are not enabled will not have callbacks fired on them. If a name is passed in a boolean will be returned indicating whether or not the component is enabled.
-* `enable($name)` Re-enables a component.  Enabled components have callbacks fired on them.
-* `disable($name)` Disables a component.  Disabled components do not have callbacks fired on them.
-* `trigger($callback, $params)` Trigger a callback on all the enabled components.
-
-#### Disabling callbacks on a component
-
-<pre>
-$this->Components->disable('Cookie');
-</pre>
-
-The CookieComponent will no longer have view callbacks triggered on it.  You will however be able to use its methods normally.
-
-
-### Component components are now loaded lazily
-
-Components used by a Component are now lazy loaded through `__get()`.  All components of the same name are still references of each other, and each component will only be constructed once per request.
-
-### Loading Components on demand
-
-Much like helpers you can now create Components on demand easily by using the load method of the ComponentCollection.
-
-<pre>
-$Prg = $this->Components->load('Prg');
-</pre>
-
-By default, all runtime loaded components will have all future callbacks triggered on them.  You can exclude components from callbacks by either using `$this->Components->disable('Prg');` or by including the `enabled = false` key in your settings.
-
-<pre>
-$Prg = $this->Components->load('Prg', array('enabled' => false));
-</pre>
-
-
-#### Changes in disabling components
-
-In the past you were able to disable components via `$this->Auth->enabled = false;` for example. In CakePHP 2.0 you should use the ComponentCollection's disable method, `$this->Components->disable('Auth');`.  Using the enabled property will not work properly.
-
-### Task Refactor
-
-Tasks have also been removed from the ClassRegistry.  Instead Tasks are put into a `TaskCollection` object attached to the Shell for a given command.  The TaskCollection for a command is used to load and construct tasks.  In addition you can use it to load tasks at runtime. If you need to access the TaskCollection inside a shell,  use `$this->Tasks->method()`.
-
-#### Using plugin tasks
-
-With TaskCollection, using plugin tasks is quite simple.  You just declare them in the $tasks array like any other Task.  The TaskCollection, will find and construct the desired task.  You should always use the plugin dot syntax to indicate plugin tasks.
-
-<pre>
-public $tasks = array('ProgressBar.Updater');
-</pre>
+    // $enabled will contain an array of helper currently enabled.
+    $enabled = $this->Helpers->enabled();
 

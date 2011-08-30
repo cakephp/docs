@@ -169,6 +169,14 @@ with callbacks.  If you need to trigger a callback you could do so by calling::
     <?php
     $this->Components->trigger('someCallback', array(&$this));
 
+Changes in disabling components
+-------------------------------
+
+In the past you were able to disable components via `$this->Auth->enabled =
+false;` for example. In CakePHP 2.0 you should use the ComponentCollection's
+disable method, `$this->Components->disable('Auth');`.  Using the enabled
+property will not work.
+
 AclComponent
 ------------
 
@@ -425,6 +433,28 @@ When overriding the constructor you should always call `parent::__construct` as
 well.  `Helper::__construct` stores the view instance at `$this->_View` for
 later reference.  The settings are not handled by the parent constructor.
 
+HelperCollection added
+----------------------
+
+After examining the responsibilities of each class involved in the View layer,
+it became clear that View was handling much more than a single task. The
+responsibility of creating helpers, is not central to what View does, and was
+moved into HelperCollection. HelperCollection is responsible for loading and
+constructing helpers, as well as triggering callbacks on helpers.  By default
+View creates a HelperCollection in its constructor, and uses it for subsequent
+operations.  The HelperCollection for a view can be found at `$this->Helpers`
+
+The motivations for refactoring this functionality came from a few issues.
+
+* View being registered in ClassRegistry could cause registry poisoning issues
+  when requestAction or the EmailComponent were used.
+* View being accessible as a global symbol invited abuse.
+* Helpers were not self contained.  After constructing a helper, you had to
+  manually construct several other objects in order to get a functioning object.
+
+You can read more about HelperCollection in the
+:doc:`/core-libraries/collections` documentation.
+
 Deprecated properties
 ---------------------
 
@@ -516,6 +546,33 @@ regions. Instead it uses special HTML/XML comments. ``<!--nocache-->`` and
 perform the same functions as before. You can read more CacheHelper and View
 changes.
 
+Helper Attribute format more flexible
+-------------------------------------
+
+The Helper class have more 3 protected attributes:
+
+* ``Helper::_minimizedAttributes``: array with minimized attributes (ie:
+  ``array('checked', 'selected', ...)``);
+* ``Helper::_attributeFormat``: how attributes will be generated (ie:
+  ``%s="%s"``);
+* ``Helper::_minimizedAttributeFormat``: how minimized attributes will be
+  generated: (ie ``%s="%s"``)
+
+By default the values used in CakePHP 1.3 do not was changed. But now you can
+use boolean attributes from HTML, like ``<input type="checkbox" checked />``. To
+this, just change ``$_minimizedAttributeFormat`` in your AppHelper to ``%s``.
+
+To use with Html/Form helpers and others, you can write::
+
+    $this->Form->checkbox('field', array('checked' => true, 'value' => 'some_value'));
+
+Other facility is that minimized attributes can be passed as item and not as
+key. For example::
+
+    $this->Form->checkbox('field', array('checked', 'value' => 'some_value'));
+
+Note that ``checked`` have a numeric key.
+
 Controller
 ==========
 
@@ -528,7 +585,8 @@ Controller
 - ``Controller::$here`` is deprecated, use the request object's here property.
 - ``Controller::$data`` is deprecated, use the request object's data property.
 - ``Controller::$params`` is deprecated, use the ``$this->request`` instead.
-- ``Controller::$Component`` has been moved to ``Controller::$Components``.
+- ``Controller::$Component`` has been moved to ``Controller::$Components``.  See
+  the :doc:`/core-libraries/collections` documentation for more information.
 - ``Controller::$view`` has been renamed to ``Controller::$viewClass``.
   ``Controller::$view`` is now used to change which view file is rendered.
 - ``Controller::render()`` now returns a CakeResponse object.

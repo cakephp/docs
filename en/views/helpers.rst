@@ -148,11 +148,15 @@ do this::
     <?php
     $mediaHelper = $this->Helpers->load('Media', $mediaSettings);
 
+The HelperCollection is a :doc:`collection </core-libraries/collections>` and 
+supports the collection API used elsewhere in CakePHP.
+
 Callback methods
 ================
 
 Helpers feature several callbacks that allow you to augment the 
-view rendering process.  See the :ref:`helper-api` for more information.
+view rendering process.  See the :ref:`helper-api` and the
+:doc:`/core-libraries/collections` documentation for more information.
 
 Creating Helpers
 ================
