@@ -60,22 +60,22 @@ helper's beforeRender method. There are several options that can be used to
 control how callbacks are fired:
 
 - ``breakOn`` Set to the value or values you want the callback propagation to stop on.
-   Can either be a scalar value, or an array of values to break on. Defaults to ``false``.
+  Can either be a scalar value, or an array of values to break on. Defaults to ``false``.
 
 - ``break`` Set to true to enabled breaking. When a trigger is broken, the last returned value
-   will be returned.  If used in combination with ``collectReturn`` the collected results will be returned.
-   Defaults to ``false``.
+  will be returned.  If used in combination with ``collectReturn`` the collected results will be returned.
+  Defaults to ``false``.
 
 - ``collectReturn`` Set to true to collect the return of each object into an array.
-   This array of return values will be returned from the trigger() call. Defaults to ``false``.
+  This array of return values will be returned from the trigger() call. Defaults to ``false``.
 
 - ``triggerDisabled`` Will trigger the callback on all objects in the collection even the non-enabled
-   objects. Defaults to false.
+  objects. Defaults to false.
 
 - ``modParams`` Allows each object the callback gets called on to modify the parameters to the next object.
-   Setting modParams to an integer value will allow you to modify the parameter with that index.
-   Any non-null value will modify the parameter index indicated.
-   Defaults to false.
+  Setting modParams to an integer value will allow you to modify the parameter with that index.
+  Any non-null value will modify the parameter index indicated.
+  Defaults to false.
 
 Cancelling a callback loop
 --------------------------

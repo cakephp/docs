@@ -413,8 +413,8 @@ CakeSession is now a fully static class, both ``SessionHelper`` and
 ``SessionComponent`` are wrappers and sugar for it.  It can now easily be used
 in models or other contexts.  All of its methods are called statically.
 
-Session configuration has also changed :doc:`/development/sessions <see the
-session section for more information>`
+Session configuration has also changed :doc:`<see the session section for more
+information </development/sessions>`
 
 Helpers
 =======
@@ -696,7 +696,8 @@ look like::
 
 
 Element caching, and view callbacks have been changed in 2.0 to help provide you
-with more flexibility and consistency. :doc:`views <Read more about those changes>`.
+with more flexibility and consistency. :doc:`Read more about those
+changes </views>`.
 
 CacheHelper decoupled
 ---------------------
