@@ -52,3 +52,9 @@ Glossary
     CSRF
         Cross Site Request Forgery.  Prevents replay attacks, double
         submissions and forged requests from other domains.
+
+    routes.php
+        A file in APP/Config that contains routing configuration.
+        This file is included before each request is processed.
+        It should connect all the routes your application needs so 
+        requests can be routed to the correct controller + action.

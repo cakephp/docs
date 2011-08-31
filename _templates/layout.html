@@ -77,3 +77,21 @@
 	</ul>
 </div>
 {% endblock %}
+
+{% block relbar2 %}
+{{ relbar() }}
+<div class="related">
+<ul>
+{% for lang in languages %}
+	<li class="right">
+		{% if lang == language %}
+		<span>{{ lang }}</span>
+		{% else %}
+		<a href="{{ langlink(lang, pagename) }}">{{ lang }}</a>
+		{% endif %}
+		{% if loop.index != languages|length %} | {% endif %}
+	</li>
+{% endfor %}
+</ul>
+</div>
+{% endblock %}

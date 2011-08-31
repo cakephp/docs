@@ -268,7 +268,7 @@ and the configured loggers.
     If you are using a custom ``Exception.handler`` this setting will have
     no effect. Unless you reference it inside your implementation.
 
-. _built-in-exceptions:
+.. _built-in-exceptions:
 
 Built in Exceptions for CakePHP
 ===============================
