@@ -1,4 +1,4 @@
-The App Class
+App Class
 #############
 
 The app class is responsible for path management, class location and class loading. 
@@ -20,74 +20,50 @@ For instance if you'd like to use your own HttpSocket class, put it under::
 
     app/libs/Network/Http/HttpSocket.php
 
-
-New Class Loader
-================
-
-Although there has been a huge refactoring in how the classes are loaded, in very 
-few occasions you will need to change your application code respect the way you were 
-used to do it. The biggest change is the introduction of a new method::
-
-    <?php
-    App::uses('AuthComponent', 'Controller/Component');
-
-We decided the function name to emulate PHP 5.3's ``use`` keyword, just as a way
-of declaring where a classname should be located at. The first parameter of
-:php:meth:`App::uses()` is the complete name of the class you intend to load,
-and the second one, the package name (or namespace) where it belongs to. The
-main difference with CakePHP 1.3's :php:meth:`App::import()` is that the former
-won't actually import the class, it will just setup the system so when the class
-is used for the first time it will be located.
-
-Some examples on using :php:meth:`App::uses()` when migrating from
-:php:meth:`App::import()`::
-
-    <?php
-    App::import('Controller', 'Pages');
-    // becomes 
-    App::uses('PagesController', 'Controller');
-
-    App::import('Component', 'Email');
-    // becomes 
-    App::uses('EmailComponent', 'Controller/Component');
-
-    App::import('View', 'Media');
-    // becomes 
-    App::uses('MediaView', 'View');
-
-    App::import('Core', 'Xml');
-    // becomes 
-    App::uses('Xml', 'Utility');
-
-    App::import('Datasource', 'MongoDb.MongoDbSource')
-    // becomes 
-    App::uses('MongoDbSource', 'MongoDb.Model/Datasource')
-
-All classes that were loaded in the past using ``App::import('Core', $class);``
-will need to be loaded using ``App::uses()`` referring to the correct package.
-See the api to locate the class in their new folder. Some examples::
-
-    <?php
-    App::import('Core', 'CakeRoute');
-    // becomes 
-    App::uses('CakeRoute', 'Routing/Route');
-
-    App::import('Core', 'Sanitize');
-    // becomes
-    App::uses('Sanitize', 'Utility');
-
-    App::import('Core', 'HttpSocket');
-    // becomes 
-    App::uses('HttpSocket', 'Network/Http');
-
-In contrast to how :php:meth:`App::import()` worked in the past, the new class
-loader will not locate classes recursively. This led to an impressive
-performance gain even on develop mode, at the cost of some seldom used features
-that always caused side effects. To be clear again, the class loader will only
-fetch the classes exactly in the package you told to find it.
-
+Once you've done this App will load your override file instead of the file
+inside CakePHP.
 
 .. php:class:: App
+
+Loading classes
+===============
+
+.. php:staticmethod:: uses($class, $package)
+
+    Classes are lazily loaded in CakePHP, however before the autoloader
+    can find your classes you need to tell App, where it can find the files.
+    By telling App which package a class can be found in, it can properly locate
+    the file and load it the first time a class is used.
+
+    Some examples for common types of classes are:
+
+    Controller
+        ``App::uses('PostsController', 'Controller');``
+    Component
+        ``App::uses('AuthComponent', 'Controller/Component');``
+    Model
+        ``App::uses('MyModel', 'Model');``
+    Behaviors
+        ``App::uses('TreeBehavior', 'Model/Behavior');``
+    Views
+        ``App::uses('ThemeView', 'View');``
+    Helpers
+        ``App::uses('HtmlHelper', 'View/Helper');``
+    Libs
+        ``App::uses('PaymentProcessor', 'Lib');``
+    Vendors
+        ``App::uses('Textile', 'Vendor');``
+
+Loading files from plugins
+--------------------------
+
+Loading classes in plugins works much the same as loading app and
+core classes except you must specify the plugin you are loading
+from::
+
+    <?php
+    App::uses('Comment', 'PluginName.Model');
+
 
 Finding paths to packages using App::path()
 ===========================================
@@ -97,33 +73,15 @@ Finding paths to packages using App::path()
     Used to read information stored path::
 
         <?php
-        App::path('Model'); will return all paths for models
+        // return the model paths in your application
+        App::path('Model');
 
-    .. versionadded:: 2.0:
+    This can be done for all packages that are apart of your application. You
+    can also fetch paths for a plugin::
 
-    1. The method now supports plugins, ``App::path('Controller', 'Users')``
-       will return the folder location for the controllers in the User plugin.
-
-    2. Won't core paths anymore, it will only return paths defined in
-       :php:meth:`App::build()` or default ones in app (or correspondent plugin).
-
-    3. The App class had the following properties removed, use method
-       :php:meth:`App::path()` to access their value::
-
-            <?php
-            App::$models
-            App::$behaviors
-            App::$controllers
-            App::$components
-            App::$datasources
-            App::$libs
-            App::$views
-            App::$helpers
-            App::$plugins
-            App::$vendors
-            App::$locales
-            App::$shells
-
+        <?php
+        // return the component paths in DebugKit
+        App::path('Component', 'DebugKit');
 
 Adding paths for App to find packages in
 ========================================
@@ -133,7 +91,7 @@ Adding paths for App to find packages in
     Sets up each package location on the file system. You can configure multiple
     search paths for each package, those will be used to look for files one
     folder at a time in the specified order.  All paths should be terminated
-    with a Directory separator.
+    with a directory separator.
 
     Adding additional controller paths for example would alter where CakePHP
     looks for controllers.  This allows you to split your application up across
@@ -244,7 +202,6 @@ Including files with App::import()
         
         // If we want the model associations, components, etc to be loaded
         $Users->constructClasses();
-        ?>
 
     **All classes that were loaded in the past using App::import('Core', $class) will need to be 
     loaded using App::uses() referring to the correct package. This change has provided large
@@ -266,35 +223,20 @@ Including files with App::import()
       will also not convert anymore the file to underscored as it did on the
       past
 
-Importing Controllers, Models, Behaviors, and Helpers
------------------------------------------------------------------
+Overriding classes in CakePHP
+=============================
 
-All application related classes should be loaded with :php:meth:`App::uses()`.
-The following examples illustrate how to do so.
+You can override almost every class in the framework, exceptions are the
+:php:class:`App` and :php:class:`Configure` classes. whenever you like to
+perform such overriding, just add your class to your app/Lib folder mimicking
+the internal structure of the framework.  Some examples to follow
 
-Loading Controllers
-~~~~~~~~~~~~~~~~~~~
+* To override the :php:class:`Dispatcher` class, create ``app/Lib/Routing/Dispatcher.php``
+* To override the :php:class:`CakeRoute` class, create ``app/Lib/Routing/Route/CakeRoute.php``
+* To override the :php:class:`Model` class, create ``app/Lib/Model/Model.php``
 
-Controller
-    ``App::uses('PostsController', 'Controller');``
-Model
-    ``App::import('Model', 'MyModel');``
-Behaviors
-    ``App::import('Behavior', 'Tree');``
-Helpers
-    ``App::import('Helper', 'Html');``
-Loading from plugins
-    Loading classes in plugins works much the same as loading app and
-    core classes except you must specify the plugin you are loading
-    from::
-
-        <?php
-        App::import('Model', 'PluginName.Comment');
-
-To load ``APP/Plugin/PluginName/Vendor/flickr/flickr.php``::
-
-    <?php
-    App::import('Vendor', 'PluginName.flickr/flickr');
+When you load the replaced files, the app/Lib files will be loaded instead of
+the built-in core classes.
 
 Loading Vendor Files
 --------------------

@@ -21,11 +21,63 @@ methods from a public scope, you will encounter errors.
 While this does not really constitute a large framework change, it means that
 access to tighter visibility methods and variables is now not possible.
 
-File naming and class loading
-=============================
+File and Folder naming
+======================
 
-Changes in file naming, folder structure and class loading are summarized int
-the 2.0 Class loading page.
+In CakePHP 2.0 we rethought the way we are structuring our files and folders.
+Given that PHP 5.3 is supporting namespaces we decided to prepare our code base
+for adopting in a near future this PHP version, so we adopted the
+http://groups.google.com/group/php-standards/web/psr-0-final-proposal. At first
+we glanced at the internal structure of CakePHP 1.3 and realized that after all
+this year there was no clear organization in the files, nor the directory
+structure really hinted where each file show be located at. With this change we
+would be allowed to experiment a little with (almost) automatic class loading
+for increasing the overall framework performance.
+
+Biggest roadblock for achieving this was maintaining some sort of backwards
+compatibility in the way the classes are loaded right now, and we definitely did
+not want to become a framework of huge class prefixes, having classnames like
+``My_Huge_Class_Name_In_Package``. We decided adopting an strategy of keeping simple
+class names while offering a very intuitive way of declaring class locations and
+clear migration path for future PHP 5.3 version of CakePHP. At first let's
+highlight the main changes in file naming standard we adopted:
+
+File names
+----------
+
+All files containing classes should be named after the class it contains. No
+file should contain more than one classes. So, no more lowercasing and
+underscoring you file names. Here are some examples:
+
+* ``my_things_controller.php`` becomes ``MyThingsController.php``
+* ``form.php`` (a Helper) becomes ``FormHelper.php``
+* ``session.php`` (a Component) becomes ``SessionComponent.php``
+
+This makes a lot more clear an consistent the file naming across applications,
+and also avoid a few edge cases where the file loader would get confused in the
+past and load files it shouldn't.
+
+Folder Names
+------------
+
+Folder containing classes should be also CamelCased, specially when containing
+classes. Think of namespaces, each folder represents a level in the namespacing
+hierarchy, folders that does not contain classes, or does not constitute a
+namespace on themselves, should be lowercased
+
+CameCased Folders
+
+* Controller
+* Controller/Component
+* View/Helper
+* Model/Behavior
+
+lowercased Folder:
+
+* config
+* webroot
+* tmp
+* vendors
 
 Internationalization / Localization
 ===================================
@@ -61,25 +113,13 @@ It is valid for all shortcut translation methods.
 More information about the specifiers, you can see in
 `sprintf <http://php.net/manual/en/function.sprintf.php>`_ function.
 
-Renamed files
-=============
-
--  cake/libs/error.php -> cake/libs/error_handler.php
--  cake/console/error.php -> cake/console/console_error_handler.php
--  cake/dispatcher.php -> cake/libs/dispatcher.php
--  cake/console/libs/* -> cake/console/shells/*
 
 Class location and constants changed
 ====================================
 
-Bootstrapping CakePHP no longer uses PHP's ``include_path`` by default any more.
-Instead you should define ``CAKE_CORE_INCLUDE_PATH`` in
-``app/webroot/index.php``, and ``app/webroot/test.php``, or use symlinks if you
-have CakePHP in a shared directory. You can also use bake to generate projects
-with all the paths setup. This change was done primarily to make the
-``APP_PATH`` and ``CORE_PATH`` constants have consistent values between the web
-and console environments. You can still use PHP's include_path by setting
-``CAKE_CORE_INCLUDE_PATH`` to an empty value.
+The constants ``APP_PATH`` and ``CORE_PATH``
+have consistent values between the web and console environments. In previous
+versions of CakePHP these values changed dependant on your environment.
 
 Basics.php
 ==========
@@ -106,8 +146,16 @@ Removed Constants
 A number of constants were removed, as they were no longer accurate, or
 duplicated.
 
-- CONTROLLERS
-- ... more needed ...
+* CONTROLLERS
+* COMPONENTS
+* MODELS
+* BEHAVIORS
+* VIEWS
+* HELPERS
+* LAYOUTS
+* ELEMENTS
+* CONFIGS
+* CONSOLE_LIBS
 
 CakeRequest
 ===========
@@ -276,11 +324,154 @@ Lib classes
 App
 ---
 
--  The API for ``App::build()`` has changed to ``App::build($paths, $mode).`` It
-   now allows you to either append, prepend or reset/replace existing paths. The
-   $mode param can take any of the following 3 values: App::APPEND,
-   App::PREPEND, ``App::RESET``. The default behavior of the function remains
-   same (ie. Prepending new paths to existing list).
+The API for ``App::build()`` has changed to ``App::build($paths, $mode).`` It
+now allows you to either append, prepend or reset/replace existing paths. The
+$mode param can take any of the following 3 values: App::APPEND,
+App::PREPEND, ``App::RESET``. The default behavior of the function remains
+same (ie. Prepending new paths to existing list).
+
+App::path()
+~~~~~~~~~~~
+
+* Now supports plugins, App::path('Controller', 'Users') will return the folder
+  location the controllers in the User plugin.
+* Won't core paths anymore, it will
+  only return paths defined in App::build() or default ones in app (or
+  correspondent plugin)
+
+App::build()
+~~~~~~~~~~~~
+
+* Will not merge app patch with core paths anymore
+
+App::objects() :
+~~~~~~~~~~~~~~~~
+
+* Now supports plugins, App::objects('Users.Model') will return the models in
+  plugin Users.
+* Returns array() instead of false for empty results or invalid types.
+* Does not return core objects anymore, App::objects('core') will return array()
+* Returns the complete class name.
+
+App class lost the following properties, use method App::path() to access their value
+
+* App::$models
+* App::$behaviors
+* App::$controllers
+* App::$components
+* App::$datasources
+* App::$libs
+* App::$views
+* App::$helpers
+* App::$plugins
+* App::$vendors
+* App::$locales
+* App::$shells
+
+App::import()
+~~~~~~~~~~~~~
+
+* No longer looks for classes recursively, it stricty uses the values for the
+  paths defined in App::build().
+* Will not be able to load App::import('Component', 'Component') use
+  App::uses('Component', 'Controller');
+* Using App::import('Lib', 'CoreClass') to load core classes is no longer
+  possible.
+* Importing a non-existent file, supplying a wrong type or package name, or null
+  values for $name and $file parameters will result in a false return value.
+* App::import('Core', 'CoreClass') is not loger supported, use App::uses()
+  instead and let the class autoloading do the rest.
+* Loading Vendor files does not look recursively in the vendors folder, it will
+  also not convert anymore the file to underscored as it did on the past.
+
+App::core()
+~~~~~~~~~~~
+
+* First parameter is no longer optional, it will always return one path
+* It can't be used anymore to get the vendors paths
+* It will only accept new style package names
+
+Class loading with App::uses()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Although there has been a huge refactoring in how the classes are loaded, in very 
+few occasions you will need to change your application code respect the way you were 
+used to do it. The biggest change is the introduction of a new method::
+
+    <?php
+    App::uses('AuthComponent', 'Controller/Component');
+
+We decided the function name to emulate PHP 5.3's ``use`` keyword, just as a way
+of declaring where a classname should be located at. The first parameter of
+:php:meth:`App::uses()` is the complete name of the class you intend to load,
+and the second one, the package name (or namespace) where it belongs to. The
+main difference with CakePHP 1.3's :php:meth:`App::import()` is that the former
+won't actually import the class, it will just setup the system so when the class
+is used for the first time it will be located.
+
+Some examples on using :php:meth:`App::uses()` when migrating from
+:php:meth:`App::import()`::
+
+    <?php
+    App::import('Controller', 'Pages');
+    // becomes 
+    App::uses('PagesController', 'Controller');
+
+    App::import('Component', 'Email');
+    // becomes 
+    App::uses('EmailComponent', 'Controller/Component');
+
+    App::import('View', 'Media');
+    // becomes 
+    App::uses('MediaView', 'View');
+
+    App::import('Core', 'Xml');
+    // becomes 
+    App::uses('Xml', 'Utility');
+
+    App::import('Datasource', 'MongoDb.MongoDbSource')
+    // becomes 
+    App::uses('MongoDbSource', 'MongoDb.Model/Datasource')
+
+All classes that were loaded in the past using ``App::import('Core', $class);``
+will need to be loaded using ``App::uses()`` referring to the correct package.
+See the api to locate the class in their new folder. Some examples::
+
+    <?php
+    App::import('Core', 'CakeRoute');
+    // becomes 
+    App::uses('CakeRoute', 'Routing/Route');
+
+    App::import('Core', 'Sanitize');
+    // becomes
+
+    App::uses('Sanitize', 'Utility');
+
+    App::import('Core', 'HttpSocket');
+    // becomes 
+    App::uses('HttpSocket', 'Network/Http');
+
+In contrast to how :php:meth:`App::import()` worked in the past, the new class
+loader will not locate classes recursively. This led to an impressive
+performance gain even on develop mode, at the cost of some seldom used features
+that always caused side effects. To be clear again, the class loader will only
+fetch the classes exactly in the package you told to find it.
+
+App::build() and core paths
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:php:meth:`App::build()` will not merge app paths with core paths anymore.
+
+Examples::
+
+    <?php
+    App::build(array('controllers' => array('/full/path/to/controllers'))) 
+    //becomes 
+    App::build(array('Controller' => array('/full/path/to/Controller')))
+
+    App::build(array('helpers' => array('/full/path/to/controllers'))) 
+    //becomes 
+    App::build(array('View/Helper' => array('/full/path/to/View/Helper')))
 
 CakeLog
 -------
