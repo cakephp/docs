@@ -9,7 +9,11 @@
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.todo', 'sphinxcontrib.phpdomain']
+extensions = [
+    'sphinx.ext.todo',
+    'sphinxcontrib.phpdomain',
+    'config.cakei18n'
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['../_templates']
@@ -35,7 +39,7 @@ copyright = u'2011, CakePHP'
 version = '2.0'
 
 # The full version, including alpha/beta/rc tags.
-release = '2.0.0-alpha'
+release = '2.0.0-beta'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -248,3 +252,6 @@ epub_copyright = u'2011, CakePHP'
 
 # Allow duplicate toc entries.
 #epub_tocdup = True
+
+# Languages available.
+languages = ['en', 'pt', 'es']
