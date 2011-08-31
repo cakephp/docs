@@ -83,7 +83,7 @@
 <div class="related languages">
 <ul>
 {% for lang in languages %}
-	<li class="right">
+	<li>
 		{% if lang == language %}
 		<span class="active">{{ lang }}</span>
 		{% elif has_lang(lang, pagename) %}
@@ -91,7 +91,6 @@
 		{% else %}
 		<span class="disabled">{{ lang }}</span>
 		{% endif %}
-		{% if loop.index != languages|length %} | {% endif %}
 	</li>
 {% endfor %}
 </ul>
