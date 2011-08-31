@@ -85,9 +85,11 @@
 {% for lang in languages %}
 	<li class="right">
 		{% if lang == language %}
-		<span>{{ lang }}</span>
+		<span class="active">{{ lang }}</span>
+		{% elif has_lang(lang, pagename) %}
+		<a href="{{ lang_link(lang, pagename) }}">{{ lang }}</a>
 		{% else %}
-		<a href="{{ langlink(lang, pagename) }}">{{ lang }}</a>
+		<span class="disabled">{{ lang }}</span>
 		{% endif %}
 		{% if loop.index != languages|length %} | {% endif %}
 	</li>

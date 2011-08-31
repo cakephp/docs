@@ -1,5 +1,5 @@
-from sphinx.util.osutil import SEP, os_path, relative_uri
-import pprint
+import os
+from sphinx.util.osutil import SEP
 """
 CakePHP i18n extension.
 
@@ -13,7 +13,7 @@ def setup(app):
     return app
 
 def append_template_ctx(app, pagename, templatename, ctx, event_arg):
-    def langlink(lang, path):
+    def lang_link(lang, path):
         """
         Generates links to other language docs.
         """
@@ -22,7 +22,17 @@ def append_template_ctx(app, pagename, templatename, ctx, event_arg):
             dots.append('..')
         return SEP.join(dots) + SEP + lang + SEP + path + app.builder.link_suffix
 
-    ctx['langlink'] = langlink
-    # pprint.pprint(app.config.__dict__)
+    def has_lang(lang, path):
+        """
+        Check to see if a language file exists for a given path/RST doc.:
+        """
+        possible = '..' + SEP + lang +  SEP + path + app.config.source_suffix
+        full_path = os.path.realpath(os.path.join(os.getcwd(), possible))
+
+        return os.path.isfile(full_path)
+
+    ctx['lang_link'] = lang_link
+    ctx['has_lang'] = has_lang
+
     ctx['languages'] = app.config.languages
     ctx['language'] = app.config.language
