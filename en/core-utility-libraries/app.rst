@@ -83,6 +83,14 @@ Finding paths to packages using App::path()
         // return the component paths in DebugKit
         App::path('Component', 'DebugKit');
 
+.. php:staticmethod:: core($package)
+
+    Used for finding the path to a package inside CakePHP::
+
+        <?php
+        // Get the path to Cache engines.
+        App::core('Cache/Engine');
+
 Adding paths for App to find packages in
 ========================================
 
@@ -143,14 +151,17 @@ Finding which objects CakePHP knows about
     Example usage::
 
         <?php
-        App::objects('plugin'); //returns array('DebugKit', 'Blog', 'User');
-        App::objects('Controller'); //returns array('PagesController', 'BlogController');
+        //returns array('DebugKit', 'Blog', 'User');
+        App::objects('plugin');
 
+        //returns array('PagesController', 'BlogController');
+        App::objects('Controller');
 
     You can also search only within a plugin's objects by using the plugin dot syntax.::
 
         <?php
-        App::objects('MyPlugin.Model'); //returns array('MyPluginPost', 'MyPluginComment');
+        // returns array('MyPluginPost', 'MyPluginComment');
+        App::objects('MyPlugin.Model');
 
     .. versionchanged:: 2.0
 
@@ -159,14 +170,16 @@ Finding which objects CakePHP knows about
        return ``array()``.
     3. Returns the complete class name
 
-
 Locating plugins
 ================
 
 .. php:staticmethod:: pluginPath($plugin)
 
     Plugins can be located with App as well. Using ``App::pluginPath('DebugKit');``
-    for example, will give you the full path to the DebugKit plugin.
+    for example, will give you the full path to the DebugKit plugin::
+
+        <?php
+        $path = App::pluginPath('DebugKit');
 
 Locating themes
 ===============
@@ -239,50 +252,39 @@ When you load the replaced files, the app/Lib files will be loaded instead of
 the built-in core classes.
 
 Loading Vendor Files
---------------------
+====================
 
-The following examples illustrate how to load vendor files from a
-number of path structures. These vendor files could be located in
+Vendor files containing classes can be loaded using ``App::uses()``.
+You might also have vendor files that do not have classes, you can load those
+using ``App::import()``. The following examples illustrate how to load vendor
+files from a number of path structures. These vendor files could be located in
 any of the vendor folders.
 
-Vendor examples
-~~~~~~~~~~~~~~~
-
-To load **vendors/geshi.php**
-
-::
+To load **vendors/geshi.php**::
 
     App::import('Vendor', 'geshi');
 
 .. note::
 
-    The geishi file must be a lower-case file name as Cake will not
+    The geshi file must be a lower-case file name as Cake will not
     find it otherwise.
 
-To load **vendors/flickr/flickr.php**
-
-::
+To load **vendors/flickr/flickr.php**::
 
     App::import('Vendor', 'flickr/flickr');
 
-To load **vendors/some.name.php**
-
-::
+To load **vendors/some.name.php**::
 
     App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));
 
-To load **vendors/services/well.named.php**
-
-::
+To load **vendors/services/well.named.php**::
 
     App::import('Vendor', 'WellNamed', array('file' => 'services'.DS.'well.named.php'));
 
 It wouldn't make a difference if your vendor files are inside your
 /app/vendors directory. Cake will automatically find it.
 
-To load **app/vendors/vendorName/libFile.php**
-
-::
+To load **app/vendors/vendorName/libFile.php**::
 
     App::import('Vendor', 'aUniqueIdentifier', array('file' =>'vendorName'.DS.'libFile.php'));
 
