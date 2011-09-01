@@ -607,6 +607,20 @@ in models or other contexts.  All of its methods are called statically.
 Session configuration has also changed :doc:`<see the session section for more
 information </development/sessions>`
 
+HttpSocket
+----------
+
+- HttpSocket doesn't change the header keys. Following others places in core,
+  the HttpSocket do not change the headers. :rfc:`2616` says that headers are case
+  insensitive, and HttpSocket preserves the values the remote host sends.
+- HttpSocket returns responses as objects now. Instead of arrays, HttpSocket
+  returns instances of HttpResponse.  See the :php:class:`HttpSocket`
+  documentation for more information.
+- Cookies are stored internally by host, not per instance. This means that, if
+  you make two requests to different servers, cookies from domain1 won't be sent
+  to domain2.  This was done to avoid possible security problems.
+
+
 Helpers
 =======
 
