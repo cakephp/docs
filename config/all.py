@@ -39,7 +39,7 @@ copyright = u'2011, CakePHP'
 version = '2.0'
 
 # The full version, including alpha/beta/rc tags.
-release = '2.0.0-beta'
+release = '2.0.0-RC1'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
