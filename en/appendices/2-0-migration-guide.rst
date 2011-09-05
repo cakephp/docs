@@ -997,6 +997,10 @@ Either of these approaches will solve the notice errors.
 The notation of ``find()`` in Cake 1.2 is no longer supported. Finds should use
 notation ``$model->find('type', array(PARAMS))`` as Cake 1.3.
 
+- ``Model::$_findMethods`` is now ``Model::$findMethods``.  This property is now
+  public and can be modified by behaviors.
+
+
 Database objets
 ---------------
 

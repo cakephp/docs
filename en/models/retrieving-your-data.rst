@@ -38,6 +38,11 @@ own model methods
 More information about model callbacks is available
 :doc:`/models/callback-methods`
 
+.. todo::
+
+    There is no content on how to use Model::$findMethods.  That's really bad
+    as custom find methods are the easiest way to make reusable queries.
+
 .. _model-find-first:
 
 find('first')
