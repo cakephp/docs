@@ -1,97 +1,72 @@
 CacheHelper
 ###########
 
-The Cache helper assists in caching entire layouts and views,
-saving time repetitively retrieving data. View Caching in Cake
-temporarily stores parsed layouts and views with the storage engine
-of choice. It should be noted that the Cache helper works quite
-differently than other helpers. It does not have methods that are
-directly called. Instead a view is marked with cache tags
-indicating which blocks of content should not be cached.
+.. php:class:: CacheHelper
 
-When a URL is requested, Cake checks to see if that request string
-has already been cached. If it has, the rest of the url dispatching
-process is skipped. Any nocache blocks are processed normally and
-the view is served. This creates a big savings in processing time
-for each request to a cached URL as minimal code is executed. If
-Cake doesn't find a cached view, or the cache has expired for the
+The Cache helper assists in caching entire layouts and views, saving time
+repetitively retrieving data. View Caching in Cake temporarily stores parsed
+layouts and views as simple PHP + HTML files It should be noted that the Cache
+helper works quite differently than other helpers. It does not have methods that
+are directly called. Instead a view is marked with cache tags indicating which
+blocks of content should not be cached. The CacheHelper then uses helper
+callbacks to process the file and output to generate the cache file.
+
+When a URL is requested, CakePHP checks to see if that request string has already
+been cached. If it has, the rest of the url dispatching process is skipped. Any
+nocache blocks are processed normally and the view is served. This creates a big
+savings in processing time for each request to a cached URL as minimal code is
+executed. If Cake doesn't find a cached view, or the cache has expired for the
 requested URL it continues to process the request normally.
 
-General Caching
-===============
+Using the Helper
+================
 
-Caching is intended to be a means of temporary storage to help
-reduce load on the server. For example you could store the results
-of a time-expensive database query so that it is not required to
-run on every page load.
+There are two steps you have to take before you can use the CacheHelper.  First
+in your ``APP/Config/core.php`` uncomment the Configure write call for
+``Cache.check``. This will tell CakePHP to check for, and generate view cache
+files when handling requests.
 
-With this in mind caching is not permanent storage and should never
-be used to permanently store anything. And only cache things that
-can be regenerated when needed.
+Once you've uncommented the ``Cache.check`` line you will need to add the helper
+to your controller's ``$helpers`` array::
 
-Cache Helper Configuration
-==========================
+    <?php
+    class PostsController extends AppConrtroller {
+        public $helpers = array(
+            'Cache'
+        );
+    }
 
-View Caching and the Cache Helper have several important
-configuration elements. They are detailed below.
+Additional configuration options
+--------------------------------
 
-To use the cache helper in any view or controller, you must first
-uncomment and set ``Configure::write(Cache.check, true)`` in ``core.php`` of
-your app/config folder. If this is not set to true, then the cache
-will not be checked or created.
-
-Caching in the Controller
-=========================
-
-Any controllers that utilize caching functionality need to include
-the CacheHelper in their $helpers array.
-
-::
-
-    var $helpers = array('Cache');
-
-You also need to indicate which actions need caching, and how long
-each action will be cached. This is done through the $cacheAction
-variable in your controllers. $cacheAction should be set to an
+CacheHelper has a few additional configuration options you can use to tune and
+tweak its behavior. This is done through the ``$cacheAction``
+variable in your controllers. ``$cacheAction`` should be set to an
 array which contains the actions you want cached, and the duration
 in seconds you want those views cached. The time value can be
-expressed in a strtotime() format. (ie. "1 hour", or "3 minutes").
+expressed in a ``strtotime()`` format. (ie. "1 hour", or "3 minutes").
 
 Using the example of an ArticlesController, that receives a lot of
-traffic that needs to be cached.
+traffic that needs to be cached::
 
-Cache frequently visited Articles for varying lengths of time
-
-::
-
-    var $cacheAction = array(
-        'view/23' => 21600,
-        'view/48' => 36000,
-        'view/52'  => 48000
+    <?php
+    public $cacheAction = array(
+        'view' => 36000,
+        'index'  => 48000
     );
 
-Remember to use your routes in the $cacheAction if you have any.
+This will cache the view action 10 hours, and the index action 13 hours.  By
+making ``$cacheAction`` a ``strtotime()`` friendly value you can cache every action in the
+controller::
 
-Cache an entire action in this case a large listing of articles
-
-::
-
-    var $cacheAction = array(
-        'archives/' => '60000'
-    );
-
-Cache every action in the controller using a strtotime() friendly
-time to indicate Controller wide caching time.
-
-::
-
-    var $cacheAction = "1 hour";
+    <?php
+    public $cacheAction = "1 hour";
 
 You can also enable controller/component callbacks for cached views
 created with ``CacheHelper``. To do so you must use the array
-format for ``$cacheAction`` and create an array like the following:
-::
+format for ``$cacheAction`` and create an array like the following::
 
+    <?php
     var $cacheAction = array(
         'view' => array('callbacks' => true, 'duration' => 21600),
         'add' => array('callbacks' => true, 'duration' => 36000),
@@ -100,7 +75,7 @@ format for ``$cacheAction`` and create an array like the following:
 
 By setting ``callbacks => true`` you tell CacheHelper that you want
 the generated files to create the components and models for the
-controller. As well as, fire the component initialize, controller
+controller. Additionally, fire the component initialize, controller
 beforeFilter, and component startup callbacks.
 
 .. note::
@@ -117,32 +92,45 @@ For example, certain parts of the page may look different whether a
 user is currently logged in or browsing your site as a guest.
 
 To indicate blocks of content that are *not* to be cached, wrap
-them in ``<cake:nocache> </cake:nocache>`` like so:
+them in ``<!--nocache--> <!--/nocache-->`` like so::
 
-::
-
-    <cake:nocache>
-    <?php if ($session->check('User.name')) : ?>
-        Welcome, <?php echo $session->read('User.name')?>.
+    <!--nocache-->
+    <?php if ($this->Session->check('User.name')) : ?>
+        Welcome, <?php echo h($this->Session->read('User.name')); ?>.
     <?php else: ?>
         <?php echo $html->link('Login', 'users/login')?>
     <?php endif; ?>
-    </cake:nocache>
+    <!--/nocache-->
 
-It should be noted that once an action is cached, the controller
-method for the action will not be called - otherwise what would be
-the point of caching the page. Therefore, it is not possible to
-wrap ``<cake:nocache> </cake:nocache>`` around variables which are
-set from the controller as they will be *null*.
+.. note::
+
+    You cannot use ``nocache`` tags in elements.  Since there are no callbacks
+    around elements, they cannot be cached.
+
+It should be noted that once an action is cached, the controller method for the
+action will not be called.  When a cache file is created, the request object,
+and view variables are serialized with PHP's ``serialize()``.
+
+.. warning::
+
+    If you have view variables that contain un-serializable content such as
+    SimpleXML objects, resource handles, or closures you might not be able to
+    use view caching.
 
 Clearing the Cache
 ==================
 
-It is important to remember that the Cake will clear a cached view
+It is important to remember that the CakePHP will clear a cached view
 if a model used in the cached view is modified. For example, if a
 cached view uses data from the Post model, and there has been an
 INSERT, UPDATE, or DELETE query made to a Post, the cache for that
 view is cleared, and new content is generated on the next request.
+
+.. note::
+
+    This automatic cache clearing requires the controller/model name to be part
+    of the URL. If you've used routing to change your urls this feature will not
+    work.
 
 If you need to manually clear the cache, you can do so by calling
 Cache::clear(). This will clear **all** cached data, excluding
