@@ -29,7 +29,7 @@ Learn about a typical :doc:`CakePHP request
 Controllers
 -----------
 
-Controllers handle requests, and help co-ordinatea and prepare
+Controllers handle requests, and help co-ordinate and prepare
 the response for the client.  Read more about :doc:`/controllers`
 
 Views
