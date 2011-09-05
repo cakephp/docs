@@ -604,7 +604,7 @@ CakeSession is now a fully static class, both ``SessionHelper`` and
 ``SessionComponent`` are wrappers and sugar for it.  It can now easily be used
 in models or other contexts.  All of its methods are called statically.
 
-Session configuration has also changed :doc:`<see the session section for more
+Session configuration has also changed :doc:`see the session section for more
 information </development/sessions>`
 
 HttpSocket
@@ -861,20 +861,20 @@ you update your application.
 Removed methods
 ---------------
 
-* `View::_triggerHelpers()` Use `$this->Helpers->trigger()` instead.  
-* `View::_loadHelpers()` Use `$this->loadHelpers()` instead.  Helpers now lazy
+* ``View::_triggerHelpers()`` Use ``$this->Helpers->trigger()`` instead.  
+* ``View::_loadHelpers()`` Use ``$this->loadHelpers()`` instead.  Helpers now lazy
   load their own helpers now.
 
 Added methods
 -------------
 
-* `View::loadHelper($name, $settings = array());` Load a single helper.
-* `View::loadHelpers()` Loads all the helpers indicated in `View::$helpers`.
+* ``View::loadHelper($name, $settings = array());`` Load a single helper.
+* ``View::loadHelpers()`` Loads all the helpers indicated in ``View::$helpers``.
 
 View->Helpers
 -------------
 
-By default View objects contain a :php:class:`HelperCollection` at `$this->Helpers`.
+By default View objects contain a :php:class:`HelperCollection` at ``$this->Helpers``.
 
 Callback positioning changes
 ----------------------------
@@ -1014,8 +1014,8 @@ notation ``$model->find('type', array(PARAMS))`` as Cake 1.3.
   public and can be modified by behaviors.
 
 
-Database objets
----------------
+Database objects
+----------------
 
 Cake 2.0 introduces some changes to Database objects that should not greatly
 affect backwards compatibility. The biggest one is the adoption of PDO for
