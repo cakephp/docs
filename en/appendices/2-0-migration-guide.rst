@@ -803,6 +803,19 @@ you update your application.
 Controller now defines a maxLimit for pagination. This maximum limit is set to
 100, but can be overridden in the $paginate options.
 
+
+Pagination
+----------
+
+Pagination has traditionally been a single method in Controller, this created a
+number of problems though. Pagination was hard to extend replace or modify. For
+2.0 pagination has been extracted into a component. :php:meth:`Controller::paginate()` still
+exists, and serves as a convenience method for loading and using the
+:php:class:`PaginatorComponent`.
+
+For more information on the new features offered by pagination in 2.0, see the
+:doc:`/core-libraries/components/pagination` documentation.
+
 View
 ====
 
