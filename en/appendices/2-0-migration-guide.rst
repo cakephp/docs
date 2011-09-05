@@ -1004,8 +1004,78 @@ notation ``$model->find('type', array(PARAMS))`` as Cake 1.3.
 Database objets
 ---------------
 
-DBOs were refactored for this version, being the use of PDO the major change.
-Check the DBO changes page for more information.
+Cake 2.0 introduces some changes to Database objects that should not greatly
+affect backwards compatibility. The biggest one is the adoption of PDO for
+handling database connections. If you are using a vanilla installation of PHP 5
+you will already have installed the needed extensions, but you may need to
+activate individual extensions for each driver you wish to use.
+
+Using PDO across all DBOs let us homogenize the code for each one and provide
+more reliable and predictable behavior for all drivers. It also allowed us to
+write more portable and accurate tests for database related code.
+
+The first thing users will probably miss is the "affected rows" and "total rows"
+statistics, as they are not reported due to the more performant and lazy design
+of PDO, there are way to overcome this issue but is very specific to each
+database. Those statistics are not gone, though, but could be missing or even
+inaccurate for some drivers. 
+
+A nice feature added after the PDO adoption is the ability of using prepared
+statements with query placeholders using the native driver if available.
+
+List of Changes
+~~~~~~~~~~~~~~~
+
+* DboMysqli was removed, we will support DboMysql only.
+* API for DboSource::execute has changed, it will now take an array of query
+  values as second parameter::
+
+    <?php
+    public function execute($sql, $params = array(), $options = array())
+
+  became::
+
+    <?php
+    public function execute($sql, $options = array(), $params = array())
+
+  third parameter is meant to receive options for logging, currently it only
+  understands the "log" option.
+
+* DboSource::value() looses it's third parameter, it was not used anyways
+* DboSource::fetchAll() now accepts an array as second parameter, to pass values
+  to be bound to the query, third parameter was dropped. Example::
+
+    <?php
+    $db->fetchAll('SELECT * from users where username = ? AND password = ?', array('jhon', '12345'));
+    $db->fetchAll('SELECT * from users where username = :username AND password = :password', array('username' => 'jhon', 'password' => '12345'));
+
+The PDO driver will automatically escape those values for you.
+
+* Database statistics are collected only if the "fullDebug" property of the
+  correspondent DBO is set to true.
+* New method DboSource::getConnection() will return the PDO object in case you
+  need to talk to the driver directly.
+* Treatment of boolean values changed a bit to make it more cross-database
+  friendly, you may need to change your test cases.
+* Postgresql support was immensely improved, it now correctly creates schemas,
+  truncate tables, and is easier to write tests using it.
+* DboSource::insertMulti() will no longer accept sql string, just pass an array
+  of fields and a nested array of values to insert them all at once
+* TranslateBehavior was refactored to use model virtualFields, this makes the
+  implementation more portable.
+* All tests cases with Mysql related stuff were moved to the correspondent
+  driver test case, this left the DboSourceTest file a bit skinny.
+* Transaction nesting support. Now it is possible to start a transaction several
+  times. It will only be committed if the commit method is called the same
+  amount of times.
+* Sqlite support was greatly improved. The major difference with cake 1.3 is
+  that in will only support Sqlite 3.x . It is a great alternative for
+  development apps, and quick running test cases.
+* Boolean column values will be casted to php native boolean type automatically,
+  so make sure you update you test cases and code if you were expecting the
+  returned value to be a string or an integer: I you had a "published" column in
+  the past using mysql all values returned from a find would be numeric on the
+  past, now they are strict boolean values.
 
 BehaviorCollection
 ------------------

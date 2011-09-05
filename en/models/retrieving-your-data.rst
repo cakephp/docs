@@ -926,3 +926,9 @@ This should generate the following SQL::
 Also, if you need to pass just part of your query as raw SQL as the
 above, datasource **expressions** with raw SQL work for any part of
 the find query.
+
+.. todo::
+
+    2.0 has the ability to use prepared statements and PDO features.
+    Add documentation to that effect.
+
