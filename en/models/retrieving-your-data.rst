@@ -38,10 +38,6 @@ own model methods
 More information about model callbacks is available
 :doc:`/models/callback-methods`
 
-.. todo::
-
-    There is no content on how to use Model::$findMethods.  That's really bad
-    as custom find methods are the easiest way to make reusable queries.
 
 .. _model-find-first:
 
@@ -450,6 +446,16 @@ format returned from a ``find('neighbors')`` call is in the form:
     and next. This function does not honor a model's default recursive
     var. The recursive setting must be passed in the parameters on each
     call.
+
+.. _model-custom-find:
+
+Creating custom find types
+==========================
+
+.. todo::
+
+    There is no content on how to use Model::$findMethods.  That's really bad
+    as custom find methods are the easiest way to make reusable queries.
 
 findAllBy
 =========
