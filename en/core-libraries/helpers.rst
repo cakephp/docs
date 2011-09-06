@@ -310,4 +310,3 @@ each one below.
     helpers/session
     helpers/text
     helpers/time
-    helpers/xml
