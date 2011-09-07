@@ -254,7 +254,7 @@ Our class extends the built-in ``DatabaseSession`` so we don't have to duplicate
 all of its logic and behavior. We wrap each operation with a :php:class:`Cache`
 operation.  This lets us fetch sessions from the fast cache, and not have to
 worry about what happens when we fill the cache.  Using this session handler is
-also easy.  In your :ref:`core.php` make the session block look like the following::
+also easy.  In your ``core.php`` make the session block look like the following::
 
     <?php
     Configure::write('Session', array(

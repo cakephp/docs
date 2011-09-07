@@ -87,7 +87,6 @@ array after the model you wish to configure::
 
 The values of the ``Post`` and ``Author`` keys could contain all the properties
 that a model/key less ``$paginate`` array could.
-Example of syntax using Containable Behavior::
 
 Once the ``$paginate`` variable has been defined, we can call the
 ``paginate()`` method in a controller action. This method will dynamically load
