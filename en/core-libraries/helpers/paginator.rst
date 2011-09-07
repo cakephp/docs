@@ -309,7 +309,7 @@ Sets all the options for the Paginator Helper. Supported options are:
 Using GET parameters for pagination
 -----------------------------------
 
-Normally Pagination in CakePHP uses :term:`named parameters`.  There are times
+Normally Pagination in CakePHP uses :ref:`named-parameters`.  There are times
 you want to use GET parameters instead.  While the main configuration option for
 this feature is in :php:class:`PaginatorComponent`, you have some additional
 control in the view.  You can use ``options()`` to indicate that you want other
