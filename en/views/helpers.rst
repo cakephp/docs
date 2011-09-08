@@ -287,6 +287,8 @@ Callbacks
     Is called after layout rendering is complete. Receives the layout filename as an
     argument.
 
+Core Helpers
+============
 
 :doc:`/core-libraries/helpers/cache`
     Used by the core to cache view content.

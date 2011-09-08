@@ -13,9 +13,6 @@ such as Form, Html, JavaScript and RSS.
 Read :doc:`/views/helpers` to learn more about helpers,
 their api, and how you can create and use your own helpers.
 
-Core Helpers
-============
-
 CakePHP comes with a number of Helpers built-in.  You can find out more about
 each one below.
 
