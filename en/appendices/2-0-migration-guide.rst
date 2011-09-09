@@ -29,7 +29,7 @@ Given that PHP 5.3 is supporting namespaces we decided to prepare our code base
 for adopting in a near future this PHP version, so we adopted the
 http://groups.google.com/group/php-standards/web/psr-0-final-proposal. At first
 we glanced at the internal structure of CakePHP 1.3 and realized that after all
-this year there was no clear organization in the files, nor the directory
+these years there was no clear organization in the files, nor the directory
 structure really hinted where each file show be located at. With this change we
 would be allowed to experiment a little with (almost) automatic class loading
 for increasing the overall framework performance.
@@ -37,7 +37,7 @@ for increasing the overall framework performance.
 Biggest roadblock for achieving this was maintaining some sort of backwards
 compatibility in the way the classes are loaded right now, and we definitely did
 not want to become a framework of huge class prefixes, having classnames like
-``My_Huge_Class_Name_In_Package``. We decided adopting an strategy of keeping simple
+``My_Huge_Class_Name_In_Package``. We decided adopting a strategy of keeping simple
 class names while offering a very intuitive way of declaring class locations and
 clear migration path for future PHP 5.3 version of CakePHP. At first let's
 highlight the main changes in file naming standard we adopted:
