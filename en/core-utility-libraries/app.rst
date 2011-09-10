@@ -230,7 +230,7 @@ Including files with App::import()
     * Importing a non-existent file, supplying a wrong type or package name, or
       null values for ``$name`` and ``$file`` parameters will result in a false return
       value
-    * ``App::import('Core', 'CoreClass')`` is not loger supported, use
+    * ``App::import('Core', 'CoreClass')`` is no longer supported, use
       :php:meth:`App::uses()` instead and let the class autoloading do the rest
     * Loading Vendor files does not look recursively in the vendors folder, it
       will also not convert anymore the file to underscored as it did on the
