@@ -28,60 +28,12 @@ Installing manually
 -------------------
 
 In addition to pear, CakePHP also supports placing the PHPUnit directory inside
-one of your vendors directories along with all its dependencies.
+one of your vendors directories along with all its dependencies.  Doing so is
+generally not recommended as PHPUnit is complicated to install as it is composed
+of many pear packages.  Installing with the pear installer is easier and faster.
 
-To do so, you need downlad a couple of projects and put in your vendors.
-Instruction below::
-
-    Go to http://github.com/sebastianbergmann/phpunit and download the version 3.5.5.
-    Extract the zip/tgz in a temporary directory and move sebastianbergmann*/PHPUnit to YOUR_PROJECT/app/vendors/PHPUnit
-    
-    Go to http://github.com/sebastianbergmann/phpunit-mock-objects and download the version 1.0.3.
-    Extract the zip/tgz in a temporary directory and move sebastianbergmann*/PHPUnit to YOUR_PROJECT/app/vendors/PHPUnit
-    
-    Go to http://github.com/sebastianbergmann/php-code-coverage and download the version 1.0.2.
-    Extract the zip/tgz in a temporary directory and move sebastianbergmann*/PHP to YOUR_PROJECT/app/vendors/PHP
-    
-    Go to http://github.com/sebastianbergmann/php-token-stream and download the version 1.0.1.
-    Extract the zip/tgz in a temporary directory and move sebastianbergmann*/PHP to YOUR_PROJECT/app/vendors/PHP
-    
-    Go to http://github.com/sebastianbergmann/php-timer and download the version 1.0.0.
-    Extract the zip/tgz in a temporary directory and move sebastianbergmann*/PHP to YOUR_PROJECT/app/vendors/PHP
-    
-    Go to http://github.com/sebastianbergmann/php-file-iterator and download the version 1.2.3.
-    Extract the zip/tgz in a temporary directory and move sebastianbergmann*/File to YOUR_PROJECT/app/vendors/File
-    
-    Go to http://github.com/sebastianbergmann/php-text-template and download the version 1.0.0.
-    Extract the zip/tgz in a temporary directory and move sebastianbergmann*/Text to YOUR_PROJECT/app/vendors/Text
-
-To automate this task, you can execute the below commands in \*UNIX/cygwin/mingw.
-
-::
-
-    cd /YOUR_APPLICATION/vendors
-    mkdir -p /tmp/cake_phpunit
-    wget --no-check-certificate https://github.com/sebastianbergmann/phpunit/tarball/3.5.5 -O /tmp/cake_phpunit/phpunit.tgz
-    wget --no-check-certificate https://github.com/sebastianbergmann/phpunit-mock-objects/tarball/1.0.3 -O /tmp/cake_phpunit/mock_objects.tgz
-    wget --no-check-certificate https://github.com/sebastianbergmann/php-code-coverage/tarball/1.0.2 -O /tmp/cake_phpunit/code_coverage.tgz
-    wget --no-check-certificate https://github.com/sebastianbergmann/php-token-stream/tarball/1.0.1 -O /tmp/cake_phpunit/token_stream.tgz
-    wget --no-check-certificate https://github.com/sebastianbergmann/php-timer/tarball/1.0.0 -O /tmp/cake_phpunit/timer.tgz
-    wget --no-check-certificate https://github.com/sebastianbergmann/php-file-iterator/tarball/1.2.3 -O /tmp/cake_phpunit/file_iterator.tgz
-    wget --no-check-certificate https://github.com/sebastianbergmann/php-text-template/tarball/1.0.0 -O /tmp/cake_phpunit/text_template.tgz
-    tar zxvf /tmp/cake_phpunit/phpunit.tgz -C /tmp/cake_phpunit/
-    tar zxvf /tmp/cake_phpunit/mock_objects.tgz -C /tmp/cake_phpunit/
-    tar zxvf /tmp/cake_phpunit/code_coverage.tgz -C /tmp/cake_phpunit/
-    tar zxvf /tmp/cake_phpunit/token_stream.tgz -C /tmp/cake_phpunit/
-    tar zxvf /tmp/cake_phpunit/timer.tgz -C /tmp/cake_phpunit/
-    tar zxvf /tmp/cake_phpunit/file_iterator.tgz -C /tmp/cake_phpunit/
-    tar zxvf /tmp/cake_phpunit/text_template.tgz -C /tmp/cake_phpunit/
-    mv /tmp/cake_phpunit/sebastianbergmann-phpunit-9243529/PHPUnit ./
-    mv /tmp/cake_phpunit/sebastianbergmann-phpunit-mock-objects-3f46dd2/PHPUnit/* ./PHPUnit/
-    mv /tmp/cake_phpunit/sebastianbergmann-php-code-coverage-c45df64/PHP ./
-    mv /tmp/cake_phpunit/sebastianbergmann-php-token-stream-9d3c637/PHP/* ./PHP/
-    mv /tmp/cake_phpunit/sebastianbergmann-php-timer-683d142/PHP/* ./PHP/
-    mv /tmp/cake_phpunit/sebastianbergmann-php-file-iterator-67c4399/File ./
-    mv /tmp/cake_phpunit/sebastianbergmann-php-text-template-c6d79d7/Text ./
-    rm -rf /tmp/cake_phpunit
+If you do wish to install PHPUnit manually, you'll need to place it and all of
+its dependencies inside your applications ``Vendor`` directory.
 
 Differences between SimpleTest
 ==============================
@@ -119,9 +71,7 @@ getTests
 The method ``getTests`` is no longer supported. You can use filters instead. The
 web test runner now takes an additional query string parameter that allows you
 to specify a basic regular expression. This regular expression is used to
-restrict the methods that are run.
-
-::
+restrict the methods that are run::
 
     e.g. filter=myMethod
 
