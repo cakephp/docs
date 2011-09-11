@@ -182,9 +182,41 @@ any changes to help ensure you haven't broken anything.
 Running tests from a browser
 ----------------------------
 
+CakePHP provides a web interface for running tests, so you can execute your
+tests through a browser if you're more comfortable in that environment.  You can
+access the web runner by going to ``http://localhost/your_app/test.php``.  The
+exact location of test.php will change depending on your setup.  But the file is
+at the same level as ``index.php``.
+
+Once you've loaded up the test runner, you can navigate App, Core and Plugin test
+suites.  Clicking an individual test case will run that test and display the
+results.
+
+Viewing code coverage
+~~~~~~~~~~~~~~~~~~~~~
+
+If you have `XDebug <http://xdebug.org>`_ installed, you can view code coverage
+results.  Code coverage is useful for telling you what parts of your code your
+tests do not reach. Coverage is useful for determining where you should add
+tests in the future, and gives you one measurement to track your testing
+progress with.
+
 .. todo::
 
-    Complete this section. Add filtering and coverage reporting.
+    Get an image of code coverage report.
+
+
+Filtering test cases
+~~~~~~~~~~~~~~~~~~~~
+
+When you have larger test cases, you will often want to run a subset of the test
+methods when you are trying to work on a single failing case.  With the
+webrunner you can use a GET parameter to filter test methods::
+
+    /test.php?case=Console/ConsoleOutput&filter=Write
+
+The filter parameter is used as a case-sensitve regular expression for filtering
+which test methods to run.
 
 Running tests from command line
 -------------------------------
@@ -203,48 +235,80 @@ your app directory you can do the following to run tests::
     # Run the configure class test in CakePHP
     ./Console/cake testsuite core Core/Configure
 
-.. todo::
+.. note::
 
-    Add filtering and coverage generation.
+    If you are running tests that interact with the session its generally a good
+    idea to use the ``--stderr`` option.  This will fix issues with tests
+    failing because of headers_sent warnings.
+
+
+Filtering test cases
+~~~~~~~~~~~~~~~~~~~~
+
+When you have larger test cases, you will often want to run a subset of the test
+methods when you are trying to work on a single failing case.  With the
+cli runner you can use an option to filter test methods::
+
+    ./Console/cake testsuite core Core/ConsoleOutput --filter Write
+
+The filter parameter is used as a case-sensitve regular expression for filtering
+which test methods to run.
+
+Generating code coverage
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can generate code coverage reports from the command line using PHPUnit's
+built-in code coverage tools.  PHPUnit will generate a set of static HTML files
+containing the coverage results.  You can generate coverage for a test case by
+doing the following::
+
+    ./Console/cake testsuite app Model/Article --coverage-html webroot/coverage
+
+This will put the coverage results in your application's webroot directory.  You
+should be able to view the results by going to 
+``http://localhost/your_app/coverage``.
 
 Creating test suites
 ====================
 
-If you want several of your test to run at the same time, you can
-try creating a test group. Create a file in **/app/tests/groups/**
-and name it something like **your\_test\_group\_name.group.php**.
-In this file, extend **TestSuite** and import test as follows:
-
-::
+If you want several of your tests to run at the same time, you can
+creating a test suite. A testsuite is composed of several test cases.
+``CakeTestSuite`` offers a few methods for easily creating test suites based on
+the file system.  If we wanted to create a test suite for all our model tests we
+could would create ``app/Test/Case/AllModelTest.php``. Put the following in it::
 
     <?php
-    class TryGroupTest extends TestSuite {
-      var $label = 'try';
-      function tryGroupTest() {
-        TestManager::addTestCasesFromDirectory($this, APP_TEST_CASES . DS . 'models');
-      }
+    class AllModelTest extends CakeTestSuite {
+        public static function suite() {
+            $suite = new CakeTestSuite('All model tests');
+            $suite->addTestDirectory(TESTS . 'Case' . DS 'Model');
+            return $suite;
+        }
     }
-    ?>
 
 The code above will group all test cases found in the
-``/app/tests/cases/models/`` folder. To add an individual file, use
-``TestManager::addTestFile($this, filename)``.
+``/app/Test/Case/Model/`` folder. To add an individual file, use
+``$suite->addTestFile($filename);``.  You can recursively add a directory
+using::
 
+    <?php
+    $suite->addTestDirectoryRecursive(TESTS . 'Case' . DS . 'Controller');
+
+Would recursively add all test cases in the ``app/Test/Case/Controller``
+directory.
 
 Fixtures
 ========
 
 When testing code that depends on models and the database, one can use
-**fixtures** as a way to generate temporary data tables loaded with
-sample data that can be used by the test. The benefit of using
-fixtures is that your test has no chance of disrupting live
-application data. In addition, you can begin testing your code
-prior to actually developing live content for an application.
+**fixtures** as a way to generate temporary data tables loaded with sample data
+that can be used by the test. The benefit of using fixtures is that your test
+has no chance of disrupting live application data. In addition, you can begin
+testing your code prior to actually developing live content for an application.
 
-CakePHP uses the connection named ``$test`` in your
-``app/Config/database.php`` configuration file. If this connection is
-not usable, an exception will be raised and you will not be able to use database
-fixtures.
+CakePHP uses the connection named ``$test`` in your ``app/Config/database.php``
+configuration file. If this connection is not usable, an exception will be
+raised and you will not be able to use database fixtures.
 
 CakePHP performs the following during the course of a fixture based
 test case:
@@ -513,66 +577,64 @@ important to make sure those classes are covered by test cases.
 
 Helper testing is a bit similar to the same approach for
 Components. Suppose we have a helper called CurrencyRendererHelper
-located in ``app/views/helpers/currency_renderer.php`` with its
+located in ``app/View/Helper/CurrencyRendererHelper.php`` with its
 accompanying test case file located in
-``app/tests/cases/helpers/currency_renderer.test.php``
+``app/Test/Case/Helper/CurrencyRendererTest.php``
 
-Creating Helper test, part I
-----------------------------
+Creating Helper test
+--------------------
 
 First of all we will define the responsibilities of our
-CurrencyRendererHelper. Basically, it will have two methods just
-for demonstration purpose:
+``CurrencyRendererHelper``. Basically, it will have two methods just for
+demonstration purpose:
 
 function usd($amount)
-This function will receive the amount to render. It will take 2
-decimal digits filling empty space with zeros and prefix 'USD'.
-
+    This function will receive the amount to render. It will take 2
+    decimal digits filling empty space with zeros and prefix 'USD'.
 function euro($amount)
-This function will do the same as usd() but prefix the output with
-'EUR'. Just to make it a bit more complex, we will also wrap the
-result in span tags::
+    This function will do the same as usd() but prefix the output with
+    'EUR'. Just to make it a bit more complex, we will also wrap the
+    result in span tags::
 
-    <span class="euro"></span> 
+        <span class="euro"></span> 
 
 Let's create the tests first::
 
     <?php
-    
-    //Import the helper to be tested.
-    //If the tested helper were using some other helper, like Html, 
-    //it should be impoorted in this line, and instantialized in startTest().
-    App::import('Helper', 'CurrencyRenderer');
+    // Import the helper to be tested.
+    App::uses('CurrencyRenderer', 'Helper');
+    App::uses('View', 'View');
     
     class CurrencyRendererTest extends CakeTestCase {
         private $currencyRenderer = null;
     
         //Here we instantiate our helper, and all other helpers we need.
-        public function startTest() {
-            $this->currencyRenderer = new CurrencyRendererHelper();
+        public function setUp() {
+            parent::setUp();
+            $view = new View();
+            $this->currencyRenderer = new CurrencyRendererHelper($view);
         }
     
-        //testing usd() function.
+        // testing usd() function.
         public function testUsd() {
-            $this->assertEqual('USD 5.30', $this->currencyRenderer->usd(5.30));
+            $this->assertEquals('USD 5.30', $this->currencyRenderer->usd(5.30));
+
             //We should always have 2 decimal digits.
-            $this->assertEqual('USD 1.00', $this->currencyRenderer->usd(1));
-            $this->assertEqual('USD 2.05', $this->currencyRenderer->usd(2.05));
+            $this->assertEquals('USD 1.00', $this->currencyRenderer->usd(1));
+            $this->assertEquals('USD 2.05', $this->currencyRenderer->usd(2.05));
+
             //Testing the thousands separator
-            $this->assertEqual('USD 12,000.70', $this->currencyRenderer->usd(12000.70));
+            $this->assertEquals('USD 12,000.70', $this->currencyRenderer->usd(12000.70));
         }
     }
 
-Here, we call ``usd()`` with different parameters and tell the test
-suite to check if the returned values are equal to what is
-expected.
+Here, we call ``usd()`` with different parameters and tell the test suite to
+check if the returned values are equal to what is expected.
 
-Executing the test now will result in errors (because
-currencyRendererHelper doesn't even exist yet) showing that we have
-3 fails.
+Executing the test now will result in errors (because currencyRendererHelper
+doesn't even exist yet) showing that we have 3 fails.
 
-Once we know what our method should do, we can write the method
-itself::
+Once we know what our method should do, we can write the method itself::
 
     <?php
     class CurrencyRendererHelper extends AppHelper {
@@ -581,22 +643,18 @@ itself::
         }
     }
 
-Here we set the decimal places to 2, decimal separator to dot,
-thousands separator to comma, and prefix the formatted number with
-'USD' string.
+Here we set the decimal places to 2, decimal separator to dot, thousands
+separator to comma, and prefix the formatted number with 'USD' string.
 
-Save this in app/views/helpers/currency\_renderer.php and execute
-the test. You should see a green bar and messaging indicating 4
-passes.
+Save this in ``app/View/Helper/CurrencyRenderer.php`` and execute the test. You
+should see a green bar and messaging indicating 4 passes.
 
 Testing components
 ==================
 
-Lets assume that we want to test a component called
-TransporterComponent, which uses a model called Transporter to
-provide functionality for other controllers. We will use four
-files:
-
+Lets assume that we want to test a component called TransporterComponent, which
+uses a model called Transporter to provide functionality for other controllers.
+We will use four files:
 
 -  A component called Transporters found in
    **app/controllers/components/transporter.php**
