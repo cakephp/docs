@@ -1,129 +1,274 @@
 Testing
 #######
 
-As of CakePHP 1.2 there is support for a comprehensive testing
-framework built into CakePHP. The framework is an extension of the
-SimpleTest framework for PHP. This section will discuss how to
-prepare for testing and how to build and run your tests.
+CakePHP comes with comprehensive testing support built-in.  CakePHP comes with
+integration for `PHPUnit <http://phpunit.de>`_.  In addition to the features
+offered by PHPUnit, CakePHP offers some additional features to make testing
+easier. This section will cover installing PHPUnit, and getting started with
+Unit Testing, and how you can use the extensions that CakePHP offers.
 
-Preparing for testing
-=====================
+Installing PHPUnit
+==================
 
-Ready to start testing? Good! Lets get going then!
+CakePHP uses PHPUnit as its underlying test framework.  PHPUnit is the de-facto
+standard for unit testing in PHP.  It offers a deep and powerful set of features
+for making sure your code does what you think it does.  PHPUnit can be installed
+through the `pear installer <http://pear.php.net>`_.  To install PHPUnit run the
+following::
 
-Installing SimpleTest
-~~~~~~~~~~~~~~~~~~~~~
+    pear upgrade PEAR
+    pear config-set auto_discover 1
+    pear install pear.phpunit.de/PHPUnit
 
-Installing SimpleTest
-The testing framework provided with CakePHP 1.3 is built upon the
-SimpleTest testing framework. SimpleTest is not shipped with the
-default CakePHP installation, so we need to download it first. You
-can find it here:
-`http://simpletest.sourceforge.net/ <http://simpletest.sourceforge.net/>`_.
+.. note::
 
-Fetch the latest version, and unzip the code to your vendors
-folder, or your app/vendors folder, depending on your preference.
-You should now have a vendors/simpletest directory with all
-SimpleTest files and folders inside. Remember to have a DEBUG level
-of at least 1 in your app/config/core.php file before running any
-tests!
+    Depending on your system's configuration, you make need to run the previous
+    commands with ``sudo``
 
-There is a new version of SimpleTest 1.1alpha that does not work
-with CakePHP. Please use 1.0.1.
+Test database setup
+===================
 
-If you have no test database connection defined in your
-app/config/database.php, test tables will be created with a
-``test_suite_`` prefix. You can create a ``$test`` database
-connection to contain any test tables like the one below::
+Remember to have a debug level of at least 1 in your ``app/Config/core.php`` 
+file before running any tests.  Tests are not accessible via the web runner when
+debug is equal to 0.  Before running any tests you should be sure to add a
+``$test`` database configuration.  This configuration is used by CakePHP for
+fixture tables and data::
 
     <?php
     var $test = array(
-        'driver' => 'mysql',
+        'datasource' => 'Datasource/Mysql',
         'persistent' => false,
         'host' => 'dbhost',
         'login' => 'dblogin',
         'password' => 'dbpassword',
-        'database' => 'databaseName'
+        'database' => 'test_database'
     );
 
-If the test database is available and CakePHP can connect to it,
-all tables will be created in this database.
+.. note::
 
-Running Core test cases
-~~~~~~~~~~~~~~~~~~~~~~~
+    Its a good idea to make the test database and your actual database
+    different databases.  This will prevent any embarrasing mistakes later.
 
-After installing Simpletest, you can run the core test cases. They
-are part of every packaged release and can also be found in the
-`git repository <http://github.com/cakephp/cakephp>`_.
+Checking the test setup
+=======================
 
-The tests can then be accessed by browsing to
-http://your.cake.domain/test.php - depending on how your specific
-setup looks. Try executing one of the core test groups by clicking
-on the corresponding link. Executing a test group might take a
-while, but you should eventually see something like "2/2 test cases
-complete: 49 passes, 0 fails and 0 exceptions.".
+After installing PHPUnit and setting up your ``$test`` database configuration
+you can make sure you're ready to write and run your own tests by running one of
+the core tests. There are two built-in runners for testing, we'll start off by
+using the web runner. The tests can then be accessed by browsing to
+http://localhost/your_app/test.php. You should see a list of the core test
+cases.  Click on the 'AllConfigure' test.  You should see a green bar with some
+additional information about the tests run, and number passed.
 
 Congratulations, you are now ready to start writing tests!
 
-If you run all of the core tests at once or run core test groups
-most of them will fail. This is known by the CakePHP developers and
-is normal so don't panic. Instead, try running each of the core
-test cases individually.
+Test case conventions
+=====================
 
-Testing overview - Unit testing vs. Web testing
-===============================================
+Like most things in CakePHP, test cases have some conventions. concerning
+tests:
 
-The CakePHP test framework supports two types of testing. One is
-Unit Testing, where you test small parts of your code, such as a
-method in a component or an action in a controller. The other type
-of testing supported is Web Testing, where you automate the work of
-testing your application through navigating pages, filling forms,
-clicking links and so on.
+#. PHP files containing tests should be in your
+   ``app/Test/Case/[Type]`` directories.
+#. The filenames of these files should end in ``Test.php`` instead
+   of just .php.
+#. The classes containing tests should extend ``CakeTestCase`` or
+   ``PHPUnit_Framework_TestCase``.
+#. Like other classnames, the test case classnames should match the filename.
+   ``RouterTest.php`` should contain ``class RouterTest extends CakeTestCase``.
+#. The name of any method containing a test (i.e. containing an
+   assertion) should begin with ``test``, as in ``testPublished()``.
+   You can also use the ``@test`` annotation to mark methods as test methods.
+
+When you have created a test case, you can execute it by browsing
+to ``http://localhost/you_app/test.php`` (depending on
+how your specific setup looks). Click App test cases, and
+then click the link to your specific file.  You can run tests from the command
+line using the testsuite shell::
+
+    ./Console/cake testsuite app Model/Post
+
+For example, would run the tests for your Post model.
+
+Creating your first test case
+=============================
+
+In the following example, we'll create a test case for a very simple helper
+method.  The helper we're going to test will be formatting progress bar HTML.
+Our helper looks like::
+
+    <?php
+    class ProgressHelper extends AppHelper {
+        public function bar($value) {
+            $width = round($value / 100) * 100;
+            return sprintf(
+                '<div class="progress-container">
+                    <div class="progress-bar" style="width: %s%%"></div>
+                </div>', $width);
+        }
+    }
+
+This is a very simple example, but it will be useful to show how you can create
+a simple test case.  After creating and saving our helper, we'll create the test
+case file in ``app/Test/Case/View/Helper/ProgressHelperTest.php``.  In that file
+we'll start with the following::
+
+    <?php
+    App::uses('ProgressHelper', 'View/Helper');
+    App::uses('View', 'View');
+
+    class ProgressHelperTest extends CakeTestCase {
+        public function setUp() {
+        
+        }
+
+        public function testBar() {
+
+        }
+    }
+
+We'll flesh out this skeleton in a minute.  We've added two methods to start
+with.  First is ``setUp()``.  This method is called before every *test* method
+in a test case class.  Setup methods should initialze the objects needed for the
+test, and do any configuration needed.  In our setup method we'll add the
+following::
+
+    <?php
+    public function setUp() {
+        parent::setUp();
+        $View = new View();
+        $this->Progress = new ProgresHelper($View);
+    }
+
+Calling the parent method is important in test cases, as CakeTestCase::setUp()
+does a number things like backing up the values in :php:class:`Configure` and,
+storing the paths in :php:class:`App`.
+
+Next, we'll fill out the test method.  We'll use some assertions to ensure that
+our code creates the output we expect::
+
+    <?php
+    public funtion testBar() {
+        $result = $this->Progress->bar(90);
+        $this->assertContains('width: 90%', $result);
+        $this->assertContains('progress-bar', $result);
+
+        $result = $this->Progress->bar(33.3333333);
+        $this->assertContains('width: 33%', $result);
+    }
+
+The above test is a simple one but shows the potential benefit of using test
+cases.  We use ``assertContains()`` to ensure that our helper is returning a
+string that contains the content we expect.  If the result did not contain the
+expected content the test would fail, and we would know that our code is
+incorrect. 
+
+By using test cases you can easily describe the relationship between a set of
+known inputs and their expected output.  This helps you be more confident of the
+code you're writing as you can easily check that the code you wrote fulfills the
+expectations and assertions your tests make.  Additionally because tests are
+code, they are easy to re-run whenever you make a change.  This helps prevent
+the creation of new bugs.
+
+.. _running-tests:
+
+Running tests
+=============
+
+Once you have PHPUnit installed and some test cases written, you'll want to run
+the test cases very frequently.  Its a good idea to run tests before committing
+any changes to help ensure you haven't broken anything.
+
+Running tests from a browser
+----------------------------
+
+.. todo::
+
+    Complete this section. Add filtering and coverage reporting.
+
+Running tests from command line
+-------------------------------
+
+CakePHP provides a ``testsuite`` shell for running tests.  You can run app, core
+and plugin tests easily using the testsuite shell.  It accepts all the arguments
+you would expect to find on the normal PHPUnit command line tool as well. From
+your app directory you can do the following to run tests::
+
+    # Run a model tests in the app
+    ./Console/cake testsuite app Model/Article
+
+    # Run a component test in a plugin
+    ./Console/cake testsuite DebugKit Controller/Component/ToolbarComponent
+
+    # Run the configure class test in CakePHP
+    ./Console/cake testsuite core Core/Configure
+
+.. todo::
+
+    Add filtering and coverage generation.
+
+Creating test suites
+====================
+
+If you want several of your test to run at the same time, you can
+try creating a test group. Create a file in **/app/tests/groups/**
+and name it something like **your\_test\_group\_name.group.php**.
+In this file, extend **TestSuite** and import test as follows:
+
+::
+
+    <?php
+    class TryGroupTest extends TestSuite {
+      var $label = 'try';
+      function tryGroupTest() {
+        TestManager::addTestCasesFromDirectory($this, APP_TEST_CASES . DS . 'models');
+      }
+    }
+    ?>
+
+The code above will group all test cases found in the
+``/app/tests/cases/models/`` folder. To add an individual file, use
+``TestManager::addTestFile($this, filename)``.
 
 
-Preparing test data
-===================
+Fixtures
+========
 
-When testing code that depends on models and data, one can use
+When testing code that depends on models and the database, one can use
 **fixtures** as a way to generate temporary data tables loaded with
 sample data that can be used by the test. The benefit of using
 fixtures is that your test has no chance of disrupting live
 application data. In addition, you can begin testing your code
 prior to actually developing live content for an application.
 
-CakePHP attempts to use the connection named ``$test`` in your
-app/config/database.php configuration file. If this connection is
-not usable, it will use the ``$default`` database configuration and
-create the test tables in the database defined in that
-configuration. In either case, it will add "test\_suite\_" to your
-own table prefix (if any) to prevent collision with your existing
-tables.
+CakePHP uses the connection named ``$test`` in your
+``app/Config/database.php`` configuration file. If this connection is
+not usable, an exception will be raised and you will not be able to use database
+fixtures.
 
 CakePHP performs the following during the course of a fixture based
 test case:
 
-
-#. Creates tables for each of the fixtures needed
-#. Populates tables with data, if data is provided in fixture
-#. Runs test methods
-#. Empties the fixture tables
-#. Removes fixture tables from database
+#. Creates tables for each of the fixtures needed.
+#. Populates tables with data, if data is provided in fixture.
+#. Runs test methods.
+#. Empties the fixture tables.
+#. Removes fixture tables from database.
 
 Creating fixtures
-~~~~~~~~~~~~~~~~~
+-----------------
 
 When creating a fixture you will mainly define two things: how the
 table is created (which fields are part of the table), and which
-records will be initially populated to the test table. Let's then
+records will be initially populated to the table. Let's 
 create our first fixture, that will be used to test our own Article
-model. Create a file named **article\_fixture.php** in your
-**app/tests/fixtures** directory, with the following content::
+model. Create a file named ``ArticleFixture.php`` in your
+``app/Test/Fixture`` directory, with the following content::
 
-    <?php  
-     class ArticleFixture extends CakeTestFixture { 
-          var $name = 'Article'; 
-           
-          var $fields = array( 
+    <?php
+    class ArticleFixture extends CakeTestFixture { 
+
+          public $fields = array( 
               'id' => array('type' => 'integer', 'key' => 'primary'), 
               'title' => array('type' => 'string', 'length' => 255, 'null' => false), 
               'body' => 'text', 
@@ -131,27 +276,17 @@ model. Create a file named **article\_fixture.php** in your
               'created' => 'datetime', 
               'updated' => 'datetime' 
           ); 
-          var $records = array( 
+          public $records = array( 
               array ('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'), 
               array ('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'), 
               array ('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31') 
           ); 
      } 
-     ?> 
 
-The ``$name`` variable is extremely significant. If you omit it,
-cake will use the wrong table names when it sets up your test
-database, and you'll get strange errors that are difficult to
-debug. If you use PHP 5.2, you might be used to writing model
-classes without ``$name``, but you must remember to include it in
-your fixture files.
-
-We use $fields to specify which fields will be part of this table,
-on how they are defined. The format used to define these fields is
-the same used in the function **generateColumnSchema()** defined on
-Cake's database engine classes (for example, on file
-dbo\_mysql.php.) Let's see the available attributes a field can
-take and their meaning:
+We use ``$fields`` to specify which fields will be part of this table,
+and how they are defined. The format used to define these fields is
+the same used with :php:class:`CakeSchema`.  The keys available for table
+definition are:
 
 type
     CakePHP internal data type. Currently supported: string (maps to
@@ -169,388 +304,206 @@ null
 default
     default value the field takes.
 
-We lastly can set a set of records that will be populated after the
-test table is created. The format is fairly straight forward and
-needs little further explanation. Just keep in mind that each
-record in the $records array must have a key for **every** field
-specified in the $fields array. If a field for a particular record
-needs to have a NULL value, just specify the value of that key as
-NULL.
+We can define a set of records that will be populated after the fixture table is
+created. The format is fairly straight forward, ``$records`` is an array of
+records.  Each item in ``$records`` should be a single row.  Inside each row,
+should be an associative array of the columns and values for the row.  Just keep
+in mind that each record in the $records array must have a key for **every**
+field specified in the ``$fields`` array. If a field for a particular record needs
+to have a NULL value, just specify the value of that key as NULL.
 
 Importing table information and records
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------
 
 Your application may have already working models with real data
-associated to them, and you might decide to test your model with
+associated to them, and you might decide to test your application with
 that data. It would be then a duplicate effort to have to define
 the table definition and/or records on your fixtures. Fortunately,
 there's a way for you to define that table definition and/or
 records for a particular fixture come from an existing model or an
 existing table.
+
 Let's start with an example. Assuming you have a model named
 Article available in your application (that maps to a table named
 articles), change the example fixture given in the previous section
-(**app/tests/fixtures/article\_fixture.php**) to:::
+(``app/Test/Fixture/ArticleFixture.php``) to::
 
     <?php  
     class ArticleFixture extends CakeTestFixture { 
-          var $name = 'Article'; 
-          var $import = 'Article'; 
+        public $import = 'Article'; 
     } 
-    ?> 
-     
 
-This statement tells the test suite to import your table definition
-from the table linked to the model called Article. You can use any
-model available in your application. The statement above does not
-import records, you can do so by changing it to::
+This statement tells the test suite to import your table definition from the
+table linked to the model called Article. You can use any model available in
+your application. The statement will only import the Article schema, and  does
+not import records. To import records you can do the following::
 
-    <?php   
+    <?php
     class ArticleFixture extends CakeTestFixture {
-        var $name = 'Article';
-        var $import = array('model' => 'Article', 'records' => true);  
+        public $import = array('model' => 'Article', 'records' => true);
     }
-    ?> 
 
 If on the other hand you have a table created but no model
 available for it, you can specify that your import will take place
 by reading that table information instead. For example::
 
-     <?php  
-       class ArticleFixture extends CakeTestFixture { 
-              var $name = 'Article'; 
-              var $import = array('table' => 'articles'); 
-       } 
-     ?> 
+    <?php  
+    class ArticleFixture extends CakeTestFixture { 
+        public $import = array('table' => 'articles'); 
+    } 
 
 Will import table definition from a table called 'articles' using
 your CakePHP database connection named 'default'. If you want to
-change the connection to use just do::
+use a different connection use::
 
      <?php  
-       class ArticleFixture extends CakeTestFixture { 
-       var $name = 'Article'; 
-       var $import = array('table' => 'articles', 'connection' => 'other'); 
-       } 
-       ?> 
+     class ArticleFixture extends CakeTestFixture { 
+        public $import = array('table' => 'articles', 'connection' => 'other'); 
+     } 
 
 Since it uses your CakePHP database connection, if there's any
 table prefix declared it will be automatically used when fetching
 table information. The two snippets above do not import records
 from the table. To force the fixture to also import its records,
-change it to::
+change the import to::
 
      <?php  
-       class ArticleFixture extends CakeTestFixture { 
-              var $name = 'Article'; 
-              var $import = array('table' => 'articles', 'records' => true); 
-       } 
-     ?> 
+     class ArticleFixture extends CakeTestFixture { 
+        public $import = array('table' => 'articles', 'records' => true);
+     } 
 
 You can naturally import your table definition from an existing
 model/table, but have your records defined directly on the fixture
 as it was shown on previous section. For example::
 
      <?php
-       class ArticleFixture extends CakeTestFixture {
-              var $name = 'Article';
-              var $import = 'Article';
-
-              var $records = array(
-                  array ('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-                  array ('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-                  array ('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
-              );
+     class ArticleFixture extends CakeTestFixture {
+          public $import = 'Article';
+          public $records = array(
+              array ('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
+              array ('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
+              array ('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+          );
        }
-     ?>
 
-Creating tests
-==============
+Loading fixtures in your test cases
+-----------------------------------
 
-First, lets go through a number of rules, or guidelines, concerning
-tests:
+After you've created your fixtures, you'll want to use them in your test cases.
+In each test case you should load the fixtures you will need.  You should load a
+fixture for every model that will have a query run against it.  To load fixtures
+you define the ``$fixtures`` property in your model::
 
+    <?php
+    class ArticleTest extends CakeTestCase {
+        public $fixtures = array('app.article', 'app.comment');
+    }
 
-#. PHP files containing tests should be in your
-   **app/tests/cases/[some\_folder]**.
-#. The filenames of these files should end in **.test.php** instead
-   of just .php.
-#. The classes containing tests should extend **CakeTestCase** or
-   **CakeWebTestCase**.
-#. The name of any method containing a test (i.e. containing an
-   assertion) should begin with **test**, as in **testPublished()**.
+The above will load the Article and Comment fixtures from the application's
+Fixture directory.  You can also load fixtures from CakePHP core, or plugins::
 
-When you have created a test case, you can execute it by browsing
-to **http://your.cake.domain/cake\_folder/test.php** (depending on
-how your specific setup looks) and clicking App test cases, and
-then click the link to your specific file.
+    <?php
+    class ArticleTest extends CakeTestCase {
+        public $fixtures = array('debug_kit.article', 'core.comment');
+    }
 
-CakeTestCase Callback Methods
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
+name as the prefix, will load the fixture from the named plugin.
 
-If you want to sneak in some logic just before or after an
-individual CakeTestCase method, and/or before or after your entire
-CakeTestCase, the following callbacks are available:
+Testcase lifecycle callbacks
+============================
 
-**start()**
-First method called in a *test case*.
+Test cases have a number of lifecycle callbacks you can use when doing testing:
 
-**end()**
-Last method called in a *test case*.
-
-**startCase()**
-called before a *test case* is started.
-
-**endCase()**
-called after a *test case* has run.
-
-**before($method)**
-Announces the start of a *test method*.
-
-**after($method)**
-Announces the end of a *test method*.
-
-**startTest($method)**
-Called just before a *test method* is executed.
-
-**endTest($method)**
-Called just after a *test method* has completed.
-
-.. todo::
-
-    Update this to reflect PHPUnit's API's
-
+* ``setUp`` is called before every test method.  Should be used to create the
+  objects that are going to be tested, and initialize any data for the test.
+  Always remember to call ``parent::setUp()``
+* ``tearDown`` is called after every test method.  Should be used to cleanup after
+  the test is complete. Always remember to call ``parent::tearDown()``.
+* ``setupBeforeClass`` is called once before test methods in a case are started.
+  This method must be *static*.
+* ``tearDownAfterClass`` is called once after test methods in a case are started.
+  This method must be *static*.
 
 Testing models
 ==============
 
 Let's say we already have our Article model defined on
-app/models/article.php, which looks like this::
+``app/Model/Article.php``, which looks like this::
 
      <?php  
-       class Article extends AppModel { 
-              var $name = 'Article'; 
-               
-              function published($fields = null) { 
-                  $params = array( 
-                        'conditions' => array(
-                              $this->name . '.published' => 1 
-                        ),
-                        'fields' => $fields
-                  ); 
-                   
-                  return $this->find('all',$params); 
-              } 
-       
-       } 
-     ?> 
+     class Article extends AppModel { 
+            public function published($fields = null) { 
+                $params = array( 
+                      'conditions' => array(
+                            $this->name . '.published' => 1 
+                      ),
+                      'fields' => $fields
+                ); 
+                 
+                return $this->find('all',$params); 
+            }
+     
+     } 
 
-We now want to set up a test that will use this model definition,
-but through fixtures, to test some functionality in the model.
-CakePHP test suite loads a very minimum set of files (to keep tests
-isolated), so we have to start by loading our parent model (in this
-case the Article model which we already defined), and then inform
-the test suite that we want to test this model by specifying which
-DB configuration it should use. CakePHP test suite enables a DB
-configuration named **test\_suite** that is used for all models
-that rely on fixtures. Setting $useDbConfig to this configuration
-will let CakePHP know that this model uses the test suite database
-connection.
+We now want to set up a test that will use this model definition, but through
+fixtures, to test some functionality in the model.  CakePHP test suite loads a
+very minimum set of files (to keep tests isolated), so we have to start by
+loading our model - in this case the Article model which we already defined.
 
-CakePHP Models will only use the test\_suite DB config if they rely
-on fixtures in your testcase!
-
-Since we also want to reuse all our existing model code we will
-create a test model that will extend from Article, set $useDbConfig
-and $name appropiately. Let's now create a file named
-**article.test.php** in your **app/tests/cases/models** directory,
-with the following contents::
+Let's now create a file named ``ArticleTest.php`` in your
+``app/Test/Case/Model`` directory, with the following contents::
 
      <?php  
-       App::import('Model','Article'); 
-    
-       
-       class ArticleTestCase extends CakeTestCase { 
-              var $fixtures = array( 'app.article' ); 
-       } 
-     ?> 
+      App::uses('Article', 'Model'); 
+      
+      class ArticleTestCase extends CakeTestCase { 
+            public $fixtures = array('app.article');
+      } 
 
-We have created the ArticleTestCase. In variable **$fixtures** we
-define the set of fixtures that we'll use.
-
-If your model is associated with other models, you will need to
-include ALL the fixtures for each associated model even if you
-don't use them. For example: A hasMany B hasMany C hasMany D. In
-ATestCase you will have to include fixtures for a, b, c and d.
+In our test cases' variable ``$fixtures`` we define the set of fixtures that
+we'll use.  You should remember to include all the fixtures that will have
+queries run aganist them.
 
 Creating a test method
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 Let's now add a method to test the function published() in the
 Article model. Edit the file
-**app/tests/cases/models/article.test.php** so it now looks like
+``app/Test/Case/Model/ArticleTest.php`` so it now looks like
 this::
 
-      <?php
-        App::import('Model', 'Article');
-        
-        class ArticleTestCase extends CakeTestCase {
-            var $fixtures = array( 'app.article' );
-        
-            function testPublished() {
-                $this->Article =& ClassRegistry::init('Article');
-        
-                $result = $this->Article->published(array('id', 'title'));
-                $expected = array(
-                    array('Article' => array( 'id' => 1, 'title' => 'First Article' )),
-                    array('Article' => array( 'id' => 2, 'title' => 'Second Article' )),
-                    array('Article' => array( 'id' => 3, 'title' => 'Third Article' ))
-                );
-        
-                $this->assertEqual($result, $expected);
-            }
+    <?php
+    App::uses('Article', 'Model');
+
+    class ArticleTestCase extends CakeTestCase {
+        public $fixtures = array('app.article');
+
+        public function setup() {
+            parent::setUp();
+            $this->Article = ClassRegistry::init('Article');
         }
-        ?>    
 
-You can see we have added a method called **testPublished()**. We
-start by creating an instance of our fixture based **Article**
-model, and then run our **published()** method. In **$expected** we
-set what we expect should be the proper result (that we know since
-we have defined which records are initally populated to the article
-table.) We test that the result equals our expectation by using the
-**assertEqual** method. See the section Creating Tests for
-information on how to run the test.
+        function testPublished() {
+            $result = $this->Article->published(array('id', 'title'));
+            $expected = array(
+                array('Article' => array( 'id' => 1, 'title' => 'First Article' )),
+                array('Article' => array( 'id' => 2, 'title' => 'Second Article' )),
+                array('Article' => array( 'id' => 3, 'title' => 'Third Article' ))
+            );
 
-Testing controllers
-===================
+            $this->assertEquals($expected, $result);
+        }
+    }
 
-Say you have a typical articles controller, with its corresponding
-model, and it looks like this::
+You can see we have added a method called ``testPublished()``. We start by
+creating an instance of our ``Article`` model, and then run our ``published()``
+method. In ``$expected`` we set what we expect should be the proper result (that
+we know since we have defined which records are initally populated to the
+article table.) We test that the result equals our expectation by using the
+``assertEquals`` method. See the :ref:`running-tests` section for more
+information on how to run your test case.
 
-    <?php 
-    class ArticlesController extends AppController { 
-       var $name = 'Articles'; 
-       var $helpers = array('Ajax', 'Form', 'Html'); 
-       
-       function index($short = null) { 
-         if (!empty($this->data)) { 
-           $this->Article->save($this->data); 
-         } 
-         if (!empty($short)) { 
-           $result = $this->Article->findAll(null, array('id', 
-              'title')); 
-         } else { 
-           $result = $this->Article->findAll(); 
-         } 
-     
-         if (isset($this->params['requested'])) { 
-           return $result; 
-         } 
-     
-         $this->set('title', 'Articles'); 
-         $this->set('articles', $result); 
-       } 
-    } 
-    ?>
-
-Create a file named articles\_controller.test.php in your
-app/tests/cases/controllers directory and put the following
-inside::
-
-    <?php 
-    class ArticlesControllerTest extends CakeTestCase { 
-       function startCase() { 
-         echo '<h1>Starting Test Case</h1>'; 
-       } 
-       function endCase() { 
-         echo '<h1>Ending Test Case</h1>'; 
-       } 
-       function startTest($method) { 
-         echo '<h3>Starting method ' . $method . '</h3>'; 
-       } 
-       function endTest($method) { 
-         echo '<hr />'; 
-       } 
-       function testIndex() { 
-         $result = $this->testAction('/articles/index'); 
-         debug($result); 
-       } 
-       function testIndexShort() { 
-         $result = $this->testAction('/articles/index/short'); 
-         debug($result); 
-       } 
-       function testIndexShortGetRenderedHtml() { 
-         $result = $this->testAction('/articles/index/short', 
-         array('return' => 'render')); 
-         debug(htmlentities($result)); 
-       } 
-       function testIndexShortGetViewVars() { 
-         $result = $this->testAction('/articles/index/short', 
-         array('return' => 'vars')); 
-         debug($result); 
-       } 
-       function testIndexFixturized() { 
-         $result = $this->testAction('/articles/index/short', 
-         array('fixturize' => true)); 
-         debug($result); 
-       } 
-       function testIndexPostFixturized() { 
-         $data = array('Article' => array('user_id' => 1, 'published' 
-              => 1, 'slug'=>'new-article', 'title' => 'New Article', 'body' => 'New Body')); 
-         $result = $this->testAction('/articles/index', 
-         array('fixturize' => true, 'data' => $data, 'method' => 'post')); 
-         debug($result); 
-       } 
-    } 
-    ?> 
-
-The testAction method
-~~~~~~~~~~~~~~~~~~~~~
-
-The new thing here is the **testAction** method. The first argument
-of that method is the Cake url of the controller action to be
-tested, as in '/articles/index/short'.
-
-The second argument is an array of parameters, consisting of:
-
-return
-    Set to what you want returned.
-    Valid values are:
-    
-    -  'vars' - You get the view vars available after executing action
-    -  'view' - You get The rendered view, without the layout
-    -  'contents' - You get the rendered view's complete html,
-       including the layout
-    -  'result' - You get the returned value when action uses
-       $this->params['requested'].
-
-    The default is 'result'.
-fixturize
-    Set to true if you want your models auto-fixturized (so your
-    application tables get copied, along with their records, to test
-    tables so if you change data it does not affect your real
-    application.) If you set 'fixturize' to an array of models, then
-    only those models will be auto-fixturized while the other will
-    remain with live tables. If you wish to use your fixture files with
-    testAction() do not use fixturize, and instead just use fixtures as
-    you normally would.
-method
-    set to 'post' or 'get' if you want to pass data to the controller
-data
-    the data to be passed. Set it to be an associative array consisting
-    of fields => value. Take a look at
-    ``function testIndexPostFixturized()`` in above test case to see
-    how we emulate posting form data for a new article submission.
-
-Pitfalls
-~~~~~~~~
-
-If you use testAction to test a method in a controller that does a
-redirect, your test will terminate immediately, not yielding any
-results.
-See
-`https://trac.cakephp.org/ticket/4154 <https://trac.cakephp.org/ticket/4154>`_
-for a possible fix.
 
 Testing Helpers
 ===============
@@ -565,7 +518,7 @@ accompanying test case file located in
 ``app/tests/cases/helpers/currency_renderer.test.php``
 
 Creating Helper test, part I
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 
 First of all we will define the responsibilities of our
 CurrencyRendererHelper. Basically, it will have two methods just
@@ -655,7 +608,7 @@ files:
    **app/tests/cases/transporter.test.php**
 
 Initializing the component
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------
 
 Since :doc:`/controllers/components`
 we need a controller to access the data in the model.
@@ -680,7 +633,7 @@ and assign values into it like this::
     $this->TransporterComponentTest->startup(&$controller); 
 
 Creating a test method
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 Just create a class that extends CakeTestCase and start writing
 tests!
@@ -710,9 +663,141 @@ tests!
         }
     }
 
+Testing controllers
+===================
 
-Testing plugins
-===============
+Say you have a typical articles controller, with its corresponding
+model, and it looks like this::
+
+    <?php 
+    class ArticlesController extends AppController { 
+       var $name = 'Articles'; 
+       var $helpers = array('Ajax', 'Form', 'Html'); 
+       
+       function index($short = null) { 
+         if (!empty($this->data)) { 
+           $this->Article->save($this->data); 
+         } 
+         if (!empty($short)) { 
+           $result = $this->Article->findAll(null, array('id', 
+              'title')); 
+         } else { 
+           $result = $this->Article->findAll(); 
+         } 
+     
+         if (isset($this->params['requested'])) { 
+           return $result; 
+         } 
+     
+         $this->set('title', 'Articles'); 
+         $this->set('articles', $result); 
+       } 
+    } 
+    ?>
+
+Create a file named articles\_controller.test.php in your
+app/tests/cases/controllers directory and put the following
+inside::
+
+    <?php 
+    class ArticlesControllerTest extends CakeTestCase { 
+       function startCase() { 
+         echo '<h1>Starting Test Case</h1>'; 
+       } 
+       function endCase() { 
+         echo '<h1>Ending Test Case</h1>'; 
+       } 
+       function startTest($method) { 
+         echo '<h3>Starting method ' . $method . '</h3>'; 
+       } 
+       function endTest($method) { 
+         echo '<hr />'; 
+       } 
+       function testIndex() { 
+         $result = $this->testAction('/articles/index'); 
+         debug($result); 
+       } 
+       function testIndexShort() { 
+         $result = $this->testAction('/articles/index/short'); 
+         debug($result); 
+       } 
+       function testIndexShortGetRenderedHtml() { 
+         $result = $this->testAction('/articles/index/short', 
+         array('return' => 'render')); 
+         debug(htmlentities($result)); 
+       } 
+       function testIndexShortGetViewVars() { 
+         $result = $this->testAction('/articles/index/short', 
+         array('return' => 'vars')); 
+         debug($result); 
+       } 
+       function testIndexFixturized() { 
+         $result = $this->testAction('/articles/index/short', 
+         array('fixturize' => true)); 
+         debug($result); 
+       } 
+       function testIndexPostFixturized() { 
+         $data = array('Article' => array('user_id' => 1, 'published' 
+              => 1, 'slug'=>'new-article', 'title' => 'New Article', 'body' => 'New Body')); 
+         $result = $this->testAction('/articles/index', 
+         array('fixturize' => true, 'data' => $data, 'method' => 'post')); 
+         debug($result); 
+       } 
+    } 
+    ?> 
+
+The testAction method
+---------------------
+
+The new thing here is the **testAction** method. The first argument
+of that method is the Cake url of the controller action to be
+tested, as in '/articles/index/short'.
+
+The second argument is an array of parameters, consisting of:
+
+return
+    Set to what you want returned.
+    Valid values are:
+    
+    -  'vars' - You get the view vars available after executing action
+    -  'view' - You get The rendered view, without the layout
+    -  'contents' - You get the rendered view's complete html,
+       including the layout
+    -  'result' - You get the returned value when action uses
+       $this->params['requested'].
+
+    The default is 'result'.
+fixturize
+    Set to true if you want your models auto-fixturized (so your
+    application tables get copied, along with their records, to test
+    tables so if you change data it does not affect your real
+    application.) If you set 'fixturize' to an array of models, then
+    only those models will be auto-fixturized while the other will
+    remain with live tables. If you wish to use your fixture files with
+    testAction() do not use fixturize, and instead just use fixtures as
+    you normally would.
+method
+    set to 'post' or 'get' if you want to pass data to the controller
+data
+    the data to be passed. Set it to be an associative array consisting
+    of fields => value. Take a look at
+    ``function testIndexPostFixturized()`` in above test case to see
+    how we emulate posting form data for a new article submission.
+
+Pitfalls
+--------
+
+If you use testAction to test a method in a controller that does a
+redirect, your test will terminate immediately, not yielding any
+results.
+See
+`https://trac.cakephp.org/ticket/4154 <https://trac.cakephp.org/ticket/4154>`_
+for a possible fix.
+
+
+
+Creating tests for plugins
+==========================
 
 Tests for plugins are created in their own directory inside the
 plugins folder.::
@@ -758,75 +843,9 @@ reference them using 'plugin.pluginName.fixtureName' syntax in the
 $fixtures array.
 
 
-Creating a test
-~~~~~~~~~~~~~~~
-
-In keeping with the other testing conventions, you should create
-your view tests in tests/cases/views. You can, of course, put those
-tests anywhere but following the conventions whenever possible is
-always a good idea. So let's create the file
-tests/cases/views/complete\_web.test.php
-
-First, when you want to write web tests, you must remember to
-extend **CakeWebTestCase** instead of CakeTestCase:
-
-::
-
-    class CompleteWebTestCase extends CakeWebTestCase
-
-If you need to do some preparation before you start the test,
-create a constructor::
-
-    <?php
-    function CompleteWebTestCase(){
-      //Do stuff here
-    }
-
-When writing the actual test cases, the first thing you need to do
-is get some output to look at. This can be done by doing a **get**
-or **post** request, using **get()**or **post()** respectively.
-Both these methods take a full url as the first parameter. This can
-be dynamically fetched if we assume that the test script is located
-under http://your.domain/cake/folder/webroot/test.php by typing::
-
-    <?php
-    $this->baseurl = current(split("webroot", $_SERVER['PHP_SELF']));
-
-You can then do gets and posts using Cake urls, like this::
-
-    <?php
-    $this->get($this->baseurl."/products/index/");
-    $this->post($this->baseurl."/customers/login", $data);
-
-The second parameter to the post method, **$data**, is an
-associative array containing the post data in Cake format::
-
-    <?php
-    $data = array(
-      "data[Customer][mail]" => "user@user.com",
-      "data[Customer][password]" => "userpass");
-
-When you have requested the page you can do all sorts of asserts on
-it, using standard SimpleTest web test methods.
-
-Walking through a page
-~~~~~~~~~~~~~~~~~~~~~~
-
-CakeWebTest also gives you an option to navigate through your page
-by clicking links or images, filling forms and clicking buttons.
-Please refer to the SimpleTest documentation for more information
-on that.
-
-
-Miscellaneous
-=============
-
-.. todo::
-
-    Rewrite.  This is incorrect.
 
 Customizing the test reporter
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
 The standard test reporter is **very** minimalistic. If you want
 more shiny output to impress someone, fear not, it is actually very
@@ -859,7 +878,7 @@ generation. You can use your custom reporter by setting the
 use your custom reporter.
 
 Test Reporter methods
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 Reporters have a number of methods used to generate the various
 parts of a Test suite response.
@@ -900,162 +919,3 @@ paintDocumentEnd()
     Paints the end of the response from the test suite. Used to paint
     things like footer elements in an html page.
 
-Grouping tests
-~~~~~~~~~~~~~~
-
-If you want several of your test to run at the same time, you can
-try creating a test group. Create a file in **/app/tests/groups/**
-and name it something like **your\_test\_group\_name.group.php**.
-In this file, extend **TestSuite** and import test as follows:
-
-::
-
-    <?php
-    class TryGroupTest extends TestSuite {
-      var $label = 'try';
-      function tryGroupTest() {
-        TestManager::addTestCasesFromDirectory($this, APP_TEST_CASES . DS . 'models');
-      }
-    }
-    ?>
-
-The code above will group all test cases found in the
-``/app/tests/cases/models/`` folder. To add an individual file, use
-``TestManager::addTestFile($this, filename)``.
-
-Running tests in the Command Line
-=================================
-
-If you have simpletest installed you can run your tests from the
-command line of your application.
-
-from **app/**
-::
-
-    cake testsuite help
-
-
-::
-
-    Usage: 
-        cake testsuite category test_type file
-            - category - "app", "core" or name of a plugin
-            - test_type - "case", "group" or "all"
-            - test_file - file name with folder prefix and without the (test|group).php suffix
-    
-    Examples: 
-            cake testsuite app all
-            cake testsuite core all
-    
-            cake testsuite app case behaviors/debuggable
-            cake testsuite app case models/my_model
-            cake testsuite app case controllers/my_controller
-    
-            cake testsuite core case file
-            cake testsuite core case router
-            cake testsuite core case set
-    
-            cake testsuite app group mygroup
-            cake testsuite core group acl
-            cake testsuite core group socket
-    
-            cake testsuite bugs case models/bug
-              // for the plugin 'bugs' and its test case 'models/bug'
-            cake testsuite bugs group bug
-              // for the plugin bugs and its test group 'bug'
-    
-    Code Coverage Analysis: 
-    
-    
-    Append 'cov' to any of the above in order to enable code coverage analysis
-
-As the help menu suggests, you'll be able to run all, part, or just
-a single test case from your app, plugin, or core, right from the
-command line.
-
-If you have a model test of **test/models/my\_model.test.php**
-you'd run just that test case by running:
-
-::
-
-    cake testsuite app models/my_model
-
-Test Suite changes in 1.3
-=========================
-
-The TestSuite harness for 1.3 was heavily refactored and partially
-rebuilt. The number of constants and global functions have been
-greatly reduced. Also the number of classes used by the test suite
-has been reduced and refactored. You **must** update
-``app/webroot/test.php`` to continue using the test suite. We hope
-that this will be the last time that a change is required to
-``app/webroot/test.php``.
-
-**Removed Constants**
-
-
--  ``CAKE_TEST_OUTPUT``
--  ``RUN_TEST_LINK``
--  ``BASE``
--  ``CAKE_TEST_OUTPUT_TEXT``
--  ``CAKE_TEST_OUTPUT_HTML``
-
-These constants have all been replaced with instance variables on
-the reporters and the ability to switch reporters.
-
-**Removed functions**
-
-
--  ``CakePHPTestHeader()``
--  ``CakePHPTestSuiteHeader()``
--  ``CakePHPTestSuiteFooter()``
--  ``CakeTestsGetReporter()``
--  ``CakePHPTestRunMore()``
--  ``CakePHPTestAnalyzeCodeCoverage()``
--  ``CakePHPTestGroupTestList()``
--  ``CakePHPTestCaseList()``
-
-These methods and the logic they contained have been
-refactored/rewritten into ``CakeTestSuiteDispatcher`` and the
-relevant reporter classes. This made the test suite more modular
-and easier to extend.
-
-**Removed Classes**
-
-
--  HtmlTestManager
--  TextTestManager
--  CliTestManager
-
-These classes became obsolete as logic was consolidated into the
-reporter classes.
-
-**Modified methods/classes**
-
-The following methods have been changed as noted.
-
-
--  ``TestManager::getExtension()`` is no longer static.
--  ``TestManager::runAllTests()`` is no longer static.
--  ``TestManager::runGroupTest()`` is no longer static.
--  ``TestManager::runTestCase()`` is no longer static.
--  ``TestManager::getTestCaseList()`` is no longer static.
--  ``TestManager::getGroupTestList()`` is no longer static.
-
-**testsuite Console changes**
-
-The output of errors, exceptions, and failures from the testsuite
-console tool have been updated to remove redundant information and
-increase readability of the messages. If you have other tools built
-upon the testsuite console, be sure to update those tools with the
-new formatting.
-
-**CodeCoverageManager changes**
-
-
--  ``CodeCoverageManager::start()``'s functionality has been moved
-   to ``CodeCoverageManager::init()``
--  ``CodeCoverageManager::start()`` now starts coverage generation.
--  ``CodeCoverageManager::stop()`` pauses collection
--  ``CodeCoverageManager::clear()`` stops and clears collected
-   coverage reports.
