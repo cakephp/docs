@@ -1,5 +1,5 @@
 #####
-Blog
+Parte 1: Tutorial para desarrollar el Blog
 #####
 
 Bienvenido a CakePHP. Probablemente estás consultando este tutorial porque quieres aprender cómo funciona CakePHP. Nuestro objetivo es potenciar tu productividad y hacer más divertido el desarrollo de aplicaciones. Esperamos que puedas comprobarlo a medida que vas profundizando en el código.

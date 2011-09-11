@@ -1,5 +1,5 @@
 #################################
-Tutorial para desarrollar el Blog
+Parte 2: Tutorial para desarrollar el Blog
 #################################
 
 Creando un modelo para los artículos (*Post Model*)
