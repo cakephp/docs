@@ -44,7 +44,7 @@ operations. Model descriptions, cached views, and session
 information are just a few examples.
 
 As such, make sure the directory ``/app/tmp`` and all its subdirectories in your cake installation
-is writable by the web server user.
+are writable by the web server user.
 
 Setup
 ============
