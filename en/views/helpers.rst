@@ -1,47 +1,27 @@
 Helpers
 #######
 
+
 Helpers are the component-like classes for the presentation layer
 of your application. They contain presentational logic that is
 shared between many views, elements, or layouts. This chapter will
 show you how to create your own helpers, and outline the basic
 tasks CakePHP’s core helpers can help you accomplish.
 
+Helpers are the component-like classes for the presentation layer
+of your application. They contain presentational logic that is
+shared between many views, elements, or layouts.
+
 CakePHP features a number of helpers that aid in view creation.
 They assist in creating well-formed markup (including forms), aid
 in formatting text, times and numbers, and can even speed up Ajax
-functionality. Here is a summary of the built-in helpers. For more
-information, check out :doc:`/core-libraries/helpers`.
-
-:doc:`/core-libraries/helpers/cache`
-    Used by the core to cache view content.
-:doc:`/core-libraries/helpers/form`
-    Creates HTML forms and form elements that self populate and handle
-    validation problems.
-:doc:`/core-libraries/helpers/html`
-    Convenience methods for crafting well-formed markup. Images, links,
-    tables, header tags and more.
-:doc:`/core-libraries/helpers/js`
-    Used to create Javascript compatible with various Javascript
-    libraries.
-:doc:`/core-libraries/helpers/number`
-    Number and currency formatting.
-:doc:`/core-libraries/helpers/paginator`
-    Model data pagination and sorting.
-:doc:`/core-libraries/helpers/rss`
-    Convenience methods for outputting RSS feed XML data.
-:doc:`/core-libraries/helpers/session`
-    Access for reading session values in views.
-:doc:`/core-libraries/helpers/text`
-    Smart linking, highlighting, word smart truncation.
-:doc:`/core-libraries/helpers/time`
-    Proximity detection (is this next year?), nice string
-    formatting(Today, 10:30 am) and time zone conversion.
+functionality. For more information on the helpers included in CakePHP,
+check out :doc:`/core-libraries/helpers`.
 
 .. _configuring-helpers:
 
-Configuring Helpers
-===================
+Using and Configuring Helpers
+=============================
 
 You configure helpers in CakePHP by making a controller aware of them.  Each
 controller has a :php:attr:`~Controller::$helpers` property that lists the
@@ -51,6 +31,14 @@ the name of the helper to the controller's ``$helpers`` array::
     <?php
     class BakeriesController extends AppController {
         public $helpers = array('Form', 'Html', 'Javascript', 'Time');
+    }
+
+Adding helpers from plugins, uses the :term:`plugin syntax` used elsewhere in
+CakePHP::
+
+    <?php
+    class BakeriesController extends AppController {
+        public $helpers = array('Blog.Comment');
     }
 
 You can also add helpers from within an action, so they will only
@@ -298,3 +286,32 @@ Callbacks
 
     Is called after layout rendering is complete. Receives the layout filename as an
     argument.
+
+Core Helpers
+============
+
+:doc:`/core-libraries/helpers/cache`
+    Used by the core to cache view content.
+:doc:`/core-libraries/helpers/form`
+    Creates HTML forms and form elements that self populate and handle
+    validation problems.
+:doc:`/core-libraries/helpers/html`
+    Convenience methods for crafting well-formed markup. Images, links,
+    tables, header tags and more.
+:doc:`/core-libraries/helpers/js`
+    Used to create Javascript compatible with various Javascript
+    libraries.
+:doc:`/core-libraries/helpers/number`
+    Number and currency formatting.
+:doc:`/core-libraries/helpers/paginator`
+    Model data pagination and sorting.
+:doc:`/core-libraries/helpers/rss`
+    Convenience methods for outputting RSS feed XML data.
+:doc:`/core-libraries/helpers/session`
+    Access for reading session values in views.
+:doc:`/core-libraries/helpers/text`
+    Smart linking, highlighting, word smart truncation.
+:doc:`/core-libraries/helpers/time`
+    Proximity detection (is this next year?), nice string
+    formatting(Today, 10:30 am) and time zone conversion.
+

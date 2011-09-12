@@ -29,7 +29,7 @@ Given that PHP 5.3 is supporting namespaces we decided to prepare our code base
 for adopting in a near future this PHP version, so we adopted the
 http://groups.google.com/group/php-standards/web/psr-0-final-proposal. At first
 we glanced at the internal structure of CakePHP 1.3 and realized that after all
-this year there was no clear organization in the files, nor the directory
+these years there was no clear organization in the files, nor the directory
 structure really hinted where each file show be located at. With this change we
 would be allowed to experiment a little with (almost) automatic class loading
 for increasing the overall framework performance.
@@ -37,7 +37,7 @@ for increasing the overall framework performance.
 Biggest roadblock for achieving this was maintaining some sort of backwards
 compatibility in the way the classes are loaded right now, and we definitely did
 not want to become a framework of huge class prefixes, having classnames like
-``My_Huge_Class_Name_In_Package``. We decided adopting an strategy of keeping simple
+``My_Huge_Class_Name_In_Package``. We decided adopting a strategy of keeping simple
 class names while offering a very intuitive way of declaring class locations and
 clear migration path for future PHP 5.3 version of CakePHP. At first let's
 highlight the main changes in file naming standard we adopted:
@@ -604,7 +604,7 @@ CakeSession is now a fully static class, both ``SessionHelper`` and
 ``SessionComponent`` are wrappers and sugar for it.  It can now easily be used
 in models or other contexts.  All of its methods are called statically.
 
-Session configuration has also changed :doc:`<see the session section for more
+Session configuration has also changed :doc:`see the session section for more
 information </development/sessions>`
 
 HttpSocket
@@ -803,6 +803,19 @@ you update your application.
 Controller now defines a maxLimit for pagination. This maximum limit is set to
 100, but can be overridden in the $paginate options.
 
+
+Pagination
+----------
+
+Pagination has traditionally been a single method in Controller, this created a
+number of problems though. Pagination was hard to extend replace or modify. For
+2.0 pagination has been extracted into a component. :php:meth:`Controller::paginate()` still
+exists, and serves as a convenience method for loading and using the
+:php:class:`PaginatorComponent`.
+
+For more information on the new features offered by pagination in 2.0, see the
+:doc:`/core-libraries/components/pagination` documentation.
+
 View
 ====
 
@@ -848,20 +861,20 @@ you update your application.
 Removed methods
 ---------------
 
-* `View::_triggerHelpers()` Use `$this->Helpers->trigger()` instead.  
-* `View::_loadHelpers()` Use `$this->loadHelpers()` instead.  Helpers now lazy
+* ``View::_triggerHelpers()`` Use ``$this->Helpers->trigger()`` instead.  
+* ``View::_loadHelpers()`` Use ``$this->loadHelpers()`` instead.  Helpers now lazy
   load their own helpers now.
 
 Added methods
 -------------
 
-* `View::loadHelper($name, $settings = array());` Load a single helper.
-* `View::loadHelpers()` Loads all the helpers indicated in `View::$helpers`.
+* ``View::loadHelper($name, $settings = array());`` Load a single helper.
+* ``View::loadHelpers()`` Loads all the helpers indicated in ``View::$helpers``.
 
 View->Helpers
 -------------
 
-By default View objects contain a :php:class:`HelperCollection` at `$this->Helpers`.
+By default View objects contain a :php:class:`HelperCollection` at ``$this->Helpers``.
 
 Callback positioning changes
 ----------------------------
@@ -1001,8 +1014,8 @@ notation ``$model->find('type', array(PARAMS))`` as Cake 1.3.
   public and can be modified by behaviors.
 
 
-Database objets
----------------
+Database objects
+----------------
 
 Cake 2.0 introduces some changes to Database objects that should not greatly
 affect backwards compatibility. The biggest one is the adoption of PDO for

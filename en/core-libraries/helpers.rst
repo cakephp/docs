@@ -1,15 +1,20 @@
 Helpers
 #######
 
-Helpers are the component-like classes for the presentation layer
-of your application. They contain presentational logic that is
-shared between many views, elements, or layouts.
+CakePHP features a number of helpers that aid in view creation.
+They assist in creating well-formed markup (including forms), aid
+in formatting text, times and numbers, and can even speed up Ajax
+functionality. Here is a summary of the built-in helpers. For more
+information, check out :doc:`/core-libraries/helpers`.
 
 This section describes each of the helpers that come with CakePHP
 such as Form, Html, JavaScript and RSS.
 
-Read :ref:`using-helpers` to learn more about
-helpers and how you can build your own helpers.
+Read :doc:`/views/helpers` to learn more about helpers,
+their api, and how you can create and use your own helpers.
+
+CakePHP comes with a number of Helpers built-in.  You can find out more about
+each one below.
 
 .. toctree::
     :maxdepth: 2
@@ -24,4 +29,3 @@ helpers and how you can build your own helpers.
     helpers/session
     helpers/text
     helpers/time
-    helpers/xml
