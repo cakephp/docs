@@ -43,15 +43,6 @@ comprehensive documentation around for all the nitty gritty details
 of the internal workings of the framework. Its a straight forward
 code reference, so bring your propeller hat.
 
-CakeForge
-=========
-
-`http://www.cakeforge.org <http://www.cakeforge.org>`_
-
-CakeForge is another developer resource you can use to host your
-CakePHP projects to share with others. If you’re looking for (or
-want to share) a killer component or a praiseworthy plugin, check
-out CakeForge.
 
 The Test Cases
 ==============
@@ -61,7 +52,7 @@ sufficient, check out the code of the test cases provided with
 CakePHP. They can serve as practical examples for function and
 data member usage for a class.::
 
-    lib/Cake/tests/Case
+    lib/Cake/Test/Case
 
 The IRC channel
 ===============

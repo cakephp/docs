@@ -6,41 +6,74 @@ CakePHP follows the
 software design pattern. Programming using MVC separates your
 application into three main parts:
 
+The Model layer
+================
 
-#. The Model represents the application data
-#. The View renders a presentation of model data
-#. The Controller handles and routes requests made by the client
+The Model layer represents the part of your application that
+implements the business logic. this means that it is responsible
+for retrieving data, converting it into meaningful concepts to your
+application, as well as processing, validating, associating and any
+other task relative to handling this data.
+
+At a first glance, Model objects can be looked at as the first layer
+of interaction with any database you might be using for your application. 
+But in general they stand for the major concepts around which you
+implement your application.
+
+In the case of a social network, the Model layer would take care of
+tasks such as Saving the user data, saving friends associations, storing
+and retrieving user photos, finding new friends for suggestions, etc.
+While the model objects can be thought as "Friend", "User", "Comment", "Photo"
+
+The View layer
+===============
+
+The View renders a presentation of modeled data. Being separated form the
+Model objects, it is responsible got using the information it has available
+to produce any presentational interface your application might need.
+
+For example, as the Model layer returns a set of data, the view would use it
+to render a HTML page containing it. Or a XML formatted result for others to
+consume.
+
+The View layer is not only limited to HTML or text representation of the data,
+it can be used to deliver a wide variety of formats depending on your needs,
+such as videos, music, documents and any other format you can think of.
+
+The Controller layer
+====================
+
+The Controller layer handles requests from users. It's responsible for rendering
+back a response with the aid of both the Model and the View Layer.
+
+Controllers can be seen as managers taking care that all needed resources for
+completing a task are delegated to the correct workers. It waits for petitions
+from clients, check their validity according to authentication or authorization rules,
+delegates data fetching or processing to the model, and selects the correct
+type of presentational data the that client is accepting, to finally delegate
+this rendering process to the View layer.
+
+
+CakePHP request cycle
+=====================
 
 |Figure 1|
 Figure: 1: A Basic MVC Request
 
-Figure: 1 shows an example of a bare-bones MVC request in CakePHP.
-To illustrate, assume a client named "Ricardo" just clicked on the
-“Buy A Custom Cake Now!” link on your application’s home page.
+Figure: 1 Shows the typical handling of a client request in CakePHP
 
 
--  Ricardo clicks the link pointing to
-   http://www.example.com/cakes/buy, and his browser makes a request
-   to your web server.
--  The dispatcher checks the request URL (/cakes/buy), and hands
-   the request to the correct controller.
--  The controller performs application specific logic. For example,
-   it may check to see if Ricardo has logged in.
--  The controller also uses models to gain access to the
-   application’s data. Models usually represent database tables, but
-   they could also represent
-   `LDAP <http://en.wikipedia.org/wiki/Ldap>`_ entries,
-   `RSS <http://en.wikipedia.org/wiki/Rss>`_ feeds, or files on the
-   system. In this example, the controller uses a model to fetch
-   Ricardo’s last purchases from the database.
--  Once the controller has worked its magic on the data, it hands
-   it to a view. The view takes this data and gets it ready for
-   presentation to the client. Views in CakePHP are usually in HTML
-   format, but a view could just as easily be a PDF, XML document, or
-   JSON object depending on your needs.
--  Once the view has used the data from the controller to build a
-   fully rendered view, the content of that view is returned to
-   Ricardo’s browser.
+The typical CakePHP request cycle starts with a user requesting a page or
+resource in your application. This request is first processed by a dispatcher
+which will select the correct controller object to handle it.
+
+Once the request arrives the controller, it will communicate with the Model layer
+to process any data fetching or saving operation that might be needed.
+After this communication is over, the controller will proceed at delegating to the
+correct view object the task of generating an output resulting from the data
+provided by the model.
+
+Finally, when this output is generated, it is immediately rendered to the user
 
 Almost every request to your application will follow this basic
 pattern. We'll add some details later on which are specific to
