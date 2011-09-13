@@ -468,7 +468,7 @@ Fixture directory.  You can also load fixtures from CakePHP core, or plugins::
 
     <?php
     class ArticleTest extends CakeTestCase {
-        public $fixtures = array('debug_kit.article', 'core.comment');
+        public $fixtures = array('plugin.debug_kit.article', 'core.comment');
     }
 
 Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
@@ -657,13 +657,13 @@ uses a model called Transporter to provide functionality for other controllers.
 We will use four files:
 
 -  A component called Transporters found in
-   **app/controllers/components/transporter.php**
+   ``app/Controller/Component/TransporterComponent.php``
 -  A model called Transporter found in
-   **app/models/transporter.php**
+   ``app/Model/Transporter.php``
 -  A fixture called TransporterTestFixture found in
-   **app/tests/fixtures/transporter\_fixture.php**
+   ``app/Test/Fixture/TransporterFixture.php``
 -  The testing code found in
-   **app/tests/cases/transporter.test.php**
+   ``app/Test/Case/TransporterTest.php``
 
 Initializing the component
 --------------------------
@@ -671,74 +671,83 @@ Initializing the component
 Since :doc:`/controllers/components`
 we need a controller to access the data in the model.
 
-If the startup() function of the component looks like this:::
+If the ``startup()`` function of the component looks like this::
 
     <?php
-    public function startup(&$controller){ 
-              $this->Transporter = $controller->Transporter;  
-     }
+    public function startup(Controller $controller){ 
+        $this->Transporter = $controller->Transporter;
+    }
 
 then we can just design a really simple fake class::
 
-    class FakeTransporterController {} 
+    <?php
+    class FakeTransporterController {}
 
 and assign values into it like this::
 
     <?php
-    $this->TransporterComponentTest = new TransporterComponent(); 
+    $this->TransporterComponent = new TransporterComponent();
     $controller = new FakeTransporterController(); 
-    $controller->Transporter = new TransporterTest(); 
-    $this->TransporterComponentTest->startup(&$controller); 
+    $controller->Transporter = ClassRegistry::init('Transporter');
+    $this->TransporterComponent->startup($controller);
 
 Creating a test method
 ----------------------
 
-Just create a class that extends CakeTestCase and start writing
-tests!
-
-::
+Just create a class that extends CakeTestCase and start writing tests::
 
     <?php
+    App::uses('TransporterComponent', 'Controller/Component');
+
     class TransporterTestCase extends CakeTestCase {
-        var $fixtures = array('transporter');
-        function testGetTransporter() {
-            $this->TransporterComponentTest = new TransporterComponent();
+        public $fixtures = array('app.transporter');
+
+        public function setUp() {
+            parent::setUp();
+            $this->TransporterComponent = new TransporterComponent();
             $controller = new FakeTransporterController();
-            $controller->Transporter = new TransporterTest();
-            $this->TransporterComponentTest->startup(&$controller);
+            $controller->Transporter = ClassRegistry::init('Transporter');
+            $this->TransporterComponentTest->startup($controller);
+        }
 
-            $result = $this->TransporterComponentTest->getTransporter("12345", "Sweden", "54321", "Sweden");
-            $this->assertEqual($result, 1, "SP is best for 1xxxx-5xxxx");
+        function testGetTransporter() {
+            $result = $this->TransporterComponent->getTransporter("12345", "Sweden", "54321", "Sweden");
+            $this->assertEquals(1, $result, "SP is best for 1xxxx-5xxxx");
 
-            $result = $this->TransporterComponentTest->getTransporter("41234", "Sweden", "44321", "Sweden");
-            $this->assertEqual($result, 2, "WSTS is best for 41xxx-44xxx");
+            $result = $this->TransporterComponent->getTransporter("41234", "Sweden", "44321", "Sweden");
+            $this->assertEquals(2, $result, "WSTS is best for 41xxx-44xxx");
 
-            $result = $this->TransporterComponentTest->getTransporter("41001", "Sweden", "41870", "Sweden");
-            $this->assertEqual($result, 3, "GL is best for 410xx-419xx");
+            $result = $this->TransporterComponent->getTransporter("41001", "Sweden", "41870", "Sweden");
+            $this->assertEquals(3, $result, "GL is best for 410xx-419xx");
 
-            $result = $this->TransporterComponentTest->getTransporter("12345", "Sweden", "54321", "Norway");
-            $this->assertEqual($result, 0, "Noone can service Norway");
+            $result = $this->TransporterComponent->getTransporter("12345", "Sweden", "54321", "Norway");
+            $this->assertEquals(0, $result, "No one can service Norway");
         }
     }
 
 Testing controllers
 ===================
 
-Say you have a typical articles controller, with its corresponding
-model, and it looks like this::
+While you can test controller classes in a similar fashion to Helpers, Models,
+and Components, CakePHP offers a specialized ``ControllerTestCase`` class.
+Using this class as the base class for your controller test cases allows you to
+use ``testAction()`` for simpler test cases.  ``ControllerTestCase`` allows you
+to easily mock out components and models, as well as potentially difficult to
+test methods like :php:meth:`~Controller::redirect()`.
+
+Say you have a typical Articles controller, and its corresponding
+model. The controller code looks like::
 
     <?php 
     class ArticlesController extends AppController { 
-       var $name = 'Articles'; 
-       var $helpers = array('Ajax', 'Form', 'Html'); 
+       public $helpers = array('Form', 'Html'); 
        
        function index($short = null) { 
          if (!empty($this->data)) { 
            $this->Article->save($this->data); 
          } 
          if (!empty($short)) { 
-           $result = $this->Article->findAll(null, array('id', 
-              'title')); 
+           $result = $this->Article->findAll(null, array('id', 'title'));
          } else { 
            $result = $this->Article->findAll(); 
          } 
@@ -751,107 +760,191 @@ model, and it looks like this::
          $this->set('articles', $result); 
        } 
     } 
-    ?>
 
-Create a file named articles\_controller.test.php in your
-app/tests/cases/controllers directory and put the following
-inside::
+Create a file named ``ArticlesControllerTest.php`` in your
+``app/Test/Case/Controller`` directory and put the following inside::
 
-    <?php 
-    class ArticlesControllerTest extends CakeTestCase { 
-       function startCase() { 
-         echo '<h1>Starting Test Case</h1>'; 
-       } 
-       function endCase() { 
-         echo '<h1>Ending Test Case</h1>'; 
-       } 
-       function startTest($method) { 
-         echo '<h3>Starting method ' . $method . '</h3>'; 
-       } 
-       function endTest($method) { 
-         echo '<hr />'; 
-       } 
-       function testIndex() { 
-         $result = $this->testAction('/articles/index'); 
-         debug($result); 
-       } 
-       function testIndexShort() { 
-         $result = $this->testAction('/articles/index/short'); 
-         debug($result); 
-       } 
-       function testIndexShortGetRenderedHtml() { 
-         $result = $this->testAction('/articles/index/short', 
-         array('return' => 'render')); 
-         debug(htmlentities($result)); 
-       } 
-       function testIndexShortGetViewVars() { 
-         $result = $this->testAction('/articles/index/short', 
-         array('return' => 'vars')); 
-         debug($result); 
-       } 
-       function testIndexFixturized() { 
-         $result = $this->testAction('/articles/index/short', 
-         array('fixturize' => true)); 
-         debug($result); 
-       } 
-       function testIndexPostFixturized() { 
-         $data = array('Article' => array('user_id' => 1, 'published' 
-              => 1, 'slug'=>'new-article', 'title' => 'New Article', 'body' => 'New Body')); 
-         $result = $this->testAction('/articles/index', 
-         array('fixturize' => true, 'data' => $data, 'method' => 'post')); 
-         debug($result); 
-       } 
-    } 
-    ?> 
+    <?php
+    class ArticlesControllerTest extends ControllerTestCase {
 
-The testAction method
----------------------
+        function testIndex() {
+            $result = $this->testAction('/articles/index');
+            debug($result);
+        } 
 
-The new thing here is the **testAction** method. The first argument
-of that method is the Cake url of the controller action to be
-tested, as in '/articles/index/short'.
+        function testIndexShort() {
+            $result = $this->testAction('/articles/index/short');
+            debug($result);
+        }
 
-The second argument is an array of parameters, consisting of:
+        function testIndexShortGetRenderedHtml() {
+            $result = $this->testAction(
+               '/articles/index/short',
+                array('return' => 'render')
+            );
+            debug($result);
+        }
 
-return
-    Set to what you want returned.
-    Valid values are:
-    
-    -  'vars' - You get the view vars available after executing action
-    -  'view' - You get The rendered view, without the layout
-    -  'contents' - You get the rendered view's complete html,
-       including the layout
-    -  'result' - You get the returned value when action uses
-       $this->params['requested'].
+        function testIndexShortGetViewVars() {
+            $result = $this->testAction(
+                '/articles/index/short',
+                array('return' => 'vars')
+            );
+            debug($result);
+        }
 
-    The default is 'result'.
-fixturize
-    Set to true if you want your models auto-fixturized (so your
-    application tables get copied, along with their records, to test
-    tables so if you change data it does not affect your real
-    application.) If you set 'fixturize' to an array of models, then
-    only those models will be auto-fixturized while the other will
-    remain with live tables. If you wish to use your fixture files with
-    testAction() do not use fixturize, and instead just use fixtures as
-    you normally would.
-method
-    set to 'post' or 'get' if you want to pass data to the controller
-data
-    the data to be passed. Set it to be an associative array consisting
-    of fields => value. Take a look at
-    ``function testIndexPostFixturized()`` in above test case to see
-    how we emulate posting form data for a new article submission.
+        function testIndexPostData() { 
+            $data = array(
+                'Article' => array(
+                    'user_id' => 1,
+                    'published' => 1,
+                    'slug' => 'new-article',
+                    'title' => 'New Article',
+                    'body' => 'New Body'
+                )
+            );
+            $result = $this->testAction(
+                '/articles/index',
+                array('data' => $data, 'method' => 'post')
+            );
+            debug($result);
+        }
+    }
 
-Pitfalls
---------
+This example shows a few of the ways you can use testAction to test your
+controllers.  The first parameter of ``testAction`` should always be the URL you
+want to test.  CakePHP will create a request and dispatch the controller and
+action.
 
-If you use testAction to test a method in a controller that does a
-redirect, your test will terminate immediately, not yielding any
-results.
-See
-`https://trac.cakephp.org/ticket/4154 <https://trac.cakephp.org/ticket/4154>`_
-for a possible fix.
+Simulating GET requests
+------------------------
 
+As seen in the ``testIndexPostData()`` example above, you can use
+``testAction()`` to test POST actions as well as GET actions.  By supplying the
+``data`` key, the request made to the controller will be POST.  By default all
+requests will be POST requests.  You can simulate a GET request by setting the
+method key::
+
+    <?php
+    function testAdding() {
+        $data = array(
+            'Post' => array(
+                'title' => 'New post',
+                'body' => 'Secret sauce'
+            )
+        );
+        $this->testAction('/posts/add', array('data' => $data, 'method' => 'get'));
+        // some assertions.
+    }
+
+The data key will bet used as query string parameters when simulating a GET
+request.
+
+Choosing the return type
+------------------------
+
+You can choose from a number of ways to inspect the success of your controller
+action. Each offers a different way to ensure your code is doing what you
+expect:
+
+* ``vars`` Get the set view variables.
+* ``view`` Get the rendered view, without a layout.
+* ``contents`` Get the rendered view including the layout.
+* ``result`` Get the return value of the controller action.  Useful 
+  for testing requestAction methods.
+
+The default value is ``result``.  As long as your return type is not ``result``
+you can also access the various other return types as properties in the test
+case::
+
+    <?php
+    public function testIndex() {
+        $this->testAction('/posts/index');
+        $this->assertIsA($this->vars['posts'], 'array');
+    }
+
+
+Using mocks with testAction
+---------------------------
+
+There will be times when you want to replace components or models with either
+partially mocked objects or completely mocked objects.  You can do this by using
+:php:meth:`~ControllerTestCase::generate()`. ``generate()`` takes the hard work
+out of generating mocks on your controller. If you decide to generate a
+controller to be used in testing, you can generate mocked versions of its models
+and components along with it::
+
+    <?php
+    $Posts = $this->generate('Posts', array(
+      'methods' => array(
+        'isAuthorized'
+      ),
+      'models' => array(
+        'Post' => array('save')
+      ),
+      'components' => array(
+        'RequestHandler' => array('isPut'),
+        'Email' => array('send'),
+        'Session'
+    )
+    ));
+
+The above would create a mocked ``PostsController``, stubbing out the ``isAuthorized``
+method. The attached Post model will have ``save()`` stubbed, and the attached
+components would have their respective methods stubbed. You can choose to stub
+an entire class by not passing methods to it, like Session in the example above.
+
+Generated controllers are automatically used as the testing controller to test.
+To enable automatic generation, set the ``autoMock`` variable on the test case to
+true. If ``autoMock`` is false, your original controller will be used in the test.
+
+The response object in the generated controller is always replaced with a mock
+that does not send headers. After using ``generate()`` or ``testAction()`` you
+can access the controller object at ``$this->controller``.
+
+A more complex example
+----------------------
+
+In its simplest form, testAction will run PostsController::index() on your
+testing controller (or an automatically generated one), including all of the
+mocked models and components. The results of the test are stored in the vars,
+contents, view, and return properties. Also available is a headers property which
+gives you access to the headers that would have been sent, allowing you to check
+for redirects::
+
+    <?php
+    function testAdd() {
+        $Posts = $this->generate('Posts', array(
+            'components' => array(
+              'Session',
+              'Email' => array('send')
+            )
+        ));
+        $Posts->Session->expects($this->once())->method('setFlash');
+        $Posts->Email->expects($this->once())->method('send')
+            ->will($this->returnValue(true));
+
+        $this->testAction('/posts/add', array(
+            'data' => array(
+              'Post' => array('name' => 'New Post')
+            )
+        ));
+
+        $this->assertEquals($this->headers['Location'], '/posts/index');
+        $this->assertEquals($this->vars['post']['Post']['name'], 'New Post');
+        $this->assertRegExp('/<html/', $this->contents);
+        $this->assertRegExp('/<form/', $this->view);
+    }
+
+This example shows a slightly more complex use of the new testAction and
+generate() methods.  First, we generate a testing controller and mock the
+:php:class:`SessionComponent`. Now that the SessionComponent is mocked, we have the ability
+to run testing methods on it. Assuming PostsController::add() redirects us to
+index, sends an email and sets a flash message, the test will pass. For the sake
+of example, we also check to see if the layout was loaded by checking the entire
+rendered contents, and checks the view for a form tag. As you can see, your
+freedom to test controllers and easily mock its classes is greatly expanded with
+these changes.
 
 
 Creating tests for plugins
@@ -861,119 +954,38 @@ Tests for plugins are created in their own directory inside the
 plugins folder.::
 
     /app
-         /plugins
-             /pizza
-                 /tests
-                      /cases
-                      /fixtures
-                      /groups
+         /Plugin
+             /Blog
+                 /Test
+                    /Case
+                    /Fixture
 
 They work just like normal tests but you have to remember to use
 the naming conventions for plugins when importing classes. This is
-an example of a testcase for the PizzaOrder model from the plugins
+an example of a testcase for the ``BlogPost`` model from the plugins
 chapter of this manual. A difference from other tests is in the
-first line where 'Pizza.PizzaOrder' is imported. You also need to
-prefix your plugin fixtures with '``plugin.plugin_name.``'.
-
-::
+first line where 'Blog.BlogPost' is imported. You also need to
+prefix your plugin fixtures with ``plugin.blog.blog_post``::
 
     <?php 
-    App::import('Model', 'Pizza.PizzaOrder');
+    App::uses('Blog.BlogPost', 'Model');
 
-    class PizzaOrderCase extends CakeTestCase {
+    class BlogPostTest extends CakeTestCase {
 
-        // Plugin fixtures located in /app/plugins/pizza/tests/fixtures/
-        var $fixtures = array('plugin.pizza.pizza_order');
-        var $PizzaOrderTest;
+        // Plugin fixtures located in /app/Plugin/Blog/Test/Fixture/
+        public $fixtures = array('plugin.pizza.pizza_order');
+        public $PizzaOrderTest;
 
         function testSomething() {
             // ClassRegistry makes the model use the test database connection
-            $this->PizzaOrderTest =& ClassRegistry::init('PizzaOrder');
+            $this->BlogPost = ClassRegistry::init('Blog.BlogPost');
 
             // do some useful test here
-            $this->assertTrue(is_object($this->PizzaOrderTest));
+            $this->assertTrue(is_object($this->BlogPost));
         }
     }
-    ?>
 
 If you want to use plugin fixtures in the app tests you can
-reference them using 'plugin.pluginName.fixtureName' syntax in the
-$fixtures array.
-
-
-
-Customizing the test reporter
------------------------------
-
-The standard test reporter is **very** minimalistic. If you want
-more shiny output to impress someone, fear not, it is actually very
-easy to extend. By creating a new reporter and making a request
-with a matching ``output`` GET parameter you can get test results
-with a custom reporter.
-
-Reporters generate the visible output from the test suite. There
-are two built in reporters: Text and Html. By default all web
-requests use the Html reporter. You can create your own reporters
-by creating files in your app/libs. For example you could create
-the file ``app/libs/test_suite/reporters/my_reporter.php`` and in
-it create the following:
-
-::
-
-    require_once CAKE_TEST_LIB . 'reporter' . DS . 'cake_base_reporter.php';
-    
-    class MyReporter extends CakeBaseReporter {
-        //methods go here.
-    }
-
-Extending ``CakeBaseReporter`` or one of its subclasses is not
-required, but strongly suggested as you may get missing errors
-otherwise. ``CakeBaseReporter`` encapsulates a few common test
-suite features such as test case timing and code coverage report
-generation. You can use your custom reporter by setting the
-``output`` query string parameter to the reporter name minus
-'reporter'. For the example above you would set ``output=my`` to
-use your custom reporter.
-
-Test Reporter methods
----------------------
-
-Reporters have a number of methods used to generate the various
-parts of a Test suite response.
-
-paintDocumentStart()
-    Paints the start of the response from the test suite. Used to paint
-    things like head elements in an html page.
-paintTestMenu()
-    Paints a menu of available test cases.
-testCaseList()
-    Retrieves and paints the list of tests cases.
-groupCaseList()
-    Retrieves and paints the list of group tests.
-paintHeader()
-    Prints before the test case/group test is started.
-paintPass()
-    Prints everytime a test case has passed. Use $this->getTestList()
-    to get an array of information pertaining to the test, and $message
-    to get the test result. Remember to call
-    parent::paintPass($message).
-paintFail()
-    Prints everytime a test case has failed. Remember to call
-    parent::paintFail($message).
-paintSkip()
-    Prints everytime a test case has been skipped. Remember to call
-    parent::paintSkip($message).
-paintException()
-    Prints everytime there is an uncaught exception. Remember to call
-    parent::paintException($message).
-    /dd
-paintError()
-    Prints everytime an error is raised. Remember to call
-    parent::paintError($message).
-paintFooter()
-    Prints when the test case/group test is over, i.e. when all test
-    cases has been executed.
-paintDocumentEnd()
-    Paints the end of the response from the test suite. Used to paint
-    things like footer elements in an html page.
+reference them using ``plugin.pluginName.fixtureName`` syntax in the
+``$fixtures`` array.
 
