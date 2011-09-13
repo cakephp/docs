@@ -5,6 +5,7 @@ Contents
 
    index
    deployment
+   tutorials-and-examples
 
 .. todolist::
 
