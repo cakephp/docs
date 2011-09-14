@@ -138,10 +138,10 @@ httpd.conf rather than a user- or site-specific httpd.conf).
    application by bake)::
 
        <IfModule mod_rewrite.c>
-           RewriteEngine on
-           RewriteRule    ^$    webroot/    [L]
-           RewriteRule    (.*) webroot/$1    [L]
-        </IfModule>
+          RewriteEngine on
+          RewriteRule    ^$    webroot/    [L]
+          RewriteRule    (.*) webroot/$1    [L]
+       </IfModule>
 
    Cake webroot directory (will be copied to your application's web
    root by bake)::
@@ -150,7 +150,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
            RewriteEngine On
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+           RewriteRule ^(.*)$ index.php/$1 [QSA,L]
        </IfModule>
 
    For many hosting services (GoDaddy, 1and1), your web server is
@@ -170,7 +170,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
            RewriteBase /path/to/cake/app
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+           RewriteRule ^(.*)$ index.php/$1 [QSA,L]
        </IfModule>
 
    The details of those changes will depend on your setup, and can
@@ -198,7 +198,7 @@ subdirectories.
             url.rewrite-once = (
                     # if the request is for css|files etc, do not pass on to Cake
                     "/(css|files|img|js)/(.*)" => "/$1/$2",
-                    "^([^\?]*)(\?(.+))?$" => "/index.php?url=$1&$3",
+                    "^([^\?]*)(\?(.+))?$" => "/index.php/$1&$3",
             )
             evhost.path-pattern = "/home/%2-%1/www/www/%4/app/webroot/"
     }
@@ -350,7 +350,7 @@ these steps:
                             <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
                             <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
                   </conditions>
-                  <action type="Rewrite" url="index.php?url={R:1}" appendQueryString="true" />
+                  <action type="Rewrite" url="index.php/{R:1}" appendQueryString="true" />
                 </rule>
                 </rules>
             </rewrite>
