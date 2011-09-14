@@ -43,10 +43,10 @@ Configuring Cache class
 =======================
 
 Configuring the Cache class can be done anywhere, but generally
-you will want to configure Cache in ``app/config/bootstrap.php``.  You
+you will want to configure Cache in ``app/Config/bootstrap.php``.  You
 can configure as many cache configurations as you need, and use any 
 mixture of cache engines.  CakePHP uses two cache configurations internally,
-which are configured in ``app/config/core.php``.
+which are configured in ``app/Config/core.php``.
 
 Using multiple cache configurations can help reduce the
 number of times you need to use :php:func:`Cache::set()` as well as
@@ -76,12 +76,10 @@ Example::
         'path' => CACHE . 'long' . DS,  
     ));
 
-By placing the above code in your ``app/config/bootstrap.php`` you will
+By placing the above code in your ``app/Config/bootstrap.php`` you will
 have two additional Cache configurations. The name of these
 configurations 'short' or 'long' is used as the ``$config``
 parameter for :php:func:`Cache::write()` and :php:func:`Cache::read()`.
-
-
 
 Creating a storage engine for Cache
 ===================================
@@ -104,7 +102,7 @@ dot syntax.::
 .. note::
 
     App and Plugin cache engines should be configured in
-    ``app/config/bootstrap.php``. If you try to configure them in core.php
+    ``app/Config/bootstrap.php``. If you try to configure them in core.php
     they will not work correctly.
 
 Custom Cache engines must extend :php:class:`CacheEngine` which defines
@@ -315,14 +313,10 @@ Cache API
 
 .. php:staticmethod:: clear($check, $config = 'default')
 
-    Destroy all cached values for a cache configuration.
-
-    .. note::
- 
-        Some caching engines, notably ``Apc`` and ``Wincache`` have special
-        behavior. If you have more than one configuration that saves to Apc
-        or Wincache calling ``Cache::clear()`` will clear *all* values stored,
-        not just those for the specified configuration.
+    Destroy all cached values for a cache configuration.  In engines like Apc,
+    Memcache and Wincache, the cache configuration's prefix is used to remove
+    cache entries.  Make sure that different cache configurations have different
+    prefixes.
 
 .. php:staticmethod:: gc($config)
 

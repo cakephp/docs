@@ -27,7 +27,7 @@ single-language application::
 To internationalize your code, all you need to do is to wrap
 strings in :php:func:`__()` like so::
 
-    <h2><?php __('Posts') ?></h2>
+    <h2><?php echo __('Posts') ?></h2>
 
 If you do nothing further, these two code examples are functionally
 identical - they will both send the same content to the browser.
@@ -53,14 +53,14 @@ templates used to create or update your
 the translations. Cake will look for your po files in the following
 location::
 
-    /app/locale/<locale>/LC_MESSAGES/<domain>.po
+    /app/Locale/<locale>/LC_MESSAGES/<domain>.po
 
 The default domain is 'default', therefore your locale folder would
 look something like this::
 
-    /app/locale/eng/LC_MESSAGES/default.po (English)   
-    /app/locale/fre/LC_MESSAGES/default.po (French)   
-    /app/locale/por/LC_MESSAGES/default.po (Portuguese) 
+    /app/Locale/eng/LC_MESSAGES/default.po (English)   
+    /app/Locale/fre/LC_MESSAGES/default.po (French)   
+    /app/Locale/por/LC_MESSAGES/default.po (Portuguese) 
 
 To create or edit your po files it's recommended that you do *not*
 use your favorite editor. To create a po file for the first time it
@@ -78,9 +78,6 @@ The three-character locale codes conform to the
 standard, although if you create regional locales (en\_US, en\_GB,
 etc.) cake will use them if appropriate.
 
-there is a 1014-character limit for each msgstr value (source
-needed).
-
 Remember that po files are useful for short messages, if you find
 you want to translate long paragraphs, or even whole pages - you
 should consider implementing a different solution. e.g.::
@@ -90,7 +87,7 @@ should consider implementing a different solution. e.g.::
     function beforeFilter() {
         $locale = Configure::read('Config.language');
         if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath)) {
-            // e.g. use /app/views/fre/pages/tos.ctp instead of /app/views/pages/tos.ctp
+            // e.g. use /app/View/fre/Pages/tos.ctp instead of /app/View/Pages/tos.ctp
             $this->viewPath = $locale . DS . $this->viewPath;
         }
     }
@@ -108,6 +105,7 @@ Localization in CakePHP
 To change or set the language for your application, all you need to
 do is the following::
 
+    <?php
     Configure::write('Config.language', 'fre');
 
 This tells Cake which locale to use (if you use a regional locale,
@@ -118,10 +116,10 @@ language at any time, e.g. in your bootstrap if you're setting the
 application default language, in your (app) controller beforeFilter
 if it's specific to the request or user, or in fact anytime at all
 before you want a message in a different language.
-
 To set the language for the current user, store the setting in the
 Session object, like this::
 
+    <?php
     $this->Session->write('Config.language', 'fre');
 
 It's a good idea to serve up public content available in multiple
@@ -139,27 +137,9 @@ translation functions all of which are globally available, but
 probably be best utilized in your views. The first parameter of the
 function is used as the msgid defined in the .po files.
 
-If you would like to have all of your validation error messages
-translated by default, a simple solution would be to add the
-following code in you app\_model.php::
-
-    <?php
-    function invalidate($field, $value = true) {
-        return parent::invalidate($field, __($value));
-    }
-
-The i18n console task will not be able to determine the message id
-from the above example, which means you'll need to add the entries
-to your pot file manually (or via your own script). To prevent the
-need to edit your default.po(t) file every time you run the i18n
-console task, you can use a different domain such as::
-
-    <?php
-    function invalidate($field, $value = true) {
-        return parent::invalidate($field, __d('validation_errors', $value));
-    }
-
-This will look for ``$value`` in the validation\_errors.po file.
+CakePHP will automatically assume that all model validation error messages in
+your ``$validate`` array are intended to be localized.  When running the i18n
+shell these strings will also be extracted.
 
 There's one other aspect of localizing your application which is
 not covered by the use of the translate functions, and that is

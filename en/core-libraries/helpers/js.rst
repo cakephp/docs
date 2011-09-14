@@ -1,6 +1,8 @@
 JsHelper
 ########
 
+.. php:class:: JsHelper
+
 Since the beginning CakePHP's support for Javascript has been with
 Prototype/Scriptaculous. While we still think these are an
 excellent Javascript library, the community has been asking for
@@ -30,10 +32,9 @@ Then you must include the library in your page. To include it in
 all pages, add this line to the <head> section of
 ``app/views/layouts/default.ctp`` (copy this file from
 ``cake/libs/view/layouts/default.ctp`` if you have not created your
-own).
+own)::
 
-::
-
+    <?php
     echo $this->Html->script('jquery'); // Include jQuery library
 
 Replace ``jquery`` with the name of your library file (.js will be
@@ -41,10 +42,9 @@ added to the name).
 
 By default scripts are cached, and you must explicitly print out
 the cache. To do this at the end of each page, include this line
-just before the ending ``</body>`` tag
+just before the ending ``</body>`` tag::
 
-::
-
+    <?php
     echo $this->Js->writeBuffer(); // Write cached scripts
 
 .. warning::
@@ -53,11 +53,10 @@ just before the ending ``</body>`` tag
     the helper to function.
 
 Javascript engine selection is declared when you include the helper
-in your controller.
+in your controller::
 
-::
-
-    var $helpers = array('Js' => array('Jquery'));
+    <?php
+    public $helpers = array('Js' => array('Jquery'));
 
 The above would use the Jquery Engine in the instances of JsHelper
 in your views. If you do not declare a specific engine, the jQuery
@@ -77,10 +76,9 @@ you shouldn't get a clash between jQuery and any other library
 That said, there is one caveat:
 **By default, jQuery uses "$" as a shortcut for "jQuery"**
 
-To override the "$" shortcut, use the jQueryObject variable.
+To override the "$" shortcut, use the jQueryObject variable::
 
-::
-
+    <?php
     $this->Js->JqueryEngine->jQueryObject = '$j';
     print $this->Html->scriptBlock('var $j = jQuery.noConflict();', 
         array('inline' => false)); //Tell jQuery to go into noconflict mode
@@ -89,12 +87,10 @@ Using the JsHelper inside customHelpers
 ---------------------------------------
 
 Declare the JsHelper in the ``$helpers`` array in your
-customHelper.
+customHelper::
 
-::
-
-    var $helpers = array('Js');
-
+    <?php
+    public $helpers = array('Js');
 
 .. note::
 
@@ -102,11 +98,10 @@ customHelper.
     helper. Doing that will have no effect.
 
 If you are willing to use an other javascript engine than the
-default, do the helper setup in your controller as follows:
+default, do the helper setup in your controller as follows::
 
-::
-
-    var $helpers = array(
+    <?php
+    public $helpers = array(
         'Js' => array('Prototype'),
         'CustomHelper'
     );
@@ -151,17 +146,13 @@ buffering wholesale with the ``$bufferScripts`` property or setting
 Since most methods in Javascript begin with a selection of elements
 in the DOM, ``$this->Js->get()`` returns a $this, allowing you to
 chain the methods using the selection. Method chaining allows you
-to write shorter, more expressive code.
-
-::
-    
+to write shorter, more expressive code::
+ 
     <?php
     $this->Js->get('#foo')->event('click', $eventCode);
 
 Is an example of method chaining. Method chaining is not possible
-in PHP4 and the above sample would be written like:
-
-::
+in PHP4 and the above sample would be written like::
 
     <?php
     $this->Js->get('#foo');
@@ -197,13 +188,12 @@ allow all scripts generated in layout elements to be output in one
 place. It should be noted that buffered scripts are handled
 separately from included script files.
 
-writeBuffer($options = array())
+.. php:method:: writeBuffer($options = array())
 
 Writes all Javascript generated so far to a code block or caches
 them to a file and returns a linked script.
 
 **Options**
-
 
 -  ``inline`` - Set to true to have scripts output as a script
    block inline if ``cache`` is also true, a script link tag will be
@@ -221,11 +211,11 @@ Creating a cache file with ``writeBuffer()`` requires that
 ``webroot/js`` be world writable and allows a browser to cache
 generated script resources for any page.
 
-buffer($content)
+.. php:method:: buffer($content)
 
 Add ``$content`` to the internal script buffer.
 
-getBuffer($clear = true)
+.. php:method:: getBuffer($clear = true)
 
 Get the contents of the current buffer. Pass in false to not clear
 the buffer at the same time.
@@ -234,7 +224,6 @@ the buffer at the same time.
 
 Some methods in the helpers are buffered by default. The engines
 buffer the following methods by default:
-
 
 -  event
 -  sortable
@@ -245,18 +234,14 @@ buffer the following methods by default:
 Additionally you can force any other method in JsHelper to use the
 buffering. By appending an boolean to the end of the arguments you
 can force other methods to go into the buffer. For example the
-``each()`` method does not normally buffer.
-
-::
+``each()`` method does not normally buffer::
 
     <?php
     $this->Js->each('alert("whoa!");', true);
 
 The above would force the ``each()`` method to use the buffer.
 Conversely if you want a method that does buffer to not buffer, you
-can pass a ``false`` in as the last argument.
-
-::
+can pass a ``false`` in as the last argument::
 
     <?php
     $this->Js->event('click', 'alert("whoa!");', false);
@@ -264,27 +249,22 @@ can pass a ``false`` in as the last argument.
 This would force the event function which normally buffers to
 return its result.
 
-Methods
-=======
+Other Methods
+=============
 
-.. php:class:: JsHelper
-
-    The core Javascript Engines provide the same feature set across all
-    libraries, there is also a subset of common options that are
-    translated into library specific options. This is done to provide
-    end developers with as unified an API as possible. The following
-    list of methods are supported by all the Engines included in the
-    CakePHP core. Whenever you see separate lists for ``Options`` and
-    ``Event Options`` both sets of parameters are supplied in the
-    ``$options`` array for the method.
+The core Javascript Engines provide the same feature set across all
+libraries, there is also a subset of common options that are
+translated into library specific options. This is done to provide
+end developers with as unified an API as possible. The following
+list of methods are supported by all the Engines included in the
+CakePHP core. Whenever you see separate lists for ``Options`` and
+``Event Options`` both sets of parameters are supplied in the
+``$options`` array for the method.
 
 .. php:method:: object($data, $options = array())
 
-    Converts values into JSON. There are a few differences between this
-    method and JavascriptHelper::object(). Most notably there is no
-    affordance for ``stringKeys`` or ``q`` options found in the
-    JavascriptHelper. Furthermore ``$this->Js->object();`` cannot make
-    script tags.
+    Serializes ``$data`` into JSON.  This method is a proxy for ``json_encode()``
+    with a few extra features added via the ``$options`` parameter.
 
     **Options:**
 
@@ -292,7 +272,7 @@ Methods
     -  ``postfix`` - String appended to the returned data.
 
     **Example Use**::
-        
+    
         <?php
         $json = $this->Js->object($data);
 
@@ -780,18 +760,14 @@ following to your controller::
     var $helpers = array('Js');
 
 Next link in the javascript library you want to use. For this
-example we'll be using jQuery.
-
-::
+example we'll be using jQuery::
 
     <?php
     echo $this->Html->script('jquery');
 
 Similar to 1.2 you need to tell the ``PaginatorHelper`` that you
 want to make Javascript enhanced links instead of plain HTML ones.
-To do so you use ``options()``
-
-::
+To do so you use ``options()``::
     
     <?php
     $this->Paginator->options(array(
@@ -826,8 +802,9 @@ Adding effects and transitions
 ------------------------------
 
 Since ``indicator`` is no longer supported, you must add any
-indicator effects yourself.::
+indicator effects yourself::
 
+    <!DOCTYPE html>
     <html>
         <head>
             <?php echo $this->Html->script('jquery'); ?>
@@ -849,9 +826,7 @@ immediately upon the page load. You need to put in this css
 With the above layout, we've included an indicator image file, that
 will display a busy indicator animation that we will show and hide
 with the ``JsHelper``. To do that we need to update our
-``options()`` function.
-
-::
+``options()`` function::
 
     <?php
     $this->Paginator->options(array(

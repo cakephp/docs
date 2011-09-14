@@ -58,7 +58,7 @@ organized::
     }
 
 If you need to enable a helper for all controllers add the name of
-the helper to the ``$helpers`` array in */app/Controller/AppController.php* (or
+the helper to the ``$helpers`` array in ``/app/Controller/AppController.php`` (or
 create if not present). Remember to include the default Html and
 Form helpers::
 
@@ -96,7 +96,7 @@ implmentation::
         );
     }
 
-The above would _alias_ ``MyHtmlHelper`` to ``$this->Html`` in your views.
+The above would *alias* ``MyHtmlHelper`` to ``$this->Html`` in your views.
 
 .. note::
 

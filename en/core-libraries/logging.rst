@@ -27,7 +27,7 @@ plugins. If for example you had a database logger called
 ``DatabaseLogger``. As part of your application it would be placed
 in ``app/Lib/Log/DatabaseLogger.php``. As part of a plugin it
 would be placed in
-``app/plugins/logging_pack/Lib/Log/DatabaseLogger.php``. When
+``app/Plugin/LoggingPack/Lib/Log/DatabaseLogger.php``. When
 configured ``CakeLog`` will attempt to load Configuring log streams
 is done by calling ``CakeLog::config()``. Configuring our
 DataBaseLogger would look like::
@@ -71,11 +71,12 @@ string type of the logged message, core values are ``error``,
 ``warning``, ``info`` and ``debug``. In addition you can define
 your own types by using them when you call ``CakeLog::write``.
 
-It should be noted that you will encounter errors when trying to
-configure application level loggers from ``app/config/core.php``.
-This is because paths are not yet bootstrapped. Configuring of
-loggers should be done in ``app/config/bootstrap.php`` to ensure
-classes are properly loaded.
+.. note::
+
+    Always configure loggers in ``app/Config/bootstrap.php``
+    Trying to use Applicationg or plugin loggers in core.php
+    will cause issues, as application paths are not yet configured.
+
 
 Error and Exception logging
 ===========================

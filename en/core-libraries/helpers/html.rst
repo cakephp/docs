@@ -117,7 +117,7 @@ Inserting Well-Formatted elements
 
     ::
 
-          <?php echo $this->Html->meta(
+        <?php echo $this->Html->meta(
             'favicon.ico',
             '/favicon.ico',
             array('type' => 'icon')
@@ -127,13 +127,13 @@ Inserting Well-Formatted elements
             title="favicon.ico" type="image/x-icon"
             rel="alternate"
         />
- 
+         
         <?php echo $this->Html->meta(
             'Comments',
             '/comments/index.rss',
             array('type' => 'rss'));
         ?>
- 
+        
         //Output (line breaks added)
         <link
             href="http://example.com/comments/index.rss"
@@ -163,7 +163,8 @@ Inserting Well-Formatted elements
     should be set to an array. To output a robots noindex tag use the
     following code::
 
-         echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex')); 
+        <?php
+        echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex')); 
 
 .. php:method:: docType(string $type = 'xhtml-strict')
 
@@ -209,15 +210,16 @@ Inserting Well-Formatted elements
     array passed to the method. Especially handy if your CSS file is
     dynamic.::
 
-        <?php echo $this->Html->style(array(
+        <?php
+        echo $this->Html->style(array(
             'background'     => '#633',
             'border-bottom' => '1px solid #000',
             'padding' => '10px'
-        )); ?>
+        )); 
 
     Will output::
 
-          background:#633; border-bottom:1px solid #000; padding:10px;
+        background:#633; border-bottom:1px solid #000; padding:10px;
 
 .. php:method:: image(string $path, array $options = array())
 
@@ -227,7 +229,8 @@ Inserting Well-Formatted elements
     Creates a formatted image tag. The path supplied should be relative
     to /app/webroot/img/.::
 
-        <?php echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'))?> 
+        <?php
+        echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'))
 
     Will output::
 
@@ -236,10 +239,11 @@ Inserting Well-Formatted elements
     To create an image link specify the link destination using the
     ``url`` option in ``$htmlAttributes``.::
 
-        <?php echo $this->Html->image("recipes/6.jpg", array(
+        <?php
+        echo $this->Html->image("recipes/6.jpg", array(
             "alt" => "Brownies",
             'url' => array('controller' => 'recipes', 'action' => 'view', 6)
-        )); ?>
+        ));
 
     Will output::
 
@@ -257,31 +261,32 @@ Inserting Well-Formatted elements
     specify attributes for the element and whether or not the
     ``$title`` should be escaped.::
 
-        <?php echo $this->Html->link('Enter', '/pages/home', array('class' => 'button', 'target' => '_blank')); ?>
+        <?php
+        echo $this->Html->link('Enter', '/pages/home', array('class' => 'button', 'target' => '_blank'));
 
     Will output::
 
-  
         <a href="/pages/home" class="button" target="_blank">Enter</a>
 
     Specify ``$confirmMessage`` to display a javascript ``confirm()``
     dialog::
 
-        <?php echo $this->Html->link(
+        <?php
+        echo $this->Html->link(
             'Delete',
             array('controller' => 'recipes', 'action' => 'delete', 6),
             array(),
             "Are you sure you wish to delete this recipe?"
-        );?>
+        );
 
     Will output::
 
-  
         <a href="/recipes/delete/6" onclick="return confirm('Are you sure you wish to delete this recipe?');">Delete</a>
 
     Query strings can also be created with ``link()``.::
 
-        <?php echo $this->Html->link('View image', array(
+        <?php
+        echo $this->Html->link('View image', array(
             'controller' => 'images',
             'action' => 'view',
             1,
@@ -303,8 +308,6 @@ Inserting Well-Formatted elements
             array('escape' => false)
         );
 
-        ?>
-
     Will output::
 
         <a href="/recipes/view/6">
@@ -323,14 +326,16 @@ Inserting Well-Formatted elements
     Returns text wrapped in a specified tag. If no text is specified
     then only the opening <tag> is returned.::
 
-        <?php echo $this->Html->tag('span', 'Hello World.', array('class' => 'welcome'));?>
- 
+        <?php
+        echo $this->Html->tag('span', 'Hello World.', array('class' => 'welcome'));
+         
         //Output
         <span class="welcome">Hello World</span>
- 
+         
         //No text specified.
-        <?php echo $this->Html->tag('span', null, array('class' => 'welcome'));?>
- 
+        <?php 
+        echo $this->Html->tag('span', null, array('class' => 'welcome'));
+         
         //Output
         <span class="welcome">
 
@@ -354,8 +359,9 @@ Inserting Well-Formatted elements
 
     If no text is specified, only an opening div tag is returned.::
  
-        <?php echo $this->Html->div('error', 'Please enter your credit card number.');?>
-
+        <?php
+        echo $this->Html->div('error', 'Please enter your credit card number.');
+        
         //Output
         <div class="error">Please enter your credit card number.</div>
 
@@ -368,8 +374,9 @@ Inserting Well-Formatted elements
     Returns a text wrapped in a CSS-classed <p> tag. If no text is
     supplied, only a starting <p> tag is returned.::
 
-        <?php echo $this->Html->para(null, 'Hello World.');?>
- 
+        <?php
+        echo $this->Html->para(null, 'Hello World.');?>
+        
         //Output
         <p>Hello World.</p>
 
@@ -398,7 +405,8 @@ Inserting Well-Formatted elements
     javascript file specified resides inside the /app/webroot/js
     directory.::
 
-        <?php echo $this->Html->script('scripts'); ?> 
+        <?php
+        echo $this->Html->script('scripts');
 
     Will output::
 
@@ -407,11 +415,13 @@ Inserting Well-Formatted elements
     You can link to files with absolute paths as well to link files
     that are not in ``app/webroot/js``::
 
-        <?php echo $this->Html->script('/otherdir/script_file'); ?> 
+        <?php
+        echo $this->Html->script('/otherdir/script_file');
 
     The first parameter can be an array to include multiple files.::
 
-        <?php echo $this->Html->script(array('jquery','wysiwyg','scripts')); ?>
+        <?php
+        echo $this->Html->script(array('jquery', 'wysiwyg', 'scripts'));
 
     Will output::
 
@@ -448,6 +458,7 @@ Inserting Well-Formatted elements
     An example of using ``scriptStart()`` and ``scriptEnd()`` would
     be::
 
+        <?php
         $this->Html->scriptStart(array('inline' => false));
 
         echo $this->Js->alert('I am in the javascript');
@@ -463,7 +474,8 @@ Inserting Well-Formatted elements
     Creates a row of table header cells to be placed inside of <table>
     tags.::
 
-        <?php echo $this->Html->tableHeaders(array('Date','Title','Active'));?>
+        <?php
+        echo $this->Html->tableHeaders(array('Date', 'Title', 'Active'));
 
         //Output 
         <tr>
@@ -471,13 +483,13 @@ Inserting Well-Formatted elements
             <th>Title</th>
             <th>Active</th>
         </tr>
- 
+        
         <?php echo $this->Html->tableHeaders(
             array('Date','Title','Active'),
             array('class' => 'status'),
             array('class' => 'product_table')
-        );?>
- 
+        );
+         
         //Output
         <tr class="status">
              <th class="product_table">Date</th>
@@ -498,31 +510,32 @@ Inserting Well-Formatted elements
     for odd- and even-numbered rows. Wrap a single table cell within an
     array() for specific <td>-attributes. ::
 
-        <?php echo $this->Html->tableCells(array(
+        <?php
+        echo $this->Html->tableCells(array(
             array('Jul 7th, 2007', 'Best Brownies', 'Yes'),
             array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),
             array('Aug 1st, 2006', 'Anti-Java Cake', 'No'),
         ));
-        ?>
- 
+         
         //Output
         <tr><td>Jul 7th, 2007</td><td>Best Brownies</td><td>Yes</td></tr>
         <tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>
         <tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td>No</td></tr>
- 
-        <?php echo $this->Html->tableCells(array(
+         
+        <?php 
+        echo $this->Html->tableCells(array(
             array('Jul 7th, 2007', array('Best Brownies', array('class'=>'highlight')) , 'Yes'),
             array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),
             array('Aug 1st, 2006', 'Anti-Java Cake', array('No', array('id'=>'special'))),
         ));
-        ?>
- 
+         
         //Output
         <tr><td>Jul 7th, 2007</td><td class="highlight">Best Brownies</td><td>Yes</td></tr>
         <tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>
         <tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td id="special">No</td></tr>
- 
-        <?php echo $this->Html->tableCells(
+         
+        <?php
+        echo $this->Html->tableCells(
             array(
                 array('Red', 'Apple'),
                 array('Orange', 'Orange'),
@@ -530,8 +543,7 @@ Inserting Well-Formatted elements
             ),
             array('class' => 'darker')
         );
-        ?>
- 
+         
         //Output
         <tr class="darker"><td>Red</td><td>Apple</td></tr>
         <tr><td>Orange</td><td>Orange</td></tr>
@@ -546,13 +558,15 @@ Inserting Well-Formatted elements
     Returns an URL pointing to a combination of controller and action.
     If $url is empty, it returns the REQUEST\_URI, otherwise it
     generates the url for the controller and action combo. If full is
-    true, the full base URL will be prepended to the result.::
+    true, the full base URL will be prepended to the result::
 
-        <?php echo $this->Html->url(array(
+        <?php
+        echo $this->Html->url(array(
             "controller" => "posts",
             "action" => "view",
-            "bar"));?>
- 
+            "bar"
+        ));
+         
         // Output
         /posts/view/bar
 
@@ -560,29 +574,29 @@ Inserting Well-Formatted elements
 
     URL with named parameters::
 
-        <?php echo $this->Html->url(array(
+        <?php
+        echo $this->Html->url(array(
             "controller" => "posts",
             "action" => "view",
-            "foo" => "bar"));
-        ?>
- 
+            "foo" => "bar"
+        ));
+         
         // Output
         /posts/view/foo:bar
 
     URL with extension::
 
-        <?php echo $this->Html->url(array(
+        <?php
+        echo $this->Html->url(array(
             "controller" => "posts",
             "action" => "list",
-            "ext" => "rss"));
-        ?>
- 
+            "ext" => "rss"
+        ));
+         
         // Output
         /posts/list.rss
 
-    URL (starting with '/') with the full base URL prepended.
-
-    ::
+    URL (starting with '/') with the full base URL prepended::
 
         <?php echo $this->Html->url('/posts', true); ?>
 
@@ -596,8 +610,7 @@ Inserting Well-Formatted elements
             "action" => "search",
             "?" => array("foo" => "bar"),
             "#" => "first"));
-        ?>
-
+        
         //Output
         /posts/search?foo=bar#first
 
@@ -614,6 +627,7 @@ create and load a new tags config file containing the tags you'd
 like to use. To change the tags used create ``app/config/tags.php``
 containing::
 
+    <?php
     $tags = array(
         'metalink' => '<link href="%s"%s >',
         'input' => '<input name="%s" %s >',
@@ -623,23 +637,18 @@ containing::
 You can then load this tag set by calling
 ``$html->loadConfig('tags');``
 
-
 Creating breadcrumb trails with HtmlHelper
 ==========================================
 
 CakePHP has the built in ability to automatically create a
 breadcrumb trail in your app. To set this up, first add something
-similar to the following in your layout template.
-
-::
+similar to the following in your layout template::
 
     <?php
     echo $this->Html->getCrumbs(' > ','Home');
 
 Now, in your view you'll want to add the following to start the
-breadcrumb trails on each of the pages.
-
-::
+breadcrumb trails on each of the pages::
 
     <?php
      echo $this->Html->addCrumb('Users', '/users');

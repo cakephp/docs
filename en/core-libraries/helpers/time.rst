@@ -145,3 +145,6 @@ Testing Time
     interval is not recognized (for example, if it is mistyped) then it
     will default to days.
 
+.. todo::
+
+    TimeHelper docs are very short on content.  Could do with some fleshing out.
