@@ -1,7 +1,10 @@
 Instalación
 ###########
 
-CakePHP se instala muy fácil y rápidamente. Los requisitos mínimos son: servidor web y copia de CakePHP. Nada más. Aunque este manual se centra en Apache, ya que es el servidor web más común, puedes configurar CakePHP para que funcione en otros servidores como LightHTTPD o Microsoft IIS.
+CakePHP se instala muy fácil y rápidamente. Los requisitos mínimos son: servidor
+web y copia de CakePHP. Nada más. Aunque este manual se centra en Apache, ya que
+es el servidor web más común, puedes configurar CakePHP para que funcione en
+otros servidores como LightHTTPD o Microsoft IIS.
 
 Vamos a preparar el proceso de instalación, que consta de los siguientes pasos:
 
@@ -12,36 +15,67 @@ Vamos a preparar el proceso de instalación, que consta de los siguientes pasos:
 Descargar CakePHP
 =================
 
-Tienes dos opciones: descargar un archivo comprimido con todo el código (zip/tar.gz/tar.bz2) de la web oficial o realizar un *checkout* del código directamente desde el repositorio de git.
+Tienes dos opciones: descargar un archivo comprimido con todo el código
+(zip/tar.gz/tar.bz2) de la web oficial o realizar un *checkout* del código
+directamente desde el repositorio de git.
 
-Para descargar la última versión estable, puedes vistar la página oficial `http://www.cakephp.org <http://www.cakephp.org>`_ y pichar en la opción "Download Now".
+Para descargar la última versión estable, puedes vistar la página oficial
+`http://www.cakephp.org <http://www.cakephp.org>`_ y pichar en la opción
+"Download Now".
 
-Además, todas las versiones de CakePHP están hospedadas en `Github <http://github.com/cakephp/cakephp>`_. Github almacena tanto el código de CakePHP como muchos otros plugins para el sistema. Las versiones *release* de CakePHP están disponibles aquí `Github downloads <http://github.com/cakephp/cakephp/downloads>`_.
+Además, todas las versiones de CakePHP están hospedadas en `Github
+<http://github.com/cakephp/cakephp>`_. Github almacena tanto el código de
+CakePHP como muchos otros plugins para el sistema. Las versiones *release* de
+CakePHP están disponibles aquí `Github downloads
+<http://github.com/cakephp/cakephp/downloads>`_.
 
-También puedes obtener la última versión, con todos los bugs y mejoras corregidos hasta el último minuto (o al menos en ese día). Para ello puedes clonar el repositorio. `Github`_.
+También puedes obtener la última versión, con todos los bugs y mejoras
+corregidos hasta el último minuto (o al menos en ese día). Para ello puedes
+clonar el repositorio. `Github`_.
 
 Permisos
 ========
 
-CakePHP usa el directorio ``/app/tmp`` para varias cosas, como guardar las descripciones de los modelos, la cache de las vistas y la información de sesión de los usuarios.
+CakePHP usa el directorio ``/app/tmp`` para varias cosas, como guardar las
+descripciones de los modelos, la cache de las vistas y la información de sesión
+de los usuarios.
 
-Debido a esto, asegúrate de que el directorio ``/app/tmp`` de tu instalación de CakePHP puede ser escrito por el usuario que ejecuta tu servidor web. Ten en cuenta que cuando tu servidor web se inicia, define un usuario como propietario del servicio. Este usuario suele llamarse 'apache' en algunas versiones de sistemas \*nix. Por lo tanto la carpeta ``/app/tmp`` debe tener permisos de escritura para que el usuario propietario del servidor web pueda escribir dentro de ella.
+Debido a esto, asegúrate de que el directorio ``/app/tmp`` de tu instalación de
+CakePHP puede ser escrito por el usuario que ejecuta tu servidor web. Ten en
+cuenta que cuando tu servidor web se inicia, define un usuario como propietario
+del servicio. Este usuario suele llamarse 'apache' en algunas versiones de
+sistemas \*nix. Por lo tanto la carpeta ``/app/tmp`` debe tener permisos de
+escritura para que el usuario propietario del servidor web pueda escribir dentro
+de ella.
 
 Configuración
 =============
 
-Configurar CakePHP es tan sencillo como copiar la carpeta en la carpeta raíz de tu servidor web (*document root*) o tan complejo y flexible como quieras para que se adapte a tu sistema. En esta sección cubriremos los 3 modos más frecuentes: desarrollo, producción, avanzado.
+Configurar CakePHP es tan sencillo como copiar la carpeta en la carpeta raíz de
+tu servidor web (*document root*) o tan complejo y flexible como quieras para
+que se adapte a tu sistema. En esta sección cubriremos los 3 modos más
+frecuentes: desarrollo, producción, avanzado.
 
--  Desarrollo: fácil y rápido. Las URL de tu aplicación incluyen la carpeta de instalación de CakePHP. Es menos seguro.
--  Producción: Requiere poder cambiar el *document root* de su servidor web, proporciona URL amigables y es muy seguro.
--  Avanzado: Te permite colocar la carpeta de CakePHP en otras partes de tu sistema de archivos, posiblemente para compartir el núcleo con varias aplicaciones web basadas en CakePHP.
+- Desarrollo: fácil y rápido. Las URL de tu aplicación incluyen la carpeta de
+  instalación de CakePHP. Es menos seguro.
+- Producción: Requiere poder cambiar el *document root* de su servidor web,
+  proporciona URL amigables y es muy seguro.
+- Avanzado: Te permite colocar la carpeta de CakePHP en otras partes de tu
+  sistema de archivos, posiblemente para compartir el núcleo con varias
+  aplicaciones web basadas en CakePHP.
 
 Desarrollo
 ==========
 
-Instalar CakePHP para desarrollo es el método más rápido de empezar. Este ejemplo te ayudará a instalar una aplicación CakePHP y configurarla para que se accesible desde http://www.example.com/cake\_2\_0/. Asumiremos que tu *document root* (la carpeta raíz de tu servidor web) es ``/var/www/html``.
+Instalar CakePHP para desarrollo es el método más rápido de empezar. Este
+ejemplo te ayudará a instalar una aplicación CakePHP y configurarla para que se
+accesible desde http://www.example.com/cake\_2\_0/. Asumiremos que tu *document
+root* (la carpeta raíz de tu servidor web) es ``/var/www/html``.
 
-Descomprime los contenidos del archivo que contiene CakePHP en la carpeta ``/var/www/html``. Ahora tendrás un nuevo directorio con el nombre de la versión que te has descargado (por ejemplo cake\_2.0.0). Cambia el nombre de este directorio a algo más sencillo, por ejemplo a ``cake20``.
+Descomprime los contenidos del archivo que contiene CakePHP en la carpeta
+``/var/www/html``. Ahora tendrás un nuevo directorio con el nombre de la versión
+que te has descargado (por ejemplo cake\_2.0.0). Cambia el nombre de este
+directorio a algo más sencillo, por ejemplo a ``cake20``.
 La estructura de directorios debería ser ahora similar a esta:
 
 -  /var/www/html
@@ -62,9 +96,19 @@ http://localhost/cake20 .
 Producción
 ==========
 
-Se llama entorno de Producción porque es el lugar al que accederán los usuarios finales de la aplicación web. Una instalación para Producción es más flexible. Este ejemplo te permitirá que un dominio actúe como una única aplicación CakePHP. Podrás instalar CakePHP en el directorio que prefieras dentro de tu sistema de ficheros y tendrás tu aplicación disponible en http://www.example.com. Ten en cuenta que esta instalación requiere que tengas permiso para escribir en el directorio raíz de tu servidor web *document root*.
+Se llama entorno de Producción porque es el lugar al que accederán los usuarios
+finales de la aplicación web. Una instalación para Producción es más flexible.
+Este ejemplo te permitirá que un dominio actúe como una única aplicación
+CakePHP. Podrás instalar CakePHP en el directorio que prefieras dentro de tu
+sistema de ficheros y tendrás tu aplicación disponible en
+http://www.example.com. Ten en cuenta que esta instalación requiere que tengas
+permiso para escribir en el directorio raíz de tu servidor web *document root*.
 
-Descomprime los contenidos del paquete que has descargado con la última versión de CakePHP en el directorio que prefieras. No es necesario que sea una carpeta de tu *document root*. Por ejemplo vamos a suponer que quieres tener tus archivos de CakePHP en la ruta ``/cake_install``. Tu sistema de archivos sería entonces:
+Descomprime los contenidos del paquete que has descargado con la última versión
+de CakePHP en el directorio que prefieras. No es necesario que sea una carpeta
+de tu *document root*. Por ejemplo vamos a suponer que quieres tener tus
+archivos de CakePHP en la ruta ``/cake_install``. Tu sistema de archivos sería
+entonces:
 
 -  /cake\_install/
    
@@ -78,13 +122,16 @@ Descomprime los contenidos del paquete que has descargado con la última versió
    -  /index.php
    -  /README
 
-Si usas Apache, ahora es el momento de configurar la directiva de configuración ``DocumentRoot`` de tu servidor web para que apunte a la carpeta /app/webroot de tu instalación.
+Si usas Apache, ahora es el momento de configurar la directiva de configuración
+``DocumentRoot`` de tu servidor web para que apunte a la carpeta /app/webroot de
+tu instalación.
 
 ::
 
     DocumentRoot /cake_install/app/webroot
 
-Si tu servidor está correctamente configurado, podrás acceder a tu aplicación utilizando la url http://www.example.com.
+Si tu servidor está correctamente configurado, podrás acceder a tu aplicación
+utilizando la url http://www.example.com.
 
 Instalación avanzada y configuración flexible
 =============================================
@@ -96,11 +143,17 @@ Instalación avanzada y configuración flexible
 ¡ A por todas !
 ===============
 
-Vamos a ver de qué es capaz tu recientemente instalado CakePHP. Dependiendo de qué opción de configuración hayas elegido, podrás acceder a tu aplicación mediante http://www.example.com/ o http://example.com/cake\_install/. Verás una página de bienvenida por defecto, que mostrará un mensaje que te dice el estado de tu conexión actual de Base de Datos.
+Vamos a ver de qué es capaz tu recientemente instalado CakePHP. Dependiendo de
+qué opción de configuración hayas elegido, podrás acceder a tu aplicación
+mediante http://www.example.com/ o http://example.com/cake\_install/. Verás una
+página de bienvenida por defecto, que mostrará un mensaje que te dice el estado
+de tu conexión actual de Base de Datos.
 
 ¡ Enhorabuena ! Estás preparado para empezar.
 
-¿ No funciona ? Bueno, estas cosas pasan. Si aparece un mensaje de error que habla de la Zona Horaria *timezone*, quita el comentario a la siguiente línea de tu fichero app/Config/core.php:
+¿ No funciona ? Bueno, estas cosas pasan. Si aparece un mensaje de error que
+habla de la Zona Horaria *timezone*, quita el comentario a la siguiente línea de
+tu fichero app/Config/core.php:
 
 ::
 
