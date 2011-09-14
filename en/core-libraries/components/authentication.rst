@@ -80,19 +80,19 @@ keys.
 - ``scope`` Additional conditions to use when looking up and
   authenticating users, i.e. ``array('User.is_active' => 1).``
 
-To configure different fields for user in ``$components`` array,
+To configure different fields for user in ``$components`` array::
 
     <?php
     // Pass settings in $components array
     public $components = array(
-    	'Auth'=> array(
-  			'authenticate' => array(	
-  				'Form' => array(
-  					'fields' => array('username' => 'email')
-  				)
-  			)
-  		)
-  	);
+        'Auth'=> array(
+            'authenticate' => array(    
+                'Form' => array(
+                    'fields' => array('username' => 'email')
+                )
+            )
+        )
+    );
 
 In addition to the common configuration, Basic authentication supports
 the following keys:

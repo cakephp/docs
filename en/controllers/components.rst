@@ -68,7 +68,7 @@ configuration options to be set before the controller's
 configuration options be set in the ``$components`` array::
 
     <?php
-    public $components = array('DebugKit.toolbar' => array('panels' => array('history', 'session')));
+    public $components = array('DebugKit.Toolbar' => array('panels' => array('history', 'session')));
 
 Consult the relevant documentation to determine what configuration
 options each component provides.

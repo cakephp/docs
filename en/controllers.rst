@@ -409,13 +409,13 @@ Other Useful Methods
     current request. This is different than view caching, covered in a
     later chapter.
 
-    The headers sent to this effect are:
+    The headers sent to this effect are::
 
-    ``Expires: Mon, 26 Jul 1997 05:00:00 GMT``
-    ``Last-Modified: [current datetime] GMT``
-    ``Cache-Control: no-store, no-cache, must-revalidate``
-    ``Cache-Control: post-check=0, pre-check=0``
-    ``Pragma: no-cache``
+        Expires: Mon, 26 Jul 1997 05:00:00 GMT
+        Last-Modified: [current datetime] GMT
+        Cache-Control: no-store, no-cache, must-revalidate
+        Cache-Control: post-check=0, pre-check=0
+        Pragma: no-cache
 
 .. php:method:: postConditions(array $data, mixed $op, string $bool, boolean $exclusive)
 
