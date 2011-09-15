@@ -5,38 +5,34 @@ DataSources are the link between models and the source of data that
 models represent. In many cases, the data is retrieved from a
 relational database such as MySQL, PostgreSQL or MSSQL. CakePHP is
 distributed with several database-specific datasources (see the
-dbo\_\* class files in cake/libs/model/datasources/dbo/), a summary
+class files in ``lib/Cake/Model/Datasource/Database``), a summary
 of which is listed here for your convenience:
 
 
--  dbo\_mssql.php
--  dbo\_mysql.php
--  dbo\_mysqli.php
--  dbo\_oracle.php
--  dbo\_postgres.php
--  dbo\_sqlite.php
+- MySql
+- Postgres
+- Sqlite
+- Sqlserver
+- Oracle
 
 .. note::
 
-    Additional DataSources and those that were removed from the core in
-    1.3 can be found in the community-maintained
+    You can find additional community contributed datasources in the 
     `CakePHP DataSources repository at github <http://github.com/cakephp/datasources>`_.
 
 When specifying a database connection configuration in
-app/config/database.php, CakePHP transparently uses the
-corresponding database datasource for all model operations. So,
-even though you might not have known about datasources, you've been
-using them all along.
+``app/Config/database.php``, CakePHP transparently uses the corresponding
+database datasource for all model operations. So, even though you might not have
+known about datasources, you've been using them all along.
 
-All of the above sources derive from a base ``DboSource`` class,
-which aggregates some logic that is common to most relational
-databases. If you decide to write a RDBMS datasource, working from
-one of these (e.g. dbo\_mysql.php or dbo\_mssql.php is your best
-bet.
+All of the above sources derive from a base ``DboSource`` class, which
+aggregates some logic that is common to most relational databases. If you decide
+to write a RDBMS datasource, working from one of these (e.g. Mysql, or Sqlite is
+your best bet.)
 
-Most people, however, are interested in writing datasources for
-external sources of data, such as remote REST APIs or even an LDAP
-server. So that's what we're going to look at now.
+Most people, however, are interested in writing datasources for external sources
+of data, such as remote REST APIs or even an LDAP server. So that's what we're
+going to look at now.
 
 Basic API For DataSources
 =========================
@@ -49,10 +45,7 @@ need not implement more of the methods listed above than necessary
 - if you need a read-only datasource, there's no reason to
 implement ``create``, ``update``, and ``delete``.
 
-
-
 Methods that must be implemented
-
 
 -  ``describe($model)``
 -  ``listSources()``
@@ -62,7 +55,6 @@ Methods that must be implemented
    -  ``read($model, $queryData = array())``
    -  ``update($model, $fields = array(), $values = array())``
    -  ``delete($model, $id = null)``
-
 
 It is also possible (and sometimes quite useful) to define the
 ``$_schema`` class attribute inside the datasource itself, instead
@@ -87,9 +79,7 @@ Twitter API as well as posting new status updates to a configured
 account.
 
 You would place the Twitter datasource in
-app/models/datasources/twitter\_source.php:
-
-::
+``app/Model/Datasource/TwitterSource.php``::
 
     <?php
     /**
@@ -97,21 +87,11 @@ app/models/datasources/twitter\_source.php:
      *
      * Used for reading and writing to Twitter, through models.
      *
-     * PHP Version 5.x
-     *
-     * CakePHP(tm) : Rapid Development Framework (http://www.cakephp.org)
-     * Copyright 2005-2009, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
-     *
-     * Licensed under The MIT License
-     * Redistributions of files must retain the above copyright notice.
-     *
-     * @filesource
-     * @copyright     Copyright 2009, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
-     * @link          http://cakephp.org CakePHP(tm) Project
-     * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
      */
-    App::import('Core', 'HttpSocket');
+    App::uses('HttpSocket', 'Network/Http');
+
     class TwitterSource extends DataSource {
+
         protected $_schema = array(
             'tweets' => array(
                 'id' => array(
@@ -134,6 +114,7 @@ app/models/datasources/twitter\_source.php:
                 ),
             )
         );
+
         public function __construct($config) {
             $auth = "{$config['login']}:{$config['password']}";
             $this->connection = new HttpSocket(
@@ -176,39 +157,30 @@ app/models/datasources/twitter\_source.php:
             return $this->_schema['tweets'];
         }
     }
-    ?>
 
-Your model implementation could be as simple as:
-
-::
+Your model implementation could be as simple as::
 
     <?php
     class Tweet extends AppModel {
         public $useDbConfig = 'twitter';
     }
-    ?>
 
 .. note::
 
     If we had not defined our schema in the datasource itself, you
     would get an error message to that effect here.
 
-And the configuration settings in your ``app/config/database.php``
-would resemble something like this:
-
-::
+And the configuration settings in your ``app/Config/database.php``
+would resemble something like this::
 
     <?php
         var $twitter = array(
-            'datasource' => 'twitter',
+            'datasource' => 'TwitterSource',
             'login' => 'username',
             'password' => 'password',
         );
-    ?>
 
-Using the familiar model methods from a controller:
-
-::
+Using the familiar model methods from a controller::
 
     <?php
     // Will use the username defined in the $twitter as shown above:
@@ -217,15 +189,11 @@ Using the familiar model methods from a controller:
     // Finds tweets by another username
     $conditions= array('username' => 'caketest');
     $otherTweets = $this->Tweet->find('all', compact('conditions'));
-    ?>
 
-Similarly, saving a new status update:
-
-::
+Similarly, saving a new status update::
 
     <?php
     $this->Tweet->save(array('status' => 'This is an update'));
-    ?>
 
 Plugin DataSources and Datasource Drivers
 =========================================
@@ -233,73 +201,11 @@ Plugin DataSources and Datasource Drivers
 You can also package Datasources into plugins.
 
 Simply place your datasource file into
-``plugins/[your_plugin]/models/datasources/[your_datasource]_source.php``
-and refer to it using the plugin notation:
-
-::
+``Plugin/[your_plugin]/Model/Datasource/[your_datasource].php``
+and refer to it using the plugin notation::
 
     var $twitter = array(
-        'datasource' => 'Twitter.Twitter',
+        'datasource' => 'Twitter.TwitterSource',
         'username' => 'test@example.com',
         'password' => 'hi_mom',
     );
-
-Plugin DBO Drivers
-------------------
-
-In addition, you can also add to the current selection of CakePHP's
-dbo drivers in plugin form.
-
-Simply add your drivers to
-``plugins/[your_plugin]/models/datasources/dbo/[your_driver].php``
-and again use plugin notation:
-
-::
-
-    var $twitter = array(
-        'driver' => 'Twitter.Twitter',
-        ...
-    );
-
-Combining the Two
------------------
-
-Finally, you're also able to bundle together your own DataSource
-and respective drivers so that they can share functionality. First
-create your main class you plan to extend:
-
-::
-
-    plugins/[social_network]/models/datasources/[social_network]_source.php : 
-    <?php
-    class SocialNetworkSource extends DataSource {
-        // general functionality here
-    }
-    ?>
-
-And now create your drivers in a sub folder:
-
-::
-
-    plugins/[social_network]/models/datasources/[social_network]/[twitter].php
-    <?php
-    class Twitter extends SocialNetworkSource {
-        // Unique functionality here
-    }
-    ?>
-
-And finally setup your ``database.php`` settings accordingly:
-
-::
-
-    var $twitter = array(
-        'driver' => 'SocialNetwork.Twitter',
-        'datasource' => 'SocialNetwork.SocialNetwork',
-    );
-    var $facebook = array(
-        'driver' => 'SocialNetwork.Facebook',
-        'datasource' => 'SocialNetwork.SocialNetwork',
-    );
-
-Just like that, all your files are included **Automagically!** No
-need to place ``App::import()`` at the top of all your files.
