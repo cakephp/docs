@@ -21,12 +21,11 @@ Model definition, for example::
 
     <?php
     class User extends AppModel {  
-        var $name = 'User';
-        var $validate = array();
+        public $name = 'User';
+        public $validate = array();
     }
-    ?>
 
-In the example above, the $validate array is added to the User
+In the example above, the ``$validate`` array is added to the User
 Model, but the array contains no validation rules. Assuming that
 the users table has login, password, email and born fields, the
 example below shows some simple validation rules that apply to
@@ -34,14 +33,13 @@ those fields::
 
     <?php
     class User extends AppModel {
-        var $name = 'User';
-        var $validate = array(
+        public $name = 'User';
+        public $validate = array(
             'login' => 'alphaNumeric',
             'email' => 'email',
             'born' => 'date'
         );
     }
-    ?>
 
 This last example shows how validation rules can be added to model
 fields. For the login field, only letters and numbers will be
@@ -60,14 +58,14 @@ some of these built-in validation rules::
 
     <?php
     class User extends AppModel {
-        var $name = 'User';
-        var $validate = array(
+        public $name = 'User';
+        public $validate = array(
             'login' => array(
                 'alphaNumeric' => array(
                     'rule' => 'alphaNumeric',
                     'required' => true,
                     'message' => 'Alphabets and numbers only'
-                    ),
+                ),
                 'between' => array(
                     'rule' => array('between', 5, 15),
                     'message' => 'Between 5 to 15 characters'
@@ -85,7 +83,6 @@ some of these built-in validation rules::
             )
         );
     }
-    ?>
 
 Two validation rules are defined for login: it should contain
 letters and numbers only, and its length should be between 5 and
@@ -103,6 +100,325 @@ Now that you’ve seen the big picture on how validation works, let’s
 look at how these rules are defined in the model. There are three
 different ways that you can define validation rules: simple arrays,
 single rule per field, and multiple rules per field.
+
+
+Simple Rules
+============
+
+As the name suggests, this is the simplest way to define a
+validation rule. The general syntax for defining rules this way
+is::
+
+    <?php
+    public $validate = array('fieldName' => 'ruleName');
+
+Where, 'fieldName' is the name of the field the rule is defined
+for, and ‘ruleName’ is a pre-defined rule name, such as
+'alphaNumeric', 'email' or 'isUnique'.
+
+For example, to ensure that the user is giving a well formatted
+email address, you could use this rule::
+
+    <?php
+    public $validate = array('user_email' => 'email');
+
+
+One Rule Per Field
+==================
+
+This definition technique allows for better control of how the
+validation rules work. But before we discuss that, let’s see the
+general usage pattern adding a rule for a single field::
+
+    <?php
+    public $validate = array(
+        'fieldName1' => array(
+            'rule' => 'ruleName', // or: array('ruleName', 'param1', 'param2' ...)
+            'required' => true,
+            'allowEmpty' => false,
+            'on' => 'create', // or: 'update'
+            'message' => 'Your Error Message'
+        )
+    );
+
+The 'rule' key is required. If you only set 'required' => true, the
+form validation will not function correctly. This is because
+'required' is not actually a rule.
+
+As you can see here, each field (only one field shown above) is
+associated with an array that contains five keys: ‘rule’,
+‘required’, ‘allowEmpty’, ‘on’ and ‘message’. Let’s have a closer
+look at these keys.
+
+rule
+~~~~
+
+The 'rule' key defines the validation method and takes either a
+single value or an array. The specified 'rule' may be the name of a
+method in your model, a method of the core Validation class, or a
+regular expression. For more information on the rules available by
+default, see
+:ref:`core-validation-rules`.
+
+If the rule does not require any parameters, 'rule' can be a single
+value e.g.::
+
+    <?php
+    public $validate = array(
+        'login' => array(
+            'rule' => 'alphaNumeric'
+        )
+    );
+
+If the rule requires some parameters (like the max, min or range),
+'rule' should be an array::
+
+    <?php
+    public $validate = array(
+        'password' => array(
+            'rule' => array('minLength', 8)
+        )
+    );
+
+Remember, the 'rule' key is required for array-based rule
+definitions.
+
+required
+~~~~~~~~
+
+This key should be assigned to a boolean value. If ‘required’ is
+true, the field must be present in the data array. For example, if
+the validation rule has been defined as follows::
+
+    public $validate = array(
+        'login' => array(
+            'rule' => 'alphaNumeric',
+            'required' => true
+        )
+    );
+
+The data sent to the model’s save() method must contain data for
+the login field. If it doesn’t, validation will fail. The default
+value for this key is boolean false.
+
+``required => true`` does not mean the same as the validation rule
+``notEmpty()``. ``required => true`` indicates that the array *key*
+must be present - it does not mean it must have a value. Therefore
+validation will fail if the field is not present in the dataset,
+but may (depending on the rule) succeed if the value submitted is
+empty ('').
+
+allowEmpty
+~~~~~~~~~~
+
+If set to ``false``, the field value must be **nonempty**, where
+"nonempty" is defined as ``!empty($value) || is_numeric($value)``.
+The numeric check is so that CakePHP does the right thing when
+``$value`` is zero.
+
+The difference between ``required`` and ``allowEmpty`` can be
+confusing. ``'required' => true`` means that you cannot save the
+model without the *key* for this field being present in
+``$this->data`` (the check is performed with ``isset``); whereas,
+``'allowEmpty' => false`` makes sure that the current field *value*
+is nonempty, as described above.
+
+on
+~~
+
+The 'on' key can be set to either one of the following values:
+'update' or 'create'. This provides a mechanism that allows a
+certain rule to be applied either during the creation of a new
+record, or during update of a record.
+
+If a rule has defined 'on' => 'create', the rule will only be
+enforced during the creation of a new record. Likewise, if it is
+defined as 'on' => 'update', it will only be enforced during the
+updating of a record.
+
+The default value for 'on' is null. When 'on' is null, the rule
+will be enforced during both creation and update.
+
+message
+~~~~~~~
+
+The message key allows you to define a custom validation error
+message for the rule::
+
+    <?php
+    public $validate = array(
+        'password' => array(
+            'rule' => array('minLength', 8),
+            'message' => 'Password must be at least 8 characters long'
+        )
+    );
+
+Multiple Rules per Field
+========================
+
+The technique outlined above gives us much more flexibility than
+simple rules assignment, but there’s an extra step we can take in
+order to gain more fine-grained control of data validation. The
+next technique we’ll outline allows us to assign multiple
+validation rules per model field.
+
+If you would like to assign multiple validation rules to a single
+field, this is basically how it should look::
+
+    <?php
+    public $validate = array(
+        'fieldName' => array(
+            'ruleName' => array(
+                'rule' => 'ruleName',
+                // extra keys like on, required, etc. go here...
+            ),
+            'ruleName2' => array(
+                'rule' => 'ruleName2',
+                // extra keys like on, required, etc. go here...
+            )
+        )
+    );
+
+As you can see, this is quite similar to what we did in the
+previous section. There, for each field we had only one array of
+validation parameters. In this case, each ‘fieldName’ consists of
+an array of rule indices. Each 'ruleName' contains a separate array
+of validation parameters.
+
+This is better explained with a practical example::
+
+    <?php
+    public $validate = array(
+        'login' => array(
+            'loginRule-1' => array(
+                'rule' => 'alphaNumeric',  
+                'message' => 'Only alphabets and numbers allowed',
+                'last' => true
+             ),
+            'loginRule-2' => array(
+                'rule' => array('minLength', 8),  
+                'message' => 'Minimum length of 8 characters'
+            )  
+        )
+    );
+
+The above example defines two rules for the login field:
+loginRule-1 and loginRule-2. As you can see, each rule is
+identified with an arbitrary name.
+
+By default CakePHP tries to validate a field using all the
+validation rules declared for it and returns the error message for
+the last failing rule. But if the key ``last`` is set to ``true``
+for a rule and it fails, then the error message for that rule is
+returned and further rules are not validated. So if you prefer to
+show the error message for the first failing rule then set
+``'last' => true`` for each rule.
+
+When using multiple rules per field the 'required' and 'allowEmpty'
+keys need to be used only once in the first rule.
+
+
+Custom Validation Rules
+=======================
+
+If you haven’t found what you need thus far, you can always create
+your own validation rules. There are two ways you can do this: by
+defining custom regular expressions, or by creating custom
+validation methods.
+
+Custom Regular Expression Validation
+------------------------------------
+
+If the validation technique you need to use can be completed by
+using regular expression matching, you can define a custom
+expression as a field validation rule::
+
+    <?php
+    public $validate = array(
+        'login' => array(
+            'rule' => '/^[a-z0-9]{3,}$/i',  
+            'message' => 'Only letters and integers, min 3 characters'
+        )
+    );
+
+The example above checks if the login contains only letters and
+integers, with a minimum of three characters.
+
+The regular expression in the ``rule`` must be delimited by
+slashes. The optional trailing 'i' after the last slash means the
+reg-exp is case *i*\ nsensitive.
+
+Adding your own Validation Methods
+----------------------------------
+
+Sometimes checking data with regular expression patterns is not
+enough. For example, if you want to ensure that a promotional code
+can only be used 25 times, you need to add your own validation
+function, as shown below::
+
+    <?php
+    class User extends AppModel {
+        public $name = 'User';
+      
+        public $validate = array(
+            'promotion_code' => array(
+                'rule' => array('limitDuplicates', 25),
+                'message' => 'This code has been used too many times.'
+            )
+        );
+     
+        function limitDuplicates($check, $limit){
+            //$check will have value: array('promomotion_code' => 'some-value')
+            //$limit will have value: 25
+            $existing_promo_count = $this->find( 'count', array('conditions' => $check, 'recursive' => -1) );
+            return $existing_promo_count < $limit;
+        }
+    }
+
+The current field to be validated is passed into the function as
+first parameter as an associated array with field name as key and
+posted data as value.
+
+If you want to pass extra parameters to your validation function,
+add elements onto the ‘rule’ array, and handle them as extra params
+(after the main ``$check`` param) in your function.
+
+Your validation function can be in the model (as in the example
+above), or in a behavior that the model implements. This includes
+mapped methods.
+
+Model/behavior methods are checked first, before looking for a
+method on the ``Validation`` class. This means that you can
+override existing validation methods (such as ``alphaNumeric()``)
+at an application level (by adding the method to ``AppModel``), or
+at model level.
+
+When writing a validation rule which can be used by multiple
+fields, take care to extract the field value from the $check array.
+The $check array is passed with the form field name as its key and
+the field value as its value. The full record being validated is
+stored in $this->data member variable::
+
+    <?php
+    class Post extends AppModel {
+      public $name = 'Post';
+      
+      public $validate = array(
+        'slug' => array(
+          'rule' => 'alphaNumericDashUnderscore',
+          'message' => 'Slug can only be letters, numbers, dash and underscore'
+        )
+      );
+        
+      function alphaNumericDashUnderscore($check) {
+          // $data array is passed using the form field name as the key
+          // have to extract the value to make the function generic
+          $value = array_values($check);
+          $value = $value[0];
+          
+          return preg_match('|^[0-9a-zA-Z_-]*$|', $value);
+      }
+    }
 
 .. _core-validation-rules:
 
@@ -122,7 +438,7 @@ with usage examples.
     The data for the field must only contain letters and numbers.::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'login' => array(
                 'rule' => 'alphaNumeric',
                 'message' => 'Usernames must only contain letters and numbers.'
@@ -136,7 +452,7 @@ with usage examples.
     Uses = not.::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'password' => array(
                 'rule' => array('between', 5, 15),
                 'message' => 'Passwords must be between 5 and 15 characters long.'
@@ -154,7 +470,7 @@ with usage examples.
     characters include space, tab, carriage return, and newline.::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'id' => array(
                 'rule' => 'blank',
                 'on' => 'create'
@@ -167,7 +483,7 @@ with usage examples.
     true or false, integers 0 or 1 or strings '0' or '1'.::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'myCheckbox' => array(
                 'rule' => array('boolean'),
                 'message' => 'Incorrect value for myCheckbox'
@@ -181,7 +497,6 @@ with usage examples.
 
     The ‘type’ key can be assigned to the values of ‘fast’, ‘all’ or
     any of the following:
-
 
     -  amex
     -  bankcard
@@ -209,12 +524,10 @@ with usage examples.
     It defaults to false.
 
     The ‘regex’ key allows you to supply your own regular expression
-    that will be used to validate the credit card number.
-
-    ::
+    that will be used to validate the credit card number::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'ccnumber' => array(
                 'rule' => array('cc', array('visa', 'maestro'), false, null),
                 'message' => 'The credit card number you supplied was invalid.'
@@ -225,19 +538,17 @@ with usage examples.
 
     Comparison is used to compare numeric values. It supports “is
     greater”, “is less”, “greater or equal”, “less or equal”, “equal
-    to”, and “not equal”. Some examples are shown below:
-
-    ::
+    to”, and “not equal”. Some examples are shown below::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'age' => array(
                 'rule' => array('comparison', '>=', 18),
                 'message' => 'Must be at least 18 years old to qualify.'
             )
         );
-    
-        var $validate = array(
+         
+        public $validate = array(
             'age' => array(
                 'rule' => array('comparison', 'greater or equal', 18),
                 'message' => 'Must be at least 18 years old to qualify.'
@@ -250,7 +561,6 @@ with usage examples.
     single parameter (which can be an array) can be passed that will be
     used to check the format of the supplied date. The value of the
     parameter can be one of the following:
-
 
     -  ‘dmy’ e.g. 27-12-2006 or 27-12-06 (separators can be a space,
        period, dash, forward slash)
@@ -265,12 +575,10 @@ with usage examples.
        dash, forward slash)
 
     If no keys are supplied, the default key that will be used is
-    ‘ymd’.
-
-    ::
+    ‘ymd’::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'born' => array(
                 'rule' => array('date','ymd'),
                 'message' => 'Enter a valid date in YY-MM-DD format.',
@@ -290,12 +598,10 @@ with usage examples.
     parameter can be passed to specify the number of digits required
     after the decimal point. If no parameter is passed, the data will
     be validated as a scientific float, which will cause validation to
-    fail if no digits are found after the decimal point.
-
-    ::
+    fail if no digits are found after the decimal point::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'price' => array(
                 'rule' => array('decimal', 2)
             )
@@ -305,14 +611,12 @@ with usage examples.
 
     This checks whether the data is a valid email address. Passing a
     boolean true as the second parameter for this rule will also
-    attempt to verify that the host for the address is valid.
-
-    ::
+    attempt to verify that the host for the address is valid::
     
         <?php
-        var $validate = array('email' => array('rule' => 'email'));
-     
-        var $validate = array(
+        public $validate = array('email' => array('rule' => 'email'));
+        
+        public $validate = array(
             'email' => array(
                 'rule' => array('email', true),
                 'message' => 'Please supply a valid email address.'
@@ -327,7 +631,7 @@ with usage examples.
     ::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'food' => array(
                 'rule' => array('equalTo', 'cake'),  
                 'message' => 'This value must be the string cake'
@@ -342,7 +646,7 @@ with usage examples.
     ::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'image' => array(
                 'rule' => array('extension', array('gif', 'jpeg', 'png', 'jpg')),
                 'message' => 'Please supply a valid image.'
@@ -358,7 +662,7 @@ with usage examples.
     ::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'clientip' => array(
                 'rule' => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)
                 'message' => 'Please supply a valid IP address.'
@@ -373,7 +677,7 @@ with usage examples.
     ::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'login' => array(
                 'rule' => 'isUnique',
                 'message' => 'This username has already been taken.'
@@ -388,7 +692,7 @@ with usage examples.
     ::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'login' => array(
                 'rule' => array('minLength', 8),  
                 'message' => 'Usernames must be at least 8 characters long.'
@@ -407,7 +711,7 @@ with usage examples.
     ::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'login' => array(
                 'rule' => array('maxLength', 15),  
                 'message' => 'Usernames must be no larger than 15 characters long.'
@@ -428,7 +732,7 @@ with usage examples.
     ::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'salary' => array(
                 'rule' => array('money', 'left'),
                 'message' => 'Please supply a valid monetary amount.'
@@ -443,7 +747,7 @@ with usage examples.
     ::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'multiple' => array(
                 'rule' => array('multiple', array(
                     'in' => array('do', 'ray', 'me', 'fa', 'so', 'la', 'ti'), 'min' => 1, 'max' => 3)
@@ -461,7 +765,7 @@ with usage examples.
     Example::
 
         <?php
-            var $validate = array(
+            public $validate = array(
               'function' => array(
                 'allowedChoice' => array(
                     'rule' => array('inList', array('Foo', 'Bar')),
@@ -475,7 +779,7 @@ with usage examples.
     Checks if the data passed is a valid number.::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'cars' => array(
                 'rule' => 'numeric',  
                 'message' => 'Please supply the number of cars.'
@@ -487,7 +791,7 @@ with usage examples.
     The basic rule to ensure that a field is not empty.::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'title' => array( 
                 'rule' => 'notEmpty',
                 'message' => 'This field cannot be left blank'
@@ -506,7 +810,7 @@ with usage examples.
     ::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'phone' => array(
                 'rule' => array('phone', null, 'us')
             )
@@ -522,7 +826,7 @@ with usage examples.
     ::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'zipcode' => array(
                 'rule' => array('postal', null, 'us')
             )
@@ -537,7 +841,7 @@ with usage examples.
     ::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'number' => array(
                 'rule' => array('range', -1, 11),
                 'message' => 'Please enter a number between 0 and 10'
@@ -560,7 +864,7 @@ with usage examples.
     ::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'ssn' => array(
                 'rule' => array('ssn', null, 'us')
             )
@@ -572,19 +876,17 @@ with usage examples.
     file, news, and gopher protocols::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'website' => array(
                 'rule' => 'url'
             )
         );
 
     To ensure that a protocol is in the url, strict mode can be enabled
-    like so.
-
-    ::
+    like so::
 
         <?php
-        var $validate = array(
+        public $validate = array(
             'website' => array(
                 'rule' => array('url', true)
             )
@@ -593,8 +895,4 @@ with usage examples.
 
 .. toctree::
 
-    data-validation/simple-rules
-    data-validation/one-rule-per-field
-    data-validation/multiple-rules-per-field
-    data-validation/custom-validation-rules
     data-validation/validating-data-from-the-controller
