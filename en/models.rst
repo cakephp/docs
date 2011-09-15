@@ -25,17 +25,12 @@ person, or a house. A blog, for example, may have many blog posts
 and each blog post may have many comments. The Blog, Post, and
 Comment are all examples of models, each associated with another.
 
-Here is a simple example of a model definition in CakePHP:
-
-::
+Here is a simple example of a model definition in CakePHP::
 
     <?php
-    
     class Ingredient extends AppModel {
-        var $name = 'Ingredient';
+        public $name = 'Ingredient';
     }
-    
-    ?>
 
 With just this simple declaration, the Ingredient model is bestowed
 with all the functionality you need to create queries along with
@@ -49,20 +44,20 @@ This intermediate class, AppModel, is empty and if you haven't
 created your own is taken from within the /cake/ folder. Overriding
 the AppModel allows you to define functionality that should be made
 available to all models within your application. To do so, you need
-to create your own app\_model.php file that resides in the root of
+to create your own ``AppModel.php`` file that resides in the root of
 the /app/ folder. Creating a project using
 :doc:`Bake <console-and-shells/code-generation-with-bake>` will automatically
 generate this file for you.
 
-Create your model PHP file in the /app/models/ directory or in a
-subdirectory of /app/models. CakePHP will find it anywhere in the
+Create your model PHP file in the ``/app/Model/`` directory or in a
+subdirectory of ``/app/Model.`` CakePHP will find it anywhere in the
 directory. By convention it should have the same name as the class;
-for this example ingredient.php.
+for this example ``Ingredient.php``.
 
 .. note::
 
     CakePHP will dynamically create a model object for you if it cannot
-    find a corresponding file in /app/models. This also means that if
+    find a corresponding file in /app/Model. This also means that if
     your model file isn't named correctly (i.e. Ingredient.php or
     ingredients.php) CakePHP will use a instance of AppModel rather
     than your missing (from CakePHP's perspective) model file. If
@@ -80,9 +75,7 @@ With your model defined, it can be accessed from within your
 make the model available for access when its name matches that of
 the controller. For example, a controller named
 IngredientsController will automatically initialize the Ingredient
-model and attach it to the controller at ``$this->Ingredient``.
-
-::
+model and attach it to the controller at ``$this->Ingredient``::
 
     <?php
     class IngredientsController extends AppController {
@@ -92,14 +85,10 @@ model and attach it to the controller at ``$this->Ingredient``.
             $this->set('ingredients', $ingredients);
         }
     }
-    
-    ?>
 
 Associated models are available through the main model. In the
 following example, Recipe has an association with the Ingredient
-model.
-
-::
+model::
 
     <?php
     class RecipesController extends AppController {
@@ -108,12 +97,9 @@ model.
             $this->set('ingredients', $ingredients);
         }
     }
-    ?>
 
 If models have absolutely NO association between them, you can use
-Controller::loadModel() to get the model.
-
-::
+:php:meth:`Controller::loadModel()`` to get the model::
 
     <?php
     class RecipesController extends AppController {
@@ -126,7 +112,6 @@ Controller::loadModel() to get the model.
            $this->set(compact('recipes', 'cars'));
         }
     }
-    ?>
 
 .. note::
 
@@ -140,6 +125,8 @@ More on models
 
 .. toctree::
 
+    models/behaviors
+    models/datasources
     models/data-validation
     models/retrieving-your-data
     models/saving-your-data
@@ -150,5 +137,3 @@ More on models
     models/additional-methods-and-properties
     models/virtual-fields
     models/transactions
-    models/behaviors
-    models/datasources
