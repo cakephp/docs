@@ -664,7 +664,7 @@ following format::
 
     <?php
     $this->Form->input('Model.field', array(
-        'error' => array('wrap' => 'span', 'class' => 'bzzz')
+        'error' => array('attributes' => array('wrap' => 'span', 'class' => 'bzzz'))
     ));
 
 To prevent HTML being automatically escaped in the error message
