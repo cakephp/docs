@@ -41,7 +41,7 @@ model to save data to a database table::
     }
 
 When save is called, the data passed to it in the first parameter is validated
-using CakePHP validation mechanism (see :doc:`/docs/data-validation` chapter for more
+using CakePHP validation mechanism (see :doc:`/docs/models/data-validation` chapter for more
 information). If for some reason your data isn't saving, be sure to check to see
 if some validation rules are being broken. You can debug this situation by
 outputting :php:attr:`Model::$validationErrors`::
