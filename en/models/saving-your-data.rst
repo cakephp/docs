@@ -15,9 +15,9 @@ following basic format::
     )
 
 Most of the time you won’t even need to worry about this format:
-CakePHP's ``HtmlHelper``, ``FormHelper``, and find methods all
+CakePHP's :php:class:`FormHelper`, and model find methods all
 package data in this format. If you're using either of the helpers,
-the data is also conveniently available in ``$this->data`` for
+the data is also conveniently available in ``$this->request->data`` for
 quick usage.
 
 Here's a quick example of a controller action that uses a CakePHP
@@ -26,9 +26,9 @@ model to save data to a database table::
     <?php
     function edit($id) {
         //Has any form data been POSTed?
-        if(!empty($this->data)) {
+        if ($this->request->is('post')) {
             //If the form data can be validated and saved...
-            if($this->Recipe->save($this->data)) {
+            if ($this->Recipe->save($this->data)) {
                 //Set a session flash message and redirect.
                 $this->Session->setFlash("Recipe Saved!");
                 $this->redirect('/recipes');
@@ -40,11 +40,17 @@ model to save data to a database table::
         $this->set('recipe', $this->Recipe->findById($id));
     }
 
-One additional note: when save is called, the data passed to it in
-the first parameter is validated using CakePHP validation mechanism
-(see the Data Validation chapter for more information). If for some
-reason your data isn't saving, be sure to check to see if some
-validation rules are being broken.
+When save is called, the data passed to it in the first parameter is validated
+using CakePHP validation mechanism (see :doc:`/docs/data-validation` chapter for more
+information). If for some reason your data isn't saving, be sure to check to see
+if some validation rules are being broken. You can debug this situation by
+outputting :php:attr:`Model::$validationErrors`::
+
+    <?php
+    if ($this->Recipe->save($this->request->data)) {
+        // handle the success.
+    }
+    debug($this->Recipe->validationErrors);
 
 There are a few other save-related methods in the model that you'll
 find useful:
@@ -52,11 +58,9 @@ find useful:
 set($one, $two = null)
 ======================
 
-Model::set() can be used to set one or many fields of data to the
+``Model::set()`` can be used to set one or many fields of data to the
 data array inside a model. This is useful when using models with
-the ActiveRecord features offered by Model.
-
-::
+the ActiveRecord features offered by Model::
 
     <?php
     $this->Post->read(null, 1);
@@ -65,9 +69,7 @@ the ActiveRecord features offered by Model.
 
 Is an example of how you can use ``set()`` to update and save
 single fields, in an ActiveRecord approach. You can also use
-``set()`` to assign new values to multiple fields.
-
-::
+``set()`` to assign new values to multiple fields::
 
     <?php
     $this->Post->read(null, 1);
@@ -91,10 +93,10 @@ security, you can limit the saved fields to those listed in
 
 .. note::
 
-    If ``$fieldList`` is not supplied, a malicious user can add
-    additional fields to the form data (if you are not using Security
-    component), and by this change fields that were not originally
-    intended to be changed.
+    If ``$fieldList`` is not supplied, a malicious user can add additional
+    fields to the form data (if you are not using
+    :php:class:`SecurityComponent`), and by this change fields that were not
+    originally intended to be changed.
 
 The save method also has an alternate syntax::
 
@@ -103,13 +105,10 @@ The save method also has an alternate syntax::
 ``$params`` array can have any of the following available options
 as keys:
 
-::
-
-    array(
-        'validate' => true,
-        'fieldList' => array(),
-        'callbacks' => true //other possible values are false, 'before', 'after'
-    )
+* ``validate`` Set to true/false to enable disable validation.
+* ``fieldList`` An array of fields you want to allow for saving.
+* ``callbacks`` Set to false to disable callbacks.  Using 'before' or 'after'
+  will enable only those callbacks.
 
 More information about model callbacks is available
 :doc:`here <callback-methods>`
