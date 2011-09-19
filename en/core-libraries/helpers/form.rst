@@ -22,8 +22,8 @@ opening form tag.
 
     All parameters are optional. If ``create()`` is called with no
     parameters supplied, it assumes you are building a form that
-    submits to the current controller, via either the ``add()`` or
-    ``edit()`` action. The default method for form submission is POST.
+    submits to the current controller, via either the current URL. 
+    The default method for form submission is POST.
     The form element is also returned with a DOM ID. The ID is
     generated using the name of the model, and the name of the
     controller action, CamelCased. If I were to call ``create()``
@@ -35,8 +35,8 @@ opening form tag.
     .. note::
 
         You can also pass ``false`` for ``$model``. This will place your
-        form data into the array: ``$this->data`` (instead of in the
-        sub-array: ``$this->data['Model']``). This can be handy for short
+        form data into the array: ``$this->request->data`` (instead of in the
+        sub-array: ``$this->request->data['Model']``). This can be handy for short
         forms that may not represent anything in your database.
 
     The ``create()`` method allows us to customize much more using the
@@ -47,20 +47,21 @@ opening form tag.
     associated with it. If you do not specify a model, then it assumes
     you are using the default model for the current controller::
 
+        // If you are on /recipies/add
         <?php echo $this->Form->create('Recipe'); ?>
 
-        //Output:
+        // Output:
         <form id="RecipeAddForm" method="post" action="/recipes/add">
 
     This will POST the form data to the ``add()`` action of
     RecipesController. However, you can also use the same logic to
-    create an edit form. The FormHelper uses the ``$this->data``
+    create an edit form. The FormHelper uses the ``$this->request->data``
     property to automatically detect whether to create an add or edit
-    form. If ``$this->data`` contains an array element named after the
+    form. If ``$this->request->data`` contains an array element named after the
     form's model, and that array contains a non-empty value of the
     model's primary key, then the FormHelper will create an edit form
     for that record. For example, if we browse to
-    http://site.com/recipes/edit/5, we might get the following::
+    http://site.com/recipes/edit/5, we would get the following::
 
         // controllers/recipes_controller.php:
         <?php
@@ -71,11 +72,9 @@ opening form tag.
                 // Save logic goes here
             }
         }
-        ?>
 
         // views/recipes/edit.ctp:
-
-        // Since $this->request->data['Recipe']['id'] = 5, we should get an edit form
+        // Since $this->request->data['Recipe']['id'] = 5, we will get an edit form
         <?php echo $this->Form->create('Recipe'); ?>
 
         //Output:
@@ -96,47 +95,46 @@ opening form tag.
 
     The default url for all forms, is now the current url including 
     passed, named, and querystring parameters. You can override this 
-    default by supplying $options['url'] in the second parameter of 
-    $this->Form->create().
+    default by supplying ``$options['url']`` in the second parameter of 
+    ``$this->Form->create()``.
 
-$options[‘type’]
-----------------
+Options for create()
+--------------------
 
-This key is used to specify the type of form to be created. Valid
-values include ‘post’, ‘get’, ‘file’, ‘put’ and ‘delete’.
+There are a number of options for create():
 
-Supplying either ‘post’ or ‘get’ changes the form submission method
-accordingly::
+* ``$options['type']`` This key is used to specify the type of form to be created. Valid
+  values include 'post', 'get', 'file', 'put' and 'delete'.
 
-    <?php echo $this->Form->create('User', array('type' => 'get')); ?>
+  Supplying either 'post' or 'get' changes the form submission method
+  accordingly::
+  
+      <?php echo $this->Form->create('User', array('type' => 'get')); ?>
+      
+      //Output:
+      <form id="UserAddForm" method="get" action="/users/add">
+  
+  Specifying 'file' changes the form submission method to 'post', and
+  includes an enctype of "multipart/form-data" on the form tag. This
+  is to be used if there are any file elements inside the form. The
+  absence of the proper enctype attribute will cause the file uploads
+  not to function::
+  
+      <?php echo $this->Form->create('User', array('type' => 'file')); ?>
+      
+      //Output:
+      <form id="UserAddForm" enctype="multipart/form-data" method="post" action="/users/add">
+  
+  When using 'put' or 'delete', your form will be functionally
+  equivalent to a 'post' form, but when submitted, the HTTP request
+  method will be overridden with 'PUT' or 'DELETE', respectively.
+  This allows CakePHP to emulate proper REST support in web
+  browsers.
 
-    //Output:
-    <form id="UserAddForm" method="get" action="/users/add">
-
-Specifying ‘file’ changes the form submission method to ‘post’, and
-includes an enctype of “multipart/form-data” on the form tag. This
-is to be used if there are any file elements inside the form. The
-absence of the proper enctype attribute will cause the file uploads
-not to function::
-
-    <?php echo $this->Form->create('User', array('type' => 'file')); ?>
-
-    //Output:
-    <form id="UserAddForm" enctype="multipart/form-data" method="post" action="/users/add">
-
-When using ‘put’ or ‘delete’, your form will be functionally
-equivalent to a 'post' form, but when submitted, the HTTP request
-method will be overridden with 'PUT' or 'DELETE', respectively.
-This allows CakePHP to emulate proper REST support in web
-browsers.
-
-$options[‘action’]
-------------------
-
-The action key allows you to point the form to a specific action in
-your current controller. For example, if you’d like to point the
-form to the login() action of the current controller, you would
-supply an $options array like the following::
+* ``$options[‘action’]`` The action key allows you to point the form to a
+  specific action in your current controller. For example, if you’d like to
+  point the form to the login() action of the current controller, you would
+  supply an $options array like the following::
 
     <?php echo $this->Form->create('User', array('action' => 'login')); ?>
 
@@ -144,19 +142,17 @@ supply an $options array like the following::
     <form id="UserLoginForm" method="post" action="/users/login">
     </form>
 
-$options[‘url’]
----------------
-
-If the desired form action isn’t in the current controller, you can
-specify a URL for the form action using the ‘url’ key of the
-$options array. The supplied URL can be relative to your CakePHP
-application, or can point to an external domain::
+* ``$options['url']`` If the desired form action isn’t in the current
+  controller, you can specify a URL for the form action using the ‘url’ key of
+  the $options array. The supplied URL can be relative to your CakePHP
+  application, or can point to an external domain::
 
     <?php echo $this->Form->create(null, array('url' => '/recipes/add')); ?>
     // or
     <?php echo $this->Form->create(null, array(
         'url' => array('controller' => 'recipes', 'action' => 'add')
-    )); ?>
+    )); 
+    ?>
 
     //Output:
     <form method="post" action="/recipes/add">
@@ -172,20 +168,15 @@ application, or can point to an external domain::
 Also check :php:meth:`HtmlHelper::url()` method
 for more examples of different types of urls.
 
-$options[‘default’]
--------------------
+* ``$options['default']`` If 'default' has been set to boolean false, the form's
+  submit action is changed so that pressing the submit button does not submit
+  the form. If the form is meant to be submitted via AJAX, setting 'default' to
+  false suppresses the form's default behavior so you can grab the data and
+  submit it via AJAX instead.
 
-If ‘default’ has been set to boolean false, the form’s submit
-action is changed so that pressing the submit button does not
-submit the form. If the form is meant to be submitted via AJAX,
-setting ‘default’ to false suppresses the form’s default behavior
-so you can grab the data and submit it via AJAX instead.
-
-$options['inputDefaults']
----------------------------------
-
-You can declare a set of default options for ``input()`` with the
-``inputDefaults`` key to customize your default input creation::
+* ``$options['inputDefaults']`` You can declare a set of default options for
+  ``input()`` with the ``inputDefaults`` key to customize your default input
+  creation::
 
     <?php
     echo $this->Form->create('User', array(
@@ -195,9 +186,9 @@ You can declare a set of default options for ``input()`` with the
             )
         ));
 
-All inputs created from that point forward would inherit the
-options declared in inputDefaults. You can override the
-defaultOptions by declaring the option in the input() call::
+  All inputs created from that point forward would inherit the
+  options declared in inputDefaults. You can override the
+  defaultOptions by declaring the option in the input() call::
 
     <?php
     echo $this->Form->input('password'); // No div, no label
@@ -206,10 +197,10 @@ defaultOptions by declaring the option in the input() call::
 Closing the Form
 ================
 
-The FormHelper also includes an ``end()`` method that completes the
-form markup. Often, ``end()`` only outputs a closing form tag, but
+The FormHelper includes an ``end()`` method that completes the
+form. Often, ``end()`` only outputs a closing form tag, but
 using ``end()`` also allows the FormHelper to insert needed hidden
-form elements other methods may be depending on::
+form elements that :php:class:`SecurityComponent` requires::
 
     <?php echo $this->Form->create(); ?>
 
@@ -223,9 +214,7 @@ closing form tag::
 
     <?php echo $this->Form->end('Finish'); ?>
 
-
 Will output::
-
 
     <div class="submit">
         <input type="submit" value="Finish" />
@@ -250,18 +239,32 @@ Will output::
 
 See the `API <http://api.cakephp.org>`_ for further details.
 
+
+.. note::
+
+    If you are using :php:class:`SecurityComponent` in your application you
+    should always end your forms with ``end()``.
+
 .. _automagic-form-elements:
 
-Automagic Form Elements
-=======================
+Creating form inputs
+====================
 
-First, let’s look at some of the more automatic form creation
-methods in the FormHelper. The main method we’ll look at is
-input(). This method will automatically inspect the model field it
+There are a few ways to create form inputs with the FormHelper.  We'll start by
+looking at ``input()``. This method will automatically inspect the model field it
 has been supplied in order to create an appropriate input for that
-field.
+field.  Internally ``input()`` delegates to other methods in FormHelper.
 
 .. php:method:: input(string $fieldName, array $options = array())
+
+    Creates the following elements given a particular ``Model.field``:
+
+    * Wrapping div.
+    * Label element
+    * Input element(s)
+    * Error element with message if applicable.
+
+    The type of input created depends on the column datatype:
 
     Column Type
         Resulting Form Field
@@ -280,9 +283,12 @@ field.
     time
         hour, minute, and meridian selects
 
-    For example, let’s assume that my User model includes fields for a
+    The ``$options`` parameter allows you to customize how ``input()`` works,
+    and finely control what is generated.
+
+    For example, let’s assume that your User model includes fields for a
     username (varchar), password (varchar), approved (datetime) and
-    quote (text). I can use the input() method of the FormHelper to
+    quote (text). You can use the input() method of the FormHelper to
     create appropriate inputs for all of these form fields::
 
         <?php 
@@ -294,7 +300,6 @@ field.
         echo $this->Form->input('quote');      //textarea
 
         echo $this->Form->end('Add'); 
-        ?>
 
     A more extensive example showing some options for a date field::
 
@@ -305,28 +310,27 @@ field.
             'maxYear' => date('Y') - 18,
         ));
 
-    Besides the specific input options found below you can specify any
-    html attribute (for instance onfocus). For more information on
-    $options and $htmlAttributes see :doc:`/core-libraries/helpers/html`.
+    Besides the specific options for ``input()`` found below, you can specify
+    any option for the input type & any html attribute (for instance onfocus).
+    For more information on ``$options`` and ``$htmlAttributes`` see
+    :doc:`/core-libraries/helpers/html`.
 
-    And to round off, here's an example for creating a
-    hasAndBelongsToMany select. Assume that User hasAndBelongsToMany
-    Group. In your controller, set a camelCase plural variable (group
-    -> groups in this case, or ExtraFunkyModel -> extraFunkyModels)
-    with the select options. In the controller action you would put the
-    following::
+    Assuming that User hasAndBelongsToMany Group. In your controller, set a
+    camelCase plural variable (group -> groups in this case, or ExtraFunkyModel
+    -> extraFunkyModels) with the select options. In the controller action you
+    would put the following::
 
         <?php
         $this->set('groups', $this->User->Group->find('list'));
 
-    And in the view a multiple select can be expected with this simple
+    And in the view a multiple select can be created with this simple
     code::
 
         <?php
         echo $this->Form->input('Group');
 
-    If you want to create a select field while using a belongsTo- or
-    hasOne-Relation, you can add the following to your Users-controller
+    If you want to create a select field while using a belongsTo - or
+    hasOne - Relation, you can add the following to your Users-controller
     (assuming your User belongsTo Group)::
 
         <?php
@@ -355,8 +359,9 @@ model name to build an input with a format like the following::
 
     <input type="text" id="ModelnameFieldname" name="data[Modelname][fieldname]">
 
-You can manually specify the model name by passing in
-Modelname.fieldname as the first parameter::
+This allows you to omit the model name when generating inputs for the model that
+the form was created for. You can create inputs for associated models, or
+arbitrary models by passing in Modelname.fieldname as the first parameter::
 
     <?php
     echo $this->Form->input('Modelname.fieldname');
@@ -366,162 +371,349 @@ thus creating an array that can be saved in one shot with
 saveAll(), use the following convention::
 
     <?php 
-       echo $this->Form->input('Modelname.0.fieldname');
-       echo $this->Form->input('Modelname.1.fieldname');
-    ?>
+    echo $this->Form->input('Modelname.0.fieldname');
+    echo $this->Form->input('Modelname.1.fieldname');
 
+    // Will generate
     <input type="text" id="Modelname0Fieldname" name="data[Modelname][0][fieldname]">
     <input type="text" id="Modelname1Fieldname" name="data[Modelname][1][fieldname]">
 
-$options[‘type’]
-----------------
+Options
+-------
 
-You can force the type of an input (and override model
-introspection) by specifying a type. In addition to the field types
-found in the :ref:`automagic-form-elements`,
-you can also create ‘file’, and ‘password’ inputs::
+``FormHelper::input()`` supports a large number of options. In addition to its
+own options ``input()`` accepts options for the generated input type, as well as
+html attributes. The following will cover the options specific to
+``FormHelper::input()``.
 
-    <?php echo $this->Form->input('field', array('type' => 'file')); ?>
+* ``$options['type']`` You can force the type of an input, overriding model
+  introspection, by specifying a type. In addition to the field types found in
+  the :ref:`automagic-form-elements`, you can also create 'file', 'password',
+  and any type supported by HTML5::
+
+    <?php 
+    echo $this->Form->input('field', array('type' => 'file')); ?>
+    echo $this->Form->input('email', array('type' => 'email')); ?>
 
     // Output:
-
-    <div class="input">
+    <div class="input file">
         <label for="UserField">Field</label>
         <input type="file" name="data[User][field]" value="" id="UserField" />
     </div>
-
-$options[‘before’], $options[‘between’], $options[‘separator’] and $options[‘after’]
-------------------------------------------------------------------------------------
-
-Use these keys if you need to inject some markup inside the output
-of the input() method::
-
-    <?php echo $this->Form->input('field', array(
-        'before' => '--before--',
-        'after' => '--after--',
-        'between' => '--between---'
-    ));?>
-
-    Output:
-
-    <div class="input">
-    --before--
-    <label for="UserField">Field</label>
-    --between---
-    <input name="data[User][field]" type="text" value="" id="UserField" />
-    --after--
+    <div class="input email">
+        <label for="UserEmail">Email</label>
+        <input type="email" name="data[User][email]" value="" id="UserEmail" />
     </div>
 
-For radio type input the 'separator' attribute can be used to
-inject markup to separate each input/label pair::
+* ``$options['div']`` Use this option to set attributes of the input's
+  containing div.  Using a string value will set the div's class name. An array
+  will set the div's attributes to those specified by the array's keys/values.
+  Alternatively, you can set this key to false to disable the output of the div.
 
-    <?php echo $this->Form->input('field', array(
-        'before' => '--before--',
-        'after' => '--after--',
-        'between' => '--between---',
-        'separator' => '--separator--',
-        'options' => array('1', '2') 
-    ));?>
+  Setting the class name::
 
-    Output:
+    <?php
+    echo $this->Form->input('User.name', array(
+        'div' => 'class_name'
+    ));
 
-    <div class="input">
-    --before--
-    <input name="data[User][field]" type="radio" value="1" id="UserField1" />
-    <label for="UserField1">1</label>
-    --separator--
-    <input name="data[User][field]" type="radio" value="2" id="UserField2" />
-    <label for="UserField2">2</label>
-    --between---
-    --after--
+  Output::
+
+    <div class="class_name">
+        <label for="UserName">Name</label>
+        <input name="data[User][name]" type="text" value="" id="UserName" />
     </div>
 
-For ``date`` and ``datetime`` type elements the 'separator'
-attribute can be used to change the string between select elements.
-Defaults to '-'.
+  Setting multiple attributes::
 
-$options[‘options’]
--------------------
+    <?php
+    echo $this->Form->input('User.name', array(
+        'div' => array(
+            'id' => 'mainDiv',
+            'title' => 'Div Title',
+            'style' => 'display:block'
+        )
+    ));
 
-This key allows you to manually specify options for a select input,
-or for a radio group. Unless the ‘type’ is specified as ‘radio’,
-the FormHelper will assume that the target output is a select
-input::
+  Output::
 
-    <?php echo $this->Form->input('field', array('options' => array(1,2,3,4,5))); ?>
-
-Output::
-
-    <div class="input">
-        <label for="UserField">Field</label>
-        <select name="data[User][field]" id="UserField">
-            <option value="0">1</option>
-            <option value="1">2</option>
-            <option value="2">3</option>
-            <option value="3">4</option>
-            <option value="4">5</option>
-        </select>
+    <div class="input text" id="mainDiv" title="Div Title" style="display:block">
+        <label for="UserName">Name</label>
+        <input name="data[User][name]" type="text" value="" id="UserName" />
     </div>
 
-Options can also be supplied as key-value pairs::
+  Disabling div output::
 
-    <?php echo $this->Form->input('field', array('options' => array(
-        'Value 1'=>'Label 1',
-        'Value 2'=>'Label 2',
-        'Value 3'=>'Label 3'
-     ))); ?>
+        <?php echo $this->Form->input('User.name', array('div' => false));?>
 
-Output::
+  Output::
+
+        <label for="UserName">Name</label>
+        <input name="data[User][name]" type="text" value="" id="UserName" />
+
+* ``$options['label']`` Set this key to the string you would like to be
+  displayed within the label that usually accompanies the input::
+
+    <?php echo $this->Form->input('User.name', array(
+        'label' => 'The User Alias'
+    ));
+
+  Output::
 
     <div class="input">
-        <label for="UserField">Field</label>
-        <select name="data[User][field]" id="UserField">
-            <option value="Value 1">Label 1</option>
-            <option value="Value 2">Label 2</option>
-            <option value="Value 3">Label 3</option>
-        </select>
+        <label for="UserName">The User Alias</label>
+        <input name="data[User][name]" type="text" value="" id="UserName" />
     </div>
 
-If you would like to generate a select with optgroups, just pass
-data in hierarchical format. Works on multiple checkboxes and radio
-buttons too, but instead of optgroups wraps elements in fieldsets::
+  Alternatively, set this key to false to disable the output of the
+  label::
 
-    <?php echo $this->Form->input('field', array('options' => array(
-        'Label1' => array(
+    <?php echo $this->Form->input('User.name', array('label' => false));
+
+  Output::
+
+    <div class="input">
+        <input name="data[User][name]" type="text" value="" id="UserName" />
+    </div>
+
+  Set this to an array to provide additional options for the
+  ``label`` element. If you do this, you can use a ``text`` key in
+  the array to customize the label text::
+
+    <?php echo $this->Form->input('User.name', array(
+        'label' => array(
+            'class' => 'thingy',
+            'text' => 'The User Alias'
+        )
+    ));
+
+  Output::
+
+    <div class="input">
+        <label for="UserName" class="thingy">The User Alias</label>
+        <input name="data[User][name]" type="text" value="" id="UserName" />
+    </div>
+
+
+* ``$options['error']`` Using this key allows you to override the default model
+  error messages and can be used, for example, to set i18n messages. It has a
+  number of suboptions which control the wrapping element, wrapping element
+  class name, and whether HTML in the error message will be escaped.
+
+  To disable error message output set the error key to false::
+
+    <?php
+    $this->Form->input('Model.field', array('error' => false));
+
+  To modify the wrapping element type and its class, use the
+  following format::
+
+    <?php
+    $this->Form->input('Model.field', array(
+        'error' => array('attributes' => array('wrap' => 'span', 'class' => 'bzzz'))
+    ));
+
+  To prevent HTML being automatically escaped in the error message
+  output, set the escape suboption to false::
+
+    <?php
+    $this->Form->input('Model.field', array(
+        'error' => array('escape' => false)
+    ));
+
+  To override the model error messages use an array with
+  the keys matching the validation rule names::
+
+    <?php
+    $this->Form->input('Model.field', array(
+        'error' => array('tooShort' => __('This is not long enough'))
+    ));
+
+  As seen above you can set the error message for each validation
+  rule you have in your models. In addition you can provide i18n
+  messages for your forms.
+
+* ``$options['before']``, ``$options['between']``, ``$options['separator']``,
+  and ``$options['after']``
+
+  Use these keys if you need to inject some markup inside the output
+  of the input() method::
+  
+      <?php echo $this->Form->input('field', array(
+          'before' => '--before--',
+          'after' => '--after--',
+          'between' => '--between---'
+      ));?>
+      
+      // Output:
+      
+      <div class="input">
+      --before--
+      <label for="UserField">Field</label>
+      --between---
+      <input name="data[User][field]" type="text" value="" id="UserField" />
+      --after--
+      </div>
+  
+  For radio inputs the 'separator' attribute can be used to
+  inject markup to separate each input/label pair::
+  
+      <?php echo $this->Form->input('field', array(
+          'before' => '--before--',
+          'after' => '--after--',
+          'between' => '--between---',
+          'separator' => '--separator--',
+          'options' => array('1', '2') 
+      ));?>
+      
+      Output:
+      
+      <div class="input">
+      --before--
+      <input name="data[User][field]" type="radio" value="1" id="UserField1" />
+      <label for="UserField1">1</label>
+      --separator--
+      <input name="data[User][field]" type="radio" value="2" id="UserField2" />
+      <label for="UserField2">2</label>
+      --between---
+      --after--
+      </div>
+  
+  For ``date`` and ``datetime`` type elements the 'separator'
+  attribute can be used to change the string between select elements.
+  Defaults to '-'.
+
+* ``$options['format']`` The ordering of the html generated FormHelper is 
+  controllable as well. The 'format' options supports an array of strings
+  describing the template you would like said element to follow. The supported
+  array keys are:
+  ``array('before', 'input', 'between', 'label', 'after','error')``.
+
+Generating specific types of inputs
+===================================
+
+In addition to the generic ``input()`` method, ``FormHelper`` has specific
+methods for generating a number of different types of inputs.  These can be used
+to generate just the input widget itself, and combined with other methods like
+:php:meth:`~FormHelper::label()` and :php:meth:`~FormHelper::error()` to
+generate fully custom form layouts.
+
+.. _general-input-options:
+
+Common options
+--------------
+
+Many of the various input element methods support a common set of options.  All
+of these options are also supported by ``input()``. To reduce repetition the
+common options shared by all input methods are as follows:
+
+* ``$options['class']`` You can set the classname for an input::
+
+    <?php
+    echo $this->Form->input('title', array('class' => 'custom-class'));
+
+* ``$options['id']`` Set this key to force the value of the DOM id for the input.
+
+* ``$options['default']`` Used to set a default value for the input field. The
+  value is used if the data passed to the form does not contain a value for the
+  field (or if no data is passed at all).
+
+  Example usage::
+
+    <?php 
+    echo $this->Form->input('ingredient', array('default' => 'Sugar')); 
+
+  Example with select field (Size "Medium" will be selected as
+  default)::
+
+    <?php 
+    $sizes = array('s' => 'Small', 'm' => 'Medium', 'l' => 'Large');
+    echo $this->Form->input('size', array('options' => $sizes, 'default' => 'm')); 
+
+  .. note::
+
+    You cannot use ``default`` to check a checkbox - instead you might
+    set the value in ``$this->request->data`` in your controller,
+    or set the input option ``checked`` to true.
+
+  .. note::
+
+    Date and datetime fields' default values can be set by using the
+    'selected' key.
+
+Options for select and radio inputs
+-----------------------------------
+
+* ``$options['options']`` This key allows you to manually specify options for a
+  select input, or for a radio group. Unless the 'type' is specified as 'radio',
+  the FormHelper will assume that the target output is a select input::
+
+    <?php echo $this->Form->select('field', array('options' => array(1,2,3,4,5))); 
+
+  Output::
+
+    <select name="data[User][field]" id="UserField">
+        <option value="0">1</option>
+        <option value="1">2</option>
+        <option value="2">3</option>
+        <option value="3">4</option>
+        <option value="4">5</option>
+    </select>
+
+  Options can also be supplied as key-value pairs::
+
+    <?php echo $this->Form->select('field', array(
+        'options' => array(
+            'Value 1'=>'Label 1',
+            'Value 2'=>'Label 2',
+            'Value 3'=>'Label 3'
+        )
+    ));
+
+  Output::
+
+    <select name="data[User][field]" id="UserField">
+        <option value="Value 1">Label 1</option>
+        <option value="Value 2">Label 2</option>
+        <option value="Value 3">Label 3</option>
+    </select>
+
+  If you would like to generate a select with optgroups, just pass
+  data in hierarchical format. This works on multiple checkboxes and radio
+  buttons too, but instead of optgroups wraps elements in fieldsets::
+
+    <?php echo $this->Form->select('field', array('options' => array(
+        'Group 1' => array(
            'Value 1'=>'Label 1',
            'Value 2'=>'Label 2'
         ),
-        'Label2' => array(
+        'Group 2' => array(
            'Value 3'=>'Label 3'
         )
      ))); ?>
 
-Output::
+  Output::
 
-    <div class="input">
-        <label for="UserField">Field</label>
-        <select name="data[User][field]" id="UserField">
-            <optgroup label="Label1">
-                <option value="Value 1">Label 1</option>
-                <option value="Value 2">Label 2</option>
-            </optgroup>
-            <optgroup label="Label2">
-                <option value="Value 3">Label 3</option>
-            </optgroup>
-        </select>
-    </div>
+    <select name="data[User][field]" id="UserField">
+        <optgroup label="Group 1">
+            <option value="Value 1">Label 1</option>
+            <option value="Value 2">Label 2</option>
+        </optgroup>
+        <optgroup label="Group 2">
+            <option value="Value 3">Label 3</option>
+        </optgroup>
+    </select>
 
-$options[‘multiple’]
---------------------
+* ``$options['multiple']`` If 'multiple' has been set to true for an input that
+  outputs a select, the select will allow multiple selections::
 
-If ‘multiple’ has been set to true for an input that outputs a
-select, the select will allow multiple selections::
-
+    <?php
     echo $this->Form->input('Model.field', array( 'type' => 'select', 'multiple' => true ));
 
-Alternatively set ‘multiple’ to ‘checkbox’ to output a list of
-related check boxes::
+  Alternatively set 'multiple' to 'checkbox' to output a list of
+  related check boxes::
 
+    <?php
     echo $this->Form->input('Model.field', array(
         'type' => 'select', 
         'multiple' => 'checkbox',
@@ -531,7 +723,7 @@ related check boxes::
         )
     ));
 
-Output::
+  Output::
 
     <div class="input select">
        <label for="ModelField">Field</label>
@@ -546,185 +738,15 @@ Output::
        </div>
     </div>
 
-$options[‘maxLength’]
----------------------
 
-Defines the maximum number of characters allowed in a text input.
+* ``$options['legend']`` Some inputs like radio buttons will be automatically
+  wrapped in a fieldset with a legend title derived from the fields name. The
+  title can be overridden with this option. Setting this option to false will
+  completely eliminate the fieldset.
 
-$options[‘div’]
----------------
-
-Use this option to set attributes of the input's containing div.
-Using a string value will set the div's class name. An array will
-set the div's attributes to those specified by the array's
-keys/values. Alternatively, you can set this key to false to
-disable the output of the div.
-
-Setting the class name::
-
-    <?php
-    echo $this->Form->input('User.name', array('div' => 'class_name'));
-
-Output::
-
-    <div class="class_name">
-        <label for="UserName">Name</label>
-        <input name="data[User][name]" type="text" value="" id="UserName" />
-    </div>
-
-Setting multiple attributes::
-
-    <?php
-    echo $this->Form->input('User.name', array('div' => array('id' => 'mainDiv', 'title' => 'Div Title', 'style' => 'display:block')));
-
-Output::
-
-    <div class="input text" id="mainDiv" title="Div Title" style="display:block">
-        <label for="UserName">Name</label>
-        <input name="data[User][name]" type="text" value="" id="UserName" />
-    </div>
-
-Disabling div output::
-
-        <?php echo $this->Form->input('User.name', array('div' => false));?>
-
-Output::
-
-        <label for="UserName">Name</label>
-        <input name="data[User][name]" type="text" value="" id="UserName" />
-
-$options[‘label’]
------------------
-
-Set this key to the string you would like to be displayed within
-the label that usually accompanies the input::
-
-    <?php echo $this->Form->input( 'User.name', array( 'label' => 'The User Alias' ) );?>
-
-Output::
-
-    <div class="input">
-        <label for="UserName">The User Alias</label>
-        <input name="data[User][name]" type="text" value="" id="UserName" />
-    </div>
-
-Alternatively, set this key to false to disable the output of the
-label::
-
-    <?php echo $this->Form->input( 'User.name', array( 'label' => false ) ); ?>
-
-Output::
-
-    <div class="input">
-        <input name="data[User][name]" type="text" value="" id="UserName" />
-    </div>
-
-Set this to an array to provide additional options for the
-``label`` element. If you do this, you can use a ``text`` key in
-the array to customize the label text::
-
-    <?php echo $this->Form->input( 'User.name', array( 'label' => array('class' => 'thingy', 'text' => 'The User Alias') ) ); ?>
-
-Output::
-
-    <div class="input">
-        <label for="UserName" class="thingy">The User Alias</label>
-        <input name="data[User][name]" type="text" value="" id="UserName" />
-    </div>
-
-$options['legend']
-------------------
-
-Some inputs like radio buttons will be automatically wrapped in a
-fieldset with a legend title derived from the fields name. The
-title can be overridden with this option. Setting this option to
-false will completely eliminate the fieldset.
-
-$options[‘id’]
---------------
-
-Set this key to force the value of the DOM id for the input.
-
-$options['error']
------------------
-
-Using this key allows you to override the default model error
-messages and can be used, for example, to set i18n messages. It has
-a number of suboptions which control the wrapping element, wrapping
-element class name, and whether HTML in the error message will be
-escaped.
-
-To disable error message output set the error key to false::
-
-    <?php
-    $this->Form->input('Model.field', array('error' => false));
-
-To modify the wrapping element type and its class, use the
-following format::
-
-    <?php
-    $this->Form->input('Model.field', array(
-        'error' => array('attributes' => array('wrap' => 'span', 'class' => 'bzzz'))
-    ));
-
-To prevent HTML being automatically escaped in the error message
-output, set the escape suboption to false::
-
-    <?php
-    $this->Form->input('Model.field', array(
-        'error' => array('escape' => false)
-    ));
-
-To override the model error messages use an associate array with
-the keyname of the validation rule::
-
-    <?php
-    $this->Form->input('Model.field', array(
-        'error' => array('tooShort' => __('This is not long enough'))
-    ));
-
-As seen above you can set the error message for each validation
-rule you have in your models. In addition you can provide i18n
-messages for your forms.
-
-$options['default']
--------------------
-
-Used to set a default value for the input field. The value is used
-if the data passed to the form does not contain a value for the
-field (or if no data is passed at all).
-
-Example usage::
-
-    <?php 
-    echo $this->Form->input('ingredient', array('default' => 'Sugar')); 
-
-Example with select field (Size "Medium" will be selected as
-default)::
-
-    <?php 
-    $sizes = array('s' => 'Small', 'm' => 'Medium', 'l' => 'Large');
-    echo $this->Form->input('size', array('options' => $sizes, 'default' => 'm')); 
-
-.. note::
-
-    You cannot use ``default`` to check a checkbox - instead you might
-    set the value in ``$this->data`` in your controller,
-    ``$this->Form->data`` in your view, or set the input option
-    ``checked`` to true.
-
-.. note::
-
-    Date and datetime fields' default values can be set by using the
-    'selected' key.
-
-$options[‘selected’]
---------------------
-
-Used in combination with a select-type input (i.e. For types
-select, date, time, datetime). Set ‘selected’ to the value of the
-item you wish to be selected by default when the input is
-rendered::
+* ``$options['selected']`` Used in combination with a select-type input (i.e.
+  For types select, date, time, datetime). Set ‘selected’ to the value of the
+  item you wish to be selected by default when the input is rendered::
 
     <?php
     echo $this->Form->input('close_time', array(
@@ -732,133 +754,67 @@ rendered::
         'selected' => '13:30:00'
     ));
 
-.. note::
+  .. note::
 
     The selected key for date and datetime inputs may also be a UNIX
     timestamp.
 
-$options[‘rows’], $options[‘cols’]
-----------------------------------
+* ``$options['empty']`` If set to true, forces the input to remain empty.
 
-These two keys specify the number of rows and columns in a textarea
-input::
+  When passed to a select list, this creates a blank option with an
+  empty value in your drop down list. If you want to have a empty
+  value with text displayed instead of just a blank option, pass in a
+  string to empty::
+  
+      <?php echo $this->Form->input('field', array(
+          'options' => array(1, 2, 3, 4, 5),
+          'empty' => '(choose one)'
+      ));
+  
+  Output::
+  
+      <div class="input">
+          <label for="UserField">Field</label>
+          <select name="data[User][field]" id="UserField">
+              <option value="">(choose one)</option>
+              <option value="0">1</option>
+              <option value="1">2</option>
+              <option value="2">3</option>
+              <option value="3">4</option>
+              <option value="4">5</option>
+          </select>
+      </div>
+  
+  .. note::
+  
+      If you need to set the default value in a password field to blank,
+      use 'value' => '' instead.
+  
+  Options can also supplied as key-value pairs.
 
-    <?php
-    echo $this->Form->input('textarea', array('rows' => '5', 'cols' => '5'));
-
-Output::
-
-    <div class="input text">
-        <label for="FormTextarea">Textarea</label>
-        <textarea name="data[Form][textarea]" cols="5" rows="5" id="FormTextarea" >
-        </textarea>
-    </div>
-
-$options[‘empty’]
------------------
-
-If set to true, forces the input to remain empty.
-
-When passed to a select list, this creates a blank option with an
-empty value in your drop down list. If you want to have a empty
-value with text displayed instead of just a blank option, pass in a
-string to empty::
-
-    <?php echo $this->Form->input('field', array(
-        'options' => array(1, 2, 3, 4, 5),
-        'empty' => '(choose one)'
-    ));
-
-Output::
-
-    <div class="input">
-        <label for="UserField">Field</label>
-        <select name="data[User][field]" id="UserField">
-            <option value="">(choose one)</option>
-            <option value="0">1</option>
-            <option value="1">2</option>
-            <option value="2">3</option>
-            <option value="3">4</option>
-            <option value="4">5</option>
-        </select>
-    </div>
-
-.. note::
-
-    If you need to set the default value in a password field to blank,
-    use 'value' => '' instead.
-
-Options can also supplied as key-value pairs.
-
-$options[‘timeFormat’]
-----------------------
-
-Used to specify the format of the select inputs for a time-related
-set of inputs. Valid values include ‘12’, ‘24’, and ‘none’.
-
-$options[‘dateFormat’]
-----------------------
-
-Used to specify the format of the select inputs for a date-related
-set of inputs. Valid values include ‘DMY’, ‘MDY’, ‘YMD’, and
-‘NONE’.
-
-$options['minYear'], $options['maxYear']
-----------------------------------------
-
-Used in combination with a date/datetime input. Defines the lower
-and/or upper end of values shown in the years select field.
-
-$options['interval']
---------------------
-
-This option specifies the number of minutes between each option in
-the minutes select box::
-
-    <?php echo $this->Form->input('Model.time', array(
-        'type' => 'time',
-        'interval' => 15
-    ));
-
-Would create 4 options in the minute select. One for each 15
-minutes.
-
-$options['class']
------------------
-
-You can set the classname for an input field using
-``$options['class']``::
-
-    <?php
-    echo $this->Form->input('title', array('class' => 'custom-class'));
-
-$options['hiddenField']
------------------------
-
-For certain input types (checkboxes, radios) a hidden input is
-created so that the key in $this->data will exist even without a
-value specified::
+* ``$options['hiddenField']`` For certain input types (checkboxes, radios) a
+  hidden input is created so that the key in $this->data will exist even without
+  a value specified::
 
     <input type="hidden" name="data[Post][Published]" id="PostPublished_" value="0" />
     <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
 
-This can be disabled by setting the
-``$options['hiddenField'] = false``::
+  This can be disabled by setting the ``$options['hiddenField'] = false``::
 
     <?php
     echo $this->Form->checkbox('published', array('hiddenField' => false));
 
-Which outputs::
+  Which outputs::
 
     <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
 
-If you want to create multiple blocks of inputs on a form that are
-all grouped together, you should use this parameter on all inputs
-except the first. If the hidden input is on the page in multiple
-places, only the last group of input's values will be saved
+  If you want to create multiple blocks of inputs on a form that are
+  all grouped together, you should use this parameter on all inputs
+  except the first. If the hidden input is on the page in multiple
+  places, only the last group of input's values will be saved
 
-In this example, only the tertiary colors would be passed, and the
-primary colors would be overridden::
+  In this example, only the tertiary colors would be passed, and the
+  primary colors would be overridden::
 
     <h2>Primary Colors</h2>
     <input type="hidden" name="data[Color][Color]" id="Colors_" value="0" />
@@ -878,78 +834,37 @@ primary colors would be overridden::
     <input type="checkbox" name="data[Addon][Addon][]" value="5" id="ColorsOrange" />
     <label for="ColorsOrange">Orange</label>
 
-Disabling the ``'hiddenField'`` on the second input group would
-prevent this behavior.
+  Disabling the ``'hiddenField'`` on the second input group would
+  prevent this behavior.
 
-File Fields
-===========
+Datetime options
+----------------
 
-To add a file upload field to a form, you must first make sure that
-the form enctype is set to "multipart/form-data", so start off with
-a create function such as the following::
+* ``$options[‘timeFormat’]`` Used to specify the format of the select inputs for
+  a time-related set of inputs. Valid values include ‘12’, ‘24’, and ‘none’.
 
-    <?php
-    echo $this->Form->create('Document', array('enctype' => 'multipart/form-data') );
-    // OR
-    echo $this->Form->create('Document', array('type' => 'file'));
+* ``$options[‘dateFormat’]`` Used to specify the format of the select inputs for
+  a date-related set of inputs. Valid values include ‘DMY’, ‘MDY’, ‘YMD’, and
+  ‘NONE’.
 
-Next add either of the two lines to your form view file::
+* ``$options['minYear'], $options['maxYear']`` Used in combination with a
+  date/datetime input. Defines the lower and/or upper end of values shown in the
+  years select field.
 
-    <?php
-    echo $this->Form->input('Document.submittedfile', array(
-        'between' => '<br />',
-        'type'=>'file'
+* ``$options['interval']`` This option specifies the number of minutes between
+  each option in the minutes select box::
+
+    <?php echo $this->Form->input('Model.time', array(
+        'type' => 'time',
+        'interval' => 15
     ));
 
-    // or
-
-    echo $this->Form->file('Document.submittedfile');
-
-Due to the limitations of HTML itself, it is not possible to put
-default values into input fields of type 'file'. Each time the form
-is displayed, the value inside will be empty.
-
-Upon submission, file fields provide an expanded data array to the
-script receiving the form data.
-
-For the example above, the values in the submitted data array would
-be organized as follows, if the CakePHP was installed on a Windows
-server. 'tmp\_name' will have a different path in a Unix
-environment::
-
-    <?php
-    $this->request->data['Document']['submittedfile'] = array(
-        'name' => conference_schedule.pdf,
-        'type' => application/pdf,
-        'tmp_name' => C:/WINDOWS/TEMP/php1EE.tmp,
-        'error' => 0,
-        'size' => 41737,
-    );
-
-This array is generated by PHP itself, so for more detail on the
-way PHP handles data passed via file fields
-`read the PHP manual section on file uploads <http://php.net/features.file-upload>`_.
-
-Validating Uploads
-------------------
-
-Below is an example validation method you could define in your
-model to validate whether a file has been successfully uploaded::
-
-    // Based on comment 8 from: http://bakery.cakephp.org/articles/view/improved-advance-validation-with-parameters
-
-    function isUploadedFile($params){
-        $val = array_shift($params);
-        if ((isset($val['error']) && $val['error'] == 0) ||
-        (!empty( $val['tmp_name']) && $val['tmp_name'] != 'none')) {
-            return is_uploaded_file($val['tmp_name']);
-        }
-        return false;
-    }
-
+  Would create 4 options in the minute select. One for each 15
+  minutes.
 
 Form Element-Specific Methods
 =============================
+
 
 .. php:method:: text(string $name, array $options)
 
@@ -964,6 +879,75 @@ Form Element-Specific Methods
     Will output::
 
         <input name="data[User][username]" type="text" class="users" id="UserUsername" />
+
+.. php:method:: password(string $fieldName, array $options)
+
+    Creates a password field.::
+
+        <?php
+        echo $this->Form->password('password');
+
+    Will output::
+
+        <input name="data[User][password]" value="" id="UserPassword" type="password">
+
+.. php:method:: hidden(string $fieldName, array $options)
+
+    Creates a hidden form input. Example::
+
+        <?php
+        echo $this->Form->hidden('id');
+
+    Will output::
+
+        <input name="data[User][id]" value="10" id="UserId" type="hidden">
+
+    .. versionchanged:: 2.0
+    
+    Hidden fields no longer remove the class attribute. This means 
+    that if there are validation errors on hidden fields, the 
+    error-field classname will be applied. 
+
+.. php:method:: textarea(string $fieldName, array $options)
+
+    Creates a textarea input field.::
+
+        <?php
+        echo $this->Form->textarea('notes');
+
+    Will output::
+
+        <textarea name="data[User][notes]" id="UserNotes"></textarea>
+
+    .. note::
+
+        The ``textarea`` input type allows for the ``$options`` attribute
+        of ``'escape'`` which determines whether or not the contents of the
+        textarea should be escaped. Defaults to ``true``.
+
+    ::
+
+        <?php
+        echo $this->Form->textarea('notes', array('escape' => false);
+        // OR....
+        echo $this->Form->input('notes', array('type' => 'textarea', 'escape' => false);
+
+Options
+-------
+
+In addition to the :ref:`general-input-options`, textarea() supports a few
+specific options:
+
+* ``$options[‘rows’], $options[‘cols’]`` These two keys specify the number of
+  rows and columns::
+
+    <?php
+    echo $this->Form->textarea('textarea', array('rows' => '5', 'cols' => '5'));
+
+  Output::
+
+    <textarea name="data[Form][textarea]" cols="5" rows="5" id="FormTextarea" >
+    </textarea>
 
 .. php:method:: checkbox(string $fieldName, array $options)
 
@@ -995,240 +979,6 @@ Form Element-Specific Methods
     Will output::
 
         <input type="checkbox" name="data[User][done]" value="1" id="UserDone" />
-
-.. php:method:: button(string $title, array $options = array())
-
-    Creates an HTML button with the specified title and a default type
-    of "button". Setting ``$options['type']`` will output one of the
-    three possible button types:
-
-    #. submit: Same as the ``$this->Form->submit`` method - (the
-       default).
-    #. reset: Creates a form reset button.
-    #. button: Creates a standard push button.
-
-    ::
-
-        <?php
-        echo $this->Form->button('A Button');
-        echo $this->Form->button('Another Button', array('type'=>'button'));
-        echo $this->Form->button('Reset the Form', array('type'=>'reset'));
-        echo $this->Form->button('Submit Form', array('type'=>'submit'));
-
-    Will output::
-
-        <button type="submit">A Button</button>
-        <button type="button">Another Button</button>
-        <button type="reset">Reset the Form</button>
-        <button type="submit">Submit Form</button>
-
-    .. note::
-
-        The ``button`` input type allows for a special ``$option``
-        attribute called ``'escape'`` which accepts a bool and determines
-        whether to HTML entity encode the $title of the button. Defaults to
-        false.
-
-    ::
-
-        <?php 
-        echo $this->Form->button('Submit Form', array('type'=>'submit','escape'=>true));
-
-.. php:method:: year(string $fieldName, int $minYear, int $maxYear, array $attributes)
-
-    Creates a select element populated with the years from ``$minYear``
-    to ``$maxYear``. HTML attributes may be supplied in $attributes. If
-    ``$attributes['empty']`` is false, the select will not include an
-    empty option::
-
-        <?php
-        echo $this->Form->year('purchased',2000,date('Y'));
-
-    Will output::
-
-        <select name="data[User][purchased][year]" id="UserPurchasedYear">
-        <option value=""></option>
-        <option value="2009">2009</option>
-        <option value="2008">2008</option>
-        <option value="2007">2007</option>
-        <option value="2006">2006</option>
-        <option value="2005">2005</option>
-        <option value="2004">2004</option>
-        <option value="2003">2003</option>
-
-        <option value="2002">2002</option>
-        <option value="2001">2001</option>
-        <option value="2000">2000</option>
-        </select>
-
-.. php:method:: month(string $fieldName, array $attributes)
-
-    Creates a select element populated with month names::
-
-        <?php
-        echo $this->Form->month('mob');
-
-    Will output::
-
-        <select name="data[User][mob][month]" id="UserMobMonth">
-        <option value=""></option>
-        <option value="01">January</option>
-        <option value="02">February</option>
-        <option value="03">March</option>
-        <option value="04">April</option>
-        <option value="05">May</option>
-        <option value="06">June</option>
-        <option value="07">July</option>
-        <option value="08">August</option>
-        <option value="09">September</option>
-        <option value="10">October</option>
-        <option value="11">November</option>
-        <option value="12">December</option>
-        </select>
-
-    You can pass in your own array of months to be used by setting the
-    'monthNames' attribute, or have months displayed as numbers by
-    passing false. (Note: the default months are internationalized and
-    can be translated using localization.)::
-
-        <?php
-        echo $this->Form->month('mob', null, array('monthNames' => false));
-
-.. php:method:: dateTime($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $attributes = array())
-
-    Creates a set of select inputs for date and time. Valid values for
-    $dateformat are ‘DMY’, ‘MDY’, ‘YMD’ or ‘NONE’. Valid values for
-    $timeFormat are ‘12’, ‘24’, and null.
-
-    You can specify not to display empty values by setting
-    "array('empty' => false)" in the attributes parameter. It will also 
-    pre-select the fields with the current datetime. 
-
-.. php:method:: day(string $fieldName, array $attributes, boolean $showEmpty)
-
-    Creates a select element populated with the (numerical) days of the
-    month.
-
-    To create an empty option with prompt text of your choosing (e.g.
-    the first option is 'Day'), you can supply the text as the final
-    parameter as follows::
-
-        <?php
-        echo $this->Form->day('created');
-
-    Will output::
-
-        <select name="data[User][created][day]" id="UserCreatedDay">
-        <option value=""></option>
-        <option value="01">1</option>
-        <option value="02">2</option>
-        <option value="03">3</option>
-        ...
-        <option value="31">31</option>
-        </select>
-
-.. php:method:: hour(string $fieldName, boolean $format24Hours, array $attributes, boolean $showEmpty)
-
-    Creates a select element populated with the hours of the day.
-
-.. php:method:: minute(string $fieldName, array $attributes, boolean $showEmpty)
-
-    Creates a select element populated with the minutes of the hour.
-
-.. php:method:: meridian(string $fieldName, array $attributes, boolean $showEmpty)
-
-    Creates a select element populated with ‘am’ and ‘pm’.
-
-.. todo::
-
-    All the date related functions need to be updated for 2.0
-
-
-.. php:method:: error(string $fieldName, mixed $text, array $options)
-
-    Shows a validation error message, specified by $text, for the given
-    field, in the event that a validation error has occurred.
-
-    Options:
-
-    -  'escape' bool Whether or not to html escape the contents of the
-       error.
-    -  'wrap' mixed Whether or not the error message should be wrapped
-       in a div. If a string, will be used as the HTML tag to use.
-    -  'class' string The classname for the error message
-
-.. php:method:: file(string $fieldName, array $options)
-
-    Creates a file input.::
-
-        <?php
-        echo $this->Form->create('User',array('type'=>'file'));
-        echo $this->Form->file('avatar');
-
-    Will output::
-
-        <form enctype="multipart/form-data" method="post" action="/users/add">
-        <input name="data[User][avatar]" value="" id="UserAvatar" type="file">
-
-    .. note::
-
-        When using ``$this->Form->file()``, remember to set the form
-        encoding-type, by setting the type option to 'file' in
-        ``$this->Form->create()``
-
-.. php:method:: hidden(string $fieldName, array $options)
-
-    Creates a hidden form input. Example::
-
-        <?php
-        echo $this->Form->hidden('id');
-
-    Will output::
-
-        <input name="data[User][id]" value="10" id="UserId" type="hidden">
-
-    .. versionchanged:: 2.0
-    
-    Hidden fields no longer remove the class attribute. This means 
-    that if there are validation errors on hidden fields, the 
-    error-field classname will be applied. 
-
-
-.. php:method:: isFieldError(string $fieldName)
-
-    Returns true if the supplied $fieldName has an active validation
-    error.::
-
-        <?php
-        if ($this->Form->isFieldError('gender')) {
-            echo $this->Form->error('gender');
-        }
-
-    .. note::
-
-        When using ``$this->Form->input()``, errors are rendered by default.
-
-.. php:method:: label(string $fieldName, string $text, array $attributes)
-
-    Creates a label tag, populated with $text.::
-
-        <?php
-        echo $this->Form->label('status');
-
-    Will output::
-
-        <label for="UserStatus">Status</label>
-
-.. php:method:: password(string $fieldName, array $options)
-
-    Creates a password field.::
-
-        <?php
-        echo $this->Form->password('password');
-
-    Will output::
-
-        <input name="data[User][password]" value="" id="UserPassword" type="password">
 
 .. php:method:: radio(string $fieldName, array $options, array $attributes)
 
@@ -1290,6 +1040,10 @@ Form Element-Specific Methods
         $options = array('M' => 'Male', 'F' => 'Female');
         echo $this->Form->select('gender', $options, null, array('escape' => false));
 
+
+Creating buttons and submit elements
+====================================
+
 .. php:method:: submit(string $caption, array $options)
 
     Creates a submit button with caption ``$caption``. If the supplied
@@ -1316,44 +1070,274 @@ Form Element-Specific Methods
 
         <div class="submit"><input type="image" src="/img/ok.png"></div>
 
-.. php:method:: text(string $fieldName, array $options)
+.. php:method:: button(string $title, array $options = array())
 
-    Creates a text input field.::
+    Creates an HTML button with the specified title and a default type
+    of "button". Setting ``$options['type']`` will output one of the
+    three possible button types:
 
-        <?php
-        echo $this->Form->text('first_name');
-
-    Will output::
-
-        <input name="data[User][first_name]" value="" id="UserFirstName" type="text">
-
-.. php:method:: textarea(string $fieldName, array $options)
-
-    Creates a textarea input field.::
-
-        <?php
-        echo $this->Form->textarea('notes');
-
-    Will output::
-
-        <textarea name="data[User][notes]" id="UserNotes"></textarea>
-
-    .. note::
-
-        The ``textarea`` input type allows for the ``$options`` attribute
-        of ``'escape'`` which determines whether or not the contents of the
-        textarea should be escaped. Defaults to ``true``.
+    #. submit: Same as the ``$this->Form->submit`` method - (the
+       default).
+    #. reset: Creates a form reset button.
+    #. button: Creates a standard push button.
 
     ::
 
         <?php
-        echo $this->Form->textarea('notes', array('escape' => false);
-        // OR....
-        echo $this->Form->input('notes', array('type' => 'textarea', 'escape' => false);
-        ?>
+        echo $this->Form->button('A Button');
+        echo $this->Form->button('Another Button', array('type'=>'button'));
+        echo $this->Form->button('Reset the Form', array('type'=>'reset'));
+        echo $this->Form->button('Submit Form', array('type'=>'submit'));
+
+    Will output::
+
+        <button type="submit">A Button</button>
+        <button type="button">Another Button</button>
+        <button type="reset">Reset the Form</button>
+        <button type="submit">Submit Form</button>
+
+
+    The ``button`` input type supports the ``escape`` option, which accepts a
+    bool and determines whether to HTML entity encode the $title of the button.
+    Defaults to false::
+
+        <?php 
+        echo $this->Form->button('Submit Form', array('type'=>'submit','escape'=>true));
+
+Creating date and time inputs
+=============================
+
+.. php:method:: dateTime($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $attributes = array())
+
+    Creates a set of select inputs for date and time. Valid values for
+    $dateformat are ‘DMY’, ‘MDY’, ‘YMD’ or ‘NONE’. Valid values for
+    $timeFormat are ‘12’, ‘24’, and null.
+
+    You can specify not to display empty values by setting
+    "array('empty' => false)" in the attributes parameter. It will also 
+    pre-select the fields with the current datetime. 
+
+.. php:method:: year(string $fieldName, int $minYear, int $maxYear, array $attributes)
+
+    Creates a select element populated with the years from ``$minYear``
+    to ``$maxYear``. HTML attributes may be supplied in $attributes. If
+    ``$attributes['empty']`` is false, the select will not include an
+    empty option::
+
+        <?php
+        echo $this->Form->year('purchased', 2000, date('Y'));
+
+    Will output::
+
+        <select name="data[User][purchased][year]" id="UserPurchasedYear">
+        <option value=""></option>
+        <option value="2009">2009</option>
+        <option value="2008">2008</option>
+        <option value="2007">2007</option>
+        <option value="2006">2006</option>
+        <option value="2005">2005</option>
+        <option value="2004">2004</option>
+        <option value="2003">2003</option>
+
+        <option value="2002">2002</option>
+        <option value="2001">2001</option>
+        <option value="2000">2000</option>
+        </select>
+
+.. php:method:: month(string $fieldName, array $attributes)
+
+    Creates a select element populated with month names::
+
+        <?php
+        echo $this->Form->month('mob');
+
+    Will output::
+
+        <select name="data[User][mob][month]" id="UserMobMonth">
+        <option value=""></option>
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+        </select>
+
+    You can pass in your own array of months to be used by setting the
+    'monthNames' attribute, or have months displayed as numbers by
+    passing false. (Note: the default months are internationalized and
+    can be translated using localization.)::
+
+        <?php
+        echo $this->Form->month('mob', null, array('monthNames' => false));
+
+.. php:method:: day(string $fieldName, array $attributes)
+
+    Creates a select element populated with the (numerical) days of the
+    month.
+
+    To create an empty option with prompt text of your choosing (e.g.
+    the first option is 'Day'), you can supply the text as the final
+    parameter as follows::
+
+        <?php
+        echo $this->Form->day('created');
+
+    Will output::
+
+        <select name="data[User][created][day]" id="UserCreatedDay">
+        <option value=""></option>
+        <option value="01">1</option>
+        <option value="02">2</option>
+        <option value="03">3</option>
+        ...
+        <option value="31">31</option>
+        </select>
+
+.. php:method:: hour(string $fieldName, boolean $format24Hours, array $attributes)
+
+    Creates a select element populated with the hours of the day.
+
+.. php:method:: minute(string $fieldName, array $attributes)
+
+    Creates a select element populated with the minutes of the hour.
+
+.. php:method:: meridian(string $fieldName, array $attributes)
+
+    Creates a select element populated with ‘am’ and ‘pm’.
+
+
+Displaying and checking errors
+==============================
+
+.. php:method:: error(string $fieldName, mixed $text, array $options)
+
+    Shows a validation error message, specified by $text, for the given
+    field, in the event that a validation error has occurred.
+
+    Options:
+
+    -  'escape' bool Whether or not to html escape the contents of the
+       error.
+    -  'wrap' mixed Whether or not the error message should be wrapped
+       in a div. If a string, will be used as the HTML tag to use.
+    -  'class' string The classname for the error message
+
+.. php:method:: isFieldError(string $fieldName)
+
+    Returns true if the supplied $fieldName has an active validation
+    error.::
+
+        <?php
+        if ($this->Form->isFieldError('gender')) {
+            echo $this->Form->error('gender');
+        }
+
+    .. note::
+
+        When using :php:meth:`FormHelper::input()`, errors are rendered by default.
+
+.. php:method:: file(string $fieldName, array $options)
+
+    To add a file upload field to a form, you must first make sure that
+    the form enctype is set to "multipart/form-data", so start off with
+    a create function such as the following::
+
+        <?php
+        echo $this->Form->create('Document', array('enctype' => 'multipart/form-data') );
+        // OR
+        echo $this->Form->create('Document', array('type' => 'file'));
+
+    Next add either of the two lines to your form view file::
+
+        <?php
+        echo $this->Form->input('Document.submittedfile', array(
+            'between' => '<br />',
+            'type'=>'file'
+        ));
+
+        // or
+
+        echo $this->Form->file('Document.submittedfile');
+
+    Due to the limitations of HTML itself, it is not possible to put
+    default values into input fields of type 'file'. Each time the form
+    is displayed, the value inside will be empty.
+
+    Upon submission, file fields provide an expanded data array to the
+    script receiving the form data.
+
+    For the example above, the values in the submitted data array would
+    be organized as follows, if the CakePHP was installed on a Windows
+    server. 'tmp\_name' will have a different path in a Unix
+    environment::
+
+        <?php
+        $this->request->data['Document']['submittedfile'] = array(
+            'name' => conference_schedule.pdf,
+            'type' => application/pdf,
+            'tmp_name' => C:/WINDOWS/TEMP/php1EE.tmp,
+            'error' => 0,
+            'size' => 41737,
+        );
+
+    This array is generated by PHP itself, so for more detail on the
+    way PHP handles data passed via file fields
+    `read the PHP manual section on file uploads <http://php.net/features.file-upload>`_.
+
+Validating Uploads
+------------------
+
+Below is an example validation method you could define in your
+model to validate whether a file has been successfully uploaded::
+
+    <?php
+    function isUploadedFile($params){
+        $val = array_shift($params);
+        if ((isset($val['error']) && $val['error'] == 0) ||
+            (!empty( $val['tmp_name']) && $val['tmp_name'] != 'none')
+        ) {
+            return is_uploaded_file($val['tmp_name']);
+        }
+        return false;
+    }
+
+Creates a file input::
+
+    <?php
+    echo $this->Form->create('User',array('type'=>'file'));
+    echo $this->Form->file('avatar');
+
+Will output::
+
+    <form enctype="multipart/form-data" method="post" action="/users/add">
+    <input name="data[User][avatar]" value="" id="UserAvatar" type="file">
+
+.. note::
+
+    When using ``$this->Form->file()``, remember to set the form
+    encoding-type, by setting the type option to 'file' in
+    ``$this->Form->create()``
+
+.. php:method:: label(string $fieldName, string $text, array $attributes)
+
+    Creates a label tag, populated with $text.::
+
+        <?php
+        echo $this->Form->label('status');
+
+    Will output::
+
+        <label for="UserStatus">Status</label>
+
 
 .. _form-improvements-1-3:
-
 
 2.0 updates
 ================
@@ -1396,22 +1380,6 @@ the error-field classname will be applied.
 
 The FormHelper is one of the most frequently used classes in
 CakePHP, and has had several improvements made to it.
-
-**Entity depth limitations**
-
-In 1.2 there was a hard limit of 5 nested keys. This posed
-significant limitations on form input creation in some contexts. In
-1.3 you can now create infinitely nested form element keys.
-Validation errors and value reading for arbitrary depths has also
-been added.
-
-**Model introspection**
-
-Support for adding 'required' classes, and properties like
-``maxlength`` to hasMany and other associations has been improved.
-In the past only 1 model and a limited set of associations would be
-introspected. In 1.3 models are introspected as needed, providing
-validation and additional information such as maxlength.
 
 **Default options for input()**
 
@@ -1468,41 +1436,3 @@ Many methods such as ``select``, ``year``, ``month``, ``day``,
 ``$showEmpty`` parameter, these have all been removed and rolled
 into the ``$attributes`` parameter using the ``'empty'`` key.
 
-**Default url**
-
-The default url for forms either was ``add`` or ``edit`` depending
-on whether or not a primary key was detected in the data array. In
-1.3 the default url will be the current action, making the forms
-submit to the action you are currently on.
-
-**Disabling hidden inputs for radio and checkbox**
-
-The automatically generated hidden inputs for radio and checkbox
-inputs can be disabled by setting the ``'hiddenField'`` option to
-``false``.
-
-**button()**
-
-button() now creates button elements, these elements by default do
-not have html entity encoding enabled. You can enable html escaping
-using the ``escape`` option. The former features of
-``FormHelper::button`` have been moved to ``FormHelper::submit``.
-
-**submit()**
-
-Due to changes in ``button()``, ``submit()`` can now generate
-reset, and other types of input buttons. Use the ``type`` option to
-change the default type of button generated. In addition to
-creating all types of buttons, ``submit()`` has ``before`` and
-``after`` options that behave exactly like their counterparts in
-``input()``.
-
-**$options['format']**
-
-The HTML generated by the form helper is now more flexible than
-ever before. The $options parameter to Form::input() now supports
-an array of strings describing the template you would like said
-element to follow. It's just been recently added to SCM, and has a
-few bugs for non PHP 5.3 users, but should be quite useful for all.
-The supported array keys are
-``array('before', 'input', 'between', 'label', 'after', 'error')``.
