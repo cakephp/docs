@@ -153,8 +153,8 @@ properly. Furthermore, if you hash incoming passwords manually
 hash them again, and they will not match.
 
 Next we need to make some modifications to ``AppController``. If
-you don't have ``/app/app_controller.php``, create it. Note that
-this goes in /app/, not /app/controllers/. Since we want our entire
+you don't have ``/app/Controller/AppController.php``, create it. Note that
+this goes in /app/Controller/, not /app/app_controllers.php. Since we want our entire
 site controlled with Auth and Acl, we will set them up in
 ``AppController``.
 ::
