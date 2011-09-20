@@ -6,40 +6,39 @@ PYTHON = python
 
 .PHONY: all clean html latexpdf epub htmlhelp
 
+# Languages that can be built.
+LANGS = en es fr pt
+
 # Dependencies to perform before running other builds.
-SPHINX_DEPENDENCIES = \
-	es/Makefile \
-	fr/Makefile \
-	pt/Makefile
+# Clone the en/Makefile everywhere.
+SPHINX_DEPENDENCIES = $(foreach lang, $(LANGS), $(lang)/Makefile)
 
 # Copy-paste the english Makefile everwhere its needed.
-%/Makefile : en/Makefile
-	$(PYTHON) -c "import shutil; shutil.copyfile('$<', '$@')"
+%/Makefile: en/Makefile
+	cp $< $@
+
+#
+# The various formats the documentation can be created in.
+# 
+# Loop over the possible languages and call other build targets.
+#
+html: $(foreach lang, $(LANGS), html-$(lang))
+htmlhelp: $(foreach lang, $(LANGS), htmlhelp-$(lang))
+epub: $(foreach lang, $(LANGS), epub-$(lang))
+htmlhelp: $(foreach lang, $(LANGS), htmlhelp-$(lang))
 
 # Make the HTML version of the documentation with correctly nested language folders.
-html: $(SPHINX_DEPENDENCIES)
-	cd en && make html LANG=en
-	cd es && make html LANG=es
-	cd fr && make html LANG=fr
-	cd pt && make html LANG=pt
+html-%: $(SPHINX_DEPENDENCIES)
+	cd $* && make html LANG=$*
 
-htmlhelp: $(SPHINX_DEPENDENCIES)
-	cd en && make htmlhelp LANG=en
-	cd es && make htmlhelp LANG=es
-	cd fr && make htmlhelp LANG=fr
-	cd pt && make htmlhelp LANG=pt
+htmlhelp-%: $(SPHINX_DEPENDENCIES)
+	cd $* && make htmlhelp LANG=$*
 
-epub: $(SPHINX_DEPENDENCIES)
-	cd en && make epub LANG=en
-	cd es && make epub LANG=es
-	cd fr && make epub LANG=fr
-	cd pt && make epub LANG=pt
+epub-%: $(SPHINX_DEPENDENCIES)
+	cd $* && make epub LANG=$*
 
-latexpdf: $(SPHINX_DEPENDENCIES)
-	cd en && make latexpdf LANG=en
-	cd es && make latexpdf LANG=es
-	cd fr && make latexpdf LANG=fr
-	cd pt && make latexpdf LANG=pt
+latexpdf-%: $(SPHINX_DEPENDENCIES)
+	cd $* && make latexpdf LANG=$*
 
 clean:
 	rm -rf build/*
