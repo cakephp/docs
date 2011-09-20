@@ -222,6 +222,8 @@ epub_author = u'CakePHP'
 epub_publisher = u'CakePHP'
 epub_copyright = u'2011, CakePHP'
 
+epub_theme = 'epub'
+
 # The language of the text. It defaults to the language option
 # or en if the language is not set.
 #epub_language = ''
