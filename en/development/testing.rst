@@ -218,6 +218,8 @@ webrunner you can use a GET parameter to filter test methods::
 The filter parameter is used as a case-sensitve regular expression for filtering
 which test methods to run.
 
+.. _run-tests-from-command-line:
+
 Running tests from command line
 -------------------------------
 
@@ -988,4 +990,74 @@ prefix your plugin fixtures with ``plugin.blog.blog_post``::
 If you want to use plugin fixtures in the app tests you can
 reference them using ``plugin.pluginName.fixtureName`` syntax in the
 ``$fixtures`` array.
+
+Integration with Jenkins
+========================
+
+`Jenkins <http://jenkins-ci.org>`_ is a continous integration server, that can
+help you automate the running of your test cases.  This helps ensure that all
+your tests stay passing and your application is always ready.
+
+Integrating a CakePHP application with Jenkins is fairly straightforward.  The
+following assumes you've already installed Jenkins on \*nix system, and are able
+to administer it.  You also know how to create jobs, and run builds.  If you are
+unsure of any of these, refer to the `Jenkins documentation <http://jenkins-ci.org/>`_ .
+
+Create a job
+------------
+
+Start off by creating a job for your application, and connect your repository
+so that jenkins can access your code.
+
+Add test database config
+------------------------
+
+Using a separate database just for Jenkins is generally a good idea, as it stops
+bleedthrough and avoids a number of basic problems.  Once you've created a new
+database in a database server that jenkins can access (usually localhost).  Add
+a *shell script step* to the build that contains the following::
+
+    cat > app/Config/database.php <<'DATABASE_PHP'
+    <?php
+    class DATABASE_CONFIG {
+      var $test = array(
+        'datasource' => 'Database/Mysql',
+        'host' => 'localhost',
+        'database' => 'jenkins_test',
+        'login' => 'jenkins',
+        'password' => 'cakephp_jenkins',
+        'encoding' => 'utf8'
+      );
+    }
+    DATABASE_PHP
+ 
+This ensures that you'll always have the correct database configuration that
+Jenkins requires.  Do the same for any other configuration files you need to.
+Its often a good idea to drop and re-create the database before each build as
+well.  This insulates you from chained failures, where one broken build causes
+others to fail.  Add another *shell script step* to the build that contains the
+following::
+
+    mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE jenkins_test; CREATE DATABASE jenkins_test';
+
+Add your tests
+--------------
+
+Add another *shell script step* to your build.  In this step run the tests for
+your application.  Creating a junit log file, or clover coverage is often a nice
+bonus, as it gives you a nice graphical view of your testing results::
+
+    app/Console/cake testsuite app AllTests \
+    --stderr \
+    --log-junit junit.xml
+    --clover-coverage clover.xml
+
+If you use clover coverage, or the junit results, make sure to configure those
+in Jenkins as well. Failing to configure those steps will mean you won't see the results.
+
+Run a build
+-----------
+
+You should be able to run a build now.  Check the console output and make any
+necessary changes to get a passing build.
 
