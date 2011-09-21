@@ -1,5 +1,5 @@
-SessionComponent
-################
+Sessions
+########
 
 The CakePHP SessionComponent provides a way to persist client data
 between page requests. It acts as a wrapper for the ``$_SESSION`` as

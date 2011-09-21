@@ -1,5 +1,5 @@
-Security Component
-##################
+Security
+########
 
 .. php:class:: SecurityComponent
 
