@@ -1,105 +1,77 @@
-Understanding Model-View-Controller
-###################################
+MVC(*Model-View-Controller*)を理解する
+####################################################
 
-CakePHP follows the
-`MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_
-software design pattern. Programming using MVC separates your
-application into three main parts:
+CakePHPは
+`MVC <http://ja.wikipedia.org/wiki/Model_View_Controller>`_
+デザインパターンを採用しています。MVCを利用したプログラミングはアプリケーションを3つの主要なパーツに分解します：
 
-The Model layer
-================
+モデル(*Model*)層
+=================
 
-The Model layer represents the part of your application that
-implements the business logic. this means that it is responsible
-for retrieving data, converting it into meaningful concepts to your
-application, as well as processing, validating, associating and any
-other task relative to handling this data.
+モデル層はビジネスロジックを実装するアプリケーションの部品を表します。これはデータの検索、アプリケーションに意味のある形への変換、また処理、検証（*validating*）、関連(*associating*)、そしてデータを扱うことに関する様々なタスクに責任をもつことを意味します。
 
-At a first glance, Model objects can be looked at as the first layer
-of interaction with any database you might be using for your application. 
-But in general they stand for the major concepts around which you
-implement your application.
+一見して、モデルオブジェクトはアプリケーションに使用しているであろうデータベースとやりとりする最初の層と見ることができるでしょう。
+しかし、一般的にこれはアプリケーションを実装するものの主要な概念を表します。
 
-In the case of a social network, the Model layer would take care of
-tasks such as Saving the user data, saving friends associations, storing
-and retrieving user photos, finding new friends for suggestions, etc.
-While the model objects can be thought as "Friend", "User", "Comment", "Photo"
+ソーシャルネットワークのケースでは、モデル層はユーザのデータを保存する、友人の繋がりを保存する、ユーザの写真を保存または検索する、新しい友人の提案を検索する、等々のタスクを引き受けることでしょう。
+このとき、モデルオブジェクトは「友達(*Friend*)」、「ユーザ(*User*)」、「コメント(*Comment*)」、「写真(*Photo*)」と考えることができます。
 
-The View layer
+ビュー(*View*)層
 ===============
 
-The View renders a presentation of modeled data. Being separated form the
-Model objects, it is responsible got using the information it has available
-to produce any presentational interface your application might need.
+ビューはモデリングされたデータの表現を描写します。利用する情報の取得に責任を持つモデルオブジェクトから分離されて、ビューはアプリケーションが必要とする表現に関するインターフェイスの生成を担当します。
 
-For example, as the Model layer returns a set of data, the view would use it
-to render a HTML page containing it. Or a XML formatted result for others to
-consume.
+例として、モデル層はデータのセットを返し、ビューはそれを含んだHTMLページ、もしくは、その他の用途の為にXMLで整形された結果を描画します。
 
-The View layer is not only limited to HTML or text representation of the data,
-it can be used to deliver a wide variety of formats depending on your needs,
-such as videos, music, documents and any other format you can think of.
+ビュー層はデータのHTMLやテキストの表現のみに制限されているわけではありません。
+動画、音楽、ドキュメント、あなたが考えうるその他のフォーマットなど、必要に応じた幅広いフォーマットを供給するために利用することができます。
 
-The Controller layer
-====================
+コントローラ(*Controller*)層
+============================
 
-The Controller layer handles requests from users. It's responsible for rendering
-back a response with the aid of both the Model and the View Layer.
+コントローラ層はユーザからのリクエストを扱います。
+これはモデル層とビュー層の助けを借りてレスポンスをレンダリングして返す責任を負います。
 
-Controllers can be seen as managers taking care that all needed resources for
-completing a task are delegated to the correct workers. It waits for petitions
-from clients, check their validity according to authentication or authorization rules,
-delegates data fetching or processing to the model, and selects the correct
-type of presentational data the that client is accepting, to finally delegate
-this rendering process to the View layer.
+コントローラは、タスクを終える為の全ての必要とされるリソースが正しい労働者に委譲されることに注意を払うマネージャーと見ることができます。
+クライアントからの要求を待ち、認証と承認のルールによる検証を行い、データの取得または処理をモデルに委譲し、クライアントが受け入れる適切な表示上のデータの種類を採択し、最終的にその描画処理をビュー層に委譲します。
 
 
-CakePHP request cycle
-=====================
+CakePHPのリクエスト循環
+=======================
 
 |Figure 1|
-Figure: 1: A Basic MVC Request
+図1: 基本的なMVCリクエスト
 
-Figure: 1 Shows the typical handling of a client request in CakePHP
+図1: CakePHPでのクライアント・リクエストの典型的な処理を示す
 
 
-The typical CakePHP request cycle starts with a user requesting a page or
-resource in your application. This request is first processed by a dispatcher
-which will select the correct controller object to handle it.
+典型的なCakePHPのリクエスト循環はユーザがアプリケーション内でページまたはリソースにリクエストを投げるところから始まります。
+このリクエストはまずディスパッチャー(*dispatcher*)により処理され、これはリクエストを処理するために適切なコントローラオブジェクトを選択します。
 
-Once the request arrives the controller, it will communicate with the Model layer
-to process any data fetching or saving operation that might be needed.
-After this communication is over, the controller will proceed at delegating to the
-correct view object the task of generating an output resulting from the data
-provided by the model.
+コントローラにリクエストが到着すると、モデル層と通信し必要とされるデータの取得または保存操作が実行されます。
+この通信が終わると、続けてコントローラはモデルから提供されたデータの基づく結果の出力を生成するタスクを適切なビューオブジェクトに委譲します。
 
-Finally, when this output is generated, it is immediately rendered to the user
+最後に、この出力が生成されると、すぐにユーザに対して描画が行われます。
 
-Almost every request to your application will follow this basic
-pattern. We'll add some details later on which are specific to
-CakePHP, so keep this in mind as we proceed.
+アプリケーションへのほとんどのリクエストはこの基本的なパターンを踏襲します。
+後にCakePHPに特有なものの詳細を追加しますので、これを覚えておいてください。
 
-Benefits
-========
+利益
+====
 
-Why use MVC? Because it is a tried and true software design pattern
-that turns an application into a maintainable, modular, rapidly
-developed package. Crafting application tasks into separate models,
-views, and controllers makes your application very light on its
-feet. New features are easily added, and new faces on old features
-are a snap. The modular and separate design also allows developers
-and designers to work simultaneously, including the ability to
-rapidly
-`prototype <http://en.wikipedia.org/wiki/Software_prototyping>`_.
-Separation also allows developers to make changes in one part of
-the application without affecting the others.
+どうしてMVCを利用するのでしょうか。それは確かに信用できるソフトウェア・デザインパターンで、アプリケーションに保守性、モジュール性を与え、アプリケーションを高速に開発されたパッケージへと変貌させます。
+アプリケーションの仕事を分割されたモデル、ビュー、コントローラに組み立てることは、アプリケーションの足取りを非常に軽くします。
+新しい機能は簡単に追加でき、古い機能の改訂は一捻りです。
+また、モジュール化され分割された設計は開発者とデザイナーが同時に作業することを可能にします。
+これは迅速に
+`プロトタイピング <http://ja.wikipedia.org/wiki/%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%97%E3%83%AD%E3%83%88%E3%82%BF%E3%82%A4%E3%83%94%E3%83%B3%E3%82%B0>`_
+を行えるということでもあります。
+また分割は、開発者が他に影響することなくアプリケーションの一部に変更を加えることを可能にします。
 
-If you've never built an application this way, it takes some time
-getting used to, but we're confident that once you've built your
-first application using CakePHP, you won't want to do it any other
-way.
+もしあなたがこの方法でアプリケーションを構築したことが無いなら、慣れるためにある程度の時間を必要とします。
+しかし一度でもCakePHPを利用したアプリケーションを構築したなら、あなたは他の方法でやりたいと思わないであろうことを私たちは確信しています。
 
-To get started on your first CakePHP application,
-:doc:`try the blog tutorial now </tutorials-and-examples/blog/blog>`
+最初のCakePHPアプリケーションを開始するには、
+:doc:`今すぐブログチュートリアルを試しましょう。 </tutorials-and-examples/blog/blog>`
 
 .. |Figure 1| image:: /_static/img/basic_mvc.png

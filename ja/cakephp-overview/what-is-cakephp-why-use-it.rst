@@ -1,57 +1,49 @@
-What is CakePHP? Why Use it?
-############################
+CakePHPって何？使う理由は？
+###########################
 
-`CakePHP <http://www.cakephp.org/>`_ is a
-`free <http://en.wikipedia.org/wiki/MIT_License>`_,
-`open-source <http://en.wikipedia.org/wiki/Open_source>`_,
-`rapid development <http://en.wikipedia.org/wiki/Rapid_application_development>`_
-`framework <http://en.wikipedia.org/wiki/Application_framework>`_
-for `PHP <http://www.php.net/>`_. It’s a foundational structure for
-programmers to create web applications. Our primary goal is to
-enable you to work in a structured and rapid manner–without loss of
-flexibility.
+`CakePHP <http://www.cakephp.org/>`_ は、
+`フリー <http://ja.wikipedia.org/wiki/MIT_License>`_ 、また
+`オープンソース <http://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9>`_ で作成されている、
+`PHP <http://www.php.net/>`_ の
+`高速開発 <http://en.wikipedia.org/wiki/Rapid_application_development>`_
+`フレームワーク <http://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF>`_ です。
+それは、プログラマーがwebアプリケーションを作る際の基本的な骨組みとなります。
+私たちの主要な目標は、柔軟性を失うことなく、構造化されたすばやい仕方での開発を可能にすることです。
 
-CakePHP takes the monotony out of web development. We provide you
-with all the tools you need to get started coding what you really
-need to get done: the logic specific to your application. Instead
-of reinventing the wheel every time you sit down to a new project,
-check out a copy of CakePHP and get started with the real guts of
-your application.
+CakePHPは、web開発から単調な作業を取り除きます。
+また、本当にするべきコーディング、つまり、アプリケーション固有のロジックに関するコーディングを始めるためのツールがすべて準備されています。
+新しいプロジェクトを始める時には、毎回、車輪の再開発をする代わりに、CakePHPのコピーをチェックアウトして、アプリケーションの本質部分の開発にすぐに取り掛かれます。
 
-CakePHP has an active
-`developer team <http://cakephp.lighthouseapp.com/contributors>`_
-and community, bringing great value to the project. In addition to
-keeping you from wheel-reinventing, using CakePHP means your
-application’s core is well tested and is being constantly
-improved.
+CakePHPにはアクティブな
+`開発チーム <http://cakephp.lighthouseapp.com/contributors>`_ とコミュニティが存在し、プロジェクトに貢献しています。
+CakePHPを使用する、ということは、車輪の再開発を避けるだけでなく、あなたが開発するアプリケーションのコア部分がよくテストされ、常に改良されている、ということになります。
 
-Here’s a quick list of features you’ll enjoy when using CakePHP:
+CakePHPの使用で益を受ける幾つかの点をざっと挙げると次のようなものがあります：
 
 
--  Active, friendly `community <http://cakephp.org/feeds>`_
--  Flexible `licensing <http://en.wikipedia.org/wiki/MIT_License>`_
--  Compatible with versions PHP 5.2.9 and greater.
--  Integrated
-   `CRUD <http://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_
-   for database interaction.
--  Application
-   `scaffolding <http://en.wikipedia.org/wiki/Scaffold_(programming)>`_.
--  Code generation.
+-  アクティブ、フレンドリーな `コミュニティ <http://cakephp.org/feeds>`_
+-  フレキシブルな `ライセンス <http://ja.wikipedia.org/wiki/MIT_License>`_
+-  PHP5.2.9以上との互換性をもつ
+-  データベースとのやり取りのための、
+   `CRUD <http://ja.wikipedia.org/wiki/CRUD>`_
+   が統合済み
+-  アプリケーションの
+   `足場組み（*scaffolding*） <http://en.wikipedia.org/wiki/Scaffold_(programming)>`_
+-  コード生成
 -  `MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_
-   architecture.
--  Request dispatcher with clean, custom URLs and routes.
--  Built-in
-   `validation <http://en.wikipedia.org/wiki/Data_validation>`_.
--  Fast and flexible
-   `templating <http://en.wikipedia.org/wiki/Web_template_system>`_
-   (PHP syntax, with helpers).
--  View Helpers for AJAX, JavaScript, HTML Forms and more.
--  Email, Cookie, Security, Session, and Request Handling
-   Components.
--  Flexible
-   `ACL <http://en.wikipedia.org/wiki/Access_control_list>`_.
--  Data Sanitization.
--  Flexible `Caching <http://en.wikipedia.org/wiki/Web_cache>`_.
--  Localization.
--  Works from any web site directory, with little to no
-   `Apache <http://httpd.apache.org/>`_ configuration involved.
+   アーキテクチャ
+-  クリーンでカスタマイズ可能なURLとルーティングを用いるリクエストディスパッチャー
+-  `バリデーション <http://en.wikipedia.org/wiki/Data_validation>`_
+   を内蔵
+-  高速で柔軟性のある
+   `テンプレート <http://ja.wikipedia.org/wiki/Web_template_system>`_
+   システム（PHP構文、各種ヘルパー）
+-  AJAX、JavaScript、HTMLフォーム、などなど各種のViewヘルパー
+-  Eメール、クッキー、セキュリティ、セッション、リクエストハンドリングなどのコンポーネント
+-  柔軟な
+   `ACL <http://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E5%BE%A1%E3%83%AA%E3%82%B9%E3%83%88>`_
+-  データのサニタイズ
+-  柔軟なF `キャッシュ <http://en.wikipedia.org/wiki/Web_cache>`_
+-  ローカライゼーション
+-  どんなwebサイトのディレクトリ構造からでも動作。最小限の
+   `Apache <http://httpd.apache.org/>`_ の設定、または設定なしで可能。
