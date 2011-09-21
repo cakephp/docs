@@ -18,8 +18,8 @@ url structure without having to update all your code.
 Routes Configuration
 ====================
 
-Routes in an application are configured in ``app/Config/routes.php``
-this file is included by the :php:class:`Dispatcher` when handling routes
+Routes in an application are configured in ``app/Config/routes.php``.
+This file is included by the :php:class:`Dispatcher` when handling routes
 and allows you to define application specific routes you want used. Routes 
 declared in this file are processed top to bottom when incoming requests
 are matched.  This means that the order you place routes can affect how
