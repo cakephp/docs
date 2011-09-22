@@ -45,7 +45,7 @@ Model
     Contains your application’s models, behaviors, and datasources.
 Plugins
     Contains plugin packages.
-Tmp
+tmp
     This is where CakePHP stores temporary data. The actual data it
     stores depends on how you have CakePHP configured, but this folder
     is usually used to store model descriptions, logs, and sometimes

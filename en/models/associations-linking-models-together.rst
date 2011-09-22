@@ -37,7 +37,7 @@ one to many   hasMany               A user can have multiple recipes.
 ------------- --------------------- ---------------------------------------
 many to one   belongsTo             Many recipes belong to a user.
 ------------- --------------------- ---------------------------------------
-many to many  hasAndBelongsToMany   Recipes have, and belong to many tags.
+many to many  hasAndBelongsToMany   Recipes have, and belong to many ingredients.
 ============= ===================== =======================================
 
 Associations are defined by creating a class variable named after
@@ -75,9 +75,9 @@ appropriate to have
     class User extends AppModel {
         var $name = 'User';
         var $hasMany = array(
-            'MyRecipe' => 'Recipe',
+            'MyRecipe' => array('className' => 'Recipe'),
         );
-        var $hasAndBelongsToMany => array('Member' => 'User');
+        var $hasAndBelongsToMany => array('Member' => array('className' => 'User'));
     }
     
     class Group extends AppModel {
@@ -87,7 +87,7 @@ appropriate to have
                 'className'  => 'Recipe',
             )
         );
-        var $hasAndBelongsToMany => array('MemberOf' => 'Group');
+        var $hasAndBelongsToMany => array('MemberOf' => array('className' => 'Group'));
     }
     ?>
 
@@ -118,6 +118,7 @@ because here we have the alias 'Member' referring to both the User
 (in Group) and the Group (in User) model in the HABTM associations.
 Choosing non-unique names for model aliases across models can cause
 unexpected behavior.
+
 Cake will automatically create links between associated model
 objects. So for example in your ``User`` model you can access the
 ``Recipe`` model as
@@ -126,8 +127,7 @@ objects. So for example in your ``User`` model you can access the
     $this->Recipe->someFunction();
 
 Similarly in your controller you can access an associated model
-simply by following your model associations and without adding it
-to the ``$uses`` array:
+simply by following your model associations:
 
 ::
 
@@ -163,10 +163,16 @@ User hasOne Profile  profiles.user\_id
 Doctor hasOne Mentor mentors.doctor\_id
 ==================== ==================
 
-The User model file will be saved in /app/models/user.php. To
+.. note::
+
+    It is not mandatory to follow CakePHP conventions, you can easily override
+    the use of any foreignKey in your associations definitions. Nevertheless sticking
+    to conventions will make your code less repetitive, easier to read and to maintain.
+
+The User model file will be saved in /app/Model/User.php. To
 define the ‘User hasOne Profile’ association, add the $hasOne
 property to the model class. Remember to have a Profile model in
-/app/models/profile.php, or the association won’t work::
+/app/Model/Profile.php, or the association won’t work::
 
     <?php
     
@@ -212,13 +218,12 @@ Possible keys for hasOne association arrays include:
    hasOne relationships. The default value for this key is the
    underscored, singular name of the current model, suffixed with
    ‘\_id’. In the example above it would default to 'user\_id'.
--  **conditions**: An SQL fragment used to filter related model
-   records. It’s good practice to use model names in SQL fragments:
-   “Profile.approved = 1” is always better than just “approved = 1.”
+-  **conditions**: an array of find() compatible conditions or SQL
+   strings such as array('Profile.approved' => true)
 -  **fields**: A list of fields to be retrieved when the associated
    model data is fetched. Returns all fields by default.
--  **order**: An SQL fragment that defines the sorting order for
-   the returned associated rows.
+-  **order**: an array of find() compatible order clauses or SQL
+   strings such as array('Profile.last_name' => 'ASC')
 -  **dependent**: When the dependent key is set to true, and the
    model’s delete() method is called with the cascade parameter set to
    true, associated model records are also deleted. In this case we
@@ -316,9 +321,8 @@ Possible keys for belongsTo association arrays include:
    belongsTo relationships. The default value for this key is the
    underscored, singular name of the other model, suffixed with
    ‘\_id’.
--  **conditions**: An SQL fragment used to filter related model
-   records. It’s good practice to use model names in SQL fragments:
-   “User.active = 1” is always better than just “active = 1.”
+-  **conditions**: an array of find() compatible conditions or SQL
+   strings such as array('User.active' => true)
 -  **type**: the type of the join to use in the SQL query, default
    is LEFT which may not fit your needs in all situations, INNER may
    be helpful when you want everything from your main and associated
@@ -327,14 +331,17 @@ Possible keys for belongsTo association arrays include:
    **(NB: type value is in lower case - i.e. left, inner)**
 -  **fields**: A list of fields to be retrieved when the associated
    model data is fetched. Returns all fields by default.
--  **order**: An SQL fragment that defines the sorting order for
-   the returned associated rows.
+-  **order**: an array of find() compatible order clauses or SQL
+   strings such as array('User.username' => 'ASC')
 -  **counterCache**: If set to true the associated Model will
    automatically increase or decrease the
    “[singular\_model\_name]\_count” field in the foreign table
    whenever you do a save() or delete(). If its a string then its the
    field name to use. The value in the counter field represents the
-   number of related rows.
+   number of related rows. It can also be defined as an array key
+   signifying the field name pointing to an array of conditions to
+   apply as a filter when updating the column.
+   E.g array('recipes_published' => array('Recipe.published' => true))
 -  **counterScope**: Optional conditions array to use for updating
    counter cache field.
 
@@ -383,7 +390,7 @@ Product hasMany Option  Option.product\_id
 ======================= ==================
 
 We can define the hasMany association in our User model at
-/app/models/user.php using the string syntax as follows::
+/app/Model/User.php using the string syntax as follows::
 
     <?php
     
@@ -424,13 +431,10 @@ Possible keys for hasMany association arrays include:
    hasMany relationships. The default value for this key is the
    underscored, singular name of the actual model, suffixed with
    ‘\_id’.
--  **conditions**: An SQL fragment used to filter related model
-   records. It’s good practice to use model names in SQL fragments:
-   “Comment.status = 1” is always better than just “status = 1.”
--  **fields**: A list of fields to be retrieved when the associated
-   model data is fetched. Returns all fields by default.
--  **order**: An SQL fragment that defines the sorting order for
-   the returned associated rows.
+-  **conditions**: an array of find() compatible conditions or SQL
+   strings such as array('Comment.visible' => true)
+-  **order**:  an array of find() compatible order clauses or SQL
+   strings such as array('Profile.last_name' => 'ASC')
 -  **limit**: The maximum number of associated rows you want
    returned.
 -  **offset**: The number of associated rows to skip over (given
@@ -507,10 +511,9 @@ to be joined up, repeatedly, many times, in many different ways.
 
 The main difference between hasMany and HABTM is that a link
 between models in HABTM is not exclusive. For example, we're about
-to join up our Recipe model with a Tag model using HABTM. Attaching
-the "Italian" tag to my grandma's Gnocci recipe doesn't "use up"
-the tag. I can also tag my Honey Glazed BBQ Spaghettio's with
-"Italian" if I want to.
+to join up our Recipe model with a Tag model using HABTM. Using tomatoes
+as an Ingredient for my grandma's spaghetti recipe doesn't "use up"
+the ingredient. I can also use it for for a salad Recipe.
 
 Links between hasMany associated objects are exclusive. If my User
 hasMany Comments, a comment is only linked to a specific user. It's
@@ -547,7 +550,8 @@ Foo HABTM Bar
 
 .. note::
 
-    Table names are by convention in alphabetical order.
+    Table names are by convention in alphabetical order. It is
+    possible to define a custom table name in association definition
 
 Make sure primary keys in tables **cakes** and **recipes** have
 "id" fields as assumed by convention. If they're different than
@@ -562,12 +566,12 @@ array syntax this time::
     class Recipe extends AppModel {
         var $name = 'Recipe';   
         var $hasAndBelongsToMany = array(
-            'Tag' =>
+            'Ingredient' =>
                 array(
                     'className'              => 'Tag',
-                    'joinTable'              => 'recipes_tags',
+                    'joinTable'              => 'ingredients_recipes',
                     'foreignKey'             => 'recipe_id',
-                    'associationForeignKey'  => 'tag_id',
+                    'associationForeignKey'  => 'ingredient_id',
                     'unique'                 => true,
                     'conditions'             => '',
                     'fields'                 => '',
@@ -586,16 +590,18 @@ Possible keys for HABTM association arrays include:
 
 
 -  **className**: the classname of the model being associated to
-   the current model. If you're defining a ‘Recipe HABTM Tag'
-   relationship, the className key should equal ‘Tag.'
+   the current model. If you're defining a ‘Recipe HABTM Ingredient'
+   relationship, the className key should equal ‘Ingredient.'
 -  **joinTable**: The name of the join table used in this
    association (if the current table doesn't adhere to the naming
    convention for HABTM join tables).
 -  **with**: Defines the name of the model for the join table. By
    default CakePHP will auto-create a model for you. Using the example
-   above it would be called RecipesTag. By using this key you can
+   above it would be called IngredientsRecipe. By using this key you can
    override this default name. The join table model can be used just
-   like any "regular" model to access the join table directly.
+   like any "regular" model to access the join table directly. By creating
+   a model class with such name and filename you can add any custom behavior
+   to the join table searches, such as adding more information/columns to it
 -  **foreignKey**: the name of the foreign key found in the current
    model. This is especially handy if you need to define multiple
    HABTM relationships. The default value for this key is the
@@ -610,13 +616,12 @@ Possible keys for HABTM association arrays include:
    existing relationship records in the foreign keys table before
    inserting new ones, when updating a record. So existing
    associations need to be passed again when updating.
--  **conditions**: An SQL fragment used to filter related model
-   records. It's good practice to use model names in SQL fragments:
-   "Comment.status = 1" is always better than just "status = 1."
+-  **conditions**: an array of find() compatible conditions or SQL
+   string
 -  **fields**: A list of fields to be retrieved when the associated
    model data is fetched. Returns all fields by default.
--  **order**: An SQL fragment that defines the sorting order for
-   the returned associated rows.
+-  **order**: an array of find() compatible order clauses or SQL
+   strings
 -  **limit**: The maximum number of associated rows you want
    returned.
 -  **offset**: The number of associated rows to skip over (given
@@ -660,150 +665,22 @@ Recipe model will also fetch related Tag records if they exist::
             )
     )
 
-Remember to define a HABTM association in the Tag model if you'd
-like to fetch Recipe data when using the Tag model.
+Remember to define a HABTM association in the Ingredient model if you'd
+like to fetch Recipe data when using the Ingredient model.
 
-It is also possible to execute custom find queries based on HABTM
-relationships. Consider the following examples:
+.. note::
 
-
-
-Assuming the same structure in the above example (Recipe HABTM
-Tag), let's say we want to fetch all Recipes with the tag
-'Dessert', one potential (wrong) way to achieve this would be to
-apply a condition to the association itself:
-
-::
-
-    $this->Recipe->bindModel(array(
-        'hasAndBelongsToMany' => array(
-            'Tag' => array('conditions'=>array('Tag.name'=>'Dessert'))
-    )));
-    $this->Recipe->find('all');
-
-::
-
-    //Data Returned
-    Array
-    (  
-        0 => Array
-            {
-            [Recipe] => Array
-                (
-                    [id] => 2745
-                    [name] => Chocolate Frosted Sugar Bombs
-                    [created] => 2007-05-01 10:31:01
-                    [user_id] => 2346
-                )
-            [Tag] => Array
-                (
-                   [0] => Array
-                        (
-                            [id] => 124
-                            [name] => Dessert
-                        )
-                )
-        )
-        1 => Array
-            {
-            [Recipe] => Array
-                (
-                    [id] => 2745
-                    [name] => Crab Cakes
-                    [created] => 2008-05-01 10:31:01
-                    [user_id] => 2349
-                )
-            [Tag] => Array
-                (
-                }
-            }
-    }
-
-Notice that this example returns ALL recipes but only the "Dessert"
-tags. To properly achieve our goal, there are a number of ways to
-do it. One option is to search the Tag model (instead of Recipe),
-which will also give us all of the associated Recipes::
-
-    $this->Recipe->Tag->find('all', array('conditions'=>array('Tag.name'=>'Dessert')));
-
-We could also use the join table model (which CakePHP provides for
-us), to search for a given ID::
-
-    $this->Recipe->bindModel(array('hasOne' => array('RecipesTag')));
-    $this->Recipe->find('all', array(
-            'fields' => array('Recipe.*'),
-            'conditions'=>array('RecipesTag.tag_id'=>124) // id of Dessert
-    ));
-
-It's also possible to create an exotic association for the purpose
-of creating as many joins as necessary to allow filtering, for
-example::
-
-    $this->Recipe->bindModel(array(
-        'hasOne' => array(
-            'RecipesTag',
-            'FilterTag' => array(
-                'className' => 'Tag',
-                'foreignKey' => false,
-                'conditions' => array('FilterTag.id = RecipesTag.tag_id')
-    ))));
-    $this->Recipe->find('all', array(
-            'fields' => array('Recipe.*'),
-            'conditions'=>array('FilterTag.name'=>'Dessert')
-    ));
-
-Both of which will return the following data::
-
-    //Data Returned
-    Array
-    (  
-        0 => Array
-            {
-            [Recipe] => Array
-                (
-                    [id] => 2745
-                    [name] => Chocolate Frosted Sugar Bombs
-                    [created] => 2007-05-01 10:31:01
-                    [user_id] => 2346
-                )
-        [Tag] => Array
-            (
-                [0] => Array
-                    (
-                        [id] => 123
-                        [name] => Breakfast
-                    )
-               [1] => Array
-                    (
-                        [id] => 124
-                        [name] => Dessert
-                    )
-               [2] => Array
-                    (
-                        [id] => 125
-                        [name] => Heart Disease
-                    )
-            )
-    }
-
-The same binding trick can be used to easily paginate your HABTM
-models. Just one word of caution: since paginate requires two
-queries (one to count the records and one to get the actual data),
-be sure to supply the ``false`` parameter to your ``bindModel();``
-which essentially tells CakePHP to keep the binding persistent over
-multiple queries, rather than just one as in the default behavior.
-Please refer to the API for more details.
+   HABTM data is treated like a complete set, each time a new data association is added
+   the complete set of associated rows in database is dropped and created again so you
+   will always need to pass the whole data set for saving. For alternative to use HABTM
+    see :ref:`hasMany-through`
 
 .. tip::
 
     For more information on saving HABTM objects see :ref:`saving-habtm`
 
-.. tip::
 
-    For more information on binding model associations on the fly see
-    :ref:`dynamic-associations`
-
-Mix and match techniques to achieve your specific objective.
+.. _hasMany-through:
 
 hasMany through (The Join Model)
 --------------------------------
@@ -811,8 +688,9 @@ hasMany through (The Join Model)
 It is sometimes desirable to store additional data with a many to
 many association. Consider the following
 
-Student hasAndBelongsToMany Course Course hasAndBelongsToMany
-Student
+`Student hasAndBelongsToMany Course`
+
+`Course hasAndBelongsToMany Student`
 
 In other words, a Student can take many Courses and a Course can be
 taken my many Students. This is a simple many to many association
@@ -832,221 +710,37 @@ the association is deleted first. You would lose the extra data in
 the columns as it is not replaced in the new insert.
 
 The way to implement our requirement is to use a **join model**,
-otherwise known (in Rails) as a **hasMany through** association.
+otherwise known as a **hasMany through** association.
 That is, the association is a model itself. So, we can create a new
 model CourseMembership. Take a look at the following models.::
 
             <?php
-            //student.php
-            class Student extends AppModel
-            {
+            //Student.php
+            class Student extends AppModel {
                 public $hasMany = array(
                     'CourseMembership'
-                );
-    
-                public $validate = array(
-                    'first_name' => array(
-                        'rule' => 'notEmpty',
-                        'message' => 'A first name is required'
-                    ),
-                    'last_name' => array(
-                        'rule' => 'notEmpty',
-                        'message' => 'A last name is required'
-                    )
                 );
             }      
             
-            //course.php
+            //Course.php
             
-            class Course extends AppModel
-            {
+            class Course extends AppModel {
                 public $hasMany = array(
                     'CourseMembership'
                 );
-    
-                public $validate = array(
-                    'name' => array(
-                        'rule' => 'notEmpty',
-                        'message' => 'A course name is required'
-                    )
-                );
             }
             
-            //course_membership.php
+            //CourseMembership.php
     
-            class CourseMembership extends AppModel
-            {
+            class CourseMembership extends AppModel {
                 public $belongsTo = array(
                     'Student', 'Course'
-                );
-    
-                public $validate = array(
-                    'days_attended' => array(
-                        'rule' => 'numeric',
-                        'message' => 'Enter the number of days the student attended'
-                    ),
-                    'grade' => array(
-                        'rule' => 'notEmpty',
-                        'message' => 'Select the grade the student received'
-                    )
                 );
             }   
 
 The CourseMembership join model uniquely identifies a given
 Student's participation on a Course in addition to extra
 meta-information.
-
-Working with join model data
-----------------------------
-
-Now that the models have been defined, let's see how we can save
-all of this. Let's say the Head of Cake School has asked us the
-developer to write an application that allows him to log a
-student's attendance on a course with days attended and grade. Take
-a look at the following code.::
-
-   <?php
-    //controllers/course_membership_controller.php
-    
-    class CourseMembershipsController extends AppController
-    {
-        public $uses = array('CourseMembership');
-        
-        public function index() {
-            $this->set('course_memberships_list', $this->CourseMembership->find('all'));
-        }
-        
-        public function add() {
-            
-            if (! empty($this->data)) {
-                
-                if ($this->CourseMembership->saveAll(
-                    $this->data, array('validate' => 'first'))) {
-
-                    
-                    $this->redirect(array('action' => 'index'));
-                }
-            }
-        }
-    }
-    
-    //views/course_memberships/add.ctp
-
-    <?php echo $form->create('CourseMembership'); ?>
-        <?php echo $form->input('Student.first_name'); ?>
-        <?php echo $form->input('Student.last_name'); ?>
-        <?php echo $form->input('Course.name'); ?>
-        <?php echo $form->input('CourseMembership.days_attended'); ?>
-        <?php echo $form->input('CourseMembership.grade'); ?>
-        <button type="submit">Save</button>
-    <?php echo $form->end(); ?>
-        
-
-You can see that the form uses the form helper's dot notation to
-build up the data array for the controller's save which looks a bit
-like this when submitted.::
-
-        Array
-        (
-            [Student] => Array
-                (
-                    [first_name] => Joe
-                    [last_name] => Bloggs
-                )
-    
-            [Course] => Array
-                (
-                    [name] => Cake
-                )
-    
-            [CourseMembership] => Array
-                (
-                    [days_attended] => 5
-                    [grade] => A
-                )
-    
-        )
-
-Cake will happily be able to save the lot together and assigning
-the foreign keys of the Student and Course into CourseMembership
-with a saveAll call with this data structure. If we run the index
-action of our CourseMembershipsController the data structure
-received now from a find('all') is::
-
-        Array
-        (
-            [0] => Array
-                (
-                    [CourseMembership] => Array
-                        (
-                            [id] => 1
-                            [student_id] => 1
-                            [course_id] => 1
-                            [days_attended] => 5
-                            [grade] => A
-                        )
-    
-                    [Student] => Array
-                        (
-                            [id] => 1
-                            [first_name] => Joe
-                            [last_name] => Bloggs
-                        )
-    
-                    [Course] => Array
-                        (
-                            [id] => 1
-                            [name] => Cake
-                        )
-    
-                )
-    
-        )
-
-There are of course many ways to work with a join model. The
-version above assumes you want to save everything at-once. There
-will be cases where you want to create the Student and Course
-independently and at a later point associate the two together with
-a CourseMembership. So you might have a form that allows selection
-of existing students and courses from picklists or ID entry and
-then the two meta-fields for the CourseMembership, e.g.::
-
-        
-        //views/course_memberships/add.ctp
-        
-        <?php echo $form->create('CourseMembership'); ?>
-            <?php echo $form->input('Student.id', array('type' => 'text', 'label' => 'Student ID', 'default' => 1)); ?>
-            <?php echo $form->input('Course.id', array('type' => 'text', 'label' => 'Course ID', 'default' => 1)); ?>
-            <?php echo $form->input('CourseMembership.days_attended'); ?>
-            <?php echo $form->input('CourseMembership.grade'); ?>
-            <button type="submit">Save</button>
-        <?php echo $form->end(); ?>
-
-And the resultant POST::
-
-     
-        Array
-        (
-            [Student] => Array
-                (
-                    [id] => 1
-                )
-    
-            [Course] => Array
-                (
-                    [id] => 1
-                )
-    
-            [CourseMembership] => Array
-                (
-                    [days_attended] => 10
-                    [grade] => 5
-                )
-    
-        )
-
-Again Cake is good to us and pulls the Student id and Course id
-into the CourseMembership with the saveAll.
 
 Join models are pretty useful things to be able to use and Cake
 makes it easy to do so with its built-in hasMany and belongsTo
@@ -1259,59 +953,6 @@ It is also possible to create self associations as shown below::
         );
     }
     ?>
-
-**An alternate method** of associating a model with itself (without
-assuming a parent/child relationship) is to have both the
-``$belongsTo`` and ``$hasMany`` relationships of a model each to
-declare an identical alias, className, and foreignKey [property]::
-
-    <?php
-    class MySchema extends CakeSchema {
-        public $users = array (
-            'id' => array ('type' => 'integer', 'default' => null, 'key' => 'primary'),
-            'username' => array ('type' => 'string', 'null' => false, 'key' => 'index'),
-            // more schema properties...
-            'last_user_id' => array ('type' => 'integer', 'default' => null, 'key' => 'index'),
-    
-            'indexes' => array (
-                'PRIMARY' => array ('column' => 'id', 'unique' => true),
-                // more keys...
-                'last_user' => array ('column' => 'last_user_id', 'unique' => false)
-            )
-        );
-    }
-    
-    class User extends AppModel {
-        public $hasMany = array (
-            'Tag' => array (
-                'foreignKey' => 'last_user_id'
-            ),
-            // more hasMany relationships...
-            'LastUser' => array (
-                'className' => 'User',
-                'foreignKey' => 'last_user_id'
-            )
-        );
-        public $belongsTo = array (
-            // in most cases this would be the only belongsTo relationship for this model
-            'LastUser' => array (
-                'className' => 'User',
-                'foreignKey' => 'last_user_id',
-                'dependent' => true
-            )
-        );
-    }
-    ?>
-
-**Reasoning** [for this particular self-association method]: Say
-there are many models which contain the property
-``$modelClass.lastUserId``. Each model has the foreign key
-``last_user_id``, a reference to the last user that
-updated/modified the record in question. The model ``User``
-*also contains* the same property (last\_user\_id), since it may be
-neat to know if someone has committed a security breach through the
-modification of any User record other than their own (you could
-also use strict ACL behaviors).
 
 **Fetching a nested array of associated records:**
 
