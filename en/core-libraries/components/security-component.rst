@@ -4,30 +4,25 @@ Security
 .. php:class:: SecurityComponent
 
 The Security Component creates an easy way to integrate tighter
-security in your application. An interface for managing
-HTTP-authenticated requests can be created with Security Component.
-It is configured in the beforeFilter() of your controllers. It has
-several configurable parameters. All of these properties can be set
-directly or through setter methods of the same name.
+security in your application. It provides methods for various tasks like:
 
-If an action is restricted using the Security Component it is
-black-holed as an invalid request which will result in a 404 error
-by default. You can configure this behavior by setting the
-$this->Security->blackHoleCallback property to a callback function
-in the controller. Keep in mind that black holes from all of the
-Security Component's methods will be run through this callback
-method.
+* Restricting which HTTP methods your application accepts.
+* CSRF protection.
+* Form tampering protection
+* Requiring that SSL be used.
+* Limiting cross controller communication.
+
+Like all components it is configured through several configurable parameters.
+All of these properties can be set directly or through setter methods of the
+same name in your controller's beforeFilter.
 
 By using the Security Component you automatically get
 `CSRF <http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_
 and form tampering protection. Hidden token fields will
 automatically be inserted into forms and checked by the Security
 component. Among other things, a form submission will not be
-accepted after a certain period of inactivity, which depends on the
-setting of ``Security.level``. On 'high', this timeout is as short
-as 10 minutes. Other token fields include a randomly generated
-nonce (one-time id) and a hash of fields which (and only which)
-must be present in the submitted POST data.
+accepted after a certain period of inactivity, which is controlled by
+the ``csrfExpires`` time.
 
 If you are using Security component's form protection features and
 other components that process form data in their ``startup()``
@@ -39,122 +34,57 @@ components in your ``$components`` array.
     When using the Security Component you **must** use the FormHelper
     to create your forms. The Security Component looks for certain
     indicators that are created and managed by the FormHelper
-    (especially those created in create() and end()). Dynamically
+    (especially those created in :php:meth:`~FormHelper::create()` 
+    and :php:meth:`~FormHelper::end()`). Dynamically
     altering the fields that are submitted in a POST request (e.g.
     disabling, deleting or creating new fields via JavaScript) is
     likely to trigger a black-holing of the request. See the
     ``$validatePost`` or ``$disabledFields`` configuration parameters.
 
-Configuration
-=============
+Handling blackhole callbacks
+============================
+
+If an action is restricted by the Security Component it is
+black-holed as an invalid request which will result in a 404 error
+by default. You can configure this behavior by setting the
+``$this->Security->blackHoleCallback`` property to a callback function
+in the controller.
+
+.. php:method:: blackHole(object $controller, string $error)
+
+    Black-hole an invalid request with a 404 error or a custom
+    callback. With no callback, the request will be exited. If a
+    controller callback is set to SecurityComponent::blackHoleCallback,
+    it will be called and passed any error information.
 
 .. php:attr:: blackHoleCallback
 
     A Controller callback that will handle and requests that are
-    blackholed.
+    blackholed. A blackhole callback can be any public method on a controllers.
+    The callback should expect an parameter indicating the type of error::
 
-.. php:attr:: requirePost
+        <?php
+        function beforeFilter() {
+            $this->Security->blackHoleCallback = 'blackhole';
+        }
 
-    A List of controller actions that require a POST request to occur.
-    An array of controller actions or '\*' to force all actions to
-    require a POST.
+        function blackhole($type) {
+            // handle errors.
+        }
 
-.. php:attr:: requireGet
+    The ``$type`` parameter can have the following values:
 
-    A List of controller actions that require a GET request to occur.
-    An array of controller actions or '\*' to force all actions to
-    require a GET.
+    * 'auth' Indicates a form validation error, or a controller/action mismatch
+      error.
+    * 'csrf' Indicates a CSRF error.
+    * 'get' Indicates an HTTP method restriction failure.
+    * 'post' Indicates an HTTP method restriction failure.
+    * 'put' Indicates an HTTP method restriction failure.
+    * 'delete' Indicates an HTTP method restriction failure.
+    * 'delete' Indicates an SSL method restriction failure.
 
-.. php:attr:: requirePut
-
-    A List of controller actions that require a PUT request to occur.
-    An array of controller actions or '\*' to force all actions to
-    require a PUT.
-
-.. php:attr:: requireDelete
-
-    A List of controller actions that require a DELETE request to occur.
-    An array of controller actions or '\*' to force all actions to
-    require a DELETE.
-
-.. php:attr:: requireSecure
-
-    List of actions that require an SSL connection to occur. An array
-    of controller actions or '\*' to force all actions to require a SSL
-    connection.
-
-.. php:attr:: requireAuth
-
-    List of actions that requires a valid authentication key. This
-    validation key is set by Security Component.
-
-.. php:attr:: allowedControllers
-
-    A List of Controller from which the actions of the current
-    controller are allowed to receive requests from. This can be used
-    to control cross controller requests.
-
-.. php:attr:: allowedActions
-
-    Actions from which actions of the current controller are allowed to
-    receive requests. This can be used to control cross controller
-    requests.
-
-.. php:attr:: disabledFields
-
-    List of form fields that shall be ignored when validating POST -
-    The value, presence or absence of these form fields will not be
-    taken into account when evaluating whether a form submission is
-    valid. Specify fields as you do for the Form Helper
-    (``Model.fieldname``).
-
-.. note::
-
-    Deprecated property, superseded by unlockedFields
-
-.. php:attr:: unlockedFields
-
-    Form fields to exclude from POST validation. Fields can be unlocked
-    either in the Component, or with FormHelper::unlockField().
-    Fields that have been unlocked are not required to be part of the POST
-    and hidden unlocked fields do not have their values checked.
-    
-.. php:attr:: validatePost
-
-    Set to ``false`` to completely skip the validation of POST
-    requests, essentially turning CSRF protection off.
-
-.. php:attr:: crsfCheck
-
-    Whether to use CSRF protected forms. Set to ``false`` to disable 
-    CSRF protection on forms.
-
-.. php:attr:: crsfExpires
-
-   The duration from when a CSRF token is created that it will expire on.
-   Each form/page request will generate a new token that can only 
-   be submitted once unless it expires.  Can be any value compatible 
-   with strtotime(). Default is +30 minutes.
-
-.. php:attr:: crsfUseOnce
-
-   Controls whether or not CSRF tokens are use and burn.  Set to 
-   ``false`` to not generate new tokens on each request.  One token 
-   will be reused until it expires. This reduces the chances of 
-   users getting invalid requests because of token consumption.
-   It has the side effect of making CSRF less secure, as tokens are reusable.
-
-
-.. todo::
-
-    Missing CSRF properties added in 2.0
-
-Methods
-=======
-
-.. todo::
-
-    Update to reflect API changes in 2.0
+Restricting HTTP methods
+========================
 
 .. php:method:: requirePost()
 
@@ -180,6 +110,10 @@ Methods
     arguments. Can be called with no arguments to force all actions to
     require a DELETE.
 
+
+Restrict actions to SSL
+=======================
+
 .. php:method:: requireSecure()
 
     Sets the actions that require a SSL-secured request. Takes any
@@ -192,63 +126,109 @@ Methods
     token. Takes any number of arguments. Can be called with no
     arguments to force all actions to require a valid authentication.
 
-.. php:method:: blackHole(object $controller, string $error)
+Restricting cross controller communication
+==========================================
 
-    Black-hole an invalid request with a 404 error or a custom
-    callback. With no callback, the request will be exited. If a
-    controller callback is set to SecurityComponent::blackHoleCallback,
-    it will be called and passed any error information.
+.. php:attr:: allowedControllers
+
+    A List of Controller from which the actions of the current
+    controller are allowed to receive requests from. This can be used
+    to control cross controller requests.
+
+.. php:attr:: allowedActions
+
+    Actions from which actions of the current controller are allowed to
+    receive requests. This can be used to control cross controller
+    requests.
+
+Form tampering prevention
+=========================
+
+By default ``SecurityComponent`` prevents users from tampering with forms.  It
+does this by working with FormHelper and tracking which files are in a form.  It
+also keeps track of the values of hidden input elements.  All of this data is
+combined and turned into a hash.  When a form is submitted, SecurityComponent
+will use the POST data to build the same structure and compare the hash.
+
+.. php:attr:: unlockedFields
+
+    Set to a list of form fields to exclude from POST validation. Fields can be
+    unlocked either in the Component, or with
+    :php:meth:`FormHelper::unlockField()`.  Fields that have been unlocked are
+    not required to be part of the POST and hidden unlocked fields do not have
+    their values checked.
+    
+.. php:attr:: validatePost
+
+    Set to ``false`` to completely skip the validation of POST
+    requests, essentially turning off form validation.
+
+CSRF configuration
+==================
+
+.. php:attr:: crsfCheck
+
+    Whether to use CSRF protected forms. Set to ``false`` to disable 
+    CSRF protection on forms.
+
+.. php:attr:: crsfExpires
+
+   The duration from when a CSRF token is created that it will expire on.
+   Each form/page request will generate a new token that can only 
+   be submitted once unless it expires.  Can be any value compatible 
+   with ``strtotime()``. The default is +30 minutes.
+
+.. php:attr:: crsfUseOnce
+
+   Controls whether or not CSRF tokens are use and burn.  Set to 
+   ``false`` to not generate new tokens on each request.  One token 
+   will be reused until it expires. This reduces the chances of 
+   users getting invalid requests because of token consumption.
+   It has the side effect of making CSRF less secure, as tokens are reusable.
+
 
 Usage
 =====
 
 Using the security component is generally done in the controller
 beforeFilter(). You would specify the security restrictions you
-want and the Security Component will enforce them on its startup.
-
-::
+want and the Security Component will enforce them on its startup::
 
     <?php
     class WidgetController extends AppController {
     
-        var $components = array('Security');
+        public $components = array('Security');
     
         function beforeFilter() {
             $this->Security->requirePost('delete');
         }
     }
-    ?>
 
 In this example the delete action can only be successfully
-triggered if it recieves a POST request.
-
-::
+triggered if it recieves a POST request::
 
     <?php
     class WidgetController extends AppController {
     
-        var $components = array('Security');
+        public $components = array('Security');
     
         function beforeFilter() {
-            if(isset($this->params[Configure::read('Routing.admin')])){
+            if (isset($this->request->params['admin'])){
                 $this->Security->requireSecure();
             }
         }
     }
-    ?>
 
 This example would force all actions that had admin routing to
-require secure SSL requests.
-
-::
+require secure SSL requests::
 
     <?php
     class WidgetController extends AppController {
     
-        var $components = array('Security');
+        public $components = array('Security');
     
         function beforeFilter() {
-            if(isset($this->params[Configure::read('Routing.admin')])){
+            if (isset($this->params['admin'])){
                 $this->Security->blackHoleCallback = 'forceSSL';
                 $this->Security->requireSecure();
             }
@@ -258,7 +238,6 @@ require secure SSL requests.
             $this->redirect('https://' . env('SERVER_NAME') . $this->here);
         }
     }
-    ?>
 
 This example would force all actions that had admin routing to
 require secure SSL requests. When the request is black holed, it
@@ -326,7 +305,7 @@ applications. You can toggle on longer, multi-use tokens by setting
 the ``beforeFilter`` of your controller::
 
     <?php
-    var $components = array(
+    public $components = array(
         'Security' => array(
             'csrfUseOnce' => false
         )
