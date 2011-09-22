@@ -8,7 +8,7 @@ Welcome
 
 The CakePHP cookbook, is an openly developed community editable documentation
 project.  We hope to maintain a high level of quality, validity and accuracy for 
-the documetation.
+the documentation.
 
 Getting started
 ===============
