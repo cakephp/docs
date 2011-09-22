@@ -7,7 +7,7 @@ PYTHON = python
 .PHONY: all clean html latexpdf epub htmlhelp
 
 # Languages that can be built.
-LANGS = en es fr pt
+LANGS = en es fr ja pt
 
 # Dependencies to perform before running other builds.
 # Clone the en/Makefile everywhere.
