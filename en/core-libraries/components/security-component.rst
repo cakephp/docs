@@ -1,5 +1,5 @@
-Security Component
-##################
+Security
+########
 
 .. php:class:: SecurityComponent
 
@@ -265,58 +265,83 @@ require secure SSL requests. When the request is black holed, it
 will call the nominated forceSSL() callback which will redirect
 non-secure requests to secure requests automatically.
 
-Basic HTTP Authentication
-=========================
+.. _security-csrf:
 
-.. todo::
+CSRF protection
+===============
 
-    Update to reflect API changes in 2.0
+CSRF or Cross Site Request Forgery is a common vulnerability in web
+applications.  It allows an attacker to capture and replay a previous request,
+and sometimes submit data requests using image tags or resources on other
+domains.
 
-The SecurityComponent has some very powerful authentication
-features. Sometimes you may need to protect some functionality
-inside your application using
-`HTTP Basic Authentication <http://en.wikipedia.org/wiki/Basic_access_authentication>`_.
-One common usage for HTTP Auth is protecting a REST or SOAP API.
+Double submission and replay attacks are handled by the SecurityComponent's CSRF
+features.  They work by adding a special token to each form request.  This token
+once used cannot be used again.  If an attempt is made to re-use an expired
+token the request will be blackholed.
 
-This type of authentication is called basic for a reason. Unless
-you're transferring information over SSL, credentials will be
-transferred in plain text.
+Using CSRF protection
+---------------------
 
-Using the SecurityComponent for HTTP authentication is easy. The
-code example below includes the SecurityComponent and adds a few
-lines of code inside the controller's beforeFilter method.
-
-::
+Simply by adding the :php:class:`SecurityComponent` to your components array,
+you can benefit from the CSRF protection it provides. By default CSRF tokens are
+valid for 30 minutes and expire on use. You can control how long tokens last by setting
+csrfExpires on the component.::
 
     <?php
-    class ApiController extends AppController {
-        var $name = 'Api';
-        var $uses = array();
-        var $components = array('Security');
-    
-        function beforeFilter() {
-            $this->Security->blackHoleCallback = 'secure';
-            $this->Security->requireAuth();
-        }
-        
-        function secure(){
-            $this->redirect(array('controller' => 'pages', 'action' => 'home'));
-        }
-         
-        function index() {
-            //protected application logic goes here...
-        }
+    $components = array(
+        'Security' => array(
+            'csrfExpires' => '+1 hour'
+        )
+    );
+
+You can also set this property in your controller's ``beforeFilter``::
+
+    <?php
+    function beforeFilter() {
+        $this->Security->csrfExpires = '+1 hour';
+        ...
     }
 
-The requireAuth() method above would blackhole any non authenticated 
-request to this controller. You can also set only some actions
-of the current controller to require this authentication, just
-pass them as arguments of requireAuth() method. On the
-example below only the edit action requires authentication.
+The csrfExpires property can be any value that is compatible with
+`strtotime() <http://php.net/manual/en/function.strtotime.php>`_. By default the
+:php:class:`FormHelper` will add a ``data[_Token][key]`` containing the CSRF
+token to every form when the component is enabled.
 
-::
+Handling missing or expired tokens
+----------------------------------
+
+Missing or expired tokens are handled similar to other security violations. The
+SecurityComponent's blackHoleCallback will be called with a 'csrf' parameter.
+This helps you filter out CSRF token failures, from other warnings.
+
+Using per-session tokens instead of one-time use tokens
+-------------------------------------------------------
+
+By default a new CSRF token is generated for each request, and each token can
+only be used one. If a token is used twice, it will be blackholed. Sometimes,
+this behaviour is not desirable, as it can create issues with single page
+applications. You can toggle on longer, multi-use tokens by setting
+``csrfUseOnce`` to ``false``. This can be done in the components array, or in
+the ``beforeFilter`` of your controller::
 
     <?php
-        $this->Security->requireAuth('edit');
+    var $components = array(
+        'Security' => array(
+            'csrfUseOnce' => false
+        )
+    );
 
+This will tell the component that you want to re-use a CSRF token until it
+expires - which is controlled by the ``csrfExpires`` value. If you are having
+issues with expired tokens, this is a good balance between security and ease of
+use.
 
+Disabling the CSRF protection
+-----------------------------
+
+There may be cases where you want to disable CSRF protection on your forms for
+some reason. If you do want to disable this feature, you can set
+``$this->Security->csrfCheck = false;`` in your ``beforeFilter`` or use the
+components array. By default CSRF protection is enabled, and configured to use
+one-use tokens.

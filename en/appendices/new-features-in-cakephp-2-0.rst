@@ -221,75 +221,7 @@ validatePost in order to do dynamic forms, disabling the CSRF protection at the
 same time. For 2.0 CSRF checking has been separated from form tampering giving
 you greater control.
 
-Using CSRF protection in CakePHP 2.0
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Simply by adding the :php:class:`SecurityComponent` to your components array,
-you can benefit from the CSRF protection it provides. By default CSRF nonces are
-valid for 30 minutes. You can control how long tokens last by setting
-csrfExpires on the component.
-
-::
-
-    <?php
-    $components = array(
-        'Security' => array(
-            'csrfExpires' => '+1 hour'
-        )
-    );
-
-You can also set this property in your controller's ``beforeFilter``::
-
-    <?php
-    function beforeFilter() {
-        $this->Security->csrfExpires = '+1 hour';
-        ...
-    }
-
-The csrfExpires property can be any value that is compatible with
-`strtotime() <http://php.net/manual/en/function.strtotime.php>`_. By default the
-:php:class:`FormHelper` will add a ``data[_Token][key]`` containing the CSRF
-token to every form when the component is enabled.
-
-Handling missing or expired tokens
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Missing or expired tokens are handled similar to in previous versions. The
-SecurityComponent's blackHoleCallback will be called, but with a 'csrf'
-parameter instead of 'auth' as in previous versions. This helps you better
-filter out CSRF token failures.
-
-Using per-session tokens instead of one-time use tokens
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-By default a new CSRF token is generated for each request, and each token can
-only be used one. If a token is used twice, it will be blackholed. Sometimes,
-this behaviour is not desirable, as it can create issues with single page
-applications. You can toggle on longer, multi-use tokens by setting
-``csrfUseOnce`` to ``false``. This can be done in the components array, or in
-the ``beforeFilter`` of your controller.
-
-::
-
-    <?php
-    var $components = array(
-        'Security' => array(
-            'csrfUseOnce' => false
-        )
-    );
-
-This will tell the component that you want to re-use a CSRF token until it
-expires. If you are having issues with expired tokens, this is a good balance
-between security and ease of use.
-
-Disabling the CSRF protection
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-There may be cases where you want to disable CSRF protection on your forms for
-some reason. If you do want to disable this feature, you can set
-``$this->Security->csrfCheck = false;`` in your ``beforeFilter`` or use the
-components array. By default CSRF protection is enabled, and configured to use
-one-use tokens.
+For more information see :ref:`security-csrf`
 
 Controller
 ==========

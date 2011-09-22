@@ -351,24 +351,13 @@ applications:
 -  When you don't have a [Plugin]AppController and
    [Plugin]AppModel, you'll get missing Controller errors when trying
    to access a plugin controller.
--  You can have a default controller with the name of your plugin.
-   If you do that, you can access its index action via /[plugin].
-   Unlike 1.2 only the index action route comes built in. Other
-   shortcuts that were accessible in 1.2 will need to have routes made
-   for them. This was done to fix a number of workarounds inside
-   CakePHP
 -  You can define your own layouts for plugins, inside
    app/Plugin/[Plugin]/View/Layouts. Otherwise, plugins will use the
    layouts from the /app/View/Layouts folder by default.
 -  You can do inter-plugin communication by using
-   $this->requestAction('/plugin_name/controller_name/action'); in your
+   ``$this->requestAction('/plugin_name/controller_name/action');`` in your
    controllers.
 -  If you use requestAction, make sure controller and model names
    are as unique as possible. Otherwise you might get PHP "redefined
    class ..." errors.
 
-.. todo::
-
-	Restructure content for less redundancy and easier reading
-
-        Update 'Tips' section to be more relevant to current versions of CakePHP

@@ -1,5 +1,5 @@
-AuthComponent
-#############
+Authentication
+##############
 
 Identifying, authenticating and authorizing users is a common part of
 almost every web application.  In CakePHP AuthComponent provides a

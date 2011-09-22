@@ -28,7 +28,7 @@ While the model objects can be thought as "Friend", "User", "Comment", "Photo"
 The View layer
 ===============
 
-The View renders a presentation of modeled data. Being separated form the
+The View renders a presentation of modeled data. Being separated from the
 Model objects, it is responsible got using the information it has available
 to produce any presentational interface your application might need.
 
