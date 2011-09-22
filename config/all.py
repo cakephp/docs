@@ -247,4 +247,4 @@ epub_theme = 'epub'
 #epub_tocdup = True
 
 # Languages available.
-languages = ['en', 'pt', 'es']
+languages = ['en', 'pt', 'es', 'ja']
