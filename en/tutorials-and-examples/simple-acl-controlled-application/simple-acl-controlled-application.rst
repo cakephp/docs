@@ -9,9 +9,7 @@ tutorial, and you are familiar with
 :doc:`/console-and-shells/code-generation-with-bake`. You should have
 some experience with CakePHP, and be familiar with MVC concepts.
 This tutorial is a brief introduction to the
-```AuthComponent`` <http://api.cakephp.org/class/auth-component>`_
-and
-```AclComponent`` <http://api.cakephp.org/class/acl-component>`_.
+:php:class:`AuthComponent` and :php:class:`AclComponent`.
 
 What you will need
 
