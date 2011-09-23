@@ -1,8 +1,6 @@
 Apêndices
 ##########
 
-Appendices contain information regarding the new features
-introduced in 2.0, and the migration path from 1.3 to 2.0.
 Apêndices contêm informações sobre os novos recursos
 introduzidos na versão 2.0, e o guia de migração da versão 
 1.3 para a versão 2.0.
