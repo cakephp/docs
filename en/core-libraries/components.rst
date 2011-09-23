@@ -32,37 +32,33 @@ the box functionality for several commonly used tasks.
 To learn more about each component see the menu below, or learn more about
 :doc:`creating your own components </controllers/components>`.
 
-All core components now can be configured in the ``$components``
-array of a controller.
-
-::
+All core components can be configured in the ``$components``
+array of a controller::
 
     <?php
     class AppController extends Controller {
     
-        var $components = array(
+        public $components = array(
             'Auth' => array(
-                'loginAction' => array('controller' => 'users', 'action' => 'signOn'),
-                'fields' => array('username' => 'email', 'password' => 'password'),
+                'authenticate' => array(
+                    'Form' => array(
+                        'fields' => array('username' => 'email', 'password' => 'passwd')
+                    )
+                )
             ),
-            'Security',
-            'Email' => array(
-                'from' => 'webmaster@domain.com',
-                'sendAs' => 'html',
-            ),
+            'Security' => array(
+                'csrfExpires' => '+10 minutes'
+            )
         );
     }
 
-You can override the settings in the controller's
-``beforeFilter()``
-
-::
+You can override the settings in the controller's ``beforeFilter()``::
 
     <?php
     class MembersController extends AppController {
 
         function beforeFilter() {
-            $this->Email->from = 'support@domain.com';
+            $this->Security->csrfExpires = '+20 minutes';
         }
     }
 
