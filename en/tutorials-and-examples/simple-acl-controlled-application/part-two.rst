@@ -1,3 +1,6 @@
+Simple Acl controlled Application - part 2
+##########################################
+
 An Automated tool for creating ACOs
 ===================================
 
@@ -10,17 +13,16 @@ every controller in your application. It will add any non-private,
 non ``Controller`` methods to the Acl table, nicely nested
 underneath the owning controller. You can add and run this in your
 ``AppController`` or any controller for that matter, just be sure
-to remove it before putting your application into production.
+to remove it before putting your application into production::
 
-::
-
+    <?php
         function build_acl() {
             if (!Configure::read('debug')) {
                 return $this->_stop();
             }
             $log = array();
 
-            $aco =& $this->Acl->Aco;
+            $aco = $this->Acl->Aco;
             $root = $aco->node('controllers');
             if (!$root) {
                 $aco->create(array('parent_id' => null, 'model' => null, 'alias' => 'controllers'));
@@ -31,8 +33,10 @@ to remove it before putting your application into production.
                 $root = $root[0];
             }   
 
-            App::import('Core', 'File');
-            $Controllers = Configure::listObjects('controller');
+            App::uses('File', 'Utility');
+
+            $Controllers = App::objects('controller');
+
             $appIndex = array_search('App', $Controllers);
             if ($appIndex !== false ) {
                 unset($Controllers[$appIndex]);
@@ -100,7 +104,7 @@ to remove it before putting your application into production.
         }
 
         function _getClassMethods($ctrlName = null) {
-            App::import('Controller', $ctrlName);
+            App::uses($ctrlName . 'Controller', 'Controller');
             if (strlen(strstr($ctrlName, '.')) > 0) {
                 // plugin's controller
                 $num = strpos($ctrlName, '.');
@@ -168,86 +172,54 @@ to remove it before putting your application into production.
      *
      */
         function _getPluginControllerNames() {
-            App::import('Core', 'File', 'Folder');
-            $paths = Configure::getInstance();
-            $folder =& new Folder();
-            $folder->cd(APP . 'plugins');
-
-            // Get the list of plugins
-            $Plugins = $folder->read();
-            $Plugins = $Plugins[0];
+            $Plugins = App::objects('plugins');
             $arr = array();
 
             // Loop through the plugins
             foreach($Plugins as $pluginName) {
-                // Change directory to the plugin
-                $didCD = $folder->cd(APP . 'plugins'. DS . $pluginName . DS . 'controllers');
-                // Get a list of the files that have a file name that ends
-                // with controller.php
-                $files = $folder->findRecursive('.*_controller\.php');
+                $controllers = App::objects('controller', $pluginName);
+                $pluginPath = App::pluginPath($pluginName);
 
-                // Loop through the controllers we found in the plugins directory
-                foreach($files as $fileName) {
-                    // Get the base file name
-                    $file = basename($fileName);
-
-                    // Get the controller name
-                    $file = Inflector::camelize(substr($file, 0, strlen($file)-strlen('_controller.php')));
-                    if (!preg_match('/^'. Inflector::humanize($pluginName). 'App/', $file)) {
-                        if (!App::import('Controller', $pluginName.'.'.$file)) {
-                            debug('Error importing '.$file.' for plugin '.$pluginName);
-                        } else {
-                            /// Now prepend the Plugin name ...
-                            // This is required to allow us to fetch the method names.
-                            $arr[] = Inflector::humanize($pluginName) . "/" . $file;
-                        }
-                    }
+                foreach ($controllers as $controller) {
+                    $arr[] = Inflector::humanize($pluginName) . "/" . $controller;
                 }
             }
             return $arr;
         }
 
-Now run the action in your browser, eg.
-http://localhost/groups/build\_acl, This will build your ACO
-table.
+Now run the action in your browser, eg.  http://localhost/groups/build\_acl,
+This will build your ACO table.
 
-You might want to keep this function around as it will add new
-ACO's for all of the controllers & actions that are in your
-application any time you run it. It does not remove nodes for
-actions that no longer exist though. Now that all the heavy lifting
-is done, we need to set up some permissions, and remove the code
+You might want to keep this function around as it will add new ACO's for all of
+the controllers & actions that are in your application any time you run it. It
+does not remove nodes for actions that no longer exist though. Now that all the
+heavy lifting is done, we need to set up some permissions, and remove the code
 that disabled ``AuthComponent`` earlier.
 
-The original code on this page did not take into account that you
-might use plugins for your application, and in order for you to
-have seamless plugin support in your Acl-controlled application, we
-have updated the above code to automatically include the correct
-plugins wherever necessary. Note that running this action will
-place some debug statements at the top of your browser page as to
-what Plugin/Controller/Action was added to the ACO tree and what
-was not.
+The original code on this page did not take into account that you might use
+plugins for your application, and in order for you to have seamless plugin
+support in your Acl-controlled application, we have updated the above code to
+automatically include the correct plugins wherever necessary. Note that running
+this action will place some debug statements at the top of your browser page as
+to what Plugin/Controller/Action was added to the ACO tree and what was not.
 
 
 Setting up permissions
 ======================
 
-Creating permissions much like creating ACO's has no magic
-solution, nor will I be providing one. To allow ARO's access to
-ACO's from the shell interface use the AclShell. For more
-information on how to use it consult the aclShell help which can be
-accessed by running:
+Creating permissions much like creating ACO's has no magic solution, nor will I
+be providing one. To allow ARO's access to ACO's from the shell interface use
+the AclShell. For more information on how to use it consult the aclShell help
+which can be accessed by running::
 
-::
-
-    cake acl help
+    ./Console/cake acl help
 
 Note: \* needs to be quoted ('\*')
 
 In order to allow with the ``AclComponent`` we would use the
-following code syntax in a custom method:
+following code syntax in a custom method::
 
-::
-
+    <?php
     $this->Acl->allow($aroAlias, $acoAlias);
 
 We are going to add in a few allow/deny statements now. Add the
@@ -256,12 +228,11 @@ visit the address in your browser to run them (e.g.
 http://localhost/cake/app/users/initdb). If you do a
 ``SELECT * FROM aros_acos`` you should see a whole pile of 1's and
 -1's. Once you've confirmed your permissions are set, remove the
-function.
+function::
 
-::
-
+    <?php
     function initDB() {
-        $group =& $this->User->Group;
+        $group = $this->User->Group;
         //Allow admins to everything
         $group->id = 1;     
         $this->Acl->allow($group, 'controllers');
@@ -305,23 +276,21 @@ edit will revert to those in the Acl.
 
 Now we want to take out the references to ``Auth->allowedActions``
 in your users and groups controllers. Then add the following to
-your posts and widgets controllers:
+your posts and widgets controllers::
 
-::
-
+    <?php
     function beforeFilter() {
         parent::beforeFilter(); 
-        $this->Auth->allowedActions = array('index', 'view');
+        $this->Auth->allow('index', 'view');
     }
 
 This removes the 'off switches' we put in earlier on the users and
 groups controllers, and gives public access on the index and view
 actions in posts and widgets controllers. In
-``AppController::beforeFilter()`` add the following:
+``AppController::beforeFilter()`` add the following::
 
-::
-
-     $this->Auth->allowedActions = array('display');
+    <?php
+     $this->Auth->allow('display');
 
 This makes the 'display' action public. This will keep our
 PagesController::display() public. This is important as often the
@@ -334,10 +303,8 @@ Logging in
 Our application is now under access control, and any attempt to
 view non-public pages will redirect you to the login page. However,
 we will need to create a login view before anyone can login. Add
-the following to ``app/views/users/login.ctp`` if you haven't done
-so already.
-
-::
+the following to ``app/View/Users/login.ctp`` if you haven't done
+so already::
 
     <h2>Login</h2>
     <?php
@@ -348,26 +315,15 @@ so already.
     ?>
 
 If a user is already logged in, redirect him by adding this to your
-UsersController:
+UsersController::
 
-::
-
+    <?php
     function login() {
         if ($this->Session->read('Auth.User')) {
             $this->Session->setFlash('You are logged in!');
             $this->redirect('/', null, false);
         }
     }       
-
-You may also want to add a flash() for Auth messages to your
-layout. Copy the default core layout - found at
-``cake/libs/view/layouts/default.ctp`` - to your app layouts folder
-if you haven't done so already. In
-``app/views/layouts/default.ctp`` add
-
-::
-
-    echo $this->Session->flash('auth');
 
 You should now be able to login and everything should work
 auto-magically. When access is denied Auth messages will be
@@ -378,10 +334,9 @@ Logout
 
 Now onto the logout. Earlier we left this function blank, now is
 the time to fill it. In ``UsersController::logout()`` add the
-following:
+following::
 
-::
-
+    <?php
     $this->Session->setFlash('Good-Bye');
     $this->redirect($this->Auth->logout());
 
