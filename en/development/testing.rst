@@ -18,12 +18,16 @@ following::
 
     pear upgrade PEAR
     pear config-set auto_discover 1
-    pear install pear.phpunit.de/PHPUnit
+    pear install pear.phpunit.de/PHPUnit-3.5.15
 
 .. note::
 
     Depending on your system's configuration, you make need to run the previous
     commands with ``sudo``
+
+.. note::
+
+    At this time CakePHP does not work with PHPUnit 3.6
 
 Test database setup
 ===================
