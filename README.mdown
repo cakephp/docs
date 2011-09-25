@@ -26,9 +26,19 @@ Building the documentation
 
 After installing the require packages you can build the documentation using `Make`
 
+	# Create all the HTML docs. Including all the languages.
 	make html
+	
+	# Create just the english HTML docs.
+	make html-en
+	
+	# Create all the EPUB (e-book) docs.
+	make epub
+	
+	# Create just the engish EPUB docs.
+	make epub-en
 
-This will generate all the documentation in an html form.  Other output such as 'epub', 'pdf' and 'htmlhelp' are not fully complete at this time.
+This will generate all the documentation in an html form.  Other output such as 'pdf' and 'htmlhelp' are not fully complete at this time.
 
 After making changes to the documentation, you can build the html version of the docs by using `make html` again.  This will build only the html files that have had changes made to them.
 
