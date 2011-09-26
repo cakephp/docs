@@ -40,7 +40,7 @@ fixture tables and data::
 
     <?php
     var $test = array(
-        'datasource' => 'Datasource/Mysql',
+        'datasource' => 'Database/Mysql',
         'persistent' => false,
         'host' => 'dbhost',
         'login' => 'dblogin',
