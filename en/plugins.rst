@@ -50,12 +50,26 @@ No problem::
         'WebmasterTools' => array('bootstrap' => true, 'routes' => true),
     ));
 
-
-With the above, you no longer need to manually include() or require() a
-plugin's configuration or routes file--It happens automatically at the 
-proper time and in the proper place. The exact same parameters could have
-also been supplied to the load() method, which would have loaded only those
+With this style of configuration, you no longer need to manually 
+include() or require() a plugin's configuration or routes file--It happens 
+automatically at the right time and place. The exact same parameters could 
+have also been supplied to the load() method, which would have loaded only those
 three plugins, and not the rest.
+
+Finally, you can also specify a set of defaults for loadAll which will apply to
+every plugin that doesn't have a more specific cofiguration.
+
+Loading all plugins bootstrap and loading routes from Blog:
+
+    CakePlugin::loadAll(array(
+        array('bootstrap' => true),
+        'Blog' => array('routes' => true)
+    ));
+
+
+Note that any all files specified should actually exist in the configured 
+plugin(s) or PHP will give warnings for each file it cannot load. This is
+especially important to remember when specifying defaults for all plugins.
 
 
 Some plugins additionally need to create one or more tables in your database. In
