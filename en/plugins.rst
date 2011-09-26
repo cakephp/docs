@@ -59,7 +59,7 @@ three plugins, and not the rest.
 Finally, you can also specify a set of defaults for loadAll which will apply to
 every plugin that doesn't have a more specific cofiguration.
 
-Loading all plugins bootstrap and loading routes from Blog::
+Load the bootstrap file from all plugins, and the routes from the Blog plugin::
     
     <?php
     CakePlugin::loadAll(array(
@@ -68,7 +68,7 @@ Loading all plugins bootstrap and loading routes from Blog::
     ));
 
 
-Note that any all files specified should actually exist in the configured 
+Note that all files specified should actually exist in the configured 
 plugin(s) or PHP will give warnings for each file it cannot load. This is
 especially important to remember when specifying defaults for all plugins.
 
