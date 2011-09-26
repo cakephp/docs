@@ -29,7 +29,7 @@ The View layer
 ===============
 
 The View renders a presentation of modeled data. Being separated from the
-Model objects, it is responsible got using the information it has available
+Model objects, it is responsible for using the information it has available
 to produce any presentational interface your application might need.
 
 For example, as the Model layer returns a set of data, the view would use it
@@ -48,9 +48,9 @@ back a response with the aid of both the Model and the View Layer.
 
 Controllers can be seen as managers taking care that all needed resources for
 completing a task are delegated to the correct workers. It waits for petitions
-from clients, check their validity according to authentication or authorization rules,
+from clients, checks their validity according to authentication or authorization rules,
 delegates data fetching or processing to the model, and selects the correct
-type of presentational data the that client is accepting, to finally delegate
+type of presentational data that the client is accepting, to finally delegate
 this rendering process to the View layer.
 
 
@@ -67,7 +67,7 @@ The typical CakePHP request cycle starts with a user requesting a page or
 resource in your application. This request is first processed by a dispatcher
 which will select the correct controller object to handle it.
 
-Once the request arrives the controller, it will communicate with the Model layer
+Once the request arrives at the controller, it will communicate with the Model layer
 to process any data fetching or saving operation that might be needed.
 After this communication is over, the controller will proceed at delegating to the
 correct view object the task of generating an output resulting from the data
