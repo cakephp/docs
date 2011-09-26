@@ -18,14 +18,14 @@ controller::
     <?php
     class ExampleController extends AppController {
         public $viewClass = 'Theme';
-        public $theme = 'example';
+        public $theme = 'Example';
     }
 
 You can also set or change the theme name within an action or within the
 ``beforeFilter`` or ``beforeRender`` callback functions::
 
     <?php
-    $this->theme = 'another_example';
+    $this->theme = 'AnotherExample';
 
 Theme view files need to be within the ``/app/View/Themed/`` folder.  Within the
 themed folder, create a folder using the same name as your theme name. Beyond
@@ -51,7 +51,7 @@ environments, its recommended that you either symlink or copy theme assets into
 the application's webroot. See below for more information.
 
 To use the new theme webroot create directories like
-``app/View/Themed/<theme_name>/webroot<path_to_file>`` in your theme. The
+``app/View/Themed/<themeName>/webroot<path_to_file>`` in your theme. The
 Dispatcher will handle finding the correct theme assets in your view paths.
 
 All of CakePHP's built-in helpers are aware of themes and will create the
