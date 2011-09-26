@@ -40,7 +40,7 @@ To get a fresh download, visit the CakePHP project on github:
 `http://github.com/cakephp/cakephp/downloads <http://github.com/cakephp/cakephp/downloads>`_
 and download the latest release of 2.0
 
-You can also clone the the repository using
+You can also clone the repository using
 `git <http://git-scm.com/>`_.
 ``git clone git://github.com/cakephp/cakephp.git``
 
@@ -150,10 +150,10 @@ complete these laundry-list items, but they're not required for
 this tutorial. One is defining a custom string (or "salt") for use
 in security hashes. The second is defining a custom number (or
 "seed") for use in encryption. The third item is allowing CakePHP
-write access to its ``Tmp`` folder.
+write access to its ``tmp`` folder.
 
 The security salt is used for generating hashes. Change the default
-salt value by editing ``/app/Config/core.php`` line 203. It doesn't
+salt value by editing ``/app/Config/core.php`` line 187. It doesn't
 much matter what the new value is, as long as it's not easily
 guessed.
 
@@ -167,7 +167,7 @@ guessed.
     ?>
 
 The cipher seed is used for encrypt/decrypt strings. Change the
-default seed value by editing ``/app/Config/core.php`` line 208. It
+default seed value by editing ``/app/Config/core.php`` line 192. It
 doesn't much matter what the new value is, as long as it's not
 easily guessed.
 
