@@ -31,7 +31,32 @@ You can either load them one by one or all of them in a single call::
     CakePlugin::loadAll(); // Loads all plugins at once
     CakePlugin::load('ContactManager'); //Loads a single plugin
 
-Some plugins need to create one or more tables in your database. In
+
+loadAll loads all plugins available, while allowing you to set certain
+settings for specific plugins. load() works similar, but only loads the 
+plugins you explicitely specify.
+
+There is a lot you can do with the load and loadAll methods to help with
+plugin configuration and routing. Perhaps you want to load all plugins 
+automatically, while specifying custom routes and bootstrap files for
+certain plugins. No problem!
+
+    <?php
+    CakePlugin::loadAll(array(
+        'Blog' => array('routes' => true),
+        'ContactManager' => array('bootstrap' => true),
+        'WebmasterTools' => array('bootstrap' => true, 'routes' => true),
+    ));
+
+
+With the above, you no longer need to manually include() or require() a
+plugin's configuration or routes file--It happens automatically at the 
+proper time and in the proper place. The exact same parameters could have
+also been supplied to the load() method, which would have loaded only those
+three plugins, and not the rest.
+
+
+Some plugins additionally need to create one or more tables in your database. In
 those cases, they will often include a schema file which you can
 call from the cake shell like this::
 
