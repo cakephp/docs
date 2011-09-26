@@ -39,7 +39,9 @@ plugins you explicitely specify.
 There is a lot you can do with the load and loadAll methods to help with
 plugin configuration and routing. Perhaps you want to load all plugins 
 automatically, while specifying custom routes and bootstrap files for
-certain plugins. No problem!
+certain plugins.
+
+No problem::
 
     <?php
     CakePlugin::loadAll(array(
