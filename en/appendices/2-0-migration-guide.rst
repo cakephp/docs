@@ -29,8 +29,8 @@ Given that PHP 5.3 is supporting namespaces we decided to prepare our code base
 for adopting in a near future this PHP version, so we adopted the
 http://groups.google.com/group/php-standards/web/psr-0-final-proposal. At first
 we glanced at the internal structure of CakePHP 1.3 and realized that after all
-these years there was no clear organization in the files, nor the directory
-structure really hinted where each file show be located at. With this change we
+these years there was no clear organization in the files, nor did the directory
+structure really hint where each file should be located. With this change we
 would be allowed to experiment a little with (almost) automatic class loading
 for increasing the overall framework performance.
 
@@ -46,33 +46,33 @@ File names
 ----------
 
 All files containing classes should be named after the class it contains. No
-file should contain more than one classes. So, no more lowercasing and
-underscoring you file names. Here are some examples:
+file should contain more than one class. So, no more lowercasing and
+underscoring your file names. Here are some examples:
 
 * ``my_things_controller.php`` becomes ``MyThingsController.php``
 * ``form.php`` (a Helper) becomes ``FormHelper.php``
 * ``session.php`` (a Component) becomes ``SessionComponent.php``
 
-This makes a lot more clear an consistent the file naming across applications,
-and also avoid a few edge cases where the file loader would get confused in the
+This makes a lot more clear and consistent the file naming across applications,
+and also avoids a few edge cases where the file loader would get confused in the
 past and load files it shouldn't.
 
 Folder Names
 ------------
 
-Folder containing classes should be also CamelCased, specially when containing
+Folders containing classes should be also CamelCased, specially when containing
 classes. Think of namespaces, each folder represents a level in the namespacing
-hierarchy, folders that does not contain classes, or does not constitute a
-namespace on themselves, should be lowercased
+hierarchy, folders that do not contain classes, or do not constitute a
+namespace on themselves, should be lowercased.
 
-CameCased Folders
+CameCased Folders:
 
 * Controller
 * Controller/Component
 * View/Helper
 * Model/Behavior
 
-lowercased Folder:
+lowercased Folders:
 
 * config
 * webroot
@@ -119,7 +119,7 @@ Class location and constants changed
 
 The constants ``APP_PATH`` and ``CORE_PATH``
 have consistent values between the web and console environments. In previous
-versions of CakePHP these values changed dependant on your environment.
+versions of CakePHP these values changed depending on your environment.
 
 Basics.php
 ==========
@@ -191,7 +191,7 @@ your components and their constructors, as both have changed::
         }
     }
 
-As with helpers is important to call ``parent::__construct()`` in components with
+As with helpers it is important to call ``parent::__construct()`` in components with
 overridden constructors. Settings for a component are also passed into the
 constructor now, and not the ``initialize()`` callback.  This makes getting well
 constructed objects easier, and allows the base class to handle setting the
@@ -305,7 +305,7 @@ Session component has lost the following methods.
 cakeError removed
 =================
 
-The ``cakeError()`` method has been removed. Its recommended that you switch all
+The ``cakeError()`` method has been removed. It's recommended that you switch all
 uses of ``cakeError`` to use exceptions. ``cakeError`` was removed because it
 was simulating exceptions. Instead of simulation, real exceptions are used in
 CakePHP 2.0.
@@ -327,30 +327,30 @@ App
 The API for ``App::build()`` has changed to ``App::build($paths, $mode).`` It
 now allows you to either append, prepend or reset/replace existing paths. The
 $mode param can take any of the following 3 values: App::APPEND,
-App::PREPEND, ``App::RESET``. The default behavior of the function remains
+App::PREPEND, ``App::RESET``. The default behavior of the function remains the
 same (ie. Prepending new paths to existing list).
 
 App::path()
 ~~~~~~~~~~~
 
 * Now supports plugins, App::path('Controller', 'Users') will return the folder
-  location the controllers in the User plugin.
-* Won't core paths anymore, it will
+  location of the controllers in the Users plugin.
+* Won't merge core paths anymore, it will
   only return paths defined in App::build() or default ones in app (or
-  correspondent plugin)
+  corresponding plugin).
 
 App::build()
 ~~~~~~~~~~~~
 
-* Will not merge app patch with core paths anymore
+* Will not merge app path with core paths anymore.
 
-App::objects() :
+App::objects()
 ~~~~~~~~~~~~~~~~
 
 * Now supports plugins, App::objects('Users.Model') will return the models in
   plugin Users.
 * Returns array() instead of false for empty results or invalid types.
-* Does not return core objects anymore, App::objects('core') will return array()
+* Does not return core objects anymore, App::objects('core') will return array().
 * Returns the complete class name.
 
 App class lost the following properties, use method App::path() to access their value
@@ -379,10 +379,10 @@ App::import()
   possible.
 * Importing a non-existent file, supplying a wrong type or package name, or null
   values for $name and $file parameters will result in a false return value.
-* App::import('Core', 'CoreClass') is not loger supported, use App::uses()
+* App::import('Core', 'CoreClass') is no loger supported, use App::uses()
   instead and let the class autoloading do the rest.
 * Loading Vendor files does not look recursively in the vendors folder, it will
-  also not convert anymore the file to underscored as it did on the past.
+  also no longer convert the file to underscored as it did in the past.
 
 App::core()
 ~~~~~~~~~~~
@@ -395,14 +395,14 @@ Class loading with App::uses()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Although there has been a huge refactoring in how the classes are loaded, in very 
-few occasions you will need to change your application code respect the way you were 
-used to do it. The biggest change is the introduction of a new method::
+few occasions you will need to change your application code to respect the way you were 
+used to doing it. The biggest change is the introduction of a new method::
 
     <?php
     App::uses('AuthComponent', 'Controller/Component');
 
-We decided the function name to emulate PHP 5.3's ``use`` keyword, just as a way
-of declaring where a classname should be located at. The first parameter of
+We decided the function name should emulate PHP 5.3's ``use`` keyword, just as a way
+of declaring where a classname should be located. The first parameter of
 :php:meth:`App::uses()` is the complete name of the class you intend to load,
 and the second one, the package name (or namespace) where it belongs to. The
 main difference with CakePHP 1.3's :php:meth:`App::import()` is that the former
@@ -435,7 +435,7 @@ Some examples on using :php:meth:`App::uses()` when migrating from
 
 All classes that were loaded in the past using ``App::import('Core', $class);``
 will need to be loaded using ``App::uses()`` referring to the correct package.
-See the api to locate the class in their new folder. Some examples::
+See the api to locate the classes in their new folders. Some examples::
 
     <?php
     App::import('Core', 'CakeRoute');
@@ -444,7 +444,6 @@ See the api to locate the class in their new folder. Some examples::
 
     App::import('Core', 'Sanitize');
     // becomes
-
     App::uses('Sanitize', 'Utility');
 
     App::import('Core', 'HttpSocket');
@@ -455,7 +454,7 @@ In contrast to how :php:meth:`App::import()` worked in the past, the new class
 loader will not locate classes recursively. This led to an impressive
 performance gain even on develop mode, at the cost of some seldom used features
 that always caused side effects. To be clear again, the class loader will only
-fetch the classes exactly in the package you told to find it.
+fetch the class in the exact package in which you told it to find it.
 
 App::build() and core paths
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -516,7 +515,7 @@ Router
   ``Router::DAY``, ``Router::ID``, and ``Router::UUID`` instead.
 - ``Router::defaults()`` has been removed.  Delete the core routes file
   inclusion from your applications routes.php file to disable default routing.
-  Conversely if you want default routing, you will have add an include to 
+  Conversely if you want default routing, you will have to add an include to 
   ``Cake/Config/routes.php`` in your routes file.
 - When using Router::parseExtensions() the extension parameter is no longer
   under ``$this->params['url']['ext']``. Instead it is available at
@@ -577,15 +576,15 @@ Xml
 ---
 
 -  The class Xml was completely re-factored. Now this class does not manipulate
-   data anymore, and it is a wrapper to SimpleXMLElement. You can use the follow
+   data anymore, and it is a wrapper to SimpleXMLElement. You can use the following
    methods:
--  ``Xml::build()``: static method that you can pass a xml string, array, path
-   to file or url. The result will be a SimpleXMLElement instance or an
-   exception will be thrown in case of error.
--  ``Xml::fromArray():`` static method that returns a SimpleXMLElement from an
-   array.
--  ``Xml::toArray()``: static method that returns an array from
-   SimpleXMLElement.
+   -  ``Xml::build()``: static method that you can pass an xml string, array, path
+      to file or url. The result will be a SimpleXMLElement instance or an
+      exception will be thrown in case of error.
+   -  ``Xml::fromArray():`` static method that returns a SimpleXMLElement from an
+      array.
+   -  ``Xml::toArray()``: static method that returns an array from
+      SimpleXMLElement.
 
 You should see the :php:class:`Xml` documentation for more information on the changes made to
 the Xml class.
@@ -610,8 +609,8 @@ information </development/sessions>`
 HttpSocket
 ----------
 
-- HttpSocket doesn't change the header keys. Following others places in core,
-  the HttpSocket do not change the headers. :rfc:`2616` says that headers are case
+- HttpSocket doesn't change the header keys. Following other places in core,
+  the HttpSocket does not change the headers. :rfc:`2616` says that headers are case
   insensitive, and HttpSocket preserves the values the remote host sends.
 - HttpSocket returns responses as objects now. Instead of arrays, HttpSocket
   returns instances of HttpResponse.  See the :php:class:`HttpSocket`
@@ -643,9 +642,9 @@ HelperCollection added
 
 After examining the responsibilities of each class involved in the View layer,
 it became clear that View was handling much more than a single task. The
-responsibility of creating helpers, is not central to what View does, and was
+responsibility of creating helpers is not central to what View does, and was
 moved into HelperCollection. HelperCollection is responsible for loading and
-constructing helpers, as well as triggering callbacks on helpers.  By default
+constructing helpers, as well as triggering callbacks on helpers.  By default,
 View creates a HelperCollection in its constructor, and uses it for subsequent
 operations.  The HelperCollection for a view can be found at `$this->Helpers`
 
@@ -695,7 +694,7 @@ PaginatorHelper
    reverse order. $key will always be first now. This was done to prevent
    needing to swap arguments when adding a second one.
 -  PaginatorHelper had a number of changes to the paging params used internally.
-   The defaults key has been removed.
+   The default key has been removed.
 -  PaginatorHelper now supports generating links with paging parameters in the
    querystring.
 
@@ -754,7 +753,7 @@ changes.
 Helper Attribute format more flexible
 -------------------------------------
 
-The Helper class have more 3 protected attributes:
+The Helper class has more 3 protected attributes:
 
 * ``Helper::_minimizedAttributes``: array with minimized attributes (ie:
   ``array('checked', 'selected', ...)``);
@@ -763,7 +762,7 @@ The Helper class have more 3 protected attributes:
 * ``Helper::_minimizedAttributeFormat``: how minimized attributes will be
   generated: (ie ``%s="%s"``)
 
-By default the values used in CakePHP 1.3 do not was changed. But now you can
+By default the values used in CakePHP 1.3 were not changed. But now you can
 use boolean attributes from HTML, like ``<input type="checkbox" checked />``. To
 this, just change ``$_minimizedAttributeFormat`` in your AppHelper to ``%s``.
 
@@ -797,7 +796,7 @@ Controller
 - ``Controller::render()`` now returns a CakeResponse object.
 
 The deprecated properties on Controller will be accessible through a ``__get()``
-method. This method will be removed in future versions, so its recommended that
+method. This method will be removed in future versions, so it's recommended that
 you update your application.
 
 Controller now defines a maxLimit for pagination. This maximum limit is set to
@@ -808,7 +807,7 @@ Pagination
 ----------
 
 Pagination has traditionally been a single method in Controller, this created a
-number of problems though. Pagination was hard to extend replace or modify. For
+number of problems though. Pagination was hard to extend, replace, or modify. For
 2.0 pagination has been extracted into a component. :php:meth:`Controller::paginate()` still
 exists, and serves as a convenience method for loading and using the
 :php:class:`PaginatorComponent`.
@@ -855,7 +854,7 @@ Deprecated properties
 -  API for ``View::element()`` has changed. Read here for more info.
 
 The deprecated properties on View will be accessible through a ``__get()``
-method. This method will be removed in future versions, so its recommended that
+method. This method will be removed in future versions, so it's recommended that
 you update your application.
 
 Removed methods
@@ -863,7 +862,7 @@ Removed methods
 
 * ``View::_triggerHelpers()`` Use ``$this->Helpers->trigger()`` instead.  
 * ``View::_loadHelpers()`` Use ``$this->loadHelpers()`` instead.  Helpers now lazy
-  load their own helpers now.
+  load their own helpers.
 
 Added methods
 -------------
@@ -881,8 +880,8 @@ Callback positioning changes
 
 beforeLayout used to fire after scripts_for_layout and content_for_layout were
 prepared. In 2.0, beforeLayout is fired before any of the special variables are
-prepared, allowing you to manipulate them before they are passed to the layout,
-the same was done for beforeRender. It is now fired well before any view
+prepared, allowing you to manipulate them before they are passed to the layout.
+The same was done for beforeRender. It is now fired well before any view
 variables are manipulated. In addition to these changes, helper callbacks always
 receive the name of the file about to be rendered. This combined with helpers
 being able to access the view through ``$this->_View`` and the current view
@@ -955,7 +954,7 @@ All of the core test cases and supporting infrastructure have been ported to use
 PHPUnit 3.5. Of course you can continue to use SimpleTest in your application by
 replacing the related files. No further support will be given for SimpleTest and
 it is recommended that you migrate to PHPUnit as well. For some additional
-information on how to migrate your tests see PHPUnit migration hints
+information on how to migrate your tests see PHPUnit migration hints.
 
 No more group tests
 -------------------
@@ -963,7 +962,7 @@ No more group tests
 PHPUnit does not differentiate between group tests and single test cases in the
 runner. Because of this, the group test options, and support for old style group
 tests has been removed. It is recommended that GroupTests be ported to
-``PHPUnit_Framework_Testsuite`` subclasses. You can find several examples ofthis
+``PHPUnit_Framework_Testsuite`` subclasses. You can find several examples of this
 in CakePHP's test suite. Group test related methods on ``TestManager`` have also
 been removed.
 
@@ -977,15 +976,15 @@ all tests are cases. In the past you would have done
 Model/Post``.
 
 
-The testsuite shell have been refactored to use the PHPUnit cli tool, it now
-support all the command line options supported by PHPUnit.
+The testsuite shell has been refactored to use the PHPUnit cli tool. It now
+supports all the command line options supported by PHPUnit.
 ``cake testsuite help`` will show you a list of all possible modifiers.
 
 Models
 ======
 
-As now models relationships are lazy loaded. You can run into situation when
-assigning a value to an inexistent model property will throw errors::
+Model relationships are now lazy loaded. You can run into a situation where
+assigning a value to a nonexistent model property will throw errors::
 
     <?php
     $Post->inexistentProperty[] = 'value';
@@ -995,20 +994,20 @@ $inexistentProperty has no effect". Assigning an initial value to the property
 solves the issue::
 
     <?php
-    $Post->inexistentProperty = array();
-    $Post->inexistentProperty[] = 'value';
+    $Post->nonexistentProperty = array();
+    $Post->nonexistentProperty[] = 'value';
 
 Or just declare the property in the model class::
 
     <?php
     class Post {
-        var $inexistantPropert = array();
+        var $nonexistantProperty = array();
     }
 
 Either of these approaches will solve the notice errors.
 
 The notation of ``find()`` in Cake 1.2 is no longer supported. Finds should use
-notation ``$model->find('type', array(PARAMS))`` as Cake 1.3.
+notation ``$model->find('type', array(PARAMS))`` as in Cake 1.3.
 
 - ``Model::$_findMethods`` is now ``Model::$findMethods``.  This property is now
   public and can be modified by behaviors.
@@ -1029,11 +1028,11 @@ write more portable and accurate tests for database related code.
 
 The first thing users will probably miss is the "affected rows" and "total rows"
 statistics, as they are not reported due to the more performant and lazy design
-of PDO, there are way to overcome this issue but is very specific to each
+of PDO, there are ways to overcome this issue but very specific to each
 database. Those statistics are not gone, though, but could be missing or even
 inaccurate for some drivers. 
 
-A nice feature added after the PDO adoption is the ability of using prepared
+A nice feature added after the PDO adoption is the ability to use prepared
 statements with query placeholders using the native driver if available.
 
 List of Changes
@@ -1054,7 +1053,7 @@ List of Changes
   third parameter is meant to receive options for logging, currently it only
   understands the "log" option.
 
-* DboSource::value() looses it's third parameter, it was not used anyways
+* DboSource::value() looses its third parameter, it was not used anyways
 * DboSource::fetchAll() now accepts an array as second parameter, to pass values
   to be bound to the query, third parameter was dropped. Example::
 
@@ -1065,7 +1064,7 @@ List of Changes
 The PDO driver will automatically escape those values for you.
 
 * Database statistics are collected only if the "fullDebug" property of the
-  correspondent DBO is set to true.
+  corresponding DBO is set to true.
 * New method DboSource::getConnection() will return the PDO object in case you
   need to talk to the driver directly.
 * Treatment of boolean values changed a bit to make it more cross-database
@@ -1076,18 +1075,18 @@ The PDO driver will automatically escape those values for you.
   of fields and a nested array of values to insert them all at once
 * TranslateBehavior was refactored to use model virtualFields, this makes the
   implementation more portable.
-* All tests cases with Mysql related stuff were moved to the correspondent
-  driver test case, this left the DboSourceTest file a bit skinny.
+* All tests cases with Mysql related stuff were moved to the corresponding
+  driver test case. This left the DboSourceTest file a bit skinny.
 * Transaction nesting support. Now it is possible to start a transaction several
   times. It will only be committed if the commit method is called the same
   amount of times.
 * Sqlite support was greatly improved. The major difference with cake 1.3 is
-  that in will only support Sqlite 3.x . It is a great alternative for
-  development apps, and quick running test cases.
+  that it will only support Sqlite 3.x . It is a great alternative for
+  development apps, and quick at running test cases.
 * Boolean column values will be casted to php native boolean type automatically,
-  so make sure you update you test cases and code if you were expecting the
-  returned value to be a string or an integer: I you had a "published" column in
-  the past using mysql all values returned from a find would be numeric on the
+  so make sure you update your test cases and code if you were expecting the
+  returned value to be a string or an integer: If you had a "published" column in
+  the past using mysql all values returned from a find would be numeric in the
   past, now they are strict boolean values.
 
 BehaviorCollection
@@ -1105,7 +1104,7 @@ and helpers you wish to use. In the past::
 
     var $components = array('Session', 'Comments');
 
-Would look in the controller's plugin before checking app/core components, it
+Would look in the controller's plugin before checking app/core components. It
 will now only look in the app/core components. If you wish to use objects from a
 plugin you must put the plugin name::
 
@@ -1167,9 +1166,9 @@ Backwards incompatible Shell Changes
 -  Bake's ControllerTask no longer takes ``public`` and ``admin`` as passed
    arguments. They are now options, indicated like ``--admin`` and ``--public``.
 
-Its recommended that you use the help on shells you use to see what if any
-arameters have changed. Its also recommended that you read the console new
-features for more information on new API's that are available.
+It's recommended that you use the help on shells you use to see what if any
+parameters have changed. It's also recommended that you read the console new
+features for more information on new APIs that are available.
 
 Debugging
 =========
@@ -1183,9 +1182,9 @@ ConnectionManager
 
 ``ConnectionManager::enumConnectionObjects()`` will now return the current
 configuration for each connection created, instead of an array with filename,
-classname and plugin, that wasn't really useful.
+classname and plugin, which wasn't really useful.
 
-When defining database connections you will need to made some changes to the way
+When defining database connections you will need to make some changes to the way
 configs were defined in the past. Basically in the database configuration class,
 the key "driver" is not accepted anymore, only "datasource", in order to make it
 more consistent. Also, as the datasources have been moved to packages you will
