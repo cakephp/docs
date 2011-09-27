@@ -270,7 +270,7 @@ Variables
 
 Variable names should be as descriptive as possible, but also as short
 as possible. Normal variables should start with a lowercase letter, and
-should be written in camelBack? in case of multiple words. Variables
+should be written in camelBack in case of multiple words. Variables
 containing objects should start with a capital letter, and in some way
 associate to the class the variable is an object of. Example:
 
@@ -299,7 +299,7 @@ protected method or variable names start with a single underscore ("\_"). Exampl
     }
     ?>
 
-Private method or variable name start with double underscore ("\_\_"). Example::
+Private methods or variable names start with double underscore ("\_\_"). Example::
 
     <?php
     class A {
@@ -332,8 +332,7 @@ for use in documentation or as examples.
 Files
 -----
 
-File names should be created with lower case. If a file name consist of
-multiple words, they should be divided by an underscore character, for
+File names which do not contain classes should be lowercased and underscored, for
 example:
 
 ::
