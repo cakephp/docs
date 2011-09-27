@@ -58,7 +58,7 @@ setUp() and tearDown()
 ----------------------
 
 In the past the methods ``setUp``, ``tearDown``, ``startTest`` and ``endTest``
-where supported, and caused confusion as they looked almost as the same thing
+where supported, and caused confusion as they looked almost like the same thing
 but in some cases you should use one or the other.
 
 In the new CakePHP test suite, it is recommended to use only ``setUp`` and
@@ -106,7 +106,7 @@ Mock expectations
 
 Mock objects are dramatically different between PHPUnit and SimpleTest. There is
 no compatibility wrapper between them. Updating mock object usage can be a
-painful process but we hope the following tips help you in your migration. Its
+painful process but we hope the following tips help you in your migration. It's
 highly recommended you familiarize yourself with the `PHPUnit Mock object <http://www.phpunit.de/manual/current/en/test-doubles.html#test-doubles.mock-objects>`_
 documentation.
 
