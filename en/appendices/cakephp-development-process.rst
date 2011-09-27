@@ -9,7 +9,7 @@ comments. If something more formal needs to be proposed or there is a
 problem with a release, the ticket system is the best place to share
 your thoughts.
 
-We currently maintain 3 versions of CakePHP.
+We currently maintain 4 versions of CakePHP.
 
 -  **stable** : Tagged releases intended for production where stability
    is more important than features. Issues filed against these releases
@@ -37,7 +37,7 @@ Hopefully this will help you understand what version is right for you.
 Once you pick your version you may feel compelled to contribute a bug
 report or make general comments on the code.
 
--  If you are using one of the stable, development, please submit
+-  If you are using a stable version or maintenance branch, please submit
    tickets or discuss with us on IRC.
 -  If you are using the development branch or feature branch, the first
    place to go is IRC. If you have a comment and cannot reach us in IRC
