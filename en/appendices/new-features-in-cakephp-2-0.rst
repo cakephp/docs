@@ -4,12 +4,12 @@ New Features in CakePHP 2.0
 Models
 ======
 
-The model construction process has been made lighter. Models associations are
+The model construction process has been made lighter. Model associations are
 now lazy loaded, applications with lots of models and associations will see
 great time reductions in the bootstrap process.
 
-Now models won't require a database connection in the construction process,
-database will be accessed for the first time only when a find operation is
+Now models won't require a database connection in the construction process.
+The database will be accessed for the first time only when a find operation is
 issued or information for one of the columns is required.
 
 View
@@ -32,8 +32,8 @@ HtmlHelper
   See `#856 <http://cakephp.lighthouseapp.com/projects/42648/tickets/856>`_.
 * ``loadConfig()`` has moved from :php:class:`Helper` to :php:class:`HtmlHelper`
   class. This method now uses the new reader classes (see 2.0 :php:class:`Configure`)
-  to load your config file. As optional you can pass the path as second parameter
-  (``app/Config`` is default). To simply, you can set the configuration file
+  to load your config file. As an option you can pass the path as second parameter
+  (``app/Config`` is default). To simplify, you can set the configuration file
   (and the reader) in ``Controller::$helpers`` (example below) to load on helper
   constructor. In configuration file you can set the below keys:
 
@@ -43,7 +43,7 @@ HtmlHelper
  * ``attributeFormat`` Should be a string;
  * ``minimizedAttributeFormat`` Should be a string.
 
-Example how to set configuration file on controller::
+Example of how to set configuration file on controller::
 
     <?php
     public $helpers = array(
@@ -79,7 +79,7 @@ CakeResponse
 ------------
 
 :php:class:`CakeResponse` is a new class introduced in 2.0. It encapsulates
-commonly used method and properties in the HTTP response your application
+commonly used methods and properties in the HTTP response your application
 generates. It consolidates several features in CakePHP. Read more about
 :php:class:`CakeResponse`.
 
@@ -155,8 +155,8 @@ handling rebuilt, to be more flexible and give more power to developers.
 String::wrap()
 --------------
 
-:php:meth:`String::wrap()` was added to help making fixed width formatting of
-text easier. Its used in Shells whenever you use :php:meth:`Shell::wrapText()`.
+:php:meth:`String::wrap()` was added to help make fixed width formatting of
+text easier. It's used in Shells whenever you use :php:meth:`Shell::wrapText()`.
 
 debug()
 -------
@@ -183,7 +183,7 @@ component changes.
 RequestHandler
 --------------
 
-:php:class:`RequestHandler` was heavily refactored do to the introduction of
+:php:class:`RequestHandler` was heavily refactored due to the introduction of
 :php:class:`CakeRequest`. These changes allowed for some new features to be
 introduced as well.
 
@@ -209,12 +209,12 @@ CookieComponent
 
 :php:class:`CookieComponent` now supports http only cookies. You can enable
 their use by setting ``$this->Cookie->httpOnly = true;``. Having http only
-cookies will make them unaccessible from the browser.
+cookies will make them inaccessible from the browser.
 
 Security Component CSRF separation
 ----------------------------------
 
-CakePHP has has CSRF protection since 1.2. For 2.0 the existing CSRF has a new
+CakePHP has had CSRF protection since 1.2. For 2.0 the existing CSRF has a new
 more paranoid mode, and is its own standalone feature. In the past CSRF features
 were coupled with form tampering safe-guards. Developers often disabled
 validatePost in order to do dynamic forms, disabling the CSRF protection at the
