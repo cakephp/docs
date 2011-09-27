@@ -40,7 +40,7 @@ The API
 Straight to the point and straight from the core developers, the
 CakePHP API (Application Programming Interface) is the most
 comprehensive documentation around for all the nitty gritty details
-of the internal workings of the framework. Its a straight forward
+of the internal workings of the framework. It's a straight forward
 code reference, so bring your propeller hat.
 
 
