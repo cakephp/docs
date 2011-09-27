@@ -4,10 +4,11 @@
 
 PYTHON = python
 
-.PHONY: all clean html latexpdf epub htmlhelp
+.PHONY: all clean html latexpdf epub htmlhelp website website-dirs
 
 # Languages that can be built.
 LANGS = en es fr ja pt
+DEST = website
 
 # Dependencies to perform before running other builds.
 # Clone the en/Makefile everywhere.
@@ -40,5 +41,25 @@ epub-%: $(SPHINX_DEPENDENCIES)
 latexpdf-%: $(SPHINX_DEPENDENCIES)
 	cd $* && make latexpdf LANG=$*
 
+website-dirs:
+	# Make the directory if its not there already.
+	[ ! -d $(DEST) ] && mkdir $(DEST) || true
+
+	# Make the downloads directory
+	[ ! -d $(DEST)/_downloads ] && mkdir $(DEST)/_downloads || true
+
+	# Make downloads for each language
+	$(foreach lang, $(LANGS), [ ! -d $(DEST)/_downloads/$(lang) ] && mkdir $(DEST)/_downloads/$(lang) || true;)
+
+website: website-dirs html epub
+	# Move HTML
+	$(foreach lang, $(LANGS), cp -r build/html/$(lang) $(DEST)/$(lang);)
+	
+	# Move EPUB files
+	$(foreach lang, $(LANGS), cp -r build/epub/$(lang)/*.epub $(DEST)/_downloads/$(lang);)
+
 clean:
 	rm -rf build/*
+
+clean-website:
+	rm -rf $(DEST)/*

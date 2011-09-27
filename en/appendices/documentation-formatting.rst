@@ -123,7 +123,7 @@ Cross referencing links
 
     You can cross reference any arbitrary title in any document using the
     ``:ref:`` role.  Link label targets must be unique across the entire
-    documentation.  When creating labels for class methods, its best to use
+    documentation.  When creating labels for class methods, it's best to use
     ``class-method`` as the format for your link label.
     
     The most common use of labels is above a title.  Example::
@@ -142,7 +142,7 @@ Cross referencing links
 Describing classes and their contents
 =====================================
 
-The CakePHP documentation, uses the `phpdomain
+The CakePHP documentation uses the `phpdomain
 <http://pypi.python.org/pypi/sphinxcontrib-phpdomain>` to provide custom
 directives for describing PHP objects and constructs.  Using these directives
 and roles is required to give proper indexing and cross referencing features.
@@ -162,7 +162,7 @@ Each directive populates the index, and or the namespace index.
 
 .. rst:directive:: .. php:const:: name
 
-   This directive declares a new PHP constant, you can also used it nested 
+   This directive declares a new PHP constant, you can also use it nested 
    inside a class directive to create class constants.
    
 .. rst:directive:: .. php:exception:: name
@@ -225,7 +225,7 @@ Each directive populates the index, and or the namespace index.
 Cross Referencing
 -----------------
 
-The following roles refer to php objects and are links are generated if a 
+The following roles refer to php objects and links are generated if a 
 matching directive is found:
 
 .. rst:role:: php:func
