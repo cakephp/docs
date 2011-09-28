@@ -719,5 +719,4 @@ More on controllers
     controllers/request-response
     controllers/scaffolding
     controllers/pages-controller
-    controllers/scaffolding
     controllers/components
