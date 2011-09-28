@@ -498,6 +498,68 @@ association in the Comment model empowers you to get User data from
 the Comment model - completing the connection and allowing the flow
 of information from either model’s perspective.
 
+counterCache - Cache your count()
+---------------------------------
+
+This function helps you cache the count of related data. Instead of
+counting the records manually via ``find('count')``, the model
+itself tracks any addition/deleting towards the associated
+``$hasMany`` model and increases/decreases a dedicated integer
+field within the parent model table.
+
+The name of the field consists of the singular model name followed
+by a underscore and the word "count".
+
+::
+
+    my_model_count
+
+Let's say you have a model called ``ImageComment`` and a model
+called ``Image``, you would add a new INT-field to the ``image``
+table and name it ``image_comment_count``.
+
+Here are some more examples:
+
+========== ======================= =========================================
+Model      Associated Model        Example
+========== ======================= =========================================
+User       Image                   users.image\_count
+---------- ----------------------- -----------------------------------------
+Image      ImageComment            images.image\_comment\_count
+---------- ----------------------- -----------------------------------------
+BlogEntry  BlogEntryComment        blog\_entries.blog\_entry\_comment\_count
+========== ======================= =========================================
+
+Once you have added the counter field you are good to go. Activate
+counter-cache in your association by adding a ``counterCache`` key
+and set the value to ``true``::
+
+    <?php
+    class Image extends AppModel {
+        var $belongsTo = array(
+            'ImageAlbum' => array('counterCache' => true)
+        );
+    }
+
+From now on, every time you add or remove a ``Image`` associated to
+``ImageAlbum``, the number within ``image_count`` is adjusted
+automatically.
+
+You can also specify ``counterScope``. It allows you to specify a
+simple condition which tells the model when to update (or when not
+to, depending on how you look at it) the counter value.
+
+Using our Image model example, we can specify it like so::
+
+    <?php
+    class Image extends AppModel {
+        var $belongsTo = array(
+            'ImageAlbum' => array(
+                'counterCache' => true,
+                'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1
+        ));
+    }
+
 hasAndBelongsToMany (HABTM)
 ---------------------------
 
