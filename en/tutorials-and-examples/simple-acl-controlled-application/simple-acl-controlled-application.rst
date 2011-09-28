@@ -9,9 +9,7 @@ tutorial, and you are familiar with
 :doc:`/console-and-shells/code-generation-with-bake`. You should have
 some experience with CakePHP, and be familiar with MVC concepts.
 This tutorial is a brief introduction to the
-```AuthComponent`` <http://api.cakephp.org/class/auth-component>`_
-and
-```AclComponent`` <http://api.cakephp.org/class/acl-component>`_.
+:php:class:`AuthComponent` and :php:class:`AclComponent`.
 
 What you will need
 
@@ -34,18 +32,16 @@ First, let's get a copy of fresh Cake code.
 
 To get a fresh download, visit the CakePHP project at Cakeforge:
 http://github.com/cakephp/cakephp/downloads and download the stable
-release. For this tutorial you need the latest 1.3 release.
+release. For this tutorial you need the latest 2.0 release.
 
 You can also checkout/export a fresh copy of our trunk code at:
-git://github.com/cakephp/cakephp.git
+``git://github.com/cakephp/cakephp.git``
 
 Once you've got a fresh copy of cake setup your database.php config
 file, and change the value of Security.salt in your
 app/config/core.php. From there we will build a simple database
 schema to build our application on. Execute the following SQL
-statements into your database.
-
-::
+statements into your database::
 
    CREATE TABLE users (
        id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -117,12 +113,16 @@ We now have a functioning CRUD application. Bake should have setup
 all the relations we need, if not add them in now. There are a few
 other pieces that need to be added before we can add the Auth and
 Acl components. First add a login and logout action to your
-``UsersController``.
-
-::
+``UsersController``::
 
     function login() {
-        //Auth Magic
+        if ($this->request->is('post')) {
+            if ($this->Auth->login()) {
+                $this->redirect($this->Auth->redirect());
+            } else {
+                $this->Session->setFlash('Your username or password was incorrect.');
+            }
+        }
     }
      
     function logout() {
@@ -130,12 +130,9 @@ Acl components. First add a login and logout action to your
     }
 
 Then create the following view file for login at
-app/views/users/login.ctp:
-
-::
+``app/View/Users/login.ctp``::
 
     <?php
-    $this->Session->flash('auth');
     echo $this->Form->create('User', array('action' => 'login'));
     echo $this->Form->inputs(array(
         'legend' => __('Login', true),
@@ -143,45 +140,48 @@ app/views/users/login.ctp:
         'password'
     ));
     echo $this->Form->end('Login');
-    ?>
 
-We don't need to worry about adding anything to hash passwords, as
-AuthComponent will do this for us automatically when
-creating/editing users, and when they login, once configured
-properly. Furthermore, if you hash incoming passwords manually
-``AuthComponent`` will not be able to log you in at all. As it will
-hash them again, and they will not match.
+Next we'll have to update our User model to hash passwords before they go into
+the database.  Storing plaintext passwords is extremely insecure and
+AuthComponent will expect that your passwords are hashed.  In
+``app/Model/User.php`` add the following::
+
+    <?php
+    App::uses('AuthComponent', 'Controller/Component');
+    class User extends AppModel {
+        // other code.
+
+        public function beforeSave() {
+            $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+            return true;
+        }
+    }
 
 Next we need to make some modifications to ``AppController``. If
 you don't have ``/app/Controller/AppController.php``, create it. Note that
 this goes in /app/Controller/, not /app/app_controllers.php. Since we want our entire
 site controlled with Auth and Acl, we will set them up in
-``AppController``.
-::
+``AppController``::
 
     <?php
     class AppController extends Controller {
-        var $components = array('Acl', 'Auth', 'Session');
-        var $helpers = array('Html', 'Form', 'Session');
+        public $components = array('Acl', 'Auth', 'Session');
+        public $helpers = array('Html', 'Form', 'Session');
     
         function beforeFilter() {
             //Configure AuthComponent
-            $this->Auth->authorize = 'actions';
             $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
             $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
             $this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'add');
         }
     }
-    ?>
 
 Before we set up the ACL at all we will need to add some users and
-groups. With ``AuthComponent`` in use we will not be able to access
+groups. With :php:class:`AuthComponent` in use we will not be able to access
 any of our actions, as we are not logged in. We will now add some
-exceptions so ``AuthComponent`` will allow us to create some groups
+exceptions so :php:class:`AuthComponent` will allow us to create some groups
 and users. In **both** your ``GroupsController`` and your
-``UsersController`` Add the following.
-
-::
+``UsersController`` Add the following::
 
     function beforeFilter() {
         parent::beforeFilter(); 
@@ -201,17 +201,16 @@ to the Acl. However, we do not at this time have any Acl tables and
 if you try to view any pages right now, you will get a missing
 table error ("Error: Database table acos for model Aco was not
 found."). To remove these errors we need to run a schema file. In a
-shell run the following:
-::
+shell run the following::
 
-        cake schema create DbAcl
+    ./Console/cake schema create DbAcl
 
 This schema will prompt you to drop and create the tables. Say yes
 to dropping and creating the tables.
 
 If you don't have shell access, or are having trouble using the
 console, you can run the sql file found in
-/path/to/app/config/schema/db\_acl.sql.
+/path/to/app/Config/schema/db\_acl.sql.
 
 With the controllers setup for data entry, and the Acl tables
 initialized we are ready to go right? Not entirely, we still have a
@@ -226,38 +225,40 @@ and groups to rows in the Acl tables. In order to do this we will
 use the ``AclBehavior``. The ``AclBehavior`` allows for the
 automagic connection of models with the Acl tables. Its use
 requires an implementation of ``parentNode()`` on your model. In
-our ``User`` model we will add the following.
+our ``User`` model we will add the following::
 
-::
-
-    var $name = 'User';
-    var $belongsTo = array('Group');
-    var $actsAs = array('Acl' => array('type' => 'requester'));
-     
-    function parentNode() {
-        if (!$this->id && empty($this->data)) {
+    <?php
+    class User extends Model {
+        public $name = 'User';
+        public $belongsTo = array('Group');
+        public $actsAs = array('Acl' => array('type' => 'requester'));
+         
+        function parentNode() {
+            if (!$this->id && empty($this->data)) {
+                return null;
+            }
+            if (isset($this->data['User']['group_id'])) {
+            $groupId = $this->data['User']['group_id'];
+            } else {
+                $groupId = $this->field('group_id');
+            }
+            if (!$groupId) {
             return null;
-        }
-        if (isset($this->data['User']['group_id'])) {
-        $groupId = $this->data['User']['group_id'];
-        } else {
-            $groupId = $this->field('group_id');
-        }
-        if (!$groupId) {
-        return null;
-        } else {
-            return array('Group' => array('id' => $groupId));
+            } else {
+                return array('Group' => array('id' => $groupId));
+            }
         }
     }
 
-Then in our ``Group`` Model Add the following:
+Then in our ``Group`` Model Add the following::
 
-::
-
-    var $actsAs = array('Acl' => array('type' => 'requester'));
-     
-    function parentNode() {
-        return null;
+    <?php
+    class Group extends Model {
+        public $actsAs = array('Acl' => array('type' => 'requester'));
+         
+        function parentNode() {
+            return null;
+        }
     }
 
 What this does, is tie the ``Group`` and ``User`` models to the
@@ -273,7 +274,6 @@ table. So add some groups and users using the baked forms by
 browsing to http://example.com/groups/add and
 http://example.com/users/add. I made the following groups:
 
-
 -  administrators
 -  managers
 -  users
@@ -282,9 +282,7 @@ I also created a user in each group so I had a user of each
 different access group to test with later. Write everything down or
 use easy passwords so you don't forget. If you do a
 ``SELECT * FROM aros;`` from a mysql prompt you should get
-something like the following:
-
-::
+something like the following::
 
     +----+-----------+-------+-------------+-------+------+------+
     | id | parent_id | model | foreign_key | alias | lft  | rght |
@@ -306,9 +304,7 @@ Group-only ACL
 --------------
 
 In case we want simplified per-group only permissions, we need to
-implement ``bindNode()`` in ``User`` model.
-
-::
+implement ``bindNode()`` in ``User`` model::
 
     function bindNode($user) {
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
@@ -319,9 +315,7 @@ check only ``Group`` Aro's.
 
 Every user has to have assigned ``group_id`` for this to work.
 
-In this case our ``aros`` table will look like this:
-
-::
+In this case our ``aros`` table will look like this::
 
     +----+-----------+-------+-------------+-------+------+------+
     | id | parent_id | model | foreign_key | alias | lft  | rght |
@@ -346,16 +340,13 @@ controllers and their actions? Well unfortunately there is no magic
 way in CakePHP's core to accomplish this. The core classes offer a
 few ways to manually create ACO's though. You can create ACO
 objects from the Acl shell or You can use the ``AclComponent``.
-Creating Acos from the shell looks like:
+Creating Acos from the shell looks like::
 
-::
+    ./Console/cake acl create aco root controllers
 
-    cake acl create aco root controllers
+While using the AclComponent would look like::
 
-While using the AclComponent would look like:
-
-::
-
+    <?php
     $this->Acl->Aco->create(array('parent_id' => null, 'alias' => 'controllers'));
     $this->Acl->Aco->save();
 
@@ -369,11 +360,9 @@ a small modification to our ``AuthComponent`` configuration.
 ``AuthComponent`` needs to know about the existence of this root
 node, so that when making ACL checks it can use the correct node
 path when looking up controllers/actions. In ``AppController`` add
-the following to the ``beforeFilter``:
+the following to the ``beforeFilter``::
 
-::
-
+    <?php
     $this->Auth->actionPath = 'controllers/';
 
-
-
+Continue to :doc:`part-two` to continue the tutorial.

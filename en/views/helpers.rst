@@ -33,7 +33,7 @@ the name of the helper to the controller's ``$helpers`` array::
         public $helpers = array('Form', 'Html', 'Javascript', 'Time');
     }
 
-Adding helpers from plugins, uses the :term:`plugin syntax` used elsewhere in
+Adding helpers from plugins uses the :term:`plugin syntax` used elsewhere in
 CakePHP::
 
     <?php

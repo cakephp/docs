@@ -518,7 +518,7 @@ Next, let's make a way for users to delete posts. Start with a
 
 This logic deletes the post specified by $id, and uses
 ``$this->Session->setFlash()`` to show the user a confirmation
-message after redirecting them on to ``/posts``.  If the user attempts
+message after redirecting them on to ``/posts``.  If the user attempts to
 do a delete using a GET request, we throw an Exception.  Uncaught exceptions
 are captured by CakePHP's exception handler, and a nice error page is 
 displayed.  There are many built-in :doc:`/development/exceptions` that can
