@@ -673,7 +673,7 @@ like to fetch Recipe data when using the Ingredient model.
    HABTM data is treated like a complete set, each time a new data association is added
    the complete set of associated rows in database is dropped and created again so you
    will always need to pass the whole data set for saving. For alternative to use HABTM
-    see :ref:`hasMany-through`
+   see :ref:`hasMany-through`
 
 .. tip::
 
@@ -1066,9 +1066,8 @@ table::
     
     $books = $Book->find('all', $options);
 
-Using joins with Containable behavior could lead to some SQL errors
-(duplicate tables), so you need to use the joins method as an
-alternative for Containable if your main goal is to perform
-searches based on related data. Containable is best suited to
-restricting the amount of related data brought by a find
-statement.
+Using joins allows you to have a maximum flexibility in how CakePHP handles associations
+and fetch the data, however in most cases you can use other tools to achieve the same results
+such as correctly defining associations, binding models on the fly and using the Containable
+behavior. This feature should be used with care because it could lead, in a few cases, into bad formed
+SQL queries if combined with any of the former techniques described for associating models.
