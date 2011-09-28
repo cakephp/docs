@@ -11,7 +11,7 @@ First, realize that there are three main parts to a Cake
 application:
 
 
-#. The core CakePHP libraries, in /cake.
+#. The core CakePHP libraries, in /lib/Cake.
 #. Your application code, in /app.
 #. The application’s webroot, usually in /app/webroot.
 
@@ -22,7 +22,7 @@ out of the app folder as long as you tell Cake where you've put
 it.
 
 To configure your Cake installation, you'll need to make some
-changes to following files.
+changes to the following files.
 
 
 -  /app/webroot/index.php
@@ -268,7 +268,7 @@ Pretty URLs on nginx
 ====================
 
 nginx is a popular server that, like Lighttpd, uses less system
-resources. It's drawback is that it does not make use of .htaccess
+resources. Its drawback is that it does not make use of .htaccess
 files like Apache and Lighttpd, so it is necessary to create those
 rewritten URLs in the site-available configuration. Depending upon
 your setup, you will have to modify this, but at the very least,
