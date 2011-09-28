@@ -26,7 +26,7 @@ Bakery
 
 `http://bakery.cakephp.org <http://bakery.cakephp.org>`_
 
-CakePHPのBakeryは、CakePHPに関する情報中継所（*clearing house*）です。
+CakePHPのBakeryは、CakePHPに関する情報中継所(*clearing house*)です。
 チュートリアル、事例研究、コード例などについて情報が得られます。
 CakePHPに関する理解が深まったらログインして知識をコミュニティと共有し、名声と富を手に入れましょう。
 
