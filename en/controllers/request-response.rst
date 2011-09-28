@@ -15,7 +15,7 @@ CakeRequest
 ###########
 
 :php:class:`CakeRequest` is the default request object used in CakePHP.  It centralizes
-a number of features for interogatting and interacting with request data.  
+a number of features for interogating and interacting with request data.  
 On each request one CakeRequest is created and then passed by reference to the various 
 layers of an application that use request data.  By default ``CakeRequest`` is assigned to
 ``$this->request``, and is available in Controller, Views and Helpers.  You can
@@ -136,7 +136,7 @@ determining whether or not your application is in a subdirectory.
 
 .. _check-the-request:
 
-Inspeciting the request
+Inspecting the request
 =======================
 
 Detecting various request conditions used to require using
@@ -170,7 +170,7 @@ that you can create:
 Some examples would be::
 
     <?php
-    // Add a environment detector.
+    // Add an environment detector.
     $this->request->addDetector('post', array('env' => 'REQUEST_METHOD', 'value' => 'POST'));
     
     // Add a pattern value detector.
@@ -237,7 +237,7 @@ CakeRequest API
 
 .. php:class:: CakeRequest
 
-    CakeRequest encapsulates request paramter handling, and introspection.
+    CakeRequest encapsulates request parameter handling, and introspection.
 
 .. php:method:: domain()
 
@@ -261,7 +261,7 @@ CakeRequest API
 
 .. php:method:: clientIp() 
 
-    Returns the current visitors IP address.
+    Returns the current visitor's IP address.
 
 .. php:method header()
 
@@ -382,7 +382,7 @@ tasks such as:
 Changing the response class
 ===========================
 
-CakePHP uses ``CakeResponse`` by default. In ``CakeResponse`` is a flexible and 
+CakePHP uses ``CakeResponse`` by default. ``CakeResponse`` is a flexible and 
 transparent to use class.  But if you need to replace it with an application 
 specific class, you can override and replace ``CakeResponse`` with
 your own class.  By replacing the CakeResponse used in index.php.
@@ -418,7 +418,7 @@ Sending attachments
 
 There are times when you want to send Controller responses as files for
 download.  You can either accomplish this using :doc:`/views/media-view`
-or by using the features on ``CakeResponse``.
+or by using the features of ``CakeResponse``.
 :php:meth:`CakeResponse::download()` allows you to send the response as file for
 download::
 
@@ -464,7 +464,7 @@ You can also tell clients that you want them to cache responses. By using
     }
 
 The above would tell clients to cache the resulting resposne for 5 days,
-hopefully speeding up your visitors experience.
+hopefully speeding up your visitors' experience.
 
 Setting headers
 ===============
@@ -513,7 +513,7 @@ CakeResponse API
 
 .. php:class:: CakeResponse
 
-    CakeResponse provides a number of useful methods for interacting wit
+    CakeResponse provides a number of useful methods for interacting with
     the response you are sending to a client.
 
 .. php:method:: header() 
