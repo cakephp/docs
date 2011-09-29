@@ -256,7 +256,7 @@ Creating custom Transports
 
 You are able to create your custom transports to integrate with others email
 systems (like SwiftMailer). To create your transport, first create the file
-``app/Network/Email/ExampleTransport.php`` (where Example is the name of your
+``app/Lib/Network/Email/ExampleTransport.php`` (where Example is the name of your
 transport). To start off your file should look like::
 
     <?php
