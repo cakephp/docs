@@ -13,7 +13,7 @@ the documentation.
 Download the documentation:
 
 - `epub format <../_downloads/en/CakePHPCookbook.epub>`_
-- `original source <http://github.com/cakephp/docs/downloads>`_
+- `original source <http://github.com/cakephp/docs>`_
 
 
 Getting started
