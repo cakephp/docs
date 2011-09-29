@@ -1,30 +1,24 @@
-Migrating from CakePHP 1.2 to 1.3
-#################################
+1.2から1.3への移行ガイド
+########################
 
-This guide summarizes many of the changes necessary when migrating
-from a 1.2 to 1.3 Cake core. Each section contains relevant
-information for the modifications made to existing methods as well
-as any methods that have been removed/renamed.
+このガイドは、様々なコアの1.2から1.3への移行に際して必要な変更について要約します。
+各々のセクションは、既存のメソッドの変更点はもちろん、削除・名前の変更がされたメソッドに関連した情報を含みます。
 
-**App File Replacements (important)**
+**（重要）Appファイルの置き換え**
 
 
--  webroot/index.php: Must be replaced due to changes in
-   bootstrapping process.
--  config/core.php: Additional settings have been put in place
-   which are required for PHP 5.3.
--  webroot/test.php: Replace if you want to run unit tests.
+-  webroot/index.php: 起動方式(bootstrapping process)の変更によるものを置き換える必要があります。
+-  config/core.php: PHP5.3に必要な設定が追加されました。
+-  webroot/test.php: 単体テストを実行する場合、置き換えてください。
 
-Removed Constants
-~~~~~~~~~~~~~~~~~
+削除された定数
+~~~~~~~~~~~~~~
 
-The following constants have been removed from CakePHP. If your
-application depends on them you must define them in
-``app/config/bootstrap.php``
+以下の定数はCakePHPから削除されました。
+削除された定数にアプリケーションが依存しているなら、 ``app/config/bootstrap.php`` にこれらの定数を定義してください。
 
 
--  ``CIPHER_SEED`` - It has been replaced with Configure class var
-   ``Security.cipherSeed`` which should be changed in
+-  ``CIPHER_SEED`` - Configureのクラス変数 ``Security.cipherSeed`` に置き換えられました。 この変更は ``app/config/core.php`` に書かれるべきです。
    ``app/config/core.php``
 -  ``PEAR``
 -  ``INFLECTIONS``
@@ -33,16 +27,14 @@ application depends on them you must define them in
 -  ``VALID_NUMBER``
 -  ``VALID_YEAR``
 
-Configuration and application bootstrapping
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+設定とアプリケーションのブートストラップ
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Bootstrapping Additional Paths.**
+**ブートストラップ時のパスの追加**
 
-In your app/config/bootstrap.php you may have variables like
-``$pluginPaths`` or ``$controllerPaths``.
-There is a new way to add those paths. As of 1.3 RC1 the
-``$pluginPaths`` variables will no longer work. You must use
-``App::build()`` to modify paths.
+app/config/bootstrap.php に、 ``$pluginPaths`` や ``$controllerPaths`` のような変数が置かれているかもしれません。
+以下はパスを追加する新しい方法です。1.3 RC1 では ``$pluginPaths`` 変数はもはや働かないでしょう。
+パスを更新するには ``App::build()`` を使う必要があります。
 
 ::
 
@@ -61,19 +53,15 @@ There is a new way to add those paths. As of 1.3 RC1 the
         'libs' => array('/full/path/to/libs/', '/next/full/path/to/libs/')
     ));
 
-Also changed is the order in which bootstrapping occurs. In the
-past ``app/config/core.php`` was loaded **after**
-``app/config/bootstrap.php``. This caused any ``App::import()`` in
-an application bootstrap to be un-cached and considerably slower
-than a cached include. In 1.3 core.php is loaded and the core cache
-configs are created **before** bootstrap.php is loaded.
+またブートストラップするときの順序が変更されました。
+以前は、 ``app/config/bootstrap.php`` の **後に** ``app/config/core.php`` が読み込まれていました。
+これはアプリケーションのブートストラップ時の ``App::import()`` がキャッシュせず、キャッシュがヒットしたときよりかなりかなり遅くなっていました。
+1.3では、core.php の読み込みと設定のキャッシュは bootstrap.php の読み込みの **前に** されます。
 
-**Loading custom inflections**
+**カスタム inflections の読み込み**
 
-``inflections.php`` has been removed, it was an unnecessary file
-hit, and the related features have been refactored into a method to
-increase their flexibility. You now use ``Inflector::rules()`` to
-load custom inflections.
+不必要なファイルの読み込みをしていた ``inflections.php`` は削除され、関連した機能は柔軟性を増強するため、メソッドに書き直されています。
+今やカスタム *inflections* を読み込むためには、 ``Inflector::rules()`` を使います。
 
 ::
 
@@ -83,51 +71,46 @@ load custom inflections.
         'irregular' => array('spins' => 'spinor')
     ));
 
-Will merge the supplied rules into the infection sets, with the
-added rules taking precedence over the core rules.
+こうして設定されるルールは、コアのルールより優先的に inflection のセットにマージされます。
 
-File renames and internal changes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ファイルの名の変更と内部の変更点
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Library Renames**
+**ライブラリ名の変更**
 
-Core libraries of libs/session.php, libs/socket.php,
-libs/model/schema.php and libs/model/behavior.php have been renamed
-so that there is a better mapping between filenames and main
-classes contained within (as well as dealing with some name-spacing
-issues):
+ファイル名と含まれるメインクラスのマッピングのため、「libs/session.php」、「libs/socket.php」、「libs/model/schema.php」、「libs/model/behavior.php」のコアライブラリは名前が変更されています。:
 
 
 -  session.php ⇒ cake\_session.php
 
-   
+  
    -  App::import('Core', 'Session') ⇒ App::import('Core',
       'CakeSession')
 
 -  socket.php ⇒ cake\_socket.php
 
-   
+  
    -  App::import('Core', 'Socket') ⇒ App::import('Core',
       'CakeSocket')
 
 -  schema.php ⇒ cake\_schema.php
 
-   
+  
    -  App::import('Model', 'Schema') ⇒ App::import('Model',
       'CakeSchema')
 
 -  behavior.php ⇒ model\_behavior.php
 
-   
+  
    -  App::import('Core', 'Behavior') ⇒ App::import('Core',
       'ModelBehavior')
 
 
-In most cases, the above renaming will not affect userland code.
+ほとんどの場合、これらの名前の変更はユーザランドのコードには影響しません。
 
-**Inheritance from Object**
+**Objectからの継承**
 
-The following classes no longer extend Object:
+以下のクラスはもはやObjectを継承しません。
 
 
 -  Router
@@ -136,51 +119,42 @@ The following classes no longer extend Object:
 -  Cache
 -  CacheEngine
 
-If you were using Object methods from these classes, you will need
-to not use those methods.
+もしこれらのクラスでObjectのメソッドを使っているなら、それらのメソッドを使わないようにする必要があります。
 
-Controller & Components
-~~~~~~~~~~~~~~~~~~~~~~~
+コントローラとコンポーネント
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Controller**
-
-
--  ``Controller::set()`` no longer changes variables from
-   ``$var_name`` to ``$varName``. Variables always appear in the view
-   exactly as you set them.
-
--  ``Controller::set('title', $var)`` no longer sets
-   ``$title_for_layout`` when rendering the layout.
-   ``$title_for_layout`` is still populated by default. But if you
-   want to customize it, use
-   ``$this->set('title_for_layout', $var)``.
-
--  ``Controller::$pageTitle`` has been removed. Use
-   ``$this->set('title_for_layout', $var);`` instead.
-
--  Controller has two new methods ``startupProcess`` and
-   ``shutdownProcess``. These methods are responsible for handling the
-   controller startup and shutdown processes.
-
-**Component**
+**コントローラ**
 
 
--  ``Component::triggerCallback`` has been added. It is a generic
-   hook into the component callback process. It supplants
-   ``Component::startup()``, ``Component::shutdown()`` and
-   ``Component::beforeRender()`` as the preferred way to trigger
-   callbacks.
+-  ``Controller::set()`` は ``$var_name`` を ``$varName`` に置き換えなくなりました。
+   変数はあなたがセットした通りにViewで扱えます。
+
+-  ``Controller::set('title', $var)`` をしてもレイアウト中で、 ``$title_for_layout`` にセットされなくなりました。
+   ``$title_for_layout`` はデフォルトのままです。もしカスタマイズしたいなら、 ``$this->set('title_for_layout', $var)`` を使用してください。
+
+-  ``Controller::$pageTitle`` は削除されました。
+   代わりに ``$this->set('title_for_layout', $var);`` を使用してください。
+
+-  コントローラには新たに ``startupProcess`` と ``shutdownProcess`` の二つのメソッドがあります。
+   これらのメソッドはコントローラの初期化処理と終了処理の取り扱いを担います。
+
+**コンポーネント**
+
+
+-  ``Component::triggerCallback`` が追加されました。
+   これはコンポーネントのコールバック処理への汎用的なフックです。
+   ``Component::startup()`` 、 ``Component::shutdown()`` 、 ``Component::beforeRender()`` よりもコールバックを引き起こす為に都合の良いものとして取って代わりました。
 
 **CookieComponent**
 
 
--  ``del`` is deprecated use ``delete``
+-  ``del`` は非推奨となりました。 ``delete`` を使用してください。
 
 **AclComponent + DbAcl**
 
-Node reference checks done with paths are now less greedy and will
-no longer consume intermediary nodes when doing searches. In the
-past given the structure:
+検索時に無駄に中継ノードを浪費すること、貪欲に検索すること無くパスを用いたノード参照のチェックが成されるようになりました。
+以前はこのような構造が与えられると：
 
 ::
 
@@ -189,554 +163,429 @@ past given the structure:
               Users/
                     edit
 
-The path ``ROOT/Users`` would match the last Users node instead of
-the first. In 1.3, if you were expecting to get the last node you
-would need to use the path ``ROOT/Users/Users``
+``ROOT/Users`` パスは最初でなく最後のUsersノードにマッチしていました。
+1.3では、最後のノードを期待するならば、 ``ROOT/Users/Users`` をパスとして使う必要があります。
 
 **RequestHandlerComponent**
 
 
--  ``getReferrer`` is deprecated use ``getReferer``
+-  ``getReferrer`` は非推奨となりました。 ``getReferer`` を使用してください。
 
-**SessionComponent & SessionHelper**
-
-
--  ``del`` is deprecated use ``delete``
-
-``SessionComponent::setFlash()`` second param used to be used for
-setting the layout and accordingly rendered a layout file. This has
-been modifed to use an element. If you specified custom session
-flash layouts in your applications you will need to make the
-following changes.
+**SessionヘルパーとSessionコンポーネント**
 
 
-#. Move the required layout files into app/views/elements
-#. Rename the $content\_for\_layout variable to $message
-#. Make sure you have ``echo $session->flash();`` in your layout
+-  ``del`` は非推奨となりました。 ``delete`` を使用してください。
 
-``SessionComponent`` and ``SessionHelper`` are not automatically
-loaded.
-Both ``SessionComponent`` and ``SessionHelper`` are no longer
-automatically included without you asking for them. SessionHelper
-and SessionComponent now act like every other component and must be
-declared like any other helper/component. You should update
-``AppController::$components`` and ``AppController::$helpers`` to
-include these classes to retain existing behavior.
+``SessionComponent::setFlash()`` の2番目の引数は、レイアウトを指定するために使われ、それに応じてレイアウトファイルをレンダリングしていました。
+これはエレメントを使うことに修正されました。
+アプリケーションでセッションflashレイアウトをカスタムしたものを指定しているならば、下記のような変更を加える必要があります。
+
+
+#. 必要なレイアウトファイルを app/views/elements に移動する
+#. $content\_for\_layout 変数を $message 変数に書き換える
+#. レイアウトに ``echo $session->flash();`` があるかどうか確かめる
+
+``SessionComponent`` と ``SessionHelper`` の両方とも、もはやあなたが求めない限り自動で読み込まれなくなりました。
+Sessionヘルパーと Sessionコンポーネントは他のコンポーネントと同じように振る舞い、他のヘルパ・コンポーネントと同じように宣言されなければなりません。
+既存の振る舞いを保持するなら、 ``AppController::$components`` と ``AppController::$helpers`` にこれらのクラスを読み込むように書き換えてください。
 
 ::
 
     var $components = array('Session', 'Auth', ...);
     var $helpers = array('Session', 'Html', 'Form' ...);
 
-These change were done to make CakePHP more explicit and
-declarative in what classes you the application developer want to
-use. In the past there was no way to avoid loading the Session
-classes without modifying core files. Which is something we want
-you to be able to avoid. In addition Session classes were the only
-magical component and helper. This change helps unify and normalize
-behavior amongst all classes.
+これらの変更はCakePHPが、これらクラスを明白的に、また宣言的にアプリケーション開発者が使いたいように成されました。
+過去にはコアファイルを修正することなくセッションを読み込むのを避けることはできませんでした。
+この変更はあなたがこれを避けることを可能にします。
+加えてセッションクラスは唯一の不思議なコンポーネントとヘルパーでした。
+この変更は、すべてのクラスの振舞いの統一と正常化のためにもなります。
 
-Library Classes
-~~~~~~~~~~~~~~~
+ライブラリクラス
+~~~~~~~~~~~~~~~~
 
 **CakeSession**
 
 
--  ``del`` is deprecated use ``delete``
+-  ``del`` は非推奨となりました。 ``delete`` を使用してください。
 
 **SessionComponent**
 
 
--  ``SessionComponent::setFlash()`` now uses an *element* instead
-   of a *layout* as its second parameter. Be sure to move any flash
-   layouts from app/views/layouts to app/views/elements and change
-   instances of $content\_for\_layout to $message.
+-  ``SessionComponent::setFlash()`` は 2番目の引数として *layout* の代わりに *element* を使うようになりました。
+   必ずflashのためのレイアウトをapp/views/layoutsからapp/views/elementsに移し、$content\_for\_layout を $messageに変更するようにしてください。
 
 **Folder**
 
 
--  ``mkdir`` is deprecated use ``create``
--  ``mv`` is deprecated use ``move``
--  ``ls`` is deprecated use ``read``
--  ``cp`` is deprecated use ``copy``
--  ``rm`` is deprecated use ``delete``
+-  ``mkdir`` は非推奨となりました。 ``create`` を使用してください。
+-  ``mv`` は非推奨となりました。 ``move`` を使用してください。
+-  ``ls`` は非推奨となりました。 ``read`` を使用してください。
+-  ``cp`` は非推奨となりました。 ``copy`` を使用してください。
+-  ``rm`` は非推奨となりました。 ``delete`` を使用してください。
 
 **Set**
 
 
--  ``isEqual`` is deprecated. Use == or ===.
+-  ``isEqual`` は非推奨となりました。 == または === を使ってください。
 
 **String**
 
 
--  ``getInstance`` is deprecated, call String methods statically.
+-  ``getInstance`` は非推奨となりました。Stringは静的にアクセスしてください。
 
 **Router**
 
-``Routing.admin`` is deprecated. It provided an inconsistent
-behavior with other prefix style routes in that it was treated
-differently. Instead you should use ``Routing.prefixes``. Prefix
-routes in 1.3 do not require additional routes to be declared
-manually. All prefix routes will be generated automatically. To
-update simply change your core.php.
+``Routing.admin`` は非推奨となりました。
+これはprefixが異なるルーティングの方式では、矛盾した振る舞いを提供していました。
+代わりに ``Routing.prefixes`` を使用する必要があります。
+1.3のprefixルートは手動でルート定義を追加する必要がありません。
+全てのprefixルートは自動で生成されます。シンプルに変更するには、core.phpを変更してください。
 
 ::
 
-    //from:
+    // このような書き方から:
     Configure::write('Routing.admin', 'admin');
-    
-    //to:
+   
+    // このような書き方へ:
     Configure::write('Routing.prefixes', array('admin'));
 
-See the New features guide for more information on using prefix
-routes. A small change has also been done to routing params. Routed
-params should now only consist of alphanumeric chars, - and \_ or
-``/[A-Z0-9-_+]+/``.
+prefixルートの更なる情報に関しては、新機能ガイドを見てください。
+また、ルーティングパラメータに小さな変更があります。
+ルーティングパラメータは今や英数字と「-」、「\_」または ``/[A-Z0-9-_+]+/`` から成る必要があります。
 
 ::
 
-    Router::connect('/:$%@#param/:action/*', array(...)); // BAD
-    Router::connect('/:can/:anybody/:see/:m-3/*', array(...)); //Acceptable
+    Router::connect('/:$%@#param/:action/*', array(...)); // ダメ
+    Router::connect('/:can/:anybody/:see/:m-3/*', array(...)); // 許容可能
 
-For 1.3 the internals of the Router were heavily refactored to
-increase performance and reduce code clutter. The side effect of
-this is two seldom used features were removed, as they were
-problematic and buggy even with the existing code base. First path
-segments using full regular expressions was removed. You can no
-longer create routes like
+1.3のために、Routerの内部はパフォーマンス向上とコードの乱雑さを減らすために大規模に書き直されました。
+この副作用として、コードの基幹部分にあることと引き換えに、問題的でありバグを引き起こしやすかった二つのまれにしか使われない機能が削除されました。
+まず、フル正規表現を使うパスセグメントが削除されました。もう次のようなルートは作れません。
 
 ::
 
     Router::connect('/([0-9]+)-p-(.*)/', array('controller' => 'products', 'action' => 'show'));
 
-These routes complicated route compilation and impossible to
-reverse route. If you need routes like this, it is recommended that
-you use route parameters with capture patterns. Next mid-route
-greedy star support has been removed. It was previously possible to
-use a greedy star in the middle of a route.
+これらのルートは複雑なルートを悪化させ、リバースルーティングを不可能にします。
+もし同じようなルートを必要とするなら、ルーティングパラメータにキャプチャパターンを用いるのが推奨されます。
+次に、ルートの中間でのワイルドカードのサポートが削除されました。以前はワイルドカードがルートの中間で使えました。
 
 ::
 
     Router::connect(
         '/pages/*/:event',
-        array('controller' => 'pages', 'action' => 'display'), 
+        array('controller' => 'pages', 'action' => 'display'),
         array('event' => '[a-z0-9_-]+')
     );
 
-This is no longer supported as mid-route greedy stars behaved
-erratically, and complicated route compiling. Outside of these two
-edge-case features and the above changes the router behaves exactly
-as it did in 1.2
+不規則な振る舞いやルートのコンパイルを複雑にするようなワイルドカードはもはやサポートされません。
+これら二つの境界ケースである機能と変更以外の振る舞いは、1.2のときと変わらず振舞います。
 
-Also, people using the 'id' key in array-form URLs will notice that
-Router::url() now treats this as a named parameter. If you
-previously used this approach for passing the ID parameter to
-actions, you will need to rewrite all your $html->link() and
-$this->redirect() calls to reflect this change.
+また、配列形式のURLに「id」キーを用いている人は、Router::url()がこれを名前付き(*named*)パラメータとして扱うことに気づくでしょう。
+もし過去にこのようなアプローチでIDパラメータをアクションに渡していたなら、この変更を反映するために、全ての $html->link() と $this->redirect() を書き換える必要あります。
 
 ::
 
-    // old format:
+    // 古いフォーマット:
     $url = array('controller' => 'posts', 'action' => 'view', 'id' => $id);
-    // use cases:
+    // ユースケース:
     Router::url($url);
     $html->link($url);
     $this->redirect($url);
-    // 1.2 result:
+    // 1.2 の結果:
     /posts/view/123
-    // 1.3 result:
+    // 1.3 の結果:
     /posts/view/id:123
-    // correct format:
+    // 正しいフォーマット:
     $url = array('controller' => 'posts', 'action' => 'view', $id);
 
 **Dispatcher**
 
-``Dispatcher`` is no longer capable of setting a controller's
-layout/viewPath with request parameters. Control of these
-properties should be handled by the Controller, not the Dispatcher.
-This feature was also undocumented, and untested.
+Dispatcherはもはやリクエストパラメータを元にControllerのlayout/viewPathを設定しません。
+これらのプロパティはDispatcherではなくControllerによって操作されるべきです。
+この機能はドキュメント化、テストがされていませんでした。
 
 **Debugger**
 
 
--  ``Debugger::checkSessionKey()`` has been renamed to
-   ``Debugger::checkSecurityKeys()``
--  Calling ``Debugger::output("text")`` no longer works. Use
-   ``Debugger::output("txt")``.
+-  ``Debugger::checkSessionKey()`` は ``Debugger::checkSecurityKeys()`` に名前が変更されました。
+-  ``Debugger::output("text")`` といったコールはもはや正しく動きません。
+   ``Debugger::output("txt")`` を使ってください。
 
 **Object**
 
 
--  ``Object::$_log`` has been removed. ``CakeLog::write`` is now
-   called statically. See :doc:`/core-libraries/logging`
-   for more information on changes made to logging.
+-  ``Object::$_log`` は削除されました。
+   今は ``CakeLog::write`` が静的に呼び出されます。
+   ログに加えられた変更の更なる情報は :doc:`/core-libraries/logging` をみてください。
 
 **Sanitize**
 
 
--  ``Sanitize::html()`` now actually always returns escaped
-   strings. In the past using the ``$remove`` parameter would skip
-   entity encoding, returning possibly dangerous content.
--  ``Sanitize::clean()`` now has a ``remove_html`` option. This
-   will trigger the ``strip_tags`` feature of ``Sanitize::html()``,
-   and must be used in conjunction with the ``encode`` parameter.
+-  ``Sanitize::html()`` は、 ``$remove`` 引数を使うことによってHTMLエンティティのエンコーディングをせず、危険な内容を返すことを許してしまっていましたが、今や常にエスケープされた文字列を返します。
+-  ``Sanitize::clean()`` には ``remove_html`` オプションが付け加えられています。
+   これは ``encode`` オプションと共に使われなければならず、 ``Sanitize::html()`` の ``strip_tags`` の機能へのトリガとなります。
 
-**Configure and App**
+**Configure と App**
 
 
--  Configure::listObjects() replaced by App::objects()
--  Configure::corePaths() replaced by App::core()
--  Configure::buildPaths() replaced by App::build()
--  Configure no longer manages paths.
--  Configure::write('modelPaths', array...) replaced by
-   App::build(array('models' => array...))
--  Configure::read('modelPaths') replaced by App::path('models')
--  There is no longer a debug = 3. The controller dumps generated
-   by this setting often caused memory consumption issues making it an
-   impractical and unusable setting. The ``$cakeDebug`` variable has
-   also been removed from ``View::renderLayout`` You should remove
-   this variable reference to avoid errors.
--  ``Configure::load()`` can now load configuration files from
-   plugins. Use ``Configure::load('plugin.file');`` to load
-   configuration files from plugins. Any configuration files in your
-   application that use ``.`` in the name should be updated to use
-   ``_``
+-  Configure::listObjects() は App::objects() に置き換えられました。
+-  Configure::corePaths() は App::core() に置き換えられました。
+-  Configure::buildPaths() は App::build() に置き換えられました。
+-  Configureはパスを管理しないようになりました。
+-  Configure::write('modelPaths', array...) は App::build(array('models' => array...)) に置き換えられました。
+-  Configure::read('modelPaths')は App::path('models') に置き換えられました。
+-  debug = 3はもうありません。
+   この設定によって生成されるコントローラのダンプは、度々メモリの消費問題を引き起こし、非実用的で使用不可能な設定でした。
+   また ``$cakeDebug`` 変数は ``View::renderLayout`` から削除されました。
+   エラーを避けるためこの変数の参照を削除してください。
+-  ``Configure::load()`` を使ってプラグインから設定ファイルを読み込めるようになりました。
+   ``Configure::load('plugin.file');`` として使ってください。
+   ``.`` （訳注：ピリオド）を設定ファイル名に使っている場合は、 ``_`` （訳注：アンダースコア）に置き換えるべきです。
 
 **Cache**
 
-In addition to being able to load CacheEngines from app/libs or
-plugins, Cache underwent some refactoring for CakePHP1.3. These
-refactorings focused around reducing the number and frequency of
-method calls. The end result was a significant performance
-improvement with only a few minor API changes which are detailed
-below.
+アプリーション、コア、またはプラグインからキャッシュエンジンを読み込めることに加えて、CakePHP1.3ではCacheがいくらか書き直されました。
+書き直した点はメソッドのコールの呼び出しの頻度と回数を減らすことに主眼が置かれました。
+結果として、少しだけマイナーなAPIの変更があり、それに伴いかなりのパフォーマンスが向上しました。詳細は以下です。
 
-The changes in Cache removed the singletons used for each Engine
-type, and instead an engine instance is made for each unique key
-created with ``Cache::config()``. Since engines are not singletons
-anymore, ``Cache::engine()`` was not needed and was removed. In
-addition ``Cache::isInitialized()`` now checks cache
-*configuration names*, not cache *engine names*. You can still use
-``Cache::set()`` or ``Cache::engine()`` to modify cache
-configurations. Also checkout the
-:doc:`/appendices/new-features-in-cakephp-1-3` for
-more information on the additional methods added to ``Cache``.
+Cacheはエンジン毎のシングルトンの使用をやめ、代わりに ``Cache::config()`` で設定されるユニークキー毎にインスタンスが作られるようになりました。
+以来エンジンはシングルトンでなく、 ``Cache::engine()`` は必要なくなり、削除されました。
+加えて ``Cache::isInitialized()`` は *エンジン名* でなく、 *設定名* をチェックするようになりました。
+しかしまだ、 ``Cache::set()`` や ``Cache::engine()`` をキャッシュの設定を変更するのに使えます。
+また ``Cache`` に追加されたメソッドの更なる情報は :doc:`/appendices/new-features-in-cakephp-1-3` をチェックしてください。
 
-It should be noted that using an app/libs or plugin cache engine
-for the default cache config can cause performance issues as the
-import that loads these classes will always be uncached. It is
-recommended that you either use one of the core cache engines for
-your ``default`` configuration, or manually include the cache
-engine class before configuring it. Furthermore any non-core cache
-engine configurations should be done in
-``app/config/bootstrap.php`` for the same reasons detailed above.
+デフォルトのキャッシュ設定でアプリーション、コア、またはプラグインにあるキャッシュエンジンを使用すると、これらのクラスの読み込みが常にキャッシュされない為にパフォーマンス問題を引き起こすことがあることに注意すべきです。
+推奨されるのは、 ``default`` 設定にコアのキャッシュエンジンの一つを使用することか、もしくは設定をする以前に手動でキャッシュエンジンのクラスを include することです。
+なおその上、コアでないキャッシュエンジンの設定は上記の理由のため、 ``app/config/bootstrap.php`` で終わらせておくべきです。
 
-Model Databases and Datasources
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+モデルのデータベースとデータソース
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Model**
+**モデル**
 
 
--  ``Model::del()`` and ``Model::remove()`` have been removed in
-   favor of ``Model::delete()``, which is now the canonical delete
-   method.
--  ``Model::findAll``, findCount, findNeighbours, removed.
--  Dynamic calling of setTablePrefix() has been removed.
-   tableprefix should be with the ``$tablePrefix`` property, and any
-   other custom construction behavior should be done in an overridden
-   ``Model::__construct()``.
--  ``DboSource::query()`` now throws warnings for un-handled model
-   methods, instead of trying to run them as queries. This means,
-   people starting transactions improperly via the
-   ``$this->Model->begin()`` syntax will need to update their code so
-   that it accesses the model's DataSource object directly.
--  Missing validation methods will now trigger errors in
-   development mode.
--  Missing behaviors will now trigger a cakeError.
--  ``Model::find(first)`` will no longer use the id property for
-   default conditions if no conditions are supplied and id is not
-   empty. Instead no conditions will be used
--  For Model::saveAll() the default value for option 'validate' is
-   now 'first' instead of true
+-  ``Model::del()`` と ``Model::remove()`` は削除され、Model::delete()が正規の削除メソッドとなりました。
+-  ``Model::findAll`` 、findCount,、findNeighbours は削除されました。
+-  動的なsetTablePrefix()のコールは削除されました。
+   テーブル接頭辞は ``$tablePrefix`` プロパティに記述されるべきで、初期化のカスタマイズはオーバーライドされた ``Model::__construct()`` の中で終わらせるべきです。
+-  ``DboSource::query()`` は登録されていないメソッドに対してその名前のクエリを発行する代わりに、警告(*warnings*)を出すようになりました。
+   これは、モデルのDataSourceオブジェクトに直接アクセスするように、無作法に ``$this->Model->begin()`` としてトランザクションを始めるような文法を改める必要があることを意味します。
+-  開発モードの時、Validationのメソッドが見つからないとエラーを引き起こすようになりました。
+-  Behaviorが見つからないとcakeErrorを引き起こすようになりました。
+-  ``Model::find(first)`` は、conditionsが与えられず、idプロパティが空でないときに限って、idプロパティをデフォルトのconditionsとして使用していましたが、今やconditions無しが使われるようになりました。
+-  Model::saveAll()の'validate'オプションは、デフォルト値としてtrueの代わりに'first'となりました。
 
-**Datasources**
+**データソース**
 
 
--  DataSource::exists() has been refactored to be more consistent
-   with non-database backed datasources. Previously, if you set
-   ``var $useTable = false; var $useDbConfig = 'custom';``, it was
-   impossible for ``Model::exists()`` to return anything but false.
-   This prevented custom datasources from using ``create()`` or
-   ``update()`` correctly without some ugly hacks. If you have custom
-   datasources that implement ``create()``, ``update()``, and
-   ``read()`` (since ``Model::exists()`` will make a call to
-   ``Model::find('count')``, which is passed to
-   ``DataSource::read()``), make sure to re-run your unit tests on
-   1.3.
+-  DataSource::exists()は非DBデータソースも使えるように書き直されました。
+   以前は、 ``var $useTable = false; var $useDbConfig = 'custom';`` としても、 ``Model::exists()`` はfalse以外を返すことは不可能でした。
+   このことが ``create()`` または ``update()`` を使っているカスタムデータソースに醜いハックを用いずに正しく動作させることを妨げていました。
+   もしカスタムデータソースが ``create()`` 、 ``update()`` 、 ``read()``  ( ``Model::exists()`` がコールするであろう ``Model::find('count')`` は、 ``DataSource::read()`` に渡されるため)を実装しているなら、1.3上でユニットテストを再度走らせて確かめてください。
 
-**Databases**
+**データベース**
 
-Most database configurations no longer support the 'connect' key
-(which has been deprecated since pre-1.2). Instead, set
-``'persistent' => true`` or false to determine whether or not a
-persistent database connection should be used
+ほとんどのデータベース設定はもはや'connect'キー（1.2以前から非推奨）をサポートしません。
+代わりに、データベースへの持続的接続をするかどうかに関わらず、 ``'persistent' => true`` もしくはfalseを指定してください。
 
-**SQL log dumping**
+**SQLログのダンプ**
 
-A commonly asked question is how can one disable or remove the SQL
-log dump at the bottom of the page?. In previous versions the HTML
-SQL log generation was buried inside DboSource. For 1.3 there is a
-new core element called ``sql_dump``. ``DboSource`` no longer
-automatically outputs SQL logs. If you want to output SQL logs in
-1.3, do the following:
+よく聞かれる質問は、どうやったらページの下のほうにあるSQLログのダンプを無効または削除できるのかというものです。
+前のバージョンでは、SQLログのHTML生成はDboSourceの中に埋め込まれていました。
+1.3には ``sql_dump`` というエレメントがコアにあります。
+``DboSource`` はもはや自動でSQLログを吐き出しません。
+もし1.3でSQLログを吐き出したいなら、下記のようにしてください。
 
 ::
 
     <?php echo $this->element('sql_dump'); ?>
 
-You can place this element anywhere in your layout or view. The
-``sql_dump`` element will only generate output when
-``Configure::read('debug')`` is equal to 2. You can of course
-customize or override this element in your app by creating
-``app/views/elements/sql_dump.ctp``.
+このエレメントはレイアウトやビューのどこにでも置けます。
+``sql_dump`` エレメントは ``Configure::read('debug')`` が2のときのみSQLログを生成します。
+もちろん ``app/views/elements/sql_dump.ctp`` を作ることでappでカスタムやオーバーライドをすることができます。
 
-View and Helpers
+ビューとヘルパー
 ~~~~~~~~~~~~~~~~
 
 **View**
 
 
--  ``View::renderElement`` removed. Use ``View::element()``
-   instead.
--  Automagic support for ``.thtml`` view file extension has been
-   removed either declare ``$this->ext = 'thtml';`` in your
-   controllers, or rename your views to use ``.ctp``
--  ``View::set('title', $var)`` no longer sets
-   ``$title_for_layout`` when rendering the layout.
-   ``$title_for_layout`` is still populated by default. But if you
-   want to customize it, use ``$this->set('title_for_layout', $var)``.
--  ``View::$pageTitle`` has been removed. Use
-   ``$this->set('title_for_layout', $var);`` instead.
--  The ``$cakeDebug`` layout variable associated with debug = 3 has
-   been removed. Remove it from your layouts as it will cause errors.
-   Also see the notes related to SQL log dumping and Configure for
-   more information.
+-  ``View::renderElement`` は削除されました。 代わりに ``View::element()`` を使用してください。
+-  ビューファイルの拡張子、 ``.thtml`` はもはや自動で読み込まれません。
+   コントローラで ``$this->ext = 'thtml';`` を宣言するか、ビューファイルの拡張子を ``.ctp`` に変更してください。
+-  ``View::set('title', $var)`` をしてもレイアウト中で、 ``$title_for_layout`` にセットされなくなりました。
+   ``$title_for_layout`` はデフォルトのままです。
+   もしカスタマイズしたいなら、 ``$this->set('title_for_layout', $var)`` を使用してください。
+-  ``View::$pageTitle`` は削除されました。
+   代わりに ``$this->set('title_for_layout', $var);`` を使用してください。
+-  debug = 3 に関するレイアウト変数 ``$cakeDebug`` は削除されました。
+   この変数を参照してもエラーを引き起こしますので、レイアウト中にあるなら削除してください。
+   また、更なる情報に関してはSQLログのダンプとConfigureに関するノートを見てください。
 
-All core helpers no longer use ``Helper::output()``. The method was
-inconsistently used and caused output issues with many of
-FormHelper's methods. If you previously overrode
-``AppHelper::output()`` to force helpers to auto-echo you will need
-to update your view files to manually echo helper output.
+全てのコアヘルパーはもう ``Helper::output()`` を使いません。
+このメソッドは矛盾した使われ方をしたり、多くのFormHelperの出力に問題を引き起こしてきたりしました。
+自動的にechoするように ``AppHelper::output()`` をオーバーロードしているのなら、手動でヘルパーのアウトプットをechoするようにビューファイルを書き換える必要があるでしょう。
 
 **TextHelper**
 
 
--  ``TextHelper::trim()`` is deprecated, used ``truncate()``
-   instead.
--  ``TextHelper::highlight()`` no longer has:
--  an ``$highlighter`` parameter. Use ``$options['format']``
-   instead.
--  an ``$considerHtml``parameter. Use ``$options['html']`` instead.
--  ``TextHelper::truncate()`` no longer has:
--  an ``$ending`` parameter. Use ``$options['ending']`` instead.
--  an ``$exact`` parameter. Use ``$options['exact']`` instead.
--  an ``$considerHtml``parameter. Use ``$options['html']``
-   instead.
+-  ``TextHelper::trim()`` は非推奨となりました。代わりに ``truncate()`` を使用してください。
+-  ``TextHelper::highlight()`` では:
+-  ``$highlighter`` 引数は削除されました。
+   代わりに ``$options['format']`` を使用してください。
+-  ``$considerHtml`` 引数は削除されました。
+   代わりに ``$options['html']`` を使用してください。
+-  ``TextHelper::truncate()`` では:
+-  ``$ending`` 引数は削除されました。
+   代わりに ``$options['ending']`` を使用してください。
+-  ``$exact`` 引数は削除されました。
+   代わりに ``$options['exact']`` を使用してください。
+-  ``$considerHtml`` 引数は削除されました。
+   代わりに ``$options['html']`` を使用してください。
 
 **PaginatorHelper**
 
-PaginatorHelper has had a number of enhancements applied to make
-styling easier.
-``prev()``, ``next()``, ``first()`` and ``last()``
+PaginatorHelper にはスタイルをより簡単にするたくさんの機能強化があります。
+``prev()`` 、 ``next()`` 、 ``first()`` 、 ``last()`` のメソッドで、リンク先が無い場合リンクの代わりに ``<div>`` タグが返されていましたが、 ``<span>`` がデフォルトになりました。
 
-The disabled state of these methods now defaults to ``<span>`` tags
-instead of ``<div>`` tags.
+passedArgs が「url」オプションに自動的にマージされるようになりました。
 
-passedArgs are now auto merged with url options in paginator.
-
-``sort()``, ``prev()``, ``next()`` now add additional class names
-to the generated html. ``prev()`` adds a class of prev. ``next()``
-adds a class of next. ``sort()`` will add the direction currently
-being sorted, either asc or desc.
+``sort()`` 、 ``prev()`` 、 ``next()`` は生成されるHTMLにクラス名を付与するようになりました。
+``prev()`` は「prev」クラスを付与します。
+``next()`` は「next」クラスを付与します。
+``sort()`` は昇順なら「asc」クラス、降順なら「desc」クラスを付与します。
 
 **FormHelper**
 
 
--  ``FormHelper::dateTime()`` no longer has a ``$showEmpty``
-   parameter. Use ``$attributes['empty']`` instead.
--  ``FormHelper::year()`` no longer has a ``$showEmpty`` parameter.
-   Use ``$attributes['empty']`` instead.
--  ``FormHelper::month()`` no longer has a ``$showEmpty``
-   parameter. Use ``$attributes['empty']`` instead.
--  ``FormHelper::day()`` no longer has a ``$showEmpty`` parameter.
-   Use ``$attributes['empty']`` instead.
--  ``FormHelper::minute()`` no longer has a ``$showEmpty``
-   parameter. Use ``$attributes['empty']`` instead.
--  ``FormHelper::meridian()`` no longer has a ``$showEmpty``
-   parameter. Use ``$attributes['empty']`` instead.
--  ``FormHelper::select()`` no longer has a ``$showEmpty``
-   parameter. Use ``$attributes['empty']`` instead.
--  Default urls generated by form helper no longer contain 'id'
-   parameter. This makes default urls more consistent with documented
-   userland routes. Also enables reverse routing to work in a more
-   intuitive fashion with default FormHelper urls.
--  ``FormHelper::submit()`` Can now create other types of inputs
-   other than type=submit. Use the type option to control the type of
-   input generated.
--  ``FormHelper::button()`` Now creates ``<button>`` elements
-   instead of reset or clear inputs. If you want to generate those
-   types of inputs use ``FormHelper::submit()`` with a
-   ``'type' => 'reset'`` option for example.
--  ``FormHelper::secure()`` and ``FormHelper::create()`` no longer
-   create hidden fieldset elements. Instead they create hidden div
-   elements. This improves validation with HTML4.
+-  ``FormHelper::dateTime()`` の ``$showEmpty`` 引数は削除されました。代わりに ``$attributes['empty']`` を使用してください。
+-  ``FormHelper::year()`` の ``$showEmpty`` 引数は削除されました。代わりに ``$attributes['empty']`` を使用してください。
+-  ``FormHelper::month()`` の ``$showEmpty`` 引数は削除されました。代わりに ``$attributes['empty']`` を使用してください。
+-  ``FormHelper::day()`` の ``$showEmpty`` 引数は削除されました。代わりに ``$attributes['empty']`` を使用してください。
+-  ``FormHelper::minute()`` の ``$showEmpty`` 引数は削除されました。代わりに ``$attributes['empty']`` を使用してください。
+-  ``FormHelper::meridian()`` の ``$showEmpty`` 引数は削除されました。代わりに ``$attributes['empty']`` を使用してください。
+-  ``FormHelper::select()`` の ``$showEmpty`` 引数は削除されました。代わりに ``$attributes['empty']`` を使用してください。
+-  FormHelperが生成するデフォルトのURLはもはや「id」を含めません。
+   これはデフォルトURLとユーザランドのルートの記述との矛盾をなくし、また、FormHelperのデフォルトURLを用いてより直感的な感覚でリバースルーティングを動作させるのを可能にします。
+-  ``FormHelper::submit()`` は type=submit 以外のタイプの input を作れるようになりました。
+   「type」オプションを用いて生成される input の種類をコントロールしてください。
+-  ``FormHelper::button()`` は「reset」や「clear」タイプの input の代わりに ``<button>`` 要素を生成するようになりました。
+   もし「reset」や「clear」タイプの input を生成したいなら、 ``FormHelper::submit()`` のオプションを ``'type' => 'reset'`` などとして使ってください。
+-  ``FormHelper::secure()`` と ``FormHelper::create()`` は隠し fieldset タグを作らないようになりました。
+   代わりに隠し div タグが作られます。
+   これは HTML4 の妥当性を向上させます。
 
-Also be sure to check the :ref:`form-improvements-1-3` for additional changes and 
-new features in the FormHelper.
+また、FormHelperの変更と新機能を :ref:`form-improvements-1-3` をチェックして確かめてください。
 
 **HtmlHelper**
 
 
--  ``HtmlHelper::meta()`` no longer has an ``$inline`` parameter.
-   It has been merged with the ``$options`` array.
--  ``HtmlHelper::link()`` no longer has an ``$escapeTitle``
-   parameter. Use ``$options['escape']`` instead.
--  ``HtmlHelper::para()`` no longer has an ``$escape`` parameter.
-   Use ``$options['escape']`` instead.
--  ``HtmlHelper::div()`` no longer has an ``$escape`` parameter.
-   Use ``$options['escape']`` instead.
--  ``HtmlHelper::tag()`` no longer has an ``$escape`` parameter.
-   Use ``$options['escape']`` instead.
--  ``HtmlHelper::css()`` no longer has an ``$inline`` parameter.
-   Use ``$options['inline']`` instead.
+-  ``HtmlHelper::meta()`` の ``$inline`` 引数は削除されました。これは ``$options`` 配列にマージされました。
+-  ``HtmlHelper::link()`` の ``$escapeTitle`` 引数は削除されました。代わりに ``$options['escape']`` を使用してください。
+-  ``HtmlHelper::para()`` の ``$escape`` 引数は削除されました。代わりに ``$options['escape']`` を使用してください。
+-  ``HtmlHelper::div()`` の ``$escape`` 引数は削除されました。代わりに ``$options['escape']`` を使用してください。
+-  ``HtmlHelper::tag()`` の ``$escape`` 引数は削除されました。代わりに ``$options['escape']`` を使用してください。
+-  ``HtmlHelper::css()`` の ``$inline`` 引数は削除されました。代わりに ``$options['inline']`` を使用してください。
 
 **SessionHelper**
 
 
--  ``flash()`` no longer auto echos. You must add an
-   ``echo $session->flash();`` to your session->flash() calls. flash()
-   was the only helper method that auto outputted, and was changed to
-   create consistency in helper methods.
+-  ``flash()`` はもはや自動的にechoされません。
+   ``echo $session->flash();`` のようにしてください。
+   flash() はヘルパメソッドの中で唯一自動的に出力されるメソッドでしたが、ヘルパメソッドとしての整合性をとるため変更されました。
 
 **CacheHelper**
 
-CacheHelper's interactions with ``Controller::$cacheAction`` has
-changed slightly. In the past if you used an array for
-``$cacheAction`` you were required to use the routed url as the
-keys, this caused caching to break whenever routes were changed.
-You also could set different cache durations for different passed
-argument values, but not different named parameters or query string
-parameters. Both of these limitations/inconsistencies have been
-removed. You now use the controller's action names as the keys for
-``$cacheAction``. This makes configuring ``$cacheAction`` easier as
-its no longer coupled to the routing, and allows cacheAction to
-work with all custom routing. If you need to have custom cache
-durations for specific argument sets you will need to detect and
-update cacheAction in your controller.
+CacheHelperの ``Controller::$cacheAction`` との相互作用は少し変更されました。
+以前は ``$cacheAction`` に配列を用いていたら、ルーティング済みのURLをキーにする必要がありました。
+これはルートが変更されたときキャッシュの破壊を引き起こしていました。
+また「pass」引数ごとにキャッシュの保持期間を設定できましたが、「named」引数やクエリ文字列ではできませんでした。
+これらの制限・矛盾は取り除かれました。
+今や ``$cacheAction`` のキーにコントローラのアクション名を用います。
+これは ``$cacheAction`` の設定をもはやルーティングを介さないようにし、簡単にできるようにします。
+もしキャッシュの保持期間を特殊な引数でカスタマイズしたいなら、コントローラで cacheAction を見つけそれを更新する必要があります。
 
 **TimeHelper**
 
-TimeHelper has been refactored to make it more i18n friendly.
-Internally almost all calls to date() have been replaced by
-strftime(). The new method TimeHelper::i18nFormat() has been added
-and will take localization data from a LC\_TIME locale definition
-file in app/locale following the POSIX standard. These are the
-changes made in the TimeHelper API:
+TimeHelperは i18n をよりフレンドリーに扱えるように書き直されました。
+内部で date() をコールしていたところは strftime() に置き換えられました。
+新しいメソッド TimeHelper::i18nFormat() が追加され、app/locale にあるPOSIX標準の LC\_TIME 定義ファイルからローカライゼーションのためのデータを取得します。
+これらは以下の TimeHelper のAPIの変更によるものです。
 
 
--  TimeHelper::format() can now take a time string as first
-   parameter and a format string as the second one, the format must be
-   using the strftime() style. When called with this parameter order
-   it will try to automatically convert the date format into the
-   preferred one for the current locale. It will also take parameters
-   as in 1.2.x version to be backwards compatible, but in this case
-   format string must be compatible with date().
--  TimeHelper::i18nFormat() has been added
+-  TimeHelper::format() は第一引数に時間文字列をとり、フォーマット文字列を第二引数、フォーマットはstrftime() の書式、とすることができるようになりました。
+   このような引数の呼び出しがあった場合、自動的に現在のロケールに合わせた日付フォーマットに変換されます。
+   また1.2.xバージョンの後方互換性を保った引数もとることが出来ますが、この場合はフォーマット文字列が date() の書式と互換性がなければなりません。
+-  TimeHelper::i18nFormat() が追加されました。
 
-**Deprecated Helpers**
+**非推奨になったHelper**
 
-Both the JavascriptHelper and the AjaxHelper are deprecated, and
-the JsHelper + HtmlHelper should be used in their place.
+JavascriptHelper と AjaxHelperは両方とも非推奨となり、JsHelper + HtmlHelper が代わって使われるべきです。
 
-You should replace
+以下のように置き換える必要があります：
 
 
--  ``$javascript->link()`` with ``$html->script()``
--  ``$javascript->codeBlock()`` with ``$html->scriptBlock()`` or
-   ``$html->scriptStart()`` and ``$html->scriptEnd()`` depending on
-   your usage.
+-  ``$javascript->link()`` を ``$html->script()`` に。
+-  ``$javascript->codeBlock()`` を使い方に拠って、 ``$html->scriptBlock()`` か ``$html->scriptStart()`` と ``$html->scriptEnd()`` に。
 
-Console and shells
+コンソールとシェル
 ~~~~~~~~~~~~~~~~~~
 
 **Shell**
 
-``Shell::getAdmin()`` has been moved up to
-``ProjectTask::getAdmin()``
+``Shell::getAdmin()`` は ``ProjectTask::getAdmin()`` に移動されました。
 
 **Schema shell**
 
 
--  ``cake schema run create`` has been renamed to
-   ``cake schema create``
--  ``cake schema run update`` has been renamed to
-   ``cake schema update``
+-  ``cake schema run create`` は ``cake schema create`` に名前が変わりました。
+-  ``cake schema run update`` は ``cake schema update`` に名前が変わりました。
 
-**Console Error Handling**
+**コンソールでのエラーハンドリング**
 
-The shell dispatcher has been modified to exit with a ``1`` status
-code if the method called on the shell explicitly returns
-``false``. Returning anything else results in a ``0`` status code.
-Before the value returned from the method was used directly as the
-status code for exiting the shell.
+シェルのディスパッチャーは、シェルで呼ばれたメソッドが明確に ``false`` を返り値としてもつと、ステータスコード ``1`` を用いて exit するようになりました。
+他の返り値ではステータスコード ``0`` を用います。
+以前は返り値をダイレクトにステータスコードとして用いてました。
 
-Shell methods which are returning ``1`` to indicate an error should
-be updated to return ``false`` instead.
+シェルのメソッドでエラーを示すために ``1`` を返り値としていたものは、代わりに ``false`` を返すように書き換えられるべきです。
 
-``Shell::error()`` has been modified to exit with status code 1
-after printing the error message which now uses a slightly
-different formatting.
+``Shell::error()`` はエラーメッセージを出力した後に、ステータスコード 1 で exit します。
+また、メッセージのフォーマットに多少の変更があります。
 
 ::
 
     $this->error('Invalid Foo', 'Please provide bar.');
-    // outputs:
+    // 出力:
     Error: Invalid Foo
     Please provide bar.
-    // exits with status code 1
+    // ステータスコード1でexit()される
 
-``ShellDispatcher::stderr()`` has been modified to not prepend
-Error: to the message anymore. It's signature is now similar to
-``Shell::stdout()``.
+``ShellDispatcher::stderr()`` はメッセージの前に「Error:」を付け加えなくなりました。
+これは ``Shell::stdout()`` と同様となったことと言えます。
 
 **ShellDispatcher::shiftArgs()**
 
-The method has been modified to return the shifted argument. Before
-if no arguments were available the method was returning false, it
-now returns null. Before if arguments were available the method was
-returning true, it now returns the shifted argument instead.
+このメソッドはシフトされた引数を返すようになりました。
+前は引数がない場合 false を返していましたが、今は null を返すようになりました。
+前は引数がある場合 true を返していましたが、今は代わりにシフトされた引数を返すようになりました。
 
 Vendors, Test Suite & schema
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**vendors/css, vendors/js, and vendors/img**
+**vendors/cssとvendors/jsとvendors/img**
 
-Support for these three directories, both in ``app/vendors`` as
-well as ``plugin/vendors`` has been removed. They have been
-replaced with plugin and theme webroot directories.
+これら３つのディレクトリは、 ``app/vendors`` と ``plugin/vendors`` の両方から削除されています。
+これらはpluginとthemeのwebrootに置き換えられました。
 
-**Test Suite and Unit Tests**
+**Test Suiteとユニットテスト**
 
-Group tests should now extend TestSuite instead of the deprecated
-GroupTest class. If your Group tests do not run, you will need to
-update the base class.
+グループテストは今や非推奨のGroupTestクラスの代わりにTestSuiteクラスを継承するべきです。
+もしあなたのグループテストがうまく走らないなら、基底クラスを変更する必要があります。
 
-**Vendor, plugin and theme assets**
+**Vendorとプラグインとテーマのアセット**
 
-Vendor asset serving has been removed in 1.3 in favour of plugin
-and theme webroot directories.
+プラグインとテーマのwebrootディレクトリのために、Vendorのアセットの供給が1.3では削除されました。
 
-Schema files used with the SchemaShell have been moved to
-``app/config/schema`` instead of ``app/config/sql`` Although
-``config/sql`` will continue to work in 1.3, it will not in future
-versions, it is recommend that the new path is used.
+SchemaShellで使われるスキーマファイルは ``app/config/sql`` から ``app/config/schema`` に移動されました。
+``config/sql`` は1.3で続けて利用できますが、次期バージョンではそうならないでしょう。

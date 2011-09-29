@@ -1,46 +1,44 @@
-Glossary
-########
+用語集
+######
 
 .. glossary::
 
-    routing array
-        An array of attributes that are passed to :php:meth:`Router::url()`.
-        They typically look like::
+    ルーティング配列
+        :php:meth:`Router::url()` に渡される属性の配列。
+        典型的には以下のようになります::
         
             array('controller' => 'posts', 'action' => 'view', 5)
 
-    html attributes
-        An array of key => values that are composed into html attributes. For example::
+    HTML属性
+        HTMLの属性を構成するキー => 値の配列。例::
             
             <?php
-            // Given
+            // これを与えると
             array('class' => 'my-class', '_target' => 'blank')
 
-            // Would generate
+            // これが生成される
             class="my-class" _target="blank"
 
-        If an option can be minimized or accepts it's name as the value, then ``true`` 
-        can be used::
+        オプションが最小化できるか、名前そのもが値として許可される場合は、 ``true`` が利用できます::
         
             <?php
-            // Given
+            // これを与えると
             array('checked' => true)
             
-            // Would generate
+            // これが生成される
             checked="checked"
     
-    plugin syntax
-        Plugin syntax refers to the dot separated classname indicating classes
-        are part of a plugin.  E.g. ``DebugKit.Toolbar`` The plugin is DebugKit,
-        and the classname is Toolbar.
+    プラグイン記法
+        プラグイン記法はドットで区切られたクラス名で、クラスがプラグインの一部であることを指定しています。
+        例えば、 ``DebugKit.Toolbar`` はDebugKitプラグインで、クラス名はToolbarです。
     
-    dot notation
-        Dot notation defines an array path, by separating nested levels with ``.``
-        For example::
+    ドット記法
+        ドット記法は、 ``.`` を用いてネストされたレベルを区切ることによって配列のパスを定義します。
+        例::
         
             Asset.filter.css
         
-        Would point to the following value::
+        は以下の値を指し示すことでしょう::
         
             array(
                 'Asset' => array(
@@ -50,11 +48,10 @@ Glossary
                 )
             )
     CSRF
-        Cross Site Request Forgery.  Prevents replay attacks, double
-        submissions and forged requests from other domains.
+        クロスサイトリクエストフォージェリ(*Cross Site Request Forgery*)。
+        再生攻撃、二重投稿、他ドメインからの偽造リクエストを防止します。
 
     routes.php
-        A file in APP/Config that contains routing configuration.
-        This file is included before each request is processed.
-        It should connect all the routes your application needs so 
-        requests can be routed to the correct controller + action.
+        APP/Config のファイルで、ルーティングの設定が入っています。
+        このファイルは全てのリクエストが処理される前に読み込まれます。
+        リクエストが正しいコントローラ+アクションにルーティングされるように、アプリケーションが必要とする全てのルートに接続する必要があります。

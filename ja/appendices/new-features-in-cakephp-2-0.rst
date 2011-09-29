@@ -1,104 +1,98 @@
-New Features in CakePHP 2.0
-###########################
+CakePHP 2.0の新機能
+###################
 
-Models
+モデル
 ======
 
-The model construction process has been made lighter. Model associations are
-now lazy loaded, applications with lots of models and associations will see
-great time reductions in the bootstrap process.
+モデルの初期化プロセスは軽量化されました。
+モデルのアソシエーションは遅延読み込みがされるようになり、多量のモデルやアソシエーションをもつアプリケーションは顕著に起動処理の時間を減少させることでしょう。
 
-Now models won't require a database connection in the construction process.
-The database will be accessed for the first time only when a find operation is
-issued or information for one of the columns is required.
+モデルは初期化プロセス時にデータベースのコネクションを必要としなくなり、find操作が発生するとき、またはカラムの情報が必要となった時のみ、データベースに初めてアクセスがなされます。
 
-View
-====
+ビュー
+======
 
 View::$output
 -------------
 
-View will now always have the last rendered content (view or layout) accessible
-through ``$this->output``. In helpers you can use ``$this->_View->output``. Modifying
-this property will change the content that comes out of the view rendering.
+ビューは常に、 ``$this->output`` を通して最後に描画されたコンテンツ（ビューかレイアウト）を保持するようになりました。
+ヘルパーで ``$this->_View->output`` を利用できます。
+このプロパティを更新することでビューの描画から出てきたコンテンツを書き換えることができます。
 
-Helpers
-=======
+ヘルパー
+========
 
 HtmlHelper
 ----------
 
-* ``getCrumbsList()`` Creates breadcrumb links wrapped in ``<li>`` elements.
-  See `#856 <http://cakephp.lighthouseapp.com/projects/42648/tickets/856>`_.
-* ``loadConfig()`` has moved from :php:class:`Helper` to :php:class:`HtmlHelper`
-  class. This method now uses the new reader classes (see 2.0 :php:class:`Configure`)
-  to load your config file. As an option you can pass the path as second parameter
-  (``app/Config`` is default). To simplify, you can set the configuration file
-  (and the reader) in ``Controller::$helpers`` (example below) to load on helper
-  constructor. In configuration file you can set the below keys:
+* ``getCrumbsList()`` は ``<li>`` エレメントでラップされたぱんくずリストのリンクを生成します。
+  `#856 <http://cakephp.lighthouseapp.com/projects/42648/tickets/856>`_ を見てください。 
+* ``loadConfig()`` は :php:class:`Helper` から :php:class:`HtmlHelper` に移動しました。
+   このメソッドは設定ファイルを読み込むのに新しいリーダークラス（2.0 :php:class:`Configure` をみてください）を使うようになりました。
+   省略可能ですが、二番目の引数としてパス（デフォルトは ``app/Config`` ）を渡すことができます。
+   単純に、設定ファイル（とリーダー）を ``Controller::$helpers`` で設定することで、ヘルパーにコンストラクタで読み込むことができます（以下に例があります）。
+   設定ファイルでは、以下のキーを指定できます:
 
- * ``tags`` Should be an array with key value;
- * ``minimizedAttributes`` Should be a list;
- * ``docTypes`` Should be an array with key value;
- * ``attributeFormat`` Should be a string;
- * ``minimizedAttributeFormat`` Should be a string.
+ * ``tags`` キーと値を用いた配列
+ * ``minimizedAttributes`` リスト
+ * ``docTypes`` キーと値を用いた配列
+ * ``attributeFormat`` 文字列
+ * ``minimizedAttributeFormat`` 文字列
 
-Example of how to set configuration file on controller::
+コントローラで設定ファイルを指定する方法の例::
 
     <?php
     public $helpers = array(
         'Html' => array(
-            'configFile' => array('config_file', 'php') // Option one: an array with filename and reader name
-            'configFile' => 'config_file' // Option two: a string with filename. The PhpReader will be used
+            'configFile' => array('config_file', 'php') // 一つ目の方法：ファイル名とリーダー名の配列
+            'configFile' => 'config_file' // 二つ目の方法： ファイル名の文字列。PhpReaderが用いられます。
         )
     );
 
 FormHelper
 ----------
 
-* :php:class:`FormHelper` now supports all HTML5 input types and custom input
-  types. Just use the input type you want as the method on the helper. For
-  example ``range()`` would create an input with type = range.
-* ``postLink()`` and ``postButton()`` Creates link/button to
-  access some page using HTTP method POST. With this, in your controller you can
-  avoid some action, like delete, to be accessed by GET method.
-* ``select()`` with multiple = checkbox, now treats the ``'id'``
-  attribute as a prefix for all the generated options.
+* :php:class:`FormHelper` は全てのHTML5インプット(*input*)の種類と、カスタムインプットをサポートします。
+  使用したいインプットをこのヘルパーのメソッドとして呼び出してください。
+  一例として、 ``range()`` はtype = rangeとなるインプットを生成するでしょう。
+* ``postLink()`` と ``postButton()`` はHTTPのPOSTメソッドを使ってなんらかのページにアクセスするリンク・ボタンを生成します。
+  これを用いて、コントローラではGETメソッドを用いたアクション、例えばdeleteのようなアクションを無視することができるようになります。
+* multiple = checkboxを用いた ``select()`` は、 ``'id'`` 属性を全ての生成されたオプションの接頭辞として扱うようになりました。
 
-Libs
-====
+ライブラリ
+==========
 
 CakeRequest
 -----------
 
-:php:class:`CakeRequest` is a new class introduced in 2.0. It encapsulates
-commonly used request introspection methods and replaces the params array with a
-more useful object. Read more about :php:class:`CakeRequest`.
+:php:class:`CakeRequest` は2.0で導入された新しいクラスです。
+このクラスは、共通に使われるリクエスト内部判定メソッドをカプセル化し、params配列をより有用なオブジェクトに書き換えます。
+詳しくは :php:class:`CakeRequest` を読んでください。
 
 CakeResponse
 ------------
 
-:php:class:`CakeResponse` is a new class introduced in 2.0. It encapsulates
-commonly used methods and properties in the HTTP response your application
-generates. It consolidates several features in CakePHP. Read more about
-:php:class:`CakeResponse`.
+:php:class:`CakeResponse` は2.0で導入された新しいクラスです。
+このクラスは、アプリケーションのHTTPレスポンスの生成で共通に使われるメソッドとプロパティとカプセル化したものです。
+これはCakePHPのいくつかの機能を統合したものです。
+詳しくは :php:class:`CakeResponse` を読んでください。
 
 CakeSession, SessionComponent
 -----------------------------
 
-:php:class:`CakeSession` and the :php:class:`SessionComponent` have had a number
-of changes, see the session section for more information.
+:php:class:`CakeSession` と :php:class:`SessionComponent` は数多くの変更があります。
+詳しい情報は、セッションのセクションを見て下さい。
 
 Router
 ------
 
-Routes can return full urls
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+フルURLを返せるようになったルート
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Route objects can now return full urls, and :php:class:`Router` will not further
-modify them beyond adding the query string and fragment elements. For example
-this could be used to create routes to handle subdomains, or enabling https/http
-flags. An example of a route class that supports subdomains would be::
+ルートオブジェクトはフルURLを返せるようになりました。
+また、 :php:class:`Router` はクエリ文字列とフラグメント識別子（訳注：#anchor_nameのこと）を付け加える以上のことはしません。
+これは例えば、サブドメインやHTTPS/HTTPのフラグを扱うルートを作成するのに使用することができます。
+以下はサブドメインをサポートするルートクラスの一例です::
 
     <?php
     class SubdomainRoute extends CakeRoute {
@@ -114,8 +108,7 @@ flags. An example of a route class that supports subdomains would be::
         }
     }
 
-When creating links you could do the following to make links pointing at other
-subdomains.
+リンクを生成するときにサブドメインを指定するには、以下のようにします。
 
 ::
 
@@ -125,44 +118,41 @@ subdomains.
          array('subdomain' => 'test', 'controller' => 'posts', 'action' => 'add')
     );
 
-The above would create a link with http://test.localhost/posts/add as the url.
+上記はリンクを、http://test.localhost/posts/addをURLとして生成することでしょう。
 
 Xml
 ---
 
-:php:class:`Xml` has had a number of changes. Read more about
-:doc:`/core-utility-libraries/xml` class.
+:php:class:`Xml` Xmlは数多くの変更があります。
+詳しくは :doc:`/core-utility-libraries/xml` クラスを読んでください。
 
-New Lib features
-================
+新しいライブラリの機能
+======================
 
-Configure readers
------------------
+設定リーダー
+------------
 
-:php:class:`Configure` can now be configured to load configuration files from a
-variety of sources and formats. The :doc:`/development/configuration` section
-contains more information about the changes made to configure.
+:php:class:`Configure` は様々なソースやフォーマットから設定ファイルを読み込むことができるように設定可能になりました。
+:doc:`/development/configuration` セクションにはConfigureへの変更についてより詳しい情報があります。
 
-:php:meth:`Configure::read()` without any arguments allows you to read all
-values from configure, instead of just the debug value.
+引数無しで :php:meth:`Configure::read()` を呼ぶと、デバッグ値の代わりに、設定の全ての値を読み込むことができるようになりました。
 
-Error and exception handling
-----------------------------
+エラーと例外のハンドリング
+--------------------------
 
-CakePHP 2.0 has had :doc:`/development/exceptions` and :doc:`/development/errors`
-handling rebuilt, to be more flexible and give more power to developers.
+CakePHP 2.0は :doc:`/development/exceptions` と :doc:`/development/errors` のハンドリングを再構築し、より柔軟に、より強い権力を開発者に与えます。
 
 String::wrap()
 --------------
 
-:php:meth:`String::wrap()` was added to help make fixed width formatting of
-text easier. It's used in Shells whenever you use :php:meth:`Shell::wrapText()`.
+テキストの横幅の調整を便利にするものとして、 :php:meth:`String::wrap()` が追加されました。
+これはシェルで :php:meth:`Shell::wrapText()` を使う時に必ず使われます。
 
 debug()
 -------
 
-:php:func:`debug()` no longer outputs html in the console. Instead it makes
-output like the following::
+:php:func:`debug()` はコンソールでHTMLを吐き出さないようになりました。
+代わりに以下のような出力をします::
 
     ########## DEBUG ##########
     Array
@@ -171,95 +161,85 @@ output like the following::
     )
     ###########################
 
-This should improve readability of ``debug()`` on the command line.
+これはコマンドラインでの ``debug()`` の可読性を向上させるでしょう。
 
-Components
-==========
+コンポーネント
+==============
 
-Components received a similar treatment to helpers and behvaiors,
-:php:class:`Component` is now the base class for components. Read more about the
-component changes.
+コンポーネントはヘルパーやビヘイビアと同じような扱いを享受し、 :php:class:`Component` がコンポーネントの基底クラスになりました。
+詳しくはコンポーネントの変更を読んでください。
 
 RequestHandler
 --------------
 
-:php:class:`RequestHandler` was heavily refactored due to the introduction of
-:php:class:`CakeRequest`. These changes allowed for some new features to be
-introduced as well.
+:php:class:`RequestHandler` は :php:class:`CakeRequest` の導入によりかなりの修正がありました。
+また、この変更はいくつかの新しい機能を導入することも可能にしました。
 
-Automatic parsing of Accept headers
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Acceptヘッダーの自動解析
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-If a client sends a single Accept mime type that matches one of the extensions
-enabled in :php:class`Router`, :php:class:`RequestHandler` will treat it the
-same an extension. This expands CakePHP's support for REST style endpoints. To
-use this feature start off by enabling extensions in ``app/Config/routes.php``
+もしクライアントが送ったAcceptが単一のMIMEタイプで、それに対応する拡張子が :php:class`Router` で有効となっているものと一致するならば、 :php:class:`RequestHandler` はそれを拡張子と同じものとして扱うでしょう。
+これはCakePHPのRESTスタイルのエンドポイントのサポートを拡張します。
+この機能を使うには、まず ``app/Config/routes.php`` で拡張子を有効にしてください。
 
 ::
 
     <?php
     Router::parseExtensions('json', 'xml');
 
-Once you have created layouts and views for your extensions, you will be able to
-visit a url like posts/view/1 and send Accept: ``application/json`` in the
-headers to receive the json version of that url.
+いったん拡張子に対応するビューとレイアウトを作成すれば、posts/view/1のようなURLにAccept: ``application/json`` を含んだヘッダーを送ることで、そのURLのJSONバージョンを受け取ることができるようになるでしょう。
 
 CookieComponent
 ---------------
 
-:php:class:`CookieComponent` now supports http only cookies. You can enable
-their use by setting ``$this->Cookie->httpOnly = true;``. Having http only
-cookies will make them inaccessible from the browser.
+:php:class:`CookieComponent` はHTTPのみのクッキー制限をサポートするようになりました。
+``$this->Cookie->httpOnly = true;`` を設定することによってそれを有効とすることができます。
+HTTPのみのクッキーにすることは、ブラウザーからクッキーにアクセスすることができないようにすることでしょう。(訳注：Javascriptなどから。参考: `setcookie <http://jp.php.net/manual/ja/function.setcookie.php>`_)
 
-Security Component CSRF separation
-----------------------------------
+SecurityコンポーネントのCSRF分離
+--------------------------------
 
-CakePHP has had CSRF protection since 1.2. For 2.0 the existing CSRF has a new
-more paranoid mode, and is its own standalone feature. In the past CSRF features
-were coupled with form tampering safe-guards. Developers often disabled
-validatePost in order to do dynamic forms, disabling the CSRF protection at the
-same time. For 2.0 CSRF checking has been separated from form tampering giving
-you greater control.
+CakePHPは1.2からCSRF対策を持つようになりました。
+2.0では既存のCSRFはより猜疑的なモードと、独立した機能を持つようになりました。
+以前は、CSRF機能はフォームの改ざん対策とセットでした。
+開発者はたびたびvalidatePostを動的なフォームの為に無効にしていましたが、CSRF対策も同時に無効化されていました。
+2.0では、CSRFチェックはフォーム改ざん対策と分離され、強くコントロールすることができるようになりました。
 
-For more information see :ref:`security-csrf`
+詳しい情報は、 :ref:`security-csrf` を見てください。
 
-Controller
+コントローラー
+==============
+
+コントローラはリクエストとレスポンスのオブジェクトを利用できるようになりました。
+これらのオブジェクトについては、専用ページで詳しく見ることが出来ます。
+
+コンソール
 ==========
 
-Controllers now have access to request and response objects. You can read more
-about these objects on their specific pages.
+CakePHP2.0のコンソールはほとんど完全に書き直されました。
+いくつかの新機能、また後方非互換な変更が加えられました。
+詳しくは、コンソールの変更を見てください。
 
-Console
-=======
+ページネーション
+================
 
-The console for CakePHP 2.0 was almost entirely rebuilt. Several new features as
-well as some backwards incompatible changes were made. Read more about console
-changes.
+ページネーションはページ付けに対して最大制限件数(*maxLimit*)を規定し、デフォルトは100です。
 
-Pagination
-==========
-
-Pagination now provides a default maxLimit for pagination at 100.
-
-This limit can be overridden with the paginate variable on Controller.
+この制限はコントローラーでpaginate変数を用いて上書き可能です。
 
 ::
 
     <?php
     $this->paginate = array('maxLimit' => 1000);
 
-This default is provided to prevent user URL manipulation causing excessive
-strain on the database for subsequent requests, where a user would edit the
-'limit' parameter to a very large number.
+このデフォルト値は、ユーザのURL操作で「limit」パラメータをとても大きな数値にしたリクエストのために、過大なデータベースの情報の引き出しを防ぐために提供されます。
 
-Aliasing
-========
+エイリアス化
+============
 
-You can now alias helpers, components and behaviors to use your class instead of
-a different one. This means that you can very easily make a ``MyHtml`` helper
-and not need to replace every instance of ``$this->Html`` in your views. To do
-this, pass the 'className' key along with your class, like you would with
-models.
+あるクラスの代わりに独自のクラスを使うために、ヘルパー、コンポーネント、ビヘイビアは別名（訳注：エイリアス）を使うことができるようになりました。
+これは、ビューで全ての ``$this->Html`` のインスタンスを置き換える必要なく ``MyHtml`` ヘルパーを作成することが、非常に簡単にできるようになったということです。
+これを為すには、モデルでしていたのと同じように、クラスを用いた「className」キーを渡してください。
 
 ::
 
@@ -270,7 +250,7 @@ models.
         )
     );
 
-Similarly, you can alias components for use in your controllers.
+同様に、コントローラで使うためにコンポーネントを別名として使うことができます。
 
 ::
 
@@ -281,8 +261,8 @@ Similarly, you can alias components for use in your controllers.
         )
     );
 
-Calls to the Email component would call the QueueEmailer component instead.
-Finally, you can alias behaviors as well.
+Emailコンポーネントを呼び出すことは、代わりにQueueEmailerを呼び出すことになるでしょう。
+最後に、ビヘイビアでも別名呼び出しが可能です。
 
 ::
 
@@ -293,15 +273,12 @@ Finally, you can alias behaviors as well.
         ) 
     );
 
-Because of the way 2.0 utilizes collections and shares them across the
-application, any classes you alias will be used throughout your application.
-Whenever your application tries to access the alias, it will access your class.
-For instance, when we aliased the Html helper in the example above, any helpers
-that use the Html helper or elements that load the Html helper, will use MyHtml
-instead.
+2.0がコレクションを利用し、アプリケーションにまたがって共有することから、全てのエイリアス化されたクラスはアプリケーションの至る所で使用されるでしょう。
+アプリケーションはいつでもエイリアスにアクセスを試み、それは独自のクラスにアクセスすることになります。
+例えば、上記のようにHtmlをエイリアス化したとき、全てのHtmlヘルパーを使うヘルパーやエレメントはHtmlヘルパーを読み込み、MyHtmlを代わりに使うことになるでしょう。
 
 ConnectionManager
 =================
 
-A new method :php:meth:`ConnectionManager::drop()` was added to allow
-removing connections at runtime.
+新しいメソッド :php:meth:`ConnectionManager::drop()` が追加されました。
+これは実行時にコネクションを削除することができます。

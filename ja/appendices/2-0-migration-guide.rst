@@ -1,96 +1,83 @@
-2.0 Migration Guide
-###################
+2.0 移行ガイド
+##############
 
-This page summarises the changes from CakePHP 1.3 that will assist in a project
-migration to 2.0, as well as for a developer reference to get up to date with
-the changes made to the core since the CakePHP 1.3 branch. Be sure to read the
-other pages in this guide for all the new features and API changes.
+このページはプロジェクトを2.0に移行する手助けをする、CakePHP 1.3からの変更点の要約をします。
+またこれは、コアへのCakePHP 1.3ブランチからの変更点への最新の開発者リファレンスともなります。
+必ずこのガイドにある新機能とAPIの変更の全てのページを読んでください。
 
-PHP Version Support
-===================
+サポートするPHPバージョン
+=========================
 
-CakePHP 2.x supports PHP Version 5.2.6 and above. PHP4 support has been dropped.
-For developers that are still working with production PHP4 environments, the
-CakePHP 1.x versions continue to support PHP4 for the lifetime of their
-development and support lifetime.
+CakePHP 2.xはPHP 5.2.6以上をサポートします。
+PHP4のサポートは止めることになります。
+いまだPHP4環境での案件で働いている開発者のために、PHP4の開発とサポートの継続期間のうちまで、CakePHP1.xは続けてPHP4をサポートします。
 
-The move to PHP 5 means all methods and properties have been updated with
-visibility keywords. If your code is attempting access to private or protected
-methods from a public scope, you will encounter errors.
+PHP5に移行するということは、全てのメソッドとプロパティはアクセス修飾子を伴うように書き直されるということです。
+コード内でprivateもしくはprotectedメソッドをpublicスコープから参照しようと試みると、エラーに遭遇することになります。
 
-While this does not really constitute a large framework change, it means that
-access to tighter visibility methods and variables is now not possible.
+これは実際にはフレームワークに多大な変更を与えるわけではありませんが、現在、より厳しくなった可視性を持つメソッドと変数へのアクセスが不可能となったことを意味します。
 
-File and Folder naming
-======================
+ファイル・フォルダ名
+====================
 
-In CakePHP 2.0 we rethought the way we are structuring our files and folders.
-Given that PHP 5.3 is supporting namespaces we decided to prepare our code base
-for adopting in a near future this PHP version, so we adopted the
-http://groups.google.com/group/php-standards/web/psr-0-final-proposal. At first
-we glanced at the internal structure of CakePHP 1.3 and realized that after all
-these years there was no clear organization in the files, nor did the directory
-structure really hint where each file should be located. With this change we
-would be allowed to experiment a little with (almost) automatic class loading
-for increasing the overall framework performance.
+CakePHP 2.0では、ファイルとフォルダの構造化をする方法を考えなおしました。
+PHP 5.3が名前空間のサポートをしていることから、このPHPバージョンを近い将来採用するのに、コードベースを準備することに決めました。
+従って、 http://groups.google.com/group/php-standards/web/psr-0-final-proposal を採用することにしました。
+まずはじめに、ここ数年の後にCakePHP 1.3の内部構造を振り返ると、明確なファイル構成が無いことと、またディレクトリ構成が各々のファイルがどこにあるべきかを真に指し示していないことに気づきました。
+この変更に伴い、全体的なフレームワークのパフォーマンスの向上のための（ほぼ）自動的なクラス読み込みについて多少の実験を行うことができるでしょう
 
-Biggest roadblock for achieving this was maintaining some sort of backwards
-compatibility in the way the classes are loaded right now, and we definitely did
-not want to become a framework of huge class prefixes, having classnames like
-``My_Huge_Class_Name_In_Package``. We decided adopting a strategy of keeping simple
-class names while offering a very intuitive way of declaring class locations and
-clear migration path for future PHP 5.3 version of CakePHP. At first let's
-highlight the main changes in file naming standard we adopted:
+これを達成するための最大の障害は、クラスをロードする方法の種々の後方互換性を維持することでした。
+また、私たちはフレームワークが ``My_Huge_Class_Name_In_Package`` のような大きなクラス接頭辞をつけることをまったく望んでいません。
+私たちは、シンプルなクラス名と同時に、クラスの配置を定義する非常に直感的な方法と、未来のPHP 5.3バージョンのCakePHPのための明確な移行の道のりを提供する戦略を採用することにしました。
+まず、私達が採用したファイル命名標準の主な変更を挙げます。
 
-File names
+ファイル名
 ----------
 
-All files containing classes should be named after the class it contains. No
-file should contain more than one class. So, no more lowercasing and
-underscoring your file names. Here are some examples:
+クラスを含むすべてのファイルは、それが含んでいるクラスにちなんで命名される必要があります。
+どのファイルも２つ以上のクラスを内包すべきではありません。
+従って、ファイル名に小文字化とアンダースコア化はもう要りません。
+いくつか例を挙げます:
 
-* ``my_things_controller.php`` becomes ``MyThingsController.php``
-* ``form.php`` (a Helper) becomes ``FormHelper.php``
-* ``session.php`` (a Component) becomes ``SessionComponent.php``
+* ``my_things_controller.php`` は ``MyThingsController.php`` になります
+* ``form.php`` (ヘルパー) は ``FormHelper.php`` になります
+* ``session.php`` (コンポーネント) は ``SessionComponent.php`` になります
 
-This makes a lot more clear and consistent the file naming across applications,
-and also avoids a few edge cases where the file loader would get confused in the
-past and load files it shouldn't.
 
-Folder Names
-------------
+これはアプリケーション中のファイル名を明確で一貫性のあるものにし、以前ファイルローダが混乱し読み込むべきでないファイルを読むという境界ケース(*edge cases*)らを避けることができるようになります。
 
-Folders containing classes should be also CamelCased, specially when containing
-classes. Think of namespaces, each folder represents a level in the namespacing
-hierarchy, folders that do not contain classes, or do not constitute a
-namespace on themselves, should be lowercased.
+フォルダ名
+----------
 
-CameCased Folders:
+特に、クラスを含むフォルダはキャメルケース(*CamelCase*)にする必要もあります。
+名前空間を考えたときに、それぞれのフォルダは名前空間の階層を象徴することから、クラスを含まない、または名前空間を自身で構成しないフォルダは、小文字で表される必要があります。
+
+キャメルケースのフォルダ:
 
 * Controller
 * Controller/Component
 * View/Helper
 * Model/Behavior
 
-lowercased Folders:
+小文字のフォルダ:
 
 * config
 * webroot
 * tmp
 * vendors
 
-Internationalization / Localization
-===================================
+多言語化・地域化
+================
 
-:php:func:`__()` (Double underscore shortcut function) always returns the translation
-(not echo anymore).
+__() (二つのアンダースコアでのショートカット関数)
+:php:func:`__()` (二つのアンダースコアでのショートカット関数) は常に翻訳を返り値として返すようになりました（もはや出力はされません）。
 
-If you want to echo the result of the translation, use::
+翻訳の結果を表示させたい場合は::
 
     <?php
     echo __('My Message');
     
-This change includes all shortcut translation methods::
+としてください。この変更は全ての翻訳のショートカット関数を含みます:::
 
     __()
     __n()
@@ -100,51 +87,57 @@ This change includes all shortcut translation methods::
     __dcn()
     __c()
 
-Alongside this, if you pass additional parameters, the translation will call
-`sprintf <http://php.net/manual/en/function.sprintf.php>`_  with these
-parameters before returning. For example::
+これに併せて、オプションパラメータを渡しているなら、翻訳はパラメータを用いて `sprintf <http://php.net/manual/ja/function.sprintf.php>`_ を値を返す前に呼び出します。
+以下は一例です::
 
     <?php
-    // Will return something like "Called: MyClass:myMethod"
+    // "Called: MyClass:myMethod" のようなものを返す
     echo __('Called: %s:%s', $className, $methodName);
 
-It is valid for all shortcut translation methods.
-
-More information about the specifiers, you can see in
-`sprintf <http://php.net/manual/en/function.sprintf.php>`_ function.
+これは全てのショートカット翻訳メソッドに関して同じことが言えます。
 
 
-Class location and constants changed
-====================================
+指定子に関する更なる情報に関しては、 `sprintf <http://php.net/manual/ja/function.sprintf.php>`_ 関数を見てください。
 
-The constants ``APP_PATH`` and ``CORE_PATH``
-have consistent values between the web and console environments. In previous
-versions of CakePHP these values changed depending on your environment.
+
+変更されたクラスの場所と定数
+============================
+
+``APP_PATH`` と ``CORE_PATH`` 定数は、WEBとコンソール環境で一貫性のある値を持ちます。
+CakePHPの前バージョンでは、これらの値が環境によって変わっていました。
 
 Basics.php
 ==========
 
--  ``getMicrotime()`` has been removed. Use the native ``microtime(true)``
-   instead.
--  ``e()`` was removed. Use ``echo``.
--  ``r()`` was removed. Use ``str_replace``.
--  ``a()`` was removed. ``Use array()``
--  ``aa()`` was removed. Use ``array()``
--  ``up()`` was removed. Use ``strtoupper()``
--  ``low()`` was removed. Use ``strtolower()``
--  ``params()`` was removed. It was not used anywhere in CakePHP.
--  ``ife()`` was removed. Use a ternary operator.
--  ``uses()`` was removed. Use ``App::import()`` instead.
--  Compatibility functions for PHP4 have been removed.
--  PHP5 constant has been removed.
--  Global var called ``$TIME_START`` was removed use
-   ``$_SERVER['REQUEST_TIME']`` instead.
+-  ``getMicrotime()は削除されました。
+   代わりにネイティブの ``microtime(true)`` を使用してください。
+-  ``e()`` は削除されました。
+   ``echo`` を使用してください。
+-  ``r()`` は削除されました。
+   ``str_replace`` を使用してください。
+-  ``a()`` は削除されました。
+   ``array()`` を使用してください。
+-  ``aa()`` は削除されました。
+   ``array()`` を使用してください。
+-  ``up()`` は削除されました。
+   ``strtoupper()`` を使用してください。
+-  ``low()`` は削除されました。
+   ``strtolower()`` を使用してください。
+-  ``params()`` は削除されました。
+   これはCakePHP内で使われることはありませんでした。
+-  ``ife()`` は削除されました。
+    三項演算子を使ってください。
+-  ``uses()`` は削除されました。
+   ``App::import()`` を使ってください。
+-  PHP4互換のための関数は削除されました。
+-  PHP5定数は削除されました。
+-  グローバル変数 ``$TIME_START`` は削除されました。
+   代わりに ``$_SERVER['REQUEST_TIME']`` を使用してください。
 
-Removed Constants
------------------
+削除された定数
+--------------
 
-A number of constants were removed, as they were no longer accurate, or
-duplicated.
+正確ではない、または重複している数多くの定数が削除されました。
 
 * CONTROLLERS
 * COMPONENTS
@@ -160,29 +153,27 @@ duplicated.
 CakeRequest
 ===========
 
-This new class encapsulates the parameters and functions related to an incoming
-request. It replaces many features inside ``Dispatcher``,
-``RequestHandlerComponent`` and Controller. It also replaces
-``$this->params`` array in all places. ``CakeRequest`` implements
-``ArrayAccess`` so many interactions with the old params array do not need to
-change. See the CakeRequest new features for more information.
+この新しいクラスはやってくるリクエストに紐付けられたパラメータと作用をカプセル化します。
+これは ``Dispatcher`` 、 ``RequestHandlerComponent`` 、 ``Controller`` の中にある多くの機能を置き換えます。
+また、全ての場所での ``$this->params`` 配列を置き換えます。
+``CakeRequest`` は ``ArrayAccess`` を実装するので、古いパラメータ配列を用いる多くの相互作用は変更する必要がありません。
+更なる情報は新機能CakeRequestを見てください。
 
-Request handling, $_GET['url'] and .htaccess files
-==================================================
+リクエスト処理、$_GET['url'] と.htaccessファイル
+================================================
 
-CakePHP no longer uses ``$_GET['url']`` for handling application request paths.
-Instead it uses ``$_SERVER['PATH_INFO']``. This provides a more uniform way of
-handling requests between servers with URL rewriting and those without. Because
-of these changes, you'll need to update your .htaccess files and
-``app/webroot/index.php``, as these files were changed to accommodate the
-changes. Additionally ``$this->params['url']['url']`` no longer exists. Instead
-you should be using $this->request->url to access the same value.
+CakePHPは ``$_GET['url']`` をアプリケーションのリクエストパスの処理に使わなくなりました。
+代わりに ``$_SERVER['PATH_INFO']`` を使います。
+これはURL書き換えを伴ったサーバーと伴わないものとでより一貫性をもつURLリクエスト処理の方法となります。
+これらの変更により、.htaccessファイルと ``app/webroot/index.php`` を、この変更を適用するために変更されたファイルに書き換える必要があります。
+また、 ``$this->params['url']['url']`` はもう存在しません。
+同等の値を得るには、代わりに$this->request->urlを使用する必要があります。
 
-Components
-==========
+コンポーネント
+==============
 
-Component is now the required base class for all components. You should update
-your components and their constructors, as both have changed::
+Componentは、全てのコンポーネントが必須とする基底クラスになりました。
+コンポーネントとそのコンストラクタが変更になったことから、これを書き換える必要があります::
 
     <?php
     class PrgComponent extends Component {
@@ -191,58 +182,52 @@ your components and their constructors, as both have changed::
         }
     }
 
-As with helpers it is important to call ``parent::__construct()`` in components with
-overridden constructors. Settings for a component are also passed into the
-constructor now, and not the ``initialize()`` callback.  This makes getting well
-constructed objects easier, and allows the base class to handle setting the
-properties up.
+ヘルパーのように、コンポーネントのオーバライドされたコンストラクタで ``parent::__construct()`` を呼ぶことが重要です。
+また、設定(*settings*)は ``initialize()`` コールバックではなく、コンストラクタに渡されるようになりました。
+これは上手く設定されたオブジェクトを簡単に取得することができるようになり、基底クラスがプロパティのセットアップを処理することができるようになります。
 
-Since settings have been moved to the component constructor, the
-``initialize()`` callback no longer receives ``$settings`` as its 2nd parameter.
-You should update your components to use the following method signature::
+設定がコンポーネントのコンストラクタに移動したことで、 ``initialize()`` コールバックは2番目の引数に ``$settings`` を受け取らないようになりました。
+以下のメソッド特性を使うようにコンポーネントを書き換える必要があります::
 
     function initialize($controller) { }
 
-Additionally, the initialize() method is only called on components that are
-enabled.  This usually means components that are directly attached to the
-controller object.
+加えて、initialize()メソッドはコンポーネントが有効な時のみ呼び出されます。
+これは通常、コントローラに直接付随したコンポーネントを意味します。
 
-Deprecated callbacks removed
-----------------------------
+非推奨だったコールバックの削除
+------------------------------
 
-All the deprecated callbacks in Component have not been transferred to
-ComponentCollection. Instead you should use the `trigger()` method to interact
-with callbacks.  If you need to trigger a callback you could do so by calling::
+Componentで非推奨となったすべてのコールバックはComponentCollectionに移動されませんでした。
+コールバックと対話するには代わりに `trigger()` メソッドを使う必要があります。
+コールバックを引き起こす必要があるなら、以下のように呼び出すことができます::
 
     <?php
     $this->Components->trigger('someCallback', array(&$this));
 
-Changes in disabling components
--------------------------------
+コンポーネント無効化の変更点
+----------------------------
 
-In the past you were able to disable components via `$this->Auth->enabled =
-false;` for example. In CakePHP 2.0 you should use the ComponentCollection's
-disable method, `$this->Components->disable('Auth');`.  Using the enabled
-property will not work.
+以前は、例えば `$this->Auth->enabled = false;` によってコンポーネントを無効化することができました。
+CakePHP 2.0 では、ComponentCollectionのdisableメソッド、 `$this->Components->disable('Auth');` を使用する必要があります。
+enabledプロパティを使っても正しく動作しないでしょう。
 
-AclComponent
-------------
+Aclコンポーネント
+-----------------
 
--  ``AclComponent`` implementations are now required to implement
-   ``AclInterface``.
--  ``AclComponent::adapter()`` has been added to allow runtime modification of
-   the ``ACL`` implementation the component uses.
--  ``AclComponent::grant()`` has been deprecated, it will be removed in a future
-   version. Use ``AclComponent::allow()`` instead.
--  ``AclComponent::revoke()`` has been deprecated, it will be removed in a
-   future version. Use AclComponent::deny() instead.
+-  ``AclComponent`` の実装部分は、 ``AclInterface`` の実装が必要となりました。
+-  このコンポーネントが使う ``ACL`` の実装部分をランタイムで変更できるように、 ``AclComponent::adapter()`` が追加されました。
+-  ``AclComponent::grant()`` は非推奨となりました。
+   将来のバージョンでは削除されることになります。
+   代わりに ``AclComponent::allow()`` を使用してください。
+-  ``AclComponent::revoke()`` は非推奨となりました。
+   将来のバージョンでは削除されることになります。
+   代わりに ``AclComponent::deny()`` を使用してください。
 
-RequestHandlerComponent
------------------------
+RequestHandlerコンポーネント
+----------------------------
 
-Many of RequestHandlerComponent's methods are just proxies for ``CakeRequest``
-methods. The following methods have been deprecated and will be removed in
-future versions:
+多くのRequestHandlerコンポーネントのメソッドは単に ``CakeRequest`` のメソッドの代用品となりました。
+以下のメソッドは非推奨となり、将来のバージョンでは削除されることになります。:
 
 -  ``isSsl()``
 -  ``isAjax()``
@@ -252,18 +237,17 @@ future versions:
 -  ``isDelete()``
 -  ``getReferer()``
 -  ``getClientIp()``
--  ``accepts()``, ``prefers()``, ``requestedWith()`` All deal in mapped content
-   types now. They no longer work with mime-types. You can use
-   ``RequestHandler::setContent()`` to create new content types.
--  ``RequestHandler::setContent()`` no longer accepts an array as a single
-   argument, you must supply both arguments.
+-  ``accepts()`` 、 ``prefers()`` 、 ``requestedWith()`` は全てマッピングされたコンテンツタイプを扱うようになり、MIMEタイプでは動作しないようになりました。
+   新しいコンテントタイプを作成するためには、 ``RequestHandler::setContent()`` を使うことができます。
+-  ``RequestHandler::setContent()`` は配列を一つの引数として指定することができないようになりました。
+   両方の引数を与える必要があります。
 
-SecurityComponent
------------------
+Securityコンポーネント
+----------------------
 
-SecurityComponent no longer handles Basic and Digest Authentication. These are
-both handled by the new AuthComponent. The following methods have been removed
-from SecurityComponent:
+Securityコンポーネントは基本認証とダイジェスト認証を処理しないようになりました。
+これら二つは、新しいAuthコンポーネントによって処理されます。
+以下のメソッドはSecurityコンポーネントから削除されました:
 
 -  requireLogin()
 -  generateDigestResponseHash()
@@ -271,89 +255,87 @@ from SecurityComponent:
 -  loginRequest()
 -  parseDigestAuthData()
 
-In addition the following properties were removed:
+加えて、以下のプロパティが削除されました:
 
 -  $loginUsers
 -  $requireLogin
 
-Moving these features to AuthComponent was done to provide a single place for
-all types of authentication and to streamline the roles of each component.
+全ての種類の認証を単一の場所に提供し、それぞれのコンポーネントの役割を能率化するために、これらの機能はAuthコンポーネントに移動しました。
 
-AuthComponent
--------------
+Authコンポーネント
+------------------
 
-The AuthComponent was entirely re-factored for 2.0, this was done to help reduce
-developer confusion and frustration. In addition, AuthComponent was made more
-flexible and extensible. You can find out more in 
-the :doc:`/core-libraries/components/authentication` guide.
+Authコンポーネントは2.0のために完全に書き直れました。
+これは開発者の混乱と頓挫(*frustration*)を減らすようになされました。
+加えて、Authコンポーネントはより柔軟で拡張性が高くなりました。
+:doc:`/core-libraries/components/authentication` ガイドでより詳しくみることができます。
 
-EmailComponent
---------------
+Emailコンポーネント
+-------------------
 
-The EmailComponent has been deprecated and has created a new library class to
-send e-mails. See :doc:`/core-utility-libraries/email` Email changes for more details.
+Emailコンポーネントは非推奨となり、Eメールを送る新しいライブラリクラスが作成されました。
+詳細は、 :doc:`/core-utility-libraries/email` のEメールの変更を見てください。
 
-SessionComponent
-----------------
+Sessionコンポーネント
+---------------------
 
-Session component has lost the following methods.
+Sessionコンポーネントは以下のメソッドを失いました。
 
 * activate()
 * active()
 * __start()
 
-cakeError removed
-=================
+cakeErrorの削除
+===============
 
-The ``cakeError()`` method has been removed. It's recommended that you switch all
-uses of ``cakeError`` to use exceptions. ``cakeError`` was removed because it
-was simulating exceptions. Instead of simulation, real exceptions are used in
-CakePHP 2.0.
+``cakeError()`` メソッドは削除されました。
+``cakeError`` の使用から例外を使うように切り替えることが推奨されています。
+``cakeError`` が削除されたのは、それがただの例外のシミュレーションであった為です。
+代わりに、CakePHP2.0では実際の例外が使われます。
 
-Error handling
-==============
+エラーハンドリング
+==================
 
-The error handling implementation has dramatically changed in 2.0. Exceptions
-have been introduced throughout the framework, and error handling has been
-updated to offer more control and flexibility. You can read more in the
-:doc:`/development/exceptions` and :doc:`/development/errors` section.
+エラーハンドリングの実装は2.0で劇的に変わりました。
+フレームワークの至るところに例外が導入され、エラーハンドリングはよりコントロールできるように、柔軟に書き直されました。
+詳しくは、 :doc:`/development/exceptions` と :doc:`/development/errors` のセクションを読むことができます。
 
-Lib classes
-===========
+ライブラリクラス
+================
 
 App
 ---
 
-The API for ``App::build()`` has changed to ``App::build($paths, $mode).`` It
-now allows you to either append, prepend or reset/replace existing paths. The
-$mode param can take any of the following 3 values: App::APPEND,
-App::PREPEND, ``App::RESET``. The default behavior of the function remains the
-same (ie. Prepending new paths to existing list).
+``App::build()`` のAPIは ``App::build($paths, $mode).`` に変更されました。
+これで既存のパスに前方追加(*prepend*)、後方追加(*append*)、リセットをかけられるようになりました。
+$mode引数は次の3つの値を取ることができます: App::APPEND、App::PREPEND、 ``App::RESET`` 。
+この関数のデフォルトの振る舞いは同じものが残されています（つまり、既存のリストの後方に新しいパスが追加されます）。
 
 App::path()
 ~~~~~~~~~~~
 
-* Now supports plugins, App::path('Controller', 'Users') will return the folder
-  location of the controllers in the Users plugin.
-* Won't merge core paths anymore, it will
-  only return paths defined in App::build() or default ones in app (or
-  corresponding plugin).
+* プラグインをサポートするようになりました。
+  App::path('Controller', 'Users') はUsersプラグインのコントローラの設置場所を返します。
+* コアのパスをマージしないようになりました。
+  App::build()で定義されたパスか、アプリケーション（またはプラグインに対応する）デフォルトのパスのみを返します。
 
 App::build()
 ~~~~~~~~~~~~
 
-* Will not merge app path with core paths anymore.
+* コアのパスとアプリケーションのパスをマージしなくなりました。
 
 App::objects()
 ~~~~~~~~~~~~~~~~
 
-* Now supports plugins, App::objects('Users.Model') will return the models in
-  plugin Users.
-* Returns array() instead of false for empty results or invalid types.
-* Does not return core objects anymore, App::objects('core') will return array().
-* Returns the complete class name.
+* プラグインをサポートするようになりました。
+  App::objects('Users.Model') はUsersプラグインのモデルを返します。
+* 空の結果や不正な型に対してfalseの代わりにarray()を返すようになりました。
+* コアのオブジェクトを返さないようになりました。
+  App::objects('core')はarray()を返します。
+* 完全なクラス名を返すようになりました。
 
-App class lost the following properties, use method App::path() to access their value
+Appクラスは以下のプロパティを失いました。
+これらの値にアクセスするにはApp::path()メソッドを使ってください。
 
 * App::$models
 * App::$behaviors
@@ -371,127 +353,115 @@ App class lost the following properties, use method App::path() to access their 
 App::import()
 ~~~~~~~~~~~~~
 
-* No longer looks for classes recursively, it stricty uses the values for the
-  paths defined in App::build().
-* Will not be able to load App::import('Component', 'Component') use
-  App::uses('Component', 'Controller');
-* Using App::import('Lib', 'CoreClass') to load core classes is no longer
-  possible.
-* Importing a non-existent file, supplying a wrong type or package name, or null
-  values for $name and $file parameters will result in a false return value.
-* App::import('Core', 'CoreClass') is no loger supported, use App::uses()
-  instead and let the class autoloading do the rest.
-* Loading Vendor files does not look recursively in the vendors folder, it will
-  also no longer convert the file to underscored as it did in the past.
+* 再帰的にクラスを探索しないようになりました。
+  App::build()で定義されたパスを元にした値を厳密に使用します。
+* App::import('Component', 'Component')と読み込むことができなくなりました。
+  App::uses('Component', 'Controller'); を使ってください。
+* App::import('Lib', 'CoreClass') を利用したコアクラスの読み込みは不可能になりました。
+* 存在しないファイルの読み込み、正しくない型またはパッケージ名の指定、$nameと$file引数へのnull値の指定は返り値falseの結果となります。
+* App::import('Core', 'CoreClass')はもうサポートされません。
+  代わりにApp::uses()を使用し、後はクラスの自動読み込みに任せるようにしましょう。
+* 外部(*Vendor*)ファイルの読み込みはvendorsフォルダを再帰的に探索しないようになりました。
+  また、以前のようにファイルをアンダースコアに変換しないようにもなりました。
 
 App::core()
 ~~~~~~~~~~~
 
-* First parameter is no longer optional, it will always return one path
-* It can't be used anymore to get the vendors paths
-* It will only accept new style package names
+* 第一引数は必須となり、常に一つのパスを返すようになりました。
+* vendorsのパスを得るために使うことはもうできません。
+* 新しいスタイルのパッケージ名のみ受け付けます。
 
-Class loading with App::uses()
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+App::uses()を用いたクラスの読み込み
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Although there has been a huge refactoring in how the classes are loaded, in very 
-few occasions you will need to change your application code to respect the way you were 
-used to doing it. The biggest change is the introduction of a new method::
+クラスの読み込み方が大きく書き直されましたが、手慣れた方法を尊重するためにアプリケーションのコードを変更する必要が稀にあります。
+最も大きな変更は新しいメソッドが導入されたことです::
 
     <?php
     App::uses('AuthComponent', 'Controller/Component');
 
-We decided the function name should emulate PHP 5.3's ``use`` keyword, just as a way
-of declaring where a classname should be located. The first parameter of
-:php:meth:`App::uses()` is the complete name of the class you intend to load,
-and the second one, the package name (or namespace) where it belongs to. The
-main difference with CakePHP 1.3's :php:meth:`App::import()` is that the former
-won't actually import the class, it will just setup the system so when the class
-is used for the first time it will be located.
+私たちは関数名を、クラス名を探索すべき場所を宣言する方法であるPHP 5.3の ``use`` キーワードを模倣するものと定めました。
+:php:meth:`App::uses()` の第一引数は読みこもうとするクラスの完全な名前となります。
+また、第二引数は、属する場所のパッケージ名（または名前空間）になります。
+CakePHP 1.3の :php:meth:`App::import()` との主な違いは、前者が実際にクラスをインポートせず、単にシステムをセットアップだけということです。
+従って、クラスが初めて使用される時にその探索がなされます。
 
-Some examples on using :php:meth:`App::uses()` when migrating from
-:php:meth:`App::import()`::
+:php:meth:`App::import()` から移行し :php:meth:`App::uses()` を使用するいくつかの例を挙げます::
 
     <?php
     App::import('Controller', 'Pages');
-    // becomes 
+    // は次のようになる 
     App::uses('PagesController', 'Controller');
 
     App::import('Component', 'Email');
-    // becomes 
+    // は次のようになる 
     App::uses('EmailComponent', 'Controller/Component');
 
     App::import('View', 'Media');
-    // becomes 
+    // は次のようになる 
     App::uses('MediaView', 'View');
 
     App::import('Core', 'Xml');
-    // becomes 
+    // は次のようになる 
     App::uses('Xml', 'Utility');
 
     App::import('Datasource', 'MongoDb.MongoDbSource')
-    // becomes 
+    // は次のようになる 
     App::uses('MongoDbSource', 'MongoDb.Model/Datasource')
 
-All classes that were loaded in the past using ``App::import('Core', $class);``
-will need to be loaded using ``App::uses()`` referring to the correct package.
-See the api to locate the classes in their new folders. Some examples::
+以前 ``App::import('Core', $class);`` を用いて読み込んでいたすべてのクラスは、正しいパッケージを参照する ``App::uses()`` を用いて読み込む必要があります。
+APIを見て新しいフォルダでクラスを探索するようにしてください。いくつか例を挙げます::
 
     <?php
     App::import('Core', 'CakeRoute');
-    // becomes 
+    // は次のようになる 
     App::uses('CakeRoute', 'Routing/Route');
 
     App::import('Core', 'Sanitize');
-    // becomes
+    // は次のようになる 
     App::uses('Sanitize', 'Utility');
 
     App::import('Core', 'HttpSocket');
-    // becomes 
+    // は次のようになる 
     App::uses('HttpSocket', 'Network/Http');
 
-In contrast to how :php:meth:`App::import()` worked in the past, the new class
-loader will not locate classes recursively. This led to an impressive
-performance gain even on develop mode, at the cost of some seldom used features
-that always caused side effects. To be clear again, the class loader will only
-fetch the class in the exact package in which you told it to find it.
+:php:meth:`App::import()` が以前どのように作用していたかとは対照的に、新しいクラスローダはクラスを再帰的に探索しません。
+これは常に副作用を及ぼしていたいくつかの稀にしか使われない機能のコストにおいて、開発モードを含めて強烈なパフォーマンスの上昇を導きました。
+改めて言うと、クラスローダは正にあなたが探すために伝えたパッケージからのみクラスを取り出すことになります。
 
-App::build() and core paths
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+App::build() とコアのパス
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:php:meth:`App::build()` will not merge app paths with core paths anymore.
+:php:meth:`App::build()` はアプリケーションのパスとコアのパスをマージしなくなりました。
 
-Examples::
+例::
 
     <?php
     App::build(array('controllers' => array('/full/path/to/controllers'))) 
-    //becomes 
+    // は次のようになる 
     App::build(array('Controller' => array('/full/path/to/Controller')))
 
     App::build(array('helpers' => array('/full/path/to/controllers'))) 
-    //becomes 
+    // は次のようになる 
     App::build(array('View/Helper' => array('/full/path/to/View/Helper')))
 
 CakeLog
 -------
 
--  Log streams now need to implement :php:class:`CakeLogInterface`. Exceptions will be raised
-   if a configured logger does not.
+-  ログのストリームは :php:class:`CakeLogInterface` を実装(*implement*)することが必要になりました。
+   設定されたロガークラスがこれをしないと、例外が発生します。
 
 Cache
 -----
 
--  :php:class:`Cache` is now a static class, it no longer has a getInstance() method.
--  CacheEngine is now an abstract class. You cannot directly create instances of 
-   it anymore.
--  CacheEngine implementations must extend CacheEngine, exceptions will be
-   raised if a configured class does not.
--  FileCache now requires trailing slashes to be added to the path setting when
-   you are modifying a cache configuration.
--  Cache no longer retains the name of the last configured cache engine. This
-   means that operations you want to occur on a specific engine need to have the
-   $config parameter equal to the config name you want the operation to occur
-   on.
+-  :php:class:`Cache` は静的なクラスになり、getInstance()メソッドをもたないようになりました。
+-  CacheEngineは抽象(*abstract*)クラスになりました。
+   直接そのクラスを作ることはもうできなくなりました。
+-  CacheEngineの実装はCacheEngineを継承する必要があります。
+   設定されたクラスがそれをしないと、例外が発生します。
+-  FileCacheはキャッシュの設定を変更する際に、パスの設定の末尾にスラッシュを付けることを必要とするようになりました。
+-  Cacheは最後に設定されたエンジンの名前を保有しないようになりました。
+   これはエンジンを指定する操作をしたいときは、$configパラメータが指定したい設定名と同一でなければいけないということを意味します。
 
 ::
 
@@ -499,58 +469,53 @@ Cache
     Cache::config('something');
     Cache::write('key, $value);
     
-    // would become
+    // 上記は、以下のようになることでしょう。
     Cache::write('key', $value, 'something');
 
 Router
 ------
 
-- You can no longer modify named parameter settings with
-  ``Router::setRequestInfo()``. You should use ``Router::connectNamed()`` to
-  configure how named parameters are handled.
-- Router no longer has a ``getInstance()`` method. It is a static class, call
-  its methods and properties statically.
-- ``Router::getNamedExpressions()`` is deprecated. Use the new router
-  constants. ``Router::ACTION``, ``Router::YEAR``, ``Router::MONTH``,
-  ``Router::DAY``, ``Router::ID``, and ``Router::UUID`` instead.
-- ``Router::defaults()`` has been removed.  Delete the core routes file
-  inclusion from your applications routes.php file to disable default routing.
-  Conversely if you want default routing, you will have to add an include to 
-  ``Cake/Config/routes.php`` in your routes file.
-- When using Router::parseExtensions() the extension parameter is no longer
-  under ``$this->params['url']['ext']``. Instead it is available at
-  ``$this->request->params['ext']``.
+- ``Router::setRequestInfo()`` を用いてnamedパラメータの設定を更新することができなくなりました。
+  ``Router::connectNamed()`` を使ってnamedパラメータの扱いを設定するべきです。
+- Routerは ``getInstance()`` メソッドをもたないようになりました。
+  これは静的なクラスなので、メソッドやプロパティは静的に呼ぶようにしてください。
+- ``Router::getNamedExpressions()`` は非推奨になりました。
+   代わりに新しいルーターの定数である、``Router::ACTION`` 、 ``Router::YEAR`` 、 ``Router::MONTH`` 、 ``Router::DAY`` 、 ``Router::ID`` 、 ``Router::UUID`` を使用してください。
+- ``Router::defaults()`` が削除されました。
+  デフォルトのルーティングを無効にするにはアプリケーションのroutes.phpからコアのルートファイルのインクルードを削除してください。
+  逆に、デフォルトのルーティングが欲しい場合、routesファイルに ``Cake/Config/routes.php`` へのインクルードを追加する必要があるでしょう。
+- Router::parseExtensions()を利用している時、拡張子のパラメータは ``$this->params['url']['ext']`` 以下ではなくなりました。
+  代わりに ``$this->request->params['ext']`` で利用可能となります。
 
 Dispatcher
 ----------
 
-- Dispatcher has been moved inside of cake/libs, you will have to update your
-  ``app/webroot/index.php`` file.
-- ``Dispatcher::dispatch()`` now takes two parameters.  The request and
-  response objects.  These should be instances of ``CakeRequest`` &
-  ``CakeResponse`` or a subclass thereof.
-- ``Dispather::parseParams()`` now only accepts a ``CakeRequest`` object.
-- ``Dispatcher::baseUrl()`` has been removed.
-- ``Dispatcher::getUrl()`` has been removed.
-- ``Dispatcher::uri()`` has been removed.
-- ``Dispatcher::$here`` has been removed.
+- Dispatcherはcake/libsの中に移動されました。
+  ``app/webroot/index.php`` を更新する必要があります。
+- ``Dispatcher::dispatch()`` は二つの引数を受け取るようになりました。
+  リクエストとレスポンスのオブジェクトです。
+  これらは ``CakeRequest`` と ``CakeResponse`` 、またはそのサブクラスのインスタンスである必要があります。
+- ``Dispather::parseParams()`` は ``CakeRequest`` オブジェクトのみ（訳注：おそらくサブクラスも）受け入れるようになりました。
+- ``Dispatcher::baseUrl()`` は削除されました。
+- ``Dispatcher::getUrl()`` は削除されました。
+- ``Dispatcher::uri()`` は削除されました。
+- ``Dispatcher::$here`` は削除されました。
 
 Configure
 ---------
 
--  ``Configure::read()`` with no parameter no longer returns the value of
-   'debug' instead it returns all values in Configure. Use
-   ``Configure::read('debug');`` if you want the value of debug.
--  ``Configure::load()`` now requires a ConfigReader to be setup. Read 
-   :ref:`loading-configuration-files` for more information.
--  ``Configure::store()`` now writes values to a given Cache configuration. Read
-   :ref:`loading-configuration-files` for more information.
+-  ``Configure::read()`` は「debug」値でなく、代わりにConfigureの全ての値を返すようになりました。
+   もしデバッグ値を得たいのなら、 ``Configure::read('debug');`` を使用してください。
+-  ``Configure::load()`` はConfigureリーダーを用いてセットアップしなければならなくなりました。
+   詳しい情報は、 :ref:`loading-configuration-files` を見てください。
+-  ``Configure::store()`` は、与えられたCacheの設定に対して値を書き込むようになりました。
+   詳しい情報は、 :ref:`loading-configuration-files` を見てください。
 
 Scaffold
 --------
 
--  Scaffold 'edit' views should be renamed to 'form'. This was done to make
-   scaffold and bake templates consistent.
+-  Scaffoldの'edit'ビューは'form'に名前を変えるべきです。
+   これはScaffoldとBakeのテンプレートに矛盾がないようにするために為されました。
 
    -  ``views/scaffolds/edit.ctp -> ``views/scaffolds/form.ctp``
    -  ``views/posts/scaffold.edit.ctp -> ``views/posts/scaffold.form.ctp``
@@ -558,160 +523,147 @@ Scaffold
 File
 ----
 
--  This class has been deprecated, use ``SplFileObject`` instead.
+-  このクラスは非推奨となりました。代わりに ``SplFileObject`` を使ってください。
 
 Folder
 ------
 
--  ``Folder::pwd()`` has been removed. Use $folder->path instead.
--  ``Folder::read()`` has been removed. Use DirectoryIterator instead.
--  ``Folder::normalizePath()`` has been removed.
--  ``Folder::correctSlashFor()`` has been removed.
--  ``Folder::slashTerm()`` has been removed.
--  ``Folder::isSlashTerm()`` has been removed.
--  ``Folder::addPathElement()`` has been removed.
-- ``Folder::dirsize()`` renamed to ``Folder::dirSize()``.
+-  ``Folder::pwd()`` は削除されました。代わりに $folder->path を使ってください。
+-  ``Folder::read()`` は削除されました。代わりに DirectoryIterator を使ってください。
+-  ``Folder::normalizePath()`` は削除されました。
+-  ``Folder::correctSlashFor()`` は削除されました。
+-  ``Folder::slashTerm()`` は削除されました。
+-  ``Folder::isSlashTerm()`` は削除されました。
+-  ``Folder::addPathElement()`` は削除されました。
+- ``Folder::dirsize()`` は ``Folder::dirSize()`` に改名されました。
 
 Xml
 ---
 
--  The class Xml was completely re-factored. Now this class does not manipulate
-   data anymore, and it is a wrapper to SimpleXMLElement. You can use the following
-   methods:
-   -  ``Xml::build()``: static method that you can pass an xml string, array, path
-      to file or url. The result will be a SimpleXMLElement instance or an
-      exception will be thrown in case of error.
-   -  ``Xml::fromArray():`` static method that returns a SimpleXMLElement from an
-      array.
-   -  ``Xml::toArray()``: static method that returns an array from
-      SimpleXMLElement.
+-  Xmlクラスは完全に書き直されました。
+   もはやこのクラスはデータを整形せず、SimpleXMLElementのラッパーになりました。
+   以下のメソッドが使用できます：
 
-You should see the :php:class:`Xml` documentation for more information on the changes made to
-the Xml class.
+   -  ``Xml::build()``:  静的なメソッドで、XML文字列、配列、ファイルまたはURLのパスを渡せます。
+      SimpleXMLElementのインスタンスを返すか、エラーの場合は例外が投げられます。
+   -  ``Xml::fromArray():`` 静的なメソッドで、配列を元にSimpleXMLElementを返します。
+   -  ``Xml::toArray()``: 静的なメソッドで、SimpleXMLElementを元に配列を返します。
+
+Xmlクラスになされた変更における更に詳しい情報は、:php:class:`Xml` ドキュメントを見てください。
 
 Inflector
 ---------
 
--  Inflector no longer has a ``getInstance()`` method.
--  ``Inflector::slug()`` no longer supports the $map argument. Use
-   ``Inflector::rules()`` to define transliteration rules.
+-  Inflector に ``getInstance()`` はもうありません。
+-  ``Inflector::slug()`` は $map 引数をサポートしなくなりました。
+   字訳のルールを定義するには ``Inflector::rules()`` を使ってください。
 
 CakeSession
 -----------
 
-CakeSession is now a fully static class, both ``SessionHelper`` and
-``SessionComponent`` are wrappers and sugar for it.  It can now easily be used
-in models or other contexts.  All of its methods are called statically.
+CakeSessionは完全に静的なクラスとなり、 ``SessionHelper`` と ``SessionComponent`` の両方はこれのラッパーと構文糖です。
+モデルや他のコンテキストで簡単に使えるようになりました。
+全てのメソッドは静的に呼び出されます。
 
-Session configuration has also changed :doc:`see the session section for more
-information </development/sessions>`
+セッションの設定もまた変更されました。
+:doc:`詳しい情報についてはセッションのセクションを見てください。 </development/sessions>`
 
 HttpSocket
 ----------
 
-- HttpSocket doesn't change the header keys. Following other places in core,
-  the HttpSocket does not change the headers. :rfc:`2616` says that headers are case
-  insensitive, and HttpSocket preserves the values the remote host sends.
-- HttpSocket returns responses as objects now. Instead of arrays, HttpSocket
-  returns instances of HttpResponse.  See the :php:class:`HttpSocket`
-  documentation for more information.
-- Cookies are stored internally by host, not per instance. This means that, if
-  you make two requests to different servers, cookies from domain1 won't be sent
-  to domain2.  This was done to avoid possible security problems.
+- HttpSocketはヘッダーのキーを変更しないようになりました。
+  コアの他の場所にならって、HttpSocketはヘッダーに変更を加えないようになりました。
+  :rfc:`2616` はヘッダーが大文字小文字を区別すると言及していますし、HttpSocketはリモートホストが送る値を保持します。
+- HttpSocketはレスポンスをオブジェクトとして返すようになりました。
+  配列の代わりに、HttpSocketはHttpResponseのインスタンスを返します。
+  更に詳しい情報は、 :php:class:`HttpSocket` ドキュメントを見てください。
+- クッキーは内部でインスタンス毎でなく、ホスト別に保持されます。
+  これは、それぞれ違うサーバーに二つのリクエストを送る場合、ドメイン1からのクッキーはドメイン2に送信されないことを意味します。
+  これは在り得るセキュリティ問題を回避するためのものです。
 
 
-Helpers
-=======
+ヘルパー
+========
 
-Constructor changed
--------------------
+コンストラクタの変更
+--------------------
 
-In order to accomodate View being removed from the ClassRegistry, the signature
-of Helper::__construct() was changed.  You should update any subclasses to use
-the following::
+ClassRegistryからViewが削除されたことに対応して、Helper::__construct()の特性(*signature*)が変わりました。
+以下のものを使うようにサブクラスを更新する必要があります::
 
     <?php
     function __construct(View $View, $settings = array())
 
-When overriding the constructor you should always call `parent::__construct` as
-well.  `Helper::__construct` stores the view instance at `$this->_View` for
-later reference.  The settings are not handled by the parent constructor.
+コンストラクタをオーバーライドするとき、常に `parent::__construct` を呼ぶ必要もあります。
+`Helper::__construct` はビューのインスタンスをのちの参照のために `$this->_View` に格納します。
+settingsは親コンストラクタによって扱われることはありません。
 
-HelperCollection added
+HelperCollectionの追加
 ----------------------
 
-After examining the responsibilities of each class involved in the View layer,
-it became clear that View was handling much more than a single task. The
-responsibility of creating helpers is not central to what View does, and was
-moved into HelperCollection. HelperCollection is responsible for loading and
-constructing helpers, as well as triggering callbacks on helpers.  By default,
-View creates a HelperCollection in its constructor, and uses it for subsequent
-operations.  The HelperCollection for a view can be found at `$this->Helpers`
+ビューレイヤーに含まれる各々のクラスの責任を精査した結果、Viewが一つのタスクよりかなり多い処理をしていることが明らかになりました。
+ヘルパーの生成の責任はViewの中核的なものではなく、これはHelperCollectionに移動しました。
+HelperCollectionはヘルパーの読み込みと生成、またヘルパーのコールバックの起動の責任を負います。
+デフォルトでは、ViewはコンストラクタでHelperCollectionを生成し、その後の操作でこれを使います。
+ビューのHelperCollectionは `$this->Helpers` にあります。
 
-The motivations for refactoring this functionality came from a few issues.
+この機能を書き直した動機は、いくつかの問題点からもたらされました。
 
-* View being registered in ClassRegistry could cause registry poisoning issues
-  when requestAction or the EmailComponent were used.
-* View being accessible as a global symbol invited abuse.
-* Helpers were not self contained.  After constructing a helper, you had to
-  manually construct several other objects in order to get a functioning object.
+* ClassRegistryにビューが登録されることは、requestActionやEmailComponentが使用されていた時、レジストリー汚染問題を起こしていました。
+* ビューがグローバルシンボルとしてアクセスできることは乱用を招いていました。
+* ヘルパーは自己完結していませんでした。
+  ヘルパーを生成した後、オブジェクトを機能させるために手動で他のオブジェクトを生成する必要がありました。
 
-You can read more about HelperCollection in the
-:doc:`/core-libraries/collections` documentation.
+HelperCollectionについて、より詳しくは :doc:`/core-libraries/collections` ドキュメントを見てください。
 
-Deprecated properties
----------------------
+非推奨になったプロパティ
+------------------------
 
-The following properties on helpers are deprecated, you should use the request
-object properties or Helper methods instead of directly accessing these
-properties as they will be removed in a future release.
+以下のヘルパのプロパティは非推奨となります。
+将来のリリースで削除される予定のこれらのプロパティに直接アクセスする代わりに、Requestオブジェクトのプロパティまたはヘルパーのメソッドを使ってください。
 
--  ``Helper::$webroot`` is deprecated, use the request object's webroot
-   property.
--  ``Helper::$base`` is deprecated, use the request object's base property.
--  ``Helper::$here`` is deprecated, use the request object's here property.
--  ``Helper::$data`` is deprecated, use the request object's data property.
--  ``Helper::$params`` is deprecated, use the ``$this->request`` instead.
+-  ``Helper::$webroot`` は非推奨になりました。代わりにRequestオブジェクトのwebrootプロパティを使用してください。
+-  ``Helper::$base`` は非推奨になりました。代わりにRequestオブジェクトのbaseプロパティを使用してください。
+-  ``Helper::$here`` は非推奨になりました。代わりにRequestオブジェクトのhereプロパティを使用してください。
+-  ``Helper::$data`` は非推奨になりました。代わりにRequestオブジェクトのdataプロパティを使用してください。
+-  ``Helper::$params`` は非推奨になりました。代わりに ``$this->request`` を使用してください。
 
-AjaxHelper and JavascriptHelper removed
----------------------------------------
+AjaxHelperとJavascriptHelperの削除
+----------------------------------
 
-The AjaxHelper and JavascriptHelper have been removed as they were deprecated in
-version 1.3.
+AjaxHelperとJavascriptHelperは1.3バージョンから非推奨となったため削除されました。
 
-They are replaced with the JsHelper and HtmlHelper.
+これらはJsHelperとHtmlHelperに置き換えられました。
 
 JsHelper
 --------
 
--  ``JsBaseEngineHelper`` is now abstract, you will need to implement all the
-   methods that previously generated errors.
+-  ``JsBaseEngineHelper`` は抽象クラスとなりました。
+   以前はエラーを吐いていたメソッド全てを実装する必要があるでしょう。
 
 PaginatorHelper
 ---------------
 
--  ``PaginatorHelper::sort()`` now takes the title and key arguments in the
-   reverse order. $key will always be first now. This was done to prevent
-   needing to swap arguments when adding a second one.
--  PaginatorHelper had a number of changes to the paging params used internally.
-   The default key has been removed.
--  PaginatorHelper now supports generating links with paging parameters in the
-   querystring.
+-  ``PaginatorHelper::sort()`` はtitleとkey引数の順序を逆に取るようになりました。
+   $keyは常に最初の引数になります。
+   これは2番目のものを追加するときに引数を交換(*swap*)する必要を無くすためです。
+-  PaginatorHelperは内部で使われるページングのパラメーターに数多くの変更があります。
+   defaultキーは削除されました。
+-  PaginatorHelperはクエリ文字列のページングパラメーターを用いてのリンクの生成をサポートするようになりました。
 
-There have been a few improvements to pagination in general. For more
-information on that you should read the new pagination features page.
+全体的にページネーションに対していくつか改善があります。
+その詳しい情報については、新しいページネーションの機能のページを見てください。
 
 FormHelper
 ----------
 
-$selected parameter removed
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$selectedパラメータの削除
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``$selected`` parameter was removed from several methods in ``FormHelper``.
-All methods now support a ``$attributes['value']`` key now which should be used
-in place of ``$selected``. This change simplifies the ``FormHelper`` methods,
-reducing the number of arguments, and reduces the duplication that ``$selected``
-created. The affected methods are:
+``$selected`` パラメータは ``FormHelper`` のいくつかのメソッドから削除されました。
+全てのメソッドは ``$attributes['value']`` キーをサポートするようになり、 ``$selected`` の代わりに使われるでしょう。
+この変更は ``FormHelper`` のメソッドを簡略化し、数多くの引数を減らし、 ``$selected`` が作り出す重複を無くすものです。
+影響のあるメソッドは以下のとおりです:
 
 -  FormHelper::select()
 -  FormHelper::dateTime()
@@ -722,178 +674,154 @@ created. The affected methods are:
 -  FormHelper::minute()
 -  FormHelper::meridian()
 
-Default urls on forms is the current action
+フォームのデフォルトURLが現在のアクションに
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The default url for all forms, is now the current url including passed, named,
-and querystring parameters. You can override this default by supplying
-``$options['url']`` in the second parameter of ``$this->Form->create()``.
+全てのフォームのデフォルトのURLは、passed、named、そしてクエリ文字列パラメータを含む現在のURLになりました。
+``$this->Form->create()`` の第二引数に ``$options['url']`` を与えることによって、このデフォルトを上書きすることができます。
 
 FormHelper::hidden()
 ~~~~~~~~~~~~~~~~~~~~
 
-Hidden fields no longer remove the class attribute. This means that if there are
-validation errors on hidden fields, the ``error-field`` classname will be
-applied.
+隠し(*hidden*)フィールドはclass属性を削除しないようになりました。
+これは隠しフィールドにバリデーションエラーがある場合は、 ``error-field`` クラス名が付与されることを意味します。
 
 CacheHelper
 -----------
 
-CacheHelper has been fully decoupled from View, and uses helper callbacks to
-generate caches. You should remember to place CacheHelper after other helpers
-that modify content in their ``afterRender`` and ``afterLayout`` callbacks. If
-you don't some changes will not be part of the cached content.
+CacheHelperはViewから完全に分離され、ヘルパーのコールバックを用いてキャッシュを生成するようになりました。
+``afterRender`` と ``afterLayout`` コールバックでコンテンツを更新する他のヘルパーの後にCacheHelperを配置しなければならないことを覚えておいてください。
+これを忘れると、いくつかの変更がキャッシュされたコンテンツに含まれないことになるでしょう。
 
-CacheHelper also no longer uses ``<cake:nocache>`` to indicate un-cached
-regions. Instead it uses special HTML/XML comments. ``<!--nocache-->`` and
-``<!--/nocache-->``. This helps CacheHelper generate valid markup and still
-perform the same functions as before. You can read more CacheHelper and View
-changes.
+また、CacheHelperはキャッシュしない範囲を指定するために ``<cake:nocache>`` を使わなくなりました。
+代わりに特別なHTML・XMLコメントである、 ``<!--nocache-->`` と ``<!--/nocache-->`` を使ってください。
+これでCacheHelperが正しいマークアップの生成と、以前と同じ機能を発揮できます。
+詳しくは、CacheHelperとViewの変更を見てください。
 
-Helper Attribute format more flexible
--------------------------------------
+より柔軟なヘルパーの属性(*Attribute*)フォーマット
+-------------------------------------------------
 
-The Helper class has more 3 protected attributes:
+Helperクラスは更に3つのprotectedな属性を持つようになりました:
 
-* ``Helper::_minimizedAttributes``: array with minimized attributes (ie:
-  ``array('checked', 'selected', ...)``);
-* ``Helper::_attributeFormat``: how attributes will be generated (ie:
-  ``%s="%s"``);
-* ``Helper::_minimizedAttributeFormat``: how minimized attributes will be
-  generated: (ie ``%s="%s"``)
+* ``Helper::_minimizedAttributes``: 最小化される属性の配列(例: ``array('checked', 'selected', ...)``);
+* ``Helper::_attributeFormat``: 属性の生成方法(例: ``%s="%s"``);
+* ``Helper::_minimizedAttributeFormat``: 最小化される属性の生成方法:(例 ``%s="%s"``)
 
-By default the values used in CakePHP 1.3 were not changed. But now you can
-use boolean attributes from HTML, like ``<input type="checkbox" checked />``. To
-this, just change ``$_minimizedAttributeFormat`` in your AppHelper to ``%s``.
+デフォルトではCakePHP 1.3での値の使われ方と変わっていません。
+しかし、 ``<input type="checkbox" checked />`` のようなHTMLの真偽値属性を扱うことができるようになりました。
+これをするには、AppHelperの ``$_minimizedAttributeFormat`` を ``%s`` に変えるだけです。
 
-To use with Html/Form helpers and others, you can write::
+Html・Formヘルパー、またその他でこれを使うには、次のように書けます::
 
     $this->Form->checkbox('field', array('checked' => true, 'value' => 'some_value'));
 
-Other facility is that minimized attributes can be passed as item and not as
-key. For example::
+他の便宜的方法は最小化される属性をキーではなくアイテムとして渡すことです。
+例を挙げます::
 
     $this->Form->checkbox('field', array('checked', 'value' => 'some_value'));
 
-Note that ``checked`` have a numeric key.
+``checked`` が数値添字であることに注意してください。
 
-Controller
-==========
+コントローラ
+============
 
-- Controller's constructor now takes two parameters. A CakeRequest, and 
-  CakeResponse objects. These objects are used to populate several deprecated 
-  properties and will be set to $request and $response inside the controller.
-- ``Controller::$webroot`` is deprecated, use the request object's webroot
-  property.
-- ``Controller::$base`` is deprecated, use the request object's base property.
-- ``Controller::$here`` is deprecated, use the request object's here property.
-- ``Controller::$data`` is deprecated, use the request object's data property.
-- ``Controller::$params`` is deprecated, use the ``$this->request`` instead.
-- ``Controller::$Component`` has been moved to ``Controller::$Components``.  See
-  the :doc:`/core-libraries/collections` documentation for more information.
-- ``Controller::$view`` has been renamed to ``Controller::$viewClass``.
-  ``Controller::$view`` is now used to change which view file is rendered.
-- ``Controller::render()`` now returns a CakeResponse object.
+- コントローラのコンストラクタは二つの引数を受け取るようになりました。
+  CakeRequestと、CakeResponseオブジェクトです。
+  これらのオブジェクトは非推奨となったいくつかのプロパティを配置するために使われ、コントローラ内部に$requestと$responseとして設置されるでしょう。
+- ``Controller::$webroot`` は非推奨になりました。代わりにRequestオブジェクトのwebrootプロパティを使用してください。
+- ``Controller::$base`` は非推奨になりました。代わりにRequestオブジェクトのbaseプロパティを使用してください。
+- ``Controller::$here`` は非推奨になりました。代わりにRequestオブジェクトのhereプロパティを使用してください。
+- ``Controller::$data`` は非推奨になりました。代わりにRequestオブジェクトのdataプロパティを使用してください。
+- ``Controller::$params`` は非推奨になりました。代わりに ``$this->request`` を使用してください。
+- ``Controller::$Component`` は ``Controller::$Components`` に移動しました。
+  より詳しい情報は :doc:`/core-libraries/collections` ドキュメントを見てください。
+- ``Controller::$view`` は ``Controller::$viewClass`` に名前が変わりました。
+  ``Controller::$view`` は今はどのビューファイルを描画するかを変更するのに使われます。
+- ``Controller::render()`` はCakeResponseオブジェクトを返すようになりました。
 
-The deprecated properties on Controller will be accessible through a ``__get()``
-method. This method will be removed in future versions, so it's recommended that
-you update your application.
+コントローラの非推奨となったプロパティは ``__get()`` メソッドを通してアクセス可能となります。
+このメソッドは将来のバージョンで削除されますので、アプリケーションを改訂することをお勧めします。
 
-Controller now defines a maxLimit for pagination. This maximum limit is set to
-100, but can be overridden in the $paginate options.
+コントローラはページ付けに対してmaxLimitを定義するようになりました。
+この最大値は100にセットされますが、$paginateオプションで上書き可能です。
 
 
 Pagination
 ----------
 
-Pagination has traditionally been a single method in Controller, this created a
-number of problems though. Pagination was hard to extend, replace, or modify. For
-2.0 pagination has been extracted into a component. :php:meth:`Controller::paginate()` still
-exists, and serves as a convenience method for loading and using the
-:php:class:`PaginatorComponent`.
+ページネーションは古くからControllerの一つのメソッドでありました。
+しかし、これは多くの問題を生み出していました。
+ページネーションを継承して書き換えたり、修正したりすることは難しいことでした。
+2.0ではページネーションはコンポーネントに展開されました。
+:php:meth:`Controller::paginate()` はまだ存在しており、 :php:class:`PaginatorComponent` を読み込んで使う便宜メソッドとして提供されます。
 
-For more information on the new features offered by pagination in 2.0, see the
-:doc:`/core-libraries/components/pagination` documentation.
+2.0のページ付けで提供される新しい機能についてより詳しい情報は、 :doc:`/core-libraries/components/pagination` ドキュメントを見てください。
 
-View
-====
+ビュー
+======
 
-View no longer registered in ClassRegistry
-------------------------------------------
+ViewはClassRegistryに登録されなくなりました
+-------------------------------------------
 
-The view being registered ClassRegistry invited abuse and effectively created a
-global symbol.  In 2.0 each Helper receives the current `View` instance in its
-constructor.  This allows helpers access to the view in a similar fashion as in
-the past, without creating global symbols.  You can access the view instance at
-`$this->_View` in any helper.
+ビューがClassRegistryに登録されることは乱用を招き、事実上グローバルシンボルを作り出していました。
+2.0では各ヘルパーは現在の `View` インスタンスをコンストラクタで受け取ります。
+これはヘルパーにグローバルシンボルを作り出すことなく、以前の様式と同様にビューにアクセスさせることができます。
+どのヘルパーでも `$this->_View` でビューのインスタンスにアクセスできます。
 
 Deprecated properties
 ---------------------
 
--  ``View::$webroot`` is deprecated, use the request object's webroot property.
--  ``View::$base`` is deprecated, use the request object's base property.
--  ``View::$here`` is deprecated, use the request object's here property.
--  ``View::$data`` is deprecated, use the request object's data property.
--  ``View::$params`` is deprecated, use the ``$this->request`` instead.
--  ``View::$loaded`` has been removed. Use the ``HelperCollection`` to access
-   loaded helpers.
-- ``View::$model`` has been removed. This behavior is now on :php:class:`Helper`
-- ``View::$modelId`` has been removed. This behavior is now on
-  :php:class:`Helper`
-- ``View::$association`` has been removed. This behavior is now on
-  :php:class:`Helper`
-- ``View::$fieldSuffix`` has been removed. This behavior is now on
-  :php:class:`Helper`
-- ``View::entity()`` has been removed. This behavior is now on
-  :php:class:`Helper`
--  ``View::_loadHelpers()`` has been removed, used ``View::loadHelpers()``
-   instead.
--  How ``View::element()`` uses caching has changed, see below for more
-   information.
--  View callbacks have been shifted around, see below for more information
--  API for ``View::element()`` has changed. Read here for more info.
+-  ``View::$webroot`` は非推奨になりました。代わりにRequestオブジェクトのwebrootプロパティを使用してください。
+-  ``View::$base`` は非推奨になりました。代わりにRequestオブジェクトのbaseプロパティを使用してください。
+-  ``View::$here`` は非推奨になりました。代わりにRequestオブジェクトのhereプロパティを使用してください。
+-  ``View::$data`` は非推奨になりました。代わりにRequestオブジェクトのdataプロパティを使用してください。
+-  ``View::$params`` は非推奨になりました。代わりに ``$this->request`` を使用してください。
+-  ``View::$loaded`` は削除されました。 ``HelperCollection`` を使って読み込み済みのヘルパーにアクセスしてください。
+- ``View::$model`` は削除されました。この振る舞いは今は :php:class:`Helper` にあります。
+- ``View::$modelId`` は削除されました。この振る舞いは今は :php:class:`Helper` にあります。
+- ``View::$association`` は削除されました。この振る舞いは今は :php:class:`Helper` にあります。
+- ``View::$fieldSuffix`` は削除されました。この振る舞いは今は :php:class:`Helper` にあります。
+- ``View::entity()`` は削除されました。この振る舞いは今は :php:class:`Helper` にあります。
+-  ``View::_loadHelpers()`` は削除され、代わりに ``View::loadHelpers()`` が使われるようになりました。
+-  ``View::element()`` のキャッシュ方法は変更されました。下方に詳しい情報がありますので参照してください。
+-  ビューのコールバックは方々に移されました。下方に詳しい情報がありますので参照してください。
+-  ``View::element()`` のAPIが変更されました。詳しい情報はここを読んでください。
 
-The deprecated properties on View will be accessible through a ``__get()``
-method. This method will be removed in future versions, so it's recommended that
-you update your application.
+ビューの非推奨となったプロパティは ``__get()`` メソッドを通してアクセス可能となります。
+このメソッドは将来のバージョンで削除されますので、アプリケーションを改訂することをお勧めします。
 
-Removed methods
----------------
+削除されたメソッド
+------------------
 
-* ``View::_triggerHelpers()`` Use ``$this->Helpers->trigger()`` instead.  
-* ``View::_loadHelpers()`` Use ``$this->loadHelpers()`` instead.  Helpers now lazy
-  load their own helpers.
+* ``View::_triggerHelpers()`` は削除されました。代わりに ``$this->Helpers->trigger()`` を使ってください。
+* ``View::_loadHelpers()`` は削除されました。代わりに ``$this->loadHelpers()`` を使ってください。
+  ヘルパーは、自身のもつヘルパーを遅延読み込み(*lazy load*)するようになりました。
 
-Added methods
--------------
+追加されたメソッド
+------------------
 
-* ``View::loadHelper($name, $settings = array());`` Load a single helper.
-* ``View::loadHelpers()`` Loads all the helpers indicated in ``View::$helpers``.
+* ``View::loadHelper($name, $settings = array());`` が追加され、これは単一のヘルパーを読み込みます。
+* ``View::loadHelpers()`` が追加され、これは ``View::$helpers`` で示されたヘルパー全てを読み込みます。
 
 View->Helpers
 -------------
 
-By default View objects contain a :php:class:`HelperCollection` at ``$this->Helpers``.
+デフォルトではViewオブジェクトは :php:class:`HelperCollection` を `$this->Helpers`` に保持します。
 
-Callback positioning changes
-----------------------------
+コールバックの位置の変更
+------------------------
 
-beforeLayout used to fire after scripts_for_layout and content_for_layout were
-prepared. In 2.0, beforeLayout is fired before any of the special variables are
-prepared, allowing you to manipulate them before they are passed to the layout.
-The same was done for beforeRender. It is now fired well before any view
-variables are manipulated. In addition to these changes, helper callbacks always
-receive the name of the file about to be rendered. This combined with helpers
-being able to access the view through ``$this->_View`` and the current view
-content through ``$this->_View->output`` gives you more power than ever before.
+以前はbeforeLayoutはscripts_for_layoutとcontent_for_layoutが準備された後に起動されていました。
+2.0では、全ての特殊な変数が準備される前にbeforeLayoutが起動するようになり、レイアウトにそれらの変数が渡される前に操作することが可能になります。
+beforeRenderもまた同様で、ビューでの変数全てが操作される前に起動するようになりました。
+これらの変更に加え、ヘルパーのコールバックはレンダリングするファイル名を常に受け取るようになりました。
+これはヘルパーが ``$this->_View`` を通してビューに、 ``$this->_View->output`` を通してその時点でのビューのコンテンツにアクセスできることと併せて、以前より強い制御ができるようになります。
 
-Helper callback signature changes
----------------------------------
+ヘルパーのコールバックの特性の変更
+----------------------------------
 
-Helper callbacks now always get one argument passed in. For beforeRender and
-afterRender it is the view file being rendered. For beforeLayout and afterLayout
-it is the layout file being rendered. Your helpers function signatures should
-look like::
+ヘルパーのコールバックは常に一つの引数、beforeRenderとafterRenderにはレンダリングされるビューファイルが、beforeLayoutとafterLayoutにはレンダリングされるレイアウトファイルが与えられるようになりました。
+ヘルパーの関数特性は以下のようにする必要があります::
 
     function beforeRender($viewFile) {
 
@@ -912,283 +840,254 @@ look like::
     }
 
 
-Element caching, and view callbacks have been changed in 2.0 to help provide you
-with more flexibility and consistency. :doc:`Read more about those
-changes </views>`.
+エレメントのキャッシュと、ビューのコールバックは2.0でより強い柔軟性と整合性を提供するために変更されました。
+:doc:`これらの変更について詳しく見る </views>`
 
-CacheHelper decoupled
----------------------
-
-In previous versions there was a tight coupling between :php:class:`CacheHelper`
-and :php:class:`View`. For 2.0 this coupling has been removed and CacheHelper
-just uses callbacks like other helpers to generate full page caches.
-
-
-CacheHelper ``<cake:nocache>`` tags changed
--------------------------------------------
-
-In previous versions, CacheHelper used a special ``<cake:noncache>`` tag as
-markers for output that should not be part of the full page cache. These tags
-were not part of any XML schema, and were not possible to validate in HTML or
-XML documents. For 2.0, these tags have been replaced with HTML/XML comments::
-
-    <cake:noncache> becomes <!--nocache-->
-    </cake:nocache> becomes <!--/nocache-->
-
-The internal code for full page view caches has also changed, so be sure to
-clear out view cache files when updating.
-
-MediaView changes
------------------
-
-:php:func:`MediaView::render()` now forces download of unknown file types
-instead of just returning false. If you want you provide an alternate download
-filename you now specify the full name including extension using key 'name' in
-the array parameter passed to the function.
-
-
-PHPUnit instead of SimpleTest
-=============================
-
-All of the core test cases and supporting infrastructure have been ported to use
-PHPUnit 3.5. Of course you can continue to use SimpleTest in your application by
-replacing the related files. No further support will be given for SimpleTest and
-it is recommended that you migrate to PHPUnit as well. For some additional
-information on how to migrate your tests see PHPUnit migration hints.
-
-No more group tests
+Cacheヘルパーの分離
 -------------------
 
-PHPUnit does not differentiate between group tests and single test cases in the
-runner. Because of this, the group test options, and support for old style group
-tests has been removed. It is recommended that GroupTests be ported to
-``PHPUnit_Framework_Testsuite`` subclasses. You can find several examples of this
-in CakePHP's test suite. Group test related methods on ``TestManager`` have also
-been removed.
+前バージョンでは :php:class:`CacheHelper` と :php:class:`View` の間に強固な密結合がありました。
+2.0ではこの密結合は取り除かれ、CacheHelperはフルページキャッシュを生成するために他のヘルパーと同じくコールバックだけを使うようになりました。
 
-Testsuite shell
+
+Cacheヘルパーの ``<cake:nocache>`` タグの変更
+---------------------------------------------
+
+前バージョンでは、CacheHelperは特別な ``<cake:noncache>`` タグをフルページキャッシュの一部とすべできはない出力の目印として使っていました。
+このタグはXMLスキーマの要素ではなく、HTMLまたはXMLドキュメントで有効となり得ませんでした。
+2.0では、このタグはHTML・XMLのコメントに置き換えられました::
+
+    <cake:noncache> が <!--nocache-->
+    </cake:nocache> が <!--/nocache-->
+
+また、更新時に必ずビューキャッシュのファイルを削除するように、フルページビューキャッシュのための内部コード変更されました。
+
+MediaViewの変更
 ---------------
 
-The testsuite shell has had its invocation simplified and expanded. You no
-longer need to differentiate between ``case`` and ``group``. It is assumed that
-all tests are cases. In the past you would have done
-``cake testsuite app case models/post`` you can now do ``cake testsuite app
-Model/Post``.
+:php:func:`MediaView::render()` は定義されていないファイルタイプを、falseを返す代わりにダウンロードを強制するようになりました。
+別名でのダウンロードのためのファイル名を提供したいなら、この関数に渡す配列パラメーターに「name」キーを使って拡張子を含む完全な名前を指定します。
 
 
-The testsuite shell has been refactored to use the PHPUnit cli tool. It now
-supports all the command line options supported by PHPUnit.
-``cake testsuite help`` will show you a list of all possible modifiers.
+SimpleTestの替わりにPHPUnit
+===========================
 
-Models
+全てのコアのテストケースとテストの基盤はPHPUnit 3.5を使うように方向性を変えました。
+もちろん関連するファイル郡を置き換えることによってアプリケーションでSimpleTestを使い続けることもできます。
+SimpleTestをずっとサポートすることはもうないでしょう。
+そして、PHPUnitに移行することもまた推奨されます。
+テストを移行する方法についての更なる情報は、 PHPUnitへ移行するヒントを見てください。
+
+グループテストの廃止
+--------------------
+
+PHPUnitはグループテストと単一のテストケースを、テスト実行の中で区別しません。
+このため、グループテストのオプションと、古い形式のグループテストは削除されました。
+GroupTestを ``PHPUnit_Framework_Testsuite`` のサブクラスに移行することをお勧めします。
+CakePHPのテストスイートの中にこのサンプルとなるものがいくつか見つけられるでしょう。
+また、 ``TestManager`` のメソッドに依存していたグループテストも削除されました。
+
+テストスイートのシェル
+----------------------
+
+テストスイートのシェルはその呼び出しがシンプルに、また拡張がされました。
+今や、 ``case`` と ``group`` を識別する必要はなくなりました。
+全てのテストはテストケースであると家庭されます。
+以前は、 ``cake testsuite app case models/post`` としていたでしょうが、 ``cake testsuite app Model/Post`` とすることができるようになりました。
+
+
+テストスイートのシェルはPHPUnitのコマンドラインツールを使うように書き直されました。
+PHPUnitによって全てのコマンドラインオプションがサポートされています。
+全ての可能な修飾子のリストが ``cake testsuite help`` で参照できます。
+
+モデル
 ======
 
-Model relationships are now lazy loaded. You can run into a situation where
-assigning a value to a nonexistent model property will throw errors::
+関連モデルは遅延読み込みが為されるようになりました。
+存在しないモデルのプロパティに値を割り当てようとすると、エラーを投げるような事態を垣間見ることが出来るでしょう::
 
     <?php
     $Post->inexistentProperty[] = 'value';
 
-will throw the error "Notice: Indirect modification of overloaded property
-$inexistentProperty has no effect". Assigning an initial value to the property
-solves the issue::
+上記は「注意：オーバーロードされた（訳注：PHPのオーバーロードのこと）プロパティの$inexistentPropertyへの間接的な変更は効果がありません。」(*Notice: Indirect modification of overloaded property $inexistentProperty has no effect*)というエラーを投げることでしょう。
+以下のように、プロパティに初期値を与えることによってこの問題を解決できます::
 
     <?php
     $Post->nonexistentProperty = array();
     $Post->nonexistentProperty[] = 'value';
 
-Or just declare the property in the model class::
+また、以下のようにモデルのクラスにプロパティを定義するだけでも解決できます::
 
     <?php
     class Post {
         var $nonexistantProperty = array();
     }
 
-Either of these approaches will solve the notice errors.
+これらのどちらかのアプローチでnoticeエラーを回避できることでしょう。
 
-The notation of ``find()`` in Cake 1.2 is no longer supported. Finds should use
-notation ``$model->find('type', array(PARAMS))`` as in Cake 1.3.
+Cake 1.2での ``find()`` の文法はサポートされなくなりました。
+findはCake 1.3の ``$model->find('type', array(PARAMS))`` のような文法を使うべできす。
 
-- ``Model::$_findMethods`` is now ``Model::$findMethods``.  This property is now
-  public and can be modified by behaviors.
+- ``Model::$_findMethods`` は ``Model::$findMethods`` になりました。
+  このプロパティはpublicとなり、ビヘイビアによって更新することができるようになりました。
 
 
-Database objects
-----------------
+データベースオブジェクト
+------------------------
 
-Cake 2.0 introduces some changes to Database objects that should not greatly
-affect backwards compatibility. The biggest one is the adoption of PDO for
-handling database connections. If you are using a vanilla installation of PHP 5
-you will already have installed the needed extensions, but you may need to
-activate individual extensions for each driver you wish to use.
+Cake 2.0はデータベースオブジェクトに後方互換性への大きな影響の無い変更を加えました。
+最大のものはデータベースの接続処理にPDOを採用したことです。
+PHP5のありきたりなインストールを利用しているなら、既に必要な拡張はインストールされているでしょう。
+しかし、使いたいと思う各ドライバのための個々の拡張を活性化する必要があるかもしれません。
 
-Using PDO across all DBOs let us homogenize the code for each one and provide
-more reliable and predictable behavior for all drivers. It also allowed us to
-write more portable and accurate tests for database related code.
+全てのDBOに渡ってPDOを利用することは、各々のDBOに関してコードを均一にすることができ、全てのドライバでより信頼できる、予測可能な振る舞いを提供することができます。
+また、データベースに関するコードのより移植可能で正確なテストを書くことも可能になりました。
 
-The first thing users will probably miss is the "affected rows" and "total rows"
-statistics, as they are not reported due to the more performant and lazy design
-of PDO, there are ways to overcome this issue but very specific to each
-database. Those statistics are not gone, though, but could be missing or even
-inaccurate for some drivers. 
+まずはじめに「 *affected rows* 」 と 「 *total rows* 」の統計が無いことに気づくかもしれません。
+これはよりパフォーマンスを上げるために、またPDOの遅延設計のために報告されないもので、この問題を克服する方法はありますが、非常に各データベースに特有のことです。
+これらの統計はどこかに行ってしまった、というわけではないですが、いくつかのドライバでは失われるか正確でない可能性があります。
 
-A nice feature added after the PDO adoption is the ability to use prepared
-statements with query placeholders using the native driver if available.
+PDOを採用した後に追加された素晴らしい機能のうちの一つは、利用可能ならばネイティブなドライバを使ったクエリのプレースホルダを用いたプリペアードステートメント(*prepared statements*)を使えるようになったことです。
 
-List of Changes
-~~~~~~~~~~~~~~~
+変更のリスト
+~~~~~~~~~~~~
 
-* DboMysqli was removed, we will support DboMysql only.
-* API for DboSource::execute has changed, it will now take an array of query
-  values as second parameter::
+* DboMysqliが削除されました。
+  DboMysqlのみをサポートします。
+* DboSource::executeのAPIが変更されました。
+  二番目の引数としてクエリの値の配列をとるようになりました::
 
     <?php
     public function execute($sql, $params = array(), $options = array())
 
-  became::
+  上記が以下のようになりました::
 
     <?php
     public function execute($sql, $options = array(), $params = array())
 
-  third parameter is meant to receive options for logging, currently it only
-  understands the "log" option.
+  第三引数はログのオプションを受け取ることを意味し、現在は「log」オプションのみ理解します。
 
-* DboSource::value() looses its third parameter, it was not used anyways
-* DboSource::fetchAll() now accepts an array as second parameter, to pass values
-  to be bound to the query, third parameter was dropped. Example::
+* DboSource::value() は第三引数を失い、これはどのような場合も使われることはありませんでした。
+* DboSource::fetchAll() は第二引数に配列を受け取ることができるようになり、クエリに結び付けられる値を渡します。
+  第三引数は削除されました。例::
 
     <?php
     $db->fetchAll('SELECT * from users where username = ? AND password = ?', array('jhon', '12345'));
     $db->fetchAll('SELECT * from users where username = :username AND password = :password', array('username' => 'jhon', 'password' => '12345'));
 
-The PDO driver will automatically escape those values for you.
+PDOドライバは自動的にこれらの値をエスケープします。
 
-* Database statistics are collected only if the "fullDebug" property of the
-  corresponding DBO is set to true.
-* New method DboSource::getConnection() will return the PDO object in case you
-  need to talk to the driver directly.
-* Treatment of boolean values changed a bit to make it more cross-database
-  friendly, you may need to change your test cases.
-* Postgresql support was immensely improved, it now correctly creates schemas,
-  truncate tables, and is easier to write tests using it.
-* DboSource::insertMulti() will no longer accept sql string, just pass an array
-  of fields and a nested array of values to insert them all at once
-* TranslateBehavior was refactored to use model virtualFields, this makes the
-  implementation more portable.
-* All tests cases with Mysql related stuff were moved to the corresponding
-  driver test case. This left the DboSourceTest file a bit skinny.
-* Transaction nesting support. Now it is possible to start a transaction several
-  times. It will only be committed if the commit method is called the same
-  amount of times.
-* Sqlite support was greatly improved. The major difference with cake 1.3 is
-  that it will only support Sqlite 3.x . It is a great alternative for
-  development apps, and quick at running test cases.
-* Boolean column values will be casted to php native boolean type automatically,
-  so make sure you update your test cases and code if you were expecting the
-  returned value to be a string or an integer: If you had a "published" column in
-  the past using mysql all values returned from a find would be numeric in the
-  past, now they are strict boolean values.
+* データベースの統計は関連するDBOの「fullDebug」プロパティがtrueにセットされている時のみ収集されるようになりました。
+* 新しいメソッドDboSource::getConnection()は直接ドライバと対話する必要がある場合のためにPDOオブジェクトを返します。
+* 真偽値の扱いがよりクロスデータベース(*cross-database*)指向にするため、多少変更が成されました。
+  テストケースを変更する必要があるかもしれません。
+* Postgresqlのサポートは莫大に向上し、正しいスキーマの生成、テーブルのtruncateができるようになり、これを使ったテストを書くのがより簡単になりました。
+* DboSource::insertMulti() はSQL文字列を受け取らないようになりました。
+  一度に全てを挿入するためのフィールドの配列とネストされた値の配列を単に渡してください。
+* TranslateBehavior はモデルのvirtualFieldsを使うように書きなおされました。
+  これで実装がより移植可能になりました。
+* 全てのMysqlに関するもののテストケースは関連するドライバのテストケースに移されました。
+  これによりDboSourceTestのファイルを多少薄くできました。
+* トランザクションのネストのサポート。
+  何重かにトランザクションをを開始することができるようになりました。
+  commitメソッドが同じ回数だけ呼び出された時のみコミットがなされます。
+* Sqliteサポートが素晴らしく向上しました。
+  cake 1.3との主な違いはSqlite 3.xのみをサポートするということです。
+  これは開発中のアプリケーションで素晴らしい代替物となり、テストケースの実行が素早くなります。
+* 真偽値カラムの値はPHPネイティブの真偽値型に自動的にキャストされます。
+  従って、もし返り値を文字列や数値として期待しているなら、テストケースやコードを必ず書きなおしてください:
+  例えば以前に「published」カラムを使っていなら、mysqlを使っていればfindから返ってくるの全ての値は以前数値でしたが、今は厳密に真偽値となりました。
 
 BehaviorCollection
 ------------------
 
--  ``BehaviorCollection`` no longer ``strtolower()'s`` mappedMethods. Behavior
-   mappedMethods are now case sensitive.
+-  ``BehaviorCollection`` はmappedMethodsを ``strtolower()`` しないようになりました。
+   ビヘイビアのmappedMethodsは大文字小文字を区別するようになりました。
 
-Plugins
-=======
+プラグイン
+==========
 
-Plugins no longer magically append their plugin prefix to components, helpers
-and models used within them. You must be explicit with the components, models,
-and helpers you wish to use. In the past::
+プラグインはコンポーネント、ヘルパー、モデルに、マジックとして自身のプラグイン接頭辞を付け加えなくなりました。
+明示的に使いたいものを指定しなければなりません。以前は::
 
     var $components = array('Session', 'Comments');
 
-Would look in the controller's plugin before checking app/core components. It
-will now only look in the app/core components. If you wish to use objects from a
-plugin you must put the plugin name::
+とすると、アプリケーション・コアのコンポーネントをチェックする前にコントローラのプラグインを調べていたでしょう。
+これはアプリケーション・コアのコンポーネントのみを見るようになりました。
+プラグインからオブジェクトを使いたい場合は、プラグインの名前を指定しなければなりません::
 
     var $components = array('Session', 'Comment.Comments');
 
-This was done to reduce hard to debug issues caused by magic misfiring. It also
-improves consistency in an application, as objects have one authoritative way to
-reference them.
+これは、マジックの失敗によって起こされていた問題をデバッグすることの煩雑さを減らすために為されました。
+また、オブジェクトの参照が単一の信頼できる方法になったことで、アプリケーションでの矛盾をなくします。
 
-Console
-=======
+コンソール
+==========
 
-Much of the console framework was rebuilt for 2.0 to address many of the
-following issues:
+コンソールのフレームワークの大部分は以下の問題の多くを処理するために、2.0で再建されました:
 
--  Tightly coupled.
--  It was difficult to make help text for shells.
--  Parameters for shells were tedious to validate.
--  Plugin tasks were not reachable.
--  Objects with too many responsibilities.
+-  強固な密結合
+-  シェルでヘルプ文字列を作るのが難しかった
+-  シェルのパラメータを検証するのは面倒だった
+-  プラグインのタスクは到達不可能だった（訳注：プラグインから別のプラグインのタスクは呼び出せなかった
+-  オブジェクトの責任が大きすぎた
 
-Backwards incompatible Shell API changes
-----------------------------------------
+後方非互換なShellのAPIの変更
+----------------------------
 
--  ``Shell`` no longer has an ``AppModel`` instance. This ``AppModel`` instance
-   was not correctly built and was problematic.
--  ``Shell::_loadDbConfig()`` has been removed. It was not generic enough to
-   stay in Shell. You can use the ``DbConfigTask`` if you need to ask the user
-   to create a db config.
--  Shells no longer use ``$this->Dispatcher`` to access stdin, stdout, and
-   stderr. They have ``ConsoleOutput`` and ``ConsoleInput`` objects to handle
-   that now.
--  Shells lazy load tasks, and use ``TaskCollection`` to provide an interface
-   similar to that used for Helpers, Components, and Behaviors for on the fly
-   loading of tasks.
--  ``Shell::$shell`` has been removed.
--  ``Shell::_checkArgs()`` has been removed. Configure a ``ConsoleOptionParser``
--  Shells no longer have direct access to ``ShellDispatcher``. You should use
-   the ``ConsoleInput``, and ``ConsoleOutput`` objects instead. If you need to
-   dispatch other shells, see the section on 'Invoking other shells from your
-   shell'.
+-  ``Shell`` は ``AppModel`` のインスタンスを保持しないようになりました。
+   この ``AppModel`` のインスタンスは正しく組み立てられておらず、問題に満ちていました。
+-  ``Shell::_loadDbConfig()`` は削除されました。
+   これは一般的にShellに置くのにふさわしいものではありませんでした。
+   もしユーザにDB設定を作成するかどうかをユーザに問う必要があるなら、 ``DbConfigTask`` を使うことが出来ます。
+-  Shellは標準入力、標準出力、標準エラー出力にアクセスするために ``$this->Dispatcher`` を使わないようになりました。
+   今はそれらを扱うために ``ConsoleOutput`` と ``ConsoleInput`` オブジェクトをもつようになりました。
+-  シェルはタスクを遅延読み込みし、タスクを実行時読み込みする時にヘルパー、コンポーネント、ビヘイビアで使われるものと似たインターフェイスを、 ``TaskCollection`` を使って提供します。
+-  ``Shell::$shell`` は削除されました。
+-  ``Shell::_checkArgs()`` は削除されました。
+   ``ConsoleOptionParser`` に設定をしてください。
+-  シェルは ``ShellDispatcher`` に直接アクセスしないようになりました。
+   代わりに ``ConsoleInput`` と ``ConsoleOutput`` オブジェクトを使用しなくてはなりません。
+   他のシェルを立ち上げる必要があるなら、「Invoking other shells from your shell」セクションを見てください。
 
-Backwards incompatible ShellDispatcher API changes
---------------------------------------------------
+後方非互換なShellDispathserのAPIの変更
+--------------------------------------
 
--  ``ShellDispatcher`` no longer has stdout, stdin, stderr file handles.
--  ``ShellDispatcher::$shell`` has been removed.
--  ``ShellDispatcher::$shellClass`` has been removed.
--  ``ShellDispatcher::$shellName`` has been removed.
--  ``ShellDispatcher::$shellCommand`` has been removed.
--  ``ShellDispatcher::$shellPaths`` has been removed, use
-   ``App::path('shells');`` instead.
--  ``ShellDispatcher`` no longer uses 'help' as a magic method that has special
-   status. Instead use the ``--help/-h`` options, and an option parser.
+-  ``ShellDispatcher`` は標準出力、標準入力、標準エラー出力のファイルハンドルを持たないようになりました。
+-  ``ShellDispatcher::$shell`` は削除されました。
+-  ``ShellDispatcher::$shellClass`` は削除されました。
+-  ``ShellDispatcher::$shellName`` は削除されました。
+-  ``ShellDispatcher::$shellCommand`` は削除されました。
+-  ``ShellDispatcher::$shellPaths`` は削除されました。代わりに ``App::path('shells');`` を使ってください。
+-  ``ShellDispatcher`` は「help」を特殊な状態をもつマジックメソッドとして使わないようになりました。
+   代わりに ``--help/-h`` オプション、またオプションパーサーを使ってください。
 
-Backwards incompatible Shell Changes
-------------------------------------
+後方非互換なShellの変更
+-----------------------
 
--  Bake's ControllerTask no longer takes ``public`` and ``admin`` as passed
-   arguments. They are now options, indicated like ``--admin`` and ``--public``.
+-  BakeのControllerTaskは ``public`` と ``admin`` を引数として取らなくなりました。
+   これらはオプションになり、 ``--admin`` や ``--public`` のように指定されます。
 
-It's recommended that you use the help on shells you use to see what if any
-parameters have changed. It's also recommended that you read the console new
-features for more information on new APIs that are available.
+あなたが使うシェルが何らかのパラメータが変更されたならば、そのシェルのヘルプを使用することをお勧めします。
+また、利用可能となった新しいAPIの詳しい機能について、コンソールの新機能を見ることもお勧めします。
 
-Debugging
-=========
+デバッグ
+========
 
-The ``debug()`` function now defaults to outputting html safe strings. This is
-disabled if being used in the console. The ``$showHtml`` option for ``debug()``
-can be set to false to disable html-safe output from debug.
+``debug()`` 関数はデフォルトでHTMLセーフな文字列で出力をするようになりました。
+コンソールで使用される場合はこれは無効になります。
+デバッグのために、 ``debug()`` の ``$showHtml`` オプションにfalseを指定して、HTMLセーフな出力を無効にすることもできます。
 
 ConnectionManager
 =================
 
-``ConnectionManager::enumConnectionObjects()`` will now return the current
-configuration for each connection created, instead of an array with filename,
-classname and plugin, which wasn't really useful.
+``ConnectionManager::enumConnectionObjects()`` はファイル名、クラス名、プラグインの配列の代わりに作成されたコネクション各々の現在の設定を返します。
+これは真に有用なものではありませんでした。
 
-When defining database connections you will need to make some changes to the way
-configs were defined in the past. Basically in the database configuration class,
-the key "driver" is not accepted anymore, only "datasource", in order to make it
-more consistent. Also, as the datasources have been moved to packages you will
-need to pass the package they are located in. Example::
+データベースのコネクションを定義する際、以前設定を定義してた方法にいくつかの変更を加える必要があります。
+基本的にデータベース設定クラスでは、より良い一貫性を保つために、「driver」クラスはもう受け付けません。
+また、データソースがパッケージに移動したため、探索するためのパッケージを渡す必要があります。
+例を挙げます::
 
     <?php
     public $default = array(

@@ -1,11 +1,10 @@
-Appendices
-##########
+付録
+####
 
-Appendices contain information regarding the new features
-introduced in 2.0, and the migration path from 1.3 to 2.0.
+付録は2.0で導入された新機能に関する情報と、1.3から2.0への移行の道程を含みます。
 
-2.0 Migration Guide
-=========================
+2.0移行ガイド
+=============
 
 .. toctree::
     :maxdepth: 1
@@ -14,8 +13,8 @@ introduced in 2.0, and the migration path from 1.3 to 2.0.
     appendices/new-features-in-cakephp-2-0
     appendices/phpunit-migration-hints
 
-Migration from 1.2 to 1.3
-=========================
+1.2から1.3への移行
+==================
 
 .. toctree::
     :maxdepth: 1
@@ -23,8 +22,8 @@ Migration from 1.2 to 1.3
     appendices/migrating-from-cakephp-1-2-to-1-3
     appendices/new-features-in-cakephp-1-3
 
-General Information
-===================
+一般的な情報
+============
 
 .. toctree::
     :maxdepth: 1

@@ -1,51 +1,36 @@
-CakePHP Development Process
-###########################
+CakePHPの開発プロセス
+#####################
 
-Here we attempt to explain the process we use when developing the
-CakePHP framework. We rely heavily on community interaction through
-tickets and IRC chat. IRC is the best place to find members of the
-development team and discuss ideas, the latest code, and make general
-comments. If something more formal needs to be proposed or there is a
-problem with a release, the ticket system is the best place to share
-your thoughts.
+ここでCakePHPフレームワークの開発をする時に使ってるプロセスを説明しようと思います。
+私たちはチケットやIRCチャットを通したコミュニティの対話に非常に信頼しています。
+IRCは開発チームのメンバーを見つけてアイデア、最新のコードについて議論する、全般的ななコメントをするのに最適な場所です。
+もし何か、より正式な要望の提出、リリースに問題があるなどの場合は、チケットシステムはあなたの考えを共有する最適な場所となります。
 
-We currently maintain 4 versions of CakePHP.
+私たちは現在CakePHPの4つのバージョンを整備しています。
 
--  **stable** : Tagged releases intended for production where stability
-   is more important than features. Issues filed against these releases
-   will be fixed in the related branch, and be part of the next release.
--  **maintenance branch** : Development branches become maintenance
-   branches once a stable release point has been reached. Maintenance
-   branches are where all bugfixes are committed before making their way
-   into a stable release. Maintenance branches have the same name as the
-   major version they are for. eg. *1.2*. If you are using a stable
-   release and need fixes that haven't made their way into a stable
-   release check here.
--  **development branches** : Development branches contain leading edge
-   fixes and features. They are named after the version number they are
-   for. eg. *1.3*. Once development branches have reached a stable
-   release point they become maintenance branches, and no further new
-   features are introduced unless absolutely necessary.
--  **feature branches** : Feature branches contain unfinished or
-   possibly unstable features and are recommended only for power users
-   interested in the most advanced feature set and willing to contribute
-   back to the community. Feature branches are named with the following
-   convention *version-feature*. An example would be *1.3-router* Which
-   would contain new features for the Router for 1.3.
+-  **安定版**(*stable*) : 機能より安定が重要な、本番用の意図されたタグの着けられたリリースです。
+   これらのリリースに対してあてがわれた問題は関連するブランチで修正され、次のリリースの一部にもなります。
+-  **保守ブランチ**(*maintenance branch*) : 一旦安定版リリースの瞬間が近づいてきたとき、開発ブランチは保守ブランチに生まれ変わります。
+   保守ブランチは、開発ブランチが安定版リリースになる前に、全てのバグ修正がコミットされる場所です。
+   保守ブランチはそのメジャーバージョンと同じ名前がつけられます。
+   例えば、 *1.2* になります。
+   もし安定板リリースを使っていて、安定版リリースに入っていない修正が必要なら、ここをチェックしてください。
+-  **開発ブランチ**(*development branches*) : 開発ブランチは稀なケースのための修正と機能を含みます。
+   これらはバージョン番号にちなんで命名されます。
+   例えば、 *1.3* になります、
+   一旦安定版リリースの瞬間が近づいてきたとき、開発ブランチは保守ブランチに生まれ変わり、絶対に必要でない限りは更に新しい機能は導入されません。
+-  **機能ブランチ**(*feature branches*) : 機能ブランチは完了してないまたは安定しない可能性のある機能で、最先端の機能セットに興味のあるへビーユーザのみに推奨されており、コミュニティへ貢献のお返しをする意思もあります。
+   機能ブランチは次の規約を元に命名されています： *バージョン-機能* 。
+   例としては、 *1.3-router* 、これは1.3のRouterのための新しい機能となります。
 
-Hopefully this will help you understand what version is right for you.
-Once you pick your version you may feel compelled to contribute a bug
-report or make general comments on the code.
+このことが、きっとどのバージョンがあなたにとって正しいかどうかの理解を助けることでしょう。
+一度バージョンを選択したら、バグ報告やコードの全般的なコメントをせずにはいられないかもしれません。
 
--  If you are using a stable version or maintenance branch, please submit
-   tickets or discuss with us on IRC.
--  If you are using the development branch or feature branch, the first
-   place to go is IRC. If you have a comment and cannot reach us in IRC
-   after a day or two, please submit a ticket.
+-  もし安定バージョンまたは保守ブランチを使っているなら、チケットを送るかIRCで私たちと議論してください。
+-  もし開発ブランチか機能ブランチを使っているなら、まず最初に行くのはIRCです。
+   もし言いたいことがあり、1～2日IRCで私たちと会うことが出来なかったら、チケットを送ってください。
 
-If you find an issue, the best answer is to write a test. The best
-advice we can offer in writing tests is to look at the ones included in
-the core.
+もし問題を見つけたら、テストを書くことが最高の答えです。
+テストを書く中で私たちが提案する最大のアドバイスは、コアに含まれるテストを見ましょうということです。
 
-As always, if you have any questions or comments, visit us at #cakephp
-on irc.freenode.net.
+いつも通り、どんな質問でもコメントでもありましたら、irc.freenode.netの#cakephpで私たちを訪ねてください。

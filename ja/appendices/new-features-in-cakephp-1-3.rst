@@ -1,28 +1,25 @@
-New features in CakePHP 1.3
---------------------------------
+CakePHP 1.3の新機能
+-------------------
 
-CakePHP 1.3 introduced a number of new features. This guide
-attempts to summarize those changes and point to expanded
-documentation where necessary.
+CakePHP 1.3は数多くの機能を取り入れました。
+このガイドはそれらの変更点を要約しようとする試みです。
+また、必要ならば、そのために拡張されたドキュメントを指し示します。
 
 Components
 ~~~~~~~~~~
 
 **SecurityComponent**
 
-The various requireXX methods like ``requireGet`` and
-``requirePost`` now accept a single array as their argument as well
-as a collection of string names.
+種々の ``requireGet`` や ``requirePost`` のようなrequireXXメソッドは、今や名前を指定する際に、引数一つ一つに文字列を渡すだけでなく、第一引数に単純な配列を渡すこともできるようになりました。
 
 ::
 
     $this->Security->requirePost(array('edit', 'update'));
 
-**Component settings**
+**コンポーネントの設定**
 
-Component settings for all core components can now be set from the
-``$components`` array. Much like behaviors, you can declare
-settings for components when you declare the component.
+全てのコアコンポーネントに対する設定は、``$components`` 配列から設定できるようになりました。
+ビヘイビアのように、コンポーネントを宣言する際、コンポーネントの設定を宣言することができます。
 
 ::
 
@@ -36,68 +33,59 @@ settings for components when you declare the component.
         )
     );
 
-This should reduce clutter in your Controller's ``beforeFilter()``
-methods.
+はコントローラの ``beforeFilter()`` メソッドの乱雑さを減らすはずです。
 
 **EmailComponent**
 
 
--  You can now retrieve the rendered contents of sent Email
-   messages, by reading ``$this->Email->htmlMessage`` and
-   ``$this->Email->textMessage``. These properties will contain the
-   rendered email content matching their name.
--  Many of EmailComponent's private methods have been made
-   protected for easier extension.
--  EmailComponent::$to can now be an array. Allowing easier setting
-   of multiple recipients, and consistency with other properties.
--  ``EmailComponent::$messageId`` has been added, it allows control
-   over the Message-ID header for email messages.
+-  送信されたメールのメッセージの、レンダリング済みの内容を、 ``$this->Email->htmlMessage`` と ``$this->Email->textMessage`` を読むことによって検索することができるようになりました。
+   これらのプロパティは、名前に即したレンダリングがなされたメールの内容に等しくなるでしょう。
+-  多くのEmailComponentのprivateメソッドは、拡張しやすいようにprotectedになりました。
+-  EmailComponent::$to は今や配列にすることができます。
+   容易に複数の受取人を指定することと、他のプロパティとの整合性を取ることが可能になりました。
+-  ``EmailComponent::$messageId`` が追加されました。
+   これによりメールの「Message-ID」ヘッダを制御することが可能になりました。
 
-View & Helpers
-~~~~~~~~~~~~~~
+ビューとヘルパー
+~~~~~~~~~~~~~~~~
 
-Helpers can now be addressed at ``$this->Helper->func()`` in
-addition to ``$helper->func()``. This allows view variables and
-helpers to share names and not create collisions.
+ルパーは、今や ``$helper->func()`` に加えて、 ``$this->Helper->func()`` にもマッピングされるようになりました。
+これは、ビューの変数とヘルパーの名前との衝突を避けることができます。
 
-**New JsHelper and new features in HtmlHelper**
+**新しい JsHelper と HtmlHelper の新機能**
 
-See :doc:`JsHelper documentation </core-libraries/helpers/js>` for more information
+更なる情報は :doc:`JsHelperドキュメント </core-libraries/helpers/js>` を見てください。
 
 **Pagination Helper**
 
-Pagination helper provides additional css classes for styling and
-you can set the default sort() direction.
-``PaginatorHelper::next()`` and ``PaginatorHelper::prev()`` now
-generate span tags by default, instead of divs.
+PaginationヘルパはスタイリングのためにCSSのクラスの追加を提供します。
+また、デフォルトのsort()の方向をセットすることができます。
+``PaginatorHelper::next()`` と ``PaginatorHelper::prev()`` は、今やdivタグの代わりにspanタグをデフォルトとして生成します。
 
 **Helper**
 
-``Helper::assetTimestamp()`` has been added. It will add timestamps
-to any asset under WWW\_ROOT. It works with
-``Configure::read('Asset.timestamp');`` just as before, but the
-functionality used in Html and Javascript helpers has been made
-available to all helpers. Assuming ``Asset.timestamp == force``
+``Helper::assetTimestamp()`` が追加されました。
+これはWWW\_ROOT以下にあるアセットにタイムスタンプを付与します。
+従来と同様に、 ``Configure::read('Asset.timestamp');`` を伴って動作しますが、HtmlヘルパーとJavascriptヘルパーで使われていたこの機能は、全てのヘルパーで利用可能になりました。 ``Asset.timestamp == force`` と仮定すると、
 
 ::
 
     $path = 'css/cake.generic.css'
     $stamped = $this->Html->assetTimestamp($path);
     
-    //$stamped contains 'css/cake.generic.css?5632934892'
+    //$stamped は 'css/cake.generic.css?5632934892' （のような）文字列が入る
 
-The appended timestamp contains the last modification time of the
-file. Since this method is defined in ``Helper`` it is available to
-all subclasses.
+付加されたタイムスタンプはファイルの最終更新時刻に等しいです。
+このメソッドは ``Helper`` で定義されたので、全てのサブクラスで利用可能になりました。
 
 **TextHelper**
 
-highlight() now accepts an array of words to highlight.
+highlight() はハイライトするための単語の配列を受け入れるようになりました。
 
 **NumberHelper**
 
-A new method ``addFormat()`` has been added. This method allows you
-to set currency parameter sets, so you don't have to retype them.
+新しいメソッド ``addFormat()`` が追加されました。
+このメソッドはcurrencyパラメータの組み合わせを設定することを可能にし、同じものを何度も入力する必要がなくなりました。
 
 ::
 
@@ -106,30 +94,24 @@ to set currency parameter sets, so you don't have to retype them.
 
 **FormHelper**
 
-The form helper has had a number of improvements and API
-modifications, see
-`Form Helper improvements <http://book.cakephp.org/view/1616/x1-3-improvements>`_
-for more information.
+フォームヘルパーは数多くの改良と、APIの更新があります。
+更なる情報は `Formヘルパーの改良点 <http://book.cakephp.org/view/1616/x1-3-improvements>`_
+を見てください。
 
-Logging
-~~~~~~~
+ログ
+~~~~
 
-Logging and ``CakeLog`` have been enhanced considerably, both in
-features and flexibility. See
-`New Logging features </view/1194/Logging>`_ for more information.
+ログとCakeLogは機能と柔軟性において共にかなりの進歩を見せました。
+更なる情報は `新しいログの機能 <http://book.cakephp.org/view/1194/Logging>`_ を見てください。
 
-Caching
-~~~~~~~
-
-Cache engines have been made more flexible in 1.3. You can now
-provide custom ``Cache`` adapters in ``app/libs`` as well as in
-plugins using ``$plugin/libs``. App/plugin cache engines can also
-override the core engines. Cache adapters must be in a cache
-directory. If you had a cache engine named ``MyCustomCacheEngine``
-it would be placed in either ``app/libs/cache/my_custom_cache.php``
-as an app/libs. Or in ``$plugin/libs/cache/my_custom_cache.php`` as
-part of a plugin. Cache configs from plugins need to use the plugin
-dot syntax.
+キャッシュ
+~~~~~~~~~~
+1.3 では、キャッシュエンジンがよりフレキシブルになりました。 ``app/libs`` にカスタム ``Cache`` アダプタを用意することができます。
+もちろん  ``$plugin/libs`` にもです。
+また、app・plugin のキャッシュエンジンはコアのエンジンを上書きできます。
+Cache アダプタは cache ディレクトリに置く必要があります。
+``MyCustomCacheEngine`` という名前のキャッシュエンジンがあるなら、 ``app/libs/cache/my_custom_cache.php`` か ``$plugin/libs/cache/my_custom_cache.php`` のどちらかに置くことになります。
+プラグインのキャッシュ設定は、ドットを使った文法を使う必要があります。
 
 ::
 
@@ -138,43 +120,37 @@ dot syntax.
         ...
     ));
 
-App and Plugin cache engines should be configured in
-``app/bootstrap.php``. If you try to configure them in core.php
-they will not work correctly.
+アプリケーションまたはプラグインのキャッシュエンジンは ``app/bootstrap.php`` で設定する必要があります。
+core.phpでこれらを設定しようとすると、正しく動作しないでしょう。
 
-**New Cache methods**
+**新しいキャッシュメソッド**
 
-Cache has a few new methods for 1.3 which make introspection and
-testing teardown easier.
+キャッシュは 1.3 で幾つかの新しいメソッドがあり、テストのティアダウン(*teardown*)とイントロスペクション(*introspection*)を容易にします。
 
 
--  ``Cache::configured()`` returns an array of configured Cache
-   engine keys.
--  ``Cache::drop($config)`` drops a configured Cache engine. Once
-   dropped cache engines are no longer readable or writeable.
--  ``Cache::increment()`` Perform an atomic increment on a numeric
-   value. This is not implemented in FileEngine.
--  ``Cache::decrement()`` Perform an atomic decrement on a numeric
-   value. This is not implemented in FileEngine.
+-  ``Cache::configured()`` は設定されたキャッシュエンジンのキーの配列を返します。
+-  ``Cache::drop($config)`` は設定されたキャッシュエンジンを破棄します。
+   一度破棄されたキャッシュエンジンは二度と書き込みや読み込みをすることができません。
+-  ``Cache::increment()`` は数字の値に対して基本的なインクリメントを実行します。
+   これは FileEngine では実装されていません。
+-  ``Cache::decrement()`` は数字の値に対して基本的なデクリメントを実行します。
+   これは FileEngine では実装されていません。
 
-Models, Behaviors and Datasource
+モデルとビヘイビアとデータソース
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**App::import(), datasources & datasources from plugins**
+**App::import()、データソース、プラグインのデータソース**
 
-Datasources can now be included loaded with ``App::import()`` and
-be included in plugins! To include a datasource in your plugin you
-put it in ``my_plugin/models/datasources/your_datasource.php``. To
-import a Datasource from a plugin use
-``App::import('Datasource', 'MyPlugin.YourDatasource');``
+データソースは ``App::import()`` を用いてインクルードできるようになり、またプラグインからインクルードできるようになりました！
+プラグインにデータソースをインクルードするには、 ``my_plugin/models/datasources/your_datasource.php`` に置いてください。
+データソースをプラグインからインポートするには、
+``App::import('Datasouce', 'MyPlugin.YourDatasource');``
+を用いてください。
 
-**Using plugin datasources in your database.php**
+**database.phpでプラグインのデータソースを使うには**
 
-You can use plugin datasources by setting the datasource key with
-the plugin name. For example if you had a WebservicePack plugin
-with a LastFm datasource
-(plugin/webservice\_pack/models/datasources/last\_fm.php), you
-could do:
+プラグイン名を用いた「datesource」キーを設定することによって、プラグインのデータソースを使うことが出来ます。
+例えば、LastFmデータソースを含むWebservicePackプラグイン(plugin/webservice\_pack/models/datasources/last\_fm.php)があるとすると、このようにできます：
 
 ::
 
@@ -182,61 +158,61 @@ could do:
         'datasource' => 'WebservicePack.LastFm'
         ...
 
-**Model**
+**モデル**
 
 
--  Missing Validation methods now trigger errors, making debugging
-   why validation isn't working easier.
--  Models now support
-   `virtual fields </view/1608/Virtual-fields>`_
+-  バリデーションメソッドが無い場合にエラーを引き起こすようになりました。
+   何故バリデーションがうまく働かないかをデバッグするのが容易になりました。
+-  モデルは
+   `バーチャルフィールド <http://book.cakephp.org/view/1608/Virtual-fields>`_
+   をサポートするようになりました。
 
-**Behaviors**
+**ビヘイビア**
 
-Using behaviors that do not exist, now triggers a ``cakeError``
-making missing behaviors easier to find and fix.
+存在しないビヘイビアを使おうとすると、missing behaviorsを出力する ``cakeError`` を引き起こすようになりました。
+これによりビヘイビアが見つからないことを発見することと、修正することが容易になりました。
 
 **CakeSchema**
 
-CakeSchema can now locate, read and write schema files to plugins.
-The SchemaShell also exposes this functionality, see below for
-changes to SchemaShell. CakeSchema also supports
-``tableParameters``. Table Parameters are non column specific table
-information such as collation, charset, comments, and table engine
-type. Each Dbo implements the tableParameters they support.
+CakeSchemaがプラグインに対して、スキーマファイルを設置/読み込み/書き込みできるようになりました。
+またSchemaShellはこの機能を公開しています。
+SchemaShellへの変更は下記を見てください。
+また、CakeSchemaは ``tableParameters`` をサポートします。
+テーブルパラメータは非カラムな、テーブルの特定の情報です。
+これは照合順序、文字セット、コメント、テーブルエンジン種別のようなものです。
+各々のDBOは自身がサポートするテーブルパラメータを実装します。
 
-**tableParameters in MySQL**
+**MySQLでのテーブルパラメータ**
 
-MySQL supports the greatest number of tableParameters; You can use
-tableParameters to set a variety of MySQL specific settings.
-
-
--  ``engine`` Control the storage engine used for your tables.
--  ``charset`` Control the character set used for tables.
--  ``encoding`` Control the encoding used for tables.
-
-In addition to tableParameters MySQL dbo's implement
-``fieldParameters``. fieldParameters allow you to control MySQL
-specific settings per column.
+MySQLは一番多くのテーブルパラメータをサポートしています。
+種々のMySQL特有の設定をするのに、テーブルパラメータを使うことが出来ます。
 
 
--  ``charset`` Set the character set used for a column
--  ``encoding`` Set the encoding used for a column
+-  ``engine`` テーブルで使われるストレージエンジンをコントロールします。
+-  ``charset``  テーブルで使われる文字セットをコントロールします。
+-  ``encoding``  テーブルで使われるエンコーディングをコントロールします。
 
-See below for examples on how to use table and field parameters in
-your schema files.
+テーブルパラメータに加えて、MySQLのDBOは ``fieldParameters`` を実装しています。
+フィールドパラメータはカラム毎のMySQL特有の設定をコントロール可能にします。
 
-**tableParameters in Postgres**
 
-....
+-  ``charset`` カラムで使われる文字セットを指定します。
+-  ``encoding`` カラムで使われるエンコーディングを指定します。
 
-**tableParameters in SQLite**
+下記のテーブルパラメータとフィールドパラメータをスキーマファイルでどのように使うかの例を見てください。
+
+**Postgresでのテーブルパラメータ**
 
 ....
 
-**Using tableParameters in schema files**
+**SQLiteでのテーブルパラメータ**
 
-You use ``tableParameters`` just as you would any other key in a
-schema file. Much like ``indexes``:
+....
+
+**スキーマファイルでテーブルパラメータを使う**
+
+スキーマファイルで他のキーを使うのと同様に、 ``tableParameters`` を使います。
+``indexes`` とよく似ています：
 
 ::
 
@@ -255,220 +231,187 @@ schema file. Much like ``indexes``:
         )
     );
 
-is an example of a table using ``tableParameters`` to set some
-database specific settings. If you use a schema file that contains
-options and features your database does not implement, those
-options will be ignored. For example if you imported the above
-schema to a PostgreSQL server, all of the tableParameters would be
-ignore as PostgreSQL does not support any of the included options.
+これはいくつかのデータベース特有の設定をするための ``tableParameters`` を使ったテーブルの例となります。
+データベースが実装していないオプションや機能が含まれたスキーマファイルを使ったとすると、これらのオプションは無視されるでしょう。
+例えば、上記のスキーマをPostgreSQLサーバにインポートしたとすると、全てのテーブルパラメータは、内包するオプションをPostgreSQLがいずれもサポートしていないので無視されるでしょう。
 
 Console
 ~~~~~~~
 
 **Bake**
 
-Bake has had a number of significant changes made to it. Those
-changes are detailed in
-`the bake updates section </view/1611/Bake-improvements-in-1-3>`_
+Bakeは数多くの重大な変更があります。これらの変更は
+`Bakeの変更点セクション </view/1611/Bake-improvements-in-1-3>`_
+を見てください。
 
-**Subclassing**
 
-The ShellDispatcher has been modified to not require shells and
-tasks to have *Shell* as their immediate parent anymore.
+**サブクラス化**
+
+ShellDispatcherは、シェルとタスクが直近の親に *Shell* クラスをもたなくて良いように修正されました。
 
 **Output**
 
-``Shell::nl()`` has been added. It returns a single or multiple
-linefeed sequences. ``Shell::out()``, ``err()`` and ``hr()`` now
-accept a ``$newlines`` parameter which is passed to ``nl()`` and
-allows for controlling how newlines are appended to the output.
+``Shell::nl()`` が追加されました。
+これは単行・複数行の改行文字を返します。 
+``Shell::out()`` 、 ``err()`` 、 ``hr()`` は、 ``$newlines`` 引数を受け取ることができるようになりました。
+これは ``nl()`` に渡され、どれだけの新規行が出力に追加されるかをコントロールすることが可能です。
 
-``Shell::out()`` and ``Shell::err()`` have been modified, allowing
-a parameterless usage. This is especially useful if you're often
-using ``$this->out('')`` for outputting just a single newline.
+``Shell::out()`` と ``Shell::err()`` は引数無しで使うことができるように更新されました。
+これはもし単行を出力したいときに ``$this->out('')`` などとしていたなら、特に役立ちます。
 
 **Acl Shell**
 
-All AclShell commands now take ``node`` parameters. ``node``
-parameters can be either an alias path like
-``controllers/Posts/view`` or Model.foreign\_key ie. ``User.1``.
-You no longer need to know or use the aco/aro id for commands.
+全てのAclShellコマンドは ``node`` 引数をとるようになりました。
+``node`` 引数には、 ``controllers/Posts/view`` のようなエイリアスと、 ``User.1`` のようなModel.foreign\_keyのどちらでも指定することができます。
+もはやコマンドのためにaco/aroのidを知る・使う必要はありません。
 
-The Acl shell ``dataSource`` switch has been removed. Use the
-Configure settings instead.
+Aclシェルの ``dataSource`` スイッチが削除されました。
+代わりにConfigureで設定をしてください。
 
 **SchemaShell**
 
-The Schema shell can now read and write Schema files and SQL dumps
-to plugins. It expects and will create schema files in
-``$plugin/config/schema``
+SchemaシェルはプラグインのスキーマファイルとSQLダンプを読み書きできるようになりました。
+``$plugin/config/schema`` にスキーマファイルがあることを期待し、書き出すのもここになります。
 
 ....
 
-Router and Dispatcher
-~~~~~~~~~~~~~~~~~~~~~
+RouterとDispatcher
+~~~~~~~~~~~~~~~~~~
 
 **Router**
 
-Generating urls with new style prefixes works exactly the same as
-admin routing did in 1.2. They use the same syntax and
-persist/behave in the same way. Assuming you have
-``Configure::write('Routing.prefixes', array('admin', 'member'));``
-in your core.php you will be able to do the following from a
-non-prefixed url:
+新しいスタイルの prefix を用いたURL生成は、まさしく 1.2 での admin ルーティングと同じく振舞います。
+同じ文法を使い、同じ方法で持続的になり、同じ方法で振る舞います。
+core.phpに ``Configure::write('Routing.prefixes', array('admin', 'member'));`` となっていると仮定すると、prefix 無しのURLから次のようにすることができます：
 
 ::
 
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => true));
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => true));
 
-Likewise, if you are in a prefixed url and want to go to a
-non-prefixed url, do the following:
+同様に、prefix 有りのURLにおいて、prefix 無しのURLに行きたい場合、次のようにします：
 
 ::
 
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => false));
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => false));
 
-**Route classes**
+**ルートクラス**
 
-For 1.3 the router has been internally rebuilt, and a new class
-``CakeRoute`` has been created. This class handles the parsing and
-reverse matching of an individual connected route. Also new in 1.3
-is the ability to create and use your own Route classes. You can
-implement any special routing features that may be needed in
-application routing classes. Developer route classes must extend
-``CakeRoute``, if they do not an error will be triggered. Commonly
-a custom route class will override the ``parse()`` and/or
-``match()`` methods found in ``CakeRoute`` to provide custom
-handling.
+1.3 では、ルートが内部で再構築され、新しく ``CakeRoute`` クラスが作られました。
+このクラスは、このクラス独自のルートをパース・リバースマッチングすることを扱います。
+また、1.3 では独自のルートクラスを作成・使用することができるようになりました。
+アプリケーションのルートクラスで必要とされる特殊なルーティング機能を実装することができます。
+開発者のルートクラスは ``CakeRoute`` を継承しなければなりません。
+もしこれを継承しなければ、エラーが引き起こされます。
+一般的に、カスタムルートクラスがカスタマイズされた処理を提供するには、 ``CakeRoute`` で見つけられる ``parse()`` メソッドと ``match()`` メソッドのどちらか（または両方共）をオーバーライドします。
 
 **Dispatcher**
 
 
--  Accessing filtered asset paths, while having no defined asset
-   filter will create 404 status code responses.
+-  フィルタされるアセットのパスに、アセットフィルタを定義しない状態でアクセスすると、404ステータスのレスポンスが吐き出されます。
 
-Library classes
-~~~~~~~~~~~~~~~
+ライブラリクラス
+~~~~~~~~~~~~~~~~
 
 **Inflector**
 
-You can now globally customize the default transliteration map used
-in Inflector::slug using Inflector::rules. eg.
-``Inflector::rules('transliteration', array('/å/' => 'aa', '/ø/' => 'oe'))``
+Inflector::rulesを使い、Inflector::slugで使われる音訳マップのデフォルトをグローバルにカスタマイズすることができるようになりました。 
+例： ``Inflector::rules('transliteration', array('/å/' => 'aa', '/ø/' => 'oe'))``
 
-The Inflector now also internally caches all data passed to it for
-inflection (except slug method).
+また、Inflectorは今やinflectionのために渡された全てのデータを内部でキャッシュします。（slugメソッド以外）。
 
 **Set**
 
-Set has a new method ``Set::apply()``, which allows you to apply
-`callbacks <http://ca2.php.net/callback>`_ to the results of
-``Set::extract`` and do so in either a map or reduce fashion.
+Setには新しく ``Set::apply()`` メソッドがあります。
+これは ``Set::extract`` の結果に `コールバック <http://ca2.php.net/callback>`_ を適用することができ、mapやreduceとして振舞うこともできます。
 
 ::
 
     Set::apply('/Movie/rating', $data, 'array_sum');
 
-Would return the sum of all Movie ratings in ``$data``.
+これは ``$data`` 内の映画の評価合計を返します。
 
 **L10N**
 
-All languages in the catalog now have a direction key. This can be
-used to determine/define the text direction of the locale being
-used.
+カタログの全ての言語はdirectionキーを持つようになりました。
+これは使われているロケールの文字の流れる方向を決定・定義するのに使用することができます。
 
 **File**
 
 
--  File now has a copy() method. It copies the file represented by
-   the file instance, to a new location.
+-  Fileにcopy()メソッドが追加されました。
+   これはファイルのインスタンスで表現されたファイルを新しい場所にコピーします。
 
 **Configure**
 
 
--  ``Configure::load()`` can now load configuration files from
-   plugins. Use ``Configure::load('plugin.file');`` to load
-   configuration files from plugins. Any configuration files in your
-   application that use ``.`` in the name should be updated to used
-   ``_``
+-  ``Configure::load()`` はプラグインからも設定ファイルを読み込めるようになりました。
+   ``Configure::load('plugin.file');`` としてプラグインから設定ファイルを読み込んでください。
+   アプリケーションで ``.`` をファイル名にもつ設定ファイルがあったら、その名前は ``_`` を使うように修正すべきです。
 
 **App/libs**
 
-In addition to ``app/vendors`` a new ``app/libs`` directory has
-been added. This directory can also be part of plugins, located at
-``$plugin/libs``. Libs directories are intended to contain 1st
-party libraries that do not come from 3rd parties or external
-vendors. This allows you to separate your organization's internal
-libraries from vendor libraries. ``App::import()`` has also been
-updated to import from libs directories.
+``app/vendors`` に加えて、新しく ``app/libs`` ディレクトリが追加されました。
+またこのディレクトリはプラグインの一部として、 ``$plugin/libs`` に置くこともできます。
+Libsディレクトリは、サードパーティ、外部ベンダからのライブラリではなく、ファーストパーティのライブラリを含有するものとして意図されています。
+これはベンダライブラリと内部ライブラリの構成を分割することを可能にします。
+また、 ``App::import()`` はlibsディレクトリからもインポートできるように更新されました。
 
 ::
 
-    App::import('Lib', 'ImageManipulation'); //imports app/libs/image_manipulation.php
+    App::import('Lib', 'ImageManipulation'); // app/libs/image_manipulation.php をインポートする
 
-You can also import libs files from plugins
+プラグインからもlibsのファイルをインポートできます
 
 ::
 
-    App::import('Lib', 'Geocoding.Geocode'); //imports app/plugins/geocoding/libs/geocode.php
+    App::import('Lib', 'Geocoding.Geocode'); // app/plugins/geocoding/libs/geocode.php をインポートする
 
-The remainder of lib importing syntax is identical to vendor files.
-So if you know how to import vendor files with unique names, you
-know how to import libs files with unique names.
+その他のlibをインポートする文法は、ベンダーファイルと同様です。
+あなたがもしどうやってベンダファイルを独自の名前でインポートするかを知っていれば、あなたはどうやってlibsのファイルを独自の名前でインポートするかを知っていることになります。
 
-**Configuration**
+**設定**
 
 
--  The default ``Security.level`` in 1.3 is **medium** instead of
-   **high**
--  There is a new configuration value ``Security.cipherSeed`` this
-   value should be customized to ensure more secure encrypted cookies,
-   and a warning will be generated in development mode when the value
-   matches its default value.
+-  ``Security.level`` のデフォルトは1.3では **high** の代わりに **medium** になりました。
+-  新しい設定値Security.cipherSeedがあります。
+   この値はクッキーをよりセキュアに符号化するのを確実にするために独自のものに変更するべきでしょう。
+   開発モードでは、この値がデフォルト値から変更されていない場合に警告が生成されます。
 
 **i18n**
 
-Now you can use locale definition files for the LC\_TIME category
-to retrieve date and time preferences for a specific language. Just
-use any POSIX compliant locale definition file and store it at
-app/locale/*language*/ (do not create a folder for the category
-LC\_TIME, just put the file in there).
+特定の言語の日時設定を検索するために、LC\_TIMEカテゴリのロケール定義ファイルを使うことができるようになりました。
+POSIXに従ったロケール定義ファイルを使い、app/locale/*language*/ に保存してください（LC\_TIMEカテゴリのフォルダを作るのではなく、ファイルを作成してください）。
 
-For example, if you have access to a machine running debian or
-ubuntu you can find a french locale file at:
-/usr/share/i18n/locales/fr\_FR. Copy the part corresponding to
-LC\_TIME into app/locale/fr\_fr/LC\_TIME file. You can then access
-the time preferences for French language this way:
+例えば、debianかubuntuが走ってるマシーンにアクセスすることができるなら、フランスのロケールファイルを/usr/share/i18n/locales/fr\_FRに見つけることができます。
+LC\_TIMEに該当する部分をapp/locale/fr\_fr/LC\_TIME（ファイル）にコピーしてください。
+そうすると、このようにフランス語の時間設定にアクセスすることがきでます：
 
 ::
 
-    Configure::write('Config.language','fr-fr'); // set the current language
-    $monthNames = __c('mon',LC_TIME,true); // returns an array with the month names in French
-    $dateFormat = __c('d_fmt',LC_TIME,true); // return the preferred dates format for France
+    Configure::write('Config.language','fr-fr'); // 現在の言語をセットする
+    $monthNames = __c('mon',LC_TIME,true); // フランス語の月の名前の配列を返す
+    $dateFormat = __c('d_fmt',LC_TIME,true); // フランスで好まれる日にちのフォーマットを返す
 
-You can read a complete guide of possible values in LC\_TIME
-definition file in
-`this page <http://sunsson.iptime.org/susv3/basedefs/xbd_chap07.html>`_
+LC\_TIME定義ファイルで使うことの出来る値の完全なガイドを
+`このページ（英語） <http://sunsson.iptime.org/susv3/basedefs/xbd_chap07.html>`_
+で読むことが出来ます。
 
-Miscellaneous
-~~~~~~~~~~~~~
 
-**Error Handling**
+その他
+~~~~~~
 
-Subclasses of ErrorHandler can more easily implement additional
-error methods. In the past you would need to override
-``__construct()`` and work around ErrorHandler's desire to convert
-all error methods into ``error404`` when debug = 0. In 1.3, error
-methods that are declared in subclasses are not converted to
-``error404``. If you want your error methods converted into
-error404, then you will need to do it manually.
+**エラーハンドリング**
 
-**Scaffolding**
+ErrorHandlerのサブクラスは、追加のエラーメソッドを実装することが更に簡単になりました。
+以前は、debug = 0のとき全てのエラーメソッドを ``error404`` に変換するというErrorHandlerの要求を、 ``__construct()`` をオーバーライドすることによって回避する必要があったかもしれません。
+1.3では、サブクラスで定義されたエラーメソッドは ``error404`` に変換されることはありません。
+error404に独自のエラーメソッドを変換したいなら、手動でする必要があります。
 
-With the addition of ``Routing.prefixes`` scaffolding has been
-updated to allow the scaffolding of any one prefix.
+**スキャフォールディング**
+
+``Routing.prefixes`` が追加されたことに伴い、スキャフォールディングはprefixのいずれかの中でのスキャフォールディングが可能になるように書き直されました。
 
 ::
 
@@ -478,19 +421,14 @@ updated to allow the scaffolding of any one prefix.
         var $scaffold = 'member';
     }
 
-Would use scaffolding for member prefixed urls.
+これは「member」prefixがなされたURLでのスキャフォールディングを使うことになります。
 
-**Validation**
+**バリデーション**
 
-After 1.2 was released, there were numerous requests to add
-additional localizations to the ``phone()`` and ``postal()``
-methods. Instead of trying to add every locale to Validation
-itself, which would result in large bloated ugly methods, and still
-not afford the flexibility needed for all cases, an alternate path
-was taken. In 1.3, ``phone()`` and ``postal()`` will pass off any
-country prefix it does not know how to handle to another class with
-the appropriate name. For example if you lived in the Netherlands
-you would create a class like
+1.2がリリースされた後、 ``phone()`` と ``postal()`` メソッドに補足的なローカライゼーションを追加して欲しいというリクエストが莫大に寄せられました。
+全てのロケールをバリデーションしようとすると、メソッドが醜く膨れ上がる上に、あらゆるケースで必要とされる柔軟性を満たせないので、代わりの方法が採用されました。
+1.3では、 ``phone()`` および ``postal()`` は、バリデーションが扱えない国識別子(*country prefix*)を、適切な名称を持つ別のクラスに受け流して処理させます。
+例として、あなたがオランダに住んでいたとすると、以下のようなクラスを作ることになります。
 
 ::
 
@@ -503,9 +441,8 @@ you would create a class like
         }
     }
 
-This file could be placed anywhere in your application, but must be
-imported before attempting to use it. In your model validation you
-could use your NlValidation class by doing the following.
+このファイルはアプリケーションのどこにでも配置することができますが、使ってみようとする前にインポートされなければなりません。
+モデルのバリデーションにおいて、以下のようにしてNlValidationクラスを使用します。
 
 ::
 
@@ -514,29 +451,24 @@ could use your NlValidation class by doing the following.
         'postal_code' => array('rule' => array('postal', null, 'nl'))
     );
 
-When your model data is validated, Validation will see that it
-cannot handle the 'nl' locale and will attempt to delegate out to
-``NlValidation::postal()`` and the return of that method will be
-used as the pass/fail for the validation. This approach allows you
-to create classes that handle a subset or group of locales,
-something that a large switch would not have. The usage of the
-individual validation methods has not changed, the ability to pass
-off to another validator has been added.
+デルのデータがバリデートされる際、バリデーションは「nl」ロケールを扱えないことを確認し、 ``NlValidation::postal()`` に委譲しようと試みます。
+そしてこのメソッドの返り値がバリデーションの成功・失敗として扱われます。
+このアプローチは、長大なswitch文が許容できないロケールのサブセットもしくはグループを扱うクラスを作成可能にします。
+個別のバリデーションメソッドの使用方法は変更されず、別のバリデーターに受け渡す能力が追加されました。
 
-**IP Address Validation**
+**IPアドレスのバリデーション**
 
-Validation of IP Addresses has been extended to allow strict
-validation of a specific IP Version. It will also make use of PHP
-native validation mechanisms if available.
+IPアドレスのバリデーションは特定のIPバージョンの厳格なバリデーションができるように拡張されました。
+またこれは、もし利用可能なら、PHPネイティブのバリデーション機構を利用します。
 
 ::
 
-    Validation::ip($someAddress);         // Validates both IPv4 and IPv6
-    Validation::ip($someAddress, 'IPv4'); // Validates IPv4 Addresses only
-    Validation::ip($someAddress, 'IPv6'); // Validates IPv6 Addresses only
+    Validation::ip($someAddress);         // IPv4 と IPv6 両方を検証
+    Validation::ip($someAddress, 'IPv4'); // IPv4 だけを検証
+    Validation::ip($someAddress, 'IPv6'); // IPv6 だけを検証
 
 **Validation::uuid()**
 
-A uuid() pattern validation has been added to the ``Validation``
-class. It will check that a given string matches a uuid by pattern
-only. It does not ensure uniqueness of the given uuid.
+uuid()パターンのバリデーションが ``Validation`` クラスに追加されました。
+これは与えられた文字列をパターンによってuuidに適合するかのチェックだけをします。
+与えられたuuidの唯一性を保障するわけではありません。
