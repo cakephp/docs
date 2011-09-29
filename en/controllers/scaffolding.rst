@@ -12,14 +12,14 @@ controller. Once you set the $scaffold variable in the controller,
 you’re up and running.
 
 CakePHP’s scaffolding is pretty cool. It allows you to get a basic
-CRUD application up and going in minutes. So cool that you'll want
-to use it in production apps. Now, we think its cool too, but
+CRUD application up and going in minutes. It's so cool that you'll want
+to use it in production apps. Now, we think it's cool too, but
 please realize that scaffolding is... well... just scaffolding.
 It's a loose structure you throw up real quick during the beginning
 of a project in order to get started. It isn't meant to be
 completely flexible, it’s meant as a temporary way to get up and
 going. If you find yourself really wanting to customize your logic
-and your views, its time to pull your scaffolding down in order to
+and your views, it's time to pull your scaffolding down in order to
 write some code. CakePHP’s Bake console, covered in the next
 section, is a great next step: it generates all the code that would
 produce the same result as the most current scaffold.
