@@ -19,7 +19,7 @@ By default CakePHP view files are written in plain PHP and have a default
 extension of .ctp (CakePHP Template). These files contain all the
 presentational logic needed to get the data it received from the
 controller in a format that is ready for the audience you’re
-serving to. If you'd prefer to using a templating language like 
+serving to. If you'd prefer using a templating language like 
 Twig, or Smarty, a subclass of View will bridge your templating
 language and CakePHP
 
@@ -104,7 +104,7 @@ javascript and CSS files from views.
 code will be placed.
 
 ``$title_for_layout`` contains the page title.  This variable is generated automatically,
-but you can override it by setting it in you controller/view.
+but you can override it by setting it in your controller/view.
 
 To set the title for the layout, it's easiest to do so in the
 controller, setting the ``$title_for_layout`` variable::
@@ -141,7 +141,7 @@ controller actions using the controller or view's
 
 For example, if a section of my site included a smaller ad banner
 space, I might create a new layout with the smaller advertising
-space and specify it as the layout for all controller's actions
+space and specify it as the layout for all controllers' actions
 using something like::
 
    <?php
@@ -164,7 +164,7 @@ empty layout (most ajax calls only require a bit of markup in
 return, rather than a fully-rendered interface). The flash layout
 is used for messages shown by :php:meth:`Controller::flash()` method.
 
-Three other layouts xml, js, and rss exist in the core for a quick
+Three other layouts, xml, js, and rss, exist in the core for a quick
 and easy way to serve up content that isn’t text/html.
 
 .. _view-elements:
@@ -330,11 +330,10 @@ To call any view method use ``$this->method()``
 .. php:method:: set(string $var, mixed $value)
 
     Views have a ``set()`` method that is analogous to the ``set()``
-    found in Controller objects. It allows you to add variables to the
-    . Using set() from your view file will add the variables to the
-    layout and elements that will be rendered later. See
-    :ref:`controller-methods` for more
-    information on using set().
+    found in Controller objects. Using set() from your view file will
+		add the variables to the layout and elements that will be rendered
+		later. See :ref:`controller-methods` for more information on using
+		set().
 
     In your view file you can do::
 
@@ -388,7 +387,8 @@ To call any view method use ``$this->method()``
 
     The cache configuration used to cache elements. Setting this
     property will change the default configuration used to cache elements.
-    This default can be overridden using the 'cache' option.
+    This default can be overridden using the 'cache' option in the element
+		method.
 
 .. php:attr:: request
 
