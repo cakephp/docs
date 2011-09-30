@@ -336,7 +336,7 @@ Possible keys for belongsTo association arrays include:
 -  **counterCache**: If set to true the associated Model will
    automatically increase or decrease the
    “[singular\_model\_name]\_count” field in the foreign table
-   whenever you do a save() or delete(). If its a string then its the
+   whenever you do a save() or delete(). If it's a string then it's the
    field name to use. The value in the counter field represents the
    number of related rows. It can also be defined as an array key
    signifying the field name pointing to an array of conditions to
@@ -734,8 +734,8 @@ like to fetch Recipe data when using the Ingredient model.
 
    HABTM data is treated like a complete set, each time a new data association is added
    the complete set of associated rows in database is dropped and created again so you
-   will always need to pass the whole data set for saving. For alternative to use HABTM
-   see :ref:`hasMany-through`
+   will always need to pass the whole data set for saving. For an alternative to using
+   HABTM see :ref:`hasMany-through`
 
 .. tip::
 
@@ -755,7 +755,7 @@ many association. Consider the following
 `Course hasAndBelongsToMany Student`
 
 In other words, a Student can take many Courses and a Course can be
-taken my many Students. This is a simple many to many association
+taken by many Students. This is a simple many to many association
 demanding a table such as this::
 
     id | student_id | course_id
@@ -1097,7 +1097,7 @@ fields::
     
     $privateItems = $Item->find('all', $options);
 
-You could perform several joins as needed in hasBelongsToMany:
+You could perform several joins as needed in hasAndBelongsToMany:
 
 Suppose a Book hasAndBelongsToMany Tag association. This relation
 uses a books\_tags table as join table, so you need to join the
