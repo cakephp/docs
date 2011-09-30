@@ -511,9 +511,9 @@ to be joined up, repeatedly, many times, in many different ways.
 
 The main difference between hasMany and HABTM is that a link
 between models in HABTM is not exclusive. For example, we're about
-to join up our Recipe model with a Tag model using HABTM. Using tomatoes
-as an Ingredient for my grandma's spaghetti recipe doesn't "use up"
-the ingredient. I can also use it for for a salad Recipe.
+to join up our Recipe model with an Ingredient model using HABTM.
+Using tomatoes as an Ingredient for my grandma's spaghetti recipe
+doesn't "use up" the ingredient. I can also use it for a salad Recipe.
 
 Links between hasMany associated objects are exclusive. If my User
 hasMany Comments, a comment is only linked to a specific user. It's
@@ -537,9 +537,9 @@ names.
 Relation
     Schema (HABTM table in bold)
 
-Recipe HABTM Tag
-    ``recipes_tags.id``, ``recipes_tags.recipe_id``,
-    ``recipes_tags.tag_id``
+Recipe HABTM Ingredient
+    ``ingredients_recipes.id``, ``ingredients_recipes.ingredient_id``,
+	``ingredients_recipes.recipe_id``
 
 Cake HABTM Fan
     ``cakes_fans.id``, ``cakes_fans.cake_id``,
@@ -568,7 +568,7 @@ array syntax this time::
         var $hasAndBelongsToMany = array(
             'Ingredient' =>
                 array(
-                    'className'              => 'Tag',
+                    'className'              => 'Ingredient',
                     'joinTable'              => 'ingredients_recipes',
                     'foreignKey'             => 'recipe_id',
                     'associationForeignKey'  => 'ingredient_id',
@@ -645,22 +645,22 @@ Recipe model will also fetch related Tag records if they exist::
                 [created] => 2007-05-01 10:31:01
                 [user_id] => 2346
             )
-        [Tag] => Array
+        [Ingredient] => Array
             (
                 [0] => Array
                     (
                         [id] => 123
-                        [name] => Breakfast
+                        [name] => Chocolate
                     )
                [1] => Array
                     (
                         [id] => 124
-                        [name] => Dessert
+                        [name] => Sugar
                     )
                [2] => Array
                     (
                         [id] => 125
-                        [name] => Heart Disease
+                        [name] => Bombs
                     )
             )
     )
