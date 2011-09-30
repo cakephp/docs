@@ -117,6 +117,7 @@ More on models
 ==============
 
 .. toctree::
+
     models/associations-linking-models-together
     models/retrieving-your-data
     models/saving-your-data

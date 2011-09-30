@@ -331,9 +331,9 @@ To call any view method use ``$this->method()``
 
     Views have a ``set()`` method that is analogous to the ``set()``
     found in Controller objects. Using set() from your view file will
-		add the variables to the layout and elements that will be rendered
-		later. See :ref:`controller-methods` for more information on using
-		set().
+    add the variables to the layout and elements that will be rendered
+    later. See :ref:`controller-methods` for more information on using
+    set().
 
     In your view file you can do::
 
@@ -388,7 +388,7 @@ To call any view method use ``$this->method()``
     The cache configuration used to cache elements. Setting this
     property will change the default configuration used to cache elements.
     This default can be overridden using the 'cache' option in the element
-		method.
+    method.
 
 .. php:attr:: request
 

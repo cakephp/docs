@@ -170,7 +170,7 @@ set, it will only reset fields that have already been set, and
 leave the rest unset. Use this to avoid updating fields in the
 database that were already set and are intended to be updated.
 
-:php:meth:`Model::`saveField(string $fieldName, string $fieldValue, $validate = false)`
+:php:meth:`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
 =======================================================================================
 
 Used to save a single field value. Set the ID of the model
@@ -182,6 +182,7 @@ field.
 For example, to update the title of a blog post, the call to
 ``saveField`` from a controller might look something like this::
 
+    <?php
     $this->Post->saveField('title', 'A New Title for a New Day');
 
 .. warning::

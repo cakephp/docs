@@ -151,7 +151,7 @@ associated with an array that contains five keys: ‘rule’,
 look at these keys.
 
 rule
-~~~~
+----
 
 The 'rule' key defines the validation method and takes either a
 single value or an array. The specified 'rule' may be the name of a
@@ -184,7 +184,7 @@ Remember, the 'rule' key is required for array-based rule
 definitions.
 
 required
-~~~~~~~~
+--------
 
 This key should be assigned to a boolean value. If ‘required’ is
 true, the field must be present in the data array. For example, if
@@ -209,7 +209,7 @@ but may (depending on the rule) succeed if the value submitted is
 empty ('').
 
 allowEmpty
-~~~~~~~~~~
+----------
 
 If set to ``false``, the field value must be **nonempty**, where
 "nonempty" is defined as ``!empty($value) || is_numeric($value)``.
@@ -224,7 +224,7 @@ model without the *key* for this field being present in
 is nonempty, as described above.
 
 on
-~~
+--
 
 The 'on' key can be set to either one of the following values:
 'update' or 'create'. This provides a mechanism that allows a
@@ -240,7 +240,7 @@ The default value for 'on' is null. When 'on' is null, the rule
 will be enforced during both creation and update.
 
 message
-~~~~~~~
+-------
 
 The message key allows you to define a custom validation error
 message for the rule::
