@@ -9,7 +9,7 @@ of the information workflow in your domain of work.
 Usually model classes represent data and are used in CakePHP applications
 for data access, more specifically they represent a database table but they are
 not limited to this, but can be used to access anything that manipulates data
-such as files,external web services, iCal events, or rows in a CSV file.
+such as files, external web services, iCal events, or rows in a CSV file.
 
 A model can be associated with other models. For example, a Recipe
 may be associated with the Author of the recipe as well as the
@@ -46,7 +46,7 @@ internal Model class. It is this core Model class that bestows the
 functionality onto your Ingredient model.
 
 This intermediate class, AppModel, is empty and if you haven't
-created your own is taken from within the CakePHP core folder. Overriding
+created your own, is taken from within the CakePHP core folder. Overriding
 the AppModel allows you to define functionality that should be made
 available to all models within your application. To do so, you need
 to create your own ``AppModel.php`` file that resides in the Model folder,
@@ -57,7 +57,7 @@ generate this file for you.
 See also :doc:`Behaviors <models/behaviors>` for more information on
 how to apply similar logic to multiple models.
 
-Back to our Ingredient model, in order to work on it, create your the PHP file in the
+Back to our Ingredient model, in order to work on it, create the PHP file in the
 ``/app/Model/`` directory. By convention it should have the same name as the class;
 for this example ``Ingredient.php``.
 
@@ -66,7 +66,7 @@ for this example ``Ingredient.php``.
     CakePHP will dynamically create a model object for you if it cannot
     find a corresponding file in /app/Model. This also means that if
     your model file isn't named correctly (i.e. ingredient.php or
-    Ingredients.php) CakePHP will use a instance of AppModel rather
+    Ingredients.php) CakePHP will use an instance of AppModel rather
     than your missing (from CakePHP's perspective) model file. If
     you're trying to use a method you've defined in your model, or a
     behavior attached to your model and you're getting SQL errors that
@@ -110,7 +110,7 @@ model::
         }
     }
 
-This shows how to use models that are already linked. To understand how this associations are
+This shows how to use models that are already linked. To understand how associations are
 defined take a look at the :doc:`Associations section <models/associations-linking-models-together>`
 
 More on models
