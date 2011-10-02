@@ -12,6 +12,7 @@ core, configure additional/different URL mappings (routes), and
 define additional/different inflections.
 
 .. index:: database.php, database.php.default
+.. _database-configuration:
 
 Database Configuration
 ======================
