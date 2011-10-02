@@ -562,7 +562,7 @@ findBy() functions return results  like ``find('first')``
 .. _model-query:
 
 :php:meth:`Model::query()`
-=======================
+==========================
 
 ``query(string $query)``
 
@@ -647,7 +647,7 @@ which returns::
     queries manually, so exact results will vary between databases.
 
 :php:meth:`Model::field()`
-=========================
+==========================
 
 ``field(string $name, array $conditions = null, string $order = null)``
 
@@ -666,7 +666,7 @@ found returns false.
     echo $this->Post->field('name', array('created <' => date('Y-m-d H:i:s')), 'created DESC'); // echo the name of the last created instance
 
 :php:meth:`Model::read()`
-========================
+=========================
 
 ``read($fields, $id)``
 

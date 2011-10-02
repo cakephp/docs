@@ -4,10 +4,10 @@ Controllers
 A controller is used to manage the logic for a part of your
 application. Most commonly, controllers are used to manage the
 logic for a single model. For example, if you were building a site
-for an online bakery, you might have a RecipesController and a
+for an online bakery, you might have a RecipesController and an
 IngredientsController managing your recipes and their ingredients.
 In CakePHP, controllers are named after the model they handle, in
-plural form. However, its often required for a controller to use
+plural form. However, it's often required for a controller to use
 more than one model.  This is possible too.
 
 The Recipe model is handled by the RecipesController, the Product
@@ -56,7 +56,7 @@ controllers.
 While normal object-oriented inheritance rules apply, CakePHP
 does a bit of extra work when it comes to special controller
 attributes. The list of components and helpers used by a
-controller, are treated specially. In these cases, AppController
+controller are treated specially. In these cases, AppController
 value arrays are merged with child controller class arrays. The values in the
 child class will always override those in AppController.
 
@@ -186,7 +186,7 @@ rendered from the controller.
     information to the view.
 
     .. versionchanged:: 1.3
-        Array keys will be no longer be inflected before they are assigned
+        Array keys will no longer be inflected before they are assigned
         to the view ('underscored\_key' does not become 'underscoredKey'
         anymore, etc.):
 
@@ -440,7 +440,7 @@ Other Useful Methods
     use in a Model->find() method. In this case,
     array(“Order.destination” => “Old Towne Bakery”).
 
-    If you want use a different SQL operator between terms, supply them
+    If you want to use a different SQL operator between terms, supply them
     using the second parameter::
 
         <?php
@@ -465,7 +465,7 @@ Other Useful Methods
         $orders = $this->Order->find('all', compact('condtions'));
 
     The third parameter allows you to tell CakePHP what SQL boolean
-    operator to use between the find conditions. String like ‘AND’,
+    operator to use between the find conditions. Strings like ‘AND’,
     ‘OR’ and ‘XOR’ are all valid values.
 
     Finally, if the last parameter is set to true, and the $op
@@ -525,7 +525,7 @@ Other Useful Methods
             echo $comment['Comment']['title'];
         }
 
-    We can then place that element anywhere at all to get the output
+    We can then place that element anywhere to get the output
     using::
 
         <?php
@@ -633,7 +633,7 @@ the current controller. Using these attributes make MVC classes
 given by ``$components`` and ``$uses`` available to the controller
 as class variables (``$this->ModelName``, for example) and those
 given by ``$helpers`` to the view as an object reference variable
-(``$helpername``).
+(``$this->{$helpername}``).
 
 .. note::
 
@@ -719,5 +719,4 @@ More on controllers
     controllers/request-response
     controllers/scaffolding
     controllers/pages-controller
-    controllers/scaffolding
     controllers/components

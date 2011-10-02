@@ -336,7 +336,7 @@ Possible keys for belongsTo association arrays include:
 -  **counterCache**: If set to true the associated Model will
    automatically increase or decrease the
    “[singular\_model\_name]\_count” field in the foreign table
-   whenever you do a save() or delete(). If its a string then its the
+   whenever you do a save() or delete(). If it's a string then it's the
    field name to use. The value in the counter field represents the
    number of related rows. It can also be defined as an array key
    signifying the field name pointing to an array of conditions to
@@ -573,9 +573,9 @@ to be joined up, repeatedly, many times, in many different ways.
 
 The main difference between hasMany and HABTM is that a link
 between models in HABTM is not exclusive. For example, we're about
-to join up our Recipe model with a Tag model using HABTM. Using tomatoes
-as an Ingredient for my grandma's spaghetti recipe doesn't "use up"
-the ingredient. I can also use it for for a salad Recipe.
+to join up our Recipe model with an Ingredient model using HABTM.
+Using tomatoes as an Ingredient for my grandma's spaghetti recipe
+doesn't "use up" the ingredient. I can also use it for a salad Recipe.
 
 Links between hasMany associated objects are exclusive. If my User
 hasMany Comments, a comment is only linked to a specific user. It's
@@ -599,9 +599,9 @@ names.
 Relation
     Schema (HABTM table in bold)
 
-Recipe HABTM Tag
-    ``recipes_tags.id``, ``recipes_tags.recipe_id``,
-    ``recipes_tags.tag_id``
+Recipe HABTM Ingredient
+    ``ingredients_recipes.id``, ``ingredients_recipes.ingredient_id``,
+	``ingredients_recipes.recipe_id``
 
 Cake HABTM Fan
     ``cakes_fans.id``, ``cakes_fans.cake_id``,
@@ -630,7 +630,7 @@ array syntax this time::
         var $hasAndBelongsToMany = array(
             'Ingredient' =>
                 array(
-                    'className'              => 'Tag',
+                    'className'              => 'Ingredient',
                     'joinTable'              => 'ingredients_recipes',
                     'foreignKey'             => 'recipe_id',
                     'associationForeignKey'  => 'ingredient_id',
@@ -707,22 +707,22 @@ Recipe model will also fetch related Tag records if they exist::
                 [created] => 2007-05-01 10:31:01
                 [user_id] => 2346
             )
-        [Tag] => Array
+        [Ingredient] => Array
             (
                 [0] => Array
                     (
                         [id] => 123
-                        [name] => Breakfast
+                        [name] => Chocolate
                     )
                [1] => Array
                     (
                         [id] => 124
-                        [name] => Dessert
+                        [name] => Sugar
                     )
                [2] => Array
                     (
                         [id] => 125
-                        [name] => Heart Disease
+                        [name] => Bombs
                     )
             )
     )
@@ -734,8 +734,8 @@ like to fetch Recipe data when using the Ingredient model.
 
    HABTM data is treated like a complete set, each time a new data association is added
    the complete set of associated rows in database is dropped and created again so you
-   will always need to pass the whole data set for saving. For alternative to use HABTM
-   see :ref:`hasMany-through`
+   will always need to pass the whole data set for saving. For an alternative to using
+   HABTM see :ref:`hasMany-through`
 
 .. tip::
 
@@ -755,7 +755,7 @@ many association. Consider the following
 `Course hasAndBelongsToMany Student`
 
 In other words, a Student can take many Courses and a Course can be
-taken my many Students. This is a simple many to many association
+taken by many Students. This is a simple many to many association
 demanding a table such as this::
 
     id | student_id | course_id
@@ -1097,7 +1097,7 @@ fields::
     
     $privateItems = $Item->find('all', $options);
 
-You could perform several joins as needed in hasBelongsToMany:
+You could perform several joins as needed in hasAndBelongsToMany:
 
 Suppose a Book hasAndBelongsToMany Tag association. This relation
 uses a books\_tags table as join table, so you need to join the

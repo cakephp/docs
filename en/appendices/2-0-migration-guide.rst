@@ -578,6 +578,7 @@ Xml
 -  The class Xml was completely re-factored. Now this class does not manipulate
    data anymore, and it is a wrapper to SimpleXMLElement. You can use the following
    methods:
+
    -  ``Xml::build()``: static method that you can pass an xml string, array, path
       to file or url. The result will be a SimpleXMLElement instance or an
       exception will be thrown in case of error.

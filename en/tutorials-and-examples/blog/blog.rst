@@ -252,4 +252,4 @@ If you are installing CakePHP on a webserver besides Apache, you
 can find instructions for getting URL rewriting working for other
 servers under the :doc:`/installation/advanced-installation` section.
 
-Continue to :doc:`part-two` to start building your first CakePHP application.
+Continue to :doc:`/tutorials-and-examples/blog/part-two` to start building your first CakePHP application.
