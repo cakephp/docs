@@ -23,7 +23,7 @@ You'll notice three main folders:
    PHP libraries you need to use with your CakePHP applications.
 
 The App Folder
-~~~~~~~~~~~~~~
+==============
 
 CakePHP’s app folder is where you will do most of your application
 development. Let’s look a little closer at the folders inside of
