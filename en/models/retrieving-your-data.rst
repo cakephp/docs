@@ -2,7 +2,7 @@ Retrieving Your Data
 ####################
 
 As stated before, one of the roles of the Model layer is to get data from multiple types of storage.
-The CakePHP Model class counts with a some functions that will help you search for this data, sort it,
+The CakePHP Model class comes with some functions that will help you search for this data, sort it,
 paginate it, and filter it. The most common function you will use in models is :php:meth:`Model::find()`
 
 .. _model-find:
@@ -15,7 +15,7 @@ find
 Find is the multifunctional workhorse of all model data-retrieval functions.
 ``$type`` can be either ``'all'``, ``'first'``, ``'count'``, ``'list'``,
 ``'neighbors'`` or ``'threaded'`` or any custom finder you can define.
-Keep in mind that ``$type`` is case sensitive. Using a upper case character
+Keep in mind that ``$type`` is case sensitive. Using an upper case character
 (for example ``All``) will not produce the expected results.
 
 ``$params`` is used to pass all parameters to the various finds,
@@ -30,13 +30,13 @@ optional::
         'group' => array('Model.field'), //fields to GROUP BY
         'limit' => n, //int
         'page' => n, //int
-        'offset'=>n, //int   
+        'offset'=> n, //int   
         'callbacks' => true //other possible values are false, 'before', 'after'
     )
 
 It's also possible to add and use other parameters, as is made use
-of by some find types, behaviors and of course possible with your
-own model methods
+of by some find types, behaviors and of course possibly with your
+own model methods.
 
 
 .. _model-find-first:
@@ -46,7 +46,7 @@ find('first')
 
 ``find('first', $params)``
 
-'first' will return one result, you'd use this for any use where you
+'first' will return one result, you'd use this for any case where you
 expect only one result. Below are a couple of simple (controller code) examples::
 
     <?php
@@ -135,7 +135,7 @@ code) examples::
 .. note::
 
     In the above example ``$allAuthors`` will contain every user in the
-    users table, there will be no condition applied to the find as none
+    users table. There will be no condition applied to the find as none
     were passed.
 
 The results of a call to ``find('all')`` will be of the following
@@ -194,7 +194,7 @@ boxes. Below are a couple of simple (controller code) examples::
 .. note::
 
     In the above example ``$allAuthors`` will contain every user in the
-    users table, there will be no condition applied to the find as none
+    users table. There will be no condition applied to the find as none
     were passed.
 
 The results of a call to ``find('list')`` will be in the following
@@ -349,7 +349,7 @@ call to ``find('threaded')`` will be of the following form::
             )
     )
 
-The order results appear can be changed as it is influence by the
+The order results appear can be changed as it is influenced by the
 order of processing. For example, if ``'order' => 'name ASC'`` is
 passed in the params to ``find('threaded')``, the results will
 appear in name order. Likewise any order can be used, there is no
@@ -475,23 +475,23 @@ This all comes together in the following example (controller code):
         
         //Will find all published articles and order them by the created column
         function index() {
-            $articles = $this->Article->find('published', array('order' => array('created' => 'desc')));
+            $articles = $this->Article->find('available', array('order' => array('created' => 'desc')));
         }
         
     }
 
 The special ``_find[Type]`` methods receive 3 arguments as shown above. The first one
-means the state of the query execution, it could be either ``before`` or ``after``, this
-is done this way because this functions are just a sort of callback function that has the
+means the state of the query execution, which could be either ``before`` or ``after``. It
+is done this way because this function is just a sort of callback function that has the
 ability to modify the query before it is done, or to modify the results after they are fetched.
 
-Typically the first thing to check in our custom find function is the state of the query,
-the ``before`` state is the moment to modify the query, bind new associations, apply more
-behaviors, interpret any special key that is passed in the second argument of ``find``. This
+Typically the first thing to check in our custom find function is the state of the query.
+The ``before`` state is the moment to modify the query, bind new associations, apply more
+behaviors, and interpret any special key that is passed in the second argument of ``find``. This
 state requires you to return the $query argument (modified or not).
 
 The ``after`` state is the perfect place to inspect the results, inject new data, process it
-to return it in another format or do whatever you like to the recently fetch data. This state
+to return it in another format, or do whatever you like to the recently fetched data. This state
 requires you to return the $results array (modified or not).
 
 You can create as many custom finders as you like, and they are a great way of reusing code in
@@ -691,7 +691,7 @@ field.
 
     As the ``read`` method overwrites any information stored in the ``data`` and ``id``
     property of the model, you should be very careful when using this function in general,
-    specially using in in the model callback functions such as ``beforeValidate`` and
+    especially using it in the model callback functions such as ``beforeValidate`` and
     ``beforeSave``. Generally the ``find`` function provides a more robust and easy to work
     with API than the ``read`` method.
 
@@ -711,7 +711,7 @@ efficient query possible, ensure proper SQL syntax, and properly
 escape each individual part of the query. Using the array syntax
 also enables CakePHP to secure your queries against any SQL injection attack
 
-At it's most basic, an array-based query looks like this::
+At its most basic, an array-based query looks like this::
 
     <?php
     $conditions = array("Post.title" => "This is a post", "Post.author_id" => 1);
@@ -908,9 +908,9 @@ Which produces the following SQL::
 Sub-queries
 -----------
 
-For the example, imagine we have a "users" table with "id", "name"
+For this example, imagine we have a "users" table with "id", "name"
 and "status". The status can be "A", "B" or "C". And we want to get
-all the users that have status different than "B" using sub-query.
+all the users that have status other than "B" using sub-query.
 
 In order to achieve that we are going to get the model data source
 and ask it to build the query as if we were calling a find method,
