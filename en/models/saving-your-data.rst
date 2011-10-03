@@ -168,7 +168,7 @@ If ``false`` is passed instead of an array, the model instance will
 not initialize fields from the model schema that are not already
 set, it will only reset fields that have already been set, and
 leave the rest unset. Use this to avoid updating fields in the
-database that were already set and are intended to be updated.
+database that were already set.
 
 :php:meth:`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
 =======================================================================================
@@ -215,7 +215,7 @@ year, the update call might look something like::
 
 .. note::
 
-    Even if the modified field exist for the model being updated, it is
+    Even if the modified field exists for the model being updated, it is
     not going to be updated automatically by the ORM. Just add it
     manually to the array if you need it to be updated.
 
@@ -259,7 +259,7 @@ numerically indexed array of records like this::
     of same model the records arrays should be just numerically indexed
     without the model key.
 
-It is also accepted having the data ins the following format::
+It is also acceptable to have the data in the following format::
 
     array(
         array('Article' => array('title' => 'title 1')),
@@ -374,7 +374,7 @@ single User and a single Profile::
     ?>
 
 As a rule, when working with hasOne, hasMany, and belongsTo
-associations, its all about keying. The basic idea is to get the
+associations, it's all about keying. The basic idea is to get the
 key from one model and place it in the foreign key field on the
 other. Sometimes this might involve using the ``$id`` attribute of
 the model class after a ``save()``, but other times it might just
@@ -444,7 +444,7 @@ Saving hasMany through data
 
 Let's see how data stored in a join table for two models is saved. As shown in the :ref:`hasMany-through`
 section, the join table is associated to each model using a `hasMany` type of relationship.
-Our example involves the Head of Cake School asking us the to write an application that allows
+Our example involves the Head of Cake School asking us to write an application that allows
 him to log a student's attendance on a course with days attended and grade. Take
 a look at the following code.::
 
@@ -503,7 +503,7 @@ The data array will look like this when submitted.::
     
         )
 
-Cake will happily be able to save the lot together and assigning
+Cake will happily be able to save the lot together and assign
 the foreign keys of the Student and Course into CourseMembership
 with a `saveAssociated` call with this data structure. If we run the index
 action of our CourseMembershipsController the data structure
@@ -688,7 +688,7 @@ Another way to look at this is adding a Membership model::
     Club hasMany Membership.
 
 These two examples are almost the exact same. They use the same
-amount and named fields in the database and the same amount of
+amount of named fields in the database and the same amount of
 models. The important differences are that the "join" model is
 named differently and its behavior is more predictable.
 
