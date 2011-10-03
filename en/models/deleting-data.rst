@@ -17,11 +17,11 @@ For example, when deleting a User record that is tied to many
 Recipe records (User 'hasMany' or 'hasAndBelongsToMany' Recipes):
  
 -  if $cascade is set to true, the related Recipe records are also
-   deleted if the models dependent-value is set to true.
+   deleted if the model's dependent-value is set to true.
 -  if $cascade is set to false, the Recipe records will remain
    after the User has been deleted.
 
-If your database supports foriegn keys and cascading deletes, its often more
+If your database supports foriegn keys and cascading deletes, it's often more
 efficient to rely on that feature than CakePHP's cascading. The one benefit to
 using the cascade feature of ``Model::delete()`` is that it allows you to
 leverage behaviors and model callbacks::
