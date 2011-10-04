@@ -33,7 +33,7 @@ You can either load them one by one or all of them in a single call::
 
 
 loadAll loads all plugins available, while allowing you to set certain
-settings for specific plugins. load() works similar, but only loads the 
+settings for specific plugins. load() works similarly, but only loads the 
 plugins you explicitely specify.
 
 There is a lot you can do with the load and loadAll methods to help with
