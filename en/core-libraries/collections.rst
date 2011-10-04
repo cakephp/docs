@@ -17,7 +17,7 @@ Loading objects on every kind of collection can be done using the ``load()``
 method::
 
     <?php
-    $this->Components->load('Prg');
+    $this->Prg = $this->Components->load('Prg');
     $this->Prg->process();
 
 When loading a component, if the component is not currently loaded into the
@@ -26,7 +26,7 @@ another instance will not be created.  When loading components, you can also
 provide additional configuration for them::
 
     <?php
-    $this->Components->load('Cookie', array('name' => 'sweet'));
+    $this->Cookie = $this->Components->load('Cookie', array('name' => 'sweet'));
 
 Any keys & values provided will be passed to the Component's constructor.  The
 one exception to this rule is ``className``.  ClassName is a special key that is
@@ -35,7 +35,7 @@ that do not reflect the classnames, which can be helpful when extending core
 components::
 
     <?php
-    $this->Components->load('Auth', array('className' => 'MyCustomAuth'));
+    $this->Auth = $this->Components->load('Auth', array('className' => 'MyCustomAuth'));
     $this->Auth->user(); // Actually using MyCustomAuth::user();
 
 The inverse of loading an object, is unloading it.  Unloaded objects are removed

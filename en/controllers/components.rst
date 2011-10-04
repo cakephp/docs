@@ -108,7 +108,7 @@ In situations like this you can load a component at runtime using the
 controller you can do the following::
     
     <?php
-    $this->Components->load('OneTimer');
+    $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
 
 
