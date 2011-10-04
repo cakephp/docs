@@ -17,9 +17,7 @@ Indentation
 
 One tab will be used for indentation.
 
-So, indentation should look like this:
-
-::
+So, indentation should look like this::
 
     <?php
     // base level
@@ -29,10 +27,9 @@ So, indentation should look like this:
     // base level
     ?>
 
-Or:
+Or::
 
-::
-
+    <?php
     $booleanVariable = true;
     $stringVariable = "moose";
     if ($booleanVariable) {
@@ -46,9 +43,7 @@ Control Structures
 ==================
 
 Control structures are for example "``if``", "``for``", "``foreach``",
-"``while``", "``switch``" etc. Below, an example with "``if``":
-
-::
+"``while``", "``switch``" etc. Below, an example with "``if``"::
 
     <?php 
     if ((expr_1) || (expr_2)) { 
@@ -58,7 +53,6 @@ Control structures are for example "``if``", "``for``", "``foreach``",
     } else {
         // default_action; 
     } 
-    ?>
 
 *  In the control structures there should be 1 (one) space before the
    first parenthesis and 1 (one) space between the last parenthesis and
@@ -87,7 +81,6 @@ Control structures are for example "``if``", "``for``", "``foreach``",
     if (expr) {
         statement;
     }
-    ?>
 
 Ternary Operator
 ----------------
@@ -96,10 +89,9 @@ Ternary operators are permissible when the entire ternary operation fits
 on one line. Longer ternaries should be split into ``if else``
 statements. Ternary operators should not ever be nested. Optionally
 parentheses can be used around the condition check of the ternary for
-clarity.
+clarity::
 
-::
-
+    <?php
     //Good, simple and readable
     $variable = isset($options['variable']) ? $options['variable'] : true;
 
@@ -111,13 +103,10 @@ Function Calls
 
 Functions should be called without space between function's name and
 starting bracket. There should be one space between every parameter of a
-function call.
-
-::
+function call::
 
     <?php 
     $var = foo($bar, $bar2, $bar3); 
-    ?>
 
 As you can see above there should be one space on both sides of equals
 sign (=).
@@ -125,9 +114,7 @@ sign (=).
 Method definition
 =================
 
-Example of a function definition:
-
-::
+Example of a function definition::
 
     <?php 
     function someFunction($arg1, $arg2 = '') {
@@ -136,19 +123,16 @@ Example of a function definition:
         }
         return $var;
     }
-    ?>
 
 Parameters with a default value, should be placed last in function
 definition. Try to make your functions return something, at least true
 or false = so it can be determined whether the function call was
-successful.
-
-::
+successful::
 
     <?php 
-    function connection(&$dns, $persistent = false) {
+    function connection($dns, $persistent = false) {
         if (is_array($dns)) {
-            $dnsInfo = &$dns;
+            $dnsInfo = $dns;
         } else {
             $dnsInfo = BD::parseDNS($dns);
         }
@@ -158,7 +142,6 @@ successful.
         }
         return true;
     }
-    ?>
 
 There are spaces on both side of the equals sign.
 
@@ -183,14 +166,9 @@ tags:
 *  `@since <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.since.pkg.html>`_
 *  `@tutorial <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.tutorial.pkg.html>`_
 *  `@version <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.version.pkg.html>`_
-*  `inline {@internal}} <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.inlineinternal.pkg.html>`_
-*  `inline {@inheritdoc}} <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.inlineinheritdoc.pkg.html>`_
-*  `inline {@link}} <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.inlinelink.pkg.html>`_
 
 PhpDoc tags are very much like JavaDoc tags in Java. Tags are only
-processed if they are the first thing in a DocBlock line, for example:
-
-::
+processed if they are the first thing in a DocBlock line, for example::
 
     <?php
     /**
@@ -200,19 +178,13 @@ processed if they are the first thing in a DocBlock line, for example:
      */
     ?>
 
-There are 3 inline tags
-(`{@internal}} <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.inlineinternal.pkg.html>`_,
-`{@inheritdoc}} <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.inlineinheritdoc.pkg.html>`_
-and
-`{@link}} <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.inlinelink.pkg.html>`_).
-
 ::
 
     <?php 
     /**
      * Example of inline phpDoc tags.
      *
-     * This function works hard with {@link foo()} to rule the world.
+     * This function works hard with foo() to rule the world.
      */
     function bar() {
     }
@@ -222,7 +194,6 @@ and
      */
     function foo() {
     }
-    ?>
 
 Comment blocks, with the exception of the first block in a file, should
 always be preceeded by a newline.
@@ -244,26 +215,20 @@ Naming convention
 Functions
 ---------
 
-Write all functions in camelBack
-
-::
+Write all functions in camelBack::
 
     <?php
     function longFunctionName() {
     }
-    ?>
 
 Classes
 -------
 
-Class names should be written in CamelCase, for example:
-
-::
+Class names should be written in CamelCase, for example::
 
     <?php
     class ExampleClass {
     }
-    ?>
 
 Variables
 ---------
@@ -272,16 +237,13 @@ Variable names should be as descriptive as possible, but also as short
 as possible. Normal variables should start with a lowercase letter, and
 should be written in camelBack in case of multiple words. Variables
 containing objects should start with a capital letter, and in some way
-associate to the class the variable is an object of. Example:
-
-::
+associate to the class the variable is an object of. Example::
 
     <?php
     $user = 'John';
     $users = array('John', 'Hans', 'Arne');
 
     $Dispatcher = new Dispatcher();
-    ?>
 
 Member visibility
 -----------------
@@ -297,7 +259,6 @@ protected method or variable names start with a single underscore ("\_"). Exampl
            /*...*/
         }
     }
-    ?>
 
 Private methods or variable names start with double underscore ("\_\_"). Example::
 
@@ -309,12 +270,18 @@ Private methods or variable names start with double underscore ("\_\_"). Example
             /*...*/
         }
     }
-    ?>
 
 Method Chaining
 ---------------
 
-todo
+Method chaining should have multiple methods spread across separate lines, and
+indented with one tab::
+
+    <?php
+    $email->from('foo@example.com')
+        ->to('bar@example.com')
+        ->subject('A great message')
+        ->send();
 
 Example addresses
 -----------------
