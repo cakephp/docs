@@ -10,5 +10,6 @@ cover the various ways you can contribute to CakePHP:
     contributing/documentation
     contributing/tickets
     contributing/code
+    contributing/cakephp-coding-conventions
     contributing/articles
 
