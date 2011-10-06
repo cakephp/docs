@@ -292,7 +292,7 @@ you will need PHP running as a FastCGI instance.
         location / {
             root   /var/www/example.com/public/app/webroot/;
             index  index.php index.html index.htm;
-            try_file $uri $uri/ /index.php?$uri&$args;
+            try_files $uri $uri/ /index.php?$uri&$args;
         }
 
         location ~ .*\.php$ {
