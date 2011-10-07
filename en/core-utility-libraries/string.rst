@@ -24,6 +24,15 @@ manipulating strings and is normally accessed statically. Example:
     Tokenizes a string using ``$separator``, ignoring any instance of
     ``$separator`` that appears between ``$leftBound`` and ``$rightBound``.
 
+    This method can be useful when splitting up data in that has regular
+    formatting such as tag lists::
+        
+        <?php
+        $data = "cakephp 'great framework' php";
+        $result = String::tokenize($data, ' ', "'", "'");
+        // result contains
+        array('cakephp', "'great framework'", 'php');
+
 .. php:staticmethod:: insert($string, $data, $options = array())
 
     The insert method is used to create string templates and to allow
@@ -31,7 +40,6 @@ manipulating strings and is normally accessed statically. Example:
 
         String::insert('My name is :name and I am :age years old.', array('name' => 'Bob', 'age' => '65'));
         // generates: "My name is Bob and I am 65 years old."
-
 
 .. php:staticmethod:: cleanInsert($string, $options = array())
 
@@ -53,7 +61,28 @@ manipulating strings and is normally accessed statically. Example:
             'after' => ''
         );
 
+.. php:staticmethod:: wrap($text, $options = array())
 
-.. todo::
+    Wraps a block of text to a set width, and indent blocks as well.
+    Can intelligently wrap text so words are not sliced across lines::
 
-    This is missing a few methods still, and useful examples.
+        <?php
+        $text = 'This is the song that never ends.';
+        $result = String::wrap($text, 22);
+
+        // returns
+        This is the song 
+        that never ends.
+
+    You can provide an array of options that control how wrapping is done.  The
+    supported options are:
+
+    * ``width`` The width to wrap to. Defaults to 72.
+    * ``wordWrap`` Whether or not to wrap whole words. Defaults to true.
+    * ``indent`` The character to indent lines with. Defaults to ''.
+    * ``indentAt`` The line number to start indenting text. Defaults to 0.
+
+
+
+
+
