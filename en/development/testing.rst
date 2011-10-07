@@ -205,10 +205,14 @@ tests do not reach. Coverage is useful for determining where you should add
 tests in the future, and gives you one measurement to track your testing
 progress with.
 
-.. todo::
+.. |Code Coverage| image:: /_static/img/code-coverage.png
 
-    Get an image of code coverage report.
+|Code Coverage|
 
+The inline code coverage uses green lines to indicate lines that have been run.
+If you hover over a green line a tooltip will indicate which tests covered the
+line. Lines in red did not run, and have not been exercised by your tests.  Grey
+lines are considered unexecutable code by xdebug.
 
 Filtering test cases
 ~~~~~~~~~~~~~~~~~~~~
