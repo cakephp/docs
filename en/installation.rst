@@ -7,11 +7,30 @@ primarily on setting up with Apache (because it's the most common),
 you can configure Cake to run on a variety of web servers such as
 LightHTTPD or Microsoft IIS.
 
-Installation preparation consists of the following steps:
+Requirements
+============
 
--  Downloading a copy of CakePHP
--  Configuring your web server to handle php if necessary
--  Checking file permissions
+-  HTTP Server. For example: Apache. mod\_rewrite is preferred, but
+   by no means required.
+-  PHP 5.2.9 or greater.
+
+Technically a database engine isn't required, but we imagine that
+most applications will utilize one. CakePHP supports a variety of
+database storage engines:
+
+-  MySQL (4 or greater)
+-  PostgreSQL
+-  Microsoft SQL Server
+-  SQLite
+
+
+License
+=======
+
+CakePHP is licensed under the MIT license.  This means that you are free to
+modify, distribute and republish the source code on the condition that the
+copyright notices are left intact.  You are also free to incorporate CakePHP
+into any Commercial or closed source application.
 
 Downloading CakePHP
 ===================
@@ -31,19 +50,21 @@ releases are available at
 `Github downloads <http://github.com/cakephp/cakephp/downloads>`_.
 
 Alternatively you can get fresh off the press code, with all the
-bug-fixes and up to the minute(well, to the day) enhancements.
-These can be accessed from github by cloning the repository.
-`Github`_.
+bug-fixes and up to the minute enhancements.
+These can be accessed from github by cloning the 
+`Github`_ repostitory::
+
+    git clone git://github.com/cakephp/cakephp.git
 
 
 Permissions
 ===========
 
-CakePHP uses the ``/app/tmp`` directory for a number of different
+CakePHP uses the ``app/tmp`` directory for a number of different
 operations. Model descriptions, cached views, and session
 information are just a few examples.
 
-As such, make sure the directory ``/app/tmp`` and all its subdirectories in your cake installation
+As such, make sure the directory ``app/tmp`` and all its subdirectories in your cake installation
 are writable by the web server user.
 
 Setup
@@ -149,11 +170,11 @@ http://example.com/cake\_install/. At this point, you'll be
 presented with CakePHP's default home, and a message that tells you
 the status of your current database connection.
 
-Congratulations! You are ready to create your first CakePHP
-application.
+Congratulations! You are ready to :doc:`create your first CakePHP
+application </getting-started>`.
 
 Not working? If you're getting timezone related error from PHP
-uncomment one line in app/Config/core.php::
+uncomment one line in ``app/Config/core.php``::
 
    <?php
    /**

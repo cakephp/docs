@@ -5,10 +5,9 @@ Contents
    :maxdepth: 3
 
    index
-   basic-info
-   cakephp-overview
    installation
    getting-started
+   cakephp-overview
    controllers
    views
    models
