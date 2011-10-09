@@ -371,7 +371,7 @@ App class lost the following properties, use method App::path() to access their 
 App::import()
 ~~~~~~~~~~~~~
 
-* No longer looks for classes recursively, it stricty uses the values for the
+* No longer looks for classes recursively, it strictly uses the values for the
   paths defined in App::build().
 * Will not be able to load App::import('Component', 'Component') use
   App::uses('Component', 'Controller');
