@@ -104,7 +104,7 @@ You can configure SSL SMTP servers, like GMail. To do so, put the ``'ssl://'``
 at prefix in the host and configure the port value accordingly.  Example::
 
     <?php
-    class CakeEmail {
+    class EmailConfig {
         public $gmail = array(
             'host' => 'ssl://smtp.gmail.com',
             'port' => 465,
