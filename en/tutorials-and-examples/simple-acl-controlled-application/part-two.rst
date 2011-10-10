@@ -104,17 +104,16 @@ to remove it before putting your application into production::
         }
 
         function _getClassMethods($ctrlName = null) {
-            App::uses($ctrlName . 'Controller', 'Controller');
+            App::uses($ctrlName, 'Controller');
             if (strlen(strstr($ctrlName, '.')) > 0) {
                 // plugin's controller
                 $num = strpos($ctrlName, '.');
                 $ctrlName = substr($ctrlName, $num+1);
             }
-            $ctrlclass = $ctrlName . 'Controller';
-            $methods = get_class_methods($ctrlclass);
+            $methods = get_class_methods($ctrlName);
 
             // Add scaffold defaults if scaffolds are being used
-            $properties = get_class_vars($ctrlclass);
+            $properties = get_class_vars($ctrlName);
             if (array_key_exists('scaffold',$properties)) {
                 if($properties['scaffold'] == 'admin') {
                     $methods = array_merge($methods, array('admin_add', 'admin_edit', 'admin_index', 'admin_view', 'admin_delete'));
