@@ -218,12 +218,18 @@ Password encryption is not done yet, open your User.php model file and add the f
 
     <?php
     // app/Model/User.php
+    App::uses('AuthComponent', 'Controller/Component');
+    class User extends AppModel {
+        
+    // ...
     
     public function beforeSave() {
         if (isset($this->data[$this->alias]['password'])) {
             $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
         }
     }
+
+    // ...
 
 So, now every time a user is saved, the password is hashed using the default hashing
 provided by the AuthComponent class. We're just missing a template view file for
