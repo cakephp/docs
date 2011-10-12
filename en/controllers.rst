@@ -1,34 +1,30 @@
 Controllers
 ################
 
-A controller is used to manage the logic for a part of your
-application. Most commonly, controllers are used to manage the
-logic for a single model. For example, if you were building a site
-for an online bakery, you might have a RecipesController and an
-IngredientsController managing your recipes and their ingredients.
-In CakePHP, controllers are named after the model they handle, in
-plural form. However, it's often required for a controller to use
-more than one model.  This is possible too.
+Controllers are the 'C' in MVC. After routing has been applied and the correct
+controller has been found, your controller's action is called.  Your controller
+should handle interpreting the request data, making sure the correct models
+are called, and the right response or view is rendered.  Controllers can be
+thought of as middle man between the Model and View.  You want to keep your
+controllers thin, and your models fat.  This will help you more easily reuse
+your code and makes your code easier to test.
 
-The Recipe model is handled by the RecipesController, the Product
-model is handled by the ProductsController, and so on.
+Commonly, controllers are used to manage the logic around a single model. For
+example, if you were building a site for an online bakery, you might have a
+RecipesController and an IngredientsController managing your recipes and their
+ingredients.  In CakePHP, controllers are named after the primary model they
+handle. It's totally possible to have controllers work with more than one model as
+well.
 
-Your application's controllers are classes that extend the CakePHP
-AppController class, which in turn extends a core Controller class,
-which is part of CakePHP. The AppController class can
-be defined in ``/app/Controller/AppController.php`` and it should 
-contain methods that are shared between all of your application’s
-controllers.
+Your application's controllers extend ``AppController`` class, which in turn
+extends the core :php:class:`Controller` class. The AppController
+class can be defined in ``/app/Controller/AppController.php`` and it should
+contain methods that are shared between all of your application’s controllers.
 
-Controllers can include any number of methods which are usually
-referred to as *actions*. Actions are controller methods used to
-display views. An action is a single public method of a controller.
+Controllers provide a number of methods which are called *actions*.  Actions are
+methods on a controller that handle requests.  By default all public methods on
+a controller are an action, and accessible from a url.
 
-CakePHP’s dispatcher calls actions when an incoming request matches
-the route to a controller's action (refer to
-:ref:`routes-configuration` for an
-explanation on how controller actions and parameters are mapped
-from the URL).
 
 .. _app-controller:
 
@@ -80,42 +76,51 @@ controller callbacks for best results::
         parent::beforeFilter();
     }
  
+Request parameters
+==================
+
+When a request is made to a CakePHP application,  CakePHP's :php:class:`Router` and
+:php:class:`Dispatcher` classes use :ref:`routes-configuration` to find and
+create the correct controller. The request data is encapsulated into a request
+object. CakePHP puts all of the important request information into the
+``$this->request`` property.  See the section on
+:doc:`/controllers/request-response` for more information on the CakePHP request
+object.
+
 Controller actions
 ==================
 
-Returning to our online bakery example, our RecipesController might
-contain the ``view()``, ``share()``, and ``search()`` actions. The
-controller would be found in
-``/app/Controller/RecipesController.php`` and contain::
+Returning to our online bakery example, our RecipesController might contain the
+``view()``, ``share()``, and ``search()`` actions. The controller would be found
+in ``/app/Controller/RecipesController.php`` and contain::
 
         <?php
         
         # /app/Controller/RecipesController.php
-    
+        
         class RecipesController extends AppController {
             function view($id) {
                 //action logic goes here..
             }
-    
+        
             function share($customer_id, $recipe_id) {
                 //action logic goes here..
             }
-    
+        
             function search($query) {
                 //action logic goes here..
             }
         }
-    
-        ?>
 
-In order for you to use a controller effectively in your own
-application, we’ll cover some of the core attributes and methods
-provided by CakePHP’s controllers.
+In order for you to use a controller effectively in your own application, we'll
+cover some of the core attributes and methods provided by CakePHP's controllers.
 
 .. _controller-life-cycle:
 
 Request Life-cycle callbacks
 ============================
+
+.. php:class:: Controller
 
 CakePHP controllers come fitted with callbacks you can use to
 insert logic around the request life-cycle:
@@ -150,11 +155,9 @@ also provide a similar set of callbacks.
 Controller Methods
 ==================
 
-.. php:class:: Controller
-
 For a complete list of controller methods and their descriptions
 visit the CakePHP API. Check out
-`http://api13.cakephp.org/class/controller <http://api13.cakephp.org/class/controller>`_.
+`http://api20.cakephp.org/class/controller <http://api20.cakephp.org/class/controller>`_.
 
 Interacting with Views
 ----------------------
@@ -338,8 +341,9 @@ Flow Control
 
 Callbacks
 ---------
-    In addition to the :ref:`controller-life-cycle`.
-    CakePHP also supports callbacks related to scaffolding.
+
+In addition to the :ref:`controller-life-cycle`.
+CakePHP also supports callbacks related to scaffolding.
 
 .. php:method:: _beforeScaffold($method)
 
@@ -424,9 +428,9 @@ Other Useful Methods
     model. This function offers a quick shortcut on building search
     logic. For example, an administrative user may want to be able to
     search orders in order to know which items need to be shipped. You
-    can use CakePHP’s Form- and HtmlHelpers to create a quick form
-    based on the Order model. Then a controller action can use the data
-    posted from that form to craft find conditions::
+    can use CakePHP's :php:class:`FormHelper` and :php:class:`HtmlHelper`
+    to create a quick form based on the Order model. Then a controller action
+    can use the data posted from that form to craft find conditions::
 
         <?php
         function index() {
@@ -435,10 +439,10 @@ Other Useful Methods
             $this->set('orders', $orders);
         }
 
-    If $this->data[‘Order’][‘destination’] equals “Old Towne Bakery”,
+    If ``$this->request->data['Order']['destination']`` equals "Old Towne Bakery",
     postConditions converts that condition to an array compatible for
     use in a Model->find() method. In this case,
-    array(“Order.destination” => “Old Towne Bakery”).
+    ``array('Order.destination' => 'Old Towne Bakery')``.
 
     If you want to use a different SQL operator between terms, supply them
     using the second parameter::
@@ -546,20 +550,21 @@ Other Useful Methods
     In addition, requestAction now takes array based cake style urls::
 
         <?php
-        echo $this->requestAction(array('controller' => 'articles', 'action' => 'featured'), array('return'));
+        echo $this->requestAction(
+            array('controller' => 'articles', 'action' => 'featured'),
+            array('return')
+        );
 
     This allows the requestAction call to bypass the usage of
     Router::url which can increase performance. The url based arrays
-    are the same as the ones that HtmlHelper::link uses with one
-    difference - if you are using named or passed parameters, you must
-    put them in a second array and wrap them with the correct key. This
-    is because requestAction merges the named args array
-    (requestAction's 2nd parameter) with the Controller::params member
-    array and does not explicitly place the named args array into the
-    key 'named'; Additional members in the ``$option`` array will also be
-    made available in the requested action's Controller::params array.
-
-    ::
+    are the same as the ones that :php:meth:`HtmlHelper::link()` uses with one
+    difference - if you are using named or passed parameters, you must put them
+    in a second array and wrap them with the correct key. This is because
+    requestAction merges the named args array (requestAction's 2nd parameter)
+    with the Controller::params member array and does not explicitly place the
+    named args array into the key 'named'; Additional members in the ``$option``
+    array will also be made available in the requested action's
+    Controller::params array::
         
         <?php
         echo $this->requestAction('/articles/featured/limit:3');
@@ -568,9 +573,15 @@ Other Useful Methods
     As an array in the requestAction would then be::
 
         <?php
-        echo $this->requestAction(array('controller' => 'articles', 'action' => 'featured'), array('named' => array('limit' => 3)));
+        echo $this->requestAction(
+            array('controller' => 'articles', 'action' => 'featured'),
+            array('named' => array('limit' => 3))
+        );
 
-        echo $this->requestAction(array('controller' => 'articles', 'action' => 'view'), array('pass' => array(5)));
+        echo $this->requestAction(
+            array('controller' => 'articles', 'action' => 'view'),
+            array('pass' => array(5))
+        );
 
     .. note::
 
@@ -579,10 +590,9 @@ Other Useful Methods
 
     When using an array url in conjunction with requestAction() you
     must specify **all** parameters that you will need in the requested
-    action. This includes parameters like ``$this->data`` and
-    ``$this->params['form']``. In addition to passing all required
-    parameters, named and pass parameters must be done in the second
-    array as seen above.
+    action. This includes parameters like ``$this->request->data``.  In addition
+    to passing all required parameters, named and pass parameters must be done
+    in the second array as seen above.
 
 
 .. php:method:: loadModel(string $modelClass, mixed $id)
@@ -604,24 +614,22 @@ Controller Attributes
 
 For a complete list of controller attributes and their descriptions
 visit the CakePHP API. Check out
-`http://api.cakephp.org/class/controller <http://api13.cakephp.org/class/controller>`_.
+`http://api.cakephp.org/class/controller <http://api20.cakephp.org/class/controller>`_.
 
 .. php:attr:: name
 
-    PHP4 users should start out their controller definitions using the
-    ``$name`` attribute. The ``$name`` attribute should be set to the
+    The ``$name`` attribute should be set to the
     name of the controller. Usually this is just the plural form of the
-    primary model the controller uses. This takes care of some PHP4
-    classname oddities and helps CakePHP resolve naming.::
+    primary model the controller uses. This property is not required,
+    but saves CakePHP from inflecting it::
 
         <?php
         
         # $name controller attribute usage example
         
         class RecipesController extends AppController {
-           var $name = 'Recipes';
+           public $name = 'Recipes';
         }
-        
         
 
 $components, $helpers and $uses
@@ -668,9 +676,9 @@ given by ``$helpers`` to the view as an object reference variable
 
         <?php
         class RecipesController extends AppController {
-            var $uses = array('Recipe', 'User');
-            var $helpers = array('Ajax');
-            var $components = array('Email');
+            public $uses = array('Recipe', 'User');
+            public $helpers = array('Js');
+            public $components = array('RequestHandler');
         }
 
     Each of these variables are merged with their inherited values,
@@ -692,24 +700,35 @@ While you can check out the details for all controller attributes
 in the API, there are other controller attributes that merit their
 own sections in the manual.
 
-The $cacheAction attribute aids in caching views, and the $paginate
-attribute is used to set pagination defaults for the controller.
-For more information on how to use these attributes, check out
-their respective sections later on in this manual.
+.. php:attr: cacheAction
+
+    The cacheAction attribute is used to define the duration and other
+    information about full page caching.  You can read more about
+    full page caching in the :php:class:`CacheHelper` documentation.
+
+.. php:attr: paginate
+
+    The paginate attribute is a deprecated compatibiliy property.  Using it
+    loads and configures the :php:class:`PaginatorComponent`.  It is recommended
+    that you update your code to use normal component settings::
+
+        <?php
+        class ArticlesController extends AppController {
+            public $components = array(
+                'Paginator' => array(
+                    'Article' => array(
+                        'conditions' => array('published' => 1)
+                    )
+                )
+            );
+        }
 
 .. todo::
 
-    Stub. Update Me!
-
-Used to create cached instances of models a controller uses. When
-set to true, all models related to the controller will be cached.
-This can increase performance in many cases.
-
-
-.. todo::
-
-	This chapter should be less about the controller api and more about examples, the controller attributes section is overwhelming
-	and difficult to understand at first. The chapter should start with some example controllers and what they do.
+    This chapter should be less about the controller api and more about
+    examples, the controller attributes section is overwhelming and difficult to
+    understand at first. The chapter should start with some example controllers
+    and what they do.
 
 More on controllers
 ===================
