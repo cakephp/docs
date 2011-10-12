@@ -157,6 +157,7 @@ actual PHP class file would look something like this::
 
     <?php
     /* /app/View/Helper/LinkHelper.php */
+    App::uses('AppHelper', 'View/Helper');
     
     class LinkHelper extends AppHelper {
         function makeEdit($title, $url) {
@@ -166,7 +167,7 @@ actual PHP class file would look something like this::
 
 .. note::
 
-    Helpers must extend :php:class:`Helper` or implement all the callbacks
+    Helpers must extend either ``AppHelper`` or :php:class:`Helper` or implement all the callbacks
     in the :ref:`helper-api`.
 
 Including other Helpers
@@ -178,6 +179,8 @@ helper. To do so, you can specify helpers you wish to use with a
 
     <?php
     /* /app/View/Helper/LinkHelper.php (using other helpers) */
+    App::uses('AppHelper', 'View/Helper');
+    
     class LinkHelper extends AppHelper {
         public $helpers = array('Html');
     
@@ -223,6 +226,8 @@ functionality that would be available to all helpers, create
 ``/app/View/Helper/AppHelper.php``::
 
     <?php
+    App::uses('AppHelper', 'View/Helper');
+    
     class AppHelper extends Helper {
         function customMethod () {
         }
