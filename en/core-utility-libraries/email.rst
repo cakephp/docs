@@ -25,7 +25,7 @@ using attributes you must use methods. Example::
 
     <?php
     $email = new CakeEmail();
-    $email->from('me@example.com');
+    $email->from(array('me@example.com' => 'My Site'));
     $email->to('you@example.com');
     $email->subject('About');
     $email->send('My message');
@@ -35,7 +35,7 @@ You can re-write the above code as::
 
     <?php
     $email = new CakeEmail();
-    $email->from('me@example.com')
+    $email->from(array('me@example.com' => 'My Site'))
         ->to('you@example.com')
         ->subject('About')
         ->send('My message');
@@ -159,6 +159,13 @@ configuration in this array, the configurations will be used in the
 :php:meth:`CakeEmail::config()` method and passed to the transport class ``config()``.
 For example, if you are using smtp transport, you should pass the host, port and
 other configurations.
+
+.. note::
+
+    The values of above keys using Email or array, like from, to, cc etc. will be passed
+    as first parameter of corresponding methods. The equivalent for:
+    ``CakeEmail::from('my@example.com', 'My Site')``
+    would be defined as  ``'from' => array('my@example.com' => 'My Site')`` in your config
 
 Setting headers
 ---------------
