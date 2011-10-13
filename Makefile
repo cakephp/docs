@@ -53,7 +53,7 @@ website-dirs:
 
 website: website-dirs html epub
 	# Move HTML
-	$(foreach lang, $(LANGS), cp -r build/html/$(lang)/* $(DEST)/$(lang);)
+	$(foreach lang, $(LANGS), cp -r build/html/$(lang) $(DEST)/$(lang);)
 	
 	# Move EPUB files
 	$(foreach lang, $(LANGS), cp -r build/epub/$(lang)/*.epub $(DEST)/_downloads/$(lang);)
