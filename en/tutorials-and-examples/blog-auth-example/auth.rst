@@ -1,10 +1,9 @@
-####################################################
 Simple Authentication and Authorization Application
 ####################################################
 
 Following our :doc:`/tutorials-and-examples/blog/blog` example, imagine we wanted to
-secure the access to secure the access to certain urls, based on the logged in
-user. We also have another requirement to allow our blog to have multiple authors
+secure the access to certain urls, based on the logged in
+user. We also have another requirement, to allow our blog to have multiple authors
 so each one of then can create their own posts, edit and delete them at will
 disallowing other authors to make any changes on one's posts.
 
@@ -22,10 +21,10 @@ First, let's create a new table in our blog database to hold our users' data::
         modified DATETIME DEFAULT NULL
     );
 
-We have sticked to CakePHP conventions in naming tables, but we're also taking
-advantage of another convention: by using the username and password columns
-in a users table, CakePHP will be able to auto configure most things for you
-when implementing the user login.
+We have adhered to the CakePHP conventions in naming tables, but we're also
+taking advantage of another convention: by using the username and password
+columns in a users table, CakePHP will be able to auto configure most things for
+us when implementing the user login.
 
 Next step is to create our User model, responsible for finding, saving and
 validating any user data::
@@ -154,11 +153,11 @@ Authorization (login and logout)
 ================================
 
 We're now ready to add our authentication layer. In CakePHP this is handled
-by the AuthComponent, a class responsible for requiring login for certain
-actions, handle user sign-in and sign-out, and also authorizing logged in
+by the :php:class:`AuthComponent`, a class responsible for requiring login for certain
+actions, handling user sign-in and sign-out, and also authorizing logged in
 users to the actions the are allowed to reach.
 
-To add this component to your application open your app/Controller/AppController.php
+To add this component to your application open your ``app/Controller/AppController.php``
 file and add the following lines::
 
     <?php
@@ -182,16 +181,16 @@ file and add the following lines::
 
 There is not much to configure, as we used the conventions for the users table.
 We just set up the urls that will be loaded after the login and logout actions is
-performed, in our case to `/posts/` and `/` respectively.
+performed, in our case to ``/posts/`` and ``/`` respectively.
 
-What we did in the `beforeFilter` function was to tell the AuthComponent to not
-require a login for all `index` and `view` actions, in every controller. We want
+What we did in the ``beforeFilter`` function was to tell the AuthComponent to not
+require a login for all ``index`` and ``view`` actions, in every controller. We want
 our visitors to be able to read and list the entries without registering in the
 site.
 
 Now, we need to be able to register new users, save their username and password,
-and more importantly encrypt their password so it is not stored as plain text in
-our database. Let's tell the AuthComponent to let not authenticated users to access
+and more importantly hash their password so it is not stored as plain text in
+our database. Let's tell the AuthComponent to let un-authenticated users to access
 the users add function and the implement the login and logout action::
 
     <?php
@@ -214,7 +213,8 @@ the users add function and the implement the login and logout action::
         $this->redirect($this->Auth->logout());
     }
 
-Password encryption is not done yet, open your User.php model file and add the following::
+Password hashing is not done yet, open your ``app/Model/User.php`` model file
+and add the following::
 
     <?php
     // app/Model/User.php
@@ -248,27 +248,27 @@ the login function, here it is::
     <?php echo $this->Form->end(__('Login'));?>
     </div>
 
-You can now register a new user by accessing the `/users/add` url and log-in with the
-newly created credentials by going to `/users/login` url. Also try to access
-any other url that was not explicitly allowed such as `/posts/add`, you will see
+You can now register a new user by accessing the ``/users/add`` url and log-in with the
+newly created credentials by going to ``/users/login`` url. Also try to access
+any other url that was not explicitly allowed such as ``/posts/add``, you will see
 that the application automatically redirects you to the login page.
 
 And that's it! It looks too simple to be truth. Let's go back a bit to explain what
-happened. The `beforeFilter` function is telling the AuthComponent to not require a
-login for the `add` action in addition to the `index` and `view` actions that were
-already allowed int the AppController's `beforeFilter` function.
+happened. The ``beforeFilter`` function is telling the AuthComponent to not require a
+login for the ``add`` action in addition to the ``index`` and ``view`` actions that were
+already allowed int the AppController's ``beforeFilter`` function.
 
-The `login` action calls the `$this->Auth->login()` function in the AuthComponent,
+The ``login`` action calls the ``$this->Auth->login()`` function in the AuthComponent,
 and it works without any further config because we are following conventions as
-mentioned earlier, thats is, having a User model with a username and a password
+mentioned earlier. That is, having a User model with a username and a password
 column, and use a form posted to a controller with the user data. This function
 returns whether the login was successful or not, and in the case it succeeds,
 then we redirect the user to the configured redirection url that we used when
 adding the AuthComponent to our application.
 
-The logout works by just accessing the `/users/logout` url and will redirect
+The logout works by just accessing the ``/users/logout`` url and will redirect
 the user to the configured logoutUrl formerly described. This url is the result
-of the `AuthComponent::logout()` function on success
+of the ``AuthComponent::logout()`` function on success
 
 Authorization (who's allowed to access what)
 ============================================
@@ -294,7 +294,7 @@ logged in user as a reference for the created post::
         }
     }
 
-The `user()` function provided by the component returns any column form the
+The ``user()`` function provided by the component returns any column form the
 currently logged in user. We used this method to add the data into the request
 info that is saved.
 
@@ -316,22 +316,22 @@ Open again the AppController class and add a few more options to the Auth config
     );
 
     public function isAuthorized($user) {
-        if ($user['role'] === 'admin') {
+        if (isset($user['role']) && $user['role'] === 'admin') {
             return true; //Admin can access every action
         }
         return false; // The rest don't
     }
 
 We just created a very simple authorization mechanism. In this case the users
-with role `admin` will be able to access any url in the site when logged in,
-but the rest of them (i.e the role `author`) can't do anything different from
+with role ``admin`` will be able to access any url in the site when logged in,
+but the rest of them (i.e the role ``author``) can't do anything different from
 not logged in users.
 
 This is not exactly what we wanted, so we need to fix to supply more rules to
-our `isAuthorized()` method. But instead of doing it in AppController, let's
+our ``isAuthorized()`` method. But instead of doing it in AppController, let's
 delegate each controller to supply those extra rules. The rules we're going to
 add to PostsController should allow authors to create posts but prevent the
-edition of posts if the author does not match. Open the file PostsController.php
+edition of posts if the author does not match. Open the file ``PostsController.php``
 and add the following content::
 
     <?php
@@ -351,11 +351,11 @@ and add the following content::
         return false;
     }
 
-We're now overriding the AppController's `isAuthorized()` call and internally
+We're now overriding the AppController's ``isAuthorized()`` call and internally
 checking if the parent class is already authorizing the user. If he isn't,
 then just allow him to access the add action, and conditionally access
 edit and delete. A final thing is left to be implemented, to tell whether
-the user is authorized to edit the post or not, we're calling a `isOwnedBy()`
+the user is authorized to edit the post or not, we're calling a ``isOwnedBy()``
 function in the Post model. It is in general a good practice to move as much
 logic as possible into models. Let's then implement the function::
 
