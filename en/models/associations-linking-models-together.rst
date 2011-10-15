@@ -336,7 +336,7 @@ Possible keys for belongsTo association arrays include:
 -  **counterCache**: If set to true the associated Model will
    automatically increase or decrease the
    “[singular\_model\_name]\_count” field in the foreign table
-   whenever you do a save() or delete(). If its a string then its the
+   whenever you do a save() or delete(). If it's a string then it's the
    field name to use. The value in the counter field represents the
    number of related rows. It can also be defined as an array key
    signifying the field name pointing to an array of conditions to
@@ -498,6 +498,68 @@ association in the Comment model empowers you to get User data from
 the Comment model - completing the connection and allowing the flow
 of information from either model’s perspective.
 
+counterCache - Cache your count()
+---------------------------------
+
+This function helps you cache the count of related data. Instead of
+counting the records manually via ``find('count')``, the model
+itself tracks any addition/deleting towards the associated
+``$hasMany`` model and increases/decreases a dedicated integer
+field within the parent model table.
+
+The name of the field consists of the singular model name followed
+by a underscore and the word "count".
+
+::
+
+    my_model_count
+
+Let's say you have a model called ``ImageComment`` and a model
+called ``Image``, you would add a new INT-field to the ``image``
+table and name it ``image_comment_count``.
+
+Here are some more examples:
+
+========== ======================= =========================================
+Model      Associated Model        Example
+========== ======================= =========================================
+User       Image                   users.image\_count
+---------- ----------------------- -----------------------------------------
+Image      ImageComment            images.image\_comment\_count
+---------- ----------------------- -----------------------------------------
+BlogEntry  BlogEntryComment        blog\_entries.blog\_entry\_comment\_count
+========== ======================= =========================================
+
+Once you have added the counter field you are good to go. Activate
+counter-cache in your association by adding a ``counterCache`` key
+and set the value to ``true``::
+
+    <?php
+    class Image extends AppModel {
+        var $belongsTo = array(
+            'ImageAlbum' => array('counterCache' => true)
+        );
+    }
+
+From now on, every time you add or remove a ``Image`` associated to
+``ImageAlbum``, the number within ``image_count`` is adjusted
+automatically.
+
+You can also specify ``counterScope``. It allows you to specify a
+simple condition which tells the model when to update (or when not
+to, depending on how you look at it) the counter value.
+
+Using our Image model example, we can specify it like so::
+
+    <?php
+    class Image extends AppModel {
+        var $belongsTo = array(
+            'ImageAlbum' => array(
+                'counterCache' => true,
+                'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1
+        ));
+    }
+
 hasAndBelongsToMany (HABTM)
 ---------------------------
 
@@ -511,9 +573,9 @@ to be joined up, repeatedly, many times, in many different ways.
 
 The main difference between hasMany and HABTM is that a link
 between models in HABTM is not exclusive. For example, we're about
-to join up our Recipe model with a Tag model using HABTM. Using tomatoes
-as an Ingredient for my grandma's spaghetti recipe doesn't "use up"
-the ingredient. I can also use it for for a salad Recipe.
+to join up our Recipe model with an Ingredient model using HABTM.
+Using tomatoes as an Ingredient for my grandma's spaghetti recipe
+doesn't "use up" the ingredient. I can also use it for a salad Recipe.
 
 Links between hasMany associated objects are exclusive. If my User
 hasMany Comments, a comment is only linked to a specific user. It's
@@ -537,9 +599,9 @@ names.
 Relation
     Schema (HABTM table in bold)
 
-Recipe HABTM Tag
-    ``recipes_tags.id``, ``recipes_tags.recipe_id``,
-    ``recipes_tags.tag_id``
+Recipe HABTM Ingredient
+    ``ingredients_recipes.id``, ``ingredients_recipes.ingredient_id``,
+	``ingredients_recipes.recipe_id``
 
 Cake HABTM Fan
     ``cakes_fans.id``, ``cakes_fans.cake_id``,
@@ -568,7 +630,7 @@ array syntax this time::
         var $hasAndBelongsToMany = array(
             'Ingredient' =>
                 array(
-                    'className'              => 'Tag',
+                    'className'              => 'Ingredient',
                     'joinTable'              => 'ingredients_recipes',
                     'foreignKey'             => 'recipe_id',
                     'associationForeignKey'  => 'ingredient_id',
@@ -645,22 +707,22 @@ Recipe model will also fetch related Tag records if they exist::
                 [created] => 2007-05-01 10:31:01
                 [user_id] => 2346
             )
-        [Tag] => Array
+        [Ingredient] => Array
             (
                 [0] => Array
                     (
                         [id] => 123
-                        [name] => Breakfast
+                        [name] => Chocolate
                     )
                [1] => Array
                     (
                         [id] => 124
-                        [name] => Dessert
+                        [name] => Sugar
                     )
                [2] => Array
                     (
                         [id] => 125
-                        [name] => Heart Disease
+                        [name] => Bombs
                     )
             )
     )
@@ -672,8 +734,8 @@ like to fetch Recipe data when using the Ingredient model.
 
    HABTM data is treated like a complete set, each time a new data association is added
    the complete set of associated rows in database is dropped and created again so you
-   will always need to pass the whole data set for saving. For alternative to use HABTM
-    see :ref:`hasMany-through`
+   will always need to pass the whole data set for saving. For an alternative to using
+   HABTM see :ref:`hasMany-through`
 
 .. tip::
 
@@ -693,7 +755,7 @@ many association. Consider the following
 `Course hasAndBelongsToMany Student`
 
 In other words, a Student can take many Courses and a Course can be
-taken my many Students. This is a simple many to many association
+taken by many Students. This is a simple many to many association
 demanding a table such as this::
 
     id | student_id | course_id
@@ -1035,7 +1097,7 @@ fields::
     
     $privateItems = $Item->find('all', $options);
 
-You could perform several joins as needed in hasBelongsToMany:
+You could perform several joins as needed in hasAndBelongsToMany:
 
 Suppose a Book hasAndBelongsToMany Tag association. This relation
 uses a books\_tags table as join table, so you need to join the
@@ -1066,9 +1128,8 @@ table::
     
     $books = $Book->find('all', $options);
 
-Using joins with Containable behavior could lead to some SQL errors
-(duplicate tables), so you need to use the joins method as an
-alternative for Containable if your main goal is to perform
-searches based on related data. Containable is best suited to
-restricting the amount of related data brought by a find
-statement.
+Using joins allows you to have a maximum flexibility in how CakePHP handles associations
+and fetch the data, however in most cases you can use other tools to achieve the same results
+such as correctly defining associations, binding models on the fly and using the Containable
+behavior. This feature should be used with care because it could lead, in a few cases, into bad formed
+SQL queries if combined with any of the former techniques described for associating models.

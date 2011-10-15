@@ -12,6 +12,7 @@ core, configure additional/different URL mappings (routes), and
 define additional/different inflections.
 
 .. index:: database.php, database.php.default
+.. _database-configuration:
 
 Database Configuration
 ======================
@@ -22,15 +23,17 @@ be found at ``app/Config/database.php.default``. A finished
 configuration should look something like this::
 
     <?php
-    var $default = array(
-        'datasource'  => 'Database/Mysql',
-        'persistent'  => false,
-        'host'        => 'localhost',
-        'login'       => 'cakephpuser',
-        'password'    => 'c4k3roxx!',
-        'database'    => 'my_cakephp_project',
-        'prefix'      => ''
-    );
+    class DATABASE_CONFIG {
+        public $default = array(
+            'datasource'  => 'Database/Mysql',
+            'persistent'  => false,
+            'host'        => 'localhost',
+            'login'       => 'cakephpuser',
+            'password'    => 'c4k3roxx!',
+            'database'    => 'my_cakephp_project',
+            'prefix'      => ''
+        );
+    }
 
 The $default connection array is used unless another connection is
 specified by the ``$useDbConfig`` property in a model. For example, if

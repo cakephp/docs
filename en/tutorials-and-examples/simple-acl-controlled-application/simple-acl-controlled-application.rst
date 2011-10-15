@@ -363,6 +363,6 @@ path when looking up controllers/actions. In ``AppController`` add
 the following to the ``beforeFilter``::
 
     <?php
-    $this->Auth->actionPath = 'controllers/';
+    $this->Auth->actionPath = 'controllers';
 
 Continue to :doc:`part-two` to continue the tutorial.

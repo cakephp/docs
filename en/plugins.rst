@@ -33,7 +33,7 @@ You can either load them one by one or all of them in a single call::
 
 
 loadAll loads all plugins available, while allowing you to set certain
-settings for specific plugins. load() works similar, but only loads the 
+settings for specific plugins. load() works similarly, but only loads the 
 plugins you explicitely specify.
 
 There is a lot you can do with the load and loadAll methods to help with
@@ -359,6 +359,13 @@ component. For example::
 
 The same technique applies to Helpers and Behaviors.
 
+.. note::
+
+    When creating Helpers you may find AppHelper is not automatically available. You should declare the resources you need with Uses::
+    
+    <?php
+    //Declare use of AppHelper for your Plugin's Helper
+    App::uses('AppHelper', 'View/Helper');
 
 Expand Your Plugin
 ------------------

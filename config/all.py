@@ -29,7 +29,7 @@ master_doc = 'contents'
 
 # General information about the project.
 project = u'CakePHP Cookbook'
-copyright = u'2011, CakePHP'
+copyright = u'2011, Cake Software Foundation, Inc'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -209,9 +209,9 @@ man_pages = [
 
 # Bibliographic Dublin Core info.
 epub_title = u'CakePHP Cookbook'
-epub_author = u'CakePHP'
-epub_publisher = u'CakePHP'
-epub_copyright = u'2011, CakePHP'
+epub_author = u'Cake Software Foundation, Inc.'
+epub_publisher = u'Cake Software Foundation, Inc.'
+epub_copyright = u'2011, Cake Software Foundation, Inc.'
 
 epub_theme = 'epub'
 

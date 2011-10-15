@@ -1,5 +1,47 @@
+Documentation
+#############
+
+Contributing to the documentation is simple.  The files are hosted on
+http://github.com/cakephp/docs.  Feel free to fork the repo, add your
+changes/improvements/translations and give back by issuing a pull request.
+You can even edit the docs online with github, without ever downloading the
+files.
+
+Translations
+============
+
+Email the docs team (docs at cakephp dot org) or hop on IRC
+(#cakephp on freenode) to discuss any translation efforts you would
+like to participate in.
+
+Translator tips:
+
+- Browse and edit in the language you want the content to be
+  translated to - otherwise you won't see what has already been
+  translated.
+- Feel free to dive right in if your chosen language already
+  exists on the book.
+- Use the to do list (top right) to see where attention is needed
+  for your language.
+- Use `Informal Form <http://en.wikipedia.org/wiki/Register_(linguistics)>`_.
+- Translate both the content and the title at the same time.
+- Do compare to the English content before submitting a correction
+  (if you correct something, but don't integrate an 'upstream' change
+  your submission won't be accepted).
+- If you need to write an English term, wrap it in ``<em>`` tags.
+  E.g. "asdf asdf *Controller* asdf" or "asdf asdf Kontroller
+  (*Controller*) asfd" as appropriate.
+- Do not submit partial translations.
+- Do not edit a section with a pending change.
+- Do not use
+  `html entities <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+  for accented characters, the book uses UTF-8.
+- Do not significantly change the markup (HTML) or add new content
+- If the original content is missing some info, submit an edit for
+  that first.
+
 Documentation formatting guide
-##############################
+==============================
 
 The new CakePHP documentation is written with ReST formatted text.  ReST 
 (Re Structured Text) is a plain text markup syntax similar to markdown, or
@@ -8,13 +50,13 @@ CakePHP documentation you follow the guidelines here on how to format and
 structure your text.
 
 Line length
-===========
+-----------
 
 Lines of text should be wrapped at 80 columns.  The only exception should be
 long urls, and code snippets.
 
 Headings and Sections
-=====================
+---------------------
 
 Section headers are created by underlining the title with punctuation characters
 at least the length of the text.
@@ -29,13 +71,13 @@ Headings should not be nested more than 5 levels deep. Headings should be
 preceded and followed by a blank line.
 
 Paragraphs
-==========
+----------
 
 Paragraphs are simply blocks of text, with all the lines at the same level of indentation.
 Paragraphs should be separated by more than one empty line.
 
 Inline markup
-=============
+-------------
 
 * one asterisk: *text* for emphasis (italics),
 * two asterisks: **text** for strong emphasis (boldface), and
@@ -52,7 +94,7 @@ Inline markup has a few restrictions:
   backslash escaped space to work around that: ``onelong\ *bolded*\ word``.
 
 Lists
-=====
+-----
 
 List markup is very similar to markdown.  Unordered lists are indicated by
 starting a line with a single asterisk and a space.  Numbered lists can be
@@ -90,12 +132,12 @@ Terms cannot be more than one line, but definitions can be multi-line and all
 lines should be indented consistently.
 
 Links
-=====
+-----
 
 There are several kinds of links, each with their own uses.
 
 External links
---------------
+~~~~~~~~~~~~~~
 
 Links to external documents can be with the following::
 
@@ -104,7 +146,7 @@ Links to external documents can be with the following::
 The above would generate a link pointing to http://example.com
 
 Links to other pages
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. rst:role:: doc
 
@@ -117,7 +159,7 @@ Links to other pages
     regardless of where it was used.
 
 Cross referencing links
------------------------
+~~~~~~~~~~~~~~~~~~~~~~~
 
 .. rst:role:: ref
 
@@ -140,7 +182,7 @@ Cross referencing links
     provide custom link text using ``:ref:`Link text <label-name>```.
 
 Describing classes and their contents
-=====================================
+-------------------------------------
 
 The CakePHP documentation uses the `phpdomain
 <http://pypi.python.org/pypi/sphinxcontrib-phpdomain>` to provide custom
@@ -223,7 +265,7 @@ Each directive populates the index, and or the namespace index.
    Describe an property/attribute on a class.
 
 Cross Referencing
------------------
+~~~~~~~~~~~~~~~~~
 
 The following roles refer to php objects and links are generated if a 
 matching directive is found:
@@ -268,7 +310,7 @@ matching directive is found:
 
 
 Source code
-===========
+-----------
 
 Literal code blocks are created by ending a paragraph with ``::``. The literal
 block must be indented, and like all paragraphs be separated by single lines::
@@ -285,7 +327,7 @@ Literal text is not modified or formatted, save that one level of indentation is
 
 
 Notes and warnings
-==================
+------------------
 
 There are often times when you want to inform the reader of an important tip,
 special note or a potential hazard. Admonitions in sphinx are used for just
@@ -310,7 +352,7 @@ All admonitions are made the same::
     This text is not part of the note.
 
 Samples
--------
+~~~~~~~
 
 .. tip::
 

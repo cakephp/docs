@@ -25,7 +25,7 @@ using attributes you must use methods. Example::
 
     <?php
     $email = new CakeEmail();
-    $email->from('me@example.com');
+    $email->from(array('me@example.com' => 'My Site'));
     $email->to('you@example.com');
     $email->subject('About');
     $email->send('My message');
@@ -35,7 +35,7 @@ You can re-write the above code as::
 
     <?php
     $email = new CakeEmail();
-    $email->from('me@example.com')
+    $email->from(array('me@example.com' => 'My Site'))
         ->to('you@example.com')
         ->subject('About')
         ->send('My message');
@@ -104,7 +104,7 @@ You can configure SSL SMTP servers, like GMail. To do so, put the ``'ssl://'``
 at prefix in the host and configure the port value accordingly.  Example::
 
     <?php
-    class CakeEmail {
+    class EmailConfig {
         public $gmail = array(
             'host' => 'ssl://smtp.gmail.com',
             'port' => 465,
@@ -125,32 +125,47 @@ Configurations
 
 The following configuration keys are used:
 
--  ``'from'``: Email or array of sender. See ``CakeEmail::from()``.
--  ``'sender'``: Email or array of real sender. See ``CakeEmail::sender()``.
--  ``'to'``: Email or array of destination. See ``CakeEmail::to()``.
--  ``'cc'``: Email or array of carbon copy. See ``CakeEmail::cc()``.
--  ``'bcc'``: Email or array of blind carbon copy. See ``CakeEmail::bcc()``.
--  ``'replyTo'``: Email or array to reply the e-mail. See ``CakeEmail::replyTo()``.
--  ``'readReceipt'``: Email or array to receive the receipt of read. See ``CakeEmail::readReceipt()``.
--  ``'returnPath'``: Email or array to return if have some error. See ``CakeEmail::returnPath()``.
--  ``'messageId'``: Message ID of e-mail. See ``CakeEmail::messageId()``.
--  ``'subject'``: Subject of the message. See ``CakeEmail::subject()``.
--  ``'message'``: Content of message. Do not set this field if you are using rendered content.
--  ``'headers'``: Headers to be included. See ``CakeEmail::setHeaders()``.
--  ``'viewRender'``: If you are using rendered content, set the view classname. See ``CakeEmail::viewRender()``.
--  ``'template'``: If you are using rendered content, set the template name. See ``CakeEmail::template()``.
--  ``'layout'``: If you are using rendered content, set the layout to render. If you want to render a template without layout, set this field to null. See ``CakeEmail::template()``.
--  ``'viewVars'``: If you are using rendered content, set the array with variables to be used in the view. See ``CakeEmail::viewVars()``.
--  ``'attachments'``: List of files to attach. See ``CakeEmail::attachments()``.
--  ``'emailFormat'``: Format of email (html, text or both). See ``CakeEmail::emailFormat()``.
--  ``'transport'``: Transport name. See ``CakeEmail::transport()``.
--  ``'log'``: Log level to log the email headers and message. ``true`` will use LOG_DEBUG. See also ``CakeLog::write()``
+- ``'from'``: Email or array of sender. See ``CakeEmail::from()``.
+- ``'sender'``: Email or array of real sender. See ``CakeEmail::sender()``.
+- ``'to'``: Email or array of destination. See ``CakeEmail::to()``.
+- ``'cc'``: Email or array of carbon copy. See ``CakeEmail::cc()``.
+- ``'bcc'``: Email or array of blind carbon copy. See ``CakeEmail::bcc()``.
+- ``'replyTo'``: Email or array to reply the e-mail. See ``CakeEmail::replyTo()``.
+- ``'readReceipt'``: Email address or an array of addresses to receive the
+  receipt of read. See ``CakeEmail::readReceipt()``.
+- ``'returnPath'``: Email address or and array of addresses to return if have
+  some error. See ``CakeEmail::returnPath()``.
+- ``'messageId'``: Message ID of e-mail. See ``CakeEmail::messageId()``.
+- ``'subject'``: Subject of the message. See ``CakeEmail::subject()``.
+- ``'message'``: Content of message. Do not set this field if you are using rendered content.
+- ``'headers'``: Headers to be included. See ``CakeEmail::setHeaders()``.
+- ``'viewRender'``: If you are using rendered content, set the view classname.
+  See ``CakeEmail::viewRender()``.
+- ``'template'``: If you are using rendered content, set the template name. See
+  ``CakeEmail::template()``.
+- ``'layout'``: If you are using rendered content, set the layout to render. If
+  you want to render a template without layout, set this field to null. See
+  ``CakeEmail::template()``.
+- ``'viewVars'``: If you are using rendered content, set the array with
+  variables to be used in the view. See ``CakeEmail::viewVars()``.
+- ``'attachments'``: List of files to attach. See ``CakeEmail::attachments()``.
+- ``'emailFormat'``: Format of email (html, text or both). See ``CakeEmail::emailFormat()``.
+- ``'transport'``: Transport name. See ``CakeEmail::transport()``.
+- ``'log'``: Log level to log the email headers and message. ``true`` will use
+  LOG_DEBUG. See also ``CakeLog::write()``
 
 All these configurations are optional, except ``'from'``. If you put more
 configuration in this array, the configurations will be used in the
 :php:meth:`CakeEmail::config()` method and passed to the transport class ``config()``.
 For example, if you are using smtp transport, you should pass the host, port and
 other configurations.
+
+.. note::
+
+    The values of above keys using Email or array, like from, to, cc etc. will be passed
+    as first parameter of corresponding methods. The equivalent for:
+    ``CakeEmail::from('my@example.com', 'My Site')``
+    would be defined as  ``'from' => array('my@example.com' => 'My Site')`` in your config
 
 Setting headers
 ---------------
@@ -209,6 +224,17 @@ And in your email templates you can use these with::
 
     <p>Here is your value: <b><?php echo $value; ?></b></p>
 
+You can use helpers in emails as well, much like you can in normal view files.
+By default only the :php:class:`HtmlHelper` is loaded.  You can load additional
+helpers using the ``helpers()`` method::
+
+    <?php
+    $email->helpers(array('Html', 'Custom', 'Text'));
+
+When setting helpers be sure to include 'Html' or it will be removed from the
+helpers loaded in your email template.
+
+
 Sending attachments
 -------------------
 
@@ -256,7 +282,7 @@ Creating custom Transports
 
 You are able to create your custom transports to integrate with others email
 systems (like SwiftMailer). To create your transport, first create the file
-``app/Network/Email/ExampleTransport.php`` (where Example is the name of your
+``app/Lib/Network/Email/ExampleTransport.php`` (where Example is the name of your
 transport). To start off your file should look like::
 
     <?php

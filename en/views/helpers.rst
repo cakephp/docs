@@ -8,10 +8,6 @@ shared between many views, elements, or layouts. This chapter will
 show you how to create your own helpers, and outline the basic
 tasks CakePHP’s core helpers can help you accomplish.
 
-Helpers are the component-like classes for the presentation layer
-of your application. They contain presentational logic that is
-shared between many views, elements, or layouts.
-
 CakePHP features a number of helpers that aid in view creation.
 They assist in creating well-formed markup (including forms), aid
 in formatting text, times and numbers, and can even speed up Ajax
@@ -23,7 +19,7 @@ check out :doc:`/core-libraries/helpers`.
 Using and Configuring Helpers
 =============================
 
-You configure helpers in CakePHP by making a controller aware of them.  Each
+You enable helpers in CakePHP by making a controller aware of them.  Each
 controller has a :php:attr:`~Controller::$helpers` property that lists the
 helpers to be made available in the view.  To enable a helper in your view, add
 the name of the helper to the controller's ``$helpers`` array::
@@ -103,7 +99,7 @@ The above would *alias* ``MyHtmlHelper`` to ``$this->Html`` in your views.
     Aliasing a helper replaces that instance anywhere that helper is used,
     including inside other Helpers.
 
-Using helper settings allows you to declaritively configure your helpers.  And
+Using helper settings allows you to declaritively configure your helpers and
 keep configuration logic out of your controller actions.  If you have
 configuration options that cannot be included as part of a class declaration,
 you can set those in your controller's beforeRender callback::
@@ -161,6 +157,7 @@ actual PHP class file would look something like this::
 
     <?php
     /* /app/View/Helper/LinkHelper.php */
+    App::uses('AppHelper', 'View/Helper');
     
     class LinkHelper extends AppHelper {
         function makeEdit($title, $url) {
@@ -170,7 +167,7 @@ actual PHP class file would look something like this::
 
 .. note::
 
-    Helpers must extend :php:class:`Helper` or implement all the callbacks
+    Helpers must extend either ``AppHelper`` or :php:class:`Helper` or implement all the callbacks
     in the :ref:`helper-api`.
 
 Including other Helpers
@@ -182,6 +179,8 @@ helper. To do so, you can specify helpers you wish to use with a
 
     <?php
     /* /app/View/Helper/LinkHelper.php (using other helpers) */
+    App::uses('AppHelper', 'View/Helper');
+    
     class LinkHelper extends AppHelper {
         public $helpers = array('Html');
     
@@ -227,6 +226,8 @@ functionality that would be available to all helpers, create
 ``/app/View/Helper/AppHelper.php``::
 
     <?php
+    App::uses('AppHelper', 'View/Helper');
+    
     class AppHelper extends Helper {
         function customMethod () {
         }
@@ -251,7 +252,7 @@ Helper API
 
 .. php:method:: url($url, $full = false)
 
-    Generates an HTML escaped URL, delgates to :php:meth:`Router::url()`.
+    Generates an HTML escaped URL, delegates to :php:meth:`Router::url()`.
 
 .. php:method:: value($options = array(), $field = null, $key = 'value')
 
@@ -269,7 +270,7 @@ Callbacks
 .. php:method:: beforeRender($viewFile)
 
     The beforeRender method is called after the controller's
-    beforeRender method but before the controller's renders views and
+    beforeRender method but before the controller renders view and
     layout. Receives the file being rendered as an argument.
 
 .. php:method:: afterRender($viewFile)

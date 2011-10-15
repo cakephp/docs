@@ -1,7 +1,6 @@
 Virtual fields
 ##############
 
-Virtual fields are a new feature in the Model for CakePHP 1.3.
 Virtual fields allow you to create arbitrary SQL expressions and
 assign them as fields in a Model. These fields cannot be saved, but
 will be treated like other model fields for read operations. They
@@ -50,9 +49,9 @@ with virtual fields can be done through a few different methods.
 Model::hasField()
 -----------------
 
-Model::hasField() has been updated so that it can return true if
+Model::hasField() will return true if
 the model has a virtualField with the correct name. By setting the
-second parameter of hasField to true, virtualFields will also be
+second parameter of `hasField()` to true, virtualFields will also be
 checked when checking if a model has a field. Using the example
 field above,
 
@@ -89,8 +88,7 @@ Model::find() and virtual fields
 
 As stated earlier ``Model::find()`` will treat virtual fields much
 like any other field in a model. The value of a virtual field will
-be placed under the model's key in the resultset. Unlike the
-behavior of calculated fields in 1.2
+be placed under the model's key in the resultset.
 
 ::
 
@@ -110,8 +108,7 @@ Pagination and virtual fields
 -----------------------------
 
 Since virtual fields behave much like regular fields when doing
-find's, ``Controller::paginate()`` has been updated to allows
-sorting by virtual fields.
+find's, ``Controller::paginate()`` will be able to sort by virtual fields too.
 
 Virtual fields and model aliases
 ================================
@@ -135,7 +132,7 @@ model.
 Limitations of virtualFields
 ============================
 
-The implementation of ``virtualFields`` in 1.3 has a few
+The implementation of ``virtualFields`` has a few
 limitations. First you cannot use ``virtualFields`` on associated
 models for conditions, order, or fields arrays. Doing so will
 generally result in an SQL error as the fields are not replaced by
@@ -150,14 +147,7 @@ need to access them.
 
     $this->virtualFields['full_name'] = $this->Author->virtualFields['full_name'];
 
-Alternatively, you can define ``$virtualFields`` in your model's
-constructor, using ``$this->alias``, like so:
+or
 
 ::
-
-    public function __construct($id=false,$table=null,$ds=null){
-      parent::__construct($id,$table,$ds);
-      $this->virtualFields = array(
-        'name'=>"CONCAT(`{$this->alias}`.`first_name`,' ',`{$this->alias}`.`last_name`)"
-      );
-    }
+    $this->virtualFields += $this->Author->virtualFields;

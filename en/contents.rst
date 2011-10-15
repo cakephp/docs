@@ -5,10 +5,9 @@ Contents
    :maxdepth: 3
 
    index
-   basic-info
-   cakephp-overview
    installation
    getting-started
+   cakephp-overview
    controllers
    views
    models
@@ -19,6 +18,7 @@ Contents
    development
    deployment
    tutorials-and-examples
+   contributing
    appendices
 
 .. todolist::
