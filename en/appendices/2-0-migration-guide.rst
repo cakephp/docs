@@ -1014,6 +1014,7 @@ notation ``$model->find('type', array(PARAMS))`` as in Cake 1.3.
   public and can be modified by behaviors.
 
 
+
 Database objects
 ----------------
 
@@ -1095,6 +1096,24 @@ BehaviorCollection
 
 -  ``BehaviorCollection`` no longer ``strtolower()'s`` mappedMethods. Behavior
    mappedMethods are now case sensitive.
+
+AclBehavior and TreeBehavior
+----------------------------
+
+- No longer supports strings as configuration. Example::
+
+    public $actsAs = array(
+        'Acl' => 'Controlled',
+        'Tree' => 'nested'
+    );
+
+  became::
+
+  public $actsAs = array(
+      'Acl' => array('type' => 'Controlled'),
+      'Tree' => array('type' => 'nested')
+  );
+
 
 Plugins
 =======
