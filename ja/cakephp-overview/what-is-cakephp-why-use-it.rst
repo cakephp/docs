@@ -28,7 +28,8 @@ CakePHPの使用で益を受ける幾つかの点をざっと挙げると次の�
    `CRUD <http://ja.wikipedia.org/wiki/CRUD>`_
    が統合済み
 -  アプリケーションの
-   `足場組み（*scaffolding*） <http://en.wikipedia.org/wiki/Scaffold_(programming)>`_
+   `足場組み <http://en.wikipedia.org/wiki/Scaffold_(programming)>`_
+   (*scaffolding*)
 -  コード生成
 -  `MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_
    アーキテクチャ
