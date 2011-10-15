@@ -345,19 +345,19 @@ Callbacks
 In addition to the :ref:`controller-life-cycle`.
 CakePHP also supports callbacks related to scaffolding.
 
-.. php:method:: _beforeScaffold($method)
+.. php:method:: beforeScaffold($method)
 
     $method name of method called example index, edit, etc.
 
-.. php:method:: _afterScaffoldSave($method)
+.. php:method:: afterScaffoldSave($method)
 
     $method name of method called either edit or update.
 
-.. php:method:: _afterScaffoldSaveError($method)
+.. php:method:: afterScaffoldSaveError($method)
 
     $method name of method called either edit or update.
 
-.. php:method:: _scaffoldError($method)
+.. php:method:: scaffoldError($method)
 
     $method name of method called example index, edit, etc.
 
