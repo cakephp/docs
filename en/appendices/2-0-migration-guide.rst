@@ -1109,10 +1109,10 @@ AclBehavior and TreeBehavior
 
   became::
 
-  public $actsAs = array(
-      'Acl' => array('type' => 'Controlled'),
-      'Tree' => array('type' => 'nested')
-  );
+    public $actsAs = array(
+        'Acl' => array('type' => 'Controlled'),
+        'Tree' => array('type' => 'nested')
+    );
 
 
 Plugins
