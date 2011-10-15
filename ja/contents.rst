@@ -5,7 +5,9 @@
    :maxdepth: 3
 
    index
+   basic-info
    cakephp-overview
+   appendices
 
 .. todolist::
 
