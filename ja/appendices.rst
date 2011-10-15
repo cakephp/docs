@@ -29,6 +29,4 @@
     :maxdepth: 1
     
     appendices/cakephp-development-process
-    appendices/cakephp-coding-conventions
-    appendices/documentation-formatting
     appendices/glossary
