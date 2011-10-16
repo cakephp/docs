@@ -26,7 +26,7 @@ the name of the helper to the controller's ``$helpers`` array::
 
     <?php
     class BakeriesController extends AppController {
-        public $helpers = array('Form', 'Html', 'Javascript', 'Time');
+        public $helpers = array('Form', 'Html', 'Js', 'Time');
     }
 
 Adding helpers from plugins uses the :term:`plugin syntax` used elsewhere in
@@ -60,7 +60,7 @@ Form helpers::
 
     <?php
     class AppController extends Controller {
-        public $helpers = array('Form', 'Html', 'Javascript', 'Time');
+        public $helpers = array('Form', 'Html', 'Js', 'Time');
     }
 
 You can pass options to helpers. These options can be used to set
@@ -75,7 +75,7 @@ attribute values or modify behavior of a helper::
     }
 
     class AwesomeController extends AppController {
-        var $helpers = array('Awesome' => array('option1' => 'value1'));
+        public $helpers = array('Awesome' => array('option1' => 'value1'));
     }
 
 One common setting to use is the ``className`` option, which allows you to
