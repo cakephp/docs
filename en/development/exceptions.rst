@@ -328,51 +328,25 @@ be thrown from a number of CakePHP core components:
 
     The chosen layout could not be found.
 
-.. php:exception:: MissingHelperClassException
+.. php:exception:: MissingHelperException
 
-    The helper file was found, but a matching class
-    was not found.
+    A helper was not found.
 
-.. php:exception:: MissingHelperFileException
+.. php:exception:: MissingBehaviorException
 
-    A configured helpers's file could not be found.
+    A configured behavior could not be found.
 
-.. php:exception:: MissingBehaviorClassException
+.. php:exception:: MissingComponentException
 
-    The behavior file was found, but a matching class
-    was not found.
+    A configured component could not be found.
 
-.. php:exception:: MissingBehaviorFileException
+.. php:exception:: MissingTaskException
 
-    A configured behaviors's file could not be found.
+    A configured task was not found.
 
-.. php:exception:: MissingComponentClassException
+.. php:exception:: MissingShellException
 
-    The component file was found, but a matching class
-    was not found.
-
-.. php:exception:: MissingComponentFileException
-
-    A configured component's file could not be found.
-
-.. php:exception:: MissingTaskClassException
-
-    The task file was found, but a matching class
-    was not found.
-
-.. php:exception:: MissingTaskFileException
-
-    The task file could not be found.
-
-.. php:exception:: MissingShellClassException
-
-    The shell file was found, but no matching class
-    was found.
-
-.. php:exception:: MissingShellFileException
-
-    A shell file matching the requested shell could
-    not be found.
+    The shell class could not be found.
 
 .. php:exception:: MissingShellMethodException
 
