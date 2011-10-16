@@ -12,7 +12,6 @@ Contents
    views
    models
    core-libraries
-   core-utility-libraries
    plugins
    console-and-shells
    development

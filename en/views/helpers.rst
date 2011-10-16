@@ -12,7 +12,7 @@ CakePHP features a number of helpers that aid in view creation.
 They assist in creating well-formed markup (including forms), aid
 in formatting text, times and numbers, and can even speed up Ajax
 functionality. For more information on the helpers included in CakePHP,
-check out :doc:`/core-libraries/helpers`.
+check out :ref:`core-helpers`.
 
 .. _configuring-helpers:
 
