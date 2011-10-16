@@ -1190,6 +1190,11 @@ It's recommended that you use the help on shells you use to see what if any
 parameters have changed. It's also recommended that you read the console new
 features for more information on new APIs that are available.
 
+.. tip::
+
+    Be sure to checkout the upgrade shell included in the 2.0 core to help you
+    migrate your 1.3 code to 2.0.
+
 Debugging
 =========
 
