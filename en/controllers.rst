@@ -434,7 +434,7 @@ Other Useful Methods
 
         <?php
         function index() {
-            $conditions = $this->postConditions($this->data);
+            $conditions = $this->postConditions($this->request->data);
             $orders = $this->Order->find('all', compact('conditions'));
             $this->set('orders', $orders);
         }
@@ -449,7 +449,7 @@ Other Useful Methods
 
         <?php
         /*
-        Contents of $this->data
+        Contents of $this->request->data
         array(
             'Order' => array(
                 'num_items' => '4',
@@ -459,14 +459,14 @@ Other Useful Methods
         */
 
         //Let’s get orders that have at least 4 items and contain ‘Ye Olde’
-        $condtions = $this->postConditions(
-            $this->data,
+        $conditions = $this->postConditions(
+            $this->request->data,
             array(
                 'num_items' => '>=', 
                 'referrer' => 'LIKE'
             )
         );
-        $orders = $this->Order->find('all', compact('condtions'));
+        $orders = $this->Order->find('all', compact('conditions'));
 
     The third parameter allows you to tell CakePHP what SQL boolean
     operator to use between the find conditions. Strings like ‘AND’,
@@ -659,7 +659,7 @@ given by ``$helpers`` to the view as an object reference variable
     also be included. This is illustrated in the example below.
 
     If you do not wish to use a Model in your controller, set
-    ``var $uses = array()``. This will allow you to use a controller
+    ``public $uses = array()``. This will allow you to use a controller
     without a need for a corresponding Model file.
 
 .. php:attr:: helpers
