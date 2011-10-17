@@ -932,6 +932,7 @@ findはCake 1.3の ``$model->find('type', array(PARAMS))`` のような文法を
   このプロパティはpublicとなり、ビヘイビアによって更新することができるようになりました。
 
 
+
 データベースオブジェクト
 ------------------------
 
@@ -1004,6 +1005,23 @@ BehaviorCollection
 -  ``BehaviorCollection`` はmappedMethodsを ``strtolower()`` しないようになりました。
    ビヘイビアのmappedMethodsは大文字小文字を区別するようになりました。
 
+AclBehaviorとTreeBehavior
+-------------------------
+
+- 設定として文字列をサポートしなくなりました。例::
+
+    public $actsAs = array(
+        'Acl' => 'Controlled',
+        'Tree' => 'nested'
+    );
+
+  こうなりました::
+
+    public $actsAs = array(
+        'Acl' => array('type' => 'Controlled'),
+        'Tree' => array('type' => 'nested')
+    );
+
 プラグイン
 ==========
 
@@ -1070,6 +1088,11 @@ BehaviorCollection
 
 あなたが使うシェルが何らかのパラメータが変更されたならば、そのシェルのヘルプを使用することをお勧めします。
 また、利用可能となった新しいAPIの詳しい機能について、コンソールの新機能を見ることもお勧めします。
+
+.. tip::
+
+    1.3のコードを2.0へ移行する手助けとなる、2.0で導入されたupgradeシェルを必ずチェックしてください。
+
 
 デバッグ
 ========
