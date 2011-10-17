@@ -43,7 +43,7 @@ Locale
     Stores string files for internationalization.
 Model
     Contains your application’s models, behaviors, and datasources.
-Plugins
+Plugin
     Contains plugin packages.
 tmp
     This is where CakePHP stores temporary data. The actual data it
@@ -56,7 +56,7 @@ tmp
     impacted. In debug mode, CakePHP will warn you if it is not the
     case.
 
-Vendors
+Vendor
     Any third-party classes or libraries should be placed here. Doing
     so makes them easy to access using the App::import('vendor',
     'name') function. Keen observers will note that this seems
