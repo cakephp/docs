@@ -119,7 +119,7 @@ paths where CakePHP will look for classes::
         'Controller' => array('/full/path/to/controllers/', '/next/full/path/to/controllers/'),
         'Model/Datasource' => array('/full/path/to/datasources/', '/next/full/path/to/datasources/'),
         'Model/Behavior' => array('/full/path/to/behaviors/', '/next/full/path/to/behaviors/'),
-        'Contorller/Component' => array('/full/path/to/components/', '/next/full/path/to/components/'),
+        'Controller/Component' => array('/full/path/to/components/', '/next/full/path/to/components/'),
         'View/Helper' => array('/full/path/to/helpers/', '/next/full/path/to/helpers/'),
         'vendors' => array('/full/path/to/vendors/', '/next/full/path/to/vendors/'),
         'Console/Command' => array('/full/path/to/shells/', '/next/full/path/to/shells/'),
