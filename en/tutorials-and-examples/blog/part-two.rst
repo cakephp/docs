@@ -67,8 +67,8 @@ posts. The code for that action would look something like this:
 
     <?php
     class PostsController extends AppController {
-        var $helpers = array ('Html','Form');
-        var $name = 'Posts';
+        public $helpers = array ('Html','Form');
+        public $name = 'Posts';
     
         function index() {
             $this->set('posts', $this->Post->find('all'));

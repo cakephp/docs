@@ -3,7 +3,7 @@ Desenvolvimento
 
 Nesta seção vamos cobrir os vários aspectos do desenvolvimento de uma aplicação
 CakePHP. Temas como configuração, manipulação de erros e exceções, depuração e 
-testes serão cobertos.
+testes serão abordados.
 
 .. toctree::
     :maxdepth: 1
