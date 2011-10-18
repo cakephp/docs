@@ -98,7 +98,7 @@ as a Translate model::
 
     <?php
     // Detach a behavior from our model:
-    $this->Category->Behaviors->detach('Translate');
+    $this->Category->Behaviors->unload('Translate');
 
 That will make our Category model stop behaving as a Translate
 model from thereon. We may need, instead, to just disable the
@@ -132,14 +132,14 @@ only on Christmas day::
     // If today is Dec 25
     if (date('m/d') == '12/25') {
         // Our model needs to behave as a Christmas model
-        $this->Category->Behaviors->attach('Christmas');
+        $this->Category->Behaviors->load('Christmas');
     }
 
-We can also use the attach method to override behavior settings::
+We can also use the load method to override behavior settings::
 
     <?php
     // We will change one setting from our already attached behavior
-    $this->Category->Behaviors->attach('Tree', array('left' => 'new_left_node'));
+    $this->Category->Behaviors->load('Tree', array('left' => 'new_left_node'));
 
 There's also a method to obtain the list of behaviors a model has
 attached. If we pass the name of a behavior to the method, it will
