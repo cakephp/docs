@@ -74,10 +74,8 @@ CameCased Folders:
 
 lowercased Folders:
 
-* config
 * webroot
 * tmp
-* vendors
 
 Internationalization / Localization
 ===================================

@@ -361,11 +361,12 @@ The same technique applies to Helpers and Behaviors.
 
 .. note::
 
-    When creating Helpers you may find AppHelper is not automatically available. You should declare the resources you need with Uses::
+    When creating Helpers you may find AppHelper is not automatically 
+    available. You should declare the resources you need with Uses::
     
-    <?php
-    //Declare use of AppHelper for your Plugin's Helper
-    App::uses('AppHelper', 'View/Helper');
+        <?php
+        // Declare use of AppHelper for your Plugin's Helper
+        App::uses('AppHelper', 'View/Helper');
 
 Expand Your Plugin
 ------------------
