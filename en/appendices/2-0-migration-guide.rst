@@ -1132,6 +1132,21 @@ This was done to reduce hard to debug issues caused by magic misfiring. It also
 improves consistency in an application, as objects have one authoritative way to
 reference them.
 
+Plugin App Controller and Plugin App Model
+----------------------------------------
+
+The plugin AppController and AppModel are no longer located directly in the 
+plugin folder. They are now placed into the plugin's Controller and Model 
+folders as such::
+
+    /app
+        /Plugin
+            /Comment
+                /Controller
+                    CommentAppController.php
+                /Model
+                    CommentAppModel.php
+
 Console
 =======
 
