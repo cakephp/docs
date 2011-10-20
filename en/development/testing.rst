@@ -291,7 +291,7 @@ could would create ``app/Test/Case/AllModelTest.php``. Put the following in it::
     class AllModelTest extends CakeTestSuite {
         public static function suite() {
             $suite = new CakeTestSuite('All model tests');
-            $suite->addTestDirectory(TESTS . 'Case' . DS 'Model');
+            $suite->addTestDirectory(TESTS . 'Case' . DS . 'Model');
             return $suite;
         }
     }
