@@ -14,6 +14,14 @@ introduced in 2.0, and the migration path from 1.3 to 2.0.
     appendices/new-features-in-cakephp-2-0
     appendices/phpunit-migration-hints
 
+2.1 Migration Guide
+===================
+
+.. toctree::
+    :maxdepth: 1
+
+    appendices/2-1-migration-guide
+
 Migration from 1.2 to 1.3
 =========================
 
