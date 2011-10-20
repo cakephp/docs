@@ -1,0 +1,7 @@
+2.1 Migration Guide
+###################
+
+CakePHP 2.1 is a fully API compatible upgrade from 2.0.  This page outlines the
+changes and improvements made for 2.1.
+
+
