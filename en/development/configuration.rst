@@ -572,7 +572,7 @@ Built-in Configuration readers
 .. php:class:: PhpReader
 
     Allows you to read configuration files that are stored as plain PHP files.
-    You can read either files from your ``app/configs`` or from plugin configs
+    You can read either files from your ``app/Config`` or from plugin configs
     directories by using :term:`plugin syntax`.  Files **must** contain a ``$config``
     variable.  An example configuration file would look like::
 
@@ -590,6 +590,10 @@ Built-in Configuration readers
         );
 
     Files without ``$config`` will cause an :php:exc:`ConfigureException`
+
+    Load your custom configuration file by inserting the following in app/Config/bootstrap.php:
+
+        Configure::load('customConfig');
 
 .. php:class:: IniReader
 
