@@ -642,7 +642,7 @@ Loading custom inflections
 --------------------------
 
 You can use :php:meth:`Inflector::rules()` in the file
-``app/config/bootstrap.php`` to load custom inflections::
+``app/Config/bootstrap.php`` to load custom inflections::
 
     <?php
     Inflector::rules('singular', array(
@@ -664,7 +664,7 @@ Bootstrapping CakePHP
 =====================
 
 If you have any additional configuration needs, use CakePHP’s
-bootstrap file, found in app/config/bootstrap.php. This file is
+bootstrap file, found in app/Config/bootstrap.php. This file is
 executed just after CakePHP’s core bootstrapping.
 
 This file is ideal for a number of common bootstrapping tasks:
