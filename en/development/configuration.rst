@@ -572,7 +572,7 @@ Built-in Configuration readers
 .. php:class:: PhpReader
 
     Allows you to read configuration files that are stored as plain PHP files.
-    You can read either files from your ``app/configs`` or from plugin configs
+    You can read either files from your ``app/Config`` or from plugin configs
     directories by using :term:`plugin syntax`.  Files **must** contain a ``$config``
     variable.  An example configuration file would look like::
 
@@ -590,6 +590,10 @@ Built-in Configuration readers
         );
 
     Files without ``$config`` will cause an :php:exc:`ConfigureException`
+
+    Load your custom configuration file by inserting the following in app/Config/bootstrap.php:
+
+        Configure::load('customConfig');
 
 .. php:class:: IniReader
 
@@ -638,7 +642,7 @@ Loading custom inflections
 --------------------------
 
 You can use :php:meth:`Inflector::rules()` in the file
-``app/config/bootstrap.php`` to load custom inflections::
+``app/Config/bootstrap.php`` to load custom inflections::
 
     <?php
     Inflector::rules('singular', array(
@@ -660,7 +664,7 @@ Bootstrapping CakePHP
 =====================
 
 If you have any additional configuration needs, use CakePHP’s
-bootstrap file, found in app/config/bootstrap.php. This file is
+bootstrap file, found in app/Config/bootstrap.php. This file is
 executed just after CakePHP’s core bootstrapping.
 
 This file is ideal for a number of common bootstrapping tasks:
