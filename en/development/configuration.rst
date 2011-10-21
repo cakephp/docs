@@ -76,6 +76,8 @@ schema
     Used in PostgreSQL database setups to specify which schema to use.
 datasource
     non-DBO datasource to use, e.g. 'ldap', 'twitter'
+unix_socket
+    Used by drivers that support it to connect via unix socket files.
 
 .. note::
 
