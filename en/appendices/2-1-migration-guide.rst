@@ -44,4 +44,13 @@ tests, and offers a file path based UI::
 The old testsuite shell and its syntax are still available.
 
 
+Network
+=======
+
+CakeRequest
+-----------
+
+- Added ``is('requested')`` and ``isRequested()`` for detecting requestAction.
+
+
 
