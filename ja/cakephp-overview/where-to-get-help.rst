@@ -1,7 +1,7 @@
 情報の探し方
 ############
 
-公式CakePHP ェブサイト
+公式CakePHPウェブサイト
 =========================
 
 `http://www.cakephp.org <http://www.cakephp.org>`_
