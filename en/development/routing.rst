@@ -63,6 +63,7 @@ disable the default routing by removing them from your application's
 :term:`routes.php` file.
 
 .. index:: :controller, :action, :plugin
+.. _connecting-routes:
 
 Connecting Routes
 =================
@@ -113,6 +114,24 @@ This route matches any URL starting with ``/pages/`` and
 hands it to the ``display()`` action of the ``PagesController();``
 The request /pages/products would be mapped to
 ``PagesController->display('products')``.
+
+In addition to the greedy star ``/*`` there is also the ``/**`` trailing star
+syntax.  Using a trailing double star, will capture the remainder of a URL as a
+single passed argument.  This is useful when you want to use an argument that
+included a ``/`` in it::
+
+    <?php
+    Router::connect(
+        '/pages/**',
+        array('controller' => 'pages', 'action' => 'show')
+    );
+
+The incoming URL of ``/pages/the-example-/-and-proof`` would result in a single
+passed argument of ``the-example-/-and-proof``.
+
+.. versionadded:: 2.1
+
+    The trailing double star was added in 2.1.
 
 You can use the second parameter of :php:meth:`Router::connect()`
 to provide any routing parameters that are compose the default values

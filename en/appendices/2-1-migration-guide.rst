@@ -28,6 +28,12 @@ debug()
 `debug()` now uses :php:class:`Debugger` internally.  This makes it consistent
 with Debugger, and takes advantage of improvements made there.
 
+
+File
+----
+
+- :php:meth:`File::info()` includes filesize information.
+
 Console
 =======
 
@@ -43,6 +49,15 @@ tests, and offers a file path based UI::
 
 The old testsuite shell and its syntax are still available.
 
+Routing
+=======
+
+Router
+------
+
+- Routes can now use a special ``/**`` syntax to include all trailing arguments
+  as a single passed argument. See the section on :ref:`connecting-routes` for
+  more information.
 
 Network
 =======
