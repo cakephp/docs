@@ -80,7 +80,7 @@ tree to see what it looks like. With a simple controller::
     <?php
     class CategoriesController extends AppController {
     
-        var $name = 'Categories';
+        public $name = 'Categories';
     
         function index() {
             $this->data = $this->Category->generateTreeList(null, null, null, '&nbsp;&nbsp;&nbsp;');
@@ -94,8 +94,8 @@ and an even simpler model definition:::
     <?php
     // app/models/category.php
     class Category extends AppModel {
-        var $name = 'Category';
-        var $actsAs = array('Tree');
+        public $name = 'Category';
+        public $actsAs = array('Tree');
     }
     ?>
 

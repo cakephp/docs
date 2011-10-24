@@ -80,7 +80,7 @@ To override the "$" shortcut, use the jQueryObject variable::
 
     <?php
     $this->Js->JqueryEngine->jQueryObject = '$j';
-    print $this->Html->scriptBlock('var $j = jQuery.noConflict();', 
+    print $this->Html->scriptBlock('public $j = jQuery.noConflict();', 
         array('inline' => false)); //Tell jQuery to go into noconflict mode
 
 Using the JsHelper inside customHelpers
@@ -756,8 +756,8 @@ include ``RequestHandlerComponent`` in your components. Add the
 following to your controller::
 
     <?php
-    var $components = array('RequestHandler');
-    var $helpers = array('Js');
+    public $components = array('RequestHandler');
+    public $helpers = array('Js');
 
 Next link in the javascript library you want to use. For this
 example we'll be using jQuery::
