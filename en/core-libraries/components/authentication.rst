@@ -96,7 +96,7 @@ To configure different fields for user in ``$components`` array::
 
 .. note::
 
-    Do not put other Auth configuration keys (like autoError, loginAction etc)
+    Do not put other Auth configuration keys (like authError, loginAction etc)
     within the authenticate or Form element. They should be at the same level as
     the authenticate key.
     Above setup with other Auth configurations should look something like::
