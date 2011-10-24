@@ -24,7 +24,7 @@ There are a few keys available for configuring exceptions::
 * ``handler`` - callback - The callback to handle exceptions. You can set this to
   any callback type, including anonymous functions.
 * ``renderer`` - string - The class responsible for rendering uncaught exceptions.
-  If you choose a custom class you should place the file for that class in app/libs. 
+  If you choose a custom class you should place the file for that class in app/Lib/Error. 
   This class needs to implement a ``render()`` method.
 * ``log`` - boolean - When true, exceptions + their stack traces will be logged 
   to CakeLog.
@@ -126,13 +126,13 @@ Create your own Exception handler with `Exception.handler`
 
 Creating your own exception handler gives you full control over the exception
 handling process.  The class you choose should be loaded in your
-``app/config/bootstrap.php``, so its available to handle any exceptions. You can
+``app/Config/bootstrap.php``, so its available to handle any exceptions. You can
 define the handler as any callback type. By settings ``Exception.handler`` CakePHP
 will ignore all other Exception settings.  A sample custom exception handling setup
 could look like::
 
     <?php
-    // in app/config/core.php
+    // in app/Config/core.php
     Configure::write('Exception.handler', 'AppExceptionHandler::handle');
 
     // in app/config/bootstrap.php
@@ -142,7 +142,7 @@ could look like::
     class AppExceptionHandler {
         public static function handle($error) {
             echo 'Oh noes! ' . $error->getMessage();
-            $this->sendEmail();
+            ...
         }
         ...
     }
@@ -199,11 +199,11 @@ If you don't want to take control of the exception handling, but want to change
 how exceptions are rendered you can use 
 ``Configure::write('Exception.renderer', 'AppExceptionRenderer');`` to choose a
 class that will render exception pages.  By default :php:class`ExceptionRenderer`
-is used.  Your custom exception renderer class should be placed in ``app/Lib``.
+is used.  Your custom exception renderer class should be placed in ``app/Lib/Error``.
 In a custom exception rendering class you can provide specialized handling for 
 application specific errors::
 
-    // in app/Lib/AppExceptionRenderer.php
+    // in app/Lib/Error/AppExceptionRenderer.php
     <?php
     App::uses('ExceptionRenderer', 'Error');
 
