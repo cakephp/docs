@@ -17,14 +17,14 @@ would be:
 
 ::
 
-    var $virtualFields = array(
+    public $virtualFields = array(
         'full_name' => 'CONCAT(User.first_name, " ", User.last_name)'
     );
 
 And with PostgreSQL:
 ::
 
-    var $virtualFields = array(
+    public $virtualFields = array(
         'name' => 'User.first_name || \' \' || User.last_name'
     );
 

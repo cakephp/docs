@@ -493,7 +493,7 @@ ACL Component in your controller's $components array:
 
 ::
 
-    var $components = array('Acl');
+    public $components = array('Acl');
 
 Once we've got that done, let's see what some examples of creating
 these objects might look like. The following code could be placed
@@ -756,7 +756,7 @@ because permissions are managed by the Acl Component.
         // You might want to place this in the AppController
         // instead, but here works great too.
     
-        var $components = array('Acl');
+        public $components = array('Acl');
     
     }
 

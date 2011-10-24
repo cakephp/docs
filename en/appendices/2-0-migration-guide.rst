@@ -1000,7 +1000,7 @@ Or just declare the property in the model class::
 
     <?php
     class Post {
-        var $nonexistantProperty = array();
+        public $nonexistantProperty = array();
     }
 
 Either of these approaches will solve the notice errors.
@@ -1126,7 +1126,7 @@ Would look in the controller's plugin before checking app/core components. It
 will now only look in the app/core components. If you wish to use objects from a
 plugin you must put the plugin name::
 
-    var $components = array('Session', 'Comment.Comments');
+    public $components = array('Session', 'Comment.Comments');
 
 This was done to reduce hard to debug issues caused by magic misfiring. It also
 improves consistency in an application, as objects have one authoritative way to
@@ -1237,4 +1237,3 @@ need to pass the package they are located in. Example::
         'password' => 'root',
         'database' => 'cake',
     );
-

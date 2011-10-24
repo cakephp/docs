@@ -920,7 +920,7 @@ PHPUnitによって全てのコマンドラインオプションがサポート�
 
     <?php
     class Post {
-        var $nonexistantProperty = array();
+        public $nonexistantProperty = array();
     }
 
 これらのどちらかのアプローチでnoticeエラーを回避できることでしょう。
@@ -1034,7 +1034,7 @@ AclBehaviorとTreeBehavior
 これはアプリケーション・コアのコンポーネントのみを見るようになりました。
 プラグインからオブジェクトを使いたい場合は、プラグインの名前を指定しなければなりません::
 
-    var $components = array('Session', 'Comment.Comments');
+    public $components = array('Session', 'Comment.Comments');
 
 これは、マジックの失敗によって起こされていた問題をデバッグすることの煩雑さを減らすために為されました。
 また、オブジェクトの参照が単一の信頼できる方法になったことで、アプリケーションでの矛盾をなくします。
@@ -1121,4 +1121,3 @@ ConnectionManager
         'password' => 'root',
         'database' => 'cake',
     );
-

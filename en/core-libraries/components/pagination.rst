@@ -31,7 +31,7 @@ here that the order key must be defined in an array structure like below::
     <?php
     class PostsController extends AppController {
     
-        var $paginate = array(
+        public $paginate = array(
             'limit' => 25,
             'order' => array(
                 'Post.title' => 'asc'
@@ -45,7 +45,7 @@ You can also include other :php:meth:`~Model::find()` options, such as
     <?php
     class PostsController extends AppController {
     
-        var $paginate = array(
+        public $paginate = array(
             'fields' => array('Post.id', 'Post.created'),
             'limit' => 25,        
             'order' => array(
@@ -66,7 +66,7 @@ pagination::
     <?php
     class RecipesController extends AppController {
     
-        var $paginate = array(
+        public $paginate = array(
             'limit' => 25,
             'contain' => array('Article')
         );
@@ -79,7 +79,7 @@ array after the model you wish to configure::
     <?php
     class PostsController extends AppController {
     
-        var $paginate = array(
+        public $paginate = array(
             'Post' => array (...),
             'Author' => array (...)
         );
@@ -188,7 +188,7 @@ the keyword in controller's ``$paginate`` class variable::
     /**
      * Add GROUP BY clause
      */
-    var $paginate = array(
+    public $paginate = array(
         'MyModel' => array(
             'limit' => 20, 
             'order' => array('week' => 'desc'),
@@ -235,7 +235,7 @@ that can be fetched to 100.  If this default is not appropriate for your
 application, you can adjust it as part of the pagination options::
 
     <?php
-    var $paginate = array(
+    public $paginate = array(
         // other keys here.
         'maxLimit' => 10
     );
@@ -257,7 +257,7 @@ type, and the :php:class:`PaginatorHelper` will generate links with the chosen t
 parameter::
     
     <?php
-    var $paginate = array(
+    public $paginate = array(
         'paramType' => 'querystring'
     );
 

@@ -191,7 +191,7 @@ So, we place our new ContactsController in
     <?php
     // /app/Plugin/ContactManager/Controller/ContactsController.php
     class ContactsController extends ContactManagerAppController {
-        var $uses = array('ContactManager.Contact');
+        public $uses = array('ContactManager.Contact');
 
         function index() {
             //...
@@ -355,7 +355,7 @@ component. For example::
     }
     
     // within your controllers:
-    var $components = array('ContactManager.Example'); 
+    public $components = array('ContactManager.Example'); 
 
 The same technique applies to Helpers and Behaviors.
 

@@ -26,7 +26,7 @@ Example usage:
 
     <?php
     class Example extends AppModel {
-       var $useDbConfig = 'alternate';
+       public $useDbConfig = 'alternate';
     }
 
 useTable
@@ -42,14 +42,14 @@ Example usage::
 
     <?php
     class Example extends AppModel {
-       var $useTable = false; // This model does not use a database table
+       public $useTable = false; // This model does not use a database table
     }
 
 Alternatively::
 
     <?php
     class Example extends AppModel {
-       var $useTable = 'exmp'; // This model uses a database table 'exmp'
+       public $useTable = 'exmp'; // This model uses a database table 'exmp'
     }
 
 tablePrefix
@@ -64,7 +64,7 @@ the model.
 Example usage::
 
     class Example extends AppModel {
-       var $tablePrefix = 'alternate_'; // will look for 'alternate_examples'
+       public $tablePrefix = 'alternate_'; // will look for 'alternate_examples'
     }
 
 .. _model-primaryKey:
@@ -80,7 +80,7 @@ Example usage::
 
     <?php
     class Example extends AppModel {
-        var $primaryKey = 'example_id'; // example_id is the field name in the database
+        public $primaryKey = 'example_id'; // example_id is the field name in the database
     }
     
 
@@ -98,7 +98,7 @@ For example, to use the ``username`` field::
 
     <?php
     class User extends AppModel {
-       var $displayField = 'username';
+       public $displayField = 'username';
     }
 
 Multiple field names cannot be combined into a single display
@@ -172,7 +172,7 @@ Each field is described by:
 Example Usage::
 
     <?php
-    var $_schema = array(
+    public $_schema = array(
         'first_name' => array(
             'type' => 'string', 
             'length' => 30
@@ -213,7 +213,7 @@ other fields in a model but will not be saveable.
 Example usage for MySQL::
 
     <?php
-    var $virtualFields = array(
+    public $virtualFields = array(
         'name' => "CONCAT(User.first_name, ' ', User.last_name)"
     );
 
@@ -237,7 +237,7 @@ Example usage::
 
     <?php
     class Example extends AppModel {
-       var $name = 'Example';
+       public $name = 'Example';
     }
 
 cacheQueries
