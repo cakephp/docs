@@ -40,7 +40,7 @@ $scaffold variable::
     <?php
     
     class CategoriesController extends AppController {
-        var $scaffold;
+        public $scaffold;
     }
     
 Assuming you’ve created even the most basic Category model class
@@ -67,9 +67,9 @@ following code, the view displays a select input populated with IDs
 or names from the Group table in the New User form::
 
     // In group.php
-    var $hasMany = 'User';
+    public $hasMany = 'User';
     // In user.php
-    var $belongsTo = 'Group';
+    public $belongsTo = 'Group';
 
 If you’d rather see something besides an ID (like the user’s first
 name), you can set the $displayField variable in the model. Let’s
@@ -81,8 +81,8 @@ in many instances::
     <?php
 
     class User extends AppModel {
-        var $name = 'User';
-        var $displayField = 'first_name';
+        public $name = 'User';
+        public $displayField = 'first_name';
     }
 
 
@@ -96,7 +96,7 @@ use scaffolding to generate an admin interface.
 Once you have enabled admin routing assign your admin prefix to the
 scaffolding variable::
 
-    var $scaffold = 'admin';
+    public $scaffold = 'admin';
 
 You will now be able to access admin scaffolded actions::
 

@@ -39,7 +39,7 @@ debug is equal to 0.  Before running any tests you should be sure to add a
 fixture tables and data::
 
     <?php
-    var $test = array(
+    public $test = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,
         'host' => 'dbhost',
@@ -1028,7 +1028,7 @@ a *shell script step* to the build that contains the following::
     cat > app/Config/database.php <<'DATABASE_PHP'
     <?php
     class DATABASE_CONFIG {
-      var $test = array(
+      public $test = array(
         'datasource' => 'Database/Mysql',
         'host' => 'localhost',
         'database' => 'jenkins_test',
