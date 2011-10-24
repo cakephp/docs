@@ -109,13 +109,13 @@ Adding paths for App to find packages in
 
         <?php
         //will setup a new search path for the Model package
-        App::build(array(Model' => array('/a/full/path/to/models/'))); 
+        App::build(array('Model' => array('/a/full/path/to/models/'))); 
 
         //will setup the path as the only valid path for searching models
         App::build(array('Model' => array('/path/to/models/')), App::RESET); 
 
         //will setup multiple search paths for helpers
-        App::build(array('View/Helper' => array('/path/to/helpers/', '/another/path/))); 
+        App::build(array('View/Helper' => array('/path/to/helpers/', '/another/path/'))); 
 
 
     If reset is set to true, all loaded plugins will be forgotten and they will
