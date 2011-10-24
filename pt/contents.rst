@@ -1,4 +1,4 @@
-Contents
+Conteúdo
 ########
 
 .. toctree::
@@ -23,7 +23,7 @@ Contents
 .. todolist::
 
 
-Indices and tables
+Índices e tabelas
 ==================
 
 * :ref:`genindex`
