@@ -39,7 +39,7 @@ compatibility in the way the classes are loaded right now, and we definitely did
 not want to become a framework of huge class prefixes, having classnames like
 ``My_Huge_Class_Name_In_Package``. We decided adopting a strategy of keeping simple
 class names while offering a very intuitive way of declaring class locations and
-clear migration path for future PHP 5.3 version of CakePHP. At first let's
+clear migration path for future PHP 5.3 version of CakePHP. First let's
 highlight the main changes in file naming standard we adopted:
 
 File names
@@ -53,14 +53,14 @@ underscoring your file names. Here are some examples:
 * ``form.php`` (a Helper) becomes ``FormHelper.php``
 * ``session.php`` (a Component) becomes ``SessionComponent.php``
 
-This makes a lot more clear and consistent the file naming across applications,
+This makes file naming a lot more clear and consistent across applications,
 and also avoids a few edge cases where the file loader would get confused in the
 past and load files it shouldn't.
 
 Folder Names
 ------------
 
-Folders containing classes should be also CamelCased, specially when containing
+Folders containing classes should be also CamelCased, especially when containing
 classes. Think of namespaces, each folder represents a level in the namespacing
 hierarchy, folders that do not contain classes, or do not constitute a
 namespace on themselves, should be lowercased.
@@ -527,7 +527,7 @@ Dispatcher
 - ``Dispatcher::dispatch()`` now takes two parameters.  The request and
   response objects.  These should be instances of ``CakeRequest`` &
   ``CakeResponse`` or a subclass thereof.
-- ``Dispather::parseParams()`` now only accepts a ``CakeRequest`` object.
+- ``Dispatcher::parseParams()`` now only accepts a ``CakeRequest`` object.
 - ``Dispatcher::baseUrl()`` has been removed.
 - ``Dispatcher::getUrl()`` has been removed.
 - ``Dispatcher::uri()`` has been removed.
@@ -625,7 +625,7 @@ Helpers
 Constructor changed
 -------------------
 
-In order to accomodate View being removed from the ClassRegistry, the signature
+In order to accommodate View being removed from the ClassRegistry, the signature
 of Helper::__construct() was changed.  You should update any subclasses to use
 the following::
 
@@ -926,12 +926,12 @@ just uses callbacks like other helpers to generate full page caches.
 CacheHelper ``<cake:nocache>`` tags changed
 -------------------------------------------
 
-In previous versions, CacheHelper used a special ``<cake:noncache>`` tag as
+In previous versions, CacheHelper used a special ``<cake:nocache>`` tag as
 markers for output that should not be part of the full page cache. These tags
 were not part of any XML schema, and were not possible to validate in HTML or
 XML documents. For 2.0, these tags have been replaced with HTML/XML comments::
 
-    <cake:noncache> becomes <!--nocache-->
+    <cake:nocache> becomes <!--nocache-->
     </cake:nocache> becomes <!--/nocache-->
 
 The internal code for full page view caches has also changed, so be sure to
