@@ -7,7 +7,7 @@ para ver como todas as peças se juntam.
 Alternativamente, você pode consultar o repositório de plugins não oficiais do CakePHP
 `CakePackages <http://cakepackages.com/>`_ e o
 `Bakery <http://bakery.cakephp.org/>`_ para as aplicações existentes
-e componentes.
+e componentes(components).
 
 .. toctree::
     :glob:
