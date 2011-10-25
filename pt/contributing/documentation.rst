@@ -1,185 +1,184 @@
-Documentation
+Documentação
 #############
 
-Contributing to the documentation is simple.  The files are hosted on
-http://github.com/cakephp/docs.  Feel free to fork the repo, add your
-changes/improvements/translations and give back by issuing a pull request.
-You can even edit the docs online with github, without ever downloading the
-files.
+Contribuir na documentação é simples. Os arquivos estão 
+no http://github.com/cakephp/docs. Sinta-se livre para fazer 
+um fork e adicionar suas alterações/melhorias/traduções e enviar 
+através de um pull request.
+Você também pode editar os arquivos online através do github, 
+sem precisar fazer o download dos arquivos.
 
-Translations
+Traduções
 ============
 
-Email the docs team (docs at cakephp dot org) or hop on IRC
-(#cakephp on freenode) to discuss any translation efforts you would
-like to participate in.
+Envie um email para o equipe da documentação (docs [at] cakephp dot org)
+ou entre no IRC(#cakephp on freenode) para discutir algum processo de 
+tradução que você queira participar.
 
-Translator tips:
+Algumas dicas:
 
-- Browse and edit in the language you want the content to be
-  translated to - otherwise you won't see what has already been
-  translated.
-- Feel free to dive right in if your chosen language already
-  exists on the book.
-- Use the to do list (top right) to see where attention is needed
-  for your language.
-- Use `Informal Form <http://en.wikipedia.org/wiki/Register_(linguistics)>`_.
-- Translate both the content and the title at the same time.
-- Do compare to the English content before submitting a correction
-  (if you correct something, but don't integrate an 'upstream' change
-  your submission won't be accepted).
-- If you need to write an English term, wrap it in ``<em>`` tags.
-  E.g. "asdf asdf *Controller* asdf" or "asdf asdf Kontroller
-  (*Controller*) asfd" as appropriate.
-- Do not submit partial translations.
-- Do not edit a section with a pending change.
-- Do not use
+- Navegue e edite no idioma que você deseja traduzir o conteúdo - caso
+  contrário você não saberá o que já foi traduzido.
+- Sinta-se livre para traduzir se o idioma escolhido já existir no book.
+- Utilize a *to do list* (no topo lado direito) para saber a onde você
+  pode dar mais atenção.
+- Utilize o `idioma formal <http://en.wikipedia.org/wiki/Register_(linguistics)>`_.
+- Traduza o conteúdo e o título ao mesmo tempo.
+- Faça uma comparação com o Inglês antes de enviar uma correção. 
+  (Se você corrigir alguma coisa, mas não sincroniza com o 'upstream' a alteração
+  não será aceita.)
+- Se você precisa escrever termos em Inglês, utilize a tag ``<em>``.
+  Ex.: "asdf asdf *Controller* asdf" ou "asdf asdf Kontroller
+  (*Controller*) asfd".
+- Não envie traduções parciais.
+- Não edite um seção com alterações pendentes.
+- Não utilize
   `html entities <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
-  for accented characters, the book uses UTF-8.
-- Do not significantly change the markup (HTML) or add new content
-- If the original content is missing some info, submit an edit for
-  that first.
+  para caracteres acentuados, o *book* usa UTF-8.
+- Não faça alterações significativas em marcações HTML e não adicione novos conteúdos.
+- Se o está faltando informação no conteúdo original, altere o original e envie ele primeiro.
 
-Documentation formatting guide
-==============================
+Formatando a Documentação
+=========================
 
-The new CakePHP documentation is written with ReST formatted text.  ReST 
-(Re Structured Text) is a plain text markup syntax similar to markdown, or
-textile.  To maintain consistency it is recommended that when adding to the
-CakePHP documentation you follow the guidelines here on how to format and
-structure your text.
+A nova documentação do CakePHP é escrita no formato ReST.
+ReST é uma linguagem de marcação para leitura de formatos de código fonte parecida
+com markdown e textile. Para manter a consistência é recomendável que use os 
+ *guidelines* a seguir de como formatar estruturar seu texto.
 
-Line length
------------
+Altura da linha
+---------------
 
-Lines of text should be wrapped at 80 columns.  The only exception should be
-long urls, and code snippets.
+As linhas devem ter no máximo 80 colunas. 
+A unica exeção são urls longas e trechos de códigos.
 
-Headings and Sections
----------------------
+Títulos e Seções
+----------------
 
-Section headers are created by underlining the title with punctuation characters
-at least the length of the text.
+Títulos e seções são criados adicionado os caracteres de pontuação na linha
+abaixo do título do mesmo tamanho do texto.
 
-- ``#`` Is used to denote page titles.
-- ``=`` Is used for sections in a page.
-- ``-`` Is used for subsections.
-- ``~`` Is used for sub-subsections
-- ``^`` Is used for sub-sub-sections.
+- ``#`` Usado para indicar título da página.
+- ``=`` Usado para indicar seções na página.
+- ``-`` Usado para subseções.
+- ``~`` Usado para sub-subseções
+- ``^`` Usado para sub-sub-subseções.
 
-Headings should not be nested more than 5 levels deep. Headings should be
-preceded and followed by a blank line.
+Títulos não devem ser adicionados mais do que 5 níveis de profundidade.
+Títulos devem ser precedido e seguido por uma linha em branco.
 
-Paragraphs
+Parágrafo
 ----------
 
-Paragraphs are simply blocks of text, with all the lines at the same level of indentation.
-Paragraphs should be separated by more than one empty line.
+Parágrafos são blocos de texto simples, com todas as linhas no mesmo nível de indentação.
+Parágrafos devem ser separados por uma ou mais linhas em branco.
 
-Inline markup
--------------
+Marcações
+---------
 
-* one asterisk: *text* for emphasis (italics),
-* two asterisks: **text** for strong emphasis (boldface), and
-* backquotes: ``text`` for code samples.
+* Um asterisco: *text* para ênfase (itálico),
+* Dois asteriscos: **text** para dar ênfase forte (negrito), e
+* crases: ``text`` para exemplos de código.
 
-If asterisks or backquotes appear in running text and could be confused with inline markup 
-delimiters, they have to be escaped with a backslash.
+Se asteriscos ou crases devem aparecer no texto elas devem ser precidadas por uma barra 
+invertida (\) para escapar.
 
-Inline markup has a few restrictions:
+.. todo::
+  Translate the complete section ``Restrições para marcação``.
 
-* It **may not** be nested.
-* Content may not start or end with whitespace: ``* text*`` is wrong.  * Content
-  must be separated from surrounding text by non-word characters. Use a
-  backslash escaped space to work around that: ``onelong\ *bolded*\ word``.
+Restrições para a marcação:
 
-Lists
+* **Não pode** ser aninhado.
+* O conteúdo não pode iniciar ou terminar com espaço em branco: ``* text*`` está incorreto.
+* Content must be separated from surrounding text by non-word characters. Use a backslash 
+  escaped space to work around that: ``onelong\ *bolded*\ word``.
+
+Listas
 -----
 
-List markup is very similar to markdown.  Unordered lists are indicated by
-starting a line with a single asterisk and a space.  Numbered lists can be
-created with either numerals, or ``#`` for auto numbering::
+A marcação de listas é muito paracido com markdown. Listas não ordenadas
+começam a linha com um asterisco seguido de um espaço. Listas númericas
+podem ser criadas com os números na frente ou ``#`` para númerar automaticamente::
 
-    * This is a bullet
-    * So is this.  But this line
-      has two lines.
+    * Isso é uma linha
+    * Essa também. 
+      Mas tem duas linhas
       
-    1. First line
-    2. Second line
+      
+    1. Primeira linha
+    2. Segunda linha
     
-    #. Automatic numbering
-    #. Will save you some time.
+    #. Númeração automatica
+    #. Vai salvar seu tempo.
 
-Indented lists can also be created, by indenting sections and separating them
-with an empty line::
+Listas indentadas também podem ser criadas, indentando as seções e separando
+elas por uma linha em branco::
 
-    * First line
-    * Second line
+    * Primeira linha
+    * Segunda linha
     
-        * Going deeper
-        * Whoah
+        * Indo mais um nível
+        * Wow!
     
-    * Back to the first level.
+    * De volta para o primeiro nível.
 
-Definition lists can be created by doing the following::
+Listas de definição pode ser criadas da seguinte forma::
 
-    term
-        definition
+    termo
+        definição
     CakePHP
-        An MVC framework for PHP
+        Framework MVC para PHP
 
-Terms cannot be more than one line, but definitions can be multi-line and all
-lines should be indented consistently.
+Termos não podem ter mais do que uma linha, mas definições podem ter multilinhas
+e todos as linhas devem ter um indentação consistente.
 
 Links
 -----
 
-There are several kinds of links, each with their own uses.
+Existe vários tipos de links, cada um com seu objetivo de uso.
 
-External links
+Links Externos
 ~~~~~~~~~~~~~~
 
-Links to external documents can be with the following::
+Links para documentos externos são feito da seguinte forma::
 
-    `External Link <http://example.com>`_
+    `Link Externo <http://example.com>`_
 
-The above would generate a link pointing to http://example.com
+O exemplo acima vai gerar um link para http://example.com
 
-Links to other pages
-~~~~~~~~~~~~~~~~~~~~
+Links para outras páginas
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. rst:role:: doc
+    Outras páginas na documentação podem ser linkadas usando ``:doc:``.
+    Você pode criar um link para um documento especifico utilizando path absoluto 
+    ou relativo sem a extensão ``.rst``. Por exemplo, se a referência ``:doc: `form```
+    aparece no documento ``core-helpers/html``, então o link será criado 
+    para ``core-helpers/form``. Se a referência for ``:doc:`/core-helpers```, será
+    sempre referênciado para ``/core-helpers``independente a onde é usado.
 
-    Other pages in the documentation can be linked to using the ``:doc:`` role.
-    You can link to the specified document using either an absolute or relative
-    path reference.  You should omit the ``.rst`` extension.  For example, if
-    the reference ``:doc:`form``` appears in the document ``core-helpers/html``,
-    then the link references ``core-helpers/form``.  If the reference was
-    ``:doc:`/core-helpers```, it would always reference ``/core-helpers``
-    regardless of where it was used.
-
-Cross referencing links
-~~~~~~~~~~~~~~~~~~~~~~~
+Links de referência cruzada
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. rst:role:: ref
 
-    You can cross reference any arbitrary title in any document using the
-    ``:ref:`` role.  Link label targets must be unique across the entire
-    documentation.  When creating labels for class methods, it's best to use
-    ``class-method`` as the format for your link label.
-    
-    The most common use of labels is above a title.  Example::
+    Você pode cruzar referência a qualquer título arbitrário em qualquer 
+    documento usando ``:ref:``. Links para um *label* devem ser únicos dentro
+    do documento. Quando for criar *labels* para métodos de classe, é melhor usar
+    ``class-method`` como *label* do link.
+
+    A forma mais comum de usar *labels* é acima de títulos. Exemplo::
     
         .. _label-name:
         
-        Section heading
+        Título de seção
         ---------------
         
-        More content here.
+        Restante do conteúdo
     
-    Elsewhere you could reference the above section using ``:ref:`label-name```.
-    The link's text would be the title that the link preceded.  You can also
-    provide custom link text using ``:ref:`Link text <label-name>```.
+    Em qualquer lugar você pode referenciar a seção acima usando ``:ref:`label-name```.
+    O texto do link será título da seção. Você também pode informar um texto personalizado
+    usando ``:ref: `Link text <label-name>```.
 
 Describing classes and their contents
 -------------------------------------
