@@ -23,7 +23,7 @@ que vão te ajudar a descrever um bug:
   ou o canal #cakephp IRC channel para isso.
 
 
-Informando problemas de segurança
+Informando Problemas de Segurança
 =========================
 
 Se você achou alguma falha de segurança no CakePHP, use o seguinte procedimento 
