@@ -88,8 +88,8 @@ You can provide custom ``Cache`` adapters in ``app/Lib`` as well
 as in plugins using ``$plugin/Lib``. App/plugin cache engines can
 also override the core engines. Cache adapters must be in a cache
 directory. If you had a cache engine named ``MyCustomCacheEngine``
-it would be placed in either ``app/Lib/Cache/MyCustomCache.php``
-as an app/libs. Or in ``$plugin/Lib/Cache/MyCustomCache.php`` as
+it would be placed in either ``app/Lib/Cache/Engine/MyCustomCacheEngine.php``
+as an app/libs. Or in ``$plugin/Lib/Cache/Engine/MyCustomCacheEngine.php`` as
 part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax.::
 
