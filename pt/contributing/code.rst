@@ -1,12 +1,12 @@
 Código
-####
+######
 
 Patches e pull requests são as melhores formas de colaborar com o CakePHP.
 Você pode anexar patchs nos tickets do `lighthouse <http://cakephp.lighthouseapp.com>`_.
 Pull requests podem ser feitos através do github e geralmente é a melhor forma de contribuir.
 
 Configuração Inicial
-=============
+====================
 
 Antes de trabalhar em patches para o CakePHP, é uma boa idea configurar seu ambiente.
 Você vai precisar dos seguintes softwares:
@@ -20,7 +20,7 @@ Configure suas informações pessoais com seu nome e e-mail::
     git config --global user.name 'Bob Barker'
     git config --global user.email 'bob.barker@example.com'
 
-.. nota::
+.. note::
 
     Se você é novo com Git, é recomendável que você leia o excelente e gratuito
     `ProGit <http://progit.org>`_ book.
@@ -46,7 +46,7 @@ Agora que está tudo configurado, você poderá definir a conexão ``$test``
 :ref:`run all the tests <running-tests>`.
 
 Trabalhando em um Patch
-==================
+=======================
 
 Sempre que você quiser corrigir um bug, criar um recurso ou uma melhoria, crie
 um *topic branch*.
@@ -59,7 +59,7 @@ como base para o seu branch. Isso facilita para aplicar suas alterações::
     git fetch upstream
     git checkout -b ticket-1234 upstream/2.0
 
-.. dica::
+.. tip::
 
     Utilize nome descritivos para os branchs, referenciando o ticket é uma boa
     convenção. Ex.: ticket-1234, feature-awesome
@@ -72,7 +72,7 @@ Faça as alterações necessárias e faça quantos *commits* achar necessário, 
 * Mantenha os commits lógicos, escreva mensagens claras e consistentes.
 
 Enviando um pull request
-=========================
+========================
 
 Agora que suas alterações estão prontas é hora de fazer o *merge* no CakePHP,
 mas antes de enviar você precisa atualizar suas *branchs*::
@@ -102,7 +102,7 @@ Agora que sua branch está no github, você pode discutir as alterações
 na lista de discussão `cakephp-core <http://groups.google.com/group/cakephp-core>`_  ou
 enviar um pull request no github.
 
-.. nota::
+.. note::
 
 	Lembre-se de que todo o código contribuido para o CakePHP será licenciado sob 
 	a licença MIT, e a Cake Software Foundation se tornará proprietária de qualquer

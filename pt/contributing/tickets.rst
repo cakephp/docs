@@ -6,7 +6,7 @@ muito importante no processo de desenvolvimento do CakePHP. Todos os tickets sob
 o CakePHP estão no `lighthouse <http://cakephp.lighthouseapp.com>`_.
 
 Informando Bugs
-==============
+===============
 
 Informações bem escritas de bugs ajudam bastante. Você pode seguir alguns passos
 que vão te ajudar a descrever um bug:
@@ -24,7 +24,7 @@ que vão te ajudar a descrever um bug:
 
 
 Informando Problemas de Segurança
-=========================
+=================================
 
 Se você achou alguma falha de segurança no CakePHP, use o seguinte procedimento 
 ao invés do metódo tradicional para bugs. Ao invés de usar o o sistema de ticket, 
