@@ -30,7 +30,7 @@ here that the order key must be defined in an array structure like below::
 
     <?php
     class PostsController extends AppController {
-    
+
         public $paginate = array(
             'limit' => 25,
             'order' => array(
@@ -44,10 +44,10 @@ You can also include other :php:meth:`~Model::find()` options, such as
 
     <?php
     class PostsController extends AppController {
-    
+
         public $paginate = array(
             'fields' => array('Post.id', 'Post.created'),
-            'limit' => 25,        
+            'limit' => 25,
             'order' => array(
                 'Post.title' => 'asc'
             )
@@ -65,7 +65,7 @@ pagination::
 
     <?php
     class RecipesController extends AppController {
-    
+
         public $paginate = array(
             'limit' => 25,
             'contain' => array('Article')
@@ -78,7 +78,7 @@ array after the model you wish to configure::
 
     <?php
     class PostsController extends AppController {
-    
+
         public $paginate = array(
             'Post' => array (...),
             'Author' => array (...)
@@ -190,7 +190,7 @@ the keyword in controller's ``$paginate`` class variable::
      */
     public $paginate = array(
         'MyModel' => array(
-            'limit' => 20, 
+            'limit' => 20,
             'order' => array('week' => 'desc'),
             'group' => array('week', 'home_team_id', 'away_team_id')
         )
@@ -201,7 +201,7 @@ the keyword in controller's ``$paginate`` class variable::
     function index() {
         $this->paginate = array(
             'MyModel' => array(
-                'limit' => 20, 
+                'limit' => 20,
                 'order' => array('week' => 'desc'),
                 'group' => array('week', 'home_team_id', 'away_team_id')
             )
@@ -255,7 +255,7 @@ more controlled and consistent. You can choose to use either querystring or
 named parameters in the component. Incoming requests will accept only the chosen
 type, and the :php:class:`PaginatorHelper` will generate links with the chosen type of
 parameter::
-    
+
     <?php
     public $paginate = array(
         'paramType' => 'querystring'
@@ -269,6 +269,38 @@ also modify the ``$settings`` property on the PaginatorComponent::
 
 By default all of the typical paging parameters will be converted into GET
 arguments.
+
+
+.. note::
+
+    You can run into a situation where assigning a value to a nonexistent property will throw errors:
+
+    <?php
+    $this->paginate['limit'] = 10;
+
+    will throw the error “Notice: Indirect modification of overloaded property $paginate has no effect”.
+    Assigning an initial value to the property solves the issue:
+
+    <?php
+    $this->paginate = array();
+    $this->paginate['limit'] = 10;
+    //or
+    $this->paginate = array('limit' => 10);
+
+    Or just declare the property in the controller class:
+
+    <?php
+    class PostsController {
+        public $paginate = array();
+    }
+
+    Or use ``$this->Paginator->setting = array('limit' => 10);``
+
+    Make sure you have added the Paginator component to your $components array if
+    you want to modify the ``$settings`` property of the PaginatorComponent.
+
+    Either of these approaches will solve the notice errors.
+
 
 AJAX Pagination
 ===============
