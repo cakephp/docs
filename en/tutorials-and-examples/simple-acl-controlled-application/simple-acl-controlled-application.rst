@@ -165,7 +165,11 @@ site controlled with Auth and Acl, we will set them up in
 
     <?php
     class AppController extends Controller {
-        public $components = array('Acl', 'Auth', 'Session');
+        public $components = array(
+            'Acl',
+            'Auth' => array('authorize' => array('Actions')),
+            'Session'
+        );
         public $helpers = array('Html', 'Form', 'Session');
     
         function beforeFilter() {
