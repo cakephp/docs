@@ -1,85 +1,81 @@
-Code
+Código
 ####
 
-Patches and pull requests are the best ways to contribute code back to CakePHP.
-Patches can be either attached to tickets in `lighthouse
-<http://cakephp.lighthouseapp.com>`_. Pull requests can be created in github,
-and are generally a better way to contribute code.
+Patches e pull requests são as melhores formas de colaborar com o CakePHP.
+Você pode anexar patchs nos tickets do `lighthouse <http://cakephp.lighthouseapp.com>`_.
+Pull requests podem ser feitos através do github e geralmente é a melhor forma de contribuir.
 
-Initial setup
+Configuração Inicial
 =============
 
-Before working on patches for CakePHP, its a good idea to get your environment
-setup.  You'll need the following software:
+Antes de trabalhar em patches para o CakePHP, é uma boa idea configurar seu ambiente.
+Você vai precisar dos seguintes softwares:
 
 * Git
-* PHP 5.2.9 or greater
+* PHP 5.2.9 ou superior
 * PHPUnit 3.5.10 - 3.5.17
 
-Set up your user information with your name/handle and working email address::
+Configure suas informações pessoais com seu nome e e-mail::
 
     git config --global user.name 'Bob Barker'
     git config --global user.email 'bob.barker@example.com'
 
-.. note::
+.. nota::
 
-    If you are new to Git, we highly recommend you to read the excellent and free 
+    Se você é novo com Git, é recomendável que você leia o excelente e gratuito
     `ProGit <http://progit.org>`_ book.
 
-Get a clone of the CakePHP source code from github:
+Faça o clone do código do CakePHP diretamente do github:
 
-* If you don't have a `github <http://github.com>`_ account, create one.
-* Fork the `CakePHP repository <http://github.com/cakephp/cakephp>`_ by clicking
-  the **Fork** button.
+* Se você não tem uma conta no `github <http://github.com>`_, crie uma.
+* Faça um Fork do `repositório CakePHP <http://github.com/cakephp/cakephp>`_ clicando 
+  no botão **Fork**.
 
-After your fork is made, clone your fork to your local machine::
+Depois clone o fork feito para sua máquina local::
 
     git clone git@github.com:YOURNAME/cakephp.git
 
-Add the original CakePHP repository as a remote repository.  You'll use this
-later to fetch changes from the CakePHP repository.  This will let you stay up
-to date with CakePHP::
+Adicione o repositório oficial do CakePHP como repositório remoto. 
+Assim você mantém seu Fork atualizado com o repositório oficial::
 
     cd cakephp
     git remote add upstream git://github.com/cakephp/cakephp.git
 
-Now that you have CakePHP setup you should be able to define a ``$test``
-:ref:`database connection <database-configuration>`, and 
+Agora que está tudo configurado, você poderá definir a conexão ``$test``
+:ref:`database connection <database-configuration>`, e 
 :ref:`run all the tests <running-tests>`.
 
-Working on a patch
+Trabalhando em um Patch
 ==================
 
-Each time you want to work on a bug, feature or enhancement create a topic
-branch.
+Sempre que você quiser corrigir um bug, criar um recurso ou uma melhoria, crie
+um *topic branch*.
 
-The branch you create should be based on the version that your fix/enhancement
-is for.  For example if you are fixing a bug in ``2.0`` you would want to use
-the ``2.0`` branch as the base for your branch.  This makes merging your changes
-in later much simpler::
+O branch que você criar deve ser baseado na versão que você está corrigindo/melhorando.
+Por exemplo: Se você vai corrigir um bug na versão ``2.0`` você precisa usar o branch ``2.0``
+como base para o seu branch. Isso facilita para aplicar suas alterações::
 
     # fixing a bug on 2.0
     git fetch upstream
     git checkout -b ticket-1234 upstream/2.0
 
-.. tip::
+.. dica::
 
-    Use a descriptive name for your branch, referencing the ticket of feature
-    name is a good convention. e.g. ticket-1234, feature-awesome
+    Utilize nome descritivos para os branchs, referenciando o ticket é uma boa
+    convenção. Ex.: ticket-1234, feature-awesome
 
-The above will create a local branch based on the upstream (CakePHP) 2.0 branch.
-Work on your fix, and make as many commits as you need; but keep in mind the
-following:
+O trecho acima vai criar um branch local baseado no branch 2.0 do repositório oficial (*upstream*)
+Faça as alterações necessárias e faça quantos *commits* achar necessário, mas tenha sempre em mente:
 
-* Follow the :doc:`/contributing/cakephp-coding-conventions`.
-* Add a test case to show the bug is fixed, or that the new feature works.
-* Keep your commits logical, and write good clear and concise commit messages.
+* Siga a :doc:`/contributing/cakephp-coding-conventions`.
+* Adicione um *test case* para mostrar que o bug foi corrigido ou que o novo recurso funciona.
+* Mantenha os commits lógicos, escreva mensagens claras e consistentes.
 
-Submitting a pull request
+Enviando um pull request
 =========================
 
-Once your changes are done and you're ready for them to be merged into CakePHP,
-you'll want to update your branch::
+Agora que suas alterações estão prontas é hora de fazer o *merge* no CakePHP,
+mas antes de enviar você precisa atualizar suas *branchs*::
 
     git checkout 2.0
     git fetch upstream
@@ -87,30 +83,31 @@ you'll want to update your branch::
     git checkout <branch_name>
     git rebase 2.0
 
-This will fetch + merge in any changes that have happened in CakePHP since you
-started.  It will then rebase - or replay your changes on top of the current
-code.  You might encounter a conflict during the ``rebase``.  If the rebase
-quits early you can see which files are conflicted/un-merged with ``git status``.
-Resolve each conflict, and then continue the rebase::
+O trecho acima vai pegar todas as alterações que ocorreram no repositório oficial
+desde que você começou sua branch local e fazer o *merge*. E depois faz um *rebase* 
+- replicando suas alterações no código atualizado. Podem acontecer conflitos durante
+o ``rebase``. Caso ocorra um conflito você poderá ver quais arquivos estão com conflitos 
+com ``git status``.
+Resolva cada conflito e continue seu *rebase*::
 
-    git add <filename> # do this for each conflicted file.
+    git add <filename> # faça isso para cada arquivo com conflito.
     git rebase --continue
 
-Check that all your tests continue to pass.  Then push your branch to your
-fork::
+Verifique se todos os seus testes (*test case*) estão passando. Então envie 
+sua branch para seu fork:: 
 
     git push origin <branch-name>
 
-Once your branch is on github, you can discuss it on the 
-`cakephp-core <http://groups.google.com/group/cakephp-core>`_ mailing list or
-submit a pull request on github.
+Agora que sua branch está no github, você pode discutir as alterações 
+na lista de discussão `cakephp-core <http://groups.google.com/group/cakephp-core>`_  ou
+enviar um pull request no github.
 
-.. note::
+.. nota::
 
     Remember that all code you contribute to CakePHP will be licensed under the
     MIT License, and the Cake Software Foundation will become the owner of any
     contributed code and all contributed code is subject to the `Contributors
     license agreement <http://cakefoundation.org/pages/cla>`_.
 
-All bug fixes merged into a maintenance branch will also be merged into upcoming
-releases periodically by the core team.
+Todos as correções de bugs serão aplicadas em um branch de manutenção que será aplicado
+nas próximas versão pelo *core team*.
