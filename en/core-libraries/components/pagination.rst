@@ -273,26 +273,26 @@ arguments.
 
 .. note::
 
-    You can run into a situation where assigning a value to a nonexistent property will throw errors:
+    You can run into a situation where assigning a value to a nonexistent property will throw errors::
 
-    <?php
-    $this->paginate['limit'] = 10;
+        <?php
+        $this->paginate['limit'] = 10;
 
     will throw the error “Notice: Indirect modification of overloaded property $paginate has no effect”.
-    Assigning an initial value to the property solves the issue:
+    Assigning an initial value to the property solves the issue::
 
-    <?php
-    $this->paginate = array();
-    $this->paginate['limit'] = 10;
-    //or
-    $this->paginate = array('limit' => 10);
+        <?php
+        $this->paginate = array();
+        $this->paginate['limit'] = 10;
+        //or
+        $this->paginate = array('limit' => 10);
 
-    Or just declare the property in the controller class:
+    Or just declare the property in the controller class::
 
-    <?php
-    class PostsController {
-        public $paginate = array();
-    }
+        <?php
+        class PostsController {
+            public $paginate = array();
+        }
 
     Or use ``$this->Paginator->setting = array('limit' => 10);``
 
