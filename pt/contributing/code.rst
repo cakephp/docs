@@ -104,10 +104,10 @@ enviar um pull request no github.
 
 .. nota::
 
-    Remember that all code you contribute to CakePHP will be licensed under the
-    MIT License, and the Cake Software Foundation will become the owner of any
-    contributed code and all contributed code is subject to the `Contributors
-    license agreement <http://cakefoundation.org/pages/cla>`_.
+	Lembre-se de que todo o código contribuido para o CakePHP será licenciado sob 
+	a licença MIT, e a Cake Software Foundation se tornará proprietária de qualquer
+	código contribuido, além de que todo código contribuido está sujeito ao 
+	`Contrato de licença de contribuidores <http://cakefoundation.org/pages/cla>`_.
 
 Todos as correções de bugs serão aplicadas em um branch de manutenção que será aplicado
 nas próximas versão pelo *core team*.
