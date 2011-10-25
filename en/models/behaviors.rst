@@ -250,7 +250,7 @@ a mapped method is slightly different than a normal behavior mixin method::
     class MyBehavior extends ModelBehavior {
         public $mapMethods = array('/do(\w+)/' => 'doSomething');
 
-        function doSomething($model, $method, $arg1, $arg2) {
+        function doSomething(Model $Model, $method, $arg1, $arg2) {
             debug(func_get_args());
             //do something
         }
@@ -262,7 +262,7 @@ you to munge the method name for additional information, much like ``Model::find
 behavior was attached to a model the following would happen::
 
     <?php
-    $model->doReleaseTheHounds('homer', 'lenny');
+    $Model->doReleaseTheHounds('homer', 'lenny');
 
     // would output
     'ReleaseTheHounds', 'homer', 'lenny'
@@ -295,51 +295,51 @@ behavior class. Much like regular behavior methods, they receive a
 ``$Model`` parameter as the first argument. This parameter is the
 model that the behavior method was invoked on.
 
-.. php:method:: function setup(Model $model, array $settings)
+.. php:method:: function setup(Model $Model, array $settings)
 
     Called when a behavior is attached to a model.  The settings come from the
     attached model's ``$actsAs`` property.
 
-.. php:method:: function cleanup(Model $model) 
+.. php:method:: function cleanup(Model $Model) 
 
     Called when a behavior is detached from a model.  The base method removes
-    model settings based on ``$model->alias``. You can override this method and
+    model settings based on ``$Model->alias``. You can override this method and
     provide custom cleanup functionality.
 
-.. php:method:: function beforeFind(Model $model, $query)
+.. php:method:: function beforeFind(Model $Model, $query)
 
     If a behavior's beforeFind return's false it will abort the find().
     Returning an array will augment the query parameters used for the
     find operation.
 
-.. php:method:: afterFind(Model $model, $results, $primary)
+.. php:method:: afterFind(Model $Model, $results, $primary)
 
     You can use the afterFind to augment the results of a find. The
     return value will be passed on as the results to either the next
     behavior in the chain or the model's afterFind.
 
-.. php:method:: beforeDelete(Model $model, $cascade = true)
+.. php:method:: beforeDelete(Model $Model, $cascade = true)
 
     You can return false from a behavior's beforeDelete to abort the
     delete. Return true to allow it continue.
 
-.. php:method:: afterDelete(Model $model)
+.. php:method:: afterDelete(Model $Model)
 
     You can use afterDelete to perform clean up operations related to
     your behavior.
 
-.. php:method:: beforeSave(Model $model)
+.. php:method:: beforeSave(Model $Model)
 
     You can return false from a behavior's beforeSave to abort the
     save. Return true to allow it continue.
 
-.. php:method:: afterSave(Model $model, $created)
+.. php:method:: afterSave(Model $Model, $created)
 
     You can use afterSave to perform clean up operations related to
     your behavior. $created will be true when a record is created, and
     false when a record is updated.
 
-.. php:method:: beforeValidate(&$model)
+.. php:method:: beforeValidate(Model $Model)
 
     You can use beforeValidate to modify a model's validate array or
     handle any other pre-validation logic. Returning false from a

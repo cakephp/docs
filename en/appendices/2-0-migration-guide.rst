@@ -184,8 +184,8 @@ your components and their constructors, as both have changed::
 
     <?php
     class PrgComponent extends Component {
-        function __construct(ComponentCollection $collection, $settings = array()) {
-            parent::__construct($collection, $settings);
+        function __construct(ComponentCollection $Collection, $settings = array()) {
+            parent::__construct($Collection, $settings);
         }
     }
 
@@ -199,7 +199,7 @@ Since settings have been moved to the component constructor, the
 ``initialize()`` callback no longer receives ``$settings`` as its 2nd parameter.
 You should update your components to use the following method signature::
 
-    function initialize($controller) { }
+    function initialize(Controller $Controller) { }
 
 Additionally, the initialize() method is only called on components that are
 enabled.  This usually means components that are directly attached to the
@@ -1006,7 +1006,7 @@ Or just declare the property in the model class::
 Either of these approaches will solve the notice errors.
 
 The notation of ``find()`` in Cake 1.2 is no longer supported. Finds should use
-notation ``$model->find('type', array(PARAMS))`` as in Cake 1.3.
+notation ``$Model->find('type', array(PARAMS))`` as in Cake 1.3.
 
 - ``Model::$_findMethods`` is now ``Model::$findMethods``.  This property is now
   public and can be modified by behaviors.

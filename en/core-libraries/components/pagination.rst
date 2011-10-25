@@ -137,11 +137,11 @@ normal additional first parameter of ``$model``::
 
     <?php
     // paginate and paginateCount implemented on a behavior.
-    public function paginate(Model $model, $conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
+    public function paginate(Model $Model, $conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
         // method content
     }
 
-    public function paginateCount(Model $model, $conditions = null, $recursive = 0, $extra = array()) {
+    public function paginateCount(Model $Model, $conditions = null, $recursive = 0, $extra = array()) {
         // method body
     }
 

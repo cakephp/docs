@@ -50,7 +50,7 @@ by default. You can configure this behavior by setting the
 ``$this->Security->blackHoleCallback`` property to a callback function
 in the controller.
 
-.. php:method:: blackHole(object $controller, string $error)
+.. php:method:: blackHole(Controller $Controller, string $error)
 
     Black-hole an invalid request with a 404 error or a custom
     callback. With no callback, the request will be exited. If a

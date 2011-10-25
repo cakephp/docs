@@ -631,7 +631,7 @@ Advanced Usage
     not change the parent of any node.::
 
         <?php
-        $model->reorder(array(
+        $Model->reorder(array(
             'id' => ,    //id of record to use as top node for reordering, default: $Model->id
             'field' => , //which field to use in reordering, default: $Model->displayField
             'order' => , //direction to order, default: 'ASC'
@@ -641,7 +641,7 @@ Advanced Usage
     .. note::
 
         If you have saved your data or made other operations on the model,
-        you might want to set ``$model->id = null`` before calling
+        you might want to set ``$Model->id = null`` before calling
         ``reorder``. Otherwise only the current node and it's children will
         be reordered.
 
@@ -714,7 +714,7 @@ Data Integrity
 
         array(
             'id' => null,
-            'field' => $model->displayField,
+            'field' => $Model->displayField,
             'order' => 'ASC',
             'verify' => true
         )

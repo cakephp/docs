@@ -616,32 +616,32 @@ Let's create the tests first::
     App::uses('View', 'View');
     
     class CurrencyRendererTest extends CakeTestCase {
-        private $currencyRenderer = null;
+        private $CurrencyRenderer = null;
     
         //Here we instantiate our helper, and all other helpers we need.
         public function setUp() {
             parent::setUp();
             $view = new View();
-            $this->currencyRenderer = new CurrencyRendererHelper($view);
+            $this->CurrencyRenderer = new CurrencyRendererHelper($view);
         }
     
         // testing usd() function.
         public function testUsd() {
-            $this->assertEquals('USD 5.30', $this->currencyRenderer->usd(5.30));
+            $this->assertEquals('USD 5.30', $this->CurrencyRenderer->usd(5.30));
 
             //We should always have 2 decimal digits.
-            $this->assertEquals('USD 1.00', $this->currencyRenderer->usd(1));
-            $this->assertEquals('USD 2.05', $this->currencyRenderer->usd(2.05));
+            $this->assertEquals('USD 1.00', $this->CurrencyRenderer->usd(1));
+            $this->assertEquals('USD 2.05', $this->CurrencyRenderer->usd(2.05));
 
             //Testing the thousands separator
-            $this->assertEquals('USD 12,000.70', $this->currencyRenderer->usd(12000.70));
+            $this->assertEquals('USD 12,000.70', $this->CurrencyRenderer->usd(12000.70));
         }
     }
 
 Here, we call ``usd()`` with different parameters and tell the test suite to
 check if the returned values are equal to what is expected.
 
-Executing the test now will result in errors (because currencyRendererHelper
+Executing the test now will result in errors (because CurrencyRendererHelper
 doesn't even exist yet) showing that we have 3 fails.
 
 Once we know what our method should do, we can write the method itself::
@@ -684,8 +684,8 @@ we need a controller to access the data in the model.
 If the ``startup()`` function of the component looks like this::
 
     <?php
-    public function startup(Controller $controller){ 
-        $this->Transporter = $controller->Transporter;
+    public function startup(Controller $Controller){ 
+        $this->Transporter = $Controller->Transporter;
     }
 
 then we can just design a really simple fake class::
@@ -697,9 +697,9 @@ and assign values into it like this::
 
     <?php
     $this->TransporterComponent = new TransporterComponent();
-    $controller = new FakeTransporterController(); 
-    $controller->Transporter = ClassRegistry::init('Transporter');
-    $this->TransporterComponent->startup($controller);
+    $Controller = new FakeTransporterController(); 
+    $Controller->Transporter = ClassRegistry::init('Transporter');
+    $this->TransporterComponent->startup($Controller);
 
 Creating a test method
 ----------------------
@@ -715,9 +715,9 @@ Just create a class that extends CakeTestCase and start writing tests::
         public function setUp() {
             parent::setUp();
             $this->TransporterComponent = new TransporterComponent();
-            $controller = new FakeTransporterController();
-            $controller->Transporter = ClassRegistry::init('Transporter');
-            $this->TransporterComponentTest->startup($controller);
+            $Controller = new FakeTransporterController();
+            $Controller->Transporter = ClassRegistry::init('Transporter');
+            $this->TransporterComponentTest->startup($Controller);
         }
 
         function testGetTransporter() {
@@ -1068,4 +1068,3 @@ Run a build
 
 You should be able to run a build now.  Check the console output and make any
 necessary changes to get a passing build.
-

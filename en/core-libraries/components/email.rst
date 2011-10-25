@@ -21,27 +21,27 @@ instead of the :php:class:`EmailComponent`. Below some tips about the migration.
    return false. We recommend to you use try/catch to ensure
    your messages are delivered correctly.
 
-Below some examples of using ``EmailComponent ($component)`` and now with
-``CakeEmail ($lib)``:
+Below some examples of using ``EmailComponent (Component $Component)`` and now with
+``CakeEmail ($Lib)``:
 
--  From ``$component->to = 'some@example.com';`` to
-   ``$lib->to('some@example.com');``
--  From ``$component->to = 'Alias <some@example.com>';`` to
-   ``$lib->to('some@example.com', 'Alias');`` or
-   ``$lib->to(array('some@example.com' => 'Alias'));``
--  From ``$component->subject = 'My subject';`` to
-   ``$lib->subject('My subject');``
--  From ``$component->date = 'Sun, 25 Apr 2011 01:00:00 -0300';`` to
-   ``$lib->addHeaders(array('Date' => 'Sun, 25 Apr 2011 01:00:00 -0300'));``
--  From ``$component->header['Custom'] = 'only my';`` to
-   ``$lib->addHeaders(array('X-Custom' => 'only my'));``
--  From ``$component->send(null, 'template', 'layout');`` to
-   ``$lib->template('template', 'layout')->send();``
--  From ``$component->delivery = 'smtp';`` to ``$lib->transport('smtp');``
--  From ``$component->smtpOptions = array('host' => 'smtp.example.com');`` to
-   ``$lib->config(array('host' => 'smtp.example.com'));``
--  From ``$sent = $component->httpMessage;`` to
-   ``$sent = $lib->message(CakeEmail::MESSAGE_HTML);``
+-  From ``$Component->to = 'some@example.com';`` to
+   ``$Lib->to('some@example.com');``
+-  From ``$Component->to = 'Alias <some@example.com>';`` to
+   ``$Lib->to('some@example.com', 'Alias');`` or
+   ``$Lib->to(array('some@example.com' => 'Alias'));``
+-  From ``$Component->subject = 'My subject';`` to
+   ``$Lib->subject('My subject');``
+-  From ``$Component->date = 'Sun, 25 Apr 2011 01:00:00 -0300';`` to
+   ``$Lib->addHeaders(array('Date' => 'Sun, 25 Apr 2011 01:00:00 -0300'));``
+-  From ``$Component->header['Custom'] = 'only my';`` to
+   ``$Lib->addHeaders(array('X-Custom' => 'only my'));``
+-  From ``$Component->send(null, 'template', 'layout');`` to
+   ``$Lib->template('template', 'layout')->send();``
+-  From ``$Component->delivery = 'smtp';`` to ``$Lib->transport('smtp');``
+-  From ``$Component->smtpOptions = array('host' => 'smtp.example.com');`` to
+   ``$Lib->config(array('host' => 'smtp.example.com'));``
+-  From ``$sent = $Component->httpMessage;`` to
+   ``$sent = $Lib->message(CakeEmail::MESSAGE_HTML);``
 
 For more information you should read the :doc:`/core-utility-libraries/email`
 documentation.
