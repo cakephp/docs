@@ -8,8 +8,8 @@ o CakePHP estão no `lighthouse <http://cakephp.lighthouseapp.com>`_.
 Informando Bugs
 ==============
 
-Well written bug reports are very helpful.  There are a few steps to help create
-the best bug report possible:
+Informações bem escritas de bugs ajudam bastante. Você pode seguir alguns passos
+que vão te ajudar a descrever um bug:
 
 * **Faça** uma `busca <http://cakephp.lighthouseapp.com/projects/42648-cakephp/tickets?q=ITS+BROKEN>`_
   por um ticket simular, tenha certeza que ninguém já informou seu problema e que
