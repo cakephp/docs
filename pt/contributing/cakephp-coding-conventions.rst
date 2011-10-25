@@ -3,7 +3,7 @@ Padrões de Codificação
 
 Os desenvolvedores Cake vão sempre usar os seguintes padrões de codificação.
 
-É recomendavel que qualquer que for desenvolver algum ingrediente para o Cake utilize esses padrões.
+É recomendavel que qualquer um que for desenvolver algum ingrediente para o Cake utilize esses padrões.
 
 Adicionando novos recursos
 ===================
