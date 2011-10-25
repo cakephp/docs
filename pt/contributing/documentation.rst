@@ -9,7 +9,7 @@ Você também pode editar os arquivos online através do github,
 sem precisar fazer o download dos arquivos.
 
 Traduções
-============
+=========
 
 Envie um email para o equipe da documentação (docs [at] cakephp dot org)
 ou entre no IRC(#cakephp on freenode) para discutir algum processo de 
@@ -83,15 +83,12 @@ Marcações
 Se asteriscos ou crases devem aparecer no texto elas devem ser precidadas por uma barra 
 invertida (\) para escapar.
 
-.. todo::
-  Translate the complete section ``Restrições para marcação``.
-
 Restrições para a marcação:
 
 * **Não pode** ser aninhado.
 * O conteúdo não pode iniciar ou terminar com espaço em branco: ``* text*`` está incorreto.
-* Content must be separated from surrounding text by non-word characters. Use a backslash 
-  escaped space to work around that: ``onelong\ *bolded*\ word``.
+* O conteúdo deve ser separado do restante do texto por *non-word characters*. Use
+  uma barra invertida escapando um espaço para corrigir isso: ``onelong\ *bolded*\ word``.
 
 Listas
 -----
@@ -179,6 +176,9 @@ Links de referência cruzada
     Em qualquer lugar você pode referenciar a seção acima usando ``:ref:`label-name```.
     O texto do link será título da seção. Você também pode informar um texto personalizado
     usando ``:ref: `Link text <label-name>```.
+
+.. todo::
+  Line 183 ~ EOF.
 
 Describing classes and their contents
 -------------------------------------
