@@ -222,7 +222,6 @@ Cada diretiva alimenta o índice e/ou o *namespace* do índice.
         
            Method description
 
-
    Atributos, métodos e constante não precisam estar um nível abaixo.
    Podem ser declaradas no mesmo nível da classe::
 
@@ -283,7 +282,7 @@ se alguma diretiva for encontrada:
 .. rst:role:: php:class
 
    Cria uma referência para uma classe através do nome::
-   
+
      :php:class:`ClassName`
 
 .. rst:role:: php:meth
@@ -345,7 +344,7 @@ Todos os *admonitions* são declarados da mesma forma::
     Esse texto não pertence a nota.
 
 Exemplos
-~~~~~~~
+~~~~~~~~
 
 .. tip::
 

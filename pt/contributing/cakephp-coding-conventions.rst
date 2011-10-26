@@ -11,7 +11,7 @@ Adicionando novos recursos
 Nenhum novo recurso deve ser adicionado ou disponibilizado sem que tenha seus próprios testes - os quais devem todos passar antes de se submeter seus códigos para o repositório.
 
 Indentação
-===========
+==========
 
 Um tab é usado para a indentação.
 
@@ -38,7 +38,7 @@ Ou::
     }
 
 Estruturas de controle
-==================
+======================
 
 Estruturas de controle são  "``if``", "``for``", "``foreach``",
 "``while``", "``switch``" etc. Veja um exemplo abaixo com "``if``"::
@@ -139,7 +139,7 @@ true ou false - assim facilita a identificação que a chamada ao metódo realme
 De novo, note que deve haver espaços em ambos os lados dos sinais de igual.
 
 Comentando o Código
-===============
+===================
 
 Todos os comentários devem ser escritos em Inglês 
 e deve haver uma clara maneira de identificar o bloco de código comentado.
@@ -192,7 +192,7 @@ Todos os blocos de comentários, exceto o primeiro bloco de um arquivo,
 devem ser precedidos com uma linha em branco.
 
 Includindo Arquivos
-===============
+===================
 
 Se for precisar incluir arquivos com classes ou bibliotecas, 
 utilize sempre a função `require\_once <http://php.net/require_once>`_.
@@ -203,7 +203,7 @@ Tags PHP
 Sempre utilize tags do PHP longas (<?php ?>) ao invés de tags curtas (<? ?>).
 
 Convenções de Nomenclatura
-=================
+==========================
 
 Metódos
 ---------
@@ -239,7 +239,7 @@ Por exemplo::
     $Dispatcher = new Dispatcher();
 
 Visibilidade de Membros
------------------
+-----------------------
 
 Use private e protected para metódos e variáveis. Em adicional, metódos ou variáveis
 protected começa com um underscore("\_"). Exemplo::
@@ -265,7 +265,8 @@ Métodos ou variáveis private começa com dois underscore ("\_\_"). Exemplo::
     }
 
 Métodos Encadeados
----------------
+------------------
+
 
 Métodos encadeados devem ser chamandos em múltiplas linhas e indentado com um tab::
 
@@ -276,7 +277,7 @@ Métodos encadeados devem ser chamandos em múltiplas linhas e indentado com um 
         ->send();
 
 Endereços de Exemplos
------------------
+---------------------
 
 Para todas as URLs e endereços de email de exemplo, utilize "example.com", 
 "example.org" ou "example.net" como domínios. Por exemplo:
@@ -290,7 +291,7 @@ O domínio ``example.com`` é reservado para este propósito (see :rfc:`2606`) e
 utilizar em documentações ou exemplos.
 
 Arquivos
------
+--------
 
 Nomes de arquivos devem ser criados em minúsculas. Se um nome de 
 arquivo consistir de múltiplas palavras, elas devem ser 
@@ -301,12 +302,12 @@ divididas por um caracter underscore. Por exemplo:
     long_file_name.php
 
 Tipos de Variáveis
---------------
+------------------
 
 Os tipos de variáveis disponíveis para uso em blocos de documentação são:
 
-Type
-    Description
+Tipo
+    Descrição
 mixed
     Variável com tipo indefinido ou que pode assumir vários tipos.
 integer
@@ -327,7 +328,7 @@ resource
 	qual os valores possíves
 	
 Constantes
----------
+----------
 
 Contantes devem ser definidas em letras maiúsculas:
 
