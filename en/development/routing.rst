@@ -546,15 +546,15 @@ request for ``/posts/view/title:first/category:general`` would result
 in a call to the view() action of the PostsController. In that
 action, you’d find the values of the title and category parameters
 inside ``$this->params['named']``.  They are also available inside
-``$this->passedArgs``. In both cases you can access named using their
+``$this->passedArgs``. In both cases you can access named parameters using their
 name as an index.  If named parameters are omitted, they will not be set.
 
 
 .. note::
 
-    What is parsed as a named parameter, is controlled by 
+    What is parsed as a named parameter is controlled by 
     :php:meth:`Router::connectNamed()`.  If your named parameters are not
-    reverse routing, or parsing correctly. You will need to inform 
+    reverse routing, or parsing correctly, you will need to inform 
     :php:class:`Router` about them.
 
 Some summarizing examples for default routes might prove helpful::
@@ -605,11 +605,11 @@ as a named parameter.
 .. note::
 
     Both named parameters and route elements share the same key-space.
-    Its best to avoid re-using a key for both a route element, and a named
+    It's best to avoid re-using a key for both a route element and a named
     parameter.
 
-Named parameters also support arrays both in generation of urls, and
-parsing of urls.  The syntax works very similar to the array syntax used
+Named parameters also support using arrays to generate and parse
+urls.  The syntax works very similar to the array syntax used
 for GET parameters.  When generating urls you can use the following
 syntax::
 
@@ -657,7 +657,7 @@ passing arguments::
       'users' => array(1, 2, 3)
     ));
 
-You would end up with a pretty long url like this (wrapped for easy of reading)::
+You would end up with a pretty long url like this (wrapped for easy reading)::
 
     posts/search
       /models[post][order]:asc/models[post][filter][published]:1
@@ -745,8 +745,8 @@ Reverse routing
 
 Reverse routing is a feature in CakePHP that is used to allow you to
 easily change your url structure without having to modify all your code.
-By using :term:`routing array`'s to define your urls, you can later
-configure routes and the generated url's will automatically update.
+By using :term:`routing array`s to define your urls, you can later
+configure routes and the generated urls will automatically update.
 
 If you create urls using strings like::
 
@@ -754,7 +754,7 @@ If you create urls using strings like::
     $this->Html->link('View', '/posts/view/' + $id);
 
 And then later decide that ``/posts`` should really be called 
-'articles' instead.  You would have to go through your entire
+'articles' instead, you would have to go through your entire
 application renaming urls.  However, if you defined your link like::
 
     <?php
