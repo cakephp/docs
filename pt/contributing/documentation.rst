@@ -177,44 +177,42 @@ Links de referência cruzada
     O texto do link será título da seção. Você também pode informar um texto personalizado
     usando ``:ref: `Link text <label-name>```.
 
-.. todo::
-  Line 183 ~ EOF.
+Descrevendo classes e seus conteúdos
+------------------------------------
 
-Describing classes and their contents
--------------------------------------
+A documentação do CakePHP utiliza o `phpdomain
+<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>` que fornece
+algumas diretivas para descrever objetos e construtores. 
+Usar essas diretivas é essêncial para criar índices e referências
+em toda a documentação.
 
-The CakePHP documentation uses the `phpdomain
-<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>` to provide custom
-directives for describing PHP objects and constructs.  Using these directives
-and roles is required to give proper indexing and cross referencing features.
+Descrevendo Classes e Construtores
+-----------------------------------
 
-Describing classes and constructs
----------------------------------
-
-Each directive populates the index, and or the namespace index.
+Cada diretiva alimenta o índice e/ou o *namespace* do índice.
 
 .. rst:directive:: .. php:global:: name
 
-   This directive declares a new PHP global variable.
+   Essa diretiva declara uma variável global.
 
 .. rst:directive:: .. php:function:: name(signature)
 
-   Defines a new global function outside of a class.
+   Define um função global fora da classe.
 
 .. rst:directive:: .. php:const:: name
 
-   This directive declares a new PHP constant, you can also use it nested 
-   inside a class directive to create class constants.
+   Essa diretiva declara uma constante, você também pode usar
+   dentro de uma classe para declarar uma constante da classe.
    
 .. rst:directive:: .. php:exception:: name
 
-   This directive declares a new Exception in the current namespace. The 
-   signature can include constructor arguments.
+   Essa diretiva declara um nova *Exception* no *namespace* atual.
+   A declaração pode conter os argumentos do construtor.
 
 .. rst:directive:: .. php:class:: name
 
-   Describes a class.  Methods, attributes, and constants belonging to the class
-   should be inside this directive's body::
+   Descreve uma classe. Métodos, atributos e constantes que pertence a classe
+   devem ser declaradas dentro dessa diretiva::
 
         .. php:class:: MyClass
         
@@ -225,8 +223,8 @@ Each directive populates the index, and or the namespace index.
            Method description
 
 
-   Attributes, methods and constants don't need to be nested.  They can also just 
-   follow the class declaration::
+   Atributos, métodos e constante não precisam estar um nível abaixo.
+   Podem ser declaradas no mesmo nível da classe::
 
         .. php:class:: MyClass
         
@@ -241,114 +239,112 @@ Each directive populates the index, and or the namespace index.
 
 .. rst:directive:: .. php:method:: name(signature)
 
-   Describe a class method, its arguments, return value, and exceptions::
+   Descreve um método da classe, seus argumentos, valor retornado e *exceptions*::
    
         .. php:method:: instanceMethod($one, $two)
         
-            :param string $one: The first parameter.
-            :param string $two: The second parameter.
-            :returns: An array of stuff.
+            :param string $one: Primeiro parâmetro.
+            :param string $two: Segundo parâmetro.
+            :returns: Um array com várias coisas.
             :throws: InvalidArgumentException
         
-           This is an instance method.
+           Isso é um método de instância.
 
 .. rst:directive:: .. php:staticmethod:: ClassName::methodName(signature)
 
-    Describe a static method, its arguments, return value and exceptions,
-    see :rst:dir:`php:method` for options.
+    Descreve um método estático, seus argumentos, valor retornado e *exceptions*
+    veja :rst:dir:`php:method` para mais detalhes.
 
 .. rst:directive:: .. php:attr:: name
 
-   Describe an property/attribute on a class.
+   Descreve um propriedade ou atributo de uma classe.
 
-Cross Referencing
-~~~~~~~~~~~~~~~~~
+Referênciando Cruzados
+~~~~~~~~~~~~~~~~~~~~~~
 
-The following roles refer to php objects and links are generated if a 
-matching directive is found:
+As funções a seguir server para referenciar objetos e links do PHP
+se alguma diretiva for encontrada:
 
 .. rst:role:: php:func
 
-   Reference a PHP function.
+   Cria uma referência para uma função PHP.
 
 .. rst:role:: php:global
 
-   Reference a global variable whose name has ``$`` prefix.
+   Cria uma referência para uma variável global que comece com ``$``.
    
 .. rst:role:: php:const
 
-   Reference either a global constant, or a class constant.  Class constants should
-   be preceded by the owning class::
+   Cria uma referência para um constante ou uma contante de uma classe. As constantes da classe
+   devem ser precedidas com o nome da classe::
    
-        DateTime has an :php:const:`DateTime::ATOM` constant.
+        DateTime tem uma constante :php:const:`DateTime::ATOM`.
 
 .. rst:role:: php:class
 
-   Reference a class by name::
+   Cria uma referência para uma classe através do nome::
    
      :php:class:`ClassName`
 
 .. rst:role:: php:meth
 
-   Reference a method of a class. This role supports both kinds of methods::
+   Cria uma referência para um método da classe. Essa função suporta os dois métodos::
    
      :php:meth:`DateTime::setDate`
      :php:meth:`Classname::staticMethod`
 
 .. rst:role:: php:attr
 
-   Reference a property on an object::
+   Cria uma referência para a propriedade de um objeto::
    
       :php:attr:`ClassName::$propertyName`
 
 .. rst:role:: php:exc
 
-   Reference an exception.
+   Cria uma referência para uma *exception*
 
 
-Source code
------------
+Código Fonte
+------------
 
-Literal code blocks are created by ending a paragraph with ``::``. The literal
-block must be indented, and like all paragraphs be separated by single lines::
+Blocos de códigos literais são criados terminando um paragrafo com ``::``.
+O bloco deve ser indentado e como todos os parágrafos ser separados por uma linha::
 
-    This is a paragraph::
+    Isso é um parágrafo::
         
         while ($i--) {
             doStuff()
         }
     
-    This is regular text again.
+    Isso é um resto normal denovo.
 
-Literal text is not modified or formatted, save that one level of indentation is removed.
+Textos literais não são modificados ou formatados, salvo quando o level de indentação é removido.
 
 
-Notes and warnings
-------------------
+Notas e Avisos
+--------------
 
-There are often times when you want to inform the reader of an important tip,
-special note or a potential hazard. Admonitions in sphinx are used for just
-that.  There are three kinds of admonitions. 
+As vezes você quer infomar ao leitor do book um dica importante, um lembrete
+ou um aviso importante. *Admonitions* no sphinx são usados para isso.
+Existe tr6es tipos de *admonitions*.
 
-* ``.. tip::`` Tips are used to document or re-iterate interesting or important
-  information. The content of the directive should be written in complete
-  sentences and include all appropriate punctuation.
-* ``.. note::`` Notes are used to document an especially important piece of
-  information. The content of the directive should be written in complete
-  sentences and include all appropriate punctuation.
-* ``.. warning::`` Warnings are used to document potential stumbling blocks, or
-  information pertaining to security.  The content of the directive should be
-  written in complete sentences and include all appropriate punctuation.
+* ``.. tip::`` Tips são usandos no documento para salientar algo importante.
+  O conteúdo deve ter as sentenças corretas e pontuação apropriada.
+* ``.. note::`` Notes são usadas para especificar uma parte importante da informação.
+  O conteúdo deve ter as sentenças corretas e pontuação apropriada.
+* ``.. warning::`` Warnings são usados para informar potenciais obstáculos
+  ou informações sobre segurança. O conteúdo deve ter as sentenças corretas 
+  e pontuação apropriada.
   
-All admonitions are made the same::
+Todos os *admonitions* são declarados da mesma forma::
 
     .. note::
     
-        Indented and preceeded and followed by a blank line. Just like a paragraph.
+        Indentado e precedido por uma linha branca. Como uma parágrafo.
     
-    This text is not part of the note.
+    Esse texto não pertence a nota.
 
-Samples
+Exemplos
 ~~~~~~~
 
 .. tip::
