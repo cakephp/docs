@@ -621,8 +621,8 @@ Let's create the tests first::
         //Here we instantiate our helper, and all other helpers we need.
         public function setUp() {
             parent::setUp();
-            $view = new View();
-            $this->CurrencyRenderer = new CurrencyRendererHelper($view);
+            $View = new View();
+            $this->CurrencyRenderer = new CurrencyRendererHelper($View);
         }
     
         // testing usd() function.
