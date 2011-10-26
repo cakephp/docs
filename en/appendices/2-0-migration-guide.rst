@@ -673,7 +673,7 @@ properties as they will be removed in a future release.
 -  ``Helper::$params`` is deprecated, use the ``$this->request`` instead.
 
 XmlHelper, AjaxHelper and JavascriptHelper removed
----------------------------------------
+--------------------------------------------------
 
 The AjaxHelper and JavascriptHelper have been removed as they were deprecated in
 version 1.3. The XmlHelper was removed, as it was made obsolete and redundant
@@ -1135,7 +1135,7 @@ improves consistency in an application, as objects have one authoritative way to
 reference them.
 
 Plugin App Controller and Plugin App Model
-----------------------------------------
+------------------------------------------
 
 The plugin AppController and AppModel are no longer located directly in the 
 plugin folder. They are now placed into the plugin's Controller and Model 
