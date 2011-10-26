@@ -542,12 +542,13 @@ Named parameters
 ================
 
 You can name parameters and send their values using the URL. A
-request for ``/posts/view/title:first/category:general`` would result
-in a call to the view() action of the PostsController. In that
-action, you’d find the values of the title and category parameters
+request for ``/contents/view/chapter:models/section:associations`` would result
+in a call to the view() action of the ContentsController. In that
+action, you’d find the values of the chapter and section parameters
 inside ``$this->params['named']``.  They are also available inside
 ``$this->passedArgs``. In both cases you can access named using their
-name as an index.  If named parameters are omitted, they will not be set.
+name as an index, e.g. ``$this->params['named']['chapter']``.  If named
+parameters are omitted, they will not be set.
 
 
 .. note::
