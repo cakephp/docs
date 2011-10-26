@@ -672,13 +672,15 @@ properties as they will be removed in a future release.
 -  ``Helper::$data`` is deprecated, use the request object's data property.
 -  ``Helper::$params`` is deprecated, use the ``$this->request`` instead.
 
-AjaxHelper and JavascriptHelper removed
+XmlHelper, AjaxHelper and JavascriptHelper removed
 ---------------------------------------
 
 The AjaxHelper and JavascriptHelper have been removed as they were deprecated in
-version 1.3.
+version 1.3. The XmlHelper was removed, as it was made obsolete and redundant
+with the improvements to :php:class:`Xml`.  The ``Xml`` class should be used to
+replace previous usage of XmlHelper.
 
-They are replaced with the JsHelper and HtmlHelper.
+The AjaxHelper, and JavascriptHelper are replaced with the JsHelper and HtmlHelper.
 
 JsHelper
 --------
