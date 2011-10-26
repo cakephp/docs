@@ -138,7 +138,7 @@ successful::
         }
 
         if (!($dnsInfo) || !($dnsInfo['phpType'])) {
-            return $this=>addError();
+            return $this->addError();
         }
         return true;
     }
