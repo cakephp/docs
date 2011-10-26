@@ -64,7 +64,7 @@ in later much simpler::
 
 .. tip::
 
-    Use a descriptive name for your branch, referencing the ticket of feature
+    Use a descriptive name for your branch, referencing the ticket or feature
     name is a good convention. e.g. ticket-1234, feature-awesome
 
 The above will create a local branch based on the upstream (CakePHP) 2.0 branch.
