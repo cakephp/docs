@@ -10,10 +10,10 @@ Adicionando novos recursos
 
 Nenhum novo recurso deve ser adicionado ou disponibilizado sem que tenha seus próprios testes - os quais devem todos passar antes de se submeter seus códigos para o repositório.
 
-Identação
+Indentação
 ===========
 
-Um tab é usado para a identação.
+Um tab é usado para a indentação.
 
 Dessa forma, o código deve ser algo parecido com isto::
 
@@ -267,7 +267,7 @@ Métodos ou variáveis private começa com dois underscore ("\_\_"). Exemplo::
 Métodos Encadeados
 ---------------
 
-Métodos encadeados devem ser chamandos em múltiplas linhas e identado com um tab::
+Métodos encadeados devem ser chamandos em múltiplas linhas e indentado com um tab::
 
     <?php
     $email->from('foo@example.com')
