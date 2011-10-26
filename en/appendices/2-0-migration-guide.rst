@@ -377,7 +377,7 @@ App::import()
   possible.
 * Importing a non-existent file, supplying a wrong type or package name, or null
   values for $name and $file parameters will result in a false return value.
-* App::import('Core', 'CoreClass') is no loger supported, use App::uses()
+* App::import('Core', 'CoreClass') is no longer supported, use App::uses()
   instead and let the class autoloading do the rest.
 * Loading Vendor files does not look recursively in the vendors folder, it will
   also no longer convert the file to underscored as it did in the past.
