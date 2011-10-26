@@ -218,9 +218,11 @@ as requesting ``/apples/view/5``. Both would call the view() method of
 the ApplesController. Inside the view() method, you would need to
 access the passed ID at ``$this->request->params['id']``.
 
-If you have a single controller in your application and you want
-that controller name does not appear in url, e.g have urls like
-``/demo`` instead of ``/home/demo``, you can do the following::
+If you have a single controller in your application and you do not want
+the controller name to appear in the url, you can map all urls to actions
+in your controller.  For example, to map all urls to actions of the
+``home`` controller, e.g have urls like ``/demo`` instead of
+``/home/demo``, you can do the following::
 
     <?php
     Router::connect('/:action', array('controller' => 'home')); 
