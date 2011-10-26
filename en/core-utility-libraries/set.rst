@@ -799,6 +799,38 @@ Foo
         */
 
 
+.. php:staticmethod:: flatten($data, $separator='.')
+
+    :rtype: array
+
+    Collapses a multi-dimensional array into a single dimension::
+
+        <?php
+        $arr = array(
+            array(
+                'Post' => array('id' => '1', 'title' => 'First Post'),
+                'Author' => array('id' => '1', 'user' => 'Kyle'),
+            ),
+            array(
+                'Post' => array('id' => '2', 'title' => 'Second Post'),
+                'Author' => array('id' => '3', 'user' => 'Crystal'),
+            ),
+        );
+        $res = Set::flatten($arr);
+        /* $res now looks like:
+            Array (
+                [0.Post.id] => 1
+                [0.Post.title] => First Post
+                [0.Author.id] => 1
+                [0.Author.user] => Kyle
+                [1.Post.id] => 2
+                [1.Post.title] => Second Post
+                [1.Author.id] => 3
+                [1.Author.user] => Crystal
+            )
+        */
+
+
 .. php:staticmethod:: format($data, $format, $keys)
 
     :rtype: array
