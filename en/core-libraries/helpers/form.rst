@@ -80,11 +80,17 @@ opening form tag.
         <form id="RecipeEditForm" method="post" action="/recipes/edit/5">
         <input type="hidden" name="_method" value="PUT" />
 
-
     .. note::
 
         Since this is an edit form, a hidden input field is generated to
         override the default HTTP method.
+
+    When creating forms for models in plugins, you should always use
+    :term:`plugin syntax` when creating a form.  This will ensure the form is
+    correctly generated::
+    
+        <?php
+        echo $this->Form->create('ContactManager.Contact');
 
     The ``$options`` array is where most of the form configuration
     happens. This special array can contain a number of different
