@@ -23,6 +23,10 @@ database storage engines:
 -  Microsoft SQL Server
 -  SQLite
 
+.. note::
+
+    The built-in drivers all require PDO.  You should make sure you have the
+    correct PDO extensions installed.
 
 License
 =======
