@@ -982,7 +982,7 @@ Router API
     * ``full_base`` - If true the :php:const:`FULL_BASE_URL` constant will 
       be prepended to generated urls.
 
-.. php:staticmethod:: mapResources($controller, $options = array())
+.. php:staticmethod:: mapResources(Controller $Controller, $options = array())
 
     Creates REST resource routes for the given controller(s).  See
     the :doc:`/development/rest` section for more information.

@@ -226,9 +226,9 @@ application.
     Router if one has been provided, and secondly by the list of
     content-types in HTTP\_ACCEPT.
 
-.. php:method:: renderAs($controller, $type)
+.. php:method:: renderAs(Controller $Controller, $type)
 
-    :param Controller $controller: Controller Reference
+    :param Controller $Controller: Controller Reference
     :param string $type: friendly content type name to render content for ex.
        xml, rss.
 
@@ -251,4 +251,3 @@ application.
 
     Returns the current response type Content-type header or null if
     one has yet to be set.
-

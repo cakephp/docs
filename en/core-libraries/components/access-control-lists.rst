@@ -519,7 +519,7 @@ models to save data like we always do:
 
     function anyAction()
     {
-        $aro =& $this->Acl->Aro;
+        $aro = $this->Acl->Aro;
         
         //Here's all of our group info in an array we can iterate through
         $groups = array(

@@ -80,8 +80,8 @@ node()
 ======
 
 The AclBehavior also allows you to retrieve the Acl node associated
-with a model record. After setting $model->id. You can use
-$model->node() to retrieve the associated Acl node.
+with a model record. After setting $Model->id. You can use
+$Model->node() to retrieve the associated Acl node.
 
 You can also retrieve the Acl Node for any row, by passing in a
 data array::

@@ -47,14 +47,14 @@ implement ``create``, ``update``, and ``delete``.
 
 Methods that must be implemented
 
--  ``describe($model)``
+-  ``describe(Model $Model)``
 -  ``listSources()``
 -  At least one of:
    
-   -  ``create($model, $fields = array(), $values = array())``
-   -  ``read($model, $queryData = array())``
-   -  ``update($model, $fields = array(), $values = array())``
-   -  ``delete($model, $id = null)``
+   -  ``create(Model $Model, $fields = array(), $values = array())``
+   -  ``read(Model $Model, $queryData = array())``
+   -  ``update(Model $Model, $fields = array(), $values = array())``
+   -  ``delete(Model $Model, $id = null)``
 
 It is also possible (and sometimes quite useful) to define the
 ``$_schema`` class attribute inside the datasource itself, instead
@@ -125,7 +125,7 @@ You would place the Twitter datasource in
         public function listSources() {
             return array('tweets');
         }
-        public function read($model, $queryData = array()) {
+        public function read(Model $Model, $queryData = array()) {
             if (!isset($queryData['conditions']['username'])) {
                 $queryData['conditions']['username'] = $this->config['login'];
             }
@@ -143,17 +143,17 @@ You would place the Twitter datasource in
             }
             return $results;
         }
-        public function create($model, $fields = array(), $values = array()) {
+        public function create(Model $Model, $fields = array(), $values = array()) {
             $data = array_combine($fields, $values);
             $result = $this->connection->post('/statuses/update.json', $data);
             $result = json_decode($result, true);
             if (isset($result['id']) && is_numeric($result['id'])) {
-                $model->setInsertId($result['id']);
+                $Model->setInsertId($result['id']);
                 return true;
             }
             return false;
         }
-        public function describe($model) {
+        public function describe(Model $Model) {
             return $this->_schema['tweets'];
         }
     }

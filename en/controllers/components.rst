@@ -196,7 +196,7 @@ way you include them in controllers - using the ``$components`` var::
         // the other component your component uses
         public $components = array('Existing'); 
     
-        function initialize($controller) {
+        function initialize(Controller $Controller) {
             $this->Existing->foo();
         }
     
@@ -209,7 +209,7 @@ way you include them in controllers - using the ``$components`` var::
     <?php
     class ExistingComponent extends Component {
     
-        function initialize($controller) {
+        function initialize(Controller $Controller) {
             $this->Parent->bar();
         }
      
@@ -230,7 +230,7 @@ Component API
     with common handling of settings.  It also provides prototypes for all
     the component callbacks.
 
-.. php:method:: __construct(ComponentCollection $collection, $settings = array())
+.. php:method:: __construct(ComponentCollection $Collection, $settings = array())
 
     Constructor for the base component class.  All ``$settings`` that
     are also public properties will have their values changed to the
@@ -239,28 +239,28 @@ Component API
 Callbacks
 ---------
 
-.. php:method:: initialize($controller)
+.. php:method:: initialize(Controller $Controller)
 
     The initialize method is called before the controller's
     beforeFilter method.
 
-.. php:method:: startup($controller)
+.. php:method:: startup(Controller $Controller)
 
     The startup method is called after the controller's beforeFilter
     method but before the controller executes the current action
     handler.
 
-.. php:method:: beforeRender($controller)
+.. php:method:: beforeRender(Controller $Controller)
 
     The beforeRender method is called after the controller executes the
     requested action's logic but before the controller's renders views
     and layout.
 
-.. php:method:: shutdown($controller)
+.. php:method:: shutdown(Controller $Controller)
 
     The shutdown method is called before output is sent to browser.
 
-.. php:method:: beforeRedirect($controller, $url, $status=null, $exit=true)
+.. php:method:: beforeRedirect(Controller $Controller, $url, $status=null, $exit=true)
 
     The beforeRedirect method is invoked when the controller's redirect
     method is called but before any further action. If this method
