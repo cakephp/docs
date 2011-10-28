@@ -1207,7 +1207,7 @@ features for more information on new APIs that are available.
 
 .. tip::
 
-    Be sure to checkout the upgrade shell included in the 2.0 core to help you
+    Be sure to checkout the :ref:`upgrade-shell` included in the 2.0 core to help you
     migrate your 1.3 code to 2.0.
 
 Debugging
