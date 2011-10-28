@@ -73,15 +73,24 @@ If your input is invalid the Xml class will throw a Exception::
     $xmlString = 'What is XML?'
     try {
         $xmlObject = Xml::build($xmlString); // Here will throw a Exception
-    } catch (Exception $e) {
+    } catch (XmlException $e) {
         throw new InternalErrorException();
     }
+
+.. note::
+
+    `DOMDocument <http://php.net/domdocument>`_ and 
+    `SimpleXML <http://php.net/simplexml>`_ implement different API's.
+    Be sure to use the correct methods on the object you request from Xml.
+
 
 Transforming a XML string in array
 ==================================
 
-::
+Converting XML strings into arrays is simple with the Xml class as well.  By
+default you'll get a SimpleXml object back::
 
+    <?php
     //Old method:
     $xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
     $xmlObject = new Xml($xmlString);
