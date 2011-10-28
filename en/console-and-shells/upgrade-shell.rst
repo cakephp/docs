@@ -1,3 +1,5 @@
+.. _upgrade-shell:
+
 Upgrade shell
 ###############
 
