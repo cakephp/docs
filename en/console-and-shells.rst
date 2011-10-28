@@ -919,3 +919,4 @@ More topics
     console-and-shells/i18n-shell
     console-and-shells/acl-shell
     console-and-shells/testsuite-shell
+    console-and-shells/upgrade-shell
