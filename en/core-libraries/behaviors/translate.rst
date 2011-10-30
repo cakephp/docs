@@ -20,7 +20,7 @@ layout.::
 
     ./cake i18n
 
-Select ``[I]`` which will run the i18n database intialization
+Select ``[I]`` which will run the i18n database initialization
 script. You will be asked if you want to drop any existing and if
 you want to create it. Answer with yes if you are sure there is no
 i18n table already, and answer with yes again to create the table.

@@ -49,7 +49,7 @@ Models
 ------
 
 Models are the heart of your application, they handle the validation,
-storage and retrival of your data.  Read more about :doc:`/models`
+storage and retrieval of your data.  Read more about :doc:`/models`
 
 Getting Help
 ============

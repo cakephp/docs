@@ -345,7 +345,7 @@ All admonitions are made the same::
 
     .. note::
     
-        Indented and preceeded and followed by a blank line. Just like a paragraph.
+        Indented and preceded and followed by a blank line. Just like a paragraph.
     
     This text is not part of the note.
 

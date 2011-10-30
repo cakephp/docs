@@ -406,7 +406,7 @@ are a few more tree-orientated permutations at your disposal.
     :param $conditions: Uses the same conditional options as find().
     :param $keyPath: Path to the field to use for the key.
     :param $valuePath: Path to the field to use for the label.
-    :param $spacer: The string to use in front of each item toindicate depth.
+    :param $spacer: The string to use in front of each item to indicate depth.
     :param $recursive: The number of levels deep to fetch associated records
 
     This method will return data similar to
@@ -447,7 +447,7 @@ are a few more tree-orientated permutations at your disposal.
 
     .. php:method:: getPath( $id = null, $fields = null, $recursive = null )
 
-    The 'path' when refering to hierachial data is how you get from
+    The 'path' when referring to hierarchal data is how you get from
     where you are to the top. So for example the path from the category
     "International" is:
 
@@ -558,7 +558,7 @@ Advanced Usage
 
     .. php:method:: removeFromTree($id=null, $delete=false)
 
-    Using this method wil either delete or move a node but retain its
+    Using this method will either delete or move a node but retain its
     sub-tree, which will be reparented one level higher. It offers more
     control than :ref:`model-delete`, which for a model
     using the tree behavior will remove the specified node and all of

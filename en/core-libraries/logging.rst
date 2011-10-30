@@ -74,7 +74,7 @@ your own types by using them when you call ``CakeLog::write``.
 .. note::
 
     Always configure loggers in ``app/Config/bootstrap.php``
-    Trying to use Applicationg or plugin loggers in core.php
+    Trying to use Application or plugin loggers in core.php
     will cause issues, as application paths are not yet configured.
 
 
@@ -194,7 +194,7 @@ CakeLog API
 
 .. php:staticmethod:: drop($name)
 
-    :param string $name: Name of the logger you wish to no longer recieve
+    :param string $name: Name of the logger you wish to no longer receive
         messages.
 
 .. php:staticmethod:: write($log, $message)
