@@ -205,7 +205,7 @@ want and the Security Component will enforce them on its startup::
     }
 
 In this example the delete action can only be successfully
-triggered if it recieves a POST request::
+triggered if it receives a POST request::
 
     <?php
     class WidgetController extends AppController {

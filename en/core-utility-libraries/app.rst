@@ -218,11 +218,11 @@ Including files with App::import()
 
     **All classes that were loaded in the past using App::import('Core', $class) will need to be 
     loaded using App::uses() referring to the correct package. This change has provided large
-    perfomance gains to the framework.**
+    performance gains to the framework.**
 
     .. versionchanged:: 2.0
 
-    * The method no longer looks for classes recursively, it stricty uses the values for the 
+    * The method no longer looks for classes recursively, it strictly uses the values for the 
       paths defined in :php:meth:`App::build()`
     * It will not be able to load ``App::import('Component', 'Component')`` use
       ``App::uses('Component', 'Controller');``;

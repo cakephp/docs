@@ -21,7 +21,7 @@ Recipe records (User 'hasMany' or 'hasAndBelongsToMany' Recipes):
 -  if $cascade is set to false, the Recipe records will remain
    after the User has been deleted.
 
-If your database supports foriegn keys and cascading deletes, it's often more
+If your database supports foreign keys and cascading deletes, it's often more
 efficient to rely on that feature than CakePHP's cascading. The one benefit to
 using the cascade feature of ``Model::delete()`` is that it allows you to
 leverage behaviors and model callbacks::
@@ -63,4 +63,4 @@ deleted. This will often result in more queries being issued.
 .. note::
 
     deleteAll() will return true even if no records are deleted, as the conditions
-    for the delete query were successfull and no matching records remain.
+    for the delete query were successful and no matching records remain.

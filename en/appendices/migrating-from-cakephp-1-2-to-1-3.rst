@@ -205,7 +205,7 @@ would need to use the path ``ROOT/Users/Users``
 
 ``SessionComponent::setFlash()`` second param used to be used for
 setting the layout and accordingly rendered a layout file. This has
-been modifed to use an element. If you specified custom session
+been modified to use an element. If you specified custom session
 flash layouts in your applications you will need to make the
 following changes.
 

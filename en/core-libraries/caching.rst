@@ -260,7 +260,7 @@ Cache API
 .. php:staticmethod:: write($key, $value, $config = 'default')
 
     Cache::write() will write a $value to the Cache. You can read or
-    delete this value later by refering to it by ``$key``. You may
+    delete this value later by referring to it by ``$key``. You may
     specify an optional configuration to store the cache in as well. If
     no ``$config`` is specified default will be used. Cache::write()
     can store any type of object and is ideal for storing results of

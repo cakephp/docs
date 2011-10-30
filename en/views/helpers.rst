@@ -81,7 +81,7 @@ attribute values or modify behavior of a helper::
 One common setting to use is the ``className`` option, which allows you to
 create aliased helpers in your views.  This feature is useful when you want to
 replace ``$this->Html`` or another common Helper reference with a custom
-implmentation::
+implementation::
 
     <?php
     class PostsController extends AppController {
@@ -99,7 +99,7 @@ The above would *alias* ``MyHtmlHelper`` to ``$this->Html`` in your views.
     Aliasing a helper replaces that instance anywhere that helper is used,
     including inside other Helpers.
 
-Using helper settings allows you to declaritively configure your helpers and
+Using helper settings allows you to declaratively configure your helpers and
 keep configuration logic out of your controller actions.  If you have
 configuration options that cannot be included as part of a class declaration,
 you can set those in your controller's beforeRender callback::

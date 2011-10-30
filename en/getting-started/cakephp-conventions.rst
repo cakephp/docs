@@ -54,7 +54,7 @@ While the page http://www.example.com/news/latest/ would be
 accessible to the user as usual, someone trying to get to the page
 http://www.example.com/news/\_findNewArticles/ would get an error,
 because the method is preceded with an underscore. You can also use
-PHP's visbility keywords to indicate whether or not a method can be 
+PHP's visibility keywords to indicate whether or not a method can be 
 accessed from a url. Non-public methods cannot be accessed.
 
 URL Considerations for Controller Names

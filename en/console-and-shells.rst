@@ -157,7 +157,7 @@ whenever there are no other commands or arguments given to a shell.  You may hav
 noticed that HelloShell is extending ``AppShell``.  Much like :ref:`app-controller`, AppShell
 gives you a base class to contain all your common functions or logic.  You can define an AppShell,
 by creating ``app/Console/Command/AppShell.php``.  If you don't have one, CakePHP will use the 
-built-in one. Since our main method wasnn't very interesting lets add another command
+built-in one. Since our main method wasn't very interesting lets add another command
 that does something::
 
     <?php 
@@ -755,7 +755,7 @@ would look like:
 
     <?xml version="1.0"?>
     <shell>
-        <commmand>bake fixture</commmand>
+        <command>bake fixture</command>
         <description>Generate fixtures for use with the test suite. You can use
            `bake fixture all` to bake all fixtures.</description>
         <epilog>Omitting all arguments and options will enter into an interactive mode.</epilog>

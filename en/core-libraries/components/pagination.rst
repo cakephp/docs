@@ -15,7 +15,7 @@ a critical part of every application and used to cause many
 headaches for developers. CakePHP eases the burden on the developer
 by providing a quick, easy way to paginate data.
 
-Pagination in CakePHP is affored by a Component in the controller, to make
+Pagination in CakePHP is offered by a Component in the controller, to make
 building paginated queries easier.  In the View :php:class:`PaginatorHelper` is
 used to make the generation of pagination links & buttons simple.
 
@@ -215,7 +215,7 @@ Control which fields used for ordering
 ======================================
 
 By default sorting can be done with any column on a model.  This is sometimes
-undersirable as it can allow users to sort on un-indexed columns, or virtual
+undesirable as it can allow users to sort on un-indexed columns, or virtual
 fields that can be expensive to calculate. You can use the 3rd parameter of
 ``Controller::paginate()`` to restrict the columns sorting will be done on::
 

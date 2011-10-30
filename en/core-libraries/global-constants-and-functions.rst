@@ -47,7 +47,7 @@ function to accomplish an oft-used task, it's here.
 .. php:function:: config()
 
     Can be used to load files from your application ``config``-folder
-    via include\_once. Function checks for existance before include and
+    via include\_once. Function checks for existence before include and
     returns boolean. Takes an optional number of arguments.
 
     Example: ``config('some_file', 'myconfig');``
