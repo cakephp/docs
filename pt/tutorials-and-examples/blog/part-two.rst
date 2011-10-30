@@ -1,6 +1,6 @@
-########################
-Tutorial Criando um Blog
-########################
+##################
+Blog - Continuação
+##################
 
 Crie um Model Post
 ==================
@@ -10,9 +10,9 @@ do CakePHP que irá interagir com nossa base de dados, teremos os alicerces
 necessários para posteriormente fazer nossas operações de visualizar,
 adicionar, editar e excluir.
 
-Os arquivos da classe de model do CakePHP ficam em ``/app/Model`` e o arquivo
-que iremos criar será salvo em ``/app/Model/Post.php``. O conteúdo completo
-deste arquivo deve ficar assim::
+Os arquivos de classe do tipo model do CakePHP ficam em ``/app/Model`` e o
+arquivo que iremos criar será salvo em ``/app/Model/Post.php``. O conteúdo
+completo deste arquivo deve ficar assim::
 
     <?php
     
@@ -21,7 +21,7 @@ deste arquivo deve ficar assim::
     }
 
 A nomenclatura da classe segue uma convenção que é muito importante no CakePHP.
-Ao chamar nosso model de Post, o CakePHP pode automaticamente deduzier que este
+Ao chamar nosso model de Post, o CakePHP pode automaticamente deduzir que este
 model será usado num PostsController, e que manipulará os dados de uma tabela do
 banco chamada de ``posts``.
 
@@ -30,8 +30,9 @@ banco chamada de ``posts``.
     O CakePHP irá criar um objeto (instância) do model dinamicamente para você,
     se não encontrar um arquivo correspondente na pasta /app/Model. Isto também
     significa que, se você acidentalmente der um nome errado ao seu arquivo
-    (p.ex. post.php ou posts.php) o CakePHP não será capaz de reconhecer quais
-    de suas configurações e passará usar seus padrões definidos ao invés disso. 
+    (p.ex. post.php ou posts.php) o CakePHP não será capaz de reconhecer nenhuma
+    de suas configurações adicionais e ao invés disso, passará a usar seus
+    padrões definidos internamente na classe Model.
 
 Para saber mais sobre models, como prefixos de nomes de tabelas, callbacks e
 validações, confira o capítulo sobre :doc:`/models` deste manual.
@@ -56,7 +57,7 @@ Agora, vamos adicionar uma action ao nosso controller. Actions quase sempre
 representam uma única função ou interface numa aplicação. Por exemplo, quando os
 usuários acessarem o endereço www.exemplo.com/posts/index (que, neste caso é o
 mesmo que www.exemplo.com/posts/), eles esperam ver a listagem dos posts. O
-código para tal ação deve se parecer com algo como::
+código para tal ação deve se parecer com algo assim::
 
     <?php
     class PostsController extends AppController {
@@ -69,7 +70,7 @@ código para tal ação deve se parecer com algo como::
     }
 
 Deixe-me explicar a ação um pouco. Definindo a função ``index()`` em nosso
-PostsController, os usuários podem acessar a lógica aqui visitando o endereço
+PostsController, os usuários podem acessar esta lógica visitando o endereço
 www.exemplo.com/posts/index. De maneira semelhante, se definirmos um método
 chamado ``foobar()`` dentro do controller, os usuários deveriam ser capazes de
 acessá-lo pelo endereço www.exemplo.com/posts/foobar.
@@ -85,7 +86,7 @@ acessá-lo pelo endereço www.exemplo.com/posts/foobar.
 
 A única declaração na nossa action utiliza o método ``set()`` para passar dados
 do controller para a view (que vamos criar logo mais). A linha define uma
-variável na view chamada 'posts' que vai conter o retorno da chamada ao método
+variável na view chamada 'posts' que vai conter o retorno da chamada do método
 ``find('all')`` do model Post. Nosso model Post está automaticamente disponível
 como ``$this->Post`` uma vez que seguimos as convenções de nomenclatura do Cake.
 
@@ -152,8 +153,8 @@ formato parecido com este::
 
 Os arquivos de view do Cake são armazenados na pasta ``/app/View`` dentro de uma
 pasta com o mesmo nome do controller a que correspondem (em nosso caso, vamos
-criar uma pasta chamada 'Posts'). Para apresentar os dados do post num adequado
-formato de tabela, o código de nossa view deve ser algo como::
+criar uma pasta chamada 'Posts'). Para apresentar os dados do post num formato
+adequado de tabela, o código de nossa view deve ser algo como::
 
     <!-- File: /app/View/Posts/index.ctp -->
     
@@ -196,7 +197,7 @@ assunto é explicado com mais detalhes na seção sobre Rotas. Usar o formato de
 array para URLs, permite que você tire vantagens da capacidade do CakePHP de
 reverter este formato de URL em URLs relativas e vice versa.
 você também pode simplesmente informar um caminho relativo à base da aplicação
-na forma /controller/action/param1/param2.
+na forma /controller/action/parametro_1/parametro_2.
 
 Neste ponto, você deve ser capaz de apontar seu navegador para
 http://www.exemplo.com/posts/index. Você deve ver sua view, corretamente
@@ -236,7 +237,7 @@ usuário acessar uma URL /posts/view/3, então o valor '3' será atribuído ao
 parâmetro ``$id``.
 
 Agora vamos criar a view para nossa nova action 'view' e colocá-la em
-``/app/views/posts/view.ctp``::
+``/app/View/Posts/view.ctp``::
 
     <!-- File: /app/View/Posts/view.ctp -->
     
@@ -255,7 +256,7 @@ Adicionando Posts
 Ler a partir da base de dados e exibir os posts foi um grande começo, mas
 precisamos permitir também que os usuários adicionem novos posts.
 
-Primeiramente, comece criando uma action add() no PostsController::
+Primeiramente, comece criando uma action ``add()`` no PostsController::
 
     <?php
     class PostsController extends AppController {
@@ -287,11 +288,11 @@ Primeiramente, comece criando uma action add() no PostsController::
 
     Você precisa incluir o componente SessionComponent e o helper SessionHelper
     em qualquer controller que você manipula variáveis de sessão. Neste caso,
-    incluimos apenas o componente porque ele carrega o helper automaticamente.
+    incluímos apenas o componente porque ele carrega o helper automaticamente.
     Se você sempre utiliza sessões, inclua o componente no seu arquivo
     AppController.
 
-Aqui está o que a action add() faz: se o método da requisição feita pelo cliente
+Aqui está o que a action ``add()`` faz: se o método da requisição feita pelo cliente
 for do tipo post, ou seja, se ele enviou dados pelo formulário, tenta salvar os
 dados usando o model Post. Se, por alguma razão ele não salvar, apenas renderize
 a view. Isto nos dá uma oportunidade de mostrar erros de validação e outros
@@ -312,7 +313,7 @@ controller redireciona para outra URL. O parâmetro ``array('action'=>'index')``
 posts. Você pode conferir a função :php:func:`Router::url()` na API para ver os
 formatos que você pode usar ao especificar uma URL para actions do CakePHP.
 
-Chamar o método save() irá verificar por erros de validação e abortar o
+Chamar o método ``save()`` irá verificar por erros de validação e abortar o
 salvamento se algum erro ocorrer. Vamos falar mais sobre erros de validação e
 sobre como manipulá-los nas seções seguintes.
 
@@ -320,7 +321,7 @@ Validação de Dados
 ==================
 
 O CakePHP percorreu uma longa estrada combatendo a monotonia da validação de
-dados de formulário. Todo mundo detesta codificar formulários intermináveis e
+dados de formulários. Todo mundo detesta codificar formulários intermináveis e
 suas rotinas de validação. O CakePHP torna tudo isso mais fácil e mais rápido.
 
 Para usufruir das vantagens dos recursos de validação, você vai precisar usar o
@@ -339,8 +340,8 @@ Aqui está nossa view add::
     echo $this->Form->end('Save Post');
     ?>
 
-Aqui, usamos o FormHelper para gerar a tag de abertura para um formulário que o
-``$this->Form->create()`` gera::
+Aqui, usamos o FormHelper para gerar a tag de abertura para um formulário. Aqui
+está o HTML gerado pelo ``$this->Form->create()``::
 
     <form id="PostAddForm" method="post" action="/posts/add">
 
@@ -450,7 +451,7 @@ com quaisquer mensagens de erro de validação.
 Uma coisa a atentar aqui: o CakePHP vai assumir que você está editando um model
 se o campo 'id' estiver presente no array de dados.
 Se nenhum 'id' estiver presente (como a view add de inserção), o Cake irá
-assumir que você está inserindo um novo model quando o método save() for
+assumir que você está inserindo um novo model quando o método ``save()`` for
 chamado.
 
 Você agora pode atualizar sua view index com os links para editar os posts
@@ -537,7 +538,8 @@ helper FormHelper fornece o método ``postLink()``::
             <th>Created</th>
         </tr>
     
-    <!-- Here's where we loop through our $posts array, printing out post info -->
+    <!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo
+    as informações dos posts -->
     
         <?php foreach ($posts as $post): ?>
         <tr>
@@ -560,11 +562,11 @@ helper FormHelper fornece o método ``postLink()``::
 
 .. note::
     O código desta view também utiliza o HtmlHelper para solicitar uma
-    confirmação ao usuário com um diálogo em Javascript antes de tentar excluir
+    confirmação do usuário com um diálogo em Javascript antes de tentar excluir
     o post.
 
-Routes
-======
+Rotas
+=====
 
 Para alguns, o roteamento padrão do CakePHP funcionará muito bem. Os
 desenvolvedores que estiverem mais afeitos a criar produtos ainda mais amigáveis
@@ -575,27 +577,27 @@ alteração de rotas neste tutorial.
 Para mais informações sobre técnicas avançadas de roteamento, veja
 :ref:`routes-configuration`.
 
-Por padrão, o CakePHP responde a requisições para a raíz de seu site
+Por padrão, o CakePHP responde a requisições para a raiz de seu site
 (i.e. http://www.exemplo.com) usando seu PagesController e renderizando uma view
 chamada de "home". Ao invés disso, vamos substituir isto por nosso
 PostsController criando uma regra de roteamento.
 
 As rotas do Cake são encontrada no arquivo ``/app/Config/routes.php``. Você vai
-querer comentar ou remover a linha que define a rota raíz padrão. Ela se parece
+querer comentar ou remover a linha que define a rota raiz padrão. Ela se parece
 com::
 
     <?php
     Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
-Esta linha conecta a URL '/' com a home page default do CakePHP. Queremos
+Esta linha conecta a URL '/' com a home page padrão do CakePHP. Queremos
 conectá-la com nosso próprio controller, então adicionamos uma linha parecida
 com isto::
 
     <?php
     Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 
-Isto deve conectar as requisições à '/' à action index() que criaremos em nosso
-PostsController.
+Isto deve conectar as requisições de '/' à action ``index()`` que criaremos em
+nosso PostsController.
 
 .. note::
     O CakePHP também faz uso do 'roteamento reverso' - se, com a rota definida
@@ -615,8 +617,8 @@ oferecer e é flexível de tantas maneiras que não conseguimos mostrar aqui por
 questões de simplicidade. Utilize o resto deste manual como guia para construir
 mais aplicações ricas em recursos.
 
-Agora que você criou uma aplicação básica em Cake, você está pronto para a coisa
-real. Comece seu próprio projeto, leia o restante do `Manual </>`_ e da
+Agora que você criou uma aplicação básica com o Cake, você está pronto para a
+coisa real. Comece seu próprio projeto, leia o restante do `Manual </>`_ e da
 `API <http://api20.cakephp.org>`_.
 
 E se você precisar de ajuda, nos vemos no canal #cakephp (e no #cakephp-pt).

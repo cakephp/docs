@@ -11,7 +11,7 @@ Este tutorial irá cobrir a criação de uma aplicação de blog simples. Nós i
 baixar e instalar o Cake, criar e configurar o banco de dados e criar a lógica
 da aplicação suficiente para listar, adicionar, editar e deletar posts do blog.
 
-Aqui uma lista do que você vai precisar:
+Aqui vai uma lista do que você vai precisar:
 
 #. Um servidor web rodando. Nós iremos assumir que você esteja usando o Apache,
    embora as instruções para usar outros servidores sejam bem semelhantes.
@@ -91,7 +91,7 @@ convenções de nomenclatura para estruturas do banco de dados e as convenções
 nomes de classes (ambas descritas em
 :doc:`/getting-started/cakephp-conventions`), você será capaz de tirar proveito
 de muitas funcionalidades do CakePHP e evitar arquivos de configurações.
-O Cake é flexivel o bastante para acomodar até mesmo os piores eschemas de
+O Cake é flexivel o bastante para acomodar até mesmo os piores esquemas de
 banco de dados legados, mas aderindo as convenções você poupa seu tempo.
 
 Veja :doc:`/getting-started/cakephp-conventions` para mais informações.
@@ -127,10 +127,10 @@ parecer com esta::
         'encoding' => ''
     );
 
-Uma vez salva esta alteração no seu novo arquivo database.php , você estará apto
-para abrir seu navegador e ver a página de boas vindas do Cake. Esta deverá lhe
-mostrar a mensagem que seu arquivo de conexão com o banco de dados foi
-encontrado, e que o Cake conseguiu se conectar com seu banco de dados.
+Após salvar seu novo arquivo database.php, você estará apto para abrir seu
+navegador e ver a página de boas vindas do Cake. A página de boas vindas deverá
+lhe mostrar uma mensagem dizendo que seu arquivo de conexão com o banco de dados
+foi encontrado, e que o Cake conseguiu se conectar com o banco de dados.
 
 Configuração Opcional
 =====================
@@ -140,11 +140,11 @@ sempre configuram estes itens, mas eles não são obrigatórios para este tutori
 Uma das configurações é customizar uma string (ou "salt") para ser utilizada nos
 hashes de segurança. O segundo é definir um número (ou "seed") para uso em
 criptografia. E o terceiro é dar permissão de escrita para o CakePHP na pasta
-tmp.
+``tmp``.
 
 O "security salt" é utilizado para gerar hashes. Altere o valor padrão do salt
-editando o arquivo /app/config/core.php na linha 187. Não importa muito o que o
-novo valor seja, basta que não seja fácil de adivinhar.
+editando o arquivo ``/app/config/core.php`` na linha 187. Não importa muito o
+que o novo valor seja, basta que não seja fácil de adivinhar.
 
 ::
 
@@ -156,9 +156,9 @@ novo valor seja, basta que não seja fácil de adivinhar.
     ?>
 
 O "cipher seed" é usado para criptografar/descriptografar strings.
-Altere o valor padrão editando o arquivo /app/config/core.php na linha 192. Como
-no "security salt", não importa muito o que o novo valor seja, basta que não
-seja fácil de adivinhar.
+Altere o valor padrão editando o arquivo ``/app/config/core.php`` na linha 192.
+Como no "security salt", não importa muito o que o novo valor seja, basta que
+não seja fácil de adivinhar.
 
 ::
 
@@ -169,11 +169,11 @@ seja fácil de adivinhar.
     Configure::write('Security.cipherSeed', '7485712659625147843639846751');
     ?>
 
-A última tarefa é garantir acesso de escrita para a pasta app/tmp. A melhor
+A última tarefa é garantir acesso de escrita para a pasta ``app/tmp``. A melhor
 maneira para fazer isto é localizar o usuário com que o seu servidor web é
-executado (<?php echo `whoami`; ?>) e alterar o dono da pasta app/tmp para este
-usuário. Você pode executar (em \*nix) o comando a seguir para alterar o usuário
-dono da pasta.
+executado (``<?php echo `whoami`; ?>``) e alterar o dono da pasta ``app/tmp``
+para este usuário. Você pode executar (em \*nix) o comando a seguir para alterar
+o usuário dono da pasta.
 
 ::
 
@@ -194,8 +194,8 @@ tudo funcionando corretamente:
 
 #. Certifique-se de que a sobrescrita de opções do .htaccess está habilitada:
    em seu arquivo httpd.conf, você deve ter uma parte que define uma seção para
-   cada Directory do seu servidor. Certifique-se de que a opção
-   ``AllowOverride`` esteja com o valor ``All`` para o Directory correto. Por
+   cada <Directory> do seu servidor. Certifique-se de que a opção
+   ``AllowOverride`` esteja com o valor ``All`` para o <Directory> correto. Por
    questões de segurança e performance, *não* defina ``AllowOverride`` para
    ``All`` em ``<Directory />``. Ao invés disso, procure o bloco ``<Directory>``
    que se refere ao seu diretório raíz de seu website.
