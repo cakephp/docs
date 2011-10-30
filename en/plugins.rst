@@ -34,7 +34,7 @@ You can either load them one by one or all of them in a single call::
 
 loadAll loads all plugins available, while allowing you to set certain
 settings for specific plugins. load() works similarly, but only loads the 
-plugins you explicitely specify.
+plugins you explicitly specify.
 
 There is a lot you can do with the load and loadAll methods to help with
 plugin configuration and routing. Perhaps you want to load all plugins 
@@ -57,7 +57,7 @@ have also been supplied to the load() method, which would have loaded only those
 three plugins, and not the rest.
 
 Finally, you can also specify a set of defaults for loadAll which will apply to
-every plugin that doesn't have a more specific cofiguration.
+every plugin that doesn't have a more specific configuration.
 
 Load the bootstrap file from all plugins, and the routes from the Blog plugin::
     
@@ -191,7 +191,7 @@ So, we place our new ContactsController in
     <?php
     // /app/Plugin/ContactManager/Controller/ContactsController.php
     class ContactsController extends ContactManagerAppController {
-        var $uses = array('ContactManager.Contact');
+        public $uses = array('ContactManager.Contact');
 
         function index() {
             //...
@@ -355,17 +355,18 @@ component. For example::
     }
     
     // within your controllers:
-    var $components = array('ContactManager.Example'); 
+    public $components = array('ContactManager.Example'); 
 
 The same technique applies to Helpers and Behaviors.
 
 .. note::
 
-    When creating Helpers you may find AppHelper is not automatically available. You should declare the resources you need with Uses::
+    When creating Helpers you may find AppHelper is not automatically 
+    available. You should declare the resources you need with Uses::
     
-    <?php
-    //Declare use of AppHelper for your Plugin's Helper
-    App::uses('AppHelper', 'View/Helper');
+        <?php
+        // Declare use of AppHelper for your Plugin's Helper
+        App::uses('AppHelper', 'View/Helper');
 
 Expand Your Plugin
 ------------------

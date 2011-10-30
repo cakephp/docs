@@ -25,7 +25,7 @@ RequestHandler it must be included in your $components array::
     <?php
     class WidgetController extends AppController {
 
-        var $components = array('RequestHandler');
+        public $components = array('RequestHandler');
 
         //rest of controller
     }
@@ -47,7 +47,7 @@ the client and its request.
         <?php
         class PostsController extends AppController {
         
-            var $components = array('RequestHandler');
+            public $components = array('RequestHandler');
     
             function beforeFilter () {
                 if ($this->RequestHandler->accepts('html')) {

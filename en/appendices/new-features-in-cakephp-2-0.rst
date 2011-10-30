@@ -176,7 +176,7 @@ This should improve readability of ``debug()`` on the command line.
 Components
 ==========
 
-Components received a similar treatment to helpers and behvaiors,
+Components received a similar treatment to helpers and behaviors,
 :php:class:`Component` is now the base class for components. Read more about the
 component changes.
 

@@ -46,7 +46,7 @@ opening form tag.
     associated with it. If you do not specify a model, then it assumes
     you are using the default model for the current controller::
 
-        // If you are on /recipies/add
+        // If you are on /recipes/add
         <?php echo $this->Form->create('Recipe'); ?>
 
         // Output:
@@ -80,11 +80,17 @@ opening form tag.
         <form id="RecipeEditForm" method="post" action="/recipes/edit/5">
         <input type="hidden" name="_method" value="PUT" />
 
-
     .. note::
 
         Since this is an edit form, a hidden input field is generated to
         override the default HTTP method.
+
+    When creating forms for models in plugins, you should always use
+    :term:`plugin syntax` when creating a form.  This will ensure the form is
+    correctly generated::
+    
+        <?php
+        echo $this->Form->create('ContactManager.Contact');
 
     The ``$options`` array is where most of the form configuration
     happens. This special array can contain a number of different
@@ -1388,7 +1394,7 @@ Will output::
 Working with SecurityComponent
 ==============================
 
-:php:meth:`SecurityComponent` offers several features tha make your forms safer
+:php:meth:`SecurityComponent` offers several features that make your forms safer
 and more secure.  By simply including the ``SecurityComponent`` in your
 controller, you'll automatically benefit from CSRF and form tampering features.
 

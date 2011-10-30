@@ -62,6 +62,12 @@ http://localhost/cake/app/users/initdb). If you do a
 function::
 
     <?php
+
+    function beforeFilter() {
+        parent::beforeFilter(); 
+        $this->Auth->allow('initDB'); // We can remove this line after we're finished
+    }
+
     function initDB() {
         $group = $this->User->Group;
         //Allow admins to everything

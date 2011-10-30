@@ -43,7 +43,7 @@ CakePHP team will take the following actions:
 * Get a fix/patch prepared.
 * Prepare a post describing the vulnerability, and the possible exploits.
 * Release new versions of all affected versions.
-* Prominantely feature the problem in the release announcement.
+* Prominently feature the problem in the release announcement.
 
 
 

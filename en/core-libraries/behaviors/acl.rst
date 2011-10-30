@@ -12,7 +12,7 @@ AROs::
 
     <?php
     class User extends AppModel {
-        var $actsAs = array('Acl' => array('type' => 'requester'));
+        public $actsAs = array('Acl' => array('type' => 'requester'));
     }
 
 This would attach the Acl behavior in ARO mode. To join the ACL
@@ -20,7 +20,7 @@ behavior in ACO mode use::
 
     <?php
     class Post extends AppModel {
-        var $actsAs = array('Acl' => array('type' => 'controlled'));
+        public $actsAs = array('Acl' => array('type' => 'controlled'));
     }
 
 You can also attach the behavior on the fly like so::

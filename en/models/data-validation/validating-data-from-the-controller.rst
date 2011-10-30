@@ -74,5 +74,5 @@ to avoid second check.
 ::
 
     if ($this->ModelName->saveAll($this->data, array('validate' => false))) {
-        // saving wihout validation
+        // saving without validation
     } 

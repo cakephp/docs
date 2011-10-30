@@ -198,7 +198,7 @@ CakePHP ha sido instalado en subdirectorios.
     $HTTP["host"] =~ "^(www\.)?example.com$" {
             url.rewrite-once = (
                     # if the request is for css|files etc, do not pass on to Cake
-                    "/(css|files|img|js)/(.*)" => "/$1/$2",
+                    "^/(css|files|img|js)/(.*)" => "/$1/$2",
                     "^([^\?]*)(\?(.+))?$" => "/index.php/$1&$3",
             )
             evhost.path-pattern = "/home/%2-%1/www/www/%4/app/webroot/"

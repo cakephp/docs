@@ -15,7 +15,7 @@ a critical part of every application and used to cause many
 headaches for developers. CakePHP eases the burden on the developer
 by providing a quick, easy way to paginate data.
 
-Pagination in CakePHP is affored by a Component in the controller, to make
+Pagination in CakePHP is offered by a Component in the controller, to make
 building paginated queries easier.  In the View :php:class:`PaginatorHelper` is
 used to make the generation of pagination links & buttons simple.
 
@@ -30,8 +30,8 @@ here that the order key must be defined in an array structure like below::
 
     <?php
     class PostsController extends AppController {
-    
-        var $paginate = array(
+
+        public $paginate = array(
             'limit' => 25,
             'order' => array(
                 'Post.title' => 'asc'
@@ -44,10 +44,10 @@ You can also include other :php:meth:`~Model::find()` options, such as
 
     <?php
     class PostsController extends AppController {
-    
-        var $paginate = array(
+
+        public $paginate = array(
             'fields' => array('Post.id', 'Post.created'),
-            'limit' => 25,        
+            'limit' => 25,
             'order' => array(
                 'Post.title' => 'asc'
             )
@@ -65,8 +65,8 @@ pagination::
 
     <?php
     class RecipesController extends AppController {
-    
-        var $paginate = array(
+
+        public $paginate = array(
             'limit' => 25,
             'contain' => array('Article')
         );
@@ -78,8 +78,8 @@ array after the model you wish to configure::
 
     <?php
     class PostsController extends AppController {
-    
-        var $paginate = array(
+
+        public $paginate = array(
             'Post' => array (...),
             'Author' => array (...)
         );
@@ -188,9 +188,9 @@ the keyword in controller's ``$paginate`` class variable::
     /**
      * Add GROUP BY clause
      */
-    var $paginate = array(
+    public $paginate = array(
         'MyModel' => array(
-            'limit' => 20, 
+            'limit' => 20,
             'order' => array('week' => 'desc'),
             'group' => array('week', 'home_team_id', 'away_team_id')
         )
@@ -201,7 +201,7 @@ the keyword in controller's ``$paginate`` class variable::
     function index() {
         $this->paginate = array(
             'MyModel' => array(
-                'limit' => 20, 
+                'limit' => 20,
                 'order' => array('week' => 'desc'),
                 'group' => array('week', 'home_team_id', 'away_team_id')
             )
@@ -215,7 +215,7 @@ Control which fields used for ordering
 ======================================
 
 By default sorting can be done with any column on a model.  This is sometimes
-undersirable as it can allow users to sort on un-indexed columns, or virtual
+undesirable as it can allow users to sort on un-indexed columns, or virtual
 fields that can be expensive to calculate. You can use the 3rd parameter of
 ``Controller::paginate()`` to restrict the columns sorting will be done on::
 
@@ -235,7 +235,7 @@ that can be fetched to 100.  If this default is not appropriate for your
 application, you can adjust it as part of the pagination options::
 
     <?php
-    var $paginate = array(
+    public $paginate = array(
         // other keys here.
         'maxLimit' => 10
     );
@@ -255,9 +255,9 @@ more controlled and consistent. You can choose to use either querystring or
 named parameters in the component. Incoming requests will accept only the chosen
 type, and the :php:class:`PaginatorHelper` will generate links with the chosen type of
 parameter::
-    
+
     <?php
-    var $paginate = array(
+    public $paginate = array(
         'paramType' => 'querystring'
     );
 
@@ -269,6 +269,38 @@ also modify the ``$settings`` property on the PaginatorComponent::
 
 By default all of the typical paging parameters will be converted into GET
 arguments.
+
+
+.. note::
+
+    You can run into a situation where assigning a value to a nonexistent property will throw errors::
+
+        <?php
+        $this->paginate['limit'] = 10;
+
+    will throw the error “Notice: Indirect modification of overloaded property $paginate has no effect”.
+    Assigning an initial value to the property solves the issue::
+
+        <?php
+        $this->paginate = array();
+        $this->paginate['limit'] = 10;
+        //or
+        $this->paginate = array('limit' => 10);
+
+    Or just declare the property in the controller class::
+
+        <?php
+        class PostsController {
+            public $paginate = array();
+        }
+
+    Or use ``$this->Paginator->setting = array('limit' => 10);``
+
+    Make sure you have added the Paginator component to your $components array if
+    you want to modify the ``$settings`` property of the PaginatorComponent.
+
+    Either of these approaches will solve the notice errors.
+
 
 AJAX Pagination
 ===============

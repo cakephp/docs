@@ -80,7 +80,7 @@ HTTP methods.
     $request is a keyed array of various options. Here is the format
     and default settings::
 
-        var $request = array(
+        public $request = array(
             'method' => 'GET',
             'uri' => array(
                 'scheme' => 'http',
@@ -125,7 +125,7 @@ request methods as string::
     $http = new HttpSocket();
     $response = $http->get('http://www.cakephp.org');
 
-    // Check the body for the prescene of a title tag.
+    // Check the body for the presence of a title tag.
     $titlePos = strpos($response->body, '<title>');
 
     // Get the status code for the response.

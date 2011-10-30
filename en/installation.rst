@@ -23,6 +23,10 @@ database storage engines:
 -  Microsoft SQL Server
 -  SQLite
 
+.. note::
+
+    The built-in drivers all require PDO.  You should make sure you have the
+    correct PDO extensions installed.
 
 License
 =======
@@ -52,7 +56,7 @@ releases are available at
 Alternatively you can get fresh off the press code, with all the
 bug-fixes and up to the minute enhancements.
 These can be accessed from github by cloning the 
-`Github`_ repostitory::
+`Github`_ repository::
 
     git clone git://github.com/cakephp/cakephp.git
 

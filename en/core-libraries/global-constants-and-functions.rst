@@ -47,7 +47,7 @@ function to accomplish an oft-used task, it's here.
 .. php:function:: config()
 
     Can be used to load files from your application ``config``-folder
-    via include\_once. Function checks for existance before include and
+    via include\_once. Function checks for existence before include and
     returns boolean. Takes an optional number of arguments.
 
     Example: ``config('some_file', 'myconfig');``
@@ -119,21 +119,9 @@ Most of the following constants refer to paths in your application.
 
     cake directory.
 
-.. php:const:: COMPONENTS
-
-    components directory.
-
-.. php:const:: CONFIGS
-
-    configuration files directory.
-
 .. php:const:: CONTROLLER\_TESTS
 
     controller tests directory.
-
-.. php:const:: CONTROLLERS
-
-    controllers directory.
 
 .. php:const:: CSS
 
@@ -143,17 +131,9 @@ Most of the following constants refer to paths in your application.
 
     Short for PHP's DIRECTORY\_SEPARATOR, which is / on Linux and \\ on windows.
 
-.. php:const:: ELEMENTS
-
-    elements directory.
-
 .. php:const:: HELPER\_TESTS
 
     helper tests directory.
-
-.. php:const:: HELPERS
-
-    helpers directory.
 
 .. php:const:: IMAGES
 
@@ -162,10 +142,6 @@ Most of the following constants refer to paths in your application.
 .. php:const:: JS
 
     JavaScript files directory (in the webroot).
-
-.. php:const:: LAYOUTS
-
-    layouts directory.
 
 .. php:const:: LIB\_TESTS
 
@@ -183,10 +159,6 @@ Most of the following constants refer to paths in your application.
 
     model tests directory.
 
-.. php:const:: MODELS
-
-    models directory.
-
 .. php:const:: SCRIPTS
 
     Cake scripts directory.
@@ -202,10 +174,6 @@ Most of the following constants refer to paths in your application.
 .. php:const:: VENDORS
 
     vendors directory.
-
-.. php:const:: VIEWS
-
-    views directory.
 
 .. php:const:: WWW\_ROOT
 

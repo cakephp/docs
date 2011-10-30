@@ -67,7 +67,7 @@ created with ``CacheHelper``. To do so you must use the array
 format for ``$cacheAction`` and create an array like the following::
 
     <?php
-    var $cacheAction = array(
+    public $cacheAction = array(
         'view' => array('callbacks' => true, 'duration' => 21600),
         'add' => array('callbacks' => true, 'duration' => 36000),
         'index'  => array('callbacks' => true, 'duration' => 48000)

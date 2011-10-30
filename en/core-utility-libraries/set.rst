@@ -64,284 +64,261 @@ Foo
     This section needs to be expanded.
 
 
-.. php:staticmethod:: Set::insert ($list, $path, $data = null)
-    
+.. php:staticmethod:: apply($path, $array, $callback, $options = array())
+
+		    :rtype: mixed
+
+		    Apply a callback to the elements of an array extracted 
+		    by a Set::extract compatible path::
+
+		        <?php
+		        $data = array(
+		            array('Movie' => array('id' => 1, 'title' => 'movie 3', 'rating' => 5)),
+		            array('Movie' => array('id' => 1, 'title' => 'movie 1', 'rating' => 1)),
+		            array('Movie' => array('id' => 1, 'title' => 'movie 2', 'rating' => 3)),
+		        );
+
+		        $result = Set::apply('/Movie/rating', $data, 'array_sum');
+		        // result equals 9
+		
+		        $result = Set::apply('/Movie/title', $data, 'strtoupper', array('type' => 'map'));
+		        // result equals array('MOVIE 3', 'MOVIE 1', 'MOVIE 2')
+		        // $options are: - type : can be 'pass' uses call_user_func_array(), 'map' uses array_map(), or 'reduce' uses array_reduce()
+
+
+.. php:staticmethod:: check($data, $path = null)
+
+    :rtype: boolean/array
+
+    Checks if a particular path is set in an array. If $path is empty,
+    $data will be returned instead of a boolean value::
+
+        <?php
+        $set = array(
+            'My Index 1' => array('First' => 'The first item')
+        );
+        $result = Set::check($set, 'My Index 1.First');
+        // $result == True
+        $result = Set::check($set, 'My Index 1');
+        // $result == True
+        $result = Set::check($set, array());
+        // $result == array('My Index 1' => array('First' => 'The first item'))
+        $set = array(
+            'My Index 1' => array('First' =>
+                array('Second' =>
+                    array('Third' =>
+                        array('Fourth' => 'Heavy. Nesting.'))))
+        );
+        $result = Set::check($set, 'My Index 1.First.Second');
+        // $result == True
+        $result = Set::check($set, 'My Index 1.First.Second.Third');
+        // $result == True
+        $result = Set::check($set, 'My Index 1.First.Second.Third.Fourth');
+        // $result == True
+        $result = Set::check($set, 'My Index 1.First.Seconds.Third.Fourth');
+        // $result == False
+
+
+.. php:staticmethod:: classicExtract($data, $path = null)
+
     :rtype: array
 
-    Inserts $data into an array as defined by $path.::
+    Gets a value from an array or object that is contained in a given
+    path using an array path syntax, i.e.:
+
+    -  "{n}.Person.{[a-z]+}" - Where "{n}" represents a numeric key,
+       "Person" represents a string literal
+    -  "{[a-z]+}" (i.e. any string literal enclosed in brackets besides
+       {n} and {s}) is interpreted as a regular expression.
+
+    **Example 1**
+    ::
 
         <?php
         $a = array(
-            'pages' => array('name' => 'page')
-        );
-        $result = Set::insert($a, 'files', array('name' => 'files'));
+            array('Article' => array('id' => 1, 'title' => 'Article 1')),
+            array('Article' => array('id' => 2, 'title' => 'Article 2')),
+            array('Article' => array('id' => 3, 'title' => 'Article 3')));
+        $result = Set::classicExtract($a, '{n}.Article.id');
         /* $result now looks like:
             Array
             (
-                [pages] => Array
+                [0] => 1
+                [1] => 2
+                [2] => 3
+            )
+        */
+        $result = Set::classicExtract($a, '{n}.Article.title');
+        /* $result now looks like:
+            Array
+            (
+                [0] => Article 1
+                [1] => Article 2
+                [2] => Article 3
+            )
+        */
+        $result = Set::classicExtract($a, '1.Article.title');
+        // $result == "Article 2"
+
+        $result = Set::classicExtract($a, '3.Article.title');
+        // $result == null
+
+    **Example 2**
+    ::
+
+        <?php
+        $a = array(
+            0 => array('pages' => array('name' => 'page')),
+            1 => array('fruites'=> array('name' => 'fruit')),
+            'test' => array(array('name' => 'jippi')),
+            'dot.test' => array(array('name' => 'jippi'))
+        );
+
+        $result = Set::classicExtract($a, '{n}.{s}.name');
+        /* $result now looks like:
+            Array
+            (
+                [0] => Array
                     (
-                        [name] => page
+                        [0] => page
                     )
-                [files] => Array
+                [1] => Array
                     (
-                        [name] => files
+                        [0] => fruit
                     )
             )
         */
-
-        $a = array(
-            'pages' => array('name' => 'page')
-        );
-        $result = Set::insert($a, 'pages.name', array());
+        $result = Set::classicExtract($a, '{s}.{n}.name');
         /* $result now looks like:
             Array
             (
-                [pages] => Array
+                [0] => Array
                     (
-                        [name] => Array
-                            (
-                            )
+                        [0] => jippi
+                    )
+                [1] => Array
+                    (
+                        [0] => jippi
                     )
             )
         */
-
-        $a = array(
-            'pages' => array(
-                0 => array('name' => 'main'),
-                1 => array('name' => 'about')
-            )
-        );
-        $result = Set::insert($a, 'pages.1.vars', array('title' => 'page title'));
+        $result = Set::classicExtract($a,'{\w+}.{\w+}.name');
         /* $result now looks like:
             Array
             (
-                [pages] => Array
+                [0] => Array
+                    (
+                        [pages] => page
+                    )
+                [1] => Array
+                    (
+                        [fruites] => fruit
+                    )
+                [test] => Array
+                    (
+                        [0] => jippi
+                    )
+                [dot.test] => Array
+                    (
+                        [0] => jippi
+                    )
+            )
+        */
+        $result = Set::classicExtract($a,'{\d+}.{\w+}.name');
+        /* $result now looks like:
+            Array
+            (
+                [0] => Array
+                    (
+                        [pages] => page
+                    )
+                [1] => Array
+                    (
+                        [fruites] => fruit
+                    )
+            )
+        */
+        $result = Set::classicExtract($a,'{n}.{\w+}.name');
+        /* $result now looks like:
+            Array
+            (
+                [0] => Array
+                    (
+                        [pages] => page
+                    )
+                [1] => Array
+                    (
+                        [fruites] => fruit
+                    )
+            )
+        */
+        $result = Set::classicExtract($a,'{s}.{\d+}.name');
+        /* $result now looks like:
+            Array
+            (
+                [0] => Array
+                    (
+                        [0] => jippi
+                    )
+                [1] => Array
+                    (
+                        [0] => jippi
+                    )
+            )
+        */
+        $result = Set::classicExtract($a,'{s}');
+        /* $result now looks like:
+            Array
+            (
+
+                [0] => Array
                     (
                         [0] => Array
                             (
-                                [name] => main
-                            )
-                        [1] => Array
-                            (
-                                [name] => about
-                                [vars] => Array
-                                    (
-                                        [title] => page title
-                                    )
-                            )
-                    )
-            )
-        */
-
-.. php:staticmethod:: sort($data, $path, $dir)
-
-    :rtype: array
-
-    Sorts an array by any value, determined by a Set-compatible path.::
-
-        $a = array(
-            0 => array('Person' => array('name' => 'Jeff')),
-            1 => array('Shirt' => array('color' => 'black'))
-        );
-        $result = Set::sort($a, '{n}.Person.name', 'asc');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [Shirt] => Array
-                            (
-                                [color] => black
+                                [name] => jippi
                             )
                     )
                 [1] => Array
                     (
-                        [Person] => Array
+                        [0] => Array
                             (
-                                [name] => Jeff
+                                [name] => jippi
                             )
                     )
             )
         */
-
-        $result = Set::sort($a, '{n}.Shirt', 'asc');
+        $result = Set::classicExtract($a,'{[a-z]}');
         /* $result now looks like:
             Array
             (
-                [0] => Array
+                [test] => Array
                     (
-                        [Person] => Array
+                        [0] => Array
                             (
-                                [name] => Jeff
+                                [name] => jippi
                             )
                     )
-                [1] => Array
+
+                [dot.test] => Array
                     (
-                        [Shirt] => Array
+                        [0] => Array
                             (
-                                [color] => black
+                                [name] => jippi
                             )
                     )
             )
         */
-
-        $result = Set::sort($a, '{n}', 'desc');
+        $result = Set::classicExtract($a, '{dot\.test}.{n}');
         /* $result now looks like:
             Array
             (
-                [0] => Array
+                [dot.test] => Array
                     (
-                        [Shirt] => Array
+                        [0] => Array
                             (
-                                [color] => black
+                                [name] => jippi
                             )
                     )
-                [1] => Array
-                    (
-                        [Person] => Array
-                            (
-                                [name] => Jeff
-                            )
-                    )
-            )
-        */
-
-        $a = array(
-            array(7,6,4),
-            array(3,4,5),
-            array(3,2,1),
-        );
-
-        $result = Set::sort($a, '{n}.{n}', 'asc');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [0] => 3
-                        [1] => 2
-                        [2] => 1
-                    )
-                [1] => Array
-                    (
-                        [0] => 3
-                        [1] => 4
-                        [2] => 5
-                    )
-                [2] => Array
-                    (
-                        [0] => 7
-                        [1] => 6
-                        [2] => 4
-                    )
-            )
-        */
-
-
-.. php:staticmethod:: reverse($object)
-
-    :rtype: array
-
-    Set::reverse is basically the opposite of :php:func:`Set::map`. It converts an
-    object into an array. If $object is not an object, reverse will
-    simply return $object.::
-
-        <?php
-        $result = Set::reverse(null);
-        // Null
-        $result = Set::reverse(false);
-        // false
-        $a = array(
-            'Post' => array('id'=> 1, 'title' => 'First Post'),
-            'Comment' => array(
-                array('id'=> 1, 'title' => 'First Comment'),
-                array('id'=> 2, 'title' => 'Second Comment')
-            ),
-            'Tag' => array(
-                array('id'=> 1, 'title' => 'First Tag'),
-                array('id'=> 2, 'title' => 'Second Tag')
-            ),
-        );
-        $map = Set::map($a); // Turn $a into a class object
-        /* $map now looks like:
-            stdClass Object
-            (
-                [_name_] => Post
-                [id] => 1
-                [title] => First Post
-                [Comment] => Array
-                    (
-                        [0] => stdClass Object
-                            (
-                                [id] => 1
-                                [title] => First Comment
-                            )
-                        [1] => stdClass Object
-                            (
-                                [id] => 2
-                                [title] => Second Comment
-                            )
-                    )
-                [Tag] => Array
-                    (
-                        [0] => stdClass Object
-                            (
-                                [id] => 1
-                                [title] => First Tag
-                            )
-                        [1] => stdClass Object
-                            (
-                                [id] => 2
-                                [title] => Second Tag
-                            )
-                    )
-            )
-        */
-
-        $result = Set::reverse($map);
-        /* $result now looks like:
-            Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => First Post
-                        [Comment] => Array
-                            (
-                                [0] => Array
-                                    (
-                                        [id] => 1
-                                        [title] => First Comment
-                                    )
-                                [1] => Array
-                                    (
-                                        [id] => 2
-                                        [title] => Second Comment
-                                    )
-                            )
-                        [Tag] => Array
-                            (
-                                [0] => Array
-                                    (
-                                        [id] => 1
-                                        [title] => First Tag
-                                    )
-                                [1] => Array
-                                    (
-                                        [id] => 2
-                                        [title] => Second Tag
-                                    )
-                            )
-                    )
-            )
-        */
-
-        $result = Set::reverse($a['Post']); // Just return the array
-        /* $result now looks like:
-            Array
-            (
-                [id] => 1
-                [title] => First Post
             )
         */
 
@@ -548,115 +525,33 @@ Foo
             )
         */
 
-.. php:staticmethod:: normalize($list, $assoc = true, $sep = ',', $trim = true)
 
-    :rtype: array
+.. php:staticmethod:: contains($val1, $val2 = null)
 
-    Normalizes a string or array list.::
+    :rtype: boolean
+
+    Determines if one Set or array contains the exact keys and values
+    of another::
 
         <?php
-        $a = array('Tree', 'CounterCache',
-                'Upload' => array(
-                    'folder' => 'products',
-                    'fields' => array('image_1_id', 'image_2_id', 'image_3_id', 'image_4_id', 'image_5_id')));
-        $b =  array('Cacheable' => array('enabled' => false),
-                'Limit',
-                'Bindable',
-                'Validator',
-                'Transactional');
-        $result = Set::normalize($a);
-        /* $result now looks like:
-            Array
-            (
-                [Tree] =>
-                [CounterCache] =>
-                [Upload] => Array
-                    (
-                        [folder] => products
-                        [fields] => Array
-                            (
-                                [0] => image_1_id
-                                [1] => image_2_id
-                                [2] => image_3_id
-                                [3] => image_4_id
-                                [4] => image_5_id
-                            )
-                    )
-            )
-        */
-        $result = Set::normalize($b);
-        /* $result now looks like:
-            Array
-            (
-                [Cacheable] => Array
-                    (
-                        [enabled] =>
-                    )
+        $a = array(
+            0 => array('name' => 'main'),
+            1 => array('name' => 'about')
+        );
+        $b = array(
+            0 => array('name' => 'main'),
+            1 => array('name' => 'about'),
+            2 => array('name' => 'contact'),
+            'a' => 'b'
+        );
+    
+        $result = Set::contains($a, $a);
+        // True
+        $result = Set::contains($a, $b);
+        // False
+        $result = Set::contains($b, $a);
+        // True
 
-                [Limit] =>
-                [Bindable] =>
-                [Validator] =>
-                [Transactional] =>
-            )
-        */
-        $result = Set::merge($a, $b); // Now merge the two and normalize
-        /* $result now looks like:
-            Array
-            (
-                [0] => Tree
-                [1] => CounterCache
-                [Upload] => Array
-                    (
-                        [folder] => products
-                        [fields] => Array
-                            (
-                                [0] => image_1_id
-                                [1] => image_2_id
-                                [2] => image_3_id
-                                [3] => image_4_id
-                                [4] => image_5_id
-                            )
-
-                    )
-                [Cacheable] => Array
-                    (
-                        [enabled] =>
-                    )
-                [2] => Limit
-                [3] => Bindable
-                [4] => Validator
-                [5] => Transactional
-            )
-        */
-        $result = Set::normalize(Set::merge($a, $b));
-        /* $result now looks like:
-            Array
-            (
-                [Tree] =>
-                [CounterCache] =>
-                [Upload] => Array
-                    (
-                        [folder] => products
-                        [fields] => Array
-                            (
-                                [0] => image_1_id
-                                [1] => image_2_id
-                                [2] => image_3_id
-                                [3] => image_4_id
-                                [4] => image_5_id
-                            )
-
-                    )
-                [Cacheable] => Array
-                    (
-                        [enabled] =>
-                    )
-                [Limit] =>
-                [Bindable] =>
-                [Validator] =>
-                [Transactional] =>
-            )
-        */
 
 .. php:staticmethod:: countDim ($array = null, $all = false, $count = 0)
     
@@ -792,308 +687,32 @@ Foo
             )
         */
 
-.. php:staticmethod:: check($data, $path = null)
 
-    :rtype: boolean/array
+.. php:staticmethod:: enum($select, $list=null)
 
-    Checks if a particular path is set in an array. If $path is empty,
-    $data will be returned instead of a boolean value::
+    :rtype: string
 
-        <?php
-        $set = array(
-            'My Index 1' => array('First' => 'The first item')
-        );
-        $result = Set::check($set, 'My Index 1.First');
-        // $result == True
-        $result = Set::check($set, 'My Index 1');
-        // $result == True
-        $result = Set::check($set, array());
-        // $result == array('My Index 1' => array('First' => 'The first item'))
-        $set = array(
-            'My Index 1' => array('First' =>
-                array('Second' =>
-                    array('Third' =>
-                        array('Fourth' => 'Heavy. Nesting.'))))
-        );
-        $result = Set::check($set, 'My Index 1.First.Second');
-        // $result == True
-        $result = Set::check($set, 'My Index 1.First.Second.Third');
-        // $result == True
-        $result = Set::check($set, 'My Index 1.First.Second.Third.Fourth');
-        // $result == True
-        $result = Set::check($set, 'My Index 1.First.Seconds.Third.Fourth');
-        // $result == False
+    The enum method works well when using html select elements. It
+    returns a value from an array list if the key exists.
 
+    If a comma separated $list is passed arrays are numeric with the
+    key of the first being 0 $list = 'no, yes' would translate to $list
+    = array(0 => 'no', 1 => 'yes');
 
-.. php:staticmethod:: remove($list, $path = null)
+    If an array is used, keys can be strings example: array('no' => 0,
+    'yes' => 1);
 
-    :rtype: array
-
-    Removes an element from a Set or array as defined by $path::
+    $list defaults to 0 = no 1 = yes if param is not passed::
 
         <?php
-        $a = array(
-            'pages'     => array('name' => 'page'),
-            'files'     => array('name' => 'files')
-        );
+        $res = Set::enum(1, 'one, two');
+        // $res is 'two'
 
-        $result = Set::remove($a, 'files');
-        /* $result now looks like:
-            Array
-            (
-                [pages] => Array
-                    (
-                        [name] => page
-                    )
+        $res = Set::enum('no', array('no' => 0, 'yes' => 1));
+        // $res is 0
 
-            )
-        */
-
-.. php:staticmethod:: classicExtract($data, $path = null)
-
-    :rtype: array
-
-    Gets a value from an array or object that is contained in a given
-    path using an array path syntax, i.e.:
-
-    -  "{n}.Person.{[a-z]+}" - Where "{n}" represents a numeric key,
-       "Person" represents a string literal
-    -  "{[a-z]+}" (i.e. any string literal enclosed in brackets besides
-       {n} and {s}) is interpreted as a regular expression.
-
-    **Example 1**
-    ::
-
-        <?php
-        $a = array(
-            array('Article' => array('id' => 1, 'title' => 'Article 1')),
-            array('Article' => array('id' => 2, 'title' => 'Article 2')),
-            array('Article' => array('id' => 3, 'title' => 'Article 3')));
-        $result = Set::classicExtract($a, '{n}.Article.id');
-        /* $result now looks like:
-            Array
-            (
-                [0] => 1
-                [1] => 2
-                [2] => 3
-            )
-        */
-        $result = Set::classicExtract($a, '{n}.Article.title');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Article 1
-                [1] => Article 2
-                [2] => Article 3
-            )
-        */
-        $result = Set::classicExtract($a, '1.Article.title');
-        // $result == "Article 2"
-
-        $result = Set::classicExtract($a, '3.Article.title');
-        // $result == null
-
-    **Example 2**
-    ::
-
-        <?php
-        $a = array(
-            0 => array('pages' => array('name' => 'page')),
-            1 => array('fruites'=> array('name' => 'fruit')),
-            'test' => array(array('name' => 'jippi')),
-            'dot.test' => array(array('name' => 'jippi'))
-        );
-
-        $result = Set::classicExtract($a, '{n}.{s}.name');
-        /* $result now looks like:
-        Array
-            (
-                [0] => Array
-                    (
-                        [0] => page
-                    )
-                [1] => Array
-                    (
-                        [0] => fruit
-                    )
-            )
-        */
-        $result = Set::classicExtract($a, '{s}.{n}.name');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [0] => jippi
-                    )
-                [1] => Array
-                    (
-                        [0] => jippi
-                    )
-            )
-        */
-        $result = Set::classicExtract($a,'{\w+}.{\w+}.name');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [pages] => page
-                    )
-                [1] => Array
-                    (
-                        [fruites] => fruit
-                    )
-                [test] => Array
-                    (
-                        [0] => jippi
-                    )
-                [dot.test] => Array
-                    (
-                        [0] => jippi
-                    )
-            )
-        */
-        $result = Set::classicExtract($a,'{\d+}.{\w+}.name');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [pages] => page
-                    )
-                [1] => Array
-                    (
-                        [fruites] => fruit
-                    )
-            )
-        */
-        $result = Set::classicExtract($a,'{n}.{\w+}.name');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [pages] => page
-                    )
-                [1] => Array
-                    (
-                        [fruites] => fruit
-                    )
-            )
-        */
-        $result = Set::classicExtract($a,'{s}.{\d+}.name');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [0] => jippi
-                    )
-                [1] => Array
-                    (
-                        [0] => jippi
-                    )
-            )
-        */
-        $result = Set::classicExtract($a,'{s}');
-        /* $result now looks like:
-            Array
-            (
-
-                [0] => Array
-                    (
-                        [0] => Array
-                            (
-                                [name] => jippi
-                            )
-                    )
-                [1] => Array
-                    (
-                        [0] => Array
-                            (
-                                [name] => jippi
-                            )
-                    )
-            )
-        */
-        $result = Set::classicExtract($a,'{[a-z]}');
-        /* $result now looks like:
-            Array
-            (
-                [test] => Array
-                    (
-                        [0] => Array
-                            (
-                                [name] => jippi
-                            )
-                    )
-
-                [dot.test] => Array
-                    (
-                        [0] => Array
-                            (
-                                [name] => jippi
-                            )
-                    )
-            )
-        */
-        $result = Set::classicExtract($a, '{dot\.test}.{n}');
-        /* $result now looks like:
-            Array
-            (
-                [dot.test] => Array
-                    (
-                        [0] => Array
-                            (
-                                [name] => jippi
-                            )
-                    )
-            )
-        */
-
-.. php:staticmethod:: matches($conditions, $data=array(), $i = null, $length=null)
-
-    :rtype: boolean
-
-    Set::matches can be used to see if a single item or a given xpath
-    match certain conditions.::
-
-        <?php
-        $a = array(
-            array('Article' => array('id' => 1, 'title' => 'Article 1')),
-            array('Article' => array('id' => 2, 'title' => 'Article 2')),
-            array('Article' => array('id' => 3, 'title' => 'Article 3')));
-        $res=Set::matches(array('id>2'), $a[1]['Article']);
-        // returns false
-        $res=Set::matches(array('id>=2'), $a[1]['Article']);
-        // returns true
-        $res=Set::matches(array('id>=3'), $a[1]['Article']);
-        // returns false
-        $res=Set::matches(array('id<=2'), $a[1]['Article']);
-        // returns true
-        $res=Set::matches(array('id<2'), $a[1]['Article']);
-        // returns false
-        $res=Set::matches(array('id>1'), $a[1]['Article']);
-        // returns true
-        $res=Set::matches(array('id>1', 'id<3', 'id!=0'), $a[1]['Article']);
-        // returns true
-        $res=Set::matches(array('3'), null, 3);
-        // returns true
-        $res=Set::matches(array('5'), null, 5);
-        // returns true
-        $res=Set::matches(array('id'), $a[1]['Article']);
-        // returns true
-        $res=Set::matches(array('id', 'title'), $a[1]['Article']);
-        // returns true
-        $res=Set::matches(array('non-existant'), $a[1]['Article']);
-        // returns false
-        $res=Set::matches('/Article[id=2]', $a);
-        // returns true
-        $res=Set::matches('/Article[id=4]', $a);
-        // returns false
-        $res=Set::matches(array(), $a);
-        // returns true
+        $res = Set::enum('first', array('first' => 'one', 'second' => 'two'));
+        // $res is 'one'
 
 
 .. php:staticmethod:: extract($path, $data=null, $options=array())
@@ -1145,7 +764,7 @@ Foo
         Selects the first comment
     /Comment[text=/cakephp/i]
         Selects all comments that have a text matching the regex /cakephp/i
-    /Comment/@\*
+    /Comment/\@\*
         Selects the key names of all comments
         Currently only absolute paths starting with a single '/' are
         supported. Please report any bugs as you find them. Suggestions for
@@ -1153,6 +772,64 @@ Foo
 
     To learn more about Set::extract() refer to function testExtract()
     in /cake/tests/cases/libs/set.test.php.
+
+
+.. php:staticmethod:: filter($var, $isArray=null)
+
+    :rtype: array
+
+    Filters empty elements out of a route array, excluding '0'::
+
+        <?php
+        $res = Set::filter(array('0', false, true, 0, array('one thing', 'I can tell you', 'is you got to be', false)));
+
+        /* $res now looks like:
+            Array (
+                [0] => 0
+                [2] => 1
+                [3] => 0
+                [4] => Array
+                    (
+                        [0] => one thing
+                        [1] => I can tell you
+                        [2] => is you got to be
+                        [3] =>
+                    )
+            )
+        */
+
+
+.. php:staticmethod:: flatten($data, $separator='.')
+
+    :rtype: array
+
+    Collapses a multi-dimensional array into a single dimension::
+
+        <?php
+        $arr = array(
+            array(
+                'Post' => array('id' => '1', 'title' => 'First Post'),
+                'Author' => array('id' => '1', 'user' => 'Kyle'),
+            ),
+            array(
+                'Post' => array('id' => '2', 'title' => 'Second Post'),
+                'Author' => array('id' => '3', 'user' => 'Crystal'),
+            ),
+        );
+        $res = Set::flatten($arr);
+        /* $res now looks like:
+            Array (
+                [0.Post.id] => 1
+                [0.Post.title] => First Post
+                [0.Author.id] => 1
+                [0.Author.user] => Kyle
+                [1.Post.id] => 2
+                [1.Post.title] => Second Post
+                [1.Author.id] => 3
+                [1.Author.user] => Crystal
+            )
+        */
+
 
 .. php:staticmethod:: format($data, $format, $keys)
 
@@ -1224,89 +901,75 @@ Foo
         */
 
 
-.. php:staticmethod:: enum($select, $list=null)
+.. php:staticmethod:: Set::insert ($list, $path, $data = null)
+    
+    :rtype: array
 
-    :rtype: string
-
-    The enum method works well when using html select elements. It
-    returns a value from an array list if the key exists.
-
-    If a comma separated $list is passed arrays are numeric with the
-    key of the first being 0 $list = 'no, yes' would translate to $list
-    = array(0 => 'no', 1 => 'yes');
-
-    If an array is used, keys can be strings example: array('no' => 0,
-    'yes' => 1);
-
-    $list defaults to 0 = no 1 = yes if param is not passed::
+    Inserts $data into an array as defined by $path.::
 
         <?php
-        $res = Set::enum(1, 'one, two');
-        // $res is 'two'
+        $a = array(
+            'pages' => array('name' => 'page')
+        );
+        $result = Set::insert($a, 'files', array('name' => 'files'));
+        /* $result now looks like:
+            Array
+            (
+                [pages] => Array
+                    (
+                        [name] => page
+                    )
+                [files] => Array
+                    (
+                        [name] => files
+                    )
+            )
+        */
 
-        $res = Set::enum('no', array('no' => 0, 'yes' => 1));
-        // $res is 0
+        $a = array(
+            'pages' => array('name' => 'page')
+        );
+        $result = Set::insert($a, 'pages.name', array());
+        /* $result now looks like:
+            Array
+            (
+                [pages] => Array
+                    (
+                        [name] => Array
+                            (
+                            )
+                    )
+            )
+        */
 
-        $res = Set::enum('first', array('first' => 'one', 'second' => 'two'));
-        // $res is 'one'
+        $a = array(
+            'pages' => array(
+                0 => array('name' => 'main'),
+                1 => array('name' => 'about')
+            )
+        );
+        $result = Set::insert($a, 'pages.1.vars', array('title' => 'page title'));
+        /* $result now looks like:
+            Array
+            (
+                [pages] => Array
+                    (
+                        [0] => Array
+                            (
+                                [name] => main
+                            )
+                        [1] => Array
+                            (
+                                [name] => about
+                                [vars] => Array
+                                    (
+                                        [title] => page title
+                                    )
+                            )
+                    )
+            )
+        */
 
-
-.. php:staticmethod:: numeric($array=null)
-
-    :rtype: boolean
-
-    Checks to see if all the values in the array are numeric::
-
-        <?php
-        $data = array('one');
-        $res = Set::numeric(array_keys($data));
-
-        // $res is true
-
-        $data = array(1 => 'one');
-        $res = Set::numeric($data);
-
-        // $res is false
-
-        $data = array('one');
-        $res = Set::numeric($data);
-
-        // $res is false
-
-        $data = array('one' => 'two');
-        $res = Set::numeric($data);
-
-        // $res is false
-
-        $data = array('one' => 1);
-        $res = Set::numeric($data);
-
-        // $res is true
-
-        $data = array(0);
-        $res = Set::numeric($data);
-
-        // $res is true
-
-        $data = array('one', 'two', 'three', 'four', 'five');
-        $res = Set::numeric(array_keys($data));
-
-        // $res is true
-
-        $data = array(1 => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five');
-        $res = Set::numeric(array_keys($data));
-
-        // $res is true
-
-        $data = array('1' => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five');
-        $res = Set::numeric(array_keys($data));
-
-        // $res is true
-
-        $data = array('one', 2 => 'two', 3 => 'three', 4 => 'four', 'a' => 'five');
-        $res = Set::numeric(array_keys($data));
-
-        // $res is false
 
 .. php:staticmethod:: map($class = 'stdClass', $tmp = 'stdClass')
 
@@ -1395,79 +1058,48 @@ Foo
         $mapped->[0]->sayHi();
 
 
-.. php:staticmethod:: pushDiff($array1, $array2)
+.. php:staticmethod:: matches($conditions, $data=array(), $i = null, $length=null)
 
-    :rtype: array
+    :rtype: boolean
 
-    This function merges two arrays and pushes the differences in
-    array2 to the bottom of the resultant array.
-
-    **Example 1**
-    ::
-    
-        <?php
-        $array1 = array('ModelOne' => array('id'=>1001, 'field_one'=>'a1.m1.f1', 'field_two'=>'a1.m1.f2'));
-        $array2 = array('ModelOne' => array('id'=>1003, 'field_one'=>'a3.m1.f1', 'field_two'=>'a3.m1.f2', 'field_three'=>'a3.m1.f3'));
-        $res = Set::pushDiff($array1, $array2);
-
-        /* $res now looks like:
-            Array
-            (
-                [ModelOne] => Array
-                    (
-                        [id] => 1001
-                        [field_one] => a1.m1.f1
-                        [field_two] => a1.m1.f2
-                        [field_three] => a3.m1.f3
-                    )
-            )
-        */
-
-    **Example 2**
-    ::
+    Set::matches can be used to see if a single item or a given xpath
+    match certain conditions.::
 
         <?php
-        $array1 = array("a"=>"b", 1 => 20938, "c"=>"string");
-        $array2 = array("b"=>"b", 3 => 238, "c"=>"string", array("extra_field"));
-        $res = Set::pushDiff($array1, $array2);
-        /* $res now looks like:
-            Array
-            (
-                [a] => b
-                [1] => 20938
-                [c] => string
-                [b] => b
-                [3] => 238
-                [4] => Array
-                    (
-                        [0] => extra_field
-                    )
-            )
-        */
-
-.. php:staticmethod:: filter($var, $isArray=null)
-
-    :rtype: array
-
-    Filters empty elements out of a route array, excluding '0'::
-
-        <?php
-        $res = Set::filter(array('0', false, true, 0, array('one thing', 'I can tell you', 'is you got to be', false)));
-
-        /* $res now looks like:
-            Array (
-                [0] => 0
-                [2] => 1
-                [3] => 0
-                [4] => Array
-                    (
-                        [0] => one thing
-                        [1] => I can tell you
-                        [2] => is you got to be
-                        [3] =>
-                    )
-            )
-        */
+        $a = array(
+            array('Article' => array('id' => 1, 'title' => 'Article 1')),
+            array('Article' => array('id' => 2, 'title' => 'Article 2')),
+            array('Article' => array('id' => 3, 'title' => 'Article 3')));
+        $res=Set::matches(array('id>2'), $a[1]['Article']);
+        // returns false
+        $res=Set::matches(array('id>=2'), $a[1]['Article']);
+        // returns true
+        $res=Set::matches(array('id>=3'), $a[1]['Article']);
+        // returns false
+        $res=Set::matches(array('id<=2'), $a[1]['Article']);
+        // returns true
+        $res=Set::matches(array('id<2'), $a[1]['Article']);
+        // returns false
+        $res=Set::matches(array('id>1'), $a[1]['Article']);
+        // returns true
+        $res=Set::matches(array('id>1', 'id<3', 'id!=0'), $a[1]['Article']);
+        // returns true
+        $res=Set::matches(array('3'), null, 3);
+        // returns true
+        $res=Set::matches(array('5'), null, 5);
+        // returns true
+        $res=Set::matches(array('id'), $a[1]['Article']);
+        // returns true
+        $res=Set::matches(array('id', 'title'), $a[1]['Article']);
+        // returns true
+        $res=Set::matches(array('non-existant'), $a[1]['Article']);
+        // returns false
+        $res=Set::matches('/Article[id=2]', $a);
+        // returns true
+        $res=Set::matches('/Article[id=4]', $a);
+        // returns false
+        $res=Set::matches(array(), $a);
+        // returns true
 
 
 .. php:staticmethod:: merge($arr1, $arr2=null)
@@ -1532,33 +1164,460 @@ Foo
         */
 
 
-.. php:staticmethod:: contains($val1, $val2 = null)
+.. php:staticmethod:: normalize($list, $assoc = true, $sep = ',', $trim = true)
+
+    :rtype: array
+
+    Normalizes a string or array list.::
+
+        <?php
+        $a = array('Tree', 'CounterCache',
+                'Upload' => array(
+                    'folder' => 'products',
+                    'fields' => array('image_1_id', 'image_2_id', 'image_3_id', 'image_4_id', 'image_5_id')));
+        $b =  array('Cacheable' => array('enabled' => false),
+                'Limit',
+                'Bindable',
+                'Validator',
+                'Transactional');
+        $result = Set::normalize($a);
+        /* $result now looks like:
+            Array
+            (
+                [Tree] =>
+                [CounterCache] =>
+                [Upload] => Array
+                    (
+                        [folder] => products
+                        [fields] => Array
+                            (
+                                [0] => image_1_id
+                                [1] => image_2_id
+                                [2] => image_3_id
+                                [3] => image_4_id
+                                [4] => image_5_id
+                            )
+                    )
+            )
+        */
+        $result = Set::normalize($b);
+        /* $result now looks like:
+            Array
+            (
+                [Cacheable] => Array
+                    (
+                        [enabled] =>
+                    )
+
+                [Limit] =>
+                [Bindable] =>
+                [Validator] =>
+                [Transactional] =>
+            )
+        */
+        $result = Set::merge($a, $b); // Now merge the two and normalize
+        /* $result now looks like:
+            Array
+            (
+                [0] => Tree
+                [1] => CounterCache
+                [Upload] => Array
+                    (
+                        [folder] => products
+                        [fields] => Array
+                            (
+                                [0] => image_1_id
+                                [1] => image_2_id
+                                [2] => image_3_id
+                                [3] => image_4_id
+                                [4] => image_5_id
+                            )
+
+                    )
+                [Cacheable] => Array
+                    (
+                        [enabled] =>
+                    )
+                [2] => Limit
+                [3] => Bindable
+                [4] => Validator
+                [5] => Transactional
+            )
+        */
+        $result = Set::normalize(Set::merge($a, $b));
+        /* $result now looks like:
+            Array
+            (
+                [Tree] =>
+                [CounterCache] =>
+                [Upload] => Array
+                    (
+                        [folder] => products
+                        [fields] => Array
+                            (
+                                [0] => image_1_id
+                                [1] => image_2_id
+                                [2] => image_3_id
+                                [3] => image_4_id
+                                [4] => image_5_id
+                            )
+
+                    )
+                [Cacheable] => Array
+                    (
+                        [enabled] =>
+                    )
+                [Limit] =>
+                [Bindable] =>
+                [Validator] =>
+                [Transactional] =>
+            )
+        */
+
+
+.. php:staticmethod:: numeric($array=null)
 
     :rtype: boolean
 
-    Determines if one Set or array contains the exact keys and values
-    of another::
+    Checks to see if all the values in the array are numeric::
+
+        <?php
+        $data = array('one');
+        $res = Set::numeric(array_keys($data));
+
+        // $res is true
+
+        $data = array(1 => 'one');
+        $res = Set::numeric($data);
+
+        // $res is false
+
+        $data = array('one');
+        $res = Set::numeric($data);
+
+        // $res is false
+
+        $data = array('one' => 'two');
+        $res = Set::numeric($data);
+
+        // $res is false
+
+        $data = array('one' => 1);
+        $res = Set::numeric($data);
+
+        // $res is true
+
+        $data = array(0);
+        $res = Set::numeric($data);
+
+        // $res is true
+
+        $data = array('one', 'two', 'three', 'four', 'five');
+        $res = Set::numeric(array_keys($data));
+
+        // $res is true
+
+        $data = array(1 => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five');
+        $res = Set::numeric(array_keys($data));
+
+        // $res is true
+
+        $data = array('1' => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five');
+        $res = Set::numeric(array_keys($data));
+
+        // $res is true
+
+        $data = array('one', 2 => 'two', 3 => 'three', 4 => 'four', 'a' => 'five');
+        $res = Set::numeric(array_keys($data));
+
+        // $res is false
+
+
+.. php:staticmethod:: pushDiff($array1, $array2)
+
+    :rtype: array
+
+    This function merges two arrays and pushes the differences in
+    array2 to the bottom of the resultant array.
+
+    **Example 1**
+    ::
+    
+        <?php
+        $array1 = array('ModelOne' => array('id'=>1001, 'field_one'=>'a1.m1.f1', 'field_two'=>'a1.m1.f2'));
+        $array2 = array('ModelOne' => array('id'=>1003, 'field_one'=>'a3.m1.f1', 'field_two'=>'a3.m1.f2', 'field_three'=>'a3.m1.f3'));
+        $res = Set::pushDiff($array1, $array2);
+
+        /* $res now looks like:
+            Array
+            (
+                [ModelOne] => Array
+                    (
+                        [id] => 1001
+                        [field_one] => a1.m1.f1
+                        [field_two] => a1.m1.f2
+                        [field_three] => a3.m1.f3
+                    )
+            )
+        */
+
+    **Example 2**
+    ::
+
+        <?php
+        $array1 = array("a"=>"b", 1 => 20938, "c"=>"string");
+        $array2 = array("b"=>"b", 3 => 238, "c"=>"string", array("extra_field"));
+        $res = Set::pushDiff($array1, $array2);
+        /* $res now looks like:
+            Array
+            (
+                [a] => b
+                [1] => 20938
+                [c] => string
+                [b] => b
+                [3] => 238
+                [4] => Array
+                    (
+                        [0] => extra_field
+                    )
+            )
+        */
+
+
+.. php:staticmethod:: remove($list, $path = null)
+
+    :rtype: array
+
+    Removes an element from a Set or array as defined by $path::
 
         <?php
         $a = array(
-            0 => array('name' => 'main'),
-            1 => array('name' => 'about')
+            'pages'     => array('name' => 'page'),
+            'files'     => array('name' => 'files')
         );
-        $b = array(
-            0 => array('name' => 'main'),
-            1 => array('name' => 'about'),
-            2 => array('name' => 'contact'),
-            'a' => 'b'
+
+        $result = Set::remove($a, 'files');
+        /* $result now looks like:
+            Array
+            (
+                [pages] => Array
+                    (
+                        [name] => page
+                    )
+
+            )
+        */
+
+
+.. php:staticmethod:: reverse($object)
+
+    :rtype: array
+
+    Set::reverse is basically the opposite of :php:func:`Set::map`. It converts an
+    object into an array. If $object is not an object, reverse will
+    simply return $object.::
+
+        <?php
+        $result = Set::reverse(null);
+        // Null
+        $result = Set::reverse(false);
+        // false
+        $a = array(
+            'Post' => array('id'=> 1, 'title' => 'First Post'),
+            'Comment' => array(
+                array('id'=> 1, 'title' => 'First Comment'),
+                array('id'=> 2, 'title' => 'Second Comment')
+            ),
+            'Tag' => array(
+                array('id'=> 1, 'title' => 'First Tag'),
+                array('id'=> 2, 'title' => 'Second Tag')
+            ),
         );
-    
-        $result = Set::contains($a, $a);
-        // True
-        $result = Set::contains($a, $b);
-        // False
-        $result = Set::contains($b, $a);
-        // True
+        $map = Set::map($a); // Turn $a into a class object
+        /* $map now looks like:
+            stdClass Object
+            (
+                [_name_] => Post
+                [id] => 1
+                [title] => First Post
+                [Comment] => Array
+                    (
+                        [0] => stdClass Object
+                            (
+                                [id] => 1
+                                [title] => First Comment
+                            )
+                        [1] => stdClass Object
+                            (
+                                [id] => 2
+                                [title] => Second Comment
+                            )
+                    )
+                [Tag] => Array
+                    (
+                        [0] => stdClass Object
+                            (
+                                [id] => 1
+                                [title] => First Tag
+                            )
+                        [1] => stdClass Object
+                            (
+                                [id] => 2
+                                [title] => Second Tag
+                            )
+                    )
+            )
+        */
+
+        $result = Set::reverse($map);
+        /* $result now looks like:
+            Array
+            (
+                [Post] => Array
+                    (
+                        [id] => 1
+                        [title] => First Post
+                        [Comment] => Array
+                            (
+                                [0] => Array
+                                    (
+                                        [id] => 1
+                                        [title] => First Comment
+                                    )
+                                [1] => Array
+                                    (
+                                        [id] => 2
+                                        [title] => Second Comment
+                                    )
+                            )
+                        [Tag] => Array
+                            (
+                                [0] => Array
+                                    (
+                                        [id] => 1
+                                        [title] => First Tag
+                                    )
+                                [1] => Array
+                                    (
+                                        [id] => 2
+                                        [title] => Second Tag
+                                    )
+                            )
+                    )
+            )
+        */
+
+        $result = Set::reverse($a['Post']); // Just return the array
+        /* $result now looks like:
+            Array
+            (
+                [id] => 1
+                [title] => First Post
+            )
+        */
 
 
-.. todo::
+.. php:staticmethod:: sort($data, $path, $dir)
 
-    Missing info about apply().
+    :rtype: array
+
+    Sorts an array by any value, determined by a Set-compatible path.::
+
+        $a = array(
+            0 => array('Person' => array('name' => 'Jeff')),
+            1 => array('Shirt' => array('color' => 'black'))
+        );
+        $result = Set::sort($a, '{n}.Person.name', 'asc');
+        /* $result now looks like:
+            Array
+            (
+                [0] => Array
+                    (
+                        [Shirt] => Array
+                            (
+                                [color] => black
+                            )
+                    )
+                [1] => Array
+                    (
+                        [Person] => Array
+                            (
+                                [name] => Jeff
+                            )
+                    )
+            )
+        */
+
+        $result = Set::sort($a, '{n}.Shirt', 'asc');
+        /* $result now looks like:
+            Array
+            (
+                [0] => Array
+                    (
+                        [Person] => Array
+                            (
+                                [name] => Jeff
+                            )
+                    )
+                [1] => Array
+                    (
+                        [Shirt] => Array
+                            (
+                                [color] => black
+                            )
+                    )
+            )
+        */
+
+        $result = Set::sort($a, '{n}', 'desc');
+        /* $result now looks like:
+            Array
+            (
+                [0] => Array
+                    (
+                        [Shirt] => Array
+                            (
+                                [color] => black
+                            )
+                    )
+                [1] => Array
+                    (
+                        [Person] => Array
+                            (
+                                [name] => Jeff
+                            )
+                    )
+            )
+        */
+
+        $a = array(
+            array(7,6,4),
+            array(3,4,5),
+            array(3,2,1),
+        );
+
+        $result = Set::sort($a, '{n}.{n}', 'asc');
+        /* $result now looks like:
+            Array
+            (
+                [0] => Array
+                    (
+                        [0] => 3
+                        [1] => 2
+                        [2] => 1
+                    )
+                [1] => Array
+                    (
+                        [0] => 3
+                        [1] => 4
+                        [2] => 5
+                    )
+                [2] => Array
+                    (
+                        [0] => 7
+                        [1] => 6
+                        [2] => 4
+                    )
+            )
+        */
+

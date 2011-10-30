@@ -238,9 +238,7 @@ Each directive populates the index, and or the namespace index.
             Text about the method
         
 
-   .. seealso:: .. php:method:: name
-                .. php:attr:: name
-                .. php:const:: name
+   .. seealso:: :rst:dir:`php:method`, :rst:dir:`php:attr`, :rst:dir:`php:const`
 
 .. rst:directive:: .. php:method:: name(signature)
 
@@ -347,7 +345,7 @@ All admonitions are made the same::
 
     .. note::
     
-        Indented and preceeded and followed by a blank line. Just like a paragraph.
+        Indented and preceded and followed by a blank line. Just like a paragraph.
     
     This text is not part of the note.
 

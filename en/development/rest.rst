@@ -73,7 +73,7 @@ this::
     
     class RecipesController extends AppController {
     
-        var $components = array('RequestHandler');
+        public $components = array('RequestHandler');
     
         function index() {
             $recipes = $this->Recipe->find('all');

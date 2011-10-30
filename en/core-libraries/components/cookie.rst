@@ -58,7 +58,7 @@ a secure connection, is available on the path
 ::
     
     <?php
-    var $components    = array('Cookie');
+    public $components    = array('Cookie');
     function beforeFilter() {
       $this->Cookie->name = 'baker_id';
       $this->Cookie->time =  3600;  // or '1 hour'

@@ -189,7 +189,7 @@ found in ``$this->request->params['named']``, whereas custom route
 element data is found in ``$this->request->params``. When you define 
 a custom route element, you can optionally specify a regular 
 expression - this tells CakePHP how to know if the URL is correctly formed or not.
-If you choose to not provide a regular expresssion, any non ``/`` will be 
+If you choose to not provide a regular expression, any non ``/`` will be 
 treated as part of the parameter::
 
     <?php
@@ -218,9 +218,11 @@ as requesting ``/apples/view/5``. Both would call the view() method of
 the ApplesController. Inside the view() method, you would need to
 access the passed ID at ``$this->request->params['id']``.
 
-If you have a single controller in your application and you want
-that controller name does not appear in url, e.g have urls like
-``/demo`` instead of ``/home/demo``, you can do the following::
+If you have a single controller in your application and you do not want
+the controller name to appear in the url, you can map all urls to actions
+in your controller.  For example, to map all urls to actions of the
+``home`` controller, e.g have urls like ``/demo`` instead of
+``/home/demo``, you can do the following::
 
     <?php
     Router::connect('/:action', array('controller' => 'home')); 
@@ -546,15 +548,15 @@ request for ``/posts/view/title:first/category:general`` would result
 in a call to the view() action of the PostsController. In that
 action, you’d find the values of the title and category parameters
 inside ``$this->params['named']``.  They are also available inside
-``$this->passedArgs``. In both cases you can access named using their
+``$this->passedArgs``. In both cases you can access named parameters using their
 name as an index.  If named parameters are omitted, they will not be set.
 
 
 .. note::
 
-    What is parsed as a named parameter, is controlled by 
+    What is parsed as a named parameter is controlled by 
     :php:meth:`Router::connectNamed()`.  If your named parameters are not
-    reverse routing, or parsing correctly. You will need to inform 
+    reverse routing, or parsing correctly, you will need to inform 
     :php:class:`Router` about them.
 
 Some summarizing examples for default routes might prove helpful::
@@ -605,11 +607,11 @@ as a named parameter.
 .. note::
 
     Both named parameters and route elements share the same key-space.
-    Its best to avoid re-using a key for both a route element, and a named
+    It's best to avoid re-using a key for both a route element and a named
     parameter.
 
-Named parameters also support arrays both in generation of urls, and
-parsing of urls.  The syntax works very similar to the array syntax used
+Named parameters also support using arrays to generate and parse
+urls.  The syntax works very similar to the array syntax used
 for GET parameters.  When generating urls you can use the following
 syntax::
 
@@ -657,7 +659,7 @@ passing arguments::
       'users' => array(1, 2, 3)
     ));
 
-You would end up with a pretty long url like this (wrapped for easy of reading)::
+You would end up with a pretty long url like this (wrapped for easy reading)::
 
     posts/search
       /models[post][order]:asc/models[post][filter][published]:1
@@ -745,8 +747,8 @@ Reverse routing
 
 Reverse routing is a feature in CakePHP that is used to allow you to
 easily change your url structure without having to modify all your code.
-By using :term:`routing array`'s to define your urls, you can later
-configure routes and the generated url's will automatically update.
+By using :term:`routing array`s to define your urls, you can later
+configure routes and the generated urls will automatically update.
 
 If you create urls using strings like::
 
@@ -754,7 +756,7 @@ If you create urls using strings like::
     $this->Html->link('View', '/posts/view/' + $id);
 
 And then later decide that ``/posts`` should really be called 
-'articles' instead.  You would have to go through your entire
+'articles' instead, you would have to go through your entire
 application renaming urls.  However, if you defined your link like::
 
     <?php
@@ -937,7 +939,7 @@ Router API
     :param array: $named A list of named parameters. Key value pairs are accepted where 
         values are either regex strings to match, or arrays.
     :param array $options: Allows to control all settings: 
-        separator, greedy, reset, defaul
+        separator, greedy, reset, default
     
     Specifies what named parameters CakePHP should be parsing out of 
     incoming urls. By default CakePHP will parse every named parameter 

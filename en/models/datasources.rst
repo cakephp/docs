@@ -174,7 +174,7 @@ And the configuration settings in your ``app/Config/database.php``
 would resemble something like this::
 
     <?php
-        var $twitter = array(
+        public $twitter = array(
             'datasource' => 'TwitterSource',
             'login' => 'username',
             'password' => 'password',
@@ -204,7 +204,7 @@ Simply place your datasource file into
 ``Plugin/[your_plugin]/Model/Datasource/[your_datasource].php``
 and refer to it using the plugin notation::
 
-    var $twitter = array(
+    public $twitter = array(
         'datasource' => 'Twitter.TwitterSource',
         'username' => 'test@example.com',
         'password' => 'hi_mom',

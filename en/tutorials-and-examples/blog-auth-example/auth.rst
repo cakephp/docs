@@ -227,6 +227,7 @@ and add the following::
         if (isset($this->data[$this->alias]['password'])) {
             $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
         }
+        return true;
     }
 
     // ...
@@ -286,7 +287,7 @@ logged in user as a reference for the created post::
     // app/Controller/PostsController.php
     public function add() {
         if ($this->request->is('post')) {
-            $this->request->data['Post']['user_id] = $this->Auth->user('id'); //Added this line
+            $this->request->data['Post']['user_id'] = $this->Auth->user('id'); //Added this line
             if ($this->Post->save($this->request->data)) {
                 $this->Session->setFlash('Your post has been saved.');
                 $this->redirect(array('action' => 'index'));
@@ -343,7 +344,7 @@ and add the following content::
                 // All registered users can add posts
                 return true;
             }
-            if (in_array($this->action, arary('edit', 'delete'))) {
+            if (in_array($this->action, array('edit', 'delete'))) {
                 $postId = $this->request->params['pass'][0];
                 return $this->Post->isOwnedBy($postId, $user['id]);
             }
@@ -363,7 +364,7 @@ logic as possible into models. Let's then implement the function::
     // app/Model/Post.php
 
     public function isOwnedBy($post, $user) {
-        return $this->field('id', arary('id' => $post, 'user_id' => $user)) === $post;
+        return $this->field('id', array('id' => $post, 'user_id' => $user)) === $post;
     }
 
 

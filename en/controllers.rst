@@ -708,7 +708,7 @@ own sections in the manual.
 
 .. php:attr: paginate
 
-    The paginate attribute is a deprecated compatibiliy property.  Using it
+    The paginate attribute is a deprecated compatibility property.  Using it
     loads and configures the :php:class:`PaginatorComponent`.  It is recommended
     that you update your code to use normal component settings::
 

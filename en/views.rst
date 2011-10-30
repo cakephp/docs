@@ -226,7 +226,7 @@ The options supported are 'cache', 'callbacks' and 'plugin'. An example::
 
 Element caching is facilitated through the :php:class:`Cache` class.  You can
 configure elements to be stored in any Cache configuration you've setup.  This
-gives you a great amount of flexibilty to decide where and for how long elements
+gives you a great amount of flexibility to decide where and for how long elements
 are stored.  To cache different versions of the same element in an application, 
 provide a unique cache key value using the following format::
 

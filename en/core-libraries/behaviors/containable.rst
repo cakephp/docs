@@ -20,7 +20,7 @@ your model::
 
     <?php
     class Post extends AppModel {
-        var $actsAs = array('Containable');
+        public $actsAs = array('Containable');
     }
 
 You can also attach the behavior on the fly::
