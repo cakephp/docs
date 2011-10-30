@@ -4,7 +4,7 @@ Collections
 Components, Helpers, Behaviors and Tasks all share a similar structure and set
 of behaviors.  For 2.0, they were given a unified API for interacting with
 collections of similar objects.  The collection objects in CakePHP, give you 
-a uniform way to interact with several diferrent kinds of objects in your
+a uniform way to interact with several different kinds of objects in your
 application.
 
 While the examples below, will use Components, the same behavior can be expected
@@ -77,7 +77,7 @@ control how callbacks are fired:
   Any non-null value will modify the parameter index indicated.
   Defaults to false.
 
-Cancelling a callback loop
+Canceling a callback loop
 --------------------------
 
 Using the ``break`` and ``breakOn`` options you can cancel a callback loop
@@ -111,7 +111,7 @@ on that object unless the ``triggerDisabled`` option is used::
 
 Disabled objects can still have their normal methods and properties used. The
 primary difference between an enabled and disabled object is with regards to
-callbacks. You can interogate a collection about the enabled objects, or check
+callbacks. You can interrogate a collection about the enabled objects, or check
 if a specific object is still enabled using ``enabled()``::
 
     <?php

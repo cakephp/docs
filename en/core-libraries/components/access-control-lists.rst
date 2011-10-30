@@ -795,7 +795,7 @@ The second set of calls is an attempt to make a more fine-grained
 permission decision. We want Aragorn to keep his full-access
 privileges, but deny other warriors in the group the ability to
 delete Weapons records. We're using the alias syntax to address the
-AROs above, but you might want to use the model/foriegn key syntax
+AROs above, but you might want to use the model/foreign key syntax
 yourself. What we have above is equivalent to this:
 
 ::

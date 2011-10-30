@@ -34,7 +34,7 @@ You can either load them one by one or all of them in a single call::
 
 loadAll loads all plugins available, while allowing you to set certain
 settings for specific plugins. load() works similarly, but only loads the 
-plugins you explicitely specify.
+plugins you explicitly specify.
 
 There is a lot you can do with the load and loadAll methods to help with
 plugin configuration and routing. Perhaps you want to load all plugins 
@@ -57,7 +57,7 @@ have also been supplied to the load() method, which would have loaded only those
 three plugins, and not the rest.
 
 Finally, you can also specify a set of defaults for loadAll which will apply to
-every plugin that doesn't have a more specific cofiguration.
+every plugin that doesn't have a more specific configuration.
 
 Load the bootstrap file from all plugins, and the routes from the Blog plugin::
     

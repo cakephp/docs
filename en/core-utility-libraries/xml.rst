@@ -295,7 +295,7 @@ Xml API
 
 .. php:class:: Xml
 
-    A factory and coversion class for creating SimpleXml or DOMDocument objects
+    A factory and conversion class for creating SimpleXml or DOMDocument objects
     from a number of sources including strings, arrays and remote urls.
 
 .. php:staticmethod:: build($input, $options = array())

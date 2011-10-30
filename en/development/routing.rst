@@ -189,7 +189,7 @@ found in ``$this->request->params['named']``, whereas custom route
 element data is found in ``$this->request->params``. When you define 
 a custom route element, you can optionally specify a regular 
 expression - this tells CakePHP how to know if the URL is correctly formed or not.
-If you choose to not provide a regular expresssion, any non ``/`` will be 
+If you choose to not provide a regular expression, any non ``/`` will be 
 treated as part of the parameter::
 
     <?php
@@ -939,7 +939,7 @@ Router API
     :param array: $named A list of named parameters. Key value pairs are accepted where 
         values are either regex strings to match, or arrays.
     :param array $options: Allows to control all settings: 
-        separator, greedy, reset, defaul
+        separator, greedy, reset, default
     
     Specifies what named parameters CakePHP should be parsing out of 
     incoming urls. By default CakePHP will parse every named parameter 

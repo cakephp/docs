@@ -46,7 +46,7 @@ opening form tag.
     associated with it. If you do not specify a model, then it assumes
     you are using the default model for the current controller::
 
-        // If you are on /recipies/add
+        // If you are on /recipes/add
         <?php echo $this->Form->create('Recipe'); ?>
 
         // Output:
@@ -1394,7 +1394,7 @@ Will output::
 Working with SecurityComponent
 ==============================
 
-:php:meth:`SecurityComponent` offers several features tha make your forms safer
+:php:meth:`SecurityComponent` offers several features that make your forms safer
 and more secure.  By simply including the ``SecurityComponent`` in your
 controller, you'll automatically benefit from CSRF and form tampering features.
 

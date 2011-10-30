@@ -1,7 +1,7 @@
 2.0 Migration Guide
 ###################
 
-This page summarises the changes from CakePHP 1.3 that will assist in a project
+This page summarizes the changes from CakePHP 1.3 that will assist in a project
 migration to 2.0, as well as for a developer reference to get up to date with
 the changes made to the core since the CakePHP 1.3 branch. Be sure to read the
 other pages in this guide for all the new features and API changes.
@@ -377,7 +377,7 @@ App::import()
   possible.
 * Importing a non-existent file, supplying a wrong type or package name, or null
   values for $name and $file parameters will result in a false return value.
-* App::import('Core', 'CoreClass') is no loger supported, use App::uses()
+* App::import('Core', 'CoreClass') is no longer supported, use App::uses()
   instead and let the class autoloading do the rest.
 * Loading Vendor files does not look recursively in the vendors folder, it will
   also no longer convert the file to underscored as it did in the past.

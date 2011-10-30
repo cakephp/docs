@@ -452,7 +452,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     .. note::
 
         Droppables in Mootools function differently from other libraries.
-        Droppables are implemented as an extension of Drag. So in addtion
+        Droppables are implemented as an extension of Drag. So in addition
         to making a get() selection for the droppable element. You must
         also provide a selector rule to the draggable element. Furthermore,
         Mootools droppables inherit all options from Drag.

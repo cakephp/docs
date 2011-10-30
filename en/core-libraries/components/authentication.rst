@@ -205,7 +205,7 @@ or :php:attr:`AuthComponent::$loginRedirect`.  If the login is unsuccessful, a f
 
     In 2.0 ``$this->Auth->login($this->request->data)`` will log the user in with whatever data is posted,
     whereas in 1.3 ``$this->Auth->login($this->data)`` would try to identify the user first and only log in
-    when succesfull.
+    when successful.
 
 Using Digest and Basic Authentication for logging in
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -699,7 +699,7 @@ AuthComponent API
 .. php:attr:: authError
 
     Error to display when user attempts to access an object or action to which they do not have
-    acccess.
+    access.
 
 .. php:method:: allow($action, [$action, ...])
 

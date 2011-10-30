@@ -73,7 +73,7 @@ some of these built-in validation rules::
             ),
             'password' => array(
                 'rule' => array('minLength', '8'),
-                'message' => 'Mimimum 8 characters long'
+                'message' => 'Minimum 8 characters long'
             ),
             'email' => 'email',
             'born' => array(

@@ -2,7 +2,7 @@ ACL Shell
 #########
 
 The AclShell is useful for managing and inspecting your Acl databases records.
-Its often more convienent than adding one time modifications to your
+Its often more convenient than adding one time modifications to your
 controllers.
 
 Most acl shell subcommands involve referencing aco/aro nodes.  As there are two
