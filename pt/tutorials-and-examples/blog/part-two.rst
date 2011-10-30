@@ -349,29 +349,29 @@ que você está criando um formulário que submete para a action ``add()`` do
 controller atual (ou para a action ``edit()`` se um campo id for incluído nos
 dados do formulário), via POST.
 
-The ``$this->Form->input()`` method is used to create form elements
-of the same name. The first parameter tells CakePHP which field
-they correspond to, and the second parameter allows you to specify
-a wide array of options - in this case, the number of rows for the
-textarea. There's a bit of introspection and automagic here:
-``input()`` will output different form elements based on the model
-field specified.
+O método ``$this->Form->input()`` é usado para criar elementos de formulário de
+mesmo nome. O primeiro parâmetro informa ao CakePHP qual o campo correspondente
+e o segundo parâmetro permite que você especifique um extenso array de opções.
+Neste caso, o número de linhas para o textarea. Há alguma introspecção
+"automágica" envolvida aqui: o ``input()`` irá exibir diferentes elementos de
+formulário com base no campo do model em questão.
 
-The ``$this->Form->end()`` call generates a submit button and ends
-the form. If a string is supplied as the first parameter to
-``end()``, the FormHelper outputs a submit button named accordingly
-along with the closing form tag. Again, refer to
-:doc:`/views/helpers` for more on helpers.
+A chamada à ``$this->Form->end()`` gera um botão de submissão e encerra o
+formulário. Se uma string for informada como primeiro parâmetro para o
+``end()``, o FormHelper exibe um botão de submit apropriadamente rotulado junto
+com a tag de fechamento do formulário. Novamente, confira o capítulo sobre os
+:doc:`/views/helpers` disponíveis no CakePHP para mais informações sobre os
+helpers.
 
-Now let's go back and update our ``/app/View/Post/index.ctp``
-view to include a new "Add Post" link. Before the ``<table>``, add
-the following line::
+Agora vamos voltar e atualizar nossa view ``/app/View/Post/index.ctp`` para
+incluir um novo link para "Adicionar Post". Antes de <table>, adicione a
+seguinte linha::
 
     <?php echo $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add')); ?>
 
-You may be wondering: how do I tell CakePHP about my validation
-requirements? Validation rules are defined in the model. Let's look
-back at our Post model and make a few adjustments::
+Você pode estar imaginando: como eu informo ao CakePHP sobre os requisitos de
+validação de meus dados? Regras de validação são definidas no model. Vamos olhar
+de volta nosso model Post e fazer alguns pequenos ajustes::
 
     <?php
     class Post extends AppModel {
@@ -388,29 +388,31 @@ back at our Post model and make a few adjustments::
     }
     ?>
 
-The ``$validate`` array tells CakePHP how to validate your data
-when the ``save()`` method is called. Here, I've specified that
-both the body and title fields must not be empty. CakePHP's
-validation engine is strong, with a number of pre-built rules
-(credit card numbers, email addresses, etc.) and flexibility for
-adding your own validation rules. For more information on that
-setup, check the :doc:`/models/data-validation`.
+O array ``$validate`` diz ao CakePHP sobre como validar seus dados quando o
+método ``save()`` for chamado. Aqui, eu especifiquei que tanto os campos body e
+title não podem ser vazios. O mecanismo de validação do CakePHP é robusto, com
+diversas regras predefinidas (números de cartão de crédito, endereços de e-mail,
+etc.) além de ser bastante flexível, permitindo adicionar suas próprias regras
+de validação. Para mais informações, confira o capítulo sobre
+:doc:`/models/data-validation`.
 
-Now that you have your validation rules in place, use the app to
-try to add a post with an empty title or body to see how it works.
-Since we've used the :php:meth:`FormHelper::input()` method of the 
-FormHelper to create our form elements, our validation error 
-messages will be shown automatically.
+Agora que você incluiu as devidas regras de validação, tente adicionar um post
+com um título ou com o corpo vazio para ver como funciona. Uma vez que usamos o
+método :php:meth:`FormHelper::input()` do FormHelper para criar nossos elementos
+de formulário, nossas mensagens de erros de validação serão mostradas
+automaticamente.
 
-Editing Posts
-=============
 
-Post editing: here we go. You're a CakePHP pro by now, so you
-should have picked up a pattern. Make the action, then the view.
-Here's what the ``edit()`` action of the PostsController would look
-like::
+Editando Posts
+==============
+
+Edição de Posts: Aqui vamos nós. A partir de agora você já é um profissional do
+CakePHP, então você deve ter identificado um padrão. Criar a action e então
+criar a view. Aqui está como o código da action ``edit()`` do PostsController
+deve se parecer::
 
     <?php
+    
     function edit($id = null) {
         $this->Post->id = $id;
         if ($this->request->is('get')) {
@@ -423,15 +425,16 @@ like::
         }
     }
 
-This action first checks that the request is a GET request.  If it is, then
-we find the Post and hand it to the view.  If the user request is not a GET, it
-probably contains POST data.  We'll use the POST data to update our Post record 
-with, or kick back and show the user the validation errors).
+Esta action primeiro verifica se a requisição é do tipo GET. Se for, nós
+buscamos o Post e passamos para a view. Se a requisição não for do tipo GET,
+provavelmente esta contém dados de um formulário POST. Nós usaremos estes dados
+para atualizar o registro do nosso Post ou exibir novamente a view mostrando
+para o usuário os erros de validação.
 
-The edit view might look something like this::
+A view edit pode ser algo parecido com isto::
 
     <!-- File: /app/View/Posts/edit.ctp -->
-        
+    
     <h1>Edit Post</h1>
     <?php
         echo $this->Form->create('Post', array('action' => 'edit'));
@@ -441,18 +444,19 @@ The edit view might look something like this::
         echo $this->Form->end('Save Post');
     ?>
 
-This view outputs the edit form (with the values populated), along
-with any necessary validation error messages.
+Esta view exibe o formulário de edição (com os valores populados), juntamente
+com quaisquer mensagens de erro de validação.
 
-One thing to note here: CakePHP will assume that you are editing a
-model if the 'id' field is present in the data array. If no 'id' is
-present (look back at our add view), Cake will assume that you are
-inserting a new model when ``save()`` is called.
+Uma coisa a atentar aqui: o CakePHP vai assumir que você está editando um model
+se o campo 'id' estiver presente no array de dados.
+Se nenhum 'id' estiver presente (como a view add de inserção), o Cake irá
+assumir que você está inserindo um novo model quando o método save() for
+chamado.
 
-You can now update your index view with links to edit specific
-posts::
+Você agora pode atualizar sua view index com os links para editar os posts
+específicos::
 
-    <!-- File: /app/View/Posts/index.ctp  (edit links added) -->
+    <!-- File: /app/View/Posts/index.ctp  (links para edição adicionados) -->
 
     <h1>Blog posts</h1>
     <p><?php echo $this->Html->link("Add Post", array('action' => 'add')); ?></p>
@@ -464,7 +468,8 @@ posts::
             <th>Created</th>
         </tr>
 
-    <!-- Here's where we loop through our $posts array, printing out post info -->
+    <!-- Aqui é onde nós percorremos nossa matriz $posts, imprimindo
+    as informações dos posts -->
 
     <?php foreach ($posts as $post): ?>
         <tr>
@@ -486,11 +491,11 @@ posts::
 
     </table>
 
-Deleting Posts
-==============
+Deletando Posts
+===============
 
-Next, let's make a way for users to delete posts. Start with a
-``delete()`` action in the PostsController::
+A seguir, vamos criar uma maneira para os usuários excluírem posts. Comece com
+uma action ``delete()`` no PostsController::
 
     <?php
     function delete($id) {
@@ -503,18 +508,22 @@ Next, let's make a way for users to delete posts. Start with a
         }
     }
 
-This logic deletes the post specified by $id, and uses
-``$this->Session->setFlash()`` to show the user a confirmation
-message after redirecting them on to ``/posts``.  If the user attempts to
-do a delete using a GET request, we throw an Exception.  Uncaught exceptions
-are captured by CakePHP's exception handler, and a nice error page is 
-displayed.  There are many built-in :doc:`/development/exceptions` that can
-be used to indicate the various HTTP errors your application might need
-to generate.
+Esta lógica exclui o post dado por $id, e utiliza ``$this->Session->setFlash()``
+para mostrar uma mensagem de confirmação para o usuário depois de redirecioná-lo
+para ``/posts``.
 
-Because we're just executing some logic and redirecting, this
-action has no view. You might want to update your index view with
-links that allow users to delete posts, however::
+Se o usuário tentar deletar um post usando uma requisição do tipo GET, nós
+lançamos uma exceção. Exceções não apanhadas são capturadas pelo manipulador de
+exceções do CakePHP e uma página de erro amigável é mostrada. O CakePHP vem com
+muitas :doc:`/development/exceptions` que você pode usar para indicar vários
+tipos de erros HTTP que sua aplicação pode precisar gerar.
+
+Como estamos executando apenas uma lógica de negócio e redirecionando, esta
+action não tem uma view. Você pode querer atualizar sua view index com links que
+permitam ao usuários excluir posts, porém, como um link executa uma requisição
+do tipo GET, nossa action irá lançar uma exceção. Precisamos então criar um
+pequeno formulário que enviará um método POST adequado. Para estes casos o
+helper FormHelper fornece o método ``postLink()``::
 
     <!-- File: /app/View/Posts/index.ctp -->
     
@@ -550,78 +559,77 @@ links that allow users to delete posts, however::
     </table>
 
 .. note::
-
-    This view code also uses the FormHelper to prompt the user with a
-    JavaScript confirmation dialog before they attempt to delete a
-    post.
+    O código desta view também utiliza o HtmlHelper para solicitar uma
+    confirmação ao usuário com um diálogo em Javascript antes de tentar excluir
+    o post.
 
 Routes
 ======
 
-For some, CakePHP's default routing works well enough. Developers
-who are sensitive to user-friendliness and general search engine
-compatibility will appreciate the way that CakePHP's URLs map to
-specific actions. So we'll just make a quick change to routes in
-this tutorial.
+Para alguns, o roteamento padrão do CakePHP funcionará muito bem. Os
+desenvolvedores que estiverem mais afeitos a criar produtos ainda mais amigáveis
+aos usuários e aos mecanismos de busca irão gostar da maneira que as URLs do
+CakePHP são mapeadas para actions específicas. Então vamos fazer uma pequena
+alteração de rotas neste tutorial.
 
-For more information on advanced routing techniques, see
+Para mais informações sobre técnicas avançadas de roteamento, veja
 :ref:`routes-configuration`.
 
-By default, CakePHP responds to a request for the root of your site
-(i.e. http://www.example.com) using its PagesController, rendering
-a view called "home". Instead, we'll replace this with our
-PostsController by creating a routing rule.
+Por padrão, o CakePHP responde a requisições para a raíz de seu site
+(i.e. http://www.exemplo.com) usando seu PagesController e renderizando uma view
+chamada de "home". Ao invés disso, vamos substituir isto por nosso
+PostsController criando uma regra de roteamento.
 
-Cake's routing is found in ``/app/Config/routes.php``. You'll want
-to comment out or remove the line that defines the default root
-route. It looks like this::
+As rotas do Cake são encontrada no arquivo ``/app/Config/routes.php``. Você vai
+querer comentar ou remover a linha que define a rota raíz padrão. Ela se parece
+com::
 
     <?php
     Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
-This line connects the URL '/' with the default CakePHP home page.
-We want it to connect with our own controller, so replace that line
-with this one::
+Esta linha conecta a URL '/' com a home page default do CakePHP. Queremos
+conectá-la com nosso próprio controller, então adicionamos uma linha parecida
+com isto::
 
     <?php
     Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 
-This should connect users requesting '/' to the index() action of
-our PostsController.
+Isto deve conectar as requisições à '/' à action index() que criaremos em nosso
+PostsController.
 
 .. note::
+    O CakePHP também faz uso do 'roteamento reverso' - se, com a rota definida
+    acima, você passar ``array('controller'=>'posts', 'action'=>'index')`` a um
+    método que espere um array, a URL resultante será '/'. É sempre uma boa
+    ideia usar arrays para URLs, já que é a partir disto que suas rotas definem
+    para onde suas URLs apontam, além de garantir que os links sempre apontem
+    para o mesmo lugar.
 
-    CakePHP also makes use of 'reverse routing' - if with the above
-    route defined you pass
-    ``array('controller' => 'posts', 'action' => 'index')`` to a
-    function expecting an array, the resultant URL used will be '/'.
-    It's therefore a good idea to always use arrays for URLs as this
-    means your routes define where a URL goes, and also ensures that
-    links point to the same place too.
+Conclusão
+=========
 
-Conclusion
-==========
+Criar aplicações desta maneira irá lhe trazer paz, honra, amor e dinheiro além
+de satisfazer às suas mais ousadas fantasias. Simples, não? Tenha em mente que
+este tutorial foi muito básico. O CakePHP possui *muito* mais recursos a
+oferecer e é flexível de tantas maneiras que não conseguimos mostrar aqui por
+questões de simplicidade. Utilize o resto deste manual como guia para construir
+mais aplicações ricas em recursos.
 
-Creating applications this way will win you peace, honor, love, and
-money beyond even your wildest fantasies. Simple, isn't it? Keep in
-mind that this tutorial was very basic. CakePHP has *many* more
-features to offer, and is flexible in ways we didn't wish to cover
-here for simplicity's sake. Use the rest of this manual as a guide
-for building more feature-rich applications.
+Agora que você criou uma aplicação básica em Cake, você está pronto para a coisa
+real. Comece seu próprio projeto, leia o restante do `Manual </>`_ e da
+`API <http://api20.cakephp.org>`_.
 
-Now that you've created a basic Cake application you're ready for
-the real thing. Start your own project, read the rest of the
-`Manual </>`_ and `API <http://api20.cakephp.org>`_.
+E se você precisar de ajuda, nos vemos no canal #cakephp (e no #cakephp-pt).
+Seja bem-vindo ao CakePHP!
 
-If you need help, come see us in #cakephp. Welcome to CakePHP!
+Leitura Recomendada
+-------------------
 
-Suggested Follow-up Reading
----------------------------
+Estas são as tarefas comuns que pessoas aprendendo o CakePHP geralmente querem
+estudar:
 
-These are common tasks people learning CakePHP usually want to study next:
-
-1. :ref:`view-layouts`: Customizing your website layout
-2. :ref:`view-elements` Including and reusing view snippets
-3. :doc:`/controllers/scaffolding`: Prototyping before creating code
-4. :doc:`/console-and-shells/code-generation-with-bake` Generating basic CRUD code
-5. :doc:`/tutorials-and-examples/blog-auth-example/auth`: User authentication and authorization tutorial
+1. :ref:`view-layouts`: Customizando o layout do seu website
+2. :ref:`view-elements` Incluindo e reutilizando trechos de código
+3. :doc:`/controllers/scaffolding`: Prototipando antes de programar
+4. :doc:`/console-and-shells/code-generation-with-bake` Gerando código CRUD básico
+5. :doc:`/tutorials-and-examples/blog-auth-example/auth`: Tutorial de autenticação e autorização de usuários
