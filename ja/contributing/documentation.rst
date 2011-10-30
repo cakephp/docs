@@ -6,8 +6,8 @@
 自由にレポジトリをフォークして、変更・改善・翻訳を追加し、プルリクエストを発行してください。
 またファイルをダウンロードせず、githubを使ってオンラインでドキュメントを編集することもできます。
 
-Translations
-============
+翻訳
+====
 
 ドキュメントチーム(*docs at cakephp dot org*)までEメールを送るか、IRC (#cakephp on freenode)で、参加したい旨を連絡してください。
 
@@ -142,8 +142,8 @@ ReST(Re Structured Text)はmarkdownやtextileと同様のプレーンテキス�
     例えば、 ``:doc:`form``` が ``core-helpers/html`` に現れたとすると、リンクは ``core-helpers/form`` を参照します。
     もし参照が ``:doc:`/core-helpers``` であったら、どこで使われるかを厭わずに、常に ``/core-helpers`` を参照します。
 
-Cross referencing links
-~~~~~~~~~~~~~~~~~~~~~~~
+相互参照リンク
+~~~~~~~~~~~~~~
 
 .. rst:role:: ref
 
@@ -221,9 +221,7 @@ CakePHPのドキュメントは `phpdomain
             メソッドについての文
         
 
-   .. seealso:: .. php:method:: name
-                .. php:attr:: name
-                .. php:const:: name
+   .. seealso:: :rst:dir:`php:method`, :rst:dir:`php:attr`, :rst:dir:`php:const`
 
 .. rst:directive:: .. php:method:: name(signature)
 
