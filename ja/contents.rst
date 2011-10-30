@@ -7,6 +7,7 @@
    index
    basic-info
    cakephp-overview
+   contributing
    appendices
 
 .. todolist::
