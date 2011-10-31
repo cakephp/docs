@@ -68,4 +68,13 @@ CakeRequest
 - Added ``is('requested')`` and ``isRequested()`` for detecting requestAction.
 
 
+Helpers
+=======
+
+TextHelper
+----------
+
+- :php:meth:`TextHelper::autoLink()`, :php:meth:`TextHelper::autoLinkUrls()`,
+  :php:meth:`TextHelper::autoLinkEmails()` now HTML escape their input by
+  default.  You can control this with the ``escape`` option.
 

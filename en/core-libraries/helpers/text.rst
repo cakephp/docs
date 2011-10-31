@@ -10,10 +10,10 @@ Text
     truncating long stretches of text.
 
 
-.. php:method:: autoLinkEmails(string $text, array $htmlOptions=array())
+.. php:method:: autoLinkEmails(string $text, array $options=array())
     
     :param string $text: The text to convert.
-    :param array $htmlOptions: An array :term:`html attributes` for the generated links.
+    :param array $options: An array of :term:`html attributes` for the generated links.
 
     Adds links to the well-formed email addresses in $text, according
     to any options defined in ``$htmlOptions`` (see
@@ -28,6 +28,10 @@ Text
         For more information regarding our world-famous pastries and desserts,
         contact <a href="mailto:info@example.com">info@example.com</a>
 
+    .. versionchanged:: 2.1
+        In 2.1 this method automatically escapes its input. Use the ``escape``
+        option to disable this if necessary.
+
 .. php:method:: autoLinkUrls(string $text, array $htmlOptions=array())
 
     :param string $text: The text to convert.
@@ -37,6 +41,10 @@ Text
     strings that start with https, http, ftp, or nntp and links them
     appropriately.
 
+    .. versionchanged:: 2.1
+        In 2.1 this method automatically escapes its input. Use the ``escape``
+        option to disable this if necessary.
+
 .. php:method:: autoLink(string $text, array $htmlOptions=array())
 
     :param string $text: The text to autolink.
@@ -45,6 +53,10 @@ Text
     Performs the functionality in both ``autoLinkUrls()`` and
     ``autoLinkEmails()`` on the supplied ``$text``. All URLs and emails
     are linked appropriately given the supplied ``$htmlOptions``.
+
+    .. versionchanged:: 2.1
+        In 2.1 this method automatically escapes its input. Use the ``escape``
+        option to disable this if necessary.
 
 .. php:method:: excerpt(string $haystack, string $needle, int $radius=100, string $ending="...")
 
