@@ -1,5 +1,5 @@
 Documentação
-#############
+############
 
 Contribuir na documentação é simples. Os arquivos estão 
 no http://github.com/cakephp/docs. Sinta-se livre para fazer 
@@ -44,7 +44,7 @@ Formatando a Documentação
 A nova documentação do CakePHP é escrita no formato ReST.
 ReST é uma linguagem de marcação para leitura de formatos de código fonte parecida
 com markdown e textile. Para manter a consistência é recomendável que use os 
- *guidelines* a seguir de como formatar estruturar seu texto.
+*guidelines* a seguir de como formatar estruturar seu texto.
 
 Altura da linha
 ---------------
@@ -68,7 +68,7 @@ Títulos não devem ser adicionados mais do que 5 níveis de profundidade.
 Títulos devem ser precedido e seguido por uma linha em branco.
 
 Parágrafo
-----------
+---------
 
 Parágrafos são blocos de texto simples, com todas as linhas no mesmo nível de indentação.
 Parágrafos devem ser separados por uma ou mais linhas em branco.
@@ -91,7 +91,7 @@ Restrições para a marcação:
   uma barra invertida escapando um espaço para corrigir isso: ``onelong\ *bolded*\ word``.
 
 Listas
------
+------
 
 A marcação de listas é muito paracido com markdown. Listas não ordenadas
 começam a linha com um asterisco seguido de um espaço. Listas númericas
@@ -187,7 +187,7 @@ Usar essas diretivas é essêncial para criar índices e referências
 em toda a documentação.
 
 Descrevendo Classes e Construtores
------------------------------------
+----------------------------------
 
 Cada diretiva alimenta o índice e/ou o *namespace* do índice.
 
