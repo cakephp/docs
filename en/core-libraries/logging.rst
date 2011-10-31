@@ -25,9 +25,9 @@ Creating and configuring log streams
 Log stream handlers can be part of your application, or part of
 plugins. If for example you had a database logger called
 ``DatabaseLogger``. As part of your application it would be placed
-in ``app/Lib/Log/DatabaseLogger.php``. As part of a plugin it
+in ``app/Lib/Log/Engine/DatabaseLogger.php``. As part of a plugin it
 would be placed in
-``app/Plugin/LoggingPack/Lib/Log/DatabaseLogger.php``. When
+``app/Plugin/LoggingPack/Lib/Log/Engine/DatabaseLogger.php``. When
 configured ``CakeLog`` will attempt to load Configuring log streams
 is done by calling ``CakeLog::config()``. Configuring our
 DataBaseLogger would look like::
