@@ -116,11 +116,11 @@ httpd.conf rather than a user- or site-specific httpd.conf).
 
    Verify that you your .htaccess files are actually in the right
    directories.
-   
 
    This can happen during copying because some operating systems treat
    files that start with '.' as hidden and therefore won't see them to
    copy.
+
 #. Make sure your copy of CakePHP is from the downloads section of
    the site or our GIT repository, and has been unpacked correctly by
    checking for .htaccess files.
