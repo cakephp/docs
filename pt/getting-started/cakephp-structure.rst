@@ -33,7 +33,7 @@ usuários ou um blog simplificado podem ser bons candidatos para plugins do
 CakePHP.
 
 Extensões de Controllers ("Componentes")
-=======================================
+========================================
 
 Um `Component` é uma classe que dá suporte às lógicas nos controllers.
 Se você possui uma lógica que queira compartilhar entre controllers, um
@@ -59,7 +59,7 @@ disponibilizados são:
    depois desta chamada.
 
 Extensões de Models ("Behaviors")
-==============================
+=================================
 
 Similarmente, Behaviors trabalham para adicionar funcionalidades comuns entre
 models. Por exemplo, se você armazena os dados dos usuários em uma estrutura de
@@ -94,7 +94,7 @@ Com a mínima descrição dada, deve ser possível saber o que estes callbacks
 fazem. Você pode encontrar mais detalhes no capítulo dos models.
 
 Extensões de Views ("Helpers")
-===========================
+==============================
 
 Um Helper é uma classe que ajuda na lógica das views. Muito parecido como os
 componentes que são usados pelos controllers, os helpers ajudam na lógica de

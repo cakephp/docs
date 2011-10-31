@@ -572,11 +572,11 @@ Outros Métodos Úteis
     nomeados (no segundo parâmetro do requestAction) com o array
     Controller::params e não coloca explicitamente o array de parâmetros
     nomeados na chave 'named'. Além disso, membros do array ``$options`` serão
-    disponibilizados no array Controller::params da ação que for chamada.
-    ::
+    disponibilizados no array Controller::params da ação que for chamada.::
+
         <?php
-        echo $this->requestAction('/articles/featured/limit:3');
-        echo $this->requestAction('/articles/view/5');
+            echo $this->requestAction('/articles/featured/limit:3');
+            echo $this->requestAction('/articles/view/5');
 
     Um array no ``requestAction`` poderia ser::
 
