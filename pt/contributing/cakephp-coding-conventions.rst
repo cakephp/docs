@@ -1,12 +1,12 @@
 Padrões de Codificação
-################
+######################
 
 Os desenvolvedores Cake vão sempre usar os seguintes padrões de codificação.
 
 É recomendavel que qualquer um que for desenvolver algum ingrediente para o Cake utilize esses padrões.
 
 Adicionando novos recursos
-===================
+==========================
 
 Nenhum novo recurso deve ser adicionado ou disponibilizado sem que tenha seus próprios testes - os quais devem todos passar antes de se submeter seus códigos para o repositório.
 
@@ -62,6 +62,7 @@ Estruturas de controle são  "``if``", "``for``", "``foreach``",
   indentação da estrutura de controle. O bloco de instruções delimitado pelas chaves 
   deve começar numa nova linha, e o código nele contido deve ser um nível de indentação 
   maior que o da estrutura de controle.
+
 ::
 
     <?php 
@@ -78,7 +79,7 @@ Estruturas de controle são  "``if``", "``for``", "``foreach``",
     }
 
 Operador Ternário
-----------------
+-----------------
 
 O Operador Ternário é permitido quando a operação ternária cabe em uma linha. 
 Ternários mais longos devem ser divididos em uma instrução ``if else``. Você não deve 
@@ -93,7 +94,7 @@ volta da condição de verificação do ternário para dar mais clareza::
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
 Chamadas de Funções
-==============
+===================
 
 Funções deve ser chamadas sem espaços entre o nome da função e o abre-parênteses. 
 Deverá ter um espaço entre cada parâmetro na chamda da função::
@@ -105,7 +106,7 @@ Como você pode ver neste código, também deve haver um espaço em ambos os lad
 
 
 Definição de Metódos
-=================
+====================
 
 Exemplo de definição de metódo::
 
@@ -206,7 +207,7 @@ Convenções de Nomenclatura
 ==========================
 
 Metódos
----------
+-------
 
 Escreva todos os metódos em camelBack::
 

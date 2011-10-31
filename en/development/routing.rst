@@ -747,8 +747,8 @@ Reverse routing
 
 Reverse routing is a feature in CakePHP that is used to allow you to
 easily change your url structure without having to modify all your code.
-By using :term:`routing array`s to define your urls, you can later
-configure routes and the generated urls will automatically update.
+By using :term:`routing arrays <routing array>` to define your urls, you can
+later configure routes and the generated urls will automatically update.
 
 If you create urls using strings like::
 

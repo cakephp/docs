@@ -37,7 +37,7 @@ used.
     key's existence.
 
 Displaying notifications or flash messages
-=========================================
+==========================================
 
 As explained in :ref:`creating-notification-messages` you can
 create one-time notifications for feedback. After creating messages 

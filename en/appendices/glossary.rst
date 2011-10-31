@@ -49,6 +49,7 @@ Glossary
                     )
                 )
             )
+
     CSRF
         Cross Site Request Forgery.  Prevents replay attacks, double
         submissions and forged requests from other domains.
