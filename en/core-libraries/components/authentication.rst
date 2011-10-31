@@ -570,7 +570,7 @@ You can do so using ``AuthComponent::deny()``::
     $this->Auth->deny('add');
 
     // remove all the actions.
-    $this->Auth->deny('*');
+    $this->Auth->deny();
 
     // remove a group of actions.
     $this->Auth->deny('add', 'edit');
