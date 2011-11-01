@@ -2,8 +2,8 @@ Folder & File
 #############
 
 The Folder and File utilities are convenience classes to help you read, write, 
-and append files; list files within a folder and other common directory related 
-tasks.
+and append to files; list files within a folder and other common directory 
+related tasks.
 
 Basic usage
 ===========
@@ -148,3 +148,7 @@ File API
 .. php:method:: writable( )
 
 .. php:method:: write( $data, $mode = 'w', $force = false )
+
+.. todo::
+
+    Explain how to use each method.
