@@ -377,42 +377,60 @@ File API
 
 		    :rtype: string
 		
+		    Prepares a ascii string for writing. Converts line endings to the 
+		    correct terminator for the current platform. If windows "\r\n" 
+		    will be used all other platforms will use "\n"
+		
 		
 .. php:method:: pwd( )
 
 		    :rtype: string
+		
+		    Returns the full path of the File.
 		
 		
 .. php:method:: read( $bytes = false, $mode = 'rb', $force = false )
 
 		    :rtype: mixed
 		
+		    Return the contents of this File as a string or return false on failure.
+		
 		
 .. php:method:: readable( )
 
 		    :rtype: boolean
+		
+		    Returns true if the File is readable.
 		
 		
 .. php:method:: safe( $name = NULL, $ext = NULL )
 
 		    :rtype: string
 		
+		    Makes filename safe for saving.
+		
 		
 .. php:method:: size( )
 
 		    :rtype: integer
+		
+		    Returns the Filesize.
 		
 		
 .. php:method:: writable( )
 
 		    :rtype: boolean
 		
+		    Returns true if the File is writable.
+		
 		
 .. php:method:: write( $data, $mode = 'w', $force = false )
 
 		    :rtype: boolean
 		
+		    Write given data to this File.
+		
 		
 .. todo::
     
-    Finish out File API. Better explain how to use each method with both classes.
+    Better explain how to use each method with both classes.
