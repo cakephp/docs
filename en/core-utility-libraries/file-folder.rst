@@ -94,14 +94,16 @@ Folder API
 
 		    :rtype: string
 		
-		    Returns a correct set of slashes for given $path. (\\ for Windows paths and / for other paths.)
+		    Returns a correct set of slashes for given $path. (\\ for 
+		    Windows paths and / for other paths.)
 		
 
 .. php:method:: create( $pathname, $mode = false )
 
 		    :rtype: boolean
 		
-		    Create a directory structure recursively. Can be used to create deep path structures like `/foo/bar/baz/shoe/horn`
+		    Create a directory structure recursively. Can be used to create 
+		    deep path structures like `/foo/bar/baz/shoe/horn`
 		
 		
 .. php:method:: delete( $path = NULL )
@@ -192,7 +194,8 @@ Folder API
 
 		    :rtype: string
 		
-		    Returns a correct set of slashes for given $path. (\\ for Windows paths and / for other paths.)
+		    Returns a correct set of slashes for given $path. (\\ for 
+		    Windows paths and / for other paths.)
 		
 
 .. php:method:: pwd( )
@@ -206,7 +209,8 @@ Folder API
 
 		    :rtype: mixed
 		
-		    Returns an array of the contents of the current directory. The returned array holds two arrays: One of directories and one of files.
+		    Returns an array of the contents of the current directory. The 
+		    returned array holds two arrays: One of directories and one of files.
 		
 
 .. php:method:: realpath( $path )
@@ -220,7 +224,8 @@ Folder API
 
 		    :rtype: string
 		
-		    Returns $path with added terminating slash (corrected for Windows or other OS).
+		    Returns $path with added terminating slash (corrected for 
+		    Windows or other OS).
 
 
 .. php:method:: tree( $path = NULL, $exceptions = true, $type = NULL )
@@ -239,95 +244,133 @@ File API
 
 		    :rtype: boolean
 		
+		    Append given data string to this File.
+		
 
 .. php:method:: close( )
 
 		    :rtype: boolean
+		
+		    Closes the current file if it is opened.
 		
 
 .. php:method:: copy( $dest, $overwrite = true )
 
 		    :rtype: boolean
 		
+		    Copy the File to $dest
+		
 		
 .. php:method:: create( )
 
 		    :rtype: boolean
+		
+		    Creates the File.
 		
 		
 .. php:method:: delete( )
 
 		    :rtype: boolean
 		
+		    Deletes the File.
+		
 		
 .. php:method:: executable( )
 
 		    :rtype: boolean
+		
+		    Returns true if the File is executable.
 		
 		
 .. php:method:: exists( )
 
 		    :rtype: boolean
 		
+		    Returns true if the File exists.
+		
 		
 .. php:method:: ext( )
 
 		    :rtype: string
+		
+		    Returns the File extension.
 		
 		
 .. php:method:: Folder( )
 
 		    :rtype: Folder
 		
+		    Returns the current folder.
+		
 		
 .. php:method:: group( )
 
 		    :rtype: integer
+		
+		    Returns the File's group.
 		
 		
 .. php:method:: info( )
 
 		    :rtype: string
 		
+		    Returns the File info.
+		
 		
 .. php:method:: lastAccess( )
 
 		    :rtype: integer
+		
+		    Returns last access time.
 		
 		
 .. php:method:: lastChange( )
 
 		    :rtype: integer
 		
+		    Returns last modified time.
+		
 		
 .. php:method:: md5( $maxsize = 5 )
 
 		    :rtype: string
+		
+		    Get md5 Checksum of file with previous check of Filesize
 		
 		
 .. php:method:: name( )
 
 		    :rtype: string
 		
+		    Returns the File name without extension.
+		
 		
 .. php:method:: offset( $offset = false, $seek = 0 )
 
 		    :rtype: mixed
+		
+		    Sets or gets the offset for the currently opened file.
 		
 		
 .. php:method:: open( $mode = 'r', $force = false )
 
 		    :rtype: boolean
 		
+		    Opens the current file with a given $mode
+		
 		
 .. php:method:: owner( )
 
 		    :rtype: integer
 		
+		    Returns the File's owner.
+		
 		
 .. php:method:: perms( )
 
 		    :rtype: string
+		
+		    Returns the "chmod" (permissions) of the File.
 		
 		
 .. php:staticmethod:: prepare( $data, $forceWindows = false )
