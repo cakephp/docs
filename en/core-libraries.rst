@@ -108,3 +108,4 @@ logging, internationalization and more.
     core-utility-libraries/security
     core-utility-libraries/sanitize
     core-utility-libraries/email
+    core-utility-libraries/file-folder
