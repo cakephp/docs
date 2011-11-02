@@ -237,58 +237,139 @@ File API
 
 .. php:method:: append( $data, $force = false )
 
+		    :rtype: boolean
+		
+
 .. php:method:: close( )
+
+		    :rtype: boolean
+		
 
 .. php:method:: copy( $dest, $overwrite = true )
 
+		    :rtype: boolean
+		
+		
 .. php:method:: create( )
 
+		    :rtype: boolean
+		
+		
 .. php:method:: delete( )
 
+		    :rtype: boolean
+		
+		
 .. php:method:: executable( )
 
+		    :rtype: boolean
+		
+		
 .. php:method:: exists( )
 
+		    :rtype: boolean
+		
+		
 .. php:method:: ext( )
 
+		    :rtype: string
+		
+		
 .. php:method:: Folder( )
 
+		    :rtype: Folder
+		
+		
 .. php:method:: group( )
 
+		    :rtype: integer
+		
+		
 .. php:method:: info( )
 
+		    :rtype: string
+		
+		
 .. php:method:: lastAccess( )
 
+		    :rtype: integer
+		
+		
 .. php:method:: lastChange( )
 
+		    :rtype: integer
+		
+		
 .. php:method:: md5( $maxsize = 5 )
 
+		    :rtype: string
+		
+		
 .. php:method:: name( )
 
+		    :rtype: string
+		
+		
 .. php:method:: offset( $offset = false, $seek = 0 )
 
+		    :rtype: mixed
+		
+		
 .. php:method:: open( $mode = 'r', $force = false )
 
+		    :rtype: boolean
+		
+		
 .. php:method:: owner( )
 
+		    :rtype: integer
+		
+		
 .. php:method:: perms( )
 
-.. php:method:: prepare( $data, $forceWindows = false )
+		    :rtype: string
+		
+		
+.. php:staticmethod:: prepare( $data, $forceWindows = false )
 
+		    :rtype: string
+		
+		
 .. php:method:: pwd( )
 
+		    :rtype: string
+		
+		
 .. php:method:: read( $bytes = false, $mode = 'rb', $force = false )
 
+		    :rtype: mixed
+		
+		
 .. php:method:: readable( )
 
+		    :rtype: boolean
+		
+		
 .. php:method:: safe( $name = NULL, $ext = NULL )
 
+		    :rtype: string
+		
+		
 .. php:method:: size( )
 
+		    :rtype: integer
+		
+		
 .. php:method:: writable( )
 
+		    :rtype: boolean
+		
+		
 .. php:method:: write( $data, $mode = 'w', $force = false )
 
+		    :rtype: boolean
+		
+		
 .. todo::
     
-    Finish out File API. Better explain how to use each method.
+    Finish out File API. Better explain how to use each method with both classes.
