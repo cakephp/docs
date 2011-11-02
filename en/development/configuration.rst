@@ -526,7 +526,10 @@ reader for you application::
     // in app/Lib/Config/XmlReader.php
     App::uses('Xml', 'Utility');
     class XmlReader implements ConfigReaderInterface {
-        function __construct($path = CONFIGS) {
+        function __construct($path = null) {
+            if (!$path) {
+                $path = APP . 'Config' . DS;
+            }
             $this->_path = $path;
         }
 
