@@ -18,7 +18,7 @@ CakePHP expects to find it.
 
 For instance if you'd like to use your own HttpSocket class, put it under::
 
-    app/libs/Network/Http/HttpSocket.php
+    app/Lib/Network/Http/HttpSocket.php
 
 Once you've done this App will load your override file instead of the file
 inside CakePHP.

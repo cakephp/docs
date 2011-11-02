@@ -52,7 +52,7 @@ use a class called ``AppError`` to handle your errors.  The following would
 need to be done::
 
     <?php
-    //in app/config/core.php
+    //in app/Config/core.php
     Configure::write('Error.handler', 'AppError::handleError');
 
     //in app/config/bootstrap.php

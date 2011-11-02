@@ -33,7 +33,7 @@ is done by calling ``CakeLog::config()``. Configuring our
 DataBaseLogger would look like::
     
     <?php
-    //for app/libs
+    //for app/Lib
     CakeLog::config('otherFile', array(
         'engine' => 'DatabaseLogger',
         'model' => 'LogEntry',

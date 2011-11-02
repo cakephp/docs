@@ -237,11 +237,11 @@ Session
     * 'database' - Uses CakePHP's database sessions.
     * 'cache' - Use the Cache class to save sessions.
 
-    To define a custom session handler, save it at ``app/libs/session/<name>.php``.
+    To define a custom session handler, save it at ``app/Model/Datasource/Session/<name>.php``.
     Make sure the class implements :php:interface:`CakeSessionHandlerInterface` 
     and set Session.handler to <name>
 
-    To use database sessions, run the ``app/config/schema/sessions.php`` schema using
+    To use database sessions, run the ``app/Config/Schema/sessions.php`` schema using
     the cake shell command: ``cake schema create Sessions``
 
 Security.level
@@ -429,7 +429,7 @@ using :php:meth:`Configure::config()`::
 
     <?php
     App::uses('PhpReader', 'Configure');
-    // Read config files from app/config
+    // Read config files from app/Config
     Configure::config('default', new PhpReader());
 
     // Read config files from another path.
@@ -523,10 +523,13 @@ If you really like XML files, you could create a simple Xml config
 reader for you application::
 
     <?php
-    // in app/Lib/Config/XmlReader.php
+    // in app/Lib/Configure/XmlReader.php
     App::uses('Xml', 'Utility');
     class XmlReader implements ConfigReaderInterface {
-        function __construct($path = CONFIGS) {
+        function __construct($path = null) {
+            if (!$path) {
+                $path = APP . 'Config' . DS;
+            }
             $this->_path = $path;
         }
 
@@ -536,10 +539,10 @@ reader for you application::
         }
     }
 
-In your ``app/config/bootstrap.php`` you could attach this reader and use it::
+In your ``app/Config/bootstrap.php`` you could attach this reader and use it::
 
     <?php
-    App::uses('XmlReader', 'Lib/Config');
+    App::uses('XmlReader', 'Configure');
     Configure::config('xml', new XmlReader());
     ...
 
