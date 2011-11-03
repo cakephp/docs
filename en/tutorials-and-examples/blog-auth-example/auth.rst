@@ -295,7 +295,7 @@ logged in user as a reference for the created post::
         }
     }
 
-The ``user()`` function provided by the component returns any column form the
+The ``user()`` function provided by the component returns any column from the
 currently logged in user. We used this method to add the data into the request
 info that is saved.
 
