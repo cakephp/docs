@@ -348,6 +348,8 @@ CakeRequest API
 
 .. php:attr:: here
 
+    Returns the current request uri.
+
 .. php:attr:: base
 
     The base path to the application, usually ``/`` unless your 
@@ -391,7 +393,7 @@ This will make all the controllers in your application use ``CustomResponse``
 instead of :php:class:`CakeResponse`.  You can also replace the response
 instance used by setting ``$this->response`` in your controllers. Overriding the 
 response object is handy during testing, as it allows you to stub 
-out the methods that interact with `header()``.  See the section on 
+out the methods that interact with ``header()``.  See the section on 
 :ref:`cakeresponse-testing` for more information.
 
 Dealing with content types
