@@ -346,7 +346,7 @@ and add the following content::
             }
             if (in_array($this->action, array('edit', 'delete'))) {
                 $postId = $this->request->params['pass'][0];
-                return $this->Post->isOwnedBy($postId, $user['id]);
+                return $this->Post->isOwnedBy($postId, $user['id']);
             }
         }
         return false;
