@@ -284,7 +284,7 @@ Mentor belongsTo Doctor mentors.doctor\_id
     model(table).
 
 We can define the belongsTo association in our Profile model at
-/app/models/profile.php using the string syntax as follows::
+/app/Model/Profile.php using the string syntax as follows::
 
     <?php
     
