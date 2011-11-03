@@ -162,7 +162,7 @@ on this record will also be deleted.
 ::
 
     <?php
-    // using app/models/ProductCategory.php
+    // using app/Model/ProductCategory.php
     // In the following example, do not let a product category be deleted if it still contains products.
     // A call of $this->Product->delete($id) from ProductsController.php has set $this->id .
     // Assuming 'ProductCategory hasMany Product', we can access $this->Product in the model.

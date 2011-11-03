@@ -62,7 +62,7 @@ opening form tag.
     for that record. For example, if we browse to
     http://site.com/recipes/edit/5, we would get the following::
 
-        // controllers/recipes_controller.php:
+        // Controller/RecipesController.php:
         <?php
         function edit($id = null) {
             if (empty($this->request->data)) {
