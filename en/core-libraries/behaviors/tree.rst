@@ -92,7 +92,7 @@ tree to see what it looks like. With a simple controller::
 and an even simpler model definition:::
 
     <?php
-    // app/models/category.php
+    // app/Model/Category.php
     class Category extends AppModel {
         public $name = 'Category';
         public $actsAs = array('Tree');

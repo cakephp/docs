@@ -207,7 +207,7 @@ Including files with App::import()
     ::
 
         <?php
-        // The same as require('controllers/users_controller.php');
+        // The same as require('Controller/UsersController.php');
         App::import('Controller', 'Users');
         
         // We need to load the class
