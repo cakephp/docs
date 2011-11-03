@@ -11,49 +11,62 @@ Security API
 .. php:class:: Security
 
 
-.. php:method:: cipher( $text, $key )
+.. php:staticmethod:: cipher( $text, $key )
 		    
 		    :rtype: string
 		
-		    Encrypts/Decrypts a text using the given key.
+		    Encrypts/Decrypts a text using the given key.::
+		
+		        <?php
+		        // Encrypt your secret password with my_key
+		        $secret = Security::cipher('my secret password', 'my_key');
+		        
+		        // Later decrypt your secret password
+		        $nosecret = Security::cipher($secret, 'my_key');
 		
 
-.. php:method:: generateAuthKey( )
+.. php:staticmethod:: generateAuthKey( )
 		    
 		    :rtype: string
 		
 		    Generate authorization hash.
 		
 
-.. php:method:: getInstance( )
+.. php:staticmethod:: getInstance( )
 		    
 		    :rtype: object
 		
 		    Singleton implementation to get object instance.
 		
 
-.. php:method:: hash( $string, $type = NULL, $salt = false )
+.. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 		    
 		    :rtype: string
 		
-		    Create a hash from string using given method. Fallback on next available method.
+		    Create a hash from string using given method. Fallback on next
+		    available method.
 		
 
-.. php:method:: inactiveMins( )
+.. php:staticmethod:: inactiveMins( )
 		    
 		    :rtype: integer
 		
-		    Get allowed minutes of inactivity based on security level.
+		    Get allowed minutes of inactivity based on security level.::
+		
+		        <?php
+		        $mins = Security::inactiveMins();
+		        // If your config Security.level is set to 'medium' then $mins will equal 100
 		
 
-.. php:method:: setHash( $hash )
+.. php:staticmethod:: setHash( $hash )
 		    
 		    :rtype: void
 		
-		    Sets the default hash method for the Security object. This affects all objects using Security::hash().
+		    Sets the default hash method for the Security object. This 
+		    affects all objects using Security::hash().
 		
 
-.. php:method:: validateAuthKey( $authKey )
+.. php:staticmethod:: validateAuthKey( $authKey )
 		    
 		    :rtype: boolean
 		
