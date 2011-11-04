@@ -42,6 +42,7 @@ allows you to define how the CookieComponent works.
 |                 |              | sub-directories such as /foo/bar/ of your domain. The|
 |                 |              | default value is the entire domain. You can set this |
 |                 |              | directly within the write() method.                  |
++-----------------+--------------+------------------------------------------------------+
 | boolean $secure | false        | Indicates that the cookie should only be transmitted |
 |                 |              | over a secure HTTPS connection. When set to true, the|
 |                 |              | cookie will only be set if a secure connection       |
