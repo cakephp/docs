@@ -553,23 +553,6 @@ Scaffold
    -  ``views/scaffolds/edit.ctp -> ``views/scaffolds/form.ctp``
    -  ``views/posts/scaffold.edit.ctp -> ``views/posts/scaffold.form.ctp``
 
-File
-----
-
--  This class has been deprecated, use ``SplFileObject`` instead.
-
-Folder
-------
-
--  ``Folder::pwd()`` has been removed. Use $folder->path instead.
--  ``Folder::read()`` has been removed. Use DirectoryIterator instead.
--  ``Folder::normalizePath()`` has been removed.
--  ``Folder::correctSlashFor()`` has been removed.
--  ``Folder::slashTerm()`` has been removed.
--  ``Folder::isSlashTerm()`` has been removed.
--  ``Folder::addPathElement()`` has been removed.
-- ``Folder::dirsize()`` renamed to ``Folder::dirSize()``.
-
 Xml
 ---
 
