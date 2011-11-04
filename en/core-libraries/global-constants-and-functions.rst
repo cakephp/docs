@@ -57,11 +57,9 @@ function to accomplish an oft-used task, it's here.
     Converts forward slashes to underscores and removes the first and
     last underscores in a string. Returns the converted string.
 
-.. php:function:: debug(mixed $var, boolean $showHtml = false)``
+.. php:function:: debug(mixed $var)
 
     If the application's DEBUG level is non-zero, $var is printed out.
-    If ``$showHTML`` is true, the data is rendered to be
-    browser-friendly.
 
     Also see :doc:`/development/debugging`
 
