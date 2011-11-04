@@ -72,7 +72,7 @@ opening form tag.
             }
         }
 
-        // views/recipes/edit.ctp:
+        // View/Recipes/edit.ctp:
         // Since $this->request->data['Recipe']['id'] = 5, we will get an edit form
         <?php echo $this->Form->create('Recipe'); ?>
 
