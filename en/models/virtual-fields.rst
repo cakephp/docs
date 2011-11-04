@@ -129,6 +129,52 @@ best to define the virtualFields in your model's constructor
 This will allow your virtualFields to work for any alias you give a
 model.
 
+Virtual fields in SQL queries
+=============================
+
+Using functions in direct SQL queries will prevent data from being returned in the same array as your model's data. For example this:
+
+	$this->Timelog->query("SELECT project_id, SUM(id) as TotalHours FROM timelogs AS Timelog GROUP BY project_id;");
+
+would return something like this:
+	
+    Array
+    (
+        [0] => Array
+            (
+                [Timelog] => Array
+                    (
+                        [project_id] => 1234
+                    )
+				[0] => Array
+					(
+						[TotalHours] => 25.5
+					)
+            )
+	)
+
+If we want to group TotalHours into our Timelog array we should specify a virtual field for our aggregate column. We can add this new virtual field on the fly rather than permanently declaring it in the model. We will provide a default value of ``0`` in case another query attempts to use this virtual field. If that were to occur, ``0`` would be returned in the TotalHours column.
+
+	$this->Timelog->virtualFields['TotalHours'] = 0;
+	
+In addition to adding the virtual field we also need to alias our column using the form of ``MyModel__MyField`` like this:
+
+	$this->Timelog->query("SELECT project_id, SUM(id) as Timelog__TotalHours FROM timelogs AS Timelog GROUP BY project_id;");
+
+Running the query again after specifying the virtual field should result in a cleaner grouping of values:
+
+    Array
+    (
+        [0] => Array
+            (
+                [Timelog] => Array
+                    (
+                        [project_id] => 1234
+						[TotalHours] => 25.5
+					)
+            )
+	)
+	
 Limitations of virtualFields
 ============================
 
