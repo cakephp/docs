@@ -199,12 +199,11 @@ which an associated model might be found.
 A common workaround for this implementation issue is to copy
 ``virtualFields`` from one model to another at runtime when you
 need to access them.
-
 ::
 
     $this->virtualFields['full_name'] = $this->Author->virtualFields['full_name'];
 
 or
-
 ::
+
     $this->virtualFields += $this->Author->virtualFields;
