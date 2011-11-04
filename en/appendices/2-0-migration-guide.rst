@@ -550,8 +550,8 @@ Scaffold
 -  Scaffold 'edit' views should be renamed to 'form'. This was done to make
    scaffold and bake templates consistent.
 
-   -  ``views/scaffolds/edit.ctp -> ``views/scaffolds/form.ctp``
-   -  ``views/posts/scaffold.edit.ctp -> ``views/posts/scaffold.form.ctp``
+   -  ``views/scaffolds/edit.ctp -> ``View/Scaffolds/form.ctp``
+   -  ``views/posts/scaffold.edit.ctp -> ``View/Posts/scaffold.form.ctp``
 
 Xml
 ---
