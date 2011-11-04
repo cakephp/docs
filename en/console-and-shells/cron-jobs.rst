@@ -30,7 +30,7 @@ needed paths to $PATH. Copy and save this to your vendors folder as
 
 You can call it like:::
 
-    $ ./vendors/cakeshell myshell myparam -cli /usr/bin -console /cakes/1.2.x.x/cake/console
+    $ ./vendors/cakeshell myshell myparam -cli /usr/bin -console /cakes/2.x/lib/Cake/Console
 
 The ``-cli`` parameter takes a path which points to the php cli
 executable and the ``-console`` parameter takes a path which points
@@ -39,10 +39,10 @@ to the CakePHP console.
 As a cronjob this would look like::
 
     # m h dom mon dow command
-    */5 *   *   *   * /full/path/to/cakeshell myshell myparam -cli /usr/bin -console /cakes/1.2.x.x/cake/console -app /full/path/to/app
+    */5 *   *   *   * /full/path/to/cakeshell myshell myparam -cli /usr/bin -console /cakes/2.x/lib/Cake/Console -app /full/path/to/app
 
 A simple trick to debug a crontab is to set it up to dump it's
 output to a logfile. You can do this like::
 
     # m h dom mon dow command
-    */5 *   *   *   * /full/path/to/cakeshell myshell myparam -cli /usr/bin -console /cakes/1.2.x.x/cake/console -app /full/path/to/app >> /path/to/log/file.log
+    */5 *   *   *   * /full/path/to/cakeshell myshell myparam -cli /usr/bin -console /cakes/2.x/lib/Cake/Console -app /full/path/to/app >> /path/to/log/file.log
