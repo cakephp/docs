@@ -343,7 +343,7 @@ App::build()
 * Will not merge app path with core paths anymore.
 
 App::objects()
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 * Now supports plugins, App::objects('Users.Model') will return the models in
   plugin Users.
