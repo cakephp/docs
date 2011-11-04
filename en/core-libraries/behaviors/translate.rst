@@ -20,7 +20,7 @@ layout.::
 
     ./cake i18n
 
-Select ``[I]`` which will run the i18n database intialization
+Select ``[I]`` which will run the i18n database initialization
 script. You will be asked if you want to drop any existing and if
 you want to create it. Answer with yes if you are sure there is no
 i18n table already, and answer with yes again to create the table.
@@ -33,8 +33,8 @@ following example.::
 
     <?php
     class Post extends AppModel {
-        var $name = 'Post';
-        var $actsAs = array(
+        public $name = 'Post';
+        public $actsAs = array(
             'Translate'
         );
     }
@@ -53,8 +53,8 @@ value with another array, like so::
 
     <?php
     class Post extends AppModel {
-        var $name = 'Post';
-        var $actsAs = array(
+        public $name = 'Post';
+        public $actsAs = array(
             'Translate' => array(
                 'fieldOne', 'fieldTwo', 'and_so_on'
             )
@@ -68,8 +68,8 @@ our current example the model should now look something like this::
 
     <?php
     class Post extends AppModel {
-        var $name = 'Post';
-        var $actsAs = array(
+        public $name = 'Post';
+        public $actsAs = array(
             'Translate' => array(
                 'name'
             )
@@ -107,8 +107,8 @@ setup as shown below. The naming is completely up to you.::
 
     <?php
     class Post extends AppModel {
-        var $name = 'Post';
-        var $actsAs = array(
+        public $name = 'Post';
+        public $actsAs = array(
             'Translate' => array(
                 'name' => 'nameTranslation'
             )
@@ -231,7 +231,7 @@ your controller or you can define it directly in the model.
 
     <?php
     class PostsController extends AppController {
-        var $name = 'Posts';
+        public $name = 'Posts';
 
         function add() {
             if ($this->data) {
@@ -249,15 +249,15 @@ your controller or you can define it directly in the model.
 
     <?php
     class Post extends AppModel {
-        var $name = 'Post';
-        var $actsAs = array(
+        public $name = 'Post';
+        public $actsAs = array(
             'Translate' => array(
                 'name'
             )
         );
 
         // Option 1) just define the property directly
-        var $locale = 'en_us';
+        public $locale = 'en_us';
 
         // Option 2) create a simple method
         function setLanguage($locale) {
@@ -282,15 +282,15 @@ you need to setup your model like this::
 
     <?php
     class Post extends AppModel {
-        var $name = 'Post';
-        var $actsAs = array(
+        public $name = 'Post';
+        public $actsAs = array(
             'Translate' => array(
                 'name'
             )
         );
         
         // Use a different model (and table)
-        var $translateModel = 'PostI18n';
+        public $translateModel = 'PostI18n';
     }
     ?>
 
@@ -312,7 +312,7 @@ Make sure that you change the ``$displayField`` to ``'field'``.::
 
     <?php
     class PostI18n extends AppModel { 
-        var $displayField = 'field'; // important
+        public $displayField = 'field'; // important
     }
     // filename: post_i18n.php
     ?>
@@ -330,18 +330,18 @@ $translateTable in your model, like so::
 
     <?php
     class Post extends AppModel {
-        var $name = 'Post';
-        var $actsAs = array(
+        public $name = 'Post';
+        public $actsAs = array(
             'Translate' => array(
                 'name'
             )
         );
         
         // Use a different model
-        var $translateModel = 'PostI18n';
+        public $translateModel = 'PostI18n';
         
         // Use a different table for translateModel
-        var $translateTable = 'post_translations';
+        public $translateTable = 'post_translations';
     }
     ?>
 

@@ -138,7 +138,7 @@ successful::
         }
 
         if (!($dnsInfo) || !($dnsInfo['phpType'])) {
-            return $this=>addError();
+            return $this->addError();
         }
         return true;
     }
@@ -196,7 +196,7 @@ processed if they are the first thing in a DocBlock line, for example::
     }
 
 Comment blocks, with the exception of the first block in a file, should
-always be preceeded by a newline.
+always be preceded by a newline.
 
 Including files
 ===============

@@ -25,15 +25,15 @@ Creating and configuring log streams
 Log stream handlers can be part of your application, or part of
 plugins. If for example you had a database logger called
 ``DatabaseLogger``. As part of your application it would be placed
-in ``app/Lib/Log/DatabaseLogger.php``. As part of a plugin it
+in ``app/Lib/Log/Engine/DatabaseLogger.php``. As part of a plugin it
 would be placed in
-``app/Plugin/LoggingPack/Lib/Log/DatabaseLogger.php``. When
+``app/Plugin/LoggingPack/Lib/Log/Engine/DatabaseLogger.php``. When
 configured ``CakeLog`` will attempt to load Configuring log streams
 is done by calling ``CakeLog::config()``. Configuring our
 DataBaseLogger would look like::
     
     <?php
-    //for app/libs
+    //for app/Lib
     CakeLog::config('otherFile', array(
         'engine' => 'DatabaseLogger',
         'model' => 'LogEntry',
@@ -74,7 +74,7 @@ your own types by using them when you call ``CakeLog::write``.
 .. note::
 
     Always configure loggers in ``app/Config/bootstrap.php``
-    Trying to use Applicationg or plugin loggers in core.php
+    Trying to use Application or plugin loggers in core.php
     will cause issues, as application paths are not yet configured.
 
 
@@ -194,7 +194,7 @@ CakeLog API
 
 .. php:staticmethod:: drop($name)
 
-    :param string $name: Name of the logger you wish to no longer recieve
+    :param string $name: Name of the logger you wish to no longer receive
         messages.
 
 .. php:staticmethod:: write($log, $message)

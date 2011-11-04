@@ -287,7 +287,7 @@ logged in user as a reference for the created post::
     // app/Controller/PostsController.php
     public function add() {
         if ($this->request->is('post')) {
-            $this->request->data['Post']['user_id] = $this->Auth->user('id'); //Added this line
+            $this->request->data['Post']['user_id'] = $this->Auth->user('id'); //Added this line
             if ($this->Post->save($this->request->data)) {
                 $this->Session->setFlash('Your post has been saved.');
                 $this->redirect(array('action' => 'index'));
@@ -295,7 +295,7 @@ logged in user as a reference for the created post::
         }
     }
 
-The ``user()`` function provided by the component returns any column form the
+The ``user()`` function provided by the component returns any column from the
 currently logged in user. We used this method to add the data into the request
 info that is saved.
 
@@ -346,7 +346,7 @@ and add the following content::
             }
             if (in_array($this->action, array('edit', 'delete'))) {
                 $postId = $this->request->params['pass'][0];
-                return $this->Post->isOwnedBy($postId, $user['id]);
+                return $this->Post->isOwnedBy($postId, $user['id']);
             }
         }
         return false;

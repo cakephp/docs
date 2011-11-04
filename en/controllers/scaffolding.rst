@@ -40,7 +40,7 @@ $scaffold variable::
     <?php
     
     class CategoriesController extends AppController {
-        var $scaffold;
+        public $scaffold;
     }
     
 Assuming you’ve created even the most basic Category model class
@@ -66,10 +66,10 @@ select input for Group in the New User form. After you add the
 following code, the view displays a select input populated with IDs
 or names from the Group table in the New User form::
 
-    // In group.php
-    var $hasMany = 'User';
-    // In user.php
-    var $belongsTo = 'Group';
+    // In Group.php
+    public $hasMany = 'User';
+    // In User.php
+    public $belongsTo = 'Group';
 
 If you’d rather see something besides an ID (like the user’s first
 name), you can set the $displayField variable in the model. Let’s
@@ -81,8 +81,8 @@ in many instances::
     <?php
 
     class User extends AppModel {
-        var $name = 'User';
-        var $displayField = 'first_name';
+        public $name = 'User';
+        public $displayField = 'first_name';
     }
 
 
@@ -96,7 +96,7 @@ use scaffolding to generate an admin interface.
 Once you have enabled admin routing assign your admin prefix to the
 scaffolding variable::
 
-    var $scaffold = 'admin';
+    public $scaffold = 'admin';
 
 You will now be able to access admin scaffolded actions::
 
@@ -127,20 +127,18 @@ scaffolded views, you can create templates. We still don't
 recommend using this technique for production applications, but
 such a customization may be useful during prototyping iterations.
 
-Customization is done by creating view templates::
+Custom scaffolding views for a specific controller
+(PostsController in this example) should be placed like so::
 
-    Custom scaffolding views for a specific controller 
-    (PostsController in this example) should be placed like so:
-    
-    /app/View/posts/scaffold.index.ctp
-    /app/View/posts/scaffold.show.ctp
-    /app/View/posts/scaffold.edit.ctp
-    /app/View/posts/scaffold.new.ctp
-    
-    Custom scaffolding views for all controllers should be placed like so:
-    
-    /app/View/scaffolds/index.ctp
-    /app/View/scaffolds/show.ctp
-    /app/View/scaffolds/edit.ctp
-    /app/View/scaffolds/new.ctp
-    /app/View/scaffolds/add.ctp
+    /app/View/Posts/scaffold.index.ctp
+    /app/View/Posts/scaffold.show.ctp
+    /app/View/Posts/scaffold.edit.ctp
+    /app/View/Posts/scaffold.new.ctp
+
+Custom scaffolding views for all controllers should be placed like so::
+
+    /app/View/Scaffolds/index.ctp
+    /app/View/Scaffolds/show.ctp
+    /app/View/Scaffolds/edit.ctp
+    /app/View/Scaffolds/new.ctp
+    /app/View/Scaffolds/add.ctp

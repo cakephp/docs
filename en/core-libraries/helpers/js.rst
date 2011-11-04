@@ -80,7 +80,7 @@ To override the "$" shortcut, use the jQueryObject variable::
 
     <?php
     $this->Js->JqueryEngine->jQueryObject = '$j';
-    print $this->Html->scriptBlock('var $j = jQuery.noConflict();', 
+    print $this->Html->scriptBlock('public $j = jQuery.noConflict();', 
         array('inline' => false)); //Tell jQuery to go into noconflict mode
 
 Using the JsHelper inside customHelpers
@@ -452,7 +452,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     .. note::
 
         Droppables in Mootools function differently from other libraries.
-        Droppables are implemented as an extension of Drag. So in addtion
+        Droppables are implemented as an extension of Drag. So in addition
         to making a get() selection for the droppable element. You must
         also provide a selector rule to the draggable element. Furthermore,
         Mootools droppables inherit all options from Drag.
@@ -756,8 +756,8 @@ include ``RequestHandlerComponent`` in your components. Add the
 following to your controller::
 
     <?php
-    var $components = array('RequestHandler');
-    var $helpers = array('Js');
+    public $components = array('RequestHandler');
+    public $helpers = array('Js');
 
 Next link in the javascript library you want to use. For this
 example we'll be using jQuery::

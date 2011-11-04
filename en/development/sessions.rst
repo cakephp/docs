@@ -12,7 +12,7 @@ Session Configuration
 =====================
 
 Session configuration is stored in ``Configure``, and the session classes will
-retrive it from there as needed. Session configuration is stored under the top
+retrieve it from there as needed. Session configuration is stored under the top
 level ``Session`` key, and a number of options are available:
 
 * ``Session.cookie`` - Change the name of the session cookie.
@@ -223,7 +223,7 @@ something like::
             if ($result) {
                 return $result;
             }
-            reutrn parent::read($id);
+            return parent::read($id);
         }
 
         // write data into the session.

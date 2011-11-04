@@ -61,10 +61,8 @@ PHP 5.3が名前空間のサポートをしていることから、このPHPバ�
 
 小文字のフォルダ:
 
-* config
 * webroot
 * tmp
-* vendors
 
 多言語化・地域化
 ================
@@ -495,7 +493,7 @@ Dispatcher
 - ``Dispatcher::dispatch()`` は二つの引数を受け取るようになりました。
   リクエストとレスポンスのオブジェクトです。
   これらは ``CakeRequest`` と ``CakeResponse`` 、またはそのサブクラスのインスタンスである必要があります。
-- ``Dispather::parseParams()`` は ``CakeRequest`` オブジェクトのみ（訳注：おそらくサブクラスも）受け入れるようになりました。
+- ``Dispatcher::parseParams()`` は ``CakeRequest`` オブジェクトのみ（訳注：おそらくサブクラスも）受け入れるようになりました。
 - ``Dispatcher::baseUrl()`` は削除されました。
 - ``Dispatcher::getUrl()`` は削除されました。
 - ``Dispatcher::uri()`` は削除されました。
@@ -628,12 +626,14 @@ HelperCollectionについて、より詳しくは :doc:`/core-libraries/collecti
 -  ``Helper::$data`` は非推奨になりました。代わりにRequestオブジェクトのdataプロパティを使用してください。
 -  ``Helper::$params`` は非推奨になりました。代わりに ``$this->request`` を使用してください。
 
-AjaxHelperとJavascriptHelperの削除
-----------------------------------
+XmlHelper、AjaxHelper、JavascriptHelperの削除
+---------------------------------------------
 
 AjaxHelperとJavascriptHelperは1.3バージョンから非推奨となったため削除されました。
+XmlHelperは、 :php:class:`Xml` の改善により、時代遅れで冗長になったことから削除されました。
+以前のXmlHelperの使用方法を書きなおすためには ``Xml`` クラスを使う必要があります。
 
-これらはJsHelperとHtmlHelperに置き換えられました。
+AjaxHelperとJavascriptHelperは、JsHelperとHtmlHelperに置き換えられました。
 
 JsHelper
 --------
@@ -853,11 +853,11 @@ Cacheヘルパーの分離
 Cacheヘルパーの ``<cake:nocache>`` タグの変更
 ---------------------------------------------
 
-前バージョンでは、CacheHelperは特別な ``<cake:noncache>`` タグをフルページキャッシュの一部とすべできはない出力の目印として使っていました。
+前バージョンでは、CacheHelperは特別な ``<cake:nocache>`` タグをフルページキャッシュの一部とすべできはない出力の目印として使っていました。
 このタグはXMLスキーマの要素ではなく、HTMLまたはXMLドキュメントで有効となり得ませんでした。
 2.0では、このタグはHTML・XMLのコメントに置き換えられました::
 
-    <cake:noncache> が <!--nocache-->
+    <cake:nocache> が <!--nocache-->
     </cake:nocache> が <!--/nocache-->
 
 また、更新時に必ずビューキャッシュのファイルを削除するように、フルページビューキャッシュのための内部コード変更されました。
@@ -920,7 +920,7 @@ PHPUnitによって全てのコマンドラインオプションがサポート�
 
     <?php
     class Post {
-        var $nonexistantProperty = array();
+        public $nonexistantProperty = array();
     }
 
 これらのどちらかのアプローチでnoticeエラーを回避できることでしょう。
@@ -1034,10 +1034,24 @@ AclBehaviorとTreeBehavior
 これはアプリケーション・コアのコンポーネントのみを見るようになりました。
 プラグインからオブジェクトを使いたい場合は、プラグインの名前を指定しなければなりません::
 
-    var $components = array('Session', 'Comment.Comments');
+    public $components = array('Session', 'Comment.Comments');
 
 これは、マジックの失敗によって起こされていた問題をデバッグすることの煩雑さを減らすために為されました。
 また、オブジェクトの参照が単一の信頼できる方法になったことで、アプリケーションでの矛盾をなくします。
+
+プラグインのAppコントローラとモデル
+-----------------------------------
+
+プラグインのAppControllerとAppModelはプラグインフォルダに直接配置されないようになりました。
+これらは以下のようにプラグインのControllerとModelフォルダに配置されます::
+
+    /app
+        /Plugin
+            /Comment
+                /Controller
+                    CommentAppController.php
+                /Model
+                    CommentAppModel.php
 
 コンソール
 ==========
@@ -1091,7 +1105,7 @@ AclBehaviorとTreeBehavior
 
 .. tip::
 
-    1.3のコードを2.0へ移行する手助けとなる、2.0で導入されたupgradeシェルを必ずチェックしてください。
+    1.3のコードを2.0へ移行する手助けとなる、2.0で導入された :ref:`upgrade-shell` を必ずチェックしてください。
 
 
 デバッグ
@@ -1121,4 +1135,3 @@ ConnectionManager
         'password' => 'root',
         'database' => 'cake',
     );
-

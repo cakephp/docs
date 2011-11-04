@@ -36,8 +36,8 @@ used.
     Check to see if a key is in the Session. Returns a boolean on the
     key's existence.
 
-Displaying notifcations or flash messages
-=========================================
+Displaying notifications or flash messages
+==========================================
 
 As explained in :ref:`creating-notification-messages` you can
 create one-time notifications for feedback. After creating messages 
@@ -64,7 +64,7 @@ The above will output a simple message, with the following html::
         // in a controller
         $this->Session->setFlash('The user could not be deleted.');
 
-    When outputing this message, you can choose the element used to display
+    When outputting this message, you can choose the element used to display
     this message::
 
         <?php 

@@ -50,9 +50,9 @@ multidimensional array used to define association specifics.
     <?php
     
     class User extends AppModel {
-        var $name = 'User';
-        var $hasOne = 'Profile';
-        var $hasMany = array(
+        public $name = 'User';
+        public $hasOne = 'Profile';
+        public $hasMany = array(
             'Recipe' => array(
                 'className'  => 'Recipe',
                 'conditions' => array('Recipe.approved' => '1'),
@@ -73,21 +73,21 @@ appropriate to have
 
     <?php
     class User extends AppModel {
-        var $name = 'User';
-        var $hasMany = array(
+        public $name = 'User';
+        public $hasMany = array(
             'MyRecipe' => array('className' => 'Recipe'),
         );
-        var $hasAndBelongsToMany => array('Member' => array('className' => 'User'));
+        public $hasAndBelongsToMany => array('Member' => array('className' => 'User'));
     }
     
     class Group extends AppModel {
-        var $name = 'Group';
-        var $hasMany = array(
+        public $name = 'Group';
+        public $hasMany = array(
             'MyRecipe' => array(
                 'className'  => 'Recipe',
             )
         );
-        var $hasAndBelongsToMany => array('MemberOf' => array('className' => 'Group'));
+        public $hasAndBelongsToMany => array('MemberOf' => array('className' => 'Group'));
     }
     ?>
 
@@ -96,21 +96,21 @@ but the following will not work well in all circumstances:
 
     <?php
     class User extends AppModel {
-        var $name = 'User';
-        var $hasMany = array(
+        public $name = 'User';
+        public $hasMany = array(
             'MyRecipe' => 'Recipe',
         );
-        var $hasAndBelongsToMany => array('Member' => 'User');
+        public $hasAndBelongsToMany => array('Member' => 'User');
     }
     
     class Group extends AppModel {
-        var $name = 'Group';
-        var $hasMany = array(
+        public $name = 'Group';
+        public $hasMany = array(
             'MyRecipe' => array(
                 'className'  => 'Recipe',
             )
         );
-        var $hasAndBelongsToMany => array('Member' => 'Group');
+        public $hasAndBelongsToMany => array('Member' => 'Group');
     }
     ?>
 
@@ -177,8 +177,8 @@ property to the model class. Remember to have a Profile model in
     <?php
     
     class User extends AppModel {
-        var $name = 'User';                
-        var $hasOne = 'Profile';   
+        public $name = 'User';                
+        public $hasOne = 'Profile';   
     }
     ?>
 
@@ -196,8 +196,8 @@ to include only certain records.
     <?php
     
     class User extends AppModel {
-        var $name = 'User';          
-        var $hasOne = array(
+        public $name = 'User';          
+        public $hasOne = array(
             'Profile' => array(
                 'className'    => 'Profile',
                 'conditions'   => array('Profile.published' => '1'),
@@ -284,13 +284,13 @@ Mentor belongsTo Doctor mentors.doctor\_id
     model(table).
 
 We can define the belongsTo association in our Profile model at
-/app/models/profile.php using the string syntax as follows::
+/app/Model/Profile.php using the string syntax as follows::
 
     <?php
     
     class Profile extends AppModel {
-        var $name = 'Profile';                
-        var $belongsTo = 'User';   
+        public $name = 'Profile';                
+        public $belongsTo = 'User';   
     }
     ?>
 
@@ -300,8 +300,8 @@ syntax::
     <?php
     
     class Profile extends AppModel {
-        var $name = 'Profile';                
-        var $belongsTo = array(
+        public $name = 'Profile';                
+        public $belongsTo = array(
             'User' => array(
                 'className'    => 'User',
                 'foreignKey'    => 'user_id'
@@ -395,8 +395,8 @@ We can define the hasMany association in our User model at
     <?php
     
     class User extends AppModel {
-        var $name = 'User';                
-        var $hasMany = 'Comment';   
+        public $name = 'User';                
+        public $hasMany = 'Comment';   
     }
     ?>
 
@@ -406,8 +406,8 @@ syntax::
     <?php
     
     class User extends AppModel {
-        var $name = 'User';                
-        var $hasMany = array(
+        public $name = 'User';                
+        public $hasMany = array(
             'Comment' => array(
                 'className'     => 'Comment',
                 'foreignKey'    => 'user_id',
@@ -536,7 +536,7 @@ and set the value to ``true``::
 
     <?php
     class Image extends AppModel {
-        var $belongsTo = array(
+        public $belongsTo = array(
             'ImageAlbum' => array('counterCache' => true)
         );
     }
@@ -553,7 +553,7 @@ Using our Image model example, we can specify it like so::
 
     <?php
     class Image extends AppModel {
-        var $belongsTo = array(
+        public $belongsTo = array(
             'ImageAlbum' => array(
                 'counterCache' => true,
                 'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1
@@ -626,8 +626,8 @@ array syntax this time::
     <?php
     
     class Recipe extends AppModel {
-        var $name = 'Recipe';   
-        var $hasAndBelongsToMany = array(
+        public $name = 'Recipe';   
+        public $hasAndBelongsToMany = array(
             'Ingredient' =>
                 array(
                     'className'              => 'Ingredient',
@@ -832,9 +832,9 @@ work. We'll start with two models::
     <?php
     
     class Leader extends AppModel {
-        var $name = 'Leader';
+        public $name = 'Leader';
      
-        var $hasMany = array(
+        public $hasMany = array(
             'Follower' => array(
                 'className' => 'Follower',
                 'order'     => 'Follower.rank'
@@ -847,7 +847,7 @@ work. We'll start with two models::
     <?php
     
     class Follower extends AppModel {
-        var $name = 'Follower';
+        public $name = 'Follower';
     }
     
     ?>
@@ -901,7 +901,7 @@ Here’s the basic usage pattern for unbindModel()::
 Now that we've successfully removed an association on the fly,
 let's add one. Our as-of-yet unprincipled Leader needs some
 associated Principles. The model file for our Principle model is
-bare, except for the var $name statement. Let's associate some
+bare, except for the public $name statement. Let's associate some
 Principles to our Leader on the fly (but remember–only for just the
 following find operation). This function appears in the
 LeadersController::
@@ -961,8 +961,8 @@ recipient\_id. Now your Message model can look something like::
 
     <?php
     class Message extends AppModel {
-        var $name = 'Message';
-        var $belongsTo = array(
+        public $name = 'Message';
+        public $belongsTo = array(
             'Sender' => array(
                 'className' => 'User',
                 'foreignKey' => 'user_id'
@@ -980,8 +980,8 @@ User model would look like::
 
     <?php
     class User extends AppModel {
-        var $name = 'User';
-        var $hasMany = array(
+        public $name = 'User';
+        public $hasMany = array(
             'MessageSent' => array(
                 'className' => 'Message',
                 'foreignKey' => 'user_id'
@@ -998,16 +998,16 @@ It is also possible to create self associations as shown below::
 
     <?php
     class Post extends AppModel {
-        var $name = 'Post';
+        public $name = 'Post';
         
-        var $belongsTo = array(
+        public $belongsTo = array(
             'Parent' => array(
                 'className' => 'Post',
                 'foreignKey' => 'parent_id'
             )
         );
     
-        var $hasMany = array(
+        public $hasMany = array(
             'Children' => array(
                 'className' => 'Post',
                 'foreignKey' => 'parent_id'

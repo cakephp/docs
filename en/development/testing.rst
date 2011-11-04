@@ -39,7 +39,7 @@ debug is equal to 0.  Before running any tests you should be sure to add a
 fixture tables and data::
 
     <?php
-    var $test = array(
+    public $test = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,
         'host' => 'dbhost',
@@ -51,7 +51,7 @@ fixture tables and data::
 .. note::
 
     Its a good idea to make the test database and your actual database
-    different databases.  This will prevent any embarrasing mistakes later.
+    different databases.  This will prevent any embarrassing mistakes later.
 
 Checking the test setup
 =======================
@@ -133,7 +133,7 @@ we'll start with the following::
 
 We'll flesh out this skeleton in a minute.  We've added two methods to start
 with.  First is ``setUp()``.  This method is called before every *test* method
-in a test case class.  Setup methods should initialze the objects needed for the
+in a test case class.  Setup methods should initialize the objects needed for the
 test, and do any configuration needed.  In our setup method we'll add the
 following::
 
@@ -141,7 +141,7 @@ following::
     public function setUp() {
         parent::setUp();
         $View = new View();
-        $this->Progress = new ProgresHelper($View);
+        $this->Progress = new ProgressHelper($View);
     }
 
 Calling the parent method is important in test cases, as CakeTestCase::setUp()
@@ -152,7 +152,7 @@ Next, we'll fill out the test method.  We'll use some assertions to ensure that
 our code creates the output we expect::
 
     <?php
-    public funtion testBar() {
+    public function testBar() {
         $result = $this->Progress->bar(90);
         $this->assertContains('width: 90%', $result);
         $this->assertContains('progress-bar', $result);
@@ -537,7 +537,7 @@ Let's now create a file named ``ArticleTest.php`` in your
 
 In our test cases' variable ``$fixtures`` we define the set of fixtures that
 we'll use.  You should remember to include all the fixtures that will have
-queries run aganist them.
+queries run against them.
 
 Creating a test method
 ----------------------
@@ -573,7 +573,7 @@ this::
 You can see we have added a method called ``testPublished()``. We start by
 creating an instance of our ``Article`` model, and then run our ``published()``
 method. In ``$expected`` we set what we expect should be the proper result (that
-we know since we have defined which records are initally populated to the
+we know since we have defined which records are initially populated to the
 article table.) We test that the result equals our expectation by using the
 ``assertEquals`` method. See the :ref:`running-tests` section for more
 information on how to run your test case.
@@ -1002,7 +1002,7 @@ reference them using ``plugin.pluginName.fixtureName`` syntax in the
 Integration with Jenkins
 ========================
 
-`Jenkins <http://jenkins-ci.org>`_ is a continous integration server, that can
+`Jenkins <http://jenkins-ci.org>`_ is a continuous integration server, that can
 help you automate the running of your test cases.  This helps ensure that all
 your tests stay passing and your application is always ready.
 
@@ -1028,7 +1028,7 @@ a *shell script step* to the build that contains the following::
     cat > app/Config/database.php <<'DATABASE_PHP'
     <?php
     class DATABASE_CONFIG {
-      var $test = array(
+      public $test = array(
         'datasource' => 'Database/Mysql',
         'host' => 'localhost',
         'database' => 'jenkins_test',

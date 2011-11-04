@@ -50,7 +50,7 @@ callback.
 The ``$primary`` parameter indicates whether or not the current
 model was the model that the query originated on or whether or not
 this model was queried as an association. If a model is queried as
-an assocation the format of ``$results`` can differ; instead of the
+an association the format of ``$results`` can differ; instead of the
 result you would normally get from a find operation, you may get
 this::
 
@@ -66,7 +66,7 @@ this::
     find is used.
 
 Below is an example of how afterfind can be used for date
-formating::
+formatting::
 
     <?php
     function afterFind($results) {
@@ -162,7 +162,7 @@ on this record will also be deleted.
 ::
 
     <?php
-    // using app/models/ProductCategory.php
+    // using app/Model/ProductCategory.php
     // In the following example, do not let a product category be deleted if it still contains products.
     // A call of $this->Product->delete($id) from ProductsController.php has set $this->id .
     // Assuming 'ProductCategory hasMany Product', we can access $this->Product in the model.

@@ -1,7 +1,7 @@
 2.0 Migration Guide
 ###################
 
-This page summarises the changes from CakePHP 1.3 that will assist in a project
+This page summarizes the changes from CakePHP 1.3 that will assist in a project
 migration to 2.0, as well as for a developer reference to get up to date with
 the changes made to the core since the CakePHP 1.3 branch. Be sure to read the
 other pages in this guide for all the new features and API changes.
@@ -39,7 +39,7 @@ compatibility in the way the classes are loaded right now, and we definitely did
 not want to become a framework of huge class prefixes, having classnames like
 ``My_Huge_Class_Name_In_Package``. We decided adopting a strategy of keeping simple
 class names while offering a very intuitive way of declaring class locations and
-clear migration path for future PHP 5.3 version of CakePHP. At first let's
+clear migration path for future PHP 5.3 version of CakePHP. First let's
 highlight the main changes in file naming standard we adopted:
 
 File names
@@ -53,14 +53,14 @@ underscoring your file names. Here are some examples:
 * ``form.php`` (a Helper) becomes ``FormHelper.php``
 * ``session.php`` (a Component) becomes ``SessionComponent.php``
 
-This makes a lot more clear and consistent the file naming across applications,
+This makes file naming a lot more clear and consistent across applications,
 and also avoids a few edge cases where the file loader would get confused in the
 past and load files it shouldn't.
 
 Folder Names
 ------------
 
-Folders containing classes should be also CamelCased, specially when containing
+Folders containing classes should be also CamelCased, especially when containing
 classes. Think of namespaces, each folder represents a level in the namespacing
 hierarchy, folders that do not contain classes, or do not constitute a
 namespace on themselves, should be lowercased.
@@ -377,7 +377,7 @@ App::import()
   possible.
 * Importing a non-existent file, supplying a wrong type or package name, or null
   values for $name and $file parameters will result in a false return value.
-* App::import('Core', 'CoreClass') is no loger supported, use App::uses()
+* App::import('Core', 'CoreClass') is no longer supported, use App::uses()
   instead and let the class autoloading do the rest.
 * Loading Vendor files does not look recursively in the vendors folder, it will
   also no longer convert the file to underscored as it did in the past.
@@ -527,7 +527,7 @@ Dispatcher
 - ``Dispatcher::dispatch()`` now takes two parameters.  The request and
   response objects.  These should be instances of ``CakeRequest`` &
   ``CakeResponse`` or a subclass thereof.
-- ``Dispather::parseParams()`` now only accepts a ``CakeRequest`` object.
+- ``Dispatcher::parseParams()`` now only accepts a ``CakeRequest`` object.
 - ``Dispatcher::baseUrl()`` has been removed.
 - ``Dispatcher::getUrl()`` has been removed.
 - ``Dispatcher::uri()`` has been removed.
@@ -625,7 +625,7 @@ Helpers
 Constructor changed
 -------------------
 
-In order to accomodate View being removed from the ClassRegistry, the signature
+In order to accommodate View being removed from the ClassRegistry, the signature
 of Helper::__construct() was changed.  You should update any subclasses to use
 the following::
 
@@ -672,13 +672,15 @@ properties as they will be removed in a future release.
 -  ``Helper::$data`` is deprecated, use the request object's data property.
 -  ``Helper::$params`` is deprecated, use the ``$this->request`` instead.
 
-AjaxHelper and JavascriptHelper removed
----------------------------------------
+XmlHelper, AjaxHelper and JavascriptHelper removed
+--------------------------------------------------
 
 The AjaxHelper and JavascriptHelper have been removed as they were deprecated in
-version 1.3.
+version 1.3. The XmlHelper was removed, as it was made obsolete and redundant
+with the improvements to :php:class:`Xml`.  The ``Xml`` class should be used to
+replace previous usage of XmlHelper.
 
-They are replaced with the JsHelper and HtmlHelper.
+The AjaxHelper, and JavascriptHelper are replaced with the JsHelper and HtmlHelper.
 
 JsHelper
 --------
@@ -926,12 +928,12 @@ just uses callbacks like other helpers to generate full page caches.
 CacheHelper ``<cake:nocache>`` tags changed
 -------------------------------------------
 
-In previous versions, CacheHelper used a special ``<cake:noncache>`` tag as
+In previous versions, CacheHelper used a special ``<cake:nocache>`` tag as
 markers for output that should not be part of the full page cache. These tags
 were not part of any XML schema, and were not possible to validate in HTML or
 XML documents. For 2.0, these tags have been replaced with HTML/XML comments::
 
-    <cake:noncache> becomes <!--nocache-->
+    <cake:nocache> becomes <!--nocache-->
     </cake:nocache> becomes <!--/nocache-->
 
 The internal code for full page view caches has also changed, so be sure to
@@ -1000,7 +1002,7 @@ Or just declare the property in the model class::
 
     <?php
     class Post {
-        var $nonexistantProperty = array();
+        public $nonexistantProperty = array();
     }
 
 Either of these approaches will solve the notice errors.
@@ -1126,14 +1128,14 @@ Would look in the controller's plugin before checking app/core components. It
 will now only look in the app/core components. If you wish to use objects from a
 plugin you must put the plugin name::
 
-    var $components = array('Session', 'Comment.Comments');
+    public $components = array('Session', 'Comment.Comments');
 
 This was done to reduce hard to debug issues caused by magic misfiring. It also
 improves consistency in an application, as objects have one authoritative way to
 reference them.
 
 Plugin App Controller and Plugin App Model
-----------------------------------------
+------------------------------------------
 
 The plugin AppController and AppModel are no longer located directly in the 
 plugin folder. They are now placed into the plugin's Controller and Model 
@@ -1205,7 +1207,7 @@ features for more information on new APIs that are available.
 
 .. tip::
 
-    Be sure to checkout the upgrade shell included in the 2.0 core to help you
+    Be sure to checkout the :ref:`upgrade-shell` included in the 2.0 core to help you
     migrate your 1.3 code to 2.0.
 
 Debugging
@@ -1237,4 +1239,3 @@ need to pass the package they are located in. Example::
         'password' => 'root',
         'database' => 'cake',
     );
-

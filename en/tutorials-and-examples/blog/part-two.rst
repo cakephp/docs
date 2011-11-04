@@ -274,6 +274,7 @@ PostsController:
 
     <?php
     class PostsController extends AppController {
+        public $helpers = array('Html', 'Form');
         public $name = 'Posts';
         public $components = array('Session');
     
@@ -320,7 +321,7 @@ redirection. In the layout we have
 :php:func:`SessionHelper::flash` which displays the
 message and clears the corresponding session variable. The
 controller's :php:meth:`Controller::redirect <redirect>` function
-redirects to another URL. The param ``array('action'=>'index)``
+redirects to another URL. The param ``array('action'=>'index')``
 translates to URL /posts i.e the index action of posts controller.
 You can refer to :php:func:`Router::url()` function on the api to see 
 the formats in which you can specify a URL for various cake functions.
@@ -484,16 +485,13 @@ posts::
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
                 <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
-                    </td>
-                    <td>
-                <?php echo $this->Form->postLink(
-                    'Delete',
-                    array('action' => 'delete', $post['Post']['id']),
-                    array('confirm' => 'Are you sure?')
-                )?>
+            </td>
+            <td>
                 <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id']));?>
             </td>
-            <td><?php echo $post['Post']['created']; ?></td>
+            <td>
+                <?php echo $post['Post']['created']; ?>
+            </td>
         </tr>
     <?php endforeach; ?>
 
@@ -547,16 +545,19 @@ links that allow users to delete posts, however::
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
-            <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
+                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
             </td>
             <td>
-            <?php echo $this->Form->postLink(
-                'Delete', 
-                array('action' => 'delete', $post['Post']['id']),
-                array('confirm' => 'Are you sure?')); 
-            ?>
+                <?php echo $this->Form->postLink(
+                    'Delete', 
+                    array('action' => 'delete', $post['Post']['id']),
+                    array('confirm' => 'Are you sure?')); 
+                ?>
+                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id']));?>
             </td>
-            <td><?php echo $post['Post']['created']; ?></td>
+            <td>
+                <?php echo $post['Post']['created']; ?>
+            </td>
         </tr>
         <?php endforeach; ?>
     
@@ -624,7 +625,7 @@ for building more feature-rich applications.
 
 Now that you've created a basic Cake application you're ready for
 the real thing. Start your own project, read the rest of the
-`Manual </>`_ and `API <http://api.cakephp.org>`_.
+`Manual </>`_ and `API <http://api20.cakephp.org>`_.
 
 If you need help, come see us in #cakephp. Welcome to CakePHP!
 

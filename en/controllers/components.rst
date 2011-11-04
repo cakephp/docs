@@ -156,7 +156,7 @@ through which we can access an instance of it::
     <?php
     /* Make the new component available at $this->Math,
     as well as the standard $this->Session */
-    var $components = array('Math', 'Session');
+    public $components = array('Math', 'Session');
 
 Components declared in ``AppController`` will be merged with those
 in your other controllers. So there is no need to re-declare the
@@ -168,7 +168,7 @@ constructor. These parameters can then be handled by
 the Component::
 
     <?php
-    var $components = array(
+    public $components = array(
         'Math' => array(
             'precision' => 2,
             'randomGenerator' => 'srand'
@@ -194,7 +194,7 @@ way you include them in controllers - using the ``$components`` var::
     <?php
     class CustomComponent extends Component {
         // the other component your component uses
-        var $components = array('Existing'); 
+        public $components = array('Existing'); 
     
         function initialize($controller) {
             $this->Existing->foo();

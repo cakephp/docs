@@ -181,7 +181,7 @@ Por favor, note que isto não funciona em instalações do Cake em subdiretório
     $HTTP["host"] =~ "^(www\.)?example.com$" {
             url.rewrite-once = (
                     # if the request is for css|files etc, do not pass on to Cake
-                    "/(css|files|img|js)/(.*)" => "/$1/$2",
+                    "^/(css|files|img|js)/(.*)" => "/$1/$2",
                     "^([^\?]*)(\?(.+))?$" => "/index.php?url=$1&$3",
             )
             evhost.path-pattern = "/home/%2-%1/www/www/%4/app/webroot/"

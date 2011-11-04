@@ -70,10 +70,10 @@ For baking custom views
 ------------------------
 
 
-#. Go into: cake/console/templates/default/views
+#. Go into: lib/Cake/Console/Templates/default/views
 #. Notice the 4 files there
 #. Copy them to your:
-   app/vendors/shells/templates/[themename]/views
+   app/Console/Templates/[themename]/views
 #. Make changes to the HTML output to control the way "bake" builds
    your views
 
@@ -84,15 +84,15 @@ don't use 'default'.
 For baking custom projects
 --------------------------
 
-Go into: cake/console/templates/skel
+Go into: lib/Cake/Console/Templates/skel
 Notice the base application files there
-Copy them to your: app/vendors/shells/templates/skel
+Copy them to your: app/Console/Templates/skel
 Make changes to the HTML output to control the way "bake" builds
 your views
 Pass the skeleton path parameter to the project task
 ::
 
-    cake bake project -skel vendors/shells/templates/skel
+    cake bake project -skel Console/Templates/skel
 
 .. note::
 
@@ -205,10 +205,10 @@ action sets, fixtures, models, test cases, and the view files from
 1.2. As well as more templates, you can also have multiple template
 sets or, bake themes. Bake themes can be provided in your app, or
 as part of plugins. An example plugin path for bake theme would be
-``app/plugins/bake_theme/vendors/shells/templates/dark_red/``. An
+``app/Plugin/BakeTheme/Console/Templates/dark_red/``. An
 app bake theme called ``blue_bunny`` would be placed in
-``app/vendors/shells/templates/blue_bunny``. You can look at
-``cake/console/templates/default/`` to see what directories and
+``app/Console/Templates/blue_bunny``. You can look at
+``lib/Cake/Console/Templates/default/`` to see what directories and
 files are required of a bake theme. However, like view files, if
 your bake theme doesn't implement a template, other installed
 themes will be checked until the correct template is found.

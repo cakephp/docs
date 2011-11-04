@@ -493,7 +493,7 @@ ACL Component in your controller's $components array:
 
 ::
 
-    var $components = array('Acl');
+    public $components = array('Acl');
 
 Once we've got that done, let's see what some examples of creating
 these objects might look like. The following code could be placed
@@ -756,7 +756,7 @@ because permissions are managed by the Acl Component.
         // You might want to place this in the AppController
         // instead, but here works great too.
     
-        var $components = array('Acl');
+        public $components = array('Acl');
     
     }
 
@@ -795,7 +795,7 @@ The second set of calls is an attempt to make a more fine-grained
 permission decision. We want Aragorn to keep his full-access
 privileges, but deny other warriors in the group the ability to
 delete Weapons records. We're using the alias syntax to address the
-AROs above, but you might want to use the model/foriegn key syntax
+AROs above, but you might want to use the model/foreign key syntax
 yourself. What we have above is equivalent to this:
 
 ::

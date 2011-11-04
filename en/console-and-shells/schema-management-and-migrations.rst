@@ -10,13 +10,11 @@ Generating and using Schema files
 
 A generated schema file allows you to easily transport a database
 agnostic schema. You can generate a schema file of your database
-using:
+using::
 
-::
+    $ Console/cake schema generate
 
-    $ cake schema generate
-
-This will generate a schema.php file in your ``app/config/schema``
+This will generate a schema.php file in your ``app/Config/Schema``
 directory.
 
 .. note::
@@ -26,22 +24,18 @@ directory.
     tables, you must add the ``-f`` option in the command line.
 
 To later rebuild the database schema from your previously made
-schema.php file run:
+schema.php file run::
 
-::
-
-    $ cake schema create
+    $ Console/cake schema create
 
 This will drop and create the tables based on the contents of the
 schema.php.
 
 Schema files can also be used to generate sql dump files. To
 generate a sql file containing the ``CREATE TABLE`` statements,
-run:
+run::
 
-::
-
-    $ cake schema dump -write filename.sql
+    $ Console/cake schema dump --write filename.sql
 
 Where filename.sql is the desired filename for the sql dump. If you
 omit filename.sql the sql dump will be output to the console but
@@ -55,15 +49,11 @@ you develop features you have an easy and database agnostic way to
 distribute database changes. Migrations are achieved through either
 SCM controlled schema files or schema snapshots. Versioning a
 schema file with the schema shell is quite easy. If you already
-have a schema file created running
+have a schema file created running::
 
-::
+    $ Console/cake schema generate
 
-    $ cake schema generate
-
-Will bring up the following choices:
-
-::
+Will bring up the following choices::
 
     Generating Schema...
     Schema file exists.
@@ -86,4 +76,4 @@ will prompt you to confirm you wish to perform the ``ALTER``
 statements that represent the difference between the existing
 database the currently executing schema file.
 
-You can perform a dry run by adding a ``-dry`` to your command.
+You can perform a dry run by adding a ``--dry`` to your command.

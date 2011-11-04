@@ -236,7 +236,7 @@ There are a number of options for ``counter()``.  The supported ones are:
            {:count} total, starting on record {:start}, ending on {:end}'
       ); 
   
-  Setting 'format' to range would outout like '1 - 3 of 13'::
+  Setting 'format' to range would output like '1 - 3 of 13'::
       
       <?php
       echo $this->Paginator->counter(array(
@@ -318,8 +318,8 @@ named parameters to be converted::
     <?php
     $this->Paginator->options(array('convertKeys' => array('your', 'keys', 'here)));.
 
-Configuring the PaginatorHelper to use a javascipt helper
----------------------------------------------------------
+Configuring the PaginatorHelper to use a javascript helper
+----------------------------------------------------------
 
 By default the ``PaginatorHelper`` uses :php:class:`JsHelper` to do ajax
 features. However, if you don't want that and want to use a custom helper 

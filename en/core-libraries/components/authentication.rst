@@ -86,13 +86,38 @@ To configure different fields for user in ``$components`` array::
     // Pass settings in $components array
     public $components = array(
         'Auth'=> array(
-            'authenticate' => array(    
+            'authenticate' => array(
                 'Form' => array(
                     'fields' => array('username' => 'email')
                 )
             )
         )
     );
+
+.. note::
+
+    Do not put other Auth configuration keys (like authError, loginAction etc)
+    within the authenticate or Form element. They should be at the same level as
+    the authenticate key.
+    Above setup with other Auth configurations should look something like::
+
+        <?php
+            // Pass settings in $components array
+            public $components = array(
+                'Auth'=> array(
+                    'loginAction' => array(
+                        'controller' => 'users',
+                        'action' => 'login',
+                        'plugin' => 'users'
+                    ),
+                    'authError' => 'Did you really think you are allowed to see that?',
+                    'authenticate' => array(
+                        'Form' => array(
+                            'fields' => array('username' => 'email')
+                        )
+                    )
+                )
+            );
 
 In addition to the common configuration, Basic authentication supports
 the following keys:
@@ -172,10 +197,15 @@ working with a login form could look like::
         }
     }
 
-The above code, will attempt to log a user in using the POST data, and
-if successful redirect the user to either the last page they were
-visiting, or :php:attr:`AuthComponent::$loginRedirect`.  If the login is
-unsuccessful, a flash message is set.
+The above code (without any data passed to the ``login`` method), will attempt to log a user in using
+the POST data, and if successful redirect the user to either the last page they were visiting,
+or :php:attr:`AuthComponent::$loginRedirect`.  If the login is unsuccessful, a flash message is set.
+
+.. warning::
+
+    In 2.0 ``$this->Auth->login($this->request->data)`` will log the user in with whatever data is posted,
+    whereas in 1.3 ``$this->Auth->login($this->data)`` would try to identify the user first and only log in
+    when successful.
 
 Using Digest and Basic Authentication for logging in
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -454,7 +484,7 @@ The core authorize objects support the following configuration keys.
   ACO's in the ACO tree.
 - ``actionMap`` Action -> CRUD mappings.  Used by ``CrudAuthorize`` and
   authorization objects that want to map actions to CRUD roles.
-- ``userModel`` The name of  the ARO/Model node user information can be found 
+- ``userModel`` The name of  the ARO/Model node user information can be found
   under.  Used with ActionsAuthorize,
 
 
@@ -540,7 +570,7 @@ You can do so using ``AuthComponent::deny()``::
     $this->Auth->deny('add');
 
     // remove all the actions.
-    $this->Auth->deny('*');
+    $this->Auth->deny();
 
     // remove a group of actions.
     $this->Auth->deny('add', 'edit');
@@ -638,7 +668,7 @@ AuthComponent API
 .. php:attr:: authorize
 
     Set to an array of Authorization objects you want to use when
-    authorizing users on each request, see the section on 
+    authorizing users on each request, see the section on
     :ref:`authorization-objects`
 
 .. php:attr:: ajaxLogin
@@ -669,7 +699,7 @@ AuthComponent API
 .. php:attr:: authError
 
     Error to display when user attempts to access an object or action to which they do not have
-    acccess.
+    access.
 
 .. php:method:: allow($action, [$action, ...])
 

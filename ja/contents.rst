@@ -5,8 +5,9 @@
    :maxdepth: 3
 
    index
-   basic-info
+   installation
    cakephp-overview
+   contributing
    appendices
 
 .. todolist::

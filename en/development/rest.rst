@@ -69,11 +69,10 @@ controller actions. A basic controller might look something like
 this::
 
     <?php
-    // controllers/recipes_controller.php
-    
+    // Controller/RecipesController.php
     class RecipesController extends AppController {
     
-        var $components = array('RequestHandler');
+        public $components = array('RequestHandler');
     
         function index() {
             $recipes = $this->Recipe->find('all');

@@ -15,7 +15,7 @@ CakeRequest
 ###########
 
 :php:class:`CakeRequest` is the default request object used in CakePHP.  It centralizes
-a number of features for interogating and interacting with request data.  
+a number of features for interrogating and interacting with request data.  
 On each request one CakeRequest is created and then passed by reference to the various 
 layers of an application that use request data.  By default ``CakeRequest`` is assigned to
 ``$this->request``, and is available in Controller, Views and Helpers.  You can
@@ -90,7 +90,7 @@ Querystring parameters can be read from using :php:attr:`CakeRequest::$query`::
 Accessing POST data
 ===================
 
-All POST data can be accesed using :php:attr:`CakeRequest::$data`.  Any form data 
+All POST data can be accessed using :php:attr:`CakeRequest::$data`.  Any form data 
 that contains a ``data`` prefix, will have that data prefix removed.  For example::
 
     <?php
@@ -336,7 +336,7 @@ CakeRequest API
 .. php:attr:: data
 
     An array of POST data. You can use :php:meth:`CakeRequest::data()`
-    to read this property in a way that supresses notice errors.
+    to read this property in a way that suppresses notice errors.
 
 .. php:attr:: query
 
@@ -347,6 +347,8 @@ CakeRequest API
     An array of route elements and request parameters.
 
 .. php:attr:: here
+
+    Returns the current request uri.
 
 .. php:attr:: base
 
@@ -391,7 +393,7 @@ This will make all the controllers in your application use ``CustomResponse``
 instead of :php:class:`CakeResponse`.  You can also replace the response
 instance used by setting ``$this->response`` in your controllers. Overriding the 
 response object is handy during testing, as it allows you to stub 
-out the methods that interact with `header()``.  See the section on 
+out the methods that interact with ``header()``.  See the section on 
 :ref:`cakeresponse-testing` for more information.
 
 Dealing with content types
@@ -463,7 +465,7 @@ You can also tell clients that you want them to cache responses. By using
         $this->response->cache(time(), '+5 days');
     }
 
-The above would tell clients to cache the resulting resposne for 5 days,
+The above would tell clients to cache the resulting response for 5 days,
 hopefully speeding up your visitors' experience.
 
 Setting headers
