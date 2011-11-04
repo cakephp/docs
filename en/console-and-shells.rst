@@ -233,9 +233,9 @@ A shell can also access it's tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
     <?php 
-    // found in Console/Task/SeaShell.php
+    // found in Console/Command/SeaShell.php
     class SeaShell extends Shell {
-       public $tasks = array('Sound'); //found in console/shells/tasks/sound.php
+       public $tasks = array('Sound'); // found in Console/Command/Task/SoundTask.php
        public function main() {
            $this->Sound->execute();
        }

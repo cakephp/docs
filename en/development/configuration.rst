@@ -660,7 +660,7 @@ or::
     Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));
 
 Will merge the supplied rules into the inflection sets defined in
-cake/libs/inflector.php, with the added rules taking precedence
+lib/Cake/Utility/Inflector.php, with the added rules taking precedence
 over the core rules.
 
 Bootstrapping CakePHP

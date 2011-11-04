@@ -770,8 +770,8 @@ Foo
         supported. Please report any bugs as you find them. Suggestions for
         additional features are welcome.
 
-    To learn more about Set::extract() refer to function testExtract()
-    in /cake/tests/cases/libs/set.test.php.
+    To learn more about Set::extract() refer to the function testExtract() 
+    in /lib/Cake/Test/Case/Utility/SetTest.php.
 
 
 .. php:staticmethod:: filter($var, $isArray=null)
