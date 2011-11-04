@@ -112,7 +112,7 @@ RecipesController inside ``app/View/recipes/xml``. We can also use
 :php:class:`Xml` for quick-and-easy XML output in those views. Here's what
 our index view might look like::
 
-    // app/views/recipes/xml/index.ctp
+    // app/View/Recipes/xml/index.ctp
     
     <recipes>
         <?php

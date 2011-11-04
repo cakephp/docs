@@ -65,7 +65,7 @@ application contained the following exception::
     class MissingWidgetException extends CakeException {};
 
 You could provide nice development errors, by creating 
-``app/views/errors/missing_widget.ctp``.  When in production mode, the above
+``app/View/Errors/missing_widget.ctp``.  When in production mode, the above
 error would be treated as a 500 error.  The constructor for :php:exc:`CakeException`
 has been extended, allowing you to pass in hashes of data.  These hashes are
 interpolated into the the messageTemplate, as well as into the view that is used
