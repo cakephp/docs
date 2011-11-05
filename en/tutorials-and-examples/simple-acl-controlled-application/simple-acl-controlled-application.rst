@@ -115,6 +115,7 @@ other pieces that need to be added before we can add the Auth and
 Acl components. First add a login and logout action to your
 ``UsersController``::
 
+    <?php
     function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
@@ -135,7 +136,7 @@ Then create the following view file for login at
     <?php
     echo $this->Form->create('User', array('action' => 'login'));
     echo $this->Form->inputs(array(
-        'legend' => __('Login', true),
+        'legend' => __('Login'),
         'username',
         'password'
     ));
@@ -191,9 +192,10 @@ exceptions so :php:class:`AuthComponent` will allow us to create some groups
 and users. In **both** your ``GroupsController`` and your
 ``UsersController`` Add the following::
 
+    <?php
     function beforeFilter() {
         parent::beforeFilter(); 
-        $this->Auth->allow(array('*'));
+        $this->Auth->allow('*');
     }
 
 These statements tell AuthComponent to allow public access to all
@@ -246,12 +248,12 @@ our ``User`` model we will add the following::
                 return null;
             }
             if (isset($this->data['User']['group_id'])) {
-            $groupId = $this->data['User']['group_id'];
+                $groupId = $this->data['User']['group_id'];
             } else {
                 $groupId = $this->field('group_id');
             }
             if (!$groupId) {
-            return null;
+                return null;
             } else {
                 return array('Group' => array('id' => $groupId));
             }
@@ -314,6 +316,7 @@ Group-only ACL
 In case we want simplified per-group only permissions, we need to
 implement ``bindNode()`` in ``User`` model::
 
+    <?php
     function bindNode($user) {
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
     }
