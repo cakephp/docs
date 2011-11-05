@@ -120,9 +120,9 @@ metadata back to the layout::
         'xmlns:dc' => 'http://purl.org/dc/elements/1.1/'));
 
     $this->set('channelData', array(
-        'title' => __("Most Recent Posts", true),
+        'title' => __("Most Recent Posts"),
         'link' => $this->Html->url('/', true),
-        'description' => __("Most recent posts.", true),
+        'description' => __("Most recent posts."),
         'language' => 'en-us'));
 
 The second part of the view generates the elements for the actual
