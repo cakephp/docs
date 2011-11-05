@@ -14,7 +14,7 @@ setup.  You'll need the following software:
 
 * Git
 * PHP 5.2.9 or greater
-* PHPUnit 3.5.10 - 3.5.17
+* PHPUnit 3.5.10 or greater
 
 Set up your user information with your name/handle and working email address::
 
