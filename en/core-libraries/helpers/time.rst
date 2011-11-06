@@ -104,11 +104,6 @@ Formatting
     end
         determines the cutoff point in which it no longer uses words and
         uses the date format instead; default "+1 month"
-        ``relativeTime( $dateString, $format = 'j/n/y' )``
-
-.. php:method:: relativeTime() 
-    
-    is essentially an alias for timeAgoInWords.
 
 .. php:method:: gmt($dateString = NULL)
 
