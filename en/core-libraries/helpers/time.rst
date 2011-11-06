@@ -18,7 +18,7 @@ user's time zone. Lets use a forum as an example. Your forum has many users who
 may post messages at any time from any part of the world. An easy way to 
 manage the time is to save all dates and times as GMT+0 or UTC. Uncomment the 
 line ``date_default_timezone_set('UTC');`` in ``app/Config/core.php`` to ensure 
-your server's time zone is set to GMT+0.
+your application's time zone is set to GMT+0.
 
 Next add a time zone field to your users table and make the necessary 
 modifications to allow your users to set their time zone. Now that we know 
@@ -34,7 +34,7 @@ posts using the Time Helper::
 Formatting
 ==========
 
-.. php:method:: fromString($date_string)
+.. php:method:: fromString($dateString, $userOffset = NULL)
 
     **fromString** takes a string and uses strtotime to convert it into
     a date object. If the string passed in is a number then it'll
@@ -44,33 +44,33 @@ Formatting
     the number of seconds from the Epoch, in this case "Fri, Aug 21st
     1970, 06:07"
 
-.. php:method:: toQuarter($date_string, $range = false)
+.. php:method:: toQuarter($dateString, $range = false)
 
     **toQuarter** will return 1, 2, 3 or 4 depending on what quarter of
     the year the date falls in. If range is set to true, a two element
     array will be returned with start and end dates in the format
     "2008-03-31".
 
-.. php:method:: toUnix($date_string)
+.. php:method:: toUnix($dateString, $userOffset = NULL)
 
     **toUnix** is a wrapper for fromString.
 
-.. php:method:: toAtom($date_string)
+.. php:method:: toAtom($dateString, $userOffset = NULL)
 
     **toAtom** return a date string in the Atom format
     "2008-01-12T00:00:00Z"
 
-.. php:method:: toRSS($date_string)
+.. php:method:: toRSS($dateString, $userOffset = NULL)
 
     **toRSS** returns a date string in the RSS format "Sat, 12 Jan 2008
     00:00:00 -0500"
 
-.. php:method:: nice($date_string = null)
+.. php:method:: nice($dateString = NULL, $userOffset = NULL)
 
     **nice** takes a date string and outputs it in the format "Tue, Jan
     1st 2008, 19:25".
 
-.. php:method:: niceShort($date_string = null)
+.. php:method:: niceShort($dateString = NULL, $userOffset = NULL)
 
     **niceShort** takes a date string and outputs it in the format "Jan
     1st 2008, 19:25". If the date object is today, the format will be
@@ -84,12 +84,12 @@ Formatting
     23:59:59')". This is handy if you need to search for records
     between two dates inclusively.
 
-.. php:method:: dayAsSql($date_string,$field_name)
+.. php:method:: dayAsSql($dateString, $field_name, $userOffset = NULL)
 
     **dayAsSql** creates a string in the same format as daysAsSql but
     only needs a single date object.
 
-.. php:method:: timeAgoInWords($datetime_string, $options = array(), $backwards = null)
+.. php:method:: timeAgoInWords($dateString, $options = array())
 
     **timeAgoInWords** will take a datetime string (anything that is
     parsable by PHP's strtotime() function or MySQL's datetime format)
@@ -104,18 +104,18 @@ Formatting
     end
         determines the cutoff point in which it no longer uses words and
         uses the date format instead; default "+1 month"
-        ``relativeTime( $date_string, $format = 'j/n/y' )``
+        ``relativeTime( $dateString, $format = 'j/n/y' )``
 
 .. php:method:: relativeTime() 
     
     is essentially an alias for timeAgoInWords.
 
-.. php:method:: gmt($date_string = null)
+.. php:method:: gmt($dateString = NULL)
 
     **gmt** will return the date as an integer set to Greenwich Mean
     Time (GMT).
 
-.. php:method:: format($format = 'd-m-Y', $date_string)
+.. php:method:: format($format, $dateString = NULL, $invalid = false, $userOffset = NULL)
 
     **format** is a wrapper for the PHP date function.
 
@@ -146,19 +146,19 @@ Testing Time
 ============
 
 
-.. php:method:: isToday()
-.. php:method:: isThisWeek()
-.. php:method:: isThisMonth()
-.. php:method:: isThisYear()
-.. php:method:: wasYesterday()
-.. php:method:: isTomorrow()
-.. php:method:: wasWithinLast()
+.. php:method:: isToday($dateString, $userOffset = NULL)
+.. php:method:: isThisWeek($dateString, $userOffset = NULL)
+.. php:method:: isThisMonth($dateString, $userOffset = NULL)
+.. php:method:: isThisYear($dateString, $userOffset = NULL)
+.. php:method:: wasYesterday($dateString, $userOffset = NULL)
+.. php:method:: isTomorrow($dateString, $userOffset = NULL)
+.. php:method:: wasWithinLast($timeInterval, $dateString, $userOffset = NULL)
 
     All of the above functions return true or false when passed a date
     string. ``wasWithinLast`` takes an additional ``$time_interval``
     option:
 
-    ``$this->Time->wasWithinLast( $time_interval, $date_string )``
+    ``$this->Time->wasWithinLast( $time_interval, $dateString )``
 
     ``wasWithinLast`` takes a time interval which is a string in the
     format "3 months" and accepts a time interval of seconds, minutes,
