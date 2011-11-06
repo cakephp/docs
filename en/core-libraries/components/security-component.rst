@@ -166,19 +166,19 @@ will use the POST data to build the same structure and compare the hash.
 CSRF configuration
 ==================
 
-.. php:attr:: crsfCheck
+.. php:attr:: csrfCheck
 
     Whether to use CSRF protected forms. Set to ``false`` to disable 
     CSRF protection on forms.
 
-.. php:attr:: crsfExpires
+.. php:attr:: csrfExpires
 
    The duration from when a CSRF token is created that it will expire on.
    Each form/page request will generate a new token that can only 
    be submitted once unless it expires.  Can be any value compatible 
    with ``strtotime()``. The default is +30 minutes.
 
-.. php:attr:: crsfUseOnce
+.. php:attr:: csrfUseOnce
 
    Controls whether or not CSRF tokens are use and burn.  Set to 
    ``false`` to not generate new tokens on each request.  One token 
