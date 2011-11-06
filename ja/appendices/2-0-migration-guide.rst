@@ -515,8 +515,8 @@ Scaffold
 -  Scaffoldの'edit'ビューは'form'に名前を変えるべきです。
    これはScaffoldとBakeのテンプレートに矛盾がないようにするために為されました。
 
-   -  ``views/scaffolds/edit.ctp -> ``View/Scaffolds/form.ctp``
-   -  ``views/posts/scaffold.edit.ctp -> ``View/Posts/scaffold.form.ctp``
+   -  ``views/scaffolds/edit.ctp`` -> ``View/Scaffolds/form.ctp``
+   -  ``views/posts/scaffold.edit.ctp`` -> ``View/Posts/scaffold.form.ctp``
 
 Xml
 ---
