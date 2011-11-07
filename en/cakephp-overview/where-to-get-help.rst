@@ -35,7 +35,7 @@ with the community and gain instant fame and fortune.
 The API
 =======
 
-`http://api.cakephp.org/ <http://api.cakephp.org/>`_
+`http://api20.cakephp.org/ <http://api20.cakephp.org/>`_
 
 Straight to the point and straight from the core developers, the
 CakePHP API (Application Programming Interface) is the most
