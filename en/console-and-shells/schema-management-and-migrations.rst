@@ -5,6 +5,11 @@ The SchemaShell provides a functionality to create schema objects,
 schema sql dumps as well as create snapshots and restore database
 snapshots.
 
+.. note::
+
+    The schema shell is used for schema exports only. There is
+    currently no support for data migration.
+
 Generating and using Schema files
 =================================
 
@@ -78,6 +83,76 @@ database the currently executing schema file.
 
 You can perform a dry run by adding a ``--dry`` to your command.
 
+Workflow examples
+=================
+
+Create schema and commit
+------------------------
+
+On a project which use versionning, the usage of cake schema
+would follow these steps:
+
+1. Create or modify your database tables
+2. Execute cake schema to export a full description of your
+   database
+3. Commit the created or updated schema.php file
+
+::
+
+    $ # once your database has been updated
+    $ Console/cake schema generate
+    $ git commit -a
+
+.. note::
+
+    If the project is not versionned, managing schemas would
+    be done through snapshots. (see previous section to
+    manage snapshots)
+
+Getting the last changes
+------------------------
+
+When you pull the last changes of your repository, and discover
+changes in the structure of the database (possibly because
+of an error message saying you are missing a table):
+
+1. Execute cake schema to update your database
+
+::
+
+    $ git pull
+    $ Console/cake schema create
+    $ Console/cake schema update
+
+All these operations can be done in dry-run mode.
+
+Rolling back
+------------
+
+If at some point you need to revert and get back to the state in which you were
+before updating your database, you should be informed that this is currently not
+supported by cake schema.
+
+More specifically, you can't automatically drop your tables once they have
+been created.
+
+Using ``update`` will, on the contrary, drop any field which differ from the
+schema file.
+
+::
+
+    $ git revert HEAD
+    $ Console/cake schema update
+
+Will bring up the following choices:
+
+::
+
+    The following statements will run.
+    ALTER TABLE `roles`
+    DROP `position`;
+    Are you sure you want to alter the tables? (y/n)
+    [n] >
 
 .. meta::
     :title lang=en: Schema management and migrations
