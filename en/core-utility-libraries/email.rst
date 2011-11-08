@@ -109,7 +109,8 @@ at prefix in the host and configure the port value accordingly.  Example::
             'host' => 'ssl://smtp.gmail.com',
             'port' => 465,
             'username' => 'my@gmail.com',
-            'password' => 'secret'
+            'password' => 'secret',
+            'transport' => 'Smtp'
         );
     }
 
