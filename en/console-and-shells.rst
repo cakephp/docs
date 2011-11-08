@@ -178,6 +178,11 @@ property contains an array of all the positional arguments provided to a command
 also use switches or options on shell applications, these are available at ``$this->params``,
 but we'll cover that in a bit.
 
+When using a ``main()`` method you won't be able to use the positional arguments
+or parameters.  This is because the first positional argument or option is
+interpreted as the command name.  If you want to use arguments and options, you
+should use method names other than ``main``.
+
 Using Models in your shells
 ---------------------------
 
