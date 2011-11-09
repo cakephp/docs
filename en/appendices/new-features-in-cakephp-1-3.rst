@@ -540,3 +540,8 @@ native validation mechanisms if available.
 A uuid() pattern validation has been added to the ``Validation``
 class. It will check that a given string matches a uuid by pattern
 only. It does not ensure uniqueness of the given uuid.
+
+
+.. meta::
+    :title lang=en: New features in CakePHP 1.3
+    :keywords lang=en: component settings,array name,array controller,private methods,necessary components,core components,share names,collisions,func,message id,new features,clutter,consistency,messageid,email,htmlmessage,variables,doc

@@ -1222,3 +1222,8 @@ need to pass the package they are located in. Example::
         'password' => 'root',
         'database' => 'cake',
     );
+
+
+.. meta::
+    :title lang=en: 2.0 Migration Guide
+    :keywords lang=en: migration guide,final proposal,backwards compatibility,class loading,api changes,x versions,php 5,google,internal structure,roadblock,prefixes,directory structure,folders,new features,visibility,environments,variables,lifetime,scope,developers

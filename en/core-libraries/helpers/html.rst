@@ -656,3 +656,8 @@ breadcrumb trails on each of the pages::
 
 This will add the output of "**Home > Users > Add User**" in your
 layout where getCrumbs was added.
+
+
+.. meta::
+    :title lang=en: HTML
+    :keywords lang=en: null array,array class,array name,path string,meta tag,cpu cycles,css file,multiple files,markup,iso 8859,attributes,attribute,stylesheet,utf 8,cakephp,elements,cache,options

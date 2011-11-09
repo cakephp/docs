@@ -324,3 +324,8 @@ some reason. If you do want to disable this feature, you can set
 ``$this->Security->csrfCheck = false;`` in your ``beforeFilter`` or use the
 components array. By default CSRF protection is enabled, and configured to use
 one-use tokens.
+
+
+.. meta::
+    :title lang=en: Security
+    :keywords lang=en: configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class

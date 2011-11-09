@@ -99,3 +99,8 @@ The above will output a simple message, with the following html::
             <?php printf($message, h($name)); ?>
         </div>
 
+
+
+.. meta::
+    :title lang=en: SessionHelper
+    :keywords lang=en: natural counterpart,flash messages,component method,session php,dot notation,component data,notification messages,additional properties,simple message,params,notifications,boolean,array,node,customize,functionality,existence,element

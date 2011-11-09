@@ -18,3 +18,8 @@ and components.
     tutorials-and-examples/blog-auth-example/auth
     tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application
     tutorials-and-examples/simple-acl-controlled-application/part-two
+
+
+.. meta::
+    :title lang=en: Tutorials & Examples
+    :keywords lang=en: application tutorials,glob,bakery,repository,applications,blog,acl

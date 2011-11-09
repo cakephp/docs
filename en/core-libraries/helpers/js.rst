@@ -840,3 +840,8 @@ This will show/hide the busy-indicator element before and after the
 ``#content`` div is updated. Although ``indicator`` has been
 removed, the new features offered by ``JsHelper`` allow for more
 control and more complex effects to be created.
+
+
+.. meta::
+    :title lang=en: JsHelper
+    :keywords lang=en: javascript engine,javascript library,extensible solution,extensible system,engine selection,helpe,html script,javascript code,webroot,scriptaculous,prototype,backbone,favour,mootools,api,ui,flexibility,lib,scripts,libraries

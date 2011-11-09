@@ -696,3 +696,8 @@ When your join table contains extra fields besides two foreign
 keys, in most cases it's easier to make a model for the join table
 and setup hasMany, belongsTo associations as shown in example above
 instead of using HABTM association.
+
+
+.. meta::
+    :title lang=en: Saving Your Data
+    :keywords lang=en: doc models,validation rules,data validation,flash message,null model,table php,request data,php class,model data,database table,array,recipes,success,reason,snap,data model

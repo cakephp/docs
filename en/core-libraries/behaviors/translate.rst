@@ -350,3 +350,8 @@ don't intend to use a custom ``$translateModel`` then leave this
 property untouched. Reason is that it would break your setup and
 show you a "Missing Table" message for the default I18n model which
 is created in runtime.
+
+
+.. meta::
+    :title lang=en: Translate
+    :keywords lang=en: invalid sql,correct layout,translation table,layout changes,database tables,array,queries,cakephp,models,translate,public name

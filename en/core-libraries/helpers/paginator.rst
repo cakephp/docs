@@ -448,3 +448,8 @@ Other Methods
         <?php
         echo $this->Paginator->url(array('sort' => 'title'), true); 
 
+
+
+.. meta::
+    :title lang=en: Paginator
+    :keywords lang=en: core libraries,true model,php class,string key,string title,resultset,inflection,page numbers,sor,asc,tandem,array,parameters,desc,queries,images

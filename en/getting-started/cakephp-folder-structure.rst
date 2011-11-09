@@ -71,3 +71,8 @@ webroot
     In a production setup, this folder should serve as the document
     root for your application. Folders here also serve as holding
     places for CSS stylesheets, images, and JavaScript files.
+
+
+.. meta::
+    :title lang=en: CakePHP Folder Structure
+    :keywords lang=en: internal libraries,core configuration,model descriptions,external vendors,connection details,folder structure,party libraries,personal commitment,database connection,internationalization,configuration files,folders,application development,readme,lib,configured,logs,config,third party,cakephp

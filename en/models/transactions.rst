@@ -29,3 +29,8 @@ transactions.
 Nested transactions are currently not supported. If a nested
 transaction is started, a commit will return false on the parent
 transaction.
+
+
+.. meta::
+    :title lang=en: Transactions
+    :keywords lang=en: transaction methods,datasource,rollback,data source

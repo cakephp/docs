@@ -136,3 +136,8 @@ If you need to manually clear the cache, you can do so by calling
 Cache::clear(). This will clear **all** cached data, excluding
 cached view files. If you need to clear the cached view files, use
 ``clearCache()``.
+
+
+.. meta::
+    :title lang=en: CacheHelper
+    :keywords lang=en: cache tags,minimal code,request string,php class,cache files,retrieving data,configuration options,time value,callbacks,processing time,html files,saving time,two steps,layouts,array,duration,config,checks,url

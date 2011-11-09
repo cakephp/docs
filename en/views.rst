@@ -408,3 +408,8 @@ More about Views
     views/themes
     views/media-view
     views/helpers
+
+
+.. meta::
+    :title lang=en: Views
+    :keywords lang=en: view logic,csv file,response elements,code elements,default extension,json,flash object,remote application,twig,subclass,ajax,reply,soap,functionality,cakephp,audience,xml,mvc

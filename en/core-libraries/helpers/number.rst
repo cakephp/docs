@@ -177,3 +177,8 @@ NumberHelper
             'thousands' => ','
         ));
         // output '¥ 123,456.79'
+
+
+.. meta::
+    :title lang=en: NumberHelper
+    :keywords lang=en: currency format,currency type,currency symbol,decimal symbol,currency usd,formatted number,format numbers,parameter number,option description,number ie,number string,decimal numbers,php class,zero values,whole numbers,negative numbers,decimal places,precisions,floating point,decimals

@@ -160,3 +160,8 @@ Using the Component
 .. php:method:: destroy()
 
     Destroys the current cookie.
+
+
+.. meta::
+    :title lang=en: Cookie
+    :keywords lang=en: array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null

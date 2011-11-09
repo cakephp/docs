@@ -291,3 +291,8 @@ To load **app/vendors/vendorName/libFile.php**::
 .. todo::
 
     This is missing a ton of methods. And vendors docs are wrong.
+
+
+.. meta::
+    :title lang=en: App Class
+    :keywords lang=en: compatible implementation,model behaviors,path management,loading files,php class,class loading,model behavior,class location,component model,management class,autoloader,classname,directory location,override,conventions,lib,textile,cakephp,php classes,loaded

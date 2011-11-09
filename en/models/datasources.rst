@@ -209,3 +209,8 @@ and refer to it using the plugin notation::
         'username' => 'test@example.com',
         'password' => 'hi_mom',
     );
+
+
+.. meta::
+    :title lang=en: DataSources
+    :keywords lang=en: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,mssql,aggregates,apis,repository,signatures

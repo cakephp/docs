@@ -764,3 +764,8 @@ AuthComponent API
 .. php:staticmethod:: password($pass)
 
     Hash a password with the application's salt value.
+
+
+.. meta::
+    :title lang=en: Authentication
+    :keywords lang=en: authentication handlers,array php,basic authentication,web application,different ways,credentials,exceptions,cakephp,logging

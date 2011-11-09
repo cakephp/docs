@@ -639,3 +639,8 @@ These are common tasks people learning CakePHP usually want to study next:
 3. :doc:`/controllers/scaffolding`: Prototyping before creating code
 4. :doc:`/console-and-shells/code-generation-with-bake` Generating basic CRUD code
 5. :doc:`/tutorials-and-examples/blog-auth-example/auth`: User authentication and authorization tutorial
+
+
+.. meta::
+    :title lang=en: ##############################
+    :keywords lang=en: doc models,validation check,controller actions,model post,php class,model class,model object,business logic,database table,naming convention,bread and butter,callbacks,prefixes,nutshell,interaction,array,cakephp,interface,applications,delete

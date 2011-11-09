@@ -1133,3 +1133,8 @@ and fetch the data, however in most cases you can use other tools to achieve the
 such as correctly defining associations, binding models on the fly and using the Containable
 behavior. This feature should be used with care because it could lead, in a few cases, into bad formed
 SQL queries if combined with any of the former techniques described for associating models.
+
+
+.. meta::
+    :title lang=en: Associations: Linking Models Together
+    :keywords lang=en: relationship types,relational mapping,recipe database,relational database,this section covers,web applications,recipes,models,cakephp,storage

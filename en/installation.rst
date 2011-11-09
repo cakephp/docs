@@ -186,3 +186,8 @@ uncomment one line in ``app/Config/core.php``::
     * to fix the date & time related errors.
     */
        date_default_timezone_set('UTC');
+
+
+.. meta::
+    :title lang=en: Installation
+    :keywords lang=en: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighthttpd,repository,enhancements,source code,cakephp,incorporate

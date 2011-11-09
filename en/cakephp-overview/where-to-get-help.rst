@@ -82,3 +82,8 @@ The Google Group
 CakePHP also has a very active Google Group. It can be a great
 resource for finding archived answers, frequently asked questions,
 and getting answers to immediate problems.
+
+
+.. meta::
+    :title lang=en: Where to Get Help
+    :keywords lang=en: application programming interface,nitty gritty details,open source projects,class lib,fame and fortune,propeller hat,core developers,channel irc,donation opportunities,general discussion,code reference,irc channel,developer tools,straight to the point,daylight hours,test cases,holler,clearing house,test case,bakery

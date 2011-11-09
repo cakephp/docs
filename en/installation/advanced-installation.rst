@@ -367,3 +367,8 @@ file for you.
 Once the web.config file is created with the correct IIS-friendly
 rewrite rules, CakePHP's links, css, js, and rerouting should work
 correctly.
+
+
+.. meta::
+    :title lang=en: Advanced Installation
+    :keywords lang=en: libraries folder,core libraries,application code,different places,filesystem,constants,webroot,restriction,apps,web server,lib,cakephp,directories,path

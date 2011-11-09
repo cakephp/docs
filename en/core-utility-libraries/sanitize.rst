@@ -116,3 +116,8 @@ Once you've done that, you can make calls to Sanitize statically.
         // output: scripthtml
         echo Sanitize::paranoid($badString, array(' ', '@'));
         // output: scripthtml    @@
+
+
+.. meta::
+    :title lang=en: Data Sanitization
+    :keywords lang=en: array notation,sql security,sql function,malicious data,controller class,data options,raw html,core library,carriage returns,database connection,orm,industrial strength,slashes,chars,multi purpose,arrays,cakephp,element,models

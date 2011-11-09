@@ -64,3 +64,8 @@ deleted. This will often result in more queries being issued.
 
     deleteAll() will return true even if no records are deleted, as the conditions
     for the delete query were successful and no matching records remain.
+
+
+.. meta::
+    :title lang=en: Deleting Data
+    :keywords lang=en: doc models,custom logic,callback methods,model class,database model,callbacks,information model,request data,deleteall,fragment,leverage,array,cakephp,failure,recipes,benefit,delete,data model

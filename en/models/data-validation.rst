@@ -896,3 +896,8 @@ with usage examples.
 .. toctree::
 
     data-validation/validating-data-from-the-controller
+
+
+.. meta::
+    :title lang=en: Data Validation
+    :keywords lang=en: validation rules,validation data,validation errors,data validation,credit card numbers,core libraries,password email,model fields,login field,model definition,php class,many different aspects,eight characters,letters and numbers,business rules,validation process,date validation,error messages,array,formatting

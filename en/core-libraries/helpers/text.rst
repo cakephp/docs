@@ -147,3 +147,8 @@ Text
     Output::
 
         The killer crept...
+
+
+.. meta::
+    :title lang=en: Text
+    :keywords lang=en: text array,html attributes,method searches,string text,haystack,pastries,nntp,key words,desserts,stretches,excerpt,excerpts,phrases,radius,functionality,aids,email addresses

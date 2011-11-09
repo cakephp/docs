@@ -739,3 +739,8 @@ More on controllers
     controllers/scaffolding
     controllers/pages-controller
     controllers/components
+
+
+.. meta::
+    :title lang=en: Controllers
+    :keywords lang=en: correct models,controller class,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,logic,recipes

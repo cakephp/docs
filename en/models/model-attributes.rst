@@ -247,3 +247,8 @@ If set to true, data fetched by the model during a single request
 is cached. This caching is in-memory only, and only lasts for the
 duration of the request. Any duplicate requests for the same data
 is handled by the cache.
+
+
+.. meta::
+    :title lang=en: Model Attributes
+    :keywords lang=en: alternate table,default model,database configuration,model example,database table,default database,model class,model behavior,class model,plural form,database connections,database connection,attribute,attributes,complete list,config,cakephp,api,class example

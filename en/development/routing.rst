@@ -1017,3 +1017,8 @@ Router API
 .. php:method:: compile()
 
     Force a route to compile its regular expression.
+
+
+.. meta::
+    :title lang=en: Routing
+    :keywords lang=en: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router

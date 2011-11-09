@@ -22,3 +22,7 @@ You are able to run each upgrade step individually. To see all the steps availab
     ./Console/cake upgrade --help
 
 Or visit the API docs for more info: http://api20.cakephp.org/class/upgrade-shell
+
+.. meta::
+    :title lang=en: .. _upgrade-shell:
+    :keywords lang=en: api docs,shell

@@ -691,3 +691,8 @@ This class is a parent class to all of the controllers in your
 application. :php:class:`AppController` is a handy place to use controller
 callbacks and define methods to be used by all of your
 controllers.
+
+
+.. meta::
+    :title lang=en: Configuration
+    :keywords lang=en: finished configuration,legacy database,database configuration,value pairs,default connection,optional configuration,example database,php class,configuration database,default database,configuration steps,index database,configuration details,class database,host localhost,inflections,key value,database connection,piece of cake,basic web

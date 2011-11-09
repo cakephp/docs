@@ -253,3 +253,8 @@ can find instructions for getting URL rewriting working for other
 servers under the :doc:`/installation/advanced-installation` section.
 
 Continue to :doc:`/tutorials-and-examples/blog/part-two` to start building your first CakePHP application.
+
+
+.. meta::
+    :title lang=en: #####
+    :keywords lang=en: model view controller,object oriented programming,application logic,directory setup,basic knowledge,database server,server configuration,reins,documentroot,readme,repository,web server,productivity,lib,sql,aim,cakephp,servers,apache,downloads

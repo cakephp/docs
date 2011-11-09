@@ -207,3 +207,7 @@ or
 ::
 
     $this->virtualFields += $this->Author->virtualFields;
+
+.. meta::
+    :title lang=en: Virtual fields
+    :keywords lang=en: sql expressions,array name,model fields,sql errors,virtual field,concatenation,model name,first name last name

@@ -17,3 +17,8 @@ PagesController.php from core to your app.
 
     Do not directly modify ANY file under the ``Cake`` folder to avoid
     issues when updating the core in future.
+
+
+.. meta::
+    :title lang=en: The Pages Controller
+    :keywords lang=en: default controller,lib,cakephp,ships,php,file folder

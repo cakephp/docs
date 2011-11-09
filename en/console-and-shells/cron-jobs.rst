@@ -46,3 +46,8 @@ output to a logfile. You can do this like::
 
     # m h dom mon dow command
     */5 *   *   *   * /full/path/to/cakeshell myshell myparam -cli /usr/bin -console /cakes/1.2.x.x/cake/console -app /full/path/to/app >> /path/to/log/file.log
+
+
+.. meta::
+    :title lang=en: Running Shells as cronjobs
+    :keywords lang=en: cronjob,bash script,path path,crontab,logfile,cakes,shells,dow,shell,cakephp,fi,running

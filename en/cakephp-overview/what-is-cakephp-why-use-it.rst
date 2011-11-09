@@ -55,3 +55,8 @@ Here’s a quick list of features you’ll enjoy when using CakePHP:
 -  Localization.
 -  Works from any web site directory, with little to no
    `Apache <http://httpd.apache.org/>`_ configuration involved.
+
+
+.. meta::
+    :title lang=en: What is CakePHP? Why Use it?
+    :keywords lang=en: custom urls,php syntax,cookie security,database interaction,security session,rapid manner,developer team,free open source,javascript html,apache configuration,web site directory,html forms,code generation,development framework,monotony,rapid development,scaffolding,dispatcher,friendly community,crud

@@ -860,3 +860,8 @@ The usage here is demonstrational, but hopefully you can see how
 checking like this can be used to decide whether or not to allow
 something to happen, show an error message, or redirect the user to
 a login.
+
+
+.. meta::
+    :title lang=en: Access Control Lists
+    :keywords lang=en: fantasy novel,access control list,request objects,online diary,request object,acls,adventurers,gandalf,lingo,web service,computer system,grandma,lord of the rings,entities,assets,logic,cakephp,stuff,control objects,control object

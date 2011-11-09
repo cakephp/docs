@@ -27,3 +27,8 @@ This ``getRecent()`` method can now be used within the controller.
 
     $recent = $this->Example->getRecent();
 
+
+
+.. meta::
+    :title lang=en: Additional Methods and Properties
+    :keywords lang=en: model classes,model functions,model class,interval,array

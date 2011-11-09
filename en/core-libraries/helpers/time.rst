@@ -186,3 +186,8 @@ Testing Time
 .. todo::
 
     TimeHelper docs are very short on content.  Could do with some fleshing out.
+
+
+.. meta::
+    :title lang=en: TimeHelper
+    :keywords lang=en: time strings,unix epoch,undesired results,rtype,necessary modifications,format time,php class,fri,time format,august 23rd,time zone,january 1,js,utc,config,tin,gmt,unix
