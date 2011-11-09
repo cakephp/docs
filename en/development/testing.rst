@@ -773,6 +773,8 @@ Create a file named ``ArticlesControllerTest.php`` in your
     <?php
     class ArticlesControllerTest extends ControllerTestCase {
 
+        public $fixtures = array('app.article');
+
         function testIndex() {
             $result = $this->testAction('/articles/index');
             debug($result);
