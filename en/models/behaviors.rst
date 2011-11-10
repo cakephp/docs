@@ -148,9 +148,9 @@ will give us the list of attached behaviors::
 
     <?php
     // If the Translate behavior is not attached
-    if (!$this->Category->Behaviors->loaded('Translate')) {
+    if (!$this->Category->Behaviors->attached('Translate')) {
         // Get the list of all behaviors the model has attached
-        $behaviors = $this->Category->Behaviors->loaded();
+        $behaviors = $this->Category->Behaviors->attached();
     }
 
 Creating Behaviors
