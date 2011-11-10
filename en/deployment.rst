@@ -10,7 +10,7 @@ Set document root
 Setting the document root correctly on your application is an important step to
 keeping your code secure and your application safer. CakePHP applications,
 should have the document root set to the application's ``app/webroot``.  This
-makes the application and configuration files in-accessible through a URL.
+makes the application and configuration files inaccessible through a URL.
 Setting the document root is different for different webservers.  See the
 :doc:`/installation/advanced-installation` documentation for webserver specific
 information.
