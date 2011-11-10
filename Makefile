@@ -7,7 +7,7 @@ PYTHON = python
 .PHONY: all clean html latexpdf epub htmlhelp website website-dirs
 
 # Languages that can be built.
-LANGS = en es fr ja pt
+LANGS = en es fr ja pt ru
 DEST = website
 
 # Dependencies to perform before running other builds.
