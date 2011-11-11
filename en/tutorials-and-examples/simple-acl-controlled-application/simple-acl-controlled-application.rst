@@ -170,7 +170,7 @@ site controlled with Auth and Acl, we will set them up in
             'Acl',
             'Auth' => array(
                 'authorize' => array(
-                    'Actions' => array('actionPath' => 'controllers')
+                    'Actions' => array('actionPath' => 'controllers') // Here we did this the first time...
                 )
             ),
             'Session'
@@ -374,7 +374,7 @@ path when looking up controllers/actions. In ``AppController`` add
 the following to the ``beforeFilter``::
 
     <?php
-    $this->Auth->actionPath = 'controllers';
+    $this->Auth->actionPath = 'controllers'; // and here documentation tell us to do the same second time. If it's not a misstatement, sorry for my stupidity :)
 
 Continue to :doc:`part-two` to continue the tutorial.
 
