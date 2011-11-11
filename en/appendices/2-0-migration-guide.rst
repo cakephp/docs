@@ -518,6 +518,16 @@ Router
 - When using Router::parseExtensions() the extension parameter is no longer
   under ``$this->params['url']['ext']``. Instead it is available at
   ``$this->request->params['ext']``.
+- Default plugin routes have changed. Plugin short routes are no longer built
+  in for any actions other than index.  Previously ``/users`` and ``/users/add``
+  would map to the UserController in the Users plugin.  In 2.0, only the
+  ``index`` action is given a short route.  If you wish to continue using short
+  routes, you cand add a route like::
+
+    <?php
+    Router::connect('/users/:action', array('controller' => 'users', 'plugin' => 'users'));
+  
+  To your routes file for each plugin you need short routes on.
 
 Dispatcher
 ----------
