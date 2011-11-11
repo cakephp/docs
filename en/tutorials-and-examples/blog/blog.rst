@@ -124,6 +124,7 @@ like the following:
 
 ::
 
+    <?php
     public $default = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,
@@ -164,7 +165,6 @@ guessed.
      * A random string used in security hashing methods.
      */
     Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
-    ?>
 
 The cipher seed is used for encrypt/decrypt strings. Change the
 default seed value by editing ``/app/Config/core.php`` line 192. It
@@ -178,7 +178,6 @@ easily guessed.
      * A random numeric string (digits only) used to encrypt/decrypt strings.
      */
     Configure::write('Security.cipherSeed', '7485712659625147843639846751');
-    ?>
 
 The final task is to make the ``app/tmp`` directory web-writable.
 The best way to do this is to find out what user your webserver

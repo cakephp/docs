@@ -371,7 +371,6 @@ single User and a single Profile::
             }
         }
     }
-    ?>
 
 As a rule, when working with hasOne, hasMany, and belongsTo
 associations, it's all about keying. The basic idea is to get the
@@ -449,7 +448,7 @@ him to log a student's attendance on a course with days attended and grade. Take
 a look at the following code.::
 
    <?php
-    //Controller/CourseMembershipController.php
+    // Controller/CourseMembershipController.php
     
     class CourseMembershipsController extends AppController {
         public $uses = array('CourseMembership');
@@ -468,7 +467,7 @@ a look at the following code.::
         }
     }
     
-    //View/CourseMemberships/add.ctp
+    // View/CourseMemberships/add.ctp
 
     <?php echo $this->Form->create('CourseMembership'); ?>
         <?php echo $this->Form->input('Student.first_name'); ?>
@@ -547,7 +546,7 @@ a CourseMembership. So you might have a form that allows selection
 of existing students and courses from picklists or ID entry and
 then the two meta-fields for the CourseMembership, e.g.::
         
-        //View/CourseMemberships/add.ctp
+        // View/CourseMemberships/add.ctp
         
         <?php echo $form->create('CourseMembership'); ?>
             <?php echo $this->Form->input('Student.id', array('type' => 'text', 'label' => 'Student ID', 'default' => 1)); ?>

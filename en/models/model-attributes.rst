@@ -26,7 +26,7 @@ Example usage:
 
     <?php
     class Example extends AppModel {
-       public $useDbConfig = 'alternate';
+        public $useDbConfig = 'alternate';
     }
 
 useTable
@@ -42,14 +42,14 @@ Example usage::
 
     <?php
     class Example extends AppModel {
-       public $useTable = false; // This model does not use a database table
+        public $useTable = false; // This model does not use a database table
     }
 
 Alternatively::
 
     <?php
     class Example extends AppModel {
-       public $useTable = 'exmp'; // This model uses a database table 'exmp'
+        public $useTable = 'exmp'; // This model uses a database table 'exmp'
     }
 
 tablePrefix
@@ -64,7 +64,7 @@ the model.
 Example usage::
 
     class Example extends AppModel {
-       public $tablePrefix = 'alternate_'; // will look for 'alternate_examples'
+        public $tablePrefix = 'alternate_'; // will look for 'alternate_examples'
     }
 
 .. _model-primaryKey:
@@ -98,7 +98,7 @@ For example, to use the ``username`` field::
 
     <?php
     class User extends AppModel {
-       public $displayField = 'username';
+        public $displayField = 'username';
     }
 
 Multiple field names cannot be combined into a single display

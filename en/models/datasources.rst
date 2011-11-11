@@ -204,6 +204,7 @@ Simply place your datasource file into
 ``Plugin/[your_plugin]/Model/Datasource/[your_datasource].php``
 and refer to it using the plugin notation::
 
+    <?php
     public $twitter = array(
         'datasource' => 'Twitter.TwitterSource',
         'username' => 'test@example.com',

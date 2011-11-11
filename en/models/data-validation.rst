@@ -190,6 +190,7 @@ This key should be assigned to a boolean value. If ‘required’ is
 true, the field must be present in the data array. For example, if
 the validation rule has been defined as follows::
 
+    <?php
     public $validate = array(
         'login' => array(
             'rule' => 'alphaNumeric',

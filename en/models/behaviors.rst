@@ -38,7 +38,6 @@ Behaviors are attached to models through the ``$actsAs`` model class
 variable::
 
     <?php
-
     class Category extends AppModel {
         public $name   = 'Category';
         public $actsAs = array('Tree');
@@ -62,7 +61,6 @@ the names of the "left" and "right" fields in the underlying
 database table::
 
     <?php
-
     class Category extends AppModel {
         public $name   = 'Category';
         public $actsAs = array('Tree' => array(
@@ -76,7 +74,6 @@ why, for example, our Category model should only behave as a tree,
 it may also need internationalization support::
 
     <?php
-
     class Category extends AppModel {
         public $name   = 'Category';
         public $actsAs = array(

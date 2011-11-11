@@ -114,6 +114,7 @@ changed very easily. Use the code below in the appropriate model.
 
 ::
 
+    <?php
     function beforeSave() {
         if (!empty($this->data['Event']['begindate']) && !empty($this->data['Event']['enddate'])) {
                 $this->data['Event']['begindate'] = $this->dateFormatBeforeSave($this->data['Event']['begindate']);

@@ -52,6 +52,7 @@ Given this type of setup, I would need to edit my webroot/index.php
 file (which will end up at /var/www/mysite/index.php, in this
 example) to look like the following::
 
+    <?php
     // /app/webroot/index.php (partial, comments removed) 
     
     if (!defined('ROOT')) {
