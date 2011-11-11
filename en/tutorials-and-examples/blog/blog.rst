@@ -1,6 +1,6 @@
-#####
-Blog
-#####
+#############
+Blog Tutorial
+#############
 
 Welcome to CakePHP. You're probably checking out this tutorial
 because you want to learn more about how CakePHP works. It's our
@@ -255,5 +255,5 @@ Continue to :doc:`/tutorials-and-examples/blog/part-two` to start building your 
 
 
 .. meta::
-    :title lang=en: #####
+    :title lang=en: Blog Tutorial
     :keywords lang=en: model view controller,object oriented programming,application logic,directory setup,basic knowledge,database server,server configuration,reins,documentroot,readme,repository,web server,productivity,lib,sql,aim,cakephp,servers,apache,downloads

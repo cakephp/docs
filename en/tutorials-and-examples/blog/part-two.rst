@@ -1,5 +1,5 @@
 ##############################
-Blog tutorial - Adding a layer
+Blog Tutorial - Adding a layer
 ##############################
 
 Create a Post Model
@@ -634,5 +634,5 @@ These are common tasks people learning CakePHP usually want to study next:
 
 
 .. meta::
-    :title lang=en: ##############################
+    :title lang=en: Blog Tutorial Adding a Layer
     :keywords lang=en: doc models,validation check,controller actions,model post,php class,model class,model object,business logic,database table,naming convention,bread and butter,callbacks,prefixes,nutshell,interaction,array,cakephp,interface,applications,delete
