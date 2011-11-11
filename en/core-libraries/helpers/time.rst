@@ -39,10 +39,14 @@ Formatting
 
 .. php:method:: convert($serverTime, $userOffset = NULL)
 
-    :rtype: string
+    :rtype: integer
 
     Converts given time (in server's time zone) to user's local 
     time, given his/her offset from GMT.
+
+        <?php
+        echo $this->Time->convert(time(), -8);
+        // 1321038036
 
 .. php:method:: convertSpecifiers($format, $time = NULL)
 
