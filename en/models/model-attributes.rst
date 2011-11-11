@@ -6,7 +6,7 @@ default model behavior.
 
 For a complete list of model attributes and their descriptions
 visit the CakePHP API. Check out
-`http://api.cakephp.org/class/model <http://api.cakephp.org/class/model>`_.
+`http://api20.cakephp.org/class/model <http://api20.cakephp.org/class/model>`_.
 
 useDbConfig
 ===========
