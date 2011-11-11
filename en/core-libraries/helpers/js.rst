@@ -844,4 +844,5 @@ control and more complex effects to be created.
 
 .. meta::
     :title lang=en: JsHelper
-    :keywords lang=en: javascript engine,javascript library,extensible solution,extensible system,engine selection,helpe,html script,javascript code,webroot,scriptaculous,prototype,backbone,favour,mootools,api,ui,flexibility,lib,scripts,libraries
+    :description lang=en: The Js Helper supports the javascript libraries Prototype, jQuery and Mootools and provides methods for manipulating javascript.
+    :keywords lang=en: js helper,javascript,cakephp jquery,cakephp mootools,cakephp prototype,cakephp jquery ui,cakephp scriptaculous,cakephp javascript,javascript engine

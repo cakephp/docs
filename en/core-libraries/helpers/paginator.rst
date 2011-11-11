@@ -451,5 +451,6 @@ Other Methods
 
 
 .. meta::
-    :title lang=en: Paginator
-    :keywords lang=en: core libraries,true model,php class,string key,string title,resultset,inflection,page numbers,sor,asc,tandem,array,parameters,desc,queries,images
+    :title lang=en: PaginatorHelper
+    :description lang=en: The Pagination helper is used to output pagination controls such as page numbers and next/previous links.
+    :keywords lang=en: paginator helper,pagination,sort,page number links,pagination in views,prev link,next link,last link,first link,page counter

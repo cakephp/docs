@@ -207,5 +207,6 @@ Feed Validator or the w3c site at http://validator.w3.org/feed/.
 
 
 .. meta::
-    :title lang=en: RSS
-    :keywords lang=en: address posts,public components,controller code,php class,automagic,html view,webservice,controller set,simple steps,metadata,router,content type,formatting,array,snap,config,logic,cakephp,xml,url
+    :title lang=en: RssHelper
+    :description lang=en: The RSS helper makes generating XML for RSS feeds easy.
+    :keywords lang=en: rss helper,rss feed,isrss,rss item,channel data,document data,parse extensions,request handler

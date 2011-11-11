@@ -217,7 +217,6 @@ Formatting
 
     A wrapper for fromString.
 
-
 Testing Time
 ============
 
@@ -244,4 +243,5 @@ Testing Time
 
 .. meta::
     :title lang=en: TimeHelper
-    :keywords lang=en: time strings,unix epoch,undesired results,rtype,necessary modifications,format time,php class,fri,time format,august 23rd,time zone,january 1,js,utc,config,tin,gmt,unix
+    :description lang=en: The Time Helper will help you format time and test time.
+    :keywords lang=en: time helper,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt

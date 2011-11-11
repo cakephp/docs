@@ -659,5 +659,6 @@ layout where getCrumbs was added.
 
 
 .. meta::
-    :title lang=en: HTML
-    :keywords lang=en: null array,array class,array name,path string,meta tag,cpu cycles,css file,multiple files,markup,iso 8859,attributes,attribute,stylesheet,utf 8,cakephp,elements,cache,options
+    :title lang=en: HtmlHelper
+    :description lang=en: The role of the HtmlHelper in CakePHP is to make HTML-related options easier, faster, and more resilient to change.
+    :keywords lang=en: html helper,cakephp css,cakephp script,content type,html image,html link,html tag,script block,script start,html url,cakephp style,cakephp crumbs

@@ -181,4 +181,5 @@ NumberHelper
 
 .. meta::
     :title lang=en: NumberHelper
-    :keywords lang=en: currency format,currency type,currency symbol,decimal symbol,currency usd,formatted number,format numbers,parameter number,option description,number ie,number string,decimal numbers,php class,zero values,whole numbers,negative numbers,decimal places,precisions,floating point,decimals
+    :description lang=en: The Number Helper contains convenience methods that enable display numbers in common formats in your views.
+    :keywords lang=en: number helper,currency,number format,number precision,format file size,format numbers

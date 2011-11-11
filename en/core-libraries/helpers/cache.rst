@@ -140,4 +140,5 @@ cached view files. If you need to clear the cached view files, use
 
 .. meta::
     :title lang=en: CacheHelper
-    :keywords lang=en: cache tags,minimal code,request string,php class,cache files,retrieving data,configuration options,time value,callbacks,processing time,html files,saving time,two steps,layouts,array,duration,config,checks,url
+    :description lang=en: The Cache helper assists in caching entire layouts and views, saving time repetitively retrieving data.
+    :keywords lang=en: cache helper,view caching,cache action,cakephp cache,nocache,clear cache

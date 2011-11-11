@@ -103,4 +103,5 @@ The above will output a simple message, with the following html::
 
 .. meta::
     :title lang=en: SessionHelper
-    :keywords lang=en: natural counterpart,flash messages,component method,session php,dot notation,component data,notification messages,additional properties,simple message,params,notifications,boolean,array,node,customize,functionality,existence,element
+    ::description lang=en: As a natural counterpart to the Session Component, the Session Helper replicates most of the components functionality and makes it available in your view.
+    :keywords lang=en: session helper,flash messages,session flash,session read,session check
