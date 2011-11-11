@@ -42,7 +42,7 @@ Formatting
     :rtype: integer
 
     Converts given time (in server's time zone) to user's local 
-    time, given his/her offset from GMT.
+    time, given his/her offset from GMT.::
 
         <?php
         echo $this->Time->convert(time(), -8);
