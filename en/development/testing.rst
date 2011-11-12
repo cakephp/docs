@@ -976,7 +976,7 @@ first line where 'Blog.BlogPost' is imported. You also need to
 prefix your plugin fixtures with ``plugin.blog.blog_post``::
 
     <?php 
-    App::uses('Blog.BlogPost', 'Model');
+    App::uses('BlogPost', 'Blog.Model');
 
     class BlogPostTest extends CakeTestCase {
 
