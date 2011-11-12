@@ -220,7 +220,7 @@ to dropping and creating the tables.
 
 If you don't have shell access, or are having trouble using the
 console, you can run the sql file found in
-/path/to/app/Config/schema/db\_acl.sql.
+/path/to/core/lib/Cake/Console/Templates/skel/Config/Schema/db\_acl.sql.
 
 With the controllers setup for data entry, and the Acl tables
 initialized we are ready to go right? Not entirely, we still have a
