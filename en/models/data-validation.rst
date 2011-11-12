@@ -190,6 +190,7 @@ This key should be assigned to a boolean value. If ‘required’ is
 true, the field must be present in the data array. For example, if
 the validation rule has been defined as follows::
 
+    <?php
     public $validate = array(
         'login' => array(
             'rule' => 'alphaNumeric',
@@ -896,3 +897,8 @@ with usage examples.
 .. toctree::
 
     data-validation/validating-data-from-the-controller
+
+
+.. meta::
+    :title lang=en: Data Validation
+    :keywords lang=en: validation rules,validation data,validation errors,data validation,credit card numbers,core libraries,password email,model fields,login field,model definition,php class,many different aspects,eight characters,letters and numbers,business rules,validation process,date validation,error messages,array,formatting

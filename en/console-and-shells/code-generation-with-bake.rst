@@ -228,3 +228,8 @@ will find which of the pluginPaths the named plugin is located on,
 and add the files there.
 
 
+
+
+.. meta::
+    :title lang=en: Code Generation with Bake
+    :keywords lang=en: command line interface,functional application,atabase,database configuration,bash script,basic ingredients,roject,odel,path path,code generation,scaffolding,windows users,configuration file,few minutes,config,iew,shell,models,running,mysql

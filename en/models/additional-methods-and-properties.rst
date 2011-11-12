@@ -11,6 +11,7 @@ the fat model.
 
 ::
 
+    <?php
     class Example extends AppModel {
     
        function getRecent() {
@@ -25,5 +26,11 @@ This ``getRecent()`` method can now be used within the controller.
 
 ::
 
+    <?php
     $recent = $this->Example->getRecent();
 
+
+
+.. meta::
+    :title lang=en: Additional Methods and Properties
+    :keywords lang=en: model classes,model functions,model class,interval,array

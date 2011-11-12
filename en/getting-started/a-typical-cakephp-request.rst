@@ -49,3 +49,8 @@ Black = required element, Gray = optional element, Blue = callback
 #. Additional controller callbacks (like afterFilter) may be
    applied. The complete, rendered view code is sent to Ricardo’s
    browser.
+
+
+.. meta::
+    :title lang=en: A Typical CakePHP Request
+    :keywords lang=en: optional element,model usage,controller class,custom cake,business logic,request example,request url,flow diagram,basic ingredients,datasources,sending emails,callback,cakes,manipulation,authentication,router,web server,parameters,cakephp,models

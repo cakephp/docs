@@ -323,3 +323,8 @@ Cache API
     Garbage collects entries in the cache configuration.  This is primarily
     used by FileEngine. It should be implemented by any Cache engine
     that requires manual eviction of cached data.
+
+
+.. meta::
+    :title lang=en: Caching
+    :keywords lang=en: uniform api,xcache,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apc,memcache,queries,cakephp,elements,servers,memory

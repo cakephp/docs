@@ -69,3 +69,8 @@ Inflector
 
     Define new inflection and transliteration rules for Inflector to use.
     See :ref:`inflection-configuration` for more information.
+
+
+.. meta::
+    :title lang=en: Inflector
+    :keywords lang=en: apple orange,word variations,apple pie,person man,latin versions,profile settings,php class,initial state,puree,slug,apples,oranges,user profile,underscore

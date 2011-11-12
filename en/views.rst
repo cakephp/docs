@@ -110,7 +110,6 @@ To set the title for the layout, it's easiest to do so in the
 controller, setting the ``$title_for_layout`` variable::
 
    <?php
-
    class UsersController extends AppController {
        function viewActive() {
            $this->set('title_for_layout', 'View Active Users');
@@ -121,7 +120,6 @@ controller, setting the ``$title_for_layout`` variable::
 You can also set the title_for_layout variable from inside the view file::
 
     <?php
-
     $this->set('title_for_layout', $titleContent);
 
 You can create as many layouts as you wish: just place them in the
@@ -196,7 +194,8 @@ Passing Variables into an Element
 You can pass data to an element through the element's second
 argument::
 
-    <?php echo $this->element('helpbox', array(
+    <?php
+    echo $this->element('helpbox', array(
         "helptext" => "Oh, this text is very helpful."
     ));
 
@@ -213,16 +212,17 @@ variable::
 The :php:meth:`View::element()` method also supports options for the element.
 The options supported are 'cache', 'callbacks' and 'plugin'. An example::
 
-    <?php echo $this->element('helpbox', array(
-                "helptext" => "This is passed to the element as $helptext",
-                "foobar" => "This is passed to the element as $foobar",
-            ),
-            array(
-                "cache" => "long_view", // uses the "long_view" cache configuration
-                "plugin" => "",  //to render an element from a plugin
-                "callbacks" => true // set to true to have before/afterRender called for the element
-            )
-        );
+    <?php
+    echo $this->element('helpbox', array(
+            "helptext" => "This is passed to the element as $helptext",
+            "foobar" => "This is passed to the element as $foobar",
+        ),
+        array(
+            "cache" => "long_view", // uses the "long_view" cache configuration
+            "plugin" => "",  //to render an element from a plugin
+            "callbacks" => true // set to true to have before/afterRender called for the element
+        )
+    );
 
 Element caching is facilitated through the :php:class:`Cache` class.  You can
 configure elements to be stored in any Cache configuration you've setup.  This
@@ -408,3 +408,8 @@ More about Views
     views/themes
     views/media-view
     views/helpers
+
+
+.. meta::
+    :title lang=en: Views
+    :keywords lang=en: view logic,csv file,response elements,code elements,default extension,json,flash object,remote application,twig,subclass,ajax,reply,soap,functionality,cakephp,audience,xml,mvc

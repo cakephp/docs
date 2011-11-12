@@ -136,3 +136,9 @@ If you need to manually clear the cache, you can do so by calling
 Cache::clear(). This will clear **all** cached data, excluding
 cached view files. If you need to clear the cached view files, use
 ``clearCache()``.
+
+
+.. meta::
+    :title lang=en: CacheHelper
+    :description lang=en: The Cache helper assists in caching entire layouts and views, saving time repetitively retrieving data.
+    :keywords lang=en: cache helper,view caching,cache action,cakephp cache,nocache,clear cache

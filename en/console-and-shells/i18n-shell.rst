@@ -43,3 +43,8 @@ The i18n shell can also be used to initialize the default tables used by the
     ./Console/cake i18n initdb
 
 This will create the ``i18n`` table used by translate behavior.
+
+
+.. meta::
+    :title lang=en: I18N shell
+    :keywords lang=en: pot files,locale default,translation tools,message string,app locale,php class,validation,i18n,translations,shell,models

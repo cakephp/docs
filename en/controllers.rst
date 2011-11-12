@@ -614,7 +614,7 @@ Controller Attributes
 
 For a complete list of controller attributes and their descriptions
 visit the CakePHP API. Check out
-`http://api.cakephp.org/class/controller <http://api20.cakephp.org/class/controller>`_.
+`http://api20.cakephp.org/class/controller <http://api20.cakephp.org/class/controller>`_.
 
 .. php:attr:: name
 
@@ -739,3 +739,8 @@ More on controllers
     controllers/scaffolding
     controllers/pages-controller
     controllers/components
+
+
+.. meta::
+    :title lang=en: Controllers
+    :keywords lang=en: correct models,controller class,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,logic,recipes

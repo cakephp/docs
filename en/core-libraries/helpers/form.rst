@@ -3,12 +3,12 @@ FormHelper
 
 .. php:class:: FormHelper
 
-The FormHelper is a new addition to CakePHP. Most of the heavy
-lifting in form creation is now done using this. The FormHelper
-focuses on creating forms quickly, in a way that will streamline
-validation, re-population and layout. The FormHelper is also
-flexible - it will do almost everything for you using conventions, or
-you can use specific methods to get only what you need.
+The FormHelper does most of the heavy lifting in form creation. 
+The FormHelper focuses on creating forms quickly, in a way that 
+will streamline validation, re-population and layout. The 
+FormHelper is also flexible - it will do almost everything for 
+you using conventions, or you can use specific methods to get 
+only what you need.
 
 Creating Forms
 ==============
@@ -254,7 +254,7 @@ Closing the Form
 
         <div class="glass-pill"><input type="submit" value="Update!" name="Update"></div>
 
-    See the `API <http://api.cakephp.org>`_ for further details.
+    See the `API <http://api20.cakephp.org>`_ for further details.
 
     .. note::
 
@@ -1471,3 +1471,9 @@ Hidden fields no longer remove the class attribute. This means
 that if there are validation errors on hidden fields, 
 the error-field classname will be applied.
 
+
+
+.. meta::
+    :title lang=en: FormHelper
+    :description lang=en: The FormHelper focuses on creating forms quickly, in a way that will streamline validation, re-population and layout.
+    :keywords lang=en: html helper,cakephp html,form create,form input,form select,form file field,form label,form text,form password,form checkbox,form radio,form submit,form date time,form error,validate upload,unlock field,form security

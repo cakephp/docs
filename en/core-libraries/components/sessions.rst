@@ -157,3 +157,8 @@ Creating notification messages
 
         <div id="flashMessage" class="example_class">Example message text</div>
 
+
+
+.. meta::
+    :title lang=en: Sessions
+    :keywords lang=en: php array,dailyplanet com,configuration documentation,dot notation,feedback messages,reading data,session data,page requests,clark kent,dots,existence,sessions,convenience,cakephp

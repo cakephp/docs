@@ -740,3 +740,8 @@ Schema files used with the SchemaShell have been moved to
 ``app/config/schema`` instead of ``app/config/sql`` Although
 ``config/sql`` will continue to work in 1.3, it will not in future
 versions, it is recommend that the new path is used.
+
+
+.. meta::
+    :title lang=en: Migrating from CakePHP 1.2 to 1.3
+    :keywords lang=en: inflections,bootstrap,unit tests,constants,cipher,php 5,replacements,pear,array,variables,models,cakephp,plugins

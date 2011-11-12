@@ -615,7 +615,7 @@ Inserting Well-Formatted elements
         /posts/search?foo=bar#first
 
     For further information check
-    `Router::url <http://api.cakephp.org/class/router#method-Routerurl>`_
+    `Router::url <http://api20.cakephp.org/class/router#method-Routerurl>`_
     in the API.
 
 Changing the tags output by HtmlHelper
@@ -656,3 +656,9 @@ breadcrumb trails on each of the pages::
 
 This will add the output of "**Home > Users > Add User**" in your
 layout where getCrumbs was added.
+
+
+.. meta::
+    :title lang=en: HtmlHelper
+    :description lang=en: The role of the HtmlHelper in CakePHP is to make HTML-related options easier, faster, and more resilient to change.
+    :keywords lang=en: html helper,cakephp css,cakephp script,content type,html image,html link,html tag,script block,script start,html url,cakephp style,cakephp crumbs

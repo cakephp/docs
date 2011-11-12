@@ -190,3 +190,8 @@ of the options array in the second parameter. Once that key has
 been set, the specified route works only for that HTTP request
 method (which could also be GET, DELETE, etc.)
 
+
+
+.. meta::
+    :title lang=en: REST
+    :keywords lang=en: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api

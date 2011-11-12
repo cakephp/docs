@@ -347,3 +347,8 @@ by an underscore character, for example:
 
     <?php
     define('LONG_NAMED_CONSTANT', 2);
+
+
+.. meta::
+    :title lang=en: Coding Standards
+    :keywords lang=en: curly brackets,indentation level,logical errors,control structures,control structure,expr,coding standards,parenthesis,foreach,readability,moose,new features,repository,developers

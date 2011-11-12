@@ -9,3 +9,8 @@ convert url arrays (eg. array('controller' => 'posts',
 Read more about ways to :ref:`configure the Router <routes-configuration>` and
 the :php:class:`Router` class.
 
+
+
+.. meta::
+    :title lang=en: Router
+    :keywords lang=en: array controller,php class,indexes,urls,configure router,parameters

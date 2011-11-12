@@ -59,3 +59,8 @@ Glossary
         This file is included before each request is processed.
         It should connect all the routes your application needs so 
         requests can be routed to the correct controller + action.
+
+
+.. meta::
+    :title lang=en: Glossary
+    :keywords lang=en: html attributes,array class,array controller,glossary glossary,target blank,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions

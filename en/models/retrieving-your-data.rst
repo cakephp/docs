@@ -977,3 +977,8 @@ custom query you like::
     $db->fetchAll('SELECT * from users where username = ? AND password = ?', array('jhon', '12345'));
     $db->fetchAll('SELECT * from users where username = :username AND password = :password', array('username' => 'jhon','password' => '12345'));
 
+
+
+.. meta::
+    :title lang=en: Retrieving Your Data
+    :keywords lang=en: upper case character,array model,order array,controller code,retrieval functions,model layer,model methods,model class,model data,data retrieval,field names,workhorse,desc,neighbors,parameters,storage,models

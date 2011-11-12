@@ -114,3 +114,8 @@ submit a pull request on github.
 
 All bug fixes merged into a maintenance branch will also be merged into upcoming
 releases periodically by the core team.
+
+
+.. meta::
+    :title lang=en: Code
+    :keywords lang=en: cakephp source code,code patches,test ref,descriptive name,bob barker,initial setup,global user,database connection,clone,lighthouse,repository,user information,enhancement,back patches,checkout

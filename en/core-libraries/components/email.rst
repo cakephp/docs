@@ -45,3 +45,8 @@ Below some examples of using ``EmailComponent ($component)`` and now with
 
 For more information you should read the :doc:`/core-utility-libraries/email`
 documentation.
+
+
+.. meta::
+    :title lang=en: EmailComponent
+    :keywords lang=en: component subject,component delivery,php class,template layout,custom headers,template method,filenames,alias,lib,array,email,migration,attachments,elements,sun

@@ -343,3 +343,8 @@ name of configuration in ``EmailConfig``.
 If you want, you can pass the to, subject and message as null and do all
 configurations in the 4th parameter (as array or using ``EmailConfig``).
 Check the list of :ref:`configurations <email-configurations>` to see all accepted configs.
+
+
+.. meta::
+    :title lang=en: CakeEmail
+    :keywords lang=en: sending mail,email sender,envelope sender,php class,database configuration,sending emails,meth,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models

@@ -77,3 +77,8 @@ statements that represent the difference between the existing
 database the currently executing schema file.
 
 You can perform a dry run by adding a ``--dry`` to your command.
+
+
+.. meta::
+    :title lang=en: Schema management and migrations
+    :keywords lang=en: schema files,schema management,schema objects,database schema,table statements,database changes,migrations,versioning,snapshots,sql,snapshot,shell,config,functionality,choices,models,php files,php file,directory,running

@@ -773,6 +773,8 @@ Create a file named ``ArticlesControllerTest.php`` in your
     <?php
     class ArticlesControllerTest extends ControllerTestCase {
 
+        public $fixtures = array('app.article');
+
         function testIndex() {
             $result = $this->testAction('/articles/index');
             debug($result);
@@ -1065,3 +1067,8 @@ Run a build
 You should be able to run a build now.  Check the console output and make any
 necessary changes to get a passing build.
 
+
+
+.. meta::
+    :title lang=en: Testing
+    :keywords lang=en: web runner,phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration

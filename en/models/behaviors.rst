@@ -38,7 +38,6 @@ Behaviors are attached to models through the ``$actsAs`` model class
 variable::
 
     <?php
-
     class Category extends AppModel {
         public $name   = 'Category';
         public $actsAs = array('Tree');
@@ -62,7 +61,6 @@ the names of the "left" and "right" fields in the underlying
 database table::
 
     <?php
-
     class Category extends AppModel {
         public $name   = 'Category';
         public $actsAs = array('Tree' => array(
@@ -76,7 +74,6 @@ why, for example, our Category model should only behave as a tree,
 it may also need internationalization support::
 
     <?php
-
     class Category extends AppModel {
         public $name   = 'Category';
         public $actsAs = array(
@@ -148,9 +145,9 @@ will give us the list of attached behaviors::
 
     <?php
     // If the Translate behavior is not attached
-    if (!$this->Category->Behaviors->loaded('Translate')) {
+    if (!$this->Category->Behaviors->attached('Translate')) {
         // Get the list of all behaviors the model has attached
-        $behaviors = $this->Category->Behaviors->loaded();
+        $behaviors = $this->Category->Behaviors->attached();
     }
 
 Creating Behaviors
@@ -346,3 +343,8 @@ model that the behavior method was invoked on.
     beforeValidate callback will abort the validation and cause it to
     fail.
 
+
+
+.. meta::
+    :title lang=en: Behaviors
+    :keywords lang=en: tree manipulation,manipulation methods,model behaviors,access control list,model class,tree structures,php class,business contract,class category,database table,bakery,inheritance,functionality,interaction,logic,cakephp,models,essence

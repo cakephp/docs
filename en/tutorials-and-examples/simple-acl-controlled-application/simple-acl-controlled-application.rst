@@ -9,7 +9,7 @@ tutorial, and you are familiar with
 :doc:`/console-and-shells/code-generation-with-bake`. You should have
 some experience with CakePHP, and be familiar with MVC concepts.
 This tutorial is a brief introduction to the
-:php:class:`AuthComponent` and :php:class:`AclComponent`.
+:php:class:`AuthComponent` and :php:class:`AclComponent`\.
 
 What you will need
 
@@ -370,10 +370,12 @@ permissions. As we will be using a global root ACO we need to make
 a small modification to our ``AuthComponent`` configuration.
 ``AuthComponent`` needs to know about the existence of this root
 node, so that when making ACL checks it can use the correct node
-path when looking up controllers/actions. In ``AppController`` add
-the following to the ``beforeFilter``::
-
-    <?php
-    $this->Auth->actionPath = 'controllers';
+path when looking up controllers/actions. In ``AppController`` ensure
+that you ``$components`` array contains the ``actionPath`` defined earlier.
 
 Continue to :doc:`part-two` to continue the tutorial.
+
+
+.. meta::
+    :title lang=en: Simple Acl controlled Application
+    :keywords lang=en: core libraries,auto increment,object oriented programming,database schema,sql statements,php class,stable release,code generation,database server,server configuration,reins,access control,shells,mvc,authentication,web server,cakephp,servers,checkout,apache

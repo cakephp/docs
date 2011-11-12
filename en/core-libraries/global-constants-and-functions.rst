@@ -179,3 +179,8 @@ Most of the following constants refer to paths in your application.
 .. php:const:: WWW\_ROOT
 
     full path to the webroot.
+
+
+.. meta::
+    :title lang=en: Global Constants and Functions
+    :keywords lang=en: internationalization and localization,global constants,example config,array php,convenience functions,core libraries,component classes,optional number,global functions,string string,core classes,format strings,unread messages,placeholders,useful functions,sprintf,arrays,parameters,existence,translations

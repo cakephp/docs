@@ -1,6 +1,6 @@
-#####
-Blog
-#####
+#############
+Blog Tutorial
+#############
 
 Welcome to CakePHP. You're probably checking out this tutorial
 because you want to learn more about how CakePHP works. It's our
@@ -124,6 +124,7 @@ like the following:
 
 ::
 
+    <?php
     public $default = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,
@@ -164,7 +165,6 @@ guessed.
      * A random string used in security hashing methods.
      */
     Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
-    ?>
 
 The cipher seed is used for encrypt/decrypt strings. Change the
 default seed value by editing ``/app/Config/core.php`` line 192. It
@@ -178,7 +178,6 @@ easily guessed.
      * A random numeric string (digits only) used to encrypt/decrypt strings.
      */
     Configure::write('Security.cipherSeed', '7485712659625147843639846751');
-    ?>
 
 The final task is to make the ``app/tmp`` directory web-writable.
 The best way to do this is to find out what user your webserver
@@ -253,3 +252,8 @@ can find instructions for getting URL rewriting working for other
 servers under the :doc:`/installation/advanced-installation` section.
 
 Continue to :doc:`/tutorials-and-examples/blog/part-two` to start building your first CakePHP application.
+
+
+.. meta::
+    :title lang=en: Blog Tutorial
+    :keywords lang=en: model view controller,object oriented programming,application logic,directory setup,basic knowledge,database server,server configuration,reins,documentroot,readme,repository,web server,productivity,lib,sql,aim,cakephp,servers,apache,downloads

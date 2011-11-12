@@ -840,3 +840,9 @@ This will show/hide the busy-indicator element before and after the
 ``#content`` div is updated. Although ``indicator`` has been
 removed, the new features offered by ``JsHelper`` allow for more
 control and more complex effects to be created.
+
+
+.. meta::
+    :title lang=en: JsHelper
+    :description lang=en: The Js Helper supports the javascript libraries Prototype, jQuery and Mootools and provides methods for manipulating javascript.
+    :keywords lang=en: js helper,javascript,cakephp jquery,cakephp mootools,cakephp prototype,cakephp jquery ui,cakephp scriptaculous,cakephp javascript,javascript engine

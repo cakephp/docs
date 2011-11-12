@@ -151,3 +151,8 @@ If you pass a locale that doesn't exist on your computer to
 `setlocale <http://www.php.net/setlocale>`_ it will have no
 effect. You can find the list of available locales by running the
 command $locale -a in a terminal.
+
+
+.. meta::
+    :title lang=en: Internationalization & Localization
+    :keywords lang=en: internationalization localization,internationalization and localization,localization features,language application,gettext,l10n,daunting task,adaptation,pot,i18n,audience,translation,languages

@@ -225,16 +225,16 @@ Including files with App::import()
     * The method no longer looks for classes recursively, it strictly uses the values for the 
       paths defined in :php:meth:`App::build()`
     * It will not be able to load ``App::import('Component', 'Component')`` use
-      ``App::uses('Component', 'Controller');``;
+      ``App::uses('Component', 'Controller');``.
     * Using ``App::import('Lib', 'CoreClass');`` to load core classes is no longer possible.
     * Importing a non-existent file, supplying a wrong type or package name, or
       null values for ``$name`` and ``$file`` parameters will result in a false return
-      value
+      value.
     * ``App::import('Core', 'CoreClass')`` is no longer supported, use
-      :php:meth:`App::uses()` instead and let the class autoloading do the rest
+      :php:meth:`App::uses()` instead and let the class autoloading do the rest.
     * Loading Vendor files does not look recursively in the vendors folder, it
-      will also not convert anymore the file to underscored as it did on the
-      past
+      will also not convert the file to underscored anymore as it did in the
+      past.
 
 Overriding classes in CakePHP
 =============================
@@ -288,6 +288,18 @@ To load **app/vendors/vendorName/libFile.php**::
 
     App::import('Vendor', 'aUniqueIdentifier', array('file' =>'vendorName'.DS.'libFile.php'));
 
+You can use ``App::uses()`` to load classes in vendors directories.  It follows
+the same conventions as loading other files.  To load classes in subdirectories,
+you'll need to add those paths with ``App::build()``::
+
+    App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage')));
+    App::uses('ClassInSomePackage', 'Vendor');
+
 .. todo::
 
     This is missing a ton of methods. And vendors docs are wrong.
+
+
+.. meta::
+    :title lang=en: App Class
+    :keywords lang=en: compatible implementation,model behaviors,path management,loading files,php class,class loading,model behavior,class location,component model,management class,autoloader,classname,directory location,override,conventions,lib,textile,cakephp,php classes,loaded

@@ -1,6 +1,8 @@
 Access Control Lists
 ####################
 
+.. php:class:: AclComponent
+
 CakePHP's access control list functionality is one of the most
 oft-discussed, most likely because it is the most sought after, but
 also because it can be the most confusing. If you're looking for a
@@ -860,3 +862,8 @@ The usage here is demonstrational, but hopefully you can see how
 checking like this can be used to decide whether or not to allow
 something to happen, show an error message, or redirect the user to
 a login.
+
+
+.. meta::
+    :title lang=en: Access Control Lists
+    :keywords lang=en: fantasy novel,access control list,request objects,online diary,request object,acls,adventurers,gandalf,lingo,web service,computer system,grandma,lord of the rings,entities,assets,logic,cakephp,stuff,control objects,control object

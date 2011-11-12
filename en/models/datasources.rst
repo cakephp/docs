@@ -204,8 +204,14 @@ Simply place your datasource file into
 ``Plugin/[your_plugin]/Model/Datasource/[your_datasource].php``
 and refer to it using the plugin notation::
 
+    <?php
     public $twitter = array(
         'datasource' => 'Twitter.TwitterSource',
         'username' => 'test@example.com',
         'password' => 'hi_mom',
     );
+
+
+.. meta::
+    :title lang=en: DataSources
+    :keywords lang=en: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,mssql,aggregates,apis,repository,signatures

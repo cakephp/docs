@@ -48,7 +48,6 @@ multidimensional array used to define association specifics.
 ::
 
     <?php
-    
     class User extends AppModel {
         public $name = 'User';
         public $hasOne = 'Profile';
@@ -60,8 +59,6 @@ multidimensional array used to define association specifics.
             )
         );
     }
-    
-    ?>
 
 In the above example, the first instance of the word 'Recipe' is
 what is termed an 'Alias'. This is an identifier for the
@@ -89,7 +86,6 @@ appropriate to have
         );
         public $hasAndBelongsToMany => array('MemberOf' => array('className' => 'Group'));
     }
-    ?>
 
 but the following will not work well in all circumstances:
 ::
@@ -112,7 +108,6 @@ but the following will not work well in all circumstances:
         );
         public $hasAndBelongsToMany => array('Member' => 'Group');
     }
-    ?>
 
 because here we have the alias 'Member' referring to both the User
 (in Group) and the Group (in User) model in the HABTM associations.
@@ -124,6 +119,7 @@ objects. So for example in your ``User`` model you can access the
 ``Recipe`` model as
 ::
 
+    <?php
     $this->Recipe->someFunction();
 
 Similarly in your controller you can access an associated model
@@ -131,6 +127,7 @@ simply by following your model associations:
 
 ::
 
+    <?php
     $this->User->Recipe->someFunction();
 
 .. note::
@@ -175,12 +172,10 @@ property to the model class. Remember to have a Profile model in
 /app/Model/Profile.php, or the association won’t work::
 
     <?php
-    
     class User extends AppModel {
-        public $name = 'User';                
-        public $hasOne = 'Profile';   
+        public $name = 'User';
+        public $hasOne = 'Profile';
     }
-    ?>
 
 There are two ways to describe this relationship in your model
 files. The simplest method is to set the $hasOne attribute to a
@@ -194,18 +189,16 @@ to include only certain records.
 ::
 
     <?php
-    
     class User extends AppModel {
-        public $name = 'User';          
+        public $name = 'User';
         public $hasOne = array(
             'Profile' => array(
                 'className'    => 'Profile',
                 'conditions'   => array('Profile.published' => '1'),
                 'dependent'    => true
             )
-        );    
+        );
     }
-    ?>
 
 Possible keys for hasOne association arrays include:
 
@@ -287,28 +280,24 @@ We can define the belongsTo association in our Profile model at
 /app/Model/Profile.php using the string syntax as follows::
 
     <?php
-    
     class Profile extends AppModel {
-        public $name = 'Profile';                
-        public $belongsTo = 'User';   
+        public $name = 'Profile';
+        public $belongsTo = 'User';
     }
-    ?>
 
 We can also define a more specific relationship using array
 syntax::
 
     <?php
-    
     class Profile extends AppModel {
-        public $name = 'Profile';                
+        public $name = 'Profile';
         public $belongsTo = array(
             'User' => array(
                 'className'    => 'User',
                 'foreignKey'    => 'user_id'
             )
-        );  
+        );
     }
-    ?>
 
 Possible keys for belongsTo association arrays include:
 
@@ -393,32 +382,28 @@ We can define the hasMany association in our User model at
 /app/Model/User.php using the string syntax as follows::
 
     <?php
-    
     class User extends AppModel {
-        public $name = 'User';                
-        public $hasMany = 'Comment';   
+        public $name = 'User';
+        public $hasMany = 'Comment';
     }
-    ?>
 
 We can also define a more specific relationship using array
 syntax::
 
     <?php
-    
     class User extends AppModel {
-        public $name = 'User';                
+        public $name = 'User';
         public $hasMany = array(
             'Comment' => array(
                 'className'     => 'Comment',
                 'foreignKey'    => 'user_id',
                 'conditions'    => array('Comment.status' => '1'),
-                'order'    => 'Comment.created DESC',
-                'limit'        => '5',
-                'dependent'=> true
+                'order'         => 'Comment.created DESC',
+                'limit'         => '5',
+                'dependent'     => true
             )
         );  
     }
-    ?>
 
 Possible keys for hasMany association arrays include:
 
@@ -624,7 +609,6 @@ association in the model files. We're gonna skip straight to the
 array syntax this time::
 
     <?php
-    
     class Recipe extends AppModel {
         public $name = 'Recipe';   
         public $hasAndBelongsToMany = array(
@@ -646,7 +630,6 @@ array syntax this time::
                 )
         );
     }
-    ?>
 
 Possible keys for HABTM association arrays include:
 
@@ -696,7 +679,7 @@ Possible keys for HABTM association arrays include:
 Once this association has been defined, find operations on the
 Recipe model will also fetch related Tag records if they exist::
 
-    //Sample results from a $this->Recipe->find() call.
+    // Sample results from a $this->Recipe->find() call.
     
     Array
     (  
@@ -777,14 +760,14 @@ That is, the association is a model itself. So, we can create a new
 model CourseMembership. Take a look at the following models.::
 
             <?php
-            //Student.php
+            // Student.php
             class Student extends AppModel {
                 public $hasMany = array(
                     'CourseMembership'
                 );
             }      
             
-            //Course.php
+            // Course.php
             
             class Course extends AppModel {
                 public $hasMany = array(
@@ -792,7 +775,7 @@ model CourseMembership. Take a look at the following models.::
                 );
             }
             
-            //CourseMembership.php
+            // CourseMembership.php
     
             class CourseMembership extends AppModel {
                 public $belongsTo = array(
@@ -830,10 +813,9 @@ up a few models so we can see how bindModel() and unbindModel()
 work. We'll start with two models::
 
     <?php
-    
     class Leader extends AppModel {
         public $name = 'Leader';
-     
+        
         public $hasMany = array(
             'Follower' => array(
                 'className' => 'Follower',
@@ -842,15 +824,9 @@ work. We'll start with two models::
         );
     }
     
-    ?>
-    
-    <?php
-    
     class Follower extends AppModel {
         public $name = 'Follower';
     }
-    
-    ?>
 
 Now, in the LeadersController, we can use the find() method in the
 Leader model to fetch a Leader and its associated followers. As you
@@ -937,13 +913,13 @@ create::
 
     <?php
     $this->Model->bindModel(
-            array('associationName' => array(
-                    'associatedModelClassName' => array(
-                        // normal association keys go here...
-                    )
+        array('associationName' => array(
+                'associatedModelClassName' => array(
+                    // normal association keys go here...
                 )
             )
-        );
+        )
+    );
 
 Even though the newly bound model doesn't need any sort of
 association definition in its model file, it will still need to be
@@ -973,7 +949,6 @@ recipient\_id. Now your Message model can look something like::
             )
         );
     }
-    ?>
 
 Recipient is an alias for the User model. Now let's see what the
 User model would look like::
@@ -992,7 +967,6 @@ User model would look like::
             )
         );
     }
-    ?>
 
 It is also possible to create self associations as shown below::
 
@@ -1014,7 +988,6 @@ It is also possible to create self associations as shown below::
             )
         );
     }
-    ?>
 
 **Fetching a nested array of associated records:**
 
@@ -1133,3 +1106,8 @@ and fetch the data, however in most cases you can use other tools to achieve the
 such as correctly defining associations, binding models on the fly and using the Containable
 behavior. This feature should be used with care because it could lead, in a few cases, into bad formed
 SQL queries if combined with any of the former techniques described for associating models.
+
+
+.. meta::
+    :title lang=en: Associations: Linking Models Together
+    :keywords lang=en: relationship types,relational mapping,recipe database,relational database,this section covers,web applications,recipes,models,cakephp,storage

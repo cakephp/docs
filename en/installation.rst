@@ -182,7 +182,12 @@ uncomment one line in ``app/Config/core.php``::
 
    <?php
    /**
-    * If you are on PHP 5.3 uncomment this line and correct your server timezone
-    * to fix the date & time related errors.
+    * Uncomment this line and correct your server timezone to fix 
+    * any date & time related errors.
     */
        date_default_timezone_set('UTC');
+
+
+.. meta::
+    :title lang=en: Installation
+    :keywords lang=en: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighthttpd,repository,enhancements,source code,cakephp,incorporate

@@ -83,3 +83,8 @@ directories in ``app/webroot`` with paths matching those used by cakephp.
    ``app/webroot/DebugKit/js/my_file.js``
 -  ``app/View/Themed/Navy/webroot/css/navy.css`` becomes
    ``app/webroot/theme/Navy/css/navy.css``
+
+
+.. meta::
+    :title lang=en: Themes
+    :keywords lang=en: production environments,theme folder,layout files,development requests,callback functions,folder structure,default view,dispatcher,symlink,case basis,layouts,assets,cakephp,themes,advantage

@@ -52,6 +52,7 @@ Given this type of setup, I would need to edit my webroot/index.php
 file (which will end up at /var/www/mysite/index.php, in this
 example) to look like the following::
 
+    <?php
     // /app/webroot/index.php (partial, comments removed) 
     
     if (!defined('ROOT')) {
@@ -367,3 +368,8 @@ file for you.
 Once the web.config file is created with the correct IIS-friendly
 rewrite rules, CakePHP's links, css, js, and rerouting should work
 correctly.
+
+
+.. meta::
+    :title lang=en: Advanced Installation
+    :keywords lang=en: libraries folder,core libraries,application code,different places,filesystem,constants,webroot,restriction,apps,web server,lib,cakephp,directories,path

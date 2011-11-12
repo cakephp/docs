@@ -77,3 +77,8 @@ use an anonymous function if you are using PHP5.3 or greater.::
 It is important to remember that errors captured by the configured error handler will be php
 errors, and that if you need custom error handling, you probably also want to configure
 :doc:`/development/exceptions` handling as well.
+
+
+.. meta::
+    :title lang=en: Error Handling
+    :keywords lang=en: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks

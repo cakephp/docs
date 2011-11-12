@@ -361,3 +361,8 @@ Here's an example of how to contain associations when paginating::
     );
 
     $users = $this->paginate('User');
+
+
+.. meta::
+    :title lang=en: Containable
+    :keywords lang=en: model behavior,author daniel,article content,new addition,wear and tear,array,aaa,email,fly,models

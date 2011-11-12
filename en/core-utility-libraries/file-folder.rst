@@ -434,3 +434,7 @@ File API
 .. todo::
     
     Better explain how to use each method with both classes.
+
+.. meta::
+    :title lang=en: Folder & File
+    :keywords lang=en: recursively copy,copy options,folder path,class folder,file php,php files,change directory,file utilities,loop through,new folder,directory structure,meth,exceptions,array,convenience,element,failure,delete files,api,delete file
