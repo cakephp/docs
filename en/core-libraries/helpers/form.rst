@@ -254,7 +254,7 @@ Closing the Form
 
         <div class="glass-pill"><input type="submit" value="Update!" name="Update"></div>
 
-    See the `API <http://api.cakephp.org>`_ for further details.
+    See the `API <http://api20.cakephp.org>`_ for further details.
 
     .. note::
 

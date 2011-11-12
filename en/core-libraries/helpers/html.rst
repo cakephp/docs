@@ -615,7 +615,7 @@ Inserting Well-Formatted elements
         /posts/search?foo=bar#first
 
     For further information check
-    `Router::url <http://api.cakephp.org/class/router#method-Routerurl>`_
+    `Router::url <http://api20.cakephp.org/class/router#method-Routerurl>`_
     in the API.
 
 Changing the tags output by HtmlHelper

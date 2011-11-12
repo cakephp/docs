@@ -622,7 +622,7 @@ Atributos do Controller
 =======================
 
 Para uma completa lista dos atributos dos controllers e suas descrições, visite
-a API do CakePHP. Siga para `http://api.cakephp.org/class/controller
+a API do CakePHP. Siga para `http://api20.cakephp.org/class/controller
 <http://api20.cakephp.org/class/controller>`_.
 
 .. php:attr:: name

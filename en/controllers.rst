@@ -614,7 +614,7 @@ Controller Attributes
 
 For a complete list of controller attributes and their descriptions
 visit the CakePHP API. Check out
-`http://api.cakephp.org/class/controller <http://api20.cakephp.org/class/controller>`_.
+`http://api20.cakephp.org/class/controller <http://api20.cakephp.org/class/controller>`_.
 
 .. php:attr:: name
 
