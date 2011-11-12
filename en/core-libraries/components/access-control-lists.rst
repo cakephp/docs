@@ -1,6 +1,8 @@
 Access Control Lists
 ####################
 
+.. php:class:: AclComponent
+
 CakePHP's access control list functionality is one of the most
 oft-discussed, most likely because it is the most sought after, but
 also because it can be the most confusing. If you're looking for a
