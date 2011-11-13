@@ -66,7 +66,7 @@ folder, it will default to the main webroot folder::
     /theme/purple_cupcake/css/main.css
      
     //and links to
-    app/Views/Themed/PurpleCupcake/webroot/css/main.css 
+    app/View/Themed/PurpleCupcake/webroot/css/main.css 
 
 Increasing performance of plugin and theme assets
 -------------------------------------------------
@@ -79,7 +79,7 @@ recommended that you either symlink or copy out plugin/theme assets to
 directories in ``app/webroot`` with paths matching those used by cakephp.
 
 
--  ``app/Plugins/DebugKit/webroot/js/my_file.js`` becomes
+-  ``app/Plugin/DebugKit/webroot/js/my_file.js`` becomes
    ``app/webroot/DebugKit/js/my_file.js``
 -  ``app/View/Themed/Navy/webroot/css/navy.css`` becomes
    ``app/webroot/theme/Navy/css/navy.css``
