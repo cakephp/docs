@@ -5,11 +5,6 @@ The SchemaShell provides a functionality to create schema objects,
 schema sql dumps as well as create snapshots and restore database
 snapshots.
 
-.. note::
-
-    The schema shell is used for schema exports only. There is
-    currently no support for data migration.
-
 Generating and using Schema files
 =================================
 
@@ -89,7 +84,7 @@ Workflow examples
 Create schema and commit
 ------------------------
 
-On a project which use versionning, the usage of cake schema
+On a project which use versioning, the usage of cake schema
 would follow these steps:
 
 1. Create or modify your database tables
@@ -105,7 +100,7 @@ would follow these steps:
 
 .. note::
 
-    If the project is not versionned, managing schemas would
+    If the project is not versioned, managing schemas would
     be done through snapshots. (see previous section to
     manage snapshots)
 
