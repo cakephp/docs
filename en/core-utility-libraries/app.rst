@@ -54,6 +54,12 @@ Loading classes
     Vendors
         ``App::uses('Textile', 'Vendor');``
 
+.. note::
+
+    Loading vendors usually means you are loading packages that do not follow 
+    conventions. For most vendor packages using ``App::import()`` is 
+    recommended.
+
 Loading files from plugins
 --------------------------
 
@@ -62,13 +68,19 @@ core classes except you must specify the plugin you are loading
 from::
 
     <?php
+    // Load the class Comment in app/Plugin/PluginName/Model/Comment.php
     App::uses('Comment', 'PluginName.Model');
+
+    // Load the class CommentComponent in app/Plugin/PluginName/Controller/Component/CommentComponent.php
+    App::uses('CommentComponent', 'PluginName.Controller/Component');
 
 
 Finding paths to packages using App::path()
 ===========================================
 
 .. php:staticmethod:: path($package, $plugin = null)
+
+    :rtype: array
 
     Used to read information stored path::
 
@@ -83,13 +95,29 @@ Finding paths to packages using App::path()
         // return the component paths in DebugKit
         App::path('Component', 'DebugKit');
 
+.. php:staticmethod:: paths()
+
+    :rtype: array
+
+    Get all the currently loaded paths from App. Useful for inspecting or 
+    storing all paths App knows about. For a paths to a specific package 
+    use ``App::path()``
+
 .. php:staticmethod:: core($package)
+
+    :rtype: string
 
     Used for finding the path to a package inside CakePHP::
 
         <?php
         // Get the path to Cache engines.
         App::core('Cache/Engine');
+
+.. php:staticmethod:: location($className)
+
+    :rtype: string
+
+    Returns the package name where a class was defined to be located at.
 
 Adding paths for App to find packages in
 ========================================
@@ -254,14 +282,30 @@ the built-in core classes.
 Loading Vendor Files
 ====================
 
-Vendor files containing classes can be loaded using ``App::uses()``.
-You might also have vendor files that do not have classes, you can load those
-using ``App::import()``. The following examples illustrate how to load vendor
+You can use ``App::uses()`` to load classes in vendors directories. It follows
+the same conventions as loading other files::
+
+    <?php
+    // Load the class Geshi in app/Vendor/Geshi.php
+    App::uses('Geshi', 'Vendor');
+
+To load classes in subdirectories, you'll need to add those paths 
+with ``App::build()``::
+
+    <?php
+    // Load the class ClassInSomePackage in app/Vendor/SomePackage/ClassInSomePackage.php
+    App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage')));
+    App::uses('ClassInSomePackage', 'Vendor');
+
+Your vendor files may not follow conventions, have a class that differs from 
+the file name or does not contain classes. You can load those files using 
+``App::import()``. The following examples illustrate how to load vendor
 files from a number of path structures. These vendor files could be located in
 any of the vendor folders.
 
-To load **vendors/geshi.php**::
+To load **app/Vendor/geshi.php**::
 
+    <?php
     App::import('Vendor', 'geshi');
 
 .. note::
@@ -269,35 +313,33 @@ To load **vendors/geshi.php**::
     The geshi file must be a lower-case file name as Cake will not
     find it otherwise.
 
-To load **vendors/flickr/flickr.php**::
+To load **app/Vendor/flickr/flickr.php**::
 
+    <?php
     App::import('Vendor', 'flickr/flickr');
 
-To load **vendors/some.name.php**::
+To load **app/Vendor/some.name.php**::
 
+    <?php
     App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));
 
-To load **vendors/services/well.named.php**::
+To load **app/Vendor/services/well.named.php**::
 
-    App::import('Vendor', 'WellNamed', array('file' => 'services'.DS.'well.named.php'));
+    <?php
+    App::import('Vendor', 'WellNamed', array('file' => 'services' . DS . 'well.named.php'));
 
-It wouldn't make a difference if your vendor files are inside your
-/app/vendors directory. Cake will automatically find it.
+It wouldn't make a difference if your vendor files are inside your /vendors 
+directory. Cake will automatically find it.
 
-To load **app/vendors/vendorName/libFile.php**::
+To load **vendors/vendorName/libFile.php**::
 
-    App::import('Vendor', 'aUniqueIdentifier', array('file' =>'vendorName'.DS.'libFile.php'));
+    <?php
+    App::import('Vendor', 'aUniqueIdentifier', array('file' => 'vendorName' .DS . 'libFile.php'));
 
-You can use ``App::uses()`` to load classes in vendors directories.  It follows
-the same conventions as loading other files.  To load classes in subdirectories,
-you'll need to add those paths with ``App::build()``::
-
-    App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage')));
-    App::uses('ClassInSomePackage', 'Vendor');
 
 .. todo::
 
-    This is missing a ton of methods. And vendors docs are wrong.
+    Missing init(), load() and shutdown()
 
 
 .. meta::
