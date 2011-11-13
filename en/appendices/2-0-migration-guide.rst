@@ -869,6 +869,12 @@ View->Helpers
 
 By default View objects contain a :php:class:`HelperCollection` at ``$this->Helpers``.
 
+Themes
+------
+
+To use themes in your Controller you no longer set ``var $view = 'Theme';``. 
+Use ``public $viewClass = 'Theme';`` instead.
+
 Callback positioning changes
 ----------------------------
 
