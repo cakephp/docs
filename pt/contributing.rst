@@ -1,8 +1,8 @@
 Contribuindo
 ############
 
-Existe várias maneiras de contribuir com o CakePHP.
-As seções abaixo vão tratar deste assunto:
+Existem várias maneiras de contribuir com o CakePHP.
+As seções abaixo irão tratar deste assunto:
 
 .. toctree::
     :maxdepth: 1

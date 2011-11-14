@@ -21,6 +21,11 @@ das aplicações irá utilizar um. O CakePHP suporta uma variedade deles:
 -  Microsoft SQL Server
 -  SQLite
 
+.. note::
+
+    Todos os drivers inclusos internamente requerem o PDO. Você deve ter certeza
+    que possui a extensão correta do PDO instalada.
+
 Licença
 =======
 
@@ -161,7 +166,7 @@ fuso horário, descomente uma linha no app/Config/core.php::
 
    <?php
    /**
-    * If you are on PHP 5.3 uncomment this line and correct your server timezone
-    * to fix the date & time related errors.
+    * Uncomment this line and correct your server timezone to fix 
+    * any date & time related errors.
     */
        date_default_timezone_set('UTC');
