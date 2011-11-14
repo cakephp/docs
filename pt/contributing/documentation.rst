@@ -1,7 +1,7 @@
 Documentação
 ############
 
-Contribuir na documentação é simples. Os arquivos estão 
+Contribuir na documentação é simples. Os arquivos estão
 no http://github.com/cakephp/docs. Sinta-se livre para fazer 
 um fork e adicionar suas alterações/melhorias/traduções e enviar 
 através de um pull request.
@@ -20,13 +20,12 @@ Algumas dicas:
 - Navegue e edite no idioma que você deseja traduzir o conteúdo - caso
   contrário você não saberá o que já foi traduzido.
 - Sinta-se livre para traduzir se o idioma escolhido já existir no book.
-- Utilize a *to do list* (no topo lado direito) para saber a onde você
-  pode dar mais atenção.
-- Utilize o `idioma formal <http://en.wikipedia.org/wiki/Register_(linguistics)>`_.
+- Utilize a
+  `linguagem informal <http://pt.wikipedia.org/wiki/Linguagem_coloquial>`_.
 - Traduza o conteúdo e o título ao mesmo tempo.
 - Faça uma comparação com o Inglês antes de enviar uma correção. 
-  (Se você corrigir alguma coisa, mas não sincroniza com o 'upstream' a alteração
-  não será aceita.)
+  (Se você corrigir alguma coisa, mas não sincroniza com o 'upstream' a
+  alteração não será aceita.)
 - Se você precisa escrever termos em Inglês, utilize a tag ``<em>``.
   Ex.: "asdf asdf *Controller* asdf" ou "asdf asdf Kontroller
   (*Controller*) asfd".
@@ -34,22 +33,24 @@ Algumas dicas:
 - Não edite um seção com alterações pendentes.
 - Não utilize
   `html entities <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
-  para caracteres acentuados, o *book* usa UTF-8.
-- Não faça alterações significativas em marcações HTML e não adicione novos conteúdos.
-- Se o está faltando informação no conteúdo original, altere o original e envie ele primeiro.
+  para caracteres acentuados, o livro usa UTF-8.
+- Não faça alterações significativas em marcações HTML e não adicione novos
+  conteúdos.
+- Se está faltando informações no conteúdo original, altere o original e envie
+  ele primeiro.
 
 Formatando a Documentação
 =========================
 
 A nova documentação do CakePHP é escrita no formato ReST.
-ReST é uma linguagem de marcação para leitura de formatos de código fonte parecida
-com markdown e textile. Para manter a consistência é recomendável que use os 
-*guidelines* a seguir de como formatar estruturar seu texto.
+ReST é uma linguagem de marcação em texto plano parecida com markdown e textile.
+Para manter a consistência é recomendável que use os  *guidelines* a seguir de
+como formatar estruturar seu texto.
 
-Altura da linha
----------------
+Largura da linha
+----------------
 
-As linhas devem ter no máximo 80 colunas. 
+As linhas devem ter no máximo 80 colunas.
 A unica exeção são urls longas e trechos de códigos.
 
 Títulos e Seções
@@ -81,11 +82,11 @@ Marcações
 * crases: ``text`` para exemplos de código.
 
 Se asteriscos ou crases devem aparecer no texto elas devem ser precidadas por uma barra 
-invertida (\) para escapar.
+invertida (\\) para serem escapadas.
 
 Restrições para a marcação:
 
-* **Não pode** ser aninhado.
+* As marcações **Não podem** ser aninhadas.
 * O conteúdo não pode iniciar ou terminar com espaço em branco: ``* text*`` está incorreto.
 * O conteúdo deve ser separado do restante do texto por *non-word characters*. Use
   uma barra invertida escapando um espaço para corrigir isso: ``onelong\ *bolded*\ word``.
@@ -126,8 +127,8 @@ Listas de definição pode ser criadas da seguinte forma::
     CakePHP
         Framework MVC para PHP
 
-Termos não podem ter mais do que uma linha, mas definições podem ter multilinhas
-e todos as linhas devem ter um indentação consistente.
+Os termos não podem ter mais do que uma linha, mas as definições podem ter
+muitas linhas e todos as linhas devem ter um indentação consistente.
 
 Links
 -----
@@ -147,22 +148,24 @@ Links para outras páginas
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. rst:role:: doc
+
     Outras páginas na documentação podem ser linkadas usando ``:doc:``.
-    Você pode criar um link para um documento especifico utilizando path absoluto 
-    ou relativo sem a extensão ``.rst``. Por exemplo, se a referência ``:doc: `form```
-    aparece no documento ``core-helpers/html``, então o link será criado 
-    para ``core-helpers/form``. Se a referência for ``:doc:`/core-helpers```, será
-    sempre referênciado para ``/core-helpers``independente a onde é usado.
+    Você pode criar um link para um documento especifico utilizando o caminho
+    absoluto ou relativo sem a extensão ``.rst``. Por exemplo, se a referência
+    ``:doc: `form``` aparece no documento ``core-helpers/html``, então o link
+    será criado para ``core-helpers/form``. Se a referência for
+    ``:doc:`/core-helpers```, será sempre referênciado para ``/core-helpers``
+    independente de onde for usado.
 
 Links de referência cruzada
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. rst:role:: ref
 
-    Você pode cruzar referência a qualquer título arbitrário em qualquer 
-    documento usando ``:ref:``. Links para um *label* devem ser únicos dentro
-    do documento. Quando for criar *labels* para métodos de classe, é melhor usar
-    ``class-method`` como *label* do link.
+    Você pode fazer referências cruzadas para qualquer título arbitrário em
+    qualquer documento usando ``:ref:``. Links para um *label* devem ser únicos
+    dentro do documento. Quando for criar *labels* para métodos de classe, é
+    melhor usar ``class-method`` como *label* do link.
 
     A forma mais comum de usar *labels* é acima de títulos. Exemplo::
     
@@ -181,10 +184,10 @@ Descrevendo classes e seus conteúdos
 ------------------------------------
 
 A documentação do CakePHP utiliza o `phpdomain
-<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>` que fornece
-algumas diretivas para descrever objetos e construtores. 
-Usar essas diretivas é essêncial para criar índices e referências
-em toda a documentação.
+<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ que fornece
+algumas diretivas para descrever objetos e construtores.
+Usar essas diretivas é essêncial para criar índices e referências em toda a
+documentação.
 
 Descrevendo Classes e Construtores
 ----------------------------------
@@ -256,10 +259,10 @@ Cada diretiva alimenta o índice e/ou o *namespace* do índice.
 
 .. rst:directive:: .. php:attr:: name
 
-   Descreve um propriedade ou atributo de uma classe.
+   Descreve um propriedade/atributo de uma classe.
 
-Referênciando Cruzados
-~~~~~~~~~~~~~~~~~~~~~~
+Referências Cruzadas
+~~~~~~~~~~~~~~~~~~~~
 
 As funções a seguir server para referenciar objetos e links do PHP
 se alguma diretiva for encontrada:
@@ -323,9 +326,9 @@ Textos literais não são modificados ou formatados, salvo quando o level de ind
 Notas e Avisos
 --------------
 
-As vezes você quer infomar ao leitor do book um dica importante, um lembrete
+As vezes você quer infomar ao leitor do manual um dica importante, um lembrete
 ou um aviso importante. *Admonitions* no sphinx são usados para isso.
-Existe tr6es tipos de *admonitions*.
+Existe três tipos de *admonitions*.
 
 * ``.. tip::`` Tips são usandos no documento para salientar algo importante.
   O conteúdo deve ter as sentenças corretas e pontuação apropriada.

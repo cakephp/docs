@@ -12,14 +12,14 @@ facilmente.
 
 Mais comumente, controllers são usados para gerenciar a lógica de um único
 model. Por exemplo, se você está construindo um site para uma padaria online,
-você pode ter um RecipesController e um IngredientsController gerenciando suas
-receitas e seus ingredientes. No CakePHP, controllers são nomeados de acordo com
-o model que manipulam. É também absolutamente possível ter controllers que usam
-mais de um model.
+você pode ter um ``RecipesController`` e um ``IngredientsController``
+gerenciando suas receitas e seus ingredientes. No CakePHP, controllers são
+nomeados de acordo com o model que manipulam. É também absolutamente possível
+ter controllers que usam mais de um model.
 
 Os controllers da sua aplicação são classes que estendem a classe CakePHP
-``AppController``, a qual por sua vez estende a classe núcleo
-:php:class:`Controller`. A classe AppController pode ser definida em
+``AppController``, a qual por sua vez estende a classe :php:class:`Controller`
+do CakePHP. A classe ``AppController`` pode ser definida em
 ``/app/Controller/AppController.php`` e deve conter métodos que são
 compartilhados entre todos os seus controllers.
 
@@ -32,43 +32,43 @@ métodos públicos em um controller são ações e acessíveis por urls.
 A Classe AppController
 ======================
 
-Como mencionado na introdução, a classe AppController é o pai de todos os outros
-controllers da sua aplicação. A própria AppController é estendida da classe
-Controller que faz parte da biblioteca do CakePHP. Assim sendo, AppController é
-definido em ``/app/Controller/AppController.php`` como::
+Como mencionado anteriormente, a classe ``AppController`` é a mãe de todos os
+outros controllers da sua aplicação. O próprio ``AppController`` é estendida da
+classe ``Controller`` que faz parte da biblioteca do CakePHP. Assim sendo,
+``AppController`` é definido em ``/app/Controller/AppController.php`` como::
 
     <?php
     class AppController extends Controller {
     }
 
-Os atributos e métodos criados em AppController vão estar disponíveis para todos
-os controllers da sua aplicação. Este é o lugar ideal para criar códigos que são
-comuns para todos os seus controladores. Componentes (que você vai aprender mais
-tarde) são a melhor alternativa para códigos que são usados por muitos (mas não
-obrigatoriamente em todos) controllers.
+Os atributos e métodos criados em ``AppController`` vão estar disponíveis para
+todos os controllers da sua aplicação. Este é o lugar ideal para criar códigos
+que são comuns para todos os seus controllers. Componentes (que você vai
+aprender mais tarde) são a melhor alternativa para códigos que são usados por
+muitos (mas não obrigatoriamente em todos) controllers.
 
 Enquanto regras normais de herança de classes orientadas à objetos são
 aplicadas, o CakePHP também faz um pequeno trabalho extra quando se trata de
 atributos especiais do controller. A lista de componentes (components)
-e ajudantes (helpers) usados no controller são tratados diferentemente. Nestes
-casos, as cadeias de valores do AppController são mescladas com os valores de
-seus controllers filhos. Os valores dos controllers filhos sempre sobrescreveram
-os do AppController.
+e helpers usados no controller são tratados diferentemente. Nestes casos, as
+cadeias de valores do ``AppController`` são mescladas com os valores de seus
+controllers filhos. Os valores dos controllers filhos sempre sobrescreveram
+os do ``AppController``.
 
 .. note::
 
-    O CakePHP mescla as seguintes variáveis do AppController em controllers da
-    sua aplicação:
+    O CakePHP mescla as seguintes variáveis do ``AppController`` em controllers
+    da sua aplicação:
 
     -  $components
     -  $helpers
     -  $uses
 
 Lembre-se de adicionar os helpers Html e Form padrões se você incluiu o atributo
-``$helpers`` em seu AppController.
+``$helpers`` em seu ``AppController``.
 
-Também lembre de fazer as chamadas de callbacks do AppController nos controllers
-filhos para obter melhores resultados::
+Também lembre de fazer as chamadas de callbacks do ``AppController`` nos
+controllers filhos para obter melhores resultados::
 
     <?php
     function beforeFilter() {
@@ -90,7 +90,7 @@ Ações de Controllers
 ====================
 
 Retornando ao nosso exemplo da padaria online, nosso controller
-RecipesController poderia conter as ações ``view()``, ``share()`` e
+``RecipesController`` poderia conter as ações ``view()``, ``share()`` e
 ``search()`` e poderia ser encontrado em
 ``/app/Controller/RecipesController.php`` contendo o código a seguir::
 
@@ -100,21 +100,21 @@ RecipesController poderia conter as ações ``view()``, ``share()`` e
         
         class RecipesController extends AppController {
             function view($id) {
-                //action logic goes here..
+                // a lógica da ação vai aqui
             }
         
             function share($customer_id, $recipe_id) {
-                //action logic goes here..
+                // a lógica da ação vai aqui
             }
         
             function search($query) {
-                //action logic goes here..
+                // a lógica da ação vai aqui
             }
         }
 
 Para que você use de forma eficaz os controllers em sua aplicação, nós iremos
-cobrir alguns dos atributos e métodos inclusos no core fornecidos pelo
-controller do CakePHP.
+cobrir alguns dos atributos e métodos inclusos no controller fornecido pelo
+CakePHP.
 
 .. _controller-life-cycle:
 
@@ -141,7 +141,8 @@ inserir lógicas em torno do ciclo de vida de uma requisição:
 
     Chamada após a lógica da ação de um controller, mas antes da view ser
     renderizada. Este callback não é usado com frequência mas pode ser preciso
-    se você chamar o método render() manualmente antes do término de uma ação.
+    se você chamar o método ``render()`` manualmente antes do término de uma
+    ação.
 
 .. php:method:: afterFilter()
 
@@ -163,7 +164,7 @@ Siga para `http://api20.cakephp.org/class/controller
 Interagindo Com as Views
 ------------------------
 
-Os controllers interagem com as views de diversas maneiras. Primeiramente elas
+Os controllers interagem com as views de diversas maneiras. Primeiramente eles
 são capazes de passar dados para as views usando o método ``set()``. Você também
 pode no seu controller decidir qual classe de View usar e qual arquivo deve ser
 renderizado.
@@ -223,7 +224,7 @@ renderizado.
     dentro do seu layout e serve de volta para o usuário final.
 
     O arquivo view usado pelo método ``render()`` é determinado por convenção.
-    Se a ação ``search()`` do controller RecipesController é requisitada, o
+    Se a ação ``search()`` do controller ``RecipesController`` é requisitada, o
     arquivo view encontrado em ``/app/View/Recipes/search.ctp`` será
     renderizado::
 
@@ -343,7 +344,7 @@ Controle de Fluxo
     o parâmetro ``$layout``.
 
     Para mensagens flash exibidas dentro de páginas, de uma olhada no método
-    ``setFlash()`` do componente SessionComponent.
+    ``setFlash()`` do componente ``SessionComponent``.
 
 Callbacks
 ---------
@@ -563,16 +564,17 @@ Outros Métodos Úteis
             array('return')
         );
 
-    Isto permite o ``requestAction`` contornar o uso do método Router::url para
-    descobrir o controller e a ação, aumentando a performance. As URLs baseadas
-    em arrays são as mesmas usadas pelo método :php:meth:`HtmlHelper::link()`
-    com uma diferença, se você está usando parâmetros nomeados ou passados, você
-    deve colocá-los em um segundo array envolvendo elas com a chave correta.
+    Isto permite o ``requestAction`` contornar o uso do método ``Router::url()``
+    para descobrir o controller e a ação, aumentando a performance. As URLs
+    baseadas em arrays são as mesmas usadas pelo método
+    :php:meth:`HtmlHelper::link()` com uma diferença, se você está usando
+    parâmetros nomeados ou passados, você deve colocá-los em um segundo array
+    envolvendo elas com a chave correta.
     Isto deve ser feito porque o ``requestAction`` mescla o array de parâmetros
     nomeados (no segundo parâmetro do requestAction) com o array
-    Controller::params e não coloca explicitamente o array de parâmetros
+    ``Controller::params`` e não coloca explicitamente o array de parâmetros
     nomeados na chave 'named'. Além disso, membros do array ``$options`` serão
-    disponibilizados no array Controller::params da ação que for chamada.::
+    disponibilizados no array ``Controller::params`` da ação que for chamada.::
 
         <?php
             echo $this->requestAction('/articles/featured/limit:3');
@@ -594,7 +596,7 @@ Outros Métodos Úteis
     .. note::
 
         Diferente de outros lugares onde URLs no formato de arrays são análogas
-        as URLs no formato de string, o requestAction tratam elas
+        as URLs no formato de string, o ``requestAction`` tratam elas
         diferentemente.
 
     Quando for usar URLs no formato de arrays em conjunto com o
@@ -673,7 +675,7 @@ como referências para objetos apropriados (``$this->{$helpername}``) na view.
 
     Os helpers `Html`, `Form` e `Session` são disponibilizados por padrão como é
     feito o ``SessionComponent``. Mas se você escolher definir seu próprio
-    `array` de ``$helpers`` no AppController, tenha certeza de incluir o
+    array de ``$helpers`` no ``AppController``, tenha certeza de incluir o
     ``Html`` e o ``Form`` se quiser que eles continuem a estar disponíveis nos
     seus controllers. Você também pode passar configurações na declaração de
     seus helpers. Para aprender mais sobre estas classes, visite suas
@@ -690,8 +692,8 @@ como referências para objetos apropriados (``$this->{$helpername}``) na view.
         }
 
     Cada uma destas variáveis são mescladas com seus valores herdados, portanto,
-    não é necessário (por exemplo) redeclarar o FormHelper ou qualquer uma das
-    classes que já foram declaradas no seu AppController.
+    não é necessário (por exemplo) redeclarar o ``FormHelper`` ou qualquer uma
+    das classes que já foram declaradas no seu ``AppController``.
 
 .. php:attr:: components
 
