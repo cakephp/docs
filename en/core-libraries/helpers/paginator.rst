@@ -449,6 +449,10 @@ Other Methods
         echo $this->Paginator->url(array('sort' => 'title'), true); 
 
 
+..todo::
+
+    Missing methods current(), defaultModel(), hasNext(), hasPage(), hasPrev(), params(), sortDir(), sortKey()
+
 
 .. meta::
     :title lang=en: PaginatorHelper

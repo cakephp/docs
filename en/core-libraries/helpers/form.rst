@@ -1472,6 +1472,10 @@ that if there are validation errors on hidden fields,
 the error-field classname will be applied.
 
 
+.. todo::
+
+    Missing methods secure(), inputs(), postButton(), postLink(), tagIsInvalid()
+
 
 .. meta::
     :title lang=en: FormHelper
