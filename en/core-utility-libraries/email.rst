@@ -207,10 +207,10 @@ send multipart templated email messages as well::
 
 This would use the following view files:
 
-* ``app/Views/Emails/text/welcome.ctp``
-* ``app/Views/Layouts/Emails/text/fancy.ctp``
-* ``app/Views/Emails/html/welcome.ctp``
-* ``app/Views/Layouts/Emails/text/fancy.ctp``
+* ``app/View/Emails/text/welcome.ctp``
+* ``app/View/Layouts/Emails/text/fancy.ctp``
+* ``app/View/Emails/html/welcome.ctp``
+* ``app/View/Layouts/Emails/text/fancy.ctp``
 
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.
