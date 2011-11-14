@@ -23,7 +23,6 @@ Dessa forma, o código deve ser algo parecido com isto::
             // level 2
         // level 1
     // base level
-    ?>
 
 Ou::
 
@@ -132,7 +131,7 @@ true ou false - assim facilita a identificação que a chamada ao metódo realme
         }
 
         if (!($dnsInfo) || !($dnsInfo['phpType'])) {
-            return $this=>addError();
+            return $this->addError();
         }
         return true;
     }
@@ -170,7 +169,6 @@ de um bloco de documentação. Por exemplo::
      * @author this tag is parsed, but this @version is ignored
      * @version 1.0 this tag is also parsed
      */
-    ?>
 
 ::
 
@@ -337,7 +335,6 @@ Contantes devem ser definidas em letras maiúsculas:
 
     <?php
     define('CONSTANT', 1);
-    ?>
 
 Se você escolher o nome de uma constante com múltiplas palavras, elas devem ser separadas por um caracter underscore. Por exemplo:
 
@@ -345,4 +342,3 @@ Se você escolher o nome de uma constante com múltiplas palavras, elas devem se
 
     <?php
     define('LONG_NAMED_CONSTANT', 2);
-    ?>
