@@ -845,9 +845,9 @@ Let's give it a try inside a controller action:
         $this->Acl->check('warriors/Aragorn', 'Weapons', 'update');
         $this->Acl->check('warriors/Aragorn', 'Weapons', 'delete');
         
-        //Remember, we can use the model/foreign key syntax 
+        //Remember, we can use the model/id syntax 
         //for our user AROs
-        $this->Acl->check(array('model' => 'User', 'foreign_key' => 2356), 'Weapons');
+        $this->Acl->check(array('User' => array('id' => 2356)), 'Weapons');
         
         //These also return true:
         $result = $this->Acl->check('warriors/Legolas', 'Weapons', 'create');
