@@ -48,11 +48,10 @@ with virtual fields can be done through a few different methods.
 Model::hasField()
 -----------------
 
-Model::hasField() will return true if
-the model has a virtualField with the correct name. By setting the
-second parameter of `hasField()` to true, virtualFields will also be
-checked when checking if a model has a field. Using the example
-field above::
+Model::hasField() will return true if the model has a concrete field passed by
+the first parameter. By setting the second parameter of `hasField()` to true,
+virtualFields will also be checked when checking if a model has a field.
+Using the example field above::
 
     <?php
     $this->User->hasField('name'); // Will return false, as there is no concrete field called name
