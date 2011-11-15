@@ -148,7 +148,5 @@ Views de `scaffold` customizadas para todos os controllers devem ser criadas
 desta maneira::
 
     /app/View/Scaffolds/index.ctp
-    /app/View/Scaffolds/show.ctp
-    /app/View/Scaffolds/edit.ctp
-    /app/View/Scaffolds/new.ctp
-    /app/View/Scaffolds/add.ctp
+    /app/View/Scaffolds/form.ctp
+    /app/View/Scaffolds/view.ctp

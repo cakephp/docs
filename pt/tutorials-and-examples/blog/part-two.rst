@@ -225,7 +225,6 @@ agora::
             $this->set('post', $this->Post->read());
         }
     }
-    ?>
 
 A chamada do método ``set()`` deve lhe parece familiar. Perceba que estamos
 usando o método ``read()`` ao invés do ``find('all')`` porque nós realmente só
@@ -260,6 +259,7 @@ Primeiramente, comece criando uma action ``add()`` no PostsController::
 
     <?php
     class PostsController extends AppController {
+        public $helpers = array('Html', 'Form');
         public $name = 'Posts';
         public $components = array('Session');
     
@@ -282,7 +282,6 @@ Primeiramente, comece criando uma action ``add()`` no PostsController::
             }
         }
     }
-    ?>
 
 .. note::
 
@@ -338,7 +337,6 @@ Aqui está nossa view add::
     echo $this->Form->input('title');
     echo $this->Form->input('body', array('rows' => '3'));
     echo $this->Form->end('Save Post');
-    ?>
 
 Aqui, usamos o FormHelper para gerar a tag de abertura para um formulário. Aqui
 está o HTML gerado pelo ``$this->Form->create()``::
@@ -387,7 +385,6 @@ de volta nosso model Post e fazer alguns pequenos ajustes::
             )
         );
     }
-    ?>
 
 O array ``$validate`` diz ao CakePHP sobre como validar seus dados quando o
 método ``save()`` for chamado. Aqui, eu especifiquei que tanto os campos body e
@@ -443,7 +440,6 @@ A view edit pode ser algo parecido com isto::
         echo $this->Form->input('body', array('rows' => '3'));
         echo $this->Form->input('id', array('type' => 'hidden')); 
         echo $this->Form->end('Save Post');
-    ?>
 
 Esta view exibe o formulário de edição (com os valores populados), juntamente
 com quaisquer mensagens de erro de validação.

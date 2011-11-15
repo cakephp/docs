@@ -182,7 +182,7 @@ make a view more readable, placing the rendering of repeating
 elements in its own file. They can also help you re-use content
 fragments in your application.
 
-Elements live in the ``/app/Views/Elements/`` folder, and have the .ctp
+Elements live in the ``/app/View/Elements/`` folder, and have the .ctp
 filename extension. They are output using the element method of the
 view::
 

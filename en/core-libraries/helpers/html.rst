@@ -658,6 +658,10 @@ This will add the output of "**Home > Users > Add User**" in your
 layout where getCrumbs was added.
 
 
+.. todo::
+
+    Missing methods getCrumbList(), loadConfig(), nestedList(), useTag()
+
 .. meta::
     :title lang=en: HtmlHelper
     :description lang=en: The role of the HtmlHelper in CakePHP is to make HTML-related options easier, faster, and more resilient to change.

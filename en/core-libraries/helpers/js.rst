@@ -842,6 +842,11 @@ removed, the new features offered by ``JsHelper`` allow for more
 control and more complex effects to be created.
 
 
+.. todo::
+
+    Missing method set()
+
+
 .. meta::
     :title lang=en: JsHelper
     :description lang=en: The Js Helper supports the javascript libraries Prototype, jQuery and Mootools and provides methods for manipulating javascript.

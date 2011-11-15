@@ -100,6 +100,10 @@ The above will output a simple message, with the following html::
         </div>
 
 
+.. todo::
+
+    Missing methods error(), valid()
+
 
 .. meta::
     :title lang=en: SessionHelper

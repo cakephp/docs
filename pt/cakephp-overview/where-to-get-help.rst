@@ -48,7 +48,7 @@ Se você sentiu que a informação fornecida na API não é suficiente, verifiqu
 código dos casos de testes fornecido com o CakePHP. Eles podem servir como
 exemplos práticos de utilização das funcionalidades de uma classe::
 
-    lib/Cake/tests/Case
+    lib/Cake/Test/Case
 
 O canal IRC
 ===========
