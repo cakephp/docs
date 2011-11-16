@@ -692,8 +692,8 @@ then we can just design a really simple fake class::
 and assign values into it like this::
 
     <?php
-    $Component = new ComponentCollection();
-    $this->TransporterComponent = new TransporterComponent($Component);
+    $Collection = new ComponentCollection();
+    $this->TransporterComponent = new TransporterComponent($Collection);
     $controller = new FakeTransporterController();
     $controller->Transporter = ClassRegistry::init('Transporter');
     $this->TransporterComponent->startup($controller);
@@ -711,8 +711,8 @@ Just create a class that extends CakeTestCase and start writing tests::
 
         public function setUp() {
             parent::setUp();
-            $Component = new ComponentCollection();
-            $this->TransporterComponent = new TransporterComponent($Component);
+            $Collection = new ComponentCollection();
+            $this->TransporterComponent = new TransporterComponent($Collection);
             $controller = new FakeTransporterController();
             $controller->Transporter = ClassRegistry::init('Transporter');
             $this->TransporterComponentTest->startup($controller);
