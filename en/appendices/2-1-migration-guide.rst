@@ -67,6 +67,15 @@ CakeRequest
 
 - Added ``is('requested')`` and ``isRequested()`` for detecting requestAction.
 
+Components
+==========
+
+AuthComponent
+-------------
+
+- :php:meth:`AuthComponent::allow()` no longer accepts ``allow('*')`` as a wildcard
+  for all actions.  Just use ``allow()``.  This unifies the API between allow()
+  and deny().
 
 Helpers
 =======
