@@ -445,7 +445,6 @@ The edit view might look something like this::
         echo $this->Form->input('body', array('rows' => '3'));
         echo $this->Form->input('id', array('type' => 'hidden')); 
         echo $this->Form->end('Save Post');
-    ?>
 
 This view outputs the edit form (with the values populated), along
 with any necessary validation error messages.
@@ -497,7 +496,7 @@ Next, let's make a way for users to delete posts. Start with a
 
     <?php
     function delete($id) {
-        if (!$this->request->is('post')) {
+        if (!$this->request->is('get')) {
             throw new MethodNotAllowedException();
         }
         if ($this->Post->delete($id)) {
@@ -509,7 +508,7 @@ Next, let's make a way for users to delete posts. Start with a
 This logic deletes the post specified by $id, and uses
 ``$this->Session->setFlash()`` to show the user a confirmation
 message after redirecting them on to ``/posts``.  If the user attempts to
-do a delete using a POST request, we throw an Exception.  Uncaught exceptions
+do a delete using a GET request, we throw an Exception.  Uncaught exceptions
 are captured by CakePHP's exception handler, and a nice error page is 
 displayed.  There are many built-in :doc:`/development/exceptions` that can
 be used to indicate the various HTTP errors your application might need
@@ -554,6 +553,11 @@ links that allow users to delete posts, however::
         <?php endforeach; ?>
     
     </table>
+
+Using :php:meth:`~FormHelper::postLink()` will create a link that uses
+Javascript to do a POST request deleting our post.  Allowing content to be
+deleted using GET requests is dangerous, as web crawlers could accidentally
+delete all your content.
 
 .. note::
 
