@@ -28,7 +28,7 @@ following::
 Test database setup
 ===================
 
-Remember to have a debug level of at least 1 in your ``app/Config/core.php`` 
+Remember to have a debug level of at least 1 in your ``app/Config/core.php``
 file before running any tests.  Tests are not accessible via the web runner when
 debug is equal to 0.  Before running any tests you should be sure to add a
 ``$test`` database configuration.  This configuration is used by CakePHP for
@@ -119,7 +119,7 @@ we'll start with the following::
 
     class ProgressHelperTest extends CakeTestCase {
         public function setUp() {
-        
+
         }
 
         public function testBar() {
@@ -161,7 +161,7 @@ The above test is a simple one but shows the potential benefit of using test
 cases.  We use ``assertContains()`` to ensure that our helper is returning a
 string that contains the content we expect.  If the result did not contain the
 expected content the test would fail, and we would know that our code is
-incorrect. 
+incorrect.
 
 By using test cases you can easily describe the relationship between a set of
 known inputs and their expected output.  This helps you be more confident of the
@@ -271,7 +271,7 @@ doing the following::
     ./Console/cake testsuite app Model/Article --coverage-html webroot/coverage
 
 This will put the coverage results in your application's webroot directory.  You
-should be able to view the results by going to 
+should be able to view the results by going to
 ``http://localhost/your_app/coverage``.
 
 Creating test suites
@@ -330,28 +330,28 @@ Creating fixtures
 
 When creating a fixture you will mainly define two things: how the
 table is created (which fields are part of the table), and which
-records will be initially populated to the table. Let's 
+records will be initially populated to the table. Let's
 create our first fixture, that will be used to test our own Article
 model. Create a file named ``ArticleFixture.php`` in your
 ``app/Test/Fixture`` directory, with the following content::
 
     <?php
-    class ArticleFixture extends CakeTestFixture { 
+    class ArticleFixture extends CakeTestFixture {
 
-          public $fields = array( 
-              'id' => array('type' => 'integer', 'key' => 'primary'), 
-              'title' => array('type' => 'string', 'length' => 255, 'null' => false), 
-              'body' => 'text', 
-              'published' => array('type' => 'integer', 'default' => '0', 'null' => false), 
-              'created' => 'datetime', 
-              'updated' => 'datetime' 
-          ); 
-          public $records = array( 
-              array ('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'), 
-              array ('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'), 
-              array ('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31') 
-          ); 
-     } 
+          public $fields = array(
+              'id' => array('type' => 'integer', 'key' => 'primary'),
+              'title' => array('type' => 'string', 'length' => 255, 'null' => false),
+              'body' => 'text',
+              'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
+              'created' => 'datetime',
+              'updated' => 'datetime'
+          );
+          public $records = array(
+              array ('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
+              array ('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
+              array ('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+          );
+     }
 
 We use ``$fields`` to specify which fields will be part of this table,
 and how they are defined. The format used to define these fields is
@@ -398,10 +398,10 @@ Article available in your application (that maps to a table named
 articles), change the example fixture given in the previous section
 (``app/Test/Fixture/ArticleFixture.php``) to::
 
-    <?php  
-    class ArticleFixture extends CakeTestFixture { 
-        public $import = 'Article'; 
-    } 
+    <?php
+    class ArticleFixture extends CakeTestFixture {
+        public $import = 'Article';
+    }
 
 This statement tells the test suite to import your table definition from the
 table linked to the model called Article. You can use any model available in
@@ -417,19 +417,19 @@ If on the other hand you have a table created but no model
 available for it, you can specify that your import will take place
 by reading that table information instead. For example::
 
-    <?php  
-    class ArticleFixture extends CakeTestFixture { 
-        public $import = array('table' => 'articles'); 
-    } 
+    <?php
+    class ArticleFixture extends CakeTestFixture {
+        public $import = array('table' => 'articles');
+    }
 
 Will import table definition from a table called 'articles' using
 your CakePHP database connection named 'default'. If you want to
 use a different connection use::
 
-     <?php  
-     class ArticleFixture extends CakeTestFixture { 
-        public $import = array('table' => 'articles', 'connection' => 'other'); 
-     } 
+     <?php
+     class ArticleFixture extends CakeTestFixture {
+        public $import = array('table' => 'articles', 'connection' => 'other');
+     }
 
 Since it uses your CakePHP database connection, if there's any
 table prefix declared it will be automatically used when fetching
@@ -437,10 +437,10 @@ table information. The two snippets above do not import records
 from the table. To force the fixture to also import its records,
 change the import to::
 
-     <?php  
-     class ArticleFixture extends CakeTestFixture { 
+     <?php
+     class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'records' => true);
-     } 
+     }
 
 You can naturally import your table definition from an existing
 model/table, but have your records defined directly on the fixture
@@ -501,20 +501,20 @@ Testing models
 Let's say we already have our Article model defined on
 ``app/Model/Article.php``, which looks like this::
 
-     <?php  
-     class Article extends AppModel { 
-            public function published($fields = null) { 
-                $params = array( 
+     <?php
+     class Article extends AppModel {
+            public function published($fields = null) {
+                $params = array(
                       'conditions' => array(
-                            $this->name . '.published' => 1 
+                            $this->name . '.published' => 1
                       ),
                       'fields' => $fields
-                ); 
-                 
-                return $this->find('all',$params); 
+                );
+
+                return $this->find('all',$params);
             }
-     
-     } 
+
+     }
 
 We now want to set up a test that will use this model definition, but through
 fixtures, to test some functionality in the model.  CakePHP test suite loads a
@@ -524,12 +524,12 @@ loading our model - in this case the Article model which we already defined.
 Let's now create a file named ``ArticleTest.php`` in your
 ``app/Test/Case/Model`` directory, with the following contents::
 
-     <?php  
-      App::uses('Article', 'Model'); 
-      
-      class ArticleTestCase extends CakeTestCase { 
+     <?php
+      App::uses('Article', 'Model');
+
+      class ArticleTestCase extends CakeTestCase {
             public $fixtures = array('app.article');
-      } 
+      }
 
 In our test cases' variable ``$fixtures`` we define the set of fixtures that
 we'll use.  You should remember to include all the fixtures that will have
@@ -602,7 +602,7 @@ function euro($amount)
     'EUR'. Just to make it a bit more complex, we will also wrap the
     result in span tags::
 
-        <span class="euro"></span> 
+        <span class="euro"></span>
 
 Let's create the tests first::
 
@@ -610,17 +610,17 @@ Let's create the tests first::
     // Import the helper to be tested.
     App::uses('CurrencyRenderer', 'Helper');
     App::uses('View', 'View');
-    
+
     class CurrencyRendererTest extends CakeTestCase {
         private $currencyRenderer = null;
-    
+
         //Here we instantiate our helper, and all other helpers we need.
         public function setUp() {
             parent::setUp();
             $view = new View();
             $this->currencyRenderer = new CurrencyRendererHelper($view);
         }
-    
+
         // testing usd() function.
         public function testUsd() {
             $this->assertEquals('USD 5.30', $this->currencyRenderer->usd(5.30));
@@ -680,7 +680,7 @@ we need a controller to access the data in the model.
 If the ``startup()`` function of the component looks like this::
 
     <?php
-    public function startup(Controller $controller){ 
+    public function startup(Controller $controller){
         $this->Transporter = $controller->Transporter;
     }
 
@@ -692,8 +692,9 @@ then we can just design a really simple fake class::
 and assign values into it like this::
 
     <?php
-    $this->TransporterComponent = new TransporterComponent();
-    $controller = new FakeTransporterController(); 
+    $Component = new ComponentCollection();
+    $this->TransporterComponent = new TransporterComponent($Component);
+    $controller = new FakeTransporterController();
     $controller->Transporter = ClassRegistry::init('Transporter');
     $this->TransporterComponent->startup($controller);
 
@@ -710,7 +711,8 @@ Just create a class that extends CakeTestCase and start writing tests::
 
         public function setUp() {
             parent::setUp();
-            $this->TransporterComponent = new TransporterComponent();
+            $Component = new ComponentCollection();
+            $this->TransporterComponent = new TransporterComponent($Component);
             $controller = new FakeTransporterController();
             $controller->Transporter = ClassRegistry::init('Transporter');
             $this->TransporterComponentTest->startup($controller);
@@ -744,28 +746,28 @@ test methods like :php:meth:`~Controller::redirect()`.
 Say you have a typical Articles controller, and its corresponding
 model. The controller code looks like::
 
-    <?php 
-    class ArticlesController extends AppController { 
-       public $helpers = array('Form', 'Html'); 
-       
-       function index($short = null) { 
-         if (!empty($this->data)) { 
-           $this->Article->save($this->data); 
-         } 
-         if (!empty($short)) { 
+    <?php
+    class ArticlesController extends AppController {
+       public $helpers = array('Form', 'Html');
+
+       function index($short = null) {
+         if (!empty($this->data)) {
+           $this->Article->save($this->data);
+         }
+         if (!empty($short)) {
            $result = $this->Article->findAll(null, array('id', 'title'));
-         } else { 
-           $result = $this->Article->findAll(); 
-         } 
-     
-         if (isset($this->params['requested'])) { 
-           return $result; 
-         } 
-     
-         $this->set('title', 'Articles'); 
-         $this->set('articles', $result); 
-       } 
-    } 
+         } else {
+           $result = $this->Article->findAll();
+         }
+
+         if (isset($this->params['requested'])) {
+           return $result;
+         }
+
+         $this->set('title', 'Articles');
+         $this->set('articles', $result);
+       }
+    }
 
 Create a file named ``ArticlesControllerTest.php`` in your
 ``app/Test/Case/Controller`` directory and put the following inside::
@@ -778,7 +780,7 @@ Create a file named ``ArticlesControllerTest.php`` in your
         function testIndex() {
             $result = $this->testAction('/articles/index');
             debug($result);
-        } 
+        }
 
         function testIndexShort() {
             $result = $this->testAction('/articles/index/short');
@@ -801,7 +803,7 @@ Create a file named ``ArticlesControllerTest.php`` in your
             debug($result);
         }
 
-        function testIndexPostData() { 
+        function testIndexPostData() {
             $data = array(
                 'Article' => array(
                     'user_id' => 1,
@@ -858,7 +860,7 @@ expect:
 * ``vars`` Get the set view variables.
 * ``view`` Get the rendered view, without a layout.
 * ``contents`` Get the rendered view including the layout.
-* ``result`` Get the return value of the controller action.  Useful 
+* ``result`` Get the return value of the controller action.  Useful
   for testing requestAction methods.
 
 The default value is ``result``.  As long as your return type is not ``result``
@@ -975,7 +977,7 @@ chapter of this manual. A difference from other tests is in the
 first line where 'Blog.BlogPost' is imported. You also need to
 prefix your plugin fixtures with ``plugin.blog.blog_post``::
 
-    <?php 
+    <?php
     App::uses('BlogPost', 'Blog.Model');
 
     class BlogPostTest extends CakeTestCase {
@@ -1036,7 +1038,7 @@ a *shell script step* to the build that contains the following::
       );
     }
     DATABASE_PHP
- 
+
 This ensures that you'll always have the correct database configuration that
 Jenkins requires.  Do the same for any other configuration files you need to.
 Its often a good idea to drop and re-create the database before each build as
