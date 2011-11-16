@@ -1,5 +1,5 @@
-Text
-####
+TextHelper
+##########
 
 .. php:class:: TextHelper
 
@@ -159,3 +159,9 @@ Text
     Output::
 
         The killer crept...
+
+
+.. meta::
+    :title lang=en: TextHelper
+    :description lang=en: The Text Helper contains methods to make text more usable and friendly in your views.
+    :keywords lang=en: text helper,autoLinkEmails,autoLinkUrls,autoLink,excerpt,highlight,stripLinks,truncate,string text

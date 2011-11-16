@@ -121,3 +121,8 @@ if a specific object is still enabled using ``enabled()``::
     // $enabled will contain an array of helper currently enabled.
     $enabled = $this->Helpers->enabled();
 
+
+
+.. meta::
+    :title lang=en: Collections
+    :keywords lang=en: array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory

@@ -343,7 +343,7 @@ App::build()
 * Will not merge app path with core paths anymore.
 
 App::objects()
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 * Now supports plugins, App::objects('Users.Model') will return the models in
   plugin Users.
@@ -518,6 +518,16 @@ Router
 - When using Router::parseExtensions() the extension parameter is no longer
   under ``$this->params['url']['ext']``. Instead it is available at
   ``$this->request->params['ext']``.
+- Default plugin routes have changed. Plugin short routes are no longer built
+  in for any actions other than index.  Previously ``/users`` and ``/users/add``
+  would map to the UserController in the Users plugin.  In 2.0, only the
+  ``index`` action is given a short route.  If you wish to continue using short
+  routes, you cand add a route like::
+
+    <?php
+    Router::connect('/users/:action', array('controller' => 'users', 'plugin' => 'users'));
+  
+  To your routes file for each plugin you need short routes on.
 
 Dispatcher
 ----------
@@ -550,25 +560,8 @@ Scaffold
 -  Scaffold 'edit' views should be renamed to 'form'. This was done to make
    scaffold and bake templates consistent.
 
-   -  ``views/scaffolds/edit.ctp -> ``views/scaffolds/form.ctp``
-   -  ``views/posts/scaffold.edit.ctp -> ``views/posts/scaffold.form.ctp``
-
-File
-----
-
--  This class has been deprecated, use ``SplFileObject`` instead.
-
-Folder
-------
-
--  ``Folder::pwd()`` has been removed. Use $folder->path instead.
--  ``Folder::read()`` has been removed. Use DirectoryIterator instead.
--  ``Folder::normalizePath()`` has been removed.
--  ``Folder::correctSlashFor()`` has been removed.
--  ``Folder::slashTerm()`` has been removed.
--  ``Folder::isSlashTerm()`` has been removed.
--  ``Folder::addPathElement()`` has been removed.
-- ``Folder::dirsize()`` renamed to ``Folder::dirSize()``.
+   -  ``views/scaffolds/edit.ctp`` -> ``View/Scaffolds/form.ctp``
+   -  ``views/posts/scaffold.edit.ctp`` -> ``View/Posts/scaffold.form.ctp``
 
 Xml
 ---
@@ -875,6 +868,12 @@ View->Helpers
 -------------
 
 By default View objects contain a :php:class:`HelperCollection` at ``$this->Helpers``.
+
+Themes
+------
+
+To use themes in your Controller you no longer set ``var $view = 'Theme';``. 
+Use ``public $viewClass = 'Theme';`` instead.
 
 Callback positioning changes
 ----------------------------
@@ -1239,3 +1238,8 @@ need to pass the package they are located in. Example::
         'password' => 'root',
         'database' => 'cake',
     );
+
+
+.. meta::
+    :title lang=en: 2.0 Migration Guide
+    :keywords lang=en: migration guide,final proposal,backwards compatibility,class loading,api changes,x versions,php 5,google,internal structure,roadblock,prefixes,directory structure,folders,new features,visibility,environments,variables,lifetime,scope,developers

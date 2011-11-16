@@ -387,7 +387,7 @@ In your controller, any action with an ``admin_`` prefix will be
 called. Using our users example, accessing the url
 ``/admin/users/edit/5`` would call the method ``admin_edit`` of our
 ``UsersController`` passing 5 as the first parameter. The view file
-used would be ``app/views/users/admin\_edit.ctp``
+used would be ``app/View/Users/admin\_edit.ctp``
 
 You can map the url /admin to your ``admin_index`` action of pages
 controller using following route::
@@ -1036,3 +1036,8 @@ Router API
 .. php:method:: compile()
 
     Force a route to compile its regular expression.
+
+
+.. meta::
+    :title lang=en: Routing
+    :keywords lang=en: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router

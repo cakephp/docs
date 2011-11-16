@@ -768,3 +768,8 @@ Data Integrity
     
         )
 
+
+
+.. meta::
+    :title lang=en: Tree
+    :keywords lang=en: auto increment,literal representation,parent id,table categories,database table,hierarchical data,null value,menu system,intricacies,access control,hierarchy,logic,elements,trees

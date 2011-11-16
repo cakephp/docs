@@ -65,7 +65,7 @@ application contained the following exception::
     class MissingWidgetException extends CakeException {};
 
 You could provide nice development errors, by creating 
-``app/views/errors/missing_widget.ctp``.  When in production mode, the above
+``app/View/Errors/missing_widget.ctp``.  When in production mode, the above
 error would be treated as a 500 error.  The constructor for :php:exc:`CakeException`
 has been extended, allowing you to pass in hashes of data.  These hashes are
 interpolated into the the messageTemplate, as well as into the view that is used
@@ -406,3 +406,8 @@ to indicate failure states.  For example::
 The above would cause the configured ``Exception.handler`` to catch and
 process the :php:exc:`NotFoundException`.  By default this will create an error page,
 and log the exception.
+
+
+.. meta::
+    :title lang=en: Exceptions
+    :keywords lang=en: uncaught exceptions,stack traces,logic errors,anonymous functions,renderer,html page,error messages,flexibility,lib,array,cakephp,php

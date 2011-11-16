@@ -270,3 +270,8 @@ Callbacks
     will be interpreted as the url to redirect to or return associative
     array with key 'url' and optionally 'status' and 'exit'.
 
+
+
+.. meta::
+    :title lang=en: Components
+    :keywords lang=en: array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc

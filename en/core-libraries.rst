@@ -109,3 +109,8 @@ logging, internationalization and more.
     core-utility-libraries/sanitize
     core-utility-libraries/email
     core-utility-libraries/file-folder
+
+
+.. meta::
+    :title lang=en: Core Libraries
+    :keywords lang=en: core libraries,global constants,cookie core,javascript libraries,access control lists,number core,text core,time core,security component,core components,plethora,general purpose,web applications,markup,authentication,api,cakephp,functionality,sessions,collections

@@ -30,8 +30,8 @@ it in ``app/webroot/js``
 
 Then you must include the library in your page. To include it in
 all pages, add this line to the <head> section of
-``app/views/layouts/default.ctp`` (copy this file from
-``cake/libs/view/layouts/default.ctp`` if you have not created your
+``app/View/Layouts/default.ctp`` (copy this file from
+``lib/Cake/View/Layouts/default.ctp`` if you have not created your
 own)::
 
     <?php
@@ -840,3 +840,14 @@ This will show/hide the busy-indicator element before and after the
 ``#content`` div is updated. Although ``indicator`` has been
 removed, the new features offered by ``JsHelper`` allow for more
 control and more complex effects to be created.
+
+
+.. todo::
+
+    Missing method set()
+
+
+.. meta::
+    :title lang=en: JsHelper
+    :description lang=en: The Js Helper supports the javascript libraries Prototype, jQuery and Mootools and provides methods for manipulating javascript.
+    :keywords lang=en: js helper,javascript,cakephp jquery,cakephp mootools,cakephp prototype,cakephp jquery ui,cakephp scriptaculous,cakephp javascript,javascript engine

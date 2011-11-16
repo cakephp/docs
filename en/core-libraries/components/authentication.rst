@@ -271,7 +271,7 @@ Displaying auth related flash messages
 
 In order to display the session error messages that Auth generates, you
 need to add the following code to your layout. Add the following two
-lines to the views/layouts/default.ctp file in the body section
+lines to the View/Layouts/default.ctp file in the body section
 preferable before the content_for_layout line.::
 
     <?php
@@ -764,3 +764,8 @@ AuthComponent API
 .. php:staticmethod:: password($pass)
 
     Hash a password with the application's salt value.
+
+
+.. meta::
+    :title lang=en: Authentication
+    :keywords lang=en: authentication handlers,array php,basic authentication,web application,different ways,credentials,exceptions,cakephp,logging

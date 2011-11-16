@@ -33,7 +33,7 @@ CakePHPに関する理解が深まったらログインして知識をコミュ�
 API
 ===
 
-`http://api.cakephp.org/ <http://api.cakephp.org/>`_
+`http://api20.cakephp.org/ <http://api20.cakephp.org/>`_
 
 直接的な答えがコア開発者から直接得られるので、CakePHP API (*Application Programming Interface*)は、フレームワークの内部動作に関する詳細に関する、もっとも総合的なドキュメントです。
 しかしこの文書は、直接的なコードリファレンスであり、経験の浅い PHP プログラマにとっては魑魅魍魎がはびこる魔窟となり得ます。

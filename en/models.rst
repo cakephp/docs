@@ -130,3 +130,8 @@ More on models
     models/additional-methods-and-properties
     models/virtual-fields
     models/transactions
+
+
+.. meta::
+    :title lang=en: Models
+    :keywords lang=en: information workflow,csv file,object oriented programming,model class,model classes,model definition,internal model,core model,simple declaration,application model,php class,database table,data model,data access,external web,inheritance,different ways,validity,functionality,queries

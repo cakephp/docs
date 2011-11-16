@@ -6,7 +6,7 @@ default model behavior.
 
 For a complete list of model attributes and their descriptions
 visit the CakePHP API. Check out
-`http://api.cakephp.org/class/model <http://api.cakephp.org/class/model>`_.
+`http://api20.cakephp.org/class/model <http://api20.cakephp.org/class/model>`_.
 
 useDbConfig
 ===========
@@ -26,7 +26,7 @@ Example usage:
 
     <?php
     class Example extends AppModel {
-       public $useDbConfig = 'alternate';
+        public $useDbConfig = 'alternate';
     }
 
 useTable
@@ -42,14 +42,14 @@ Example usage::
 
     <?php
     class Example extends AppModel {
-       public $useTable = false; // This model does not use a database table
+        public $useTable = false; // This model does not use a database table
     }
 
 Alternatively::
 
     <?php
     class Example extends AppModel {
-       public $useTable = 'exmp'; // This model uses a database table 'exmp'
+        public $useTable = 'exmp'; // This model uses a database table 'exmp'
     }
 
 tablePrefix
@@ -64,7 +64,7 @@ the model.
 Example usage::
 
     class Example extends AppModel {
-       public $tablePrefix = 'alternate_'; // will look for 'alternate_examples'
+        public $tablePrefix = 'alternate_'; // will look for 'alternate_examples'
     }
 
 .. _model-primaryKey:
@@ -98,7 +98,7 @@ For example, to use the ``username`` field::
 
     <?php
     class User extends AppModel {
-       public $displayField = 'username';
+        public $displayField = 'username';
     }
 
 Multiple field names cannot be combined into a single display
@@ -247,3 +247,8 @@ If set to true, data fetched by the model during a single request
 is cached. This caching is in-memory only, and only lasts for the
 duration of the request. Any duplicate requests for the same data
 is handled by the cache.
+
+
+.. meta::
+    :title lang=en: Model Attributes
+    :keywords lang=en: alternate table,default model,database configuration,model example,database table,default database,model class,model behavior,class model,plural form,database connections,database connection,attribute,attributes,complete list,config,cakephp,api,class example

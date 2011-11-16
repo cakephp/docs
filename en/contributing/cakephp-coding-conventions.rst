@@ -25,7 +25,6 @@ So, indentation should look like this::
             // level 2
         // level 1
     // base level
-    ?>
 
 Or::
 
@@ -176,7 +175,6 @@ processed if they are the first thing in a DocBlock line, for example::
      * @author this tag is parsed, but this @version is ignored
      * @version 1.0 this tag is also parsed
      */
-    ?>
 
 ::
 
@@ -341,7 +339,6 @@ Constants should be defined in capital letters:
 
     <?php
     define('CONSTANT', 1);
-    ?>
 
 If a constant name consists of multiple words, they should be separated
 by an underscore character, for example:
@@ -350,4 +347,8 @@ by an underscore character, for example:
 
     <?php
     define('LONG_NAMED_CONSTANT', 2);
-    ?>
+
+
+.. meta::
+    :title lang=en: Coding Standards
+    :keywords lang=en: curly brackets,indentation level,logical errors,control structures,control structure,expr,coding standards,parenthesis,foreach,readability,moose,new features,repository,developers

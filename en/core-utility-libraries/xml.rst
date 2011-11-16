@@ -343,3 +343,8 @@ Xml API
 .. php:staticmethod:: toArray($obj)
 
     Convert either a SimpleXml or DOMDocument object into an array.
+
+
+.. meta::
+    :title lang=en: Xml
+    :keywords lang=en: array php,xml class,xml objects,post xml,xml object,string url,string data,xml parser,php 5,bakery,constructor,php xml,cakephp,php file,unicorns,meth

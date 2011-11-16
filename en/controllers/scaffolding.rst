@@ -131,14 +131,16 @@ Custom scaffolding views for a specific controller
 (PostsController in this example) should be placed like so::
 
     /app/View/Posts/scaffold.index.ctp
-    /app/View/Posts/scaffold.show.ctp
-    /app/View/Posts/scaffold.edit.ctp
-    /app/View/Posts/scaffold.new.ctp
+    /app/View/Posts/scaffold.form.ctp
+    /app/View/Posts/scaffold.view.ctp
 
 Custom scaffolding views for all controllers should be placed like so::
 
     /app/View/Scaffolds/index.ctp
-    /app/View/Scaffolds/show.ctp
-    /app/View/Scaffolds/edit.ctp
-    /app/View/Scaffolds/new.ctp
-    /app/View/Scaffolds/add.ctp
+    /app/View/Scaffolds/form.ctp
+    /app/View/Scaffolds/view.ctp
+
+
+.. meta::
+    :title lang=en: Scaffolding
+    :keywords lang=en: database schemas,loose structure,scaffolding,scaffold,php class,database tables,web developer,downside,web application,logic,developers,cakephp,running,current,delete,database application

@@ -178,6 +178,11 @@ property contains an array of all the positional arguments provided to a command
 also use switches or options on shell applications, these are available at ``$this->params``,
 but we'll cover that in a bit.
 
+When using a ``main()`` method you won't be able to use the positional arguments
+or parameters.  This is because the first positional argument or option is
+interpreted as the command name.  If you want to use arguments and options, you
+should use method names other than ``main``.
+
 Using Models in your shells
 ---------------------------
 
@@ -233,9 +238,9 @@ A shell can also access it's tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to :doc:`/controllers/components`::
 
     <?php 
-    // found in Console/Task/SeaShell.php
+    // found in Console/Command/SeaShell.php
     class SeaShell extends Shell {
-       public $tasks = array('Sound'); //found in console/shells/tasks/sound.php
+       public $tasks = array('Sound'); // found in Console/Command/Task/SoundTask.php
        public function main() {
            $this->Sound->execute();
        }
@@ -920,3 +925,8 @@ More topics
     console-and-shells/acl-shell
     console-and-shells/testsuite-shell
     console-and-shells/upgrade-shell
+
+
+.. meta::
+    :title lang=en: Console and Shells
+    :keywords lang=en: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc

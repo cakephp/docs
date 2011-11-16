@@ -97,3 +97,8 @@ data array::
 
 Will both return the same Acl Node information.
 
+
+
+.. meta::
+    :title lang=en: ACL
+    :keywords lang=en: group node,array type,root node,acl system,acl entry,parent child relationships,model reference,php class,aros,group id,aco,aro,user group,alias,fly

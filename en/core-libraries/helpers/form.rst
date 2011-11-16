@@ -3,12 +3,12 @@ FormHelper
 
 .. php:class:: FormHelper
 
-The FormHelper is a new addition to CakePHP. Most of the heavy
-lifting in form creation is now done using this. The FormHelper
-focuses on creating forms quickly, in a way that will streamline
-validation, re-population and layout. The FormHelper is also
-flexible - it will do almost everything for you using conventions, or
-you can use specific methods to get only what you need.
+The FormHelper does most of the heavy lifting in form creation. 
+The FormHelper focuses on creating forms quickly, in a way that 
+will streamline validation, re-population and layout. The 
+FormHelper is also flexible - it will do almost everything for 
+you using conventions, or you can use specific methods to get 
+only what you need.
 
 Creating Forms
 ==============
@@ -49,7 +49,8 @@ opening form tag.
         // If you are on /recipes/add
         <?php echo $this->Form->create('Recipe'); ?>
 
-        // Output:
+    Output::
+
         <form id="RecipeAddForm" method="post" action="/recipes/add">
 
     This will POST the form data to the ``add()`` action of
@@ -72,11 +73,12 @@ opening form tag.
             }
         }
 
-        // views/recipes/edit.ctp:
+        // View/Recipes/edit.ctp:
         // Since $this->request->data['Recipe']['id'] = 5, we will get an edit form
         <?php echo $this->Form->create('Recipe'); ?>
 
-        //Output:
+    Output::
+
         <form id="RecipeEditForm" method="post" action="/recipes/edit/5">
         <input type="hidden" name="_method" value="PUT" />
 
@@ -116,7 +118,8 @@ There are a number of options for create():
   
       <?php echo $this->Form->create('User', array('type' => 'get')); ?>
       
-      //Output:
+  Output::
+
       <form id="UserAddForm" method="get" action="/users/add">
   
   Specifying 'file' changes the form submission method to 'post', and
@@ -127,7 +130,8 @@ There are a number of options for create():
   
       <?php echo $this->Form->create('User', array('type' => 'file')); ?>
       
-      //Output:
+  Output::
+
       <form id="UserAddForm" enctype="multipart/form-data" method="post" action="/users/add">
   
   When using 'put' or 'delete', your form will be functionally
@@ -143,31 +147,37 @@ There are a number of options for create():
 
     <?php echo $this->Form->create('User', array('action' => 'login')); ?>
 
-    //Output:
+  Output::
+
     <form id="UserLoginForm" method="post" action="/users/login">
     </form>
 
 * ``$options['url']`` If the desired form action isn’t in the current
   controller, you can specify a URL for the form action using the ‘url’ key of
   the $options array. The supplied URL can be relative to your CakePHP
-  application, or can point to an external domain::
+  application::
 
-    <?php echo $this->Form->create(null, array('url' => '/recipes/add')); ?>
+    <?php
+    echo $this->Form->create(null, array('url' => '/recipes/add'));
     // or
-    <?php echo $this->Form->create(null, array(
+    echo $this->Form->create(null, array(
         'url' => array('controller' => 'recipes', 'action' => 'add')
-    )); 
-    ?>
+    ));
 
-    //Output:
+  Output::
+
     <form method="post" action="/recipes/add">
 
-    <?php echo $this->Form->create(null, array(
+  or can point to an external domain::
+
+    <?php
+    echo $this->Form->create(null, array(
         'url' => 'http://www.google.com/search',
         'type' => 'get'
-    )); ?>
+    ));
 
-    //Output:
+  Output::
+
     <form method="get" action="http://www.google.com/search">
 
   Also check :php:meth:`HtmlHelper::url()` method for more examples of
@@ -185,11 +195,11 @@ There are a number of options for create():
 
     <?php
     echo $this->Form->create('User', array(
-            'inputDefaults' => array(
-                'label' => false,
-                'div' => false
-            )
-        ));
+        'inputDefaults' => array(
+            'label' => false,
+            'div' => false
+        )
+    ));
 
   All inputs created from that point forward would inherit the
   options declared in inputDefaults. You can override the
@@ -244,7 +254,7 @@ Closing the Form
 
         <div class="glass-pill"><input type="submit" value="Update!" name="Update"></div>
 
-    See the `API <http://api.cakephp.org>`_ for further details.
+    See the `API <http://api20.cakephp.org>`_ for further details.
 
     .. note::
 
@@ -309,6 +319,7 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
 
     A more extensive example showing some options for a date field::
 
+        <?php
         echo $this->Form->input('birth_dt', array(
             'label' => 'Date of birth',
             'dateFormat' => 'DMY',
@@ -380,7 +391,8 @@ saveAll(), use the following convention::
     echo $this->Form->input('Modelname.0.fieldname');
     echo $this->Form->input('Modelname.1.fieldname');
 
-    // Will generate
+Output::
+
     <input type="text" id="Modelname0Fieldname" name="data[Modelname][0][fieldname]">
     <input type="text" id="Modelname1Fieldname" name="data[Modelname][1][fieldname]">
 
@@ -398,10 +410,11 @@ html attributes. The following will cover the options specific to
   and any type supported by HTML5::
 
     <?php 
-    echo $this->Form->input('field', array('type' => 'file')); ?>
-    echo $this->Form->input('email', array('type' => 'email')); ?>
+    echo $this->Form->input('field', array('type' => 'file'));
+    echo $this->Form->input('email', array('type' => 'email'));
 
-    // Output:
+  Output::
+
     <div class="input file">
         <label for="UserField">Field</label>
         <input type="file" name="data[User][field]" value="" id="UserField" />
@@ -450,7 +463,8 @@ html attributes. The following will cover the options specific to
 
   Disabling div output::
 
-    <?php echo $this->Form->input('User.name', array('div' => false));?>
+    <?php
+    echo $this->Form->input('User.name', array('div' => false)); ?>
 
   Output::
 
@@ -460,7 +474,8 @@ html attributes. The following will cover the options specific to
 * ``$options['label']`` Set this key to the string you would like to be
   displayed within the label that usually accompanies the input::
 
-    <?php echo $this->Form->input('User.name', array(
+    <?php
+    echo $this->Form->input('User.name', array(
         'label' => 'The User Alias'
     ));
 
@@ -474,7 +489,8 @@ html attributes. The following will cover the options specific to
   Alternatively, set this key to false to disable the output of the
   label::
 
-    <?php echo $this->Form->input('User.name', array('label' => false));
+    <?php
+    echo $this->Form->input('User.name', array('label' => false));
 
   Output::
 
@@ -486,7 +502,8 @@ html attributes. The following will cover the options specific to
   ``label`` element. If you do this, you can use a ``text`` key in
   the array to customize the label text::
 
-    <?php echo $this->Form->input('User.name', array(
+    <?php
+    echo $this->Form->input('User.name', array(
         'label' => array(
             'class' => 'thingy',
             'text' => 'The User Alias'
@@ -545,13 +562,14 @@ html attributes. The following will cover the options specific to
   Use these keys if you need to inject some markup inside the output
   of the input() method::
   
-      <?php echo $this->Form->input('field', array(
+      <?php
+      echo $this->Form->input('field', array(
           'before' => '--before--',
           'after' => '--after--',
           'between' => '--between---'
-      ));?>
+      ));
       
-      // Output:
+  Output::
       
       <div class="input">
       --before--
@@ -564,15 +582,16 @@ html attributes. The following will cover the options specific to
   For radio inputs the 'separator' attribute can be used to
   inject markup to separate each input/label pair::
   
-      <?php echo $this->Form->input('field', array(
+      <?php
+      echo $this->Form->input('field', array(
           'before' => '--before--',
           'after' => '--after--',
           'between' => '--between---',
           'separator' => '--separator--',
           'options' => array('1', '2') 
-      ));?>
+      ));
       
-      Output:
+  Output::
       
       <div class="input">
       --before--
@@ -701,7 +720,8 @@ Options for select, checkbox and  radio inputs
   value with text displayed instead of just a blank option, pass in a
   string to empty::
   
-      <?php echo $this->Form->input('field', array(
+      <?php
+      echo $this->Form->input('field', array(
           'options' => array(1, 2, 3, 4, 5),
           'empty' => '(choose one)'
       ));
@@ -789,7 +809,8 @@ Datetime options
 * ``$options['interval']`` This option specifies the number of minutes between
   each option in the minutes select box::
 
-    <?php echo $this->Form->input('Model.time', array(
+    <?php
+    echo $this->Form->input('Model.time', array(
         'type' => 'time',
         'interval' => 15
     ));
@@ -907,7 +928,7 @@ Form Element-Specific Methods
 
       Output::
 
-        <textarea name="data[Form][textarea]" cols="5" rows="5" id="FormTextarea" >
+        <textarea name="data[Form][textarea]" cols="5" rows="5" id="FormTextarea">
         </textarea>
 
 .. php:method:: checkbox(string $fieldName, array $options)
@@ -1020,7 +1041,8 @@ Form Element-Specific Methods
 
       Options can also be supplied as key-value pairs::
 
-        <?php echo $this->Form->select('field', $options, array(
+        <?php
+        echo $this->Form->select('field', $options, array(
             'Value 1'=>'Label 1',
             'Value 2'=>'Label 2',
             'Value 3'=>'Label 3'
@@ -1140,9 +1162,9 @@ Creating buttons and submit elements
 
         <?php
         echo $this->Form->button('A Button');
-        echo $this->Form->button('Another Button', array('type'=>'button'));
-        echo $this->Form->button('Reset the Form', array('type'=>'reset'));
-        echo $this->Form->button('Submit Form', array('type'=>'submit'));
+        echo $this->Form->button('Another Button', array('type' => 'button'));
+        echo $this->Form->button('Reset the Form', array('type' => 'reset'));
+        echo $this->Form->button('Submit Form', array('type' => 'submit'));
 
     Will output::
 
@@ -1157,7 +1179,7 @@ Creating buttons and submit elements
     Defaults to false::
 
         <?php 
-        echo $this->Form->button('Submit Form', array('type'=>'submit','escape'=>true));
+        echo $this->Form->button('Submit Form', array('type' => 'submit', 'escape' => true));
 
 Creating date and time inputs
 =============================
@@ -1449,3 +1471,13 @@ Hidden fields no longer remove the class attribute. This means
 that if there are validation errors on hidden fields, 
 the error-field classname will be applied.
 
+
+.. todo::
+
+    Missing methods secure(), inputs(), postButton(), postLink(), tagIsInvalid()
+
+
+.. meta::
+    :title lang=en: FormHelper
+    :description lang=en: The FormHelper focuses on creating forms quickly, in a way that will streamline validation, re-population and layout.
+    :keywords lang=en: html helper,cakephp html,form create,form input,form select,form file field,form label,form text,form password,form checkbox,form radio,form submit,form date time,form error,validate upload,unlock field,form security

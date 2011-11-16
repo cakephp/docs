@@ -103,3 +103,8 @@ To get started on your first CakePHP application,
 :doc:`try the blog tutorial now </tutorials-and-examples/blog/blog>`
 
 .. |Figure 1| image:: /_static/img/basic_mvc.png
+
+
+.. meta::
+    :title lang=en: Understanding Model-View-Controller
+    :keywords lang=en: model view controller,model layer,formatted result,model objects,music documents,business logic,text representation,first glance,retrieving data,software design,html page,videos music,new friends,interaction,cakephp,interface,photo,presentation,mvc,photos

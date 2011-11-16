@@ -102,3 +102,8 @@ repeatedly. CakePHP facilitates view code reuse with layouts and
 elements. By default, every view rendered by a controller is placed
 inside a layout. Elements are used when small snippets of content
 need to be reused in multiple views.
+
+
+.. meta::
+    :title lang=en: CakePHP Structure
+    :keywords lang=en: user management system,controller actions,application extensions,default behavior,maps,logic,snap,definitions,aids,models,route map,blog,plugins,fit

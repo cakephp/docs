@@ -18,16 +18,12 @@ following::
 
     pear upgrade PEAR
     pear config-set auto_discover 1
-    pear install pear.phpunit.de/PHPUnit-3.5.15
+    pear install pear.phpunit.de/PHPUnit
 
 .. note::
 
     Depending on your system's configuration, you make need to run the previous
     commands with ``sudo``
-
-.. note::
-
-    At this time CakePHP does not work with PHPUnit 3.6
 
 Test database setup
 ===================
@@ -777,6 +773,8 @@ Create a file named ``ArticlesControllerTest.php`` in your
     <?php
     class ArticlesControllerTest extends ControllerTestCase {
 
+        public $fixtures = array('app.article');
+
         function testIndex() {
             $result = $this->testAction('/articles/index');
             debug($result);
@@ -978,7 +976,7 @@ first line where 'Blog.BlogPost' is imported. You also need to
 prefix your plugin fixtures with ``plugin.blog.blog_post``::
 
     <?php 
-    App::uses('Blog.BlogPost', 'Model');
+    App::uses('BlogPost', 'Blog.Model');
 
     class BlogPostTest extends CakeTestCase {
 
@@ -1069,3 +1067,8 @@ Run a build
 You should be able to run a build now.  Check the console output and make any
 necessary changes to get a passing build.
 
+
+
+.. meta::
+    :title lang=en: Testing
+    :keywords lang=en: web runner,phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration

@@ -203,3 +203,8 @@ CakeLog API
     $log indicates the type of log message being created.
     $message is the message of the log entry being written to.
 
+
+
+.. meta::
+    :title lang=en: Logging
+    :keywords lang=en: array php,common ancestor,logging data,class settings,configuration properties,class model,ajax,constructor,debugging,search terms,streams,lib,config,sorts,logs,soap,cakephp

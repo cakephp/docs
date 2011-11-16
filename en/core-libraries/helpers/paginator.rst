@@ -346,11 +346,11 @@ assume a tabular layout, but the PaginatorHelper available in views
 doesn't always need to be restricted as such.
 
 See the details on
-`PaginatorHelper <http://api.cakephp.org/class/paginator-helper>`_
+`PaginatorHelper <http://api20.cakephp.org/class/paginator-helper>`_
 in the API. As mentioned, the PaginatorHelper also offers sorting features
 which can be easily integrated into your table column headers::
 
-    // app/views/posts/index.ctp
+    // app/View/Posts/index.ctp
     <table>
         <tr> 
             <th><?php echo $this->Paginator->sort('id', 'ID'); ?></th> 
@@ -448,3 +448,13 @@ Other Methods
         <?php
         echo $this->Paginator->url(array('sort' => 'title'), true); 
 
+
+..todo::
+
+    Missing methods current(), defaultModel(), hasNext(), hasPage(), hasPrev(), params(), sortDir(), sortKey()
+
+
+.. meta::
+    :title lang=en: PaginatorHelper
+    :description lang=en: The Pagination helper is used to output pagination controls such as page numbers and next/previous links.
+    :keywords lang=en: paginator helper,pagination,sort,page number links,pagination in views,prev link,next link,last link,first link,page counter

@@ -18,3 +18,8 @@ debugging, and testing will be covered.
     development/rest
     development/vendor-packages
     
+
+
+.. meta::
+    :title lang=en: Development
+    :keywords lang=en: development sessions,debugging,exceptions

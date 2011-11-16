@@ -1,5 +1,5 @@
 ##############################
-Blog tutorial - Adding a layer
+Blog Tutorial - Adding a layer
 ##############################
 
 Create a Post Model
@@ -15,12 +15,9 @@ we'll be creating will be saved to ``/app/Model/Post.php``. The
 completed file should look like this::
 
     <?php
-    
     class Post extends AppModel {
         public $name = 'Post';
     }
-    
-    ?>
 
 Naming convention is very important in CakePHP. By naming our model
 Post, CakePHP can automatically infer that this model will be used
@@ -55,7 +52,6 @@ directory. Here's what the basic controller should look like::
         public $helpers = array ('Html','Form');
         public $name = 'Posts';
     }
-    ?>
 
 Now, lets add an action to our controller. Actions often represent
 a single function or interface in an application. For example, when
@@ -74,7 +70,6 @@ posts. The code for that action would look something like this:
             $this->set('posts', $this->Post->find('all'));
         }
     }
-    ?>
 
 Let me explain the action a bit. By defining function ``index()``
 in our PostsController, users can now access the logic there by
@@ -234,7 +229,6 @@ PostsController now::
             $this->set('post', $this->Post->read());
         }
     }
-    ?>
 
 The ``set()`` call should look familiar. Notice we're using
 ``read()`` rather than ``find('all')`` because we only really want
@@ -297,7 +291,6 @@ PostsController:
             }
         }
     }
-    ?>
 
 .. note::
 
@@ -400,7 +393,6 @@ back at our Post model and make a few adjustments::
             )
         );
     }
-    ?>
 
 The ``$validate`` array tells CakePHP how to validate your data
 when the ``save()`` method is called. Here, I've specified that
@@ -517,7 +509,7 @@ Next, let's make a way for users to delete posts. Start with a
 This logic deletes the post specified by $id, and uses
 ``$this->Session->setFlash()`` to show the user a confirmation
 message after redirecting them on to ``/posts``.  If the user attempts to
-do a delete using a GET request, we throw an Exception.  Uncaught exceptions
+do a delete using a POST request, we throw an Exception.  Uncaught exceptions
 are captured by CakePHP's exception handler, and a nice error page is 
 displayed.  There are many built-in :doc:`/development/exceptions` that can
 be used to indicate the various HTTP errors your application might need
@@ -639,3 +631,8 @@ These are common tasks people learning CakePHP usually want to study next:
 3. :doc:`/controllers/scaffolding`: Prototyping before creating code
 4. :doc:`/console-and-shells/code-generation-with-bake` Generating basic CRUD code
 5. :doc:`/tutorials-and-examples/blog-auth-example/auth`: User authentication and authorization tutorial
+
+
+.. meta::
+    :title lang=en: Blog Tutorial Adding a Layer
+    :keywords lang=en: doc models,validation check,controller actions,model post,php class,model class,model object,business logic,database table,naming convention,bread and butter,callbacks,prefixes,nutshell,interaction,array,cakephp,interface,applications,delete

@@ -14,7 +14,7 @@ setup.  You'll need the following software:
 
 * Git
 * PHP 5.2.9 or greater
-* PHPUnit 3.5.10 - 3.5.17
+* PHPUnit 3.5.10 or greater
 
 Set up your user information with your name/handle and working email address::
 
@@ -114,3 +114,8 @@ submit a pull request on github.
 
 All bug fixes merged into a maintenance branch will also be merged into upcoming
 releases periodically by the core team.
+
+
+.. meta::
+    :title lang=en: Code
+    :keywords lang=en: cakephp source code,code patches,test ref,descriptive name,bob barker,initial setup,global user,database connection,clone,lighthouse,repository,user information,enhancement,back patches,checkout

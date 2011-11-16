@@ -316,3 +316,8 @@ Core Helpers
     Proximity detection (is this next year?), nice string
     formatting(Today, 10:30 am) and time zone conversion.
 
+
+
+.. meta::
+    :title lang=en: Helpers
+    :keywords lang=en: php class,time function,presentation layer,processing power,ajax,markup,array,functionality,logic,syntax,elements,cakephp,plugins

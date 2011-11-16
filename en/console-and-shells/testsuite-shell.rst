@@ -7,3 +7,8 @@ using the testsuite shell.
 For more information on basic usage of the testsuite shell see
 :ref:`run-tests-from-command-line`
 
+
+
+.. meta::
+    :title lang=en: Testsuite shell
+    :keywords lang=en: shell,command line

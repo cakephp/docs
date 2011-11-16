@@ -9,7 +9,7 @@ tutorial, and you are familiar with
 :doc:`/console-and-shells/code-generation-with-bake`. You should have
 some experience with CakePHP, and be familiar with MVC concepts.
 This tutorial is a brief introduction to the
-:php:class:`AuthComponent` and :php:class:`AclComponent`.
+:php:class:`AuthComponent` and :php:class:`AclComponent`\.
 
 What you will need
 
@@ -115,6 +115,7 @@ other pieces that need to be added before we can add the Auth and
 Acl components. First add a login and logout action to your
 ``UsersController``::
 
+    <?php
     function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
@@ -135,7 +136,7 @@ Then create the following view file for login at
     <?php
     echo $this->Form->create('User', array('action' => 'login'));
     echo $this->Form->inputs(array(
-        'legend' => __('Login', true),
+        'legend' => __('Login'),
         'username',
         'password'
     ));
@@ -191,9 +192,10 @@ exceptions so :php:class:`AuthComponent` will allow us to create some groups
 and users. In **both** your ``GroupsController`` and your
 ``UsersController`` Add the following::
 
+    <?php
     function beforeFilter() {
         parent::beforeFilter(); 
-        $this->Auth->allow(array('*'));
+        $this->Auth->allow('*');
     }
 
 These statements tell AuthComponent to allow public access to all
@@ -246,12 +248,12 @@ our ``User`` model we will add the following::
                 return null;
             }
             if (isset($this->data['User']['group_id'])) {
-            $groupId = $this->data['User']['group_id'];
+                $groupId = $this->data['User']['group_id'];
             } else {
                 $groupId = $this->field('group_id');
             }
             if (!$groupId) {
-            return null;
+                return null;
             } else {
                 return array('Group' => array('id' => $groupId));
             }
@@ -314,6 +316,7 @@ Group-only ACL
 In case we want simplified per-group only permissions, we need to
 implement ``bindNode()`` in ``User`` model::
 
+    <?php
     function bindNode($user) {
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
     }
@@ -367,10 +370,12 @@ permissions. As we will be using a global root ACO we need to make
 a small modification to our ``AuthComponent`` configuration.
 ``AuthComponent`` needs to know about the existence of this root
 node, so that when making ACL checks it can use the correct node
-path when looking up controllers/actions. In ``AppController`` add
-the following to the ``beforeFilter``::
-
-    <?php
-    $this->Auth->actionPath = 'controllers';
+path when looking up controllers/actions. In ``AppController`` ensure
+that you ``$components`` array contains the ``actionPath`` defined earlier.
 
 Continue to :doc:`part-two` to continue the tutorial.
+
+
+.. meta::
+    :title lang=en: Simple Acl controlled Application
+    :keywords lang=en: core libraries,auto increment,object oriented programming,database schema,sql statements,php class,stable release,code generation,database server,server configuration,reins,access control,shells,mvc,authentication,web server,cakephp,servers,checkout,apache

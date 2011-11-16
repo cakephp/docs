@@ -35,7 +35,7 @@ conhecimentos com a comunidade e ganhe fama e fortuna.
 A API
 =====
 
-`http://api.cakephp.org/ <http://api.cakephp.org/>`_
+`http://api20.cakephp.org/ <http://api20.cakephp.org/>`_
 
 Direto ao ponto e diretamente dos desenvolvedores do núcleo, a API
 (`Application Programming Interface`) do CakePHP é a mais completa documentação
@@ -48,7 +48,7 @@ Se você sentiu que a informação fornecida na API não é suficiente, verifiqu
 código dos casos de testes fornecido com o CakePHP. Eles podem servir como
 exemplos práticos de utilização das funcionalidades de uma classe::
 
-    lib/Cake/tests/Case
+    lib/Cake/Test/Case
 
 O canal IRC
 ===========

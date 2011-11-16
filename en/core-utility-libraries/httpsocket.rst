@@ -317,3 +317,8 @@ authentication. For example::
     To use a proxy, you must call the ``HttpSocket::configProxy()`` similar to
     ``HttpSocket::configAuth()``.
 
+
+
+.. meta::
+    :title lang=en: HttpSocket
+    :keywords lang=en: array name,array data,query parameter,query string,php class,string query,test type,string data,google,query results,webservices,apis,parameters,cakephp,meth,search results

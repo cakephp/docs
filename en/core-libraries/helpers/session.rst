@@ -99,3 +99,13 @@ The above will output a simple message, with the following html::
             <?php printf($message, h($name)); ?>
         </div>
 
+
+.. todo::
+
+    Missing methods error(), valid()
+
+
+.. meta::
+    :title lang=en: SessionHelper
+    ::description lang=en: As a natural counterpart to the Session Component, the Session Helper replicates most of the components functionality and makes it available in your view.
+    :keywords lang=en: session helper,flash messages,session flash,session read,session check

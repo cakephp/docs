@@ -561,3 +561,8 @@ CakeResponse API
     the set headers as well as the body. This is done automatically at the
     end of each request by :php:class:`Dispatcher`
 
+
+
+.. meta::
+    :title lang=en: Request and Response objects
+    :keywords lang=en: request controller,request parameters,array indices,purpose index,response objects,domain information,request object,request data,interrogating,params,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp

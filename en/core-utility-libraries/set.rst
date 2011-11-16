@@ -770,8 +770,8 @@ Foo
         supported. Please report any bugs as you find them. Suggestions for
         additional features are welcome.
 
-    To learn more about Set::extract() refer to function testExtract()
-    in /cake/tests/cases/libs/set.test.php.
+    To learn more about Set::extract() refer to the function testExtract() 
+    in /lib/Cake/Test/Case/Utility/SetTest.php.
 
 
 .. php:staticmethod:: filter($var, $isArray=null)
@@ -1616,3 +1616,8 @@ Foo
 		        $result = Set::apply('/Movie/title', $data, 'strtoupper', array('type' => 'map'));
 		        // result equals array('MOVIE 3', 'MOVIE 1', 'MOVIE 2')
 		        // $options are: - type : can be 'pass' uses call_user_func_array(), 'map' uses array_map(), or 'reduce' uses array_reduce()
+
+
+.. meta::
+    :title lang=en: Set
+    :keywords lang=en: array array,path array,array name,numeric key,regular expression,result set,person name,brackets,syntax,cakephp,elements,php,set path

@@ -515,25 +515,8 @@ Scaffold
 -  Scaffoldの'edit'ビューは'form'に名前を変えるべきです。
    これはScaffoldとBakeのテンプレートに矛盾がないようにするために為されました。
 
-   -  ``views/scaffolds/edit.ctp -> ``views/scaffolds/form.ctp``
-   -  ``views/posts/scaffold.edit.ctp -> ``views/posts/scaffold.form.ctp``
-
-File
-----
-
--  このクラスは非推奨となりました。代わりに ``SplFileObject`` を使ってください。
-
-Folder
-------
-
--  ``Folder::pwd()`` は削除されました。代わりに $folder->path を使ってください。
--  ``Folder::read()`` は削除されました。代わりに DirectoryIterator を使ってください。
--  ``Folder::normalizePath()`` は削除されました。
--  ``Folder::correctSlashFor()`` は削除されました。
--  ``Folder::slashTerm()`` は削除されました。
--  ``Folder::isSlashTerm()`` は削除されました。
--  ``Folder::addPathElement()`` は削除されました。
-- ``Folder::dirsize()`` は ``Folder::dirSize()`` に改名されました。
+   -  ``views/scaffolds/edit.ctp`` -> ``View/Scaffolds/form.ctp``
+   -  ``views/posts/scaffold.edit.ctp`` -> ``View/Posts/scaffold.form.ctp``
 
 Xml
 ---

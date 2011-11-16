@@ -21,8 +21,6 @@ Translator tips:
   translated.
 - Feel free to dive right in if your chosen language already
   exists on the book.
-- Use the to do list (top right) to see where attention is needed
-  for your language.
 - Use `Informal Form <http://en.wikipedia.org/wiki/Register_(linguistics)>`_.
 - Translate both the content and the title at the same time.
 - Do compare to the English content before submitting a correction
@@ -89,8 +87,8 @@ delimiters, they have to be escaped with a backslash.
 Inline markup has a few restrictions:
 
 * It **may not** be nested.
-* Content may not start or end with whitespace: ``* text*`` is wrong.  * Content
-  must be separated from surrounding text by non-word characters. Use a
+* Content may not start or end with whitespace: ``* text*`` is wrong.
+* Content must be separated from surrounding text by non-word characters. Use a
   backslash escaped space to work around that: ``onelong\ *bolded*\ word``.
 
 Lists
@@ -185,7 +183,7 @@ Describing classes and their contents
 -------------------------------------
 
 The CakePHP documentation uses the `phpdomain
-<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>` to provide custom
+<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ to provide custom
 directives for describing PHP objects and constructs.  Using these directives
 and roles is required to give proper indexing and cross referencing features.
 
@@ -363,3 +361,8 @@ Samples
 .. warning::
 
     It could be dangerous.
+
+
+.. meta::
+    :title lang=en: Documentation
+    :keywords lang=en: partial translations,translation efforts,html entities,text markup,asfd,asdf,structured text,english content,markdown,formatted text,dot org,repo,consistency,translator,freenode,textile,improvements,syntax,cakephp,submission

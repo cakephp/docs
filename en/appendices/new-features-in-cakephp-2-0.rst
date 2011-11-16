@@ -305,3 +305,8 @@ ConnectionManager
 
 A new method :php:meth:`ConnectionManager::drop()` was added to allow
 removing connections at runtime.
+
+
+.. meta::
+    :title lang=en: New Features in CakePHP 2.0
+    :keywords lang=en: time reductions,doctypes,model construction,key value,option one,database connection,content view,configuration file,constructor,great time,array,new features,bootstrap process,elements,new models

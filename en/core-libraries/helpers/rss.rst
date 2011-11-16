@@ -120,9 +120,9 @@ metadata back to the layout::
         'xmlns:dc' => 'http://purl.org/dc/elements/1.1/'));
 
     $this->set('channelData', array(
-        'title' => __("Most Recent Posts", true),
+        'title' => __("Most Recent Posts"),
         'link' => $this->Html->url('/', true),
-        'description' => __("Most recent posts.", true),
+        'description' => __("Most recent posts."),
         'language' => 'en-us'));
 
 The second part of the view generates the elements for the actual
@@ -204,3 +204,14 @@ Feed Validator or the w3c site at http://validator.w3.org/feed/.
     to 1 or to 0 to get a valid feed, because of the various debug
     information added automagically under higher debug settings that
     break XML syntax or feed validation rules.
+
+
+.. todo::
+
+    Missing all class and method definitions
+
+
+.. meta::
+    :title lang=en: RssHelper
+    :description lang=en: The RSS helper makes generating XML for RSS feeds easy.
+    :keywords lang=en: rss helper,rss feed,isrss,rss item,channel data,document data,parse extensions,request handler

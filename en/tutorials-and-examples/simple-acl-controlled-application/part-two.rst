@@ -192,3 +192,8 @@ by user at the same time. You can also set permissions on a global
 and per-controller and per-action basis. Furthermore, you have a
 reusable block of code to easily expand your ACO table as your app
 grows.
+
+
+.. meta::
+    :title lang=en: Simple Acl controlled Application - part 2
+    :keywords lang=en: shell interface,magic solution,aco,unzipped,config,sync,syntax,cakephp,php,running,acl

@@ -635,7 +635,7 @@ beneficios que hemos mencionado un poco más arriba)
 
 
 Ahora ya estás preparado para la acción. Empieza tu propio proyecto, lee el
-resto del manual y el API `Manual </>`_ `API <http://api.cakephp.org>`_.
+resto del manual y el API `Manual </>`_ `API <http://api20.cakephp.org>`_.
 
 Lectura sugerida para continuar desde aquí
 ==========================================

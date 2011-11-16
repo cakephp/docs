@@ -42,6 +42,7 @@ allows you to define how the CookieComponent works.
 |                 |              | sub-directories such as /foo/bar/ of your domain. The|
 |                 |              | default value is the entire domain. You can set this |
 |                 |              | directly within the write() method.                  |
++-----------------+--------------+------------------------------------------------------+
 | boolean $secure | false        | Indicates that the cookie should only be transmitted |
 |                 |              | over a secure HTTPS connection. When set to true, the|
 |                 |              | cookie will only be set if a secure connection       |
@@ -159,3 +160,8 @@ Using the Component
 .. php:method:: destroy()
 
     Destroys the current cookie.
+
+
+.. meta::
+    :title lang=en: Cookie
+    :keywords lang=en: array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null

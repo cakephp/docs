@@ -76,3 +76,8 @@ to avoid second check.
     if ($this->ModelName->saveAll($this->data, array('validate' => false))) {
         // saving without validation
     } 
+
+
+.. meta::
+    :title lang=en: Validating Data from the Controller
+    :keywords lang=en: password rules,validations,subset,array,logs,logic,email,first name last name,models,options,data model

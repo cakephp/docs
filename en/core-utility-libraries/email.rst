@@ -109,7 +109,8 @@ at prefix in the host and configure the port value accordingly.  Example::
             'host' => 'ssl://smtp.gmail.com',
             'port' => 465,
             'username' => 'my@gmail.com',
-            'password' => 'secret'
+            'password' => 'secret',
+            'transport' => 'Smtp'
         );
     }
 
@@ -206,10 +207,10 @@ send multipart templated email messages as well::
 
 This would use the following view files:
 
-* ``app/Views/Emails/text/welcome.ctp``
-* ``app/Views/Layouts/Emails/text/fancy.ctp``
-* ``app/Views/Emails/html/welcome.ctp``
-* ``app/Views/Layouts/Emails/text/fancy.ctp``
+* ``app/View/Emails/text/welcome.ctp``
+* ``app/View/Layouts/Emails/text/fancy.ctp``
+* ``app/View/Emails/html/welcome.ctp``
+* ``app/View/Layouts/Emails/text/fancy.ctp``
 
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.
@@ -342,3 +343,8 @@ name of configuration in ``EmailConfig``.
 If you want, you can pass the to, subject and message as null and do all
 configurations in the 4th parameter (as array or using ``EmailConfig``).
 Check the list of :ref:`configurations <email-configurations>` to see all accepted configs.
+
+
+.. meta::
+    :title lang=en: CakeEmail
+    :keywords lang=en: sending mail,email sender,envelope sender,php class,database configuration,sending emails,meth,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models

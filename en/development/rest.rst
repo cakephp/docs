@@ -112,7 +112,7 @@ RecipesController inside ``app/View/recipes/xml``. We can also use
 :php:class:`Xml` for quick-and-easy XML output in those views. Here's what
 our index view might look like::
 
-    // app/views/recipes/xml/index.ctp
+    // app/View/Recipes/xml/index.ctp
     
     <recipes>
         <?php
@@ -190,3 +190,8 @@ of the options array in the second parameter. Once that key has
 been set, the specified route works only for that HTTP request
 method (which could also be GET, DELETE, etc.)
 
+
+
+.. meta::
+    :title lang=en: REST
+    :keywords lang=en: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api
