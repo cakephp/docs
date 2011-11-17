@@ -28,7 +28,7 @@ following::
 .. tip::
 
     All output is swallowed when using PHPUnit 3.6. Add the ``--debug`` 
-    modifier to display output if using the CLI interface.
+    modifier to display output if using the CLI.
 
 Test database setup
 ===================
