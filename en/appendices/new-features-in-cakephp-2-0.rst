@@ -28,7 +28,7 @@ Helpers
 HtmlHelper
 ----------
 
-* ``getCrumbsList()`` Creates breadcrumb links wrapped in ``<li>`` elements.
+* ``getCrumbList()`` Creates breadcrumb links wrapped in ``<li>`` elements.
   See `#856 <http://cakephp.lighthouseapp.com/projects/42648/tickets/856>`_.
 * ``loadConfig()`` has moved from :php:class:`Helper` to :php:class:`HtmlHelper`
   class. This method now uses the new reader classes (see 2.0 :php:class:`Configure`)
