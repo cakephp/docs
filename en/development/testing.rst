@@ -25,6 +25,11 @@ following::
     Depending on your system's configuration, you make need to run the previous
     commands with ``sudo``
 
+.. tip::
+
+    All output is swallowed when using PHPUnit 3.6. Add the ``--debug`` 
+    modifier to display output if using the CLI interface.
+
 Test database setup
 ===================
 
