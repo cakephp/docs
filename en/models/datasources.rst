@@ -18,7 +18,7 @@ of which is listed here for your convenience:
 .. note::
 
     You can find additional community contributed datasources in the 
-    `CakePHP DataSources repository at github <http://github.com/cakephp/datasources>`_.
+    `CakePHP DataSources repository at github <https://github.com/cakephp/datasources/tree/2.0>`_.
 
 When specifying a database connection configuration in
 ``app/Config/database.php``, CakePHP transparently uses the corresponding
