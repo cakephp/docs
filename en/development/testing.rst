@@ -338,6 +338,8 @@ model. Create a file named ``ArticleFixture.php`` in your
     <?php
     class ArticleFixture extends CakeTestFixture { 
 
+          /* Optional. Set this property to load fixtures to a different test datasource */
+          public $useDbConfig = 'test';
           public $fields = array( 
               'id' => array('type' => 'integer', 'key' => 'primary'), 
               'title' => array('type' => 'string', 'length' => 255, 'null' => false), 
@@ -352,6 +354,11 @@ model. Create a file named ``ArticleFixture.php`` in your
               array ('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31') 
           ); 
      } 
+
+The ``$useDbConfig`` property defines the datasource of which the fixture will
+use.  You can specify an arbitrary name, eg.: ``myapp``, and the testsuite
+will use ``test_myapp`` if it exists.  Doing this is optional, and when
+unspecified, the default ``test`` datasource will be used.
 
 We use ``$fields`` to specify which fields will be part of this table,
 and how they are defined. The format used to define these fields is
@@ -534,6 +541,12 @@ Let's now create a file named ``ArticleTest.php`` in your
 In our test cases' variable ``$fixtures`` we define the set of fixtures that
 we'll use.  You should remember to include all the fixtures that will have
 queries run against them.
+
+.. note::
+
+    You can override the test model database by specifying the ``$useDbConfig``
+    property. Ensure that the relevant fixture uses the same value so that the
+    table is created in the correct database.
 
 Creating a test method
 ----------------------
