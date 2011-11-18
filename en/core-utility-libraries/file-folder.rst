@@ -48,6 +48,19 @@ Folder API
     // Create a new folder with 0755 permissions
     $dir = new Folder('/path/to/folder', true, 0755);
 
+.. php:attr:: path
+
+    Current path to the folder. :php:meth:`Folder::pwd()` will return the same 
+    information.
+
+.. php:attr:: sort
+
+    Whether or not the list results should be sorted by name.
+
+.. php:attr:: mode
+
+    Mode to be used when creating folders. Defaults to ``0755``. Does nothing on 
+    windows machines.
 
 .. php:staticmethod:: addPathElement( $path, $element )
 
@@ -336,6 +349,30 @@ File API
     // Create a new file with 0644 permissions
     $file = new File('/path/to/file.php', true, 0644);
 
+.. php:attr:: Folder
+
+    The Folder object of the file.
+
+.. php:attr:: name
+
+    The name of the file with the extension. Differs from 
+    :php:meth:`File::name()` which returns the name without the extension.
+
+.. php:attr:: info
+
+    An array of file info. Use :php:meth:`File::info()` instead.
+
+.. php:attr:: handle
+
+    Holds the file handler resource if the file is opened.
+
+.. php:attr:: lock
+
+    Enable locking for file reading and writing.
+
+.. php:attr:: path
+
+    Current file's absolute path.
 
 .. php:method:: append( $data, $force = false )
 
