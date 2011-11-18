@@ -152,18 +152,57 @@ Folder API
     :rtype: array
 
     Get error from latest method.
-	
+
+
 .. php:method:: find( $regexpPattern = '.*', $sort = false )
 
     :rtype: array
 
-    Returns an array of all matching files in current directory.
-	
+    Returns an array of all matching files in current directory::
+
+        <?php
+        // Find all .png in your app/webroot/img/ folder and sort the results
+        $dir = new Folder(WWW_ROOT . 'img');
+        $files = $dir->find('.*\.png', true);
+        /*
+        Array
+        (
+            [0] => cake.icon.png
+            [1] => test-error-icon.png
+            [2] => test-fail-icon.png
+            [3] => test-pass-icon.png
+            [4] => test-skip-icon.png
+        )
+        */
+
+.. note::
+
+    The folder find and findRecursive methods will only find files. If you 
+    would like to get folders and files see :php:meth:`Folder::read()` or 
+    :php:meth:`Folder::tree()`
+
+
 .. php:method:: findRecursive( $pattern = '.*', $sort = false )
 
     :rtype: array
 
-    Returns an array of all matching files in and below current directory.
+    Returns an array of all matching files in and below current directory::
+
+        <?php
+        // Recursively find files beginning with test or index
+        $dir = new Folder(WWW_ROOT);
+        $files = $dir->findRecursive('(test|index).*');
+        /*
+        Array
+        (
+            [0] => /var/www/cake/app/webroot/index.php
+            [1] => /var/www/cake/app/webroot/test.php
+            [2] => /var/www/cake/app/webroot/img/test-skip-icon.png
+            [3] => /var/www/cake/app/webroot/img/test-fail-icon.png
+            [4] => /var/www/cake/app/webroot/img/test-error-icon.png
+            [5] => /var/www/cake/app/webroot/img/test-pass-icon.png
+        )
+        */
 
 
 .. php:method:: inCakePath( $path = '' )
@@ -234,8 +273,34 @@ Folder API
 
     :rtype: mixed
 
+    :param boolean $sort: If true will sort results.
+    :param mixed $exceptions: An array of files and folder names to ignore. If 
+        true or '.' this method will ignore hidden or dot files.
+    :param boolean $fullPath: If true will return results using absolute paths.
+
     Returns an array of the contents of the current directory. The 
-    returned array holds two arrays: One of directories and one of files.
+    returned array holds two arrays: One of directories and one of files::
+
+        <?php
+        $dir = new Folder(WWW_ROOT);
+        $files = $dir->read(true, array('files', 'index.php'));
+        /*
+        Array
+        (
+            [0] => Array
+                (
+                    [0] => css
+                    [1] => img
+                    [2] => js
+                )
+            [1] => Array
+                (
+                    [0] => .htaccess
+                    [1] => favicon.ico
+                    [2] => test.php
+                )
+        )
+        */
 
 
 .. php:method:: realpath( $path )
@@ -338,10 +403,10 @@ File API
 .. php:method:: group( )
 
     :rtype: integer
-		
-	    Returns the File's group.
-		
-		
+
+    Returns the File's group.
+
+
 .. php:method:: info( )
 
     :rtype: string
