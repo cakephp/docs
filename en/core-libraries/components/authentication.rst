@@ -369,7 +369,7 @@ calling ``$this->Auth->login()`` with the user data you want to 'login'::
     <?php
     public function register() {
         if ($this->User->save($this->request->data)) {
-            $id = $this->User->getLastInsertID();
+            $id = $this->User->id;
             $this->request->data['User'] = array_merge($this->request->data["User"], array('id' => $id));
             $this->Auth->login($this->request->data['User']);
             $this->redirect('/users/home');
