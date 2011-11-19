@@ -395,9 +395,9 @@ ContactManager мы имеем доступ к ContactsController в /contact_ma
 
 -  Если вы не создали [Plugin]AppController и [Plugin]AppModel, то получите
    ошибки при попытке доступа к контроллерам плагина.
--  Вы можете сделать свои страницы компоновки в 
+-  Вы можете сделать свои лэйауты в
    app/Plugin/[Plugin]/View/Layouts. Иначе плагины будут использовать
-   страницы компоновки по умолчанию из /app/View/Layouts.
+   лэйауты по умолчанию из /app/View/Layouts.
 -  Плагины могут общаться между собой, используя
    ``$this->requestAction('/plugin_name/controller_name/action');`` в контроллерах.
 -  Если вы используете requestAction, убедитесь что названия контроллера и модели
