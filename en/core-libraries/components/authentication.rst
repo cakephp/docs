@@ -369,11 +369,17 @@ calling ``$this->Auth->login()`` with the user data you want to 'login'::
     <?php
     public function register() {
         if ($this->User->save($this->request->data)) {
+            $id = $this->User->getLastInsertID();
+            $this->request->data['User'] = array_merge($this->request->data["User"], array('id' => $id));
             $this->Auth->login($this->request->data['User']);
             $this->redirect('/users/home');
         }
     }
 
+.. warning::
+
+    Be sure to manually add the new User id to the array passed to the login
+    method. Otherwise you won't have the user id available.
 
 Accessing the logged in user
 ----------------------------
