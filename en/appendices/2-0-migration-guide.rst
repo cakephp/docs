@@ -6,6 +6,11 @@ migration to 2.0, as well as for a developer reference to get up to date with
 the changes made to the core since the CakePHP 1.3 branch. Be sure to read the
 other pages in this guide for all the new features and API changes.
 
+.. tip::
+
+    Be sure to checkout the :ref:`upgrade-shell` included in the 2.0 core to help you
+    migrate your 1.3 code to 2.0.
+
 PHP Version Support
 ===================
 
@@ -85,6 +90,12 @@ Lowercased Folders:
 
 * tmp
 * webroot
+
+AppController / AppModel
+========================
+
+The ``app/app_controller.php`` and ``app/app_model.php`` are now located and 
+named as ``app/Controller/AppController.php`` and ``app/Model/AppModel.php``.
 
 Internationalization / Localization
 ===================================
@@ -1217,11 +1228,6 @@ Backwards incompatible Shell Changes
 It's recommended that you use the help on shells you use to see what if any
 parameters have changed. It's also recommended that you read the console new
 features for more information on new APIs that are available.
-
-.. tip::
-
-    Be sure to checkout the :ref:`upgrade-shell` included in the 2.0 core to help you
-    migrate your 1.3 code to 2.0.
 
 Debugging
 =========
