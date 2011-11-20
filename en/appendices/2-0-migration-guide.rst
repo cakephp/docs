@@ -55,27 +55,36 @@ underscoring your file names. Here are some examples:
 
 This makes file naming a lot more clear and consistent across applications,
 and also avoids a few edge cases where the file loader would get confused in the
-past and load files it shouldn't.
+past and load files it should not.
 
 Folder Names
 ------------
 
-Folders containing classes should be also CamelCased, especially when containing
-classes. Think of namespaces, each folder represents a level in the namespacing
+Most folders should be also CamelCased, especially when containing classes. 
+Think of namespaces, each folder represents a level in the namespacing
 hierarchy, folders that do not contain classes, or do not constitute a
 namespace on themselves, should be lowercased.
 
-CameCased Folders:
+CamelCased Folders:
 
+* Config
+* Console
 * Controller
 * Controller/Component
-* View/Helper
+* Lib
+* Locale
+* Model
 * Model/Behavior
+* Plugin
+* Test
+* Vendor
+* View
+* View/Helper
 
-lowercased Folders:
+Lowercased Folders:
 
-* webroot
 * tmp
+* webroot
 
 Internationalization / Localization
 ===================================
@@ -495,7 +504,7 @@ Cache
 
     <?php
     Cache::config('something');
-    Cache::write('key, $value);
+    Cache::write('key', $value);
     
     // would become
     Cache::write('key', $value, 'something');
@@ -895,6 +904,7 @@ afterRender it is the view file being rendered. For beforeLayout and afterLayout
 it is the layout file being rendered. Your helpers function signatures should
 look like::
 
+    <?php
     function beforeRender($viewFile) {
 
     }
@@ -1101,6 +1111,7 @@ AclBehavior and TreeBehavior
 
 - No longer supports strings as configuration. Example::
 
+    <?php
     public $actsAs = array(
         'Acl' => 'Controlled',
         'Tree' => 'nested'
@@ -1108,6 +1119,7 @@ AclBehavior and TreeBehavior
 
   became::
 
+    <?php
     public $actsAs = array(
         'Acl' => array('type' => 'Controlled'),
         'Tree' => array('type' => 'nested')
@@ -1121,12 +1133,14 @@ Plugins no longer magically append their plugin prefix to components, helpers
 and models used within them. You must be explicit with the components, models,
 and helpers you wish to use. In the past::
 
+    <?php
     var $components = array('Session', 'Comments');
 
 Would look in the controller's plugin before checking app/core components. It
 will now only look in the app/core components. If you wish to use objects from a
 plugin you must put the plugin name::
 
+    <?php
     public $components = array('Session', 'Comment.Comments');
 
 This was done to reduce hard to debug issues caused by magic misfiring. It also
@@ -1242,4 +1256,5 @@ need to pass the package they are located in. Example::
 
 .. meta::
     :title lang=en: 2.0 Migration Guide
+    :description lang=en: This page summarizes the changes from CakePHP 1.3 that will assist in a project migration to 2.0, as well as for a developer reference to get up to date with the changes made to the core since the CakePHP 1.3 branch.
     :keywords lang=en: migration guide,final proposal,backwards compatibility,class loading,api changes,x versions,php 5,google,internal structure,roadblock,prefixes,directory structure,folders,new features,visibility,environments,variables,lifetime,scope,developers
