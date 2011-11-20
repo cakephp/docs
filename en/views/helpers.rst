@@ -84,6 +84,7 @@ replace ``$this->Html`` or another common Helper reference with a custom
 implementation::
 
     <?php
+    // app/Controller/PostsController.php
     class PostsController extends AppController {
         public $helpers = array(
             'Html' => array(
@@ -92,12 +93,25 @@ implementation::
         );
     }
 
+    // app/View/Helper/MyHtmlHelper.php
+    App::uses('HtmlHelper', 'View/Helper');
+    class MyHtmlHelper extends HtmlHelper {
+        // Add your code to override the core HtmlHelper
+    }
+
 The above would *alias* ``MyHtmlHelper`` to ``$this->Html`` in your views.
 
 .. note::
 
     Aliasing a helper replaces that instance anywhere that helper is used,
     including inside other Helpers.
+
+.. tip::
+
+    Aliasing the Html or Session Helper while using the core PagesController 
+    will not work. It is better to copy 
+    ``lib/Cake/Controller/PagesController.php`` into your ``app/Controller/`` 
+    folder.
 
 Using helper settings allows you to declaratively configure your helpers and
 keep configuration logic out of your controller actions.  If you have

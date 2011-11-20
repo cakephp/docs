@@ -33,18 +33,18 @@ is done by calling ``CakeLog::config()``. Configuring our
 DataBaseLogger would look like::
     
     <?php
-    //for app/Lib
+    // for app/Lib
     CakeLog::config('otherFile', array(
         'engine' => 'DatabaseLogger',
         'model' => 'LogEntry',
-        ...
+        // ...
     ));
     
-    //for plugin called LoggingPack
+    // for plugin called LoggingPack
     CakeLog::config('otherFile', array(
         'engine' => 'LoggingPack.DatabaseLogger',
         'model' => 'LogEntry',
-        ...
+        // ...
     ));
 
 When configuring a log stream the ``engine`` parameter is used to
@@ -56,7 +56,7 @@ properties are passed to the log stream's constructor as an array.::
 
     class DatabaseLogger implements CakeLogInterface {
         function __construct($options = array()) {
-            //...
+            // ...
         }
 
         function write($type, $message) {
@@ -102,7 +102,7 @@ Using the default FileLog class
 
 While CakeLog can be configured to write to a number of user
 configured logging adapters, it also comes with a default logging
-configuration.  The default logging configuration will be
+configuration. The default logging configuration will be
 used any time there are *no other* logging adapters configured.
 Once a logging adapter has been configured you will need to also
 configure FileLog if you want file logging to continue.
@@ -114,22 +114,22 @@ which writes to the error log. The default log location is
 ``app/tmp/logs/$type.log``::
 
     <?php
-    //Executing this inside a CakePHP class:
-     $this->log("Something didn't work!");
-     
-    //Results in this being appended to app/tmp/logs/error.log
-    2007-11-02 10:22:02 Error: Something didn't work!
+    // Executing this inside a CakePHP class
+    $this->log("Something didn't work!");
+    
+    // Results in this being appended to app/tmp/logs/error.log
+    // 2007-11-02 10:22:02 Error: Something didn't work!
 
 You can specify a custom log names, using the second parameter. The
 default built-in FileLog class will treat this log name as the file
 you wish to write logs to::
 
     <?php
-    //called statically
+    // called statically
     CakeLog::write('activity', 'A special message for activity logging');
-     
-    //Results in this being appended to app/tmp/logs/activity.log (rather than error.log)
-    2007-11-02 10:22:02 Activity: A special message for activity logging
+    
+    // Results in this being appended to app/tmp/logs/activity.log (rather than error.log)
+    // 2007-11-02 10:22:02 Activity: A special message for activity logging
 
 The configured directory must be writable by the web server user in
 order for logging to work correctly.
@@ -152,6 +152,7 @@ Writing to logs
 Writing to the log files can be done in 2 different ways. The first
 is to use the static :php:meth:`CakeLog::write()` method::
 
+    <?php
     CakeLog::write('debug', 'Something did not work');
 
 The second is to use the log() shortcut function available on any
@@ -159,7 +160,7 @@ class that extends ``Object``. Calling log() will internally call
 CakeLog::write()::
 
     <?php
-    //Executing this inside a CakePHP class:
+    // Executing this inside a CakePHP class:
     $this->log("Something did not work!", 'debug');
 
 All configured log streams are written to sequentially each time
@@ -207,4 +208,5 @@ CakeLog API
 
 .. meta::
     :title lang=en: Logging
-    :keywords lang=en: array php,common ancestor,logging data,class settings,configuration properties,class model,ajax,constructor,debugging,search terms,streams,lib,config,sorts,logs,soap,cakephp
+    :description lang=en: Log CakePHP data to the disk to help debug your application over longer periods of time.
+    :keywords lang=en: cakephp logging,log errors,debug,logging data,cakelog class,ajax logging,soap logging,debugging,logs

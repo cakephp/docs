@@ -445,7 +445,6 @@ The edit view might look something like this::
         echo $this->Form->input('body', array('rows' => '3'));
         echo $this->Form->input('id', array('type' => 'hidden')); 
         echo $this->Form->end('Save Post');
-    ?>
 
 This view outputs the edit form (with the values populated), along
 with any necessary validation error messages.
@@ -497,7 +496,7 @@ Next, let's make a way for users to delete posts. Start with a
 
     <?php
     function delete($id) {
-        if (!$this->request->is('post')) {
+        if (!$this->request->is('get')) {
             throw new MethodNotAllowedException();
         }
         if ($this->Post->delete($id)) {
@@ -554,6 +553,11 @@ links that allow users to delete posts, however::
         <?php endforeach; ?>
     
     </table>
+
+Using :php:meth:`~FormHelper::postLink()` will create a link that uses
+Javascript to do a POST request deleting our post.  Allowing content to be
+deleted using GET requests is dangerous, as web crawlers could accidentally
+delete all your content.
 
 .. note::
 

@@ -149,8 +149,8 @@ will show just the add.ctp::
     <?php echo $this->Form->end(__('Submit'));?>
     </div>
 
-Authorization (login and logout)
-================================
+Authentication (login and logout)
+=================================
 
 We're now ready to add our authentication layer. In CakePHP this is handled
 by the :php:class:`AuthComponent`, a class responsible for requiring login for certain
@@ -164,7 +164,7 @@ file and add the following lines::
     // app/Controller/AppController.php
     class AppController extends Controller {
         //...
-        
+
         public $components = array(
             'Session',
             'Auth' => array(
@@ -220,9 +220,9 @@ and add the following::
     // app/Model/User.php
     App::uses('AuthComponent', 'Controller/Component');
     class User extends AppModel {
-        
+
     // ...
-    
+
     public function beforeSave() {
         if (isset($this->data[$this->alias]['password'])) {
             $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);

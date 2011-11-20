@@ -182,12 +182,13 @@ statically anywhere in your application one CakeLog has been loaded::
 Debug Kit
 =========
 
-DebugKit is a plugin that provides a number of good debugging tools.  It primarily
+DebugKit is a plugin that provides a number of good debugging tools. It primarily
 provides a toolbar in the rendered HTML, that provides a plethora of information about 
-your application and the current request.  You can download 
-`DebugKit <http://github.com/cakephp/debug_kit>`_ from github.
+your application and the current request. You can download 
+`DebugKit <https://github.com/cakephp/debug_kit/tree/2.0>`_ from github.
 
 
 .. meta::
     :title lang=en: Debugging
+    :description lang=en: Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin.
     :keywords lang=en: code excerpt,stack trace,default output,error link,default error,web requests,error report,debugger,arrays,different ways,excerpt from,cakephp,ide,options

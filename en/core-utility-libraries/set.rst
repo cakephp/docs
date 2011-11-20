@@ -9,7 +9,7 @@ very useful set of static utilities in the Set class that allow you
 to do just that.
 
 CakePHP's Set class can be called from any model or controller in
-the same way Inflector is called. Example: Set::combine().
+the same way Inflector is called. Example: :php:meth:`Set::combine()`.
 
 Set-compatible Path syntax
 ==========================
@@ -1521,8 +1521,9 @@ Foo
 
     :rtype: array
 
-    Sorts an array by any value, determined by a Set-compatible path.::
+    Sorts an array by any value, determined by a Set-compatible path::
 
+        <?php
         $a = array(
             0 => array('Person' => array('name' => 'Jeff')),
             1 => array('Shirt' => array('color' => 'black'))
