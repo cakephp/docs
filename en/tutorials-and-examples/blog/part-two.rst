@@ -313,7 +313,7 @@ method to set a message to a session variable to be displayed on the page after
 redirection. In the layout we have
 :php:func:`SessionHelper::flash` which displays the
 message and clears the corresponding session variable. The
-controller's :php:meth:`Controller::redirect <redirect>` function
+controller's :php:meth:`Controller::redirect` function
 redirects to another URL. The param ``array('action'=>'index')``
 translates to URL /posts i.e the index action of posts controller.
 You can refer to :php:func:`Router::url()` function on the api to see 
