@@ -164,6 +164,7 @@ Removed Constants
 A number of constants were removed, as they were no longer accurate, or
 duplicated.
 
+* APP_PATH
 * CONTROLLERS
 * COMPONENTS
 * MODELS
