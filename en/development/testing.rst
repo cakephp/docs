@@ -945,7 +945,7 @@ for redirects::
             )
         ));
 
-        $this->assertEquals($this->headers['Location'], '/posts/index');
+        $this->assertEquals($this->headers['Location'], 'http://localhost/blog/posts/index');
         $this->assertEquals($this->vars['post']['Post']['name'], 'New Post');
         $this->assertRegExp('/<html/', $this->contents);
         $this->assertRegExp('/<form/', $this->view);
