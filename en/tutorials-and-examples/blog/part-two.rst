@@ -496,7 +496,7 @@ Next, let's make a way for users to delete posts. Start with a
 
     <?php
     function delete($id) {
-        if (!$this->request->is('get')) {
+        if ($this->request->is('get')) {
             throw new MethodNotAllowedException();
         }
         if ($this->Post->delete($id)) {
