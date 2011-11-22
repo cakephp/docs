@@ -272,6 +272,8 @@ Would load and return a ProjectTask instance. You can load tasks from plugins us
     <?php
     $ProgressBar = $this->Tasks->load('ProgressBar.ProgressBar');
 
+.. _invoking-other-shells-from-your-shell:
+
 Invoking other shells from your shell
 =====================================
 
@@ -815,7 +817,7 @@ Shell API
     AppShell can be used as a base class for all your shells. It should extend
     :php:class:`Shell`, and be located in ``Console/Command/AppShell.php``
 
-.. php:class:: Shell
+.. php:class:: Shell($stdout = null, $stderr = null, $stdin = null)
 
     Shell is the base class for all shells, and provides a number of functions for 
     interacting with user input, outputting text a generating errors.
@@ -827,6 +829,63 @@ Shell API
 .. php:attr:: uses
 
     An array of models that should be loaded for this shell/task.
+
+.. php:method:: clear()
+
+    Clears the current output being displayed.
+
+.. php:method:: createFile($path, $contents)
+
+    :param string $path: Absolute path to the file you want to create.
+    :param string $contents: Contents to put in the file.
+
+    Creates a file at a given path.  If the Shell is interactive, a warning will be
+    generated, and the user asked if they want to overwrite the file if it already exists.
+    If the shell's interactive property is false, no question will be asked and the file 
+    will simply be overwritten.
+
+.. php:method:: dispatchShell()
+
+    Dispatch a command to another Shell. Similar to 
+    :php:meth:`Controller::requestAction()` but intended for running shells 
+    from other shells.
+
+    See :ref:`invoking-other-shells-from-your-shell`.
+
+.. php:method:: err($message = null, $newlines = 1)
+
+    :param string $method: The message to print.
+    :param integer $newlines: The number of newlines to follow the message.
+
+    Outputs a method to ``stderr``, works similar to :php:meth:`Shell::out()`
+
+.. php:method:: error($title, $message = null)
+
+    :param string $title: Title of the error
+    :param string $message: An optional error message
+
+    Displays a formatted error message and exits the application with status 
+    code 1
+
+.. php:method:: getOptionParser()
+
+    Should return a :php:class:`ConsoleOptionParser` object, with any 
+    sub-parsers for the shell.
+
+.. php:method:: hasMethod($name)
+
+    Check to see if this shell has a callable method by the given name.
+
+.. php:method:: hasTask($task)
+
+    Check to see if this shell has a task with the provided name.
+
+.. php:method:: hr($newlines = 0, $width = 63)
+
+    :param int $newlines: The number of newlines to precede and follow the line.
+    :param int $width: The width of the line to draw. 
+
+    Create a horizontal line preceded and followed by a number of newlines.
 
 .. php:method:: in($prompt, $options = null, $default = null)
 
@@ -843,6 +902,19 @@ Shell API
         $selection = $this->in('Red or Green?', array('R', 'G'), 'R');
 
     The selection validation is case-insensitive.
+
+.. php:method:: initialize()
+
+    Initializes the Shell acts as constructor for subclasses allows 
+    configuration of tasks prior to shell execution.
+
+.. php:method:: loadTasks()
+
+    Loads tasks defined in public :php:attr:`Shell::$tasks`
+
+.. php:method:: nl($multiplier = 1)
+
+    Outputs a number of newlines.
 
 .. php:method:: out($message = null, $newlines = 1, $level = Shell::NORMAL)
 
@@ -871,49 +943,43 @@ Shell API
     On windows systems, plain output is the default unless the ``ANSICON`` environment 
     variable is present.
 
-.. php:method:: nl($multiplier = 1)
+.. php:method:: runCommand($command, $argv)
 
-    Outputs a number of newlines.
+    Runs the Shell with the provided argv.
 
-.. php:method:: hr($newlines = 0, $width = 63)
+    Delegates calls to Tasks and resolves methods inside the class. Commands 
+    are looked up with the following order:
 
-    :param int $newlines: The number of newlines to precede and follow the line.
-    :param int $width: The width of the line to draw. 
+    - Method on the shell.
+    - Matching task name.
+    - main() method.
 
-    Create a horizontal line preceded and followed by a number of newlines.
+    If a shell implements a main() method, all missing method calls will be 
+    sent to main() with the original method name in the argv.
 
-.. php:method:: err($message = null, $newlines = 1)
+.. php:method:: shortPath($file)
 
-    :param string $method: The message to print.
-    :param integer $newlines: The number of newlines to follow the message.
+    Makes absolute file path easier to read.
 
-    Outputs a method to ``stderr``, works similar to :php:meth:`Shell::out()`
+.. php:method:: startup()
 
-.. php:method:: error($title, $message = null)
+    Starts up the Shell and displays the welcome message. Allows for checking 
+    and configuring prior to command or main execution
 
-    :param string $title: Title of the error
-    :param string $message: An optional error message
+    Override this method if you want to remove the welcome information, or 
+    otherwise modify the pre-command flow.
 
-    Displays a formatted error message and exits the application with status code 1
+.. php:method:: wrapText($text, $options = array())
 
-.. php:method:: clear()
+    Wrap a block of text. Allows you to set the width, and indenting on a 
+    block of text.
 
-    Clears the current output being displayed.
+    :param string $text: The text to format
+    :param array $options:
 
-.. php:method:: createFile($path, $contents)
-
-    :param string $path: Absolute path to the file you want to create.
-    :param string $contents: Contents to put in the file.
-
-    Creates a file at a given path.  If the Shell is interactive, a warning will be
-    generated, and the user asked if they want to overwrite the file if it already exists.
-    If the shell's interactive property is false, no question will be asked and the file 
-    will simply be overwritten.
-
-.. php:method:: getOptionParser()
-
-    Should return a :php:class:`ConsoleOptionParser` object, with any sub-parsers for
-    the shell.
+        * ``width`` The width to wrap to. Defaults to 72
+        * ``wordWrap`` Only wrap on words breaks (spaces) Defaults to true.
+        * ``indent`` Indent the text with the string provided. Defaults to null.
 
 More topics
 ===========
