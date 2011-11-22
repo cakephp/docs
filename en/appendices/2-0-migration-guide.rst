@@ -135,7 +135,7 @@ More information about the specifiers, you can see in
 Class location and constants changed
 ====================================
 
-The constants ``APP_PATH`` and ``CORE_PATH``
+The constants ``APP`` and ``CORE_PATH``
 have consistent values between the web and console environments. In previous
 versions of CakePHP these values changed depending on your environment.
 
@@ -165,16 +165,22 @@ A number of constants were removed, as they were no longer accurate, or
 duplicated.
 
 * APP_PATH
-* CONTROLLERS
-* COMPONENTS
-* MODELS
 * BEHAVIORS
-* VIEWS
-* HELPERS
-* LAYOUTS
-* ELEMENTS
+* COMPONENTS
 * CONFIGS
 * CONSOLE_LIBS
+* CONTROLLERS
+* CONTROLLER_TESTS
+* ELEMENTS
+* HELPERS
+* HELPER_TESTS
+* LAYOUTS
+* LIB_TESTS
+* LIBS
+* MODELS
+* MODEL_TESTS
+* SCRIPTS
+* VIEWS
 
 CakeRequest
 ===========
