@@ -264,10 +264,12 @@ Loading tasks on the fly with TaskCollection
 You can load tasks on the fly using the Task collection object. You can load tasks that
 were not declared in $tasks this way::
 
+    <?php
     $Project = $this->Tasks->load('Project');
 
 Would load and return a ProjectTask instance. You can load tasks from plugins using::
 
+    <?php
     $ProgressBar = $this->Tasks->load('ProgressBar.ProgressBar');
 
 Invoking other shells from your shell
@@ -627,6 +629,7 @@ The following option would result in ``$this->params['verbose']`` always
 being available.  This lets you omit ``empty()`` or ``isset()`` 
 checks for boolean flags::
 
+    <?php
     if ($this->params['verbose']) {
         // do something
     }
