@@ -186,10 +186,10 @@ O que fizemos na função ``beforeFilter`` foi dizer ao AuthComponent para não
 solicitar um login para todas as  actions ``index`` e ``view`, em todos os controller. Nós queremos
 querems que nossos visitantes possam ler qualquer post sem precisar se registrar no site.
 
-Agora, nos precisamos autorizar que novos usuários possam se registrar, salvando username e password deles,
-and more importantly hash their password so it is not stored as plain text in
-our database. Let's tell the AuthComponent to let un-authenticated users to access
-the users add function and the implement the login and logout action::
+Agora, nos precisamos autorizar que novos usuários possam se registrar, salvando o nome de usuário e a senha deles,
+e o mais importante encriptar a senha pra que ela não seja armazenada como texto plano em nosso banco de dados.
+Vamos dizer ao AuthComponet para permitir usuários deslogados acessarem a função
+add e implementar a ação de login e logout::
 
     <?php
     // app/Controller/UsersController.php
@@ -211,8 +211,8 @@ the users add function and the implement the login and logout action::
         $this->redirect($this->Auth->logout());
     }
 
-Password hashing is not done yet, open your ``app/Model/User.php`` model file
-and add the following::
+Hash da senha não foi feito ainda, abra o seu arquivo de model ``app/Model/User.php`` 
+e adicione o seguinte::
 
     <?php
     // app/Model/User.php
@@ -230,9 +230,8 @@ and add the following::
 
     // ...
 
-So, now every time a user is saved, the password is hashed using the default hashing
-provided by the AuthComponent class. We're just missing a template view file for
-the login function, here it is::
+Então, agora toda vez que um usuário for salvo, a senha será  encriptada usando o hashing padrão disponibilizado pela
+classe AuthComponent. Está faltando somente um arquivo view para a função de login, Aqui está ele::
 
     <div class="users form">
     <?php echo $this->Session->flash('auth'); ?>
@@ -247,10 +246,10 @@ the login function, here it is::
     <?php echo $this->Form->end(__('Login'));?>
     </div>
 
-You can now register a new user by accessing the ``/users/add`` url and log-in with the
-newly created credentials by going to ``/users/login`` url. Also try to access
-any other url that was not explicitly allowed such as ``/posts/add``, you will see
-that the application automatically redirects you to the login page.
+Você pode registrar um novo usuário acessando a url ``/users/add`` e autenticar com
+as credenciais do usuário recém criado indo para a url ``/users/login``. Tente também 
+acessar qualquer outra url sem que a permisão tenha sido explicitada, como em ``/posts/add``, 
+você verá que a aplicação irá redireciona-lo automáticamente para pagina de login.
 
 And that's it! It looks too simple to be truth. Let's go back a bit to explain what
 happened. The ``beforeFilter`` function is telling the AuthComponent to not require a
