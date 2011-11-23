@@ -49,24 +49,29 @@ allows you to define how the CookieComponent works.
 |                 |              | exists. You can set this directly within the write() |
 |                 |              | method.                                              |
 +-----------------+--------------+------------------------------------------------------+
+| boolean         | false        | Set to true to make HTTP only cookies. Cookies that  |
+| $httpOnly       |              | are HTTP only are not accessible in Javascript.      |
++-----------------+--------------+------------------------------------------------------+
 
 The following snippet of controller code shows how to include the
 CookieComponent and set up the controller variables needed to write
 a cookie named 'baker\_id' for the domain 'example.com' which needs
 a secure connection, is available on the path
-‘/bakers/preferences/’, and expires in one hour.
+‘/bakers/preferences/’, expires in one hour and is HTTP only.
 
 ::
-    
+
     <?php
-    public $components    = array('Cookie');
+    public $components = array('Cookie');
     function beforeFilter() {
-      $this->Cookie->name = 'baker_id';
-      $this->Cookie->time =  3600;  // or '1 hour'
-      $this->Cookie->path = '/bakers/preferences/'; 
-      $this->Cookie->domain = 'example.com';   
-      $this->Cookie->secure = true;  //i.e. only sent if using secure HTTPS
-      $this->Cookie->key = 'qSI232qs*&sXOw!';
+        parent::beforeFilter();
+        $this->Cookie->name = 'baker_id';
+        $this->Cookie->time =  3600;  // or '1 hour'
+        $this->Cookie->path = '/bakers/preferences/';
+        $this->Cookie->domain = 'example.com';   
+        $this->Cookie->secure = true;  // i.e. only sent if using secure HTTPS
+        $this->Cookie->key = 'qSI232qs*&sXOw!';
+        $this->Cookie->httpOnly = true;
     }
 
 Next, let’s look at how to use the different methods of the Cookie
@@ -75,33 +80,33 @@ Component.
 Using the Component
 ===================
 
-.. php:class:: CookieComponent
+.. php:class:: CookieComponent(ComponentCollection $collection, array $settings = array())
 
     The CookieComponent offers a number of methods for working with
     Cookies.
 
-.. php:method:: write(mixed $key, mixed $value, boolean $encrypt, mixed $expires)
+.. php:method:: write(mixed $key, mixed $value = null, boolean $encrypt = true, mixed $expires = null)
 
     The write() method is the heart of cookie component, $key is the
     cookie variable name you want, and the $value is the information to
     be stored::
 
         <?php
-        $this->Cookie->write('name','Larry');
+        $this->Cookie->write('name', 'Larry');
 
     You can also group your variables by supplying dot notation in the
     key parameter::
 
         <?php
         $this->Cookie->write('User.name', 'Larry');
-        $this->Cookie->write('User.role','Lead');  
+        $this->Cookie->write('User.role', 'Lead');
 
     If you want to write more than one value to the cookie at a time,
     you can pass an array::
 
         <?php
         $this->Cookie->write('User',
-            array('name'=>'Larry','role'=>'Lead')
+            array('name' => 'Larry', 'role' => 'Lead')
         );
 
     All values in the cookie are encrypted by default. If you want to
@@ -114,7 +119,7 @@ Using the Component
     app/config/core.php to ensure a better encryption.::
 
         <?php
-        $this->Cookie->write('name','Larry',false);
+        $this->Cookie->write('name', 'Larry', false);
 
     The last parameter to write is $expires – the number of seconds
     before your cookie will expire. For convenience, this parameter can
@@ -122,11 +127,11 @@ Using the Component
     understands::
 
         <?php
-        //Both cookies expire in one hour.
-          $this->Cookie->write('first_name','Larry',false, 3600);
-          $this->Cookie->write('last_name','Masters',false, '1 hour');
+        // Both cookies expire in one hour.
+        $this->Cookie->write('first_name', 'Larry', false, 3600);
+        $this->Cookie->write('last_name', 'Masters', false, '1 hour');
 
-.. php:method:: read(mixed $key)
+.. php:method:: read(mixed $key = null)
 
     This method is used to read the value of a cookie variable with the
     name specified by $key.::
@@ -134,15 +139,15 @@ Using the Component
         <?php
         // Outputs “Larry”
         echo $this->Cookie->read('name');
-  
-        //You can also use the dot notation for read
+
+        // You can also use the dot notation for read
         echo $this->Cookie->read('User.name');
-    
-        //To get the variables which you had grouped
-        //using the dot notation as an array use something like  
+
+        // To get the variables which you had grouped
+        // using the dot notation as an array use something like
         $this->Cookie->read('User');
-    
-        // this outputs something like array('name' => 'Larry', 'role'=>'Lead')
+
+        // this outputs something like array('name' => 'Larry', 'role' => 'Lead')
 
 .. php:method:: delete(mixed $key)
 
@@ -150,12 +155,11 @@ Using the Component
     notation::
 
         <?php
-        //Delete a variable
+        // Delete a variable
         $this->Cookie->delete('bar')
-    
-        //Delete the cookie variable bar, but not all under foo
+
+        // Delete the cookie variable bar, but not all under foo
         $this->Cookie->delete('foo.bar')
- 
 
 .. php:method:: destroy()
 
