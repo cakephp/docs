@@ -1065,7 +1065,7 @@ bonus, as it gives you a nice graphical view of your testing results::
     app/Console/cake testsuite app AllTests \
     --stderr \
     --log-junit junit.xml
-    --clover-coverage clover.xml
+    --coverage-clover clover.xml
 
 If you use clover coverage, or the junit results, make sure to configure those
 in Jenkins as well. Failing to configure those steps will mean you won't see the results.
