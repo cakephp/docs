@@ -43,10 +43,10 @@ fixture tables and data::
     public $test = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,
-        'host' => 'dbhost',
-        'login' => 'dblogin',
-        'password' => 'dbpassword',
-        'database' => 'test_database'
+        'host'       => 'dbhost',
+        'login'      => 'dblogin',
+        'password'   => 'dbpassword',
+        'database'   => 'test_database'
     );
 
 .. note::
@@ -342,7 +342,6 @@ model. Create a file named ``ArticleFixture.php`` in your
 
     <?php
     class ArticleFixture extends CakeTestFixture {
-
           public $fields = array(
               'id' => array('type' => 'integer', 'key' => 'primary'),
               'title' => array('type' => 'string', 'length' => 255, 'null' => false),
@@ -551,7 +550,7 @@ this::
     <?php
     App::uses('Article', 'Model');
 
-    class ArticleTestCase extends CakeTestCase {
+    class ArticleTest extends CakeTestCase {
         public $fixtures = array('app.article');
 
         public function setup() {
@@ -613,10 +612,10 @@ Let's create the tests first::
 
     <?php
     // Import the helper to be tested.
-    App::uses('CurrencyRenderer', 'Helper');
+    App::uses('CurrencyRendererHelper', 'View/Helper');
     App::uses('View', 'View');
 
-    class CurrencyRendererTest extends CakeTestCase {
+    class CurrencyRendererHelperTest extends CakeTestCase {
         private $currencyRenderer = null;
 
         //Here we instantiate our helper, and all other helpers we need.
@@ -630,11 +629,11 @@ Let's create the tests first::
         public function testUsd() {
             $this->assertEquals('USD 5.30', $this->currencyRenderer->usd(5.30));
 
-            //We should always have 2 decimal digits.
+            // We should always have 2 decimal digits.
             $this->assertEquals('USD 1.00', $this->currencyRenderer->usd(1));
             $this->assertEquals('USD 2.05', $this->currencyRenderer->usd(2.05));
 
-            //Testing the thousands separator
+            // Testing the thousands separator
             $this->assertEquals('USD 12,000.70', $this->currencyRenderer->usd(12000.70));
         }
     }
@@ -667,14 +666,14 @@ Lets assume that we want to test a component called TransporterComponent, which
 uses a model called Transporter to provide functionality for other controllers.
 We will use four files:
 
--  A component called Transporters found in
+-  A component called TransporterComponent found in
    ``app/Controller/Component/TransporterComponent.php``
 -  A model called Transporter found in
    ``app/Model/Transporter.php``
--  A fixture called TransporterTestFixture found in
+-  A fixture called TransporterFixture found in
    ``app/Test/Fixture/TransporterFixture.php``
 -  The testing code found in
-   ``app/Test/Case/TransporterTest.php``
+   ``app/Test/Case/TransporterComponentTest.php``
 
 Initializing the component
 --------------------------
@@ -711,7 +710,7 @@ Just create a class that extends CakeTestCase and start writing tests::
     <?php
     App::uses('TransporterComponent', 'Controller/Component');
 
-    class TransporterTestCase extends CakeTestCase {
+    class TransporterComponentTest extends CakeTestCase {
         public $fixtures = array('app.transporter');
 
         public function setUp() {
@@ -753,25 +752,25 @@ model. The controller code looks like::
 
     <?php
     class ArticlesController extends AppController {
-       public $helpers = array('Form', 'Html');
+        public $helpers = array('Form', 'Html');
 
-       function index($short = null) {
-         if (!empty($this->data)) {
-           $this->Article->save($this->data);
-         }
-         if (!empty($short)) {
-           $result = $this->Article->findAll(null, array('id', 'title'));
-         } else {
-           $result = $this->Article->findAll();
-         }
+        function index($short = null) {
+            if (!empty($this->data)) {
+                $this->Article->save($this->data);
+            }
+            if (!empty($short)) {
+                $result = $this->Article->findAll(null, array('id', 'title'));
+            } else {
+                $result = $this->Article->findAll();
+            }
 
-         if (isset($this->params['requested'])) {
-           return $result;
-         }
+            if (isset($this->params['requested'])) {
+                return $result;
+            }
 
-         $this->set('title', 'Articles');
-         $this->set('articles', $result);
-       }
+            $this->set('title', 'Articles');
+            $this->set('articles', $result);
+        }
     }
 
 Create a file named ``ArticlesControllerTest.php`` in your
@@ -779,7 +778,6 @@ Create a file named ``ArticlesControllerTest.php`` in your
 
     <?php
     class ArticlesControllerTest extends ControllerTestCase {
-
         public $fixtures = array('app.article');
 
         function testIndex() {
@@ -865,10 +863,10 @@ expect:
 * ``vars`` Get the set view variables.
 * ``view`` Get the rendered view, without a layout.
 * ``contents`` Get the rendered view including the layout.
-* ``result`` Get the return value of the controller action.  Useful
+* ``result`` Get the return value of the controller action. Useful
   for testing requestAction methods.
 
-The default value is ``result``.  As long as your return type is not ``result``
+The default value is ``result``. As long as your return type is not ``result``
 you can also access the various other return types as properties in the test
 case::
 
@@ -884,24 +882,24 @@ Using mocks with testAction
 
 There will be times when you want to replace components or models with either
 partially mocked objects or completely mocked objects.  You can do this by using
-:php:meth:`~ControllerTestCase::generate()`. ``generate()`` takes the hard work
+:php:meth:`ControllerTestCase::generate()`. ``generate()`` takes the hard work
 out of generating mocks on your controller. If you decide to generate a
 controller to be used in testing, you can generate mocked versions of its models
 and components along with it::
 
     <?php
     $Posts = $this->generate('Posts', array(
-      'methods' => array(
-        'isAuthorized'
-      ),
-      'models' => array(
-        'Post' => array('save')
-      ),
-      'components' => array(
-        'RequestHandler' => array('isPut'),
-        'Email' => array('send'),
-        'Session'
-    )
+        'methods' => array(
+            'isAuthorized'
+        ),
+        'models' => array(
+            'Post' => array('save')
+        ),
+        'components' => array(
+            'RequestHandler' => array('isPut'),
+            'Email' => array('send'),
+            'Session'
+        )
     ));
 
 The above would create a mocked ``PostsController``, stubbing out the ``isAuthorized``
@@ -931,17 +929,21 @@ for redirects::
     function testAdd() {
         $Posts = $this->generate('Posts', array(
             'components' => array(
-              'Session',
-              'Email' => array('send')
+                'Session',
+                'Email' => array('send')
             )
         ));
-        $Posts->Session->expects($this->once())->method('setFlash');
-        $Posts->Email->expects($this->once())->method('send')
+        $Posts->Session
+            ->expects($this->once())
+            ->method('setFlash');
+        $Posts->Email
+            ->expects($this->once())
+            ->method('send')
             ->will($this->returnValue(true));
 
         $this->testAction('/posts/add', array(
             'data' => array(
-              'Post' => array('name' => 'New Post')
+                'Post' => array('name' => 'New Post')
             )
         ));
 
