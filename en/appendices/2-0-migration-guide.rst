@@ -155,8 +155,8 @@ Basics.php
 -  ``uses()`` was removed. Use ``App::import()`` instead.
 -  Compatibility functions for PHP4 have been removed.
 -  PHP5 constant has been removed.
--  Global var called ``$TIME_START`` was removed use
-   ``$_SERVER['REQUEST_TIME']`` instead.
+-  Global var called ``$TIME_START`` was removed use the constant 
+   ``TIME_START`` or ``$_SERVER['REQUEST_TIME']`` instead.
 
 Removed Constants
 -----------------
