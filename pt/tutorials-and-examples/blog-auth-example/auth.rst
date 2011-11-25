@@ -1,16 +1,16 @@
-Simple Authentication and Authorization Application
+Autenticação simples e Autorização da Aplicação
 ####################################################
 
 Seguindo com nosso :doc:`/tutorials-and-examples/blog/blog` exemplo, imagine que
 queremos fornececer acesso seguro as nossas urls, baseada em autenticação de usuário.
-Nós também temos outro requisito, permitir que muitos que muitos autores possam
+Nós também temos outro requisito, permitir que muitos autores possam
 criar seus próprios posts, editar e deletar os post deles sem que afete o que os outros
 autores fizeram em seus posts.
 
 Criando a tabela de usuários
 ================================
 
-Primeiro, vamos criar uma noava tabela no nosso database blog para armazenar os dados de usuários::
+Primeiro, vamos criar uma nova tabela na nossa base de dados blog para armazenar os dados de usuários::
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -21,13 +21,13 @@ Primeiro, vamos criar uma noava tabela no nosso database blog para armazenar os 
         modified DATETIME DEFAULT NULL
     );
 
-Nós temos respeitados as convenções do CakePHP para nomear tabelas, mas nós também
-aproveitamos outra convenção:  usando as colunas username e password em nossas
-tabela users,o CakePHP será capaz de auto configurar as coisas quanto implementarmos
-o mecanismos de login de nossos usuaŕaios.
+Nós respeitamos as convenções do CakePHP para nomear tabelas, mas também
+aproveitamos outra convenção:  usando as colunas username e password em nossa
+tabela users,o CakePHP será capaz de auto configurar as coisas quando implementarmos
+o mecanismos de login de nossos usuários.
 
-A próxima etapa é criar o nosso model User, resposável pelas pesquisas, gravações e
-e validações e dados dos usuários::
+A próxima etapa é criar o nosso model User, responsável pelas pesquisas, gravações e
+validações de dados dos usuários::
 
     <?php
     // app/Model/User.php
@@ -57,7 +57,7 @@ e validações e dados dos usuários::
     }
 
 Vamos criar também nosso UsersController, o conteúdo a seguir corresponde a classe UsersController
-básica `cozida` usando o ferramana de geração e códigos presente no CakePHP::
+básica `cozida` usando o ferramenta de geração de códigos presente no CakePHP::
 
     <?php
     // app/Controller/UsersController.php
@@ -128,8 +128,8 @@ básica `cozida` usando o ferramana de geração e códigos presente no CakePHP:
             $this->redirect(array('action' => 'index'));
         }
 
-Da mesma forma criamos as views para nosso posts no blog ou usando a ferramanta
-de geração de código, nós implementamos as views. Para o proposito de nosso tutorial, iremos
+Da mesma forma criamos as views para nossos posts no blog ou usando a ferramanta
+de geração de código, nós implementamos as views. Para o propósito de nosso tutorial, iremos
 mostrar somente o add.ctp::
 
     <!-- app/View/Users/add.ctp -->
@@ -179,14 +179,14 @@ e adicione as seguintes linhas::
     }
 
 Aqui não há muito para configurar, como nós usamos convenções na tabela users.
-Nós somente configuramos as urls que serão carregadas após as ações de login e logout actions,
+Nós somente configuramos as urls que serão carregadas após as ações de login e logout,
 em nosso caso são ``/posts/`` e ``/`` respectivamente.
 
-O que fizemos na função ``beforeFilter`` foi dizer ao AuthComponent para não
+O que fizemos na função ``beforeFilter´´ foi dizer ao AuthComponent para não
 solicitar um login para todas as  actions ``index`` e ``view`, em todos os controller. Nós queremos
-querems que nossos visitantes possam ler qualquer post sem precisar se registrar no site.
+queremos que nossos visitantes possam ler qualquer post sem precisar se registrar no site.
 
-Agora, nos precisamos autorizar que novos usuários possam se registrar, salvando o nome de usuário e a senha deles,
+Agora, nós precisamos autorizar que novos usuários possam se registrar, salvando o nome de usuário e a senha deles,
 e o mais importante encriptar a senha pra que ela não seja armazenada como texto plano em nosso banco de dados.
 Vamos dizer ao AuthComponet para permitir usuários deslogados acessarem a função
 add e implementar a ação de login e logout::
@@ -251,34 +251,33 @@ as credenciais do usuário recém criado indo para a url ``/users/login``. Tente
 acessar qualquer outra url sem que a permisão tenha sido explicitada, como em ``/posts/add``, 
 você verá que a aplicação irá redireciona-lo automáticamente para pagina de login.
 
-And that's it! It looks too simple to be truth. Let's go back a bit to explain what
-happened. The ``beforeFilter`` function is telling the AuthComponent to not require a
-login for the ``add`` action in addition to the ``index`` and ``view`` actions that were
-already allowed int the AppController's ``beforeFilter`` function.
+E é isso! Parece simples demais para ser verdade. Vamos voltar um pouco para explicar o que 
+aconteceu. A função ``beforeFilter``  está falando para o AuthComponent não solicitar um
+login para a ação ``add`` em adição as açẽos ``index`` e ``view``que foram
+prontamente autorizadas na função ``beforeFilter`` do AppController.
 
-The ``login`` action calls the ``$this->Auth->login()`` function in the AuthComponent,
-and it works without any further config because we are following conventions as
-mentioned earlier. That is, having a User model with a username and a password
-column, and use a form posted to a controller with the user data. This function
-returns whether the login was successful or not, and in the case it succeeds,
-then we redirect the user to the configured redirection url that we used when
-adding the AuthComponent to our application.
+A ação de ``login`` chama a função ``$this->Auth->login()`` do AuthComponent,
+e ele funciona sem qualquer configuração adicional por que seguimos das convenções 
+mencionadas anteriormente. Isso é, temos um model User com uma coluna username e uma password, 
+e usa um form para postar  os dados dos usuário para o controller. Essa função
+retorna se o login foi bem sucedido ou não, e caso ela retorne sucesso, então nós redirecionamos 
+o usuário para a url que configuramos quando adicionamos o AuthComponent  em nossa aplicação.
 
-The logout works by just accessing the ``/users/logout`` url and will redirect
-the user to the configured logoutUrl formerly described. This url is the result
-of the ``AuthComponent::logout()`` function on success
+O logout funciona exatamente quando acessamos a url ``/users/logout`` e irá redirecionar 
+o usuário para a url configurada em logoutUrl anteriormente descrita. Essa url é acionada quando 
+a função ``AuthComponent::logout()`` obtém sucesso.
 
-Authorization (who's allowed to access what)
+Autorização (quem tem permissão de acessar o que)
 ============================================
 
-As stated before, we are converting this blog in a multi user authoring tool,
-and in order to do this, we need to modify the posts table a bit to add the
-reference to the User model::
+Como afirmado anteriormente, nós estamos convertendo esse blog em uma ferramenta
+multi usuário de autoria, e para fazer isso, nós precisamos modificar um pouco a tabela posts para adicionar
+a referencia ao model User::
 
     ALTER TABLE posts ADD COLUMN user_id INT(11);
 
-Also, a small change in the PostsController is required to store the currently
-logged in user as a reference for the created post::
+Também, é necessária uma pequena mudança no PostsController para guardar a referência do usuário logado para o
+post criado::
 
     <?php
     // app/Controller/PostsController.php
@@ -292,14 +291,14 @@ logged in user as a reference for the created post::
         }
     }
 
-The ``user()`` function provided by the component returns any column from the
-currently logged in user. We used this method to add the data into the request
-info that is saved.
+A função ``user()`` fornecida pelo component retorna qualquer coluna do usuário logado no 
+momento. Nós usamos esse metódo para adicionar a informação dentro de request data para que
+ela seja salva.
 
-Let's secure our app to prevent some authors to edit or delete the others' posts.
-Basic rules for our app are that admin users can access every url, while normal
-users (the author role) can only access the permitted actions.
-Open again the AppController class and add a few more options to the Auth config::
+Vamos garantir que nossa app evite que alguns autores editem ou apaguem posts de outros.
+Uma regra basica para nossa aplicação é que usuários admin podem acessar qualquer url, enquanto usuários normais
+(o papel author) pode somente acessar as actions permitidas.
+Abra novamente a classe AppController e adicione um pouco mais de opções para as configurações do Auth::
 
     <?php
     // app/Controller/AppController.php
@@ -309,28 +308,28 @@ Open again the AppController class and add a few more options to the Auth config
         'Auth' => array(
             'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
             'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
-            'authorize' => array('Controller') // Added this line
+            'authorize' => array('Controller') // Adicionamos essa linha
         )
     );
 
     public function isAuthorized($user) {
         if (isset($user['role']) && $user['role'] === 'admin') {
-            return true; //Admin can access every action
+            return true; //Admin pode acessar todas actions
         }
-        return false; // The rest don't
+        return false; // O resto não pode
     }
 
-We just created a very simple authorization mechanism. In this case the users
-with role ``admin`` will be able to access any url in the site when logged in,
-but the rest of them (i.e the role ``author``) can't do anything different from
-not logged in users.
+Nós acabamos de criar um mecanismo de autorização muito simples. Nesse caso os usuários
+com papel ``admin`` irão poder acessar qualquer url  no site quando estiverem logados,
+mas o restante dos usuários (i.e o papel ``author``) não podem acessar qualquer coisa diferente
+dos usuários não logado.
 
-This is not exactly what we wanted, so we need to fix to supply more rules to
-our ``isAuthorized()`` method. But instead of doing it in AppController, let's
-delegate each controller to supply those extra rules. The rules we're going to
-add to PostsController should allow authors to create posts but prevent the
-edition of posts if the author does not match. Open the file ``PostsController.php``
-and add the following content::
+Isso não é exatamente o que nós queremos, por isso precisamos corrigir nosso metódo ``isAuthorized()``
+para fornecer mais regras. Mas ao invés de fazer isso no AppController, vamos
+delegar a cada controller suprir essas regras extras. As regras que adicionaremos para o 
+add de PostsController deve permitir ao autores criaresmo post mas evitar a
+edição de posts se não corresponde. Abra o arquivo ``PostsController.php``
+e adicione o seguinte conteúdo::
 
     <?php
     // app/Controller/PostsController.php
@@ -349,13 +348,13 @@ and add the following content::
         return false;
     }
 
-We're now overriding the AppController's ``isAuthorized()`` call and internally
-checking if the parent class is already authorizing the user. If he isn't,
-then just allow him to access the add action, and conditionally access
-edit and delete. A final thing is left to be implemented, to tell whether
-the user is authorized to edit the post or not, we're calling a ``isOwnedBy()``
-function in the Post model. It is in general a good practice to move as much
-logic as possible into models. Let's then implement the function::
+Nós estamos sobreescrevendo  a chamada do ``isAuthorized()`` do AppController e internamente
+verificando se na classe pai já é usuário autoriado. Se ele não for,
+então só lhe permite acesso a ação add, e condicionamente acesso as ações
+edit e delete. A  última coisa que falta implementar, é dizer se usuário é
+autorizado a editar ou post ou não, nós estamos chamando a função ``isOwnedBy()``
+no model Post. Isso normamlmente é uma boa prática para mover tanta lógica quanto possivél
+para dentro dos models. Vamos então implementar essa função::
 
     <?php
     // app/Model/Post.php
@@ -365,16 +364,16 @@ logic as possible into models. Let's then implement the function::
     }
 
 
-This concludes our simple authentication and authorization tutorial. For securing
-the UsersController you can follow the same technique we did for PostsController,
-you could also be more creative and code something more general in AppController based
-on your own rules.
+Isso conclui então nossa autorização simples e nosso tutorial de autorização. Para garantir
+o UsersController você pode seguir as mesmas técnicas que usamos para PostsController,
+você também pode ser mais criativo e codificar algumas coisa mais geral no AppController 
+para suas próprias regras baseadas em papeis.
 
-Should you need more control, we suggest you reading the complete Auth guide in the
-:doc:`/core-libraries/components/authentication` section where you will find more
-about configuring the component, creating custom Authorization classes, and much more.
+Se precisar de mais controle, nós sugerimos você ler o guia completo do Auth 
+:doc:`/core-libraries/components/authentication` secão onde você encontrará mais 
+sobre a configuração do componente, criação de classes de Autorização customizadas, e muito mais.
 
-Suggested Follow-up Reading
+Sugerimos as seguintes leituras
 ---------------------------
 
 1. :doc:`/console-and-shells/code-generation-with-bake` Generating basic CRUD code
