@@ -98,7 +98,6 @@ function to accomplish an oft-used task, it's here.
     the modified array.
 
 
-
 Core Definition Constants
 =========================
 
@@ -106,79 +105,128 @@ Most of the following constants refer to paths in your application.
 
 .. php:const:: APP
 
-   root directory.
+   Path to the application's directory.
 
-.. php:const:: APP\_PATH
+.. php:const:: APP_DIR
 
-   app directory.
+    Equals ``app`` or the name of your application directory.
+
+.. php:const:: APPLIBS
+
+    Path to the application's Lib directory.
 
 .. php:const:: CACHE
 
-    cache files directory.
+    Path to the cache files directory. It can be shared between hosts in a 
+    multi-server setup.
 
 .. php:const:: CAKE
 
-    cake directory.
+    Path to the cake directory.
 
-.. php:const:: CONTROLLER\_TESTS
+.. php:const:: CAKE_CORE_INCLUDE_PATH
 
-    controller tests directory.
+    Path to the root lib directory.
+
+.. php:const:: CORE_PATH
+
+   Path to the root directory with ending directory slash.
 
 .. php:const:: CSS
 
-    CSS files directory.
+    Path to the public CSS directory.
+
+.. php:const:: CSS_URL
+
+    Web path to the CSS files directory.
 
 .. php:const:: DS
 
     Short for PHP's DIRECTORY\_SEPARATOR, which is / on Linux and \\ on windows.
 
-.. php:const:: HELPER\_TESTS
+.. php:const:: FULL_BASE_URL
 
-    helper tests directory.
+    Full url prefix. Such as ``https://example.com``
 
 .. php:const:: IMAGES
 
-    images directory.
+    Path to the public images directory.
+
+.. php:const:: IMAGES_URL
+
+    Web path to the public images directory.
 
 .. php:const:: JS
 
-    JavaScript files directory (in the webroot).
+    Path to the public JavaScript directory.
 
-.. php:const:: LIB\_TESTS
+.. php:const:: JS_URL
 
-    CakePHP Library tests directory.
-
-.. php:const:: LIBS
-
-    CakePHP libs directory.
+    Web path to the js files directory.
 
 .. php:const:: LOGS
 
-    logs directory (in app).
+    Path to the logs directory.
 
-.. php:const:: MODEL\_TESTS
+.. php:const:: ROOT
 
-    model tests directory.
-
-.. php:const:: SCRIPTS
-
-    Cake scripts directory.
+    Path to the root directory.
 
 .. php:const:: TESTS
 
-    tests directory (parent for the models, controllers, etc. test directories)
+    Path to the tests directory.
 
 .. php:const:: TMP
 
-    tmp directory.
+    Path to the temporary files directory.
 
 .. php:const:: VENDORS
 
-    vendors directory.
+    Path to the vendors directory.
+
+.. php:const:: WEBROOT_DIR
+
+    Equals ``webroot`` or the name of your webroot directory.
 
 .. php:const:: WWW\_ROOT
 
-    full path to the webroot.
+    Full path to the webroot.
+
+
+Timing Definition Constants
+===========================
+
+.. php:const:: TIME_START
+
+    Unix timestamp in microseconds as a float from when the application started.
+
+.. php:const:: SECOND
+
+    Equals 1
+
+.. php:const:: MINUTE
+
+    Equals 60
+
+.. php:const:: HOUR
+
+    Equals 3600
+
+.. php:const:: DAY
+
+    Equals 86400
+
+.. php:const:: WEEK
+
+    Equals 604800
+
+.. php:const:: MONTH
+
+    Equals 2592000
+
+.. php:const:: YEAR
+
+    Equals 31536000
 
 
 .. meta::
