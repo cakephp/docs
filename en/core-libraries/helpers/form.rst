@@ -1446,7 +1446,7 @@ FormHelper. All methods now support a ``$attributes['value']`` key
 now which should be used in place of ``$selected``. This change 
 simplifies the FormHelper methods, reducing the number of 
 arguments, and reduces the duplication that ``$selected`` created. 
-The affected methods are:
+The effected methods are:
 
     * FormHelper::select()
     * FormHelper::dateTime()

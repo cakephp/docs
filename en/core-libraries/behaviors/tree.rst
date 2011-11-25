@@ -147,7 +147,7 @@ would for any model. For example::
     $data['Category']['name'] =  'Skating';
     $this->Category->save($data);
 
-When using the tree behavior its not necessary to do any more than
+When using the tree behavior it's not necessary to do any more than
 set the parent\_id, and the tree behavior will take care of the
 rest. If you don't set the parent\_id, the tree behavior will add
 to the tree making your new addition a new top level entry::
@@ -438,7 +438,7 @@ are a few more tree-orientated permutations at your disposal.
     .. php:method:: getParentNode()
 
     This convenience function will, as the name suggests, return the
-    parent node for any node, or *false* if the node has no parent (its
+    parent node for any node, or *false* if the node has no parent (it's
     the root node). For example::
 
         <?php

@@ -11,7 +11,7 @@ is probably best used in controllers or models.
 CakePHP already protects you against SQL Injection **if** you use
 CakePHP's ORM methods (such as find() and save()) and proper array
 notation (ie. array('field' => $value)) instead of raw SQL. For
-sanitization against XSS its generally better to save raw HTML in
+sanitization against XSS it's generally better to save raw HTML in
 database without modification and sanitize at the time of
 output/display.
 

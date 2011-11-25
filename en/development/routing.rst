@@ -23,7 +23,7 @@ This file is included by the :php:class:`Dispatcher` when handling routes
 and allows you to define application specific routes you want used. Routes 
 declared in this file are processed top to bottom when incoming requests
 are matched.  This means that the order you place routes can affect how
-routes are parsed.  Its generally a good idea to place most frequently
+routes are parsed.  It's generally a good idea to place most frequently
 visited routes at the top of the routes file if possible.  This will
 save having to check a number of routes that won't match on each request.
 After connecting routes you can manipulate the order of routes using
@@ -396,7 +396,7 @@ Much like admin routing all prefix actions should be prefixed with
 the prefix name. So ``/manager/posts/add`` would map to
 ``PostsController::manager_add()``.
 
-When using prefix routes its important to remember, using the HTML
+When using prefix routes it's important to remember, using the HTML
 helper to build your links will help maintain the prefix calls.
 Here's how to build this link using the HTML helper::
 
@@ -601,7 +601,7 @@ parameters as values with string keys matching the name::
 
     array('controller' => 'posts', 'action' => 'view', 'chapter' => 'association')
 
-Since 'chapter' doesn't match any defined route elements, its treated 
+Since 'chapter' doesn't match any defined route elements, it's treated 
 as a named parameter.
 
 .. note::

@@ -508,7 +508,7 @@ so you can access it again.  ``Configure::restore()`` does exactly that::
     // restore runtime configuration from the cache.
     Configure::restore('user_1234', 'default');
 
-When restoring configuration information its important to restore it with
+When restoring configuration information it's important to restore it with
 the same key, and cache configuration as was used to store it.  Restored 
 information is merged on top of the existing runtime configuration.
 

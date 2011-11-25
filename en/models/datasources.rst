@@ -168,7 +168,7 @@ Your model implementation could be as simple as::
 .. note::
 
     If we had not defined our schema in the datasource itself, you
-    would get an error message to that effect here.
+    would get an error message to that affect here.
 
 And the configuration settings in your ``app/Config/database.php``
 would resemble something like this::

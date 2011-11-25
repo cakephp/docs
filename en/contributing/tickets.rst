@@ -16,7 +16,7 @@ the best bug report possible:
   issue, or that it hasn't already been fixed in the repository.
 * **Do** include detailed instructions on **how to reproduce the bug**.  This
   could be in the form of test cases or a code snippet that demonstrates the
-  issue.  Not having a way to reproduce an issue, means its less likely to get
+  issue.  Not having a way to reproduce an issue, means it's less likely to get
   fixed.
 * **Do** give as many details as possible about your environment: (OS, PHP
   version, CakePHP version).

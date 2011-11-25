@@ -51,7 +51,7 @@ fixture tables and data::
 
 .. note::
 
-    Its a good idea to make the test database and your actual database
+    It's a good idea to make the test database and your actual database
     different databases.  This will prevent any embarrassing mistakes later.
 
 Checking the test setup
@@ -181,7 +181,7 @@ Running tests
 =============
 
 Once you have PHPUnit installed and some test cases written, you'll want to run
-the test cases very frequently.  Its a good idea to run tests before committing
+the test cases very frequently. It's a good idea to run tests before committing
 any changes to help ensure you haven't broken anything.
 
 Running tests from a browser
@@ -248,7 +248,7 @@ your app directory you can do the following to run tests::
 
 .. note::
 
-    If you are running tests that interact with the session its generally a good
+    If you are running tests that interact with the session it's generally a good
     idea to use the ``--stderr`` option.  This will fix issues with tests
     failing because of headers_sent warnings.
 
@@ -1047,10 +1047,10 @@ a *shell script step* to the build that contains the following::
     DATABASE_PHP
 
 This ensures that you'll always have the correct database configuration that
-Jenkins requires.  Do the same for any other configuration files you need to.
-Its often a good idea to drop and re-create the database before each build as
-well.  This insulates you from chained failures, where one broken build causes
-others to fail.  Add another *shell script step* to the build that contains the
+Jenkins requires. Do the same for any other configuration files you need to.
+It's often a good idea to drop and re-create the database before each build as
+well. This insulates you from chained failures, where one broken build causes
+others to fail. Add another *shell script step* to the build that contains the
 following::
 
     mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE jenkins_test; CREATE DATABASE jenkins_test';
@@ -1059,7 +1059,7 @@ Add your tests
 --------------
 
 Add another *shell script step* to your build.  In this step run the tests for
-your application.  Creating a junit log file, or clover coverage is often a nice
+your application. Creating a junit log file, or clover coverage is often a nice
 bonus, as it gives you a nice graphical view of your testing results::
 
     app/Console/cake testsuite app AllTests \

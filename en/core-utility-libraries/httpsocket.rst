@@ -160,7 +160,7 @@ preserves the values the remote host sends::
     content-tyPe: text/html
 
 Your ``$response->headers`` (or ``$response['header']``) will contain the exact
-keys sent. In order to safely access the header fields, its best to use
+keys sent. In order to safely access the header fields, it's best to use
 ``getHeader()``.  If your headers looks like::
 
     Date: Mon, 16 Apr 2007 04:14:16 GMT

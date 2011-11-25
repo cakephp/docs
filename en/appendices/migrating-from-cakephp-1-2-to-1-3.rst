@@ -629,7 +629,7 @@ argument values, but not different named parameters or query string
 parameters. Both of these limitations/inconsistencies have been
 removed. You now use the controller's action names as the keys for
 ``$cacheAction``. This makes configuring ``$cacheAction`` easier as
-its no longer coupled to the routing, and allows cacheAction to
+it's no longer coupled to the routing, and allows cacheAction to
 work with all custom routing. If you need to have custom cache
 durations for specific argument sets you will need to detect and
 update cacheAction in your controller.

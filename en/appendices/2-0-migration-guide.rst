@@ -732,7 +732,7 @@ The ``$selected`` parameter was removed from several methods in ``FormHelper``.
 All methods now support a ``$attributes['value']`` key now which should be used
 in place of ``$selected``. This change simplifies the ``FormHelper`` methods,
 reducing the number of arguments, and reduces the duplication that ``$selected``
-created. The affected methods are:
+created. The effected methods are:
 
 -  FormHelper::select()
 -  FormHelper::dateTime()
@@ -842,7 +842,7 @@ View
 View no longer registered in ClassRegistry
 ------------------------------------------
 
-The view being registered ClassRegistry invited abuse and effectively created a
+The view being registered ClassRegistry invited abuse and affectively created a
 global symbol.  In 2.0 each Helper receives the current `View` instance in its
 constructor.  This allows helpers access to the view in a similar fashion as in
 the past, without creating global symbols.  You can access the view instance at

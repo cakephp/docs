@@ -146,7 +146,7 @@ normal additional first parameter of ``$model``::
     }
 
 
-Its seldom you'll need to implement paginate() and paginateCount().  You should
+It's seldom you'll need to implement paginate() and paginateCount().  You should
 make sure  you can't achieve your goal with the core model methods, or a custom
 finder.
 

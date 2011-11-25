@@ -47,7 +47,7 @@ Themes can contain static assets as well as view files.  A theme can include any
 necessary assets in its webroot directory. This allows for easy packaging and
 distribution of themes.  While in development, requests for theme assets will be
 handled by :php:class:`Dispatcher`.  To improve performance for production
-environments, its recommended that you either symlink or copy theme assets into
+environments, it's recommended that you either symlink or copy theme assets into
 the application's webroot. See below for more information.
 
 To use the new theme webroot create directories like
@@ -71,10 +71,10 @@ folder, it will default to the main webroot folder::
 Increasing performance of plugin and theme assets
 -------------------------------------------------
 
-Its a well known fact that serving assets through PHP is guaranteed to be slower
+It's a well known fact that serving assets through PHP is guaranteed to be slower
 than serving those assets without invoking PHP. And while the core team has
 taken steps to make plugin and theme asset serving as fast as possible, there
-may be situations where more performance is required. In these situations its
+may be situations where more performance is required. In these situations it's
 recommended that you either symlink or copy out plugin/theme assets to
 directories in ``app/webroot`` with paths matching those used by cakephp.
 

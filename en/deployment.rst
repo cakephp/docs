@@ -42,7 +42,7 @@ There are a few ways you can configure multiple applications to use the same
 CakePHP core.  You can either use PHP's ``include_path`` or set the
 ``CAKE_CORE_INCLUDE_PATH`` in your application's ``webroot/index.php``.
 Generally using PHP's ``include_path`` is easier and more robust.  CakePHP comes
-preconfigured to look on the ``include_path`` as well so its simple to use.
+preconfigured to look on the ``include_path`` as well so it's simple to use.
 
 In your ``php.ini`` file locate the existing ``include_path`` directive, and
 either append to it or add an ``include_path`` directive::

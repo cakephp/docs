@@ -152,7 +152,7 @@ the following::
     }
 
 Authentication objects should return ``false`` if they cannot identify the
-user.  And an array of user information if they can. Its not required
+user.  And an array of user information if they can. It's not required
 that you extend ``BaseAuthenticate``, only that your authentication object
 implements an ``authenticate()`` method.  The ``BaseAuthenticate`` class
 provides a number of helpful methods that are commonly used.  You can
@@ -331,7 +331,7 @@ Because Digest authentication requires a password hashed in the format
 defined by the RFC.  In order to correctly hash a password for use with
 Digest authentication you should use the special password hashing
 function on ``DigestAuthenticate``.  If you are going to be combining
-digest authentication with any other authentication strategies, its also
+digest authentication with any other authentication strategies, it's also
 recommended that you store the digest password in a separate column,
 from the normal password hash::
 
@@ -508,7 +508,7 @@ following::
 
 Authorize objects should return ``false`` if the user is denied access, or
 if the object is unable to perform a check.  If the object is able to
-verify the user's access, ``true`` should be returned. Its not required
+verify the user's access, ``true`` should be returned. It's not required
 that you extend ``BaseAuthorize``, only that your authorize object
 implements an ``authorize()`` method.  The ``BaseAuthorize`` class provides
 a number of helpful methods that are commonly used.

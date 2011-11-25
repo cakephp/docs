@@ -94,7 +94,7 @@ An Rss layout is very simple, put the following contents in
     echo $this->Rss->document($documentData,$channel);
 
 It doesn't look like much but thanks to the power in the ``RssHelper``
-its doing a lot of lifting for us. We haven't set ``$documentData`` or
+it's doing a lot of lifting for us. We haven't set ``$documentData`` or
 ``$channelData`` in the controller, however in CakePHP your views
 can pass variables back to the layout. Which is where our
 ``$channelData`` array will come from setting all of the meta data for

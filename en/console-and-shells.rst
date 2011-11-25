@@ -46,7 +46,7 @@ executable::
     $ cd /my/app_folder
     $ Console/cake
 
-Its often wise to add the core cake executable to your system path
+It's often wise to add the core cake executable to your system path
 so you can use the cake command anywhere.  This comes in handy when you are 
 creating new projects. See :ref:`adding-cake-to-your-path` for how to make ``cake``
 available systemwide.
@@ -581,7 +581,7 @@ define the behavior of the option:
 * ``short`` - The single letter variant for this option, leave undefined for none.
 * ``help`` - Help text for this option.  Used when generating help for the option.
 * ``default`` - The default value for this option.  If not defined the default will be true.
-* ``boolean`` - The option uses no value, its just a boolean switch. 
+* ``boolean`` - The option uses no value, it's just a boolean switch. 
   Defaults to false.
 * ``choices`` An array of valid choices for this option.  If left empty all
   values are valid. An exception will be raised when parse() encounters an invalid value.
