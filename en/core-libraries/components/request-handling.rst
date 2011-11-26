@@ -27,7 +27,7 @@ RequestHandler it must be included in your $components array::
 
         public $components = array('RequestHandler');
 
-        //rest of controller
+        // Rest of controller
     }
 
 Obtaining Request Information
@@ -117,7 +117,7 @@ following would accomplish that::
         if ($this->request->is('ajax')) {
             $this->disableCache();
         }
-        //Continue Controller action
+        // Continue Controller action
 
 
 

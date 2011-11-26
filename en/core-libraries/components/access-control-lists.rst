@@ -286,11 +286,12 @@ updating the following lines in app/config/core.php
 
 ::
 
-    //Change these lines:
+    <?php
+    // Change these lines:
     Configure::write('Acl.classname', 'DbAcl');
     Configure::write('Acl.database', 'default');
     
-    //To look like this:
+    // To look like this:
     Configure::write('Acl.classname', 'IniAcl');
     //Configure::write('Acl.database', 'default');
 
@@ -495,6 +496,7 @@ ACL Component in your controller's $components array:
 
 ::
 
+    <?php
     public $components = array('Acl');
 
 Once we've got that done, let's see what some examples of creating
@@ -519,11 +521,11 @@ models to save data like we always do:
 
 ::
 
-    function anyAction()
-    {
+    <?php
+    function anyAction() {
         $aro =& $this->Acl->Aro;
         
-        //Here's all of our group info in an array we can iterate through
+        // Here's all of our group info in an array we can iterate through
         $groups = array(
             0 => array(
                 'alias' => 'warriors'
@@ -539,17 +541,16 @@ models to save data like we always do:
             ),
         );
         
-        //Iterate and create ARO groups
-        foreach($groups as $data)
-        {
-            //Remember to call create() when saving in loops...
+        // Iterate and create ARO groups
+        foreach($groups as $data) {
+            // Remember to call create() when saving in loops...
             $aro->create();
             
-            //Save data
+            // Save data
             $aro->save($data);
         }
     
-        //Other action logic goes here...
+        // Other action logic goes here...
     }
 
 Once we've got them in there, we can use the ACL console
@@ -585,13 +586,13 @@ specific model records in our database.
 
 ::
 
-    function anyAction()
-    {
+    <?php
+    function anyAction() {
         $aro = new Aro();
         
-        //Here are our user records, ready to be linked up to new ARO records
-        //This data could come from a model and modified, but we're using static
-        //arrays here for demonstration purposes.
+        // Here are our user records, ready to be linked up to new ARO records
+        // This data could come from a model and modified, but we're using static
+        // arrays here for demonstration purposes.
         
         $users = array(
             0 => array(
@@ -650,17 +651,16 @@ specific model records in our database.
             ),
         );
         
-        //Iterate and create AROs (as children)
-        foreach($users as $data)
-        {
-            //Remember to call create() when saving in loops...
+        // Iterate and create AROs (as children)
+        foreach($users as $data) {
+            // Remember to call create() when saving in loops...
             $aro->create();
     
             //Save data
             $aro->save($data);
         }
         
-        //Other action logic goes here...
+        // Other action logic goes here...
     }
 
 .. note::
@@ -753,8 +753,8 @@ because permissions are managed by the Acl Component.
 
 ::
 
-    class SomethingsController extends AppController
-    {
+    <?php
+    class SomethingsController extends AppController {
         // You might want to place this in the AppController
         // instead, but here works great too.
     
@@ -767,14 +767,14 @@ action inside this controller.
 
 ::
 
-    function index()
-    {
-        //Allow warriors complete access to weapons
-        //Both these examples use the alias syntax
+    <?php
+    function index() {
+        // Allow warriors complete access to weapons
+        // Both these examples use the alias syntax
         $this->Acl->allow('warriors', 'Weapons');
         
-        //Though the King may not want to let everyone
-        //have unfettered access
+        // Though the King may not want to let everyone
+        // have unfettered access
         $this->Acl->deny('warriors/Legolas', 'Weapons', 'delete');
         $this->Acl->deny('warriors/Gimli',   'Weapons', 'delete');
         
@@ -802,6 +802,7 @@ yourself. What we have above is equivalent to this:
 
 ::
 
+    <?php
     // 6342 = Legolas
     // 1564 = Gimli
     
@@ -830,30 +831,31 @@ we've created. The basic syntax for making a permissions check is:
 
 ::
 
-    $this->Acl->check( $aro, $aco, $action = '*');
+    <?php
+    $this->Acl->check($aro, $aco, $action = '*');
 
 Let's give it a try inside a controller action:
 
 ::
 
-    function index()
-    {
-        //These all return true:
+    <?php
+    function index() {
+        // These all return true:
         $this->Acl->check('warriors/Aragorn', 'Weapons');
         $this->Acl->check('warriors/Aragorn', 'Weapons', 'create');
         $this->Acl->check('warriors/Aragorn', 'Weapons', 'read');
         $this->Acl->check('warriors/Aragorn', 'Weapons', 'update');
         $this->Acl->check('warriors/Aragorn', 'Weapons', 'delete');
         
-        //Remember, we can use the model/id syntax 
-        //for our user AROs
+        // Remember, we can use the model/id syntax 
+        // for our user AROs
         $this->Acl->check(array('User' => array('id' => 2356)), 'Weapons');
         
-        //These also return true:
+        // These also return true:
         $result = $this->Acl->check('warriors/Legolas', 'Weapons', 'create');
         $result = $this->Acl->check('warriors/Gimli', 'Weapons', 'read');
         
-        //But these return false:
+        // But these return false:
         $result = $this->Acl->check('warriors/Legolas', 'Weapons', 'delete');
         $result = $this->Acl->check('warriors/Gimli', 'Weapons', 'delete');
     }

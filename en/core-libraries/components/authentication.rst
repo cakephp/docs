@@ -64,7 +64,7 @@ to every attached object.  The all key is also exposed as
     <?php
     // Pass settings in using 'all'
     $this->Auth->authenticate = array(
-        AuthComponent::ALL => array('userModel' => 'Users.User')
+        AuthComponent::ALL => array('userModel' => 'Users.User'),
         'Form',
         'Basic'
     );
@@ -102,22 +102,22 @@ To configure different fields for user in ``$components`` array::
     Above setup with other Auth configurations should look something like::
 
         <?php
-            // Pass settings in $components array
-            public $components = array(
-                'Auth'=> array(
-                    'loginAction' => array(
-                        'controller' => 'users',
-                        'action' => 'login',
-                        'plugin' => 'users'
-                    ),
-                    'authError' => 'Did you really think you are allowed to see that?',
-                    'authenticate' => array(
-                        'Form' => array(
-                            'fields' => array('username' => 'email')
-                        )
+        // Pass settings in $components array
+        public $components = array(
+            'Auth'=> array(
+                'loginAction' => array(
+                    'controller' => 'users',
+                    'action' => 'login',
+                    'plugin' => 'users'
+                ),
+                'authError' => 'Did you really think you are allowed to see that?',
+                'authenticate' => array(
+                    'Form' => array(
+                        'fields' => array('username' => 'email')
                     )
                 )
-            );
+            )
+        );
 
 In addition to the common configuration, Basic authentication supports
 the following keys:
@@ -271,7 +271,7 @@ Displaying auth related flash messages
 
 In order to display the session error messages that Auth generates, you
 need to add the following code to your layout. Add the following two
-lines to the View/Layouts/default.ctp file in the body section
+lines to the ``app/View/Layouts/default.ctp`` file in the body section
 preferable before the content_for_layout line.::
 
     <?php
@@ -470,7 +470,7 @@ is also exposed as ``AuthComponent::ALL``::
     <?php
     // Pass settings in using 'all'
     $this->Auth->authorize = array(
-        AuthComponent::ALL => array('actionPath' => 'controllers/')
+        AuthComponent::ALL => array('actionPath' => 'controllers/'),
         'Actions',
         'Controller'
     );

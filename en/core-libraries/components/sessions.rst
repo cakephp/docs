@@ -26,7 +26,7 @@ reference the following::
 
     <?php
     array('User' => 
-            array('username' => 'clark-kent@dailyplanet.com')
+        array('username' => 'clark-kent@dailyplanet.com')
     );
 
 Dots are used to indicate nested arrays. This notation is used for
@@ -81,7 +81,7 @@ all Session component methods wherever a name/key is used.
     destroy the PHP session and then create a fresh session::
 
         <?php
-        $this->Session->destroy()
+        $this->Session->destroy();
 
 
 .. _creating-notification-messages:
@@ -150,7 +150,7 @@ Creating notification messages
     ``div`` output using ``$this->Session->flash()`` in your layout or view.::
 
         <?php
-        $this->Session->setFlash('Example message text', 'default', array('class' => 'example_class'))
+        $this->Session->setFlash('Example message text', 'default', array('class' => 'example_class'));
 
     The output from using ``$this->Session->flash()`` with the above example
     would be::
