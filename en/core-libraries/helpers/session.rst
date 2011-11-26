@@ -16,7 +16,7 @@ As with the Session Component, data is read by using
 
     <?php
     array('User' => 
-            array('username' => 'super@example.com')
+        array('username' => 'super@example.com')
     );
 
 Given the previous array structure, the node would be accessed by

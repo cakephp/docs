@@ -21,7 +21,8 @@ NumberHelper
     This method is used to display a number in common currency formats
     (EUR,GBP,USD). Usage in a view looks like::
 
-        <?php echo $this->Number->currency($number, $currency); ?>
+        <?php
+        echo $this->Number->currency($number, $currency);
 
     The first parameter, $number, should be a floating point number
     that represents the amount of money you are expressing. The second
@@ -62,9 +63,10 @@ NumberHelper
     If a non-recognized $currency value is supplied, it is prepended to
     a USD formatted number. For example::
 
-        <?php echo $this->Number->currency('1234.56', 'FOO'); ?>
+        <?php
+        echo $this->Number->currency('1234.56', 'FOO');
 
-        //Outputs:
+        // Outputs
         FOO 1,234.56
 
 .. php:method:: addFormat($formatName, $options)
@@ -75,17 +77,19 @@ NumberHelper
     Add a currency format to the Number helper.  Makes reusing
     currency formats easier.::
     
-        <?php $this->Number->addFormat('BRR', array('before' => 'R$ ')); ?>
+        <?php
+        $this->Number->addFormat('BRR', array('before' => 'R$ '));
     
     You can now use `BRR` as a shortform when formatting currency amounts.::
     
-        <?php echo $this->Number->currency($value, 'BRR'); ?>
+        <?php
+        echo $this->Number->currency($value, 'BRR');
     
     Added formats are merged with the following defaults.::
     
        array(
-       	'before' => '$', 'after' => 'c', 'zero' => 0, 'places' => 2, 'thousands' => ',',
-       	'decimals' => '.', 'negative' => '()', 'escape' => true
+           'before' => '$', 'after' => 'c', 'zero' => 0, 'places' => 2, 'thousands' => ',',
+           'decimals' => '.', 'negative' => '()', 'escape' => true
        )
 
 .. php:method:: precision(mixed $number, int $precision = 3)
@@ -97,9 +101,10 @@ NumberHelper
     precision (decimal places). It will round in order to maintain the
     level of precision defined.::
 
-        <?php echo $this->Number->precision(456.91873645, 2 ); ?>
+        <?php
+        echo $this->Number->precision(456.91873645, 2 );
 
-        //Outputs:
+        // Outputs
         456.92
 
 
@@ -113,9 +118,10 @@ NumberHelper
     precision). This method also expresses the number as a percentage
     and prepends the output with a percent sign.::
 
-        <?php echo $this->Number->toPercentage(45.691873645); ?>
+        <?php
+        echo $this->Number->toPercentage(45.691873645);
 
-        //Outputs:
+        // Outputs
         45.69%
 
 .. php:method:: toReadableSize(string $data_size)
@@ -129,7 +135,7 @@ NumberHelper
     terms)::
 
         <?php
-        echo $this->Number->toReadableSize(0);  // 0 Bytes
+        echo $this->Number->toReadableSize(0); // 0 Bytes
         echo $this->Number->toReadableSize(1024); // 1 KB
         echo $this->Number->toReadableSize(1321205.76); // 1.26 MB
         echo $this->Number->toReadableSize(5368709120); // 5.00 GB

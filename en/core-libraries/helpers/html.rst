@@ -83,7 +83,7 @@ Inserting Well-Formatted elements
 
     The first parameter can be an array to include multiple files.::
 
-        <?php echo $this->Html->css(array('forms','tables','menu')); ?>
+        <?php echo $this->Html->css(array('forms', 'tables', 'menu')); ?>
 
     Will output::
 
@@ -117,24 +117,25 @@ Inserting Well-Formatted elements
 
     ::
 
-        <?php echo $this->Html->meta(
+        <?php
+        echo $this->Html->meta(
             'favicon.ico',
             '/favicon.ico',
             array('type' => 'icon')
-        );?> //Output (line breaks added) </p>
+        );
+        // Output (line breaks added)
         <link
             href="http://example.com/favicon.ico"
             title="favicon.ico" type="image/x-icon"
             rel="alternate"
         />
          
-        <?php echo $this->Html->meta(
+        echo $this->Html->meta(
             'Comments',
             '/comments/index.rss',
-            array('type' => 'rss'));
-        ?>
-        
-        //Output (line breaks added)
+            array('type' => 'rss')
+        );
+        // Output (line breaks added)
         <link
             href="http://example.com/comments/index.rss"
             title="Comments"
@@ -145,19 +146,20 @@ Inserting Well-Formatted elements
     This method can also be used to add the meta keywords and
     descriptions. Example::
 
-        <?php echo $this->Html->meta(
+        <?php
+        echo $this->Html->meta(
             'keywords',
             'enter any meta keyword here'
-        );?>
-        //Output <meta name="keywords" content="enter any meta keyword here"/>
-        //
+        );
+        // Output
+        <meta name="keywords" content="enter any meta keyword here" />
 
-        <?php echo $this->Html->meta(
+        echo $this->Html->meta(
             'description',
             'enter any meta description here'
-           );?> 
-
-        //Output <meta name="description" content="enter any meta description here"/>
+        );
+        // Output
+        <meta name="description" content="enter any meta description here" />
 
     If you want to add a custom meta tag then the first parameter
     should be set to an array. To output a robots noindex tag use the
@@ -212,7 +214,7 @@ Inserting Well-Formatted elements
 
         <?php
         echo $this->Html->style(array(
-            'background'     => '#633',
+            'background' => '#633',
             'border-bottom' => '1px solid #000',
             'padding' => '10px'
         )); 
@@ -230,7 +232,7 @@ Inserting Well-Formatted elements
     to /app/webroot/img/.::
 
         <?php
-        echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'))
+        echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'));
 
     Will output::
 
@@ -329,14 +331,14 @@ Inserting Well-Formatted elements
         <?php
         echo $this->Html->tag('span', 'Hello World.', array('class' => 'welcome'));
          
-        //Output
+        // Output
         <span class="welcome">Hello World</span>
          
-        //No text specified.
+        // No text specified.
         <?php 
         echo $this->Html->tag('span', null, array('class' => 'welcome'));
          
-        //Output
+        // Output
         <span class="welcome">
 
     .. note::
@@ -362,7 +364,7 @@ Inserting Well-Formatted elements
         <?php
         echo $this->Html->div('error', 'Please enter your credit card number.');
         
-        //Output
+        // Output
         <div class="error">Please enter your credit card number.</div>
 
 .. php:method::  para(string $class, string $text, array $options)
@@ -375,9 +377,9 @@ Inserting Well-Formatted elements
     supplied, only a starting <p> tag is returned.::
 
         <?php
-        echo $this->Html->para(null, 'Hello World.');?>
+        echo $this->Html->para(null, 'Hello World.');
         
-        //Output
+        // Output
         <p>Hello World.</p>
 
 .. php:method:: script(mixed $url, mixed $options)
@@ -477,20 +479,20 @@ Inserting Well-Formatted elements
         <?php
         echo $this->Html->tableHeaders(array('Date', 'Title', 'Active'));
 
-        //Output 
+        // Output 
         <tr>
             <th>Date</th>
             <th>Title</th>
             <th>Active</th>
         </tr>
         
-        <?php echo $this->Html->tableHeaders(
+        echo $this->Html->tableHeaders(
             array('Date','Title','Active'),
             array('class' => 'status'),
             array('class' => 'product_table')
         );
          
-        //Output
+        // Output
         <tr class="status">
              <th class="product_table">Date</th>
              <th class="product_table">Title</th>
@@ -517,24 +519,22 @@ Inserting Well-Formatted elements
             array('Aug 1st, 2006', 'Anti-Java Cake', 'No'),
         ));
          
-        //Output
+        // Output
         <tr><td>Jul 7th, 2007</td><td>Best Brownies</td><td>Yes</td></tr>
         <tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>
         <tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td>No</td></tr>
-         
-        <?php 
+        
         echo $this->Html->tableCells(array(
             array('Jul 7th, 2007', array('Best Brownies', array('class'=>'highlight')) , 'Yes'),
             array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),
             array('Aug 1st, 2006', 'Anti-Java Cake', array('No', array('id'=>'special'))),
         ));
          
-        //Output
+        // Output
         <tr><td>Jul 7th, 2007</td><td class="highlight">Best Brownies</td><td>Yes</td></tr>
         <tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>
         <tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td id="special">No</td></tr>
-         
-        <?php
+        
         echo $this->Html->tableCells(
             array(
                 array('Red', 'Apple'),
@@ -543,8 +543,8 @@ Inserting Well-Formatted elements
             ),
             array('class' => 'darker')
         );
-         
-        //Output
+        
+        // Output
         <tr class="darker"><td>Red</td><td>Apple</td></tr>
         <tr><td>Orange</td><td>Orange</td></tr>
         <tr class="darker"><td>Yellow</td><td>Banana</td></tr>
@@ -598,9 +598,10 @@ Inserting Well-Formatted elements
 
     URL (starting with '/') with the full base URL prepended::
 
-        <?php echo $this->Html->url('/posts', true); ?>
+        <?php
+        echo $this->Html->url('/posts', true);
 
-        //Output
+        // Output
         http://somedomain.com/posts
 
     URL with GET params and named anchor::
@@ -631,7 +632,7 @@ containing::
     $tags = array(
         'metalink' => '<link href="%s"%s >',
         'input' => '<input name="%s" %s >',
-        //...
+        // ...
     );
 
 You can then load this tag set by calling
@@ -645,14 +646,14 @@ breadcrumb trail in your app. To set this up, first add something
 similar to the following in your layout template::
 
     <?php
-    echo $this->Html->getCrumbs(' > ','Home');
+    echo $this->Html->getCrumbs(' > ', 'Home');
 
 Now, in your view you'll want to add the following to start the
 breadcrumb trails on each of the pages::
 
     <?php
-     echo $this->Html->addCrumb('Users', '/users');
-     echo $this->Html->addCrumb('Add User', '/users/add');
+    echo $this->Html->addCrumb('Users', '/users');
+    echo $this->Html->addCrumb('Add User', '/users/add');
 
 This will add the output of "**Home > Users > Add User**" in your
 layout where getCrumbs was added.

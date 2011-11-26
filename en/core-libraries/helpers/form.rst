@@ -1043,9 +1043,9 @@ Form Element-Specific Methods
 
         <?php
         echo $this->Form->select('field', $options, array(
-            'Value 1'=>'Label 1',
-            'Value 2'=>'Label 2',
-            'Value 3'=>'Label 3'
+            'Value 1' => 'Label 1',
+            'Value 2' => 'Label 2',
+            'Value 3' => 'Label 3'
         ));
 
       Output::
@@ -1063,11 +1063,11 @@ Form Element-Specific Methods
         <?php
         $options = array(
            'Group 1' => array(
-              'Value 1'=>'Label 1',
-              'Value 2'=>'Label 2'
+              'Value 1' => 'Label 1',
+              'Value 2' => 'Label 2'
            ),
            'Group 2' => array(
-              'Value 3'=>'Label 3'
+              'Value 3' => 'Label 3'
            )
         ));
         echo $this->Form->select('field', $options);
@@ -1327,7 +1327,7 @@ Displaying and checking errors
     a create function such as the following::
 
         <?php
-        echo $this->Form->create('Document', array('enctype' => 'multipart/form-data') );
+        echo $this->Form->create('Document', array('enctype' => 'multipart/form-data'));
         // OR
         echo $this->Form->create('Document', array('type' => 'file'));
 
@@ -1336,10 +1336,10 @@ Displaying and checking errors
         <?php
         echo $this->Form->input('Document.submittedfile', array(
             'between' => '<br />',
-            'type'=>'file'
+            'type' => 'file'
         ));
 
-        // or
+        // OR
 
         echo $this->Form->file('Document.submittedfile');
 
@@ -1375,7 +1375,7 @@ Below is an example validation method you could define in your
 model to validate whether a file has been successfully uploaded::
 
     <?php
-    function isUploadedFile($params){
+    function isUploadedFile($params) {
         $val = array_shift($params);
         if ((isset($val['error']) && $val['error'] == 0) ||
             (!empty( $val['tmp_name']) && $val['tmp_name'] != 'none')
@@ -1388,7 +1388,7 @@ model to validate whether a file has been successfully uploaded::
 Creates a file input::
 
     <?php
-    echo $this->Form->create('User',array('type'=>'file'));
+    echo $this->Form->create('User', array('type' => 'file'));
     echo $this->Form->file('avatar');
 
 Will output::

@@ -147,6 +147,9 @@ associative array into an element for each key value pair.
 ::
 
     <?php
+    // You should import Sanitize
+    App::uses('Sanitize', 'Utility');
+
     foreach ($posts as $post) {
         $postTime = strtotime($post['Post']['created']);
     
@@ -158,9 +161,6 @@ associative array into an element for each key value pair.
             'day' => date('d', $postTime),
             $post['Post']['slug']
         );
-
-        // You should import Sanitize
-        App::uses('Sanitize', 'Utility');
 
         // This is the part where we clean the body text for output as the description 
         // of the rss item, this needs to have only text to make sure the feed validates
@@ -177,7 +177,7 @@ associative array into an element for each key value pair.
             'title' => $post['Post']['title'],
             'link' => $postLink,
             'guid' => array('url' => $postLink, 'isPermaLink' => 'true'),
-            'description' =>  $bodyText,
+            'description' => $bodyText,
             'dc:creator' => $post['Post']['author'],
             'pubDate' => $post['Post']['created']
         ));

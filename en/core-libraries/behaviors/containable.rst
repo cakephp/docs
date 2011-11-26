@@ -180,7 +180,7 @@ and nothing else — you could do something like the following::
     $this->Post->contain('Comment.author');
     $this->Post->find('all');
     
-    //or..
+    // or..
     
     $this->Post->find('all', array('contain' => 'Comment.author'));
 

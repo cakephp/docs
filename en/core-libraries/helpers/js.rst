@@ -80,8 +80,11 @@ To override the "$" shortcut, use the jQueryObject variable::
 
     <?php
     $this->Js->JqueryEngine->jQueryObject = '$j';
-    print $this->Html->scriptBlock('public $j = jQuery.noConflict();', 
-        array('inline' => false)); //Tell jQuery to go into noconflict mode
+    echo $this->Html->scriptBlock(
+        'var $j = jQuery.noConflict();', 
+        array('inline' => false)
+    );
+    // Tell jQuery to go into noconflict mode
 
 Using the JsHelper inside customHelpers
 ---------------------------------------
@@ -308,14 +311,14 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     
         <?php
         $this->Js->get('#my-list');
-            $this->Js->sortable(array(
-                'distance' => 5,
-                'containment' => 'parent',
-                'start' => 'onStart',
-                'complete' => 'onStop',
-                'sort' => 'onSort',
-                'wrapCallbacks' => false
-            ));
+        $this->Js->sortable(array(
+            'distance' => 5,
+            'containment' => 'parent',
+            'start' => 'onStart',
+            'complete' => 'onStop',
+            'sort' => 'onSort',
+            'wrapCallbacks' => false
+        ));
 
     Assuming you were using the jQuery engine, you would get the
     following code in your generated Javascript block
@@ -354,11 +357,13 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     **Example use**::
 
         <?php
-        $this->Js->event('click',
-        $this->Js->request(array(
-        'action' => 'foo', param1), array(
-        'async' => true,
-        'update' => '#element')));
+        $this->Js->event(
+            'click',
+            $this->Js->request(
+                array('action' => 'foo', 'param1'),
+                array('async' => true, 'update' => '#element')
+            )
+        );
 
 .. php:method:: get($selector)
 
@@ -528,7 +533,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
         $this->Js->get('#element');
         $result = $this->Js->effect('fadeIn');
 
-        //$result contains $("#foo").fadeIn();
+        // $result contains $("#foo").fadeIn();
 
 .. php:method:: event($type, $content, $options = array())
 
@@ -599,7 +604,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     
     .. code-block:: javascript
 
-        $('div.message').each(function () { $(this).css({color: "red"});});
+        $('div.message').each(function () { $(this).css({color: "red"}); });
 
 .. php:method:: alert($message)
 
@@ -699,11 +704,11 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
         <?php
         echo $this->Js->link('Page 2', array('page' => 2), array(
-            'update' =>; '#content',
-            'htmlAttributes' =>; array('other' => 'value')
+            'update' => '#content',
+            'htmlAttributes' => array('other' => 'value')
         ));
 
-        //Creates the following html
+        // Creates the following html
         <a href="/posts/index/page:2" other="value">Page 2</a>
 
 .. php:method:: serializeForm($options = array())

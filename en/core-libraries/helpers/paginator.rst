@@ -316,7 +316,7 @@ control in the view.  You can use ``options()`` to indicate that you want other
 named parameters to be converted::
 
     <?php
-    $this->Paginator->options(array('convertKeys' => array('your', 'keys', 'here)));.
+    $this->Paginator->options(array('convertKeys' => array('your', 'keys', 'here')));
 
 Configuring the PaginatorHelper to use a javascript helper
 ----------------------------------------------------------
@@ -449,7 +449,7 @@ Other Methods
         echo $this->Paginator->url(array('sort' => 'title'), true); 
 
 
-..todo::
+.. todo::
 
     Missing methods current(), defaultModel(), hasNext(), hasPage(), hasPrev(), params(), sortDir(), sortKey()
 

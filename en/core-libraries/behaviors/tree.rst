@@ -84,10 +84,9 @@ tree to see what it looks like. With a simple controller::
     
         function index() {
             $this->data = $this->Category->generateTreeList(null, null, null, '&nbsp;&nbsp;&nbsp;');
-            debug ($this->data); die;       
+            debug($this->data); die;       
         }
     }
-    ?>
 
 and an even simpler model definition:::
 
@@ -97,7 +96,6 @@ and an even simpler model definition:::
         public $name = 'Category';
         public $actsAs = array('Tree');
     }
-    ?>
 
 We can check what our category tree data looks like by visiting
 /categories You should see something like this:
@@ -204,7 +202,7 @@ of your data will remain unchanged. For example::
     <?php
     // pseudo controller code
     $this->Category->id = 5; // id of Extreme knitting
-    $this->Category->save(array('name' =>'Extreme fishing'));
+    $this->Category->save(array('name' => 'Extreme fishing'));
 
 The above code did not affect the parent\_id field - even if the
 parent\_id is included in the data that is passed to save if the
@@ -249,7 +247,7 @@ that Extreme fishing does not belong under Sport, but instead
 should be located under Other People's Categories. With the
 following code::
 
-    <?php
+  <?php
   // pseudo controller code
   $this->Category->id = 5; // id of Extreme fishing
   $newParentId = $this->Category->field('id', array('name' => 'Other People\'s Categories'));
@@ -301,7 +299,7 @@ reports category is no longer useful. To remove it
 *and any children it may have* just call delete as you would for
 any model. For example with the following code::
 
-    <?php
+  <?php
   // pseudo controller code
   $this->Category->id = 10;
   $this->Category->delete();
@@ -414,6 +412,7 @@ are a few more tree-orientated permutations at your disposal.
     to show the structure of your data. Below is an example of what you
     can expect this method to return::
 
+      <?php
       $treelist = $this->Category->generateTreeList();
 
     Output::

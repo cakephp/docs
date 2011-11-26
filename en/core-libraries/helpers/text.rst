@@ -86,7 +86,7 @@ TextHelper
     Example::
         
         <?php
-        echo $this->Text->highlight($last_sentence, 'using',array('format'=>'<span class="highlight">\1</span>');
+        echo $this->Text->highlight($last_sentence, 'using', array('format' => '<span class="highlight">\1</span>'));
 
     Output::
 
@@ -135,6 +135,7 @@ TextHelper
 
     Example::
 
+        <?php
         echo $this->Text->truncate(
             'The killer crept forward and tripped on the rug.',
             22,
