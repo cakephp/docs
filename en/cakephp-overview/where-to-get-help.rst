@@ -83,7 +83,17 @@ CakePHP also has a very active Google Group. It can be a great
 resource for finding archived answers, frequently asked questions,
 and getting answers to immediate problems.
 
+CakePHP Questions
+=================
+
+`http://ask.cakephp.org/ <http://ask.cakephp.org/>`_
+
+Simply register/login and ask a question. Wait until you've got some answers 
+and pick the correct answer. You can view, comment and vote on previously asked 
+and solved questions as well.
+
 
 .. meta::
     :title lang=en: Where to Get Help
-    :keywords lang=en: application programming interface,nitty gritty details,open source projects,class lib,fame and fortune,propeller hat,core developers,channel irc,donation opportunities,general discussion,code reference,irc channel,developer tools,straight to the point,daylight hours,test cases,holler,clearing house,test case,bakery
+    :description lang=en: Where to get help with CakePHP: The official CakePHP website, The Cookbook, The Bakery, The API, in the test cases, the IRC channel, The CakePHP Google Group or CakePHP Questions.
+    :keywords lang=en: cakephp,cakephp help,help with cakephp,where to get help,cakephp irc,cakephp questions,cakephp api,cakephp test cases,open source projects,channel irc,code reference,irc channel,developer tools,test case,bakery
