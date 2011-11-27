@@ -1,5 +1,7 @@
 RSS
-#######
+###
+
+.. php:class:: RssHelper
 
 The RSS helper makes generating XML for RSS feeds easy.
 
@@ -56,13 +58,13 @@ the same::
     // Modify the Posts Controller action that corresponds to
     // the action which deliver the rss feed, which is the
     // index action in our example
-    
+
     public function index(){
         if ($this->RequestHandler->isRss() ){
             $posts = $this->Post->find('all', array('limit' => 20, 'order' => 'Post.created DESC'));
             return $this->set(compact('posts'));
         }
-    
+
         // this is not an Rss request, so deliver
         // data used by website's interface
         $this->paginate['Post'] = array('order' => 'Post.created DESC', 'limit' => 10);
@@ -205,10 +207,82 @@ Feed Validator or the w3c site at http://validator.w3.org/feed/.
     information added automagically under higher debug settings that
     break XML syntax or feed validation rules.
 
+Rss Helper API
+==============
 
-.. todo::
+.. php:attr:: action
 
-    Missing all class and method definitions
+    Current action
+
+.. php:attr:: base
+
+    Base URL
+
+.. php:attr:: data
+
+    POSTed model data
+
+.. php:attr:: field
+
+    Name of the current field
+
+.. php:attr:: helpers
+
+    Helpers used by the RSS Helper
+
+.. php:attr:: here
+
+    URL to current action
+
+.. php:attr:: model
+
+    Name of current model
+
+.. php:attr:: params
+
+    Parameter array
+
+.. php:attr:: version
+
+    Default spec version of generated RSS.
+
+.. php:method:: channel(array $attrib = array (), array $elements = array (), mixed $content = null)
+
+    :rtype: string
+
+    Returns an RSS ``<channel />`` element.
+
+.. php:method:: document(array $attrib = array (), string $content = null)
+
+    :rtype: string
+
+    Returns an RSS document wrapped in ``<rss />`` tags.
+
+.. php:method:: elem(string $name, array $attrib = array (), mixed $content = null, boolean $endTag = true)
+
+    :rtype: string
+
+    Generates an XML element.
+
+.. php:method:: item(array $att = array (), array $elements = array ())
+
+    :rtype: string
+
+    Converts an array into an ``<item />`` element and its contents.
+
+.. php:method:: items(array $items, mixed $callback = null)
+
+    :rtype: string
+
+    Transforms an array of data using an optional callback, and maps it to a 
+    set of ``<item />`` tags.
+
+.. php:method:: time(mixed $time)
+
+    :rtype: string
+
+    Converts a time in any format to an RSS time. See 
+    :php:meth:`TimeHelper::toRSS()`.
 
 
 .. meta::

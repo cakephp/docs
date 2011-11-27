@@ -1,6 +1,8 @@
 SessionHelper
 #############
 
+.. php:class:: SessionHelper
+
 As a natural counterpart to the Session Component, the Session
 Helper replicates most of the components functionality and makes it
 available in your view. The Session Helper is no longer
@@ -24,14 +26,16 @@ Given the previous array structure, the node would be accessed by
 notation is used for all Session helper methods wherever a ``$key`` is
 used.
 
-.. php:class:: SessionHelper
+.. php:method:: read(string $key)
 
-.. php:method:: read($key)
+    :rtype: mixed
 
     Read from the Session. Returns a string or array depending on the
     contents of the session.
 
-.. php:method:: check($key)
+.. php:method:: check(string $key)
+
+    :rtype: boolean
 
     Check to see if a key is in the Session. Returns a boolean on the
     key's existence.
@@ -54,7 +58,9 @@ The above will output a simple message, with the following html::
         Your stuff has been saved.
     </div>
 
-.. php:method:: flash($key, $params)
+.. php:method:: flash(string $key, array $params)
+
+    :rtype: string
 
     As with the component method you can set additional properties
     and customize which element is used. In the controller you might 
@@ -99,10 +105,17 @@ The above will output a simple message, with the following html::
             <?php printf($message, h($name)); ?>
         </div>
 
+.. php:method:: error()
 
-.. todo::
+    :rtype: string
 
-    Missing methods error(), valid()
+    Returns last error encountered in a session.
+
+.. php:method:: valid()
+
+    :rtype: boolean
+
+    Used to check is a session is valid in a view.
 
 
 .. meta::
