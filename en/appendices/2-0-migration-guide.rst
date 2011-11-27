@@ -91,11 +91,13 @@ lowercased Folders:
 * tmp
 * webroot
 
-AppController / AppModel
+AppController / AppModel / AppHelper / AppShell
 ========================
 
-The ``app/app_controller.php`` and ``app/app_model.php`` are now located and 
-named as ``app/Controller/AppController.php`` and ``app/Model/AppModel.php``.
+The ``app/app_controller.php``, ``app/app_model.php``, ``app/app_helper.php are now located and 
+named as ``app/Controller/AppController.php``, ``app/Model/AppModel.php`` and ``app/Helper/AppHelper.php`` respectively.
+
+Also all shell/task now extend AppShell. You can have your custom AppShell.php at ``app/Console/Command/AppShell.php``
 
 Internationalization / Localization
 ===================================
