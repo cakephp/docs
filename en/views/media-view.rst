@@ -16,13 +16,13 @@ parameters to specify where your file is located::
         function download () {
             $this->viewClass = 'Media';
             $params = array(
-                  'id' => 'example.zip',
-                  'name' => 'example',
-                  'download' => true,
-                  'extension' => 'zip',
-                  'path' => APP . 'files' . DS
-           );
-           $this->set($params);
+                'id'        => 'example.zip',
+                'name'      => 'example',
+                'download'  => true,
+                'extension' => 'zip',
+                'path'      => APP . 'files' . DS
+            );
+            $this->set($params);
         }
     }
 
@@ -33,15 +33,15 @@ MediaView's ``$mimeType`` array::
     function download () {
         $this->viewClass = 'Media';
         $params = array(
-              'id' => 'example.docx',
-              'name' => 'example',
-              'extension' => 'docx',
-              'mimeType' => array(
+            'id'        => 'example.docx',
+            'name'      => 'example',
+            'extension' => 'docx',
+            'mimeType'  => array(
                 'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-               ),
-              'path' => APP . 'files' . DS
-       );
-       $this->set($params);
+            ),
+            'path'      => APP . 'files' . DS
+        );
+        $this->set($params);
     }
 
 Parameters

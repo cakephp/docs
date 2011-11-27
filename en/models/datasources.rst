@@ -174,11 +174,11 @@ And the configuration settings in your ``app/Config/database.php``
 would resemble something like this::
 
     <?php
-        public $twitter = array(
-            'datasource' => 'TwitterSource',
-            'login' => 'username',
-            'password' => 'password',
-        );
+    public $twitter = array(
+        'datasource' => 'TwitterSource',
+        'login'      => 'username',
+        'password'   => 'password',
+    );
 
 Using the familiar model methods from a controller::
 
@@ -201,14 +201,14 @@ Plugin DataSources and Datasource Drivers
 You can also package Datasources into plugins.
 
 Simply place your datasource file into
-``Plugin/[your_plugin]/Model/Datasource/[your_datasource].php``
+``Plugin/[YourPlugin]/Model/Datasource/[YourDatasource].php``
 and refer to it using the plugin notation::
 
     <?php
     public $twitter = array(
         'datasource' => 'Twitter.TwitterSource',
-        'username' => 'test@example.com',
-        'password' => 'hi_mom',
+        'username'   => 'test@example.com',
+        'password'   => 'hi_mom',
     );
 
 

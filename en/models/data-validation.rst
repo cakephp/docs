@@ -37,7 +37,7 @@ those fields::
         public $validate = array(
             'login' => 'alphaNumeric',
             'email' => 'email',
-            'born' => 'date'
+            'born'  => 'date'
         );
     }
 
@@ -62,23 +62,23 @@ some of these built-in validation rules::
         public $validate = array(
             'login' => array(
                 'alphaNumeric' => array(
-                    'rule' => 'alphaNumeric',
+                    'rule'     => 'alphaNumeric',
                     'required' => true,
-                    'message' => 'Alphabets and numbers only'
+                    'message'  => 'Alphabets and numbers only'
                 ),
                 'between' => array(
-                    'rule' => array('between', 5, 15),
+                    'rule'    => array('between', 5, 15),
                     'message' => 'Between 5 to 15 characters'
                 )
             ),
             'password' => array(
-                'rule' => array('minLength', '8'),
+                'rule'    => array('minLength', '8'),
                 'message' => 'Minimum 8 characters long'
             ),
             'email' => 'email',
             'born' => array(
-                'rule' => 'date',
-                'message' => 'Enter a valid date',
+                'rule'       => 'date',
+                'message'    => 'Enter a valid date',
                 'allowEmpty' => true
             )
         );
@@ -133,11 +133,11 @@ general usage pattern adding a rule for a single field::
     <?php
     public $validate = array(
         'fieldName1' => array(
-            'rule' => 'ruleName', // or: array('ruleName', 'param1', 'param2' ...)
-            'required' => true,
+            'rule'       => 'ruleName', // or: array('ruleName', 'param1', 'param2' ...)
+            'required'   => true,
             'allowEmpty' => false,
-            'on' => 'create', // or: 'update'
-            'message' => 'Your Error Message'
+            'on'         => 'create', // or: 'update'
+            'message'    => 'Your Error Message'
         )
     );
 
@@ -193,7 +193,7 @@ the validation rule has been defined as follows::
     <?php
     public $validate = array(
         'login' => array(
-            'rule' => 'alphaNumeric',
+            'rule'     => 'alphaNumeric',
             'required' => true
         )
     );
@@ -249,7 +249,7 @@ message for the rule::
     <?php
     public $validate = array(
         'password' => array(
-            'rule' => array('minLength', 8),
+            'rule'    => array('minLength', 8),
             'message' => 'Password must be at least 8 characters long'
         )
     );
@@ -292,12 +292,12 @@ This is better explained with a practical example::
     public $validate = array(
         'login' => array(
             'loginRule-1' => array(
-                'rule' => 'alphaNumeric',  
+                'rule'    => 'alphaNumeric',  
                 'message' => 'Only alphabets and numbers allowed',
-                'last' => true
+                'last'    => true
              ),
             'loginRule-2' => array(
-                'rule' => array('minLength', 8),  
+                'rule'    => array('minLength', 8),  
                 'message' => 'Minimum length of 8 characters'
             )  
         )
@@ -337,7 +337,7 @@ expression as a field validation rule::
     <?php
     public $validate = array(
         'login' => array(
-            'rule' => '/^[a-z0-9]{3,}$/i',  
+            'rule'    => '/^[a-z0-9]{3,}$/i',
             'message' => 'Only letters and integers, min 3 characters'
         )
     );
@@ -360,18 +360,21 @@ function, as shown below::
     <?php
     class User extends AppModel {
         public $name = 'User';
-      
+
         public $validate = array(
             'promotion_code' => array(
-                'rule' => array('limitDuplicates', 25),
+                'rule'    => array('limitDuplicates', 25),
                 'message' => 'This code has been used too many times.'
             )
         );
-     
-        function limitDuplicates($check, $limit){
-            //$check will have value: array('promomotion_code' => 'some-value')
-            //$limit will have value: 25
-            $existing_promo_count = $this->find( 'count', array('conditions' => $check, 'recursive' => -1) );
+
+        function limitDuplicates($check, $limit) {
+            // $check will have value: array('promomotion_code' => 'some-value')
+            // $limit will have value: 25
+            $existing_promo_count = $this->find('count', array(
+                'conditions' => $check,
+                'recursive' => -1
+            ));
             return $existing_promo_count < $limit;
         }
     }
@@ -402,23 +405,23 @@ stored in $this->data member variable::
 
     <?php
     class Post extends AppModel {
-      public $name = 'Post';
-      
-      public $validate = array(
-        'slug' => array(
-          'rule' => 'alphaNumericDashUnderscore',
-          'message' => 'Slug can only be letters, numbers, dash and underscore'
-        )
-      );
-        
-      function alphaNumericDashUnderscore($check) {
-          // $data array is passed using the form field name as the key
-          // have to extract the value to make the function generic
-          $value = array_values($check);
-          $value = $value[0];
-          
-          return preg_match('|^[0-9a-zA-Z_-]*$|', $value);
-      }
+        public $name = 'Post';
+
+        public $validate = array(
+            'slug' => array(
+                'rule'    => 'alphaNumericDashUnderscore',
+                'message' => 'Slug can only be letters, numbers, dash and underscore'
+            )
+        );
+
+        function alphaNumericDashUnderscore($check) {
+            // $data array is passed using the form field name as the key
+            // have to extract the value to make the function generic
+            $value = array_values($check);
+            $value = $value[0];
+
+            return preg_match('|^[0-9a-zA-Z_-]*$|', $value);
+        }
     }
 
 .. _core-validation-rules:
@@ -441,7 +444,7 @@ with usage examples.
         <?php
         public $validate = array(
             'login' => array(
-                'rule' => 'alphaNumeric',
+                'rule'    => 'alphaNumeric',
                 'message' => 'Usernames must only contain letters and numbers.'
             )
         );
@@ -455,7 +458,7 @@ with usage examples.
         <?php
         public $validate = array(
             'password' => array(
-                'rule' => array('between', 5, 15),
+                'rule'    => array('between', 5, 15),
                 'message' => 'Passwords must be between 5 and 15 characters long.'
             )
         );
@@ -474,7 +477,7 @@ with usage examples.
         public $validate = array(
             'id' => array(
                 'rule' => 'blank',
-                'on' => 'create'
+                'on'   => 'create'
             )
         );
 
@@ -486,7 +489,7 @@ with usage examples.
         <?php
         public $validate = array(
             'myCheckbox' => array(
-                'rule' => array('boolean'),
+                'rule'    => array('boolean'),
                 'message' => 'Incorrect value for myCheckbox'
             )
         );
@@ -530,7 +533,7 @@ with usage examples.
         <?php
         public $validate = array(
             'ccnumber' => array(
-                'rule' => array('cc', array('visa', 'maestro'), false, null),
+                'rule'    => array('cc', array('visa', 'maestro'), false, null),
                 'message' => 'The credit card number you supplied was invalid.'
             )
         );
@@ -544,14 +547,14 @@ with usage examples.
         <?php
         public $validate = array(
             'age' => array(
-                'rule' => array('comparison', '>=', 18),
+                'rule'    => array('comparison', '>=', 18),
                 'message' => 'Must be at least 18 years old to qualify.'
             )
         );
-         
+
         public $validate = array(
             'age' => array(
-                'rule' => array('comparison', 'greater or equal', 18),
+                'rule'    => array('comparison', 'greater or equal', 18),
                 'message' => 'Must be at least 18 years old to qualify.'
             )
         );
@@ -581,8 +584,8 @@ with usage examples.
         <?php
         public $validate = array(
             'born' => array(
-                'rule' => array('date','ymd'),
-                'message' => 'Enter a valid date in YY-MM-DD format.',
+                'rule'       => array('date','ymd'),
+                'message'    => 'Enter a valid date in YY-MM-DD format.',
                 'allowEmpty' => true
             )
         );
@@ -619,7 +622,7 @@ with usage examples.
         
         public $validate = array(
             'email' => array(
-                'rule' => array('email', true),
+                'rule'    => array('email', true),
                 'message' => 'Please supply a valid email address.'
             )
         );
@@ -634,7 +637,7 @@ with usage examples.
         <?php
         public $validate = array(
             'food' => array(
-                'rule' => array('equalTo', 'cake'),  
+                'rule'    => array('equalTo', 'cake'),
                 'message' => 'This value must be the string cake'
             )
         );
@@ -649,7 +652,7 @@ with usage examples.
         <?php
         public $validate = array(
             'image' => array(
-                'rule' => array('extension', array('gif', 'jpeg', 'png', 'jpg')),
+                'rule'    => array('extension', array('gif', 'jpeg', 'png', 'jpg')),
                 'message' => 'Please supply a valid image.'
             )
         );
@@ -665,7 +668,7 @@ with usage examples.
         <?php
         public $validate = array(
             'clientip' => array(
-                'rule' => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)
+                'rule'    => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)
                 'message' => 'Please supply a valid IP address.'
             )
         );
@@ -680,7 +683,7 @@ with usage examples.
         <?php
         public $validate = array(
             'login' => array(
-                'rule' => 'isUnique',
+                'rule'    => 'isUnique',
                 'message' => 'This username has already been taken.'
             )
         );
@@ -695,7 +698,7 @@ with usage examples.
         <?php
         public $validate = array(
             'login' => array(
-                'rule' => array('minLength', 8),  
+                'rule'    => array('minLength', 8),
                 'message' => 'Usernames must be at least 8 characters long.'
             )
         );
@@ -714,7 +717,7 @@ with usage examples.
         <?php
         public $validate = array(
             'login' => array(
-                'rule' => array('maxLength', 15),  
+                'rule'    => array('maxLength', 15),
                 'message' => 'Usernames must be no larger than 15 characters long.'
             )
         );
@@ -735,7 +738,7 @@ with usage examples.
         <?php
         public $validate = array(
             'salary' => array(
-                'rule' => array('money', 'left'),
+                'rule'    => array('money', 'left'),
                 'message' => 'Please supply a valid monetary amount.'
             )
         );
@@ -751,8 +754,10 @@ with usage examples.
         public $validate = array(
             'multiple' => array(
                 'rule' => array('multiple', array(
-                    'in' => array('do', 'ray', 'me', 'fa', 'so', 'la', 'ti'), 'min' => 1, 'max' => 3)
-                ),
+                    'in'  => array('do', 'ray', 'me', 'fa', 'so', 'la', 'ti'),
+                    'min' => 1,
+                    'max' => 3
+                )),
                 'message' => 'Please select one, two or three options'
             )
         );
@@ -766,14 +771,14 @@ with usage examples.
     Example::
 
         <?php
-            public $validate = array(
-              'function' => array(
-                'allowedChoice' => array(
-                    'rule' => array('inList', array('Foo', 'Bar')),
-                    'message' => 'Enter either Foo or Bar.'
-                )
-              )
-            );
+        public $validate = array(
+            'function' => array(
+                 'allowedChoice' => array(
+                     'rule'    => array('inList', array('Foo', 'Bar')),
+                     'message' => 'Enter either Foo or Bar.'
+                 )
+             )
+         );
 
 .. php:staticmethod:: numeric()
 
@@ -782,7 +787,7 @@ with usage examples.
         <?php
         public $validate = array(
             'cars' => array(
-                'rule' => 'numeric',  
+                'rule'    => 'numeric',
                 'message' => 'Please supply the number of cars.'
             )
         );
@@ -794,7 +799,7 @@ with usage examples.
         <?php
         public $validate = array(
             'title' => array( 
-                'rule' => 'notEmpty',
+                'rule'    => 'notEmpty',
                 'message' => 'This field cannot be left blank'
             )
         );
@@ -844,7 +849,7 @@ with usage examples.
         <?php
         public $validate = array(
             'number' => array(
-                'rule' => array('range', -1, 11),
+                'rule'    => array('range', -1, 11),
                 'message' => 'Please enter a number between 0 and 10'
             )
         );

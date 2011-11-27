@@ -34,13 +34,14 @@ find operation, or to perform any other post-find logic. The
 $results parameter passed to this callback contains the returned
 results from the model's find operation, i.e. something like::
 
+    <?php
     $results = array(
-      0 => array(
-        'ModelName' => array(
-          'field1' => 'value1',
-          'field2' => 'value2',
+        0 => array(
+            'ModelName' => array(
+                'field1' => 'value1',
+                'field2' => 'value2',
+            ),
         ),
-      ),
     );
 
 The return value for this callback should be the (possibly
@@ -54,9 +55,10 @@ an association the format of ``$results`` can differ; instead of the
 result you would normally get from a find operation, you may get
 this::
 
+    <?php
     $results = array(
-      'field_1' => 'value1',
-      'field_2' => 'value2'
+        'field_1' => 'value1',
+        'field_2' => 'value2'
     );
 
 .. warning::
@@ -117,14 +119,14 @@ changed very easily. Use the code below in the appropriate model.
     <?php
     function beforeSave() {
         if (!empty($this->data['Event']['begindate']) && !empty($this->data['Event']['enddate'])) {
-                $this->data['Event']['begindate'] = $this->dateFormatBeforeSave($this->data['Event']['begindate']);
-                $this->data['Event']['enddate'] = $this->dateFormatBeforeSave($this->data['Event']['enddate']);
+            $this->data['Event']['begindate'] = $this->dateFormatBeforeSave($this->data['Event']['begindate']);
+            $this->data['Event']['enddate'] = $this->dateFormatBeforeSave($this->data['Event']['enddate']);
         }
         return true;
     }
-    
+
     function dateFormatBeforeSave($dateString) {
-        return date('Y-m-d', strtotime($dateString)); // Direction is from 
+        return date('Y-m-d', strtotime($dateString));
     }
 
 .. tip::
@@ -167,8 +169,7 @@ on this record will also be deleted.
     // In the following example, do not let a product category be deleted if it still contains products.
     // A call of $this->Product->delete($id) from ProductsController.php has set $this->id .
     // Assuming 'ProductCategory hasMany Product', we can access $this->Product in the model.
-    function beforeDelete()
-    {
+    function beforeDelete() {
         $count = $this->Product->find("count", array(
             "conditions" => array("product_category_id" => $this->id)
         ));

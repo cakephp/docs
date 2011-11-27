@@ -36,7 +36,7 @@ It is not always useful to have **User.first\_name** fully
 qualified. If you do not follow the convention (i.e. you have
 multiple relations to other tables) this would result in an error.
 In this case it may be better to just use
-**first\_name \|\| \\'\\' \|\| last\_name** without the Model
+``first_name || \'\' || last_name`` without the Model
 Name.
 
 Using virtual fields
