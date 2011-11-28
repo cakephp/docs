@@ -378,6 +378,13 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     on the selection of ``#element``. To change the active selection,
     call ``get()`` again with a new element.
 
+.. php:method:: set(mixed $one, mixed $two = null)
+
+    Pass variables into Javascript. Allows you to set variables that will be 
+    output when the buffer is fetched with :php:meth:`JsHelper::getBuffer()` or 
+    :php:meth:`JsHelper::writeBuffer()`. The Javascript variable used to output 
+    set variables can be controlled with :php:attr:`JsHelper::$setVariable`.
+
 .. php:method:: drag($options = array())
 
     Make an element draggable.
@@ -845,11 +852,6 @@ This will show/hide the busy-indicator element before and after the
 ``#content`` div is updated. Although ``indicator`` has been
 removed, the new features offered by ``JsHelper`` allow for more
 control and more complex effects to be created.
-
-
-.. todo::
-
-    Missing method set()
 
 
 .. meta::
