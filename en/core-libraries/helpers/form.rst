@@ -821,7 +821,7 @@ Datetime options
 Form Element-Specific Methods
 =============================
 
-.. php:method:: label($fieldName, $text, $options)
+.. php:method:: label(string $fieldName, string $text, array $options)
 
     Create a label element.  ``$fieldName`` is used for generating the 
     DOM id.  If ``$text`` is undefined, ``$fieldName`` will be used to inflect
@@ -1402,16 +1402,6 @@ Will output::
     encoding-type, by setting the type option to 'file' in
     ``$this->Form->create()``
 
-.. php:method:: label(string $fieldName, string $text, array $attributes)
-
-    Creates a label tag, populated with $text.::
-
-        <?php
-        echo $this->Form->label('status');
-
-    Will output::
-
-        <label for="UserStatus">Status</label>
 
 Working with SecurityComponent
 ==============================
