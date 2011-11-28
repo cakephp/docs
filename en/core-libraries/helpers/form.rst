@@ -367,6 +367,30 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
         // or
         $this->set('reallyInappropriateModelNames', $this->ReallyInappropriateModelName->find('list'));
 
+.. php:method:: inputs(mixed $fields = null, array $blacklist = null)
+
+    Generate a set of inputs for ``$fields``. If $fields is null the current model 
+    will be used.
+
+    In addition to controller fields output, ``$fields`` can be used to control 
+    legend and fieldset rendering with the ``fieldset`` and ``legend`` keys. 
+    ``$form->inputs(array('legend' => 'My legend'));``
+    Would generate an input set with a custom legend. You can customize 
+    individual inputs through ``$fields`` as well.::
+
+        <?php
+        echo $form->inputs(array(
+            'name' => array('label' => 'custom label')
+        ));
+
+    In addition to fields control, inputs() allows you to use a few additional 
+    options.
+
+    - ``fieldset`` Set to false to disable the fieldset. If a string is supplied 
+      it will be used as the classname for the fieldset element.
+    - ``legend`` Set to false to disable the legend for the generated input set. 
+      Or supply a string to customize the legend text.
+
 Field naming conventions
 ------------------------
 
@@ -1181,6 +1205,24 @@ Creating buttons and submit elements
         <?php 
         echo $this->Form->button('Submit Form', array('type' => 'submit', 'escape' => true));
 
+.. php:method:: postButton(string $title, mixed $url, array $options = array ())
+
+    Create a ``<button>`` tag with a surrounding ``<form>`` that submits via 
+    POST.
+
+    This method creates a ``<form>`` element. So do not use this method in some 
+    opened form. Instead use :php:meth:`FormHelper::submit()` or 
+    :php:meth:`FormHelper::button()` to create buttons inside opened forms.
+
+.. php:method:: postLink(string $title, mixed $url = null, array $options = array (), string $confirmMessage = false)
+
+    Creates an HTML link, but access the url using method POST. Requires 
+    javascript to be enabled in browser.
+
+    This method creates a ``<form>`` element. So do not use this method inside 
+    an existing form. Instead you should add a submit button using 
+    :php:meth:`FormHelper::submit()`
+
 Creating date and time inputs
 =============================
 
@@ -1320,6 +1362,11 @@ Displaying and checking errors
 
         When using :php:meth:`FormHelper::input()`, errors are rendered by default.
 
+.. php:method:: tagIsInvalid()
+
+    Returns false if given form field described by the current entity has no 
+    errors. Otherwise it returns the validation message.
+
 .. php:method:: file(string $fieldName, array $options)
 
     To add a file upload field to a form, you must first make sure that
@@ -1423,6 +1470,10 @@ special ``_Token`` inputs are generated.
         <?php
         $this->Form->unlockField('User.id');
 
+.. php:method:: secure(array $fields = array())
+
+    Generates a hidden field with a security hash based on the fields used 
+    in the form.
 
 .. _form-improvements-1-3:
 
@@ -1460,11 +1511,6 @@ parameter of ``$this->Form->create()``
 Hidden fields no longer remove the class attribute. This means 
 that if there are validation errors on hidden fields, 
 the error-field classname will be applied.
-
-
-.. todo::
-
-    Missing methods secure(), inputs(), postButton(), postLink(), tagIsInvalid()
 
 
 .. meta::
