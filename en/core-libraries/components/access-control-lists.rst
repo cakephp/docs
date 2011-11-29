@@ -1,7 +1,7 @@
 Access Control Lists
 ####################
 
-.. php:class:: AclComponent
+.. php:class:: AclComponent(ComponentCollection $collection, array $settings = array())
 
 CakePHP's access control list functionality is one of the most
 oft-discussed, most likely because it is the most sought after, but

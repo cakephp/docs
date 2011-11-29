@@ -1,6 +1,8 @@
 ACL
 ###
 
+.. php:class:: AclBehavior()
+
 The Acl behavior provides a way to seamlessly integrate a model
 with your ACL system. It can create both AROs or ACOs
 transparently.

@@ -1,6 +1,8 @@
 Sessions
 ########
 
+.. php:class:: SessionComponent(ComponentCollection $collection, array $settings = array())
+
 The CakePHP SessionComponent provides a way to persist client data
 between page requests. It acts as a wrapper for the ``$_SESSION`` as
 well as providing convenience methods for several ``$_SESSION``
@@ -9,9 +11,6 @@ related functions.
 Sessions can be configured in a number of ways in CakePHP.  For more
 information, you should see the :doc:`Session configuration </development/sessions>`
 documentation.
-
-
-.. php:class:: SessionComponent
 
 Interacting with Session data
 =============================

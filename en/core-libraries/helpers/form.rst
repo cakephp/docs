@@ -1,7 +1,7 @@
 FormHelper
 ##########
 
-.. php:class:: FormHelper
+.. php:class:: FormHelper(View $view, array $settings = array())
 
 The FormHelper does most of the heavy lifting in form creation. 
 The FormHelper focuses on creating forms quickly, in a way that 

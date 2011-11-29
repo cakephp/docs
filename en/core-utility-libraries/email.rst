@@ -1,7 +1,7 @@
 CakeEmail
 #########
 
-.. php:class:: CakeEmail
+.. php:class:: CakeEmail(mixed $config = null)
 
 ``CakeEmail`` is a new class to send email. With this
 class you can send email from any place of your application. In addition to

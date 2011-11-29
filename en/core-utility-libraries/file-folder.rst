@@ -40,7 +40,7 @@ simply delete the file::
 Folder API
 ==========
 
-.. php:class:: Folder( $path = false, $create = false, $mode = false )
+.. php:class:: Folder(string $path = false, boolean $create = false, mixed $mode = false)
 
 ::
 
@@ -341,7 +341,7 @@ Folder API
 File API
 ========
 
-.. php:class:: File( $path, $create = false, $mode = 493 )
+.. php:class:: File(string $path, boolean $create = false, integer $mode = 493)
 
 ::
 

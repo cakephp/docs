@@ -1,5 +1,7 @@
 App Class
-#############
+#########
+
+.. php:class:: App
 
 The app class is responsible for path management, class location and class loading. 
 Make sure you follow the :ref:`file-and-classname-conventions`.
@@ -22,8 +24,6 @@ For instance if you'd like to use your own HttpSocket class, put it under::
 
 Once you've done this App will load your override file instead of the file
 inside CakePHP.
-
-.. php:class:: App
 
 Loading classes
 ===============

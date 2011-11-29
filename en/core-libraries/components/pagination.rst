@@ -1,7 +1,7 @@
 Pagination
 ##########
 
-.. php:class:: PaginatorComponent
+.. php:class:: PaginatorComponent(ComponentCollection $collection, array $settings = array())
 
 One of the main obstacles of creating flexible and user-friendly
 web applications is designing an intuitive UI. Many applications

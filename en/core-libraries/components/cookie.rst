@@ -1,5 +1,7 @@
 Cookie
-#######
+######
+
+.. php:class:: CookieComponent(ComponentCollection $collection, array $settings = array())
 
 The CookieComponent is a wrapper around the native PHP ``setcookie``
 method. It also includes a host of delicious icing to make coding
@@ -80,10 +82,7 @@ Component.
 Using the Component
 ===================
 
-.. php:class:: CookieComponent(ComponentCollection $collection, array $settings = array())
-
-    The CookieComponent offers a number of methods for working with
-    Cookies.
+The CookieComponent offers a number of methods for working with Cookies.
 
 .. php:method:: write(mixed $key, mixed $value = null, boolean $encrypt = true, mixed $expires = null)
 

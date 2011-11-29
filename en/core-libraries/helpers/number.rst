@@ -1,16 +1,16 @@
 NumberHelper
 ############
 
-.. php:class:: NumberHelper
+.. php:class:: NumberHelper(View $view, array $settings = array())
 
-    The NumberHelper contains convenience methods that enable display
-    numbers in common formats in your views. These methods include ways
-    to format currency, percentages, data sizes, format numbers to
-    specific precisions and also to give you more flexibility with
-    formatting numbers.
+The NumberHelper contains convenience methods that enable display
+numbers in common formats in your views. These methods include ways
+to format currency, percentages, data sizes, format numbers to
+specific precisions and also to give you more flexibility with
+formatting numbers.
 
-    All of these functions return the formatted number; They do not
-    automatically echo the output into the view.
+All of these functions return the formatted number; They do not
+automatically echo the output into the view.
 
 .. php:method:: currency(mixed $number, string $currency= 'USD', $options = array())
 

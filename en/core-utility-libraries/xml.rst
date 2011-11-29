@@ -1,6 +1,8 @@
 Xml
 ###
 
+.. php:class:: Xml
+
 The Xml class was all refactored. As PHP 5 have
 `SimpleXML <http://php.net/simplexml>`_ and
 `DOMDocument <http://php.net/domdocument>`_, the CakePHP doesn't need to
@@ -293,10 +295,8 @@ sweet, below has the steps to do for create a child node::
 Xml API
 =======
 
-.. php:class:: Xml
-
-    A factory and conversion class for creating SimpleXml or DOMDocument objects
-    from a number of sources including strings, arrays and remote urls.
+A factory and conversion class for creating SimpleXml or DOMDocument objects
+from a number of sources including strings, arrays and remote urls.
 
 .. php:staticmethod:: build($input, $options = array())
 

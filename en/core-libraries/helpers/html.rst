@@ -1,6 +1,8 @@
 HTML
 ####
 
+.. php:class:: HtmlHelper(View $view, array $settings = array())
+
 The role of the HtmlHelper in CakePHP is to make HTML-related
 options easier, faster, and more resilient to change. Using this
 helper will enable your application to be more light on its feet,
@@ -27,8 +29,6 @@ are a few examples of how to use the $htmlAttributes parameter::
 
 Inserting Well-Formatted elements
 =================================
-
-.. php:class:: HtmlHelper
 
     The most important task the HtmlHelper accomplishes is creating
     well formed markup. Don't be afraid to use it often - you can cache

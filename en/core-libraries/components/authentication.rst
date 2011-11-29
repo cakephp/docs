@@ -1,6 +1,8 @@
 Authentication
 ##############
 
+.. php:class:: AuthComponent(ComponentCollection $collection, array $settings = array())
+
 Identifying, authenticating and authorizing users is a common part of
 almost every web application.  In CakePHP AuthComponent provides a
 pluggable way to do these tasks.  AuthComponent allows you to combine
@@ -654,10 +656,8 @@ done to resources, rather than the specific actions being visited.
 AuthComponent API
 =================
 
-.. php:class:: AuthComponent
-
-    AuthComponent is the primary interface to the built-in authorization
-    and authentication mechanics in CakePHP.
+AuthComponent is the primary interface to the built-in authorization
+and authentication mechanics in CakePHP.
 
 .. php:attr:: ajaxLogin
 

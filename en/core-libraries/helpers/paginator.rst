@@ -1,7 +1,7 @@
 Paginator
 #############
 
-.. php:class:: PaginatorHelper
+.. php:class:: PaginatorHelper(View $view, array $settings = array())
 
 The Pagination helper is used to output pagination controls such as
 page numbers and next/previous links. It works in tandem with

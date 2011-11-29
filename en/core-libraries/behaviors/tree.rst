@@ -1,6 +1,8 @@
 Tree
 ####
 
+.. php:class:: TreeBehavior()
+
 It's fairly common to want to store hierarchical data in a database
 table. Examples of such data might be categories with unlimited
 subcategories, data related to a multilevel menu system or a

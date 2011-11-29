@@ -1,6 +1,8 @@
 Translate
 #########
 
+.. php:class:: TranslateBehavior()
+
 TranslateBehavior is actually quite easy to setup and works out of
 the box with very little configuration. In this section, you will
 learn how to add and setup the behavior to use in any model.

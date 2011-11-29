@@ -1,7 +1,7 @@
 JsHelper
 ########
 
-.. php:class:: JsHelper
+.. php:class:: JsHelper(View $view, array $settings = array())
 
 Since the beginning CakePHP's support for Javascript has been with
 Prototype/Scriptaculous. While we still think these are an
