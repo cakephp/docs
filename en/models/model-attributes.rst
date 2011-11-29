@@ -240,16 +240,6 @@ Example usage::
        public $name = 'Example';
     }
 
-schemaName
-===========
-
-This property holds the physical schema name in the database and
-typically will be automatically set during model instantiation by
-the model's datasource, see
-:doc:`/models/datasources`.
-
-.. versionadded:: 2.1
-
 cacheQueries
 ============
 

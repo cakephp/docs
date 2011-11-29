@@ -724,45 +724,6 @@ like to fetch Recipe data when using the Ingredient model.
 
     For more information on saving HABTM objects see :ref:`saving-habtm`
 
-Cross database HABTM
-~~~~~~~~~~~~~~~~~~~~
-
-In some cases, you might want to store the join table in a separate database.  To achieve
-this, you need to create the join Model class with the appropriate ``$useDbConfig`` value
-and specify it as the ``with`` key in the association configuration. For example, the
-following configuration stores *Player* data in the default database, while models *Guild*
-and *GuildsPlayer* are stored in a separated datasource called `guilddb`::
-
-    <?php
-    // Model/Player.php
-    class Player extends AppModel {
-        public $hasAndBelongsToMany = array(
-            'Guild' => array(
-                'className'                  => 'Guild',
-                'with'                       => 'PlayersGuild',
-                ),
-            );
-    }
-
-    // Model/Guild.php
-    class Guild extends AppModel {
-        public $useDbConfig = 'guilddb';
-        public $hasAndBelongsToMany = array(
-            'Player' => array(
-                'className'                  => 'Guild',
-                'with'                       => 'PlayersGuild',
-                ),
-            );
-    }
-
-    // Model/PlayersGuild.php
-    class PlayersGuild extends AppModel {
-        public $useDbConfig = 'guilddb';
-    }
-
-.. note:: You need to ensure the database you are using supports cross database queries.
-
-.. versionadded:: 2.1
 
 .. _hasMany-through:
 
