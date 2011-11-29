@@ -49,6 +49,11 @@ tests, and offers a file path based UI::
 
 The old testsuite shell and its syntax are still available.
 
+General
+-------
+
+- Generated files no longer contain timestamps with the generation datetime.
+
 Routing
 =======
 
