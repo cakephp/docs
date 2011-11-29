@@ -29,14 +29,14 @@ configure and use components.
 .. toctree::
     :maxdepth: 2
 
+    core-libraries/components/access-control-lists
     core-libraries/components/authentication
     core-libraries/components/cookie
+    core-libraries/components/email
     core-libraries/components/request-handling
     core-libraries/components/pagination
     core-libraries/components/security-component
     core-libraries/components/sessions
-    core-libraries/components/access-control-lists
-    core-libraries/components/email
 
 .. _core-helpers:
 
@@ -95,20 +95,20 @@ logging, internationalization and more.
 .. toctree::
     :maxdepth: 2
 
-    core-libraries/logging
-    core-libraries/caching
-    core-libraries/internationalization-and-localization
-    core-utility-libraries/set
-    core-utility-libraries/string
-    core-utility-libraries/xml
-    core-utility-libraries/inflector
     core-utility-libraries/app
-    core-utility-libraries/httpsocket
-    core-utility-libraries/router
-    core-utility-libraries/security
+    core-libraries/caching
     core-utility-libraries/sanitize
     core-utility-libraries/email
     core-utility-libraries/file-folder
+    core-utility-libraries/httpsocket
+    core-utility-libraries/inflector
+    core-libraries/internationalization-and-localization
+    core-libraries/logging
+    core-utility-libraries/router
+    core-utility-libraries/security
+    core-utility-libraries/set
+    core-utility-libraries/string
+    core-utility-libraries/xml
 
 
 .. meta::
