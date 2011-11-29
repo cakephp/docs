@@ -452,7 +452,7 @@ Inserting Well-Formatted elements
     output between ``scriptStart()`` and ``scriptEnd()`` and create an
     script tag. Options are the same as ``scriptBlock()``
 
-    .. php:method:: scriptEnd()
+.. php:method:: scriptEnd()
 
     End a buffering script block, returns the generated script element
     or null if the script block was opened with inline = false.
@@ -467,7 +467,49 @@ Inserting Well-Formatted elements
 
         $this->Html->scriptEnd();
 
-    .. php:method:: tableHeaders(array $names, array $trOptions = null, array $thOptions = null)
+.. php:method:: nestedList(array $list, array $options = array(), array $itemOptions = array(), string $tag = 'ul')
+
+    :param array $list: Set of elements to list.
+    :param array $options: Additional HTML attributes of the list (ol/ul) tag 
+        or if ul/ol use that as tag.
+    :param array $itemOptions: Additional HTML attributes of the list item (LI) 
+        tag.
+    :param string $tag: Type of list tag to use (ol/ul).
+
+    Build a nested list (UL/OL) out of an associative array::
+
+        <?php
+        $list = array(
+            'Languages' => array(
+                'English' => array(
+                    'American',
+                    'Canadian',
+                    'British',
+                ),
+                'Spanish',
+                'German',
+            )
+        );
+        echo $this->Html->nestedList($list);
+
+        // Output (minus the whitespace)
+        <ul>
+            <li>Languages
+                <ul>
+                    <li>English
+                        <ul>
+                            <li>American</li>
+                            <li>Canadian</li>
+                            <li>British</li>
+                        </ul>
+                    </li>
+                    <li>Spanish</li>
+                    <li>German</li>
+                </ul>
+            </li>
+        </ul>
+
+.. php:method:: tableHeaders(array $names, array $trOptions = null, array $thOptions = null)
 
     :param array $names: An array of strings to create table headings.
     :param array $trOptions: An array of :term:`html attributes` for the <tr>
@@ -612,56 +654,80 @@ Inserting Well-Formatted elements
             "?" => array("foo" => "bar"),
             "#" => "first"));
         
-        //Output
+        // Output
         /posts/search?foo=bar#first
 
     For further information check
     `Router::url <http://api20.cakephp.org/class/router#method-Routerurl>`_
     in the API.
 
+.. php:method:: useTag(string $tag)
+
+    Returns a formatted existent block of ``$tag``::
+
+        <?php
+        $this->Html->useTag(
+            'form',
+            'http://example.com',
+            array('method' => 'post', 'class' => 'myform')
+        );
+
+        // Output
+        <form action="http://example.com" method="post" class="myform">
+
 Changing the tags output by HtmlHelper
 ======================================
 
-The built in tag sets for :php:class:`HtmlHelper` are XHTML compliant,
-however if you need to generate HTML for HTML4 you will need to
-create and load a new tags config file containing the tags you'd
-like to use. To change the tags used create ``app/config/tags.php``
-containing::
+.. php:method:: loadConfig(mixed $configFile, string $path = null)
 
-    <?php
-    $tags = array(
-        'metalink' => '<link href="%s"%s >',
-        'input' => '<input name="%s" %s >',
-        // ...
-    );
+    The built in tag sets for :php:class:`HtmlHelper` are XHTML compliant,
+    however if you need to generate HTML for HTML4 you will need to
+    create and load a new tags config file containing the tags you'd
+    like to use. To change the tags used create ``app/Config/tags.php``
+    containing::
 
-You can then load this tag set by calling
-``$html->loadConfig('tags');``
+        <?php
+        $tags = array(
+            'metalink' => '<link href="%s"%s >',
+            'input' => '<input name="%s" %s >',
+            // ...
+        );
+
+    You can then load this tag set by calling
+    ``$html->loadConfig('tags');``
 
 Creating breadcrumb trails with HtmlHelper
 ==========================================
 
-CakePHP has the built in ability to automatically create a
-breadcrumb trail in your app. To set this up, first add something
-similar to the following in your layout template::
+.. php:method:: getCrumbs(string $separator = '&raquo;', string $startText = false)
 
-    <?php
-    echo $this->Html->getCrumbs(' > ', 'Home');
+    CakePHP has the built in ability to automatically create a
+    breadcrumb trail in your app. To set this up, first add something
+    similar to the following in your layout template::
 
-Now, in your view you'll want to add the following to start the
-breadcrumb trails on each of the pages::
+        <?php
+        echo $this->Html->getCrumbs(' > ', 'Home');
 
-    <?php
-    echo $this->Html->addCrumb('Users', '/users');
-    echo $this->Html->addCrumb('Add User', '/users/add');
+.. php:method:: addCrumb(string $name, string $link = null, mixed $options = null)
 
-This will add the output of "**Home > Users > Add User**" in your
-layout where getCrumbs was added.
+    Now, in your view you'll want to add the following to start the
+    breadcrumb trails on each of the pages::
 
+        <?php
+        echo $this->Html->addCrumb('Users', '/users');
+        echo $this->Html->addCrumb('Add User', '/users/add');
 
-.. todo::
+    This will add the output of "**Home > Users > Add User**" in your
+    layout where getCrumbs was added.
 
-    Missing methods getCrumbList(), loadConfig(), nestedList(), useTag()
+.. php:method:: getCrumbList(array $options = array())
+
+    Returns breadcrumbs as a (x)html list.
+
+    This method uses :php:meth:`HtmlHelper::tag()` to generate list and its 
+    elements. Works similar to :php:meth:`HtmlHelper::getCrumbs()`, so it uses 
+    options which every crumb was added with.
+
 
 .. meta::
     :title lang=en: HtmlHelper
