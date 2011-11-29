@@ -407,6 +407,7 @@ More about Views
 
     views/themes
     views/media-view
+    views/json-and-xml-views
     views/helpers
 
 
