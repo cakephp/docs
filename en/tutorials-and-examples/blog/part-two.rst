@@ -49,8 +49,8 @@ directory. Here's what the basic controller should look like::
 
     <?php
     class PostsController extends AppController {
-        public $helpers = array ('Html','Form');
         public $name = 'Posts';
+        public $helpers = array('Html', 'Form');
     }
 
 Now, lets add an action to our controller. Actions often represent
@@ -63,9 +63,9 @@ posts. The code for that action would look something like this:
 
     <?php
     class PostsController extends AppController {
-        public $helpers = array ('Html','Form');
         public $name = 'Posts';
-    
+        public $helpers = array('Html', 'Form');
+
         function index() {
             $this->set('posts', $this->Post->find('all'));
         }
@@ -217,13 +217,13 @@ PostsController now::
 
     <?php
     class PostsController extends AppController {
-        public $helpers = array('Html', 'Form');
         public $name = 'Posts';
-    
+        public $helpers = array('Html', 'Form');
+
         public function index() {
              $this->set('posts', $this->Post->find('all'));
         }
-    
+
         public function view($id = null) {
             $this->Post->id = $id;
             $this->set('post', $this->Post->read());
@@ -268,20 +268,20 @@ PostsController:
 
     <?php
     class PostsController extends AppController {
-        public $helpers = array('Html', 'Form');
         public $name = 'Posts';
+        public $helpers = array('Html', 'Form');
         public $components = array('Session');
-    
+
         public function index() {
             $this->set('posts', $this->Post->find('all'));
         }
-    
+
         public function view($id) {
             $this->Post->id = $id;
             $this->set('post', $this->Post->read());
-    
+
         }
-    
+
         public function add() {
             if ($this->request->is('post')) {
                 if ($this->Post->save($this->request->data)) {

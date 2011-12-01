@@ -66,20 +66,20 @@ set to a value greater than 0.
 
         Debugger::dump($foo);
 
-        //outputs
+        // outputs
         array(
             1,
             2,
             3
         )
 
-        //simple object
+        // simple object
         $car = new Car();
 
         Debugger::dump($car);
 
-        //outputs
-        Car::
+        // outputs
+        Car
         Car::colour = 'red'
         Car::make = 'Toyota'
         Car::model = 'Camry'

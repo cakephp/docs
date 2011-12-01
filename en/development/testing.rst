@@ -351,9 +351,9 @@ model. Create a file named ``ArticleFixture.php`` in your
               'updated' => 'datetime'
           );
           public $records = array(
-              array ('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-              array ('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-              array ('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
+              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
+              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
           );
      }
 
@@ -454,9 +454,9 @@ as it was shown on previous section. For example::
      class ArticleFixture extends CakeTestFixture {
           public $import = 'Article';
           public $records = array(
-              array ('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-              array ('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-              array ('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
+              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
+              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
           );
        }
 
@@ -515,7 +515,7 @@ Let's say we already have our Article model defined on
                       'fields' => $fields
                 );
 
-                return $this->find('all',$params);
+                return $this->find('all', $params);
             }
 
      }
@@ -561,9 +561,9 @@ this::
         function testPublished() {
             $result = $this->Article->published(array('id', 'title'));
             $expected = array(
-                array('Article' => array( 'id' => 1, 'title' => 'First Article' )),
-                array('Article' => array( 'id' => 2, 'title' => 'Second Article' )),
-                array('Article' => array( 'id' => 3, 'title' => 'Third Article' ))
+                array('Article' => array('id' => 1, 'title' => 'First Article')),
+                array('Article' => array('id' => 2, 'title' => 'Second Article')),
+                array('Article' => array('id' => 3, 'title' => 'Third Article'))
             );
 
             $this->assertEquals($expected, $result);
@@ -1035,14 +1035,14 @@ a *shell script step* to the build that contains the following::
     cat > app/Config/database.php <<'DATABASE_PHP'
     <?php
     class DATABASE_CONFIG {
-      public $test = array(
-        'datasource' => 'Database/Mysql',
-        'host' => 'localhost',
-        'database' => 'jenkins_test',
-        'login' => 'jenkins',
-        'password' => 'cakephp_jenkins',
-        'encoding' => 'utf8'
-      );
+        public $test = array(
+            'datasource' => 'Database/Mysql',
+            'host'       => 'localhost',
+            'database'   => 'jenkins_test',
+            'login'      => 'jenkins',
+            'password'   => 'cakephp_jenkins',
+            'encoding'   => 'utf8'
+        );
     }
     DATABASE_PHP
 

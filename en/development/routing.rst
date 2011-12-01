@@ -513,6 +513,7 @@ order they appear in the called url.
 
 ::
 
+    <?php
     debug($this->request->params['pass']);
     debug($this->passedArgs); 
 
@@ -532,6 +533,7 @@ Either of the above would output::
 When generating urls, using a :term:`routing array` you add passed 
 arguments as values without string keys in the array::
 
+    <?php
     array('controller' => 'posts', 'action' => 'view', 5)
 
 Since ``5`` has a numeric key, it is treated as a passed argument.
@@ -591,6 +593,7 @@ named parameters or routed parameters, and defaults to assuming you
 intended them to be routed parameters. To connect named parameters
 in the router use :php:meth:`Router::connectNamed()`::
 
+    <?php
     Router::connectNamed(array('chapter', 'section'));
 
 Will ensure that your chapter and section parameters reverse route
@@ -599,6 +602,7 @@ correctly.
 When generating urls, using a :term:`routing array` you add named 
 parameters as values with string keys matching the name::
 
+    <?php
     array('controller' => 'posts', 'action' => 'view', 'chapter' => 'association')
 
 Since 'chapter' doesn't match any defined route elements, it's treated 
@@ -617,12 +621,12 @@ syntax::
 
     <?php
     $url = Router::url(array(
-      'controller' => 'posts',
-      'action' => 'index',
-      'filter' => array(
-        'published' => 1
-        'frontpage' => 1
-      )
+        'controller' => 'posts',
+        'action' => 'index',
+        'filter' => array(
+            'published' => 1
+            'frontpage' => 1
+        )
     ));
 
 The above would generate the url ``/posts/index/filter[published]:1/filter[frontpage]:1``. 
@@ -631,8 +635,8 @@ as an array, just as you sent them to :php:meth:`Router::url`::
 
     <?php
     $this->passedArgs['filter'] = array(
-      'published' => 1
-      'frontpage' => 1
+        'published' => 1
+        'frontpage' => 1
     );
 
 Arrays can be deeply nested as well, allowing you even more flexibility in 
@@ -640,23 +644,23 @@ passing arguments::
 
     <?php
     $url = Router::url(array(
-      'controller' => 'posts',
-      'action' => 'search',
-      'models' => array(
-        'post' => array(
-          'order' => 'asc',
-          'filter' => array(
-            'published' => 1
-          )
+        'controller' => 'posts',
+        'action' => 'search',
+        'models' => array(
+            'post' => array(
+                'order' => 'asc',
+                'filter' => array(
+                    'published' => 1
+                )
+            ),
+            'comment' => array(
+                'order' => 'desc',
+                'filter' => array(
+                    'spam' => 0
+                )
+            ),
         ),
-        'comment' => array(
-          'order' => 'desc',
-          'filter' => array(
-            'spam' => 0
-          )
-        ),
-      ),
-      'users' => array(1, 2, 3)
+        'users' => array(1, 2, 3)
     ));
 
 You would end up with a pretty long url like this (wrapped for easy reading)::
@@ -672,18 +676,17 @@ which you passed to the router::
     <?php
     $this->passedArgs['models'] = array(
         'post' => array(
-          'order' => 'asc',
-          'filter' => array(
-            'published' => 1
-          )
+            'order' => 'asc',
+            'filter' => array(
+                'published' => 1
+            )
         ),
         'comment' => array(
-          'order' => 'desc',
-          'filter' => array(
-            'spam' => 0
-          )
+            'order' => 'desc',
+            'filter' => array(
+                'spam' => 0
+            )
         ),
-      ),
     );
 
 .. _controlling-named-parameters:
@@ -720,16 +723,16 @@ Parse only the page parameter if the current action is 'index'::
 
     <?php
     Router::connectNamed(
-       array('page' => array('action' => 'index')),
-       array('default' => false, 'greedy' => false)
+        array('page' => array('action' => 'index')),
+        array('default' => false, 'greedy' => false)
     );
 
 Parse only the page parameter if the current action is 'index' and the controller is 'pages'::
 
     <?php
     Router::connectNamed(
-       array('page' => array('action' => 'index', 'controller' => 'pages')),
-       array('default' => false, 'greedy' => false)
+        array('page' => array('action' => 'index', 'controller' => 'pages')),
+        array('default' => false, 'greedy' => false)
     ); 
 
 
@@ -895,9 +898,9 @@ Router API
     
         <?php
         Router::connect(
-          '/:lang/:controller/:action/:id',
-          array(),
-          array('id' => '[0-9]+', 'lang' => '[a-z]{3}')
+            '/:lang/:controller/:action/:id',
+            array(),
+            array('id' => '[0-9]+', 'lang' => '[a-z]{3}')
         );
     
     Shows connecting a route with custom route parameters as well as providing

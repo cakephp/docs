@@ -142,9 +142,9 @@ could look like::
     class AppExceptionHandler {
         public static function handle($error) {
             echo 'Oh noes! ' . $error->getMessage();
-            ...
+            // ...
         }
-        ...
+        // ...
     }
 
 You can run any code you wish inside ``handleException``.  The code above would
@@ -184,9 +184,7 @@ the default exception rendering.  It receives the thrown exception as its only
 argument.  You should implement your error handling in that method::
 
     <?php
-
     class AppController extends Controller {
-
         function appError($error) {
             // custom logic goes here.
         }
@@ -203,8 +201,8 @@ is used.  Your custom exception renderer class should be placed in ``app/Lib/Err
 In a custom exception rendering class you can provide specialized handling for 
 application specific errors::
 
-    // in app/Lib/Error/AppExceptionRenderer.php
     <?php
+    // in app/Lib/Error/AppExceptionRenderer.php
     App::uses('ExceptionRenderer', 'Error');
 
     class AppExceptionRenderer extends ExceptionRenderer {
