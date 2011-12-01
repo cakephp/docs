@@ -596,6 +596,43 @@ with usage examples.
     supply a given format. The more work you can do for your users, the
     better.
 
+.. php:staticmethod:: datetime()
+    
+    This rule ensures that the data is a valid datetime format. A
+    parameter (which can be an array) can be passed to specify the format
+    of the date. The value of the parameter can be one or more of the
+    following:
+
+    -  ‘dmy’ e.g. 27-12-2006 or 27-12-06 (separators can be a space,
+       period, dash, forward slash)
+    -  ‘mdy’ e.g. 12-27-2006 or 12-27-06 (separators can be a space,
+       period, dash, forward slash)
+    -  ‘ymd’ e.g. 2006-12-27 or 06-12-27 (separators can be a space,
+       period, dash, forward slash)
+    -  ‘dMy’ e.g. 27 December 2006 or 27 Dec 2006
+    -  ‘Mdy’ e.g. December 27, 2006 or Dec 27, 2006 (comma is optional)
+    -  ‘My’ e.g. (December 2006 or Dec 2006)
+    -  ‘my’ e.g. 12/2006 or 12/06 (separators can be a space, period,
+       dash, forward slash)
+
+    If no keys are supplied, the default key that will be used is
+    ‘ymd’::
+
+        <?php
+        public $validate = array(
+            'birthday' => array(
+                'rule' => array('datetime', 'dmy'),
+                'message' => 'Please enter a valid date and time.'
+            )
+        );
+        ?>
+
+    Also a second parameter can be passed to specify a custom regular
+    expression. If this parameter is used, this will be the only
+    validation that will occur.
+
+    Note that unlike date(), datetime() will validate a date and a time.
+
 .. php:staticmethod:: decimal()
 
     This rule ensures that the data is a valid decimal number. A
