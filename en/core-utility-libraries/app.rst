@@ -53,6 +53,10 @@ Loading classes
         ``App::uses('PaymentProcessor', 'Lib');``
     Vendors
         ``App::uses('Textile', 'Vendor');``
+    Utility
+        ``App::uses('String', 'Utility');``
+
+    So basically the second param should simply match the folder path of the class file in core or app.
 
 .. note::
 
