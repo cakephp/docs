@@ -36,7 +36,7 @@ Getting Cake
 
 First, let's get a copy of fresh Cake code.
 
-To get a fresh download, visit the CakePHP project on github:
+To get a fresh download, visit the CakePHP project on GitHub:
 `http://github.com/cakephp/cakephp/downloads <http://github.com/cakephp/cakephp/downloads>`_
 and download the latest release of 2.0
 
