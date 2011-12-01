@@ -281,7 +281,7 @@ This is how we retrieve the above associations with Containable::
 
     <?php
     $this->User->find('all', array(
-        'contain'=>array(
+        'contain' => array(
             'Profile',
             'Account' => array(
                 'AccountSummary'

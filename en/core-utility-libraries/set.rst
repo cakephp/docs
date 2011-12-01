@@ -169,7 +169,7 @@ Foo
         <?php
         $a = array(
             0 => array('pages' => array('name' => 'page')),
-            1 => array('fruites'=> array('name' => 'fruit')),
+            1 => array('fruites' => array('name' => 'fruit')),
             'test' => array(array('name' => 'jippi')),
             'dot.test' => array(array('name' => 'jippi'))
         );
@@ -1134,8 +1134,8 @@ Foo
             )
         );
         $arry2 = 4;
-        $arry3 = array(0=>"test array", "cats"=>"dogs", "people" => 1267);
-        $arry4 = array("cats"=>"felines", "dog"=>"angry");
+        $arry3 = array(0 => "test array", "cats" => "dogs", "people" => 1267);
+        $arry4 = array("cats" => "felines", "dog" => "angry");
         $res = Set::merge($arry1, $arry2, $arry3, $arry4);
 
         /* $res now looks like:
@@ -1344,8 +1344,8 @@ Foo
     ::
     
         <?php
-        $array1 = array('ModelOne' => array('id'=>1001, 'field_one'=>'a1.m1.f1', 'field_two'=>'a1.m1.f2'));
-        $array2 = array('ModelOne' => array('id'=>1003, 'field_one'=>'a3.m1.f1', 'field_two'=>'a3.m1.f2', 'field_three'=>'a3.m1.f3'));
+        $array1 = array('ModelOne' => array('id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2'));
+        $array2 = array('ModelOne' => array('id' => 1003, 'field_one' => 'a3.m1.f1', 'field_two' => 'a3.m1.f2', 'field_three' => 'a3.m1.f3'));
         $res = Set::pushDiff($array1, $array2);
 
         /* $res now looks like:
@@ -1365,8 +1365,8 @@ Foo
     ::
 
         <?php
-        $array1 = array("a"=>"b", 1 => 20938, "c"=>"string");
-        $array2 = array("b"=>"b", 3 => 238, "c"=>"string", array("extra_field"));
+        $array1 = array("a" => "b", 1 => 20938, "c" => "string");
+        $array2 = array("b" => "b", 3 => 238, "c" => "string", array("extra_field"));
         $res = Set::pushDiff($array1, $array2);
         /* $res now looks like:
             Array
@@ -1423,14 +1423,14 @@ Foo
         $result = Set::reverse(false);
         // false
         $a = array(
-            'Post' => array('id'=> 1, 'title' => 'First Post'),
+            'Post' => array('id' => 1, 'title' => 'First Post'),
             'Comment' => array(
-                array('id'=> 1, 'title' => 'First Comment'),
-                array('id'=> 2, 'title' => 'Second Comment')
+                array('id' => 1, 'title' => 'First Comment'),
+                array('id' => 2, 'title' => 'Second Comment')
             ),
             'Tag' => array(
-                array('id'=> 1, 'title' => 'First Tag'),
-                array('id'=> 2, 'title' => 'Second Tag')
+                array('id' => 1, 'title' => 'First Tag'),
+                array('id' => 2, 'title' => 'Second Tag')
             ),
         );
         $map = Set::map($a); // Turn $a into a class object

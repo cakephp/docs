@@ -30,7 +30,7 @@ optional::
         'group' => array('Model.field'), //fields to GROUP BY
         'limit' => n, //int
         'page' => n, //int
-        'offset'=> n, //int   
+        'offset' => n, //int   
         'callbacks' => true //other possible values are false, 'before', 'after'
     )
 

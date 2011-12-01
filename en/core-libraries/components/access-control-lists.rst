@@ -542,7 +542,7 @@ models to save data like we always do:
         );
         
         // Iterate and create ARO groups
-        foreach($groups as $data) {
+        foreach ($groups as $data) {
             // Remember to call create() when saving in loops...
             $aro->create();
             
@@ -652,7 +652,7 @@ specific model records in our database.
         );
         
         // Iterate and create AROs (as children)
-        foreach($users as $data) {
+        foreach ($users as $data) {
             // Remember to call create() when saving in loops...
             $aro->create();
     

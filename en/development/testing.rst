@@ -684,7 +684,7 @@ we need a controller to access the data in the model.
 If the ``startup()`` function of the component looks like this::
 
     <?php
-    public function startup(Controller $controller){
+    public function startup(Controller $controller) {
         $this->Transporter = $controller->Transporter;
     }
 

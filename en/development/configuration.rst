@@ -352,7 +352,7 @@ anywhere within your application, in a static context::
 
         <?php
         Configure::write(
-            'Company',array('name'=>'Pizza, Inc.','slogan'=>'Pizza for your body and soul')
+            'Company', array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul')
         );
 
     You can use ``Configure::write('debug', $int)`` to switch between

@@ -87,7 +87,7 @@ To configure different fields for user in ``$components`` array::
     <?php
     // Pass settings in $components array
     public $components = array(
-        'Auth'=> array(
+        'Auth' => array(
             'authenticate' => array(
                 'Form' => array(
                     'fields' => array('username' => 'email')
@@ -106,7 +106,7 @@ To configure different fields for user in ``$components`` array::
         <?php
         // Pass settings in $components array
         public $components = array(
-            'Auth'=> array(
+            'Auth' => array(
                 'loginAction' => array(
                     'controller' => 'users',
                     'action' => 'login',

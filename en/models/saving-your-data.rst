@@ -404,12 +404,12 @@ First, you need to build your form for both Company and Account
 models (we'll assume that Company hasMany Account)::
 
     <?php
-    echo $form->create('Company', array('action'=>'add'));
-    echo $form->input('Company.name', array('label'=>'Company name'));
+    echo $form->create('Company', array('action' => 'add'));
+    echo $form->input('Company.name', array('label' => 'Company name'));
     echo $form->input('Company.description');
     echo $form->input('Company.location');
     
-    echo $form->input('Account.0.name', array('label'=>'Account name'));
+    echo $form->input('Account.0.name', array('label' => 'Account name'));
     echo $form->input('Account.0.username');
     echo $form->input('Account.0.email');
     
@@ -601,7 +601,7 @@ $recipe\_id is already set to something)::
     <?php echo $this->Form->create('Tag');?>
         <?php echo $this->Form->input(
             'Recipe.id', 
-            array('type'=>'hidden', 'value' => $recipe_id)); ?>
+            array('type' => 'hidden', 'value' => $recipe_id)); ?>
         <?php echo $this->Form->input('Tag.name'); ?>
     <?php echo $this->Form->end('Add Tag'); ?>
 

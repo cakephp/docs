@@ -174,7 +174,7 @@ association name.::
 
     <?php
     $this->Post->bindTranslation(array('name' => 'nameTranslation'));
-    $this->Post->find('all', array('recursive'=>1)); // need at least recursive 1 for this to work.
+    $this->Post->find('all', array('recursive' => 1)); // need at least recursive 1 for this to work.
 
 With this setup the result of your find() should look something
 like this::

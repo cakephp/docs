@@ -384,7 +384,7 @@ which can be easily integrated into your table column headers::
             <th><?php echo $this->Paginator->sort('id', 'ID'); ?></th> 
             <th><?php echo $this->Paginator->sort('title', 'Title'); ?></th> 
         </tr> 
-           <?php foreach($data as $recipe): ?> 
+           <?php foreach ($data as $recipe): ?> 
         <tr> 
             <td><?php echo $recipe['Recipe']['id']; ?> </td> 
             <td><?php echo h($recipe['Recipe']['title']); ?> </td> 
@@ -403,7 +403,7 @@ It is also possible to sort a column based on associations::
             <th><?php echo $this->Paginator->sort('title', 'Title'); ?></th> 
             <th><?php echo $this->Paginator->sort('Author.name', 'Author'); ?></th> 
         </tr> 
-           <?php foreach($data as $recipe): ?> 
+           <?php foreach ($data as $recipe): ?> 
         <tr> 
             <td><?php echo h($recipe['Recipe']['title']); ?> </td> 
             <td><?php echo h($recipe['Author']['name']); ?> </td> 

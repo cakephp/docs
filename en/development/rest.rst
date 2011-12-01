@@ -95,7 +95,7 @@ this::
         }
     
         function delete($id) {
-            if($this->Recipe->delete($id)) {
+            if ($this->Recipe->delete($id)) {
                 $message = 'Deleted';
             } else {
                 $message = 'Error';

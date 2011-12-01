@@ -534,7 +534,7 @@ Advanced Usage
     Categories) that moves a node up the tree::
 
         <?php
-        function moveup($name = null, $delta = null){
+        function moveup($name = null, $delta = null) {
                 $cat = $this->Category->findByName($name);
                 if (empty($cat)) {
                     $this->Session->setFlash('There is no category named ' . $name);

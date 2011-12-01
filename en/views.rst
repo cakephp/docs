@@ -267,7 +267,7 @@ like the following::
 
     <h2>Latest Posts</h2>
     <?php $posts = $this->requestAction('posts/index/sort:created/direction:asc/limit:5'); ?>
-    <?php foreach($posts as $post): ?>
+    <?php foreach ($posts as $post): ?>
     <ol>
         <li><?php echo $post['Post']['title']; ?></li>
     </ol>

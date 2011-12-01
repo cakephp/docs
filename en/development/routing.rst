@@ -493,7 +493,7 @@ had a controller action that looked like::
 
     <?php
     CalendarsController extends AppController{
-        function view($arg1, $arg2){
+        function view($arg1, $arg2) {
             debug(func_get_args());
         }
     }

@@ -14,7 +14,7 @@ that allow you to tack on any extra attributes on your tags. Here
 are a few examples of how to use the $htmlAttributes parameter::
 
     Desired attributes: <tag class="someClass" />      
-    Array parameter: array('class'=>'someClass')
+    Array parameter: array('class' => 'someClass')
      
     Desired attributes: <tag name="foo" value="bar" />  
     Array parameter:  array('name' => 'foo', 'value' => 'bar')
@@ -567,9 +567,9 @@ Inserting Well-Formatted elements
         <tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td>No</td></tr>
         
         echo $this->Html->tableCells(array(
-            array('Jul 7th, 2007', array('Best Brownies', array('class'=>'highlight')) , 'Yes'),
+            array('Jul 7th, 2007', array('Best Brownies', array('class' => 'highlight')) , 'Yes'),
             array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),
-            array('Aug 1st, 2006', 'Anti-Java Cake', array('No', array('id'=>'special'))),
+            array('Aug 1st, 2006', 'Anti-Java Cake', array('No', array('id' => 'special'))),
         ));
          
         // Output

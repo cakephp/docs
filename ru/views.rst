@@ -230,7 +230,7 @@ CakePHP может помочь вам в повторном использов�
 
     <?php
     $this->element('helpbox', array(), array(
-            "cache" => array('config'=> 'short', 'key'=>'уникальное значение')
+            "cache" => array('config' => 'short', 'key' => 'уникальное значение')
         )
     );
 
@@ -264,7 +264,7 @@ CakePHP может помочь вам в повторном использов�
 
     <h2>Последние посты</h2>
     <?php $posts = $this->requestAction('posts/index/sort:created/direction:asc/limit:5'); ?>
-    <?php foreach($posts as $post): ?>
+    <?php foreach ($posts as $post): ?>
     <ol>
         <li><?php echo $post['Post']['title']; ?></li>
     </ol>

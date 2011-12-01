@@ -521,7 +521,7 @@ Other Useful Methods
         // View/Elements/latest_comments.ctp
 
         $comments = $this->requestAction('/comments/latest');
-        foreach($comments as $comment) {
+        foreach ($comments as $comment) {
             echo $comment['Comment']['title'];
         }
 
