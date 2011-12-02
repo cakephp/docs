@@ -6,7 +6,7 @@ Pré-requis
 
 -  Serveur HTTP. Par exemple: Apache. mod\_rewrite est recommandé
    mais en aucune façon obligatoire.
--  PHP 5.2.9 ou supérieur.
+-  PHP 5.2.6 ou supérieur.
 
 Techniquement, un moteur de base de données n'est pas obligatoire,
 mais nous imaginons que la plupart des applications en font usage.

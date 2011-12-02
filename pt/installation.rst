@@ -11,7 +11,7 @@ Requisitos
 
 -  Servidor HTTP. Por exemplo: Apache. É preferível ter o mod\_rewrite
    habilitado mas não é uma exigência.
--  PHP 5.2.9 ou superior.
+-  PHP 5.2.6 ou superior.
 
 Tecnicamente não é exigido um banco de dados mas imaginamos que a maioria
 das aplicações irá utilizar um. O CakePHP suporta uma variedade deles:
