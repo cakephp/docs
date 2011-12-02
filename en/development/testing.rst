@@ -990,8 +990,8 @@ prefix your plugin fixtures with ``plugin.blog.blog_post``::
     class BlogPostTest extends CakeTestCase {
 
         // Plugin fixtures located in /app/Plugin/Blog/Test/Fixture/
-        public $fixtures = array('plugin.pizza.pizza_order');
-        public $PizzaOrderTest;
+        public $fixtures = array('plugin.blog.blog_post');
+        public $BlogPost;
 
         function testSomething() {
             // ClassRegistry makes the model use the test database connection
