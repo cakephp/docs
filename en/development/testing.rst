@@ -850,7 +850,7 @@ method key::
         // some assertions.
     }
 
-The data key will bet used as query string parameters when simulating a GET
+The data key will be used as query string parameters when simulating a GET
 request.
 
 Choosing the return type
