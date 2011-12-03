@@ -95,7 +95,7 @@ this::
         }
     
         function delete($id) {
-            if($this->Recipe->delete($id)) {
+            if ($this->Recipe->delete($id)) {
                 $message = 'Deleted';
             } else {
                 $message = 'Error';
@@ -182,7 +182,7 @@ route would look like, without using :php:meth:`Router::mapResources()`::
         "/:controller/:id",
         array("action" => "edit", "[method]" => "PUT"),
         array("id" => "[0-9]+")
-    )
+    );
 
 Advanced routing techniques are covered elsewhere, so we'll focus
 on the most important point for our purposes here: the [method] key

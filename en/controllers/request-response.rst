@@ -179,7 +179,7 @@ Some examples would be::
     // Add an option detector
     $this->request->addDetector('internalIp', array(
         'env' => 'CLIENT_IP', 
-        'options' => array('192.168.0.101, '192.168.0.100')
+        'options' => array('192.168.0.101', '192.168.0.100')
     ));
     
     // Add a callback detector. Can either be an anonymous function or a regular callable.
@@ -502,7 +502,7 @@ test and makes testing controllers easier::
     function testSomething() {
         $this->controller->response = $this->getMock('CakeResponse');
         $this->controller->response->expects($this->once())->method('header');
-        ...
+        // ...
     }
 
 Additionally you can more easily run tests from the command line, as you can use

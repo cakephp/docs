@@ -10,8 +10,8 @@ repetitive things like typing in what could be hundreds of actions
 in a large application.
 
 For this purpose exists a ver handy plugin available at github, called
-`AclExtras <https://github.com/markstory/acl_extras/tree/2.0>` which can
-be downloaded in `The Girhub Downloads page <https://github.com/markstory/acl_extras/zipball/2.0>`
+`AclExtras <https://github.com/markstory/acl_extras/tree/2.0>`_ which can
+be downloaded in `The Github Downloads page <https://github.com/markstory/acl_extras/zipball/2.0>`_
 are we're going to briefly describe how to use it to generate all our ACO's
 
 First grab a copy of the plugin and unzipped or clone it using git into
@@ -43,7 +43,7 @@ be providing one. To allow ARO's access to ACO's from the shell interface use
 the AclShell. For more information on how to use it consult the aclShell help
 which can be accessed by running::
 
-    ./Console/cake acl help
+    ./Console/cake acl --help
 
 Note: \* needs to be quoted ('\*')
 
@@ -64,27 +64,27 @@ function::
     <?php
 
     function beforeFilter() {
-        parent::beforeFilter(); 
+        parent::beforeFilter();
         $this->Auth->allow('initDB'); // We can remove this line after we're finished
     }
 
     function initDB() {
         $group = $this->User->Group;
         //Allow admins to everything
-        $group->id = 1;     
+        $group->id = 1;
         $this->Acl->allow($group, 'controllers');
-     
+
         //allow managers to posts and widgets
         $group->id = 2;
         $this->Acl->deny($group, 'controllers');
         $this->Acl->allow($group, 'controllers/Posts');
         $this->Acl->allow($group, 'controllers/Widgets');
-     
+
         //allow users to only add and edit on posts and widgets
         $group->id = 3;
-        $this->Acl->deny($group, 'controllers');        
+        $this->Acl->deny($group, 'controllers');
         $this->Acl->allow($group, 'controllers/Posts/add');
-        $this->Acl->allow($group, 'controllers/Posts/edit');        
+        $this->Acl->allow($group, 'controllers/Posts/edit');
         $this->Acl->allow($group, 'controllers/Widgets/add');
         $this->Acl->allow($group, 'controllers/Widgets/edit');
         //we add an exit to avoid an ugly "missing views" error message
@@ -117,7 +117,7 @@ your posts and widgets controllers::
 
     <?php
     function beforeFilter() {
-        parent::beforeFilter(); 
+        parent::beforeFilter();
         $this->Auth->allow('index', 'view');
     }
 
@@ -145,7 +145,7 @@ so already::
 
     <h2>Login</h2>
     <?php
-    echo $this->Form->create('User', array('url' => array('controller' => 'users', 'action' =>'login')));
+    echo $this->Form->create('User', array('url' => array('controller' => 'users', 'action' => 'login')));
     echo $this->Form->input('User.username');
     echo $this->Form->input('User.password');
     echo $this->Form->end('Login');
@@ -160,7 +160,7 @@ UsersController::
             $this->Session->setFlash('You are logged in!');
             $this->redirect('/', null, false);
         }
-    }       
+    }
 
 You should now be able to login and everything should work
 auto-magically. When access is denied Auth messages will be

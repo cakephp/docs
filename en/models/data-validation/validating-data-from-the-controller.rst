@@ -12,7 +12,8 @@ First, set the data to the model:
 
 ::
 
-    $this->ModelName->set( $this->data );
+    <?php
+    $this->ModelName->set($this->data);
 
 Then, to check if the data validates, use the validates method of
 the model, which will return true if it validates and false if it
@@ -20,6 +21,7 @@ doesn't:
 
 ::
 
+    <?php
     if ($this->ModelName->validates()) {
         // it validated logic
     } else {
@@ -36,6 +38,7 @@ can pass an options array specifying the fields to validate. e.g.
 
 ::
 
+    <?php
     if ($this->User->validates(array('fieldList' => array('email', 'password')))) {
         // valid
     } else {
@@ -48,6 +51,7 @@ invalidFields method also returns that data as the result.
 
 ::
 
+    <?php
     $errors = $this->ModelName->invalidFields(); // contains validationErrors array
 
 It is important to note that the data must be set to the model
@@ -62,6 +66,7 @@ used:
 
 ::
 
+    <?php
     if ($this->ModelName->saveAll($this->data, array('validate' => 'only'))) {
       // validates
     } else {
@@ -73,6 +78,7 @@ to avoid second check.
 
 ::
 
+    <?php
     if ($this->ModelName->saveAll($this->data, array('validate' => false))) {
         // saving without validation
     } 

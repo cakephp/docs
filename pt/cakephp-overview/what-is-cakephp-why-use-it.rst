@@ -26,7 +26,7 @@ Abaixo segue uma pequena lista dos recursos que você poder desfrutar no CakePHP
 
 -  `Comunidade <http://cakephp.org/feeds>`_ ativa e amigável
 -  `Licença <http://pt.wikipedia.org/wiki/Licença_MIT>`_ flexível
--  Compatível com o PHP 5.2.9 e superior
+-  Compatível com o PHP 5.2.6 e superior
 -  `CRUD <http://pt.wikipedia.org/wiki/CRUD>`_
    integrado para interação com o banco de dados
 -  `Scaffolding <http://en.wikipedia.org/wiki/Scaffold_(programming)>`_

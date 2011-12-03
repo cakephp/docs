@@ -1,6 +1,8 @@
 Containable
 ###########
 
+.. php:class:: ContainableBehavior()
+
 A new addition to the CakePHP 1.2 core is the
 ``ContainableBehavior``. This model behavior allows you to filter
 and limit model find operations. Using Containable will help you
@@ -180,7 +182,7 @@ and nothing else — you could do something like the following::
     $this->Post->contain('Comment.author');
     $this->Post->find('all');
     
-    //or..
+    // or..
     
     $this->Post->find('all', array('contain' => 'Comment.author'));
 
@@ -279,7 +281,7 @@ This is how we retrieve the above associations with Containable::
 
     <?php
     $this->User->find('all', array(
-        'contain'=>array(
+        'contain' => array(
             'Profile',
             'Account' => array(
                 'AccountSummary'

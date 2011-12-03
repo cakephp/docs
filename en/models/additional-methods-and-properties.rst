@@ -13,13 +13,12 @@ the fat model.
 
     <?php
     class Example extends AppModel {
-    
-       function getRecent() {
-          $conditions = array(
-             'created BETWEEN (curdate() - interval 7 day) and (curdate() - interval 0 day))'
-          );
-          return $this->find('all', compact('conditions'));
-       }
+        function getRecent() {
+            $conditions = array(
+                'created BETWEEN (curdate() - interval 7 day) and (curdate() - interval 0 day))'
+            );
+            return $this->find('all', compact('conditions'));
+        }
     }
 
 This ``getRecent()`` method can now be used within the controller.

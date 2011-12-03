@@ -9,11 +9,11 @@ and are generally a better way to contribute code.
 Initial setup
 =============
 
-Before working on patches for CakePHP, its a good idea to get your environment
+Before working on patches for CakePHP, it's a good idea to get your environment
 setup.  You'll need the following software:
 
 * Git
-* PHP 5.2.9 or greater
+* PHP 5.2.6 or greater
 * PHPUnit 3.5.10 or greater
 
 Set up your user information with your name/handle and working email address::

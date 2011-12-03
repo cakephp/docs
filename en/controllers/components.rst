@@ -58,7 +58,7 @@ as::
     public function beforeFilter() {
         $this->Auth->authorize = array('controller');
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
-        
+
         $this->Cookie->name = 'CookieMonster';
     }
 
@@ -132,7 +132,6 @@ the file in ``/app/Controller/Component/MathComponent.php``. The basic
 structure for the component would look something like this::
 
     <?php
-    
     class MathComponent extends Component {
         function doComplexOperation($amount1, $amount2) {
             return $amount1 + $amount2;
@@ -190,32 +189,31 @@ Sometimes one of your components may need to use another component.
 In this case you can include other components in your component the exact same
 way you include them in controllers - using the ``$components`` var::
 
-    // app/Controller/Component/CustomComponent.php
     <?php
+    // app/Controller/Component/CustomComponent.php
     class CustomComponent extends Component {
         // the other component your component uses
         public $components = array('Existing'); 
-    
+
         function initialize($controller) {
             $this->Existing->foo();
         }
-    
+
         function bar() {
             // ...
        }
     }
 
     // app/Controller/Component/ExistingComponent.php
-    <?php
     class ExistingComponent extends Component {
-    
+
         function initialize($controller) {
             $this->Parent->bar();
         }
-     
+
         function foo() {
             // ...
-       }
+        }
     }
 
 .. _component-api:

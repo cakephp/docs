@@ -1,13 +1,13 @@
 TextHelper
 ##########
 
-.. php:class:: TextHelper
+.. php:class:: TextHelper(View $view, array $settings = array())
 
-    The TextHelper contains methods to make text more usable and
-    friendly in your views. It aids in enabling links, formatting urls,
-    creating excerpts of text around chosen words or phrases,
-    highlighting key words in blocks of text, and to gracefully
-    truncating long stretches of text.
+The TextHelper contains methods to make text more usable and
+friendly in your views. It aids in enabling links, formatting urls,
+creating excerpts of text around chosen words or phrases,
+highlighting key words in blocks of text, and to gracefully
+truncating long stretches of text.
 
 
 .. php:method:: autoLinkEmails(string $text, array $options=array())
@@ -98,7 +98,7 @@ TextHelper
     Example::
         
         <?php
-        echo $this->Text->highlight($last_sentence, 'using',array('format'=>'<span class="highlight">\1</span>');
+        echo $this->Text->highlight($last_sentence, 'using', array('format' => '<span class="highlight">\1</span>'));
 
     Output::
 
@@ -147,6 +147,7 @@ TextHelper
 
     Example::
 
+        <?php
         echo $this->Text->truncate(
             'The killer crept forward and tripped on the rug.',
             22,

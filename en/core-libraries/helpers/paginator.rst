@@ -1,7 +1,7 @@
 Paginator
 #############
 
-.. php:class:: PaginatorHelper
+.. php:class:: PaginatorHelper(View $view, array $settings = array())
 
 The Pagination helper is used to output pagination controls such as
 page numbers and next/previous links. It works in tandem with
@@ -60,6 +60,14 @@ link is active, it will automatically switch directions like normal::
     echo $this->Paginator->sort('user_id', null, array('direction' => 'desc'));
     // creates
     <a href="/posts/index/page:1/sort:user_id/dir:desc/">User Id</a>
+
+.. php:method:: sortDir(string $model = null, mixed $options = array())
+
+    Gets the current direction the recordset is sorted.
+
+.. php:method:: sortKey(string $model = null, mixed $options = array())
+
+    Gets the current key by which the recordset is sorted.
 
 Creating page number links
 ==========================
@@ -200,6 +208,26 @@ pages in the paged data set.
     ``$last`` no links will be generated once the user is inside the range of last
     pages.
 
+.. php:method:: current(string $model = null)
+
+    Gets the current page of the recordset for the given model::
+
+        <?php
+        // Our url is: http://example.com/comments/view/page:3
+        echo $this->Paginator->current('Comment');
+        // Output is 3
+
+.. php:method:: hasNext(string $model = null)
+
+    Returns true if the given result set is not at the last page.
+
+.. php:method:: hasPrev(string $model = null)
+
+    Returns true if the given result set is not at the first page.
+
+.. php:method:: hasPage(string $model = null, integer $page = 1)
+
+    Returns true if the given result set has the page number given by ``$page``.
 
 Creating a page counter
 =======================
@@ -316,7 +344,7 @@ control in the view.  You can use ``options()`` to indicate that you want other
 named parameters to be converted::
 
     <?php
-    $this->Paginator->options(array('convertKeys' => array('your', 'keys', 'here)));.
+    $this->Paginator->options(array('convertKeys' => array('your', 'keys', 'here')));
 
 Configuring the PaginatorHelper to use a javascript helper
 ----------------------------------------------------------
@@ -356,7 +384,7 @@ which can be easily integrated into your table column headers::
             <th><?php echo $this->Paginator->sort('id', 'ID'); ?></th> 
             <th><?php echo $this->Paginator->sort('title', 'Title'); ?></th> 
         </tr> 
-           <?php foreach($data as $recipe): ?> 
+           <?php foreach ($data as $recipe): ?> 
         <tr> 
             <td><?php echo $recipe['Recipe']['id']; ?> </td> 
             <td><?php echo h($recipe['Recipe']['title']); ?> </td> 
@@ -375,7 +403,7 @@ It is also possible to sort a column based on associations::
             <th><?php echo $this->Paginator->sort('title', 'Title'); ?></th> 
             <th><?php echo $this->Paginator->sort('Author.name', 'Author'); ?></th> 
         </tr> 
-           <?php foreach($data as $recipe): ?> 
+           <?php foreach ($data as $recipe): ?> 
         <tr> 
             <td><?php echo h($recipe['Recipe']['title']); ?> </td> 
             <td><?php echo h($recipe['Author']['name']); ?> </td> 
@@ -448,10 +476,38 @@ Other Methods
         <?php
         echo $this->Paginator->url(array('sort' => 'title'), true); 
 
+.. php:method:: defaultModel()
 
-..todo::
+    Gets the default model of the paged sets or null if pagination is not 
+    initialized.
 
-    Missing methods current(), defaultModel(), hasNext(), hasPage(), hasPrev(), params(), sortDir(), sortKey()
+.. php:method:: params(string $model = null)
+
+    Gets the current paging parameters from the resultset for the given model::
+
+        <?php
+        debug($this->Paginator->params());
+        /*
+        Array
+        (
+            [page] => 2
+            [current] => 2
+            [count] => 43
+            [prevPage] => 1
+            [nextPage] => 3
+            [pageCount] => 3
+            [order] => 
+            [limit] => 20
+            [options] => Array
+                (
+                    [page] => 2
+                    [conditions] => Array
+                        (
+                        )
+                )
+            [paramType] => named
+        )
+        */
 
 
 .. meta::

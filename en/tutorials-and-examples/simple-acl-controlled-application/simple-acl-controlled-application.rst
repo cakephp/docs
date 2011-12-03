@@ -30,12 +30,14 @@ Preparing our Application
 
 First, let's get a copy of fresh Cake code.
 
-To get a fresh download, visit the CakePHP project at Cakeforge:
+To get a fresh download, visit the CakePHP project at GitHub:
 http://github.com/cakephp/cakephp/downloads and download the stable
 release. For this tutorial you need the latest 2.0 release.
 
-You can also checkout/export a fresh copy of our trunk code at:
-``git://github.com/cakephp/cakephp.git``
+
+You can also clone the repository using
+`git <http://git-scm.com/>`_.
+``git clone git://github.com/cakephp/cakephp.git``
 
 Once you've got a fresh copy of cake setup your database.php config
 file, and change the value of Security.salt in your
@@ -220,7 +222,7 @@ to dropping and creating the tables.
 
 If you don't have shell access, or are having trouble using the
 console, you can run the sql file found in
-/path/to/app/Config/schema/db\_acl.sql.
+/path/to/app/Config/Schema/db\_acl.sql.
 
 With the controllers setup for data entry, and the Acl tables
 initialized we are ready to go right? Not entirely, we still have a

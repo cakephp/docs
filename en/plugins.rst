@@ -145,15 +145,15 @@ application can, such as Config, Console, Lib, webroot, etc.
 
 ::
 
-    // /app/Plugin/ContactManager/Controller/ContactManagerAppController.php:
     <?php
+    // /app/Plugin/ContactManager/Controller/ContactManagerAppController.php:
     class ContactManagerAppController extends AppController {
     }
 
 ::
 
-    // /app/Plugin/ContactManager/Model/ContactManagerAppModel.php:
     <?php
+    // /app/Plugin/ContactManager/Model/ContactManagerAppModel.php:
     class ContactManagerAppModel extends AppModel {
     }
 

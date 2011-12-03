@@ -1,5 +1,7 @@
 RSS
-#######
+###
+
+.. php:class:: RssHelper(View $view, array $settings = array())
 
 The RSS helper makes generating XML for RSS feeds easy.
 
@@ -56,13 +58,13 @@ the same::
     // Modify the Posts Controller action that corresponds to
     // the action which deliver the rss feed, which is the
     // index action in our example
-    
-    public function index(){
-        if ($this->RequestHandler->isRss() ){
+
+    public function index() {
+        if ($this->RequestHandler->isRss() ) {
             $posts = $this->Post->find('all', array('limit' => 20, 'order' => 'Post.created DESC'));
             return $this->set(compact('posts'));
         }
-    
+
         // this is not an Rss request, so deliver
         // data used by website's interface
         $this->paginate['Post'] = array('order' => 'Post.created DESC', 'limit' => 10);
@@ -94,7 +96,7 @@ An Rss layout is very simple, put the following contents in
     echo $this->Rss->document($documentData,$channel);
 
 It doesn't look like much but thanks to the power in the ``RssHelper``
-its doing a lot of lifting for us. We haven't set ``$documentData`` or
+it's doing a lot of lifting for us. We haven't set ``$documentData`` or
 ``$channelData`` in the controller, however in CakePHP your views
 can pass variables back to the layout. Which is where our
 ``$channelData`` array will come from setting all of the meta data for
@@ -147,6 +149,9 @@ associative array into an element for each key value pair.
 ::
 
     <?php
+    // You should import Sanitize
+    App::uses('Sanitize', 'Utility');
+
     foreach ($posts as $post) {
         $postTime = strtotime($post['Post']['created']);
     
@@ -158,9 +163,6 @@ associative array into an element for each key value pair.
             'day' => date('d', $postTime),
             $post['Post']['slug']
         );
-
-        // You should import Sanitize
-        App::uses('Sanitize', 'Utility');
 
         // This is the part where we clean the body text for output as the description 
         // of the rss item, this needs to have only text to make sure the feed validates
@@ -177,7 +179,7 @@ associative array into an element for each key value pair.
             'title' => $post['Post']['title'],
             'link' => $postLink,
             'guid' => array('url' => $postLink, 'isPermaLink' => 'true'),
-            'description' =>  $bodyText,
+            'description' => $bodyText,
             'dc:creator' => $post['Post']['author'],
             'pubDate' => $post['Post']['created']
         ));
@@ -205,10 +207,82 @@ Feed Validator or the w3c site at http://validator.w3.org/feed/.
     information added automagically under higher debug settings that
     break XML syntax or feed validation rules.
 
+Rss Helper API
+==============
 
-.. todo::
+.. php:attr:: action
 
-    Missing all class and method definitions
+    Current action
+
+.. php:attr:: base
+
+    Base URL
+
+.. php:attr:: data
+
+    POSTed model data
+
+.. php:attr:: field
+
+    Name of the current field
+
+.. php:attr:: helpers
+
+    Helpers used by the RSS Helper
+
+.. php:attr:: here
+
+    URL to current action
+
+.. php:attr:: model
+
+    Name of current model
+
+.. php:attr:: params
+
+    Parameter array
+
+.. php:attr:: version
+
+    Default spec version of generated RSS.
+
+.. php:method:: channel(array $attrib = array (), array $elements = array (), mixed $content = null)
+
+    :rtype: string
+
+    Returns an RSS ``<channel />`` element.
+
+.. php:method:: document(array $attrib = array (), string $content = null)
+
+    :rtype: string
+
+    Returns an RSS document wrapped in ``<rss />`` tags.
+
+.. php:method:: elem(string $name, array $attrib = array (), mixed $content = null, boolean $endTag = true)
+
+    :rtype: string
+
+    Generates an XML element.
+
+.. php:method:: item(array $att = array (), array $elements = array ())
+
+    :rtype: string
+
+    Converts an array into an ``<item />`` element and its contents.
+
+.. php:method:: items(array $items, mixed $callback = null)
+
+    :rtype: string
+
+    Transforms an array of data using an optional callback, and maps it to a 
+    set of ``<item />`` tags.
+
+.. php:method:: time(mixed $time)
+
+    :rtype: string
+
+    Converts a time in any format to an RSS time. See 
+    :php:meth:`TimeHelper::toRSS()`.
 
 
 .. meta::

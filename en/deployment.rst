@@ -25,7 +25,7 @@ things:
 
 * Debug messages, created with :php:func:`pr()` and :php:func:`debug()` are
   disabled.
-* Core CakePHP caches are flushed ever 99 years, instead of every 10 seconds as
+* Core CakePHP caches are flushed every 99 years, instead of every 10 seconds as
   in development.
 * Error views are less informative, and give generic error messages instead.
 * Errors are not displayed.
@@ -42,7 +42,7 @@ There are a few ways you can configure multiple applications to use the same
 CakePHP core.  You can either use PHP's ``include_path`` or set the
 ``CAKE_CORE_INCLUDE_PATH`` in your application's ``webroot/index.php``.
 Generally using PHP's ``include_path`` is easier and more robust.  CakePHP comes
-preconfigured to look on the ``include_path`` as well so its simple to use.
+preconfigured to look on the ``include_path`` as well so it's simple to use.
 
 In your ``php.ini`` file locate the existing ``include_path`` directive, and
 either append to it or add an ``include_path`` directive::

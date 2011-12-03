@@ -307,7 +307,7 @@ SessionComponent para definir uma variável de sessão com uma mensagem a ser
 exibida na página depois de ser redirecionada. No layout, nós temos
 :php:func:`SessionHelper::flash` que exibe a mensagem e limpa a variável de
 sessão correspondente. O método :php:meth:`Controller::redirect <redirect>` do
-controller redireciona para outra URL. O parâmetro ``array('action'=>'index')``
+controller redireciona para outra URL. O parâmetro ``array('action' => 'index')``
 é convertido para a URL /posts, em outras palavras, a action index do controller
 posts. Você pode conferir a função :php:func:`Router::url()` na API para ver os
 formatos que você pode usar ao especificar uma URL para actions do CakePHP.
@@ -597,7 +597,7 @@ nosso PostsController.
 
 .. note::
     O CakePHP também faz uso do 'roteamento reverso' - se, com a rota definida
-    acima, você passar ``array('controller'=>'posts', 'action'=>'index')`` a um
+    acima, você passar ``array('controller' => 'posts', 'action' => 'index')`` a um
     método que espere um array, a URL resultante será '/'. É sempre uma boa
     ideia usar arrays para URLs, já que é a partir disto que suas rotas definem
     para onde suas URLs apontam, além de garantir que os links sempre apontem

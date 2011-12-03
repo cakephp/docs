@@ -287,8 +287,8 @@ Controle de Fluxo
 
         <?php
         function placeOrder() {
-            //Logic for finalizing order goes here
-            if($success) {
+            // Logic for finalizing order goes here
+            if ($success) {
                 $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));
             } else {
                 $this->redirect(array('controller' => 'orders', 'action' => 'confirm'));
@@ -534,7 +534,7 @@ Outros Métodos Úteis
         // View/Elements/latest_comments.ctp
 
         $comments = $this->requestAction('/comments/latest');
-        foreach($comments as $comment) {
+        foreach ($comments as $comment) {
             echo $comment['Comment']['title'];
         }
 

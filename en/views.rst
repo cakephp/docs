@@ -232,7 +232,7 @@ provide a unique cache key value using the following format::
 
     <?php
     $this->element('helpbox', array(), array(
-            "cache" => array('config'=> 'short', 'key'=>'unique value')
+            "cache" => array('config' => 'short', 'key' => 'unique value')
         )
     );
 
@@ -250,7 +250,7 @@ the Post example::
 
     <?php
     class PostsController extends AppController {
-        ...
+        // ...
         function index() {
             $posts = $this->paginate();
             if (isset($this->params['requested'])) {
@@ -267,7 +267,7 @@ like the following::
 
     <h2>Latest Posts</h2>
     <?php $posts = $this->requestAction('posts/index/sort:created/direction:asc/limit:5'); ?>
-    <?php foreach($posts as $post): ?>
+    <?php foreach ($posts as $post): ?>
     <ol>
         <li><?php echo $post['Post']['title']; ?></li>
     </ol>

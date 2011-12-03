@@ -37,7 +37,7 @@ those fields::
         public $validate = array(
             'login' => 'alphaNumeric',
             'email' => 'email',
-            'born' => 'date'
+            'born'  => 'date'
         );
     }
 
@@ -62,23 +62,23 @@ some of these built-in validation rules::
         public $validate = array(
             'login' => array(
                 'alphaNumeric' => array(
-                    'rule' => 'alphaNumeric',
+                    'rule'     => 'alphaNumeric',
                     'required' => true,
-                    'message' => 'Alphabets and numbers only'
+                    'message'  => 'Alphabets and numbers only'
                 ),
                 'between' => array(
-                    'rule' => array('between', 5, 15),
+                    'rule'    => array('between', 5, 15),
                     'message' => 'Between 5 to 15 characters'
                 )
             ),
             'password' => array(
-                'rule' => array('minLength', '8'),
+                'rule'    => array('minLength', '8'),
                 'message' => 'Minimum 8 characters long'
             ),
             'email' => 'email',
             'born' => array(
-                'rule' => 'date',
-                'message' => 'Enter a valid date',
+                'rule'       => 'date',
+                'message'    => 'Enter a valid date',
                 'allowEmpty' => true
             )
         );
@@ -133,11 +133,11 @@ general usage pattern adding a rule for a single field::
     <?php
     public $validate = array(
         'fieldName1' => array(
-            'rule' => 'ruleName', // or: array('ruleName', 'param1', 'param2' ...)
-            'required' => true,
+            'rule'       => 'ruleName', // or: array('ruleName', 'param1', 'param2' ...)
+            'required'   => true,
             'allowEmpty' => false,
-            'on' => 'create', // or: 'update'
-            'message' => 'Your Error Message'
+            'on'         => 'create', // or: 'update'
+            'message'    => 'Your Error Message'
         )
     );
 
@@ -193,7 +193,7 @@ the validation rule has been defined as follows::
     <?php
     public $validate = array(
         'login' => array(
-            'rule' => 'alphaNumeric',
+            'rule'     => 'alphaNumeric',
             'required' => true
         )
     );
@@ -249,7 +249,7 @@ message for the rule::
     <?php
     public $validate = array(
         'password' => array(
-            'rule' => array('minLength', 8),
+            'rule'    => array('minLength', 8),
             'message' => 'Password must be at least 8 characters long'
         )
     );
@@ -292,12 +292,12 @@ This is better explained with a practical example::
     public $validate = array(
         'login' => array(
             'loginRule-1' => array(
-                'rule' => 'alphaNumeric',  
+                'rule'    => 'alphaNumeric',  
                 'message' => 'Only alphabets and numbers allowed',
-                'last' => true
+                'last'    => true
              ),
             'loginRule-2' => array(
-                'rule' => array('minLength', 8),  
+                'rule'    => array('minLength', 8),  
                 'message' => 'Minimum length of 8 characters'
             )  
         )
@@ -337,7 +337,7 @@ expression as a field validation rule::
     <?php
     public $validate = array(
         'login' => array(
-            'rule' => '/^[a-z0-9]{3,}$/i',  
+            'rule'    => '/^[a-z0-9]{3,}$/i',
             'message' => 'Only letters and integers, min 3 characters'
         )
     );
@@ -360,18 +360,21 @@ function, as shown below::
     <?php
     class User extends AppModel {
         public $name = 'User';
-      
+
         public $validate = array(
             'promotion_code' => array(
-                'rule' => array('limitDuplicates', 25),
+                'rule'    => array('limitDuplicates', 25),
                 'message' => 'This code has been used too many times.'
             )
         );
-     
-        function limitDuplicates($check, $limit){
-            //$check will have value: array('promomotion_code' => 'some-value')
-            //$limit will have value: 25
-            $existing_promo_count = $this->find( 'count', array('conditions' => $check, 'recursive' => -1) );
+
+        function limitDuplicates($check, $limit) {
+            // $check will have value: array('promomotion_code' => 'some-value')
+            // $limit will have value: 25
+            $existing_promo_count = $this->find('count', array(
+                'conditions' => $check,
+                'recursive' => -1
+            ));
             return $existing_promo_count < $limit;
         }
     }
@@ -402,23 +405,23 @@ stored in $this->data member variable::
 
     <?php
     class Post extends AppModel {
-      public $name = 'Post';
-      
-      public $validate = array(
-        'slug' => array(
-          'rule' => 'alphaNumericDashUnderscore',
-          'message' => 'Slug can only be letters, numbers, dash and underscore'
-        )
-      );
-        
-      function alphaNumericDashUnderscore($check) {
-          // $data array is passed using the form field name as the key
-          // have to extract the value to make the function generic
-          $value = array_values($check);
-          $value = $value[0];
-          
-          return preg_match('|^[0-9a-zA-Z_-]*$|', $value);
-      }
+        public $name = 'Post';
+
+        public $validate = array(
+            'slug' => array(
+                'rule'    => 'alphaNumericDashUnderscore',
+                'message' => 'Slug can only be letters, numbers, dash and underscore'
+            )
+        );
+
+        function alphaNumericDashUnderscore($check) {
+            // $data array is passed using the form field name as the key
+            // have to extract the value to make the function generic
+            $value = array_values($check);
+            $value = $value[0];
+
+            return preg_match('|^[0-9a-zA-Z_-]*$|', $value);
+        }
     }
 
 .. _core-validation-rules:
@@ -434,19 +437,19 @@ many oft-used validation techniques you won’t need to write on your
 own. Below, you'll find a complete list of all the rules, along
 with usage examples.
 
-.. php:staticmethod:: alphaNumeric()
+.. php:staticmethod:: alphaNumeric(mixed $check)
 
     The data for the field must only contain letters and numbers.::
 
         <?php
         public $validate = array(
             'login' => array(
-                'rule' => 'alphaNumeric',
+                'rule'    => 'alphaNumeric',
                 'message' => 'Usernames must only contain letters and numbers.'
             )
         );
 
-.. php:staticmethod:: between()
+.. php:staticmethod:: between(string $check, integer $min, integer $max)
 
     The length of the data for the field must fall within the specified
     numeric range. Both minimum and maximum values must be supplied.
@@ -455,7 +458,7 @@ with usage examples.
         <?php
         public $validate = array(
             'password' => array(
-                'rule' => array('between', 5, 15),
+                'rule'    => array('between', 5, 15),
                 'message' => 'Passwords must be between 5 and 15 characters long.'
             )
         );
@@ -464,7 +467,8 @@ with usage examples.
     representation of the data". Be careful that it may be larger than
     the number of characters when handling non-ASCII characters.
 
-.. php:staticmethod:: blank
+
+.. php:staticmethod:: blank(mixed $check)
 
     This rule is used to make sure that the field is left blank or only
     white space characters are present in its value. White space
@@ -474,11 +478,12 @@ with usage examples.
         public $validate = array(
             'id' => array(
                 'rule' => 'blank',
-                'on' => 'create'
+                'on'   => 'create'
             )
         );
 
-.. php:staticmethod:: boolean
+
+.. php:staticmethod:: boolean(string $check)
 
     The data for the field must be a boolean value. Valid values are
     true or false, integers 0 or 1 or strings '0' or '1'.::
@@ -486,12 +491,13 @@ with usage examples.
         <?php
         public $validate = array(
             'myCheckbox' => array(
-                'rule' => array('boolean'),
+                'rule'    => array('boolean'),
                 'message' => 'Incorrect value for myCheckbox'
             )
         );
 
-.. php:staticmethod:: cc()
+
+.. php:staticmethod:: cc(mixed $check, mixed $type = 'fast', boolean $deep = false, string $regex = null)
 
     This rule is used to check whether the data is a valid credit card
     number. It takes three parameters: ‘type’, ‘deep’ and ‘regex’.
@@ -530,12 +536,13 @@ with usage examples.
         <?php
         public $validate = array(
             'ccnumber' => array(
-                'rule' => array('cc', array('visa', 'maestro'), false, null),
+                'rule'    => array('cc', array('visa', 'maestro'), false, null),
                 'message' => 'The credit card number you supplied was invalid.'
             )
         );
 
-.. php:staticmethod:: comparison()
+
+.. php:staticmethod:: comparison(mixed $check1, string $operator = null, integer $check2 = null)
 
     Comparison is used to compare numeric values. It supports “is
     greater”, “is less”, “greater or equal”, “less or equal”, “equal
@@ -544,19 +551,33 @@ with usage examples.
         <?php
         public $validate = array(
             'age' => array(
-                'rule' => array('comparison', '>=', 18),
-                'message' => 'Must be at least 18 years old to qualify.'
-            )
-        );
-         
-        public $validate = array(
-            'age' => array(
-                'rule' => array('comparison', 'greater or equal', 18),
+                'rule'    => array('comparison', '>=', 18),
                 'message' => 'Must be at least 18 years old to qualify.'
             )
         );
 
-.. php:staticmethod:: date()
+        public $validate = array(
+            'age' => array(
+                'rule'    => array('comparison', 'greater or equal', 18),
+                'message' => 'Must be at least 18 years old to qualify.'
+            )
+        );
+
+
+.. php:staticmethod:: custom(mixed $check, string $regex = null)
+
+    Used when a custom regular expression is needed::
+
+        <?php
+        public $validate = array(
+            'infinite' => array(
+                'rule'    => array('custom', '\u221E'),
+                'message' => 'Please enter an infinite number.'
+            )
+        );
+
+
+.. php:staticmethod:: date(string $check, mixed $format = 'ymd', string $regex = null)
 
     This rule ensures that data is submitted in valid date formats. A
     single parameter (which can be an array) can be passed that will be
@@ -581,8 +602,8 @@ with usage examples.
         <?php
         public $validate = array(
             'born' => array(
-                'rule' => array('date','ymd'),
-                'message' => 'Enter a valid date in YY-MM-DD format.',
+                'rule'       => array('date', 'ymd'),
+                'message'    => 'Enter a valid date in YY-MM-DD format.',
                 'allowEmpty' => true
             )
         );
@@ -593,7 +614,45 @@ with usage examples.
     supply a given format. The more work you can do for your users, the
     better.
 
-.. php:staticmethod:: decimal()
+
+.. php:staticmethod:: datetime(array $check, mixed $dateFormat = 'ymd', string $regex = null)
+    
+    This rule ensures that the data is a valid datetime format. A
+    parameter (which can be an array) can be passed to specify the format
+    of the date. The value of the parameter can be one or more of the
+    following:
+
+    -  ‘dmy’ e.g. 27-12-2006 or 27-12-06 (separators can be a space,
+       period, dash, forward slash)
+    -  ‘mdy’ e.g. 12-27-2006 or 12-27-06 (separators can be a space,
+       period, dash, forward slash)
+    -  ‘ymd’ e.g. 2006-12-27 or 06-12-27 (separators can be a space,
+       period, dash, forward slash)
+    -  ‘dMy’ e.g. 27 December 2006 or 27 Dec 2006
+    -  ‘Mdy’ e.g. December 27, 2006 or Dec 27, 2006 (comma is optional)
+    -  ‘My’ e.g. (December 2006 or Dec 2006)
+    -  ‘my’ e.g. 12/2006 or 12/06 (separators can be a space, period,
+       dash, forward slash)
+
+    If no keys are supplied, the default key that will be used is
+    ‘ymd’::
+
+        <?php
+        public $validate = array(
+            'birthday' => array(
+                'rule'    => array('datetime', 'dmy'),
+                'message' => 'Please enter a valid date and time.'
+            )
+        );
+
+    Also a second parameter can be passed to specify a custom regular
+    expression. If this parameter is used, this will be the only
+    validation that will occur.
+
+    Note that unlike date(), datetime() will validate a date and a time.
+
+
+.. php:staticmethod:: decimal(integer $check, integer $places = null, string $regex = null)
 
     This rule ensures that the data is a valid decimal number. A
     parameter can be passed to specify the number of digits required
@@ -608,7 +667,8 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: email()
+
+.. php:staticmethod:: email(string $check, boolean $deep = false, string $regex = null)
 
     This checks whether the data is a valid email address. Passing a
     boolean true as the second parameter for this rule will also
@@ -619,12 +679,13 @@ with usage examples.
         
         public $validate = array(
             'email' => array(
-                'rule' => array('email', true),
+                'rule'    => array('email', true),
                 'message' => 'Please supply a valid email address.'
             )
         );
 
-.. php:staticmethod:: equalTo()
+
+.. php:staticmethod:: equalTo(mixed $check, mixed $compareTo)
 
     This rule will ensure that the value is equal to, and of the same
     type as the given value.
@@ -634,12 +695,13 @@ with usage examples.
         <?php
         public $validate = array(
             'food' => array(
-                'rule' => array('equalTo', 'cake'),  
+                'rule'    => array('equalTo', 'cake'),
                 'message' => 'This value must be the string cake'
             )
         );
 
-.. php:staticmethod:: extension()
+
+.. php:staticmethod:: extension(mixed $check, array $extensions = array('gif', 'jpeg', 'png', 'jpg'))
 
     This rule checks for valid file extensions like .jpg or .png. Allow
     multiple extensions by passing them in array form.
@@ -649,13 +711,32 @@ with usage examples.
         <?php
         public $validate = array(
             'image' => array(
-                'rule' => array('extension', array('gif', 'jpeg', 'png', 'jpg')),
+                'rule'    => array('extension', array('gif', 'jpeg', 'png', 'jpg')),
                 'message' => 'Please supply a valid image.'
             )
         );
 
 
-.. php:staticmethod:: ip()
+.. php:staticmethod:: inList(string $check, array $list)
+
+    This rule will ensure that the value is in a given set. It needs an
+    array of values. The field is valid if the field's value matches
+    one of the values in the given array.
+
+    Example::
+
+        <?php
+        public $validate = array(
+            'function' => array(
+                 'allowedChoice' => array(
+                     'rule'    => array('inList', array('Foo', 'Bar')),
+                     'message' => 'Enter either Foo or Bar.'
+                 )
+             )
+         );
+
+
+.. php:staticmethod:: ip(string $check, string $type = 'both')
 
     This rule will ensure that a valid IPv4 or IPv6 address has been
     submitted. Accepts as option 'both' (default), 'IPv4' or 'IPv6'.
@@ -665,10 +746,11 @@ with usage examples.
         <?php
         public $validate = array(
             'clientip' => array(
-                'rule' => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)
+                'rule'    => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)
                 'message' => 'Please supply a valid IP address.'
             )
         );
+
 
 .. php:staticmethod:: isUnique()
 
@@ -680,31 +762,19 @@ with usage examples.
         <?php
         public $validate = array(
             'login' => array(
-                'rule' => 'isUnique',
+                'rule'    => 'isUnique',
                 'message' => 'This username has already been taken.'
             )
         );
 
-.. php:staticmethod:: minLength()
+.. php:staticmethod:: luhn(string|array $check, boolean $deep = false)
 
-    This rule ensures that the data meets a minimum length
-    requirement.
+    The Luhn algorithm: A checksum formula to validate a variety of 
+    identification numbers. See http://en.wikipedia.org/wiki/Luhn_algorithm for 
+    more information.
 
-    ::
 
-        <?php
-        public $validate = array(
-            'login' => array(
-                'rule' => array('minLength', 8),  
-                'message' => 'Usernames must be at least 8 characters long.'
-            )
-        );
-
-    The length here is "the number of bytes in the string
-    representation of the data". Be careful that it may be larger than
-    the number of characters when handling non-ASCII characters.
-
-.. php:staticmethod:: maxLength()
+.. php:staticmethod:: maxLength(string $check, integer $max)
 
     This rule ensures that the data stays within a maximum length
     requirement.
@@ -714,7 +784,7 @@ with usage examples.
         <?php
         public $validate = array(
             'login' => array(
-                'rule' => array('maxLength', 15),  
+                'rule'    => array('maxLength', 15),
                 'message' => 'Usernames must be no larger than 15 characters long.'
             )
         );
@@ -723,7 +793,28 @@ with usage examples.
     representation of the data". Be careful that it may be larger than
     the number of characters when handling non-ASCII characters.
 
-.. php:staticmethod:: money()
+
+.. php:staticmethod:: minLength(string $check, integer $min)
+
+    This rule ensures that the data meets a minimum length
+    requirement.
+
+    ::
+
+        <?php
+        public $validate = array(
+            'login' => array(
+                'rule'    => array('minLength', 8),
+                'message' => 'Usernames must be at least 8 characters long.'
+            )
+        );
+
+    The length here is "the number of bytes in the string
+    representation of the data". Be careful that it may be larger than
+    the number of characters when handling non-ASCII characters.
+
+
+.. php:staticmethod:: money(string $check, string $symbolPosition = 'left')
 
     This rule will ensure that the value is in a valid monetary
     amount.
@@ -735,12 +826,12 @@ with usage examples.
         <?php
         public $validate = array(
             'salary' => array(
-                'rule' => array('money', 'left'),
+                'rule'    => array('money', 'left'),
                 'message' => 'Please supply a valid monetary amount.'
             )
         );
 
-.. php:staticmethod:: multiple()
+.. php:staticmethod:: multiple(mixed $check, mixed $options = array())
 
     Use this for validating a multiple select input. It supports
     parameters "in", "max" and "min".
@@ -751,50 +842,23 @@ with usage examples.
         public $validate = array(
             'multiple' => array(
                 'rule' => array('multiple', array(
-                    'in' => array('do', 'ray', 'me', 'fa', 'so', 'la', 'ti'), 'min' => 1, 'max' => 3)
-                ),
+                    'in'  => array('do', 'ray', 'me', 'fa', 'so', 'la', 'ti'),
+                    'min' => 1,
+                    'max' => 3
+                )),
                 'message' => 'Please select one, two or three options'
             )
         );
 
-.. php:staticmethod:: inList()
 
-    This rule will ensure that the value is in a given set. It needs an
-    array of values. The field is valid if the field's value matches
-    one of the values in the given array.
-
-    Example::
-
-        <?php
-            public $validate = array(
-              'function' => array(
-                'allowedChoice' => array(
-                    'rule' => array('inList', array('Foo', 'Bar')),
-                    'message' => 'Enter either Foo or Bar.'
-                )
-              )
-            );
-
-.. php:staticmethod:: numeric()
-
-    Checks if the data passed is a valid number.::
-
-        <?php
-        public $validate = array(
-            'cars' => array(
-                'rule' => 'numeric',  
-                'message' => 'Please supply the number of cars.'
-            )
-        );
-
-.. php:staticmethod:: notEmpty()
+.. php:staticmethod:: notEmpty(mixed $check)
 
     The basic rule to ensure that a field is not empty.::
 
         <?php
         public $validate = array(
             'title' => array( 
-                'rule' => 'notEmpty',
+                'rule'    => 'notEmpty',
                 'message' => 'This field cannot be left blank'
             )
         );
@@ -802,7 +866,21 @@ with usage examples.
     Do not use this for a multiple select input as it will cause an
     error. Instead, use "multiple".
 
-.. php:staticmethod:: phone()
+
+.. php:staticmethod:: numeric(string $check)
+
+    Checks if the data passed is a valid number.::
+
+        <?php
+        public $validate = array(
+            'cars' => array(
+                'rule'    => 'numeric',
+                'message' => 'Please supply the number of cars.'
+            )
+        );
+
+
+.. php:staticmethod:: phone(mixed $check, string $regex = null, string $country = 'all')
 
     Phone validates US phone numbers. If you want to validate non-US
     phone numbers, you can provide a regular expression as the second
@@ -817,7 +895,8 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: postal()
+
+.. php:staticmethod:: postal(mixed $check, string $regex = null, string $country = 'us')
 
     Postal is used to validate ZIP codes from the U.S. (us), Canada
     (ca), U.K (uk), Italy (it), Germany (de) and Belgium (be). For
@@ -833,7 +912,8 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: range()
+
+.. php:staticmethod:: range(string $check, integer $lower = null, integer $upper = null)
 
     This rule ensures that the value is in a given range. If no range
     is supplied, the rule will check to ensure the value is a legal
@@ -844,7 +924,7 @@ with usage examples.
         <?php
         public $validate = array(
             'number' => array(
-                'rule' => array('range', -1, 11),
+                'rule'    => array('range', -1, 11),
                 'message' => 'Please enter a number between 0 and 10'
             )
         );
@@ -856,7 +936,8 @@ with usage examples.
     
         The range lower/upper are not inclusive
 
-.. php:staticmethod:: ssn()
+
+.. php:staticmethod:: ssn(mixed $check, string $regex = null, string $country = null)
 
     Ssn validates social security numbers from the U.S. (us), Denmark
     (dk), and the Netherlands (nl). For other social security number
@@ -871,7 +952,15 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: url()
+
+.. php:staticmethod:: time(string $check)
+
+    Time validation, determines if the string passed is a valid time. Validates 
+    time as 24hr (HH:MM) or am/pm ([H]H:MM[a|p]m) Does not allow/validate 
+    seconds.
+
+
+.. php:staticmethod:: url(string $check, boolean $strict = false)
 
     This rule checks for valid URL formats. Supports http(s), ftp(s),
     file, news, and gopher protocols::
@@ -892,6 +981,16 @@ with usage examples.
                 'rule' => array('url', true)
             )
         );
+
+
+.. php:staticmethod:: userDefined(mixed $check, object $object, string $method, array $args = null)
+
+    Runs an user-defined validation.
+
+
+.. php:staticmethod:: uuid(string $check)
+
+    Checks that a value is a valid uuid: http://tools.ietf.org/html/rfc4122
 
 
 .. toctree::

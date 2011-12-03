@@ -23,7 +23,7 @@ This file is included by the :php:class:`Dispatcher` when handling routes
 and allows you to define application specific routes you want used. Routes 
 declared in this file are processed top to bottom when incoming requests
 are matched.  This means that the order you place routes can affect how
-routes are parsed.  Its generally a good idea to place most frequently
+routes are parsed.  It's generally a good idea to place most frequently
 visited routes at the top of the routes file if possible.  This will
 save having to check a number of routes that won't match on each request.
 After connecting routes you can manipulate the order of routes using
@@ -415,7 +415,7 @@ Much like admin routing all prefix actions should be prefixed with
 the prefix name. So ``/manager/posts/add`` would map to
 ``PostsController::manager_add()``.
 
-When using prefix routes its important to remember, using the HTML
+When using prefix routes it's important to remember, using the HTML
 helper to build your links will help maintain the prefix calls.
 Here's how to build this link using the HTML helper::
 
@@ -512,7 +512,7 @@ had a controller action that looked like::
 
     <?php
     CalendarsController extends AppController{
-        function view($arg1, $arg2){
+        function view($arg1, $arg2) {
             debug(func_get_args());
         }
     }
@@ -532,6 +532,7 @@ order they appear in the called url.
 
 ::
 
+    <?php
     debug($this->request->params['pass']);
     debug($this->passedArgs); 
 
@@ -551,6 +552,7 @@ Either of the above would output::
 When generating urls, using a :term:`routing array` you add passed 
 arguments as values without string keys in the array::
 
+    <?php
     array('controller' => 'posts', 'action' => 'view', 5)
 
 Since ``5`` has a numeric key, it is treated as a passed argument.
@@ -610,6 +612,7 @@ named parameters or routed parameters, and defaults to assuming you
 intended them to be routed parameters. To connect named parameters
 in the router use :php:meth:`Router::connectNamed()`::
 
+    <?php
     Router::connectNamed(array('chapter', 'section'));
 
 Will ensure that your chapter and section parameters reverse route
@@ -618,9 +621,10 @@ correctly.
 When generating urls, using a :term:`routing array` you add named 
 parameters as values with string keys matching the name::
 
+    <?php
     array('controller' => 'posts', 'action' => 'view', 'chapter' => 'association')
 
-Since 'chapter' doesn't match any defined route elements, its treated 
+Since 'chapter' doesn't match any defined route elements, it's treated 
 as a named parameter.
 
 .. note::
@@ -636,12 +640,12 @@ syntax::
 
     <?php
     $url = Router::url(array(
-      'controller' => 'posts',
-      'action' => 'index',
-      'filter' => array(
-        'published' => 1
-        'frontpage' => 1
-      )
+        'controller' => 'posts',
+        'action' => 'index',
+        'filter' => array(
+            'published' => 1
+            'frontpage' => 1
+        )
     ));
 
 The above would generate the url ``/posts/index/filter[published]:1/filter[frontpage]:1``. 
@@ -650,8 +654,8 @@ as an array, just as you sent them to :php:meth:`Router::url`::
 
     <?php
     $this->passedArgs['filter'] = array(
-      'published' => 1
-      'frontpage' => 1
+        'published' => 1
+        'frontpage' => 1
     );
 
 Arrays can be deeply nested as well, allowing you even more flexibility in 
@@ -659,23 +663,23 @@ passing arguments::
 
     <?php
     $url = Router::url(array(
-      'controller' => 'posts',
-      'action' => 'search',
-      'models' => array(
-        'post' => array(
-          'order' => 'asc',
-          'filter' => array(
-            'published' => 1
-          )
+        'controller' => 'posts',
+        'action' => 'search',
+        'models' => array(
+            'post' => array(
+                'order' => 'asc',
+                'filter' => array(
+                    'published' => 1
+                )
+            ),
+            'comment' => array(
+                'order' => 'desc',
+                'filter' => array(
+                    'spam' => 0
+                )
+            ),
         ),
-        'comment' => array(
-          'order' => 'desc',
-          'filter' => array(
-            'spam' => 0
-          )
-        ),
-      ),
-      'users' => array(1, 2, 3)
+        'users' => array(1, 2, 3)
     ));
 
 You would end up with a pretty long url like this (wrapped for easy reading)::
@@ -691,18 +695,17 @@ which you passed to the router::
     <?php
     $this->passedArgs['models'] = array(
         'post' => array(
-          'order' => 'asc',
-          'filter' => array(
-            'published' => 1
-          )
+            'order' => 'asc',
+            'filter' => array(
+                'published' => 1
+            )
         ),
         'comment' => array(
-          'order' => 'desc',
-          'filter' => array(
-            'spam' => 0
-          )
+            'order' => 'desc',
+            'filter' => array(
+                'spam' => 0
+            )
         ),
-      ),
     );
 
 .. _controlling-named-parameters:
@@ -739,16 +742,16 @@ Parse only the page parameter if the current action is 'index'::
 
     <?php
     Router::connectNamed(
-       array('page' => array('action' => 'index')),
-       array('default' => false, 'greedy' => false)
+        array('page' => array('action' => 'index')),
+        array('default' => false, 'greedy' => false)
     );
 
 Parse only the page parameter if the current action is 'index' and the controller is 'pages'::
 
     <?php
     Router::connectNamed(
-       array('page' => array('action' => 'index', 'controller' => 'pages')),
-       array('default' => false, 'greedy' => false)
+        array('page' => array('action' => 'index', 'controller' => 'pages')),
+        array('default' => false, 'greedy' => false)
     ); 
 
 
@@ -914,9 +917,9 @@ Router API
     
         <?php
         Router::connect(
-          '/:lang/:controller/:action/:id',
-          array(),
-          array('id' => '[0-9]+', 'lang' => '[a-z]{3}')
+            '/:lang/:controller/:action/:id',
+            array(),
+            array('id' => '[0-9]+', 'lang' => '[a-z]{3}')
         );
     
     Shows connecting a route with custom route parameters as well as providing

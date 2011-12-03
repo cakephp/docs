@@ -317,7 +317,7 @@ realiza a través de la función :php:func:`SessionHelper::flash` que está en e
 layout, que muestra el mensaje y lo borra de la sesión para que sólo se vea una
 vez. El método :php:meth:`Controller::redirect <redirect>` del controlador nos
 permite redirigir a otra página de nuestra aplicación, traduciendo el parámetro
-``array('action'=>'index)`` a la URL /posts, y la acción index. Puedes consultar
+``array('action' => 'index)`` a la URL /posts, y la acción index. Puedes consultar
 la documentación de este método aquí :php:func:`Router::url()`. Verás los
 diferentes modos de indicar la ruta que quieres construir.
 

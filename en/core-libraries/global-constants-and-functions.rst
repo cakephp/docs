@@ -39,6 +39,72 @@ function to accomplish an oft-used task, it's here.
         :doc:`/core-libraries/internationalization-and-localization`
         section for more information.
 
+.. php:function:: __c(string $msg, integer $category, mixed $args = null)
+
+    Note that the category must be specified with a numeric value, instead of 
+    the constant name. The values are:
+
+    - 0 - LC_ALL
+    - 1 - LC_COLLATE
+    - 2 - LC_CTYPE
+    - 3 - LC_MONETARY
+    - 4 - LC_NUMERIC
+    - 5 - LC_TIME
+    - 6 - LC_MESSAGES
+
+.. php:function:: __d(string $domain, string $msg, mixed $args = null)
+
+    Allows you to override the current domain for a single message lookup.
+
+    Useful when internationalizing a plugin: 
+    ``echo __d('PluginName', 'This is my plugin');``
+
+.. php:function:: __dc(string $domain, string $msg, integer $category, mixed $args = null)
+
+    Allows you to override the current domain for a single message lookup. It 
+    also allows you to specify a category.
+
+    Note that the category must be specified with a numeric value, instead of 
+    the constant name. The values are:
+
+    - 0 - LC_ALL
+    - 1 - LC_COLLATE
+    - 2 - LC_CTYPE
+    - 3 - LC_MONETARY
+    - 4 - LC_NUMERIC
+    - 5 - LC_TIME
+    - 6 - LC_MESSAGES
+
+.. php:function:: __dcn(string $domain, string $singular, string $plural, integer $count, integer $category, mixed $args = null)
+
+    Allows you to override the current domain for a single plural message 
+    lookup. It also allows you to specify a category. Returns correct plural 
+    form of message identified by $singular and $plural for count $count from 
+    domain $domain.
+
+    Note that the category must be specified with a numeric value, instead of 
+    the constant name. The values are:
+
+    - 0 - LC_ALL
+    - 1 - LC_COLLATE
+    - 2 - LC_CTYPE
+    - 3 - LC_MONETARY
+    - 4 - LC_NUMERIC
+    - 5 - LC_TIME
+    - 6 - LC_MESSAGES
+
+.. php:function:: __dn(string $domain, string $singular, string $plural, integer $count, mixed $args = null)
+
+    Allows you to override the current domain for a single plural message 
+    lookup. Returns correct plural form of message identified by $singular and 
+    $plural for count $count from domain $domain.
+
+.. php:function:: __n(string $singular, string $plural, integer $count, mixed $args = null)
+
+    Returns correct plural form of message identified by $singular and $plural 
+    for count $count. Some languages have more than one form for plural 
+    messages dependent on the count.
+
 .. php:function:: am(array $one, $two, $three...)
 
     Merges all the arrays passed as parameters and returns the merged
@@ -82,22 +148,34 @@ function to accomplish an oft-used task, it's here.
     Checks to make sure that the supplied file is within the current
     PHP include\_path. Returns a boolean result.
 
-.. php:function:: h(string $text, string $charset = null)
+.. php:function:: h(string $text, boolean $double = true, string $charset = null)
 
     Convenience wrapper for ``htmlspecialchars()``.
 
+.. php:function:: LogError(string $message)
+
+    Shortcut to :php:meth:`Log::write()`.
+
+.. php:function:: pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)
+
+    Splits a dot syntax plugin name into its plugin and classname. If $name 
+    does not have a dot, then index 0 will be null.
+
+    Commonly used like ``list($plugin, $name) = pluginSplit('Users.User');``
 
 .. php:function:: pr(mixed $var)
 
     Convenience wrapper for ``print_r()``, with the addition of
     wrapping <pre> tags around the output.
 
+.. php:function:: sortByKey(array &$array, string $sortby, string $order = 'asc', integer $type = SORT_NUMERIC)
+
+    Sorts given $array by key $sortby.
+
 .. php:function:: stripslashes_deep(array $value)
 
     Recursively strips slashes from the supplied ``$value``. Returns
     the modified array.
-
-
 
 Core Definition Constants
 =========================
@@ -106,79 +184,128 @@ Most of the following constants refer to paths in your application.
 
 .. php:const:: APP
 
-   root directory.
+   Path to the application's directory.
 
-.. php:const:: APP\_PATH
+.. php:const:: APP_DIR
 
-   app directory.
+    Equals ``app`` or the name of your application directory.
+
+.. php:const:: APPLIBS
+
+    Path to the application's Lib directory.
 
 .. php:const:: CACHE
 
-    cache files directory.
+    Path to the cache files directory. It can be shared between hosts in a 
+    multi-server setup.
 
 .. php:const:: CAKE
 
-    cake directory.
+    Path to the cake directory.
 
-.. php:const:: CONTROLLER\_TESTS
+.. php:const:: CAKE_CORE_INCLUDE_PATH
 
-    controller tests directory.
+    Path to the root lib directory.
+
+.. php:const:: CORE_PATH
+
+   Path to the root directory with ending directory slash.
 
 .. php:const:: CSS
 
-    CSS files directory.
+    Path to the public CSS directory.
+
+.. php:const:: CSS_URL
+
+    Web path to the CSS files directory.
 
 .. php:const:: DS
 
     Short for PHP's DIRECTORY\_SEPARATOR, which is / on Linux and \\ on windows.
 
-.. php:const:: HELPER\_TESTS
+.. php:const:: FULL_BASE_URL
 
-    helper tests directory.
+    Full url prefix. Such as ``https://example.com``
 
 .. php:const:: IMAGES
 
-    images directory.
+    Path to the public images directory.
+
+.. php:const:: IMAGES_URL
+
+    Web path to the public images directory.
 
 .. php:const:: JS
 
-    JavaScript files directory (in the webroot).
+    Path to the public JavaScript directory.
 
-.. php:const:: LIB\_TESTS
+.. php:const:: JS_URL
 
-    CakePHP Library tests directory.
-
-.. php:const:: LIBS
-
-    CakePHP libs directory.
+    Web path to the js files directory.
 
 .. php:const:: LOGS
 
-    logs directory (in app).
+    Path to the logs directory.
 
-.. php:const:: MODEL\_TESTS
+.. php:const:: ROOT
 
-    model tests directory.
-
-.. php:const:: SCRIPTS
-
-    Cake scripts directory.
+    Path to the root directory.
 
 .. php:const:: TESTS
 
-    tests directory (parent for the models, controllers, etc. test directories)
+    Path to the tests directory.
 
 .. php:const:: TMP
 
-    tmp directory.
+    Path to the temporary files directory.
 
 .. php:const:: VENDORS
 
-    vendors directory.
+    Path to the vendors directory.
+
+.. php:const:: WEBROOT_DIR
+
+    Equals ``webroot`` or the name of your webroot directory.
 
 .. php:const:: WWW\_ROOT
 
-    full path to the webroot.
+    Full path to the webroot.
+
+
+Timing Definition Constants
+===========================
+
+.. php:const:: TIME_START
+
+    Unix timestamp in microseconds as a float from when the application started.
+
+.. php:const:: SECOND
+
+    Equals 1
+
+.. php:const:: MINUTE
+
+    Equals 60
+
+.. php:const:: HOUR
+
+    Equals 3600
+
+.. php:const:: DAY
+
+    Equals 86400
+
+.. php:const:: WEEK
+
+    Equals 604800
+
+.. php:const:: MONTH
+
+    Equals 2592000
+
+.. php:const:: YEAR
+
+    Equals 31536000
 
 
 .. meta::

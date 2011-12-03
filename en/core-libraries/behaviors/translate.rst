@@ -1,6 +1,8 @@
 Translate
 #########
 
+.. php:class:: TranslateBehavior()
+
 TranslateBehavior is actually quite easy to setup and works out of
 the box with very little configuration. In this section, you will
 learn how to add and setup the behavior to use in any model.
@@ -38,7 +40,6 @@ following example.::
             'Translate'
         );
     }
-    ?>
 
 This will do nothing yet, because it expects a couple of options
 before it begins to work. You need to define which fields of the
@@ -60,7 +61,6 @@ value with another array, like so::
             )
         );
     }
-    ?>
 
 After you have done that (for example putting "name" as one of the
 fields) you already finished the basic setup. Great! According to
@@ -75,7 +75,6 @@ our current example the model should now look something like this::
             )
         );
     }
-    ?>
 
 When defining fields for TranslateBehavior to translate, be sure to
 omit those fields from the translated model's schema. If you leave
@@ -114,7 +113,6 @@ setup as shown below. The naming is completely up to you.::
             )
         );
     }
-    ?>
 
 With this setup the result of $this->Post->find() should look
 something like this::
@@ -175,8 +173,8 @@ where the key is the translatable field and the value is the fake
 association name.::
 
     <?php
-    $this->Post->bindTranslation(array ('name' => 'nameTranslation'));
-    $this->Post->find('all', array ('recursive'=>1)); // need at least recursive 1 for this to work.
+    $this->Post->bindTranslation(array('name' => 'nameTranslation'));
+    $this->Post->find('all', array('recursive' => 1)); // need at least recursive 1 for this to work.
 
 With this setup the result of your find() should look something
 like this::
@@ -243,7 +241,6 @@ your controller or you can define it directly in the model.
             }
         }
     }
-    ?>
 
 **Example B:** In your model::
 
@@ -264,7 +261,6 @@ your controller or you can define it directly in the model.
             $this->locale = $locale;
         }
     }
-    ?>
 
 Multiple Translation Tables
 ===========================
@@ -292,7 +288,6 @@ you need to setup your model like this::
         // Use a different model (and table)
         public $translateModel = 'PostI18n';
     }
-    ?>
 
 **Important** is that you have to pluralize the table. It is now a
 usual model and can be treated as such and thus comes with the
@@ -314,8 +309,7 @@ Make sure that you change the ``$displayField`` to ``'field'``.::
     class PostI18n extends AppModel { 
         public $displayField = 'field'; // important
     }
-    // filename: post_i18n.php
-    ?>
+    // filename: PostI18n.php
 
 That's all it takes. You can also add all other model stuff here
 like $useTable. But for better consistency we could do that in the
@@ -343,7 +337,6 @@ $translateTable in your model, like so::
         // Use a different table for translateModel
         public $translateTable = 'post_translations';
     }
-    ?>
 
 Please note that **you can't use $translateTable alone**. If you
 don't intend to use a custom ``$translateModel`` then leave this

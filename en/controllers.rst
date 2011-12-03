@@ -174,12 +174,11 @@ rendered from the controller.
     can be accessed in your view::
 
         <?php
-
-        //First you pass data from the controller:
+        // First you pass data from the controller:
 
         $this->set('color', 'pink');
 
-        //Then, in the view, you can utilize the data:
+        // Then, in the view, you can utilize the data:
         ?>
 
         You have selected <?php echo $color; ?> icing for the cake.
@@ -196,26 +195,23 @@ rendered from the controller.
     ::
 
         <?php
-
         $data = array(
             'color' => 'pink',
             'type' => 'sugar',
             'base_price' => 23.95
         );
 
-        //make $color, $type, and $base_price 
-        //available to the view:
+        // make $color, $type, and $base_price 
+        // available to the view:
 
         $this->set($data);  
 
-        
 
     The attribute ``$pageTitle`` no longer exists, use ``set()`` to set
     the title::
 
         <?php
         $this->set('title_for_layout', 'This is the page title');
-        ?>
 
 
 .. php:method:: render(string $action, string $layout, string $file)
@@ -232,12 +228,12 @@ rendered from the controller.
 
         <?php
         class RecipesController extends AppController {
-        ...
+        // ...
             function search() {
                 // Render the view in /View/Recipes/search.ctp
                 $this->render();
             }
-        ...
+        // ...
         }
 
     Although CakePHP will automatically call it (unless you’ve set
@@ -288,8 +284,8 @@ Flow Control
 
         <?php
         function placeOrder() {
-            //Logic for finalizing order goes here
-            if($success) {
+            // Logic for finalizing order goes here
+            if ($success) {
                 $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));
             } else {
                 $this->redirect(array('controller' => 'orders', 'action' => 'confirm'));
@@ -458,7 +454,7 @@ Other Useful Methods
         )
         */
 
-        //Let’s get orders that have at least 4 items and contain ‘Ye Olde’
+        // Let’s get orders that have at least 4 items and contain ‘Ye Olde’
         $conditions = $this->postConditions(
             $this->request->data,
             array(
@@ -525,7 +521,7 @@ Other Useful Methods
         // View/Elements/latest_comments.ctp
 
         $comments = $this->requestAction('/comments/latest');
-        foreach($comments as $comment) {
+        foreach ($comments as $comment) {
             echo $comment['Comment']['title'];
         }
 
@@ -624,9 +620,7 @@ visit the CakePHP API. Check out
     but saves CakePHP from inflecting it::
 
         <?php
-        
-        # $name controller attribute usage example
-        
+        // $name controller attribute usage example
         class RecipesController extends AppController {
            public $name = 'Recipes';
         }

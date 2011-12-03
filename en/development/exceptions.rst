@@ -126,7 +126,7 @@ Create your own Exception handler with `Exception.handler`
 
 Creating your own exception handler gives you full control over the exception
 handling process.  The class you choose should be loaded in your
-``app/Config/bootstrap.php``, so its available to handle any exceptions. You can
+``app/Config/bootstrap.php``, so it's available to handle any exceptions. You can
 define the handler as any callback type. By settings ``Exception.handler`` CakePHP
 will ignore all other Exception settings.  A sample custom exception handling setup
 could look like::
@@ -142,9 +142,9 @@ could look like::
     class AppExceptionHandler {
         public static function handle($error) {
             echo 'Oh noes! ' . $error->getMessage();
-            ...
+            // ...
         }
-        ...
+        // ...
     }
 
 You can run any code you wish inside ``handleException``.  The code above would
@@ -184,9 +184,7 @@ the default exception rendering.  It receives the thrown exception as its only
 argument.  You should implement your error handling in that method::
 
     <?php
-
     class AppController extends Controller {
-
         function appError($error) {
             // custom logic goes here.
         }
@@ -203,8 +201,8 @@ is used.  Your custom exception renderer class should be placed in ``app/Lib/Err
 In a custom exception rendering class you can provide specialized handling for 
 application specific errors::
 
-    // in app/Lib/Error/AppExceptionRenderer.php
     <?php
+    // in app/Lib/Error/AppExceptionRenderer.php
     App::uses('ExceptionRenderer', 'Error');
 
     class AppExceptionRenderer extends ExceptionRenderer {

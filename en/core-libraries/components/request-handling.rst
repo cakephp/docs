@@ -1,7 +1,7 @@
 Request Handling
 ################
 
-.. php:class:: RequestHandlerComponent
+.. php:class:: RequestHandlerComponent(ComponentCollection $collection, array $settings = array())
 
 The Request Handler component is used in CakePHP to obtain
 additional information about the HTTP requests that are made to
@@ -27,7 +27,7 @@ RequestHandler it must be included in your $components array::
 
         public $components = array('RequestHandler');
 
-        //rest of controller
+        // Rest of controller
     }
 
 Obtaining Request Information
@@ -117,7 +117,7 @@ following would accomplish that::
         if ($this->request->is('ajax')) {
             $this->disableCache();
         }
-        //Continue Controller action
+        // Continue Controller action
 
 
 

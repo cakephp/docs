@@ -25,10 +25,15 @@ following::
     Depending on your system's configuration, you make need to run the previous
     commands with ``sudo``
 
+.. tip::
+
+    All output is swallowed when using PHPUnit 3.6. Add the ``--debug`` 
+    modifier to display output if using the CLI.
+
 Test database setup
 ===================
 
-Remember to have a debug level of at least 1 in your ``app/Config/core.php`` 
+Remember to have a debug level of at least 1 in your ``app/Config/core.php``
 file before running any tests.  Tests are not accessible via the web runner when
 debug is equal to 0.  Before running any tests you should be sure to add a
 ``$test`` database configuration.  This configuration is used by CakePHP for
@@ -38,15 +43,15 @@ fixture tables and data::
     public $test = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,
-        'host' => 'dbhost',
-        'login' => 'dblogin',
-        'password' => 'dbpassword',
-        'database' => 'test_database'
+        'host'       => 'dbhost',
+        'login'      => 'dblogin',
+        'password'   => 'dbpassword',
+        'database'   => 'test_database'
     );
 
 .. note::
 
-    Its a good idea to make the test database and your actual database
+    It's a good idea to make the test database and your actual database
     different databases.  This will prevent any embarrassing mistakes later.
 
 Checking the test setup
@@ -119,7 +124,7 @@ we'll start with the following::
 
     class ProgressHelperTest extends CakeTestCase {
         public function setUp() {
-        
+
         }
 
         public function testBar() {
@@ -161,7 +166,7 @@ The above test is a simple one but shows the potential benefit of using test
 cases.  We use ``assertContains()`` to ensure that our helper is returning a
 string that contains the content we expect.  If the result did not contain the
 expected content the test would fail, and we would know that our code is
-incorrect. 
+incorrect.
 
 By using test cases you can easily describe the relationship between a set of
 known inputs and their expected output.  This helps you be more confident of the
@@ -176,7 +181,7 @@ Running tests
 =============
 
 Once you have PHPUnit installed and some test cases written, you'll want to run
-the test cases very frequently.  Its a good idea to run tests before committing
+the test cases very frequently. It's a good idea to run tests before committing
 any changes to help ensure you haven't broken anything.
 
 Running tests from a browser
@@ -243,7 +248,7 @@ your app directory you can do the following to run tests::
 
 .. note::
 
-    If you are running tests that interact with the session its generally a good
+    If you are running tests that interact with the session it's generally a good
     idea to use the ``--stderr`` option.  This will fix issues with tests
     failing because of headers_sent warnings.
 
@@ -271,7 +276,7 @@ doing the following::
     ./Console/cake testsuite app Model/Article --coverage-html webroot/coverage
 
 This will put the coverage results in your application's webroot directory.  You
-should be able to view the results by going to 
+should be able to view the results by going to
 ``http://localhost/your_app/coverage``.
 
 Creating test suites
@@ -330,7 +335,7 @@ Creating fixtures
 
 When creating a fixture you will mainly define two things: how the
 table is created (which fields are part of the table), and which
-records will be initially populated to the table. Let's 
+records will be initially populated to the table. Let's
 create our first fixture, that will be used to test our own Article
 model. Create a file named ``ArticleFixture.php`` in your
 ``app/Test/Fixture`` directory, with the following content::
@@ -405,10 +410,10 @@ Article available in your application (that maps to a table named
 articles), change the example fixture given in the previous section
 (``app/Test/Fixture/ArticleFixture.php``) to::
 
-    <?php  
-    class ArticleFixture extends CakeTestFixture { 
-        public $import = 'Article'; 
-    } 
+    <?php
+    class ArticleFixture extends CakeTestFixture {
+        public $import = 'Article';
+    }
 
 This statement tells the test suite to import your table definition from the
 table linked to the model called Article. You can use any model available in
@@ -424,19 +429,19 @@ If on the other hand you have a table created but no model
 available for it, you can specify that your import will take place
 by reading that table information instead. For example::
 
-    <?php  
-    class ArticleFixture extends CakeTestFixture { 
-        public $import = array('table' => 'articles'); 
-    } 
+    <?php
+    class ArticleFixture extends CakeTestFixture {
+        public $import = array('table' => 'articles');
+    }
 
 Will import table definition from a table called 'articles' using
 your CakePHP database connection named 'default'. If you want to
 use a different connection use::
 
-     <?php  
-     class ArticleFixture extends CakeTestFixture { 
-        public $import = array('table' => 'articles', 'connection' => 'other'); 
-     } 
+     <?php
+     class ArticleFixture extends CakeTestFixture {
+        public $import = array('table' => 'articles', 'connection' => 'other');
+     }
 
 Since it uses your CakePHP database connection, if there's any
 table prefix declared it will be automatically used when fetching
@@ -444,10 +449,10 @@ table information. The two snippets above do not import records
 from the table. To force the fixture to also import its records,
 change the import to::
 
-     <?php  
-     class ArticleFixture extends CakeTestFixture { 
+     <?php
+     class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'records' => true);
-     } 
+     }
 
 You can naturally import your table definition from an existing
 model/table, but have your records defined directly on the fixture
@@ -457,9 +462,9 @@ as it was shown on previous section. For example::
      class ArticleFixture extends CakeTestFixture {
           public $import = 'Article';
           public $records = array(
-              array ('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-              array ('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-              array ('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
+              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
+              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
           );
        }
 
@@ -508,20 +513,20 @@ Testing models
 Let's say we already have our Article model defined on
 ``app/Model/Article.php``, which looks like this::
 
-     <?php  
-     class Article extends AppModel { 
-            public function published($fields = null) { 
-                $params = array( 
+     <?php
+     class Article extends AppModel {
+            public function published($fields = null) {
+                $params = array(
                       'conditions' => array(
-                            $this->name . '.published' => 1 
+                            $this->name . '.published' => 1
                       ),
                       'fields' => $fields
-                ); 
-                 
-                return $this->find('all',$params); 
+                );
+
+                return $this->find('all', $params);
             }
-     
-     } 
+
+     }
 
 We now want to set up a test that will use this model definition, but through
 fixtures, to test some functionality in the model.  CakePHP test suite loads a
@@ -531,12 +536,12 @@ loading our model - in this case the Article model which we already defined.
 Let's now create a file named ``ArticleTest.php`` in your
 ``app/Test/Case/Model`` directory, with the following contents::
 
-     <?php  
-      App::uses('Article', 'Model'); 
-      
-      class ArticleTestCase extends CakeTestCase { 
+     <?php
+      App::uses('Article', 'Model');
+
+      class ArticleTestCase extends CakeTestCase {
             public $fixtures = array('app.article');
-      } 
+      }
 
 In our test cases' variable ``$fixtures`` we define the set of fixtures that
 we'll use.  You should remember to include all the fixtures that will have
@@ -559,7 +564,7 @@ this::
     <?php
     App::uses('Article', 'Model');
 
-    class ArticleTestCase extends CakeTestCase {
+    class ArticleTest extends CakeTestCase {
         public $fixtures = array('app.article');
 
         public function setup() {
@@ -570,9 +575,9 @@ this::
         function testPublished() {
             $result = $this->Article->published(array('id', 'title'));
             $expected = array(
-                array('Article' => array( 'id' => 1, 'title' => 'First Article' )),
-                array('Article' => array( 'id' => 2, 'title' => 'Second Article' )),
-                array('Article' => array( 'id' => 3, 'title' => 'Third Article' ))
+                array('Article' => array('id' => 1, 'title' => 'First Article')),
+                array('Article' => array('id' => 2, 'title' => 'Second Article')),
+                array('Article' => array('id' => 3, 'title' => 'Third Article'))
             );
 
             $this->assertEquals($expected, $result);
@@ -587,6 +592,11 @@ article table.) We test that the result equals our expectation by using the
 ``assertEquals`` method. See the :ref:`running-tests` section for more
 information on how to run your test case.
 
+.. note::
+
+    When setting up your Model for testing be sure to use 
+    ``ClassRegistry::init('YourModelName');`` as it knows to use your test 
+    database connection.
 
 Testing Helpers
 ===============
@@ -615,34 +625,34 @@ function euro($amount)
     'EUR'. Just to make it a bit more complex, we will also wrap the
     result in span tags::
 
-        <span class="euro"></span> 
+        <span class="euro"></span>
 
 Let's create the tests first::
 
     <?php
     // Import the helper to be tested.
-    App::uses('CurrencyRenderer', 'Helper');
+    App::uses('CurrencyRendererHelper', 'View/Helper');
     App::uses('View', 'View');
-    
-    class CurrencyRendererTest extends CakeTestCase {
+
+    class CurrencyRendererHelperTest extends CakeTestCase {
         private $currencyRenderer = null;
-    
+
         //Here we instantiate our helper, and all other helpers we need.
         public function setUp() {
             parent::setUp();
             $view = new View();
             $this->currencyRenderer = new CurrencyRendererHelper($view);
         }
-    
+
         // testing usd() function.
         public function testUsd() {
             $this->assertEquals('USD 5.30', $this->currencyRenderer->usd(5.30));
 
-            //We should always have 2 decimal digits.
+            // We should always have 2 decimal digits.
             $this->assertEquals('USD 1.00', $this->currencyRenderer->usd(1));
             $this->assertEquals('USD 2.05', $this->currencyRenderer->usd(2.05));
 
-            //Testing the thousands separator
+            // Testing the thousands separator
             $this->assertEquals('USD 12,000.70', $this->currencyRenderer->usd(12000.70));
         }
     }
@@ -675,14 +685,14 @@ Lets assume that we want to test a component called TransporterComponent, which
 uses a model called Transporter to provide functionality for other controllers.
 We will use four files:
 
--  A component called Transporters found in
+-  A component called TransporterComponent found in
    ``app/Controller/Component/TransporterComponent.php``
 -  A model called Transporter found in
    ``app/Model/Transporter.php``
--  A fixture called TransporterTestFixture found in
+-  A fixture called TransporterFixture found in
    ``app/Test/Fixture/TransporterFixture.php``
 -  The testing code found in
-   ``app/Test/Case/TransporterTest.php``
+   ``app/Test/Case/TransporterComponentTest.php``
 
 Initializing the component
 --------------------------
@@ -693,7 +703,7 @@ we need a controller to access the data in the model.
 If the ``startup()`` function of the component looks like this::
 
     <?php
-    public function startup(Controller $controller){ 
+    public function startup(Controller $controller) {
         $this->Transporter = $controller->Transporter;
     }
 
@@ -705,8 +715,9 @@ then we can just design a really simple fake class::
 and assign values into it like this::
 
     <?php
-    $this->TransporterComponent = new TransporterComponent();
-    $controller = new FakeTransporterController(); 
+    $Collection = new ComponentCollection();
+    $this->TransporterComponent = new TransporterComponent($Collection);
+    $controller = new FakeTransporterController();
     $controller->Transporter = ClassRegistry::init('Transporter');
     $this->TransporterComponent->startup($controller);
 
@@ -718,12 +729,13 @@ Just create a class that extends CakeTestCase and start writing tests::
     <?php
     App::uses('TransporterComponent', 'Controller/Component');
 
-    class TransporterTestCase extends CakeTestCase {
+    class TransporterComponentTest extends CakeTestCase {
         public $fixtures = array('app.transporter');
 
         public function setUp() {
             parent::setUp();
-            $this->TransporterComponent = new TransporterComponent();
+            $Collection = new ComponentCollection();
+            $this->TransporterComponent = new TransporterComponent($Collection);
             $controller = new FakeTransporterController();
             $controller->Transporter = ClassRegistry::init('Transporter');
             $this->TransporterComponentTest->startup($controller);
@@ -757,41 +769,40 @@ test methods like :php:meth:`~Controller::redirect()`.
 Say you have a typical Articles controller, and its corresponding
 model. The controller code looks like::
 
-    <?php 
-    class ArticlesController extends AppController { 
-       public $helpers = array('Form', 'Html'); 
-       
-       function index($short = null) { 
-         if (!empty($this->data)) { 
-           $this->Article->save($this->data); 
-         } 
-         if (!empty($short)) { 
-           $result = $this->Article->findAll(null, array('id', 'title'));
-         } else { 
-           $result = $this->Article->findAll(); 
-         } 
-     
-         if (isset($this->params['requested'])) { 
-           return $result; 
-         } 
-     
-         $this->set('title', 'Articles'); 
-         $this->set('articles', $result); 
-       } 
-    } 
+    <?php
+    class ArticlesController extends AppController {
+        public $helpers = array('Form', 'Html');
+
+        function index($short = null) {
+            if (!empty($this->data)) {
+                $this->Article->save($this->data);
+            }
+            if (!empty($short)) {
+                $result = $this->Article->findAll(null, array('id', 'title'));
+            } else {
+                $result = $this->Article->findAll();
+            }
+
+            if (isset($this->params['requested'])) {
+                return $result;
+            }
+
+            $this->set('title', 'Articles');
+            $this->set('articles', $result);
+        }
+    }
 
 Create a file named ``ArticlesControllerTest.php`` in your
 ``app/Test/Case/Controller`` directory and put the following inside::
 
     <?php
     class ArticlesControllerTest extends ControllerTestCase {
-
         public $fixtures = array('app.article');
 
         function testIndex() {
             $result = $this->testAction('/articles/index');
             debug($result);
-        } 
+        }
 
         function testIndexShort() {
             $result = $this->testAction('/articles/index/short');
@@ -814,7 +825,7 @@ Create a file named ``ArticlesControllerTest.php`` in your
             debug($result);
         }
 
-        function testIndexPostData() { 
+        function testIndexPostData() {
             $data = array(
                 'Article' => array(
                     'user_id' => 1,
@@ -858,7 +869,7 @@ method key::
         // some assertions.
     }
 
-The data key will bet used as query string parameters when simulating a GET
+The data key will be used as query string parameters when simulating a GET
 request.
 
 Choosing the return type
@@ -871,10 +882,10 @@ expect:
 * ``vars`` Get the set view variables.
 * ``view`` Get the rendered view, without a layout.
 * ``contents`` Get the rendered view including the layout.
-* ``result`` Get the return value of the controller action.  Useful 
+* ``result`` Get the return value of the controller action. Useful
   for testing requestAction methods.
 
-The default value is ``result``.  As long as your return type is not ``result``
+The default value is ``result``. As long as your return type is not ``result``
 you can also access the various other return types as properties in the test
 case::
 
@@ -890,24 +901,24 @@ Using mocks with testAction
 
 There will be times when you want to replace components or models with either
 partially mocked objects or completely mocked objects.  You can do this by using
-:php:meth:`~ControllerTestCase::generate()`. ``generate()`` takes the hard work
+:php:meth:`ControllerTestCase::generate()`. ``generate()`` takes the hard work
 out of generating mocks on your controller. If you decide to generate a
 controller to be used in testing, you can generate mocked versions of its models
 and components along with it::
 
     <?php
     $Posts = $this->generate('Posts', array(
-      'methods' => array(
-        'isAuthorized'
-      ),
-      'models' => array(
-        'Post' => array('save')
-      ),
-      'components' => array(
-        'RequestHandler' => array('isPut'),
-        'Email' => array('send'),
-        'Session'
-    )
+        'methods' => array(
+            'isAuthorized'
+        ),
+        'models' => array(
+            'Post' => array('save')
+        ),
+        'components' => array(
+            'RequestHandler' => array('isPut'),
+            'Email' => array('send'),
+            'Session'
+        )
     ));
 
 The above would create a mocked ``PostsController``, stubbing out the ``isAuthorized``
@@ -937,21 +948,25 @@ for redirects::
     function testAdd() {
         $Posts = $this->generate('Posts', array(
             'components' => array(
-              'Session',
-              'Email' => array('send')
+                'Session',
+                'Email' => array('send')
             )
         ));
-        $Posts->Session->expects($this->once())->method('setFlash');
-        $Posts->Email->expects($this->once())->method('send')
+        $Posts->Session
+            ->expects($this->once())
+            ->method('setFlash');
+        $Posts->Email
+            ->expects($this->once())
+            ->method('send')
             ->will($this->returnValue(true));
 
         $this->testAction('/posts/add', array(
             'data' => array(
-              'Post' => array('name' => 'New Post')
+                'Post' => array('name' => 'New Post')
             )
         ));
 
-        $this->assertEquals($this->headers['Location'], '/posts/index');
+        $this->assertEquals($this->headers['Location'], 'http://localhost/blog/posts/index');
         $this->assertEquals($this->vars['post']['Post']['name'], 'New Post');
         $this->assertRegExp('/<html/', $this->contents);
         $this->assertRegExp('/<form/', $this->view);
@@ -967,6 +982,26 @@ rendered contents, and checks the view for a form tag. As you can see, your
 freedom to test controllers and easily mock its classes is greatly expanded with
 these changes.
 
+When doing controller tests using mocks that use static methods you'll have to
+use a different method to register your mock expectations.  For example if you
+wanted to mock out :php:meth:`AuthComponent::user()` you'd have to do the
+following::
+
+    <?php
+    function testAdd() {
+        $Posts = $this->generate('Posts', array(
+            'components' => array(
+                'Session',
+                'Auth' => array('user')
+            )
+        ));
+        $Posts->Auth->staticExpects($this->any())
+            ->method('user')
+            ->with('id')
+            ->will($this->returnValue(2));
+
+By using ``staticExpects`` you will be able to mock and manipulate static
+methods on components and models.
 
 Creating tests for plugins
 ==========================
@@ -988,14 +1023,14 @@ chapter of this manual. A difference from other tests is in the
 first line where 'Blog.BlogPost' is imported. You also need to
 prefix your plugin fixtures with ``plugin.blog.blog_post``::
 
-    <?php 
+    <?php
     App::uses('BlogPost', 'Blog.Model');
 
     class BlogPostTest extends CakeTestCase {
 
         // Plugin fixtures located in /app/Plugin/Blog/Test/Fixture/
-        public $fixtures = array('plugin.pizza.pizza_order');
-        public $PizzaOrderTest;
+        public $fixtures = array('plugin.blog.blog_post');
+        public $BlogPost;
 
         function testSomething() {
             // ClassRegistry makes the model use the test database connection
@@ -1039,22 +1074,22 @@ a *shell script step* to the build that contains the following::
     cat > app/Config/database.php <<'DATABASE_PHP'
     <?php
     class DATABASE_CONFIG {
-      public $test = array(
-        'datasource' => 'Database/Mysql',
-        'host' => 'localhost',
-        'database' => 'jenkins_test',
-        'login' => 'jenkins',
-        'password' => 'cakephp_jenkins',
-        'encoding' => 'utf8'
-      );
+        public $test = array(
+            'datasource' => 'Database/Mysql',
+            'host'       => 'localhost',
+            'database'   => 'jenkins_test',
+            'login'      => 'jenkins',
+            'password'   => 'cakephp_jenkins',
+            'encoding'   => 'utf8'
+        );
     }
     DATABASE_PHP
- 
+
 This ensures that you'll always have the correct database configuration that
-Jenkins requires.  Do the same for any other configuration files you need to.
-Its often a good idea to drop and re-create the database before each build as
-well.  This insulates you from chained failures, where one broken build causes
-others to fail.  Add another *shell script step* to the build that contains the
+Jenkins requires. Do the same for any other configuration files you need to.
+It's often a good idea to drop and re-create the database before each build as
+well. This insulates you from chained failures, where one broken build causes
+others to fail. Add another *shell script step* to the build that contains the
 following::
 
     mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE jenkins_test; CREATE DATABASE jenkins_test';
@@ -1063,13 +1098,13 @@ Add your tests
 --------------
 
 Add another *shell script step* to your build.  In this step run the tests for
-your application.  Creating a junit log file, or clover coverage is often a nice
+your application. Creating a junit log file, or clover coverage is often a nice
 bonus, as it gives you a nice graphical view of your testing results::
 
     app/Console/cake testsuite app AllTests \
     --stderr \
     --log-junit junit.xml
-    --clover-coverage clover.xml
+    --coverage-clover clover.xml
 
 If you use clover coverage, or the junit results, make sure to configure those
 in Jenkins as well. Failing to configure those steps will mean you won't see the results.

@@ -22,7 +22,7 @@ to implement your own caching systems. The built-in caching engines are:
 * ``ApcCache`` APC cache uses the PHP `APC <http://php.net/apc>`_ extension
   This extension uses shared memory on the webserver to store objects.
   This makes it very fast, and able to provide atomic read/write features.
-  By default CakePHP will use this cache engine if its available.
+  By default CakePHP will use this cache engine if it's available.
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
   extension.  Wincache is similar to APC in features and performance, but 
   optimized for windows and IIS.
@@ -63,7 +63,7 @@ Example::
     <?php
     Cache::config('short', array(
         'engine' => 'File',  
-        'duration'=> '+1 hours',  
+        'duration' => '+1 hours',  
         'path' => CACHE,  
         'prefix' => 'cake_short_'
     ));
@@ -71,8 +71,8 @@ Example::
     // long  
     Cache::config('long', array(  
         'engine' => 'File',  
-        'duration'=> '+1 week',  
-        'probability'=> 100,  
+        'duration' => '+1 week',  
+        'probability' => 100,  
         'path' => CACHE . 'long' . DS,  
     ));
 

@@ -30,7 +30,7 @@ optional::
         'group' => array('Model.field'), //fields to GROUP BY
         'limit' => n, //int
         'page' => n, //int
-        'offset'=> n, //int   
+        'offset' => n, //int   
         'callbacks' => true //other possible values are false, 'before', 'after'
     )
 
@@ -51,11 +51,15 @@ expect only one result. Below are a couple of simple (controller code) examples:
 
     <?php
     function some_function() {
-       ...
-       $semiRandomArticle = $this->Article->find('first');
-       $lastCreated = $this->Article->find('first', array('order' => array('Article.created' => 'desc')));
-       $specificallyThisOne = $this->Article->find('first', array('conditions' => array('Article.id' => 1)));
-       ...
+        // ...
+        $semiRandomArticle = $this->Article->find('first');
+        $lastCreated = $this->Article->find('first', array(
+            'order' => array('Article.created' => 'desc')
+        ));
+        $specificallyThisOne = $this->Article->find('first', array(
+            'conditions' => array('Article.id' => 1)
+        ));
+        // ...
     }
 
 In the first example, no parameters at all are passed to find -
@@ -93,15 +97,17 @@ couple of simple (controller code) examples::
 
     <?php
     function some_function() {
-       ...
-       $total = $this->Article->find('count');
-       $pending = $this->Article->find('count', array('conditions' => array('Article.status' => 'pending')));
-       $authors = $this->Article->User->find('count');
-       $publishedAuthors = $this->Article->find('count', array(
-          'fields' => 'DISTINCT Article.user_id',
-          'conditions' => array('Article.status !=' => 'pending')
-       ));
-       ...
+        // ...
+        $total = $this->Article->find('count');
+        $pending = $this->Article->find('count', array(
+            'conditions' => array('Article.status' => 'pending')
+        ));
+        $authors = $this->Article->User->find('count');
+        $publishedAuthors = $this->Article->find('count', array(
+           'fields' => 'DISTINCT Article.user_id',
+           'conditions' => array('Article.status !=' => 'pending')
+        ));
+        // ...
     }
 
 .. note::
@@ -124,12 +130,16 @@ code) examples::
 
     <?php
     function some_function() {
-       ...
-       $allArticles = $this->Article->find('all');
-       $pending = $this->Article->find('all', array('conditions' => array('Article.status' => 'pending')));
-       $allAuthors = $this->Article->User->find('all');
-       $allPublishedAuthors = $this->Article->User->find('all', array('conditions' => array('Article.status !=' => 'pending')));
-       ...
+        // ...
+        $allArticles = $this->Article->find('all');
+        $pending = $this->Article->find('all', array(
+            'conditions' => array('Article.status' => 'pending')
+        ));
+        $allAuthors = $this->Article->User->find('all');
+        $allPublishedAuthors = $this->Article->User->find('all', array(
+            'conditions' => array('Article.status !=' => 'pending')
+        ));
+        // ...
     }
 
 .. note::
@@ -177,7 +187,7 @@ boxes. Below are a couple of simple (controller code) examples::
 
     <?php
     function some_function() {
-       ...
+        // ...
         $allArticles = $this->Article->find('list');
         $pending = $this->Article->find('list', array(
             'conditions' => array('Article.status' => 'pending')
@@ -188,7 +198,7 @@ boxes. Below are a couple of simple (controller code) examples::
             'conditions' => array('Article.status !=' => 'pending'),
             'recursive' => 0
         ));
-       ...
+        // ...
     }
 
 .. note::
@@ -221,17 +231,23 @@ Some further examples to clarify::
 
     <?php
     function some_function() {
-       ...
-       $justusernames = $this->Article->User->find('list', array('fields' => array('User.username')));
-       $usernameMap = $this->Article->User->find('list', array('fields' => array('User.username', 'User.first_name')));
-       $usernameGroups = $this->Article->User->find('list', array('fields' => array('User.username', 'User.first_name', 'User.group')));
-       ...
+        // ...
+        $justusernames = $this->Article->User->find('list', array(
+            'fields' => array('User.username')
+        ));
+        $usernameMap = $this->Article->User->find('list', array(
+            'fields' => array('User.username', 'User.first_name')
+        ));
+        $usernameGroups = $this->Article->User->find('list', array(
+            'fields' => array('User.username', 'User.first_name', 'User.group')
+        ));
+        // ...
     }
 
 With the above code example, the resultant vars would look
 something like this::
 
-    
+
     $justusernames = Array
     (
         //[id] => 'username',
@@ -241,7 +257,7 @@ something like this::
         [2] => 'gwoo',
         [400] => 'jperras',
     )
-    
+
     $usernameMap = Array
     (
         //[username] => 'firstname',
@@ -251,22 +267,22 @@ something like this::
         ['gwoo'] => 'Gwoo',
         ['jperras'] => 'Joël',
     )
-    
+
     $usernameGroups = Array
     (
         ['User'] => Array
-            (
+        (
             ['PHPNut'] => 'Larry',
             ['gwoo'] => 'Gwoo',
-            )
-    
+        )
+
         ['Admin'] => Array
-            (
+        (
             ['_psychic_'] => 'John',
             ['AD7six'] => 'Andy',
             ['jperras'] => 'Joël',
-            )
-    
+        )
+
     )
 
 .. _model-find-threaded:
@@ -283,12 +299,12 @@ model data to build nested results. Below are a couple of simple
 
     <?php
     function some_function() {
-       ...
-       $allCategories = $this->Category->find('threaded');
-       $someCategories = $this->Comment->find('threaded', array(
-              'conditions' => array('article_id' => 50)
-       ));
-       ...
+        // ...
+        $allCategories = $this->Category->find('threaded');
+        $someCategories = $this->Comment->find('threaded', array(
+            'conditions' => array('article_id' => 50)
+        ));
+        // ...
     }
 
 .. tip::
@@ -303,25 +319,26 @@ call to ``find('threaded')`` will be of the following form::
     Array
     (
         [0] => Array
+        (
+            [ModelName] => Array
             (
-                [ModelName] => Array
-                    (
-                        [id] => 83
-                        [parent_id] => null
-                        [field1] => value1
-                        [field2] => value2
-                        [field3] => value3
-                    )
-    
-                [AssociatedModelName] => Array
-                    (
-                        [id] => 1
-                        [field1] => value1
-                        [field2] => value2
-                        [field3] => value3
-                    )
-                [children] => Array
-                    (
+                [id] => 83
+                [parent_id] => null
+                [field1] => value1
+                [field2] => value2
+                [field3] => value3
+            )
+
+            [AssociatedModelName] => Array
+            (
+                [id] => 1
+                [field1] => value1
+                [field2] => value2
+                [field3] => value3
+            )
+
+            [children] => Array
+            (
                 [0] => Array
                 (
                     [ModelName] => Array
@@ -332,7 +349,7 @@ call to ``find('threaded')`` will be of the following form::
                         [field2] => value2
                         [field3] => value3
                     )
-    
+
                     [AssociatedModelName] => Array
                     (
                         [id] => 2
@@ -340,13 +357,14 @@ call to ``find('threaded')`` will be of the following form::
                         [field2] => value2
                         [field3] => value3
                     )
-                        [children] => Array
+
+                    [children] => Array
                     (
                     )
-                        )
+                )
                 ...
-                    )
             )
+        )
     )
 
 The order results appear can be changed as it is influenced by the
@@ -385,39 +403,39 @@ format returned from a ``find('neighbors')`` call is in the form:
     Array
     (
         [prev] => Array
+        (
+            [ModelName] => Array
             (
-                [ModelName] => Array
-                    (
-                        [id] => 2
-                        [field1] => value1
-                        [field2] => value2
-                        ...
-                    )
-                [AssociatedModelName] => Array
-                    (
-                        [id] => 151
-                        [field1] => value1
-                        [field2] => value2
-                        ...
-                    )
+                [id] => 2
+                [field1] => value1
+                [field2] => value2
+                ...
             )
+            [AssociatedModelName] => Array
+            (
+                [id] => 151
+                [field1] => value1
+                [field2] => value2
+                ...
+            )
+        )
         [next] => Array
+        (
+            [ModelName] => Array
             (
-                [ModelName] => Array
-                    (
-                        [id] => 4
-                        [field1] => value1
-                        [field2] => value2
-                        ...
-                    )
-                [AssociatedModelName] => Array
-                    (
-                        [id] => 122
-                        [field1] => value1
-                        [field2] => value2
-                        ...
-                    )
+                [id] => 4
+                [field1] => value1
+                [field2] => value2
+                ...
             )
+            [AssociatedModelName] => Array
+            (
+                [id] => 122
+                [field1] => value1
+                [field2] => value2
+                ...
+            )
+        )
     )
 
 .. note::
@@ -473,9 +491,11 @@ This all comes together in the following example (controller code):
     <?php
     class ArticlesController extends AppController {
         
-        //Will find all published articles and order them by the created column
+        // Will find all published articles and order them by the created column
         function index() {
-            $articles = $this->Article->find('available', array('order' => array('created' => 'desc')));
+            $articles = $this->Article->find('available', array(
+                'order' => array('created' => 'desc')
+            ));
         }
         
     }
@@ -586,6 +606,7 @@ scripting attacks.
 ``query()`` uses the table name in the query as the array key for
 the returned data, rather than the model name. For example::
 
+    <?php
     $this->Picture->query("SELECT * FROM pictures LIMIT 2;");
 
 might return::
@@ -593,28 +614,29 @@ might return::
     Array
     (
         [0] => Array
+        (
+            [pictures] => Array
             (
-                [pictures] => Array
-                    (
-                        [id] => 1304
-                        [user_id] => 759
-                    )
+                [id] => 1304
+                [user_id] => 759
             )
-    
+        )
+
         [1] => Array
+        (
+            [pictures] => Array
             (
-                [pictures] => Array
-                    (
-                        [id] => 1305
-                        [user_id] => 759
-                    )
+                [id] => 1305
+                [user_id] => 759
             )
+        )
     )
 
 To use the model name as the array key, and get a result consistent
 with that returned by the Find methods, the query can be
 rewritten::
 
+    <?php
     $this->Picture->query("SELECT * FROM pictures AS Picture LIMIT 2;");
 
 which returns::
@@ -622,22 +644,22 @@ which returns::
     Array
     (
         [0] => Array
+        (
+            [Picture] => Array
             (
-                [Picture] => Array
-                    (
-                        [id] => 1304
-                        [user_id] => 759
-                    )
+                [id] => 1304
+                [user_id] => 759
             )
-    
+        )
+
         [1] => Array
+        (
+            [Picture] => Array
             (
-                [Picture] => Array
-                    (
-                        [id] => 1305
-                        [user_id] => 759
-                    )
+                [id] => 1305
+                [user_id] => 759
             )
+        )
     )
 
 .. note::
@@ -663,7 +685,8 @@ found returns false.
     $this->Post->id = 22;
     echo $this->Post->field('name'); // echo the name for row id 22
     
-    echo $this->Post->field('name', array('created <' => date('Y-m-d H:i:s')), 'created DESC'); // echo the name of the last created instance
+    echo $this->Post->field('name', array('created <' => date('Y-m-d H:i:s')), 'created DESC');
+    // echo the name of the last created instance
 
 :php:meth:`Model::read()`
 =========================
@@ -715,7 +738,7 @@ At its most basic, an array-based query looks like this::
 
     <?php
     $conditions = array("Post.title" => "This is a post", "Post.author_id" => 1);
-    //Example usage with a model:
+    // Example usage with a model:
     $this->Post->find('first', array('conditions' => $conditions));
 
 The structure here is fairly self-explanatory: it will find any
@@ -763,6 +786,7 @@ additional key/value pairs to the array::
 
 You can also create finds that compare two fields in the database::
 
+    <?php
     array("Post.created = Post.modified")
 
 This above example will return posts where the created date is
@@ -776,7 +800,7 @@ a string like::
     <?php
     array(
         'Model.field & 8 = 1',
-        //other conditions as usual
+        // other conditions as usual
     )
 
 By default, CakePHP joins multiple conditions with boolean AND;
@@ -786,11 +810,10 @@ one in the given set. However, we could just as easily find posts
 that match either condition::
 
     <?php
-    array( "OR" => array (
+    array("OR" => array(
         "Post.title" => array("First post", "Second post", "Third post"),
         "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
-        )
-    )
+    ))
 
 Cake accepts all valid SQL boolean operations, including AND, OR,
 NOT, XOR, etc., and they can be upper or lower case, whichever you
@@ -801,9 +824,9 @@ keyword (“magic”) or were created in the past two weeks, but you
 want to restrict your search to posts written by Bob::
 
     <?php
-    array (
+    array(
         "Author.name" => "Bob", 
-        "OR" => array (
+        "OR" => array(
             "Post.title LIKE" => "%magic%",
             "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
         )
@@ -814,18 +837,16 @@ you want to do a LIKE search with multiple terms, you can do so by
 using conditions similar to::
 
     <?php
-     array(
-        'OR' => array(
+    array('OR' => array(
         array('Post.title LIKE' => '%one%'),
         array('Post.title LIKE' => '%two%')
-        )
-    );
+    ))
 
 Cake can also check for null fields. In this example, the query
 will return records where the post title is not null::
 
     <?php
-    array ("NOT" => array (
+    array("NOT" => array(
             "Post.title" => null
         )
     )
@@ -843,51 +864,61 @@ To handle BETWEEN queries, you can use the following::
 How about GROUP BY?::
 
     <?php
-    array('fields'=>array('Product.type','MIN(Product.price) as price'), 'group' => 'Product.type');
+    array(
+        'fields' => array(
+            'Product.type',
+            'MIN(Product.price) as price'
+        ),
+        'group' => 'Product.type'
+    )
 
 The data returned for this would be in the following format::
 
     Array
     (
         [0] => Array
+        (
+            [Product] => Array
             (
-                [Product] => Array
-                    (
-                        [type] => Clothing
-                    )
-                [0] => Array
-                    (
-                        [price] => 32
-                    )
+                [type] => Clothing
             )
-        [1] => Array....
+            [0] => Array
+            (
+                [price] => 32
+            )
+        )
+        [1] => Array
+        ...
 
 A quick example of doing a DISTINCT query. You can use other
 operators, such as MIN(), MAX(), etc., in a similar fashion::
 
     <?php
-    array('fields'=>array('DISTINCT (User.name) AS my_column_name'), 'order'=>array('User.id DESC'));
+    array(
+        'fields' => array('DISTINCT (User.name) AS my_column_name'),
+        'order' = >array('User.id DESC')
+    )
 
 You can create very complex conditions, by nesting multiple
 condition arrays::
 
     <?php
     array(
-       'OR' => array(
-          array('Company.name' => 'Future Holdings'),
-          array('Company.city' => 'CA')
-       ),
-       'AND' => array(
-          array(
-             'OR'=>array(
-                array('Company.status' => 'active'),
-                'NOT'=>array(
-                   array('Company.status'=> array('inactive', 'suspended'))
+        'OR' => array(
+            array('Company.name' => 'Future Holdings'),
+            array('Company.city' => 'CA')
+        ),
+        'AND' => array(
+            array(
+                'OR' => array(
+                    array('Company.status' => 'active'),
+                    'NOT' => array(
+                        array('Company.status' => array('inactive', 'suspended'))
+                    )
                 )
-             )
-         )
-       )
-    );
+            )
+        )
+    )
 
 Which produces the following SQL::
 
@@ -923,15 +954,15 @@ expression and add it to the conditions array::
     $db = $this->User->getDataSource();
     $subQuery = $db->buildStatement(
         array(
-            'fields' => array('"User2"."id"'),
-            'table' => $db->fullTableName($this->User),
-            'alias' => 'User2',
-            'limit' => null,
-            'offset' => null,
-            'joins' => array(),
+            'fields'     => array('"User2"."id"'),
+            'table'      => $db->fullTableName($this->User),
+            'alias'      => 'User2',
+            'limit'      => null,
+            'offset'     => null,
+            'joins'      => array(),
             'conditions' => $conditionsSubQuery,
-            'order' => null,
-            'group' => null
+            'order'      => null,
+            'group'      => null
         ),
         $this->User
     );
@@ -974,8 +1005,14 @@ custom query you like::
 
     <?php
     $db = $this->getDataSource();
-    $db->fetchAll('SELECT * from users where username = ? AND password = ?', array('jhon', '12345'));
-    $db->fetchAll('SELECT * from users where username = :username AND password = :password', array('username' => 'jhon','password' => '12345'));
+    $db->fetchAll(
+        'SELECT * from users where username = ? AND password = ?',
+        array('jhon', '12345')
+    );
+    $db->fetchAll(
+        'SELECT * from users where username = :username AND password = :password',
+        array('username' => 'jhon','password' => '12345')
+    );
 
 
 

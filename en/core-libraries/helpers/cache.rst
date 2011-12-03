@@ -1,7 +1,7 @@
 CacheHelper
 ###########
 
-.. php:class:: CacheHelper
+.. php:class:: CacheHelper(View $view, array $settings = array())
 
 The Cache helper assists in caching entire layouts and views, saving time
 repetitively retrieving data. View Caching in Cake temporarily stores parsed
@@ -31,9 +31,7 @@ to your controller's ``$helpers`` array::
 
     <?php
     class PostsController extends AppConrtroller {
-        public $helpers = array(
-            'Cache'
-        );
+        public $helpers = array('Cache');
     }
 
 Additional configuration options
@@ -70,7 +68,7 @@ format for ``$cacheAction`` and create an array like the following::
     public $cacheAction = array(
         'view' => array('callbacks' => true, 'duration' => 21600),
         'add' => array('callbacks' => true, 'duration' => 36000),
-        'index'  => array('callbacks' => true, 'duration' => 48000)
+        'index' => array('callbacks' => true, 'duration' => 48000)
     );
 
 By setting ``callbacks => true`` you tell CacheHelper that you want

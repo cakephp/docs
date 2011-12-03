@@ -183,7 +183,7 @@ passed from the model to the behavior::
         );
     }
 
-Since behaviors are shared across all the model instances that use them, its a
+Since behaviors are shared across all the model instances that use them, it's a
 good practice to store the settings per alias/model name that is using the
 behavior.  When created behaviors will have their ``setup()`` method called::
 

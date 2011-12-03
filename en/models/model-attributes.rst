@@ -63,6 +63,7 @@ the model.
 
 Example usage::
 
+    <?php
     class Example extends AppModel {
         public $tablePrefix = 'alternate_'; // will look for 'alternate_examples'
     }
@@ -237,7 +238,7 @@ Example usage::
 
     <?php
     class Example extends AppModel {
-       public $name = 'Example';
+        public $name = 'Example';
     }
 
 cacheQueries

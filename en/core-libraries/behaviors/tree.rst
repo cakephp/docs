@@ -1,6 +1,8 @@
 Tree
 ####
 
+.. php:class:: TreeBehavior()
+
 It's fairly common to want to store hierarchical data in a database
 table. Examples of such data might be categories with unlimited
 subcategories, data related to a multilevel menu system or a
@@ -84,10 +86,9 @@ tree to see what it looks like. With a simple controller::
     
         function index() {
             $this->data = $this->Category->generateTreeList(null, null, null, '&nbsp;&nbsp;&nbsp;');
-            debug ($this->data); die;       
+            debug($this->data); die;       
         }
     }
-    ?>
 
 and an even simpler model definition:::
 
@@ -97,7 +98,6 @@ and an even simpler model definition:::
         public $name = 'Category';
         public $actsAs = array('Tree');
     }
-    ?>
 
 We can check what our category tree data looks like by visiting
 /categories You should see something like this:
@@ -147,7 +147,7 @@ would for any model. For example::
     $data['Category']['name'] =  'Skating';
     $this->Category->save($data);
 
-When using the tree behavior its not necessary to do any more than
+When using the tree behavior it's not necessary to do any more than
 set the parent\_id, and the tree behavior will take care of the
 rest. If you don't set the parent\_id, the tree behavior will add
 to the tree making your new addition a new top level entry::
@@ -204,7 +204,7 @@ of your data will remain unchanged. For example::
     <?php
     // pseudo controller code
     $this->Category->id = 5; // id of Extreme knitting
-    $this->Category->save(array('name' =>'Extreme fishing'));
+    $this->Category->save(array('name' => 'Extreme fishing'));
 
 The above code did not affect the parent\_id field - even if the
 parent\_id is included in the data that is passed to save if the
@@ -249,7 +249,7 @@ that Extreme fishing does not belong under Sport, but instead
 should be located under Other People's Categories. With the
 following code::
 
-    <?php
+  <?php
   // pseudo controller code
   $this->Category->id = 5; // id of Extreme fishing
   $newParentId = $this->Category->field('id', array('name' => 'Other People\'s Categories'));
@@ -301,7 +301,7 @@ reports category is no longer useful. To remove it
 *and any children it may have* just call delete as you would for
 any model. For example with the following code::
 
-    <?php
+  <?php
   // pseudo controller code
   $this->Category->id = 10;
   $this->Category->delete();
@@ -414,6 +414,7 @@ are a few more tree-orientated permutations at your disposal.
     to show the structure of your data. Below is an example of what you
     can expect this method to return::
 
+      <?php
       $treelist = $this->Category->generateTreeList();
 
     Output::
@@ -438,7 +439,7 @@ are a few more tree-orientated permutations at your disposal.
     .. php:method:: getParentNode()
 
     This convenience function will, as the name suggests, return the
-    parent node for any node, or *false* if the node has no parent (its
+    parent node for any node, or *false* if the node has no parent (it's
     the root node). For example::
 
         <?php
@@ -533,7 +534,7 @@ Advanced Usage
     Categories) that moves a node up the tree::
 
         <?php
-        function moveup($name = null, $delta = null){
+        function moveup($name = null, $delta = null) {
                 $cat = $this->Category->findByName($name);
                 if (empty($cat)) {
                     $this->Session->setFlash('There is no category named ' . $name);

@@ -49,8 +49,8 @@ directory. Here's what the basic controller should look like::
 
     <?php
     class PostsController extends AppController {
-        public $helpers = array ('Html','Form');
         public $name = 'Posts';
+        public $helpers = array('Html', 'Form');
     }
 
 Now, lets add an action to our controller. Actions often represent
@@ -63,9 +63,9 @@ posts. The code for that action would look something like this:
 
     <?php
     class PostsController extends AppController {
-        public $helpers = array ('Html','Form');
         public $name = 'Posts';
-    
+        public $helpers = array('Html', 'Form');
+
         function index() {
             $this->set('posts', $this->Post->find('all'));
         }
@@ -217,13 +217,13 @@ PostsController now::
 
     <?php
     class PostsController extends AppController {
-        public $helpers = array('Html', 'Form');
         public $name = 'Posts';
-    
+        public $helpers = array('Html', 'Form');
+
         public function index() {
              $this->set('posts', $this->Post->find('all'));
         }
-    
+
         public function view($id = null) {
             $this->Post->id = $id;
             $this->set('post', $this->Post->read());
@@ -268,20 +268,20 @@ PostsController:
 
     <?php
     class PostsController extends AppController {
-        public $helpers = array('Html', 'Form');
         public $name = 'Posts';
+        public $helpers = array('Html', 'Form');
         public $components = array('Session');
-    
+
         public function index() {
             $this->set('posts', $this->Post->find('all'));
         }
-    
+
         public function view($id) {
             $this->Post->id = $id;
             $this->set('post', $this->Post->read());
-    
+
         }
-    
+
         public function add() {
             if ($this->request->is('post')) {
                 if ($this->Post->save($this->request->data)) {
@@ -313,8 +313,8 @@ method to set a message to a session variable to be displayed on the page after
 redirection. In the layout we have
 :php:func:`SessionHelper::flash` which displays the
 message and clears the corresponding session variable. The
-controller's :php:meth:`Controller::redirect <redirect>` function
-redirects to another URL. The param ``array('action'=>'index')``
+controller's :php:meth:`Controller::redirect` function
+redirects to another URL. The param ``array('action' => 'index')``
 translates to URL /posts i.e the index action of posts controller.
 You can refer to :php:func:`Router::url()` function on the api to see 
 the formats in which you can specify a URL for various cake functions.
@@ -445,7 +445,6 @@ The edit view might look something like this::
         echo $this->Form->input('body', array('rows' => '3'));
         echo $this->Form->input('id', array('type' => 'hidden')); 
         echo $this->Form->end('Save Post');
-    ?>
 
 This view outputs the edit form (with the values populated), along
 with any necessary validation error messages.
@@ -497,7 +496,7 @@ Next, let's make a way for users to delete posts. Start with a
 
     <?php
     function delete($id) {
-        if (!$this->request->is('post')) {
+        if ($this->request->is('get')) {
             throw new MethodNotAllowedException();
         }
         if ($this->Post->delete($id)) {
@@ -509,7 +508,7 @@ Next, let's make a way for users to delete posts. Start with a
 This logic deletes the post specified by $id, and uses
 ``$this->Session->setFlash()`` to show the user a confirmation
 message after redirecting them on to ``/posts``.  If the user attempts to
-do a delete using a POST request, we throw an Exception.  Uncaught exceptions
+do a delete using a GET request, we throw an Exception.  Uncaught exceptions
 are captured by CakePHP's exception handler, and a nice error page is 
 displayed.  There are many built-in :doc:`/development/exceptions` that can
 be used to indicate the various HTTP errors your application might need
@@ -554,6 +553,11 @@ links that allow users to delete posts, however::
         <?php endforeach; ?>
     
     </table>
+
+Using :php:meth:`~FormHelper::postLink()` will create a link that uses
+Javascript to do a POST request deleting our post.  Allowing content to be
+deleted using GET requests is dangerous, as web crawlers could accidentally
+delete all your content.
 
 .. note::
 

@@ -1,7 +1,7 @@
 Security
 ########
 
-.. php:class:: SecurityComponent
+.. php:class:: SecurityComponent(ComponentCollection $collection, array $settings = array())
 
 The Security Component creates an easy way to integrate tighter
 security in your application. It provides methods for various tasks like:
@@ -213,7 +213,7 @@ triggered if it receives a POST request::
         public $components = array('Security');
     
         function beforeFilter() {
-            if (isset($this->request->params['admin'])){
+            if (isset($this->request->params['admin'])) {
                 $this->Security->requireSecure();
             }
         }
@@ -228,7 +228,7 @@ require secure SSL requests::
         public $components = array('Security');
     
         function beforeFilter() {
-            if (isset($this->params['admin'])){
+            if (isset($this->params['admin'])) {
                 $this->Security->blackHoleCallback = 'forceSSL';
                 $this->Security->requireSecure();
             }
@@ -279,7 +279,7 @@ You can also set this property in your controller's ``beforeFilter``::
     <?php
     function beforeFilter() {
         $this->Security->csrfExpires = '+1 hour';
-        ...
+        // ...
     }
 
 The csrfExpires property can be any value that is compatible with

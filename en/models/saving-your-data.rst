@@ -8,10 +8,10 @@ following basic format::
     Array
     (
         [ModelName] => Array
-            (
-                [fieldname1] => 'value'
-                [fieldname2] => 'value'
-            )
+        (
+            [fieldname1] => 'value'
+            [fieldname2] => 'value'
+        )
     )
 
 Most of the time you won’t even need to worry about this format:
@@ -25,18 +25,18 @@ model to save data to a database table::
 
     <?php
     function edit($id) {
-        //Has any form data been POSTed?
+        // Has any form data been POSTed?
         if ($this->request->is('post')) {
-            //If the form data can be validated and saved...
+            // If the form data can be validated and saved...
             if ($this->Recipe->save($this->data)) {
-                //Set a session flash message and redirect.
+                // Set a session flash message and redirect.
                 $this->Session->setFlash("Recipe Saved!");
                 $this->redirect('/recipes');
             }
         }
      
-        //If no form data, find the recipe to be edited
-        //and hand it to the view.
+        // If no form data, find the recipe to be edited
+        // and hand it to the view.
         $this->set('recipe', $this->Recipe->findById($id));
     }
 
@@ -100,6 +100,7 @@ security, you can limit the saved fields to those listed in
 
 The save method also has an alternate syntax::
 
+    <?php
     save(array $data = null, array $params = array())
 
 ``$params`` array can have any of the following available options
@@ -125,8 +126,8 @@ handy when creating new objects.
 
 ::
 
+    <?php
     $this->Ingredient->save($newData);
-    
     $newIngredientId = $this->Ingredient->id;
 
 Creating or updating is controlled by the model's ``id`` field. If
@@ -134,11 +135,11 @@ Creating or updating is controlled by the model's ``id`` field. If
 Otherwise a new record is created::
 
     <?php
-    //Create: id isn't set or is null
+    // Create: id isn't set or is null
     $this->Recipe->create();
     $this->Recipe->save($this->data);
     
-    //Update: id is set to a numerical value 
+    // Update: id is set to a numerical value 
     $this->Recipe->id = 2;
     $this->Recipe->save($this->data);
 
@@ -152,7 +153,7 @@ your are passing the primary key field into the data array::
 
     <?php
     $data = array('id' => 10, 'title' => 'My new title');
-    //This will update Recipe with id 10
+    // This will update Recipe with id 10
     $this->Recipe->save($data);
 
 :php:meth:`Model::create(array $data = array())`
@@ -247,6 +248,7 @@ options may be used:
 For saving multiple records of single model, $data needs to be a
 numerically indexed array of records like this::
 
+    <?php
     array(
         array('title' => 'title 1'),
         array('title' => 'title 2'),
@@ -261,6 +263,7 @@ numerically indexed array of records like this::
 
 It is also acceptable to have the data in the following format::
 
+    <?php
     array(
         array('Article' => array('title' => 'title 1')),
         array('Article' => array('title' => 'title 2')),
@@ -269,9 +272,10 @@ It is also acceptable to have the data in the following format::
 Keep in mind that if you want to update a record instead of creating a new one
 you just need to add the primary key index to the data row::
 
+    <?php
     array(
-        array('Article' => array('title' => 'New article')), //This creates a new row
-        array('Article' => array('id' => 2, 'title' => 'title 2')), //This updates an existing row
+        array('Article' => array('title' => 'New article')), // This creates a new row
+        array('Article' => array('id' => 2, 'title' => 'title 2')), // This updates an existing row
     )
 
 
@@ -290,7 +294,7 @@ options may be used:
 For saving a record along with its related record having a hasOne
 or belongsTo association, the data array should be like this::
 
-
+    <?php
     array(
         'User' => array('username' => 'billy'),
         'Profile' => array('sex' => 'Male', 'occupation' => 'Programmer'),
@@ -299,7 +303,7 @@ or belongsTo association, the data array should be like this::
 For saving a record along with its related records having hasMany
 association, the data array should be like this::
 
-
+    <?php
     array(
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
@@ -400,12 +404,12 @@ First, you need to build your form for both Company and Account
 models (we'll assume that Company hasMany Account)::
 
     <?php
-    echo $form->create('Company', array('action'=>'add'));
-    echo $form->input('Company.name', array('label'=>'Company name'));
+    echo $form->create('Company', array('action' => 'add'));
+    echo $form->input('Company.name', array('label' => 'Company name'));
     echo $form->input('Company.description');
     echo $form->input('Company.location');
     
-    echo $form->input('Account.0.name', array('label'=>'Account name'));
+    echo $form->input('Account.0.name', array('label' => 'Account name'));
     echo $form->input('Account.0.username');
     echo $form->input('Account.0.email');
     
@@ -427,11 +431,11 @@ action::
 
     <?php
     function add() {
-       if(!empty($this->data)) {
-          //Use the following to avoid validation errors:
-          unset($this->Company->Account->validate['company_id']);
-          $this->Company->saveAssociated($this->data);
-       }
+        if (!empty($this->data)) {
+            // Use the following to avoid validation errors:
+            unset($this->Company->Account->validate['company_id']);
+            $this->Company->saveAssociated($this->data);
+        }
     }
 
 That's all there is to it. Now our Company and Account models will
@@ -448,59 +452,57 @@ him to log a student's attendance on a course with days attended and grade. Take
 a look at the following code.::
 
    <?php
-    // Controller/CourseMembershipController.php
-    
-    class CourseMembershipsController extends AppController {
-        public $uses = array('CourseMembership');
-        
-        public function index() {
-            $this->set('courseMembershipsList', $this->CourseMembership->find('all'));
-        }
-        
-        public function add() {
-            
-            if ($this->request->is('post')) {
-                if ($this->CourseMembership->saveAssociated($this->request->data)) {
-                    $this->redirect(array('action' => 'index'));
-                }
-            }
-        }
-    }
-    
-    // View/CourseMemberships/add.ctp
+   // Controller/CourseMembershipController.php
+   class CourseMembershipsController extends AppController {
+       public $uses = array('CourseMembership');
 
-    <?php echo $this->Form->create('CourseMembership'); ?>
-        <?php echo $this->Form->input('Student.first_name'); ?>
-        <?php echo $this->Form->input('Student.last_name'); ?>
-        <?php echo $this->Form->input('Course.name'); ?>
-        <?php echo $this->Form->input('CourseMembership.days_attended'); ?>
-        <?php echo $this->Form->input('CourseMembership.grade'); ?>
-        <button type="submit">Save</button>
-    <?php echo  $this->Form->end(); ?>
+       public function index() {
+           $this->set('courseMembershipsList', $this->CourseMembership->find('all'));
+       }
+
+       public function add() {
+           if ($this->request->is('post')) {
+               if ($this->CourseMembership->saveAssociated($this->request->data)) {
+                   $this->redirect(array('action' => 'index'));
+               }
+           }
+       }
+   }
+
+   // View/CourseMemberships/add.ctp
+
+   <?php echo $this->Form->create('CourseMembership'); ?>
+       <?php echo $this->Form->input('Student.first_name'); ?>
+       <?php echo $this->Form->input('Student.last_name'); ?>
+       <?php echo $this->Form->input('Course.name'); ?>
+       <?php echo $this->Form->input('CourseMembership.days_attended'); ?>
+       <?php echo $this->Form->input('CourseMembership.grade'); ?>
+       <button type="submit">Save</button>
+   <?php echo  $this->Form->end(); ?>
         
 
 The data array will look like this when submitted.::
 
-        Array
+    Array
+    (
+        [Student] => Array
         (
-            [Student] => Array
-                (
-                    [first_name] => Joe
-                    [last_name] => Bloggs
-                )
-    
-            [Course] => Array
-                (
-                    [name] => Cake
-                )
-    
-            [CourseMembership] => Array
-                (
-                    [days_attended] => 5
-                    [grade] => A
-                )
-    
+            [first_name] => Joe
+            [last_name] => Bloggs
         )
+
+        [Course] => Array
+        (
+            [name] => Cake
+        )
+
+        [CourseMembership] => Array
+        (
+            [days_attended] => 5
+            [grade] => A
+        )
+
+    )
 
 Cake will happily be able to save the lot together and assign
 the foreign keys of the Student and Course into CourseMembership
@@ -508,35 +510,33 @@ with a `saveAssociated` call with this data structure. If we run the index
 action of our CourseMembershipsController the data structure
 received now from a find('all') is::
 
-        Array
+    Array
+    (
+        [0] => Array
         (
-            [0] => Array
-                (
-                    [CourseMembership] => Array
-                        (
-                            [id] => 1
-                            [student_id] => 1
-                            [course_id] => 1
-                            [days_attended] => 5
-                            [grade] => A
-                        )
-    
-                    [Student] => Array
-                        (
-                            [id] => 1
-                            [first_name] => Joe
-                            [last_name] => Bloggs
-                        )
-    
-                    [Course] => Array
-                        (
-                            [id] => 1
-                            [name] => Cake
-                        )
-    
-                )
-    
+            [CourseMembership] => Array
+            (
+                [id] => 1
+                [student_id] => 1
+                [course_id] => 1
+                [days_attended] => 5
+                [grade] => A
+            )
+
+            [Student] => Array
+            (
+                [id] => 1
+                [first_name] => Joe
+                [last_name] => Bloggs
+            )
+
+            [Course] => Array
+            (
+                [id] => 1
+                [name] => Cake
+            )
         )
+    )
 
 There are of course many ways to work with a join model. The
 version above assumes you want to save everything at-once. There
@@ -558,26 +558,24 @@ then the two meta-fields for the CourseMembership, e.g.::
 
 And the resultant POST::
 
-     
-        Array
+    Array
+    (
+        [Student] => Array
         (
-            [Student] => Array
-                (
-                    [id] => 1
-                )
-    
-            [Course] => Array
-                (
-                    [id] => 1
-                )
-    
-            [CourseMembership] => Array
-                (
-                    [days_attended] => 10
-                    [grade] => 5
-                )
-    
+            [id] => 1
         )
+
+        [Course] => Array
+        (
+            [id] => 1
+        )
+
+        [CourseMembership] => Array
+        (
+            [days_attended] => 10
+            [grade] => 5
+        )
+    )
 
 Again Cake is good to us and pulls the Student id and Course id
 into the CourseMembership with the `saveAssociated`.
@@ -603,9 +601,9 @@ $recipe\_id is already set to something)::
     <?php echo $this->Form->create('Tag');?>
         <?php echo $this->Form->input(
             'Recipe.id', 
-            array('type'=>'hidden', 'value' => $recipe_id)); ?>
+            array('type' => 'hidden', 'value' => $recipe_id)); ?>
         <?php echo $this->Form->input('Tag.name'); ?>
-        <?php echo $this->Form->end('Add Tag'); ?>
+    <?php echo $this->Form->end('Add Tag'); ?>
 
 In this example, you can see the ``Recipe.id`` hidden field whose
 value is set to the ID of the recipe we want to link the tag to.
@@ -617,10 +615,9 @@ automatically save the HABTM data to the database.
 
     <?php
     function add() {
-        
-        //Save the association
+        // Save the association
         if ($this->Tag->save($this->request->data)) {
-            //do something on success            
+            // do something on success
         }
     }
 

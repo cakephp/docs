@@ -1,7 +1,7 @@
 CakeEmail
 #########
 
-.. php:class:: CakeEmail
+.. php:class:: CakeEmail(mixed $config = null)
 
 ``CakeEmail`` is a new class to send email. With this
 class you can send email from any place of your application. In addition to
@@ -43,7 +43,7 @@ You can re-write the above code as::
 Choosing the sender
 -------------------
 
-When sending email on behalf of other people its often a good idea to define the
+When sending email on behalf of other people it's often a good idea to define the
 original sender using the Sender header.  You can do so using ``sender()``::
 
     <?php
@@ -52,7 +52,7 @@ original sender using the Sender header.  You can do so using ``sender()``::
 
 .. note::
 
-    Its also a good idea to set the envelope sender when sending mail on another
+    It's also a good idea to set the envelope sender when sending mail on another
     person's behalf.  This prevents them from getting any messages about
     deliverability.
 

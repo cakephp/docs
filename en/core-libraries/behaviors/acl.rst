@@ -1,6 +1,8 @@
 ACL
 ###
 
+.. php:class:: AclBehavior()
+
 The Acl behavior provides a way to seamlessly integrate a model
 with your ACL system. It can create both AROs or ACOs
 transparently.
@@ -47,7 +49,7 @@ parentNode() must return the alias of the ACO or ARO node::
 
     <?php
     function parentNode() {
-            return 'root_node';
+        return 'root_node';
     }
 
 A more complete example. Using an example User Model, where User
