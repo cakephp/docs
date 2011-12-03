@@ -578,6 +578,11 @@ article table.) We test that the result equals our expectation by using the
 ``assertEquals`` method. See the :ref:`running-tests` section for more
 information on how to run your test case.
 
+.. note::
+
+    When setting up your Model for testing be sure to use 
+    ``ClassRegistry::init('YourModelName');`` as it knows to use your test 
+    database connection.
 
 Testing Helpers
 ===============
