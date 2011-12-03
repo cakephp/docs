@@ -437,7 +437,7 @@ many oft-used validation techniques you won’t need to write on your
 own. Below, you'll find a complete list of all the rules, along
 with usage examples.
 
-.. php:staticmethod:: alphaNumeric()
+.. php:staticmethod:: alphaNumeric(mixed $check)
 
     The data for the field must only contain letters and numbers.::
 
@@ -449,7 +449,7 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: between()
+.. php:staticmethod:: between(string $check, integer $min, integer $max)
 
     The length of the data for the field must fall within the specified
     numeric range. Both minimum and maximum values must be supplied.
@@ -467,7 +467,8 @@ with usage examples.
     representation of the data". Be careful that it may be larger than
     the number of characters when handling non-ASCII characters.
 
-.. php:staticmethod:: blank
+
+.. php:staticmethod:: blank(mixed $check)
 
     This rule is used to make sure that the field is left blank or only
     white space characters are present in its value. White space
@@ -481,7 +482,8 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: boolean
+
+.. php:staticmethod:: boolean(string $check)
 
     The data for the field must be a boolean value. Valid values are
     true or false, integers 0 or 1 or strings '0' or '1'.::
@@ -494,7 +496,8 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: cc()
+
+.. php:staticmethod:: cc(mixed $check, mixed $type = 'fast', boolean $deep = false, string $regex = null)
 
     This rule is used to check whether the data is a valid credit card
     number. It takes three parameters: ‘type’, ‘deep’ and ‘regex’.
@@ -538,7 +541,8 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: comparison()
+
+.. php:staticmethod:: comparison(mixed $check1, string $operator = null, integer $check2 = null)
 
     Comparison is used to compare numeric values. It supports “is
     greater”, “is less”, “greater or equal”, “less or equal”, “equal
@@ -559,7 +563,21 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: date()
+
+.. php:staticmethod:: custom(mixed $check, string $regex = null)
+
+    Used when a custom regular expression is needed::
+
+        <?php
+        public $validate = array(
+            'infinite' => array(
+                'rule'    => array('custom', '\u221E'),
+                'message' => 'Please enter an infinite number.'
+            )
+        );
+
+
+.. php:staticmethod:: date(string $check, mixed $format = 'ymd', string $regex = null)
 
     This rule ensures that data is submitted in valid date formats. A
     single parameter (which can be an array) can be passed that will be
@@ -584,7 +602,7 @@ with usage examples.
         <?php
         public $validate = array(
             'born' => array(
-                'rule'       => array('date','ymd'),
+                'rule'       => array('date', 'ymd'),
                 'message'    => 'Enter a valid date in YY-MM-DD format.',
                 'allowEmpty' => true
             )
@@ -596,7 +614,8 @@ with usage examples.
     supply a given format. The more work you can do for your users, the
     better.
 
-.. php:staticmethod:: datetime()
+
+.. php:staticmethod:: datetime(array $check, mixed $dateFormat = 'ymd', string $regex = null)
     
     This rule ensures that the data is a valid datetime format. A
     parameter (which can be an array) can be passed to specify the format
@@ -621,11 +640,10 @@ with usage examples.
         <?php
         public $validate = array(
             'birthday' => array(
-                'rule' => array('datetime', 'dmy'),
+                'rule'    => array('datetime', 'dmy'),
                 'message' => 'Please enter a valid date and time.'
             )
         );
-        ?>
 
     Also a second parameter can be passed to specify a custom regular
     expression. If this parameter is used, this will be the only
@@ -633,7 +651,8 @@ with usage examples.
 
     Note that unlike date(), datetime() will validate a date and a time.
 
-.. php:staticmethod:: decimal()
+
+.. php:staticmethod:: decimal(integer $check, integer $places = null, string $regex = null)
 
     This rule ensures that the data is a valid decimal number. A
     parameter can be passed to specify the number of digits required
@@ -648,7 +667,8 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: email()
+
+.. php:staticmethod:: email(string $check, boolean $deep = false, string $regex = null)
 
     This checks whether the data is a valid email address. Passing a
     boolean true as the second parameter for this rule will also
@@ -664,7 +684,8 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: equalTo()
+
+.. php:staticmethod:: equalTo(mixed $check, mixed $compareTo)
 
     This rule will ensure that the value is equal to, and of the same
     type as the given value.
@@ -679,7 +700,8 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: extension()
+
+.. php:staticmethod:: extension(mixed $check, array $extensions = array('gif', 'jpeg', 'png', 'jpg'))
 
     This rule checks for valid file extensions like .jpg or .png. Allow
     multiple extensions by passing them in array form.
@@ -695,7 +717,26 @@ with usage examples.
         );
 
 
-.. php:staticmethod:: ip()
+.. php:staticmethod:: inList(string $check, array $list)
+
+    This rule will ensure that the value is in a given set. It needs an
+    array of values. The field is valid if the field's value matches
+    one of the values in the given array.
+
+    Example::
+
+        <?php
+        public $validate = array(
+            'function' => array(
+                 'allowedChoice' => array(
+                     'rule'    => array('inList', array('Foo', 'Bar')),
+                     'message' => 'Enter either Foo or Bar.'
+                 )
+             )
+         );
+
+
+.. php:staticmethod:: ip(string $check, string $type = 'both')
 
     This rule will ensure that a valid IPv4 or IPv6 address has been
     submitted. Accepts as option 'both' (default), 'IPv4' or 'IPv6'.
@@ -709,6 +750,7 @@ with usage examples.
                 'message' => 'Please supply a valid IP address.'
             )
         );
+
 
 .. php:staticmethod:: isUnique()
 
@@ -725,26 +767,14 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: minLength()
+.. php:staticmethod:: luhn(string|array $check, boolean $deep = false)
 
-    This rule ensures that the data meets a minimum length
-    requirement.
+    The Luhn algorithm: A checksum formula to validate a variety of 
+    identification numbers. See http://en.wikipedia.org/wiki/Luhn_algorithm for 
+    more information.
 
-    ::
 
-        <?php
-        public $validate = array(
-            'login' => array(
-                'rule'    => array('minLength', 8),
-                'message' => 'Usernames must be at least 8 characters long.'
-            )
-        );
-
-    The length here is "the number of bytes in the string
-    representation of the data". Be careful that it may be larger than
-    the number of characters when handling non-ASCII characters.
-
-.. php:staticmethod:: maxLength()
+.. php:staticmethod:: maxLength(string $check, integer $max)
 
     This rule ensures that the data stays within a maximum length
     requirement.
@@ -763,7 +793,28 @@ with usage examples.
     representation of the data". Be careful that it may be larger than
     the number of characters when handling non-ASCII characters.
 
-.. php:staticmethod:: money()
+
+.. php:staticmethod:: minLength(string $check, integer $min)
+
+    This rule ensures that the data meets a minimum length
+    requirement.
+
+    ::
+
+        <?php
+        public $validate = array(
+            'login' => array(
+                'rule'    => array('minLength', 8),
+                'message' => 'Usernames must be at least 8 characters long.'
+            )
+        );
+
+    The length here is "the number of bytes in the string
+    representation of the data". Be careful that it may be larger than
+    the number of characters when handling non-ASCII characters.
+
+
+.. php:staticmethod:: money(string $check, string $symbolPosition = 'left')
 
     This rule will ensure that the value is in a valid monetary
     amount.
@@ -780,7 +831,7 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: multiple()
+.. php:staticmethod:: multiple(mixed $check, mixed $options = array())
 
     Use this for validating a multiple select input. It supports
     parameters "in", "max" and "min".
@@ -799,37 +850,8 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: inList()
 
-    This rule will ensure that the value is in a given set. It needs an
-    array of values. The field is valid if the field's value matches
-    one of the values in the given array.
-
-    Example::
-
-        <?php
-        public $validate = array(
-            'function' => array(
-                 'allowedChoice' => array(
-                     'rule'    => array('inList', array('Foo', 'Bar')),
-                     'message' => 'Enter either Foo or Bar.'
-                 )
-             )
-         );
-
-.. php:staticmethod:: numeric()
-
-    Checks if the data passed is a valid number.::
-
-        <?php
-        public $validate = array(
-            'cars' => array(
-                'rule'    => 'numeric',
-                'message' => 'Please supply the number of cars.'
-            )
-        );
-
-.. php:staticmethod:: notEmpty()
+.. php:staticmethod:: notEmpty(mixed $check)
 
     The basic rule to ensure that a field is not empty.::
 
@@ -844,7 +866,21 @@ with usage examples.
     Do not use this for a multiple select input as it will cause an
     error. Instead, use "multiple".
 
-.. php:staticmethod:: phone()
+
+.. php:staticmethod:: numeric(string $check)
+
+    Checks if the data passed is a valid number.::
+
+        <?php
+        public $validate = array(
+            'cars' => array(
+                'rule'    => 'numeric',
+                'message' => 'Please supply the number of cars.'
+            )
+        );
+
+
+.. php:staticmethod:: phone(mixed $check, string $regex = null, string $country = 'all')
 
     Phone validates US phone numbers. If you want to validate non-US
     phone numbers, you can provide a regular expression as the second
@@ -859,7 +895,8 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: postal()
+
+.. php:staticmethod:: postal(mixed $check, string $regex = null, string $country = 'us')
 
     Postal is used to validate ZIP codes from the U.S. (us), Canada
     (ca), U.K (uk), Italy (it), Germany (de) and Belgium (be). For
@@ -875,7 +912,8 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: range()
+
+.. php:staticmethod:: range(string $check, integer $lower = null, integer $upper = null)
 
     This rule ensures that the value is in a given range. If no range
     is supplied, the rule will check to ensure the value is a legal
@@ -898,7 +936,8 @@ with usage examples.
     
         The range lower/upper are not inclusive
 
-.. php:staticmethod:: ssn()
+
+.. php:staticmethod:: ssn(mixed $check, string $regex = null, string $country = null)
 
     Ssn validates social security numbers from the U.S. (us), Denmark
     (dk), and the Netherlands (nl). For other social security number
@@ -913,7 +952,15 @@ with usage examples.
             )
         );
 
-.. php:staticmethod:: url()
+
+.. php:staticmethod:: time(string $check)
+
+    Time validation, determines if the string passed is a valid time. Validates 
+    time as 24hr (HH:MM) or am/pm ([H]H:MM[a|p]m) Does not allow/validate 
+    seconds.
+
+
+.. php:staticmethod:: url(string $check, boolean $strict = false)
 
     This rule checks for valid URL formats. Supports http(s), ftp(s),
     file, news, and gopher protocols::
@@ -934,6 +981,16 @@ with usage examples.
                 'rule' => array('url', true)
             )
         );
+
+
+.. php:staticmethod:: userDefined(mixed $check, object $object, string $method, array $args = null)
+
+    Runs an user-defined validation.
+
+
+.. php:staticmethod:: uuid(string $check)
+
+    Checks that a value is a valid uuid: http://tools.ietf.org/html/rfc4122
 
 
 .. toctree::
