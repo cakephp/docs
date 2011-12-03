@@ -968,6 +968,26 @@ rendered contents, and checks the view for a form tag. As you can see, your
 freedom to test controllers and easily mock its classes is greatly expanded with
 these changes.
 
+When doing controller tests using mocks that use static methods you'll have to
+use a different method to register your mock expectations.  For example if you
+wanted to mock out :php:meth:`AuthComponent::user()` you'd have to do the
+following::
+
+    <?php
+    function testAdd() {
+        $Posts = $this->generate('Posts', array(
+            'components' => array(
+                'Session',
+                'Auth' => array('user')
+            )
+        ));
+        $Posts->Auth->staticExpects($this->any())
+            ->method('user')
+            ->with('id')
+            ->will($this->returnValue(2));
+
+By using ``staticExpects`` you will be able to mock and manipulate static
+methods on components and models.
 
 Creating tests for plugins
 ==========================
