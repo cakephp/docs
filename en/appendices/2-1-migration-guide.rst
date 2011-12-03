@@ -102,3 +102,8 @@ Two new view classes have been added to CakePHP.  A new :php:class:`JsonView`
 and :php:class:`XmlView` allow you to easily generate XML and JSON views.  You
 can learn more about these classes in the section on
 :doc:`/views/json-and-xml-views`
+
+Testing
+=======
+
+- Web test runner now displays the PHPUnit version number.
