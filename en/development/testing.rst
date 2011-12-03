@@ -105,7 +105,7 @@ Our helper looks like::
     <?php
     class ProgressHelper extends AppHelper {
         public function bar($value) {
-            $width = round($value / 100) * 100;
+            $width = round($value / 100, 2) * 100;
             return sprintf(
                 '<div class="progress-container">
                     <div class="progress-bar" style="width: %s%%"></div>
@@ -119,8 +119,9 @@ case file in ``app/Test/Case/View/Helper/ProgressHelperTest.php``.  In that file
 we'll start with the following::
 
     <?php
-    App::uses('ProgressHelper', 'View/Helper');
+    App::uses('Controller', 'Controller');
     App::uses('View', 'View');
+    App::uses('ProgressHelper', 'View/Helper');
 
     class ProgressHelperTest extends CakeTestCase {
         public function setUp() {
@@ -141,7 +142,8 @@ following::
     <?php
     public function setUp() {
         parent::setUp();
-        $View = new View();
+        $Controller = new Controller();
+        $View = new View($Controller);
         $this->Progress = new ProgressHelper($View);
     }
 
@@ -617,8 +619,9 @@ Let's create the tests first::
 
     <?php
     // Import the helper to be tested.
-    App::uses('CurrencyRendererHelper', 'View/Helper');
+    App::uses('Controller', 'Controller');
     App::uses('View', 'View');
+    App::uses('CurrencyRendererHelper', 'View/Helper');
 
     class CurrencyRendererHelperTest extends CakeTestCase {
         private $currencyRenderer = null;
@@ -626,8 +629,9 @@ Let's create the tests first::
         //Here we instantiate our helper, and all other helpers we need.
         public function setUp() {
             parent::setUp();
-            $view = new View();
-            $this->currencyRenderer = new CurrencyRendererHelper($view);
+            $Controller = new Controller();
+            $View = new View($Controller);
+            $this->currencyRenderer = new CurrencyRendererHelper($View);
         }
 
         // testing usd() function.
