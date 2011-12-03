@@ -592,70 +592,15 @@ Testing Helpers
 Since a decent amount of logic resides in Helper classes, it's
 important to make sure those classes are covered by test cases.
 
-Helper testing is a bit similar to the same approach for
-Components. Suppose we have a helper called CurrencyRendererHelper
-located in ``app/View/Helper/CurrencyRendererHelper.php`` with its
-accompanying test case file located in
-``app/Test/Case/Helper/CurrencyRendererTest.php``
+Helper testing is a bit similar to the same approach for Components. First we 
+create an example helper to test. The ``CurrencyRendererHelper`` will help us 
+display currencies in our views and for simplicity only has one method 
+``usd()``.
 
-Creating Helper test
---------------------
-
-First of all we will define the responsibilities of our
-``CurrencyRendererHelper``. Basically, it will have two methods just for
-demonstration purpose:
-
-function usd($amount)
-    This function will receive the amount to render. It will take 2
-    decimal digits filling empty space with zeros and prefix 'USD'.
-function euro($amount)
-    This function will do the same as usd() but prefix the output with
-    'EUR'. Just to make it a bit more complex, we will also wrap the
-    result in span tags::
-
-        <span class="euro"></span>
-
-Let's create the tests first::
+::
 
     <?php
-    // Import the helper to be tested.
-    App::uses('Controller', 'Controller');
-    App::uses('View', 'View');
-    App::uses('CurrencyRendererHelper', 'View/Helper');
-
-    class CurrencyRendererHelperTest extends CakeTestCase {
-        private $currencyRenderer = null;
-
-        //Here we instantiate our helper, and all other helpers we need.
-        public function setUp() {
-            parent::setUp();
-            $Controller = new Controller();
-            $View = new View($Controller);
-            $this->currencyRenderer = new CurrencyRendererHelper($View);
-        }
-
-        // testing usd() function.
-        public function testUsd() {
-            $this->assertEquals('USD 5.30', $this->currencyRenderer->usd(5.30));
-
-            // We should always have 2 decimal digits.
-            $this->assertEquals('USD 1.00', $this->currencyRenderer->usd(1));
-            $this->assertEquals('USD 2.05', $this->currencyRenderer->usd(2.05));
-
-            // Testing the thousands separator
-            $this->assertEquals('USD 12,000.70', $this->currencyRenderer->usd(12000.70));
-        }
-    }
-
-Here, we call ``usd()`` with different parameters and tell the test suite to
-check if the returned values are equal to what is expected.
-
-Executing the test now will result in errors (because currencyRendererHelper
-doesn't even exist yet) showing that we have 3 fails.
-
-Once we know what our method should do, we can write the method itself::
-
-    <?php
+    // app/View/Helper/CurrencyRendererHelper.php
     class CurrencyRendererHelper extends AppHelper {
         public function usd($amount) {
             return 'USD ' . number_format($amount, 2, '.', ',');
@@ -665,8 +610,44 @@ Once we know what our method should do, we can write the method itself::
 Here we set the decimal places to 2, decimal separator to dot, thousands
 separator to comma, and prefix the formatted number with 'USD' string.
 
-Save this in ``app/View/Helper/CurrencyRenderer.php`` and execute the test. You
-should see a green bar and messaging indicating 4 passes.
+Now we create our tests::
+
+    <?php
+    // app/Test/Case/View/Helper/CurrencyRendererHelperTest.php
+
+    App::uses('Controller', 'Controller');
+    App::uses('View', 'View');
+    App::uses('CurrencyRendererHelper', 'View/Helper');
+
+    class CurrencyRendererHelperTest extends CakeTestCase {
+        public $CurrencyRenderer = null;
+
+        // Here we instantiate our helper
+        public function setUp() {
+            parent::setUp();
+            $Controller = new Controller();
+            $View = new View($Controller);
+            $this->CurrencyRenderer = new CurrencyRendererHelper($View);
+        }
+
+        // Testing the usd() function
+        public function testUsd() {
+            $this->assertEquals('USD 5.30', $this->CurrencyRenderer->usd(5.30));
+
+            // We should always have 2 decimal digits
+            $this->assertEquals('USD 1.00', $this->CurrencyRenderer->usd(1));
+            $this->assertEquals('USD 2.05', $this->CurrencyRenderer->usd(2.05));
+
+            // Testing the thousands separator
+            $this->assertEquals('USD 12,000.70', $this->CurrencyRenderer->usd(12000.70));
+        }
+    }
+
+Here, we call ``usd()`` with different parameters and tell the test suite to
+check if the returned values are equal to what is expected.
+
+Save this in and execute the test. You should see a green bar and messaging 
+indicating 4 passes.
 
 Testing components
 ==================
