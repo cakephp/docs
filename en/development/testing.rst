@@ -290,11 +290,11 @@ could would create ``app/Test/Case/AllModelTest.php``. Put the following in it::
 
 The code above will group all test cases found in the
 ``/app/Test/Case/Model/`` folder. To add an individual file, use
-``$suite->addTestFile($filename);``.  You can recursively add a directory
-using::
+``$suite->addTestFile($filename);``. You can recursively add a directory
+for all tests using::
 
     <?php
-    $suite->addTestDirectoryRecursive(TESTS . 'Case' . DS . 'Controller');
+    $suite->addTestDirectoryRecursive(TESTS . 'Case');
 
 Would recursively add all test cases in the ``app/Test/Case/Controller``
 directory.
@@ -350,7 +350,7 @@ model. Create a file named ``ArticleFixture.php`` in your
 
 We use ``$fields`` to specify which fields will be part of this table,
 and how they are defined. The format used to define these fields is
-the same used with :php:class:`CakeSchema`.  The keys available for table
+the same used with :php:class:`CakeSchema`. The keys available for table
 definition are:
 
 type
@@ -496,20 +496,19 @@ Testing models
 Let's say we already have our Article model defined on
 ``app/Model/Article.php``, which looks like this::
 
-     <?php
-     class Article extends AppModel {
-            public function published($fields = null) {
-                $params = array(
-                      'conditions' => array(
-                            $this->name . '.published' => 1
-                      ),
-                      'fields' => $fields
-                );
+    <?php
+    class Article extends AppModel {
+        public function published($fields = null) {
+            $params = array(
+                'conditions' => array(
+                    $this->name . '.published' => 1
+                ),
+                'fields' => $fields
+            );
 
-                return $this->find('all', $params);
-            }
-
-     }
+            return $this->find('all', $params);
+        }
+    }
 
 We now want to set up a test that will use this model definition, but through
 fixtures, to test some functionality in the model.  CakePHP test suite loads a
@@ -519,12 +518,12 @@ loading our model - in this case the Article model which we already defined.
 Let's now create a file named ``ArticleTest.php`` in your
 ``app/Test/Case/Model`` directory, with the following contents::
 
-     <?php
-      App::uses('Article', 'Model');
+    <?php
+    App::uses('Article', 'Model');
 
-      class ArticleTestCase extends CakeTestCase {
-            public $fixtures = array('app.article');
-      }
+    class ArticleTestCase extends CakeTestCase {
+        public $fixtures = array('app.article');
+    }
 
 In our test cases' variable ``$fixtures`` we define the set of fixtures that
 we'll use.  You should remember to include all the fixtures that will have
