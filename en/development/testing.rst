@@ -218,18 +218,6 @@ If you hover over a green line a tooltip will indicate which tests covered the
 line. Lines in red did not run, and have not been exercised by your tests.  Grey
 lines are considered unexecutable code by xdebug.
 
-Filtering test cases
-~~~~~~~~~~~~~~~~~~~~
-
-When you have larger test cases, you will often want to run a subset of the test
-methods when you are trying to work on a single failing case.  With the
-webrunner you can use a GET parameter to filter test methods::
-
-    /test.php?case=Console/ConsoleOutput&filter=Write
-
-The filter parameter is used as a case-sensitve regular expression for filtering
-which test methods to run.
-
 .. _run-tests-from-command-line:
 
 Running tests from command line
