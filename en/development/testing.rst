@@ -28,7 +28,8 @@ following::
 .. tip::
 
     All output is swallowed when using PHPUnit 3.6. Add the ``--debug`` 
-    modifier to display output if using the CLI.
+    modifier to display output if using the CLI or use ``ob_flush()`` to force 
+    output to be displayed.
 
 Test database setup
 ===================
