@@ -347,8 +347,9 @@ and add the following content::
                 $postId = $this->request->params['pass'][0];
                 return $this->Post->isOwnedBy($postId, $user['id']);
             }
+            return false;
         }
-        return false;
+        return true;
     }
 
 We're now overriding the AppController's ``isAuthorized()`` call and internally
