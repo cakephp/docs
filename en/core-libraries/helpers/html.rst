@@ -168,7 +168,7 @@ Inserting Well-Formatted elements
         <?php
         echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex')); 
 
-.. php:method:: docType(string $type = 'xhtml-strict')
+.. php:method:: docType(string $type = 'html5')
 
     :param string $type: The type of doctype being made.
 
@@ -185,6 +185,8 @@ Inserting Well-Formatted elements
         HTML4 Transitional
     html4-frame
         HTML4 Frameset
+    html5
+        HTML5
     xhtml-strict
         XHTML1 Strict
     xhtml-trans
@@ -197,7 +199,7 @@ Inserting Well-Formatted elements
     ::
 
         <?php echo $this->Html->docType(); ?> 
-        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        <!DOCTYPE html>
 
         <?php echo $this->Html->docType('html4-trans'); ?> 
         <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
