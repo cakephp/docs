@@ -333,20 +333,20 @@ model. Create a file named ``ArticleFixture.php`` in your
 
     <?php
     class ArticleFixture extends CakeTestFixture {
-          public $fields = array(
-              'id' => array('type' => 'integer', 'key' => 'primary'),
-              'title' => array('type' => 'string', 'length' => 255, 'null' => false),
-              'body' => 'text',
-              'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
-              'created' => 'datetime',
-              'updated' => 'datetime'
-          );
-          public $records = array(
-              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
-          );
-     }
+        public $fields = array(
+            'id' => array('type' => 'integer', 'key' => 'primary'),
+            'title' => array('type' => 'string', 'length' => 255, 'null' => false),
+            'body' => 'text',
+            'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
+            'created' => 'datetime',
+            'updated' => 'datetime'
+        );
+        public $records = array(
+            array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
+            array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
+            array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+        );
+    }
 
 We use ``$fields`` to specify which fields will be part of this table,
 and how they are defined. The format used to define these fields is
@@ -421,10 +421,10 @@ Will import table definition from a table called 'articles' using
 your CakePHP database connection named 'default'. If you want to
 use a different connection use::
 
-     <?php
-     class ArticleFixture extends CakeTestFixture {
+    <?php
+    class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'connection' => 'other');
-     }
+    }
 
 Since it uses your CakePHP database connection, if there's any
 table prefix declared it will be automatically used when fetching
@@ -432,24 +432,24 @@ table information. The two snippets above do not import records
 from the table. To force the fixture to also import its records,
 change the import to::
 
-     <?php
-     class ArticleFixture extends CakeTestFixture {
+    <?php
+    class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'records' => true);
-     }
+    }
 
 You can naturally import your table definition from an existing
 model/table, but have your records defined directly on the fixture
 as it was shown on previous section. For example::
 
-     <?php
-     class ArticleFixture extends CakeTestFixture {
-          public $import = 'Article';
-          public $records = array(
-              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
-          );
-       }
+    <?php
+    class ArticleFixture extends CakeTestFixture {
+        public $import = 'Article';
+        public $records = array(
+            array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
+            array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
+            array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+        );
+    }
 
 Loading fixtures in your test cases
 -----------------------------------
@@ -674,7 +674,7 @@ controllers that use it. Here is our example component located in
     }
 
 Now we can write tests to ensure our paginate ``limit`` parameter is being 
-set correctly by the ``adjust`` method in our component located in 
+set correctly by the ``adjust`` method in our component. We create the file 
 ``app/Test/Case/Controller/Component/PagematronComponentTest.php``::
 
     <?php
