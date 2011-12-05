@@ -31,7 +31,7 @@ following::
     modifier to display output if using the CLI or use ``ob_flush()`` to force 
     output to be displayed.
 
-Test database setup
+Test Database Setup
 ===================
 
 Remember to have a debug level of at least 1 in your ``app/Config/core.php``
@@ -55,7 +55,7 @@ fixture tables and data::
     It's a good idea to make the test database and your actual database
     different databases.  This will prevent any embarrassing mistakes later.
 
-Checking the test setup
+Checking the Test Setup
 =======================
 
 After installing PHPUnit and setting up your ``$test`` database configuration
@@ -68,7 +68,7 @@ additional information about the tests run, and number passed.
 
 Congratulations, you are now ready to start writing tests!
 
-Test case conventions
+Test Case Conventions
 =====================
 
 Like most things in CakePHP, test cases have some conventions. concerning
@@ -96,7 +96,7 @@ line using the testsuite shell::
 
 For example, would run the tests for your Post model.
 
-Creating your first test case
+Creating Your First Test Case
 =============================
 
 In the following example, we'll create a test case for a very simple helper
@@ -180,7 +180,7 @@ the creation of new bugs.
 
 .. _running-tests:
 
-Running tests
+Running Tests
 =============
 
 Once you have PHPUnit installed and some test cases written, you'll want to run
@@ -270,34 +270,104 @@ This will put the coverage results in your application's webroot directory.  You
 should be able to view the results by going to
 ``http://localhost/your_app/coverage``.
 
-Creating test suites
-====================
+Test Case Lifecycle Callbacks
+=============================
 
-If you want several of your tests to run at the same time, you can
-creating a test suite. A testsuite is composed of several test cases.
-``CakeTestSuite`` offers a few methods for easily creating test suites based on
-the file system.  If we wanted to create a test suite for all our model tests we
-could would create ``app/Test/Case/AllModelTest.php``. Put the following in it::
+Test cases have a number of lifecycle callbacks you can use when doing testing:
+
+* ``setUp`` is called before every test method.  Should be used to create the
+  objects that are going to be tested, and initialize any data for the test.
+  Always remember to call ``parent::setUp()``
+* ``tearDown`` is called after every test method.  Should be used to cleanup after
+  the test is complete. Always remember to call ``parent::tearDown()``.
+* ``setupBeforeClass`` is called once before test methods in a case are started.
+  This method must be *static*.
+* ``tearDownAfterClass`` is called once after test methods in a case are started.
+  This method must be *static*.
+
+Testing Models
+==============
+
+Let's say we already have our Article model defined on
+``app/Model/Article.php``, which looks like this::
 
     <?php
-    class AllModelTest extends CakeTestSuite {
-        public static function suite() {
-            $suite = new CakeTestSuite('All model tests');
-            $suite->addTestDirectory(TESTS . 'Case' . DS . 'Model');
-            return $suite;
+    class Article extends AppModel {
+        public function published($fields = null) {
+            $params = array(
+                'conditions' => array(
+                    $this->name . '.published' => 1
+                ),
+                'fields' => $fields
+            );
+
+            return $this->find('all', $params);
         }
     }
 
-The code above will group all test cases found in the
-``/app/Test/Case/Model/`` folder. To add an individual file, use
-``$suite->addTestFile($filename);``. You can recursively add a directory
-for all tests using::
+We now want to set up a test that will use this model definition, but through
+fixtures, to test some functionality in the model.  CakePHP test suite loads a
+very minimum set of files (to keep tests isolated), so we have to start by
+loading our model - in this case the Article model which we already defined.
+
+Let's now create a file named ``ArticleTest.php`` in your
+``app/Test/Case/Model`` directory, with the following contents::
 
     <?php
-    $suite->addTestDirectoryRecursive(TESTS . 'Case');
+    App::uses('Article', 'Model');
 
-Would recursively add all test cases in the ``app/Test/Case/Controller``
-directory.
+    class ArticleTestCase extends CakeTestCase {
+        public $fixtures = array('app.article');
+    }
+
+In our test cases' variable ``$fixtures`` we define the set of fixtures that
+we'll use.  You should remember to include all the fixtures that will have
+queries run against them.
+
+Creating a test method
+----------------------
+
+Let's now add a method to test the function published() in the
+Article model. Edit the file
+``app/Test/Case/Model/ArticleTest.php`` so it now looks like
+this::
+
+    <?php
+    App::uses('Article', 'Model');
+
+    class ArticleTest extends CakeTestCase {
+        public $fixtures = array('app.article');
+
+        public function setup() {
+            parent::setUp();
+            $this->Article = ClassRegistry::init('Article');
+        }
+
+        function testPublished() {
+            $result = $this->Article->published(array('id', 'title'));
+            $expected = array(
+                array('Article' => array('id' => 1, 'title' => 'First Article')),
+                array('Article' => array('id' => 2, 'title' => 'Second Article')),
+                array('Article' => array('id' => 3, 'title' => 'Third Article'))
+            );
+
+            $this->assertEquals($expected, $result);
+        }
+    }
+
+You can see we have added a method called ``testPublished()``. We start by
+creating an instance of our ``Article`` model, and then run our ``published()``
+method. In ``$expected`` we set what we expect should be the proper result (that
+we know since we have defined which records are initially populated to the
+article table.) We test that the result equals our expectation by using the
+``assertEquals`` method. See the :ref:`running-tests` section for more
+information on how to run your test case.
+
+.. note::
+
+    When setting up your Model for testing be sure to use 
+    ``ClassRegistry::init('YourModelName');`` as it knows to use your test 
+    database connection.
 
 Fixtures
 ========
@@ -475,251 +545,7 @@ Fixture directory.  You can also load fixtures from CakePHP core, or plugins::
 Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
 name as the prefix, will load the fixture from the named plugin.
 
-Testcase lifecycle callbacks
-============================
-
-Test cases have a number of lifecycle callbacks you can use when doing testing:
-
-* ``setUp`` is called before every test method.  Should be used to create the
-  objects that are going to be tested, and initialize any data for the test.
-  Always remember to call ``parent::setUp()``
-* ``tearDown`` is called after every test method.  Should be used to cleanup after
-  the test is complete. Always remember to call ``parent::tearDown()``.
-* ``setupBeforeClass`` is called once before test methods in a case are started.
-  This method must be *static*.
-* ``tearDownAfterClass`` is called once after test methods in a case are started.
-  This method must be *static*.
-
-Testing models
-==============
-
-Let's say we already have our Article model defined on
-``app/Model/Article.php``, which looks like this::
-
-    <?php
-    class Article extends AppModel {
-        public function published($fields = null) {
-            $params = array(
-                'conditions' => array(
-                    $this->name . '.published' => 1
-                ),
-                'fields' => $fields
-            );
-
-            return $this->find('all', $params);
-        }
-    }
-
-We now want to set up a test that will use this model definition, but through
-fixtures, to test some functionality in the model.  CakePHP test suite loads a
-very minimum set of files (to keep tests isolated), so we have to start by
-loading our model - in this case the Article model which we already defined.
-
-Let's now create a file named ``ArticleTest.php`` in your
-``app/Test/Case/Model`` directory, with the following contents::
-
-    <?php
-    App::uses('Article', 'Model');
-
-    class ArticleTestCase extends CakeTestCase {
-        public $fixtures = array('app.article');
-    }
-
-In our test cases' variable ``$fixtures`` we define the set of fixtures that
-we'll use.  You should remember to include all the fixtures that will have
-queries run against them.
-
-Creating a test method
-----------------------
-
-Let's now add a method to test the function published() in the
-Article model. Edit the file
-``app/Test/Case/Model/ArticleTest.php`` so it now looks like
-this::
-
-    <?php
-    App::uses('Article', 'Model');
-
-    class ArticleTest extends CakeTestCase {
-        public $fixtures = array('app.article');
-
-        public function setup() {
-            parent::setUp();
-            $this->Article = ClassRegistry::init('Article');
-        }
-
-        function testPublished() {
-            $result = $this->Article->published(array('id', 'title'));
-            $expected = array(
-                array('Article' => array('id' => 1, 'title' => 'First Article')),
-                array('Article' => array('id' => 2, 'title' => 'Second Article')),
-                array('Article' => array('id' => 3, 'title' => 'Third Article'))
-            );
-
-            $this->assertEquals($expected, $result);
-        }
-    }
-
-You can see we have added a method called ``testPublished()``. We start by
-creating an instance of our ``Article`` model, and then run our ``published()``
-method. In ``$expected`` we set what we expect should be the proper result (that
-we know since we have defined which records are initially populated to the
-article table.) We test that the result equals our expectation by using the
-``assertEquals`` method. See the :ref:`running-tests` section for more
-information on how to run your test case.
-
-.. note::
-
-    When setting up your Model for testing be sure to use 
-    ``ClassRegistry::init('YourModelName');`` as it knows to use your test 
-    database connection.
-
-Testing Helpers
-===============
-
-Since a decent amount of logic resides in Helper classes, it's
-important to make sure those classes are covered by test cases.
-
-Helper testing is a bit similar to the same approach for Components. First we 
-create an example helper to test. The ``CurrencyRendererHelper`` will help us 
-display currencies in our views and for simplicity only has one method 
-``usd()``.
-
-::
-
-    <?php
-    // app/View/Helper/CurrencyRendererHelper.php
-    class CurrencyRendererHelper extends AppHelper {
-        public function usd($amount) {
-            return 'USD ' . number_format($amount, 2, '.', ',');
-        }
-    }
-
-Here we set the decimal places to 2, decimal separator to dot, thousands
-separator to comma, and prefix the formatted number with 'USD' string.
-
-Now we create our tests::
-
-    <?php
-    // app/Test/Case/View/Helper/CurrencyRendererHelperTest.php
-
-    App::uses('Controller', 'Controller');
-    App::uses('View', 'View');
-    App::uses('CurrencyRendererHelper', 'View/Helper');
-
-    class CurrencyRendererHelperTest extends CakeTestCase {
-        public $CurrencyRenderer = null;
-
-        // Here we instantiate our helper
-        public function setUp() {
-            parent::setUp();
-            $Controller = new Controller();
-            $View = new View($Controller);
-            $this->CurrencyRenderer = new CurrencyRendererHelper($View);
-        }
-
-        // Testing the usd() function
-        public function testUsd() {
-            $this->assertEquals('USD 5.30', $this->CurrencyRenderer->usd(5.30));
-
-            // We should always have 2 decimal digits
-            $this->assertEquals('USD 1.00', $this->CurrencyRenderer->usd(1));
-            $this->assertEquals('USD 2.05', $this->CurrencyRenderer->usd(2.05));
-
-            // Testing the thousands separator
-            $this->assertEquals('USD 12,000.70', $this->CurrencyRenderer->usd(12000.70));
-        }
-    }
-
-Here, we call ``usd()`` with different parameters and tell the test suite to
-check if the returned values are equal to what is expected.
-
-Save this in and execute the test. You should see a green bar and messaging 
-indicating 4 passes.
-
-Testing Components
-==================
-
-Lets pretend we have a component called PagematronComponent in our application. 
-This component helps us set the pagination limit value across all the 
-controllers that use it. Here is our example component located in 
-``app/Controller/Component/PagematronComponent.php``::
-
-    <?php
-    class PagematronComponent extends Component {
-        public $Controller = null;
-
-        public function startup(Controller $controller) {
-            parent::startup($controller);
-            $this->Controller = $controller;
-            // Make sure the controller is using pagination
-            if (!isset($this->Controller->paginate)) {
-                $this->Controller->paginate = array();
-            }
-        }
-
-        public function adjust($length = 'short') {
-            switch ($length) {
-                case 'long':
-                    $this->Controller->paginate['limit'] = 100;
-                break;
-                case 'medium':
-                    $this->Controller->paginate['limit'] = 50;
-                break;
-                default:
-                    $this->Controller->paginate['limit'] = 20;
-                break;
-            }
-        }
-    }
-
-Now we can write tests to ensure our paginate ``limit`` parameter is being 
-set correctly by the ``adjust`` method in our component. We create the file 
-``app/Test/Case/Controller/Component/PagematronComponentTest.php``::
-
-    <?php
-    App::uses('Controller', 'Controller');
-    App::uses('PagematronComponent', 'Controller/Component');
-
-    // A fake controller to test against
-    class TestPagematronController extends Controller {
-        public $paginate = null;
-    }
-
-    class PagematronComponentTest extends CakeTestCase {
-        public $PagematronComponent = null;
-        public $Controller = null;
-
-        public function setUp() {
-            parent::setUp();
-            // Setup our component and fake test controller
-            $Collection = new ComponentCollection();
-            $this->PagematronComponent = new PagematronComponent($Collection);
-            $this->Controller = new TestPagematronController();
-            $this->PagematronComponent->startup($this->Controller);
-        }
-
-        public function testAdjust() {
-            // Test our adjust method with different parameter settings
-            $this->PagematronComponent->adjust();
-            $this->assertEquals($this->Controller->paginate['limit'], 20);
-
-            $this->PagematronComponent->adjust('medium');
-            $this->assertEquals($this->Controller->paginate['limit'], 50);
-
-            $this->PagematronComponent->adjust('long');
-            $this->assertEquals($this->Controller->paginate['limit'], 100);
-        }
-
-        public function tearDown() {
-            parent::tearDown();
-            // Clean up after we're done
-            unset($this->PagematronComponent);
-            unset($this->Controller);
-        }
-    }
-
-Testing controllers
+Testing Controllers
 ===================
 
 While you can test controller classes in a similar fashion to Helpers, Models,
@@ -936,7 +762,7 @@ for redirects::
     }
 
 This example shows a slightly more complex use of the new testAction and
-generate() methods.  First, we generate a testing controller and mock the
+generate() methods. First, we generate a testing controller and mock the
 :php:class:`SessionComponent`. Now that the SessionComponent is mocked, we have the ability
 to run testing methods on it. Assuming PostsController::add() redirects us to
 index, sends an email and sets a flash message, the test will pass. For the sake
@@ -962,11 +788,185 @@ following::
             ->method('user')
             ->with('id')
             ->will($this->returnValue(2));
+    }
 
 By using ``staticExpects`` you will be able to mock and manipulate static
 methods on components and models.
 
-Creating tests for plugins
+Testing Components
+==================
+
+Lets pretend we have a component called PagematronComponent in our application. 
+This component helps us set the pagination limit value across all the 
+controllers that use it. Here is our example component located in 
+``app/Controller/Component/PagematronComponent.php``::
+
+    <?php
+    class PagematronComponent extends Component {
+        public $Controller = null;
+
+        public function startup(Controller $controller) {
+            parent::startup($controller);
+            $this->Controller = $controller;
+            // Make sure the controller is using pagination
+            if (!isset($this->Controller->paginate)) {
+                $this->Controller->paginate = array();
+            }
+        }
+
+        public function adjust($length = 'short') {
+            switch ($length) {
+                case 'long':
+                    $this->Controller->paginate['limit'] = 100;
+                break;
+                case 'medium':
+                    $this->Controller->paginate['limit'] = 50;
+                break;
+                default:
+                    $this->Controller->paginate['limit'] = 20;
+                break;
+            }
+        }
+    }
+
+Now we can write tests to ensure our paginate ``limit`` parameter is being 
+set correctly by the ``adjust`` method in our component. We create the file 
+``app/Test/Case/Controller/Component/PagematronComponentTest.php``::
+
+    <?php
+    App::uses('Controller', 'Controller');
+    App::uses('PagematronComponent', 'Controller/Component');
+
+    // A fake controller to test against
+    class TestPagematronController extends Controller {
+        public $paginate = null;
+    }
+
+    class PagematronComponentTest extends CakeTestCase {
+        public $PagematronComponent = null;
+        public $Controller = null;
+
+        public function setUp() {
+            parent::setUp();
+            // Setup our component and fake test controller
+            $Collection = new ComponentCollection();
+            $this->PagematronComponent = new PagematronComponent($Collection);
+            $this->Controller = new TestPagematronController();
+            $this->PagematronComponent->startup($this->Controller);
+        }
+
+        public function testAdjust() {
+            // Test our adjust method with different parameter settings
+            $this->PagematronComponent->adjust();
+            $this->assertEquals($this->Controller->paginate['limit'], 20);
+
+            $this->PagematronComponent->adjust('medium');
+            $this->assertEquals($this->Controller->paginate['limit'], 50);
+
+            $this->PagematronComponent->adjust('long');
+            $this->assertEquals($this->Controller->paginate['limit'], 100);
+        }
+
+        public function tearDown() {
+            parent::tearDown();
+            // Clean up after we're done
+            unset($this->PagematronComponent);
+            unset($this->Controller);
+        }
+    }
+
+Testing Helpers
+===============
+
+Since a decent amount of logic resides in Helper classes, it's
+important to make sure those classes are covered by test cases.
+
+First we create an example helper to test. The ``CurrencyRendererHelper`` will 
+help us display currencies in our views and for simplicity only has one method 
+``usd()``.
+
+::
+
+    <?php
+    // app/View/Helper/CurrencyRendererHelper.php
+    class CurrencyRendererHelper extends AppHelper {
+        public function usd($amount) {
+            return 'USD ' . number_format($amount, 2, '.', ',');
+        }
+    }
+
+Here we set the decimal places to 2, decimal separator to dot, thousands
+separator to comma, and prefix the formatted number with 'USD' string.
+
+Now we create our tests::
+
+    <?php
+    // app/Test/Case/View/Helper/CurrencyRendererHelperTest.php
+
+    App::uses('Controller', 'Controller');
+    App::uses('View', 'View');
+    App::uses('CurrencyRendererHelper', 'View/Helper');
+
+    class CurrencyRendererHelperTest extends CakeTestCase {
+        public $CurrencyRenderer = null;
+
+        // Here we instantiate our helper
+        public function setUp() {
+            parent::setUp();
+            $Controller = new Controller();
+            $View = new View($Controller);
+            $this->CurrencyRenderer = new CurrencyRendererHelper($View);
+        }
+
+        // Testing the usd() function
+        public function testUsd() {
+            $this->assertEquals('USD 5.30', $this->CurrencyRenderer->usd(5.30));
+
+            // We should always have 2 decimal digits
+            $this->assertEquals('USD 1.00', $this->CurrencyRenderer->usd(1));
+            $this->assertEquals('USD 2.05', $this->CurrencyRenderer->usd(2.05));
+
+            // Testing the thousands separator
+            $this->assertEquals('USD 12,000.70', $this->CurrencyRenderer->usd(12000.70));
+        }
+    }
+
+Here, we call ``usd()`` with different parameters and tell the test suite to
+check if the returned values are equal to what is expected.
+
+Save this in and execute the test. You should see a green bar and messaging 
+indicating 1 pass and 4 assertions.
+
+Creating Test Suites
+====================
+
+If you want several of your tests to run at the same time, you can
+creating a test suite. A testsuite is composed of several test cases.
+``CakeTestSuite`` offers a few methods for easily creating test suites based on
+the file system.  If we wanted to create a test suite for all our model tests we
+could would create ``app/Test/Case/AllModelTest.php``. Put the following in it::
+
+    <?php
+    class AllModelTest extends CakeTestSuite {
+        public static function suite() {
+            $suite = new CakeTestSuite('All model tests');
+            $suite->addTestDirectory(TESTS . 'Case' . DS . 'Model');
+            return $suite;
+        }
+    }
+
+The code above will group all test cases found in the
+``/app/Test/Case/Model/`` folder. To add an individual file, use
+``$suite->addTestFile($filename);``. You can recursively add a directory
+for all tests using::
+
+    <?php
+    $suite->addTestDirectoryRecursive(TESTS . 'Case');
+
+Would recursively add all test cases in the ``app/Test/Case/``
+directory.
+
+Creating Tests for Plugins
 ==========================
 
 Tests for plugins are created in their own directory inside the
