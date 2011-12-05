@@ -637,81 +637,85 @@ check if the returned values are equal to what is expected.
 Save this in and execute the test. You should see a green bar and messaging 
 indicating 4 passes.
 
-Testing components
+Testing Components
 ==================
 
-Lets assume that we want to test a component called TransporterComponent, which
-uses a model called Transporter to provide functionality for other controllers.
-We will use four files:
-
--  A component called TransporterComponent found in
-   ``app/Controller/Component/TransporterComponent.php``
--  A model called Transporter found in
-   ``app/Model/Transporter.php``
--  A fixture called TransporterFixture found in
-   ``app/Test/Fixture/TransporterFixture.php``
--  The testing code found in
-   ``app/Test/Case/TransporterComponentTest.php``
-
-Initializing the component
---------------------------
-
-Since :doc:`/controllers/components`
-we need a controller to access the data in the model.
-
-If the ``startup()`` function of the component looks like this::
+Lets pretend we have a component called PagematronComponent in our application. 
+This component helps us set the pagination limit value across all the 
+controllers that use it. Here is our example component located in 
+``app/Controller/Component/PagematronComponent.php``::
 
     <?php
-    public function startup(Controller $controller) {
-        $this->Transporter = $controller->Transporter;
+    class PagematronComponent extends Component {
+        public $Controller = null;
+
+        public function startup(Controller $controller) {
+            parent::startup($controller);
+            $this->Controller = $controller;
+            // Make sure the controller is using pagination
+            if (!isset($this->Controller->paginate)) {
+                $this->Controller->paginate = array();
+            }
+        }
+
+        public function adjust($length = 'short') {
+            switch ($length) {
+                case 'long':
+                    $this->Controller->paginate['limit'] = 100;
+                break;
+                case 'medium':
+                    $this->Controller->paginate['limit'] = 50;
+                break;
+                default:
+                    $this->Controller->paginate['limit'] = 20;
+                break;
+            }
+        }
     }
 
-then we can just design a really simple fake class::
+Now we can write tests to ensure our paginate ``limit`` parameter is being 
+set correctly by the ``adjust`` method in our component located in 
+``app/Test/Case/Controller/Component/PagematronComponentTest.php``::
 
     <?php
-    class FakeTransporterController {}
+    App::uses('Controller', 'Controller');
+    App::uses('PagematronComponent', 'Controller/Component');
 
-and assign values into it like this::
+    // A fake controller to test against
+    class TestPagematronController extends Controller {
+        public $paginate = null;
+    }
 
-    <?php
-    $Collection = new ComponentCollection();
-    $this->TransporterComponent = new TransporterComponent($Collection);
-    $controller = new FakeTransporterController();
-    $controller->Transporter = ClassRegistry::init('Transporter');
-    $this->TransporterComponent->startup($controller);
-
-Creating a test method
-----------------------
-
-Just create a class that extends CakeTestCase and start writing tests::
-
-    <?php
-    App::uses('TransporterComponent', 'Controller/Component');
-
-    class TransporterComponentTest extends CakeTestCase {
-        public $fixtures = array('app.transporter');
+    class PagematronComponentTest extends CakeTestCase {
+        public $PagematronComponent = null;
+        public $Controller = null;
 
         public function setUp() {
             parent::setUp();
+            // Setup our component and fake test controller
             $Collection = new ComponentCollection();
-            $this->TransporterComponent = new TransporterComponent($Collection);
-            $controller = new FakeTransporterController();
-            $controller->Transporter = ClassRegistry::init('Transporter');
-            $this->TransporterComponentTest->startup($controller);
+            $this->PagematronComponent = new PagematronComponent($Collection);
+            $this->Controller = new TestPagematronController();
+            $this->PagematronComponent->startup($this->Controller);
         }
 
-        function testGetTransporter() {
-            $result = $this->TransporterComponent->getTransporter("12345", "Sweden", "54321", "Sweden");
-            $this->assertEquals(1, $result, "SP is best for 1xxxx-5xxxx");
+        public function testAdjust() {
+            // Test our adjust method with different parameter settings
+            $this->PagematronComponent->adjust();
+            $this->assertEquals($this->Controller->paginate['limit'], 20);
 
-            $result = $this->TransporterComponent->getTransporter("41234", "Sweden", "44321", "Sweden");
-            $this->assertEquals(2, $result, "WSTS is best for 41xxx-44xxx");
+            $this->PagematronComponent->adjust('medium');
+            $this->assertEquals($this->Controller->paginate['limit'], 50);
 
-            $result = $this->TransporterComponent->getTransporter("41001", "Sweden", "41870", "Sweden");
-            $this->assertEquals(3, $result, "GL is best for 410xx-419xx");
+            $this->PagematronComponent->adjust('long');
+            $this->assertEquals($this->Controller->paginate['limit'], 100);
+        }
 
-            $result = $this->TransporterComponent->getTransporter("12345", "Sweden", "54321", "Norway");
-            $this->assertEquals(0, $result, "No one can service Norway");
+        public function tearDown() {
+            parent::tearDown();
+            // Clean up after we're done
+            unset($this->PagematronComponent);
+            unset($this->Controller);
         }
     }
 
