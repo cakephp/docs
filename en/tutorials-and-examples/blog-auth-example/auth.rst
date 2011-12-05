@@ -338,7 +338,9 @@ and add the following content::
     // app/Controller/PostsController.php
 
     public function isAuthorized($user) {
-        if (!parent::isAuthorized($user)) {
+        if (parent::isAuthorized($user)) {
+            return true;
+        } else {
             if ($this->action === 'add') {
                 // All registered users can add posts
                 return true;
@@ -349,7 +351,6 @@ and add the following content::
             }
             return false;
         }
-        return true;
     }
 
 We're now overriding the AppController's ``isAuthorized()`` call and internally
