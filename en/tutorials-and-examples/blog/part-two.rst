@@ -66,7 +66,7 @@ posts. The code for that action would look something like this:
         public $name = 'Posts';
         public $helpers = array('Html', 'Form');
 
-        function index() {
+        public function index() {
             $this->set('posts', $this->Post->find('all'));
         }
     }
@@ -287,6 +287,8 @@ PostsController:
                 if ($this->Post->save($this->request->data)) {
                     $this->Session->setFlash('Your post has been saved.');
                     $this->redirect(array('action' => 'index'));
+                } else {
+                    $this->Session->setFlash('Unable to add your post.');
                 }
             }
         }
@@ -425,6 +427,8 @@ like::
             if ($this->Post->save($this->request->data)) {
                 $this->Session->setFlash('Your post has been updated.');
                 $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash('Unable to update your post.');
             }
         }
     }
