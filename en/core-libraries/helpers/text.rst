@@ -46,26 +46,26 @@ truncating long stretches of text.
     ``autoLinkEmails()`` on the supplied ``$text``. All URLs and emails
     are linked appropriately given the supplied ``$htmlOptions``.
 
-.. php:method:: excerpt(string $haystack, string $needle, int $radius=100, string $ending="...")
+.. php:method:: excerpt(string $haystack, string $needle, integer $radius=100, string $ending="...")
 
     :param string $haystack: The string to search.
     :param string $needle: The string to excerpt around.
     :param int $radius:  The number of characters on either side of $needle you want to include.
-    :param string $ending: Text to append to the end of the result. 
+    :param string $ending: Text to append/prepend to the beginning or end of the result. 
 
     Extracts an excerpt from ``$haystack`` surrounding the ``$needle``
     with a number of characters on each side determined by ``$radius``,
-    and suffixed with ``$ending``. This method is especially handy for
+    and prefix/suffix with ``$ending``. This method is especially handy for
     search results. The query string or keywords can be shown within
     the resulting document.::
 
         <?php
-        echo $this->Text->excerpt($last_paragraph, 'method', 50);
+        echo $this->Text->excerpt($last_paragraph, 'method', 50, '...');
 
     Output::
 
-        mined by $radius, and suffixed with $ending. This method is especially handy for
-        search results. The query...
+        ... by $radius, and prefix/suffix with $ending. This method is 
+        especially handy for search results. The query...
 
 .. php:method:: highlight(string $haystack, string $needle, array $options = array() )
 
