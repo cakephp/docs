@@ -117,7 +117,7 @@ and ReallyBigPerson are all examples of conventional model names.
 
 Table names corresponding to CakePHP models are plural and
 underscored. The underlying tables for the above mentioned models
-would be people, ``big\_people``, and ``really\_big\_people``,
+would be people, ``big_people``, and ``really_big_people``,
 respectively.
 
 You can use the utility library :php:class:`Inflector` to check the
