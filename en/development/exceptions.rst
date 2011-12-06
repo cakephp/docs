@@ -135,7 +135,7 @@ could look like::
     // in app/Config/core.php
     Configure::write('Exception.handler', 'AppExceptionHandler::handle');
 
-    // in app/config/bootstrap.php
+    // in app/Config/bootstrap.php
     App::uses('AppExceptionHandler', 'Lib');
 
     // in app/Lib/AppExceptionHandler.php

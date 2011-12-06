@@ -15,7 +15,7 @@ The ``useDbConfig`` property is a string that specifies the name of
 the database connection to use to bind your model class to the
 related database table. You can set it to any of the database
 connections defined within your database configuration file. The
-database configuration file is stored in /app/config/database.php.
+database configuration file is stored in /app/Config/database.php.
 
 The ``useDbConfig`` property is defaulted to the 'default' database
 connection.
@@ -57,7 +57,7 @@ tablePrefix
 
 The name of the table prefix used for the model. The table prefix
 is initially set in the database connection file at
-/app/config/database.php. The default is no prefix. You can
+/app/Config/database.php. The default is no prefix. You can
 override the default by setting the ``tablePrefix`` attribute in
 the model.
 

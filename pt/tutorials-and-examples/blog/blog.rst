@@ -143,7 +143,7 @@ criptografia. E o terceiro é dar permissão de escrita para o CakePHP na pasta
 ``tmp``.
 
 O "security salt" é utilizado para gerar hashes. Altere o valor padrão do salt
-editando o arquivo ``/app/config/core.php`` na linha 187. Não importa muito o
+editando o arquivo ``/app/Config/core.php`` na linha 187. Não importa muito o
 que o novo valor seja, basta que não seja fácil de adivinhar.
 
 ::
@@ -156,7 +156,7 @@ que o novo valor seja, basta que não seja fácil de adivinhar.
     ?>
 
 O "cipher seed" é usado para criptografar/descriptografar strings.
-Altere o valor padrão editando o arquivo ``/app/config/core.php`` na linha 192.
+Altere o valor padrão editando o arquivo ``/app/Config/core.php`` na linha 192.
 Como no "security salt", não importa muito o que o novo valor seja, basta que
 não seja fácil de adivinhar.
 
@@ -222,7 +222,7 @@ tudo funcionando corretamente:
 
 Se você não quiser ou não puder carregar o mod\_rewrite (ou algum outro módulo
 compatível) em seu servidor, você vai precisar usar o recurso de URLs amigáveis
-do CakePHP. No arquivo ``/app/config/core.php``, descomente uma linha parecida
+do CakePHP. No arquivo ``/app/Config/core.php``, descomente uma linha parecida
 com::
 
     Configure::write('App.baseUrl', env('SCRIPT_NAME'));

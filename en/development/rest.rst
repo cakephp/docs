@@ -17,14 +17,14 @@ The Simple Setup
 ================
 
 The fastest way to get up and running with REST is to add a few
-lines to your routes.php file, found in app/config. The Router
+lines to your routes.php file, found in app/Config. The Router
 object features a method called mapResources(), that is used to set
 up a number of default routes for REST access to your controllers.
 If we wanted to allow REST access to a recipe database, we'd do
 something like this::
 
     <?php
-    //In app/config/routes.php...
+    //In app/Config/routes.php...
         
     Router::mapResources('recipes');
     Router::parseExtensions();

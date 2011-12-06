@@ -69,7 +69,7 @@ Connecting Routes
 
 Defining your own routes allows you to define how your application
 will respond to a given URL. Define your own routes in the
-``app/config/routes.php`` file using the :php:meth:`Router::connect()`
+``app/Config/routes.php`` file using the :php:meth:`Router::connect()`
 method.
 
 The ``connect()`` method takes up to three parameters: the URL you
@@ -359,7 +359,7 @@ special URL such as ``/admin/users/edit/5``. In CakePHP, prefix routing
 can be enabled from within the core configuration file by setting
 the prefixes with Routing.prefixes. Note that prefixes, although
 related to the router, are to be configured in
-``app/config/core.php``::
+``app/Config/core.php``::
 
     <?php
     Configure::write('Routing.prefixes', array('admin'));

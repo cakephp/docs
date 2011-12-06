@@ -13,7 +13,7 @@ and exception handler using configure.
 Error configuration
 ===================
 
-Error configuration is done inside your application's ``app/config/core.php``
+Error configuration is done inside your application's ``app/Config/core.php``
 file.  You can define a callback to be fired each time your application triggers
 any PHP error - exceptions are handled :doc:`/development/exceptions` separately.
 The callback can be any PHP callable, including an anonymous function.  The 
@@ -56,7 +56,7 @@ need to be done::
     //in app/Config/core.php
     Configure::write('Error.handler', 'AppError::handleError');
 
-    //in app/config/bootstrap.php
+    //in app/Config/bootstrap.php
     App::uses('AppError', 'Lib');
 
     //in app/Lib/AppError.php
