@@ -454,7 +454,7 @@ Other Useful Methods
         )
         */
 
-        // Let’s get orders that have at least 4 items and contain ‘Ye Olde’
+        // Let's get orders that have at least 4 items and contain 'Ye Olde'
         $conditions = $this->postConditions(
             $this->request->data,
             array(

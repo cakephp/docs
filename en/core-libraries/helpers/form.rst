@@ -140,7 +140,7 @@ There are a number of options for create():
   This allows CakePHP to emulate proper REST support in web
   browsers.
 
-* ``$options[‘action’]`` The action key allows you to point the form to a
+* ``$options['action']`` The action key allows you to point the form to a
   specific action in your current controller. For example, if you’d like to
   point the form to the login() action of the current controller, you would
   supply an $options array like the following::
@@ -819,10 +819,10 @@ Options for select, checkbox and  radio inputs
 Datetime options
 ----------------
 
-* ``$options[‘timeFormat’]`` Used to specify the format of the select inputs for
+* ``$options['timeFormat']`` Used to specify the format of the select inputs for
   a time-related set of inputs. Valid values include ‘12’, ‘24’, and ‘none’.
 
-* ``$options[‘dateFormat’]`` Used to specify the format of the select inputs for
+* ``$options['dateFormat']`` Used to specify the format of the select inputs for
   a date-related set of inputs. Valid values include ‘DMY’, ‘MDY’, ‘YMD’, and
   ‘NONE’.
 
@@ -944,7 +944,7 @@ Form Element-Specific Methods
     In addition to the :ref:`general-input-options`, textarea() supports a few
     specific options:
 
-    * ``$options[‘rows’], $options[‘cols’]`` These two keys specify the number of
+    * ``$options['rows'], $options['cols']`` These two keys specify the number of
       rows and columns::
 
         <?php
