@@ -319,6 +319,11 @@ association, the data array should be like this::
     associated models. If successful, the foreign key of the main model will be stored in 
     the related models' id field, i.e. $this->RelatedModel->id.
 
+.. warning::
+    
+    Be careful when checking saveAssociated calls with atomic option set to
+    false. It returns an array instead of boolean.
+
 
 :php:meth:`Model::saveAll(array $data = null, array $options = array())`
 ========================================================================
