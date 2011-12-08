@@ -103,6 +103,16 @@ and :php:class:`XmlView` allow you to easily generate XML and JSON views.  You
 can learn more about these classes in the section on
 :doc:`/views/json-and-xml-views`
 
+
+Helpers
+=======
+
+FormHelper
+----------
+
+- FormHelper now omits disabled fields from the secured fields hash.  This makes
+  working with :php:class:`SecurityComponent` and disabled inputs easier.
+
 Testing
 =======
 
