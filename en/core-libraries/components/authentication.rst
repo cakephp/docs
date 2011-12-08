@@ -29,6 +29,22 @@ ways of authenticating users stored in your application.
 
 By default ``AuthComponent`` uses ``FormAuthenticate``.
 
+Choosing an Authentication type
+-------------------------------
+
+Generally you'll want to offer form based authenitcation. It is the easiest for
+users using a web-browser to use.  If you are building an API or webservice, you
+may want to consider basic authentication or digest authentication.  The key
+differences between digest and basic authentication are mostly related to how
+passwords are handled.  In basic authentication, the username and password are
+transmitted as plain-text to the server.  This makes basic authentication
+un-suitable for applications without SSL, as you would end up exposing sensitive
+passwords.  Digest authentication uses a digest hash of the username, password,
+and a few other details.  This makes digest authentication more appropriate for
+applications without SSL encryption.
+
+You can also use authentication systems like openid as well, however openid is
+not part of CakePHP core.
 
 Configuring Authentication handlers
 -----------------------------------

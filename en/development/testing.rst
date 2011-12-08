@@ -28,7 +28,8 @@ following::
 .. tip::
 
     All output is swallowed when using PHPUnit 3.6. Add the ``--debug`` 
-    modifier to display output if using the CLI.
+    modifier to display output if using the CLI or use ``ob_flush()`` to force 
+    output to be displayed.
 
 Test database setup
 ===================
@@ -105,7 +106,7 @@ Our helper looks like::
     <?php
     class ProgressHelper extends AppHelper {
         public function bar($value) {
-            $width = round($value / 100) * 100;
+            $width = round($value / 100, 2) * 100;
             return sprintf(
                 '<div class="progress-container">
                     <div class="progress-bar" style="width: %s%%"></div>
@@ -119,8 +120,9 @@ case file in ``app/Test/Case/View/Helper/ProgressHelperTest.php``.  In that file
 we'll start with the following::
 
     <?php
-    App::uses('ProgressHelper', 'View/Helper');
+    App::uses('Controller', 'Controller');
     App::uses('View', 'View');
+    App::uses('ProgressHelper', 'View/Helper');
 
     class ProgressHelperTest extends CakeTestCase {
         public function setUp() {
@@ -141,7 +143,8 @@ following::
     <?php
     public function setUp() {
         parent::setUp();
-        $View = new View();
+        $Controller = new Controller();
+        $View = new View($Controller);
         $this->Progress = new ProgressHelper($View);
     }
 
@@ -215,18 +218,6 @@ If you hover over a green line a tooltip will indicate which tests covered the
 line. Lines in red did not run, and have not been exercised by your tests.  Grey
 lines are considered unexecutable code by xdebug.
 
-Filtering test cases
-~~~~~~~~~~~~~~~~~~~~
-
-When you have larger test cases, you will often want to run a subset of the test
-methods when you are trying to work on a single failing case.  With the
-webrunner you can use a GET parameter to filter test methods::
-
-    /test.php?case=Console/ConsoleOutput&filter=Write
-
-The filter parameter is used as a case-sensitve regular expression for filtering
-which test methods to run.
-
 .. _run-tests-from-command-line:
 
 Running tests from command line
@@ -299,11 +290,11 @@ could would create ``app/Test/Case/AllModelTest.php``. Put the following in it::
 
 The code above will group all test cases found in the
 ``/app/Test/Case/Model/`` folder. To add an individual file, use
-``$suite->addTestFile($filename);``.  You can recursively add a directory
-using::
+``$suite->addTestFile($filename);``. You can recursively add a directory
+for all tests using::
 
     <?php
-    $suite->addTestDirectoryRecursive(TESTS . 'Case' . DS . 'Controller');
+    $suite->addTestDirectoryRecursive(TESTS . 'Case');
 
 Would recursively add all test cases in the ``app/Test/Case/Controller``
 directory.
@@ -367,7 +358,7 @@ unspecified, the default ``test`` datasource will be used.
 
 We use ``$fields`` to specify which fields will be part of this table,
 and how they are defined. The format used to define these fields is
-the same used with :php:class:`CakeSchema`.  The keys available for table
+the same used with :php:class:`CakeSchema`. The keys available for table
 definition are:
 
 type
@@ -513,20 +504,19 @@ Testing models
 Let's say we already have our Article model defined on
 ``app/Model/Article.php``, which looks like this::
 
-     <?php
-     class Article extends AppModel {
-            public function published($fields = null) {
-                $params = array(
-                      'conditions' => array(
-                            $this->name . '.published' => 1
-                      ),
-                      'fields' => $fields
-                );
+    <?php
+    class Article extends AppModel {
+        public function published($fields = null) {
+            $params = array(
+                'conditions' => array(
+                    $this->name . '.published' => 1
+                ),
+                'fields' => $fields
+            );
 
-                return $this->find('all', $params);
-            }
-
-     }
+            return $this->find('all', $params);
+        }
+    }
 
 We now want to set up a test that will use this model definition, but through
 fixtures, to test some functionality in the model.  CakePHP test suite loads a
@@ -536,12 +526,12 @@ loading our model - in this case the Article model which we already defined.
 Let's now create a file named ``ArticleTest.php`` in your
 ``app/Test/Case/Model`` directory, with the following contents::
 
-     <?php
-      App::uses('Article', 'Model');
+    <?php
+    App::uses('Article', 'Model');
 
-      class ArticleTestCase extends CakeTestCase {
-            public $fixtures = array('app.article');
-      }
+    class ArticleTestCase extends CakeTestCase {
+        public $fixtures = array('app.article');
+    }
 
 In our test cases' variable ``$fixtures`` we define the set of fixtures that
 we'll use.  You should remember to include all the fixtures that will have
@@ -604,68 +594,15 @@ Testing Helpers
 Since a decent amount of logic resides in Helper classes, it's
 important to make sure those classes are covered by test cases.
 
-Helper testing is a bit similar to the same approach for
-Components. Suppose we have a helper called CurrencyRendererHelper
-located in ``app/View/Helper/CurrencyRendererHelper.php`` with its
-accompanying test case file located in
-``app/Test/Case/Helper/CurrencyRendererTest.php``
+Helper testing is a bit similar to the same approach for Components. First we 
+create an example helper to test. The ``CurrencyRendererHelper`` will help us 
+display currencies in our views and for simplicity only has one method 
+``usd()``.
 
-Creating Helper test
---------------------
-
-First of all we will define the responsibilities of our
-``CurrencyRendererHelper``. Basically, it will have two methods just for
-demonstration purpose:
-
-function usd($amount)
-    This function will receive the amount to render. It will take 2
-    decimal digits filling empty space with zeros and prefix 'USD'.
-function euro($amount)
-    This function will do the same as usd() but prefix the output with
-    'EUR'. Just to make it a bit more complex, we will also wrap the
-    result in span tags::
-
-        <span class="euro"></span>
-
-Let's create the tests first::
+::
 
     <?php
-    // Import the helper to be tested.
-    App::uses('CurrencyRendererHelper', 'View/Helper');
-    App::uses('View', 'View');
-
-    class CurrencyRendererHelperTest extends CakeTestCase {
-        private $currencyRenderer = null;
-
-        //Here we instantiate our helper, and all other helpers we need.
-        public function setUp() {
-            parent::setUp();
-            $view = new View();
-            $this->currencyRenderer = new CurrencyRendererHelper($view);
-        }
-
-        // testing usd() function.
-        public function testUsd() {
-            $this->assertEquals('USD 5.30', $this->currencyRenderer->usd(5.30));
-
-            // We should always have 2 decimal digits.
-            $this->assertEquals('USD 1.00', $this->currencyRenderer->usd(1));
-            $this->assertEquals('USD 2.05', $this->currencyRenderer->usd(2.05));
-
-            // Testing the thousands separator
-            $this->assertEquals('USD 12,000.70', $this->currencyRenderer->usd(12000.70));
-        }
-    }
-
-Here, we call ``usd()`` with different parameters and tell the test suite to
-check if the returned values are equal to what is expected.
-
-Executing the test now will result in errors (because currencyRendererHelper
-doesn't even exist yet) showing that we have 3 fails.
-
-Once we know what our method should do, we can write the method itself::
-
-    <?php
+    // app/View/Helper/CurrencyRendererHelper.php
     class CurrencyRendererHelper extends AppHelper {
         public function usd($amount) {
             return 'USD ' . number_format($amount, 2, '.', ',');
@@ -675,8 +612,44 @@ Once we know what our method should do, we can write the method itself::
 Here we set the decimal places to 2, decimal separator to dot, thousands
 separator to comma, and prefix the formatted number with 'USD' string.
 
-Save this in ``app/View/Helper/CurrencyRenderer.php`` and execute the test. You
-should see a green bar and messaging indicating 4 passes.
+Now we create our tests::
+
+    <?php
+    // app/Test/Case/View/Helper/CurrencyRendererHelperTest.php
+
+    App::uses('Controller', 'Controller');
+    App::uses('View', 'View');
+    App::uses('CurrencyRendererHelper', 'View/Helper');
+
+    class CurrencyRendererHelperTest extends CakeTestCase {
+        public $CurrencyRenderer = null;
+
+        // Here we instantiate our helper
+        public function setUp() {
+            parent::setUp();
+            $Controller = new Controller();
+            $View = new View($Controller);
+            $this->CurrencyRenderer = new CurrencyRendererHelper($View);
+        }
+
+        // Testing the usd() function
+        public function testUsd() {
+            $this->assertEquals('USD 5.30', $this->CurrencyRenderer->usd(5.30));
+
+            // We should always have 2 decimal digits
+            $this->assertEquals('USD 1.00', $this->CurrencyRenderer->usd(1));
+            $this->assertEquals('USD 2.05', $this->CurrencyRenderer->usd(2.05));
+
+            // Testing the thousands separator
+            $this->assertEquals('USD 12,000.70', $this->CurrencyRenderer->usd(12000.70));
+        }
+    }
+
+Here, we call ``usd()`` with different parameters and tell the test suite to
+check if the returned values are equal to what is expected.
+
+Save this in and execute the test. You should see a green bar and messaging 
+indicating 4 passes.
 
 Testing components
 ==================
