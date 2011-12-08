@@ -338,19 +338,15 @@ and add the following content::
     // app/Controller/PostsController.php
 
     public function isAuthorized($user) {
-        if (parent::isAuthorized($user)) {
+        if ($this->action === 'add') {
+           // All registered users can add posts
             return true;
-        } else {
-            if ($this->action === 'add') {
-                // All registered users can add posts
-                return true;
-            }
-            if (in_array($this->action, array('edit', 'delete'))) {
-                $postId = $this->request->params['pass'][0];
-                return $this->Post->isOwnedBy($postId, $user['id']);
-            }
-            return false;
         }
+        if (in_array($this->action, array('edit', 'delete'))) {
+            $postId = $this->request->params['pass'][0];
+            return $this->Post->isOwnedBy($postId, $user['id']);
+        }
+        return parent::isAuthorized();
     }
 
 We're now overriding the AppController's ``isAuthorized()`` call and internally
