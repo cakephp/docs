@@ -40,8 +40,10 @@ between projects.
 Конфигурация Компонентов
 ========================
 
-Many of the core components require configuration. Some examples of
-components requiring configuration are
+Many of the core components require configuration.
+Для многих компонентов доступна(или требуется) конфигурация
+
+Some examples of components requiring configuration are
 :doc:`/core-libraries/components/authentication`, :doc:`/core-libraries/components/cookie`
 and :doc:`/core-libraries/components/email`. Configuration for these
 components, and for components in general, is usually done in the
