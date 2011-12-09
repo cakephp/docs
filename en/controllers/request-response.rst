@@ -425,14 +425,13 @@ or by using the features of ``CakeResponse``.
 download::
 
     <?php
-    function sendFile($id) {
+    public function sendFile($id) {
         $this->autoRender = false;
 
         $file = $this->Attachment->getFile($id);
         $this->response->type($file['type']);
         $this->response->download($file['name']);
         $this->response->body($file['content']);
-        $this->response->send();
     }
 
 The above shows how you could use CakeResponse to generate a file download
