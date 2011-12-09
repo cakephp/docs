@@ -793,6 +793,37 @@ following::
 By using ``staticExpects`` you will be able to mock and manipulate static
 methods on components and models.
 
+Testing a JSON Responding Controller
+------------------------------------
+
+JSON is a very friendly and common format to use when building a web service. 
+Testing the endpoints of your web service is very simple with CakePHP. Let us 
+begin with a simple example controller that responds in JSON::
+
+    <?php
+    class MarkersController extends AppController {
+        public $autoRender = false;
+        public function index() {
+            $data = $this->Marker->find('first');
+            $this->response->body(json_encode($data));
+        }
+    }
+
+Now we create the file ``app/Test/Case/Controller/MarkersControllerTest.php`` 
+and make sure our web service is returning the proper response::
+
+    <?php
+    class MarkersControllerTest extends ControllerTestCase {
+        public function testIndex() {
+            $result = $this->testAction('/markers/index.json');
+            $result = json_decode($result, true);
+            $expected = array(
+                'Marker' => array('id' => 1, 'lng' => 66, 'lat' => 45),
+            );
+            $this->assertEquals($expected, $result);
+        }
+    }
+
 Testing Components
 ==================
 
