@@ -210,7 +210,7 @@ This would use the following view files:
 * ``app/View/Emails/text/welcome.ctp``
 * ``app/View/Layouts/Emails/text/fancy.ctp``
 * ``app/View/Emails/html/welcome.ctp``
-* ``app/View/Layouts/Emails/text/fancy.ctp``
+* ``app/View/Layouts/Emails/html/fancy.ctp``
 
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.
