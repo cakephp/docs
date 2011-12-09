@@ -1,18 +1,9 @@
 Компоненты
 ##########
 
-Components are packages of logic that are shared between
-controllers. 
 Компоненты - это "пакеты" логики, которые доступны разным контроллерам.    
-
-If you find yourself wanting to copy and paste things
-between controllers, you might consider wrapping some functionality
-in a component.
-Если вы часто делаете копи паст, то стоит задуматься над созданием 
-компонентам, в котором будет описана часто используемая логика.
-
-CakePHP also comes with a fantastic set of core components you can
-use to aid in:
+Если вы часто делаете "копи паст" из контроллера в контроллер, то стоит 
+задуматься над созданием  компонентам, в котором будет описана часто используемая логика.
 В CakePHP есть фантастический набор основных компонентов, которые упрощают 
 работу с такими задачами:
 
@@ -24,32 +15,20 @@ use to aid in:
 - Аутентификация(Authentication)
 - Обработка запроса(Request handling)
 
-Each of these core components are detailed in their own chapters.
-Каждый из этих компонентов подробно описан в своей главе.
-
-For now, we’ll show you how to create your own components.
-А сейчас посмотрим, как создавать свои собственные компоненты.
-
-Creating components keeps controller code clean and allows you to reuse code
-between projects.
-Создание компонентов сохраняет код контроллера чистым и позволяет повторно 
-использовать в разных проектах.
+Каждый из этих компонентов подробно описан в своей главе. А сейчас посмотрим, как создавать 
+свои собственные компоненты. Создание компонентов сохраняет код контроллера чистым и 
+позволяет повторно  использовать в разных проектах.
 
 .. _configuring-components:
 
 Конфигурация Компонентов
 ========================
 
-Many of the core components require configuration.
-Для многих компонентов доступна(или требуется) конфигурация
-
-Some examples of components requiring configuration are
-:doc:`/core-libraries/components/authentication`, :doc:`/core-libraries/components/cookie`
-and :doc:`/core-libraries/components/email`. Configuration for these
-components, and for components in general, is usually done in the
-``$components`` array or your controller's ``beforeFilter()``
-method::
-
+Для многих компонентов доступна(или требуется) конфигурация.
+Например, компоненты :doc:`/core-libraries/components/authentication`, 
+:doc:`/core-libraries/components/cookie` и :doc:`/core-libraries/components/email` 
+требуют конфигурации. Конфигурация для этих компонентов и компонентов в целом обычно делается в
+``$components`` массиве или в вашем методе контроллера ``beforeFilter()``::
     <?php
     class PostsController extends AppController {
         public $components = array(
