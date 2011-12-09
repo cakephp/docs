@@ -1,33 +1,30 @@
 Контроллеры
 ###########
 
-Controllers are the 'C' in MVC. After routing has been applied and the correct
-controller has been found, your controller's action is called.  Your controller
-should handle interpreting the request data, making sure the correct models
-are called, and the right response or view is rendered.  Controllers can be
-thought of as middle man between the Model and View.  You want to keep your
-controllers thin, and your models fat.  This will help you more easily reuse
-your code and makes your code easier to test.
-
 Контроллер - это буква 'С' в аббревиатуре MVC. После того, как отработал роутинг и 
-был найден нужный контроллер, вызывается метод этого контроллера.
+был найден нужный контроллер, вызывается метод этого контроллера. Ваш контроллер
+должен обрабатывать запрос к данным, проверя, что используются правильные модели,
+пользователю оправляеися правильный ответ и отображается нужное представление. 
+Контроллеры могут рассматриваться как посредники между моделью и представлением. 
+Вам нужно стараться сохранять контроллеры "худыми"(избавленными от лишнего кода) 
+и всю бизнес логику стараться реализовать в моделях. Это поможет вам с переносимостью 
+кода и сделает ваш код более тестируемым.
 
-Commonly, controllers are used to manage the logic around a single model. For
-example, if you were building a site for an online bakery, you might have a
-RecipesController and an IngredientsController managing your recipes and their
-ingredients.  In CakePHP, controllers are named after the primary model they
-handle. It's totally possible to have controllers work with more than one model as
-well.
+Как правило, контроллеры используются для управления логикой вокруг одной модели.
+Например, если вы создаете сайт какой ни будь онлайн пекарни, у вас наверняка будут контроллеры
+RecipesController и/или IngredientsController, которые будут управлять рецептами(recipes) и их
+ингредиентами(ingredients). В CakePHP, контроллерам дают название по названию первичной модели, за 
+которую они отвечают. Но нет никаких проблем, если в контроллере используется более
+одной модели.
 
-Your application's controllers extend ``AppController`` class, which in turn
-extends the core :php:class:`Controller` class. The AppController
-class can be defined in ``/app/Controller/AppController.php`` and it should
-contain methods that are shared between all of your application’s controllers.
+Все ваши контроллеры в приложении расширяют класс ``AppController``, который, в свою
+очередь, расширяет класс ядра :php:class:`Controller`. Класс AppController
+может быть определен в ``/app/Controller/AppController.php`` и он может содержать методы,
+доступные всем вашим контроллерам в приложении.
 
-Controllers provide a number of methods which are called *actions*.  Actions are
-methods on a controller that handle requests.  By default all public methods on
-a controller are an action, and accessible from a url.
-
+Контроллер содержит некоторые методы, которые называются *экшены(actions)*. Экшены - 
+это методы контроллера которые обрабатывают запрос пользователя. По умолчанию все публичные 
+методы контроллера это экшены и доступны по url.
 
 .. _app-controller:
 
