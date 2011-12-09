@@ -174,6 +174,8 @@ Setting headers
 In ``CakeEmail`` you are free to set whatever headers you want. When migrating
 to use CakeEmail, do not forget to put the ``X-`` prefix in your headers.
 
+See ``CakeEmail::setHeaders()`` and ``CakeEmail::addHeaders()``
+
 Sending templated emails
 ------------------------
 
