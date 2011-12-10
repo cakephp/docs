@@ -30,54 +30,51 @@ RecipesController и/или IngredientsController, которые будут у�
 
 Контроллер приложения(App Controller)
 =====================================
-
-As stated in the introduction, the AppController class is the
-parent class to all of your application's controllers.
-AppController itself extends the Controller class included in the
-CakePHP core library. As such, AppController is defined in
-``/app/Controller/AppController.php`` like so::
+    
+Как было сказано выше, класс AppController родительский класс для 
+всех контроллеров приложения. AppController расширяет класс Controller, включенного
+в ядро CakePHP. AppController который может быть определен в 
+``/app/Controller/AppController.php``. Определение класса::
 
     <?php
     class AppController extends Controller {
     }
-    
 
-Controller attributes and methods created in your AppController
-will be available to all of your application's controllers. It is
-the ideal place to create code that is common to all of your
-controllers. Components (which you'll learn about later) are best
-used for code that is used in many (but not necessarily all)
-controllers.
+Атрибуты и методы, созданные в AppController будкт доступны всем контроллерам
+приложения. Это идеальное место, для создания кода, общего для всех контроллеров.
+Компоненты (о них вы узнаете чуть позже) лучший пример архитектуры кода. Они могут 
+использоваться только в определенных контроллерах.
 
-While normal object-oriented inheritance rules apply, CakePHP
-does a bit of extra work when it comes to special controller
-attributes. The list of components and helpers used by a
-controller are treated specially. In these cases, AppController
-value arrays are merged with child controller class arrays. The values in the
-child class will always override those in AppController.
+Хотя и применяются нормальные объектно-ориентированные правила наследования, CakePHP
+выполняет дополнительную работу, связанную со специальными атрибутами контроллера.
+Список компонентов и хелперов, используемых в контроллере, рассматривается отдельно для каждого.
+В этом случае, значения из AppController объединяются со значениями из дочерних контроллеров.
+Значения в дочерних контроллерах всегда имеют больший приоритет и перезаписывают значения
+в AppController.
+
 
 .. note::
-
-    CakePHP merges the following variables from the AppController to
-    your application's controllers:
+    
+    Значения, которые CakePHP обеденяет из AppController с значениями
+    в контроллерах приложения:
 
     -  $components
     -  $helpers
     -  $uses
 
-Remember to add the default Html and Form helpers, if you define
-var ``$helpers`` in your AppController
-
-Please also remember to call AppController's callbacks within child
-controller callbacks for best results::
+Незабудьте добавить по умолчанию хелперы Html и Form, если вы переопределяете
+переменную ``$helpers`` в вашем AppController.
+ 
+Также, помните, не забудьте вызывать обратные вызовы(callbacks) AppController в обратном вызове в дочернем
+контроллере для правильной работы сценария::
 
     <?php
     function beforeFilter() {
         parent::beforeFilter();
     }
  
-Request parameters
-==================
+Параметры запроса(Request parameters)
+=====================================
 
 When a request is made to a CakePHP application,  CakePHP's :php:class:`Router` and
 :php:class:`Dispatcher` classes use :ref:`routes-configuration` to find and
