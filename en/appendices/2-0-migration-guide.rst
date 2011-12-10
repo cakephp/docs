@@ -558,6 +558,14 @@ Router
   
   To your routes file for each plugin you need short routes on.
 
+Your app/Config/routes.php file needs to be updated adding this line at the bottom of the file::
+
+    <?php
+    require CAKE . 'Config' . DS . 'routes.php';
+
+This is needed in order to generate the default routes for your application. If you do not wish to have such routes,
+or want to implement your own standard you can include your own file with custom router rules.
+
 Dispatcher
 ----------
 
