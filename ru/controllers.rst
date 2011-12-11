@@ -143,51 +143,50 @@ CakePHP.
     Вызывается после того  как выполнится экшен и после того,
     как рендер выполнится. Этот метод контроллера выполняется самым последним.
 
-In addition to controller life-cycle callbacks, :doc:`/controllers/components`
-also provide a similar set of callbacks.
+В дополнению к жизненому циклу колбеков контролера, :doc:`/controllers/components`
+также предоставляют схожий набор колбеков. 
 
 .. _controller-methods:
 
-Controller Methods
-==================
+Методы Контроллера(Controller Methods)
+======================================
 
-For a complete list of controller methods and their descriptions
-visit the CakePHP API. Check out
-`http://api20.cakephp.org/class/controller <http://api20.cakephp.org/class/controller>`_.
+Для получения информации о всех методах контроллера и их описание посетите 
+CakePHP API - `http://api20.cakephp.org/class/controller <http://api20.cakephp.org/class/controller>`_.
 
-Interacting with Views
-----------------------
+Взфаимодействие с представлениями(Interacting with Views)
+---------------------------------------------------------
 
-Controllers interact with the view in a number of ways. First they
-are able to pass data to the views, using ``set()``. You can also
-decide which view class to use, and which view file should be
-rendered from the controller.
+Существует сного вариантов взаимдействия контроллера с представлением.
+Для начала, нужно установить переменные, используя ``set()``. Также, можно выбрать
+какой класс представления использовать и какой файл представления должен
+быть отображен.
 
 .. php:method:: set(string $var, mixed $value)
 
-    The ``set()`` method is the main way to send data from your
-    controller to your view. Once you've used ``set()``, the variable
-    can be accessed in your view::
+    Метод ``set()`` это основной метод для передачи данных от контроллера
+    в представление. Когда вы используете ``set()``, то появляется возможность
+    использовать эту переменную в представлении.
+    
+        view::
 
         <?php
-        // First you pass data from the controller:
+        // Для начала, передадим данные из контроллера:
 
         $this->set('color', 'pink');
 
-        // Then, in the view, you can utilize the data:
+        // Тепрь вы можете в представлении использовать эти данные:
         ?>
 
         You have selected <?php echo $color; ?> icing for the cake.
-
-    The ``set()`` method also takes an associative array as its first
-    parameter. This can often be a quick way to assign a set of
-    information to the view.
-
+    
+    Метод ``set()`` может принимать ассоциативный массив в качестве первого параметра.
+    Это быстпый способ передачи больших объемов данных от контроллера к представлению.
+    
     .. versionchanged:: 1.3
-        Array keys will no longer be inflected before they are assigned
-        to the view ('underscored\_key' does not become 'underscoredKey'
-        anymore, etc.):
-
+        Ключи массива не могут быть изменены до их передачи в представление(
+        'underscored\_key' больше не становится 'underscoredKey' и т.д.)
+        
     ::
 
         <?php
@@ -197,45 +196,44 @@ rendered from the controller.
             'base_price' => 23.95
         );
 
-        // make $color, $type, and $base_price 
-        // available to the view:
+        // делаем переменные $color, $type и $base_price 
+        // доступными в представлении:
 
         $this->set($data);  
-
-
-    The attribute ``$pageTitle`` no longer exists, use ``set()`` to set
+    
+    Аттрибут ``$pageTitle`` больше не существует. Используйте ``set()`` to set
     the title::
 
         <?php
-        $this->set('title_for_layout', 'This is the page title');
+        $this->set('title_for_layout', 'Это заголовок страницы');
 
 
 .. php:method:: render(string $action, string $layout, string $file)
+    
+    Метод ``render()`` автоматически вызывается при завершении 
+    запроса к любому экшену контроллера. Этот метод выполняет всю логику
+    представления (используя данные, которые вы передали через метод ``set()``)
+    находящуюся внутри представлений и предоставляет ее как ответ на 
+    запрос пользователя.
 
-    The ``render()`` method is automatically called at the end of each
-    requested controller action. This method performs all the view
-    logic (using the data you’ve given in using the ``set()`` method),
-    places the view inside its layout and serves it back to the end
-    user.
-
-    The default view file used by render is determined by convention.
-    If the ``search()`` action of the RecipesController is requested,
-    the view file in /app/View/Recipes/search.ctp will be rendered::
+   	Дефолтный файл представления определяется по соглашению.
+   	Для экшена ``search()`` контроллера RecipesController будет отоьражен фаил передставления
+  	/app/View/Recipes/search.ctp ::
 
         <?php
         class RecipesController extends AppController {
         // ...
             function search() {
-                // Render the view in /View/Recipes/search.ctp
+                // Отображается файл представления /View/Recipes/search.ctp
                 $this->render();
             }
         // ...
         }
 
-    Although CakePHP will automatically call it (unless you’ve set
-    ``$this->autoRender`` to false) after every action’s logic, you can
-    use it to specify an alternate view file by specifying an action
-    name in the controller using ``$action``.
+	Хотя CakePHP будет автоматически его вызывать (этим вы можете управлять,
+	используя переменную ``$this->autoRender``, которая по умолчанию установленна
+	в true) после того, как отработает вся логика экшена, вы можете указать 
+	специальное представление задав параметр ``$action``.
 
     If ``$action`` starts with '/' it is assumed to be a view or
     element file relative to the ``/app/View`` folder. This allows
