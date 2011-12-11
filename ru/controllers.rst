@@ -76,20 +76,17 @@ RecipesController и/или IngredientsController, которые будут у�
 Параметры запроса(Request parameters)
 =====================================
 
-When a request is made to a CakePHP application,  CakePHP's :php:class:`Router` and
-:php:class:`Dispatcher` classes use :ref:`routes-configuration` to find and
-create the correct controller. The request data is encapsulated into a request
-object. CakePHP puts all of the important request information into the
-``$this->request`` property.  See the section on
-:doc:`/controllers/request-response` for more information on the CakePHP request
-object.
+При запросе к CakePHP приложению, CakePHP классы :php:class:`Router` и :php:class:`Dispatcher`
+используют :ref:`routes-configuration` для нахождения и вызова правильнго контроллера.
+Все данные запроса инкапсулированны в объекте запроса. CakePHP складывает всю важную информацию
+в свойство ``$this->request``. Больше информации о объекте запроса можно найти в части 
+докуметации :doc:`/controllers/request-response`.
 
-Controller actions
-==================
+Экшены контроллера(Controller actions)
+======================================
 
-Returning to our online bakery example, our RecipesController might contain the
-``view()``, ``share()``, and ``search()`` actions. The controller would be found
-in ``/app/Controller/RecipesController.php`` and contain::
+Вернемся к нашему примеру с онлайн пекарней. Наш RecipesController может содержать
+``view()``, ``share()``, и ``search()`` экшены. Это выглядит так::
 
         <?php
         
@@ -109,40 +106,42 @@ in ``/app/Controller/RecipesController.php`` and contain::
             }
         }
 
-In order for you to use a controller effectively in your own application, we'll
-cover some of the core attributes and methods provided by CakePHP's controllers.
+Для того, чтобы эффективно использовать контроллеры  в своих приложениях, рассмотрим
+некоторые основные атрибуты и методы, предоставляемые базовой архитектурой контроллеров
+CakePHP.
 
 .. _controller-life-cycle:
 
-Request Life-cycle callbacks
-============================
+Жизненый цикл запроса и колбеков(Request Life-cycle callbacks)
+==============================================================
 
 .. php:class:: Controller
 
-CakePHP controllers come fitted with callbacks you can use to
-insert logic around the request life-cycle:
+Контроллеры в CakePHP содержат некоторые колбеки, которые позволяют
+встроить логику вокруг жизненного цикла запроса:
 
 .. php:method:: beforeFilter()
 
-    This function is executed before every action in the controller.
-    It's a handy place to check for an active session or inspect user
-    permissions.
+    Эта функция выполняется до выполнения любого экшена в контроллере.
+    Это самое лучшее место для проверки активной сессиии или проверки 
+    прав пользователя.
 
     .. note::
-
-        The beforeFilter() method will be called for missing actions,
-        and scaffolded actions.
+        
+        Метод beforeFilter() может быть вызван для несуществующих
+        экшенов и scaffolded экшенов.
 
 .. php:method:: beforeRender()
-
-    Called after controller action logic, but before the view is
-    rendered. This callback is not used often, but may be needed if you
-    are calling render() manually before the end of a given action.
+    
+    Выполняется после выполнения логики экшена, но до того, как будет рендерится
+    представление. Этот колбек не используется очень часто, но очень удобен,
+    если вы вызываете метод render() до окончания выполнения всей логики
+    экшена.
 
 .. php:method:: afterFilter()
-
-    Called after every controller action, and after rendering is
-    complete. This is the last controller method to run.
+    
+    Вызывается после того  как выполнится экшен и после того,
+    как рендер выполнится. Этот метод контроллера выполняется самым последним.
 
 In addition to controller life-cycle callbacks, :doc:`/controllers/components`
 also provide a similar set of callbacks.
