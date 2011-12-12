@@ -216,9 +216,9 @@ CakePHP API - `http://api20.cakephp.org/class/controller <http://api20.cakephp.o
     находящуюся внутри представлений и предоставляет ее как ответ на 
     запрос пользователя.
 
-   	Дефолтный файл представления определяется по соглашению.
-   	Для экшена ``search()`` контроллера RecipesController будет отоьражен фаил передставления
-  	/app/View/Recipes/search.ctp ::
+    Дефолтный файл представления определяется по соглашению.
+    Для экшена ``search()`` контроллера RecipesController будет отоьражен фаил передставления
+  	 /app/View/Recipes/search.ctp ::
 
         <?php
         class RecipesController extends AppController {
@@ -230,31 +230,30 @@ CakePHP API - `http://api20.cakephp.org/class/controller <http://api20.cakephp.o
         // ...
         }
 
-	Хотя CakePHP будет автоматически его вызывать (этим вы можете управлять,
-	используя переменную ``$this->autoRender``, которая по умолчанию установленна
-	в true) после того, как отработает вся логика экшена, вы можете указать 
-	специальное представление задав параметр ``$action``.
+	 Хотя CakePHP будет автоматически его вызывать (этим вы можете управлять,
+	 используя переменную ``$this->autoRender``, которая по умолчанию установленна
+	 в true) после того, как отработает вся логика экшена, вы можете указать 
+	 специальное представление задав параметр ``$action``.
 
-    If ``$action`` starts with '/' it is assumed to be a view or
-    element file relative to the ``/app/View`` folder. This allows
-    direct rendering of elements, very useful in ajax calls.
-    ::
+	 Если параметр ``$action`` начинается с '/' это означает, что файл элемента или
+	 представления следует искать в папке ``/app/View``. Это позваляет напрямую указывать
+	 какие файлы следует отобразить, что очень удобно, например, при работе с Ajax запросами.
+ 	 ::
 
         <?php
-        // Render the element in /View/Elements/ajaxreturn.ctp
+        // Отображается элемент /View/Elements/ajaxreturn.ctp
         $this->render('/Elements/ajaxreturn');
 
-    You can also specify an alternate view or element file using the
-    third parameter, ``$file``. The ``$layout`` parameter allows you to specify
-    the layout the view is rendered in.
+	 Также, можно указывать конкретный файл. который нужно отобразить. Для этого 
+	 нужно использовать третий параметр ``$file``. Параметр ``$layout`` позволяет 
+	 указывать лаяут в котором будет отображатся представление. 
 
-Rendering a specific view
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Отображение конкретных представлений(Rendering a specific view)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In your controller you may want to render a different view than
-what would conventionally be done. You can do this by calling
-``render()`` directly. Once you have called ``render()`` CakePHP
-will not try to re-render the view::
+В своем контроллере вам возможно понадобится отоббразить свои представления, отличающиеся
+от представлений по умолчанию. Вы можете сделать это вызвав ``render()`` в ручную.
+После вызова ``render()`` CakePHP не будет пытаться сделать повторный вызов ``render()`` ::
 
     <?php
     class PostsController extends AppController {
@@ -263,11 +262,11 @@ will not try to re-render the view::
         }
     }
 
-This would render ``app/View/Posts/custom_file.ctp`` instead of
+Этот код отобразит ``app/View/Posts/custom_file.ctp`` вместо 
 ``app/View/Posts/my_action.ctp``
 
-Flow Control
-------------
+Управление Потоком(Flow Control)
+--------------------------------
 
 .. php:method:: redirect(mixed $url, integer $status, boolean $exit)
 
@@ -285,6 +284,8 @@ Flow Control
                 $this->redirect(array('controller' => 'orders', 'action' => 'confirm'));
             }
         }
+
+	 
 
     You can also use a relative or absolute URL as the $url argument::
 
