@@ -275,10 +275,10 @@ Test Case Lifecycle Callbacks
 
 Test cases have a number of lifecycle callbacks you can use when doing testing:
 
-* ``setUp`` is called before every test method.  Should be used to create the
+* ``setUp`` is called before every test method. Should be used to create the
   objects that are going to be tested, and initialize any data for the test.
   Always remember to call ``parent::setUp()``
-* ``tearDown`` is called after every test method.  Should be used to cleanup after
+* ``tearDown`` is called after every test method. Should be used to cleanup after
   the test is complete. Always remember to call ``parent::tearDown()``.
 * ``setupBeforeClass`` is called once before test methods in a case are started.
   This method must be *static*.
@@ -338,12 +338,12 @@ this::
     class ArticleTest extends CakeTestCase {
         public $fixtures = array('app.article');
 
-        public function setup() {
+        public function setUp() {
             parent::setUp();
             $this->Article = ClassRegistry::init('Article');
         }
 
-        function testPublished() {
+        public function testPublished() {
             $result = $this->Article->published(array('id', 'title'));
             $expected = array(
                 array('Article' => array('id' => 1, 'title' => 'First Article')),
@@ -562,7 +562,7 @@ model. The controller code looks like::
     class ArticlesController extends AppController {
         public $helpers = array('Form', 'Html');
 
-        function index($short = null) {
+        public function index($short = null) {
             if (!empty($this->data)) {
                 $this->Article->save($this->data);
             }
@@ -588,17 +588,17 @@ Create a file named ``ArticlesControllerTest.php`` in your
     class ArticlesControllerTest extends ControllerTestCase {
         public $fixtures = array('app.article');
 
-        function testIndex() {
+        public function testIndex() {
             $result = $this->testAction('/articles/index');
             debug($result);
         }
 
-        function testIndexShort() {
+        public function testIndexShort() {
             $result = $this->testAction('/articles/index/short');
             debug($result);
         }
 
-        function testIndexShortGetRenderedHtml() {
+        public function testIndexShortGetRenderedHtml() {
             $result = $this->testAction(
                '/articles/index/short',
                 array('return' => 'render')
@@ -606,7 +606,7 @@ Create a file named ``ArticlesControllerTest.php`` in your
             debug($result);
         }
 
-        function testIndexShortGetViewVars() {
+        public function testIndexShortGetViewVars() {
             $result = $this->testAction(
                 '/articles/index/short',
                 array('return' => 'vars')
@@ -614,7 +614,7 @@ Create a file named ``ArticlesControllerTest.php`` in your
             debug($result);
         }
 
-        function testIndexPostData() {
+        public function testIndexPostData() {
             $data = array(
                 'Article' => array(
                     'user_id' => 1,
@@ -647,7 +647,7 @@ requests will be POST requests.  You can simulate a GET request by setting the
 method key::
 
     <?php
-    function testAdding() {
+    public function testAdding() {
         $data = array(
             'Post' => array(
                 'title' => 'New post',
@@ -734,7 +734,7 @@ gives you access to the headers that would have been sent, allowing you to check
 for redirects::
 
     <?php
-    function testAdd() {
+    public function testAdd() {
         $Posts = $this->generate('Posts', array(
             'components' => array(
                 'Session',
@@ -777,7 +777,7 @@ wanted to mock out :php:meth:`AuthComponent::user()` you'd have to do the
 following::
 
     <?php
-    function testAdd() {
+    public function testAdd() {
         $Posts = $this->generate('Posts', array(
             'components' => array(
                 'Session',
@@ -1026,7 +1026,7 @@ prefix your plugin fixtures with ``plugin.blog.blog_post``::
         public $fixtures = array('plugin.blog.blog_post');
         public $BlogPost;
 
-        function testSomething() {
+        public function testSomething() {
             // ClassRegistry makes the model use the test database connection
             $this->BlogPost = ClassRegistry::init('Blog.BlogPost');
 
