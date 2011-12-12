@@ -157,19 +157,19 @@ httpd.conf rather than a user- or site-specific httpd.conf).
    If your cakephp site still has problems with mod_rewrite you might 
    want to try and modify settings for virtualhosts. If on ubuntu, 
    edit the file /etc/apache2/sites-available/default (location is 
-   distribution dependent). In this file, ensure that AllowOverride 
-   None is changed to AllowOverride All, so you have::
+   distribution dependent). In this file, ensure that 
+   ``AllowOverride None`` is changed to ``AllowOverride All``, so you have::
 
-   	<Directory />
-		Options FollowSymLinks
-		AllowOverride All
-	</Directory>
-	<Directory /var/www/>
-		Options Indexes FollowSymLinks MultiViews
-		AllowOverride All
-		Order allow,deny
-		allow from all
-	</Directory>
+       <Directory />
+           Options FollowSymLinks
+           AllowOverride All
+       </Directory>
+       <Directory /var/www>
+           Options Indexes FollowSymLinks MultiViews
+           AllowOverride All
+           Order Allow,Deny
+           Allow from all
+       </Directory>
 
    If on Mac OSX, another solution is to use the tool virtualhostx to
    make a virtual host to point to your folder.  
