@@ -420,6 +420,19 @@ Output::
     <input type="text" id="Modelname0Fieldname" name="data[Modelname][0][fieldname]">
     <input type="text" id="Modelname1Fieldname" name="data[Modelname][1][fieldname]">
 
+
+FormHelper uses several field-suffixes internally for datetime input creation.
+If you are using fields named ``year``, ``month``, ``day``, ``hour``,
+``minute``, or ``meridian`` and having issues getting the correct input, you can
+set the ``name`` attribute to override the default behavior::
+
+    <?php
+    echo $this->Form->input('Model.year', array(
+        'type' => 'text',
+        'name' => 'data[Model][year]'
+    ));
+
+
 Options
 -------
 
@@ -820,11 +833,12 @@ Datetime options
 ----------------
 
 * ``$options['timeFormat']`` Used to specify the format of the select inputs for
-  a time-related set of inputs. Valid values include ‘12’, ‘24’, and ‘none’.
+  a time-related set of inputs. Valid values include '12', '24', and ``null``.
 
 * ``$options['dateFormat']`` Used to specify the format of the select inputs for
-  a date-related set of inputs. Valid values include ‘DMY’, ‘MDY’, ‘YMD’, and
-  ‘NONE’.
+  a date-related set of inputs. Valid values include any combination of 'D',
+  'M' and 'Y' or ``null``. The inputs will be put in the order defined by the
+  dateFormat option.
 
 * ``$options['minYear'], $options['maxYear']`` Used in combination with a
   date/datetime input. Defines the lower and/or upper end of values shown in the
