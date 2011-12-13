@@ -28,6 +28,22 @@ This ``getRecent()`` method can now be used within the controller.
     <?php
     $recent = $this->Example->getRecent();
 
+:php:meth:`Model::exists()`
+===========================
+
+Returns true if a record with the currently set ID exists.
+
+Internally calls :php:meth:`Model::getID()` to obtain the current record ID to verify, and 
+then performs a ``Model::find('count')`` on the currently configured datasource to 
+ascertain the existence of the record in persistent storage.
+
+::
+
+    <?php
+    $this->Example->id = 9;
+    if ($this->Example->exists()) {
+        // ...
+    }
 
 
 .. meta::
