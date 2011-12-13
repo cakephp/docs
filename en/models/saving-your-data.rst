@@ -688,8 +688,13 @@ amount of named fields in the database and the same amount of
 models. The important differences are that the "join" model is
 named differently and its behavior is more predictable.
 
-When your join table contains extra fields besides two foreign
-keys, in most cases it's easier to make a model for the join table
+.. tip::
+
+    When your join table contains extra fields besides two foreign
+    keys, you can prevent deletion of existing records by setting
+    ``'unique'`` array key to ``'keepExisting'``.
+
+However, in most cases it's easier to make a model for the join table
 and setup hasMany, belongsTo associations as shown in example above
 instead of using HABTM association.
 

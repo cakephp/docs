@@ -661,6 +661,8 @@ Possible keys for HABTM association arrays include:
    existing relationship records in the foreign keys table before
    inserting new ones, when updating a record. So existing
    associations need to be passed again when updating.
+   To prevent deletion of existing relationship records, set this key to
+   a string ``'keepExisting'``.
 -  **conditions**: an array of find() compatible conditions or SQL
    string
 -  **fields**: A list of fields to be retrieved when the associated
