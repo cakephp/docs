@@ -844,6 +844,10 @@ Datetime options
   date/datetime input. Defines the lower and/or upper end of values shown in the
   years select field.
 
+* ``$options['orderYear']`` Used in combination with a date/datetime input. 
+  Defines the order in which the year values will be set. Valid values include
+  'asc', 'desc'. The default value is 'desc'.
+
 * ``$options['interval']`` This option specifies the number of minutes between
   each option in the minutes select box::
 
