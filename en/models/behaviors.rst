@@ -159,8 +159,9 @@ automatically. The callbacks are similar to those found in Models:
 ``afterDelete`` and ``onError`` - see
 :doc:`/models/callback-methods`.
 
-Your behaviors should be placed in ``app/Model/Behavior``. It's
-often helpful to use a core behavior as a template when creating
+Your behaviors should be placed in ``app/Model/Behavior``.  They are named in CamelCase and
+postfixed by ``Behavior``, ex. NameBehavior.php.
+It's often helpful to use a core behavior as a template when creating
 your own. Find them in ``lib/Cake/Model/Behavior/``.
 
 Every callback and behavior method takes a reference to the model it is being called
