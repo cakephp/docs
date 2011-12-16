@@ -27,9 +27,9 @@ following::
 
 .. tip::
 
-    All output is swallowed when using PHPUnit 3.6. Add the ``--debug`` 
-    modifier to display output if using the CLI or use ``ob_flush()`` to force 
-    output to be displayed.
+    All output is swallowed when using PHPUnit 3.6+. Add the ``--debug`` 
+    modifier if using the CLI or add ``&debug=1`` to the url if using the web 
+    runner to display output.
 
 Test Database Setup
 ===================
