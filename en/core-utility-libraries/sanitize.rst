@@ -72,7 +72,7 @@ Once you've done that, you can make calls to Sanitize statically.
 
     :param string $string: Data to clean.
     :param string $connection: The name of the database to quote the string for, 
-        as named in your app/config/database.php file.
+        as named in your app/Config/database.php file.
 
     Used to escape SQL statements by adding slashes, depending on the
     system's current magic\_quotes\_gpc setting,

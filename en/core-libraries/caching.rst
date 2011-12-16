@@ -221,7 +221,7 @@ Cache API
 
     The Cache class in CakePHP provides a generic frontend for several
     backend caching systems. Different Cache configurations and engines
-    can be setup in your app/config/core.php
+    can be setup in your app/Config/core.php
 
 .. php:staticmethod:: config($name = null, $settings = array())
 

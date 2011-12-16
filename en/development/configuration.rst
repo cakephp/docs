@@ -143,7 +143,7 @@ Core Configuration
 
 Each application in CakePHP contains a configuration file to 
 determine CakePHP's internal behavior.
-``app/config/core.php``. This file is a collection of Configure class
+``app/Config/core.php``. This file is a collection of Configure class
 variable definitions and constant definitions that determine how
 your application behaves. Before we dive into those particular
 variables, you’ll need to be familiar with :php:class:`Configure`, CakePHP’s
@@ -154,7 +154,7 @@ CakePHP Core Configuration
 
 The Configure class is used to manage a set of core CakePHP
 configuration variables. These variables can be found in
-``app/config/core.php``. Below is a description of each variable and
+``app/Config/core.php``. Below is a description of each variable and
 how it affects your CakePHP application.
 
 debug

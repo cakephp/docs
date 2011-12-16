@@ -41,7 +41,7 @@ You can also clone the repository using
 
 Once you've got a fresh copy of cake setup your database.php config
 file, and change the value of Security.salt in your
-app/config/core.php. From there we will build a simple database
+app/Config/core.php. From there we will build a simple database
 schema to build our application on. Execute the following SQL
 statements into your database::
 

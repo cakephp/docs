@@ -140,7 +140,7 @@ There are a number of options for create():
   This allows CakePHP to emulate proper REST support in web
   browsers.
 
-* ``$options[‘action’]`` The action key allows you to point the form to a
+* ``$options['action']`` The action key allows you to point the form to a
   specific action in your current controller. For example, if you’d like to
   point the form to the login() action of the current controller, you would
   supply an $options array like the following::
@@ -419,6 +419,19 @@ Output::
 
     <input type="text" id="Modelname0Fieldname" name="data[Modelname][0][fieldname]">
     <input type="text" id="Modelname1Fieldname" name="data[Modelname][1][fieldname]">
+
+
+FormHelper uses several field-suffixes internally for datetime input creation.
+If you are using fields named ``year``, ``month``, ``day``, ``hour``,
+``minute``, or ``meridian`` and having issues getting the correct input, you can
+set the ``name`` attribute to override the default behavior::
+
+    <?php
+    echo $this->Form->input('Model.year', array(
+        'type' => 'text',
+        'name' => 'data[Model][year]'
+    ));
+
 
 Options
 -------
@@ -819,16 +832,21 @@ Options for select, checkbox and  radio inputs
 Datetime options
 ----------------
 
-* ``$options[‘timeFormat’]`` Used to specify the format of the select inputs for
-  a time-related set of inputs. Valid values include ‘12’, ‘24’, and ‘none’.
+* ``$options['timeFormat']`` Used to specify the format of the select inputs for
+  a time-related set of inputs. Valid values include '12', '24', and ``null``.
 
-* ``$options[‘dateFormat’]`` Used to specify the format of the select inputs for
-  a date-related set of inputs. Valid values include ‘DMY’, ‘MDY’, ‘YMD’, and
-  ‘NONE’.
+* ``$options['dateFormat']`` Used to specify the format of the select inputs for
+  a date-related set of inputs. Valid values include any combination of 'D',
+  'M' and 'Y' or ``null``. The inputs will be put in the order defined by the
+  dateFormat option.
 
 * ``$options['minYear'], $options['maxYear']`` Used in combination with a
   date/datetime input. Defines the lower and/or upper end of values shown in the
   years select field.
+
+* ``$options['orderYear']`` Used in combination with a date/datetime input. 
+  Defines the order in which the year values will be set. Valid values include
+  'asc', 'desc'. The default value is 'desc'.
 
 * ``$options['interval']`` This option specifies the number of minutes between
   each option in the minutes select box::
@@ -944,7 +962,7 @@ Form Element-Specific Methods
     In addition to the :ref:`general-input-options`, textarea() supports a few
     specific options:
 
-    * ``$options[‘rows’], $options[‘cols’]`` These two keys specify the number of
+    * ``$options['rows'], $options['cols']`` These two keys specify the number of
       rows and columns::
 
         <?php

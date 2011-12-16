@@ -282,7 +282,7 @@ might not be using a database for some reason.
 
 By default, CakePHP's ACL is database-driven. To enable INI-based
 ACL, you'll need to tell CakePHP what system you're using by
-updating the following lines in app/config/core.php
+updating the following lines in app/Config/core.php
 
 ::
 
@@ -295,7 +295,7 @@ updating the following lines in app/config/core.php
     Configure::write('Acl.classname', 'IniAcl');
     //Configure::write('Acl.database', 'default');
 
-ARO/ACO permissions are specified in **/app/config/acl.ini.php**.
+ARO/ACO permissions are specified in **/app/Config/acl.ini.php**.
 The basic idea is that AROs are specified in an INI section that
 has three properties: groups, allow, and deny.
 
@@ -382,7 +382,7 @@ retrieve nodes in tree format. The console application is used to
 initialize your database and interact with your ACO and ARO trees.
 
 To get started, first you'll need to make sure your
-``/app/config/database.php`` is present and correctly configured.
+``/app/Config/database.php`` is present and correctly configured.
 See section 4.1 for more information on database configuration.
 
 Once you've done that, use the CakePHP console to create your ACL
@@ -432,7 +432,7 @@ console application should look something like the following:
     This replaces an older deprecated command, "initdb".
 
 You can also use the SQL file found in
-``app/config/sql/db_acl.sql``, but that's nowhere near as fun.
+``app/Config/Schema/db_acl.sql``, but that's nowhere near as fun.
 
 When finished, you should have three new database tables in your
 system: acos, aros, and aros\_acos (the join table to create

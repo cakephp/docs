@@ -174,6 +174,8 @@ Setting headers
 In ``CakeEmail`` you are free to set whatever headers you want. When migrating
 to use CakeEmail, do not forget to put the ``X-`` prefix in your headers.
 
+See ``CakeEmail::setHeaders()`` and ``CakeEmail::addHeaders()``
+
 Sending templated emails
 ------------------------
 
@@ -210,7 +212,7 @@ This would use the following view files:
 * ``app/View/Emails/text/welcome.ctp``
 * ``app/View/Layouts/Emails/text/fancy.ctp``
 * ``app/View/Emails/html/welcome.ctp``
-* ``app/View/Layouts/Emails/text/fancy.ctp``
+* ``app/View/Layouts/Emails/html/fancy.ctp``
 
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.

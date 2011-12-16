@@ -10,7 +10,7 @@ paginate it, and filter it. The most common function you will use in models is :
 find
 ====
 
-``find($type, $params)``
+``find(string $type = 'first', array $params = array())``
 
 Find is the multifunctional workhorse of all model data-retrieval functions.
 ``$type`` can be either ``'all'``, ``'first'``, ``'count'``, ``'list'``,
@@ -22,6 +22,7 @@ Keep in mind that ``$type`` is case sensitive. Using an upper case character
 and has the following possible keys by default - all of which are
 optional::
 
+    <?php
     array(
         'conditions' => array('Model.field' => $thisValue), //array of conditions
         'recursive' => 1, //int
@@ -44,10 +45,9 @@ own model methods.
 find('first')
 =============
 
-``find('first', $params)``
-
-'first' will return one result, you'd use this for any case where you
-expect only one result. Below are a couple of simple (controller code) examples::
+``find('first', $params)`` will return one result, you'd use this for any case 
+where you expect only one result. Below are a couple of simple (controller code) 
+examples::
 
     <?php
     function some_function() {
@@ -90,8 +90,6 @@ returned from ``find('first')`` call is of the form::
 find('count')
 =============
 
-``find('count', $params)``
-
 ``find('count', $params)`` returns an integer value. Below are a
 couple of simple (controller code) examples::
 
@@ -121,9 +119,7 @@ couple of simple (controller code) examples::
 find('all')
 ===========
 
-``find('all', $params)``
-
-``find('all')`` returns an array of (potentially multiple) results.
+``find('all', $params)`` returns an array of (potentially multiple) results.
 It is in fact the mechanism used by all ``find()`` variants, as
 well as ``paginate``. Below are a couple of simple (controller
 code) examples::
@@ -178,8 +174,6 @@ form::
 
 find('list')
 ============
-
-``find('list', $params)``
 
 ``find('list', $params)`` returns an indexed array, useful for any
 place where you would want a list such as for populating input select
@@ -290,8 +284,6 @@ something like this::
 find('threaded')
 ================
 
-``find('threaded', $params)``
-
 ``find('threaded', $params)`` returns a nested array, and is
 appropriate if you want to use the ``parent_id`` field of your
 model data to build nested results. Below are a couple of simple
@@ -379,10 +371,8 @@ returned first.
 find('neighbors')
 =================
 
-``find('neighbors', $params)``
-
-'neighbors' will perform a find similar to 'first', but will return
-the row before and after the one you request. Below is a simple
+``find('neighbors', $params)`` will perform a find similar to 'first', but will 
+return the row before and after the one you request. Below is a simple
 (controller code) example:
 
 ::
@@ -517,7 +507,7 @@ requires you to return the $results array (modified or not).
 You can create as many custom finders as you like, and they are a great way of reusing code in
 your application across models.
 
-Magic find types
+Magic Find Types
 ================
 
 These magic functions can be used as a shortcut to search your
@@ -533,22 +523,23 @@ findAllBy
 
 ``findAllBy<fieldName>(string $value, array $fields, array $order, int $limit, int $page, int $recursive)``
 
-findAllBy<x> Example
-    Corresponding SQL Fragment
-$this->Product->findAllByOrderStatus(‘3’);
-    Product.order\_status = 3
-$this->Recipe->findAllByType(‘Cookie’);
-    Recipe.type = ‘Cookie’
-$this->User->findAllByLastName(‘Anderson’);
-    User.last\_name = ‘Anderson’
-$this->Cake->findAllById(7);
-    Cake.id = 7
-$this->User->findAllByEmailOrUsername('jhon');
-    User.email = 'jhon' OR User.username = 'jhon';
-$this->User->findAllByUsernameAndPassword('jhon', '123');
-    User.username = 'jhon' AND User.password = '123';
-$this->User->findAllByLastName(‘psychic’, array(), array('User.user\_name => 'asc'));
-    User.last\_name = ‘psychic’ ORDER BY User.user\_name ASC
++------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| findAllBy<x> Example                                                                     | Corresponding SQL Fragment                                 |
++==========================================================================================+============================================================+
+| ``$this->Product->findAllByOrderStatus('3');``                                           | ``Product.order_status = 3``                               |
++------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| ``$this->Recipe->findAllByType('Cookie');``                                              | ``Recipe.type = 'Cookie'``                                 |
++------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| ``$this->User->findAllByLastName('Anderson');``                                          | ``User.last_name = 'Anderson'``                            |
++------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| ``$this->Cake->findAllById(7);``                                                         | ``Cake.id = 7``                                            |
++------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| ``$this->User->findAllByEmailOrUsername('jhon');``                                       | ``User.email = 'jhon' OR User.username = 'jhon';``         |
++------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| ``$this->User->findAllByUsernameAndPassword('jhon', '123');``                            | ``User.username = 'jhon' AND User.password = '123';``      |
++------------------------------------------------------------------------------------------+------------------------------------------------------------+
+| ``$this->User->findAllByLastName('psychic', array(), array('User.user_name => 'asc'));`` | ``User.last_name = 'psychic' ORDER BY User.user_name ASC`` |
++------------------------------------------------------------------------------------------+------------------------------------------------------------+
 
 The returned result is an array formatted just as it would be from ``find('all')``.
 
@@ -562,22 +553,23 @@ The findBy magic functions also accept some optional parameters:
 ``findBy<fieldName>(string $value[, mixed $fields[, mixed $order]]);``
 
 
-findBy<x> Example
-    Corresponding SQL Fragment
-$this->Product->findByOrderStatus(‘3’);
-    Product.order\_status = 3
-$this->Recipe->findByType(‘Cookie’);
-    Recipe.type = ‘Cookie’
-$this->User->findByLastName(‘Anderson’);
-    User.last\_name = ‘Anderson’
-$this->User->findByEmailOrUsername('jhon');
-    User.email = 'jhon' OR User.username = 'jhon';
-$this->User->findByUsernameAndPassword('jhon', '123');
-    User.username = 'jhon' AND User.password = '123';
-$this->Cake->findById(7);
-    Cake.id = 7
++------------------------------------------------------------+-------------------------------------------------------+
+| findBy<x> Example                                          | Corresponding SQL Fragment                            |
++============================================================+=======================================================+
+| ``$this->Product->findByOrderStatus('3');``                | ``Product.order_status = 3``                          |
++------------------------------------------------------------+-------------------------------------------------------+
+| ``$this->Recipe->findByType('Cookie');``                   | ``Recipe.type = 'Cookie'``                            |
++------------------------------------------------------------+-------------------------------------------------------+
+| ``$this->User->findByLastName('Anderson');``               | ``$this->User->findByLastName('Anderson');``          |
++------------------------------------------------------------+-------------------------------------------------------+
+| ``$this->User->findByEmailOrUsername('jhon');``            | ``User.email = 'jhon' OR User.username = 'jhon';``    |
++------------------------------------------------------------+-------------------------------------------------------+
+| ``$this->User->findByUsernameAndPassword('jhon', '123');`` | ``User.username = 'jhon' AND User.password = '123';`` |
++------------------------------------------------------------+-------------------------------------------------------+
+| ``$this->Cake->findById(7);``                              | ``Cake.id = 7``                                       |
++------------------------------------------------------------+-------------------------------------------------------+
 
-findBy() functions return results  like ``find('first')``
+findBy() functions return results like ``find('first')``
 
 .. _model-query:
 

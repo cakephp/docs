@@ -190,7 +190,7 @@ use :php:meth:`CakeLog::write()` to write log messages.  This method can be call
 statically anywhere in your application one CakeLog has been loaded::
 
     <?php
-    // in app/config/bootstrap.php
+    // in app/Config/bootstrap.php
     App::uses('CakeLog', 'Log');
 
     // Anywhere in your application
