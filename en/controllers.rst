@@ -316,6 +316,13 @@ Flow Control
         <?php
         $this->redirect($this->referer());
 
+    The method also supports name based parameters. If you want to redirect
+    to a URL like: ``http://www.example.com/orders/confirm/product:pizza/quantity:5``
+    you can use::
+
+        <?php
+        $this->redirect(array('controller' => 'orders', 'action' => 'confirm', 'product' => 'pizza', 'quantity' => 5));
+
 .. php:method:: flash(string $message, string $url, integer $pause, string $layout)
 
     Like ``redirect()``, the ``flash()`` method is used to direct a
