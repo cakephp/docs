@@ -85,8 +85,8 @@ tree to see what it looks like. With a simple controller::
         public $name = 'Categories';
     
         function index() {
-            $this->data = $this->Category->generateTreeList(null, null, null, '&nbsp;&nbsp;&nbsp;');
-            debug($this->data); die;       
+            $data = $this->Category->generateTreeList(null, null, null, '&nbsp;&nbsp;&nbsp;');
+            debug($data); die;       
         }
     }
 

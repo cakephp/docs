@@ -232,10 +232,10 @@ your controller or you can define it directly in the model.
         public $name = 'Posts';
 
         function add() {
-            if ($this->data) {
+            if (!empty($this->request->data)) {
                 $this->Post->locale = 'de_de'; // we are going to save the german version
                 $this->Post->create();
-                if ($this->Post->save($this->data)) {
+                if ($this->Post->save($this->request->data)) {
                     $this->redirect(array('action' => 'index'));
                 }
             }

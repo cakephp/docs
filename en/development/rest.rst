@@ -86,7 +86,7 @@ this::
     
         function edit($id) {
             $this->Recipe->id = $id;
-            if ($this->Recipe->save($this->data)) {
+            if ($this->Recipe->save($this->request->data)) {
                 $message = 'Saved';
             } else {
                 $message = 'Error';

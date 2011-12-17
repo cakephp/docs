@@ -563,8 +563,8 @@ model. The controller code looks like::
         public $helpers = array('Form', 'Html');
 
         public function index($short = null) {
-            if (!empty($this->data)) {
-                $this->Article->save($this->data);
+            if (!empty($this->request->data)) {
+                $this->Article->save($this->request->data);
             }
             if (!empty($short)) {
                 $result = $this->Article->findAll(null, array('id', 'title'));
