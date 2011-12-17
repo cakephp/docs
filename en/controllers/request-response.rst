@@ -183,9 +183,9 @@ Some examples would be::
     ));
     
     // Add a callback detector. Can either be an anonymous function or a regular callable.
-    $this->request->addDetector('awesome', function ($request) {
+    $this->request->addDetector('awesome', array('callback' => function ($request) {
         return isset($request->awesome);
-    });
+    }));
 
 ``CakeRequest`` also includes methods like :php:meth:`CakeRequest::domain()`,
 :php:meth:`CakeRequest::subdomains()` and :php:meth:`CakeRequest::host()` to
