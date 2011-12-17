@@ -67,7 +67,7 @@ opening form tag.
         <?php
         function edit($id = null) {
             if (empty($this->request->data)) {
-                $this->data = $this->Recipe->findById($id);
+                $this->request->data = $this->Recipe->findById($id);
             } else {
                 // Save logic goes here
             }
