@@ -45,6 +45,18 @@ chapter:
   CakePHP can help you build forms, build AJAX functionality,
   paginate model data, or serve RSS feeds.
 
+
+.. _extending-views:
+
+Extending Views
+---------------
+
+.. _view-blocks:
+
+Using view blocks
+=================
+
+
 .. _view-layouts:
 
 Layouts
@@ -164,6 +176,9 @@ is used for messages shown by :php:meth:`Controller::flash()` method.
 
 Three other layouts, xml, js, and rss, exist in the core for a quick
 and easy way to serve up content that isn’t text/html.
+
+Extending layouts
+-----------------
 
 .. _view-elements:
 
@@ -319,6 +334,10 @@ in the plugin, it will look in the main APP folder.::
 
     <?php echo $this->element('helpbox', array(), array('plugin' => 'pluginname')); ?>
 
+Extending elements
+------------------
+
+
 View API
 ========
 
@@ -379,6 +398,43 @@ To call any view method use ``$this->method()``
     helpers, like the :doc:`/core-libraries/helpers/js` and
     :doc:`/core-libraries/helpers/html` Helpers.
 
+    .. deprecated:: 2.1
+        Use the :ref:`view-blocks` features instead.
+
+.. php:method:: blocks
+
+    Get the names of all defined blocks as an array.
+
+.. php:method:: start($name)
+
+    Start a capturing block for a view block.  See the section on 
+    :ref:`view-blocks` for examples.
+
+.. php:method:: end
+
+    End the top most open capturing block.  See the section on 
+    :ref:`view-blocks` for examples.
+
+.. php:method:: append($name, $content)
+
+    Append into the block with ``$name``.  See the section on 
+    :ref:`view-blocks` for examples.
+
+.. php:method:: assign($name, $content)
+
+    Assign the value of a block.  This will overwrite any existing content. See
+    the section on :ref:`view-blocks` for examples.
+
+.. php:method:: fetch($name)
+
+    Fetch the value of a block. '' Will be returned for blocks that are not
+    defined. See the section on :ref:`view-blocks` for examples.
+
+.. php:method:: extend($name)
+
+    Extend the current view/element/layout with the named one.  See the section
+    on :ref:`extending-views` for examples.
+
 .. php:attr:: layout
 
     Set the layout the current view will be wrapped in.
@@ -399,6 +455,16 @@ To call any view method use ``$this->method()``
 
     Contains the last rendered content from a view, either the view file, or the
     layout content.
+
+    .. deprecated:: 2.1
+        Use ``$view->Blocks->get('content');`` instead.
+
+.. php:attr:: Blocks
+
+    An instance of :php:class:`ViewBlock`.  Used to provide view block
+    functionality in view rendering.
+
+    .. versionadded:: 2.1
 
 More about Views
 ================
