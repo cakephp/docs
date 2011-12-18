@@ -95,6 +95,8 @@ TextHelper
 View
 ====
 
+- :php:attr:`View::$output` is deprecated.
+
 Content type views
 ------------------
 
@@ -102,6 +104,20 @@ Two new view classes have been added to CakePHP.  A new :php:class:`JsonView`
 and :php:class:`XmlView` allow you to easily generate XML and JSON views.  You
 can learn more about these classes in the section on
 :doc:`/views/json-and-xml-views`
+
+Extending views
+---------------
+
+:php:class:`View` has a new method allowing you to wrap or 'extend' a
+view/element/layout with another file.  See the section on
+:ref:`extending-views` for more information on this feature.
+
+View blocks
+-----------
+
+View blocks are a flexible way to create slots or blocks in your views.  Blocks
+replace ``$scripts_for_layout`` with a more robust and flexible API.  See the
+section on :ref:`view-blocks` for more infomation.
 
 
 Helpers
