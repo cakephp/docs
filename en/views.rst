@@ -248,7 +248,11 @@ might look like::
    <title><?php echo $title_for_layout?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
    <!-- Include external files and scripts here (See HTML helper for more info.) -->
-   <?php echo $scripts_for_layout ?>
+   <?php
+   echo $this->fetch('meta');
+   echo $this->fetch('css');
+   echo $this->fetch('script');
+   ?>
    </head>
    <body>
 
@@ -259,7 +263,7 @@ might look like::
    </div>
 
    <!-- Here's where I want my views to be displayed -->
-   <?php echo $content_for_layout ?>
+   <?php echo $this->fetch('content'); ?>
 
    <!-- Add a footer to each displayed page -->
    <div id="footer">...</div>
@@ -267,17 +271,17 @@ might look like::
    </body>
    </html>
 
-``$scripts_for_layout`` contains any external files and scripts
-included with the built-in HTML helper. Useful for including
+The ``script``, ``css`` and ``meta`` blocks contain any content defined 
+in the views using the built-in HTML helper. Useful for including
 javascript and CSS files from views.
 
 .. note::
 
     When using :php:meth:`HtmlHelper::css()` or :php:meth:`HtmlHelper::script()` 
     in view files, specify 'false' for the 'inline' option to place the html 
-    source in ``$scripts_for_layout``. (See API for more details on usage).
+    source in a block with the same name. (See API for more details on usage).
 
-``$content_for_layout`` contains the view. This is where the view
+The ``content`` block contains the view. This is where the view
 code will be placed.
 
 ``$title_for_layout`` contains the page title.  This variable is generated automatically,
@@ -292,7 +296,6 @@ controller, setting the ``$title_for_layout`` variable::
            $this->set('title_for_layout', 'View Active Users');
        }
    }
-   
 
 You can also set the title_for_layout variable from inside the view file::
 
@@ -431,7 +434,7 @@ the Post example::
         // ...
         function index() {
             $posts = $this->paginate();
-            if (isset($this->params['requested'])) {
+            if ($this->request->is('requested')) {
                 return $posts;
             } else {
                 $this->set('posts', $posts);
