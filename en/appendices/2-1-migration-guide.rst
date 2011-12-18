@@ -92,10 +92,25 @@ TextHelper
   :php:meth:`TextHelper::autoLinkEmails()` now HTML escape their input by
   default.  You can control this with the ``escape`` option.
 
+HtmlHelper
+----------
+
+- :php:meth:`HtmlHelper::script()` had a ``block`` option added.
+- :php:meth:`HtmlHelper::css()` had a ``block`` option added.
+- :php:meth:`HtmlHelper::meta()` had a ``block`` option added.
+
 View
 ====
 
 - :php:attr:`View::$output` is deprecated.
+- ``$content_for_layout`` is deprecated.  Use ``$this->fetch('content');``
+  instead. 
+- ``$scripts_for_layout`` is deprecated.  Use the following instead::
+
+        <?php
+        $this->fetch('meta');
+        $this->fetch('css');
+        $this->fetch('script');
 
 Content type views
 ------------------
