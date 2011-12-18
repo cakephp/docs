@@ -92,7 +92,7 @@ lowercased Folders:
 * webroot
 
 AppController / AppModel / AppHelper / AppShell
-========================
+===============================================
 
 The ``app/app_controller.php``, ``app/app_model.php``, ``app/app_helper.php are now located and 
 named as ``app/Controller/AppController.php``, ``app/Model/AppModel.php`` and ``app/Helper/AppHelper.php`` respectively.
