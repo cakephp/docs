@@ -60,6 +60,12 @@ Glossary
         It should connect all the routes your application needs so 
         requests can be routed to the correct controller + action.
 
+    DRY
+        Don't repeat yourself. Is a principle of software development aimed at
+        reducing repetition of information of all kinds.  In CakePHP DRY is used
+        to allow you to code things once and re-use them across your
+        application.
+
 
 .. meta::
     :title lang=en: Glossary
