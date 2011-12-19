@@ -60,7 +60,8 @@ with Debugger, and takes advantage of improvements made there.
 File
 ----
 
-- :php:meth:`File::info()` includes filesize information.
+- :php:meth:`File::info()` includes filesize & mimetype information.
+- :php:meth:`File::mime()` was added.
 
 Console
 =======
