@@ -167,6 +167,19 @@ section on :ref:`view-blocks` for more infomation.
 Helpers
 =======
 
+New callbacks
+-------------
+
+Two new callbacks have been added to Helpers.
+:php:meth:`Helper::beforeRenderFile()` and :php:meth:`Helper::afterRenderFile()`
+these new callbacks are fired before/after every view fragment is rendered.
+This includes elements, layouts and views.
+
+CacheHelper
+-----------
+
+- ``<!--nocache-->`` tags now work inside elements correctly.
+
 FormHelper
 ----------
 
