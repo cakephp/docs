@@ -5,7 +5,7 @@ CakePHP 2.1 is a fully API compatible upgrade from 2.0.  This page outlines the
 changes and improvements made for 2.1.
 
 AppController, AppHelper, and AppModel
-================================================
+======================================
 
 These classes are now required to be part of the app directory, as they were
 removed from the CakePHP core.  If you do not already have these classes, you
