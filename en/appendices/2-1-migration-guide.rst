@@ -172,6 +172,9 @@ FormHelper
 
 - FormHelper now omits disabled fields from the secured fields hash.  This makes
   working with :php:class:`SecurityComponent` and disabled inputs easier.
+- The ``between`` option when used in conjunction with radio inputs, now behaves
+  differently.  The ``between`` value is now placed between the legend and first
+  input elements.
 
 Testing
 =======

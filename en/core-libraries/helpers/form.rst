@@ -1016,6 +1016,9 @@ Form Element-Specific Methods
     * ``$attributes['separator']`` to specify HTML in between radio
       buttons (e.g. <br />).
 
+    * ``$attributes['between']`` specify some content to be inserted between the
+      legend and first element.
+
     * ``$attributes['legend']`` Radio elements are wrapped with a label and
       fieldset by default.  Set ``$attributes['legend']`` to false to remove
       them.::
