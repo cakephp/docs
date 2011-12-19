@@ -829,6 +829,14 @@ Options for select, checkbox and  radio inputs
   Disabling the ``'hiddenField'`` on the second input group would
   prevent this behavior.
 
+  You can set a different hidden field value other than 0 such as 'N'::
+
+      <?php
+      echo $this->Form->checkbox('published', array(
+          'value' => 'Y',
+          'hiddenField' => 'N',
+      ));
+
 Datetime options
 ----------------
 
