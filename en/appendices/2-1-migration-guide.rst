@@ -190,6 +190,9 @@ FormHelper
   input elements.
 - The ``hiddenField`` option with checkbox inputs can now be set to a specific 
   value such as 'N' rather than just 0.
+- The ``for`` attribute for date + time inputs now reflects the first generated
+  input. This may result in the for attribute changing for generated datetime
+  inputs.
 
 Testing
 =======
