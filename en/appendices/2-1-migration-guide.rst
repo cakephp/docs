@@ -198,3 +198,5 @@ Testing
 =======
 
 - Web test runner now displays the PHPUnit version number.
+- Web test runner now defaults to displaying app tests.
+
