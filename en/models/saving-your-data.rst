@@ -594,11 +594,79 @@ Saving models that are associated by hasOne, belongsTo, and hasMany
 is pretty simple: you just populate the foreign key field with the
 ID of the associated model. Once that's done, you just call the
 save() method on the model, and everything gets linked up
-correctly.
+correctly.  An example of the required format for the data array
+passed to save() for the Tag model is shown below::
 
-With HABTM, you need to set the ID of the associated model in your
-data array. We'll build a form that creates a new tag and
-associates it on the fly with some recipe.
+    Array
+    (
+        [Recipe] => Array
+            (
+                [id] => 42
+            )
+        [Tag] => Array 
+            (
+                [name] => Italian
+            )
+    )
+
+You can also use this format to save several records and their
+HABTM associations with saveAll(), using an array like the
+following::
+
+    Array
+    (
+        [0] => Array
+            (
+                [Recipe] => Array
+                    (
+                        [id] => 42
+                    )
+                [Tag] => Array
+                    (
+                        [name] => Italian
+                    )
+            )
+        [1] => Array
+            (
+                [Recipe] => Array
+                    (
+                        [id] => 42
+                    )
+                [Tag] => Array
+                    (
+                        [name] => Pasta
+                    )
+            )
+        [2] => Array
+            (
+                [Recipe] => Array
+                    (
+                        [id] => 51
+                    )
+                [Tag] => Array
+                    (
+                        [name] => Mexican
+                    )
+            )
+        [3] => Array
+            (
+                [Recipe] => Array
+                    (
+                        [id] => 17
+                    )
+                [Tag] => Array
+                    (
+                        [name] => American (new)
+                    )
+            )
+    )
+
+Passing the above array to saveAll() will create the conatined tags,
+each associated with their respective recipes.
+
+As an example, we'll build a form that creates a new tag and
+getnerates the proper data array to associate it on the fly with 
+some recipe.
 
 The simplest form might look something like this (we'll assume that
 $recipe\_id is already set to something)::
@@ -702,3 +770,4 @@ instead of using HABTM association.
 .. meta::
     :title lang=en: Saving Your Data
     :keywords lang=en: doc models,validation rules,data validation,flash message,null model,table php,request data,php class,model data,database table,array,recipes,success,reason,snap,data model
+
