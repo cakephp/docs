@@ -65,9 +65,7 @@ Will bring up the following choices::
 Choosing [s] (snapshot) will create an incremented schema.php. So
 if you have schema.php, it will create schema\_2.php and so on. You
 can then restore to any of these schema files at any time by
-running:
-
-::
+running::
 
     $ cake schema update -s 2
 
@@ -90,9 +88,7 @@ would follow these steps:
 1. Create or modify your database tables
 2. Execute cake schema to export a full description of your
    database
-3. Commit the created or updated schema.php file
-
-::
+3. Commit the created or updated schema.php file::
 
     $ # once your database has been updated
     $ Console/cake schema generate
@@ -111,9 +107,7 @@ When you pull the last changes of your repository, and discover
 changes in the structure of the database (possibly because
 of an error message saying you are missing a table):
 
-1. Execute cake schema to update your database
-
-::
+1. Execute cake schema to update your database::
 
     $ git pull
     $ Console/cake schema create
@@ -132,16 +126,12 @@ More specifically, you can't automatically drop your tables once they have
 been created.
 
 Using ``update`` will, on the contrary, drop any field which differ from the
-schema file.
-
-::
+schema file::
 
     $ git revert HEAD
     $ Console/cake schema update
 
-Will bring up the following choices:
-
-::
+Will bring up the following choices::
 
     The following statements will run.
     ALTER TABLE `roles`
