@@ -337,7 +337,7 @@ model that the behavior method was invoked on.
     your behavior. $created will be true when a record is created, and
     false when a record is updated.
 
-.. php:method:: beforeValidate(&$model)
+.. php:method:: beforeValidate(Model $model)
 
     You can use beforeValidate to modify a model's validate array or
     handle any other pre-validation logic. Returning false from a
