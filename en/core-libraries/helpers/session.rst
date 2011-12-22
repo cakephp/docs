@@ -40,27 +40,39 @@ used.
     Check to see if a key is in the Session. Returns a boolean on the
     key's existence.
 
+.. php:method:: error()
+
+    :rtype: string
+
+    Returns last error encountered in a session.
+
+.. php:method:: valid()
+
+    :rtype: boolean
+
+    Used to check is a session is valid in a view.
+
 Displaying notifications or flash messages
 ==========================================
 
-As explained in :ref:`creating-notification-messages` you can
-create one-time notifications for feedback. After creating messages 
-with :php:meth:`SessionComponent::setFlash()` you will want to 
-display them. Once a message is displayed, it will be removed and 
-not displayed again::
-
-    <?php
-    echo $this->Session->flash();
-
-The above will output a simple message, with the following html::
-
-    <div id="flashMessage" class="message">
-        Your stuff has been saved.
-    </div>
-
-.. php:method:: flash(string $key, array $params)
+.. php:method:: flash(string $key = 'flash', array $params = array())
 
     :rtype: string
+
+    As explained in :ref:`creating-notification-messages` you can
+    create one-time notifications for feedback. After creating messages 
+    with :php:meth:`SessionComponent::setFlash()` you will want to 
+    display them. Once a message is displayed, it will be removed and 
+    not displayed again::
+
+        <?php
+        echo $this->Session->flash();
+
+    The above will output a simple message, with the following html::
+
+        <div id="flashMessage" class="message">
+            Your stuff has been saved.
+        </div>
 
     As with the component method you can set additional properties
     and customize which element is used. In the controller you might 
@@ -104,18 +116,6 @@ The above will output a simple message, with the following html::
         <div class="flash payment">
             <?php printf($message, h($name)); ?>
         </div>
-
-.. php:method:: error()
-
-    :rtype: string
-
-    Returns last error encountered in a session.
-
-.. php:method:: valid()
-
-    :rtype: boolean
-
-    Used to check is a session is valid in a view.
 
 
 .. meta::
