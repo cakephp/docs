@@ -208,7 +208,7 @@ Hobbits                 Allow 'ale'      Allowing access to ale!
 Pippin                  --               Still allowing ale!    
 ======================= ================ =======================
 
-..note::
+.. note::
 
     Since the 'Pippin' node in the ACL tree doesn't specifically deny
     access to the ale ACO, the final result is that we allow access to
