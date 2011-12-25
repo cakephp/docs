@@ -26,8 +26,9 @@ are matched.  This means that the order you place routes can affect how
 routes are parsed.  It's generally a good idea to place most frequently
 visited routes at the top of the routes file if possible.  This will
 save having to check a number of routes that won't match on each request.
-After connecting routes you can manipulate the order of routes using
-:php:meth:`Router::promote()`.
+Notice: by default if you define two routes the one defined first has
+higher priority over the one defined latter.  After connecting routes you
+can manipulate the order of routes using :php:meth:`Router::promote()`.
 
 CakePHP also comes with a few default routes to get you started. These
 can be disabled later on once you are sure you don't need them. 
