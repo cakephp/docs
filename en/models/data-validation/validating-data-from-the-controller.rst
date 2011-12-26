@@ -13,7 +13,7 @@ First, set the data to the model:
 ::
 
     <?php
-    $this->ModelName->set($this->data);
+    $this->ModelName->set($this->request->data);
 
 Then, to check if the data validates, use the validates method of
 the model, which will return true if it validates and false if it
@@ -67,7 +67,7 @@ used:
 ::
 
     <?php
-    if ($this->ModelName->saveAll($this->data, array('validate' => 'only'))) {
+    if ($this->ModelName->saveAll($this->request->data, array('validate' => 'only'))) {
       // validates
     } else {
       // does not validate
@@ -79,7 +79,7 @@ to avoid second check.
 ::
 
     <?php
-    if ($this->ModelName->saveAll($this->data, array('validate' => false))) {
+    if ($this->ModelName->saveAll($this->request->data, array('validate' => false))) {
         // saving without validation
     } 
 

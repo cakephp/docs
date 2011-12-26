@@ -67,7 +67,7 @@ opening form tag.
         <?php
         function edit($id = null) {
             if (empty($this->request->data)) {
-                $this->data = $this->Recipe->findById($id);
+                $this->request->data = $this->Recipe->findById($id);
             } else {
                 // Save logic goes here
             }
@@ -785,8 +785,8 @@ Options for select, checkbox and  radio inputs
   Options can also supplied as key-value pairs.
 
 * ``$options['hiddenField']`` For certain input types (checkboxes, radios) a
-  hidden input is created so that the key in $this->data will exist even without
-  a value specified::
+  hidden input is created so that the key in $this->request->data will exist 
+  even without a value specified::
 
     <input type="hidden" name="data[Post][Published]" id="PostPublished_" value="0" />
     <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />

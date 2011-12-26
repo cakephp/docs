@@ -28,7 +28,7 @@ model to save data to a database table::
         // Has any form data been POSTed?
         if ($this->request->is('post')) {
             // If the form data can be validated and saved...
-            if ($this->Recipe->save($this->data)) {
+            if ($this->Recipe->save($this->request->data)) {
                 // Set a session flash message and redirect.
                 $this->Session->setFlash("Recipe Saved!");
                 $this->redirect('/recipes');
@@ -137,11 +137,11 @@ Otherwise a new record is created::
     <?php
     // Create: id isn't set or is null
     $this->Recipe->create();
-    $this->Recipe->save($this->data);
+    $this->Recipe->save($this->request->data);
     
     // Update: id is set to a numerical value 
     $this->Recipe->id = 2;
-    $this->Recipe->save($this->data);
+    $this->Recipe->save($this->request->data);
 
 .. tip::
 
@@ -360,23 +360,23 @@ single User and a single Profile::
 
     <?php
     function add() {
-        if (!empty($this->data)) {
+        if (!empty($this->request->data)) {
             // We can save the User data:
-            // it should be in $this->data['User']
-     
-            $user = $this->User->save($this->data);
-    
+            // it should be in $this->request->data['User']
+
+            $user = $this->User->save($this->request->data);
+
             // If the user was saved, Now we add this information to the data
             // and save the Profile.
-          
+
             if (!empty($user)) {
                 // The ID of the newly created user has been set
                 // as $this->User->id.
-                $this->data['Profile']['user_id'] = $this->User->id;
-    
+                $this->request->data['Profile']['user_id'] = $this->User->id;
+
                 // Because our User hasOne Profile, we can access
                 // the Profile model through the User model:
-                $this->User->Profile->save($this->data);
+                $this->User->Profile->save($this->request->data);
             }
         }
     }
@@ -431,15 +431,15 @@ having ``Account.0.fieldName`` is exactly what we need.
     the association between the models is hasOne, you have to use
     ModelName.fieldName notation for the associated model.
 
-Now, in our companies\_controller we can create an ``add()``
+Now, in our CompaniesController we can create an ``add()``
 action::
 
     <?php
     function add() {
-        if (!empty($this->data)) {
+        if (!empty($this->request->data)) {
             // Use the following to avoid validation errors:
             unset($this->Company->Account->validate['company_id']);
-            $this->Company->saveAssociated($this->data);
+            $this->Company->saveAssociated($this->request->data);
         }
     }
 
@@ -627,7 +627,7 @@ automatically save the HABTM data to the database.
     }
 
 With the preceding code, our new Tag is created and associated with
-a Recipe, whose ID was set in $this->data['Recipe']['id'].
+a Recipe, whose ID was set in $this->request->data['Recipe']['id'].
 
 Other ways we might want to present our associated data can include
 a select drop down list. The data can be pulled from the model

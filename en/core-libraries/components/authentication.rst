@@ -69,8 +69,8 @@ array::
 
     // Pass settings in
     $this->Auth->authenticate = array(
-        'Form' => array('userModel' => 'Users.User'),
-        'Basic' => array('userModel' => 'Users.User')
+        'Form' => array('userModel' => 'Member'),
+        'Basic' => array('userModel' => 'Member')
     );
 
 In the second example you'll notice that we had to declare the
@@ -82,7 +82,7 @@ to every attached object.  The all key is also exposed as
     <?php
     // Pass settings in using 'all'
     $this->Auth->authenticate = array(
-        AuthComponent::ALL => array('userModel' => 'Users.User'),
+        AuthComponent::ALL => array('userModel' => 'Member'),
         'Form',
         'Basic'
     );

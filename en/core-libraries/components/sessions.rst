@@ -88,13 +88,15 @@ all Session component methods wherever a name/key is used.
 Creating notification messages
 ==============================
 
-.. php:method:: setFlash($message, $element = 'default', $params = array(), $key = 'flash')
+.. php:method:: setFlash(string $message, string $element = 'default', array $params = array(), string $key = 'flash')
+
+    :rtype: void
 
     Often in web applications, you will need to display a one-time notification
     message to the user after processing a form or acknowledging data.
     In CakePHP, these are referred to as "flash messages".  You can set flash
     message with the SessionComponent and display them with the
-    :php:class:`SessionHelper`.  To set a message, use ``setFlash``::
+    :php:meth:`SessionHelper::flash()`. To set a message, use ``setFlash``::
 
         <?php
         // In the controller.
@@ -134,18 +136,20 @@ Creating notification messages
 
     The ``$element`` parameter allows you to control which element 
     (located in ``/app/View/Elements``) should be used to render the
-    message in. In the element the message is available as ``$message``. 
-    If you leave the ``$element`` set to 'default', the message will be wrapped
-    with the following:::
+    message in. In the element the message is available as ``$message``.
+    First we set the flash in our controller::
 
-        <div id="flashMessage" class="message"> [message] </div>
+        <?php
+        $this->Session->setFlash('Something custom!', 'flash_custom');
+
+    Then we create the file ``app/View/Elements/flash_custom.ctp`` and build our
+    custom flash element::
+
+        <div id="myCustomFlash"><?php echo $message; ?></div>
 
     ``$params`` allows you to pass additional view variables to the
-    rendered layout. ``$key`` sets the ``$message`` index in the Message
-    array. The default is 'flash'.
-
-    Parameters can be passed affecting the rendered div, for example
-    adding "class" in the $params array will apply a class to the
+    rendered layout. Parameters can be passed affecting the rendered div, for 
+    example adding "class" in the $params array will apply a class to the
     ``div`` output using ``$this->Session->flash()`` in your layout or view.::
 
         <?php
@@ -156,7 +160,12 @@ Creating notification messages
 
         <div id="flashMessage" class="example_class">Example message text</div>
 
+    To use an element from a plugin just specify the plugin in the 
+    ``$params``::
 
+        <?php
+        // Will use /app/Plugin/Comment/View/Elements/flash_no_spam.ctp
+        $this->Session->setFlash('Message!', 'flash_no_spam', array('plugin' => 'Comment'));
 
 .. meta::
     :title lang=en: Sessions

@@ -49,20 +49,24 @@ As you can see in the example above, some things are wrapped in
 {}'s, others not. In the table below, you can see which options are
 available.
 
-Expression
-    Definition
-{n}
-    Represents a numeric key
-{s}
-    Represents a string
-Foo
-    Any string (without enclosing brackets) is treated like a string
-    literal.
-{[a-z]+}
-    Any string enclosed in brackets (besides {n} and {s}) is
-    interpreted as a regular expression.
-    This section needs to be expanded.
++--------------------------------+--------------------------------------------+
+| Expression                     | Definition                                 |
++================================+============================================+
+| {n}                            | Represents a numeric key                   |
++--------------------------------+--------------------------------------------+
+| {s}                            | Represents a string                        |
++--------------------------------+--------------------------------------------+
+| Foo                            | Any string (without enclosing brackets)    |
+|                                | is treated like a string literal.          |
++--------------------------------+--------------------------------------------+
+| {[a-z]+}                       | Any string enclosed in brackets (besides   |
+|                                | {n} and {s}) is interpreted as a regular   |
+|                                | expression.                                |
++--------------------------------+--------------------------------------------+
 
+.. todo:
+
+    This section needs to be expanded.
 
 .. php:staticmethod:: apply($path, $array, $callback, $options = array())
 
@@ -740,38 +744,40 @@ Foo
 
     Currently implemented selectors:
 
-    Selector
-        Note
-    /User/id
-        Similar to the classic {n}.User.id
-    /User[2]/name
-        Selects the name of the second User
-    /User[id<2]
-        Selects all Users with an id < 2
-    /User[id>2][<5]
-        Selects all Users with an id > 2 but
-        5
-    /Post/Comment[author\_name=john]/../name
-        Selects the name of all Posts that have at least one Comment
-        written by john
-    /Posts[title]
-        Selects all Posts that have a 'title' key
-    /Comment/.[1]
-        Selects the contents of the first comment
-    /Comment/.[:last]
-        Selects the last comment
-    /Comment/.[:first]
-        Selects the first comment
-    /Comment[text=/cakephp/i]
-        Selects all comments that have a text matching the regex /cakephp/i
-    /Comment/\@\*
-        Selects the key names of all comments
-        Currently only absolute paths starting with a single '/' are
-        supported. Please report any bugs as you find them. Suggestions for
-        additional features are welcome.
+    +------------------------------------------+--------------------------------------------+
+    | Selector                                 | Note                                       |
+    +==========================================+============================================+
+    | /User/id                                 | Similar to the classic {n}.User.id         |
+    +------------------------------------------+--------------------------------------------+
+    | /User[2]/name                            | Selects the name of the second User        |
+    +------------------------------------------+--------------------------------------------+
+    | /User[id<2]                              | Selects all Users with an id < 2           |
+    +------------------------------------------+--------------------------------------------+
+    | /User[id>2][<5]                          | Selects all Users with an id > 2 but 5     |
+    +------------------------------------------+--------------------------------------------+
+    | /Post/Comment[author\_name=john]/../name | Selects the name of all Posts that have at |
+    |                                          | least one Comment written by john          |
+    +------------------------------------------+--------------------------------------------+
+    | /Posts[title]                            | Selects all Posts that have a 'title' key  |
+    +------------------------------------------+--------------------------------------------+
+    | /Comment/.[1]                            | Selects the contents of the first comment  |
+    +------------------------------------------+--------------------------------------------+
+    | /Comment/.[:last]                        | Selects the last comment                   |
+    +------------------------------------------+--------------------------------------------+
+    | /Comment/.[:first]                       | Selects the first comment                  |
+    +------------------------------------------+--------------------------------------------+
+    | /Comment[text=/cakephp/i]                | Selects all comments that have a text      |
+    |                                          | matching the regex /cakephp/i              |
+    +------------------------------------------+--------------------------------------------+
+    | /Comment/\@\*                            | Selects the key names of all comments      |
+    |                                          | Currently only absolute paths starting with|
+    |                                          | a single '/' are supported. Please report  |
+    |                                          | any bugs as you find them. Suggestions for |
+    |                                          | additional features are welcome.           |
+    +------------------------------------------+--------------------------------------------+
 
     To learn more about Set::extract() refer to the function testExtract() 
-    in /lib/Cake/Test/Case/Utility/SetTest.php.
+    in ``/lib/Cake/Test/Case/Utility/SetTest.php``.
 
 
 .. php:staticmethod:: filter($var, $isArray=null)

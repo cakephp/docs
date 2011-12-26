@@ -212,7 +212,7 @@ This would use the following view files:
 * ``app/View/Emails/text/welcome.ctp``
 * ``app/View/Layouts/Emails/text/fancy.ctp``
 * ``app/View/Emails/html/welcome.ctp``
-* ``app/View/Layouts/Emails/html/fancy.ctp``
+* ``app/View/Layouts/Emails/html/fancy.ct)``
 
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.
@@ -223,7 +223,7 @@ You can set view variables with ``CakeEmail::viewVars()``::
     $email = new CakeEmail('templated');
     $email->viewVars(array('value' => 12345));
 
-And in your email templates you can use these with::
+In your email templates you can use these with::
 
     <p>Here is your value: <b><?php echo $value; ?></b></p>
 
@@ -236,6 +236,15 @@ helpers using the ``helpers()`` method::
 
 When setting helpers be sure to include 'Html' or it will be removed from the
 helpers loaded in your email template.
+
+If you want to send email using templates in a plugin you can use the familiar
+:term:`plugin syntax` to do so::
+
+    <?php
+    $email = new CakeEmail();
+    $email->template('Blog.new_comment', 'Blog.auto_message')
+
+The above would use templates from the Blog plugin as an example.
 
 
 Sending attachments
