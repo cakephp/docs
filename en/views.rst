@@ -60,7 +60,7 @@ Extending Views
 ---------------
 
 View extending allows you to wrap one view in another.  Combining this with
-:ref:`view-blocks <view blocks>` gives you a powerful way to keep your views
+:ref:`view blocks <view-blocks>` gives you a powerful way to keep your views
 :term:`DRY`.  For example, your application has a sidebar that needs to change depending
 on the specific view being rendered.  By extending a common view file you can
 avoid repeating the common markup for your sidebar, and only define the parts
@@ -212,7 +212,7 @@ when used with the ``inline = false`` option::
         </head>
         // rest of the layout follows
 
-The ``HtmlHelper`` also allows you to control which block the scripts and CSS go
+The :php:meth:`HtmlHelper` also allows you to control which block the scripts and CSS go
 to::
 
     <?php
@@ -239,7 +239,7 @@ default layout when the page is rendered.
 
 When you create a layout, you need to tell CakePHP where to place
 the code for your views. To do so, make sure your layout includes a
-place for ``$content_for_layout`` Here's an example of what a default layout
+place for ``$this->fetch('content')`` Here's an example of what a default layout
 might look like::
 
    <!DOCTYPE html>
@@ -281,8 +281,7 @@ javascript and CSS files from views.
     in view files, specify 'false' for the 'inline' option to place the html 
     source in a block with the same name. (See API for more details on usage).
 
-The ``content`` block contains the view. This is where the view
-code will be placed.
+The ``content`` block contains the contents of the rendered view.
 
 ``$title_for_layout`` contains the page title.  This variable is generated automatically,
 but you can override it by setting it in your controller/view.
@@ -345,6 +344,20 @@ is used for messages shown by :php:meth:`Controller::flash()` method.
 Three other layouts, xml, js, and rss, exist in the core for a quick
 and easy way to serve up content that isn’t text/html.
 
+Using layouts from plugins
+--------------------------
+
+If you want to use a layout that exists in a plugin, you can use 
+:term:`plugin syntax`.  For example to use the contact layout from the 
+Contacts plugin::
+
+    <?php
+    class UsersController extends AppController {
+        public function viewActive() {
+            $this->layout = 'Contacts.contact';
+        }
+    }
+
 
 .. _view-elements:
 
@@ -391,7 +404,7 @@ variable::
     echo $helptext; //outputs "Oh, this text is very helpful."
 
 The :php:meth:`View::element()` method also supports options for the element.
-The options supported are 'cache', 'callbacks' and 'plugin'. An example::
+The options supported are 'cache' and 'callbacks'. An example::
 
     <?php
     echo $this->element('helpbox', array(
@@ -400,7 +413,6 @@ The options supported are 'cache', 'callbacks' and 'plugin'. An example::
         ),
         array(
             "cache" => "long_view", // uses the "long_view" cache configuration
-            "plugin" => "",  //to render an element from a plugin
             "callbacks" => true // set to true to have before/afterRender called for the element
         )
     );
@@ -493,12 +505,26 @@ Requesting Elements from a Plugin
 ---------------------------------
 
 If you are using a plugin and wish to use elements from within the
-plugin, just specify the plugin parameter. If the view is being
-rendered for a plugin controller/action, it will automatically
-point to the element for the plugin. If the element doesn't exist
-in the plugin, it will look in the main APP folder.::
+plugin, just use the familiar :term:`plugin syntax`. If the view is being
+rendered for a plugin controller/action, the plugin name will automatically
+be prefixed onto all elements used, unless another plugin name is present.
+If the element doesn't exist in the plugin, it will look in the main APP folder.::
 
-    <?php echo $this->element('helpbox', array(), array('plugin' => 'pluginname')); ?>
+    <?php echo $this->element('Contacts.helpbox'); ?>
+
+If your view is a part of a plugin you can omit the plugin name.  For example,
+if you are in the ``ContactsController`` of the Contacts plugin::
+
+    <?php
+    echo $this->element('helpbox');
+    // and
+    echo $this->element('Contacts.helpbox');
+
+Are equivalent and will result in the same element being rendered.
+
+.. versionchanged:: 2.1
+    The ``$options[plugin]`` option was deprecated and support for
+    ``Plugin.element`` was added.
 
 
 View API
@@ -573,30 +599,42 @@ To call any view method use ``$this->method()``
     Start a capturing block for a view block.  See the section on 
     :ref:`view-blocks` for examples.
 
+    .. versionadded:: 2.1
+
 .. php:method:: end
 
     End the top most open capturing block.  See the section on 
     :ref:`view-blocks` for examples.
+
+    .. versionadded:: 2.1
 
 .. php:method:: append($name, $content)
 
     Append into the block with ``$name``.  See the section on 
     :ref:`view-blocks` for examples.
 
+    .. versionadded:: 2.1
+
 .. php:method:: assign($name, $content)
 
     Assign the value of a block.  This will overwrite any existing content. See
     the section on :ref:`view-blocks` for examples.
+
+    .. versionadded:: 2.1
 
 .. php:method:: fetch($name)
 
     Fetch the value of a block. '' Will be returned for blocks that are not
     defined. See the section on :ref:`view-blocks` for examples.
 
+    .. versionadded:: 2.1
+
 .. php:method:: extend($name)
 
     Extend the current view/element/layout with the named one.  See the section
     on :ref:`extending-views` for examples.
+
+    .. versionadded:: 2.1
 
 .. php:attr:: layout
 

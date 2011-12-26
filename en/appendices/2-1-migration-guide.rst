@@ -140,6 +140,13 @@ View
         $this->fetch('meta');
         $this->fetch('css');
         $this->fetch('script');
+  
+  ``$scripts_for_layout`` is still available, but the :ref:`view blocks <view-blocks>` API
+  gives a more extensible & flexible replacement.
+- The ``Plugin.view`` syntax is now available everywhere.  You can use this
+  syntax anywhere you reference the name of a view, layout or element.
+- The ``$options['plugin']`` option for :php:meth:`~View::element()` is
+  deprecated.  You should use ``Plugin.element_name`` instead.
 
 Content type views
 ------------------
