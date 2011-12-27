@@ -1,5 +1,5 @@
 Paginator
-#############
+#########
 
 .. php:class:: PaginatorHelper(View $view, array $settings = array())
 
@@ -121,7 +121,7 @@ include links to the first 2 and last 2 pages in the paged results::
     echo $this->Paginator->numbers(array('first' => 2, 'last' => 2));
 
 Creating jump links
-========================
+===================
 
 In addition to generating links that go directly to specific page numbers,
 you'll often want links that go to the previous and next links, first and last

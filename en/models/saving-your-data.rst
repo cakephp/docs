@@ -172,7 +172,7 @@ leave the rest unset. Use this to avoid updating fields in the
 database that were already set.
 
 :php:meth:`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
-=======================================================================================
+======================================================================================
 
 Used to save a single field value. Set the ID of the model
 (``$this->ModelName->id = $id``) just before calling
@@ -448,7 +448,7 @@ be validated and saved all at the same time. By default ``saveAssociated``
 will validate all values passed and then try to perform a save for each.
 
 Saving hasMany through data
-============================
+===========================
 
 Let's see how data stored in a join table for two models is saved. As shown in the :ref:`hasMany-through`
 section, the join table is associated to each model using a `hasMany` type of relationship.

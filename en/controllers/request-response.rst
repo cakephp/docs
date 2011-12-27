@@ -137,7 +137,7 @@ determining whether or not your application is in a subdirectory.
 .. _check-the-request:
 
 Inspecting the request
-=======================
+======================
 
 Detecting various request conditions used to require using
 :php:class:`RequestHandlerComponent`. These methods have been moved to
@@ -510,7 +510,7 @@ headers in CLI.
 
 
 CakeResponse API
-==================
+================
 
 .. php:class:: CakeResponse
 

@@ -32,7 +32,7 @@ By default ``AuthComponent`` uses ``FormAuthenticate``.
 Choosing an Authentication type
 -------------------------------
 
-Generally you'll want to offer form based authenitcation. It is the easiest for
+Generally you'll want to offer form based authentication. It is the easiest for
 users using a web-browser to use.  If you are building an API or webservice, you
 may want to consider basic authentication or digest authentication.  The key
 differences between digest and basic authentication are mostly related to how

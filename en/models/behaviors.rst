@@ -151,7 +151,7 @@ will give us the list of attached behaviors::
     }
 
 Creating Behaviors
-===================
+==================
 
 Behaviors that are attached to Models get their callbacks called
 automatically. The callbacks are similar to those found in Models:
@@ -266,7 +266,7 @@ behavior was attached to a model the following would happen::
     'ReleaseTheHounds', 'homer', 'lenny'
 
 Behavior callbacks
-===================
+==================
 
 Model Behaviors can define a number of callbacks that are triggered
 before/after the model callbacks of the same name. Behavior
@@ -284,7 +284,7 @@ The available callbacks are:
 -  ``afterDelete`` is fired before a model's afterDelete
 
 Creating a behavior callback
------------------------------
+----------------------------
 
 .. php:class:: ModelBehavior
 

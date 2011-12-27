@@ -751,7 +751,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 .. _ajax-pagination:
 
 Ajax Pagination
-=====================
+===============
 
 Much like Ajax Pagination in 1.2, you can use the JsHelper to
 handle the creation of Ajax pagination links instead of plain HTML

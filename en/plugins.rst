@@ -1,5 +1,5 @@
 Plugins
-########
+#######
 
 CakePHP allows you to set up a combination of controllers, models,
 and views and release them as a packaged application plugin that
@@ -84,7 +84,7 @@ them and setting up the database in their documentation. Some
 plugins will require more setup than others.
 
 Using a Plugin
-------------------
+--------------
 
 You can reference a plugin's controllers, models, components, 
 behaviors, and helpers by prefixing the name of the plugin before
@@ -178,7 +178,7 @@ have any problems with using the command line.
 
 
 Plugin Controllers
--------------------
+------------------
 
 Controllers for our ContactManager plugin will be stored in
 /app/Plugin/ContactManager/Controller/. Since the main thing we'll 
@@ -220,7 +220,7 @@ because we don’t have a Contact model defined yet.
 .. _plugin-models:
 
 Plugin Models
-----------------
+-------------
 
 Models for the plugin are stored in /app/Plugin/ContactManager/Model.
 We've already defined a ContactsController for this plugin, so let's 
@@ -299,7 +299,7 @@ Creating this file, would allow you to override
 
 
 Plugin assets
---------------
+-------------
 
 A plugin's web assets (but not PHP files) can be served through the 
 plugin's 'webroot' directory, just like the main application's assets::
@@ -317,7 +317,7 @@ the mime-type of that asset.
 
 
 Linking to assets in plugins
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Simply prepend /plugin_name/ to the beginning of a request for an
 asset within that plugin, and it will work as if the asset were
@@ -334,7 +334,7 @@ would serve the asset
 
 
 Components, Helpers and Behaviors
-----------------------------------
+---------------------------------
 
 A plugin can have Components, Helpers and Behaviors just like a
 regular CakePHP application. You can even create plugins that
@@ -387,7 +387,7 @@ plugins. Just don't forget to share your code with the community so
 that everyone can benefit from your awesome, reusable components!
 
 Plugin Tips
-------------
+-----------
 
 Once a plugin has been installed in /app/Plugin, you can access it
 at the URL /plugin_name/controller_name/action. In our ContactManager

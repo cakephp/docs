@@ -638,7 +638,7 @@ want to test.  CakePHP will create a request and dispatch the controller and
 action.
 
 Simulating GET requests
-------------------------
+-----------------------
 
 As seen in the ``testIndexPostData()`` example above, you can use
 ``testAction()`` to test POST actions as well as GET actions.  By supplying the
