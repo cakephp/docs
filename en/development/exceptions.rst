@@ -191,7 +191,7 @@ argument.  You should implement your error handling in that method::
     }
 
 Using a custom renderer with Exception.renderer to handle application exceptions
-==================================================================================
+================================================================================
 
 If you don't want to take control of the exception handling, but want to change
 how exceptions are rendered you can use 

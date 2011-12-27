@@ -551,7 +551,7 @@ Router
   in for any actions other than index.  Previously ``/users`` and ``/users/add``
   would map to the UserController in the Users plugin.  In 2.0, only the
   ``index`` action is given a short route.  If you wish to continue using short
-  routes, you cand add a route like::
+  routes, you can add a route like::
 
     <?php
     Router::connect('/users/:action', array('controller' => 'users', 'plugin' => 'users'));

@@ -72,7 +72,7 @@ As such, make sure the directory ``app/tmp`` and all its subdirectories in your 
 are writable by the web server user.
 
 Setup
-============
+=====
 
 Setting up CakePHP can be as simple as slapping it in your web
 server’s document root, or as complex and flexible as you wish.

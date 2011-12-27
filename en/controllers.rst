@@ -1,5 +1,5 @@
 Controllers
-################
+###########
 
 Controllers are the 'C' in MVC. After routing has been applied and the correct
 controller has been found, your controller's action is called.  Your controller
@@ -29,7 +29,7 @@ a controller are an action, and accessible from a url.
 .. _app-controller:
 
 The App Controller
-========================
+==================
 
 As stated in the introduction, the AppController class is the
 parent class to all of your application's controllers.

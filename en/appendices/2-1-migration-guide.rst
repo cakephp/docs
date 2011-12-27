@@ -36,7 +36,7 @@ Exceptions
 ==========
 
 The default exception rendering now includes more detailed stack traces
-including file exceprts and argument dumps for all functions in the stack.
+including file excerpts and argument dumps for all functions in the stack.
 
 
 Utility
@@ -161,7 +161,7 @@ View blocks
 
 View blocks are a flexible way to create slots or blocks in your views.  Blocks
 replace ``$scripts_for_layout`` with a more robust and flexible API.  See the
-section on :ref:`view-blocks` for more infomation.
+section on :ref:`view-blocks` for more information.
 
 
 Helpers

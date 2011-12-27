@@ -78,7 +78,7 @@ control how callbacks are fired:
   Defaults to false.
 
 Canceling a callback loop
---------------------------
+-------------------------
 
 Using the ``break`` and ``breakOn`` options you can cancel a callback loop
 midway similar to stopping event propagation in JavaScript::

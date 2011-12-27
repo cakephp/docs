@@ -26,7 +26,7 @@ and retrieving user photos, finding new friends for suggestions, etc.
 While the model objects can be thought as "Friend", "User", "Comment", "Photo"
 
 The View layer
-===============
+==============
 
 The View renders a presentation of modeled data. Being separated from the
 Model objects, it is responsible for using the information it has available
