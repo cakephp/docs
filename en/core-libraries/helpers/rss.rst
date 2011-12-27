@@ -82,7 +82,6 @@ An Rss layout is very simple, put the following contents in
 ``app/View/Layout/rss/default.ctp``::
 
     <?php
-    echo $this->Rss->header();
     if (!isset($documentData)) {
         $documentData = array();
     }
