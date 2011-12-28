@@ -684,8 +684,8 @@ Building a ConsoleOptionParser from an array
 
 .. php:method:: buildFromArray($spec)
 
-As previously mentioned, when creating subcommand option parsers 
-you can define the parser spec as an array this method.  This can help 
+As previously mentioned, when creating subcommand option parsers,
+you can define the parser spec as an array for that method. This can help 
 make building subcommand parsers easier, as everything is an array::
 
     <?php
