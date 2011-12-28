@@ -28,9 +28,16 @@ can use the following while upgrading::
     App::uses('Controller', 'Controller');
     class AppController extends Controller {
     }
-    
+
 If your application already has these files/classes you don't need to do
 anything.
+
+Models
+======
+
+- The ``beforeDelete`` callback will get fired first in behaviors and the in the model itself,
+this makes it consistent with the rest of the events triggered in the model layer.
+
 
 Exceptions
 ==========
@@ -206,4 +213,14 @@ Testing
 
 - Web test runner now displays the PHPUnit version number.
 - Web test runner now defaults to displaying app tests.
+- Fixtures can be created in different datasources other than $test.
+- Models loaded using the ClassRegistry and using another datasource will get their datasource name
+prepended with ``test_`` (e.g datasource `master` will try to use `test_master` in the testsuite)
 
+Events
+======
+
+- A new generic events system has been built and it replaced the way callbacks were dispatched. This
+should not represent any change to your code.
+- You can dispatch your own events and attach callbacks to them at will, useful for inter-plugin
+communication and easier decoupling of your classes.
