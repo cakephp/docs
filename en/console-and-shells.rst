@@ -77,7 +77,7 @@ Running the Console with no arguments produces this help message::
      api [CORE]                              import [app]                            
      bake [CORE]                             schema [CORE]                           
      command_list [CORE]                     testsuite [CORE]                        
-     console [CORE]
+     console [CORE]                          upgrade [CORE]
 
     To run a command, type 'cake shell_name [args]'
     To get help on a specific command, type 'cake shell_name help'
