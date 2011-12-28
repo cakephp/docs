@@ -501,7 +501,7 @@ You can use the following options when creating an argument:
 * ``index`` The index for the arg, if left undefined the argument will be put
    onto the end of the arguments. If you define the same index twice the 
    first option will be overwritten.
-* ``choices`` A array of valid choices for this argument.  If left empty all
+* ``choices`` An array of valid choices for this argument.  If left empty all
    values are valid. An exception will be raised when parse() encounters an
    invalid value.
 
