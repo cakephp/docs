@@ -752,7 +752,8 @@ for redirects::
         $this->testAction('/posts/add', array(
             'data' => array(
                 'Post' => array('name' => 'New Post')
-            )
+            ),
+            'return' => 'vars'
         ));
 
         $this->assertEquals($this->headers['Location'], 'http://localhost/blog/posts/index');
@@ -770,6 +771,11 @@ of example, we also check to see if the layout was loaded by checking the entire
 rendered contents, and checks the view for a form tag. As you can see, your
 freedom to test controllers and easily mock its classes is greatly expanded with
 these changes.
+
+.. note::
+
+    $this->vars, $this->view and $this->contents are only available when the return 
+    type of ``testAction()`` is not 'result' in the example above it is set to 'vars'.
 
 When doing controller tests using mocks that use static methods you'll have to
 use a different method to register your mock expectations.  For example if you
