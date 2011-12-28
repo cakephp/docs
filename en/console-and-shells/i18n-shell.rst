@@ -22,7 +22,9 @@ application will be combined into a single POT file::
 
 The above will run the extraction shell.  In addition to extracting strings in ``__()``
 methods, validation messages in models will be extracted as well.  The result of
-this command will be the file ``app/Locale/default.pot``
+this command will be the file ``app/Locale/default.pot``.  You use the pot file
+as a template for creating po files.  If you are manually creating po files from
+the pot file, be sure to correctly set the ``Plural-Forms`` header line.
 
 Generating POT files for plugins
 --------------------------------

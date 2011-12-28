@@ -1,6 +1,6 @@
 .. _upgrade-shell:
 
-Upgrade Shell
+Upgrade shell
 #############
 
 The upgrade shell will do most of the work to upgrade your CakePHP application from 1.3 to 2.0.
