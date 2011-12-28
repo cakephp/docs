@@ -112,7 +112,7 @@ cake executable to your system path.
    ``/Users/mark/cakephp/lib/Cake/Console/cake``
 #. Edit your ``.bashrc`` or ``.bash_profile`` file in your home directory, and add the following::
 
-    export PATH="/Users/mark/cakephp/lib/Cake/Console:$PATH"
+    export PATH="$PATH:/Users/mark/cakephp/lib/Cake/Console"
 
 #. Reload the bash configuration or open a new terminal, and ``cake`` should work anywhere.
 
