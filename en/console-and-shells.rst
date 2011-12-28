@@ -43,7 +43,7 @@ CakePHP applications contain a ``Console`` directory that contains
 all the shells and tasks for an application.  It also comes with an
 executable::
 
-    $ cd /my/app_folder
+    $ cd /path/to/cakephp/app
     $ Console/cake
 
 It's often wise to add the core cake executable to your system path
@@ -56,20 +56,20 @@ Running the Console with no arguments produces this help message::
     Welcome to CakePHP v2.0.0 Console
     ---------------------------------------------------------------
     App : app
-    Path: /Users/markstory/cakephp/app/
+    Path: /path/to/cakephp/app/
     ---------------------------------------------------------------
     Current Paths:
 
-     -working: /path/to/cake/
-     -root: /path/to/cake/
-     -app: /path/to/cake/app/
-     -core: /path/to/cake/
+     -app: app
+     -working: /path/to/cakephp/app
+     -root: /path/to/cakephp/
+     -core: /path/to/cakephp/core
 
     Changing Paths:
 
     your working path should be the same as your application path
     to change your path use the '-app' param.
-    Example: -app relative/path/to/myapp or -app /absolute/path/to/myapp
+    Example: -app relative/path/to/cakephp/app or -app /absolute/path/to/cakephp/app
 
     Available Shells:
 
@@ -94,7 +94,7 @@ path as the first argument to the cake command. This next example
 shows how to specify an app folder, assuming you’ve already added
 the console folder to your ``PATH``::
 
-    $ cake -app /path/to/app
+    $ cake -app /path/to/cakephp/app
 
 The path supplied can be relative to the current working directory
 or supplied as an absolute path.
