@@ -214,7 +214,7 @@ Tasks allow you to extract commands into classes.  For example the ``bake`` is m
 almost entirely of tasks.  You define a shell's tasks by using the ``$tasks`` property::
 
     <?php 
-    class UserShell extends Shell {
+    class UserShell extends AppShell {
        public $tasks = array('Template');
     }
 
@@ -239,7 +239,7 @@ making re-usable chunks of functionality similar to :doc:`/controllers/component
 
     <?php 
     // found in Console/Command/SeaShell.php
-    class SeaShell extends Shell {
+    class SeaShell extends AppShell {
        public $tasks = array('Sound'); // found in Console/Command/Task/SoundTask.php
        public function main() {
            $this->Sound->execute();
