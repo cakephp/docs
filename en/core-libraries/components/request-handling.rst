@@ -46,9 +46,9 @@ the client and its request.
 
         <?php
         class PostsController extends AppController {
-        
+
             public $components = array('RequestHandler');
-    
+
             function beforeFilter () {
                 if ($this->RequestHandler->accepts('html')) {
                     // Execute code only if client accepts an HTML (text/html) response
@@ -138,7 +138,7 @@ Automatically decoding request data
         e.g. 'json' or 'xml'
     :param array $handler: The handler information for the type.
 
-    Add a request data decoder. The handler should contain a callback, and any 
+    Add a request data decoder. The handler should contain a callback, and any
     additional arguments for the callback.  The callback should return
     an array of data contained in the request input.  For example adding a CSV
     handler in your controllers' beforeFilter could look like::
@@ -153,12 +153,12 @@ Automatically decoding request data
         };
         $this->RequestHandler->addInputType('csv', array($parser));
 
-    The above example requires PHP 5.3, however you can use any 
-    `callable <http://php.net/callback>`_ for the handling function.  You can 
-    also pass additional arguments to the callback, this is useful for callbacks 
+    The above example requires PHP 5.3, however you can use any
+    `callable <http://php.net/callback>`_ for the handling function.  You can
+    also pass additional arguments to the callback, this is useful for callbacks
     like ``json_decode``::
 
-        <?php 
+        <?php
         $this->RequestHandler->addInputType('json', array('json_decode', true));
 
     The above will make ``$this->request->data`` an array of the JSON input data,
@@ -244,8 +244,7 @@ application.
        one content association, $index is used to select the content
        type.
 
-    Sets the response header based on content-type map names. If DEBUG
-    is greater than 1, the header is not set.
+    Sets the response header based on content-type map names.
 
 .. php:method:: responseType()
 
