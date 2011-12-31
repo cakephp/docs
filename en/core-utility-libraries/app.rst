@@ -340,11 +340,31 @@ To load **vendors/vendorName/libFile.php**::
     <?php
     App::import('Vendor', 'aUniqueIdentifier', array('file' => 'vendorName' .DS . 'libFile.php'));
 
+App Init/Load/Shutdown Methods
+==============================
 
-.. todo::
+.. php:staticmethod:: init( )
 
-    Missing init(), load() and shutdown()
+    :rtype: void
 
+    Initializes the cache for App, registers a shutdown function.
+
+.. php:staticmethod:: load(string $className)
+
+    :rtype: boolean
+
+    Method to handle the automatic class loading. It will look for each class'
+    package defined using :php:meth:`App::uses()` and with this information it
+    will resolve the package name to a full path to load the class from. File
+    name for each class should follow the class name. For instance, if a class
+    is name ``MyCustomClass`` the file name should be ``MyCustomClass.php``
+
+.. php:staticmethod:: shutdown( )
+
+    :rtype: void
+
+    Object destructor. Writes cache file if changes have been made to the 
+    ``$_map``.
 
 .. meta::
     :title lang=en: App Class
