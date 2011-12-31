@@ -54,20 +54,21 @@ So back to our example, we would have a `Order` model that will manage the buyin
 and probably a `place` method to save the order details and do any other logic::
 
     <?php
-        // Cart/Model/Oder.php
-        class Order extends AppModel {
-        
+    // Cart/Model/Order.php
+    class Order extends AppModel {
+
         public function place($order) {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
                 $this->sendNotificationEmail();
                 $this->decrementFromStock();
                 $this->updateUserStatistics();
-                ...
+                // ...
                 return true;
             }
             return false;
         }
+    }
 
 Well, that does not look right at all. A plugin should not make any assumption
 about sending emails, and may not even have the inventory data to decrement the
@@ -75,10 +76,10 @@ item from it, and definitely tracking usage statistics is not the best place to
 do it. So we need another solution, let's rewrite that using the event manager::
 
     <?php
-        // Cart/Model/Oder.php
-        App::uses('CakeEvent', 'Event');
-        class Order extends AppModel {
-    
+    // Cart/Model/Order.php
+    App::uses('CakeEvent', 'Event');
+    class Order extends AppModel {
+
         public function place($order) {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
@@ -89,6 +90,7 @@ do it. So we need another solution, let's rewrite that using the event manager::
             }
             return false;
         }
+    }
 
 That looks a lot cleaner, at gives us the opportunity to introduce the event
 classes and methods. The first thing you may notice is the call to ``getEventManager()``
@@ -103,9 +105,9 @@ receives an instance of the :php:class:`CakeEvent` class. Let's dissect now the
 process of dispatching an event::
 
     <?php
-        new CakeEvent('Model.Order.afterPlace', $this, array(
-            'order' => $order
-        ));
+    new CakeEvent('Model.Order.afterPlace', $this, array(
+        'order' => $order
+    ));
 
 :php:class:`CakeEvent` receives 3 arguments in its constructor. The first one
 is the event name, you should try to keep this name as unique as possible, 
@@ -142,27 +144,28 @@ are available in the controller, and say this controller is responsible for
 attaching them. A possible code would look like this::
 
     <?php
-        // Listeners configured somewhere else, maybe a config file:
-        Configure::write('Order.afterPlace', array(
-            'email-sending' => 'EmailSender::sendBuyEmail',
-            'inventory' => array($this->InventoryManager, 'decrement'),
-            'logger' => function($event) {
-                // Anonymous function are only available in PHP 5.3+
-                CakeLog::write('info', 'A new order was placed with id: ' . $event->subject()->id);
-            }
-        ));
+    // Listeners configured somewhere else, maybe a config file:
+    Configure::write('Order.afterPlace', array(
+        'email-sending' => 'EmailSender::sendBuyEmail',
+        'inventory' => array($this->InventoryManager, 'decrement'),
+        'logger' => function($event) {
+            // Anonymous function are only available in PHP 5.3+
+            CakeLog::write('info', 'A new order was placed with id: ' . $event->subject()->id);
+        }
+    ));
 
-        // Cart/Controller/OrdersController.php
-        class OrdersController extends AppController {
-        
+    // Cart/Controller/OrdersController.php
+    class OrdersController extends AppController {
+
         public function finish() {
             foreach (Configure::read('Order.afterPlace') as $l) {
                 $this->Order->getEventManager()->attach($l, 'Model.Order.afterPlace');
             }
             if ($this->Order->place($this->Cart->items())) {
-                ...
+                // ...
             }
         }
+    }
 
 This may not be the cleanest way to do it, so you can come up with you own ways
 for attaching listener to an object's event manager. This simple way of defining
@@ -195,23 +198,23 @@ instead of implementing a custom static function or converting any other workaro
 to trigger methods in this class. A listener is created as follows::
 
     <?php
-        App::uses('CakeEventListener', 'Event');
-        class UserStatistic implements CakeEventListener {
+    App::uses('CakeEventListener', 'Event');
+    class UserStatistic implements CakeEventListener {
 
-            public function implementedEvents() {
-                return array(
-                    'Model.Order.afterPlace' => 'updateBuyStatistic',
-                );
-            }
-
-            public function updateBuyStatistic($event) {
-                ... // Code to update statistics
-            }
+        public function implementedEvents() {
+            return array(
+                'Model.Order.afterPlace' => 'updateBuyStatistic',
+            );
         }
 
-        // Attach the UserStatistic object to the Order's event manager
-        $statistics = new UserStatistic;
-        $this->Order->getEventManager($statistics);
+        public function updateBuyStatistic($event) {
+            // Code to update statistics
+        }
+    }
+
+    // Attach the UserStatistic object to the Order's event manager
+    $statistics = new UserStatistic;
+    $this->Order->getEventManager($statistics);
 
 As you can see in the above code, the `attach` function can handle instances of
 the `CakeEventListener` interface. Internally the event manager will read the
@@ -240,11 +243,11 @@ first and so on. You set priorities using the `attach` method for callbacks, and
 declaring it in the `implementedEvents` function for event listeners::
 
     <?php
-    //Setting priority for a callback
+    // Setting priority for a callback
     $callback = array($this, 'doSomething');
     $this->getEventManager()->attach($callback, 'Model.Order.afterPlace', array('priority' => 2));
 
-    //Setting priority for a listener
+    // Setting priority for a listener
     class UserStatistic implements CakeEventListener {
         public function implementedEvents() {
             return array(
@@ -272,11 +275,11 @@ third argument of the `attach` method, or declare it in the `implementedEvents`
 returned array similar to what you do with priorities::
 
     <?php
-    //Setting priority for a callback
+    // Setting priority for a callback
     $callback = array($this, 'doSomething');
     $this->getEventManager()->attach($callback, 'Model.Order.afterPlace', array('passParams' => true));
 
-    //Setting priority for a listener
+    // Setting priority for a listener
     class UserStatistic implements CakeEventListener {
         public function implementedEvents() {
             return array(
@@ -285,7 +288,7 @@ returned array similar to what you do with priorities::
         }
 
         public function updateBuyStatistic($orderData) {
-            ...
+            // ...
         }
     }
 
@@ -294,8 +297,8 @@ receiving `$orderData` instead of the `$event` object. This is so, because in ou
 previous example we trigger the `Model.Order.afterPlace` event with some data::
 
     <?php
-     $this->getEventManager()->dispatch(new CakeEvent('Mode.Order.afterPlace', $this, array(
-            'order' => $order
+    $this->getEventManager()->dispatch(new CakeEvent('Mode.Order.afterPlace', $this, array(
+        'order' => $order
     )));
 
 .. note::
@@ -316,15 +319,15 @@ In order to stop events you can either return `false` in your callbacks or call
 the `stopPropagation` method on the event object::
 
     <?php
-        public function doSomething($event) {
-            ...
-            return false; //stops the event
-        }
+    public function doSomething($event) {
+        // ...
+        return false; // stops the event
+    }
 
-        public function updateBuyStatistic($event) {
-            ...
-            $event->stopPropagation();
-        }
+    public function updateBuyStatistic($event) {
+        // ...
+        $event->stopPropagation();
+    }
 
 Stopping an event can have two different effects. The first one van always be
 expected: any callback after the event was stopped will no be called. The second
@@ -336,17 +339,17 @@ we had a `beforePlace` stopping the event has a valid meaning.
 To check if an event was stopped, you call the `isStopped()` method in the event object::
 
     <?php
-         public function place($order) {
-            $event = new CakeEvent('Model.Oder.beforePlace', $this, array('order' => $order));
-            $this->getEventManager()->dispatch($event);
-            if ($event->isStopped()) {
-                return false;
-            }
-            if ($this->Order->save($order)) {
-                ...
-            }
-            ...
-         }
+    public function place($order) {
+        $event = new CakeEvent('Model.Order.beforePlace', $this, array('order' => $order));
+        $this->getEventManager()->dispatch($event);
+        if ($event->isStopped()) {
+            return false;
+        }
+        if ($this->Order->save($order)) {
+            // ...
+        }
+        // ...
+    }
 
 In the previous example the order would not get saved if the event is stopped
 during the `beforePlace` process.
@@ -364,32 +367,31 @@ Event results can be altered either using the event object result property
 directly or returning the value in the callback itself::
 
     <?php
-    
-        //A listener callback
-        public function doSomething($event) {
-            ...
-            $alteredData = $event->data['order']  + $moreData;
-            return $alteredData;
-        }
+    // A listener callback
+    public function doSomething($event) {
+        // ...
+        $alteredData = $event->data['order']  + $moreData;
+        return $alteredData;
+    }
 
-        //Another listener callback
-        public function doSomethingElse($event) {
-            ...
-            $event->result['order'] = $alteredData;
+    // Another listener callback
+    public function doSomethingElse($event) {
+        // ...
+        $event->result['order'] = $alteredData;
+    }
+
+    // Using the event result
+    public function place($order) {
+        $event = new CakeEvent('Model.Order.beforePlace', $this, array('order' => $order));
+        $this->getEventManager()->dispatch($event);
+        if (!empty($event->result['order'])) {
+            $order = $event->result['order'];
         }
-    
-        //Using the event result
-        public function place($order) {
-            $event = new CakeEvent('Model.Oder.beforePlace', $this, array('order' => $order));
-            $this->getEventManager()->dispatch($event);
-            if (!empty($event->result['order'])) {
-                $order = $event->result['order'];
-            }
-            if ($this->Order->save($order)) {
-                ...
-            }
-            ...
-         }
+        if ($this->Order->save($order)) {
+            // ...
+        }
+        // ...
+    }
 
 As you also may have noticed it is possible to alter any event object property
 and be sure that this new data will get passed to the next callback. In most of
@@ -405,28 +407,28 @@ the :php:meth:`CakeEventManager::detach()` method using as arguments the first t
 params you used for attaching it::
 
     <?php
-        //Attaching a function
-        $this->getEventManager()->attach(array($this, 'doSomething'), 'My.event');
+    // Attaching a function
+    $this->getEventManager()->attach(array($this, 'doSomething'), 'My.event');
 
-        //Detaching the function
-        $this->getEventManager()->detach(array($this, 'doSomething'), 'My.event');
+    // Detaching the function
+    $this->getEventManager()->detach(array($this, 'doSomething'), 'My.event');
 
-        //Attaching an anonymous function (PHP 5.3+ only);
-        $myFunction = function($event) { ... };
-        $this->getEventManager()->attach($myFunction, 'My.event');
+    // Attaching an anonymous function (PHP 5.3+ only);
+    $myFunction = function($event) { ... };
+    $this->getEventManager()->attach($myFunction, 'My.event');
 
-        //Detaching the anonymous function
-        $this->getEventManager()->detach($myFunction, 'My.event');
+    // Detaching the anonymous function
+    $this->getEventManager()->detach($myFunction, 'My.event');
 
-        //Attaching a CakeEventListener
-        $listener = new MyCakeEventLister();
-        $this->getEventManager()->attach($listener);
+    // Attaching a CakeEventListener
+    $listener = new MyCakeEventLister();
+    $this->getEventManager()->attach($listener);
         
-        //Detaching a single event key from a listener
-        $this->getEventManager()->detach($listener, 'My.event');
+    // Detaching a single event key from a listener
+    $this->getEventManager()->detach($listener, 'My.event');
 
-        //Detaching all callbacks implemented by a listener
-        $this->getEventManager()->attach($listener);
+    // Detaching all callbacks implemented by a listener
+    $this->getEventManager()->attach($listener);
 
 The global event manager
 ========================
@@ -454,9 +456,9 @@ Accessing the global event manager is as easy as calling an static function,
 the following example will attach a global event to the `beforePlace` event::
 
     <?php
-        //In any configuration file or piece of code that executes before the event
-        App::uses('CakeEventManager', 'Event');
-        CakeEventManager::instance()->attach($aCallback, 'Model.Order.beforePlace');
+    // In any configuration file or piece of code that executes before the event
+    App::uses('CakeEventManager', 'Event');
+    CakeEventManager::instance()->attach($aCallback, 'Model.Order.beforePlace');
 
 As you can see, we just change how we get access to a event manager instance,
 and we can apply the same concepts we learned before about triggering, attaching,
