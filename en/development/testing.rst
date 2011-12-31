@@ -327,7 +327,7 @@ queries run against them.
 Creating a test method
 ----------------------
 
-Let's now add a method to test the function published() in the
+Let's now add a method to test the function ``published()`` in the
 Article model. Edit the file
 ``app/Test/Case/Model/ArticleTest.php`` so it now looks like
 this::
@@ -726,12 +726,12 @@ can access the controller object at ``$this->controller``.
 A more complex example
 ----------------------
 
-In its simplest form, testAction will run PostsController::index() on your
-testing controller (or an automatically generated one), including all of the
-mocked models and components. The results of the test are stored in the vars,
-contents, view, and return properties. Also available is a headers property which
-gives you access to the headers that would have been sent, allowing you to check
-for redirects::
+In its simplest form, ``testAction()`` will run ``PostsController::index()`` on 
+your testing controller (or an automatically generated one), including all of the
+mocked models and components. The results of the test are stored in the ``vars``,
+``contents``, ``view``, and ``return`` properties. Also available is a headers
+property which gives you access to the ``headers`` that would have been sent,
+allowing you to check for redirects::
 
     <?php
     public function testAdd() {
@@ -761,10 +761,10 @@ for redirects::
         $this->assertRegExp('/<form/', $this->view);
     }
 
-This example shows a slightly more complex use of the new testAction and
-generate() methods. First, we generate a testing controller and mock the
+This example shows a slightly more complex use of the ``testAction()`` and
+``generate()`` methods. First, we generate a testing controller and mock the
 :php:class:`SessionComponent`. Now that the SessionComponent is mocked, we have the ability
-to run testing methods on it. Assuming PostsController::add() redirects us to
+to run testing methods on it. Assuming ``PostsController::add()`` redirects us to
 index, sends an email and sets a flash message, the test will pass. For the sake
 of example, we also check to see if the layout was loaded by checking the entire
 rendered contents, and checks the view for a form tag. As you can see, your
@@ -1004,9 +1004,9 @@ Tests for plugins are created in their own directory inside the
 plugins folder.::
 
     /app
-         /Plugin
-             /Blog
-                 /Test
+        /Plugin
+            /Blog
+                /Test
                     /Case
                     /Fixture
 
