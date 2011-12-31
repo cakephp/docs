@@ -111,7 +111,7 @@ Finding paths to packages using App::path()
 
 .. php:staticmethod:: core(string $package)
 
-    :rtype: string
+    :rtype: array
 
     Used for finding the path to a package inside CakePHP::
 
