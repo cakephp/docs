@@ -5,6 +5,11 @@
 またこれは、コアへのCakePHP 1.3ブランチからの変更点への最新の開発者リファレンスともなります。
 必ずこのガイドにある新機能とAPIの変更の全てのページを読んでください。
 
+.. tip::
+
+    1.3のコードを2.0へ移行する手助けとなる、2.0で導入された :ref:`upgrade-shell` を必ずチェックしてください。
+
+
 サポートするPHPバージョン
 =========================
 
@@ -49,20 +54,38 @@ PHP 5.3が名前空間のサポートをしていることから、このPHPバ�
 フォルダ名
 ----------
 
-特に、クラスを含むフォルダはキャメルケース(*CamelCase*)にする必要もあります。
+ほとんどのフォルダ、特にクラスを含むフォルダはキャメルケース(*CamelCase*)にする必要もあります。
 名前空間を考えたときに、それぞれのフォルダは名前空間の階層を象徴することから、クラスを含まない、または名前空間を自身で構成しないフォルダは、小文字で表される必要があります。
 
 キャメルケースのフォルダ:
 
+* Config
+* Console
 * Controller
 * Controller/Component
-* View/Helper
+* Lib
+* Locale
+* Model
 * Model/Behavior
+* Plugin
+* Test
+* Vendor
+* View
+* View/Helper
 
 小文字のフォルダ:
 
 * webroot
 * tmp
+
+AppController / AppModel / AppHelper / AppShell
+===============================================
+
+``app/app_controller.php`` 、 ``app/app_model.php`` 、 ``app/app_helper.php`` はそれぞれ、
+``app/Controller/AppController.php`` 、 ``app/Model/AppModel.php`` 、 ``app/Helper/AppHelper.php`` に配置・名称変更されました。
+
+また、全てのシェル・タスクはAppShellを継承するようになりました。
+独自のAppShell.phpを ``app/Console/Command/AppShell.php`` にもつことができます。
 
 多言語化・地域化
 ================
@@ -101,7 +124,7 @@ __() (二つのアンダースコアでのショートカット関数)
 変更されたクラスの場所と定数
 ============================
 
-``APP_PATH`` と ``CORE_PATH`` 定数は、WEBとコンソール環境で一貫性のある値を持ちます。
+``APP`` と ``CORE_PATH`` 定数は、WEBとコンソール環境で一貫性のある値を持ちます。
 CakePHPの前バージョンでは、これらの値が環境によって変わっていました。
 
 Basics.php
@@ -130,23 +153,30 @@ Basics.php
 -  PHP4互換のための関数は削除されました。
 -  PHP5定数は削除されました。
 -  グローバル変数 ``$TIME_START`` は削除されました。
-   代わりに ``$_SERVER['REQUEST_TIME']`` を使用してください。
+   代わりに ``TIME_START`` 定数か ``$_SERVER['REQUEST_TIME']`` を使用してください。
 
 削除された定数
 --------------
 
 正確ではない、または重複している数多くの定数が削除されました。
 
-* CONTROLLERS
-* COMPONENTS
-* MODELS
+* APP_PATH
 * BEHAVIORS
-* VIEWS
-* HELPERS
-* LAYOUTS
-* ELEMENTS
+* COMPONENTS
 * CONFIGS
 * CONSOLE_LIBS
+* CONTROLLERS
+* CONTROLLER_TESTS
+* ELEMENTS
+* HELPERS
+* HELPER_TESTS
+* LAYOUTS
+* LIB_TESTS
+* LIBS
+* MODELS
+* MODEL_TESTS
+* SCRIPTS
+* VIEWS
 
 CakeRequest
 ===========
@@ -323,7 +353,7 @@ App::build()
 * コアのパスとアプリケーションのパスをマージしなくなりました。
 
 App::objects()
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 * プラグインをサポートするようになりました。
   App::objects('Users.Model') はUsersプラグインのモデルを返します。
@@ -465,7 +495,7 @@ Cache
 
     <?php
     Cache::config('something');
-    Cache::write('key, $value);
+    Cache::write('key', $value);
     
     // 上記は、以下のようになることでしょう。
     Cache::write('key', $value, 'something');
@@ -484,6 +514,24 @@ Router
   逆に、デフォルトのルーティングが欲しい場合、routesファイルに ``Cake/Config/routes.php`` へのインクルードを追加する必要があるでしょう。
 - Router::parseExtensions()を利用している時、拡張子のパラメータは ``$this->params['url']['ext']`` 以下ではなくなりました。
   代わりに ``$this->request->params['ext']`` で利用可能となります。
+- プラグインのルートのデフォルトが変更になりました。
+  index以外のアクションにはプラグインショートカットルート(*Plugin short routes*)が標準で組み込まれなくなりました。
+  以前は``/users`` や ``/users/add`` はUsersプラグインのUsersControllerにマッピングされていました。
+  2.0では、 ``index`` アクションのみがショートカットルートとして与えられます。
+  引き続きショートカットを利用したいと思う方は、以下のようにルートを追加できます::
+
+    <?php
+    Router::connect('/users/:action', array('controller' => 'users', 'plugin' => 'users'));
+  
+  ショートカットルートを有効にしたいプラグイン毎にroutesファイルにこれを追加してください。
+
+app/Config/routes.phpファイルは以下の行をファイルの後方に追加するように更新する必要があります::
+
+    <?php
+    require CAKE . 'Config' . DS . 'routes.php';
+
+これはアプリケーションのデフォルトのルートを生成するために必要となります。
+このようなルートを望まない、または独自の標準を実装したいなら、独自のルーティングルールを記述したファイルを読み込むようにすることができるでしょう。
 
 Dispatcher
 ----------
@@ -791,6 +839,12 @@ View->Helpers
 
 デフォルトではViewオブジェクトは :php:class:`HelperCollection` を `$this->Helpers`` に保持します。
 
+テーマ
+------
+
+コントローラでテーマを使うには、 ``var $view = 'Theme';`` と指定しないようになりました。
+代わりに ``public $viewClass = 'Theme';`` としてください。
+
 コールバックの位置の変更
 ------------------------
 
@@ -806,6 +860,7 @@ beforeRenderもまた同様で、ビューでの変数全てが操作される�
 ヘルパーのコールバックは常に一つの引数、beforeRenderとafterRenderにはレンダリングされるビューファイルが、beforeLayoutとafterLayoutにはレンダリングされるレイアウトファイルが与えられるようになりました。
 ヘルパーの関数特性は以下のようにする必要があります::
 
+    <?php
     function beforeRender($viewFile) {
 
     }
@@ -993,6 +1048,7 @@ AclBehaviorとTreeBehavior
 
 - 設定として文字列をサポートしなくなりました。例::
 
+    <?php
     public $actsAs = array(
         'Acl' => 'Controlled',
         'Tree' => 'nested'
@@ -1000,6 +1056,7 @@ AclBehaviorとTreeBehavior
 
   こうなりました::
 
+    <?php
     public $actsAs = array(
         'Acl' => array('type' => 'Controlled'),
         'Tree' => array('type' => 'nested')
@@ -1011,12 +1068,14 @@ AclBehaviorとTreeBehavior
 プラグインはコンポーネント、ヘルパー、モデルに、マジックとして自身のプラグイン接頭辞を付け加えなくなりました。
 明示的に使いたいものを指定しなければなりません。以前は::
 
+    <?php
     var $components = array('Session', 'Comments');
 
 とすると、アプリケーション・コアのコンポーネントをチェックする前にコントローラのプラグインを調べていたでしょう。
 これはアプリケーション・コアのコンポーネントのみを見るようになりました。
 プラグインからオブジェクトを使いたい場合は、プラグインの名前を指定しなければなりません::
 
+    <?php
     public $components = array('Session', 'Comment.Comments');
 
 これは、マジックの失敗によって起こされていた問題をデバッグすることの煩雑さを減らすために為されました。
@@ -1085,10 +1144,6 @@ AclBehaviorとTreeBehavior
 
 あなたが使うシェルが何らかのパラメータが変更されたならば、そのシェルのヘルプを使用することをお勧めします。
 また、利用可能となった新しいAPIの詳しい機能について、コンソールの新機能を見ることもお勧めします。
-
-.. tip::
-
-    1.3のコードを2.0へ移行する手助けとなる、2.0で導入された :ref:`upgrade-shell` を必ずチェックしてください。
 
 
 デバッグ
