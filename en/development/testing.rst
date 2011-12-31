@@ -756,7 +756,7 @@ for redirects::
         ));
 
         $this->assertContains('/posts/index', $this->headers['Location']);
-        $this->assertEquals($this->vars['post']['Post']['name'], 'New Post');
+        $this->assertEquals('New Post', $this->vars['post']['Post']['name']);
         $this->assertRegExp('/<html/', $this->contents);
         $this->assertRegExp('/<form/', $this->view);
     }
@@ -889,13 +889,13 @@ set correctly by the ``adjust`` method in our component. We create the file
         public function testAdjust() {
             // Test our adjust method with different parameter settings
             $this->PagematronComponent->adjust();
-            $this->assertEquals($this->Controller->paginate['limit'], 20);
+            $this->assertEquals(20, $this->Controller->paginate['limit']);
 
             $this->PagematronComponent->adjust('medium');
-            $this->assertEquals($this->Controller->paginate['limit'], 50);
+            $this->assertEquals(50, $this->Controller->paginate['limit']);
 
             $this->PagematronComponent->adjust('long');
-            $this->assertEquals($this->Controller->paginate['limit'], 100);
+            $this->assertEquals(100, $this->Controller->paginate['limit']);
         }
 
         public function tearDown() {
