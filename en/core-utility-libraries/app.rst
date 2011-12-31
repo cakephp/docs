@@ -28,7 +28,9 @@ inside CakePHP.
 Loading classes
 ===============
 
-.. php:staticmethod:: uses($class, $package)
+.. php:staticmethod:: uses(string $class, string $package)
+
+    :rtype: void
 
     Classes are lazily loaded in CakePHP, however before the autoloader
     can find your classes you need to tell App, where it can find the files.
@@ -82,7 +84,7 @@ from::
 Finding paths to packages using App::path()
 ===========================================
 
-.. php:staticmethod:: path($package, $plugin = null)
+.. php:staticmethod:: path(string $package, string $plugin = null)
 
     :rtype: array
 
@@ -99,15 +101,15 @@ Finding paths to packages using App::path()
         // return the component paths in DebugKit
         App::path('Component', 'DebugKit');
 
-.. php:staticmethod:: paths()
+.. php:staticmethod:: paths( )
 
     :rtype: array
 
     Get all the currently loaded paths from App. Useful for inspecting or 
     storing all paths App knows about. For a paths to a specific package 
-    use ``App::path()``
+    use :php:meth:`App::path()`
 
-.. php:staticmethod:: core($package)
+.. php:staticmethod:: core(string $package)
 
     :rtype: string
 
@@ -117,7 +119,7 @@ Finding paths to packages using App::path()
         // Get the path to Cache engines.
         App::core('Cache/Engine');
 
-.. php:staticmethod:: location($className)
+.. php:staticmethod:: location(string $className)
 
     :rtype: string
 
@@ -126,15 +128,17 @@ Finding paths to packages using App::path()
 Adding paths for App to find packages in
 ========================================
 
-.. php:staticmethod:: build($paths = array(), $mode = App::PREPEND)
+.. php:staticmethod:: build(array $paths = array(), mixed $mode = App::PREPEND)
+
+    :rtype: void
 
     Sets up each package location on the file system. You can configure multiple
     search paths for each package, those will be used to look for files one
-    folder at a time in the specified order.  All paths should be terminated
+    folder at a time in the specified order. All paths should be terminated
     with a directory separator.
 
     Adding additional controller paths for example would alter where CakePHP
-    looks for controllers.  This allows you to split your application up across
+    looks for controllers. This allows you to split your application up across
     the filesystem.
 
     Usage::
@@ -172,9 +176,9 @@ Adding paths for App to find packages in
 Finding which objects CakePHP knows about
 =========================================
 
-.. php:staticmethod:: objects($type, $path = null, $cache = true)
+.. php:staticmethod:: objects(string $type, mixed $path = null, boolean $cache = true)
 
-    Returns an array of objects of the given type.
+    :rtype: mixed Returns an array of objects of the given type or false if incorrect.
 
     You can find out which objects App knows about using
     ``App::objects('Controller')`` for example to find which application controllers
@@ -205,7 +209,9 @@ Finding which objects CakePHP knows about
 Locating plugins
 ================
 
-.. php:staticmethod:: pluginPath($plugin)
+.. php:staticmethod:: pluginPath(string $plugin)
+
+    :rtype: string
 
     Plugins can be located with App as well. Using ``App::pluginPath('DebugKit');``
     for example, will give you the full path to the DebugKit plugin::
@@ -216,7 +222,9 @@ Locating plugins
 Locating themes
 ===============
 
-.. php:staticmethod:: themePath($theme)
+.. php:staticmethod:: themePath(string $theme)
+
+    :rtype: string
 
     Themes can be found ``App::themePath('purple');``, would give the full path to the
     `purple` theme.
@@ -226,7 +234,9 @@ Locating themes
 Including files with App::import()
 ==================================
 
-.. php:staticmethod:: import($type, $name, $parent, $search, $file, $return)
+.. php:staticmethod:: import(mixed $type = null, string $name = null, mixed $parent = true, array $search = array(), string $file = null, boolean $return = false)
+
+    :rtype: boolean
 
     At first glance ``App::import`` seems complex, however in most use
     cases only 2 arguments are required.
