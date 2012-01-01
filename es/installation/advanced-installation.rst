@@ -309,16 +309,10 @@ nginx es un servidor web que está ganando mucha popularidad. Igual que Lighttpd
         location / {
             root   /var/www/example.com/public/app/webroot/;
             index  index.php index.html index.htm;
-            if (-f $request_filename) {
-                break;
-            }
-            if (-d $request_filename) {
-                break;
-            }
-            rewrite ^(.+)$ /index.php/$1 last;
+            try_files $uri $uri/ /index.php?$uri&$args;
         }
 
-        location ~ .*\.php[345]?$ {
+        location ~ .*\.php$ {
             include /etc/nginx/fcgi.conf;
             fastcgi_pass    127.0.0.1:10005;
             fastcgi_index   index.php;

@@ -46,7 +46,7 @@ Locale
    internacionalización de tu proyecto.
 Model
    Contiene los modelos de tu aplicación, comportamientos (behaviors) y 
-fuentes de datos (datasources).
+   fuentes de datos (datasources).
 Plugins
    Contiene los plugins, increíble ¿ verdad ?
 tmp
