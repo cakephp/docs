@@ -8,6 +8,7 @@
    installation
    getting-started
    cakephp-overview
+   deployment
    contributing
    appendices
 
