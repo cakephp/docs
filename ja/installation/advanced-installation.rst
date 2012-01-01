@@ -129,6 +129,24 @@ everything to play nicely on their systems.
            RewriteRule ^(.*)$ index.php/$1 [QSA,L]
        </IfModule>
 
+   まだあなたのcakephpサイトでmod\_rewriteの問題が起きているなら、仮想ホスト(*virtualhosts*)の設定の変更を試してみるといいかもしれません。
+   ubuntu上なら、/etc/apache2/sites-available/default(場所はディストリビューションによる)のファイルを編集してください。
+   このファイルの中で、 ``AllowOverride None`` が ``AllowOverride All`` に変更されているかを確かめてください。
+   つまり以下のようになるでしょう::
+
+       <Directory />
+           Options FollowSymLinks
+           AllowOverride All
+       </Directory>
+       <Directory /var/www>
+           Options Indexes FollowSymLinks MultiViews
+           AllowOverride All
+           Order Allow,Deny
+           Allow from all
+       </Directory>
+
+   Mac OSX上での別解は、仮想ホストをフォルダに向けさせるのに、virtualhostxツールを使うことが挙げられます。
+
    多くのホスティングサービス(GoDaddym、1and1)では、実際にWEBサーバーが既にmod\_rewriteを使っているユーザディレクトリから配信されます。
    CakePHPをユーザディレクトリ(http://example.com/~username/cakephp/)または既にmod\_rewriteを活用しているその他のURL構造にインストールしているなら、
    RewriteBaseステートメントをCakePHPが使う.htaccessファイル(/.htaccess、/app/.htaccess、/app/webroot/.htaccess)に追加する必要があります。

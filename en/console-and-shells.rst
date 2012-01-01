@@ -43,7 +43,7 @@ CakePHP applications contain a ``Console`` directory that contains
 all the shells and tasks for an application.  It also comes with an
 executable::
 
-    $ cd /my/app_folder
+    $ cd /path/to/cakephp/app
     $ Console/cake
 
 It's often wise to add the core cake executable to your system path
@@ -56,20 +56,20 @@ Running the Console with no arguments produces this help message::
     Welcome to CakePHP v2.0.0 Console
     ---------------------------------------------------------------
     App : app
-    Path: /Users/markstory/cakephp/app/
+    Path: /path/to/cakephp/app/
     ---------------------------------------------------------------
     Current Paths:
 
-     -working: /path/to/cake/
-     -root: /path/to/cake/
-     -app: /path/to/cake/app/
-     -core: /path/to/cake/
+     -app: app
+     -working: /path/to/cakephp/app
+     -root: /path/to/cakephp/
+     -core: /path/to/cakephp/core
 
     Changing Paths:
 
     your working path should be the same as your application path
     to change your path use the '-app' param.
-    Example: -app relative/path/to/myapp or -app /absolute/path/to/myapp
+    Example: -app relative/path/to/cakephp/app or -app /absolute/path/to/cakephp/app
 
     Available Shells:
 
@@ -77,7 +77,7 @@ Running the Console with no arguments produces this help message::
      api [CORE]                              import [app]                            
      bake [CORE]                             schema [CORE]                           
      command_list [CORE]                     testsuite [CORE]                        
-     console [CORE]
+     console [CORE]                          upgrade [CORE]
 
     To run a command, type 'cake shell_name [args]'
     To get help on a specific command, type 'cake shell_name help'
@@ -94,7 +94,7 @@ path as the first argument to the cake command. This next example
 shows how to specify an app folder, assuming you’ve already added
 the console folder to your ``PATH``::
 
-    $ cake -app /path/to/app
+    $ cake -app /path/to/cakephp/app
 
 The path supplied can be relative to the current working directory
 or supplied as an absolute path.
@@ -112,7 +112,7 @@ cake executable to your system path.
    ``/Users/mark/cakephp/lib/Cake/Console/cake``
 #. Edit your ``.bashrc`` or ``.bash_profile`` file in your home directory, and add the following::
 
-    export PATH="/Users/mark/cakephp/lib/Cake/Console:$PATH"
+    export PATH="$PATH:/Users/mark/cakephp/lib/Cake/Console"
 
 #. Reload the bash configuration or open a new terminal, and ``cake`` should work anywhere.
 
@@ -214,7 +214,7 @@ Tasks allow you to extract commands into classes.  For example the ``bake`` is m
 almost entirely of tasks.  You define a shell's tasks by using the ``$tasks`` property::
 
     <?php 
-    class UserShell extends Shell {
+    class UserShell extends AppShell {
        public $tasks = array('Template');
     }
 
@@ -239,7 +239,7 @@ making re-usable chunks of functionality similar to :doc:`/controllers/component
 
     <?php 
     // found in Console/Command/SeaShell.php
-    class SeaShell extends Shell {
+    class SeaShell extends AppShell {
        public $tasks = array('Sound'); // found in Console/Command/Task/SoundTask.php
        public function main() {
            $this->Sound->execute();
@@ -501,7 +501,7 @@ You can use the following options when creating an argument:
 * ``index`` The index for the arg, if left undefined the argument will be put
    onto the end of the arguments. If you define the same index twice the 
    first option will be overwritten.
-* ``choices`` A array of valid choices for this argument.  If left empty all
+* ``choices`` An array of valid choices for this argument.  If left empty all
    values are valid. An exception will be raised when parse() encounters an
    invalid value.
 
@@ -684,8 +684,8 @@ Building a ConsoleOptionParser from an array
 
 .. php:method:: buildFromArray($spec)
 
-As previously mentioned, when creating subcommand option parsers 
-you can define the parser spec as an array this method.  This can help 
+As previously mentioned, when creating subcommand option parsers,
+you can define the parser spec as an array for that method. This can help 
 make building subcommand parsers easier, as everything is an array::
 
     <?php

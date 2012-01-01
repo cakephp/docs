@@ -18,14 +18,16 @@ The Simple Setup
 
 The fastest way to get up and running with REST is to add a few
 lines to your routes.php file, found in app/Config. The Router
-object features a method called mapResources(), that is used to set
+object features a method called ``mapResources()``, that is used to set
 up a number of default routes for REST access to your controllers.
+Make sure ``mapResources()`` comes before ``require CAKE . 'Config' . DS . 'routes.php';``
+and other routes which would override the routes.
 If we wanted to allow REST access to a recipe database, we'd do
 something like this::
 
     <?php
     //In app/Config/routes.php...
-        
+
     Router::mapResources('recipes');
     Router::parseExtensions();
 
@@ -34,9 +36,9 @@ access where method specifies the desired result format (e.g. xml,
 json, rss). These routes are HTTP Request Method sensitive.
 
 =========== ===================== ==============================
-HTTP format URL.format            Controller action invoked    
+HTTP format URL.format            Controller action invoked
 =========== ===================== ==============================
-GET         /recipes.format       RecipesController::index()  
+GET         /recipes.format       RecipesController::index()
 ----------- --------------------- ------------------------------
 GET         /recipes/123.format   RecipesController::view(123)
 ----------- --------------------- ------------------------------
@@ -71,19 +73,19 @@ this::
     <?php
     // Controller/RecipesController.php
     class RecipesController extends AppController {
-    
+
         public $components = array('RequestHandler');
-    
+
         function index() {
             $recipes = $this->Recipe->find('all');
             $this->set(compact('recipes'));
         }
-    
+
         function view($id) {
             $recipe = $this->Recipe->findById($id);
             $this->set(compact('recipe'));
         }
-    
+
         function edit($id) {
             $this->Recipe->id = $id;
             if ($this->Recipe->save($this->request->data)) {
@@ -93,7 +95,7 @@ this::
             }
             $this->set(compact("message"));
         }
-    
+
         function delete($id) {
             if ($this->Recipe->delete($id)) {
                 $message = 'Deleted';
@@ -104,7 +106,7 @@ this::
         }
     }
 
-Since we've added a call to :php:meth:`Router::parseExtensions()`, 
+Since we've added a call to :php:meth:`Router::parseExtensions()`,
 the CakePHP router is already primed to serve up different views based on
 different kinds of requests. Since we're dealing with REST
 requests, the view type is XML. We place the REST views for our
@@ -113,7 +115,7 @@ RecipesController inside ``app/View/recipes/xml``. We can also use
 our index view might look like::
 
     // app/View/Recipes/xml/index.ctp
-    
+
     <recipes>
         <?php
         $xml = Xml::build($recipes);
@@ -121,8 +123,8 @@ our index view might look like::
         ?>
     </recipes>
 
-When serving up a specific content type using parseExtensions(), 
-CakePHP automatically looks for a view helper that matches the type. 
+When serving up a specific content type using parseExtensions(),
+CakePHP automatically looks for a view helper that matches the type.
 Since we're using XML as the content type, there is no built-in helper,
 however if you were to create one it would automatically be loaded
 for our use in those views.
@@ -133,7 +135,7 @@ The rendered XML will end up looking something like this::
         <post id="234" created="2008-06-13" modified="2008-06-14">
             <author id="23423" first_name="Billy" last_name="Bob"></author>
             <comment id="245" body="This is a comment for this post."></comment>
-        </post>   
+        </post>
         <post id="3247" created="2008-06-15" modified="2008-06-15">
             <author id="625" first_name="Nate" last_name="Johnson"></author>
             <comment id="654" body="This is a comment for this post."></comment>
@@ -143,23 +145,23 @@ The rendered XML will end up looking something like this::
 Creating the logic for the edit action is a bit trickier, but not
 by much. Since you're providing an API that outputs XML, it's a
 natural choice to receive XML as input. Not to worry, the
-:php:class:`RequestHandler` and :php:class:`Router` classes make 
-things much easier. If a POST or PUT request has an XML content-type, 
-then the input is run through  Cake's :php:class:`Xml` class, and the 
+:php:class:`RequestHandler` and :php:class:`Router` classes make
+things much easier. If a POST or PUT request has an XML content-type,
+then the input is run through  Cake's :php:class:`Xml` class, and the
 array representation of the data is assigned to `$this->request->data`.
-Because of this feature, handling XML and POST data in parallel 
-is seamless: no changes are required to the controller or model code. 
+Because of this feature, handling XML and POST data in parallel
+is seamless: no changes are required to the controller or model code.
 Everything you need should end up in ``$this->request->data``.
 
 Accepting input in other formats
 ================================
 
-Typically REST applications not only output content in alternate data formats 
-they also accept data in different formats.  In CakePHP, the 
+Typically REST applications not only output content in alternate data formats
+they also accept data in different formats.  In CakePHP, the
 :php:class:`RequestHandlerComponent` helps facilitate this.  By default
 it will decode any incoming JSON/XML input data for POST/PUT requests
-and supply the array version of that data in `$this->request->data`.  
-You can also wire in additional deserializers for alternate formats if you 
+and supply the array version of that data in `$this->request->data`.
+You can also wire in additional deserializers for alternate formats if you
 need them, using :php:meth:`RequestHandler::addInputType()`
 
 Custom REST Routing
