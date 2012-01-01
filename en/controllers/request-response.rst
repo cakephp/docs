@@ -10,6 +10,7 @@ object on what information the request contained.  For 2.0,
 purpose.
 
 .. index:: $this->request
+.. _cake-request:
 
 CakeRequest
 ###########
