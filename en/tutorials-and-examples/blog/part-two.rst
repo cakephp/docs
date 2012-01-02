@@ -300,8 +300,8 @@ PostsController:
     any controller where you will use it. If necessary, include it in
     your AppController.
 
-Here's what the ``add()`` action does: if the submitted form data
-isn't empty, try to save the data using the Post model. If for some
+Here's what the ``add()`` action does: if HTTP method of the
+request was POST, try to save the data using the Post model. If for some
 reason it doesn't save, just render the view. This gives us a
 chance to show the user validation errors or other warnings.
 
