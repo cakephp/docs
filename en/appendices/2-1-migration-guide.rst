@@ -99,6 +99,7 @@ Router
 - Routes can now use a special ``/**`` syntax to include all trailing arguments
   as a single passed argument. See the section on :ref:`connecting-routes` for
   more information.
+- :php:meth:`Router::resourceMap()` was added.
 
 Network
 =======
