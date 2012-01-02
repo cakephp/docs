@@ -35,8 +35,10 @@ anything.
 Models
 ======
 
-- The ``beforeDelete`` callback will get fired first in behaviors and the in the model itself,
-this makes it consistent with the rest of the events triggered in the model layer.
+- The ``beforeDelete`` callback will be fired before behaviors beforeDelete callbacks.
+  This makes it consistent with the rest of the events triggered in the model layer.
+- ``Model::find('threaded')`` now triggers a warning when called on models
+  without a ``parent_id`` field.
 
 
 Exceptions
