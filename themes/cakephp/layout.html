@@ -46,9 +46,9 @@
 				</li>
 				<li class="cake-version"><a href="http://book.cakephp.org">Book</a>
 					<ul>
-						<li><a href="http://book.cakephp.org/view/305/The-Manual">1.1</a>&nbsp;|</li>
-						<li><a href="http://book.cakephp.org/view/3/The-Manual">1.2</a>&nbsp;|</li>
-						<li><a href="http://book.cakephp.org/view/876/The-Manual">1.3</a>&nbsp;|</li>
+						<li><a href="http://book.cakephp.org/1.1/view/305/The-Manual">1.1</a>&nbsp;|</li>
+						<li><a href="http://book.cakephp.org/1.2/view/3/The-Manual">1.2</a>&nbsp;|</li>
+						<li><a href="http://book.cakephp.org/1.3/view/876/The-Manual">1.3</a>&nbsp;|</li>
 						<li><a href="http://book.cakephp.org/2.0/en/">2.0</a></li>
 					</ul>
 				</li>
@@ -77,6 +77,15 @@
 		</li>
 	</ul>
 </div>
+{% endblock %}
+
+{% block sidebar1 %}
+<ul class='versions'>
+	<li><a href="http://book.cakephp.org/1.3/{{ language }}/view/876/">1.3 Book</a> | </li>
+	<li><a href="http://book.cakephp.org/1.2/{{ language }}/view/3/">1.2 Book</a> | </li>
+	<li><a href="http://book.cakephp.org/1.1/{{ language }}/view/305/">1.1 Book</a></li>
+</ul>
+{{ sidebar() }}
 {% endblock %}
 
 {% block relbar2 %}
