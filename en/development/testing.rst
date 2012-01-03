@@ -1086,7 +1086,7 @@ well. This insulates you from chained failures, where one broken build causes
 others to fail. Add another *shell script step* to the build that contains the
 following::
 
-    mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE jenkins_test; CREATE DATABASE jenkins_test';
+    mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
 
 Add your tests
 --------------
@@ -1097,7 +1097,7 @@ bonus, as it gives you a nice graphical view of your testing results::
 
     app/Console/cake testsuite app AllTests \
     --stderr \
-    --log-junit junit.xml
+    --log-junit junit.xml \
     --coverage-clover clover.xml
 
 If you use clover coverage, or the junit results, make sure to configure those
