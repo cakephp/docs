@@ -25,8 +25,7 @@ level ``Session`` key, and a number of options are available:
 * ``Session.checkAgent`` - Should the user agent be checked, on each request.  If
   the useragent does not match the session will be destroyed.
 
-* ``Session.autoRegenerate`` - Auto regeneration used to only be available when
-  ``Security.level`` was set to high.  Enabling this setting, turns on automatic
+* ``Session.autoRegenerate`` - Enabling this setting, turns on automatic
   renewal of sessions, and sessionids that change frequently. Enabling this
   value will use the session's ``Config.countdown`` value to keep track of requests.
   Once the countdown reaches 0, the session id will be regenerated.  This is a
