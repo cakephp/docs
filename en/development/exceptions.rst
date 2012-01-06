@@ -164,7 +164,7 @@ could do the following::
     <?php
     // in app/Lib/AppErrorHandler.php
     class AppErrorHandler {
-        public static handleException($error) {
+        public static function handleException($error) {
             if ($error instanceof MissingWidgetException) {
                 return self::handleMissingWidget($error);
             }
