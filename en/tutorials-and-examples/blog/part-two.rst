@@ -310,7 +310,7 @@ information is available in ``$this->request->data``. You can use the
 :php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to see
 what it looks like.
 
-We use the SessionComponents' :php:meth:`SessionComponent::setFlash()`
+We use the SessionComponent's :php:meth:`SessionComponent::setFlash()`
 method to set a message to a session variable to be displayed on the page after
 redirection. In the layout we have
 :php:func:`SessionHelper::flash` which displays the
@@ -372,7 +372,7 @@ the form. If a string is supplied as the first parameter to
 along with the closing form tag. Again, refer to
 :doc:`/views/helpers` for more on helpers.
 
-Now let's go back and update our ``/app/View/Post/index.ctp``
+Now let's go back and update our ``/app/View/Posts/index.ctp``
 view to include a new "Add Post" link. Before the ``<table>``, add
 the following line::
 
@@ -436,7 +436,7 @@ like::
 This action first checks that the request is a GET request.  If it is, then
 we find the Post and hand it to the view.  If the user request is not a GET, it
 probably contains POST data.  We'll use the POST data to update our Post record 
-with, or kick back and show the user the validation errors).
+with, or kick back and show the user the validation errors.
 
 The edit view might look something like this::
 

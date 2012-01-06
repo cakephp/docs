@@ -9,10 +9,10 @@ controllers and actions into the Acl. However, we all hate doing
 repetitive things like typing in what could be hundreds of actions
 in a large application.
 
-For this purpose exists a ver handy plugin available at github, called
+For this purpose exists a very handy plugin available at github, called
 `AclExtras <https://github.com/markstory/acl_extras/tree/2.0>`_ which can
-be downloaded in `The Github Downloads page <https://github.com/markstory/acl_extras/zipball/2.0>`_
-are we're going to briefly describe how to use it to generate all our ACO's
+be downloaded in `The Github Downloads page <https://github.com/markstory/acl_extras/zipball/2.0>`_.
+We're going to briefly describe how to use it to generate all our ACO's
 
 First grab a copy of the plugin and unzipped or clone it using git into
 `app/Plugin/AclExtras`. Then activate the plugin in your `app/Config/boostrap.php`
@@ -40,7 +40,7 @@ Setting up permissions
 
 Creating permissions much like creating ACO's has no magic solution, nor will I
 be providing one. To allow ARO's access to ACO's from the shell interface use
-the AclShell. For more information on how to use it consult the aclShell help
+the AclShell. For more information on how to use it consult the AclShell help
 which can be accessed by running::
 
     ./Console/cake acl --help
@@ -63,12 +63,12 @@ function::
 
     <?php
 
-    function beforeFilter() {
+    public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('initDB'); // We can remove this line after we're finished
     }
 
-    function initDB() {
+    public function initDB() {
         $group = $this->User->Group;
         //Allow admins to everything
         $group->id = 1;
@@ -116,7 +116,7 @@ in your users and groups controllers. Then add the following to
 your posts and widgets controllers::
 
     <?php
-    function beforeFilter() {
+    public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('index', 'view');
     }
@@ -131,7 +131,7 @@ actions in posts and widgets controllers. In
 
 This makes the 'display' action public. This will keep our
 PagesController::display() public. This is important as often the
-default routing has this action as the home page for you
+default routing has this action as the home page for your
 application.
 
 Logging in
@@ -155,7 +155,7 @@ If a user is already logged in, redirect him by adding this to your
 UsersController::
 
     <?php
-    function login() {
+    public function login() {
         if ($this->Session->read('Auth.User')) {
             $this->Session->setFlash('You are logged in!');
             $this->redirect('/', null, false);
