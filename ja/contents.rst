@@ -9,6 +9,7 @@
    getting-started
    cakephp-overview
    deployment
+   tutorials-and-examples
    contributing
    appendices
 
