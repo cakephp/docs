@@ -4,7 +4,7 @@ Simple Authentication and Authorization Application
 Following our :doc:`/tutorials-and-examples/blog/blog` example, imagine we wanted to
 secure the access to certain urls, based on the logged in
 user. We also have another requirement, to allow our blog to have multiple authors
-so each one of then can create their own posts, edit and delete them at will
+so each one of them can create their own posts, edit and delete them at will
 disallowing other authors to make any changes on one's posts.
 
 Creating all users' related code
@@ -56,7 +56,7 @@ validating any user data::
         );
     }
 
-Let's also create our UsersController, the following contents corresponds to a
+Let's also create our UsersController, the following contents correspond to a
 basic `baked` UsersController class using the code generation utilities bundled
 with CakePHP::
 
@@ -154,7 +154,7 @@ Authentication (login and logout)
 We're now ready to add our authentication layer. In CakePHP this is handled
 by the :php:class:`AuthComponent`, a class responsible for requiring login for certain
 actions, handling user sign-in and sign-out, and also authorizing logged in
-users to the actions the are allowed to reach.
+users to the actions are allowed to reach.
 
 To add this component to your application open your ``app/Controller/AppController.php``
 file and add the following lines::
@@ -190,7 +190,7 @@ site.
 Now, we need to be able to register new users, save their username and password,
 and more importantly hash their password so it is not stored as plain text in
 our database. Let's tell the AuthComponent to let un-authenticated users to access
-the users add function and the implement the login and logout action::
+the users add function and implement the login and logout action::
 
     <?php
     // app/Controller/UsersController.php

@@ -118,7 +118,7 @@ Acl components. First add a login and logout action to your
 ``UsersController``::
 
     <?php
-    function login() {
+    public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 $this->redirect($this->Auth->redirect());
@@ -128,7 +128,7 @@ Acl components. First add a login and logout action to your
         }
     }
      
-    function logout() {
+    public function logout() {
         //Leave empty for now.
     }
 
@@ -179,7 +179,7 @@ site controlled with Auth and Acl, we will set them up in
         );
         public $helpers = array('Html', 'Form', 'Session');
     
-        function beforeFilter() {
+        public function beforeFilter() {
             //Configure AuthComponent
             $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
             $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
@@ -195,7 +195,7 @@ and users. In **both** your ``GroupsController`` and your
 ``UsersController`` Add the following::
 
     <?php
-    function beforeFilter() {
+    public function beforeFilter() {
         parent::beforeFilter(); 
         $this->Auth->allow('*');
     }
@@ -245,7 +245,7 @@ our ``User`` model we will add the following::
         public $belongsTo = array('Group');
         public $actsAs = array('Acl' => array('type' => 'requester'));
          
-        function parentNode() {
+        public function parentNode() {
             if (!$this->id && empty($this->data)) {
                 return null;
             }
@@ -268,7 +268,7 @@ Then in our ``Group`` Model Add the following::
     class Group extends Model {
         public $actsAs = array('Acl' => array('type' => 'requester'));
          
-        function parentNode() {
+        public function parentNode() {
             return null;
         }
     }
@@ -319,7 +319,7 @@ In case we want simplified per-group only permissions, we need to
 implement ``bindNode()`` in ``User`` model::
 
     <?php
-    function bindNode($user) {
+    public function bindNode($user) {
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
     }
 
