@@ -158,8 +158,7 @@ Adding paths for App to find packages in
     be needed to be loaded again.
 
     .. versionchanged:: 2.0
-
-    Will not merge app paths with core paths anymore.
+        Will not merge app paths with core paths anymore.
 
     Examples::
 
@@ -172,6 +171,23 @@ Adding paths for App to find packages in
         //becomes 
         App::build(array('View/Helper' => array('/full/path/to/View/Helper')))
 
+
+    ``App::build()`` can be used to add new package locations.  This is useful
+    when you want to add new top level packages or, sub-packages to your
+    application::
+
+        <?php
+        App::build(array(
+            'Service' => array('%s' . 'Service' . DS)
+        ), App::REGISTER);
+
+    The ``%s`` in newly registered packages will be replaced with the
+    :php:const:`APP` path.  You must include a trailing ``/`` in registered
+    packages.  Once packages are registered, you can use ``App::build()`` to
+    append/prepend/reset paths like any other package.
+
+    .. versionchanged:: 2.1
+        Registering packages was added in 2.1
 
 Finding which objects CakePHP knows about
 =========================================

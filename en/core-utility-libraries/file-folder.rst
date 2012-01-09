@@ -563,6 +563,12 @@ File API
 
     Write given data to this File.
 
+.. php:method:: mime()
+
+    :rtype: mixed
+
+    Get the file's mimetype, returns false on failure.
+
 
 .. todo::
 

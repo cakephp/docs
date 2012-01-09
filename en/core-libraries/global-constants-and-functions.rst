@@ -16,11 +16,9 @@ directories in your CakePHP application.
 Global Functions
 ================
 
-Here are CakePHP's globally available functions. Many of them are
-convenience wrappers for long-named PHP functions, but some of them
-(like ``uses()``) can be used to include code or perform other
-useful functions. Chances are if you're constantly wanting a
-function to accomplish an oft-used task, it's here.
+Here are CakePHP's globally available functions. Most of them
+are just convenience wrappers for other CakePHP functionality,
+such as debugging and translating content.
 
 .. php:function:: \_\_(string $string_id, [$formatArgs])
 

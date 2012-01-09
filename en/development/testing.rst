@@ -402,21 +402,29 @@ model. Create a file named ``ArticleFixture.php`` in your
 ``app/Test/Fixture`` directory, with the following content::
 
     <?php
-    class ArticleFixture extends CakeTestFixture {
-        public $fields = array(
-            'id' => array('type' => 'integer', 'key' => 'primary'),
-            'title' => array('type' => 'string', 'length' => 255, 'null' => false),
-            'body' => 'text',
-            'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
-            'created' => 'datetime',
-            'updated' => 'datetime'
-        );
-        public $records = array(
-            array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-            array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-            array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
-        );
-    }
+    class ArticleFixture extends CakeTestFixture { 
+
+          /* Optional. Set this property to load fixtures to a different test datasource */
+          public $useDbConfig = 'test';
+          public $fields = array( 
+              'id' => array('type' => 'integer', 'key' => 'primary'), 
+              'title' => array('type' => 'string', 'length' => 255, 'null' => false), 
+              'body' => 'text', 
+              'published' => array('type' => 'integer', 'default' => '0', 'null' => false), 
+              'created' => 'datetime', 
+              'updated' => 'datetime' 
+          ); 
+          public $records = array( 
+              array ('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'), 
+              array ('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'), 
+              array ('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31') 
+          ); 
+     } 
+
+The ``$useDbConfig`` property defines the datasource of which the fixture will
+use.  You can specify an arbitrary name, eg.: ``myapp``, and the testsuite
+will use ``test_myapp`` if it exists.  Doing this is optional, and when
+unspecified, the default ``test`` datasource will be used.
 
 We use ``$fields`` to specify which fields will be part of this table,
 and how they are defined. The format used to define these fields is
@@ -544,6 +552,252 @@ Fixture directory.  You can also load fixtures from CakePHP core, or plugins::
 
 Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
 name as the prefix, will load the fixture from the named plugin.
+
+Testcase lifecycle callbacks
+============================
+
+Test cases have a number of lifecycle callbacks you can use when doing testing:
+
+* ``setUp`` is called before every test method.  Should be used to create the
+  objects that are going to be tested, and initialize any data for the test.
+  Always remember to call ``parent::setUp()``
+* ``tearDown`` is called after every test method.  Should be used to cleanup after
+  the test is complete. Always remember to call ``parent::tearDown()``.
+* ``setupBeforeClass`` is called once before test methods in a case are started.
+  This method must be *static*.
+* ``tearDownAfterClass`` is called once after test methods in a case are started.
+  This method must be *static*.
+
+Testing models
+==============
+
+Let's say we already have our Article model defined on
+``app/Model/Article.php``, which looks like this::
+
+    <?php
+    class Article extends AppModel {
+        public function published($fields = null) {
+            $params = array(
+                'conditions' => array(
+                    $this->name . '.published' => 1
+                ),
+                'fields' => $fields
+            );
+
+            return $this->find('all', $params);
+        }
+    }
+
+We now want to set up a test that will use this model definition, but through
+fixtures, to test some functionality in the model.  CakePHP test suite loads a
+very minimum set of files (to keep tests isolated), so we have to start by
+loading our model - in this case the Article model which we already defined.
+
+Let's now create a file named ``ArticleTest.php`` in your
+``app/Test/Case/Model`` directory, with the following contents::
+
+    <?php
+    App::uses('Article', 'Model');
+
+    class ArticleTestCase extends CakeTestCase {
+        public $fixtures = array('app.article');
+    }
+
+In our test cases' variable ``$fixtures`` we define the set of fixtures that
+we'll use.  You should remember to include all the fixtures that will have
+queries run against them.
+
+.. note::
+
+    You can override the test model database by specifying the ``$useDbConfig``
+    property. Ensure that the relevant fixture uses the same value so that the
+    table is created in the correct database.
+
+Creating a test method
+----------------------
+
+Let's now add a method to test the function published() in the
+Article model. Edit the file
+``app/Test/Case/Model/ArticleTest.php`` so it now looks like
+this::
+
+    <?php
+    App::uses('Article', 'Model');
+
+    class ArticleTest extends CakeTestCase {
+        public $fixtures = array('app.article');
+
+        public function setup() {
+            parent::setUp();
+            $this->Article = ClassRegistry::init('Article');
+        }
+
+        function testPublished() {
+            $result = $this->Article->published(array('id', 'title'));
+            $expected = array(
+                array('Article' => array('id' => 1, 'title' => 'First Article')),
+                array('Article' => array('id' => 2, 'title' => 'Second Article')),
+                array('Article' => array('id' => 3, 'title' => 'Third Article'))
+            );
+
+            $this->assertEquals($expected, $result);
+        }
+    }
+
+You can see we have added a method called ``testPublished()``. We start by
+creating an instance of our ``Article`` model, and then run our ``published()``
+method. In ``$expected`` we set what we expect should be the proper result (that
+we know since we have defined which records are initially populated to the
+article table.) We test that the result equals our expectation by using the
+``assertEquals`` method. See the :ref:`running-tests` section for more
+information on how to run your test case.
+
+.. note::
+
+    When setting up your Model for testing be sure to use 
+    ``ClassRegistry::init('YourModelName');`` as it knows to use your test 
+    database connection.
+
+Testing Helpers
+===============
+
+Since a decent amount of logic resides in Helper classes, it's
+important to make sure those classes are covered by test cases.
+
+Helper testing is a bit similar to the same approach for Components. First we 
+create an example helper to test. The ``CurrencyRendererHelper`` will help us 
+display currencies in our views and for simplicity only has one method 
+``usd()``.
+
+::
+
+    <?php
+    // app/View/Helper/CurrencyRendererHelper.php
+    class CurrencyRendererHelper extends AppHelper {
+        public function usd($amount) {
+            return 'USD ' . number_format($amount, 2, '.', ',');
+        }
+    }
+
+Here we set the decimal places to 2, decimal separator to dot, thousands
+separator to comma, and prefix the formatted number with 'USD' string.
+
+Now we create our tests::
+
+    <?php
+    // app/Test/Case/View/Helper/CurrencyRendererHelperTest.php
+
+    App::uses('Controller', 'Controller');
+    App::uses('View', 'View');
+    App::uses('CurrencyRendererHelper', 'View/Helper');
+
+    class CurrencyRendererHelperTest extends CakeTestCase {
+        public $CurrencyRenderer = null;
+
+        // Here we instantiate our helper
+        public function setUp() {
+            parent::setUp();
+            $Controller = new Controller();
+            $View = new View($Controller);
+            $this->CurrencyRenderer = new CurrencyRendererHelper($View);
+        }
+
+        // Testing the usd() function
+        public function testUsd() {
+            $this->assertEquals('USD 5.30', $this->CurrencyRenderer->usd(5.30));
+
+            // We should always have 2 decimal digits
+            $this->assertEquals('USD 1.00', $this->CurrencyRenderer->usd(1));
+            $this->assertEquals('USD 2.05', $this->CurrencyRenderer->usd(2.05));
+
+            // Testing the thousands separator
+            $this->assertEquals('USD 12,000.70', $this->CurrencyRenderer->usd(12000.70));
+        }
+    }
+
+Here, we call ``usd()`` with different parameters and tell the test suite to
+check if the returned values are equal to what is expected.
+
+Save this in and execute the test. You should see a green bar and messaging 
+indicating 4 passes.
+
+Testing components
+==================
+
+Lets assume that we want to test a component called TransporterComponent, which
+uses a model called Transporter to provide functionality for other controllers.
+We will use four files:
+
+-  A component called TransporterComponent found in
+   ``app/Controller/Component/TransporterComponent.php``
+-  A model called Transporter found in
+   ``app/Model/Transporter.php``
+-  A fixture called TransporterFixture found in
+   ``app/Test/Fixture/TransporterFixture.php``
+-  The testing code found in
+   ``app/Test/Case/TransporterComponentTest.php``
+
+Initializing the component
+--------------------------
+
+Since :doc:`/controllers/components`
+we need a controller to access the data in the model.
+
+If the ``startup()`` function of the component looks like this::
+
+    <?php
+    public function startup(Controller $controller) {
+        $this->Transporter = $controller->Transporter;
+    }
+
+then we can just design a really simple fake class::
+
+    <?php
+    class FakeTransporterController {}
+
+and assign values into it like this::
+
+    <?php
+    $Collection = new ComponentCollection();
+    $this->TransporterComponent = new TransporterComponent($Collection);
+    $controller = new FakeTransporterController();
+    $controller->Transporter = ClassRegistry::init('Transporter');
+    $this->TransporterComponent->startup($controller);
+
+Creating a test method
+----------------------
+
+Just create a class that extends CakeTestCase and start writing tests::
+
+    <?php
+    App::uses('TransporterComponent', 'Controller/Component');
+
+    class TransporterComponentTest extends CakeTestCase {
+        public $fixtures = array('app.transporter');
+
+        public function setUp() {
+            parent::setUp();
+            $Collection = new ComponentCollection();
+            $this->TransporterComponent = new TransporterComponent($Collection);
+            $controller = new FakeTransporterController();
+            $controller->Transporter = ClassRegistry::init('Transporter');
+            $this->TransporterComponentTest->startup($controller);
+        }
+
+        function testGetTransporter() {
+            $result = $this->TransporterComponent->getTransporter("12345", "Sweden", "54321", "Sweden");
+            $this->assertEquals(1, $result, "SP is best for 1xxxx-5xxxx");
+
+            $result = $this->TransporterComponent->getTransporter("41234", "Sweden", "44321", "Sweden");
+            $this->assertEquals(2, $result, "WSTS is best for 41xxx-44xxx");
+
+            $result = $this->TransporterComponent->getTransporter("41001", "Sweden", "41870", "Sweden");
+            $this->assertEquals(3, $result, "GL is best for 410xx-419xx");
+
+            $result = $this->TransporterComponent->getTransporter("12345", "Sweden", "54321", "Norway");
+            $this->assertEquals(0, $result, "No one can service Norway");
+        }
+    }
 
 Testing Controllers
 ===================

@@ -15,6 +15,7 @@ CakePHP.
     :maxdepth: 2
 
     core-libraries/global-constants-and-functions
+    core-libraries/events
     core-libraries/collections
 
 .. _core-components:
@@ -113,4 +114,4 @@ logging, internationalization and more.
 
 .. meta::
     :title lang=en: Core Libraries
-    :keywords lang=en: core libraries,global constants,cookie core,javascript libraries,access control lists,number core,text core,time core,security component,core components,plethora,general purpose,web applications,markup,authentication,api,cakephp,functionality,sessions,collections
+    :keywords lang=en: core libraries,global constants,cookie,access control lists,number,text,time,security component,core components,general purpose,web applications,markup,authentication,api,cakephp,functionality,sessions,collections,events

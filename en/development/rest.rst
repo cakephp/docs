@@ -27,7 +27,7 @@ something like this::
 
     <?php
     //In app/Config/routes.php...
-
+        
     Router::mapResources('recipes');
     Router::parseExtensions();
 
@@ -73,19 +73,19 @@ this::
     <?php
     // Controller/RecipesController.php
     class RecipesController extends AppController {
-
+    
         public $components = array('RequestHandler');
-
+    
         function index() {
             $recipes = $this->Recipe->find('all');
             $this->set(compact('recipes'));
         }
-
+    
         function view($id) {
             $recipe = $this->Recipe->findById($id);
             $this->set(compact('recipe'));
         }
-
+    
         function edit($id) {
             $this->Recipe->id = $id;
             if ($this->Recipe->save($this->request->data)) {
@@ -95,7 +95,7 @@ this::
             }
             $this->set(compact("message"));
         }
-
+    
         function delete($id) {
             if ($this->Recipe->delete($id)) {
                 $message = 'Deleted';
@@ -115,7 +115,7 @@ RecipesController inside ``app/View/recipes/xml``. We can also use
 our index view might look like::
 
     // app/View/Recipes/xml/index.ctp
-
+    
     <recipes>
         <?php
         $xml = Xml::build($recipes);
@@ -164,16 +164,38 @@ and supply the array version of that data in `$this->request->data`.
 You can also wire in additional deserializers for alternate formats if you
 need them, using :php:meth:`RequestHandler::addInputType()`
 
+Modifing the default REST routes
+================================
+
+If the default REST routes dont' work for your application, you can modify them
+using :php:meth:`Router::resourceMap()`.  This method allows you to set the
+default routes that get set with :php:meth:`Router::mapResources()`.  When using
+this method you need to set *all* the defaults you want to use::
+
+    <?php
+    Router::resourceMap(array(
+        array('action' => 'index', 'method' => 'GET', 'id' => false),
+        array('action' => 'view', 'method' => 'GET', 'id' => true),
+        array('action' => 'add', 'method' => 'POST', 'id' => false),
+        array('action' => 'edit', 'method' => 'PUT', 'id' => true),
+        array('action' => 'delete', 'method' => 'DELETE', 'id' => true),
+        array('action' => 'update', 'method' => 'POST', 'id' => true)
+    ));
+
+By overwriting the default resource map, future calls to ``mapResources()`` will
+use the new values.
+
+
 Custom REST Routing
 ===================
 
-If the default routes created by :php:meth:`Router::mapResources()` don't work for you,
-use the :php:meth:`Router::connect()` method to define a custom set of REST
-routes. The connect() method allows you to define a number of
-different options for a given URL. The first parameter is the URL
-itself, and the second parameter allows you to supply those
-options. The third parameter allows you to specify regex patterns
-to help CakePHP identify certain markers in the specified URL.
+If the default routes created by :php:meth:`Router::mapResources()` don't work
+for you, use the :php:meth:`Router::connect()` method to define a custom set of
+REST routes. The ``connect()`` method allows you to define a number of different
+options for a given URL. The first parameter is the URL itself, and the second
+parameter allows you to supply those options. The third parameter allows you to
+specify regex patterns to help CakePHP identify certain markers in the specified
+URL.
 
 We'll provide a simple example here, and allow you to tailor this
 route for your other RESTful purposes. Here's what our edit REST
@@ -191,7 +213,6 @@ on the most important point for our purposes here: the [method] key
 of the options array in the second parameter. Once that key has
 been set, the specified route works only for that HTTP request
 method (which could also be GET, DELETE, etc.)
-
 
 
 .. meta::

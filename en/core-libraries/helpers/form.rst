@@ -829,6 +829,14 @@ Options for select, checkbox and  radio inputs
   Disabling the ``'hiddenField'`` on the second input group would
   prevent this behavior.
 
+  You can set a different hidden field value other than 0 such as 'N'::
+
+      <?php
+      echo $this->Form->checkbox('published', array(
+          'value' => 'Y',
+          'hiddenField' => 'N',
+      ));
+
 Datetime options
 ----------------
 
@@ -1015,6 +1023,9 @@ Form Element-Specific Methods
 
     * ``$attributes['separator']`` to specify HTML in between radio
       buttons (e.g. <br />).
+
+    * ``$attributes['between']`` specify some content to be inserted between the
+      legend and first element.
 
     * ``$attributes['legend']`` Radio elements are wrapped with a label and
       fieldset by default.  Set ``$attributes['legend']`` to false to remove

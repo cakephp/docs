@@ -30,11 +30,11 @@ are a few examples of how to use the $htmlAttributes parameter::
 Inserting Well-Formatted elements
 =================================
 
-    The most important task the HtmlHelper accomplishes is creating
-    well formed markup. Don't be afraid to use it often - you can cache
-    views in CakePHP in order to save some CPU cycles when views are
-    being rendered and delivered. This section will cover some of the
-    methods of the HtmlHelper and how to use them.
+The most important task the HtmlHelper accomplishes is creating
+well formed markup. Don't be afraid to use it often - you can cache
+views in CakePHP in order to save some CPU cycles when views are
+being rendered and delivered. This section will cover some of the
+methods of the HtmlHelper and how to use them.
 
 .. php:method:: charset($charset=null)
 
@@ -68,9 +68,12 @@ Inserting Well-Formatted elements
     :param array $options: An array of :term:`html attributes`.
 
     Creates a link(s) to a CSS style-sheet. If key 'inline' is set to
-    false in $options parameter, the link tags are added to the
-    $scripts\_for\_layout variable which you can print inside the head
+    false in ``$options`` parameter, the link tags are added to the
+    ``css`` block which you can print inside the head
     tag of the document.
+
+    You can use the ``block`` option to control which block the link element
+    will be appended to.  By default it will append to the ``css`` block.
 
     This method of CSS inclusion assumes that the CSS file specified
     resides inside the /app/webroot/css directory.::
@@ -91,17 +94,19 @@ Inserting Well-Formatted elements
         <link rel="stylesheet" type="text/css" href="/css/tables.css" />
         <link rel="stylesheet" type="text/css" href="/css/menu.css" />
 
+    .. versionchanged:: 2.1
+        The ``block`` option was added.
+
 .. php:method:: meta(string $type, string $url = null, array $options = array())
 
     :param string $type: The type meta tag you want.
     :param mixed $url: The url for the meta tag, either a string or a :term:`routing array`.
     :param array $options: An array of :term:`html attributes`.
 
-    This method is handy for linking to external resources like
-    RSS/Atom feeds and favicons. Like css(), you can specify whether or
-    not you'd like this tag to appear inline or in the head tag by
-    setting the 'inline' key in the $attributes parameter to false, ie
-    - ``array('inline' => false)``.
+    This method is handy for linking to external resources like RSS/Atom feeds
+    and favicons. Like css(), you can specify whether or not you'd like this tag
+    to appear inline or appended to the ``meta`` block by setting the 'inline'
+    key in the $attributes parameter to false, ie - ``array('inline' => false)``.
 
     If you set the "type" attribute using the $attributes parameter,
     CakePHP contains a few shortcuts:
@@ -168,7 +173,10 @@ Inserting Well-Formatted elements
         <?php
         echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex')); 
 
-.. php:method:: docType(string $type = 'xhtml-strict')
+    .. versionchanged:: 2.1
+        The ``block`` option was added.
+
+.. php:method:: docType(string $type = 'html5')
 
     :param string $type: The type of doctype being made.
 
@@ -185,6 +193,8 @@ Inserting Well-Formatted elements
         HTML4 Transitional
     html4-frame
         HTML4 Frameset
+    html5
+        HTML5
     xhtml-strict
         XHTML1 Strict
     xhtml-trans
@@ -197,7 +207,7 @@ Inserting Well-Formatted elements
     ::
 
         <?php echo $this->Html->docType(); ?> 
-        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        <!DOCTYPE html>
 
         <?php echo $this->Html->docType('html4-trans'); ?> 
         <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -388,23 +398,20 @@ Inserting Well-Formatted elements
        array of strings for multiple files.
     :param array $options: An array of :term:`html attributes`.
 
-    Creates link(s) to a javascript file. If key ``inline`` is set to
-    false in $options, the link tags are added to the
-    $scripts\_for\_layout variable which you can print inside the head
-    tag of the document.
-
-    Include a script file into the page. ``$options['inline']``
-    controls whether or not a script should be returned inline or added
-    to $scripts\_for\_layout. ``$options['once']`` controls, whether or
+    Include a script file(s). If key ``inline`` is set to false in $options, the
+    script tags are added to the ``script`` block which you can print inside the
+    head tag of the document. ``$options['once']`` controls, whether or
     not you want to include this script once per request or more than
-    once.
+    once. ``$options['block']`` allows you to control which block the script tag
+    is appended to.  This is useful when you want to place some scripts at the
+    bottom of the layout.
 
-    You can also use $options to set additional properties to the
+    You can use $options to set additional properties to the
     generated script tag. If an array of script tags is used, the
     attributes will be applied to all of the generated script tags.
 
     This method of javascript file inclusion assumes that the
-    javascript file specified resides inside the /app/webroot/js
+    javascript file specified resides inside the ``/app/webroot/js``
     directory.::
 
         <?php
@@ -431,6 +438,20 @@ Inserting Well-Formatted elements
         <script type="text/javascript" href="/js/wysiwyg.js"></script>
         <script type="text/javascript" href="/js/scripts.js"></script>
 
+    You can append the script tag to a specific block using the ``block``
+    option::
+
+        <?php
+        echo $this->Html->script('wysiwyg', array('block' => 'scriptBottom'));
+        
+    In your layout you can output all the script tags added to 'scriptBottom'::
+
+        <?php
+        echo $this->fetch('scriptBottom');
+
+    .. versionchanged:: 2.1
+        The ``block`` option was added.
+
 .. php:method::  scriptBlock($code, $options = array())
 
     :param string $code: The code to go in the script tag.
@@ -438,7 +459,7 @@ Inserting Well-Formatted elements
 
     Generate a code block containing ``$code`` set
     ``$options['inline']`` to false to have the script block appear in
-    ``$scripts_for_layout``. Also new is the ability to add attributes
+    the ``script`` view block. Other options defined will be added as attributes
     to script tags.
     ``$this->html->scriptBlock('stuff', array('defer' => true));`` will
     create a script tag with ``defer="defer"`` attribute.

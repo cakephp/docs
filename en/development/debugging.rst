@@ -28,6 +28,10 @@ default.
 Output from this function is only shown if the core debug variable
 has been set to a value greater than 0.
 
+.. versionchanged:: 2.1 
+    The output of ``debug()`` more resembles ``var_dump()``, and uses
+    :php:class:`Debugger` internally.
+
 Debugger Class
 ==============
 
@@ -88,6 +92,10 @@ set to a value greater than 0.
         Car::decelerate()
         Car::stop()
 
+    .. versionchanged:: 2.1
+        In 2.1 forward the output was updated for readability. See
+        :php:func:`Debugger::exportVar()`
+
 .. php:staticmethod:: Debugger::log($var, $level = 7)
 
     Creates a detailed stack trace log at the time of invocation. The
@@ -136,7 +144,7 @@ set to a value greater than 0.
             [0] => <code><span style="color: #000000"> * @access public</span></code>
             [1] => <code><span style="color: #000000"> */</span></code>
             [2] => <code><span style="color: #000000">    function excerpt($file, $line, $context = 2) {</span></code>
-    
+         
             [3] => <span class="code-highlight"><code><span style="color: #000000">        $data = $lines = array();</span></code></span>
             [4] => <code><span style="color: #000000">        $data = @explode("\n", file_get_contents($file));</span></code>
         )
@@ -152,9 +160,18 @@ set to a value greater than 0.
     variable conversions, and can be used in your own Debuggers as
     well.
 
+    .. versionchanged:: 2.1
+        This function generates different output in 2.1 forward.
+
 .. php:staticmethod:: Debugger::invoke($debugger)
 
-    Replace the CakePHP Debugger with a new Error Handler.
+    Replace the CakePHP Debugger with a new instance.
+
+.. php:staticmethod:: Debugger::getType($var)
+
+    Get the type of a variable.  Objects will return their classname
+
+    .. versionadded:: 2.1
 
 Using Logging to debug
 ======================

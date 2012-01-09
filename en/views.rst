@@ -7,6 +7,14 @@ form of HTML, XML, or JSON, but streaming files and creating PDF's
 that users can download are also responsibilities of the View
 Layer.
 
+CakePHP comes with a few built-in View classes for handling the most
+common rendering scenarios:
+
+- To create XML or JSON webservices you can use the :doc:`views/json-and-xml-views`.
+- To serve protected files, or dynamically generated files, you can use
+  :doc:`views/media-view`
+- To create multiple themed views, you can use :doc:`views/themes`
+
 View Templates
 ==============
 
@@ -45,6 +53,175 @@ chapter:
   CakePHP can help you build forms, build AJAX functionality,
   paginate model data, or serve RSS feeds.
 
+
+.. _extending-views:
+
+Extending Views
+---------------
+
+View extending allows you to wrap one view in another.  Combining this with
+:ref:`view blocks <view-blocks>` gives you a powerful way to keep your views
+:term:`DRY`.  For example, your application has a sidebar that needs to change depending
+on the specific view being rendered.  By extending a common view file you can
+avoid repeating the common markup for your sidebar, and only define the parts
+that change::
+
+    // app/View/Common/view.ctp
+    <h1><?php echo $this->fetch('title'); ?></h1>
+    <?php echo $this->fetch('content'); ?>
+
+    <div class="actions">
+        <h3>Related actions</h3>
+        <ul>
+        <?php echo $this->fetch('sidebar'); ?>
+        </ul>
+    </div>
+
+The above view file could be used as a parent view.  It expects that the view
+extending it will define the ``sidebar`` and ``title`` blocks.  The ``content``
+block is a special block that CakePHP creates. It will contain all the
+un-captured content from the extending view. Assuming our view file has a
+``$posts`` variable with the data about our post.  Our view could look like::
+
+    // app/View/Posts/view.ctp
+    <?php
+    $this->extend('/Common/view.ctp');
+
+    $this->assign('title', $post)
+
+    $this->start('sidebar');
+    ?>
+    <li><?php
+    echo $this->Html->link('edit', array(
+        'action' => 'edit',
+        $post['Post']['id']
+    )); ?>
+    </li>
+    <?php $this->end(); ?>
+
+    <?php 
+    // The remaining content will be available as the 'content' block 
+    // in the parent view.
+    echo h($post['Post']['body']);
+
+The post view above shows how you can extend a view, and populate a set of
+blocks.  Any content not in already in a defined block will captured and put
+into a special block named ``content``.  When a view contains a call to
+``extend()`` execution continues to the bottom of the current view file.
+Once its complete, the extended view will be rendered.  Calling ``extend()``
+more than once in a view file will override the parent view that will be
+processed next::
+
+    <?php
+    $this->extend('/Common/view.ctp');
+    $this->extend('/Common/index.ctp');
+
+The above will result in ``/Common/index.ctp`` being rendered as the parent view
+to the current view.
+
+You can nest extended views as many times as necessary. Each view can extend
+another view if desired.  Each parent view will get the previous view's content
+as the ``content`` block.
+
+.. note::
+
+    You should avoid using ``content`` as a block name in your application.
+    CakePHP uses this for un-captured content in extended views.
+
+
+.. _view-blocks:
+
+Using view blocks
+=================
+
+View blocks replace ``$scripts_for_layout`` and provide a flexible API that
+allows you to define slots or blocks in your views/layouts that will be defined
+elsewhere.  For example blocks are ideal for implementing things such as
+sidebars, or regions to load assets at the bottom/top of the layout.
+Blocks can be defined in two ways.  Either as a capturing block, or by direct
+assignment.  The ``start()``, ``append()`` and ``end()`` methods allow to to
+work with capturing blocks::
+
+    <?php
+    // create the sidebar block.
+    $this->start('sidebar');
+    echo $this->element('sidebar/recent_topics');
+    echo $this->element('sidebar/recent_comments');
+    $this->end();
+
+
+    // Append into the sidebar later on.
+    $this->append('sidebar');
+    echo $this->element('sidebar/popular_topics');
+    $this->end();
+
+You can also append into a block using ``start()`` multiple times.  ``assign()``
+can be used to clear or overwrite a block at any time::
+
+    <?php
+    // Clear the previous content from the sidebar block.
+    $this->assign('sidebar', '');
+
+.. note::
+
+    You should avoid using ``content`` as a block name.  This is used by CakePHP
+    internally for extended views, and view content in the layout.
+
+Displaying blocks
+-----------------
+
+You can display blocks using the ``fetch()`` method.  ``fetch()`` will safely
+output a block, returning '' if a block does not exist::
+
+    <?php echo $this->fetch('sidebar'); ?>
+
+You can also use fetch to conditionally show content that should surround a
+block should it exist.  This is helpful in layouts, or extended views where you
+want to conditionally show headings or other markup::
+
+    // in app/Layout/default.ctp
+    <?php if ($this->fetch('menu')): ?>
+    <div class="menu">
+        <h3>Menu options</h3>
+        <?php echo $this->fetch('menu'); ?>
+    </div>
+    <?php endif; ?>
+
+Using blocks for script and CSS files
+-------------------------------------
+
+Blocks replace the deprecated ``$scripts_for_layout`` layout variable.  Instead
+you should use blocks.  The :php:class:`HtmlHelper` ties into view blocks, and its
+:php:meth:`~HtmlHelper::script()`, :php:meth:`~HtmlHelper::css()`, and
+:php:meth:`~HtmlHelper::meta()` methods each update a block with the same name
+when used with the ``inline = false`` option::
+
+    <?php 
+    // in your view file
+    $this->Html->script('carousel', array('inline' => false));
+    $this->Html->css('carousel', null, array('inline' => false));
+    ?>
+
+    // In your layout file.
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+        <title><?php echo $this->fetch('title'); ?></title>
+        <?php echo $this->fetch('script'); ?>
+        <?php echo $this->fetch('css'); ?>
+        </head>
+        // rest of the layout follows
+
+The :php:meth:`HtmlHelper` also allows you to control which block the scripts and CSS go
+to::
+
+    <?php
+    // in your view
+    $this->Html->script('carousel', array('block' => 'scriptBottom'));
+    
+    // in your layout
+    echo $this->fetch('scriptBottom');
+
 .. _view-layouts:
 
 Layouts
@@ -62,7 +239,7 @@ default layout when the page is rendered.
 
 When you create a layout, you need to tell CakePHP where to place
 the code for your views. To do so, make sure your layout includes a
-place for ``$content_for_layout`` Here's an example of what a default layout
+place for ``$this->fetch('content')`` Here's an example of what a default layout
 might look like::
 
    <!DOCTYPE html>
@@ -71,7 +248,11 @@ might look like::
    <title><?php echo $title_for_layout?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
    <!-- Include external files and scripts here (See HTML helper for more info.) -->
-   <?php echo $scripts_for_layout ?>
+   <?php
+   echo $this->fetch('meta');
+   echo $this->fetch('css');
+   echo $this->fetch('script');
+   ?>
    </head>
    <body>
 
@@ -82,7 +263,7 @@ might look like::
    </div>
 
    <!-- Here's where I want my views to be displayed -->
-   <?php echo $content_for_layout ?>
+   <?php echo $this->fetch('content'); ?>
 
    <!-- Add a footer to each displayed page -->
    <div id="footer">...</div>
@@ -90,18 +271,17 @@ might look like::
    </body>
    </html>
 
-``$scripts_for_layout`` contains any external files and scripts
-included with the built-in HTML helper. Useful for including
+The ``script``, ``css`` and ``meta`` blocks contain any content defined 
+in the views using the built-in HTML helper. Useful for including
 javascript and CSS files from views.
 
 .. note::
 
     When using :php:meth:`HtmlHelper::css()` or :php:meth:`HtmlHelper::script()` 
     in view files, specify 'false' for the 'inline' option to place the html 
-    source in ``$scripts_for_layout``. (See API for more details on usage).
+    source in a block with the same name. (See API for more details on usage).
 
-``$content_for_layout`` contains the view. This is where the view
-code will be placed.
+The ``content`` block contains the contents of the rendered view.
 
 ``$title_for_layout`` contains the page title.  This variable is generated automatically,
 but you can override it by setting it in your controller/view.
@@ -115,7 +295,6 @@ controller, setting the ``$title_for_layout`` variable::
            $this->set('title_for_layout', 'View Active Users');
        }
    }
-   
 
 You can also set the title_for_layout variable from inside the view file::
 
@@ -165,6 +344,21 @@ is used for messages shown by :php:meth:`Controller::flash()` method.
 Three other layouts, xml, js, and rss, exist in the core for a quick
 and easy way to serve up content that isn’t text/html.
 
+Using layouts from plugins
+--------------------------
+
+If you want to use a layout that exists in a plugin, you can use 
+:term:`plugin syntax`.  For example to use the contact layout from the 
+Contacts plugin::
+
+    <?php
+    class UsersController extends AppController {
+        public function viewActive() {
+            $this->layout = 'Contacts.contact';
+        }
+    }
+
+
 .. _view-elements:
 
 Elements
@@ -210,7 +404,7 @@ variable::
     echo $helptext; //outputs "Oh, this text is very helpful."
 
 The :php:meth:`View::element()` method also supports options for the element.
-The options supported are 'cache', 'callbacks' and 'plugin'. An example::
+The options supported are 'cache' and 'callbacks'. An example::
 
     <?php
     echo $this->element('helpbox', array(
@@ -219,7 +413,6 @@ The options supported are 'cache', 'callbacks' and 'plugin'. An example::
         ),
         array(
             "cache" => "long_view", // uses the "long_view" cache configuration
-            "plugin" => "",  //to render an element from a plugin
             "callbacks" => true // set to true to have before/afterRender called for the element
         )
     );
@@ -253,7 +446,7 @@ the Post example::
         // ...
         function index() {
             $posts = $this->paginate();
-            if (isset($this->params['requested'])) {
+            if ($this->request->is('requested')) {
                 return $posts;
             } else {
                 $this->set('posts', $posts);
@@ -312,12 +505,27 @@ Requesting Elements from a Plugin
 ---------------------------------
 
 If you are using a plugin and wish to use elements from within the
-plugin, just specify the plugin parameter. If the view is being
-rendered for a plugin controller/action, it will automatically
-point to the element for the plugin. If the element doesn't exist
-in the plugin, it will look in the main APP folder.::
+plugin, just use the familiar :term:`plugin syntax`. If the view is being
+rendered for a plugin controller/action, the plugin name will automatically
+be prefixed onto all elements used, unless another plugin name is present.
+If the element doesn't exist in the plugin, it will look in the main APP folder.::
 
-    <?php echo $this->element('helpbox', array(), array('plugin' => 'pluginname')); ?>
+    <?php echo $this->element('Contacts.helpbox'); ?>
+
+If your view is a part of a plugin you can omit the plugin name.  For example,
+if you are in the ``ContactsController`` of the Contacts plugin::
+
+    <?php
+    echo $this->element('helpbox');
+    // and
+    echo $this->element('Contacts.helpbox');
+
+Are equivalent and will result in the same element being rendered.
+
+.. versionchanged:: 2.1
+    The ``$options[plugin]`` option was deprecated and support for
+    ``Plugin.element`` was added.
+
 
 View API
 ========
@@ -379,6 +587,55 @@ To call any view method use ``$this->method()``
     helpers, like the :doc:`/core-libraries/helpers/js` and
     :doc:`/core-libraries/helpers/html` Helpers.
 
+    .. deprecated:: 2.1
+        Use the :ref:`view-blocks` features instead.
+
+.. php:method:: blocks
+
+    Get the names of all defined blocks as an array.
+
+.. php:method:: start($name)
+
+    Start a capturing block for a view block.  See the section on 
+    :ref:`view-blocks` for examples.
+
+    .. versionadded:: 2.1
+
+.. php:method:: end
+
+    End the top most open capturing block.  See the section on 
+    :ref:`view-blocks` for examples.
+
+    .. versionadded:: 2.1
+
+.. php:method:: append($name, $content)
+
+    Append into the block with ``$name``.  See the section on 
+    :ref:`view-blocks` for examples.
+
+    .. versionadded:: 2.1
+
+.. php:method:: assign($name, $content)
+
+    Assign the value of a block.  This will overwrite any existing content. See
+    the section on :ref:`view-blocks` for examples.
+
+    .. versionadded:: 2.1
+
+.. php:method:: fetch($name)
+
+    Fetch the value of a block. '' Will be returned for blocks that are not
+    defined. See the section on :ref:`view-blocks` for examples.
+
+    .. versionadded:: 2.1
+
+.. php:method:: extend($name)
+
+    Extend the current view/element/layout with the named one.  See the section
+    on :ref:`extending-views` for examples.
+
+    .. versionadded:: 2.1
+
 .. php:attr:: layout
 
     Set the layout the current view will be wrapped in.
@@ -400,6 +657,16 @@ To call any view method use ``$this->method()``
     Contains the last rendered content from a view, either the view file, or the
     layout content.
 
+    .. deprecated:: 2.1
+        Use ``$view->Blocks->get('content');`` instead.
+
+.. php:attr:: Blocks
+
+    An instance of :php:class:`ViewBlock`.  Used to provide view block
+    functionality in view rendering.
+
+    .. versionadded:: 2.1
+
 More about Views
 ================
 
@@ -407,6 +674,7 @@ More about Views
 
     views/themes
     views/media-view
+    views/json-and-xml-views
     views/helpers
 
 
