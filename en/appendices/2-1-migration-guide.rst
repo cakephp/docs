@@ -217,13 +217,14 @@ Testing
 - Web test runner now displays the PHPUnit version number.
 - Web test runner now defaults to displaying app tests.
 - Fixtures can be created in different datasources other than $test.
-- Models loaded using the ClassRegistry and using another datasource will get their datasource name
-prepended with ``test_`` (e.g datasource `master` will try to use `test_master` in the testsuite)
+- Models loaded using the ClassRegistry and using another datasource will get
+  their datasource name prepended with ``test_`` (e.g datasource `master` will
+  try to use `test_master` in the testsuite)
 
 Events
 ======
 
-- A new generic events system has been built and it replaced the way callbacks were dispatched. This
-should not represent any change to your code.
-- You can dispatch your own events and attach callbacks to them at will, useful for inter-plugin
-communication and easier decoupling of your classes.
+- A new generic events system has been built and it replaced the way callbacks
+  were dispatched. This should not represent any change to your code.
+- You can dispatch your own events and attach callbacks to them at will, useful
+  for inter-plugin communication and easier decoupling of your classes.
