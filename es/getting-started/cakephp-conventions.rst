@@ -76,8 +76,7 @@ cualquiera de estas formas
 todos ellos resolverían al método index del controlador RedApples. De todos
 la convención es que esa url sea minúscula y subrayada, de este modo
 
-- /red\_apples/go\_pick sería la url correcta para acceder a 
-``RedApplesController::go_pick``
+- /red\_apples/go\_pick sería la url correcta para acceder a  ``RedApplesController::go_pick``
 
 Para más información sobre URLs y parámetros en CakePHP, consulta 
 :ref:`routes-configuration`.
@@ -121,7 +120,7 @@ saltar esta convención en cualquier momento y escribir plurales más adecuados
 al español.
 
 Puedes también usar la clase de utilidad :php:class:`Inflector` para comprobar
- el singular y plural de las palabras. Consulta la documentación aquí 
+el singular y plural de las palabras. Consulta la documentación aquí 
 :doc:`/core-utility-libraries/inflector`.
 
 Los nombres de los campos con más de una palabra se escriben en minúscula y 
@@ -161,7 +160,7 @@ En vez de utilizar una clave con autoincremento como clave primaria, recuerda
 que también puedes usar una clave char(36). Cuando CakePHP ve que has 
 definido así tu clave primaria, gestionará esta clave añadiendo un UUID 
 (String::uuid) que es un código único que identificará a cada registro, cada
- vez que realices un Model::save en ese modelo.
+vez que realices un Model::save en ese modelo.
 
 Convenciones en la vistas
 =========================
@@ -194,5 +193,5 @@ ninguna otra forma que creando los nombres correctos y los ficheros que tienes
 que crear de todos modos para que tu aplicación funcione.
 
 Ahora ya sabes los fundamentos y cómo utilizar las convenciones de CakePHP, 
-te recomendamos que le eches un vistazo a :doc:`/tutorials-and-examples/blog/blog`
+te recomendamos que le eches un vistazo al :doc:`tutorial para hacer un blog</tutorials-and-examples/blog/blog>`
 para ver cómo encajan estas piezas en una aplicación completa.

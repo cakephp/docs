@@ -114,7 +114,7 @@ entonces:
    
    -  /app
       
-      -  /webroot (este directorio es el que configuraremos como ``DocumentRoot``        en el servidor web
+      -  /webroot (este directorio es el que configuraremos como ``DocumentRoot``   en el servidor web
 
    -  /lib
    -  /vendors

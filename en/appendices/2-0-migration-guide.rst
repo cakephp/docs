@@ -94,7 +94,7 @@ lowercased Folders:
 AppController / AppModel / AppHelper / AppShell
 ===============================================
 
-The ``app/app_controller.php``, ``app/app_model.php``, ``app/app_helper.php are now located and 
+The ``app/app_controller.php``, ``app/app_model.php``, ``app/app_helper.php`` are now located and 
 named as ``app/Controller/AppController.php``, ``app/Model/AppModel.php`` and ``app/Helper/AppHelper.php`` respectively.
 
 Also all shell/task now extend AppShell. You can have your custom AppShell.php at ``app/Console/Command/AppShell.php``
@@ -549,7 +549,7 @@ Router
   ``$this->request->params['ext']``.
 - Default plugin routes have changed. Plugin short routes are no longer built
   in for any actions other than index.  Previously ``/users`` and ``/users/add``
-  would map to the UserController in the Users plugin.  In 2.0, only the
+  would map to the UsersController in the Users plugin.  In 2.0, only the
   ``index`` action is given a short route.  If you wish to continue using short
   routes, you can add a route like::
 

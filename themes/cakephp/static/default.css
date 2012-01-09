@@ -389,3 +389,22 @@ dl.const em.property {
     right: 17px;
     border: 0;
 }
+
+ul.versions {
+    color:#fff;
+    float:right;
+    margin:0;
+    margin-top:-22px;
+    margin-right:200px;
+    padding:0;
+    font-size:0.9em;
+}
+ul.versions li {
+    display:inline-block;
+    padding-right:5px;
+}
+ul.versions li a {
+    color:#fff;
+    display:inline-block;
+    padding-right:5px;
+}

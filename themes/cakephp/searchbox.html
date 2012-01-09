@@ -8,7 +8,7 @@
     :license: BSD, see LICENSE for details.
 #}
 {%- if pagename != "search" %}
-<div id="searchbox" style="display: none">
+<div id="searchbox">
     <form id="searchform" class="search" action="{{ pathto('search') }}" method="get">
       <input class="search-input" type="search" name="q" size="18" />
       <input class="search-submit" type="image" src="{{ pathto('_static/search-submit.png', 1) }}" alt="{{ _('Go') }}" />
@@ -19,5 +19,4 @@
     {{ _('Enter search terms or a class or function name.') }}
     </p>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
 {%- endif %}

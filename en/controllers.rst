@@ -10,7 +10,7 @@ controllers thin, and your models fat.  This will help you more easily reuse
 your code and makes your code easier to test.
 
 Commonly, controllers are used to manage the logic around a single model. For
-example, if you were building a site for an online bakery, you might have a
+example, if you were building a site for an on-line bakery, you might have a
 RecipesController and an IngredientsController managing your recipes and their
 ingredients.  In CakePHP, controllers are named after the primary model they
 handle. It's totally possible to have controllers work with more than one model as
@@ -19,11 +19,14 @@ well.
 Your application's controllers extend ``AppController`` class, which in turn
 extends the core :php:class:`Controller` class. The AppController
 class can be defined in ``/app/Controller/AppController.php`` and it should
-contain methods that are shared between all of your application’s controllers.
+contain methods that are shared between all of your application's controllers.
 
 Controllers provide a number of methods which are called *actions*.  Actions are
 methods on a controller that handle requests.  By default all public methods on
-a controller are an action, and accessible from a url.
+a controller are an action, and accessible from a url.  Actions are responsible
+for interpreting the request and creating the response.  Usually responses are
+in the form of a rendered view, but there are other ways to create responses as
+well.
 
 
 .. _app-controller:
@@ -84,18 +87,23 @@ When a request is made to a CakePHP application,  CakePHP's :php:class:`Router` 
 create the correct controller. The request data is encapsulated into a request
 object. CakePHP puts all of the important request information into the
 ``$this->request`` property.  See the section on
-:doc:`/controllers/request-response` for more information on the CakePHP request
+:ref:`cake-request` for more information on the CakePHP request
 object.
 
 Controller actions
 ==================
 
-Returning to our online bakery example, our RecipesController might contain the
+Controller actions are responsible for converting the request parameters into a
+response for the browser/user making the request.  CakePHP uses conventions to
+automate this process and remove some boiler-plate code you would otherwise need
+to write.
+
+By convention CakePHP renders a view with an inflected version of the action
+name.  Returning to our online bakery example, our RecipesController might contain the
 ``view()``, ``share()``, and ``search()`` actions. The controller would be found
 in ``/app/Controller/RecipesController.php`` and contain::
 
         <?php
-        
         # /app/Controller/RecipesController.php
         
         class RecipesController extends AppController {
@@ -111,6 +119,47 @@ in ``/app/Controller/RecipesController.php`` and contain::
                 //action logic goes here..
             }
         }
+
+The view files for these actions would be ``app/View/Recipes/view.ctp``,
+``app/View/Recipes/share.ctp``, and ``app/View/Recipes/share.ctp``.  The
+conventional view file name is the lower cased and underscored version of the
+action name.
+
+Controller actions generally use :php:meth:`~Controller::set()` to create a
+context that :php:class:`View` uses to render the view.  Because of the
+conventions that CakePHP uses, you don' need to create and render the view
+manually. Instead once a controller action has completed, CakePHP will handle
+rendering and delivering the View.
+
+If for some reason you'd like to skip the default behavior.  Both of the
+following techniques will by-pass the default view rendering behavior.
+
+* If you return a string, or an object that can be converted to a string from 
+  your controller action, it will be used as the response body.
+* You can return a :php:class:`CakeResponse` object with the completely created
+  response.
+
+When controller methods are used with :php:meth:`~Controller::requestAction()`
+you will often want to return data that isn't a string.  If you have controller
+methods that are used for normal web requests + requestAction you should check
+the request type before returning::
+
+    <?php
+    class RecipesController extends AppController {
+        function popular() {
+            $popular = $this->Recipe->popular();
+            if (!empty($this->request->params['requested'])) {
+                return $popular;
+            }
+            $this->set('popular', $popular);
+        }
+    }
+
+The above controller action is an example of how a method can be used with
+``requestAction()`` and normal requests. Returning an array data to a
+non-requestAction request will cause errors and should be avoided.  See the
+section on :php:meth:`Controller::requestAction()` for more tips on using
+``requestAction()``
 
 In order for you to use a controller effectively in your own application, we'll
 cover some of the core attributes and methods provided by CakePHP's controllers.
@@ -518,9 +567,17 @@ Other Useful Methods
         // Controller/CommentsController.php
         class CommentsController extends AppController {
             function latest() {
+                if (empty($this->request->params['requested'])) {
+                    throw new ForbiddenException();
+                }
                 return $this->Comment->find('all', array('order' => 'Comment.created DESC', 'limit' => 10));
             }
         }
+
+    You should always include checks to make sure your requestAction methods are
+    actually originating from ``requestAction``.  Failing to do so will allow
+    requestAction methods to be directly accessible from a URL, which is
+    generally undesirable.
 
     If we now create a simple element to call that function::
 

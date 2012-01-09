@@ -154,7 +154,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
            RewriteRule ^(.*)$ index.php/$1 [QSA,L]
        </IfModule>
 
-   If your cakephp site still has problems with mod_rewrite you might 
+   If your cakephp site still has problems with mod\_rewrite you might 
    want to try and modify settings for virtualhosts. If on ubuntu, 
    edit the file /etc/apache2/sites-available/default (location is 
    distribution dependent). In this file, ensure that 
