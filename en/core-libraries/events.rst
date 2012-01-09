@@ -1,6 +1,8 @@
 Events system
 #############
 
+.. versionadded:: 2.1
+
 Creating maintainable applications is both a science and and art. It is
 well-known that a key for having good quality code is making your objects
 loosely coupled and strongly cohesive at the same time. Cohesion means that
