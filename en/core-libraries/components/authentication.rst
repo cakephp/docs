@@ -337,7 +337,7 @@ callback of your model::
 
 You don't need to hash passwords before calling ``$this->Auth->login()``.
 The various authentication objects will hash passwords individually. If
-you are using Digest authentication, use should not use
+you are using Digest authentication, you should not use
 AuthComponent::password() for generating passwords.  See below for how
 to generate digest hashes.
 
@@ -486,7 +486,7 @@ array::
         'Controller'
     );
 
-Much like ``Auth->authenticate``,  ``Auth->authorize``, allows helps you
+Much like ``Auth->authenticate``,  ``Auth->authorize``, helps you
 keep your code DRY, by using the ``all`` key.  This special key allows you
 to set settings that are passed to every attached object.  The all key
 is also exposed as ``AuthComponent::ALL``::
@@ -501,7 +501,7 @@ is also exposed as ``AuthComponent::ALL``::
 
 In the above example, both the ``Actions`` and ``Controller`` will get the
 settings defined for the 'all' key.  Any settings passed to a specific
-authentication object will override the matching key in the 'all' key.
+authorization object will override the matching key in the 'all' key.
 The core authorize objects support the following configuration keys.
 
 - ``actionPath`` Used by ``ActionsAuthorize`` to locate controller action
@@ -607,7 +607,7 @@ Mapping actions when using CrudAuthorize
 ----------------------------------------
 
 When using CrudAuthorize or any other authorize objects that use action
-mappings, it is might be necessary to map additional methods.  You can
+mappings, it might be necessary to map additional methods.  You can
 map actions -> CRUD permissions using mapAction().  Calling this on
 AuthComponent will delegate to all the of the configured authorize
 objects, so you can be sure the settings were applied every where::
