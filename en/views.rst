@@ -59,6 +59,8 @@ chapter:
 Extending Views
 ---------------
 
+.. versionadded:: 2.1
+
 View extending allows you to wrap one view in another.  Combining this with
 :ref:`view blocks <view-blocks>` gives you a powerful way to keep your views
 :term:`DRY`.  For example, your application has a sidebar that needs to change depending
@@ -134,6 +136,8 @@ as the ``content`` block.
 Using view blocks
 =================
 
+.. versionadded:: 2.1
+
 View blocks replace ``$scripts_for_layout`` and provide a flexible API that
 allows you to define slots or blocks in your views/layouts that will be defined
 elsewhere.  For example blocks are ideal for implementing things such as
@@ -170,6 +174,8 @@ can be used to clear or overwrite a block at any time::
 Displaying blocks
 -----------------
 
+.. versionadded:: 2.1
+
 You can display blocks using the ``fetch()`` method.  ``fetch()`` will safely
 output a block, returning '' if a block does not exist::
 
@@ -189,6 +195,8 @@ want to conditionally show headings or other markup::
 
 Using blocks for script and CSS files
 -------------------------------------
+
+.. versionadded:: 2.1
 
 Blocks replace the deprecated ``$scripts_for_layout`` layout variable.  Instead
 you should use blocks.  The :php:class:`HtmlHelper` ties into view blocks, and its
@@ -346,6 +354,8 @@ and easy way to serve up content that isn’t text/html.
 
 Using layouts from plugins
 --------------------------
+
+.. versionadded:: 2.1
 
 If you want to use a layout that exists in a plugin, you can use 
 :term:`plugin syntax`.  For example to use the contact layout from the 
