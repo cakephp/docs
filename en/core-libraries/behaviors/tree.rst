@@ -14,7 +14,7 @@ deep it is simple to add a parent\_id field to your database table
 and use this to keep track of which item is the parent of what.
 Bundled with cake however, is a powerful behavior which allows you
 to use the benefits of
-`MPTT logic <http://dev.mysql.com/tech-resources/articles/hierarchical-data.html>`_
+`MPTT logic <http://www.sitepoint.com/hierarchical-data-database-2/>`_
 without worrying about any of the intricacies of the technique -
 unless you want to ;).
 
@@ -39,7 +39,7 @@ direct children.
 .. note::
 
     The ``parent`` field must be able to have a NULL value! It might
-    seem to work, if you just give the top elements a parent value of
+    seem to work if you just give the top elements a parent value of
     zero, but reordering the tree (and possible other operations) will
     fail.
 
