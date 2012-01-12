@@ -31,6 +31,8 @@ can use the following while upgrading::
 
 If your application already has these files/classes you don't need to do
 anything.
+Additionally if you were using the core PagesController, you would need to copy
+this to your app/Controller directory as well.
 
 Models
 ======
@@ -143,14 +145,14 @@ View
 
 - :php:attr:`View::$output` is deprecated.
 - ``$content_for_layout`` is deprecated.  Use ``$this->fetch('content');``
-  instead. 
+  instead.
 - ``$scripts_for_layout`` is deprecated.  Use the following instead::
 
         <?php
         $this->fetch('meta');
         $this->fetch('css');
         $this->fetch('script');
-  
+
   ``$scripts_for_layout`` is still available, but the :ref:`view blocks <view-blocks>` API
   gives a more extensible & flexible replacement.
 - The ``Plugin.view`` syntax is now available everywhere.  You can use this
@@ -205,7 +207,7 @@ FormHelper
 - The ``between`` option when used in conjunction with radio inputs, now behaves
   differently. The ``between`` value is now placed between the legend and first
   input elements.
-- The ``hiddenField`` option with checkbox inputs can now be set to a specific 
+- The ``hiddenField`` option with checkbox inputs can now be set to a specific
   value such as 'N' rather than just 0.
 - The ``for`` attribute for date + time inputs now reflects the first generated
   input. This may result in the for attribute changing for generated datetime
