@@ -329,7 +329,7 @@ callback of your model::
 
     <?php
     class User extends AppModel {
-        function beforeSave($options = array()) {
+        public function beforeSave($options = array()) {
             $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
             return true;
         }
@@ -355,7 +355,7 @@ from the normal password hash::
 
     <?php
     class User extends AppModel {
-        function beforeSave($options = array()) {
+        public function beforeSave($options = array()) {
             // make a password for digest auth.
             $this->data['User']['digest_hash'] = DigestAuthenticate::password(
                 $this->data['User']['username'], $this->data['User']['password'], env('SERVER_NAME')
@@ -626,21 +626,24 @@ Using ControllerAuthorize
 -------------------------
 
 ControllerAuthorize allows you to handle authorization checks in a
-controller callback.  This is ideal when you have very simple
+controller callback. This is ideal when you have very simple
 authorization, or you need to use a combination of models + components
 to do your authorization, and don't want to create a custom authorize
 object.
 
 The callback is always called ``isAuthorized()`` and it should return a
 boolean as to whether or not the user is allowed to access resources in
-the request.  The callback is passed the active user, so it can be
+the request. The callback is passed the active user, so it can be
 checked::
 
     <?php
     class AppController extends Controller {
-        function isAuthorized($user) {
+        public $components = array(
+            'Auth' => array('authorize' => 'Controller'),
+        );
+        public function isAuthorized($user = null) {
             if (isset($this->request->params['admin'])) {
-                return (bool)($user['role'] == 'admin')
+                return (bool)($user['role'] == 'admin');
             }
             return true;
         }
