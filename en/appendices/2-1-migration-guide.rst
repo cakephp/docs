@@ -104,6 +104,8 @@ Router
   as a single passed argument. See the section on :ref:`connecting-routes` for
   more information.
 - :php:meth:`Router::resourceMap()` was added.
+- :php:meth:`Router::defaultRouteClass()` was added. This method allows you to
+  set the default route class used for all future routes that are connected.
 
 Network
 =======

@@ -1017,6 +1017,10 @@ Router API
     Used in routes.php to declare which :ref:`file-extensions` your application
     supports.  By providing no arguments, all file extensions will be supported.
 
+.. php:staticmethod:: defaultRouteClass($classname)
+
+    Set the default route to be used when connecting routes in the future.
+
 .. php:class:: CakeRoute
 
     The base class for custom routes to be based on.
