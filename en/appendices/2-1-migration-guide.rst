@@ -122,6 +122,8 @@ AuthComponent
 - :php:meth:`AuthComponent::allow()` no longer accepts ``allow('*')`` as a wildcard
   for all actions.  Just use ``allow()``.  This unifies the API between allow()
   and deny().
+- ``recursive`` option was added to all authentication adapters.  Allows you to
+  more eaisly control the associations stored in the session.
 
 Helpers
 =======
