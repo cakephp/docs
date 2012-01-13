@@ -1016,6 +1016,8 @@ Router API
 
     Used in routes.php to declare which :ref:`file-extensions` your application
     supports.  By providing no arguments, all file extensions will be supported.
+    
+    .. versionadded:: 2.1
 
 .. php:staticmethod:: defaultRouteClass($classname)
 
