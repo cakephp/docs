@@ -143,6 +143,8 @@ HtmlHelper
 - :php:meth:`HtmlHelper::script()` had a ``block`` option added.
 - :php:meth:`HtmlHelper::css()` had a ``block`` option added.
 - :php:meth:`HtmlHelper::meta()` had a ``block`` option added.
+- The ``$startText`` parameter of :php:meth:`HtmlHelper::getCrumbs()` can now be
+  an array.  This gives more control and flexibility over the first crumb link.
 
 View
 ====

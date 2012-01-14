@@ -729,6 +729,22 @@ Creating breadcrumb trails with HtmlHelper
         <?php
         echo $this->Html->getCrumbs(' > ', 'Home');
 
+    The ``$startText`` option can also accept an array.  This gives more control
+    over the generated first link::
+
+        <?php
+        echo $this->Html->getCrumbs(' > ', array(
+            'text' => $this->Html->image('home.png'),
+            'url' => array('controller' => 'pages', 'action' => 'display', 'home'),
+            'escape' => false
+        ));
+
+    Any keys that are not ``text`` or ``url`` will be passed to
+    :php:meth:`~HtmlHelper::link()` as the ``$options`` parameter.
+
+    .. versionchanged:: 2.1
+        The ``$startText`` parameter now accepts an array.
+
 .. php:method:: addCrumb(string $name, string $link = null, mixed $options = null)
 
     Now, in your view you'll want to add the following to start the
