@@ -585,18 +585,18 @@ a good idea to add an additional primary key field (by convention
 names.
 
 Relation
-    Schema (HABTM table in bold)
+    Schema (HABTM table name in bold)
 
-Recipe HABTM Ingredient
-    ``ingredients_recipes.id``, ``ingredients_recipes.ingredient_id``,
-	``ingredients_recipes.recipe_id``
+========================= ================================================================
+Relationship              HABTM Table Fields
+========================= ================================================================
+Recipe HABTM Ingredient   **ingredients_recipes**.id, **ingredients_recipes**.ingredient_id, **ingredients_recipes**.recipe_id
+------------------------- ----------------------------------------------------------------
+Cake HABTM Fan            **cakes_fans**.id, **cakes_fans**.cake_id,cakes_fans.fan_id
+------------------------- ----------------------------------------------------------------
+Foo HABTM Bar             **bars_foos**.id, **bars_foos**.foo_id, **bars_foos**.bar_id
+========================= ================================================================
 
-Cake HABTM Fan
-    ``cakes_fans.id``, ``cakes_fans.cake_id``,
-    ``cakes_fans.fan_id``
-
-Foo HABTM Bar
-    ``bars_foos.id``, ``bars_foos.foo_id``, ``bars_foos.bar_id``
 
 .. note::
 
