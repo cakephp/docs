@@ -514,6 +514,16 @@ is given.
 Requesting Elements from a Plugin
 ---------------------------------
 
+2.0
+---
+
+To load an element from a plugin, use the `plugin` option (moved out of the `data` option in 1.x) 
+
+    <?php echo $this->element('helpbox', array(), array('plugin' => 'Contacts')); ?>
+
+2.1
+---
+
 If you are using a plugin and wish to use elements from within the
 plugin, just use the familiar :term:`plugin syntax`. If the view is being
 rendered for a plugin controller/action, the plugin name will automatically
