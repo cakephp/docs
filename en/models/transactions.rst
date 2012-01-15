@@ -18,19 +18,17 @@ transactions.
 ::
 
     <?php
-    $dataSource->begin($this);
+    $dataSource->begin();
     
     // Perform some tasks
     
     if (/*all's well*/) {
-        $dataSource->commit($this);
+        $dataSource->commit();
     } else {
-        $dataSource->rollback($this);
+        $dataSource->rollback();
     }
 
-Nested transactions are currently not supported. If a nested
-transaction is started, a commit will return false on the parent
-transaction.
+Transaction nesting support. Now it is possible to start a transaction several times. It will only be committed if the commit method is called the same amount of times.
 
 
 .. meta::
