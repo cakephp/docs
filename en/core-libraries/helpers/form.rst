@@ -1122,7 +1122,7 @@ Form Element-Specific Methods
            'Group 2' => array(
               'Value 3' => 'Label 3'
            )
-        ));
+        );
         echo $this->Form->select('field', $options);
 
       Output::
