@@ -408,3 +408,11 @@ ul.versions li a {
     display:inline-block;
     padding-right:5px;
 }
+
+#searchbox {
+	font-size:90%;
+}
+
+#searchbox ul li {
+	padding:4px 0;
+}

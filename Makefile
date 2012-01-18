@@ -27,6 +27,8 @@ html: $(foreach lang, $(LANGS), html-$(lang))
 htmlhelp: $(foreach lang, $(LANGS), htmlhelp-$(lang))
 epub: $(foreach lang, $(LANGS), epub-$(lang))
 htmlhelp: $(foreach lang, $(LANGS), htmlhelp-$(lang))
+quicksearch: $(foreach lang, $(LANGS), quicksearch-$(lang))
+
 
 # Make the HTML version of the documentation with correctly nested language folders.
 html-%: $(SPHINX_DEPENDENCIES)
@@ -41,6 +43,9 @@ epub-%: $(SPHINX_DEPENDENCIES)
 latexpdf-%: $(SPHINX_DEPENDENCIES)
 	cd $* && make latexpdf LANG=$*
 
+quicksearch-%: $(SPHINX_DEPENDENCIES)
+	cd build/html/$* && php ../../../scripts/toc_extractor.php
+
 website-dirs:
 	# Make the directory if its not there already.
 	[ ! -d $(DEST) ] && mkdir $(DEST) || true
@@ -51,7 +56,7 @@ website-dirs:
 	# Make downloads for each language
 	$(foreach lang, $(LANGS), [ ! -d $(DEST)/_downloads/$(lang) ] && mkdir $(DEST)/_downloads/$(lang) || true;)
 
-website: website-dirs html epub
+website: website-dirs html quicksearch epub
 	# Move HTML
 	$(foreach lang, $(LANGS), cp -r build/html/$(lang) $(DEST)/$(lang);)
 	
