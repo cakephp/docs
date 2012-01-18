@@ -13,7 +13,7 @@ App.Book = (function() {
 	})();
 
     function init() {
-		base = location.href.replace(location.origin, '').split('/').slice(0, 3).join('/') + '/';
+		base = location.href.replace(location.protocol + '//' + location.host, '').split('/').slice(0, 3).join('/') + '/'; 
         // SEARCH EVENT
         $('#searchform input.search-input').keyup(function() {
             if ($(this).val() == '') {
