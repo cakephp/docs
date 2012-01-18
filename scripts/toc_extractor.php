@@ -15,7 +15,7 @@ function transformIndex(&$menu) {
 		$xml = new SimpleXMLElement($piece[0]);
 		foreach ($xml->xpath('//a') as $node) {
 			$tmp = $node->attributes();
-			$text = (string) $node->strong[0];
+			$text = $text = (string) $node; 
 			if ($text && $text[0] === '(') {
 				$url = (string)$tmp["href"][0];
 				$text = str_replace('$', ' ', end(explode('::', $url))) . ' ' . $text;
