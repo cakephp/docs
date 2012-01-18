@@ -31,6 +31,8 @@ can use the following while upgrading::
 
 If your application already has these files/classes you don't need to do
 anything.
+Additionally if you were using the core PagesController, you would need to copy
+this to your app/Controller directory as well.
 
 Models
 ======
@@ -102,6 +104,8 @@ Router
   as a single passed argument. See the section on :ref:`connecting-routes` for
   more information.
 - :php:meth:`Router::resourceMap()` was added.
+- :php:meth:`Router::defaultRouteClass()` was added. This method allows you to
+  set the default route class used for all future routes that are connected.
 
 Network
 =======
@@ -120,6 +124,8 @@ AuthComponent
 - :php:meth:`AuthComponent::allow()` no longer accepts ``allow('*')`` as a wildcard
   for all actions.  Just use ``allow()``.  This unifies the API between allow()
   and deny().
+- ``recursive`` option was added to all authentication adapters.  Allows you to
+  more eaisly control the associations stored in the session.
 
 Helpers
 =======
@@ -137,20 +143,22 @@ HtmlHelper
 - :php:meth:`HtmlHelper::script()` had a ``block`` option added.
 - :php:meth:`HtmlHelper::css()` had a ``block`` option added.
 - :php:meth:`HtmlHelper::meta()` had a ``block`` option added.
+- The ``$startText`` parameter of :php:meth:`HtmlHelper::getCrumbs()` can now be
+  an array.  This gives more control and flexibility over the first crumb link.
 
 View
 ====
 
 - :php:attr:`View::$output` is deprecated.
 - ``$content_for_layout`` is deprecated.  Use ``$this->fetch('content');``
-  instead. 
+  instead.
 - ``$scripts_for_layout`` is deprecated.  Use the following instead::
 
         <?php
         $this->fetch('meta');
         $this->fetch('css');
         $this->fetch('script');
-  
+
   ``$scripts_for_layout`` is still available, but the :ref:`view blocks <view-blocks>` API
   gives a more extensible & flexible replacement.
 - The ``Plugin.view`` syntax is now available everywhere.  You can use this
@@ -205,7 +213,7 @@ FormHelper
 - The ``between`` option when used in conjunction with radio inputs, now behaves
   differently. The ``between`` value is now placed between the legend and first
   input elements.
-- The ``hiddenField`` option with checkbox inputs can now be set to a specific 
+- The ``hiddenField`` option with checkbox inputs can now be set to a specific
   value such as 'N' rather than just 0.
 - The ``for`` attribute for date + time inputs now reflects the first generated
   input. This may result in the for attribute changing for generated datetime

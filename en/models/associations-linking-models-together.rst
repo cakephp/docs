@@ -327,10 +327,13 @@ Possible keys for belongsTo association arrays include:
    “[singular\_model\_name]\_count” field in the foreign table
    whenever you do a save() or delete(). If it's a string then it's the
    field name to use. The value in the counter field represents the
-   number of related rows. It can also be defined as an array key
-   signifying the field name pointing to an array of conditions to
-   apply as a filter when updating the column.
-   E.g array('recipes_published' => array('Recipe.published' => true))
+   number of related rows. You can also specify multiple counter caches
+   by using an array where the key is field name and value is the
+   conditions. E.g.
+   array(
+      'recipies_count' => true,
+      'recipes_published' => array('Recipe.published' => 1)
+   )
 -  **counterScope**: Optional conditions array to use for updating
    counter cache field.
 
@@ -582,18 +585,18 @@ a good idea to add an additional primary key field (by convention
 names.
 
 Relation
-    Schema (HABTM table in bold)
+    Schema (HABTM table name in bold)
 
-Recipe HABTM Ingredient
-    ``ingredients_recipes.id``, ``ingredients_recipes.ingredient_id``,
-	``ingredients_recipes.recipe_id``
+========================= ================================================================
+Relationship              HABTM Table Fields
+========================= ================================================================
+Recipe HABTM Ingredient   **ingredients_recipes**.id, **ingredients_recipes**.ingredient_id, **ingredients_recipes**.recipe_id
+------------------------- ----------------------------------------------------------------
+Cake HABTM Fan            **cakes_fans**.id, **cakes_fans**.cake_id, **cakes_fans**.fan_id
+------------------------- ----------------------------------------------------------------
+Foo HABTM Bar             **bars_foos**.id, **bars_foos**.foo_id, **bars_foos**.bar_id
+========================= ================================================================
 
-Cake HABTM Fan
-    ``cakes_fans.id``, ``cakes_fans.cake_id``,
-    ``cakes_fans.fan_id``
-
-Foo HABTM Bar
-    ``bars_foos.id``, ``bars_foos.foo_id``, ``bars_foos.bar_id``
 
 .. note::
 
