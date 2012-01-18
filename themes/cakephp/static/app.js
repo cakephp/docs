@@ -3,6 +3,7 @@ App = new Object();
 App.Book = (function() {
  
     var menu = [];
+	var base;
 	var delay = (function(){
 		var timer = 0;
 		return function(callback, ms){
@@ -12,6 +13,7 @@ App.Book = (function() {
 	})();
 
     function init() {
+		base = location.href.replace(location.origin, '').split('/').slice(0, 3).join('/') + '/';
         // SEARCH EVENT
         $('#searchform input.search-input').keyup(function() {
             if ($(this).val() == '') {
@@ -28,6 +30,8 @@ App.Book = (function() {
 				}, 200);
             }
         });
+
+
         $(document).keyup(
                 function(e) {
                     // escape key
@@ -40,9 +44,10 @@ App.Book = (function() {
                         }
                     }
         });
+
         $("p.searchtip").after("<div id='search-results'><ul></ul></div>");
 
-        $.getJSON('/2.0/en/_static/menu.json', function(data) {
+        $.getJSON(base + '_static/menu.json', function(data) {
 			menu = data;
         });
 	}
@@ -66,7 +71,7 @@ App.Book = (function() {
         $.each(results, function(index, item) {
             if (item.score > 0) {
                 $('#search-results ul').append(
-                        "<li><a href='" + item.node.link + "'>"
+                        "<li><a href='" + base + item.node.link + "'>"
                                 + item.node.text + "</a></li>");
             }
         });
