@@ -28,20 +28,18 @@ App.Book = (function() {
 				}, 200);
             }
         });
-
-
         $(document).keyup(
                 function(e) {
                     // escape key
                     if (e.keyCode == 27) {
-                        if ($('#searchform input.search-input').is(':focus')) {
-                            $('#searchform input.search-input').val('')
-                                    .trigger('keyup');
+                        if ($('#searchform input.search-input').val() == '') {
+							$('#search-results ul').fadeOut(150, function() {
+			                    $(this).empty();
+						        $('ul.current').fadeIn(150);
+							});
                         }
                     }
- 
-                });
-
+        });
         $("p.searchtip").after("<div id='search-results'><ul></ul></div>");
 
         $.getJSON('_static/menu.json', function(data) {
