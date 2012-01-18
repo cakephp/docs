@@ -42,7 +42,7 @@ App.Book = (function() {
         });
         $("p.searchtip").after("<div id='search-results'><ul></ul></div>");
 
-        $.getJSON('_static/menu.json', function(data) {
+        $.getJSON('/2.0/en/_static/menu.json', function(data) {
 			menu = data;
         });
 	}
