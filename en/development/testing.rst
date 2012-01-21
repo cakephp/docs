@@ -25,6 +25,11 @@ following::
     Depending on your system's configuration, you make need to run the previous
     commands with ``sudo``
 
+Once PHPUnit is installed with the pear installer, you should confirm that the
+PHPUnit libraires are on PHP's ``include_path``.  You can do this by checking
+your php.ini file and making sure that the PHPUnit files are in one of the
+``include_path`` directories.
+
 .. tip::
 
     All output is swallowed when using PHPUnit 3.6+. Add the ``--debug`` 
