@@ -176,41 +176,44 @@ methods of the HtmlHelper and how to use them.
     .. versionchanged:: 2.1
         The ``block`` option was added.
 
-.. php:method:: docType(string $type = 'html5')
+.. php:method:: docType(string $type = 'xhtml-strict')
 
     :param string $type: The type of doctype being made.
 
     Returns a (X)HTML doctype tag. Supply the doctype according to the
     following table:
 
-    type
-        translated value
-    html
-        text/html
-    html4-strict
-        HTML4 Strict
-    html4-trans
-        HTML4 Transitional
-    html4-frame
-        HTML4 Frameset
-    html5
-        HTML5
-    xhtml-strict
-        XHTML1 Strict
-    xhtml-trans
-        XHTML1 Transitional
-    xhtml-frame
-        XHTML1 Frameset
-    xhtml11
-        XHTML 1.1
+    +--------------------------+----------------------------------+
+    | type                     | translated value                 |
+    +==========================+==================================+
+    | html4-strict             | HTML4 Strict                     |
+    +--------------------------+----------------------------------+
+    | html4-trans              | HTML4 Transitional               |
+    +--------------------------+----------------------------------+
+    | html4-frame              | HTML4 Frameset                   |
+    +--------------------------+----------------------------------+
+    | html5                    | HTML5                            |
+    +--------------------------+----------------------------------+
+    | xhtml-strict             | XHTML1 Strict                    |
+    +--------------------------+----------------------------------+
+    | xhtml-trans              | XHTML1 Transitional              |
+    +--------------------------+----------------------------------+
+    | xhtml-frame              | XHTML1 Frameset                  |
+    +--------------------------+----------------------------------+
+    | xhtml11                  | XHTML1.1                         |
+    +--------------------------+----------------------------------+
 
     ::
 
-        <?php echo $this->Html->docType(); ?> 
-        <!DOCTYPE html>
+        <?php
+        echo $this->Html->docType();
+        // Outputs: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-        <?php echo $this->Html->docType('html4-trans'); ?> 
-        <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+        echo $this->Html->docType('html5');
+        // Outputs: <!DOCTYPE html>
+
+        echo $this->Html->docType('html4-trans');
+        // Outputs: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
 .. php:method:: style(array $data, boolean $oneline = true)
