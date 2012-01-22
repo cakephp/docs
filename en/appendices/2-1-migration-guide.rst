@@ -182,6 +182,13 @@ Extending views
 view/element/layout with another file.  See the section on
 :ref:`extending-views` for more information on this feature.
 
+Themes
+------
+
+The ``ThemeView`` class is deprecated in favor of the ``View`` class. Simply
+setting ``$this->theme = 'MyTheme'`` will enable theme support, and all custom
+View classes which extend from ``ThemeView`` should extend ``View``.
+
 View blocks
 -----------
 
