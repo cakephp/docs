@@ -4,22 +4,17 @@ Themes
 You can take advantage of themes, making it easy to switch the look and feel of
 your page quickly and easily.
 
-To use themes, you need to tell your controller to use the ThemeView class
-instead of the default View class::
-
-    <?php
-    class ExampleController extends AppController {
-        public $viewClass = 'Theme';
-    }
-
-To declare which theme to use by default, specify the theme name in your
+To use themes, specify the theme name in your
 controller::
 
     <?php
     class ExampleController extends AppController {
-        public $viewClass = 'Theme';
         public $theme = 'Example';
     }
+
+    .. versionchanged:: 2.1
+        Versions previous to 2.1 required setting the ``$this->viewClass = 'Theme'``.
+        2.1 removes this requirement as the normal ``View`` class supports themes
 
 You can also set or change the theme name within an action or within the
 ``beforeFilter`` or ``beforeRender`` callback functions::
