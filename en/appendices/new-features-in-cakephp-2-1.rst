@@ -118,7 +118,7 @@ Conditional View Rendering
 Several new methods were added to :php:class:`CakeRequest` to ease the task of
 setting correct HTTP headers to foster HTTP caching. You can now define our
 caching strategy using the expiration or validation HTTP cache model, or combine
-boths. Now there are specific methods in :php:class:`CakeRequest` to fine-tune
+both. Now there are specific methods in :php:class:`CakeRequest` to fine-tune
 Cache-Control directives, set the entity tag (Etag), set the Last-Modified time
 and much more.
 
@@ -126,11 +126,11 @@ When those methods are combined with having the :php:class:`RequestHandlerCompon
 enabled in your controller, the component will automatically decide if the
 response is already cached in the client and will send a `304 Not Modified`
 status code before rendering the view. Skipping the view rendering process saves
-CPU cycles an memory.::
+CPU cycles and memory.::
 
     <?php
     class ArtilcesController extends AppController {
-        public $componets = array('RequestHandler');
+        public $components = array('RequestHandler');
 
         public function view($id) {
             $article = $this->Article->read(null, $id);
@@ -139,5 +139,5 @@ CPU cycles an memory.::
         }
     }
 
-In the above example the view will not be rendered if the client sents the
+In the above example the view will not be rendered if the client sent the
 header `If-Modified-Since`, and the response will have a 304 status.

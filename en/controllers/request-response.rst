@@ -491,8 +491,8 @@ hopefully speeding up your visitors' experience.
 Fine tuning HTTP cache
 ======================
 
-One of the best a easiest ways of speeding up your application is using HTTP
-cache, under this caching model you are only required to help clients decide if
+One of the best and easiest ways of speeding up your application is using HTTP
+cache. Under this caching model you are only required to help clients decide if
 they should use a cached copy of the response by setting a few headers such as
 modified time, response entity tag and others.
 
@@ -509,7 +509,7 @@ The Cache Control header
 
 .. versionadded:: 2.1
 
-Used under the expiration model, tis header contains multiple indicators
+Used under the expiration model, this header contains multiple indicators
 which can change the way browsers or proxies use the cached content. A
 Cache-Control header can look like this::
 
@@ -531,7 +531,7 @@ fresh.::
     public function view() {
         ...
         // set the Cache-Control as public for 3600 seconds
-        $this->response->sharable(true, 3600);3600
+        $this->response->sharable(true, 3600);
     }
 
     public function my_data() {
@@ -626,8 +626,8 @@ such circumstances, you use the Vary header::
 
     <?php
         $this->response->vary('User-Agent');
-        $this->response->vary('Accept-Encodig', 'User-Agent');
-        $this->response->vary('Accept-Language');')'
+        $this->response->vary('Accept-Encoding', 'User-Agent');
+        $this->response->vary('Accept-Language');
 
 .. _cakeresponse-testing:
 
