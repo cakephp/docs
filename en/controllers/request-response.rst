@@ -439,6 +439,25 @@ The above shows how you could use CakeResponse to generate a file download
 response without using :php:class:`MediaView`.  In general you will want to use
 MediaView as it provides a few additional features above what CakeResponse does.
 
+Setting headers
+===============
+
+Setting headers is done with the :php:meth:`CakeResponse::header()` method.  It
+can be called with a few different parameter configurations::
+
+    <?php
+    // Set a single header
+    $this->response->header('Location', 'http://example.com');
+
+    // Set multiple headers
+    $this->response->header(array('Location' => 'http://example.com', 'X-Extra' => 'My header'));
+    $this->response->header(array('WWW-Authenticate: Negotiate', 'Content-type: application/pdf'));
+
+Setting the same header multiple times will result in overwriting the previous
+values, just like regular header calls.  Headers are not sent when
+:php:meth:`CakeResponse::header()` is called either.  They are just buffered
+until the response is actually sent.
+
 Interacting with browser caching
 ================================
 
@@ -468,24 +487,147 @@ You can also tell clients that you want them to cache responses. By using
 The above would tell clients to cache the resulting response for 5 days,
 hopefully speeding up your visitors' experience.
 
-Setting headers
-===============
 
-Setting headers is done with the :php:meth:`CakeResponse::header()` method.  It
-can be called with a few different parameter configurations::
+Fine tuning HTTP cache
+======================
+
+One of the best a easiest ways of speeding up your application is using HTTP
+cache, under this caching model you are only required to help clients decide if
+they should use a cached copy of the response by setting a few headers such as
+modified time, response entity tag and others.
+
+Opposed to having to code the logic for caching and for invalidating (refreshing)
+it once the data has changed, HTTP uses two models, expiration and validation
+which usually are a lot simpler than having to manage the cache yourself.
+
+Apart from using :php:meth:`CakeResponse::cache()` you can also use many other
+methods to fine tune HTTP cache headers to take advantage of browser or reverse
+proxy caching.
+
+The Cache Control header
+------------------------
+
+.. versionadded:: 2.1
+
+Used under the expiration model, tis header contains multiple indicators
+which can change the way browsers or proxies use the cached content. A
+Cache-Control header can look like this::
+
+    Cache-Control: private, max-age=3600, must-revalidate
+
+``CakeResponse`` class helps you set this header with some utility methods that
+will produce a final valid Cache-Control header. First of them is :php:meth:`CakeResponse::sharable()`
+method, which indicates whether a response in to be considered sharable across
+different users or clients or users. This method actually controls the `public`
+or `private` part of this header. Setting a response as private indicates that
+all or part of it is intended for a single user. To take advantage of shared
+caches it is needed to set the control directive as public
+
+Second parameter of this method is used to specify a `max-age` for the cache,
+which is the number of seconds after which the response is no longer considered
+fresh.::
 
     <?php
-    // Set a single header
-    $this->response->header('Location', 'http://example.com');
+    public function view() {
+        ...
+        // set the Cache-Control as public for 3600 seconds
+        $this->response->sharable(true, 3600);3600
+    }
 
-    // Set multiple headers
-    $this->response->header(array('Location' => 'http://example.com', 'X-Extra' => 'My header'));
-    $this->response->header(array('WWW-Authenticate: Negotiate', 'Content-type: application/pdf'));
+    public function my_data() {
+        ...
+        // set the Cache-Control as private for 3600 seconds
+        $this->response->sharable(false, 3600);
+    }
 
-Setting the same header multiple times will result in overwriting the previous
-values, just like regular header calls.  Headers are not sent when
-:php:meth:`CakeResponse::header()` is called either.  They are just buffered
-until the response is actually sent.
+``CakeResponse`` exposes separate methods for setting each of the components in
+the Cache-Control header.
+
+The Expiration header
+---------------------
+
+.. versionadded:: 2.1
+
+Also under the cache expiration model, you can set the `Expires` header, which
+according to the HTTP specification is the date/time after which the response is
+no longer considered fresh. This header can be set using the
+:php:meth:`CakeResponse::expires()` method::
+
+    <?php
+    function view() {
+        $this->response->expires('+5 days');
+    }
+
+This method also accepts a DateTime or any string that can be parsed by the
+DeteTime class.
+
+
+The Etag header
+---------------
+
+.. versionadded:: 2.1
+
+Cache validation in HTTP is often used when content is constantly changing, and
+asks the application to only generate the response contents if the cache is no
+longer fresh. Under this model, the client continues to store pages in the
+cache, but instead of using it directly, it asks the application every time
+whether the resources changed or not. This is commonly used with static
+resources such as images and other assets.
+
+The Etag header (called entity tag) is string that uniquely identifies the
+requested resource. It is very much like the checksum of a file, caching
+will compare checksums to tell whether they match or not.
+
+To actually get advantage of using this header you have to either call manually
+:php:meth:`CakeResponse::checkNotModified()` method or have the :php:class:`RequestHandlerComponent`
+included in your controller::
+
+    <?php
+    public function index() {
+        $articles = $this->Article->find('all');
+        $this->response->etag($this->Article->generateHash($articles));
+        if ($this->response->checkNotModified($this->request)) {
+            return $this->response;
+        }
+        ...
+    }
+
+The Last Modified header
+------------------------
+
+.. versionadded:: 2.1
+
+Also under the HTTP cache validation model, you can set the `Last-Modified`
+header to indicate the date and time at which the resource was modified for the
+last time. Setting this header helps CakePHP respond to caching clients whether
+the response was modified or not based on the client cache.
+
+To actually get advantage of using this header you have to either call manually
+:php:meth:`CakeResponse::checkNotModified()` method or have the :php:class:`RequestHandlerComponent`
+included in your controller::
+
+    <?php
+    public function view() {
+        $article = $this->Article->find('first');
+        $this->response->modified($article['Article']['modified']);
+        if ($this->response->checkNotModified($this->request)) {
+            return $this->response;
+        }
+        ...
+    }
+
+The Vary header
+---------------
+
+In some cases you might want to serve different contents using the same url.
+This is often the case when you have a multilingual page or respond with
+different HTML according to the browser that is requesting the resource. For
+such circumstances, you use the Vary header::
+
+    <?php
+        $this->response->vary('User-Agent');
+        $this->response->vary('Accept-Encodig', 'User-Agent');
+        $this->response->vary('Accept-Language');')'
 
 .. _cakeresponse-testing:
 
@@ -538,6 +680,40 @@ CakeResponse API
 .. php:method:: disableCache()
 
     Sets the headers to disable client caching for the response.
+
+.. php:method:: sharable($isPublic, $time)
+
+    Sets the Cache-Control header to be either `public` or `private` and
+    optionally sets a `max-age` directive of the resource
+
+    .. versionadded:: 2.1
+
+.. php:method:: expires($date)
+
+    Allows to set the `Expires` header to a specific date.
+
+    .. versionadded:: 2.1
+
+.. php:method:: etag($tag, $weak)
+
+    Sets the `Etag` header to uniquely identify a response resource.
+
+    .. versionadded:: 2.1
+
+.. php:method:: modified($time)
+
+    Sets the `Last-Modified` header to a specific date and time in the correct
+    format.
+
+    .. versionadded:: 2.1
+
+.. php:method:: checkNotModified(CakeRequest $request)
+
+    Compares the cache headers for the request object with the cache header from
+    the response and determines if it can still be considered fresh. In that
+    case deletes any response contents and sends the `304 Not Modified` header.
+
+    .. versionadded:: 2.1
 
 .. php:method:: compress()
 

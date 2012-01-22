@@ -252,6 +252,34 @@ application.
     one has yet to be set.
 
 
+Taking advantage of HTTP cache validation
+=========================================
+
+.. versionadded:: 2.1
+
+HTTP cache validation model is one the process used for cache gateways, also known
+as reverse proxies, to determine if they can serve a stored copy of a response
+to the client. Under this model, you mostly save bandwidth, but when used
+correctly you can also save some CPU processing, reducing this way response
+times.
+
+Enabling the RequestHandlerComponent in your controller automatically activates
+a check done before rendering the view. This check compares the response object
+against the original request to determine whether the response was not modified
+since the last time the client asked for it.
+
+If response is evaluated as not modified, then the view rendering process is
+stopped, saving processing time an  no content is returned to the client, saving
+bandwidth. The response status code is then set to `304 Not Modified`.
+
+You can opt-out this automatic checking by setting the ``checkHttpCache``
+setting to false::
+
+    <?php
+    public components = array(
+        'RequestHandler' => array(
+            'checkHttpCache' => false
+    ));
 
 .. meta::
     :title lang=en: Request Handling
