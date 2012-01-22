@@ -145,6 +145,7 @@ HtmlHelper
 - :php:meth:`HtmlHelper::meta()` had a ``block`` option added.
 - The ``$startText`` parameter of :php:meth:`HtmlHelper::getCrumbs()` can now be
   an array.  This gives more control and flexibility over the first crumb link.
+- :php:meth:`HtmlHelper::docType()` now defaults to html5.
 
 View
 ====

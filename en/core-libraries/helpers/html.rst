@@ -215,6 +215,8 @@ methods of the HtmlHelper and how to use them.
         echo $this->Html->docType('html4-trans');
         // Outputs: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
+    .. versionchanged:: 2.1
+        The default doctype is html5 in 2.1.
 
 .. php:method:: style(array $data, boolean $oneline = true)
 
