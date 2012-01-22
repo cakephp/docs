@@ -524,9 +524,9 @@ Requesting Elements from a Plugin
 2.0
 ---
 
-To load an element from a plugin, use the `plugin` option (moved out of the `data` option in 1.x) 
+To load an element from a plugin, use the `plugin` option (moved out of the `data` option in 1.x)::
 
-    <?php echo $this->element('helpbox', array(), array('plugin' => 'Contacts')); ?>
+    <?php echo $this->element('helpbox', array(), array('plugin' => 'Contacts'));
 
 2.1
 ---
