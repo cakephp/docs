@@ -52,6 +52,22 @@ Block capturing also supports nesting::
         <?php $this->end(); ?>
     <?php $this->end(); ?>
 
+ThemeView
+---------
+
+In 2.1, the use of ``ThemeView`` is deprecated in favor of using the ``View`` class itself. ``ThemeView`` is now a stub class.
+
+All custom pathing code has been moved into the ``View`` class, meaning that it is now possible for classes extending the ``View`` class to automatically support themes. Whereas before we might set the ``$viewClass`` Controller property to ``Theme``, it is now possible to enable themes by simply setting the ``$theme`` property. Example::
+
+    <?php
+    App::uses('Controller', 'Controller');
+
+    class AppController extends Controller {
+        public $theme = 'Example';
+    }
+
+All View classes which extended ``ThemeView`` in 2.0 should now simply extend ``View``.
+
 JsonView
 --------
 
