@@ -279,6 +279,13 @@ might look like::
    </body>
    </html>
 
+.. note::
+
+    Prior to version 2.1, method fetch() was not available, ``fetch('content')``
+    is a replacement for ``$content_for_layout`` and lines ``fetch('meta')``,
+    ``fetch('css')`` and ``fetch('script')`` are contained in the ``$scripts_for_layout``
+    variable in version 2.0
+
 The ``script``, ``css`` and ``meta`` blocks contain any content defined 
 in the views using the built-in HTML helper. Useful for including
 javascript and CSS files from views.
@@ -517,9 +524,9 @@ Requesting Elements from a Plugin
 2.0
 ---
 
-To load an element from a plugin, use the `plugin` option (moved out of the `data` option in 1.x) 
+To load an element from a plugin, use the `plugin` option (moved out of the `data` option in 1.x)::
 
-    <?php echo $this->element('helpbox', array(), array('plugin' => 'Contacts')); ?>
+    <?php echo $this->element('helpbox', array(), array('plugin' => 'Contacts'));
 
 2.1
 ---
