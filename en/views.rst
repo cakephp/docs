@@ -107,10 +107,10 @@ un-captured content from the extending view. Assuming our view file has a
     echo h($post['Post']['body']);
 
 The post view above shows how you can extend a view, and populate a set of
-blocks.  Any content not in already in a defined block will captured and put
+blocks.  Any content not already in a defined block will be captured and put
 into a special block named ``content``.  When a view contains a call to
 ``extend()`` execution continues to the bottom of the current view file.
-Once its complete, the extended view will be rendered.  Calling ``extend()``
+Once it is complete, the extended view will be rendered.  Calling ``extend()``
 more than once in a view file will override the parent view that will be
 processed next::
 
@@ -143,7 +143,7 @@ allows you to define slots or blocks in your views/layouts that will be defined
 elsewhere.  For example blocks are ideal for implementing things such as
 sidebars, or regions to load assets at the bottom/top of the layout.
 Blocks can be defined in two ways.  Either as a capturing block, or by direct
-assignment.  The ``start()``, ``append()`` and ``end()`` methods allow to to
+assignment.  The ``start()``, ``append()`` and ``end()`` methods allow you to
 work with capturing blocks::
 
     <?php
@@ -154,12 +154,12 @@ work with capturing blocks::
     $this->end();
 
 
-    // Append into the sidebar later on.
+    // Append content to the sidebar later on.
     $this->append('sidebar');
     echo $this->element('sidebar/popular_topics');
     $this->end();
 
-You can also append into a block using ``start()`` multiple times.  ``assign()``
+You can also append to a block using ``start()`` multiple times.  ``assign()``
 can be used to clear or overwrite a block at any time::
 
     <?php
@@ -181,7 +181,7 @@ output a block, returning '' if a block does not exist::
 
     <?php echo $this->fetch('sidebar'); ?>
 
-You can also use fetch to conditionally show content that should surround a
+You can also use ``fetch()`` to conditionally show content that should surround a
 block should it exist.  This is helpful in layouts, or extended views where you
 want to conditionally show headings or other markup::
 
@@ -387,7 +387,7 @@ elements in its own file. They can also help you re-use content
 fragments in your application.
 
 Elements live in the ``/app/View/Elements/`` folder, and have the .ctp
-filename extension. They are output using the element method of the
+filename extension. They are output using the ``element()`` method of the
 view::
 
     <?php echo $this->element('helpbox'); ?>
@@ -490,7 +490,7 @@ configuring :php:class:`Cache`. A simple example of caching an element would be:
 If you render the same element more than once in a view and have
 caching enabled be sure to set the 'key' parameter to a different
 name each time. This will prevent each succesive call from
-overwriting the previous element() call's cached result. E.g.::
+overwriting the previous ``element()`` call's cached result. For example::
 
     <?php
     echo $this->element(
@@ -517,7 +517,7 @@ Requesting Elements from a Plugin
 2.0
 ---
 
-To load an element from a plugin, use the `plugin` option (moved out of the `data` option in 1.x) 
+To load an element from a plugin, use the `plugin` option (moved out of the `data` option in 1.x):: 
 
     <?php echo $this->element('helpbox', array(), array('plugin' => 'Contacts')); ?>
 
@@ -528,7 +528,7 @@ If you are using a plugin and wish to use elements from within the
 plugin, just use the familiar :term:`plugin syntax`. If the view is being
 rendered for a plugin controller/action, the plugin name will automatically
 be prefixed onto all elements used, unless another plugin name is present.
-If the element doesn't exist in the plugin, it will look in the main APP folder.::
+If the element doesn't exist in the plugin, it will look in the main APP folder::
 
     <?php echo $this->element('Contacts.helpbox'); ?>
 
@@ -558,10 +558,10 @@ To call any view method use ``$this->method()``
 .. php:method:: set(string $var, mixed $value)
 
     Views have a ``set()`` method that is analogous to the ``set()``
-    found in Controller objects. Using set() from your view file will
+    found in Controller objects. Using  ``set()`` from your view file will
     add the variables to the layout and elements that will be rendered
     later. See :ref:`controller-methods` for more information on using
-    set().
+     ``set()``.
 
     In your view file you can do::
 
@@ -630,7 +630,7 @@ To call any view method use ``$this->method()``
 
 .. php:method:: append($name, $content)
 
-    Append into the block with ``$name``.  See the section on 
+    Append to the block with ``$name``.  See the section on 
     :ref:`view-blocks` for examples.
 
     .. versionadded:: 2.1
