@@ -279,6 +279,13 @@ might look like::
    </body>
    </html>
 
+.. note::
+
+    Prior to version 2.1, method fetch() was not available, ``fetch('content')``
+    is a replacement for ``$content_for_layout`` and lines ``fetch('meta')``,
+    ``fetch('css')`` and ``fetch('script')`` are contained in the ``$scripts_for_layout``
+    variable in version 2.0
+
 The ``script``, ``css`` and ``meta`` blocks contain any content defined 
 in the views using the built-in HTML helper. Useful for including
 javascript and CSS files from views.
