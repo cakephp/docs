@@ -25,7 +25,7 @@ Usage example (using :php:func:`Set::sort()`)::
         1 => array('Shirt' => array('color' => 'black'))
     );
     $result = Set::sort($a, '{n}.Person.name', 'asc');
-    /* $result now looks like: 
+    /* $result now looks like:
         Array
         (
             [0] => Array
@@ -72,7 +72,7 @@ available.
 
 		    :rtype: mixed
 
-		    Apply a callback to the elements of an array extracted 
+		    Apply a callback to the elements of an array extracted
 		    by a Set::extract compatible path::
 
 		        <?php
@@ -84,7 +84,7 @@ available.
 
 		        $result = Set::apply('/Movie/rating', $data, 'array_sum');
 		        // result equals 9
-		
+
 		        $result = Set::apply('/Movie/title', $data, 'strtoupper', array('type' => 'map'));
 		        // result equals array('MOVIE 3', 'MOVIE 1', 'MOVIE 2')
 		        // $options are: - type : can be 'pass' uses call_user_func_array(), 'map' uses array_map(), or 'reduce' uses array_reduce()
@@ -548,7 +548,7 @@ available.
             2 => array('name' => 'contact'),
             'a' => 'b'
         );
-    
+
         $result = Set::contains($a, $a);
         // True
         $result = Set::contains($a, $b);
@@ -558,7 +558,7 @@ available.
 
 
 .. php:staticmethod:: countDim ($array = null, $all = false, $count = 0)
-    
+
     :rtype: integer
 
     Counts the dimensions of an array. If $all is set to false (which
@@ -776,7 +776,7 @@ available.
     |                                          | additional features are welcome.           |
     +------------------------------------------+--------------------------------------------+
 
-    To learn more about Set::extract() refer to the function testExtract() 
+    To learn more about Set::extract() refer to the function testExtract()
     in ``/lib/Cake/Test/Case/Utility/SetTest.php``.
 
 
@@ -908,7 +908,7 @@ available.
 
 
 .. php:staticmethod:: Set::insert ($list, $path, $data = null)
-    
+
     :rtype: array
 
     Inserts $data into an array as defined by $path.::
@@ -1348,7 +1348,7 @@ available.
 
     **Example 1**
     ::
-    
+
         <?php
         $array1 = array('ModelOne' => array('id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2'));
         $array2 = array('ModelOne' => array('id' => 1003, 'field_one' => 'a3.m1.f1', 'field_two' => 'a3.m1.f2', 'field_three' => 'a3.m1.f3'));
@@ -1607,7 +1607,7 @@ available.
 
 		    :rtype: mixed
 
-		    Apply a callback to the elements of an array extracted 
+		    Apply a callback to the elements of an array extracted
 		    by a Set::extract compatible path::
 
 		        <?php
@@ -1619,10 +1619,72 @@ available.
 
 		        $result = Set::apply('/Movie/rating', $data, 'array_sum');
 		        // result equals 9
-		
+
 		        $result = Set::apply('/Movie/title', $data, 'strtoupper', array('type' => 'map'));
 		        // result equals array('MOVIE 3', 'MOVIE 1', 'MOVIE 2')
 		        // $options are: - type : can be 'pass' uses call_user_func_array(), 'map' uses array_map(), or 'reduce' uses array_reduce()
+
+.. php:staticmethod:: nest($data, $options = array())
+
+		    :rtype: array
+
+		    Takes in a flat array and returns a nested array::
+
+		        <?php
+                        $data = array(
+                            array('ModelName' => array('id' => 1, 'parent_id' => null)),
+                            array('ModelName' => array('id' => 2, 'parent_id' => 1)),
+                            array('ModelName' => array('id' => 3, 'parent_id' => 1)),
+                            array('ModelName' => array('id' => 4, 'parent_id' => 1)),
+                            array('ModelName' => array('id' => 5, 'parent_id' => 1)),
+                            array('ModelName' => array('id' => 6, 'parent_id' => null)),
+                            array('ModelName' => array('id' => 7, 'parent_id' => 6)),
+                            array('ModelName' => array('id' => 8, 'parent_id' => 6)),
+                            array('ModelName' => array('id' => 9, 'parent_id' => 6)),
+                            array('ModelName' => array('id' => 10, 'parent_id' => 6))
+                        );
+
+		        $result = Set::nest($data, array('root' => 6));
+		        /* $result now looks like:
+                            array(
+                                    (int) 0 => array(
+                                            'ModelName' => array(
+                                                    'id' => (int) 6,
+                                                    'parent_id' => null
+                                            ),
+                                            'children' => array(
+                                                    (int) 0 => array(
+                                                            'ModelName' => array(
+                                                                    'id' => (int) 7,
+                                                                    'parent_id' => (int) 6
+                                                            ),
+                                                            'children' => array()
+                                                    ),
+                                                    (int) 1 => array(
+                                                            'ModelName' => array(
+                                                                    'id' => (int) 8,
+                                                                    'parent_id' => (int) 6
+                                                            ),
+                                                            'children' => array()
+                                                    ),
+                                                    (int) 2 => array(
+                                                            'ModelName' => array(
+                                                                    'id' => (int) 9,
+                                                                    'parent_id' => (int) 6
+                                                            ),
+                                                            'children' => array()
+                                                    ),
+                                                    (int) 3 => array(
+                                                            'ModelName' => array(
+                                                                    'id' => (int) 10,
+                                                                    'parent_id' => (int) 6
+                                                            ),
+                                                            'children' => array()
+                                                    )
+                                            )
+                                    )
+                            )
+                        */
 
 
 .. meta::
