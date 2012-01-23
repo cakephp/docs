@@ -39,8 +39,9 @@ Models
 
 - The ``beforeDelete`` callback will be fired before behaviors beforeDelete callbacks.
   This makes it consistent with the rest of the events triggered in the model layer.
-- ``Model::find('threaded')`` now triggers a warning when called on models
-  without a ``parent_id`` field.
+- ``Model::find('threaded')`` now accepts ``$options['parent']`` if using other field
+  then ``parent_id``. Also if the model has TreeBehavior attached and set up with other
+  parent field, the threaded find will by default use that.
 
 
 Exceptions
