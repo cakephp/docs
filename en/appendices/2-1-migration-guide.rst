@@ -68,6 +68,10 @@ debug()
 `debug()` now uses :php:class:`Debugger` internally.  This makes it consistent
 with Debugger, and takes advantage of improvements made there.
 
+Set
+---
+
+- :php:func:`Set::nest()` has been added. It takes in a flat array and returns a nested array
 
 File
 ----
