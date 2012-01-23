@@ -4,8 +4,8 @@
 CakePHP 2.1 is a fully API compatible upgrade from 2.0.  This page outlines the
 changes and improvements made for 2.1.
 
-AppController, AppHelper, and AppModel
-======================================
+AppController, AppHelper, AppModel and AppShell
+===============================================
 
 These classes are now required to be part of the app directory, as they were
 removed from the CakePHP core.  If you do not already have these classes, you
@@ -27,6 +27,12 @@ can use the following while upgrading::
     <?php
     App::uses('Controller', 'Controller');
     class AppController extends Controller {
+    }
+
+    // app/Console/Command/AppShell.php
+    <?php
+    App::uses('Shell', 'Console');
+    class AppShell extends Shell {
     }
 
 If your application already has these files/classes you don't need to do
