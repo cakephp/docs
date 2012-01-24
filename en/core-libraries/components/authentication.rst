@@ -525,7 +525,7 @@ following::
     App::uses('BaseAuthorize', 'Controller/Component/Auth');
 
     class LdapAuthorize extends BaseAuthorize {
-        public function authorize($user, CakeRequest $request); {
+        public function authorize($user, CakeRequest $request) {
             // Do things for ldap here.
         }
     }
