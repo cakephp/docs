@@ -27,7 +27,7 @@ By default CakePHP view files are written in plain PHP and have a default
 extension of .ctp (CakePHP Template). These files contain all the
 presentational logic needed to get the data it received from the
 controller in a format that is ready for the audience you’re
-serving to. If you'd prefer using a templating language like 
+serving to. If you'd prefer using a templating language like
 Twig, or Smarty, a subclass of View will bridge your templating
 language and CakePHP
 
@@ -87,7 +87,7 @@ un-captured content from the extending view. Assuming our view file has a
 
     // app/View/Posts/view.ctp
     <?php
-    $this->extend('/Common/view.ctp');
+    $this->extend('Common/view');
 
     $this->assign('title', $post)
 
@@ -101,8 +101,8 @@ un-captured content from the extending view. Assuming our view file has a
     </li>
     <?php $this->end(); ?>
 
-    <?php 
-    // The remaining content will be available as the 'content' block 
+    <?php
+    // The remaining content will be available as the 'content' block
     // in the parent view.
     echo h($post['Post']['body']);
 
@@ -115,8 +115,8 @@ more than once in a view file will override the parent view that will be
 processed next::
 
     <?php
-    $this->extend('/Common/view.ctp');
-    $this->extend('/Common/index.ctp');
+    $this->extend('Common/view');
+    $this->extend('Common/index');
 
 The above will result in ``/Common/index.ctp`` being rendered as the parent view
 to the current view.
@@ -204,7 +204,7 @@ you should use blocks.  The :php:class:`HtmlHelper` ties into view blocks, and i
 :php:meth:`~HtmlHelper::meta()` methods each update a block with the same name
 when used with the ``inline = false`` option::
 
-    <?php 
+    <?php
     // in your view file
     $this->Html->script('carousel', array('inline' => false));
     $this->Html->css('carousel', null, array('inline' => false));
@@ -226,7 +226,7 @@ to::
     <?php
     // in your view
     $this->Html->script('carousel', array('block' => 'scriptBottom'));
-    
+
     // in your layout
     echo $this->fetch('scriptBottom');
 
@@ -264,7 +264,7 @@ might look like::
    </head>
    <body>
 
-   <!-- If you'd like some sort of menu to 
+   <!-- If you'd like some sort of menu to
    show up on all of your views, include it here -->
    <div id="header">
        <div id="menu">...</div>
@@ -286,14 +286,14 @@ might look like::
     ``fetch('css')`` and ``fetch('script')`` are contained in the ``$scripts_for_layout``
     variable in version 2.0
 
-The ``script``, ``css`` and ``meta`` blocks contain any content defined 
+The ``script``, ``css`` and ``meta`` blocks contain any content defined
 in the views using the built-in HTML helper. Useful for including
 javascript and CSS files from views.
 
 .. note::
 
-    When using :php:meth:`HtmlHelper::css()` or :php:meth:`HtmlHelper::script()` 
-    in view files, specify 'false' for the 'inline' option to place the html 
+    When using :php:meth:`HtmlHelper::css()` or :php:meth:`HtmlHelper::script()`
+    in view files, specify 'false' for the 'inline' option to place the html
     source in a block with the same name. (See API for more details on usage).
 
 The ``content`` block contains the contents of the rendered view.
@@ -318,7 +318,7 @@ You can also set the title_for_layout variable from inside the view file::
 
 You can create as many layouts as you wish: just place them in the
 ``app/View/Layouts`` directory, and switch between them inside of your
-controller actions using the controller or view's 
+controller actions using the controller or view's
 :php:attr:`~View::$layout` property::
 
     <?php
@@ -364,8 +364,8 @@ Using layouts from plugins
 
 .. versionadded:: 2.1
 
-If you want to use a layout that exists in a plugin, you can use 
-:term:`plugin syntax`.  For example to use the contact layout from the 
+If you want to use a layout that exists in a plugin, you can use
+:term:`plugin syntax`.  For example to use the contact layout from the
 Contacts plugin::
 
     <?php
@@ -437,7 +437,7 @@ The options supported are 'cache' and 'callbacks'. An example::
 Element caching is facilitated through the :php:class:`Cache` class.  You can
 configure elements to be stored in any Cache configuration you've setup.  This
 gives you a great amount of flexibility to decide where and for how long elements
-are stored.  To cache different versions of the same element in an application, 
+are stored.  To cache different versions of the same element in an application,
 provide a unique cache key value using the following format::
 
     <?php
@@ -487,8 +487,8 @@ Caching Elements
 ----------------
 
 You can take advantage of CakePHP view caching if you supply a
-cache parameter. If set to true, it will cache the element in the 
-'default' Cache configuration. Otherwise, you can set which cache configuration 
+cache parameter. If set to true, it will cache the element in the
+'default' Cache configuration. Otherwise, you can set which cache configuration
 should be used. See :doc:`/core-libraries/caching` for more information on
 configuring :php:class:`Cache`. A simple example of caching an element would be::
 
@@ -501,13 +501,13 @@ overwriting the previous element() call's cached result. E.g.::
 
     <?php
     echo $this->element(
-        'helpbox', 
+        'helpbox',
         array('var' => $var),
         array('cache' => array('key' => 'first_use', 'config' => 'view_long')
     );
-    
+
     echo $this->element(
-        'helpbox', 
+        'helpbox',
         array('var' => $differenVar),
         array('cache' => array('key' => 'second_use', 'config' => 'view_long')
     );
@@ -623,21 +623,21 @@ To call any view method use ``$this->method()``
 
 .. php:method:: start($name)
 
-    Start a capturing block for a view block.  See the section on 
+    Start a capturing block for a view block.  See the section on
     :ref:`view-blocks` for examples.
 
     .. versionadded:: 2.1
 
 .. php:method:: end
 
-    End the top most open capturing block.  See the section on 
+    End the top most open capturing block.  See the section on
     :ref:`view-blocks` for examples.
 
     .. versionadded:: 2.1
 
 .. php:method:: append($name, $content)
 
-    Append into the block with ``$name``.  See the section on 
+    Append into the block with ``$name``.  See the section on
     :ref:`view-blocks` for examples.
 
     .. versionadded:: 2.1
