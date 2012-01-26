@@ -268,6 +268,19 @@ methods of the HtmlHelper and how to use them.
             <img src="/img/recipes/6.jpg" alt="Brownies" />
         </a>
 
+    If you are creating images in emails, or want absolute paths to images you
+    can use the ``fullBase`` option::
+
+        <?php
+        echo $this->Html->image("logo.png", array('fullBase' => true));
+
+    Will output::
+
+        <img src="http://example.com/img/logo.jpg" alt="" />
+
+    .. versionchanged:: 2.1
+        The ``fullBase`` option was added.
+
 .. php:method:: link(string $title, mixed $url = null, array $options = array(), string $confirmMessage = false)
 
     :param string $title: The text to display as the body of the link.
