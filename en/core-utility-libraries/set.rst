@@ -726,7 +726,7 @@ available.
     Set::extract uses basic XPath 2.0 syntax to return subsets of your
     data from a find or a find all. This function allows you to
     retrieve your data quickly without having to loop through multi
-    dimentional arrays or traverse through tree structures.
+    dimensional arrays or traverse through tree structures.
 
     .. note::
 
@@ -1098,7 +1098,7 @@ available.
         // returns true
         $res=Set::matches(array('id', 'title'), $a[1]['Article']);
         // returns true
-        $res=Set::matches(array('non-existant'), $a[1]['Article']);
+        $res=Set::matches(array('non-existent'), $a[1]['Article']);
         // returns false
         $res=Set::matches('/Article[id=2]', $a);
         // returns true

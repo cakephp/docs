@@ -24,7 +24,7 @@ View Blocks
 
 View Blocks are a mechanism to allow the inclusion of slots of content, whilst allowing child view classes or elements to provide custom content for that block.
 
-Blocks are output by calling the ``fetch`` method on the :php:class:`View`. For example, the following can be placed in your ``View/Layouts/defualt.ctp`` file::
+Blocks are output by calling the ``fetch`` method on the :php:class:`View`. For example, the following can be placed in your ``View/Layouts/default.ctp`` file::
 
     <?php echo $this->fetch('my_block'); ?>
 
@@ -34,7 +34,7 @@ Setting the content of a block can be done in a number of ways. A simple assignm
 
     <?php $this->assign('my_block', 'Hello Block'); ?>
 
-Or you can use it to capture a seciton of more complex content::
+Or you can use it to capture a section of more complex content::
 
     <?php $this->start('my_block'); ?>
         <h1>Hello Block!</h1>
@@ -87,7 +87,7 @@ The :php:class:`JsonView` is used like any other view class, by defining it on t
 Once you have setup the controller, you need to identify what content should be serialized as JSON, by setting the view variable ``_serialize``. Example::
 
     <?php
-    $this->set(comapct('users', 'posts', 'tags'));
+    $this->set(compact('users', 'posts', 'tags'));
     $this->set('_serialize', array('users', 'posts'));
 
 The above example would result in only the ``users`` and ``posts`` variables being serialized for the JSON output, like so::
@@ -118,7 +118,7 @@ XmlView
 Much like the :php:class:`JsonView`, the :php:class:`XmlView` requires you to set the ``_serialize`` view variable in order to indicate what information should be serialized into XML for output.
 
     <?php
-    $this->set(comapct('users', 'posts', 'tags'));
+    $this->set(compact('users', 'posts', 'tags'));
     $this->set('_serialize', array('users', 'posts'));
 
 The above example would result in only the ``users`` and ``posts`` variables being serialized for the XML output, like so::
@@ -145,7 +145,7 @@ status code before rendering the view. Skipping the view rendering process saves
 CPU cycles and memory.::
 
     <?php
-    class ArtilcesController extends AppController {
+    class ArticlesController extends AppController {
         public $components = array('RequestHandler');
 
         public function view($id) {

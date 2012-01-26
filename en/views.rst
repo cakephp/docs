@@ -496,7 +496,7 @@ configuring :php:class:`Cache`. A simple example of caching an element would be:
 
 If you render the same element more than once in a view and have
 caching enabled be sure to set the 'key' parameter to a different
-name each time. This will prevent each succesive call from
+name each time. This will prevent each successive call from
 overwriting the previous element() call's cached result. E.g.::
 
     <?php
