@@ -187,7 +187,7 @@ first match found.
 
 If you are planning to use custom named arguments with your route,
 you have to make the router aware of it using the
-:php:meth`Router::connectNamed()` function. So if you want the above route
+:php:meth:`Router::connectNamed()` function. So if you want the above route
 to match urls like ``/cooks/some_action/type:chef`` we do::
 
     <?php
