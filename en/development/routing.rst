@@ -137,7 +137,7 @@ passed argument of ``the-example-/-and-proof``.
     The trailing double star was added in 2.1.
 
 You can use the second parameter of :php:meth:`Router::connect()`
-to provide any routing parameters that are compose the default values
+to provide any routing parameters that are composed of the default values
 of the route::
 
     <?php
@@ -201,11 +201,11 @@ to match urls like ``/cooks/some_action/type:chef`` we do::
 Route elements
 --------------
 
-You can specify your own route elements, doing so gives you the
+You can specify your own route elements and doing so gives you the
 power to define places in the URL where parameters for controller
 actions should lie. When a request is made, the values for these
 route elements are found in ``$this->request->params`` on the controller. 
-This is different than named parameters are handled, so note the
+This is different than how named parameters are handled, so note the
 difference: named parameters (/controller/action/name:value) are
 found in ``$this->request->params['named']``, whereas custom route 
 element data is found in ``$this->request->params``. When you define 
@@ -852,7 +852,7 @@ remove the default routes that CakePHP offers by deleting them from your
 application's routes.php file.
 
 This will cause CakePHP to serve errors, when users try to visit
-urls that would normally be provided by CakePHP, and are have not
+urls that would normally be provided by CakePHP but have not
 been connected explicitly.
 
 Custom Route classes
@@ -861,8 +861,8 @@ Custom Route classes
 Custom route classes allow you to extend and change how individual
 routes parse requests and handle reverse routing. A route class
 should extend :php:class:`CakeRoute` and implement one or both of
-``match()`` and ``parse()``. Parse is used to parse requests and
-match is used to handle reverse routing.
+``match()`` and/or ``parse()``. ``parse()`` is used to parse requests and
+``match()`` is used to handle reverse routing.
 
 You can use a custom route class when making a route by using the
 ``routeClass`` option, and loading the file containing your route
@@ -961,9 +961,9 @@ Router API
 
 .. php:staticmethod:: connectNamed($named, $options = array())
 
-    :param array: $named A list of named parameters. Key value pairs are accepted where 
+    :param array $named: A list of named parameters. Key value pairs are accepted where 
         values are either regex strings to match, or arrays.
-    :param array $options: Allows to control all settings: 
+    :param array $options: Allows control of all settings: 
         separator, greedy, reset, default
     
     Specifies what named parameters CakePHP should be parsing out of 
@@ -989,23 +989,23 @@ Router API
              string '&'
            * full - if true the full base URL will be prepended.
 
-    Generate a URL for specified action. Returns an URL pointing 
+    Generate a URL for the specified action. Returns an URL pointing 
     to a combination of controller and action. $url can be:
 
-    * Empty - the method will find address to actual controller/action.
-    * '/' - the method will find base URL of application.
-    * A combination of controller/action - the method will find url for it.
+    * Empty - the method will find the address to the actual controller/action.
+    * '/' - the method will find the base URL of application.
+    * A combination of controller/action - the method will find the url for it.
 
-    There are a few 'special' parameters that can change the final URL string that is generated
+    There are a few 'special' parameters that can change the final URL string that is generated:
 
-    * ``base`` - Set to false to remove the base path from the generated url. 
+    * ``base`` - Set to false to remove the base path from the generated URL. 
       If your application is not in the root directory, this can be used to
-      generate urls that are 'cake relative'. Cake relative urls are required
+      generate URLs that are 'cake relative'. Cake relative URLs are required
       when using requestAction.
     * ``?`` - Takes an array of query string parameters
-    * ``#`` - Allows you to set url hash fragments.
+    * ``#`` - Allows you to set URL hash fragments.
     * ``full_base`` - If true the :php:const:`FULL_BASE_URL` constant will 
-      be prepended to generated urls.
+      be prepended to generated URLs.
 
 .. php:staticmethod:: mapResources($controller, $options = array())
 
@@ -1033,17 +1033,17 @@ Router API
     
     Parses an incoming url, and generates an array of request parameters
     that Dispatcher can act upon. Extending this method allows you to customize
-    how incoming urls are converted into an array.  Return ``false`` from
-    url to indicate match failure.
+    how incoming URLs are converted into an array.  Return ``false`` from
+    URL to indicate a match failure.
 
 .. php:method:: match($url)
 
-    :param array $url: The routing array to convert into a string url.
+    :param array $url: The routing array to convert into a string URL.
     
-    Attempt to match a url array.  If the url matches the route parameters 
-    and settings, then return a generated string url.  If the url doesn't 
+    Attempt to match a URL array.  If the URL matches the route parameters 
+    and settings, then return a generated string URL.  If the URL doesn't 
     match the route parameters, false will be returned.  This method handles 
-    the reverse routing or conversion of url arrays into string urls.
+    the reverse routing or conversion of URL arrays into string URLs.
 
 .. php:method:: compile()
 
