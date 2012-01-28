@@ -239,6 +239,12 @@ FormHelper
   input. This may result in the for attribute changing for generated datetime
   inputs.
 
+PaginatorHelper
+---------------
+
+- :php:meth:`PaginatorHelper::numbers()` now has a ``currentClass`` option.
+
+
 Testing
 =======
 
