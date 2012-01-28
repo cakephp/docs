@@ -248,6 +248,7 @@ Testing
 - Models loaded using the ClassRegistry and using another datasource will get
   their datasource name prepended with ``test_`` (e.g datasource `master` will
   try to use `test_master` in the testsuite)
+- Test cases are generated with class specific setup methods.
 
 Events
 ======
