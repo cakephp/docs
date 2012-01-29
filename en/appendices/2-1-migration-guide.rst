@@ -49,6 +49,13 @@ Models
   then ``parent_id``. Also if the model has TreeBehavior attached and set up with other
   parent field, the threaded find will by default use that.
 
+Behaviors
+=========
+
+TranslateBehavior
+-----------------
+
+- :php:class:`I18nModel` has been moved into a separate file.
 
 Exceptions
 ==========
@@ -84,6 +91,16 @@ File
 
 - :php:meth:`File::info()` includes filesize & mimetype information.
 - :php:meth:`File::mime()` was added.
+
+Cache
+-----
+
+- :php:class:`CacheEngine` has been moved into a separate file.
+
+Configure
+---------
+
+- :php:class:`ConfigReaderInterface` has been moved into a separate file.
 
 Console
 =======
@@ -137,6 +154,22 @@ AuthComponent
   and deny().
 - ``recursive`` option was added to all authentication adapters. Allows you to
   more easily control the associations stored in the session.
+
+
+AclComponent
+------------
+
+- :php:class:`AclComponent` no longer lowercases and inflects the classname used for
+  ``Acl.classname``.  Instead it uses the provided value as is.
+- Acl backend implementations should now be put in ``Controller/Component/Acl``.
+- Acl implementations should be moved into the Component/Acl directory from
+  Component.  For example if your Acl class was called ``CustomAclComponent``,
+  and was in ``Controller/Component/CustomAclComponent.php``. 
+  It should be moved into ``Controller/Component/Acl/CustomAcl.php``, and be
+  named ``CustomAcl``.
+- :php:class:`DbAcl` has been moved into a separate file.
+- :php:class:`IniAcl` has been moved into a separate file.
+- :php:class:`AclInterface` has been moved into a separate file.
 
 Helpers
 =======
