@@ -37,13 +37,13 @@ Interacting with the event managers
 
 Let's suppose you are building a Cart plugin, but you don't really want to mess with
 shipping logic, emailing the user or decrementing the item from the stock,
-it is your wish to handle those things separately in other plugin or in app code.
-Typically, when not directly using the observer pattern you would do this attaching
+it is your wish to handle those things separately in another plugin or in app code.
+Typically, when not directly using the observer pattern you would do this by attaching
 behaviors on the fly to your models, and perhaps some components to the controllers.
 
 Doing so represents a challenge most of the time, since you would have to come up
 with the code for externally loading those behaviors or attaching hooks to your
-plugin controllers. Prior CakePHP 2.1 some developers chose to implement generic
+plugin controllers. Prior to CakePHP 2.1 some developers chose to implement generic
 event systems to solve this problem, and some of those system were offered as plugins.
 Now, you can benefit from a standard general purpose event system that will let you
 cleanly separate the concerns of your plugins and application code with the built in
@@ -52,7 +52,7 @@ events manager.
 Dispatching events
 ------------------
 
-So back to our example, we would have a `Order` model that will manage the buying logic,
+So back to our example, we would have an `Order` model that will manage the buying logic,
 and probably a `place` method to save the order details and do any other logic::
 
     <?php
@@ -85,7 +85,7 @@ do it. So we need another solution, let's rewrite that using the event manager::
         public function place($order) {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
-                $this->getEventManager()->dispatch(new CakeEvent('Mode.Order.afterPlace', $this, array(
+                $this->getEventManager()->dispatch(new CakeEvent('Model.Order.afterPlace', $this, array(
                     'order' => $order
                 )));
                 return true;
@@ -101,7 +101,7 @@ This method will not return the same manager instance across models, and it is n
 shared between controllers and models, but they are between controllers and views, 
 nevertheless. We will review later how to overcome this implementation detail.
 
-The ``getEventManager`` method return an instance of :php:class:`CakeEventManager`,
+The ``getEventManager`` method returns an instance of :php:class:`CakeEventManager`,
 and to dispatch events you use :php:meth:`CakeEventManager::dispatch()` which
 receives an instance of the :php:class:`CakeEvent` class. Let's dissect now the
 process of dispatching an event::
@@ -119,7 +119,7 @@ and `Layer.Class.eventName` for events happening in specific classes on a layer,
 for example `Model.User.afterRegister` or `Controller.Courses.invalidAccess`.
 
 The second argument is the `subject`, meaning the object associated to the event,
-usually when it is the same class triggering events about itself, the using `$this`
+usually when it is the same class triggering events about itself, using `$this`
 will be the most common case. Although a :php:class:`Component` could trigger
 controller events too. The subject class is important because listeners will get
 immediate access to the object properties and have the chance to inspect or
@@ -130,7 +130,7 @@ useful to pass around so listeners can act upon it. While this can be an argumen
 of any type, we recommend passing an associative array, to make inspection easier.
 
 :php:meth:`CakeEventManager::dispatch()` method accepts the event object as argument
-and notifies all listener and callbacks passing this abject along. So the listeners
+and notifies all listener and callbacks passing this object along. So the listeners
 will handle all the extra logic around the `afterPlace` event, you can log the time,
 send emails, update user statistics possibly in separate objects and even delegating
 it to offline tasks if you have the need.
@@ -141,9 +141,9 @@ Registering callbacks
 How do we register callbacks or observers to our new `afterPlace` event? This
 is subject to a wide variety of different implementations, but they all have
 to call the :php:meth:`CakeEventManager::attach()` method to register new actors.
-For simplicity sake, let's imagine we know in the plugin what the callbacks are and
+For simplicity's sake, let's imagine we know in the plugin what the callbacks 
 are available in the controller, and say this controller is responsible for
-attaching them. A possible code would look like this::
+attaching them. The possible code would look like this::
 
     <?php
     // Listeners configured somewhere else, maybe a config file:
@@ -169,10 +169,10 @@ attaching them. A possible code would look like this::
         }
     }
 
-This may not be the cleanest way to do it, so you can come up with you own ways
-for attaching listener to an object's event manager. This simple way of defining
+This may not be the cleanest way to do it, so you can come up with your own ways
+for attaching listeners to an object's event manager. This simple way of defining
 them using the `Configure` class is intended for didactic purposes only. This
-little example allows us to show case what type of callbacks can be attached to
+little example allows us to showcase what type of callbacks can be attached to
 the manager. As you may already have figured out, the `attach` method takes any
 valid  PHP `callback` type, this is a string representing a static function call,
 an array having a class instance and a method, an anonymous function if you use
@@ -191,7 +191,7 @@ Listeners are an alternative, and often cleaner way of registering callbacks for
 an event. This is done by implementing the :php:class:`CakeEventListener` interface
 in any class you wish to register some callbacks. Classes implementing it need to
 provide the ``implementedEvents()`` method and return an associative array with all
-events names that the class will handle.
+event names that the class will handle.
 
 To keep up with our previous example, let's imagine we have a UserStatistic class
 responsible for calculating useful information and compiling into the global site
@@ -219,7 +219,7 @@ to trigger methods in this class. A listener is created as follows::
     $this->Order->getEventManager($statistics);
 
 As you can see in the above code, the `attach` function can handle instances of
-the `CakeEventListener` interface. Internally the event manager will read the
+the `CakeEventListener` interface. Internally, the event manager will read the
 array returned by `implementedEvents` method and wire the callbacks accordingly.
 
 Establishing priorities
@@ -227,14 +227,14 @@ Establishing priorities
 
 In some cases you'd want to run a callback and make sure it gets executed before,
 or after all the other callbacks have been run. For instance, think again about
-our user statistics example. It would make sense to only run this method only
+our user statistics example. It would make sense to run this method only
 when we can make sure the event was not cancelled, there were no errors and the
 other callbacks did not change the state of the order itself. For those cases you
 use priorities.
 
 Priorities are handled using a number associated to the callback itself. The higher
 the number, the later the method will be fired. Default priority for all callbacks
-and listener method is set to `10`. If you need your method to be run before, then
+and listener methods are set to `10`. If you need your method to be run before, then
 using any value below this default will help you do it, even setting the priority
 to `1` or a negative value should work. On the other hand if you desire to run the
 callback after the others, using a number above `10` will do.
@@ -267,12 +267,12 @@ Getting event data as function params
 -------------------------------------
 
 Some developers might prefer having the event data passed as function parameters
-instead of receiving the event object. While this is a odd preference and using
+instead of receiving the event object. While this is an odd preference and using
 the event object is a lot more powerful, this was needed to provide backwards
 compatibility with the previous event system and to offer seasoned developers an
 alternative to what they were used to.
 
-In order to toggle this option you have to add the `passParams` options to the
+In order to toggle this option you have to add the `passParams` option to the
 third argument of the `attach` method, or declare it in the `implementedEvents`
 returned array similar to what you do with priorities::
 
@@ -295,11 +295,11 @@ returned array similar to what you do with priorities::
     }
 
 In the above code the `doSomething` function and `updateBuyStatistic` method will
-receiving `$orderData` instead of the `$event` object. This is so, because in our
+receive `$orderData` instead of the `$event` object. This is so, because in our
 previous example we trigger the `Model.Order.afterPlace` event with some data::
 
     <?php
-    $this->getEventManager()->dispatch(new CakeEvent('Mode.Order.afterPlace', $this, array(
+    $this->getEventManager()->dispatch(new CakeEvent('Model.Order.afterPlace', $this, array(
         'order' => $order
     )));
 
@@ -313,7 +313,7 @@ Stopping events
 ---------------
 
 There are circumstances where you will need to stop events so the operation that
-started it is cancelled. You see example of this in the model callbacks
+started it is cancelled. You see examples of this in the model callbacks
 (e.g. beforeSave) in which it is possible to stop the saving operation if
 the code detects it cannot proceed any further.
 
@@ -331,8 +331,8 @@ the `stopPropagation` method on the event object::
         $event->stopPropagation();
     }
 
-Stopping an event can have two different effects. The first one van always be
-expected: any callback after the event was stopped will no be called. The second
+Stopping an event can have two different effects. The first one can always be
+expected: any callback after the event was stopped will not be called. The second
 consequence is optional and it depends on the code triggering the event, for
 instance, in our `afterPlace` example it would not make any sense to cancel the
 operation since the data was already saved and the cart emptied. Nevertheless, if
@@ -454,7 +454,7 @@ one before it triggers the internal attached callbacks. The priority for each ma
 independent, the global callbacks will fire in their own priority queue and then
 the local callbacks will get called in the respective priority order.
 
-Accessing the global event manager is as easy as calling an static function,
+Accessing the global event manager is as easy as calling a static function,
 the following example will attach a global event to the `beforePlace` event::
 
     <?php
@@ -462,7 +462,7 @@ the following example will attach a global event to the `beforePlace` event::
     App::uses('CakeEventManager', 'Event');
     CakeEventManager::instance()->attach($aCallback, 'Model.Order.beforePlace');
 
-As you can see, we just change how we get access to a event manager instance,
+As you can see, we just change how we get access to an event manager instance,
 and we can apply the same concepts we learned before about triggering, attaching,
 detaching, stopping events, etc.
 
