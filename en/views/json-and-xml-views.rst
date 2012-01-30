@@ -98,5 +98,5 @@ well.
 
 .. php:class:: JsonView
 
-    A view class for generating Json view data.  See aboice for how you can use
+    A view class for generating Json view data.  See above for how you can use
     JsonView in your application.
