@@ -3,11 +3,11 @@ Events system
 
 .. versionadded:: 2.1
 
-Creating maintainable applications is both a science and and art. It is
+Creating maintainable applications is both a science and an art. It is
 well-known that a key for having good quality code is making your objects
 loosely coupled and strongly cohesive at the same time. Cohesion means that
-all method and properties for a class are strongly related to the class
-itself and it is not trying to do the job other object should be doing,
+all methods and properties for a class are strongly related to the class
+itself and it is not trying to do the job other objects should be doing,
 while loosely coupling is the measure of how little a class is "wired"
 to external objects, and how much that class is depending on them.
 
@@ -15,7 +15,7 @@ While most of the CakePHP structure and default libraries will help you
 achieve this goal, there are certain cases where you need to cleanly communicate
 with other parts in the system without having to hard code those dependencies,
 thus losing cohesion and increasing class coupling. A very successful design
-patter in software engineering is the Observer pattern, where objects can
+pattern in software engineering is the Observer pattern, where objects can
 generate events and notify possibly anonymous listeners about changes in the
 internal state.
 
@@ -29,7 +29,7 @@ popular javascript frameworks such as jQuery, while remaining loyal to its
 object oriented design. In this implementation, an event object is carried
 across all listeners holding the information and the ability to stop the event
 propagation at any point. Listeners can register themselves or can delegate this
-task to other objects an have the chance to alter the state and the event itself
+task to other objects and have the chance to alter the state and the event itself
 for the rest of the callbacks.
 
 Interacting with the event managers
