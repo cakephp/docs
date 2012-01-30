@@ -229,7 +229,7 @@ properties and methods.
 
 * ``$this->request->webroot`` contains the webroot directory.
 * ``$this->request->base`` contains the base path.
-* ``$this->request->here`` contains the request uri for the current request.
+* ``$this->request->here`` contains the full address to the current request
 * ``$this->request->query`` contains the query string parameters.
 
 
