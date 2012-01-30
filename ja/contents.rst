@@ -8,6 +8,7 @@
    installation
    getting-started
    cakephp-overview
+   controllers
    deployment
    tutorials-and-examples
    contributing
