@@ -46,7 +46,9 @@ Configuring the Cache class can be done anywhere, but generally
 you will want to configure Cache in ``app/Config/bootstrap.php``.  You
 can configure as many cache configurations as you need, and use any 
 mixture of cache engines.  CakePHP uses two cache configurations internally,
-which are configured in ``app/Config/core.php``.
+which are configured in ``app/Config/core.php``. If you are using APC or
+Memcache you should make sure to set unique keys for the core caches.  This will
+prevent multiple applications from overwriting each other's cached data.
 
 Using multiple cache configurations can help reduce the
 number of times you need to use :php:func:`Cache::set()` as well as
@@ -80,6 +82,11 @@ By placing the above code in your ``app/Config/bootstrap.php`` you will
 have two additional Cache configurations. The name of these
 configurations 'short' or 'long' is used as the ``$config``
 parameter for :php:func:`Cache::write()` and :php:func:`Cache::read()`.
+
+.. note::
+
+    When using the FileEngine you might need to use the ``mask`` option to
+    ensure cache files are made with the correct permissions.
 
 Creating a storage engine for Cache
 ===================================
