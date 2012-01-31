@@ -102,6 +102,15 @@ Configure
 
 - :php:class:`ConfigReaderInterface` has been moved into a separate file.
 
+App
+---
+
+- :php:meth:`App::build()` now has the ability to register new packages using
+  ``App::REGISTER``. See :ref:`app-build-register` for more information.
+- Classes that could not be found on configured paths will be searched inside
+  ``APP`` as a fallback path.  This makes autoloading nested directories in
+  ``app/Vendor`` easier.
+
 Console
 =======
 

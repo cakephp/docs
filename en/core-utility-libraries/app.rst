@@ -157,9 +157,6 @@ Adding paths for App to find packages in
     If reset is set to true, all loaded plugins will be forgotten and they will
     be needed to be loaded again.
 
-    .. versionchanged:: 2.0
-        Will not merge app paths with core paths anymore.
-
     Examples::
 
         <?php
@@ -171,6 +168,14 @@ Adding paths for App to find packages in
         //becomes 
         App::build(array('View/Helper' => array('/full/path/to/View/Helper')))
 
+    .. versionchanged:: 2.0
+        ``App::build()`` will not merge app paths with core paths anymore.
+
+
+.. _app-build-register:
+
+Add new packages to an application
+----------------------------------
 
     ``App::build()`` can be used to add new package locations.  This is useful
     when you want to add new top level packages or, sub-packages to your
