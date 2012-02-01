@@ -210,9 +210,9 @@ View
 - ``$scripts_for_layout`` is deprecated.  Use the following instead::
 
         <?php
-        $this->fetch('meta');
-        $this->fetch('css');
-        $this->fetch('script');
+        echo $this->fetch('meta');
+        echo $this->fetch('css');
+        echo $this->fetch('script');
 
   ``$scripts_for_layout`` is still available, but the :ref:`view blocks <view-blocks>` API
   gives a more extensible & flexible replacement.
