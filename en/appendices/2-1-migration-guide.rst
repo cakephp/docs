@@ -40,6 +40,14 @@ anything.
 Additionally if you were using the core PagesController, you would need to copy
 this to your app/Controller directory as well.
 
+.htaccess files
+===============
+
+The default ``.htaccess`` files have changed, you should remember to update them
+or update your webservers URL re-writing scheme to match the changes done in
+``.htaccess``
+
+
 Models
 ======
 
