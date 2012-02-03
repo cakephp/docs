@@ -32,7 +32,7 @@ File and Folder naming
 In CakePHP 2.0 we rethought the way we are structuring our files and folders.
 Given that PHP 5.3 is supporting namespaces we decided to prepare our code base
 for adopting in a near future this PHP version, so we adopted the
-http://groups.google.com/group/php-standards/web/psr-0-final-proposal. At first
+https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md. At first
 we glanced at the internal structure of CakePHP 1.3 and realized that after all
 these years there was no clear organization in the files, nor did the directory
 structure really hint where each file should be located. With this change we
