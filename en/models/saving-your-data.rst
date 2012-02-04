@@ -239,11 +239,11 @@ temporarily unbind the associations.
 Method used to save multiple rows of the same model at once. The following
 options may be used:
 
-* validate: Set to false to disable validation, true to validate each record before saving,
+* ``validate``: Set to false to disable validation, true to validate each record before saving,
   'first' to validate *all* records before any are saved (default),
-* atomic: If true (default), will attempt to save all records in a single transaction.
+* ``atomic``: If true (default), will attempt to save all records in a single transaction.
   Should be set to false if database/table does not support transactions.
-*  fieldList: Equivalent to the $fieldList parameter in Model::save()
+*  ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
 
 For saving multiple records of single model, $data needs to be a
 numerically indexed array of records like this::
@@ -285,11 +285,11 @@ you just need to add the primary key index to the data row::
 Method used to save multiple model associations at once. The following
 options may be used:
 
-* validate: Set to false to disable validation, true to validate each record before saving,
+* ``validate``: Set to false to disable validation, true to validate each record before saving,
   'first' to validate *all* records before any are saved (default),
-* atomic: If true (default), will attempt to save all records in a single transaction.
+* ``atomic``: If true (default), will attempt to save all records in a single transaction.
   Should be set to false if database/table does not support transactions.
-*  fieldList: Equivalent to the $fieldList parameter in Model::save()
+*  ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
 
 For saving a record along with its related record having a hasOne
 or belongsTo association, the data array should be like this::
