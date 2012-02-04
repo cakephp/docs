@@ -586,9 +586,6 @@ a good idea to add an additional primary key field (by convention
 **HABTM** requires a separate join table that includes both *model*
 names.
 
-Relation
-    Schema (HABTM table name in bold)
-
 ========================= ================================================================
 Relationship              HABTM Table Fields
 ========================= ================================================================
