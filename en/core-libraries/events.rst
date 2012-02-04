@@ -1,4 +1,4 @@
-Events system
+Events System
 #############
 
 .. versionadded:: 2.1
