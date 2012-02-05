@@ -347,6 +347,36 @@ methods of the HtmlHelper and how to use them.
     Also check :php:meth:`HtmlHelper::url` method
     for more examples of different types of urls.
 
+.. php:method:: video(string|array $path, array $options)
+
+    :param string|array $path Path to the video file, relative to the webroot/{$options['pathPrefix']} directory.
+        Or an array where each item itself can be a path string or an associate array containing keys `src` and `type`
+    :param array $options Array of HTML attributes, and special options.
+        Options:
+        - `text` Text to include inside the video tag
+        - `pathPrefix` Path prefix to use for relative urls, defaults to 'files/'
+        - `fullBase` If provided the src attribute will get a full addres (non-relative url) for
+          the video file.
+
+    .. versionadded:: 2.1
+    Returns a formatted video tag.
+    <?php
+    echo $this->Html->video('video.mp4', array('fullBase' => true, 'text' => 'Fallback text'));
+
+    //Output
+    <video src="http://www.somehost.com/files/video.mp4">Fallback text</video>
+
+    echo $this->Html->video(
+        array('video.mp4', array('src' => 'video.ogg', 'type' => "video/ogg; codecs='theora, vorbis'")),
+        array('autoplay')
+    );
+    
+    //Output
+    <video autoplay="autoplay">
+        <source src="/files/video.mp4" type="video/mp4"/>
+        <source src="/files/video.ogg" type="video/ogg; codecs='theora, vorbis'"/>
+    </video>
+
 .. php:method:: tag(string $tag, string $text, array $htmlAttributes)
 
     :param string $tag: The tag name being generated.
