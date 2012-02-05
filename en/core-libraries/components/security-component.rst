@@ -81,7 +81,7 @@ in the controller.
     * 'post' Indicates an HTTP method restriction failure.
     * 'put' Indicates an HTTP method restriction failure.
     * 'delete' Indicates an HTTP method restriction failure.
-    * 'delete' Indicates an SSL method restriction failure.
+    * 'secure' Indicates an SSL method restriction failure.
 
 Restricting HTTP methods
 ========================
