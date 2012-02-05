@@ -157,3 +157,11 @@ CPU cycles and memory.::
 
 In the above example the view will not be rendered if the client sent the
 header `If-Modified-Since`, and the response will have a 304 status.
+
+Helpers
+====
+
+HtmlHelper
+-----------
+A new function :php:meth:`HtmlHelper::video()` has been added for HTML5's video tag generation.
+
