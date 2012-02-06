@@ -163,5 +163,5 @@ Helpers
 
 HtmlHelper
 -----------
-A new function :php:meth:`HtmlHelper::video()` has been added for HTML5's video tag generation.
+A new function :php:meth:`HtmlHelper::media()` has been added for HTML5's audio/video element generation.
 
