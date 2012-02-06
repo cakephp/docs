@@ -355,7 +355,7 @@ methods of the HtmlHelper and how to use them.
         Options:
         - `text` Text to include inside the video tag
         - `pathPrefix` Path prefix to use for relative urls, defaults to 'files/'
-        - `fullBase` If provided the src attribute will get a full addres (non-relative url) for
+        - `fullBase` If provided the src attribute will get a full address (non-relative url) for
           the video file.
 
     .. versionadded:: 2.1
