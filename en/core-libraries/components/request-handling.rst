@@ -257,7 +257,7 @@ Taking advantage of HTTP cache validation
 
 .. versionadded:: 2.1
 
-HTTP cache validation model is one the process used for cache gateways, also known
+The HTTP cache validation model is one of the processes used for cache gateways, also known
 as reverse proxies, to determine if they can serve a stored copy of a response
 to the client. Under this model, you mostly save bandwidth, but when used
 correctly you can also save some CPU processing, reducing this way response
