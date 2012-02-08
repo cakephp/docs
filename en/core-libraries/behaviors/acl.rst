@@ -10,7 +10,7 @@ transparently.
 To use the new behavior, you can add it to the $actsAs property of
 your model. When adding it to the actsAs array you choose to make
 the related Acl entry an ARO or an ACO. The default is to create
-AROs::
+ACOs::
 
     <?php
     class User extends AppModel {
@@ -23,6 +23,14 @@ behavior in ACO mode use::
     <?php
     class Post extends AppModel {
         public $actsAs = array('Acl' => array('type' => 'controlled'));
+    }
+
+For User and Group models it is common to have both ACO and ARO nodes,
+to achieve this use::
+
+    <?php
+    class User extends AppModel {
+        public $actsAs = array('Acl' => array('type' => 'both'));
     }
 
 You can also attach the behavior on the fly like so::
@@ -63,13 +71,11 @@ belongsTo Group::
         $data = $this->data;
         if (empty($this->data)) {
             $data = $this->read();
-        } 
+        }
         if (!$data['User']['group_id']) {
             return null;
         } else {
-            $this->Group->id = $data['User']['group_id'];
-            $groupNode = $this->Group->node();
-            return array('Group' => array('id' => $groupNode[0]['Aro']['foreign_key']));
+            return array('Group' => array('id' => $data['User']['group_id']));
         }
     }
 
@@ -91,7 +97,7 @@ data array::
     <?php
     $this->User->id = 1;
     $node = $this->User->node();
-    
+
     $user = array('User' => array(
         'id' => 1
     ));
@@ -99,7 +105,17 @@ data array::
 
 Will both return the same Acl Node information.
 
+If you had setup AclBehavior to create both ACO and ARO nodes, you need to
+specify which node type you want::
 
+    <?php
+    $this->User->id = 1;
+    $node = $this->User->node(null, 'Aro');
+
+    $user = array('User' => array(
+        'id' => 1
+    ));
+    $node = $this->User->node($user, 'Aro');
 
 .. meta::
     :title lang=en: ACL

@@ -159,7 +159,7 @@ In the above example the view will not be rendered if the client sent the
 header `If-Modified-Since`, and the response will have a 304 status.
 
 Helpers
-====
+=======
 
 HtmlHelper
 -----------
