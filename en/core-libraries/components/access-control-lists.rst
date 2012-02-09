@@ -3,6 +3,69 @@ Access Control Lists
 
 .. php:class:: AclComponent(ComponentCollection $collection, array $settings = array())
 
+Access control in CakePHP is provided by the ``AclComponent``.  It
+uses an adapter pattern to allow any required access control strategy to
+be implemented.  There are a few Acl implementations provided in CakePHP as
+well.
+
+Before diving into the particulars of CakePHP's access control component, its a
+good idea to brush up on some of the terminology used regarding access control.
+There are two primary types of resources in access control.  ARO's and ACO's.
+While they seem daunting at first, the acronyms are far less intimidating.
+
+* **ARO** (Access Requestor Object) These are your users.  Users request access
+  to other resources.  The permissions defined in your ACL either grant or deny
+  them access to any requested resource. While an **ARO** can technically not be
+  a user, it is generally an agent requesting access to another resource.
+* **ACO** (Access Controlled Object) These are the non user domain objects in
+  your application.  Your controller actions, your posts, your comments, your
+  invoices, your cart items. Basically anything a user needs to ask for access
+  to.
+* **Permissions** Permissions are the mappings or rules that define which
+  **ARO** can access which **ACO**.
+
+Now that we understand the concepts, lets look at how CakePHP implements them.
+In CakePHP you generally interface with the ``AclComponent`` and check
+permissions at the controller level.  AclComponent integrates well with the
+:php:class:`AuthComponent` using both the ``Actions`` and ``Crud`` authorization
+objects.
+
+Built-in ACL Backends
+=====================
+
+As mentioned before, the AclComponent uses an adapter pattern, to allow a
+variety of ACL implementations to be used.  If one of the built-in
+implementations doesn't suit your applications needs, you can always create your
+own.  The built-in implementations are:
+
+* ``PhpAcl`` uses a static PHP array to define the ARO groupings, and the ACO
+  paths.  This is an ideal implementation when you have a permission system that
+  doesn't need to be changed on the fly. Its also faster than DbAcl.
+* ``DbAcl`` stores the **ARO**, **ACO**, and permissions trees in the database.
+  This allows the permissions to be changed at runtime without modifying source
+  code.  However, it can be less performant and more complex than other
+  implementations.
+
+
+
+
+
+- Where permissions fit into this.
+- Permission cascades.
+- The built-in CakePHP acl backends
+  - configuring acl component
+- Building your own acl backend & AclInterface
+
+- Using PhpAcl
+  - creating a permissions file
+- Using DbAcl
+  - creating the tables.
+- Using grant/deny
+- Integrating with AuthComponent
+- Example setup using PhpAcl for an e-learning site.
+
+
+
 CakePHP's access control list functionality is one of the most
 oft-discussed, most likely because it is the most sought after, but
 also because it can be the most confusing. If you're looking for a
