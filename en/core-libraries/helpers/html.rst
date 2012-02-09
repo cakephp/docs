@@ -106,7 +106,7 @@ methods of the HtmlHelper and how to use them.
     and also wanted to include ``app/webroot/css/Blog.common.css``, you would::
 
         <?php
-        echo $this->Html->css('Blog.common.css', array('plugin' => false));
+        echo $this->Html->css('Blog.common.css', null, array('plugin' => false));
 
     .. versionchanged:: 2.1
         The ``block`` option was added.
