@@ -56,6 +56,8 @@ Models
 - ``Model::find('threaded')`` now accepts ``$options['parent']`` if using other field
   then ``parent_id``. Also if the model has TreeBehavior attached and set up with other
   parent field, the threaded find will by default use that.
+- Parameters for queries using prepared statements will now be part of the SQL
+  dump.
 
 Behaviors
 =========
