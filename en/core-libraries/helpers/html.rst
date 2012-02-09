@@ -94,8 +94,23 @@ methods of the HtmlHelper and how to use them.
         <link rel="stylesheet" type="text/css" href="/css/tables.css" />
         <link rel="stylesheet" type="text/css" href="/css/menu.css" />
 
+    You can include css files from any loaded plugin using 
+    :term:`plugin syntax`.  To include ``app/Plugin/DebugKit/webroot/css/toolbar.css``
+    You could use the following::
+
+        <?php
+        echo $this->Html->css('DebugKit.toolbar.css');
+
+    If you want to include a css file which shares a name with a loaded
+    plugin you can do the following.  For example if you had a ``Blog`` plugin,
+    and also wanted to include ``app/webroot/css/Blog.common.css``, you would::
+
+        <?php
+        echo $this->Html->css('Blog.common.css', array('plugin' => false));
+
     .. versionchanged:: 2.1
         The ``block`` option was added.
+        Support for :term:`plugin syntax` was added.
 
 .. php:method:: meta(string $type, string $url = null, array $options = array())
 
@@ -278,8 +293,23 @@ methods of the HtmlHelper and how to use them.
 
         <img src="http://example.com/img/logo.jpg" alt="" />
 
+    You can include image files from any loaded plugin using 
+    :term:`plugin syntax`.  To include ``app/Plugin/DebugKit/webroot/img/icon.png``
+    You could use the following::
+
+        <?php
+        echo $this->Html->image('DebugKit.icon.png');
+
+    If you want to include a image file which shares a name with a loaded
+    plugin you can do the following.  For example if you had a ``Blog`` plugin,
+    and also wanted to include ``app/webroot/js/Blog.icon.png``, you would::
+
+        <?php
+        echo $this->Html->image('Blog.icon.png', array('plugin' => false));
+
     .. versionchanged:: 2.1
         The ``fullBase`` option was added.
+        Support for :term:`plugin syntax` was added.
 
 .. php:method:: link(string $title, mixed $url = null, array $options = array(), string $confirmMessage = false)
 
@@ -505,8 +535,23 @@ methods of the HtmlHelper and how to use them.
         <?php
         echo $this->fetch('scriptBottom');
 
+    You can include script files from any loaded plugin using 
+    :term:`plugin syntax`.  To include ``app/Plugin/DebugKit/webroot/js/toolbar.js``
+    You could use the following::
+
+        <?php
+        echo $this->Html->script('DebugKit.toolbar.js');
+
+    If you want to include a script file which shares a name with a loaded
+    plugin you can do the following.  For example if you had a ``Blog`` plugin,
+    and also wanted to include ``app/webroot/js/Blog.plugins.js``, you would::
+
+        <?php
+        echo $this->Html->script('Blog.plugins.js', array('plugin' => false));
+
     .. versionchanged:: 2.1
         The ``block`` option was added.
+        Support for :term:`plugin syntax` was added.
 
 .. php:method::  scriptBlock($code, $options = array())
 

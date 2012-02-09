@@ -213,6 +213,9 @@ HtmlHelper
 - :php:meth:`HtmlHelper::image()` now has a ``fullBase`` option.
 - :php:meth:`HtmlHelper::video()` has been added.  You can use this method to
   create HTML5 video elements.
+- :term:`plugin syntax` support has been added for
+  :php:meth:`HtmlHelper::script()`, :php:meth:`HtmlHelper::css()`, :php:meth:`HtmlHelper::image()`.
+  You can now easily link to plugin assets using ``Plugin.asset``.
 
 View
 ====
