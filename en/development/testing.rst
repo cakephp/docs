@@ -83,8 +83,8 @@ tests:
    ``app/Test/Case/[Type]`` directories.
 #. The filenames of these files should end in ``Test.php`` instead
    of just .php.
-#. The classes containing tests should extend ``CakeTestCase`` or
-   ``PHPUnit_Framework_TestCase``.
+#. The classes containing tests should extend ``CakeTestCase``,
+   ``ControllerTestCase`` or ``PHPUnit_Framework_TestCase``.
 #. Like other classnames, the test case classnames should match the filename.
    ``RouterTest.php`` should contain ``class RouterTest extends CakeTestCase``.
 #. The name of any method containing a test (i.e. containing an
