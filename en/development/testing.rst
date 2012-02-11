@@ -290,90 +290,6 @@ Test cases have a number of lifecycle callbacks you can use when doing testing:
 * ``tearDownAfterClass`` is called once after test methods in a case are started.
   This method must be *static*.
 
-Testing Models
-==============
-
-Let's say we already have our Article model defined on
-``app/Model/Article.php``, which looks like this::
-
-    <?php
-    class Article extends AppModel {
-        public function published($fields = null) {
-            $params = array(
-                'conditions' => array(
-                    $this->name . '.published' => 1
-                ),
-                'fields' => $fields
-            );
-
-            return $this->find('all', $params);
-        }
-    }
-
-We now want to set up a test that will use this model definition, but through
-fixtures, to test some functionality in the model.  CakePHP test suite loads a
-very minimum set of files (to keep tests isolated), so we have to start by
-loading our model - in this case the Article model which we already defined.
-
-Let's now create a file named ``ArticleTest.php`` in your
-``app/Test/Case/Model`` directory, with the following contents::
-
-    <?php
-    App::uses('Article', 'Model');
-
-    class ArticleTestCase extends CakeTestCase {
-        public $fixtures = array('app.article');
-    }
-
-In our test cases' variable ``$fixtures`` we define the set of fixtures that
-we'll use.  You should remember to include all the fixtures that will have
-queries run against them.
-
-Creating a test method
-----------------------
-
-Let's now add a method to test the function ``published()`` in the
-Article model. Edit the file
-``app/Test/Case/Model/ArticleTest.php`` so it now looks like
-this::
-
-    <?php
-    App::uses('Article', 'Model');
-
-    class ArticleTest extends CakeTestCase {
-        public $fixtures = array('app.article');
-
-        public function setUp() {
-            parent::setUp();
-            $this->Article = ClassRegistry::init('Article');
-        }
-
-        public function testPublished() {
-            $result = $this->Article->published(array('id', 'title'));
-            $expected = array(
-                array('Article' => array('id' => 1, 'title' => 'First Article')),
-                array('Article' => array('id' => 2, 'title' => 'Second Article')),
-                array('Article' => array('id' => 3, 'title' => 'Third Article'))
-            );
-
-            $this->assertEquals($expected, $result);
-        }
-    }
-
-You can see we have added a method called ``testPublished()``. We start by
-creating an instance of our ``Article`` model, and then run our ``published()``
-method. In ``$expected`` we set what we expect should be the proper result (that
-we know since we have defined which records are initially populated to the
-article table.) We test that the result equals our expectation by using the
-``assertEquals`` method. See the :ref:`running-tests` section for more
-information on how to run your test case.
-
-.. note::
-
-    When setting up your Model for testing be sure to use 
-    ``ClassRegistry::init('YourModelName');`` as it knows to use your test 
-    database connection.
-
 Fixtures
 ========
 
@@ -573,7 +489,7 @@ Test cases have a number of lifecycle callbacks you can use when doing testing:
 * ``tearDownAfterClass`` is called once after test methods in a case are started.
   This method must be *static*.
 
-Testing models
+Testing Models
 ==============
 
 Let's say we already have our Article model defined on
