@@ -108,19 +108,31 @@ do is the following::
     <?php
     Configure::write('Config.language', 'fre');
 
-This tells Cake which locale to use (if you use a regional locale,
-such as fr\_FR, it will use the
-`ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_
-locale as a fallback if it doesn't exist), you can change the
-language at any time, e.g. in your bootstrap if you're setting the
-application default language, in your (app) controller beforeFilter
-if it's specific to the request or user, or in fact anytime at all
-before you want a message in a different language.
-To set the language for the current user, store the setting in the
-Session object, like this::
+This tells Cake which locale to use (if you use a regional locale, such as
+fr\_FR, it will use the `ISO 639-2
+<http://www.loc.gov/standards/iso639-2/php/code_list.php>`_ locale as a fallback
+if it doesn't exist), you can change the language at any time during a request.
+e.g. in your bootstrap if you're setting the application default language, in
+your (app) controller beforeFilter if it's specific to the request or user, or
+in fact anytime at all before you want a message in a different language.  To
+set the language for the current user, you can store the setting in the Session
+object, like this::
 
     <?php
     $this->Session->write('Config.language', 'fre');
+
+At the beginning of each request in your controller's ``beforeFilter`` you 
+should configure ``Configure`` as well::
+
+    <?php
+    class AppController extends Controller{
+        public function beforeFilter() {
+            Configure::write('Config.language', $this->Session->read('Config.language'));
+        }
+    }
+
+Doing this will ensure that both :php:class:`I18n` and
+:php:class:`TranslateBehavior` access the same language value.
 
 It's a good idea to serve up public content available in multiple
 languages from a unique url - this makes it easy for users (and
@@ -150,7 +162,7 @@ to set the formats for these things you need to use
 If you pass a locale that doesn't exist on your computer to
 `setlocale <http://www.php.net/setlocale>`_ it will have no
 effect. You can find the list of available locales by running the
-command $locale -a in a terminal.
+command ``locale -a`` in a terminal.
 
 
 .. meta::
