@@ -12,7 +12,7 @@ formatting numbers.
 All of these functions return the formatted number; They do not
 automatically echo the output into the view.
 
-.. php:method:: currency(mixed $number, string $currency= 'USD', $options = array())
+.. php:method:: currency(mixed $number, string $currency= 'USD', array $options = array())
 
     :param float $number: The value to covert.
     :param string $currency: The known currency format to use.
@@ -69,7 +69,7 @@ automatically echo the output into the view.
         // Outputs
         FOO 1,234.56
 
-.. php:method:: addFormat($formatName, $options)
+.. php:method:: addFormat(string $formatName, array $options)
     
     :param string $formatName: The format name to be used in the future
     :param array $options: The array of options for this format.
