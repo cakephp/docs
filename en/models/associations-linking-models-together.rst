@@ -65,8 +65,7 @@ what is termed an 'Alias'. This is an identifier for the
 relationship and can be anything you choose. Usually, you will
 choose the same name as the class that it references. However,
 **aliases for each model must be unique app wide**. E.g. it is
-appropriate to have
-::
+appropriate to have::
 
     <?php
     class User extends AppModel {
@@ -87,8 +86,7 @@ appropriate to have
         public $hasAndBelongsToMany => array('MemberOf' => array('className' => 'Group'));
     }
 
-but the following will not work well in all circumstances:
-::
+but the following will not work well in all circumstances:::
 
     <?php
     class User extends AppModel {
@@ -116,16 +114,13 @@ unexpected behavior.
 
 Cake will automatically create links between associated model
 objects. So for example in your ``User`` model you can access the
-``Recipe`` model as
-::
+``Recipe`` model as::
 
     <?php
     $this->Recipe->someFunction();
 
 Similarly in your controller you can access an associated model
-simply by following your model associations:
-
-::
+simply by following your model associations::
 
     <?php
     $this->User->Recipe->someFunction();
@@ -224,9 +219,7 @@ Possible keys for hasOne association arrays include:
    Profile.
 
 Once this association has been defined, find operations on the User
-model will also fetch a related Profile record if it exists:
-
-::
+model will also fetch a related Profile record if it exists::
 
     //Sample results from a $this->User->find() call.
     
@@ -498,9 +491,7 @@ itself tracks any addition/deleting towards the associated
 field within the parent model table.
 
 The name of the field consists of the singular model name followed
-by a underscore and the word "count".
-
-::
+by a underscore and the word "count"::
 
     my_model_count
 
