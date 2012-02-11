@@ -474,21 +474,6 @@ Fixture directory.  You can also load fixtures from CakePHP core, or plugins::
 Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
 name as the prefix, will load the fixture from the named plugin.
 
-Testcase lifecycle callbacks
-============================
-
-Test cases have a number of lifecycle callbacks you can use when doing testing:
-
-* ``setUp`` is called before every test method.  Should be used to create the
-  objects that are going to be tested, and initialize any data for the test.
-  Always remember to call ``parent::setUp()``
-* ``tearDown`` is called after every test method.  Should be used to cleanup after
-  the test is complete. Always remember to call ``parent::tearDown()``.
-* ``setupBeforeClass`` is called once before test methods in a case are started.
-  This method must be *static*.
-* ``tearDownAfterClass`` is called once after test methods in a case are started.
-  This method must be *static*.
-
 Testing Models
 ==============
 
@@ -641,84 +626,6 @@ check if the returned values are equal to what is expected.
 
 Save this in and execute the test. You should see a green bar and messaging 
 indicating 4 passes.
-
-Testing components
-==================
-
-Lets assume that we want to test a component called TransporterComponent, which
-uses a model called Transporter to provide functionality for other controllers.
-We will use four files:
-
--  A component called TransporterComponent found in
-   ``app/Controller/Component/TransporterComponent.php``
--  A model called Transporter found in
-   ``app/Model/Transporter.php``
--  A fixture called TransporterFixture found in
-   ``app/Test/Fixture/TransporterFixture.php``
--  The testing code found in
-   ``app/Test/Case/TransporterComponentTest.php``
-
-Initializing the component
---------------------------
-
-Since :doc:`/controllers/components`
-we need a controller to access the data in the model.
-
-If the ``startup()`` function of the component looks like this::
-
-    <?php
-    public function startup(Controller $controller) {
-        $this->Transporter = $controller->Transporter;
-    }
-
-then we can just design a really simple fake class::
-
-    <?php
-    class FakeTransporterController {}
-
-and assign values into it like this::
-
-    <?php
-    $Collection = new ComponentCollection();
-    $this->TransporterComponent = new TransporterComponent($Collection);
-    $controller = new FakeTransporterController();
-    $controller->Transporter = ClassRegistry::init('Transporter');
-    $this->TransporterComponent->startup($controller);
-
-Creating a test method
-----------------------
-
-Just create a class that extends CakeTestCase and start writing tests::
-
-    <?php
-    App::uses('TransporterComponent', 'Controller/Component');
-
-    class TransporterComponentTest extends CakeTestCase {
-        public $fixtures = array('app.transporter');
-
-        public function setUp() {
-            parent::setUp();
-            $Collection = new ComponentCollection();
-            $this->TransporterComponent = new TransporterComponent($Collection);
-            $controller = new FakeTransporterController();
-            $controller->Transporter = ClassRegistry::init('Transporter');
-            $this->TransporterComponentTest->startup($controller);
-        }
-
-        function testGetTransporter() {
-            $result = $this->TransporterComponent->getTransporter("12345", "Sweden", "54321", "Sweden");
-            $this->assertEquals(1, $result, "SP is best for 1xxxx-5xxxx");
-
-            $result = $this->TransporterComponent->getTransporter("41234", "Sweden", "44321", "Sweden");
-            $this->assertEquals(2, $result, "WSTS is best for 41xxx-44xxx");
-
-            $result = $this->TransporterComponent->getTransporter("41001", "Sweden", "41870", "Sweden");
-            $this->assertEquals(3, $result, "GL is best for 410xx-419xx");
-
-            $result = $this->TransporterComponent->getTransporter("12345", "Sweden", "54321", "Norway");
-            $this->assertEquals(0, $result, "No one can service Norway");
-        }
-    }
 
 Testing Controllers
 ===================
