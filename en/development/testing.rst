@@ -564,69 +564,6 @@ information on how to run your test case.
     ``ClassRegistry::init('YourModelName');`` as it knows to use your test 
     database connection.
 
-Testing Helpers
-===============
-
-Since a decent amount of logic resides in Helper classes, it's
-important to make sure those classes are covered by test cases.
-
-Helper testing is a bit similar to the same approach for Components. First we 
-create an example helper to test. The ``CurrencyRendererHelper`` will help us 
-display currencies in our views and for simplicity only has one method 
-``usd()``.
-
-::
-
-    <?php
-    // app/View/Helper/CurrencyRendererHelper.php
-    class CurrencyRendererHelper extends AppHelper {
-        public function usd($amount) {
-            return 'USD ' . number_format($amount, 2, '.', ',');
-        }
-    }
-
-Here we set the decimal places to 2, decimal separator to dot, thousands
-separator to comma, and prefix the formatted number with 'USD' string.
-
-Now we create our tests::
-
-    <?php
-    // app/Test/Case/View/Helper/CurrencyRendererHelperTest.php
-
-    App::uses('Controller', 'Controller');
-    App::uses('View', 'View');
-    App::uses('CurrencyRendererHelper', 'View/Helper');
-
-    class CurrencyRendererHelperTest extends CakeTestCase {
-        public $CurrencyRenderer = null;
-
-        // Here we instantiate our helper
-        public function setUp() {
-            parent::setUp();
-            $Controller = new Controller();
-            $View = new View($Controller);
-            $this->CurrencyRenderer = new CurrencyRendererHelper($View);
-        }
-
-        // Testing the usd() function
-        public function testUsd() {
-            $this->assertEquals('USD 5.30', $this->CurrencyRenderer->usd(5.30));
-
-            // We should always have 2 decimal digits
-            $this->assertEquals('USD 1.00', $this->CurrencyRenderer->usd(1));
-            $this->assertEquals('USD 2.05', $this->CurrencyRenderer->usd(2.05));
-
-            // Testing the thousands separator
-            $this->assertEquals('USD 12,000.70', $this->CurrencyRenderer->usd(12000.70));
-        }
-    }
-
-Here, we call ``usd()`` with different parameters and tell the test suite to
-check if the returned values are equal to what is expected.
-
-Save this in and execute the test. You should see a green bar and messaging 
-indicating 4 passes.
-
 Testing Controllers
 ===================
 
