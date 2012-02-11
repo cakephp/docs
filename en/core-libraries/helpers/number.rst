@@ -12,7 +12,7 @@ formatting numbers.
 All of these functions return the formatted number; They do not
 automatically echo the output into the view.
 
-.. php:method:: currency(mixed $number, string $currency= 'USD', array $options = array())
+.. php:method:: currency(mixed $number, string $currency = 'USD', array $options = array())
 
     :param float $number: The value to covert.
     :param string $currency: The known currency format to use.
@@ -29,36 +29,54 @@ automatically echo the output into the view.
     parameter is used to choose a predefined currency formatting
     scheme:
 
-    $currency
-        1234.56, formatted by currency type
-    EUR
-        € 1.236,33
-    GBP
-        £ 1,236.33
-    USD
-        $ 1,236.33
+    +---------------------+----------------------------------------------------+
+    | $currency           | 1234.56, formatted by currency type                |
+    +=====================+====================================================+
+    | EUR                 | € 1.236,33                                         |
+    +---------------------+----------------------------------------------------+
+    | GBP                 | £ 1,236.33                                         |
+    +---------------------+----------------------------------------------------+
+    | USD                 | $ 1,236.33                                         |
+    +---------------------+----------------------------------------------------+
 
     The third parameter is an array of options for further defining the
     output. The following options are available:
 
-    Option
-        Description
-    before
-        The currency symbol to place before whole numbers ie. '$'
-    after
-        The currency symbol to place after decimal numbers ie. 'c'. Set to boolean false to use no decimal symbol. eg. 0.35 => $0.35.
-    zero
-        The text to use for zero values, can be a string or a number. ie. 0, 'Free!'
-    places
-        Number of decimal places to use. ie. 2
-    thousands
-        Thousands separator ie. ','
-    decimals
-        Decimal separator symbol ie. '.'
-    negative
-        Symbol for negative numbers. If equal to '()', the number will be wrapped with ( and )
-    escape
-        Should the output be htmlentity escaped? Defaults to true
+    +---------------------+----------------------------------------------------+
+    | Option              | Description                                        |
+    +=====================+====================================================+
+    | before              | The currency symbol to place before whole numbers  |
+    |                     | ie. '$'                                            |
+    +---------------------+----------------------------------------------------+
+    | after               | The currency symbol to place after decimal numbers |
+    |                     | ie. 'c'. Set to boolean false to use no decimal    |
+    |                     | symbol. eg. 0.35 => $0.35.                         |
+    +---------------------+----------------------------------------------------+
+    | zero                | The text to use for zero values, can be a string or|
+    |                     | a number. ie. 0, 'Free!'                           |
+    +---------------------+----------------------------------------------------+
+    | places              | Number of decimal places to use. ie. 2             |
+    +---------------------+----------------------------------------------------+
+    | thousands           | Thousands separator ie. ','                        |
+    +---------------------+----------------------------------------------------+
+    | decimals            | Decimal separator symbol ie. '.'                   |
+    +---------------------+----------------------------------------------------+
+    | negative            | Symbol for negative numbers. If equal to '()', the |
+    |                     | number will be wrapped with ( and )                |
+    +---------------------+----------------------------------------------------+
+    | escape              | Should the output be htmlentity escaped? Defaults  |
+    |                     | to true                                            |
+    +---------------------+----------------------------------------------------+
+    | wholeSymbol         | String to use for whole numbers ie. ' dollars'     |
+    +---------------------+----------------------------------------------------+
+    | wholePosition       | Either 'before' or 'after' to place the whole      |
+    |                     | symbol                                             |
+    +---------------------+----------------------------------------------------+
+    | fractionSymbol      | String to use for fraction numbers ie. ' cents'    |
+    +---------------------+----------------------------------------------------+
+    | fractionPosition    | Either 'before' or 'after' to place the fraction   |
+    |                     | symbol                                             |
+    +---------------------+----------------------------------------------------+
 
     If a non-recognized $currency value is supplied, it is prepended to
     a USD formatted number. For example::
