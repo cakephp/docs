@@ -110,6 +110,8 @@ logging, internationalization and more.
     core-utility-libraries/set
     core-utility-libraries/string
     core-utility-libraries/xml
+    core-utility-libraries/time
+    core-utility-libraries/number
 
 
 .. meta::

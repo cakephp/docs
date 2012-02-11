@@ -173,6 +173,44 @@ header `If-Modified-Since`, and the response will have a 304 status.
 Helpers
 =======
 
+To allow easier use outside of the ``View`` layer, methods from
+:php:class:`TimeHelper`, :php:class:`TextHelper`, and :php:class:`NumberHelper`
+helpers have been extracted to :php:class:`CakeTime`, :php:class:`String`,
+and :php:class:`CakeNumber` classes respectively.
+
+To use the new utility classes::
+
+    <?php
+    class AppController extends Controller {
+
+        public function log($msg) {
+            $msg .= String::truncate($msg, 100);
+            parent::log($msg);
+        }
+    }
+
+You can override the default class to use by creating a new class in your
+``APP/Utility`` folder, e.g.: ``Utility/MyAwesomeStringClass.php``, and specify
+it in ``engine`` key::
+
+    <?php
+    // Utility/MyAwesomeStringClass.php
+    class MyAwesomeStringClass extends String {
+        // my truncate is better than yours
+        public function static truncate($text, $length = 100, $options = array()) {
+            return null;
+        }
+    }
+
+    // Controller/AppController.php
+    class AppController extends Controller {
+        public $helpers = array(
+            'Text' => array(
+                'engine' => 'MyAwesomeStringClass',
+                ),
+            );
+    }
+
 HtmlHelper
 -----------
 A new function :php:meth:`HtmlHelper::media()` has been added for HTML5's audio/video element generation.
