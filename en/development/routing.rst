@@ -28,7 +28,7 @@ visited routes at the top of the routes file if possible.  This will
 save having to check a number of routes that won't match on each request.
 
 Routes are parsed and matched in the order they are connected in.
-If you define two similar routes, the first defined defined route will 
+If you define two similar routes, the first defined route will 
 have higher priority over the one defined latter.  After connecting routes you
 can manipulate the order of routes using :php:meth:`Router::promote()`.
 
@@ -187,7 +187,7 @@ first match found.
 
 If you are planning to use custom named arguments with your route,
 you have to make the router aware of it using the
-:php:meth`Router::connectNamed()` function. So if you want the above route
+:php:meth:`Router::connectNamed()` function. So if you want the above route
 to match urls like ``/cooks/some_action/type:chef`` we do::
 
     <?php
