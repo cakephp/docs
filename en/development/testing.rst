@@ -885,6 +885,7 @@ set correctly by the ``adjust`` method in our component. We create the file
 
     <?php
     App::uses('Controller', 'Controller');
+    App::uses('ComponentCollection', 'Controller');
     App::uses('PagematronComponent', 'Controller/Component');
 
     // A fake controller to test against
