@@ -6,7 +6,7 @@ Authentication
 Identifying, authenticating and authorizing users is a common part of
 almost every web application.  In CakePHP AuthComponent provides a
 pluggable way to do these tasks.  AuthComponent allows you to combine
-authentication objects, and authorization objects to create flexible
+authentication objects and authorization objects to create flexible
 ways of identifying and checking user authorization.
 
 .. _authentication-objects:
@@ -16,7 +16,7 @@ Authentication
 
 Authentication is the process of identifying users by provided
 credentials and ensuring that users are who they say they are.
-Generally this is done through a username and password, that are checked
+Generally this is done through a username and password that are checked
 against a known list of users. In CakePHP, there are several built in
 ways of authenticating users stored in your application.
 
@@ -34,17 +34,17 @@ Choosing an Authentication type
 
 Generally you'll want to offer form based authentication. It is the easiest for
 users using a web-browser to use.  If you are building an API or webservice, you
-may want to consider basic authentication or digest authentication.  The key
-differences between digest and basic authentication are mostly related to how
-passwords are handled.  In basic authentication, the username and password are
-transmitted as plain-text to the server.  This makes basic authentication
+may want to consider Basic authentication or Digest authentication.  The key
+differences between Digest and Basic authentication are mostly related to how
+passwords are handled.  In Basic authentication, the username and password are
+transmitted as plain-text to the server.  This makes Basic authentication
 un-suitable for applications without SSL, as you would end up exposing sensitive
 passwords.  Digest authentication uses a digest hash of the username, password,
-and a few other details.  This makes digest authentication more appropriate for
+and a few other details.  This makes Digest authentication more appropriate for
 applications without SSL encryption.
 
-You can also use authentication systems like openid as well, however openid is
-not part of CakePHP core.
+You can also use authentication systems like OpenID as well; however, OpenID is
+not part of the CakePHP core.
 
 Configuring Authentication handlers
 -----------------------------------
@@ -59,7 +59,7 @@ authentication by throwing an exception.  You will need to catch any
 thrown exceptions, and handle them as needed.
 
 You can configure authentication handlers in your controller's
-``beforeFilter`` or, in the ``$components`` array.  You can pass
+``beforeFilter`` or in the ``$components`` array.  You can pass
 configuration information into each authentication object, using an
 array::
 
@@ -76,7 +76,7 @@ array::
 In the second example you'll notice that we had to declare the
 ``userModel`` key twice. To help you keep your code DRY, you can use the
 ``all`` key.  This special key allows you to set settings that are passed
-to every attached object.  The all key is also exposed as
+to every attached object.  The ``all`` key is also exposed as
 ``AuthComponent::ALL``::
 
     <?php
@@ -88,17 +88,17 @@ to every attached object.  The all key is also exposed as
     );
 
 In the above example, both ``Form`` and ``Basic`` will get the settings
-defined for the 'all' key.  Any settings passed to a specific
-authentication object will override the matching key in the 'all' key.
+defined for the ``all`` key.  Any settings passed to a specific
+authentication object will override the matching key in the ``all`` key.
 The core authentication objects support the following configuration
-keys.
+keys::
 
 - ``fields`` The fields to use to identify a user by.
 - ``userModel`` The model name of the User, defaults to User.
 - ``scope`` Additional conditions to use when looking up and
   authenticating users, i.e. ``array('User.is_active' => 1).``
 
-To configure different fields for user in ``$components`` array::
+To configure different fields for user in the ``$components`` array::
 
     <?php
     // Pass settings in $components array
@@ -114,10 +114,10 @@ To configure different fields for user in ``$components`` array::
 
 .. note::
 
-    Do not put other Auth configuration keys (like authError, loginAction etc)
+    Do not put other Auth configuration keys (like authError, loginAction, etc)
     within the authenticate or Form element. They should be at the same level as
     the authenticate key.
-    Above setup with other Auth configurations should look something like::
+    The above setup with other Auth configurations should look something like::
 
         <?php
         // Pass settings in $components array
@@ -138,11 +138,11 @@ To configure different fields for user in ``$components`` array::
         );
 
 In addition to the common configuration, Basic authentication supports
-the following keys:
+the following key:
 
 - ``realm`` The realm being authenticated. Defaults to ``env('SERVER_NAME')``.
 
-In addition to the common configuration Digest authentication supports
+In addition to the common configuration, Digest authentication supports
 the following keys:
 
 - ``realm`` The realm authentication is for, Defaults to the servername.
@@ -155,8 +155,8 @@ Creating Custom Authentication objects
 --------------------------------------
 
 Because authentication objects are pluggable, you can create custom
-authentication objects in your application or plugins.  If for example
-you wanted to create an OpenID authentication object.  In
+authentication objects in your application or plugins.  If, for example,
+you wanted to create an OpenID authentication object  in
 ``app/Controller/Component/Auth/OpenidAuthenticate.php`` you could put
 the following::
 
@@ -170,19 +170,19 @@ the following::
     }
 
 Authentication objects should return ``false`` if they cannot identify the
-user.  And an array of user information if they can. It's not required
+user  and an array of user information if they can. It's not required
 that you extend ``BaseAuthenticate``, only that your authentication object
 implements an ``authenticate()`` method.  The ``BaseAuthenticate`` class
 provides a number of helpful methods that are commonly used.  You can
 also implement a ``getUser()`` method if your authentication object needs
 to support stateless or cookie-less authentication. See the sections on
-basic and digest authentication below for more information.
+Basic and Digest authentication below for more information.
 
 Using custom authentication objects
 -----------------------------------
 
-Once you've created your custom authentication object, you can use them
-by including them in AuthComponents authenticate array::
+Once you've created your custom authentication objects, you can use them
+by including them in the AuthComponents authenticate array::
 
     <?php
     $this->Auth->authenticate = array(
@@ -228,7 +228,7 @@ or :php:attr:`AuthComponent::$loginRedirect`.  If the login is unsuccessful, a f
 Using Digest and Basic Authentication for logging in
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Because basic and digest authentication don't require an initial POST to
+Because Basic and Digest authentication don't require an initial POST to
 be performed before they initiate the login sequence, your ``login()``
 function will look a bit different than when using
 ``FormAuthentication``::
@@ -242,11 +242,11 @@ function will look a bit different than when using
         }
     }
 
-Once logged in, users using digest and basic auth are not required to
+Once logged in, users using Basic and Digest authentication are not required to
 have cookies.  In fact, all authentication objects are able to provide
 *stateless* authentication through implementing the ``getUser()`` method.
-If the client supports cookies, basic and digest auth will store a user
-in session much like any other authentication object.  If a client
+If the client supports cookies, Basic and Digest authentication will store a user
+in the session much like any other authentication object.  If a client
 doesn't support cookies, (such as a simple HTTP client built on top of
 CURL) stateless authentication is also supported.  Stateless
 authentication will re-verify the user's credentials on each request,
@@ -258,15 +258,15 @@ Creating stateless authentication systems
 
 Authentication objects can implement a ``getUser()`` method that can be
 used to support user login systems that don't rely on cookies.  A
-typical getUser method looks at the request/environment and uses the
-information there to confirm the identity of the user.  HTTP Basic
-authentication for example uses ``$_SERVER['PHP_AUTH_USER]`` and
+typical ``getUser()`` method looks at the request/environment and uses the
+information there to confirm the identity of the user.  For example, HTTP Basic
+authentication uses ``$_SERVER['PHP_AUTH_USER]`` and
 ``$_SERVER['PHP_AUTH_PW]`` for the username and password fields.  On each
 request, if a client doesn't support cookies, these values are used to
-re-identify the user and ensure they are valid user.  As with
-authentication object's ``authenticate()`` method the ``getUser()`` method
-should return an array of user information on success, and ``false`` on
-failure.::
+re-identify the user and ensure they are valid user.  As with the
+authentication object's ``authenticate()`` method, the ``getUser()`` method
+should return an array of user information on success and ``false`` on
+failure::
 
     <?php
     public function getUser($request) {
@@ -279,7 +279,7 @@ failure.::
         return $this->_findUser($username, $pass);
     }
 
-The above is how you could implement getUser method for HTTP basic
+The above is how you could implement ``getUser()`` method for HTTP basic
 authentication.  The ``_findUser()`` method is part of ``BaseAuthenticate``
 and identifies a user based on a username and password.
 
@@ -290,7 +290,7 @@ Displaying auth related flash messages
 In order to display the session error messages that Auth generates, you
 need to add the following code to your layout. Add the following two
 lines to the ``app/View/Layouts/default.ctp`` file in the body section
-preferable before the content_for_layout line.::
+preferable before the content_for_layout line::
 
     <?php
     echo $this->Session->flash();
@@ -299,14 +299,14 @@ preferable before the content_for_layout line.::
 
 You can customize the error messages, and flash settings AuthComponent
 uses.  Using ``$this->Auth->flash`` you can configure the parameters
-AuthComponent uses for setting flash messages.  The available keys are
+AuthComponent uses for setting flash messages.  The available keys are::
 
 - ``element`` - The element to use, defaults to 'default'.
 - ``key`` - The key to use, defaults to 'auth'
 - ``params`` - The array of additional params to use, defaults to array()
 
 In addition to the flash message settings you can customize other error
-messages AuthComponent uses. In your controller's beforeFilter, or
+messages AuthComponent uses. In your controller's beforeFilter or
 component settings you can use ``authError`` to customize the error used
 for when authorization fails::
 
@@ -346,10 +346,10 @@ Hashing passwords for digest authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Because Digest authentication requires a password hashed in the format
-defined by the RFC.  In order to correctly hash a password for use with
+defined by the RFC in order to correctly hash a password for use with
 Digest authentication you should use the special password hashing
-function on ``DigestAuthenticate``.  If you are going to be combining
-digest authentication with any other authentication strategies, it's also
+function in ``DigestAuthenticate``.  If you are going to be combining
+Digest authentication with any other authentication strategies, it's also
 recommended that you store the digest password in a separate column,
 from the normal password hash::
 
@@ -364,8 +364,8 @@ from the normal password hash::
         }
     }
 
-Passwords for digest authentication need a bit more information than
-other password hashes, based on the RFC for digest authentication. If
+Passwords for Digest authentication need a bit more information than
+other password hashes, based on the RFC for Digest authentication. If
 you use AuthComponent::password() for digest hashes you will not be able
 to login.
 
@@ -397,7 +397,7 @@ calling ``$this->Auth->login()`` with the user data you want to 'login'::
 .. warning::
 
     Be sure to manually add the new User id to the array passed to the login
-    method. Otherwise you won't have the user id available.
+    method otherwise you won't have the user id available.
 
 Accessing the logged in user
 ----------------------------
@@ -429,7 +429,7 @@ application::
         $this->redirect($this->Auth->logout());
     }
 
-Logging out users that logged in with Digest or Basic auth is difficult
+Logging out users that logged in with Digest or Basic authentication is difficult
 to accomplish for all clients.  Most browsers will retain credentials
 for the duration they are still open.  Some clients can be forced to
 logout by sending a 401 status code.  Changing the authentication realm
@@ -442,11 +442,11 @@ Authorization
 
 Authorization is the process of ensuring that an
 identified/authenticated user is allowed to access the resources they
-are requesting.  If enabled ``AuthComponent`` can automatically check
+are requesting.  If enabled, ``AuthComponent`` can automatically check
 authorization handlers and ensure that logged in users are allowed to
 access the resources they are requesting.  There are several built-in
-authorization handlers, and you can create custom ones for your
-application, or as part of a plugin.
+authorization handlers and you can create custom ones for your
+application or as part of a plugin.
 
 - ``ActionsAuthorize`` Uses the AclComponent to check for permissions on
   an action level.
@@ -463,16 +463,16 @@ You configure authorization handlers using ``$this->Auth->authorize``.
 You can configure one or many handlers for authorization.  Using
 multiple handlers allows you to support different ways of checking
 authorization.  When authorization handlers are checked, they will be
-called in the order they are declared.  Handlers should return false, if
-they are unable to check authorization, or the check has failed.
+called in the order they are declared.  Handlers should return false if
+either they are unable to check authorization or the check has failed.
 Handlers should return true if they were able to check authorization
 successfully. Handlers will be called in sequence until one passes.  If
 all checks fail, the user will be redirected to the page they came from.
 Additionally you can halt all authorization by throwing an exception.
-You will need to catch any thrown exceptions, and handle them.
+You will need to catch any thrown exceptions and handle them.
 
 You can configure authorization handlers in your controller's
-``beforeFilter`` or, in the ``$components`` array.  You can pass
+``beforeFilter`` or in the ``$components`` array.  You can pass
 configuration information into each authorization object, using an
 array::
 
@@ -488,7 +488,7 @@ array::
 
 Much like ``Auth->authenticate``,  ``Auth->authorize``, helps you
 keep your code DRY, by using the ``all`` key.  This special key allows you
-to set settings that are passed to every attached object.  The all key
+to set settings that are passed to every attached object.  The ``all`` key
 is also exposed as ``AuthComponent::ALL``::
 
     <?php
@@ -500,8 +500,8 @@ is also exposed as ``AuthComponent::ALL``::
     );
 
 In the above example, both the ``Actions`` and ``Controller`` will get the
-settings defined for the 'all' key.  Any settings passed to a specific
-authorization object will override the matching key in the 'all' key.
+settings defined for the ``all`` key.  Any settings passed to a specific
+authorization object will override the matching key in the ``all`` key.
 The core authorize objects support the following configuration keys.
 
 - ``actionPath`` Used by ``ActionsAuthorize`` to locate controller action
@@ -509,14 +509,14 @@ The core authorize objects support the following configuration keys.
 - ``actionMap`` Action -> CRUD mappings.  Used by ``CrudAuthorize`` and
   authorization objects that want to map actions to CRUD roles.
 - ``userModel`` The name of  the ARO/Model node user information can be found
-  under.  Used with ActionsAuthorize,
+  under.  Used with ``ActionsAuthorize``,
 
 
 Creating Custom Authorize objects
 ---------------------------------
 
 Because authorize objects are pluggable, you can create custom authorize
-objects in your application or plugins.  If for example you wanted to
+objects in your application or plugins.  If, for example, you wanted to
 create an LDAP authorize object.  In
 ``app/Controller/Component/Auth/LdapAuthorize.php`` you could put the
 following::
@@ -541,7 +541,7 @@ Using custom authorize objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Once you've created your custom authorize object, you can use them by
-including them in AuthComponents authorize array::
+including them in the AuthComponents authorize array::
 
     <?php
     $this->Auth->authorize = array(
@@ -553,7 +553,7 @@ Using no authorization
 ----------------------
 
 If you'd like to not use any of the built-in authorization objects, and
-want to handle things entirely outside of AuthComponent you can set
+want to handle things entirely outside of AuthComponent, you can set
 ``$this->Auth->authorize = false;``.  By default AuthComponent starts off
 with ``authorize = false``.  If you don't use an authorization scheme,
 make sure to check authorization yourself in your controller's
@@ -563,11 +563,11 @@ beforeFilter, or with another component.
 Making actions public
 ---------------------
 
-There are often times controller actions that you wish to remain
-entirely public, or that don't require users to be logged in.
+Often there are controller actions you wish to remain
+entirely public or that don't require users to be logged in.
 AuthComponent is pessimistic, and defaults to denying access. You can
 mark actions as public actions by using ``AuthComponent::allow()``.  By
-marking actions as public, AuthComponent, will not check for a logged in
+marking actions as public, AuthComponent will not check for a logged in
 user, nor will authorize objects be checked::
 
     <?php
@@ -586,8 +586,8 @@ also supply an array containing all the action names.
 Making actions require authorization
 ------------------------------------
 
-If after making actions public, you want to revoke the public access.
-You can do so using ``AuthComponent::deny()``::
+If, after making actions public, you want to revoke the public access
+you can do so using ``AuthComponent::deny()``::
 
     <?php
     // remove one action
@@ -606,9 +606,9 @@ also supply an array containing all the action names.
 Mapping actions when using CrudAuthorize
 ----------------------------------------
 
-When using CrudAuthorize or any other authorize objects that use action
+When using ``CrudAuthorize`` or any other authorize objects that use action
 mappings, it might be necessary to map additional methods.  You can
-map actions -> CRUD permissions using mapAction().  Calling this on
+map actions -> CRUD permissions using ``mapAction()``.  Calling this on
 AuthComponent will delegate to all the of the configured authorize
 objects, so you can be sure the settings were applied every where::
 
@@ -618,14 +618,14 @@ objects, so you can be sure the settings were applied every where::
         'view' => array('show', 'display')
     ));
 
-The keys for mapActions should be the CRUD permissions you want to set,
+The keys for ``mapActions`` should be the CRUD permissions you want to set,
 while the values should be an array of all the actions that are mapped
 to the CRUD permission.
 
 Using ControllerAuthorize
 -------------------------
 
-ControllerAuthorize allows you to handle authorization checks in a
+``ControllerAuthorize`` allows you to handle authorization checks in a
 controller callback. This is ideal when you have very simple
 authorization, or you need to use a combination of models + components
 to do your authorization, and don't want to create a custom authorize
@@ -657,8 +657,8 @@ the admin prefix.
 Using ActionsAuthorize
 ----------------------
 
-ActionsAuthorize integrates with the AclComponent, and provides a fine
-grained per action ACL check on each request.  ActionsAuthorize is often
+``ActionsAuthorize`` integrates with the AclComponent, and provides a fine
+grained per action ACL check on each request.  ``ActionsAuthorize`` is often
 paired with DbAcl to give dynamic and flexible permission systems that
 can be edited by admin users through the application.  It can however,
 be combined with other Acl implementations such as IniAcl and custom
@@ -672,7 +672,7 @@ map requests to CRUD operations.  Provides the ability to authorize
 using CRUD mappings. These mapped results are then checked in the
 AclComponent as specific permissions.
 
-For example, taking ``/posts/index`` as the current request.  The default
+For example, assume ``/posts/index`` is the current request.  The default
 mapping for ``index``, is a ``read`` permission check. The Acl check would
 then be for the ``posts`` controller with the ``read`` permission.  This
 allows you to create permission systems that focus more on what is being
@@ -804,7 +804,7 @@ and authentication mechanics in CakePHP.
 
 .. php:method:: loggedIn()
 
-    Returns true if the current client is a logged in user, or false if
+    Returns true if the current client is a logged in user or false if
     they are not.
 
 .. php:method:: login($user)
@@ -827,7 +827,7 @@ and authentication mechanics in CakePHP.
 
     Maps action names to CRUD operations. Used for controller-based 
     authentication. Make sure to configure the authorize property before 
-    calling this method. As it delegates $map to all the attached authorize 
+    calling this method as it delegates $map to all the attached authorize 
     objects.
 
 .. php:staticmethod:: password($pass)
@@ -852,7 +852,7 @@ and authentication mechanics in CakePHP.
 
 .. php:staticmethod:: user($key = null)
 
-    :param string $key:  The user data key you want to fetch if null,
+    :param string $key:  The user data key you want to fetch. If null,
         all user data will be returned.  Can also be called as an instance
         method.
 
