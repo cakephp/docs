@@ -487,8 +487,8 @@ array::
     );
 
 Much like ``Auth->authenticate``,  ``Auth->authorize``, helps you
-keep your code DRY, by using the ``all`` key.  This special key allows you
-to set settings that are passed to every attached object.  The all key
+keep your code DRY, by using the ``all`` key. This special key allows you
+to set settings that are passed to every attached object. The all key
 is also exposed as ``AuthComponent::ALL``::
 
     <?php
@@ -500,7 +500,7 @@ is also exposed as ``AuthComponent::ALL``::
     );
 
 In the above example, both the ``Actions`` and ``Controller`` will get the
-settings defined for the 'all' key.  Any settings passed to a specific
+settings defined for the 'all' key. Any settings passed to a specific
 authorization object will override the matching key in the 'all' key.
 The core authorize objects support the following configuration keys.
 
@@ -508,16 +508,16 @@ The core authorize objects support the following configuration keys.
   ACO's in the ACO tree.
 - ``actionMap`` Action -> CRUD mappings.  Used by ``CrudAuthorize`` and
   authorization objects that want to map actions to CRUD roles.
-- ``userModel`` The name of  the ARO/Model node user information can be found
-  under.  Used with ActionsAuthorize,
+- ``userModel`` The name of the ARO/Model node user information can be found
+  under. Used with ActionsAuthorize.
 
 
 Creating Custom Authorize objects
 ---------------------------------
 
 Because authorize objects are pluggable, you can create custom authorize
-objects in your application or plugins.  If for example you wanted to
-create an LDAP authorize object.  In
+objects in your application or plugins. If for example you wanted to
+create an LDAP authorize object. In
 ``app/Controller/Component/Auth/LdapAuthorize.php`` you could put the
 following::
 
