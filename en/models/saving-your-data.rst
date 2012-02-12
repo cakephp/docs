@@ -34,7 +34,7 @@ model to save data to a database table::
                 $this->redirect('/recipes');
             }
         }
-     
+
         // If no form data, find the recipe to be edited
         // and hand it to the view.
         $this->set('recipe', $this->Recipe->findById($id));
@@ -138,8 +138,8 @@ Otherwise a new record is created::
     // Create: id isn't set or is null
     $this->Recipe->create();
     $this->Recipe->save($this->request->data);
-    
-    // Update: id is set to a numerical value 
+
+    // Update: id is set to a numerical value
     $this->Recipe->id = 2;
     $this->Recipe->save($this->request->data);
 
@@ -203,7 +203,7 @@ year, the update call might look something like::
 
     <?php
     $this_year = date('Y-m-d h:i:s', strtotime('-1 year'));
-    
+
     $this->Baker->updateAll(
         array('Baker.approved' => true),
         array('Baker.created <=' => $this_year)
@@ -244,12 +244,13 @@ options may be used:
 * ``atomic``: If true (default), will attempt to save all records in a single transaction.
   Should be set to false if database/table does not support transactions.
 *  ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
+*  ``deep``: (since 2.1) If set to true, also associated data is saved, see also saveAssociated
 
 For saving multiple records of single model, $data needs to be a
 numerically indexed array of records like this::
 
     <?php
-    array(
+    $data = array(
         array('title' => 'title 1'),
         array('title' => 'title 2'),
     )
@@ -264,11 +265,23 @@ numerically indexed array of records like this::
 It is also acceptable to have the data in the following format::
 
     <?php
-    array(
+    $data = array(
         array('Article' => array('title' => 'title 1')),
         array('Article' => array('title' => 'title 2')),
     )
 
+To save also associated data with ``$options['deep'] = true`` (since 2.1), the two above examples would look like::
+
+    <?php
+    $data = array(
+        array('title' => 'title 1', 'Assoc' => array('field' => 'value')),
+        array('title' => 'title 2'),
+    )
+    $data = array(
+        array('Article' => array('title' => 'title 1'), 'Assoc' => array('field' => 'value')),
+        array('Article' => array('title' => 'title 2')),
+    )
+    $Model->saveMany($data, array('deep' => true));
 Keep in mind that if you want to update a record instead of creating a new one
 you just need to add the primary key index to the data row::
 
@@ -290,6 +303,8 @@ options may be used:
 * ``atomic``: If true (default), will attempt to save all records in a single transaction.
   Should be set to false if database/table does not support transactions.
 *  ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
+*  ``deep``: (since 2.1) If set to true, not only directly associated data is saved,
+  but deeper nested associated data as well. Defaults to false.
 
 For saving a record along with its related record having a hasOne
 or belongsTo association, the data array should be like this::
@@ -315,15 +330,48 @@ association, the data array should be like this::
 
 .. note::
 
-    Saving related data with ``saveAssociated()`` will only work for directly
-    associated models. If successful, the foreign key of the main model will be stored in 
+    If successful, the foreign key of the main model will be stored in
     the related models' id field, i.e. $this->RelatedModel->id.
 
 .. warning::
-    
+
     Be careful when checking saveAssociated calls with atomic option set to
     false. It returns an array instead of boolean.
 
+.. versionchanged:: 2.1
+You can now save deeper associated data as well with setting ``$options['deep'] = true;``
+
+For saving a record along with its related records having hasMany
+association and deeper associated Comment belongsTo User data as well,
+the data array should be like this::
+
+    <?php
+    $data = array(
+        'Article' => array('title' => 'My first article'),
+        'Comment' => array(
+            array('body' => 'Comment 1', 'user_id' => 1),
+            array('body' => 'Save a new user as well', 'User' => array('first' => 'mad', 'last' => 'coder'))
+        ),
+    )
+
+And save this data with::
+
+    <?php
+    $Article->saveAssociated($data, array('deep' => true));
+
+.. versionchanged:: 2.1
+``Model::saveAll()`` and friends now support passing the `fieldList` for multiple models. Example::
+
+    <?php
+    $this->SomeModel->saveAll($data, array(
+        'fieldList' => array(
+            'SomeModel' => array('field_1'),
+            'AssociatedModel' => array('field_2', 'field_3')
+        )
+    ));
+    ?>
+    The fieldList will be an array of model aliases as keys and arrays with fields as values.
+    The modelnames are not nested like in the data to be saved.
 
 :php:meth:`Model::saveAll(array $data = null, array $options = array())`
 ========================================================================
@@ -413,11 +461,11 @@ models (we'll assume that Company hasMany Account)::
     echo $form->input('Company.name', array('label' => 'Company name'));
     echo $form->input('Company.description');
     echo $form->input('Company.location');
-    
+
     echo $form->input('Account.0.name', array('label' => 'Account name'));
     echo $form->input('Account.0.username');
     echo $form->input('Account.0.email');
-    
+
     echo $form->end('Add');
 
 Take a look at the way we named the form fields for the Account
@@ -484,7 +532,7 @@ a look at the following code.::
        <?php echo $this->Form->input('CourseMembership.grade'); ?>
        <button type="submit">Save</button>
    <?php echo  $this->Form->end(); ?>
-        
+
 
 The data array will look like this when submitted.::
 
@@ -550,9 +598,9 @@ independently and at a later point associate the two together with
 a CourseMembership. So you might have a form that allows selection
 of existing students and courses from picklists or ID entry and
 then the two meta-fields for the CourseMembership, e.g.::
-        
+
         // View/CourseMemberships/add.ctp
-        
+
         <?php echo $form->create('CourseMembership'); ?>
             <?php echo $this->Form->input('Student.id', array('type' => 'text', 'label' => 'Student ID', 'default' => 1)); ?>
             <?php echo $this->Form->input('Course.id', array('type' => 'text', 'label' => 'Course ID', 'default' => 1)); ?>
@@ -605,7 +653,7 @@ $recipe\_id is already set to something)::
 
     <?php echo $this->Form->create('Tag');?>
         <?php echo $this->Form->input(
-            'Recipe.id', 
+            'Recipe.id',
             array('type' => 'hidden', 'value' => $recipe_id)); ?>
         <?php echo $this->Form->input('Tag.name'); ?>
     <?php echo $this->Form->end('Add Tag'); ?>
@@ -638,7 +686,7 @@ pull in this data into a ``<select>``::
     <?php
     // in the controller:
     $this->set('tags', $this->Recipe->Tag->find('list'));
-    
+
     // in the view:
     $form->input('tags');
 
@@ -652,7 +700,7 @@ declared slightly different. The tag name is defined using the
     <?php
     // in the controller:
     $this->set('tags', $this->Recipe->Tag->find('list'));
-    
+
     // in the view:
     $this->Form->input('Tag');
 

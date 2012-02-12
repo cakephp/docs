@@ -16,6 +16,18 @@ Model::saveAll(), Model::saveAssociated(), Model::validateAssociated()
         )
     ));
 
+``Model::saveAll()`` and friends now can save unlimited levels deep. Example::
+
+    <?php
+    $data = array(
+        'Article' => array('title' => 'My first article'),
+        'Comment' => array(
+            array('body' => 'Comment 1', 'user_id' => 1),
+            array('body' => 'Save a new user as well', 'User' => array('first' => 'mad', 'last' => 'coder'))
+        ),
+    );
+    $this->SomeModel->saveAll($data, array('deep' => true));
+
 View
 ====
 
