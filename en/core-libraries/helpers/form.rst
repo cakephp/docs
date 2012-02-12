@@ -367,6 +367,10 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
         // or
         $this->set('reallyInappropriateModelNames', $this->ReallyInappropriateModelName->find('list'));
 
+    .. note::
+
+    Don't try to use `FormHelper::input()` to generate submit buttons. Use :php:meth:`FormHelper::submit()` for that.
+
 .. php:method:: inputs(mixed $fields = null, array $blacklist = null)
 
     Generate a set of inputs for ``$fields``. If $fields is null the current model 
