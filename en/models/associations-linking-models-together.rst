@@ -570,9 +570,9 @@ should be two fields, each foreign keys (which should be integers)
 pointing to both of the primary keys of the involved models. To
 avoid any issues - don't define a combined primary key for these
 two fields, if your application requires it you can define a unique
-index. If you plan to add any extra information to this table, it's
-a good idea to add an additional primary key field (by convention
-'id') to make acting on the table as easy as any other model.
+index. If you plan to add any extra information to this table, or use
+a 'with' model, you should add an additional primary key field (by convention
+'id').
 
 **HABTM** requires a separate join table that includes both *model*
 names.
