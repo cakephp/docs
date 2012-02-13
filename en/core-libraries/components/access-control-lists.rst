@@ -3,21 +3,23 @@ Access Control Lists
 
 .. php:class:: AclComponent(ComponentCollection $collection, array $settings = array())
 
-Access control in CakePHP is provided by the ``AclComponent``.  It
-uses an adapter pattern to allow any required access control strategy to
-be implemented.  There are a few Acl implementations provided in CakePHP as
-well.
+Access control in CakePHP is provided by the ``AclComponent``.  It uses an
+adapter pattern to allow any required access control strategy to be implemented
+through a consistent interface.  There are a few Acl implementations provided in
+CakePHP as well.
 
 Before diving into the particulars of CakePHP's access control component, its a
 good idea to brush up on some of the terminology used regarding access control.
 There are two primary types of resources in access control.  ARO's and ACO's.
-While they seem daunting at first, the acronyms are far less intimidating.
+While they seem daunting at first, the acronyms are far less intimidating and
+confusing then they really are:
 
-* **ARO** (Access Requestor Object) These are your users.  Users request access
-  to other resources.  The permissions defined in your ACL either grant or deny
-  them access to any requested resource. While an **ARO** can technically not be
-  a user, it is generally an agent requesting access to another resource.
-* **ACO** (Access Controlled Object) These are the non user domain objects in
+* **ARO** (Access Requestor Object) These are your users, or actors.  Users
+  request access to other resources.  The permissions defined in your ACL either
+  grant or deny them access to any requested resource. While an **ARO** can
+  technically not be a user, it is generally an agent requesting access to
+  another resource.
+* **ACO** (Access Controlled Object) These are the non-user domain objects in
   your application.  Your controller actions, your posts, your comments, your
   invoices, your cart items. Basically anything a user needs to ask for access
   to.
@@ -26,9 +28,10 @@ While they seem daunting at first, the acronyms are far less intimidating.
 
 Now that we understand the concepts, lets look at how CakePHP implements them.
 In CakePHP you generally interface with the ``AclComponent`` and check
-permissions at the controller level.  AclComponent integrates well with the
+permissions at the controller level.  The AclComponent integrates well with the
 :php:class:`AuthComponent` using both the ``Actions`` and ``Crud`` authorization
 objects.
+
 
 Built-in ACL Backends
 =====================
@@ -46,8 +49,109 @@ own.  The built-in implementations are:
   code.  However, it can be less performant and more complex than other
   implementations.
 
+Permissions and cascading permissions
+=====================================
 
+In both ``PhpAcl``, and ``DbAcl`` ARO and ACO nodes are stored in tree
+structures.  This allows for permissions to cascade down the tree. For the
+following examples, we'll assume an simple e-learning application with a few user
+groups.  We'll also assume that we're using our ACL with
+:php:class:`AuthComponent` with ``ActionsAuthorize``.  Our ACO tree, will be
+comprised of our controllers and their actions:
 
+* controllers
+
+  * Lessons
+
+    * index
+    * add
+    * edit
+    * view
+    * delete
+
+  * Courses
+
+    * index
+    * add
+    * edit
+    * delete
+
+  * Students
+
+    * index
+    * add
+    * edit
+    * delete
+
+While our ARO tree would look like:
+
+* users
+
+  * Administrators
+
+    * Bob
+    * Betty
+
+  * Teachers
+
+    * Fred
+    * Felicity
+
+ * Students
+
+    * Joe
+    * Jessica
+
+With these tree structures, we can define permissions that apply to groups of users, or
+just a single one.  This reduces duplication in your permissions, allows
+permissions to cascade for any given path, and gives you a powerful granular
+permission system.  When permissions are checked, each path is traversed until
+an allow/deny rule is reached.  For example, we'll grant a few permissions, and
+then check how permissions are resolved:
+
+* controllers **Deny: users, Grant: Administrators**
+
+  * Lessons **Grant: Teachers**
+
+    * index **Grant: Students**
+    * add
+    * edit
+    * view **Grant Students**
+    * delete 
+
+  * Courses **Grant: Teachers**
+
+    * index **Grant: Students**
+    * add
+    * edit
+    * delete
+
+  * Students
+
+    * index **Grant: Teachers**
+    * add **Grant: users**
+    * edit **Grant Students**
+    * delete
+
+With a few permissions in place, we can start checking permissions.  In the
+example above, we've used alias paths for both ARO's and ACO's. However, nodes
+can be identified either by alias paths, or model.id pairs.  You should only use
+one type of identifier in each tree. Generally, controller ACO's are stored
+using aliases, while nodes created with the :php:class:`AclBehavior` are created
+as model.id pairs.  For our example, permissions are resolved between two paths.
+Once an explicit deny/allow rule is encontered path traversal is stopped.
+
+When checking if ``users/Students/Joe`` can access ``controllers/Courses/add``
+the following happens:
+
+* The tree for each path is generated, and the terminal nodes are fetched.
+* A permission lookup is done for the ``Joe`` and ``add`` nodes.
+* Since the previous lookup failed, permissions lookups are done for each parent
+  node in the tree.
+* Since the only permission set is the deny rule for ``users`` and
+  ``controllers`` the acl check fails.
+
+TODO: Add a few more examples.
 
 
 - Where permissions fit into this.
