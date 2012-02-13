@@ -29,7 +29,6 @@
 				</li>
 				<li class="cake-version"><a href="http://github.com/cakephp/cakephp/tree/2.0">CakePHP 2.0</a>
 					<ul>
-						<!-- <li><a href="#">Download</a>|</li> -->
 						<li><a href="http://cakephp.lighthouseapp.com/projects/42648-cakephp/milestones">Tickets</a></li>
 					</ul>
 				</li>
@@ -54,7 +53,6 @@
 					</ul>
 				</li>
 				<li><a href="http://cakephp.lighthouseapp.com">Tickets</a></li>
-				<li><a href="http://translation.cakephp.org">Translations</a></li>
 			</ul>
 		</li>
 		<li><a href="#" class="empty">Community</a>
@@ -88,6 +86,18 @@
 </ul>
 {{ sidebar() }}
 {% endblock %}
+
+{% block document %}
+<div class="documentwrapper">
+	<div class="bodywrapper">
+		<div class="body">
+		{% include 'localtoc.html' %}
+		{% block body %} {% endblock %}
+		</div>
+	</div>
+</div>
+{% endblock %}
+
 
 {% block relbar2 %}
 {{ relbar() }}
