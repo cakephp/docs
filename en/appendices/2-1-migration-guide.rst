@@ -162,6 +162,12 @@ CakeRequest
 
 - Added ``is('requested')`` and ``isRequested()`` for detecting requestAction.
 
+CakeResponse
+------------
+
+- Added :php:meth:`CakeResponse::cookie()` for setting cookies.
+- Added a number of methods for :ref:`cake-response-caching`
+
 Components
 ==========
 

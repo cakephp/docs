@@ -488,6 +488,8 @@ The above would tell clients to cache the resulting response for 5 days,
 hopefully speeding up your visitors' experience.
 
 
+.. _cake-response-caching:
+
 Fine tuning HTTP cache
 ======================
 
