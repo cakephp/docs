@@ -302,6 +302,8 @@ FormHelper
 - The ``for`` attribute for date + time inputs now reflects the first generated
   input. This may result in the for attribute changing for generated datetime
   inputs.
+- The ``type`` attribute for :php:meth:`FormHelper::button()` can be removed now.  It still
+  defaults to 'submit'.
 
 PaginatorHelper
 ---------------
