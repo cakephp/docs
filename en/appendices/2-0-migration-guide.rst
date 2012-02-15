@@ -14,7 +14,7 @@ other pages in this guide for all the new features and API changes.
 PHP Version Support
 ===================
 
-CakePHP 2.x supports PHP Version 5.2.6 and above. PHP4 support has been dropped.
+CakePHP 2.x supports PHP Version 5.2.8 and above. PHP4 support has been dropped.
 For developers that are still working with production PHP4 environments, the
 CakePHP 1.x versions continue to support PHP4 for the lifetime of their
 development and support lifetime.
@@ -90,6 +90,10 @@ lowercased Folders:
 
 * tmp
 * webroot
+
+htaccess (URL Rewriting)
+===============================================
+In your ``app/webroot/.htaccess`` replace line ``RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]`` with ``RewriteRule ^(.*)$ index.php?/$1 [QSA,L]``
 
 AppController / AppModel / AppHelper / AppShell
 ===============================================
