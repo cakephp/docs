@@ -657,7 +657,8 @@ Possible keys for HABTM association arrays include:
    To prevent deletion of existing relationship records, set this key to
    a string ``'keepExisting'``.
 -  **conditions**: an array of find() compatible conditions or SQL
-   string
+   string.  If you have conditions on an associated table, you should use a
+   'with' model, and define the necessary belongsTo associations on it.
 -  **fields**: A list of fields to be retrieved when the associated
    model data is fetched. Returns all fields by default.
 -  **order**: an array of find() compatible order clauses or SQL
