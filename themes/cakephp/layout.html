@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 {% endblock -%}
 
-{%- set css_files = css_files + ['_static/csf-navbar.css'] -%}
+{%- set css_files = ['_static/foundation.css', '_static/pygments.css', '_static/csf-navbar.css', '_static/default.css'] -%}
 {%- set script_files = script_files + ["_static/app.js"] -%}
 
 {# Use the header block to insert the CSF navbar #}
@@ -93,6 +93,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="content row">
 	<ul class="related-pages">
 	{%- for rellink in rellinks %}
@@ -109,34 +110,33 @@
 
 
 {%- block relbar1 %}
-	<div class="searchbar row">
+<div class="searchbar row">
 	{% include 'searchbox.html' %}
+</div>
+<div class="related row">
+	<div class="columns three">
+		<a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a>
 	</div>
-	<div class="related row">
-		<div class="columns three">
-			<a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a>
-		</div>
-		<div class="columns nine">
-			<ul>
-			{%- for parent in parents %}
-			<li>
-				<a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %}>{{ parent.title }}</a>
-			</li>
-			{%- endfor %}
-			</ul>
+	<div class="columns nine">
+		<ul>
+		{%- for parent in parents %}
+		<li>
+			<a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %}>{{ parent.title }}</a>
+		</li>
+		{%- endfor %}
+		</ul>
 
-			<ul class='versions'>
-				<li><a href="http://book.cakephp.org/1.3/{{ language }}/view/876/">1.3 Book</a> | </li>
-				<li><a href="http://book.cakephp.org/1.2/{{ language }}/view/3/">1.2 Book</a> | </li>
-				<li><a href="http://book.cakephp.org/1.1/{{ language }}/view/305/">1.1 Book</a></li>
-			</ul>
-		</div>
+		<ul class='versions'>
+			<li><a href="http://book.cakephp.org/1.3/{{ language }}/view/876/">1.3 Book</a> | </li>
+			<li><a href="http://book.cakephp.org/1.2/{{ language }}/view/3/">1.2 Book</a> | </li>
+			<li><a href="http://book.cakephp.org/1.1/{{ language }}/view/305/">1.1 Book</a></li>
+		</ul>
 	</div>
+</div>
 {% endblock -%}
 
 
 {%- block relbar2 %}
-{{ relbar() }}
 <div class="related languages">
 <ul>
 {% for lang in languages %}
