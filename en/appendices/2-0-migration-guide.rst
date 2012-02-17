@@ -1043,7 +1043,7 @@ Or just declare the property in the model class::
 
     <?php
     class Post {
-        public $nonexistantProperty = array();
+        public $nonexistentProperty = array();
     }
 
 Either of these approaches will solve the notice errors.

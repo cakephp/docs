@@ -371,7 +371,7 @@ And save this data with::
     ));
     ?>
     The fieldList will be an array of model aliases as keys and arrays with fields as values.
-    The modelnames are not nested like in the data to be saved.
+    The model names are not nested like in the data to be saved.
 
 :php:meth:`Model::saveAll(array $data = null, array $options = array())`
 ========================================================================
@@ -596,7 +596,7 @@ version above assumes you want to save everything at-once. There
 will be cases where you want to create the Student and Course
 independently and at a later point associate the two together with
 a CourseMembership. So you might have a form that allows selection
-of existing students and courses from picklists or ID entry and
+of existing students and courses from pick lists or ID entry and
 then the two meta-fields for the CourseMembership, e.g.::
 
         // View/CourseMemberships/add.ctp

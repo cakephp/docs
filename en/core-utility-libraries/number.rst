@@ -146,7 +146,7 @@ automatically echo the output into the view.
         App::uses('CakeNumber', 'Utility');
         CakeNumber::addFormat('BRR', array('before' => 'R$ '));
 
-    You can now use `BRR` as a shortform when formatting currency amounts::
+    You can now use `BRR` as a short form when formatting currency amounts::
 
         <?php
         // called as NumberHelper
