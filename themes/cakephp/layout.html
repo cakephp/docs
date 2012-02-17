@@ -1,14 +1,14 @@
-{% extends 'default/layout.html' %}
+{%- extends 'default/layout.html' -%}
 
-{% block doctype %}
+{%- block doctype %}
 <!DOCTYPE html>
-{% endblock %}
+{% endblock -%}
 
-{% set css_files = css_files + ['_static/csf-navbar.css'] %}
-{% set script_files = script_files + ["_static/app.js"] %}
+{%- set css_files = css_files + ['_static/csf-navbar.css'] -%}
+{%- set script_files = script_files + ["_static/app.js"] -%}
 
 {# Use the header block to insert the CSF navbar #}
-{% block header %}
+{%- block header %}
 <div id="cakephp-global-navigation">
 	<ul>
 		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
@@ -76,30 +76,66 @@
 		</li>
 	</ul>
 </div>
-{% endblock %}
+{% endblock -%}
 
-{% block sidebar1 %}
-<ul class='versions'>
-	<li><a href="http://book.cakephp.org/1.3/{{ language }}/view/876/">1.3 Book</a> | </li>
-	<li><a href="http://book.cakephp.org/1.2/{{ language }}/view/3/">1.2 Book</a> | </li>
-	<li><a href="http://book.cakephp.org/1.1/{{ language }}/view/305/">1.1 Book</a></li>
-</ul>
-{{ sidebar() }}
-{% endblock %}
+{%- block content %}
+<div class="content row">
+	<div class="sidebar columns three">
+		{%- for sidebartemplate in sidebars %}
+		{%- include sidebartemplate %}
+		{%- endfor %}
+	</div>
 
-{% block document %}
-<div class="documentwrapper">
-	<div class="bodywrapper">
+	<div class="document columns nine">
 		<div class="body">
-		{% include 'localtoc.html' %}
-		{% block body %} {% endblock %}
+			{% include 'localtoc.html' %}
+			{% block body %} {% endblock %}
 		</div>
 	</div>
 </div>
-{% endblock %}
+<div class="content row">
+	<ul class="related-pages">
+	{%- for rellink in rellinks %}
+	<li>
+		<a href="{{ pathto(rellink[0]) }}" title="{{ rellink[1]|striptags|e }}"{{ accesskey(rellink[2]) }}>
+			{{- rellink[3] -}}
+		</a>
+		{%- if not loop.first %}{{ reldelim2 }}{% endif -%}
+	</li>
+	{%- endfor %}
+	</ul>
+</div>
+{% endblock -%}
 
 
-{% block relbar2 %}
+{%- block relbar1 %}
+	<div class="searchbar row">
+	{% include 'searchbox.html' %}
+	</div>
+	<div class="related row">
+		<div class="columns three">
+			<a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a>
+		</div>
+		<div class="columns nine">
+			<ul>
+			{%- for parent in parents %}
+			<li>
+				<a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %}>{{ parent.title }}</a>
+			</li>
+			{%- endfor %}
+			</ul>
+
+			<ul class='versions'>
+				<li><a href="http://book.cakephp.org/1.3/{{ language }}/view/876/">1.3 Book</a> | </li>
+				<li><a href="http://book.cakephp.org/1.2/{{ language }}/view/3/">1.2 Book</a> | </li>
+				<li><a href="http://book.cakephp.org/1.1/{{ language }}/view/305/">1.1 Book</a></li>
+			</ul>
+		</div>
+	</div>
+{% endblock -%}
+
+
+{%- block relbar2 %}
 {{ relbar() }}
 <div class="related languages">
 <ul>

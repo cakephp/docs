@@ -28,7 +28,7 @@ source_suffix = '.rst'
 master_doc = 'contents'
 
 # General information about the project.
-project = u'CakePHP Cookbook'
+project = u'Cookbook'
 copyright = u'2011, Cake Software Foundation, Inc'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -119,7 +119,7 @@ html_static_path = []
 
 # Custom sidebar templates, maps document names to template names.
 html_sidebars = {
- '**' : ['searchbox.html', 'globaltoc.html', 'sourcelink.html']
+ '**' : ['globaltoc.html', 'sourcelink.html']
 }
 
 # Additional templates that should be rendered to pages, maps page names to

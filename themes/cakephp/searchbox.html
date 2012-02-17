@@ -7,7 +7,6 @@
     :copyright: Copyright 2007-2011 by the Sphinx team, see AUTHORS.
     :license: BSD, see LICENSE for details.
 #}
-{%- if pagename != "search" %}
 <div id="searchbox">
     <form id="searchform" class="search" action="{{ pathto('search') }}" method="get">
       <input class="search-input" type="search" name="q" size="18" />
@@ -15,8 +14,4 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    {{ _('Enter search terms or a class or function name. Hit enter for full text search') }}
-    </p>
 </div>
-{%- endif %}
