@@ -167,6 +167,8 @@ need them, using :php:meth:`RequestHandler::addInputType()`
 Modifing the default REST routes
 ================================
 
+.. versionadded:: 2.1
+
 If the default REST routes dont' work for your application, you can modify them
 using :php:meth:`Router::resourceMap()`.  This method allows you to set the
 default routes that get set with :php:meth:`Router::mapResources()`.  When using
