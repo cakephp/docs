@@ -369,7 +369,8 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
 
     .. note::
 
-    Don't try to use `FormHelper::input()` to generate submit buttons. Use :php:meth:`FormHelper::submit()` for that.
+        Try to avoid using `FormHelper::input()` to generate submit buttons. Use
+        :php:meth:`FormHelper::submit()` instead.
 
 .. php:method:: inputs(mixed $fields = null, array $blacklist = null)
 

@@ -282,8 +282,9 @@ To save also associated data with ``$options['deep'] = true`` (since 2.1), the t
         array('Article' => array('title' => 'title 2')),
     )
     $Model->saveMany($data, array('deep' => true));
-Keep in mind that if you want to update a record instead of creating a new one
-you just need to add the primary key index to the data row::
+
+Keep in mind that if you want to update a record instead of creating a new
+one you just need to add the primary key index to the data row::
 
     <?php
     array(
@@ -302,8 +303,8 @@ options may be used:
   'first' to validate *all* records before any are saved (default),
 * ``atomic``: If true (default), will attempt to save all records in a single transaction.
   Should be set to false if database/table does not support transactions.
-*  ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
-*  ``deep``: (since 2.1) If set to true, not only directly associated data is saved,
+* ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
+* ``deep``: (since 2.1) If set to true, not only directly associated data is saved,
   but deeper nested associated data as well. Defaults to false.
 
 For saving a record along with its related record having a hasOne
@@ -331,7 +332,7 @@ association, the data array should be like this::
 .. note::
 
     If successful, the foreign key of the main model will be stored in
-    the related models' id field, i.e. $this->RelatedModel->id.
+    the related models' id field, i.e. ``$this->RelatedModel->id``.
 
 .. warning::
 
@@ -339,6 +340,7 @@ association, the data array should be like this::
     false. It returns an array instead of boolean.
 
 .. versionchanged:: 2.1
+
 You can now save deeper associated data as well with setting ``$options['deep'] = true;``
 
 For saving a record along with its related records having hasMany
@@ -360,6 +362,7 @@ And save this data with::
     $Article->saveAssociated($data, array('deep' => true));
 
 .. versionchanged:: 2.1
+
 ``Model::saveAll()`` and friends now support passing the `fieldList` for multiple models. Example::
 
     <?php
@@ -369,9 +372,9 @@ And save this data with::
             'AssociatedModel' => array('field_2', 'field_3')
         )
     ));
-    ?>
-    The fieldList will be an array of model aliases as keys and arrays with fields as values.
-    The model names are not nested like in the data to be saved.
+
+The fieldList will be an array of model aliases as keys and arrays with fields as values.
+The model names are not nested like in the data to be saved.
 
 :php:meth:`Model::saveAll(array $data = null, array $options = array())`
 ========================================================================
