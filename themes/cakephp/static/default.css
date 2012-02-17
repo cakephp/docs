@@ -13,72 +13,26 @@
 
 /* -- page layout ----------------------------------------------------------- */
 
-body {
-    font-family: sans-serif;
-    font-size: 100%;
-    background-color: #11303d;
-    color: #000;
-    margin: 0;
-    padding: 0;
+/* Inline list styles */
+.inline li {
+	display: inline;
 }
-
-
-div.document {
-    background-image: url('sidebar-background.jpg');
-}
-
-div.documentwrapper {
-    float: left;
-    width: 100%;
-}
-
-div.bodywrapper {
-    margin: 0 0 0 270px;
-}
-
-div.body {
-    background-color: #ffffff;
-    color: #000000;
-    padding: 0 20px 30px 20px;
-    position: relative;
-    z-index: 0;
-}
-
-div.footer {
-    color: #ffffff;
-    width: 100%;
-    padding: 9px 0 9px 0;
-    text-align: center;
-    font-size: 75%;
-}
-
-div.footer a {
-    color: #ffffff;
-    text-decoration: underline;
-}
-
-div.related {
-    background-color: #133f52;
-    line-height: 30px;
-    color: #ffffff;
-    clear: both;
-}
-
-div.related a {
-    color: #ffffff;
-    text-shadow: 0 1px 0 #000;
-    -webkit-text-shadow: 0 1px 0 #000;
-}
-div.languages ul {
-    float: right;
-    margin-right: 10px
-}
-.languages li:after {
+.inline li:after {
     content: ' | ';
     display: inline;
 }
-.languages li:last-child:after {
+.inline li:last-child:after {
     content: '';
+}
+
+.breadcrumb li:after {
+	content: ' > ';
+}
+
+/*  Languages  */
+div.languages ul {
+    float: right;
+    margin-right: 10px
 }
 .languages .disabled {
     opacity: 0.8;
@@ -87,55 +41,6 @@ div.languages ul {
     text-decoration: underline;
 }
 
-div.sphinxsidebar {
-    width: 270px;
-}
-
-div.sphinxsidebar h3 {
-    font-family: HelveticaNeue-Light, HelveticaNeue, Helvetica, Arial, sans-serif;
-    color: #000;
-    font-size: 1.4em;
-    font-weight: normal;
-    margin: 0;
-    padding: 0;
-}
-
-div.sphinxsidebar h3 a {
-    color: #000;
-}
-
-div.sphinxsidebar h4 {
-    font-family: HelveticaNeue-Light, HelveticaNeue, Helvetica, Arial, sans-serif;
-    color: #000;
-    font-size: 1.3em;
-    font-weight: normal;
-    margin: 5px 0 0 0;
-    padding: 0;
-}
-
-div.sphinxsidebar p {
-    color: #333;
-}
-
-div.sphinxsidebar p.topless {
-    margin: 5px 10px 10px 10px;
-}
-
-div.sphinxsidebar ul {
-    margin: 10px;
-    padding: 0;
-    color: #000;
-}
-
-div.sphinxsidebar a {
-    color: #088;
-}
-
-div.sphinxsidebar input {
-    border: 1px solid #98dbcc;
-    font-family: sans-serif;
-    font-size: 1em;
-}
 
 
 
@@ -159,42 +64,6 @@ a:hover {
 
 /* -- body styles ----------------------------------------------------------- */
 
-div.body h1,
-div.body h2,
-div.body h3,
-div.body h4,
-div.body h5,
-div.body h6 {
-    font-family: HelveticaNeue-Light, HelveticaNeue, Helvetica, Arial, sans-serif;
-    font-weight: bold;
-    color: #222;
-    border-bottom: 1px solid #888;
-    margin: 20px 0px 10px 0px;
-    padding: 3px 0 3px 0px;
-}
-
-div.body h1 { margin-top: 0; font-size: 200%; }
-div.body h2 { font-size: 160%; }
-div.body h3 { font-size: 140%; }
-div.body h4 { font-size: 120%; }
-div.body h5 { font-size: 110%; }
-div.body h6 { font-size: 100%; }
-
-a.headerlink {
-    color: #c60f0f;
-    font-size: 0.8em;
-    padding: 0 4px 0 4px;
-    text-decoration: none;
-}
-
-a.headerlink:hover {
-    background-color: #c60f0f;
-    color: white;
-}
-
-div.body p, div.body dd, div.body li {
-    line-height: 130%;
-}
 
 /* Admonitions */
 div.admonition {
@@ -366,27 +235,6 @@ dl.const em.property {
 }
 
 /* Searchbox */
-#searchform {
-    background: url('./search-field.png') top left no-repeat;
-    height: 50px;
-    position: relative;
-}
-#searchform .search-input {
-    position: absolute;
-    top: 11px;
-    left: 14px;
-    width: 185px;
-    height: 24px;
-    border: none;
-    -webkit-appearance: textfield;
-    padding: 0;
-}
-#searchform .search-submit {
-    position: absolute;
-    top: 9px;
-    right: 17px;
-    border: 0;
-}
 
 ul.versions {
     color:#fff;
@@ -396,21 +244,4 @@ ul.versions {
     margin-right:200px;
     padding:0;
     font-size:0.9em;
-}
-ul.versions li {
-    display:inline-block;
-    padding-right:5px;
-}
-ul.versions li a {
-    color:#fff;
-    display:inline-block;
-    padding-right:5px;
-}
-
-#searchbox {
-	font-size:90%;
-}
-
-#searchbox ul li {
-	padding:4px 0;
 }
