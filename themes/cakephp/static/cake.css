@@ -80,22 +80,20 @@ a:hover {
 }
 
 
-/* Preformatted */
-pre, code {
+/* Preformatted text */
+pre, code, .pre {
 	font-family: "Bitstream Vera Sans", "Consolas", "Monaco", monospace;
 }
-code {
-	padding: 1px 3px;
-}
 pre {
-	margin-bottom: 12px;
-}
-pre {
+	margin-bottom: 18px;
 	overflow-x: auto;
     padding: 8px;
     background: #f2f2f2;
     color: #222;
     line-height: 120%;
+    -moz-box-shadow: inset 0px 1px 4px rgba(0,0,0,0.15);
+    -webkit-box-shadow: inset 0px 1px 4px rgba(0,0,0,0.15);
+    box-shadow: inset 0px 1px 4px rgba(0,0,0,0.15);
 }
 pre::-webkit-scrollbar {
     height: 10px;
@@ -109,4 +107,16 @@ pre::-webkit-scrollbar-thumb:horizontal {
     background: #c0c0c0;
     border-radius: 5px;
     -webkit-border-radius: 5px;
+}
+
+
+/* lists */
+ul, ol {
+	margin-left: 30px;
+}
+ul {
+	list-style: disc outside;
+}
+ul ul {
+	margin: 9px 0 9px 30px;
 }

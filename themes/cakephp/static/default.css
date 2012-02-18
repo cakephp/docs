@@ -13,7 +13,63 @@
  @import 'csf-navbar.css';
  @import 'cake.css';
 
-/* -- page layout ----------------------------------------------------------- */
+/* -- top navbars -- */
+.search-header {
+	background: #003D4C;
+	color: #fff;
+}
+.breadcrumb-header {
+	background: #BD8A5D;
+	color: #fff;
+	margin-bottom: 18px;
+}
+
+
+
+/* -- Headings -- */
+.headerlink {
+	display: none;
+}
+.method:hover .headerlink,
+h1:hover .headerlink,
+h2:hover .headerlink,
+h3:hover .headerlink,
+h4:hover .headerlink,
+h5:hover .headerlink,
+h6:hover .headerlink {
+	display: inline;
+	margin: 0 0 0 5px;
+	font-size: 80%;
+	padding: 0;
+}
+
+
+/* -- body styles -- */
+p {
+	font-size: 14px;
+	font-size: 1.4rem;
+	line-height: 130%
+}
+
+@media handheld, only screen and (max-width: 767px) {
+	p {
+		font-size: 16px;
+		font-size: 1.6rem;
+	}
+}
+
+/* inline code */
+tt {
+	font-size: 90%;
+	line-height: normal;
+	background: rgba(100, 100, 100, 0.10);
+    padding: 0px 1px;
+    color: #003D4C;
+}
+dl tt {
+    border-bottom: none;
+}
+
 
 /* Inline list styles */
 .inline li {
@@ -26,7 +82,6 @@
 .inline li:last-child:after {
     content: '';
 }
-
 .breadcrumb li:after {
 	content: ' > ';
 }
@@ -43,21 +98,6 @@ div.languages ul {
     text-decoration: underline;
 }
 
-
-
-/* -- body styles ----------------------------------------------------------- */
-
-p {
-	font-size: 15px;
-	font-size: 1.5rem;
-	line-height: 130%
-}
-@media handheld, only screen and (max-width: 767px) {
-	p {
-		font-size: 16px;
-		font-size: 1.6rem;
-	}
-}
 
 
 /* Admonitions */
@@ -111,9 +151,9 @@ div.admonition p.admonition-title + p {
     background: #df9c00;
     line-height: 16px;
     font-weight:normal;
-    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     color: #fff;
 }
 .admonition-title:before {
@@ -151,25 +191,7 @@ div.admonition p.admonition-title + p {
     border-top-color: #9d9d9d;
 }
 
-tt {
-    background: #f0f0f0;
-    padding: 0 1px 0 1px;
-    font-family: monospace;
-    font-size: 110%;
-}
 
-
-
-
-tt {
-    background: #f0f0f0;
-    padding: 0 1px 0 1px;
-    font-family: monospace;
-    font-size: 110%;
-}
-dl tt {
-    border-bottom: none;
-}
 
 table.docutils th {
     border-bottom: 2px solid #000;
@@ -180,13 +202,6 @@ table.docutils th {
     padding-bottom: 3px;
 }
 
-.warning tt {
-    background: #e6c0be;
-}
-
-.note tt {
-    background: #f3e7b1;
-}
 
 .viewcode-back {
     font-family: sans-serif;
@@ -215,10 +230,41 @@ dl.const em.property {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     text-shadow: 0px 1px #fff;
+    margin-right: 5px;
+}
+
+/* method and property definitions */
+.attr,
+.method {
+	margin-bottom: 28px;
+}
+.attr dt,
+.method dt {
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+.attr tt,
+.method tt {
+	background: none;
+}
+.attr .descname,
+.attr .descclassname,
+.method .descname,
+.method .descclassname {
+	font-family: "Bitstream Vera Sans", "Consolas", "Monaco", monospace;
+	font-size: 16px;
+}
+.attr .descname,
+.method .descname {
+	font-weight: bold;
+	color: #C92434;
+}
+.attr dd,
+.method dd {
+	margin-left: 20px;
 }
 
 /* Searchbox */
-
 ul.versions {
     color:#fff;
     float:right;
@@ -227,4 +273,17 @@ ul.versions {
     margin-right:200px;
     padding:0;
     font-size:0.9em;
+}
+
+/* -- Sidebar --*/
+.sidebar > ul {
+	margin-left: 0;
+}
+.sidebar ul {
+	list-style: none;
+	font-size: 16px;
+	font-family: MuseoSlab500, Helvetica, Arial;
+}
+.sidebar .current {
+	color: #C92434;
 }
