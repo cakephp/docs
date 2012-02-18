@@ -70,12 +70,6 @@ h5, h6 {
 	color: #BD8A5D;
 }
 
-p {
-	font-size: 14px;
-	font-size: 1.4rem;
-	line-height: 130%
-}
-
 /* Links */
 a {
 	color: #417282;
@@ -95,4 +89,24 @@ code {
 }
 pre {
 	margin-bottom: 12px;
+}
+pre {
+	overflow-x: auto;
+    padding: 8px;
+    background: #f2f2f2;
+    color: #222;
+    line-height: 120%;
+}
+pre::-webkit-scrollbar {
+    height: 10px;
+}
+pre::-webkit-scrollbar-track-piece {
+    background: #ddd;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+pre::-webkit-scrollbar-thumb:horizontal {
+    background: #c0c0c0;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
 }

@@ -9,6 +9,9 @@
  * :license: BSD, see LICENSE for details.
  *
  */
+ @import 'foundation.css';
+ @import 'csf-navbar.css';
+ @import 'cake.css';
 
 /* -- page layout ----------------------------------------------------------- */
 
@@ -42,26 +45,19 @@ div.languages ul {
 
 
 
-
-/* -- hyperlink styles ------------------------------------------------------ */
-
-a {
-    color: #088;
-    text-decoration: none;
-}
-
-a:visited {
-    color: #005353;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-
-
 /* -- body styles ----------------------------------------------------------- */
+
+p {
+	font-size: 15px;
+	font-size: 1.5rem;
+	line-height: 130%
+}
+@media handheld, only screen and (max-width: 767px) {
+	p {
+		font-size: 16px;
+		font-size: 1.6rem;
+	}
+}
 
 
 /* Admonitions */
@@ -155,26 +151,14 @@ div.admonition p.admonition-title + p {
     border-top-color: #9d9d9d;
 }
 
-/* preformatted text  */
-pre {
-    padding: 8px;
-    background: #f2f2f2;
-    color: #222;
-    line-height: 120%;
+tt {
+    background: #f0f0f0;
+    padding: 0 1px 0 1px;
+    font-family: monospace;
+    font-size: 110%;
 }
-pre::-webkit-scrollbar {
-    height: 10px;
-}
-pre::-webkit-scrollbar-track-piece {
-    background: #ddd;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-}
-pre::-webkit-scrollbar-thumb:horizontal {
-    background: #c0c0c0;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-}
+
+
 
 
 tt {
