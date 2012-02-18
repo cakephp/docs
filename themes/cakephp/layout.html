@@ -1,10 +1,10 @@
-{%- extends 'default/layout.html' -%}
+{% extends 'default/layout.html' -%}
 
 {%- block doctype %}
 <!DOCTYPE html>
 {% endblock -%}
 
-{%- set css_files = ['_static/foundation.css', '_static/pygments.css', '_static/csf-navbar.css', '_static/default.css'] -%}
+{%- set css_files = ['_static/foundation.css', '_static/pygments.css', '_static/csf-navbar.css', '_static/cake.css', '_static/default.css'] -%}
 {%- set script_files = script_files + ["_static/app.js"] -%}
 
 {# Use the header block to insert the CSF navbar #}
@@ -141,13 +141,13 @@
 <ul class="languages inline">
 {% for lang in languages %}
 	<li>
-		{% if lang == language %}
+		{%- if lang == language -%}
 		<span class="active">{{ lang }}</span>
-		{% elif has_lang(lang, pagename) %}
+		{%- elif has_lang(lang, pagename) -%}
 		<a href="{{ lang_link(lang, pagename) }}">{{ lang }}</a>
-		{% else %}
+		{%- else -%}
 		<span class="disabled">{{ lang }}</span>
-		{% endif %}
+		{%- endif -%}
 	</li>
 {% endfor %}
 </ul>
