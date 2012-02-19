@@ -14,6 +14,12 @@
  @import 'cake.css';
 
 /* -- top navbars -- */
+.masthead img {
+	margin-top: 6px;
+}
+.header-backing {
+	height: 300px;
+}
 .search-header {
 	color: #fff;
 }
@@ -43,29 +49,35 @@
 }
 .root-link,
 .breadcrumb {
+	line-height: 25px;
 	margin: 5px 0;
 }
-.root-link,
+.root-link a,
 .breadcrumb li {
 	font-size: 18px;
 	margin: 0;
+	vertical-align: middle;
 }
 
 /* Searchbox */
 #searchform {
-	margin: 18px 0;
+	margin: 24px 0;
 }
 .search-input {
 	width: 70%;
-	font-size: 30px;
-	line-height: 30px;
+	font-size: 16px;
 	padding: 5px 0;
 	margin:  0 3% 0 0;
+	height: 30px;
+	border: none;
+	-webkit-appearance: textfield;
+	vertical-align: top;
 }
 .search-submit {
 	padding: 6px 2px;
 	font-size: 16px;
-	width: 15%;
+	width: 12%;
+	vertical-align: top;
 }
 
 
@@ -149,29 +161,16 @@ dl tt {
 	content: ' > ';
 }
 
-/*  Languages  */
-div.languages ul {
-    float: right;
-    margin-right: 10px
-}
-.languages .disabled {
-    opacity: 0.8;
-}
-.languages .active {
-    text-decoration: underline;
-}
+
 
 
 
 /* Admonitions */
-div.admonition {
+.admonition {
     margin: 20px 0;
-    padding: 23px 10px 22px;
+    padding: 9px 9px 9px 45px;
     position: relative;
-}
-
-div.admonition p.admonition-title + p {
-    display: inline;
+    border-left: 4px solid #bb8c60;
 }
 
 .admonition p {
@@ -183,84 +182,73 @@ div.admonition p.admonition-title + p {
 .admonition ul, .admonition ol {
     margin-bottom: 5px;
 }
+.seealso,
 .tip {
-    background: #f2faff;
-    border: 2px solid #0085cb;
+	border-color: #45717a;
+    background: #e9eef1;
 }
 .note {
-    background-color: #fffdf2;
-    border: 2px solid #ffcb00;
-}
-.seealso {
-    background-color: #f9f9f9;
-    border: 2px solid #e2e2e2;
+    background-color: #fffef2;
 }
 .topic {
     background-color: #eee;
 }
 .warning {
-    background-color: #fff4f3;
-    border: 2px solid red;
+	border-color: #C92434;
+    background-color: #fbeded;
+}
+.deprecated,
+.versionadded,
+.versionchanged {
+	margin: 20px 0;
+    padding: 9px 9px 9px 45px;
+    position: relative;
+    border-left: 4px solid #bb8c60;
+	border-color: #afad56;
+	background: #f0efdd;
+}
+.deprecated:before,
+.versionadded:before,
+.versionchanged:before {
+	content:  '';
+	width: 30px;
+	height: 25px;
+	background: url(icons.png) 0 -57px no-repeat;
+	display: block;
+	position: absolute;
+	top: 5px;
+	left: 9px
+}
+.versionmodified {
+	font-style: italic;
 }
 
-.seealso .admonition-title,
-.tip .admonition-title,
-.warning .admonition-title,
-.note .admonition-title {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    padding: 4px 8px;
-    background: #df9c00;
-    line-height: 16px;
-    font-weight:normal;
-    -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    color: #fff;
-}
-.admonition-title:before {
-    content: '';
-    display: block;
-    height: 20px;
-    width: 8px;
-    position: absolute;
-    top: 24px;
-    left: 0px;
-    background: transparent;
-    z-index: -1;
-    border-top: 45px solid #eed993;
-    border-left: 45px solid transparent;
-}
-
-.tip .admonition-title:before {
-    border-top-color: #ccebff;
+/* Icons on admonition blocks */
+.admonition .admonition-title {
+	background: url(icons.png) top left no-repeat;
+	height: 0;
+	width: 32px;
+	padding-top: 25px;
+	overflow: hidden;
+	position: absolute;
+	top: 9px;
+	left: 9px;
 }
 .tip .admonition-title {
-    background: #0085cb;
-    color: #fff;
+	background-position: 0 -85px;
 }
-.warning .admonition-title:before {
-    border-top-color: #f1c5c1;
-}
-.warning p.admonition-title {
-    background: red;
-    color: #fff;
-}
-.seealso .admonition-title {
-    background: #999;
-}
-.seealso .admonition-title:before {
-    border-top-color: #9d9d9d;
+.warning .admonition-title {
+	background-position: 0 -25px;
+	padding-top: 30px;
+	top: 9px;
 }
 
-
+/* Tables */
 .docutils td,
 .docutils th {
     padding-top: 3px;
     padding-bottom: 3px;
 }
-
 
 .viewcode-back {
     font-family: sans-serif;
@@ -293,11 +281,15 @@ dl.const em.property {
 }
 
 /* method and property definitions */
+.role,
+.directive,
 .class,
 .attr,
 .method {
 	margin-bottom: 28px;
 }
+.role dt,
+.directive dt,
 .class dt,
 .attr dt,
 .method dt {
@@ -307,19 +299,27 @@ dl.const em.property {
 dt tt {
 	background: none;
 }
+.role .descname,
+.directive .descname,
 .class .descname,
 .attr .descname,
+.directive .descclassname,
+.role .descclassname,
 .attr .descclassname,
 .method .descname,
 .method .descclassname {
 	font-family: "Bitstream Vera Sans", "Consolas", "Monaco", monospace;
 	font-size: 16px;
 }
+.role .descname,
+.directive .descname,
 .attr .descname,
 .method .descname {
 	font-weight: bold;
 	color: #C92434;
 }
+.role dd,
+.directive dd,
 .attr dd,
 .method dd {
 	margin-left: 20px;
@@ -347,6 +347,33 @@ dt tt {
 	font-weight: normal;
 }
 
+/*-- glossary --*/
+.glossary dt {
+	font-size: 16px;
+	font-family: MuseoSlab500, Helvetica, Arial;
+	color: #BD8A5D;
+}
+.glossary dd {
+	margin-bottom: 18px;
+}
+
+/* -- generated index -- */
+.genindex-jumpbox {
+	margin-bottom: 18px;
+}
+.genindextable {
+	border: 0;
+}
+.genindextable dt {
+	line-height: 20px;
+	margin-bottom: 5px;
+}
+.genindextable dd {
+	margin-left: 24px;
+}
+.genindextable a {
+	font-size: 14px;
+}
 
 /* -- Sidebar --*/
 .sidebar > ul {
@@ -365,7 +392,29 @@ dt tt {
 .related-pages {
 	float: right;
 }
+.footer .contribute,
+.languages,
 .related-pages a {
 	font-size: 14px;
 	font-family: MuseoSlab500, Helvetica, Arial;	
+}
+
+.contribute strong {
+	color: #C92434;
+}
+
+/*  Languages  */
+.languages ul {
+    float: right;
+    margin-right: 10px
+}
+.languages li,
+.languages a {
+	color: #417282;
+}
+.languages .disabled {
+    opacity: 0.5;
+}
+.languages .active {
+    text-decoration: underline;
 }

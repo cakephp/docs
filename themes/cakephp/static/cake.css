@@ -148,6 +148,10 @@ ul ul {
 	-webkit-transform: rotate(-2.8deg);
 	-moz-transform: rotate(-2.8deg);
 	transform: rotate(-2.8deg);
+	
+	-webkit-transform-origin: top center;
+	-moz-transform-origin: top center;
+	transform-origin: top center;
 }
 .masthead .row {
 	z-index: 1;
