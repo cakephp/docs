@@ -79,6 +79,14 @@ a:hover {
 	text-decoration: underline;
 }
 
+/* Buttons */
+.button.primary {
+	font-size: 14px;
+	background: #C92434;
+	font-family: MuseoSlab500, Helvetica, Arial;
+	font-weight: normal;
+}
+
 
 /* Preformatted text */
 pre, code {

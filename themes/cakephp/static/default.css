@@ -73,6 +73,9 @@ h6:hover .headerlink {
 
 
 /* -- body styles -- */
+.body {
+	position: relative;
+}
 td, th, p, li {
 	font-size: 14px;
 	font-size: 1.4rem;
@@ -96,6 +99,22 @@ tt {
 }
 dl tt {
     border-bottom: none;
+}
+
+#page-contents-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+#page-contents-button:active + .panel {
+	display: block;
+}
+.body .panel {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	display: none;
 }
 
 
