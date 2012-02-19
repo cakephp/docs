@@ -330,7 +330,7 @@ callback of your model::
     <?php
     class User extends AppModel {
         public function beforeSave($options = array()) {
-            $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+            $this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
             return true;
         }
     }
@@ -357,8 +357,8 @@ from the normal password hash::
     class User extends AppModel {
         public function beforeSave($options = array()) {
             // make a password for digest auth.
-            $this->data['User']['digest_hash'] = DigestAuthenticate::password(
-                $this->data['User']['username'], $this->data['User']['password'], env('SERVER_NAME')
+            $this->request->data['User']['digest_hash'] = DigestAuthenticate::password(
+                $this->request->data['User']['username'], $this->request->data['User']['password'], env('SERVER_NAME')
             );
             return true;
         }
