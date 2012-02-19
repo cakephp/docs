@@ -81,7 +81,7 @@ a:hover {
 
 
 /* Preformatted text */
-pre, code, .pre {
+pre, code {
 	font-family: "Bitstream Vera Sans", "Consolas", "Monaco", monospace;
 }
 pre {

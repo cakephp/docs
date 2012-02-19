@@ -22,6 +22,34 @@
 	background: #BD8A5D;
 	color: #fff;
 	margin-bottom: 18px;
+	font-family: MuseoSlab500, Helvetica, Arial;
+}
+.breadcrumb-header .row {
+	position: relative;
+}
+.breadcrumb-header a {
+	color: #fff;
+}
+.breadcrumb-header .versions {
+	background: #003D4C;
+	display: block;
+	margin: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 6px;
+}
+.versions a {
+	padding: 0 4px;
+}
+.root-link,
+.breadcrumb {
+	margin: 5px 0;
+}
+.root-link,
+.breadcrumb li {
+	font-size: 18px;
+	margin: 0;
 }
 
 
@@ -45,14 +73,13 @@ h6:hover .headerlink {
 
 
 /* -- body styles -- */
-p {
+td, th, p, li {
 	font-size: 14px;
 	font-size: 1.4rem;
-	line-height: 130%
+	line-height: 140%
 }
-
 @media handheld, only screen and (max-width: 767px) {
-	p {
+	td, th, p, li {
 		font-size: 16px;
 		font-size: 1.6rem;
 	}
@@ -60,6 +87,7 @@ p {
 
 /* inline code */
 tt {
+	font-family: "Bitstream Vera Sans", "Consolas", "Monaco", monospace;
 	font-size: 90%;
 	line-height: normal;
 	background: rgba(100, 100, 100, 0.10);
@@ -192,12 +220,8 @@ div.admonition p.admonition-title + p {
 }
 
 
-
-table.docutils th {
-    border-bottom: 2px solid #000;
-}
-table.docutils td,
-table.docutils th {
+.docutils td,
+.docutils th {
     padding-top: 3px;
     padding-bottom: 3px;
 }
@@ -234,19 +258,21 @@ dl.const em.property {
 }
 
 /* method and property definitions */
+.class,
 .attr,
 .method {
 	margin-bottom: 28px;
 }
+.class dt,
 .attr dt,
 .method dt {
 	font-size: 14px;
 	margin-bottom: 5px;
 }
-.attr tt,
-.method tt {
+dt tt {
 	background: none;
 }
+.class .descname,
 .attr .descname,
 .attr .descclassname,
 .method .descname,
@@ -262,6 +288,28 @@ dl.const em.property {
 .attr dd,
 .method dd {
 	margin-left: 20px;
+}
+
+/* Parameter lists */
+.method .field-list th,
+.method .field-list {
+	border: 0;
+}
+.method .field-name {
+	font-size: 15px;
+	font-size: 1.5rem;
+	font-family: MuseoSlab500, Helvetica, Arial;
+	color: #BD8A5D;
+}
+.method .field-list ul {
+	list-style: none;
+	margin-left: 0;
+}
+.method .field-list strong {
+	font-size: 110%;
+	font-family: "Bitstream Vera Sans", "Consolas", "Monaco", monospace;
+	color: #003D4C;
+	font-weight: normal;
 }
 
 /* Searchbox */
