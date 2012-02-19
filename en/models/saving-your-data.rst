@@ -163,7 +163,7 @@ This method resets the model state for saving new information.
 
 If the ``$data`` parameter (using the array format outlined above)
 is passed, the model instance will be ready to save with that data
-(accessible at ``$this->data``).
+(accessible at ``$this->request->data``).
 
 If ``false`` is passed instead of an array, the model instance will
 not initialize fields from the model schema that are not already
