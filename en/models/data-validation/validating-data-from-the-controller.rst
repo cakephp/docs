@@ -26,6 +26,7 @@ doesn't:
         // it validated logic
     } else {
         // didn't validate logic
+        $errors = $this->ModelName->validationErrors;
     }
 
 It may be desirable to validate your model only using a subset of
@@ -53,6 +54,11 @@ invalidFields method also returns that data as the result.
 
     <?php
     $errors = $this->ModelName->invalidFields(); // contains validationErrors array
+
+The validation errors list is not cleared between successive calls to ``invalidFields()``
+So if you are validating in a loop and want each set of errors separately
+don't use ``invalidFields()``. Instead use ``validates()``
+and access the ``validationErrors`` model property.
 
 It is important to note that the data must be set to the model
 before the data can be validated. This is different from the save
