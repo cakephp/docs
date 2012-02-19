@@ -15,7 +15,6 @@
 
 /* -- top navbars -- */
 .search-header {
-	background: #003D4C;
 	color: #fff;
 }
 .breadcrumb-header {
@@ -31,7 +30,7 @@
 	color: #fff;
 }
 .breadcrumb-header .versions {
-	background: #003D4C;
+	background: #417282;
 	display: block;
 	margin: 0;
 	position: absolute;
@@ -50,6 +49,23 @@
 .breadcrumb li {
 	font-size: 18px;
 	margin: 0;
+}
+
+/* Searchbox */
+#searchform {
+	margin: 18px 0;
+}
+.search-input {
+	width: 70%;
+	font-size: 30px;
+	line-height: 30px;
+	padding: 5px 0;
+	margin:  0 3% 0 0;
+}
+.search-submit {
+	padding: 6px 2px;
+	font-size: 16px;
+	width: 15%;
 }
 
 
@@ -331,16 +347,6 @@ dt tt {
 	font-weight: normal;
 }
 
-/* Searchbox */
-ul.versions {
-    color:#fff;
-    float:right;
-    margin:0;
-    margin-top:-22px;
-    margin-right:200px;
-    padding:0;
-    font-size:0.9em;
-}
 
 /* -- Sidebar --*/
 .sidebar > ul {
@@ -353,4 +359,13 @@ ul.versions {
 }
 .sidebar .current {
 	color: #C92434;
+}
+
+/* -- Footer --*/
+.related-pages {
+	float: right;
+}
+.related-pages a {
+	font-size: 14px;
+	font-family: MuseoSlab500, Helvetica, Arial;	
 }

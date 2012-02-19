@@ -80,11 +80,12 @@ a:hover {
 }
 
 /* Buttons */
-.button.primary {
-	font-size: 14px;
-	background: #C92434;
+.button {
 	font-family: MuseoSlab500, Helvetica, Arial;
 	font-weight: normal;
+}
+.button.red {
+	background: #C92434;
 }
 
 
@@ -127,4 +128,34 @@ ul {
 }
 ul ul {
 	margin: 9px 0 9px 30px;
+}
+
+/* tilted header */
+.masthead {
+	background: #417282 url(header-bg.png) repeat-x;
+	position: relative;
+	overflow: hidden;
+}
+.header-backing {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	z-index: 0;
+	background: url(header-halftone.png) repeat-x;
+
+	-webkit-transform: rotate(-2.8deg);
+	-moz-transform: rotate(-2.8deg);
+	transform: rotate(-2.8deg);
+}
+.masthead .row {
+	z-index: 1;
+	position: relative;
+}
+
+/* footer */
+.footer {
+	background: #B2CCCD url(pale-halftone-bottom.png) top left repeat-x;
+	padding: 10px 0;
 }
