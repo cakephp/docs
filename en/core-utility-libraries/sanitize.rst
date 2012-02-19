@@ -34,7 +34,7 @@ Once you've done that, you can make calls to Sanitize statically.
     :param mixed $options: Options to use when cleaning, see below.
 
     This function is an industrial-strength, multi-purpose cleaner,
-    meant to be used on entire arrays (like $this->data, for example).
+    meant to be used on entire arrays (like $this->request->data, for example).
     The function takes an array (or string) and returns the clean
     version. The following cleaning operations are performed on each
     element in the array (recursively):
@@ -65,7 +65,7 @@ Once you've done that, you can make calls to Sanitize statically.
     Usage of clean() with options looks something like the following::
 
         <?php
-        $this->data = Sanitize::clean($this->data, array('encode' => false));
+        $this->data = Sanitize::clean($this->request->data, array('encode' => false));
 
 
 .. php:staticmethod:: Sanitize::escape($string, $connection)
