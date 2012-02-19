@@ -105,7 +105,7 @@ true if you want the save operation to continue.
 
 This callback is especially handy for any data-massaging logic that
 needs to happen before your data is stored. If your storage engine
-needs dates in a specific format, access it at $this->data and
+needs dates in a specific format, access it at $this->request->data and
 modify it.
 
 Below is an example of how beforeSave can be used for date
@@ -118,9 +118,9 @@ changed very easily. Use the code below in the appropriate model.
 
     <?php
     function beforeSave() {
-        if (!empty($this->data['Event']['begindate']) && !empty($this->data['Event']['enddate'])) {
-            $this->data['Event']['begindate'] = $this->dateFormatBeforeSave($this->data['Event']['begindate']);
-            $this->data['Event']['enddate'] = $this->dateFormatBeforeSave($this->data['Event']['enddate']);
+        if (!empty($this->request->data['Event']['begindate']) && !empty($this->request->data['Event']['enddate'])) {
+            $this->request->data['Event']['begindate'] = $this->dateFormatBeforeSave($this->request->data['Event']['begindate']);
+            $this->request->data['Event']['enddate'] = $this->dateFormatBeforeSave($this->request->data['Event']['enddate']);
         }
         return true;
     }
