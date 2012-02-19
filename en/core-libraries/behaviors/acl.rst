@@ -57,11 +57,11 @@ belongsTo Group::
 
     <?php
     function parentNode() {
-        if (!$this->id && empty($this->data)) {
+        if (!$this->id && empty($this->request->data)) {
             return null;
         }
-        $data = $this->data;
-        if (empty($this->data)) {
+        $data = $this->request->data;
+        if (empty($this->request->data)) {
             $data = $this->read();
         } 
         if (!$data['User']['group_id']) {
