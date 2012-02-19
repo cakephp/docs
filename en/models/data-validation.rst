@@ -220,7 +220,7 @@ The numeric check is so that CakePHP does the right thing when
 The difference between ``required`` and ``allowEmpty`` can be
 confusing. ``'required' => true`` means that you cannot save the
 model without the *key* for this field being present in
-``$this->data`` (the check is performed with ``isset``); whereas,
+``$this->request->data`` (the check is performed with ``isset``); whereas,
 ``'allowEmpty' => false`` makes sure that the current field *value*
 is nonempty, as described above.
 
@@ -401,7 +401,7 @@ When writing a validation rule which can be used by multiple
 fields, take care to extract the field value from the $check array.
 The $check array is passed with the form field name as its key and
 the field value as its value. The full record being validated is
-stored in $this->data member variable::
+stored in $this->request->data member variable::
 
     <?php
     class Post extends AppModel {
