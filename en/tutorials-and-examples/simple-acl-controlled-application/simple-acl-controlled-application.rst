@@ -155,7 +155,7 @@ AuthComponent will expect that your passwords are hashed.  In
         // other code.
 
         public function beforeSave() {
-            $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+            $this->request->data['User']['password'] = AuthComponent::password($this->request->data['User']['password']);
             return true;
         }
     }
@@ -246,11 +246,11 @@ our ``User`` model we will add the following::
         public $actsAs = array('Acl' => array('type' => 'requester'));
          
         public function parentNode() {
-            if (!$this->id && empty($this->data)) {
+            if (!$this->id && empty($this->request->data)) {
                 return null;
             }
-            if (isset($this->data['User']['group_id'])) {
-                $groupId = $this->data['User']['group_id'];
+            if (isset($this->request->data['User']['group_id'])) {
+                $groupId = $this->request->data['User']['group_id'];
             } else {
                 $groupId = $this->field('group_id');
             }
