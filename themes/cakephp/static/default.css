@@ -65,7 +65,7 @@
 	clear: right;
 }
 .search-input {
-	width: 76%;
+	width: 82%;
 	font-size: 16px;
 	padding: 5px 0;
 	margin:  0 3% 0 0;
@@ -90,17 +90,32 @@
 	#tablet-nav {
 		font-size: 14px;
 		float: right;
-		margin: 5px 5px 10px 0;
+		margin: 10px 5px 10px 0;
+		width: 10%;
 	}
 	.versions.inline {
 		display: none;
 	}
 	.masthead img {
 		margin-left: 10%;
-		margin-top: 14px;
+		margin-top: 9px;
 	}
 	
-	/* Navigation */
+	#searchform {
+		margin: 10px 0 0 0;
+		width: 75%;
+		float: left;
+		clear: none;
+	}
+	.search-input {
+		width: 95%;
+	}
+	.search-submit {
+		margin: 7px 5% 0 0;
+		float: right;
+	}
+	
+	/* modal navigation */
 	#nav-modal ul {
 		list-style: none;
 	}
@@ -159,17 +174,6 @@ dl tt {
     border-bottom: none;
 }
 
-#page-contents-button {
-	float: right;
-	padding: 7px 15px;
-}
-.body .panel {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 100%;
-	display: none;
-}
 
 
 /* Inline list styles */
@@ -400,9 +404,21 @@ dt tt {
 }
 
 /* -- page contents -- */
+#page-contents-button {
+	float: right;
+	padding: 7px 15px;
+}
+.body .panel {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	display: none;
+	padding: 0;
+}
 .panel.flyout > ul {
 	list-style: none;
-	margin-left: 0;
+	margin: 15px;
 }
 .panel.flyout li a {
 	font-size: 16px;

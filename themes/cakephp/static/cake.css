@@ -88,6 +88,9 @@ a:hover {
 	-webkit-text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
 	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.45);
 }
+.button:hover {
+	background: #b7cfcf;
+}
 .button.red {
 	background: #C92434;
 }
