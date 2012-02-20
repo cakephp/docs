@@ -1,4 +1,4 @@
-App = new Object();
+App = {};
  
 App.Book = (function() {
  
@@ -16,7 +16,7 @@ App.Book = (function() {
 		base = location.href.replace(location.protocol + '//' + location.host, '').split('/').slice(0, 3).join('/') + '/'; 
         // SEARCH EVENT
         $('#searchform input.search-input').keyup(function() {
-            if ($(this).val() == '') {
+            if ($(this).val() === '') {
                 $('#search-results ul').fadeOut(150, function() {
                     $(this).empty();
                     $('ul.current').fadeIn(150);
@@ -28,7 +28,8 @@ App.Book = (function() {
 					$('#search-results ul').show();
 					search_menu($(self).val());
 				}, 200);
-            }
+			}
+
         });
 
 
@@ -36,7 +37,7 @@ App.Book = (function() {
                 function(e) {
                     // escape key
                     if (e.keyCode == 27) {
-                        if ($('#searchform input.search-input').val() == '') {
+                        if ($('#searchform input.search-input').val() === '') {
 							$('#search-results ul').fadeOut(150, function() {
 			                    $(this).empty();
 						        $('ul.current').fadeIn(150);
@@ -50,6 +51,31 @@ App.Book = (function() {
         $.getJSON(base + '_static/menu.json', function(data) {
 			menu = data;
         });
+
+		// Make top nav responsive.
+		$('#cakephp-global-navigation ul').responsiveMenu();
+
+		// Make side navigation go into a lightbox.
+		$('#tablet-nav').bind('click', function (e) {
+			e.preventDefault();
+
+			// Squirt the nav into the modal.
+			var contents = $('#sidebar-navigation').html();
+			var modal = $('#nav-modal').html(contents);
+			modal.append('<a href="#" class="close-reveal-modal">&#215;</a>');
+			modal.reveal({
+				animation: 'fade'
+			});
+		});
+
+		$('#page-contents-button').bind('click', function (e) {
+			e.preventDefault();
+			e.stopPropagation();
+			$('#page-contents').fadeIn('fast');
+		});
+		$(document).bind('click', function (e) {
+			$('#page-contents').fadeOut('fast');
+		});
 	}
  
 	function wait() {
@@ -71,8 +97,8 @@ App.Book = (function() {
         $.each(results, function(index, item) {
             if (item.score > 0) {
                 $('#search-results ul').append(
-                        "<li><a href='" + base + item.node.link + "'>"
-                                + item.node.text + "</a></li>");
+					"<li><a href='" + base + item.node.link + "'>" + 
+					item.node.text + "</a></li>");
             }
         });
     }
@@ -82,7 +108,7 @@ App.Book = (function() {
     }
  
     return {
-        init : init,
+        init : init
     }
 })();
 
@@ -257,5 +283,54 @@ jQuery.extend(jQuery.expr[':'], {
     }
 });
 
+// Create a responsive design menu.
+(function($) {
+	$.fn.responsiveMenu = function(options) {
+		var defaults = {
+			autoArrows: false,
+			width: 768
+		}
+
+		options = $.extend(defaults, options);
+		return this.each(function() {
+			var $this = $(this);
+			var $window = $(window);
+			var setClass = function() {
+				if ($window.width() > options.width) {
+					$this.addClass('dropdown').removeClass('accordion');
+				} else {
+					$this.addClass('accordion').removeClass('dropdown');
+				}
+			}
+
+			$window.resize(function() {
+				setClass();
+				$this.children('ul').css('display', 'none');
+			});
+
+			setClass();
+			$this
+				.addClass('responsive-menu')
+				.find('a')
+					.live('click', function(e) {
+						var $a = $(this);
+						var container = $a.next('ul,div');
+						if ($this.hasClass('accordion') && container.length > 0) {
+							container.slideToggle();
+							return false;
+						}
+					})
+					.stop()
+					.siblings('ul').parent('li').addClass('hasChild');
+
+			if (options.autoArrows) {
+				$('.hasChild > a', $this)
+					.append('<span class="arrow">&nbsp;</span>');
+			}
+		});
+	}
+})(jQuery);
+
+	
 
 $(App.Book.init);

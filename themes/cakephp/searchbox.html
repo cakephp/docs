@@ -7,7 +7,9 @@
     :copyright: Copyright 2007-2011 by the Sphinx team, see AUTHORS.
     :license: BSD, see LICENSE for details.
 #}
-<div id="searchbox" class="columns nine">
+<div id="searchbox" class="columns nine phone-three">
+	<a href="#" id="tablet-nav" class="hide-on-desktops button small">{{ _('Nav') }}</a>
+
 	<form id="searchform" class="search" action="{{ pathto('search') }}" method="get">
 		<input class="search-input" type="search" name="q" size="18" />
 		<input class="search-submit button red" type="text" value="{{ _('Search') }}" />
@@ -15,5 +17,4 @@
 		<input type="hidden" name="area" value="default" />
 	</form>
 
-	<a href="#" id="tablet-nav" class="hide-on-desktops button small">{{ _('Nav') }}</a>
 </div>

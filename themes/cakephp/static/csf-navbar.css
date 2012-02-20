@@ -1,4 +1,4 @@
-/* @override http://localhost/cakephp/cakephp-github/csfnavbar/css/style.css */
+/* @override http://localhost/cake_docs/build/html/en/_static/csf-navbar.css */
 /**
  * Adapted Reset CSS Reloaded
  * ------------------------------------
@@ -38,40 +38,41 @@
 #cakephp-global-navigation {
 	border-bottom: 1px solid #000;
 	position: relative;
-	z-index: 999;
+	z-index: 39;
+	background: #3B3B3B;
 	background: -moz-linear-gradient(top, #3B3B3B 0%, #2b2b2b 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3B3B3B), color-stop(100%,#2b2b2b));
 }
 #cakephp-global-navigation ul {
 	height: 29px;
 	margin: 0 auto;
-	width: 980px;
+	max-width: 980px;
 	display: block;
 }
-#cakephp-global-navigation ul li {
+#cakephp-global-navigation li {
 	list-style: none;
 	float: left;
 	height: 17px;
+	font-size: 17px;
 	line-height: 23px;
 	position: relative;
 	width: 120px;
 	padding: 3px 0;
 	list-style-image: none;
 }
-#cakephp-global-navigation ul li:hover,
-#cakephp-global-navigation ul li.sfhover {
-	background: #606060;
+#cakephp-global-navigation li:hover {
+	background: #303030;
 }
-#cakephp-global-navigation ul li.main {
+#cakephp-global-navigation li.main {
 	background: transparent url('./main-link.png') 0px 4px no-repeat;
 	margin-left: 0;
 	margin-right: 40px;
 	padding-left: 27px;
 	width: 60px;
 }
-#cakephp-global-navigation ul li,
-#cakephp-global-navigation ul li a,
-#cakephp-global-navigation ul li span {
+#cakephp-global-navigation li,
+#cakephp-global-navigation a,
+#cakephp-global-navigation span {
 	font-family: Tahoma;
 	font-size: 12px;
 	color: #fff;
@@ -81,11 +82,11 @@
 	cursor: hand;
 	cursor: pointer;
 }
-#cakephp-global-navigation ul li a,
-#cakephp-global-navigation ul li span {
+#cakephp-global-navigation li a,
+#cakephp-global-navigation li span {
 	padding: 0 10px;
 }
-#cakephp-global-navigation ul li.main a {
+#cakephp-global-navigation li.main a {
 	padding: 0;
 	font-size: 14px;
 }
@@ -94,7 +95,7 @@
 /** Second level 
  * --------------
  */
-#cakephp-global-navigation ul ul {
+#cakephp-global-navigation .second-level {
 	display: none;
 	width: 200px;
 	margin: 0;
@@ -103,7 +104,7 @@
 	border: 1px solid #000;
 	border-top: 0;
 	position: relative;
-	top: 1px;
+	top: 3px;
 	left: -1px;
 	list-style: none;
 	background: #1b404a;
@@ -111,7 +112,7 @@
 	background: -moz-linear-gradient(top, #1b404a, #245b6a);
 	border-radius: 0 0 5px 5px;
 }
-#cakephp-global-navigation ul li ul li {
+#cakephp-global-navigation .second-level li {
 	display: block;
 	float: none;
 	width: 196px;
@@ -119,24 +120,24 @@
 	margin: 0;
 }
 /* display on hover */
-#cakephp-global-navigation ul li:hover ul,
-#cakephp-global-navigation ul li.sfhover ul {
+#cakephp-global-navigation li:hover .second-level {
 	display: block;
 	margin: 0;
 }
-#cakephp-global-navigation ul li ul li.cake-version {
+#cakephp-global-navigation .cake-version {
 	height: 45px;
 }
-#cakephp-global-navigation ul li ul li:hover,
-#cakephp-global-navigation ul li ul li.sfhover {
+#cakephp-global-navigation .second-level li:hover {
 	background: #2f6f80;
 }
-#cakephp-global-navigation ul li ul li a {
-	margin: 0 0px;
-	line-height: 28px;
+#cakephp-global-navigation .second-level li:last-child {
+	border-radius: 0 0 5px 5px;
 }
-#cakephp-global-navigation ul li ul li a:hover {
-	color: #e6e49f;
+#cakephp-global-navigation .second-level a {
+	margin: 0 0px;
+}
+#cakephp-global-navigation .second-level a:hover {
+	color: #BD8A5D;
 }
 
 
@@ -144,7 +145,7 @@
  * Third level navigation
  * ------------------------------------
  */
-#cakephp-global-navigation ul ul ul {
+#cakephp-global-navigation .third-level {
 	border: 0;
 	background: none;
 	-webkit-box-shadow: none;
@@ -155,28 +156,28 @@
 	display: block;
 	padding-left: 14px;
 }
-#cakephp-global-navigation .cake-version ul li {
+#cakephp-global-navigation .cake-version li {
 	display: inline;
 	float: left;
 	width: auto;
 	border-right: none;
 	background: none;
 }
-#cakephp-global-navigation .cake-version ul li a {
+#cakephp-global-navigation .cake-version a {
 	padding: 0 3px;
 	background-color: transparent;
 	display: inline;
 }
-#cakephp-global-navigation ul li ul li:hover ul li {
+#cakephp-global-navigation li:hover li {
 	background-color: inherit;
 }
 #cakephp-global-navigation .cake-version ul,
-#cakephp-global-navigation .cake-version ul li,
-#cakephp-global-navigation .cake-version ul li a {
+#cakephp-global-navigation .cake-version li,
+#cakephp-global-navigation .cake-version a {
 	line-height: 15px;
 	height: 15px;
 }
-#cakephp-global-navigation .cake-version ul li a:hover {
-	color: #e37a24;
+#cakephp-global-navigation .cake-version a:hover {
+	color: #BD8A5D;
 	text-decoration: underline;
 }

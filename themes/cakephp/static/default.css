@@ -62,6 +62,7 @@
 /* Searchbox */
 #searchform {
 	margin: 24px 0;
+	clear: right;
 }
 .search-input {
 	width: 70%;
@@ -76,8 +77,35 @@
 .search-submit {
 	padding: 6px 2px;
 	font-size: 16px;
-	width: 12%;
+	width: 90px;
 	vertical-align: top;
+}
+
+/* tablet and smaller */
+@media only screen and (max-width: 767px) {
+	.masthead .button { 
+		display: inline !important;
+	}
+	#tablet-nav {
+		font-size: 14px;
+		float: right;
+		margin: 5px 5px 10px 0;
+	}
+	.versions.inline {
+		display: none;
+	}
+	.masthead img {
+		margin-left: 10%;
+		margin-top: 14px;
+	}
+	
+	/* Navigation */
+	#nav-modal ul {
+		list-style: none;
+	}
+	#nav-modal > ul {
+		margin-left:  0;
+	}
 }
 
 
@@ -130,12 +158,7 @@ dl tt {
 }
 
 #page-contents-button {
-	position: absolute;
-	top: 0;
-	right: 0;
-}
-#page-contents-button:active + .panel {
-	display: block;
+	float: right;
 }
 .body .panel {
 	position: absolute;
@@ -160,8 +183,6 @@ dl tt {
 .breadcrumb li:after {
 	content: ' > ';
 }
-
-
 
 
 
@@ -376,10 +397,10 @@ dt tt {
 }
 
 /* -- Sidebar --*/
-.sidebar > ul {
+#sidebar-navigation > ul {
 	margin-left: 0;
 }
-.sidebar ul {
+.sidebar li {
 	list-style: none;
 	font-size: 16px;
 	font-family: MuseoSlab500, Helvetica, Arial;
