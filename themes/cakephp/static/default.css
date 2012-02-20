@@ -65,7 +65,7 @@
 	clear: right;
 }
 .search-input {
-	width: 70%;
+	width: 76%;
 	font-size: 16px;
 	padding: 5px 0;
 	margin:  0 3% 0 0;
@@ -75,6 +75,7 @@
 	vertical-align: top;
 }
 .search-submit {
+	margin: 0;
 	padding: 6px 2px;
 	font-size: 16px;
 	width: 90px;
@@ -106,6 +107,7 @@
 	#nav-modal > ul {
 		margin-left:  0;
 	}
+	
 }
 
 
@@ -159,6 +161,7 @@ dl tt {
 
 #page-contents-button {
 	float: right;
+	padding: 7px 15px;
 }
 .body .panel {
 	position: absolute;
@@ -368,7 +371,7 @@ dt tt {
 	font-weight: normal;
 }
 
-/*-- glossary --*/
+/* -- glossary -- */
 .glossary dt {
 	font-size: 16px;
 	font-family: MuseoSlab500, Helvetica, Arial;
@@ -394,6 +397,20 @@ dt tt {
 }
 .genindextable a {
 	font-size: 14px;
+}
+
+/* -- page contents -- */
+.panel.flyout > ul {
+	list-style: none;
+	margin-left: 0;
+}
+.panel.flyout li a {
+	font-size: 16px;
+	font-family: MuseoSlab500, Helvetica, Arial;
+	color: #C92434;
+}
+.panel.flyout li li a {
+	color: #417282;
 }
 
 /* -- Sidebar --*/

@@ -83,10 +83,15 @@ a:hover {
 .button {
 	font-family: MuseoSlab500, Helvetica, Arial;
 	font-weight: normal;
+	background: #b2cccd;
+	
+	-webkit-text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.45);
 }
 .button.red {
 	background: #C92434;
 }
+
 
 
 /* Preformatted text */
@@ -162,6 +167,11 @@ ul ul {
 .footer {
 	background: #B2CCCD url(pale-halftone-bottom.png) top left repeat-x;
 	padding: 10px 0;
+}
+
+/* Inline */
+.panel.flyout {
+	border: 3px solid #C92434;
 }
 
 /* Reveal modal dialogs */
