@@ -86,7 +86,7 @@ on :doc:`/models/behaviors`.
     core-libraries/behaviors/translate
     core-libraries/behaviors/tree
 
-Core libraries
+Core Libraries
 ==============
 
 Beyond the core MVC components, CakePHP includes a great selection of utility
@@ -98,8 +98,10 @@ logging, internationalization and more.
 
     core-utility-libraries/app
     core-libraries/caching
-    core-utility-libraries/sanitize
     core-utility-libraries/email
+    core-utility-libraries/number
+    core-utility-libraries/time
+    core-utility-libraries/sanitize
     core-utility-libraries/file-folder
     core-utility-libraries/httpsocket
     core-utility-libraries/inflector
@@ -110,8 +112,6 @@ logging, internationalization and more.
     core-utility-libraries/set
     core-utility-libraries/string
     core-utility-libraries/xml
-    core-utility-libraries/time
-    core-utility-libraries/number
 
 
 .. meta::
