@@ -336,9 +336,9 @@ model. Create a file named ``ArticleFixture.php`` in your
               'updated' => 'datetime' 
           ); 
           public $records = array( 
-              array ('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'), 
-              array ('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'), 
-              array ('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31') 
+              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'), 
+              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'), 
+              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31') 
           ); 
      } 
 
@@ -352,21 +352,26 @@ and how they are defined. The format used to define these fields is
 the same used with :php:class:`CakeSchema`. The keys available for table
 definition are:
 
-type
-    CakePHP internal data type. Currently supported: string (maps to
-    VARCHAR), text (maps to TEXT), integer (maps to INT), float (maps
-    to FLOAT), datetime (maps to DATETIME), timestamp (maps to
-    TIMESTAMP), time (maps to TIME), date (maps to DATE), and binary
-    (maps to BLOB)
-key
-    set to primary to make the field AUTO\_INCREMENT, and a PRIMARY KEY
+``type``
+    CakePHP internal data type. Currently supported:
+        - ``string``: maps to ``VARCHAR``
+        - ``text``: maps to ``TEXT``
+        - ``integer``: maps to ``INT``
+        - ``float``: maps to ``FLOAT``
+        - ``datetime``: maps to ``DATETIME``
+        - ``timestamp``: maps to ``TIMESTAMP``
+        - ``time``: maps to ``TIME``
+        - ``date``: maps to ``DATE``
+        - ``binary``: maps to ``BLOB``
+``key``
+    Set to ``primary`` to make the field AUTO\_INCREMENT, and a PRIMARY KEY
     for the table.
-length
-    set to the specific length the field should take.
-null
-    set to either true (to allow NULLs) or false (to disallow NULLs)
-default
-    default value the field takes.
+``length``
+    Set to the specific length the field should take.
+``null``
+    Set to either ``true`` (to allow NULLs) or ``false`` (to disallow NULLs).
+``default``
+    Default value the field takes.
 
 We can define a set of records that will be populated after the fixture table is
 created. The format is fairly straight forward, ``$records`` is an array of
