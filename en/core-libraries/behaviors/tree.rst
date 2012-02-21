@@ -84,7 +84,7 @@ tree to see what it looks like. With a simple controller::
     
         public $name = 'Categories';
     
-        function index() {
+        public function index() {
             $data = $this->Category->generateTreeList(null, null, null, '&nbsp;&nbsp;&nbsp;');
             debug($data); die;       
         }
@@ -502,7 +502,7 @@ Advanced Usage
     Categories) that moves a specified node down the tree::
 
         <?php
-        function movedown($name = null, $delta = null) {
+        public function movedown($name = null, $delta = null) {
                 $cat = $this->Category->findByName($name);
                 if (empty($cat)) {
                     $this->Session->setFlash('There is no category named ' . $name);
@@ -534,7 +534,7 @@ Advanced Usage
     Categories) that moves a node up the tree::
 
         <?php
-        function moveup($name = null, $delta = null) {
+        public function moveup($name = null, $delta = null) {
                 $cat = $this->Category->findByName($name);
                 if (empty($cat)) {
                     $this->Session->setFlash('There is no category named ' . $name);

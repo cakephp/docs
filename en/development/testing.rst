@@ -557,7 +557,7 @@ this::
             $this->Article = ClassRegistry::init('Article');
         }
 
-        function testPublished() {
+        public function testPublished() {
             $result = $this->Article->published(array('id', 'title'));
             $expected = array(
                 array('Article' => array('id' => 1, 'title' => 'First Article')),

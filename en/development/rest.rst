@@ -76,17 +76,17 @@ this::
     
         public $components = array('RequestHandler');
     
-        function index() {
+        public function index() {
             $recipes = $this->Recipe->find('all');
             $this->set(compact('recipes'));
         }
     
-        function view($id) {
+        public function view($id) {
             $recipe = $this->Recipe->findById($id);
             $this->set(compact('recipe'));
         }
     
-        function edit($id) {
+        public function edit($id) {
             $this->Recipe->id = $id;
             if ($this->Recipe->save($this->request->data)) {
                 $message = 'Saved';
@@ -96,7 +96,7 @@ this::
             $this->set(compact("message"));
         }
     
-        function delete($id) {
+        public function delete($id) {
             if ($this->Recipe->delete($id)) {
                 $message = 'Deleted';
             } else {

@@ -1053,7 +1053,7 @@ available.
     ::
 
         class MyClass {
-            function sayHi() {
+            public function sayHi() {
                 echo 'Hi!';
             }
         }

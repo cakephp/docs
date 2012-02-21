@@ -84,7 +84,7 @@ should consider implementing a different solution. e.g.::
 
     <?php
     // App Controller Code.
-    function beforeFilter() {
+    public function beforeFilter() {
         $locale = Configure::read('Config.language');
         if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath)) {
             // e.g. use /app/View/fre/Pages/tos.ctp instead of /app/View/Pages/tos.ctp

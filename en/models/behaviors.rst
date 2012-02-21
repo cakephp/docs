@@ -189,7 +189,7 @@ good practice to store the settings per alias/model name that is using the
 behavior.  When created behaviors will have their ``setup()`` method called::
 
     <?php
-    function setup(Model $Model, $settings) {
+    public function setup(Model $Model, $settings) {
         if (!isset($this->settings[$Model->alias])) {
             $this->settings[$Model->alias] = array(
                 'option1_key' => 'option1_default_value',
@@ -226,7 +226,7 @@ Although this method takes two parameters, the method signature
 should look like::
 
     <?php
-    function fly(Model $Model, $from, $to) {
+    public function fly(Model $Model, $from, $to) {
         // Do some flying.
     }
 
@@ -248,7 +248,7 @@ a mapped method is slightly different than a normal behavior mixin method::
     class MyBehavior extends ModelBehavior {
         public $mapMethods = array('/do(\w+)/' => 'doSomething');
 
-        function doSomething($model, $method, $arg1, $arg2) {
+        public function doSomething($model, $method, $arg1, $arg2) {
             debug(func_get_args());
             //do something
         }

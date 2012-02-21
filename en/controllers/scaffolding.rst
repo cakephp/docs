@@ -112,7 +112,7 @@ scaffolded at the same time. As with normal scaffolding you can
 override individual methods and replace them with your own::
     
     <?php
-    function admin_view($id = null) {
+    public function admin_view($id = null) {
       // custom code here
     }
 

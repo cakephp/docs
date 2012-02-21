@@ -231,7 +231,7 @@ your controller or you can define it directly in the model.
     class PostsController extends AppController {
         public $name = 'Posts';
 
-        function add() {
+        public function add() {
             if (!empty($this->request->data)) {
                 $this->Post->locale = 'de_de'; // we are going to save the german version
                 $this->Post->create();
@@ -257,7 +257,7 @@ your controller or you can define it directly in the model.
         public $locale = 'en_us';
 
         // Option 2) create a simple method
-        function setLanguage($locale) {
+        public function setLanguage($locale) {
             $this->locale = $locale;
         }
     }

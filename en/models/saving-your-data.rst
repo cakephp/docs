@@ -24,7 +24,7 @@ Here's a quick example of a controller action that uses a CakePHP
 model to save data to a database table::
 
     <?php
-    function edit($id) {
+    public function edit($id) {
         // Has any form data been POSTed?
         if ($this->request->is('post')) {
             // If the form data can be validated and saved...
@@ -410,7 +410,7 @@ that you've POSTed enough data (using the FormHelper) to create a
 single User and a single Profile::
 
     <?php
-    function add() {
+    public function add() {
         if (!empty($this->request->data)) {
             // We can save the User data:
             // it should be in $this->request->data['User']
@@ -486,7 +486,7 @@ Now, in our CompaniesController we can create an ``add()``
 action::
 
     <?php
-    function add() {
+    public function add() {
         if (!empty($this->request->data)) {
             // Use the following to avoid validation errors:
             unset($this->Company->Account->validate['company_id']);
@@ -670,7 +670,7 @@ automatically save the HABTM data to the database.
 ::
 
     <?php
-    function add() {
+    public function add() {
         // Save the association
         if ($this->Tag->save($this->request->data)) {
             // do something on success

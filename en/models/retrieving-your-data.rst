@@ -50,7 +50,7 @@ where you expect only one result. Below are a couple of simple (controller code)
 examples::
 
     <?php
-    function some_function() {
+    public function some_function() {
         // ...
         $semiRandomArticle = $this->Article->find('first');
         $lastCreated = $this->Article->find('first', array(
@@ -94,7 +94,7 @@ find('count')
 couple of simple (controller code) examples::
 
     <?php
-    function some_function() {
+    public function some_function() {
         // ...
         $total = $this->Article->find('count');
         $pending = $this->Article->find('count', array(
@@ -125,7 +125,7 @@ well as ``paginate``. Below are a couple of simple (controller
 code) examples::
 
     <?php
-    function some_function() {
+    public function some_function() {
         // ...
         $allArticles = $this->Article->find('all');
         $pending = $this->Article->find('all', array(
@@ -180,7 +180,7 @@ place where you would want a list such as for populating input select
 boxes. Below are a couple of simple (controller code) examples::
 
     <?php
-    function some_function() {
+    public function some_function() {
         // ...
         $allArticles = $this->Article->find('list');
         $pending = $this->Article->find('list', array(
@@ -224,7 +224,7 @@ be configured using the model attribute
 Some further examples to clarify::
 
     <?php
-    function some_function() {
+    public function some_function() {
         // ...
         $justusernames = $this->Article->User->find('list', array(
             'fields' => array('User.username')
@@ -290,7 +290,7 @@ model data to build nested results. Below are a couple of simple
 (controller code) examples::
 
     <?php
-    function some_function() {
+    public function some_function() {
         // ...
         $allCategories = $this->Category->find('threaded');
         $someCategories = $this->Comment->find('threaded', array(
@@ -378,7 +378,7 @@ return the row before and after the one you request. Below is a simple
 ::
 
     <?php
-    function some_function() {
+    public function some_function() {
        $neighbors = $this->Article->find('neighbors', array('field' => 'id', 'value' => 3));
     }
 
@@ -482,7 +482,7 @@ This all comes together in the following example (controller code):
     class ArticlesController extends AppController {
         
         // Will find all published articles and order them by the created column
-        function index() {
+        public function index() {
             $articles = $this->Article->find('available', array(
                 'order' => array('created' => 'desc')
             ));

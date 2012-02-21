@@ -71,7 +71,7 @@ Below is an example of how afterfind can be used for date
 formatting::
 
     <?php
-    function afterFind($results) {
+    public function afterFind($results) {
         foreach ($results as $key => $val) {
             if (isset($val['Event']['begindate'])) {
                 $results[$key]['Event']['begindate'] = $this->dateFormatAfterFind($val['Event']['begindate']);
@@ -80,7 +80,7 @@ formatting::
         return $results;
     }
     
-    function dateFormatAfterFind($dateString) {
+    public function dateFormatAfterFind($dateString) {
         return date('d-m-Y', strtotime($dateString));
     }
 
@@ -117,7 +117,7 @@ changed very easily. Use the code below in the appropriate model.
 ::
 
     <?php
-    function beforeSave() {
+    public function beforeSave() {
         if (!empty($this->data['Event']['begindate']) && !empty($this->data['Event']['enddate'])) {
             $this->data['Event']['begindate'] = $this->dateFormatBeforeSave($this->data['Event']['begindate']);
             $this->data['Event']['enddate'] = $this->dateFormatBeforeSave($this->data['Event']['enddate']);
@@ -125,7 +125,7 @@ changed very easily. Use the code below in the appropriate model.
         return true;
     }
 
-    function dateFormatBeforeSave($dateString) {
+    public function dateFormatBeforeSave($dateString) {
         return date('Y-m-d', strtotime($dateString));
     }
 
@@ -169,7 +169,7 @@ on this record will also be deleted.
     // In the following example, do not let a product category be deleted if it still contains products.
     // A call of $this->Product->delete($id) from ProductsController.php has set $this->id .
     // Assuming 'ProductCategory hasMany Product', we can access $this->Product in the model.
-    function beforeDelete() {
+    public function beforeDelete() {
         $count = $this->Product->find("count", array(
             "conditions" => array("product_category_id" => $this->id)
         ));

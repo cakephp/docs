@@ -189,11 +189,11 @@ So, we place our new ContactsController in
 /app/Plugin/ContactManager/Controller and it looks like so::
 
     <?php
-    // /app/Plugin/ContactManager/Controller/ContactsController.php
+    // app/Plugin/ContactManager/Controller/ContactsController.php
     class ContactsController extends ContactManagerAppController {
         public $uses = array('ContactManager.Contact');
 
-        function index() {
+        public function index() {
             //...
         }
     }

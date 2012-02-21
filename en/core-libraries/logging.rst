@@ -55,11 +55,11 @@ properties are passed to the log stream's constructor as an array.::
     App::uses('CakeLogInterface', 'Log');
 
     class DatabaseLogger implements CakeLogInterface {
-        function __construct($options = array()) {
+        public function __construct($options = array()) {
             // ...
         }
 
-        function write($type, $message) {
+        public function write($type, $message) {
             // write to the database.
         }
     }

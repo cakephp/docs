@@ -13,7 +13,7 @@ the fat model.
 
     <?php
     class Example extends AppModel {
-        function getRecent() {
+        public function getRecent() {
             $conditions = array(
                 'created BETWEEN (curdate() - interval 7 day) and (curdate() - interval 0 day))'
             );

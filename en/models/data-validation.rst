@@ -368,7 +368,7 @@ function, as shown below::
             )
         );
 
-        function limitDuplicates($check, $limit) {
+        public function limitDuplicates($check, $limit) {
             // $check will have value: array('promomotion_code' => 'some-value')
             // $limit will have value: 25
             $existing_promo_count = $this->find('count', array(
@@ -414,7 +414,7 @@ stored in $this->data member variable::
             )
         );
 
-        function alphaNumericDashUnderscore($check) {
+        public function alphaNumericDashUnderscore($check) {
             // $data array is passed using the form field name as the key
             // have to extract the value to make the function generic
             $value = array_values($check);

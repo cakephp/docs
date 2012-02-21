@@ -75,7 +75,7 @@ Please also remember to call AppController's callbacks within child
 controller callbacks for best results::
 
     <?php
-    function beforeFilter() {
+    public function beforeFilter() {
         parent::beforeFilter();
     }
  
@@ -107,15 +107,15 @@ in ``/app/Controller/RecipesController.php`` and contain::
         # /app/Controller/RecipesController.php
         
         class RecipesController extends AppController {
-            function view($id) {
+            public function view($id) {
                 //action logic goes here..
             }
         
-            function share($customer_id, $recipe_id) {
+            public function share($customer_id, $recipe_id) {
                 //action logic goes here..
             }
         
-            function search($query) {
+            public function search($query) {
                 //action logic goes here..
             }
         }
@@ -146,7 +146,7 @@ the request type before returning::
 
     <?php
     class RecipesController extends AppController {
-        function popular() {
+        public function popular() {
             $popular = $this->Recipe->popular();
             if (!empty($this->request->params['requested'])) {
                 return $popular;
@@ -278,7 +278,7 @@ rendered from the controller.
         <?php
         class RecipesController extends AppController {
         // ...
-            function search() {
+            public function search() {
                 // Render the view in /View/Recipes/search.ctp
                 $this->render();
             }
@@ -313,7 +313,7 @@ will not try to re-render the view::
 
     <?php
     class PostsController extends AppController {
-        function my_action() {
+        public function my_action() {
             $this->render('custom_file');
         }
     }
@@ -332,7 +332,7 @@ Flow Control
     you might wish to redirect them to a receipt screen.::
 
         <?php
-        function placeOrder() {
+        public function placeOrder() {
             // Logic for finalizing order goes here
             if ($success) {
                 $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));
@@ -433,7 +433,7 @@ Other Useful Methods
 
         <?php
         class UserController extends AppController {
-            function delete($id) {
+            public function delete($id) {
                 // delete code goes here, and then...
                 if ($this->referer() != '/') {
                     $this->redirect($this->referer());
@@ -447,7 +447,7 @@ Other Useful Methods
 
         <?php
         class UserController extends AppController {
-            function delete($id) {
+            public function delete($id) {
                 // delete code goes here, and then...
                 $this->redirect($this->referer(array('action' => 'index')));
             }
@@ -485,7 +485,7 @@ Other Useful Methods
     can use the data posted from that form to craft find conditions::
 
         <?php
-        function index() {
+        public function index() {
             $conditions = $this->postConditions($this->request->data);
             $orders = $this->Order->find('all', compact('conditions'));
             $this->set('orders', $orders);
@@ -566,7 +566,7 @@ Other Useful Methods
         <?php
         // Controller/CommentsController.php
         class CommentsController extends AppController {
-            function latest() {
+            public function latest() {
                 if (empty($this->request->params['requested'])) {
                     throw new ForbiddenException();
                 }

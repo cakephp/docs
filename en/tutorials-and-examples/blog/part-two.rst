@@ -419,7 +419,7 @@ Here's what the ``edit()`` action of the PostsController would look
 like::
 
     <?php
-    function edit($id = null) {
+    public function edit($id = null) {
         $this->Post->id = $id;
         if ($this->request->is('get')) {
             $this->request->data = $this->Post->read();
@@ -499,7 +499,7 @@ Next, let's make a way for users to delete posts. Start with a
 ``delete()`` action in the PostsController::
 
     <?php
-    function delete($id) {
+    public function delete($id) {
         if ($this->request->is('get')) {
             throw new MethodNotAllowedException();
         }

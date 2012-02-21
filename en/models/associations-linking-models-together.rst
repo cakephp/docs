@@ -832,7 +832,7 @@ purposes, let's use unbindModel() to remove that association in a
 controller action::
 
     <?php
-    function someAction() {
+    public function someAction() {
         // This fetches Leaders, and their associated Followers
         $this->Leader->find('all');
       
@@ -879,7 +879,7 @@ following find operation). This function appears in the
 LeadersController::
 
     <?php
-    function anotherAction() {
+    public function anotherAction() {
         // There is no Leader hasMany Principles in 
         // the leader.php model file, so a find here, 
         // only fetches Leaders.
