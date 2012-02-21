@@ -340,8 +340,7 @@ association, the data array should be like this::
     false. It returns an array instead of boolean.
 
 .. versionchanged:: 2.1
-
-You can now save deeper associated data as well with setting ``$options['deep'] = true;``
+    You can now save deeper associated data as well with setting ``$options['deep'] = true;``
 
 For saving a record along with its related records having hasMany
 association and deeper associated Comment belongsTo User data as well,
@@ -362,8 +361,9 @@ And save this data with::
     $Article->saveAssociated($data, array('deep' => true));
 
 .. versionchanged:: 2.1
+    ``Model::saveAll()`` and friends now support passing the `fieldList` for multiple models. 
 
-``Model::saveAll()`` and friends now support passing the `fieldList` for multiple models. Example::
+Example of using ``fieldList`` with multiple models::
 
     <?php
     $this->SomeModel->saveAll($data, array(

@@ -1,5 +1,5 @@
-HTML
-####
+HtmlHelper
+##########
 
 .. php:class:: HtmlHelper(View $view, array $settings = array())
 
@@ -384,16 +384,17 @@ methods of the HtmlHelper and how to use them.
         item itself can be a path string or an associate array containing keys
         `src` and `type`.
     :param array $options: Array of HTML attributes, and special options.
+
         Options:
 
-            - `type` Type of media element to generate, valid values are "audio"
-              or "video". If type is not provided media type is guessed based on
-              file's mime type.
-            - `text` Text to include inside the video tag
-            - `pathPrefix` Path prefix to use for relative urls, defaults to 
-              'files/'
-            - `fullBase` If provided the src attribute will get a full address
-              including domain name
+        - `type` Type of media element to generate, valid values are "audio"
+          or "video". If type is not provided media type is guessed based on
+          file's mime type.
+        - `text` Text to include inside the video tag
+        - `pathPrefix` Path prefix to use for relative urls, defaults to 
+          'files/'
+        - `fullBase` If provided the src attribute will get a full address
+          including domain name
 
     .. versionadded:: 2.1
 
