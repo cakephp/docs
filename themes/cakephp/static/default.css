@@ -314,6 +314,7 @@ dl tt {
 /* Tables */
 .docutils td,
 .docutils th {
+	font-size: 14px;
     padding-top: 3px;
     padding-bottom: 3px;
 }
@@ -352,15 +353,21 @@ dl.const em.property {
 .role,
 .directive,
 .class,
+.const,
 .attr,
-.method {
+.function,
+.method,
+.staticmethod {
 	margin-bottom: 28px;
 }
 .role dt,
 .directive dt,
 .class dt,
+.const dt,
 .attr dt,
-.method dt {
+.function dt,
+.method dt,
+.staticmethod dt {
 	font-size: 14px;
 	margin-bottom: 5px;
 }
@@ -371,48 +378,64 @@ dt tt {
 .directive .descname,
 .class .descname,
 .attr .descname,
+.const .descname,
 .directive .descclassname,
 .role .descclassname,
 .attr .descclassname,
+.function .descname,
 .method .descname,
-.method .descclassname {
+.method .descclassname,
+.staticmethod .descname,
+.staticmethod .descclassname {
 	font-family: "Bitstream Vera Sans", "Consolas", "Monaco", monospace;
 	font-size: 16px;
 }
 .role .descname,
 .directive .descname,
+.class .descname,
 .attr .descname,
-.method .descname {
+.const .descname,
+.function .descname,
+.method .descname,
+.staticmethod .descname {
 	font-weight: bold;
 	color: #C92434;
 }
 .role dd,
 .directive dd,
 .attr dd,
-.method dd {
+.const dd,
+.function dd,
+.method dd,
+.staticmethod dd {
 	margin-left: 20px;
 }
 
 /* Parameter lists */
-.method .field-list th,
-.method .field-list {
+.field-list th,
+.field-list {
 	border: 0;
+	padding-top: 0;
 }
-.method .field-name {
+.field-list .field-name {
 	font-size: 15px;
 	font-size: 1.5rem;
 	font-family: MuseoSlab500, Helvetica, Arial;
 	color: #BD8A5D;
 }
-.method .field-list ul {
+.field-list ul {
 	list-style: none;
 	margin-left: 0;
 }
-.method .field-list strong {
+.field-list
+.field-list strong {
 	font-size: 110%;
 	font-family: "Bitstream Vera Sans", "Consolas", "Monaco", monospace;
 	color: #003D4C;
 	font-weight: normal;
+}
+.field-list .field-body {
+	font-size: 14px;
 }
 
 /* -- glossary -- */
