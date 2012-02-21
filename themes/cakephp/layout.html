@@ -1,8 +1,11 @@
 {% extends 'default/layout.html' -%}
-
 {%- block doctype %}
 <!DOCTYPE html>
 {% endblock -%}
+
+{% block extrahead %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% endblock %}
 
 {%- set script_files = script_files + ["_static/app.js", "_static/modernizr.foundation.js", "_static/foundation.js"] -%}
 
