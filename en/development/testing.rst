@@ -479,6 +479,20 @@ Fixture directory.  You can also load fixtures from CakePHP core, or plugins::
 Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
 name as the prefix, will load the fixture from the named plugin.
 
+You can control when your fixtures are loaded by setting
+:php:attr:`CakeTestCase::$autoFixtures` to ``false`` and later load them using
+:php:meth:`CakeTestCase::loadFixtures()`::
+
+    <?php
+    class ArticleTest extends CakeTestCase {
+        public $fixtures = array('app.article', 'app.comment');
+        public $autoFixtures = false;
+
+        public function testMyFunction() {
+            $this->loadFixtures('Article', 'Comment');
+        }
+    }
+
 Testing Models
 ==============
 
