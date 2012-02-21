@@ -8,13 +8,14 @@
     :license: BSD, see LICENSE for details.
 #}
 <div id="searchbox" class="columns nine phone-three">
-	<a href="#" id="tablet-nav" class="hide-on-desktops button small">{{ _('Nav') }}</a>
 
 	<form id="searchform" class="search" action="{{ pathto('search') }}" method="get">
 		<input class="search-input" type="search" name="q" size="18" />
-		<input class="search-submit button red" type="text" value="{{ _('Search') }}" />
+		<input class="search-submit search-big button red" type="submit" value="{{ _('Search') }}" />
 		<input type="hidden" name="check_keywords" value="yes" />
 		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="hide-on-desktops pale button small">{{ _('Nav') }}</a>
 	</form>
 
 </div>
