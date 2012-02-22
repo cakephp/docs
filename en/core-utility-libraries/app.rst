@@ -164,7 +164,7 @@ Adding paths for App to find packages in
         //becomes 
         App::build(array('Controller' => array('/full/path/to/Controller')))
 
-        App::build(array('helpers' => array('/full/path/to/controllers'))) 
+        App::build(array('helpers' => array('/full/path/to/views/helpers'))) 
         //becomes 
         App::build(array('View/Helper' => array('/full/path/to/View/Helper')))
 
