@@ -120,7 +120,7 @@ which writes to the error log. The default log location is
     // Results in this being appended to app/tmp/logs/error.log
     // 2007-11-02 10:22:02 Error: Something didn't work!
 
-You can specify a custom log names, using the second parameter. The
+You can specify a custom log name using the first parameter. The
 default built-in FileLog class will treat this log name as the file
 you wish to write logs to::
 
