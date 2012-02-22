@@ -222,6 +222,8 @@ HtmlHelper
 - :term:`plugin syntax` support has been added for
   :php:meth:`HtmlHelper::script()`, :php:meth:`HtmlHelper::css()`, :php:meth:`HtmlHelper::image()`.
   You can now easily link to plugin assets using ``Plugin.asset``.
+- :php:meth:`HtmlHelper::getCrumbList()` had the ``$startText`` parameter added.
+
 
 View
 ====

@@ -865,13 +865,19 @@ Creating breadcrumb trails with HtmlHelper
     This will add the output of "**Home > Users > Add User**" in your
     layout where getCrumbs was added.
 
-.. php:method:: getCrumbList(array $options = array())
+.. php:method:: getCrumbList(array $options = array(), mixed $startText)
 
     Returns breadcrumbs as a (x)html list.
 
     This method uses :php:meth:`HtmlHelper::tag()` to generate list and its 
-    elements. Works similar to :php:meth:`HtmlHelper::getCrumbs()`, so it uses 
-    options which every crumb was added with.
+    elements. Works similar to :php:meth:`~HtmlHelper::getCrumbs()`, so it uses 
+    options which every crumb was added with.  You can use the ``$startText``
+    parameter to provide the first breadcrumb link/text.  This is useful when
+    you always want to include a root link.  This option works the same as the
+    ``$startText`` option for :php:meth:`~HtmlHelper::getCrumbs()`.
+
+    ..versionchanged:: 2.1
+        The ``$startText`` parameter was added.
 
 
 .. meta::
