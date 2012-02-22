@@ -58,6 +58,9 @@ Models
   parent field, the threaded find will by default use that.
 - Parameters for queries using prepared statements will now be part of the SQL
   dump.
+- Validation arrays can now be more specific with when a field is required.
+  The ``required`` key now accepts ``create`` and ``update``.  These values will
+  make a field required when creating or updating.
 
 Behaviors
 =========

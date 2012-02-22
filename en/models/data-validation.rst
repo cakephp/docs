@@ -186,9 +186,11 @@ definitions.
 required
 --------
 
-This key should be assigned to a boolean value. If ‘required’ is
-true, the field must be present in the data array. For example, if
-the validation rule has been defined as follows::
+This key accepts either a boolean, or ``create`` or ``update``.  Setting this
+key to ``true`` will make the field always required.  While setting it to
+``create`` or ``update`` will make the field required only for update or  create
+operations. If 'required' is evaluated to true, the field must be present in the
+data array.  For example, if the validation rule has been defined as follows::
 
     <?php
     public $validate = array(
@@ -208,6 +210,9 @@ must be present - it does not mean it must have a value. Therefore
 validation will fail if the field is not present in the dataset,
 but may (depending on the rule) succeed if the value submitted is
 empty ('').
+
+.. versionchanged:: 2.1
+    Support for ``create`` and ``update`` were added.
 
 allowEmpty
 ----------
