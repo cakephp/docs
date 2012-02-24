@@ -747,8 +747,11 @@ named differently and its behavior is more predictable.
 .. tip::
 
     When your join table contains extra fields besides two foreign
-    keys, you can prevent deletion of existing records by setting
-    ``'unique'`` array key to ``'keepExisting'``.
+    keys, you can prevent losing the extra field values by setting
+    ``'unique'`` array key to ``'keepExisting'``. You could think of
+    this similar to 'unique' => true, but without losing data from
+    the extra fields during save operation. See: :ref:`HABTM
+    association arrays <ref-habtm-arrays>`.
 
 However, in most cases it's easier to make a model for the join table
 and setup hasMany, belongsTo associations as shown in example above
