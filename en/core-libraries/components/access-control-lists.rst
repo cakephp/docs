@@ -139,7 +139,7 @@ can be identified either by alias paths, or model.id pairs.  You should only use
 one type of identifier in each tree. Generally, controller ACO's are stored
 using aliases, while nodes created with the :php:class:`AclBehavior` are created
 as model.id pairs.  For our example, permissions are resolved between two paths.
-Once an explicit deny/allow rule is encontered path traversal is stopped.
+Once an explicit deny/allow rule is encountered path traversal is stopped.
 
 When checking if ``users/Students/Joe`` can access ``controllers/Courses/add``
 the following happens:
@@ -1027,7 +1027,7 @@ Let's give it a try inside a controller action:
         $result = $this->Acl->check('warriors/Gimli', 'Weapons', 'delete');
     }
 
-The usage here is demonstrational, but hopefully you can see how
+The usage here is for demonstration but hopefully you can see how
 checking like this can be used to decide whether or not to allow
 something to happen, show an error message, or redirect the user to
 a login.
