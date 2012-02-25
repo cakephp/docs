@@ -97,10 +97,11 @@ While our ARO tree would look like:
     * Fred
     * Felicity
 
- * Students
+  * Students
 
     * Joe
     * Jessica
+
 
 With these tree structures, we can define permissions that apply to groups of users, or
 just a single one.  This reduces duplication in your permissions, allows
@@ -162,11 +163,63 @@ TODO: Add a few more examples.
 
 - Using PhpAcl
   - creating a permissions file
+
+Let's setup ``app/Config/acl.php`` to reflect the access rules of our e-learning 
+application. We assume that the user data is stored in a **username** and a **group_id** 
+column of a users model. In order to map a user record to a role defined in PhpAcl we need to 
+tell the adapter how the relevant information can be mapped::
+
+    <?php
+    $config['map'] = array(
+        'User' => 'User/username',
+        'Role' => 'User/group_id',
+    );
+
+Because the roles are given as model IDs we can define some aliases for our **group_ids** to make
+definition of roles and rules easier to read::
+
+    <?php
+    $config['alias'] = array(
+        'Role/1' => 'Role/Administrator',   // group_id 1 == Administrator
+        'Role/2' => 'Role/Teacher',         //          2 == Teacher
+        'Role/3' => 'Role/Student',         //          3 == Student
+    );
+
+Now we can setup the roles. Roles are defined as keys, inherited roles as values::
+
+    <?php
+    // AROs
+    $config['roles'] = array(
+        'Role/Administrator' => null,
+        'Role/Teacher' => 'Role/default',
+        'Role/Student' => 'Role/default',
+    );
+
+As you see, we don't need to define every user as they are identified by their respective group.
+Now lets setup rules. The rules array can contain two keys, **allow** and **deny**. For our simple 
+example we'll only need to define **allow** rules as by default every access controlled 
+object is denied::
+
+    <?php
+    // ACOs
+    $config['rules']['allow'] = array(
+        '/*' => 'Role/Administrator',
+        '/Lessons' => 'Role/Teacher',
+        '/Lessons/(index|view)' => 'Role/Student',
+        '/Courses' => 'Role/Teacher',
+        '/Courses/index' => 'Role/Student',
+        '/Students/index' => 'Role/Teacher',
+        '/Students/add' => 'Role/default',
+        '/Students/edit' => 'Role/Student',
+    );
+
+- Example setup using PhpAcl for an e-learning site.
+
+
 - Using DbAcl
   - creating the tables.
 - Using grant/deny
 - Integrating with AuthComponent
-- Example setup using PhpAcl for an e-learning site.
 
 
 
