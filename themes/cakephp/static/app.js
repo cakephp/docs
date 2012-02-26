@@ -25,9 +25,11 @@ App.Book = (function() {
 		});
 	};
 
+	var searchResults;
+
 	function init() {
 		base = location.href.replace(location.protocol + '//' + location.host, '').split('/').slice(0, 3).join('/') + '/'; 
-		var searchResults = $('#search-results');
+		searchResults = $('#inline-search-results');
 
 		// SEARCH EVENT
 		$('.search-input').keyup(function() {
@@ -90,7 +92,7 @@ App.Book = (function() {
 	}
 
 	function search_menu(query) {
-		$('#search-results').empty().append('<ul></ul>');
+		searchResults.empty().append('<ul></ul>');
 		var matches = [];
 		$.each(menu, function(index, item) {
 			var scored_node = {
@@ -103,7 +105,7 @@ App.Book = (function() {
 		results = matches.slice(0, 20);
 		$.each(results, function(index, item) {
 			if (item.score > 0) {
-				$('#search-results ul').append(
+				searchResults.find('ul').append(
 					"<li><a href='" + base + item.node.link + "'>" + 
 					item.node.text + "</a></li>");
 			}

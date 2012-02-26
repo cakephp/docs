@@ -86,7 +86,7 @@
 	vertical-align: top;
 }
 /* Search results */
-#search-results {
+#inline-search-results {
 	position: absolute;
 	background: #fff;
 	z-index: 10;
@@ -96,19 +96,19 @@
 	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
 	border-top: 1px solid #333;
 }
-#search-results ul {
+#inline-search-results ul {
 	list-style: none;
 	margin: 0;
 }
-#search-results li {
+#inline-search-results li {
 	border-bottom: 1px solid #eee;
 	margin: 0;
 }
-#search-results a {
+#inline-search-results a {
 	display: block;
 	padding: 5px 10px;
 }
-#search-results a:hover {
+#inline-search-results a:hover {
 	background: #eee;
 }
 
