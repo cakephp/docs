@@ -222,7 +222,7 @@ something like::
     <?php
     App::uses('DatabaseSession', 'Model/Datasource/Session');
 
-    class ComboSession implements CakeSessionHandlerInterface {
+    class ComboSession extends DatabaseSession implements CakeSessionHandlerInterface {
         public $cacheKey;
 
         public function __construct() {
