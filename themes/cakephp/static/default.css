@@ -472,12 +472,12 @@ dt tt {
 	padding: 7px 15px;
 }
 .body .panel {
-	position: absolute;
-	top: 0;
-	right: 0;
-	left: 0;
-	display: none;
 	padding: 0;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 100%;
+	display: none;
 	box-sizing: border-box;
 }
 .panel.flyout > ul {

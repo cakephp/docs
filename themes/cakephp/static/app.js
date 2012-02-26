@@ -50,6 +50,7 @@ App.Book = (function() {
 				if ($('.search-input').val() === '') {
 					searchResults.fadeOut('fast');
 				}
+				$('#page-contents').fadeOut('fast');
 			}
 		});
 
