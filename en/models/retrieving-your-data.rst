@@ -444,7 +444,23 @@ The ``find`` method is flexible enough to accept your custom finders, this is
 done by declaring your own types in a model variable and by implementing a special
 function in your model class.
 
-Let's say you want a finder for all published articles in your database. The first
+A Model Find Type is a shortcut to find options. For example, the following two finds are equivalent
+
+::
+
+    $this->User->find('first');
+    $this->User->find('all', array('limit' => 1));
+
+The following are core find types:
+
+* ``first``
+* ``all``
+* ``count``
+* ``list``
+* ``threaded``
+* ``neighbors``
+
+But what about other types? Let's say you want a finder for all published articles in your database. The first
 change you need to do is add your type to the :php:attr:`Model::$findMethods` variable in the model
 
 ::
@@ -506,6 +522,60 @@ requires you to return the $results array (modified or not).
 
 You can create as many custom finders as you like, and they are a great way of reusing code in
 your application across models.
+
+It is also possible to paginate via a custom find type as follows:
+
+::
+
+    <?php
+    class ArticlesController extends AppController {
+        
+        // Will paginate all published articles
+        public function index() {
+            $this->paginate = array('available');
+            $articles = $this->paginate();
+            $this->set(compact('articles'));
+        }
+        
+    }
+
+Setting the ``$this->paginate`` property as above on the controller will result in the ``type``
+of the find becoming ``available``, and will also allow you to continue to modify the find results.
+
+If your pagination page count is becoming corrupt, it may be necessary to add the following code to
+your ``AppModel``, which should fix pagination count:
+
+::
+    <?php
+    class AppModel extends Model {
+    
+    /**
+     * Removes 'fields' key from count query on custom finds when it is an array,
+     * as it will completely break the Model::_findCount() call
+     *
+     * @param string $state Either "before" or "after"
+     * @param array $query
+     * @param array $results
+     * @return int The number of records found, or false
+     * @access protected
+     * @see Model::find()
+     */
+        protected function _findCount($state, $query, $results = array()) {
+            if ($state === 'before') {
+                if (isset($query['type']) && isset($this->findMethods[$query['type']])) {
+                    $query = $this->{'_find' . ucfirst($query['type'])}('before', $query);
+                    if (!empty($query['fields']) && is_array($query['fields'])) {
+                        if (!preg_match('/^count/i', $query['fields'][0])) {
+                            unset($query['fields']);
+                        }
+                    }
+                }
+            }
+            return parent::_findCount($state, $query, $results);
+        }
+        
+    }
+
 
 Magic Find Types
 ================
