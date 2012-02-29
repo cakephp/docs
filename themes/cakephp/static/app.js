@@ -1,64 +1,8 @@
 App = {};
  
 App.Book = (function() {
- 
-	var menu = [];
-	var base;
-	var delay = (function(){
-		var timer = 0;
-		return function(callback, ms){
-			clearTimeout(timer);
-			timer = setTimeout(callback, ms);
-		};
-	})();
-
-	var positionElement = function (to, element) {
-		var position = to.offset();
-		var height = to.outerHeight();
-		var width = to.outerWidth();
-
-		element.css({
-			position: 'absolute',
-			top: position.top + height + 'px',
-			left: position.left + 'px',
-			width: width + 'px'
-		});
-	};
-
-	var searchResults;
 
 	function init() {
-		base = location.href.replace(location.protocol + '//' + location.host, '').split('/').slice(0, 3).join('/') + '/'; 
-		searchResults = $('#inline-search-results');
-
-		// SEARCH EVENT
-		$('.search-input').keyup(function() {
-			if ($(this).val() === '') {
-				searchResults.fadeOut('fast');
-			} else {
-				var _this = $(this);
-				delay(function() {
-					positionElement(_this, searchResults);
-					searchResults.show();
-					search_menu(_this.val());
-				}, 200);
-			}
-		});
-
-
-		$(document).keyup(function(e) {
-			// escape key
-			if (e.keyCode == 27) {
-				if ($('.search-input').val() === '') {
-					searchResults.fadeOut('fast');
-				}
-				$('#page-contents').fadeOut('fast');
-			}
-		});
-
-		$.getJSON(base + '_static/menu.json', function(data) {
-			menu = data;
-		});
 
 		// Make top nav responsive.
 		$('#cakephp-global-navigation ul').responsiveMenu();
@@ -82,32 +26,15 @@ App.Book = (function() {
 			e.stopPropagation();
 			$('#page-contents').fadeIn('fast');
 		});
-		$(document).bind('click', function (e) {
+
+		var hideContents = function (e) {
 			$('#page-contents').fadeOut('fast');
-		});
-	}
- 
-	function wait() {
-
-	}
-
-	function search_menu(query) {
-		searchResults.empty().append('<ul></ul>');
-		var matches = [];
-		$.each(menu, function(index, item) {
-			var scored_node = {
-				score : item.text.toLowerCase().score(query.toLowerCase()),
-				node : item
-			};
-			matches.push(scored_node);
-		});
-		matches.sort(compare_scores);
-		results = matches.slice(0, 20);
-		$.each(results, function(index, item) {
-			if (item.score > 0) {
-				searchResults.find('ul').append(
-					"<li><a href='" + base + item.node.link + "'>" + 
-					item.node.text + "</a></li>");
+		};
+	
+		$(document).bind('click', hideContents);
+		$(document).bind('keyup', function (e) {
+			if (e.keyCode == 27) {
+				hideContents();
 			}
 		});
 	}
@@ -119,6 +46,89 @@ App.Book = (function() {
 	return {
 		init : init
 	}
+})();
+
+// Inline search form, and standalone search form.
+App.Book.Search = (function () {
+
+	var segments = location.pathname.split('/');
+	var base = '/' + segments.slice(1, segments.length - 2).join('/') + '/';
+	var searchResults;
+	var searchInput;
+	var searchUrl = 'http://localhost/docs_search/search';
+
+	var delay = (function(){
+		var timer = 0;
+		return function(callback, ms){
+			clearTimeout(timer);
+			timer = setTimeout(callback, ms);
+		};
+	})();
+
+	var positionElement = function (to, element) {
+		var position = to.offset();
+		var height = to.outerHeight();
+		var width = to.outerWidth();
+
+		element.css({
+			position: 'absolute',
+			top: position.top + height + 'px',
+			left: position.left + 'px',
+			width: width + 'px'
+		});
+	};
+
+	var handleKeyEvent = function (event) {
+		if ($(this).val() === '') {
+			searchResults.fadeOut('fast');
+		} else {
+			var _this = $(this);
+			delay(function() {
+				positionElement(_this, searchResults);
+				searchResults.show();
+				doSearch(_this.val());
+			}, 200);
+		}
+	};
+
+	// escape key
+	var handleEscape = function (event) {
+		if (event.keyCode == 27 && searchInput.val() === '') {
+			searchResults.fadeOut('fast');
+		}
+	};
+
+	var doSearch = function (value) {
+		var url = searchUrl + '?lang=en&q=' + encodeURIComponent(value);
+		var xhr = $.ajax({
+			url: url,
+			dataType: 'json',
+			type: 'GET'
+		});
+
+		xhr.done(function (response) {
+			searchResults.empty().append('<ul></ul>');
+			var results = response.data.slice(0, 10);
+			$.each(results, function(index, item) {
+				searchResults.find('ul').append(
+					"<li><a href='" + base + item.url + "'>" + 
+					item.contents.join("\n") + "</a></li>");
+			});
+		});
+
+	};
+
+	var init = function () {
+		searchInput = $('.search-input');
+		searchResults = $('#inline-search-results');
+
+		searchInput.keyup(handleKeyEvent);
+		$(document).keyup(handleEscape);
+	};
+
+	return {
+		init: init
+	};
 })();
 
 
@@ -339,7 +349,7 @@ jQuery.extend(jQuery.expr[':'], {
 		});
 	}
 })(jQuery);
-
 	
 
 $(App.Book.init);
+$(App.Book.Search.init);
