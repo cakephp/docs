@@ -171,6 +171,24 @@ CakeResponse
 - Added :php:meth:`CakeResponse::cookie()` for setting cookies.
 - Added a number of methods for :ref:`cake-response-caching`
 
+Controller
+==========
+
+Controller
+----------
+
+- :php:attr:`Controller::$uses` was modfied the default value is now ``true``
+  instead of false.  Additionally different values are handled slightly
+  differently, but will behave the same in most cases.
+
+    - ``true`` Will load the default model and merge with AppController.
+    - An array will load those models and merge with AppController.
+    - An empty array will not load any models other than those declared in the
+      base class.
+    - ``false`` will not load any models, and will not merge with the base class
+      either.
+
+
 Components
 ==========
 

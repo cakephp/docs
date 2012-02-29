@@ -718,7 +718,13 @@ given by ``$helpers`` to the view as an object reference variable
 
     If you do not wish to use a Model in your controller, set
     ``public $uses = array()``. This will allow you to use a controller
-    without a need for a corresponding Model file.
+    without a need for a corresponding Model file. However, the models
+    defined in the ``AppController`` will still be loaded.  You can also use
+    ``false`` to not load any models at all.  Even those defined in the
+    ``AppController``
+
+    .. versionchanged:: 2.1
+        Uses now has a new default value, it also handles ``false`` differently.
 
 .. php:attr:: helpers
 
