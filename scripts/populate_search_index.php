@@ -8,7 +8,6 @@
 // Elastic search config
 define('ES_URL', 'http://localhost:9200');
 define('ES_INDEX', 'documentation');
-define('ES_TYPE', 'docs');
 
 
 function main($argv) {
@@ -30,19 +29,20 @@ function main($argv) {
 
 function update_index($lang, $file) {
 	$contents = file_get_contents($file);
-	list($filename) = explode('.', $file);
+	$filename = $file->getPathName();
+	list($filename) = explode('.', $filename);
 
-	$path = str_replace($lang . '/', '', $filename) . '.html';
-	$filename = str_replace('/', '-', $filename);
-	$filename = trim($filename, '-');
+	$path = $filename . '.html';
+	$id = str_replace($lang . '/', '', $filename);
+	$id = str_replace('/', '-', $id);
+	$id = trim($id, '-');
 
-	$url = implode('/', array(ES_URL, ES_INDEX, ES_TYPE, $filename));
+	$url = implode('/', array(ES_URL, ES_INDEX, $lang, $id));
 
 	$data = array(
-		'url' => $path,
-		'title' => $filename,
 		'contents' => $contents,
-		'lang' => $lang
+		'title' => $filename,
+		'url' => $path,
 	);
 
 	$data = json_encode($data);
@@ -52,7 +52,7 @@ function update_index($lang, $file) {
 	fwrite($fh, $data);
 	rewind($fh);
 
-	echo "Sending request for $file\n";
+	echo "Sending request for $file to $url\n";
 
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_PUT, true);
