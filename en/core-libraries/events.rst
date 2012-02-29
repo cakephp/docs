@@ -216,7 +216,7 @@ to trigger methods in this class. A listener is created as follows::
 
     // Attach the UserStatistic object to the Order's event manager
     $statistics = new UserStatistic;
-    $this->Order->getEventManager($statistics);
+    $this->Order->getEventManager()->attach($statistics);
 
 As you can see in the above code, the `attach` function can handle instances of
 the `CakeEventListener` interface. Internally, the event manager will read the
