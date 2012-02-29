@@ -719,7 +719,7 @@ case::
     <?php
     public function testIndex() {
         $this->testAction('/posts/index');
-        $this->assertIsA($this->vars['posts'], 'array');
+        $this->assertInternalType('array', $this->vars['posts']);
     }
 
 
