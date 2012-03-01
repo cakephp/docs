@@ -78,6 +78,9 @@
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
+.standalone-search .search-input {
+	border: 1px solid #ccc;
+}
 .search-submit {
 	margin: 0;
 	padding: 6px 2px;

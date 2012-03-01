@@ -49,16 +49,17 @@ App.Book = (function() {
 })();
 
 // Inline search form, and standalone search form.
-App.Book.Search = (function () {
+App.InlineSearch = (function () {
 
 	var segments = location.pathname.split('/');
 	var base = '/' + segments.slice(1, segments.length - 2).join('/') + '/';
 	var searchResults;
 	var searchInput;
+	var doSearch;
 	var searchUrl = 'http://localhost/docs_search/search';
 
 	var delay = (function(){
-		var timer = 0;
+		var timer;
 		return function(callback, ms){
 			clearTimeout(timer);
 			timer = setTimeout(callback, ms);
@@ -98,8 +99,20 @@ App.Book.Search = (function () {
 		}
 	};
 
-	var doSearch = function (value) {
-		var url = searchUrl + '?lang=en&q=' + encodeURIComponent(value);
+	// Returns a function that is used for executing searches.
+	// Allows re-use between inline and standalone search page.
+	var createSearch = function (searchResult, limit) {
+		return function (value) {
+			executeSearch(value, searchResult, limit);
+		};
+	};
+
+	var executeSearch = function (value, searchResults, limit, page) {
+		var query = {lang: window.lang, q: value};
+		if (page) {
+			query.page = page;
+		}
+		var url = searchUrl + '?' + jQuery.param(query);
 		var xhr = $.ajax({
 			url: url,
 			dataType: 'json',
@@ -107,27 +120,37 @@ App.Book.Search = (function () {
 		});
 
 		xhr.done(function (response) {
+			var results;
 			searchResults.empty().append('<ul></ul>');
-			var results = response.data.slice(0, 10);
+			results = response.data;
+			if (limit) {
+				results = response.data.slice(0, limit);
+			}
 			$.each(results, function(index, item) {
 				searchResults.find('ul').append(
 					"<li><a href='" + base + item.url + "'>" + 
 					item.contents.join("\n") + "</a></li>");
 			});
+			$(document).trigger('search.complete', [response]);
 		});
-
 	};
 
 	var init = function () {
-		searchInput = $('.search-input');
+		searchInput = $('.masthead .search-input');
 		searchResults = $('#inline-search-results');
 
 		searchInput.keyup(handleKeyEvent);
 		$(document).keyup(handleEscape);
+	
+		doSearch = createSearch(searchResults, 10);
 	};
 
 	return {
-		init: init
+		init: init,
+		delay: delay,
+		searchUrl: searchUrl,
+		createSearch: createSearch,
+		executeSearch: executeSearch
 	};
 })();
 
@@ -188,4 +211,4 @@ jQuery.extend(jQuery.expr[':'], {
 })(jQuery);
 
 $(App.Book.init);
-$(App.Book.Search.init);
+$(App.InlineSearch.init);
