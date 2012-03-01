@@ -129,8 +129,17 @@ div.sphinxsidebar ul {
     color: #000;
 }
 
-div.sphinxsidebar a {
-    color: #088;
+div.sphinxsidebar .toctree-l1 a{
+    color: #000;
+    font-weight:bold;
+}
+div.sphinxsidebar .toctree-l2 a{
+    font-size: 12px;
+    font-weight:normal;
+}
+div.sphinxsidebar .toctree-l3 a{
+    font-size: 12px;
+    font-weight:normal;
 }
 
 div.sphinxsidebar input {
