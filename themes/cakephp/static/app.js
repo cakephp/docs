@@ -72,7 +72,7 @@ App.Book.Search = (function () {
 
 		element.css({
 			position: 'absolute',
-			top: position.top + height + 'px',
+			top: position.top + height + window.scrollY + 'px',
 			left: position.left + 'px',
 			width: width + 'px'
 		});
