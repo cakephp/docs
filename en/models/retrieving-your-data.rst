@@ -31,7 +31,7 @@ optional::
         'group' => array('Model.field'), //fields to GROUP BY
         'limit' => n, //int
         'page' => n, //int
-        'offset' => n, //int   
+        'offset' => n, //int
         'callbacks' => true //other possible values are false, 'before', 'after'
     )
 
@@ -45,8 +45,8 @@ own model methods.
 find('first')
 =============
 
-``find('first', $params)`` will return one result, you'd use this for any case 
-where you expect only one result. Below are a couple of simple (controller code) 
+``find('first', $params)`` will return one result, you'd use this for any case
+where you expect only one result. Below are a couple of simple (controller code)
 examples::
 
     <?php
@@ -75,7 +75,7 @@ returned from ``find('first')`` call is of the form::
                 [field2] => value2
                 [field3] => value3
             )
-    
+
         [AssociatedModelName] => Array
             (
                 [id] => 1
@@ -158,7 +158,7 @@ form::
                         [field2] => value2
                         [field3] => value3
                     )
-    
+
                 [AssociatedModelName] => Array
                     (
                         [id] => 1
@@ -166,7 +166,7 @@ form::
                         [field2] => value2
                         [field3] => value3
                     )
-    
+
             )
     )
 
@@ -371,7 +371,7 @@ returned first.
 find('neighbors')
 =================
 
-``find('neighbors', $params)`` will perform a find similar to 'first', but will 
+``find('neighbors', $params)`` will perform a find similar to 'first', but will
 return the row before and after the one you request. Below is a simple
 (controller code) example:
 
@@ -480,7 +480,7 @@ the method to implement would be named ``_findMyFancySearch``.
     <?php
     class Article extends AppModel {
         public $findMethods = array('available' =>  true);
-        
+
         protected function _findAvailable($state, $query, $results = array()) {
             if ($state == 'before') {
                 $query['conditions']['Article.published'] = true;
@@ -496,14 +496,14 @@ This all comes together in the following example (controller code):
 
     <?php
     class ArticlesController extends AppController {
-        
+
         // Will find all published articles and order them by the created column
         public function index() {
             $articles = $this->Article->find('available', array(
                 'order' => array('created' => 'desc')
             ));
         }
-        
+
     }
 
 The special ``_find[Type]`` methods receive 3 arguments as shown above. The first one
@@ -529,14 +529,14 @@ It is also possible to paginate via a custom find type as follows:
 
     <?php
     class ArticlesController extends AppController {
-        
+
         // Will paginate all published articles
         public function index() {
             $this->paginate = array('available');
             $articles = $this->paginate();
             $this->set(compact('articles'));
         }
-        
+
     }
 
 Setting the ``$this->paginate`` property as above on the controller will result in the ``type``
@@ -546,9 +546,10 @@ If your pagination page count is becoming corrupt, it may be necessary to add th
 your ``AppModel``, which should fix pagination count:
 
 ::
+
     <?php
     class AppModel extends Model {
-    
+
     /**
      * Removes 'fields' key from count query on custom finds when it is an array,
      * as it will completely break the Model::_findCount() call
@@ -565,7 +566,7 @@ your ``AppModel``, which should fix pagination count:
                 if (isset($query['type']) && isset($this->findMethods[$query['type']])) {
                     $query = $this->{'_find' . ucfirst($query['type'])}('before', $query);
                     if (!empty($query['fields']) && is_array($query['fields'])) {
-                        if (!preg_match('/^count/i', $query['fields'][0])) {
+                        if (!preg_match('/^count/i', current($query['fields']))) {
                             unset($query['fields']);
                         }
                     }
@@ -573,7 +574,7 @@ your ``AppModel``, which should fix pagination count:
             }
             return parent::_findCount($state, $query, $results);
         }
-        
+
     }
 
 
@@ -746,7 +747,7 @@ found returns false.
     <?php
     $this->Post->id = 22;
     echo $this->Post->field('name'); // echo the name for row id 22
-    
+
     echo $this->Post->field('name', array('created <' => date('Y-m-d H:i:s')), 'created DESC');
     // echo the name of the last created instance
 
@@ -887,7 +888,7 @@ want to restrict your search to posts written by Bob::
 
     <?php
     array(
-        "Author.name" => "Bob", 
+        "Author.name" => "Bob",
         "OR" => array(
             "Post.title LIKE" => "%magic%",
             "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
@@ -1012,7 +1013,7 @@ expression and add it to the conditions array::
 
     <?php
     $conditionsSubQuery['"User2"."status"'] = 'B';
-    
+
     $db = $this->User->getDataSource();
     $subQuery = $db->buildStatement(
         array(
@@ -1030,27 +1031,27 @@ expression and add it to the conditions array::
     );
     $subQuery = ' "User"."id" NOT IN (' . $subQuery . ') ';
     $subQueryExpression = $db->expression($subQuery);
-    
+
     $conditions[] = $subQueryExpression;
-    
+
     $this->User->find('all', compact('conditions'));
 
 This should generate the following SQL::
 
-    SELECT 
-        "User"."id" AS "User__id", 
-        "User"."name" AS "User__name", 
-        "User"."status" AS "User__status" 
-    FROM 
-        "users" AS "User" 
-    WHERE 
+    SELECT
+        "User"."id" AS "User__id",
+        "User"."name" AS "User__name",
+        "User"."status" AS "User__status"
+    FROM
+        "users" AS "User"
+    WHERE
         "User"."id" NOT IN (
-            SELECT 
-                "User2"."id" 
-            FROM 
-                "users" AS "User2" 
-            WHERE 
-                "User2"."status" = 'B' 
+            SELECT
+                "User2"."id"
+            FROM
+                "users" AS "User2"
+            WHERE
+                "User2"."status" = 'B'
         )
 
 Also, if you need to pass just part of your query as raw SQL as the
