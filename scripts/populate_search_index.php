@@ -22,13 +22,13 @@ function main($argv) {
 	$matcher = new RegexIterator($recurser, '/\.rst/');
 
 	foreach ($matcher as $file) {
-		update_index($lang, $file);
+		updateIndex($lang, $file);
 	}
 	echo "Index update complete\n";
 }
 
-function update_index($lang, $file) {
-	$contents = file_get_contents($file);
+function updateIndex($lang, $file) {
+	$fileData = readFileData($file);
 	$filename = $file->getPathName();
 	list($filename) = explode('.', $filename);
 
@@ -40,8 +40,8 @@ function update_index($lang, $file) {
 	$url = implode('/', array(ES_URL, ES_INDEX, $lang, $id));
 
 	$data = array(
-		'contents' => $contents,
-		'title' => $filename,
+		'contents' => $fileData['contents'],
+		'title' => $fileData['title'],
 		'url' => $path,
 	);
 
@@ -73,6 +73,20 @@ function update_index($lang, $file) {
 	fclose($fh);
 
 	echo "Sent $file\n";
+}
+
+function readFileData($file) {
+	$contents = file_get_contents($file);
+
+	// extract the title and guess that things underlined with # or == and first in the file
+	// are the title.
+	preg_match('/^(.*)\n[=#]+\n/', $contents, $matches);
+	$title = $matches[1];
+
+	// Remove the title from the indexed text.
+	$contents = str_replace($matches[0], '', $contents);
+
+	return compact('contents', 'title');
 }
 
 main($argv);

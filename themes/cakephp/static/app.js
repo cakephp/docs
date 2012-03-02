@@ -128,7 +128,8 @@ App.InlineSearch = (function () {
 			}
 			$.each(results, function(index, item) {
 				searchResults.find('ul').append(
-					"<li><a href='" + base + item.url + "'>" + 
+					"<li><a href='" + base + item.url + "'>" +
+					'<strong>' + item.title + '</strong><br />' + 
 					item.contents.join("\n") + "</a></li>");
 			});
 			$(document).trigger('search.complete', [response]);
