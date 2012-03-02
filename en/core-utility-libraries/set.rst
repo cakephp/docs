@@ -730,8 +730,8 @@ available.
 
     .. note::
 
-        If $path is an array or $data is empty it the call is delegated to
-        Set::classicExtract.
+        If ``$path`` does not contain a '/' the call will be delegated to
+        :php:meth:`Set::classicExtract()`
 
     ::
 
