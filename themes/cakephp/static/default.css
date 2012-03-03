@@ -345,9 +345,9 @@ dl.const em.property {
     font-size: 90%;
     font-style: normal;
     padding: 2px 0px 2px 4px;
-    border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
+    border-radius: 4px;
     text-shadow: 0px 1px #fff;
     margin-right: 5px;
 }
