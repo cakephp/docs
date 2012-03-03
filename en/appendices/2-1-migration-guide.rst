@@ -238,8 +238,8 @@ HtmlHelper
   an array.  This gives more control and flexibility over the first crumb link.
 - :php:meth:`HtmlHelper::docType()` now defaults to html5.
 - :php:meth:`HtmlHelper::image()` now has a ``fullBase`` option.
-- :php:meth:`HtmlHelper::video()` has been added.  You can use this method to
-  create HTML5 video elements.
+- :php:meth:`HtmlHelper::media()` has been added.  You can use this method to
+  create HTML5 audio/video elements.
 - :term:`plugin syntax` support has been added for
   :php:meth:`HtmlHelper::script()`, :php:meth:`HtmlHelper::css()`, :php:meth:`HtmlHelper::image()`.
   You can now easily link to plugin assets using ``Plugin.asset``.
