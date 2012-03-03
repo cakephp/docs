@@ -94,7 +94,7 @@ App.InlineSearch = (function () {
 
 	// escape key
 	var handleEscape = function (event) {
-		if (event.keyCode == 27 && searchInput.val() === '') {
+		if (event.keyCode == 27) {
 			searchResults.fadeOut('fast');
 		}
 	};
@@ -126,11 +126,19 @@ App.InlineSearch = (function () {
 			if (limit) {
 				results = response.data.slice(0, limit);
 			}
+			var ul = searchResults.find('ul');
 			$.each(results, function(index, item) {
-				searchResults.find('ul').append(
-					"<li><a href='" + base + item.url + "'>" +
-					'<strong>' + item.title + '</strong><br />' + 
-					item.contents.join("\n") + "</a></li>");
+				var li = $('<li></li>');
+				var link = $('<a></a>');
+				link.attr('href', base + item.url);
+				if (item.title) {
+					link.append('<strong>' + item.title + '</strong><br />');
+				}
+				var span = $('<span></span>');
+				span.text(item.contents.join("\n"));
+				link.append(span);
+				li.append(link);
+				ul.append(li);
 			});
 			$(document).trigger('search.complete', [response]);
 		});

@@ -87,7 +87,7 @@ function readFileData($file) {
 	$contents = str_replace($matches[0], '', $contents);
 
 	// Remove title markers from the text.
-	$contents = preg_replace('/\n[-=]+\n/', '', $contents);
+	$contents = preg_replace('/\n[-=~]+\n/', '', $contents);
 
 	return compact('contents', 'title');
 }
