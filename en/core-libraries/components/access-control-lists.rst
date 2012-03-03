@@ -204,16 +204,14 @@ object is denied::
     // ACOs
     $config['rules']['allow'] = array(
         '/*' => 'Role/Administrator',
-        '/Lessons' => 'Role/Teacher',
-        '/Lessons/(index|view)' => 'Role/Student',
-        '/Courses' => 'Role/Teacher',
-        '/Courses/index' => 'Role/Student',
-        '/Students/index' => 'Role/Teacher',
-        '/Students/add' => 'Role/default',
-        '/Students/edit' => 'Role/Student',
+        '/controllers/Lessons' => 'Role/Teacher',
+        '/controllers/Lessons/(index|view)' => 'Role/Student',
+        '/controllers/Courses' => 'Role/Teacher',
+        '/controllers/Courses/index' => 'Role/Student',
+        '/controllers/Students/index' => 'Role/Teacher',
+        '/controllers/Students/add' => 'Role/default',
+        '/controllers/Students/edit' => 'Role/Student',
     );
-
-- Example setup using PhpAcl for an e-learning site.
 
 
 - Using DbAcl
