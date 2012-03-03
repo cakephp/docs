@@ -496,7 +496,7 @@ dt tt {
 	color: #417282;
 }
 
-/* -- Sidebar --*/
+/* -- Sidebar -- */
 #sidebar-navigation > ul {
 	margin-left: 0;
 }
@@ -509,7 +509,24 @@ dt tt {
 	color: #C92434;
 }
 
-/* -- Footer --*/
+/* -- pagination -- */
+#pagination a {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	border: 1px solid #ccc;
+	margin: 0 4px 0 0;
+}
+#pagination a.active {
+	color: #C92434;
+}
+#pagination a.active:hover {
+	text-decoration: none;
+}
+
+/* -- Footer -- */
 .related-pages {
 	float: right;
 }
