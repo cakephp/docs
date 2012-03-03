@@ -24,7 +24,7 @@ function main($argv) {
 	foreach ($matcher as $file) {
 		updateIndex($lang, $file);
 	}
-	echo "Index update complete\n";
+	echo "\nIndex update complete\n";
 }
 
 function updateIndex($lang, $file) {
@@ -52,7 +52,7 @@ function updateIndex($lang, $file) {
 	fwrite($fh, $data);
 	rewind($fh);
 
-	echo "Sending request for $file to $url\n";
+	echo "Sending request:\n\tfile: $file\n\turl: $url\n";
 
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_PUT, true);
@@ -64,7 +64,7 @@ function updateIndex($lang, $file) {
 	$metadata = curl_getinfo($ch);
 
 	if ($metadata['http_code'] > 400) {
-		echo "Failed to complete request.\n";
+		echo "[ERROR] Failed to complete request.\n";
 		var_dump($response);
 		exit(2);
 	}
@@ -85,6 +85,9 @@ function readFileData($file) {
 
 	// Remove the title from the indexed text.
 	$contents = str_replace($matches[0], '', $contents);
+
+	// Remove title markers from the text.
+	$contents = preg_replace('/\n[-=]+\n/', '', $contents);
 
 	return compact('contents', 'title');
 }
