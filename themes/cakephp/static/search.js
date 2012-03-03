@@ -52,6 +52,10 @@ App.Search = (function () {
 		paginationContainer.delegate('a', 'click', paginate);
 
 		doSearch = App.InlineSearch.createSearch(searchResults);
+		var params = $.getQueryParameters();
+		if (params.q) {
+			searchInput.val(params.q).trigger('keyup');
+		}
 	};
 
 
