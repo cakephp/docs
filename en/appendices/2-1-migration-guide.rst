@@ -327,6 +327,9 @@ FormHelper
   inputs.
 - The ``type`` attribute for :php:meth:`FormHelper::button()` can be removed now.  It still
   defaults to 'submit'.
+- :php:meth:`FormHelper::radio()` now allows you to disable all options.
+  You can do this by setting either ``'disabled' => true`` or ``'disabled' => 'disabled'``
+  in the ``$attributes`` array.
 
 PaginatorHelper
 ---------------

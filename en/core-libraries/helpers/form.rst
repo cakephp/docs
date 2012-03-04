@@ -1032,6 +1032,9 @@ Form Element-Specific Methods
     * ``$attributes['between']`` specify some content to be inserted between the
       legend and first element.
 
+    * ``$attributes['disabled']`` Setting this to ``true`` or ``'disabled'``
+      will disable all of the generated radio buttons.
+
     * ``$attributes['legend']`` Radio elements are wrapped with a label and
       fieldset by default.  Set ``$attributes['legend']`` to false to remove
       them.::
@@ -1052,6 +1055,10 @@ Form Element-Specific Methods
     If for some reason you don't want the hidden input, setting
     ``$attributes['value']`` to a selected value or boolean false will
     do just that.
+
+    .. versionchanged:: 2.1
+        The ``$attributes['disabled']`` option was added in 2.1.
+
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
 
