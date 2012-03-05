@@ -177,7 +177,7 @@ Controller
 Controller
 ----------
 
-- :php:attr:`Controller::$uses` was modfied the default value is now ``true``
+- :php:attr:`Controller::$uses` was modified the default value is now ``true``
   instead of false.  Additionally different values are handled slightly
   differently, but will behave the same in most cases.
 

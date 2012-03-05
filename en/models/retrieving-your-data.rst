@@ -661,7 +661,7 @@ scripting attacks.
 
 .. note::
 
-    ``query()`` does not honor $Model->cachequeries as its
+    ``query()`` does not honor $Model->cacheQueries as its
     functionality is inherently disjoint from that of the calling
     model. To avoid caching calls to query, supply a second argument of
     false, ie: ``query($query, $cachequeries = false)``
