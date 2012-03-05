@@ -14,6 +14,9 @@ window.lang = "{{ language }}";
 
 {# Use the header block to insert the CSF navbar #}
 {%- block header %}
+{# Outer wrapper for pushing the footer to the bottom #}
+<div id="container">
+
 <div id="cakephp-global-navigation">
 	<ul>
 		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
@@ -148,6 +151,10 @@ window.lang = "{{ language }}";
 	{%- endfor %}
 	</ul>
 </div>
+
+	<div class="footer-push"> </div>
+</div>
+{# End of div[id=wrapper] #}
 {% endblock -%}
 
 {%- block relbar2 %}
@@ -155,6 +162,8 @@ window.lang = "{{ language }}";
 {% endblock %}
 
 {%- block footer %}
+{# Push the footer down to the bottom of the page #}
+
 <div class="footer">
 	<div class="row">
 		<div class="columns six offset-by-three contribute">

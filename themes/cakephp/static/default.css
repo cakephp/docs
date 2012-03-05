@@ -13,6 +13,20 @@
  @import 'csf-navbar.css';
  @import 'cake.css';
 
+html {
+	overflow-y: scroll;
+}
+html,
+body {
+	height: 100%;
+}
+#container {
+	min-height: 100%;
+	height: auto;
+	margin-bottom: -80px;
+}
+
+
 /* -- top navbars -- */
 .masthead img {
 	margin-top: 6px;
@@ -527,6 +541,13 @@ dt tt {
 }
 
 /* -- Footer -- */
+.footer-push {
+	clear: both;
+	height: 80px;
+}
+.footer {
+	min-height: 60px;
+}
 .related-pages {
 	float: right;
 }
