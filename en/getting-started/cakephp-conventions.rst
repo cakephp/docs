@@ -40,12 +40,12 @@ internal use. For example::
     <?php
     class NewsController extends AppController {
     
-        function latest() {
+        public function latest() {
             $this->_findNewArticles();
         }
         
-        function _findNewArticles() {
-            //Logic to find latest news articles
+        protected function _findNewArticles() {
+            // Logic to find latest news articles
         }
     }
     

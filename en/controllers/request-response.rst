@@ -465,7 +465,7 @@ You sometimes need to force browsers to not cache the results of a controller
 action.  :php:meth:`CakeResponse::disableCache()` is intended for just that::
 
     <?php
-    function index() {
+    public function index() {
         // do something.
         $this->response->disableCache();
     }
@@ -479,7 +479,7 @@ You can also tell clients that you want them to cache responses. By using
 :php:meth:`CakeResponse::cache()`::
 
     <?php
-    function index() {
+    public function index() {
         //do something
         $this->response->cache(time(), '+5 days');
     }
@@ -556,7 +556,7 @@ no longer considered fresh. This header can be set using the
 :php:meth:`CakeResponse::expires()` method::
 
     <?php
-    function view() {
+    public function view() {
         $this->response->expires('+5 days');
     }
 
@@ -643,7 +643,7 @@ components delegate to ``CakeResponse``.  This helps you get closer to a 'unit'
 test and makes testing controllers easier::
 
     <?php
-    function testSomething() {
+    public function testSomething() {
         $this->controller->response = $this->getMock('CakeResponse');
         $this->controller->response->expects($this->once())->method('header');
         // ...

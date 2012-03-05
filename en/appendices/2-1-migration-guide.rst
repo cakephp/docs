@@ -58,6 +58,9 @@ Models
   parent field, the threaded find will by default use that.
 - Parameters for queries using prepared statements will now be part of the SQL
   dump.
+- Validation arrays can now be more specific with when a field is required.
+  The ``required`` key now accepts ``create`` and ``update``.  These values will
+  make a field required when creating or updating.
 
 Behaviors
 =========
@@ -168,6 +171,24 @@ CakeResponse
 - Added :php:meth:`CakeResponse::cookie()` for setting cookies.
 - Added a number of methods for :ref:`cake-response-caching`
 
+Controller
+==========
+
+Controller
+----------
+
+- :php:attr:`Controller::$uses` was modfied the default value is now ``true``
+  instead of false.  Additionally different values are handled slightly
+  differently, but will behave the same in most cases.
+
+    - ``true`` Will load the default model and merge with AppController.
+    - An array will load those models and merge with AppController.
+    - An empty array will not load any models other than those declared in the
+      base class.
+    - ``false`` will not load any models, and will not merge with the base class
+      either.
+
+
 Components
 ==========
 
@@ -217,11 +238,13 @@ HtmlHelper
   an array.  This gives more control and flexibility over the first crumb link.
 - :php:meth:`HtmlHelper::docType()` now defaults to html5.
 - :php:meth:`HtmlHelper::image()` now has a ``fullBase`` option.
-- :php:meth:`HtmlHelper::video()` has been added.  You can use this method to
-  create HTML5 video elements.
+- :php:meth:`HtmlHelper::media()` has been added.  You can use this method to
+  create HTML5 audio/video elements.
 - :term:`plugin syntax` support has been added for
   :php:meth:`HtmlHelper::script()`, :php:meth:`HtmlHelper::css()`, :php:meth:`HtmlHelper::image()`.
   You can now easily link to plugin assets using ``Plugin.asset``.
+- :php:meth:`HtmlHelper::getCrumbList()` had the ``$startText`` parameter added.
+
 
 View
 ====

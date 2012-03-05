@@ -65,7 +65,7 @@ opening form tag.
 
         // Controller/RecipesController.php:
         <?php
-        function edit($id = null) {
+        public function edit($id = null) {
             if (empty($this->request->data)) {
                 $this->request->data = $this->Recipe->findById($id);
             } else {
@@ -1230,7 +1230,7 @@ Below is an example validation method you could define in your
 model to validate whether a file has been successfully uploaded::
 
     <?php
-    function isUploadedFile($params) {
+    public function isUploadedFile($params) {
         $val = array_shift($params);
         if ((isset($val['error']) && $val['error'] == 0) ||
             (!empty( $val['tmp_name']) && $val['tmp_name'] != 'none')

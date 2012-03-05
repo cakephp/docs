@@ -31,7 +31,7 @@ optional::
         'group' => array('Model.field'), //fields to GROUP BY
         'limit' => n, //int
         'page' => n, //int
-        'offset' => n, //int   
+        'offset' => n, //int
         'callbacks' => true //other possible values are false, 'before', 'after'
     )
 
@@ -45,12 +45,12 @@ own model methods.
 find('first')
 =============
 
-``find('first', $params)`` will return one result, you'd use this for any case 
-where you expect only one result. Below are a couple of simple (controller code) 
+``find('first', $params)`` will return one result, you'd use this for any case
+where you expect only one result. Below are a couple of simple (controller code)
 examples::
 
     <?php
-    function some_function() {
+    public function some_function() {
         // ...
         $semiRandomArticle = $this->Article->find('first');
         $lastCreated = $this->Article->find('first', array(
@@ -75,7 +75,7 @@ returned from ``find('first')`` call is of the form::
                 [field2] => value2
                 [field3] => value3
             )
-    
+
         [AssociatedModelName] => Array
             (
                 [id] => 1
@@ -94,7 +94,7 @@ find('count')
 couple of simple (controller code) examples::
 
     <?php
-    function some_function() {
+    public function some_function() {
         // ...
         $total = $this->Article->find('count');
         $pending = $this->Article->find('count', array(
@@ -125,7 +125,7 @@ well as ``paginate``. Below are a couple of simple (controller
 code) examples::
 
     <?php
-    function some_function() {
+    public function some_function() {
         // ...
         $allArticles = $this->Article->find('all');
         $pending = $this->Article->find('all', array(
@@ -158,7 +158,7 @@ form::
                         [field2] => value2
                         [field3] => value3
                     )
-    
+
                 [AssociatedModelName] => Array
                     (
                         [id] => 1
@@ -166,7 +166,7 @@ form::
                         [field2] => value2
                         [field3] => value3
                     )
-    
+
             )
     )
 
@@ -180,7 +180,7 @@ place where you would want a list such as for populating input select
 boxes. Below are a couple of simple (controller code) examples::
 
     <?php
-    function some_function() {
+    public function some_function() {
         // ...
         $allArticles = $this->Article->find('list');
         $pending = $this->Article->find('list', array(
@@ -224,7 +224,7 @@ be configured using the model attribute
 Some further examples to clarify::
 
     <?php
-    function some_function() {
+    public function some_function() {
         // ...
         $justusernames = $this->Article->User->find('list', array(
             'fields' => array('User.username')
@@ -290,7 +290,7 @@ model data to build nested results. Below are a couple of simple
 (controller code) examples::
 
     <?php
-    function some_function() {
+    public function some_function() {
         // ...
         $allCategories = $this->Category->find('threaded');
         $someCategories = $this->Comment->find('threaded', array(
@@ -371,14 +371,14 @@ returned first.
 find('neighbors')
 =================
 
-``find('neighbors', $params)`` will perform a find similar to 'first', but will 
+``find('neighbors', $params)`` will perform a find similar to 'first', but will
 return the row before and after the one you request. Below is a simple
 (controller code) example:
 
 ::
 
     <?php
-    function some_function() {
+    public function some_function() {
        $neighbors = $this->Article->find('neighbors', array('field' => 'id', 'value' => 3));
     }
 
@@ -444,7 +444,23 @@ The ``find`` method is flexible enough to accept your custom finders, this is
 done by declaring your own types in a model variable and by implementing a special
 function in your model class.
 
-Let's say you want a finder for all published articles in your database. The first
+A Model Find Type is a shortcut to find options. For example, the following two finds are equivalent
+
+::
+
+    $this->User->find('first');
+    $this->User->find('all', array('limit' => 1));
+
+The following are core find types:
+
+* ``first``
+* ``all``
+* ``count``
+* ``list``
+* ``threaded``
+* ``neighbors``
+
+But what about other types? Let's say you want a finder for all published articles in your database. The first
 change you need to do is add your type to the :php:attr:`Model::$findMethods` variable in the model
 
 ::
@@ -464,7 +480,7 @@ the method to implement would be named ``_findMyFancySearch``.
     <?php
     class Article extends AppModel {
         public $findMethods = array('available' =>  true);
-        
+
         protected function _findAvailable($state, $query, $results = array()) {
             if ($state == 'before') {
                 $query['conditions']['Article.published'] = true;
@@ -480,14 +496,14 @@ This all comes together in the following example (controller code):
 
     <?php
     class ArticlesController extends AppController {
-        
+
         // Will find all published articles and order them by the created column
-        function index() {
+        public function index() {
             $articles = $this->Article->find('available', array(
                 'order' => array('created' => 'desc')
             ));
         }
-        
+
     }
 
 The special ``_find[Type]`` methods receive 3 arguments as shown above. The first one
@@ -506,6 +522,61 @@ requires you to return the $results array (modified or not).
 
 You can create as many custom finders as you like, and they are a great way of reusing code in
 your application across models.
+
+It is also possible to paginate via a custom find type as follows:
+
+::
+
+    <?php
+    class ArticlesController extends AppController {
+
+        // Will paginate all published articles
+        public function index() {
+            $this->paginate = array('available');
+            $articles = $this->paginate();
+            $this->set(compact('articles'));
+        }
+
+    }
+
+Setting the ``$this->paginate`` property as above on the controller will result in the ``type``
+of the find becoming ``available``, and will also allow you to continue to modify the find results.
+
+If your pagination page count is becoming corrupt, it may be necessary to add the following code to
+your ``AppModel``, which should fix pagination count:
+
+::
+
+    <?php
+    class AppModel extends Model {
+
+    /**
+     * Removes 'fields' key from count query on custom finds when it is an array,
+     * as it will completely break the Model::_findCount() call
+     *
+     * @param string $state Either "before" or "after"
+     * @param array $query
+     * @param array $results
+     * @return int The number of records found, or false
+     * @access protected
+     * @see Model::find()
+     */
+        protected function _findCount($state, $query, $results = array()) {
+            if ($state === 'before') {
+                if (isset($query['type']) && isset($this->findMethods[$query['type']])) {
+                    $query = $this->{'_find' . ucfirst($query['type'])}('before', $query);
+                    if (!empty($query['fields']) && is_array($query['fields'])) {
+                        if (!preg_match('/^count/i', current($query['fields']))) {
+                            unset($query['fields']);
+                        }
+                    }
+                }
+            }
+            return parent::_findCount($state, $query, $results);
+        }
+
+    }
+
 
 Magic Find Types
 ================
@@ -676,7 +747,7 @@ found returns false.
     <?php
     $this->Post->id = 22;
     echo $this->Post->field('name'); // echo the name for row id 22
-    
+
     echo $this->Post->field('name', array('created <' => date('Y-m-d H:i:s')), 'created DESC');
     // echo the name of the last created instance
 
@@ -817,7 +888,7 @@ want to restrict your search to posts written by Bob::
 
     <?php
     array(
-        "Author.name" => "Bob", 
+        "Author.name" => "Bob",
         "OR" => array(
             "Post.title LIKE" => "%magic%",
             "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
@@ -942,7 +1013,7 @@ expression and add it to the conditions array::
 
     <?php
     $conditionsSubQuery['"User2"."status"'] = 'B';
-    
+
     $db = $this->User->getDataSource();
     $subQuery = $db->buildStatement(
         array(
@@ -960,27 +1031,27 @@ expression and add it to the conditions array::
     );
     $subQuery = ' "User"."id" NOT IN (' . $subQuery . ') ';
     $subQueryExpression = $db->expression($subQuery);
-    
+
     $conditions[] = $subQueryExpression;
-    
+
     $this->User->find('all', compact('conditions'));
 
 This should generate the following SQL::
 
-    SELECT 
-        "User"."id" AS "User__id", 
-        "User"."name" AS "User__name", 
-        "User"."status" AS "User__status" 
-    FROM 
-        "users" AS "User" 
-    WHERE 
+    SELECT
+        "User"."id" AS "User__id",
+        "User"."name" AS "User__name",
+        "User"."status" AS "User__status"
+    FROM
+        "users" AS "User"
+    WHERE
         "User"."id" NOT IN (
-            SELECT 
-                "User2"."id" 
-            FROM 
-                "users" AS "User2" 
-            WHERE 
-                "User2"."status" = 'B' 
+            SELECT
+                "User2"."id"
+            FROM
+                "users" AS "User2"
+            WHERE
+                "User2"."status" = 'B'
         )
 
 Also, if you need to pass just part of your query as raw SQL as the

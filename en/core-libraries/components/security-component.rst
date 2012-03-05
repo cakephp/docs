@@ -64,11 +64,11 @@ in the controller.
     The callback should expect an parameter indicating the type of error::
 
         <?php
-        function beforeFilter() {
+        public function beforeFilter() {
             $this->Security->blackHoleCallback = 'blackhole';
         }
 
-        function blackhole($type) {
+        public function blackhole($type) {
             // handle errors.
         }
 
@@ -199,7 +199,7 @@ want and the Security Component will enforce them on its startup::
     
         public $components = array('Security');
     
-        function beforeFilter() {
+        public function beforeFilter() {
             $this->Security->requirePost('delete');
         }
     }
@@ -212,7 +212,7 @@ triggered if it receives a POST request::
     
         public $components = array('Security');
     
-        function beforeFilter() {
+        public function beforeFilter() {
             if (isset($this->request->params['admin'])) {
                 $this->Security->requireSecure();
             }
@@ -227,14 +227,14 @@ require secure SSL requests::
     
         public $components = array('Security');
     
-        function beforeFilter() {
+        public function beforeFilter() {
             if (isset($this->params['admin'])) {
                 $this->Security->blackHoleCallback = 'forceSSL';
                 $this->Security->requireSecure();
             }
         }
     
-        function forceSSL() {
+        public function forceSSL() {
             $this->redirect('https://' . env('SERVER_NAME') . $this->here);
         }
     }
@@ -268,7 +268,7 @@ valid for 30 minutes and expire on use. You can control how long tokens last by 
 csrfExpires on the component.::
 
     <?php
-    $components = array(
+    public $components = array(
         'Security' => array(
             'csrfExpires' => '+1 hour'
         )
@@ -277,7 +277,7 @@ csrfExpires on the component.::
 You can also set this property in your controller's ``beforeFilter``::
 
     <?php
-    function beforeFilter() {
+    public function beforeFilter() {
         $this->Security->csrfExpires = '+1 hour';
         // ...
     }

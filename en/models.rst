@@ -90,7 +90,7 @@ model and attach it to the controller at ``$this->Ingredient``::
 
     <?php
     class IngredientsController extends AppController {
-        function index() {
+        public function index() {
             //grab all ingredients and pass it to the view:
             $ingredients = $this->Ingredient->find('all');
             $this->set('ingredients', $ingredients);
@@ -104,7 +104,7 @@ model::
     <?php
     class Recipe extends AppModel {
 
-        function steakRecipes() {
+        public function steakRecipes() {
             $ingredient = $this->Ingredient->findByName('Steak');
             return $this->findAllByMainIngredient($ingredient['Ingredient']['id']);
         }

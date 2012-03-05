@@ -306,7 +306,7 @@ controller, setting the ``$title_for_layout`` variable::
 
    <?php
    class UsersController extends AppController {
-       function viewActive() {
+       public function viewActive() {
            $this->set('title_for_layout', 'View Active Users');
        }
    }
@@ -323,7 +323,7 @@ controller actions using the controller or view's
 
     <?php
     // from a controller
-    function admin_view() {
+    public function admin_view() {
         // stuff
         $this->layout = 'admin';
     }
@@ -461,7 +461,7 @@ the Post example::
     <?php
     class PostsController extends AppController {
         // ...
-        function index() {
+        public function index() {
             $posts = $this->paginate();
             if ($this->request->is('requested')) {
                 return $posts;

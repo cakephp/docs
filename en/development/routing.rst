@@ -302,7 +302,7 @@ elements should also be made available as passed arguments::
 
     <?php
     // SomeController.php
-    function view($articleId = null, $slug = null) {
+    public function view($articleId = null, $slug = null) {
         // some code here...
     }
 
@@ -515,7 +515,7 @@ had a controller action that looked like::
 
     <?php
     CalendarsController extends AppController{
-        function view($arg1, $arg2) {
+        public function view($arg1, $arg2) {
             debug(func_get_args());
         }
     }

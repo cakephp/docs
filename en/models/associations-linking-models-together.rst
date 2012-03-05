@@ -626,6 +626,7 @@ array syntax this time::
 
 Possible keys for HABTM association arrays include:
 
+.. _ref-habtm-arrays:
 
 -  **className**: the classname of the model being associated to
    the current model. If you're defining a ‘Recipe HABTM Ingredient'
@@ -650,12 +651,14 @@ Possible keys for HABTM association arrays include:
    multiple HABTM relationships. The default value for this key is the
    underscored, singular name of the other model, suffixed with
    ‘\_id'.
--  **unique**: If true (default value) cake will first delete
-   existing relationship records in the foreign keys table before
-   inserting new ones, when updating a record. So existing
-   associations need to be passed again when updating.
-   To prevent deletion of existing relationship records, set this key to
-   a string ``'keepExisting'``.
+-  **unique**: boolean or string ``keepExisting``.
+    - If true (default value) cake will first delete existing relationship
+      records in the foreign keys table before inserting new ones.
+      Existing associations need to be passed again when updating.
+    - When false, cake will insert the relationship record, and that
+      no join records are deleted during a save operation.
+    - When set to ``keepExisting``, the behavior is similar to `true`,
+      but existing associations are not deleted.
 -  **conditions**: an array of find() compatible conditions or SQL
    string.  If you have conditions on an associated table, you should use a
    'with' model, and define the necessary belongsTo associations on it.
@@ -750,6 +753,12 @@ scenario because when hasAndBelongsToMany associations are saved,
 the association is deleted first. You would lose the extra data in
 the columns as it is not replaced in the new insert.
 
+    .. versionchanged:: 2.1
+
+    You can set ``unique`` setting to ``keepExisting`` circumvent
+    losing extra data during the save operation.  See ``unique``
+    key in :ref:`HABTM association arrays <ref-habtm-arrays>`.
+
 The way to implement our requirement is to use a **join model**,
 otherwise known as a **hasMany through** association.
 That is, the association is a model itself. So, we can create a new
@@ -832,7 +841,7 @@ purposes, let's use unbindModel() to remove that association in a
 controller action::
 
     <?php
-    function someAction() {
+    public function someAction() {
         // This fetches Leaders, and their associated Followers
         $this->Leader->find('all');
       
@@ -879,7 +888,7 @@ following find operation). This function appears in the
 LeadersController::
 
     <?php
-    function anotherAction() {
+    public function anotherAction() {
         // There is no Leader hasMany Principles in 
         // the leader.php model file, so a find here, 
         // only fetches Leaders.

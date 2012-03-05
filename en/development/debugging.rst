@@ -10,7 +10,7 @@ your application.
 Basic Debugging
 ===============
 
-.. php:function:: debug($var, $showHTML = false, $showFrom = true)
+:php:func:`debug($var, $showHTML = false, $showFrom = true) <debug()>`
 
     :param mixed $var: The contents to print out.  Arrays and objects work well.
     :param boolean $showHTML: Set to true, to enable escaping.  Escaping is enabled

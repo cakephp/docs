@@ -133,7 +133,7 @@ structure for the component would look something like this::
 
     <?php
     class MathComponent extends Component {
-        function doComplexOperation($amount1, $amount2) {
+        public function doComplexOperation($amount1, $amount2) {
             return $amount1 + $amount2;
         }
     }
@@ -195,11 +195,11 @@ way you include them in controllers - using the ``$components`` var::
         // the other component your component uses
         public $components = array('Existing'); 
 
-        function initialize($controller) {
+        public function initialize($controller) {
             $this->Existing->foo();
         }
 
-        function bar() {
+        public function bar() {
             // ...
        }
     }
@@ -207,11 +207,11 @@ way you include them in controllers - using the ``$components`` var::
     // app/Controller/Component/ExistingComponent.php
     class ExistingComponent extends Component {
 
-        function initialize($controller) {
+        public function initialize($controller) {
             $this->Parent->bar();
         }
 
-        function foo() {
+        public function foo() {
             // ...
         }
     }

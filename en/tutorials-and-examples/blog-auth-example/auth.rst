@@ -172,7 +172,7 @@ file and add the following lines::
             )
         );
 
-        function beforeFilter() {
+        public function beforeFilter() {
             $this->Auth->allow('index', 'view');
         }
         //...

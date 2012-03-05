@@ -49,7 +49,7 @@ the client and its request.
 
             public $components = array('RequestHandler');
 
-            function beforeFilter () {
+            public function beforeFilter () {
                 if ($this->RequestHandler->accepts('html')) {
                     // Execute code only if client accepts an HTML (text/html) response
                 } elseif ($this->RequestHandler->accepts('xml')) {

@@ -185,7 +185,7 @@ argument.  You should implement your error handling in that method::
 
     <?php
     class AppController extends Controller {
-        function appError($error) {
+        public function appError($error) {
             // custom logic goes here.
         }
     }
@@ -304,7 +304,7 @@ or HTTP errors. An example use of the HTTP exceptions could be rendering 404
 pages for items that have not been found::
 
     <?php 
-    function view ($id) {
+    public function view ($id) {
         $post = $this->Post->findById($id);
         if (!$post) {
             throw new NotFoundException('Could not find that post');
@@ -393,7 +393,7 @@ You can throw any of the HTTP related exceptions from your controller actions
 to indicate failure states.  For example::
 
     <?php
-    function view($id) {
+    public function view($id) {
         $post = $this->Post->read(null, $id);
         if (!$post) {
             throw new NotFoundException();

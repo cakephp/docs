@@ -24,7 +24,7 @@ Here's a quick example of a controller action that uses a CakePHP
 model to save data to a database table::
 
     <?php
-    function edit($id) {
+    public function edit($id) {
         // Has any form data been POSTed?
         if ($this->request->is('post')) {
             // If the form data can be validated and saved...
@@ -410,7 +410,7 @@ that you've POSTed enough data (using the FormHelper) to create a
 single User and a single Profile::
 
     <?php
-    function add() {
+    public function add() {
         if (!empty($this->request->data)) {
             // We can save the User data:
             // it should be in $this->request->data['User']
@@ -486,7 +486,7 @@ Now, in our CompaniesController we can create an ``add()``
 action::
 
     <?php
-    function add() {
+    public function add() {
         if (!empty($this->request->data)) {
             // Use the following to avoid validation errors:
             unset($this->Company->Account->validate['company_id']);
@@ -670,7 +670,7 @@ automatically save the HABTM data to the database.
 ::
 
     <?php
-    function add() {
+    public function add() {
         // Save the association
         if ($this->Tag->save($this->request->data)) {
             // do something on success
@@ -747,8 +747,11 @@ named differently and its behavior is more predictable.
 .. tip::
 
     When your join table contains extra fields besides two foreign
-    keys, you can prevent deletion of existing records by setting
-    ``'unique'`` array key to ``'keepExisting'``.
+    keys, you can prevent losing the extra field values by setting
+    ``'unique'`` array key to ``'keepExisting'``. You could think of
+    this similar to 'unique' => true, but without losing data from
+    the extra fields during save operation. See: :ref:`HABTM
+    association arrays <ref-habtm-arrays>`.
 
 However, in most cases it's easier to make a model for the join table
 and setup hasMany, belongsTo associations as shown in example above

@@ -81,10 +81,9 @@ tree to see what it looks like. With a simple controller::
 
     <?php
     class CategoriesController extends AppController {
-    
         public $name = 'Categories';
-    
-        function index() {
+
+        public function index() {
             $data = $this->Category->generateTreeList(null, null, null, '&nbsp;&nbsp;&nbsp;');
             debug($data); die;       
         }
@@ -249,11 +248,11 @@ that Extreme fishing does not belong under Sport, but instead
 should be located under Other People's Categories. With the
 following code::
 
-  <?php
-  // pseudo controller code
-  $this->Category->id = 5; // id of Extreme fishing
-  $newParentId = $this->Category->field('id', array('name' => 'Other People\'s Categories'));
-  $this->Category->save(array('parent_id' => $newParentId)); 
+    <?php
+    // pseudo controller code
+    $this->Category->id = 5; // id of Extreme fishing
+    $newParentId = $this->Category->field('id', array('name' => 'Other People\'s Categories'));
+    $this->Category->save(array('parent_id' => $newParentId));
 
 As would be expected the structure would be modified to:
 
@@ -301,10 +300,10 @@ reports category is no longer useful. To remove it
 *and any children it may have* just call delete as you would for
 any model. For example with the following code::
 
-  <?php
-  // pseudo controller code
-  $this->Category->id = 10;
-  $this->Category->delete();
+    <?php
+    // pseudo controller code
+    $this->Category->id = 10;
+    $this->Category->delete();
 
 The category tree would be modified as follows:
 
@@ -376,7 +375,7 @@ are a few more tree-orientated permutations at your disposal.
         // -- or --
         $this->Category->id = 1;
         $allChildren = $this->Category->children(); // a flat array with 11 items
-  
+
         // Only return direct children
         $directChildren = $this->Category->children(1, true); // a flat array with 2 items
 
@@ -397,7 +396,7 @@ are a few more tree-orientated permutations at your disposal.
         // -- or --
         $this->Category->id = 1;
         $directChildren = $this->Category->childCount(); // will output 11
-    
+
         // Only counts the direct descendants of this category
         $numChildren = $this->Category->childCount(1, true); // will output 2
 
@@ -502,23 +501,23 @@ Advanced Usage
     Categories) that moves a specified node down the tree::
 
         <?php
-        function movedown($name = null, $delta = null) {
-                $cat = $this->Category->findByName($name);
-                if (empty($cat)) {
-                    $this->Session->setFlash('There is no category named ' . $name);
-                    $this->redirect(array('action' => 'index'), null, true);
-                }
-
-                $this->Category->id = $cat['Category']['id'];
-
-                if ($delta > 0) {  
-                    $this->Category->moveDown($this->Category->id, abs($delta));
-                } else {
-                    $this->Session->setFlash('Please provide the number of positions the field should be moved down.'); 
-                }
-
+        public function movedown($name = null, $delta = null) {
+            $cat = $this->Category->findByName($name);
+            if (empty($cat)) {
+                $this->Session->setFlash('There is no category named ' . $name);
                 $this->redirect(array('action' => 'index'), null, true);
             }
+
+            $this->Category->id = $cat['Category']['id'];
+
+            if ($delta > 0) {
+                $this->Category->moveDown($this->Category->id, abs($delta));
+            } else {
+                $this->Session->setFlash('Please provide the number of positions the field should be moved down.'); 
+            }
+
+            $this->redirect(array('action' => 'index'), null, true);
+        }
 
     For example, if you'd like to move the "Sport" category one
     position down, you would request: /categories/movedown/Sport/1.
@@ -534,30 +533,29 @@ Advanced Usage
     Categories) that moves a node up the tree::
 
         <?php
-        function moveup($name = null, $delta = null) {
-                $cat = $this->Category->findByName($name);
-                if (empty($cat)) {
-                    $this->Session->setFlash('There is no category named ' . $name);
-                    $this->redirect(array('action' => 'index'), null, true);
-                }
-
-                $this->Category->id = $cat['Category']['id'];
-
-                if ($delta > 0) {  
-                    $this->Category->moveUp($this->Category->id, abs($delta));
-                } else {
-                    $this->Session->setFlash('Please provide a number of positions the category should be moved up.'); 
-                }
-
+        public function moveup($name = null, $delta = null) {
+            $cat = $this->Category->findByName($name);
+            if (empty($cat)) {
+                $this->Session->setFlash('There is no category named ' . $name);
                 $this->redirect(array('action' => 'index'), null, true);
-
             }
+
+            $this->Category->id = $cat['Category']['id'];
+
+            if ($delta > 0) {
+                $this->Category->moveUp($this->Category->id, abs($delta));
+            } else {
+                $this->Session->setFlash('Please provide a number of positions the category should be moved up.'); 
+            }
+
+            $this->redirect(array('action' => 'index'), null, true);
+        }
 
     For example, if you would like to move the category "Gwendolyn" up
     one position you would request /categories/moveup/Gwendolyn/1. Now
     the order of Friends will be Gwendolyn, Gerald.
 
-    .. php:method:: removeFromTree($id=null, $delete=false)
+    .. php:method:: removeFromTree($id = null, $delete = false)
 
     Using this method will either delete or move a node but retain its
     sub-tree, which will be reparented one level higher. It offers more
@@ -688,7 +686,7 @@ Data Integrity
         $this->Category->recover();
         // or
         $this->Category->recover('parent');
-     
+
         // Rebuild all the parent_id's based on the lft and rght fields
         $this->Category->recover('tree');
 
@@ -766,7 +764,7 @@ Data Integrity
                     [1] => 163
                     [2] => left greater than right
                 )
-    
+
         )
 
 

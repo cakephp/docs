@@ -99,7 +99,7 @@ adds PaginatorHelper to the list of helpers in your controller, if it has not
 been added already.::
 
     <?php
-    function list_recipes() {
+    public function list_recipes() {
         // similar to findAll(), but fetches paged results
         $data = $this->paginate('Recipe');
         $this->set('data', $data);
@@ -115,7 +115,7 @@ Or you can also set ``conditions`` and other keys in the
 ``$paginate`` array inside your action.::
 
     <?php
-    function list_recipes() {
+    public function list_recipes() {
         $this->paginate = array(
             'conditions' => array('Recipe.title LIKE' => 'a%'),
             'limit' => 10
@@ -158,7 +158,7 @@ from::
     /**
      * Overridden paginate method - group by week, away_team_id and home_team_id
      */
-    function paginate($conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
+    public function paginate($conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
         $recursive = -1;
         $group = $fields = array('week', 'away_team_id', 'home_team_id');
          return $this->find('all', compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group'));
@@ -173,7 +173,7 @@ accordingly depending on what database you are using::
     /**
      * Overridden paginateCount method
      */
-    function paginateCount($conditions = null, $recursive = 0, $extra = array()) {
+    public function paginateCount($conditions = null, $recursive = 0, $extra = array()) {
         $sql = "SELECT DISTINCT ON(week, home_team_id, away_team_id) week, home_team_id, away_team_id FROM games";
         $this->recursive = $recursive;
         $results = $this->query($sql);
@@ -198,7 +198,7 @@ the keyword in controller's ``$paginate`` class variable::
     /**
      * Or on-the-fly from within the action
      */
-    function index() {
+    public function index() {
         $this->paginate = array(
             'MyModel' => array(
                 'limit' => 20,

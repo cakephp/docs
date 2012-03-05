@@ -45,10 +45,10 @@ organized::
 
     <?php
     class BakeriesController extends AppController {
-        function bake {
+        public function bake {
             $this->helpers[] = 'Time';
         }
-        function mix {
+        public function mix {
             // The Time helper is not loaded here and thus not available
         }
     }
@@ -68,7 +68,7 @@ attribute values or modify behavior of a helper::
 
     <?php
     class AwesomeHelper extends AppHelper {
-        function __construct(View $view, $settings = array()) {
+        public function __construct(View $view, $settings = array()) {
             parent::__construct($view, $settings);
             debug($options);
         }
@@ -120,7 +120,7 @@ you can set those in your controller's beforeRender callback::
 
     <?php
     class PostsController extends AppController {
-        function beforeRender() {
+        public function beforeRender() {
             parent::beforeRender();
             $this->helpers['CustomStuff'] = $this->_getCustomStuffSettings();
         }
@@ -174,7 +174,7 @@ actual PHP class file would look something like this::
     App::uses('AppHelper', 'View/Helper');
     
     class LinkHelper extends AppHelper {
-        function makeEdit($title, $url) {
+        public function makeEdit($title, $url) {
             // Logic to create specially formatted link goes here...
         }
     }
@@ -198,7 +198,7 @@ helper. To do so, you can specify helpers you wish to use with a
     class LinkHelper extends AppHelper {
         public $helpers = array('Html');
     
-        function makeEdit($title, $url) {
+        public function makeEdit($title, $url) {
             // Use the HTML helper to output
             // formatted data:
     
@@ -243,7 +243,7 @@ functionality that would be available to all helpers, create
     App::uses('AppHelper', 'View/Helper');
     
     class AppHelper extends Helper {
-        function customMethod () {
+        public function customMethod () {
         }
     }
 

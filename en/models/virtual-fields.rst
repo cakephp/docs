@@ -114,7 +114,7 @@ using virtualFields in models that have more than one alias it is
 best to define the virtualFields in your model's constructor::
 
     <?php
-    function __construct($id = false, $table = null, $ds = null) {
+    public function __construct($id = false, $table = null, $ds = null) {
         parent::__construct($id, $table, $ds);
         $this->virtualFields['name'] = sprintf('CONCAT(%s.first_name, " ", %s.last_name)', $this->alias, $this->alias);
     }
