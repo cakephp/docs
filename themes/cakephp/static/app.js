@@ -56,7 +56,7 @@ App.InlineSearch = (function () {
 	var searchResults;
 	var searchInput;
 	var doSearch;
-	var searchUrl = 'http://localhost/docs_search/search';
+	var searchUrl = 'http://search.cakephp.org/search';
 
 	var delay = (function(){
 		var timer;
