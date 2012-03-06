@@ -9,24 +9,24 @@ Basic usage
 ===========
 
 Ensure the classes are loaded using :php:meth:`App::uses()`::
-    
+
     <?php
     App::uses('Folder', 'Utility');
     App::uses('File', 'Utility');
 
 Then we can setup a new folder instance::
-    
+
     <?php
     $dir = new Folder('/path/to/folder');
 
 and search for all *.ctp* files within that folder using regex::
-    
+
     <?php
     $files = $dir->find('.*\.ctp');
 
 Now we can loop through the files and read, write or append to the contents or
 simply delete the file::
-    
+
     <?php
     foreach ($files as $file) {
         $file = new File($dir->pwd() . DS . $file);
@@ -50,7 +50,7 @@ Folder API
 
 .. php:attr:: path
 
-    Current path to the folder. :php:meth:`Folder::pwd()` will return the same 
+    Current path to the folder. :php:meth:`Folder::pwd()` will return the same
     information.
 
 .. php:attr:: sort
@@ -59,7 +59,7 @@ Folder API
 
 .. php:attr:: mode
 
-    Mode to be used when creating folders. Defaults to ``0755``. Does nothing on 
+    Mode to be used when creating folders. Defaults to ``0755``. Does nothing on
     windows machines.
 
 .. php:staticmethod:: addPathElement( $path, $element )
@@ -91,7 +91,7 @@ Folder API
 
     :rtype: boolean
 
-    Change the mode on a directory structure recursively. This includes 
+    Change the mode on a directory structure recursively. This includes
     changing the mode on files as well::
 
         <?php
@@ -103,7 +103,7 @@ Folder API
 
     :rtype: boolean
 
-    Recursively copy a directory. The only parameter $options can either 
+    Recursively copy a directory. The only parameter $options can either
     be a path into copy to or an array of options::
 
         <?php
@@ -124,7 +124,7 @@ Folder API
 
     :rtype: string
 
-    Returns a correct set of slashes for given $path. (\\ for 
+    Returns a correct set of slashes for given $path. (\\ for
     Windows paths and / for other paths.)
 
 
@@ -132,7 +132,7 @@ Folder API
 
     :rtype: boolean
 
-    Create a directory structure recursively. Can be used to create 
+    Create a directory structure recursively. Can be used to create
     deep path structures like `/foo/bar/baz/shoe/horn`::
 
         <?php
@@ -190,8 +190,8 @@ Folder API
 
 .. note::
 
-    The folder find and findRecursive methods will only find files. If you 
-    would like to get folders and files see :php:meth:`Folder::read()` or 
+    The folder find and findRecursive methods will only find files. If you
+    would like to get folders and files see :php:meth:`Folder::read()` or
     :php:meth:`Folder::tree()`
 
 
@@ -271,7 +271,7 @@ Folder API
 
     :rtype: string
 
-    Returns a correct set of slashes for given $path. (\\ for 
+    Returns a correct set of slashes for given $path. (\\ for
     Windows paths and / for other paths.)
 
 
@@ -287,11 +287,11 @@ Folder API
     :rtype: mixed
 
     :param boolean $sort: If true will sort results.
-    :param mixed $exceptions: An array of files and folder names to ignore. If 
+    :param mixed $exceptions: An array of files and folder names to ignore. If
         true or '.' this method will ignore hidden or dot files.
     :param boolean $fullPath: If true will return results using absolute paths.
 
-    Returns an array of the contents of the current directory. The 
+    Returns an array of the contents of the current directory. The
     returned array holds two arrays: One of directories and one of files::
 
         <?php
@@ -327,7 +327,7 @@ Folder API
 
     :rtype: string
 
-    Returns $path with added terminating slash (corrected for 
+    Returns $path with added terminating slash (corrected for
     Windows or other OS).
 
 
@@ -355,7 +355,7 @@ File API
 
 .. php:attr:: name
 
-    The name of the file with the extension. Differs from 
+    The name of the file with the extension. Differs from
     :php:meth:`File::name()` which returns the name without the extension.
 
 .. php:attr:: info
@@ -398,7 +398,7 @@ File API
 .. php:method:: create( )
 
     :rtype: boolean
-	
+
     Creates the File.
 
 
@@ -450,6 +450,8 @@ File API
 
     Returns the File info.
 
+    .. versionchanged:: 2.1
+        ``File::info()`` now includes filesize & mimetype information.
 
 .. php:method:: lastAccess( )
 
@@ -510,8 +512,8 @@ File API
 
     :rtype: string
 
-    Prepares a ascii string for writing. Converts line endings to the 
-    correct terminator for the current platform. If windows "\r\n" 
+    Prepares a ascii string for writing. Converts line endings to the
+    correct terminator for the current platform. If windows "\r\n"
     will be used all other platforms will use "\n"
 
 
@@ -562,6 +564,8 @@ File API
     :rtype: boolean
 
     Write given data to this File.
+
+.. versionadded:: 2.1 ``File::mime()``
 
 .. php:method:: mime()
 
