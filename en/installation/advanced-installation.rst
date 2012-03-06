@@ -306,12 +306,15 @@ you will need PHP running as a FastCGI instance.
     server {
         listen   80;
         server_name example.com;
+    
+        # root directive should be global
+        root   /var/www/example.com/public/app/webroot/;
 
         access_log /var/www/example.com/log/access.log;
         error_log /var/www/example.com/log/error.log;
 
         location / {
-            root   /var/www/example.com/public/app/webroot/;
+          
             index  index.php index.html index.htm;
             try_files $uri $uri/ /index.php?$uri&$args;
         }
