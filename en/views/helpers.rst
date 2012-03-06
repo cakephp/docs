@@ -240,7 +240,7 @@ functionality that would be available to all helpers, create
 ``/app/View/Helper/AppHelper.php``::
 
     <?php
-    App::uses('Helper', 'View/Helper');
+    App::uses('Helper', 'View');
     
     class AppHelper extends Helper {
         public function customMethod () {
