@@ -525,7 +525,7 @@ dt tt {
 }
 
 /* -- pagination -- */
-#pagination a {
+#search-pagination a {
 	display: inline-block;
 	width: 20px;
 	height: 20px;
@@ -534,10 +534,10 @@ dt tt {
 	border: 1px solid #ccc;
 	margin: 0 4px 0 0;
 }
-#pagination a.active {
+#search-pagination a.active {
 	color: #C92434;
 }
-#pagination a.active:hover {
+#search-pagination a.active:hover {
 	text-decoration: none;
 }
 
