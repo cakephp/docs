@@ -3,11 +3,11 @@ FormHelper
 
 .. php:class:: FormHelper(View $view, array $settings = array())
 
-The FormHelper does most of the heavy lifting in form creation. 
-The FormHelper focuses on creating forms quickly, in a way that 
-will streamline validation, re-population and layout. The 
-FormHelper is also flexible - it will do almost everything for 
-you using conventions, or you can use specific methods to get 
+The FormHelper does most of the heavy lifting in form creation.
+The FormHelper focuses on creating forms quickly, in a way that
+will streamline validation, re-population and layout. The
+FormHelper is also flexible - it will do almost everything for
+you using conventions, or you can use specific methods to get
 only what you need.
 
 Creating Forms
@@ -21,7 +21,7 @@ opening form tag.
 
     All parameters are optional. If ``create()`` is called with no
     parameters supplied, it assumes you are building a form that
-    submits to the current controller, via either the current URL. 
+    submits to the current controller, via either the current URL.
     The default method for form submission is POST.
     The form element is also returned with a DOM ID. The ID is
     generated using the name of the model, and the name of the
@@ -90,7 +90,7 @@ opening form tag.
     When creating forms for models in plugins, you should always use
     :term:`plugin syntax` when creating a form.  This will ensure the form is
     correctly generated::
-    
+
         <?php
         echo $this->Form->create('ContactManager.Contact');
 
@@ -100,9 +100,9 @@ opening form tag.
 
     .. versionchanged:: 2.0
 
-    The default url for all forms, is now the current url including 
-    passed, named, and querystring parameters. You can override this 
-    default by supplying ``$options['url']`` in the second parameter of 
+    The default url for all forms, is now the current url including
+    passed, named, and querystring parameters. You can override this
+    default by supplying ``$options['url']`` in the second parameter of
     ``$this->Form->create()``.
 
 Options for create()
@@ -115,25 +115,25 @@ There are a number of options for create():
 
   Supplying either 'post' or 'get' changes the form submission method
   accordingly::
-  
+
       <?php echo $this->Form->create('User', array('type' => 'get')); ?>
-      
+
   Output::
 
       <form id="UserAddForm" method="get" action="/users/add">
-  
+
   Specifying 'file' changes the form submission method to 'post', and
   includes an enctype of "multipart/form-data" on the form tag. This
   is to be used if there are any file elements inside the form. The
   absence of the proper enctype attribute will cause the file uploads
   not to function::
-  
+
       <?php echo $this->Form->create('User', array('type' => 'file')); ?>
-      
+
   Output::
 
       <form id="UserAddForm" enctype="multipart/form-data" method="post" action="/users/add">
-  
+
   When using 'put' or 'delete', your form will be functionally
   equivalent to a 'post' form, but when submitted, the HTTP request
   method will be overridden with 'PUT' or 'DELETE', respectively.
@@ -240,7 +240,7 @@ Closing the Form
 
     You can specify detail settings by passing an array to ``end()``::
 
-        <?php 
+        <?php
         $options = array(
             'label' => 'Update',
             'value' => 'Update!',
@@ -307,15 +307,15 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
     quote (text). You can use the input() method of the FormHelper to
     create appropriate inputs for all of these form fields::
 
-        <?php 
-        echo $this->Form->create(); 
+        <?php
+        echo $this->Form->create();
 
         echo $this->Form->input('username');   //text
         echo $this->Form->input('password');   //password
         echo $this->Form->input('approved');   //day, month, year, hour, minute, meridian
         echo $this->Form->input('quote');      //textarea
 
-        echo $this->Form->end('Add'); 
+        echo $this->Form->end('Add');
 
     A more extensive example showing some options for a date field::
 
@@ -374,13 +374,13 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
 
 .. php:method:: inputs(mixed $fields = null, array $blacklist = null)
 
-    Generate a set of inputs for ``$fields``. If $fields is null the current model 
+    Generate a set of inputs for ``$fields``. If $fields is null the current model
     will be used.
 
-    In addition to controller fields output, ``$fields`` can be used to control 
-    legend and fieldset rendering with the ``fieldset`` and ``legend`` keys. 
+    In addition to controller fields output, ``$fields`` can be used to control
+    legend and fieldset rendering with the ``fieldset`` and ``legend`` keys.
     ``$form->inputs(array('legend' => 'My legend'));``
-    Would generate an input set with a custom legend. You can customize 
+    Would generate an input set with a custom legend. You can customize
     individual inputs through ``$fields`` as well.::
 
         <?php
@@ -388,12 +388,12 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
             'name' => array('label' => 'custom label')
         ));
 
-    In addition to fields control, inputs() allows you to use a few additional 
+    In addition to fields control, inputs() allows you to use a few additional
     options.
 
-    - ``fieldset`` Set to false to disable the fieldset. If a string is supplied 
+    - ``fieldset`` Set to false to disable the fieldset. If a string is supplied
       it will be used as the classname for the fieldset element.
-    - ``legend`` Set to false to disable the legend for the generated input set. 
+    - ``legend`` Set to false to disable the legend for the generated input set.
       Or supply a string to customize the legend text.
 
 Field naming conventions
@@ -416,7 +416,7 @@ If you need to specify multiple fields using the same field name,
 thus creating an array that can be saved in one shot with
 saveAll(), use the following convention::
 
-    <?php 
+    <?php
     echo $this->Form->input('Modelname.0.fieldname');
     echo $this->Form->input('Modelname.1.fieldname');
 
@@ -451,7 +451,7 @@ html attributes. The following will cover the options specific to
   the :ref:`automagic-form-elements`, you can also create 'file', 'password',
   and any type supported by HTML5::
 
-    <?php 
+    <?php
     echo $this->Form->input('field', array('type' => 'file'));
     echo $this->Form->input('email', array('type' => 'email'));
 
@@ -603,16 +603,16 @@ html attributes. The following will cover the options specific to
 
   Use these keys if you need to inject some markup inside the output
   of the input() method::
-  
+
       <?php
       echo $this->Form->input('field', array(
           'before' => '--before--',
           'after' => '--after--',
           'between' => '--between---'
       ));
-      
+
   Output::
-      
+
       <div class="input">
       --before--
       <label for="UserField">Field</label>
@@ -620,21 +620,21 @@ html attributes. The following will cover the options specific to
       <input name="data[User][field]" type="text" value="" id="UserField" />
       --after--
       </div>
-  
+
   For radio inputs the 'separator' attribute can be used to
   inject markup to separate each input/label pair::
-  
+
       <?php
       echo $this->Form->input('field', array(
           'before' => '--before--',
           'after' => '--after--',
           'between' => '--between---',
           'separator' => '--separator--',
-          'options' => array('1', '2') 
+          'options' => array('1', '2')
       ));
-      
+
   Output::
-      
+
       <div class="input">
       --before--
       <input name="data[User][field]" type="radio" value="1" id="UserField1" />
@@ -645,12 +645,12 @@ html attributes. The following will cover the options specific to
       --between---
       --after--
       </div>
-  
+
   For ``date`` and ``datetime`` type elements the 'separator'
   attribute can be used to change the string between select elements.
   Defaults to '-'.
 
-* ``$options['format']`` The ordering of the html generated FormHelper is 
+* ``$options['format']`` The ordering of the html generated FormHelper is
   controllable as well. The 'format' options supports an array of strings
   describing the template you would like said element to follow. The supported
   array keys are:
@@ -675,9 +675,9 @@ html attributes. The following will cover the options specific to
     <?php
     // No div, no label
     echo $this->Form->input('password');
-    
+
     // has a label element
-    echo $this->Form->input('username', array('label' => 'Username')); 
+    echo $this->Form->input('username', array('label' => 'Username'));
 
 Generating specific types of inputs
 ===================================
@@ -710,15 +710,15 @@ common options shared by all input methods are as follows:
 
   Example usage::
 
-    <?php 
-    echo $this->Form->input('ingredient', array('default' => 'Sugar')); 
+    <?php
+    echo $this->Form->input('ingredient', array('default' => 'Sugar'));
 
   Example with select field (Size "Medium" will be selected as
   default)::
 
-    <?php 
+    <?php
     $sizes = array('s' => 'Small', 'm' => 'Medium', 'l' => 'Large');
-    echo $this->Form->input('size', array('options' => $sizes, 'default' => 'm')); 
+    echo $this->Form->input('size', array('options' => $sizes, 'default' => 'm'));
 
   .. note::
 
@@ -761,15 +761,15 @@ Options for select, checkbox and  radio inputs
   empty value in your drop down list. If you want to have a empty
   value with text displayed instead of just a blank option, pass in a
   string to empty::
-  
+
       <?php
       echo $this->Form->input('field', array(
           'options' => array(1, 2, 3, 4, 5),
           'empty' => '(choose one)'
       ));
-  
+
   Output::
-  
+
       <div class="input">
           <label for="UserField">Field</label>
           <select name="data[User][field]" id="UserField">
@@ -781,16 +781,16 @@ Options for select, checkbox and  radio inputs
               <option value="4">5</option>
           </select>
       </div>
-  
+
   .. note::
-  
+
       If you need to set the default value in a password field to blank,
       use 'value' => '' instead.
-  
+
   Options can also supplied as key-value pairs.
 
 * ``$options['hiddenField']`` For certain input types (checkboxes, radios) a
-  hidden input is created so that the key in $this->request->data will exist 
+  hidden input is created so that the key in $this->request->data will exist
   even without a value specified::
 
     <input type="hidden" name="data[Post][Published]" id="PostPublished_" value="0" />
@@ -857,7 +857,7 @@ Datetime options
   date/datetime input. Defines the lower and/or upper end of values shown in the
   years select field.
 
-* ``$options['orderYear']`` Used in combination with a date/datetime input. 
+* ``$options['orderYear']`` Used in combination with a date/datetime input.
   Defines the order in which the year values will be set. Valid values include
   'asc', 'desc'. The default value is 'desc'.
 
@@ -878,7 +878,7 @@ Form Element-Specific Methods
 
 .. php:method:: label(string $fieldName, string $text, array $options)
 
-    Create a label element.  ``$fieldName`` is used for generating the 
+    Create a label element.  ``$fieldName`` is used for generating the
     DOM id.  If ``$text`` is undefined, ``$fieldName`` will be used to inflect
     the label's text::
 
@@ -895,7 +895,7 @@ Form Element-Specific Methods
     will be used as a classname::
 
         <?php
-        echo $this->Form->label('User.name', array('id' => 'user-label'));
+        echo $this->Form->label('User.name', null, array('id' => 'user-label'));
         echo $this->Form->label('User.name', 'Your username', 'highlight');
 
     Output::
@@ -940,10 +940,10 @@ Form Element-Specific Methods
         <input name="data[User][id]" value="10" id="UserId" type="hidden">
 
     .. versionchanged:: 2.0
-    
-    Hidden fields no longer remove the class attribute. This means 
-    that if there are validation errors on hidden fields, the 
-    error-field classname will be applied. 
+
+    Hidden fields no longer remove the class attribute. This means
+    that if there are validation errors on hidden fields, the
+    error-field classname will be applied.
 
 .. php:method:: textarea(string $fieldName, array $options)
 
@@ -1020,8 +1020,8 @@ Form Element-Specific Methods
 
 .. php:method:: radio(string $fieldName, array $options, array $attributes)
 
-    Creates a set of radio button inputs. 
-    
+    Creates a set of radio button inputs.
+
     **Options**
 
     * ``$attributes['value']`` to set which value should be selected default.
@@ -1325,25 +1325,25 @@ Creating buttons and submit elements
     bool and determines whether to HTML entity encode the $title of the button.
     Defaults to false::
 
-        <?php 
+        <?php
         echo $this->Form->button('Submit Form', array('type' => 'submit', 'escape' => true));
 
 .. php:method:: postButton(string $title, mixed $url, array $options = array ())
 
-    Create a ``<button>`` tag with a surrounding ``<form>`` that submits via 
+    Create a ``<button>`` tag with a surrounding ``<form>`` that submits via
     POST.
 
-    This method creates a ``<form>`` element. So do not use this method in some 
-    opened form. Instead use :php:meth:`FormHelper::submit()` or 
+    This method creates a ``<form>`` element. So do not use this method in some
+    opened form. Instead use :php:meth:`FormHelper::submit()` or
     :php:meth:`FormHelper::button()` to create buttons inside opened forms.
 
 .. php:method:: postLink(string $title, mixed $url = null, array $options = array (), string $confirmMessage = false)
 
-    Creates an HTML link, but access the url using method POST. Requires 
+    Creates an HTML link, but access the url using method POST. Requires
     javascript to be enabled in browser.
 
-    This method creates a ``<form>`` element. So do not use this method inside 
-    an existing form. Instead you should add a submit button using 
+    This method creates a ``<form>`` element. So do not use this method inside
+    an existing form. Instead you should add a submit button using
     :php:meth:`FormHelper::submit()`
 
 Creating date and time inputs
@@ -1356,8 +1356,8 @@ Creating date and time inputs
     $timeFormat are ‘12’, ‘24’, and null.
 
     You can specify not to display empty values by setting
-    "array('empty' => false)" in the attributes parameter. It will also 
-    pre-select the fields with the current datetime. 
+    "array('empty' => false)" in the attributes parameter. It will also
+    pre-select the fields with the current datetime.
 
 .. php:method:: year(string $fieldName, int $minYear, int $maxYear, array $attributes)
 
@@ -1487,7 +1487,7 @@ Displaying and checking errors
 
 .. php:method:: tagIsInvalid()
 
-    Returns false if given form field described by the current entity has no 
+    Returns false if given form field described by the current entity has no
     errors. Otherwise it returns the validation message.
 
 
@@ -1513,7 +1513,7 @@ special ``_Token`` inputs are generated.
 
 .. php:method:: secure(array $fields = array())
 
-    Generates a hidden field with a security hash based on the fields used 
+    Generates a hidden field with a security hash based on the fields used
     in the form.
 
 .. _form-improvements-1-3:
@@ -1523,11 +1523,11 @@ special ``_Token`` inputs are generated.
 
 **$selected parameter removed**
 
-The ``$selected`` parameter was removed from several methods in 
-FormHelper. All methods now support a ``$attributes['value']`` key 
-now which should be used in place of ``$selected``. This change 
-simplifies the FormHelper methods, reducing the number of 
-arguments, and reduces the duplication that ``$selected`` created. 
+The ``$selected`` parameter was removed from several methods in
+FormHelper. All methods now support a ``$attributes['value']`` key
+now which should be used in place of ``$selected``. This change
+simplifies the FormHelper methods, reducing the number of
+arguments, and reduces the duplication that ``$selected`` created.
 The effected methods are:
 
     * FormHelper::select()
@@ -1541,16 +1541,16 @@ The effected methods are:
 
 **Default urls on forms is the current action**
 
-The default url for all forms, is now the current url including 
-passed, named, and querystring parameters. You can override 
-this default by supplying ``$options['url']`` in the second 
+The default url for all forms, is now the current url including
+passed, named, and querystring parameters. You can override
+this default by supplying ``$options['url']`` in the second
 parameter of ``$this->Form->create()``
 
 
 **FormHelper::hidden()**
 
-Hidden fields no longer remove the class attribute. This means 
-that if there are validation errors on hidden fields, 
+Hidden fields no longer remove the class attribute. This means
+that if there are validation errors on hidden fields,
 the error-field classname will be applied.
 
 
