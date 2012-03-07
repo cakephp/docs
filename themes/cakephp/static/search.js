@@ -45,7 +45,7 @@ App.Search = (function () {
 	var init = function () {
 		searchInput = $('.standalone-search .search-input');
 		searchResults = $('#search-results');
-		paginationContainer = $('#pagination');
+		paginationContainer = $('#search-pagination');
 
 		searchInput.bind('keyup', handleKeyEvent);
 		$(document).bind('search.complete', createPagination);
