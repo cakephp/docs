@@ -61,6 +61,10 @@ Models
 - Validation arrays can now be more specific with when a field is required.
   The ``required`` key now accepts ``create`` and ``update``.  These values will
   make a field required when creating or updating.
+- Model now has a ``schemaName`` property.  If your application switches
+  datasources by modifying :php:attr:`Model::$useDbConfig` you should also
+  modify ``schemaName`` or use :php:meth:`Model::setDataSource()` method which
+  handles this for you.
 
 Behaviors
 =========
