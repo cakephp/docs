@@ -73,11 +73,10 @@ JSON response.  This is a situation where a view file would be useful::
     class PostsController extends AppController {
         public function index() {
             $this->set(compact('posts', 'comments'));
-            $this->set('_serialize', array('posts', 'comments'));
         }
     }
 
-    // View code - app/View/Posts/
+    // View code - app/View/Posts/json/index.ctp
     foreach ($posts as &$post) {
         unset($post['Post']['generated_html']);
     }
