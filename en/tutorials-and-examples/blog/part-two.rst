@@ -246,11 +246,11 @@ Now let's create the view for our new 'view' action and place it in
 
     <!-- File: /app/View/Posts/view.ctp -->
     
-    <h1><?php echo $post['Post']['title']?></h1>
+    <h1><?php echo h($post['Post']['title'])?></h1>
     
     <p><small>Created: <?php echo $post['Post']['created']?></small></p>
     
-    <p><?php echo $post['Post']['body']?></p>
+    <p><?php echo h($post['Post']['body'])?></p>
 
 Verify that this is working by trying the links at ``/posts/index`` or
 manually requesting a post by accessing ``/posts/view/1``.
