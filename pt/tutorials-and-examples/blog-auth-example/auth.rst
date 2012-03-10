@@ -1,5 +1,5 @@
 Autenticação simples e Autorização da Aplicação
-####################################################
+###############################################
 
 Seguindo com nosso :doc:`/tutorials-and-examples/blog/blog` exemplo, imagine que
 queremos fornececer acesso seguro as nossas urls, baseada em autenticação de usuário.
@@ -8,7 +8,7 @@ criar seus próprios posts, editar e deletar os post deles sem que afete o que o
 autores fizeram em seus posts.
 
 Criando a tabela de usuários
-================================
+============================
 
 Primeiro, vamos criar uma nova tabela na nossa base de dados blog para armazenar os dados de usuários::
 
@@ -149,7 +149,7 @@ mostrar somente o add.ctp::
     </div>
 
 Autorização (login e logout)
-================================
+===========================
 
 Nós agora estamos prontos para adicionar a camada de autorização. No CakePHP isso é feito
 pela :php:class:`AuthComponent`, uma classe responsável por solicitar login para certas ações,
@@ -268,7 +268,7 @@ o usuário para a url configurada em logoutUrl anteriormente descrita. Essa url 
 a função ``AuthComponent::logout()`` obtém sucesso.
 
 Autorização (quem tem permissão de acessar o que)
-============================================
+=================================================
 
 Como afirmado anteriormente, nós estamos convertendo esse blog em uma ferramenta
 multi usuário de autoria, e para fazer isso, nós precisamos modificar um pouco a tabela posts para adicionar
@@ -374,7 +374,7 @@ Se precisar de mais controle, nós sugerimos você ler o guia completo do Auth
 sobre a configuração do componente, criação de classes de Autorização customizadas, e muito mais.
 
 Sugerimos as seguintes leituras
----------------------------
+-------------------------------
 
 1. :doc:`/console-and-shells/code-generation-with-bake` Generating basic CRUD code
 2. :doc:`/core-libraries/components/authentication`: User registration and login
