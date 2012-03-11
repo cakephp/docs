@@ -675,6 +675,42 @@ controllers.  The first parameter of ``testAction`` should always be the URL you
 want to test.  CakePHP will create a request and dispatch the controller and
 action.
 
+When testing actions that contain ``redirect()`` and other code following the
+redirect it is generally a good idea to return when redirecting.  The reason for
+this, is that ``redirect()`` is mocked in testing, and does not exit like
+normal.  And instead of your code exiting, it will contine to run code following
+the redirect.  For example::
+
+    <?php
+    class ArticlesController extends AppController {
+        public function add() {
+            if ($this->request->is('post')) {
+                if ($this->Article->save($this->request->data)) {
+                    $this->redirect(array('action' => 'index'));
+                }
+            }
+            // more code
+        }
+    }
+
+When testing the above code, you will still run ``// more code`` even when the
+redirect is reached.  Instead, you should write the code like::
+
+    <?php
+    class ArticlesController extends AppController {
+        public function add() {
+            if ($this->request->is('post')) {
+                if ($this->Article->save($this->request->data)) {
+                    return $this->redirect(array('action' => 'index'));
+                }
+            }
+            // more code
+        }
+    }
+
+In this case ``// more code`` will not be executed as the method will return
+once the redirect is reached.
+
 Simulating GET requests
 -----------------------
 
