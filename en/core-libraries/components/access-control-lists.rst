@@ -169,24 +169,36 @@ TODO: Add a few more examples.
 PhpACL
 ========================
 
+To enable the :php:class:`PhpAcl` adapter set the ``Acl.classname`` property in 
+``app/Config/core.php`` ::
+
+	<?php
+	//...
+	//Configure::write('Acl.classname', 'DbAcl');
+	//Configure::write('Acl.database', 'default');
+	Configure::write('Acl.classname', 'PhpAcl');
+
 Setting up permissions
 ----------------------
 
 Let's setup ``app/Config/acl.php`` to reflect the access rules of our e-learning 
 application. We assume that the user data is stored in a ``username`` and a ``group_id``
-column of a ``users`` model. In order to map a user record to a role defined in :php:class:`PhpAcl` we need to 
-tell the adapter how the relevant information can be mapped::
+column of a ``User`` model. In order to map a ``User`` record to a role defined in :php:class:`PhpAcl` we need to 
+tell the adapter how the obtain the relevant information (the default map is
+``User => User/username`` and ``Role => User/role``)::
 
     <?php
     $config['map'] = array(
-        // Default is:
-        // User => User/username
-        // Role => User/role
         'User' => 'User/username',
         'Role' => 'User/group_id',
     );
 
-Because the roles are given as model IDs we can (optionally) define some aliases for our ``group_ids`` to make
+If a ``User`` array with ``username`` and ``group_id`` fields is passed as ARO
+(e.g. ``array('User' => array('username' => 'Fred', 'group_id' => 2)``) :php:class:`PhpAcl` internally
+will lookup if a role ``User`` is defined for the provided ``username``. If no role matches, 
+:php:class:`PhpAcl` will check if a role ``Role`` is defined for the provided ``group_id``. If no role can be found, the ARO will
+be resolved to the default role ``Role/default``. Because the roles are given as model IDs we can (optionally) 
+define some aliases for our ``group_ids`` to make
 definition of roles and rules easier to read::
 
     <?php
@@ -197,7 +209,7 @@ definition of roles and rules easier to read::
     );
 
 Now we can setup the roles. Roles are defined as keys, inherited roles as values. Inherited roles can be defined as a
-comma separated list or as array::
+comma separated list or as array, ``null`` on the rhs indicates a root node::
 
     <?php
     // AROs
@@ -207,14 +219,14 @@ comma separated list or as array::
         'Role/Student' => array('Role/default'),
     );
 
-Now lets setup rules. The rules array can contain two keys, ``allow`` and ``deny``. For our simple 
+Now let's setup rules. The rules array can contain two keys, ``allow`` and ``deny``. For our simple 
 example we'll only need to define ``allow`` rules as by default every access controlled 
 object is denied:: 
     
     <?php
     // ACOs
     $config['rules']['allow'] = array(
-        '/.*' => 'Role/Administrator',
+        '/*' => 'Role/Administrator',
         '/controllers/Lessons' => 'Role/Teacher',
         '/controllers/Lessons/(index|view)' => 'Role/Student',
         '/controllers/Courses' => 'Role/Teacher',
@@ -228,9 +240,9 @@ Advanced Usage
 --------------
 
 As you can see from the example above, ACOs (lhs of rules) can be defined by using wildcards.
-PhpAcl splits ACOs by ``/`` and then treats every token as a regular expression. 
-When checking access, the requested ACO is split analogous and each token is
-matched against its respective rule token. Lets expand the above example::
+PhpAcl splits ACOs by ``/`` and then treats every token as a regular expression after replacing
+``*`` with ``.*``. When checking access, the requested ACO is split analogous and each token is
+matched against its respective rule token. Example::
 
     <?php
     // in some action
@@ -238,9 +250,9 @@ matched against its respective rule token. Lets expand the above example::
         $this->Acl->Aro->addRole(array('User/Felicity' => 'Role/Teacher, Role/default'));
         $this->Acl->Aro->addRole(array('User/Fred' => array('Role/Teacher', 'Role/default')));
 
-        $this->Acl->allow('/controllers/.*/manager_[a-zA-Z]+', 'Role/Teacher');
-        $this->Acl->deny('/controllers/Courses/manager_confirm', 'User/Felicity');
+        $this->Acl->allow('/controllers/*/manager_[a-zA-Z]+', 'Role/Teacher');
         $this->Acl->deny('/controllers/Courses/manager_delete', 'Role/Teacher');
+        $this->Acl->deny('/controllers/Courses/manager_confirm', 'User/Felicity');
 
         $this->Acl->check('Felicity', '/controllers/Foo/manager_bar'); // true
         $this->Acl->check('Felicity', '/controllers/Courses/manager_delete'); // false
@@ -248,9 +260,10 @@ matched against its respective rule token. Lets expand the above example::
         $this->Acl->check('Fred', '/controllers/Courses/manager_confirm'); // true
     }
 
-This would grant all teachers access to all actions starting with ``manager_`` for every 
-controller except the ``manager_delete`` action in the ``Courses`` controller.
-Additionally ``Felicity`` would not be allowed to access the ``manager_confirm`` action.
+The ``allow()`` call grants every ``Teacher`` access to all actions starting with ``manager_`` for every 
+controller. The ``deny()`` calls repeal the grants for the ``manager_delete`` 
+action in the ``Courses`` controller. Additionally ``Felicity`` would not be allowed to 
+access the ``manager_confirm`` action.
 
 Runtime options
 ---------------
@@ -269,9 +282,10 @@ Additional options can be passed to the :php:class:`PhpAcl` instance::
             ),
         );
 
-The ``config`` key refers to the ACL definition file and will be passed to :php:class:`PhpReader`. Setting
-``policy`` to ``PhpAcl::ALLOW`` allows every ACO by default. Using this policy only ``deny`` rules 
-can be specified.
+The ``config`` key refers to the ACL definition file and will be passed to :php:class:`PhpReader`. 
+Setting ``policy`` to ``PhpAcl::ALLOW`` follows a blacklist approach where you would only specify
+``deny`` rules, while by default every ACO is allowed. 
+
 
 - Using DbAcl
   - creating the tables.
