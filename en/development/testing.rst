@@ -258,7 +258,7 @@ cli runner you can use an option to filter test methods::
 
     ./Console/cake testsuite core Core/ConsoleOutput --filter Write
 
-The filter parameter is used as a case-sensitve regular expression for filtering
+The filter parameter is used as a case-sensitive regular expression for filtering
 which test methods to run.
 
 Generating code coverage
@@ -678,7 +678,7 @@ action.
 When testing actions that contain ``redirect()`` and other code following the
 redirect it is generally a good idea to return when redirecting.  The reason for
 this, is that ``redirect()`` is mocked in testing, and does not exit like
-normal.  And instead of your code exiting, it will contine to run code following
+normal.  And instead of your code exiting, it will continue to run code following
 the redirect.  For example::
 
     <?php
@@ -1136,7 +1136,7 @@ Add test database config
 ------------------------
 
 Using a separate database just for Jenkins is generally a good idea, as it stops
-bleedthrough and avoids a number of basic problems.  Once you've created a new
+bleed through and avoids a number of basic problems.  Once you've created a new
 database in a database server that jenkins can access (usually localhost).  Add
 a *shell script step* to the build that contains the following::
 
