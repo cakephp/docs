@@ -24,8 +24,8 @@
  */
 @font-face {
     font-family: 'MuseoSlab500';
-    src: url('/css/Museo_Slab_500-webfont.eot');
-    src: url('/css/Museo_Slab_500-webfont.eot?#iefix') format('embedded-opentype'),
+    src: url('Museo_Slab_500-webfont.eot');
+    src: url('Museo_Slab_500-webfont.eot?#iefix') format('embedded-opentype'),
          url('Museo_Slab_500-webfont.woff') format('woff'),
          url('Museo_Slab_500-webfont.ttf') format('truetype'),
          url('Museo_Slab_500-webfont.svg#MuseoSlab500') format('svg');
