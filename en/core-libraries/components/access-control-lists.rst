@@ -209,7 +209,7 @@ definition of roles and rules easier to read::
     );
 
 Now we can setup the roles. Roles are defined as keys, inherited roles as values. Inherited roles can be defined as a
-comma separated list or as array, ``null`` on the rhs indicates a root node::
+comma separated list or as array, ``null`` values indicate root nodes::
 
     <?php
     // AROs
@@ -239,7 +239,7 @@ object is denied::
 Advanced Usage
 --------------
 
-As you can see from the example above, ACOs (lhs of rules) can be defined by using wildcards.
+As you can see from the example above, ACOs (array keys of rules) can be defined by using wildcards.
 PhpAcl splits ACOs by ``/`` and then treats every token as a regular expression after replacing
 ``*`` with ``.*``. When checking access, the requested ACO is split analogous and each token is
 matched against its respective rule token. Example::
