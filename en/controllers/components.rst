@@ -17,6 +17,7 @@ use to aid in:
 - Cookies
 - Authentication
 - Request handling
+- Pagination
 
 Each of these core components are detailed in their own chapters.
 For now, we’ll show you how to create your own components. Creating
