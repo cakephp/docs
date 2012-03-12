@@ -5,7 +5,7 @@ App.Book = (function() {
 	function init() {
 
 		// Make top nav responsive.
-		$('#cakephp-global-navigation ul').responsiveMenu();
+		$('#cakephp-global-navigation').menuSelect({'class': 'nav-select'});
 
 		// Make side navigation go into a lightbox.
 		$('#tablet-nav').bind('click', function (e) {
@@ -171,53 +171,72 @@ jQuery.extend(jQuery.expr[':'], {
 	}
 });
 
-// Create a responsive design menu.
-(function($) {
-	$.fn.responsiveMenu = function(options) {
-		var defaults = {
-			autoArrows: false,
-			width: 768
-		}
+(function ($) {
+var defaults = {
+	'class': ''
+};
+$.fn.menuSelect = function (options) {
+	options = $.extend({}, defaults, options || {});
 
-		options = $.extend(defaults, options);
-		return this.each(function() {
-			var $this = $(this);
-			var $window = $(window);
-			var setClass = function() {
-				if ($window.width() > options.width) {
-					$this.addClass('dropdown').removeClass('accordion');
-				} else {
-					$this.addClass('accordion').removeClass('dropdown');
-				}
-			}
+	// Append the li & children to target.
+	var appendOpt = function (li, target, prefix) {
+		li = $(li);
+		prefix = prefix || '';
 
-			$window.resize(function() {
-				setClass();
-				$this.children('ul').css('display', 'none');
+		if (li.find('> ul').length) {
+			prefix = li.find('> a').text() + ' - ';
+			li.find('li').each(function () {
+				appendOpt(this, target, prefix);
 			});
+		} else {
+			var a = li.find('a');
+			opt = $('<option />', {
+				text: prefix + a.text(),
+				value: a.attr('href')
+			});
+			target.append(opt);
+		}
+	};
 
-			setClass();
-			$this
-				.addClass('responsive-menu')
-				.find('a')
-					.live('click', function(e) {
-						var $a = $(this);
-						var container = $a.next('ul,div');
-						if ($this.hasClass('accordion') && container.length > 0) {
-							container.slideToggle();
-							return false;
-						}
-					})
-					.stop()
-					.siblings('ul').parent('li').addClass('hasChild');
+	// Convert the ul + li elements into
+	// an optgroup + option elements.
+	var convert = function (element) {
+		var select = $('<select />', options);
+		select.appendTo(element);
+		var option = $('<option />', {
+			text: 'Go to..',
+			selected: 'selected'
+		});
+		select.append(option);
 
-			if (options.autoArrows) {
-				$('.hasChild > a', $this)
-					.append('<span class="arrow">&nbsp;</span>');
+		$(element).find('> ul > li').each(function () {
+			var opt, optgroup;
+			var li = $(this);
+			if (li.find('ul').length > 0) {
+				optgroup = $('<optgroup />', {
+					label: li.find('> a').text()
+				});
+				select.append(optgroup);
+				li.find('> ul > li').each(function () {
+					appendOpt(this, optgroup);
+				});
+			} else {
+				appendOpt(li, select);
 			}
 		});
-	}
-})(jQuery);
+
+		var handleChange = function (event) {
+			window.location = $(this).val();
+		};
+
+		select.bind('change', handleChange);
+	};
+
+	return this.each(function () {
+		convert(this);
+	});
+};
+} (jQuery));
 
 $(App.Book.init);
 $(App.InlineSearch.init);
