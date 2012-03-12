@@ -14,6 +14,15 @@ Guia de Migração para a Versão 2.0
     appendices/new-features-in-cakephp-2-0
     appendices/phpunit-migration-hints
 
+Guia de Migração para a Versão 2.1
+==================================
+
+.. toctree::
+    :maxdepth: 1
+
+    appendices/2-1-migration-guide
+    appendices/new-features-in-cakephp-2-1
+
 Migrando da Versão 1.2 para 1.3
 ===============================
 
@@ -28,7 +37,11 @@ Informações Gerais
 
 .. toctree::
     :maxdepth: 1
-    
+
     appendices/cakephp-development-process
     appendices/glossary
 
+
+.. meta::
+    :title lang=pt: Apêndices
+    :keywords lang=pt: guia de migração,rota de migração,novas funcionalidades,glossário
