@@ -74,6 +74,35 @@ configuration options be set in the ``$components`` array::
 Consult the relevant documentation to determine what configuration
 options each component provides.
 
+One common setting to use is the ``className`` option, which allows you to
+alias components.  This feature is useful when you want to
+replace ``$this->Auth`` or another common Component reference with a custom
+implementation::
+
+    <?php
+    // app/Controller/PostsController.php
+    class PostsController extends AppController {
+        public $components = array(
+            'Auth' => array(
+                'className' => 'MyAuth'
+            )
+        );
+    }
+
+    // app/Controller/Component/MyAuthComponent.php
+    App::uses('AuthComponent', 'Controller/Component');
+    class MyAuthComponent extends AuthComponent {
+        // Add your code to override the core AuthComponent
+    }
+
+The above would *alias* ``MyAuthComponent`` to ``$this->Auth`` in your
+controllers.
+
+.. note::
+
+    Aliasing a component replaces that instance anywhere that component is used,
+    including inside other Components.
+
 Using Components
 ================
 
