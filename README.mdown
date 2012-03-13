@@ -38,6 +38,9 @@ After installing the require packages you can build the documentation using `Mak
 	# Create just the engish EPUB docs.
 	make epub-en
 
+	# Populate the search index
+	make populate-index
+
 This will generate all the documentation in an html form.  Other output such as 'pdf' and 'htmlhelp' are not fully complete at this time.
 
 After making changes to the documentation, you can build the html version of the docs by using `make html` again.  This will build only the html files that have had changes made to them.
@@ -69,3 +72,18 @@ the `scripts` folder of this repo. In order to use it, copy it into any CakePHP 
 
 The script will process all the files under one of the translation folders and generate the possible description terms using an external API, 
 it is a good idea to go over the generated terms and clean-up whatever noise it might have generated.
+
+Making search work locally
+--------------------------
+
+* Install elasticesearch.  This varies based on your platform, but most
+  package managers have a package for it.
+* Clone the [docs_search](https://github.com/cakephp/docs_search) into a
+  web accessible directory directory.
+* Modify `searchUrl` in `themes/cakephp/static/app.js` to point at the
+  baseurl for your docs_search clone.
+* Start elasticsearch with the default configuration.
+* Populate the search index using `make populate-index`.
+* You should now be able to search the docs using elasticsearch.
+
+
