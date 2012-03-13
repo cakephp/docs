@@ -179,7 +179,6 @@ body {
 	#nav-modal > ul {
 		margin-left:  0;
 	}
-	
 }
 
 
@@ -552,15 +551,22 @@ dt tt {
 .related-pages {
 	float: right;
 }
-.footer .contribute,
+
+.footer .contribute {
+	margin-bottom: 10px;
+}
+.contribute strong {
+	color: #C92434;
+}
+.contribute,
 .languages,
 .related-pages a {
 	font-size: 14px;
 	font-family: MuseoSlab500, Helvetica, Arial;	
 }
-
-.contribute strong {
-	color: #C92434;
+.copyright {
+	font-size: 12px;
+	color: #003D4C;
 }
 
 /*  Languages  */
@@ -577,4 +583,26 @@ dt tt {
 }
 .languages .active {
     text-decoration: underline;
+}
+
+/* tablet and smaller */
+@media only screen and (max-width: 767px) {
+	.footer .columns,
+	.row .document {
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+
+	.related-pages,
+	.languages,
+	.copyright,
+	.contribute {
+		text-align: center;
+	}
+	.languages ul {
+		float: none;
+	}
+	.row .related-pages {
+		float: none;
+	}
 }

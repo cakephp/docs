@@ -176,7 +176,7 @@ window.lang = "{{ language }}";
 	</div>
 
 	<div class="row">
-		<div class="columns nine offset-by-three">
+		<div class="columns nine offset-by-three copyright">
 			{%- if show_copyright %}
 				{%- if hasdoc('copyright') %}
 					{% trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a href="{{ path }}">Copyright</a> {{ copyright }}.{% endtrans %}
