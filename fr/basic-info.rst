@@ -24,6 +24,6 @@ Licence
 
 CakePHP est distribué sous la licence MIT.  Cela signifie que vous 
 êtes libre de modifier, de distribuer ainsi que de publier le code 
-source, à la condition que les mentions du copyright doivent être
+source, à condition que les mentions du copyright soient 
 laissées intactes.  Vous êtes également libre d'intégrer CakePHP
 dans n'importe quelle application commerciale ou non open-source.
