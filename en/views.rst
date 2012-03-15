@@ -87,7 +87,7 @@ un-captured content from the extending view. Assuming our view file has a
 
     // app/View/Posts/view.ctp
     <?php
-    $this->extend('Common/view');
+    $this->extend('/Common/view');
 
     $this->assign('title', $post)
 
@@ -115,8 +115,8 @@ more than once in a view file will override the parent view that will be
 processed next::
 
     <?php
-    $this->extend('Common/view');
-    $this->extend('Common/index');
+    $this->extend('/Common/view');
+    $this->extend('/Common/index');
 
 The above will result in ``/Common/index.ctp`` being rendered as the parent view
 to the current view.
