@@ -16,7 +16,6 @@ completed file should look like this::
 
     <?php
     class Post extends AppModel {
-        public $name = 'Post';
     }
 
 Naming convention is very important in CakePHP. By naming our model
@@ -49,7 +48,6 @@ directory. Here's what the basic controller should look like::
 
     <?php
     class PostsController extends AppController {
-        public $name = 'Posts';
         public $helpers = array('Html', 'Form');
     }
 
@@ -63,7 +61,6 @@ posts. The code for that action would look something like this:
 
     <?php
     class PostsController extends AppController {
-        public $name = 'Posts';
         public $helpers = array('Html', 'Form');
 
         public function index() {
@@ -217,7 +214,6 @@ PostsController now::
 
     <?php
     class PostsController extends AppController {
-        public $name = 'Posts';
         public $helpers = array('Html', 'Form');
 
         public function index() {
@@ -268,7 +264,6 @@ PostsController:
 
     <?php
     class PostsController extends AppController {
-        public $name = 'Posts';
         public $helpers = array('Html', 'Form');
         public $components = array('Session');
 
@@ -383,9 +378,7 @@ requirements? Validation rules are defined in the model. Let's look
 back at our Post model and make a few adjustments::
 
     <?php
-    class Post extends AppModel {
-        public $name = 'Post';
-    
+    class Post extends AppModel {    
         public $validate = array(
             'title' => array(
                 'rule' => 'notEmpty'
