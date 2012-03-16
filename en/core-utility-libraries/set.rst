@@ -799,7 +799,6 @@ available.
                         [0] => one thing
                         [1] => I can tell you
                         [2] => is you got to be
-                        [3] =>
                     )
             )
         */
