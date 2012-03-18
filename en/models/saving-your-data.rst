@@ -636,9 +636,8 @@ Either use unset($this->data['Model']['modified']), etc. Alternatively you can o
 ::
 
 	class AppModel extends Model {
-		//
-		// 
-		function save($data = null, $validate = true, $fieldList = array()) {        
+
+		public function save($data = null, $validate = true, $fieldList = array()) {        
 			//clear modified field value before each save        
 			if (isset($this->data) && isset($this->data[$this->name])) {
 				unset($this->data[$this->name]['modified']);        
@@ -648,6 +647,5 @@ Either use unset($this->data['Model']['modified']), etc. Alternatively you can o
 			}
 			return parent::save($data, $validate, $fieldList);    
 		}
-		//
-		//
+
 	}
