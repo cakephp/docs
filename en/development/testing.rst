@@ -940,6 +940,8 @@ set correctly by the ``adjust`` method in our component. We create the file
 
     <?php
     App::uses('Controller', 'Controller');
+    App::uses('CakeRequest', 'Network');
+    App::uses('CakeResponse', 'Network');
     App::uses('ComponentCollection', 'Controller');
     App::uses('PagematronComponent', 'Controller/Component');
 
@@ -957,7 +959,9 @@ set correctly by the ``adjust`` method in our component. We create the file
             // Setup our component and fake test controller
             $Collection = new ComponentCollection();
             $this->PagematronComponent = new PagematronComponent($Collection);
-            $this->Controller = new TestPagematronController();
+            $CakeRequest = new CakeRequest();
+            $CakeResponse = new CakeResponse();
+            $this->Controller = new TestPagematronController($CakeRequest, $CakeResponse);
             $this->PagematronComponent->startup($this->Controller);
         }
 
