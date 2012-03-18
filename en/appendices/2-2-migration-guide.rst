@@ -14,3 +14,37 @@ Models
     or drop joins which are required for the custom finder itself.
     As the pagination of custom find methods never worked quite well it required
     workarounds for this in the model level, which are now no longer needed
+
+Testing
+=======
+
+- The webrunner now includes links to re-run a test with debug output.
+
+
+Error Handling
+==============
+
+- When repeat exceptions, or exception are raised when rendering error pages,
+  the new ``error`` layout will be used.  It's recommended to not use additional
+  helpers in this layout as its intended for development level errors only. This
+  fixes issues with fatal errors in rendering error pages due to helper usage in
+  the ``default`` layout.
+
+
+Network
+=======
+
+CakeEmail
+---------
+
+- :php:meth:`CakeEmail::charset()` and :php:meth:`CakeEmail::headerCharset()`
+  were added.
+
+
+Utility
+=======
+
+Set
+---
+
+- :php:meth:`Set::expand()` was added.
