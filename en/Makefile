@@ -41,6 +41,16 @@ clean:
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html/$(LANG)
 	@echo
+	echo "CACHE MANIFEST" > $(BUILDDIR)/html/$(LANG)/manifest.appcache
+	echo \# `date +%s` >> $(BUILDDIR)/html/$(LANG)/manifest.appcache
+	find $(BUILDDIR)/html/$(LANG) -name "*.html" | sed "s!\($(BUILDDIR)/html\)!/2.0!g" >> $(BUILDDIR)/html/$(LANG)/manifest.appcache
+	find $(BUILDDIR)/html/$(LANG) -name "*.js" | sed "s!\($(BUILDDIR)/html\)!/2.0!g" >> $(BUILDDIR)/html/$(LANG)/manifest.appcache
+	find $(BUILDDIR)/html/$(LANG) -name "*.css" | sed "s!\($(BUILDDIR)/html\)!/2.0!g" >> $(BUILDDIR)/html/$(LANG)/manifest.appcache
+	find $(BUILDDIR)/html/$(LANG) -name "*.png" | sed "s!\($(BUILDDIR)/html\)!/2.0!g" >> $(BUILDDIR)/html/$(LANG)/manifest.appcache
+	find $(BUILDDIR)/html/$(LANG) -name "*.gif" | sed "s!\($(BUILDDIR)/html\)!/2.0!g" >> $(BUILDDIR)/html/$(LANG)/manifest.appcache
+	find $(BUILDDIR)/html/$(LANG) -name "*.ttf" | sed "s!\($(BUILDDIR)/html\)!/2.0!g" >> $(BUILDDIR)/html/$(LANG)/manifest.appcache
+	find $(BUILDDIR)/html/$(LANG) -name "*.woff" | sed "s!\($(BUILDDIR)/html\)!/2.0!g" >> $(BUILDDIR)/html/$(LANG)/manifest.appcache
+
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html/$(LANG)."
 
 dirhtml:
