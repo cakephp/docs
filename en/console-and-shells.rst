@@ -215,7 +215,7 @@ almost entirely of tasks.  You define a shell's tasks by using the ``$tasks`` pr
 
     <?php 
     class UserShell extends AppShell {
-       public $tasks = array('Template');
+        public $tasks = array('Template');
     }
 
 You can use tasks from plugins using the standard :term:`plugin syntax`.
@@ -228,10 +228,10 @@ will call this method when the task is invoked.  A task class looks like::
 
     <?php
     class FileGeneratorTask extends Shell {
-       public $uses = array('User');
-       public function execute() {
+        public $uses = array('User');
+        public function execute() {
 
-       }
+        }
     }
 
 A shell can also access it's tasks as properties, which makes tasks great for
@@ -240,10 +240,10 @@ making re-usable chunks of functionality similar to :doc:`/controllers/component
     <?php 
     // found in Console/Command/SeaShell.php
     class SeaShell extends AppShell {
-       public $tasks = array('Sound'); // found in Console/Command/Task/SoundTask.php
-       public function main() {
-           $this->Sound->execute();
-       }
+        public $tasks = array('Sound'); // found in Console/Command/Task/SoundTask.php
+        public function main() {
+            $this->Sound->execute();
+        }
     }
 
 You can also access tasks directly from the command line::
@@ -767,7 +767,7 @@ would look like:
     <shell>
         <command>bake fixture</command>
         <description>Generate fixtures for use with the test suite. You can use
-           `bake fixture all` to bake all fixtures.</description>
+            `bake fixture all` to bake all fixtures.</description>
         <epilog>Omitting all arguments and options will enter into an interactive mode.</epilog>
         <subcommands/>
         <options>
