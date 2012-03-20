@@ -639,7 +639,7 @@ Create a file named ``ArticlesControllerTest.php`` in your
         public function testIndexShortGetRenderedHtml() {
             $result = $this->testAction(
                '/articles/index/short',
-                array('return' => 'render')
+                array('return' => 'contents')
             );
             debug($result);
         }
