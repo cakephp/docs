@@ -571,8 +571,11 @@ marking actions as public, AuthComponent, will not check for a logged in
 user, nor will authorize objects be checked::
 
     <?php
-    // Allow all actions.
+    // Allow all actions. CakePHP 2.0
     $this->Auth->allow('*');
+
+    // Allow all actions. CakePHP 2.1
+    $this->Auth->allow();
 
     // Allow only the view and index actions.
     $this->Auth->allow('view', 'index');
