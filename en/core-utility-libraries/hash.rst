@@ -1,335 +1,114 @@
-Set
+Hash
 ###
 
-.. php:class:: Set
+.. php:class:: Hash
 
 Array management, if done right, can be a very powerful and useful
 tool for building smarter, more optimized code. CakePHP offers a
-very useful set of static utilities in the Set class that allow you
+very useful set of static utilities in the Hash class that allow you
 to do just that.
 
-CakePHP's Set class can be called from any model or controller in
-the same way Inflector is called. Example: :php:meth:`Set::combine()`.
+CakePHP's Hash class can be called from any model or controller in
+the same way Inflector is called. Example: :php:meth:`Hash::combine()`.
 
-.. deprecated:: 2.2
-
-    The Set class has been deprecated in 2.2 in favour of the :php:class:`Hash`
-    class.  It offers a more consistent interface and API.
-
-Set-compatible Path syntax
+Hash-compatible Path syntax
 ==========================
 
-The Path syntax is used by (for example) sort, and is used to
-define a path.
-
-Usage example (using :php:func:`Set::sort()`)::
-
-    <?php
-    $a = array(
-        0 => array('Person' => array('name' => 'Jeff')),
-        1 => array('Shirt' => array('color' => 'black'))
-    );
-    $result = Set::sort($a, '{n}.Person.name', 'asc');
-    /* $result now looks like:
-        Array
-        (
-            [0] => Array
-                (
-                    [Shirt] => Array
-                        (
-                            [color] => black
-                        )
-                )
-            [1] => Array
-                (
-                    [Person] => Array
-                        (
-                            [name] => Jeff
-                        )
-                )
-        )
-    */
-
-As you can see in the example above, some things are wrapped in
-{}'s, others not. In the table below, you can see which options are
-available.
+The Path syntax is used by all the methods in ``Hash``. Not all parts of the
+path syntax are available in all methods.  A path expression is made of any
+number of tokens.  See the table below for the path syntax and where they are
+supported.
 
 +--------------------------------+--------------------------------------------+
 | Expression                     | Definition                                 |
 +================================+============================================+
-| {n}                            | Represents a numeric key                   |
+| ``{n}``                        | Represents a numeric key.  Will match      |
+|                                | any string or numeric key.                 |
 +--------------------------------+--------------------------------------------+
-| {s}                            | Represents a string                        |
+| ``{s}``                        | Represents a string.  Will match any       |
+|                                | any string value including numeric string  |
+|                                | values.                                    |
 +--------------------------------+--------------------------------------------+
-| Foo                            | Any string (without enclosing brackets)    |
-|                                | is treated like a string literal.          |
-+--------------------------------+--------------------------------------------+
-| {[a-z]+}                       | Any string enclosed in brackets (besides   |
-|                                | {n} and {s}) is interpreted as a regular   |
-|                                | expression.                                |
+| ``Foo``                        | Matches keys with the exact same value.    |
 +--------------------------------+--------------------------------------------+
 
-.. todo:
+All expression elements are supported all methods.  In addition to expression
+elements you can use attribute matching with methods like ``extract()``.
 
-    This section needs to be expanded.
++--------------------------------+--------------------------------------------+
+| Expression                     | Definition                                 |
++================================+============================================+
+| ``[id]``                       | Match elements with a given array key.     |
++--------------------------------+--------------------------------------------+
+| ``[id=2]``                     | Match elements with id equal to 2.         |
++--------------------------------+--------------------------------------------+
+| ``[id!=2]``                    | Match elements with id not equal to 2.     |
++--------------------------------+--------------------------------------------+
+| ``[id>2]``                     | Match elements with id greater than 2.     |
++--------------------------------+--------------------------------------------+
+| ``[id>=2]``                    | Match elements with id greater than        |
+|                                | or equal to 2.                             |
++--------------------------------+--------------------------------------------+
+| ``[id<2]``                     | Match elements with id less than 2         |
++--------------------------------+--------------------------------------------+
+| ``[id<=2]``                    | Match elements with id less than           |
+|                                | or equal to 2.                             |
++--------------------------------+--------------------------------------------+
+| ``[text=/.../]``               | Match elements that have values matching   |
+|                                | the regular expression inside ``...``.     |
++--------------------------------+--------------------------------------------+
+
 
 .. php:staticmethod:: apply($path, $array, $callback, $options = array())
 
-		    :rtype: mixed
+        :rtype: mixed
 
-		    Apply a callback to the elements of an array extracted
-		    by a Set::extract compatible path::
+        Apply a callback to the elements of an array extracted
+        by a Hash::extract compatible path::
 
-		        <?php
-		        $data = array(
-		            array('Movie' => array('id' => 1, 'title' => 'movie 3', 'rating' => 5)),
-		            array('Movie' => array('id' => 1, 'title' => 'movie 1', 'rating' => 1)),
-		            array('Movie' => array('id' => 1, 'title' => 'movie 2', 'rating' => 3)),
-		        );
+            <?php
+            $data = array(
+                array('Movie' => array('id' => 1, 'title' => 'movie 3', 'rating' => 5)),
+                array('Movie' => array('id' => 1, 'title' => 'movie 1', 'rating' => 1)),
+                array('Movie' => array('id' => 1, 'title' => 'movie 2', 'rating' => 3)),
+            );
 
-		        $result = Set::apply('/Movie/rating', $data, 'array_sum');
-		        // result equals 9
+            $result = Hash::apply('/Movie/rating', $data, 'array_sum');
+            // result equals 9
 
-		        $result = Set::apply('/Movie/title', $data, 'strtoupper', array('type' => 'map'));
-		        // result equals array('MOVIE 3', 'MOVIE 1', 'MOVIE 2')
-		        // $options are: - type : can be 'pass' uses call_user_func_array(), 'map' uses array_map(), or 'reduce' uses array_reduce()
+            $result = Hash::apply('/Movie/title', $data, 'strtoupper', array('type' => 'map'));
+            // result equals array('MOVIE 3', 'MOVIE 1', 'MOVIE 2')
+            // $options are: - type : can be 'pass' uses call_user_func_array(), 'map' uses array_map(), or 'reduce' uses array_reduce()
 
 
 .. php:staticmethod:: check($data, $path = null)
 
-    :rtype: boolean/array
+    :rtype: boolean
 
-    Checks if a particular path is set in an array. If $path is empty,
-    $data will be returned instead of a boolean value::
+    Checks if a particular path is set in an array::
 
         <?php
         $set = array(
             'My Index 1' => array('First' => 'The first item')
         );
-        $result = Set::check($set, 'My Index 1.First');
+        $result = Hash::check($set, 'My Index 1.First');
         // $result == True
-        $result = Set::check($set, 'My Index 1');
+        $result = Hash::check($set, 'My Index 1');
         // $result == True
-        $result = Set::check($set, array());
-        // $result == array('My Index 1' => array('First' => 'The first item'))
         $set = array(
             'My Index 1' => array('First' =>
                 array('Second' =>
                     array('Third' =>
                         array('Fourth' => 'Heavy. Nesting.'))))
         );
-        $result = Set::check($set, 'My Index 1.First.Second');
+        $result = Hash::check($set, 'My Index 1.First.Second');
         // $result == True
-        $result = Set::check($set, 'My Index 1.First.Second.Third');
+        $result = Hash::check($set, 'My Index 1.First.Second.Third');
         // $result == True
-        $result = Set::check($set, 'My Index 1.First.Second.Third.Fourth');
+        $result = Hash::check($set, 'My Index 1.First.Second.Third.Fourth');
         // $result == True
-        $result = Set::check($set, 'My Index 1.First.Seconds.Third.Fourth');
+        $result = Hash::check($set, 'My Index 1.First.Seconds.Third.Fourth');
         // $result == False
-
-
-.. php:staticmethod:: classicExtract($data, $path = null)
-
-    :rtype: array
-
-    Gets a value from an array or object that is contained in a given
-    path using an array path syntax, i.e.:
-
-    -  "{n}.Person.{[a-z]+}" - Where "{n}" represents a numeric key,
-       "Person" represents a string literal
-    -  "{[a-z]+}" (i.e. any string literal enclosed in brackets besides
-       {n} and {s}) is interpreted as a regular expression.
-
-    **Example 1**
-    ::
-
-        <?php
-        $a = array(
-            array('Article' => array('id' => 1, 'title' => 'Article 1')),
-            array('Article' => array('id' => 2, 'title' => 'Article 2')),
-            array('Article' => array('id' => 3, 'title' => 'Article 3')));
-        $result = Set::classicExtract($a, '{n}.Article.id');
-        /* $result now looks like:
-            Array
-            (
-                [0] => 1
-                [1] => 2
-                [2] => 3
-            )
-        */
-        $result = Set::classicExtract($a, '{n}.Article.title');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Article 1
-                [1] => Article 2
-                [2] => Article 3
-            )
-        */
-        $result = Set::classicExtract($a, '1.Article.title');
-        // $result == "Article 2"
-
-        $result = Set::classicExtract($a, '3.Article.title');
-        // $result == null
-
-    **Example 2**
-    ::
-
-        <?php
-        $a = array(
-            0 => array('pages' => array('name' => 'page')),
-            1 => array('fruites' => array('name' => 'fruit')),
-            'test' => array(array('name' => 'jippi')),
-            'dot.test' => array(array('name' => 'jippi'))
-        );
-
-        $result = Set::classicExtract($a, '{n}.{s}.name');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [0] => page
-                    )
-                [1] => Array
-                    (
-                        [0] => fruit
-                    )
-            )
-        */
-        $result = Set::classicExtract($a, '{s}.{n}.name');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [0] => jippi
-                    )
-                [1] => Array
-                    (
-                        [0] => jippi
-                    )
-            )
-        */
-        $result = Set::classicExtract($a,'{\w+}.{\w+}.name');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [pages] => page
-                    )
-                [1] => Array
-                    (
-                        [fruites] => fruit
-                    )
-                [test] => Array
-                    (
-                        [0] => jippi
-                    )
-                [dot.test] => Array
-                    (
-                        [0] => jippi
-                    )
-            )
-        */
-        $result = Set::classicExtract($a,'{\d+}.{\w+}.name');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [pages] => page
-                    )
-                [1] => Array
-                    (
-                        [fruites] => fruit
-                    )
-            )
-        */
-        $result = Set::classicExtract($a,'{n}.{\w+}.name');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [pages] => page
-                    )
-                [1] => Array
-                    (
-                        [fruites] => fruit
-                    )
-            )
-        */
-        $result = Set::classicExtract($a,'{s}.{\d+}.name');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [0] => jippi
-                    )
-                [1] => Array
-                    (
-                        [0] => jippi
-                    )
-            )
-        */
-        $result = Set::classicExtract($a,'{s}');
-        /* $result now looks like:
-            Array
-            (
-
-                [0] => Array
-                    (
-                        [0] => Array
-                            (
-                                [name] => jippi
-                            )
-                    )
-                [1] => Array
-                    (
-                        [0] => Array
-                            (
-                                [name] => jippi
-                            )
-                    )
-            )
-        */
-        $result = Set::classicExtract($a,'{[a-z]}');
-        /* $result now looks like:
-            Array
-            (
-                [test] => Array
-                    (
-                        [0] => Array
-                            (
-                                [name] => jippi
-                            )
-                    )
-
-                [dot.test] => Array
-                    (
-                        [0] => Array
-                            (
-                                [name] => jippi
-                            )
-                    )
-            )
-        */
-        $result = Set::classicExtract($a, '{dot\.test}.{n}');
-        /* $result now looks like:
-            Array
-            (
-                [dot.test] => Array
-                    (
-                        [0] => Array
-                            (
-                                [name] => jippi
-                            )
-                    )
-            )
-        */
 
 
 .. php:staticmethod:: combine($data, $path1 = null, $path2 = null, $groupPath = null)
@@ -339,14 +118,14 @@ available.
     Creates an associative array using a $path1 as the path to build
     its keys, and optionally $path2 as path to get the values. If
     $path2 is not specified, all values will be initialized to null
-    (useful for Set::merge). You can optionally group the values by
+    (useful for Hash::merge). You can optionally group the values by
     what is obtained when following the path specified in $groupPath.::
 
         <?php
-        $result = Set::combine(array(), '{n}.User.id', '{n}.User.Data');
+        $result = Hash::combine(array(), '{n}.User.id', '{n}.User.Data');
         // $result == array();
 
-        $result = Set::combine('', '{n}.User.id', '{n}.User.Data');
+        $result = Hash::combine('', '{n}.User.id', '{n}.User.Data');
         // $result == array();
 
         $a = array(
@@ -381,7 +160,7 @@ available.
                 )
             )
         );
-        $result = Set::combine($a, '{n}.User.id');
+        $result = Hash::combine($a, '{n}.User.id');
         /* $result now looks like:
             Array
             (
@@ -391,7 +170,7 @@ available.
             )
         */
 
-        $result = Set::combine($a, '{n}.User.id', '{n}.User.non-existant');
+        $result = Hash::combine($a, '{n}.User.id', '{n}.User.non-existant');
         /* $result now looks like:
             Array
             (
@@ -401,7 +180,7 @@ available.
             )
         */
 
-        $result = Set::combine($a, '{n}.User.id', '{n}.User.Data');
+        $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data');
         /* $result now looks like:
             Array
             (
@@ -423,7 +202,7 @@ available.
             )
         */
 
-        $result = Set::combine($a, '{n}.User.id', '{n}.User.Data.name');
+        $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data.name');
         /* $result now looks like:
             Array
             (
@@ -433,7 +212,7 @@ available.
             )
         */
 
-        $result = Set::combine($a, '{n}.User.id', '{n}.User.Data', '{n}.User.group_id');
+        $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data', '{n}.User.group_id');
         /* $result now looks like:
             Array
             (
@@ -461,7 +240,7 @@ available.
             )
         */
 
-        $result = Set::combine($a, '{n}.User.id', '{n}.User.Data.name', '{n}.User.group_id');
+        $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data.name', '{n}.User.group_id');
         /* $result now looks like:
             Array
             (
@@ -477,7 +256,7 @@ available.
             )
         */
 
-        $result = Set::combine($a, '{n}.User.id', array('{0}: {1}', '{n}.User.Data.user', '{n}.User.Data.name'), '{n}.User.group_id');
+        $result = Hash::combine($a, '{n}.User.id', array('%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'), '{n}.User.group_id');
         /* $result now looks like:
             Array
             (
@@ -493,7 +272,7 @@ available.
             )
         */
 
-        $result = Set::combine($a, array('{0}: {1}', '{n}.User.Data.user', '{n}.User.Data.name'), '{n}.User.id');
+        $result = Hash::combine($a, array('%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'), '{n}.User.id');
         /* $result now looks like:
             Array
             (
@@ -503,7 +282,7 @@ available.
             )
         */
 
-        $result = Set::combine($a, array('{1}: {0}', '{n}.User.Data.user', '{n}.User.Data.name'), '{n}.User.id');
+        $result = Hash::combine($a, array('%2s$: %1s$', '{n}.User.Data.user', '{n}.User.Data.name'), '{n}.User.id');
         /* $result now looks like:
             Array
             (
@@ -513,7 +292,7 @@ available.
             )
         */
 
-        $result = Set::combine($a, array('%1$s: %2$d', '{n}.User.Data.user', '{n}.User.id'), '{n}.User.Data.name');
+        $result = Hash::combine($a, array('%1$s: %2$d', '{n}.User.Data.user', '{n}.User.id'), '{n}.User.Data.name');
 
         /* $result now looks like:
             Array
@@ -524,7 +303,7 @@ available.
             )
         */
 
-        $result = Set::combine($a, array('%2$d: %1$s', '{n}.User.Data.user', '{n}.User.id'), '{n}.User.Data.name');
+        $result = Hash::combine($a, array('%2$d: %1$s', '{n}.User.Data.user', '{n}.User.id'), '{n}.User.Data.name');
         /* $result now looks like:
             Array
             (
@@ -539,7 +318,7 @@ available.
 
     :rtype: boolean
 
-    Determines if one Set or array contains the exact keys and values
+    Determines if one Hash or array contains the exact keys and values
     of another::
 
         <?php
@@ -554,77 +333,61 @@ available.
             'a' => 'b'
         );
 
-        $result = Set::contains($a, $a);
-        // True
-        $result = Set::contains($a, $b);
-        // False
-        $result = Set::contains($b, $a);
-        // True
+        $result = Hash::contains($a, $a);
+        // true
+        $result = Hash::contains($a, $b);
+        // false
+        $result = Hash::contains($b, $a);
+        // true
 
 
-.. php:staticmethod:: countDim ($array = null, $all = false, $count = 0)
+.. php:staticmethod:: dimensions ($array = null)
 
     :rtype: integer
 
-    Counts the dimensions of an array. If $all is set to false (which
-    is the default) it will only consider the dimension of the first
-    element in the array::
+    Counts the dimensions of an array. This method will only 
+    consider the dimension of the first element in the array::
 
         <?php
         $data = array('one', '2', 'three');
-        $result = Set::countDim($data);
+        $result = Hash::dimensions($data);
         // $result == 1
 
         $data = array('1' => '1.1', '2', '3');
-        $result = Set::countDim($data);
+        $result = Hash::dimensions($data);
         // $result == 1
 
         $data = array('1' => array('1.1' => '1.1.1'), '2', '3' => array('3.1' => '3.1.1'));
-        $result = Set::countDim($data);
+        $result = Hash::dimensions($data);
         // $result == 2
 
         $data = array('1' => '1.1', '2', '3' => array('3.1' => '3.1.1'));
-        $result = Set::countDim($data);
+        $result = Hash::dimensions($data);
         // $result == 1
 
+
+        $data = array('1' => array('1.1' => '1.1.1'), '2', '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
+        $result = Hash::countDim($data);
+        // $result == 2
+
+.. php:staticmethod:: maxDimensions(array $data)
+
+    Similar to :php:meth:`~Hash::dimensions()`, however this method returns,
+    the deepest number of dimensions of any element in the array::
+
         $data = array('1' => '1.1', '2', '3' => array('3.1' => '3.1.1'));
-        $result = Set::countDim($data, true);
+        $result = Hash::dimensions($data, true);
         // $result == 2
 
         $data = array('1' => array('1.1' => '1.1.1'), '2', '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
-        $result = Set::countDim($data);
-        // $result == 2
-
-        $data = array('1' => array('1.1' => '1.1.1'), '2', '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
-        $result = Set::countDim($data, true);
+        $result = Hash::countDim($data, true);
         // $result == 3
 
-        $data = array('1' => array('1.1' => '1.1.1'), array('2' => array('2.1' => array('2.1.1' => '2.1.1.1'))), '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
-        $result = Set::countDim($data, true);
-        // $result == 4
-
-        $data = array('1' => array('1.1' => '1.1.1'), array('2' => array('2.1' => array('2.1.1' => array('2.1.1.1')))), '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
-        $result = Set::countDim($data, true);
-        // $result == 5
-
-        $data = array('1' => array('1.1' => '1.1.1'), array('2' => array('2.1' => array('2.1.1' => array('2.1.1.1' => '2.1.1.1.1')))), '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
-        $result = Set::countDim($data, true);
-        // $result == 5
-
-        $set = array('1' => array('1.1' => '1.1.1'), array('2' => array('2.1' => array('2.1.1' => array('2.1.1.1' => '2.1.1.1.1')))), '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
-        $result = Set::countDim($set, false, 0);
-        // $result == 2
-
-        $result = Set::countDim($set, true);
-        // $result == 5
-
-
-.. php:staticmethod:: diff($val1, $val2 = null)
+.. php:staticmethod:: diff(array $val1, array $val2)
 
     :rtype: array
 
-    Computes the difference between a Set and an array, two Sets, or
-    two arrays::
+    Computes the difference between two arrays::
 
         <?php
         $a = array(
@@ -637,7 +400,7 @@ available.
             2 => array('name' => 'contact')
         );
 
-        $result = Set::diff($a, $b);
+        $result = Hash::diff($a, $b);
         /* $result now looks like:
             Array
             (
@@ -647,7 +410,7 @@ available.
                     )
             )
         */
-        $result = Set::diff($a, array());
+        $result = Hash::diff($a, array());
         /* $result now looks like:
             Array
             (
@@ -661,7 +424,7 @@ available.
                     )
             )
         */
-        $result = Set::diff(array(), $b);
+        $result = Hash::diff(array(), $b);
         /* $result now looks like:
             Array
             (
@@ -685,7 +448,7 @@ available.
             1 => array('name' => 'about')
         );
 
-        $result = Set::diff($a, $b);
+        $result = Hash::diff($a, $b);
         /* $result now looks like:
             Array
             (
@@ -696,39 +459,11 @@ available.
             )
         */
 
-
-.. php:staticmethod:: enum($select, $list=null)
-
-    :rtype: string
-
-    The enum method works well when using html select elements. It
-    returns a value from an array list if the key exists.
-
-    If a comma separated $list is passed arrays are numeric with the
-    key of the first being 0 $list = 'no, yes' would translate to $list
-    = array(0 => 'no', 1 => 'yes');
-
-    If an array is used, keys can be strings example: array('no' => 0,
-    'yes' => 1);
-
-    $list defaults to 0 = no 1 = yes if param is not passed::
-
-        <?php
-        $res = Set::enum(1, 'one, two');
-        // $res is 'two'
-
-        $res = Set::enum('no', array('no' => 0, 'yes' => 1));
-        // $res is 0
-
-        $res = Set::enum('first', array('first' => 'one', 'second' => 'two'));
-        // $res is 'one'
-
-
 .. php:staticmethod:: extract($path, $data=null, $options=array())
 
     :rtype: array
 
-    Set::extract uses basic XPath 2.0 syntax to return subsets of your
+    Hash::extract uses basic XPath 2.0 syntax to return subsets of your
     data from a find or a find all. This function allows you to
     retrieve your data quickly without having to loop through multi
     dimensional arrays or traverse through tree structures.
@@ -736,14 +471,14 @@ available.
     .. note::
 
         If ``$path`` does not contain a '/' the call will be delegated to
-        :php:meth:`Set::classicExtract()`
+        :php:meth:`Hash::classicExtract()`
 
     ::
 
         <?php
         // Common Usage:
         $users = $this->User->find("all");
-        $results = Set::extract('/User/id', $users);
+        $results = Hash::extract('/User/id', $users);
         // results returns:
         // array(1,2,3,4,5,...);
 
@@ -781,8 +516,8 @@ available.
     |                                          | additional features are welcome.           |
     +------------------------------------------+--------------------------------------------+
 
-    To learn more about Set::extract() refer to the function testExtract()
-    in ``/lib/Cake/Test/Case/Utility/SetTest.php``.
+    To learn more about Hash::extract() refer to the function testExtract()
+    in ``/lib/Cake/Test/Case/Utility/HashTest.php``.
 
 
 .. php:staticmethod:: filter($var, $isArray=null)
@@ -792,7 +527,7 @@ available.
     Filters empty elements out of a route array, excluding '0'::
 
         <?php
-        $res = Set::filter(array('0', false, true, 0, array('one thing', 'I can tell you', 'is you got to be', false)));
+        $res = Hash::filter(array('0', false, true, 0, array('one thing', 'I can tell you', 'is you got to be', false)));
 
         /* $res now looks like:
             Array (
@@ -827,7 +562,7 @@ available.
                 'Author' => array('id' => '3', 'user' => 'Crystal'),
             ),
         );
-        $res = Set::flatten($arr);
+        $res = Hash::flatten($arr);
         /* $res now looks like:
             Array (
                 [0.Post.id] => 1
@@ -855,7 +590,7 @@ available.
             array('Person' => array('first_name' => 'Larry', 'last_name' => 'Masters', 'city' => 'Boondock', 'state' => 'TN', 'something' => '{0}')),
             array('Person' => array('first_name' => 'Garrett', 'last_name' => 'Woodworth', 'city' => 'Venice Beach', 'state' => 'CA', 'something' => '{1}')));
 
-        $res = Set::format($data, '{1}, {0}', array('{n}.Person.first_name', '{n}.Person.last_name'));
+        $res = Hash::format($data, '{1}, {0}', array('{n}.Person.first_name', '{n}.Person.last_name'));
         /*
         Array
         (
@@ -865,7 +600,7 @@ available.
         )
         */
 
-        $res = Set::format($data, '{0}, {1}', array('{n}.Person.city', '{n}.Person.state'));
+        $res = Hash::format($data, '{0}, {1}', array('{n}.Person.city', '{n}.Person.state'));
         /*
         Array
         (
@@ -874,7 +609,7 @@ available.
             [2] => Venice Beach, CA
         )
         */
-        $res = Set::format($data, '{{0}, {1}}', array('{n}.Person.city', '{n}.Person.state'));
+        $res = Hash::format($data, '{{0}, {1}}', array('{n}.Person.city', '{n}.Person.state'));
         /*
         Array
         (
@@ -883,7 +618,7 @@ available.
             [2] => {Venice Beach, CA}
         )
         */
-        $res = Set::format($data, '{%2$d, %1$s}', array('{n}.Person.something', '{n}.Person.something'));
+        $res = Hash::format($data, '{%2$d, %1$s}', array('{n}.Person.something', '{n}.Person.something'));
         /*
         Array
         (
@@ -892,7 +627,7 @@ available.
             [2] => {0, {1}}
         )
         */
-        $res = Set::format($data, '%2$d, %1$s', array('{n}.Person.first_name', '{n}.Person.something'));
+        $res = Hash::format($data, '%2$d, %1$s', array('{n}.Person.first_name', '{n}.Person.something'));
         /*
         Array
         (
@@ -901,7 +636,7 @@ available.
             [2] => 0, Garrett
         )
         */
-        $res = Set::format($data, '%1$s, %2$d', array('{n}.Person.first_name', '{n}.Person.something'));
+        $res = Hash::format($data, '%1$s, %2$d', array('{n}.Person.first_name', '{n}.Person.something'));
         /*
         Array
         (
@@ -912,7 +647,7 @@ available.
         */
 
 
-.. php:staticmethod:: Set::insert ($list, $path, $data = null)
+.. php:staticmethod:: Hash::insert ($list, $path, $data = null)
 
     :rtype: array
 
@@ -922,7 +657,7 @@ available.
         $a = array(
             'pages' => array('name' => 'page')
         );
-        $result = Set::insert($a, 'files', array('name' => 'files'));
+        $result = Hash::insert($a, 'files', array('name' => 'files'));
         /* $result now looks like:
             Array
             (
@@ -940,7 +675,7 @@ available.
         $a = array(
             'pages' => array('name' => 'page')
         );
-        $result = Set::insert($a, 'pages.name', array());
+        $result = Hash::insert($a, 'pages.name', array());
         /* $result now looks like:
             Array
             (
@@ -959,7 +694,7 @@ available.
                 1 => array('name' => 'about')
             )
         );
-        $result = Set::insert($a, 'pages.1.vars', array('title' => 'page title'));
+        $result = Hash::insert($a, 'pages.1.vars', array('title' => 'page title'));
         /* $result now looks like:
             Array
             (
@@ -986,13 +721,13 @@ available.
 
     :rtype: object
 
-    This method Maps the contents of the Set object to an object
+    This method Maps the contents of the Hash object to an object
     hierarchy while maintaining numeric keys as arrays of objects.
 
     Basically, the map function turns array items into initialized
     class objects. By default it turns an array into a stdClass Object,
     however you can map values into any type of class. Example:
-    Set::map($array\_of\_values, 'nameOfYourClass');::
+    Hash::map($array\_of\_values, 'nameOfYourClass');::
 
         <?php
         $data = array(
@@ -1019,7 +754,7 @@ available.
                 ),
             )
         );
-        $mapped = Set::map($data);
+        $mapped = Hash::map($data);
 
         /* $mapped now looks like:
 
@@ -1053,7 +788,7 @@ available.
 
         */
 
-    Using Set::map() with a custom class for second parameter:
+    Using Hash::map() with a custom class for second parameter:
 
     ::
 
@@ -1063,7 +798,7 @@ available.
             }
         }
 
-        $mapped = Set::map($data, 'MyClass');
+        $mapped = Hash::map($data, 'MyClass');
         //Now you can access all the properties as in the example above,
         //but also you can call MyClass's methods
         $mapped->[0]->sayHi();
@@ -1073,7 +808,7 @@ available.
 
     :rtype: boolean
 
-    Set::matches can be used to see if a single item or a given xpath
+    Hash::matches can be used to see if a single item or a given xpath
     match certain conditions.::
 
         <?php
@@ -1081,35 +816,35 @@ available.
             array('Article' => array('id' => 1, 'title' => 'Article 1')),
             array('Article' => array('id' => 2, 'title' => 'Article 2')),
             array('Article' => array('id' => 3, 'title' => 'Article 3')));
-        $res=Set::matches(array('id>2'), $a[1]['Article']);
+        $res=Hash::matches(array('id>2'), $a[1]['Article']);
         // returns false
-        $res=Set::matches(array('id>=2'), $a[1]['Article']);
+        $res=Hash::matches(array('id>=2'), $a[1]['Article']);
         // returns true
-        $res=Set::matches(array('id>=3'), $a[1]['Article']);
+        $res=Hash::matches(array('id>=3'), $a[1]['Article']);
         // returns false
-        $res=Set::matches(array('id<=2'), $a[1]['Article']);
+        $res=Hash::matches(array('id<=2'), $a[1]['Article']);
         // returns true
-        $res=Set::matches(array('id<2'), $a[1]['Article']);
+        $res=Hash::matches(array('id<2'), $a[1]['Article']);
         // returns false
-        $res=Set::matches(array('id>1'), $a[1]['Article']);
+        $res=Hash::matches(array('id>1'), $a[1]['Article']);
         // returns true
-        $res=Set::matches(array('id>1', 'id<3', 'id!=0'), $a[1]['Article']);
+        $res=Hash::matches(array('id>1', 'id<3', 'id!=0'), $a[1]['Article']);
         // returns true
-        $res=Set::matches(array('3'), null, 3);
+        $res=Hash::matches(array('3'), null, 3);
         // returns true
-        $res=Set::matches(array('5'), null, 5);
+        $res=Hash::matches(array('5'), null, 5);
         // returns true
-        $res=Set::matches(array('id'), $a[1]['Article']);
+        $res=Hash::matches(array('id'), $a[1]['Article']);
         // returns true
-        $res=Set::matches(array('id', 'title'), $a[1]['Article']);
+        $res=Hash::matches(array('id', 'title'), $a[1]['Article']);
         // returns true
-        $res=Set::matches(array('non-existent'), $a[1]['Article']);
+        $res=Hash::matches(array('non-existent'), $a[1]['Article']);
         // returns false
-        $res=Set::matches('/Article[id=2]', $a);
+        $res=Hash::matches('/Article[id=2]', $a);
         // returns true
-        $res=Set::matches('/Article[id=4]', $a);
+        $res=Hash::matches('/Article[id=4]', $a);
         // returns false
-        $res=Set::matches(array(), $a);
+        $res=Hash::matches(array(), $a);
         // returns true
 
 
@@ -1147,7 +882,7 @@ available.
         $arry2 = 4;
         $arry3 = array(0 => "test array", "cats" => "dogs", "people" => 1267);
         $arry4 = array("cats" => "felines", "dog" => "angry");
-        $res = Set::merge($arry1, $arry2, $arry3, $arry4);
+        $res = Hash::merge($arry1, $arry2, $arry3, $arry4);
 
         /* $res now looks like:
         Array
@@ -1191,7 +926,7 @@ available.
                 'Bindable',
                 'Validator',
                 'Transactional');
-        $result = Set::normalize($a);
+        $result = Hash::normalize($a);
         /* $result now looks like:
             Array
             (
@@ -1211,7 +946,7 @@ available.
                     )
             )
         */
-        $result = Set::normalize($b);
+        $result = Hash::normalize($b);
         /* $result now looks like:
             Array
             (
@@ -1226,7 +961,7 @@ available.
                 [Transactional] =>
             )
         */
-        $result = Set::merge($a, $b); // Now merge the two and normalize
+        $result = Hash::merge($a, $b); // Now merge the two and normalize
         /* $result now looks like:
             Array
             (
@@ -1255,7 +990,7 @@ available.
                 [5] => Transactional
             )
         */
-        $result = Set::normalize(Set::merge($a, $b));
+        $result = Hash::normalize(Hash::merge($a, $b));
         /* $result now looks like:
             Array
             (
@@ -1294,52 +1029,52 @@ available.
 
         <?php
         $data = array('one');
-        $res = Set::numeric(array_keys($data));
+        $res = Hash::numeric(array_keys($data));
 
         // $res is true
 
         $data = array(1 => 'one');
-        $res = Set::numeric($data);
+        $res = Hash::numeric($data);
 
         // $res is false
 
         $data = array('one');
-        $res = Set::numeric($data);
+        $res = Hash::numeric($data);
 
         // $res is false
 
         $data = array('one' => 'two');
-        $res = Set::numeric($data);
+        $res = Hash::numeric($data);
 
         // $res is false
 
         $data = array('one' => 1);
-        $res = Set::numeric($data);
+        $res = Hash::numeric($data);
 
         // $res is true
 
         $data = array(0);
-        $res = Set::numeric($data);
+        $res = Hash::numeric($data);
 
         // $res is true
 
         $data = array('one', 'two', 'three', 'four', 'five');
-        $res = Set::numeric(array_keys($data));
+        $res = Hash::numeric(array_keys($data));
 
         // $res is true
 
         $data = array(1 => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five');
-        $res = Set::numeric(array_keys($data));
+        $res = Hash::numeric(array_keys($data));
 
         // $res is true
 
         $data = array('1' => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five');
-        $res = Set::numeric(array_keys($data));
+        $res = Hash::numeric(array_keys($data));
 
         // $res is true
 
         $data = array('one', 2 => 'two', 3 => 'three', 4 => 'four', 'a' => 'five');
-        $res = Set::numeric(array_keys($data));
+        $res = Hash::numeric(array_keys($data));
 
         // $res is false
 
@@ -1357,7 +1092,7 @@ available.
         <?php
         $array1 = array('ModelOne' => array('id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2'));
         $array2 = array('ModelOne' => array('id' => 1003, 'field_one' => 'a3.m1.f1', 'field_two' => 'a3.m1.f2', 'field_three' => 'a3.m1.f3'));
-        $res = Set::pushDiff($array1, $array2);
+        $res = Hash::pushDiff($array1, $array2);
 
         /* $res now looks like:
             Array
@@ -1378,7 +1113,7 @@ available.
         <?php
         $array1 = array("a" => "b", 1 => 20938, "c" => "string");
         $array2 = array("b" => "b", 3 => 238, "c" => "string", array("extra_field"));
-        $res = Set::pushDiff($array1, $array2);
+        $res = Hash::pushDiff($array1, $array2);
         /* $res now looks like:
             Array
             (
@@ -1399,7 +1134,7 @@ available.
 
     :rtype: array
 
-    Removes an element from a Set or array as defined by $path::
+    Removes an element from a Hash or array as defined by $path::
 
         <?php
         $a = array(
@@ -1407,7 +1142,7 @@ available.
             'files'     => array('name' => 'files')
         );
 
-        $result = Set::remove($a, 'files');
+        $result = Hash::remove($a, 'files');
         /* $result now looks like:
             Array
             (
@@ -1424,14 +1159,14 @@ available.
 
     :rtype: array
 
-    Set::reverse is basically the opposite of :php:func:`Set::map`. It converts an
+    Hash::reverse is basically the opposite of :php:func:`Hash::map`. It converts an
     object into an array. If $object is not an object, reverse will
     simply return $object.::
 
         <?php
-        $result = Set::reverse(null);
+        $result = Hash::reverse(null);
         // Null
-        $result = Set::reverse(false);
+        $result = Hash::reverse(false);
         // false
         $a = array(
             'Post' => array('id' => 1, 'title' => 'First Post'),
@@ -1444,7 +1179,7 @@ available.
                 array('id' => 2, 'title' => 'Second Tag')
             ),
         );
-        $map = Set::map($a); // Turn $a into a class object
+        $map = Hash::map($a); // Turn $a into a class object
         /* $map now looks like:
             stdClass Object
             (
@@ -1480,7 +1215,7 @@ available.
             )
         */
 
-        $result = Set::reverse($map);
+        $result = Hash::reverse($map);
         /* $result now looks like:
             Array
             (
@@ -1518,7 +1253,7 @@ available.
             )
         */
 
-        $result = Set::reverse($a['Post']); // Just return the array
+        $result = Hash::reverse($a['Post']); // Just return the array
         /* $result now looks like:
             Array
             (
@@ -1532,14 +1267,14 @@ available.
 
     :rtype: array
 
-    Sorts an array by any value, determined by a Set-compatible path::
+    Sorts an array by any value, determined by a Hash-compatible path::
 
         <?php
         $a = array(
             0 => array('Person' => array('name' => 'Jeff')),
             1 => array('Shirt' => array('color' => 'black'))
         );
-        $result = Set::sort($a, '{n}.Person.name', 'asc');
+        $result = Hash::sort($a, '{n}.Person.name', 'asc');
         /* $result now looks like:
             Array
             (
@@ -1560,7 +1295,7 @@ available.
             )
         */
 
-        $result = Set::sort($a, '{n}.Shirt', 'asc');
+        $result = Hash::sort($a, '{n}.Shirt', 'asc');
         /* $result now looks like:
             Array
             (
@@ -1581,7 +1316,7 @@ available.
             )
         */
 
-        $result = Set::sort($a, '{n}', 'desc');
+        $result = Hash::sort($a, '{n}', 'desc');
         /* $result now looks like:
             Array
             (
@@ -1613,7 +1348,7 @@ available.
 		    :rtype: mixed
 
 		    Apply a callback to the elements of an array extracted
-		    by a Set::extract compatible path::
+		    by a Hash::extract compatible path::
 
 		        <?php
 		        $data = array(
@@ -1622,10 +1357,10 @@ available.
 		            array('Movie' => array('id' => 1, 'title' => 'movie 2', 'rating' => 3)),
 		        );
 
-		        $result = Set::apply('/Movie/rating', $data, 'array_sum');
+		        $result = Hash::apply('/Movie/rating', $data, 'array_sum');
 		        // result equals 9
 
-		        $result = Set::apply('/Movie/title', $data, 'strtoupper', array('type' => 'map'));
+		        $result = Hash::apply('/Movie/title', $data, 'strtoupper', array('type' => 'map'));
 		        // result equals array('MOVIE 3', 'MOVIE 1', 'MOVIE 2')
 		        // $options are: - type : can be 'pass' uses call_user_func_array(), 'map' uses array_map(), or 'reduce' uses array_reduce()
 
@@ -1649,7 +1384,7 @@ available.
                             array('ModelName' => array('id' => 10, 'parent_id' => 6))
                         );
 
-		        $result = Set::nest($data, array('root' => 6));
+		        $result = Hash::nest($data, array('root' => 6));
 		        /* $result now looks like:
                             array(
                                     (int) 0 => array(
@@ -1693,5 +1428,5 @@ available.
 
 
 .. meta::
-    :title lang=en: Set
+    :title lang=en: Hash
     :keywords lang=en: array array,path array,array name,numeric key,regular expression,result set,person name,brackets,syntax,cakephp,elements,php,set path
