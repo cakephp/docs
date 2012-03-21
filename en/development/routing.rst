@@ -418,6 +418,8 @@ Much like admin routing all prefix actions should be prefixed with
 the prefix name. So ``/manager/posts/add`` would map to
 ``PostsController::manager_add()``.
 
+Additionnaly, the current prefix will be available from the controller methods through ``$this->request->prefix``
+
 When using prefix routes it's important to remember, using the HTML
 helper to build your links will help maintain the prefix calls.
 Here's how to build this link using the HTML helper::
