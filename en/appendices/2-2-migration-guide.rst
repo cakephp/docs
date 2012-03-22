@@ -48,3 +48,12 @@ Set
 ---
 
 - :php:meth:`Set::expand()` was added.
+
+Helpers
+=======
+
+FormHelper
+----------
+
+- FormHelper now better handles adding required classes to inputs.  It now
+  honours the ``on`` key.
