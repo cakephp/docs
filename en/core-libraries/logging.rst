@@ -82,10 +82,10 @@ Error and Exception logging
 ===========================
 
 Errors and Exceptions can also be logged.  By configuring the 
-co-responding values in your core.php file.  Set ``Error.log`` to 
-true to log errors, and ``Exception.log`` to true to log 
-uncaught exceptions. See :doc:`/development/configuration` for more
-information.
+co-responding values in your core.php file.  Errors will be 
+displayed when debug > 0 and logged when debug == 0. Set ``Exception.log`` 
+to true to log uncaught exceptions. See :doc:`/development/configuration` 
+for more information.
 
 Interacting with log streams
 ============================
