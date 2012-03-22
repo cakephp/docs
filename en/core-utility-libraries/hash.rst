@@ -11,13 +11,16 @@ to do just that.
 CakePHP's Hash class can be called from any model or controller in
 the same way Inflector is called. Example: :php:meth:`Hash::combine()`.
 
-Hash-compatible Path syntax
-==========================
+.. _hash-path-syntax:
 
-The Path syntax is used by all the methods in ``Hash``. Not all parts of the
-path syntax are available in all methods.  A path expression is made of any
-number of tokens.  See the table below for the path syntax and where they are
-supported.
+Hash path syntax
+================
+
+The path syntax described below is used by all the methods in ``Hash``. Not all
+parts of the path syntax are available in all methods.  A path expression is
+made of any number of tokens.  Tokens are composed of two groups.  Expresssions,
+are used to traverse the array data, while matchers are used to qualify
+elements.  You apply matchers to expression elements.
 
 +--------------------------------+--------------------------------------------+
 | Expression                     | Definition                                 |
@@ -36,7 +39,7 @@ All expression elements are supported all methods.  In addition to expression
 elements you can use attribute matching with methods like ``extract()``.
 
 +--------------------------------+--------------------------------------------+
-| Expression                     | Definition                                 |
+| Matcher                        | Definition                                 |
 +================================+============================================+
 | ``[id]``                       | Match elements with a given array key.     |
 +--------------------------------+--------------------------------------------+
@@ -58,76 +61,99 @@ elements you can use attribute matching with methods like ``extract()``.
 |                                | the regular expression inside ``...``.     |
 +--------------------------------+--------------------------------------------+
 
+.. php:staticmethod:: get(array $data, $path)
 
-.. php:staticmethod:: apply($path, $array, $callback, $options = array())
+    :rtype: mixed
 
-        :rtype: mixed
+    ``get()`` is a simplified version of ``extract()``, it only supports direct
+    path expressions.  Paths with ``{n}``, ``{s}`` or matchers are not
+    supported.  Use ``get()`` when you want exactly one value out of an array.
 
-        Apply a callback to the elements of an array extracted
-        by a Hash::extract compatible path::
-
-            <?php
-            $data = array(
-                array('Movie' => array('id' => 1, 'title' => 'movie 3', 'rating' => 5)),
-                array('Movie' => array('id' => 1, 'title' => 'movie 1', 'rating' => 1)),
-                array('Movie' => array('id' => 1, 'title' => 'movie 2', 'rating' => 3)),
-            );
-
-            $result = Hash::apply('/Movie/rating', $data, 'array_sum');
-            // result equals 9
-
-            $result = Hash::apply('/Movie/title', $data, 'strtoupper', array('type' => 'map'));
-            // result equals array('MOVIE 3', 'MOVIE 1', 'MOVIE 2')
-            // $options are: - type : can be 'pass' uses call_user_func_array(), 'map' uses array_map(), or 'reduce' uses array_reduce()
-
-
-.. php:staticmethod:: check($data, $path = null)
-
-    :rtype: boolean
-
-    Checks if a particular path is set in an array::
-
-        <?php
-        $set = array(
-            'My Index 1' => array('First' => 'The first item')
-        );
-        $result = Hash::check($set, 'My Index 1.First');
-        // $result == True
-        $result = Hash::check($set, 'My Index 1');
-        // $result == True
-        $set = array(
-            'My Index 1' => array('First' =>
-                array('Second' =>
-                    array('Third' =>
-                        array('Fourth' => 'Heavy. Nesting.'))))
-        );
-        $result = Hash::check($set, 'My Index 1.First.Second');
-        // $result == True
-        $result = Hash::check($set, 'My Index 1.First.Second.Third');
-        // $result == True
-        $result = Hash::check($set, 'My Index 1.First.Second.Third.Fourth');
-        // $result == True
-        $result = Hash::check($set, 'My Index 1.First.Seconds.Third.Fourth');
-        // $result == False
-
-
-.. php:staticmethod:: combine($data, $path1 = null, $path2 = null, $groupPath = null)
+.. php:staticmethod:: extract(array $data, $path)
 
     :rtype: array
 
-    Creates an associative array using a $path1 as the path to build
-    its keys, and optionally $path2 as path to get the values. If
-    $path2 is not specified, all values will be initialized to null
-    (useful for Hash::merge). You can optionally group the values by
-    what is obtained when following the path specified in $groupPath.::
+    ``Hash::extract()`` supports all expression, and matcher components of
+    :ref:`hash-path-syntax`. You can use extract to retrieve data from arrays,
+    along arbitrary paths quickly without having to loop through the data
+    structures.  Instead you use path expressions to qualify which elements you
+    want returned ::
 
         <?php
-        $result = Hash::combine(array(), '{n}.User.id', '{n}.User.Data');
-        // $result == array();
+        // Common Usage:
+        $users = $this->User->find("all");
+        $results = Hash::extract('{n}.User.id', $users);
+        // results returns:
+        // array(1,2,3,4,5,...);
 
-        $result = Hash::combine('', '{n}.User.id', '{n}.User.Data');
-        // $result == array();
+.. php:staticmethod:: Hash::insert($data, $path, $values = null)
 
+    :rtype: array
+
+    Inserts $data into an array as defined by $path. This method only supports
+    the expression types of :ref:`hash-path-syntax`::
+
+        <?php
+        $a = array(
+            'pages' => array('name' => 'page')
+        );
+        $result = Hash::insert($a, 'files', array('name' => 'files'));
+        // $result now looks like:
+        Array
+        (
+            [pages] => Array
+                (
+                    [name] => page
+                )
+            [files] => Array
+                (
+                    [name] => files
+                )
+        )
+
+    You can use paths using ``{n}`` and ``{s}`` to insert data into multiple
+    points::
+
+        $users = $this->User->find('all');
+        $users = Set::insert($users, '{n}.User.new', 'value');
+
+.. php:staticmethod:: remove($data, $path = null)
+
+    :rtype: array
+
+    Removes all elements from an array that match $path. This method supports
+    all the expression elements of :ref:`hash-path-syntax`::
+
+        <?php
+        $a = array(
+            'pages' => array('name' => 'page'),
+            'files' => array('name' => 'files')
+        );
+        $result = Hash::remove($a, 'files');
+        /* $result now looks like:
+            Array
+            (
+                [pages] => Array
+                    (
+                        [name] => page
+                    )
+
+            )
+        */
+
+    Using ``{n}`` and ``{s}`` will allow you to remove multiple values at once.
+
+.. php:staticmethod:: combine($data, $keyPath = null, $valuePath = null, $groupPath = null)
+
+    :rtype: array
+
+    Creates an associative array using a $keyPath as the path to build its keys,
+    and optionally $valuePath as path to get the values. If $valuePath is not
+    specified, or doesn't match anything, values will be initialized to null.
+    You can optionally group the values by what is obtained when following the
+    path specified in $groupPath.::
+
+        <?php
         $a = array(
             array(
                 'User' => array(
@@ -149,34 +175,14 @@ elements you can use attribute matching with methods like ``extract()``.
                     )
                 )
             ),
-            array(
-                'User' => array(
-                    'id' => 25,
-                    'group_id' => 1,
-                    'Data' => array(
-                        'user' => 'gwoo',
-                        'name' => 'The Gwoo'
-                    )
-                )
-            )
         );
+
         $result = Hash::combine($a, '{n}.User.id');
         /* $result now looks like:
             Array
             (
                 [2] =>
                 [14] =>
-                [25] =>
-            )
-        */
-
-        $result = Hash::combine($a, '{n}.User.id', '{n}.User.non-existant');
-        /* $result now looks like:
-            Array
-            (
-                [2] =>
-                [14] =>
-                [25] =>
             )
         */
 
@@ -194,11 +200,6 @@ elements you can use attribute matching with methods like ``extract()``.
                         [user] => phpnut
                         [name] => Larry E. Masters
                     )
-                [25] => Array
-                    (
-                        [user] => gwoo
-                        [name] => The Gwoo
-                    )
             )
         */
 
@@ -208,7 +209,6 @@ elements you can use attribute matching with methods like ``extract()``.
             (
                 [2] => Mariano Iglesias
                 [14] => Larry E. Masters
-                [25] => The Gwoo
             )
         */
 
@@ -222,11 +222,6 @@ elements you can use attribute matching with methods like ``extract()``.
                             (
                                 [user] => mariano.iglesias
                                 [name] => Mariano Iglesias
-                            )
-                        [25] => Array
-                            (
-                                [user] => gwoo
-                                [name] => The Gwoo
                             )
                     )
                 [2] => Array
@@ -247,7 +242,6 @@ elements you can use attribute matching with methods like ``extract()``.
                 [1] => Array
                     (
                         [2] => Mariano Iglesias
-                        [25] => The Gwoo
                     )
                 [2] => Array
                     (
@@ -256,14 +250,22 @@ elements you can use attribute matching with methods like ``extract()``.
             )
         */
 
-        $result = Hash::combine($a, '{n}.User.id', array('%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'), '{n}.User.group_id');
+    You can provide array's for both $keyPath and $valuePath.  If you do this,
+    the first value will be used as a format string, for values extracted by the
+    other paths::
+
+        $result = Hash::combine(
+            $a,
+            '{n}.User.id',
+            array('%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'),
+            '{n}.User.group_id'
+        );
         /* $result now looks like:
             Array
             (
                 [1] => Array
                     (
                         [2] => mariano.iglesias: Mariano Iglesias
-                        [25] => gwoo: The Gwoo
                     )
                 [2] => Array
                     (
@@ -272,47 +274,76 @@ elements you can use attribute matching with methods like ``extract()``.
             )
         */
 
-        $result = Hash::combine($a, array('%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'), '{n}.User.id');
+        $result = Hash::combine(
+            $a,
+            array('%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'),
+            '{n}.User.id'
+        );
         /* $result now looks like:
             Array
             (
                 [mariano.iglesias: Mariano Iglesias] => 2
                 [phpnut: Larry E. Masters] => 14
-                [gwoo: The Gwoo] => 25
             )
         */
 
-        $result = Hash::combine($a, array('%2s$: %1s$', '{n}.User.Data.user', '{n}.User.Data.name'), '{n}.User.id');
-        /* $result now looks like:
-            Array
-            (
-                [Mariano Iglesias: mariano.iglesias] => 2
-                [Larry E. Masters: phpnut] => 14
-                [The Gwoo: gwoo] => 25
+.. php:staticmethod:: format($data, $format, $keys)
+
+    :rtype: array
+
+    Returns a series of values extracted from an array, formatted with a
+    format string::
+
+        <?php
+        $data = array(
+            array(
+                'Person' => array(
+                    'first_name' => 'Nate',
+                    'last_name' => 'Abele',
+                    'city' => 'Boston',
+                    'state' => 'MA',
+                    'something' => '42'
+                )
+            ),
+            array(
+                'Person' => array(
+                    'first_name' => 'Larry',
+                    'last_name' => 'Masters',
+                    'city' => 'Boondock',
+                    'state' => 'TN',
+                    'something' => '{0}'
+                )
+            ),
+            array(
+                'Person' => array(
+                    'first_name' => 'Garrett',
+                    'last_name' => 'Woodworth',
+                    'city' => 'Venice Beach',
+                    'state' => 'CA',
+                    'something' => '{1}'
+                )
             )
+        );
+
+        $res = Hash::format($data, '%2$d, %1$s', array('{n}.Person.first_name', '{n}.Person.something'));
+        /*
+        Array
+        (
+            [0] => 42, Nate
+            [1] => 0, Larry
+            [2] => 0, Garrett
+        )
         */
 
-        $result = Hash::combine($a, array('%1$s: %2$d', '{n}.User.Data.user', '{n}.User.id'), '{n}.User.Data.name');
-
-        /* $result now looks like:
-            Array
-            (
-                [mariano.iglesias: 2] => Mariano Iglesias
-                [phpnut: 14] => Larry E. Masters
-                [gwoo: 25] => The Gwoo
-            )
+        $res = Hash::format($data, '%1$s, %2$d', array('{n}.Person.first_name', '{n}.Person.something'));
+        /*
+        Array
+        (
+            [0] => Nate, 42
+            [1] => Larry, 0
+            [2] => Garrett, 0
+        )
         */
-
-        $result = Hash::combine($a, array('%2$d: %1$s', '{n}.User.Data.user', '{n}.User.id'), '{n}.User.Data.name');
-        /* $result now looks like:
-            Array
-            (
-                [2: mariano.iglesias] => Mariano Iglesias
-                [14: phpnut] => Larry E. Masters
-                [25: gwoo] => The Gwoo
-            )
-        */
-
 
 .. php:staticmethod:: contains($val1, $val2 = null)
 
@@ -340,6 +371,75 @@ elements you can use attribute matching with methods like ``extract()``.
         $result = Hash::contains($b, $a);
         // true
 
+.. php:staticmethod:: check($data, $path = null)
+
+    :rtype: boolean
+
+    Checks if a particular path is set in an array::
+
+        <?php
+        $set = array(
+            'My Index 1' => array('First' => 'The first item')
+        );
+        $result = Hash::check($set, 'My Index 1.First');
+        // $result == True
+
+        $result = Hash::check($set, 'My Index 1');
+        // $result == True
+
+        $set = array(
+            'My Index 1' => array('First' =>
+                array('Second' =>
+                    array('Third' =>
+                        array('Fourth' => 'Heavy. Nesting.'))))
+        );
+        $result = Hash::check($set, 'My Index 1.First.Second');
+        // $result == True
+
+        $result = Hash::check($set, 'My Index 1.First.Second.Third');
+        // $result == True
+
+        $result = Hash::check($set, 'My Index 1.First.Second.Third.Fourth');
+        // $result == True
+
+        $result = Hash::check($set, 'My Index 1.First.Seconds.Third.Fourth');
+        // $result == False
+
+.. php:staticmethod:: filter($var, $callback = array('Hash', 'filter'))
+
+    :rtype: array
+
+    Filters empty elements out of array, excluding '0'. You can also supply a
+    custom $callback to filter the array elements.  You callback should return
+    ``false`` to remove elements from the resulting array.::
+
+        <?php
+        $data = array(
+            '0',
+            false,
+            true,
+            0,
+            array('one thing', 'I can tell you', 'is you got to be', false)
+        );
+        $res = Hash::filter();
+
+        /* $res now looks like:
+            Array (
+                [0] => 0
+                [2] => true
+                [3] => 0
+                [4] => Array
+                    (
+                        [0] => one thing
+                        [1] => I can tell you
+                        [2] => is you got to be
+                    )
+            )
+        */
+
+.. todo::
+
+    Continue here.
 
 .. php:staticmethod:: dimensions ($array = null)
 
@@ -459,90 +559,8 @@ elements you can use attribute matching with methods like ``extract()``.
             )
         */
 
-.. php:staticmethod:: extract($path, $data=null, $options=array())
-
-    :rtype: array
-
-    Hash::extract uses basic XPath 2.0 syntax to return subsets of your
-    data from a find or a find all. This function allows you to
-    retrieve your data quickly without having to loop through multi
-    dimensional arrays or traverse through tree structures.
-
-    .. note::
-
-        If ``$path`` does not contain a '/' the call will be delegated to
-        :php:meth:`Hash::classicExtract()`
-
-    ::
-
-        <?php
-        // Common Usage:
-        $users = $this->User->find("all");
-        $results = Hash::extract('/User/id', $users);
-        // results returns:
-        // array(1,2,3,4,5,...);
-
-    Currently implemented selectors:
-
-    +------------------------------------------+--------------------------------------------+
-    | Selector                                 | Note                                       |
-    +==========================================+============================================+
-    | /User/id                                 | Similar to the classic {n}.User.id         |
-    +------------------------------------------+--------------------------------------------+
-    | /User[2]/name                            | Selects the name of the second User        |
-    +------------------------------------------+--------------------------------------------+
-    | /User[id<2]                              | Selects all Users with an id < 2           |
-    +------------------------------------------+--------------------------------------------+
-    | /User[id>2][<5]                          | Selects all Users with an id > 2 but 5     |
-    +------------------------------------------+--------------------------------------------+
-    | /Post/Comment[author\_name=john]/../name | Selects the name of all Posts that have at |
-    |                                          | least one Comment written by john          |
-    +------------------------------------------+--------------------------------------------+
-    | /Posts[title]                            | Selects all Posts that have a 'title' key  |
-    +------------------------------------------+--------------------------------------------+
-    | /Comment/.[1]                            | Selects the contents of the first comment  |
-    +------------------------------------------+--------------------------------------------+
-    | /Comment/.[:last]                        | Selects the last comment                   |
-    +------------------------------------------+--------------------------------------------+
-    | /Comment/.[:first]                       | Selects the first comment                  |
-    +------------------------------------------+--------------------------------------------+
-    | /Comment[text=/cakephp/i]                | Selects all comments that have a text      |
-    |                                          | matching the regex /cakephp/i              |
-    +------------------------------------------+--------------------------------------------+
-    | /Comment/\@\*                            | Selects the key names of all comments      |
-    |                                          | Currently only absolute paths starting with|
-    |                                          | a single '/' are supported. Please report  |
-    |                                          | any bugs as you find them. Suggestions for |
-    |                                          | additional features are welcome.           |
-    +------------------------------------------+--------------------------------------------+
-
-    To learn more about Hash::extract() refer to the function testExtract()
-    in ``/lib/Cake/Test/Case/Utility/HashTest.php``.
 
 
-.. php:staticmethod:: filter($var, $isArray=null)
-
-    :rtype: array
-
-    Filters empty elements out of a route array, excluding '0'::
-
-        <?php
-        $res = Hash::filter(array('0', false, true, 0, array('one thing', 'I can tell you', 'is you got to be', false)));
-
-        /* $res now looks like:
-            Array (
-                [0] => 0
-                [2] => 1
-                [3] => 0
-                [4] => Array
-                    (
-                        [0] => one thing
-                        [1] => I can tell you
-                        [2] => is you got to be
-                        [3] =>
-                    )
-            )
-        */
 
 
 .. php:staticmethod:: flatten($data, $separator='.')
@@ -577,144 +595,8 @@ elements you can use attribute matching with methods like ``extract()``.
         */
 
 
-.. php:staticmethod:: format($data, $format, $keys)
-
-    :rtype: array
-
-    Returns a series of values extracted from an array, formatted in a
-    format string::
-
-        <?php
-        $data = array(
-            array('Person' => array('first_name' => 'Nate', 'last_name' => 'Abele', 'city' => 'Boston', 'state' => 'MA', 'something' => '42')),
-            array('Person' => array('first_name' => 'Larry', 'last_name' => 'Masters', 'city' => 'Boondock', 'state' => 'TN', 'something' => '{0}')),
-            array('Person' => array('first_name' => 'Garrett', 'last_name' => 'Woodworth', 'city' => 'Venice Beach', 'state' => 'CA', 'something' => '{1}')));
-
-        $res = Hash::format($data, '{1}, {0}', array('{n}.Person.first_name', '{n}.Person.last_name'));
-        /*
-        Array
-        (
-            [0] => Abele, Nate
-            [1] => Masters, Larry
-            [2] => Woodworth, Garrett
-        )
-        */
-
-        $res = Hash::format($data, '{0}, {1}', array('{n}.Person.city', '{n}.Person.state'));
-        /*
-        Array
-        (
-            [0] => Boston, MA
-            [1] => Boondock, TN
-            [2] => Venice Beach, CA
-        )
-        */
-        $res = Hash::format($data, '{{0}, {1}}', array('{n}.Person.city', '{n}.Person.state'));
-        /*
-        Array
-        (
-            [0] => {Boston, MA}
-            [1] => {Boondock, TN}
-            [2] => {Venice Beach, CA}
-        )
-        */
-        $res = Hash::format($data, '{%2$d, %1$s}', array('{n}.Person.something', '{n}.Person.something'));
-        /*
-        Array
-        (
-            [0] => {42, 42}
-            [1] => {0, {0}}
-            [2] => {0, {1}}
-        )
-        */
-        $res = Hash::format($data, '%2$d, %1$s', array('{n}.Person.first_name', '{n}.Person.something'));
-        /*
-        Array
-        (
-            [0] => 42, Nate
-            [1] => 0, Larry
-            [2] => 0, Garrett
-        )
-        */
-        $res = Hash::format($data, '%1$s, %2$d', array('{n}.Person.first_name', '{n}.Person.something'));
-        /*
-        Array
-        (
-            [0] => Nate, 42
-            [1] => Larry, 0
-            [2] => Garrett, 0
-        )
-        */
 
 
-.. php:staticmethod:: Hash::insert ($list, $path, $data = null)
-
-    :rtype: array
-
-    Inserts $data into an array as defined by $path.::
-
-        <?php
-        $a = array(
-            'pages' => array('name' => 'page')
-        );
-        $result = Hash::insert($a, 'files', array('name' => 'files'));
-        /* $result now looks like:
-            Array
-            (
-                [pages] => Array
-                    (
-                        [name] => page
-                    )
-                [files] => Array
-                    (
-                        [name] => files
-                    )
-            )
-        */
-
-        $a = array(
-            'pages' => array('name' => 'page')
-        );
-        $result = Hash::insert($a, 'pages.name', array());
-        /* $result now looks like:
-            Array
-            (
-                [pages] => Array
-                    (
-                        [name] => Array
-                            (
-                            )
-                    )
-            )
-        */
-
-        $a = array(
-            'pages' => array(
-                0 => array('name' => 'main'),
-                1 => array('name' => 'about')
-            )
-        );
-        $result = Hash::insert($a, 'pages.1.vars', array('title' => 'page title'));
-        /* $result now looks like:
-            Array
-            (
-                [pages] => Array
-                    (
-                        [0] => Array
-                            (
-                                [name] => main
-                            )
-                        [1] => Array
-                            (
-                                [name] => about
-                                [vars] => Array
-                                    (
-                                        [title] => page title
-                                    )
-                            )
-                    )
-            )
-        */
 
 
 .. php:staticmethod:: map($class = 'stdClass', $tmp = 'stdClass')
