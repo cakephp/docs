@@ -241,6 +241,18 @@ your app directory you can do the following to run tests::
     idea to use the ``--stderr`` option.  This will fix issues with tests
     failing because of headers_sent warnings.
 
+You can also run ``testsuite`` shell in the project root directory.
+This shows you a full list of all the tests that you currently have. You can then freely choose
+what test(s) to run.
+
+	# Run testsuite in project root directory for application folder called app
+	lib/Cake/Console/cake testsuite app
+	
+	# Run testsuite in project root directory for application folder called myapp
+	lib/Cake/Console/cake testsuite -app myapp app
+	
+	
+
 
 Filtering test cases
 ~~~~~~~~~~~~~~~~~~~~
