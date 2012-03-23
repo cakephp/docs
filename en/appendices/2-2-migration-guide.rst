@@ -29,7 +29,9 @@ Error Handling
   helpers in this layout as its intended for development level errors only. This
   fixes issues with fatal errors in rendering error pages due to helper usage in
   the ``default`` layout.
-
+- You can now configure application specific console error handling.  By setting
+  ``Error.consoleHandler``, and ``Exception.consoleHandler`` you can define the
+  callback that will handle errors/exceptions raised in console applications.
 
 Network
 =======

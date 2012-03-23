@@ -26,7 +26,7 @@ default error handling configuration looks like::
         'trace' => true
     ));
 
-You have 3 built-in options when configuring error handlers:
+You have 4 built-in options when configuring error handlers:
 
 * ``handler`` - callback - The callback to handle errors. You can set this to any
   callback type, including anonymous functions.
@@ -36,6 +36,9 @@ You have 3 built-in options when configuring error handlers:
 * ``trace`` - boolean - Include stack traces for errors in log files.  Stack traces 
   will be included in the log after each error.  This is helpful for finding 
   where/when errors are being raised.
+* ``consoleHandler`` - callback - The callback used to handle errors when
+  running in the console.  If undefined, CakePHP's default handlers will be
+  used.
 
 ErrorHandler by default, displays errors when ``debug`` > 0, and logs errors when 
 debug = 0.  The type of errors captured in both cases is controlled by ``Error.level``.
@@ -44,6 +47,9 @@ debug = 0.  The type of errors captured in both cases is controlled by ``Error.l
 
     If you use a custom error handler, the trace setting will have no effect, 
     unless you refer to it in your error handling function.
+
+.. versionadded:: 2.2
+    The ``Error.consoleHandler`` option was added in 2.2.
 
 Creating your own error handler
 ===============================
