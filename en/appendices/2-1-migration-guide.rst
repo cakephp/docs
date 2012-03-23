@@ -66,6 +66,13 @@ Models
   modify ``schemaName`` or use :php:meth:`Model::setDataSource()` method which
   handles this for you.
 
+CakeSession
+-----------
+
+.. versionchanged:: 2.1.1
+    CakeSession no longer sets the P3P header, as this is the responsibity of your application.
+    More info see ticket `#2515 <http://cakephp.lighthouseapp.com/projects/42648/tickets/2515-cakephp-20-session-p3p-header-doesnt-work-in-an-iframe>`_ in lighthouse
+
 Behaviors
 =========
 
@@ -214,7 +221,7 @@ AclComponent
 - Acl backend implementations should now be put in ``Controller/Component/Acl``.
 - Acl implementations should be moved into the Component/Acl directory from
   Component.  For example if your Acl class was called ``CustomAclComponent``,
-  and was in ``Controller/Component/CustomAclComponent.php``. 
+  and was in ``Controller/Component/CustomAclComponent.php``.
   It should be moved into ``Controller/Component/Acl/CustomAcl.php``, and be
   named ``CustomAcl``.
 - :php:class:`DbAcl` has been moved into a separate file.
