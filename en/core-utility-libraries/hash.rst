@@ -437,9 +437,141 @@ elements you can use attribute matching with methods like ``extract()``.
             )
         */
 
-.. todo::
+.. php:staticmethod:: flatten(array $data, $separator='.')
 
-    Continue here.
+    :rtype: array
+
+    Collapses a multi-dimensional array into a single dimension::
+
+        <?php
+        $arr = array(
+            array(
+                'Post' => array('id' => '1', 'title' => 'First Post'),
+                'Author' => array('id' => '1', 'user' => 'Kyle'),
+            ),
+            array(
+                'Post' => array('id' => '2', 'title' => 'Second Post'),
+                'Author' => array('id' => '3', 'user' => 'Crystal'),
+            ),
+        );
+        $res = Hash::flatten($arr);
+        /* $res now looks like:
+            Array (
+                [0.Post.id] => 1
+                [0.Post.title] => First Post
+                [0.Author.id] => 1
+                [0.Author.user] => Kyle
+                [1.Post.id] => 2
+                [1.Post.title] => Second Post
+                [1.Author.id] => 3
+                [1.Author.user] => Crystal
+            )
+        */
+
+.. php:staticmethod:: expand(array $data, $separator='.')
+
+    :rtype: array
+
+    Expands an array that was previously flattened with
+    :php:meth:`Hash::flatten()`::
+
+        <?php
+        $data = array(
+            '0.Post.id' => 1,
+            '0.Post.title' => First Post,
+            '0.Author.id' => 1,
+            '0.Author.user' => Kyle,
+            '1.Post.id' => 2,
+            '1.Post.title' => Second Post,
+            '1.Author.id' => 3,
+            '1.Author.user' => Crystal,
+        );
+        $res = Hash::flatten($data);
+        /* $res now looks like:
+        array(
+            array(
+                'Post' => array('id' => '1', 'title' => 'First Post'),
+                'Author' => array('id' => '1', 'user' => 'Kyle'),
+            ),
+            array(
+                'Post' => array('id' => '2', 'title' => 'Second Post'),
+                'Author' => array('id' => '3', 'user' => 'Crystal'),
+            ),
+        );
+        */
+
+.. php:staticmethod:: merge(array $data, $merge)
+
+    :rtype: array
+
+    This function can be thought of as a hybrid between PHP's
+    ``array_merge`` and ``array_merge_recursive``. The difference to the two
+    is that if an array key contains another array then the function
+    behaves recursive (unlike ``array_merge``) but does not do if for keys
+    containing strings (unlike ``array_merge_recursive``).
+
+    .. note::
+
+        This function will work with an unlimited amount of arguments and
+        typecasts non-array parameters into arrays.
+
+    ::
+
+        <?php
+        $array = array(
+            array(
+                'id' => '48c2570e-dfa8-4c32-a35e-0d71cbdd56cb',
+                'name' => 'mysql raleigh-workshop-08 < 2008-09-05.sql ',
+                'description' => 'Importing an sql dump'
+            ),
+            array(
+                'id' => '48c257a8-cf7c-4af2-ac2f-114ecbdd56cb',
+                'name' => 'pbpaste | grep -i Unpaid | pbcopy',
+                'description' => 'Remove all lines that say "Unpaid".',
+            )
+        );
+        $arrayB = 4;
+        $arrayC = array(0 => "test array", "cats" => "dogs", "people" => 1267);
+        $arrayD = array("cats" => "felines", "dog" => "angry");
+        $res = Hash::merge($array, $arrayB, $arrayC, $arrayD);
+
+        /* $res now looks like:
+        Array
+        (
+            [0] => Array
+                (
+                    [id] => 48c2570e-dfa8-4c32-a35e-0d71cbdd56cb
+                    [name] => mysql raleigh-workshop-08 < 2008-09-05.sql
+                    [description] => Importing an sql dump
+                )
+            [1] => Array
+                (
+                    [id] => 48c257a8-cf7c-4af2-ac2f-114ecbdd56cb
+                    [name] => pbpaste | grep -i Unpaid | pbcopy
+                    [description] => Remove all lines that say "Unpaid".
+                )
+            [2] => 4
+            [3] => test array
+            [cats] => felines
+            [people] => 1267
+            [dog] => angry
+        )
+        */
+
+.. php:staticmethod:: numeric($array=null)
+
+    :rtype: boolean
+
+    Checks to see if all the values in the array are numeric::
+
+        <?php
+        $data = array('one');
+        $res = Hash::numeric(array_keys($data));
+        // $res is true
+
+        $data = array(1 => 'one');
+        $res = Hash::numeric($data);
+        // $res is false
 
 .. php:staticmethod:: dimensions ($array = null)
 
@@ -483,673 +615,24 @@ elements you can use attribute matching with methods like ``extract()``.
         $result = Hash::countDim($data, true);
         // $result == 3
 
-.. php:staticmethod:: diff(array $val1, array $val2)
+.. php:staticmethod:: map(array $data, $path, $function)
+
+    Creates a new array, by extracting $path, and mapping $function
+    across the results. You can use both expression and matching elements with
+    this method.
+
+.. php:staticmethod:: reduce(array $data, $path, $function)
+
+    Creates a single value, by extracting $path, and reducing the extracted
+    results with $function. You can use both expression and matching elements
+    with this method.
+
+.. php:staticmethod:: sort(array $data, $path, $dir)
 
     :rtype: array
 
-    Computes the difference between two arrays::
-
-        <?php
-        $a = array(
-            0 => array('name' => 'main'),
-            1 => array('name' => 'about')
-        );
-        $b = array(
-            0 => array('name' => 'main'),
-            1 => array('name' => 'about'),
-            2 => array('name' => 'contact')
-        );
-
-        $result = Hash::diff($a, $b);
-        /* $result now looks like:
-            Array
-            (
-                [2] => Array
-                    (
-                        [name] => contact
-                    )
-            )
-        */
-        $result = Hash::diff($a, array());
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [name] => main
-                    )
-                [1] => Array
-                    (
-                        [name] => about
-                    )
-            )
-        */
-        $result = Hash::diff(array(), $b);
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [name] => main
-                    )
-                [1] => Array
-                    (
-                        [name] => about
-                    )
-                [2] => Array
-                    (
-                        [name] => contact
-                    )
-            )
-        */
-
-        $b = array(
-            0 => array('name' => 'me'),
-            1 => array('name' => 'about')
-        );
-
-        $result = Hash::diff($a, $b);
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [name] => main
-                    )
-            )
-        */
-
-
-
-
-
-.. php:staticmethod:: flatten($data, $separator='.')
-
-    :rtype: array
-
-    Collapses a multi-dimensional array into a single dimension::
-
-        <?php
-        $arr = array(
-            array(
-                'Post' => array('id' => '1', 'title' => 'First Post'),
-                'Author' => array('id' => '1', 'user' => 'Kyle'),
-            ),
-            array(
-                'Post' => array('id' => '2', 'title' => 'Second Post'),
-                'Author' => array('id' => '3', 'user' => 'Crystal'),
-            ),
-        );
-        $res = Hash::flatten($arr);
-        /* $res now looks like:
-            Array (
-                [0.Post.id] => 1
-                [0.Post.title] => First Post
-                [0.Author.id] => 1
-                [0.Author.user] => Kyle
-                [1.Post.id] => 2
-                [1.Post.title] => Second Post
-                [1.Author.id] => 3
-                [1.Author.user] => Crystal
-            )
-        */
-
-
-
-
-
-
-.. php:staticmethod:: map($class = 'stdClass', $tmp = 'stdClass')
-
-    :rtype: object
-
-    This method Maps the contents of the Hash object to an object
-    hierarchy while maintaining numeric keys as arrays of objects.
-
-    Basically, the map function turns array items into initialized
-    class objects. By default it turns an array into a stdClass Object,
-    however you can map values into any type of class. Example:
-    Hash::map($array\_of\_values, 'nameOfYourClass');::
-
-        <?php
-        $data = array(
-            array(
-                "IndexedPage" => array(
-                    "id" => 1,
-                    "url" => 'http://blah.com/',
-                    'hash' => '68a9f053b19526d08e36c6a9ad150737933816a5',
-                    'get_vars' => '',
-                    'redirect' => '',
-                    'created' => "1195055503",
-                    'updated' => "1195055503",
-                )
-            ),
-            array(
-                "IndexedPage" => array(
-                    "id" => 2,
-                    "url" => 'http://blah.com/',
-                    'hash' => '68a9f053b19526d08e36c6a9ad150737933816a5',
-                    'get_vars' => '',
-                    'redirect' => '',
-                    'created' => "1195055503",
-                    'updated' => "1195055503",
-                ),
-            )
-        );
-        $mapped = Hash::map($data);
-
-        /* $mapped now looks like:
-
-            Array
-            (
-                [0] => stdClass Object
-                    (
-                        [_name_] => IndexedPage
-                        [id] => 1
-                        [url] => http://blah.com/
-                        [hash] => 68a9f053b19526d08e36c6a9ad150737933816a5
-                        [get_vars] =>
-                        [redirect] =>
-                        [created] => 1195055503
-                        [updated] => 1195055503
-                    )
-
-                [1] => stdClass Object
-                    (
-                        [_name_] => IndexedPage
-                        [id] => 2
-                        [url] => http://blah.com/
-                        [hash] => 68a9f053b19526d08e36c6a9ad150737933816a5
-                        [get_vars] =>
-                        [redirect] =>
-                        [created] => 1195055503
-                        [updated] => 1195055503
-                    )
-
-            )
-
-        */
-
-    Using Hash::map() with a custom class for second parameter:
-
-    ::
-
-        class MyClass {
-            public function sayHi() {
-                echo 'Hi!';
-            }
-        }
-
-        $mapped = Hash::map($data, 'MyClass');
-        //Now you can access all the properties as in the example above,
-        //but also you can call MyClass's methods
-        $mapped->[0]->sayHi();
-
-
-.. php:staticmethod:: matches($conditions, $data=array(), $i = null, $length=null)
-
-    :rtype: boolean
-
-    Hash::matches can be used to see if a single item or a given xpath
-    match certain conditions.::
-
-        <?php
-        $a = array(
-            array('Article' => array('id' => 1, 'title' => 'Article 1')),
-            array('Article' => array('id' => 2, 'title' => 'Article 2')),
-            array('Article' => array('id' => 3, 'title' => 'Article 3')));
-        $res=Hash::matches(array('id>2'), $a[1]['Article']);
-        // returns false
-        $res=Hash::matches(array('id>=2'), $a[1]['Article']);
-        // returns true
-        $res=Hash::matches(array('id>=3'), $a[1]['Article']);
-        // returns false
-        $res=Hash::matches(array('id<=2'), $a[1]['Article']);
-        // returns true
-        $res=Hash::matches(array('id<2'), $a[1]['Article']);
-        // returns false
-        $res=Hash::matches(array('id>1'), $a[1]['Article']);
-        // returns true
-        $res=Hash::matches(array('id>1', 'id<3', 'id!=0'), $a[1]['Article']);
-        // returns true
-        $res=Hash::matches(array('3'), null, 3);
-        // returns true
-        $res=Hash::matches(array('5'), null, 5);
-        // returns true
-        $res=Hash::matches(array('id'), $a[1]['Article']);
-        // returns true
-        $res=Hash::matches(array('id', 'title'), $a[1]['Article']);
-        // returns true
-        $res=Hash::matches(array('non-existent'), $a[1]['Article']);
-        // returns false
-        $res=Hash::matches('/Article[id=2]', $a);
-        // returns true
-        $res=Hash::matches('/Article[id=4]', $a);
-        // returns false
-        $res=Hash::matches(array(), $a);
-        // returns true
-
-
-.. php:staticmethod:: merge($arr1, $arr2=null)
-
-    :rtype: array
-
-    This function can be thought of as a hybrid between PHP's
-    array\_merge and array\_merge\_recursive. The difference to the two
-    is that if an array key contains another array then the function
-    behaves recursive (unlike array\_merge) but does not do if for keys
-    containing strings (unlike array\_merge\_recursive). See the unit
-    test for more information.
-
-    .. note::
-
-        This function will work with an unlimited amount of arguments and
-        typecasts non-array parameters into arrays.
-
-    ::
-
-        <?php
-        $arry1 = array(
-            array(
-                'id' => '48c2570e-dfa8-4c32-a35e-0d71cbdd56cb',
-                'name' => 'mysql raleigh-workshop-08 < 2008-09-05.sql ',
-                'description' => 'Importing an sql dump'
-            ),
-            array(
-                'id' => '48c257a8-cf7c-4af2-ac2f-114ecbdd56cb',
-                'name' => 'pbpaste | grep -i Unpaid | pbcopy',
-                'description' => 'Remove all lines that say "Unpaid".',
-            )
-        );
-        $arry2 = 4;
-        $arry3 = array(0 => "test array", "cats" => "dogs", "people" => 1267);
-        $arry4 = array("cats" => "felines", "dog" => "angry");
-        $res = Hash::merge($arry1, $arry2, $arry3, $arry4);
-
-        /* $res now looks like:
-        Array
-        (
-            [0] => Array
-                (
-                    [id] => 48c2570e-dfa8-4c32-a35e-0d71cbdd56cb
-                    [name] => mysql raleigh-workshop-08 < 2008-09-05.sql
-                    [description] => Importing an sql dump
-                )
-
-            [1] => Array
-                (
-                    [id] => 48c257a8-cf7c-4af2-ac2f-114ecbdd56cb
-                    [name] => pbpaste | grep -i Unpaid | pbcopy
-                    [description] => Remove all lines that say "Unpaid".
-                )
-
-            [2] => 4
-            [3] => test array
-            [cats] => felines
-            [people] => 1267
-            [dog] => angry
-        )
-        */
-
-
-.. php:staticmethod:: normalize($list, $assoc = true, $sep = ',', $trim = true)
-
-    :rtype: array
-
-    Normalizes a string or array list.::
-
-        <?php
-        $a = array('Tree', 'CounterCache',
-                'Upload' => array(
-                    'folder' => 'products',
-                    'fields' => array('image_1_id', 'image_2_id', 'image_3_id', 'image_4_id', 'image_5_id')));
-        $b =  array('Cacheable' => array('enabled' => false),
-                'Limit',
-                'Bindable',
-                'Validator',
-                'Transactional');
-        $result = Hash::normalize($a);
-        /* $result now looks like:
-            Array
-            (
-                [Tree] =>
-                [CounterCache] =>
-                [Upload] => Array
-                    (
-                        [folder] => products
-                        [fields] => Array
-                            (
-                                [0] => image_1_id
-                                [1] => image_2_id
-                                [2] => image_3_id
-                                [3] => image_4_id
-                                [4] => image_5_id
-                            )
-                    )
-            )
-        */
-        $result = Hash::normalize($b);
-        /* $result now looks like:
-            Array
-            (
-                [Cacheable] => Array
-                    (
-                        [enabled] =>
-                    )
-
-                [Limit] =>
-                [Bindable] =>
-                [Validator] =>
-                [Transactional] =>
-            )
-        */
-        $result = Hash::merge($a, $b); // Now merge the two and normalize
-        /* $result now looks like:
-            Array
-            (
-                [0] => Tree
-                [1] => CounterCache
-                [Upload] => Array
-                    (
-                        [folder] => products
-                        [fields] => Array
-                            (
-                                [0] => image_1_id
-                                [1] => image_2_id
-                                [2] => image_3_id
-                                [3] => image_4_id
-                                [4] => image_5_id
-                            )
-
-                    )
-                [Cacheable] => Array
-                    (
-                        [enabled] =>
-                    )
-                [2] => Limit
-                [3] => Bindable
-                [4] => Validator
-                [5] => Transactional
-            )
-        */
-        $result = Hash::normalize(Hash::merge($a, $b));
-        /* $result now looks like:
-            Array
-            (
-                [Tree] =>
-                [CounterCache] =>
-                [Upload] => Array
-                    (
-                        [folder] => products
-                        [fields] => Array
-                            (
-                                [0] => image_1_id
-                                [1] => image_2_id
-                                [2] => image_3_id
-                                [3] => image_4_id
-                                [4] => image_5_id
-                            )
-
-                    )
-                [Cacheable] => Array
-                    (
-                        [enabled] =>
-                    )
-                [Limit] =>
-                [Bindable] =>
-                [Validator] =>
-                [Transactional] =>
-            )
-        */
-
-
-.. php:staticmethod:: numeric($array=null)
-
-    :rtype: boolean
-
-    Checks to see if all the values in the array are numeric::
-
-        <?php
-        $data = array('one');
-        $res = Hash::numeric(array_keys($data));
-
-        // $res is true
-
-        $data = array(1 => 'one');
-        $res = Hash::numeric($data);
-
-        // $res is false
-
-        $data = array('one');
-        $res = Hash::numeric($data);
-
-        // $res is false
-
-        $data = array('one' => 'two');
-        $res = Hash::numeric($data);
-
-        // $res is false
-
-        $data = array('one' => 1);
-        $res = Hash::numeric($data);
-
-        // $res is true
-
-        $data = array(0);
-        $res = Hash::numeric($data);
-
-        // $res is true
-
-        $data = array('one', 'two', 'three', 'four', 'five');
-        $res = Hash::numeric(array_keys($data));
-
-        // $res is true
-
-        $data = array(1 => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five');
-        $res = Hash::numeric(array_keys($data));
-
-        // $res is true
-
-        $data = array('1' => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five');
-        $res = Hash::numeric(array_keys($data));
-
-        // $res is true
-
-        $data = array('one', 2 => 'two', 3 => 'three', 4 => 'four', 'a' => 'five');
-        $res = Hash::numeric(array_keys($data));
-
-        // $res is false
-
-
-.. php:staticmethod:: pushDiff($array1, $array2)
-
-    :rtype: array
-
-    This function merges two arrays and pushes the differences in
-    array2 to the bottom of the resultant array.
-
-    **Example 1**
-    ::
-
-        <?php
-        $array1 = array('ModelOne' => array('id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2'));
-        $array2 = array('ModelOne' => array('id' => 1003, 'field_one' => 'a3.m1.f1', 'field_two' => 'a3.m1.f2', 'field_three' => 'a3.m1.f3'));
-        $res = Hash::pushDiff($array1, $array2);
-
-        /* $res now looks like:
-            Array
-            (
-                [ModelOne] => Array
-                    (
-                        [id] => 1001
-                        [field_one] => a1.m1.f1
-                        [field_two] => a1.m1.f2
-                        [field_three] => a3.m1.f3
-                    )
-            )
-        */
-
-    **Example 2**
-    ::
-
-        <?php
-        $array1 = array("a" => "b", 1 => 20938, "c" => "string");
-        $array2 = array("b" => "b", 3 => 238, "c" => "string", array("extra_field"));
-        $res = Hash::pushDiff($array1, $array2);
-        /* $res now looks like:
-            Array
-            (
-                [a] => b
-                [1] => 20938
-                [c] => string
-                [b] => b
-                [3] => 238
-                [4] => Array
-                    (
-                        [0] => extra_field
-                    )
-            )
-        */
-
-
-.. php:staticmethod:: remove($list, $path = null)
-
-    :rtype: array
-
-    Removes an element from a Hash or array as defined by $path::
-
-        <?php
-        $a = array(
-            'pages'     => array('name' => 'page'),
-            'files'     => array('name' => 'files')
-        );
-
-        $result = Hash::remove($a, 'files');
-        /* $result now looks like:
-            Array
-            (
-                [pages] => Array
-                    (
-                        [name] => page
-                    )
-
-            )
-        */
-
-
-.. php:staticmethod:: reverse($object)
-
-    :rtype: array
-
-    Hash::reverse is basically the opposite of :php:func:`Hash::map`. It converts an
-    object into an array. If $object is not an object, reverse will
-    simply return $object.::
-
-        <?php
-        $result = Hash::reverse(null);
-        // Null
-        $result = Hash::reverse(false);
-        // false
-        $a = array(
-            'Post' => array('id' => 1, 'title' => 'First Post'),
-            'Comment' => array(
-                array('id' => 1, 'title' => 'First Comment'),
-                array('id' => 2, 'title' => 'Second Comment')
-            ),
-            'Tag' => array(
-                array('id' => 1, 'title' => 'First Tag'),
-                array('id' => 2, 'title' => 'Second Tag')
-            ),
-        );
-        $map = Hash::map($a); // Turn $a into a class object
-        /* $map now looks like:
-            stdClass Object
-            (
-                [_name_] => Post
-                [id] => 1
-                [title] => First Post
-                [Comment] => Array
-                    (
-                        [0] => stdClass Object
-                            (
-                                [id] => 1
-                                [title] => First Comment
-                            )
-                        [1] => stdClass Object
-                            (
-                                [id] => 2
-                                [title] => Second Comment
-                            )
-                    )
-                [Tag] => Array
-                    (
-                        [0] => stdClass Object
-                            (
-                                [id] => 1
-                                [title] => First Tag
-                            )
-                        [1] => stdClass Object
-                            (
-                                [id] => 2
-                                [title] => Second Tag
-                            )
-                    )
-            )
-        */
-
-        $result = Hash::reverse($map);
-        /* $result now looks like:
-            Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => First Post
-                        [Comment] => Array
-                            (
-                                [0] => Array
-                                    (
-                                        [id] => 1
-                                        [title] => First Comment
-                                    )
-                                [1] => Array
-                                    (
-                                        [id] => 2
-                                        [title] => Second Comment
-                                    )
-                            )
-                        [Tag] => Array
-                            (
-                                [0] => Array
-                                    (
-                                        [id] => 1
-                                        [title] => First Tag
-                                    )
-                                [1] => Array
-                                    (
-                                        [id] => 2
-                                        [title] => Second Tag
-                                    )
-                            )
-                    )
-            )
-        */
-
-        $result = Hash::reverse($a['Post']); // Just return the array
-        /* $result now looks like:
-            Array
-            (
-                [id] => 1
-                [title] => First Post
-            )
-        */
-
-
-.. php:staticmethod:: sort($data, $path, $dir)
-
-    :rtype: array
-
-    Sorts an array by any value, determined by a Hash-compatible path::
+    Sorts an array by any value, determined by a :ref:`hash-path-syntax`
+    Only expression elements are supported by this method::
 
         <?php
         $a = array(
@@ -1177,74 +660,213 @@ elements you can use attribute matching with methods like ``extract()``.
             )
         */
 
-        $result = Hash::sort($a, '{n}.Shirt', 'asc');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [Person] => Array
-                            (
-                                [name] => Jeff
-                            )
-                    )
-                [1] => Array
-                    (
-                        [Shirt] => Array
-                            (
-                                [color] => black
-                            )
-                    )
-            )
-        */
+.. php:staticmethod:: diff(array $val1, array $val2)
 
-        $result = Hash::sort($a, '{n}', 'desc');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [Shirt] => Array
-                            (
-                                [color] => black
-                            )
-                    )
-                [1] => Array
-                    (
-                        [Person] => Array
-                            (
-                                [name] => Jeff
-                            )
-                    )
-            )
-        */
+    :rtype: array
 
+    Computes the difference between two arrays::
+
+        <?php
         $a = array(
-            array(7,6,4),
-            array(3,4,5),
-            array(3,2,1),
+            0 => array('name' => 'main'),
+            1 => array('name' => 'about')
+        );
+        $b = array(
+            0 => array('name' => 'main'),
+            1 => array('name' => 'about'),
+            2 => array('name' => 'contact')
         );
 
-.. php:staticmethod:: apply($path, $array, $callback, $options = array())
+        $result = Hash::diff($a, $b);
+        /* $result now looks like:
+            Array
+            (
+                [2] => Array
+                    (
+                        [name] => contact
+                    )
+            )
+        */
 
-		    :rtype: mixed
+.. php:staticmethod:: mergeDiff($data, $compare)
 
-		    Apply a callback to the elements of an array extracted
-		    by a Hash::extract compatible path::
+    :rtype: array
 
-		        <?php
-		        $data = array(
-		            array('Movie' => array('id' => 1, 'title' => 'movie 3', 'rating' => 5)),
-		            array('Movie' => array('id' => 1, 'title' => 'movie 1', 'rating' => 1)),
-		            array('Movie' => array('id' => 1, 'title' => 'movie 2', 'rating' => 3)),
-		        );
+    This function merges two arrays and pushes the differences in
+    data to the bottom of the resultant array.
 
-		        $result = Hash::apply('/Movie/rating', $data, 'array_sum');
-		        // result equals 9
+    **Example 1**
+    ::
 
-		        $result = Hash::apply('/Movie/title', $data, 'strtoupper', array('type' => 'map'));
-		        // result equals array('MOVIE 3', 'MOVIE 1', 'MOVIE 2')
-		        // $options are: - type : can be 'pass' uses call_user_func_array(), 'map' uses array_map(), or 'reduce' uses array_reduce()
+        <?php
+        $array1 = array('ModelOne' => array('id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2'));
+        $array2 = array('ModelOne' => array('id' => 1003, 'field_one' => 'a3.m1.f1', 'field_two' => 'a3.m1.f2', 'field_three' => 'a3.m1.f3'));
+        $res = Hash::mergeDiff($array1, $array2);
+
+        /* $res now looks like:
+            Array
+            (
+                [ModelOne] => Array
+                    (
+                        [id] => 1001
+                        [field_one] => a1.m1.f1
+                        [field_two] => a1.m1.f2
+                        [field_three] => a3.m1.f3
+                    )
+            )
+        */
+
+    **Example 2**
+    ::
+
+        <?php
+        $array1 = array("a" => "b", 1 => 20938, "c" => "string");
+        $array2 = array("b" => "b", 3 => 238, "c" => "string", array("extra_field"));
+        $res = Hash::mergeDiff($array1, $array2);
+        /* $res now looks like:
+            Array
+            (
+                [a] => b
+                [1] => 20938
+                [c] => string
+                [b] => b
+                [3] => 238
+                [4] => Array
+                    (
+                        [0] => extra_field
+                    )
+            )
+        */
+
+.. php:staticmethod:: normalize($list, $assoc = true)
+
+    :rtype: array
+
+    Normalizes an array. If ``$assoc`` is true, the resulting array will be
+    normalized to be an associative array.  Numeric keys with values, will be
+    converted to string keys with null values. Normalizing an array, makes using
+    the results with :php:meth:`Hash::merge()` easier::
+
+        <?php
+        $a = array('Tree', 'CounterCache',
+            'Upload' => array(
+                'folder' => 'products',
+                'fields' => array('image_1_id', 'image_2_id')
+            )
+        );
+        $result = Hash::normalize($a);
+        /* $result now looks like:
+            Array
+            (
+                [Tree] => null
+                [CounterCache] => null
+                [Upload] => Array
+                    (
+                        [folder] => products
+                        [fields] => Array
+                            (
+                                [0] => image_1_id
+                                [1] => image_2_id
+                            )
+                    )
+            )
+        */
+
+        $b =  array(
+            'Cacheable' => array('enabled' => false),
+            'Limit',
+            'Bindable',
+            'Validator',
+            'Transactional'
+        );
+        $result = Hash::normalize($b);
+        /* $result now looks like:
+            Array
+            (
+                [Cacheable] => Array
+                    (
+                        [enabled] => false
+                    )
+
+                [Limit] => null
+                [Bindable] => null
+                [Validator] => null
+                [Transactional] => null
+            )
+        */
+
+.. php:staticmethod:: nest(array $data, $options = array())
+
+    Takes a flat array set, and creates a nested, or threaded data structure.
+    Used by methods like ``Model::find('threaded')``.
+
+    **Options:**
+
+    - ``children`` The key name to use in the resultset for children. Defaults
+      to 'children'.
+    - ``idPath`` The path to a key that identifies each entry. Should be
+      compatible with :php:meth:`Hash::extract()`. Defaults to ``{n}.$alias.id``
+    - ``parentPath`` The path to a key that identifies the parent of each entry.
+      Should be compatible with :php:meth:`Hash::extract()`. Defaults to ``{n}.$alias.parent_id``
+    - ``root`` The id of the desired top-most result.
+
+    Example::
+
+        <?php
+        $data = array(
+            array('ModelName' => array('id' => 1, 'parent_id' => null)),
+            array('ModelName' => array('id' => 2, 'parent_id' => 1)),
+            array('ModelName' => array('id' => 3, 'parent_id' => 1)),
+            array('ModelName' => array('id' => 4, 'parent_id' => 1)),
+            array('ModelName' => array('id' => 5, 'parent_id' => 1)),
+            array('ModelName' => array('id' => 6, 'parent_id' => null)),
+            array('ModelName' => array('id' => 7, 'parent_id' => 6)),
+            array('ModelName' => array('id' => 8, 'parent_id' => 6)),
+            array('ModelName' => array('id' => 9, 'parent_id' => 6)),
+            array('ModelName' => array('id' => 10, 'parent_id' => 6))
+        );
+
+        $result = Hash::nest($data, array('root' => 6));
+        /* $result now looks like:
+        array(
+                (int) 0 => array(
+                    'ModelName' => array(
+                        'id' => (int) 6,
+                        'parent_id' => null
+                    ),
+                    'children' => array(
+                        (int) 0 => array(
+                            'ModelName' => array(
+                                'id' => (int) 7,
+                                'parent_id' => (int) 6
+                            ),
+                            'children' => array()
+                        ),
+                        (int) 1 => array(
+                            'ModelName' => array(
+                                'id' => (int) 8,
+                                'parent_id' => (int) 6
+                            ),
+                            'children' => array()
+                        ),
+                        (int) 2 => array(
+                            'ModelName' => array(
+                                'id' => (int) 9,
+                                'parent_id' => (int) 6
+                            ),
+                            'children' => array()
+                        ),
+                        (int) 3 => array(
+                            'ModelName' => array(
+                                'id' => (int) 10,
+                                'parent_id' => (int) 6
+                            ),
+                            'children' => array()
+                        )
+                    )
+                )
+            )
+            */
 
 .. php:staticmethod:: nest($data, $options = array())
 
@@ -1252,61 +874,6 @@ elements you can use attribute matching with methods like ``extract()``.
 
 		    Takes in a flat array and returns a nested array::
 
-		        <?php
-                        $data = array(
-                            array('ModelName' => array('id' => 1, 'parent_id' => null)),
-                            array('ModelName' => array('id' => 2, 'parent_id' => 1)),
-                            array('ModelName' => array('id' => 3, 'parent_id' => 1)),
-                            array('ModelName' => array('id' => 4, 'parent_id' => 1)),
-                            array('ModelName' => array('id' => 5, 'parent_id' => 1)),
-                            array('ModelName' => array('id' => 6, 'parent_id' => null)),
-                            array('ModelName' => array('id' => 7, 'parent_id' => 6)),
-                            array('ModelName' => array('id' => 8, 'parent_id' => 6)),
-                            array('ModelName' => array('id' => 9, 'parent_id' => 6)),
-                            array('ModelName' => array('id' => 10, 'parent_id' => 6))
-                        );
-
-		        $result = Hash::nest($data, array('root' => 6));
-		        /* $result now looks like:
-                            array(
-                                    (int) 0 => array(
-                                            'ModelName' => array(
-                                                    'id' => (int) 6,
-                                                    'parent_id' => null
-                                            ),
-                                            'children' => array(
-                                                    (int) 0 => array(
-                                                            'ModelName' => array(
-                                                                    'id' => (int) 7,
-                                                                    'parent_id' => (int) 6
-                                                            ),
-                                                            'children' => array()
-                                                    ),
-                                                    (int) 1 => array(
-                                                            'ModelName' => array(
-                                                                    'id' => (int) 8,
-                                                                    'parent_id' => (int) 6
-                                                            ),
-                                                            'children' => array()
-                                                    ),
-                                                    (int) 2 => array(
-                                                            'ModelName' => array(
-                                                                    'id' => (int) 9,
-                                                                    'parent_id' => (int) 6
-                                                            ),
-                                                            'children' => array()
-                                                    ),
-                                                    (int) 3 => array(
-                                                            'ModelName' => array(
-                                                                    'id' => (int) 10,
-                                                                    'parent_id' => (int) 6
-                                                            ),
-                                                            'children' => array()
-                                                    )
-                                            )
-                                    )
-                            )
-                        */
 
 
 .. meta::
