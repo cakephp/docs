@@ -30,7 +30,7 @@ Once you've uncommented the ``Cache.check`` line you will need to add the helper
 to your controller's ``$helpers`` array::
 
     <?php
-    class PostsController extends AppConrtroller {
+    class PostsController extends AppController {
         public $helpers = array('Cache');
     }
 
