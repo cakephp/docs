@@ -62,8 +62,7 @@ Settable Parameters
 
 ``download``
     A boolean value indicating whether headers should be set to force
-    download. Note that your controller's autoRender option should be
-    set to false for this to work correctly.
+    download.
 
 ``extension``
     The file extension. This is matched against an internal list of
