@@ -773,7 +773,7 @@ information to automate various features such as outputting form fields in the
 view.  Field names are by convention lowercase and separated by underscores.
 
 Using created and modified
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 By defining a created or modified field in your database table as datetime
 fields, CakePHP will recognize those fields and populate them automatically
