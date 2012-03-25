@@ -501,15 +501,12 @@ Advanced Usage
     Categories) that moves a specified node down the tree::
 
         <?php
-        public function movedown($name = null, $delta = null) {
-            $cat = $this->Category->findByName($name);
-            if (empty($cat)) {
-                $this->Session->setFlash('There is no category named ' . $name);
-                $this->redirect(array('action' => 'index'), null, true);
+        public function movedown($id = null, $delta = null) {
+            $this->Category->id = $id;
+            if (!$this->Category->exists()) {
+               throw new NotFoundException(__('Invalid category'));
             }
-
-            $this->Category->id = $cat['Category']['id'];
-
+            
             if ($delta > 0) {
                 $this->Category->moveDown($this->Category->id, abs($delta));
             } else {
@@ -519,8 +516,8 @@ Advanced Usage
             $this->redirect(array('action' => 'index'), null, true);
         }
 
-    For example, if you'd like to move the "Sport" category one
-    position down, you would request: /categories/movedown/Sport/1.
+    For example, if you'd like to move the "Sport" ( id of 3 ) category one
+    position down, you would request: /categories/movedown/3/1.
 
     .. php:method:: moveUp()
 
@@ -533,15 +530,12 @@ Advanced Usage
     Categories) that moves a node up the tree::
 
         <?php
-        public function moveup($name = null, $delta = null) {
-            $cat = $this->Category->findByName($name);
-            if (empty($cat)) {
-                $this->Session->setFlash('There is no category named ' . $name);
-                $this->redirect(array('action' => 'index'), null, true);
+        public function moveup($id = null, $delta = null) {            
+            $this->Category->id = $id;
+            if (!$this->Category->exists()) {
+               throw new NotFoundException(__('Invalid category'));
             }
-
-            $this->Category->id = $cat['Category']['id'];
-
+      
             if ($delta > 0) {
                 $this->Category->moveUp($this->Category->id, abs($delta));
             } else {
@@ -551,8 +545,8 @@ Advanced Usage
             $this->redirect(array('action' => 'index'), null, true);
         }
 
-    For example, if you would like to move the category "Gwendolyn" up
-    one position you would request /categories/moveup/Gwendolyn/1. Now
+    For example, if you would like to move the category "Gwendolyn" ( id of 8 ) up
+    one position you would request /categories/moveup/8/1. Now
     the order of Friends will be Gwendolyn, Gerald.
 
     .. php:method:: removeFromTree($id = null, $delete = false)
