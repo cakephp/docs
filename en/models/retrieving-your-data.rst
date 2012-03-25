@@ -631,7 +631,7 @@ The findBy magic functions also accept some optional parameters:
 +------------------------------------------------------------+-------------------------------------------------------+
 | ``$this->Recipe->findByType('Cookie');``                   | ``Recipe.type = 'Cookie'``                            |
 +------------------------------------------------------------+-------------------------------------------------------+
-| ``$this->User->findByLastName('Anderson');``               | ``$this->User->findByLastName('Anderson');``          |
+| ``$this->User->findByLastName('Anderson');``               | ``User.last_name = 'Anderson';``          |
 +------------------------------------------------------------+-------------------------------------------------------+
 | ``$this->User->findByEmailOrUsername('jhon');``            | ``User.email = 'jhon' OR User.username = 'jhon';``    |
 +------------------------------------------------------------+-------------------------------------------------------+
