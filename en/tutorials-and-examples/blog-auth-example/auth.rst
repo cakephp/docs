@@ -316,10 +316,13 @@ Open again the AppController class and add a few more options to the Auth config
     );
 
     public function isAuthorized($user) {
+        // Admin can access every action
         if (isset($user['role']) && $user['role'] === 'admin') {
-            return true; //Admin can access every action
+            return true;
         }
-        return false; // The rest don't
+
+        // Default deny
+        return false;
     }
 
 We just created a very simple authorization mechanism. In this case the users
@@ -338,20 +341,20 @@ and add the following content::
     // app/Controller/PostsController.php
 
     public function isAuthorized($user) {
-        if (parent::isAuthorized($user)) {
+        // All registered users can add posts
+        if ($this->action === 'add') {
             return true;
         }
 
-        if ($this->action === 'add') {
-           // All registered users can add posts
-            return true;
-        }
+        // The owner of a post can edit and delete it
         if (in_array($this->action, array('edit', 'delete'))) {
             $postId = $this->request->params['pass'][0];
-            return $this->Post->isOwnedBy($postId, $user['id']);
+            if ($this->Post->isOwnedBy($postId, $user['id'])) {
+                return true;
+            }
         }
-        
-        return false;
+
+        return parent::isAuthorized($user);
     }
 
 We're now overriding the AppController's ``isAuthorized()`` call and internally
