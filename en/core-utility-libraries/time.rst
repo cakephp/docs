@@ -41,7 +41,7 @@ Formatting
         // 1321038036
 
         // called as CakeTime
-        App::uses('CakeTime', 'Utility')
+        App::uses('CakeTime', 'Utility');
         echo CakeTime::convert(time(), -8);
 
 .. php:method:: convertSpecifiers($format, $time = NULL)
@@ -64,7 +64,7 @@ Formatting
         // (modified >= '2011-08-22 00:00:00') AND (modified <= '2011-08-22 23:59:59')
 
         // called as CakeTime
-        App::uses('CakeTime', 'Utility')
+        App::uses('CakeTime', 'Utility');
         echo CakeTime::dayAsSql('Aug 22, 2011', 'modified');
 
 .. php:method:: daysAsSql($begin, $end, $fieldName, $userOffset = NULL)
@@ -82,7 +82,7 @@ Formatting
         // (created >= '2011-08-22 00:00:00') AND (created <= '2011-08-25 23:59:59')
 
         // called as CakeTime
-        App::uses('CakeTime', 'Utility')
+        App::uses('CakeTime', 'Utility');
         echo CakeTime::daysAsSql('Aug 22, 2011', 'Aug 25, 2011', 'created');
 
 .. php:method:: format($format, $dateString = NULL, $invalid = false, $userOffset = NULL)
@@ -104,7 +104,7 @@ Formatting
         // 2 days from now formatted as Sun, 13 Nov 2011 03:36:10 +0800
 
         // called as CakeTime
-        App::uses('CakeTime', 'Utility')
+        App::uses('CakeTime', 'Utility');
         echo CakeTime::format('Y-m-d H:i:s');
         echo CakeTime::format('F jS, Y h:i A', '2011-08-22 11:53:00');
         echo CakeTime::format('r', '+2 days', true);
@@ -125,7 +125,7 @@ Formatting
         // 1321074066 (+1 day from current date)
 
         // called as CakeTime
-        App::uses('CakeTime', 'Utility')
+        App::uses('CakeTime', 'Utility');
         echo CakeTime::fromString('Aug 22, 2011');
         echo CakeTime::fromString('+1 days');
 
@@ -141,7 +141,7 @@ Formatting
         // 1313971200
 
         // called as CakeTime
-        App::uses('CakeTime', 'Utility')
+        App::uses('CakeTime', 'Utility');
         echo CakeTime::gmt('Aug 22, 2011');
 
 .. php:method:: i18nFormat($date, $format = NULL, $invalid = false, $userOffset = NULL)
@@ -165,7 +165,7 @@ Formatting
         // Mon, Aug 22nd 2011, 11:53
 
         // called as CakeTime
-        App::uses('CakeTime', 'Utility')
+        App::uses('CakeTime', 'Utility');
         echo CakeTime::nice('2011-08-22 11:53:00');
 
 .. php:method:: niceShort($dateString = NULL, $userOffset = NULL)
@@ -183,7 +183,7 @@ Formatting
         // Aug 22nd, 11:53
 
         // called as CakeTime
-        App::uses('CakeTime', 'Utility')
+        App::uses('CakeTime', 'Utility');
         echo CakeTime::niceShort('2011-08-22 11:53:00');
 
 .. php:method:: serverOffset()
@@ -210,7 +210,7 @@ Formatting
         // on August 22nd, 2011
 
         // called as CakeTime
-        App::uses('CakeTime', 'Utility')
+        App::uses('CakeTime', 'Utility');
         echo CakeTime::timeAgoInWords('Aug 22, 2011');
         echo CakeTime::timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y'));
 
@@ -222,7 +222,7 @@ Formatting
         // On Nov 10th, 2011 it would display: 2 months, 2 weeks, 6 days ago
 
         // called as CakeTime
-        App::uses('CakeTime', 'Utility')
+        App::uses('CakeTime', 'Utility');
         echo CakeTime::timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y', 'end' => '+1 year'));
 
 .. php:method:: toAtom($dateString, $userOffset = NULL)
@@ -255,7 +255,7 @@ Formatting
         */
 
         // called as CakeTime
-        App::uses('CakeTime', 'Utility')
+        App::uses('CakeTime', 'Utility');
         echo CakeTime::toQuarter('Aug 22, 2011');
         $arr = CakeTime::toQuarter('Aug 22, 2011', true);
 
@@ -289,11 +289,11 @@ Testing Time
 
         <?php
         // called via TimeHelper
-        $this->Time->wasWithinLast( $time_interval, $dateString )
+        $this->Time->wasWithinLast($time_interval, $dateString);
 
         // called as CakeTime
-        App::uses('CakeTime', 'Utility')
-        CakeTime::wasWithinLast( $time_interval, $dateString )
+        App::uses('CakeTime', 'Utility');
+        CakeTime::wasWithinLast($time_interval, $dateString);
 
     ``wasWithinLast`` takes a time interval which is a string in the
     format "3 months" and accepts a time interval of seconds, minutes,
