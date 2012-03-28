@@ -144,6 +144,7 @@ The following configuration keys are used:
   See ``CakeEmail::viewRender()``.
 - ``'template'``: If you are using rendered content, set the template name. See
   ``CakeEmail::template()``.
+- ``'theme'``: Theme used when rendering template. See ``CakeEmail::theme()``.
 - ``'layout'``: If you are using rendered content, set the layout to render. If
   you want to render a template without layout, set this field to null. See
   ``CakeEmail::template()``.
@@ -246,6 +247,18 @@ If you want to send email using templates in a plugin you can use the familiar
 
 The above would use templates from the Blog plugin as an example.
 
+In some cases, you might need to override the default template provided by plugins.
+You can do this using themes by telling CakeEmail to use appropriate theme using
+``CakeEmail::theme()`` method::
+
+    <?php
+    $email = new CakeEmail();
+    $email->template('Blog.new_comment', 'Blog.auto_message')
+    $email->theme('TestTheme');
+
+This allows you to override the `new_comment` template in your theme without modifying
+the Blog plugin.  The template file needs to be created in the following path:
+``APP/View/Themed/TestTheme/Blog/Emails/text/new_comment.ctp``.
 
 Sending attachments
 -------------------

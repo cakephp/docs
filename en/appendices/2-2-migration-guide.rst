@@ -42,6 +42,7 @@ CakeEmail
 - :php:meth:`CakeEmail::charset()` and :php:meth:`CakeEmail::headerCharset()`
   were added.
 
+- :php:meth:`CakeEmail::theme()` was added.
 
 Utility
 =======
