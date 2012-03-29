@@ -81,32 +81,28 @@ HTTP methods.
     and default settings::
 
         public $request = array(
-            'method' => 'GET',
-            'uri' => array(
-                'scheme' => 'http',
-                'host' => null,
-                'port' => 80,
-                'user' => null,
-                'pass' => null,
-                'path' => null,
-                'query' => null,
-                'fragment' => null
-            ),
-            'auth' => array(
-                'method' => 'Basic',
-                'user' => null,
-                'pass' => null
-            ),
-            'version' => '1.1',
-            'body' => '',
-            'line' => null,
-            'header' => array(
-                'Connection' => 'close',
-                'User-Agent' => 'CakePHP'
-            ),
-            'raw' => null,
-            'cookies' => array()
-        );
+	    	'method' => 'GET',
+	    	'uri' => array(
+	    		'scheme' => 'http',
+			    'host' => null,
+		    	'port' => 80,
+	    		'user' => null,
+			    'pass' => null,
+			    'path' => null,
+			    'query' => null,
+		    	'fragment' => null
+	    	),
+	    	'version' => '1.1',
+	    	'body' => '',
+    		'line' => null,
+    		'header' => array(
+    			'Connection' => 'close',
+    			'User-Agent' => 'CakePHP'
+    		),
+    		'raw' => null,
+	    	'redirect' => false,
+	    	'cookies' => array()
+    	);
 
 Handling the response
 =====================
@@ -145,7 +141,9 @@ The ``HttpResponse`` also exposes the following methods:
 
 * ``body()`` returns the body
 * ``isOk()`` returns if code is 200;
+* ``isRedirect()`` returns if code is 301, 302, 303 or 307 and the *Location* header is set.
 * ``getHeader()`` allows you to fetch headers, see the next section.
+
 
 Getting headers from a response
 -------------------------------
@@ -178,6 +176,28 @@ You could fetch the above headers by calling::
     $response->getHeader('date');
 
 Headers can be fetched case-insensitively.
+
+Automaticaly handling a redirect response
+----------------------------------------
+
+When the response has a valid redirect status code (see ``HttpResponse::isRedirect``), 
+an extra request can be automaticaly done according to the received *Location* header::
+
+    <?php 
+    App::uses('HttpSocket', 'Network/Http');
+
+    $HttpSocket = new HttpSocket();
+    $response = $HttpSocket->get('http://example.com/redirecting_url', array(), array('redirect' => true));
+
+
+The *redirect* option can take the following values
+
+* **true** : all redirecting responses will fire a consequent new request
+* **integer** : the setted value is the maximum number of redirections allowed (after reaching it, the *redirect* value is condidered as **false**)
+* **false** (default) : no consequent request will be fired
+
+The returned ``$response`` will be the final one, according to the settings.
+
 
 Creating a custom response class
 --------------------------------
