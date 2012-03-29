@@ -92,6 +92,11 @@ HTTP methods.
 			    'query' => null,
 		    	'fragment' => null
 	    	),
+		'auth' => array(
+			'method' => 'Basic',
+			'user' => null,
+			'pass' => null
+		),
 	    	'version' => '1.1',
 	    	'body' => '',
     		'line' => null,
