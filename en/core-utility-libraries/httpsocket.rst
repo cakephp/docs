@@ -81,33 +81,33 @@ HTTP methods.
     and default settings::
 
         public $request = array(
-	    	'method' => 'GET',
-	    	'uri' => array(
-	    		'scheme' => 'http',
-			    'host' => null,
-		    	'port' => 80,
-	    		'user' => null,
-			    'pass' => null,
-			    'path' => null,
-			    'query' => null,
-		    	'fragment' => null
-	    	),
-		'auth' => array(
-			'method' => 'Basic',
-			'user' => null,
-			'pass' => null
-		),
-	    	'version' => '1.1',
-	    	'body' => '',
-    		'line' => null,
-    		'header' => array(
-    			'Connection' => 'close',
-    			'User-Agent' => 'CakePHP'
-    		),
-    		'raw' => null,
-	    	'redirect' => false,
-	    	'cookies' => array()
-    	);
+            'method' => 'GET',
+            'uri' => array(
+                'scheme' => 'http',
+                'host' => null,
+                'port' => 80,
+                'user' => null,
+                'pass' => null,
+                'path' => null,
+                'query' => null,
+                'fragment' => null
+            ),
+            'auth' => array(
+                'method' => 'Basic',
+                'user' => null,
+                'pass' => null
+            ),
+            'version' => '1.1',
+            'body' => '',
+            'line' => null,
+            'header' => array(
+                'Connection' => 'close',
+                'User-Agent' => 'CakePHP'
+            ),
+            'raw' => null,
+            'redirect' => false,
+            'cookies' => array()
+        );
 
 Handling the response
 =====================
