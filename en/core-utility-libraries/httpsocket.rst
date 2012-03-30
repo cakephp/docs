@@ -182,11 +182,11 @@ You could fetch the above headers by calling::
 
 Headers can be fetched case-insensitively.
 
-Automaticaly handling a redirect response
-----------------------------------------
+Automatically handling a redirect response
+------------------------------------------
 
 When the response has a valid redirect status code (see ``HttpResponse::isRedirect``), 
-an extra request can be automaticaly done according to the received *Location* header::
+an extra request can be automatically done according to the received *Location* header::
 
     <?php 
     App::uses('HttpSocket', 'Network/Http');
@@ -198,7 +198,7 @@ an extra request can be automaticaly done according to the received *Location* h
 The *redirect* option can take the following values
 
 * **true** : all redirecting responses will fire a consequent new request
-* **integer** : the setted value is the maximum number of redirections allowed (after reaching it, the *redirect* value is condidered as **false**)
+* **integer** : the set value is the maximum number of redirections allowed (after reaching it, the *redirect* value is considered as **false**)
 * **false** (default) : no consequent request will be fired
 
 The returned ``$response`` will be the final one, according to the settings.
