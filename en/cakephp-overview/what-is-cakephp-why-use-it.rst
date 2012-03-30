@@ -30,7 +30,7 @@ Here’s a quick list of features you’ll enjoy when using CakePHP:
 
 -  Active, friendly `community <http://cakephp.org/feeds>`_
 -  Flexible `licensing <http://en.wikipedia.org/wiki/MIT_License>`_
--  Compatible with versions PHP 5.2.6 and greater.
+-  Compatible with versions PHP 5.2.8 and greater.
 -  Integrated
    `CRUD <http://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_
    for database interaction.
