@@ -29,7 +29,7 @@ default error handling configuration looks like::
 You have 5 built-in options when configuring error handlers:
 
 * ``handler`` - callback - The callback to handle errors. You can set this to any
-  callback type, including anonymous functions.
+  callable type, including anonymous functions.
 * ``level`` - int - The level of errors you are interested in capturing. Use the 
   built-in php error constants, and bitmasks to select the level of error you 
   are interested in.
@@ -40,7 +40,7 @@ You have 5 built-in options when configuring error handlers:
   running in the console.  If undefined, CakePHP's default handlers will be
   used.
 * ``fatalErrorHandler`` - callback - The callback to handle fatal errors. You can set
-  this to any callback type, including anonymous functions. Setting it to ``false``
+  this to any callable type, including anonymous functions. Setting it to ``false``
   disable the handler.
 
 ErrorHandler by default, displays errors when ``debug`` > 0, and logs errors when 
@@ -114,7 +114,7 @@ The following would need to be done::
         }
     }
 
-Call ``ErrorHandler::handleFatalError()`` is optional. This method log the fatal
+Call ``ErrorHandler::handleFatalError()`` is optional. This method will log the fatal
 error in ``error.log`` and shows an Internal Server Error page when ``debug`` is
 disabled or the fatal error message page when ``debug`` is enabled.
 
