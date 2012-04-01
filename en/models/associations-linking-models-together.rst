@@ -888,9 +888,9 @@ following find operation). This function appears in the
 LeadersController::
 
     <?php
+    public function another_action() {
         // There is no Leader hasMany Principles in 
         // the leader.php model file, so a find here, 
-    public function another_action() {
         // only fetches Leaders.
         $this->Leader->find('all');
      

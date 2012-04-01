@@ -99,7 +99,7 @@ CakePHP автоматически сделает модель доступно�
     <?php
     class Recipe extends AppModel {
 
-        function steak_recipes() {
+        function steakRecipes() {
             $ingredient = $this->Ingredient->findByName('Steak');
             return $this->findAllByMainIngredient($ingredient['Ingredient']['id']);
         }
