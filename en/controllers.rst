@@ -332,7 +332,7 @@ Flow Control
     you might wish to redirect them to a receipt screen.::
 
         <?php
-        public function placeOrder() {
+        public function place_order() {
             // Logic for finalizing order goes here
             if ($success) {
                 $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));

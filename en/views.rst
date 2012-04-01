@@ -306,7 +306,7 @@ controller, setting the ``$title_for_layout`` variable::
 
    <?php
    class UsersController extends AppController {
-       public function viewActive() {
+       public function view_active() {
            $this->set('title_for_layout', 'View Active Users');
        }
    }
@@ -338,12 +338,12 @@ using something like::
 
    <?php
    class UsersController extends AppController {
-       public function viewActive() {
+       public function view_active() {
            $this->set('title_for_layout', 'View Active Users');
            $this->layout = 'default_small_ad';
        }
 
-       public function viewImage() {
+       public function view_image() {
            $this->layout = 'image';
            //output user image
        }
@@ -370,7 +370,7 @@ Contacts plugin::
 
     <?php
     class UsersController extends AppController {
-        public function viewActive() {
+        public function view_active() {
             $this->layout = 'Contacts.contact';
         }
     }
