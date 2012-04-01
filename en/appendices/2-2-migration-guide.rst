@@ -34,6 +34,9 @@ Error Handling
 - You can now configure application specific console error handling.  By setting
   ``Error.consoleHandler``, and ``Exception.consoleHandler`` you can define the
   callback that will handle errors/exceptions raised in console applications.
+- You can now configure application specific fatal error handling.  By setting
+  ``Error.fatalErrorHandler`` you can define the callback that will handle
+  fatal errors.
 
 Network
 =======
