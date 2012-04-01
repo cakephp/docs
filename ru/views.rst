@@ -111,7 +111,7 @@
 
    <?php
    class UsersController extends AppController {
-       function viewActive() {
+       function view_active() {
            $this->set('title_for_layout', 'View Active Users');
        }
    }
@@ -144,12 +144,12 @@
 
    <?php
    class UsersController extends AppController {
-       public function viewActive() {
+       public function view_active() {
            $this->set('title_for_layout', 'View Active Users');
            $this->layout = 'default_small_ad';
        }
 
-       public function viewImage() {
+       public function view_image() {
            $this->layout = 'image';
            //вывод изображения пользователя
        }
