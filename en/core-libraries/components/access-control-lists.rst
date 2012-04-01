@@ -522,7 +522,7 @@ models to save data like we always do:
 ::
 
     <?php
-    function anyAction() {
+    function any_action() {
         $aro =& $this->Acl->Aro;
         
         // Here's all of our group info in an array we can iterate through
@@ -587,7 +587,7 @@ specific model records in our database.
 ::
 
     <?php
-    function anyAction() {
+    function any_action() {
         $aro = new Aro();
         
         // Here are our user records, ready to be linked up to new ARO records

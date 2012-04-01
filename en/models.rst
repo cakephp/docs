@@ -104,7 +104,7 @@ model::
     <?php
     class Recipe extends AppModel {
 
-        public function steakRecipes() {
+        public function steak_recipes() {
             $ingredient = $this->Ingredient->findByName('Steak');
             return $this->findAllByMainIngredient($ingredient['Ingredient']['id']);
         }
