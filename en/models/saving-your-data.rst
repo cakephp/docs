@@ -770,10 +770,10 @@ Model name of Ingredient expects the table name ingredients. A Model name of
 EventRegistration would expect a table name of event_registrations. CakePHP will
 inspect your tables to determine the data type of each field and uses this
 information to automate various features such as outputting form fields in the
-view.  Field names are by convention lowercase and separated by underscores.
+view. Field names are by convention lowercase and separated by underscores.
 
 Using created and modified
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------
 
 By defining a created or modified field in your database table as datetime
 fields, CakePHP will recognize those fields and populate them automatically
@@ -786,19 +786,18 @@ current date and time whenever the existing record is saved.
 
 If you have updated, created or modified data in your $this->data (e.g. from a
 Model::read or Model::set) before a Model::save() then the values will be taken
-from $this->data and not automagically updated.  Either use
+from $this->data and not automagically updated. Either use
 ``unset($this->data['Model']['modified'])``, etc. Alternatively you can override
 the Model::save() to always do it for you::
 
+    <?php
     class AppModel extends Model {
 
         public function save($data = null, $validate = true, $fieldList = array()) }
-            //clear modified field value before each save
-            if (isset($this->data) && isset($this->data[$this->name])) {
-                unset($this->data[$this->name]['modified']);
-            }
-            if (isset($data) && isset($data[$this->name])) {
-                unset($data[$this->name]['modified']);
+            // Clear modified field value before each save
+            $this->set($data);
+            if (isset($this->data[$this->alias]['modified'])) {
+                unset($this->data[$this->alias]['modified']);
             }
             return parent::save($data, $validate, $fieldList);
         }
