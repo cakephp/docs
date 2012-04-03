@@ -627,7 +627,7 @@ elements you can use attribute matching with methods like ``extract()``.
     results with $function. You can use both expression and matching elements
     with this method.
 
-.. php:staticmethod:: sort(array $data, $path, $dir)
+.. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
 
     :rtype: array
 
@@ -659,6 +659,15 @@ elements you can use attribute matching with methods like ``extract()``.
                     )
             )
         */
+
+    ``$dir`` can be either ``asc`` or ``desc`.  ``$type``
+    can be one of the following values:
+
+    * ``regular`` for regular sorting.
+    * ``numeric`` for sorting values as their numeric equivalents.
+    * ``string`` for sorting values as their string value.
+    * ``natural`` for sorting values in a human friendly way.  Will
+      sort ``foo10`` below ``foo2`` as an example.
 
 .. php:staticmethod:: diff(array $val1, array $val2)
 
