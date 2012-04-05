@@ -799,7 +799,7 @@ the Model::save() to always do it for you::
             if (isset($this->data[$this->alias]['modified'])) {
                 unset($this->data[$this->alias]['modified']);
             }
-            return parent::save($data, $validate, $fieldList);
+            return parent::save($this->data, $validate, $fieldList);
         }
 
     }
