@@ -667,7 +667,8 @@ elements you can use attribute matching with methods like ``extract()``.
     * ``numeric`` for sorting values as their numeric equivalents.
     * ``string`` for sorting values as their string value.
     * ``natural`` for sorting values in a human friendly way.  Will
-      sort ``foo10`` below ``foo2`` as an example.
+      sort ``foo10`` below ``foo2`` as an example. Natural sorting
+      requires PHP 5.4 or greater.
 
 .. php:staticmethod:: diff(array $val1, array $val2)
 
