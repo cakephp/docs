@@ -1,5 +1,9 @@
+if (/cakephp\.org/.test(document.domain)) {
+	document.domain = 'cakephp.org';
+}
+
 App = {};
- 
+
 App.Book = (function() {
 
 	function init() {
