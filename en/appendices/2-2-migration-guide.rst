@@ -62,3 +62,6 @@ FormHelper
 
 - FormHelper now better handles adding required classes to inputs.  It now
   honours the ``on`` key.
+- :php:meth:`FormHelper::radio()` now supports an ``empty`` which works similar
+  to the empty option on ``select()``.
+
