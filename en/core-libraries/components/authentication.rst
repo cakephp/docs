@@ -260,8 +260,8 @@ Authentication objects can implement a ``getUser()`` method that can be
 used to support user login systems that don't rely on cookies.  A
 typical getUser method looks at the request/environment and uses the
 information there to confirm the identity of the user.  HTTP Basic
-authentication for example uses ``$_SERVER['PHP_AUTH_USER]`` and
-``$_SERVER['PHP_AUTH_PW]`` for the username and password fields.  On each
+authentication for example uses ``$_SERVER['PHP_AUTH_USER']`` and
+``$_SERVER['PHP_AUTH_PW']`` for the username and password fields.  On each
 request, if a client doesn't support cookies, these values are used to
 re-identify the user and ensure they are valid user.  As with
 authentication object's ``authenticate()`` method the ``getUser()`` method
