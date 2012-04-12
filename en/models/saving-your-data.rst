@@ -644,9 +644,9 @@ Saving Related Model Data (HABTM)
 Saving models that are associated by hasOne, belongsTo, and hasMany
 is pretty simple: you just populate the foreign key field with the
 ID of the associated model. Once that's done, you just call the
-save() method on the model, and everything gets linked up
-correctly.  An example of the required format for the data array
-passed to save() for the Tag model is shown below::
+``save()`` method on the model, and everything gets linked up
+correctly. An example of the required format for the data array
+passed to ``save()`` for the Tag model is shown below::
 
     Array
     (
@@ -661,7 +661,7 @@ passed to save() for the Tag model is shown below::
     )
 
 You can also use this format to save several records and their
-HABTM associations with saveAll(), using an array like the
+HABTM associations with ``saveAll()``, using an array like the
 following::
 
     Array
@@ -712,15 +712,15 @@ following::
             )
     )
 
-Passing the above array to saveAll() will create the conatined tags,
+Passing the above array to ``saveAll()`` will create the contained tags,
 each associated with their respective recipes.
 
 As an example, we'll build a form that creates a new tag and
-getnerates the proper data array to associate it on the fly with 
+generates the proper data array to associate it on the fly with
 some recipe.
 
 The simplest form might look something like this (we'll assume that
-$recipe\_id is already set to something)::
+``$recipe_id`` is already set to something)::
 
     <?php echo $this->Form->create('Tag');?>
         <?php echo $this->Form->input(
@@ -746,7 +746,7 @@ automatically save the HABTM data to the database.
     }
 
 With the preceding code, our new Tag is created and associated with
-a Recipe, whose ID was set in $this->request->data['Recipe']['id'].
+a Recipe, whose ID was set in ``$this->request->data['Recipe']['id']``.
 
 Other ways we might want to present our associated data can include
 a select drop down list. The data can be pulled from the model
