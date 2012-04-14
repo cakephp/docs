@@ -12,6 +12,11 @@ Models
     As the pagination of custom find methods never worked quite well it required
     workarounds for this in the model level, which are now no longer needed
 
+Datasources
+===========
+
+- Dbo datasources now supports real transactions.
+
 Pagination
 ==========
 
