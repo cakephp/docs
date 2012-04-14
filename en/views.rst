@@ -185,7 +185,7 @@ You can also use fetch to conditionally show content that should surround a
 block should it exist.  This is helpful in layouts, or extended views where you
 want to conditionally show headings or other markup::
 
-    // in app/Layouts/default.ctp
+    // in app/View/Layouts/default.ctp
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
