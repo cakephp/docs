@@ -53,7 +53,7 @@ configuration, but the result will be different based on ``debug`` level.
 .. versionadded:: 2.2
     The ``Error.consoleHandler`` option was added in 2.2.
 
-.. versionmodified:: 2.2
+.. versionchanged:: 2.2
     The ``Error.handler`` and ``Error.consoleHandler`` will receive the fatal error
     codes as well. The default behavior is show a page to internal server error
     (``debug`` disabled) or a page with the message, file and line (``debug`` enabled).
