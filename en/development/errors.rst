@@ -26,10 +26,10 @@ default error handling configuration looks like::
         'trace' => true
     ));
 
-You have 4 built-in options when configuring error handlers:
+You have 5 built-in options when configuring error handlers:
 
 * ``handler`` - callback - The callback to handle errors. You can set this to any
-  callback type, including anonymous functions.
+  callable type, including anonymous functions.
 * ``level`` - int - The level of errors you are interested in capturing. Use the 
   built-in php error constants, and bitmasks to select the level of error you 
   are interested in.
@@ -42,6 +42,8 @@ You have 4 built-in options when configuring error handlers:
 
 ErrorHandler by default, displays errors when ``debug`` > 0, and logs errors when 
 debug = 0.  The type of errors captured in both cases is controlled by ``Error.level``.
+The fatal error handler will be called independent of ``debug`` level or ``Error.level``
+configuration, but the result will be different based on ``debug`` level.
 
 .. note::
 
@@ -50,6 +52,11 @@ debug = 0.  The type of errors captured in both cases is controlled by ``Error.l
 
 .. versionadded:: 2.2
     The ``Error.consoleHandler`` option was added in 2.2.
+
+.. versionmodified:: 2.2
+    The ``Error.handler`` and ``Error.consoleHandler`` will receive the fatal error
+    codes as well. The default behavior is show a page to internal server error
+    (``debug`` disabled) or a page with the message, file and line (``debug`` enabled).
 
 Creating your own error handler
 ===============================
@@ -86,6 +93,34 @@ errors, and that if you need custom error handling, you probably also want to co
 :doc:`/development/exceptions` handling as well.
 
 
+Changing fatal error behavior
+=============================
+
+Since CakePHP 2.2 the ``Error.handler`` will recieve the fatal error codes as well.
+If you do not want to show the cake error page, you can override it like::
+
+    <?php
+    //in app/Config/core.php
+    Configure::write('Error.handler', 'AppError::handleError');
+
+    //in app/Config/bootstrap.php
+    App::uses('AppError', 'Lib');
+
+    //in app/Lib/AppError.php
+    class AppError {
+        public static function handleError($code, $description, $file = null, $line = null, $context = null) {
+            list(, $level) = ErrorHandler::mapErrorCode($code);
+            if ($level === LOG_ERROR) {
+                // Ignore fatal error. It will keep the PHP error message only
+                return false;
+            }
+            return ErrorHandler::handleError($code, $description, $file, $line, $context);
+        }
+    }
+
+If you want to keep the default fatal error behavior, you can call ``ErrorHandler::handleFatalError()``
+from your custom handler.
+
 .. meta::
     :title lang=en: Error Handling
-    :keywords lang=en: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks
+    :keywords lang=en: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks,fatal error
