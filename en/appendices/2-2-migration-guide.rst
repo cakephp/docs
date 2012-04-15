@@ -54,7 +54,16 @@ Utility
 Set
 ---
 
+- The :php:class:`Set` class is now deprecated, and replaced by the :php:class:`Hash` class.
+  Set will not be removed until 3.0.
 - :php:meth:`Set::expand()` was added.
+
+Hash
+----
+
+The :php:class:`Hash` class was added in 2.2.  It replaced Set providing a more
+consistent, reliable and performant API to doing many of the same tasks Set
+does. See the :doc:`/core-utility-libraries/hash` page for more detail.
 
 Helpers
 =======

@@ -1,5 +1,5 @@
 Hash
-###
+####
 
 .. php:class:: Hash
 

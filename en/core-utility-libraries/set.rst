@@ -12,7 +12,6 @@ CakePHP's Set class can be called from any model or controller in
 the same way Inflector is called. Example: :php:meth:`Set::combine()`.
 
 .. deprecated:: 2.2
-
     The Set class has been deprecated in 2.2 in favour of the :php:class:`Hash`
     class.  It offers a more consistent interface and API.
 
