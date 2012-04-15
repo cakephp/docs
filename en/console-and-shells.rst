@@ -892,7 +892,7 @@ Shell API
     :param string $prompt: The prompt to display to the user.
     :param array $options: An array of valid choices the user can pick from.
        Picking an invalid option will force the user to choose again.
-    :param string $default: The default option if there is on.
+    :param string $default: The default option if there is one.
 
     This method helps you interact with the user, and create interactive shells.
     It will return the users answer to the prompt, and allows you to provide a 
