@@ -562,7 +562,7 @@ this::
     class ArticleTest extends CakeTestCase {
         public $fixtures = array('app.article');
 
-        public function setup() {
+        public function setUp() {
             parent::setUp();
             $this->Article = ClassRegistry::init('Article');
         }
