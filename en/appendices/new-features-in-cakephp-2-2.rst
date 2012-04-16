@@ -15,7 +15,7 @@ Models
 Datasources
 ===========
 
-- Dbo datasources now supports real transactions.
+- Dbo datasources now supports real nested transactions.
 
 Pagination
 ==========

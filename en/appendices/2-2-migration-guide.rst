@@ -18,8 +18,8 @@ Models
 Datasources
 ===========
 
-- Dbo datasources now supports real transactions. If you get some problem in your
-  application related with that, disable it using
+- Dbo datasources now supports real nested transactions. If you get some problem
+  in your application related with that, disable it using
   ``ConnectionManager::getDataSource('default')->nestedTransaction = false;``
 
 Testing
