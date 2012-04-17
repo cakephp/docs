@@ -324,10 +324,7 @@ test case:
 
 Creating fixtures
 -----------------
-
-When creating a fixture you will mainly define two things: how the
-table is created (which fields are part of the table), and which
-records will be initially populated to the table. Let's
+When creating a fixture you will mainly define two things: how the table is created (which fields are part of the table), and which records will be initially populated to the table. Let's
 create our first fixture, that will be used to test our own Article
 model. Create a file named ``ArticleFixture.php`` in your
 ``app/Test/Fixture`` directory, with the following content::
@@ -389,7 +386,46 @@ records.  Each item in ``$records`` should be a single row.  Inside each row,
 should be an associative array of the columns and values for the row.  Just keep
 in mind that each record in the $records array must have a key for **every**
 field specified in the ``$fields`` array. If a field for a particular record needs
-to have a NULL value, just specify the value of that key as NULL.
+to have a ``null`` value, just specify the value of that key as ``null``.
+
+Dynamic data and fixtures
+-------------------------
+
+Since records for a fixture are declared as a class property, you cannot easily
+use functions or other dynamic data to define fixtures.  To solve this problem,
+you can define ``$records`` in the init() function of your fixture. For example
+if you wanted all the created and updated timestamps to reflect today's date you
+could do the following::
+
+    <?php
+    class ArticleFixture extends CakeTestFixture {
+
+        public $fields = array( 
+            'id' => array('type' => 'integer', 'key' => 'primary'), 
+            'title' => array('type' => 'string', 'length' => 255, 'null' => false), 
+            'body' => 'text', 
+            'published' => array('type' => 'integer', 'default' => '0', 'null' => false), 
+            'created' => 'datetime', 
+            'updated' => 'datetime' 
+        );
+
+        public function init() {
+            $this->records = array(
+                array(
+                    'id' => 1,
+                    'title' => 'First Article',
+                    'body' => 'First Article Body',
+                    'published' => '1',
+                    'created' => date('Y-m-d H:i:s'),
+                    'updated' => date('Y-m-d H:i:s'),
+                ),
+            );
+            parent::init();
+        }
+    }
+
+When overriding ``init()`` just remember to always call ``parent::init()``.
+
 
 Importing table information and records
 ---------------------------------------
