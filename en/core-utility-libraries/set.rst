@@ -21,28 +21,17 @@ Usage example (using :php:func:`Set::sort()`)::
 
     <?php
     $a = array(
-        0 => array('Person' => array('name' => 'Jeff')),
-        1 => array('Shirt' => array('color' => 'black'))
+        0 => array('Person' => array('name' => 'Jeff'), 'Friend' => array(array('name' => 'Nate'))),
+        1 => array('Person' => array('name' => 'Tracy'),'Friend' => array(array('name' => 'Lindsay'))),
+        2 => array('Person' => array('name' => 'Adam'),'Friend' => array(array('name' => 'Bob')))
     );
     $result = Set::sort($a, '{n}.Person.name', 'asc');
-    /* $result now looks like:
-        Array
-        (
-            [0] => Array
-                (
-                    [Shirt] => Array
-                        (
-                            [color] => black
-                        )
-                )
-            [1] => Array
-                (
-                    [Person] => Array
-                        (
-                            [name] => Jeff
-                        )
-                )
-        )
+    /* result now looks like
+     array(
+        0 => array('Person' => array('name' => 'Adam'),'Friend' => array(array('name' => 'Bob'))),
+        1 => array('Person' => array('name' => 'Jeff'), 'Friend' => array(array('name' => 'Nate'))),
+        2 => array('Person' => array('name' => 'Tracy'),'Friend' => array(array('name' => 'Lindsay')))
+    );
     */
 
 As you can see in the example above, some things are wrapped in
@@ -1530,76 +1519,24 @@ available.
 
         <?php
         $a = array(
-            0 => array('Person' => array('name' => 'Jeff')),
-            1 => array('Shirt' => array('color' => 'black'))
+            0 => array('Person' => array('name' => 'Jeff'), 'Friend' => array(array('name' => 'Nate'))),
+            1 => array('Person' => array('name' => 'Tracy'),'Friend' => array(array('name' => 'Lindsay'))),
+            2 => array('Person' => array('name' => 'Adam'),'Friend' => array(array('name' => 'Bob')))
         );
         $result = Set::sort($a, '{n}.Person.name', 'asc');
         /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [Shirt] => Array
-                            (
-                                [color] => black
-                            )
-                    )
-                [1] => Array
-                    (
-                        [Person] => Array
-                            (
-                                [name] => Jeff
-                            )
-                    )
-            )
-        */
+        array(
+            0 => array('Person' => array('name' => 'Adam'),'Friend' => array(array('name' => 'Bob'))),
+            1 => array('Person' => array('name' => 'Jeff'), 'Friend' => array(array('name' => 'Nate'))),
+            2 => array('Person' => array('name' => 'Tracy'),'Friend' => array(array('name' => 'Lindsay')))
+        );
 
-        $result = Set::sort($a, '{n}.Shirt', 'asc');
+        $result = Set::sort($a, '{n}.Person.name', 'desc');
         /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [Person] => Array
-                            (
-                                [name] => Jeff
-                            )
-                    )
-                [1] => Array
-                    (
-                        [Shirt] => Array
-                            (
-                                [color] => black
-                            )
-                    )
-            )
-        */
-
-        $result = Set::sort($a, '{n}', 'desc');
-        /* $result now looks like:
-            Array
-            (
-                [0] => Array
-                    (
-                        [Shirt] => Array
-                            (
-                                [color] => black
-                            )
-                    )
-                [1] => Array
-                    (
-                        [Person] => Array
-                            (
-                                [name] => Jeff
-                            )
-                    )
-            )
-        */
-
-        $a = array(
-            array(7,6,4),
-            array(3,4,5),
-            array(3,2,1),
+        array(
+            2 => array('Person' => array('name' => 'Tracy'),'Friend' => array(array('name' => 'Lindsay')))
+            1 => array('Person' => array('name' => 'Jeff'), 'Friend' => array(array('name' => 'Nate'))),
+            0 => array('Person' => array('name' => 'Adam'),'Friend' => array(array('name' => 'Bob'))),
         );
 
 .. php:staticmethod:: apply($path, $array, $callback, $options = array())
