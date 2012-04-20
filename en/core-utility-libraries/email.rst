@@ -197,7 +197,7 @@ normal views::
         ->send();
 
 The above would use ``app/View/Emails/html/welcome.ctp`` for the view,
-and ``app/View/Layout/Emails/html/fancy.ctp`` for the layout. You can
+and ``app/View/Layouts/Emails/html/fancy.ctp`` for the layout. You can
 send multipart templated email messages as well::
 
     <?php

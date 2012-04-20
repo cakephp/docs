@@ -45,16 +45,17 @@ need not implement more of the methods listed above than necessary
 - if you need a read-only datasource, there's no reason to
 implement ``create``, ``update``, and ``delete``.
 
-Methods that must be implemented
+Methods that must be implemented for all CRUD methods:
 
--  ``describe($model)``
+-  ``describe($Model)``
 -  ``listSources()``
+-  ``calculate($Model, $func, $params)``
 -  At least one of:
    
-   -  ``create($model, $fields = array(), $values = array())``
-   -  ``read($model, $queryData = array())``
-   -  ``update($model, $fields = array(), $values = array())``
-   -  ``delete($model, $id = null)``
+   -  ``create($Model, $fields = array(), $values = array())``
+   -  ``read($Model, $queryData = array())``
+   -  ``update($Model, $fields = array(), $values = array())``
+   -  ``delete($Model, $conditions = null)``
 
 It is also possible (and sometimes quite useful) to define the
 ``$_schema`` class attribute inside the datasource itself, instead
@@ -62,7 +63,7 @@ of in the model.
 
 And that's pretty much all there is to it. By coupling this
 datasource to a model, you are then able to use
-``Model::find()/save()`` as you would normally, and the appropriate
+``Model::find()/save()/delete()`` as you would normally, and the appropriate
 data and/or parameters used to call those methods will be passed on
 to the datasource itself, where you can decide to implement
 whichever features you need (e.g. Model::find options such as
@@ -72,145 +73,227 @@ parameters).
 An Example
 ==========
 
-Here is a simple example of how to use Datasources and
-``HttpSocket`` to implement a very basic
-`Twitter <http://twitter.com>`_ source that allows querying the
-Twitter API as well as posting new status updates to a configured
-account.
-
-You would place the Twitter datasource in
-``app/Model/Datasource/TwitterSource.php``::
+A common reason you would want to write your own datasource is when you would
+like to access a 3rd party API using the usual ``Model::find()/save()/delete()``
+methods. Let's write a datasource that will access a fictitious remote JSON
+based API. We'll call it ``FarAwaySource`` and we'll put it in
+``app/Model/Datasource/FarAwaySource.php``::
 
     <?php
-    /**
-     * Twitter DataSource
-     *
-     * Used for reading and writing to Twitter, through models.
-     *
-     */
     App::uses('HttpSocket', 'Network/Http');
 
-    class TwitterSource extends DataSource {
+    class FarAwaySource extends DataSource {
 
-        protected $_schema = array(
-            'tweets' => array(
-                'id' => array(
-                    'type' => 'integer',
-                    'null' => true,
-                    'key' => 'primary',
-                    'length' => 11,
-                ),
-                'text' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'key' => 'primary',
-                    'length' => 140
-                ),
-                'status' => array(
-                    'type' => 'string',
-                    'null' => true,
-                    'key' => 'primary',
-                    'length' => 140
-                ),
-            )
+    /**
+     * An optional description of your datasource
+     */
+        public $description = 'A far away datasource';
+
+    /**
+     * Our default config options. These options will be customized in our
+     * ``app/Config/database.php`` and will be merged in the ``__construct()``.
+     */
+        public $config = array(
+            'apiKey' => '',
         );
 
+    /**
+     * If we want to create() or update() we need to specify the fields
+     * available. We use the same array keys as we do with CakeSchema, eg.
+     * fixtures and schema migrations.
+     */
+        protected $_schema = array(
+            'id' => array(
+                'type' => 'integer',
+                'null' => false,
+                'key' => 'primary',
+                'length' => 11,
+            ),
+            'name' => array(
+                'type' => 'string',
+                'null' => true,
+                'length' => 255,
+            ),
+            'message' => array(
+                'type' => 'text',
+                'null' => true,
+            ),
+        );
+
+    /**
+     * Create our HttpSocket and handle any config tweaks.
+     */
         public function __construct($config) {
-            $auth = "{$config['login']}:{$config['password']}";
-            $this->connection = new HttpSocket(
-                "http://{$auth}@twitter.com/"
-            );
             parent::__construct($config);
+            $this->Http = new HttpSocket();
         }
+
+    /**
+     * Since datasources normally connect to a database there are a few things
+     * we must change to get them to work without a database.
+     */
+
+    /**
+     * listSources() is for caching. You'll likely want to implement caching in
+     * your own way with a custom datasource. So just ``return null``.
+     */
         public function listSources() {
-            return array('tweets');
+            return null;
         }
-        public function read($model, $queryData = array()) {
-            if (!isset($queryData['conditions']['username'])) {
-                $queryData['conditions']['username'] = $this->config['login'];
-            }
-            $url = "/statuses/user_timeline/";
-            $url .= "{$queryData['conditions']['username']}.json";
-     
-            $response = json_decode($this->connection->get($url), true);
-            $results = array();
-     
-            foreach ($response as $record) {
-                $record = array('Tweet' => $record);
-                $record['User'] = $record['Tweet']['user'];
-                unset($record['Tweet']['user']);
-                $results[] = $record;
-            }
-            return $results;
+
+    /**
+     * describe() tells the model your schema for ``Model::save()``.
+     *
+     * You may want a different schema for each model but still use a single
+     * datasource. If this is your case then set a ``schema`` property on your
+     * models and simply return ``$Model->schema`` here instead.
+     */
+        public function describe(Model $Model) {
+            return $this->_schema;
         }
-        public function create($model, $fields = array(), $values = array()) {
+
+    /**
+     * calculate() is for determining how we will count the records and is
+     * required to get ``update()`` and ``delete()`` to work.
+     *
+     * We don't count the records here but return a string to be passed to
+     * ``read()`` which will do the actual counting. The easiest way is to just
+     * return the string 'COUNT' and check for it in ``read()`` where
+     * ``$data['fields'] == 'COUNT'``.
+     */
+        public function calculate(Model $Model, $func, $params = array()) {
+            return 'COUNT';
+        }
+
+    /**
+     * Implement the R in CRUD. Calls to ``Model::find()`` arrive here.
+     */
+        public function read(Model $Model, $data = array()) {
+            /**
+             * Here we do the actual count as instructed by our calculate()
+             * method above. We could either check the remote source or some
+             * other way to get the record count. Here we'll simply return 1 so
+             * ``update()`` and ``delete()`` will assume the record exists.
+             */
+            if ($data['fields'] == 'COUNT') {
+                return array(array(array('count' => 1)));
+            }
+            /**
+             * Now we get, decode and return the remote data.
+             */
+            $data['conditions']['apiKey'] = $this->config['apiKey'];
+            $json = $this->Http->get('http://example.com/api/list.json', $data['conditions']);
+            $res = json_decode($json, true);
+            if (is_null($res)) {
+                $error = json_last_error();
+                throw new CakeException($error);
+            }
+            return array($Model->alias => $res);
+        }
+
+    /**
+     * Implement the C in CRUD. Calls to ``Model::save()`` without $Model->id
+     * set arrive here.
+     */
+        public function create(Model $Model, $fields = array(), $values = array()) {
             $data = array_combine($fields, $values);
-            $result = $this->connection->post('/statuses/update.json', $data);
-            $result = json_decode($result, true);
-            if (isset($result['id']) && is_numeric($result['id'])) {
-                $model->setInsertId($result['id']);
-                return true;
+            $data['apiKey'] = $this->config['apiKey'];
+            $json = $this->Http->post('http://example.com/api/set.json', $data);
+            $res = json_decode($json, true);
+            if (is_null($res)) {
+                $error = json_last_error();
+                throw new CakeException($error);
             }
-            return false;
+            return true;
         }
-        public function describe($model) {
-            return $this->_schema['tweets'];
+
+    /**
+     * Implement the U in CRUD. Calls to ``Model::save()`` with $Model->id
+     * set arrive here. Depending on the remote source you can just call
+     * ``$this->create()``.
+     */
+        public function update(Model $Model, $fields = array(), $values = array()) {
+            return $this->create($Model, $fields, $values);
         }
+
+    /**
+     * Implement the D in CRUD. Calls to ``Model::delete()`` arrive here.
+     */
+        public function delete(Model $Model, $conditions = null) {
+            $id = $conditions[$Model->alias . '.id'];
+            $json = $this->Http->get('http://example.com/api/remove.json', array(
+                'id' => $id,
+                'apiKey' => $this->config['apiKey'],
+            ));
+            $res = json_decode($json, true);
+            if (is_null($res)) {
+                $error = json_last_error();
+                throw new CakeException($error);
+            }
+            return true;
+        }
+
     }
 
-Your model implementation could be as simple as::
+We can then configure the datasource in our ``app/Config/database.php`` file
+by adding something like this::
 
     <?php
-    class Tweet extends AppModel {
-        public $useDbConfig = 'twitter';
-    }
-
-.. note::
-
-    If we had not defined our schema in the datasource itself, you
-    would get an error message to that affect here.
-
-And the configuration settings in your ``app/Config/database.php``
-would resemble something like this::
-
-    <?php
-    public $twitter = array(
-        'datasource' => 'TwitterSource',
-        'login'      => 'username',
-        'password'   => 'password',
+    public $faraway = array(
+        'datasource' => 'FarAwaySource',
+        'apiKey'     => '1234abcd',
     );
 
-Using the familiar model methods from a controller::
+Then use the database config in our models like this::
 
     <?php
-    // Will use the username defined in the $twitter as shown above:
-    $tweets = $this->Tweet->find('all');
-    
-    // Finds tweets by another username
-    $conditions= array('username' => 'caketest');
-    $otherTweets = $this->Tweet->find('all', compact('conditions'));
+    class MyModel extends AppModel {
+        public $useDbConfig = 'faraway';
+    }
 
-Similarly, saving a new status update::
+We can retrieve data from our remote source using the familiar model methods::
 
     <?php
-    $this->Tweet->save(array('status' => 'This is an update'));
+    // Get all messages from 'Some Person'
+    $messages = $this->MyModel->find('all', array(
+        'conditions' => array('name' => 'Some Person'),
+    ));
 
-Plugin DataSources and Datasource Drivers
-=========================================
+Similarly we can save a new message::
+
+    <?php
+    $this->MyModel->save(array(
+        'name' => 'Some Person',
+        'message' => 'New Message',
+    ));
+
+Update the previous message::
+
+    <?php
+    $this->MyModel->id = 42;
+    $this->MyModel->save(array(
+        'message' => 'Updated message',
+    ));
+
+And delete the message::
+
+    <?php
+    $this->MyModel->delete(42);
+
+Plugin DataSources
+==================
 
 You can also package Datasources into plugins.
 
 Simply place your datasource file into
-``Plugin/[YourPlugin]/Model/Datasource/[YourDatasource].php``
+``Plugin/[YourPlugin]/Model/Datasource/[YourSource].php``
 and refer to it using the plugin notation::
 
     <?php
-    public $twitter = array(
-        'datasource' => 'Twitter.TwitterSource',
-        'username'   => 'test@example.com',
-        'password'   => 'hi_mom',
+    public $faraway = array(
+        'datasource' => 'MyPlugin.FarAwaySource',
+        'apiKey'     => 'abcd1234',
     );
-
 
 .. meta::
     :title lang=en: DataSources

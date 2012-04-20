@@ -121,7 +121,7 @@ in ``/app/Controller/RecipesController.php`` and contain::
         }
 
 The view files for these actions would be ``app/View/Recipes/view.ctp``,
-``app/View/Recipes/share.ctp``, and ``app/View/Recipes/share.ctp``.  The
+``app/View/Recipes/share.ctp``, and ``app/View/Recipes/search.ctp``.  The
 conventional view file name is the lower cased and underscored version of the
 action name.
 
@@ -332,7 +332,7 @@ Flow Control
     you might wish to redirect them to a receipt screen.::
 
         <?php
-        public function placeOrder() {
+        public function place_order() {
             // Logic for finalizing order goes here
             if ($success) {
                 $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));

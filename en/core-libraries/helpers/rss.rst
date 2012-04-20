@@ -79,7 +79,7 @@ Layout
 ------
 
 An Rss layout is very simple, put the following contents in
-``app/View/Layout/rss/default.ctp``::
+``app/View/Layouts/rss/default.ctp``::
 
     <?php
     if (!isset($documentData)) {

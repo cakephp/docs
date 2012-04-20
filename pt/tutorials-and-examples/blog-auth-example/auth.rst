@@ -149,7 +149,7 @@ mostrar somente o add.ctp::
     </div>
 
 Autorização (login e logout)
-===========================
+============================
 
 Nós agora estamos prontos para adicionar a camada de autorização. No CakePHP isso é feito
 pela :php:class:`AuthComponent`, uma classe responsável por solicitar login para certas ações,

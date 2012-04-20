@@ -192,11 +192,11 @@ The content of ``$xmlString`` will be::
             'project' => array(
                 array(
                     'id' => 1, 'title' => 'Project 1',
-                    'industry' => array('id' => 1, 'name' => Industry 1')
+                    'industry' => array('id' => 1, 'name' => 'Industry 1')
                 ),
                 array(
                     'id' => 2, 'title' => 'Project 2',
-                    'industry' => array('id' => 2, 'name' => Industry 2')
+                    'industry' => array('id' => 2, 'name' => 'Industry 2')
                 )
             )
         )

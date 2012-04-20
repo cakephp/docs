@@ -229,7 +229,15 @@ Folder API
 
     :rtype: boolean
 
-    Returns true if the File is in given path.
+    Returns true if the File is in given path::
+
+        <?php
+        $Folder = new Folder(WWW_ROOT);
+        $result = $Folder->inPath(APP);
+        // $result = true, /var/www/example/app/ is in /var/www/example/app/webroot/
+
+        $result = $Folder->inPath(WWW_ROOT . 'img' . DS, true);
+        // $result = true, /var/www/example/app/webroot/ is in /var/www/example/app/webroot/img/
 
 
 .. php:staticmethod:: isAbsolute( $path )
@@ -243,7 +251,13 @@ Folder API
 
     :rtype: boolean
 
-    Returns true if given $path ends in a slash (i.e. is slash-terminated).
+    Returns true if given $path ends in a slash (i.e. is slash-terminated)::
+
+        <?php
+        $result = Folder::isSlashTerm('/my/test/path');
+        // $result = false
+        $result = Folder::isSlashTerm('/my/test/path/');
+        // $result = true
 
 
 .. php:staticmethod:: isWindowsPath( $path )

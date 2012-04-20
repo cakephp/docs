@@ -18,8 +18,8 @@ CakePHP фреймворк предоставляет надежную осно�
 
 Лучший способ познакомится с CakePHP, это взять и сделать что-нибудь. Для начала мы создадим простой блог.
 
-.. include:: /tutorials-and-examples/blog/blog.rst
-.. include:: /tutorials-and-examples/blog/part-two.rst
+.. include:: ../en/tutorials-and-examples/blog/blog.rst
+.. include:: ../en/tutorials-and-examples/blog/part-two.rst
 
 Дополнительные материалы
 ========================

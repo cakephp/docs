@@ -248,6 +248,16 @@ your app directory you can do the following to run tests::
     idea to use the ``--stderr`` option.  This will fix issues with tests
     failing because of headers_sent warnings.
 
+You can also run ``testsuite`` shell in the project root directory.  This shows
+you a full list of all the tests that you currently have. You can then freely
+choose what test(s) to run::
+
+    # Run testsuite in project root directory for application folder called app
+    lib/Cake/Console/cake testsuite app
+
+    # Run testsuite in project root directory for an application in ./myapp
+    lib/Cake/Console/cake testsuite -app myapp app
+
 
 Filtering test cases
 ~~~~~~~~~~~~~~~~~~~~
@@ -258,7 +268,7 @@ cli runner you can use an option to filter test methods::
 
     ./Console/cake testsuite core Core/ConsoleOutput --filter Write
 
-The filter parameter is used as a case-sensitve regular expression for filtering
+The filter parameter is used as a case-sensitive regular expression for filtering
 which test methods to run.
 
 Generating code coverage
@@ -314,10 +324,7 @@ test case:
 
 Creating fixtures
 -----------------
-
-When creating a fixture you will mainly define two things: how the
-table is created (which fields are part of the table), and which
-records will be initially populated to the table. Let's
+When creating a fixture you will mainly define two things: how the table is created (which fields are part of the table), and which records will be initially populated to the table. Let's
 create our first fixture, that will be used to test our own Article
 model. Create a file named ``ArticleFixture.php`` in your
 ``app/Test/Fixture`` directory, with the following content::
@@ -379,7 +386,46 @@ records.  Each item in ``$records`` should be a single row.  Inside each row,
 should be an associative array of the columns and values for the row.  Just keep
 in mind that each record in the $records array must have a key for **every**
 field specified in the ``$fields`` array. If a field for a particular record needs
-to have a NULL value, just specify the value of that key as NULL.
+to have a ``null`` value, just specify the value of that key as ``null``.
+
+Dynamic data and fixtures
+-------------------------
+
+Since records for a fixture are declared as a class property, you cannot easily
+use functions or other dynamic data to define fixtures.  To solve this problem,
+you can define ``$records`` in the init() function of your fixture. For example
+if you wanted all the created and updated timestamps to reflect today's date you
+could do the following::
+
+    <?php
+    class ArticleFixture extends CakeTestFixture {
+
+        public $fields = array( 
+            'id' => array('type' => 'integer', 'key' => 'primary'), 
+            'title' => array('type' => 'string', 'length' => 255, 'null' => false), 
+            'body' => 'text', 
+            'published' => array('type' => 'integer', 'default' => '0', 'null' => false), 
+            'created' => 'datetime', 
+            'updated' => 'datetime' 
+        );
+
+        public function init() {
+            $this->records = array(
+                array(
+                    'id' => 1,
+                    'title' => 'First Article',
+                    'body' => 'First Article Body',
+                    'published' => '1',
+                    'created' => date('Y-m-d H:i:s'),
+                    'updated' => date('Y-m-d H:i:s'),
+                ),
+            );
+            parent::init();
+        }
+    }
+
+When overriding ``init()`` just remember to always call ``parent::init()``.
+
 
 Importing table information and records
 ---------------------------------------
@@ -552,7 +598,7 @@ this::
     class ArticleTest extends CakeTestCase {
         public $fixtures = array('app.article');
 
-        public function setup() {
+        public function setUp() {
             parent::setUp();
             $this->Article = ClassRegistry::init('Article');
         }
@@ -639,7 +685,7 @@ Create a file named ``ArticlesControllerTest.php`` in your
         public function testIndexShortGetRenderedHtml() {
             $result = $this->testAction(
                '/articles/index/short',
-                array('return' => 'render')
+                array('return' => 'contents')
             );
             debug($result);
         }
@@ -678,7 +724,7 @@ action.
 When testing actions that contain ``redirect()`` and other code following the
 redirect it is generally a good idea to return when redirecting.  The reason for
 this, is that ``redirect()`` is mocked in testing, and does not exit like
-normal.  And instead of your code exiting, it will contine to run code following
+normal.  And instead of your code exiting, it will continue to run code following
 the redirect.  For example::
 
     <?php
@@ -940,6 +986,8 @@ set correctly by the ``adjust`` method in our component. We create the file
 
     <?php
     App::uses('Controller', 'Controller');
+    App::uses('CakeRequest', 'Network');
+    App::uses('CakeResponse', 'Network');
     App::uses('ComponentCollection', 'Controller');
     App::uses('PagematronComponent', 'Controller/Component');
 
@@ -957,7 +1005,9 @@ set correctly by the ``adjust`` method in our component. We create the file
             // Setup our component and fake test controller
             $Collection = new ComponentCollection();
             $this->PagematronComponent = new PagematronComponent($Collection);
-            $this->Controller = new TestPagematronController();
+            $CakeRequest = new CakeRequest();
+            $CakeResponse = new CakeResponse();
+            $this->Controller = new TestPagematronController($CakeRequest, $CakeResponse);
             $this->PagematronComponent->startup($this->Controller);
         }
 
@@ -1136,7 +1186,7 @@ Add test database config
 ------------------------
 
 Using a separate database just for Jenkins is generally a good idea, as it stops
-bleedthrough and avoids a number of basic problems.  Once you've created a new
+bleed through and avoids a number of basic problems.  Once you've created a new
 database in a database server that jenkins can access (usually localhost).  Add
 a *shell script step* to the build that contains the following::
 

@@ -260,8 +260,8 @@ Authentication objects can implement a ``getUser()`` method that can be
 used to support user login systems that don't rely on cookies.  A
 typical getUser method looks at the request/environment and uses the
 information there to confirm the identity of the user.  HTTP Basic
-authentication for example uses ``$_SERVER['PHP_AUTH_USER]`` and
-``$_SERVER['PHP_AUTH_PW]`` for the username and password fields.  On each
+authentication for example uses ``$_SERVER['PHP_AUTH_USER']`` and
+``$_SERVER['PHP_AUTH_PW']`` for the username and password fields.  On each
 request, if a client doesn't support cookies, these values are used to
 re-identify the user and ensure they are valid user.  As with
 authentication object's ``authenticate()`` method the ``getUser()`` method
@@ -388,7 +388,7 @@ calling ``$this->Auth->login()`` with the user data you want to 'login'::
     public function register() {
         if ($this->User->save($this->request->data)) {
             $id = $this->User->id;
-            $this->request->data['User'] = array_merge($this->request->data["User"], array('id' => $id));
+            $this->request->data['User'] = array_merge($this->request->data['User'], array('id' => $id));
             $this->Auth->login($this->request->data['User']);
             $this->redirect('/users/home');
         }
@@ -571,8 +571,11 @@ marking actions as public, AuthComponent, will not check for a logged in
 user, nor will authorize objects be checked::
 
     <?php
-    // Allow all actions.
+    // Allow all actions. CakePHP 2.0
     $this->Auth->allow('*');
+
+    // Allow all actions. CakePHP 2.1
+    $this->Auth->allow();
 
     // Allow only the view and index actions.
     $this->Auth->allow('view', 'index');
@@ -642,10 +645,18 @@ checked::
             'Auth' => array('authorize' => 'Controller'),
         );
         public function isAuthorized($user = null) {
-            if (isset($this->request->params['admin'])) {
-                return (bool)($user['role'] == 'admin');
+            // Any registered user can access public functions
+            if (empty($this->request->params['admin'])) {
+                return true;
             }
-            return true;
+
+            // Only admins can access admin functions
+            if (isset($this->request->params['admin'])) {
+                return (bool)($user['role'] === 'admin');
+            }
+
+            // Default deny
+            return false;
         }
     }
 
@@ -701,7 +712,7 @@ and authentication mechanics in CakePHP.
 
 .. php:attr:: authError
 
-    Error to display when user attempts to access an object or action to which 
+    Error to display when user attempts to access an object or action to which
     they do not have access.
 
 .. php:attr:: authorize
@@ -716,7 +727,7 @@ and authentication mechanics in CakePHP.
 
 .. php:attr:: flash
 
-    Settings to use when Auth needs to do a flash message with 
+    Settings to use when Auth needs to do a flash message with
     :php:meth:`SessionComponent::setFlash()`.
     Available keys are:
 
@@ -731,15 +742,15 @@ and authentication mechanics in CakePHP.
 
 .. php:attr:: loginRedirect
 
-    The URL (defined as a string or array) to the controller action users 
-    should be redirected to after logging in. This value will be ignored if the 
+    The URL (defined as a string or array) to the controller action users
+    should be redirected to after logging in. This value will be ignored if the
     user has an ``Auth.redirect`` value in their session.
 
 .. php:attr:: logoutRedirect
 
-    The default action to redirect to after the user is logged out. While 
-    AuthComponent does not handle post-logout redirection, a redirect URL will 
-    be returned from :php:meth:`AuthComponent::logout()`. Defaults to 
+    The default action to redirect to after the user is logged out. While
+    AuthComponent does not handle post-logout redirection, a redirect URL will
+    be returned from :php:meth:`AuthComponent::logout()`. Defaults to
     :php:attr:`AuthComponent::$loginAction`.
 
 .. php:attr:: request
@@ -752,7 +763,7 @@ and authentication mechanics in CakePHP.
 
 .. php:attr:: sessionKey
 
-    The session key name where the record of the current user is stored. If 
+    The session key name where the record of the current user is stored. If
     unspecified, it will be "Auth.User".
 
 .. php:method:: allow($action, [$action, ...])
@@ -780,7 +791,7 @@ and authentication mechanics in CakePHP.
 
 .. php:method:: flash($message)
 
-    Set a flash message. Uses the Session component, and values from 
+    Set a flash message. Uses the Session component, and values from
     :php:attr:`AuthComponent::$flash`.
 
 .. php:method:: identify($request, $response)
@@ -798,8 +809,8 @@ and authentication mechanics in CakePHP.
 
 .. php:method:: isAuthorized($user = null, $request = null)
 
-    Uses the configured Authorization adapters to check whether or not a user 
-    is authorized. Each adapter will be checked in sequence, if any of them 
+    Uses the configured Authorization adapters to check whether or not a user
+    is authorized. Each adapter will be checked in sequence, if any of them
     return true, then the user will be authorized for the request.
 
 .. php:method:: loggedIn()
@@ -825,9 +836,9 @@ and authentication mechanics in CakePHP.
 
 .. php:method:: mapActions($map = array())
 
-    Maps action names to CRUD operations. Used for controller-based 
-    authentication. Make sure to configure the authorize property before 
-    calling this method. As it delegates $map to all the attached authorize 
+    Maps action names to CRUD operations. Used for controller-based
+    authentication. Make sure to configure the authorize property before
+    calling this method. As it delegates $map to all the attached authorize
     objects.
 
 .. php:staticmethod:: password($pass)
@@ -836,9 +847,9 @@ and authentication mechanics in CakePHP.
 
 .. php:method:: redirect($url = null)
 
-    If no parameter is passed, gets the authentication redirect URL. Pass a 
-    url in to set the destination a user should be redirected to upon logging 
-    in. Will fallback to :php:attr:`AuthComponent::$loginRedirect` if there is 
+    If no parameter is passed, gets the authentication redirect URL. Pass a
+    url in to set the destination a user should be redirected to upon logging
+    in. Will fallback to :php:attr:`AuthComponent::$loginRedirect` if there is
     no stored redirect value.
 
 .. php:method:: shutdown($Controller)
@@ -847,7 +858,7 @@ and authentication mechanics in CakePHP.
 
 .. php:method:: startup($Controller)
 
-    Main execution method. Handles redirecting of invalid users, and 
+    Main execution method. Handles redirecting of invalid users, and
     processing of login form data.
 
 .. php:staticmethod:: user($key = null)

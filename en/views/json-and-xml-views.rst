@@ -45,7 +45,7 @@ can be either a string or an array of view variables to serialize::
     class PostsController extends AppController {
         public function index() {
             $this->set('posts', $this->paginate());
-            $this->set('_serialize', 'posts');
+            $this->set('_serialize', array('posts'));
         }
     }
 
@@ -59,6 +59,12 @@ You can also define ``_serialize`` as an array of view variables to combine::
             $this->set('_serialize', array('posts', 'comments'));
         }
     }
+
+Defining ``_serialize`` as an array has the added benefit of automatically
+appending a top-level ``<response>`` element when using :php:class:`XmlView`.
+If you use a string value for ``_serialize`` and XmlView, make sure that your
+view variable has a single top-level element.  Without a single top-level
+element the Xml will fail to generate.
 
 Using a data view with view files
 =================================

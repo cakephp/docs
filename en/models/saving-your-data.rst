@@ -644,15 +644,83 @@ Saving Related Model Data (HABTM)
 Saving models that are associated by hasOne, belongsTo, and hasMany
 is pretty simple: you just populate the foreign key field with the
 ID of the associated model. Once that's done, you just call the
-save() method on the model, and everything gets linked up
-correctly.
+``save()`` method on the model, and everything gets linked up
+correctly. An example of the required format for the data array
+passed to ``save()`` for the Tag model is shown below::
 
-With HABTM, you need to set the ID of the associated model in your
-data array. We'll build a form that creates a new tag and
-associates it on the fly with some recipe.
+    Array
+    (
+        [Recipe] => Array
+            (
+                [id] => 42
+            )
+        [Tag] => Array 
+            (
+                [name] => Italian
+            )
+    )
+
+You can also use this format to save several records and their
+HABTM associations with ``saveAll()``, using an array like the
+following::
+
+    Array
+    (
+        [0] => Array
+            (
+                [Recipe] => Array
+                    (
+                        [id] => 42
+                    )
+                [Tag] => Array
+                    (
+                        [name] => Italian
+                    )
+            )
+        [1] => Array
+            (
+                [Recipe] => Array
+                    (
+                        [id] => 42
+                    )
+                [Tag] => Array
+                    (
+                        [name] => Pasta
+                    )
+            )
+        [2] => Array
+            (
+                [Recipe] => Array
+                    (
+                        [id] => 51
+                    )
+                [Tag] => Array
+                    (
+                        [name] => Mexican
+                    )
+            )
+        [3] => Array
+            (
+                [Recipe] => Array
+                    (
+                        [id] => 17
+                    )
+                [Tag] => Array
+                    (
+                        [name] => American (new)
+                    )
+            )
+    )
+
+Passing the above array to ``saveAll()`` will create the contained tags,
+each associated with their respective recipes.
+
+As an example, we'll build a form that creates a new tag and
+generates the proper data array to associate it on the fly with
+some recipe.
 
 The simplest form might look something like this (we'll assume that
-$recipe\_id is already set to something)::
+``$recipe_id`` is already set to something)::
 
     <?php echo $this->Form->create('Tag');?>
         <?php echo $this->Form->input(
@@ -678,7 +746,7 @@ automatically save the HABTM data to the database.
     }
 
 With the preceding code, our new Tag is created and associated with
-a Recipe, whose ID was set in $this->request->data['Recipe']['id'].
+a Recipe, whose ID was set in ``$this->request->data['Recipe']['id']``.
 
 Other ways we might want to present our associated data can include
 a select drop down list. The data can be pulled from the model
@@ -757,7 +825,54 @@ However, in most cases it's easier to make a model for the join table
 and setup hasMany, belongsTo associations as shown in example above
 instead of using HABTM association.
 
+Datatables
+==========
+
+While CakePHP can have datasources that aren't database driven, most of the
+time, they are. CakePHP is designed to be agnostic and will work with MySQL,
+MSSQL, Oracle, PostgreSQL and others. You can create your database tables as you
+normally would. When you create your Model classes, they'll automatically map to
+the tables that you've created. Table names are by convention lowercase and
+pluralized with multi-word table names separated by underscores. For example, a
+Model name of Ingredient expects the table name ingredients. A Model name of
+EventRegistration would expect a table name of event_registrations. CakePHP will
+inspect your tables to determine the data type of each field and uses this
+information to automate various features such as outputting form fields in the
+view. Field names are by convention lowercase and separated by underscores.
+
+Using created and modified
+--------------------------
+
+By defining a created or modified field in your database table as datetime
+fields, CakePHP will recognize those fields and populate them automatically
+whenever a record is created or saved to the database (unless the data being
+saved already contains a value for these fields).
+
+The created and modified fields will be set to the current date and time when
+the record is initially added. The modified field will be updated with the
+current date and time whenever the existing record is saved.
+
+If you have updated, created or modified data in your $this->data (e.g. from a
+Model::read or Model::set) before a Model::save() then the values will be taken
+from $this->data and not automagically updated. Either use
+``unset($this->data['Model']['modified'])``, etc. Alternatively you can override
+the Model::save() to always do it for you::
+
+    <?php
+    class AppModel extends Model {
+
+        public function save($data = null, $validate = true, $fieldList = array()) }
+            // Clear modified field value before each save
+            $this->set($data);
+            if (isset($this->data[$this->alias]['modified'])) {
+                unset($this->data[$this->alias]['modified']);
+            }
+            return parent::save($this->data, $validate, $fieldList);
+        }
+
+    }
 
 .. meta::
     :title lang=en: Saving Your Data
     :keywords lang=en: doc models,validation rules,data validation,flash message,null model,table php,request data,php class,model data,database table,array,recipes,success,reason,snap,data model
+

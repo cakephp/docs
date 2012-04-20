@@ -87,7 +87,7 @@ un-captured content from the extending view. Assuming our view file has a
 
     // app/View/Posts/view.ctp
     <?php
-    $this->extend('Common/view');
+    $this->extend('/Common/view');
 
     $this->assign('title', $post)
 
@@ -115,8 +115,8 @@ more than once in a view file will override the parent view that will be
 processed next::
 
     <?php
-    $this->extend('Common/view');
-    $this->extend('Common/index');
+    $this->extend('/Common/view');
+    $this->extend('/Common/index');
 
 The above will result in ``/Common/index.ctp`` being rendered as the parent view
 to the current view.
@@ -185,7 +185,7 @@ You can also use fetch to conditionally show content that should surround a
 block should it exist.  This is helpful in layouts, or extended views where you
 want to conditionally show headings or other markup::
 
-    // in app/Layout/default.ctp
+    // in app/View/Layouts/default.ctp
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -306,7 +306,7 @@ controller, setting the ``$title_for_layout`` variable::
 
    <?php
    class UsersController extends AppController {
-       public function viewActive() {
+       public function view_active() {
            $this->set('title_for_layout', 'View Active Users');
        }
    }
@@ -338,12 +338,12 @@ using something like::
 
    <?php
    class UsersController extends AppController {
-       public function viewActive() {
+       public function view_active() {
            $this->set('title_for_layout', 'View Active Users');
            $this->layout = 'default_small_ad';
        }
 
-       public function viewImage() {
+       public function view_image() {
            $this->layout = 'image';
            //output user image
        }
@@ -370,7 +370,7 @@ Contacts plugin::
 
     <?php
     class UsersController extends AppController {
-        public function viewActive() {
+        public function view_active() {
             $this->layout = 'Contacts.contact';
         }
     }

@@ -1,11 +1,9 @@
 Code Generation with Bake
 #########################
 
-You’ve already learned about scaffolding in CakePHP: a simple way
-to get up and running with only a database and some bare classes.
-CakePHP’s Bake console is another effort to get you up and running
-in CakePHP – fast. The Bake console can create any of CakePHP’s
-basic ingredients: models, views and controllers. And we aren’t
+CakePHP's Bake console is another effort to get you up and running
+in CakePHP – fast. The Bake console can create any of CakePHP's
+basic ingredients: models, views and controllers. And we aren't
 just talking skeleton classes: Bake can create a fully functional
 application in just a few minutes. In fact, Bake is a natural step
 to take once an application has been scaffolded.

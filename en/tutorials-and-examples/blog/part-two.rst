@@ -16,7 +16,6 @@ completed file should look like this::
 
     <?php
     class Post extends AppModel {
-        public $name = 'Post';
     }
 
 Naming convention is very important in CakePHP. By naming our model
@@ -49,7 +48,6 @@ directory. Here's what the basic controller should look like::
 
     <?php
     class PostsController extends AppController {
-        public $name = 'Posts';
         public $helpers = array('Html', 'Form');
     }
 
@@ -63,7 +61,6 @@ posts. The code for that action would look something like this:
 
     <?php
     class PostsController extends AppController {
-        public $name = 'Posts';
         public $helpers = array('Html', 'Form');
 
         public function index() {
@@ -217,7 +214,6 @@ PostsController now::
 
     <?php
     class PostsController extends AppController {
-        public $name = 'Posts';
         public $helpers = array('Html', 'Form');
 
         public function index() {
@@ -268,7 +264,6 @@ PostsController:
 
     <?php
     class PostsController extends AppController {
-        public $name = 'Posts';
         public $helpers = array('Html', 'Form');
         public $components = array('Session');
 
@@ -304,6 +299,11 @@ Here's what the ``add()`` action does: if HTTP method of the
 request was POST, try to save the data using the Post model. If for some
 reason it doesn't save, just render the view. This gives us a
 chance to show the user validation errors or other warnings.
+
+Every CakePHP request includes a ``CakeRequest`` object which is accessible using 
+``$this->request``. The request object contains useful information regarding the 
+request that was just received, and can be used to control the flow of your application.
+In this case, we use the :php:meth:`CakeRequest::is()` method to check that the request is a HTTP POST request.
 
 When a user uses a form to POST data to your application, that
 information is available in ``$this->request->data``. You can use the
@@ -383,9 +383,7 @@ requirements? Validation rules are defined in the model. Let's look
 back at our Post model and make a few adjustments::
 
     <?php
-    class Post extends AppModel {
-        public $name = 'Post';
-    
+    class Post extends AppModel {    
         public $validate = array(
             'title' => array(
                 'rule' => 'notEmpty'
