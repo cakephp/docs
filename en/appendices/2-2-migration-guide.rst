@@ -45,8 +45,10 @@ CakeEmail
 
 - :php:meth:`CakeEmail::charset()` and :php:meth:`CakeEmail::headerCharset()`
   were added.
-
 - :php:meth:`CakeEmail::theme()` was added.
+- :php:meth:`CakeEmail::domain()` was added. You can use this method to set the
+  domain name used when sending email from a CLI script or if you want to
+  control the hostname used to send email.
 
 Utility
 =======
