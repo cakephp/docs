@@ -232,7 +232,7 @@ Since settings have been moved to the component constructor, the
 ``initialize()`` callback no longer receives ``$settings`` as its 2nd parameter.
 You should update your components to use the following method signature::
 
-    function initialize($controller) { }
+    function initialize(Controller $controller) { }
 
 Additionally, the initialize() method is only called on components that are
 enabled.  This usually means components that are directly attached to the
