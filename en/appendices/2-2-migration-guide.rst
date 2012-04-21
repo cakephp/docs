@@ -67,6 +67,13 @@ The :php:class:`Hash` class was added in 2.2.  It replaced Set providing a more
 consistent, reliable and performant API to doing many of the same tasks Set
 does. See the :doc:`/core-utility-libraries/hash` page for more detail.
 
+CakeTime
+--------
+
+The ``$userOffset`` parameter has been replaced with ``$timezone`` parameter in all relevant functions.
+So instead of numeric offset you can now pass in a timezone string or DateTimeZone object.
+Passing numeric offsets for ``$timezone`` parameter is still possible for backwards compatibility.
+
 Helpers
 =======
 
@@ -77,4 +84,10 @@ FormHelper
   honours the ``on`` key.
 - :php:meth:`FormHelper::radio()` now supports an ``empty`` which works similar
   to the empty option on ``select()``.
+
+TimeHelper
+--------
+
+Since 2.1 as TimeHelper uses CakeTime class, for all its revelent methods too the ``$userOffset`` parameter
+has been replaced with ``$timezone`` parameter.
 

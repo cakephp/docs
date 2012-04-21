@@ -16,3 +16,13 @@ Pagination
 ==========
 
 Paginating custom finders will now return correct counts, see Model changes for more info.
+
+Utility
+=======
+
+CakeTime
+--------
+
+The ``$userOffset`` parameter has been replaced with ``$timezone`` parameter in all relevant functions.
+So instead of numeric offset you can now pass in a timezone string or DateTimeZone object.
+Passing numeric offsets for ``$timezone`` parameter is still possible for backwards compatibility.
