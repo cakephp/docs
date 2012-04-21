@@ -26,3 +26,13 @@ CakeTime
 The ``$userOffset`` parameter has been replaced with ``$timezone`` parameter in all relevant functions.
 So instead of numeric offset you can now pass in a timezone string or DateTimeZone object.
 Passing numeric offsets for ``$timezone`` parameter is still possible for backwards compatibility.
+
+Configuration
+=============
+
+A new config parameter 'Config.timezone' is available which you can set to user's timezone string.
+eg. You can do ``Configure::write('Config.timezone', 'Europe/Paris')``.
+If a method of ``CakeTime`` class is called with ``$timezone`` parameter as null and 'Config.timezone' is set, then the
+value of 'Config.timezone' will be used. This feature allows you to set user's timezone just once instead
+of passing it each time in function calls.
+
