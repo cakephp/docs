@@ -191,8 +191,8 @@ Sessionヘルパーと Sessionコンポーネントは他のコンポーネン�
 
 ::
 
-    public $components = array('Session', 'Auth', ...);
-    public $helpers = array('Session', 'Html', 'Form' ...);
+    var $components = array('Session', 'Auth', ...);
+    var $helpers = array('Session', 'Html', 'Form' ...);
 
 これらの変更はCakePHPが、これらクラスを明白的に、また宣言的にアプリケーション開発者が使いたいように成されました。
 過去にはコアファイルを修正することなくセッションを読み込むのを避けることはできませんでした。
@@ -380,7 +380,7 @@ Cacheはエンジン毎のシングルトンの使用をやめ、代わりに ``
 
 
 -  DataSource::exists()は非DBデータソースも使えるように書き直されました。
-   以前は、 ``public $useTable = false; public $useDbConfig = 'custom';`` としても、 ``Model::exists()`` はfalse以外を返すことは不可能でした。
+   以前は、 ``var $useTable = false; var $useDbConfig = 'custom';`` としても、 ``Model::exists()`` はfalse以外を返すことは不可能でした。
    このことが ``create()`` または ``update()`` を使っているカスタムデータソースに醜いハックを用いずに正しく動作させることを妨げていました。
    もしカスタムデータソースが ``create()`` 、 ``update()`` 、 ``read()``  ( ``Model::exists()`` がコールするであろう ``Model::find('count')`` は、 ``DataSource::read()`` に渡されるため)を実装しているなら、1.3上でユニットテストを再度走らせて確かめてください。
 
