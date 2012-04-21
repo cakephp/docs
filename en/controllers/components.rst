@@ -225,7 +225,7 @@ way you include them in controllers - using the ``$components`` var::
         // the other component your component uses
         public $components = array('Existing'); 
 
-        public function initialize($controller) {
+        public function initialize(Controller $controller) {
             $this->Existing->foo();
         }
 
@@ -237,7 +237,7 @@ way you include them in controllers - using the ``$components`` var::
     // app/Controller/Component/ExistingComponent.php
     class ExistingComponent extends Component {
 
-        public function initialize($controller) {
+        public function initialize(Controller $controller) {
             $this->Parent->bar();
         }
 

@@ -243,7 +243,7 @@ functionality that would be available to all helpers, create
     App::uses('Helper', 'View');
     
     class AppHelper extends Helper {
-        public function customMethod () {
+        public function customMethod() {
         }
     }
 

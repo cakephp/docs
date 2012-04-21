@@ -570,7 +570,7 @@ Let's now create a file named ``ArticleTest.php`` in your
     <?php
     App::uses('Article', 'Model');
 
-    class ArticleTestCase extends CakeTestCase {
+    class ArticleTest extends CakeTestCase {
         public $fixtures = array('app.article');
     }
 

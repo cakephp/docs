@@ -217,7 +217,7 @@ Componentは、全てのコンポーネントが必須とする基底クラス�
 設定がコンポーネントのコンストラクタに移動したことで、 ``initialize()`` コールバックは2番目の引数に ``$settings`` を受け取らないようになりました。
 以下のメソッド特性を使うようにコンポーネントを書き換える必要があります::
 
-    function initialize($controller) { }
+    function initialize(Controller $controller) { }
 
 加えて、initialize()メソッドはコンポーネントが有効な時のみ呼び出されます。
 これは通常、コントローラに直接付随したコンポーネントを意味します。
@@ -842,7 +842,7 @@ View->Helpers
 テーマ
 ------
 
-コントローラでテーマを使うには、 ``var $view = 'Theme';`` と指定しないようになりました。
+コントローラでテーマを使うには、 ``public $view = 'Theme';`` と指定しないようになりました。
 代わりに ``public $viewClass = 'Theme';`` としてください。
 
 コールバックの位置の変更
@@ -1069,7 +1069,7 @@ AclBehaviorとTreeBehavior
 明示的に使いたいものを指定しなければなりません。以前は::
 
     <?php
-    var $components = array('Session', 'Comments');
+    public $components = array('Session', 'Comments');
 
 とすると、アプリケーション・コアのコンポーネントをチェックする前にコントローラのプラグインを調べていたでしょう。
 これはアプリケーション・コアのコンポーネントのみを見るようになりました。

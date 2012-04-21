@@ -232,7 +232,7 @@ Since settings have been moved to the component constructor, the
 ``initialize()`` callback no longer receives ``$settings`` as its 2nd parameter.
 You should update your components to use the following method signature::
 
-    function initialize($controller) { }
+    function initialize(Controller $controller) { }
 
 Additionally, the initialize() method is only called on components that are
 enabled.  This usually means components that are directly attached to the
@@ -913,7 +913,7 @@ By default View objects contain a :php:class:`HelperCollection` at ``$this->Help
 Themes
 ------
 
-To use themes in your Controller you no longer set ``var $view = 'Theme';``. 
+To use themes in your Controller you no longer set ``public $view = 'Theme';``. 
 Use ``public $viewClass = 'Theme';`` instead.
 
 Callback positioning changes
@@ -1166,7 +1166,7 @@ and models used within them. You must be explicit with the components, models,
 and helpers you wish to use. In the past::
 
     <?php
-    var $components = array('Session', 'Comments');
+    public $components = array('Session', 'Comments');
 
 Would look in the controller's plugin before checking app/core components. It
 will now only look in the app/core components. If you wish to use objects from a

@@ -25,7 +25,7 @@ function transformIndex(&$menu) {
 	}
 }
 
-function transformMenu(&$menu){
+function transformMenu(&$menu) {
 	$dir = getcwd();
 	$html = file_get_contents("$dir/contents.html");
 	$html = preg_replace('/&(.+);/', '', $html);
