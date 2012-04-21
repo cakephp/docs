@@ -103,7 +103,7 @@ flags. An example of a route class that supports subdomains would be::
     <?php
     class SubdomainRoute extends CakeRoute {
         
-        public function match ($params) {
+        public function match($params) {
             $subdomain = isset($params['subdomain']) ? $params['subdomain'] : null;
             unset($params['subdomain']);
             $path = parent::match($params);
