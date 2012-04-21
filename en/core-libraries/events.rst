@@ -336,7 +336,7 @@ expected: any callback after the event was stopped will not be called. The secon
 consequence is optional and it depends on the code triggering the event, for
 instance, in our `afterPlace` example it would not make any sense to cancel the
 operation since the data was already saved and the cart emptied. Nevertheless, if
-we had a `beforePlace` stopping the event had a valid meaning.
+we had a `beforePlace` stopping the event would have a valid meaning.
 
 To check if an event was stopped, you call the `isStopped()` method in the event object::
 
@@ -372,7 +372,7 @@ directly or returning the value in the callback itself::
     // A listener callback
     public function doSomething($event) {
         // ...
-        $alteredData = $event->data['order']  + $moreData;
+        $alteredData = $event->data['order'] + $moreData;
         return $alteredData;
     }
 
