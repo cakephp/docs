@@ -225,8 +225,8 @@ include these classes to retain existing behavior.
 
 ::
 
-    var $components = array('Session', 'Auth', ...);
-    var $helpers = array('Session', 'Html', 'Form' ...);
+    public $components = array('Session', 'Auth', ...);
+    public $helpers = array('Session', 'Html', 'Form' ...);
 
 These change were done to make CakePHP more explicit and
 declarative in what classes you the application developer want to
@@ -464,7 +464,7 @@ Model Databases and Datasources
 
 -  DataSource::exists() has been refactored to be more consistent
    with non-database backed datasources. Previously, if you set
-   ``var $useTable = false; var $useDbConfig = 'custom';``, it was
+   ``public $useTable = false; public $useDbConfig = 'custom';``, it was
    impossible for ``Model::exists()`` to return anything but false.
    This prevented custom datasources from using ``create()`` or
    ``update()`` correctly without some ugly hacks. If you have custom

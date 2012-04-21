@@ -913,7 +913,7 @@ By default View objects contain a :php:class:`HelperCollection` at ``$this->Help
 Themes
 ------
 
-To use themes in your Controller you no longer set ``var $view = 'Theme';``. 
+To use themes in your Controller you no longer set ``public $view = 'Theme';``. 
 Use ``public $viewClass = 'Theme';`` instead.
 
 Callback positioning changes
@@ -1166,7 +1166,7 @@ and models used within them. You must be explicit with the components, models,
 and helpers you wish to use. In the past::
 
     <?php
-    var $components = array('Session', 'Comments');
+    public $components = array('Session', 'Comments');
 
 Would look in the controller's plugin before checking app/core components. It
 will now only look in the app/core components. If you wish to use objects from a
