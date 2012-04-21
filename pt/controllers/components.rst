@@ -197,7 +197,7 @@ em controllers, usando o atributo ``$components``::
         // O outro componente que seu componente utiliza
         public $components = array('Existing'); 
     
-        function initialize($controller) {
+        function initialize(Controller $controller) {
             $this->Existing->foo();
         }
     
@@ -210,7 +210,7 @@ em controllers, usando o atributo ``$components``::
     <?php
     class ExistingComponent extends Component {
     
-        function initialize($controller) {
+        function initialize(Controller $controller) {
             $this->Parent->bar();
         }
      

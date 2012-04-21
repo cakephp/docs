@@ -23,7 +23,7 @@ Components
 
 ::
 
-    var $components = array(
+    public $components = array(
         'Cookie' => array(
             'name' => 'MyCookie'
         ),
@@ -154,7 +154,7 @@ core.phpでこれらを設定しようとすると、正しく動作しないで
 
 ::
 
-    var $lastFm = array(
+    public $lastFm = array(
         'datasource' => 'WebservicePack.LastFm'
         ...
 
@@ -216,7 +216,7 @@ MySQLは一番多くのテーブルパラメータをサポートしています
 
 ::
 
-    var $comments => array(
+    public $comments => array(
         'id' => array('type' => 'integer', 'null' => false, 'default' => 0, 'key' => 'primary'),
         'post_id' => array('type' => 'integer', 'null' => false, 'default' => 0),
         'comment' => array('type' => 'text'),
@@ -418,7 +418,7 @@ error404に独自のエラーメソッドを変換したいなら、手動です
     Configure::write('Routing.prefixes', array('admin', 'member'));
     
     class PostsController extends AppController {
-        var $scaffold = 'member';
+        public $scaffold = 'member';
     }
 
 これは「member」prefixがなされたURLでのスキャフォールディングを使うことになります。
@@ -446,7 +446,7 @@ error404に独自のエラーメソッドを変換したいなら、手動です
 
 ::
 
-    var $validate = array(
+    public $validate = array(
         'phone_no' => array('rule' => array('phone', null, 'nl')),
         'postal_code' => array('rule' => array('postal', null, 'nl'))
     );
