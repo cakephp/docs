@@ -144,9 +144,9 @@ Test Shell
 A new TestShell has been added. It reduces the typing required to run unit
 tests, and offers a file path based UI::
 
-    # Run the post model tests
-    Console/cake test app/Model/Post.php
-    Console/cake test app/Controller/PostsController.php
+    ./Console/cake test app Model/Post
+    ./Console/cake test app Controller/PostsController
+    ./Console/cake test Plugin View/Helper/MyHelper
 
 The old testsuite shell and its syntax are still available.
 
