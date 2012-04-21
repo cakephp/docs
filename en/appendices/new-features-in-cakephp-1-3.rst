@@ -26,7 +26,7 @@ settings for components when you declare the component.
 
 ::
 
-    var $components = array(
+    public $components = array(
         'Cookie' => array(
             'name' => 'MyCookie'
         ),
@@ -178,7 +178,7 @@ could do:
 
 ::
 
-    var $lastFm = array(
+    public $lastFm = array(
         'datasource' => 'WebservicePack.LastFm'
         ...
 
@@ -240,7 +240,7 @@ schema file. Much like ``indexes``:
 
 ::
 
-    var $comments => array(
+    public $comments => array(
         'id' => array('type' => 'integer', 'null' => false, 'default' => 0, 'key' => 'primary'),
         'post_id' => array('type' => 'integer', 'null' => false, 'default' => 0),
         'comment' => array('type' => 'text'),
@@ -475,7 +475,7 @@ updated to allow the scaffolding of any one prefix.
     Configure::write('Routing.prefixes', array('admin', 'member'));
     
     class PostsController extends AppController {
-        var $scaffold = 'member';
+        public $scaffold = 'member';
     }
 
 Would use scaffolding for member prefixed urls.
@@ -509,7 +509,7 @@ could use your NlValidation class by doing the following.
 
 ::
 
-    var $validate = array(
+    public $validate = array(
         'phone_no' => array('rule' => array('phone', null, 'nl')),
         'postal_code' => array('rule' => array('postal', null, 'nl'))
     );

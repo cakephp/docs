@@ -248,7 +248,7 @@ a mapped method is slightly different than a normal behavior mixin method::
     class MyBehavior extends ModelBehavior {
         public $mapMethods = array('/do(\w+)/' => 'doSomething');
 
-        public function doSomething($model, $method, $arg1, $arg2) {
+        public function doSomething(Model $model, $method, $arg1, $arg2) {
             debug(func_get_args());
             //do something
         }

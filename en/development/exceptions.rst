@@ -304,7 +304,7 @@ or HTTP errors. An example use of the HTTP exceptions could be rendering 404
 pages for items that have not been found::
 
     <?php 
-    public function view ($id) {
+    public function view($id) {
         $post = $this->Post->findById($id);
         if (!$post) {
             throw new NotFoundException('Could not find that post');
