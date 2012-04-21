@@ -95,9 +95,9 @@ When you have created a test case, you can execute it by browsing
 to ``http://localhost/you_app/test.php`` (depending on
 how your specific setup looks). Click App test cases, and
 then click the link to your specific file.  You can run tests from the command
-line using the testsuite shell::
+line using the test shell::
 
-    ./Console/cake testsuite app Model/Post
+    ./Console/cake test app Model/Post
 
 For example, would run the tests for your Post model.
 
@@ -228,19 +228,19 @@ lines are considered unexecutable code by xdebug.
 Running tests from command line
 -------------------------------
 
-CakePHP provides a ``testsuite`` shell for running tests.  You can run app, core
-and plugin tests easily using the testsuite shell.  It accepts all the arguments
+CakePHP provides a ``test`` shell for running tests. You can run app, core
+and plugin tests easily using the test shell. It accepts all the arguments
 you would expect to find on the normal PHPUnit command line tool as well. From
 your app directory you can do the following to run tests::
 
     # Run a model tests in the app
-    ./Console/cake testsuite app Model/Article
+    ./Console/cake test app Model/Article
 
     # Run a component test in a plugin
-    ./Console/cake testsuite DebugKit Controller/Component/ToolbarComponent
+    ./Console/cake test DebugKit Controller/Component/ToolbarComponent
 
     # Run the configure class test in CakePHP
-    ./Console/cake testsuite core Core/Configure
+    ./Console/cake test core Core/Configure
 
 .. note::
 
@@ -248,25 +248,28 @@ your app directory you can do the following to run tests::
     idea to use the ``--stderr`` option.  This will fix issues with tests
     failing because of headers_sent warnings.
 
-You can also run ``testsuite`` shell in the project root directory.  This shows
+.. versionchanged:: 2.1
+    The ``test`` shell was added in 2.1. The 2.0 ``testsuite`` shell is still
+    available but the new syntax is preferred.
+
+You can also run ``test`` shell in the project root directory. This shows
 you a full list of all the tests that you currently have. You can then freely
 choose what test(s) to run::
 
-    # Run testsuite in project root directory for application folder called app
-    lib/Cake/Console/cake testsuite app
+    # Run test in project root directory for application folder called app
+    lib/Cake/Console/cake test app
 
-    # Run testsuite in project root directory for an application in ./myapp
-    lib/Cake/Console/cake testsuite -app myapp app
-
+    # Run test in project root directory for an application in ./myapp
+    lib/Cake/Console/cake test --app myapp app
 
 Filtering test cases
 ~~~~~~~~~~~~~~~~~~~~
 
 When you have larger test cases, you will often want to run a subset of the test
-methods when you are trying to work on a single failing case.  With the
-cli runner you can use an option to filter test methods::
+methods when you are trying to work on a single failing case. With the
+CLI runner you can use an option to filter test methods::
 
-    ./Console/cake testsuite core Core/ConsoleOutput --filter Write
+    ./Console/cake test core Console/ConsoleOutput --filter testWriteArray
 
 The filter parameter is used as a case-sensitive regular expression for filtering
 which test methods to run.
@@ -275,11 +278,11 @@ Generating code coverage
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can generate code coverage reports from the command line using PHPUnit's
-built-in code coverage tools.  PHPUnit will generate a set of static HTML files
+built-in code coverage tools. PHPUnit will generate a set of static HTML files
 containing the coverage results.  You can generate coverage for a test case by
 doing the following::
 
-    ./Console/cake testsuite app Model/Article --coverage-html webroot/coverage
+    ./Console/cake test app Model/Article --coverage-html webroot/coverage
 
 This will put the coverage results in your application's webroot directory.  You
 should be able to view the results by going to
@@ -1220,7 +1223,7 @@ Add another *shell script step* to your build.  In this step run the tests for
 your application. Creating a junit log file, or clover coverage is often a nice
 bonus, as it gives you a nice graphical view of your testing results::
 
-    app/Console/cake testsuite app AllTests \
+    app/Console/cake test app AllTests \
     --stderr \
     --log-junit junit.xml \
     --coverage-clover clover.xml

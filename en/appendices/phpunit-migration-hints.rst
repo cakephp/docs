@@ -76,7 +76,7 @@ restrict the methods that are run::
     e.g. filter=myMethod
 
 Only tests containing the string ``myMethod`` will be run on the next refresh.
-The cake testsuite shell also supports a -filter option to filter methods.
+The cake test shell also supports a --filter option to filter methods.
 
 Assertion methods
 -----------------
