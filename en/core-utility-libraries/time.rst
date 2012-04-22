@@ -302,6 +302,23 @@ Formatting
 
     A wrapper for fromString.
 
+.. php:method:: toServer($dateString, $timezone = NULL, $format = 'Y-m-d H:i:s')
+
+    :rtype: mixed
+
+.. versionadded:: 2.2
+
+    Returns a formatted date in server's timezone.
+
+.. php:method:: timezone($timezone = NULL)
+
+    :rtype: DateTimeZone
+
+.. versionadded:: 2.2
+
+    Returns a timezone object from a string or the user's timezone object. If the function is called
+    without a parameter it tries to get timezone from 'Config.timezone' configuration variable.
+
 Testing Time
 ============
 
