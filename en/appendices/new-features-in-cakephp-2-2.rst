@@ -48,3 +48,32 @@ ability to change the request information or the response before it is sent to
 the client. Check the full documentation for this new features in
 :doc:`/development/dispatch-filters`
  
+
+Caching
+=======
+
+Redis Engine
+------------
+
+A new cahing engine was added using the `phpredis extension <https://github.com/nicolasff/phpredis>`_
+it is configured similarly to the Memcache engine. 
+
+Cache groups
+------------
+
+It is now possible to tag or label cache keys under groups. This makes it
+simpler to mass-delete cache entries associated to the same label. Groups are
+declared at configuration time when creating the cache engine::
+
+    <?php
+    Cache::config(array(
+        'engine' => 'Redis',
+        ...
+        'groups' => array('post', 'comment', 'user')
+    ));
+
+You can have as many groups as you like, but keep in mind they cannot be
+dynamically modified.
+
+A new ``Cache`` class method was added: ``clearGroup``. It takes the group name
+and deletes all entries labled with the same string.
