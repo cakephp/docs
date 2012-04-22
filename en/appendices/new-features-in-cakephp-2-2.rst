@@ -36,3 +36,11 @@ If a method of ``CakeTime`` class is called with ``$timezone`` parameter as null
 value of 'Config.timezone' will be used. This feature allows you to set user's timezone just once instead
 of passing it each time in function calls.
 
+Dispatcher Filters
+==================
+
+Event listeners can now be attached to the dispatcher calls, those will have the
+ability to change the request information or the response before it is sent to
+the client. Check the full documentation for this new features in
+:doc:`/development/dispatch-filters`
+ 
