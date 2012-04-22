@@ -336,7 +336,7 @@ expected: any callback after the event was stopped will not be called. The secon
 consequence is optional and it depends on the code triggering the event, for
 instance, in our `afterPlace` example it would not make any sense to cancel the
 operation since the data was already saved and the cart emptied. Nevertheless, if
-we had a `beforePlace` stopping the event has a valid meaning.
+we had a `beforePlace` stopping the event would have a valid meaning.
 
 To check if an event was stopped, you call the `isStopped()` method in the event object::
 
@@ -372,7 +372,7 @@ directly or returning the value in the callback itself::
     // A listener callback
     public function doSomething($event) {
         // ...
-        $alteredData = $event->data['order']  + $moreData;
+        $alteredData = $event->data['order'] + $moreData;
         return $alteredData;
     }
 
@@ -430,7 +430,7 @@ params you used for attaching it::
     $this->getEventManager()->detach($listener, 'My.event');
 
     // Detaching all callbacks implemented by a listener
-    $this->getEventManager()->attach($listener);
+    $this->getEventManager()->detach($listener);
 
 The global event manager
 ========================
@@ -497,7 +497,7 @@ implementing callbacks such as using behaviors, components or helpers.
 Keep in mind that with great power comes great responsibility, decoupling your
 classes this way also means that you need to perform more and better integration
 testing on your code. Abusing this tool won't make your apps have a better architecture,
-quite the opposite, it will make the harder to read. Whereas in contrast, if you
+quite the opposite, it will make the code harder to read. Whereas in contrast, if you
 use it wisely, only for the stuff your really need, it will make you code easier
 to work with, test and integrate.
 

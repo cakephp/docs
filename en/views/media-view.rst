@@ -15,7 +15,7 @@ parameters to specify where your file is located::
 
     <?php
     class ExampleController extends AppController {
-        public function download () {
+        public function download() {
             $this->viewClass = 'Media';
             // Download app/outside_webroot_dir/example.zip
             $params = array(
@@ -34,7 +34,7 @@ MediaView's ``$mimeType`` array. We are also using a relative path which will
 default to your ``app/webroot`` folder::
 
     <?php
-    public function download () {
+    public function download() {
         $this->viewClass = 'Media';
         // Render app/webroot/files/example.docx
         $params = array(
