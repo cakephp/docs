@@ -63,9 +63,9 @@ Adding data to a posts table for example would like this::
         if(isset($event['create'])){
             switch($event['create']){
                 case 'posts':
-                    $this->Post = ClassRegistry::init('Post');
-                    $this->Post->create();
-                    $this->Post->save(
+                    $post = ClassRegistry::init('Post');
+                    $post->create();
+                    $post->save(
                         array('Post' =>
                             array('title' => 'CakePHP Schema Files')
                         )
