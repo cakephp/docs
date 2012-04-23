@@ -19,18 +19,44 @@ transactions.
 
     <?php
     $dataSource->begin();
-    
+
     // Perform some tasks
-    
+
     if (/*all's well*/) {
         $dataSource->commit();
     } else {
         $dataSource->rollback();
     }
 
-Transaction nesting support. Now it is possible to start a transaction several times. It will only be committed if the commit method is called the same amount of times.
+Nested Transactions
+-------------------
 
+It is possible to start a transaction several times using the
+:php:meth:`Datasource::begin()` method. The transaction will finish only when
+the number of `commit` and `rollback` match with begin's.
+
+::
+
+    <?php
+    $dataSource->begin();
+    // Perform some tasks
+    $dataSource->begin();
+    // More few tasks
+    if (/*latest task ok*/) {
+        $dataSource->commit();
+    } else {
+        $dataSource->rollback();
+        // Change something in main task
+    }
+    $dataSource->commit();
+
+This will perform the nested transaction if your database supports it. The methods
+will always return true when in transaction mode and the nested is not supported.
+
+If you want to use multiple begin's but not use the nested transaction from database,
+disable it using ``$dataSource->nestedTransaction = false;``. It will use only
+the global transaction.
 
 .. meta::
     :title lang=en: Transactions
-    :keywords lang=en: transaction methods,datasource,rollback,data source
+    :keywords lang=en: transaction methods,datasource,rollback,data source,begin,commit,nested transaction

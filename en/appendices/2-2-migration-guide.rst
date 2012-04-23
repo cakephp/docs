@@ -15,6 +15,13 @@ Models
     As the pagination of custom find methods never worked quite well it required
     workarounds for this in the model level, which are now no longer needed
 
+Datasources
+===========
+
+- Dbo datasources now supports real nested transactions. If you get some problem
+  in your application related with that, disable it using
+  ``ConnectionManager::getDataSource('default')->nestedTransaction = false;``
+
 Testing
 =======
 
