@@ -181,6 +181,24 @@ ul ul {
 	margin: 9px 0 9px 30px;
 }
 
+/* def list */
+dl.docutils {
+	margin: 2em 0;
+	padding: 0;
+}
+.docutils dt {
+	font-weight: bold;
+	font-size: 14px;
+	font-size: 1.4rem;
+}
+.docutils dd {
+	border-left: 2px solid #ccc;
+	margin: 0 0 1em 1em;
+	padding: 0 0 .5em .5em;
+	font-size: 14px;
+	font-size: 1.4rem;
+}
+
 /* tilted header */
 .masthead {
 	background: #417282 url(header-bg.png) repeat-x;

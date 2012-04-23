@@ -45,8 +45,6 @@ setting ``public $useDbConfig = 'legacy';`` in the appropriate models.
 Fill out the key/value pairs in the configuration array to best
 suit your needs.
 
-Key
-    Value
 datasource
     The name of the datasource this configuration array is for.
     Examples: Database/Mysql, Database/Sqlserver, Database/Postgres, Database/Sqlite.
