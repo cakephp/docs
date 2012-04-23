@@ -41,6 +41,54 @@ Where filename.sql is the desired filename for the sql dump. If you
 omit filename.sql the sql dump will be output to the console but
 not written to a file.
 
+CakeSchema callbacks
+====================
+
+After generating a schema you might want to insert data on some
+tables to get your app started. This can be achieved through
+CakeSchema callbacks. Every schema file is generated with a
+``before($event = array())`` and a ``after($event = array())`` method.
+
+The ``$event`` param holds an array with two keys. One to tell if a
+table is being dropped or created and another for errors. Examples::
+
+    array('drop' => 'posts', 'errors' => null)
+    array('create' => 'posts', 'errors' => null)
+
+Adding data to a posts table for example would like this::
+
+    <?php
+    App::uses('Post', 'Model');
+    public function after($event = array()) {
+        if(isset($event['create'])){
+            switch($event['create']){
+                case 'posts':
+                    $this->Post = new Post();
+                    $this->Post->create();
+                    $this->Post->save(
+                        array('Post' =>
+                            array('title' => 'CakePHP Schema Files')
+                        )
+                    );
+                    break;
+            }
+        }
+    }
+
+The ``before()`` and ``after()`` callbacks run each time a table is created
+or dropped on the current schema.
+
+When inserting data to more than one table you'll need to flush the database
+cache after each table is created. Cache can be disable by setting
+``$db->cacheSources = false`` in the before action(). ::
+
+    <?php
+    public function before($event = array()) {
+        $db = ConnectionManager::getDataSource($this->connection);
+        $db->cacheSources = false;
+        return true;
+    }
+
 Migrations with CakePHP schema shell
 ====================================
 
