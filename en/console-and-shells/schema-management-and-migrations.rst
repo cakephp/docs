@@ -63,7 +63,7 @@ Adding data to a posts table for example would like this::
         if(isset($event['create'])){
             switch($event['create']){
                 case 'posts':
-                    $this->Post = new Post();
+                    $this->Post = ClassRegistry::init('Post');
                     $this->Post->create();
                     $this->Post->save(
                         array('Post' =>
