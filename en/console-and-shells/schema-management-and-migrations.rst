@@ -60,8 +60,8 @@ Adding data to a posts table for example would like this::
     <?php
     App::uses('Post', 'Model');
     public function after($event = array()) {
-        if(isset($event['create'])){
-            switch($event['create']){
+        if (isset($event['create'])) {
+            switch ($event['create']) {
                 case 'posts':
                     $post = ClassRegistry::init('Post');
                     $post->create();

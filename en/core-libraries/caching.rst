@@ -2,21 +2,21 @@ Caching
 #######
 
 Caching is frequently used to reduce the time it takes to create or read from
-other resources.  Caching is often used to make reading from expensive 
+other resources.  Caching is often used to make reading from expensive
 resources less expensive.  You can easily store the results of expensive queries,
 or remote webservice access that doesn't frequently change in a cache.  Once
 in the cache, re-reading the stored resource from the cache is much cheaper
 than accessing the remote resource.
 
 Caching in CakePHP is primarily facilitated by the :php:class:`Cache` class.
-This class provides a set of static methods that provide a uniform API to 
+This class provides a set of static methods that provide a uniform API to
 dealing with all different types of Caching implementations.  CakePHP
-comes with several cache engines built-in, and provides an easy system 
+comes with several cache engines built-in, and provides an easy system
 to implement your own caching systems. The built-in caching engines are:
 
-* ``FileCache`` File cache is a simple cache that uses local files, it 
-  is the slowest cache engine, and doesn't provide as many features for 
-  atomic operations.  However, since disk storage is often quite cheap, 
+* ``FileCache`` File cache is a simple cache that uses local files, it
+  is the slowest cache engine, and doesn't provide as many features for
+  atomic operations.  However, since disk storage is often quite cheap,
   storing large objects, or elements that are infrequently written
   work well in files.
 * ``ApcCache`` APC cache uses the PHP `APC <http://php.net/apc>`_ extension
@@ -24,17 +24,17 @@ to implement your own caching systems. The built-in caching engines are:
   This makes it very fast, and able to provide atomic read/write features.
   By default CakePHP will use this cache engine if it's available.
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
-  extension.  Wincache is similar to APC in features and performance, but 
+  extension.  Wincache is similar to APC in features and performance, but
   optimized for windows and IIS.
 * ``XcacheEngine`` Similar to APC, `Xcache <http://xcache.lighttpd.net/>`_
   is a PHP extension that provides similar features to APC.
 * ``MemcacheEngine`` Uses the `Memcache <http://php.net/memcache>`_
-  extension.  Memcache provides a very fast cache system that can be 
+  extension.  Memcache provides a very fast cache system that can be
   distributed across many servers, and provides atomic operations.
 
 Regardless of the CacheEngine you choose to use, your application interacts with
 :php:class:`Cache` in a consistent manner.  This means you can easily swap cache engines
-as your application grows. In addition to the :php:class:`Cache` class, the 
+as your application grows. In addition to the :php:class:`Cache` class, the
 :doc:`/core-libraries/helpers/cache` allows for full page caching, which
 can greatly improve performance as well.
 
@@ -44,7 +44,7 @@ Configuring Cache class
 
 Configuring the Cache class can be done anywhere, but generally
 you will want to configure Cache in ``app/Config/bootstrap.php``.  You
-can configure as many cache configurations as you need, and use any 
+can configure as many cache configurations as you need, and use any
 mixture of cache engines.  CakePHP uses two cache configurations internally,
 which are configured in ``app/Config/core.php``. If you are using APC or
 Memcache you should make sure to set unique keys for the core caches.  This will
@@ -64,18 +64,18 @@ Example::
 
     <?php
     Cache::config('short', array(
-        'engine' => 'File',  
-        'duration' => '+1 hours',  
-        'path' => CACHE,  
+        'engine' => 'File',
+        'duration' => '+1 hours',
+        'path' => CACHE,
         'prefix' => 'cake_short_'
     ));
 
-    // long  
-    Cache::config('long', array(  
-        'engine' => 'File',  
-        'duration' => '+1 week',  
-        'probability' => 100,  
-        'path' => CACHE . 'long' . DS,  
+    // long
+    Cache::config('long', array(
+        'engine' => 'File',
+        'duration' => '+1 week',
+        'probability' => 100,
+        'path' => CACHE . 'long' . DS,
     ));
 
 By placing the above code in your ``app/Config/bootstrap.php`` you will
@@ -103,7 +103,7 @@ dot syntax.::
     <?php
     Cache::config('custom', array(
         'engine' => 'CachePack.MyCustomCache',
-        ...
+        // ...
     ));
 
 .. note::
@@ -113,7 +113,7 @@ dot syntax.::
     they will not work correctly.
 
 Custom Cache engines must extend :php:class:`CacheEngine` which defines
-a number of abstract methods as well as provides a few initialization 
+a number of abstract methods as well as provides a few initialization
 methods.
 
 The required API for a CacheEngine is
@@ -175,9 +175,9 @@ results that infrequently change, or that are subject to heavy reads into the
 cache.  A perfect example of this are the results from :php:meth:`Model::find()`
 A method that uses Cache to store results could look like::
 
-    <?php 
+    <?php
     class Post extends AppModel {
-    
+
         public function newest() {
             $result = Cache::read('newest_posts', 'longterm');
             if (!$result) {
@@ -197,13 +197,13 @@ Using Cache to store counters
 =============================
 
 Counters for various things are easily stored in a cache.  For example a simple
-countdown for remaining 'slots' in a contest could be store in Cache.  The
+countdown for remaining 'slots' in a contest could be store in Cache. The
 Cache class exposes atomic ways to increment/decrement counter values in an easy
 way.  Atomic operations are important for these values as it reduces the risk of
 contention, and ability for two users to simultaneously lower the value by one
 resulting in an incorrect value.
 
-After setting an integer value you can manipulate it using 
+After setting an integer value you can manipulate it using
 :php:meth:`Cache::increment()` and :php:meth:`Cache::decrement()`::
 
     <?php
@@ -212,7 +212,7 @@ After setting an integer value you can manipulate it using
     // Later on
     Cache::decrement('initial_count');
 
-    //or 
+    // or
     Cache::increment('initial_count');
 
 .. note::
@@ -235,7 +235,7 @@ Cache API
     ``Cache::config()`` is used to create additional Cache
     configurations. These additional configurations can have different
     duration, engines, paths, or prefixes than your default cache
-    config. 
+    config.
 
 .. php:staticmethod:: read($key, $config = 'default')
 
@@ -273,10 +273,11 @@ Cache API
     can store any type of object and is ideal for storing results of
     model finds.::
 
-            if (($posts = Cache::read('posts')) === false) {
-                $posts = $this->Post->find('all');
-                Cache::write('posts', $posts);
-            }
+        <?php
+        if (($posts = Cache::read('posts')) === false) {
+            $posts = $this->Post->find('all');
+            Cache::write('posts', $posts);
+        }
 
     Using Cache::write() and Cache::read() to easily reduce the number
     of trips made to the database to fetch posts.
@@ -298,14 +299,14 @@ Cache API
         <?php
         Cache::set(array('duration' => '+30 days'));
         Cache::write('results', $data);
-    
+
         // Later on
-    
+
         Cache::set(array('duration' => '+30 days'));
         $results = Cache::read('results');
 
     If you find yourself repeatedly calling ``Cache::set()`` perhaps
-    you should create a new :php:func:`Cache::config()`. This will remove the 
+    you should create a new :php:func:`Cache::config()`. This will remove the
     need to call ``Cache::set()``.
 
 .. php:staticmethod:: increment($key, $offset = 1, $config = 'default')
