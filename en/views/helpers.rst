@@ -70,7 +70,7 @@ attribute values or modify behavior of a helper::
     class AwesomeHelper extends AppHelper {
         public function __construct(View $view, $settings = array()) {
             parent::__construct($view, $settings);
-            debug($options);
+            debug($settings);
         }
     }
 
