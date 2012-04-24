@@ -103,7 +103,7 @@ Configuration
 =============
 
 ``app/Config/bootstrap.php`` changed to add configuration related to Dispatcher
-filters. If your application rely on assets in themes or plugins being
+filters. If your application relies on assets in themes or plugins being
 dispatched, or if your are using the full page caching feature you need to copy
 the relevant configuration to your bootstrap file. Basically you only need to
 add the following lines::
