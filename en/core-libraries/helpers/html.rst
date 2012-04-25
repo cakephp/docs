@@ -810,20 +810,24 @@ Changing the tags output by HtmlHelper
 .. php:method:: loadConfig(mixed $configFile, string $path = null)
 
     The built in tag sets for :php:class:`HtmlHelper` are XHTML compliant,
-    however if you need to generate HTML for HTML4 you will need to
+    however if you need to generate HTML for HTML5 you will need to
     create and load a new tags config file containing the tags you'd
-    like to use. To change the tags used create ``app/Config/tags.php``
+    like to use. To change the tags used create ``app/Config/html5_tags.php``
     containing::
 
         <?php
-        $tags = array(
-            'metalink' => '<link href="%s"%s >',
-            'input' => '<input name="%s" %s >',
+        $config = array('tags' => array(
+            'css' => '<link rel="%s" href="%s" %s>',
+            'style' => '<style%s>%s</style>',
+            'charset' => '<meta charset="%s">',
+            'javascriptblock' => '<script%s>%s</script>',
+            'javascriptstart' => '<script>',
+            'javascriptlink' => '<script src="%s"%s></script>',
             // ...
-        );
+        ));
 
     You can then load this tag set by calling
-    ``$html->loadConfig('tags');``
+    ``$this->Html->loadConfig('html5_tags');``
 
 Creating breadcrumb trails with HtmlHelper
 ==========================================
