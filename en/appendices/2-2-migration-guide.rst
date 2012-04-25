@@ -44,6 +44,11 @@ Error Handling
 - The handler configured in ``Error.handler`` and ``Error.consoleHandler`` will
   receive fatal error codes (ie. ``E_ERROR``, ``E_PARSE``, ``E_USER_ERROR``).
 
+Exceptions
+----------
+
+- The :php:class:`NotImplementedException` was added.
+
 Network
 =======
 
