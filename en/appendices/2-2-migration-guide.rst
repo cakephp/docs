@@ -98,7 +98,7 @@ FormHelper
   to the empty option on ``select()``.
 
 TimeHelper
---------
+----------
 
 Since 2.1 as TimeHelper uses CakeTime class, for all its revelent methods too the ``$userOffset`` parameter
 has been replaced with ``$timezone`` parameter.
