@@ -50,12 +50,16 @@ the number of `commit` and `rollback` match with begin's.
     }
     $dataSource->commit();
 
-This will perform the nested transaction if your database supports it. The methods
-will always return true when in transaction mode and the nested is not supported.
+This will perform the real nested transaction if your database supports it and
+it is enabled in the datasource. The methods will always return true when in
+transaction mode and the nested is not supported or disabled.
 
 If you want to use multiple begin's but not use the nested transaction from database,
-disable it using ``$dataSource->nestedTransaction = false;``. It will use only
+disable it using ``$dataSource->useNestedTransactions = false;``. It will use only
 the global transaction.
+
+The real nested transaction is disabled by default. Enable it using
+``$dataSource->useNestedTransactions = true;``.
 
 .. meta::
     :title lang=en: Transactions
