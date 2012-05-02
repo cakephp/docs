@@ -28,6 +28,8 @@ There are a few keys available for configuring exceptions::
   This class needs to implement a ``render()`` method.
 * ``log`` - boolean - When true, exceptions + their stack traces will be logged 
   to CakeLog.
+* ``consoleHandler`` - callback - The callback used to handle exceptions, in a
+  console context.  If undefined, CakePHP's default handler will be used.
 
 Exception rendering by default displays an HTML page, you can customize either the
 handler or the renderer by changing the settings.  Changing the handler, allows
@@ -35,6 +37,9 @@ you to take full control over the exception handling process, while changing
 the renderer allows you to easily change the output type/contents, as well as
 add in application specific exception handling.
 
+
+.. versionadded:: 2.2
+    The ``Exception.consoleHandler`` option was added in 2.2.
 
 Exception classes
 =================
@@ -298,6 +303,10 @@ exceptions for HTTP methods
 .. php:exception:: InternalErrorException
 
     Used for doing a 500 Internal Server Error.
+
+.. php:exception:: NotImplementedException
+
+    Used for doing a 501 Not Implemented Errors.
 
 You can throw these exceptions from you controllers to indicate failure states,
 or HTTP errors. An example use of the HTTP exceptions could be rendering 404

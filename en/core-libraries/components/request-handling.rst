@@ -82,15 +82,20 @@ Other request 'type' detection methods include:
     if the client accepts WAP content. The supported Mobile User Agent
     strings are:
 
-    -  iPhone
-    -  MIDP
-    -  AvantGo
+    -  Android
+    -  AvantGo 
     -  BlackBerry
-    -  J2ME
-    -  Opera Mini
     -  DoCoMo
+    -  Fennec
+    -  iPad
+    -  iPhone
+    -  iPod
+    -  J2ME
+    -  MIDP
     -  NetFront
     -  Nokia
+    -  Opera Mini
+    -  Opera Mobi
     -  PalmOS
     -  PalmSource
     -  portalmmm
@@ -99,7 +104,9 @@ Other request 'type' detection methods include:
     -  SonyEricsson
     -  Symbian
     -  UP.Browser
+    -  webOS
     -  Windows CE
+    -  Windows Phone OS
     -  Xiino
 
 .. php:method:: isWap()

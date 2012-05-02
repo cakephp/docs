@@ -576,7 +576,30 @@ your ``AppModel``, which should fix pagination count:
         }
 
     }
+    ?>
 
+
+.. versionchanged:: 2.2
+
+You no longer need to override _findCount for fixing incorrect count results.
+The ``'before'`` state of your custom finder will now be called again with
+$query['operation'] = 'count'. The returned $query will be used in ``_findCount()``
+If needed you can distinguish by checking for ``'operation'`` key
+and return a different ``$query``::
+
+    protected function _findAvailable($state, $query, $results = array()) {
+        if ($state == 'before') {
+            $query['conditions']['Article.published'] = true;
+            if (!empty($query['operation']) && $query['operation'] == 'count') {
+                return $query;
+            }
+            $query['joins'] = array(
+                //array of required joins
+            );
+            return $query;
+        }
+        return $results;
+    }
 
 Magic Find Types
 ================

@@ -31,6 +31,10 @@ to implement your own caching systems. The built-in caching engines are:
 * ``MemcacheEngine`` Uses the `Memcache <http://php.net/memcache>`_
   extension.  Memcache provides a very fast cache system that can be
   distributed across many servers, and provides atomic operations.
+* ``RedisEngine`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
+  extension. Redis provides a fast and persistent cache system similar to
+  memcached, also provides atomic operations.
+
 
 Regardless of the CacheEngine you choose to use, your application interacts with
 :php:class:`Cache` in a consistent manner.  This means you can easily swap cache engines
@@ -150,6 +154,11 @@ The required API for a CacheEngine is
     Delete all keys from the cache.  If $check is true, you should
     validate that each value is actually expired.
 
+.. php:method:: clearGroup($group, $config = 'default')
+
+    :return: Boolean true on success.
+    Delete all keys from the cache belonging to the same group.
+
 .. php:method:: decrement($key, $offset = 1)
 
     :return: Boolean true on success.
@@ -166,6 +175,7 @@ The required API for a CacheEngine is
 
     Not required, but used to do clean up when resources expire.
     FileEngine uses this to delete files containing expired content.
+
 
 Using Cache to store common query results
 =========================================
@@ -218,8 +228,47 @@ After setting an integer value you can manipulate it using
 .. note::
 
     Incrementing and decrementing do not work with FileEngine. You should use
-    APC or Memcache instead.
+    APC, Redis or Memcache instead.
 
+
+Using groups
+============
+
+.. versionadded:: 2.2
+
+Sometimes you will want to mark multiple cache entries to belong to certain
+group or namespace. This is a common requirement for mass-invalidating keys
+whenever some information changes that is shared among all entries in the same
+group. This is possible by delcaring the groups in cache configuration::
+
+    <?php
+    Cache::config('site_home', array(
+        'engine' => 'Redis',
+        'duration' => '+999 days',
+        'groups' => array(comment', 'post')
+    ));
+
+Let's say you want to store the html generated for your homepage in cache, but
+would also want to automatically invalidate this cache everytime a comment or
+post is added to your database. By adding the groups ``comment`` and ``post`` we
+have efeectively tagged any key stored into this cache configuration with both
+group names.
+
+For instance whenever a new post is added, we could tell the Cache engine to
+remove all entries associated to the ``post`` group::
+
+    <?php
+    // Model/Post.php
+
+    public function afteSave($created) {
+        if ($created) {
+            Cache::clearGroup('post', 'site_home');
+        }
+    }
+
+Groups are shared across all cache configs using the same engine and same
+prefix. If you are using groups and what to take advantage of gruop deletion,
+choose a common prefix for all your configs.
 
 Cache API
 =========
