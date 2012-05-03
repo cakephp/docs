@@ -240,7 +240,7 @@ Using groups
 Sometimes you will want to mark multiple cache entries to belong to certain
 group or namespace. This is a common requirement for mass-invalidating keys
 whenever some information changes that is shared among all entries in the same
-group. This is possible by delcaring the groups in cache configuration::
+group. This is possible by declaring the groups in cache configuration::
 
     <?php
     Cache::config('site_home', array(
@@ -250,9 +250,9 @@ group. This is possible by delcaring the groups in cache configuration::
     ));
 
 Let's say you want to store the html generated for your homepage in cache, but
-would also want to automatically invalidate this cache everytime a comment or
+would also want to automatically invalidate this cache every time a comment or
 post is added to your database. By adding the groups ``comment`` and ``post`` we
-have efeectively tagged any key stored into this cache configuration with both
+have effectively tagged any key stored into this cache configuration with both
 group names.
 
 For instance whenever a new post is added, we could tell the Cache engine to
@@ -261,14 +261,14 @@ remove all entries associated to the ``post`` group::
     <?php
     // Model/Post.php
 
-    public function afteSave($created) {
+    public function afterSave($created) {
         if ($created) {
             Cache::clearGroup('post', 'site_home');
         }
     }
 
 Groups are shared across all cache configs using the same engine and same
-prefix. If you are using groups and what to take advantage of gruop deletion,
+prefix. If you are using groups and what to take advantage of group deletion,
 choose a common prefix for all your configs.
 
 Cache API

@@ -42,7 +42,7 @@ Configuration
 - A new config parameter 'Config.timezone' is available which you can set to user's timezone string.
     eg. You can do ``Configure::write('Config.timezone', 'Europe/Paris')``.
     If a method of ``CakeTime`` class is called with ``$timezone`` parameter as null and 'Config.timezone' is set,
-    then thevalue of 'Config.timezone' will be used. This feature allows you to set user's timezone just once
+    then the value of 'Config.timezone' will be used. This feature allows you to set user's timezone just once
     instead of passing it each time in function calls.
 
 Dispatcher Filters
@@ -60,7 +60,7 @@ Caching
 Redis Engine
 ------------
 
-A new cahing engine was added using the `phpredis extension <https://github.com/nicolasff/phpredis>`_
+A new caching engine was added using the `phpredis extension <https://github.com/nicolasff/phpredis>`_
 it is configured similarly to the Memcache engine. 
 
 Cache groups
@@ -81,4 +81,4 @@ You can have as many groups as you like, but keep in mind they cannot be
 dynamically modified.
 
 A new ``Cache`` class method was added: ``clearGroup``. It takes the group name
-and deletes all entries labled with the same string.
+and deletes all entries labeled with the same string.

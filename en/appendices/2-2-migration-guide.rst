@@ -103,14 +103,14 @@ FormHelper
 ----------
 
 - FormHelper now better handles adding required classes to inputs.  It now
-  honours the ``on`` key.
+  honors the ``on`` key.
 - :php:meth:`FormHelper::radio()` now supports an ``empty`` which works similar
   to the empty option on ``select()``.
 
 TimeHelper
 ----------
 
-Since 2.1 as TimeHelper uses CakeTime class, for all its revelent methods too the ``$userOffset`` parameter
+Since 2.1, TimeHelper uses the CakeTime class for all its relevant methods. The ``$userOffset`` parameter
 has been replaced with ``$timezone`` parameter.
 
 

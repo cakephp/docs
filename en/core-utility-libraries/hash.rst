@@ -18,7 +18,7 @@ Hash path syntax
 
 The path syntax described below is used by all the methods in ``Hash``. Not all
 parts of the path syntax are available in all methods.  A path expression is
-made of any number of tokens.  Tokens are composed of two groups.  Expresssions,
+made of any number of tokens.  Tokens are composed of two groups.  Expressions,
 are used to traverse the array data, while matchers are used to qualify
 elements.  You apply matchers to expression elements.
 
@@ -812,7 +812,7 @@ elements you can use attribute matching with methods like ``extract()``.
 
     **Options:**
 
-    - ``children`` The key name to use in the resultset for children. Defaults
+    - ``children`` The key name to use in the result set for children. Defaults
       to 'children'.
     - ``idPath`` The path to a key that identifies each entry. Should be
       compatible with :php:meth:`Hash::extract()`. Defaults to ``{n}.$alias.id``

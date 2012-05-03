@@ -5,7 +5,7 @@ Dispatcher Filters
 
 There are several reasons to want a piece of code to be run before any
 controller code is executed or right before the response is sent to the client,
-such as response caching, header tunning, special authentication or just to
+such as response caching, header tuning, special authentication or just to
 provide access to a mission-critical 
 API response in lesser time than a complete
 request dispatching cycle would take.
@@ -69,7 +69,7 @@ gives the ability to PHP 5.3 users to attach anonymous functions as filters::
 
 The ``on`` key only takes ``before`` and ``after`` as valid values, and evidently
 means whether the filter should run before or after any controller code is
-executed. Additionaly to defining filters with the ``callable`` key, you also
+executed. Additionally to defining filters with the ``callable`` key, you also
 get the chance to define a priority for your filters, if none is specified then
 a default of ``10`` is selected for you::
 
@@ -178,7 +178,7 @@ page, in our case it would be anything served from the ``PagesController``::
 
 This filter will send a expiration header to 1 day in the future for
 all responses produced by the pages controller. You could of course do the same
-in the contrller, this is just an example of what could be done with filters.
+in the controller, this is just an example of what could be done with filters.
 For instance, instead of altering the response you could cache it using the
 :php:class:`Cache` class and serve the response from the ``beforeDispatch``
 callback.
@@ -198,9 +198,9 @@ few milliseconds for this mission-critical API endpoint::
         }
         App::uses('ClassRegistry', Utility);
         $postModel = ClassRegistry::init('Post');
-        $event->data['reponse']->body(json_encode($postModel->find('recent')));
+        $event->data['response']->body(json_encode($postModel->find('recent')));
         $event->stopPropagation();
-        return $event->data['reponse'];
+        return $event->data['response'];
     };
 
     Configure::write('Dispatcher.filters', array(
@@ -223,4 +223,4 @@ usually a more accurate choice for adding any request handling code to your app.
 .. meta::
     :title lang=en: Dispatcher Filters
     :description lang=en: Dispatcher filters are a middleware layer for CakePHP allowing to alter the request or response before it is sent
-    :keywords lang=en: middelware, filters, dispatcher, request, response, rack, application stack, events, beforeDispatch, afterDispatch, router
+    :keywords lang=en: middleware, filters, dispatcher, request, response, rack, application stack, events, beforeDispatch, afterDispatch, router

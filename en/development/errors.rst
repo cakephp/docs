@@ -96,7 +96,7 @@ errors, and that if you need custom error handling, you probably also want to co
 Changing fatal error behavior
 =============================
 
-Since CakePHP 2.2 the ``Error.handler`` will recieve the fatal error codes as well.
+Since CakePHP 2.2 the ``Error.handler`` will receive the fatal error codes as well.
 If you do not want to show the cake error page, you can override it like::
 
     <?php
