@@ -151,7 +151,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
            RewriteEngine On
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+           RewriteRule ^(.*)$ index.php?/$1 [QSA,L]
        </IfModule>
 
    If your cakephp site still has problems with mod\_rewrite you might 
