@@ -154,9 +154,10 @@ The required API for a CacheEngine is
     Delete all keys from the cache.  If $check is true, you should
     validate that each value is actually expired.
 
-.. php:method:: clearGroup($group, $config = 'default')
+.. php:method:: clearGroup($group)
 
     :return: Boolean true on success.
+
     Delete all keys from the cache belonging to the same group.
 
 .. php:method:: decrement($key, $offset = 1)
@@ -374,6 +375,12 @@ Cache API
     Memcache and Wincache, the cache configuration's prefix is used to remove
     cache entries.  Make sure that different cache configurations have different
     prefixes.
+
+.. php:method:: clearGroup($group, $config = 'default')
+
+    :return: Boolean true on success.
+
+    Delete all keys from the cache belonging to the same group.
 
 .. php:staticmethod:: gc($config)
 

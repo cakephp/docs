@@ -878,13 +878,6 @@ elements you can use attribute matching with methods like ``extract()``.
             )
             */
 
-.. php:staticmethod:: nest($data, $options = array())
-
-		    :rtype: array
-
-		    Takes in a flat array and returns a nested array::
-
-
 
 .. meta::
     :title lang=en: Hash
