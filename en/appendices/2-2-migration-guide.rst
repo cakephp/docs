@@ -49,6 +49,16 @@ Exceptions
 
 - The :php:class:`NotImplementedException` was added.
 
+Core
+====
+
+Configure
+---------
+
+- :php:meth:`Configure::dump()` was added.  It is used to persist configuration
+  data in durable storage like files.  Both :php:class:`PhpReader` and
+  :php:class:`IniReader` work with it.
+
 Network
 =======
 

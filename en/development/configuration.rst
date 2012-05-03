@@ -156,7 +156,7 @@ configuration registry class.
 CakePHP Core Configuration
 --------------------------
 
-The Configure class is used to manage a set of core CakePHP
+The :php:class:`Configure` class is used to manage a set of core CakePHP
 configuration variables. These variables can be found in
 ``app/Config/core.php``. Below is a description of each variable and
 how it affects your CakePHP application.
@@ -322,7 +322,7 @@ values by defining variable or constants in some files. Doing so
 forces you to include that configuration file every time you needed
 to use those values.
 
-CakePHP’s new Configure class can be used to store and retrieve
+CakePHP’s Configure class can be used to store and retrieve
 application or runtime specific values. Be careful, this class
 allows you to store anything in it, then use it in any other part
 of your code: a sure temptation to break the MVC pattern CakePHP
@@ -418,17 +418,15 @@ anywhere within your application, in a static context::
 
     Drops a connected reader object.
 
-.. _loading-configuration-files:
+Reading and writing configuration files
+=======================================
 
-Loading configuration files
-===========================
-
-CakePHP comes with two built-in configuration file readers.  
-:php:class:`PhpReader` is able to read PHP config files, in the same 
+CakePHP comes with two built-in configuration file readers.
+:php:class:`PhpReader` is able to read PHP config files, in the same
 format that Configure has historically read.  :php:class:`IniReader` is
-able to read ini config files.  See the `PHP documentation <http://php.net/parse_ini_file>`_ 
-for more information on the specifics of ini files. 
-To use a core config reader, you'll need to attach it to Configure 
+able to read ini config files.  See the `PHP documentation <http://php.net/parse_ini_file>`_
+for more information on the specifics of ini files.
+To use a core config reader, you'll need to attach it to Configure
 using :php:meth:`Configure::config()`::
 
     <?php
@@ -440,9 +438,9 @@ using :php:meth:`Configure::config()`::
     Configure::config('default', new PhpReader('/path/to/your/config/files/'));
 
 You can have multiple readers attached to Configure, each reading
-different kinds of configuration files, or reading from 
-different types of sources.  You can interact with attached readers 
-using a few other methods on Configure. To see check which reader 
+different kinds of configuration files, or reading from
+different types of sources.  You can interact with attached readers
+using a few other methods on Configure. To see check which reader
 aliases are attached you can use :php:meth:`Configure::configured()`::
 
     <?php
@@ -455,6 +453,12 @@ aliases are attached you can use :php:meth:`Configure::configured()`::
 You can also remove attached readers.  ``Configure::drop('default')``
 would remove the default reader alias. Any future attempts to load configuration 
 files with that reader would fail.
+
+
+.. _loading-configuration-files:
+
+Loading configuration files
+---------------------------
 
 .. php:staticmethod:: load($key, $config = 'default', $merge = true)
 
@@ -473,6 +477,39 @@ Loaded configuration files merge their data with the existing runtime configurat
 in Configure.  This allows you to overwrite and add new values 
 into the existing runtime configuration. By setting ``$merge`` to true, values
 will not ever overwrite the existing configuration.
+
+Creating or modifying configuration files
+-----------------------------------------
+
+.. php:staticmethod:: dump($key, $config = 'default', $keys = array())
+
+    :param string $key: The name of the file/stored configuration to be created.
+    :param string $config: The name of the reader to store the data with.
+    :param array $keys: The list of top-level keys to save.  Defaults to all
+        keys.
+
+Dumps all or some of the data in Configure into a file or storage system
+supported by a config reader. The serialization format
+is decided by the config reader attached as $config.  For example, if the
+'default' adapter is a :php:class:`PhpReader`, the generated file will be a PHP 
+configuration file loadable by the :php:class:`PhpReader`
+
+Given that the 'default' reader is an instance of PhpReader.
+Save all data in Configure to the file `my_config.php`::
+
+    <?php
+    Configure::dump('my_config.php', 'default');
+
+Save only the error handling configuration::
+
+    <?php
+    Configure::dump('error.php', 'default', array('Error', 'Exception');
+
+``Configure::dump()`` can be used to either modify or overwrite
+configuration files that are readable with :php:meth:`Configure::load()`
+
+.. versionadded:: 2.2
+    ``Configure::dump()`` was added in 2.2.
 
 Storing runtime configuration
 -----------------------------
