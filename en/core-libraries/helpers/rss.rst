@@ -92,7 +92,7 @@ An Rss layout is very simple, put the following contents in
         $channelData['title'] = $title_for_layout;
     } 
     $channel = $this->Rss->channel(array(), $channelData, $content_for_layout);
-    echo $this->Rss->document($documentData,$channel);
+    echo $this->Rss->document($documentData, $channel);
 
 It doesn't look like much but thanks to the power in the ``RssHelper``
 it's doing a lot of lifting for us. We haven't set ``$documentData`` or
@@ -117,9 +117,6 @@ Controller::set() method. Here though we are passing the channel's
 metadata back to the layout::
 
     <?php
-    $this->set('documentData', array(
-        'xmlns:dc' => 'http://purl.org/dc/elements/1.1/'));
-
     $this->set('channelData', array(
         'title' => __("Most Recent Posts"),
         'link' => $this->Html->url('/', true),
@@ -179,7 +176,6 @@ associative array into an element for each key value pair.
             'link' => $postLink,
             'guid' => array('url' => $postLink, 'isPermaLink' => 'true'),
             'description' => $bodyText,
-            'dc:creator' => $post['Post']['author'],
             'pubDate' => $post['Post']['created']
         ));
     }
