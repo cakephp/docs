@@ -316,7 +316,7 @@ nginx es un servidor web que está ganando mucha popularidad. Igual que Lighttpd
             include /etc/nginx/fcgi.conf;
             fastcgi_pass    127.0.0.1:10005;
             fastcgi_index   index.php;
-            fastcgi_param SCRIPT_FILENAME /var/www/example.com/public/app/webroot$fastcgi_script_name;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         }
     }
 
