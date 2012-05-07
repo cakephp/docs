@@ -1,4 +1,3 @@
-/* @override http://localhost/cake_docs/build/html/en/_static/csf-navbar.css */
 /**
  * Adapted Reset CSS Reloaded
  * ------------------------------------
@@ -18,7 +17,7 @@
 	font-weight: inherit;
 	font-style: inherit; 
 	font-size: 100%;
-	font-family: Tahoma, sans-serif;
+	font-family: "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
 	vertical-align: baseline;
 	color: #000000;
 }
@@ -26,7 +25,7 @@
 #cakephp-global-navigation :focus {
 	outline: 0;
 }
-#cakephp-global-navigation ol, 
+#cakephp-global-navigation ol,
 #cakephp-global-navigation ul {
 	list-style: none;
 }
