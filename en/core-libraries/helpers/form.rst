@@ -731,6 +731,12 @@ common options shared by all input methods are as follows:
     Date and datetime fields' default values can be set by using the
     'selected' key.
 
+  .. note::
+
+    Beware of using false to assign a default value. A false value is used to
+    disable/exclude options of an input field, so ``'default' => false`` would
+    not set any value at all. Instead use ``'default' => 0``.
+
 In addition to the above options, you can mixin any html attribute you wish to
 use.  Any non-special option name will be treated as an HTML attribute, and
 applied to the generated HTML input element.
