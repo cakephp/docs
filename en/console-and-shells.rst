@@ -116,9 +116,18 @@ cake executable to your system path.
 
 #. Reload the bash configuration or open a new terminal, and ``cake`` should work anywhere.
 
-.. todo::
+If you are on Windows Vista or 7, you should follow the steps below.
 
-    Add how to setup PATH for windows systems.
+#. Locate where your cakephp install and cake executable are.  For example
+   ``C:\xampp\htdocs\cakephp\lib\Cake\Console``
+#. Open System Properties window from My Computer. You want to try the shortcut Windows Key + Pause or Windows Key + Break. Or, from the Desktop, right-click My Computer, click Properties then click Advanced System Settings link in the left column
+#. Go under Advanced tab and click on Environment Variables button
+#. In the System Variables portion, reach Path variable and double-click on it to Edit
+#. Add the ``cake`` install path string followed by a semi colon. Result example::
+
+    %SystemRoot%\system32;%SystemRoot%;C:\xampp\htdocs\cakephp\Cake\lib\Console;
+
+#. Click Ok and ``cake`` should work anywhere.
 
 Creating a shell
 ================
