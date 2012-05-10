@@ -4,7 +4,7 @@ Views
 *Views* (ou Visões) são o **V** do MVC. *Views* são 
 responsáveis por gerar a saída de dados específica solicitada por
 uma requisição. Geralmente esta saída é apresentada em forma de
-HTML, XML ou JSON, mas disponibilizar arquivos através de *streaming*
+HTML, XML ou JSON. No entanto, disponibilizar arquivos através de *streaming*
 (fluxo de informação, geralmente multimídia, através de pacotes) ou
 criar PDFs que podem ser baixados também são de responsabilidade
 da Camada *View*.
