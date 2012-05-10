@@ -14,7 +14,7 @@ cenários mais comuns de renderização:
 
 - Para criar *webservices* em XML ou JSON, você pode usar o :doc:`views/json-and-xml-views`
 - Para prover arquivos protegidos ou arquivos criados dinamicamente, você pode usar :doc:`views/media-view`
-- Para criar múltiplos temas para as visões, você pode usar: doc: `views` / temas
+- Para criar múltiplos temas para as visões, você pode usar :doc:`views/themes`
 
 View Templates
 ==============
