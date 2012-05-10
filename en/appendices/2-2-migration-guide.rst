@@ -59,6 +59,17 @@ Configure
   data in durable storage like files.  Both :php:class:`PhpReader` and
   :php:class:`IniReader` work with it.
 
+
+Controller
+==========
+
+AuthComponent
+-------------
+
+- The options for adapters defined in :php:attr:`AuthComponent::$authenticate`
+  now accepts a ``contain`` option. This is used to set containable options for
+  when user records are loaded.
+
 Network
 =======
 
