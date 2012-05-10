@@ -9,13 +9,12 @@ HTML, XML ou JSON, mas disponibilizar arquivos através de *streaming*
 criar PDFs que podem ser baixados também são de responsabilidade
 da Camada *View*.
 
-CakePHP comes with a few built-in View classes for handling the most
-common rendering scenarios:
+O CakePHP traz incluso várias classes do tipo *View* para lidar com os
+cenários mais comuns de renderização:
 
-- To create XML or JSON webservices you can use the :doc:`views/json-and-xml-views`.
-- To serve protected files, or dynamically generated files, you can use
-  :doc:`views/media-view`
-- To create multiple themed views, you can use :doc:`views/themes`
+- Para criar *webservices* em XML ou JSON, você pode usar o :doc:`views/json-and-xml-views`
+- Para prover arquivos protegidos ou arquivos criados dinamicamente, você pode usar :doc:`views/media-view`
+- Para criar múltiplos temas para as visões, você pode usar: doc: `views` / temas
 
 View Templates
 ==============
