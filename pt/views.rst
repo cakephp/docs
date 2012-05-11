@@ -25,13 +25,13 @@ navegadores, mas você pode também precisar prover dados AMF para um
 objeto em Flash,responder a uma aplicação remota via SOAP ou gerar
 um arquivo CSV para um usuário.
 
-By default CakePHP view files are written in plain PHP and have a default
-extension of .ctp (CakePHP Template). These files contain all the
-presentational logic needed to get the data it received from the
-controller in a format that is ready for the audience you’re
-serving to. If you'd prefer using a templating language like
-Twig, or Smarty, a subclass of View will bridge your templating
-language and CakePHP
+Por padrão, em CakePHP os arquivos do tipo *view* são escritos em
+PHP comum e possuem a extensão .ctp (CakePHP *Template*). Estes
+arquivos contém toda a lógica de apresentação necessária para
+transformar os dados recebidos do *controller* em um formato pronto
+o público. Caso você prefira usar uma linguagem de *template* como
+Twig ou Smarty, uma subclasse da *View* irá fazer uma ponte entre
+sua linguagem de *template* e o CakePHP.
 
 View files are stored in ``/app/View/``, in a folder named after the
 controller that uses the files, and named after the action it
