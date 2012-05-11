@@ -6,7 +6,9 @@ Cake Developers will use the following coding standards.
 It is recommended that others developing CakeIngredients follow the same
 standards.
 
-You can use the `CakePHP Code Sniffer <https://github.com/cakephp/cakephp-codesniffer>`_ to check that your code follows required standards.
+You can use the `CakePHP Code Sniffer
+<https://github.com/cakephp/cakephp-codesniffer>`_ to check that your code
+follows required standards.
 
 Adding new features
 ===================
