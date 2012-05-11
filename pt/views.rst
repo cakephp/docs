@@ -39,22 +39,26 @@ de acordo com a ação correspondente. Por exemplo, a ação “view()”
 do *controller* Products será normalmente encontrada em
 ``/app/View/Products/view.ctp``.
 
-The view layer in CakePHP can be made up of a number of different
-parts. Each part has different uses, and will be covered in this
-chapter:
+A camada *view* no CakePHP pode ser composta por uma quantidade de
+partes diferentes. Cada parte tem diferentes usos e será coberta
+neste capítulo:
 
-- **views**: Views are the part of the page that is unique to the
-  action being run. They form the meat of your application's response.
-- **elements**: smaller, reusable bits of view code. Elements are
-  usually rendered inside of views.
-- **layouts**: view files that contain presentational code that is
-  found wrapping many interfaces in your application. Most views are
-  rendered inside of a layout.
-- **helpers**: these classes encapsulate view logic that is needed
-  in many places in the view layer. Among other things, helpers in
-  CakePHP can help you build forms, build AJAX functionality,
-  paginate model data, or serve RSS feeds.
+- **views**: *views* são a parte da página que é única para a
+*action* em execução. Elas compõem a parte crucial da resposta da
+aplicação. 
 
+- **elements**: pedaços de código pequenos e reutilizáveis.
+  *Elements* geralmente são renderizados dentro de *views*.
+
+- **layouts**: arquivos da *view* contendo código de apresentação
+  que envolve várias interfaces da aplicação. A maior parte dos
+  arquivos *views* é renderizada dentro de um *layout*.
+
+- **helpers**: essas classes encapsulam lógica da *view* que seja
+  necessária em vários lugares na camada *view*. *Helpers* no CakePHP
+  podem ajudá-lo a construir formulários, construir funcionalidade
+  AJAX, paginar dados da *model*, prover *feeds* RSS, dentre outras
+  coisas.
 
 .. _extending-views:
 
