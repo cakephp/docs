@@ -33,10 +33,10 @@ o público. Caso você prefira usar uma linguagem de *template* como
 Twig ou Smarty, uma subclasse da *View* irá fazer uma ponte entre
 sua linguagem de *template* e o CakePHP.
 
-View files are stored in ``/app/View/``, in a folder named after the
-controller that uses the files, and named after the action it
-corresponds to. For example, the view file for the Products
-controller's "view()" action, would normally be found in
+Arquivos do tipo *view* são guardados em ``/app/View/``, dentro do
+diretório com o nome do *controller* que usa os arquivos e nomeado
+de acordo com a ação correspondente. Por exemplo, a ação “view()”
+do *controller* Products será normalmente encontrada em
 ``/app/View/Products/view.ctp``.
 
 The view layer in CakePHP can be made up of a number of different
