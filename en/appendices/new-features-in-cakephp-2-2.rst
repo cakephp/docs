@@ -82,3 +82,15 @@ dynamically modified.
 
 A new ``Cache`` class method was added: ``clearGroup``. It takes the group name
 and deletes all entries labeled with the same string.
+
+Logging
+-------
+
+- The :php:class:`CakeLog` class now accepts the same log levels as defined in `RFC 5424 <http://tools.ietf.org/html/rfc5424>`_.  Several conveniences methods have also been added:
+
+    * :php:meth:`CakeLog::emergency($message, $scope = array()`
+    * :php:meth:`CakeLog::alert($message, $scope = array()`
+
+- A third argument `$scope` has been added to `CakeLog::write`.  See :ref:`logging-scopes`.
+
+- A new log engine: :php:class:`ConsoleLog` has been added.

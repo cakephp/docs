@@ -170,6 +170,37 @@ the log is written to, a ``default`` stream using the core
 ``FileLog`` class will be configured to output into
 ``app/tmp/logs/`` just as CakeLog did in previous versions.
 
+.. _logging-scopes:
+
+Logging Scopes
+==============
+
+.. versionadded:: 2.2
+
+You could configure scopes for your logfiles.  For example::
+
+    <?php
+    // configure tmp/logs/shops.log to receive all types (log levels), but only
+    // those with `orders` and `payments` scope
+    CakeLog::config('shops', array(
+        'engine' => 'FileLog',
+        'types' => array(),
+        'scopes' => array('orders', 'payments'),
+        'file' => 'shops.log',
+    ));
+
+    // configure tmp/logs/payments.log to receive all types, but only
+    // those with `payments` scope
+    CakeLog::config('shops', array(
+        'engine' => 'FileLog',
+        'types' => array(),
+        'scopes' => array('payments'),
+        'file' => 'payments.log',
+    ));
+
+    CakeLog::warning('this gets written only to shops.log', 'orders');
+    CakeLog::warning('this gets written to both shops.log and payments.log', 'payments');
+
 CakeLog API
 ===========
 
@@ -198,13 +229,90 @@ CakeLog API
     :param string $name: Name of the logger you wish to no longer receive
         messages.
 
-.. php:staticmethod:: write($log, $message)
+.. php:staticmethod:: write($log, $message, $scope = array())
 
     Write a message into all the configured loggers.
     $log indicates the type of log message being created.
     $message is the message of the log entry being written to.
 
+    .. versionchanged:: 2.2 $scope was added
 
+.. versionadded:: 2.2 Log levels and scopes
+
+.. php:staticmethod:: levels()
+
+Call this method without arguments, eg: `CakeLog::levels()` to obtain current
+level configuration.
+
+To append additional level 'user0' and 'user1' to to default log levels::
+
+    <?php
+    CakeLog::levels(array('user0', 'user1')) // or
+    CakeLog::levels(array('user0', 'user1'), true)
+
+will result in::
+
+    <?php
+    array(
+        0 => 'emergency',
+        1 => 'alert',
+        ...
+        8 => 'user0',
+        9 => 'user1',
+    );
+
+To set/replace existing configuration, pass an array with the second argument
+set to false::
+
+    <?php
+    CakeLog::levels(array('user0', 'user1'), false);
+
+will result in::
+
+    <?php
+    array(
+        0 => 'user0',
+        1 => 'user1',
+    );
+
+.. php:staticmethod:: defaultLevels()
+
+    Resets log levels to the original value
+
+    :returns: An array of the default log levels values
+
+.. php:staticmethod:: enabled($streamName)
+
+    Checks wether $streamName is enable
+
+    :returns: boolean
+
+.. php:staticmethod:: enable($streamName)
+
+    Enable stream $streamName
+
+.. php:staticmethod:: disable($streamName)
+
+    Disable stream $streamName
+
+.. php:staticmethod:: stream($streamName)
+
+    Gets $streamName from the active streams
+
+Convenience methods
+-------------------
+
+.. versionadded:: 2.2
+
+The following convenience methods were added to log `$message` with the
+appropriate log level.
+
+.. php:staticmethod:: emergency($message, $scope = array())
+.. php:staticmethod:: alert($message, $scope = array())
+.. php:staticmethod:: critical($message, $scope = array())
+.. php:staticmethod:: notice($message, $scope = array())
+.. php:staticmethod:: debug($message, $scope = array())
+.. php:staticmethod:: info($message, $scope = array())
 
 .. meta::
     :title lang=en: Logging

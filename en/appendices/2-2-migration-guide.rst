@@ -148,3 +148,31 @@ add the following lines::
 
 Check the full documentation for this new features in
 :doc:`/development/dispatch-filters`
+
+Logging
+=======
+
+Changes in :php:class:`CakeLog` now requires:
+
+- Modify ``app/Config/core.php`` to change the value of :php:const:`LOG_ERROR` to :php:const:`LOG_ERR`::
+
+    <?php
+    define('LOG_ERROR', LOG_ERR);
+
+- Modify ``app/Config/bootstrap.php`` to add default logging configuration::
+
+    <?php
+    App::uses('CakeLog', 'Log');
+    CakeLog::config('debug', array(
+        'engine' => 'FileLog',
+        'types' => array('notice', 'info', 'debug'),
+        'file' => 'debug',
+    ));
+    CakeLog::config('error', array(
+        'engine' => 'FileLog',
+        'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
+        'file' => 'error',
+    ));
+
+Check the full documentation for this new features in
+:doc:`/core-libraries/logging`
