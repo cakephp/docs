@@ -200,24 +200,24 @@ nas quais você queira mostrar cabeçalhos e outras marcações condicionalmente
     </div>
     <?php endif; ?>
 
-Using blocks for script and CSS files
--------------------------------------
+Utilizando blocos para arquivos de script e CSS
+-----------------------------------------------
 
 .. versionadded:: 2.1
 
-Blocks replace the deprecated ``$scripts_for_layout`` layout variable.  Instead
-you should use blocks.  The :php:class:`HtmlHelper` ties into view blocks, and its
-:php:meth:`~HtmlHelper::script()`, :php:meth:`~HtmlHelper::css()`, and
-:php:meth:`~HtmlHelper::meta()` methods each update a block with the same name
-when used with the ``inline = false`` option::
+Blocos substituem a obsoleta variável ``$scripts_for_layout`` do *layout*. Em vez
+disto, você deve usar blocos. A :php:class:`HtmlHelper` vincula-se aos blocos da
+*view* e a cada um dos seus métodos php:meth:`~HtmlHelper::script()`, :php:meth:`~HtmlHelper::css()`
+e :php:meth:`~HtmlHelper::meta()` quando o bloco com o mesmo nome utiliza a opção ``inline = false``::
+
 
     <?php
-    // in your view file
+    // no seu arquivo de view
     $this->Html->script('carousel', array('inline' => false));
     $this->Html->css('carousel', null, array('inline' => false));
     ?>
 
-    // In your layout file.
+    // no seu arquivo de layout
     <!DOCTYPE html>
     <html lang="en">
         <head>
@@ -225,16 +225,16 @@ when used with the ``inline = false`` option::
         <?php echo $this->fetch('script'); ?>
         <?php echo $this->fetch('css'); ?>
         </head>
-        // rest of the layout follows
 
-The :php:meth:`HtmlHelper` also allows you to control which block the scripts and CSS go
-to::
+        // o resto do layout continua
+
+A :php:meth:`HtmlHelper` também permite você controlar para que bloco os scripts e CSS vão::
 
     <?php
-    // in your view
+    // na sua view
     $this->Html->script('carousel', array('block' => 'scriptBottom'));
 
-    // in your layout
+    // no seu layout
     echo $this->fetch('scriptBottom');
 
 .. _view-layouts:
