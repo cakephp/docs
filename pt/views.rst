@@ -183,16 +183,16 @@ Displaying blocks
 
 .. versionadded:: 2.1
 
-You can display blocks using the ``fetch()`` method.  ``fetch()`` will safely
-output a block, returning '' if a block does not exist::
+Você pode exibir blocos usando o método ``fetch()``. ``fecht()`` irá retornar
+um bloco de maneira segura, retornando '' se o bloco não existir::
 
     <?php echo $this->fetch('sidebar'); ?>
 
-You can also use fetch to conditionally show content that should surround a
-block should it exist.  This is helpful in layouts, or extended views where you
-want to conditionally show headings or other markup::
+Você também pode usar o *fetch* para exibir condicionalmente um conteúdo que deve
+envolver um bloco que deveria existir. Isto é útil em *layouts* ou *views* estendidas,
+nas quais você queira mostrar cabeçalhos e outras marcações condicionalmente:
 
-    // in app/View/Layouts/default.ctp
+    // em app/View/Layouts/default.ctp
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
