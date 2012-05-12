@@ -114,30 +114,29 @@ poderá parecer como::
     // na view pai.
     echo h($post['Post']['body']);
 
-The post view above shows how you can extend a view, and populate a set of
-blocks.  Any content not in already in a defined block will captured and put
-into a special block named ``content``.  When a view contains a call to
-``extend()`` execution continues to the bottom of the current view file.
-Once its complete, the extended view will be rendered.  Calling ``extend()``
-more than once in a view file will override the parent view that will be
-processed next::
+A *view* de post acima mostra como você pode estender uma *view*  e
+preenche-la com um conjunto de blocos. Qualquer conteúdo que não estiver
+definido em um bloco será capturado e colocado em um bloco especial chamado
+``content``. Quando uma *view* contém uma chamada para ``extend()``, a execução
+continua até o fim do arquivo *view*  atual. Uma vez finalizada, a *view*
+estendida será renderizada. Chamar ``extend()`` mais do que uma vez em um
+arquivo *view* irá sobrescrever a *view* pai que será processada em seguida:: 
 
     <?php
     $this->extend('/Common/view');
     $this->extend('/Common/index');
 
-The above will result in ``/Common/index.ctp`` being rendered as the parent view
-to the current view.
+O trecho acima resultará em ``/Common/index.ctp`` sendo renderizada como a
+*view* pai para a *view* atual.
 
-You can nest extended views as many times as necessary. Each view can extend
-another view if desired.  Each parent view will get the previous view's content
-as the ``content`` block.
+Você pode aninhar *views* estendidas quantas vezes forem necessárias. Cada
+*view* pode estender outra *view* se quiser. Cada *view* pai pegará a *view*
+o conteúdo da *view* anterior como o bloco ``content``.
 
 .. note::
 
-    You should avoid using ``content`` as a block name in your application.
-    CakePHP uses this for un-captured content in extended views.
-
+    Você deve evitar o uso de ``content`` como o nome de um bloco em sua aplicação.
+    CakePHP usa isto em * views*  estendidas para conteúdos não-capturados .
 
 .. _view-blocks:
 
