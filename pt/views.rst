@@ -178,8 +178,8 @@ can be used to clear or overwrite a block at any time::
     You should avoid using ``content`` as a block name.  This is used by CakePHP
     internally for extended views, and view content in the layout.
 
-Displaying blocks
------------------
+Exibindo blocos
+---------------
 
 .. versionadded:: 2.1
 
