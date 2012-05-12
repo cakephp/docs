@@ -110,8 +110,6 @@ poderá parecer como::
 
     <?php
 
-    // The remaining content will be available as the 'content' block
-    // in the parent view.
     // O conteúdo restante estará disponível como o bloco `content`
     // na view pai.
     echo h($post['Post']['body']);
