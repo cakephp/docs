@@ -67,12 +67,12 @@ Extending Views
 
 .. versionadded:: 2.1
 
-View extending allows you to wrap one view in another.  Combining this with
-:ref:`view blocks <view-blocks>` gives you a powerful way to keep your views
-:term:`DRY`.  For example, your application has a sidebar that needs to change depending
-on the specific view being rendered.  By extending a common view file you can
-avoid repeating the common markup for your sidebar, and only define the parts
-that change::
+Estender a *View* permite que você inclua uma *view* dentro de outra. Combinando
+isto com :ref:`view blocks <view-blocks>` você tem uma maneira poderosa para
+deixar suas *views*  :term:`DRY` (enxutas). Por exemplo, sua aplicação tem uma
+barra lateral (*sidebar*) que precisa mudar a depender de quando uma *view* específica
+é renderizada. Estendendo um mesmo arquivo de *view*, você pode evitar repetições
+de marcações em comum e apenas definir as que mudam::
 
     // app/View/Common/view.ctp
     <h1><?php echo $this->fetch('title'); ?></h1>
@@ -85,11 +85,12 @@ that change::
         </ul>
     </div>
 
-The above view file could be used as a parent view.  It expects that the view
-extending it will define the ``sidebar`` and ``title`` blocks.  The ``content``
-block is a special block that CakePHP creates. It will contain all the
-un-captured content from the extending view. Assuming our view file has a
-``$posts`` variable with the data about our post.  Our view could look like::
+O arquivo de *view* acima pode ser usado como uma *view* pai. Esta espera
+que a *view* que a estende definirá os blocos ``sidebar`` e ``title``. O bloco
+``content`` é um block especial que o CakePHP cria. Nele conterá todo o conteúdo
+não-capturado da *view* que a estende. Considerando que nosso arquivo *view*
+tem uma variável ``$post`` com informação sobre nosso post, nossa *view*
+poderá parecer como::
 
     // app/View/Posts/view.ctp
     <?php
@@ -108,8 +109,11 @@ un-captured content from the extending view. Assuming our view file has a
     <?php $this->end(); ?>
 
     <?php
+
     // The remaining content will be available as the 'content' block
     // in the parent view.
+    // O conteúdo restante estará disponível como o bloco `content`
+    // na view pai.
     echo h($post['Post']['body']);
 
 The post view above shows how you can extend a view, and populate a set of
