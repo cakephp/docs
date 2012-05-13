@@ -242,15 +242,15 @@ A :php:meth:`HtmlHelper` também permite você controlar para que bloco os scrip
 Layouts
 =======
 
-A layout contains presentation code that wraps around a view.
-Anything you want to see in all of your views should be placed in a
-layout.
+Um layout contem o código de apresentação que envolve uma view. 
+Qualquer coisa que você queira ver em todas as suas views deve ser 
+colocada em um layout.
 
-Layout files should be placed in ``/app/View/Layouts``. CakePHP's
-default layout can be overridden by creating a new default layout
-at ``/app/View/Layouts/default.ctp``. Once a new default layout has
-been created, controller-rendered view code is placed inside of the
-default layout when the page is rendered.
+Arquivos de layouts devem ser colocados em ``/app/View/Layouts``. O
+layout padrão do CakePHP pode ser sobrescrito criando um novo layuot 
+padrão em ``/app/View/Layouts/default.ctp``. Uma vez que um novo layout 
+padrão tenha sido criado, o código da view renderizado pelo controller 
+é colocado dentro do layout padrão quando a página é renderizada.
 
 When you create a layout, you need to tell CakePHP where to place
 the code for your views. To do so, make sure your layout includes a
