@@ -144,7 +144,7 @@ En el directorio raíz *webroot* (será copiado allí por bake):
            RewriteEngine On
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+           RewriteRule ^(.*)$ index.php?/$1 [QSA,L]
        </IfModule>
 
 Muchos de las empresas de hosting (GoDaddy, 1and1) ya tienen mod\_rewrite activo
@@ -172,7 +172,7 @@ de configuración sólo se aplique si mod\_rewrite está cargado):
            RewriteBase /path/to/cake/app
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+           RewriteRule ^(.*)$ index.php?/$1 [QSA,L]
        </IfModule>
 
 Este cambio dependerá de tu configuración. Puede que debas realizar otros
@@ -252,7 +252,7 @@ cargado):
          RewriteBase /path/to/cake/app
          RewriteCond %{REQUEST_FILENAME} !-d
          RewriteCond %{REQUEST_FILENAME} !-f
-         RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+         RewriteRule ^(.*)$ index.php?/$1 [QSA,L]
      </IfModule>
 
 Este cambio dependerá de tu configuración. Puede que debas realizar otros
