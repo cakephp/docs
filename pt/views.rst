@@ -286,7 +286,7 @@ um layout padrão deve parecer::
    </body>
    </html>
 
-.. note::
+.. nota::
 
     Na versão anterior a 2.1, o método fetch() não estava disponível, ``fetch('content')``
     é uma substituição para ``$content_for_layout`` e as linhas ``fetch('meta')``,
@@ -294,14 +294,11 @@ um layout padrão deve parecer::
     na versão 2.0.
 
 Os blocos ``script``, ``css`` e ``meta`` contém qualquer conteúdo definido
-nas visões usando o built-in helper HTML. Útil na inclusão de javascript e arquivos javascript 
+nas visões usando o built-in helper HTML. Útil na inclusão de arquivos javascript 
 e CSS de views. 
 
-The ``script``, ``css`` and ``meta`` blocks contain any content defined
-in the views using the built-in HTML helper. Useful for including
-javascript and CSS files from views.
 
-.. note::
+.. nota::
 
     When using :php:meth:`HtmlHelper::css()` or :php:meth:`HtmlHelper::script()`
     in view files, specify 'false' for the 'inline' option to place the html
