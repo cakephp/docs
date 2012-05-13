@@ -547,19 +547,19 @@ principal da APP.::
 
     <?php echo $this->element('Contacts.helpbox'); ?>
 
-If your view is a part of a plugin you can omit the plugin name.  For example,
-if you are in the ``ContactsController`` of the Contacts plugin::
+Se sua view é parte de um plugin você pode omitir o nome do plugin. Por exemplo, 
+se você está no ``ContactsController`` do plugin Contacts:: 
 
     <?php
     echo $this->element('helpbox');
     // and
     echo $this->element('Contacts.helpbox');
 
-Are equivalent and will result in the same element being rendered.
+São equivalentes e resultarão no mesmo elemento sendo renderizado.
 
 .. versionchanged:: 2.1
-    The ``$options[plugin]`` option was deprecated and support for
-    ``Plugin.element`` was added.
+    A opção ``$options[plugin]`` foi descontinuada e o suporte para 
+    ``Plugin.element`` foi adicionado.
 
 
 View API
