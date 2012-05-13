@@ -401,7 +401,7 @@ de elementos repetidos em seu próprio arquivo. Eles também podem ajudá-lo
 a re-usar conteúdos fragmentados pela sua aplicação.
 
 *Elements* vivem na pasta ``/app/View/Elements/`` e possuem a extensão .ctp
-no nome do arquivo. Eles são exibidos através do uso do método *elemente*
+no nome do arquivo. Eles são exibidos através do uso do método *element*
 da *view*::
 
     <?php echo $this->element('helpbox'); ?>
