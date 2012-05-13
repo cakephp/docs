@@ -339,10 +339,9 @@ controller ou view::
     // from a view file
     $this->layout = 'loggedin';
 
-For example, if a section of my site included a smaller ad banner
-space, I might create a new layout with the smaller advertising
-space and specify it as the layout for all controllers' actions
-using something like::
+Por exemplo, se a seção do meu site incluir um pequeno espaço para banner,
+eu posso criar um novo layout com um pequeno espaço para propaganda e especificá-lo 
+como layout para as ações de todos os controladores usando algo como::
 
    <?php
    class UsersController extends AppController {
@@ -357,15 +356,15 @@ using something like::
        }
    }
 
-CakePHP features two core layouts (besides CakePHP's default
-layout) you can use in your own application: 'ajax' and 'flash'.
-The Ajax layout is handy for crafting Ajax responses - it's an
-empty layout (most ajax calls only require a bit of markup in
-return, rather than a fully-rendered interface). The flash layout
-is used for messages shown by :php:meth:`Controller::flash()` method.
+CakePHP tem em seu núcleo, dois layouts (além do layout padrão) 
+que você pode usar em suas próprias aplicações: 'ajax' e 'flash'. 
+O layout Ajax é útil para elaborar respostas Ajax - é um layout vazio 
+(a maior parte das chamadas ajax requer pouca marcação de retorno, 
+preferencialmente a uma interface totalmente renderizada). O layout 
+flash é usado para mensagens mostradas pelo método :php:meth:`Controller::flash()`.
 
-Three other layouts, xml, js, and rss, exist in the core for a quick
-and easy way to serve up content that isn’t text/html.
+Outros três layouts, xml, js, e rss, existem no núcleo como um modo 
+rápido e fácil de servir conteúdo que não seja text/html.
 
 Using layouts from plugins
 --------------------------
