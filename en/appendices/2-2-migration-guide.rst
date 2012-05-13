@@ -103,9 +103,13 @@ does. See the :doc:`/core-utility-libraries/hash` page for more detail.
 CakeTime
 --------
 
-The ``$userOffset`` parameter has been replaced with ``$timezone`` parameter in all relevant functions.
-So instead of numeric offset you can now pass in a timezone string or DateTimeZone object.
-Passing numeric offsets for ``$timezone`` parameter is still possible for backwards compatibility.
+- The ``$userOffset`` parameter has been replaced with ``$timezone`` parameter
+  in all relevant functions.  So instead of numeric offset you can now pass in a
+  timezone string or DateTimeZone object.  Passing numeric offsets for
+  ``$timezone`` parameter is still possible for backwards compatibility.
+- :php:meth:`CakeTime::timeAgoInWords()` had the ``accuracy`` option added.
+  This option allows you to specify how accurate formatted times should be.
+
 
 Helpers
 =======
@@ -121,8 +125,10 @@ FormHelper
 TimeHelper
 ----------
 
-Since 2.1, TimeHelper uses the CakeTime class for all its relevant methods. The ``$userOffset`` parameter
-has been replaced with ``$timezone`` parameter.
+- Since 2.1, TimeHelper uses the CakeTime class for all its relevant methods.
+  The ``$userOffset`` parameter has been replaced with ``$timezone`` parameter.
+- :php:meth:`TimeHelper::timeAgoInWords()` has the ``element`` option added.
+  This allows you to specify an HTML element to wrap the formatted time.
 
 
 Configuration

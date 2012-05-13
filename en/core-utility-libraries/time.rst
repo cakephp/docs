@@ -226,7 +226,7 @@ Formatting
         // called via TimeHelper
         echo $this->Time->timeAgoInWords('Aug 22, 2011');
         // on 22/8/11
-        
+
         echo $this->Time->timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y'));
         // on August 22nd, 2011
 
@@ -245,6 +245,20 @@ Formatting
         // called as CakeTime
         App::uses('CakeTime', 'Utility');
         echo CakeTime::timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y', 'end' => '+1 year'));
+
+    Use the 'accuracy' option to determine how precise the output should be.
+    You can use this to limit the output::
+
+        <?php
+        // If $timestamp is 1 month, 1 week, 5 days and 6 hours ago
+        echo CakeTime::timeAgoInWords($timestamp, array(
+            'accuracy' => array('month' => 'month'),
+            'end' => '1 year'
+        ));
+        // Outputs '1 month ago'
+
+    .. versionchanged:: 2.2
+        The ``accuracy`` option was added.
 
 .. php:method:: toAtom($dateString, $timezone = NULL)
 
