@@ -319,15 +319,15 @@ a variável ``$title_for_layout``::
        }
    }
 
-You can also set the title_for_layout variable from inside the view file::
+Você também pode setar a variável title_for_layout no arquivo de view::
 
     <?php
     $this->set('title_for_layout', $titleContent);
 
-You can create as many layouts as you wish: just place them in the
-``app/View/Layouts`` directory, and switch between them inside of your
-controller actions using the controller or view's
-:php:attr:`~View::$layout` property::
+Você pode criar quantos layouts você desejar: apenas coloque-os no 
+diretório ``app/View/Layouts``, e defina qual deles usar dentro das ações 
+do seu controller usando a propriedade :php:attr:`~View::$layout` do 
+controller ou view::
 
     <?php
     // from a controller
