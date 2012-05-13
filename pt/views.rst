@@ -388,21 +388,21 @@ Contacts plugin::
 Elements
 ========
 
-Many applications have small blocks of presentation code that need
-to be repeated from page to page, sometimes in different places in
-the layout. CakePHP can help you repeat parts of your website that
-need to be reused. These reusable parts are called Elements. Ads,
-help boxes, navigational controls, extra menus, login forms, and
-callouts are often implemented in CakePHP as elements. An element
-is basically a mini-view that can be included in other views, in
-layouts, and even within other elements. Elements can be used to
-make a view more readable, placing the rendering of repeating
-elements in its own file. They can also help you re-use content
-fragments in your application.
+Muitas aplicações possuem pequenos blocos de códigos de apresentação
+que precisam ser repetidos a cada página, às vezes em diferentes
+lugares no *layout*. CakePHP ajuda você a repetir partes do seu *website*
+que precisam ser reutilizados. Estas partes reutilizáveis são chamadas de
+*Elements* (ou Elementos). Propagandas, caixas de ajuda, controles de navegação, menus
+extras, formulários de login e chamadas geralmente são implementadas como
+*elements*. Um *element* é básicamente uma *mini-view* que pode ser inclusa
+em outras *views*, *layouts* e até mesmo em outros *elements*. *Elements*
+podem ser usados para criar uma *view* mais legível, colocando o processamento
+de elementos repetidos em seu próprio arquivo. Eles também podem ajudá-lo
+a re-usar conteúdos fragmentados pela sua aplicação.
 
-Elements live in the ``/app/View/Elements/`` folder, and have the .ctp
-filename extension. They are output using the element method of the
-view::
+*Elements* vivem na pasta ``/app/View/Elements/`` e possuem a extensão .ctp
+no nome do arquivo. Eles são exibidos através do uso do método *elemente*
+da *view*::
 
     <?php echo $this->element('helpbox'); ?>
 
