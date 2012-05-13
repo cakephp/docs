@@ -294,23 +294,23 @@ um layout padrão deve parecer::
     na versão 2.0.
 
 Os blocos ``script``, ``css`` e ``meta`` contém qualquer conteúdo definido
-nas visões usando o built-in helper HTML. Útil na inclusão de arquivos javascript 
+nas views usando o helper HTML embutido. Útil na inclusão de arquivos javascript 
 e CSS de views. 
 
 
 .. nota::
 
-    When using :php:meth:`HtmlHelper::css()` or :php:meth:`HtmlHelper::script()`
-    in view files, specify 'false' for the 'inline' option to place the html
-    source in a block with the same name. (See API for more details on usage).
+    Quando usar :php:meth:`HtmlHelper::css()` ou :php:meth:`HtmlHelper::script()`
+    em views, especifique 'false' para a opção 'inline' para colocar o código html
+    em um bloco de mesmo nome. (Veja a API para mais detalhes de uso)
 
-The ``content`` block contains the contents of the rendered view.
+O bloco ``content`` contem o conteúdo da view renderizada.
 
-``$title_for_layout`` contains the page title.  This variable is generated automatically,
-but you can override it by setting it in your controller/view.
+``$title_for_layout`` contém o título da página, Esta variável é gerada automaticamente,
+mas você poderá sobrescrevê-la definindo-a em seu controller/view.
 
-To set the title for the layout, it's easiest to do so in the
-controller, setting the ``$title_for_layout`` variable::
+Para definir o título para o layout, o modo mais fácil é no controller, setando
+a variável ``$title_for_layout``::
 
    <?php
    class UsersController extends AppController {
