@@ -247,15 +247,15 @@ Qualquer coisa que você queira ver em todas as suas views deve ser
 colocada em um layout.
 
 Arquivos de layouts devem ser colocados em ``/app/View/Layouts``. O
-layout padrão do CakePHP pode ser sobrescrito criando um novo layuot 
+layout padrão do CakePHP pode ser sobrescrito criando um novo layout 
 padrão em ``/app/View/Layouts/default.ctp``. Uma vez que um novo layout 
 padrão tenha sido criado, o código da view renderizado pelo controller 
 é colocado dentro do layout padrão quando a página é renderizada.
 
-When you create a layout, you need to tell CakePHP where to place
-the code for your views. To do so, make sure your layout includes a
-place for ``$this->fetch('content')`` Here's an example of what a default layout
-might look like::
+Quando você cria um layout, você precisa dizer ao CakePHP onde colocar 
+o código de suas views. Para isso, garanta que o seu layout inclui
+um lugar para ``$this->fetch('conteúdo')``. A seguir, um exemplo de como 
+um layout padrão deve parecer: 
 
    <!DOCTYPE html>
    <html lang="en">
