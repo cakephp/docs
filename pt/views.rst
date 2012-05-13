@@ -254,8 +254,8 @@ padrão tenha sido criado, o código da view renderizado pelo controller
 
 Quando você cria um layout, você precisa dizer ao CakePHP onde colocar 
 o código de suas views. Para isso, garanta que o seu layout inclui
-um lugar para ``$this->fetch('conteúdo')``. A seguir, um exemplo de como 
-um layout padrão deve parecer: 
+um lugar para ``$this->fetch('content')``. A seguir, um exemplo de como 
+um layout padrão deve parecer:: 
 
    <!DOCTYPE html>
    <html lang="en">
@@ -288,10 +288,14 @@ um layout padrão deve parecer:
 
 .. note::
 
-    Prior to version 2.1, method fetch() was not available, ``fetch('content')``
-    is a replacement for ``$content_for_layout`` and lines ``fetch('meta')``,
-    ``fetch('css')`` and ``fetch('script')`` are contained in the ``$scripts_for_layout``
-    variable in version 2.0
+    Na versão anterior a 2.1, o método fetch() não estava disponível, ``fetch('content')``
+    é uma substituição para ``$content_for_layout`` e as linhas ``fetch('meta')``,
+    ``fetch('css')`` and ``fetch('script')`` estavam contidas na variável ``$scripts_for_layout``
+    na versão 2.0.
+
+Os blocos ``script``, ``css`` e ``meta`` contém qualquer conteúdo definido
+nas visões usando o built-in helper HTML. Útil na inclusão de javascript e arquivos javascript 
+e CSS de views. 
 
 The ``script``, ``css`` and ``meta`` blocks contain any content defined
 in the views using the built-in HTML helper. Useful for including
