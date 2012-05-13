@@ -341,7 +341,7 @@ controller ou view::
 
 Por exemplo, se a seção do meu site incluir um pequeno espaço para banner,
 eu posso criar um novo layout com um pequeno espaço para propaganda e especificá-lo 
-como layout para as ações de todos os controladores usando algo como::
+como layout para as ações de todos os controllers usando algo como::
 
    <?php
    class UsersController extends AppController {
@@ -356,7 +356,7 @@ como layout para as ações de todos os controladores usando algo como::
        }
    }
 
-CakePHP tem em seu núcleo, dois layouts (além do layout padrão) 
+O CakePHP tem em seu núcleo, dois layouts (além do layout padrão) 
 que você pode usar em suas próprias aplicações: 'ajax' e 'flash'. 
 O layout Ajax é útil para elaborar respostas Ajax - é um layout vazio 
 (a maior parte das chamadas ajax requer pouca marcação de retorno, 
@@ -525,24 +525,25 @@ some repetition, by setting :php:attr:`View::$elementCache` to the cache
 configuration you want to use.  CakePHP will use this configuration, when none
 is given.
 
-Requesting Elements from a Plugin
+Requisitando Elementos de um Plugin
 ---------------------------------
 
 2.0
 ---
 
-To load an element from a plugin, use the `plugin` option (moved out of the `data` option in 1.x)::
+Para carregar um elemento de um plugin, use a opção `plugin` (retirada da opção `data` na versão 1.x)::
 
     <?php echo $this->element('helpbox', array(), array('plugin' => 'Contacts'));
 
 2.1
 ---
 
-If you are using a plugin and wish to use elements from within the
-plugin, just use the familiar :term:`plugin syntax`. If the view is being
-rendered for a plugin controller/action, the plugin name will automatically
-be prefixed onto all elements used, unless another plugin name is present.
-If the element doesn't exist in the plugin, it will look in the main APP folder.::
+Se você está usando um plugin e deseja usar elementos de dentro deste plugin
+apenas use :term:`plugin syntax`. Se a view está renderizando para um 
+controller/action de plugin, o nome do plugin será automaticamente prefixado 
+antes de todos os elementos usados, ao menos que outro nome de plugin esteja 
+presente. Se o elemento não existir no plugin, será procurado na pasta 
+principal da APP.::
 
     <?php echo $this->element('Contacts.helpbox'); ?>
 
