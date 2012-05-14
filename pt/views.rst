@@ -407,46 +407,44 @@ da *view*::
 
     <?php echo $this->element('helpbox'); ?>
 
-Passing Variables into an Element
+Passando variáveis em um *Element*
 ---------------------------------
 
-You can pass data to an element through the element's second
-argument::
+Você pode passar dados para um *element* através do segundo argumento do *element*::
 
     <?php
     echo $this->element('helpbox', array(
-        "helptext" => "Oh, this text is very helpful."
+        "helptext" => "Oh, este texto é muito útil."
     ));
 
-Inside the element file, all the passed variables are available as
-members of the parameter array (in the same way that :php:meth:`Controller::set()` in
-the controller works with view files). In the above example, the
-``/app/View/Elements/helpbox.ctp`` file can use the ``$helptext``
-variable::
+Dentro do arquivo do *element*, todas as variáveis passadas estão disponíveis como
+membros do array de parâmetros (da mesma forma que :php:meth:`Controller::set()` no
+*controller*trabalha com arquivos de *views*). No exemplo acima, o arquivo 
+``/app/View/Elements/helpbox.ctp`` pode usar a variável ``$helptext``::
 
     <?php
-    // inside app/View/Elements/helpbox.ctp
-    echo $helptext; //outputs "Oh, this text is very helpful."
+    // Dentro de app/View/Elements/helpbox.ctp
+    echo $helptext; //outputs "Oh, este texto é muito útil."
 
-The :php:meth:`View::element()` method also supports options for the element.
-The options supported are 'cache' and 'callbacks'. An example::
+O método :php:meth:`View::element()` também suporta opções para o *element*.
+As opções suportadas são 'cache' e 'callbacks'. Um exemplo::
 
     <?php
     echo $this->element('helpbox', array(
-            "helptext" => "This is passed to the element as $helptext",
-            "foobar" => "This is passed to the element as $foobar",
+            "helptext" => "Isto é passado para o *element * como $helptext",
+            "foobar" => "TIsto é passado para o *element * como $foobar",
         ),
         array(
-            "cache" => "long_view", // uses the "long_view" cache configuration
-            "callbacks" => true // set to true to have before/afterRender called for the element
+            "cache" => "long_view", // usa a configuração de cache "long_view"
+            "callbacks" => true // atribue verdadeiro para ter before/afterRender chamado pelo *element*
         )
     );
 
-Element caching is facilitated through the :php:class:`Cache` class.  You can
-configure elements to be stored in any Cache configuration you've setup.  This
-gives you a great amount of flexibility to decide where and for how long elements
-are stored.  To cache different versions of the same element in an application,
-provide a unique cache key value using the following format::
+O cache de *element* é facilitado através da classe :php:class:`Cache`.  Você pode 
+configurar *elements* para serem guardados em qualquer configuração de cache que você 
+tenha definido. Isto permite uma maior flexibilidade para decidir onde e por quantos
+*elements* são guardados. Para fazer o cache de diferentes versões de um mesmo *element*
+em uma aplicação, defina uma única chave de cache usando o seguinte formato::
 
     <?php
     $this->element('helpbox', array(), array(
@@ -454,17 +452,16 @@ provide a unique cache key value using the following format::
         )
     );
 
-You can take full advantage of elements by using
-``requestAction()``. The ``requestAction()`` function fetches view
-variables from a controller action and returns them as an array.
-This enables your elements to perform in true MVC style. Create a
-controller action that prepares the view variables for your
-elements, then call ``requestAction()`` inside the second parameter
-of ``element()`` to feed the element the view variables from your
-controller.
+Você pode tirar vantagem de *elements* usando 
+``requestAction()``. A função ``requestAction()`` carrega variáveis da 
+*views* a partir de ações do *controller* e as retorna como um array.
+Isto habilita seus *elements* para atuar verdadeiramente no estilo MVC. Crie
+uma ação de *controller* que prepara as variáveis da *view* para seu *element*, depois
+chame ``requestAction()`` no segundo parâmetro do ``element()`` para carregar as variáveis
+da *view* a partir do seu *controller*.
 
-To do this, in your controller add something like the following for
-the Post example::
+Para isto, em seu *controller*, adicione algo como segue no exemplo abaixo 
+para Post::
 
     <?php
     class PostsController extends AppController {
@@ -479,9 +476,9 @@ the Post example::
         }
     }
 
-And then in the element we can access the paginated posts model. To
-get the latest five posts in an ordered list we would do something
-like the following::
+Em seguida, no *element*, você poderá acessar os modelos de posts paginados.
+Para obter os últimos cinco posts em uma lista ordenadas, você pode fazer algo
+como::
 
     <h2>Latest Posts</h2>
     <?php $posts = $this->requestAction('posts/index/sort:created/direction:asc/limit:5'); ?>
