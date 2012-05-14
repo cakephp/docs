@@ -184,7 +184,7 @@ Exibindo blocos
 .. versionadded:: 2.1
 
 Você pode exibir blocos usando o método ``fetch()``. ``fecht()`` irá retornar
-um bloco de maneira segura, retornando '' se o bloco não existir::
+um bloco de maneira segura, retornando '' se o bloco não existir"::
 
     <?php echo $this->fetch('sidebar'); ?>
 
@@ -228,7 +228,7 @@ e :php:meth:`~HtmlHelper::meta()` quando o bloco com o mesmo nome utiliza a opç
 
         // o resto do layout continua
 
-A :php:meth:`HtmlHelper` também permite você controlar para que bloco os scripts e CSS vão::
+A :php:meth:`HtmlHelper` também permite você controlar para que bloco os *scripts* e CSS vão::
 
     <?php
     // na sua view
@@ -242,20 +242,20 @@ A :php:meth:`HtmlHelper` também permite você controlar para que bloco os scrip
 Layouts
 =======
 
-Um layout contem o código de apresentação que envolve uma view. 
-Qualquer coisa que você queira ver em todas as suas views deve ser 
-colocada em um layout.
+Um *layout* contem o código de apresentação que envolve uma *view*. 
+Qualquer coisa que você queira ver em todas as suas *views* deve ser 
+colocada em um *layout*.
 
-Arquivos de layouts devem ser colocados em ``/app/View/Layouts``. O
-layout padrão do CakePHP pode ser sobrescrito criando um novo layout 
-padrão em ``/app/View/Layouts/default.ctp``. Uma vez que um novo layout 
-padrão tenha sido criado, o código da view renderizado pelo controller 
+Arquivos de *layouts* devem ser colocados em ``/app/View/Layouts``. O
+layout padrão do CakePHP pode ser sobrescrito criando um novo *layout* 
+padrão em ``/app/View/Layouts/default.ctp``. Uma vez que um novo *layout* 
+padrão tenha sido criado, o código da *view* renderizado pelo *controller* 
 é colocado dentro do layout padrão quando a página é renderizada.
 
 Quando você cria um layout, você precisa dizer ao CakePHP onde colocar 
-o código de suas views. Para isso, garanta que o seu layout inclui
+o código de suas *views*. Para isso, garanta que o seu *layout* inclui
 um lugar para ``$this->fetch('content')``. A seguir, um exemplo de como 
-um layout padrão deve parecer:: 
+um *layout* padrão deve parecer:: 
 
    <!DOCTYPE html>
    <html lang="en">
@@ -294,8 +294,8 @@ um layout padrão deve parecer::
     na versão 2.0.
 
 Os blocos ``script``, ``css`` e ``meta`` contém qualquer conteúdo definido
-nas views usando o helper HTML embutido. Útil na inclusão de arquivos javascript 
-e CSS de views. 
+nas views usando o helper HTML embutido. Útil na inclusão de arquivos *javascript* 
+e CSS de *views*. 
 
 
 .. nota::
@@ -304,12 +304,12 @@ e CSS de views.
     em views, especifique 'false' para a opção 'inline' para colocar o código html
     em um bloco de mesmo nome. (Veja a API para mais detalhes de uso)
 
-O bloco ``content`` contem o conteúdo da view renderizada.
+O bloco ``content`` contem o conteúdo da *view* renderizada.
 
 ``$title_for_layout`` contém o título da página, Esta variável é gerada automaticamente,
 mas você poderá sobrescrevê-la definindo-a em seu controller/view.
 
-Para definir o título para o layout, o modo mais fácil é no controller, setando
+Para definir o título para o *layout*, o modo mais fácil é no controller, setando
 a variável ``$title_for_layout``::
 
    <?php
@@ -319,15 +319,15 @@ a variável ``$title_for_layout``::
        }
    }
 
-Você também pode setar a variável title_for_layout no arquivo de view::
+Você também pode setar a variável title_for_layout no arquivo de *view*::
 
     <?php
     $this->set('title_for_layout', $titleContent);
 
-Você pode criar quantos layouts você desejar: apenas coloque-os no 
+Você pode criar quantos *layouts* você desejar: apenas coloque-os no 
 diretório ``app/View/Layouts``, e defina qual deles usar dentro das ações 
 do seu controller usando a propriedade :php:attr:`~View::$layout` do 
-controller ou view::
+*controller* ou *view*::
 
     <?php
     // from a controller
@@ -339,9 +339,9 @@ controller ou view::
     // from a view file
     $this->layout = 'loggedin';
 
-Por exemplo, se a seção do meu site incluir um pequeno espaço para banner,
-eu posso criar um novo layout com um pequeno espaço para propaganda e especificá-lo 
-como layout para as ações de todos os controllers usando algo como::
+Por exemplo, se a seção do meu *site* incluir um pequeno espaço para banner,
+eu posso criar um novo *layout* com um pequeno espaço para propaganda e especificá-lo 
+como *layout* para as ações de todos os *controllers* usando algo como::
 
    <?php
    class UsersController extends AppController {
@@ -356,14 +356,14 @@ como layout para as ações de todos os controllers usando algo como::
        }
    }
 
-O CakePHP tem em seu núcleo, dois layouts (além do layout padrão) 
+O CakePHP tem em seu núcleo, dois *layouts* (além do layout padrão) 
 que você pode usar em suas próprias aplicações: 'ajax' e 'flash'. 
-O layout Ajax é útil para elaborar respostas Ajax - é um layout vazio 
+O *layout* Ajax é útil para elaborar respostas Ajax - é um *layout* vazio 
 (a maior parte das chamadas ajax requer pouca marcação de retorno, 
-preferencialmente a uma interface totalmente renderizada). O layout 
+preferencialmente a uma interface totalmente renderizada). O *layout* 
 flash é usado para mensagens mostradas pelo método :php:meth:`Controller::flash()`.
 
-Outros três layouts, xml, js, e rss, existem no núcleo como um modo 
+Outros três *layouts*, XML, JS, e RSS, existem no núcleo como um modo 
 rápido e fácil de servir conteúdo que não seja text/html.
 
 Usando layouts a partir de plugins
@@ -371,8 +371,8 @@ Usando layouts a partir de plugins
 
 .. versionadded:: 2.1
 
-Para usar um layout que existe em um plugin, basta utilizar :term:`plugin syntax`.  
-Por exemplo, para usar o layout de contato do plugin de contatos::
+Para usar um *layout* que existe em um *plugin*, basta utilizar :term:`plugin syntax`.  
+Por exemplo, para usar o *layout* de contato do *plugin* de contatos::
 
     <?php
     class UsersController extends AppController {
@@ -417,7 +417,7 @@ Você pode passar dados para um *element* através do segundo argumento do *elem
 
 Dentro do arquivo do *element*, todas as variáveis passadas estão disponíveis como
 membros do array de parâmetros (da mesma forma que :php:meth:`Controller::set()` no
-*controller*trabalha com arquivos de *views*). No exemplo acima, o arquivo 
+*controller* trabalha com arquivos de *views*). No exemplo acima, o arquivo 
 ``/app/View/Elements/helpbox.ctp`` pode usar a variável ``$helptext``::
 
     <?php
@@ -490,17 +490,17 @@ Caching de Elementos
 --------------------
 
 
-Você pode tomar proveito do CakePHP view caching, se você fornecer 
-um parâmetro de cache. Se definido como true, o elemento será guardado 
-na configuração de cache 'default'. Caso contrário, você poderá definir
+Você pode tomar proveito do CakePHP *view caching*, se você fornecer 
+um parâmetro de *cache*. Se definido como true, o elemento será guardado 
+na configuração de *cache* 'default'. Caso contrário, você poderá definir
 qual configuração de cache deve ser usada. Veja :doc:`/core-libraries/caching` 
 para mais informações de configuração :php:class:`Cache`. Um exemplo simples
-de caching um elemento seria:: 
+de *caching* um elemento seria:: 
 
     <?php echo $this->element('helpbox', array(), array('cache' => true)); ?>
 
 
-Se você renderiza o mesmo elemento mais que uma vez em uma view e tem caching 
+Se você renderiza o mesmo elemento mais que uma vez em uma *view* e tem *caching* 
 ativado, esteja certo de definir o parâmetro chave (key) para um nome diferente 
 cada vez. Isto irá prevenir que cada chamada sucessiva substitua o resultado 
 armazenado da chamada element() anterior. E.g.::
@@ -538,17 +538,17 @@ Para carregar um elemento de um plugin, use a opção `plugin` (retirada da opç
 2.1
 ---
 
-Se você está usando um plugin e deseja usar elementos de dentro deste plugin
+Se você está usando um *plugin* e deseja usar elementos de dentro deste *plugin*
 apenas use :term:`plugin syntax`. Se a view está renderizando para um 
 controller/action de plugin, o nome do plugin será automaticamente prefixado 
-antes de todos os elementos usados, ao menos que outro nome de plugin esteja 
-presente. Se o elemento não existir no plugin, será procurado na pasta 
+antes de todos os elementos usados, ao menos que outro nome de *plugin* esteja 
+presente. Se o elemento não existir no *plugin*, será procurado na pasta 
 principal da APP.::
 
     <?php echo $this->element('Contacts.helpbox'); ?>
 
-Se sua view é parte de um plugin você pode omitir o nome do plugin. Por exemplo, 
-se você está no ``ContactsController`` do plugin Contacts:: 
+Se sua *view* é parte de um *plugin* você pode omitir o nome do *plugin*. Por exemplo, 
+se você está no ``ContactsController`` do *plugin* Contacts:: 
 
     <?php
     echo $this->element('helpbox');
