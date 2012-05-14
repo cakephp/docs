@@ -1,7 +1,7 @@
 Bienvenue
 #########
 
-Le livre de cuisine CakePHP est un projet libre et communautaire d'�dition de la documentation. Nous espérons maintenir une documentation pointue et de qualité. 
+Le livre de cuisine CakePHP est un projet libre et communautaire d'édition de la documentation. Nous espérons maintenir une documentation pointue et de qualité. 
 
 Télécharger la documentation:
 
@@ -25,10 +25,10 @@ Apprennez le :doc:`fonctionnement typique de CakePHP
 </getting-started/a-typical-cakephp-request>` et les :doc:`conventions
 </getting-started/cakephp-conventions>` propres à CakePHP.
 
-Controllers (controlleurs)
+Controllers (contrôleurs)
 --------------------------
 
-Taitement des requétes et renvoi des résultats au client web. En savoir plus sur les :doc:`/controllers`
+Les contrôleurs traitent les requétes et renvoient des résultats au client web. En savoir plus sur les :doc:`/controllers`
 
 Views (vues)
 ------------
