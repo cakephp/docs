@@ -43,9 +43,7 @@ A camada *view* no CakePHP pode ser composta por uma quantidade de
 diferentes partes. Cada parte tem diferentes usos e serão cobertas
 neste capítulo:
 
-- **views**: *views* são a parte da página que é única para a 
-*action* em execução. Elas compõem a parte crucial da resposta da
-aplicação. 
+- **views**: *views* é a única parte da página que está em execução. Elas compõem a parte crucial da resposta da aplicação. 
 
 - **elements**: pedaços de código pequenos e reutilizáveis.
   *Elements* geralmente são renderizados dentro de *views*.
