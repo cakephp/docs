@@ -87,7 +87,7 @@ de marcações em comum e apenas definir as que mudam::
 
 O arquivo de *view* acima pode ser usado como uma *view* pai. Esta espera
 que a *view* que a estende definirá os blocos ``sidebar`` e ``title``. O bloco
-``content`` é um block especial que o CakePHP cria. Nele conterá todo o conteúdo
+``content`` é um bloco especial que o CakePHP cria. Nele conterá todo o conteúdo
 não-capturado da *view* que a estende. Considerando que nosso arquivo *view*
 tem uma variável ``$post`` com informação sobre nosso post, nossa *view*
 poderá parecer como::
@@ -136,47 +136,49 @@ o conteúdo da *view* anterior como o bloco ``content``.
 .. note::
 
     Você deve evitar o uso de ``content`` como o nome de um bloco em sua aplicação.
-    CakePHP usa isto em * views*  estendidas para conteúdos não-capturados .
+    CakePHP usa isto em *views*  estendidas para conteúdos não-capturados .
 
 .. _view-blocks:
 
-Using view blocks
+Usando Blocos de Views (Visões)
 =================
 
 .. versionadded:: 2.1
 
-View blocks replace ``$scripts_for_layout`` and provide a flexible API that
-allows you to define slots or blocks in your views/layouts that will be defined
-elsewhere.  For example blocks are ideal for implementing things such as
-sidebars, or regions to load assets at the bottom/top of the layout.
-Blocks can be defined in two ways.  Either as a capturing block, or by direct
-assignment.  The ``start()``, ``append()`` and ``end()`` methods allow to to
-work with capturing blocks::
+Blocos de *views* substituem ``$scripts_for_layout`` e provêm uma API flexível que 
+permite criar slots ou blocos em suas *views*/layouts que podem ser definidas
+em qualquer lugar. Por exemplo, blocos são ideais para implementar recursos como 
+barras laterais ou regiões para carregar seções na parte de baixo ou no topo
+do layout.
+Blocos podem ser definidos de duas formas. Seja capturando um bloco ou por atribuição 
+direta. Os métodos ``start()``, ``append()`` e ``end()`` permitem trabalhar com 
+captura de blocos::
 
     <?php
-    // create the sidebar block.
+    // cria um bloco lateral.
     $this->start('sidebar');
     echo $this->element('sidebar/recent_topics');
     echo $this->element('sidebar/recent_comments');
     $this->end();
 
 
-    // Append into the sidebar later on.
+    // Concatena na barra lateral em seguida.
     $this->append('sidebar');
     echo $this->element('sidebar/popular_topics');
     $this->end();
 
-You can also append into a block using ``start()`` multiple times.  ``assign()``
-can be used to clear or overwrite a block at any time::
+Também é possível concatenar em um bloco utilizando o método ``start()`` múltiplas vezes.
+O método ``assign()`` pode ser usado para limpar ou sobrescrever o bloco::
 
     <?php
-    // Clear the previous content from the sidebar block.
+    // Limpa o conteúdo anterior da barra lateral.
     $this->assign('sidebar', '');
+
 
 .. note::
 
-    You should avoid using ``content`` as a block name.  This is used by CakePHP
-    internally for extended views, and view content in the layout.
+    Você deve evitar o uso de ``content`` como o nome de um bloco em sua aplicação.
+    CakePHP usa isto em *views* estendidas para conteúdos não-capturados .
 
 Exibindo blocos
 ---------------
