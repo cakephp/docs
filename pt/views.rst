@@ -490,8 +490,8 @@ like the following::
     </ol>
     <?php endforeach; ?>
 
-Caching Elements
-----------------
+Caching de Elementos
+--------------------
 
 
 Você pode tomar proveito do CakePHP view caching, se você fornecer 
@@ -503,7 +503,6 @@ de caching um elemento seria::
 
     <?php echo $this->element('helpbox', array(), array('cache' => true)); ?>
 
-Isto previnirá cada chamada sucessiva de substituir o resultado armazenado da . E.g.
 
 Se você renderiza o mesmo elemento mais que uma vez em uma view e tem caching 
 ativado, esteja certo de definir o parâmetro chave (key) para um nome diferente 
