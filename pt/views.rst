@@ -590,24 +590,23 @@ Para chamar qualquer método de uma view use ``$this->method()``.
 
 .. php:method:: getVar(string $var)
 
-    Gets the value of the viewVar with the name $var
+    Obtem o valor de viewVar com o nome $var
 
 .. php:method:: getVars()
 
-    Gets a list of all the available view variables in the current
-    rendering scope. Returns an array of variable names.
-
+    Obtem uma lista de todas as variáveis disponíveis da view, no escopo 
+    renderizado corrente. Retorna um array com os nomes das variáveis.
+    
 .. php:method:: element(string $elementPath, array $data, array $options = array())
 
-    Renders an element or view partial. See the section on
-    :ref:`view-elements` for more information and
-    examples.
+    Renderiza um elemento ou parte de uma view. Veja a seção :ref:`view-elements` 
+    para maiores informações e exemplos. 
 
 .. php:method:: uuid(string $object, mixed $url)
 
-    Generates a unique non-random DOM ID for an object, based on the
-    object type and url. This method is often used by helpers that need
-    to generate unique DOM ID's for elements such as the :php:class:`JsHelper`::
+    Gera um DOM ID não randômico único para um objeto, baseado no tipo
+    do objeto e url. Este método é frequentemente usado por helpers que 
+    precisam gerar DOM ID únicos para elementos como :php:class:`JsHelper`::
 
         <?php
         $uuid = $this->uuid('form', array('controller' => 'posts', 'action' => 'index'));
@@ -615,26 +614,28 @@ Para chamar qualquer método de uma view use ``$this->method()``.
 
 .. php:method:: addScript(string $name, string $content)
 
-    Adds content to the internal scripts buffer. This buffer is made
-    available in the layout as ``$scripts_for_layout``. This method is
-    helpful when creating helpers that need to add javascript or css
-    directly to the layout. Keep in mind that scripts added from the
-    layout, or elements in the layout will not be added to
-    ``$scripts_for_layout``. This method is most often used from inside
-    helpers, like the :doc:`/core-libraries/helpers/js` and
-    :doc:`/core-libraries/helpers/html` Helpers.
+    Adiciona conteúdo para buffer de scripts internos. Este buffer
+    é disponibilizado no layout como ``$scripts_for_layout``. Este 
+    método auxilia na criação de helpers que necessitam adicionar 
+    javascript or css diretamente para o layout. Ciente que scripts
+    adicionados de layouts, or elementos do layout não serão adicionados 
+    para ``$scripts_for_layout``. Este método é frequentemente usado dentro
+    dos helpers, como nos Helpers `/core-libraries/helpers/js` e
+    :doc:`/core-libraries/helpers/html`.
+
+    
 
     .. deprecated:: 2.1
-        Use the :ref:`view-blocks` features instead.
+        Use a feature :ref:`view-blocks`, ao invés.
 
 .. php:method:: blocks
 
-    Get the names of all defined blocks as an array.
+    Obtem o nome de todos os blocos definidos como um array.
 
 .. php:method:: start($name)
 
-    Start a capturing block for a view block.  See the section on
-    :ref:`view-blocks` for examples.
+    Inicia a caputura de bloco para um bloco de view. Veja a seção em 
+    :ref:`view-blocks` para exemplos.
 
     .. versionadded:: 2.1
 
@@ -704,7 +705,7 @@ Para chamar qualquer método de uma view use ``$this->method()``.
 
     .. versionadded:: 2.1
 
-More about Views
+Mais sobre Views
 ================
 
 .. toctree::
