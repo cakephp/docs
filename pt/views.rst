@@ -368,14 +368,13 @@ flash é usado para mensagens mostradas pelo método :php:meth:`Controller::flas
 Outros três layouts, xml, js, e rss, existem no núcleo como um modo 
 rápido e fácil de servir conteúdo que não seja text/html.
 
-Using layouts from plugins
+Usando layouts a partir de plugins
 --------------------------
 
 .. versionadded:: 2.1
 
-If you want to use a layout that exists in a plugin, you can use
-:term:`plugin syntax`.  For example to use the contact layout from the
-Contacts plugin::
+Para usar um layout que existe em um plugin, basta utilizar :term:`plugin syntax`.  
+Por exemplo, para usar o layout de contato do plugin de contatos::
 
     <?php
     class UsersController extends AppController {
