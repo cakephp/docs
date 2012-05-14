@@ -286,7 +286,7 @@ um *layout* padrão deve parecer::
    </body>
    </html>
 
-.. nota::
+.. note::
 
     Na versão anterior a 2.1, o método fetch() não estava disponível, ``fetch('content')``
     é uma substituição para ``$content_for_layout`` e as linhas ``fetch('meta')``,
@@ -298,7 +298,7 @@ nas views usando o helper HTML embutido. Útil na inclusão de arquivos *javascr
 e CSS de *views*. 
 
 
-.. nota::
+.. note::
 
     Quando usar :php:meth:`HtmlHelper::css()` ou :php:meth:`HtmlHelper::script()`
     em views, especifique 'false' para a opção 'inline' para colocar o código html
@@ -567,24 +567,26 @@ View API
 
 .. php:class:: View
 
-View methods are accessible in all view, element and layout files.
-To call any view method use ``$this->method()``
+Métodos de Views são acessíveis por todas as views, elementos e arquivos de layout.
+Para chamar qualquer método de uma view use ``$this->method()``.
+
+
 
 .. php:method:: set(string $var, mixed $value)
 
-    Views have a ``set()`` method that is analogous to the ``set()``
-    found in Controller objects. Using set() from your view file will
-    add the variables to the layout and elements that will be rendered
-    later. See :ref:`controller-methods` for more information on using
-    set().
-
-    In your view file you can do::
-
+    Views têm métodos ``set()`` que são análogos aos ``set()``
+    encontrados nos objetos controllers. Usando set() em seu arquivo view
+    serão adicionados variáveis para layouts e elementos que serão renderizados
+    posteriormente. Veja :ref:`controller-methods` para maiores informações de como 
+    usar o set().
+    
+    No seu arquivo de view, você pode::
+  
         <?php
         $this->set('activeMenuButton', 'posts');
 
-    Then in your layout the ``$activeMenuButton`` variable will be
-    available and contain the value 'posts'.
+    Assim em seu layout a variável ``$activeMenuButton`` estará disponível 
+    e conterá o valor 'posts'.
 
 .. php:method:: getVar(string $var)
 
