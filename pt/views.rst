@@ -641,67 +641,70 @@ Para chamar qualquer método de uma view use ``$this->method()``.
 
 .. php:method:: end
 
-    End the top most open capturing block.  See the section on
-    :ref:`view-blocks` for examples.
+    Finaliza o mais recente bloco sendo capturado. Veja a seção em 
+    :ref:`view-blocks` para exemplos.
 
     .. versionadded:: 2.1
 
 .. php:method:: append($name, $content)
 
-    Append into the block with ``$name``.  See the section on
-    :ref:`view-blocks` for examples.
+    Anexa no bloco com ``$name``.  Veja a seção em
+    :ref:`view-blocks` para examplos.
 
     .. versionadded:: 2.1
 
 .. php:method:: assign($name, $content)
 
-    Assign the value of a block.  This will overwrite any existing content. See
-    the section on :ref:`view-blocks` for examples.
+    Atribui o valor de um bloco. Isso irá sobrescrever qualquer conteúdo existente.
+    Veja a seção em :ref:`view-blocks` para exemplos.
 
     .. versionadded:: 2.1
 
 .. php:method:: fetch($name)
 
-    Fetch the value of a block. '' Will be returned for blocks that are not
-    defined. See the section on :ref:`view-blocks` for examples.
+    Fetch o valor do bloco. '' Serão retornados de blocos que não são definidos
+    Veja a seção em :ref:`view-blocks` para exemplos.    
 
     .. versionadded:: 2.1
 
 .. php:method:: extend($name)
 
-    Extend the current view/element/layout with the named one.  See the section
-    on :ref:`extending-views` for examples.
+    Estende o view/element/layout corrente com o nome fornecido. Veja a seção em 
+    :ref:`extending-views` para examplos.
 
     .. versionadded:: 2.1
 
 .. php:attr:: layout
 
-    Set the layout the current view will be wrapped in.
-
+    Seta o layout onde a view corrente será envolvida.
+   
 .. php:attr:: elementCache
 
-    The cache configuration used to cache elements. Setting this
-    property will change the default configuration used to cache elements.
-    This default can be overridden using the 'cache' option in the element
-    method.
+    A configuração de cache usada para armazenar elementos. Setando esta 
+    propriedade a configuração padrâo usada para armazenar elementos será alterada
+    Este padrão pode ser sobrescrito usando a opção 'cache' no método do elemento. 
+   
 
 .. php:attr:: request
 
-    An instance of :php:class:`CakeRequest`.  Use this instance to access
-    information about the current request.
+    
+    Uma instância de :php:class:`CakeRequest`.  Use esta instância para acessar 
+    informaçãoes sobre a requisição atual.
+
 
 .. php:attr:: output
 
-    Contains the last rendered content from a view, either the view file, or the
-    layout content.
+    Contem o último conteúdo renderizado de uma view, seja um arquivo de view 
+    ou conteúdo do layout.    
+
 
     .. deprecated:: 2.1
         Use ``$view->Blocks->get('content');`` instead.
 
 .. php:attr:: Blocks
 
-    An instance of :php:class:`ViewBlock`.  Used to provide view block
-    functionality in view rendering.
+   Uma instância de :php:class:`ViewBlock`. Usada para prover um bloco 
+   de funcionalidades de view na view renderizada.
 
     .. versionadded:: 2.1
 
