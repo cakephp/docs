@@ -493,18 +493,23 @@ like the following::
 Caching Elements
 ----------------
 
-You can take advantage of CakePHP view caching if you supply a
-cache parameter. If set to true, it will cache the element in the
-'default' Cache configuration. Otherwise, you can set which cache configuration
-should be used. See :doc:`/core-libraries/caching` for more information on
-configuring :php:class:`Cache`. A simple example of caching an element would be::
+
+Você pode tomar proveito do CakePHP view caching, se você fornecer 
+um parâmetro de cache. Se definido como true, o elemento será guardado 
+na configuração de cache 'default'. Caso contrário, você poderá definir
+qual configuração de cache deve ser usada. Veja :doc:`/core-libraries/caching` 
+para mais informações de configuração :php:class:`Cache`. Um exemplo simples
+de caching um elemento seria:: 
 
     <?php echo $this->element('helpbox', array(), array('cache' => true)); ?>
 
-If you render the same element more than once in a view and have
-caching enabled be sure to set the 'key' parameter to a different
-name each time. This will prevent each successive call from
-overwriting the previous element() call's cached result. E.g.::
+Isto previnirá cada chamada sucessiva de substituir o resultado armazenado da . E.g.
+
+Se você renderiza o mesmo elemento mais que uma vez em uma view e tem caching 
+ativado, esteja certo de definir o parâmetro chave (key) para um nome diferente 
+cada vez. Isto irá prevenir que cada chamada sucessiva substitua o resultado 
+armazenado da chamada element() anterior. E.g.::
+
 
     <?php
     echo $this->element(
@@ -519,11 +524,11 @@ overwriting the previous element() call's cached result. E.g.::
         array('cache' => array('key' => 'second_use', 'config' => 'view_long')
     );
 
-The above will ensure that both element results are cached separately.  If
-you want all element caching to use the same cache configuration, you can save
-some repetition, by setting :php:attr:`View::$elementCache` to the cache
-configuration you want to use.  CakePHP will use this configuration, when none
-is given.
+O código acima garante que ambos os resultados do elemento serão armazenados separadamente.
+Se você quiser que todos os elementos armazenados usem a mesma configuração de cache, você 
+pode salvar alguma repetição, setando :php:attr:`View::$elementCache`para a configuração 
+de cache que você quer usar. O CakePHP usará esta configuração, quando nenhuma outra for dada. 
+
 
 Requisitando Elementos de um Plugin
 ---------------------------------
