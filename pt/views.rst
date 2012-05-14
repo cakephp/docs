@@ -22,7 +22,7 @@ View Templates
 Em CakePHP, você fala com seus usuários através da camada *view* (visão).
 Na maior parte do tempo, suas *views* exibirão documentos (X)HTML nos
 navegadores, mas você pode também precisar prover dados AMF para um
-objeto em Flash,responder a uma aplicação remota via SOAP ou gerar
+objeto em Flash, responder a uma aplicação remota via SOAP ou gerar
 um arquivo CSV para um usuário.
 
 Por padrão, em CakePHP os arquivos do tipo *view* são escritos em
@@ -40,10 +40,10 @@ do *controller* Products será normalmente encontrada em
 ``/app/View/Products/view.ctp``.
 
 A camada *view* no CakePHP pode ser composta por uma quantidade de
-partes diferentes. Cada parte tem diferentes usos e será coberta
+diferentes partes. Cada parte tem diferentes usos e serão cobertas
 neste capítulo:
 
-- **views**: *views* são a parte da página que é única para a
+- **views**: *views* são a parte da página que é única para a 
 *action* em execução. Elas compõem a parte crucial da resposta da
 aplicação. 
 
