@@ -4,6 +4,41 @@
 CakePHP 2.2 is a fully API compatible upgrade from 2.0/2.1.  This page outlines the
 changes and improvements made for 2.2.
 
+.. _required-steps-to-upgrade-2-2:
+
+Required steps to upgrade
+=========================
+
+When upgrading to CakePHP 2.2 its important to add a few new configuration
+values to ``app/Config/bootstrap.php``.  Adding these will ensure consistent
+behavior with 2.1.x::
+
+    <?php
+    // Enable the Dispatcher filters for plugin assets, and
+    // CacheHelper.
+    Configure::write('Dispatcher.filters', array(
+        'AssetDispatcher',
+        'CacheDispatcher'
+    ));
+
+    // Add logging configuration.
+    CakeLog::config('debug', array(
+        'engine' => 'FileLog',
+        'types' => array('notice', 'info', 'debug'),
+        'file' => 'debug',
+    ));
+    CakeLog::config('error', array(
+        'engine' => 'FileLog',
+        'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
+        'file' => 'error',
+    ));
+
+You will also need to modify ``app/Config/core.php``. Change the value of
+:php:const:`LOG_ERROR` to :php:const:`LOG_ERR`::
+
+    <?php
+    define('LOG_ERROR', LOG_ERR);
+
 Models
 ======
 
@@ -131,48 +166,16 @@ TimeHelper
   This allows you to specify an HTML element to wrap the formatted time.
 
 
-Configuration
-=============
+Dispatcher
+==========
 
-``app/Config/bootstrap.php`` changed to add configuration related to Dispatcher
-filters. If your application relies on assets in themes or plugins being
-dispatched, or if your are using the full page caching feature you need to copy
-the relevant configuration to your bootstrap file. Basically you only need to
-add the following lines::
-
-    <?php
-    Configure::write('Dispatcher.filters', array(
-	    'AssetDispatcher',
-	    'CacheDispatcher'
-    ));
-
-Check the full documentation for this new features in
-:doc:`/development/dispatch-filters`
+With the addition of :doc:`/development/dispatch-filters` you'll need to update
+``app/Config/bootstrap.php``.  See :ref:`required-steps-to-upgrade-2-2`, and see
+the documentation in :doc:`/development/dispatch-filters`
 
 Logging
 =======
 
-Changes in :php:class:`CakeLog` now requires:
-
-- Modify ``app/Config/core.php`` to change the value of :php:const:`LOG_ERROR` to :php:const:`LOG_ERR`::
-
-    <?php
-    define('LOG_ERROR', LOG_ERR);
-
-- Modify ``app/Config/bootstrap.php`` to add default logging configuration::
-
-    <?php
-    App::uses('CakeLog', 'Log');
-    CakeLog::config('debug', array(
-        'engine' => 'FileLog',
-        'types' => array('notice', 'info', 'debug'),
-        'file' => 'debug',
-    ));
-    CakeLog::config('error', array(
-        'engine' => 'FileLog',
-        'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
-        'file' => 'error',
-    ));
-
-Check the full documentation for this new features in
-:doc:`/core-libraries/logging`
+Changes in :php:class:`CakeLog` now require, some additional configuration
+in your ``app/Config/bootstrap.php``.  See :ref:`required-steps-to-upgrade-2-2`,
+and :doc:`/core-libraries/logging`.
