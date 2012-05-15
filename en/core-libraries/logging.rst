@@ -177,7 +177,16 @@ Logging Scopes
 
 .. versionadded:: 2.2
 
-You could configure scopes for your logfiles.  For example::
+Often times you'll want to configure different logging behavior for different
+subsystems or parts of your application.  Take for example an e-commerce shop.
+You'll probably want to handel logging for orders and payments differently than
+you do other less critical logs.
+
+CakePHP exposes this concept as logging scopes.  When log messages are written
+you can include a scope name.  If there is a configured logger for that scope,
+the log messages will be directed to those loggers.  If a log message is written
+to an unknown scope, loggers that handle that level of message will log the
+message. For example::
 
     <?php
     // configure tmp/logs/shops.log to receive all types (log levels), but only
@@ -200,6 +209,7 @@ You could configure scopes for your logfiles.  For example::
 
     CakeLog::warning('this gets written only to shops.log', 'orders');
     CakeLog::warning('this gets written to both shops.log and payments.log', 'payments');
+    CakeLog::warning('this gets written to both shops.log and payments.log', 'unknown');
 
 CakeLog API
 ===========
@@ -229,10 +239,10 @@ CakeLog API
     :param string $name: Name of the logger you wish to no longer receive
         messages.
 
-.. php:staticmethod:: write($log, $message, $scope = array())
+.. php:staticmethod:: write($level, $message, $scope = array())
 
     Write a message into all the configured loggers.
-    $log indicates the type of log message being created.
+    $level indicates the level of log message being created.
     $message is the message of the log entry being written to.
 
     .. versionchanged:: 2.2 $scope was added
