@@ -60,12 +60,12 @@ Compõem a parte crucial da resposta da aplicação.
 
 .. _extending-views:
 
-Extending Views
+Estendendo Views
 ---------------
 
 .. versionadded:: 2.1
 
-Estender a *View* permite que você inclua uma *view* dentro de outra. Combinando
+A estenção de uma *View* permite que você inclua uma *view* dentro de outra. Combinando
 isto com :ref:`view blocks <view-blocks>` você tem uma maneira poderosa para
 deixar suas *views*  :term:`DRY` (enxutas). Por exemplo, sua aplicação tem uma
 barra lateral (*sidebar*) que precisa mudar a depender de quando uma *view* específica
@@ -84,10 +84,10 @@ de marcações em comum e apenas definir as que mudam::
     </div>
 
 O arquivo de *view* acima pode ser usado como uma *view* pai. Esta espera
-que a *view* que a estende definirá os blocos ``sidebar`` e ``title``. O bloco
-``content`` é um bloco especial que o CakePHP cria. Nele conterá todo o conteúdo
+que a *view* que a estende defina os blocos ``sidebar`` e ``title``. O bloco
+``content`` é um bloco especial que o CakePHP cria. Ele conterá todo o conteúdo
 não-capturado da *view* que a estende. Considerando que nosso arquivo *view*
-tem uma variável ``$post`` com informação sobre nosso post, nossa *view*
+tem uma variável ``$post`` com informação sobre nosso *post*, nossa *view*
 poderá parecer como::
 
     // app/View/Posts/view.ctp
@@ -112,12 +112,12 @@ poderá parecer como::
     // na view pai.
     echo h($post['Post']['body']);
 
-A *view* de post acima mostra como você pode estender uma *view*  e
+A *view* de *post* acima mostra como você pode estender uma *view*  e
 preenche-la com um conjunto de blocos. Qualquer conteúdo que não estiver
 definido em um bloco será capturado e colocado em um bloco especial chamado
 ``content``. Quando uma *view* contém uma chamada para ``extend()``, a execução
 continua até o fim do arquivo *view*  atual. Uma vez finalizada, a *view*
-estendida será renderizada. Chamar ``extend()`` mais do que uma vez em um
+estendida será renderizada. Chamar ``extend()`` mais de uma vez em um
 arquivo *view* irá sobrescrever a *view* pai que será processada em seguida:: 
 
     <?php
@@ -128,13 +128,13 @@ O trecho acima resultará em ``/Common/index.ctp`` sendo renderizada como a
 *view* pai para a *view* atual.
 
 Você pode aninhar *views* estendidas quantas vezes forem necessárias. Cada
-*view* pode estender outra *view* se quiser. Cada *view* pai pegará a *view*
+*view* pode estender outra *view* se quiser. Cada *view* pai pegará
 o conteúdo da *view* anterior como o bloco ``content``.
 
 .. note::
 
     Você deve evitar o uso de ``content`` como o nome de um bloco em sua aplicação.
-    CakePHP usa isto em *views*  estendidas para conteúdos não-capturados .
+    CakePHP usa este nome em *views* estendidas para conteúdos não-capturados.
 
 .. _view-blocks:
 
