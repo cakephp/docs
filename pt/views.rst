@@ -566,45 +566,45 @@ View API
 
 .. php:class:: View
 
-Métodos de Views são acessíveis por todas as views, elementos e arquivos de layout.
-Para chamar qualquer método de uma view use ``$this->method()``.
+Métodos de *Views* são acessíveis por todas as *views*, *elements* e arquivos de *layout*.
+Para chamar qualquer método de uma *view* use ``$this->method()``.
 
 
 
 .. php:method:: set(string $var, mixed $value)
 
-    Views têm métodos ``set()`` que são análogos aos ``set()``
-    encontrados nos objetos controllers. Usando set() em seu arquivo view
-    serão adicionados variáveis para layouts e elementos que serão renderizados
+    *Views* têm métodos ``set()`` que são análogos aos ``set()``
+    encontrados nos objetos *controllers*. Usando set() em seu arquivo *view*
+    serão adicionados variáveis para *layouts* e *elements* que serão renderizados
     posteriormente. Veja :ref:`controller-methods` para maiores informações de como 
     usar o set().
     
-    No seu arquivo de view, você pode::
+    No seu arquivo de *view*, você pode::
   
         <?php
         $this->set('activeMenuButton', 'posts');
 
-    Assim em seu layout a variável ``$activeMenuButton`` estará disponível 
+    Assim em seu *layout* a variável ``$activeMenuButton`` estará disponível 
     e conterá o valor 'posts'.
 
 .. php:method:: getVar(string $var)
 
-    Obtem o valor de viewVar com o nome $var
+    Obtem o valor de *viewVar* com o nome $var
 
 .. php:method:: getVars()
 
-    Obtem uma lista de todas as variáveis disponíveis da view, no escopo 
-    renderizado corrente. Retorna um array com os nomes das variáveis.
+    Obtem uma lista de todas as variáveis disponíveis da *view*, no escopo 
+    renderizado corrente. Retorna um *array* com os nomes das variáveis.
     
 .. php:method:: element(string $elementPath, array $data, array $options = array())
 
-    Renderiza um elemento ou parte de uma view. Veja a seção :ref:`view-elements` 
+    Renderiza um elemento ou parte de uma *view*. Veja a seção :ref:`view-elements` 
     para maiores informações e exemplos. 
 
 .. php:method:: uuid(string $object, mixed $url)
 
     Gera um DOM ID não randômico único para um objeto, baseado no tipo
-    do objeto e url. Este método é frequentemente usado por helpers que 
+    do objeto e url. Este método é frequentemente usado por *helpers* que 
     precisam gerar DOM ID únicos para elementos como :php:class:`JsHelper`::
 
         <?php
@@ -613,27 +613,27 @@ Para chamar qualquer método de uma view use ``$this->method()``.
 
 .. php:method:: addScript(string $name, string $content)
 
-    Adiciona conteúdo para buffer de scripts internos. Este buffer
-    é disponibilizado no layout como ``$scripts_for_layout``. Este 
-    método auxilia na criação de helpers que necessitam adicionar 
-    javascript or css diretamente para o layout. Ciente que scripts
-    adicionados de layouts, or elementos do layout não serão adicionados 
+    Adiciona conteúdo para *buffer* de *scripts* internos. Este *buffer*
+    é disponibilizado no *layout* como ``$scripts_for_layout``. Este 
+    método auxilia na criação de *helpers* que necessitam adicionar 
+    javascript or css diretamente para o *layout*. Ciente que *scripts*
+    adicionados de *layouts*, or *elements* do *layout* não serão adicionados 
     para ``$scripts_for_layout``. Este método é frequentemente usado dentro
-    dos helpers, como nos Helpers `/core-libraries/helpers/js` e
+    dos *helpers*, como nos *Helpers* `/core-libraries/helpers/js` e
     :doc:`/core-libraries/helpers/html`.
 
     
 
     .. deprecated:: 2.1
-        Use a feature :ref:`view-blocks`, ao invés.
+        Use a *feature* :ref:`view-blocks`, ao invés.
 
 .. php:method:: blocks
 
-    Obtem o nome de todos os blocos definidos como um array.
+    Obtem o nome de todos os blocos definidos como um *array*.
 
 .. php:method:: start($name)
 
-    Inicia a caputura de bloco para um bloco de view. Veja a seção em 
+    Inicia a caputura de bloco para um bloco de *view*. Veja a seção em 
     :ref:`view-blocks` para exemplos.
 
     .. versionadded:: 2.1
@@ -661,27 +661,27 @@ Para chamar qualquer método de uma view use ``$this->method()``.
 
 .. php:method:: fetch($name)
 
-    Fetch o valor do bloco. '' Serão retornados de blocos que não são definidos
+    *Fetch* o valor do bloco. '' Serão retornados de blocos que não estão definidos
     Veja a seção em :ref:`view-blocks` para exemplos.    
 
     .. versionadded:: 2.1
 
 .. php:method:: extend($name)
 
-    Estende o view/element/layout corrente com o nome fornecido. Veja a seção em 
+    Estende o *view*/*element*/*layout* corrente com o nome fornecido. Veja a seção em 
     :ref:`extending-views` para examplos.
 
     .. versionadded:: 2.1
 
 .. php:attr:: layout
 
-    Seta o layout onde a view corrente será envolvida.
+    Seta o *layout* onde a *view* corrente será envolvida.
    
 .. php:attr:: elementCache
 
-    A configuração de cache usada para armazenar elementos. Setando esta 
-    propriedade a configuração padrâo usada para armazenar elementos será alterada
-    Este padrão pode ser sobrescrito usando a opção 'cache' no método do elemento. 
+    A configuração de *cache* usada para armazenar *elements*. Setando esta 
+    propriedade a configuração padrâo usada para armazenar *elements* será alterada
+    Este padrão pode ser sobrescrito usando a opção 'cache' no método do *element*. 
    
 
 .. php:attr:: request
@@ -693,17 +693,17 @@ Para chamar qualquer método de uma view use ``$this->method()``.
 
 .. php:attr:: output
 
-    Contem o último conteúdo renderizado de uma view, seja um arquivo de view 
-    ou conteúdo do layout.    
+    Contem o último conteúdo renderizado de uma *view*, seja um arquivo de *view* 
+    ou conteúdo do *layout*.    
 
 
     .. deprecated:: 2.1
-        Use ``$view->Blocks->get('content');`` instead.
+        Use ``$view->Blocks->get('content');`` ao invés.
 
 .. php:attr:: Blocks
 
    Uma instância de :php:class:`ViewBlock`. Usada para prover um bloco 
-   de funcionalidades de view na view renderizada.
+   de funcionalidades de *view* na *view* renderizada.
 
     .. versionadded:: 2.1
 
