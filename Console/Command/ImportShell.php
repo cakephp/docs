@@ -3,7 +3,7 @@ App::uses('HttpSocket', 'Network/Http');
 
 class ImportShell extends Shell {
 
-	protected $_urlStack = array('/1.1/view/305/The-Manual');
+	protected $_urlStack = array('/1.1/view/305/The-Manual.ajax');
 
 	protected $_crawled = array();
 
@@ -28,7 +28,7 @@ class ImportShell extends Shell {
 	protected function _crawl($url = '') {
 		$this->_crawled[] = $url;
 		$this->out('Crawling ' . $url);
-		$cacheFile = TMP . '/stash/' . md5($url);
+		$cacheFile = TMP . 'stash/' . md5($url);
 		if (file_exists($cacheFile)) {
 			$fullContents = file_get_contents($cacheFile);
 		} else {
@@ -56,8 +56,13 @@ class ImportShell extends Shell {
 
 	protected function _addNextPage($contents) {
 		preg_match('@<span class="next"><a href="(.*?)".*?>(.*?)</a></span>@s', $contents, $next);
-		if ($next && !in_array($next[1], $this->_crawled)) {
-			$this->_urlStack[] = $next[1];
+		if (!$next) {
+			return;
+		}
+		$nextUrl = str_replace('/en/', '/', $next[1]);
+		$nextUrl .= '.ajax';
+		if (!in_array($nextUrl, $this->_crawled)) {
+			$this->_urlStack[] = $nextUrl;
 		}
 	}
 
