@@ -371,7 +371,7 @@ Usando layouts a partir de plugins
 
 .. versionadded:: 2.1
 
-Para usar um *layout* que existe em um *plugin*, basta utilizar :term:`plugin syntax`.  
+Se você quiser usar um *layout* que existe em um *plugin*, você pode usar a sintaxe de *plugin*.   
 Por exemplo, para usar o *layout* de contato do *plugin* de contatos::
 
     <?php
@@ -387,25 +387,25 @@ Por exemplo, para usar o *layout* de contato do *plugin* de contatos::
 Elements
 ========
 
-Muitas aplicações possuem pequenos blocos de códigos de apresentação
+Muitas aplicações possuem pequenos blocos de código de apresentação
 que precisam ser repetidos a cada página, às vezes em diferentes
-lugares no *layout*. CakePHP ajuda você a repetir partes do seu *website*
+lugares no *layout*. O CakePHP ajuda você a repetir partes do seu *website*
 que precisam ser reutilizados. Estas partes reutilizáveis são chamadas de
-*Elements* (ou Elementos). Propagandas, caixas de ajuda, controles de navegação, menus
-extras, formulários de login e chamadas geralmente são implementadas como
-*elements*. Um *element* é básicamente uma *mini-view* que pode ser inclusa
+*Elements* (ou Elementos). Propagandas, caixas de ajuda, controles de navegação, *menus*
+extras, formulários de *login* e chamadas geralmente são implementadas como
+*elements*. Um *element* é básicamente uma *mini-view* que pode ser incluída
 em outras *views*, *layouts* e até mesmo em outros *elements*. *Elements*
 podem ser usados para criar uma *view* mais legível, colocando o processamento
 de elementos repetidos em seu próprio arquivo. Eles também podem ajudá-lo
 a re-usar conteúdos fragmentados pela sua aplicação.
 
-*Elements* vivem na pasta ``/app/View/Elements/`` e possuem a extensão .ctp
+*Elements* são colocados na pasta ``/app/View/Elements/`` e possuem a extensão .ctp
 no nome do arquivo. Eles são exibidos através do uso do método *element*
 da *view*::
 
     <?php echo $this->element('helpbox'); ?>
 
-Passando variáveis em um *Element*
+Passando variáveis em um Element
 ---------------------------------
 
 Você pode passar dados para um *element* através do segundo argumento do *element*::
@@ -416,7 +416,7 @@ Você pode passar dados para um *element* através do segundo argumento do *elem
     ));
 
 Dentro do arquivo do *element*, todas as variáveis passadas estão disponíveis como
-membros do array de parâmetros (da mesma forma que :php:meth:`Controller::set()` no
+membros do *array* de parâmetros (da mesma forma que :php:meth:`Controller::set()` no
 *controller* trabalha com arquivos de *views*). No exemplo acima, o arquivo 
 ``/app/View/Elements/helpbox.ctp`` pode usar a variável ``$helptext``::
 
@@ -438,11 +438,11 @@ As opções suportadas são 'cache' e 'callbacks'. Um exemplo::
         )
     );
 
-O cache de *element* é facilitado através da classe :php:class:`Cache`.  Você pode 
-configurar *elements* para serem guardados em qualquer configuração de cache que você 
+O *cache* de *element* é facilitado através da classe :php:class:`Cache`.  Você pode 
+configurar *elements* para serem guardados em qualquer configuração de *cache* que você 
 tenha definido. Isto permite uma maior flexibilidade para decidir onde e por quantos
-*elements* são guardados. Para fazer o cache de diferentes versões de um mesmo *element*
-em uma aplicação, defina uma única chave de cache usando o seguinte formato::
+*elements* são guardados. Para fazer o *cache* de diferentes versões de um mesmo *element*
+em uma aplicação, defina uma única chave de *cache* usando o seguinte formato::
 
     <?php
     $this->element('helpbox', array(), array(
@@ -452,14 +452,13 @@ em uma aplicação, defina uma única chave de cache usando o seguinte formato::
 
 Você pode tirar vantagem de *elements* usando 
 ``requestAction()``. A função ``requestAction()`` carrega variáveis da 
-*views* a partir de ações do *controller* e as retorna como um array.
+*views* a partir de ações do *controller* e as retorna como um *array*.
 Isto habilita seus *elements* para atuar verdadeiramente no estilo MVC. Crie
 uma ação de *controller* que prepara as variáveis da *view* para seu *element*, depois
 chame ``requestAction()`` no segundo parâmetro do ``element()`` para carregar as variáveis
 da *view* a partir do seu *controller*.
 
-Para isto, em seu *controller*, adicione algo como segue no exemplo abaixo 
-para Post::
+Para isto, em seu *controller*, adicione algo como segue, como exemplo de *Post*::
 
     <?php
     class PostsController extends AppController {
@@ -474,8 +473,8 @@ para Post::
         }
     }
 
-Em seguida, no *element*, você poderá acessar os modelos de posts paginados.
-Para obter os últimos cinco posts em uma lista ordenadas, você pode fazer algo
+Em seguida, no *element*, você poderá acessar os modelos de *posts* paginados.
+Para obter os últimos cinco *posts* em uma lista ordenada, você pode fazer algo
 como::
 
     <h2>Latest Posts</h2>
