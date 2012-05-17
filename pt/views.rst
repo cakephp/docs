@@ -2,11 +2,11 @@ Views
 #####
 
 *Views* (ou Visões) são o **V** do MVC. *Views* são 
-responsáveis por gerar a saída de dados específica solicitada por
-uma requisição. Geralmente esta saída é apresentada em forma de
+responsáveis por gerar a saída de dados específica para uma determinada
+requisição. Geralmente esta saída é apresentada na forma de
 HTML, XML ou JSON. No entanto, disponibilizar arquivos através de *streaming*
 (fluxo de informação, geralmente multimídia, através de pacotes) ou
-criar PDFs que podem ser baixados também são de responsabilidade
+criar PDFs, que podem ser baixados, também são de responsabilidade
 da Camada *View*.
 
 O CakePHP traz incluso várias classes do tipo *View* para lidar com os
