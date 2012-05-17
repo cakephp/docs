@@ -205,8 +205,8 @@ Utilizando blocos para arquivos de script e CSS
 
 .. versionadded:: 2.1
 
-Blocos substituem a obsoleta variável ``$scripts_for_layout`` do *layout*. Em vez
-disto, você deve usar blocos. A :php:class:`HtmlHelper` vincula-se aos blocos da
+Blocos substituem a variável obsoleta ``$scripts_for_layout`` do *layout*. Em vez
+de usá-la, você deve usar blocos. A :php:class:`HtmlHelper` vincula-se aos blocos da
 *view* e a cada um dos seus métodos php:meth:`~HtmlHelper::script()`, :php:meth:`~HtmlHelper::css()`
 e :php:meth:`~HtmlHelper::meta()` quando o bloco com o mesmo nome utiliza a opção ``inline = false``::
 
@@ -247,12 +247,12 @@ Qualquer coisa que você queira ver em todas as suas *views* deve ser
 colocada em um *layout*.
 
 Arquivos de *layouts* devem ser colocados em ``/app/View/Layouts``. O
-layout padrão do CakePHP pode ser sobrescrito criando um novo *layout* 
+*layout* padrão do CakePHP pode ser sobrescrito criando um novo *layout* 
 padrão em ``/app/View/Layouts/default.ctp``. Uma vez que um novo *layout* 
 padrão tenha sido criado, o código da *view* renderizado pelo *controller* 
-é colocado dentro do layout padrão quando a página é renderizada.
+é colocado dentro do *layout* padrão quando a página é renderizada.
 
-Quando você cria um layout, você precisa dizer ao CakePHP onde colocar 
+Quando você cria um *layout*, você precisa dizer ao CakePHP onde colocar 
 o código de suas *views*. Para isso, garanta que o seu *layout* inclui
 um lugar para ``$this->fetch('content')``. A seguir, um exemplo de como 
 um *layout* padrão deve parecer:: 
@@ -294,22 +294,22 @@ um *layout* padrão deve parecer::
     na versão 2.0.
 
 Os blocos ``script``, ``css`` e ``meta`` contém qualquer conteúdo definido
-nas views usando o helper HTML embutido. Útil na inclusão de arquivos *javascript* 
+nas *views* usando o *helper* HTML embutido. Útil na inclusão de arquivos *javascript* 
 e CSS de *views*. 
 
 
 .. note::
 
     Quando usar :php:meth:`HtmlHelper::css()` ou :php:meth:`HtmlHelper::script()`
-    em views, especifique 'false' para a opção 'inline' para colocar o código html
+    em *views*, especifique 'false' para a opção 'inline' para colocar o código html
     em um bloco de mesmo nome. (Veja a API para mais detalhes de uso)
 
 O bloco ``content`` contem o conteúdo da *view* renderizada.
 
 ``$title_for_layout`` contém o título da página, Esta variável é gerada automaticamente,
-mas você poderá sobrescrevê-la definindo-a em seu controller/view.
+mas você poderá sobrescrevê-la definindo-a em seu *controller*/*view*.
 
-Para definir o título para o *layout*, o modo mais fácil é no controller, setando
+Para definir o título para o *layout*, o modo mais fácil é no *controller*, setando
 a variável ``$title_for_layout``::
 
    <?php
@@ -326,7 +326,7 @@ Você também pode setar a variável title_for_layout no arquivo de *view*::
 
 Você pode criar quantos *layouts* você desejar: apenas coloque-os no 
 diretório ``app/View/Layouts``, e defina qual deles usar dentro das ações 
-do seu controller usando a propriedade :php:attr:`~View::$layout` do 
+do seu *controller* usando a propriedade :php:attr:`~View::$layout` do 
 *controller* ou *view*::
 
     <?php
@@ -339,7 +339,7 @@ do seu controller usando a propriedade :php:attr:`~View::$layout` do
     // from a view file
     $this->layout = 'loggedin';
 
-Por exemplo, se a seção do meu *site* incluir um pequeno espaço para banner,
+Por exemplo, se a seção do meu *site* incluir um pequeno espaço para *banner*,
 eu posso criar um novo *layout* com um pequeno espaço para propaganda e especificá-lo 
 como *layout* para as ações de todos os *controllers* usando algo como::
 
@@ -356,7 +356,7 @@ como *layout* para as ações de todos os *controllers* usando algo como::
        }
    }
 
-O CakePHP tem em seu núcleo, dois *layouts* (além do layout padrão) 
+O CakePHP tem em seu núcleo, dois *layouts* (além do *layout* padrão) 
 que você pode usar em suas próprias aplicações: 'ajax' e 'flash'. 
 O *layout* Ajax é útil para elaborar respostas Ajax - é um *layout* vazio 
 (a maior parte das chamadas ajax requer pouca marcação de retorno, 
