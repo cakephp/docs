@@ -38,6 +38,8 @@ CakeTime
   * :php:meth:`CakeTime::toServer()`
   * :php:meth:`CakeTime::timezone()`
 
+- The $dateString parameter now also accepts a DateTime object.
+
 Configuration
 =============
 
