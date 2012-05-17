@@ -144,10 +144,10 @@ Usando Blocos de Views (Visões)
 .. versionadded:: 2.1
 
 Blocos de *views* substituem ``$scripts_for_layout`` e provêm uma API flexível que 
-permite criar slots ou blocos em suas *views*/layouts que podem ser definidas
+permite criar *slots* ou blocos em suas *views*/*layouts* que podem ser definidas
 em qualquer lugar. Por exemplo, blocos são ideais para implementar recursos como 
 barras laterais ou regiões para carregar seções na parte de baixo ou no topo
-do layout.
+do *layout*.
 Blocos podem ser definidos de duas formas. Seja capturando um bloco ou por atribuição 
 direta. Os métodos ``start()``, ``append()`` e ``end()`` permitem trabalhar com 
 captura de blocos::
@@ -165,7 +165,7 @@ captura de blocos::
     echo $this->element('sidebar/popular_topics');
     $this->end();
 
-Também é possível concatenar em um bloco utilizando o método ``start()`` múltiplas vezes.
+Também é possível concatenar blocos utilizando o método ``start()`` múltiplas vezes.
 O método ``assign()`` pode ser usado para limpar ou sobrescrever o bloco::
 
     <?php
@@ -176,7 +176,7 @@ O método ``assign()`` pode ser usado para limpar ou sobrescrever o bloco::
 .. note::
 
     Você deve evitar o uso de ``content`` como o nome de um bloco em sua aplicação.
-    CakePHP usa isto em *views* estendidas para conteúdos não-capturados .
+    CakePHP usa este nome em *views* estendidas para conteúdos não-capturados .
 
 Exibindo blocos
 ---------------
