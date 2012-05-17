@@ -485,22 +485,22 @@ como::
     </ol>
     <?php endforeach; ?>
 
-Caching de Elementos
+Caching Elements
 --------------------
 
 
 Você pode tomar proveito do CakePHP *view caching*, se você fornecer 
-um parâmetro de *cache*. Se definido como true, o elemento será guardado 
+um parâmetro de *cache*. Se definido como *true*, o *element* será guardado 
 na configuração de *cache* 'default'. Caso contrário, você poderá definir
-qual configuração de cache deve ser usada. Veja :doc:`/core-libraries/caching` 
+qual configuração de *cache* deve ser usada. Veja :doc:`/core-libraries/caching` 
 para mais informações de configuração :php:class:`Cache`. Um exemplo simples
-de *caching* um elemento seria:: 
+de *caching* um *element* seria:: 
 
     <?php echo $this->element('helpbox', array(), array('cache' => true)); ?>
 
 
-Se você renderiza o mesmo elemento mais que uma vez em uma *view* e tem *caching* 
-ativado, esteja certo de definir o parâmetro chave (key) para um nome diferente 
+Se você renderiza o mesmo *element* mais que uma vez em uma *view* e tem *caching* 
+ativado, esteja certo de definir o parâmetro chave (*key*) para um nome diferente 
 cada vez. Isto irá prevenir que cada chamada sucessiva substitua o resultado 
 armazenado da chamada element() anterior. E.g.::
 
@@ -518,36 +518,36 @@ armazenado da chamada element() anterior. E.g.::
         array('cache' => array('key' => 'second_use', 'config' => 'view_long')
     );
 
-O código acima garante que ambos os resultados do elemento serão armazenados separadamente.
-Se você quiser que todos os elementos armazenados usem a mesma configuração de cache, você 
+O código acima garante que ambos os resultados do *element* serão armazenados separadamente.
+Se você quiser que todos os elementos armazenados usem a mesma configuração de *cache*, você 
 pode salvar alguma repetição, setando :php:attr:`View::$elementCache`para a configuração 
-de cache que você quer usar. O CakePHP usará esta configuração, quando nenhuma outra for dada. 
+de *cache* que você quer usar. O CakePHP usará esta configuração, quando nenhuma outra for dada. 
 
 
-Requisitando Elementos de um Plugin
+Requisitando Elements de um Plugin
 ---------------------------------
 
 2.0
 ---
 
-Para carregar um elemento de um plugin, use a opção `plugin` (retirada da opção `data` na versão 1.x)::
+Para carregar um *element* de um *plugin*, use a opção `plugin` (retirada da opção `data` na versão 1.x)::
 
     <?php echo $this->element('helpbox', array(), array('plugin' => 'Contacts'));
 
 2.1
 ---
 
-Se você está usando um *plugin* e deseja usar elementos de dentro deste *plugin*
-apenas use :term:`plugin syntax`. Se a view está renderizando para um 
-controller/action de plugin, o nome do plugin será automaticamente prefixado 
-antes de todos os elementos usados, ao menos que outro nome de *plugin* esteja 
-presente. Se o elemento não existir no *plugin*, será procurado na pasta 
+Se você está usando um *plugin* e deseja usar *elements* de dentro deste *plugin*
+apenas use :term:`plugin syntax`. Se a *view* está renderizando para um 
+*controller*/*action* de *plugin*, o nome do *plugin* será automaticamente prefixado 
+antes de todos os *elements* usados, ao menos que outro nome de *plugin* esteja 
+presente. Se o *element* não existir no *plugin*, será procurado na pasta 
 principal da APP.::
 
     <?php echo $this->element('Contacts.helpbox'); ?>
 
 Se sua *view* é parte de um *plugin* você pode omitir o nome do *plugin*. Por exemplo, 
-se você está no ``ContactsController`` do *plugin* Contacts:: 
+se você está no ``ContactsController`` do *plugin* Contatos:: 
 
     <?php
     echo $this->element('helpbox');
