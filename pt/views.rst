@@ -25,25 +25,25 @@ navegadores, mas você pode também precisar prover dados AMF para um
 objeto em Flash, responder a uma aplicação remota via SOAP ou gerar
 um arquivo CSV para um usuário.
 
-Por padrão, em CakePHP os arquivos do tipo *view* são escritos em
+Por padrão, no CakePHP os arquivos do tipo *view* são escritos em
 PHP comum e possuem a extensão .ctp (CakePHP *Template*). Estes
 arquivos contém toda a lógica de apresentação necessária para
 transformar os dados recebidos do *controller* em um formato pronto
-o público. Caso você prefira usar uma linguagem de *template* como
+para o público. Caso você prefira usar uma linguagem de *template* como
 Twig ou Smarty, uma subclasse da *View* irá fazer uma ponte entre
 sua linguagem de *template* e o CakePHP.
 
 Arquivos do tipo *view* são guardados em ``/app/View/``, dentro do
 diretório com o nome do *controller* que usa os arquivos e nomeado
 de acordo com a ação correspondente. Por exemplo, a ação “view()”
-do *controller* Products será normalmente encontrada em
+do *controller* *Products* será normalmente encontrada em
 ``/app/View/Products/view.ctp``.
 
-A camada *view* no CakePHP pode ser composta por uma quantidade de
-diferentes partes. Cada parte tem diferentes usos e serão cobertas
-neste capítulo:
+A camada *view* no CakePHP pode ser composta de diferentes partes. 
+Cada parte tem diferentes usos e serão cobertas em seções específicas:
 
-- **views**: *views* é a única parte da página que está em execução. Elas compõem a parte crucial da resposta da aplicação. 
+- **views**: *views* é a única parte da página que está em execução. 
+Compõem a parte crucial da resposta da aplicação. 
 
 - **elements**: pedaços de código pequenos e reutilizáveis.
   *Elements* geralmente são renderizados dentro de *views*.
@@ -55,7 +55,7 @@ neste capítulo:
 - **helpers**: essas classes encapsulam lógica da *view* que seja
   necessária em vários lugares na camada *view*. *Helpers* no CakePHP
   podem ajudá-lo a construir formulários, construir funcionalidade
-  AJAX, paginar dados da *model*, prover *feeds* RSS, dentre outras
+  AJAX, paginar dados do *model*, prover *feeds* RSS, dentre outras
   coisas.
 
 .. _extending-views:
