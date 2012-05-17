@@ -1,7 +1,9 @@
 <?php
+App::uses('HttpSocket', 'Network/Http');
+
 class ImportShell extends Shell {
 
-	protected $_urlStack = array('/');
+	protected $_urlStack = array('/1.1/view/305/The-Manual');
 
 	protected $_crawled = array();
 
@@ -10,7 +12,6 @@ class ImportShell extends Shell {
 	protected $_referenceMap = array();
 
 	public function main() {
-		App::import('Core', 'HttpSocket');
 		$this->Socket = new HttpSocket();
 
 		while($this->_urlStack) {
