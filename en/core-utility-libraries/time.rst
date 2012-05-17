@@ -60,6 +60,8 @@ Formatting
 
 .. versionchanged:: 2.2
    ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+.. versionadded:: 2.2
+   ``$dateString`` parameter now also accepts a DateTime object.
 
     Creates a string in the same format as daysAsSql but
     only needs a single date object::
@@ -79,6 +81,8 @@ Formatting
 
 .. versionchanged:: 2.2
    ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+.. versionadded:: 2.2
+   ``$dateString`` parameter now also accepts a DateTime object.
 
     Returns a string in the format "($field\_name >=
     '2008-01-21 00:00:00') AND ($field\_name <= '2008-01-25
@@ -100,6 +104,8 @@ Formatting
 
 .. versionchanged:: 2.2
    ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+.. versionadded:: 2.2
+   ``$dateString`` parameter now also accepts a DateTime object.
 
     Will return a string formatted to the given format using the 
     `PHP date() formatting options <http://www.php.net/manual/en/function.date.php>`_::
@@ -127,6 +133,8 @@ Formatting
 
 .. versionchanged:: 2.2
    ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+.. versionadded:: 2.2
+   ``$dateString`` parameter now also accepts a DateTime object.
 
     Takes a string and uses `strtotime <http://us.php.net/manual/en/function.date.php>`_ 
     to convert it into a date integer::
@@ -190,6 +198,8 @@ Formatting
 
 .. versionchanged:: 2.2
    ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+.. versionadded:: 2.2
+   ``$dateString`` parameter now also accepts a DateTime object.
 
     :rtype: string
 
@@ -259,11 +269,15 @@ Formatting
 
     .. versionchanged:: 2.2
         The ``accuracy`` option was added.
+.. versionadded:: 2.2
+   ``$dateString`` parameter now also accepts a DateTime object.
 
 .. php:method:: toAtom($dateString, $timezone = NULL)
 
 .. versionchanged:: 2.2
    ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+.. versionadded:: 2.2
+   ``$dateString`` parameter now also accepts a DateTime object.
 
     :rtype: string
 
@@ -296,11 +310,15 @@ Formatting
         App::uses('CakeTime', 'Utility');
         echo CakeTime::toQuarter('Aug 22, 2011');
         $arr = CakeTime::toQuarter('Aug 22, 2011', true);
+.. versionadded:: 2.2
+   ``$dateString`` parameter now also accepts a DateTime object.
 
 .. php:method:: toRSS($dateString, $timezone = NULL)
 
 .. versionchanged:: 2.2
    ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+.. versionadded:: 2.2
+   ``$dateString`` parameter now also accepts a DateTime object.
 
     :rtype: string
 
@@ -313,6 +331,8 @@ Formatting
 
 .. versionchanged:: 2.2
    ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+.. versionadded:: 2.2
+   ``$dateString`` parameter now also accepts a DateTime object.
 
     A wrapper for fromString.
 
@@ -346,6 +366,8 @@ Testing Time
 
 .. versionchanged:: 2.2
    ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+.. versionadded:: 2.2
+   ``$dateString`` parameter now also accepts a DateTime object.
 
     All of the above functions return true or false when passed a date
     string. ``wasWithinLast`` takes an additional ``$time_interval``
