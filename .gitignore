@@ -1,1 +1,4 @@
+*.pyc
 build/*
+*/_build/*
+.DS_Store
