@@ -13,6 +13,8 @@ class ImportShell extends Shell {
 
 	public function main() {
 		$this->Socket = new HttpSocket();
+		mkdir('./tmp');
+		mkdir('./stash');
 
 		while($this->_urlStack) {
 			$url = array_shift($this->_urlStack);
@@ -28,7 +30,7 @@ class ImportShell extends Shell {
 	protected function _crawl($url = '') {
 		$this->_crawled[] = $url;
 		$this->out('Crawling ' . $url);
-		$cacheFile = TMP . 'stash/' . md5($url);
+		$cacheFile = './stash/' . md5($url);
 		if (file_exists($cacheFile)) {
 			$fullContents = file_get_contents($cacheFile);
 		} else {
@@ -69,6 +71,12 @@ class ImportShell extends Shell {
 	protected function _reference($contents) {
 		preg_match('@<div class="crumbs">\s*<a href="/.*?">.*?</a>&raquo;(.*?)</div>@s', $contents, $crumbs);
 		if (!$crumbs || !trim($crumbs[1])) {
+			preg_match('@<h2[^>]+>\s*(.*?)</h2>@', $contents, $title);
+			if ($title && isset($title[1])) {
+				$crumbs = $title;
+			}
+		}
+		if (!$crumbs) {
 			return 'index';
 		}
 		$input = strip_tags(str_replace(array('&raquo;', '&amp;'), array('/', 'and'), $crumbs[1]));
@@ -98,8 +106,8 @@ class ImportShell extends Shell {
 	}
 
 	protected function _convertHtmlToReST($html) {
-		$input = TMP . 'sample.html';
-		$output = TMP . 'sample.rst';
+		$input = './tmp/sample.html';
+		$output = './tmp/sample.rst';
 
 		file_put_contents($input, $html);
 		exec("pandoc -s --from=html --to=rst --output=$output $input");
