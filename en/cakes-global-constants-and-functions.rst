@@ -1,11 +1,11 @@
-12 Cake's Global Constants And Functions
-----------------------------------------
+Cake's Global Constants And Functions
+#####################################
 
 Here are some globally available constants and functions that you might
 find useful as you build your application with Cake.
 
 Global Functions
-----------------
+================
 
 Here are Cake's globally available functions. Many of them are
 convenience wrappers for long-named PHP functions, but some of them
@@ -22,9 +22,7 @@ Loads Cake's core configuration file. Returns true on success.
 -  string *$lib2...*
 
 Used to load Cake's core libaries (found in **cake/libs/**). Supply the
-name of the lib filename without the '.php' extension.
-
-::
+name of the lib filename without the '.php' extension::
 
     uses('sanitize', 'security');
 
@@ -33,9 +31,7 @@ name of the lib filename without the '.php' extension.
 -  string *$lib2...*
 
 Used to load external libraries found in the /vendors directory. Supply
-the name of the lib filename without the '.php' extension.
-
-::
+the name of the lib filename without the '.php' extension::
 
     vendor('myWebService', 'nusoap');
 
@@ -48,11 +44,9 @@ If $showHTML is true, the data is rendered to be browser-friendly.
 
 -  **a**
 
-Returns an array of the parameters used to call the wrapping function.
+Returns an array of the parameters used to call the wrapping function::
 
-::
-
-    <function someFunction()
+    function someFunction()
     {
         echo print_r(a('foo', 'bar'));
     }
@@ -69,9 +63,7 @@ Returns an array of the parameters used to call the wrapping function.
 -  **aa**
 
 Used to create associative arrays formed from the parameters used to
-call the wrapping function.
-
-::
+call the wrapping function::
 
     echo aa('a','b'); // output: array( 'a' => 'b' )
 
@@ -173,7 +165,7 @@ Converts forward slashes to underscores and removes first and last
 underscores in a string.
 
 CakePHP Core Definition Constants
----------------------------------
+=================================
 
 ACL\_CLASSNAME
 
@@ -276,7 +268,7 @@ WEBSERVICES
 If set to true, Cake's bulit in webservices functionality is turned on.
 
 CakePHP Path Constants
-----------------------
+======================
 
 +---------------------+-------------------------------------------------------------------------------------------+
 | APP                 | the path to the application's directory.                                                  |
@@ -333,7 +325,7 @@ CakePHP Path Constants
 +---------------------+-------------------------------------------------------------------------------------------+
 
 CakePHP Webroot Configuration Paths
------------------------------------
+===================================
 
 +-----------------------------+----------------------------------------------------------------------+
 | CORE\_PATH                  | path to the Cake core libraries.                                     |

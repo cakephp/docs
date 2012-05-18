@@ -1,14 +1,14 @@
-11 Helpers
-----------
+Helpers
+#######
 
 Helpers are meant to provide functions that are commonly needed in views
 to format and present data in useful ways.
 
 HTML
-----
+====
 
 Introduction
-~~~~~~~~~~~~
+------------
 
 The HTML helper is one of Cake's ways of making development less
 monotonous and more rapid. The HTML helper has two main goals: to aid in
@@ -38,14 +38,12 @@ HTML code regardless of any AUTO\_OUTPUT settings.
 HTML helper functions also include a $htmlAttributes parameter, that
 allow you to tack on any extra attributes on your tags. For example, if
 you had a tag you'd like to add a class attribute to, you'd pass this as
-the $htmlAttribute value:
-
-::
+the $htmlAttribute value::
 
     array('class'=>'someClass')
 
 Inserting Well-Formatted elements
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------
 
 If you'd like to use Cake to insert well-formed and often-repeated
 elements in your HTML code, the HTML helper is great at doing that.
@@ -132,6 +130,7 @@ Edit Action inside of the NotesController
 
 ::
 
+    <?php
     function edit($id)
     {
       //First, let's check to see if any form data has been
@@ -295,10 +294,9 @@ you'll see it in your controller with the part of the date it handles
 concatenated to the end of the field name. For example, if my Note had a
 deadline field that was a date, and my dayOptionTag $tagName parameter
 was set to 'note/deadline', the day data would show up in the $params
-variable once the form has been submitted to a controller action:
+variable once the form has been submitted to a controller action::
 
-::
-
+    <?php
     $this->data['Note']['deadline_day']
 
 You can then use this information to concatenate the time data in a
@@ -309,11 +307,11 @@ in the $data array used to save the information to the model.
 Pre-populating a form element is done by supplying a 'value' key-value
 pair in the $htmlAttributes parameter. For text-based fields, the value
 will be shown in the form element. For discrete form elements, supply
-the id or key of the element you'd like to have be selected by default.
+the id or key of the element you'd like to have be selected by default::
 
-::
-
-    //Sets the radio element with 'Complete' selected by default.<br />
+    <?php
+    // Sets the radio element with
+    // 'Complete' selected by default.<br />
     $html->radio('Note/status', array('1' => 'Complete', '2' => 'In Progress'), null, array('value' => '1'));
 
 Concatenating time data before saving a model (excerpt from NotesController)
@@ -321,6 +319,7 @@ Concatenating time data before saving a model (excerpt from NotesController)
 
 ::
 
+    <?php
     function edit($id)
        {
           //First, let's check to see if any form data has been submitted to the action.
@@ -361,7 +360,7 @@ Concatenating time data before saving a model (excerpt from NotesController)
    $selected=null, $optionAttr=null)
 
 AJAX
-----
+====
 
 The Cake Ajax helper utilizes the ever-popular Prototype and
 script.aculo.us libraries for Ajax operations and client side effects.
@@ -375,10 +374,10 @@ a parameter. This array is used to specify different things about your
 Ajax operation. Here are the different values you can specify:
 
 AjaxHelper Options
-~~~~~~~~~~~~~~~~~~
+------------------
 
 General Options
-^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~
 
 +---------------+--------------------------------------------------------------------------------------------------+
 | url           | The URL for the action you want to be called                                                     |
@@ -393,7 +392,7 @@ General Options
 +---------------+--------------------------------------------------------------------------------------------------+
 
 Callbacks
-^^^^^^^^^
+~~~~~~~~~
 
 JavaScript code to be executed at certain times during the
 XMLHttpRequest process.
@@ -483,10 +482,9 @@ $url should be able to return the autocomplete terms: basically, your
 action needs to spit out an unordered list (<ul></ul>) with list items
 that are the auto complete terms. If you wanted an autocomplete field
 that retrieved the subjects of your blog posts, your controller action
-might look something like:
+might look something like::
 
-::
-
+    <?php
     function autocomplete ()
     {
         $this->set('posts',
@@ -497,9 +495,7 @@ might look something like:
     }
 
 And your view for the autocomplete() action above would look something
-like:
-
-::
+like::
 
     <ul>
     <?php foreach($posts as $post): ?>
@@ -508,9 +504,7 @@ like:
     </ul>
 
 The actual auto-complete field as it would look in a view would look
-like this:
-
-::
+like this::
 
     <form action="/users/index" method="POST">
         <?php echo $ajax->autoComplete('Post/subject', '/posts/autoComplete')?>
@@ -520,9 +514,7 @@ like this:
 The autoComplete() function will use this information to render a text
 field, and some divs that will be used to show the autocomplete terms
 supplied by your action. You might also want to style the view with
-something like the following:
-
-::
+something like the following::
 
     <style type="text/css">
 
@@ -618,7 +610,7 @@ the element. Additional options for the in-place editor can be found on
 the Script.aculo.us wiki.
 
 Javascript
-----------
+==========
 
 The JavaScript helper is used to aid the developer in outputting
 well-formatted Javascript-related tags and data.
@@ -666,7 +658,7 @@ Writes cached events cached with cacheEvents().
 -  string *$script*
 
 Number
-------
+======
 
 The Number helper includes a few nice functions for formatting numerical
 data in your views.
@@ -693,7 +685,7 @@ Returns the given number formatted as a percentage, limited to the
 precision specified in $precision.
 
 Text
-----
+====
 
 The Text Helper provides methods that a developer may need for
 outputting well formatted text to the browser.
@@ -755,7 +747,7 @@ Text-to-html parser, similar to Textile or RedCloth, only with a little
 different syntax.
 
 Time
-----
+====
 
 The Time Helper provides methods that a developer may need for
 outputting Unix timestamps and/or datetime strings into more
@@ -877,7 +869,7 @@ needing a specific bit of view logic over and over, you can make your
 own view helper.
 
 Extending the Cake Helper Class
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
 
 Let's say we wanted to create a helper that could be used to output a
 CSS styled link you needed in your application. In order to fit your
@@ -890,6 +882,7 @@ actual php class file would look something like this:
 
 ::
 
+    <?php
     class LinkHelper extends Helper
     {
         function makeEdit($title, $url)
@@ -922,6 +915,7 @@ the view.
 
 ::
 
+    <?php
     class LinkHelper extends Helper
     {
         function makeEdit($title, $url)
@@ -934,7 +928,7 @@ the view.
     }
 
 Including other Helpers
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 You may wish to use some functionality already existing in another
 helper. To take advantage of that, you can specify helpers you wish to
@@ -945,6 +939,7 @@ use with a $helpers array, formatted just as you would in a controller.
 
 ::
 
+    <?php
     class LinkHelper extends Helper
     {
 
@@ -962,14 +957,13 @@ use with a $helpers array, formatted just as you would in a controller.
     }
 
 Using your Custom Helper
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 Once you've created your helper and placed it in /app/views/helpers/,
 you'll be able to include it in your controllers using the special
-variable $helpers.
+variable $helpers::
 
-::
-
+    <?php
     class ThingsController
     {
       var $helpers = array('Html', 'Link');

@@ -11,7 +11,7 @@ Rails framework. Our primary goal is to enable you to work in a
 structured and rapid manner - without loss of flexibility.
 
 Why CakePHP?
-------------
+============
 
 CakePHP has several features that make it a great choice as a framework
 for developing applications swiftly and with the least amount of hassle.
@@ -49,7 +49,7 @@ Here are a few in no particular order:
    configuration involved
 
 History of CakePHP
-------------------
+==================
 
 In 2005, Michal Tatarynowicz wrote a minimal version of a Rapid
 Application Framework in PHP. He found that it was the start of a very
