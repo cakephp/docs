@@ -1,5 +1,5 @@
-13 Data Validation
-------------------
+Data Validation
+###############
 
 Creating custom validation rules can help to make sure the data in a
 Model conforms to the business rules of the application, such as
@@ -11,7 +11,7 @@ the Model. To do that, use the Model::validate array in the Model
 definition, for example:
 
 /app/models/user.php
-~~~~~~~~~~~~~~~~~~~~
+====================
 
 ::
 
@@ -27,7 +27,6 @@ definition, for example:
           'born' => VALID_NUMBER
        );
     }
-    ?>
 
 Validations are defined using Perl-compatibile regular expressions, some
 of which are pre-defined in /libs/validators.php. These are:
@@ -47,7 +46,7 @@ But usually the data is implicit in the controller code. The following
 example demonstrates how to create a form-handling action:
 
 Form-handling Action in /app/controllers/blog\_controller.php
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=============================================================
 
 ::
 
@@ -77,12 +76,11 @@ Form-handling Action in /app/controllers/blog\_controller.php
           }
        }
     }
-    ?>
 
 The view used by this action can look like this:
 
 The add form view in /app/views/blog/add.thtml
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==============================================
 
 ::
 
@@ -117,9 +115,7 @@ as invalid to invoke Cake's normal form invalidation process.
 Remember to use a field name that isn't already in the model, in order
 to avoid any conflicts.
 
-The controller might look something like this:
-
-::
+The controller might look something like this::
 
     <?php
 
@@ -151,8 +147,6 @@ The controller might look something like this:
             }
         }
     }
-
-    ?>
 
 If you want to invalidate a piece of data that is outside of the Model
 itself, be sure to add that data to the Model using the set() method.

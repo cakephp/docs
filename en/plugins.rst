@@ -1,5 +1,5 @@
-14 Plugins
-----------
+Plugins
+#######
 
 CakePHP allows you to set up a combination of controllers, models, and
 views and release them as a packaged application plugin that others can
@@ -13,7 +13,7 @@ Otherwise, it operates in its own little space, behaving much like it
 would if it were an application on it's own.
 
 Creating a Plugin
------------------
+=================
 
 As a working example, let's create a new plugin that orders pizza for
 you. What could be more useful in any CakePHP application? To start out,
@@ -23,7 +23,7 @@ will be used in many places, so pick wisely. For this plugin, let's use
 the name 'pizza'. This is how the setup will eventually look:
 
 Pizza Ordering Filesystem Layout
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+================================
 
 ::
 
@@ -43,7 +43,7 @@ the plugin, and extend the parent application's AppController and
 AppModel. Here's what they should look like:
 
 Pizza Plugin AppController: /app/plugins/pizza/pizza\_app\_controller.php
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=========================================================================
 
 ::
 
@@ -57,7 +57,7 @@ Pizza Plugin AppController: /app/plugins/pizza/pizza\_app\_controller.php
     ?>
 
 Pizza Plugin AppModel: /app/plugins/pizza/pizza\_app\_model.php
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===============================================================
 
 ::
 
@@ -74,7 +74,7 @@ If you forget to define these special classes, CakePHP will hand you
 "Missing Controller" errors until the problem is rectified.
 
 Plugin Controllers
-------------------
+==================
 
 Controllers for our pizza plugin will be stored in
 **/app/plugins/pizza/controllers**. Since the main thing we'll be
@@ -93,7 +93,7 @@ So, we place our new PizzaOrdersController in
 **/app/plugins/pizza/controllers** and it looks like so:
 
 /app/plugins/pizza/controllers/pizza\_orders\_controller.php
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------------------------
 
 ::
 
@@ -121,7 +121,7 @@ PizzaAppController) rather than just the parent application's
 AppController.
 
 Plugin Models
--------------
+=============
 
 Models for the plugin are stored in **/app/plugins/pizza/models**. We've
 already defined a PizzaOrdersController for this plugin, so let's create
@@ -130,7 +130,7 @@ PizzaOrders is consistent with our naming scheme, and is unique enough,
 so we'll leave it as is).
 
 /app/plugins/pizza/models/pizza\_order.php
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------
 
 ::
 
@@ -146,7 +146,7 @@ so we'll leave it as is).
 Again, note that this class extends PizzaAppModel rather than AppModel.
 
 Plugin Views
-------------
+============
 
 Views behave exactly as they do in normal applications. Just place them
 in the right folder inside of the /app/plugins/[plugin]/views folder.
@@ -154,7 +154,7 @@ For our pizza ordering plugin, we'll need at least one view for our
 PizzaOrdersController::index() action, so let's include that as well:
 
 /app/plugins/pizza/views/pizza\_orders/index.thtml
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------------------
 
 ::
 
@@ -163,7 +163,7 @@ PizzaOrdersController::index() action, so let's include that as well:
     <!-- An order form of some sort might go here....-->
 
 Working With Plugins
---------------------
+====================
 
 So, now that you've built evertything, it should be ready to distribute
 (though we'd suggest you also distribute a few extras like a readme, sql
@@ -190,7 +190,7 @@ Some final tips on working with plugins in your CakePHP applications:
 
 #. You can do inter-plugin communication by using requestAction in your
    controllers.
-    `` $this->requestAction('/plugin/controller/action'); ``
+   ``$this->requestAction('/plugin/controller/action');``
 
 #. If you use requestAction, make sure controller and model names are as
    unique as possible. Otherwise you might get PHP "redefined class ..."
