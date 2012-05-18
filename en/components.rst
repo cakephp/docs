@@ -1,5 +1,5 @@
-10 Components
--------------
+Components
+##########
 
 Components are used to aid controllers in specific situations. Rather
 than extend Cake's core libraries, special functionality can be made
@@ -24,7 +24,7 @@ component. But you also want to add some entries to the main menu when
 the user is logged in, and this is presentation logic.
 
 Creating your own
------------------
+=================
 
 To create a component, add a file in **app/controllers/components/**
 directory.
@@ -35,10 +35,11 @@ define a class that corresponds to the file name (appending the word
 following contents:
 
 A simple component
-~~~~~~~~~~~~~~~~~~
+==================
 
 ::
 
+    <?php
     class FooComponent extends Object
     {
         var $someVar = null;
@@ -62,16 +63,14 @@ component access to its controller. If you do not want this function to
 be used or called, set the class variable $disableStartup to true.
 
 Now, to use your component, you need to add the following code in your
-controller's definition:
+controller's definition::
 
-::
+    <?php
+    var $components = array('Foo');
 
-     var $components = array('Foo');
+Inside of that controller you could now use::
 
-Inside of that controller you could now use:
-
-::
-
+    <?php
     $this->Foo->doFoo();
 
 A component gets access to the controller that loaded it through the
@@ -83,9 +82,7 @@ startup() method.
 Because CakePHP loads models in a lazy fashion, it's usually not a good
 idea to create model instances in components. If you need model data in
 a component, it's best to pass that data in through one of the
-component's methods:
-
-::
+component's methods::
 
     <?php
 
@@ -100,14 +97,11 @@ component's methods:
         }
     }
 
-    ?>
-
 You can also use other components inside your component. You simply have
 to declare in your component which components you want to use. In the
-example below it is the session component.
+example below it is the session component::
 
-::
-
+    <?php
     var $components = array('Session');
 
 Making your components public

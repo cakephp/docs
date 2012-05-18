@@ -1,8 +1,8 @@
-1 Preface
----------
+Preface
+########
 
 Audience
-~~~~~~~~
+========
 
 This manual is written for people who want to build web applications
 faster and more enjoyably. CakePHP aims to assist PHP users of all
@@ -20,7 +20,7 @@ Rudimentary knowledge in first aid (CPR), basic survival skills, dating
 scope of this document.
 
 CakePHP is Free
-~~~~~~~~~~~~~~~
+===============
 
 CakePHP is free. You don't have to pay for it, you can use it any way
 you want. CakePHP is developed under the `MIT
@@ -31,7 +31,7 @@ web site (`http://www.cakephp.org <http://www.cakephp.org>`_). You can
 also browse the latest and greatest code there.
 
 Community
-~~~~~~~~~
+=========
 
 CakePHP is developed by a hard working community of people. They come
 from different countries all over the world and joined together to

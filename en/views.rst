@@ -1,5 +1,5 @@
-9 Views
--------
+Views
+#####
 
 A view is a page template, usually named after an action. For example,
 the view for **PostsController::add()** would be found at
@@ -27,7 +27,7 @@ One that is helpful is renderElement(), which will be discussed in
 section 1.2.
 
 Layouts
-~~~~~~~
+=======
 
 A layout contains all the presentational code that wraps around a view.
 Anything you want to see in all of your views should be placed in your
@@ -42,9 +42,7 @@ when the page is rendered.
 When you create a layout, you need to tell Cake where to place your
 controller view code: to do so, make sure your layout includes a place
 for **$content\_for\_layout** (and optionally, **$title\_for\_layout**).
-Here's an example of what a default layout might look like:
-
-::
+Here's an example of what a default layout might look like::
 
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -70,10 +68,9 @@ Here's an example of what a default layout might look like:
     </html>
 
 To set the title for the layout, it's easiest to do so in the
-controller, using the $pageTitle controller variable.
+controller, using the $pageTitle controller variable::
 
-::
-
+    <?php
     class UsersController extends AppController
     {
         function viewActive()
@@ -90,14 +87,13 @@ variable, or setLayout() function.
 For example, if a section of my site included a smaller ad banner space,
 I might create a new layout with the smaller advertising space and
 specify it as the layout for all controller's actions using something
-like:
+like::
 
-::
-
+    <?php
     var $layout = 'default_small_ad';
 
 Elements
-~~~~~~~~
+========
 
 Many applications have small blocks of presentational code that needs to
 be repeated from page to page, sometimes in different places in the
@@ -114,7 +110,7 @@ The Element, by default, has access to any data declared for use in the
 View.
 
 Rendering an Element
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 ::
 
@@ -124,7 +120,7 @@ You can also directly hand data to an Element for use, by passing an
 array of data as the second parameter of the renderElement method.
 
 Calling an Element passing a data array
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------
 
 ::
 
@@ -144,7 +140,7 @@ of repeating elements in its own file. They can also help you re-use
 content fragments in your website.
 
 Error Views
-~~~~~~~~~~~
+===========
 
 There are a number of different situations where CakePHP needs to show
 some sort of error message. Many times during development you can see
@@ -155,7 +151,7 @@ special view files in **app/views/error**.
 Here are the error views that are supported by CakePHP:
 
 Error view files (app/views/error)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------
 
 ::
 

@@ -1,8 +1,8 @@
-8 Controllers
--------------
+Controllers
+#############
 
 What is a controller?
----------------------
+=====================
 
 A controller is used to manage the logic for a certain section of your
 application. Most commonly, controllers are used to manage the logic for
@@ -26,10 +26,9 @@ automatically by the Dispatcher if an incoming page request specifies it
 in the routes configuration. Returning to our video collection example,
 our VideosController might contain the view(), rent(), and search()
 actions. The controller would be found in
-/app/controllers/videos\_controller.php and contain:
+/app/controllers/videos\_controller.php and contain::
 
-::
-
+    <?php
     class VideosController extends AppController
     {
         function view($id)
@@ -49,9 +48,7 @@ actions. The controller would be found in
     }
 
 You would be able to access these actions using the following example
-URLs:
-
-::
+URLs::
 
     http://www.example.com/videos/view/253
     http://www.example.com/videos/rent/5124/0-235253
@@ -65,14 +62,14 @@ how to have your controller hand data to the view, redirect the user,
 and much more.
 
 Controller Functions
---------------------
+====================
 
 While this section will treat most of the often-used functions in Cake's
 Controller, it's important to remember to use
 `http://api.cakephp.org <http://api.cakephp.org>`_ for a full reference.
 
 Interacting with your Views
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
 -  **set**
 -  string *$var*
@@ -104,7 +101,7 @@ after your action is rendered. Alternatively, you can call this function
 to render the view at any point in the controller logic.
 
 User Redirection
-~~~~~~~~~~~~~~~~
+----------------
 
 -  **redirect**
 -  string *$url*
@@ -128,7 +125,7 @@ also want to return rather than exit(), depending on your situation (for
 example, if you need some callbacks to execute).
 
 Controller Callbacks
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 Cake controllers feature a number of callbacks you can use to insert
 logic before or after important controller functions. To utilize this
@@ -149,7 +146,7 @@ Called after every controller action.
 Called after controller logic, and just before a view is rendered.
 
 Other Useful Functions
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 While these are functions part of Cake's Object class, they are also
 available inside the Controller:
@@ -169,10 +166,9 @@ You can use requestAction to get data from another controller action, or
 get a fully rendered view from a controller.
 
 First, getting data from a controller is simple. You just use
-requestAction in the view where you need the data.
+requestAction in the view where you need the data::
 
-::
-
+    <?php
     // Here is our simple controller:
 
     class UsersController extends AppController
@@ -186,10 +182,9 @@ requestAction in the view where you need the data.
 Imagine that we needed to create a simple table showing the users in the
 system. Instead of duplicating code in another controller, we can get
 the data from UsersController::getUserList() instead by using
-requestAction().
+requestAction()::
 
-::
-
+    <?php
     class ProductsController extends AppController
     {
         function showUserProducts()
@@ -200,17 +195,15 @@ requestAction().
             // UsersController::getUserList().
         }
     }
-     
 
 If you have an often used element in your application that is not
 static, you might want to use requestAction() to inject it into your
 views. Let's say that rather than just passing the data from
 UsersController::getUserList, we actually wanted to render that action's
 view (which might consist of a table), inside another controller. This
-saves us from duplicating view code.
+saves us from duplicating view code::
 
-::
-
+    <?php
     class ProgramsController extends AppController
     {
         function viewAll()
@@ -241,10 +234,9 @@ directory.
 
 If the $type is equal to the PHP constant LOG\_DEBUG, the message is
 written to the log as a debug message. Any other type is written to the
-log as an error.
+log as an error::
 
-::
-
+    <?php
     // Inside a controller, you can use log() to write entries:
     $this->log('Mayday! Mayday!');
     //Log entry:
@@ -260,18 +252,13 @@ log as an error.
 A method to which you can pass $this->data, and it will pass back an
 array formatted as a model conditions array.
 
-For example, if I have a person search form:
-
-::
+For example, if I have a person search form::
 
     // app/views/people/search.thtml:
-
     <?php echo $html->input('Person/last_name'); ?>
 
 Submitting the form with this element would result in the following
-$this->data array:
-
-::
+$this->data array::
 
     Array
     (
@@ -282,10 +269,9 @@ $this->data array:
     )
 
 At this point, we can use postConditions() to format this data to use in
-model:
+model::
 
-::
-
+    <?php
     // app/controllers/people_controller.php:
     $conditions = $this->postConditions($this->data);
 
@@ -299,7 +285,7 @@ model:
     $this->Person->findAll($conditions);
 
 Controller Variables
---------------------
+====================
 
 Manipulating a few special variables inside of your controller allows
 you to take advantage of some extra Cake functionality:
@@ -315,10 +301,9 @@ class if you're running into problems.
 Does your controller use more than one model? Your FragglesController
 will automatically load $this->Fraggle, but if you want access to
 $this->Smurf as well, try adding something like the following to your
-controller:
+controller::
 
-::
-
+    <?php
     var $uses = array('Fraggle','Smurf');
 
 Please notice how you also need to include your Fraggle model in the
@@ -328,10 +313,9 @@ $uses array, even though it was automatically available before.
 
 Use this variable to have your controller load helpers into its views.
 The HTML helper is automatically loaded, but you can use this variable
-to specify a few others:
+to specify a few others::
 
-::
-
+    <?php
     var $helpers = array('Html','Ajax','Javascript');
 
 Remember that you will need to include the HtmlHelper in the $helpers
@@ -355,10 +339,9 @@ If you'd like a bit of code run every time an action is called (and
 before any of that action code runs), use $beforeFilter. This
 functionality is really nice for access control - you can check to see a
 user's permissions before any action takes place. Just set this variable
-using an array containing the controller action(s) you'd like to run:
+using an array containing the controller action(s) you'd like to run::
 
-::
-
+    <?php
     class ProductsController extends AppController
     {
         var $beforeFilter = array('checkAccess');
@@ -377,14 +360,13 @@ using an array containing the controller action(s) you'd like to run:
 **$components**
 
 Just like $helpers and $uses, this variable is used to load up
-components you will need:
+components you will need::
 
-::
-
+    <?php
     var $components = array('acl');
 
 Controller Parameters
----------------------
+=====================
 
 Controller parameters are available at **$this->params** in your Cake
 controller. This variable is used to get data into the controller and
@@ -394,10 +376,9 @@ handed to the controller via POST or GET operations.
 
 **$this->data**
 
-Used to handle POST data sent from HTML Helper forms to the controller.
+Used to handle POST data sent from HTML Helper forms to the controller::
 
-::
-
+    <?php
     // A HTML Helper is used to create a form element
 
     $html->input('User/first_name');
@@ -459,9 +440,7 @@ $this->params['pass'] would equal "?var1=3&var2=4".
 
 Stores the current URL requested, along with key-value pairs of get
 variables. For example, if the URL /posts/view/?var1=3&var2=4 was
-called, $this->params['url'] would look like this:
-
-::
+called, $this->params['url'] would look like this::
 
     [url] => Array
             (

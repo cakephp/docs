@@ -20,7 +20,7 @@ Contents
    data-validation
    plugins
    access-control-lists
-   data-sanitization-the-sanitize-class
+   data-sanitation-the-sanitize-class
    the-cake-session-component
    the-request-handler-component
    the-security-component
@@ -34,8 +34,6 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-* :doc:`/appendices/glossary`
-
 
 .. meta::
     :title lang=en: Contents
