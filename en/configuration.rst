@@ -1,5 +1,5 @@
 Configuration
-===============
+###############
 
 Database Configuration
 ======================

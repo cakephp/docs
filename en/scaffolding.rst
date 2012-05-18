@@ -1,8 +1,8 @@
-6 Scaffolding
--------------
+Scaffolding
+###########
 
 Cake's Scaffolding is Pretty Cool
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=================================
 
 So cool that you'll want to use it in production apps. Now, we think its
 cool, too, but please realize that scaffolding is... well... just
@@ -21,16 +21,13 @@ scaffolding has been included in Cake. Scaffolding analyzes your
 database tables and creates standard lists with add, delete and edit
 buttons, standard forms for editing and standard views for inspecting a
 single item in the database. To add scaffolding to your application, in
-the controller, add the **$scaffold** variable:
-
-::
+the controller, add the **$scaffold** variable::
 
     <?php
     class CategoriesController extends AppController
     {
     var $scaffold;
     }
-    ?>
 
 One important thing to note about scaffold: it expects that any field
 name that ends with **\_id** is a foreign key to a table which has a
@@ -44,9 +41,7 @@ Also, when you have a foreign key in a table (e.g. titles table has
 automatically populated with the rows from the foreign table (titles) in
 the show/edit/new views. To set which field in the foreign table is
 shown, set the **$displayField** variable in the foreign model. To
-continue our example of a category having a title:
-
-::
+continue our example of a category having a title::
 
     <?php
     class Category extends AppModel
@@ -55,10 +50,9 @@ continue our example of a category having a title:
 
     var $displayField = 'title';
     }
-    ?>
 
 Customizing Scaffold Views
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+==========================
 
 If you're looking for something a little different in your scaffolded
 views, you can create them yourself. We still don't recommend using this
@@ -69,11 +63,9 @@ If you'd like to change your scaffolding views, you'll need to supply
 your own:
 
 Custom Scaffolding Views for a Single Controller
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+================================================
 
-Custom scaffolding views for a PostsController should be placed like so:
-
-::
+Custom scaffolding views for a PostsController should be placed like so::
 
     /app/views/posts/scaffold/scaffold.index.thtml
     /app/views/posts/scaffold/scaffold.show.thtml
@@ -81,11 +73,9 @@ Custom scaffolding views for a PostsController should be placed like so:
     /app/views/posts/scaffold/scaffold.new.thtml
 
 Custom Scaffolding Views for an Entire Application
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==================================================
 
-Custom scaffolding views for all controllers should be placed like so:
-
-::
+Custom scaffolding views for all controllers should be placed like so::
 
     /app/views/scaffold/scaffold.index.thtml
     /app/views/scaffold/scaffold.show.thtml

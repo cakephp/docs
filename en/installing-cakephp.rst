@@ -242,6 +242,7 @@ set up Cake to work with the following setup:
                     bootstrap.php
                     dispatcher.php
                 /vendors 
+
 Given this type of setup, I would need to edit my webroot index.php file
 (which should be at /var/www/mysite/index.php, in this example) to look
 like the following:

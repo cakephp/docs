@@ -1,8 +1,8 @@
-7 Models
---------
+Models
+######
 
 What is a model?
-----------------
+================
 
 What does it do? It separates domain logic from the presentation,
 isolating application logic.
@@ -15,7 +15,7 @@ association information, and methods specific to the table it uses.
 Here's what a simple User model might look like in Cake:
 
 Example User Model, saved in /app/models/user.php
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------------
 
 ::
 
@@ -45,10 +45,8 @@ Example User Model, saved in /app/models/user.php
         }
     }
 
-    ?>
-
 Model Functions
----------------
+===============
 
 From a PHP view, models are classes extending the AppModel class. The
 AppModel class is originally defined in the cake/ directory, but should
@@ -62,15 +60,14 @@ Model, it's important to remember to use
 `http://api.cakephp.org <http://api.cakephp.org>`_ for a full reference.
 
 User-Defined Functions
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 An example of a table-specific method in the model is a pair of methods
 for hiding/unhiding posts in a blog.
 
- 
 
 Example Model Functions
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 ::
 
@@ -97,10 +94,9 @@ Example Model Functions
           }
        }
     }
-    ?>
 
 Retrieving Your Data
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 Below are a few of the standard ways of getting to your data using a
 model:
@@ -159,6 +155,7 @@ your PHP version). Examples (as used in a Controller) might be:
 
 ::
 
+    <?php
     //PHP 5 Users
     $this->Post->findByTitle('My First Blog Post');
     $this->Author->findByLastName('Rogers');
@@ -187,10 +184,9 @@ $conditions.
 
 This is useful in situations where you want 'Previous' and 'Next' links
 that walk users through some ordered sequence through your model
-entries. It only works for numeric and date based fields.
+entries. It only works for numeric and date based fields::
 
-::
-
+    <?php
     class ImagesController extends AppController
     {
         function view($id)
@@ -237,10 +233,9 @@ would for a findAll() request. The $keyPath and $valuePath are where you
 tell the model where to find the keys and values for your generated
 list. For example, if you wanted to generate a list of roles based on
 your Role model, keyed by their integer ids, the full call might look
-something like:
+something like::
 
-::
-
+    <?php
     $this->set(
         'Roles',
         $this->Role->generateList(null, 'role_name ASC', null, '{n}.Role.id', '{n}.Role.role_name')
@@ -276,7 +271,7 @@ custom SQL queries (the results of which are returned), and execute() is
 used to make custom SQL commands (which require no return value).
 
 Custom Sql Calls with query()
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
 ::
 
@@ -293,10 +288,9 @@ Custom Sql Calls with query()
             return $firstName;
         }
     }
-    ?>
 
 Complex Find Conditions (using arrays)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------
 
 Most of the model's finder calls involve passing sets of conditions in
 one way or another. The simplest approach to this is to use a WHERE
@@ -311,10 +305,11 @@ query.
 At it's most basic, an array-based query looks like this:
 
 Basic find conditions array usage example:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------
 
 ::
 
+    <?php
     $conditions = array("Post.title" => "This is a post");
 
     //Example usage with a model:
@@ -331,6 +326,7 @@ where the title is **not** "This is a post":
 
 ::
 
+    <?php
     array("Post.title" => "<> This is a post")
 
 All that was added was '<>' before the expression. Cake can parse out
@@ -342,13 +338,13 @@ was in a given set of values:
 
 ::
 
+    <?php
     array("Post.title" => array("First post", "Second post", "Third post"))
 
 Adding additional filters to the conditions is as simple as adding
-additional key/value pairs to the array:
+additional key/value pairs to the array::
 
-::
-
+    <?php
     array
     (
         "Post.title"   => array("First post", "Second post", "Third post"),
@@ -359,10 +355,9 @@ By default, Cake joins multiple conditions with boolean AND; which
 means, the snippet above would only match posts that have been created
 in the past two weeks, **and** have a title that matches one in the
 given set. However, we could just as easily find posts that match either
-condition:
+condition::
 
-::
-
+    <?php
     array
     ("or" =>
         array
@@ -379,10 +374,9 @@ hasMany/belongsTo relationship between Posts and Authors, which would
 result in a LEFT JOIN on the find done on Post. Let's say you wanted to
 find all the posts that contained a certain keyword **or** were created
 in the past two weeks, but you want to restrict your search to posts
-written by Bob:
+written by Bob::
 
-::
-
+    <?php
     array 
     ("Author.name" => "Bob", "or" => array
         (
@@ -392,13 +386,11 @@ written by Bob:
     )
 
 Saving Your Data
-~~~~~~~~~~~~~~~~
+================
 
 To save data to your model, you need to supply it with the data you wish
 to save. The data handed to the save() method should be in the following
-form:
-
-::
+form::
 
     Array
     (
@@ -419,10 +411,9 @@ the easiest, however.
 Data posted from forms is automatically formatted like this and placed
 in **$this->data** inside of your controller, so saving your data from
 web forms is a snap. An edit function for a property controller might
-look something like the following:
+look something like the following::
 
-::
-
+    <?php
     function edit($id)
     {
 
@@ -478,7 +469,7 @@ Used to save a single field value.
 Returns the ID of the most recently created record.
 
 Model Callbacks
-~~~~~~~~~~~~~~~
+===============
 
 We've added some model callbacks that allow you to sneak in logic before
 or after certain model operations. To gain this functionality in your
@@ -519,10 +510,9 @@ if you want the save operation to continue, and **false**\ if you want
 to abort.
 
 One usage of beforeSave might be to format time data for storage in a
-specifc database engine:
+specifc database engine::
 
-::
-
+    <?php
     // Date/time fields created by HTML Helper:
     // This code would be seen in a view
 
@@ -573,7 +563,7 @@ Place any logic that you want to be executed after every deletion in
 this callback method.
 
 Model Variables
----------------
+===============
 
 When creating your models, there are a number of special variables you
 can set in order to gain access to Cake functionality:
@@ -593,7 +583,7 @@ Imagine you have Groups which have many Users which in turn have many
 Articles.
 
 Model::recursive options
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 +-------------------+----------------------------------------------------------------------------------+
 | $recursive = -1   | No associated data is fetched.                                                   |
@@ -631,10 +621,10 @@ your database configuration file. The default is, you guessed it,
 'default'.
 
 Associations
-------------
+============
 
 Introduction
-~~~~~~~~~~~~
+------------
 
 One of the most powerful features of CakePHP is the relational mapping
 provided by the model. In CakePHP, the links between tables are handled
@@ -697,7 +687,7 @@ move to allowing Posts to be related to Tag objects using the
 hasAndBelongsToMany relationship (Post hasAndBelongsToMany Tags).
 
 Defining and Querying with hasOne
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------
 
 In order to set up this association, we'll assume that you've already
 created the User and Profile models. To define the hasOne assocation
@@ -705,7 +695,7 @@ between them, we'll need to add an array to the models to tell Cake how
 they relate:
 
 /app/models/user.php hasOne
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
 ::
 
@@ -722,7 +712,6 @@ they relate:
                             )
                       );
     }
-    ?>
 
 The $hasOne array is what Cake uses to build the association between the
 User and Profile models. Each key in the array allows you to further
@@ -759,10 +748,9 @@ configure the association:
    follow Cake's naming conventions.
 
 Now, when we execute find() or findAll() calls using the Profile model,
-we should see our associated User model there as well:
+we should see our associated User model there as well::
 
-::
-
+    <?php
     $user = $this->User->read(null, '25');
     print_r($user);
 
@@ -789,14 +777,14 @@ we should see our associated User model there as well:
     )
 
 Defining and Querying with belongsTo
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------
 
 Now that a User can see its Profile, we'll need to define an association
 so Profile can see its User. This is done in Cake using the belongsTo
 assocation. In the Profile model, we'd do the following:
 
 /app/models/profile.php belongsTo
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------
 
 ::
 
@@ -812,7 +800,6 @@ assocation. In the Profile model, we'd do the following:
                                )
                          );
     }
-    ?>
 
 The $belongsTo array is what Cake uses to build the association between
 the User and Profile models. Each key in the array allows you to further
@@ -842,10 +829,9 @@ configure the association:
    follow Cake's naming conventions.
 
 Now, when we execute find() or findAll() calls using the Profile model,
-we should see our associated User model there as well:
+we should see our associated User model there as well::
 
-::
-
+    <?php
     $profile = $this->Profile->read(null, '4');
     print_r($profile);
 
@@ -873,14 +859,14 @@ we should see our associated User model there as well:
     )
 
 Defining and Querying with hasMany
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==================================
 
 Now that User and Profile models are associated and working properly,
 let's build our system so that User records are associated to Comment
 records. This is done in the User model like so:
 
 /app/models/user.php hasMany
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 
 ::
 
@@ -913,7 +899,6 @@ records. This is done in the User model like so:
                             )
                       );
     }
-    ?>
 
 The $hasMany array is what Cake uses to build the association between
 the User and Comment models. Each key in the array allows you to further
@@ -981,10 +966,9 @@ configure the association:
    number of records that should be associated.
 
 Now, when we execute find() or findAll() calls using the User model, we
-should see our associated Comment models there as well:
+should see our associated Comment models there as well::
 
-::
-
+    <?php
     $user = $this->User->read(null, '25');
     print_r($user);
 
@@ -1055,7 +1039,7 @@ models can see each other. Not defining assocations from both models is
 often a common gotcha when trying to use scaffolding.
 
 Defining and Querying with hasAndBelongsToMany
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==============================================
 
 Now that you've mastered the simpler associations, let's move to the
 last assocation: hasAndBelongsToMany (or HABTM). This last one is the
@@ -1080,7 +1064,7 @@ is [plural model name1]\_[plural model name2], where the model names are
 in alphabetical order:
 
 HABTM Join Tables: Sample models and their join table names
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------------------------
 
 #. Posts and Tags: posts\_tags
 
@@ -1093,9 +1077,7 @@ the models they link. For our example, "post\_id" and "tag\_id" is all
 we'll need.
 
 Here's what the SQL dumps will look like for our Posts HABTM Tags
-example:
-
-::
+example::
 
     --
     -- Table structure for table `posts`
@@ -1139,7 +1121,7 @@ example:
 With our tables set up, let's define the association in the Post model:
 
 /app/models/post.php hasAndBelongsToMany
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------------
 
 ::
 
@@ -1226,10 +1208,9 @@ allows you to further configure the association:
    supplying your own query here.
 
 Now, when we execute find() or findAll() calls using the Post model, we
-should see our associated Tag models there as well:
+should see our associated Tag models there as well::
 
-::
-
+    <?php
     $post = $this->Post->read(null, '2');
     print_r($post);
 
@@ -1265,7 +1246,7 @@ should see our associated Tag models there as well:
     )
 
 Saving Related Model Data
-~~~~~~~~~~~~~~~~~~~~~~~~~
+=========================
 
 One important thing to remember when working with associated models is
 that saving model data should always be done by the corresponding Cake
@@ -1281,10 +1262,11 @@ Comment. The example action shown below will assume that you've posted a
 single Post and a single Comment.
 
 /app/controllers/posts\_controller.php (partial)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------------
 
 ::
 
+    <?php
     function add()
     {
         if (!empty($this->data))
@@ -1319,10 +1301,11 @@ parent model before saving. You could pass this ID as a URL parameter,
 or as a hidden element in a form...
 
 /app/controllers/posts\_controller.php (partial)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------------
 
 ::
 
+    <?php
     //Here's how it would look if the URL param is used...
     function addComment($post_id)
     {
@@ -1344,9 +1327,7 @@ If the ID was passed as a hidden element in the form, you might want to
 name the field (if you're using the HtmlHelper) so it ends up in the
 posted data where it needs to be:
 
-If the ID for the post is at $post['Post']['id']...
-
-::
+If the ID for the post is at $post['Post']['id']::
 
     <?php echo $html->hidden('Comment/post_id', array('value' => $post['Post']['id'])); ?>
 
@@ -1363,7 +1344,7 @@ hasMany relations), the main point is getting the ID of the parent model
 and saving it to the child model.
 
 Saving hasAndBelongsToMany Relations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------
 
 Saving models that are associated by hasOne, belongsTo, and hasMany is
 pretty simple: you just populate the foreign key field with the ID of
@@ -1385,7 +1366,7 @@ using the Html Helper) looks like 'Model/field\_name'. Let's just start
 out with the part of the form that creates our post:
 
 /app/views/posts/add.thtml Form for creating posts
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------------------
 
 ::
 
@@ -1414,7 +1395,7 @@ The form as it stands now will just create Post records. Let's add some
 code to allow us to bind a given Post to one or many Tags:
 
 /app/views/posts/add.thtml (Tag association code added)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------------------
 
 ::
 
@@ -1457,7 +1438,7 @@ the possible Tags, and the values are the displayed names of the Tags in
 the multi-select element.
 
 Changing Associations on the Fly using bindModel() and unbindModel()
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+====================================================================
 
 You might occasionally wish to change model association information for
 exceptional situations when building your application. If your
@@ -1469,7 +1450,7 @@ Let's set up a few models so we can see how bindModel() and
 unbindModel() work. We'll start with two models:
 
 leader.php and follower.php
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
 ::
 
@@ -1505,10 +1486,11 @@ hasMany Followers" relationship. For demonstration purposes, let's use
 unbindModel() to remove that association mid-controller.
 
 leaders\_controller.php (partial)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------
 
 ::
 
+    <?php
     function someAction()
     {
         //This fetches Leaders, and their associated Followers
@@ -1533,10 +1515,11 @@ change the name of the association type and model classname. The basic
 usage for unbindModel() is:
 
 Generic unbindModel() example
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
 ::
 
+    <?php
     $this->Model->unbindModel(array('associationType' => array('associatedModelClassName')));
 
 Now that we've successfully removed an association on the fly, let's add
@@ -1546,10 +1529,11 @@ statement. Let's associate some Principles to our Leader on the fly (but
 only for just the following find function call):
 
 leaders\_controller.php (partial)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------
 
 ::
 
+    <?php
     function anotherAction()
     {
         //There is no Leader hasMany Principles in the leader.php model file, so
@@ -1580,10 +1564,11 @@ normal association array inside an array who's key is named after the
 type of assocation you are trying to create:
 
 Generic bindModel() example
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
 ::
 
+    <?php
     $this->Model->bindModel(
             array('associationName' => array(
                     'associatedModelClassName' => array(
