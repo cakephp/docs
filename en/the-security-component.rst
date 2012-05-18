@@ -1,5 +1,5 @@
-19 The Security Component
--------------------------
+The Security Component
+######################
 
 The Security component is used to secure your controller actions against
 malicious or errant requests. It allows you to set up the conditions
@@ -9,13 +9,13 @@ using the Security component, you must make sure that 'Security' is
 listed in your controllers' $components array.
 
 Protecting Controller Actions
------------------------------
+=============================
 
 The Security component contains two primary methods for restricting
 access to controller actions:
 
-**requirePost**
-~~~~~~~~~~~~~~~
+requirePost
+---------------
 
 -  string *$action1*
 -  string *$action2*
@@ -24,8 +24,8 @@ access to controller actions:
 In order for the specified actions to execute, they must be requested
 via POST.
 
-**requireAuth**
-~~~~~~~~~~~~~~~
+requireAuth
+-----------
 
 -  string *$action1*
 -  string *$action2*
@@ -42,10 +42,9 @@ actions that you want fully protected. Learn more about how the
 authentication key is generated, and how it ends up where it should in
 Section 4 below.
 
-But first, let's take a look at a simple example:
+But first, let's take a look at a simple example::
 
-::
-
+    <?php
     class ThingsController extends AppController
     {
         var $components = array('Security');
@@ -73,7 +72,7 @@ And that's about all there is to it. You can test this by typing the URL
 for the action into your browser and seeing what happens.
 
 Handling Invalid Requests
--------------------------
+=========================
 
 So if a request doesn't meet the security requirements that we define,
 what happens to it? By default, the request is black-holed, which means
@@ -92,7 +91,7 @@ to check the request against other defined requirements. Otherwise, it
 stops checking, and your application continues uninhibited.
 
 Advanced Request Authentication
--------------------------------
+===============================
 
 The ``requireAuth()`` method allows you to be very detailed in
 specifying how and from where an action can be accessed, but it comes

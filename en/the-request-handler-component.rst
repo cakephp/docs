@@ -1,15 +1,14 @@
-18 The Request Handler Component
---------------------------------
+The Request Handler Component
+#############################
 
 The Request Handler component is used in Cake to determine information
 about the incoming HTTP request. You can use it to better inform your
 controller about AJAX requests, get information about the remote
 client's IP address and request type, or strip unwanted data from
 output. To use the Request Handler component, you'll need to make sure
-it is specified in your controller's $components array.
+it is specified in your controller's $components array::
 
-::
-
+    <?php
     class ThingsController extends AppController
     {
         var $components = array('RequestHandler');
@@ -18,7 +17,7 @@ it is specified in your controller's $components array.
     }
 
 Getting Client/Request Information
-----------------------------------
+==================================
 
 Let's just dive in:
 
@@ -32,10 +31,9 @@ passed, it returns true if the client accepts the given type, by
 checking $type against the content-type map (see setContent()). If $type
 is an array, each string is evaluated individually, and accepts() will
 return true if just one of them matches an accepted content-type. For
-example:
+example::
 
-::
-
+    <?php
     class PostsController extends AppController
     {
         var $components = array('RequestHandler');
@@ -126,9 +124,7 @@ text/xml).
 Adds a content-type alias mapping, for use with accepts() and prefers(),
 where $name is the name of the mapping (string), and $type is either a
 string or an array of strings, each of which is a MIME type. The
-built-in type mappings are as follows:
-
-::
+built-in type mappings are as follows::
 
     // Name     => Type
       'js'      => 'text/javascript',
@@ -142,7 +138,7 @@ built-in type mappings are as follows:
       'atom'    => 'application/atom+xml'
 
 Stripping Data
---------------
+==============
 
 Occasionally you will want to remove data from a request or output. Use
 the following Request Handler functions to perform these sorts of
@@ -169,10 +165,9 @@ Strips any <script> and <style> related tags from $str.
 -  string *$tag1*
 -  string *$tag2...*
 
-Removes the tags specified by $tag1, $tag2, etc. from $str.
+Removes the tags specified by $tag1, $tag2, etc. from $str::
 
-::
-
+    <?php
     $someString = '<font color="#FF0000"><bold>Foo</bold></font> <em>Bar</em>';
 
     echo $this->RequestHandler->stripTags($someString, 'font', 'bold');
@@ -185,19 +180,17 @@ Removes the tags specified by $tag1, $tag2, etc. from $str.
 Strips whitespace from $str.
 
 Other Useful Functions
-----------------------
+======================
 
 The Request Handler component is especially useful when your application
 includes AJAX requests. The setAjax() function is used to automatically
 detect AJAX requests, and set the controller's layout to an AJAX layout
 for that request. The benefit here is that you can make small modular
-views that can also double as AJAX views.
-
-::
+views that can also double as AJAX views::
 
     // list.thtml
     <ul>
-    <? foreach ($things as $thing):?>
+    <?php foreach ($things as $thing):?>
     <li><?php echo $thing;?></li>
     <?endforeach;?>
     </ul>

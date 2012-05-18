@@ -1,8 +1,8 @@
-15 Access Control Lists
------------------------
+Access Control Lists
+####################
 
 Understanding How ACL Works
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===========================
 
 Most important, powerful things require some sort of access control.
 Access control lists are a way to manage application permissions in a
@@ -215,7 +215,7 @@ ale-related permissions:
 #. Final Result: deny the ale.
 
 Defining Permissions: Cake's INI-based ACL
-------------------------------------------
+==========================================
 
 Cake's first ACL implementation was based off of INI files stored in the
 Cake installation. While its useful and stable, we recommend that you
@@ -230,9 +230,7 @@ core.php.
 
 ARO/ACO permissions are specified in **/app/config/acl.ini.php**.
 Instructions on specifying access can be found at the beginning of
-acl.ini.php:
-
-::
+acl.ini.php::
 
     ; acl.ini.php - Cake ACL Configuration
     ; ---------------------------------------------------------------------
@@ -262,10 +260,10 @@ groups along with their permissions. To learn how to use Cake's ACL
 component to check permissions using this INI file, see section 11.4.
 
 Defining Permissions: Cake's Database ACL
------------------------------------------
+=========================================
 
 Getting Started
-~~~~~~~~~~~~~~~
+---------------
 
 The default ACL permissions implementation is database stored. Database
 ACL, or dbACL consists of a set of core models, and a command-line
@@ -290,7 +288,7 @@ executing the following command (from your **/cake/scripts/**
 directory):
 
 Initializing your database using acl.php
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------------
 
 ::
 
@@ -313,7 +311,7 @@ aros\_acos table is used to link your AROs to the ACOs they can access.
 Now, you should be able to start creating your ARO and ACO trees.
 
 Creating Access Request Objects (AROs) and Access Control Objects (ACOs)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------------------------------------
 
 There are two ways of referring to AROs/ACOs. One is by giving them an
 numeric id, which is usually just the primary key of the table they
@@ -330,63 +328,54 @@ address your object using a non-integer ID.
 
 Before we can create our ACOs and AROs, we'll need to load up those
 classes. The easiest way to do this is to include Cake's ACL Component
-in your controller using the $components array:
+in your controller using the $components array::
 
-::
-
+    <?php
     var $components = array('Acl');
 
 Once we've got that done, let's see what some examples of creating these
 objects might look like. The following code could be placed in a
-controller action somewhere:
+controller action somewhere::
 
-::
-
+    <?php
     $aro = new Aro();
 
-First, set up a few AROs. These objects will have no parent initially.
+First, set up a few AROs. These objects will have no parent initially::
 
-::
-
+    <?php
     $aro->create( 1, null, 'Bob Marley' );<br />
     $aro->create( 2, null, 'Jimi Hendrix');<br />
     $aro->create( 3, null, 'George Washington');<br />
     $aro->create( 4, null, 'Abraham Lincoln');
 
 Now, we can make groups to organize these users. Notice that the IDs for
-these objects are 0, because they will never tie to users in our system.
+these objects are 0, because they will never tie to users in our system::
 
-::
-
+    <?php
     $aro->create(0, null, 'Presidents');<br />
     $aro->create(0, null, 'Artists');
 
-Now, hook AROs to their respective groups:
+Now, hook AROs to their respective groups::
 
-::
-
+    <?php
     $aro->setParent('Presidents', 'George Washington');<br />
     $aro->setParent('Presidents', 'Abraham Lincoln');<br />
     $aro->setParent('Artists', 'Jimi Hendrix');<br />
     $aro->setParent('Artists', 'Bob Marley');
 
-In short, here is how to create an ARO:
+In short, here is how to create an ARO::
 
-::
-
+    <?php
     $aro = new Aro();
     $aro->create($user_id, $parent_id, $alias);
 
-You can also create AROs using the command line script using
-
-::
+You can also create AROs using the command line script using::
 
     $acl.php create aro <link_id> <parent_id> <alias>
 
-Creating an ACO is done in a similar manner:
+Creating an ACO is done in a similar manner::
 
-::
-
+    <?php
     $aco = new Aco();
 
     //Create some access control objects:
@@ -395,29 +384,24 @@ Creating an ACO is done in a similar manner:
     $aco->create(3, null, 'Fans');
 
 We could create groups for these objects using setParent(), but we'll
-skip that
- for this particular example. To create an ACO:
+skip that for this particular example. To create an ACO::
 
-::
-
+    <?php
     $aco = new Aco();
     $aco->create($id, $parent, $alias);
 
-The corresponding command line script command would be:
-
-::
+The corresponding command line script command would be::
 
     $acl.php create aco <link_id> <parent_id> <alias>
 
 Assigning Permissions
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 After creating our ACOs and AROs, we can finally assign permission
 between the two groups. This is done using Cake's core Acl component.
-Let's continue on with our example:
+Let's continue on with our example::
 
-::
-
+    <?php
     // First, in a controller, we'll need access
     // to Cake's ACL component:
 
@@ -476,17 +460,16 @@ with Cake. The syntax is similar to the model functions, and can be
 viewed by executing $php acl.php help.
 
 Checking Permissions: The ACL Component
----------------------------------------
+=======================================
 
 Checking permissions is the easiest part of using Cake's ACL: it
 consists of using a single method in the Acl component: check(). A good
 way to implement ACL in your application might be to place an action in
 your AppController that performs ACL checks. Once placed there, you can
 access the Acl component and perform permissions checks
-application-wide. Here's an example implementation:
+application-wide. Here's an example implementation::
 
-::
-
+    <?php
     class AppController extends Controller
     {
         // Get our component
@@ -514,8 +497,7 @@ application-wide. Here's an example implementation:
 
 Basically, by making the Acl component available in the AppController,
 it will be visible for use in any controller in your application. Here's
-the basic format:
+the basic format::
 
-::
-
+    <?php
     $this->Acl->Check($aro, $aco, $action = '*');

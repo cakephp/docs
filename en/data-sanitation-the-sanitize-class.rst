@@ -1,20 +1,19 @@
-16 Data Sanitation: The Sanitize Class
---------------------------------------
+Data Sanitation: The Sanitize Class
+###################################
 
 Cake comes with Sanitize, a class you can use to rid user-submitted data
 of malicious attacks and other unwanted data. Sanitize is a core
 library, so it can be used anywhere inside of your code, but is probably
 best used in controllers or models.
 
-Include the library and then create a new Sanitize object.
+Include the library and then create a new Sanitize object::
 
-::
-
+    <?php
     uses('sanitize');
     $mrClean = new Sanitize();
 
 Making Data Safe for use in SQL and HTML
-----------------------------------------
+========================================
 
 This section explains how to use some of the functions that Sanitize
 offers.
@@ -25,10 +24,9 @@ offers.
 
 This function strips anything out of the target $string that is not a
 plain-jane alphanumeric character. You can, however, let it overlook
-certain characters by passing them along inside the $allowedChars array.
+certain characters by passing them along inside the $allowedChars array::
 
-::
-
+    <?php
     $badString = ";:<script><html><   // >@@#";
 
     echo $mrClean->paranoid($badString);
@@ -48,10 +46,9 @@ an existing HTML layout. This is especially useful if you don't want
 users to be able to break your layouts or insert images or scripts
 inside of blog comments, forum posts, and the like. If the $remove
 option is set to true, any HTML is removed rather than rendered as HTML
-entities.
+entities::
 
-::
-
+    <?php
     $badString = '<font size="99" color="#FF0000">HEY</font><script>...</script>';
 
     echo $mrClean->html($badString);

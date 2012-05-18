@@ -1,5 +1,5 @@
-17 The Cake Session Component
------------------------------
+The Cake Session Component
+##########################
 
 Cake comes preset to save session data in three ways: as temporary files
 inside of your Cake installation, using the default PHP mechanism, or
@@ -10,10 +10,11 @@ CAKE\_SESSION\_SAVE constant to 'cake', 'php', or 'database', depending
 on your application's needs.
 
 core.php Session Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==============================
 
 ::
 
+    <?php
     define('CAKE_SESSION_SAVE', 'php');
 
 In order to use the database session storage, you'll need to create a
@@ -21,7 +22,7 @@ table in your database. The schema for that table can be found in
 **/app/config/sql/sessions.sql**.
 
 Using the Cake Session Component
---------------------------------
+================================
 
 The Cake session component is used to interact with session information.
 It includes basic session reading and writing, but also contains
@@ -77,7 +78,7 @@ Writes the message specified by $flashMessage into the session (to be
 later retrieved by flash()).
 
 If $layout is set to 'default', the message is stored as
-``'<div        class="message">'.$flashMessage.'</div>'``. If $default
+``'<div class="message">'.$flashMessage.'</div>'``. If $default
 is set to an empty string ('') then the message is stored just as it has
 been passed. If any other value is passed then the message is stored
 inside the Cake view specified by $layout.
