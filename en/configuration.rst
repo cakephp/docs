@@ -1,8 +1,8 @@
-5 Configuration
----------------
+Configuration
+===============
 
 Database Configuration
-~~~~~~~~~~~~~~~~~~~~~~
+======================
 
 Your **app/config/database.php** file is where your database
 configuration all takes place. A fresh install doesn't have a
@@ -11,10 +11,11 @@ configuration all takes place. A fresh install doesn't have a
 see the following:
 
 app/config/database.php
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 ::
 
+    <?php
     var $default = array('driver'   => 'mysql',
                          'connect'  => 'mysql_connect',
                          'host'     => 'localhost',
@@ -69,17 +70,16 @@ Your database tables should also follow the following conventions:
 You'll also notice that there is a $test connection setting included in
 the database.php file. Fill out this configuration (or add other
 similarly formatted configurations) and use it in your application by
-placing something like:
+placing something like::
 
-::
-
+    <?php
     var $useDbConfig = 'test';
 
 Inside one of your models. You can add any number of additional
 connection settings in this manner.
 
 Global Configuration
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 CakePHP's global configuration can be found in **app/config/core.php**.
 While we really dislike configuration files, it just had to be done.
@@ -126,7 +126,7 @@ values are:
    'default' key.
 
 Routes Configuration
-~~~~~~~~~~~~~~~~~~~~
+====================
 
 "Routing" is a pared-down pure-PHP mod\_rewrite-alike that can map URLs
 to controller/action/params and back. It was added to Cake to make
@@ -139,7 +139,7 @@ controllers and actions. Routes are configured in the
 **app/config/routes.php** file. They are set-up like this:
 
 Route Pattern
-~~~~~~~~~~~~~
+-------------
 
 ::
 
@@ -170,18 +170,17 @@ The following example joins all the urls in /blog to the BlogController.
 The default action will be BlogController::index().
 
 Route Example
-~~~~~~~~~~~~~
+-------------
 
 ::
 
     <?php
     $Route->connect ('/blog/:action/*', array('controller'=>'Blog', 'action'=>'index'));
-    ?>
 
 A URL like /blog/history/05/june can then be handled like this:
 
 Route Handling in a Controller
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------
 
 ::
 
@@ -193,7 +192,6 @@ Route Handling in a Controller
        // .. Display appropriate content
      }
     }
-    ?>
 
 The 'history' from the URL was matched by :action from the Blog's route.
 URL elements matched by \* are passed to the active controller's
@@ -205,16 +203,15 @@ for PagesController::display('home'). Home is a view which can be
 overridden by creating the file **/app/views/pages/home.thtml**.
 
 Setting the Default Route
-~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------
 
 ::
 
     <?php
     $Route->connect ('/', array('controller'=>'Pages', 'action'=>'display', 'home'));
-    ?>
 
 Advanced Routing Configuration: Admin Routing and Webservices
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------------------------
 
 There are some settings in /app/config/core.php you can take advantage
 of in order to organize your application and craft URLs that make the
@@ -233,9 +230,7 @@ but you can change it to whatever you like. Remember this string,
 because you'll need to prepend it to your administrative actions in your
 controller. So, admin actions in this case would be named
 admin\_actionName(). Here's some examples of desired URLs and possible
-CAKE\_ADMIN and controller action settings:
-
-::
+CAKE\_ADMIN and controller action settings::
 
     /admin/products/add          CAKE_ADMIN = 'admin'
                                  name of action in ProductsController = 'admin_add()'
@@ -249,13 +244,15 @@ CAKE\_ADMIN and controller action settings:
 Using admin routes allows you to keep your logic organized while making
 the routing very easy to accomplish. When enabled, you can easily
 determine in the controller whether an admin route has been accessed by
-using:
+using::
 
-$this->params[CAKE\_ADMIN];
+    <?php
+    $this->params[CAKE\_ADMIN];
 
-or, assuming 'admin' is the value of CAKE\_ADMIN,
+or, assuming 'admin' is the value of CAKE\_ADMIN::
 
-$this->params['admin'];
+    <?php
+    $this->params['admin'];
 
 Please note that enabling admin routes or using them does not enable any
 sort of authentication or security. You'll need implement those
@@ -292,10 +289,11 @@ widget or handheld application. First I need to enable Cake's webservice
 routing:
 
 /app/config/core.php (partial)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------
 
 ::
 
+    <?php
     /**
      *  The define below is used to turn cake built webservices
      *  on or off. Default setting is off.
@@ -311,7 +309,7 @@ Once that's done, I can structure the logic in my controller just as I
 normally would:
 
 messages\_controller.php
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 ::
 
@@ -330,10 +328,9 @@ messages\_controller.php
             // If a user requests /xml/phones/doWhosOnline, they will get the XML version.
         }
     }
-    ?>
 
 (Optional) Custom Inflections Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------
 
 Cake's naming conventions can be really nice - you can name your model
 Box, your controller Boxes, and everything just works out. There are

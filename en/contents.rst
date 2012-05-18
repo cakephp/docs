@@ -5,6 +5,7 @@ Contents
    :maxdepth: 3
 
    index
+   preface
    introduction-to-cakephp
    basic-concepts
    installing-cakephp

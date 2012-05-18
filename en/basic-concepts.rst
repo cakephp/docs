@@ -1,8 +1,8 @@
-3 Basic Concepts
-----------------
+Basic Concepts
+================
 
 Introduction
-~~~~~~~~~~~~
+------------
 
 This chapter is a short, casual introduction to MVC concepts as they are
 implemented in Cake. If you're new to MVC (Model View Controller)
@@ -12,7 +12,7 @@ MVC in CakePHP, and show some simple examples of CakePHP using the MVC
 pattern.
 
 The MVC Pattern
-~~~~~~~~~~~~~~~
+---------------
 
 Model-View-Controller is a software design pattern that helps you
 logically separate your code, make it more reusable, maintainable, and
@@ -55,15 +55,13 @@ this pattern not only to manage how objects interact within your
 application, but also how files are stored, which is detailed next.
 
 Overview of the Cake File Layout
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------
 
-When you unpack Cake on your server you will find three main folders -
-
-::
+When you unpack Cake on your server you will find three main folders::
 
         app
-        cake        
-        vendors        
+        cake
+        vendors
 
 The **cake** folder is where the core libraries for Cake lay and you
 generally won't ever need to touch it.
@@ -81,9 +79,7 @@ You will learn more about vendors later, but the basic idea is that you
 can access classes you've placed in the vendors directory using Cake's
 **vendor()** function.
 
-Let's look at the entire file layout:
-
-::
+Let's look at the entire file layout::
 
     /app
         /config          - Contains config files for your database, ACL, etc. 

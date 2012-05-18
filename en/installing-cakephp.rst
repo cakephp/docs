@@ -1,8 +1,8 @@
-4 Installing CakePHP
---------------------
+Installing CakePHP
+####################
 
 Introduction
-~~~~~~~~~~~~
+============
 
 So now you know everything there is to know about the structure and
 purpose of all the CakePHP libraries, or you have skipped to this part
@@ -15,13 +15,13 @@ CakePHP, bringing up the default CakePHP page, and some troubleshooting
 tips just in case everything does not go as planned.
 
 Requirements
-~~~~~~~~~~~~
+============
 
 In order use CakePHP you must first have a server that has all the
 required libraries and programs to run CakePHP:
 
 Server Requirements
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 Here are the requirements for setting up a server to run CakePHP:
 
@@ -34,10 +34,10 @@ Here are the requirements for setting up a server to run CakePHP:
    PostgreSQL and a wrapper for ADODB).
 
 Installing CakePHP
-~~~~~~~~~~~~~~~~~~
+==================
 
 Getting the most recent stable version
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------
 
 There are a few ways you can secure a copy of CakePHP: getting a stable
 release from CakeForge, grabbing a nightly build, or getting a fresh
@@ -58,7 +58,7 @@ client and connect to
 and choose the version you're after.
 
 Unpacking
-~~~~~~~~~
+---------
 
 Now that you've downloaded the most recent release, place that
 compressed package on your web server in the webroot. Now you need to
@@ -68,7 +68,7 @@ applications under a single domain, or using the production setup, which
 allows for a single CakePHP application on the domain.
 
 Setting Up CakePHP
-~~~~~~~~~~~~~~~~~~
+------------------
 
 The first way to setup CakePHP is generally only recommended for
 development environments because it is less secure. The second way is
@@ -78,12 +78,10 @@ NOTE: **/app/tmp** must be writable by the user that your web server
 runs as.
 
 Development Setup
-~~~~~~~~~~~~~~~~~
+-----------------
 
 For development we can place the whole Cake installation directory
-inside the specified DocumentRoot like this:
-
-::
+inside the specified DocumentRoot like this::
 
         /wwwroot
         /cake
@@ -94,22 +92,18 @@ inside the specified DocumentRoot like this:
             index.php
 
 In this setup the wwwroot folder acts as the web root so your URLs will
-look something like this (if you're also using mod\_rewrite):
-
-::
+look something like this (if you're also using mod\_rewrite)::
 
     <a href="http://www.example.com/cake/controllerName/actionName/param1/param2" title="Linkification: http://www.example.com/cake/controllerName/actionName/param1/param2">www.example.com/cake/controllerName/actionName/param1/param2</a>
 
 Production Setup
-~~~~~~~~~~~~~~~~
+----------------
 
 In order to utilize a production setup, you will need to have the rights
 to change the DocumentRoot on your server. Doing so, makes the whole
 domain act as a single CakePHP application.
 
-The production setup uses the following layout:
-
-::
+The production setup uses the following layout::
 
     ../path_to_cake_install
         /app
@@ -129,7 +123,7 @@ The production setup uses the following layout:
         index.php
 
 Suggested Production httpd.conf
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
 
 ::
 
@@ -143,7 +137,7 @@ URLs might look like this (if you're using mod\_rewrite):
     http://www.example.com/controllerName/actionName/param1/param2
 
 Advanced Setup: Alternative Installation Options
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------------
 
 There are some cases where you may wish to place Cake's directories on
 different places on disk. This may be due to a shared host restriction,
@@ -248,7 +242,6 @@ set up Cake to work with the following setup:
                     bootstrap.php
                     dispatcher.php
                 /vendors 
-
 Given this type of setup, I would need to edit my webroot index.php file
 (which should be at /var/www/mysite/index.php, in this example) to look
 like the following:
@@ -256,11 +249,10 @@ like the following:
 It is recommended to use the 'DS' constant rather than slashes to
 delimit file paths. This prevents any 'missing file' errors you might
 get as a result of using the wrong delimiter, and it makes your code
-more portable.
+more portable::
 
-::
-
-     if (!defined('ROOT'))
+    <?php
+    if (!defined('ROOT'))
     {
         define('ROOT', DS.'home'.DS.'me');
     }
@@ -276,7 +268,7 @@ more portable.
     }
 
 Configuring Apache and mod\_rewrite
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------
 
 While CakePHP is built to work with mod\_rewrite out of the box, we've
 noticed that a few users struggle with getting everything to play nicely
@@ -315,7 +307,7 @@ correctly:
    file at the root of your installation as well.
 
 Make Sure It's Working
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 Alright, lets see this baby in action. Depending on which setup you
 used, you should point your browser to
