@@ -8,7 +8,7 @@
 // Elastic search config
 define('ES_URL', 'http://localhost:9200');
 define('ES_INDEX', 'documentation');
-define('CAKEPHP_VERSION', '1-1');
+define('CAKEPHP_VERSION', '2-2');
 
 
 function main($argv) {
