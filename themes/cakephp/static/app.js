@@ -3,6 +3,10 @@ if (/cakephp\.org/.test(document.domain)) {
 }
 
 App = {};
+App.config = {
+	url: 'http://search.cakephp.org/search',
+	version: '1-1'
+};
 
 App.Book = (function() {
 
@@ -49,7 +53,7 @@ App.Book = (function() {
  
 	return {
 		init : init
-	}
+	};
 })();
 
 // Inline search form, and standalone search form.
@@ -60,7 +64,6 @@ App.InlineSearch = (function () {
 	var searchResults;
 	var searchInput;
 	var doSearch;
-	var searchUrl = 'http://search.cakephp.org/search';
 
 	var delay = (function(){
 		var timer;
@@ -112,11 +115,11 @@ App.InlineSearch = (function () {
 	};
 
 	var executeSearch = function (value, searchResults, limit, page) {
-		var query = {lang: window.lang, q: value};
+		var query = {lang: window.lang, q: value, version: App.config.version};
 		if (page) {
 			query.page = page;
 		}
-		var url = searchUrl + '?' + jQuery.param(query);
+		var url = App.config.url + '?' + jQuery.param(query);
 		var xhr = $.ajax({
 			url: url,
 			dataType: 'json',
@@ -161,7 +164,7 @@ App.InlineSearch = (function () {
 	return {
 		init: init,
 		delay: delay,
-		searchUrl: searchUrl,
+		searchUrl: App.config.url,
 		createSearch: createSearch,
 		executeSearch: executeSearch
 	};

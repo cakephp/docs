@@ -8,6 +8,7 @@
 // Elastic search config
 define('ES_URL', 'http://localhost:9200');
 define('ES_INDEX', 'documentation');
+define('CAKEPHP_VERSION', '1-1');
 
 
 function main($argv) {
@@ -37,7 +38,7 @@ function updateIndex($lang, $file) {
 	$id = str_replace('/', '-', $id);
 	$id = trim($id, '-');
 
-	$url = implode('/', array(ES_URL, ES_INDEX, $lang, $id));
+	$url = implode('/', array(ES_URL, ES_INDEX, CAKEPHP_VERSION . '-' . $lang, $id));
 
 	$data = array(
 		'contents' => $fileData['contents'],
