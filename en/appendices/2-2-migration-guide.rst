@@ -257,3 +257,11 @@ and :doc:`/core-libraries/logging`.
 - A third argument ``$scope`` has been added to :php:meth:`CakeLog::write`.
   See :ref:`logging-scopes`.
 - A new log engine: :php:class:`ConsoleLog` has been added.
+
+Model Validation
+================
+
+A new object ``ModelValidator`` was added to delegate the work of validating
+model data, it should be transparent to the application and fully backwards
+compatible. It also exposes a rich API to add, modify and remove validation
+rules. Check docs for this object in :doc:`/models/data-validation`.
