@@ -93,6 +93,13 @@ Configure
 - :php:meth:`Configure::dump()` was added.  It is used to persist configuration
   data in durable storage like files.  Both :php:class:`PhpReader` and
   :php:class:`IniReader` work with it.
+- A new config parameter 'Config.timezone' is available which you can set to
+  user's timezone string.  eg. You can do ``Configure::write('Config.timezone',
+  'Europe/Paris')``.  If a method of ``CakeTime`` class is called with
+  ``$timezone`` parameter as null and 'Config.timezone' is set, then the value
+  of 'Config.timezone' will be used. This feature allows you to set user's
+  timezone just once instead of passing it each time in function calls.
+
 
 
 Controller
@@ -104,6 +111,13 @@ AuthComponent
 - The options for adapters defined in :php:attr:`AuthComponent::$authenticate`
   now accepts a ``contain`` option. This is used to set containable options for
   when user records are loaded.
+
+Pagination
+==========
+
+- Paginating custom finders will now return correct counts, see Model changes
+  for more info.
+
 
 Network
 =======
@@ -145,6 +159,13 @@ CakeTime
 - :php:meth:`CakeTime::timeAgoInWords()` had the ``accuracy`` option added.
   This option allows you to specify how accurate formatted times should be.
 
+- New methods added:
+
+  * :php:meth:`CakeTime::toServer()`
+  * :php:meth:`CakeTime::timezone()`
+
+- The ``$dateString`` parameter in all methods now accepts a DateTime object.
+
 
 Helpers
 =======
@@ -166,16 +187,70 @@ TimeHelper
   This allows you to specify an HTML element to wrap the formatted time.
 
 
-Dispatcher
-==========
-
-With the addition of :doc:`/development/dispatch-filters` you'll need to update
-``app/Config/bootstrap.php``.  See :ref:`required-steps-to-upgrade-2-2`, and see
-the documentation in :doc:`/development/dispatch-filters`
-
-Logging
+Routing
 =======
 
-Changes in :php:class:`CakeLog` now require, some additional configuration
-in your ``app/Config/bootstrap.php``.  See :ref:`required-steps-to-upgrade-2-2`,
+Dispatcher
+----------
+
+- Event listeners can now be attached to the dispatcher calls, those will have
+  the ability to change the request information or the response before it is
+  sent to the client. Check the full documentation for this new features in
+  :doc:`/development/dispatch-filters`
+- With the addition of :doc:`/development/dispatch-filters` you'll need to
+  update ``app/Config/bootstrap.php``.  See
+  :ref:`required-steps-to-upgrade-2-2`.
+
+Cache
+=====
+
+Redis Engine
+------------
+
+A new caching engine was added using the `phpredis extension
+<https://github.com/nicolasff/phpredis>`_ it is configured similarly to the
+Memcache engine.
+
+Cache groups
+------------
+
+It is now possible to tag or label cache keys under groups. This makes it
+simpler to mass-delete cache entries associated to the same label. Groups are
+declared at configuration time when creating the cache engine::
+
+    <?php
+    Cache::config(array(
+        'engine' => 'Redis',
+        ...
+        'groups' => array('post', 'comment', 'user')
+    ));
+
+You can have as many groups as you like, but keep in mind they cannot be
+dynamically modified.
+
+The :php:meth:`Cache::clearGroup()` class method was added. It takes the group
+name and deletes all entries labeled with the same string.
+
+Log
+===
+
+Changes in :php:class:`CakeLog` now require, some additional configuration in
+your ``app/Config/bootstrap.php``.  See :ref:`required-steps-to-upgrade-2-2`,
 and :doc:`/core-libraries/logging`.
+
+- The :php:class:`CakeLog` class now accepts the same log levels as defined in
+  `RFC 5424 <http://tools.ietf.org/html/rfc5424>`_.  Several convenience
+  methods have also been added:
+
+  * :php:meth:`CakeLog::emergency($message, $scope = array()`
+  * :php:meth:`CakeLog::alert($message, $scope = array()`
+  * :php:meth:`CakeLog::critical($message, $scope = array()`
+  * :php:meth:`CakeLog::error($message, $scope = array()`
+  * :php:meth:`CakeLog::warning($message, $scope = array()`
+  * :php:meth:`CakeLog::notice($message, $scope = array()`
+  * :php:meth:`CakeLog::info($message, $scope = array()`
+  * :php:meth:`CakeLog::debug($message, $scope = array()`
+
+- A third argument ``$scope`` has been added to :php:meth:`CakeLog::write`.
+  See :ref:`logging-scopes`.
+- A new log engine: :php:class:`ConsoleLog` has been added.
