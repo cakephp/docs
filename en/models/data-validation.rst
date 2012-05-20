@@ -429,6 +429,155 @@ stored in $this->data member variable::
         }
     }
 
+
+Dynamically change validation rules
+===================================
+
+Using ``$validate`` property to declare validation rules is a good ways of defining
+statically rules for each model. Nevertheless there are cases when you want to
+dynamically add, change or remove validation rules from the predefined set.
+
+All validation rules are stored in a ``ModelValidator`` object, which holds
+every rule set for each field in your model. Defining new validation rules is as
+easy as telling this object to store new validation methods for the fields you
+want to.
+
+
+Adding new validation rules
+---------------------------
+
+.. versionadded:: 2.2
+
+The ``ModelValidator`` objects allows several ways for adding new fields to the
+set. The first one is using the ``add`` method::
+
+    <?php
+        // Inside a model class
+        $this->validator()->add('password', 'required', array(
+           'rule' => 'notEmpty',
+           'required' => 'create'
+        ));
+
+This will add a single rule to the `password` field in the model. You can chain
+multiple calls to add to create as many rules as you like::
+
+    <?php
+        // Inside a model class
+        $this->validator()
+            ->add('password', 'required', array(
+                'rule' => 'notEmpty',
+                'required' => 'create'
+            ))
+            ->add('password', 'size', array(
+                'rule' => array('between', 8, 20),
+                'message' => 'Password should be at least 8 chars long'
+            ));
+
+It is also possible to add multiple rules at once for a single field::
+
+    <?php
+        $this->validator()->add('password', array(
+            'required' => array(
+                 'rule' => 'notEmpty',
+                 'required' => 'create'
+            ),
+            'size' => array(
+                'rule' => array('between', 8, 20),
+                'message' => 'Password should be at least 8 chars long'
+            )
+        ));
+
+Alternatively, you can use the validator object to set rules directly to fields
+using the array interface::
+
+    <?php
+        $validator = $this->validator();
+        $validator['username'] = array(
+            'unique' => array(
+                 'rule' => 'isUnique',
+                 'required' => 'create'
+            ),
+            'alphanumeric' => array(
+                'rule' => 'alphanumeric'
+            )
+        );
+
+Modifying current validation rules
+----------------------------------
+
+.. versionadded:: 2.2
+
+Modifying current validation rules is also possible using the validator object,
+there are several ways in which you can alter current rules, append methods to a
+field or completely remove a rule from a field rule set::
+
+    <?php
+    //In a model class
+    $this->validator()->getField('password')->setRule('required', array(
+        'rule' => 'required',
+        'required' => true
+    ));
+
+You can also completyly replace all the rules for a field using a similar
+method::
+
+    <?php
+    //In a model class
+    $this->validator()->getField('password')->setRules(array(
+        'required' => array(...),
+        'otherRule' => array(...)
+    ));
+
+If you wish to just modify a sigle property in a rule you can set properties
+directly into the ``CakeValidationRule`` object::
+
+        <?php
+        //In a model class
+        $this->validator()->getField('password')
+            ->getRule('required')->message = 'This field cannot be left blank';
+
+Properties in any ``CakeValidationRule`` are named as the valid array keys you
+can use for defining such rules using the ``$validate`` property in the model.
+
+As with adding new rule to the set, it is also possible to modify existing rules
+using the array interface::
+
+    <?php
+        $validator = $this->validator();
+        $validator['username']['unique'] = array(
+            'rule' => 'isUnique',
+            'required' => 'create'
+        );
+
+        $validator['username']['unique']->last = true;
+        $validator['username']['unique']->message = 'Name already taken';
+
+
+Removing rules from the set
+---------------------------
+
+.. versionadded:: 2.2
+
+It is possible to both completely remove all rules for a field and to delete a
+single rule in a field's rule set::
+
+    <?php
+        //Completely remove all rules for a field
+        $this->validator()->remove('username');
+
+        //Remove 'required' rule from password
+        $this->validator()->remove('password', required);
+
+Optionally, you can use the array interface to delete rules from the set::
+
+    <?php
+        $validator = $this->validator();
+        //Completely remove all rules for a field
+        unset($validator['username']);
+        
+        //Remove 'required' rule from password
+        unset($validator['password']['required']);
+
 .. _core-validation-rules:
 
 Core Validation Rules
