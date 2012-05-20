@@ -32,7 +32,7 @@ Formatting
 
     :rtype: integer
 
-    Converts given time (in server's time zone) to user's local 
+    Converts given time (in server's time zone) to user's local
     time, given his/her timezone.::
 
         <?php
@@ -51,7 +51,7 @@ Formatting
 
     :rtype: string
 
-    Converts a string representing the format for the function 
+    Converts a string representing the format for the function
     strftime and returns a windows safe and i18n aware format.
 
 .. php:method:: dayAsSql($dateString, $field_name, $timezone = NULL)
@@ -104,17 +104,17 @@ Formatting
 
     :rtype: string
 
-    Will return a string formatted to the given format using the 
+    Will return a string formatted to the given format using the
     `PHP date() formatting options <http://www.php.net/manual/en/function.date.php>`_::
 
         <?php
         // called via TimeHelper
         echo $this->Time->format('Y-m-d H:i:s');
         // The Unix Epoch as 1970-01-01 00:00:00
-        
+
         echo $this->Time->format('F jS, Y h:i A', '2011-08-22 11:53:00');
         // August 22nd, 2011 11:53 AM
-        
+
         echo $this->Time->format('r', '+2 days', true);
         // 2 days from now formatted as Sun, 13 Nov 2011 03:36:10 +0800
 
@@ -134,14 +134,14 @@ Formatting
 
     :rtype: string
 
-    Takes a string and uses `strtotime <http://us.php.net/manual/en/function.date.php>`_ 
+    Takes a string and uses `strtotime <http://us.php.net/manual/en/function.date.php>`_
     to convert it into a date integer::
 
         <?php
         // called via TimeHelper
         echo $this->Time->fromString('Aug 22, 2011');
         // 1313971200
-        
+
         echo $this->Time->fromString('+1 days');
         // 1321074066 (+1 day from current date)
 
@@ -175,8 +175,8 @@ Formatting
 
     :rtype: string
 
-    Returns a formatted date string, given either a UNIX timestamp or a 
-    valid strtotime() date string. It take in account the default date 
+    Returns a formatted date string, given either a UNIX timestamp or a
+    valid strtotime() date string. It take in account the default date
     format for the current language if a LC_TIME file is used.
 
     .. versionchanged:: 2.2
@@ -303,7 +303,7 @@ Formatting
         // called via TimeHelper
         echo $this->Time->toQuarter('Aug 22, 2011');
         // Would print 3
-        
+
         $arr = $this->Time->toQuarter('Aug 22, 2011', true);
         /*
         Array
@@ -325,7 +325,7 @@ Formatting
 
     :rtype: string
 
-    Will return a date string in the RSS format "Sat, 12 Jan 2008 
+    Will return a date string in the RSS format "Sat, 12 Jan 2008
     00:00:00 -0500"
 
     .. versionchanged:: 2.2
@@ -360,6 +360,13 @@ Formatting
     .. versionadded:: 2.2
        Returns a timezone object from a string or the user's timezone object. If the function is called
        without a parameter it tries to get timezone from 'Config.timezone' configuration variable.
+
+.. php:method:: listTimezones($filter = null, $country = null, $group = true)
+
+    :rtype: array
+
+    .. versionadded:: 2.2
+       Returns a list of timezone identifiers.
 
 Testing Time
 ============

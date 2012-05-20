@@ -165,6 +165,7 @@ CakeTime
 
   * :php:meth:`CakeTime::toServer()`
   * :php:meth:`CakeTime::timezone()`
+  * :php:meth:`CakeTime::listTimezones()`
 
 - The ``$dateString`` parameter in all methods now accepts a DateTime object.
 
