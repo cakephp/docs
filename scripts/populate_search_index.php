@@ -43,7 +43,7 @@ function updateIndex($lang, $file) {
 	$id = str_replace('/', '-', $id);
 	$id = trim($id, '-');
 
-	$url = implode('/', array(ES_URL, ES_INDEX, CAKEPHP_VERSION . '-' . $lang, $id));
+	$url = implode('/', array(ES_HOST, ES_INDEX, CAKEPHP_VERSION . '-' . $lang, $id));
 
 	$data = array(
 		'contents' => $fileData['contents'],
@@ -69,7 +69,7 @@ function updateIndex($lang, $file) {
 	$response = curl_exec($ch);
 	$metadata = curl_getinfo($ch);
 
-	if ($metadata['http_code'] > 400) {
+	if ($metadata['http_code'] > 400 || !$metadata['http_code']) {
 		echo "[ERROR] Failed to complete request.\n";
 		var_dump($response);
 		exit(2);
