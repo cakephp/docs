@@ -179,7 +179,7 @@ Logging Scopes
 
 Often times you'll want to configure different logging behavior for different
 subsystems or parts of your application.  Take for example an e-commerce shop.
-You'll probably want to handel logging for orders and payments differently than
+You'll probably want to handle logging for orders and payments differently than
 you do other less critical logs.
 
 CakePHP exposes this concept as logging scopes.  When log messages are written
