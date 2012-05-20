@@ -1497,6 +1497,31 @@ Displaying and checking errors
     errors. Otherwise it returns the validation message.
 
 
+Setting Defaults for all fields
+===============================
+
+.. versionadded:: 2.2
+
+You can declare a set of default options for
+``input()`` with the :php:meth:`FormHelper::inputDefaults()` method customize your default input
+creation::
+
+    <?php
+    echo $this->Form->inputDefaults(array(
+            'label' => false,
+            'div' => false,
+            'class' => 'fancy'
+        )
+    ));
+
+All inputs created from that point forward would inherit the options declared in
+inputDefaults. You can override the defaultOptions by declaring the option in the
+input() call::
+
+    <?php
+    echo $this->Form->input('password'); // No div, no label with class 'fancy'
+    echo $this->Form->input('username', array('label' => 'Username')); // has a label element same defaults
+
 Working with SecurityComponent
 ==============================
 
