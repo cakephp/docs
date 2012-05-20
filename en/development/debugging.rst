@@ -136,7 +136,7 @@ set to a value greater than 0.
     lines around it.::
 
         <?php
-        pr( Debugger::excerpt(ROOT.DS.LIBS.'debugger.php', 321, 2) );
+        pr( Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2) );
         
         //will output the following.
         Array

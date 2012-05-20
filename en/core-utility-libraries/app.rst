@@ -369,7 +369,7 @@ directory. Cake will automatically find it.
 To load **vendors/vendorName/libFile.php**::
 
     <?php
-    App::import('Vendor', 'aUniqueIdentifier', array('file' => 'vendorName' .DS . 'libFile.php'));
+    App::import('Vendor', 'aUniqueIdentifier', array('file' => 'vendorName' . DS . 'libFile.php'));
 
 App Init/Load/Shutdown Methods
 ==============================

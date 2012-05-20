@@ -56,7 +56,7 @@ example) to look like the following::
     // /app/webroot/index.php (partial, comments removed) 
     
     if (!defined('ROOT')) {
-        define('ROOT', DS.'home'.DS.'me');
+        define('ROOT', DS . 'home' . DS . 'me');
     }
     
     if (!defined('APP_DIR')) {
@@ -64,7 +64,7 @@ example) to look like the following::
     }
     
     if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-        define('CAKE_CORE_INCLUDE_PATH', DS.'usr'.DS.'lib');
+        define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
     }
 
 It is recommended to use the ``DS`` constant rather than slashes to
