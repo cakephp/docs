@@ -6,7 +6,7 @@
  */
 
 // Elastic search config
-define('ES_URL', 'http://localhost:9200');
+define('ES_DEFAULT_HOST', 'http://localhost:9200');
 define('ES_INDEX', 'documentation');
 define('CAKEPHP_VERSION', '2-2');
 
@@ -17,6 +17,11 @@ function main($argv) {
 		exit(1);
 	}
 	$lang = $argv[1];
+	if (!empty($argv[2])) {
+		define('ES_HOST', $argv[2]);
+	} else {
+		define('ES_HOST', ES_DEFAULT_HOST);
+	}
 	
 	$directory = new RecursiveDirectoryIterator($lang);
 	$recurser = new RecursiveIteratorIterator($directory);

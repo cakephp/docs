@@ -3,6 +3,7 @@
 # http://bazaar.launchpad.net/~bzr-pqm/bzr/2.3/
 
 PYTHON = python
+ES_HOST =
 
 .PHONY: all clean html latexpdf epub htmlhelp website website-dirs
 
@@ -44,7 +45,7 @@ latexpdf-%: $(SPHINX_DEPENDENCIES)
 	cd $* && make latexpdf LANG=$*
 
 populate-index-%: $(SPHINX_DEPENDENCIES)
-	php scripts/populate_search_index.php $*
+	php scripts/populate_search_index.php $* $(ES_HOST)
 
 website-dirs:
 	# Make the directory if its not there already.
