@@ -61,6 +61,8 @@ Testing
 =======
 
 - The webrunner now includes links to re-run a test with debug output.
+- Generated test cases for Controller now subclass
+  :php:class:`ControllerTestCase`.
 
 
 Error Handling
@@ -84,6 +86,7 @@ Exceptions
 
 - The :php:class:`NotImplementedException` was added.
 
+
 Core
 ====
 
@@ -99,7 +102,6 @@ Configure
   ``$timezone`` parameter as null and 'Config.timezone' is set, then the value
   of 'Config.timezone' will be used. This feature allows you to set user's
   timezone just once instead of passing it each time in function calls.
-
 
 
 Controller
