@@ -374,7 +374,7 @@ function, as shown below::
         );
 
         public function limitDuplicates($check, $limit) {
-            // $check will have value: array('promomotion_code' => 'some-value')
+            // $check will have value: array('promotion_code' => 'some-value')
             // $limit will have value: 25
             $existing_promo_count = $this->find('count', array(
                 'conditions' => $check,
@@ -518,7 +518,7 @@ field or completely remove a rule from a field rule set::
         'required' => true
     ));
 
-You can also completyly replace all the rules for a field using a similar
+You can also completely replace all the rules for a field using a similar
 method::
 
     <?php
@@ -528,7 +528,7 @@ method::
         'otherRule' => array(...)
     ));
 
-If you wish to just modify a sigle property in a rule you can set properties
+If you wish to just modify a single property in a rule you can set properties
 directly into the ``CakeValidationRule`` object::
 
         <?php
