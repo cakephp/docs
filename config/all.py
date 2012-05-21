@@ -199,15 +199,14 @@ latex_show_urls = 'footnote'
 preamb = ur'''
 % Custom colors.
 \definecolor{ChapterColor}{RGB}{201,36,52}
-\definecolor{Black}{RGB}{0,0,0}
-\definecolor{TitleColor}{RGB}{85,85,85}
+\definecolor{TitleColor}{RGB}{0,0,0}
 
 % No section numbering
 \setcounter{secnumdepth}{0}
 
 % Make chapter titles red.
-\ChNameVar{\color{Black}\Large}
-\ChNumVar{\color{Black}\Large}
+\ChNameVar{\color{TitleColor}\Large}
+\ChNumVar{\color{TitleColor}\Large}
 \ChTitleVar{\color{ChapterColor}\Huge\sf}
 '''
 
