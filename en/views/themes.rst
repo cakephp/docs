@@ -12,9 +12,9 @@ controller::
         public $theme = 'Example';
     }
 
-    .. versionchanged:: 2.1
-        Versions previous to 2.1 required setting the ``$this->viewClass = 'Theme'``.
-        2.1 removes this requirement as the normal ``View`` class supports themes
+.. versionchanged:: 2.1
+   Versions previous to 2.1 required setting the ``$this->viewClass = 'Theme'``.
+   2.1 removes this requirement as the normal ``View`` class supports themes
 
 You can also set or change the theme name within an action or within the
 ``beforeFilter`` or ``beforeRender`` callback functions::
