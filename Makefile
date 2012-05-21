@@ -27,6 +27,8 @@ SPHINX_DEPENDENCIES = $(foreach lang, $(LANGS), $(lang)/Makefile)
 html: $(foreach lang, $(LANGS), html-$(lang))
 htmlhelp: $(foreach lang, $(LANGS), htmlhelp-$(lang))
 epub: $(foreach lang, $(LANGS), epub-$(lang))
+latex: $(foreach lang, $(LANGS), latex-$(lang))
+pdf: $(foreach lang, $(LANGS), pdf-$(lang))
 htmlhelp: $(foreach lang, $(LANGS), htmlhelp-$(lang))
 populate-index: $(foreach lang, $(LANGS), populate-index-$(lang))
 
@@ -41,7 +43,10 @@ htmlhelp-%: $(SPHINX_DEPENDENCIES)
 epub-%: $(SPHINX_DEPENDENCIES)
 	cd $* && make epub LANG=$*
 
-latexpdf-%: $(SPHINX_DEPENDENCIES)
+latex-%: $(SPHINX_DEPENDENCIES)
+	cd $* && make latex LANG=$*
+
+pdf-%: $(SPHINX_DEPENDENCIES)
 	cd $* && make latexpdf LANG=$*
 
 populate-index-%: $(SPHINX_DEPENDENCIES)
