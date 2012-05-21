@@ -65,7 +65,7 @@ Estendendo Views
 
 .. versionadded:: 2.1
 
-A estenção de uma *View* permite que você inclua uma *view* dentro de outra. Combinando
+A extensão de uma *View* permite que você inclua uma *view* dentro de outra. Combinando
 isto com :ref:`view blocks <view-blocks>` você tem uma maneira poderosa para
 deixar suas *views*  :term:`DRY` (enxutas). Por exemplo, sua aplicação tem uma
 barra lateral (*sidebar*) que precisa mudar a depender de quando uma *view* específica
@@ -262,7 +262,7 @@ um *layout* padrão deve parecer::
    <head>
    <title><?php echo $title_for_layout?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-   <!-- Include external files and scripts here (See HTML helper for more info.) -->
+   <!-- Incluir arquivos extenos e scripts aqui (Ver o helper HTML para mais detalhes) -->
    <?php
    echo $this->fetch('meta');
    echo $this->fetch('css');
@@ -271,16 +271,16 @@ um *layout* padrão deve parecer::
    </head>
    <body>
 
-   <!-- If you'd like some sort of menu to
-   show up on all of your views, include it here -->
+   <!-- Se você quiser exibir algum menu
+   em todas as suas views, inclua-o aqui -->
    <div id="header">
        <div id="menu">...</div>
    </div>
 
-   <!-- Here's where I want my views to be displayed -->
+   <!-- Aqui é onde eu quero que minhas views sejam exibidas -->
    <?php echo $this->fetch('content'); ?>
 
-   <!-- Add a footer to each displayed page -->
+   <!-- Adicionar um rodapé para cada página exibida -->
    <div id="footer">...</div>
 
    </body>
@@ -330,13 +330,13 @@ do seu *controller* usando a propriedade :php:attr:`~View::$layout` do
 *controller* ou *view*::
 
     <?php
-    // from a controller
+    // de um controller
     public function admin_view() {
-        // stuff
+        // códigos
         $this->layout = 'admin';
     }
 
-    // from a view file
+    // de um arquivo view
     $this->layout = 'loggedin';
 
 Por exemplo, se a seção do meu *site* incluir um pequeno espaço para *banner*,
@@ -697,25 +697,18 @@ Para chamar qualquer método de uma *view* use ``$this->method()``.
     ou conteúdo do *layout*.    
 
 
-    .. deprecated:: 2.1
-        Use ``$view->Blocks->get('content');`` ao invés.
+.. deprecated:: 2.1
+
+    Use ``$view->Blocks->get('content');`` ao invés.
+
 
 .. php:attr:: Blocks
 
-   Uma instância de :php:class:`ViewBlock`. Usada para prover um bloco 
-   de funcionalidades de *view* na *view* renderizada.
+    Uma instância de :php:class:`ViewBlock`. Usada para prover um bloco 
+    de funcionalidades de *view* na *view* renderizada.
 
-    .. versionadded:: 2.1
 
-Mais sobre Views
-================
-
-.. toctree::
-
-    views/themes
-    views/media-view
-    views/json-and-xml-views
-    views/helpers
+.. versionadded:: 2.1
 
 
 .. meta::
