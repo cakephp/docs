@@ -186,11 +186,13 @@ Exibindo blocos
 Você pode exibir blocos usando o método ``fetch()``. ``fecht()`` irá retornar
 um bloco de maneira segura, retornando '' se o bloco não existir"::
 
+
     <?php echo $this->fetch('sidebar'); ?>
 
 Você também pode usar o *fetch* para exibir condicionalmente um conteúdo que deve
 envolver um bloco que deveria existir. Isto é útil em *layouts* ou *views* estendidas,
-nas quais você queira mostrar cabeçalhos e outras marcações condicionalmente:
+nas quais você queira mostrar cabeçalhos e outras marcações condicionalmente::
+
 
     // em app/View/Layouts/default.ctp
     <?php if ($this->fetch('menu')): ?>
