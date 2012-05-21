@@ -42,7 +42,7 @@ Formatting
 
         // called as CakeTime
         App::uses('CakeTime', 'Utility');
-        echo CakeTime::convert(time(), new DataTimeZone('Asia/Jakarta'));
+        echo CakeTime::convert(time(), new DateTimeZone('Asia/Jakarta'));
 
     .. versionchanged:: 2.2
        ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
@@ -386,16 +386,16 @@ Testing Time
        ``$dateString`` parameter now also accepts a DateTime object.
 
     All of the above functions return true or false when passed a date
-    string. ``wasWithinLast`` takes an additional ``$time_interval``
+    string. ``wasWithinLast`` takes an additional ``$timeInterval``
     option::
 
         <?php
         // called via TimeHelper
-        $this->Time->wasWithinLast($time_interval, $dateString);
+        $this->Time->wasWithinLast($timeInterval, $dateString);
 
         // called as CakeTime
         App::uses('CakeTime', 'Utility');
-        CakeTime::wasWithinLast($time_interval, $dateString);
+        CakeTime::wasWithinLast($timeInterval, $dateString);
 
     ``wasWithinLast`` takes a time interval which is a string in the
     format "3 months" and accepts a time interval of seconds, minutes,
