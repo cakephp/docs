@@ -679,6 +679,9 @@ html attributes. The following will cover the options specific to
     // has a label element
     echo $this->Form->input('username', array('label' => 'Username'));
 
+  If you need to later change the defaults you can use
+  :php:meth:`FormHelper::inputDefaults()`.
+
 Generating specific types of inputs
 ===================================
 
@@ -1502,9 +1505,9 @@ Setting Defaults for all fields
 
 .. versionadded:: 2.2
 
-You can declare a set of default options for
-``input()`` with the :php:meth:`FormHelper::inputDefaults()` method customize your default input
-creation::
+You can declare a set of default options for ``input()`` using
+:php:meth:`FormHelper::inputDefaults()`.  Changing the default options allows
+you to consolidate repeated options into a single method call::
 
     <?php
     echo $this->Form->inputDefaults(array(
@@ -1514,8 +1517,8 @@ creation::
         )
     ));
 
-All inputs created from that point forward would inherit the options declared in
-inputDefaults. You can override the defaultOptions by declaring the option in the
+All inputs created from that point forward will inherit the options declared in
+inputDefaults. You can override the default options by declaring the option in the
 input() call::
 
     <?php
