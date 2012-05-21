@@ -108,7 +108,7 @@ Adding cake to your system path
 If you are on a \*nix system (linux, MacOSX) the following steps will let you add the 
 cake executable to your system path.
 
-#. Locate where your cakephp install, and cake executable are.  For example
+#. Locate where your CakePHP install, and cake executable are.  For example
    ``/Users/mark/cakephp/lib/Cake/Console/cake``
 #. Edit your ``.bashrc`` or ``.bash_profile`` file in your home directory, and add the following::
 
@@ -118,7 +118,7 @@ cake executable to your system path.
 
 If you are on Windows Vista or 7, you should follow the steps below.
 
-#. Locate where your cakephp install and cake executable are.  For example
+#. Locate where your CakePHP install and cake executable are.  For example
    ``C:\xampp\htdocs\cakephp\lib\Cake\Console``
 #. Open System Properties window from My Computer. You want to try the shortcut Windows Key + Pause or Windows Key + Break. Or, from the Desktop, right-click My Computer, click Properties then click Advanced System Settings link in the left column
 #. Go under Advanced tab and click on Environment Variables button

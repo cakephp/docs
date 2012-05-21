@@ -71,7 +71,7 @@ than serving those assets without invoking PHP. And while the core team has
 taken steps to make plugin and theme asset serving as fast as possible, there
 may be situations where more performance is required. In these situations it's
 recommended that you either symlink or copy out plugin/theme assets to
-directories in ``app/webroot`` with paths matching those used by cakephp.
+directories in ``app/webroot`` with paths matching those used by CakePHP.
 
 
 -  ``app/Plugin/DebugKit/webroot/js/my_file.js`` becomes
