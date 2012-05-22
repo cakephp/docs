@@ -13,7 +13,7 @@ formatting numbers.
    ``NumberHelper`` have been refactored into :php:class:`CakeNumber` class to
    allow easier use outside of the ``View`` layer.
    Within a view, these methods are accessible via the `NumberHelper`
-   class and you can called it as you would call a normal helper method:
+   class and you can call it as you would call a normal helper method:
    ``$this->Number->method($args);``.
 
 .. include:: ../../core-utility-libraries/number.rst
