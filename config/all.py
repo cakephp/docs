@@ -210,8 +210,8 @@ preamb = ur'''
 \ChTitleVar{\color{ChapterColor}\Huge\sf}
 
 % link colors
-\definecolor{InnerLinkColor}{rgb}{0.208,0.374,0.486}
-\definecolor{OuterLinkColor}{rgb}{0.216,0.439,0.388}
+\definecolor{InnerLinkColor}{RGB}{65,114,130}
+\definecolor{OuterLinkColor}{RGB}{0,61,76}
 
 % background and border for code examples.
 \definecolor{VerbatimColor}{RGB}{242,242,242}
