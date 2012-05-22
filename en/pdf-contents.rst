@@ -4,9 +4,8 @@ Contents
 .. toctree::
    :maxdepth: 2
 
-   index
-   installation
    getting-started
+   installation
    cakephp-overview
    controllers
    views
@@ -17,7 +16,6 @@ Contents
    development
    deployment
    tutorials-and-examples
-   contributing
    glossary
 
 
