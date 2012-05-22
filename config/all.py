@@ -163,18 +163,18 @@ htmlhelp_basename = 'CakePHPCookbookdoc'
 #latex_paper_size = 'letter'
 
 # The font size ('10pt', '11pt' or '12pt').
-#latex_font_size = '10pt'
+latex_font_size = '11pt'
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
   ('pdf-contents', 'CakePHPCookbook.tex', u'CakePHP Cookbook Documentation',
-   u'CakePHP', 'manual'),
+   u'Cake Software Foundation', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
-latex_logo = None
+latex_logo = '../themes/cakephp/static/pdf-logo.png'
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
@@ -208,6 +208,14 @@ preamb = ur'''
 \ChNameVar{\color{TitleColor}\Large}
 \ChNumVar{\color{TitleColor}\Large}
 \ChTitleVar{\color{ChapterColor}\Huge\sf}
+
+% link colors
+\definecolor{InnerLinkColor}{rgb}{0.208,0.374,0.486}
+\definecolor{OuterLinkColor}{rgb}{0.216,0.439,0.388}
+
+% background and border for code examples.
+\definecolor{VerbatimColor}{RGB}{242,242,242}
+\definecolor{VerbatimBorderColor}{RGB}{230,230,230}
 '''
 
 latex_elements ={
