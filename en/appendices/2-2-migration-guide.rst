@@ -129,6 +129,9 @@ CakeEmail
 
 - :php:meth:`CakeEmail::charset()` and :php:meth:`CakeEmail::headerCharset()`
   were added.
+- Legacy Japanese encodings are now handled correctly. ``ISO-2202-JP`` is used
+  when the encoding is ``ISO-2202-JP-MS`` which works around a number of issues
+  in mail clients when dealing with the CP932 and Shift_JIS encodings.
 - :php:meth:`CakeEmail::theme()` was added.
 - :php:meth:`CakeEmail::domain()` was added. You can use this method to set the
   domain name used when sending email from a CLI script or if you want to
