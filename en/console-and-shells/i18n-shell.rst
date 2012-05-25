@@ -35,6 +35,39 @@ You can generate a POT file for a specific plugin using::
 
 This will generate the required POT files used in the plugins.
 
+Model validation messages
+-------------------------
+
+You can set the domain to be used for extracted validation messages in your models.
+If the model already has a ``$validationDomain`` property, the given validation 
+domain will be ignored::
+
+    ./Console/cake i18n extract --validation-domain validation_errors
+
+You can also prevent the shell from extracting validation messages::
+
+    ./Console/cake i18n extract --ignore-model-validation
+
+
+Excluding folders
+-----------------
+
+You can pass a comma separated list of folders that you wish to be excluded.
+Any path containing a path segment with the provided values will be ignored::
+
+    ./Console/cake i18n extract --exclude Test,Vendor
+
+Skipping overwrite warnings for existing POT files
+--------------------------------------------------
+.. versionadded:: 2.2
+
+By adding --overwrite, the shell script will no longer warn you if a POT file
+already exists and will overwrite by default::
+
+    ./Console/cake i18n extract --overwrite
+
+
+
 
 Create the tables used by TranslateBehavior
 ===========================================
