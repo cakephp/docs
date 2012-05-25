@@ -243,7 +243,7 @@ If you want to send email using templates in a plugin you can use the familiar
 
     <?php
     $email = new CakeEmail();
-    $email->template('Blog.new_comment', 'Blog.auto_message')
+    $email->template('Blog.new_comment', 'Blog.auto_message');
 
 The above would use templates from the Blog plugin as an example.
 
@@ -253,7 +253,7 @@ You can do this using themes by telling CakeEmail to use appropriate theme using
 
     <?php
     $email = new CakeEmail();
-    $email->template('Blog.new_comment', 'Blog.auto_message')
+    $email->template('Blog.new_comment', 'Blog.auto_message');
     $email->theme('TestTheme');
 
 This allows you to override the `new_comment` template in your theme without modifying

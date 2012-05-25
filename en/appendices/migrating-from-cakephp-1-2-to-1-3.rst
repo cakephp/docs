@@ -46,6 +46,7 @@ There is a new way to add those paths. As of 1.3 RC1 the
 
 ::
 
+    <?php
     App::build(array(
         'plugins' => array('/full/path/to/plugins/', '/next/full/path/to/plugins/'),
         'models' =>  array('/full/path/to/models/', '/next/full/path/to/models/'),
@@ -77,6 +78,7 @@ load custom inflections.
 
 ::
 
+    <?php
     Inflector::rules('singular', array(
         'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),
         'uninflected' => array('singulars'),
@@ -225,6 +227,7 @@ include these classes to retain existing behavior.
 
 ::
 
+    <?php
     var $components = array('Session', 'Auth', ...);
     var $helpers = array('Session', 'Html', 'Form' ...);
 
@@ -282,6 +285,7 @@ update simply change your core.php.
 
 ::
 
+    <?php
     //from:
     Configure::write('Routing.admin', 'admin');
     
@@ -295,6 +299,7 @@ params should now only consist of alphanumeric chars, - and \_ or
 
 ::
 
+    <?php
     Router::connect('/:$%@#param/:action/*', array(...)); // BAD
     Router::connect('/:can/:anybody/:see/:m-3/*', array(...)); //Acceptable
 
@@ -307,6 +312,7 @@ longer create routes like
 
 ::
 
+    <?php
     Router::connect('/([0-9]+)-p-(.*)/', array('controller' => 'products', 'action' => 'show'));
 
 These routes complicated route compilation and impossible to
@@ -317,6 +323,7 @@ use a greedy star in the middle of a route.
 
 ::
 
+    <?php
     Router::connect(
         '/pages/*/:event',
         array('controller' => 'pages', 'action' => 'display'), 
@@ -336,6 +343,7 @@ $this->redirect() calls to reflect this change.
 
 ::
 
+    <?php
     // old format:
     $url = array('controller' => 'posts', 'action' => 'view', 'id' => $id);
     // use cases:
@@ -492,7 +500,8 @@ automatically outputs SQL logs. If you want to output SQL logs in
 
 ::
 
-    <?php echo $this->element('sql_dump'); ?>
+    <?php
+    echo $this->element('sql_dump');
 
 You can place this element anywhere in your layout or view. The
 ``sql_dump`` element will only generate output when

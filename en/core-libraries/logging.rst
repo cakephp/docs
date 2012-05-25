@@ -257,8 +257,9 @@ level configuration.
 To append additional level 'user0' and 'user1' to to default log levels::
 
     <?php
-    CakeLog::levels(array('user0', 'user1')) // or
-    CakeLog::levels(array('user0', 'user1'), true)
+    CakeLog::levels(array('user0', 'user1'));
+    // or
+    CakeLog::levels(array('user0', 'user1'), true);
 
 will result in::
 

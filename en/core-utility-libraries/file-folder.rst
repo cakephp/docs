@@ -116,7 +116,7 @@ Folder API
             'to' => '/path/to/new/folder',
             'from' => '/path/to/copy/from', // will cause a cd() to occur
             'mode' => 0755,
-            'skip' => array('skip-me.php', '.git'),
+            'skip' => array('skip-me.php', '.git')
         ));
 
 

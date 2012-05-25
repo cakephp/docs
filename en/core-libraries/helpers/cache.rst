@@ -93,10 +93,10 @@ To indicate blocks of content that are *not* to be cached, wrap
 them in ``<!--nocache--> <!--/nocache-->`` like so::
 
     <!--nocache-->
-    <?php if ($this->Session->check('User.name')) : ?>
+    <?php if ($this->Session->check('User.name')): ?>
         Welcome, <?php echo h($this->Session->read('User.name')); ?>.
     <?php else: ?>
-        <?php echo $html->link('Login', 'users/login')?>
+        <?php echo $html->link('Login', 'users/login'); ?>
     <?php endif; ?>
     <!--/nocache-->
 

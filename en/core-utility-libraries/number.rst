@@ -183,14 +183,14 @@ automatically echo the output into the view.
 
         <?php
         // called as NumberHelper
-        echo $this->Number->precision(456.91873645, 2 );
+        echo $this->Number->precision(456.91873645, 2);
 
         // Outputs
         456.92
 
         // called as CakeNumber
         App::uses('CakeNumber', 'Utility');
-        echo CakeNumber::precision(456.91873645, 2 );
+        echo CakeNumber::precision(456.91873645, 2);
 
 
 .. php:method:: toPercentage(mixed $number, int $precision = 2)

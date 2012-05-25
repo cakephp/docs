@@ -17,9 +17,9 @@ As with the Session Component, data is read by using
 :term:`dot notation` array structures::
 
     <?php
-    array('User' => 
-        array('username' => 'super@example.com')
-    );
+    array('User' => array(
+        'username' => 'super@example.com'
+    ));
 
 Given the previous array structure, the node would be accessed by
 ``User.username``, with the dot indicating the nested array. This
@@ -96,7 +96,7 @@ Displaying notifications or flash messages
     this::
 
         <div class="flash flash-failure">
-            <?php echo $message ?>
+            <?php echo $message; ?>
         </div>
 
     You can also pass additional parameters into the ``flash()`` method, which

@@ -82,7 +82,7 @@ controller callbacks for best results::
 Request parameters
 ==================
 
-When a request is made to a CakePHP application,  CakePHP's :php:class:`Router` and
+When a request is made to a CakePHP application, CakePHP's :php:class:`Router` and
 :php:class:`Dispatcher` classes use :ref:`routes-configuration` to find and
 create the correct controller. The request data is encapsulated into a request
 object. CakePHP puts all of the important request information into the
@@ -111,7 +111,7 @@ in ``/app/Controller/RecipesController.php`` and contain::
                 //action logic goes here..
             }
         
-            public function share($customer_id, $recipe_id) {
+            public function share($customerId, $recipeId) {
                 //action logic goes here..
             }
         

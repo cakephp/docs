@@ -27,7 +27,7 @@ single-language application::
 To internationalize your code, all you need to do is to wrap
 strings in :php:func:`__()` like so::
 
-    <h2><?php echo __('Posts') ?></h2>
+    <h2><?php echo __('Posts'); ?></h2>
 
 If you do nothing further, these two code examples are functionally
 identical - they will both send the same content to the browser.
@@ -96,7 +96,7 @@ or::
 
     <?php
     // View code
-    echo $this->element(Configure::read('Config.language') . '/tos')
+    echo $this->element(Configure::read('Config.language') . '/tos');
 
 
 Localization in CakePHP
@@ -125,7 +125,7 @@ At the beginning of each request in your controller's ``beforeFilter`` you
 should configure ``Configure`` as well::
 
     <?php
-    class AppController extends Controller{
+    class AppController extends Controller {
         public function beforeFilter() {
             Configure::write('Config.language', $this->Session->read('Config.language'));
         }

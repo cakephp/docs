@@ -160,13 +160,13 @@ Adding paths for App to find packages in
     Examples::
 
         <?php
-        App::build(array('controllers' => array('/full/path/to/controllers'))) 
+        App::build(array('controllers' => array('/full/path/to/controllers')));
         //becomes 
-        App::build(array('Controller' => array('/full/path/to/Controller')))
+        App::build(array('Controller' => array('/full/path/to/Controller')));
 
-        App::build(array('helpers' => array('/full/path/to/views/helpers'))) 
+        App::build(array('helpers' => array('/full/path/to/views/helpers')));
         //becomes 
-        App::build(array('View/Helper' => array('/full/path/to/View/Helper')))
+        App::build(array('View/Helper' => array('/full/path/to/View/Helper')));
 
     .. versionchanged:: 2.0
         ``App::build()`` will not merge app paths with core paths anymore.
@@ -274,7 +274,7 @@ Including files with App::import()
         App::import('Controller', 'Users');
         
         // We need to load the class
-        $Users = new UsersController;
+        $Users = new UsersController();
         
         // If we want the model associations, components, etc to be loaded
         $Users->constructClasses();

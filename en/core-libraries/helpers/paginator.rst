@@ -100,7 +100,6 @@ Supported options are:
 
       <?php 
       echo $this->Paginator->numbers(array('first' => 'First page')); 
-      ?>
 
 * ``last`` Whether you want last links generated, set to an integer to define
   the number of 'last' links to generate. Defaults to false.  Follows the same
