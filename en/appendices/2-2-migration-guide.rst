@@ -270,3 +270,10 @@ A new object ``ModelValidator`` was added to delegate the work of validating
 model data, it should be transparent to the application and fully backwards
 compatible. It also exposes a rich API to add, modify and remove validation
 rules. Check docs for this object in :doc:`/models/data-validation`.
+
+I18N extract shell
+==================
+
+Option added to overwrite existing POT files by default::
+
+    ./Console/cake i18n extract --overwrite
