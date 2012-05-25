@@ -68,7 +68,7 @@ a secure connection, is available on the path
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Cookie->name = 'baker_id';
-        $this->Cookie->time =  3600;  // or '1 hour'
+        $this->Cookie->time = 3600;  // or '1 hour'
         $this->Cookie->path = '/bakers/preferences/';
         $this->Cookie->domain = 'example.com';   
         $this->Cookie->secure = true;  // i.e. only sent if using secure HTTPS
@@ -155,10 +155,10 @@ The CookieComponent offers a number of methods for working with Cookies.
 
         <?php
         // Delete a variable
-        $this->Cookie->delete('bar')
+        $this->Cookie->delete('bar');
 
         // Delete the cookie variable bar, but not all under foo
-        $this->Cookie->delete('foo.bar')
+        $this->Cookie->delete('foo.bar');
 
 .. php:method:: destroy()
 

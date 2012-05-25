@@ -323,12 +323,13 @@ as defined in the routes::
 
     // view.ctp
     // this will return a link to /blog/3-CakePHP_Rocks
-    <?php echo $this->Html->link('CakePHP Rocks', array(
+    <?php
+    echo $this->Html->link('CakePHP Rocks', array(
         'controller' => 'blog',
         'action' => 'view',
         'id' => 3,
         'slug' => 'CakePHP_Rocks'
-    )); ?>
+    ));
 
 Per-route named parameters
 --------------------------
@@ -516,7 +517,7 @@ If you were to visit the previously mentioned url, and you
 had a controller action that looked like::
 
     <?php
-    CalendarsController extends AppController{
+    CalendarsController extends AppController {
         public function view($arg1, $arg2) {
             debug(func_get_args());
         }

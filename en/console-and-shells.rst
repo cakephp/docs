@@ -297,7 +297,7 @@ as var args or as a string::
     $this->dispatchShell('schema create Blog --plugin Blog');
 
     // As an array
-    $this->dispatchShell('schema', 'create',  'Blog', '--plugin',  'Blog');
+    $this->dispatchShell('schema', 'create', 'Blog', '--plugin', 'Blog');
 
 The above shows how you can call the schema shell to create the schema for a plugin 
 from inside your plugin's shell.
@@ -473,7 +473,7 @@ Calling with no arguments will return the current value::
     $parser->description(array('line one', 'line two'));
 
     // read the current value
-    $parser->description()
+    $parser->description();
 
 .. php:method:: epilog($text = null)
 
@@ -487,7 +487,7 @@ Calling with no arguments will return the current value::
     $parser->epilog(array('line one', 'line two'));
 
     // read the current value
-    $parser->epilog()
+    $parser->epilog();
 
 Adding arguments
 ----------------

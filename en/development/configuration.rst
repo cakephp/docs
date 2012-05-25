@@ -334,7 +334,8 @@ won't end up breaking the MVC structure we’ve set in place.
 This class can be called from
 anywhere within your application, in a static context::
 
-    <?php Configure::read('debug'); ?>
+    <?php
+    Configure::read('debug');
 
 .. php:staticmethod:: write($key, $value)
 
@@ -445,7 +446,7 @@ aliases are attached you can use :php:meth:`Configure::configured()`::
 
     <?php
     // Get the array of aliases for attached readers.
-    Configure::configured()
+    Configure::configured();
 
     // Check if a specific reader is attached
     Configure::configured('default');

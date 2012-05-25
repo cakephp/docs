@@ -204,8 +204,8 @@ few milliseconds for this mission-critical API endpoint::
     };
 
     Configure::write('Dispatcher.filters', array(
-	    'AssetDispatcher',
-	    'CacheDispatcher',
+        'AssetDispatcher',
+        'CacheDispatcher',
         'recent-posts' => array(
             'callable' => $postsList,
             'priority' => 9,
