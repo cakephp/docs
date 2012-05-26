@@ -24,9 +24,9 @@ Session by using :term:`dot notation`. So ``User.username`` would
 reference the following::
 
     <?php
-    array('User' => 
-        array('username' => 'clark-kent@dailyplanet.com')
-    );
+    array('User' => array(
+        'username' => 'clark-kent@dailyplanet.com'
+    ));
 
 Dots are used to indicate nested arrays. This notation is used for
 all Session component methods wherever a name/key is used.

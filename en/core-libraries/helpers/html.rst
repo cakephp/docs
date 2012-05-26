@@ -777,11 +777,13 @@ methods of the HtmlHelper and how to use them.
 
     URL with GET params and named anchor::
 
-        <?php echo $this->Html->url(array(
+        <?php
+        echo $this->Html->url(array(
             "controller" => "posts",
             "action" => "search",
             "?" => array("foo" => "bar"),
-            "#" => "first"));
+            "#" => "first"
+        ));
         
         // Output
         /posts/search?foo=bar#first

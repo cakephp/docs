@@ -121,7 +121,8 @@ metadata back to the layout::
         'title' => __("Most Recent Posts"),
         'link' => $this->Html->url('/', true),
         'description' => __("Most recent posts."),
-        'language' => 'en-us'));
+        'language' => 'en-us'
+    ));
 
 The second part of the view generates the elements for the actual
 records of the feed. This is accomplished by looping through the

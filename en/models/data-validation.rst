@@ -297,12 +297,12 @@ This is better explained with a practical example::
     public $validate = array(
         'login' => array(
             'loginRule-1' => array(
-                'rule'    => 'alphaNumeric',  
+                'rule'    => 'alphaNumeric',
                 'message' => 'Only alphabets and numbers allowed',
                 'last'    => true
              ),
             'loginRule-2' => array(
-                'rule'    => array('minLength', 8),  
+                'rule'    => array('minLength', 8),
                 'message' => 'Minimum length of 8 characters'
             )  
         )

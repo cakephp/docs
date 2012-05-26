@@ -134,7 +134,7 @@ will show just the add.ctp::
 
     <!-- app/View/Users/add.ctp -->
     <div class="users form">
-    <?php echo $this->Form->create('User');?>
+    <?php echo $this->Form->create('User'); ?>
         <fieldset>
             <legend><?php echo __('Add User'); ?></legend>
         <?php
@@ -145,7 +145,7 @@ will show just the add.ctp::
             ));
         ?>
         </fieldset>
-    <?php echo $this->Form->end(__('Submit'));?>
+    <?php echo $this->Form->end(__('Submit')); ?>
     </div>
 
 Authentication (login and logout)
@@ -239,7 +239,7 @@ the login function, here it is::
 
     <div class="users form">
     <?php echo $this->Session->flash('auth'); ?>
-    <?php echo $this->Form->create('User');?>
+    <?php echo $this->Form->create('User'); ?>
         <fieldset>
             <legend><?php echo __('Please enter your username and password'); ?></legend>
         <?php
@@ -247,7 +247,7 @@ the login function, here it is::
             echo $this->Form->input('password');
         ?>
         </fieldset>
-    <?php echo $this->Form->end(__('Login'));?>
+    <?php echo $this->Form->end(__('Login')); ?>
     </div>
 
 You can now register a new user by accessing the ``/users/add`` url and log-in with the

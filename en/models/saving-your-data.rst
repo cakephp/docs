@@ -722,7 +722,7 @@ some recipe.
 The simplest form might look something like this (we'll assume that
 ``$recipe_id`` is already set to something)::
 
-    <?php echo $this->Form->create('Tag');?>
+    <?php echo $this->Form->create('Tag'); ?>
         <?php echo $this->Form->input(
             'Recipe.id',
             array('type' => 'hidden', 'value' => $recipe_id)); ?>

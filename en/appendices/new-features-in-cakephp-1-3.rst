@@ -16,6 +16,7 @@ as a collection of string names.
 
 ::
 
+    <?php
     $this->Security->requirePost(array('edit', 'update'));
 
 **Component settings**
@@ -26,6 +27,7 @@ settings for components when you declare the component.
 
 ::
 
+    <?php
     var $components = array(
         'Cookie' => array(
             'name' => 'MyCookie'
@@ -81,6 +83,7 @@ available to all helpers. Assuming ``Asset.timestamp == force``
 
 ::
 
+    <?php
     $path = 'css/cake.generic.css'
     $stamped = $this->Html->assetTimestamp($path);
     
@@ -101,6 +104,7 @@ to set currency parameter sets, so you don't have to retype them.
 
 ::
 
+    <?php
     $this->Number->addFormat('NOK', array('before' => 'Kr. '));
     $formatted = $this->Number->currency(1000, 'NOK');
 
@@ -133,6 +137,7 @@ dot syntax.
 
 ::
 
+    <?php
     Cache::config('custom', array(
         'engine' => 'CachePack.MyCustomCache',
         ...
@@ -178,6 +183,7 @@ could do:
 
 ::
 
+    <?php
     var $lastFm = array(
         'datasource' => 'WebservicePack.LastFm'
         ...
@@ -240,6 +246,7 @@ schema file. Much like ``indexes``:
 
 ::
 
+    <?php
     var $comments => array(
         'id' => array('type' => 'integer', 'null' => false, 'default' => 0, 'key' => 'primary'),
         'post_id' => array('type' => 'integer', 'null' => false, 'default' => 0),
@@ -319,6 +326,7 @@ non-prefixed url:
 
 ::
 
+    <?php
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => true));
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => true));
 
@@ -327,6 +335,7 @@ non-prefixed url, do the following:
 
 ::
 
+    <?php
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => false));
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => false));
 
@@ -369,6 +378,7 @@ Set has a new method ``Set::apply()``, which allows you to apply
 
 ::
 
+    <?php
     Set::apply('/Movie/rating', $data, 'array_sum');
 
 Would return the sum of all Movie ratings in ``$data``.
@@ -406,12 +416,14 @@ updated to import from libs directories.
 
 ::
 
+    <?php
     App::import('Lib', 'ImageManipulation'); //imports app/libs/image_manipulation.php
 
 You can also import libs files from plugins
 
 ::
 
+    <?php
     App::import('Lib', 'Geocoding.Geocode'); //imports app/plugins/geocoding/libs/geocode.php
 
 The remainder of lib importing syntax is identical to vendor files.
@@ -444,6 +456,7 @@ the time preferences for French language this way:
 
 ::
 
+    <?php
     Configure::write('Config.language','fr-fr'); // set the current language
     $monthNames = __c('mon',LC_TIME,true); // returns an array with the month names in French
     $dateFormat = __c('d_fmt',LC_TIME,true); // return the preferred dates format for France
@@ -472,6 +485,7 @@ updated to allow the scaffolding of any one prefix.
 
 ::
 
+    <?php
     Configure::write('Routing.prefixes', array('admin', 'member'));
     
     class PostsController extends AppController {
@@ -494,6 +508,7 @@ you would create a class like
 
 ::
 
+    <?php
     class NlValidation {
         function phone($check) {
             ...
@@ -509,6 +524,7 @@ could use your NlValidation class by doing the following.
 
 ::
 
+    <?php
     var $validate = array(
         'phone_no' => array('rule' => array('phone', null, 'nl')),
         'postal_code' => array('rule' => array('postal', null, 'nl'))
@@ -531,6 +547,7 @@ native validation mechanisms if available.
 
 ::
 
+    <?php
     Validation::ip($someAddress);         // Validates both IPv4 and IPv6
     Validation::ip($someAddress, 'IPv4'); // Validates IPv4 Addresses only
     Validation::ip($someAddress, 'IPv6'); // Validates IPv6 Addresses only

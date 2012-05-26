@@ -935,7 +935,7 @@ Form Element-Specific Methods
 
     Will output::
 
-        <input name="data[User][password]" value="" id="UserPassword" type="password">
+        <input name="data[User][password]" value="" id="UserPassword" type="password" />
 
 .. php:method:: hidden(string $fieldName, array $options)
 
@@ -946,7 +946,7 @@ Form Element-Specific Methods
 
     Will output::
 
-        <input name="data[User][id]" value="10" id="UserId" type="hidden">
+        <input name="data[User][id]" value="10" id="UserId" type="hidden" />
 
     .. versionchanged:: 2.0
 
@@ -1055,10 +1055,10 @@ Form Element-Specific Methods
 
       Will output::
 
-        <input name="data[User][gender]" id="UserGender_" value="" type="hidden">
-        <input name="data[User][gender]" id="UserGenderM" value="M" type="radio">
+        <input name="data[User][gender]" id="UserGender_" value="" type="hidden" />
+        <input name="data[User][gender]" id="UserGenderM" value="M" type="radio" />
         <label for="UserGenderM">Male</label>
-        <input name="data[User][gender]" id="UserGenderF" value="F" type="radio">
+        <input name="data[User][gender]" id="UserGenderF" value="F" type="radio" />
         <label for="UserGenderF">Female</label>
 
     If for some reason you don't want the hidden input, setting
@@ -1078,7 +1078,7 @@ Form Element-Specific Methods
 
         <?php
         $options = array('M' => 'Male', 'F' => 'Female');
-        echo $this->Form->select('gender', $options)
+        echo $this->Form->select('gender', $options);
 
     Will output::
 
@@ -1101,7 +1101,8 @@ Form Element-Specific Methods
       select input, or for a radio group. Unless the 'type' is specified as 'radio',
       the FormHelper will assume that the target output is a select input::
 
-        <?php echo $this->Form->select('field', array(1,2,3,4,5));
+        <?php
+        echo $this->Form->select('field', array(1,2,3,4,5));
 
       Output::
 
@@ -1116,7 +1117,7 @@ Form Element-Specific Methods
       Options can also be supplied as key-value pairs::
 
         <?php
-        echo $this->Form->select('field', $options, array(
+        echo $this->Form->select('field', array(
             'Value 1' => 'Label 1',
             'Value 2' => 'Label 2',
             'Value 3' => 'Label 3'
@@ -1168,7 +1169,7 @@ Form Element-Specific Methods
       related check boxes::
 
         <?php
-        $options =  array(
+        $options = array(
             'Value 1' => 'Label 1',
             'Value 2' => 'Label 2'
         );
@@ -1228,9 +1229,9 @@ Form Element-Specific Methods
 
         <?php
         $this->request->data['Document']['submittedfile'] = array(
-            'name' => conference_schedule.pdf,
-            'type' => application/pdf,
-            'tmp_name' => C:/WINDOWS/TEMP/php1EE.tmp,
+            'name' => 'conference_schedule.pdf',
+            'type' => 'application/pdf',
+            'tmp_name' => 'C:/WINDOWS/TEMP/php1EE.tmp',
             'error' => 0,
             'size' => 41737,
         );
@@ -1389,7 +1390,6 @@ Creating date and time inputs
         <option value="2005">2005</option>
         <option value="2004">2004</option>
         <option value="2003">2003</option>
-
         <option value="2002">2002</option>
         <option value="2001">2001</option>
         <option value="2000">2000</option>

@@ -142,8 +142,8 @@ would for any model. For example::
 
     <?php
     // pseudo controller code
-    $data['Category']['parent_id'] =  3;
-    $data['Category']['name'] =  'Skating';
+    $data['Category']['parent_id'] = 3;
+    $data['Category']['name'] = 'Skating';
     $this->Category->save($data);
 
 When using the tree behavior it's not necessary to do any more than
@@ -154,7 +154,7 @@ to the tree making your new addition a new top level entry::
     <?php
     // pseudo controller code
     $data = array();
-    $data['Category']['name'] =  'Other People\'s Categories';
+    $data['Category']['name'] = 'Other People\'s Categories';
     $this->Category->save($data);
 
 Running the above two code snippets would alter your tree as

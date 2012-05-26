@@ -267,28 +267,28 @@ Component API
 Callbacks
 ---------
 
-.. php:method:: initialize($controller)
+.. php:method:: initialize(Controller $controller)
 
     The initialize method is called before the controller's
     beforeFilter method.
 
-.. php:method:: startup($controller)
+.. php:method:: startup(Controller $controller)
 
     The startup method is called after the controller's beforeFilter
     method but before the controller executes the current action
     handler.
 
-.. php:method:: beforeRender($controller)
+.. php:method:: beforeRender(Controller $controller)
 
     The beforeRender method is called after the controller executes the
     requested action's logic but before the controller's renders views
     and layout.
 
-.. php:method:: shutdown($controller)
+.. php:method:: shutdown(Controller $controller)
 
     The shutdown method is called before output is sent to browser.
 
-.. php:method:: beforeRedirect($controller, $url, $status=null, $exit=true)
+.. php:method:: beforeRedirect(Controller $controller, $url, $status=null, $exit=true)
 
     The beforeRedirect method is invoked when the controller's redirect
     method is called but before any further action. If this method

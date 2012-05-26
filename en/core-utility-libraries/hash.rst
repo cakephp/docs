@@ -782,7 +782,7 @@ elements you can use attribute matching with methods like ``extract()``.
             )
         */
 
-        $b =  array(
+        $b = array(
             'Cacheable' => array('enabled' => false),
             'Limit',
             'Bindable',

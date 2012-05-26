@@ -135,7 +135,8 @@ available.
         $a = array(
             array('Article' => array('id' => 1, 'title' => 'Article 1')),
             array('Article' => array('id' => 2, 'title' => 'Article 2')),
-            array('Article' => array('id' => 3, 'title' => 'Article 3')));
+            array('Article' => array('id' => 3, 'title' => 'Article 3'))
+        );
         $result = Set::classicExtract($a, '{n}.Article.id');
         /* $result now looks like:
             Array
@@ -840,7 +841,8 @@ available.
         $data = array(
             array('Person' => array('first_name' => 'Nate', 'last_name' => 'Abele', 'city' => 'Boston', 'state' => 'MA', 'something' => '42')),
             array('Person' => array('first_name' => 'Larry', 'last_name' => 'Masters', 'city' => 'Boondock', 'state' => 'TN', 'something' => '{0}')),
-            array('Person' => array('first_name' => 'Garrett', 'last_name' => 'Woodworth', 'city' => 'Venice Beach', 'state' => 'CA', 'something' => '{1}')));
+            array('Person' => array('first_name' => 'Garrett', 'last_name' => 'Woodworth', 'city' => 'Venice Beach', 'state' => 'CA', 'something' => '{1}'))
+        );
 
         $res = Set::format($data, '{1}, {0}', array('{n}.Person.first_name', '{n}.Person.last_name'));
         /*
@@ -1044,6 +1046,7 @@ available.
 
     ::
 
+        <?php
         class MyClass {
             public function sayHi() {
                 echo 'Hi!';
@@ -1067,7 +1070,8 @@ available.
         $a = array(
             array('Article' => array('id' => 1, 'title' => 'Article 1')),
             array('Article' => array('id' => 2, 'title' => 'Article 2')),
-            array('Article' => array('id' => 3, 'title' => 'Article 3')));
+            array('Article' => array('id' => 3, 'title' => 'Article 3'))
+        );
         $res=Set::matches(array('id>2'), $a[1]['Article']);
         // returns false
         $res=Set::matches(array('id>=2'), $a[1]['Article']);
@@ -1132,8 +1136,8 @@ available.
             )
         );
         $arry2 = 4;
-        $arry3 = array(0 => "test array", "cats" => "dogs", "people" => 1267);
-        $arry4 = array("cats" => "felines", "dog" => "angry");
+        $arry3 = array(0 => 'test array', 'cats' => 'dogs', 'people' => 1267);
+        $arry4 = array('cats' => 'felines', 'dog' => 'angry');
         $res = Set::merge($arry1, $arry2, $arry3, $arry4);
 
         /* $res now looks like:
@@ -1169,15 +1173,21 @@ available.
     Normalizes a string or array list.::
 
         <?php
-        $a = array('Tree', 'CounterCache',
-                'Upload' => array(
-                    'folder' => 'products',
-                    'fields' => array('image_1_id', 'image_2_id', 'image_3_id', 'image_4_id', 'image_5_id')));
-        $b =  array('Cacheable' => array('enabled' => false),
-                'Limit',
-                'Bindable',
-                'Validator',
-                'Transactional');
+        $a = array(
+            'Tree',
+            'CounterCache',
+            'Upload' => array(
+                'folder' => 'products',
+                'fields' => array('image_1_id', 'image_2_id', 'image_3_id', 'image_4_id', 'image_5_id')
+            )
+        );
+        $b = array(
+            'Cacheable' => array('enabled' => false),
+            'Limit',
+            'Bindable',
+            'Validator',
+            'Transactional'
+        );
         $result = Set::normalize($a);
         /* $result now looks like:
             Array
@@ -1390,8 +1400,8 @@ available.
 
         <?php
         $a = array(
-            'pages'     => array('name' => 'page'),
-            'files'     => array('name' => 'files')
+            'pages' => array('name' => 'page'),
+            'files' => array('name' => 'files')
         );
 
         $result = Set::remove($a, 'files');
@@ -1534,6 +1544,7 @@ available.
             1 => array('Person' => array('name' => 'Jeff'), 'Friend' => array(array('name' => 'Nate'))),
             2 => array('Person' => array('name' => 'Tracy'),'Friend' => array(array('name' => 'Lindsay')))
         );
+        */
 
         $result = Set::sort($a, '{n}.Person.name', 'desc');
         /* $result now looks like:
@@ -1542,6 +1553,7 @@ available.
             1 => array('Person' => array('name' => 'Jeff'), 'Friend' => array(array('name' => 'Nate'))),
             0 => array('Person' => array('name' => 'Adam'),'Friend' => array(array('name' => 'Bob'))),
         );
+        */
 
 .. php:staticmethod:: apply($path, $array, $callback, $options = array())
 
