@@ -250,14 +250,14 @@ and :doc:`/core-libraries/logging`.
   `RFC 5424 <http://tools.ietf.org/html/rfc5424>`_.  Several convenience
   methods have also been added:
 
-  * :php:meth:`CakeLog::emergency($message, $scope = array()`
-  * :php:meth:`CakeLog::alert($message, $scope = array()`
-  * :php:meth:`CakeLog::critical($message, $scope = array()`
-  * :php:meth:`CakeLog::error($message, $scope = array()`
-  * :php:meth:`CakeLog::warning($message, $scope = array()`
-  * :php:meth:`CakeLog::notice($message, $scope = array()`
-  * :php:meth:`CakeLog::info($message, $scope = array()`
-  * :php:meth:`CakeLog::debug($message, $scope = array()`
+  * :php:meth:`CakeLog::emergency($message, $scope = array())`
+  * :php:meth:`CakeLog::alert($message, $scope = array())`
+  * :php:meth:`CakeLog::critical($message, $scope = array())`
+  * :php:meth:`CakeLog::error($message, $scope = array())`
+  * :php:meth:`CakeLog::warning($message, $scope = array())`
+  * :php:meth:`CakeLog::notice($message, $scope = array())`
+  * :php:meth:`CakeLog::info($message, $scope = array())`
+  * :php:meth:`CakeLog::debug($message, $scope = array())`
 
 - A third argument ``$scope`` has been added to :php:meth:`CakeLog::write`.
   See :ref:`logging-scopes`.
