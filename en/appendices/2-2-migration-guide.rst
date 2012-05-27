@@ -266,10 +266,14 @@ and :doc:`/core-libraries/logging`.
 Model Validation
 ================
 
-A new object ``ModelValidator`` was added to delegate the work of validating
-model data, it should be transparent to the application and fully backwards
-compatible. It also exposes a rich API to add, modify and remove validation
-rules. Check docs for this object in :doc:`/models/data-validation`.
+- A new object ``ModelValidator`` was added to delegate the work of validating
+  model data, it should be transparent to the application and fully backwards
+  compatible. It also exposes a rich API to add, modify and remove validation
+  rules. Check docs for this object in :doc:`/models/data-validation`.
+
+- New validation rule added:
+
+  * :php:meth:`Validation::naturalNumber()`
 
 I18N extract shell
 ==================
