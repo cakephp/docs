@@ -1033,6 +1033,27 @@ with usage examples.
             )
         );
 
+.. php:staticmethod:: naturalNumber(mixed $check, boolean $allowZero = false)
+
+    .. versionadded:: 2.2
+
+    This rule checks if the data passed is a valid natural number.
+    If ``$allowZero`` is set to true, zero is also accepted as a value.
+
+    ::
+
+        <?php
+        public $validate = array(
+            'wheels' => array(
+                'rule'    => 'naturalNumber',
+                'message' => 'Please supply the number of wheels.'
+            ),
+            'airbags' => array(
+                'rule'    => array('naturalNumber', true),
+                'message' => 'Please supply the number of airbags.'
+            ),
+        );
+
 
 .. php:staticmethod:: phone(mixed $check, string $regex = null, string $country = 'all')
 
