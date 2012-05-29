@@ -243,7 +243,6 @@ Closing the Form
         <?php
         $options = array(
             'label' => 'Update',
-            'value' => 'Update!',
             'div' => array(
                 'class' => 'glass-pill',
             )
@@ -252,7 +251,7 @@ Closing the Form
 
     Will output::
 
-        <div class="glass-pill"><input type="submit" value="Update!" name="Update"></div>
+        <div class="glass-pill"><input type="submit" value="Update" name="Update"></div>
 
     See the `API <http://api20.cakephp.org>`_ for further details.
 
