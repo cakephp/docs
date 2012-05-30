@@ -3,6 +3,8 @@ Hash
 
 .. php:class:: Hash
 
+.. versionadded:: 2.2
+
 Array management, if done right, can be a very powerful and useful
 tool for building smarter, more optimized code. CakePHP offers a
 very useful set of static utilities in the Hash class that allow you
