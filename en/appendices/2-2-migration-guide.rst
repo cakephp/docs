@@ -215,6 +215,12 @@ Dispatcher
   update ``app/Config/bootstrap.php``.  See
   :ref:`required-steps-to-upgrade-2-2`.
 
+Router
+------
+
+- :php:meth:`Router::setExtensions()` has been added. With the new method you can
+  now add more extensions to be parsed, for example within a plugin routes file.
+
 Cache
 =====
 
