@@ -1023,13 +1023,13 @@ Router API
 .. php:staticmethod:: setExtensions($extensions, $merge = true)
 
     .. versionadded:: 2.2
-       Set or add valid extensions. To have the extensions parsed, you are still
-       required to call :php:meth:`Router::parseExtensions()`.
+    Set or add valid extensions. To have the extensions parsed, you are still required to call
+    :php:meth:`Router::parseExtensions()`
 
 .. php:staticmethod:: defaultRouteClass($classname)
 
     .. versionadded:: 2.1
-       Set the default route to be used when connecting routes in the future.
+    Set the default route to be used when connecting routes in the future.
 
 .. php:class:: CakeRoute
 
