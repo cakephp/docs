@@ -1555,27 +1555,6 @@ available.
         );
         */
 
-.. php:staticmethod:: apply($path, $array, $callback, $options = array())
-
-		    :rtype: mixed
-
-		    Apply a callback to the elements of an array extracted
-		    by a Set::extract compatible path::
-
-		        <?php
-		        $data = array(
-		            array('Movie' => array('id' => 1, 'title' => 'movie 3', 'rating' => 5)),
-		            array('Movie' => array('id' => 1, 'title' => 'movie 1', 'rating' => 1)),
-		            array('Movie' => array('id' => 1, 'title' => 'movie 2', 'rating' => 3)),
-		        );
-
-		        $result = Set::apply('/Movie/rating', $data, 'array_sum');
-		        // result equals 9
-
-		        $result = Set::apply('/Movie/title', $data, 'strtoupper', array('type' => 'map'));
-		        // result equals array('MOVIE 3', 'MOVIE 1', 'MOVIE 2')
-		        // $options are: - type : can be 'pass' uses call_user_func_array(), 'map' uses array_map(), or 'reduce' uses array_reduce()
-
 .. php:staticmethod:: nest($data, $options = array())
 
 		    :rtype: array
