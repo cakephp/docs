@@ -1557,65 +1557,65 @@ available.
 
 .. php:staticmethod:: nest($data, $options = array())
 
-		    :rtype: array
+    :rtype: array
 
-		    Takes in a flat array and returns a nested array::
+    Takes in a flat array and returns a nested array::
 
-		        <?php
-                        $data = array(
-                            array('ModelName' => array('id' => 1, 'parent_id' => null)),
-                            array('ModelName' => array('id' => 2, 'parent_id' => 1)),
-                            array('ModelName' => array('id' => 3, 'parent_id' => 1)),
-                            array('ModelName' => array('id' => 4, 'parent_id' => 1)),
-                            array('ModelName' => array('id' => 5, 'parent_id' => 1)),
-                            array('ModelName' => array('id' => 6, 'parent_id' => null)),
-                            array('ModelName' => array('id' => 7, 'parent_id' => 6)),
-                            array('ModelName' => array('id' => 8, 'parent_id' => 6)),
-                            array('ModelName' => array('id' => 9, 'parent_id' => 6)),
-                            array('ModelName' => array('id' => 10, 'parent_id' => 6))
-                        );
+        <?php
+        $data = array(
+            array('ModelName' => array('id' => 1, 'parent_id' => null)),
+            array('ModelName' => array('id' => 2, 'parent_id' => 1)),
+            array('ModelName' => array('id' => 3, 'parent_id' => 1)),
+            array('ModelName' => array('id' => 4, 'parent_id' => 1)),
+            array('ModelName' => array('id' => 5, 'parent_id' => 1)),
+            array('ModelName' => array('id' => 6, 'parent_id' => null)),
+            array('ModelName' => array('id' => 7, 'parent_id' => 6)),
+            array('ModelName' => array('id' => 8, 'parent_id' => 6)),
+            array('ModelName' => array('id' => 9, 'parent_id' => 6)),
+            array('ModelName' => array('id' => 10, 'parent_id' => 6))
+        );
 
-		        $result = Set::nest($data, array('root' => 6));
-		        /* $result now looks like:
-                            array(
-                                    (int) 0 => array(
-                                            'ModelName' => array(
-                                                    'id' => (int) 6,
-                                                    'parent_id' => null
-                                            ),
-                                            'children' => array(
-                                                    (int) 0 => array(
-                                                            'ModelName' => array(
-                                                                    'id' => (int) 7,
-                                                                    'parent_id' => (int) 6
-                                                            ),
-                                                            'children' => array()
-                                                    ),
-                                                    (int) 1 => array(
-                                                            'ModelName' => array(
-                                                                    'id' => (int) 8,
-                                                                    'parent_id' => (int) 6
-                                                            ),
-                                                            'children' => array()
-                                                    ),
-                                                    (int) 2 => array(
-                                                            'ModelName' => array(
-                                                                    'id' => (int) 9,
-                                                                    'parent_id' => (int) 6
-                                                            ),
-                                                            'children' => array()
-                                                    ),
-                                                    (int) 3 => array(
-                                                            'ModelName' => array(
-                                                                    'id' => (int) 10,
-                                                                    'parent_id' => (int) 6
-                                                            ),
-                                                            'children' => array()
-                                                    )
-                                            )
-                                    )
-                            )
-                        */
+        $result = Set::nest($data, array('root' => 6));
+
+        /* $result now looks like:
+            array(
+                (int) 0 => array(
+                    'ModelName' => array(
+                        'id' => (int) 6,
+                        'parent_id' => null
+                    ),
+                    'children' => array(
+                        (int) 0 => array(
+                            'ModelName' => array(
+                                'id' => (int) 7,
+                                'parent_id' => (int) 6
+                            ),
+                            'children' => array()
+                        ),
+                        (int) 1 => array(
+                            'ModelName' => array(
+                                'id' => (int) 8,
+                                'parent_id' => (int) 6
+                            ),
+                            'children' => array()
+                        ),
+                        (int) 2 => array(
+                            'ModelName' => array(
+                                'id' => (int) 9,
+                                'parent_id' => (int) 6
+                            ),
+                            'children' => array()
+                        ),
+                        (int) 3 => array(
+                            'ModelName' => array(
+                                'id' => (int) 10,
+                                'parent_id' => (int) 6
+                            ),
+                            'children' => array()
+                        )
+                    )
+                )
+            ) */
 
 
 .. meta::
