@@ -194,6 +194,12 @@ TimeHelper
 - :php:meth:`TimeHelper::timeAgoInWords()` has the ``element`` option added.
   This allows you to specify an HTML element to wrap the formatted time.
 
+HtmlHelper
+----------
+
+- :php:meth:`HtmlHelper::tableHeaders()` now supports setting attributes per
+  table cell.
+
 
 Routing
 =======
