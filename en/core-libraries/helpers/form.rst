@@ -99,11 +99,10 @@ opening form tag.
     key-value pairs that affect the way the form tag is generated.
 
     .. versionchanged:: 2.0
-
-    The default url for all forms, is now the current url including
-    passed, named, and querystring parameters. You can override this
-    default by supplying ``$options['url']`` in the second parameter of
-    ``$this->Form->create()``.
+        The default url for all forms, is now the current url including
+        passed, named, and querystring parameters. You can override this
+        default by supplying ``$options['url']`` in the second parameter of
+        ``$this->Form->create()``.
 
 Options for create()
 --------------------
@@ -948,10 +947,9 @@ Form Element-Specific Methods
         <input name="data[User][id]" value="10" id="UserId" type="hidden" />
 
     .. versionchanged:: 2.0
-
-    Hidden fields no longer remove the class attribute. This means
-    that if there are validation errors on hidden fields, the
-    error-field classname will be applied.
+        Hidden fields no longer remove the class attribute. This means
+        that if there are validation errors on hidden fields, the
+        error-field classname will be applied.
 
 .. php:method:: textarea(string $fieldName, array $options)
 
