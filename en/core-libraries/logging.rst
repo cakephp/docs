@@ -245,7 +245,7 @@ CakeLog API
     $level indicates the level of log message being created.
     $message is the message of the log entry being written to.
 
-    .. versionchanged:: 2.2 $scope was added
+    .. versionchanged:: 2.2 ``$scope`` was added
 
 .. versionadded:: 2.2 Log levels and scopes
 

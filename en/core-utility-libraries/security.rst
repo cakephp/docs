@@ -23,6 +23,29 @@ Security API
         // Later decrypt your secret password
         $nosecret = Security::cipher($secret, 'my_key');
 
+    ``cipher()`` uses a **weak** XOR cipher and should **not** be used for
+    important or sensitive data.
+
+.. php:staticmethod:: rijndael($text, $key, $mode)
+
+    :param string $text: The text to encrypt
+    :param string $key: The key to use for encryption.  This must be longer than
+        32 bytes.
+    :param string $mode: The mode to use, either 'encrypt' or 'decrypt'
+
+    Encrypts/Decrypts text using the rijndael-256 cipher. This requires the
+    `mcrypt extension <http://php.net/mcrypt>`_ to be installed::
+
+        <?php
+        // Encrypt some data.
+        $encrypted = Security::rijndael('a secret', Configure::read('Security.key'), 'encrypt');
+
+        // Later decrypt it.
+        $encrypted = Security::rijndael($data, Configure::read('Security.key'), 'decrypt');
+
+    .. versionadded:: 2.2
+        ``Security::rijndael()`` was added in 2.2.
+
 .. php:staticmethod:: generateAuthKey( )
 
     :rtype: string

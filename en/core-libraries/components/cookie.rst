@@ -26,6 +26,9 @@ allows you to define how the CookieComponent works.
 | string $key     | null         | This string is used to encrypt                       |
 |                 |              | the value written to the cookie.                     |
 |                 |              | This string should be random and difficult to guess. |
+|                 |              |                                                      |
+|                 |              | When using rijndael encryption this value            |
+|                 |              | must be longer than 32 bytes.                        |
 +-----------------+--------------+------------------------------------------------------+
 | string $domain  | ''           | The domain name allowed to access the cookie. e.g.   |
 |                 |              | Use '.yourdomain.com' to allow access from all your  |
@@ -59,9 +62,7 @@ The following snippet of controller code shows how to include the
 CookieComponent and set up the controller variables needed to write
 a cookie named 'baker\_id' for the domain 'example.com' which needs
 a secure connection, is available on the path
-‘/bakers/preferences/’, expires in one hour and is HTTP only.
-
-::
+‘/bakers/preferences/’, expires in one hour and is HTTP only::
 
     <?php
     public $components = array('Cookie');
@@ -72,7 +73,7 @@ a secure connection, is available on the path
         $this->Cookie->path = '/bakers/preferences/';
         $this->Cookie->domain = 'example.com';   
         $this->Cookie->secure = true;  // i.e. only sent if using secure HTTPS
-        $this->Cookie->key = 'qSI232qs*&sXOw!';
+        $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
         $this->Cookie->httpOnly = true;
     }
 
@@ -163,6 +164,15 @@ The CookieComponent offers a number of methods for working with Cookies.
 .. php:method:: destroy()
 
     Destroys the current cookie.
+
+.. php:method:: type($type)
+
+    Allows you to change the encryption scheme.  By default the 'cipher' scheme
+    is used. However, you should use the 'rijndael' scheme for improved
+    security.
+
+    .. versionchanged:: 2.2
+        The 'rijndael' type was added.
 
 
 .. meta::

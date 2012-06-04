@@ -114,6 +114,16 @@ AuthComponent
   now accepts a ``contain`` option. This is used to set containable options for
   when user records are loaded.
 
+CookieComponent
+---------------
+
+- You can now encrypt cookie values with the rijndael cipher.  This requires
+  the `mcrypt <http://php.net/mcrypt>`_ extension to be installed.  Using
+  rijndael gives cookie values actual encryption, and is recommended in place of
+  the XOR cipher available in previous releases. The XOR cipher is still the
+  default cipher scheme to maintain compatibility with previous releases. You
+  can read more in the :php:meth:`Security::rijndael()` documentation.
+
 Pagination
 ==========
 
@@ -194,6 +204,12 @@ TimeHelper
 - :php:meth:`TimeHelper::timeAgoInWords()` has the ``element`` option added.
   This allows you to specify an HTML element to wrap the formatted time.
 
+HtmlHelper
+----------
+
+- :php:meth:`HtmlHelper::tableHeaders()` now supports setting attributes per
+  table cell.
+
 
 Routing
 =======
@@ -208,6 +224,12 @@ Dispatcher
 - With the addition of :doc:`/development/dispatch-filters` you'll need to
   update ``app/Config/bootstrap.php``.  See
   :ref:`required-steps-to-upgrade-2-2`.
+
+Router
+------
+
+- :php:meth:`Router::setExtensions()` has been added. With the new method you can
+  now add more extensions to be parsed, for example within a plugin routes file.
 
 Cache
 =====
