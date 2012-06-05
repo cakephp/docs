@@ -80,6 +80,7 @@ a:hover {
 }
 
 /* General button */
+.offline-download a,
 .button {
 	font-family: MuseoSlab500, Helvetica, Arial;
 	font-weight: normal;
@@ -95,6 +96,7 @@ a:hover {
 	-o-border-radius: 3px;
 	border-radius: 3px;
 }
+.offline-download a:hover,
 .button:hover,
 .button:focus {
 	text-decoration: none;
@@ -102,6 +104,7 @@ a:hover {
 	-webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
 	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
 }
+.offline-download a:active,
 .button:active {
 	outline: 0;
 	-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -124,6 +127,7 @@ a:hover {
 }
 
 /* Red buttons */
+.offline-download a,
 .button.red {
 	background: #C92434;
 
@@ -133,6 +137,7 @@ a:hover {
 	background-image: linear-gradient(top, #e01b2f, #c92434);
 
 }
+.offline-download a:hover,
 .button.red:hover {
 	background: #d62738;
 	border-color: #8c1925;
@@ -250,6 +255,35 @@ dl.docutils {
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
 	border-radius: 0;
+}
+
+/* promo spot on home page */
+.offline-download {
+	padding: 20px 20px 2px 210px;
+	background: #efefef url(./interact.png) 10px 10px no-repeat;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+	-webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+	-moz-box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+	margin: 0 0 20px 0;
+}
+.offline-download ul {
+	margin: 0;
+}
+.offline-download li {
+	display: inline-block;
+	list-style: none;
+}
+.offline-download a {
+	display: inline-block;
+	text-align: center;
+	padding: 9px 34px 11px;
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 1;
+	font-family: "Helvetica Neue", "Helvetica", Arial, Verdana, sans-serif;
+	position: relative;
+	cursor: pointer;
 }
 
 #cakephp-global-navigation .nav-select {

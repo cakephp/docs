@@ -10,11 +10,14 @@ The CakePHP cookbook, is an openly developed community editable documentation
 project.  We hope to maintain a high level of quality, validity and accuracy for 
 the documentation.
 
-Download the documentation:
+.. container:: offline-download
 
-- `epub format <../_downloads/en/CakePHPCookbook.epub>`_
-- `original source <http://github.com/cakephp/docs>`_
+    Prepared by the CakePHP community, you can download the
+    documentation and read it almost anywhere anytime.
 
+    - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
+    - `EPUB <../_downloads/en/Cookbook.epub>`_
+    - `Original Source <http://github.com/cakephp/docs>`_
 
 Getting started
 ===============
