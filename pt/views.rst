@@ -42,8 +42,8 @@ do *controller* *Products* será normalmente encontrada em
 A camada *view* no CakePHP pode ser composta de diferentes partes. 
 Cada parte tem diferentes usos e serão cobertas em seções específicas:
 
-- **views**: *views* é a única parte da página que está em execução. 
-Compõem a parte crucial da resposta da aplicação. 
+- **views**: *views* é a única parte da página que está em execução.
+  Compõem a parte crucial da resposta da aplicação.
 
 - **elements**: pedaços de código pequenos e reutilizáveis.
   *Elements* geralmente são renderizados dentro de *views*.
@@ -61,7 +61,7 @@ Compõem a parte crucial da resposta da aplicação.
 .. _extending-views:
 
 Estendendo Views
----------------
+----------------
 
 .. versionadded:: 2.1
 
@@ -139,7 +139,7 @@ o conteúdo da *view* anterior como o bloco ``content``.
 .. _view-blocks:
 
 Usando Blocos de Views (Visões)
-=================
+===============================
 
 .. versionadded:: 2.1
 
@@ -369,7 +369,7 @@ Outros três *layouts*, XML, JS, e RSS, existem no núcleo como um modo
 rápido e fácil de servir conteúdo que não seja text/html.
 
 Usando layouts a partir de plugins
---------------------------
+----------------------------------
 
 .. versionadded:: 2.1
 
@@ -522,12 +522,12 @@ armazenado da chamada element() anterior. E.g.::
 
 O código acima garante que ambos os resultados do *element* serão armazenados separadamente.
 Se você quiser que todos os elementos armazenados usem a mesma configuração de *cache*, você 
-pode salvar alguma repetição, setando :php:attr:`View::$elementCache`para a configuração 
+pode salvar alguma repetição, setando :php:attr:`View::$elementCache` para a configuração 
 de *cache* que você quer usar. O CakePHP usará esta configuração, quando nenhuma outra for dada. 
 
 
 Requisitando Elements de um Plugin
----------------------------------
+----------------------------------
 
 2.0
 ---

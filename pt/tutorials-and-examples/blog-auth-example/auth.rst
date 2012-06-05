@@ -183,7 +183,7 @@ Nós somente configuramos as urls que serão carregadas após as ações de logi
 em nosso caso são ``/posts/`` e ``/`` respectivamente.
 
 O que fizemos na função ``beforeFilter`` foi dizer ao AuthComponent para não
-solicitar um login para todas as  actions ``index`` e ``view`, em todos os controller. Nós queremos
+solicitar um login para todas as  actions ``index`` e ``view``, em todos os controller. Nós queremos
 queremos que nossos visitantes possam ler qualquer post sem precisar se registrar no site.
 
 Agora, nós precisamos autorizar que novos usuários possam se registrar, salvando o nome de usuário e a senha deles,
