@@ -246,7 +246,7 @@ group. This is possible by declaring the groups in cache configuration::
     Cache::config('site_home', array(
         'engine' => 'Redis',
         'duration' => '+999 days',
-        'groups' => array(comment', 'post')
+        'groups' => array('comment', 'post')
     ));
 
 Let's say you want to store the html generated for your homepage in cache, but

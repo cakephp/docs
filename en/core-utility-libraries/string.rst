@@ -38,6 +38,7 @@ use the ``String`` class::
 
     ::
 
+        <?php
         String::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
 
@@ -60,6 +61,7 @@ use the ``String`` class::
     The insert method is used to create string templates and to allow
     for key/value replacements::
 
+        <?php
         String::insert('My name is :name and I am :age years old.', array('name' => 'Bob', 'age' => '65'));
         // generates: "My name is Bob and I am 65 years old."
 
@@ -78,7 +80,6 @@ use the ``String`` class::
             'clean' => array(
                 'method' => 'text', // or html
             ),
-
             'before' => '',
             'after' => ''
         );
@@ -126,11 +127,11 @@ use the ``String`` class::
 
         <?php
         // called as TextHelper
-        echo $this->Text->highlight($last_sentence, 'using', array('format' => '<span class="highlight">\1</span>'));
+        echo $this->Text->highlight($lastSentence, 'using', array('format' => '<span class="highlight">\1</span>'));
 
         // called as String
         App::uses('String', 'Utility');
-        echo String::highlight($last_sentence, 'using', array('format' => '<span class="highlight">\1</span>'));
+        echo String::highlight($lastSentence, 'using', array('format' => '<span class="highlight">\1</span>'));
 
     Output::
 
@@ -205,11 +206,11 @@ use the ``String`` class::
 
         <?php
         // called as TextHelper
-        echo $this->Text->excerpt($last_paragraph, 'method', 50, '...');
+        echo $this->Text->excerpt($lastParagraph, 'method', 50, '...');
 
         // called as String
         App::uses('String', 'Utility');
-        echo String::excerpt($last_paragraph, 'method', 50, '...');
+        echo String::excerpt($lastParagraph, 'method', 50, '...');
 
     Output::
 

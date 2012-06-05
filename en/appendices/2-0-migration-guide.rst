@@ -93,7 +93,7 @@ lowercased Folders:
 
 htaccess (URL Rewriting)
 ===============================================
-In your ``app/webroot/.htaccess`` replace line ``RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]`` with ``RewriteRule ^(.*)$ index.php?/$1 [QSA,L]``
+In your ``app/webroot/.htaccess`` replace line ``RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]`` with ``RewriteRule ^(.*)$ index.php [QSA,L]``
 
 AppController / AppModel / AppHelper / AppShell
 ===============================================
@@ -460,9 +460,9 @@ Some examples on using :php:meth:`App::uses()` when migrating from
     // becomes 
     App::uses('Xml', 'Utility');
 
-    App::import('Datasource', 'MongoDb.MongoDbSource')
+    App::import('Datasource', 'MongoDb.MongoDbSource');
     // becomes 
-    App::uses('MongoDbSource', 'MongoDb.Model/Datasource')
+    App::uses('MongoDbSource', 'MongoDb.Model/Datasource');
 
 All classes that were loaded in the past using ``App::import('Core', $class);``
 will need to be loaded using ``App::uses()`` referring to the correct package.
@@ -495,13 +495,13 @@ App::build() and core paths
 Examples::
 
     <?php
-    App::build(array('controllers' => array('/full/path/to/controllers'))) 
+    App::build(array('controllers' => array('/full/path/to/controllers')));
     //becomes 
-    App::build(array('Controller' => array('/full/path/to/Controller')))
+    App::build(array('Controller' => array('/full/path/to/Controller')));
 
-    App::build(array('helpers' => array('/full/path/to/controllers'))) 
+    App::build(array('helpers' => array('/full/path/to/controllers')));
     //becomes 
-    App::build(array('View/Helper' => array('/full/path/to/View/Helper')))
+    App::build(array('View/Helper' => array('/full/path/to/View/Helper')));
 
 CakeLog
 -------
@@ -803,11 +803,13 @@ this, just change ``$_minimizedAttributeFormat`` in your AppHelper to ``%s``.
 
 To use with Html/Form helpers and others, you can write::
 
+    <?php
     $this->Form->checkbox('field', array('checked' => true, 'value' => 'some_value'));
 
 Other facility is that minimized attributes can be passed as item and not as
 key. For example::
 
+    <?php
     $this->Form->checkbox('field', array('checked', 'value' => 'some_value'));
 
 Note that ``checked`` have a numeric key.

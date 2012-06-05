@@ -161,7 +161,7 @@ from::
     public function paginate($conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
         $recursive = -1;
         $group = $fields = array('week', 'away_team_id', 'home_team_id');
-         return $this->find('all', compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group'));
+        return $this->find('all', compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group'));
     }
 
 You also need to override the core ``paginateCount()``, this method

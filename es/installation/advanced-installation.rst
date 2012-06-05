@@ -47,7 +47,7 @@ para que se parezca a este:
  // /app/webroot/index.php (partial, comments removed) 
     
     if (!defined('ROOT')) {
-        define('ROOT', DS.'home'.DS.'me');
+        define('ROOT', DS . 'home' . DS . 'me');
     }
     
     if (!defined('APP_DIR')) {
@@ -55,7 +55,7 @@ para que se parezca a este:
     }
     
     if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-        define('CAKE_CORE_INCLUDE_PATH', DS.'usr'.DS.'lib');
+        define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
     }
 
 Recomendamos utilizar la constante ``DS`` en vez del caracter '/' para delimitar

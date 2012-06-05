@@ -305,18 +305,22 @@ from a number of sources including strings, arrays and remote urls.
 
     Building XML from a string::
 
-        $xml = Xml::build('<example>text</example>');`
+        <?php
+        $xml = Xml::build('<example>text</example>');
 
     Building XML from string (output DOMDocument)::
 
+        <?php
         $xml = Xml::build('<example>text</example>', array('return' => 'domdocument'));
 
     Building XML from a file path::
 
+        <?php
         $xml = Xml::build('/path/to/an/xml/file.xml');
 
     Building from a remote URL::
 
+        <?php
         $xml = Xml::build('http://example.com/example.xml');
 
     Building from an array::

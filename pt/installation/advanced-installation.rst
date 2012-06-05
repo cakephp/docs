@@ -47,7 +47,7 @@ seguinte::
     // /app/webroot/index.php (parcial, comentários removidos) 
     
     if (!defined('ROOT')) {
-        define('ROOT', DS.'home'.DS.'me');
+        define('ROOT', DS . 'home' . DS . 'me');
     }
     
     if (!defined('APP_DIR')) {
@@ -55,7 +55,7 @@ seguinte::
     }
     
     if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-        define('CAKE_CORE_INCLUDE_PATH', DS.'usr'.DS.'lib');
+        define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
     }
 
 Recomenda-se a utilização da constante ``DS`` ao invés das barras para

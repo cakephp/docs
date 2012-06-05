@@ -42,7 +42,7 @@ CakePHPを次のような条件で動作させたいとします:
     // /app/webroot/index.php (一部分。コメントは取り除いてあります。) 
     
     if (!defined('ROOT')) {
-        define('ROOT', DS.'home'.DS.'me');
+        define('ROOT', DS . 'home' . DS . 'me');
     }
     
     if (!defined('APP_DIR')) {
@@ -50,7 +50,7 @@ CakePHPを次のような条件で動作させたいとします:
     }
     
     if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-        define('CAKE_CORE_INCLUDE_PATH', DS.'usr'.DS.'lib');
+        define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
     }
 
 ファイルパスの区切り文字には、スラッシュではなく ``DS`` 定数を使うようにお勧めします。

@@ -12,14 +12,14 @@ formatting numbers.
 .. versionchanged:: 2.1
    ``NumberHelper`` have been refactored into :php:class:`CakeNumber` class to
    allow easier use outside of the ``View`` layer.
-   Within a view, these methods are accessible via the `NumberHelper`
-   class and you can called it as you would call a normal helper method:
+   Within a view, these methods are accessible via the ``NumberHelper``
+   class and you can call it as you would call a normal helper method:
    ``$this->Number->method($args);``.
 
 .. include:: ../../core-utility-libraries/number.rst
     :start-after: start-cakenumber
     :end-before: end-cakenumber
-
+`
 .. meta::
     :title lang=en: NumberHelper
     :description lang=en: The Number Helper contains convenience methods that enable display numbers in common formats in your views.

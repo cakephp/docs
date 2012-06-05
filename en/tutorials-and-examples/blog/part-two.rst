@@ -1,4 +1,3 @@
-##############################
 Blog Tutorial - Adding a layer
 ##############################
 
@@ -242,11 +241,11 @@ Now let's create the view for our new 'view' action and place it in
 
     <!-- File: /app/View/Posts/view.ctp -->
     
-    <h1><?php echo h($post['Post']['title'])?></h1>
+    <h1><?php echo h($post['Post']['title']); ?></h1>
     
-    <p><small>Created: <?php echo $post['Post']['created']?></small></p>
+    <p><small>Created: <?php echo $post['Post']['created']; ?></small></p>
     
-    <p><?php echo h($post['Post']['body'])?></p>
+    <p><?php echo h($post['Post']['body']); ?></p>
 
 Verify that this is working by trying the links at ``/posts/index`` or
 manually requesting a post by accessing ``/posts/view/1``.
@@ -477,10 +476,10 @@ posts::
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
+                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])); ?>
             </td>
             <td>
-                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id']));?>
+                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?>
             </td>
             <td>
                 <?php echo $post['Post']['created']; ?>
@@ -528,7 +527,7 @@ links that allow users to delete posts, however::
         <tr>
             <th>Id</th>
             <th>Title</th>
-                    <th>Actions</th>
+            <th>Actions</th>
             <th>Created</th>
         </tr>
     
@@ -538,7 +537,7 @@ links that allow users to delete posts, however::
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
+                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])); ?>
             </td>
             <td>
                 <?php echo $this->Form->postLink(
@@ -546,7 +545,7 @@ links that allow users to delete posts, however::
                     array('action' => 'delete', $post['Post']['id']),
                     array('confirm' => 'Are you sure?')); 
                 ?>
-                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id']));?>
+                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?>
             </td>
             <td>
                 <?php echo $post['Post']['created']; ?>

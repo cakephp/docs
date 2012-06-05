@@ -9,6 +9,7 @@
    getting-started
    cakephp-overview
    controllers
+   views
    deployment
    tutorials-and-examples
    contributing

@@ -32,10 +32,7 @@ Formatting
 
     :rtype: integer
 
-.. versionchanged:: 2.2
-   ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
-
-    Converts given time (in server's time zone) to user's local 
+    Converts given time (in server's time zone) to user's local
     time, given his/her timezone.::
 
         <?php
@@ -45,21 +42,21 @@ Formatting
 
         // called as CakeTime
         App::uses('CakeTime', 'Utility');
-        echo CakeTime::convert(time(), new DataTimeZone('Asia/Jakarta'));
+        echo CakeTime::convert(time(), new DateTimeZone('Asia/Jakarta'));
+
+    .. versionchanged:: 2.2
+       ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
 
 .. php:method:: convertSpecifiers($format, $time = NULL)
 
     :rtype: string
 
-    Converts a string representing the format for the function 
+    Converts a string representing the format for the function
     strftime and returns a windows safe and i18n aware format.
 
 .. php:method:: dayAsSql($dateString, $field_name, $timezone = NULL)
 
     :rtype: string
-
-.. versionchanged:: 2.2
-   ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
 
     Creates a string in the same format as daysAsSql but
     only needs a single date object::
@@ -73,12 +70,15 @@ Formatting
         App::uses('CakeTime', 'Utility');
         echo CakeTime::dayAsSql('Aug 22, 2011', 'modified');
 
+    .. versionchanged:: 2.2
+       ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+
+    .. versionadded:: 2.2
+       ``$dateString`` parameter now also accepts a DateTime object.
+
 .. php:method:: daysAsSql($begin, $end, $fieldName, $timezone = NULL)
 
     :rtype: string
-
-.. versionchanged:: 2.2
-   ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
 
     Returns a string in the format "($field\_name >=
     '2008-01-21 00:00:00') AND ($field\_name <= '2008-01-25
@@ -94,24 +94,27 @@ Formatting
         App::uses('CakeTime', 'Utility');
         echo CakeTime::daysAsSql('Aug 22, 2011', 'Aug 25, 2011', 'created');
 
+    .. versionchanged:: 2.2
+       ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+
+    .. versionadded:: 2.2
+       ``$dateString`` parameter now also accepts a DateTime object.
+
 .. php:method:: format($format, $dateString = NULL, $invalid = false, $timezone = NULL)
 
     :rtype: string
 
-.. versionchanged:: 2.2
-   ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
-
-    Will return a string formatted to the given format using the 
+    Will return a string formatted to the given format using the
     `PHP date() formatting options <http://www.php.net/manual/en/function.date.php>`_::
 
         <?php
         // called via TimeHelper
         echo $this->Time->format('Y-m-d H:i:s');
         // The Unix Epoch as 1970-01-01 00:00:00
-        
+
         echo $this->Time->format('F jS, Y h:i A', '2011-08-22 11:53:00');
         // August 22nd, 2011 11:53 AM
-        
+
         echo $this->Time->format('r', '+2 days', true);
         // 2 days from now formatted as Sun, 13 Nov 2011 03:36:10 +0800
 
@@ -121,21 +124,24 @@ Formatting
         echo CakeTime::format('F jS, Y h:i A', '2011-08-22 11:53:00');
         echo CakeTime::format('r', '+2 days', true);
 
+    .. versionchanged:: 2.2
+       ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+
+    .. versionadded:: 2.2
+       ``$dateString`` parameter now also accepts a DateTime object.
+
 .. php:method:: fromString($dateString, $timezone = NULL)
 
     :rtype: string
 
-.. versionchanged:: 2.2
-   ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
-
-    Takes a string and uses `strtotime <http://us.php.net/manual/en/function.date.php>`_ 
+    Takes a string and uses `strtotime <http://us.php.net/manual/en/function.date.php>`_
     to convert it into a date integer::
 
         <?php
         // called via TimeHelper
         echo $this->Time->fromString('Aug 22, 2011');
         // 1313971200
-        
+
         echo $this->Time->fromString('+1 days');
         // 1321074066 (+1 day from current date)
 
@@ -143,6 +149,12 @@ Formatting
         App::uses('CakeTime', 'Utility');
         echo CakeTime::fromString('Aug 22, 2011');
         echo CakeTime::fromString('+1 days');
+
+    .. versionchanged:: 2.2
+       ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+
+    .. versionadded:: 2.2
+       ``$dateString`` parameter now also accepts a DateTime object.
 
 .. php:method:: gmt($dateString = NULL)
 
@@ -163,12 +175,12 @@ Formatting
 
     :rtype: string
 
-.. versionchanged:: 2.2
-   ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
-
-    Returns a formatted date string, given either a UNIX timestamp or a 
-    valid strtotime() date string. It take in account the default date 
+    Returns a formatted date string, given either a UNIX timestamp or a
+    valid strtotime() date string. It take in account the default date
     format for the current language if a LC_TIME file is used.
+
+    .. versionchanged:: 2.2
+       ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
 
 .. php:method:: nice($dateString = NULL, $timezone = NULL)
 
@@ -188,9 +200,6 @@ Formatting
 
 .. php:method:: niceShort($dateString = NULL, $timezone = NULL)
 
-.. versionchanged:: 2.2
-   ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
-
     :rtype: string
 
     Takes a date string and outputs it in the format "Jan
@@ -206,6 +215,12 @@ Formatting
         // called as CakeTime
         App::uses('CakeTime', 'Utility');
         echo CakeTime::niceShort('2011-08-22 11:53:00');
+
+    .. versionchanged:: 2.2
+       ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+
+    .. versionadded:: 2.2
+       ``$dateString`` parameter now also accepts a DateTime object.
 
 .. php:method:: serverOffset()
 
@@ -260,14 +275,20 @@ Formatting
     .. versionchanged:: 2.2
         The ``accuracy`` option was added.
 
-.. php:method:: toAtom($dateString, $timezone = NULL)
+    .. versionadded:: 2.2
+       ``$dateString`` parameter now also accepts a DateTime object.
 
-.. versionchanged:: 2.2
-   ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+.. php:method:: toAtom($dateString, $timezone = NULL)
 
     :rtype: string
 
     Will return a date string in the Atom format "2008-01-12T00:00:00Z"
+
+    .. versionchanged:: 2.2
+       ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+
+    .. versionadded:: 2.2
+       ``$dateString`` parameter now also accepts a DateTime object.
 
 .. php:method:: toQuarter($dateString, $range = false)
 
@@ -282,7 +303,7 @@ Formatting
         // called via TimeHelper
         echo $this->Time->toQuarter('Aug 22, 2011');
         // Would print 3
-        
+
         $arr = $this->Time->toQuarter('Aug 22, 2011', true);
         /*
         Array
@@ -297,41 +318,55 @@ Formatting
         echo CakeTime::toQuarter('Aug 22, 2011');
         $arr = CakeTime::toQuarter('Aug 22, 2011', true);
 
-.. php:method:: toRSS($dateString, $timezone = NULL)
+    .. versionadded:: 2.2
+       ``$dateString`` parameter now also accepts a DateTime object.
 
-.. versionchanged:: 2.2
-   ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+.. php:method:: toRSS($dateString, $timezone = NULL)
 
     :rtype: string
 
-    Will return a date string in the RSS format "Sat, 12 Jan 2008 
+    Will return a date string in the RSS format "Sat, 12 Jan 2008
     00:00:00 -0500"
+
+    .. versionchanged:: 2.2
+       ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+
+    .. versionadded:: 2.2
+       ``$dateString`` parameter now also accepts a DateTime object.
 
 .. php:method:: toUnix($dateString, $timezone = NULL)
 
     :rtype: integer
 
-.. versionchanged:: 2.2
-   ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
-
     A wrapper for fromString.
+
+    .. versionchanged:: 2.2
+       ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+
+    .. versionadded:: 2.2
+       ``$dateString`` parameter now also accepts a DateTime object.
 
 .. php:method:: toServer($dateString, $timezone = NULL, $format = 'Y-m-d H:i:s')
 
     :rtype: mixed
 
-.. versionadded:: 2.2
-
-    Returns a formatted date in server's timezone.
+    .. versionadded:: 2.2
+       Returns a formatted date in server's timezone.
 
 .. php:method:: timezone($timezone = NULL)
 
     :rtype: DateTimeZone
 
-.. versionadded:: 2.2
+    .. versionadded:: 2.2
+       Returns a timezone object from a string or the user's timezone object. If the function is called
+       without a parameter it tries to get timezone from 'Config.timezone' configuration variable.
 
-    Returns a timezone object from a string or the user's timezone object. If the function is called
-    without a parameter it tries to get timezone from 'Config.timezone' configuration variable.
+.. php:method:: listTimezones($filter = null, $country = null, $group = true)
+
+    :rtype: array
+
+    .. versionadded:: 2.2
+       Returns a list of timezone identifiers.
 
 Testing Time
 ============
@@ -344,20 +379,23 @@ Testing Time
 .. php:method:: isTomorrow($dateString, $timezone = NULL)
 .. php:method:: wasWithinLast($timeInterval, $dateString, $timezone = NULL)
 
-.. versionchanged:: 2.2
-   ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+    .. versionchanged:: 2.2
+       ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+
+    .. versionadded:: 2.2
+       ``$dateString`` parameter now also accepts a DateTime object.
 
     All of the above functions return true or false when passed a date
-    string. ``wasWithinLast`` takes an additional ``$time_interval``
+    string. ``wasWithinLast`` takes an additional ``$timeInterval``
     option::
 
         <?php
         // called via TimeHelper
-        $this->Time->wasWithinLast($time_interval, $dateString);
+        $this->Time->wasWithinLast($timeInterval, $dateString);
 
         // called as CakeTime
         App::uses('CakeTime', 'Utility');
-        CakeTime::wasWithinLast($time_interval, $dateString);
+        CakeTime::wasWithinLast($timeInterval, $dateString);
 
     ``wasWithinLast`` takes a time interval which is a string in the
     format "3 months" and accepts a time interval of seconds, minutes,

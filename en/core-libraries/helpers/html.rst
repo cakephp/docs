@@ -670,6 +670,26 @@ methods of the HtmlHelper and how to use them.
              <th class="product_table">Active</th>
         </tr>
 
+    .. versionchanged:: 2.2
+        ``tableHeaders()`` now accepts attributes per cell, see below.
+
+    As of 2.2 you can set attributes per column, these are used instead of the
+    defaults provided in the ``$thOptions``::
+
+        <?php
+        echo $this->Html->tableHeaders(array(
+            'id',
+            'Name' => array('class' => 'highlight'),
+            'Date' => array('class' => 'sortable')
+        ));
+
+        // Output
+        <tr>
+            <th>id</th>
+            <th class="highlight">Name</th>
+            <th class="sortable">Date</th>
+        </tr>
+
 .. php:method:: tableCells(array $data, array $oddTrOptions = null, array $evenTrOptions = null, $useCount = false, $continueOddEven = true)
 
     :param array $data: A two dimensional array with data for the rows.
@@ -777,11 +797,13 @@ methods of the HtmlHelper and how to use them.
 
     URL with GET params and named anchor::
 
-        <?php echo $this->Html->url(array(
+        <?php
+        echo $this->Html->url(array(
             "controller" => "posts",
             "action" => "search",
             "?" => array("foo" => "bar"),
-            "#" => "first"));
+            "#" => "first"
+        ));
         
         // Output
         /posts/search?foo=bar#first

@@ -99,11 +99,10 @@ opening form tag.
     key-value pairs that affect the way the form tag is generated.
 
     .. versionchanged:: 2.0
-
-    The default url for all forms, is now the current url including
-    passed, named, and querystring parameters. You can override this
-    default by supplying ``$options['url']`` in the second parameter of
-    ``$this->Form->create()``.
+        The default url for all forms, is now the current url including
+        passed, named, and querystring parameters. You can override this
+        default by supplying ``$options['url']`` in the second parameter of
+        ``$this->Form->create()``.
 
 Options for create()
 --------------------
@@ -243,7 +242,6 @@ Closing the Form
         <?php
         $options = array(
             'label' => 'Update',
-            'value' => 'Update!',
             'div' => array(
                 'class' => 'glass-pill',
             )
@@ -252,7 +250,7 @@ Closing the Form
 
     Will output::
 
-        <div class="glass-pill"><input type="submit" value="Update!" name="Update"></div>
+        <div class="glass-pill"><input type="submit" value="Update" name="Update"></div>
 
     See the `API <http://api20.cakephp.org>`_ for further details.
 
@@ -679,6 +677,9 @@ html attributes. The following will cover the options specific to
     // has a label element
     echo $this->Form->input('username', array('label' => 'Username'));
 
+  If you need to later change the defaults you can use
+  :php:meth:`FormHelper::inputDefaults()`.
+
 Generating specific types of inputs
 ===================================
 
@@ -932,7 +933,7 @@ Form Element-Specific Methods
 
     Will output::
 
-        <input name="data[User][password]" value="" id="UserPassword" type="password">
+        <input name="data[User][password]" value="" id="UserPassword" type="password" />
 
 .. php:method:: hidden(string $fieldName, array $options)
 
@@ -943,13 +944,12 @@ Form Element-Specific Methods
 
     Will output::
 
-        <input name="data[User][id]" value="10" id="UserId" type="hidden">
+        <input name="data[User][id]" value="10" id="UserId" type="hidden" />
 
     .. versionchanged:: 2.0
-
-    Hidden fields no longer remove the class attribute. This means
-    that if there are validation errors on hidden fields, the
-    error-field classname will be applied.
+        Hidden fields no longer remove the class attribute. This means
+        that if there are validation errors on hidden fields, the
+        error-field classname will be applied.
 
 .. php:method:: textarea(string $fieldName, array $options)
 
@@ -1052,10 +1052,10 @@ Form Element-Specific Methods
 
       Will output::
 
-        <input name="data[User][gender]" id="UserGender_" value="" type="hidden">
-        <input name="data[User][gender]" id="UserGenderM" value="M" type="radio">
+        <input name="data[User][gender]" id="UserGender_" value="" type="hidden" />
+        <input name="data[User][gender]" id="UserGenderM" value="M" type="radio" />
         <label for="UserGenderM">Male</label>
-        <input name="data[User][gender]" id="UserGenderF" value="F" type="radio">
+        <input name="data[User][gender]" id="UserGenderF" value="F" type="radio" />
         <label for="UserGenderF">Female</label>
 
     If for some reason you don't want the hidden input, setting
@@ -1075,7 +1075,7 @@ Form Element-Specific Methods
 
         <?php
         $options = array('M' => 'Male', 'F' => 'Female');
-        echo $this->Form->select('gender', $options)
+        echo $this->Form->select('gender', $options);
 
     Will output::
 
@@ -1098,7 +1098,8 @@ Form Element-Specific Methods
       select input, or for a radio group. Unless the 'type' is specified as 'radio',
       the FormHelper will assume that the target output is a select input::
 
-        <?php echo $this->Form->select('field', array(1,2,3,4,5));
+        <?php
+        echo $this->Form->select('field', array(1,2,3,4,5));
 
       Output::
 
@@ -1113,7 +1114,7 @@ Form Element-Specific Methods
       Options can also be supplied as key-value pairs::
 
         <?php
-        echo $this->Form->select('field', $options, array(
+        echo $this->Form->select('field', array(
             'Value 1' => 'Label 1',
             'Value 2' => 'Label 2',
             'Value 3' => 'Label 3'
@@ -1165,7 +1166,7 @@ Form Element-Specific Methods
       related check boxes::
 
         <?php
-        $options =  array(
+        $options = array(
             'Value 1' => 'Label 1',
             'Value 2' => 'Label 2'
         );
@@ -1225,9 +1226,9 @@ Form Element-Specific Methods
 
         <?php
         $this->request->data['Document']['submittedfile'] = array(
-            'name' => conference_schedule.pdf,
-            'type' => application/pdf,
-            'tmp_name' => C:/WINDOWS/TEMP/php1EE.tmp,
+            'name' => 'conference_schedule.pdf',
+            'type' => 'application/pdf',
+            'tmp_name' => 'C:/WINDOWS/TEMP/php1EE.tmp',
             'error' => 0,
             'size' => 41737,
         );
@@ -1386,7 +1387,6 @@ Creating date and time inputs
         <option value="2005">2005</option>
         <option value="2004">2004</option>
         <option value="2003">2003</option>
-
         <option value="2002">2002</option>
         <option value="2001">2001</option>
         <option value="2000">2000</option>
@@ -1496,6 +1496,31 @@ Displaying and checking errors
     Returns false if given form field described by the current entity has no
     errors. Otherwise it returns the validation message.
 
+
+Setting Defaults for all fields
+===============================
+
+.. versionadded:: 2.2
+
+You can declare a set of default options for ``input()`` using
+:php:meth:`FormHelper::inputDefaults()`.  Changing the default options allows
+you to consolidate repeated options into a single method call::
+
+    <?php
+    echo $this->Form->inputDefaults(array(
+            'label' => false,
+            'div' => false,
+            'class' => 'fancy'
+        )
+    ));
+
+All inputs created from that point forward will inherit the options declared in
+inputDefaults. You can override the default options by declaring the option in the
+input() call::
+
+    <?php
+    echo $this->Form->input('password'); // No div, no label with class 'fancy'
+    echo $this->Form->input('username', array('label' => 'Username')); // has a label element same defaults
 
 Working with SecurityComponent
 ==============================

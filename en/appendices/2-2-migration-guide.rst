@@ -4,16 +4,51 @@
 CakePHP 2.2 is a fully API compatible upgrade from 2.0/2.1.  This page outlines the
 changes and improvements made for 2.2.
 
+.. _required-steps-to-upgrade-2-2:
+
+Required steps to upgrade
+=========================
+
+When upgrading to CakePHP 2.2 its important to add a few new configuration
+values to ``app/Config/bootstrap.php``.  Adding these will ensure consistent
+behavior with 2.1.x::
+
+    <?php
+    // Enable the Dispatcher filters for plugin assets, and
+    // CacheHelper.
+    Configure::write('Dispatcher.filters', array(
+        'AssetDispatcher',
+        'CacheDispatcher'
+    ));
+
+    // Add logging configuration.
+    CakeLog::config('debug', array(
+        'engine' => 'FileLog',
+        'types' => array('notice', 'info', 'debug'),
+        'file' => 'debug',
+    ));
+    CakeLog::config('error', array(
+        'engine' => 'FileLog',
+        'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
+        'file' => 'error',
+    ));
+
+You will also need to modify ``app/Config/core.php``. Change the value of
+:php:const:`LOG_ERROR` to :php:const:`LOG_ERR`::
+
+    <?php
+    define('LOG_ERROR', LOG_ERR);
+
 Models
 ======
 
 - ``Model::_findCount()`` will now call the custom find methods with
-    ``$state = 'before'`` and ``$queryData['operation'] = 'count'``.
-    In many cases custom finds already return correct counts for pagination,
-    but ``'operation'`` key allows more flexibility to build other queries,
-    or drop joins which are required for the custom finder itself.
-    As the pagination of custom find methods never worked quite well it required
-    workarounds for this in the model level, which are now no longer needed
+  ``$state = 'before'`` and ``$queryData['operation'] = 'count'``.
+  In many cases custom finds already return correct counts for pagination,
+  but ``'operation'`` key allows more flexibility to build other queries,
+  or drop joins which are required for the custom finder itself.
+  As the pagination of custom find methods never worked quite well it required
+  workarounds for this in the model level, which are now no longer needed
 
 Datasources
 ===========
@@ -26,6 +61,8 @@ Testing
 =======
 
 - The webrunner now includes links to re-run a test with debug output.
+- Generated test cases for Controller now subclass
+  :php:class:`ControllerTestCase`.
 
 
 Error Handling
@@ -49,6 +86,7 @@ Exceptions
 
 - The :php:class:`NotImplementedException` was added.
 
+
 Core
 ====
 
@@ -58,6 +96,12 @@ Configure
 - :php:meth:`Configure::dump()` was added.  It is used to persist configuration
   data in durable storage like files.  Both :php:class:`PhpReader` and
   :php:class:`IniReader` work with it.
+- A new config parameter 'Config.timezone' is available which you can set to
+  user's timezone string.  eg. You can do ``Configure::write('Config.timezone',
+  'Europe/Paris')``.  If a method of ``CakeTime`` class is called with
+  ``$timezone`` parameter as null and 'Config.timezone' is set, then the value
+  of 'Config.timezone' will be used. This feature allows you to set user's
+  timezone just once instead of passing it each time in function calls.
 
 
 Controller
@@ -70,6 +114,23 @@ AuthComponent
   now accepts a ``contain`` option. This is used to set containable options for
   when user records are loaded.
 
+CookieComponent
+---------------
+
+- You can now encrypt cookie values with the rijndael cipher.  This requires
+  the `mcrypt <http://php.net/mcrypt>`_ extension to be installed.  Using
+  rijndael gives cookie values actual encryption, and is recommended in place of
+  the XOR cipher available in previous releases. The XOR cipher is still the
+  default cipher scheme to maintain compatibility with previous releases. You
+  can read more in the :php:meth:`Security::rijndael()` documentation.
+
+Pagination
+==========
+
+- Paginating custom finders will now return correct counts, see Model changes
+  for more info.
+
+
 Network
 =======
 
@@ -78,6 +139,9 @@ CakeEmail
 
 - :php:meth:`CakeEmail::charset()` and :php:meth:`CakeEmail::headerCharset()`
   were added.
+- Legacy Japanese encodings are now handled correctly. ``ISO-2202-JP`` is used
+  when the encoding is ``ISO-2202-JP-MS`` which works around a number of issues
+  in mail clients when dealing with the CP932 and Shift_JIS encodings.
 - :php:meth:`CakeEmail::theme()` was added.
 - :php:meth:`CakeEmail::domain()` was added. You can use this method to set the
   domain name used when sending email from a CLI script or if you want to
@@ -110,6 +174,14 @@ CakeTime
 - :php:meth:`CakeTime::timeAgoInWords()` had the ``accuracy`` option added.
   This option allows you to specify how accurate formatted times should be.
 
+- New methods added:
+
+  * :php:meth:`CakeTime::toServer()`
+  * :php:meth:`CakeTime::timezone()`
+  * :php:meth:`CakeTime::listTimezones()`
+
+- The ``$dateString`` parameter in all methods now accepts a DateTime object.
+
 
 Helpers
 =======
@@ -121,6 +193,8 @@ FormHelper
   honors the ``on`` key.
 - :php:meth:`FormHelper::radio()` now supports an ``empty`` which works similar
   to the empty option on ``select()``.
+- Added :php:meth:`FormHelper::inputDefaults()` to set common properties for
+  each of the inputs generated by the helper
 
 TimeHelper
 ----------
@@ -130,49 +204,102 @@ TimeHelper
 - :php:meth:`TimeHelper::timeAgoInWords()` has the ``element`` option added.
   This allows you to specify an HTML element to wrap the formatted time.
 
+HtmlHelper
+----------
 
-Configuration
-=============
+- :php:meth:`HtmlHelper::tableHeaders()` now supports setting attributes per
+  table cell.
 
-``app/Config/bootstrap.php`` changed to add configuration related to Dispatcher
-filters. If your application relies on assets in themes or plugins being
-dispatched, or if your are using the full page caching feature you need to copy
-the relevant configuration to your bootstrap file. Basically you only need to
-add the following lines::
 
-    <?php
-    Configure::write('Dispatcher.filters', array(
-	    'AssetDispatcher',
-	    'CacheDispatcher'
-    ));
-
-Check the full documentation for this new features in
-:doc:`/development/dispatch-filters`
-
-Logging
+Routing
 =======
 
-Changes in :php:class:`CakeLog` now requires:
+Dispatcher
+----------
 
-- Modify ``app/Config/core.php`` to change the value of :php:const:`LOG_ERROR` to :php:const:`LOG_ERR`::
+- Event listeners can now be attached to the dispatcher calls, those will have
+  the ability to change the request information or the response before it is
+  sent to the client. Check the full documentation for this new features in
+  :doc:`/development/dispatch-filters`
+- With the addition of :doc:`/development/dispatch-filters` you'll need to
+  update ``app/Config/bootstrap.php``.  See
+  :ref:`required-steps-to-upgrade-2-2`.
+
+Router
+------
+
+- :php:meth:`Router::setExtensions()` has been added. With the new method you can
+  now add more extensions to be parsed, for example within a plugin routes file.
+
+Cache
+=====
+
+Redis Engine
+------------
+
+A new caching engine was added using the `phpredis extension
+<https://github.com/nicolasff/phpredis>`_ it is configured similarly to the
+Memcache engine.
+
+Cache groups
+------------
+
+It is now possible to tag or label cache keys under groups. This makes it
+simpler to mass-delete cache entries associated to the same label. Groups are
+declared at configuration time when creating the cache engine::
 
     <?php
-    define('LOG_ERROR', LOG_ERR);
-
-- Modify ``app/Config/bootstrap.php`` to add default logging configuration::
-
-    <?php
-    App::uses('CakeLog', 'Log');
-    CakeLog::config('debug', array(
-        'engine' => 'FileLog',
-        'types' => array('notice', 'info', 'debug'),
-        'file' => 'debug',
-    ));
-    CakeLog::config('error', array(
-        'engine' => 'FileLog',
-        'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
-        'file' => 'error',
+    Cache::config(array(
+        'engine' => 'Redis',
+        ...
+        'groups' => array('post', 'comment', 'user')
     ));
 
-Check the full documentation for this new features in
-:doc:`/core-libraries/logging`
+You can have as many groups as you like, but keep in mind they cannot be
+dynamically modified.
+
+The :php:meth:`Cache::clearGroup()` class method was added. It takes the group
+name and deletes all entries labeled with the same string.
+
+Log
+===
+
+Changes in :php:class:`CakeLog` now require, some additional configuration in
+your ``app/Config/bootstrap.php``.  See :ref:`required-steps-to-upgrade-2-2`,
+and :doc:`/core-libraries/logging`.
+
+- The :php:class:`CakeLog` class now accepts the same log levels as defined in
+  `RFC 5424 <http://tools.ietf.org/html/rfc5424>`_.  Several convenience
+  methods have also been added:
+
+  * :php:meth:`CakeLog::emergency($message, $scope = array())`
+  * :php:meth:`CakeLog::alert($message, $scope = array())`
+  * :php:meth:`CakeLog::critical($message, $scope = array())`
+  * :php:meth:`CakeLog::error($message, $scope = array())`
+  * :php:meth:`CakeLog::warning($message, $scope = array())`
+  * :php:meth:`CakeLog::notice($message, $scope = array())`
+  * :php:meth:`CakeLog::info($message, $scope = array())`
+  * :php:meth:`CakeLog::debug($message, $scope = array())`
+
+- A third argument ``$scope`` has been added to :php:meth:`CakeLog::write`.
+  See :ref:`logging-scopes`.
+- A new log engine: :php:class:`ConsoleLog` has been added.
+
+Model Validation
+================
+
+- A new object ``ModelValidator`` was added to delegate the work of validating
+  model data, it should be transparent to the application and fully backwards
+  compatible. It also exposes a rich API to add, modify and remove validation
+  rules. Check docs for this object in :doc:`/models/data-validation`.
+
+- New validation rule added:
+
+  * :php:meth:`Validation::naturalNumber()`
+
+I18N extract shell
+==================
+
+Option added to overwrite existing POT files by default::
+
+    ./Console/cake i18n extract --overwrite

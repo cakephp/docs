@@ -43,7 +43,7 @@ level ``Session`` key, and a number of options are available:
 
 * ``Session.ini`` - Allows you to set additional session ini settings for your
   config.  This combined with ``Session.handler`` replace the custom session
-  handling features of previous versions.
+  handling features of previous versions
 
 CakePHP's defaults to setting ``session.cookie_secure`` to true, when your
 application is on an SSL protocol.  If your application serves from both SSL and
@@ -56,6 +56,17 @@ disable this::
         'defaults' => 'php',
         'ini' => array(
             'session.cookie_secure' => false
+        )
+    ));
+
+Session cookie paths default to ``/`` in 2.0, to change this you can use the
+``session.cookie_path`` ini flag to the directory path of your application::
+
+    <?php
+    Configure::write('Session', array(
+        'defaults' => 'php',
+        'ini' => array(
+            'session.cookie_path' => '/app/dir'
         )
     ));
 
