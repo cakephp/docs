@@ -62,7 +62,7 @@ CakePHPのビューレイヤーはいくつかの異なるパーツによって�
     <?php
     $this->extend('/Common/view');
 
-    $this->assign('title', $post)
+    $this->assign('title', $post);
 
     $this->start('sidebar');
     ?>
