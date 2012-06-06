@@ -12,8 +12,10 @@ the documentation.
 
 .. container:: offline-download
 
-    Prepared by the CakePHP community, you can download the
-    documentation and read it almost anywhere anytime.
+    **Read the book anywhere**
+
+    Enjoy the CakePHP cookbook almost anywhere.  Available, as both a PDF and
+    EPUB, you can now read the docs on more devices and offline.
 
     - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/en/Cookbook.epub>`_
