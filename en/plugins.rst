@@ -36,6 +36,9 @@ loadAll loads all plugins available, while allowing you to set certain
 settings for specific plugins. load() works similarly, but only loads the 
 plugins you explicitly specify.
 
+Plugin configuration
+====================
+
 There is a lot you can do with the load and loadAll methods to help with
 plugin configuration and routing. Perhaps you want to load all plugins 
 automatically, while specifying custom routes and bootstrap files for
@@ -72,7 +75,6 @@ Note that all files specified should actually exist in the configured
 plugin(s) or PHP will give warnings for each file it cannot load. This is
 especially important to remember when specifying defaults for all plugins.
 
-
 Some plugins additionally need to create one or more tables in your database. In
 those cases, they will often include a schema file which you can
 call from the cake shell like this::
@@ -82,6 +84,37 @@ call from the cake shell like this::
 Most plugins will indicate the proper procedure for configuring
 them and setting up the database in their documentation. Some
 plugins will require more setup than others.
+
+Advanced bootstrapping
+======================
+
+If you like to load more than one bootstrap file for a plugin. You can specify
+an array of files for the bootstrap configuration key::
+
+    <?php
+    CakePlugin::loadAll(array(
+        'Blog' => array(
+            'bootstrap' => array(
+                'config1',
+                'config2'
+            )
+        )
+    ));
+
+You can also specify a callable function that needs to be called when the plugin
+has been loaded::
+
+    <?php
+
+    function aCallableFunction($pluginName, $config) {
+        
+    }
+
+    CakePlugin::loadAll(array(
+        'Blog' => array(
+            'bootstrap' => 'aCallableFunction'
+        )
+    ));
 
 Using a Plugin
 --------------
