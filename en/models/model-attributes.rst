@@ -230,9 +230,8 @@ usage, as well as limitations, see
 name
 ====
 
-As you saw earlier in this chapter, the name attribute is a
-compatibility feature for PHP4 users and is set to the same value
-as the model name.
+Name of the model. If you do not specify it in your model file it will
+be set to the class name by constructor.
 
 Example usage::
 
