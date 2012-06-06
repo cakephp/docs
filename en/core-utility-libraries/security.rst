@@ -64,7 +64,20 @@ Security API
     :rtype: string
 
     Create a hash from string using given method. Fallback on next
-    available method.
+    available method. If ``$type`` is set to true, the applications salt
+    value will be used.
+
+    ::
+
+        <?php
+        //Using the application's salt value
+        $sha1 = Security::hash('CakePHP Framework', 'sha1', true);
+
+        //Using a custom salt value
+        $md5 = Security::hash('CakePHP Framework', 'md5', 'my-salt');
+
+        //Using the default hash algorithm
+        $hash = Security::hash('CakePHP Framework');
 
 .. php:staticmethod:: inactiveMins( )
 
