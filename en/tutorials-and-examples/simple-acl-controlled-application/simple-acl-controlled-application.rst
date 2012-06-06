@@ -373,7 +373,19 @@ a small modification to our ``AuthComponent`` configuration.
 ``AuthComponent`` needs to know about the existence of this root
 node, so that when making ACL checks it can use the correct node
 path when looking up controllers/actions. In ``AppController`` ensure
-that you ``$components`` array contains the ``actionPath`` defined earlier.
+that your ``$components`` array contains the ``actionPath`` defined earlier::
+
+    <?php
+    class AppController extends Controller {
+        public $components = array(
+            'Acl',
+            'Auth' => array(
+                'authorize' => array(
+                    'Actions' => array('actionPath' => 'controllers')
+                )
+            ),
+            'Session'
+        );
 
 Continue to :doc:`part-two` to continue the tutorial.
 
