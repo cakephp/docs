@@ -31,15 +31,15 @@ components in your ``$components`` array.
 
 .. note::
 
-    When using the Security Component you **must** use the FormHelper
-    to create your forms. The Security Component looks for certain
-    indicators that are created and managed by the FormHelper
-    (especially those created in :php:meth:`~FormHelper::create()` 
-    and :php:meth:`~FormHelper::end()`). Dynamically
-    altering the fields that are submitted in a POST request (e.g.
-    disabling, deleting or creating new fields via JavaScript) is
-    likely to trigger a black-holing of the request. See the
-    ``$validatePost`` or ``$disabledFields`` configuration parameters.
+    When using the Security Component you **must** use the FormHelper to create
+    your forms. In addition, you must **not** override any of the fields' "name"
+    attributes. The Security Component looks for certain indicators that are
+    created and managed by the FormHelper (especially those created in
+    :php:meth:`~FormHelper::create()` and :php:meth:`~FormHelper::end()`).
+    Dynamically altering the fields that are submitted in a POST request (e.g.
+    disabling, deleting or creating new fields via JavaScript) is likely to
+    trigger a black-holing of the request. See the ``$validatePost`` or
+    ``$disabledFields`` configuration parameters.
 
 Handling blackhole callbacks
 ============================
