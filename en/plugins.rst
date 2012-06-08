@@ -14,7 +14,7 @@ connection, etc.). Otherwise, it operates in its own little space,
 behaving much like it would if it were an application on its own.
 
 Installing a Plugin
--------------------
+===================
 
 To install a plugin, start by simply dropping the plugin folder in 
 your app/Plugin folder. If you're installing a plugin named 
@@ -117,7 +117,7 @@ has been loaded::
     ));
 
 Using a Plugin
---------------
+==============
 
 You can reference a plugin's controllers, models, components, 
 behaviors, and helpers by prefixing the name of the plugin before
@@ -139,7 +139,7 @@ any other helper in your view, such as::
 
 
 Creating Your Own Plugins
--------------------------
+=========================
 
 As a working example, let's begin to create the ContactManager
 plugin referenced above. To start out, we'll set up our plugin's
@@ -211,7 +211,7 @@ have any problems with using the command line.
 
 
 Plugin Controllers
-------------------
+==================
 
 Controllers for our ContactManager plugin will be stored in
 /app/Plugin/ContactManager/Controller/. Since the main thing we'll 
@@ -253,7 +253,7 @@ because we don’t have a Contact model defined yet.
 .. _plugin-models:
 
 Plugin Models
--------------
+=============
 
 Models for the plugin are stored in /app/Plugin/ContactManager/Model.
 We've already defined a ContactsController for this plugin, so let's 
@@ -295,7 +295,7 @@ have the plugin prefix on them, use the alternative syntax::
     }
 
 Plugin Views
-------------
+============
 
 Views behave exactly as they do in normal applications. Just place
 them in the right folder inside of the /app/Plugin/[PluginName]/View/
@@ -314,7 +314,7 @@ well::
     :ref:`view-elements`
 
 Overriding plugin views from inside your application
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------------------------
 
 You can override any plugin views from inside your app using
 special paths. If you have a plugin called 'ContactManager' you 
@@ -332,7 +332,7 @@ Creating this file, would allow you to override
 
 
 Plugin assets
--------------
+=============
 
 A plugin's web assets (but not PHP files) can be served through the 
 plugin's 'webroot' directory, just like the main application's assets::
@@ -350,7 +350,7 @@ the mime-type of that asset.
 
 
 Linking to assets in plugins
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 
 Simply prepend /plugin_name/ to the beginning of a request for an
 asset within that plugin, and it will work as if the asset were
@@ -367,7 +367,7 @@ would serve the asset
 
 
 Components, Helpers and Behaviors
----------------------------------
+=================================
 
 A plugin can have Components, Helpers and Behaviors just like a
 regular CakePHP application. You can even create plugins that
@@ -402,7 +402,7 @@ The same technique applies to Helpers and Behaviors.
         App::uses('AppHelper', 'View/Helper');
 
 Expand Your Plugin
-------------------
+==================
 
 This example created a good start for a plugin, but there is a lot
 more that you can do. As a general rule, anything you can do with your
@@ -420,7 +420,7 @@ plugins. Just don't forget to share your code with the community so
 that everyone can benefit from your awesome, reusable components!
 
 Plugin Tips
------------
+===========
 
 Once a plugin has been installed in /app/Plugin, you can access it
 at the URL /plugin_name/controller_name/action. In our ContactManager
