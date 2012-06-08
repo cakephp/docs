@@ -19,7 +19,7 @@ formatting numbers.
 .. include:: ../../core-utility-libraries/number.rst
     :start-after: start-cakenumber
     :end-before: end-cakenumber
-`
+
 .. meta::
     :title lang=en: NumberHelper
     :description lang=en: The Number Helper contains convenience methods that enable display numbers in common formats in your views.
