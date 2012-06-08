@@ -166,11 +166,11 @@ Let's say we wanted to create a helper that could be used to output
 a specifically crafted CSS-styled link you needed many different
 places in your application. In order to fit your logic in to
 CakePHP's existing helper structure, you'll need to create a new
-class in ``/app/View/Helper``. Let's call our helper LinkHelper. The
+class in ``/app/views/helpers``. Let's call our helper LinkHelper. The
 actual PHP class file would look something like this::
 
     <?php
-    /* /app/View/Helper/LinkHelper.php */
+    /* /app/views/helpers/link.php */
     App::uses('AppHelper', 'View/Helper');
     
     class LinkHelper extends AppHelper {
@@ -192,7 +192,7 @@ helper. To do so, you can specify helpers you wish to use with a
 ``$helpers`` array, formatted just as you would in a controller::
 
     <?php
-    /* /app/View/Helper/LinkHelper.php (using other helpers) */
+    /* /app/views/helpers/link.php (using other helpers) */
     App::uses('AppHelper', 'View/Helper');
     
     class LinkHelper extends AppHelper {
@@ -215,7 +215,7 @@ Using your Helper
 -----------------
 
 Once you've created your helper and placed it in
-``/app/View/Helper/``, you'll be able to include it in your
+``/app/views/helpers/``, you'll be able to include it in your
 controllers using the special variable :php:attr:`~Controller::$helpers`::
 
     <?php
@@ -237,7 +237,7 @@ Creating Functionality for All Helpers
 All helpers extend a special class, AppHelper (just like models
 extend AppModel and controllers extend AppController). To create
 functionality that would be available to all helpers, create
-``/app/View/Helper/AppHelper.php``::
+``/app/views/helpers/app_helper.php``::
 
     <?php
     App::uses('Helper', 'View');
