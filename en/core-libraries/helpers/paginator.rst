@@ -329,7 +329,7 @@ Sets all the options for the Paginator Helper. Supported options are:
   pagination calls. If not specified, regular links will be created::
 
     <?php
-    $this->Paginator->options('update' => '#content');
+    $this->Paginator->options(array('update' => '#content'));
 
   This is useful when doing :ref:`ajax-pagination`.  Keep in mind that the value
   of update can be any valid CSS selector, but most often is is simpler to use an
