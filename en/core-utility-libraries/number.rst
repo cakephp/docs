@@ -117,26 +117,11 @@ automatically echo the output into the view.
 .. php:method:: addFormat(string $formatName, array $options)
     
     :param string $formatName: The format name to be used in the future
-    :param array $options: The array of options for this format.
-
-        - `before` Currency symbol before number. False for none.
-        - `after` Currency symbol after number. False for none.
-        - `zero` The text to use for zero values, can be a string or a number.
-          ie. 0, 'Free!'
-        - `places` Number of decimal places to use. ie. 2.
-        - `thousands` Thousands separator ie. ','.
-        - `decimals` Decimal separator symbol ie. '.'.
-        - `negative` Symbol for negative numbers. If equal to '()', the number
-          will be wrapped with ( and ).
-        - `escape` Should the output be htmlentity escaped? Defaults to true.
-        - `wholeSymbol` String to use for whole numbers ie. ' dollars'.
-        - `wholePosition` Either 'before' or 'after' to place the whole symbol.
-        - `fractionSymbol` String to use for fraction numbers ie. ' cents'.
-        - `fractionPosition` Either 'before' or 'after' to place the fraction
-          symbol.
+    :param array $options: The array of options for this format. Uses the
+        same ``$options`` keys as :php:meth:`CakeNumber::currency()`.
 
     Add a currency format to the Number helper. Makes reusing
-    currency formats easier.::
+    currency formats easier::
 
         <?php
         // called as NumberHelper
