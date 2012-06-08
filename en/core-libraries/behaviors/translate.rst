@@ -62,7 +62,7 @@ value with another array, like so::
         );
     }
 
-After you have done that (for example putting "name" as one of the
+After you have done that (for example putting "title" as one of the
 fields) you already finished the basic setup. Great! According to
 our current example the model should now look something like this::
 
@@ -71,7 +71,7 @@ our current example the model should now look something like this::
         public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
-                'name'
+                'title'
             )
         );
     }
@@ -85,7 +85,7 @@ Conclusion
 ==========
 
 From now on each record update/creation will cause
-TranslateBehavior to copy the value of "name" to the translation
+TranslateBehavior to copy the value of "title" to the translation
 table (default: i18n) along with the current locale. A locale is
 the identifier of the language, so to speak.
 
@@ -109,7 +109,7 @@ setup as shown below. The naming is completely up to you.::
         public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
-                'name' => 'nameTranslation'
+                'title' => 'titleTranslation'
             )
         );
     }
@@ -122,12 +122,12 @@ something like this::
          [Post] => Array
              (
                  [id] => 1
-                 [name] => Beispiel Eintrag 
+                 [title] => Beispiel Eintrag 
                  [body] => lorem ipsum...
                  [locale] => de_de
              )
     
-         [nameTranslation] => Array
+         [titleTranslation] => Array
              (
                  [0] => Array
                      (
@@ -135,7 +135,7 @@ something like this::
                          [locale] => en_us
                          [model] => Post
                          [foreign_key] => 1
-                         [field] => name
+                         [field] => title
                          [content] => Example entry
                      )
     
@@ -145,7 +145,7 @@ something like this::
                          [locale] => de_de
                          [model] => Post
                          [foreign_key] => 1
-                         [field] => name
+                         [field] => title
                          [content] => Beispiel Eintrag
                      )
     
@@ -173,7 +173,7 @@ where the key is the translatable field and the value is the fake
 association name.::
 
     <?php
-    $this->Post->bindTranslation(array('name' => 'nameTranslation'));
+    $this->Post->bindTranslation(array('title' => 'titleTranslation'));
     $this->Post->find('all', array('recursive' => 1)); // need at least recursive 1 for this to work.
 
 With this setup the result of your find() should look something
@@ -184,12 +184,12 @@ like this::
          [Post] => Array
              (
                  [id] => 1
-                 [name] => Beispiel Eintrag
+                 [title] => Beispiel Eintrag
                  [body] => lorem ipsum...
                  [locale] => de_de
              )
 
-         [nameTranslation] => Array
+         [titleTranslation] => Array
              (
                  [0] => Array
                      (
@@ -197,7 +197,7 @@ like this::
                          [locale] => en_us
                          [model] => Post
                          [foreign_key] => 1
-                         [field] => name
+                         [field] => title
                          [content] => Example entry
                      )
 
@@ -207,7 +207,7 @@ like this::
                          [locale] => de_de
                          [model] => Post
                          [foreign_key] => 1
-                         [field] => name
+                         [field] => title
                          [content] => Beispiel Eintrag
                      )
 
@@ -249,7 +249,7 @@ your controller or you can define it directly in the model.
         public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
-                'name'
+                'title'
             )
         );
 
@@ -281,7 +281,7 @@ you need to setup your model like this::
         public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
-                'name'
+                'title'
             )
         );
         
@@ -327,7 +327,7 @@ $translateTable in your model, like so::
         public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
-                'name'
+                'title'
             )
         );
         
