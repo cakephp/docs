@@ -13,6 +13,15 @@
     appendices/new-features-in-cakephp-2-0
     appendices/phpunit-migration-hints
 
+2.1移行ガイド
+=============
+
+.. toctree::
+    :maxdepth: 1
+
+    appendices/2-1-migration-guide
+    appendices/new-features-in-cakephp-2-1
+
 1.2から1.3への移行
 ==================
 
