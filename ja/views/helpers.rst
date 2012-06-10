@@ -24,7 +24,7 @@ CakePHPでヘルパーを有効にするにはコントローラに認識させ�
         public $helpers = array('Form', 'Html', 'Js', 'Time');
     }
 
-プラグインからヘルパーを追加するにはCakePHPの様々な場所で使われている :term:`plugin syntax` を使います。::
+プラグインからヘルパーを追加するにはCakePHPの様々な場所で使われている :term:`プラグイン記法` を使います。::
 
     <?php
     class BakeriesController extends AppController {

@@ -439,7 +439,7 @@ HtmlHelper
 - :php:meth:`HtmlHelper::media()` が追加されました。
   このメソッドを使って、 HTML5 の audio/video エレメントを作成することができます。
 - :php:meth:`HtmlHelper::script()` と :php:meth:`HtmlHelper::css()` 、
-  :php:meth:`HtmlHelper::image()` に :term:`plugin syntax` がサポートされました。
+  :php:meth:`HtmlHelper::image()` に :term:`プラグイン記法` がサポートされました。
   ``Plugin.asset`` を利用し、より用意にプラグインへのリンクが作成できます。
 - :php:meth:`HtmlHelper::getCrumbList()` に ``$startText`` が追加されました。
 
