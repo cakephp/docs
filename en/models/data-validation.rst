@@ -429,6 +429,11 @@ stored in $this->data member variable::
         }
     }
 
+.. note::
+
+    Your own validation methods must have ``public`` visibility. Validation
+    methods that are ``protected`` and ``private`` are not supported.
+
 
 Dynamically change validation rules
 ===================================
