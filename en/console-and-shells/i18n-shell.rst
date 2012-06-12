@@ -66,6 +66,22 @@ already exists and will overwrite by default::
 
     ./Console/cake i18n extract --overwrite
 
+Extracting messages from the CakePHP core libraries
+---------------------------------------------------
+.. versionadded:: 2.2
+
+By default, the extract shell script will ask you if you like to extract
+the messages used in the CakePHP core libraries. Set --extract-core to yes or
+no to set the default behavior.
+
+::
+
+    ./Console/cake i18n extract --extract-core yes
+
+    or
+
+    ./Console/cake i18n extract --extract-core no
+
 
 
 
