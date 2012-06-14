@@ -13,7 +13,6 @@ of which is listed here for your convenience:
 - Postgres
 - Sqlite
 - Sqlserver
-- Oracle
 
 .. note::
 
