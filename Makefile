@@ -9,6 +9,10 @@ ES_HOST =
 
 # Languages that can be built.
 LANGS = en es fr ja pt ru
+
+# pdflatex does not like ja or ru for some reason.
+PDF_LANGS = en es fr pt
+
 DEST = website
 
 # Dependencies to perform before running other builds.
@@ -27,8 +31,8 @@ SPHINX_DEPENDENCIES = $(foreach lang, $(LANGS), $(lang)/Makefile)
 html: $(foreach lang, $(LANGS), html-$(lang))
 htmlhelp: $(foreach lang, $(LANGS), htmlhelp-$(lang))
 epub: $(foreach lang, $(LANGS), epub-$(lang))
-latex: $(foreach lang, $(LANGS), latex-$(lang))
-pdf: $(foreach lang, $(LANGS), pdf-$(lang))
+latex: $(foreach lang, $(PDF_LANGS), latex-$(lang))
+pdf: $(foreach lang, $(PDF_LANGS), pdf-$(lang))
 htmlhelp: $(foreach lang, $(LANGS), htmlhelp-$(lang))
 populate-index: $(foreach lang, $(LANGS), populate-index-$(lang))
 
@@ -70,7 +74,7 @@ website: website-dirs html populate-index epub pdf
 	$(foreach lang, $(LANGS), cp -r build/epub/$(lang)/*.epub $(DEST)/_downloads/$(lang) || true;)
 
 	# Move PDF files
-	$(foreach lang, $(LANGS), [ -f build/latex/$(lang)/*.pdf ] && cp -r build/latex/$(lang)/*.pdf $(DEST)/_downloads/$(lang) || true;)
+	$(foreach lang, $(PDF_LANGS), [ -f build/latex/$(lang)/*.pdf ] && cp -r build/latex/$(lang)/*.pdf $(DEST)/_downloads/$(lang) || true;)
 
 clean:
 	rm -rf build/*

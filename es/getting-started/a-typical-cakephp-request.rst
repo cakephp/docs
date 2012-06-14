@@ -7,7 +7,7 @@ o Request. Continuando con nuestro ejemplo anterior, imaginemos que nuestro
 amigo Ricardo acaba de pinchar en el link "Compra un Pastel Personalizado"
 en una aplicación CakePHP.
 
-.. figure:: /_static/img/typical-cake-request.gif
+.. figure:: /_static/img/typical-cake-request.png
    :align: center
    :alt: Diagrama de flujo que muestra un Request típico en CakePHP
    

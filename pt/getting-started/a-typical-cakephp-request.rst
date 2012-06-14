@@ -8,7 +8,7 @@ Ricardo apenas clicou no link "Compre um bolo personalizado agora!" em uma
 `landing page <http://pt.wikipedia.org/wiki/Landing_page>`_ de uma aplicação
 CakePHP.
 
-.. figure:: /_static/img/typical-cake-request.gif
+.. figure:: /_static/img/typical-cake-request.png
    :align: center
    :alt: Um diagrama de fluxo mostrando uma típica requisição CakePHP
    
