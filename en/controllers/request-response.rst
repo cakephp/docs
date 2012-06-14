@@ -481,11 +481,13 @@ You can also tell clients that you want them to cache responses. By using
     <?php
     public function index() {
         //do something
-        $this->response->cache(time(), '+5 days');
+        $this->response->cache('-1 minute', '+5 days');
     }
 
 The above would tell clients to cache the resulting response for 5 days,
-hopefully speeding up your visitors' experience.
+hopefully speeding up your visitors' experience. ``cache()`` sets the
+Last-Modified value to the first argument. Expires, and Max-age are set based on
+the second parameter. Cache-Control is set to public as well.
 
 
 .. _cake-response-caching:
