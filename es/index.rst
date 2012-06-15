@@ -5,10 +5,13 @@ El manual de CakePHP, es un proyecto de documentación abierto, editable y
 mantenido por la comunidad. Esperamos mantener un alto nivel de calidad, validez
 y precisión de la documentación.
 
-Descargar la documentación:
+.. container:: offline-download
 
-- `formato ePub <../_downloads/es/CakePHPCookbook.epub>`_
-- `fuente original (archivos de texto) <http://github.com/cakephp/docs>`_
+    Descargar la documentación:
+
+    - `formato PDF <../_downloads/es/CakePHPCookbook.pdf>`_
+    - `formato ePub <../_downloads/es/CakePHPCookbook.epub>`_
+    - `fuente original (archivos de texto) <http://github.com/cakephp/docs>`_
 
 
 Iniciando con CakePHP

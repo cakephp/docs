@@ -3,10 +3,13 @@ Bienvenue
 
 Le livre de cuisine CakePHP est un projet libre et communautaire d'édition de la documentation. Nous espérons maintenir une documentation pointue et de qualité. 
 
-Télécharger la documentation:
+.. container:: offline-download
 
-- `format epub <../_downloads/fr/CakePHPCookbook.epub>`_
-- `source originale <http://github.com/cakephp/docs>`_
+    Télécharger la documentation:
+
+    - `format PDF <../_downloads/fr/CakePHPCookbook.pdf>`_
+    - `format EPUB <../_downloads/fr/Cookbook.epub>`_
+    - `Source originale <http://github.com/cakephp/docs>`_
 
 
 Mise en route
