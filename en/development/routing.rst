@@ -829,7 +829,8 @@ a destination within your application or an outside location::
     Router::redirect(
         '/home/*',
         array('controller' => 'posts', 'action' => 'view',
-        array('persist' => true)
+            array('persist' => true)
+        )
     );
 
 Redirects ``/home/*`` to ``/posts/view`` and passes the parameters to
