@@ -88,7 +88,7 @@ set to a value greater than 0.
         Car::make = 'Toyota'
         Car::model = 'Camry'
         Car::mileage = '15000'
-        Car::acclerate()
+        Car::accelerate()
         Car::decelerate()
         Car::stop()
 

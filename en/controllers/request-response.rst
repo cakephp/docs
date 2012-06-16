@@ -563,7 +563,7 @@ no longer considered fresh. This header can be set using the
     }
 
 This method also accepts a DateTime or any string that can be parsed by the
-DeteTime class.
+DateTime class.
 
 
 The Etag header

@@ -135,7 +135,7 @@ our index view might look like::
 
     // app/View/Recipes/xml/index.ctp
     <?php
-    // Do some formatting ane manipulation on 
+    // Do some formatting and manipulation on
     // the $recipes array.
     $xml = Xml::fromArray(array('response' => $recipes));
     echo $xml->asXML();
@@ -181,12 +181,12 @@ and supply the array version of that data in `$this->request->data`.
 You can also wire in additional deserializers for alternate formats if you
 need them, using :php:meth:`RequestHandler::addInputType()`
 
-Modifing the default REST routes
-================================
+Modifying the default REST routes
+=================================
 
 .. versionadded:: 2.1
 
-If the default REST routes dont' work for your application, you can modify them
+If the default REST routes don't work for your application, you can modify them
 using :php:meth:`Router::resourceMap()`.  This method allows you to set the
 default routes that get set with :php:meth:`Router::mapResources()`.  When using
 this method you need to set *all* the defaults you want to use::
