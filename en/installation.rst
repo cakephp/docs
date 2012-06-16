@@ -100,21 +100,17 @@ the purposes of this example that your document root is set to
 Unpack the contents of the Cake archive into ``/var/www/html``. You now
 have a folder in your document root named after the release you've
 downloaded (e.g. cake\_2.0.0). Rename this folder to cake\_2\_0.
-Your development setup will look like this on the file system:
+Your development setup will look like this on the file system::
 
-
--  /var/www/html
-
-  -  /cake\_2\_0
-
-     -  /app
-     -  /lib
-     -  /vendors
-     -  /plugins
-     -  /.htaccess
-     -  /index.php
-     -  /README
-
+    /var/www/html/
+        cake_2_0/
+            app/
+            lib/
+            plugins/
+            vendors/
+            .htaccess
+            index.php
+            README
 
 If your web server is configured correctly, you should now find
 your Cake application accessible at
@@ -164,22 +160,18 @@ rights to change the ``DocumentRoot`` on Apache webservers.
 Unpack the contents of the Cake archive into a directory of your
 choosing. For the purposes of this example, we assume you choose to
 install Cake into /cake\_install. Your production setup will look
-like this on the filesystem:
+like this on the filesystem::
 
-
--  /cake\_install/
-   
-   -  /app
-      
-      -  /webroot (this directory is set as the ``DocumentRoot``
-         directive)
-
-   -  /lib
-   -  /vendors
-   -  /.htaccess
-   -  /index.php
-   -  /README
-
+    /cake_install/
+        app/
+            webroot/ (this directory is set as the ``DocumentRoot``
+             directive)
+        lib/
+        plugins/
+        vendors/
+        .htaccess
+        index.php
+        README
 
 Developers using Apache should set the ``DocumentRoot`` directive
 for the domain to::
