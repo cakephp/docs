@@ -122,7 +122,7 @@ Since we've added a call to :php:meth:`Router::parseExtensions()`,
 the CakePHP router is already primed to serve up different views based on
 different kinds of requests. Since we're dealing with REST
 requests, we'll be making XML views.  You can also easily make JSON views using
-CakePHP's built in :doc:`views/json-and-xml-views`. By using the built in
+CakePHP's built in :doc:`/views/json-and-xml-views`. By using the built in
 :php:class:`XmlView` we can define a ``_serialize`` view variable.  This special
 view variable is used to define which view variables ``XmlView`` should
 serialize into XML.
