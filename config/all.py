@@ -28,7 +28,7 @@ source_suffix = '.rst'
 master_doc = 'contents'
 
 # General information about the project.
-project = u'Cookbook'
+project = u'CakePHP Cookbook'
 copyright = u'2012, Cake Software Foundation, Inc'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -214,7 +214,7 @@ epub_author = u'Cake Software Foundation, Inc.'
 epub_publisher = u'Cake Software Foundation, Inc.'
 epub_copyright = u'2012, Cake Software Foundation, Inc.'
 
-epub_theme = 'epub'
+epub_theme = 'cakephp-epub'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.
@@ -239,7 +239,11 @@ epub_theme = 'epub'
 #epub_post_files = []
 
 # A list of files that should not be packed into the epub file.
-#epub_exclude_files = []
+epub_exclude_files = [
+    'index',
+    'pdf-contents',
+    'search'
+]
 
 # The depth of the table of contents in toc.ncx.
 #epub_tocdepth = 3
