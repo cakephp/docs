@@ -106,6 +106,17 @@ Any keys that do not exist will return ``null``::
     $foo = $this->request->data('Value.that.does.not.exist');
     // $foo == null
 
+Accessing PUT or POST data
+==========================
+
+.. versionadded:: 2.2
+
+When building REST services you often accept request data on ``PUT`` and
+``DELETE`` requests.  As of 2.2 any ``application/x-www-form-urlencoded``
+request body data will automatically be parsed and set to ``$this->data`` for
+``PUT`` and ``DELETE`` requests.  If you are accepting JSON or XML data, see
+below for how you can access those request bodies.
+
 Accessing XML or JSON data
 ==========================
 

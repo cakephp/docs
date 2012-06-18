@@ -39,6 +39,17 @@ You will also need to modify ``app/Config/core.php``. Change the value of
     <?php
     define('LOG_ERROR', LOG_ERR);
 
+Console
+=======
+
+I18N extract shell
+------------------
+
+- An option was added to overwrite existing POT files by default::
+
+    ./Console/cake i18n extract --overwrite
+
+
 Models
 ======
 
@@ -146,6 +157,11 @@ CakeEmail
 - :php:meth:`CakeEmail::domain()` was added. You can use this method to set the
   domain name used when sending email from a CLI script or if you want to
   control the hostname used to send email.
+
+CakeRequest
+-----------
+
+- CakeRequest will now automatically decode 
 
 Utility
 =======
@@ -297,9 +313,3 @@ Model Validation
 
   * :php:meth:`Validation::naturalNumber()`
 
-I18N extract shell
-==================
-
-Option added to overwrite existing POT files by default::
-
-    ./Console/cake i18n extract --overwrite
