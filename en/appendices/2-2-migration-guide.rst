@@ -161,7 +161,10 @@ CakeEmail
 CakeRequest
 -----------
 
-- CakeRequest will now automatically decode 
+- CakeRequest will now automatically decode
+  ``application/x-www-form-urlencoded`` request bodies on ``PUT`` and ``DELETE``
+  requests.  This data will be available as ``$this->data`` just like POST data
+  is.
 
 Utility
 =======
