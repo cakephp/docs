@@ -27,7 +27,7 @@ changes to the following files.
 
 -  /app/webroot/index.php
 -  /app/webroot/test.php (if you use the
-   `Testing <view/1196/Testing>`_ feature.)
+   :doc:`Testing </development/testing>` feature.)
 
 There are three constants that you'll need to edit: ``ROOT``,
 ``APP_DIR``, and ``CAKE_CORE_INCLUDE_PATH``.
