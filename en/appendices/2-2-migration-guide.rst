@@ -39,6 +39,11 @@ You will also need to modify ``app/Config/core.php``. Change the value of
     <?php
     define('LOG_ERROR', LOG_ERR);
 
+When using ``Model::validateAssociated()`` or ``Model::saveAssociated()`` and
+primary model validation fails, the validation errors of associated models are no longer wiped out.
+``Model::$validationErrors`` will now always show all the errors.
+You might need to update your testcases to reflect this change.
+
 Console
 =======
 
