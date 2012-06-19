@@ -1,76 +1,80 @@
-2.0 Migration Guide
-###################
+Guide de Migration 2.0
+######################
 
-This page summarizes the changes from CakePHP 1.3 that will assist in a project
-migration to 2.0, as well as for a developer reference to get up to date with
-the changes made to the core since the CakePHP 1.3 branch. Be sure to read the
-other pages in this guide for all the new features and API changes.
+Cette page résume les changements par rapport à CakePHP 1.3 qui aidera pour les
+projets de migration vers la version 2.0, ainsi qu'une référence pour se mettre
+à jour sur les changements faits dans le coeur depuis la branche CakePHP 1.3.
+Soyez sur de lire les autres pages de ce guide pour toutes les nouvelles 
+fonctionnalités et les changements de l'API.
 
 .. tip::
 
-    Be sure to checkout the :ref:`upgrade-shell` included in the 2.0 core to help you
-    migrate your 1.3 code to 2.0.
+    Faites bien un checkout :ref:`upgrade-shell` inclu dans le coeur de la 2.0 
+    pour vous aider à migrer du code de la 1.3 à la 2.0.
 
-PHP Version Support
-===================
+Support des Versions de PHP
+===========================
 
-CakePHP 2.x supports PHP Version 5.2.8 and above. PHP4 support has been dropped.
-For developers that are still working with production PHP4 environments, the
-CakePHP 1.x versions continue to support PHP4 for the lifetime of their
-development and support lifetime.
+CakePHP 2.x supporte la Version de PHP 5.2.8 et supérieur. Le support de PHP4 a
+été supprimé. Pour les développeurs qui travaillent avec un environnement de 
+production PHP4, les versions de CakePHP 1.x continuent le support de PHP4 pour 
+la durée de vie de leur développement.
 
-The move to PHP 5 means all methods and properties have been updated with
-visibility keywords. If your code is attempting access to private or protected
-methods from a public scope, you will encounter errors.
+Le passage à PHP5 siginifie que toutes les méthodes et propriétés ont été mises
+à jour avec les mots-clés correspondants. Si votre code tente d'accéder à des 
+méthodes privées ou protégées avec une étendue public, vous rencontrerez des erreurs
 
-While this does not really constitute a large framework change, it means that
-access to tighter visibility methods and variables is now not possible.
+Bien que cela ne constitue pas un changement énormer du framework, cela signifie qu'un
+accès aux méthodes et variables à la visibilité serrée n'est maintenant plus possible.
 
-File and Folder naming
-======================
+Le nommage des Fichiers et Dossiers
+===================================
 
-In CakePHP 2.0 we rethought the way we are structuring our files and folders.
-Given that PHP 5.3 is supporting namespaces we decided to prepare our code base
-for adopting in a near future this PHP version, so we adopted the
-https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md. At first
-we glanced at the internal structure of CakePHP 1.3 and realized that after all
-these years there was no clear organization in the files, nor did the directory
-structure really hint where each file should be located. With this change we
-would be allowed to experiment a little with (almost) automatic class loading
-for increasing the overall framework performance.
+Dans CakePHP 2.0, nous avons repensé la façon de structurer nos fichiers et dossiers.
+Etant donné que PHP 5.3 supporte les espaces de nom (namespaces), nous avons décidé
+de préparer notre base de code pour l'adoption dans un futur proche de cette version 
+de PHP, donc nous avons adopté 
+https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md.
+Tout d'abord, nous avons regardé la structure interne de CakePHP 1.3 et avons réalisé 
+qu'après toutes ces années, il n'y avait ni organisation claire des fichiers, ni une 
+structure de dossiers vraiment logique où chaque fichier se trouve où il devrait. Avec 
+ce changement, nous serions autorisés à exmpérimenter un peu le chargement (presque)
+automatique des classes pour augmenter les performances globales du framework.
 
-Biggest roadblock for achieving this was maintaining some sort of backwards
-compatibility in the way the classes are loaded right now, and we definitely did
-not want to become a framework of huge class prefixes, having classnames like
-``My_Huge_Class_Name_In_Package``. We decided adopting a strategy of keeping simple
-class names while offering a very intuitive way of declaring class locations and
-clear migration path for future PHP 5.3 version of CakePHP. First let's
-highlight the main changes in file naming standard we adopted:
+Le plus grand obstacle pour réussir cela, était de maintenir une sorte de compatiblité
+rétro-active avec la façon dont les classes sont chargés en ce moment, et nous ne 
+voulions définitivement pas devenir un framework avec des énormes préfixes de classe, 
+des noms de classe du type ``Mon_Enorme_Classe_Dans_Le_Progiciel``. Nous avons décidé
+d'adopter une stratégie de garder des noms de classe simples, tout en offrant une façon
+très intuitive de déclaration des emplacements de classe et des chemins de migration
+clairs pour la future version PHP 5.3 de CakePHP. Tout d'abord, mettons en évidence les
+principaux changements dans la standardisation du nommage des fichiers que nous avons
+adoptée:
 
-File names
-----------
+Noms des Fichiers
+-----------------
 
-All files containing classes should be named after the class it contains. No
-file should contain more than one class. So, no more lowercasing and
-underscoring your file names. Here are some examples:
+Tous les fichiers contenant les classes doivent être nommées selon la classe qu'il contient.
+Aucun fichier ne doit contenir plus d'une classe. Donc, plus de minuscules ou de 
+soulignements dans les noms de fichier. Voici quelques exemples:
 
-* ``my_things_controller.php`` becomes ``MyThingsController.php``
-* ``form.php`` (a Helper) becomes ``FormHelper.php``
-* ``session.php`` (a Component) becomes ``SessionComponent.php``
+* ``mes_trucs_controller.php`` devient ``MesTrucsController.php``
+* ``form.php`` (a Helper) devient ``FormHelper.php``
+* ``session.php`` (a Component) devient ``SessionComponent.php``
 
-This makes file naming a lot more clear and consistent across applications,
-and also avoids a few edge cases where the file loader would get confused in the
-past and load files it should not.
+Cela rend le nommage des fichiers beaucoup plus clair et cohérent à travers les applications,
+et aussi évite quelques cas où le chargement des fichiers aurait pu été géné dans le passé et
+aurait pu entrainé un chargement non souhaité de fichiers.
 
-Folder Names
-------------
+Les Noms des Dossiers
+---------------------
 
-Most folders should be also CamelCased, especially when containing classes. 
-Think of namespaces, each folder represents a level in the namespacing
-hierarchy, folders that do not contain classes, or do not constitute a
-namespace on themselves, should be lowercased.
+La plupart des dossiers devront être en CamelCase, spécialement ceux conteant des classes.
+En songeant aux espaces de noms, chaque dossier représente un niveau dans la hiérachie des
+espaces de noms, les dossiers qui ne contiennent pas de classes, ou ne constituent pas un 
+espace de noms sur eux-mêmes, devraient être en LowerCase.
 
-CamelCased Folders:
+Dossiers en CamelCase:
 
 * Config
 * Console
@@ -86,35 +90,35 @@ CamelCased Folders:
 * View
 * View/Helper
 
-lowercased Folders:
+Dossiers en LowerCase:
 
 * tmp
 * webroot
 
 htaccess (URL Rewriting)
 ===============================================
-In your ``app/webroot/.htaccess`` replace line ``RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]`` with ``RewriteRule ^(.*)$ index.php?/$1 [QSA,L]``
+Dans votre fichier ``app/webroot/.htaccess`` remplacez le  ``RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]`` avec ``RewriteRule ^(.*)$ index.php?/$1 [QSA,L]``
 
 AppController / AppModel / AppHelper / AppShell
 ===============================================
 
-The ``app/app_controller.php``, ``app/app_model.php``, ``app/app_helper.php`` are now located and 
-named as ``app/Controller/AppController.php``, ``app/Model/AppModel.php`` and ``app/Helper/AppHelper.php`` respectively.
+Les fichiers ``app/app_controller.php``, ``app/app_model.php``, ``app/app_helper.php`` sont situés et nommés respectivement
+comme ceci ``app/Controller/AppController.php``, ``app/Model/AppModel.php`` et ``app/Helper/AppHelper.php``.
 
-Also all shell/task now extend AppShell. You can have your custom AppShell.php at ``app/Console/Command/AppShell.php``
+Aussi, les shell/task sont étendus (extend) Appshell. Vous pouvez avoir votre propre AppShell.php dans ``app/Console/Command/AppShell.php``
 
 Internationalization / Localization
 ===================================
 
-:php:func:`__()` (Double underscore shortcut function) always returns the translation
-(not echo anymore).
+:php:func:`__()` (La fonction raccourci de Double underscore) retourne toujours la traduction
+(plus de echo).
 
-If you want to echo the result of the translation, use::
+Si vous voulez changer les résultats de la traduction, utilisez::
 
     <?php
     echo __('My Message');
     
-This change includes all shortcut translation methods::
+Cela rempalce toutes les méthodes de translation raccourcies::
 
     __()
     __n()
@@ -124,51 +128,51 @@ This change includes all shortcut translation methods::
     __dcn()
     __c()
 
-Alongside this, if you pass additional parameters, the translation will call
-`sprintf <http://php.net/manual/en/function.sprintf.php>`_  with these
-parameters before returning. For example::
+A côté de cela, si vous passez des paramètres supplémentaires, la traduction appelera 
+`sprintf <http://php.net/manual/en/function.sprintf.php>`_  avec ces
+paramètres retournés précédemment
+parameters avant de retourner. Par exemple::
 
     <?php
-    // Will return something like "Called: MyClass:myMethod"
-    echo __('Called: %s:%s', $className, $methodName);
+    // Retournera quelque chose comme "Appelé: MaClasse:maMethode"
+    echo __('Appelé: %s:%s', $nomdelaclasse, $nomdelamethode);
 
-It is valid for all shortcut translation methods.
+Elle est valide pour toutes les méthodes raccourcies de traduction.
 
-More information about the specifiers, you can see in
-`sprintf <http://php.net/manual/en/function.sprintf.php>`_ function.
+Plus d'informations sur les spécificités de la fonction: 
+`sprintf <http://php.net/manual/en/function.sprintf.php>`_.
 
 
-Class location and constants changed
-====================================
+Emplacement de la Classe et constantes changées
+===============================================
 
-The constants ``APP`` and ``CORE_PATH``
-have consistent values between the web and console environments. In previous
-versions of CakePHP these values changed depending on your environment.
+Les constantes ``APP`` et ``CORE_PATH``
+ont des valeur cohérentes entre le web et les environnement de la console. Dans les précedentes
+versions de CakePHP, ces valeurs changeaient selon l'environnement.
 
 Basics.php
 ==========
 
 -  ``getMicrotime()`` has been removed. Use the native ``microtime(true)``
    instead.
--  ``e()`` was removed. Use ``echo``.
--  ``r()`` was removed. Use ``str_replace``.
--  ``a()`` was removed. ``Use array()``
--  ``aa()`` was removed. Use ``array()``
--  ``up()`` was removed. Use ``strtoupper()``
--  ``low()`` was removed. Use ``strtolower()``
--  ``params()`` was removed. It was not used anywhere in CakePHP.
--  ``ife()`` was removed. Use a ternary operator.
--  ``uses()`` was removed. Use ``App::import()`` instead.
--  Compatibility functions for PHP4 have been removed.
--  PHP5 constant has been removed.
--  Global var called ``$TIME_START`` was removed use the constant 
-   ``TIME_START`` or ``$_SERVER['REQUEST_TIME']`` instead.
+-  ``e()`` a été retirée. Utilisez ``echo``.
+-  ``r()`` a été retirée. Utilisez ``str_replace``.
+-  ``a()`` a été retirée. Utilisez ``array()``
+-  ``aa()`` a été retirée. Utilisez ``array()``
+-  ``up()`` a été retirée. Utilisez ``strtoupper()``
+-  ``low()`` a été retirée. Utilisez ``strtolower()``
+-  ``params()`` a été retirée. Il n'était utilisé nul part dans CakePHP
+-  ``ife()`` a été retirée. Utilisez un opérateur ternaire.
+-  ``uses()`` a été retirée. Utilisez ``App::import()`` à la place.
+-  La compatibilité des fonctions de PHP4 a été retirée.
+-  La constante PHP5 a été retirée.
+-  La variable Globale appelée ``$TIME_START`` a été retirée. Utilisez la constante
+   ``TIME_START`` ou ``$_SERVER['REQUEST_TIME']`` à la place.
 
-Removed Constants
------------------
+Constantes Retirées
+-------------------
 
-A number of constants were removed, as they were no longer accurate, or
-duplicated.
+Un nombre de constantes ont été retirées, puisqu'elles n'ataient plus exactes ou bien étaient dupliquées.
 
 * APP_PATH
 * BEHAVIORS
@@ -191,29 +195,29 @@ duplicated.
 CakeRequest
 ===========
 
-This new class encapsulates the parameters and functions related to an incoming
-request. It replaces many features inside ``Dispatcher``,
-``RequestHandlerComponent`` and Controller. It also replaces
-``$this->params`` array in all places. ``CakeRequest`` implements
-``ArrayAccess`` so many interactions with the old params array do not need to
-change. See the CakeRequest new features for more information.
+Cette nouvelle classe encapsule les paramètres et fonctions liées aux requêtes entrantes. 
+Elle remplace plusieurs fonctionnalités de ``Dispatcher``,
+``RequestHandlerComponent`` et Controller. Elle remplace aussi le tableau
+``$this->params`` à tout endroit. ``CakeRequest`` implémente
+``ArrayAccess`` donc la plupart des interactions avec les anciens tableaux params n'ont pas besoin de changement.
+Voir les nouvelles fonctionnalités de CakeRequest pour plus d'informations.
 
-Request handling, $_GET['url'] and .htaccess files
-==================================================
+Gestion des Requêtes, $_GET['url'] e fichiers .htaccess
+=======================================================
 
-CakePHP no longer uses ``$_GET['url']`` for handling application request paths.
-Instead it uses ``$_SERVER['PATH_INFO']``. This provides a more uniform way of
-handling requests between servers with URL rewriting and those without. Because
-of these changes, you'll need to update your .htaccess files and
-``app/webroot/index.php``, as these files were changed to accommodate the
-changes. Additionally ``$this->params['url']['url']`` no longer exists. Instead
-you should be using $this->request->url to access the same value.
+CakePHP n'utilise plus ``$_GET['url']`` pour la gestion des chemins des requêtes de l'application.
+A la place il utilise ``$_SERVER['PATH_INFO']``. Cela fournit une façon plus uniforme de gestion 
+des requêtes entre les serveurs avec URL rewriting et ceux sans. Du fait de ces changements, 
+vous aurez besoin de mettre à jout vos fichiers .htaccess et ``app/webroot/index.php``,
+puisque ces fichiers ont été changés pour accueillir les changements.
+De plus, ``$this->params['url']['url']`` n'existe plus. A la place, vous devrez utiliser
+$this->request->url pour accéder à la même valeur.
 
 Components
 ==========
 
-Component is now the required base class for all components. You should update
-your components and their constructors, as both have changed::
+Component est maintenant la classe de base requise pour tous les components. Vous devrez mettre à jour
+vos components et lerus constructeurs, puisque tous deux ont changé::
 
     <?php
     class PrgComponent extends Component {
@@ -222,51 +226,50 @@ your components and their constructors, as both have changed::
         }
     }
 
-As with helpers it is important to call ``parent::__construct()`` in components with
-overridden constructors. Settings for a component are also passed into the
-constructor now, and not the ``initialize()`` callback.  This makes getting well
-constructed objects easier, and allows the base class to handle setting the
-properties up.
+Tout comme les helpers il est important d'appeler ``parent::__construct()`` dans les components avec les
+constructeurs surchargés. Les paramètres pour un component sont aussi maintenant passés à travers le
+constructeur, et non plus via le callback ``initialize()``. Cela aide à avoir de bons objets construits,
+et autorise la classe de base à gérer les propriétés supérieures.
 
-Since settings have been moved to the component constructor, the
-``initialize()`` callback no longer receives ``$settings`` as its 2nd parameter.
-You should update your components to use the following method signature::
+Depuis que les paramètres ont été déplacés au constructeur du component, le callback
+``initialize()`` ne reçoit plus ``$settings`` en 2ème paramètre.
+Vous devrez mettre à jour vos components pour utiliser la signature méthode suivante::
 
     function initialize($controller) { }
 
-Additionally, the initialize() method is only called on components that are
-enabled.  This usually means components that are directly attached to the
-controller object.
+De plus, la méthode initialize() est seulement appelée sur les components qui sont permis.
+Cela signifie en général que les components qui sont directement attachés à l'objet
+controlleur.
 
-Deprecated callbacks removed
-----------------------------
+Callbacks dépréciés supprimés
+-----------------------------
 
-All the deprecated callbacks in Component have not been transferred to
-ComponentCollection. Instead you should use the `trigger()` method to interact
-with callbacks.  If you need to trigger a callback you could do so by calling::
+Tous les callbacks dépréciés dans Component ont été transférés à 
+ComponentCollection. A la place, vous devriez utiliser la méthode `trigger()` pour intéragir
+avec les callbacks. Si vous avez besoin de déclencher un callback, vous pouvez le faire en appelant::
 
     <?php
     $this->Components->trigger('someCallback', array(&$this));
 
-Changes in disabling components
--------------------------------
+Changement dans la désactivation des components
+-----------------------------------------------
 
-In the past you were able to disable components via `$this->Auth->enabled =
-false;` for example. In CakePHP 2.0 you should use the ComponentCollection's
-disable method, `$this->Components->disable('Auth');`.  Using the enabled
-property will not work.
+Dans le passé, vous étiez capable de désativer les components via `$this->Auth->enabled =
+false;` par exemple. Dans CakePHP 2.0 vous devriez utiliser la méthode de désactivation des
+ComponentCollection's, `$this->Components->disable('Auth');`. Utiliser les propriétés actives
+ne va pas fonctionner.
 
 AclComponent
 ------------
 
--  ``AclComponent`` implementations are now required to implement
+-  Les impléémentations ``AclComponent`` sont maintenant requises pour implémenter
    ``AclInterface``.
--  ``AclComponent::adapter()`` has been added to allow runtime modification of
-   the ``ACL`` implementation the component uses.
--  ``AclComponent::grant()`` has been deprecated, it will be removed in a future
-   version. Use ``AclComponent::allow()`` instead.
--  ``AclComponent::revoke()`` has been deprecated, it will be removed in a
-   future version. Use AclComponent::deny() instead.
+-  ``AclComponent::adapter()`` a été ajouté pour permettre l'éxecution de la modification de
+   l'utilisation de implémentation du component ``ACL``.
+-  ``AclComponent::grant()`` a été déprécié, il sera supprimé dans un version future
+    Utilisez ``AclComponent::allow()`` à la place.
+-  ``AclComponent::revoke()`` a été déprécié, il sera supprimé dans un version future
+   Utilisez AclComponent::deny() à la place.
 
 RequestHandlerComponent
 -----------------------
