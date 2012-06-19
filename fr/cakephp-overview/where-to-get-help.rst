@@ -1,8 +1,8 @@
-Where to Get Help
-#################
+Ou obtenir de l'aide
+####################
 
-The Official CakePHP website
-============================
+Le site officiel de CakePHP
+===========================
 
 `http://www.cakephp.org <http://www.cakephp.org>`_
 
@@ -10,7 +10,7 @@ The Official CakePHP website is always a great place to visit. It
 features links to oft-used developer tools, screencasts, donation
 opportunities, and downloads.
 
-The Cookbook
+Le Cookbook
 ============
 
 `http://book.cakephp.org <http://book.cakephp.org>`_
