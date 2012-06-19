@@ -602,7 +602,7 @@ to add multiple options at once.::
 
     <?php
     $parser->addOptions(array(
-        'node', array('short' => 'n', 'help' => 'The node to create'),
+        'node' => array('short' => 'n', 'help' => 'The node to create'),
         'parent' => array('short' => 'p', 'help' => 'The parent node')
     ));
 
