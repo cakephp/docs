@@ -1,5 +1,5 @@
-Code Generation with Bake
-#########################
+Generation de code avec Bake
+############################
 
 CakePHP's Bake console is another effort to get you up and running
 in CakePHP – fast. The Bake console can create any of CakePHP's
