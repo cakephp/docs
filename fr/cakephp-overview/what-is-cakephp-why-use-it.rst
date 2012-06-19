@@ -1,4 +1,4 @@
-What is CakePHP? Why Use it?
+Qu'est ce que CakePHP? Pourquoi l'utiliser?
 ############################
 
 `CakePHP <http://www.cakephp.org/>`_ is a
