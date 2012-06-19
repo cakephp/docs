@@ -1,4 +1,4 @@
-ACL Shell
+Shell ACL
 #########
 
 The AclShell is useful for managing and inspecting your Acl databases records.
@@ -17,16 +17,16 @@ Most acl shell subcommands involve referencing aco/aro nodes.  As there are two
 Using a ``.`` indicates that you are going to use a bound record style reference
 while using a ``/`` indicates an alias path.
 
-Installing the database tables
-==============================
+Installer les tables de la base de données
+==========================================
 
 Before using the database ACL you'll need to setup the tables.  You can do that
 using::
 
     ./Console/cake acl initdb
 
-Create and delete nodes
-=======================
+Créer et supprimer les nodes
+============================
 
 You can use the create and delete subcommands to create and delete nodes::
 
