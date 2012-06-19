@@ -1,4 +1,4 @@
-Generation de code avec Bake
+Génération de code avec Bake
 ############################
 
 CakePHP's Bake console is another effort to get you up and running
