@@ -93,35 +93,32 @@ Passez le squelette du chemin en paramètre de la tâche du projet::
        squelette comme il fait pour les vues)
 
 
-Bake improvements in 1.3
-========================
+Amélioration de Bake dans la version 1.3
+========================================
 
-For 1.3 bake has had a significant overhaul, and a number of
-features and enhancements have been built in.
+Dans CakePHP 1.3, bake a connu une révision importante,
+avec le rajout de fonctionnalités et améliorations.
 
 
--  Two new tasks (FixtureTask and TestTask) are accessible from the
-   main bake menu
--  A third task (TemplateTask) has been added for use in your
-   shells.
--  All the different bake tasks now allow you to use connections
-   other than default for baking. Using the ``-connection`` parameter.
--  Plugin support has been greatly improved. You can use either
-   ``-plugin PluginName`` or ``Plugin.class``.
--  Questions have been clarified, and made easier to understand.
--  Multiple validations on models has been added.
--  Self Associated models using ``parent_id`` are now detected. For
-   example if your model is named Thread, a ParentThread and
-   ChildThread association will be created.
--  Fixtures and Tests can be baked separately.
--  Baked Tests include as many fixtures as they know about,
-   including plugin detection (plugin detection does not work on
-   PHP4).
 
-So with the laundry list of features, we'll take some time to look
-at some of the new commands, new parameters and updated features.
+-  Deux nouvelles tâches (FixtureTask and TestTask) sont accessibles à partir du menu principal de bake.
+-  Une troisième tâche (TemplateTask) a été rajoutée pour l'utilisation dans vos shells.
+-  Toutes ces différentes tâches de bake vous permettent maintenant d'utiliser d'autres connections de bake que le 'default'
+   Utilisez le paramètre ``-connection``.
+-  Le support de Plugin a été fortement amélioré. Vous pouvez maintenant utiliser
+   ``-plugin NomDuPlugin`` ou ``Plugin.class``.
+-  Les Questions ont été clarifiées, et sont plus facilement compréhensibles.
+-  Les validations multiples sur les modèles ont été ajoutées.
+-  Les associations des modèles sur eux-mêmes utilisant ``parent_id`` sont maintenant détectées.
+   Par exemple, si votre modèle est appelé Thread, une association ParentThread et ChildThread sera créee.
+-  Fixtures et Tests peuvent être 'cuits' séparément.
+-  Les Tests 'Cuits' incluent autant de fixtures connues,
+   ainsi que la détéction des plugin (La détection plugin ne fonctionne pas avec PHP4).
 
-**New FixtureTask, TestTask and TemplateTask.**
+Ainsi avec cette liste de fonctionnalités, nous allons prendre le temps de regarder certaines nouvelles
+commandes, certains nouveaux paramètres et les fonctionnalités mises à jour.
+
+**Nouveaux FixtureTask, TestTask et TemplateTask.**
 
 Fixture and test baking were a bit of a pain in the past. You could
 only generate tests when baking the classes, and fixtures could
