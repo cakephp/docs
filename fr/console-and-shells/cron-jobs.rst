@@ -1,18 +1,13 @@
-Lancer des Shells en tant que tâche cron (cronjob)
+Executer des Shells en tâches cron (cronjob)
 ##################################################
+Une chose habituelle à faire avec un shell, c'est de l'exécuter par une tâche cron
+pour nettoyer la base de données une fois de temps en temps ou pour envoyer des newsletters. 
+Cependant, même si vous avez ajouté le chemin de la console à la variable PATH via ``~/.profile``,
+elle sera indisponible pour la tâche cron.
 
-Une utilisation classique du shell consiste à le lance en tant que tâche cron
-pour nettoyer la base de données une fois de temps en temps ou pour lancer des newsletters.
-Cependant, quand vous avez ajouté le chemin de la console à la variable PATH via
-``~/.profile``, il rendra la tâche cron inutilisable.
-
-Le script BASH suivant va appeler votre shell et ajoutera les chemins nécessaires à $PATH.
-Copier et sauvegarder ce script dans votre dossier vendors sous le nom 'cakeshell'
-et n'oubliez pas de le rendre executable.
-
-(``chmod +x cakeshell``)
-
-::
+Le script BASH suivant appellera votre shell et ajoutera les chemins nécessaires à $PATH. 
+Copiez et sauvegardez ceci dans votre dossier vendors, en le nommant 'cakeshell' 
+et n'oubliez pas de le rendre exécutable. (``chmod +x cakeshell``)::
 
     #!/bin/bash
     TERM=dumb
@@ -33,10 +28,10 @@ Vous l'appelez ainsi:::
 
     $ ./vendors/cakeshell myshell myparam -cli /usr/bin -console /cakes/1.2.x.x/cake/console
 
-Le paramètre ``-cli`` prend le chemin qui pointe vers l'exécutable cli php et le paramètre
-``-console`` prend un chemin qui pointe vers la console de CakePHP.
+Le paramètre ``-cli`` prend un chemin qui pointe vers l'exécutable cli php 
+et le paramètre ``-console`` prend un chemin qui pointe vers la console CakePHP.
 
-En écriture cronjob, cela ressemblerait à::
+Pour une tâche cron, ceci devrait ressembler à ::
 
     # m h dom mon dow command
     */5 *   *   *   * /chemin/complet/vers/cakeshell myshell myparam -cli /usr/bin -console /cakes/1.2.x.x/cake/console -app /full/chemin/vers/app
