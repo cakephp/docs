@@ -1,99 +1,98 @@
 Ou obtenir de l'aide
 ####################
 
-Le site officiel de CakePHP
-===========================
+Le site officiel CakePHP
+========================
 
 `http://www.cakephp.org <http://www.cakephp.org>`_
 
-The Official CakePHP website is always a great place to visit. It
-features links to oft-used developer tools, screencasts, donation
-opportunities, and downloads.
+Le site officiel CakePHP est toujours un endroit épatant à visiter.
+Il propose des liens vers des outils fréquemment utilisés par le développeur,
+des didacticiels vidéo, des possibilités de faire un don et des téléchargements.
 
 Le Cookbook
 ============
 
 `http://book.cakephp.org <http://book.cakephp.org>`_
 
-This manual should probably be the first place you go to get
-answers. As with many other open source projects, we get new folks
-regularly. Try your best to answer your questions on your own
-first. Answers may come slower, but will remain longer – and you'll
-also be lightening our support load. Both the manual and the API
-have an online component.
+Ce manuel devrait être probablement le premier endroit où vous rendre 
+pour obtenir des réponses. Comme pour beaucoup d'autres projets open source,
+nous accueillons de nouvelles personnes régulièrement. Faites tout votre possible
+pour répondre à vos questions par vous même dans un premier temps.
+Les réponses peuvent venir lentement, mais elles resteront longtemps et vous aurez 
+ainsi allégé notre charge en support utilisateur. Le manuel et l'API ont tous 
+deux une version en ligne.
 
-The Bakery
-==========
+La Boulangerie
+==============
 
 `http://bakery.cakephp.org <http://bakery.cakephp.org>`_
 
-The CakePHP Bakery is a clearing house for all things CakePHP.
-Check it out for tutorials, case studies, and code examples. Once
-you’re acquainted with CakePHP, log on and share your knowledge
-with the community and gain instant fame and fortune.
+La Boulangerie (Bakery) est une chambre d'enregistrement pour tout 
+ce qui concerne CakePHP. Vous y trouverez des tutoriels, des études
+de cas et des exemples de code. Lorsque vous serez familiarisé avec CakePHP,
+connectez-vous pour partager vos connaissances avec la communauté 
+et obtenez en un instant la gloire et la fortune.
 
-The API
-=======
+L'API
+=====
 
 `http://api20.cakephp.org/ <http://api20.cakephp.org/>`_
 
-Straight to the point and straight from the core developers, the
-CakePHP API (Application Programming Interface) is the most
-comprehensive documentation around for all the nitty gritty details
-of the internal workings of the framework. It's a straight forward
-code reference, so bring your propeller hat.
+Allez droit au but et atteignez le graal des développeurs, 
+l'API CakePHP (Application Programming Interface) est la documentation 
+la plus complète sur tous les détails essentiels au fonctionnement interne du framework.
+C'est une référence directe au code, donc apportez votre chapeau à hélice.
 
+Les cas de Test
+===============
 
-The Test Cases
-==============
-
-If you ever feel the information provided in the API is not
-sufficient, check out the code of the test cases provided with
-CakePHP. They can serve as practical examples for function and
-data member usage for a class.::
+Si vous avez toujours le sentiment que l'information fournie par 
+l'API est insuffisante, regardez le code des cas de test fournis avec CakePHP. 
+Ils peuvent servir d'exemples pratiques pour l'utilisation d'une fonction et de
+donnée membres d'une classe.::
 
     lib/Cake/Test/Case
 
-The IRC channel
-===============
+Le canal IRC
+============
 
-**IRC Channels on irc.freenode.net:**
+**Canaux IRC sur irc.freenode.net :**
 
-
--  `#cakephp <irc://irc.freenode.net/cakephp>`_ -- General
-   Discussion
+-  `#cakephp <irc://irc.freenode.net/cakephp>`_ -- Discussion générale
 -  `#cakephp-docs <irc://irc.freenode.net/cakephp-docs>`_ --
    Documentation
 -  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ --
    Bakery
+-  `#cakephp-fr <irc://irc.freenode.net/cakephp-fr>`_ -- Canal francophone
 
-If you’re stumped, give us a holler in the CakePHP IRC channel.
-Someone from the development team is usually there, especially
-during the daylight hours for North and South America users. We’d
-love to hear from you, whether you need some help, want to find
-users in your area, or would like to donate your brand new sports
-car.
+Si vous êtes déconcerté, poussez un hurlement sur le canal IRC de CakePHP. 
+Une personne de l'équipe de développement s'y trouve habituellement, 
+en particulier durant les heures du jour pour les utilisateurs 
+d'Amérique du Nord et du Sud. Nous serions ravi de vous écouter,
+que vous ayez besoin d'un peu d'aide, que vous vouliez trouver des utilisateurs 
+dans votre région ou que vous aimeriez donner votre nouvelle voiture sportive de marque.
 
-The Google Group
+Le Groupe Google
 ================
 
 `http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
 
-CakePHP also has a very active Google Group. It can be a great
-resource for finding archived answers, frequently asked questions,
-and getting answers to immediate problems.
+CakePHP dispose également d'un Groupe Google très actif. 
+Il peut être une ressource de choix pour trouver des réponses archivées, 
+des questions fréquemment posées et obtenir des réponses aux problèmes urgents.
 
-CakePHP Questions
-=================
+Les Questions CakePHP
+=====================
 
 `http://ask.cakephp.org/ <http://ask.cakephp.org/>`_
 
-Simply register/login and ask a question. Wait until you've got some answers 
-and pick the correct answer. You can view, comment and vote on previously asked 
-and solved questions as well.
+Simplement s'inscrire/se connecter et poser une question. Attendez jusqu'à ce
+que vous ayez quelques réponses et choisissez la réponse correcte. Vous pouvez aussi
+voir, commenter et voter pour les questions précedemment demandées et aussi les quesstions résolues.
 
 
 .. meta::
-    :title lang=en: Where to Get Help
-    :description lang=en: Where to get help with CakePHP: The official CakePHP website, The Cookbook, The Bakery, The API, in the test cases, the IRC channel, The CakePHP Google Group or CakePHP Questions.
-    :keywords lang=en: cakephp,cakephp help,help with cakephp,where to get help,cakephp irc,cakephp questions,cakephp api,cakephp test cases,open source projects,channel irc,code reference,irc channel,developer tools,test case,bakery
+    :title lang=fr: Ou trouver de l'aide
+    :description lang=fr: Ou trouver de l'aide avec CakePHP: Le site officiel de CakePHP, Le Cookbook, La Bakery, L'API, Les cas de test, Le canal IRC, Le Groupe Google CakePHP ou les Questions CakePHP.
+    :keywords lang=fr: cakephp,cakephp aide,aide avec cakephp,ou trouver de l'aide,cakephp irc,cakephp questions,cakephp api,cakephp cas test,open source projets,canal irc,code reference,irc canal,outils developpeurs,cases tests,bakery
