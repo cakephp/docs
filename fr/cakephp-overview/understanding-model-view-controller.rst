@@ -13,7 +13,7 @@ La couche Modèle
 La couche Modèle représente la partie de l'application qui implémente la logique métier.
 Cela signifie qu'elle est responsable de récuperer les données, de les convertir selon 
 des concepts chargés de sens pour votre application, tels que le traitement, la validation,
- l'association et beaucoup d'autres tâches relatives à la manipulation des données
+l'association et beaucoup d'autres tâches relatives à la manipulation des données
 
 A première vue, l'objet Modèle peut être vu comme la première couche d'intéraction
  avec n'importe quelle base de données que vous pourriez utiliser pour votre application.
