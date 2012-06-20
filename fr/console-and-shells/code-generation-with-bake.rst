@@ -71,7 +71,7 @@ Pour fabriquer des vues sur mesure
 La partie du chemin ``[themename]`` est le nom du theme de bake que vous créez.
 Les noms des thèmes de Bake doivent être unique, donc n'utilisez pas 'default'.
 
-For fabriquer des projets sur mesure
+Pour fabriquer des projets sur mesure
 ------------------------------------
 
 Allez dans le dossier: lib/Cake/Console/Templates/skel
