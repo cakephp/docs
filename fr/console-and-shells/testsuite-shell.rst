@@ -10,5 +10,5 @@ For more information on basic usage of the testsuite shell see
 
 
 .. meta::
-    :title lang=en: Testsuite shell
-    :keywords lang=en: shell,command line
+    :title lang=fr: Testsuite shell
+    :keywords lang=fr: shell,ligne de commande
