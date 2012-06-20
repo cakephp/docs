@@ -7,7 +7,7 @@ y precisión de la documentación.
 
 Descargar la documentación:
 
-- `formato ePub <../_downloads/en/CakePHPCookbook.epub>`_
+- `formato ePub <../_downloads/es/CakePHPCookbook.epub>`_
 - `fuente original (archivos de texto) <http://github.com/cakephp/docs>`_
 
 

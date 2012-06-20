@@ -12,7 +12,7 @@ the documentation.
 
 Download the documentation:
 
-- `epub format <../_downloads/en/Cookbook.epub>`_
+- `epub format <../_downloads/en/CakePHPCookbook.epub>`_
 - `original source <http://github.com/cakephp/docs>`_
 
 

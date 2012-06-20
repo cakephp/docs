@@ -12,7 +12,7 @@ documentação do CakePHP.
 
 Download da documentação:
 
-- `formato epub <../_downloads/en/CakePHPCookbook.epub>`_
+- `formato epub <../_downloads/pt/CakePHPCookbook.epub>`_
 - `código-fonte original <http://github.com/cakephp/docs>`_
 
 Introdução

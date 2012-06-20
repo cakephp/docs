@@ -12,7 +12,7 @@ CakePHP Cookbook - это открытый проект, позволяющий 
 
 Скачать документацию:
 
-- `формат epub <../_downloads/en/CakePHPCookbook.epub>`_
+- `формат epub <../_downloads/ru/CakePHPCookbook.epub>`_
 - `исходный код <http://github.com/cakephp/docs>`_
 
 
