@@ -1,62 +1,53 @@
 Qu'est ce que CakePHP? Pourquoi l'utiliser?
-############################
+###########################################
 
-`CakePHP <http://www.cakephp.org/>`_ is a
-`free <http://en.wikipedia.org/wiki/MIT_License>`_,
-`open-source <http://en.wikipedia.org/wiki/Open_source>`_,
-`rapid development <http://en.wikipedia.org/wiki/Rapid_application_development>`_
+`CakePHP <http://www.cakephp.org/>`_ est un 
 `framework <http://en.wikipedia.org/wiki/Application_framework>`_
-for `PHP <http://www.php.net/>`_. It’s a foundational structure for
-programmers to create web applications. Our primary goal is to
-enable you to work in a structured and rapid manner–without loss of
-flexibility.
+pour `PHP <http://www.php.net/>`_
+`gratuit <http://en.wikipedia.org/wiki/MIT_License>`_,
+`open-source <http://en.wikipedia.org/wiki/Open_source>`_,
+`de développement rapide <http://en.wikipedia.org/wiki/Rapid_application_development>`_.
+c'est une structure fondamentale pour les programmeurs pour créer des
+applications web. Notre principal objectif est de vous permettre
+de travailler d'une manière structurée et rapide -sans perte de flexibilité.
 
-CakePHP takes the monotony out of web development. We provide you
-with all the tools you need to get started coding what you really
-need to get done: the logic specific to your application. Instead
-of reinventing the wheel every time you sit down to a new project,
-check out a copy of CakePHP and get started with the real guts of
-your application.
+CakePHP rompt la monotonie du développement web. Nous vous offrons 
+tous les outils nécessaires pour ne coder que ce dont vous avez 
+réellement besoin : la logique spécifique de votre application.
 
-CakePHP has an active
-`developer team <http://cakephp.lighthouseapp.com/contributors>`_
-and community, bringing great value to the project. In addition to
-keeping you from wheel-reinventing, using CakePHP means your
-application’s core is well tested and is being constantly
-improved.
+Au lieu de réinventer la roue à chaque fois que vous démarrez un 
+nouveau projet, récupérez une copie de CakePHP et concentrez-vous
+sur les « entrailles » de votre application.
 
-Here’s a quick list of features you’ll enjoy when using CakePHP:
+CakePHP dispose 
+`d’une équipe de développement <http://cakephp.lighthouseapp.com/contributors>`_
+et d’une communauté actives, qui donnent au projet une forte valeur ajoutée.
+En plus de vous éviter la ré-invention de la roue, l’utilisation de CakePHP implique 
+que le coeur de votre application est bien testé et qu’il peut être constamment amélioré.
 
+Voici un aperçu rapide des caractéristiques que vous apprécierez en utilisant CakePHP :
 
--  Active, friendly `community <http://cakephp.org/feeds>`_
--  Flexible `licensing <http://en.wikipedia.org/wiki/MIT_License>`_
--  Compatible with versions PHP 5.2.8 and greater.
--  Integrated
-   `CRUD <http://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_
-   for database interaction.
--  Application
-   `scaffolding <http://en.wikipedia.org/wiki/Scaffold_(programming)>`_.
--  Code generation.
--  `MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_
-   architecture.
--  Request dispatcher with clean, custom URLs and routes.
--  Built-in
-   `validation <http://en.wikipedia.org/wiki/Data_validation>`_.
--  Fast and flexible
-   `templating <http://en.wikipedia.org/wiki/Web_template_system>`_
-   (PHP syntax, with helpers).
--  View Helpers for AJAX, JavaScript, HTML Forms and more.
--  Email, Cookie, Security, Session, and Request Handling
-   Components.
--  Flexible
-   `ACL <http://en.wikipedia.org/wiki/Access_control_list>`_.
--  Data Sanitization.
--  Flexible `Caching <http://en.wikipedia.org/wiki/Web_cache>`_.
--  Localization.
--  Works from any web site directory, with little to no
-   `Apache <http://httpd.apache.org/>`_ configuration involved.
+-  `Communauté active et sympathique <http://cakephp.org/feeds>`_
+-  `Système de license souple <http://en.wikipedia.org/wiki/MIT_License>`_
+-  Compatible avec les versions PHP 5.2.8 et supérieures.
+-  Fonctions `CRUD <http://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_ (create, read, update, delete) intégrées pour les interactions avec la base de données
+-  `Scaffolding <http://en.wikipedia.org/wiki/Scaffold_(programming)>`_ (maquettage rapide) d’application.
+-  Génération de code.
+-  Architecture `MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_.
+-  Dispatcheur de requêtes avec des URLs propres et personnalisables grâce un système de routes
+-  `Validation intégrée des données <http://en.wikipedia.org/wiki/Data_validation>`_.
+-  Système de `template <http://en.wikipedia.org/wiki/Web_template_system>`_ rapide et souple (syntaxe PHP avec des Helpers)
+-  Helpers (assistants) de vue pour AJAX, JavaScript, formulaires HTML...
+
+-  Components (composants) intégrés : Email, Cookie, Security, Session et Request Handling
+-  Système de contrôle d’accès `ACL <http://en.wikipedia.org/wiki/Access_control_list>`_ flexible.
+-  Nettoyage des données.
+-  Système de `cache <http://en.wikipedia.org/wiki/Web_cache>`_ souple.
+-  Localisation et internationalisation.
+-  Fonctionne sur n’importe quelle arborescence de site web, avec un zest de configuration `Apache <http://httpd.apache.org/>`_
+pas très compliquée
 
 
 .. meta::
-    :title lang=en: What is CakePHP? Why Use it?
-    :keywords lang=en: custom urls,php syntax,cookie security,database interaction,security session,rapid manner,developer team,free open source,javascript html,apache configuration,web site directory,html forms,code generation,development framework,monotony,rapid development,scaffolding,dispatcher,friendly community,crud
+    :title lang=fr: Qu'est-ce que CakePHP? Pourquoi l'utiliser?
+    :keywords lang=fr: custom urls,php syntax,cookie security,database interaction,security session,rapid manner,developer team,free open source,javascript html,apache configuration,web site directory,html forms,code generation,development framework,monotony,rapid development,scaffolding,dispatcher,friendly community,crud
