@@ -1,31 +1,27 @@
 Génération de code avec Bake
 ############################
 
-CakePHP's Bake console is another effort to get you up and running
-in CakePHP – fast. The Bake console can create any of CakePHP's
-basic ingredients: models, views and controllers. And we aren't
-just talking skeleton classes: Bake can create a fully functional
-application in just a few minutes. In fact, Bake is a natural step
-to take once an application has been scaffolded.
+La console Bake de CakePHP est un autre outil permettant de réaliser son application rapidement.
+La console Bake peut créer chacun des ingrédients basiques de CakePHP : modèles, vues et contrôleurs.
+Et nous ne parlons pas seulement des squelettes de classes : Bake peut créer une application fonctionnelle
+complète en seulement quelques minutes. En réalité, Bake est une étape naturelle
+à suivre une fois qu'une application a été prototypée.
 
-Those new to Bake (especially Windows users) may find the
-`Bake screencast <http://tv.cakephp.org/video/gwoo/2010/12/24/setting_up_the_cakephp_console_on_windows>`_
-helpful in setting things up before continuing.
+Ceux qui sont novices avec Bake (spécialement les utilisateurs de Windows)
+pourraient trouver le `Bake screencast <http://tv.cakephp.org/video/gwoo/2010/12/24/setting_up_the_cakephp_console_on_windows>`_ 
+utile pour paramétrer les choses avant de continuer.
 
-Depending on the configuration of your setup, you may have to set
-execute rights on the cake bash script or call it using ./cake
-bake. The cake console is run using the PHP CLI (command line
-interface). If you have problems running the script, ensure that
-you have the PHP CLI installed and that it has the proper modules
-enabled (eg: MySQL).
+Suivant la configuration de votre installation, 
+vous devrez peut être donner les droits d'exécution au script bash cake ou l'appeler avec la commande ./cake bake.
+La console cake est exécutée en utilisant le CLI PHP (Interface de Ligne de Commande). 
+Si vous avez des problèmes en exécutant ce script, vérifiez que le CLI PHP est installé 
+et qu'il a les modules adéquats autorisés (ex: MySQL).
 
-When running Bake for the first time, you'll be prompted to create
-a Database Configuration file, if you haven't created one already.
+En exécutant Bake la première fois, vous serez invité à créer un fichier de configuration 
+de la base de données, si vous n'en avez pas créé auparavant.
 
-After you've created a Database Configuration file, running Bake
-will present you with the following options:
-
-::
+Après que vous ayez créé un fichier de configuration de base de données, 
+exécuter Bake vous présentera les options suivantes ::
 
     ---------------------------------------------------------------
     App : app
@@ -44,8 +40,7 @@ will present you with the following options:
     What would you like to Bake? (D/M/V/C/P/F/T/Q)
     >  
 
-Alternatively, you can run any of these commands directly from the
-command line::
+Sinon, vous pouvez exécuter chacune de ces commandes directement depuis la ligne de commande ::
 
     $ cake bake db_config
     $ cake bake model
@@ -58,50 +53,44 @@ command line::
     $ cake bake all
 
 
-Modify default HTML produced by "baked" templates
-=================================================
+Modifier le HTML par défault produit par les templates de bake
+==============================================================
 
-If you wish to modify the default HTML output produced by the
-"bake" command, follow these simple steps:
+Si vous souhaitez modifier la sortie HTML par défaut produite par la commande bake, suivez les étapes simples suivantes:
 
-For baking custom views
-------------------------
+Pour fabriquer des vues sur mesure
+----------------------------------
 
 
-#. Go into: lib/Cake/Console/Templates/default/views
-#. Notice the 4 files there
-#. Copy them to your:
+#. Aller dans le dossier: lib/Cake/Console/Templates/default/views
+#. Remarquez les 4 fichiers ici
+#. Copier les dans le dossier:
    app/Console/Templates/[themename]/views
-#. Make changes to the HTML output to control the way "bake" builds
-   your views
+#. Faire les changement pour la sortie HTML pour controler la façon dont "bake" fabrique vos vues
 
-The ``[themename]`` path segment should be the name of the bake
-theme that you are creating. Bake theme names need to be unique, so
-don't use 'default'.
+La partie du chemin ``[themename]`` est le nom du theme de bake que vous créez.
+Les noms des thèmes de Bake doivent être unique, donc n'utilisez pas 'default'.
 
-For baking custom projects
---------------------------
+For fabriquer des projets sur mesure
+------------------------------------
 
-Go into: lib/Cake/Console/Templates/skel
-Notice the base application files there
-Copy them to your: app/Console/Templates/skel
-Make changes to the HTML output to control the way "bake" builds
-your views
-Pass the skeleton path parameter to the project task
-::
+Allez dans le dossier: lib/Cake/Console/Templates/skel
+Remarquez l'application de base ici
+Copier les dans le dossier: app/Console/Templates/skel
+Faire les changement pour la sortie HTML pour controler la façon dont "bake" fabrique vos vues.
+Passez le squelette du chemin en paramètre de la tâche du projet::
 
     cake bake project -skel Console/Templates/skel
 
 .. note::
 
-    -  You must run the specific project task ``cake bake project`` so
-       that the path parameter can be passed.
-    -  The template path is relative to the current path of the Command
-       Line Interface.
-    -  Since the full path to the skeleton needs to be manually
-       entered, you can specify any directory holding your template build
-       you want, including using multiple templates. (Unless Cake starts
-       supporting overriding the skel folder like it does for views)
+    -  Vous devez lancer la tâche du projet spécifique ``cake bake project`` afin que
+       le paramètre du chemin soit passé.
+    -  Le chemin du template est relatif au chemin courant de l'Interface de Commande en Ligne.
+    -  Puisque le chemin complet du squelette doit être entré manuellement,
+       vous pouvez spécifier n'importe quel dossier avec le template que vous souhaiter construire,
+       ainsi que l'utilisation de plusieurs templates. (Sauf si Cake commence par outrepasser le dossier
+       squelette comme il fait pour les vues)
 
 
 Bake improvements in 1.3
