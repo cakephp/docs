@@ -22,16 +22,6 @@ Contents
 
 .. todolist::
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-* :doc:`/appendices/glossary`
-
-
 .. meta::
     :title lang=en: Contents
     :keywords lang=en: core libraries,ref search,shells,deployment,appendices,glossary,models

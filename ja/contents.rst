@@ -17,10 +17,3 @@
 
 .. todolist::
 
-
-索引とテーブル
-==============
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

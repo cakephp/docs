@@ -240,16 +240,16 @@ epub_theme = 'cakephp-epub'
 
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = [
-    'index',
-    'pdf-contents',
-    'search'
+    'index.html',
+    'pdf-contents.html',
+    'search.html',
 ]
 
 # The depth of the table of contents in toc.ncx.
-#epub_tocdepth = 3
+epub_tocdepth = 2
 
 # Allow duplicate toc entries.
-#epub_tocdup = True
+epub_tocdup = False
 
 # Languages available.
 languages = ['en', 'pt', 'es', 'ja', 'ru']

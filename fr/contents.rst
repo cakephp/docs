@@ -23,11 +23,3 @@ Contenu
 
 .. todolist::
 
-
-Table des matières
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-* :doc:`/appendices/glossary`

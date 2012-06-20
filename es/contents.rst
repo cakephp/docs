@@ -12,11 +12,3 @@ Contents
 
 .. todolist::
 
-
-Índices y Tablas
-================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-* :doc:`/appendices/glossary`
