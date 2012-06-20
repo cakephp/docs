@@ -1,12 +1,12 @@
-Schema management and migrations
-################################
+Schema management et migrations
+###############################
 
-The SchemaShell provides a functionality to create schema objects,
+Le Shell SchemaShell fournit une fonctionnalité pour créer des objets de schema,
 schema sql dumps as well as create snapshots and restore database
 snapshots.
 
-Generating and using Schema files
-=================================
+Générer et utiliser les fichiers Schema
+=======================================
 
 A generated schema file allows you to easily transport a database
 agnostic schema. You can generate a schema file of your database
