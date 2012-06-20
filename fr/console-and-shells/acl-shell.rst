@@ -1,82 +1,81 @@
 Shell ACL
 #########
 
-The AclShell is useful for managing and inspecting your Acl databases records.
-It's often more convenient than adding one time modifications to your
-controllers.
+Le Shell Acl est utile pour gérer et inspecter les enregistrements de vos base de données Acl.
+Il est souvent plus pratique que l'ajout de modifications ponctuelles dans les controlleurs.
 
-Most acl shell subcommands involve referencing aco/aro nodes.  As there are two
-'forms' of these nodes, there is two notations in the shell::
+La plupart des sous-commandes shell acl implique le référencement des noeuds aco/aro. 
+Comme il y a deux 'formes' de ces noeuds, il existe deux notation dans le shell::
 
-    # A Model + foreign_key reference
+    # Un Modèle + référence de la clé étrangère
     ./Console/cake acl view Model.1
 
-    # An alias path reference
+    # Un chemin alias de référence
     ./Console/cake acl view root/controllers
 
-Using a ``.`` indicates that you are going to use a bound record style reference
-while using a ``/`` indicates an alias path.
+Utiliser ``.`` indique que vous allez utiliser une référence d'eregistrement lié au style,
+tandis que utiliser un ``/`` indique un chemin alias.
 
 Installer les tables de la base de données
 ==========================================
 
-Before using the database ACL you'll need to setup the tables.  You can do that
-using::
+Avant d'utiliser la base de données ACL, vous aurez besoin de configurer les tables.
+Vous pouvez le faire en utilisant::
 
     ./Console/cake acl initdb
 
 Créer et supprimer les nodes
 ============================
 
-You can use the create and delete subcommands to create and delete nodes::
+You pouvez utiliser les sous-commandes de création et de suppression pour créer et supprimer des noeuds::
 
     ./Console/cake acl create aco controllers/Posts
 
-Would create an aco record using an alias path.  You could do the following as
-well::
+Cette commnde crée un enregistrement aco en utilisant un chemin alias.
+Vous pouvez aussi faire comme ce qui suit::
 
     ./Console/cake acl create aro Group.1
 
-To create an aro node for the Group id = 1.
+Pour créer un noeud aro pour le Groupe dont l'id est = 1.
 
-Grant and deny access
-=====================
+Accorder et refuser l'accès
+===========================
 
-Use the grant command to grant ACL permissions. Once executed, the ARO
-specified (and its children, if any) will have ALLOW access to the
-specified ACO action (and the ACO's children, if any)::
+Utilisez la commande d'accès pour accorder les permssions ACL.
+Une fois executée, l'ARO spécifié (et ses enfants, si il en a) aura un accès AUTORISÉ à
+l'action ACO spécifié (et les enfants de l'ACO, si il y en a)::
 
     ./Console/cake acl grant Group.1 controllers/Posts 
 
-The above would grant all privileges.  You could grant only the read privilege
-using the following::
+La commande ci-dessus accorde tous les privilèges.
+Vous pouvez n'accorder que les privilèges de lecture en utilisant la commande suivante::
 
     ./Console/cake acl grant Group.1 controllers/Posts read
 
-Denying permission works in the exact same way.  The only difference is you
-switch 'deny' in for 'grant'.
+Refuser une permission fonctionne exactement de la même façon. 
+La seule différence est le remplacement de 'grant' en 'deny'.
 
-Check permissions
-=================
+Vérification des permissions
+============================
 
-Use this command to grant ACL permissions. Once executed, the ARO
-specified (and its children, if any) will have ALLOW access to the
-specified ACO action (and the ACO's children, if any)::
+Utilisez les commandes pour accorder les permissions ACL.
+Une fois exécutées, l'ARO spécifié (et ses enfants, s'il en a) aura un accès AUTORISÉ
+pour l'action ACO spécifiée (et les enfants de l'ACO, si ils existent)::
 
     ./Console/cake acl check Group.1 controllers/Posts read
 
-The output will either be ``success`` or ``not allowed``.
+La sortie sera soit ``success``(succès), soit ``not allowed``(non autorisé).
 
-View the node trees
-===================
+Voir l'arbre de noeuds
+======================
 
-The view command will return the ARO or ACO tree.  The optional node parameter
-allows you to return only a portion of the requested tree::
+La commande view permet de voir les arbres des ARO et des ACO.
+Le paramètre optionnel 'node' permet de retourner seulement une portion de l'arbre demandé::
 
     ./Console/cake acl view
 
 
 
 .. meta::
-    :title lang=en: ACL Shell
-    :keywords lang=en: record style,style reference,acl,database tables,group id,notations,alias,privilege,node,privileges,shell,databases
+    :title lang=fr: ACL Shell
+    :keywords lang=fr: style d'enregistrement,style reférence,acl,tables de la base de données,group id,notations,alias,privilège,noeuds node,privilèges,shell,base de données
