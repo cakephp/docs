@@ -1,52 +1,50 @@
-I18N shell
+Shell I18N
 ##########
 
-The i18n features of CakePHP use `po files <http://en.wikipedia.org/wiki/GNU_gettext>`_
-as their translation source.  This makes them easily to integrate with tools
-like `poedit <http://www.poedit.net/>`_ and other common translation tools.
+La fonctionnalité i18n de CakePHP utilise les `fichiers po <http://en.wikipedia.org/wiki/GNU_gettext>`_
+comme source de traduction. Cela les rend faciles à intégrer avec des outils tels que `poedit <http://www.poedit.net/>`_ 
+et d'autres outils habituels de traduction.
 
-The i18n shell provides a quick and easy way to generate po template files.
-These templates files can then be given to translators so they can translate the
-strings in your application.  Once you have translations done, pot files can be
-merged with existing translations to help update your translations.
+Le Shell de i18n fournit une rapide et simple façon de générer les fichiers template po.
+Les fichiers templates peuvent être donnés aux traducteurs afin qu'ils traduisent les chaînes
+de caractères dans votre application. Une fois que votre traduction est faite, les fichiers pot
+peuvent être fusionnés avec les traductions existantes pour aider la mise à jour de vos traductions.
 
-Generating POT files
-====================
 
-POT files can be generated for an existing application using the ``extract``
-command.  This command will scan your entire application for ``__()`` style
-function calls, and extract the message string.  Each unique string in your
-application will be combined into a single POT file::
+Générer les fichiers POT
+========================
+
+Les fichiers POT peuvent être généres pour une application existante en utilisant la commande ``extract``.
+Cette commande va scaner toutes les fonctions de type ``__()`` de l'ensemble de votre application, et extraire
+les chaînes de caractères. Chaque chaîne unique dans votre application sera combinée en un seule fichier POT::
 
     ./Console/cake i18n extract
 
-The above will run the extraction shell.  In addition to extracting strings in ``__()``
-methods, validation messages in models will be extracted as well.  The result of
-this command will be the file ``app/Locale/default.pot``.  You use the pot file
-as a template for creating po files.  If you are manually creating po files from
-the pot file, be sure to correctly set the ``Plural-Forms`` header line.
+La commande du dessus va lancer le shell d'extraction. En plus de l'extraction des chaînes de caractères des méthides ``__()``,
+Les messages de validation des modèles vont aussi être extrait. Le résultat de cette commande va être la création du fichier 
+``app/Locale/default.pot``. Vous utilisez le fichier pot comme un template pour créer les fichiers po. Si vous créez
+manuellement les fichiers po à partir du fichier pot, pensez à bien corriger le ``Plural-Forms`` de la ligne d'en-tête.
 
-Generating POT files for plugins
---------------------------------
+Générer les fichiers POT pour les plugins
+-----------------------------------------
 
-You can generate a POT file for a specific plugin using::
+Vous pouvez générer un fichier POT pour un plugin spécifique en faisant::
 
     ./Console/cake i18n extract --plugin <Plugin>
 
-This will generate the required POT files used in the plugins.
+Cela générera les fichiers POT requis utilisés dans les plugins.
 
 
-Create the tables used by TranslateBehavior
-===========================================
+Créer les tables utilisées par TranslateBehavior
+================================================
 
-The i18n shell can also be used to initialize the default tables used by the
-:php:class:`TranslateBehavior`::
+Le shell i18n peut aussi être utilisé pour initialiser les tables par défaut utilisées par :php:class:`TranslateBehavior`::
 
     ./Console/cake i18n initdb
 
-This will create the ``i18n`` table used by translate behavior.
+Cela va créer la table ``i18n`` utilisé par le behavior Translate.
 
 
 .. meta::
-    :title lang=en: I18N shell
-    :keywords lang=en: pot files,locale default,translation tools,message string,app locale,php class,validation,i18n,translations,shell,models
+    :title lang=fr: I18N shell
+    :keywords lang=fr: fichiers pot,locale default,traduction outils,message chaîne de caractère,app locale,php class,validation,i18n,traductions,shell,modèle
