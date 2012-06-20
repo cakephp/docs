@@ -17,12 +17,12 @@ Cela générera un fichier schema.php dans votre dossier ``app/Config/Schema``.
 
 .. note::
 
-    Le shell de shema The schema shell will only process tables for which there are
-    models defined. To force the schema shell to process all the
-    tables, you must add the ``-f`` option in the command line.
+    Le shell schema n'utilise que les tables pour lesquelles des modèles sont définis. 
+    Pour forcer le shell à considérer toutes les tables,
+    vous devez ajouter l'option ``-f`` à votre ligne de commande.
 
-To later rebuild the database schema from your previously made
-schema.php file run::
+Pour reconstruire plus tard votre schéma de base de données 
+à partir d'un fichier schema.php précédemment réalisé, lancez ::
 
     $ Console/cake schema create
 
