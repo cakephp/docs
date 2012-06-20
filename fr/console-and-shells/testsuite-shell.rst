@@ -1,10 +1,10 @@
-Testsuite shell
+Shell Testsuite
 ###############
 
-Once you've started writing :doc:`Tests </development/testing>` you can run them
-using the testsuite shell.
+Une fois que vous avez commencé à écrire :doc:`Tests </development/testing>` vous pouvez les lancer
+en utilisant le shell testsuite.
 
-For more information on basic usage of the testsuite shell see
+Pour plus d'informations sur utilisations classiques du shell testsuite, allez voir
 :ref:`run-tests-from-command-line`
 
 
