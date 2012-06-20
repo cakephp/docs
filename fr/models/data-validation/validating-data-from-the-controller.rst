@@ -1,88 +1,75 @@
-Validating Data from the Controller
-###################################
+Validation des données à partir du Controller
+#############################################
 
-While normally you would just use the save method of the model,
-there may be times where you wish to validate the data without
-saving it. For example, you may wish to display some additional
-information to the user before actually saving the data to the
-database. Validating data requires a slightly different process
-than just saving the data.
+Alors que normalement vous n'utiliseriez que la méthode save du modèle,
+il peut arriver que vous souhaitiez valider les données sans les sauvegarder.
+Par exemple, vous souhaitez afficher des informations supplémentaires à
+l'utilisateur avant qu'il ne sauvegarde les données dans la base. Valider
+les données nécessite un processus légèrement différentde la méthode save.
 
-First, set the data to the model:
-
-::
+Tout d'abord, mettez les données au modèle::
 
     <?php
     $this->ModelName->set($this->request->data);
 
-Then, to check if the data validates, use the validates method of
-the model, which will return true if it validates and false if it
-doesn't:
-
-::
+Ensuite, pour vérifier si les données sont validées, utilisez la méthide validates
+du modèle, qui va retourner true si elles sont valides et false si elles ne le sont pas::
 
     <?php
     if ($this->ModelName->validates()) {
-        // it validated logic
+        // La logique est validée
     } else {
-        // didn't validate logic
+        // La logique n'est pas validée
         $errors = $this->ModelName->validationErrors;
     }
 
-It may be desirable to validate your model only using a subset of
-the validations specified in your model. For example say you had a
-User model with fields for first\_name, last\_name, email and
-password. In this instance when creating or editing a user you
-would want to validate all 4 field rules. Yet when a user logs in
-you would validate just email and password rules. To do this you
-can pass an options array specifying the fields to validate. e.g.
-
-::
+Il peut être souhaité de valider votre modèle seulement en utilisant
+un sous-ensemble des validations spécifiées dans le modèle. Par exemple,
+si vous avez un modèle Utilisateur avec les champs prenom, nom, email et 
+mot_de_passe. Dans ce cas, quand vous créez ou modifiez un utilisateur,
+vous ne voulez pas valider les 4 règles des champs. Pourtant quant un
+utilisateur se connecte, vous voulez validez seulement les règles de
+l'email et du mot_de_passe. Pour le faire, vous pouvez passer un tableau
+d'options spécifiant les champs sur lesquels vous voulez la validation.
+For example ::
 
     <?php
-    if ($this->User->validates(array('fieldList' => array('email', 'password')))) {
+    if ($this->User->validates(array('fieldList' => array('email', 'mot_de_passe')))) {
         // valid
     } else {
         // invalid
     }
 
-The validates method invokes the invalidFields method which
-populates the validationErrors property of the model. The
-invalidFields method also returns that data as the result.
-
-::
+La méthode validates invoque la méthode invalidFields qui
+remplit la propriété validationErrors du modèle. La méthode
+invalidFields retourne aussi cette donnée comme résultat::
 
     <?php
     $errors = $this->ModelName->invalidFields(); // contains validationErrors array
 
-The validation errors list is not cleared between successive calls to ``invalidFields()``
-So if you are validating in a loop and want each set of errors separately
-don't use ``invalidFields()``. Instead use ``validates()``
-and access the ``validationErrors`` model property.
+La liste des erreurs de validation n'est pas supprimée entre les différents appels à ``invalidFields()``
+Donc si vous validez dans une boucle et que vous voulez chaque jeu d'erreurs séparement,
+n'utilisez pas ``invalidFields()``. Utilisez plutôt ``validates()``
+et accéder à la propriété ``validationErrors`` du modèle.
 
-It is important to note that the data must be set to the model
-before the data can be validated. This is different from the save
-method which allows the data to be passed in as a parameter. Also,
-keep in mind that it is not required to call validates prior to
-calling save as save will automatically validate the data before
-actually saving.
+Il est important de noter que les données doivent être envoyées au modèle
+avant que les données soient validées. C'est différent de la méthode save
+qui autorise aux données d'être passées comme paramètre. Aussi,
+garder à l'esprit qu'il n'est pas requis d'appeler validates antérieurement
+à l'appel save puisque save va automatiquement valider les données avant 
+l'enregistrement effectif.
 
-To validate multiple models, the following approach should be
-used:
-
-::
+Pour valider de multiple modèles, l'approche suivante devrait être utilisée::
 
     <?php
     if ($this->ModelName->saveAll($this->request->data, array('validate' => 'only'))) {
-      // validates
+      // valide
     } else {
-      // does not validate
+      // ne valide pas
     }
 
-If you have validated data before save, you can turn off validation
-to avoid second check.
-
-::
+Si vous avez validé les données avant l'enregistrement, vous pouvez stopper la validation du save
+pour éviter un deuxième contrôle::
 
     <?php
     if ($this->ModelName->saveAll($this->request->data, array('validate' => false))) {
@@ -91,5 +78,5 @@ to avoid second check.
 
 
 .. meta::
-    :title lang=en: Validating Data from the Controller
-    :keywords lang=en: password rules,validations,subset,array,logs,logic,email,first name last name,models,options,data model
+    :title lang=fr: Validation des données depuis un controlleur
+    :keywords lang=fr: règles de mot de passe,validations,sous-ensemble,tableau,logs,logic,email,prénom nom,modèles,options,données du modèle
