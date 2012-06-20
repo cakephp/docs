@@ -1,25 +1,23 @@
-Schema management et migrations
-###############################
+Gestion des Schema et migrations
+################################
 
-Le Shell SchemaShell fournit une fonctionnalité pour créer des objets de schema,
-schema sql dumps as well as create snapshots and restore database
-snapshots.
+Le shell Schema fournit une fonctionnalité pour créer des objets, 
+des dumps sql et pour créer et restaurer des vues instantanées de votre base de données.
 
 Générer et utiliser les fichiers Schema
 =======================================
 
-A generated schema file allows you to easily transport a database
-agnostic schema. You can generate a schema file of your database
-using::
+Un fichier de génération de schema vous permet de facilement 
+transporter un schema de base de données agnostique.
+Vous pouvez générer un fichier de schema de votre base de données en utilisant::
 
     $ Console/cake schema generate
 
-This will generate a schema.php file in your ``app/Config/Schema``
-directory.
+Cela générera un fichier schema.php dans votre dossier ``app/Config/Schema``.
 
 .. note::
 
-    The schema shell will only process tables for which there are
+    Le shell de shema The schema shell will only process tables for which there are
     models defined. To force the schema shell to process all the
     tables, you must add the ``-f`` option in the command line.
 
@@ -28,117 +26,112 @@ schema.php file run::
 
     $ Console/cake schema create
 
-This will drop and create the tables based on the contents of the
-schema.php.
+Cela va supprimer et créer les tables en se basant sur le contenu de schema.php.
 
-Schema files can also be used to generate sql dump files. To
-generate a sql file containing the ``CREATE TABLE`` statements,
-run::
+Les fichiers de schéma peuvent aussi être utilisés pour générer des dumps sql.
+Pour générer un fichier sql comprennant les définitions ``CREATE TABLE``, lancez::
 
     $ Console/cake schema dump --write filename.sql
 
-Where filename.sql is the desired filename for the sql dump. If you
-omit filename.sql the sql dump will be output to the console but
-not written to a file.
+nomdufichier.sql est le nom souhaité pour le fichier contenant le dump sql. 
+Si vous omettez nomdufichier.sql, le dump sql sera affiché sur la console,
+mais ne sera pas écrit dans un fichier.
 
 Migrations with CakePHP schema shell
 ====================================
 
-Migrations allow for versioning of your database schema, so that as
-you develop features you have an easy and database agnostic way to
-distribute database changes. Migrations are achieved through either
-SCM controlled schema files or schema snapshots. Versioning a
-schema file with the schema shell is quite easy. If you already
-have a schema file created running::
+Les migrations permettent de "versionner" votre schéma de base de données, 
+de telle façon que lorsque vous développez des fonctionnalités, 
+vous avez une méthode facile et élégante pour relever les modifications apportées à votre base. 
+Les migrations sont réalisées soit grâce aux fichiers de schémas, soit grâce aux vues instantanées.
+Versionner un fichier de schéma avec le shell schema est assez facile. 
+Si vous avez déjà un fichier schema créé en utilisant ::
 
     $ Console/cake schema generate
 
-Will bring up the following choices::
+Vous aurez alors les choix suivants ::
 
-    Generating Schema...
-    Schema file exists.
-     [O]verwrite
-     [S]napshot
-     [Q]uit
-    Would you like to do? (o/s/q)
+    Generating Schema... (Génération du Schema)
+    Schema file exists. (Le fichier schema existe)
+     [O]verwrite (Ecraser)
+     [S]napshot  (Vue instantanée)
+     [Q]uit      (Quitter)
+    Would you like to do? (o/s/q) (Que voulez vous faire?)
 
-Choosing [s] (snapshot) will create an incremented schema.php. So
-if you have schema.php, it will create schema\_2.php and so on. You
-can then restore to any of these schema files at any time by
-running::
+Choisir [s] (snapshot - vue instantanée) va créer un fichier schema.php incrémenté. 
+Ainsi, si vous avez schema.php, cela va créer schema\_2.php et ainsi de suite.
+Vous pouvez ensuite restaurer chacun de ces schémas en utilisant ::
 
     $ cake schema update -s 2
 
-Where 2 is the snapshot number you wish to run. The schema shell
-will prompt you to confirm you wish to perform the ``ALTER``
-statements that represent the difference between the existing
-database the currently executing schema file.
+Où 2 est le numéro de la vue instantanée que vous voulez exécuter.
+Le shell vous demandera de confirmer votre intention d'exécuter les définitions ``ALTER`` 
+qui représentent les différences entre la base existante et le fichier de schéma exécuté à ce moment.
 
-You can perform a dry run by adding a ``--dry`` to your command.
+Vous pouvez effectuer un lancement d'essai ("dry run") en ajoutant ``--dry`` à votre commande.
 
-Workflow examples
-=================
+Exemple d'application
+=====================
 
-Create schema and commit
-------------------------
+Créer un schema et commit
+-------------------------
 
-On a project which use versioning, the usage of cake schema
-would follow these steps:
+Sur un projet qui utilise le versioning, 
+l'utilisation du schema cake suivrait les étapes suivantes:
 
-1. Create or modify your database tables
-2. Execute cake schema to export a full description of your
-   database
-3. Commit the created or updated schema.php file::
+1. Créer ou modifier les tables de votre base de données.
+2. Exécuter cake schema pour exporter une description complète de votre base de données.
+3. Commit et créer ou modifier le fichier schema.php::
 
-    $ # once your database has been updated
+    $ # Une fois que votre base de données a été mise à jour
     $ Console/cake schema generate
     $ git commit -a
 
 .. note::
 
-    If the project is not versioned, managing schemas would
-    be done through snapshots. (see previous section to
-    manage snapshots)
+    Si le projet n'est pas versionné, la gestion des schemas se fera à travers des vues instantanées.
+    (voir la section précédente pour gérer les vues instantanées)
 
-Getting the last changes
-------------------------
+Récupérer les derniers changements
+----------------------------------
 
-When you pull the last changes of your repository, and discover
-changes in the structure of the database (possibly because
-of an error message saying you are missing a table):
+Quand vous récupérer les derniers changements de votre répertoire, 
+et découvrer des changements dans la structure de la base de données
+(par exemple vous avez un message d'erreur disant qu'il manque une table):
+vous avez une table manquante
 
-1. Execute cake schema to update your database::
+1. Exécuter cake schema pour mettre à jour votre base de données::
 
     $ git pull
     $ Console/cake schema create
     $ Console/cake schema update
 
-All these operations can be done in dry-run mode.
+Toutes ces opérations peuvent être faites en mode sans écriture.
 
-Rolling back
-------------
+Revenir en arrière
+------------------
 
-If at some point you need to revert and get back to the state in which you were
-before updating your database, you should be informed that this is currently not
-supported by cake schema.
+Si à un moment donné vous avez besoin de revenir en arrière et retourner à un état précédent
+à votre dernière mise à jour, vous devez être informé que ce n'est pas pour l'instant
+pas possible avec cake schema.
 
-More specifically, you can't automatically drop your tables once they have
-been created.
+Plus précisemment, vous ne pouvez pas supprimer automatiquement vos tables
+une fois qu'elles ont été créees.
 
-Using ``update`` will, on the contrary, drop any field which differ from the
-schema file::
+L'utilisation de ``update`` supprimera, au contraire, n'importe quel champ
+qui différera de votre fichier schema::
 
     $ git revert HEAD
     $ Console/cake schema update
 
-Will bring up the following choices::
+Ceci vous proposera les choix suivants::
 
-    The following statements will run.
+    The following statements will run.(Les requêtes suivantes vont être exécutées)
     ALTER TABLE `roles`
     DROP `position`;
-    Are you sure you want to alter the tables? (y/n)
+    Are you sure you want to alter the tables? (y/n) (Etes vous sur de vouloir modifier les tables?)
     [n] >
 
 .. meta::
-    :title lang=en: Schema management and migrations
-    :keywords lang=en: schema files,schema management,schema objects,database schema,table statements,database changes,migrations,versioning,snapshots,sql,snapshot,shell,config,functionality,choices,models,php files,php file,directory,running
+    :title lang=fr: Gestion des Schema et migrations
+    :keywords lang=fr: fichiers de schema,gestion des schema,Objets schema,base de données schema,requêtes sur table,changements de base de données,migrations,versioning,snapshots,sql,snapshot,shell,config,fonctionnalité,choix,modèles,fichiers php,fichier php,directory,lancement
