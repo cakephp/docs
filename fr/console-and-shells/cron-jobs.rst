@@ -1,14 +1,15 @@
-Running Shells as cronjobs
-##########################
+Lancer des Shells en tant que cronjobs
+######################################
 
-A common thing to do with a shell is making it run as a cronjob to
-clean up the database once in a while or send newsletters. However,
-when you have added the console path to the PATH variable via
-``~/.profile``, it will be unavailable to the cronjob.
+Une utlisiation classique du shell consiste à le lance en tant que cronjob
+pour nettoyer la base de données une fois de temps en temps ou pour lancer des newsletters.
+Cependant, quand vous avez ajouté le chemin de la console à la variable PATH via
+``~/.profile``, il rendra cronjob inutilisable.
 
-The following BASH script will call your shell and append the
-needed paths to $PATH. Copy and save this to your vendors folder as
-'cakeshell' and don't forget to make it executable.
+Le script BASH suivant va appeler votre shell et ajoutera les chemins nécessaires à $PATH.
+Copier et sauvegarder ce script dans votre dossier vendors sous le nom 'cakeshell'
+et n'oubliez pas de le rendre executable.
+
 (``chmod +x cakeshell``)
 
 ::
@@ -28,26 +29,25 @@ needed paths to $PATH. Copy and save this to your vendors folder as
     done
     $cmd
 
-You can call it like:::
+Vous l'appelez ainsi:::
 
     $ ./vendors/cakeshell myshell myparam -cli /usr/bin -console /cakes/1.2.x.x/cake/console
 
-The ``-cli`` parameter takes a path which points to the php cli
-executable and the ``-console`` parameter takes a path which points
-to the CakePHP console.
+Le paramètre ``-cli`` prend le chemin qui pointe vers l'executable cli php et le paramètre
+``-console`` prend un chemin qui pointe vers la console de CakePHP.
 
-As a cronjob this would look like::
+En écriture cronjob, cela ressemblerait à::
 
     # m h dom mon dow command
-    */5 *   *   *   * /full/path/to/cakeshell myshell myparam -cli /usr/bin -console /cakes/1.2.x.x/cake/console -app /full/path/to/app
+    */5 *   *   *   * /chemin/complet/vers/cakeshell myshell myparam -cli /usr/bin -console /cakes/1.2.x.x/cake/console -app /full/chemin/vers/app
 
-A simple trick to debug a crontab is to set it up to dump it's
-output to a logfile. You can do this like::
+Une astuce simple pour débugger la cronjob est d'envoyer sa sortie dans un fichier de log.
+Vous pouvez faire comme cela ::
 
     # m h dom mon dow command
     */5 *   *   *   * /full/path/to/cakeshell myshell myparam -cli /usr/bin -console /cakes/1.2.x.x/cake/console -app /full/path/to/app >> /path/to/log/file.log
 
 
 .. meta::
-    :title lang=en: Running Shells as cronjobs
-    :keywords lang=en: cronjob,bash script,path path,crontab,logfile,cakes,shells,dow,shell,cakephp,fi,running
+    :title lang=fr: Lancer des Shells en tant que cronjobs
+    :keywords lang=fr: cronjob,bash script,chemin path,crontab,logfile,cakes,shells,dow,shell,cakephp,fi,running
