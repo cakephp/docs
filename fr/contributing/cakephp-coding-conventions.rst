@@ -3,7 +3,7 @@ Normes de codes
 
 Les développeurs de Cake vont utiliser les normes de code suivantes.
 
-Il est recommandé que les autres qui développent des IngredientsCake suivent les mêmes normes.
+Il est recommandé que les autres personnes qui développent des IngredientsCake suivent les mêmes normes.
 
 Ajout de nouvelles fonctionnalités
 ==================================
