@@ -1,41 +1,39 @@
-Components
-##########
+Composants (Components)
+########################
 
-Components are packages of logic that are shared between
-controllers. If you find yourself wanting to copy and paste things
-between controllers, you might consider wrapping some functionality
-in a component.
+Les composants (Components) sont des regroupements de logique applicative
+qui sont partagés entre les contrôleurs. Si vous vous surprenez à vouloir 
+copier et coller des choses entre vos contrôleurs, alors vous devriez envisager
+de regrouper plusieurs fonctionnalités dans un Composant. 
 
-CakePHP also comes with a fantastic set of core components you can
-use to aid in:
+CakePHP est également livré avec un fantastique ensemble de composants,
+que vous pouvez utiliser pour vous aider : 
 
-
-- Security
+- Sécurité
 - Sessions
-- Access control lists
+- Listes de contrôle d'accès (ACL)
 - Emails
 - Cookies
-- Authentication
-- Request handling
+- Authentification
+- Traitement de requêtes
 - Pagination
 
-Each of these core components are detailed in their own chapters.
-For now, we’ll show you how to create your own components. Creating
-components keeps controller code clean and allows you to reuse code
-between projects.
+Chacun de ces composants d’origine est détaillé dans des chapitres
+spécifiques. Pour l’heure, nous allons vous montrer comment créer 
+vos propres composants. La création de composants vous permet de garder
+le code de vos contrôleurs propre et vous permet de réutiliser 
+du code entre vos projet.
 
 .. _configuring-components:
 
-Configuring Components
-======================
+Configuration des Composants
+============================
 
-Many of the core components require configuration. Some examples of
-components requiring configuration are
+De nombreux composants du cœur nécessitent une configuration. Quelques exemples :
 :doc:`/core-libraries/components/authentication`, :doc:`/core-libraries/components/cookie`
-and :doc:`/core-libraries/components/email`. Configuration for these
-components, and for components in general, is usually done in the
-``$components`` array or your controller's ``beforeFilter()``
-method::
+et :doc:`/core-libraries/components/email`.
+Toute configuration pour ces composants, et pour les composants en général, 
+se fait dans le tableau des ``$components`` de la méthode ``beforeFilter()`` de vos contrôleurs::
 
     <?php
     class PostsController extends AppController {
@@ -47,13 +45,11 @@ method::
             'Cookie' => array('name' => 'CookieMonster')
         );
 
-Would be an example of configuring a component with the
-``$components`` array. All core components allow their
-configuration settings to be set in this way. In addition you can
-configure components in your controller's ``beforeFilter()``
-method. This is useful when you need to assign the results of a
-function to a component property. The above could also be expressed
-as::
+Serait un exemple de configuration d'un composant avec le tableau 
+``$components``. Tous les composants du coeur permettent aux paramètres
+d'être configurés dans la méthode de votre controlleur ``beforeFilter()``.
+C'est utile quand vous avez besoin d'assigner les résultats d'une fonction
+à la propriété d'un composant. Ceci peut aussi être exprimé comme::
 
     <?php
     public function beforeFilter() {
@@ -63,21 +59,21 @@ as::
         $this->Cookie->name = 'CookieMonster';
     }
 
-It's possible, however, that a component requires certain
-configuration options to be set before the controller's
-``beforeFilter()`` is run. To this end, some components allow
-configuration options be set in the ``$components`` array::
+C'est possible, cependant, que le composant requièrt certaines options de 
+configuration avant que le contrôleur ``beforeFilter()`` soit lancé.
+Pour cela, certains composants permettent aux options de configuration
+d'être définies dans le tableau ``$components``::
 
     <?php
     public $components = array('DebugKit.Toolbar' => array('panels' => array('history', 'session')));
 
-Consult the relevant documentation to determine what configuration
-options each component provides.
+Consulter la documentation pertiente pour connaître les options de configuration
+que chaque composant fournit.
 
-One common setting to use is the ``className`` option, which allows you to
-alias components.  This feature is useful when you want to
-replace ``$this->Auth`` or another common Component reference with a custom
-implementation::
+Un paramètre commun à utiliser est l'option ``className``, qui vous autorise les 
+alias des composants. Cette fonctionnalité est utile quand vous voulez remplacer
+``$this->Auth`` ou à une autre référence de Composant commun avec une impémentation
+sur mesure::
 
     <?php
     // app/Controller/PostsController.php
@@ -92,15 +88,16 @@ implementation::
     // app/Controller/Component/MyAuthComponent.php
     App::uses('AuthComponent', 'Controller/Component');
     class MyAuthComponent extends AuthComponent {
-        // Add your code to override the core AuthComponent
+        // Ajouter votre code pour écraser le AuthComponent du coeur
     }
 
-The above would *alias* ``MyAuthComponent`` to ``$this->Auth`` in your
-controllers.
+Ce qu'il y a au-dessous donnerait un *alias* ``MyAuthComponent`` à ``$this->Auth`` dans vos
+controlleurs.
 
 .. note::
 
-    Aliasing a component replaces that instance anywhere that component is used,
+    Faire un alias à un composant remplace
+Aliasing a component replaces that instance anywhere that component is used,
     including inside other Components.
 
 Using Components
