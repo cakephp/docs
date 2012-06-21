@@ -145,8 +145,7 @@ Commenter le code
 Tous les commentaires doivent être écrits en anglais,
 et doivent clairement décrire le block de code commenté.
 
-Les commentaires doivent inclure le `phpDocumentor suivant <http://phpdoc.org>`_
-tags:
+Les commentaires doivent inclure les tags `phpDocumentor suivants <http://phpdoc.org>`_:
 
 *  `@access <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.access.pkg.html>`_
 *  `@author <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.author.pkg.html>`_
