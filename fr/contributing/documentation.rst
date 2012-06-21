@@ -74,8 +74,8 @@ Les paragraphes ne doivent être séparés par plus d'une ligne vide.
 Le balisage interne
 -------------------
 
-* Une astérisque: *text* pour une accentuation (italiques),
-* two asterisks: **text** pour une forte accentuation (caractères gras), et
+* Un astérisque: *text* pour une accentuation (italiques),
+* Deux asterisques: **text** pour une forte accentuation (caractères gras), et
 * backquotes: ``text`` pour les exemples de code.
 
 Si les astérisques ou les backquotes apparaissent dans le texte et peuvent être confondus avec
