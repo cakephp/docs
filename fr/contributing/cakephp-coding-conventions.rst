@@ -1,32 +1,31 @@
-Coding Standards
-################
+Normes de codes
+###############
 
-Cake Developers will use the following coding standards.
+Les développeurs de Cake vont utiliser les normes de code suivantes.
 
-It is recommended that others developing CakeIngredients follow the same
-standards.
+Il est recommandé que les autres qui développent des IngredientsCake suivent les mêmes normes.
 
-Adding new features
-===================
+Ajout de nouvelles fonctionnalités
+==================================
 
-No new features should be added, without having their own tests – which
-should be passed before committing them to the repository.
+Aucune nouvelle fonctionnalité ne devrait être ajouté, sans avoir fait ces propres
+tests - qui doivent être validés avant de les committer au dépôt.
 
 Indentation
 ===========
 
-One tab will be used for indentation.
+Un onglet sera utilisé pour l'indentation.
 
-So, indentation should look like this::
+Alors, l'indentation devrait ressembler à cela::
 
     <?php
-    // base level
-        // level 1
-            // level 2
-        // level 1
-    // base level
+    // niveau de base
+        // niveau 1
+            // niveau 2
+        // niveau 1
+    // niveau de base
 
-Or::
+Ou::
 
     <?php
     $booleanVariable = true;
@@ -38,11 +37,11 @@ Or::
         }
     }
 
-Control Structures
-==================
+Structures de contrôle
+======================
 
-Control structures are for example "``if``", "``for``", "``foreach``",
-"``while``", "``switch``" etc. Below, an example with "``if``"::
+Les structures de controle sont par exemple "``if``", "``for``", "``foreach``",
+"``while``", "``switch``" etc. En-dessous, une exemple avec "``if``"::
 
     <?php 
     if ((expr_1) || (expr_2)) { 
@@ -53,20 +52,19 @@ Control structures are for example "``if``", "``for``", "``foreach``",
         // default_action; 
     } 
 
-*  In the control structures there should be 1 (one) space before the
-   first parenthesis and 1 (one) space between the last parenthesis and
-   the opening bracket.
-*  Always use curly brackets in control structures, even if they are not
-   needed. They increase the readability of the code, and they give you
-   fewer logical errors.
-*  Opening curly brackets should be placed on the same line as the
-   control structure. Closing curly brackets should be placed on new
-   lines, and they should have same indentation level as the control
-   structure. The statement included in curly brackets should begin on a
-   new line, and code contained within it should gain a new level of
-   indentation.
+*  Dans les structures de contrôle, il devrait y avoir 1 (un) espace avant la
+   première parenthèse et 1 (un) espace entre les dernières parenthèses et 
+   l'accolade ouvrante.    
+*  Toujours utiliser des accolades dans les structures de contrôle,
+   même si elles ne sont pas nécessaires. Elles augmentent la lisibilité
+   du code, et elles vous donnent moins d'erreurs logiques.
 
-::
+*  L'ouverture des accolades doit être placé sur la même ligne que la structure de
+   contrôle. La fermeture des accolades doit être placé sur de nouvelles
+   lignes, et ils devraient avoir le même niveau d'indentation que la structure de
+   contrôle. La déclaration incluse dans les accolades doit commencer sur une
+   nouvelle ligne, et le code qu'il contient doit gagner un nouveau niveau 
+   d'indentation::
 
     <?php 
     // wrong = no brackets, badly placed statement
@@ -81,39 +79,37 @@ Control structures are for example "``if``", "``for``", "``foreach``",
         statement;
     }
 
-Ternary Operator
-----------------
+Opérateurs ternaires
+--------------------
 
-Ternary operators are permissible when the entire ternary operation fits
-on one line. Longer ternaries should be split into ``if else``
-statements. Ternary operators should not ever be nested. Optionally
-parentheses can be used around the condition check of the ternary for
-clarity::
+Les opérateurs ternaires sont permis quand l'opération entière rentre sur une ligne.
+Les opérateurs ternaires plus longues doivent être séparées en expression ``if else``.
+Les opérateurs ternaires ne doivent pas être imbriqués. Des parenthèses optionnelles
+peuvent être utilisées autour de la condition vérifiée de l'opération pour clarifier::
 
     <?php
-    //Good, simple and readable
+    //Bien, simple et lisible
     $variable = isset($options['variable']) ? $options['variable'] : true;
 
-    //Nested ternaries are bad
+    //Imbriquations des ternaires est mauvaise
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
-Function Calls
-==============
+Appels des fonctions
+====================
 
-Functions should be called without space between function's name and
-starting bracket. There should be one space between every parameter of a
-function call::
+Les fonctions doivent être appelées sans espace entre le nom de la fonction et 
+la parenthèse ouvrante. Il doit y avoir un espace entre chaque paramètre d'un appel
+de fonction::
 
     <?php 
     $var = foo($bar, $bar2, $bar3); 
 
-As you can see above there should be one space on both sides of equals
-sign (=).
+Comme vous pouvez le voir, il devrait y avoir un espace des deux côtés des signes égal (=).
 
-Method definition
-=================
+Définition des méthodes
+=======================
 
-Example of a function definition::
+Exemple d'un définition de fonction::
 
     <?php 
     function someFunction($arg1, $arg2 = '') {
@@ -123,10 +119,9 @@ Example of a function definition::
         return $var;
     }
 
-Parameters with a default value, should be placed last in function
-definition. Try to make your functions return something, at least true
-or false = so it can be determined whether the function call was
-successful::
+Les paramètres avec une valeur par défaut, devrait être placée en dernier dans la défintion
+de la fonction. Essayez de faire en sorte que vos fonctions retournent quelque chose, 
+au moins true ou false = ainsi cela peut déterminer si l'appel de la fonction est un succès::
 
     <?php 
     function connection($dns, $persistent = false) {
@@ -142,15 +137,15 @@ successful::
         return true;
     }
 
-There are spaces on both side of the equals sign.
+Il y a des espaces des deux côtés du signe égal.
 
-Commenting code
-===============
+Commenter le code
+=================
 
-All comments should be written in English, and should in a clear way
-describe the commented block of code.
+Tous les commentaires doivent être écrits en anglais,
+et doivent clairement décrire le block de code commenté.
 
-Comments can include the following `phpDocumentor <http://phpdoc.org>`_
+Les commentaires doivent inclure le `phpDocumentor suivant <http://phpdoc.org>`_
 tags:
 
 *  `@access <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.access.pkg.html>`_
@@ -166,12 +161,12 @@ tags:
 *  `@tutorial <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.tutorial.pkg.html>`_
 *  `@version <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.version.pkg.html>`_
 
-PhpDoc tags are very much like JavaDoc tags in Java. Tags are only
-processed if they are the first thing in a DocBlock line, for example::
+Les tags de PhpDoc sont un peu du même style que les tags de JavaDoc dans Java. Les Tags 
+sont seulement traités si ils sont la première chose dans la ligne DocBlock, par exemple::
 
     <?php
     /**
-     * Tag example.
+     * Exemple de Tag.
      * @author this tag is parsed, but this @version is ignored
      * @version 1.0 this tag is also parsed
      */
@@ -180,9 +175,9 @@ processed if they are the first thing in a DocBlock line, for example::
 
     <?php 
     /**
-     * Example of inline phpDoc tags.
+     * Exemple de tags inline phpDoc.
      *
-     * This function works hard with foo() to rule the world.
+     * Cette fonction travaille dur avec foo() pour gouverner le monde.
      */
     function bar() {
     }
@@ -193,49 +188,50 @@ processed if they are the first thing in a DocBlock line, for example::
     function foo() {
     }
 
-Comment blocks, with the exception of the first block in a file, should
-always be preceded by a newline.
+Les blocks de commentaires, avec une exception du premier block dans le fichier, doivent
+toujours être précédés par un retour à la ligne.
 
-Including files
-===============
+Inclure les fichiers
+====================
 
-When including files with classes or libraries, use only and always the
-`require\_once <http://php.net/require_once>`_ function.
+Quand on inclut les fichiers avec des classes ou librairies, utilisez seulement
+et toujours la fonction `require\_once <http://php.net/require_once>`_.
 
-PHP tags
-========
+Les tags PHP
+============
 
-Always use long tags (``<?php ?>``) Instead of short tags (<? ?>).
+Toujours utiliser les tags longs (``<?php ?>``) plutôt que les tags courts (<? ?>).
 
-Naming convention
-=================
+Convention de nommage
+=====================
 
-Functions
+Fonctions
 ---------
 
-Write all functions in camelBack::
+Ecrivez toutes les fonctions en camelBack::
 
     <?php
-    function longFunctionName() {
+    function NomDeFonctionLong() {
     }
 
 Classes
 -------
 
-Class names should be written in CamelCase, for example::
+Les noms de classe doivent être écrites en CamelCase, par exemple::
 
     <?php
-    class ExampleClass {
+    class ClasseExemple {
     }
 
 Variables
 ---------
 
-Variable names should be as descriptive as possible, but also as short
-as possible. Normal variables should start with a lowercase letter, and
-should be written in camelBack in case of multiple words. Variables
-containing objects should start with a capital letter, and in some way
-associate to the class the variable is an object of. Example::
+Les noms de variable doivent être aussi descriptives que possibles, mais
+aussi courtes que possibles. Les variables normales doivent démarrer 
+avec une lettre minuscule, et doivent être écrites en camelBack en cas
+de mots multiples. Les variables contenant des objets doivent démarrer 
+avec une majuscule, et d'une certaine manière associées à la classe dont
+elles proviennent. Exemple::
 
     <?php
     $user = 'John';
@@ -243,11 +239,12 @@ associate to the class the variable is an object of. Example::
 
     $Dispatcher = new Dispatcher();
 
-Member visibility
------------------
+Visibilité des membres
+----------------------
 
-Use PHP5's private and protected keywords for methods and variables.  Additionally,
-protected method or variable names start with a single underscore ("\_"). Example::
+Utilisez les mots-clés private et protected de PHP5 pour les méthodes et variables.
+De plus les noms des méthodes et variables protégées commencent avec un underscore
+simple ("\_"). Exemple::
 
     <?php
     class A {
@@ -258,7 +255,7 @@ protected method or variable names start with a single underscore ("\_"). Exampl
         }
     }
 
-Private methods or variable names start with double underscore ("\_\_"). Example::
+Les noms de méthode et variables privées commencent avec un underscore double ("\_\_"). Exemple::
 
     <?php
     class A {
@@ -269,11 +266,11 @@ Private methods or variable names start with double underscore ("\_\_"). Example
         }
     }
 
-Method Chaining
----------------
+Chaînage des méthodes
+---------------------
 
-Method chaining should have multiple methods spread across separate lines, and
-indented with one tab::
+Le chaînage des méthodes doit avoir des méthodes multiples répartis dans des lignes
+distinctes, et indenté avec une tabulation::
 
     <?php
     $email->from('foo@example.com')
@@ -281,67 +278,66 @@ indented with one tab::
         ->subject('A great message')
         ->send();
 
-Example addresses
------------------
+Exemple d'adresses
+------------------
 
-For all example URL and mail addresses use "example.com", "example.org"
-and "example.net", for example:
+Pour tous les exemples d'URL et d'adresse email, utilisez "example.com", "example.org"
+and "example.net", par exemple:
 
 *  Email: someone@example.com
 *  WWW: `http://www.example.com <http://www.example.com>`_
 *  FTP: `ftp://ftp.example.com <ftp://ftp.example.com>`_
 
-The ``example.com`` domain name has been reserved for this (see :rfc:`2606`) and is recommended
-for use in documentation or as examples.
+Le nom de domaine ``example.com`` est réservé à cela (see :rfc:`2606`) et est recommandée
+pour l'utilisation dans la documentation ou comme exemples.
 
-Files
------
+Fichiers
+--------
 
-File names which do not contain classes should be lowercased and underscored, for
-example:
-
+Les noms de fichier qui ne contiennent pas de classes, doivent être écrits en minuscules et soulignés,
+par exemple:
 ::
 
-    long_file_name.php
+    nom_de_fichier_long.php
 
-Variable types
---------------
+Types de variables
+------------------
 
-Variable types for use in DocBlocks:
+Les types de variable pour l'utilisation dans DocBlocks:
 
 Type
     Description
 mixed
-    A variable with undefined (or multiple) type.
+    Une variable avec un type indéfini (ou multiple).
 integer
-    Integer type variable (whole number).
+    Variable de type Integer (Tout nombre).
 float
-    Float type (point number).
+    Type Float (nombres à virgule).
 boolean
-    Logical type (true or false).
+    Type Logique (true or false).
 string
-    String type (any value in "" or ' ').
+    Type String (toutes les valeurs en "" ou ' ').
 array
-    Array type.
+    Type Tableau.
 object
-    Object type.
+    Type Objet.
 resource
-    Resource type (returned by for example mysql\_connect()).
-    Remember that when you specify the type as mixed, you should indicate
-    whether it is unknown, or what the possible types are.
+    Type Ressource (retourné par exemple par mysql\_connect()).
+    Rappelez vous que quand vous spécifiez un type en mixed, vous devez indiquer
+    si il est inconnu, ou les types possibles.
 
-Constants
+Constantes
 ---------
 
-Constants should be defined in capital letters:
+Les constantes doivent être définies en majuscules:
 
 ::
 
     <?php
     define('CONSTANT', 1);
 
-If a constant name consists of multiple words, they should be separated
-by an underscore character, for example:
+Si un nom de constante a plusieurs mots, ils doivent être séparés par un caractère
+underscore, par exemple:
 
 ::
 
@@ -350,5 +346,5 @@ by an underscore character, for example:
 
 
 .. meta::
-    :title lang=en: Coding Standards
-    :keywords lang=en: curly brackets,indentation level,logical errors,control structures,control structure,expr,coding standards,parenthesis,foreach,readability,moose,new features,repository,developers
+    :title lang=fr: Normes de code
+    :keywords lang=fr: accolades,niveau d'indentation,erreurs logiques,structures de contrôle,structure de contôle,expr,normes de code,parenthèses,foreach,Lecture possible,moose,nouvelles fonctionnalités,dépôt,developpeurs
