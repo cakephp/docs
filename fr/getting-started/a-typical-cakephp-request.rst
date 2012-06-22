@@ -1,11 +1,12 @@
 A Typical CakePHP Request
 #########################
 
-We’ve covered the basic ingredients in CakePHP, so let’s look at
-how objects work together to complete a basic request. Continuing
-with our original request example, let’s imagine that our friend
-Ricardo just clicked on the “Buy A Custom Cake Now!” link on a
-CakePHP application’s landing page.
+Nous avons découvert les ingrédients de bases de CakePHP, regardons
+maintenant comment chaque objet travaille avec les autres pour répondre
+à une requête simple. Poursuivons sur notre exemple original de requête,
+imaginons que notre ami Ricardo vient de cliquer sur le lien "Achetez un 
+Cake personnalisé maintenant !" sur la page d'accueil d'une application 
+CakePHP.
 
 .. figure:: /_static/img/typical-cake-request.gif
    :align: center
@@ -13,44 +14,40 @@ CakePHP application’s landing page.
    
    Flow diagram showing a typical CakePHP request
 
-Figure: 2. Typical Cake Request.
+Figure: 2. Une requête CakePHP typique.
 
-Black = required element, Gray = optional element, Blue = callback
+Noir = élément obligatoire, Gris = élément optionnel, Bleu = rappel (callback)
 
-
-#. Ricardo clicks the link pointing to
-   http://www.example.com/cakes/buy, and his browser makes a request
-   to your web server.
-#. The Router parses the URL in order to extract the parameters for
-   this request: the controller, action, and any other arguments that
-   will affect the business logic during this request.
-#. Using routes, a request URL is mapped to a controller action (a
-   method in a specific controller class). In this case, it’s the
-   buy() method of the CakesController. The controller’s
-   beforeFilter() callback is called before any controller action
-   logic is executed.
-#. The controller may use models to gain access to the
-   application’s data. In this example, the controller uses a model to
-   fetch Ricardo’s last purchases from the database. Any applicable
-   model callbacks, behaviors, and DataSources may apply during this
-   operation. While model usage is not required, all CakePHP
-   controllers initially require at least one model.
-#. After the model has retrieved the data, it is returned to the
-   controller. Model callbacks may apply.
-#. The controller may use components to further refine the data or
-   perform other operations (session manipulation, authentication, or
-   sending emails, for example).
-#. Once the controller has used models and components to prepare
-   the data sufficiently, that data is handed to the view using the
-   controller’s set() method. Controller callbacks may be applied
-   before the data is sent. The view logic is performed, which may
-   include the use of elements and/or helpers. By default, the view is
-   rendered inside of a layout.
-#. Additional controller callbacks (like afterFilter) may be
-   applied. The complete, rendered view code is sent to Ricardo’s
-   browser.
+#. Ricardo clique sur le lien pointant vers http://www.example.com/cakes/buy 
+   et son navigateur envoie une requête au serveur Web.
+#. Le routeur analyse l'URL afin d'extraire les paramètres de cette requête 
+   : le contrôleur, l'action et tout argument qui affectera la logique métier 
+   pendant cette requête.
+#. En utilisant les routes, l'URL d'une requête est liée à une action d'un 
+   contrôleur (une méthode d'une classe contrôleur spécifique). Dans notre exemple,
+   il s'agit de la méthode buy() du Contrôleur Cakes. La fonction de rappel du 
+   contrôleur, beforeFilter(), est appelée avant que toute logique de l'action du
+   contrôleur ne soit exécutée.
+#. Le contrôleur peut utiliser des modèles pour accéder aux données de l'application.
+   Dans cet exemple, le contrôleur utilise un modèle pour récupérer les derniers 
+   achats de Ricardo depuis la base de données. Toute méthode de rappel du modèle,
+   tout comportements ou sources de données peuvent s'appliquer pendant cette opération. 
+   Bien que l'utilisation du modèle ne soit pas obligatoire, tous les contrôleurs
+   CakePHP nécessitent au départ, au moins un modèle.
+#. Une fois que le modèle a récupéré les données, elles sont retournées au contrôleur.
+   Des fonctions de rappel du modèle peuvent s'exécuter.
+#. Le contrôleur peut faire usage de composants pour affiner les données ou pour 
+   effectuer d'autres opérations (manipulation de session, authentification ou envoi
+   de mails par exemple).
+#. Une fois que le contrôleur a utilisé les modèles et composants pour préparer suffisamment
+   les données, ces données sont passées à la vue grâce à la méthode set(). Les méthodes 
+   de rappel du contrôleur peuvent être appliquées avant l'envoi des données. La logique 
+   de la vue est exécutée, laquelle peut inclure l'utilisation d'éléments et/ou d'assistants. 
+   Par défaut, la vue est rendue à travers une mise en page (layout).
+#. D'autres fonctions de rappel (callbacks) du contrôleur (comme afterFilter) peuvent être
+   exécutées. La vue complète et final est envoyée au navigateur de Ricardo.
 
 
 .. meta::
-    :title lang=en: A Typical CakePHP Request
-    :keywords lang=en: optional element,model usage,controller class,custom cake,business logic,request example,request url,flow diagram,basic ingredients,datasources,sending emails,callback,cakes,manipulation,authentication,router,web server,parameters,cakephp,models
+    :title lang=fr: Une requête CakePHP typique
+    :keywords lang=fr: élement optionnel,modèle utilisation,contrôleur classe,custom cake,business logic,exemple requête,requête url,flow diagram,ingrédients basiques,bases de données,envoyer emails,callback,cakes,manipulation,authentification,router,web server,paramètres,cakephp,modèles
