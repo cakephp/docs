@@ -1,21 +1,43 @@
-CakePHP Conventions
-###################
+Conventions de CakePHP
+######################
 
-We are big fans of convention over configuration. While it takes a
-bit of time to learn CakePHP’s conventions, you save time in the
-long run: by following convention, you get free functionality, and
-you free yourself from the maintenance nightmare of tracking config
-files. Convention also makes for a very uniform system development,
-allowing other developers to jump in and help more easily.
+Nous sommes de grands fans des conventions plutôt que de la configuration.
+Bien que cela réclame un peu de temps pour apprendre les conventions de 
+CakePHP, à terme vous gagnerez du temps : en suivant les conventions,
+vous aurez des fonctionnalités automatiques et vous vous libérerez du 
+cauchemard de la maintenance par l'analyse des fichiers de configuration.
+Les conventions sont aussi là pour créer un environnement de développement
+uniforme, permettant à d'autres développeurs de s'investir dans le code
+plus facilement.
 
-CakePHP’s conventions have been distilled out of years of web
-development experience and best practices. While we suggest you use
-these conventions while developing with CakePHP, we should mention
-that many of these tenets are easily overridden – something that is
-especially handy when working with legacy systems.
+Les conventions de CakePHP ont été crées à partir de nombreuses années 
+d'expérience dans le développement Web et de bonnes pratiques. Alors 
+que nous vous conseillons d'utiliser ces conventions lors de vos 
+développements CakePHP, nous devons mentionner que la plupart de ces 
+principes sont facilement contournables - ce qui est particulièrement 
+utile lorsque vous travaillez avec d'anciennes applications.
 
-Controller Conventions
-======================
+Les conventions des Controller
+==============================
+
+Les noms des classes de contrôleur sont au pluriel, CamelCased et
+se terminent par 'Controller'. PersonnesController, GrossePersonnesController 
+et VraimentGrossePersonnesController sont des exemples respectant cette 
+convention.
+
+La première fonction que vous écrivez pour un contrôleur devrait être
+index(). Lorsqu'une requête adresse un contrôleur mais pas d'action, le 
+comportement par défaut de CakePHP est d'exécuter la fonction index() 
+de ce contrôleur. Ainsi, la requête http://www.exemple.com/pommes/ renvoie
+à la fonction index() de PommesController, alors que
+http://www.exemple.com/pommes/view renvoie vers la fonction view() de 
+PommesController.
+
+Dans CakePHP, vous pouvez aussi changer la visibilité des fonctions 
+d'un contrôleur en préfixant le nom par des caractères soulignés. 
+Si une fonction d'un contrôleur a été préfixée avec un souligné, elle
+ne sera pas visible sur le Web, via le répartiteur, mais elle sera 
+disponible pour un usage interne. Exemple :
 
 Controller classnames are plural, CamelCased, and end in
 ``Controller``. ``PeopleController`` and
