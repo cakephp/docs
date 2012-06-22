@@ -7,14 +7,11 @@ maintenant comment chaque objet travaille avec les autres pour répondre
 imaginons que notre ami Ricardo vient de cliquer sur le lien "Achetez un 
 Cake personnalisé maintenant !" sur la page d'accueil d'une application 
 CakePHP.
-
-.. figure:: /_static/img/typical-cake-request.gif
-   :align: center
-   :alt: Flow diagram showing a typical CakePHP request
    
    Flow diagram showing a typical CakePHP request
-
-Figure: 2. Une requête CakePHP typique.
+.. figure:: /_static/img/typical-cake-request.gif
+   :align: center
+   :alt:Diagramme représentant une requête CakePHP typique.
 
 Noir = élément obligatoire, Gris = élément optionnel, Bleu = rappel (callback)
 
