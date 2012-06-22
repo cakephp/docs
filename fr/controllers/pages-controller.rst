@@ -1,4 +1,4 @@
-Le Contôrleur Pages
+Le Contrôleur Pages
 ###################
 
 Le cœur de CakePHP est livré avec un contrôleur par défaut ``PagesController.php``.
