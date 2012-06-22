@@ -1,5 +1,5 @@
-A Typical CakePHP Request
-#########################
+Une requête CakePHP typique
+###########################
 
 Nous avons découvert les ingrédients de bases de CakePHP, regardons
 maintenant comment chaque objet travaille avec les autres pour répondre
