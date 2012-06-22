@@ -1,28 +1,29 @@
-The Pages Controller
-####################
+Le Contôrleur Pages
+###################
 
-CakePHP ships with a default controller ``PagesController.php``. This is a
-simple and optional controller for serving up static content. The home page
-you see after installation is generated using this controller. If you make the
-view file ``app/View/Pages/about_us.ctp`` you can access it using the url
-``http://example.com/pages/about_us``. You are free to modify the Pages
-Controller to meet your needs.
+Le cœur de CakePHP est livré avec un contrôleur par défaut ``PagesController.php``.
+C'est un contrôleur simple et optionnel pour rendre de contenu statique.
+La page d'accueil que vous voyez juste après l'installation est d'ailleurs 
+générée à l'aide de ce contrôleur. Ex : Si vous écrivez un fichier de vue 
+``app/View/Pages/a_propos.ctp``, vous pouvez y accéder en utilisant l'url 
+``http://example.com/pages/a_propos``. Vous pouvez modifier le contrôleur
+Pages selon vos besoins.
 
-When you "bake" an app using CakePHP's console utility the Pages Controller is
-created in your ``app/Controller/`` folder. You can also copy the file from
-``lib/Cake/Console/Templates/skel/Controller/PagesController.php``.
+Quand vous "cuisinez" une applications avec l'utilitaire console de CakePHP,
+le contrôleur Pages est copié dans votre dossier ``app/Controller/`` et vous pouvez
+le modifier selon vos besoin. Ou vous pouvez simplement copier le fichier à 
+partir de ``lib/Cake/Console/Templates/skel/Controller/PagesController.php``.
 
 .. versionchanged:: 2.1
-    With CakePHP 2.0 the Pages Controller was part of ``lib/Cake``. Since 2.1
-    the Pages Controller is no longer part of the core but ships in the app
-    folder.
+    Avec CakePHP 2.0 le contrôleur Pages était une partie de ``lib/Cake``. Depuis 2.1,
+    le contrôleur Pages ne fait plus parti du coeur, mais se situe dans le dossier app.
 
 .. warning::
 
-    Do not directly modify ANY file under the ``lib/Cake`` folder to avoid
-    issues when updating the core in future.
+    Ne modifiez directement AUCUN fichier du dossier ``lib/Cake`` pour éviter les
+    problèmes lors des mises à jour du coeur dans le futur.
 
 
 .. meta::
-    :title lang=en: The Pages Controller
-    :keywords lang=en: pages controller,default controller,lib,cakephp,ships,php,file folder
+    :title lang=fr: Le Contrôleur Pages
+    :keywords lang=fr: contrôleur pages,contrôleur par défault,lib,cakephp,ships,php,fichier dossier
