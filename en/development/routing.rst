@@ -828,7 +828,7 @@ a destination within your application or an outside location::
     <?php
     Router::redirect(
         '/home/*',
-        array('controller' => 'posts', 'action' => 'view',
+        array('controller' => 'posts', 'action' => 'view'),
         array('persist' => true)
     );
 
