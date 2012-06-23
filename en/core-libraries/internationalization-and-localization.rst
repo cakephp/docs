@@ -164,6 +164,40 @@ If you pass a locale that doesn't exist on your computer to
 effect. You can find the list of available locales by running the
 command ``locale -a`` in a terminal.
 
+Translating model validation errors
+===================================
+CakePHP will automatically extract the validation error when you are using the
+:doc:`i18n console task </console-and-shells>`. By default, the default domain is used.
+This can be overwritten by setting the ``$validationDomain`` property in your model::
+
+    <?php
+    class User extends AppModel {
+
+        public $validationDomain = 'validation_errors';
+    }
+
+Additional parameters defined in the validation rule are passed to the translation
+function. This allows you to create dynamic validation messages::
+
+    <?php
+    class User extends AppModel {
+
+        public $validationDomain = 'validation';
+
+        public $validate = array(
+            'username' => array(
+                    'length' => array(
+                    'rule' => array('between', 2, 10),
+                    'message' => 'Username should be between %d and %d characters'
+                )
+            )
+        )
+    }
+
+Which will do the following internal call::
+
+    <?php
+    __d('validation', 'Username should be between %d and %d characters', array(2, 10));
 
 .. meta::
     :title lang=en: Internationalization & Localization
