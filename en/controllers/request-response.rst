@@ -328,7 +328,7 @@ CakeRequest API
     Check for a single type::
 
         <?php
-        $this->request->accepts('json');
+        $this->request->accepts('application/json');
 
 .. php:staticmethod:: acceptLanguage($language)
 
