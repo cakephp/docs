@@ -41,7 +41,7 @@ Security API
         $encrypted = Security::rijndael('a secret', Configure::read('Security.key'), 'encrypt');
 
         // Later decrypt it.
-        $encrypted = Security::rijndael($data, Configure::read('Security.key'), 'decrypt');
+        $decrypted = Security::rijndael($encrypted, Configure::read('Security.key'), 'decrypt');
 
     .. versionadded:: 2.2
         ``Security::rijndael()`` was added in 2.2.
