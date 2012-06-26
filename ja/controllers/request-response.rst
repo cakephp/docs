@@ -284,7 +284,7 @@ CakeRequest API
     あるタイプについて調べる::
 
         <?php
-        $this->request->accepts('json');
+        $this->request->accepts('application/json');
 
 .. php:staticmethod:: acceptLanguage($language)
 
