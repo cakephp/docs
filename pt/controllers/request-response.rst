@@ -337,7 +337,7 @@ API do CakeRequest
     Verifica apenas um tipo::
 
         <?php
-        $this->request->accepts('json');
+        $this->request->accepts('application/json');
 
 .. php:staticmethod:: acceptLanguage($language)
 
