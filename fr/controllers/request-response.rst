@@ -106,84 +106,86 @@ N'importe quel clé qui n'existe pas va retourner ``null``::
     $foo = $this->request->data('Value.that.does.not.exist');
     // $foo == null
 
-Accessing XML or JSON data
-==========================
+Accéder aux données XML ou JSON
+===============================
 
-Applications employing :doc:`/development/rest` often exchange data in non
-URL encoded post bodies.  You can read input data in any format using
-:php:meth:`CakeRequest::input()`.  By providing a decoding function you can
-receive the content in a deserialized format::
+Les applications employant :doc:`/development/rest` échangent souvent des données
+dans des organes post non encodées en URL. Vous pouvez lire les données entrantes
+dans n'importe quel format en utilisant :php:meth:`CakeRequest::input()`. En fournissant
+une fonction de décodage, vous pouvez recevoir le contenu dans un format déserializé::
 
     <?php
-    // Get JSON encoded data submitted to a PUT/POST action
+    // Obtenir les données encodées JSON soumises par une action PUT/POST
     $data = $this->request->input('json_decode');
 
-Since some deserializing methods require additional parameters when being called,
-such as the 'as array' parameter on ``json_decode`` or if you want XML converted
-into a DOMDocument object, :php:meth:`CakeRequest::input()` supports passing
-in additional parameters as well::
+Depuis que certaines méthodes de déserialization ont besoin de paramètres additionnels
+quand elles sont appelées, comme le paramètre 'en tant que tableau' ('as array') pour
+``json_decode`` ou si vous voulez convertir les XML en objet DOMDocument,
+:php:meth:`CakeRequest::input()` supporte le passement dans des paramètres additionnels
+aussi::
 
     <?php
-    // Get Xml encoded data submitted to a PUT/POST action
+    // Obtenir les données encodées en Xml soumises avec une action PUT/POST
     $data = $this->request->input('Xml::build', array('return' => 'domdocument'));
 
-Accessing path information
-==========================
+Accéder aux informations du chemin
+==================================
 
-CakeRequest also provides useful information about the paths in your
-application.  :php:attr:`CakeRequest::$base` and
-:php:attr:`CakeRequest::$webroot` are useful for generating urls, and
-determining whether or not your application is in a subdirectory.
+CakeRequest fournit aussi des informations utiles sur les chemins dans votre application.
+:php:attr:`CakeRequest::$base` et :php:attr:`CakeRequest::$webroot` sont utiles pour générer
+des urls, et déterminer si votre application est ou n'est pas dans un sous-dossier.
 
 .. _check-the-request:
 
-Inspecting the request
-======================
+Inspecter la requête
+====================
 
-Detecting various request conditions used to require using
-:php:class:`RequestHandlerComponent`. These methods have been moved to
-``CakeRequest``, and offer a new interface alongside a more backwards compatible
-usage::
+Détecter des conditions variées de la requête utilisée utilisant
+r various request conditions used to require using
+:php:class:`RequestHandlerComponent`. Ces méthodes ont été déplacées dans
+``CakeRequest``, et offrent une nouvelle interface compatible avec les utlisations
+anciennes::
 
     <?php
     $this->request->is('post');
     $this->request->isPost();
 
-Both method calls will return the same value.  For the time being the methods
-are still available on RequestHandler, but are deprecated and still might be
-removed before the final release.  You can also easily extend the request
-detectors that are available, by using :php:meth:`CakeRequest::addDetector()` 
-to create new kinds of detectors.  There are four different types of detectors 
-that you can create:
+Les deux méthodes appellées vont retourner la même valeur. Pour l'instant,
+les méthodes sont toujours disponibles dans RequestHandler, mais sont depréciées
+et pourraient être retirées avant la version finale. Vous pouvez aussi facilement
+étendre les détecteurs de la requête qui sont disponibles, en utilisant
+:php:meth:`CakeRequest::addDetector()` pour créer de nouveaux types de détecteurs.
+Il y a quatre différents types de détecteurs que vous pouvez créer:
 
-* Environment value comparison - An environment value comparison, compares a
-  value fetched from :php:func:`env()` to a known value the environment value is 
-  equality checked against the provided value.
-* Pattern value comparison - Pattern value comparison allows you to compare a
-  value fetched from :php:func:`env()` to a regular expression.
-* Option based comparison -  Option based comparisons use a list of options to
-  create a regular expression.  Subsequent calls to add an already defined
-  options detector will merge the options.
-* Callback detectors - Callback detectors allow you to provide a 'callback' type
-  to handle the check.  The callback will receive the request object as its only
-  parameter.
+* Comparaison avec valeur d'environnement - Une comparaison de la valeur d'environnement,
+  compare une valeur attrapée à partir de :php:func:`env()` pour une valeur connue, la valeur
+  d'environnement est vérifiée équitablement avec la valeur fournie.
+* La comparaison de la valeur modèle - La comparaison de la valeur modèle vous autorise à comparer
+  une valeur attrapée à partir de :php:func:`env()` à une expression régulière.
+* Comparaison basée sur les options -  La comparaison basée sur les options utilise une liste
+  d'options pour créer une expression régulière. De tels appels pour ajouter un détecteur
+  d'options déjà définie, va fusionner les options.
+* Les détecteurs de Callback - Les détecteurs de Callback vous permettrent de fournir un type
+  'callback' pour gérer une vérfication. Le callback va recevoir l'objet requête comme seul
+  paramètre.
 
-Some examples would be::
+Quelques exemples seraient::
 
     <?php
-    // Add an environment detector.
+    // Ajouter un détecteur d'environment.
     $this->request->addDetector('post', array('env' => 'REQUEST_METHOD', 'value' => 'POST'));
     
-    // Add a pattern value detector.
+    // Ajouter un détecteur de valeur modèle.
     $this->request->addDetector('iphone', array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i'));
     
-    // Add an option detector
+    // Ajouter un détecteur d'options
     $this->request->addDetector('internalIp', array(
         'env' => 'CLIENT_IP', 
         'options' => array('192.168.0.101', '192.168.0.100')
     ));
     
-    // Add a callback detector. Can either be an anonymous function or a regular callable.
+    // Ajouter un détecteur de callback detector. Peut soit être une fonction anonyme
+    ou un callback régulier.
     $this->request->addDetector('awesome', array('callback' => function ($request) {
         return isset($request->awesome);
     }));
