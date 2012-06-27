@@ -1,13 +1,12 @@
-Request and Response objects
-############################
+Les Objets Request et Response
+##############################
 
-New in CakePHP 2.0 are request and response objects.  In previous versions these
-objects were represented through arrays, and the related methods were spread 
-across :php:class:`RequestHandlerComponent`, :php:class:`Router`, 
-:php:class:`Dispatcher` and :php:class:`Controller`.  There was no authoritative 
-object on what information the request contained.  For 2.0,
-:php:class:`CakeRequest` and :php:class:`CakeResponse` are used for this
-purpose.
+Les objets request et response sont nouveaux depuis CakePHP 2.0. Dans les versions
+précédentes, ces objets étaient représentés à travers des array, et les méthodes liées
+étaient répandues à travers :php:class:`RequestHandlerComponent`, :php:class:`Router`, 
+:php:class:`Dispatcher` and :php:class:`Controller`. Il n'y avait pas d'objet authorisé
+qui reprenait les informations de la requête. Pour CakePHP 2.0,
+:php:class:`CakeRequest` et :php:class:`CakeResponse` sont utilisés à ce sujet.
 
 .. index:: $this->request
 .. _cake-request:
@@ -15,92 +14,93 @@ purpose.
 CakeRequest
 ###########
 
-:php:class:`CakeRequest` is the default request object used in CakePHP.  It centralizes
-a number of features for interrogating and interacting with request data.  
-On each request one CakeRequest is created and then passed by reference to the various 
-layers of an application that use request data.  By default ``CakeRequest`` is assigned to
-``$this->request``, and is available in Controller, Views and Helpers.  You can
-also access it in Components by using the controller reference. Some of the duties 
-``CakeRequest`` performs include:
+:php:class:`CakeRequest` est l'objet requête utilisé par défaut dans CakePHP.  Il centralise
+un certain nombre de fonctionnalités pour interroger et intéragir avec les données demandées.
+Pour chaque requête, une CakeRequest est créée et passée en référence aux différentes couches
+de l'application que la requête de données utilise. Par défaut ``CakeRequest`` est assignée
+à ``$this->request``, et est disponible dans les Contrôleurs, Vues et Helpers. Vous pouvez
+aussi y accéder dans les Composants en utlisant la référence du contrôleur. Certaines des tâches
+incluses que ``CakeRequest`` permet :
 
-* Process the GET, POST, and FILES arrays into the data structures you are
-  familiar with.
-* Provide environment introspection pertaining to the request.  Things like the
-  headers sent, the client's IP address, and the subdomain/domain information
-  about the application the server is running on.
-* Provide access to request parameters both as array indices and object
-  properties.
+* Transformer les tableaux GET, POST, et FILES en structures de données avec lesquelles
+  vous êtes familiers.
+* Fournir une introspection de l'environnement se rapportant à la demande. Des choses comme
+  les envois d'en-têtes (headers), l'adresse IP du client et les informations des
+  sous-domaines/domaines sur lesquels le serveur de l'application tourne.
+* Fournit un accès aux paramètres de la requête à la fois en tableaux indicés et en propriétés
+  d'un objet.
 
-Accessing request parameters
-============================
+Accéder aux paramètres de la requête
+====================================
 
-CakeRequest exposes several interfaces for accessing request parameters.  The first
-is as array indexes, the second is through ``$this->request->params``, and the
-third is as object properties::
+CakeRequest propose plusieurs interfaces pour accéder aux paramètres de la requête. La première
+est des tableaux indexés, la seconde est à travers ``$this->request->params``, et la troisième
+est des propriétés d'objets::
 
     <?php
     $this->request['controller'];
     $this->request->controller;
     $this->request->params['controller']
 
-All of the above will both access the same value. Multiple ways of accessing the
-parameters was done to ease migration for existing applications. All 
-:ref:`route-elements` are accessed through this interface.
+Tout ce qui est au-dessus retournera la même valeur. Plusieurs façons d'accéder
+aux paramètres a été fait pour faciliter la migration des applications existantes.
+Tous les éléments de route :ref:`route-elements` sont accessibles à travers cette
+interface.
 
-In addition to :ref:`route-elements` you also often need access to 
-:ref:`passed-arguments` and :ref:`named-parameters`.  These are both available
-on the request object as well::
+En plus des éléments de routes :ref:`route-elements`, vous avez souvent besoin d'accéder
+aux arguments passés :ref:`passed-arguments` et aux paramètres nommés :ref:`named-parameters`.
+Ceux-ci sont aussi tous les deux disponibles dans l'objet request::
 
     <?php
-    // Passed arguments
+    // Arguments passés
     $this->request['pass'];
     $this->request->pass;
     $this->request->params['pass'];
 
-    // named parameters
+    // Paramètres nommés
     $this->request['named'];
     $this->request->named;
     $this->request->params['named'];
 
-Will all provide you access to the passed arguments and named parameters. There
-are several important/useful parameters that CakePHP uses internally, these 
-are also all found in the request parameters:
+Il vous fournira un accès aux arguments passés et ax paramètres nommés.
+Il y a de nombreux paramètres importants et utiles que CakePHP utiise en
+interne, il sont aussi trouvables dans les paramètres de la requête:
 
-* ``plugin`` The plugin handling the request, will be null for no plugin.
-* ``controller`` The controller handling the current request.
-* ``action`` The action handling the current request.
-* ``prefix`` The prefix for the current action.  See :ref:`prefix-routing` for
-  more information.
-* ``bare`` Present when the request came from requestAction() and included the
-  bare option.  Bare requests do not have layouts rendered.
-* ``requested`` Present and set to true when the action came from requestAction.
+* ``plugin`` Le plugin gèrant la requête, va être nul pour les non-plugins.
+* ``controller`` Le contrôleur gère la requête courante.
+* ``action`` L'action gère la requête courante.
+* ``prefix`` Le prefix pour l'action courante. Voir :ref:`prefix-routing` pour
+  plus d'informations.
+* ``bare`` Présent quannd la requête vient de requestAction() et inclut l'option bare.
+  Les requêtes vides n'ont pas de layout de rendu.
+* ``requested`` Présent et mis à true quand l'action vient de requestAction.
 
 
-Accessing Querystring parameters
-================================
+Accéder aux paramètres Querystring
+==================================
 
-Querystring parameters can be read from using :php:attr:`CakeRequest::$query`::
+Les paramètres Querystring peuvent être lus en utilisant :php:attr:`CakeRequest::$query`::
 
     <?php
     // url is /posts/index?page=1&sort=title
     $this->request->query['page'];
 
-    // You can also access it via array access
+    //  Vous pouvez aussi y accéder par un tableau d'accès
     $this->request['url']['page'];
 
-Accessing POST data
-===================
+Accéder aux données POST
+========================
 
-All POST data can be accessed using :php:attr:`CakeRequest::$data`.  Any form data 
-that contains a ``data`` prefix, will have that data prefix removed.  For example::
+Toutes les données POST peuvent être accédées par :php:attr:`CakeRequest::$data`. N'importe quelle
+forme de tableau qui contient un prefix ``data``, va avoir sa donnée prefixée retirée. Par exemple::
 
     <?php
     // An input with a name attribute equal to 'data[Post][title]' is accessible at
     $this->request->data['Post']['title'];
 
-You can either directly access the data property, or you can use 
-:php:meth:`CakeRequest::data()` to read the data array in an error free manner.
-Any keys that do not exist will return ``null``::
+Vous pouvez soit accéder directement à la propriété des données, soit vous pouvez
+utiliser :php:meth:`CakeRequest::data()` pour lire le tableau de données sans erreurs.
+N'importe quel clé qui n'existe pas va retourner ``null``::
 
     <?php
     $foo = $this->request->data('Value.that.does.not.exist');
