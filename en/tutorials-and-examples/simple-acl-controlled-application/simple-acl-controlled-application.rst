@@ -240,7 +240,7 @@ requires an implementation of ``parentNode()`` on your model. In
 our ``User`` model we will add the following::
 
     <?php
-    class User extends Model {
+    class User extends AppModel {
         public $name = 'User';
         public $belongsTo = array('Group');
         public $actsAs = array('Acl' => array('type' => 'requester'));
@@ -265,7 +265,7 @@ our ``User`` model we will add the following::
 Then in our ``Group`` Model Add the following::
 
     <?php
-    class Group extends Model {
+    class Group extends AppModel {
         public $actsAs = array('Acl' => array('type' => 'requester'));
          
         public function parentNode() {
