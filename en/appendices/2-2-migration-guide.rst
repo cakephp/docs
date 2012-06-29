@@ -162,7 +162,7 @@ CakeEmail
 - :php:meth:`CakeEmail::domain()` was added. You can use this method to set the
   domain name used when sending email from a CLI script or if you want to
   control the hostname used to send email.
-- You can now define ``theme`` and ``helpers`` in your EmailConfig class. 
+- You can now define ``theme`` and ``helpers`` in your EmailConfig class.
 
 CakeRequest
 -----------
@@ -318,7 +318,9 @@ Model Validation
   compatible. It also exposes a rich API to add, modify and remove validation
   rules. Check docs for this object in :doc:`/models/data-validation`.
 
-- New validation rule added:
+- New validation rules added:
 
   * :php:meth:`Validation::naturalNumber()`
+  * :php:meth:`Validation::mimeType()`
+  * :php:meth:`Validation::uploadError()`
 

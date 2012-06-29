@@ -20,7 +20,7 @@ in the Model. To do that, use the Model::validate array in the
 Model definition, for example::
 
     <?php
-    class User extends AppModel {  
+    class User extends AppModel {
         public $name = 'User';
         public $validate = array();
     }
@@ -304,7 +304,7 @@ This is better explained with a practical example::
             'loginRule-2' => array(
                 'rule'    => array('minLength', 8),
                 'message' => 'Minimum length of 8 characters'
-            )  
+            )
         )
     );
 
@@ -775,7 +775,7 @@ with usage examples.
 
 
 .. php:staticmethod:: datetime(array $check, mixed $dateFormat = 'ymd', string $regex = null)
-    
+
     This rule ensures that the data is a valid datetime format. A
     parameter (which can be an array) can be passed to specify the format
     of the date. The value of the parameter can be one or more of the
@@ -832,10 +832,10 @@ with usage examples.
     This checks whether the data is a valid email address. Passing a
     boolean true as the second parameter for this rule will also
     attempt to verify that the host for the address is valid::
-    
+
         <?php
         public $validate = array('email' => array('rule' => 'email'));
-        
+
         public $validate = array(
             'email' => array(
                 'rule'    => array('email', true),
@@ -928,8 +928,8 @@ with usage examples.
 
 .. php:staticmethod:: luhn(string|array $check, boolean $deep = false)
 
-    The Luhn algorithm: A checksum formula to validate a variety of 
-    identification numbers. See http://en.wikipedia.org/wiki/Luhn_algorithm for 
+    The Luhn algorithm: A checksum formula to validate a variety of
+    identification numbers. See http://en.wikipedia.org/wiki/Luhn_algorithm for
     more information.
 
 
@@ -952,6 +952,21 @@ with usage examples.
     representation of the data". Be careful that it may be larger than
     the number of characters when handling non-ASCII characters.
 
+.. php:staticmethod:: mimeType(mixed $check, array $mimeTypes)
+
+    .. versionadded:: 2.2
+
+    This rule checks for valid mimeType
+
+    ::
+
+        <?php
+        public $validate = array(
+            'image' => array(
+                'rule'    => array('mimeType', array('image/gif')),
+                'message' => 'Invalid mime type.'
+            ),
+        );
 
 .. php:staticmethod:: minLength(string $check, integer $min)
 
@@ -1016,7 +1031,7 @@ with usage examples.
 
         <?php
         public $validate = array(
-            'title' => array( 
+            'title' => array(
                 'rule'    => 'notEmpty',
                 'message' => 'This field cannot be left blank'
             )
@@ -1110,10 +1125,10 @@ with usage examples.
         );
 
     The above example will accept any value which is larger than 0
-    (e.g., 0.01) and less than 10 (e.g., 9.99). 
-    
+    (e.g., 0.01) and less than 10 (e.g., 9.99).
+
     .. note::
-    
+
         The range lower/upper are not inclusive
 
 
@@ -1135,10 +1150,25 @@ with usage examples.
 
 .. php:staticmethod:: time(string $check)
 
-    Time validation, determines if the string passed is a valid time. Validates 
-    time as 24hr (HH:MM) or am/pm ([H]H:MM[a|p]m) Does not allow/validate 
+    Time validation, determines if the string passed is a valid time. Validates
+    time as 24hr (HH:MM) or am/pm ([H]H:MM[a|p]m) Does not allow/validate
     seconds.
 
+.. php:staticmethod:: uploadError(mixed $check)
+
+    .. versionadded:: 2.2
+
+    This rule checks if a file upload has an error.
+
+    ::
+
+        <?php
+        public $validate = array(
+            'image' => array(
+                'rule'    => 'uploadError',
+                'message' => 'Something went wrong with the upload.'
+            ),
+        );
 
 .. php:staticmethod:: url(string $check, boolean $strict = false)
 
