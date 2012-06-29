@@ -10,6 +10,7 @@
    cakephp-overview
    controllers
    views
+   core-libraries
    deployment
    tutorials-and-examples
    contributing
