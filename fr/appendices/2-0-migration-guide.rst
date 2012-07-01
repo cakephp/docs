@@ -153,8 +153,8 @@ versions de CakePHP, ces valeurs changeaient selon l'environnement.
 Basics.php
 ==========
 
--  ``getMicrotime()`` has been removed. Use the native ``microtime(true)``
-   instead.
+-  ``getMicrotime()`` a été retirée. Utilisez la fonction native ``microtime(true)``
+   à la place.
 -  ``e()`` a été retirée. Utilisez ``echo``.
 -  ``r()`` a été retirée. Utilisez ``str_replace``.
 -  ``a()`` a été retirée. Utilisez ``array()``
@@ -202,7 +202,7 @@ Elle remplace plusieurs fonctionnalités de ``Dispatcher``,
 ``ArrayAccess`` donc la plupart des interactions avec les anciens tableaux params n'ont pas besoin de changement.
 Voir les nouvelles fonctionnalités de CakeRequest pour plus d'informations.
 
-Gestion des Requêtes, $_GET['url'] e fichiers .htaccess
+Gestion des Requêtes, $_GET['url'] et fichiers .htaccess
 =======================================================
 
 CakePHP n'utilise plus ``$_GET['url']`` pour la gestion des chemins des requêtes de l'application.
@@ -217,7 +217,7 @@ Components
 ==========
 
 Component est maintenant la classe de base requise pour tous les components. Vous devrez mettre à jour
-vos components et lerus constructeurs, puisque tous deux ont changé::
+vos components et leurs constructeurs, puisque tous deux ont changé::
 
     <?php
     class PrgComponent extends Component {
@@ -262,21 +262,21 @@ ne va pas fonctionner.
 AclComponent
 ------------
 
--  Les impléémentations ``AclComponent`` sont maintenant requises pour implémenter
+-  Les implémentations ``AclComponent`` sont maintenant requises pour implémenter
    ``AclInterface``.
 -  ``AclComponent::adapter()`` a été ajouté pour permettre l'éxecution de la modification de
    l'utilisation de implémentation du component ``ACL``.
--  ``AclComponent::grant()`` a été déprécié, il sera supprimé dans un version future
+-  ``AclComponent::grant()`` a été déprécié, il sera supprimé dans une version future
     Utilisez ``AclComponent::allow()`` à la place.
--  ``AclComponent::revoke()`` a été déprécié, il sera supprimé dans un version future
+-  ``AclComponent::revoke()`` a été déprécié, il sera supprimé dans une version future
    Utilisez AclComponent::deny() à la place.
 
 RequestHandlerComponent
 -----------------------
 
-Many of RequestHandlerComponent's methods are just proxies for ``CakeRequest``
-methods. The following methods have been deprecated and will be removed in
-future versions:
+Beaucoup de méthodes de RequestHandlerComponent sont justes des proxies pour les méthodes
+de ``CakeRequest``. Le méthodes suivantes ont été dépréciées et seront retirées dans les
+versions futures:
 
 -  ``isSsl()``
 -  ``isAjax()``
@@ -286,18 +286,18 @@ future versions:
 -  ``isDelete()``
 -  ``getReferer()``
 -  ``getClientIp()``
--  ``accepts()``, ``prefers()``, ``requestedWith()`` All deal in mapped content
-   types now. They no longer work with mime-types. You can use
-   ``RequestHandler::setContent()`` to create new content types.
--  ``RequestHandler::setContent()`` no longer accepts an array as a single
-   argument, you must supply both arguments.
+-  ``accepts()``, ``prefers()``, ``requestedWith()`` Tous sont maintenant gérés dans
+    les types de contenu. Ils ne fonctionnent plus avec les mime-types. Vous pouvez
+    utiliser ``RequestHandler::setContent()`` pour créer des nouveaux types de contenu.
+-  ``RequestHandler::setContent()`` n'accepte plus de tableau en tant qu'argument unique,
+    vous devez fournir les deux arguments.
 
 SecurityComponent
 -----------------
 
-SecurityComponent no longer handles Basic and Digest Authentication. These are
-both handled by the new AuthComponent. The following methods have been removed
-from SecurityComponent:
+SecurityComponent ne gère plus l'Authentification Basic et Sommaire (Digest). Elles sont
+toutes deux gérées par le nouveau AuthComponent. Les méthodes suivantes ont été retirées de
+SecurityComponent:
 
 -  requireLogin()
 -  generateDigestResponseHash()
@@ -305,89 +305,94 @@ from SecurityComponent:
 -  loginRequest()
 -  parseDigestAuthData()
 
-In addition the following properties were removed:
+De plus les propriétés suivantes ont été retirées:
 
 -  $loginUsers
 -  $requireLogin
 
-Moving these features to AuthComponent was done to provide a single place for
-all types of authentication and to streamline the roles of each component.
+Le déplacement des fonctionalités verss Authcomponent a été faite pour fournir
+un endroit unique pour tous les types d'authentification et pour rationaliser 
+les rôles de chaque composant.
 
 AuthComponent
 -------------
 
-The AuthComponent was entirely re-factored for 2.0, this was done to help reduce
-developer confusion and frustration. In addition, AuthComponent was made more
-flexible and extensible. You can find out more in 
-the :doc:`/core-libraries/components/authentication` guide.
+AuthComponent a été entièrement refait dans 2.0, ça é été fait pour réduire
+les confusions et frustrations des développeurs.
+De plus, AuthComponent a été construite plus flexible et extensible.
+Vous pouvez trouver plus d'informations dans le guide
+:doc:`/core-libraries/components/authentication`.
 
 EmailComponent
 --------------
 
-The EmailComponent has been deprecated and has created a new library class to
-send e-mails. See :doc:`/core-utility-libraries/email` Email changes for more details.
+EmailComponent a été déprecié et a crée une nouvelle classe de librairie pour 
+envoyer les emails. Voir les changements pour Email 
+:doc:`/core-utility-libraries/email` pour plus de détails.
 
 SessionComponent
 ----------------
 
-Session component has lost the following methods.
+Session component a perdu les méthodes suivantes.
 
 * activate()
 * active()
 * __start()
 
-cakeError removed
-=================
+Retrait de cakeError
+====================
 
-The ``cakeError()`` method has been removed. It's recommended that you switch all
-uses of ``cakeError`` to use exceptions. ``cakeError`` was removed because it
-was simulating exceptions. Instead of simulation, real exceptions are used in
-CakePHP 2.0.
+La méthode ``cakeError()`` a été retirée. Il est recommandé que vous changiez
+toutes les utilisations de ``cakeError`` pour utiliser les exceptions. ``cakeError`` 
+a été retiré car il simulait les exceptions. Plutôt que la simulation, de réelles
+exceptions sont utilisées dans CakePHP 2.0.
 
-Error handling
-==============
+Gestion des Erreurs
+===================
 
-The error handling implementation has dramatically changed in 2.0. Exceptions
-have been introduced throughout the framework, and error handling has been
-updated to offer more control and flexibility. You can read more in the
-:doc:`/development/exceptions` and :doc:`/development/errors` section.
+L'implémentation de la gestion des erreurs a changé de façon spectaculaire dans 2.0.
+Les exceptions ont été introduites partout dans le framework, et la gestion des erreurs
+a été mise à jour pour offrir plus de contrôle et de flexibilité. Vous pouvez
+en lire plus dans les sections
+:doc:`/development/exceptions` et :doc:`/development/errors`.
 
-Lib classes
+Classes Lib
 ===========
 
 App
 ---
 
-The API for ``App::build()`` has changed to ``App::build($paths, $mode).`` It
-now allows you to either append, prepend or reset/replace existing paths. The
-$mode param can take any of the following 3 values: App::APPEND,
-App::PREPEND, ``App::RESET``. The default behavior of the function remains the
-same (ie. Prepending new paths to existing list).
+L'API pour ``App::build()`` a changé pour ``App::build($paths, $mode).`` Elle
+vous autorise maintenant à soit ajouter, soit faire précéder ou bien 
+réinitialiser / remplacer les chemins existants. Le paramètre $mode peut prendre
+n'importe lesquelles des 3 valeurs suivantes: App::APPEND,
+App::PREPEND, ``App::RESET``. Le behavior par défaut de la fonction reste le même
+(ex. Faire précéder des nouveaux chemins par une liste existante).
 
 App::path()
 ~~~~~~~~~~~
 
-* Now supports plugins, App::path('Controller', 'Users') will return the folder
-  location of the controllers in the Users plugin.
-* Won't merge core paths anymore, it will
-  only return paths defined in App::build() or default ones in app (or
-  corresponding plugin).
+* Supporte maintenant les plugins, App::path('Controller', 'Users') va retourner
+  la location du dossier des contrôleurs dans le plugin des utilisateurs.
+* Ne fusionnera plus les chemins du coeur, il retournera seulement les chemins
+  définies dans App::build() et ceux par défaut dans app (ou correspondant au
+  plugin).
 
 App::build()
 ~~~~~~~~~~~~
 
-* Will not merge app path with core paths anymore.
+* Ne fusionnera plus le chemin de app avec les chemins du coeur.
 
 App::objects()
 ~~~~~~~~~~~~~~
 
-* Now supports plugins, App::objects('Users.Model') will return the models in
-  plugin Users.
-* Returns array() instead of false for empty results or invalid types.
-* Does not return core objects anymore, App::objects('core') will return array().
-* Returns the complete class name.
+* Supporte maintenant les plugins, App::objects('Utilisateurs.Model') va retourner les modèles dans
+  le plugin Utilisateurs.
+* Retourne array() au lieu de false pour les résultats vides ou les types invalides.
+* Ne retourne plus les objets du coeur, App::objects('core') retournera array().
+* Retourne le nom complet de la classe.
 
-App class lost the following properties, use method App::path() to access their value
+La classe App perd les propriétés suivantes, utilisez la méthode App::path() pour accéder à leur valeur
 
 * App::$models
 * App::$behaviors
@@ -405,86 +410,89 @@ App class lost the following properties, use method App::path() to access their 
 App::import()
 ~~~~~~~~~~~~~
 
-* No longer looks for classes recursively, it strictly uses the values for the
-  paths defined in App::build().
-* Will not be able to load App::import('Component', 'Component') use
+* Ne recherche plus les classes de façon récursive, il utilise strictement les
+  valeurs pour les chemins définies dans App::build().
+* Ne sera plus capable de charger App::import('Component', 'Component') utilisez
   App::uses('Component', 'Controller');
-* Using App::import('Lib', 'CoreClass') to load core classes is no longer
-  possible.
-* Importing a non-existent file, supplying a wrong type or package name, or null
-  values for $name and $file parameters will result in a false return value.
-* App::import('Core', 'CoreClass') is no longer supported, use App::uses()
-  instead and let the class autoloading do the rest.
-* Loading Vendor files does not look recursively in the vendors folder, it will
-  also no longer convert the file to underscored as it did in the past.
+* Utiliser App::import('Lib', 'CoreClass') pour charger les classes du coeur n'est 
+  plus possible.
+* Importer un fichier non-existant, fournir un mauvais type ou un mauvais nom de package
+  , ou des valeurs nulles pour les paramètres $name et $file va donner une fausse valeur de
+  retour.
+* App::import('Core', 'CoreClass') n'est plus supporté, utilisez App::uses()
+  à la place et laisser la classe autoloading faire le reste.
+* Charger des fichiers Vendor ne recherchera pas de façon récursive dans les dossiers
+  Vendors, cela ne convertira plus le fichier en underscore comme cela se faisant dans
+  le passé.
 
 App::core()
 ~~~~~~~~~~~
 
-* First parameter is no longer optional, it will always return one path
-* It can't be used anymore to get the vendors paths
-* It will only accept new style package names
+* Le premier paramètres n'est plus optionnel, il retournera toujours un chemin
+* Il ne peut plus être utilisé pour obtenir les chemins des vendors
+* Il acceptera seulement le nouveau style des noms de package
 
-Class loading with App::uses()
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Chargement des Classes avec App::uses()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Although there has been a huge refactoring in how the classes are loaded, in very 
-few occasions you will need to change your application code to respect the way you were 
-used to doing it. The biggest change is the introduction of a new method::
+Bien qu'il y ait eu une re-construction énorme dans la façon de charger les classes,
+dans quelques occasions, vous aurez besoin de changer le code de votre application pour
+respecter la façon que vous aviez l'habitude de faire. Le plus grand changement est 
+l'introduction d'une nouvelle méthode::
 
     <?php
     App::uses('AuthComponent', 'Controller/Component');
 
-We decided the function name should emulate PHP 5.3's ``use`` keyword, just as a way
-of declaring where a classname should be located. The first parameter of
-:php:meth:`App::uses()` is the complete name of the class you intend to load,
-and the second one, the package name (or namespace) where it belongs to. The
-main difference with CakePHP 1.3's :php:meth:`App::import()` is that the former
-won't actually import the class, it will just setup the system so when the class
-is used for the first time it will be located.
+Nous avons décidé que le nom de la fonction devait imiter le mot-clé ``use`` de PHP 5.3, 
+juste pour la façon de déclarer où un nom de classe devait se trouver. Le premier
+paramètre de :php:meth:`App::uses()` est le nom complet de la classe que vous avez 
+l'intention de charger, et le second paramètre, le nom du package (ou espace de noms)
+auquel il appartient. La principale différence avec le :php:meth:`App::import()` de 
+CakePHP 1.3 est que l'actuelle n'importera pas la classe, il configurera juste
+le système pour qu'à la première utilisation de la classe, il sera localisé.
 
-Some examples on using :php:meth:`App::uses()` when migrating from
+Quelques exemples de l'utilisation de :php:meth:`App::uses()` quand on migre de
 :php:meth:`App::import()`::
 
     <?php
     App::import('Controller', 'Pages');
-    // becomes 
+    // devient 
     App::uses('PagesController', 'Controller');
 
     App::import('Component', 'Email');
-    // becomes 
+    // devient 
     App::uses('EmailComponent', 'Controller/Component');
 
     App::import('View', 'Media');
-    // becomes 
+    // devient 
     App::uses('MediaView', 'View');
 
     App::import('Core', 'Xml');
-    // becomes 
+    // devient 
     App::uses('Xml', 'Utility');
 
     App::import('Datasource', 'MongoDb.MongoDbSource')
-    // becomes 
+    // devient 
     App::uses('MongoDbSource', 'MongoDb.Model/Datasource')
 
-All classes that were loaded in the past using ``App::import('Core', $class);``
-will need to be loaded using ``App::uses()`` referring to the correct package.
-See the api to locate the classes in their new folders. Some examples::
+Toutes les classes qui ont été chargées dans le passé utilisant ``App::import('Core', $class);``
+auront besoin d'être chargées en utlisant ``App::uses()`` en référence au bon package.
+Voir l'api pour localiser les classes dans leurs nouveaux dossiers. Quelques exemples::
 
     <?php
     App::import('Core', 'CakeRoute');
-    // becomes 
+    // devient 
     App::uses('CakeRoute', 'Routing/Route');
 
     App::import('Core', 'Sanitize');
-    // becomes
+    // devient
     App::uses('Sanitize', 'Utility');
 
     App::import('Core', 'HttpSocket');
-    // becomes 
+    // devient 
     App::uses('HttpSocket', 'Network/Http');
 
-In contrast to how :php:meth:`App::import()` worked in the past, the new class
+Au contraire de la façon dont fonctionnait :php:meth:`App::import()`, the new class
 loader will not locate classes recursively. This led to an impressive
 performance gain even on develop mode, at the cost of some seldom used features
 that always caused side effects. To be clear again, the class loader will only
