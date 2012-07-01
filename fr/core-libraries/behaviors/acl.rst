@@ -3,72 +3,66 @@ ACL
 
 .. php:class:: AclBehavior()
 
-The Acl behavior provides a way to seamlessly integrate a model
-with your ACL system. It can create both AROs or ACOs
-transparently.
+Le comportement Acl fournit une solution pour intégrer sans souci un modèle dans votre système ACL. Il peut créer à la fois les AROs et les ACOs de manière transparente.
 
-To use the new behavior, you can add it to the $actsAs property of
-your model. When adding it to the actsAs array you choose to make
-the related Acl entry an ARO or an ACO. The default is to create
-ACOs::
+Pour utiliser le nouveau comportement, vous pouvez l'ajouter à la propriété $actsAs de votre modèle. 
+Quand vous l'ajoutez au tableau actsAs, vous choisissez de créer l'entrée Acl correspondante comme un ARO ou un ACO. 
+Par défaut cela crée des AROs::
 
     <?php
-    class User extends AppModel {
+    class Utilisateur extends AppModel {
         public $actsAs = array('Acl' => array('type' => 'requester'));
     }
 
-This would attach the Acl behavior in ARO mode. To join the ACL
-behavior in ACO mode use::
+Ceci attacherait le comportement Acl en mode ARO. Pour joindre le comportement ACL dans un mode ACO, utilisez ::
 
     <?php
     class Post extends AppModel {
         public $actsAs = array('Acl' => array('type' => 'controlled'));
     }
 
-For User and Group models it is common to have both ACO and ARO nodes,
-to achieve this use::
+Pour les modèles d'utilisateur et de groupe il est fréquent d'avoir à la fois 
+les noeuds ACO et ARO, pour permettre cela utilisez::
+
 
     <?php
-    class User extends AppModel {
+    class Utilisateur extends AppModel {
         public $actsAs = array('Acl' => array('type' => 'both'));
     }
 
-You can also attach the behavior on the fly like so::
+Vous pouvez aussi attacher le comportement à la volée, comme ceci ::
 
     <?php
     $this->Post->Behaviors->attach('Acl', array('type' => 'controlled'));
 
-.. versionchanged:: 2.1
-    You can now safely attach AclBehavior to AppModel. Aco, Aro and AclNode
-    now extend Model instead of AppModel, which would cause an infinite loop.
-    If your application depends on having those models to extend AppModel for some reason,
-    then copy AclNode to your application and have it extend AppModel again.
+.. changement de version:: 2.1
+    Vous pouvez maintenenant en toute sécurité attacher le comportement Acl (AclBehavior) à votre Appmodel.
+    Aco, Aro et Noeud Acl (AclNode) son dorénavent des extensions du Modèle et non plus de l'AppModel, 
+    ceci pouvait causer in boucle infinie.  
+    Si pour plusieurs raisons, votre application est dépendante de l'utilisation des modèles comme extension 
+    de l'AppModel alors copier Le Noeud Acl (AclNode) dans votre application et faite le extension de l'AppModel à nouveau
+    
 
+Utiliser le comportement Acl
+============================
 
-Using the AclBehavior
-=====================
+La plupart des tâches du comportement Acl sont réalisées de façon transparente, dans le callback afterSave() de votre modèle. Cependant, son utilisation nécessite que votre Modèle ait une méthode parentNode() définie. Ceci est utilisé par le comportement Acl, pour déterminer les relations parent->enfant. Une méthode parentNode() de modèle doit retourner null ou une référence au Modèle parent::
 
-Most of the AclBehavior works transparently on your Model's
-afterSave(). However, using it requires that your Model has a
-parentNode() method defined. This is used by the AclBehavior to
-determine parent->child relationships. A model's parentNode()
-method must return null or return a parent Model reference::
 
     <?php
     function parentNode() {
         return null;
     }
 
-If you want to set an ACO or ARO node as the parent for your Model,
-parentNode() must return the alias of the ACO or ARO node::
+Si vous voulez définir un nœud ACO ou ARO comme parent pour votre Modèle, parentNode() doit retourner l'alias du nœud ACO ou ARO::
 
     <?php
     function parentNode() {
-        return 'root_node';
+        return 'noeud_racine';
     }
 
-A more complete example. Using an example User Model, where User
-belongsTo Group::
+Voici un exemple plus complet. Utilisons un modèle exemple Utilisateur, avec Utilisateur belongsTo Groupe::
+
 
     <?php
     function parentNode() {
@@ -79,51 +73,45 @@ belongsTo Group::
         if (empty($this->data)) {
             $data = $this->read();
         }
-        if (!$data['User']['group_id']) {
+        if (!$data['Utilisateur']['group_id']) {
             return null;
         } else {
-            return array('Group' => array('id' => $data['User']['group_id']));
+            return array('Group' => array('id' => $data['Utilisateur']['group_id']));
         }
     }
 
-In the above example the return is an array that looks similar to
-the results of a model find. It is important to have the id value
-set or the parentNode relation will fail. The AclBehavior uses this
-data to construct its tree structure.
+Dans l'exemple ci-dessus, le retour est un tableau qui ressemble aux résultats d'un find de modèle. Il est important d'avoir une valeur d'id définie ou bien la relation parentNode échouera. Le comportement Acl utilise ces données pour construire son arborescense.
 
 node()
 ======
 
-The AclBehavior also allows you to retrieve the Acl node associated
-with a model record. After setting $model->id. You can use
-$model->node() to retrieve the associated Acl node.
+Le Comportement Acl vous permet aussi de récupérer le nœud Acl associé à un enregistrement de modèle. Après avoir défini $model->id. Vous pouvez utiliser $model->node() pour récupérer le nœud Acl associé.
 
-You can also retrieve the Acl Node for any row, by passing in a
-data array::
+Vous pouvez aussi récupérer le nœud Acl de n'importe quelle ligne, en passant un tableau de données en paramètre::
+
+    <?php
+    $this->Utilisateur->id = 1;
+    $noeud = $this->Utilisateur->node();
+
+    $utilisateur = array('Utilisateur' => array(
+        'id' => 1
+    ));
+    $noeud = $this->Utilisateur->node($utilisateur);
+
+Ces deux exemples retourneront la même information de nœud Acl.
+
+Si vous avez paramétrés le comportement Acl (AclBehavior) pour créér à la fois 
+les noeuds ARO et ACO, vous devez spécifier quel type de noeud vous desirez::
 
     <?php
     $this->User->id = 1;
-    $node = $this->User->node();
+    $noeud = $this->Utilisateur->node(null, 'Aro');
 
-    $user = array('User' => array(
+    $utilisateur = array('Utilisateur' => array(
         'id' => 1
     ));
-    $node = $this->User->node($user);
-
-Will both return the same Acl Node information.
-
-If you had setup AclBehavior to create both ACO and ARO nodes, you need to
-specify which node type you want::
-
-    <?php
-    $this->User->id = 1;
-    $node = $this->User->node(null, 'Aro');
-
-    $user = array('User' => array(
-        'id' => 1
-    ));
-    $node = $this->User->node($user, 'Aro');
+    $noeud = $this->Utilisateur->node($utilisateur, 'Aro');
 
 .. meta::
-    :title lang=en: ACL
-    :keywords lang=en: group node,array type,root node,acl system,acl entry,parent child relationships,model reference,php class,aros,group id,aco,aro,user group,alias,fly
+    :title lang=fr: ACL
+    :keywords lang=fr: group node,array type,root node,acl system,acl entry,parent child relationships,model reference,php class,aros,group id,aco,aro,user group,alias,fly
