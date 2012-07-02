@@ -91,37 +91,37 @@ que le find() retourne.
 Par exemple, pour ne recuperer que les informations relative au post vous pouvez
 faire cela::
 
-<?php
-$this->Post->contain();
-$this->Post->find('all');
+    <?php
+    $this->Post->contain();
+    $this->Post->find('all');
 
 Vous pouvez utiliser la magie de "Containable" à l'interieur d'un appel find():: 
 
-<?php
-$this->Post->find('all', array('contain' => false));
+    <?php
+    $this->Post->find('all', array('contain' => false));
 
 Après avoir fait cela, vous vous retrouvez avec quelque chose de plus concis::
 
-[0] => Array
-        (
-            [Post] => Array
-                (
-                    [id] => 1
-                    [titre] => Premier article
-                    [contenu] => aaa
-                    [created] => 2008-05-18 00:00:00
-                )
-        )
-[1] => Array
-        (
-            [Post] => Array
-                (
-                    [id] => 2
-                    [titre] => Second article
-                    [contenu] => bbb
-                    [created] => 2008-05-19 00:00:00
-                )
-        )
+    [0] => Array
+            (
+                [Post] => Array
+                    (
+                        [id] => 1
+                        [titre] => Premier article
+                        [contenu] => aaa
+                        [created] => 2008-05-18 00:00:00
+                    )
+            )
+    [1] => Array
+            (
+                [Post] => Array
+                    (
+                        [id] => 2
+                        [titre] => Second article
+                        [contenu] => bbb
+                        [created] => 2008-05-19 00:00:00
+                    )
+            )
 
 Ceci n'est pas nouveau: en fait, vous pouvez obtenir le même résultat sans le ``comportement
 Containable`` en faisant quelque chose comme ::
