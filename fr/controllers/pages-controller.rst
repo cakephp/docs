@@ -2,7 +2,7 @@ Le Contrôleur Pages
 ###################
 
 Le cœur de CakePHP est livré avec un contrôleur par défaut ``PagesController.php``.
-C'est un contrôleur simple et optionnel pour rendre de contenu statique.
+C'est un contrôleur simple et optionnel pour rendre un contenu statique.
 La page d'accueil que vous voyez juste après l'installation est d'ailleurs 
 générée à l'aide de ce contrôleur. Ex : Si vous écrivez un fichier de vue 
 ``app/View/Pages/a_propos.ctp``, vous pouvez y accéder en utilisant l'url 

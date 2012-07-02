@@ -642,121 +642,122 @@ Inflector
 CakeSession
 -----------
 
-CakeSession is now a fully static class, both ``SessionHelper`` and
-``SessionComponent`` are wrappers and sugar for it.  It can now easily be used
-in models or other contexts.  All of its methods are called statically.
+CakeSession est maintenant une classe complètement statique, les deux ``SessionHelper`` 
+et ``SessionComponent`` sont des wrappers et du sucre pour celui-ci. Il peut facilement être
+utilisé dans les modèles ou dans d'autres contextes. Toutes ses méthodes sont appelées
+de façon statique.
 
-Session configuration has also changed :doc:`see the session section for more
-information </development/sessions>`
+La configuration de Sessiona aussi changé :doc:`Voir la section session pour plus
+d'information </development/sessions>`
 
 HttpSocket
 ----------
 
-- HttpSocket doesn't change the header keys. Following other places in core,
-  the HttpSocket does not change the headers. :rfc:`2616` says that headers are case
-  insensitive, and HttpSocket preserves the values the remote host sends.
-- HttpSocket returns responses as objects now. Instead of arrays, HttpSocket
-  returns instances of HttpResponse.  See the :php:class:`HttpSocket`
-  documentation for more information.
-- Cookies are stored internally by host, not per instance. This means that, if
-  you make two requests to different servers, cookies from domain1 won't be sent
-  to domain2.  This was done to avoid possible security problems.
+- HttpSocket ne change pas les clés d'en-tête. Suivant les autres endroits dans le coeur, 
+  le HttpSocket ne change pas les headers. :rfc:`2616` dit que les en-têtes sont insensibles
+  à la casse, et HttpSocket préserve les valeurs envois de l'hôte distant.
+- HttpSocket retourne maintenant les réponses en objets. Au lieu des tableaux, HttpSocket
+  retourne les instances de HttpResponse. Voir la documentation de :php:class:`HttpSocket`
+  pour plus d'informations.
+- Les cookies sont stockés en interne par l'hôte, pas par instance. Cela signifie que, si
+  vous faîtes deux requêtes à différents serveurs, les cookies du domaine1 ne seront pas 
+  envoyés au domaine2. Cela a été fait pour éviter d'éventuels porblèmes de sécurité.
 
 
 Helpers
 =======
 
-Constructor changed
--------------------
+Changement du constructeur
+--------------------------
 
-In order to accommodate View being removed from the ClassRegistry, the signature
-of Helper::__construct() was changed.  You should update any subclasses to use
-the following::
+Afin de prendre en considération le fait que View a été retiré de la ClassRegistry, la signature
+du Helper::__construct() a été changée. Vous devez mettre à jour toutes les sous-classes pour
+utiliser ce qui suit::
 
     <?php
     function __construct(View $View, $settings = array())
 
-When overriding the constructor you should always call `parent::__construct` as
-well.  `Helper::__construct` stores the view instance at `$this->_View` for
-later reference.  The settings are not handled by the parent constructor.
+Quand vous écrasez le constructeur, vous devez toujours aussi appeler `parent::__construct`.
+`Helper::__construct` stocke l'instance de vue dans `$this->_View` pour une référence future.
+Les configurations ne sont pas gérées par le constructeur parent.
 
-HelperCollection added
-----------------------
+HelperCollection ajouté
+-----------------------
 
-After examining the responsibilities of each class involved in the View layer,
-it became clear that View was handling much more than a single task. The
-responsibility of creating helpers is not central to what View does, and was
-moved into HelperCollection. HelperCollection is responsible for loading and
-constructing helpers, as well as triggering callbacks on helpers.  By default,
-View creates a HelperCollection in its constructor, and uses it for subsequent
-operations.  The HelperCollection for a view can be found at `$this->Helpers`
+Après un examen des responsabilités de chaque classe impliquée dans la couche Vue, il nous 
+est clairement apparu que la Vue gérait bien plus qu'une unique tâche. La responsabilité
+de créer les helpers n'est pas centrale dans ce que la Vue fait, et a été déplacée dans le
+HelperCollection. HelperCollection est responsable du chargement et de la construction des
+helpers, ainsi que de déclencher les callbacks sur les helpers. Par défaut, la Vue crée
+un HelperCollection dans son constructeur, et l'utilise pour des opérations ultérieures.
+L'HelperCollection pour une vue peut être trouvé dans `$this->Helpers`.
 
-The motivations for refactoring this functionality came from a few issues.
+Les motivations pour la reconstruction de cette fonctionnalité vient de quelques soucis.
 
-* View being registered in ClassRegistry could cause registry poisoning issues
-  when requestAction or the EmailComponent were used.
-* View being accessible as a global symbol invited abuse.
-* Helpers were not self contained.  After constructing a helper, you had to
-  manually construct several other objects in order to get a functioning object.
+* La Vue qui était enregistrée dans ClassRegistry pouvait causer des problèmes emposionnés 
+  d'enregistrement quand requestAction ou l'EmailComponent était utilisé.
+* La Vue accessible comme un symbole global entraînait des abus.
+* Les Helpers n'étaient pas contenus eux-mêmes. Après avoir construit un helper, vous deviez 
+  construire manuellement plusieurs autres objets afin d'obtenir un objet fonctionnant.
 
-You can read more about HelperCollection in the
-:doc:`/core-libraries/collections` documentation.
+Vous pouvez en lire plus sur HelperCollection dans la documentation
+:doc:`/core-libraries/collections`.
 
-Deprecated properties
+Propriétés dépréciées
 ---------------------
 
-The following properties on helpers are deprecated, you should use the request
-object properties or Helper methods instead of directly accessing these
-properties as they will be removed in a future release.
+Les propriétés suivantes sur les helpers sont depréciées, vous devez utiliser les propriétés 
+de l'objet request ou les méthodes de l'Helper plutôt que accéder directement à ces
+propriétés puisqu'elles seront supprimées dans une version future.
 
--  ``Helper::$webroot`` is deprecated, use the request object's webroot
-   property.
--  ``Helper::$base`` is deprecated, use the request object's base property.
--  ``Helper::$here`` is deprecated, use the request object's here property.
--  ``Helper::$data`` is deprecated, use the request object's data property.
--  ``Helper::$params`` is deprecated, use the ``$this->request`` instead.
+-  ``Helper::$webroot`` est depréciée, utilisez la propriété webroot de l'objet request.
+-  ``Helper::$base`` est depréciée, utilisez la propriété base de l'objet request.
+-  ``Helper::$here`` est depréciée, utilisez la propriété here de l'objet request.
+-  ``Helper::$data`` est depréciée, utilisez la propriété data de l'objet request.
+-  ``Helper::$params`` est depréciée, utilisez ``$this->request`` à la place.
 
-XmlHelper, AjaxHelper and JavascriptHelper removed
---------------------------------------------------
+XmlHelper, AjaxHelper et JavascriptHelper retirés
+-------------------------------------------------
 
-The AjaxHelper and JavascriptHelper have been removed as they were deprecated in
-version 1.3. The XmlHelper was removed, as it was made obsolete and redundant
-with the improvements to :php:class:`Xml`.  The ``Xml`` class should be used to
-replace previous usage of XmlHelper.
+Les Helpers AjaxHelper et JavascriptHelper ont été retirés puisqu'ils étaient dépréciés dans 
+la version 1.3. Le Helper XmlHelper a été retiré, puisqu'il était obsolète et superflu avec les
+améliorations de :php:class:`Xml`. La classe ``Xml`` doit être utiliser pour remplacer les 
+utilisations anciennes de XmlHelper.
 
-The AjaxHelper, and JavascriptHelper are replaced with the JsHelper and HtmlHelper.
+Les Helpers AjaxHelper et JavascriptHelper sont remplacés par les Helpers JsHelper et HtmlHelper.
 
 JsHelper
 --------
 
--  ``JsBaseEngineHelper`` is now abstract, you will need to implement all the
-   methods that previously generated errors.
+-  ``JsBaseEngineHelper`` est maintenant abstraite, vous devrez implémenter toutes les méthodes
+qui généraient avant des erreurs.
 
 PaginatorHelper
 ---------------
 
--  ``PaginatorHelper::sort()`` now takes the title and key arguments in the
-   reverse order. $key will always be first now. This was done to prevent
-   needing to swap arguments when adding a second one.
--  PaginatorHelper had a number of changes to the paging params used internally.
-   The default key has been removed.
--  PaginatorHelper now supports generating links with paging parameters in the
-   querystring.
+-  ``PaginatorHelper::sort()`` prend maintenant les arguments titre et key dans l'ordre inversé.
+   $key sera maintenant toujours le premier. Cela a été fait pour prévenir les besoins d'échange
+   des arguments lors de l'ajout d'un second argument.
+-  PaginatorHelper avait un nombre de changements pour les paramètres de pagination utilisé en 
+   interne.
+   Le key par défaut a été retiré.
+-  PaginatorHelper supporte maintenant la génération des liens avec les paramètres de pagination 
+  dans querystring.
 
-There have been a few improvements to pagination in general. For more
-information on that you should read the new pagination features page.
+Il y a eu quelques améliorations dans pagination en général. Pour plus d'informations sur cela,
+vous devriez lire la page des nouvelles fonctionnalités de pagination.
 
 FormHelper
 ----------
 
-$selected parameter removed
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Le paramètre $selected retiré
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``$selected`` parameter was removed from several methods in ``FormHelper``.
-All methods now support a ``$attributes['value']`` key now which should be used
-in place of ``$selected``. This change simplifies the ``FormHelper`` methods,
-reducing the number of arguments, and reduces the duplication that ``$selected``
-created. The effected methods are:
+Le paramètre ``$selected`` a été retiré de plusieurs méthodes dans ``FormHelper``.
+Toutes les méthodes supportent maintenant une clé ``$attributes['value']`` qui 
+doit être utilisée à la place de ``$selected``. Ce changement simplifie les méthodes
+``FormHelper``, réduit le nombre d'arguments, et réduit les répétitions que ``$selected``
+créait. Les méthodes effectives sont:
 
 -  FormHelper::select()
 -  FormHelper::dateTime()
@@ -767,184 +768,184 @@ created. The effected methods are:
 -  FormHelper::minute()
 -  FormHelper::meridian()
 
-Default urls on forms is the current action
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Les urls par défaut dans les formulaires sont l'action courante
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The default url for all forms, is now the current url including passed, named,
-and querystring parameters. You can override this default by supplying
-``$options['url']`` in the second parameter of ``$this->Form->create()``.
+L'url par défaut pour tous les formulaires est maintenant l'url courante, incluant les 
+paramètres passés, nommés et querystring. Vous pouvez écraser ce réglage par défaut en 
+fournissant ``$options['url']`` dans le second paramètre de ``$this->Form->create()``.
 
 FormHelper::hidden()
 ~~~~~~~~~~~~~~~~~~~~
 
-Hidden fields no longer remove the class attribute. This means that if there are
-validation errors on hidden fields, the ``error-field`` classname will be
-applied.
+Les champs cachés n'enlèvent plus la classe attribut. Cela signifie que si il y a des erreurs 
+de validation sur des champs cachés, le nom de classe ``error-field`` sera appliqué.
 
 CacheHelper
 -----------
 
-CacheHelper has been fully decoupled from View, and uses helper callbacks to
-generate caches. You should remember to place CacheHelper after other helpers
-that modify content in their ``afterRender`` and ``afterLayout`` callbacks. If
-you don't some changes will not be part of the cached content.
+Le CacheHelper a été complètement découplé de la Vue, et les utilisations des callbacks du Helper
+pour générer des caches. Vous devez retenir de placer CacheHelper après les autres helpers
+qui modifient le contenu dans les callbacks ``afterRender`` et ``afterLayout``. Si vous ne le
+faîtes pas, certains changements ne feront pas parti du contenu récupéré.
 
-CacheHelper also no longer uses ``<cake:nocache>`` to indicate un-cached
-regions. Instead it uses special HTML/XML comments. ``<!--nocache-->`` and
-``<!--/nocache-->``. This helps CacheHelper generate valid markup and still
-perform the same functions as before. You can read more CacheHelper and View
-changes.
+CacheHelper n'utilise également plus ``<cake:nocache>`` pour indiquer les régions non mises
+en cache. A la place, il utilise les commentaires spéciaux HTML/XML. ``<!--nocache-->`` et
+``<!--/nocache-->``. Cela aide CacheHelper à générer des balises valides et continue à effectuer
+les mêmes fonctions qu'avant. Vous pouvez en lire plus sur CacheHelper et les changements de Vue.
 
-Helper Attribute format more flexible
--------------------------------------
+Les formats des attributs d'Helper plus flexible
+------------------------------------------------
 
-The Helper class has more 3 protected attributes:
+La classe Helper a 3 attributs protégés:
 
-* ``Helper::_minimizedAttributes``: array with minimized attributes (ie:
+* ``Helper::_minimizedAttributes``: tableau avec des attributs minimums (ex:
   ``array('checked', 'selected', ...)``);
-* ``Helper::_attributeFormat``: how attributes will be generated (ie:
+* ``Helper::_attributeFormat``: comment les attributs vont être générés (ex:
   ``%s="%s"``);
-* ``Helper::_minimizedAttributeFormat``: how minimized attributes will be
-  generated: (ie ``%s="%s"``)
+* ``Helper::_minimizedAttributeFormat``: comment les attributs minimums vont être
+  générés: (ie ``%s="%s"``)
 
-By default the values used in CakePHP 1.3 were not changed. But now you can
-use boolean attributes from HTML, like ``<input type="checkbox" checked />``. To
-this, just change ``$_minimizedAttributeFormat`` in your AppHelper to ``%s``.
+Par défaut, les valeurs utilisées dans CakePHP 1.3 n'ont pas été changées. Mais vous
+pouvez maintenant utiliser les attributs boléens de HTML, comme 
+``<input type="checkbox" checked />``. Pour cela, changez juste``$_minimizedAttributeFormat``
+dans votre AppHelper en ``%s``.
 
-To use with Html/Form helpers and others, you can write::
+Pour utiliser avec les helpers Html/Form et les autres, vous pouvez écrire::
 
-    $this->Form->checkbox('field', array('checked' => true, 'value' => 'some_value'));
+    $this->Form->checkbox('field', array('checked' => true, 'value' => 'une_valeur'));
 
-Other facility is that minimized attributes can be passed as item and not as
-key. For example::
+Une autre aptitude est que les attributs minimums peuvent être passés en item et pas en clé.
+Par exemple::
 
-    $this->Form->checkbox('field', array('checked', 'value' => 'some_value'));
+    $this->Form->checkbox('field', array('checked', 'value' => 'une_valeur'));
 
-Note that ``checked`` have a numeric key.
+Notez que ``checked`` a une clé numérique.
 
 Controller
 ==========
 
-- Controller's constructor now takes two parameters. A CakeRequest, and 
-  CakeResponse objects. These objects are used to populate several deprecated 
-  properties and will be set to $request and $response inside the controller.
-- ``Controller::$webroot`` is deprecated, use the request object's webroot
-  property.
-- ``Controller::$base`` is deprecated, use the request object's base property.
-- ``Controller::$here`` is deprecated, use the request object's here property.
-- ``Controller::$data`` is deprecated, use the request object's data property.
-- ``Controller::$params`` is deprecated, use the ``$this->request`` instead.
-- ``Controller::$Component`` has been moved to ``Controller::$Components``.  See
-  the :doc:`/core-libraries/collections` documentation for more information.
-- ``Controller::$view`` has been renamed to ``Controller::$viewClass``.
-  ``Controller::$view`` is now used to change which view file is rendered.
-- ``Controller::render()`` now returns a CakeResponse object.
+- Le constructeur du Contrôleur prend maintenant deux paramètres. Les objets 
+  CakeRequest et CakeResponse. Ces objets sont utilisés pour remplir plusieurs
+  propriétés dépreciéeset seront mis dans $request et $response à l'intérieur du
+  contrôleur.
+- ``Controller::$webroot`` est depréciée, utilisez la propriété webroot de l'objet request.
+- ``Controller::$base`` est depréciée, utilisez la propriété base de l'objet request.
+- ``Controller::$here`` est depréciée, utilisez la propriété here de l'objet request.
+- ``Controller::$data`` est depréciée, utilisez la propriété data de l'objet request.
+- ``Controller::$params`` est depréciée, utilisez ``$this->request`` à la place.
+- ``Controller::$Component`` a été déplacée vers ``Controller::$Components``. Voir
+  la documentation :doc:`/core-libraries/collections` pour plus d'informations.
+- ``Controller::$view`` a été renommée en ``Controller::$viewClass``.
+  ``Controller::$view`` est maintenant utilisée pour changer le fichier vue qui doit être rendu.
+- ``Controller::render()`` retourne maintenant un objet CakeResponse.
 
-The deprecated properties on Controller will be accessible through a ``__get()``
-method. This method will be removed in future versions, so it's recommended that
-you update your application.
+Les propriétés depréciées dans Controller seront accessibles à travers la méthode ``__get()``.
+Cette méthode va être retirée dans les versions futures, donc il est recommandé que vous
+mettiez votre application à jour.
 
-Controller now defines a maxLimit for pagination. This maximum limit is set to
-100, but can be overridden in the $paginate options.
-
+Le Controller définit maintenant une limite Max (maxLimit) pour la pagination. Cette limite maximale
+est mise à 100, mais peut être écrasée dans les options de $paginate.
 
 Pagination
 ----------
 
-Pagination has traditionally been a single method in Controller, this created a
-number of problems though. Pagination was hard to extend, replace, or modify. For
-2.0 pagination has been extracted into a component. :php:meth:`Controller::paginate()` still
-exists, and serves as a convenience method for loading and using the
+La Pagination était traditionnellement une unique méthode dans le Contôleur, cela créait pourtant un
+nombre de problèmes. La Pagination était difficile à étendre, remplacer et modifier. Dans 2.0, 
+la pagination a été extraite dans un composant. :php:meth:`Controller::paginate()` existe
+toujours, et sert en tant que méthode commode pour le chargement et en utilisant le
 :php:class:`PaginatorComponent`.
 
-For more information on the new features offered by pagination in 2.0, see the
-:doc:`/core-libraries/components/pagination` documentation.
+Pour plus d'informations sur les nouvelles fonctionnalités offertes par la pagination dans 2.0, voir
+la documentation :doc:`/core-libraries/components/pagination`.
 
-View
+Vue
 ====
 
-View no longer registered in ClassRegistry
+La Vue n'est plus enregistrée dans ClassRegistry
 ------------------------------------------
 
-The view being registered ClassRegistry invited abuse and affectively created a
-global symbol.  In 2.0 each Helper receives the current `View` instance in its
-constructor.  This allows helpers access to the view in a similar fashion as in
-the past, without creating global symbols.  You can access the view instance at
-`$this->_View` in any helper.
+La vue étant enregistrée dans ClassRegistry entraînait des abus et créait effectivement
+un symbole global. Dans 2.0 chaque Helper reçoit l'instance `Vue` courante dans son
+constructeur. Cela autorise l'accès aux vues pour les helpers de la même façon que dans
+le passé, sans crées de symboles globaux. Vous pouvez accéder à l'instance de vue
+dans `$this->_View` dans n'importe quel helper.
 
-Deprecated properties
+Propriétés dépréciées
 ---------------------
 
--  ``View::$webroot`` is deprecated, use the request object's webroot property.
--  ``View::$base`` is deprecated, use the request object's base property.
--  ``View::$here`` is deprecated, use the request object's here property.
--  ``View::$data`` is deprecated, use the request object's data property.
--  ``View::$params`` is deprecated, use the ``$this->request`` instead.
--  ``View::$loaded`` has been removed. Use the ``HelperCollection`` to access
-   loaded helpers.
-- ``View::$model`` has been removed. This behavior is now on :php:class:`Helper`
-- ``View::$modelId`` has been removed. This behavior is now on
+-  ``View::$webroot`` est depréciée, utilisez la propriété webroot de l'objet request.
+-  ``View::$base`` est depréciée, utilisez la propriété base de l'objet request.
+-  ``View::$here`` est depréciée, utilisez la propriété here de l'objet request.
+-  ``View::$data`` est depréciée, utilisez la propriété data de l'objet request.
+-  ``View::$params`` est depréciée, utilisez ``$this->request`` à la place.
+-  ``View::$loaded`` a été retirée. Utilisez ``HelperCollection`` pour accéder
+   aux helpers chargés.
+- ``View::$model`` a été retirée. Ce behavior est maintenant dans :php:class:`Helper`
+- ``View::$modelId`` a été retirée. Ce behavior est maintenant dans
   :php:class:`Helper`
-- ``View::$association`` has been removed. This behavior is now on
+- ``View::$association`` a été retiré. Ce behavior est maintenant dans
   :php:class:`Helper`
-- ``View::$fieldSuffix`` has been removed. This behavior is now on
+- ``View::$fieldSuffix`` a été retiré. Ce behavior est maintenant dans
   :php:class:`Helper`
-- ``View::entity()`` has been removed. This behavior is now on
+- ``View::entity()`` a été retiré. Ce behavior est maintenant dans
   :php:class:`Helper`
--  ``View::_loadHelpers()`` has been removed, used ``View::loadHelpers()``
+-  ``View::_loadHelpers()`` a été retiré, utilisez ``View::loadHelpers()``
    instead.
--  How ``View::element()`` uses caching has changed, see below for more
-   information.
--  View callbacks have been shifted around, see below for more information
--  API for ``View::element()`` has changed. Read here for more info.
+-  La façon dont ``View::element()`` utilise le cache a changé, voir en-dessous
+   pour plus d'informations.
+-  Les callbacks de Vue ont été  transférés, voir en-dessous pour plus d'informations.
+-  L'API pour ``View::element()`` a changé. Lire ici pour plus d'informations.
 
-The deprecated properties on View will be accessible through a ``__get()``
-method. This method will be removed in future versions, so it's recommended that
-you update your application.
+Les propriétés depréciées de Vue seront accessibles à travers une méthode ``__get()``.
+Cette méthode va être retirée dans les versions futures, ainsi il est recommandé 
+que vous mettiez à jour votre application.
 
-Removed methods
----------------
+Méthodes retirées
+-----------------
 
-* ``View::_triggerHelpers()`` Use ``$this->Helpers->trigger()`` instead.  
-* ``View::_loadHelpers()`` Use ``$this->loadHelpers()`` instead.  Helpers now lazy
-  load their own helpers.
+* ``View::_triggerHelpers()`` Utilisez ``$this->Helpers->trigger()`` à la place.
+* ``View::_loadHelpers()`` Utilisez ``$this->loadHelpers()`` à la place. Les Helpers
+  chargent maintenant facilement leurs propres helpers.
 
 Added methods
 -------------
 
-* ``View::loadHelper($name, $settings = array());`` Load a single helper.
-* ``View::loadHelpers()`` Loads all the helpers indicated in ``View::$helpers``.
+* ``View::loadHelper($name, $settings = array());`` Charge un unique helper.
+* ``View::loadHelpers()`` charge tous les helpers indiqués dans ``View::$helpers``.
 
 View->Helpers
 -------------
 
-By default View objects contain a :php:class:`HelperCollection` at ``$this->Helpers``.
+Par défaut, les objets Vue contiennent un :php:class:`HelperCollection` dans ``$this->Helpers``.
 
-Themes
+Thèmes
 ------
 
-To use themes in your Controller you no longer set ``var $view = 'Theme';``. 
-Use ``public $viewClass = 'Theme';`` instead.
+Pour utiliser les thèmes dans vos Contrôleurs, vous n'avez plus à mettre ``var $view = 'Theme';``. 
+Utilisez ``public $viewClass = 'Theme';`` à la place.
 
-Callback positioning changes
-----------------------------
+Changements de positionnement des callbacks
+-------------------------------------------
 
-beforeLayout used to fire after scripts_for_layout and content_for_layout were
-prepared. In 2.0, beforeLayout is fired before any of the special variables are
-prepared, allowing you to manipulate them before they are passed to the layout.
-The same was done for beforeRender. It is now fired well before any view
-variables are manipulated. In addition to these changes, helper callbacks always
-receive the name of the file about to be rendered. This combined with helpers
-being able to access the view through ``$this->_View`` and the current view
-content through ``$this->_View->output`` gives you more power than ever before.
+beforeLayout utilisé pour se déclencher après scripts_for_layout et 
+content_for_layout a été préparé. Dans 2.0, beforeLayout est tiré avant
+que toute variable spéciale soit préparée, vous autorisant à les manipuler
+avant qu'elles soient passées au layout.
+La même chose a été faite pour beforeRender. Il est maintenant tiré bien avant 
+que toute variable soit manipulée. En plus de ces changements, les callbacks
+des helpers reçoivent toujours le nom du fichier qui est sur le point d'être
+rendu. Ceci, combiné avec le fait que les helpers soient capables d'accéder à 
+la vue à travers ``$this->_View`` et la vue courante du contenu à travers
+``$this->_View->output`` vous donne plus de puissance qu'avant.
 
-Helper callback signature changes
----------------------------------
+La signature du callback Helper change
+--------------------------------------
 
-Helper callbacks now always get one argument passed in. For beforeRender and
-afterRender it is the view file being rendered. For beforeLayout and afterLayout
-it is the layout file being rendered. Your helpers function signatures should
-look like::
+Les callbacks de Helper récupèrent maintenant toujours un argument passé à l'intérieur.
+Pour BeforeRender et afterRender, c'est le fichier vue qui est rendu.and
+Pour beforeLayout et afterLayout, c'est le fichier layout qui est rendu
+Vos signatures de fonction des helpers doivent ressembler à cela::
 
     <?php
     function beforeRender($viewFile) {
@@ -964,178 +965,180 @@ look like::
     }
 
 
-Element caching, and view callbacks have been changed in 2.0 to help provide you
-with more flexibility and consistency. :doc:`Read more about those
-changes </views>`.
+L'élement attrapé, et les callbacks de vue ont été changés dans 2.0 pour vous aider
+à vous fournir plus de flexibilité et de cohérence. :doc:`Lire plus sur les 
+changements </views>`.
 
-CacheHelper decoupled
----------------------
+CacheHelper decouplé
+--------------------
 
-In previous versions there was a tight coupling between :php:class:`CacheHelper`
-and :php:class:`View`. For 2.0 this coupling has been removed and CacheHelper
-just uses callbacks like other helpers to generate full page caches.
-
-
-CacheHelper ``<cake:nocache>`` tags changed
--------------------------------------------
-
-In previous versions, CacheHelper used a special ``<cake:nocache>`` tag as
-markers for output that should not be part of the full page cache. These tags
-were not part of any XML schema, and were not possible to validate in HTML or
-XML documents. For 2.0, these tags have been replaced with HTML/XML comments::
-
-    <cake:nocache> becomes <!--nocache-->
-    </cake:nocache> becomes <!--/nocache-->
-
-The internal code for full page view caches has also changed, so be sure to
-clear out view cache files when updating.
-
-MediaView changes
------------------
-
-:php:func:`MediaView::render()` now forces download of unknown file types
-instead of just returning false. If you want you provide an alternate download
-filename you now specify the full name including extension using key 'name' in
-the array parameter passed to the function.
+Dans les versions precédentes, il y avait un couplage étroit entre :php:class:`CacheHelper`
+et :php:class:`View`. Dans 2.0 ce couplage a été retiré et CacheHelper utilise juste
+les callbacks comme les autres helpers pour générer la page complète mise en cache.
 
 
-PHPUnit instead of SimpleTest
+CacheHelper ``<cake:nocache>`` tags changé
+------------------------------------------
+
+Dans les versions précédentes, CacheHelper utilise un tag spécial ``<cake:nocache>`` comme
+marqueurs pour la sortie qui ne devraient pas faire partie de la page entièrement mise
+en cache. Ces tags ne faisaient parti d'aucun schéma XML, et il n'était pas possible de
+valider dans les documents HTML et XML. Dans 2.0, ces tags ont été remplacés avec
+des commentaires HTML/XML::
+
+    <cake:nocache> devient <!--nocache-->
+    </cake:nocache> devient <!--/nocache-->
+
+Le code interne pour la page vue complète mise en cache a aussi été changé, alors
+soyez sur de nettoyer le cache de la vue quand vous mettez à jour.
+
+Changements de MediaView 
+------------------------
+
+:php:func:`MediaView::render()` force maintenant le téléchargement de types de fichiers 
+inconnus à la place de juste retourner false. Si vous le voulez, vous pouvez fournir
+un fichier de téléchargement alternatif, vous spécifiez le nom complet incluant
+l'extension en utilisant la clé 'name' dans le paramètre tableau passé à la fonction.
+
+PHPUnit plutôt que SimpleTest
 =============================
 
-All of the core test cases and supporting infrastructure have been ported to use
-PHPUnit 3.5. Of course you can continue to use SimpleTest in your application by
-replacing the related files. No further support will be given for SimpleTest and
-it is recommended that you migrate to PHPUnit as well. For some additional
-information on how to migrate your tests see PHPUnit migration hints.
+Tous les cas de test du coeur et les infrastructures supportant ont été portés
+pour utiliser PHPUnit 3.5. Bien sur, vous pouvez continuer à utiliser SimpleTest
+dans votre application en remplaçant les fichiers liés. Pas plus de support ne
+sera donné pour SimpleTest et il est recommandé que vous migriez vers PHPUnit aussi.
+Pour plus d'informations sur la façon de migrer vos tests, regardez les allusions
+sur la migration vers PHPUnit.
 
-No more group tests
--------------------
+Plus de tests groupés
+---------------------
 
-PHPUnit does not differentiate between group tests and single test cases in the
-runner. Because of this, the group test options, and support for old style group
-tests has been removed. It is recommended that GroupTests be ported to
-``PHPUnit_Framework_Testsuite`` subclasses. You can find several examples of this
-in CakePHP's test suite. Group test related methods on ``TestManager`` have also
-been removed.
+PHPUnit ne fait pas la différence entre les cas de tests groupés et les cas de tests uniques.
+A cause de cela, les options des tests groupés, et le support pour les tests groupés 
+à l'ancienne ont été retirés. Il est recommandé que les TestGroupés soient portés
+vers les sous-classes de ``PHPUnit_Framework_Testsuite``. Vous pouvez trouver plusieurs
+exemples de ceci dans la suite de test de CakePHP. Les méthodes liées aux tests groupés
+dans ``TestManager`` ont aussi été retirées.
 
-Testsuite shell
+Shell Testsuite
 ---------------
 
-The testsuite shell has had its invocation simplified and expanded. You no
-longer need to differentiate between ``case`` and ``group``. It is assumed that
-all tests are cases. In the past you would have done
-``cake testsuite app case models/post`` you can now do ``cake testsuite app
-Model/Post``.
+Le shell Testsuite a eu ses invocations simplifiées et étendues. Vous n'avez plus besoin
+de faire la différenciation entre ``case`` and ``group``. On suppose que tous les tests
+sont des cas. Dans le passé, vous vous auriez fait ``cake testsuite app case models/post``
+vous pouvez maintenant faire ``cake testsuite app Model/Post``.
 
+Le shell Testsuite a été reconstruit pour utiliser l'outils cli de PHPUnit. Cela supporte
+maintenant toutes les options de ligne de commande supportées par PHPUnit.
+``cake testsuite help`` vous montrera une liste de toutes les modifications possibles.
 
-The testsuite shell has been refactored to use the PHPUnit cli tool. It now
-supports all the command line options supported by PHPUnit.
-``cake testsuite help`` will show you a list of all possible modifiers.
+Modèles
+=======
 
-Models
-======
-
-Model relationships are now lazy loaded. You can run into a situation where
-assigning a value to a nonexistent model property will throw errors::
+Les relations des Modèles sont maintenant facilement chargées. Vous pouvez être dans une situation
+où l'assignation d'une valeur à une propriété non-existante d'un modèle vous enverra les erreurs::
 
     <?php
     $Post->inexistentProperty[] = 'value';
 
-will throw the error "Notice: Indirect modification of overloaded property
-$inexistentProperty has no effect". Assigning an initial value to the property
-solves the issue::
+enverra à traver l'erreur "Notice: Indirect modification of overloaded property
+$inexistentProperty has no effect"(Notice: La modification indirecte d'une propriété 
+$propriétéInexistente n'a aucun effet). Assigner une valeur initiale à la propriété
+résoud le problème::
 
     <?php
     $Post->nonexistentProperty = array();
     $Post->nonexistentProperty[] = 'value';
 
-Or just declare the property in the model class::
+Ou déclare juste la propriété dans la classe modèle::
 
     <?php
     class Post {
         public $nonexistentProperty = array();
     }
 
-Either of these approaches will solve the notice errors.
+Chacune des ses approches résoudra les erreurs de notice.
 
-The notation of ``find()`` in Cake 1.2 is no longer supported. Finds should use
-notation ``$model->find('type', array(PARAMS))`` as in Cake 1.3.
+La notation de ``find()`` dans Cake 1.2 n'est plus supportée. Les Finds devraient
+utiliser la notation ``$model->find('type', array(PARAMS))`` comme dans Cake 1.3.
 
-- ``Model::$_findMethods`` is now ``Model::$findMethods``.  This property is now
-  public and can be modified by behaviors.
+- ``Model::$_findMethods`` est maintenant ``Model::$findMethods``.  Cette propriété est
+  maintenant publique et peut être modifiée par les behaviors.
 
+Objets Database
+---------------
 
+Cake 2.0 introduit quelques changements dans les objets Database qui ne devraient pas affecter
+grandement la compatibilité rétro-active. Le plus grand changement est l'adoption
+de PDO pour la gestion des connections aux bases de données. Si vous utilisez une installation
+vanilla de PHP 5, vous aurez déjà les extensions nécessaires installées, mais il se peut
+que vous dussiez activer les extensions individuelles pour chaque driver que vous
+souhaitez utiliser.
 
-Database objects
-----------------
+Utiliser PDO à travers toutes les BDD nous permettent d'homogénéiser le code pour chacune et
+fournissent un comportement plus fiable et prévisible pour tous les drivers. Il nous a également
+permis d'écrire des tests plus précis et portables pour le code de la base de données liée.
 
-Cake 2.0 introduces some changes to Database objects that should not greatly
-affect backwards compatibility. The biggest one is the adoption of PDO for
-handling database connections. If you are using a vanilla installation of PHP 5
-you will already have installed the needed extensions, but you may need to
-activate individual extensions for each driver you wish to use.
+La première chose qui va probablement manquer aux utilisateurs, est les statistiques 
+"affected rows" et "total rows", comme elles ne sont pas reportées à cause d'un design
+de PDO plus performant et paresseux, il y a des façons de régler ce problème, mais qui sont
+trs spécifiques à chaque base de données. Ces statistiques ne sont pas parties cependant, mais
+pourraient manquer ou même être inexactes pour certains drivers. 
 
-Using PDO across all DBOs let us homogenize the code for each one and provide
-more reliable and predictable behavior for all drivers. It also allowed us to
-write more portable and accurate tests for database related code.
-
-The first thing users will probably miss is the "affected rows" and "total rows"
-statistics, as they are not reported due to the more performant and lazy design
-of PDO, there are ways to overcome this issue but very specific to each
-database. Those statistics are not gone, though, but could be missing or even
-inaccurate for some drivers. 
-
+Une fonctionnalité sympa ajoutée après l'adoption de PDO est la possibilité d'utiliser
+des requêtes préparées avec 
 A nice feature added after the PDO adoption is the ability to use prepared
-statements with query placeholders using the native driver if available.
+statements with query placeholders utilisant le driver natif si il est disponible.
 
-List of Changes
-~~~~~~~~~~~~~~~
+Liste des changements
+~~~~~~~~~~~~~~~~~~~~~
 
-* DboMysqli was removed, we will support DboMysql only.
-* API for DboSource::execute has changed, it will now take an array of query
-  values as second parameter::
+* DboMysqli a été retirée, nous ferons seulement le support de DboMysql.
+* API pour DboSource::execute a changé, elle prendra maintenant un tableau de valeurs requêtées
+  en second paramètre::
 
     <?php
     public function execute($sql, $params = array(), $options = array())
 
-  became::
+  devient::
 
     <?php
     public function execute($sql, $options = array(), $params = array())
 
-  third parameter is meant to receive options for logging, currently it only
-  understands the "log" option.
+  le troisième paramètre est supposé recevoir les options pour se connecter, 
+  third parameter is meant to receive options for logging, en ce moment, il
+  ne comprend que l'option "log".
 
-* DboSource::value() looses its third parameter, it was not used anyways
-* DboSource::fetchAll() now accepts an array as second parameter, to pass values
-  to be bound to the query, third parameter was dropped. Example::
+* DboSource::value() perd son troisième paramètre, il n'était pas utilisé de toute façon.
+* DboSource::fetchAll() accepte maintenant un tableau en second paramètre, pour passer les valeurs
+  devant être liées à la requête, le troisième paramètre a été abandonnée.
+  Exemple::
 
     <?php
     $db->fetchAll('SELECT * from users where username = ? AND password = ?', array('jhon', '12345'));
     $db->fetchAll('SELECT * from users where username = :username AND password = :password', array('username' => 'jhon', 'password' => '12345'));
 
-The PDO driver will automatically escape those values for you.
+Le driver PDO va automatiquement echapper ces valeurs pour vous.
 
-* Database statistics are collected only if the "fullDebug" property of the
-  corresponding DBO is set to true.
-* New method DboSource::getConnection() will return the PDO object in case you
-  need to talk to the driver directly.
-* Treatment of boolean values changed a bit to make it more cross-database
-  friendly, you may need to change your test cases.
-* Postgresql support was immensely improved, it now correctly creates schemas,
-  truncate tables, and is easier to write tests using it.
-* DboSource::insertMulti() will no longer accept sql string, just pass an array
-  of fields and a nested array of values to insert them all at once
-* TranslateBehavior was refactored to use model virtualFields, this makes the
-  implementation more portable.
-* All tests cases with Mysql related stuff were moved to the corresponding
-  driver test case. This left the DboSourceTest file a bit skinny.
-* Transaction nesting support. Now it is possible to start a transaction several
-  times. It will only be committed if the commit method is called the same
-  amount of times.
-* Sqlite support was greatly improved. The major difference with cake 1.3 is
-  that it will only support Sqlite 3.x . It is a great alternative for
-  development apps, and quick at running test cases.
+* Les statistiques de Base de données sont collectées seulement si la propriété "fullDebug" de la BDD correspondante
+  est mise à true.
+* Nouvelle méthode DboSource::getConnection() va retourner l'objet PDO dans le cas où
+  vous auriez besoin de parler directement au driver.
+* Le traitement des valeurs boléennes a changé un peu pour pouvoir faciliter le croisement
+  de base de données, vous devrez peut-être changer vos cas de test. 
+* Le support de Postgresql a été immensément amélioré, il crée maintenant correctement les schémas,
+  vide les tables, et il est plus facile d'écrire des tests en l'utilisant.
+* DboSource::insertMulti() n'acceptera plus les chaînes sql, passez juste un tableau de champs
+  et un tableau imbriqué de valeurs pour les insérer tous en une fois.
+* TranslateBehavior a été reconstruit pour utiliser les vituaFields des modèles, cela rend l'implémentation
+  plus portable.
+* Tous les cas de test avec les choses liées de Mysql ont été déplacés vers le cas de test du driver correspondant.
+  Cela a laissé le fichier DboSourceTest un peu maigre.
+* Support de l'imbrication des transactions. Maintenant il est possible de démarrer une transaction plusieurs fois.
+  Il ne peut être engagé si la méthode de validation est appelé le même nombre de fois.
+* Le support Sqlite a été grandement amélioré. La différence majeure avec cake 1.3 est qu'il
+  ne supportera que Sqlite 3.x. C'est une bonne alternative pour le développement des apps, et rapidement
+  en lançant les cas de test.
 * Boolean column values will be casted to php native boolean type automatically,
   so make sure you update your test cases and code if you were expecting the
   returned value to be a string or an integer: If you had a "published" column in
