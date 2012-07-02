@@ -343,9 +343,9 @@ L'arbre Catégorie serait modifié comme suit:
          -  International
 
 
-  - D'autre catégorie de gens
+   -  D'autre catégorie de gens
 
-  -  Pêche Extreme
+   -  Pêche Extreme
  
 
 Interroger et utiliser vos données
