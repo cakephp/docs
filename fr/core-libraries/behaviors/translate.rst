@@ -250,7 +250,7 @@ Pour dire à un modèle dans quelle langue le contenu devra être sauvé, change
         }
     }
 
-Traduction deTables Multiples
+Traduction de Tables Multiples
 =============================
 
 Si vous attendez beaucoup d'entrée vous vous demandez certainement
@@ -260,7 +260,7 @@ Il y a deux propriétés introduite dans le Comportement Translate
 qui permettent de spécifier quel modèle doit être relié au model
 qui contient les traductions.
 
-These are **$translateModel** and **$translateTable**.
+Les voici **$translateModel** et **$translateTable**.
 
 
 Disons que nous voulons sauver nos traductions pour tous les posts dans la
