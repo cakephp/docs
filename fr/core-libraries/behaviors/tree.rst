@@ -42,12 +42,12 @@ rechercher les enfants directs.
 
 
 
-.. note::
+..note::
 
     Le champ ``parent`` doit être capable d'avoir une valeur NULL ! 
     Cela pourrait sembler fonctionner, si vous donnez juste une valeur parente 
     de zéro aux éléments de premier niveau, mais réordonner l'arbre 
-(et sans doute d'autres opérations) échouera.
+    (et sans doute d'autres opérations) échouera.
    
 
 Utilisation Basique
