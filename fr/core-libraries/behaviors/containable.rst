@@ -11,10 +11,10 @@ construction du modèle. Il agit en modifiant temporairement ou définitivement 
 Pour utiliser le nouveau comportement, vous pouvez l'ajouter à la propriété $actAs de votre modèle::
 
 
-<?php
-class Post extends AppModel {
-    public $actsAs = array('Containable');
-}
+    <?php
+    class Post extends AppModel {
+        public $actsAs = array('Containable');
+    }
 
 Vous pouvez aussi attacher le comportement à la volée::
 
