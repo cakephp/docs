@@ -1,370 +1,328 @@
 Containable
-###########
+########
 
-.. php:class:: ContainableBehavior()
+.. php:class:: ContainableBehavior
 
-A new addition to the CakePHP 1.2 core is the
-``ContainableBehavior``. This model behavior allows you to filter
-and limit model find operations. Using Containable will help you
-cut down on needless wear and tear on your database, increasing the
-speed and overall performance of your application. The class will
-also help you search and filter your data for your users in a clean
-and consistent way.
+Une nouvelle intégration au coeur de CakePHP est le Comportement "Containable" ``ContainableBehavior``. Ce comportement de modèle vous permet de filtrer et limiter les opérations de récupération de données "find". Utiliser Containable vous aidera a réduire l'utilisation inutile de votre base de données et augmentera la vitesse et la plupart des performances de votre application. La class vous aidera aussi a chercher et filtrer vos données pour vos utilisateurs d'une façon propre et consistante.
 
-Containable allows you to streamline and simplify operations on
-your model bindings. It works by temporarily or permanently
-altering the associations of your models. It does this by using
-supplied the containments to generate a series of ``bindModel`` and
-``unbindModel`` calls.
+Le comportement "Containable" vous permet de rationaliser et simplifier les opérations de
+construction du modèle. Il agit en modifiant temporairement ou définitivement les associations de vos modèles. Il fait cela en utilisant des "containements" pour génerer une série d'appels ``bindModel`` et ``unbindModel``.  
 
-To use the new behavior, you can add it to the $actsAs property of
-your model::
+Pour utiliser le nouveau comportement, vous pouvez l'ajouter à la propriété $actAs de votre modèle ::
 
-    <?php
-    class Post extends AppModel {
-        public $actsAs = array('Containable');
-    }
 
-You can also attach the behavior on the fly::
+<?php
+class Post extends AppModel {
+    public $actsAs = array('Containable');
+}
 
-    <?php
-    $this->Post->Behaviors->attach('Containable');
+Vous pouvez aussi attacher le comportement à la volée ::
 
-.. _using-containable:
+<?php
+$this->Post->Behaviors->attach('Containable');
 
-Using Containable
-~~~~~~~~~~~~~~~~~
 
-To see how Containable works, let's look at a few examples. First,
-we'll start off with a find() call on a model named Post. Let's say
-that Post hasMany Comment, and Post hasAndBelongsToMany Tag. The
-amount of data fetched in a normal find() call is rather
-extensive::
+.. _Utilisation de Containable:
 
-    <?php
-    debug($this->Post->find('all'));
-    
-    [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => First article
-                        [content] => aaa
-                        [created] => 2008-05-18 00:00:00
-                    )
-                [Comment] => Array
-                    (
-                        [0] => Array
-                            (
-                                [id] => 1
-                                [post_id] => 1
-                                [author] => Daniel
-                                [email] => dan@example.com
-                                [website] => http://example.com
-                                [comment] => First comment
-                                [created] => 2008-05-18 00:00:00
-                            )
-                        [1] => Array
-                            (
-                                [id] => 2
-                                [post_id] => 1
-                                [author] => Sam
-                                [email] => sam@example.net
-                                [website] => http://example.net
-                                [comment] => Second comment
-                                [created] => 2008-05-18 00:00:00
-                            )
-                    )
-                [Tag] => Array
-                    (
-                        [0] => Array
-                            (
-                                [id] => 1
-                                [name] => Awesome
-                            )
-                        [1] => Array
-                            (
-                                [id] => 2
-                                [name] => Baking
-                            )
-                    )
-            )
-    [1] => Array
-            (
-                [Post] => Array
-                    (...
+Utilisation de Containable
+~~~~~~~~~~~~~~~~
 
-For some interfaces in your application, you may not need that much
-information from the Post model. One thing the
-``ContainableBehavior`` does is help you cut down on what find()
-returns.
+Pour voir comment Containable fonctionne, regardons quelques exemples. Premièrement, nous commencerons avec un appel find() sur un modèle nommé Post. Disons que ce Post a plusieurs (hasMany) Commentaire, et Post a et appartient à plusieurs (hasAndBelongsToMany) Tag. La quantité de données récupérées par un appel find() normal est assez étendue :: 
 
-For example, to get only the post-related information, you can do
-the following::
 
-    <?php
-    $this->Post->contain();
-    $this->Post->find('all');
+<?php
+debug($this->Post->find('all'));
 
-You can also invoke Containable's magic from inside the find()
-call::
-
-    <?php
-    $this->Post->find('all', array('contain' => false));
-
-Having done that, you end up with something a lot more concise::
-
-    [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => First article
-                        [content] => aaa
-                        [created] => 2008-05-18 00:00:00
-                    )
-            )
-    [1] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 2
-                        [title] => Second article
-                        [content] => bbb
-                        [created] => 2008-05-19 00:00:00
-                    )
-            )
-
-This sort of help isn't new: in fact, you can do that without the
-``ContainableBehavior`` doing something like this::
-
-    <?php
-    $this->Post->recursive = -1;
-    $this->Post->find('all');
-
-Containable really shines when you have complex associations, and
-you want to pare down things that sit at the same level. The
-model's ``$recursive`` property is helpful if you want to hack off
-an entire level of recursion, but not when you want to pick and
-choose what to keep at each level. Let's see how it works by using
-the ``contain()`` method.
-
-The contain method's first argument accepts the name, or an array
-of names, of the models to keep in the find operation. If we wanted
-to fetch all posts and their related tags (without any comment
-information), we'd try something like this::
-
-    <?php
-    $this->Post->contain('Tag');
-    $this->Post->find('all');
-
-Again, we can use the contain key inside a find() call::
-
-    <?php
-    $this->Post->find('all', array('contain' => 'Tag'));
-
-Without Containable, you'd end up needing to use the
-``unbindModel()`` method of the model, multiple times if you're
-paring off multiple models. Containable creates a cleaner way to
-accomplish this same task.
-
-Containing deeper associations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Containable also goes a step deeper: you can filter the data of the
-*associated* models. If you look at the results of the original
-find() call, notice the author field in the Comment model. If you
-are interested in the posts and the names of the comment authors —
-and nothing else — you could do something like the following::
-
-    <?php
-    $this->Post->contain('Comment.author');
-    $this->Post->find('all');
-    
-    // or..
-    
-    $this->Post->find('all', array('contain' => 'Comment.author'));
-
-Here, we've told Containable to give us our post information, and
-just the author field of the associated Comment model. The output
-of the find call might look something like this::
-
-    [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => First article
-                        [content] => aaa
-                        [created] => 2008-05-18 00:00:00
-                    )
-                [Comment] => Array
-                    (
-                        [0] => Array
-                            (
-                                [author] => Daniel
-                                [post_id] => 1
-                            )
-                        [1] => Array
-                            (
-                                [author] => Sam
-                                [post_id] => 1
-                            )
-                    )
-            )
-    [1] => Array
-            (...
-
-As you can see, the Comment arrays only contain the author field
-(plus the post\_id which is needed by CakePHP to map the results).
-
-You can also filter the associated Comment data by specifying a
-condition::
-
-    <?php
-    $this->Post->contain('Comment.author = "Daniel"');
-    $this->Post->find('all');
-    
-    //or...
-    
-    $this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
-
-This gives us a result that gives us posts with comments authored
-by Daniel::
-
-    [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => First article
-                        [content] => aaa
-                        [created] => 2008-05-18 00:00:00
-                    )
-                [Comment] => Array
-                    (
-                        [0] => Array
-                            (
-                                [id] => 1
-                                [post_id] => 1
-                                [author] => Daniel
-                                [email] => dan@example.com
-                                [website] => http://example.com
-                                [comment] => First comment
-                                [created] => 2008-05-18 00:00:00
-                            )
-                    )
-            )
-
-Additional filtering can be performed by supplying the standard :ref:`model-find` options::
-
-    <?php
-    $this->Post->find('all', array('contain' => array(
-        'Comment' => array(
-            'conditions' => array('Comment.author =' => "Daniel"),
-            'order' => 'Comment.created DESC'
-        )
-    )));
-
-Here's an example of using the ``ContainableBehavior`` when you've
-got deep and complex model relationships.
-
-Let's consider the following model associations::
-
-    User->Profile
-    User->Account->AccountSummary
-    User->Post->PostAttachment->PostAttachmentHistory->HistoryNotes
-    User->Post->Tag
-
-This is how we retrieve the above associations with Containable::
-
-    <?php
-    $this->User->find('all', array(
-        'contain' => array(
-            'Profile',
-            'Account' => array(
-                'AccountSummary'
-            ),
-            'Post' => array(
-                'PostAttachment' => array(
-                    'fields' => array('id', 'name'),
-                    'PostAttachmentHistory' => array(
-                        'HistoryNotes' => array(
-                            'fields' => array('id', 'note')
-                        )
-                    )
-                ),
-                'Tag' => array(
-                    'conditions' => array('Tag.name LIKE' => '%happy%')
+[0] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 1
+                    [titre] => First article
+                    [contenu] => aaa
+                    [created] => 2008-05-18 00:00:00
                 )
+            [Commentaire] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 1
+                            [post_id] => 1
+                            [auteur] => Daniel
+                            [email] => dan@example.com
+                            [siteweb] => http://example.com
+                            [commentaire] => First comment
+                            [created] => 2008-05-18 00:00:00
+                        )
+                    [1] => Array
+                        (
+                            [id] => 2
+                            [post_id] => 1
+                            [auteur] => Sam
+                            [email] => sam@example.net
+                            [siteweb] => http://example.net
+                            [commentaire] => Second comment
+                            [created] => 2008-05-18 00:00:00
+                        )
+                )
+            [Tag] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 1
+                            [name] => A
+                        )
+                    [1] => Array
+                        (
+                            [id] => 2
+                            [name] => B
+                        )
+                )
+        )
+[1] => Array
+        (
+            [Post] => Array
+                (...
+
+Pour certaines interfaces de votre application, vous pouvez ne pas avoir besoin d'autant 
+d'information depuis le modèle Post. Le ``Comportement containable`` permet de reduire ce
+que le find() retourne.
+
+Par exemple, pour ne recuperer que les informations relative au post vous pouvez
+faire cela::
+
+<?php
+$this->Post->contain();
+$this->Post->find('all');
+
+Vous pouvez utiliser la magie de "Containable" à l'interieur d'un appel find():: 
+
+<?php
+$this->Post->find('all', array('contain' => false));
+
+Après avoir fait cela, vous vous retrouvez avec quelque chose de plus concis::
+
+[0] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 1
+                    [titre] => Premier article
+                    [contenu] => aaa
+                    [created] => 2008-05-18 00:00:00
+                )
+        )
+[1] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 2
+                    [titre] => Second article
+                    [contenu] => bbb
+                    [created] => 2008-05-19 00:00:00
+                )
+        )
+
+Ceci n'est pas nouveau: en fait, vous pouvez obtenir le même résultat sans le ``comportement
+Containable`` en faisant quelque chose comme ::
+
+<?php
+$this->Post->recursive = -1;
+$this->Post->find('all');
+
+Le ``comportement Containable`` s'exprime vraiment quand vous avez des associations complexes, et que vous voulez rogner le nombre d'information au même niveau.
+La propriété $recursive des modèles est utile si vous voulez éviter un niveau de 
+recursivité entier, mais pas pour choisir ce que vous garder à chaque niveau. regardons ensemble comment la methode ``contain()`` agit.
+
+Le premier argument de la méthode accepte le nom, ou un tableau de noms, des modèles
+à garder lors du find. Si nous désirons aller chercher tous les posts et les tags annexes
+(sans aucune information de commentaire), nous devons essayer quelque chose comme ::
+
+<?php
+$this->Post->contain('Tag');
+$this->Post->find('all');
+
+Nous pouvons à nouveau utiliser la clef contain dans l'appel find()::
+
+<?php
+$this->Post->find('all', array('contain' => 'Tag'));
+
+Sans le comportement Containable, nous finirions par utilisez la méthode ``unbindModel()`` du modèle, plusieurs fois si nous épluchons des modèles multiples. Le ``comportement Containable`` fourni un moyen plus propre pour accomplir cette même tâche.Contenant des associations plus profondes.
+
+Des associations plus profondes
+~~~~~~~~~~~~~~~~~~~~
+
+Le comportment Containable permet également d'aller un peu plus loin : vous pouvez filtrer
+les données des modèles associés . si vous regardez le résultats d'un appel find() classique,
+notez le champ "auteur" dans le modèle "Commentaire". Si vous êtes interéssés dans les posts par les noms et les commentaires des auteurs - et rien d'autre - vous devez faire quelque chose comme ::
+
+<?php
+$this->Post->contain('Commentaire.auteur');
+$this->Post->find('all');
+
+// ou..
+
+$this->Post->find('all', array('contain' => 'Commentaire.auteur'));
+
+ici , nous avons dit au comportement Containable de nous donner l'informations de post, et uniquement le champs auteur du modèle Commentaire associé.
+Le résultat du find ressemble à ::
+
+[0] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 1
+                    [titre] => Premier article
+                    [contenu] => aaa
+                    [created] => 2008-05-18 00:00:00
+                )
+            [Commentaire] => Array
+                (
+                    [0] => Array
+                        (
+                            [auteur] => Daniel
+                            [post_id] => 1
+                        )
+                    [1] => Array
+                        (
+                            [auteur] => Sam
+                            [post_id] => 1
+                        )
+                )
+        )
+[1] => Array
+        (...
+
+Comme vous pouvez le voir, les tableaux de Commentaire ne contiennent uniquement que le champ auteur (avec le post_id qui est requit par CakePHP pour présenter le résultat)
+
+Vous pouvez également filtrer les 
+donneés Commentaire associés en spécifiant une condition ::
+
+<?php
+$this->Post->contain('Commentaire.auteur = "Daniel"');
+$this->Post->find('all');
+
+//ou...
+
+$this->Post->find('all', array('contain' => 'Commentaire.auteur = "Daniel"'));
+
+Ceci nous donnes comme résultat les posts et commentaires dont
+daniel est l'auteur::
+
+[0] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 1
+                    [title] => Premier article
+                    [content] => aaa
+                    [created] => 2008-05-18 00:00:00
+                )
+            [Commentaire] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 1
+                            [post_id] => 1
+                            [auteur] => Daniel
+                            [email] => dan@example.com
+                            [siteweb] => http://example.com
+                            [commentaire] => Premier commentaire
+                            [created] => 2008-05-18 00:00:00
+                        )
+                )
+        )
+
+Des filtre supplémentaires peuvent être utilisées en utilisant les options de recherche standard ::         
+
+<?php
+$this->Post->find('all', array('contain' => array(
+    'Commentaire' => array(
+        'conditions' => array('Commentaire.auteur =' => "Daniel"),
+        'order' => 'Commentaire.created DESC'
+    )
+)));
+
+Voici un exemple d'utilisation du comportement Containable quand vous avez de profondes 
+et complexes relations entre les modèles.
+
+Examinons les associations de modèles suivants::
+
+User->Profil
+User->Compte->ResumeCompte
+User->Post->PieceJointe->HistoriquePieceJointe->HistoriqueNotes
+User->Post->Tag
+
+Voici ce que nous recupérons des associations ci-dessus avec le comportement Containable ::
+
+
+<?php
+$this->User->find('all', array(
+    'contain' => array(
+        'Profil',
+        'Compte' => array(
+            'ResumeCompte'
+        ),
+        'Post' => array(
+            'PieceJointe' => array(
+                'fields' => array('id', 'nom'),
+                'HistoriquePieceJointe' => array(
+                    'HistoriqueNotes' => array(
+                        'fields' => array('id', 'note')
+                    )
+                )
+            ),
+            'Tag' => array(
+                'conditions' => array('Tag.name LIKE' => '%joyeux%')
             )
         )
-    ));
+    )
+));
 
-Keep in mind that ``contain`` key is only used once in the main
-model, you don't need to use 'contain' again for related models
+Garder à l'esprit que la clef 'contain' n'est utilisée qu'une seule fois dans le model principal, vous n'avez pas besoin d'utiliser 'contain' a nouveau dans les modèles liés.
 
 .. note::
 
-    When using 'fields' and 'contain' options - be careful to include
-    all foreign keys that your query directly or indirectly requires.
-    Please also note that because Containable must to be attached to
-    all models used in containment, you may consider attaching it to
-    your AppModel.
+En utilisant les options 'fields' et 'contain' - faites attention d'inclure  toutes
+les clefs étrangères que votre requête requiert directement ou indirectement.
+Notez également que c'est parce que le comportement Containable doit être attaché à tous les modèles utilisés dans le contenu, que vous devez l'attacher à votre AppModel. 
 
-ContainableBehavior options
+Les options du Comportement Containable
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``ContainableBehavior`` has a number of options that can be set
-when the Behavior is attached to a model. The settings allow you to
-fine tune the behavior of Containable and work with other behaviors
-more easily.
+Le ``Comportment Containable`` a plusieurs options qui peuvent être définies quand le comportement est attaché à un modèle. Ces paramètres vous permettent d'affiner le comportement de Containable et de travailler plus facilement avec les autres comportements.
+
+   - **recursive** (boolean, optional), définir à true pour permettre au comportement Containable, de déterminer automatiquement le niveau de récursivité nécessaire pour récupérer les modèles spécifiés et de paramétrer la récursivité du modèle à ce niveau. Le définir à false désactive cette fonctionnalité. La valeur par défaut est ``true``.
+    - **notices** (boolean, optional), émet des alertes E_NOTICES pour les liaisons référencées dans un appel containable et qui ne sont pas valides. La valeur par défaut est true.
+    - **autoFields** (boolean, optional), ajout automatique des champs nécessaires pour récupérer les liaisons requêtées. La valeur par défaut est ``true``.
 
 
--  **recursive** (boolean, optional) set to true to allow
-   containable to automatically determine the recursiveness level
-   needed to fetch specified models, and set the model recursiveness
-   to this level. setting it to false disables this feature. The
-   default value is ``true``.
--  **notices** (boolean, optional) issues E\_NOTICES for bindings
-   referenced in a containable call that are not valid. The default
-   value is ``true``.
--  **autoFields**: (boolean, optional) auto-add needed fields to
-   fetch requested bindings. The default value is ``true``.
+Vous pouvez changer les paramètres du Comportement Containable à l'exécution, en ré-attachant le comportement comme vu au chapitre Utiliser les comportements :doc:`/models/additional-methods-and-properties`
 
-You can change ContainableBehavior settings at run time by
-reattaching the behavior as seen in
-:doc:`/models/additional-methods-and-properties`
+Le comportement Containable peut quelque fois causer des problèles avec d'autres comportements ou des requêtes qui utilisent des fonctions d'aggrégations et/ou des clauses GROUP BY. Si vous obtenez des erreurs SQL invalides à cause du mélange de champs aggrégés et non-aggrégés, essayer de désactiver le paramètre ``autoFields``::
 
-ContainableBehavior can sometimes cause issues with other behaviors
-or queries that use aggregate functions and/or GROUP BY statements.
-If you get invalid SQL errors due to mixing of aggregate and
-non-aggregate fields, try disabling the ``autoFields`` setting.::
 
-    <?php
-    $this->Post->Behaviors->attach('Containable', array('autoFields' => false));
 
-Using Containable with pagination
-=================================
+<?php
+$this->Post->Behaviors->attach('Containable', array('autoFields' => false));
 
-By including the 'contain' parameter in the ``$paginate`` property
-it will apply to both the find('count') and the find('all') done on
-the model
+Utilisation du comportement Containable avec la pagination
+===================================
+En incluant le paramètre 'contain' dans la propriété ``$paginate``
+la pagination sera appliqué à la fois au find('count') et au find('all') dans le modèle
 
-See the section :ref:`using-containable` for further details.
+Voir la section :ref:`using-containable` pour plus de détails.
 
-Here's an example of how to contain associations when paginating::
+Voici un exemple pour limiter les associations en paginant::
 
-    <?php
-    $this->paginate['User'] = array(
-        'contain' => array('Profile', 'Account'),
-        'order' => 'User.username'
-    );
+<?php
+$this->paginate['Utilisateur'] = array(
+    'contain' => array('Profil', 'Compte'),
+    'order' => 'Utilisateur.pseudo'
+);
 
-    $users = $this->paginate('User');
-
+$users = $this->paginate('User');
 
 .. meta::
-    :title lang=en: Containable
-    :keywords lang=en: model behavior,author daniel,article content,new addition,wear and tear,array,aaa,email,fly,models
+    :title lang=fr: Containable
+    :keywords lang=fr: modèle behavior,author daniel,article content,new addition,wear and tear,array,aaa,email,fly,models
