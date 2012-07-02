@@ -8,7 +8,7 @@ Une nouvelle intégration au coeur de CakePHP est le Comportement "Containable" 
 Le comportement "Containable" vous permet de rationaliser et simplifier les opérations de
 construction du modèle. Il agit en modifiant temporairement ou définitivement les associations de vos modèles. Il fait cela en utilisant des "containements" pour génerer une série d'appels ``bindModel`` et ``unbindModel``.  
 
-Pour utiliser le nouveau comportement, vous pouvez l'ajouter à la propriété $actAs de votre modèle ::
+Pour utiliser le nouveau comportement, vous pouvez l'ajouter à la propriété $actAs de votre modèle::
 
 
 <?php
@@ -16,7 +16,7 @@ class Post extends AppModel {
     public $actsAs = array('Containable');
 }
 
-Vous pouvez aussi attacher le comportement à la volée ::
+Vous pouvez aussi attacher le comportement à la volée::
 
 <?php
 $this->Post->Behaviors->attach('Containable');
