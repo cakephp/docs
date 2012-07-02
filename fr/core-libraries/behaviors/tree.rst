@@ -252,7 +252,7 @@ données. Donc l\'arbre de données devrait maintenant ressembler à:
          -  International
 
 
-    - D'autre catégorie de gens
+   - D'autre catégorie de gens
 
 
 
