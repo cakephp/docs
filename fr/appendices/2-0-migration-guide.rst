@@ -908,8 +908,8 @@ Méthodes retirées
 * ``View::_loadHelpers()`` Utilisez ``$this->loadHelpers()`` à la place. Les Helpers
   chargent maintenant facilement leurs propres helpers.
 
-Added methods
--------------
+Méthodes ajoutées
+-----------------
 
 * ``View::loadHelper($name, $settings = array());`` Charge un unique helper.
 * ``View::loadHelpers()`` charge tous les helpers indiqués dans ``View::$helpers``.
@@ -1139,22 +1139,22 @@ Le driver PDO va automatiquement echapper ces valeurs pour vous.
 * Le support Sqlite a été grandement amélioré. La différence majeure avec cake 1.3 est qu'il
   ne supportera que Sqlite 3.x. C'est une bonne alternative pour le développement des apps, et rapidement
   en lançant les cas de test.
-* Boolean column values will be casted to php native boolean type automatically,
-  so make sure you update your test cases and code if you were expecting the
-  returned value to be a string or an integer: If you had a "published" column in
-  the past using mysql all values returned from a find would be numeric in the
-  past, now they are strict boolean values.
+* Les valeurs des colonnes boléennes vont être lancées automatiquement vers le type boléeen natif de php,
+  donc assurez vous de mettre à jour vos cas de test et code si vous attendiez une valeur retournée de type
+  chaîne de caractère ou un entier: Si vous aviez une colonne "published" dans le passé en utilisant mysql,
+  toutes les valeurs retournées d'un find auraient été numériques dans le passé, maintenant elles sont
+  strictement des valeurs boléennes.
 
 BehaviorCollection
 ------------------
 
--  ``BehaviorCollection`` no longer ``strtolower()'s`` mappedMethods. Behavior
-   mappedMethods are now case sensitive.
+-  ``BehaviorCollection`` ne mettent plus en minuscule ``strtolower()`` les mappedMethods. Les
+   mappedMethods des Behaviors sont maintenant sensible à la casse.
 
-AclBehavior and TreeBehavior
+AclBehavior et TreeBehavior
 ----------------------------
 
-- No longer supports strings as configuration. Example::
+- Ne supporte plus les chaînes de caractère pour la configuration. Exemple::
 
     <?php
     public $actsAs = array(
@@ -1162,7 +1162,7 @@ AclBehavior and TreeBehavior
         'Tree' => 'nested'
     );
 
-  became::
+  devient::
 
     <?php
     public $actsAs = array(
@@ -1174,30 +1174,29 @@ AclBehavior and TreeBehavior
 Plugins
 =======
 
-Plugins no longer magically append their plugin prefix to components, helpers
-and models used within them. You must be explicit with the components, models,
-and helpers you wish to use. In the past::
+Les plugins n'ajoutent plus de façon magique leur prefix plugin aux composants, helpers
+et modèles utilisés à travers eux. Vous devez être explicite avec les composants, modèles
+et helpers que vous souhaitez utiliser. Dans le passé::
 
     <?php
     var $components = array('Session', 'Comments');
 
-Would look in the controller's plugin before checking app/core components. It
-will now only look in the app/core components. If you wish to use objects from a
-plugin you must put the plugin name::
+Aurait regardé dans le plugin du contrôleur avant de vérifier les composants app/core. Il va
+maintenant seulement regarder dans les composants app/core. Si vous souhaitez utiliser
+les objets à partir d'un plugin, vous devez mettre le nom du plugin::
 
     <?php
     public $components = array('Session', 'Comment.Comments');
 
-This was done to reduce hard to debug issues caused by magic misfiring. It also
-improves consistency in an application, as objects have one authoritative way to
-reference them.
+Cela a été fait pour réduire la difficulté des problèmes de debug causés par les ratés de la
+magie. Cela améliore aussi la cohérence dans votre application, puisque les objets ont une façon
+autoritaire de les référencer.
 
-Plugin App Controller and Plugin App Model
+Plugin App Controller et Plugin App Model
 ------------------------------------------
 
-The plugin AppController and AppModel are no longer located directly in the 
-plugin folder. They are now placed into the plugin's Controller and Model 
-folders as such::
+Les plugins AppController et AppModel ne sont plus directement localisés dans le dossier plugin.
+Ils sont maintenant placés dans les dossiers des plugins des Contrôleur et des Modèles comme ceci::
 
     /app
         /Plugin
@@ -1210,14 +1209,14 @@ folders as such::
 Console
 =======
 
-Much of the console framework was rebuilt for 2.0 to address many of the
-following issues:
+La plupart de la console du framework a été reconstruite pour 2.0 pour traiter un grand nombre
+de questions suivantes:
 
--  Tightly coupled.
--  It was difficult to make help text for shells.
--  Parameters for shells were tedious to validate.
--  Plugin tasks were not reachable.
--  Objects with too many responsibilities.
+-  Etroitement couplé.
+-  Il était difficile de faire un texte d'aide pour les shells.
+-  Les paramètres pour les shells étaient fastidieux à valider.
+-  Les tâches des Plugins n'étaient pas joignables.
+-  Objets avec trop de responsabilités.
 
 Backwards incompatible Shell API changes
 ----------------------------------------
@@ -1243,45 +1242,47 @@ Backwards incompatible Shell API changes
 Backwards incompatible ShellDispatcher API changes
 --------------------------------------------------
 
--  ``ShellDispatcher`` no longer has stdout, stdin, stderr file handles.
--  ``ShellDispatcher::$shell`` has been removed.
--  ``ShellDispatcher::$shellClass`` has been removed.
--  ``ShellDispatcher::$shellName`` has been removed.
--  ``ShellDispatcher::$shellCommand`` has been removed.
--  ``ShellDispatcher::$shellPaths`` has been removed, use
-   ``App::path('shells');`` instead.
--  ``ShellDispatcher`` no longer uses 'help' as a magic method that has special
-   status. Instead use the ``--help/-h`` options, and an option parser.
+-  ``ShellDispatcher`` n'a plus de fichiers de gestion stdout, stdin, stderr.
+-  ``ShellDispatcher::$shell`` a été retirée.
+-  ``ShellDispatcher::$shellClass`` a été retirée.
+-  ``ShellDispatcher::$shellName`` a été retirée.
+-  ``ShellDispatcher::$shellCommand`` a été retirée.
+-  ``ShellDispatcher::$shellPaths`` a été retirée, utilisez
+   ``App::path('shells');`` à la place.
+-  ``ShellDispatcher`` n'utilise plus 'help' comme méthode magique qui a un statut
+   spécial. A la place, utilisez les options ``--help/-h``, et un parseur d'option.
 
 Backwards incompatible Shell Changes
 ------------------------------------
 
--  Bake's ControllerTask no longer takes ``public`` and ``admin`` as passed
-   arguments. They are now options, indicated like ``--admin`` and ``--public``.
+-  Bake's ControllerTask ne prend plus ``public`` et ``admin`` comme arguments
+   passés. Ce sont maintenant des options, indiquées par ``--admin`` et ``--public``.
 
-It's recommended that you use the help on shells you use to see what if any
-parameters have changed. It's also recommended that you read the console new
-features for more information on new APIs that are available.
+Il est recommandé que vous utilisiez le help sur les shells que vous utilisiez
+pour voir si tous les paramètres ont changé. il est aussi recommandé que vous lisiez
+les nouvelles fonctionnalités de la console, pour plus d'informations sur les
+nouvelles APIs qui sont disponibles.
 
-Debugging
-=========
+Debugger
+========
 
-The ``debug()`` function now defaults to outputting html safe strings. This is
-disabled if being used in the console. The ``$showHtml`` option for ``debug()``
-can be set to false to disable html-safe output from debug.
+La fonction ``debug()`` va sortir par défaut les chaînes sans danger de html. C'est
+désactivé si c'est utilisé dans la console. L'option ``$showHtml`` pour ``debug()``
+peut être mis sur false pour désactiver la sortie sans danger de html du debug.
 
 ConnectionManager
 =================
 
-``ConnectionManager::enumConnectionObjects()`` will now return the current
-configuration for each connection created, instead of an array with filename,
-classname and plugin, which wasn't really useful.
+``ConnectionManager::enumConnectionObjects()`` va maintenant retourner la configuration
+courante pour chaque connection créée, au lieu d'un tableau avec un nom de fichier,
+d'un nom de classe et d'un plugin, qui n'était pas réellement utiles.
 
-When defining database connections you will need to make some changes to the way
-configs were defined in the past. Basically in the database configuration class,
-the key "driver" is not accepted anymore, only "datasource", in order to make it
-more consistent. Also, as the datasources have been moved to packages you will
-need to pass the package they are located in. Example::
+Quand vous définirez les connections à la base de données, vous aurez besoin de faire
+quelques changements dans la façon dont les configs ont été définies dans le passé.
+Basiquement dans classe de configuration de la base de données, la clé "driver" n'est plus
+acceptée, seulement "datasource", afin de la rendre plus cohérente. Aussi, comme les 
+sources de données ont été déplacées vers les packages, vous aurez besoin de passer
+le package dans lequel ils sont localisés. Exemple::
 
     <?php
     public $default = array(
@@ -1295,6 +1296,6 @@ need to pass the package they are located in. Example::
 
 
 .. meta::
-    :title lang=en: 2.0 Migration Guide
-    :description lang=en: This page summarizes the changes from CakePHP 1.3 that will assist in a project migration to 2.0, as well as for a developer reference to get up to date with the changes made to the core since the CakePHP 1.3 branch.
-    :keywords lang=en: cakephp upgrade,cakephp migration,migration guide,1.3 to 2.0,update cakephp,backwards compatibility,api changes,x versions,directory structure,new features
+    :title lang=fr: 2.0 Guide de Migration
+    :description lang=fr: Cette page résume les changements à partir de CakePHP 1.3 qui vous aideront dans votre projet de    migration vers 2.0, ainsi qu'une référence pour un développeur pour se mettre au courant des changements faits dans le coeur depuis la branche CakePHP 1.3.
+    :keywords lang=fr: cakephp mise à jour,cakephp migration,guide de migration,1.3 vers 2.0,mise à jour cakephp,compatibilité rétro-active,changements de l'api,x versions,structure de répertoire,nouvelles fonctionnalités

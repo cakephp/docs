@@ -1,15 +1,15 @@
-2.1 Migration Guide
-###################
+2.1 Guide de Migration
+######################
 
-CakePHP 2.1 is a fully API compatible upgrade from 2.0.  This page outlines the
-changes and improvements made for 2.1.
+CakePHP 2.1 est une mise à jour de l'API complètement compatible à partir de 2.0.
+Cette page souligne les changements et améliorations faits pour 2.1.
 
-AppController, AppHelper, AppModel and AppShell
+AppController, AppHelper, AppModel et AppShell
 ===============================================
 
-These classes are now required to be part of the app directory, as they were
-removed from the CakePHP core.  If you do not already have these classes, you
-can use the following while upgrading::
+Ces classes sont désormais tenus de faire partie du répertoire app, puisqu'elles ont
+été retirées du coeur de CakePHP. Si vous n'avez toujours pas ces classes, vous pouvez 
+utiliser ce qui suit pour la mise à jour::
 
     // app/View/Helper/AppHelper.php
     <?php
@@ -35,29 +35,29 @@ can use the following while upgrading::
     class AppShell extends Shell {
     }
 
-If your application already has these files/classes you don't need to do
-anything.
-Additionally if you were using the core PagesController, you would need to copy
-this to your app/Controller directory as well.
+Si votre application a ces fichiers/classes, vous n'avez rien besoin de faire.
+De plus, si vous utilisiez le PagesController du coeur, vous aurez aussi besoin
+de le copier dans votre répertoire app/Controller.
 
-.htaccess files
-===============
+Fichiers .htaccess
+==================
 
-The default ``.htaccess`` files have changed, you should remember to update them
-or update your webservers URL re-writing scheme to match the changes done in
-``.htaccess``
+Les fichiers ``.htaccess`` par défaut ont changé, vous devrez vous rappeler de
+les mettre à jour ou de mettre à jour les schémas URL de re-writing de vos serveurs
+web pour correspondre aux changements faits dans ``.htaccess``
 
+Modèles
+=======
 
-Models
-======
-
-- The ``beforeDelete`` callback will be fired before behaviors beforeDelete callbacks.
-  This makes it consistent with the rest of the events triggered in the model layer.
-- ``Model::find('threaded')`` now accepts ``$options['parent']`` if using other field
-  then ``parent_id``. Also if the model has TreeBehavior attached and set up with other
-  parent field, the threaded find will by default use that.
-- Parameters for queries using prepared statements will now be part of the SQL
-  dump.
+- Le callback ``beforeDelete`` sera vidé avant les callbacks beforeDelete des behaviors.
+  Cela donne plus de cohérence avec le reste des évènements déclenchés dans la couche
+  Modèle.
+- ``Model::find('threaded')`` accepte maintenant ``$options['parent']`` si vous utilisez
+  un autre champ, alors ``parent_id``. Aussi, si le modèle a TreeBehavior attaché et
+  configuré avec un autre champ parent, le and set up with other
+  parent field, le find threaded l'utilisera par défaut.
+- Les paramètres pour les requêtes utilisant les requêtes préparées vont maintenant
+  faire partie de l'instruction SQL.
 - Validation arrays can now be more specific with when a field is required.
   The ``required`` key now accepts ``create`` and ``update``.  These values will
   make a field required when creating or updating.
