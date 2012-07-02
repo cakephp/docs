@@ -168,8 +168,7 @@ Le comportement Tree additionnera vos nouveaux ajouts au sommet de l'arbre::
     $data['Category']['name'] =  'd\'autre catégories de gens';
     $this->Category->save($data);
 
-Running the above two code snippets would alter your tree as
-follows:
+En executant l'extrait de code ci-dessus votre arbre devient:
 
 
 -  Mes Catégorie
