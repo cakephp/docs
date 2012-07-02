@@ -51,7 +51,7 @@ rechercher les enfants directs.
    
 
 Utilisation Basique
-===========
+==================
 
 Le comportement en arbre de données (Tree behavior) possède beaucoup
 de fonctionnalités, mais commençons avec un exemple simple. 
@@ -161,9 +161,6 @@ tree prendra soin du reste.
 Si vous ne définissez pas l'id du parent (parent\_id),
 Le comportement Tree additionnera vos nouveaux ajouts au sommet de l'arbre::
 
-
-If you don't set the parent\_id, the tree behavior will add
-to the tree making your new addition a new top level entry::
 
     <?php
     // pseudo code de controller 
