@@ -38,7 +38,7 @@ Pour voir comment Containable fonctionne, regardons quelques exemples. Première
                 [Post] => Array
                     (
                         [id] => 1
-                        [titre] => First article
+                        [titre] => Premier article
                         [contenu] => aaa
                         [created] => 2008-05-18 00:00:00
                     )
@@ -51,7 +51,7 @@ Pour voir comment Containable fonctionne, regardons quelques exemples. Première
                                 [auteur] => Daniel
                                 [email] => dan@example.com
                                 [siteweb] => http://example.com
-                                [commentaire] => First comment
+                                [commentaire] => Premier commentaire
                                 [created] => 2008-05-18 00:00:00
                             )
                         [1] => Array
@@ -61,7 +61,7 @@ Pour voir comment Containable fonctionne, regardons quelques exemples. Première
                                 [auteur] => Sam
                                 [email] => sam@example.net
                                 [siteweb] => http://example.net
-                                [commentaire] => Second comment
+                                [commentaire] => Second commentaire
                                 [created] => 2008-05-18 00:00:00
                             )
                     )
