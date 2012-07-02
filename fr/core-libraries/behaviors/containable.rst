@@ -25,64 +25,64 @@ Vous pouvez aussi attacher le comportement à la volée::
 .. _Utilisation de Containable:
 
 Utilisation de Containable
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Pour voir comment Containable fonctionne, regardons quelques exemples. Premièrement, nous commencerons avec un appel find() sur un modèle nommé Post. Disons que ce Post a plusieurs (hasMany) Commentaire, et Post a et appartient à plusieurs (hasAndBelongsToMany) Tag. La quantité de données récupérées par un appel find() normal est assez étendue :: 
 
 
-<?php
-debug($this->Post->find('all'));
-
-[0] => Array
-        (
-            [Post] => Array
-                (
-                    [id] => 1
-                    [titre] => First article
-                    [contenu] => aaa
-                    [created] => 2008-05-18 00:00:00
-                )
-            [Commentaire] => Array
-                (
-                    [0] => Array
-                        (
-                            [id] => 1
-                            [post_id] => 1
-                            [auteur] => Daniel
-                            [email] => dan@example.com
-                            [siteweb] => http://example.com
-                            [commentaire] => First comment
-                            [created] => 2008-05-18 00:00:00
-                        )
-                    [1] => Array
-                        (
-                            [id] => 2
-                            [post_id] => 1
-                            [auteur] => Sam
-                            [email] => sam@example.net
-                            [siteweb] => http://example.net
-                            [commentaire] => Second comment
-                            [created] => 2008-05-18 00:00:00
-                        )
-                )
-            [Tag] => Array
-                (
-                    [0] => Array
-                        (
-                            [id] => 1
-                            [name] => A
-                        )
-                    [1] => Array
-                        (
-                            [id] => 2
-                            [name] => B
-                        )
-                )
-        )
-[1] => Array
-        (
-            [Post] => Array
-                (...
+    <?php
+    debug($this->Post->find('all'));
+    
+    [0] => Array
+            (
+                [Post] => Array
+                    (
+                        [id] => 1
+                        [titre] => First article
+                        [contenu] => aaa
+                        [created] => 2008-05-18 00:00:00
+                    )
+                [Commentaire] => Array
+                    (
+                        [0] => Array
+                            (
+                                [id] => 1
+                                [post_id] => 1
+                                [auteur] => Daniel
+                                [email] => dan@example.com
+                                [siteweb] => http://example.com
+                                [commentaire] => First comment
+                                [created] => 2008-05-18 00:00:00
+                            )
+                        [1] => Array
+                            (
+                                [id] => 2
+                                [post_id] => 1
+                                [auteur] => Sam
+                                [email] => sam@example.net
+                                [siteweb] => http://example.net
+                                [commentaire] => Second comment
+                                [created] => 2008-05-18 00:00:00
+                            )
+                    )
+                [Tag] => Array
+                    (
+                        [0] => Array
+                            (
+                                [id] => 1
+                                [name] => A
+                            )
+                        [1] => Array
+                            (
+                                [id] => 2
+                                [name] => B
+                            )
+                    )
+            )
+    [1] => Array
+            (
+                [Post] => Array
+                    (...
 
 Pour certaines interfaces de votre application, vous pouvez ne pas avoir besoin d'autant 
 d'information depuis le modèle Post. Le ``Comportement containable`` permet de reduire ce
