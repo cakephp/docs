@@ -18,8 +18,8 @@ Pour utiliser le nouveau comportement, vous pouvez l'ajouter à la propriété $
 
 Vous pouvez aussi attacher le comportement à la volée::
 
-<?php
-$this->Post->Behaviors->attach('Containable');
+    <?php
+    $this->Post->Behaviors->attach('Containable');
 
 
 .. _Utilisation de Containable:
