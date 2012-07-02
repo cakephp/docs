@@ -160,7 +160,7 @@ notez le champ "auteur" dans le modèle "Commentaire". Si vous êtes interéssé
     $this->Post->contain('Commentaire.auteur');
     $this->Post->find('all');
 
-// ou..
+    // ou..
 
     $this->Post->find('all', array('contain' => 'Commentaire.auteur'));
 
@@ -202,7 +202,7 @@ donneés Commentaire associés en spécifiant une condition ::
     $this->Post->contain('Commentaire.auteur = "Daniel"');
     $this->Post->find('all');
 
-//ou...
+    //ou...
 
     $this->Post->find('all', array('contain' => 'Commentaire.auteur = "Daniel"'));
 
@@ -292,9 +292,9 @@ Les options du Comportement Containable
 
 Le ``Comportment Containable`` a plusieurs options qui peuvent être définies quand le comportement est attaché à un modèle. Ces paramètres vous permettent d'affiner le comportement de Containable et de travailler plus facilement avec les autres comportements.
 
-   - **recursive** (boolean, optional), définir à true pour permettre au comportement Containable, de déterminer automatiquement le niveau de récursivité nécessaire pour récupérer les modèles spécifiés et de paramétrer la récursivité du modèle à ce niveau. Le définir à false désactive cette fonctionnalité. La valeur par défaut est ``true``.
-    - **notices** (boolean, optional), émet des alertes E_NOTICES pour les liaisons référencées dans un appel containable et qui ne sont pas valides. La valeur par défaut est true.
-    - **autoFields** (boolean, optional), ajout automatique des champs nécessaires pour récupérer les liaisons requêtées. La valeur par défaut est ``true``.
+- **recursive** (boolean, optional), définir à true pour permettre au comportement Containable, de déterminer automatiquement le niveau de récursivité nécessaire pour récupérer les modèles spécifiés et de paramétrer la récursivité du modèle à ce niveau. Le définir à false désactive cette fonctionnalité. La valeur par défaut est ``true``.
+- **notices** (boolean, optional), émet des alertes E_NOTICES pour les liaisons référencées dans un appel containable et qui ne sont pas valides. La valeur par défaut est true.
+- **autoFields** (boolean, optional), ajout automatique des champs nécessaires pour récupérer les liaisons requêtées. La valeur par défaut est ``true``.
 
 
 Vous pouvez changer les paramètres du Comportement Containable à l'exécution, en ré-attachant le comportement comme vu au chapitre Utiliser les comportements :doc:`/models/additional-methods-and-properties`
