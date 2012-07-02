@@ -679,8 +679,8 @@ methods of the HtmlHelper and how to use them.
         <?php
         echo $this->Html->tableHeaders(array(
             'id',
-            'Name' => array('class' => 'highlight'),
-            'Date' => array('class' => 'sortable')
+            array('Name' => array('class' => 'highlight')),
+            array('Date' => array('class' => 'sortable'))
         ));
 
         // Output
