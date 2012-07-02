@@ -492,125 +492,126 @@ Voir l'api pour localiser les classes dans leurs nouveaux dossiers. Quelques exe
     // devient 
     App::uses('HttpSocket', 'Network/Http');
 
-Au contraire de la façon dont fonctionnait :php:meth:`App::import()`, the new class
-loader will not locate classes recursively. This led to an impressive
-performance gain even on develop mode, at the cost of some seldom used features
-that always caused side effects. To be clear again, the class loader will only
-fetch the class in the exact package in which you told it to find it.
+Au contraire de la façon dont fonctionnait :php:meth:`App::import()`, la nouvelle classe
+de chargement ne va pas localiser les classes de façon récursive. Cela entraîne un gain
+de performance impressionnant même en mode développement, au prix de certaines fonctionnalités 
+rarement utilisées qui ont toujours provoqué des effets secondaires. Pour être encore plus
+clair, la classe de chargement va seulement attraper la classe dans le package exact dans
+lequel vous lui avez dit de le trouver.
 
-App::build() and core paths
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+App::build() et les chemins du coeur
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:php:meth:`App::build()` will not merge app paths with core paths anymore.
+:php:meth:`App::build()` ne va plus fusionner les chemins de app avec les chemins du coeur.
 
-Examples::
+Exemples::
 
     <?php
-    App::build(array('controllers' => array('/full/path/to/controllers'))) 
-    //becomes 
-    App::build(array('Controller' => array('/full/path/to/Controller')))
+    App::build(array('controllers' => array('/chemin/complet/vers/contrôleurs'))) 
+    //devient 
+    App::build(array('Controller' => array('/chemin/complet/vers/contrôleurs')))
 
-    App::build(array('helpers' => array('/full/path/to/controllers'))) 
-    //becomes 
-    App::build(array('View/Helper' => array('/full/path/to/View/Helper')))
+    App::build(array('helpers' => array('/chemin/complet/vers/contrôleurs'))) 
+    //devient 
+    App::build(array('View/Helper' => array('/chemin/complet/vers/Vues/Helpers')))
 
 CakeLog
 -------
 
--  Log streams now need to implement :php:class:`CakeLogInterface`. Exceptions will be raised
-   if a configured logger does not.
+- La connexion aux flux a maintenant besoin de mettre en œuvre: php: class: `CakeLogInterface`. 
+  Des exceptions seront soulevées si un enregistreur n'est pas configuré. 
 
 Cache
 -----
 
--  :php:class:`Cache` is now a static class, it no longer has a getInstance() method.
--  CacheEngine is now an abstract class. You cannot directly create instances of 
-   it anymore.
--  CacheEngine implementations must extend CacheEngine, exceptions will be
-   raised if a configured class does not.
--  FileCache now requires trailing slashes to be added to the path setting when
-   you are modifying a cache configuration.
--  Cache no longer retains the name of the last configured cache engine. This
-   means that operations you want to occur on a specific engine need to have the
-   $config parameter equal to the config name you want the operation to occur
-   on.
-
+-  :php:class:`Cache` est maintenant une classe statique, elle n'a plus de méthode getInstance().
+-  CacheEngine est maintenant une classe abstraite. Vous ne pouvez plus directement créer d'instances
+   de celle-ci.
+-  Les implémentations de CacheEngine doivent étendre CacheEngine, des exceptions seront soulevées
+   si une classe de configuration ne l'est pas.
+-  FileCache nécessite maintenant l'ajout de barres obliques au chemin de configuration lorsque vous modifiez
+   une configuration du cache.
+-  Cache ne retient plus le nom du dernier moteur de cache configuré. Cela signifie que les opérations que
+   vous souhaitez produire sur un moteur spécifique doivent avoir le paramètre $config égale au nom de config
+   que vous souhaitez.
+   
 ::
 
     <?php
-    Cache::config('something');
-    Cache::write('key', $value);
+    Cache::config('quelquechose');
+    Cache::write('key', $valeur);
     
-    // would become
-    Cache::write('key', $value, 'something');
+    // deviendrait
+    Cache::write('key', $valeur, 'quelquechose');
 
 Router
 ------
 
-- You can no longer modify named parameter settings with
-  ``Router::setRequestInfo()``. You should use ``Router::connectNamed()`` to
-  configure how named parameters are handled.
-- Router no longer has a ``getInstance()`` method. It is a static class, call
-  its methods and properties statically.
-- ``Router::getNamedExpressions()`` is deprecated. Use the new router
-  constants. ``Router::ACTION``, ``Router::YEAR``, ``Router::MONTH``,
-  ``Router::DAY``, ``Router::ID``, and ``Router::UUID`` instead.
-- ``Router::defaults()`` has been removed.  Delete the core routes file
-  inclusion from your applications routes.php file to disable default routing.
-  Conversely if you want default routing, you will have to add an include to 
-  ``Cake/Config/routes.php`` in your routes file.
-- When using Router::parseExtensions() the extension parameter is no longer
-  under ``$this->params['url']['ext']``. Instead it is available at
+- Vous ne pouvez plus modifier les paramètres de configuration avec
+  ``Router::setRequestInfo()``. Vous devriez utiliser ``Router::connectNamed()`` pour
+  configurer la façon dont les paramètres nommés sont gérés.
+- Le Router n'a plus de méthode ``getInstance()``. C'est une classe statique, appelle
+  ses méthodes et propriétés de façon statique.
+- ``Router::getNamedExpressions()`` est deprécié. Utilisez les nouvelles constantes du 
+  routeur. ``Router::ACTION``, ``Router::YEAR``, ``Router::MONTH``,
+  ``Router::DAY``, ``Router::ID``, et ``Router::UUID`` à la place.
+- ``Router::defaults()`` a été retiré. Supprimer l'inclusion de fichier des routes du
+  coeur de votre fichier routes.php de vos applications pour désactiver le routing par
+  défaut. Inversement, si vous voulez le routing par défaut, vous devrez ajouter une
+  inclusion dans votre fichier de routes ``Cake/Config/routes.php``.
+- Quand vous utilisez Router::parseExtensions() le paramètre d'extension n'est plus sous
+  ``$this->params['url']['ext']``. A la place, il est disponible avec
   ``$this->request->params['ext']``.
-- Default plugin routes have changed. Plugin short routes are no longer built
-  in for any actions other than index.  Previously ``/users`` and ``/users/add``
-  would map to the UsersController in the Users plugin.  In 2.0, only the
-  ``index`` action is given a short route.  If you wish to continue using short
-  routes, you can add a route like::
+- Les routes des plugins par défaut ont changé. Les routes courtes de Plugin ne sont plus
+  construites que dans les actions index. Précédemment `/users`` et ``/users/add``
+  mappaient le UtilisateursController dans le plugin Utilisateurs. Dans 2.0, seule l'action
+  ``index`` est donné par une route courte. Si vous souhaitez continuer à utiliser
+  les routes courtes, vous pouvez ajouter une route comme::
 
     <?php
-    Router::connect('/users/:action', array('controller' => 'users', 'plugin' => 'users'));
+    Router::connect('/utilisateurs/:action', array('controller' => 'utilisateurs', 'plugin' => 'utilisateurs'));
   
-  To your routes file for each plugin you need short routes on.
+  Pour votre fichier de routes pour chaque plugin, vous avez besoin de routes courtes actives.
 
-Your app/Config/routes.php file needs to be updated adding this line at the bottom of the file::
+Votre fichier app/Config/routes.php doit être mis à jour en ajoutant cette ligne en bas du fichier::
 
     <?php
     require CAKE . 'Config' . DS . 'routes.php';
 
-This is needed in order to generate the default routes for your application. If you do not wish to have such routes,
-or want to implement your own standard you can include your own file with custom router rules.
+Cela est nécessaire afin de générer les routes par défaut pour votre application. Si vous ne souhaitez 
+pas avoir de telles routes, ou si vous voulez implémenter votre propre standard, vous pouvez inclure
+votre propre fichier avec vos propres règles de routeur.
 
 Dispatcher
 ----------
 
-- Dispatcher has been moved inside of cake/libs, you will have to update your
-  ``app/webroot/index.php`` file.
-- ``Dispatcher::dispatch()`` now takes two parameters.  The request and
-  response objects.  These should be instances of ``CakeRequest`` &
-  ``CakeResponse`` or a subclass thereof.
-- ``Dispatcher::parseParams()`` now only accepts a ``CakeRequest`` object.
-- ``Dispatcher::baseUrl()`` has been removed.
-- ``Dispatcher::getUrl()`` has been removed.
-- ``Dispatcher::uri()`` has been removed.
-- ``Dispatcher::$here`` has been removed.
+- Le Dispatcher a été déplacé dans cake/libs, vous devrez mettre à jour votre fichier
+  ``app/webroot/index.php``.
+- Le ``Dispatcher::dispatch()`` prend maintenant deux paramètres. Les objets request et
+  response. Ceux-ci devraient être des instances de ``CakeRequest`` &
+  ``CakeResponse`` ou une sous-classe de ceux-ci.
+- ``Dispatcher::parseParams()`` n'accepte que l'objet ``CakeRequest``.
+- ``Dispatcher::baseUrl()`` a été retiré.
+- ``Dispatcher::getUrl()`` a été retiré.
+- ``Dispatcher::uri()`` a été retiré.
+- ``Dispatcher::$here`` a été retiré.
 
 Configure
 ---------
 
--  ``Configure::read()`` with no parameter no longer returns the value of
-   'debug' instead it returns all values in Configure. Use
-   ``Configure::read('debug');`` if you want the value of debug.
--  ``Configure::load()`` now requires a ConfigReader to be setup. Read 
-   :ref:`loading-configuration-files` for more information.
--  ``Configure::store()`` now writes values to a given Cache configuration. Read
-   :ref:`loading-configuration-files` for more information.
+-  ``Configure::read()`` avec aucun paramètre ne retourne plus la valeur de
+   'debug', à la place elle retourne toutes les valeurs dans Configure. Utilisez
+   ``Configure::read('debug');`` si vous voulez la valeur de debug.
+-  ``Configure::load()`` requiert maintenant un ConfigReader pour être configuré. Lisez 
+   :ref:`loading-configuration-files` pour plus d'informations.
+-  ``Configure::store()`` écrit maintenant les valeurs à une configuration du Cache donnée.
+   Lisez :ref:`loading-configuration-files` pour plus d'informations.
 
 Scaffold
 --------
 
--  Scaffold 'edit' views should be renamed to 'form'. This was done to make
-   scaffold and bake templates consistent.
+-  Les vues Scaffold 'edit' devront être renommées par 'form'. Cela a été fait pour rendre
+   les templates scaffold et bake cohérents.
 
    -  ``views/scaffolds/edit.ctp`` -> ``View/Scaffolds/form.ctp``
    -  ``views/posts/scaffold.edit.ctp`` -> ``View/Posts/scaffold.form.ctp``
@@ -618,27 +619,25 @@ Scaffold
 Xml
 ---
 
--  The class Xml was completely re-factored. Now this class does not manipulate
-   data anymore, and it is a wrapper to SimpleXMLElement. You can use the following
-   methods:
+-  La classe Xml a été complètement reconstruite. Maintenant cette classe ne manipule plus
+   de données, et elle est un enrouleur (wrapper) pour les SimpleXMLElement. Vous pouvez utiliser
+   les méthodes suivantes:
 
-   -  ``Xml::build()``: static method that you can pass an xml string, array, path
-      to file or url. The result will be a SimpleXMLElement instance or an
-      exception will be thrown in case of error.
-   -  ``Xml::fromArray():`` static method that returns a SimpleXMLElement from an
-      array.
-   -  ``Xml::toArray()``: static method that returns an array from
-      SimpleXMLElement.
+   -  ``Xml::build()``: Méthode statique dans laquelle vous pouvez passer une chaîne de caractère xml,
+      un tableau, un chemin vers un fichier ou une url. Le résultat va être une instance SimpleXMLElement
+      ou une exception va être envoyée en cas d'erreurs.
+   -  ``Xml::fromArray():`` Méthode statique qui retourne un SimpleXMLElement à partir d'un tableau.
+   -  ``Xml::toArray()``: Méthode statique qui retourne un tableau à partir de SimpleXMLElement.
 
-You should see the :php:class:`Xml` documentation for more information on the changes made to
-the Xml class.
+Vous devez utiliser la documentation :php:class:`Xml` pour plus d'informations sur les changements faits sur
+la classe Xml.
 
 Inflector
 ---------
 
--  Inflector no longer has a ``getInstance()`` method.
--  ``Inflector::slug()`` no longer supports the $map argument. Use
-   ``Inflector::rules()`` to define transliteration rules.
+-  L'Inflecteur n'a plus de méthode ``getInstance()``.
+-  ``Inflector::slug()`` ne supporte plus l'argument $map. Utilisez
+   ``Inflector::rules()`` pour définir les règles de translitération.
 
 CakeSession
 -----------
