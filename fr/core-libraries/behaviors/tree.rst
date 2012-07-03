@@ -90,30 +90,30 @@ de catégories, en visitant /categories. Vous devriez voir quelque chose comme :
 
 -  Mes Catégories
    
-    -  Fun
+   -  Fun
       
-        -  Sport
+      -  Sport
          
-            -  Surf
-            -  Tricot Extreme
+         -  Surf
+         -  Tricot Extreme
 
-        -  Amis
+      -  Amis
          
-            -  Gérard
-            -  Gwendoline
+         -  Gérard
+         -  Gwendoline
 
 
-    -  Travail
+   -  Travail
       
-        -  Rapports
+      -  Rapports
          
-            -  Annuel
-            -  Statut
+         -  Annuel
+         -  Statut
 
-        -  Voyages
+      -  Voyages
          
-            -  National
-            -  International
+         -  National
+         -  International
 
 
 
