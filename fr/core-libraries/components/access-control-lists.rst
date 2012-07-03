@@ -56,6 +56,7 @@ La chose suivante que Gandalf doit faire, c'est de créer une liste initiale des
 -    La bière
 
 Traditionnellement, les systèmes étaient gérés en utilisant une sorte de matrice, qui présentait un ensemble basique d'utilisateurs et de permissions en relation avec les objets. Si ces informations étaient stockées dans un tableau, il ressemblerait à ça :
+
  
 
 ======== ======== ========= ============ ========== =======
@@ -79,6 +80,8 @@ Pippin                                   Autorisé      Autorisé
 -------- -------- --------- ------------ ---------- -------
 Merry                                    Autorisé      Autorisé  
 ======== ======== ========= ============ ========== =======
+
+
 
 A première vue, il semble que ce système pourrait très bien fonctionner. 
 Les affectations peuvent être mises en place à des fin
