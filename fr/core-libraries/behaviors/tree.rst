@@ -31,7 +31,7 @@ Si vous êtes familier de la logique MPTT vous pouvez vous demander pourquoi un 
    
 
 Utilisation Basique
-===========
+====================
 
 Le comportement en arbre de données (Tree behavior) possède beaucoup
 de fonctionnalités, mais commençons avec un exemple simple. 
