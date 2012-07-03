@@ -201,7 +201,7 @@ données. Donc l\'arbre de données devrait maintenant ressembler à:
 
 -  Mes Catégorie
    
-      -  Fun
+   -  Fun
       
       -  Sport
          
@@ -215,7 +215,7 @@ données. Donc l\'arbre de données devrait maintenant ressembler à:
          -  Gwendoline
 
 
-      -  Travail
+   -  Travail
       
       -  Rapports
          
