@@ -276,7 +276,7 @@ Comme on pouvait s'y attendre, la structure serait modifiée comme suit:
 
 - D'autre catégorie de gens
 
-      -  Pêche Extreme **Deplacé**
+   -  Pêche Extreme **Deplacé**
 
 
 Effacement des données
