@@ -78,7 +78,7 @@ ou ACOs, que le système va contrôler. Sa liste devrait ressembler à quelque c
 Traditionnellement, les systèmes étaient gérés en utilisant une sorte de matrice, 
 qui présentait un ensemble basique d'utilisateurs et de permissions en relation 
 avec les objets. Si ces informations étaient stockées dans un tableau, il 
-ressemblerait à ça ::
+ressemblerait à ça
 
  
 ======== ========= ========= ============ ============= ========
