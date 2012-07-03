@@ -39,13 +39,10 @@ Afin de vous aider à comprendre comment toutes les choses travaillent ensemble,
 -    Pippin
 -    Merry
 
-
 .. note::
 
     Comprenez que l'ACL n'est pas la même chose que l'authentification. L'ACL est ce qui vient après qu'un utilisateur ait été authentifié. Par contre, les deux sont habituellement utilisés de paire, il est important de faire la distinction entre savoir 
     qui est quelqu'un (authentification) et savoir ce qu'il peut faire (ACL).
-
-    
 
 La chose suivante que Gandalf doit faire, c'est de créer une liste initiale des choses, ou ACOs, que le système va contrôler. Sa liste devrait ressembler à quelque chose comme ça :
 
