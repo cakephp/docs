@@ -248,7 +248,7 @@ Comme on pouvait s'y attendre, la structure serait modifiée comme suit:
 
 -  Mes Catégorie
    
-      -  Fun
+   -  Fun
       
       -  Sport
          
@@ -261,7 +261,7 @@ Comme on pouvait s'y attendre, la structure serait modifiée comme suit:
          -  Gwendoline
 
 
-      -  Travail
+   -  Travail
       
       -  Rapports
          
