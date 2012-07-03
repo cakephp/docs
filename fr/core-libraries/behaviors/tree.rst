@@ -273,7 +273,6 @@ Comme on pouvait s'y attendre, la structure serait modifiée comme suit:
          -  National
          -  International
 
-
 - D'autre catégorie de gens
 
    -  Pêche Extreme **Deplacé**
