@@ -149,29 +149,28 @@ Le comportement Tree additionnera vos nouveaux ajouts au sommet de l'arbre::
 En executant les extraits de code suivant devrait modifier l'arbre comme suit:
 
 -  Mes Catégorie
-   
-      -  Fun
+    -  Fun
       
-      -  Sport
+    -  Sport
          
-         -  Surf
-         -  Tricot Extreme 
-         -  Faire du Skate **Nouveau**
+        -  Surf
+        -  Tricot Extreme 
+        -  Faire du Skate **Nouveau**
 
-      -  Amis
+    -  Amis
          
-         -  Gérard
-         -  Gwendoline
+        -  Gérard
+        -  Gwendoline
 
 
-      -  Travail
+    -  Travail
       
-      -  Rapports
+    -  Rapports
          
          -  Annuel
          -  Statut
 
-      -  Voyages
+    -  Voyages
          
          -  National
          -  International
