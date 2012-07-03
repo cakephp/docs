@@ -22,8 +22,8 @@ Les listes de contrôles d'accès, ou ACL (Access Control Lists), manipulent deu
 
 Rappel :
 
- -   ACO - Objet Contrôle d'Accès - Quelque chose qui est recherché
- -   ARO - Objet Requête d'Accès - Quelque chose qui veut quelque chose
+-   ACO - Objet Contrôle d'Accès - Quelque chose qui est recherché
+-   ARO - Objet Requête d'Accès - Quelque chose qui veut quelque chose
 
 Généralement, les ACL sont utilisées pour décider quand un ARO peut obtenir l'accès à un ACO.
 
