@@ -103,7 +103,7 @@ de catégories, en visitant /categories. Vous devriez voir quelque chose comme :
          -  Gwendoline
 
 
-      -  Travail
+    -  Travail
       
       -  Rapports
          
@@ -151,11 +151,11 @@ En executant les extraits de code suivant devrait modifier l'arbre comme suit:
 -  Mes Catégorie
     -  Fun
       
-    -  Sport
+        -  Sport
          
-        -  Surf
-        -  Tricot Extreme 
-        -  Faire du Skate **Nouveau**
+            -  Surf
+            -  Tricot Extreme 
+            -  Faire du Skate **Nouveau**
 
     -  Amis
          
