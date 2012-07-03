@@ -86,7 +86,7 @@ et une définition de modèle encore plus simple :::
     }
 
 Nous pouvons vérifier à quoi ressemble les données de notre arbre 
-de catégories, en visitant /categories. Vous devriez voir quelque chose comme ::
+de catégories, en visitant /categories. Vous devriez voir quelque chose comme :
 
 
 -  Mes Catégories
