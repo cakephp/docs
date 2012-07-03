@@ -80,27 +80,29 @@ qui présentait un ensemble basique d'utilisateurs et de permissions en relation
 avec les objets. Si ces informations étaient stockées dans un tableau, il 
 ressemblerait à ça
 
+
+
  
 ========== ========= ========= ============ ============= ========
-x          Les armes L'anneau  Le porc salé La diplomacie La bière    
+x          Les armes L'anneau  Le porc salé La diplomacie La bière
 ========== ========= ========= ============ ============= ========
-Gandalf                      Autorisé     Autorisé      Autorisé  
+Gandalf                        Autorisé     Autorisé      Autorisé
 ---------- --------- --------- ------------ ------------- --------
-Aragorn    Autorisé            Autorisé     Autorisé      Autorisé  
+Aragorn    Autorisé            Autorisé     Autorisé      Autorisé
 ---------- --------- --------- ------------ ------------- --------
-Bilbo                                                   Autorisé  
----------- --------- --------- ------------ ------------- -------
-Frodo                Autorisé                             Autorisé  
+Bilbo                                                     Autorisé
 ---------- --------- --------- ------------ ------------- --------
-Gollum                         Autorisé                         
+Frodo                Autorisé                             Autorisé
 ---------- --------- --------- ------------ ------------- --------
-Legolas    Autorisé            Autorisé     Autorisé      Autorisé  
+Gollum                         Autorisé                           
 ---------- --------- --------- ------------ ------------- --------
-Gimli      Autorisé            Autorisé                         
+Legolas    Autorisé            Autorisé     Autorisé      Autorisé
 ---------- --------- --------- ------------ ------------- --------
-Pippin                                    Autorisé      Autorisé  
+Gimli      Autorisé            Autorisé                           
 ---------- --------- --------- ------------ ------------- --------
-Merry                                     Autorisé      Autorisé  
+Pippin                                      Autorisé      Autorisé
+---------- --------- --------- ------------ ------------- --------
+Merry                                       Autorisé      Autorisé
 ========== ========= ========= ============ ============= ========
 
 
