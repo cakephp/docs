@@ -504,7 +504,7 @@ Save all data in Configure to the file `my_config.php`::
 Save only the error handling configuration::
 
     <?php
-    Configure::dump('error.php', 'default', array('Error', 'Exception');
+    Configure::dump('error.php', 'default', array('Error', 'Exception'));
 
 ``Configure::dump()`` can be used to either modify or overwrite
 configuration files that are readable with :php:meth:`Configure::load()`
