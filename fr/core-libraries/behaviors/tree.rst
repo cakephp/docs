@@ -15,9 +15,9 @@ Pré-requis
 Pour utiliser le comportement en Arbre (TreeBehavior), votre table nécessite 3 champs tels
 que listés ci-dessous (tous sont des entiers) :
 
-    - parent - le nom du champ par défaut est parent\_id, pour stocker l'id de l'objet parent.
-    - left - le nom du champ par défaut est lft, pour stocker la valeur lft de la ligne courante.
-    - right - le nom du champ par défaut est rght, pour stocker la valeur rght de la ligne courante.
+- parent - le nom du champ par défaut est parent\_id, pour stocker l'id de l'objet parent.
+- left - le nom du champ par défaut est lft, pour stocker la valeur lft de la ligne courante.
+- right - le nom du champ par défaut est rght, pour stocker la valeur rght de la ligne courante.
 
 Si vous êtes familier de la logique MPTT vous pouvez vous demander pourquoi un champ parent existe - parce qu'il est tout bonnement plus facile d'effectuer certaines tâches à l'usage, si un lien parent direct est stocké en base, comme rechercher les enfants directs. 
 
