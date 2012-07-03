@@ -9,16 +9,31 @@ qu'elle est la plus recherchée, mais aussi parce qu'elle peut-être la plus
 déroutante. Si vous recherchez une bonne façon de débuter avec les ACLs 
 en général, lisez ce qui suit.
 
-Soyez courageux et persévérant avec ce sujet, même si au départ cela paraît difficile. Une fois que vous aurez pris le coup, ce sera un outil extrêmement puissant, à garder sous la main quand vous développez votre application.
+Soyez courageux et persévérant avec ce sujet, même si au départ cela paraît difficile. 
+Une fois que vous aurez pris le coup, ce sera un outil extrêmement puissant, à garder 
+sous la main quand vous développez votre application.
 
 
 
 Comprendre le fonctionnement des ACL
 ===========================
 
-Les choses importantes requièrent un contrôle d'accès. Les listes de contrôles d'accès sont une façon de gérer les permissions d'une application d'une manière très précise et pourtant facilement maintenable et manipulable.
+Les choses importantes requièrent un contrôle d'accès. Les listes de contrôles d'accès 
+sont une façon de gérer les permissions d'une application d'une manière très précise et 
+pourtant facilement maintenable et manipulable.
 
-Les listes de contrôles d'accès, ou ACL (Access Control Lists), manipulent deux choses principales : les choses qui veulent accéder à des trucs et celles qui sont recherchées. Dans le jargon ACL, les choses qui veulent accéder à des trucs (le plus souvent les utilisateurs) sont appelées access request objects (objets requête d'accès) ou AROs. Les choses du système qui sont recherchées (le plus souvent les actions ou les données) sont appelées access control objects (objets contrôle d'accès) ou ACOs. Les entités sont appelées "objets", parce que parfois, l'objet demandé n'est pas une personne - des fois, vous pourriez vouloir limiter l'accès à certains contrôleurs de Cake qui doivent initier leur logique dans d'autres parties de votre application. Les ACOs pourraient être n'importe quoi que vous voudriez contrôler, d'une action de contrôleur à un service Web, en passant par une case de l'agenda en ligne de votre Mamy.
+Les listes de contrôles d'accès, ou ACL (Access Control Lists), manipulent deux choses 
+principales : les choses qui veulent accéder à des trucs et celles qui sont recherchées. 
+Dans le jargon ACL, les choses qui veulent accéder à des trucs 
+(le plus souvent les utilisateurs) sont appelées access request objects 
+(objets requête d'accès) ou AROs. Les choses du système qui sont recherchées 
+(le plus souvent les actions ou les données) sont appelées access control objects 
+(objets contrôle d'accès) ou ACOs. Les entités sont appelées "objets", parce que parfois, 
+l'objet demandé n'est pas une personne - des fois, vous pourriez vouloir limiter 
+l'accès à certains contrôleurs de Cake qui doivent initier leur logique dans d'autres 
+parties de votre application. Les ACOs pourraient être n'importe quoi que vous voudriez 
+contrôler, d'une action de contrôleur à un service Web, en passant par une case de 
+l'agenda en ligne de votre Mamy.
 
 Rappel :
 
@@ -27,7 +42,12 @@ Rappel :
 
 Généralement, les ACL sont utilisées pour décider quand un ARO peut obtenir l'accès à un ACO.
 
-Afin de vous aider à comprendre comment toutes les choses travaillent ensemble, utilisons un exemple semi-fonctionnel. Imaginons un moment, un ordinateur utilisé par un célèbre groupe d'aventuriers tirés du roman fantastique le *Seigneur des Anneaux*. Le chef du groupe, Gandalf, veut gérer les biens du groupe, tout en maintenant un bon niveau de confidentialité et de sécurité entre les autres membres de l'équipe. La première chose dont il a besoin est de créer une liste d'AROs qui comprend :
+Afin de vous aider à comprendre comment toutes les choses travaillent ensemble, utilisons 
+un exemple semi-fonctionnel. Imaginons un moment, un ordinateur utilisé par un célèbre 
+groupe d'aventuriers tirés du roman fantastique le *Seigneur des Anneaux*. 
+Le chef du groupe, Gandalf, veut gérer les biens du groupe, tout en maintenant un bon 
+niveau de confidentialité et de sécurité entre les autres membres de l'équipe. 
+La première chose dont il a besoin est de créer une liste d'AROs qui comprend :
 
 -    Gandalf
 -    Aragorn
@@ -41,18 +61,24 @@ Afin de vous aider à comprendre comment toutes les choses travaillent ensemble,
 
 .. note::
 
-    Comprenez que l'ACL n'est pas la même chose que l'authentification. L'ACL est ce qui vient après qu'un utilisateur ait été authentifié. Par contre, les deux sont habituellement utilisés de paire, il est important de faire la distinction entre savoir 
-    qui est quelqu'un (authentification) et savoir ce qu'il peut faire (ACL).
+    Comprenez que l'ACL n'est pas la même chose que l'authentification. L'ACL est ce 
+qui vient après qu'un utilisateur ait été authentifié. Par contre, les deux sont 
+habituellement utilisés de paire, il est important de faire la distinction entre savoir 
+qui est quelqu'un (authentification) et savoir ce qu'il peut faire (ACL).
 
-La chose suivante que Gandalf doit faire, c'est de créer une liste initiale des choses, ou ACOs, que le système va contrôler. Sa liste devrait ressembler à quelque chose comme ça :
+La chose suivante que Gandalf doit faire, c'est de créer une liste initiale des choses, 
+ou ACOs, que le système va contrôler. Sa liste devrait ressembler à quelque chose comme ça :
 
--   Les armes
+-    Les armes
 -    L'Anneau
 -    Le porc salé
 -    La diplomatie
 -    La bière
 
-Traditionnellement, les systèmes étaient gérés en utilisant une sorte de matrice, qui présentait un ensemble basique d'utilisateurs et de permissions en relation avec les objets. Si ces informations étaient stockées dans un tableau, il ressemblerait à ça :
+Traditionnellement, les systèmes étaient gérés en utilisant une sorte de matrice, 
+qui présentait un ensemble basique d'utilisateurs et de permissions en relation 
+avec les objets. Si ces informations étaient stockées dans un tableau, il 
+ressemblerait à ça :
 
  
 ======== ========= ========= ============ ============= ========
@@ -82,13 +108,29 @@ Merry                                     Autorisé      Autorisé
 A première vue, il semble que ce système pourrait très bien fonctionner. 
 Les affectations peuvent être mises en place à des fin
 de sécurité (seul Frodo peut accéder à l'Anneau) et pour éviter les accidents 
-(en gardant les hobbits à distance du porc salé et des armes). Cela paraît suffisamment complet et assez facile à lire, n'est-ce pas ?
+(en gardant les hobbits à distance du porc salé et des armes). Cela paraît 
+suffisamment complet et assez facile à lire, n'est-ce pas ?
 
-Pour un petit système comme celui-ci, peut-être qu'une configuration en matrice pourrait fonctionner. Mais pour un système évolutif ou un système avec un fort pourcentage de ressources (ACOs) et d'utilisateurs (AROs), un tableau peut devenir plus lourd que rapide. 
+Pour un petit système comme celui-ci, peut-être qu'une configuration en matrice 
+pourrait fonctionner. Mais pour un système évolutif ou un système avec un fort 
+pourcentage de ressources (ACOs) et d'utilisateurs (AROs), un tableau peut devenir
+plus lourd que rapide. 
 
-Imaginez une tentative de contrôler l'accès à des centaines de camps militaires et de gérer cela par unité. Un autre inconvénient des matrices est que vous ne pouvez par vraiment regrouper logiquement des sections d'utilisateurs ou faire des changements de permissions en cascade, pour des groupes d'utilisateurs basés sur ces regroupements logiques. Par exemple, il serait certainement plus chouette d'autoriser automatiquement les hobbits à accéder à la bière et au porc une fois que le combat est fini : faire ça sur une base d'utilisateurs gérés individuellement pourrait être fastidieux et source d'erreur. Faire des changements de permissions en cascade pour tous les "hobbits" serait plus facile.
+Imaginez une tentative de contrôler l'accès à des centaines de camps militaires
+et de gérer cela par unité. Un autre inconvénient des matrices est que vous ne
+pouvez par vraiment regrouper logiquement des sections d'utilisateurs ou faire
+des changements de permissions en cascade, pour des groupes d'utilisateurs basés
+sur ces regroupements logiques. Par exemple, il serait certainement plus chouette
+d'autoriser automatiquement les hobbits à accéder à la bière et au porc une fois 
+que le combat est fini : faire ça sur une base d'utilisateurs gérés individuellement
+pourrait être fastidieux et source d'erreur. Faire des changements de permissions en
+cascade pour tous les "hobbits" serait plus facile.
 
-Les ACL sont très souvent implémentés dans une structure en arbre. Il y a généralement un arbre d'AROs et un arbre d'ACOs. En organisant vos objets en arbres, les permissions peuvent toujours être distribuées d'une façon granulaire, tout en maintenant encore une bonne cohérence de l'ensemble. En chef raisonnable qu'il est, Gandalf choisit d'utiliser l'ACL dans son nouveau système et d'organiser ses objets de la manière suivante :
+Les ACL sont très souvent implémentés dans une structure en arbre. Il y a généralement
+un arbre d'AROs et un arbre d'ACOs. En organisant vos objets en arbres, les permissions
+peuvent toujours être distribuées d'une façon granulaire, tout en maintenant encore une
+bonne cohérence de l'ensemble. En chef raisonnable qu'il est, Gandalf choisit d'utiliser
+l'ACL dans son nouveau système et d'organiser ses objets de la manière suivante :
 
    
 
@@ -115,7 +157,10 @@ Les ACL sont très souvent implémentés dans une structure en arbre. Il y a gé
       
       -  Gollum
 
-L'utilisation d'une structure en arbre pour les AROs permet à Gandalf, de définir en une fois des autorisations qui s'appliquent à un groupe entier d'utilisateurs. Ainsi, en utilisant notre arbre ARO, Gandalf peut ajouter, après coup, quelques permissions de groupe :
+L'utilisation d'une structure en arbre pour les AROs permet à Gandalf, de définir
+en une fois des autorisations qui s'appliquent à un groupe entier d'utilisateurs. 
+Ainsi, en utilisant notre arbre ARO, Gandalf peut ajouter, après coup, quelques 
+permissions de groupe :
 
    
 
@@ -168,11 +213,12 @@ Pippin                  --               Still allowing ale!
 .. note::
 
     Puisque le nœud "Pippin" dans l'arbre d'ACL ne refuse pas spécifiquement 
-    l'accès à l'ACO bière, le résultat final est que nous donnons l'accès à cet ACO.
+    l'accès à l'ACO bière, le résultat final est que nous donnons l'accès à 
+    cet ACO.
     
-L'arbre nous permet aussi de faire des ajustements plus fins pour un meilleur contrôle granulaire, tout en conservant encore la capacité de faire de grands changements pour les groupes d'AROs :
-
-   
+L'arbre nous permet aussi de faire des ajustements plus fins pour un meilleur
+contrôle granulaire, tout en conservant encore la capacité de faire de grands 
+changements pour les groupes d'AROs :
 
 -  Communauté de l'Anneau
    (**Refuser**: tout)
@@ -233,8 +279,9 @@ Définir les permissions : ACL de Cake basées sur des fichiers INI
 ==========================================
 
 La première implémentation d'ACL sur Cake était basée sur des fichiers 
-INI stockés dans l'installation de Cake. Bien qu'elle soit stable et pratique, nous recommandons d'utiliser plutôt les solutions d'ACL basées sur les bases de données, 
-surtout pour leur capacité à créer de nouveaux ACOs et AROs à la volée. 
+INI stockés dans l'installation de Cake. Bien qu'elle soit stable et pratique, 
+nous recommandons d'utiliser plutôt les solutions d'ACL basées sur les bases 
+de données,surtout pour leur capacité à créer de nouveaux ACOs et AROs à la volée. 
 Nous recommandons son utilisation dans de simples applications - et spécialement 
 pour ceux qui ont une raison plus ou moins particulière de ne pas vouloir utiliser 
 une base de données.
@@ -324,7 +371,8 @@ nous avions façonnée pourrait ressembler dans une syntaxe INI :
     allow = porc_sale
 
 
-Maintenant que vous avez défini vos permissions, vous pouvez passer à la section sur la <vérification des permissions> utilisant le composant ACL.
+Maintenant que vous avez défini vos permissions, vous pouvez passer à la section
+sur la <vérification des permissions> utilisant le composant ACL.
 
 Maintenant que vos partitions sont définis, vous pouvez passer à la section
 :ref:`vérification des permissions <verification-permissions>avec le composant ACL.
@@ -351,7 +399,8 @@ d'ACO et d'ARO.
 
 Pour commencer, vous devrez d'abord être sûr que 
 votre ``/app/config/database.php`` soit présent et correctement configuré. 
-Voir la section 4.1 pour plus d'information sur la configuration d'une base de données.
+Voir la section 4.1 pour plus d'information sur la configuration 
+d'une base de données.
 
 Une fois que vous l'avez fait, utilisez la console de CakePHP 
 pour créer vos tables d'ACL :
@@ -443,18 +492,23 @@ un alias textuel pour l'objet.
    
 
 Vous voulez créer de nouveaux objets ACL en utilisant le modèle ACL du coeur 
-de CalePHP. Pour ce faire, il y a un nombre de champs que vous aurez à utiliser pour enregistrer les données : ``model``, ``foreign_key``, ``alias``, et ``parent_id``.
+de CalePHP. Pour ce faire, il y a un nombre de champs que vous aurez à utiliser 
+pour enregistrer les données : ``model``, ``foreign_key``, ``alias``, et ``parent_id``.
 
 Les champs ``model`` et ``foreign_key`` pour un objet ACL vous permettent de créer 
 un lien entre les objets qui correspondent à l'enregistrement du modèle (s'il en est). 
 Par exemple, un certain nombre d'AROs correspondraient aux enregistrement 
-User de la base de données. Il faut configurer la ``foreign_key`` pour que l'ID du User 
-vous permette de lier les informations de l'ARO et de l'User avec un seul appel find() au modèle User avec la bonne association. 
+User de la base de données. Il faut configurer la ``foreign_key`` pour que l'ID 
+du User vous permette de lier les informations de l'ARO et de l'User avec un seul 
+appel find() au modèle User avec la bonne association. 
 Réciproquement, si vous voulez gérer les opérations d'édition sur un article spécifique 
-d'un blog ou d'une liste de recette, vous devez choisir de lier un ACO à cet enregistrement spécifique du modèle.
+d'un blog ou d'une liste de recette, vous devez choisir de lier un ACO à cet enregistrement 
+spécifique du modèle.
 
 L'``alias`` d'un objet ACL est un simple label lisible pour un humain que vous pouvez utiliser 
-pour identifier un objet ACL qui n'est pas en relation directe avec un enregistrement d'un modèle. Les alias sont couramment utilisés pour nommer les groupes d'utilisateurs ou les collections d'ACOs.
+pour identifier un objet ACL qui n'est pas en relation directe avec un enregistrement 
+d'un modèle. Les alias sont couramment utilisés pour nommer les groupes d'utilisateurs 
+ou les collections d'ACOs.
 
 Le ``parent_id`` d'un objet ACL vous permet de remplir la structure de l'arbre. 
 Il fournit l'ID du noeud parent dans l'arbre pour créer un nouvel enfant.
@@ -557,7 +611,8 @@ enregistrements spécifiques du modèle de notre base de données.
 
 .. note::
 
-    Quand nous ajouterons un noeud enfant à un arbre, nous devrons nous assurer d'utiliser les ID des noeuds ACL, plutôt que d'utiliser la valeur de la foreign_key (clé étrangère).
+    Quand nous ajouterons un noeud enfant à un arbre, nous devrons nous assurer d'utiliser 
+les ID des noeuds ACL, plutôt que d'utiliser la valeur de la foreign_key (clé étrangère).
 
 ::
 
@@ -693,7 +748,9 @@ naturelle de ce dernier dans une application Cake est un groupe de modèles,
 et enfin pour les contrôleurs qui le manipulent. A côté des contrôleurs eux-mêmes, 
 nous allons vouloir contrôler l'accès à des actions spécifiques de ces contrôleurs.
 
-Basés sur cette idée, nous allons configurer un arbre d'ACO qui va imiter une configuration d'application Cake. Depuis nos cinq ACOs, nous allons créer un arbre d'ACO qui devra ressembler à ça :
+Basés sur cette idée, nous allons configurer un arbre d'ACO qui va imiter une 
+configuration d'application Cake. Depuis nos cinq ACOs, nous allons créer un 
+arbre d'ACO qui devra ressembler à ça :
 
 
 -    Armes
@@ -743,7 +800,8 @@ composant Acl.
     
     }
 
-Configurons quelques permissions de base, en utilisant le Composant Acl dans une action à l'intérieur de ce contrôleur.
+Configurons quelques permissions de base, en utilisant le Composant Acl dans une
+action à l'intérieur de ce contrôleur.
 
 ::
 
@@ -774,8 +832,10 @@ mais vous pouvez ajouter une colonne dans la table aros_acos de la base de donn�
 
 Le second ensemble d'appels est une tentative de prendre une décision un peu plus 
 précise sur les permissions. Nous voulons qu'Aragorn conserve ses privilèges de plein 
-accès, mais nous refusons aux autres guerriers du groupe, la capacité de supprimer les enregistrements de la table Armes. Nous utilisons la syntaxe avec un alias pour 
-adresser les AROs ci-dessus, mais vous pourriez utiliser votre propre syntaxe modèle/clé étrangère. Ce que nous avons ci-dessus est équivalent à ceci :
+accès, mais nous refusons aux autres guerriers du groupe, la capacité de supprimer 
+les enregistrements de la table Armes. Nous utilisons la syntaxe avec un alias pour 
+adresser les AROs ci-dessus, mais vous pourriez utiliser votre propre syntaxe 
+modèle/clé étrangère. Ce que nous avons ci-dessus est équivalent à ceci :
 
 
 ::
@@ -791,7 +851,8 @@ adresser les AROs ci-dessus, mais vous pourriez utiliser votre propre syntaxe mo
 
     L'adressage d'un nœud en utilisant la syntaxe avec un alias, nécessite une chaîne 
     délimitée par des slashs ('/utilisateurs/salaries/developpeurs'). L'adressage d'un 
-    nœud en utilisant la syntaxe modèle/clé étrangère nécessite un tableau avec deux paramètres : ``array('model' => 'Utilisateur', 'foreign_key' => 8282)``.
+    nœud en utilisant la syntaxe modèle/clé étrangère nécessite un tableau avec deux 
+    paramètres : ``array('model' => 'Utilisateur', 'foreign_key' => 8282)``.
 
    
 La prochaine section nous aidera à valider notre configuration, en utilisant 
