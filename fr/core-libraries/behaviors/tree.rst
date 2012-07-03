@@ -4,9 +4,18 @@ Tree
 .. php:class:: TreeBehavior()
 
 C'est assez courant de vouloir stocker ses données sous une forme hiérarchique 
-dans la table d'une base de données. Des exemples de tels besoins pourraient être des catégories avec un nombre illimité de sous-catégories, des données en relation avec un système de menu multi-niveaux ou une représentation littérale d'une hiérarchie, comme celle qui est utilisée pour stocker les objets de contrôle d'accès avec la logique ACL.
+dans la table d'une base de données. Des exemples de tels besoins pourraient être 
+des catégories avec un nombre illimité de sous-catégories, des données en relation 
+avec un système de menu multi-niveaux ou une représentation littérale d'une 
+hiérarchie, comme celle qui est utilisée pour stocker les objets de contrôle d'accès 
+avec la logique ACL.
 
-Pour de petits arbres de données et les cas où les données n'ont que quelques niveaux de profondeurs, c'est simple d'ajouter un champ parent_id à votre table et de l'utiliser pour savoir quel objet est le parent de quel autre. En natif avec CakePHP, il existe cependant un moyen puissant d'avoir les bénéfices de la logique MPTT `MPTT logic <http://www.sitepoint.com/hierarchical-data-database-2/>`, sans avoir à connaître les détails de l'implémentation technique - à moins que ça ne vous intéresse ;).
+Pour de petits arbres de données et les cas où les données n'ont que quelques niveaux 
+de profondeurs, c'est simple d'ajouter un champ parent_id à votre table et de l'utiliser 
+pour savoir quel objet est le parent de quel autre. En natif avec CakePHP, il existe cependant
+un moyen puissant d'avoir les bénéfices de la logique MPTT
+`MPTT logic <http://www.sitepoint.com/hierarchical-data-database-2/>`, sans avoir à connaître les
+détails de l'implémentation technique - à moins que ça ne vous intéresse ;).
 
 
 Pré-requis
@@ -19,7 +28,9 @@ que listés ci-dessous (tous sont des entiers) :
 - left - le nom du champ par défaut est lft, pour stocker la valeur lft de la ligne courante.
 - right - le nom du champ par défaut est rght, pour stocker la valeur rght de la ligne courante.
 
-Si vous êtes familier de la logique MPTT vous pouvez vous demander pourquoi un champ parent existe - parce qu'il est tout bonnement plus facile d'effectuer certaines tâches à l'usage, si un lien parent direct est stocké en base, comme rechercher les enfants directs. 
+Si vous êtes familier de la logique MPTT vous pouvez vous demander pourquoi un champ parent 
+existe - parce qu'il est tout bonnement plus facile d'effectuer certaines tâches à l'usage, si un
+lien parent direct est stocké en base, comme rechercher les enfants directs. 
 
 
 
@@ -64,7 +75,8 @@ Créons la table suivante ::
     INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(15, 'International', 13, 26, 27);
 
 Dans le but de vérifier que tout est défini correctement, nous pouvons créer une 
-méthode de test et afficher les contenus de notre arbre de catégories, pour voir à quoi il ressemble. Avec un simple contrôleur ::
+méthode de test et afficher les contenus de notre arbre de catégories, pour voir à quoi il ressemble. 
+Avec un simple contrôleur ::
 
     <?php
     class CategoriesController extends AppController {
@@ -283,7 +295,9 @@ Effacement des données
 --------------------------
 Le comportement Tree fournit un certain nombre de façons de gérer la suppression de
 des données. Pour commencer par le plus simple exemple, disons que la
-catégorie des rapports n'est plus utile. Pour l'enlever * et tous les enfants qu'il peut avoir * il suffit d'appeler et supprimer comme vous le feriez pour n'importe quel modèle. Par exemple, avec le code suivant ::
+catégorie des rapports n'est plus utile. Pour l'enlever * et tous les enfants 
+qu'il peut avoir * il suffit d'appeler et supprimer comme vous le feriez pour n'importe 
+quel modèle. Par exemple, avec le code suivant ::
 
 
 
@@ -327,12 +341,14 @@ Interroger et utiliser vos données
 ------------------------------------
 
 Utiliser et manipuler des données hiérarchisées peut s'avérer assez difficile. 
-C'est pourquoi le comportement tree met à votre disposition quelques méthodes de permutations en plus des méthodes find de bases.
+C'est pourquoi le comportement tree met à votre disposition quelques méthodes de 
+permutations en plus des méthodes find de bases.
 
 .. note::
 
     La plupart des méthodes de tree se basent et renvoient des données triées 
-    en fonction du champ ``lft``. Si vous appelez ``find()`` sans trier en fonction de ``lft``, ou si vous faites une demande de tri sur un tree, vous risquez d'obtenir des résultats inattendus.
+    en fonction du champ ``lft``. Si vous appelez ``find()`` sans trier en fonction de 
+    ``lft``, ou si vous faites une demande de tri sur un tree, vous risquez d'obtenir des résultats inattendus.
 
 
 .. php:class:: TreeBehavior
@@ -501,7 +517,8 @@ qui déplace un noeud spécifié vers le bas de l'arbre::
             if ($delta > 0) {
                 $this->Category->moveDown($this->Category->id, abs($delta));
             } else {
-                $this->Session->setFlash('Merci de fournir de combien de positions vous souhaiteriez le déplacer vers le bas.'); 
+                $this->Session->setFlash('Merci de fournir de combien de positions vous souhaiteriez 
+                le déplacer vers le bas.'); 
             }
 
             $this->redirect(array('action' => 'index'), null, true);
@@ -532,7 +549,8 @@ déplacant un noeud plus haut dans un arbre::
             if ($delta > 0) {
                 $this->Category->moveUp($this->Category->id, abs($delta));
             } else {
-                $this->Session->setFlash('Merci de fournir de combien de positions vous souhaiteriez le déplacer vers le haut.'); 
+                $this->Session->setFlash('Merci de fournir de combien de positions vous souhaiteriez le déplacer 
+                vers le haut.'); 
             }
 
             $this->redirect(array('action' => 'index'), null, true);
@@ -613,8 +631,8 @@ les enfants ont été reparenté et 'Sport' a été effacé.
 
 .. php:method:: reorder(array('id' => null, 'field' => $Model->displayField, 'order' => 'ASC', 'verify' => true))
 
-Réordonne les nœuds (et nœuds enfants) de l'arbre en fonction du champ et de la direction spécifiée dans les paramètres. Cette méthode ne
-changera pas le parent d'un nœud. ::
+Réordonne les nœuds (et nœuds enfants) de l'arbre en fonction du champ et de la 
+direction spécifiée dans les paramètres. Cette méthode ne changera pas le parent d'un nœud.::
     
 
         <?php
@@ -627,20 +645,25 @@ changera pas le parent d'un nœud. ::
 
     .. note::
 
-        Si vous avez sauvegardé vos données ou fait d'autres opérations sur le modèle,vous pouvez définir ``$model->id = null`` avant d'appeler   ``reorder``. Sinon, seul les enfants du nœud actuel et ses enfants seront réordonnés.
+    Si vous avez sauvegardé vos données ou fait d'autres opérations sur le modèle,vous 
+    pouvez définir ``$model->id = null`` avant d'appeler   ``reorder``. Sinon, seul les enfants du nœud 
+    actuel et ses enfants seront réordonnés.
         
 
 Intègrité des données
 =====================
 
-En raison de la nature complexes auto-référentielle de ces structures de données comme les arbres et listes chaînées, elles peuvent parfois se rompre par un appel négligent. Rassurez-vous, tout n'est pas perdu! Le comportement Tree contient plusieurs fonctionnalités précédemment non-documentées destinés à se remettre de telles situations.
+En raison de la nature complexes auto-référentielle de ces structures de données comme les arbres et 
+listes chaînées, elles peuvent parfois se rompre par un appel négligent. Rassurez-vous, tout
+n'est pas perdu! Le comportement Tree contient plusieurs fonctionnalités précédemment non-documentées 
+destinés à se remettre de telles situations.
     
 .. php:method:: recover($mode = 'parent', $missingParentAction = null)
 
 Le parmètre ``mode`` est utilisé pour spécifier la source de l'info qui est
-correcte. La source opposée de donnée sera peuplées en fonction de cette source d'information. Ex si le champ MPTT est corrompu ou vide, avec
-le ``$mode 'parent'`` la valeur du champ ``parent_id`` sera utilisée pour
-peupler les champs gauche et droite.
+correcte. La source opposée de donnée sera peuplées en fonction de cette source d'information. 
+Ex: si le champ MPTT est corrompu ou vide, avec le ``$mode 'parent'`` la valeur du champ 
+``parent_id`` sera utilisée pour peupler les champs gauche et droite.
 
 Le paramètre ``missingParentAction``s'applique uniquement aux
 "parent" mode et détermine ce qu'il faut faire si le champ parent
