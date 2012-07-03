@@ -151,21 +151,27 @@ En executant les extraits de code suivant devrait modifier l'arbre comme suit:
 -  Mes Catégorie
 
    -  Fun
+
       -  Sport
+
          -  Surf
          -  Tricot Extreme 
          -  Faire du Skate **Nouveau**
 
       -  Amis
+
          -  Gérard
-        -  Gwendoline
+         -  Gwendoline
 
    -  Travail
+
       -  Rapports
+
          -  Annuel
          -  Statut
 
       -  Voyages
+
          -  National
          -  International
 
