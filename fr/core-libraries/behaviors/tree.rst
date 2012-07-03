@@ -474,21 +474,21 @@ C'est pourquoi le comportement tree met à votre disposition quelques méthodes 
 Utilisation avancée
 ==============
 
-    Le comportement Tree ne fonctionne pas uniquement en tâche de fond,
-    il y a un certain nombre de méthode spécifiques dans le comportement Tree
-    pour répondre a vos besoin de données hierarchique, et des
-    problèmes inattendus qui pourraient survenir durant le processus. 
+Le comportement Tree ne fonctionne pas uniquement en tâche de fond,
+il y a un certain nombre de méthode spécifiques dans le comportement Tree
+pour répondre a vos besoin de données hierarchique, et des
+problèmes inattendus qui pourraient survenir durant le processus. 
 
 
-    .. php:method:: moveDown()
+.. php:method:: moveDown()
 
-    Utilisé pour déplacer un seul nœud dans l'arbre. Vous devez fournir l\'
-     ID de l'élément à déplacer et un nombre positif de combien de
-     positions le noeud devrait être déplacé vers le bas. 
-     Tous les nœuds enfants pour le noeud spécifié seront également déplacés.
+Utilisé pour déplacer un seul nœud dans l'arbre. Vous devez fournir l\'
+ID de l'élément à déplacer et un nombre positif de combien de
+positions le noeud devrait être déplacé vers le bas. 
+Tous les nœuds enfants pour le noeud spécifié seront également déplacés.
 
-    Voici l\'exemple  d'un controller action (dans un controlleur nommé Category )
-    qui déplace un noeud spécifié vers le bas de l'arbre::
+Voici l\'exemple  d'un controller action (dans un controlleur nommé Category )
+qui déplace un noeud spécifié vers le bas de l'arbre::
     
 
         <?php
@@ -507,20 +507,20 @@ Utilisation avancée
             $this->redirect(array('action' => 'index'), null, true);
         }
 
-    Par exemple , si vous souhaitez déplacer le "Sport" (id de 3) d'une catégorie
-    vers le bas, vous devriez requéter: /categories/movedown/3/1.
+Par exemple , si vous souhaitez déplacer le "Sport" (id de 3) d'une catégorie
+vers le bas, vous devriez requéter: /categories/movedown/3/1.
    
-    .. php:method:: moveUp()
+.. php:method:: moveUp()
 
     
-     Utilisé pour déplacer un seul nœud de l'arbre. Vous devez fournir l'ID
-     de l'élément à déplacer et un nombre positif de combien de positions le
-     noeud devrait être déplacé vers le haut. Tous les nœuds enfants seront également
-     déplacés.
+Utilisé pour déplacer un seul nœud de l'arbre. Vous devez fournir l'ID
+de l'élément à déplacer et un nombre positif de combien de positions le
+noeud devrait être déplacé vers le haut. Tous les nœuds enfants seront également
+déplacés.
 
    
-    Voici un exemple d\'un controlleur action (dans un controller categories)
-    déplacant un noeud plus haut dans un arbre::
+Voici un exemple d\'un controlleur action (dans un controller categories)
+déplacant un noeud plus haut dans un arbre::
     
         <?php
         public function moveup($id = null, $delta = null) {            
@@ -538,20 +538,20 @@ Utilisation avancée
             $this->redirect(array('action' => 'index'), null, true);
         }
 
-    Par exemple , si vous souhaitez déplacer la catégory "Gwendoline" (id de 8 ) plus haut
-    d'une position vous devriez requêter: /categories/moveup/8/1.
-    Maintenant l'ordre des Amis sera Gwendoline, Gérard.
+Par exemple , si vous souhaitez déplacer la catégory "Gwendoline" (id de 8 ) plus haut
+d'une position vous devriez requêter: /categories/moveup/8/1.
+Maintenant l'ordre des Amis sera Gwendoline, Gérard.
     
 
-    .. php:method:: removeFromTree($id = null, $delete = false)
+.. php:method:: removeFromTree($id = null, $delete = false)
 
-     En utilisant cette méthode sera supprimé ou déplacé un nœud, tout en conservant
-     son sous-arbre, qui sera apparenté à un niveau supérieur. 
-     Il offre plus de contrôle que: ref: `modèle-delete` qui, pour un modèle
-     en utilisant le comportement tree supprimera le noeud spécifié et tous
-     ses enfants.
+En utilisant cette méthode sera supprimé ou déplacé un nœud, tout en conservant
+son sous-arbre, qui sera apparenté à un niveau supérieur. 
+Il offre plus de contrôle que: ref: `modèle-delete` qui, pour un modèle
+en utilisant le comportement tree supprimera le noeud spécifié et tous
+ses enfants.
 
-    Prenons l\'arbre suivant au début:
+Prenons l\'arbre suivant au début:
 
     
     -  Mes Catégories
@@ -566,13 +566,13 @@ Utilisation avancée
 
 
 
-     En executant le code suivant avec l\'id de 'Sport'::        
+En executant le code suivant avec l\'id de 'Sport'::        
     
 
         <?php
         $this->Node->removeFromTree($id); 
 
-    Le noeud Sport sera retiré du haut du noeud:
+Le noeud Sport sera retiré du haut du noeud:
     
 
       -  Mes Catégories
@@ -586,17 +586,17 @@ Utilisation avancée
       -  Sport **Déplacé**
 
     
-    Cela démontre le comportement par défaut du ``removeFromTree`` de
-    déplacement d'un noeud pour ne plus avoir de parent,et de re-parenter tout
-    les enfants.
+Cela démontre le comportement par défaut du ``removeFromTree`` de
+déplacement d'un noeud pour ne plus avoir de parent,et de re-parenter tout
+les enfants.
 
-    Si toutefois  l'extrait de code suivant était utilisé avec l\'id  'Sport'::
+Si toutefois  l'extrait de code suivant était utilisé avec l\'id  'Sport'::
     
 
            <?php
         $this->Node->removeFromTree($id, true); 
 
-    L'arbre deviendrait.
+L'arbre deviendrait.
 
 
     -  Mes Catégories
@@ -607,14 +607,14 @@ Utilisation avancée
          -  Tricot Extreme
          -  Skate
 
-   Ceci démontre l'utilisation alternative de ``removeFromTree``, 
-   les enfants ont été reparenté et 'Sport' a été effacé.
+Ceci démontre l'utilisation alternative de ``removeFromTree``, 
+les enfants ont été reparenté et 'Sport' a été effacé.
   
 
-    .. php:method:: reorder(array('id' => null, 'field' => $Model->displayField, 'order' => 'ASC', 'verify' => true))
+.. php:method:: reorder(array('id' => null, 'field' => $Model->displayField, 'order' => 'ASC', 'verify' => true))
 
-    Réordonne les nœuds (et nœuds enfants) de l'arbre en fonction du champ et de la direction spécifiée dans les paramètres. Cette méthode ne
-    changera pas le parent d'un nœud. ::
+Réordonne les nœuds (et nœuds enfants) de l'arbre en fonction du champ et de la direction spécifiée dans les paramètres. Cette méthode ne
+changera pas le parent d'un nœud. ::
     
 
         <?php
@@ -633,34 +633,34 @@ Utilisation avancée
 Intègrité des données
 =====================
 
-    En raison de la nature complexes auto-référentielle de ces structures de données comme les arbres et listes chaînées, elles peuvent parfois se rompre par un appel négligent. Rassurez-vous, tout n'est pas perdu! Le comportement Tree contient plusieurs fonctionnalités précédemment non-documentées destinés à se remettre de telles situations.
+En raison de la nature complexes auto-référentielle de ces structures de données comme les arbres et listes chaînées, elles peuvent parfois se rompre par un appel négligent. Rassurez-vous, tout n'est pas perdu! Le comportement Tree contient plusieurs fonctionnalités précédemment non-documentées destinés à se remettre de telles situations.
     
-    .. php:method:: recover($mode = 'parent', $missingParentAction = null)
+.. php:method:: recover($mode = 'parent', $missingParentAction = null)
 
-    Le parmètre ``mode`` est utilisé pour spécifier la source de l'info qui est
-    correcte. La source opposée de donnée sera peuplées en fonction de cette source d'information. Ex si le champ MPTT est corrompu ou vide, avec
-    le ``$mode 'parent'`` la valeur du champ ``parent_id`` sera utilisée pour
-    peupler les champs gauche et droite.
+Le parmètre ``mode`` est utilisé pour spécifier la source de l'info qui est
+correcte. La source opposée de donnée sera peuplées en fonction de cette source d'information. Ex si le champ MPTT est corrompu ou vide, avec
+le ``$mode 'parent'`` la valeur du champ ``parent_id`` sera utilisée pour
+peupler les champs gauche et droite.
 
-    Le paramètre ``missingParentAction``s'applique uniquement aux
-     "parent" mode et détermine ce qu'il faut faire si le champ parent
-     contient un identifiant qui n'est pas présent.
+Le paramètre ``missingParentAction``s'applique uniquement aux
+"parent" mode et détermine ce qu'il faut faire si le champ parent
+contient un identifiant qui n'est pas présent.
     
-    Options ``$mode`` permises:
+Options ``$mode`` permises:
 
-    -  ``'parent'`` - utilise l'actuel``parent_id``pour mettre à jour les champs``lft`` and ``rght``.
-    -  ``'tree'`` - utilise  les actuels champs``lft``et``rght``pour mettre à jour le champ ``parent_id``
+-  ``'parent'`` - utilise l'actuel``parent_id``pour mettre à jour les champs``lft`` and ``rght``.
+-  ``'tree'`` - utilise  les actuels champs``lft``et``rght``pour mettre à jour le champ ``parent_id``
 
-    Les options de ``missingParentActions`` autorisées durant l\'utilisation de
-    ``mode='parent'``:
-
+Les options de ``missingParentActions`` autorisées durant l\'utilisation de
+``mode='parent'``:
     
-    -  ``null`` - ne fait rien et continu
-    -  ``'return'`` - ne fait rien et fait un return
-    -  ``'delete'`` - efface le noeud
-    -  ``int`` - defini parent\_id à cet id
+-  ``null`` - ne fait rien et continu
+-  ``'return'`` - ne fait rien et fait un return
+-  ``'delete'`` - efface le noeud
+-  ``int`` - defini parent\_id à cet id
 
-    Exemple::
+
+Exemple::
 
         <?php
         // Reconstruit tous les champs gauche et droit en se basant sur parent_id
@@ -672,22 +672,23 @@ Intègrité des données
         $this->Category->recover('tree');
         
 
-    .. php:method:: reorder($options = array())
+.. php:method:: reorder($options = array())
 
-    Réordonne les nœuds (et nœuds enfants) de l'arbre en fonction du
-     champ et de la direction spécifiée dans les paramètres. Cette méthode ne
-     change pas le parent d'un nœud.
+Réordonne les nœuds (et nœuds enfants) de l'arbre en fonction du
+champ et de la direction spécifiée dans les paramètres. Cette méthode ne
+change pas le parent d'un nœud.
     
-    La réorganisation affecte tous les nœuds dans l'arborescence par défaut, mais les options suivantes peuvent influer sur le processus:
+La réorganisation affecte tous les nœuds dans l'arborescence par défaut, mais les options
+suivantes peuvent influer sur le processus:
     
 
-    -  ``'id'`` - ne réordonne que les noeuds sous ce noeud.
-    -  ``'field``' - champ à utiliser pour le tri, par défaut le 
-       ``displayField`` du modèle.
-    -  ``'order'`` - ``'ASC'`` pour tri ascendant, ``'DESC'`` pour tri descendant.
-    -  ``'verify'`` - avec ou sans vérification avant tri.
+-  ``'id'`` - ne réordonne que les noeuds sous ce noeud.
+-  ``'field``' - champ à utiliser pour le tri, par défaut le ``displayField`` du modèle.
+-  ``'order'`` - ``'ASC'`` pour tri ascendant, ``'DESC'`` pour tri descendant.
+-  ``'verify'`` - avec ou sans vérification avant tri.
 
-    ``$options`` est utilisé pour passer tous les paramètres supplémentaires, et les clefs suivantes par défaut, toutes sont facultatives::
+``$options`` est utilisé pour passer tous les paramètres supplémentaires, et les clefs suivantes 
+par défaut, toutes sont facultatives::
      
         array(
             'id' => null,
@@ -697,24 +698,24 @@ Intègrité des données
         )
 
 
-    .. php:method:: verify()
+.. php:method:: verify()
 
-    Retourne ``True`` si l'arbre est valide sinon un tableau d'erreurs,
-     avec des champs pour le type, l'index, et le message d'erreur.
+Retourne ``True`` si l'arbre est valide sinon un tableau d'erreurs,
+avec des champs pour le type, l'index, et le message d'erreur.
 
-     Chaque enregistrement dans le tableau de sortie est un tableau de la forme (type, id,message)
+Chaque enregistrement dans le tableau de sortie est un tableau de la forme (type, id,message)
     
 
-    -  ``type`` est soit ``'index'`` ou ``'node'``
-    -  ``'id'`` est l\'id du noeud erroné.
-    -  ``'message'`` dépend de l'erreur rencontrée
+-  ``type`` est soit ``'index'`` ou ``'node'``
+-  ``'id'`` est l\'id du noeud erroné.
+-  ``'message'`` dépend de l'erreur rencontrée
 
-    Exemple d'utilisation::
+Exemple d'utilisation::
 
         <?php
         $this->Category->verify();
 
-    Exemple de sortie::
+Exemple de sortie::
 
         Array
         (
