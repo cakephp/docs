@@ -88,7 +88,6 @@ et une définition de modèle encore plus simple :::
 Nous pouvons vérifier à quoi ressemble les données de notre arbre 
 de catégories, en visitant /categories. Vous devriez voir quelque chose comme :
 
-
 -  Mes Catégories
    
    -  Fun
@@ -148,7 +147,6 @@ Le comportement Tree additionnera vos nouveaux ajouts au sommet de l'arbre::
     $this->Category->save($data);
 
 En executant les extraits de code suivant devrait modifier l'arbre comme suit:
-
 
 -  Mes Catégorie
    
