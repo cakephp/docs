@@ -104,7 +104,6 @@ Merry                                     Autorisé      Autorisé
 ======== ========= ========= ============ ============= ========
 
 
-
 A première vue, il semble que ce système pourrait très bien fonctionner. 
 Les affectations peuvent être mises en place à des fin
 de sécurité (seul Frodo peut accéder à l'Anneau) et pour éviter les accidents 
