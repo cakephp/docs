@@ -58,10 +58,6 @@ La chose suivante que Gandalf doit faire, c'est de créer une liste initiale des
 Traditionnellement, les systèmes étaient gérés en utilisant une sorte de matrice, qui présentait un ensemble basique d'utilisateurs et de permissions en relation avec les objets. Si ces informations étaient stockées dans un tableau, il ressemblerait à ça :
 
  
-========	=========	=========	============	=============	========
-x	Les armes	L'anneau	 Le porc salé	La diplomacie	La bière    
-========	=========	=========	============	=============	========
-
 ======== ========= ========= ============ ============= ========
 x        Les armes L'anneau  Le porc salé La diplomacie La bière    
 ======== ========= ========= ============ ============= ========
