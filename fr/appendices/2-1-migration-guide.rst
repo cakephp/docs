@@ -58,20 +58,23 @@ Modèles
   parent field, le find threaded l'utilisera par défaut.
 - Les paramètres pour les requêtes utilisant les requêtes préparées vont maintenant
   faire partie de l'instruction SQL.
-- Validation arrays can now be more specific with when a field is required.
-  The ``required`` key now accepts ``create`` and ``update``.  These values will
-  make a field required when creating or updating.
+- Les tableaux de validation peuvent maintenant être plus précis quand un champ est obligatoire.
+  La clé ``required`` accepte ``create`` et ``update``.  Ces valeurs rendront un champ
+  obligatoire lors de la création ou la mise à jour.
 - Model now has a ``schemaName`` property.  If your application switches
   datasources by modifying :php:attr:`Model::$useDbConfig` you should also
   modify ``schemaName`` or use :php:meth:`Model::setDataSource()` method which
   handles this for you.
+  Le Modèle a maintenant une propriété ``schemaName``. Si votre application change de sources de données
+  en modifiant :php:attr:`Model::$useDbConfig`, vous devriez aussi modifier
+  ``schemaName`` ou utiliser la méthode :php:meth:`Model::setDataSource()` qui gère cela pour vous.
 
 CakeSession
 -----------
 
 .. versionchanged:: 2.1.1
-    CakeSession no longer sets the P3P header, as this is the responsibity of your application.
-    More info see ticket `#2515 <http://cakephp.lighthouseapp.com/projects/42648/tickets/2515-cakephp-20-session-p3p-header-doesnt-work-in-an-iframe>`_ in lighthouse
+    CakeSession ne fixe plus l'en-tête P3P, puisque cela relève de la responsabilité de votre application.
+    Pour plus d'informations, voyez le ticket `#2515 <http://cakephp.lighthouseapp.com/projects/42648/tickets/2515-cakephp-20-session-p3p-header-doesnt-work-in-an-iframe>`_ dans la lighthouse
 
 Behaviors
 =========
@@ -79,11 +82,12 @@ Behaviors
 TranslateBehavior
 -----------------
 
-- :php:class:`I18nModel` has been moved into a separate file.
+- :php:class:`I18nModel` a été déplacé vers un fichier séparé.
 
 Exceptions
 ==========
 
+L'exception par défaut de rendu inclut maintenant plus de détails
 The default exception rendering now includes more detailed stack traces
 including file excerpts and argument dumps for all functions in the stack.
 
