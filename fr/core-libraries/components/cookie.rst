@@ -23,13 +23,13 @@ Composant cookie fonctionne.
 +=================+==============+======================================================+
 | string $name    |'CakeCookie'  | Le nom du cookie                                     |
 +-----------------+--------------+------------------------------------------------------+
-| string $key     | null         | This string is used to encrypt                       |
-|                 |              | the value written to the cookie.                     |
-|                 |              | This string should be random and difficult to guess. |
+| string $key     | null         | Cette chaîne de caractère est utilisée pour encrypter|
+|                 |              | la valeur écrite vers le cookie.Cette chaîne devrait |
+|                 |              | être aléatoire et difficile à devinericult to guess. |
 +-----------------+--------------+------------------------------------------------------+
-| string $domain  | ''           | The domain name allowed to access the cookie. e.g.   |
-|                 |              | Use '.yourdomain.com' to allow access from all your  |
-|                 |              | subdomains.                                          |
+| string $domain  | ''           | Le nom de domaine autoriser à accéder au cookie ex:  |
+|                 |              | Utiliser '.votredomaine.com' pour to aautoriser les  |
+|                 |              | accès depuis tout vos sous-domaines                  |
 +-----------------+--------------+------------------------------------------------------+
 | int or string   | '5 Days'     | The time when your cookie will expire. Integers are  |
 | $time           |              | Interpreted as seconds and a value of 0 is equivalent|
