@@ -2,26 +2,26 @@ Cookie
 ######
 
 .. php:class:: CookieComponent(ComponentCollection $collection, array $settings = array())
+Le composant Cookie est un conteneur de la méthode native de PHP
+``setcookie``.Il inclut également toutes sortes de fonctionnalités pour 
+rendre le codage de code pour les cookies très pratique.
+Avant de tenter d'utiliser le composant Cookie, vous devez vous assurer
+que 'Cookie'est listé dnas la partie $components de votre controlleur.
 
-The CookieComponent is a wrapper around the native PHP ``setcookie``
-method. It also includes a host of delicious icing to make coding
-cookies in your controllers very convenient. Before attempting to
-use the CookieComponent, you must make sure that 'Cookie' is listed
-in your controllers' $components array.
+Paramétrage du contrôleur
+=========================
 
+Voici un certain nombre de variables de contrôleur qui vous permettent
+la manière dont les cookies sont créés et gérés.
+Définir ces variables spéciales dans la méthode beforeFilter () 
+de votre contrôleur vous permet de définir la façon dont le 
+Composant cookie fonctionne.
 
-Controller Setup
-================
-
-There are a number of controller variables that allow you to
-configure the way cookies are created and managed. Defining these
-special variables in the beforeFilter() method of your controller
-allows you to define how the CookieComponent works.
 
 +-----------------+--------------+------------------------------------------------------+
-| Cookie variable | default      | description                                          |
+| variable cookie | par defaut   | description                                          |
 +=================+==============+======================================================+
-| string $name    |'CakeCookie'  | The name of the cookie.                              |
+| string $name    |'CakeCookie'  | Le nom du cookie                                     |
 +-----------------+--------------+------------------------------------------------------+
 | string $key     | null         | This string is used to encrypt                       |
 |                 |              | the value written to the cookie.                     |
