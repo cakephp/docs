@@ -87,77 +87,78 @@ TranslateBehavior
 Exceptions
 ==========
 
-L'exception par défaut de rendu inclut maintenant plus de détails
-The default exception rendering now includes more detailed stack traces
-including file excerpts and argument dumps for all functions in the stack.
+L'exception par défaut de rendu inclut maintenant des traces de pile plus détaillées
+y compris des extraits de fichiers et les décharges d'arguments pour toutes les 
+fonctions dans la pile.
 
-
-Utility
-=======
+Utilitaire
+==========
 
 Debugger
 --------
 
-- :php:func:`Debugger::getType()` has been added.  It can be used to get the type of
-  variables.
-- :php:func:`Debugger::exportVar()` has been modified to create more readable
-  and useful output.
+- :php:func:`Debugger::getType()` a été ajoutée. Elle peut être utilisée pour récupérer
+  le type de variables.
+- :php:func:`Debugger::exportVar()` a été modifiée pour créer une sortie plus lisible
+  et plus utile.
 
 debug()
 -------
 
-`debug()` now uses :php:class:`Debugger` internally.  This makes it consistent
-with Debugger, and takes advantage of improvements made there.
+`debug()` utilise maintenant :php:class:`Debugger` en interne. Cela la rend plus cohérente avec
+avec Debugger, et profite des améliorations faîtes ici.
 
 Set
 ---
 
-- :php:func:`Set::nest()` has been added. It takes in a flat array and returns a nested array
+- :php:func:`Set::nest()` a été ajoutée. Elle prend en argument un tableau plat
+  et retourne un tableau imbriqué.
 
 File
 ----
 
-- :php:meth:`File::info()` includes filesize & mimetype information.
-- :php:meth:`File::mime()` was added.
+- :php:meth:`File::info()` inclut les informations de taille et de mimetype du fichier.
+- :php:meth:`File::mime()` a été ajoutée.
 
 Cache
 -----
 
-- :php:class:`CacheEngine` has been moved into a separate file.
+- :php:class:`CacheEngine` a été déplacée dans un fichier séparé.
 
-Configure
----------
+Configuration
+-------------
 
-- :php:class:`ConfigReaderInterface` has been moved into a separate file.
+- :php:class:`ConfigReaderInterface` a été déplacée dans un fichier séparé.
 
 App
 ---
 
-- :php:meth:`App::build()` now has the ability to register new packages using
-  ``App::REGISTER``. See :ref:`app-build-register` for more information.
-- Classes that could not be found on configured paths will be searched inside
-  ``APP`` as a fallback path.  This makes autoloading nested directories in
-  ``app/Vendor`` easier.
+- :php:meth:`App::build()` a maintenant la possibilité d'enregistrer de nouveaux paquets`
+  à l'aide de``App::REGISTER``. Voir :ref:`app-build-register` pour plus d'informations.
+- Les classes qui ne peuvent pas être trouvées sur les chemins configurés vont être cherchées
+  dans ``APP`` comme un chemin de secours. Cela facilite le chargement automatique des 
+  répertoires imbriqués dans ``app/Vendor``.
 
 Console
 =======
 
-Test Shell
-----------
+Shell de Test
+-------------
 
-A new TestShell has been added. It reduces the typing required to run unit
-tests, and offers a file path based UI::
+Un nouveau TestShell a été ajouté. Il réduit le typage requis pour exécuter les 
+tests unitaires, et offre un chemin de fichier en fonction d'interface utilisateur ::
 
-    # Run the post model tests
+    # Execute les tests du modèle post
     Console/cake test app/Model/Post.php
     Console/cake test app/Controller/PostsController.php
 
-The old testsuite shell and its syntax are still available.
+Le vieux shell testsuite et sa syntaxe sont encore disponibles.
 
-General
+Général
 -------
 
-- Generated files no longer contain timestamps with the generation datetime.
+- Les fichiers générés ne contiennent plus les timestamps avec la génération
+des datetime.
 
 Routing
 =======
@@ -165,12 +166,12 @@ Routing
 Router
 ------
 
-- Routes can now use a special ``/**`` syntax to include all trailing arguments
-  as a single passed argument. See the section on :ref:`connecting-routes` for
-  more information.
-- :php:meth:`Router::resourceMap()` was added.
-- :php:meth:`Router::defaultRouteClass()` was added. This method allows you to
-  set the default route class used for all future routes that are connected.
+- Les routes peuvent maintenant utiliser une syntaxe spéciale ``/**`` pour inclure 
+  tous les arguments de fin en un argument unique passé . Voir la section sur
+  :ref:`connecting-routes` pour plus d'informations.
+- :php:meth:`Router::resourceMap()` a été ajoutée.
+- :php:meth:`Router::defaultRouteClass()` a été ajoutée. Cette méthode vous autorise
+  à définir la classe route par défaut utilisé pour toutes les routes à venir qui sont connectés.
 
 Network
 =======
@@ -178,30 +179,29 @@ Network
 CakeRequest
 -----------
 
-- Added ``is('requested')`` and ``isRequested()`` for detecting requestAction.
+- Ajout de ``is('requested')`` et ``isRequested()`` pour la détection de requestAction.
 
 CakeResponse
 ------------
 
-- Added :php:meth:`CakeResponse::cookie()` for setting cookies.
-- Added a number of methods for :ref:`cake-response-caching`
+- Ajout :php:meth:`CakeResponse::cookie()` pour la définition des cookies.
+- Ajout d'un nombre de méthodes pour :ref:`cake-response-caching`
 
-Controller
+Contrôleur
 ==========
 
 Controller
 ----------
 
-- :php:attr:`Controller::$uses` was modified the default value is now ``true``
-  instead of false.  Additionally different values are handled slightly
-  differently, but will behave the same in most cases.
+- :php:attr:`Controller::$uses` a été modifié, la valeur par défaut est maintenant ``true``
+  à la place de false. De plus, les différentes valeurs sont traitées de façon légèrement
+  différente, mais se comportera comme cela dans la plupart des cas.
 
-    - ``true`` Will load the default model and merge with AppController.
-    - An array will load those models and merge with AppController.
-    - An empty array will not load any models other than those declared in the
-      base class.
-    - ``false`` will not load any models, and will not merge with the base class
-      either.
+    - ``true`` va charger le modèle par défaut et fusionnser avec AppController.
+    - Un tableau va charger ces modèles et fusionner avec AppController.
+    - Un tableau vide ne va charger aucun modèle, sauf ceux déclarés dans la classe de base.
+    - ``false`` ne va charger aucun modèle, et ne va pas non plus fusionner avec la 
+    classe de base.
 
 
 Components
@@ -210,27 +210,28 @@ Components
 AuthComponent
 -------------
 
-- :php:meth:`AuthComponent::allow()` no longer accepts ``allow('*')`` as a wildcard
-  for all actions.  Just use ``allow()``.  This unifies the API between allow()
-  and deny().
-- ``recursive`` option was added to all authentication adapters. Allows you to
-  more easily control the associations stored in the session.
-
+- :php:meth:`AuthComponent::allow()` n'accepte plus ``allow('*')`` en joker
+  pour toutes les actions. Utilisez juste ``allow()``. Cela unifie l'API entre allow()
+  et deny().
+- L'option ``recursive`` a été ajoutée à toutes les cartes d'authentification. Vous
+  permet de contrôler plus facilement les associations stockées dans la session.
 
 AclComponent
 ------------
 
-- :php:class:`AclComponent` no longer lowercases and inflects the classname used for
-  ``Acl.classname``.  Instead it uses the provided value as is.
-- Acl backend implementations should now be put in ``Controller/Component/Acl``.
-- Acl implementations should be moved into the Component/Acl directory from
-  Component.  For example if your Acl class was called ``CustomAclComponent``,
-  and was in ``Controller/Component/CustomAclComponent.php``.
-  It should be moved into ``Controller/Component/Acl/CustomAcl.php``, and be
-  named ``CustomAcl``.
-- :php:class:`DbAcl` has been moved into a separate file.
-- :php:class:`IniAcl` has been moved into a separate file.
-- :php:class:`AclInterface` has been moved into a separate file.
+- :php:class:`AclComponent` ne met plus en minuscules et n'infléchit plus
+  le nom de classe utilisé pour ``Acl.classname``. A la place, il utilise la
+  valeur fournie comme telle.
+- Les implémentations Backend Acl devraient maintenant être mis dans 
+  ``Controller/Component/Acl``.
+- Les implémentations Acl doivent être déplacées dans le dossier Component/Acl
+  à partir de Component. Par exemple si votre classe Acl a été appelée ``CustomAclComponent``,
+  et était dans ``Controller/Component/CustomAclComponent.php``.
+  Il doit être déplacé dans ``Controller/Component/Acl/CustomAcl.php``, et être nommé
+  ``CustomAcl``.
+- :php:class:`DbAcl` a été déplacée dans un fichier séparé.
+- :php:class:`IniAcl` a été déplacée dans un fichier séparé.
+- :php:class:`AclInterface` a été déplacée dans un fichier séparé.
 
 Helpers
 =======
@@ -245,128 +246,136 @@ TextHelper
 HtmlHelper
 ----------
 
-- :php:meth:`HtmlHelper::script()` had a ``block`` option added.
-- :php:meth:`HtmlHelper::scriptBlock()` had a ``block`` option added.
-- :php:meth:`HtmlHelper::css()` had a ``block`` option added.
-- :php:meth:`HtmlHelper::meta()` had a ``block`` option added.
-- The ``$startText`` parameter of :php:meth:`HtmlHelper::getCrumbs()` can now be
-  an array.  This gives more control and flexibility over the first crumb link.
-- :php:meth:`HtmlHelper::docType()` now defaults to html5.
-- :php:meth:`HtmlHelper::image()` now has a ``fullBase`` option.
-- :php:meth:`HtmlHelper::media()` has been added.  You can use this method to
-  create HTML5 audio/video elements.
-- :term:`plugin syntax` support has been added for
+- :php:meth:`HtmlHelper::script()` avait une option ajoutée ``block``.
+- :php:meth:`HtmlHelper::scriptBlock()` avait une option ajoutée ``block``.
+- :php:meth:`HtmlHelper::css()` avait une option ajoutée ``block``.
+- :php:meth:`HtmlHelper::meta()` avait une option ajoutée ``block``.
+- Le paramètre ``$startText`` de :php:meth:`HtmlHelper::getCrumbs()` peut
+  maintenant être un tableau. Cela donne plus de contrôle et de flexibilité
+  sur le premier lien crumb.
+- :php:meth:`HtmlHelper::docType()` est par défaut html5.
+- :php:meth:`HtmlHelper::image()` a maintenant une option ``fullBase``.
+- :php:meth:`HtmlHelper::media()` a été ajoutée. Vous pouvez utilisez cette méthode
+  pour créer des éléments audio/vidéo HTML5.
+- Le support du :term:`plugin syntax` a été ajouté pour
   :php:meth:`HtmlHelper::script()`, :php:meth:`HtmlHelper::css()`, :php:meth:`HtmlHelper::image()`.
-  You can now easily link to plugin assets using ``Plugin.asset``.
-- :php:meth:`HtmlHelper::getCrumbList()` had the ``$startText`` parameter added.
+  Vous pouvez maintenant faciliter les liens vers les assets des plugins en utilisant
+  ``Plugin.asset``.
+- :php:meth:`HtmlHelper::getCrumbList()` a eu le paramètre ``$startText``ajouté.
 
 
-View
-====
+Vue
+===
 
-- :php:attr:`View::$output` is deprecated.
-- ``$content_for_layout`` is deprecated.  Use ``$this->fetch('content');``
-  instead.
-- ``$scripts_for_layout`` is deprecated.  Use the following instead::
+- :php:attr:`View::$output` est déprécié.
+- ``$content_for_layout`` est déprécié. Utilisez ``$this->fetch('content');``
+  à la place.
+- ``$scripts_for_layout`` est déprécié. Utilisez ce qui suit à la place::
 
         <?php
         echo $this->fetch('meta');
         echo $this->fetch('css');
         echo $this->fetch('script');
 
-  ``$scripts_for_layout`` is still available, but the :ref:`view blocks <view-blocks>` API
-  gives a more extensible & flexible replacement.
-- The ``Plugin.view`` syntax is now available everywhere.  You can use this
-  syntax anywhere you reference the name of a view, layout or element.
-- The ``$options['plugin']`` option for :php:meth:`~View::element()` is
-  deprecated.  You should use ``Plugin.element_name`` instead.
+  ``$scripts_for_layout`` est toujours disponible, mais l'API :ref:`view blocks <view-blocks>`
+  donne un remplacement plus extensible et flexible.
+- La syntaxe ``Plugin.view`` est maintenant disponible partout. Vous pouvez utiliser cette
+  syntaxe n'importe où, vous réferencez le nom de la vue, du layout ou de l'element.
+- L'option ``$options['plugin']`` pour :php:meth:`~View::element()` est déprécié.
+  Vous devez utiliser ``Plugin.element_name`` à la place.
 
-Content type views
-------------------
+Vues de type contenu
+--------------------
 
-Two new view classes have been added to CakePHP.  A new :php:class:`JsonView`
-and :php:class:`XmlView` allow you to easily generate XML and JSON views.  You
-can learn more about these classes in the section on
-:doc:`/views/json-and-xml-views`
+Deux nouvelles classes de vues ont été ajoutées à CakePHP. Une nouvelle classe
+:php:class:`JsonView` et :php:class:`XmlView` vous permettent de facilement
+générer des vues XML et JSON. Vous en apprendrez plus sur ces classes dans
+la section :doc:`/views/json-and-xml-views`.
 
-Extending views
----------------
+Vues étendues
+-------------
 
-:php:class:`View` has a new method allowing you to wrap or 'extend' a
-view/element/layout with another file.  See the section on
-:ref:`extending-views` for more information on this feature.
+:php:class:`View` a une nouvelle méthode vous permettant d'enrouler
+ou 'étendre' une vue/élement/layout avec un autre fichier.
+Voir la section sur
+:ref:`extending-views` pour plus d'informations sur cette fonctionnalité.
 
-Themes
+Thèmes
 ------
 
-The ``ThemeView`` class is deprecated in favor of the ``View`` class. Simply
-setting ``$this->theme = 'MyTheme'`` will enable theme support, and all custom
-View classes which extend from ``ThemeView`` should extend ``View``.
+La classe ``ThemeView`` est déprecié en faveur de la classe ``View``. En
+mettant simplement ``$this->theme = 'MyTheme'`` activera le support theme
+et toutes las classes de vue qui étendaient ``ThemeView`` devront étendre
+``View``.
 
-View blocks
------------
+Blocks de Vue
+-------------
 
-View blocks are a flexible way to create slots or blocks in your views.  Blocks
-replace ``$scripts_for_layout`` with a more robust and flexible API.  See the
-section on :ref:`view-blocks` for more information.
+Les blocks de Vue sont une façon flexible de créer des slots ou blocks dans vos
+vues. Les blocks remplacent ``$scripts_for_layout`` avec une API robuste et flexible.
+Voir la section sur :ref:`view-blocks` pour plus d'informations.
 
 
 Helpers
 =======
 
-New callbacks
+Nouveaux callbacks
 -------------
 
-Two new callbacks have been added to Helpers.
-:php:meth:`Helper::beforeRenderFile()` and :php:meth:`Helper::afterRenderFile()`
-these new callbacks are fired before/after every view fragment is rendered.
-This includes elements, layouts and views.
+Deux nouveau callbacks ont été ajoutées aux Helpers.
+:php:meth:`Helper::beforeRenderFile()` et :php:meth:`Helper::afterRenderFile()`.
+Ces deux nouveaux callbacks sont déckenchés avant/après que chaque fragment de vue
+soit rendu. Cela inclut les éléments, layouts et vues.
 
 CacheHelper
 -----------
 
-- ``<!--nocache-->`` tags now work inside elements correctly.
+- Les tags ``<!--nocache-->`` fonctionnent maintenant correctement à l'intérieur des éléments.
 
 FormHelper
 ----------
 
-- FormHelper now omits disabled fields from the secured fields hash. This makes
-  working with :php:class:`SecurityComponent` and disabled inputs easier.
-- The ``between`` option when used in conjunction with radio inputs, now behaves
-  differently. The ``between`` value is now placed between the legend and first
-  input elements.
-- The ``hiddenField`` option with checkbox inputs can now be set to a specific
-  value such as 'N' rather than just 0.
-- The ``for`` attribute for date + time inputs now reflects the first generated
-  input. This may result in the for attribute changing for generated datetime
-  inputs.
-- The ``type`` attribute for :php:meth:`FormHelper::button()` can be removed now.  It still
-  defaults to 'submit'.
-- :php:meth:`FormHelper::radio()` now allows you to disable all options.
-  You can do this by setting either ``'disabled' => true`` or ``'disabled' => 'disabled'``
-  in the ``$attributes`` array.
+- FormHelper omet désormais des champs désactivés à partir des champs hash sécurisés.
+  Cela permet le fonctionnement avec :php:class:`SecurityComponent` et désactive
+  les inputs plus facilement.
+- L'option ``between`` quand elle est utilisée dans le cas d'inputs radio, se comporte
+  maintenant différemment. La valeur ``between`` est maintenant placée entre le légende
+  et les premiers éléments inputs.
+- L'option ``hiddenField`` avec les inputs checkbox peuvent maintenant être mis à une 
+  valeur spécifique comme 'N' plutôt que seulement 0.
+- L'attribut ``for`` pour les inputs date et time reflètent maintenant le premier input
+  généré. Cela peut impliquer que l'attribut for peut changer les inputs datetime
+  générés.
+- L'attribut ``type`` pour :php:meth:`FormHelper::button()` peut maintenant être retiré. Il met
+  toujours 'submit' par défaut.
+- :php:meth:`FormHelper::radio()` vous permet maintenant de désactiver toutes les options.
+  Vous pouvez le faire en mettant soit ``'disabled' => true`` soit ``'disabled' => 'disabled'``
+  dans le tableau ``$attributes``.
 
 PaginatorHelper
 ---------------
 
-- :php:meth:`PaginatorHelper::numbers()` now has a ``currentClass`` option.
+- :php:meth:`PaginatorHelper::numbers()` a maintenant une option ``currentClass``.
 
 
 Testing
 =======
 
-- Web test runner now displays the PHPUnit version number.
-- Web test runner now defaults to displaying app tests.
-- Fixtures can be created in different datasources other than $test.
-- Models loaded using the ClassRegistry and using another datasource will get
-  their datasource name prepended with ``test_`` (e.g datasource `master` will
-  try to use `test_master` in the testsuite)
-- Test cases are generated with class specific setup methods.
+- Les Web test runner affichent maintenant le numéro de version de PHPUnit.
+- Les Web test runner configurent par défaut l'affichage des test des app.
+- Les Fixtures peuvent être créées pour différentes sources de données autre
+  que $test.
+- Les Modèles chargés utilisant la ClassRegistry et utilisant une autre source
+  de données aura son nom de source donnée préfixé par ``test_`` (ex: source
+  de données `master` essaiera d'utiliser `test_master` dans la testsuite)
+- Les cas de Test sont générés avec des méthodes de configuration de la classe spécifique.
 
-Events
-======
+Evènements
+==========
 
-- A new generic events system has been built and it replaced the way callbacks
-  were dispatched. This should not represent any change to your code.
-- You can dispatch your own events and attach callbacks to them at will, useful
-  for inter-plugin communication and easier decoupling of your classes.
+- Un nouveau système générique des évènements a été construit et a remplacé la façon
+  dont les callbacks ont été dispatchés. Cela ne devrait représenter aucun changement
+  dans votre code.
+- Vous pouvez envoyer vos propres évènements et leur attacher des callbacks selon vos
+  souhaits, utile pour la communication inter-plugin et facilite le découplage
+  de vos classes.

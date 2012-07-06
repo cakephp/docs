@@ -1,15 +1,15 @@
-CakePHP Development Process
-###########################
+Le processus de développement CakePHP
+#####################################
 
-Here we attempt to explain the process we use when developing the
-CakePHP framework. We rely heavily on community interaction through
-tickets and IRC chat. IRC is the best place to find members of the
-development team and discuss ideas, the latest code, and make general
-comments. If something more formal needs to be proposed or there is a
-problem with a release, the ticket system is the best place to share
-your thoughts.
+Ici, nous tenterons d'expliquer le processus que nous utilisons lors de l'élaboration du
+CakePHP. Nous comptons beaucoup sur l'interaction communautaire par le biais
+billets et par le chat IRC. IRC est le meilleur endroit pour trouver des membres de
+l'équipe de développement et pour discuter d'idées, du dernier code, et de faire des
+commentaires généraux. Si quelque chose de plus formel doit être proposé ou s'il y a un
+problème avec une version sortie, le système de ticket est le meilleur endroit pour
+partager vos idées.
 
-We currently maintain 4 versions of CakePHP.
+Nous maintenons 4 versions de CakePHP.
 
 -  **stable** : Tagged releases intended for production where stability
    is more important than features. Issues filed against these releases
@@ -47,10 +47,10 @@ If you find an issue, the best answer is to write a test. The best
 advice we can offer in writing tests is to look at the ones included in
 the core.
 
-As always, if you have any questions or comments, visit us at #cakephp
-on irc.freenode.net.
+Comme toujours, si vous avez n'importe quelle question ou commentaire, visitez nous
+sur #cakephp sur irc.freenode.net.
 
 
 .. meta::
-    :title lang=en: CakePHP Development Process
-    :keywords lang=en: maintenance branch,community interaction,community feature,necessary feature,stable release,ticket system,advanced feature,power users,feature set,chat irc,leading edge,router,new features,members,attempt,development branches,branch development
+    :title lang=fr: Processus de développement de CakePHP
+    :keywords lang=fr: branche de maintenance, interaction communautaire,fontionnalité communautaire,fonctionnalité nécessaire,version sortie stable,système de ticket,fonctionnalité avancée,power users,feature set,chat irc,leading edge,router,new features,members,attempt,development branches,branche de développement
