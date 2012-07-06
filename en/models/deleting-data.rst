@@ -49,7 +49,8 @@ fragment or array.
 * **cascade** Boolean, Set to true to delete records that depend on
   this record
 * **callbacks** Boolean, Run callbacks
-  Return boolean True on success, false on failure.
+
+Return boolean True on success, false on failure.
 
 Example::
 
