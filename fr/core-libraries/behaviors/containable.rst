@@ -1,5 +1,5 @@
 Containable
-###########
+########
 
 .. php:class:: ContainableBehavior
 
