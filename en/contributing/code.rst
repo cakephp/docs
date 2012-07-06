@@ -54,20 +54,21 @@ Each time you want to work on a bug, feature or enhancement create a topic
 branch.
 
 The branch you create should be based on the version that your fix/enhancement
-is for.  For example if you are fixing a bug in ``2.0`` you would want to use
-the ``2.0`` branch as the base for your branch.  This makes merging your changes
-in later much simpler::
+is for.  For example if you are fixing a bug in ``2.3`` you would want to use
+the ``2.3`` branch as the base for your branch.  If your change is a bug fix
+for the current stable release, you should use the ``master`` branch. This
+makes merging your changes in later much simpler::
 
-    # fixing a bug on 2.0
+    # fixing a bug on 2.3
     git fetch upstream
-    git checkout -b ticket-1234 upstream/2.0
+    git checkout -b ticket-1234 upstream/2.3
 
 .. tip::
 
     Use a descriptive name for your branch, referencing the ticket or feature
     name is a good convention. e.g. ticket-1234, feature-awesome
 
-The above will create a local branch based on the upstream (CakePHP) 2.0 branch.
+The above will create a local branch based on the upstream (CakePHP) 2.3 branch.
 Work on your fix, and make as many commits as you need; but keep in mind the
 following:
 
@@ -75,17 +76,18 @@ following:
 * Add a test case to show the bug is fixed, or that the new feature works.
 * Keep your commits logical, and write good clear and concise commit messages.
 
+
 Submitting a pull request
 =========================
 
 Once your changes are done and you're ready for them to be merged into CakePHP,
 you'll want to update your branch::
 
-    git checkout 2.0
+    git checkout 2.3
     git fetch upstream
-    git merge upstream/2.0
+    git merge upstream/2.3
     git checkout <branch_name>
-    git rebase 2.0
+    git rebase 2.3
 
 This will fetch + merge in any changes that have happened in CakePHP since you
 started.  It will then rebase - or replay your changes on top of the current
