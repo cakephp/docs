@@ -248,17 +248,6 @@ Session
     To use database sessions, run the ``app/Config/Schema/sessions.php`` schema using
     the cake shell command: ``cake schema create Sessions``
 
-Security.level
-    The level of CakePHP security. The session timeout time defined in
-    'Session.timeout' is multiplied according to the settings here.
-    Valid values:
-    'high' = x 10
-    'medium' = x 100
-    'low' = x 300
-    'high' and 'medium' also enable
-    `session.referer\_check <http://www.php.net/manual/en/session.configuration.php#ini.session.referer-check>`_
-    CakePHP session IDs are also regenerated between requests if
-    'Security.level' is set to 'high'.
 Security.salt
     A random string used in security hashing.
 Security.cipherSeed
