@@ -93,21 +93,21 @@ Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
     
 
         <?php
-        $this->Cookie->write('name', 'Larry');
+        $this->Cookie->write('nom', 'Rémy');
 
     Vous pouvez également grouper vos variables en utilsant la notation point '.' 
     dans les paramêtres de clef::
 
         <?php
-        $this->Cookie->write('User.name', 'Larry');
-        $this->Cookie->write('User.role', 'Lead');
+        $this->Cookie->write('Utilisateur.nom', 'Rémy');
+        $this->Cookie->write('Utilisateur.role', 'Chef');
 
     Si vous vouler écrire plus d'une valeur dans le cookie en une fois, vous 
     pouvez passer un tableau::
 
         <?php
-        $this->Cookie->write('User',
-            array('name' => 'Larry', 'role' => 'Lead')
+        $this->Cookie->write('Utilisateur',
+            array('nom' => 'Rémy', 'role' => 'Chef')
         );
 
     Toutes les valeurs dans le cookie sont encryptée par défaut. Si vous voulez 
@@ -119,7 +119,7 @@ Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
     app/Config/core.php pour assurer un meilleur cryptage.::
     
         <?php
-        $this->Cookie->write('name', 'Larry', false);
+        $this->Cookie->write('nom', 'Rémy', false);
 
     Le dernier paramètre à écrire est $expires - le nombre de secondes
     avant que le cookie n'expire. Par convention, ce paramètre peut aussi
@@ -138,16 +138,16 @@ Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
 
         <?php
         // Sortie "Rémy"
-        echo $this->Cookie->read('name');
+        echo $this->Cookie->read('nom');
 
         // Vous pouvez aussi utiliser la notation par point pour lire
-        echo $this->Cookie->read('User.name');
+        echo $this->Cookie->read('Utilisateur.nom');
 
         // Pour prendre les variables que vous aviez groupés 
         // en utilisant la notation par point comme un tableau faites quelque chose comme
-        $this->Cookie->read('User');
+        $this->Cookie->read('Utilisateur');
 
-        // ceci retourne quelque chose comme array('name' => 'Larry', 'role' => 'Lead')
+        // ceci retourne quelque chose comme array('nom' => 'Rémy', 'role' => 'Chef')
     
 
 .. php:method:: delete(mixed $key)
