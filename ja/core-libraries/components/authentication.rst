@@ -1,12 +1,12 @@
-”FØ
+èªè¨¼
         Authentication
 ##############
 
 .. php:class:: AuthComponent(ComponentCollection $collection, array $settings = array())
 
-ƒ†[ƒU‚ğ¯•Ê‚µA”FØ‚µAŒ ŒÀ‚ğ•t—^‚·‚é‚±‚Æ‚ÍA‚Ù‚Æ‚ñ‚Ç‚·‚×‚Ä‚ÌWebƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚É‹¤’Ê‚Ì‹@”\‚Å‚·B
-CakePHP ‚Ì AuthComponent ‚Å‚Í‚»‚¤‚¢‚Á‚½ƒ^ƒXƒN‚ğÀs‚·‚é‚½‚ß‚Ìƒvƒ‰ƒKƒuƒ‹‚È•û–@‚ğ’ñ‹Ÿ‚µ‚Ü‚·B
-AuthComponent ‚É‚æ‚èA”FØƒIƒuƒWƒFƒNƒg‚ÆAƒ†[ƒU‚ÌŒ ŒÀ‚ğ¯•ÊE”»’è‚·‚é_“î‚Èd‘g‚İ‚ğì‚é‚½‚ß‚ÌŒ ŒÀ”»’èƒIƒuƒWƒFƒNƒg‚ğ‘g‚İ‡‚í‚¹‚é‚±‚Æ‚ª‚Å‚«‚é‚æ‚¤‚É‚È‚è‚Ü‚·B
+ãƒ¦ãƒ¼ã‚¶ã‚’è­˜åˆ¥ã—ã€èªè¨¼ã—ã€æ¨©é™ã‚’ä»˜ä¸ã™ã‚‹ã“ã¨ã¯ã€ã»ã¨ã‚“ã©ã™ã¹ã¦ã®Webã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã«å…±é€šã®æ©Ÿèƒ½ã§ã™ã€‚
+CakePHP ã® AuthComponent ã§ã¯ãã†ã„ã£ãŸã‚¿ã‚¹ã‚¯ã‚’å®Ÿè¡Œã™ã‚‹ãŸã‚ã®ãƒ—ãƒ©ã‚¬ãƒ–ãƒ«ãªæ–¹æ³•ã‚’æä¾›ã—ã¾ã™ã€‚
+AuthComponent ã«ã‚ˆã‚Šã€èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã€ãƒ¦ãƒ¼ã‚¶ã®æ¨©é™ã‚’è­˜åˆ¥ãƒ»åˆ¤å®šã™ã‚‹æŸ”è»Ÿãªä»•çµ„ã¿ã‚’ä½œã‚‹ãŸã‚ã®æ¨©é™åˆ¤å®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’çµ„ã¿åˆã‚ã›ã‚‹ã“ã¨ãŒã§ãã‚‹ã‚ˆã†ã«ãªã‚Šã¾ã™ã€‚
 
 ..
   Identifying, authenticating and authorizing users is a common part of almost every web application.
@@ -16,13 +16,13 @@ AuthComponent ‚É‚æ‚èA”FØƒIƒuƒWƒFƒNƒg‚ÆAƒ†[ƒU‚ÌŒ ŒÀ‚ğ¯•ÊE”»’è‚·‚é_“î‚Èd‘g
 
 .. _authentication-objects:
 
-”FØ
+èªè¨¼
         Authentication
 ==============
 
-”FØ‚Æ‚ÍA—^‚¦‚ç‚ê‚½”FØî•ñ‚É‚æ‚èƒ†[ƒU‚ğ¯•Ê‚µA‚»‚Ìƒ†[ƒU‚ªŒ¾‚¤‚Æ‚¨‚è‚Ìl•¨‚Å‚ ‚é‚±‚Æ‚ğŠmÀ‚È‚à‚Ì‚É‚·‚éˆ—‚Ì‚±‚Æ‚Å‚·B
-‚½‚¢‚Ä‚¢‚Ìê‡A‚±‚ê‚Íƒ†[ƒU–¼‚ÆƒpƒXƒ[ƒh‚É‚æ‚ès‚í‚êA‚»‚ê‚ÆŠù’m‚Ìƒ†[ƒUƒŠƒXƒg‚ğÆ‚ç‚µ‡‚í‚¹‚Ü‚·B
-CakePHP ‚É‚ÍA‚ ‚È‚½‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ““à‚É•ÛŠÇ‚³‚ê‚Ä‚¢‚éƒ†[ƒU‚ğ”FØ‚·‚é‚½‚ß‚Ì‘g‚İ‚İÏ‚İ‚Ì•û–@‚ª‚¢‚­‚Â‚©‘¶İ‚µ‚Ü‚·B
+èªè¨¼ã¨ã¯ã€ä¸ãˆã‚‰ã‚ŒãŸèªè¨¼æƒ…å ±ã«ã‚ˆã‚Šãƒ¦ãƒ¼ã‚¶ã‚’è­˜åˆ¥ã—ã€ãã®ãƒ¦ãƒ¼ã‚¶ãŒè¨€ã†ã¨ãŠã‚Šã®äººç‰©ã§ã‚ã‚‹ã“ã¨ã‚’ç¢ºå®Ÿãªã‚‚ã®ã«ã™ã‚‹å‡¦ç†ã®ã“ã¨ã§ã™ã€‚
+ãŸã„ã¦ã„ã®å ´åˆã€ã“ã‚Œã¯ãƒ¦ãƒ¼ã‚¶åã¨ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã«ã‚ˆã‚Šè¡Œã‚ã‚Œã€ãã‚Œã¨æ—¢çŸ¥ã®ãƒ¦ãƒ¼ã‚¶ãƒªã‚¹ãƒˆã‚’ç…§ã‚‰ã—åˆã‚ã›ã¾ã™ã€‚
+CakePHP ã«ã¯ã€ã‚ãªãŸã®ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³å†…ã«ä¿ç®¡ã•ã‚Œã¦ã„ã‚‹ãƒ¦ãƒ¼ã‚¶ã‚’èªè¨¼ã™ã‚‹ãŸã‚ã®çµ„ã¿è¾¼ã¿æ¸ˆã¿ã®æ–¹æ³•ãŒã„ãã¤ã‹å­˜åœ¨ã—ã¾ã™ã€‚
 
 ..
   Authentication is the process of identifying users by provided credentials 
@@ -30,10 +30,10 @@ CakePHP ‚É‚ÍA‚ ‚È‚½‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ““à‚É•ÛŠÇ‚³‚ê‚Ä‚¢‚éƒ†[ƒU‚ğ”FØ‚·‚é‚½‚ß‚Ì‘g
   Generally this is done through a username and password, that are checked against a known list of users.
   In CakePHP, there are several built in ways of authenticating users stored in your application.
 
-* ``FormAuthenticate`` ‚Å‚ÍAPOST‚³‚ê‚½ƒf[ƒ^‚ğ‚à‚Æ‚É”FØ‚ğs‚¤‚±‚Æ‚ª‰Â”\‚Å‚·B
-  ’Êí‚±‚ê‚ÍAƒ†[ƒU‚ªî•ñ‚ğ“ü—Í‚·‚éƒƒOƒCƒ“ƒtƒH[ƒ€‚Å‚·B
-* ``BasicAuthenticate`` ‚Å‚ÍABasic HTTP ”FØ‚ğg‚Á‚½”FØ‚ğs‚¤‚±‚Æ‚ª‰Â”\‚Å‚·B
-* ``DigestAuthenticate`` ‚Å‚ÍAƒ_ƒCƒWƒFƒXƒg HTTP ”FØ‚ğg‚Á‚½”FØ‚ğs‚¤‚±‚Æ‚ª‰Â”\‚Å‚·B
+* ``FormAuthenticate`` ã§ã¯ã€POSTã•ã‚ŒãŸãƒ‡ãƒ¼ã‚¿ã‚’ã‚‚ã¨ã«èªè¨¼ã‚’è¡Œã†ã“ã¨ãŒå¯èƒ½ã§ã™ã€‚
+  é€šå¸¸ã“ã‚Œã¯ã€ãƒ¦ãƒ¼ã‚¶ãŒæƒ…å ±ã‚’å…¥åŠ›ã™ã‚‹ãƒ­ã‚°ã‚¤ãƒ³ãƒ•ã‚©ãƒ¼ãƒ ã§ã™ã€‚
+* ``BasicAuthenticate`` ã§ã¯ã€Basic HTTP èªè¨¼ã‚’ä½¿ã£ãŸèªè¨¼ã‚’è¡Œã†ã“ã¨ãŒå¯èƒ½ã§ã™ã€‚
+* ``DigestAuthenticate`` ã§ã¯ã€ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆ HTTP èªè¨¼ã‚’ä½¿ã£ãŸèªè¨¼ã‚’è¡Œã†ã“ã¨ãŒå¯èƒ½ã§ã™ã€‚
 
 ..
   * ``FormAuthenticate`` allows you to authenticate users based on form POST
@@ -43,23 +43,23 @@ CakePHP ‚É‚ÍA‚ ‚È‚½‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ““à‚É•ÛŠÇ‚³‚ê‚Ä‚¢‚éƒ†[ƒU‚ğ”FØ‚·‚é‚½‚ß‚Ì‘g
   * ``DigestAuthenticate`` allows you to authenticate users using Digest
     HTTP authentication.
 
-ƒfƒtƒHƒ‹ƒg‚Å ``AuthComponent`` ‚Í ``FormAuthenticate`` ‚ğg—p‚µ‚Ü‚·B
+ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ ``AuthComponent`` ã¯ ``FormAuthenticate`` ã‚’ä½¿ç”¨ã—ã¾ã™ã€‚
 
 ..
   By default ``AuthComponent`` uses ``FormAuthenticate``.
 
-”FØƒ^ƒCƒv‚Ì‘I‘ğ
+èªè¨¼ã‚¿ã‚¤ãƒ—ã®é¸æŠ
 -------------------------------
 
 ..
         Choosing an Authentication type
 
-‘å’ï‚Ìê‡‚ÍƒtƒH[ƒ€‚ÉŠî‚Ã‚­”FØ‚ğ—˜—p‚µ‚½‚¢‚Æv‚¤‚Å‚µ‚å‚¤B‚±‚ê‚ÍWebƒuƒ‰ƒEƒU‚ğg‚¤ƒ†[ƒU‚É‚Æ‚Á‚Ä‚Í‚à‚Á‚Æ‚àŠÈ’P‚È•û–@‚Å‚·B‚à‚µAAPI‚âWebƒT[ƒrƒX‚ğ\’z‚µ‚Ä‚¢‚é‚È‚çABasic”FØ‚âƒ_ƒCƒWƒFƒXƒg”FØ‚àl—¶‚µ‚½‚­‚È‚é‚©‚à‚µ‚ê‚Ü‚¹‚ñB
-ƒ_ƒCƒWƒFƒXƒg”FØ‚ÆBasic”FØ‚Ìd—v‚Èˆá‚¢‚Í‚Ù‚Æ‚ñ‚Ç‚Ç‚Ì‚æ‚¤‚ÉƒpƒXƒ[ƒh‚ğˆµ‚¤‚©‚Æ‚¢‚¤‚±‚Æ‚É‚ ‚è‚Ü‚·B
-Basic”FØ‚Å‚ÍAƒ†[ƒU–¼‚ÆƒpƒXƒ[ƒh‚Í•½•¶‚ÌƒeƒLƒXƒg‚Æ‚µ‚ÄƒT[ƒo‚É‘—M‚³‚ê‚Ü‚·B
-‚»‚Ì‚½‚ß Basic”FØ‚Í SSL ‚ğg‚í‚È‚¢ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚É‚ÍŒü‚¢‚Ä‚¢‚Ü‚¹‚ñB‚±‚ê‚ÍATd‚Éˆµ‚¤‚×‚«ƒpƒXƒ[ƒh‚ª˜Io‚µ‚Ä‚µ‚Ü‚¤‰Â”\«‚ª‚ ‚é‚½‚ß‚Å‚·B
-ƒ_ƒCƒWƒFƒXƒg”FØ‚Íƒ†[ƒU–¼‚âƒpƒXƒ[ƒhA‚»‚Ì‚Ù‚©‚Ì‚¢‚­‚Â‚©‚ÌÚ×î•ñ‚Ìƒ_ƒCƒWƒFƒXƒgƒnƒbƒVƒ…‚ğg‚¢‚Ü‚·B
-‚»‚Ì‚½‚ß ƒ_ƒCƒWƒFƒXƒg”FØ‚Í SSL ‚ğg‚í‚È‚¢ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚É‚à‚Ó‚³‚í‚µ‚¢‚à‚Ì‚Å‚·B
+å¤§æŠµã®å ´åˆã¯ãƒ•ã‚©ãƒ¼ãƒ ã«åŸºã¥ãèªè¨¼ã‚’åˆ©ç”¨ã—ãŸã„ã¨æ€ã†ã§ã—ã‚‡ã†ã€‚ã“ã‚Œã¯Webãƒ–ãƒ©ã‚¦ã‚¶ã‚’ä½¿ã†ãƒ¦ãƒ¼ã‚¶ã«ã¨ã£ã¦ã¯ã‚‚ã£ã¨ã‚‚ç°¡å˜ãªæ–¹æ³•ã§ã™ã€‚ã‚‚ã—ã€APIã‚„Webã‚µãƒ¼ãƒ“ã‚¹ã‚’æ§‹ç¯‰ã—ã¦ã„ã‚‹ãªã‚‰ã€Basicèªè¨¼ã‚„ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ã‚‚è€ƒæ…®ã—ãŸããªã‚‹ã‹ã‚‚ã—ã‚Œã¾ã›ã‚“ã€‚
+ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ã¨Basicèªè¨¼ã®é‡è¦ãªé•ã„ã¯ã»ã¨ã‚“ã©ã©ã®ã‚ˆã†ã«ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’æ‰±ã†ã‹ã¨ã„ã†ã“ã¨ã«ã‚ã‚Šã¾ã™ã€‚
+Basicèªè¨¼ã§ã¯ã€ãƒ¦ãƒ¼ã‚¶åã¨ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã¯å¹³æ–‡ã®ãƒ†ã‚­ã‚¹ãƒˆã¨ã—ã¦ã‚µãƒ¼ãƒã«é€ä¿¡ã•ã‚Œã¾ã™ã€‚
+ãã®ãŸã‚ Basicèªè¨¼ã¯ SSL ã‚’ä½¿ã‚ãªã„ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã«ã¯å‘ã„ã¦ã„ã¾ã›ã‚“ã€‚ã“ã‚Œã¯ã€æ…é‡ã«æ‰±ã†ã¹ããƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒéœ²å‡ºã—ã¦ã—ã¾ã†å¯èƒ½æ€§ãŒã‚ã‚‹ãŸã‚ã§ã™ã€‚
+ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ã¯ãƒ¦ãƒ¼ã‚¶åã‚„ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã€ãã®ã»ã‹ã®ã„ãã¤ã‹ã®è©³ç´°æƒ…å ±ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆãƒãƒƒã‚·ãƒ¥ã‚’ä½¿ã„ã¾ã™ã€‚
+ãã®ãŸã‚ ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ã¯ SSL ã‚’ä½¿ã‚ãªã„ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã«ã‚‚ãµã•ã‚ã—ã„ã‚‚ã®ã§ã™ã€‚
 
 ..
   Generally you'll want to offer form based authentication. It is the easiest for
@@ -73,26 +73,26 @@ Basic”FØ‚Å‚ÍAƒ†[ƒU–¼‚ÆƒpƒXƒ[ƒh‚Í•½•¶‚ÌƒeƒLƒXƒg‚Æ‚µ‚ÄƒT[ƒo‚É‘—M‚³‚ê‚Ü‚·B
   Digest authentication uses a digest hash of the username, password, and a few other details.  
   This makes digest authentication more appropriate for applications without SSL encryption.
 
-‚Ü‚½AOpenID ‚Ì‚æ‚¤‚È”FØƒVƒXƒeƒ€‚ğg‚¤‚±‚Æ‚à‰Â”\‚Å‚·B‚½‚¾‚µAOpenID ‚Í CakePHP ‚ÌƒRƒA‚É‚ÍŠÜ‚Ü‚ê‚Ü‚¹‚ñB
+ã¾ãŸã€OpenID ã®ã‚ˆã†ãªèªè¨¼ã‚·ã‚¹ãƒ†ãƒ ã‚’ä½¿ã†ã“ã¨ã‚‚å¯èƒ½ã§ã™ã€‚ãŸã ã—ã€OpenID ã¯ CakePHP ã®ã‚³ã‚¢ã«ã¯å«ã¾ã‚Œã¾ã›ã‚“ã€‚
 
 ..
   You can also use authentication systems like openid as well, 
   however openid is not part of CakePHP core.
 
 
-”FØ‚ğİ’è‚·‚é‚½‚ß‚Ìƒnƒ“ƒhƒ‰
+èªè¨¼ã‚’è¨­å®šã™ã‚‹ãŸã‚ã®ãƒãƒ³ãƒ‰ãƒ©
 -----------------------------------
 
 ..
   Configuring Authentication handlers
 
-”FØƒnƒ“ƒhƒ‰‚Í ``$this->Auth->authenticate`` ‚ğg‚Á‚Äİ’è‚µ‚Ü‚·B
-”FØ‚Ég‚¤ƒnƒ“ƒhƒ‰‚ğ‚P‚Â‚à‚µ‚­‚Í•¡”İ’è‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-•¡”‚Ìƒnƒ“ƒhƒ‰‚ğİ’è‚·‚é‚±‚Æ‚ÅA•¡”‚ÌƒƒOƒCƒ“‚Ìd‘g‚İ‚ğƒTƒ|[ƒg‚·‚é‚±‚Æ‚ª‰Â”\‚Å‚·B
-ƒ†[ƒU‚ªƒƒOƒCƒ“‚·‚éÛA”FØƒnƒ“ƒhƒ‰‚ÍéŒ¾‚³‚ê‚Ä‚¢‚é‡‚É”»’è‚³‚ê‚Ü‚·B
-‚ ‚éƒnƒ“ƒhƒ‰‚Å¯•Ê‚ª‚Å‚«‚½‚çA‚»‚êˆÈ~‚Ìƒnƒ“ƒhƒ‰‚Å‚Í”»’è‚³‚ê‚Ü‚¹‚ñB
-‹t‚ÉA—áŠO‚ğ“Š‚°‚é‚±‚Æ‚Å‚·‚×‚Ä‚Ì”FØ‚ğ¸”s‚É‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·B
-“Š‚°‚ç‚ê‚½‚¢‚©‚È‚é—áŠO‚àƒLƒƒƒbƒ`‚µ‚È‚¯‚ê‚Î‚È‚ç‚¸A•K—v‚É‰‚¶‚Ä‚»‚ê‚ç‚É‘Îˆ‚µ‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñB
+èªè¨¼ãƒãƒ³ãƒ‰ãƒ©ã¯ ``$this->Auth->authenticate`` ã‚’ä½¿ã£ã¦è¨­å®šã—ã¾ã™ã€‚
+èªè¨¼ã«ä½¿ã†ãƒãƒ³ãƒ‰ãƒ©ã‚’ï¼‘ã¤ã‚‚ã—ãã¯è¤‡æ•°è¨­å®šã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
+è¤‡æ•°ã®ãƒãƒ³ãƒ‰ãƒ©ã‚’è¨­å®šã™ã‚‹ã“ã¨ã§ã€è¤‡æ•°ã®ãƒ­ã‚°ã‚¤ãƒ³ã®ä»•çµ„ã¿ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹ã“ã¨ãŒå¯èƒ½ã§ã™ã€‚
+ãƒ¦ãƒ¼ã‚¶ãŒãƒ­ã‚°ã‚¤ãƒ³ã™ã‚‹éš›ã€èªè¨¼ãƒãƒ³ãƒ‰ãƒ©ã¯å®£è¨€ã•ã‚Œã¦ã„ã‚‹é †ã«åˆ¤å®šã•ã‚Œã¾ã™ã€‚
+ã‚ã‚‹ãƒãƒ³ãƒ‰ãƒ©ã§è­˜åˆ¥ãŒã§ããŸã‚‰ã€ãã‚Œä»¥é™ã®ãƒãƒ³ãƒ‰ãƒ©ã§ã¯åˆ¤å®šã•ã‚Œã¾ã›ã‚“ã€‚
+é€†ã«ã€ä¾‹å¤–ã‚’æŠ•ã’ã‚‹ã“ã¨ã§ã™ã¹ã¦ã®èªè¨¼ã‚’å¤±æ•—ã«ã™ã‚‹ã“ã¨ã‚‚ã§ãã¾ã™ã€‚
+æŠ•ã’ã‚‰ã‚ŒãŸã„ã‹ãªã‚‹ä¾‹å¤–ã‚‚ã‚­ãƒ£ãƒƒãƒã—ãªã‘ã‚Œã°ãªã‚‰ãšã€å¿…è¦ã«å¿œã˜ã¦ãã‚Œã‚‰ã«å¯¾å‡¦ã—ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 
 ..
   You configure authentication handlers using ``$this->Auth->authenticate``.
@@ -103,8 +103,8 @@ Basic”FØ‚Å‚ÍAƒ†[ƒU–¼‚ÆƒpƒXƒ[ƒh‚Í•½•¶‚ÌƒeƒLƒXƒg‚Æ‚µ‚ÄƒT[ƒo‚É‘—M‚³‚ê‚Ü‚·B
   Conversely you can halt all authentication by throwing an exception.  
   You will need to catch any thrown exceptions, and handle them as needed.
 
-ƒRƒ“ƒgƒ[ƒ‰‚Ì ``beforeFilter`` ‚Ì’†A‚à‚µ‚­‚Í ``$components`` ”z—ñ‚Ì’†‚ÉA”FØƒnƒ“ƒhƒ‰‚ğ‚¢‚­‚Â‚Å‚àİ’è‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-Ÿ‚Ì‚æ‚¤‚É‚·‚é‚±‚Æ‚ÅŠe”FØƒIƒuƒWƒFƒNƒg‚Ö‚Æİ’èî•ñ‚ğ“n‚·‚±‚Æ‚ª‚Å‚«‚Ü‚·B
+ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã® ``beforeFilter`` ã®ä¸­ã€ã‚‚ã—ãã¯ ``$components`` é…åˆ—ã®ä¸­ã«ã€èªè¨¼ãƒãƒ³ãƒ‰ãƒ©ã‚’ã„ãã¤ã§ã‚‚è¨­å®šã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
+æ¬¡ã®ã‚ˆã†ã«ã™ã‚‹ã“ã¨ã§å„èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¸ã¨è¨­å®šæƒ…å ±ã‚’æ¸¡ã™ã“ã¨ãŒã§ãã¾ã™ã€‚
 
 ..
   You can configure authentication handlers in your controller's ``beforeFilter`` or, 
@@ -112,19 +112,19 @@ Basic”FØ‚Å‚ÍAƒ†[ƒU–¼‚ÆƒpƒXƒ[ƒh‚Í•½•¶‚ÌƒeƒLƒXƒg‚Æ‚µ‚ÄƒT[ƒo‚É‘—M‚³‚ê‚Ü‚·B
   You can pass configuration information into each authentication object, using an array::
 
     <?php
-    // Šî–{“I‚Èİ’è–@
+    // åŸºæœ¬çš„ãªè¨­å®šæ³•
     $this->Auth->authenticate = array('Form');
 
-    // İ’è‚ğ’†‚É‹Lq
+    // è¨­å®šã‚’ä¸­ã«è¨˜è¿°
     $this->Auth->authenticate = array(
         'Form' => array('userModel' => 'Member'),
         'Basic' => array('userModel' => 'Member')
     );
 
-ã‹L‚Ì‚Q‚Â–Ú‚ÌƒuƒƒbƒN‚Å‚ÍA``userModel`` ƒL[‚ğ‚Q‰ñéŒ¾‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢‚Æ‚¢‚¤‚±‚Æ‚É‹C‚Ã‚¢‚½‚Å‚µ‚å‚¤B
-ƒR[ƒh‚ğDRY‚É•Û‚¿‚½‚¢‚È‚çA``all`` ƒL[‚ğg‚¤‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-‚±‚Ì“Á•Ê‚ÈƒL[‚ğg‚¤‚±‚Æ‚ÅA—ñ‹“‚µ‚½ƒIƒuƒWƒFƒNƒg‚·‚×‚Ä‚Éİ’è‚ª“n‚³‚ê‚é‚±‚Æ‚É‚È‚è‚Ü‚·B
-all ƒL[‚Í ``AuthComponent::ALL`` ‚Æ‹Lq‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·::
+ä¸Šè¨˜ã®ï¼’ã¤ç›®ã®ãƒ–ãƒ­ãƒƒã‚¯ã§ã¯ã€``userModel`` ã‚­ãƒ¼ã‚’ï¼’å›å®£è¨€ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„ã¨ã„ã†ã“ã¨ã«æ°—ã¥ã„ãŸã§ã—ã‚‡ã†ã€‚
+ã‚³ãƒ¼ãƒ‰ã‚’DRYã«ä¿ã¡ãŸã„ãªã‚‰ã€``all`` ã‚­ãƒ¼ã‚’ä½¿ã†ã“ã¨ãŒã§ãã¾ã™ã€‚
+ã“ã®ç‰¹åˆ¥ãªã‚­ãƒ¼ã‚’ä½¿ã†ã“ã¨ã§ã€åˆ—æŒ™ã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã™ã¹ã¦ã«è¨­å®šãŒæ¸¡ã•ã‚Œã‚‹ã“ã¨ã«ãªã‚Šã¾ã™ã€‚
+all ã‚­ãƒ¼ã¯ ``AuthComponent::ALL`` ã¨è¨˜è¿°ã™ã‚‹ã“ã¨ã‚‚ã§ãã¾ã™::
 
 ..
   In the second example you'll notice that we had to declare the ``userModel`` key twice. 
@@ -133,16 +133,16 @@ all ƒL[‚Í ``AuthComponent::ALL`` ‚Æ‹Lq‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·::
   The all key is also exposed as ``AuthComponent::ALL``::
 
     <?php
-    // 'all' ‚ğg‚Á‚Äİ’è‚ğ‹Lq
+    // 'all' ã‚’ä½¿ã£ã¦è¨­å®šã‚’è¨˜è¿°
     $this->Auth->authenticate = array(
         AuthComponent::ALL => array('userModel' => 'Member'),
         'Form',
         'Basic'
     );
 
-ã‹L‚Ì—á‚Å‚ÍA``Form`` ‚Æ ``Basic`` ‚Ì—¼•û‚Æ‚à‚ª  'all' ƒL[‚ÅéŒ¾‚³‚ê‚½İ’è‚ğæ“¾‚·‚é‚±‚Æ‚É‚È‚è‚Ü‚·B
-“Á’è‚Ì”FØƒIƒuƒWƒFƒNƒg‚ÉŒÂ•Ê‚É‘‚¢‚½İ’è‚Í 'all' ƒL[‚Ì“¯–¼‚ÌƒL[‚Ìî•ñ‚ğƒI[ƒo[ƒ‰ƒCƒh‚µ‚Ü‚·B
-ƒRƒA‚Ì”FØƒIƒuƒWƒFƒNƒg‚Å‚ÍŸ‚Ìİ’èƒL[‚ğƒTƒ|[ƒg‚µ‚Ä‚¢‚Ü‚·B
+ä¸Šè¨˜ã®ä¾‹ã§ã¯ã€``Form`` ã¨ ``Basic`` ã®ä¸¡æ–¹ã¨ã‚‚ãŒ  'all' ã‚­ãƒ¼ã§å®£è¨€ã•ã‚ŒãŸè¨­å®šã‚’å–å¾—ã™ã‚‹ã“ã¨ã«ãªã‚Šã¾ã™ã€‚
+ç‰¹å®šã®èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å€‹åˆ¥ã«æ›¸ã„ãŸè¨­å®šã¯ 'all' ã‚­ãƒ¼ã®åŒåã®ã‚­ãƒ¼ã®æƒ…å ±ã‚’ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã—ã¾ã™ã€‚
+ã‚³ã‚¢ã®èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ã¯æ¬¡ã®è¨­å®šã‚­ãƒ¼ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã™ã€‚
 
 ..
   In the above example, both ``Form`` and ``Basic`` will get the settings defined for the 'all' key.  
@@ -150,10 +150,10 @@ all ƒL[‚Í ``AuthComponent::ALL`` ‚Æ‹Lq‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·::
   The core authentication objects support the following configuration keys.
 
 
-- ``fields`` ƒ†[ƒU‚ğ¯•Ê‚·‚é‚Ì‚Ég‚¤—ñ–¼‚Ì”z—ñB
-- ``userModel`` User ‚Ìƒ‚ƒfƒ‹–¼BƒfƒtƒHƒ‹ƒg‚Í UserB
-- ``scope`` ”FØ‚·‚éƒ†[ƒU‚ğŒŸõ‚·‚éÛ‚Ég‚¤A’Ç‰Á‚ÌğŒB—áF ``array('User.is_active' => 1).``
-- ``contain`` ƒ†[ƒU‚ÌƒŒƒR[ƒh‚ªƒ[ƒh‚³‚ê‚½Û‚ÉŠÜ‚ß‚é‚±‚Æ‚Ì‚Å‚«‚éƒIƒvƒVƒ‡ƒ“B
+- ``fields`` ãƒ¦ãƒ¼ã‚¶ã‚’è­˜åˆ¥ã™ã‚‹ã®ã«ä½¿ã†åˆ—åã®é…åˆ—ã€‚
+- ``userModel`` User ã®ãƒ¢ãƒ‡ãƒ«åã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯ Userã€‚
+- ``scope`` èªè¨¼ã™ã‚‹ãƒ¦ãƒ¼ã‚¶ã‚’æ¤œç´¢ã™ã‚‹éš›ã«ä½¿ã†ã€è¿½åŠ ã®æ¡ä»¶ã€‚ä¾‹ï¼š ``array('User.is_active' => 1).``
+- ``contain`` ãƒ¦ãƒ¼ã‚¶ã®ãƒ¬ã‚³ãƒ¼ãƒ‰ãŒãƒ­ãƒ¼ãƒ‰ã•ã‚ŒãŸéš›ã«å«ã‚ã‚‹ã“ã¨ã®ã§ãã‚‹ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã€‚
 
 ..
   - ``fields`` The fields to use to identify a user by.
@@ -164,13 +164,13 @@ all ƒL[‚Í ``AuthComponent::ALL`` ‚Æ‹Lq‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·::
 
   .. versionadded:: 2.2
 
-”z—ñ ``$components`` ‚Ì’†‚Åƒ†[ƒU‚ÌŒÂX‚Ì—ñ–¼‚ğİ’è‚·‚é‚É‚Í::
+é…åˆ— ``$components`` ã®ä¸­ã§ãƒ¦ãƒ¼ã‚¶ã®å€‹ã€…ã®åˆ—åã‚’è¨­å®šã™ã‚‹ã«ã¯::
 
 ..
   To configure different fields for user in ``$components`` array::
 
     <?php
-    // $components ”z—ñ‚Ì’†‚Åİ’è‚ğ‹Lq
+    // $components é…åˆ—ã®ä¸­ã§è¨­å®šã‚’è¨˜è¿°
     public $components = array(
         'Auth' => array(
             'authenticate' => array(
@@ -183,9 +183,9 @@ all ƒL[‚Í ``AuthComponent::ALL`` ‚Æ‹Lq‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·::
 
 .. note::
 
-    Auth ‚Ì‘¼‚Ìİ’èƒL[iauthError ‚â loginAction ‚È‚Çj‚ğ authenticate ‚â Form ‚Ì‰ºˆÊ—v‘f‚Æ‚µ‚Ä‘‚¢‚Ä‚Í‚¢‚¯‚Ü‚¹‚ñB
-    ‚»‚ê‚ç‚Í authenticate ƒL[‚Æ“¯‚¶ƒŒƒxƒ‹‚Å‚ ‚é‚×‚«‚Å‚·B
-    ã‹L‚Ì—á‚ğ‘¼‚Ì Auth İ’è‚ğg‚Á‚Ä‘‚¢‚½ê‡‚ÍŸ‚Ì‚æ‚¤‚É‚È‚è‚Ü‚·::
+    Auth ã®ä»–ã®è¨­å®šã‚­ãƒ¼ï¼ˆauthError ã‚„ loginAction ãªã©ï¼‰ã‚’ authenticate ã‚„ Form ã®ä¸‹ä½è¦ç´ ã¨ã—ã¦æ›¸ã„ã¦ã¯ã„ã‘ã¾ã›ã‚“ã€‚
+    ãã‚Œã‚‰ã¯ authenticate ã‚­ãƒ¼ã¨åŒã˜ãƒ¬ãƒ™ãƒ«ã§ã‚ã‚‹ã¹ãã§ã™ã€‚
+    ä¸Šè¨˜ã®ä¾‹ã‚’ä»–ã® Auth è¨­å®šã‚’ä½¿ã£ã¦æ›¸ã„ãŸå ´åˆã¯æ¬¡ã®ã‚ˆã†ã«ãªã‚Šã¾ã™::
 
 ..
   Do not put other Auth configuration keys (like authError, loginAction etc)
@@ -194,7 +194,7 @@ all ƒL[‚Í ``AuthComponent::ALL`` ‚Æ‹Lq‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·::
   Above setup with other Auth configurations should look something like::
 
         <?php
-        // $components ”z—ñ‚Ì’†‚Åİ’è‚ğ‹Lq
+        // $components é…åˆ—ã®ä¸­ã§è¨­å®šã‚’è¨˜è¿°
         public $components = array(
             'Auth' => array(
                 'loginAction' => array(
@@ -211,25 +211,25 @@ all ƒL[‚Í ``AuthComponent::ALL`` ‚Æ‹Lq‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·::
             )
         );
 
-‹¤’Ê‚Ìİ’è‚É‰Á‚¦‚ÄABasic ”FØ‚Å‚ÍŸ‚ÌƒL[‚à—˜—p‚Å‚«‚Ü‚·B
+å…±é€šã®è¨­å®šã«åŠ ãˆã¦ã€Basic èªè¨¼ã§ã¯æ¬¡ã®ã‚­ãƒ¼ã‚‚åˆ©ç”¨ã§ãã¾ã™ã€‚
 
 ..
   In addition to the common configuration, Basic authentication supports the following keys:
 
-- ``realm`` ”FØ‚³‚ê‚é realmBƒfƒtƒHƒ‹ƒg‚Å‚Í ``env('SERVER_NAME')``B
+- ``realm`` èªè¨¼ã•ã‚Œã‚‹ realmã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ã¯ ``env('SERVER_NAME')``ã€‚
 
 ..
   - ``realm`` The realm being authenticated. Defaults to ``env('SERVER_NAME')``.
 
-‹¤’Ê‚Ìİ’è‚É‰Á‚¦‚ÄAƒ_ƒCƒWƒFƒXƒg”FØ‚Å‚ÍŸ‚ÌƒL[‚à—˜—p‚Å‚«‚Ü‚·B
+å…±é€šã®è¨­å®šã«åŠ ãˆã¦ã€ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ã§ã¯æ¬¡ã®ã‚­ãƒ¼ã‚‚åˆ©ç”¨ã§ãã¾ã™ã€‚
 
 ..
   In addition to the common configuration Digest authentication supports the following keys:
 
-- ``realm`` realm ”FØ‚Ì”FØæBƒfƒtƒHƒ‹ƒg‚ÍƒT[ƒo–¼B
-- ``nonce`` ”FØ‚Åg‚í‚ê‚é nonceBƒfƒtƒHƒ‹ƒg‚Í ``uniqid()``B
-- ``qop`` ƒfƒtƒHƒ‹ƒg‚Í authBŒ»“_‚Å‚Í‘¼‚Ì’l‚ÍƒTƒ|[ƒg‚³‚ê‚Ä‚¢‚È‚¢B
-- ``opaque`` ƒNƒ‰ƒCƒAƒ“ƒg‚©‚ç•ÏX‚³‚ê‚é‚±‚Æ‚È‚­–ß‚³‚ê‚é‚×‚«•¶š—ñBƒfƒtƒHƒ‹ƒg‚Å‚Í ``md5($settings['realm'])``B
+- ``realm`` realm èªè¨¼ã®èªè¨¼å…ˆã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯ã‚µãƒ¼ãƒåã€‚
+- ``nonce`` èªè¨¼ã§ä½¿ã‚ã‚Œã‚‹ nonceã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯ ``uniqid()``ã€‚
+- ``qop`` ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯ authã€‚ç¾æ™‚ç‚¹ã§ã¯ä»–ã®å€¤ã¯ã‚µãƒãƒ¼ãƒˆã•ã‚Œã¦ã„ãªã„ã€‚
+- ``opaque`` ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰å¤‰æ›´ã•ã‚Œã‚‹ã“ã¨ãªãæˆ»ã•ã‚Œã‚‹ã¹ãæ–‡å­—åˆ—ã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ã¯ ``md5($settings['realm'])``ã€‚
 
 ..
   - ``realm`` The realm authentication is for, Defaults to the servername.
@@ -238,15 +238,15 @@ all ƒL[‚Í ``AuthComponent::ALL`` ‚Æ‹Lq‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·::
   - ``opaque`` A string that must be returned unchanged by clients. Defaults
     to ``md5($settings['realm'])``
 
-ƒJƒXƒ^ƒ€”FØƒIƒuƒWƒFƒNƒg‚Ìì¬
+ã‚«ã‚¹ã‚¿ãƒ èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½œæˆ
 --------------------------------------
 
 ..
   Creating Custom Authentication objects
 
 
-”FØƒIƒuƒWƒFƒNƒg‚Íƒvƒ‰ƒKƒuƒ‹‚È‚Ì‚ÅAƒJƒXƒ^ƒ€”FØƒIƒuƒWƒFƒNƒg‚ğ©•ª‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ““à‚É‚Å‚àAƒvƒ‰ƒOƒCƒ“‚Æ‚µ‚Ä‚Å‚àì¬‚ª‰Â”\‚Å‚·B
-‚à‚µ—á‚¦‚ÎAOpenID ”FØƒIƒuƒWƒFƒNƒg‚ğì¬‚µ‚½‚¢‚Ì‚¾‚Æ‚µ‚½‚çA``app/Controller/Component/Auth/OpenidAuthenticate.php`` ‚Ì’†‚ÅŸ‚Ì‚æ‚¤‚É‹Lq‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
+èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯ãƒ—ãƒ©ã‚¬ãƒ–ãƒ«ãªã®ã§ã€ã‚«ã‚¹ã‚¿ãƒ èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è‡ªåˆ†ã®ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³å†…ã«ã§ã‚‚ã€ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã¨ã—ã¦ã§ã‚‚ä½œæˆãŒå¯èƒ½ã§ã™ã€‚
+ã‚‚ã—ä¾‹ãˆã°ã€OpenID èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã—ãŸã„ã®ã ã¨ã—ãŸã‚‰ã€``app/Controller/Component/Auth/OpenidAuthenticate.php`` ã®ä¸­ã§æ¬¡ã®ã‚ˆã†ã«è¨˜è¿°ã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
 
 ..
   Because authentication objects are pluggable, 
@@ -259,16 +259,16 @@ all ƒL[‚Í ``AuthComponent::ALL`` ‚Æ‹Lq‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·::
 
     class OpenidAuthenticate extends BaseAuthenticate {
         public function authenticate(CakeRequest $request, CakeResponse $response) {
-            // OpenID —p‚Ìˆ—‚ğ‚±‚±‚É‹Lq‚µ‚Ü‚·B
+            // OpenID ç”¨ã®å‡¦ç†ã‚’ã“ã“ã«è¨˜è¿°ã—ã¾ã™ã€‚
         }
     }
 
-”FØƒIƒuƒWƒFƒNƒg‚ÍAƒ†[ƒU‚ğ¯•Ê‚Å‚«‚È‚©‚Á‚½ê‡‚É ``false`` ‚ğ•Ô‚³‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñB
-‚»‚µ‚ÄA‰Â”\‚È‚çƒ†[ƒUî•ñ‚Ì”z—ñ‚à•Ô‚·‚×‚«‚Å‚µ‚å‚¤B
-``BaseAuthenticate`` ‚ğŒp³‚µ‚È‚­‚Ä‚à‚©‚Ü‚¢‚Ü‚¹‚ñB“Æ©‚Ì”FØƒIƒuƒWƒFƒNƒg‚É‚Í ``authenticate()`` ƒƒ\ƒbƒh‚ªÀ‘•‚³‚ê‚Ä‚¢‚ê‚Î‚æ‚¢‚Ì‚Å‚·B
-``BaseAuthenticate`` ƒNƒ‰ƒX‚Å‚Í‚æ‚­g‚í‚ê‚é‹­—Í‚Èƒƒ\ƒbƒh‚ª‘½”’ñ‹Ÿ‚³‚ê‚Ü‚·B
-‚Ü‚½A“Æ©‚Ì”FØƒIƒuƒWƒFƒNƒg‚ªƒXƒe[ƒgƒŒƒX”FØ‚âƒNƒbƒL[ƒŒƒX”FØ‚ğƒTƒ|[ƒg‚·‚é•K—v‚ª‚ ‚é‚È‚çA``getUser()`` ƒƒ\ƒbƒh‚ğÀ‘•‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·B
-Ú×‚Í‰º‹L‚Ì Basic^ƒ_ƒCƒWƒFƒXƒg”FØ‚ÌƒZƒNƒVƒ‡ƒ“‚ğQÆ‚µ‚Ä‚­‚¾‚³‚¢B
+èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯ã€ãƒ¦ãƒ¼ã‚¶ã‚’è­˜åˆ¥ã§ããªã‹ã£ãŸå ´åˆã« ``false`` ã‚’è¿”ã•ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
+ãã—ã¦ã€å¯èƒ½ãªã‚‰ãƒ¦ãƒ¼ã‚¶æƒ…å ±ã®é…åˆ—ã‚‚è¿”ã™ã¹ãã§ã—ã‚‡ã†ã€‚
+``BaseAuthenticate`` ã‚’ç¶™æ‰¿ã—ãªãã¦ã‚‚ã‹ã¾ã„ã¾ã›ã‚“ã€‚ç‹¬è‡ªã®èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã¯ ``authenticate()`` ãƒ¡ã‚½ãƒƒãƒ‰ãŒå®Ÿè£…ã•ã‚Œã¦ã„ã‚Œã°ã‚ˆã„ã®ã§ã™ã€‚
+``BaseAuthenticate`` ã‚¯ãƒ©ã‚¹ã§ã¯ã‚ˆãä½¿ã‚ã‚Œã‚‹å¼·åŠ›ãªãƒ¡ã‚½ãƒƒãƒ‰ãŒå¤šæ•°æä¾›ã•ã‚Œã¾ã™ã€‚
+ã¾ãŸã€ç‹¬è‡ªã®èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒã‚¹ãƒ†ãƒ¼ãƒˆãƒ¬ã‚¹èªè¨¼ã‚„ã‚¯ãƒƒã‚­ãƒ¼ãƒ¬ã‚¹èªè¨¼ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹å¿…è¦ãŒã‚ã‚‹ãªã‚‰ã€``getUser()`` ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å®Ÿè£…ã™ã‚‹ã“ã¨ã‚‚ã§ãã¾ã™ã€‚
+è©³ç´°ã¯ä¸‹è¨˜ã® Basicï¼ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 
 ..
   Authentication objects should return ``false`` if they cannot identify the user.  
@@ -280,42 +280,42 @@ all ƒL[‚Í ``AuthComponent::ALL`` ‚Æ‹Lq‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·::
   to support stateless or cookie-less authentication. 
   See the sections on basic and digest authentication below for more information.
 
-ƒJƒXƒ^ƒ€”FØƒIƒuƒWƒFƒNƒg‚Ì—˜—p
+ã‚«ã‚¹ã‚¿ãƒ èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åˆ©ç”¨
 -----------------------------------
 
 ..
   Using custom authentication objects
 
-ƒJƒXƒ^ƒ€”FØƒIƒuƒWƒFƒNƒg‚ğì¬‚µ‚½‚çAAuthComponents ‚Ì authenticate ”z—ñ“à‚É‚»‚ê‚ğŠÜ‚ß‚é‚±‚Æ‚Å—˜—p‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·::
+ã‚«ã‚¹ã‚¿ãƒ èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã—ãŸã‚‰ã€AuthComponents ã® authenticate é…åˆ—å†…ã«ãã‚Œã‚’å«ã‚ã‚‹ã“ã¨ã§åˆ©ç”¨ã™ã‚‹ã“ã¨ãŒã§ãã¾ã™::
 
 ..
   Once you've created your custom authentication object, you can use them by including them in AuthComponents authenticate array::
 
     <?php
     $this->Auth->authenticate = array(
-        'Openid', // app“à‚Ì”FØƒIƒuƒWƒFƒNƒg
-        'AuthBag.Combo', // ƒvƒ‰ƒOƒCƒ“‚Ì”FØƒIƒuƒWƒFƒNƒg
+        'Openid', // appå†…ã®èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+        'AuthBag.Combo', // ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     );
 
 
-ƒ†[ƒU‚Ì¯•Ê‚ÆƒƒOƒCƒ“
+ãƒ¦ãƒ¼ã‚¶ã®è­˜åˆ¥ã¨ãƒ­ã‚°ã‚¤ãƒ³
 -------------------------------------
 
 ..
   Identifying users and logging them in
 
-ˆÈ‘O‚Ì ``AuthComponent`` ‚Í©“®“I‚ÉƒƒOƒCƒ“‚ğs‚Á‚Ä‚¢‚Ü‚µ‚½B
-‚±‚ê‚É¬—‚·‚él‚ª‘½‚­A‚É‚Í AuthComponent ‚Ì—˜—p‚ğ‚â‚â“ï‚µ‚­‚µ‚Ä‚¢‚Ü‚µ‚½B
-2.0 ‚ÅƒƒOƒCƒ“‚µ‚½‚¢ê‡‚É‚ÍAè“®‚Å ``$this->Auth->login()`` ‚ğŒÄ‚Ño‚·•K—v‚ª‚ ‚è‚Ü‚·B
+ä»¥å‰ã® ``AuthComponent`` ã¯è‡ªå‹•çš„ã«ãƒ­ã‚°ã‚¤ãƒ³ã‚’è¡Œã£ã¦ã„ã¾ã—ãŸã€‚
+ã“ã‚Œã«æ··ä¹±ã™ã‚‹äººãŒå¤šãã€æ™‚ã«ã¯ AuthComponent ã®åˆ©ç”¨ã‚’ã‚„ã‚„é›£ã—ãã—ã¦ã„ã¾ã—ãŸã€‚
+2.0 ã§ãƒ­ã‚°ã‚¤ãƒ³ã—ãŸã„å ´åˆã«ã¯ã€æ‰‹å‹•ã§ ``$this->Auth->login()`` ã‚’å‘¼ã³å‡ºã™å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
 
 ..
   In the past ``AuthComponent`` auto-magically logged users in.  
   This was confusing for many people, and made using AuthComponent a bit difficult at times.  
   For 2.0, you'll need to manually call ``$this->Auth->login()`` to log a user in.
 
-ƒ†[ƒU‚ğ”FØ‚·‚éÛ‚É‚ÍAİ’è‚³‚ê‚Ä‚¢‚é”FØƒIƒuƒWƒFƒNƒg‚ğİ’è‚³‚ê‚½‡‚Éƒ`ƒFƒbƒN‚µ‚Ä‚¢‚«‚Ü‚·B
-‚ ‚éƒIƒuƒWƒFƒNƒg‚Åƒ†[ƒU‚ª¯•Ê‚Å‚«‚½‚çAˆÈ~‚ÌƒIƒuƒWƒFƒNƒg‚Íƒ`ƒFƒbƒN‚³‚ê‚Ü‚¹‚ñB
-ƒƒOƒCƒ“ƒtƒH[ƒ€‚Æ˜AŒg‚·‚é’Pƒ‚È login ŠÖ”‚È‚çŸ‚Ì‚æ‚¤‚É‚È‚è‚Ü‚·::
+ãƒ¦ãƒ¼ã‚¶ã‚’èªè¨¼ã™ã‚‹éš›ã«ã¯ã€è¨­å®šã•ã‚Œã¦ã„ã‚‹èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¨­å®šã•ã‚ŒãŸé †ã«ãƒã‚§ãƒƒã‚¯ã—ã¦ã„ãã¾ã™ã€‚
+ã‚ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ãƒ¦ãƒ¼ã‚¶ãŒè­˜åˆ¥ã§ããŸã‚‰ã€ä»¥é™ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯ãƒã‚§ãƒƒã‚¯ã•ã‚Œã¾ã›ã‚“ã€‚
+ãƒ­ã‚°ã‚¤ãƒ³ãƒ•ã‚©ãƒ¼ãƒ ã¨é€£æºã™ã‚‹å˜ç´”ãª login é–¢æ•°ãªã‚‰æ¬¡ã®ã‚ˆã†ã«ãªã‚Šã¾ã™::
 
 ..
   When authenticating users, attached authentication objects are checked in the order they are attached.
@@ -328,13 +328,13 @@ all ƒL[‚Í ``AuthComponent::ALL`` ‚Æ‹Lq‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·::
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirect());
             } else {
-                $this->Session->setFlash(__('ƒ†[ƒU–¼‚à‚µ‚­‚ÍƒpƒXƒ[ƒh‚ª³‚µ‚­‚ ‚è‚Ü‚¹‚ñB'), 'default', array(), 'auth');
+                $this->Session->setFlash(__('ãƒ¦ãƒ¼ã‚¶åã‚‚ã—ãã¯ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒæ­£ã—ãã‚ã‚Šã¾ã›ã‚“ã€‚'), 'default', array(), 'auth');
             }
         }
     }
 
-ã‹L‚ÌƒR[ƒh‚Íi``login`` ƒƒ\ƒbƒh‚É“n‚³‚ê‚éî•ñˆÈŠO‚ÍjAPOSTƒf[ƒ^‚ğg‚Á‚Äƒ†[ƒU‚ğƒƒOƒCƒ“‚³‚¹‚æ‚¤‚Æ‚µ‚Ü‚·B
-ƒƒOƒCƒ“‚ª¬Œ÷‚È‚çƒ†[ƒU‚ªÅŒã‚É–K‚ê‚Ä‚¢‚½ƒy[ƒW‚© :php:attr:`AuthComponent::$loginRedirect` ‚Ö‚Æ redirect ‚µ‚Ü‚·BƒƒOƒCƒ“‚ª¸”s‚È‚çAƒtƒ‰ƒbƒVƒ…ƒƒbƒZ[ƒW‚ªƒZƒbƒg‚³‚ê‚Ü‚·B
+ä¸Šè¨˜ã®ã‚³ãƒ¼ãƒ‰ã¯ï¼ˆ``login`` ãƒ¡ã‚½ãƒƒãƒ‰ã«æ¸¡ã•ã‚Œã‚‹æƒ…å ±ä»¥å¤–ã¯ï¼‰ã€POSTãƒ‡ãƒ¼ã‚¿ã‚’ä½¿ã£ã¦ãƒ¦ãƒ¼ã‚¶ã‚’ãƒ­ã‚°ã‚¤ãƒ³ã•ã›ã‚ˆã†ã¨ã—ã¾ã™ã€‚
+ãƒ­ã‚°ã‚¤ãƒ³ãŒæˆåŠŸãªã‚‰ãƒ¦ãƒ¼ã‚¶ãŒæœ€å¾Œã«è¨ªã‚Œã¦ã„ãŸãƒšãƒ¼ã‚¸ã‹ :php:attr:`AuthComponent::$loginRedirect` ã¸ã¨ redirect ã—ã¾ã™ã€‚ãƒ­ã‚°ã‚¤ãƒ³ãŒå¤±æ•—ãªã‚‰ã€ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒã‚»ãƒƒãƒˆã•ã‚Œã¾ã™ã€‚
 
 ..
   The above code (without any data passed to the ``login`` method), 
@@ -344,19 +344,19 @@ all ƒL[‚Í ``AuthComponent::ALL`` ‚Æ‹Lq‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·::
 
 .. warning::
 
-    1.3 ‚Ì ``$this->Auth->login($this->data)`` ‚Å‚ÍAƒ†[ƒU‚Ì¯•Ê‚ğ‚İ‚Ä¬Œ÷‚µ‚½‚Æ‚«‚Ì‚İƒƒOƒCƒ“‚ªs‚í‚ê‚Ü‚µ‚½‚ªA
-    2.0 ‚Å‚Í ``$this->Auth->login($this->request->data)`` ‚Å‚È‚É‚ª POST ‚³‚ê‚½‚Ì‚¾‚Æ‚µ‚Ä‚àƒƒOƒCƒ“‚ğs‚¢‚Ü‚·B
+    1.3 ã® ``$this->Auth->login($this->data)`` ã§ã¯ã€ãƒ¦ãƒ¼ã‚¶ã®è­˜åˆ¥ã‚’è©¦ã¿ã¦æˆåŠŸã—ãŸã¨ãã®ã¿ãƒ­ã‚°ã‚¤ãƒ³ãŒè¡Œã‚ã‚Œã¾ã—ãŸãŒã€
+    2.0 ã§ã¯ ``$this->Auth->login($this->request->data)`` ã§ãªã«ãŒ POST ã•ã‚ŒãŸã®ã ã¨ã—ã¦ã‚‚ãƒ­ã‚°ã‚¤ãƒ³ã‚’è¡Œã„ã¾ã™ã€‚
 
     ..
       In 2.0 ``$this->Auth->login($this->request->data)`` will log the user in with whatever data is posted,
       whereas in 1.3 ``$this->Auth->login($this->data)`` would try to identify the user first and only log in when successful.
 
-ƒƒOƒCƒ“‚Å‚Ìƒ_ƒCƒWƒFƒXƒg”FØEBasic”FØ‚Ì—˜—p
+ãƒ­ã‚°ã‚¤ãƒ³ã§ã®ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ãƒ»Basicèªè¨¼ã®åˆ©ç”¨
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ..
   Using Digest and Basic Authentication for logging in
 
-Basic”FØEƒ_ƒCƒWƒFƒXƒg”FØ‚Å‚ÍAƒƒOƒCƒ“ˆ—‚Ì‘O‚ÉÀs‚³‚ê‚éAÅ‰‚Ì POST ‚ğ•K—v‚Æ‚µ‚È‚¢‚½‚ßA‚ ‚È‚½‚ªÀ‘•‚µ‚½ ``login()`` ŠÖ”‚Í ``FormAuthentication`` ‚ğg‚¤ê‡‚Æ‚¢áŠ±ˆÙ‚È‚è‚Ü‚·B
+Basicèªè¨¼ãƒ»ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ã§ã¯ã€ãƒ­ã‚°ã‚¤ãƒ³å‡¦ç†ã®å‰ã«å®Ÿè¡Œã•ã‚Œã‚‹ã€æœ€åˆã® POST ã‚’å¿…è¦ã¨ã—ãªã„ãŸã‚ã€ã‚ãªãŸãŒå®Ÿè£…ã—ãŸ ``login()`` é–¢æ•°ã¯ ``FormAuthentication`` ã‚’ä½¿ã†å ´åˆã¨ã„è‹¥å¹²ç•°ãªã‚Šã¾ã™ã€‚
 
 ..
   Because basic and digest authentication don't require an initial POST to be performed before they initiate the login sequence, 
@@ -367,15 +367,15 @@ Basic”FØEƒ_ƒCƒWƒFƒXƒg”FØ‚Å‚ÍAƒƒOƒCƒ“ˆ—‚Ì‘O‚ÉÀs‚³‚ê‚éAÅ‰‚Ì POST ‚ğ•K—
         if ($this->Auth->login()) {
             return $this->redirect($this->Auth->redirect());
         } else {
-            $this->Session->setFlash(__('ƒ†[ƒU–¼‚à‚µ‚­‚ÍƒpƒXƒ[ƒh‚ª³‚µ‚­‚ ‚è‚Ü‚¹‚ñB'), 'default', array(), 'auth');
+            $this->Session->setFlash(__('ãƒ¦ãƒ¼ã‚¶åã‚‚ã—ãã¯ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒæ­£ã—ãã‚ã‚Šã¾ã›ã‚“ã€‚'), 'default', array(), 'auth');
         }
     }
 
-ƒƒOƒCƒ“ŒãAƒ_ƒCƒWƒFƒXƒg”FØEBasic”FØ‚ğg‚¤ƒ†[ƒU‚ÍƒNƒbƒL[‚ª•K—v‚ ‚è‚Ü‚¹‚ñB
-ÀÛ‚Ì‚Æ‚±‚ëA‚·‚×‚Ä‚Ì”FØƒIƒuƒWƒFƒNƒg‚Í ``getUser()`` ƒƒ\ƒbƒh‚ğÀ‘•‚·‚é‚±‚Æ‚Å *ƒXƒe[ƒgƒŒƒX* ‚È”FØ‚ğ’ñ‹Ÿ‚·‚é‚±‚Æ‚ª‰Â”\‚Å‚·B
-ƒNƒ‰ƒCƒAƒ“ƒg‚ªƒNƒbƒL[‚ğƒTƒ|[ƒg‚·‚éê‡‚ÍABasic”FØ‚àƒ_ƒCƒWƒFƒXƒg”FØ‚àA‘¼‚Ì”FØƒIƒuƒWƒFƒNƒg‚Æ“¯—l‚ÉƒZƒbƒVƒ‡ƒ“‚Éƒ†[ƒU‚ğ•ÛŠÇ‚µ‚Ü‚·B
-ƒNƒ‰ƒCƒAƒ“ƒg‚ªƒNƒbƒL[‚ğƒTƒ|[ƒg‚µ‚È‚¢ê‡iCURLã‚É\’z‚³‚ê‚½’Pƒ‚ÈHTTPƒNƒ‰ƒCƒAƒ“ƒg‚È‚Ç‚Ìê‡j‚ÍAƒXƒe[ƒgƒŒƒX”FØ‚àƒTƒ|[ƒg‚³‚ê‚Ü‚·B
-ƒXƒe[ƒgƒŒƒX”FØ‚ÍƒŠƒNƒGƒXƒg‚²‚Æ‚Éƒ†[ƒU‚Ì”FØî•ñ‚ğÄÆ‡‚µ‚Ü‚·B‚±‚ê‚É‚æ‚èáŠ±‚ÌƒI[ƒo[ƒwƒbƒh‚ª¶‚Ü‚ê‚Ü‚·‚ªAƒNƒbƒL[‚ğƒTƒ|[ƒg‚µ‚È‚¢‚©‚Å‚«‚È‚¢ƒ†[ƒU‚Å‚àƒƒOƒCƒ“‚Å‚«‚é‚æ‚¤‚É‚È‚è‚Ü‚·B
+ãƒ­ã‚°ã‚¤ãƒ³å¾Œã€ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ãƒ»Basicèªè¨¼ã‚’ä½¿ã†ãƒ¦ãƒ¼ã‚¶ã¯ã‚¯ãƒƒã‚­ãƒ¼ãŒå¿…è¦ã‚ã‚Šã¾ã›ã‚“ã€‚
+å®Ÿéš›ã®ã¨ã“ã‚ã€ã™ã¹ã¦ã®èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯ ``getUser()`` ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å®Ÿè£…ã™ã‚‹ã“ã¨ã§ *ã‚¹ãƒ†ãƒ¼ãƒˆãƒ¬ã‚¹* ãªèªè¨¼ã‚’æä¾›ã™ã‚‹ã“ã¨ãŒå¯èƒ½ã§ã™ã€‚
+ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒã‚¯ãƒƒã‚­ãƒ¼ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹å ´åˆã¯ã€Basicèªè¨¼ã‚‚ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ã‚‚ã€ä»–ã®èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨åŒæ§˜ã«ã‚»ãƒƒã‚·ãƒ§ãƒ³ã«ãƒ¦ãƒ¼ã‚¶ã‚’ä¿ç®¡ã—ã¾ã™ã€‚
+ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒã‚¯ãƒƒã‚­ãƒ¼ã‚’ã‚µãƒãƒ¼ãƒˆã—ãªã„å ´åˆï¼ˆCURLä¸Šã«æ§‹ç¯‰ã•ã‚ŒãŸå˜ç´”ãªHTTPã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãªã©ã®å ´åˆï¼‰ã¯ã€ã‚¹ãƒ†ãƒ¼ãƒˆãƒ¬ã‚¹èªè¨¼ã‚‚ã‚µãƒãƒ¼ãƒˆã•ã‚Œã¾ã™ã€‚
+ã‚¹ãƒ†ãƒ¼ãƒˆãƒ¬ã‚¹èªè¨¼ã¯ãƒªã‚¯ã‚¨ã‚¹ãƒˆã”ã¨ã«ãƒ¦ãƒ¼ã‚¶ã®èªè¨¼æƒ…å ±ã‚’å†ç…§åˆã—ã¾ã™ã€‚ã“ã‚Œã«ã‚ˆã‚Šè‹¥å¹²ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ˜ãƒƒãƒ‰ãŒç”Ÿã¾ã‚Œã¾ã™ãŒã€ã‚¯ãƒƒã‚­ãƒ¼ã‚’ã‚µãƒãƒ¼ãƒˆã—ãªã„ã‹ã§ããªã„ãƒ¦ãƒ¼ã‚¶ã§ã‚‚ãƒ­ã‚°ã‚¤ãƒ³ã§ãã‚‹ã‚ˆã†ã«ãªã‚Šã¾ã™ã€‚
 
 ..
   Once logged in, users using digest and basic auth are not required to have cookies.  
@@ -385,17 +385,17 @@ Basic”FØEƒ_ƒCƒWƒFƒXƒg”FØ‚Å‚ÍAƒƒOƒCƒ“ˆ—‚Ì‘O‚ÉÀs‚³‚ê‚éAÅ‰‚Ì POST ‚ğ•K—
   Stateless authentication will re-verify the user's credentials on each request,
   this creates a small amount of additional overhead, but allows clients that cannot or do not support cookies to login in.
 
-ƒXƒe[ƒgƒŒƒX”FØƒVƒXƒeƒ€‚Ìì¬
+ã‚¹ãƒ†ãƒ¼ãƒˆãƒ¬ã‚¹èªè¨¼ã‚·ã‚¹ãƒ†ãƒ ã®ä½œæˆ
 -----------------------------------------
 
 ..
   Creating stateless authentication systems
 
-”FØƒIƒuƒWƒFƒNƒg‚ÍƒNƒbƒL[‚ÉˆË‘¶‚µ‚È‚¢ƒ†[ƒUƒƒOƒCƒ“‚ÌƒVƒXƒeƒ€‚ğƒTƒ|[ƒg‚·‚é‚½‚ß‚Ég‚í‚ê‚é ``getUser()`` ƒƒ\ƒbƒh‚ğÀ‘•‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-“TŒ^“I‚È getUser ƒƒ\ƒbƒh‚ÍƒŠƒNƒGƒXƒg‚âŠÂ‹«‚ğŒ©‚ÄAƒ†[ƒU‚ğ¯•Ê‚·‚é‚½‚ß‚É‚»‚Ìî•ñ‚ğg‚¢‚Ü‚·B
-HTTP Basic”FØ‚Ì—á‚ğ‹“‚°‚é‚ÆAƒ†[ƒU–¼‚ÆƒpƒXƒ[ƒh‚Ì’l‚Æ‚µ‚Ä ``$_SERVER['PHP_AUTH_USER']`` ‚Æ ``$_SERVER['PHP_AUTH_PW']`` ‚ğg‚¢‚Ü‚·B
-ƒŠƒNƒGƒXƒg‚²‚Æ‚ÉA‚à‚µƒNƒ‰ƒCƒAƒ“ƒg‚ªƒNƒbƒL[‚ğƒTƒ|[ƒg‚µ‚Ä‚¢‚È‚¢‚È‚çA‚»‚ê‚ç‚Ì’l‚ğÄ“xƒ†[ƒU‚ğ¯•Ê‚·‚é‚½‚ß‚Ég‚¢A³‹K‚Ìƒ†[ƒU‚Å‚ ‚é‚±‚Æ‚ğŠm”F‚µ‚Ü‚·B
-”FØƒIƒuƒWƒFƒNƒg‚Ì ``authenticate()`` ƒƒ\ƒbƒh‚Æ“¯—l‚ÉA``getUser()`` ƒƒ\ƒbƒh‚à¬Œ÷‚È‚çƒ†[ƒUî•ñ‚Ì”z—ñ‚ğA¸”s‚È‚ç ``false`` ‚ğ•Ô‚·‚æ‚¤‚É‚µ‚Ä‚­‚¾‚³‚¢::
+èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯ã‚¯ãƒƒã‚­ãƒ¼ã«ä¾å­˜ã—ãªã„ãƒ¦ãƒ¼ã‚¶ãƒ­ã‚°ã‚¤ãƒ³ã®ã‚·ã‚¹ãƒ†ãƒ ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹ãŸã‚ã«ä½¿ã‚ã‚Œã‚‹ ``getUser()`` ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å®Ÿè£…ã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
+å…¸å‹çš„ãª getUser ãƒ¡ã‚½ãƒƒãƒ‰ã¯ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚„ç’°å¢ƒã‚’è¦‹ã¦ã€ãƒ¦ãƒ¼ã‚¶ã‚’è­˜åˆ¥ã™ã‚‹ãŸã‚ã«ãã®æƒ…å ±ã‚’ä½¿ã„ã¾ã™ã€‚
+HTTP Basicèªè¨¼ã®ä¾‹ã‚’æŒ™ã’ã‚‹ã¨ã€ãƒ¦ãƒ¼ã‚¶åã¨ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã®å€¤ã¨ã—ã¦ ``$_SERVER['PHP_AUTH_USER']`` ã¨ ``$_SERVER['PHP_AUTH_PW']`` ã‚’ä½¿ã„ã¾ã™ã€‚
+ãƒªã‚¯ã‚¨ã‚¹ãƒˆã”ã¨ã«ã€ã‚‚ã—ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒã‚¯ãƒƒã‚­ãƒ¼ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ãªã„ãªã‚‰ã€ãã‚Œã‚‰ã®å€¤ã‚’å†åº¦ãƒ¦ãƒ¼ã‚¶ã‚’è­˜åˆ¥ã™ã‚‹ãŸã‚ã«ä½¿ã„ã€æ­£è¦ã®ãƒ¦ãƒ¼ã‚¶ã§ã‚ã‚‹ã“ã¨ã‚’ç¢ºèªã—ã¾ã™ã€‚
+èªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã® ``authenticate()`` ãƒ¡ã‚½ãƒƒãƒ‰ã¨åŒæ§˜ã«ã€``getUser()`` ãƒ¡ã‚½ãƒƒãƒ‰ã‚‚æˆåŠŸãªã‚‰ãƒ¦ãƒ¼ã‚¶æƒ…å ±ã®é…åˆ—ã‚’ã€å¤±æ•—ãªã‚‰ ``false`` ã‚’è¿”ã™ã‚ˆã†ã«ã—ã¦ãã ã•ã„::
 
 ..
   Authentication objects can implement a ``getUser()`` method that can be used to support user login systems that don't rely on cookies.  
@@ -416,22 +416,22 @@ HTTP Basic”FØ‚Ì—á‚ğ‹“‚°‚é‚ÆAƒ†[ƒU–¼‚ÆƒpƒXƒ[ƒh‚Ì’l‚Æ‚µ‚Ä ``$_SERVER['PHP_AUT
         return $this->_findUser($username, $pass);
     }
 
-ã‹L‚Å‚Í HTTP Basic”FØ—p‚Ì getUser ƒƒ\ƒbƒh‚ğ‚Ç‚Ì‚æ‚¤‚ÉÀs‚Å‚«‚é‚Ì‚©‚ğ¦‚µ‚Ä‚¢‚Ü‚·B
-``_findUser()`` ƒƒ\ƒbƒh‚Í ``BaseAuthenticate`` ‚Ìˆê•”‚Åƒ†[ƒU–¼AƒpƒXƒ[ƒh‚ğ‚à‚Æ‚Éƒ†[ƒU‚ğ¯•Ê‚µ‚Ü‚·B
+ä¸Šè¨˜ã§ã¯ HTTP Basicèªè¨¼ç”¨ã® getUser ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ã©ã®ã‚ˆã†ã«å®Ÿè¡Œã§ãã‚‹ã®ã‹ã‚’ç¤ºã—ã¦ã„ã¾ã™ã€‚
+``_findUser()`` ãƒ¡ã‚½ãƒƒãƒ‰ã¯ ``BaseAuthenticate`` ã®ä¸€éƒ¨ã§ãƒ¦ãƒ¼ã‚¶åã€ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’ã‚‚ã¨ã«ãƒ¦ãƒ¼ã‚¶ã‚’è­˜åˆ¥ã—ã¾ã™ã€‚
 
 ..
   The above is how you could implement getUser method for HTTP basic authentication.  
   The ``_findUser()`` method is part of ``BaseAuthenticate`` and identifies a user based on a username and password.
 
 
-”FØ‚É‚Â‚¢‚Ä‚Ìƒtƒ‰ƒbƒVƒ…ƒƒbƒZ[ƒW‚Ì•\¦
+èªè¨¼ã«ã¤ã„ã¦ã®ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®è¡¨ç¤º
 --------------------------------------
 
 ..
   Displaying auth related flash messages
 
-Auth ‚ª¶¬‚·‚éƒZƒbƒVƒ‡ƒ“ƒGƒ‰[ƒƒbƒZ[ƒW‚ğ•\¦‚·‚é‚½‚ß‚É‚ÍAŸ‚ÌƒR[ƒh‚ğ‚ ‚È‚½‚ÌƒŒƒCƒAƒEƒg‚É‰Á‚¦‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñB
-``app/View/Layouts/default.ctp`` ƒtƒ@ƒCƒ‹‚ÉŸ‚Ì‚Qs‚ğ‰Á‚¦‚Ä‚­‚¾‚³‚¢Bcontent_for_layout s‚Ì‘Oš‚É‚ ‚é body •”‚Ì’†‚ª‚æ‚¢‚Å‚µ‚å‚¤::
+Auth ãŒç”Ÿæˆã™ã‚‹ã‚»ãƒƒã‚·ãƒ§ãƒ³ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤ºã™ã‚‹ãŸã‚ã«ã¯ã€æ¬¡ã®ã‚³ãƒ¼ãƒ‰ã‚’ã‚ãªãŸã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã«åŠ ãˆãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
+``app/View/Layouts/default.ctp`` ãƒ•ã‚¡ã‚¤ãƒ«ã«æ¬¡ã®ï¼’è¡Œã‚’åŠ ãˆã¦ãã ã•ã„ã€‚content_for_layout è¡Œã®å‰â˜…ã«ã‚ã‚‹ body éƒ¨ã®ä¸­ãŒã‚ˆã„ã§ã—ã‚‡ã†::
 
 ..
   In order to display the session error messages that Auth generates, you need to add the following code to your layout. 
@@ -442,26 +442,26 @@ Auth ‚ª¶¬‚·‚éƒZƒbƒVƒ‡ƒ“ƒGƒ‰[ƒƒbƒZ[ƒW‚ğ•\¦‚·‚é‚½‚ß‚É‚ÍAŸ‚ÌƒR[ƒh‚ğ‚ ‚È‚½‚
     echo $this->Session->flash('auth');
     ?>
 
-AuthComponent ‚Ì flash İ’è‚ğg‚¤‚±‚Æ‚ÅƒGƒ‰[ƒƒbƒZ[ƒW‚ğƒJƒXƒ^ƒ}ƒCƒY‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-``$this->Auth->flash`` ‚ğg‚¤‚±‚Æ‚ÅAAuthComponent ‚ªƒtƒ‰ƒbƒVƒ…ƒƒbƒZ[ƒW‚Ì‚½‚ß‚Ég‚¤ƒpƒ‰ƒ[ƒ^‚ğİ’è‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-—˜—p‰Â”\‚ÈƒL[‚ÍŸ‚Ì‚Æ‚¨‚è‚Å‚·B
+AuthComponent ã® flash è¨­å®šã‚’ä½¿ã†ã“ã¨ã§ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚ºã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
+``$this->Auth->flash`` ã‚’ä½¿ã†ã“ã¨ã§ã€AuthComponent ãŒãƒ•ãƒ©ãƒƒã‚·ãƒ¥ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ãŸã‚ã«ä½¿ã†ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’è¨­å®šã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
+åˆ©ç”¨å¯èƒ½ãªã‚­ãƒ¼ã¯æ¬¡ã®ã¨ãŠã‚Šã§ã™ã€‚
 
 ..
   You can customize the error messages, and flash settings AuthComponent uses.  
   Using ``$this->Auth->flash`` you can configure the parameters AuthComponent uses for setting flash messages.  
   The available keys are 
 
-- ``element`` - g—p‚³‚ê‚éƒGƒŒƒƒ“ƒgBƒfƒtƒHƒ‹ƒg‚Í 'default'
-- ``key`` - g—p‚³‚ê‚éƒL[BƒfƒtƒHƒ‹ƒg‚Í 'auth'
-- ``params`` - g—p‚³‚ê‚é’Ç‰Á‚Ì params ”z—ñBƒfƒtƒHƒ‹ƒg‚Í array()
+- ``element`` - ä½¿ç”¨ã•ã‚Œã‚‹ã‚¨ãƒ¬ãƒ¡ãƒ³ãƒˆã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯ 'default'
+- ``key`` - ä½¿ç”¨ã•ã‚Œã‚‹ã‚­ãƒ¼ã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯ 'auth'
+- ``params`` - ä½¿ç”¨ã•ã‚Œã‚‹è¿½åŠ ã® params é…åˆ—ã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯ array()
 
 ..
   - ``element`` - The element to use, defaults to 'default'.
   - ``key`` - The key to use, defaults to 'auth'
   - ``params`` - The array of additional params to use, defaults to array()
 
-ƒtƒ‰ƒbƒVƒ…ƒƒbƒZ[ƒW‚Ìİ’è‚¾‚¯‚Å‚È‚­AAuthComponent ‚ªg—p‚·‚é‘¼‚ÌƒGƒ‰[ƒƒbƒZ[ƒW‚ğƒJƒXƒ^ƒ}ƒCƒY‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·B
-‚ ‚È‚½©g‚ÌƒRƒ“ƒgƒ[ƒ‰‚Ì beforeFilter ‚Ì’†‚â component ‚Ìİ’è‚ÅA”FØ‚ª¸”s‚µ‚½Û‚Ég‚í‚ê‚éƒGƒ‰[‚ğƒJƒXƒ^ƒ}ƒCƒY‚·‚é‚Ì‚É ``authError`` ‚ğg‚¤‚±‚Æ‚ª‚Å‚«‚Ü‚·::
+ãƒ•ãƒ©ãƒƒã‚·ãƒ¥ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®è¨­å®šã ã‘ã§ãªãã€AuthComponent ãŒä½¿ç”¨ã™ã‚‹ä»–ã®ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚ºã™ã‚‹ã“ã¨ã‚‚ã§ãã¾ã™ã€‚
+ã‚ãªãŸè‡ªèº«ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã® beforeFilter ã®ä¸­ã‚„ component ã®è¨­å®šã§ã€èªè¨¼ãŒå¤±æ•—ã—ãŸéš›ã«ä½¿ã‚ã‚Œã‚‹ã‚¨ãƒ©ãƒ¼ã‚’ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚ºã™ã‚‹ã®ã« ``authError`` ã‚’ä½¿ã†ã“ã¨ãŒã§ãã¾ã™::
 
 ..
   In addition to the flash message settings you can customize other error messages AuthComponent uses. 
@@ -469,19 +469,19 @@ AuthComponent ‚Ì flash İ’è‚ğg‚¤‚±‚Æ‚ÅƒGƒ‰[ƒƒbƒZ[ƒW‚ğƒJƒXƒ^ƒ}ƒCƒY‚·‚é‚±‚Æ‚ª‚
 
 
     <?php
-    $this->Auth->authError = "‚±‚ÌƒGƒ‰[‚Í•ÛŒì‚³‚ê‚½WebƒTƒCƒg‚Ìˆê•”‚Éƒ†[ƒU‚ªƒAƒNƒZƒX‚µ‚æ‚¤‚Æ‚µ‚½Û‚É•\¦‚³‚ê‚Ü‚·B";
+    $this->Auth->authError = "ã“ã®ã‚¨ãƒ©ãƒ¼ã¯ä¿è­·ã•ã‚ŒãŸWebã‚µã‚¤ãƒˆã®ä¸€éƒ¨ã«ãƒ¦ãƒ¼ã‚¶ãŒã‚¢ã‚¯ã‚»ã‚¹ã—ã‚ˆã†ã¨ã—ãŸéš›ã«è¡¨ç¤ºã•ã‚Œã¾ã™ã€‚";
 
-ƒpƒXƒ[ƒh‚ÌƒnƒbƒVƒ…‰»
+ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã®ãƒãƒƒã‚·ãƒ¥åŒ–
 ----------------------
 
 ..
   Hashing passwords
 
-AuthComponent ‚ª‚à‚Í‚â©“®‚Å‚ÍƒpƒXƒ[ƒh‚ğƒnƒbƒVƒ…‰»‚µ‚È‚­‚È‚Á‚½‚±‚Æ‚ÉA‹C‚Ã‚¢‚½‚©‚à‚µ‚ê‚Ü‚¹‚ñB
-‚±‚ê‚Í‘Ã“–«ƒ`ƒFƒbƒN‚Ì‚æ‚¤‚È‘½‚­‚Ì‹¤’Êƒ^ƒXƒN‚ğ“ï‚µ‚¢‚à‚Ì‚É‚µ‚Ä‚¢‚½‚½‚ßAæ‚èœ‚©‚ê‚Ü‚µ‚½B
-ƒpƒXƒ[ƒh‚ğ•½•¶ƒeƒLƒXƒg‚Ì‚Ü‚Ü•ÛŠÇ‚µ‚Ä‚Í **‚¢‚¯‚Ü‚¹‚ñ**Bƒ†[ƒU‚ÌƒŒƒR[ƒh‚ğ•Û‘¶‚·‚é‘O‚ÉAƒpƒXƒ[ƒh‚Í•K‚¸ƒnƒbƒVƒ…‰»‚·‚é‚×‚«‚Å‚·B
-ƒ†[ƒU‚ğ•Û‘¶‚·‚é‘O‚ÉƒpƒXƒ[ƒh‚ğƒnƒbƒVƒ…‰»‚·‚é‚½‚ß‚ÉAstatic ‚Ì ``AuthComponent::password()`` ‚ğg‚¤‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-‚±‚ê‚Í‚ ‚È‚½‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÅƒnƒbƒVƒ…‰»‚·‚éÛ‚Ìí—ª‚ğİ’è‚·‚é‚½‚ß‚Ég‚í‚ê‚é‚à‚Ì‚Å‚·B
+AuthComponent ãŒã‚‚ã¯ã‚„è‡ªå‹•ã§ã¯ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’ãƒãƒƒã‚·ãƒ¥åŒ–ã—ãªããªã£ãŸã“ã¨ã«ã€æ°—ã¥ã„ãŸã‹ã‚‚ã—ã‚Œã¾ã›ã‚“ã€‚
+ã“ã‚Œã¯å¦¥å½“æ€§ãƒã‚§ãƒƒã‚¯ã®ã‚ˆã†ãªå¤šãã®å…±é€šã‚¿ã‚¹ã‚¯ã‚’é›£ã—ã„ã‚‚ã®ã«ã—ã¦ã„ãŸãŸã‚ã€å–ã‚Šé™¤ã‹ã‚Œã¾ã—ãŸã€‚
+ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’å¹³æ–‡ãƒ†ã‚­ã‚¹ãƒˆã®ã¾ã¾ä¿ç®¡ã—ã¦ã¯ **ã„ã‘ã¾ã›ã‚“**ã€‚ãƒ¦ãƒ¼ã‚¶ã®ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’ä¿å­˜ã™ã‚‹å‰ã«ã€ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã¯å¿…ãšãƒãƒƒã‚·ãƒ¥åŒ–ã™ã‚‹ã¹ãã§ã™ã€‚
+ãƒ¦ãƒ¼ã‚¶ã‚’ä¿å­˜ã™ã‚‹å‰ã«ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’ãƒãƒƒã‚·ãƒ¥åŒ–ã™ã‚‹ãŸã‚ã«ã€static ã® ``AuthComponent::password()`` ã‚’ä½¿ã†ã“ã¨ãŒã§ãã¾ã™ã€‚
+ã“ã‚Œã¯ã‚ãªãŸã®ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã§ãƒãƒƒã‚·ãƒ¥åŒ–ã™ã‚‹éš›ã®æˆ¦ç•¥ã‚’è¨­å®šã™ã‚‹ãŸã‚ã«ä½¿ã‚ã‚Œã‚‹ã‚‚ã®ã§ã™ã€‚
 
 ..
   AuthComponent no longer automatically hashes every password it can find.
@@ -490,7 +490,7 @@ AuthComponent ‚ª‚à‚Í‚â©“®‚Å‚ÍƒpƒXƒ[ƒh‚ğƒnƒbƒVƒ…‰»‚µ‚È‚­‚È‚Á‚½‚±‚Æ‚ÉA‹C‚Ã‚¢‚½
   You can use the static ``AuthComponent::password()`` to hash passwords before saving them.  
   This will use the configured hashing strategy for your application.
 
-ƒpƒXƒ[ƒh‚Ì‘Ã“–«ƒ`ƒFƒbƒN‚Ì‚ ‚ÆA‚ ‚È‚½‚Ìƒ‚ƒfƒ‹‚Ì beforeSave ƒR[ƒ‹ƒoƒbƒN‚Ì’†‚ÅƒpƒXƒ[ƒh‚ğƒnƒbƒVƒ…‰»‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·::
+ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã®å¦¥å½“æ€§ãƒã‚§ãƒƒã‚¯ã®ã‚ã¨ã€ã‚ãªãŸã®ãƒ¢ãƒ‡ãƒ«ã® beforeSave ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã®ä¸­ã§ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’ãƒãƒƒã‚·ãƒ¥åŒ–ã™ã‚‹ã“ã¨ãŒã§ãã¾ã™::
 ..
   After validating the password, you can hash a password in the beforeSave callback of your model::
 
@@ -502,10 +502,10 @@ AuthComponent ‚ª‚à‚Í‚â©“®‚Å‚ÍƒpƒXƒ[ƒh‚ğƒnƒbƒVƒ…‰»‚µ‚È‚­‚È‚Á‚½‚±‚Æ‚ÉA‹C‚Ã‚¢‚½
         }
     }
 
-``$this->Auth->login()`` ‚ğŒÄ‚Ño‚·‘O‚ÉƒpƒXƒ[ƒh‚ğƒnƒbƒVƒ…‰»‚·‚é•K—v‚Í‚ ‚è‚Ü‚¹‚ñB
-‚³‚Ü‚´‚Ü‚È”FØƒIƒuƒWƒFƒNƒg‚ªŒÂX‚ÉƒpƒXƒ[ƒh‚ğƒnƒbƒVƒ…‰»‚µ‚Ü‚·B
-ƒ_ƒCƒWƒFƒXƒg”FØ‚ğg‚¤ê‡AƒpƒXƒ[ƒh‚Ì¶¬‚É AuthComponent::password() ‚ğg‚Á‚Ä‚Í‚¢‚¯‚Ü‚¹‚ñB
-ƒ_ƒCƒWƒFƒXƒg‚ÌƒnƒbƒVƒ…‚ğ¶¬‚·‚é•û–@‚É‚Â‚¢‚Ä‚Í‰º‹L‚ğQÆ‚µ‚Ä‚­‚¾‚³‚¢B
+``$this->Auth->login()`` ã‚’å‘¼ã³å‡ºã™å‰ã«ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’ãƒãƒƒã‚·ãƒ¥åŒ–ã™ã‚‹å¿…è¦ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚
+ã•ã¾ã–ã¾ãªèªè¨¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒå€‹ã€…ã«ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’ãƒãƒƒã‚·ãƒ¥åŒ–ã—ã¾ã™ã€‚
+ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ã‚’ä½¿ã†å ´åˆã€ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã®ç”Ÿæˆã« AuthComponent::password() ã‚’ä½¿ã£ã¦ã¯ã„ã‘ã¾ã›ã‚“ã€‚
+ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆã®ãƒãƒƒã‚·ãƒ¥ã‚’ç”Ÿæˆã™ã‚‹æ–¹æ³•ã«ã¤ã„ã¦ã¯ä¸‹è¨˜ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚
 
 ..
   You don't need to hash passwords before calling ``$this->Auth->login()``.
@@ -514,15 +514,15 @@ AuthComponent ‚ª‚à‚Í‚â©“®‚Å‚ÍƒpƒXƒ[ƒh‚ğƒnƒbƒVƒ…‰»‚µ‚È‚­‚È‚Á‚½‚±‚Æ‚ÉA‹C‚Ã‚¢‚½
   See below for how to generate digest hashes.
 
 
-ƒ_ƒCƒWƒFƒXƒg”FØ‚ÌƒpƒXƒ[ƒh‚ÌƒnƒbƒVƒ…‰»
+ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ã®ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã®ãƒãƒƒã‚·ãƒ¥åŒ–
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ..
   Hashing passwords for digest authentication
 
-ƒ_ƒCƒWƒFƒXƒg”FØ‚Í RFC ‚Å’è‹`‚³‚ê‚½ƒtƒH[ƒ}ƒbƒg‚ÅƒnƒbƒVƒ…‰»‚³‚ê‚½ƒpƒXƒ[ƒh‚ª•K—v‚Å‚·B
-ƒpƒXƒ[ƒh‚ğƒ_ƒCƒWƒFƒXƒg”FØ‚Åg—p‚Å‚«‚é‚æ‚¤³‚µ‚­ƒnƒbƒVƒ…‰»‚·‚é‚½‚ß‚ÉA“Á•Ê‚ÈƒpƒXƒ[ƒhƒnƒbƒVƒ…‰»‚ÌŠÖ” ``DigestAuthenticate`` ‚ğg‚Á‚Ä‚­‚¾‚³‚¢B
-ƒ_ƒCƒWƒFƒXƒg”FØ‚Æ‚»‚Ì‘¼‚Ì”FØí—ª‚ğ‡‚í‚¹‚Ä—˜—p‚·‚éê‡‚É‚ÍA’Êí‚ÌƒnƒbƒVƒ…‰»ƒpƒXƒ[ƒh‚Æ‚Í•Ê‚ÌƒJƒ‰ƒ€‚Åƒ_ƒCƒWƒFƒXƒgƒpƒXƒ[ƒh‚ğ•ÛŠÇ‚·‚é‚Ì‚ğ‚¨Š©‚ß‚µ‚Ü‚·::
+ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ã¯ RFC ã§å®šç¾©ã•ã‚ŒãŸãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã§ãƒãƒƒã‚·ãƒ¥åŒ–ã•ã‚ŒãŸãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒå¿…è¦ã§ã™ã€‚
+ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ã§ä½¿ç”¨ã§ãã‚‹ã‚ˆã†æ­£ã—ããƒãƒƒã‚·ãƒ¥åŒ–ã™ã‚‹ãŸã‚ã«ã€ç‰¹åˆ¥ãªãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãƒãƒƒã‚·ãƒ¥åŒ–ã®é–¢æ•° ``DigestAuthenticate`` ã‚’ä½¿ã£ã¦ãã ã•ã„ã€‚
+ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ã¨ãã®ä»–ã®èªè¨¼æˆ¦ç•¥ã‚’åˆã‚ã›ã¦åˆ©ç”¨ã™ã‚‹å ´åˆã«ã¯ã€é€šå¸¸ã®ãƒãƒƒã‚·ãƒ¥åŒ–ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã¨ã¯åˆ¥ã®ã‚«ãƒ©ãƒ ã§ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’ä¿ç®¡ã™ã‚‹ã®ã‚’ãŠå‹§ã‚ã—ã¾ã™::
 
 ..
   Because Digest authentication requires a password hashed in the format defined by the RFC.  
@@ -541,8 +541,8 @@ AuthComponent ‚ª‚à‚Í‚â©“®‚Å‚ÍƒpƒXƒ[ƒh‚ğƒnƒbƒVƒ…‰»‚µ‚È‚­‚È‚Á‚½‚±‚Æ‚ÉA‹C‚Ã‚¢‚½
         }
     }
 
-ƒ_ƒCƒWƒFƒXƒg”FØ—p‚ÌƒpƒXƒ[ƒh‚ÍAƒ_ƒCƒWƒFƒXƒg”FØ‚Ì RFC ‚ÉŠî‚Ã‚«A‘¼‚ÌƒnƒbƒVƒ…‰»ƒpƒXƒ[ƒh‚æ‚è‚à‚â‚â‘½‚­‚Ìî•ñ‚ğ—v‹‚µ‚Ü‚·B
-ƒ_ƒCƒWƒFƒXƒgƒnƒbƒVƒ…‚Ì‚½‚ß‚É AuthComponent::password() ‚ğg‚¤‚ÆƒƒOƒCƒ“‚Å‚«‚È‚­‚È‚Á‚Ä‚µ‚Ü‚¢‚Ü‚·B
+ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ç”¨ã®ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã¯ã€ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆèªè¨¼ã® RFC ã«åŸºã¥ãã€ä»–ã®ãƒãƒƒã‚·ãƒ¥åŒ–ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚ˆã‚Šã‚‚ã‚„ã‚„å¤šãã®æƒ…å ±ã‚’è¦æ±‚ã—ã¾ã™ã€‚
+ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆãƒãƒƒã‚·ãƒ¥ã®ãŸã‚ã« AuthComponent::password() ã‚’ä½¿ã†ã¨ãƒ­ã‚°ã‚¤ãƒ³ã§ããªããªã£ã¦ã—ã¾ã„ã¾ã™ã€‚
 
 ..
   Passwords for digest authentication need a bit more information than other password hashes, based on the RFC for digest authentication. 
@@ -550,23 +550,23 @@ AuthComponent ‚ª‚à‚Í‚â©“®‚Å‚ÍƒpƒXƒ[ƒh‚ğƒnƒbƒVƒ…‰»‚µ‚È‚­‚È‚Á‚½‚±‚Æ‚ÉA‹C‚Ã‚¢‚½
 
 .. note::
 
-    AuthComponent::$authenticate “à‚Å DigestAuthentication ‚ªİ’è‚³‚ê‚½ê‡A
-    DigestAuthenticate::password() ‚Ì‘æ‚Rƒpƒ‰ƒ[ƒ^‚Í’è‹`‚µ‚½ 'realm' ‚Ìİ’è’l‚Æˆê’v‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B
-    •¡”‚ÌŠÂ‹«‚ÅˆêŠÑ‚µ‚½ƒnƒbƒVƒ…‚ª—~‚µ‚¢ê‡‚É static ‚È•¶š—ñ‚ğg‚¢‚½‚¢‚Æv‚¤‚©‚à‚µ‚ê‚Ü‚¹‚ñB
+    AuthComponent::$authenticate å†…ã§ DigestAuthentication ãŒè¨­å®šã•ã‚ŒãŸå ´åˆã€
+    DigestAuthenticate::password() ã®ç¬¬ï¼“ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¯å®šç¾©ã—ãŸ 'realm' ã®è¨­å®šå€¤ã¨ä¸€è‡´ã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+    è¤‡æ•°ã®ç’°å¢ƒã§ä¸€è²«ã—ãŸãƒãƒƒã‚·ãƒ¥ãŒæ¬²ã—ã„å ´åˆã« static ãªæ–‡å­—åˆ—ã‚’ä½¿ã„ãŸã„ã¨æ€ã†ã‹ã‚‚ã—ã‚Œã¾ã›ã‚“ã€‚
     
     ..
       The third parameter of DigestAuthenticate::password() must match the 'realm' config value defined 
       when DigestAuthentication was configured in AuthComponent::$authenticate.  This defaults to ``env('SCRIPT_NAME)``.
       You may wish to use a static string if you want consistent hashes in multiple environments.
 
-è“®‚Å‚Ìƒ†[ƒUƒƒOƒCƒ“
+æ‰‹å‹•ã§ã®ãƒ¦ãƒ¼ã‚¶ãƒ­ã‚°ã‚¤ãƒ³
 -------------------------
 
 ..
   Manually logging users in
 
-“Æ©‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ğ“o˜^‚µ‚½’¼Œã‚È‚ÇA‚É‚Íè“®‚É‚æ‚éƒƒOƒCƒ“‚ª•K—v‚É‚È‚é–‘Ô‚ª”­¶‚·‚é‚±‚Æ‚à‚ ‚é‚Å‚µ‚å‚¤B
-ƒƒOƒCƒ“‚³‚¹‚½‚¢ƒ†[ƒUƒf[ƒ^‚ğˆø”‚É ``$this->Auth->login()`` ‚ğŒÄ‚Ño‚·‚±‚Æ‚ÅA‚±‚ê‚ğÀŒ»‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·::
+ç‹¬è‡ªã®ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ç™»éŒ²ã—ãŸç›´å¾Œãªã©ã€æ™‚ã«ã¯æ‰‹å‹•ã«ã‚ˆã‚‹ãƒ­ã‚°ã‚¤ãƒ³ãŒå¿…è¦ã«ãªã‚‹äº‹æ…‹ãŒç™ºç”Ÿã™ã‚‹ã“ã¨ã‚‚ã‚ã‚‹ã§ã—ã‚‡ã†ã€‚
+ãƒ­ã‚°ã‚¤ãƒ³ã•ã›ãŸã„ãƒ¦ãƒ¼ã‚¶ãƒ‡ãƒ¼ã‚¿ã‚’å¼•æ•°ã« ``$this->Auth->login()`` ã‚’å‘¼ã³å‡ºã™ã“ã¨ã§ã€ã“ã‚Œã‚’å®Ÿç¾ã™ã‚‹ã“ã¨ãŒã§ãã¾ã™::
 
 ..
   Sometimes the need arises where you need to manually log a user in, such as just after they registered for your application.  
@@ -584,21 +584,21 @@ AuthComponent ‚ª‚à‚Í‚â©“®‚Å‚ÍƒpƒXƒ[ƒh‚ğƒnƒbƒVƒ…‰»‚µ‚È‚­‚È‚Á‚½‚±‚Æ‚ÉA‹C‚Ã‚¢‚½
 
 .. warning::
 
-    login ƒƒ\ƒbƒh‚É“n‚³‚ê‚é”z—ñ‚ÉV‚½‚Èƒ†[ƒUID‚ª’Ç‰Á‚³‚ê‚Ä‚¢‚é‚±‚Æ‚ğ•K‚¸Šm”F‚µ‚Ä‚­‚¾‚³‚¢B‚»‚¤‚Å‚È‚¢ê‡A‚»‚Ìƒ†[ƒUID‚ª—˜—p‚Å‚«‚È‚­‚È‚Á‚Ä‚µ‚Ü‚¢‚Ü‚·B
+    login ãƒ¡ã‚½ãƒƒãƒ‰ã«æ¸¡ã•ã‚Œã‚‹é…åˆ—ã«æ–°ãŸãªãƒ¦ãƒ¼ã‚¶IDãŒè¿½åŠ ã•ã‚Œã¦ã„ã‚‹ã“ã¨ã‚’å¿…ãšç¢ºèªã—ã¦ãã ã•ã„ã€‚ãã†ã§ãªã„å ´åˆã€ãã®ãƒ¦ãƒ¼ã‚¶IDãŒåˆ©ç”¨ã§ããªããªã£ã¦ã—ã¾ã„ã¾ã™ã€‚
     
     ..
       Be sure to manually add the new User id to the array passed to the login method. Otherwise you won't have the user id available.
 
-ƒƒOƒCƒ“‚µ‚½ƒ†[ƒU‚ÌƒAƒNƒZƒX
+ãƒ­ã‚°ã‚¤ãƒ³ã—ãŸãƒ¦ãƒ¼ã‚¶ã®ã‚¢ã‚¯ã‚»ã‚¹
 ----------------------------
 
 ..
   Accessing the logged in user
 
-ƒ†[ƒU‚ªƒƒOƒCƒ“‚µ‚½‚ ‚ÆAŒ»ó‚Ì‚»‚Ìƒ†[ƒU‚É‚Â‚¢‚Ä‚Ì“Á’è‚Ìî•ñ‚ª•K—v‚É‚È‚é‚±‚Æ‚à‚ ‚é‚Å‚µ‚å‚¤B
-``AuthComponent::user()`` ‚ğg‚¤‚±‚Æ‚ÅAŒ»İƒƒOƒCƒ“‚µ‚Ä‚¢‚é‚»‚Ìƒ†[ƒU‚ÉƒAƒNƒZƒX‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-‚±‚Ìƒƒ\ƒbƒh‚Í static ‚ÅAAuthComponent ‚ªƒ[ƒh‚³‚ê‚½‚ ‚ÆAglobal ‚Ég‚¤‚±‚Æ‚à‚Å‚«‚Ü‚·B
-ƒCƒ“ƒXƒ^ƒ“ƒXƒƒ\ƒbƒh‚Æ‚µ‚Ä‚àAstatic ƒƒ\ƒbƒh‚Æ‚µ‚Ä‚àƒAƒNƒZƒX‰Â”\‚Å‚·::
+ãƒ¦ãƒ¼ã‚¶ãŒãƒ­ã‚°ã‚¤ãƒ³ã—ãŸã‚ã¨ã€ç¾çŠ¶ã®ãã®ãƒ¦ãƒ¼ã‚¶ã«ã¤ã„ã¦ã®ç‰¹å®šã®æƒ…å ±ãŒå¿…è¦ã«ãªã‚‹ã“ã¨ã‚‚ã‚ã‚‹ã§ã—ã‚‡ã†ã€‚
+``AuthComponent::user()`` ã‚’ä½¿ã†ã“ã¨ã§ã€ç¾åœ¨ãƒ­ã‚°ã‚¤ãƒ³ã—ã¦ã„ã‚‹ãã®ãƒ¦ãƒ¼ã‚¶ã«ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
+ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã¯ static ã§ã€AuthComponent ãŒãƒ­ãƒ¼ãƒ‰ã•ã‚ŒãŸã‚ã¨ã€global ã«ä½¿ã†ã“ã¨ã‚‚ã§ãã¾ã™ã€‚
+ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒ¡ã‚½ãƒƒãƒ‰ã¨ã—ã¦ã‚‚ã€static ãƒ¡ã‚½ãƒƒãƒ‰ã¨ã—ã¦ã‚‚ã‚¢ã‚¯ã‚»ã‚¹å¯èƒ½ã§ã™::
 
 ..
   Once a user is logged in, you will often need some particular information about the current user.  
@@ -607,21 +607,21 @@ AuthComponent ‚ª‚à‚Í‚â©“®‚Å‚ÍƒpƒXƒ[ƒh‚ğƒnƒbƒVƒ…‰»‚µ‚È‚­‚È‚Á‚½‚±‚Æ‚ÉA‹C‚Ã‚¢‚½
   You can access it both as an instance method or as a static method::
 
     <?php
-    // ‚Ç‚±‚©‚ç‚Å‚à—˜—p‚Å‚«‚Ü‚·B
+    // ã©ã“ã‹ã‚‰ã§ã‚‚åˆ©ç”¨ã§ãã¾ã™ã€‚
     AuthComponent::user('id')
 
-    // Controller‚Ì’†‚Å‚Ì‚İ—˜—p‚Å‚«‚Ü‚·B
+    // Controllerã®ä¸­ã§ã®ã¿åˆ©ç”¨ã§ãã¾ã™ã€‚
     $this->Auth->user('id');
 
 
-ƒƒOƒAƒEƒg
+ãƒ­ã‚°ã‚¢ã‚¦ãƒˆ
 ----------
 
 ..
   Logging users out
 
-ÅI“I‚É‚Í”FØ‚ğ‰ğœ‚µA“KØ‚ÈêŠ‚Ö‚ÆƒŠƒ_ƒCƒŒƒNƒg‚·‚é‚½‚ß‚Ì‚Ä‚Á‚Æ‚è‘‚¢•û–@‚ª‚Ù‚µ‚­‚È‚é‚Å‚µ‚å‚¤B
-‚±‚Ìƒƒ\ƒbƒh‚Í‚ ‚È‚½‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ““à‚Ìƒƒ“ƒo[ƒy[ƒW‚É 'ƒƒOƒAƒEƒg' ƒŠƒ“ƒN‚ğ“ü‚ê‚½‚¢ê‡‚É‚à•Ö—˜‚Å‚·B
+æœ€çµ‚çš„ã«ã¯èªè¨¼ã‚’è§£é™¤ã—ã€é©åˆ‡ãªå ´æ‰€ã¸ã¨ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã™ã‚‹ãŸã‚ã®ã¦ã£ã¨ã‚Šæ—©ã„æ–¹æ³•ãŒã»ã—ããªã‚‹ã§ã—ã‚‡ã†ã€‚
+ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã¯ã‚ãªãŸã®ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³å†…ã®ãƒ¡ãƒ³ãƒãƒ¼ãƒšãƒ¼ã‚¸ã« 'ãƒ­ã‚°ã‚¢ã‚¦ãƒˆ' ãƒªãƒ³ã‚¯ã‚’å…¥ã‚ŒãŸã„å ´åˆã«ã‚‚ä¾¿åˆ©ã§ã™ã€‚
 
 ..
   Eventually you'll want a quick way to de-authenticate someone, and redirect them to where they need to go. 
@@ -632,10 +632,10 @@ AuthComponent ‚ª‚à‚Í‚â©“®‚Å‚ÍƒpƒXƒ[ƒh‚ğƒnƒbƒVƒ…‰»‚µ‚È‚­‚È‚Á‚½‚±‚Æ‚ÉA‹C‚Ã‚¢‚½
         $this->redirect($this->Auth->logout());
     }
 
-ƒ_ƒCƒWƒFƒXƒg^Basic”FØ‚ÅƒƒOƒCƒ“‚µ‚½ƒ†[ƒU‚ÌƒƒOƒAƒEƒg‚ğA‚·‚×‚Ä‚ÌƒNƒ‰ƒCƒAƒ“ƒg‚Å¬‚µ‹‚°‚é‚Ì‚Í“ï‚µ‚¢‚à‚Ì‚Å‚·B
-‘½‚­‚Ìƒuƒ‰ƒEƒU‚ÍŠJ‚¢‚Ä‚¢‚éŠÔ‚¾‚¯Œp‘±‚·‚é”FØî•ñ‚ğ•Û—L‚µ‚Ä‚¢‚Ü‚·B
-ƒNƒ‰ƒCƒAƒ“ƒg‚Ì’†‚É‚Í 401 ‚ÌƒXƒe[ƒ^ƒXƒR[ƒh‚ğ‘—M‚µ‚Ä‹­§“I‚ÉƒƒOƒAƒEƒg‚·‚é‚±‚Æ‚ª‚ ‚è‚¦‚Ü‚·B
-”FØ realm ‚Ì•ÏX‚ÍAˆê•”‚ÌƒNƒ‰ƒCƒAƒ“ƒg‚Å‹@”\‚³‚¹‚é‚½‚ß‚Ì‚à‚¤‚P‚Â‚Ì‰ğŒˆ–@‚Å‚·B
+ãƒ€ã‚¤ã‚¸ã‚§ã‚¹ãƒˆï¼Basicèªè¨¼ã§ãƒ­ã‚°ã‚¤ãƒ³ã—ãŸãƒ¦ãƒ¼ã‚¶ã®ãƒ­ã‚°ã‚¢ã‚¦ãƒˆã‚’ã€ã™ã¹ã¦ã®ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã§æˆã—é‚ã’ã‚‹ã®ã¯é›£ã—ã„ã‚‚ã®ã§ã™ã€‚
+å¤šãã®ãƒ–ãƒ©ã‚¦ã‚¶ã¯é–‹ã„ã¦ã„ã‚‹é–“ã ã‘ç¶™ç¶šã™ã‚‹èªè¨¼æƒ…å ±ã‚’ä¿æœ‰ã—ã¦ã„ã¾ã™ã€‚
+ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®ä¸­ã«ã¯ 401 ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’é€ä¿¡ã—ã¦å¼·åˆ¶çš„ã«ãƒ­ã‚°ã‚¢ã‚¦ãƒˆã™ã‚‹ã“ã¨ãŒã‚ã‚Šãˆã¾ã™ã€‚
+èªè¨¼ realm ã®å¤‰æ›´ã¯ã€ä¸€éƒ¨ã®ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã§æ©Ÿèƒ½ã•ã›ã‚‹ãŸã‚ã®ã‚‚ã†ï¼‘ã¤ã®è§£æ±ºæ³•ã§ã™ã€‚
 
 ..
   Logging out users that logged in with Digest or Basic auth is difficult to accomplish for all clients.  
@@ -645,25 +645,25 @@ AuthComponent ‚ª‚à‚Í‚â©“®‚Å‚ÍƒpƒXƒ[ƒh‚ğƒnƒbƒVƒ…‰»‚µ‚È‚­‚È‚Á‚½‚±‚Æ‚ÉA‹C‚Ã‚¢‚½
 
 .. _authorization-objects:
 
-Œ ŒÀ”»’è
+æ¨©é™åˆ¤å®š
 ========
 
 ..
   Authorization
 
-Œ ŒÀ”»’è‚Í¯•Ê‚³‚ê”FØ‚³‚ê‚½ƒ†[ƒU‚ªA—v‹‚·‚éƒŠƒ\[ƒX‚Ö‚ÌƒAƒNƒZƒX‚ğ—v‹‚Ç‚¨‚è‚É‹–‰Â‚µ‚Ä‚æ‚¢‚Ì‚©‚ğŠm‚½‚é‚à‚Ì‚É‚·‚é‚½‚ß‚Ìˆ—‚Å‚·B
-—LŒø‚È ``AuthComponent`` ‚ª©“®“I‚É”FØƒnƒ“ƒhƒ‰‚ğƒ`ƒFƒbƒN‚µAƒƒOƒCƒ“‚µ‚½ƒ†[ƒU‚ª—v‹‚Ç‚¨‚è‚ÉƒŠƒ\[ƒX‚Ö‚ÌƒAƒNƒZƒX‚ğ‹–‰Â‚·‚é‚©‚Ç‚¤‚©‚ğŠm”F‚µ‚Ü‚·B
-‘g‚İ‚İÏ‚İ‚Ì”FØƒnƒ“ƒhƒ‰‚ª‚¢‚­‚Â‚©‘¶İ‚µ‚Ü‚·‚Ì‚ÅA‚ ‚È‚½‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ“—p‚ÉƒJƒXƒ^ƒ€”Å‚ğì¬‚µ‚½‚èAƒvƒ‰ƒOƒCƒ“‚Ìˆê•”‚Æ‚µ‚Äì¬‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
+æ¨©é™åˆ¤å®šã¯è­˜åˆ¥ã•ã‚Œèªè¨¼ã•ã‚ŒãŸãƒ¦ãƒ¼ã‚¶ãŒã€è¦æ±‚ã™ã‚‹ãƒªã‚½ãƒ¼ã‚¹ã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ã‚’è¦æ±‚ã©ãŠã‚Šã«è¨±å¯ã—ã¦ã‚ˆã„ã®ã‹ã‚’ç¢ºãŸã‚‹ã‚‚ã®ã«ã™ã‚‹ãŸã‚ã®å‡¦ç†ã§ã™ã€‚
+æœ‰åŠ¹ãª ``AuthComponent`` ãŒè‡ªå‹•çš„ã«èªè¨¼ãƒãƒ³ãƒ‰ãƒ©ã‚’ãƒã‚§ãƒƒã‚¯ã—ã€ãƒ­ã‚°ã‚¤ãƒ³ã—ãŸãƒ¦ãƒ¼ã‚¶ãŒè¦æ±‚ã©ãŠã‚Šã«ãƒªã‚½ãƒ¼ã‚¹ã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ã‚’è¨±å¯ã™ã‚‹ã‹ã©ã†ã‹ã‚’ç¢ºèªã—ã¾ã™ã€‚
+çµ„ã¿è¾¼ã¿æ¸ˆã¿ã®èªè¨¼ãƒãƒ³ãƒ‰ãƒ©ãŒã„ãã¤ã‹å­˜åœ¨ã—ã¾ã™ã®ã§ã€ã‚ãªãŸã®ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ç”¨ã«ã‚«ã‚¹ã‚¿ãƒ ç‰ˆã‚’ä½œæˆã—ãŸã‚Šã€ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®ä¸€éƒ¨ã¨ã—ã¦ä½œæˆã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
 
   Authorization is the process of ensuring that an identified/authenticated user is allowed to access the resources they are requesting.  
   If enabled ``AuthComponent`` can automatically check authorization handlers and ensure that logged in users are allowed to access the resources 
   they are requesting.  
   There are several built-in authorization handlers, and you can create custom ones for your application, or as part of a plugin.
 
-- ``ActionsAuthorize`` ƒAƒNƒVƒ‡ƒ“ƒŒƒxƒ‹‚Åƒp[ƒ~ƒbƒVƒ‡ƒ“‚ğƒ`ƒFƒbƒN‚·‚é‚½‚ß‚É AclComponent ‚ğg‚¢‚Ü‚·B
-- ``CrudAuthorize`` ƒŠƒ\[ƒX‚Ö‚Ìƒp[ƒ~ƒbƒVƒ‡ƒ“‚ğƒ`ƒFƒbƒN‚·‚é‚½‚ß‚ÉAAclComponent ‚ÆAƒAƒNƒVƒ‡ƒ“ -> CRUD ‚Ìƒ}ƒbƒsƒ“ƒO‚ğg‚¢‚Ü‚·B
-- ƒAƒNƒeƒBƒu‚ÈƒRƒ“ƒgƒ[ƒ‰‚Ì ``ControllerAuthorize`` Calls ``isAuthorized()`` on the active controller, and uses the return of that to authorize a user.
-This is often the most simple way to authorize users.š
+- ``ActionsAuthorize`` ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ¬ãƒ™ãƒ«ã§ãƒ‘ãƒ¼ãƒŸãƒƒã‚·ãƒ§ãƒ³ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹ãŸã‚ã« AclComponent ã‚’ä½¿ã„ã¾ã™ã€‚
+- ``CrudAuthorize`` ãƒªã‚½ãƒ¼ã‚¹ã¸ã®ãƒ‘ãƒ¼ãƒŸãƒƒã‚·ãƒ§ãƒ³ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹ãŸã‚ã«ã€AclComponent ã¨ã€ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ -> CRUD ã®ãƒãƒƒãƒ”ãƒ³ã‚°ã‚’ä½¿ã„ã¾ã™ã€‚
+- ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã® ``ControllerAuthorize`` Calls ``isAuthorized()`` on the active controller, and uses the return of that to authorize a user.
+This is often the most simple way to authorize users.â˜…
 
 ..
   - ``ActionsAuthorize`` Uses the AclComponent to check for permissions on an action level.
@@ -671,22 +671,22 @@ This is often the most simple way to authorize users.š
   - ``ControllerAuthorize`` Calls ``isAuthorized()`` on the active controller, and uses the return of that to authorize a user.
     This is often the most simple way to authorize users.
 
-Œ ŒÀ”»’èƒnƒ“ƒhƒ‰‚Ìİ’è
+æ¨©é™åˆ¤å®šãƒãƒ³ãƒ‰ãƒ©ã®è¨­å®š
 ----------------------
 
 ..
   Configuring Authorization handlers
 
-Œ ŒÀ”»’èƒnƒ“ƒhƒ‰‚Ìİ’è‚Í ``$this->Auth->authorize`` ‚Ås‚¢‚Ü‚·B
-‚P‚ÂˆÈã‚ÌŒ ŒÀ”»’è‚Ìƒnƒ“ƒhƒ‰‚ğİ’è‚Å‚«‚Ü‚·B
-•¡”‚Ìƒnƒ“ƒhƒ‰‚ğg‚¤‚±‚Æ‚ÅA‚³‚Ü‚´‚Ü‚ÈŒ ŒÀ”»’è‚Ì•û–@‚ğƒTƒ|[ƒg‚Å‚«‚Ü‚·B
-Œ ŒÀ”»’èƒnƒ“ƒhƒ‰‚ªƒ`ƒFƒbƒN‚³‚ê‚éÛ‚É‚ÍAéŒ¾‚³‚ê‚½‡‚ÉŒÄ‚Ño‚³‚ê‚Ü‚·B
-ƒnƒ“ƒhƒ‰‚ÍŒ ŒÀ”»’è‚Ìƒ`ƒFƒbƒN‚ª‚Å‚«‚È‚©‚Á‚½‚èAƒ`ƒFƒbƒN‚ª¸”s‚È‚çAfalse ‚ğ•Ô‚µ‚Ä‚­‚¾‚³‚¢B
-Œ ŒÀ”»’è‚Ìƒ`ƒFƒbƒN‚ª‚Å‚«‚ÄAŒ‹‰Ê‚ª¬Œ÷‚È‚çAtrue ‚ğ•Ô‚µ‚Ä‚­‚¾‚³‚¢B
-ƒnƒ“ƒhƒ‰‚Í‚¢‚¸‚ê‚©‚É’Ê‰ß‚Å‚«‚é‚Ü‚ÅA‡”Ô‚ÉŒÄ‚Ño‚³‚ê‚Ü‚·B
-‚·‚×‚Ä‚Ìƒ`ƒFƒbƒNŒ‹‰Ê‚ª¸”s‚È‚çAƒ†[ƒU‚ÍŒ³‚¢‚½ƒy[ƒW‚Ö‚ÆƒŠƒ_ƒCƒŒƒNƒg‚³‚ê‚Ü‚·B
-‚Ü‚½A—áŠO‚ğ“Š‚°‚é‚±‚Æ‚Å‚·‚×‚Ä‚ÌŒ ŒÀ”»’è‚ğ¸”s‚É‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-“Š‚°‚ç‚ê‚½‚¢‚©‚È‚é—áŠO‚àƒLƒƒƒbƒ`‚µ‚È‚¯‚ê‚Î‚È‚ç‚¸A•K—v‚É‰‚¶‚Ä‚»‚ê‚ç‚É‘Îˆ‚µ‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñB
+æ¨©é™åˆ¤å®šãƒãƒ³ãƒ‰ãƒ©ã®è¨­å®šã¯ ``$this->Auth->authorize`` ã§è¡Œã„ã¾ã™ã€‚
+ï¼‘ã¤ä»¥ä¸Šã®æ¨©é™åˆ¤å®šã®ãƒãƒ³ãƒ‰ãƒ©ã‚’è¨­å®šã§ãã¾ã™ã€‚
+è¤‡æ•°ã®ãƒãƒ³ãƒ‰ãƒ©ã‚’ä½¿ã†ã“ã¨ã§ã€ã•ã¾ã–ã¾ãªæ¨©é™åˆ¤å®šã®æ–¹æ³•ã‚’ã‚µãƒãƒ¼ãƒˆã§ãã¾ã™ã€‚
+æ¨©é™åˆ¤å®šãƒãƒ³ãƒ‰ãƒ©ãŒãƒã‚§ãƒƒã‚¯ã•ã‚Œã‚‹éš›ã«ã¯ã€å®£è¨€ã•ã‚ŒãŸé †ã«å‘¼ã³å‡ºã•ã‚Œã¾ã™ã€‚
+ãƒãƒ³ãƒ‰ãƒ©ã¯æ¨©é™åˆ¤å®šã®ãƒã‚§ãƒƒã‚¯ãŒã§ããªã‹ã£ãŸã‚Šã€ãƒã‚§ãƒƒã‚¯ãŒå¤±æ•—ãªã‚‰ã€false ã‚’è¿”ã—ã¦ãã ã•ã„ã€‚
+æ¨©é™åˆ¤å®šã®ãƒã‚§ãƒƒã‚¯ãŒã§ãã¦ã€çµæœãŒæˆåŠŸãªã‚‰ã€true ã‚’è¿”ã—ã¦ãã ã•ã„ã€‚
+ãƒãƒ³ãƒ‰ãƒ©ã¯ã„ãšã‚Œã‹ã«é€šéã§ãã‚‹ã¾ã§ã€é †ç•ªã«å‘¼ã³å‡ºã•ã‚Œã¾ã™ã€‚
+ã™ã¹ã¦ã®ãƒã‚§ãƒƒã‚¯çµæœãŒå¤±æ•—ãªã‚‰ã€ãƒ¦ãƒ¼ã‚¶ã¯å…ƒã„ãŸãƒšãƒ¼ã‚¸ã¸ã¨ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã•ã‚Œã¾ã™ã€‚
+ã¾ãŸã€ä¾‹å¤–ã‚’æŠ•ã’ã‚‹ã“ã¨ã§ã™ã¹ã¦ã®æ¨©é™åˆ¤å®šã‚’å¤±æ•—ã«ã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
+æŠ•ã’ã‚‰ã‚ŒãŸã„ã‹ãªã‚‹ä¾‹å¤–ã‚‚ã‚­ãƒ£ãƒƒãƒã—ãªã‘ã‚Œã°ãªã‚‰ãšã€å¿…è¦ã«å¿œã˜ã¦ãã‚Œã‚‰ã«å¯¾å‡¦ã—ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚
 
 ..
   You configure authorization handlers using ``$this->Auth->authorize``.
@@ -700,26 +700,26 @@ This is often the most simple way to authorize users.š
   Additionally you can halt all authorization by throwing an exception.
   You will need to catch any thrown exceptions, and handle them.
 
-‚ ‚È‚½‚ÌƒRƒ“ƒgƒ[ƒ‰‚Ì ``beforeFilter`` ‚Ì’†‚â ``$components`` ”z—ñ‚Ì’†‚ÅŒ ŒÀ”»’èƒnƒ“ƒhƒ‰‚Ìİ’è‚ğs‚¤‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-”z—ñ‚ğg‚Á‚ÄAŠeŒ ŒÀ”»’èƒIƒuƒWƒFƒNƒg‚Éİ’èî•ñ‚ğ“n‚·‚±‚Æ‚ª‚Å‚«‚Ü‚·::
+ã‚ãªãŸã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã® ``beforeFilter`` ã®ä¸­ã‚„ ``$components`` é…åˆ—ã®ä¸­ã§æ¨©é™åˆ¤å®šãƒãƒ³ãƒ‰ãƒ©ã®è¨­å®šã‚’è¡Œã†ã“ã¨ãŒã§ãã¾ã™ã€‚
+é…åˆ—ã‚’ä½¿ã£ã¦ã€å„æ¨©é™åˆ¤å®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«è¨­å®šæƒ…å ±ã‚’æ¸¡ã™ã“ã¨ãŒã§ãã¾ã™::
 
 ..
   You can configure authorization handlers in your controller's ``beforeFilter`` or, in the ``$components`` array.  
   You can pass configuration information into each authorization object, using an array::
 
     <?php
-    // Šî–{“I‚Èİ’è–@
+    // åŸºæœ¬çš„ãªè¨­å®šæ³•
     $this->Auth->authorize = array('Controller');
 
-    // İ’è‚ğ’†‚É‹Lq
+    // è¨­å®šã‚’ä¸­ã«è¨˜è¿°
     $this->Auth->authorize = array(
         'Actions' => array('actionPath' => 'controllers/'),
         'Controller'
     );
 
-``Auth->authorize`` ‚à ``Auth->authenticate`` ‚Æ‚Ù‚Ú“¯—l‚ÅA``all`` ƒL[‚ğg‚¤‚±‚Æ‚ÅƒR[ƒh‚ğ DRY ‚É•Û‚¿‚â‚·‚­‚È‚è‚Ü‚·B
-‚±‚Ì“Á•Ê‚ÈƒL[‚É‚æ‚èAİ’è‚³‚ê‚½‚·‚×‚Ä‚ÌƒIƒuƒWƒFƒNƒg‚É“n‚·İ’è‚ğ‹Lq‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-all ƒL[‚Í ``AuthComponent::ALL`` ‚Æ‹Lq‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·::
+``Auth->authorize`` ã‚‚ ``Auth->authenticate`` ã¨ã»ã¼åŒæ§˜ã§ã€``all`` ã‚­ãƒ¼ã‚’ä½¿ã†ã“ã¨ã§ã‚³ãƒ¼ãƒ‰ã‚’ DRY ã«ä¿ã¡ã‚„ã™ããªã‚Šã¾ã™ã€‚
+ã“ã®ç‰¹åˆ¥ãªã‚­ãƒ¼ã«ã‚ˆã‚Šã€è¨­å®šã•ã‚ŒãŸã™ã¹ã¦ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«æ¸¡ã™è¨­å®šã‚’è¨˜è¿°ã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
+all ã‚­ãƒ¼ã¯ ``AuthComponent::ALL`` ã¨è¨˜è¿°ã™ã‚‹ã“ã¨ã‚‚ã§ãã¾ã™::
 
 ..
   Much like ``Auth->authenticate``, ``Auth->authorize``, helps you keep your code DRY, by using the ``all`` key. 
@@ -727,20 +727,20 @@ all ƒL[‚Í ``AuthComponent::ALL`` ‚Æ‹Lq‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·::
   The all key is also exposed as ``AuthComponent::ALL``::
 
     <?php
-    // 'all' ‚ğg‚Á‚Äİ’è‚ğ‹Lq
+    // 'all' ã‚’ä½¿ã£ã¦è¨­å®šã‚’è¨˜è¿°
     $this->Auth->authorize = array(
         AuthComponent::ALL => array('actionPath' => 'controllers/'),
         'Actions',
         'Controller'
     );
 
-ã‹L‚Ì—á‚Å‚ÍA``Actions`` ‚Æ ``Controller`` ‚Ì—¼•û‚Æ‚à‚ª 'all' ƒL[‚ÅéŒ¾‚³‚ê‚½İ’è‚ğæ“¾‚·‚é‚±‚Æ‚É‚È‚è‚Ü‚·B
-“Á’è‚ÌŒ ŒÀ”»’èƒIƒuƒWƒFƒNƒg‚ÉŒÂ•Ê‚É‘‚¢‚½İ’è‚Í 'all' ƒL[‚Ì“¯–¼‚ÌƒL[‚Ìî•ñ‚ğƒI[ƒo[ƒ‰ƒCƒh‚µ‚Ü‚·B
-ƒRƒA‚ÌŒ ŒÀ”»’èƒIƒuƒWƒFƒNƒg‚Å‚ÍŸ‚Ìİ’èƒL[‚ğƒTƒ|[ƒg‚µ‚Ä‚¢‚Ü‚·B
+ä¸Šè¨˜ã®ä¾‹ã§ã¯ã€``Actions`` ã¨ ``Controller`` ã®ä¸¡æ–¹ã¨ã‚‚ãŒ 'all' ã‚­ãƒ¼ã§å®£è¨€ã•ã‚ŒãŸè¨­å®šã‚’å–å¾—ã™ã‚‹ã“ã¨ã«ãªã‚Šã¾ã™ã€‚
+ç‰¹å®šã®æ¨©é™åˆ¤å®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å€‹åˆ¥ã«æ›¸ã„ãŸè¨­å®šã¯ 'all' ã‚­ãƒ¼ã®åŒåã®ã‚­ãƒ¼ã®æƒ…å ±ã‚’ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã—ã¾ã™ã€‚
+ã‚³ã‚¢ã®æ¨©é™åˆ¤å®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§ã¯æ¬¡ã®è¨­å®šã‚­ãƒ¼ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã™ã€‚
 
-- ``actionPath`` ACO ƒcƒŠ[“à‚Ì ACO š ``ActionsAuthorize`` ‚É‚æ‚Á‚Äg‚í‚Ü‚·Bto locate controller action ACO's in the ACO tree.
-- ``actionMap`` ƒAƒNƒVƒ‡ƒ“ -> CRUD ‚Ìƒ}ƒbƒsƒ“ƒOBCRUD ƒ[ƒ‹‚ÉƒAƒNƒVƒ‡ƒ“‚ğƒ}ƒbƒsƒ“ƒO‚µ‚½‚¢ ``CrudAuthorize`` ‚à‚µ‚­‚ÍŒ ŒÀ”»’èƒIƒuƒWƒFƒNƒg‚É‚æ‚Á‚Äg‚í‚ê‚Ü‚·B
-- ``userModel`` ARO/ƒ‚ƒfƒ‹ ‚Ìƒm[ƒh–¼B‚±‚êˆÈ‰º‚©‚çƒ†[ƒUî•ñ‚ğ’T‚µ‚Ü‚·BActionsAuthorize ‚Åg‚í‚ê‚Ü‚·B
+- ``actionPath`` ACO ãƒ„ãƒªãƒ¼å†…ã® ACO â˜… ``ActionsAuthorize`` ã«ã‚ˆã£ã¦ä½¿ã‚ã¾ã™ã€‚to locate controller action ACO's in the ACO tree.
+- ``actionMap`` ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ -> CRUD ã®ãƒãƒƒãƒ”ãƒ³ã‚°ã€‚CRUD ãƒ­ãƒ¼ãƒ«ã«ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’ãƒãƒƒãƒ”ãƒ³ã‚°ã—ãŸã„ ``CrudAuthorize`` ã‚‚ã—ãã¯æ¨©é™åˆ¤å®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã‚ˆã£ã¦ä½¿ã‚ã‚Œã¾ã™ã€‚
+- ``userModel`` ARO/ãƒ¢ãƒ‡ãƒ« ã®ãƒãƒ¼ãƒ‰åã€‚ã“ã‚Œä»¥ä¸‹ã‹ã‚‰ãƒ¦ãƒ¼ã‚¶æƒ…å ±ã‚’æ¢ã—ã¾ã™ã€‚ActionsAuthorize ã§ä½¿ã‚ã‚Œã¾ã™ã€‚
 
 ..
   In the above example, both the ``Actions`` and ``Controller`` will get the settings defined for the 'all' key. 
@@ -751,21 +751,21 @@ all ƒL[‚Í ``AuthComponent::ALL`` ‚Æ‹Lq‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·::
   - ``userModel`` The name of the ARO/Model node user information can be found under. Used with ActionsAuthorize.
 
 
-ƒJƒXƒ^ƒ€Œ ŒÀ”»’èƒIƒuƒWƒFƒNƒg‚Ì¶¬
+ã‚«ã‚¹ã‚¿ãƒ æ¨©é™åˆ¤å®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç”Ÿæˆ
 ----------------------------------
 
 ..
   Creating Custom Authorize objects
 
-Œ ŒÀ”»’èƒIƒuƒWƒFƒNƒg‚Íƒvƒ‰ƒKƒuƒ‹‚È‚Ì‚ÅAƒJƒXƒ^ƒ€Œ ŒÀ”»’èƒIƒuƒWƒFƒNƒg‚ğ©•ª‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ““à‚É‚Å‚àAƒvƒ‰ƒOƒCƒ“‚Æ‚µ‚Ä‚Å‚àì¬‚ª‰Â”\‚Å‚·B
-‚à‚µ—á‚¦‚ÎALDAP Œ ŒÀ”»’èƒIƒuƒWƒFƒNƒg‚ğì¬‚µ‚½‚¢‚Ì‚¾‚Æ‚µ‚½‚çA``app/Controller/Component/Auth/LdapAuthorize.php`` ‚Ì’†‚ÅŸ‚Ì‚æ‚¤‚É‹Lq‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·::
+æ¨©é™åˆ¤å®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯ãƒ—ãƒ©ã‚¬ãƒ–ãƒ«ãªã®ã§ã€ã‚«ã‚¹ã‚¿ãƒ æ¨©é™åˆ¤å®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è‡ªåˆ†ã®ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³å†…ã«ã§ã‚‚ã€ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã¨ã—ã¦ã§ã‚‚ä½œæˆãŒå¯èƒ½ã§ã™ã€‚
+ã‚‚ã—ä¾‹ãˆã°ã€LDAP æ¨©é™åˆ¤å®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã—ãŸã„ã®ã ã¨ã—ãŸã‚‰ã€``app/Controller/Component/Auth/LdapAuthorize.php`` ã®ä¸­ã§æ¬¡ã®ã‚ˆã†ã«è¨˜è¿°ã™ã‚‹ã“ã¨ãŒã§ãã¾ã™::
 
     <?php
     App::uses('BaseAuthorize', 'Controller/Component/Auth');
 
     class LdapAuthorize extends BaseAuthorize {
         public function authorize($user, CakeRequest $request) {
-            // LDAP —p‚Ìˆ—‚ğ‚±‚±‚É‹Lq‚µ‚Ü‚·B
+            // LDAP ç”¨ã®å‡¦ç†ã‚’ã“ã“ã«è¨˜è¿°ã—ã¾ã™ã€‚
         }
     }
 
@@ -775,7 +775,7 @@ all ƒL[‚Í ``AuthComponent::ALL`` ‚Æ‹Lq‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·::
   In ``app/Controller/Component/Auth/LdapAuthorize.php`` you could put the following::
 
 
-Œ ŒÀ”»’èƒIƒuƒWƒFƒNƒg‚Í
+æ¨©é™åˆ¤å®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯
 
 ..
   Authorize objects should return ``false`` if the user is denied access, or
