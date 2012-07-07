@@ -261,7 +261,3 @@ CakePHP ではセッションの複数の方法で設定を行えます。
         <?php
         // /app/Plugin/Comment/View/Elements/flash_no_spam.ctp が使用されます
         $this->Session->setFlash('Message!', 'flash_no_spam', array('plugin' => 'Comment'));
-
-.. meta::
-    :title lang=ja: セッション
-    :keywords lang=en: php array,dailyplanet com,configuration documentation,dot notation,feedback messages,reading data,session data,page requests,clark kent,dots,existence,sessions,convenience,cakephp
