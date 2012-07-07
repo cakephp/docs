@@ -84,13 +84,13 @@ Ensuite,regardons comment utiliser les différentes méthode du Composant Cookie
 Utiliser le composant
 ===================
 
-The CookieComponent offers a number of methods for working with Cookies.
+Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
 
 .. php:method:: write(mixed $key, mixed $value = null, boolean $encrypt = true, mixed $expires = null)
 
-    The write() method is the heart of cookie component, $key is the
-    cookie variable name you want, and the $value is the information to
-    be stored::
+    La méthode write() est le cœur du comosant cookie, $key est le 
+    nom de la variable désiré, et $value est l'information à stocker::
+    
 
         <?php
         $this->Cookie->write('name', 'Larry');
