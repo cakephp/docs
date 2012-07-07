@@ -2,64 +2,67 @@ Cookie
 ######
 
 .. php:class:: CookieComponent(ComponentCollection $collection, array $settings = array())
+Le composant Cookie est un conteneur de la méthode native de PHP
+``setcookie``.Il inclut également toutes sortes de fonctionnalités pour 
+rendre le codage de code pour les cookies très pratique.
+Avant de tenter d'utiliser le composant Cookie, vous devez vous assurer
+que 'Cookie'est listé dnas la partie $components de votre controlleur.
 
-The CookieComponent is a wrapper around the native PHP ``setcookie``
-method. It also includes a host of delicious icing to make coding
-cookies in your controllers very convenient. Before attempting to
-use the CookieComponent, you must make sure that 'Cookie' is listed
-in your controllers' $components array.
+Paramétrage du contrôleur
+=========================
 
+Voici un certain nombre de variables de contrôleur qui vous permettent
+la manière dont les cookies sont créés et gérés.
+Définir ces variables spéciales dans la méthode beforeFilter () 
+de votre contrôleur vous permet de définir la façon dont le 
+Composant cookie fonctionne.
 
-Controller Setup
-================
-
-There are a number of controller variables that allow you to
-configure the way cookies are created and managed. Defining these
-special variables in the beforeFilter() method of your controller
-allows you to define how the CookieComponent works.
 
 +-----------------+--------------+------------------------------------------------------+
-| Cookie variable | default      | description                                          |
+| variable cookie | par defaut   | description                                          |
 +=================+==============+======================================================+
-| string $name    |'CakeCookie'  | The name of the cookie.                              |
+| string $name    |'CakeCookie'  | Le nom du cookie                                     |
 +-----------------+--------------+------------------------------------------------------+
-| string $key     | null         | This string is used to encrypt                       |
-|                 |              | the value written to the cookie.                     |
-|                 |              | This string should be random and difficult to guess. |
+| string $key     | null         | Cette chaîne de caractère est utilisée pour encrypter|
+|                 |              | la valeur écrite vers le cookie.Cette chaîne devrait |
+|                 |              | être aléatoire et difficile à deviner                |
 +-----------------+--------------+------------------------------------------------------+
-| string $domain  | ''           | The domain name allowed to access the cookie. e.g.   |
-|                 |              | Use '.yourdomain.com' to allow access from all your  |
-|                 |              | subdomains.                                          |
+| string $domain  | ''           | Le nom de domaine autoriser à accéder au cookie ex:  |
+|                 |              | Utiliser '.votredomaine.com' pour autoriser les      |
+|                 |              | accès depuis tout vos sous-domaines                  |
 +-----------------+--------------+------------------------------------------------------+
-| int or string   | '5 Days'     | The time when your cookie will expire. Integers are  |
-| $time           |              | Interpreted as seconds and a value of 0 is equivalent|
-|                 |              | to a 'session cookie': i.e. the cookie expires when  |
-|                 |              | the browser is closed. If a string is set, this will |
-|                 |              | be interpreted with PHP function strtotime(). You can|
-|                 |              | set this directly within the write() method.         |
+| int or string   | '5 Days'     | Le moment ou votre cookie expirera. Les entiers sont |
+| $time           |              | Interpretés comme des secondes et une valeur de 0 est|
+|                 |              | équivalente à une 'session cookie':ex. le cookie     |
+|                 |              | expire quand le navigateur est fermé. Si une chaîne  |
+|                 |              | est définie ce sera interprété avec la fonction PHP  |
+|                 |              | strtotime(). Vous pouvez définir cela a l'interieur  |
+|                 |              | de la méthode write().                               |
 +-----------------+--------------+------------------------------------------------------+
-| string $path    | '/'          | The server path on which the cookie will be applied. |
-|                 |              | If $cookiePath is set to '/foo/', the cookie will    |
-|                 |              | only be available within the /foo/ directory and all |
-|                 |              | sub-directories such as /foo/bar/ of your domain. The|
-|                 |              | default value is the entire domain. You can set this |
-|                 |              | directly within the write() method.                  |
+| string $path    | '/'          | Le chemin d'accès au server sur lequel le cookie sera|
+|                 |              | appliqué. Si $cookiePath est paramétré à '/foo/', il |
+|                 |              | ne sera disponible que dans le repertoires /foo/     |
+|                 |              | et tous les sous repertoires comme /foo/bar/ de votre|
+|                 |              | domaine La valeur par défaut est le domaine entier. |
+|                 |              | Vous pouvez définir cela directement  à l'intérieur  |
+|                 |              | de la méthode write().                               |
 +-----------------+--------------+------------------------------------------------------+
-| boolean $secure | false        | Indicates that the cookie should only be transmitted |
-|                 |              | over a secure HTTPS connection. When set to true, the|
-|                 |              | cookie will only be set if a secure connection       |
-|                 |              | exists. You can set this directly within the write() |
-|                 |              | method.                                              |
+| boolean $secure | false        | Indique que le cookie ne devrait être transmis qu'au |
+|                 |              | travers une connexion HTTPS sécurisée. Quand cela est|
+|                 |              | défini à true, le cookie ne sera défini que si une   |
+|                 |              | connexion sécurisé existe.Vous pouvez définir cela   |
+|                 |              | directement à l'intérieur de la méthode write()      |
 +-----------------+--------------+------------------------------------------------------+
-| boolean         | false        | Set to true to make HTTP only cookies. Cookies that  |
-| $httpOnly       |              | are HTTP only are not accessible in Javascript.      |
+| boolean         | false        | Défini à true pour fabriquer uniquement des cookies  |
+| $httpOnly       |              | HTTP. Les cookies seulement HTTP ne sont pas         |
+|                 |              | disponible par javascript                            |
 +-----------------+--------------+------------------------------------------------------+
 
-The following snippet of controller code shows how to include the
-CookieComponent and set up the controller variables needed to write
-a cookie named 'baker\_id' for the domain 'example.com' which needs
-a secure connection, is available on the path
-‘/bakers/preferences/’, expires in one hour and is HTTP only.
+Les extraits de code de contrôleur suivant montre comment inclure le composant Cookie et
+paramétrer les variables de contrôleur nécessaires pour écrire un cookie nommé 'baker\_id'
+pour le domaine 'example.com' qui a besoin d'une connexion sécurisée, qui est disponible
+sur le chemin '/bakers/preferences/' ,qui expire dans une heure, et est uniquement en
+HTTP.
 
 ::
 
@@ -68,101 +71,100 @@ a secure connection, is available on the path
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Cookie->name = 'baker_id';
-        $this->Cookie->time =  3600;  // or '1 hour'
+        $this->Cookie->time =  3600;  // ou '1 heure'
         $this->Cookie->path = '/bakers/preferences/';
         $this->Cookie->domain = 'example.com';   
-        $this->Cookie->secure = true;  // i.e. only sent if using secure HTTPS
+        $this->Cookie->secure = true;  // ex. envoyé uniquement si la connexion est HTTPS
         $this->Cookie->key = 'qSI232qs*&sXOw!';
         $this->Cookie->httpOnly = true;
     }
 
-Next, let’s look at how to use the different methods of the Cookie
-Component.
+Ensuite,regardons comment utiliser les différentes méthode du Composant Cookie.
 
-Using the Component
+Utiliser le composant
 ===================
 
-The CookieComponent offers a number of methods for working with Cookies.
+Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
 
 .. php:method:: write(mixed $key, mixed $value = null, boolean $encrypt = true, mixed $expires = null)
 
-    The write() method is the heart of cookie component, $key is the
-    cookie variable name you want, and the $value is the information to
-    be stored::
+    La méthode write() est le cœur du comosant cookie, $key est le 
+    nom de la variable désiré, et $value est l'information à stocker::
+    
 
         <?php
-        $this->Cookie->write('name', 'Larry');
+        $this->Cookie->write('nom', 'Rémy');
 
-    You can also group your variables by supplying dot notation in the
-    key parameter::
-
-        <?php
-        $this->Cookie->write('User.name', 'Larry');
-        $this->Cookie->write('User.role', 'Lead');
-
-    If you want to write more than one value to the cookie at a time,
-    you can pass an array::
+    Vous pouvez également grouper vos variables en utilsant la notation point '.' 
+    dans les paramêtres de clef::
 
         <?php
-        $this->Cookie->write('User',
-            array('name' => 'Larry', 'role' => 'Lead')
+        $this->Cookie->write('Utilisateur.nom', 'Rémy');
+        $this->Cookie->write('Utilisateur.role', 'Chef');
+
+    Si vous vouler écrire plus d'une valeur dans le cookie en une fois, vous 
+    pouvez passer un tableau::
+
+        <?php
+        $this->Cookie->write('Utilisateur',
+            array('nom' => 'Rémy', 'role' => 'Chef')
         );
 
-    All values in the cookie are encrypted by default. If you want to
-    store the values as plain-text, set the third parameter of the
-    write() method to false. The encryption performed on cookie values
-    is fairly uncomplicated encryption system. It uses
-    ``Security.salt`` and a predefined Configure class var
-    ``Security.cipherSeed`` to encrypt values. To make your cookies
-    more secure you should change ``Security.cipherSeed`` in
-    app/Config/core.php to ensure a better encryption.::
-
+    Toutes les valeurs dans le cookie sont encryptée par défaut. Si vous voulez 
+    stocker vos valeurs en texte clair, definissez le troisème paramêtre de la 
+    méthode write() à false. L'encryption utilisée sur les valeurs de cookie est
+    un système d'encryption très simple. Il utilise ``Security.salt`` et une
+    variable de classe de configuration prédéfinie ``Security.cipherSeed`` pour
+    encripter les valeurs. Vous deviez changer ``Security.cipherSeed``dans 
+    app/Config/core.php pour assurer un meilleur cryptage.::
+    
         <?php
-        $this->Cookie->write('name', 'Larry', false);
+        $this->Cookie->write('nom', 'Rémy', false);
 
-    The last parameter to write is $expires – the number of seconds
-    before your cookie will expire. For convenience, this parameter can
-    also be passed as a string that the php strtotime() function
-    understands::
+    Le dernier paramètre à écrire est $expires - le nombre de secondes
+    avant que le cookie n'expire. Par convention, ce paramètre peut aussi
+    être passé comme une chaîne de texte que la fonction strtotime() de
+    php comprends::
 
         <?php
         // Both cookies expire in one hour.
-        $this->Cookie->write('first_name', 'Larry', false, 3600);
-        $this->Cookie->write('last_name', 'Masters', false, '1 hour');
+        $this->Cookie->write('prénom', 'Rémy', false, 3600);
+        $this->Cookie->write('nom', 'Masters', false, '1 hour');
 
 .. php:method:: read(mixed $key = null)
 
-    This method is used to read the value of a cookie variable with the
-    name specified by $key.::
+    Cette méthode est utilisée pour lire la valeur d'une variable de cookie
+    avec le nom spécifié dans $key.::    
 
         <?php
-        // Outputs “Larry”
-        echo $this->Cookie->read('name');
+        // Sortie "Rémy"
+        echo $this->Cookie->read('nom');
 
-        // You can also use the dot notation for read
-        echo $this->Cookie->read('User.name');
+        // Vous pouvez aussi utiliser la notation par point pour lire
+        echo $this->Cookie->read('Utilisateur.nom');
 
-        // To get the variables which you had grouped
-        // using the dot notation as an array use something like
-        $this->Cookie->read('User');
+        // Pour prendre les variables que vous aviez groupés 
+        // en utilisant la notation par point comme un tableau faites quelque chose comme
+        $this->Cookie->read('Utilisateur');
 
-        // this outputs something like array('name' => 'Larry', 'role' => 'Lead')
+        // ceci retourne quelque chose comme array('nom' => 'Rémy', 'role' => 'Chef')
+    
 
 .. php:method:: delete(mixed $key)
 
-    Deletes a cookie variable of the name in $key. Works with dot
+    Efface une variable de cookie du nom défini dans $key. Fonctionne avec la notation par point
     notation::
 
         <?php
-        // Delete a variable
+        // Efface une variable
         $this->Cookie->delete('bar')
 
-        // Delete the cookie variable bar, but not all under foo
+        // Efface la variable de cookie bar , mais seulement dans foo
         $this->Cookie->delete('foo.bar')
 
 .. php:method:: destroy()
 
-    Destroys the current cookie.
+    Detruit le cookie actuel.
 
 
 .. meta::
