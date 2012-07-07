@@ -1,36 +1,40 @@
 EmailComponent
 ##############
 
-:php:class:`EmailComponent` is now deprecated, but it will keep working.
-Internally this class is using :php:class:`CakeEmail` to send emails.
-Unfortunately, you will need to move your files from ``app/views/elements/emails``
-to ``app/View/Emails``. Also, rename the directory ``email`` to ``Emails`` in the
-layouts path. If it affects others places in your application, we recommend to
-you create symbolic links.
+:php:class:`EmailComponent`  est maintenant déprécié, mais il continu à fonctionner.
+En interne cette classe utilise :php:class:`CakeEmail` pour envoyer des
+mails.
+Malheureusement, vous aurez besoin de déplacer vos fichiers depuis
+``app/views/elements/emails`` vers ``app/View/Emails``. Renommez également le répertoire ``email`` 
+en ``Emails`` dans le chemin des layouts.
+Si cela affecte d'autres endroits dans votre application, nous vous recommandons d'utiliser des 
+liens symboliques.
+Nous vous recommandons de mettre à jour votre code pour utiliser la classe 
+:php:class:`CakeEmail` au lieu de :php:class:`EmailComponent` . ci dessous
+quelques conseils à propos de la migration.
 
-We recommend to you upgrade your code to use :php:class:`CakeEmail` class
-instead of the :php:class:`EmailComponent`. Below some tips about the migration.
+-  L'entête n'est pas changée pour être X-... Ce que vous paramétrez est ce  qui est 
+   utilisé. Donc rappelez-vous de mettre X- dans vos entêtes perso
+-  La méthode ``send()`` ne reçoit uniquement que le contenu du message. Le template 
+   et le layout devrons être paramétrés en utilisant la méthode
+   :php:meth:`CakeEmail::template()`.
+   La liste des pièces-jointes devront être un tableau de fichiers 
+   (qui apparaîtrons dans l’email) comme clef et valeur le chemin complet du fichier réel.
+-  A chaque erreur , :php:class:`CakeEmail` enverra une exception au lieu de
+   retourner false. Nous vous recommandons d'utiliser try/catch pour vous assurer que vos 
+   messages sont délivrés correctement.
 
--  The headers are not changed to be X-... What you set is what is used. So,
-   remember to put X- in your custom headers.
--  The ``send()`` method receives only the message content. The template and 
-   layout should be set using :php:meth:`CakeEmail::template()` method.
--  The list of attachments should be an array of filenames (that will appear in
-   email) as key and value the full path to real file.
--  At any error, :php:class:`CakeEmail` will throw an exception instead of
-   return false. We recommend to you use try/catch to ensure
-   your messages are delivered correctly.
 
-Below some examples of using ``EmailComponent ($component)`` and now with
-``CakeEmail ($lib)``:
+Ci dessous quelques exemples d'utilisation du composant Email
+``EmailComponent ($component)`` et maintenant avec ``CakeEmail ($lib)``:
 
--  From ``$component->to = 'some@example.com';`` to
-   ``$lib->to('some@example.com');``
--  From ``$component->to = 'Alias <some@example.com>';`` to
-   ``$lib->to('some@example.com', 'Alias');`` or
-   ``$lib->to(array('some@example.com' => 'Alias'));``
--  From ``$component->subject = 'My subject';`` to
-   ``$lib->subject('My subject');``
+-  From ``$component->to = 'quelquechose@exemple.com';`` to
+   ``$lib->to('quelquechose@exemple.com');``
+-  From ``$component->to = 'Alias <quelquechose@exemple.com>';`` to
+   ``$lib->to('quelquechose@exemple.com', 'Alias');`` or
+   ``$lib->to(array('quelquechose@exemple.com' => 'Alias'));``
+-  From ``$component->subject = 'Mon sujet';`` to
+   ``$lib->subject('Mon sujet');``
 -  From ``$component->date = 'Sun, 25 Apr 2011 01:00:00 -0300';`` to
    ``$lib->addHeaders(array('Date' => 'Sun, 25 Apr 2011 01:00:00 -0300'));``
 -  From ``$component->header['Custom'] = 'only my';`` to
@@ -38,15 +42,16 @@ Below some examples of using ``EmailComponent ($component)`` and now with
 -  From ``$component->send(null, 'template', 'layout');`` to
    ``$lib->template('template', 'layout')->send();``
 -  From ``$component->delivery = 'smtp';`` to ``$lib->transport('smtp');``
--  From ``$component->smtpOptions = array('host' => 'smtp.example.com');`` to
-   ``$lib->config(array('host' => 'smtp.example.com'));``
+-  From ``$component->smtpOptions = array('host' => 'smtp.exemple.com');`` to
+   ``$lib->config(array('host' => 'smtp.exemple.com'));``
 -  From ``$sent = $component->httpMessage;`` to
    ``$sent = $lib->message(CakeEmail::MESSAGE_HTML);``
 
-For more information you should read the :doc:`/core-utility-libraries/email`
-documentation.
+Pour plus d'information vous devriez lire la documentation
+:doc:`/core-utility-libraries/email`
 
 
-.. meta::
-    :title lang=en: EmailComponent
-    :keywords lang=en: component subject,component delivery,php class,template layout,custom headers,template method,filenames,alias,lib,array,email,migration,attachments,elements,sun
+
+.. meta::     :title lang=en: EmailComponent     :keywords lang=en: component
+subject,component delivery,php class,template layout,custom headers,template
+method,filenames,alias,lib,array,email,migration,attachments,elements,sun
