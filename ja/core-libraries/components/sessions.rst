@@ -137,10 +137,10 @@ CakePHP ではセッションの複数の方法で設定を行えます。
         $this->Session->destroy();
 
 
-.. _creating-notification-messages:
-
 ..
   Creating notification messages
+
+.. _creating-notification-messages:
 
 通知メッセージの作成
 ==============================
