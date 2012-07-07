@@ -71,7 +71,10 @@ The ``on`` key only takes ``before`` and ``after`` as valid values, and evidentl
 means whether the filter should run before or after any controller code is
 executed. Additionally to defining filters with the ``callable`` key, you also
 get the chance to define a priority for your filters, if none is specified then
-a default of ``10`` is selected for you::
+a default of ``10`` is selected for you
+
+As all filters will have default priotiry ``10``, should you want to run a filter before
+any other in te list, select lower priority numbers as needed::
 
     <?php
     Configure::write('Dispatcher.filters', array(
@@ -212,6 +215,11 @@ few milliseconds for this mission-critical API endpoint::
             'on'=> 'before'
         )
     ));
+
+In previous example we have selected a priority of ``9`` for our filter, so to skip
+any other logic either placed in custom or core filters such as CakePHP internal
+routing system. Although it is not required, it shows how to make your important
+code run first in case you need to trim as much fat as possible from some requests.
 
 For obvious reasons this has the potential of making your app very difficult
 to maintain. Filters are a extremely powerful tool when used wisely, adding
