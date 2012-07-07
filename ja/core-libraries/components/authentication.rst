@@ -1,6 +1,8 @@
 認証
-        Authentication
 ##############
+
+..
+  Authentication
 
 .. php:class:: AuthComponent(ComponentCollection $collection, array $settings = array())
 
@@ -17,8 +19,10 @@ AuthComponent により、認証オブジェクトと、ユーザの権限を識
 .. _authentication-objects:
 
 認証
-        Authentication
 ==============
+
+..
+  Authentication
 
 認証とは、与えられた認証情報によりユーザを識別し、そのユーザが言うとおりの人物であることを確実なものにする処理のことです。
 たいていの場合、これはユーザ名とパスワードにより行われ、それと既知のユーザリストを照らし合わせます。
@@ -52,7 +56,7 @@ CakePHP には、あなたのアプリケーション内に保管されている
 -------------------------------
 
 ..
-        Choosing an Authentication type
+  Choosing an Authentication type
 
 大抵の場合はフォームに基づく認証を利用したいと思うでしょう。これはWebブラウザを使うユーザにとってはもっとも簡単な方法です。もし、APIやWebサービスを構築しているなら、Basic認証やダイジェスト認証も考慮したくなるかもしれません。
 ダイジェスト認証とBasic認証の重要な違いはほとんどどのようにパスワードを扱うかということにあります。
