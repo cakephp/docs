@@ -11,6 +11,7 @@
    controllers
    views
    core-libraries
+   plugins
    deployment
    tutorials-and-examples
    contributing
