@@ -1286,7 +1286,7 @@ available.
                 [Transactional] =>
             )
         */
-        $result = Set::merge($a, $b); // Now merge the two and normalize
+        $result = Set::merge($a, $b);
         /* $result now looks like:
             Array
             (
@@ -1315,7 +1315,7 @@ available.
                 [5] => Transactional
             )
         */
-        $result = Set::normalize(Set::merge($a, $b));
+        $result = Set::normalize(Set::merge($a, $b)); // Now merge the two and normalize
         /* $result now looks like:
             Array
             (
