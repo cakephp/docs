@@ -4,11 +4,7 @@ Set
 .. php:class:: Set
 
 このクラスは配列の管理をし、正しく使えば、よりスマートで、最適化されたコードを作るのにとても強力で便利なツールとなります。
-CakePHPは *保留*
-Array management, if done right, can be a very powerful and useful
-tool for building smarter, more optimized code. CakePHP offers a
-very useful set of static utilities in the Set class that allow you
-to do just that.
+CakePHPは、上記を可能にする非常に便利な静的ユーティリティ郡をSetクラスで提供します。
 
 CakePHsのSetクラスはどのモデルやコントローラからも、Inflectorを呼ぶのと同じ方法で呼び出すことができます。
 例: :php:meth:`Set::combine()`
