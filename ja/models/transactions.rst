@@ -50,7 +50,7 @@
 
 もし複数のbeginを使いたいがデータベースのネスト化されたトランザクションを使いたくないなら、``$dataSource->useNestedTransactions = false;`` とすることでそれを無効にします。その場合には、グローバルトランザクションだけを使うことができます。 
 
-ネスト化されたトランザクションはデフォルトでは利用不可となっています。これを使うためには、\ ``$dataSource->useNestedTransactions = true;``\ として使って下さい。
+ネスト化されたトランザクションはデフォルトでは利用不可となっています。これを使うためには、\ ``$dataSource->useNestedTransactions = true;``\ として下さい。
 
 .. meta::
     :title lang=en: Transactions
