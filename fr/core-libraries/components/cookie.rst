@@ -25,41 +25,44 @@ Composant cookie fonctionne.
 +-----------------+--------------+------------------------------------------------------+
 | string $key     | null         | Cette chaîne de caractère est utilisée pour encrypter|
 |                 |              | la valeur écrite vers le cookie.Cette chaîne devrait |
-|                 |              | être aléatoire et difficile à devinericult to guess. |
+|                 |              | être aléatoire et difficile à deviner                |
 +-----------------+--------------+------------------------------------------------------+
 | string $domain  | ''           | Le nom de domaine autoriser à accéder au cookie ex:  |
-|                 |              | Utiliser '.votredomaine.com' pour to aautoriser les  |
+|                 |              | Utiliser '.votredomaine.com' pour autoriser les      |
 |                 |              | accès depuis tout vos sous-domaines                  |
 +-----------------+--------------+------------------------------------------------------+
-| int or string   | '5 Days'     | The time when your cookie will expire. Integers are  |
-| $time           |              | Interpreted as seconds and a value of 0 is equivalent|
-|                 |              | to a 'session cookie': i.e. the cookie expires when  |
-|                 |              | the browser is closed. If a string is set, this will |
-|                 |              | be interpreted with PHP function strtotime(). You can|
-|                 |              | set this directly within the write() method.         |
+| int or string   | '5 Days'     | Le moment ou votre cookie expirera. Les entiers sont |
+| $time           |              | Interpretés comme des secondes et une valeur de 0 est|
+|                 |              | équivalente à une 'session cookie':ex. le cookie     |
+|                 |              | expire quand le navigateur est fermé. Si une chaîne  |
+|                 |              | est définie ce sera interprété avec la fonction PHP  |
+|                 |              | strtotime(). Vous pouvez définir cela a l'interieur  |
+|                 |              | de la méthode write().                               |
 +-----------------+--------------+------------------------------------------------------+
-| string $path    | '/'          | The server path on which the cookie will be applied. |
-|                 |              | If $cookiePath is set to '/foo/', the cookie will    |
-|                 |              | only be available within the /foo/ directory and all |
-|                 |              | sub-directories such as /foo/bar/ of your domain. The|
-|                 |              | default value is the entire domain. You can set this |
-|                 |              | directly within the write() method.                  |
+| string $path    | '/'          | Le chemin d'accès au server sur lequel le cookie sera|
+|                 |              | appliqué. Si $cookiePath est paramétré à '/foo/', il |
+|                 |              | ne sera disponible que dans le repertoires /foo/     |
+|                 |              | et tous les sous repertoires comme /foo/bar/ de votre|
+|                 |              | domaine La valeur par défaut est le domaine entier. |
+|                 |              | Vous pouvez définir cela directement  à l'intérieur  |
+|                 |              | de la méthode write().                               |
 +-----------------+--------------+------------------------------------------------------+
-| boolean $secure | false        | Indicates that the cookie should only be transmitted |
-|                 |              | over a secure HTTPS connection. When set to true, the|
-|                 |              | cookie will only be set if a secure connection       |
-|                 |              | exists. You can set this directly within the write() |
-|                 |              | method.                                              |
+| boolean $secure | false        | Indique que le cookie ne devrait être transmis qu'au |
+|                 |              | travers une connexion HTTPS sécurisée. Quand cela est|
+|                 |              | défini à true, le cookie ne sera défini que si une   |
+|                 |              | connexion sécurisé existe.Vous pouvez définir cela   |
+|                 |              | directement à l'intérieur de la méthode write()      |
 +-----------------+--------------+------------------------------------------------------+
-| boolean         | false        | Set to true to make HTTP only cookies. Cookies that  |
-| $httpOnly       |              | are HTTP only are not accessible in Javascript.      |
+| boolean         | false        | Défini à true pour fabriquer uniquement des cookies  |
+| $httpOnly       |              | HTTP. Les cookies seulement HTTP ne sont pas         |
+|                 |              | disponible par javascript                            |
 +-----------------+--------------+------------------------------------------------------+
 
-The following snippet of controller code shows how to include the
-CookieComponent and set up the controller variables needed to write
-a cookie named 'baker\_id' for the domain 'example.com' which needs
-a secure connection, is available on the path
-‘/bakers/preferences/’, expires in one hour and is HTTP only.
+Les extraits de code de contrôleur suivant montre comment inclure le composant Cookie et
+paramétrer les variables de contrôleur nécessaires pour écrire un cookie nommé 'baker\_id'
+pour le domaine 'example.com' qui a besoin d'une connexion sécurisée, qui est disponible
+sur le chemin '/bakers/preferences/' ,qui expire dans une heure, et est uniquement en
+HTTP.
 
 ::
 
@@ -68,18 +71,17 @@ a secure connection, is available on the path
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Cookie->name = 'baker_id';
-        $this->Cookie->time =  3600;  // or '1 hour'
+        $this->Cookie->time =  3600;  // ou '1 heure'
         $this->Cookie->path = '/bakers/preferences/';
         $this->Cookie->domain = 'example.com';   
-        $this->Cookie->secure = true;  // i.e. only sent if using secure HTTPS
+        $this->Cookie->secure = true;  // ex. envoyé uniquement si la connexion est HTTPS
         $this->Cookie->key = 'qSI232qs*&sXOw!';
         $this->Cookie->httpOnly = true;
     }
 
-Next, let’s look at how to use the different methods of the Cookie
-Component.
+Ensuite,regardons comment utiliser les différentes méthode du Composant Cookie.
 
-Using the Component
+Utiliser le composant
 ===================
 
 The CookieComponent offers a number of methods for working with Cookies.
