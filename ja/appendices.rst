@@ -22,6 +22,16 @@
     appendices/2-1-migration-guide
     appendices/new-features-in-cakephp-2-1
 
+
+2.2移行ガイド
+===================
+
+.. toctree::
+    :maxdepth: 1
+
+    appendices/2-2-migration-guide
+
+
 1.2から1.3への移行
 ==================
 
