@@ -103,7 +103,7 @@ Once you've done that, you can make calls to Sanitize statically.
 .. php:staticmethod:: Sanitize::paranoid($string, $allowedChars)
 
     :param string $string: Data to clean.
-    :param string $allowedChars: An array of non alpha numeric characters allowed.
+    :param array $allowedChars: An array of non alpha numeric characters allowed.
 
     This function strips anything out of the target $string that is not
     a plain-jane alphanumeric character. The function can be made to
