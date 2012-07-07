@@ -429,7 +429,3 @@ HTTP キャッシュバリデーションモデルは、クライアントへの
         'RequestHandler' => array(
             'checkHttpCache' => false
     ));
-
-.. meta::
-    :title lang=ja: リクエストハンドリング
-    :keywords lang=en: handler component,javascript libraries,public components,null returns,model data,request data,content types,file extensions,ajax,meth,content type,array,conjunction,cakephp,insight,php
