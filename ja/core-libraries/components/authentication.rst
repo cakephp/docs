@@ -775,7 +775,10 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
   In ``app/Controller/Component/Auth/LdapAuthorize.php`` you could put the following::
 
 
-Authorize objects should return ``false`` if the user is denied access, or
+権限判定オブジェクトは
+
+..
+  Authorize objects should return ``false`` if the user is denied access, or
 if the object is unable to perform a check.  If the object is able to
 verify the user's access, ``true`` should be returned. It's not required
 that you extend ``BaseAuthorize``, only that your authorize object
