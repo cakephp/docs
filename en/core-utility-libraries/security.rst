@@ -64,7 +64,7 @@ Security API
     :rtype: string
 
     Create a hash from string using given method. Fallback on next
-    available method. If ``$type`` is set to true, the applications salt
+    available method. If ``$salt`` is set to true, the applications salt
     value will be used.
 
     ::
