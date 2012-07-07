@@ -137,33 +137,34 @@ Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
     avec le nom spécifié dans $key.::    
 
         <?php
-        // Sortie Rémy
+        // Sortie "Rémy"
         echo $this->Cookie->read('name');
 
         // Vous pouvez aussi utiliser la notation par point pour lire
         echo $this->Cookie->read('User.name');
 
-        // Pour prendre les variables comme un tableau faite quelque chose comme
-        // using the dot notation as an array use something like
+        // Pour prendre les variables que vous aviez groupés 
+        // en utilisant la notation par point comme un tableau faites quelque chose comme
         $this->Cookie->read('User');
 
-        // this outputs something like array('name' => 'Larry', 'role' => 'Lead')
+        // ceci retourne quelque chose comme array('name' => 'Larry', 'role' => 'Lead')
+    
 
 .. php:method:: delete(mixed $key)
 
-    Deletes a cookie variable of the name in $key. Works with dot
+    Efface une variable de cookie du nom défini dans $key. Fonctionne avec la notation par point
     notation::
 
         <?php
-        // Delete a variable
+        // Efface une variable
         $this->Cookie->delete('bar')
 
-        // Delete the cookie variable bar, but not all under foo
+        // Efface la variable de cookie bar , mais seulement dans foo
         $this->Cookie->delete('foo.bar')
 
 .. php:method:: destroy()
 
-    Destroys the current cookie.
+    Detruit le cookie actuel.
 
 
 .. meta::
