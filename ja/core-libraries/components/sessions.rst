@@ -38,7 +38,7 @@ CakePHP ではセッションの複数の方法で設定を行えます。
   Session by using :term:`dot notation`. So ``User.username`` would
   reference the following::
 
-覚えておきたいことは、ドット区切りにより配列構造で作成可能ということです。
+覚えておきたいことは、 :term:`ドット記法` により配列構造で作成可能ということです。
 そのため ``User.username`` は、次のような値が参照されます。::
 
     <?php
@@ -60,7 +60,7 @@ CakePHP ではセッションの複数の方法で設定を行えます。
       separated array. For example::
 
     $name のなかに、$value をセッションとして格納します。
-    $name には、ドット区切りの配列を使用できます。
+    $name には、ドット記法の配列を使用できます。
     たとえば::
 
         <?php
