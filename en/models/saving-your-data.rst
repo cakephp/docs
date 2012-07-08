@@ -329,7 +329,8 @@ association, the data array should be like this::
         ),
     )
 
-And for saving a record along with its related records having hasMany with more than two levels deep associations, the data array should be as follow::
+And for saving a record along with its related records having hasMany with more than two
+levels deep associations, the data array should be as follow::
 
     <?php
     array(
