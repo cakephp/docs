@@ -329,6 +329,32 @@ association, the data array should be like this::
         ),
     )
 
+And for saving a record along with its related records having hasMany with more than two
+levels deep associations, the data array should be as follow::
+
+    <?php
+    array(
+        'User' => array('email' => 'john-doe@cakephp.org'),
+        'Cart' => array(
+            array(
+                'payment_status_id' => 2,
+                'total_cost' => 250,
+                'CartItem' => array(
+                    array(
+                        'cart_product_id' => 3,
+                        'quantity' => 1,
+                        'cost' => 100,
+                    ),
+                    array(
+                        'cart_product_id' => 5,
+                        'quantity' => 1,
+                        'cost' => 150,
+                    )
+                )
+            )
+        )
+    )
+
 .. note::
 
     If successful, the foreign key of the main model will be stored in
