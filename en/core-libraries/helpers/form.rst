@@ -401,7 +401,7 @@ The Form helper is pretty smart. Whenever you specify a field name
 with the form helper methods, it'll automatically use the current
 model name to build an input with a format like the following::
 
-    <input type="text" id="ModelnameFieldname" name="data[Modelname][fieldname]">
+    <input type="text" id="ModelnameFieldname" name="Modelname[fieldname]">
 
 This allows you to omit the model name when generating inputs for the model that
 the form was created for. You can create inputs for associated models, or
@@ -420,8 +420,8 @@ saveAll(), use the following convention::
 
 Output::
 
-    <input type="text" id="Modelname0Fieldname" name="data[Modelname][0][fieldname]">
-    <input type="text" id="Modelname1Fieldname" name="data[Modelname][1][fieldname]">
+    <input type="text" id="Modelname0Fieldname" name="Modelname[0][fieldname]">
+    <input type="text" id="Modelname1Fieldname" name="Modelname[1][fieldname]">
 
 
 FormHelper uses several field-suffixes internally for datetime input creation.
@@ -432,7 +432,7 @@ set the ``name`` attribute to override the default behavior::
     <?php
     echo $this->Form->input('Model.year', array(
         'type' => 'text',
-        'name' => 'data[Model][year]'
+        'name' => 'Model[year]'
     ));
 
 
@@ -457,11 +457,11 @@ html attributes. The following will cover the options specific to
 
     <div class="input file">
         <label for="UserField">Field</label>
-        <input type="file" name="data[User][field]" value="" id="UserField" />
+        <input type="file" name="User[field]" value="" id="UserField" />
     </div>
     <div class="input email">
         <label for="UserEmail">Email</label>
-        <input type="email" name="data[User][email]" value="" id="UserEmail" />
+        <input type="email" name="User[email]" value="" id="UserEmail" />
     </div>
 
 * ``$options['div']`` Use this option to set attributes of the input's
@@ -480,7 +480,7 @@ html attributes. The following will cover the options specific to
 
     <div class="class_name">
         <label for="UserName">Name</label>
-        <input name="data[User][name]" type="text" value="" id="UserName" />
+        <input name="User[name]" type="text" value="" id="UserName" />
     </div>
 
   Setting multiple attributes::
@@ -498,7 +498,7 @@ html attributes. The following will cover the options specific to
 
     <div class="input text" id="mainDiv" title="Div Title" style="display:block">
         <label for="UserName">Name</label>
-        <input name="data[User][name]" type="text" value="" id="UserName" />
+        <input name="User[name]" type="text" value="" id="UserName" />
     </div>
 
   Disabling div output::
@@ -509,7 +509,7 @@ html attributes. The following will cover the options specific to
   Output::
 
     <label for="UserName">Name</label>
-    <input name="data[User][name]" type="text" value="" id="UserName" />
+    <input name="User[name]" type="text" value="" id="UserName" />
 
 * ``$options['label']`` Set this key to the string you would like to be
   displayed within the label that usually accompanies the input::
@@ -523,7 +523,7 @@ html attributes. The following will cover the options specific to
 
     <div class="input">
         <label for="UserName">The User Alias</label>
-        <input name="data[User][name]" type="text" value="" id="UserName" />
+        <input name="User[name]" type="text" value="" id="UserName" />
     </div>
 
   Alternatively, set this key to false to disable the output of the
@@ -535,7 +535,7 @@ html attributes. The following will cover the options specific to
   Output::
 
     <div class="input">
-        <input name="data[User][name]" type="text" value="" id="UserName" />
+        <input name="User[name]" type="text" value="" id="UserName" />
     </div>
 
   Set this to an array to provide additional options for the
@@ -554,7 +554,7 @@ html attributes. The following will cover the options specific to
 
     <div class="input">
         <label for="UserName" class="thingy">The User Alias</label>
-        <input name="data[User][name]" type="text" value="" id="UserName" />
+        <input name="User[name]" type="text" value="" id="UserName" />
     </div>
 
 
@@ -615,7 +615,7 @@ html attributes. The following will cover the options specific to
       --before--
       <label for="UserField">Field</label>
       --between---
-      <input name="data[User][field]" type="text" value="" id="UserField" />
+      <input name="User[field]" type="text" value="" id="UserField" />
       --after--
       </div>
 
@@ -635,10 +635,10 @@ html attributes. The following will cover the options specific to
 
       <div class="input">
       --before--
-      <input name="data[User][field]" type="radio" value="1" id="UserField1" />
+      <input name="User[field]" type="radio" value="1" id="UserField1" />
       <label for="UserField1">1</label>
       --separator--
-      <input name="data[User][field]" type="radio" value="2" id="UserField2" />
+      <input name="User[field]" type="radio" value="2" id="UserField2" />
       <label for="UserField2">2</label>
       --between---
       --after--
@@ -779,7 +779,7 @@ Options for select, checkbox and  radio inputs
 
       <div class="input">
           <label for="UserField">Field</label>
-          <select name="data[User][field]" id="UserField">
+          <select name="User[field]" id="UserField">
               <option value="">(choose one)</option>
               <option value="0">1</option>
               <option value="1">2</option>
@@ -800,8 +800,8 @@ Options for select, checkbox and  radio inputs
   hidden input is created so that the key in $this->request->data will exist
   even without a value specified::
 
-    <input type="hidden" name="data[Post][Published]" id="PostPublished_" value="0" />
-    <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
+    <input type="hidden" name="Post[Published]" id="PostPublished_" value="0" />
+    <input type="checkbox" name="Post[Published]" value="1" id="PostPublished" />
 
   This can be disabled by setting the ``$options['hiddenField'] = false``::
 
@@ -810,7 +810,7 @@ Options for select, checkbox and  radio inputs
 
   Which outputs::
 
-    <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
+    <input type="checkbox" name="Post[Published]" value="1" id="PostPublished" />
 
   If you want to create multiple blocks of inputs on a form that are
   all grouped together, you should use this parameter on all inputs
@@ -821,21 +821,21 @@ Options for select, checkbox and  radio inputs
   primary colors would be overridden::
 
     <h2>Primary Colors</h2>
-    <input type="hidden" name="data[Color][Color]" id="Colors_" value="0" />
-    <input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsRed" />
+    <input type="hidden" name="Color[Color]" id="Colors_" value="0" />
+    <input type="checkbox" name="Color[Color][]" value="5" id="ColorsRed" />
     <label for="ColorsRed">Red</label>
-    <input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsBlue" />
+    <input type="checkbox" name="Color[Color][]" value="5" id="ColorsBlue" />
     <label for="ColorsBlue">Blue</label>
-    <input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsYellow" />
+    <input type="checkbox" name="Color[Color][]" value="5" id="ColorsYellow" />
     <label for="ColorsYellow">Yellow</label>
 
     <h2>Tertiary Colors</h2>
-    <input type="hidden" name="data[Color][Color]" id="Colors_" value="0" />
-    <input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsGreen" />
+    <input type="hidden" name="Color[Color]" id="Colors_" value="0" />
+    <input type="checkbox" name="Color[Color][]" value="5" id="ColorsGreen" />
     <label for="ColorsGreen">Green</label>
-    <input type="checkbox" name="data[Color][Color][]" value="5" id="ColorsPurple" />
+    <input type="checkbox" name="Color[Color][]" value="5" id="ColorsPurple" />
     <label for="ColorsPurple">Purple</label>
-    <input type="checkbox" name="data[Addon][Addon][]" value="5" id="ColorsOrange" />
+    <input type="checkbox" name="Addon[Addon][]" value="5" id="ColorsOrange" />
     <label for="ColorsOrange">Orange</label>
 
   Disabling the ``'hiddenField'`` on the second input group would
@@ -922,7 +922,7 @@ Form Element-Specific Methods
 
     Will output::
 
-        <input name="data[User][username]" type="text" class="users" id="UserUsername" />
+        <input name="User[username]" type="text" class="users" id="UserUsername" />
 
 .. php:method:: password(string $fieldName, array $options)
 
@@ -933,7 +933,7 @@ Form Element-Specific Methods
 
     Will output::
 
-        <input name="data[User][password]" value="" id="UserPassword" type="password" />
+        <input name="User[password]" value="" id="UserPassword" type="password" />
 
 .. php:method:: hidden(string $fieldName, array $options)
 
@@ -944,7 +944,7 @@ Form Element-Specific Methods
 
     Will output::
 
-        <input name="data[User][id]" value="10" id="UserId" type="hidden" />
+        <input name="User[id]" value="10" id="UserId" type="hidden" />
 
     .. versionchanged:: 2.0
         Hidden fields no longer remove the class attribute. This means
@@ -960,7 +960,7 @@ Form Element-Specific Methods
 
     Will output::
 
-        <textarea name="data[User][notes]" id="UserNotes"></textarea>
+        <textarea name="User[notes]" id="UserNotes"></textarea>
 
     .. note::
 
@@ -989,7 +989,7 @@ Form Element-Specific Methods
 
       Output::
 
-        <textarea name="data[Form][textarea]" cols="5" rows="5" id="FormTextarea">
+        <textarea name="Form[textarea]" cols="5" rows="5" id="FormTextarea">
         </textarea>
 
 .. php:method:: checkbox(string $fieldName, array $options)
@@ -1002,8 +1002,8 @@ Form Element-Specific Methods
 
     Will output::
 
-        <input type="hidden" name="data[User][done]" value="0" id="UserDone_" />
-        <input type="checkbox" name="data[User][done]" value="1" id="UserDone" />
+        <input type="hidden" name="User[done]" value="0" id="UserDone_" />
+        <input type="checkbox" name="User[done]" value="1" id="UserDone" />
 
     It is possible to specify the value of the checkbox by using the
     $options array::
@@ -1012,8 +1012,8 @@ Form Element-Specific Methods
 
     Will output::
 
-        <input type="hidden" name="data[User][done]" value="0" id="UserDone_" />
-        <input type="checkbox" name="data[User][done]" value="555" id="UserDone" />
+        <input type="hidden" name="User[done]" value="0" id="UserDone_" />
+        <input type="checkbox" name="User[done]" value="555" id="UserDone" />
 
     If you don't want the Form helper to create a hidden input::
 
@@ -1021,7 +1021,7 @@ Form Element-Specific Methods
 
     Will output::
 
-        <input type="checkbox" name="data[User][done]" value="1" id="UserDone" />
+        <input type="checkbox" name="User[done]" value="1" id="UserDone" />
 
 
 .. php:method:: radio(string $fieldName, array $options, array $attributes)
@@ -1052,10 +1052,10 @@ Form Element-Specific Methods
 
       Will output::
 
-        <input name="data[User][gender]" id="UserGender_" value="" type="hidden" />
-        <input name="data[User][gender]" id="UserGenderM" value="M" type="radio" />
+        <input name="User[gender]" id="UserGender_" value="" type="hidden" />
+        <input name="User[gender]" id="UserGenderM" value="M" type="radio" />
         <label for="UserGenderM">Male</label>
-        <input name="data[User][gender]" id="UserGenderF" value="F" type="radio" />
+        <input name="User[gender]" id="UserGenderF" value="F" type="radio" />
         <label for="UserGenderF">Female</label>
 
     If for some reason you don't want the hidden input, setting
@@ -1079,7 +1079,7 @@ Form Element-Specific Methods
 
     Will output::
 
-        <select name="data[User][gender]" id="UserGender">
+        <select name="User[gender]" id="UserGender">
         <option value=""></option>
         <option value="M">Male</option>
         <option value="F">Female</option>
@@ -1103,7 +1103,7 @@ Form Element-Specific Methods
 
       Output::
 
-        <select name="data[User][field]" id="UserField">
+        <select name="User[field]" id="UserField">
             <option value="0">1</option>
             <option value="1">2</option>
             <option value="2">3</option>
@@ -1122,7 +1122,7 @@ Form Element-Specific Methods
 
       Output::
 
-        <select name="data[User][field]" id="UserField">
+        <select name="User[field]" id="UserField">
             <option value="Value 1">Label 1</option>
             <option value="Value 2">Label 2</option>
             <option value="Value 3">Label 3</option>
@@ -1146,7 +1146,7 @@ Form Element-Specific Methods
 
       Output::
 
-        <select name="data[User][field]" id="UserField">
+        <select name="User[field]" id="UserField">
             <optgroup label="Group 1">
                 <option value="Value 1">Label 1</option>
                 <option value="Value 2">Label 2</option>
@@ -1178,13 +1178,13 @@ Form Element-Specific Methods
 
         <div class="input select">
            <label for="ModelField">Field</label>
-           <input name="data[Model][field]" value="" id="ModelField" type="hidden">
+           <input name="Model[field]" value="" id="ModelField" type="hidden">
            <div class="checkbox">
-              <input name="data[Model][field][]" value="Value 1" id="ModelField1" type="checkbox">
+              <input name="Model[field][]" value="Value 1" id="ModelField1" type="checkbox">
               <label for="ModelField1">Label 1</label>
            </div>
            <div class="checkbox">
-              <input name="data[Model][field][]" value="Value 2" id="ModelField2" type="checkbox">
+              <input name="Model[field][]" value="Value 2" id="ModelField2" type="checkbox">
               <label for="ModelField2">Label 2</label>
            </div>
         </div>
@@ -1263,7 +1263,7 @@ Creates a file input::
 Will output::
 
     <form enctype="multipart/form-data" method="post" action="/users/add">
-    <input name="data[User][avatar]" value="" id="UserAvatar" type="file">
+    <input name="User[avatar]" value="" id="UserAvatar" type="file">
 
 .. note::
 
@@ -1378,7 +1378,7 @@ Creating date and time inputs
 
     Will output::
 
-        <select name="data[User][purchased][year]" id="UserPurchasedYear">
+        <select name="User[purchased][year]" id="UserPurchasedYear">
         <option value=""></option>
         <option value="2009">2009</option>
         <option value="2008">2008</option>
@@ -1401,7 +1401,7 @@ Creating date and time inputs
 
     Will output::
 
-        <select name="data[User][mob][month]" id="UserMobMonth">
+        <select name="User[mob][month]" id="UserMobMonth">
         <option value=""></option>
         <option value="01">January</option>
         <option value="02">February</option>
@@ -1439,7 +1439,7 @@ Creating date and time inputs
 
     Will output::
 
-        <select name="data[User][created][day]" id="UserCreatedDay">
+        <select name="User[created][day]" id="UserCreatedDay">
         <option value=""></option>
         <option value="01">1</option>
         <option value="02">2</option>
