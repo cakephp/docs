@@ -159,16 +159,16 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 - ``scope`` 認証するユーザを検索する際に使う、追加の条件。例： ``array('User.is_active' => 1).``
 - ``contain`` ユーザのレコードがロードされた際に含めることのできるオプション。
 
+  .. versionadded:: 2.2
+
 ..
   - ``fields`` The fields to use to identify a user by.
   - ``userModel`` The model name of the User, defaults to User.
   - ``scope`` Additional conditions to use when looking up and
-    authenticating users, i.e. ``array('User.is_active' => 1).``
+    authenticating users, i.e. ``array('User.is_active' => 1)``。
   - ``contain`` Containable options for when the user record is loaded.
 
-  .. versionadded:: 2.2
-
-配列 ``$components`` の中でユーザの個々の列名を設定するには::
+配列 ``$components`` の中でユーザの特定の列名を設定するには::
 
     <?php
     // $components 配列の中で設定を記述
@@ -187,7 +187,7 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 
 .. note::
 
-    Auth の他の設定キー（authError や loginAction など）を authenticate や Form の下位要素として書いてはいけません。
+    Auth の他の設定キー(authError や loginAction など)を authenticate や Form の下位要素として書いてはいけません。
     それらは authenticate キーと同じレベルであるべきです。
     上記の例を他の Auth 設定を使って書いた場合は次のようになります::
 
@@ -549,7 +549,7 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
 .. note::
 
     AuthComponent::$authenticate 内で DigestAuthentication が設定された場合、
-    DigestAuthenticate::password() の第３パラメータは定義した 'realm' の設定値と一致する必要があります。
+    DigestAuthenticate::password() の第３パラメータは定義した 'realm' の設定値と一致する必要があります。このデフォルトは  ``env('SCRIPT_NAME)`` です。
     複数の環境で一貫したハッシュが欲しい場合に static な文字列を使いたいと思うかもしれません。
     
     ..
@@ -789,7 +789,7 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 ..
   Using custom authorize objects
 
-カスタム権限判定オブジェクトを作成したら、AuthComponents の authorize 配列にそれらを含めることで使うことができます。
+カスタム権限判定オブジェクトを作成したら、AuthComponents の authorize 配列にそれらを含めることで使うことができます::
 
     <?php
     $this->Auth->authorize = array(
@@ -825,7 +825,7 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 
 コントローラのアクションが完全に公開すべきものであったり、ユーザのログインが不要であったりという場合があります。
 AuthComponent は悲観的であり、デフォルトではアクセスを拒否します。
-``AuthComponent::allow()` を使うことで、公開すべきアクションに印をつけることができます。
+``AuthComponent::allow()`` を使うことで、公開すべきアクションに印をつけることができます。
 アクションに公開の印をつけることで、AuthComponent は該当のユーザがログインしているかのチェックも、権限判定オブジェクトによるチェックも行わなくなります::
 
     <?php
@@ -850,6 +850,7 @@ AuthComponent は悲観的であり、デフォルトではアクセスを拒否
 
 ``allow()`` には必要な数だけいくつでもアクション名を記述することができます。
 すべてのアクション名を含む配列を渡してもかまいません。
+
 ..
   You can provide as many action names as you need to ``allow()``.  
   You can also supply an array containing all the action names.
@@ -894,7 +895,7 @@ CrudAuthorize を使う場合のアクションのマッピング
 CrudAuthorize やアクションマッピングを使う他の権限判定オブジェクトを使う場合、追加でモデルのマッピングが必要になるかもしれません。
 その場合、mapAction() を使うことで、アクション -> CRUD パーミッションのマッピングを行うことができます。
 AuthComponent のこのメソッドを呼び出すことで、設定済みのすべての権限判定オブジェクトに設定が渡されます::
-ですので、設定がどこでも確実に適用されます。
+ですので、設定がどこでも確実に適用されます::
 
     <?php
     $this->Auth->mapActions(array(
@@ -957,7 +958,7 @@ ControllerAuthorize を使うことで、コントローラのコールバック
   The callback is always called ``isAuthorized()`` and it should return a boolean as to whether or not the user is allowed to access resources in the request. 
   The callback is passed the active user, so it can be checked::
 
-上記のコールバックは非常にシンプルな権限判定システムとなっており、role = admin のユーザだけが admin に設定★されたアクションにアクセスすることができます。
+上記のコールバックは非常にシンプルな権限判定システムとなっており、role = admin のユーザだけが admin に設定されたアクションにアクセスすることができます。
 
 ..
   The above callback would provide a very simple authorization system where, only users with role = admin could access actions that were in the admin prefix.
@@ -1060,7 +1061,7 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 .. php:attr:: flash
 
     Auth が :php:meth:`SessionComponent::setFlash()` でフラッシュメッセージを行う必要がある場合に使用する設定。
-    次のキーが利用可能::
+    次のキーが利用可能:
 
     - ``element`` - 使用するエレメント。デフォルトで 'default'。
     - ``key`` - 使用するキー。デフォルトで 'auth'。
@@ -1112,7 +1113,7 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
     レスポンスオブジェクト。
     
     ..
-    Response object
+      Response object
 
 .. php:attr:: sessionKey
 
@@ -1273,7 +1274,7 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 
 .. php:staticmethod:: user($key = null)
 
-    :param string $key:  フェッチしたいユーザデータのキー。null ならすべてのユーザデータが返される。インスタンスメソッドとしても呼び出し可能。
+    :param string $key:  フェッチしたいユーザデータのキー。null ならユーザの全データが返される。インスタンスメソッドとしても呼び出し可能。
     
     ..
       :param string $key:  The user data key you want to fetch if null, all user data will be returned.  Can also be called as an instance method.
