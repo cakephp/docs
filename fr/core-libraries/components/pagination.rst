@@ -3,30 +3,37 @@ Pagination
 
 .. php:class:: PaginatorComponent(ComponentCollection $collection, array $settings = array())
 
-One of the main obstacles of creating flexible and user-friendly
-web applications is designing an intuitive UI. Many applications
-tend to grow in size and complexity quickly, and designers and
-programmers alike find they are unable to cope with displaying
-hundreds or thousands of records. Refactoring takes time, and
-performance and user satisfaction can suffer.
+Un des principaux obstacle à la création d'une application flexible et
+ergonomique est le design et une interface utilisateur intuitive.
+De nombreuses applications ont tendances à augmenter en taille et en complexité
+rapidement, et les designers ainsi que les programmeurs  trouvent même qu'ils
+sont incapables de faire face a l'affichage des centaines ou des milliers 
+d'enregistrements.
+Réécrire prend du temps , et les performances et la satisfaction des
+utilisateurs peut en pâtir .
 
-Displaying a reasonable number of records per page has always been
-a critical part of every application and used to cause many
-headaches for developers. CakePHP eases the burden on the developer
-by providing a quick, easy way to paginate data.
+Afficher un nombre raisonnable d'enregistrements par page à toujours été
+une partie critique dans toutes les applications et cause régulièrement
+de nombreux maux de tête aux développeurs. CakePHP allège le fardeau 
+des développeurs en fournissant un moyen rapide et facile de paginer 
+les données.
 
-Pagination in CakePHP is offered by a Component in the controller, to make
-building paginated queries easier.  In the View :php:class:`PaginatorHelper` is
-used to make the generation of pagination links & buttons simple.
+La pagination dans CakePHP est offerte par un Composant dans le contrôleur,
+pour rendre la création des requêtes de pagination plus faciles.
+Dans la Vue :php:class:`PaginatorHelper` est utilisé pour rendre la
+génération de la pagination, des liens et des boutons simple.  
 
-Query Setup
-===========
+Paramétrage des requête
+=======================
 
-In the controller, we start by defining the query conditions pagination will use
-by default in the ``$paginate`` controller variable. These conditions, serve as
-the basis of your pagination queries.  They are augmented by the sort, direction
-limit, and page parameters passed in from the url. It is important to note
-here that the order key must be defined in an array structure like below::
+Dans le contrôleur , nous commençons par définir les conditions de la requête de
+pagination qui seront utilisées par défaut dans la variable ``$paginate`` du
+contrôleur. 
+Ces conditions , vont servir de base à vos requêtes de pagination. Elles sont
+complétées par le tri, la direction, la limitation et les paramètres de page
+passés depuis l'url. Ici , il est important de noter que l'ordre des clefs 
+doit être définis dans une structure en tableau comme ci-dessous:: 
+
 
     <?php
     class PostsController extends AppController {
@@ -39,8 +46,9 @@ here that the order key must be defined in an array structure like below::
         );
     }
 
-You can also include other :php:meth:`~Model::find()` options, such as
-``fields``::
+Vous pouvez aussi inclure d'autres options :php:meth:`~Model::find()`,
+comme ``fields``::
+
 
     <?php
     class PostsController extends AppController {
@@ -54,13 +62,14 @@ You can also include other :php:meth:`~Model::find()` options, such as
         );
     }
 
-Other keys that can be included in the ``$paginate`` array are
-similar to the parameters of the ``Model->find('all')`` method, that
-is: ``conditions``, ``fields``, ``order``, ``limit``, ``page``, ``contain``,
-``joins``, and ``recursive``. In addition to the aforementioned keys, any
-additional keys will also be passed directly to the model find methods.  This
-makes it very simple to use behaviors like :php:class:`ContainableBehavior` with
-pagination::
+D'autres clefs qui peuvent être introduite dans le tableau ``$paginate``
+sont similaires aux paramètres de la méthode ``Model->find('all')``,
+qui sont: ``conditions``, ``fields``, ``order``, ``limit``, ``page``, 
+``contain``,``joins``, et ``recursive``. En plus des touches mentionnées
+ci dessus, chacune des clefs peut aussi être passé à la méthode find du 
+modèle. Ça devient alors très simple d'utiliser les comportement comme
+:php:class:`ContainableBehavior` avec la pagination::
+
 
 
     <?php
@@ -72,9 +81,9 @@ pagination::
         );
     }
 
-In addition to defining general pagination values, you can define more than one
-set of pagination defaults in the controller, you just name the keys of the
-array after the model you wish to configure::
+En plus de définir des valeurs de pagination générales, vous pouvez définir
+plus d'un jeu de pagination par défaut dans votre contrôleur , vous avez juste
+à nommer les clefs du tableau après le modèle que vous souhaitez configurer::
 
     <?php
     class PostsController extends AppController {
@@ -85,34 +94,38 @@ array after the model you wish to configure::
         );
     }
 
-The values of the ``Post`` and ``Author`` keys could contain all the properties
-that a model/key less ``$paginate`` array could.
+Les valeurs des clefs  ``Post`` et ``Author`` pourraient contenir toutes
+les propriétés qu'un model/clef sans ``$paginate`` pourraient contenir.
 
-Once the ``$paginate`` variable has been defined, we can call the
-``paginate()`` method in a controller action. This method will dynamically load
-the :php:class:`PaginatorComponent`, and call its paginate() method. This will return
-``find()`` results from the model. It also sets some additional
-paging statistics, which are added to the request object. The additional
-information is set to ``$this->request->params['paging']``, and is used by
-:php:class:`PaginatorHelper` for creating links. ``Controller::paginate()`` also
-adds PaginatorHelper to the list of helpers in your controller, if it has not
-been added already.::
+Une fois que la variable ``$paginate`` à été définie , nous pouvons
+appeler la méthode ``paginate()`` dans l'action du contrôleur.
+Cette méthode chargera dynamiquement :php:class:`PaginatorComponent`,
+et appellera sa méthode paginate(). Ceci retournera le résultat du ``find()``
+depuis le modèle. Ceci envoi également quelques statistiques de pagination,
+qui sont additionnées à l'objet de la requête. L'information additionnelle 
+est envoyée à ``$this->request->params['paging']``, et est utilisée par
+:php:class:`PaginatorHelper` pour la création de liens. 
+``Controller::paginate()` ajoute également  PaginatorHelper à la liste
+des helpers de votre contrôleur, si il n'a pas encore été additionné::
+
 
     <?php
     public function list_recipes() {
-        // similar to findAll(), but fetches paged results
+        // similaire à un  findAll(), mais récupère les résultats paginés
         $data = $this->paginate('Recipe');
         $this->set('data', $data);
     }
 
-You can filter the records by passing conditions as second
-parameter to the ``paginate()`` function.::
+Vous pouvez filtrer les enregistrements en passant des conditions
+comme second paramètres à la fonction ``paginate()``.::
+
 
     <?php
     $data = $this->paginate('Recipe', array('Recipe.title LIKE' => 'a%'));
 
-Or you can also set ``conditions`` and other keys in the
-``$paginate`` array inside your action.::
+Ou vous pouvez aussi définir des  ``conditions`` et d'autre clefs dans
+le tableau ``$paginate`` à l'intérieur de votre action.::
+
 
     <?php
     public function list_recipes() {
@@ -124,39 +137,42 @@ Or you can also set ``conditions`` and other keys in the
         $this->set(compact('data'));
     );
 
-Custom Query Pagination
-=======================
+Personnalisation des requêtes de pagination
+===========================================
 
-If you're not able to use the standard find options to create the query you need
-to display your data, there are a few options.  You can use a
-:ref:`custom find type <model-custom-find>`. You can also implement the
-``paginate()`` and ``paginateCount()`` methods on your model, or include them in
-a behavior attached to your model. Behaviors implementing ``paginate`` and/or
-``paginateCount`` should implement the method signatures defined below with the
-normal additional first parameter of ``$model``::
+Si vous n'êtes pas prêt à utiliser les options standards du find pour créé 
+la requête d'affichage de vos données, il y a quelques options. 
+Vous pouvez utiliser  :ref:`custom find type <model-custom-find>`.
+Vous pouvez aussi implémenter les méthodes ``paginate()`` et ``paginateCount()``
+sur votre modèle, ou les inclure dans un comportement attaché à votre modèle.
+Les comportement qui implémentent ``paginate`` et/ou``paginateCount`` devraient
+implémenter les signatures de méthode définies ci-dessous avec le premier
+paramêtre normal additionnel de ``$model``::
+
+
 
     <?php
-    // paginate and paginateCount implemented on a behavior.
+    // paginate et paginateCount implémentée dans le comportement.
     public function paginate(Model $model, $conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
-        // method content
+        // contenu de la méthode
     }
 
     public function paginateCount(Model $model, $conditions = null, $recursive = 0, $extra = array()) {
-        // method body
+        // corp (body) de la méthode
     }
 
+C'est rare d'avoir besoin d'implémenter paginate() et paginateCount(). vous devriez
+vous assurer que vous ne pouvez pas atteindre votre but avec les méthodes du noyau
+du modèle, ou avec un finder personnalisé.
 
-It's seldom you'll need to implement paginate() and paginateCount().  You should
-make sure  you can't achieve your goal with the core model methods, or a custom
-finder.
 
-The ``paginate()`` method should implement the following method signature.  To
-use your own method/logic override it in the model you wish to get the data
-from::
+La méthode ``paginate()`` devrait implémenter les signatures de méthode suivantes.
+Pour utiliser vos propre méthode/logique redéfinissez lès (override) dans le modèle dans lequel vous voulez prendre des données::
+
 
     <?php
     /**
-     * Overridden paginate method - group by week, away_team_id and home_team_id
+     * Redéfition (overriden) de la méthode paginate - groupée par semaine, away_team_id and home_team_id
      */
     public function paginate($conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
         $recursive = -1;
@@ -164,14 +180,15 @@ from::
          return $this->find('all', compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group'));
     }
 
-You also need to override the core ``paginateCount()``, this method
-expects the same arguments as ``Model::find('count')``. The example
-below uses some Postgres-specifc features, so please adjust
-accordingly depending on what database you are using::
+Vous aurez aussi besoin de redéfinir (override) le noyau ``paginateCount()``,
+Cette méthode s'attend aux mêmes arguments que ``Model::find('count')``.
+L'exemple ci-dessous utilise quelques fonctionnalités Postgres spécifiques,
+Veuillez ajuster en conséquence en fonction de la base de données que vous utilisez::
+
 
     <?php
     /**
-     * Overridden paginateCount method
+     * Redefinition (Overridden) de la méthode paginateCount
      */
     public function paginateCount($conditions = null, $recursive = 0, $extra = array()) {
         $sql = "SELECT DISTINCT ON(week, home_team_id, away_team_id) week, home_team_id, away_team_id FROM games";
@@ -180,13 +197,15 @@ accordingly depending on what database you are using::
         return count($results);
     }
 
-The observant reader will have noticed that the paginate method
-we've defined wasn't actually necessary - All you have to do is add
-the keyword in controller's ``$paginate`` class variable::
+Le lecteur attentif aura noté que la méthode paginate que nous avons
+définis n'était pas réellement nécessaire - Tout ce que vous avez à
+faire est d'ajouter le mot clef dans les variables de la classes
+``$paginate`` des contrôleurs::
+
 
     <?php
     /**
-     * Add GROUP BY clause
+     * Ajout d'une clause GROUP BY
      */
     public $paginate = array(
         'MyModel' => array(
@@ -196,7 +215,7 @@ the keyword in controller's ``$paginate`` class variable::
         )
     );
     /**
-     * Or on-the-fly from within the action
+     * Ou à la volée depuis l'intérieur de l'action 
      */
     public function index() {
         $this->paginate = array(
@@ -207,114 +226,131 @@ the keyword in controller's ``$paginate`` class variable::
             )
         );
 
-In CakePHP 2.0, you no longer need to implement ``paginateCount()`` when using
-group clauses.  The core ``find('count')`` will correctly count the total number
-of rows.
+Dans CalePHP 2.0 , vous n'avez plus besoin d'implémenter ``paginateCount()``
+quand vous utilisez des groupes de clauses. Le noyau ``find('count')`` comptera
+correctement le nombre total de lignes.
 
-Control which fields used for ordering
-======================================
 
-By default sorting can be done with any column on a model.  This is sometimes
-undesirable as it can allow users to sort on un-indexed columns, or virtual
-fields that can be expensive to calculate. You can use the 3rd parameter of
-``Controller::paginate()`` to restrict the columns sorting will be done on::
+Contrôle du champ à utiliser pour ordonner
+=========================================
+
+Par défaut le classement peut être effectué par n'importe quelle colonne dans
+un modèle. C'est parfois indésirable comme permettre aux utilisateurs de trier
+des colonnes non indexées, ou les champs virtuels peuvent être coûteux en temps
+de calculs. Vous pouvez utiliser le 3ème paramètres de
+``Controller::paginate()`` pour restreindre les tries de colonnes qui pourront 
+être effectués::
+
+
 
     <?php
     $this->paginate('Post', array(), array('title', 'slug'));
 
-This would allow sorting on the title and slug columns only. A user that sets
-sort to any other value will be ignored.
+Ceci permettrait le tri uniquement sur les colonnes title et slug.
+Un utilisateur qui paramètre le tris à d'autres valeurs sera ignoré.
 
-Limit the maximum number of rows that can be fetched
-====================================================
 
-The number of results that are fetched is exposed to the user as the
-``limit`` parameter.  It is generally undesirable to allow users to fetch all
-rows in a paginated set.  By default CakePHP limits the maximum number of rows
-that can be fetched to 100.  If this default is not appropriate for your
-application, you can adjust it as part of the pagination options::
+Limitation du nombre maximum de lignes qui peuvent être recherchées
+==================================================================
+
+Le nombre de résultats qui sont retournés à l'utilisateur est représenté
+par le paramètre ``limit``. Il est généralement indésirable de permettre
+à l'utilisateur de retourner toutes les lignes dans un ensemble paginé.
+Par défaut CAKEPHP limite le nombre de lignes retournées à 100. Si cette
+valeur par défaut n'est pas appropriée pour votre application, vous pouvez
+l'ajuster dans une partie des options de pagination::
+
 
     <?php
     public $paginate = array(
-        // other keys here.
+        // d'autre clefs ici.
         'maxLimit' => 10
     );
 
-If the request's limit param is greater than this value, it will be reduced to
-the ``maxLimit`` value.
+Si les paramètres de limitation de la requête est supérieur à cette valeur,
+il sera réduit à la valeur de ``maxLimit`.
+
 
 .. _pagination-with-get:
 
-Pagination with GET parameters
-==============================
+Pagination avec des paramètres GET
+==================================
 
-In previous versions of CakePHP you could only generate pagination links using
-named parameters. But if pages were requested with GET parameters they would
-still work. For 2.0, we decided to make how you generate pagination parameters
-more controlled and consistent. You can choose to use either querystring or
-named parameters in the component. Incoming requests will accept only the chosen
-type, and the :php:class:`PaginatorHelper` will generate links with the chosen type of
-parameter::
+Dans les versions précédentes de CAKEPHP vous ne pouviez générer des liens 
+de pagination qu'en utilisant des paramètres nommés. Mais si les pages étaient
+recherchées avec des paramètres GET elle continueraient à travailler.
+Pour la version 2.0, nous avons décidés de rendre plus contrôler et cohérent
+comment vous générez les paramètres de pagination. Vous pouvez choisir d'utiliser
+une chaîne de requête ou bien des paramètre nommés dans le composant.
+Les requêtes entrantes devront accepter le type choisi, et la
+:php:class:`PaginatorHelper` générera les liens  avec les paramètres choisis:: 
+
 
     <?php
     public $paginate = array(
         'paramType' => 'querystring'
     );
 
-The above would enable querystring parameter parsing and generation. You can
-also modify the ``$settings`` property on the PaginatorComponent::
+Ci-dessus permettrait un paramètre de recherche par chaîne de caractères, de le
+parser et de le générer. Vous pouvez aussi modifier  les propriétés de
+``$settings`` du Composant Paginator (PaginatorComponent)::
+
 
     <?php
     $this->Paginator->settings['paramType'] = 'querystring';
 
-By default all of the typical paging parameters will be converted into GET
-arguments.
-
+Par défaut tous les paramètre de pagination typiques seront convertis en 
+arguments GET
 
 .. note::
 
-    You can run into a situation where assigning a value to a nonexistent property will throw errors::
+    Vous pouvez rentrez dans une situation ou assigner une valeur dans une propriété
+    inexistante retournera des erreurs::
 
+    
         <?php
         $this->paginate['limit'] = 10;
 
-    will throw the error “Notice: Indirect modification of overloaded property $paginate has no effect”.
-    Assigning an initial value to the property solves the issue::
+Retournera l'erreur “Notice: Indirect modification of overloaded property $paginate has no effect”.
+En assignant une valeur initiale à la propriété cela résout le problème::
 
         <?php
         $this->paginate = array();
         $this->paginate['limit'] = 10;
-        //or
+        //ou
         $this->paginate = array('limit' => 10);
 
-    Or just declare the property in the controller class::
+Ou juste en déclarant la propriété dans la classe du contrôleur ::
+    
 
         <?php
         class PostsController {
             public $paginate = array();
         }
 
-    Or use ``$this->Paginator->setting = array('limit' => 10);``
+Ou en utilisant ``$this->Paginator->setting = array('limit' => 10);``
+    
+Soyez sur d'avoir ajouté le composant Paginator a votre tableau $components
+si vous voulez modifier les propriétés ``$settings`` du Composant Paginator. 
 
-    Make sure you have added the Paginator component to your $components array if
-    you want to modify the ``$settings`` property of the PaginatorComponent.
-
-    Either of these approaches will solve the notice errors.
+L'une ou l'autre de ces approches résoudra les erreurs rencontrés.
 
 
-AJAX Pagination
+Pagination AJAX 
 ===============
 
-It's very easy to incorporate Ajax functionality into pagination.
-Using the :php:class:`JsHelper` and :php:class:`RequestHandlerComponent` you can
-easily add Ajax pagination to your application.  See :ref:`ajax-pagination` for
-more information.
+C'est très simple d'incorporer les fonctionnalités Ajax dans la pagination.
+en utilisant :php:class:`JsHelper` et :php:class:`RequestHandlerComponent`
+vous pouvez facilement ajouter des paginations Ajax à votre application.
+Voir :ref:`ajax-pagination` pour plus d'information.
 
-Pagination in the view
+
+Pagination dans la vue
 ======================
 
-Check the :php:class:`PaginatorHelper` documentation for how to create links for
-pagination navigation.
+Regardez la documentation  :php:class:`PaginatorHelper` pour voir comment créer des
+liens pour la navigation dans la pagination.
+
 
 
 .. meta::
