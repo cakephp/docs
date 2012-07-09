@@ -47,9 +47,8 @@ All of the above will both access the same value. Multiple ways of accessing the
 parameters was done to ease migration for existing applications. All 
 :ref:`route-elements` are accessed through this interface.
 
-In addition to :ref:`route-elements` you also often need access to 
-:ref:`passed-arguments` and :ref:`named-parameters`.  These are both available
-on the request object as well::
+In addition to :ref:`route-elements` you also often need access to
+:ref:`passed-arguments`.  These are available on the request object as well::
 
     <?php
     // Passed arguments
@@ -57,12 +56,7 @@ on the request object as well::
     $this->request->pass;
     $this->request->params['pass'];
 
-    // named parameters
-    $this->request['named'];
-    $this->request->named;
-    $this->request->params['named'];
-
-Will all provide you access to the passed arguments and named parameters. There
+Will all provide you access to the passed arguments. There
 are several important/useful parameters that CakePHP uses internally, these 
 are also all found in the request parameters:
 

@@ -476,7 +476,7 @@ get the latest five posts in an ordered list we would do something
 like the following::
 
     <h2>Latest Posts</h2>
-    <?php $posts = $this->requestAction('posts/index/sort:created/direction:asc/limit:5'); ?>
+    <?php $posts = $this->requestAction('posts/index?sort=created&direction=asc&limit=5'); ?>
     <?php foreach ($posts as $post): ?>
     <ol>
         <li><?php echo $post['Post']['title']; ?></li>

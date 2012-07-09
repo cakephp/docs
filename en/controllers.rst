@@ -148,7 +148,7 @@ the request type before returning::
     class RecipesController extends AppController {
         public function popular() {
             $popular = $this->Recipe->popular();
-            if (!empty($this->request->params['requested'])) {
+            if (!$this->request->is('requested')) {
                 return $popular;
             }
             $this->set('popular', $popular);
@@ -567,7 +567,7 @@ Other Useful Methods
         // Controller/CommentsController.php
         class CommentsController extends AppController {
             public function latest() {
-                if (empty($this->request->params['requested'])) {
+                if (!$this->request->is('requested')) {
                     throw new ForbiddenException();
                 }
                 return $this->Comment->find('all', array('order' => 'Comment.created DESC', 'limit' => 10));
@@ -618,26 +618,19 @@ Other Useful Methods
     This allows the requestAction call to bypass the usage of
     Router::url which can increase performance. The url based arrays
     are the same as the ones that :php:meth:`HtmlHelper::link()` uses with one
-    difference - if you are using named or passed parameters, you must put them
+    difference - if you are using passed parameters, you must put them
     in a second array and wrap them with the correct key. This is because
-    requestAction merges the named args array (requestAction's 2nd parameter)
-    with the Controller::params member array and does not explicitly place the
-    named args array into the key 'named'; Additional members in the ``$option``
-    array will also be made available in the requested action's
-    Controller::params array::
+    requestAction merges the extra parameters (requestAction's 2nd parameter)
+    with the ``request->params`` member array and does not explicitly place them
+    under the ``pass`` key. Any additional keys in the ``$option`` array will 
+    be made available in the requested action's ``request->params`` property::
         
         <?php
-        echo $this->requestAction('/articles/featured/limit:3');
         echo $this->requestAction('/articles/view/5');
 
     As an array in the requestAction would then be::
 
         <?php
-        echo $this->requestAction(
-            array('controller' => 'articles', 'action' => 'featured'),
-            array('named' => array('limit' => 3))
-        );
-
         echo $this->requestAction(
             array('controller' => 'articles', 'action' => 'view'),
             array('pass' => array(5))
@@ -651,7 +644,7 @@ Other Useful Methods
     When using an array url in conjunction with requestAction() you
     must specify **all** parameters that you will need in the requested
     action. This includes parameters like ``$this->request->data``.  In addition
-    to passing all required parameters, named and pass parameters must be done
+    to passing all required parameters, passed arguments must be done
     in the second array as seen above.
 
 
