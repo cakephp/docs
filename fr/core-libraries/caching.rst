@@ -1,5 +1,14 @@
-Caching
-#######
+La mise en cache
+################
+
+La mise en cache est fréquemment utilisé pour réduire le temps pris pour
+créer ou lire depuis une autre ressource. La mise en cache est souvent 
+utilisée pour rendre la lecture de ressources couteuses en temps en ressource
+moins couteuses. Vous pouvez aisement stocker le résultats de reqûetes
+couteuses, ou des services d'accès web à distance qui ne changent pas frequement
+dans un cache. Une fois dans un cache, re-lire les ressources stockées
+depuis le cache est plus avantageux qu'un accès a une ressource distante. 
+
 
 Caching is frequently used to reduce the time it takes to create or read from
 other resources.  Caching is often used to make reading from expensive 
