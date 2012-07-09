@@ -3,13 +3,14 @@ Normes de codes
 
 Les développeurs de Cake vont utiliser les normes de code suivantes.
 
-Il est recommandé que les autres personnes qui développent des IngredientsCake suivent les mêmes normes.
+Il est recommandé que les autres personnes qui développent des IngredientsCake 
+suivent les mêmes normes.
 
 Ajout de nouvelles fonctionnalités
 ==================================
 
-Aucune nouvelle fonctionnalité ne devrait être ajouté, sans avoir fait ces propres
-tests - qui doivent être validés avant de les committer au dépôt.
+Aucune nouvelle fonctionnalité ne devrait être ajouté, sans avoir fait ces 
+propres tests - qui doivent être validés avant de les committer au dépôt.
 
 Indentation
 ===========
@@ -31,9 +32,9 @@ Ou::
     $booleanVariable = true;
     $stringVariable = "moose";
     if ($booleanVariable) {
-        echo "Boolean value is true";
+        echo "Valeur boléenne si true";
         if ($stringVariable == "moose") {
-            echo "We have encountered a moose";
+            echo "Nous avons rencontré un moose";
         }
     }
 
@@ -59,18 +60,18 @@ Les structures de controle sont par exemple "``if``", "``for``", "``foreach``",
    même si elles ne sont pas nécessaires. Elles augmentent la lisibilité
    du code, et elles vous donnent moins d'erreurs logiques.
 
-*  L'ouverture des accolades doit être placé sur la même ligne que la structure de
-   contrôle. La fermeture des accolades doit être placé sur de nouvelles
-   lignes, et ils devraient avoir le même niveau d'indentation que la structure de
-   contrôle. La déclaration incluse dans les accolades doit commencer sur une
+*  L'ouverture des accolades doit être placée sur la même ligne que la structure 
+   de contrôle. La fermeture des accolades doit être placée sur de nouvelles
+   lignes, et ils devraient avoir le même niveau d'indentation que la structure 
+   de contrôle. La déclaration inclue dans les accolades doit commencer sur une
    nouvelle ligne, et le code qu'il contient doit gagner un nouveau niveau 
    d'indentation::
 
     <?php 
-    // wrong = no brackets, badly placed statement
+    // wrong = pas de parenthèses, déclaration mal placée
     if (expr) statement; 
 
-    // wrong = no brackets
+    // wrong = pas de parenthèses
     if (expr) 
         statement; 
 
@@ -82,10 +83,11 @@ Les structures de controle sont par exemple "``if``", "``for``", "``foreach``",
 Opérateurs ternaires
 --------------------
 
-Les opérateurs ternaires sont permis quand l'opération entière rentre sur une ligne.
-Les opérateurs ternaires plus longues doivent être séparées en expression ``if else``.
-Les opérateurs ternaires ne doivent pas être imbriqués. Des parenthèses optionnelles
-peuvent être utilisées autour de la condition vérifiée de l'opération pour clarifier::
+Les opérateurs ternaires sont permis quand l'opération entière rentre sur une 
+ligne. Les opérateurs ternaires plus longues doivent être séparées en expression
+``if else``. Les opérateurs ternaires ne doivent pas être imbriqués. Des 
+parenthèses optionnelles peuvent être utilisées autour de la condition vérifiée 
+de l'opération pour clarifier::
 
     <?php
     //Bien, simple et lisible
@@ -98,13 +100,14 @@ Appels des fonctions
 ====================
 
 Les fonctions doivent être appelées sans espace entre le nom de la fonction et 
-la parenthèse ouvrante. Il doit y avoir un espace entre chaque paramètre d'un appel
-de fonction::
+la parenthèse ouvrante. Il doit y avoir un espace entre chaque paramètre 
+d'un appel de fonction::
 
     <?php 
     $var = foo($bar, $bar2, $bar3); 
 
-Comme vous pouvez le voir, il devrait y avoir un espace des deux côtés des signes égal (=).
+Comme vous pouvez le voir, il devrait y avoir un espace des deux côtés des 
+signes égal (=).
 
 Définition des méthodes
 =======================
@@ -112,16 +115,17 @@ Définition des méthodes
 Exemple d'un définition de fonction::
 
     <?php 
-    function someFunction($arg1, $arg2 = '') {
+    function uneCertaineFonction($arg1, $arg2 = '') {
         if (expr) {
             statement;
         }
         return $var;
     }
 
-Les paramètres avec une valeur par défaut, devrait être placée en dernier dans la défintion
-de la fonction. Essayez de faire en sorte que vos fonctions retournent quelque chose, 
-au moins true ou false = ainsi cela peut déterminer si l'appel de la fonction est un succès::
+Les paramètres avec une valeur par défaut, devraient être placés en dernier 
+dans la défintion de la fonction. Essayez de faire en sorte que vos fonctions 
+retournent quelque chose, au moins true ou false = ainsi cela peut déterminer 
+si l'appel de la fonction est un succès::
 
     <?php 
     function connection($dns, $persistent = false) {
@@ -160,14 +164,15 @@ Les commentaires doivent inclure les tags `phpDocumentor suivants <http://phpdoc
 *  `@tutorial <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.tutorial.pkg.html>`_
 *  `@version <http://manual.phpdoc.org/HTMLframesConverter/phpdoc.de/phpDocumentor/tutorial_tags.version.pkg.html>`_
 
-Les tags de PhpDoc sont un peu du même style que les tags de JavaDoc dans Java. Les Tags 
-sont seulement traités si ils sont la première chose dans la ligne DocBlock, par exemple::
+Les tags de PhpDoc sont un peu du même style que les tags de JavaDoc dans Java. 
+Les Tags sont seulement traités si ils sont la première chose dans la ligne 
+DocBlock, par exemple::
 
     <?php
     /**
      * Exemple de Tag.
-     * @author this tag is parsed, but this @version is ignored
-     * @version 1.0 this tag is also parsed
+     * @author ce tag est analysé, mais @version est ignoré
+     * @version 1.0 ce tag est aussi analysé
      */
 
 ::
@@ -187,8 +192,8 @@ sont seulement traités si ils sont la première chose dans la ligne DocBlock, p
     function foo() {
     }
 
-Les blocks de commentaires, avec une exception du premier block dans le fichier, doivent
-toujours être précédés par un retour à la ligne.
+Les blocks de commentaires, avec une exception du premier block dans le fichier,
+doivent toujours être précédés par un retour à la ligne.
 
 Inclure les fichiers
 ====================
@@ -199,7 +204,8 @@ et toujours la fonction `require\_once <http://php.net/require_once>`_.
 Les tags PHP
 ============
 
-Toujours utiliser les tags longs (``<?php ?>``) plutôt que les tags courts (<? ?>).
+Toujours utiliser les tags longs (``<?php ?>``) plutôt que les tags courts 
+(<? ?>).
 
 Convention de nommage
 =====================
@@ -210,7 +216,7 @@ Fonctions
 Ecrivez toutes les fonctions en camelBack::
 
     <?php
-    function NomDeFonctionLong() {
+    function nomDeFonctionLong() {
     }
 
 Classes
@@ -229,7 +235,7 @@ Les noms de variable doivent être aussi descriptives que possibles, mais
 aussi courtes que possibles. Les variables normales doivent démarrer 
 avec une lettre minuscule, et doivent être écrites en camelBack en cas
 de mots multiples. Les variables contenant des objets doivent démarrer 
-avec une majuscule, et d'une certaine manière associées à la classe dont
+avec une majuscule, et d'une certaine manière être associées à la classe d'où 
 elles proviennent. Exemple::
 
     <?php
@@ -241,20 +247,21 @@ elles proviennent. Exemple::
 Visibilité des membres
 ----------------------
 
-Utilisez les mots-clés private et protected de PHP5 pour les méthodes et variables.
-De plus les noms des méthodes et variables protégées commencent avec un underscore
-simple ("\_"). Exemple::
+Utilisez les mots-clés private et protected de PHP5 pour les méthodes et 
+variables. De plus les noms des méthodes et variables protégées commencent 
+avec un underscore simple ("\_"). Exemple::
 
     <?php
     class A {
-        protected $_iAmAProtectedVariable;
+        protected $_jeSuisUneVariableProtegee;
 
-        protected function _iAmAProtectedMethod() {
+        protected function _jeSuisUnemethodeProtegee() {
            /*...*/
         }
     }
 
-Les noms de méthode et variables privées commencent avec un underscore double ("\_\_"). Exemple::
+Les noms de méthodes et variables privées commencent avec un underscore double 
+("\_\_"). Exemple::
 
     <?php
     class A {
@@ -268,33 +275,33 @@ Les noms de méthode et variables privées commencent avec un underscore double 
 Chaînage des méthodes
 ---------------------
 
-Le chaînage des méthodes doit avoir des méthodes multiples répartis dans des lignes
-distinctes, et indenté avec une tabulation::
+Le chaînage des méthodes doit avoir des méthodes multiples réparties dans des 
+lignes distinctes, et indentées avec une tabulation::
 
     <?php
     $email->from('foo@example.com')
         ->to('bar@example.com')
-        ->subject('A great message')
+        ->subject('Un super message')
         ->send();
 
 Exemple d'adresses
 ------------------
 
-Pour tous les exemples d'URL et d'adresse email, utilisez "example.com", "example.org"
-and "example.net", par exemple:
+Pour tous les exemples d'URL et d'adresse email, utilisez "example.com", 
+"example.org" et "example.net", par exemple:
 
 *  Email: someone@example.com
 *  WWW: `http://www.example.com <http://www.example.com>`_
 *  FTP: `ftp://ftp.example.com <ftp://ftp.example.com>`_
 
-Le nom de domaine ``example.com`` est réservé à cela (see :rfc:`2606`) et est recommandée
-pour l'utilisation dans la documentation ou comme exemples.
+Le nom de domaine ``example.com`` est réservé à cela (see :rfc:`2606`) et est 
+recommandée pour l'utilisation dans la documentation ou comme exemples.
 
 Fichiers
 --------
 
-Les noms de fichier qui ne contiennent pas de classes, doivent être écrits en minuscules et soulignés,
-par exemple:
+Les noms de fichier qui ne contiennent pas de classes, doivent être écrits en 
+minuscules et soulignés, par exemple:
 ::
 
     nom_de_fichier_long.php
@@ -302,7 +309,7 @@ par exemple:
 Types de variables
 ------------------
 
-Les types de variable pour l'utilisation dans DocBlocks:
+Les types de variables pour l'utilisation dans DocBlocks:
 
 Type
     Description
@@ -326,22 +333,22 @@ resource
     si il est inconnu, ou les types possibles.
 
 Constantes
----------
+----------
 
 Les constantes doivent être définies en majuscules:
 
 ::
 
     <?php
-    define('CONSTANT', 1);
+    define('CONSTANTE', 1);
 
-Si un nom de constante a plusieurs mots, ils doivent être séparés par un caractère
-underscore, par exemple:
+Si un nom de constante a plusieurs mots, ils doivent être séparés par un 
+caractère underscore, par exemple:
 
 ::
 
     <?php
-    define('LONG_NAMED_CONSTANT', 2);
+    define('NOM_LONG_DE_CONSTANTE', 2);
 
 
 .. meta::

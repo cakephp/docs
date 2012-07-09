@@ -1,54 +1,57 @@
 Tickets
 #######
 
-Avoir des retours et de l'aide de la communauté sous forme de tickets est une partie
-extrèmement importante dans le processus de développement de CakePHP. Tous les tickets
-CakePHP sont hébérgés sur `lighthouse <http://cakephp.lighthouseapp.com>`_.
+Avoir des retours et de l'aide de la communauté sous forme de tickets est une 
+partie extrêmement importante dans le processus de développement de CakePHP. 
+Tous les tickets CakePHP sont hébérgés sur 
+`lighthouse <http://cakephp.lighthouseapp.com>`_.
 
 Rapporter des bugs
 ==================
 
-Bien écrits, les raports de bug sont très aidants. Il y a quelques étapes pour faire
-le meilleur rapport de bug possible:
+Bien écrits, les rapports de bug sont très aidants. Il y a quelques étapes pour 
+faire le meilleur rapport de bug possible:
 
-* **Faire** des `recherches <http://cakephp.lighthouseapp.com/projects/42648-cakephp/tickets?q=ITS+BROKEN>`_
-  pour un ticket similaire éventuellement existant, et s'assurer que personne n'a déjà reporté le bug ou qu'il 
-  a déjà été résolu dans le répertoire.
+* **Faire** des `recherches 
+  <http://cakephp.lighthouseapp.com/projects/42648-cakephp/tickets?q=ITS+BROKEN>`_
+  pour un ticket similaire éventuellement existant, et s'assurer que personne 
+  n'a déjà reporté le bug ou qu'il n'a pas déjà été résolu dans le répertoire.
 
-* **Faire** des instructions détaillées de la manière de **reproduire le bug**. Cela
-  peut être sous la forme de cas de Test ou un bout de code démontre le problème.
-  Ne pas avoir une possibilité de reproduire le problème, signifie qu'il est moins
-  facile de le régler.
+* **Faire** des instructions détaillées de la manière de **reproduire le bug**. 
+  Cela peut être sous la forme de cas de Test ou un bout de code démontrant le 
+  problème. Ne pas avoir une possibilité de reproduire le problème, signifie 
+  qu'il est moins facile de le régler.
 
-* **Faire** Donner autant de détails que possible sur votre envronnement: (OS, version de PHP, Version de CakePHP).
+* **Faire** Donner autant de détails que possible sur votre envronnement: 
+  (OS, version de PHP, Version de CakePHP).
 
-* **Ne pas Faire** Utiliser un ticket système pour poser une question de support technique.
-  Utilisez le `Groupe google <http://groups.google.com/group/cake-php>`_ ou le canal IRC #cakephp
-  pour cela.
+* **Ne pas Faire** Utiliser un ticket système pour poser une question de 
+  support technique. Utilisez le 
+  `Groupe google <http://groups.google.com/group/cake-php>`_ ou le 
+  canal IRC #cakephp pour cela.
 
 
 Rapportez des problèmes de sécurité
 ===================================
 
-Si vous avez trouvé un problème de sécurité dans CakePHP, merci de bien vouloir
-utiliser la procédure suivante, plutôt que le système de rapport de bug classique.
-Au lieu d'utiliser le tracker de bug, la mailing-liste ou le canal IRC, merci d'envoyer
-un email à **security [at] cakephp.org**.
-Les Emails envoyés à cette adresse vont à l'équipe qui construit le coeur de CakePHP via
-une mailing-liste privée.
+Si vous avez trouvé un problème de sécurité dans CakePHP, merci de bien vouloir 
+utiliser la procédure suivante, plutôt que le système de rapport de bug 
+classique. Au lieu d'utiliser le tracker de bug, la mailing-liste ou le canal 
+IRC, merci d'envoyer un email à **security [at] cakephp.org**.
+Les Emails envoyés à cette adresse vont à l'équipe qui construit le coeur de 
+CakePHP via une mailing-liste privée.
 
-Pour chaque rapport, nous essayons d'abord de confirmer la vulnérabilité. Une fois confirmée,
-l'équipe du coeur de CakePHP va entreprendre les actions suivantes:
+Pour chaque rapport, nous essayons d'abord de confirmer la vulnérabilité. 
+Une fois confirmée, l'équipe du coeur de CakePHP va entreprendre les actions 
+suivantes:
 
-* La reconnaissance faite au rapporteur que nous avons reçus son problème, et que nous travaillons
-  à sa réparation. Nous demandons au rapporteur de garder le problème confidentiel jusqu'à ce que
-  nous l'annoncions.
+* La reconnaissance faite au rapporteur que nous avons reçu son problème, et 
+  que nous travaillons à sa réparation. Nous demandons au rapporteur de garder 
+  le problème confidentiel jusqu'à ce que nous l'annoncions.
 * Obtenir une préparation d'un fix/patch.
 * Préparer un message décrivant la vulnérabilité, et sa possible exploitation.
 * Sortir de nouvelles versions de toutes les versions affectées.
 * Montrer de façon prohéminente le problème dans la publication de l'annonce.
-
-
 
 
 
