@@ -1,198 +1,230 @@
-Security
+Securité
 ########
 
 .. php:class:: SecurityComponent(ComponentCollection $collection, array $settings = array())
 
-The Security Component creates an easy way to integrate tighter
-security in your application. It provides methods for various tasks like:
 
-* Restricting which HTTP methods your application accepts.
-* CSRF protection.
-* Form tampering protection
-* Requiring that SSL be used.
-* Limiting cross controller communication.
+Le composant Security offre une manière simple d'inclure une sécurité 
+renforcée à votre application. Il fournit des méthodes pour diverse tâche
+comme:
 
-Like all components it is configured through several configurable parameters.
-All of these properties can be set directly or through setter methods of the
-same name in your controller's beforeFilter.
 
-By using the Security Component you automatically get
-`CSRF <http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_
-and form tampering protection. Hidden token fields will
-automatically be inserted into forms and checked by the Security
-component. Among other things, a form submission will not be
-accepted after a certain period of inactivity, which is controlled by
-the ``csrfExpires`` time.
+* Restreindre quelle méthode HTTP que votre application accepte.
+* Protection CSRF .
+* Protection contre la falsification de formulaire
+* Exiger l'utilisation du SSL.
+* Limiter les communications croisées dans le contrôleur
 
-If you are using Security component's form protection features and
-other components that process form data in their ``startup()``
-callbacks, be sure to place Security Component before those
-components in your ``$components`` array.
+Comme tous les composants il est configuré au travers plusieurs paramètres 
+configurables.
+Toutes ces propriétés peuvent être définies directement ou au travers de
+"méthodes setter" du même nom dans la partie beforeFilter de votre contrôleur.
+
+En utilisant le Composant Sécurité vous faites automatiquement
+un  get `CSRF <http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_
+et une protection contre la falsification de formulaire. 
+Des champs jeton cachés seront automatiquement insérés  dans les
+formulaires  et vérifiés par le composant Sécurité. En outre, une
+soumission par formulaire ne sera pas acceptée après une certaine
+période d'inactivité, qui est contrôler par le temps ``csrfExpires``.
+
+
+Si vous utiliser la fonctionnalité de protection des formulaires 
+par le composant Sécurité et que d'autre composants traitent des données 
+de formulaire dans les callbacks ``startup()``, soyez sûre de placer
+le composant Sécurité avant ces composant dans le tableau ``$components``
 
 .. note::
 
-    When using the Security Component you **must** use the FormHelper
-    to create your forms. The Security Component looks for certain
-    indicators that are created and managed by the FormHelper
-    (especially those created in :php:meth:`~FormHelper::create()` 
-    and :php:meth:`~FormHelper::end()`). Dynamically
-    altering the fields that are submitted in a POST request (e.g.
-    disabling, deleting or creating new fields via JavaScript) is
-    likely to trigger a black-holing of the request. See the
-    ``$validatePost`` or ``$disabledFields`` configuration parameters.
+    Quand vous utilisez le composant Sécurité vous **devez** utiliser
+    le Helper Form (FormHelper) pour créé vos formulaires. 
+    Le composant Sécurité regarde certains indicateurs qui sont créés et 
+    gérer par le Helper form 
+    (spécialement ceux créés dans :php:meth:`~FormHelper::create()`)
+    et :php:meth:`~FormHelper::end()`). La modification dynamique des champs
+    qui lui sont soumis dans une requête POST (ex. désactiver, effacer, 
+    créer des champs nouveau via Javascript) est susceptible de déclencher
+    un black-holing (envoi dans le trou noir) de la requête. Voir les 
+    paramètres de configuration
+    de ``$validatePost`` ou ``$disabledFields``.
 
-Handling blackhole callbacks
-============================
+    
+Manipulation des callbacks trou noir 
+====================================
 
-If an action is restricted by the Security Component it is
-black-holed as an invalid request which will result in a 404 error
-by default. You can configure this behavior by setting the
-``$this->Security->blackHoleCallback`` property to a callback function
-in the controller.
+Si une action est restreinte par le composant Security, elle devient 
+un trou noir, comme une requête invalide qui aboutira à une erreur 404 
+par défaut.
+Vous pouvez configurer ce comportement, en définissant la propriété 
+$this->Security->blackHoleCallback par une fonction de rappel (callback) 
+dans le contrôleur. 
+
 
 .. php:method:: blackHole(object $controller, string $error)
 
-    Black-hole an invalid request with a 404 error or a custom
-    callback. With no callback, the request will be exited. If a
-    controller callback is set to SecurityComponent::blackHoleCallback,
-    it will be called and passed any error information.
+    Met en "trou noir" (black-hole) une requête invalide, avec une 
+    erreur 404 ou un callback personnalisé. Sans callback, la requête 
+    sera abandonnée. Si un callback de contrôleur est défini pour SecurityComponent::blackHoleCallback, il sera appelé et passera 
+    toute information sur l'erreur. 
 
+    
 .. php:attr:: blackHoleCallback
 
-    A Controller callback that will handle and requests that are
-    blackholed. A blackhole callback can be any public method on a controllers.
-    The callback should expect an parameter indicating the type of error::
+    La fonction de rappel (callback) du contrôleur qui va gérer et requéter
+    ce qui doit être mis dans un trou noir (blackholed).
+    La fonction de rappel de mise en trou noir (blackhole callback) peut être 
+    n'importe quelle méthode publique d'un contrôleur.
+    La fonction de rappel doit s'attendre a un paramètre indiquant le type
+    d'erreur::
 
+    
         <?php
         public function beforeFilter() {
             $this->Security->blackHoleCallback = 'blackhole';
         }
 
         public function blackhole($type) {
-            // handle errors.
+            // gestions des erreurs.
         }
 
-    The ``$type`` parameter can have the following values:
+    Le  paramètre ``$type`` peut avoir les valeurs suivantes:
 
-    * 'auth' Indicates a form validation error, or a controller/action mismatch
-      error.
-    * 'csrf' Indicates a CSRF error.
-    * 'get' Indicates an HTTP method restriction failure.
-    * 'post' Indicates an HTTP method restriction failure.
-    * 'put' Indicates an HTTP method restriction failure.
-    * 'delete' Indicates an HTTP method restriction failure.
-    * 'secure' Indicates an SSL method restriction failure.
+    * 'auth' Indiques un erreur de validation de formulaire, ou une incohérence 
+    contrôleur/action.
+    * 'csrf' Indique une erreur CSRF.
+    * 'get' Indique une problème sur la méthode de restriction HTTP.
+    * 'post' Indique une problème sur la méthode de restriction HTTP.
+    * 'put' Indique une problème sur la méthode de restriction HTTP.
+    * 'delete' Indique une problème sur la méthode de restriction HTTP.
+    * 'secure' Indique une problème sur la méthode de restriction SSL.
 
-Restricting HTTP methods
-========================
+Restreindre les méthodes HTTP
+==============================
 
 .. php:method:: requirePost()
 
-    Sets the actions that require a POST request. Takes any number of
-    arguments. Can be called with no arguments to force all actions to
-    require a POST.
+    Définit les actions qui nécessitent une requête POST. Prend un 
+    nombre indéfini de paramètres. Peut être appelé sans argument, 
+    pour forcer toutes les actions à requérir un POST.
 
+    
 .. php:method:: requireGet()
 
-    Sets the actions that require a GET request. Takes any number of
-    arguments. Can be called with no arguments to force all actions to
-    require a GET.
+    Définit les actions qui nécessitent une requête GET. Prend un
+    nombre indéfini de paramètres. Peut-être appelé sans argument,
+    pour forcer toutes les actions  à requérir un GET.
 
+    
 .. php:method:: requirePut()
 
-    Sets the actions that require a PUT request. Takes any number of
-    arguments. Can be called with no arguments to force all actions to
-    require a PUT.
+    Définit les actions qui nécessitent une requête PUT. Prend un
+    nombre indéfini de paramètres. Peut-être appelé sans argument,
+    pour forcer toutes les actions  à requérir un PUT.
 
+   
 .. php:method:: requireDelete()
 
-    Sets the actions that require a DELETE request. Takes any number of
-    arguments. Can be called with no arguments to force all actions to
-    require a DELETE.
+    Définit les actions qui nécessitent une requête DELETE. Prend un
+    nombre indéfini de paramètres. Peut-être appelé sans argument,
+    pour forcer toutes les actions  à requérir un DELETE.
 
-
-Restrict actions to SSL
-=======================
+   
+Restreindre les actions à SSL
+=============================
 
 .. php:method:: requireSecure()
 
-    Sets the actions that require a SSL-secured request. Takes any
-    number of arguments. Can be called with no arguments to force all
-    actions to require a SSL-secured.
+    Définit les actions qui nécessitent une requête SSL-securisée. Prend un
+    nombre indéfini de paramètres. Peut-être appelé sans argument,
+    pour forcer toutes les actions  à requérir une  SSL-securisée.
+
 
 .. php:method:: requireAuth()
 
-    Sets the actions that require a valid Security Component generated
-    token. Takes any number of arguments. Can be called with no
-    arguments to force all actions to require a valid authentication.
+    Définit les actions qui nécessitent un jeton valide généré par
+    le composant Sécurité. Prend un nombre indéfini de paramètres. 
+    Peut-être appelé sans argument, pour forcer toutes les actions
+    à requérir une authentification valide.
 
-Restricting cross controller communication
-==========================================
+    
+Restreindre les demandes croisées de contrôleur
+===============================================
 
 .. php:attr:: allowedControllers
 
-    A List of Controller from which the actions of the current
-    controller are allowed to receive requests from. This can be used
-    to control cross controller requests.
+    Une liste de contrôleurs à partir desquelles les actions du 
+    contrôleur courant sont autorisées à recevoir des requêtes. 
+    Ceci peut être utilisé pour contrôler les demandes croisées de contrôleur.
+    
 
 .. php:attr:: allowedActions
 
-    Actions from which actions of the current controller are allowed to
-    receive requests. This can be used to control cross controller
-    requests.
+    Les actions parmi celles du contrôleur courant qui sont autorisées 
+    à recevoir des requêtes. Ceci peut être utilisé pour contrôler les 
+    demandes croisées de contrôleur.
 
-Form tampering prevention
-=========================
+   
+Prévention de la falsification de formulaire
+=============================================
 
-By default ``SecurityComponent`` prevents users from tampering with forms.  It
-does this by working with FormHelper and tracking which files are in a form.  It
-also keeps track of the values of hidden input elements.  All of this data is
-combined and turned into a hash.  When a form is submitted, SecurityComponent
-will use the POST data to build the same structure and compare the hash.
+Par défaut le composant Sécurité ``SecurityComponent`` prévient les utilisateurs
+de la falsification de formulaire. Il fait cela en travaillant avec le Helper
+Form et en traquant quels fichiers sont dans un formulaire. il assure le suivi
+des éléments d'entrée cachés. Toutes ses données son combinées et hachées.
+Quand un formulaire est soumis, le composant de sécurité utilisera les données
+POSTé pour construire la même structure et comparer le hachage.
+
 
 .. php:attr:: unlockedFields
 
-    Set to a list of form fields to exclude from POST validation. Fields can be
-    unlocked either in the Component, or with
-    :php:meth:`FormHelper::unlockField()`.  Fields that have been unlocked are
-    not required to be part of the POST and hidden unlocked fields do not have
-    their values checked.
-    
+    Définit une liste de champs de formulaire à exclure de la validation POST.
+    Les champs peuvent être déverrouillés dans le composant ou avec
+    :php:meth:`FormHelper::unlockField()`. Les champs qui ont été déverrouillés 
+    ne sont par requit faisant parti du POST et les champs cachés déverrouillés 
+    n'ont pas leurs valeurs vérifiées.
+
+        
 .. php:attr:: validatePost
 
-    Set to ``false`` to completely skip the validation of POST
-    requests, essentially turning off form validation.
+    Mis à ``false`` pour complètement éviter la validation des requêtes POST,
+    essentiellement éteindre la validation de formulaire. 
 
-CSRF configuration
-==================
+
+configuration CSRF (Cross site request forgery)
+===============================================
 
 .. php:attr:: csrfCheck
 
-    Whether to use CSRF protected forms. Set to ``false`` to disable 
-    CSRF protection on forms.
+    Si vous utilisez les formulaires de protection CSRF. Définit à 
+    ``false`` pour désactivé la protection CSRF sur les formulaires.
 
+    
 .. php:attr:: csrfExpires
 
-   The duration from when a CSRF token is created that it will expire on.
-   Each form/page request will generate a new token that can only 
-   be submitted once unless it expires.  Can be any value compatible 
-   with ``strtotime()``. The default is +30 minutes.
+   La durée avant expiration d'un jeton CSRF.
+   Chaque requête formulaire/page va générer un nouveau jeton qui ne
+   pourra être soumis qu'une seule fois avant son expiration. Peut
+   être une valeur compatible à ``strtotime()``. Par défaut 30 minutes.
 
+   
 .. php:attr:: csrfUseOnce
 
-   Controls whether or not CSRF tokens are use and burn.  Set to 
-   ``false`` to not generate new tokens on each request.  One token 
-   will be reused until it expires. This reduces the chances of 
-   users getting invalid requests because of token consumption.
-   It has the side effect of making CSRF less secure, as tokens are reusable.
+   Contrôle si oui ou non  les jetons CSRF sont utilisés et brûlés. 
+   Définit à ``false`` pour ne pas générer de nouveau jetons sur chaque
+   requête. Un jeton pourra être réutiliser jusqu’à ce qu'il expire.
+   Ceci réduit les chances des utilisateurs d'avoir des requêtes invalides
+   en raison de la consommation de jeton. Cela à pour effet de rendre 
+   CSRF moins sécurisé, et les jetons réutilisable.
 
 
-Usage
-=====
+Utilisation
+===========
 
-Using the security component is generally done in the controller
-beforeFilter(). You would specify the security restrictions you
-want and the Security Component will enforce them on its startup::
+Le componsant Security est généralement utilisé dans la méthode 
+beforeFilter() de votre contrôleur. Vous pouvez spécifier les restrictions 
+de sécurité que vous voulez et le composant Security les forcera 
+au démarrage::
+
 
     <?php
     class WidgetController extends AppController {
@@ -204,8 +236,9 @@ want and the Security Component will enforce them on its startup::
         }
     }
 
-In this example the delete action can only be successfully
-triggered if it receives a POST request::
+Dans cette exemple, l'action delete peut être effectuée 
+avec succès si celui ci reçoit une requête POST::
+
 
     <?php
     class WidgetController extends AppController {
@@ -219,8 +252,9 @@ triggered if it receives a POST request::
         }
     }
 
-This example would force all actions that had admin routing to
-require secure SSL requests::
+Cette exemple forcera toutes les actions qui proviennent de la 
+"route" Admin à être effectuées via des requêtes sécurisées SSL::
+
 
     <?php
     class WidgetController extends AppController {
@@ -239,33 +273,38 @@ require secure SSL requests::
         }
     }
 
-This example would force all actions that had admin routing to
-require secure SSL requests. When the request is black holed, it
-will call the nominated forceSSL() callback which will redirect
-non-secure requests to secure requests automatically.
+Cet exemple forcera toutes les actions qui proviennent de la "route"
+admin à requérir des requêtes sécurisés SSL. Quand la requête est placée
+dans un trou noir, elle appellera le callback forceSSL() qui redirigera
+les requêtes non sécurisées vers les requêtes sécurisées automatiquement.
+
 
 .. _security-csrf:
 
-CSRF protection
+protection CSRF
 ===============
 
-CSRF or Cross Site Request Forgery is a common vulnerability in web
-applications.  It allows an attacker to capture and replay a previous request,
-and sometimes submit data requests using image tags or resources on other
-domains.
+CSRF ou Cross Site Request Forgery est une vulnérabilité commune pour
+les applications Web. Cela permet à un attaquant de capturer et de rejouer 
+une requête , et parfois de soumettre des demandes de données en utilisant 
+les balises images ou des ressources sur d'autres domaines.
 
-Double submission and replay attacks are handled by the SecurityComponent's CSRF
-features.  They work by adding a special token to each form request.  This token
-once used cannot be used again.  If an attempt is made to re-use an expired
-token the request will be blackholed.
+Les doubles soumissions et les attaques `replay` sont gérée par les fonctionnalités
+CSRF du composant Sécurité. Elle fonctionnent en ajoutant un jeton spécial
+pour chaque requête de formulaire. Ce jeton utilisé qu'une fois ne peux 
+pas être utilisé à nouveau. Si une tentative est faite pour ré-utiliser 
+un jeton expiré la requête sera mise dans le trou noir (blackholed)
 
-Using CSRF protection
----------------------
 
-Simply by adding the :php:class:`SecurityComponent` to your components array,
-you can benefit from the CSRF protection it provides. By default CSRF tokens are
-valid for 30 minutes and expire on use. You can control how long tokens last by setting
-csrfExpires on the component.::
+Utilisation de la protection CSRF
+---------------------------------
+
+En ajoutant simplement la :php:class:`SecurityComponent` à votre tableau
+de composant , vous pouvez bénéficier de la protection CSRF fournit.
+Par défaut les jetons CSRF sont valides 30 minutes et expire à l'utilisation.
+Vous pouvez contrôler la durée des jetons en paramétrant csrfExpires
+dans le composant.::
+
 
     <?php
     public $components = array(
@@ -274,7 +313,8 @@ csrfExpires on the component.::
         )
     );
 
-You can also set this property in your controller's ``beforeFilter``::
+Vous pouvez aussi définir cette propriété dans la partie ``beforeFilter`
+de votre contrôleur.::
 
     <?php
     public function beforeFilter() {
@@ -282,27 +322,35 @@ You can also set this property in your controller's ``beforeFilter``::
         // ...
     }
 
-The csrfExpires property can be any value that is compatible with
-`strtotime() <http://php.net/manual/en/function.strtotime.php>`_. By default the
-:php:class:`FormHelper` will add a ``data[_Token][key]`` containing the CSRF
-token to every form when the component is enabled.
+La valeur de la propriété csrfExpires peut être n'importe quelle valeur
+compatible à la propriété 
+`strtotime() <http://php.net/manual/en/function.strtotime.php>`_.
+Par défaut le Helper Form :php:class:`FormHelper` ajoutera une
+``data[_Token][key]`` contenant le jeton CSRF pour tous les formulaires 
+quand le composant est activé. 
 
-Handling missing or expired tokens
-----------------------------------
 
-Missing or expired tokens are handled similar to other security violations. The
-SecurityComponent's blackHoleCallback will be called with a 'csrf' parameter.
-This helps you filter out CSRF token failures, from other warnings.
+Gérer les jetons manquants ou périmés
+-----------------------------------
 
-Using per-session tokens instead of one-time use tokens
--------------------------------------------------------
+Les jetons manquants ou périmés sont gérés de la même façon que d'autre violation
+de sécurité. Le blackHoleCallback du composant Sécurité sera appelé avec un
+paramètre 'csrf'.
+Ceci vous aide à filtrer en sortie les problèmes de jeton CSRF, des autres
+erreurs .
 
-By default a new CSRF token is generated for each request, and each token can
-only be used one. If a token is used twice, it will be blackholed. Sometimes,
-this behaviour is not desirable, as it can create issues with single page
-applications. You can toggle on longer, multi-use tokens by setting
-``csrfUseOnce`` to ``false``. This can be done in the components array, or in
-the ``beforeFilter`` of your controller::
+
+Utilisation de jeton par-session au lieu de jeton une-fois 
+----------------------------------------------------------
+
+Par défaut un nouveau jeton est généré à chaque requête , et chaque jeton ne peut
+être utilisé qu'une seule fois. Si un jeton est utilisé une nouvelle fois, il
+sera mis dans le trou noir. Parfois , ce comportement est indésirable, et
+peut créer des problèmes avec les applications "une page". Vous pouvez activer 
+la multi-utilisation des jetons en paramétrant ``csrfUseOnce`` à ``false``.
+Ceci peut être effectué dans le tableau components, ou dans la partie
+``beforeFilter`` de votre contrôleur::
+
 
     <?php
     public $components = array(
@@ -311,19 +359,21 @@ the ``beforeFilter`` of your controller::
         )
     );
 
-This will tell the component that you want to re-use a CSRF token until it
-expires - which is controlled by the ``csrfExpires`` value. If you are having
-issues with expired tokens, this is a good balance between security and ease of
-use.
+Cela dira au composant que vous voulez ré-utiliser un jeton CSRF jusqu'à
+ce qu'il expire - C'est contrôlé par les valeurs de ``csrfExpires``.
+Si vous avez des problèmes avec les jetons expirés , ceci peut être une
+bon équilibrage entre la sécurité et la facilité d'utilisation. 
 
-Disabling the CSRF protection
+Désactiver la protection CSRF
 -----------------------------
 
-There may be cases where you want to disable CSRF protection on your forms for
-some reason. If you do want to disable this feature, you can set
-``$this->Security->csrfCheck = false;`` in your ``beforeFilter`` or use the
-components array. By default CSRF protection is enabled, and configured to use
-one-use tokens.
+Il peut y avoir des cas où vous souhaitez désactiver la protection CSRF 
+sur vos formulaires. Si vous voulez désactiver cette fonctionnalité, vous 
+pouvez définir ``$this->Security->csrfCheck = false;`` dans votre
+``beforeFilter`` ou utiliser le tableau components. Par défaut la protection
+CSRF est activée , et paramétrée pour l'utilisation une-utilisation des jetons.
+
+
 
 
 .. meta::
