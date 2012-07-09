@@ -1,30 +1,28 @@
-Migrating from CakePHP 1.2 to 1.3
-#################################
+Migrer de CakePHP 1.2 vers 1.3
+##############################
 
-This guide summarizes many of the changes necessary when migrating
-from a 1.2 to 1.3 Cake core. Each section contains relevant
-information for the modifications made to existing methods as well
-as any methods that have been removed/renamed.
+Ce guide résume plusieurs des changements nécessaires quand on migre
+du coeur de Cake 1.2 vers 1.3. Chaque section contient des informations
+pertinentes pour les modifications faîtes aux méthodes existantes
+ainsi que toute méthode qui a été retirée/renommée.
 
-**App File Replacements (important)**
-
-
--  webroot/index.php: Must be replaced due to changes in
-   bootstrapping process.
--  config/core.php: Additional settings have been put in place
-   which are required for PHP 5.3.
--  webroot/test.php: Replace if you want to run unit tests.
-
-Removed Constants
-~~~~~~~~~~~~~~~~~
-
-The following constants have been removed from CakePHP. If your
-application depends on them you must define them in
-``app/config/bootstrap.php``
+**Remplacements du fichier App (important)**
 
 
--  ``CIPHER_SEED`` - It has been replaced with Configure class var
-   ``Security.cipherSeed`` which should be changed in
+-  webroot/index.php: Doit être remplacé à cause des changements dans le processus
+   de bootstrapping.
+-  config/core.php: Des configurations additionnelles ont été mise en place
+   qui sont requises pour PHP 5.3.
+-  webroot/test.php: Remplacez si vous voulez lancer des tests unitiaires.
+
+Constantes retirées
+~~~~~~~~~~~~~~~~~~~
+
+Les constantes suivantes ont été retirées de CakePHP. Si votre application
+dépend d'eux, vous devez les définir dans ``app/config/bootstrap.php``
+
+-  ``CIPHER_SEED`` - Cela a été remplacé par la variable ``Security.cipherSeed``
+   de la classe de configuration qui doit être changée dans
    ``app/config/core.php``
 -  ``PEAR``
 -  ``INFLECTIONS``
@@ -33,47 +31,48 @@ application depends on them you must define them in
 -  ``VALID_NUMBER``
 -  ``VALID_YEAR``
 
-Configuration and application bootstrapping
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Configuration et bootstrapping de l'application
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Bootstrapping Additional Paths.**
+**Chemins de bootstrapping en plus.**
 
-In your app/config/bootstrap.php you may have variables like
-``$pluginPaths`` or ``$controllerPaths``.
-There is a new way to add those paths. As of 1.3 RC1 the
-``$pluginPaths`` variables will no longer work. You must use
-``App::build()`` to modify paths.
+Dans votre fichier app/config/bootstrap.php il se peut que vous ayez des variables
+telles que ``$pluginPaths`` ou ``$controllerPaths``.
+Il y a une nouvelle façon d'ajouter ces chemins. Comme dans la 1.3 RC1, les
+variables ``$pluginPaths`` ne fonctionneront plus. Vous devez utiliser
+``App::build()`` pour modifier les chemins.
 
 ::
 
     App::build(array(
-        'plugins' => array('/full/path/to/plugins/', '/next/full/path/to/plugins/'),
-        'models' =>  array('/full/path/to/models/', '/next/full/path/to/models/'),
-        'views' => array('/full/path/to/views/', '/next/full/path/to/views/'),
-        'controllers' => array('/full/path/to/controllers/', '/next/full/path/to/controllers/'),
-        'datasources' => array('/full/path/to/datasources/', '/next/full/path/to/datasources/'),
-        'behaviors' => array('/full/path/to/behaviors/', '/next/full/path/to/behaviors/'),
-        'components' => array('/full/path/to/components/', '/next/full/path/to/components/'),
-        'helpers' => array('/full/path/to/helpers/', '/next/full/path/to/helpers/'),
-        'vendors' => array('/full/path/to/vendors/', '/next/full/path/to/vendors/'),
-        'shells' => array('/full/path/to/shells/', '/next/full/path/to/shells/'),
-        'locales' => array('/full/path/to/locale/', '/next/full/path/to/locale/'),
-        'libs' => array('/full/path/to/libs/', '/next/full/path/to/libs/')
+        'plugins' => array('/chemin/complet/vers/plugins/', '/prochain/chemin/complet/vers/plugins/'),
+        'models' =>  array('/chemin/complet/vers/modèles/', '/prochain/chemin/complet/vers/modèles/'),
+        'views' => array('/chemin/complet/vers/vues/', '/prochain/chemin/complet/vers/vues/'),
+        'controllers' => array('/chemin/complet/vers/contrôleurs/', '/prochain/chemin/complet/vers/contrôleurs/'),
+        'datasources' => array('/chemin/complet/vers/sources_de_données/', '/prochain/chemin/complet/vers/source_de_données/'),
+        'behaviors' => array('/chemin/complet/vers/behaviors/', '/prochain/chemin/complet/vers/behaviors/'),
+        'components' => array('/chemin/complet/vers/composants/', '/prochain/chemin/complet/vers/composants/'),
+        'helpers' => array('/chemin/complet/vers/helpers/', '/prochain/chemin/complet/vers/helpers/'),
+        'vendors' => array('/chemin/complet/vers/vendors/', '/prochain/chemin/complet/vers/vendors/'),
+        'shells' => array('/chemin/complet/vers/shells/', '/prochain/chemin/complet/vers/shells/'),
+        'locales' => array('/chemin/complet/vers/locale/', '/prochain/chemin/complet/vers/locale/'),
+        'libs' => array('/chemin/complet/vers/libs/', '/prochain/chemin/complet/vers/libs/')
     ));
 
-Also changed is the order in which bootstrapping occurs. In the
-past ``app/config/core.php`` was loaded **after**
-``app/config/bootstrap.php``. This caused any ``App::import()`` in
-an application bootstrap to be un-cached and considerably slower
-than a cached include. In 1.3 core.php is loaded and the core cache
-configs are created **before** bootstrap.php is loaded.
+Ce qui a aussi changé est l'ordre dans lequel apparait le bootstrapping.
+Dans le passé, ``app/config/core.php`` était chargé **après**
+``app/config/bootstrap.php``. Cela entraînait que n'importe quel ``App::import()`` 
+dans le bootstrap d'une application n'était plus en cache et ralentissait 
+considérablement par rapport à une inclusion en cache. Dans 1.3, le fichier core.php
+est chargé et les configurations du coeur mises en cache sont créées
+**avant** que bootstrap.php soit chargé.
 
-**Loading custom inflections**
+**Chargement des inflections**
 
-``inflections.php`` has been removed, it was an unnecessary file
-hit, and the related features have been refactored into a method to
-increase their flexibility. You now use ``Inflector::rules()`` to
-load custom inflections.
+``inflections.php`` a été retiré, c'était un fichier non nécessaire et les 
+fonctionnalités liées ont été reconstruites dans une méthode pour augmenter
+leur flexibilité. Vous pouvez maintenant utiliser ``Inflector::rules()`` pour
+charger les différentes inflections.
 
 ::
 
@@ -83,20 +82,19 @@ load custom inflections.
         'irregular' => array('spins' => 'spinor')
     ));
 
-Will merge the supplied rules into the infection sets, with the
-added rules taking precedence over the core rules.
+Fusionnera les règles fournies dans un ensemble d'inflections, avec les règles ajoutées
+prenant le pas sur les règles de base.
 
-File renames and internal changes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Renommages de fichier et changements internes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Library Renames**
+**Renommage des Librairies**
 
-Core libraries of libs/session.php, libs/socket.php,
-libs/model/schema.php and libs/model/behavior.php have been renamed
-so that there is a better mapping between filenames and main
-classes contained within (as well as dealing with some name-spacing
-issues):
-
+Les librairies du coeur de libs/session.php, libs/socket.php,
+libs/model/schema.php et libs/model/behavior.php ont été renommées
+afin qu'il y ait une meilleure correspondance entre les noms de fichiers 
+et les principales classes contenues (ainsi que la gestion avec les problèmes
+d'espaces de noms):
 
 -  session.php ⇒ cake\_session.php
 
@@ -123,11 +121,11 @@ issues):
       'ModelBehavior')
 
 
-In most cases, the above renaming will not affect userland code.
+Dans la plupart des cas, le renommage ci-dessus, n'affectera pas les codes existants.
 
-**Inheritance from Object**
+**Héritage de Object**
 
-The following classes no longer extend Object:
+Les classes suivantes ne vont plus étendre Object:
 
 
 -  Router
@@ -136,45 +134,45 @@ The following classes no longer extend Object:
 -  Cache
 -  CacheEngine
 
-If you were using Object methods from these classes, you will need
-to not use those methods.
+Si vous utilisiez les méthodes de Object à partir de ces classes, vous devrez ne 
+plus utiliser ces méthodes.
 
-Controller & Components
-~~~~~~~~~~~~~~~~~~~~~~~
+Contrôleurs & Composants
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Controller**
+**Contrôleur**
 
 
--  ``Controller::set()`` no longer changes variables from
-   ``$var_name`` to ``$varName``. Variables always appear in the view
-   exactly as you set them.
+-  ``Controller::set()`` ne change plus les variables à partir de
+   ``$var_name`` vers ``$varName``. Les variables apparaissent toujours
+   dans la vue exactement comme vous l'aviez fixée.
 
--  ``Controller::set('title', $var)`` no longer sets
-   ``$title_for_layout`` when rendering the layout.
-   ``$title_for_layout`` is still populated by default. But if you
-   want to customize it, use
+-  ``Controller::set('title', $var)`` ne fixe plus
+   ``$title_for_layout`` quand il rend le layout.
+   ``$title_for_layout`` est toujours rempli par défaut. Mais si vous voulez
+   le modifier, utilisez
    ``$this->set('title_for_layout', $var)``.
 
--  ``Controller::$pageTitle`` has been removed. Use
-   ``$this->set('title_for_layout', $var);`` instead.
+-  ``Controller::$pageTitle`` a été retiré. Utilisez
+   ``$this->set('title_for_layout', $var);`` à la place.
 
--  Controller has two new methods ``startupProcess`` and
-   ``shutdownProcess``. These methods are responsible for handling the
-   controller startup and shutdown processes.
+-  Controller a deux nouvelles méthodes ``startupProcess`` et
+   ``shutdownProcess``. Ces méthodes sont responsables de la gestion du startup
+   du contrôleur et des processus de shutdown.
+   
+**Composant**
 
-**Component**
 
-
--  ``Component::triggerCallback`` has been added. It is a generic
-   hook into the component callback process. It supplants
-   ``Component::startup()``, ``Component::shutdown()`` and
-   ``Component::beforeRender()`` as the preferred way to trigger
-   callbacks.
+-  ``Component::triggerCallback`` a été ajouté. C'est un hook générique
+  dans le processus de callback du composant. Il supplante
+   ``Component::startup()``, ``Component::shutdown()`` et
+   ``Component::beforeRender()`` comme manière préférentielle pour
+   déclencher les callbacks.
 
 **CookieComponent**
 
 
--  ``del`` is deprecated use ``delete``
+-  ``del`` est dépreciée, utilisez ``delete``
 
 **AclComponent + DbAcl**
 
@@ -189,116 +187,117 @@ past given the structure:
               Users/
                     edit
 
-The path ``ROOT/Users`` would match the last Users node instead of
-the first. In 1.3, if you were expecting to get the last node you
-would need to use the path ``ROOT/Users/Users``
+Le chemin ``ROOT/Users`` correspondrait au dernier noeud Utilisateurs
+au lieu du premier. Dans 1.3, si vous vous attenidez à obtenir le dernier
+noeud, vous deviez utiliser le chemin ``ROOT/Users/Users``
 
 **RequestHandlerComponent**
 
 
--  ``getReferrer`` is deprecated use ``getReferer``
+-  ``getReferrer`` est déprecié, utilisez ``getReferer``
 
 **SessionComponent & SessionHelper**
 
 
--  ``del`` is deprecated use ``delete``
+-  ``del`` est déprecié, utilisez ``delete``
 
-``SessionComponent::setFlash()`` second param used to be used for
-setting the layout and accordingly rendered a layout file. This has
-been modified to use an element. If you specified custom session
-flash layouts in your applications you will need to make the
-following changes.
+``SessionComponent::setFlash()`` Le second paramètre utilisé habituellement
+pour configurer le layout et par conséquence le rendu du fichier layout.
+Cela a été modifié pour utiliser un élément. Si vous spécifiez des flash de
+session dans vos applications vous aurez besoin de faire les changements
+suivants.
 
+#. Déplacer les fichiers dde layout requis dans app/views/elements
+#. Renommer la variable $content\_for\_layout en $message
+#. Assurez vous d'avoir ``echo $session->flash();`` dans votre layout
 
-#. Move the required layout files into app/views/elements
-#. Rename the $content\_for\_layout variable to $message
-#. Make sure you have ``echo $session->flash();`` in your layout
-
-``SessionComponent`` and ``SessionHelper`` are not automatically
-loaded.
-Both ``SessionComponent`` and ``SessionHelper`` are no longer
-automatically included without you asking for them. SessionHelper
-and SessionComponent now act like every other component and must be
-declared like any other helper/component. You should update
-``AppController::$components`` and ``AppController::$helpers`` to
-include these classes to retain existing behavior.
+``SessionComponent`` et ``SessionHelper`` ne sont pas chargés automatiquement.
+Les deux helpers ``SessionComponent`` et ``SessionHelper`` ne sont plus inclus
+automatiquement sans que vous le demandiez. SessionHelper
+et SessionComponent se comportent maintenant comme chaque autre composant et
+doivent être déclarés comme tout autre helper/composant. Vous devriez mettre
+à jour ``AppController::$components`` et ``AppController::$helpers`` pour
+inclure ces classes pour conserver les behaviors existants.
 
 ::
 
     var $components = array('Session', 'Auth', ...);
     var $helpers = array('Session', 'Html', 'Form' ...);
 
-These change were done to make CakePHP more explicit and
-declarative in what classes you the application developer want to
-use. In the past there was no way to avoid loading the Session
-classes without modifying core files. Which is something we want
-you to be able to avoid. In addition Session classes were the only
-magical component and helper. This change helps unify and normalize
-behavior amongst all classes.
+Ces changements ont été faits pour rendre CakePHP plus explicites et
+déclaratifs dans quelles classes, vous le développeur d'applications,
+veut l'utiliser. Dans le passé, il n'y avait aucun moyen d'éviter le
+chargement des classes de Session sans modifier les fichiers du coeur.
+Ce qui est quelque chose que nous souhaitions que vous soyez capable
+d'éviter. De plus, les classes de Session étaient le seul composant
+ou helper magique. Ce changement aide à unifier et normaliser
+le behavior pour toutes les classes.
 
-Library Classes
-~~~~~~~~~~~~~~~
+Classes de Librairie
+~~~~~~~~~~~~~~~~~~~~
 
 **CakeSession**
 
 
--  ``del`` is deprecated use ``delete``
+-  ``del`` est déprecié, utilisez ``delete``
 
 **SessionComponent**
 
 
--  ``SessionComponent::setFlash()`` now uses an *element* instead
-   of a *layout* as its second parameter. Be sure to move any flash
-   layouts from app/views/layouts to app/views/elements and change
-   instances of $content\_for\_layout to $message.
+-  ``SessionComponent::setFlash()`` utilise maintenant un *élément*
+   au lieu d'un *layout* en second paramètre. Assurez vous de déplacer
+   tout flash layout de app/views/layouts vers app/views/elements et de
+   changer les instances de $content\_for\_layout en $message.
 
 **Folder**
 
 
--  ``mkdir`` is deprecated use ``create``
--  ``mv`` is deprecated use ``move``
--  ``ls`` is deprecated use ``read``
--  ``cp`` is deprecated use ``copy``
--  ``rm`` is deprecated use ``delete``
+-  ``mkdir`` est déprecié, utilisez ``create``
+-  ``mv`` est déprecié, utilisez ``move``
+-  ``ls`` est déprecié, utilisez ``read``
+-  ``cp`` est déprecié, utilisez ``copy``
+-  ``rm`` est déprecié, utilisez ``delete``
 
 **Set**
 
 
--  ``isEqual`` is deprecated. Use == or ===.
+-  ``isEqual`` est déprecié, utilisez == ou ===.
 
 **String**
 
 
--  ``getInstance`` is deprecated, call String methods statically.
+-  ``getInstance`` est déprecié, appelez les méthodes String statiquement.
 
 **Router**
 
-``Routing.admin`` is deprecated. It provided an inconsistent
-behavior with other prefix style routes in that it was treated
-differently. Instead you should use ``Routing.prefixes``. Prefix
-routes in 1.3 do not require additional routes to be declared
-manually. All prefix routes will be generated automatically. To
-update simply change your core.php.
+``Routing.admin`` est déprecié. Il fournit un behavior incompatible
+avec les autres styles de prefix de routes puisqu'il était traité
+différemment. A la place, vous devez utiliser ``Routing.prefixes``.
+Les préfixes de routes dans 1.3 ne nécessitent pas la déclaration
+manuelle de routes supplémentaires. Tous les préfixes de routes
+seront générés automatiquement. Pour mettre à jour, changez
+simplement votre core.php.
 
 ::
 
-    //from:
+    //Forme ancienne:
     Configure::write('Routing.admin', 'admin');
     
-    //to:
+    //à changer en:
     Configure::write('Routing.prefixes', array('admin'));
 
-See the New features guide for more information on using prefix
-routes. A small change has also been done to routing params. Routed
-params should now only consist of alphanumeric chars, - and \_ or
-``/[A-Z0-9-_+]+/``.
+Voir le guide des nouvelles fonctionnalités pour plus d'informations
+sur l'utilisation des préfixes de routes.
+Un petit changement a aussi été fait pour router les paramètres. Les 
+paramètres routés doivent maintenant seulement être des caractères
+alphanumériques, - et \_ ou ``/[A-Z0-9-_+]+/``.
 
 ::
 
     Router::connect('/:$%@#param/:action/*', array(...)); // BAD
     Router::connect('/:can/:anybody/:see/:m-3/*', array(...)); //Acceptable
 
-For 1.3 the internals of the Router were heavily refactored to
+Dans 1.3, lesFor 1.3 the internals of the Router were heavily refactored to
 increase performance and reduce code clutter. The side effect of
 this is two seldom used features were removed, as they were
 problematic and buggy even with the existing code base. First path

@@ -1,31 +1,35 @@
 Génération de code avec Bake
 ############################
 
-La console Bake de CakePHP est un autre outil permettant de réaliser son application rapidement.
-La console Bake peut créer chacun des ingrédients basiques de CakePHP : modèles, vues et contrôleurs.
-Et nous ne parlons pas seulement des squelettes de classes : Bake peut créer une application fonctionnelle
-complète en seulement quelques minutes. En réalité, Bake est une étape naturelle
-à suivre une fois qu'une application a été prototypée.
+La console Bake de CakePHP est un autre outil permettant de réaliser son 
+application rapidement. La console Bake peut créer chacun des ingrédients 
+basiques de CakePHP : modèles, vues et contrôleurs. Et nous ne parlons pas 
+seulement des squelettes de classes : Bake peut créer une application 
+fonctionnelle complète en seulement quelques minutes. En réalité, Bake est 
+une étape naturelle à suivre une fois qu'une application a été prototypée.
 
 Ceux qui sont novices avec Bake (spécialement les utilisateurs de Windows)
-pourraient trouver le `Bake screencast <http://tv.cakephp.org/video/gwoo/2010/12/24/setting_up_the_cakephp_console_on_windows>`_ 
+pourront trouver le 
+`Bake screencast <http://tv.cakephp.org/video/gwoo/2010/12/24/setting_up_the_cakephp_console_on_windows>`_ 
 utile pour paramétrer les choses avant de continuer.
 
-Suivant la configuration de votre installation, 
-vous devrez peut être donner les droits d'exécution au script bash cake ou l'appeler avec la commande ./cake bake.
-La console cake est exécutée en utilisant le CLI PHP (Interface de Ligne de Commande). 
-Si vous avez des problèmes en exécutant ce script, vérifiez que le CLI PHP est installé 
-et qu'il a les modules adéquats autorisés (ex: MySQL).
+Suivant la configuration de votre installation, vous devrez peut être donner 
+les droits d'exécution au script bash cake ou l'appeler avec la commande 
+./cake bake.
+La console cake est exécutée en utilisant le CLI PHP 
+(Interface de Ligne de Commande). Si vous avez des problèmes en exécutant ce 
+script, vérifiez que le CLI PHP est installé et qu'il a les modules adéquats 
+autorisés (ex: MySQL).
 
-En exécutant Bake la première fois, vous serez invité à créer un fichier de configuration 
-de la base de données, si vous n'en avez pas créé auparavant.
+En exécutant Bake la première fois, vous serez invité à créer un fichier de 
+configuration de la base de données, si vous n'en avez pas créé auparavant.
 
-Après que vous ayez créé un fichier de configuration de base de données, 
+Après que vous avez créé un fichier de configuration de base de données, 
 exécuter Bake vous présentera les options suivantes ::
 
     ---------------------------------------------------------------
     App : app
-    Path: /path-to/project/app
+    Path: /path-to/project/app (Chemin: /chemin/vers/app/du/projet)
     ---------------------------------------------------------------
     Interactive Bake Shell
     ---------------------------------------------------------------
@@ -40,7 +44,8 @@ exécuter Bake vous présentera les options suivantes ::
     What would you like to Bake? (D/M/V/C/P/F/T/Q)
     >  
 
-Sinon, vous pouvez exécuter chacune de ces commandes directement depuis la ligne de commande ::
+Sinon, vous pouvez exécuter chacune de ces commandes directement depuis la 
+ligne de commande ::
 
     $ cake bake db_config
     $ cake bake model
@@ -53,43 +58,46 @@ Sinon, vous pouvez exécuter chacune de ces commandes directement depuis la lign
     $ cake bake all
 
 
-Modifier le HTML par défault produit par les templates de bake
-==============================================================
+Modifier le HTML par défaut produit par les templates de bake
+=============================================================
 
-Si vous souhaitez modifier la sortie HTML par défaut produite par la commande bake, suivez les étapes simples suivantes:
+Si vous souhaitez modifier la sortie HTML par défaut produite par la commande 
+bake, suivez les étapes simples suivantes:
 
 Pour fabriquer des vues sur mesure
 ----------------------------------
 
-
 #. Aller dans le dossier: lib/Cake/Console/Templates/default/views
 #. Remarquez les 4 fichiers ici
-#. Copier les dans le dossier:
-   app/Console/Templates/[themename]/views
-#. Faire les changement pour la sortie HTML pour controler la façon dont "bake" fabrique vos vues
+#. Copier les dans le dossier: app/Console/Templates/[themename]/views
+#. Faire les changement pour la sortie HTML pour contrôler la façon dont "bake" 
+   fabrique vos vues
 
 La partie du chemin ``[themename]`` est le nom du theme de bake que vous créez.
-Les noms des thèmes de Bake doivent être unique, donc n'utilisez pas 'default'.
+Les noms des thèmes de Bake doivent être uniques, donc n'utilisez pas 'default'.
 
 Pour fabriquer des projets sur mesure
 ------------------------------------
 
 Allez dans le dossier: lib/Cake/Console/Templates/skel
-Remarquez l'application de base ici
-Copier les dans le dossier: app/Console/Templates/skel
-Faire les changement pour la sortie HTML pour controler la façon dont "bake" fabrique vos vues.
+Remarquez l'application de base ici.
+Copiez les dans le dossier: app/Console/Templates/skel
+Faire les changements pour la sortie HTML pour contrôler la façon dont "bake" 
+fabrique vos vues.
 Passez le squelette du chemin en paramètre de la tâche du projet::
 
     cake bake project -skel Console/Templates/skel
 
 .. note::
 
-    -  Vous devez lancer la tâche du projet spécifique ``cake bake project`` afin que
-       le paramètre du chemin soit passé.
-    -  Le chemin du template est relatif au chemin courant de l'Interface de Commande en Ligne.
+    -  Vous devez lancer la tâche du projet spécifique ``cake bake project`` 
+       afin que le paramètre du chemin soit passé.
+    -  Le chemin du template est relatif au chemin courant de l'Interface 
+       de Commande en Ligne.
     -  Puisque le chemin complet du squelette doit être entré manuellement,
-       vous pouvez spécifier n'importe quel dossier avec le template que vous souhaiter construire,
-       ainsi que l'utilisation de plusieurs templates. (Sauf si Cake commence par outrepasser le dossier
+       vous pouvez spécifier n'importe quel dossier avec le template que vous 
+       souhaitez construire, ainsi que l'utilisation de plusieurs templates. 
+       (Sauf si Cake commence par outrepasser le dossier
        squelette comme il fait pour les vues)
 
 
@@ -99,121 +107,126 @@ Amélioration de Bake dans la version 1.3
 Dans CakePHP 1.3, bake a connu une révision importante,
 avec le rajout de fonctionnalités et améliorations.
 
-
-
--  Deux nouvelles tâches (FixtureTask and TestTask) sont accessibles à partir du menu principal de bake.
--  Une troisième tâche (TemplateTask) a été rajoutée pour l'utilisation dans vos shells.
--  Toutes ces différentes tâches de bake vous permettent maintenant d'utiliser d'autres connections de bake que le 'default'
+-  Deux nouvelles tâches (FixtureTask and TestTask) sont accessibles à partir 
+   du menu principal de bake.
+-  Une troisième tâche (TemplateTask) a été rajoutée pour l'utilisation dans 
+   vos shells.
+-  Toutes ces différentes tâches de bake vous permettent maintenant d'utiliser 
+   d'autres connections de bake que le 'default'.
    Utilisez le paramètre ``-connection``.
--  Le support de Plugin a été fortement amélioré. Vous pouvez maintenant utiliser
-   ``-plugin NomDuPlugin`` ou ``Plugin.class``.
+-  Le support de Plugin a été fortement amélioré. Vous pouvez maintenant 
+   utiliser ``-plugin NomDuPlugin`` ou ``Plugin.class``.
 -  Les Questions ont été clarifiées, et sont plus facilement compréhensibles.
 -  Les validations multiples sur les modèles ont été ajoutées.
--  Les associations des modèles sur eux-mêmes utilisant ``parent_id`` sont maintenant détectées.
-   Par exemple, si votre modèle est appelé Thread, une association ParentThread et ChildThread sera créee.
+-  Les associations des modèles sur eux-mêmes utilisant ``parent_id`` sont 
+   maintenant détectées.
+   Par exemple, si votre modèle est appelé Thread, une association ParentThread 
+   et ChildThread sera créée.
 -  Fixtures et Tests peuvent être 'cuits' séparément.
 -  Les Tests 'Cuits' incluent autant de fixtures connues,
-   ainsi que la détéction des plugin (La détection plugin ne fonctionne pas avec PHP4).
+   ainsi que la détection des plugins (La détection plugin ne fonctionne 
+   pas avec PHP4).
 
-Ainsi avec cette liste de fonctionnalités, nous allons prendre le temps de regarder certaines nouvelles
-commandes, certains nouveaux paramètres et les fonctionnalités mises à jour.
+Ainsi, avec cette liste de fonctionnalités, nous allons prendre le temps de 
+regarder certaines nouvelles commandes, certains nouveaux paramètres et les 
+fonctionnalités mises à jour.
 
 **Nouveaux FixtureTask, TestTask et TemplateTask.**
 
-Fixture and test baking were a bit of a pain in the past. You could
-only generate tests when baking the classes, and fixtures could
-only be generated when baking models. This made adding tests to
-your applications later or even regenerating fixtures with new
-schemas a bit painful. For 1.3 we've separated out Fixture and Test
-making them separate tasks. This allows you to re-run them and
-regenerate tests and fixtures at any point in your development
-process.
+Fixture et le test baking étaient un peu ardus dans le passé.
+Vous pouviez seulement générer des tests quand vous bakiez des classes, et 
+les fixtures pouvaient seulement être générées quand on bakait les modèles.
+Cela faisait que l'ajout ultérieur de tests à vos applications ou même
+la régénération de fixtures avec de nouveaux schémas étaient difficiles.
+Dans 1.3, nous avons séparé Fixture et la fabrication des Tests en tâches
+différentes. Cela vous permet de les relancer et de regénérer des tests 
+et fixtures à n'importe quel moment dans votre processus de développement.
 
-In addition to being rebuildable at any time, baked tests are now
-attempt to find as many fixtures as possible. In the past getting
-into testing often involved fighting through numerous 'Missing
-Table' errors. With more advanced fixture detection we hope to make
-testing easier and more accessible.
+En plus d'être reconstructible à n'importe quel moment, les tests cuits
+sont maintenant capable de trouver autant de fixtures que possible.
+Dans le passé, tester impliquait souvent de se battre à travers de
+nombreuses erreurs 'Manque la table'. Avec une detection des fixtures
+plus poussée, nous espérons rendre le test plus simple plus accessible.
 
-Test cases also generate skeleton test methods for every
-non-inherited public method in your classes. Saving you one extra
-step.
+Les cas de test générent aussi des méthodes squelettes de test pour chaque
+méthode publique non héritée dans vos classes. Vous enlevant une étape
+supplémentaire.
 
-``TemplateTask`` is a behind the scenes task, and it handles file
-generation from templates. In previous versions of CakePHP baked
-views were template based, but all other code was not. With 1.3
-almost all the content in the files generated by bake are
-controlled by templates and the ``TemplateTask``.
+``TemplateTask`` est une tâche en arrière plan, et elle gère la génération
+des fichiers à partir de templates. Dans les versions précédentes de CakePHP
+les vues cuites étaient basées sur des templates, mais tout le reste du code
+ne l'était pas. Avec 1.3, presque tout le contenu dans les fichiers générés par
+bake sont contrôlés par les templates et la ``TemplateTask``.
 
-The ``FixtureTask`` not only generates fixtures with dummy data,
-but using the interactive options or the ``-records`` option you
-can enable fixture generation using live data.
+La ``FixtureTask`` ne génére plus seulement les fixtures avec les données 
+factices mais en utilisant les options interactives ou l'option ``-records`` 
+vous pouvez activer la génération de fixture en utilisant les données live.
 
-**New bake command**
-New commands have been added to make baking easier and faster.
-Controller, Model, View baking all feature an ``all`` subcommand,
-that builds everything at once and makes speedy rebuilds easy.
+**Nouvelle commande bake**
+De nouvelles commandes ont été ajoutées pour rendre le baking plus facile
+et plus rapide. Les bakings des contrôleurs, Modèles et Vues ont tous
+la fonctionnalité de sous-commande ``all``, qui construit tout en une fois
+et reconstruit rapidement et facilement.
 
 ::
 
     cake bake model all
 
-Would bake all the models for an application in one shot. Similarly
-``cake bake controller all`` would bake all controllers and
-``cake bake view all`` would generate all view files. Parameters on
-the ``ControllerTask`` have changed as well.
-``cake bake controller scaffold`` is now
-``cake bake controller public``. ``ViewTask`` has had an ``-admin``
-flag added, using ``-admin`` will allow you to bake views for
-actions that begin with ``Routing.admin``
+Bakerait tous les modèles pour une application en une fois. De même,
+``cake bake controller all`` bakerait tous les contrôleurs et 
+``cake bake view all`` générerait tous les fichiers vues. Les paramètres de
+la tâche ``ControllerTask`` ont aussi changé.
+``cake bake controller scaffold`` est maintenant 
+``cake bake controller public``. ``ViewTask`` a eu un drapeau ``-admin``
+ajouté, en utilisant ``-admin`` cela vous autorise à baker les vues pour les
+actions qui commencent par ``Routing.admin``.
 
-As mentioned before ``cake bake fixture`` and ``cake bake test``
-are new, and have several subcommands each.
-``cake bake fixture all`` will regenerate all the basic fixtures
-for your application. The ``-count`` parameter allows you to set
-the number of fake records that are created. By running fixture
-task interactively you can generate fixtures using the data in your
-live tables. You can use ``cake bake test <type> <class>`` to
-create test cases for already created objects in your app. Type
-should be one of the standard CakePHP types ('component',
-'controller', 'model', 'helper', 'behavior') but doesn't have to
-be. Class should be an existing object of the chosen type.
+Comme mentionné avant ``cake bake fixture`` et ``cake bake test``
+sont nouveaux, et ont plusieurs sous-commandes chacun.
+``cake bake fixture all`` va regénérer tous les fixtures basiques pour votre
+application. Le paramètre ``-count`` vous autorise à configurer le nombre 
+d'enregistrements faux qui sont créés. En lançant la tâche de fixture de façon
+interactive, vous pouvez générer les fixtures en utilisant les données dons vos
+tables live. Vous pouvez utiliser ``cake bake test <type> <class>`` pour créer
+les cas de test pour les objets déjà crées dans votre app. Le type doit être 
+l'un des types standards de CakePHP ('composant',
+'contrôleur', 'modèle', 'helper', 'behavior') mais peut ne pas exister.
+Les classes doivent être un objet existant d'un type choisi.
 
-**Templates Galore**
+**Des templates en abondance**
 
-New in bake for 1.3 is the addition of more templates. In 1.2 baked
-views used templates that could be changed to modify the view files
-bake generated. In 1.3 templates are used to generate all output
-from bake. There are separate templates for controllers, controller
-action sets, fixtures, models, test cases, and the view files from
-1.2. As well as more templates, you can also have multiple template
-sets or, bake themes. Bake themes can be provided in your app, or
-as part of plugins. An example plugin path for bake theme would be
-``app/Plugin/BakeTheme/Console/Templates/dark_red/``. An
-app bake theme called ``blue_bunny`` would be placed in
-``app/Console/Templates/blue_bunny``. You can look at
-``lib/Cake/Console/Templates/default/`` to see what directories and
-files are required of a bake theme. However, like view files, if
-your bake theme doesn't implement a template, other installed
-themes will be checked until the correct template is found.
+Une nouveauté dans bake pour 1.3 est l'addition de plus de templates.
+Dans 1.2, les vues bakées utilisaient les templates qui pouvaient être
+changés pour modifier les fichiers vues bakés générées. Dans 1.3, les
+templates sont utilisés pour générer toute sortie de bake générée.
+Il y a des templates séparés poour les contrôleurs, les ensembles d'action
+des contrôleurs, les fixtures, les modèles, les cas de test, et les fichiers
+de vue de 1.2. Comme de plus en plus de templates, vous pouvez aussi avoir des
+ensembles de template multiple ou, de thèmes bakés. Les thèmes bakés peuvent
+être fournis dans votre app, ou dans une partie des plugins. Un exemple de 
+chemin de plugin pouf le thème baké serait
+``app/Plugin/BakeTheme/Console/Templates/dark_red/``. Un thème d'app 
+bakée appelé ``blue_bunny`` serait placé dans 
+``app/Console/Templates/blue_bunny``. Vous pouvez regarder dans
+``lib/Cake/Console/Templates/default/`` pour voir quels répertoires et fichiers
+sont requis d'un thème baké. Cependant, comme les fichiers vues, si votre
+thème baké n'implémente pas un template, les autres thèmes installés seront
+vérifiés jusqu'à ce que le template correct soit trouvé.
 
-**Additional plugin support.**
+**Support de plugins additionels.**
 
-New in 1.3 are additional ways to specify plugin names when using
-bake. In addition to ``cake bake plugin Todo controller Posts``,
-there are two new forms. ``cake bake controller Todo.Posts`` and
-``cake bake controller Posts -plugin Todo``. The plugin parameter
-can be while using interactive bake as well.
-``cake bake controller -plugin Todo``, for example will allow you
-to use interactive bake to add controllers to your Todo plugin.
-Additional / multiple plugin paths are supported as well. In the
-past bake required your plugin to be in app/plugins. In 1.3 bake
-will find which of the pluginPaths the named plugin is located on,
-and add the files there.
-
-
+Nouveau dans 1.3 sont les chemins additionnels pour spécifier les noms de plugin
+quand on utilise bake. En plus de ``cake bake plugin Todo controller Posts``,
+il y a deux nouvelles formes. ``cake bake controller Todo.Posts`` et
+``cake bake controller Posts -plugin Todo``. Le paramètre de plugin peut aussi
+exister en utilisant le bake interactif.
+``cake bake controller -plugin Todo``, par exemple vous autorisera
+à utiliser le bake interactif pour ajouter des contrôleurs à votre plugin Todo.
+Des chemins de plugin supplémentaires / multiples sont aussi supportés. Dans
+le passé, bake nécessitait que le plugin soit dans app/plugins. Dans 1.3, bake 
+trouvera le chemin du plugin pour le plugin nommé, et y ajoutera les fichiers.
 
 
 .. meta::
-    :title lang=en: Code Generation with Bake
-    :keywords lang=en: command line interface,functional application,atabase,database configuration,bash script,basic ingredients,roject,odel,path path,code generation,scaffolding,windows users,configuration file,few minutes,config,iew,shell,models,running,mysql
+    :title lang=fr: Génération de code avec Bake
+    :keywords lang=fr: interface de commande en ligne,application fonctionnel,base de données,configuration de la base de données,script bash,ingrédients basiques,projet,modèle,chemin,génération de code,scaffolding,utilisateurs windows,configuration du fichier,quelques minutes,config,vue,shell,modèles,execution,mysql

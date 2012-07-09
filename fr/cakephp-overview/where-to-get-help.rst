@@ -1,27 +1,27 @@
-Ou obtenir de l'aide
+Où obtenir de l'aide
 ####################
 
-Le site officiel CakePHP
-========================
+Le site officiel de CakePHP
+===========================
 
 `http://www.cakephp.org <http://www.cakephp.org>`_
 
-Le site officiel CakePHP est toujours un endroit épatant à visiter.
+Le site officiel de CakePHP est toujours un endroit épatant à visiter.
 Il propose des liens vers des outils fréquemment utilisés par le développeur,
 des didacticiels vidéo, des possibilités de faire un don et des téléchargements.
 
 Le Cookbook
-============
+===========
 
 `http://book.cakephp.org <http://book.cakephp.org>`_
 
-Ce manuel devrait être probablement le premier endroit où vous rendre 
+Ce manuel devrait probablement être le premier endroit où vous rendre 
 pour obtenir des réponses. Comme pour beaucoup d'autres projets open source,
-nous accueillons de nouvelles personnes régulièrement. Faites tout votre possible
+nous accueillons de nouvelles personnes régulièrement. Faîtes tout votre possible
 pour répondre à vos questions par vous même dans un premier temps.
-Les réponses peuvent venir lentement, mais elles resteront longtemps et vous aurez 
-ainsi allégé notre charge en support utilisateur. Le manuel et l'API ont tous 
-deux une version en ligne.
+Les réponses peuvent venir lentement, mais elles resteront longtemps et vous 
+aurez ainsi allégé notre charge de travail en support utilisateur. Le manuel et
+l'API ont tous deux une version en ligne.
 
 La Boulangerie
 ==============
@@ -30,7 +30,7 @@ La Boulangerie
 
 La Boulangerie (Bakery) est une chambre d'enregistrement pour tout 
 ce qui concerne CakePHP. Vous y trouverez des tutoriels, des études
-de cas et des exemples de code. Lorsque vous serez familiarisé avec CakePHP,
+de cas et des exemples de code. Lorsque vous serez familiarisés avec CakePHP,
 connectez-vous pour partager vos connaissances avec la communauté 
 et obtenez en un instant la gloire et la fortune.
 
@@ -41,7 +41,8 @@ L'API
 
 Allez droit au but et atteignez le graal des développeurs, 
 l'API CakePHP (Application Programming Interface) est la documentation 
-la plus complète sur tous les détails essentiels au fonctionnement interne du framework.
+la plus complète sur tous les détails essentiels au fonctionnement interne
+du framework.
 C'est une référence directe au code, donc apportez votre chapeau à hélice.
 
 Les cas de Test
@@ -69,9 +70,10 @@ Le canal IRC
 Si vous êtes déconcerté, poussez un hurlement sur le canal IRC de CakePHP. 
 Une personne de l'équipe de développement s'y trouve habituellement, 
 en particulier durant les heures du jour pour les utilisateurs 
-d'Amérique du Nord et du Sud. Nous serions ravi de vous écouter,
-que vous ayez besoin d'un peu d'aide, que vous vouliez trouver des utilisateurs 
-dans votre région ou que vous aimeriez donner votre nouvelle voiture sportive de marque.
+d'Amérique du Nord et du Sud. Nous serions ravis de vous écouter,
+que vous ayez besoin d'un peu d'aide, que vous vouliez trouver des utilisateurs
+dans votre région ou que vous aimeriez donner votre nouvelle marque de
+voiture sportive.
 
 Le Groupe Google
 ================
@@ -88,11 +90,12 @@ Les Questions CakePHP
 `http://ask.cakephp.org/ <http://ask.cakephp.org/>`_
 
 Simplement s'inscrire/se connecter et poser une question. Attendez jusqu'à ce
-que vous ayez quelques réponses et choisissez la réponse correcte. Vous pouvez aussi
-voir, commenter et voter pour les questions précedemment demandées et aussi les quesstions résolues.
+que vous ayez quelques réponses et choisissez la réponse correcte. Vous pouvez 
+aussi voir, commenter et voter pour les questions précédemment demandées et
+aussi les questions résolues.
 
 
 .. meta::
-    :title lang=fr: Ou trouver de l'aide
-    :description lang=fr: Ou trouver de l'aide avec CakePHP: Le site officiel de CakePHP, Le Cookbook, La Bakery, L'API, Les cas de test, Le canal IRC, Le Groupe Google CakePHP ou les Questions CakePHP.
-    :keywords lang=fr: cakephp,cakephp aide,aide avec cakephp,ou trouver de l'aide,cakephp irc,cakephp questions,cakephp api,cakephp cas test,open source projets,canal irc,code reference,irc canal,outils developpeurs,cases tests,bakery
+    :title lang=fr: Où trouver de l'aide
+    :description lang=fr: Où trouver de l'aide avec CakePHP: Le site officiel de CakePHP, Le Cookbook, La Boulangerie, L'API, Les cas de test, Le canal IRC, Le Groupe Google CakePHP ou les Questions CakePHP.
+    :keywords lang=fr: cakephp,cakephp aide,aide avec cakephp,où trouver de l'aide,cakephp irc,cakephp questions,cakephp api,cakephp cas test,projets open source,canal irc,code reference,irc canal,outils développeurs,cas de test,boulangerie

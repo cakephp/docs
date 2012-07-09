@@ -43,9 +43,9 @@ report or make general comments on the code.
    place to go is IRC. If you have a comment and cannot reach us in IRC
    after a day or two, please submit a ticket.
 
-If you find an issue, the best answer is to write a test. The best
-advice we can offer in writing tests is to look at the ones included in
-the core.
+Si vous trouvez un problème, la meilleure réponse es d'écrire un test. Le meilleur
+conseil que nous pouvons offrir dans l'écriture des tests est de regarder
+ceux qui sont inclus dans le coeur.
 
 Comme toujours, si vous avez n'importe quelle question ou commentaire, visitez nous
 sur #cakephp sur irc.freenode.net.
