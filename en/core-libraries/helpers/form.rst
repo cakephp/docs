@@ -581,7 +581,9 @@ html attributes. The following will cover the options specific to
 
     <?php
     $this->Form->input('Model.field', array(
-        'error' => array('escape' => false)
+        'error' => array(
+            'attributes' => array('escape' => false)
+        )
     ));
 
   To override the model error messages use an array with
