@@ -12,6 +12,7 @@
    views
    models
    core-libraries
+   plugins
    development
    deployment
    tutorials-and-examples
