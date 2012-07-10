@@ -14,7 +14,8 @@ est déjà prête à tourner !
 Le scaffolding par CakePHP est vraiment bien imaginé.
 Il vous permet de mettre en place une application basique CRUD
 (Création, Vue, Edition et Destruction) en quelques minutes.
-Il est si bien fait que vous aurez envie de l'utiliser dans toutes vos applications. 
+Il est si bien fait que vous aurez envie de l'utiliser dans toutes 
+vos applications. 
 Attention ! Nous pensons aussi que le scaffolding est utile, 
 mais veuillez réaliser que ce n'est... qu'un échaufaudage !
 C'est une structure très simple à mettre en oeuvre, et il vaut mieux
@@ -32,12 +33,13 @@ est encore susceptible de changer, ce qui est tout à faire normal à ce
 stade du processus de création. Ca a un inconvénient : un développeur déteste
 créer des formulaires dont il ne verra jamais l'utilisation réelle. C'est pour
 réduire le stress du développeur que le Scaffolding a été introduit dans CakePHP. 
-Il analyse les tables de votre base et crée de façon simple une liste des enregistrements,
-avec les boutons d'ajout, de suppression et de modification, des formulaires
-pour l'édition et une vue pour afficher un enregistrement en particulier.
+Il analyse les tables de votre base et crée de façon simple une liste des 
+enregistrements, avec les boutons d'ajout, de suppression et de modification, 
+des formulaires pour l'édition et une vue pour afficher un enregistrement en 
+particulier.
 
-Pour ajouter le Scaffolding dans votre application, ajoutez la variable $scaffold
-dans votre contrôleur ::
+Pour ajouter le Scaffolding dans votre application, ajoutez la variable 
+$scaffold dans votre contrôleur ::
 
     <?php
     class CategoriesController extends AppController {
@@ -62,12 +64,10 @@ le modèle Utilisateur, vous verrez les identifiants des utilisateurs dans
 l'affichage de vos catégories. Puisque scaffolding connaît les associations
 entre modèles, vous ne verrez pas d'enregistrements liés dans les vues via
 scaffold jusqu'à ce que vous ajoutiez manuellement un code d'association
-au modèle. Par exemple, si le modèle Groupe hasMany Utilisateur et que Utilisateur
-belongsTo Groupe, vous devrez ajouter manuellement le code suivant dans vos modèles
-Utilisateur et Groupe. Avant d'ajouter le code suivant, la vue affiche un select
-pour le Groupe dans le nouveau formulaire Utilisateur::
-
-
+au modèle. Par exemple, si le modèle Groupe hasMany Utilisateur et que 
+Utilisateur belongsTo Groupe, vous devrez ajouter manuellement le code suivant 
+dans vos modèles Utilisateur et Groupe. Avant d'ajouter le code suivant, la 
+vue affiche un select pour le Groupe dans le nouveau formulaire Utilisateur::
 
     <?php
     // In Group.php
@@ -94,7 +94,8 @@ Créer une interface admin simplifiée avec scaffolding
 
 Si vous avez activé le routage admin dans votre app/config/core.php, 
 avec ``Configure::write('Routing.prefixes', array('admin'));`` vous pouvez 
-utiliser le scaffolding (échafaudage) pour générer une interface d'administration.
+utiliser le scaffolding (échafaudage) pour générer une interface 
+d'administration.
 
 Une fois que vous avez activé le routage admin, assignez votre préfixe 
 d'administration à la variable de scaffolding::

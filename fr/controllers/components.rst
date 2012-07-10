@@ -1,5 +1,5 @@
 Composants (Components)
-########################
+#######################
 
 Les composants (Components) sont des regroupements de logique applicative
 qui sont partagés entre les contrôleurs. Si vous vous surprenez à vouloir 
@@ -30,10 +30,12 @@ Configuration des Composants
 ============================
 
 De nombreux composants du cœur nécessitent une configuration. Quelques exemples :
-:doc:`/core-libraries/components/authentication`, :doc:`/core-libraries/components/cookie`
+:doc:`/core-libraries/components/authentication`, 
+:doc:`/core-libraries/components/cookie`
 et :doc:`/core-libraries/components/email`.
 Toute configuration pour ces composants, et pour les composants en général, 
-se fait dans le tableau des ``$components`` de la méthode ``beforeFilter()`` de vos contrôleurs::
+se fait dans le tableau des ``$components`` de la méthode ``beforeFilter()`` 
+de vos contrôleurs::
 
     <?php
     class PostsController extends AppController {
@@ -47,9 +49,9 @@ se fait dans le tableau des ``$components`` de la méthode ``beforeFilter()`` de
 
 Serait un exemple de configuration d'un composant avec le tableau 
 ``$components``. Tous les composants du coeur permettent aux paramètres
-d'être configurés dans la méthode de votre controlleur ``beforeFilter()``.
+d'être configurés dans la méthode de votre contrôleur ``beforeFilter()``.
 C'est utile quand vous avez besoin d'assigner les résultats d'une fonction
-à la propriété d'un composant. Ceci peut aussi être exprimé comme::
+à la propriété d'un composant. Ceci peut aussi être exprimé comme ceci::
 
     <?php
     public function beforeFilter() {
@@ -59,7 +61,7 @@ C'est utile quand vous avez besoin d'assigner les résultats d'une fonction
         $this->Cookie->name = 'CookieMonster';
     }
 
-C'est possible, cependant, que le composant requièrt certaines options de 
+C'est possible, cependant, que le composant requiert certaines options de 
 configuration avant que le contrôleur ``beforeFilter()`` soit lancé.
 Pour cela, certains composants permettent aux options de configuration
 d'être définies dans le tableau ``$components``::
@@ -67,13 +69,13 @@ d'être définies dans le tableau ``$components``::
     <?php
     public $components = array('DebugKit.Toolbar' => array('panels' => array('history', 'session')));
 
-Consulter la documentation pertiente pour connaître les options de configuration
-que chaque composant fournit.
+Consulter la documentation pertinente pour connaître les options de 
+configuration que chaque composant fournit.
 
-Un paramètre commun à utiliser est l'option ``className``, qui vous autorise les 
-alias des composants. Cette fonctionnalité est utile quand vous voulez remplacer
-``$this->Auth`` ou à une autre référence de Composant commun avec une impémentation
-sur mesure::
+Un paramètre commun à utiliser est l'option ``className``, qui vous autorise 
+les alias des composants. Cette fonctionnalité est utile quand vous voulez 
+remplacer ``$this->Auth`` ou à une autre référence de Composant commun avec 
+une implémentation sur mesure::
 
     <?php
     // app/Controller/PostsController.php
@@ -91,23 +93,22 @@ sur mesure::
         // Ajouter votre code pour écraser le AuthComponent du coeur
     }
 
-Ce qu'il y a au-dessous donnerait un *alias* ``MyAuthComponent`` à ``$this->Auth`` dans vos
-controlleurs.
+Ce qu'il y a au-dessous donnerait un *alias* ``MyAuthComponent`` à 
+``$this->Auth`` dans vos contrôleurs.
 
 .. note::
 
-    Faire un alias à un composant remplace
-Aliasing a component replaces that instance anywhere that component is used,
-    including inside other Components.
+    Faire un alias à un composant remplace cette instance n'importe où où le
+    composant est utilisé, en incluant l'intérieur des autres Composants.
 
 Utiliser les Composants
 =======================
 
-Une fois que vous avez inclu quelques composants dan votre controlleur,
-les utiliser est très simple. Chaque composant que vous utilisez est enregistré
-comme propriété dans votre controlleur. Si vous avez chargé la
-:php:class:`SessionComponent` et le :php:class:`CookieComponent` dans votre
-controlleur, vous pouvez y accèder comme ceci::
+Une fois que vous avez inclu quelques composants dans votre contrôleur, 
+les utiliser est très simple. Chaque composant que vous utilisez est enregistré 
+comme propriété dans votre contrôleur. Si vous avez chargé la
+:php:class:`SessionComponent` et le :php:class:`CookieComponent` dans votre 
+contrôleur, vous pouvez y accéder comme ceci::
 
     <?php
     class PostsController extends AppController {
@@ -122,17 +123,17 @@ controlleur, vous pouvez y accèder comme ceci::
 
 .. note::
 
-    Depuis que les Modèles et les Composants sont tous deux ajoutés aux
-    controlleurs en tant que propriété, ils partagent le même 'espace de noms'.
-    Assurez vous de ne pas donner le même nom à un composant et un modèle
+    Depuis que les Modèles et les Composants sont tous deux ajoutés aux 
+    contrôleurs en tant que propriété, ils partagent le même 'espace de noms'.
+    Assurez vous de ne pas donner le même nom à un composant et à un modèle.
 
 Charger les composants à la volée
 ---------------------------------
 
-Vous n'avez parfois pas besoin de rendre le composant accessible sur chaque action.
-Dans ce cas là, vous pouvez charger à la volée en utilisant la 
-:doc:`Component Collection </core-libraries/collections>`. A partie de l'intérieur 
-d'un controlleur, vous pouvez faire comme ce qui suit::
+Vous n'avez parfois pas besoin de rendre le composant accessible sur chaque 
+action. Dans ce cas là, vous pouvez charger à la volée en utilisant la 
+:doc:`Component Collection </core-libraries/collections>`. A partir de 
+l'intérieur d'un contrôleur, vous pouvez faire comme ce qui suit::
     
     <?php
     $this->OneTimer = $this->Components->load('OneTimer');
@@ -142,8 +143,8 @@ d'un controlleur, vous pouvez faire comme ce qui suit::
 Callbacks des composants
 ========================
 
-Les composants vous offrent aussi quelques callbacks durant le cycle de vie
-qui vous permettent d'augmenter le cycle de la requête. Allez voir l'api
+Les composants vous offrent aussi quelques callbacks durant le cycle de vie 
+qui vous permettent d'augmenter le cycle de la requête. Allez voir l'api 
 :ref:`component-api` pour plus d'informations sur les callbacks possibles 
 des composants.
 
@@ -156,25 +157,26 @@ Nous pourrions créer un composant pour héberger cette logique partagée afin
 de l'utiliser dans plusieurs contrôleurs différents.
 
 La première étape consiste à créer un nouveau fichier et une classe pour 
-le composant. Créez le fichier dans ``/app/Controller/Component/MathComponent.php``.
-La structure de base pour le composant ressemblerait à quelque chose comme ça ::
+le composant. Créez le fichier dans 
+``/app/Controller/Component/MathComponent.php``. La structure de base pour 
+le composant ressemblerait à quelque chose comme ça ::
 
     <?php
     class MathComponent extends Component {
-        public function doComplexOperation($amount1, $amount2) {
-            return $amount1 + $amount2;
+        public function faireDesOperationsComplexes($montant1, $montant2) {
+            return $montant1 + $montant2;
         }
     }
 
 .. note::
 
-    Tous les composant Math doivent étendre :php:class:`Component`. Ne pas le faire
-    vous enverra une exception.
+    Tous les composants comme Math doivent étendre :php:class:`Component`. 
+    Ne pas le faire vous enverra une exception.
 
-Inclure votre composant dans vos controlleurs
----------------------------------------------
+Inclure votre composant dans vos contrôleurs
+--------------------------------------------
 
-Une fois notre composant terminé, nous pouvons l’utiliser au sein
+Une fois notre composant terminé, nous pouvons l’utiliser au sein 
 des contrôleurs de l’application en plaçant son nom 
 (sans la partie "Component") dans le tableau ``$components`` du contrôleur.
 Le contrôleur sera automatiquement pourvu d'un nouvel attribut nommé 
@@ -205,18 +207,18 @@ pris en charge par le Composant::
     );
 
 L'exemple ci-dessus passerait le tableau contenant "precision"
-et "generateurAleatoire" comme second paramètre au
+et "generateurAleatoire" comme second paramètre au 
 ``MathComponent::__construct()``. Par convention, tout paramètre passé
-qui sont aussi des propriétés publiques sur votre composant auront
-les valeurs basés sur ces paramètres.
+qui est aussi une propriété publique sur votre composant aura 
+la valeur basée sur ces paramètres.
 
 Utiliser d'autres Composants dans votre Composant
 -------------------------------------------------
 
 Parfois un de vos composants a besoin d'utiliser un autre composant.
 Dans ce cas, vous pouvez inclure d'autres composants dans votre composant
-exactement de la même manière que dans vos contrôleurs - en utilisant
-``$components`` var::
+exactement de la même manière que dans vos contrôleurs - en utilisant la 
+variable ``$components``::
 
     <?php
     // app/Controller/Component/CustomComponent.php
@@ -252,10 +254,11 @@ API de Component
 
 .. php:class:: Component
 
-    La classe de base de Component vous offre quelques méthodes pour le chargement
-    de faignant des autres Composants à travers :php:class:`ComponentCollection` 
-    comme nous l'avons traité avec la gestion habituelle des paramètres. Elle fournit
-    aussi des prototypes pour tous les callbacks des composants.
+    La classe de base de Component vous offre quelques méthodes pour le 
+    chargement facile des autres Composants à travers 
+    :php:class:`ComponentCollection` comme nous l'avons traité avec la gestion 
+    habituelle des paramètres. Elle fournit aussi des prototypes pour tous 
+    les callbacks des composants.
 
 .. php:method:: __construct(ComponentCollection $collection, $parametres = array())
 
@@ -268,31 +271,34 @@ Les Callbacks
 
 .. php:method:: initialize($controller)
 
-    La méthode initialize est appelée avant la méthode du contrôleur beforeFilter.
+    La méthode initialize est appelée avant la méthode du contrôleur 
+    beforeFilter.
 
 .. php:method:: startup($controller)
 
-    La méthode startup est appelée après la méthode du contrôleur beforeFilter
-    mais avant que le controlleur n'execute l'action prévue.
+    La méthode startup est appelée après la méthode du contrôleur 
+    beforeFilter mais avant que le contrôleur n'exécute l'action prévue.
 
 .. php:method:: beforeRender($controller)
 
-    La méthode beforeRender est appelée après que le contrôleur exécute la logique de
-    l'action requêté, mais avant que le rendu de la vue et le layout du contrôleur.
+    La méthode beforeRender est appelée après que le contrôleur exécute la 
+    logique de l'action requêté, mais avant le rendu de la vue et le 
+    layout du contrôleur.
 
 .. php:method:: shutdown($controller)
 
-    La méthode shutdown est appelée avant que la sortie soit envoyé au navigateur.
+    La méthode shutdown est appelée avant que la sortie soit envoyée au 
+    navigateur.
 
 .. php:method:: beforeRedirect($controller, $url, $status=null, $exit=true)
 
-    La méthode beforeRedirect est invoquée quand la méthode de redirection du contrôleur
-    est appelée, mais avant toute action qui suit. Si cette méthode retourne false, le
-    contrôleur ne continuera pas de rediriger la requête. Les variables $url, $status
-    et $exit ont la même signification que pour la méthode du contrôleur. Vous pouvez
-    aussi retourner une chaîne de caractère qui sera interpretée comme une url pour
-    rediriger ou retourner un array associatif avec la clé 'url' et éventuellement
-    'status' et 'exit'.
+    La méthode beforeRedirect est invoquée quand la méthode de redirection 
+    du contrôleur est appelée, mais avant toute action qui suit. Si cette 
+    méthode retourne false, le contrôleur ne continuera pas de rediriger la 
+    requête. Les variables $url, $status et $exit ont la même signification 
+    que pour la méthode du contrôleur. Vous pouvez aussi retourner une chaîne 
+    de caractère qui sera interpretée comme une url pour rediriger ou retourner 
+    un array associatif avec la clé 'url' et éventuellement 'status' et 'exit'.
 
 
 .. meta::
