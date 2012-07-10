@@ -138,7 +138,7 @@ sistema e não o de um usuário ou de um site específico).
            RewriteEngine On
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+           RewriteRule ^(.*)$ index.php?/$1 [QSA,L]
        </IfModule>
 
    Para muitos serviços de hospedagem (GoDaddy, 1and1), seu servidor web
@@ -157,7 +157,7 @@ sistema e não o de um usuário ou de um site específico).
            RewriteBase /path/to/cake/app
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+           RewriteRule ^(.*)$ index.php?/$1 [QSA,L]
        </IfModule>
 
    Os detalhes dessa mudança vai depender de sua configuração, e pode incluir
