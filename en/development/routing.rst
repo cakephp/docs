@@ -321,6 +321,8 @@ as defined in the routes::
         'slug' => 'CakePHP_Rocks'
     ]);
 
+.. _named-routes::
+
 Using named routes
 ------------------
 
@@ -541,8 +543,6 @@ arguments as values without string keys in the array::
 
 Since ``5`` has a numeric key, it is treated as a passed argument.
 
-.. index:: named parameters
-
 Reverse routing
 ===============
 
@@ -587,6 +587,16 @@ document fragments using special keys::
 Router will also convert any unknown parameters in a routing array to
 querystring parameters.  The ``?`` is offered for backwards compatibility with
 older versions of CakePHP.
+
+Improving performance of routing
+--------------------------------
+
+After connecting many routes, or if you're reverse routing a higher than average
+number of URL's generating URL's can start representing a measurable amout of
+time.  The easiest way to address this issue is to use :ref:`named-routes`.
+Using named routes dramatically changes the internal performance of finding
+matching routes.  Instead of a linear search through a subset of routes, a
+single route is fetched and used for generating a URL.
 
 .. _redirect-routing:
 
