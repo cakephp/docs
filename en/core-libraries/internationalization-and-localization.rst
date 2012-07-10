@@ -98,6 +98,34 @@ or::
     // View code
     echo $this->element(Configure::read('Config.language') . '/tos');
 
+Internationalizing CakePHP Plugins
+===================================
+
+If you want to include translation files within your application you'll need to
+follow a few conventions.
+
+Instead of __() and __n() you will have to use __d() and __dn(). The D means 
+domain. So if you have a plugin called 'DebugKit' you would have to do this::
+
+    <?php
+    __('debug_kit', 'My example text');
+
+Using the underscored syntax is important, if you don't use it CakePHP won't
+find your translation file.
+
+Your translation file for this example should go into::
+
+    /app/Plugin/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
+
+And for other languages than the default::
+
+    /app/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)   
+    /app/Plugin/DebugKit/Locale/fre/LC_MESSAGES/debug_kit.po (French)   
+    /app/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese) 
+
+The reason for that is that CakePHP will use the lower cased and underscored
+plugin name to compare it to the translation domain and is going to look into
+the plugin if there is a match for the given translation file.
 
 Localization in CakePHP
 =======================
