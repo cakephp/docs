@@ -318,6 +318,9 @@ Model Validation
   compatible. It also exposes a rich API to add, modify and remove validation
   rules. Check docs for this object in :doc:`/models/data-validation`.
 
+- Custom validation functions in your models need to have "public" visibility
+  so that they are accessible by ``ModelValidator``.
+
 - New validation rules added:
 
   * :php:meth:`Validation::naturalNumber()`
