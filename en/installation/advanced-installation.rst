@@ -151,7 +151,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
            RewriteEngine On
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+           RewriteRule ^(.*)$ index.php [QSA,L]
        </IfModule>
 
    If your CakePHP site still has problems with mod\_rewrite you might 
@@ -191,7 +191,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
            RewriteBase /path/to/cake/app
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+           RewriteRule ^(.*)$ index.php [QSA,L]
        </IfModule>
 
    The details of those changes will depend on your setup, and can

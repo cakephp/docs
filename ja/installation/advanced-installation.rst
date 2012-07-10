@@ -126,7 +126,7 @@ everything to play nicely on their systems.
            RewriteEngine On
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+           RewriteRule ^(.*)$ index.php [QSA,L]
        </IfModule>
 
    まだあなたのcakephpサイトでmod\_rewriteの問題が起きているなら、仮想ホスト(*virtualhosts*)の設定の変更を試してみるといいかもしれません。
@@ -158,7 +158,7 @@ everything to play nicely on their systems.
            RewriteBase /path/to/cake/app
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+           RewriteRule ^(.*)$ index.php [QSA,L]
        </IfModule>
 
    この変更の詳細は設定に依り、Cakeとは関係ない事柄も含むことがあります。
