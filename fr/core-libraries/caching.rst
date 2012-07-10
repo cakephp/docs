@@ -1,66 +1,77 @@
-Caching
-#######
+La mise en cache
+################
 
-Caching is frequently used to reduce the time it takes to create or read from
-other resources.  Caching is often used to make reading from expensive 
-resources less expensive.  You can easily store the results of expensive queries,
-or remote webservice access that doesn't frequently change in a cache.  Once
-in the cache, re-reading the stored resource from the cache is much cheaper
-than accessing the remote resource.
+La mise en cache est fréquemment utilisée pour réduire le temps pris pour
+créer ou lire depuis une autre ressource. La mise en cache est souvent 
+utilisée pour rendre la lecture de ressources consommatrices en temps en 
+ressources moins consommatrices. Vous pouvez aisément stocker le résultats
+de requêtes consommatrices en ressources, ou des accès a distance a des 
+services web qui ne changent pas fréquemment dans un cache.Une fois dans 
+un cache, re-lire les ressources stockées depuis le cache est moins  
+consommateur en ressource qu'un accès a une ressource distante. 
 
-Caching in CakePHP is primarily facilitated by the :php:class:`Cache` class.
-This class provides a set of static methods that provide a uniform API to 
-dealing with all different types of Caching implementations.  CakePHP
-comes with several cache engines built-in, and provides an easy system 
-to implement your own caching systems. The built-in caching engines are:
+Mettre en cache dans CakePHP est principalement facilité par la classe 
+:php:class:`Cache`. Cette classe fournit un ensemble de méthodes
+statiques qui fournissent une API uniforme pour le traitement des 
+différentes implémentations de mise en cache. CakePHP arrive avec plusieurs
+moteurs de cache intégrés, et fournit un système facile pour implémenter
+votre propre système de mise en cache. Les moteurs de cache intégrés sont:
 
-* ``FileCache`` File cache is a simple cache that uses local files, it 
-  is the slowest cache engine, and doesn't provide as many features for 
-  atomic operations.  However, since disk storage is often quite cheap, 
-  storing large objects, or elements that are infrequently written
-  work well in files.
-* ``ApcCache`` APC cache uses the PHP `APC <http://php.net/apc>`_ extension
-  This extension uses shared memory on the webserver to store objects.
-  This makes it very fast, and able to provide atomic read/write features.
-  By default CakePHP will use this cache engine if it's available.
-* ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
-  extension.  Wincache is similar to APC in features and performance, but 
-  optimized for windows and IIS.
-* ``XcacheEngine`` Similar to APC, `Xcache <http://xcache.lighttpd.net/>`_
-  is a PHP extension that provides similar features to APC.
-* ``MemcacheEngine`` Uses the `Memcache <http://php.net/memcache>`_
-  extension.  Memcache provides a very fast cache system that can be 
-  distributed across many servers, and provides atomic operations.
+* ``FileCache`` File cache est un cache simple qui utilise des fichiers
+  locaux, c'est le moteur de cache le plus lent, et ne fournit que peut
+  de fonctionnalité pour les opérations atomiques. Cependant, le stockage
+  sur disque est souvent peu consommateur en ressource, au stockage de 
+  grands objets, ou des éléments qui sont rarement écrits fonctionnent
+  bien dans les fichiers.
+* ``ApcCache`` Le cache APC utilise l'extension PHP `APC <http://php.net/apc>`_ 
+  Cette extension utilise la mémoire partagée du serveur Web pour stocker
+  les objets. Cela le rend très rapide, et capable de fournir les 
+  fonctionnalités atomiques en lecture/écriture.
+  Par défaut CakePHP utilisera ce moteur de cache si il est disponible.
+* ``Wincache`` utilise l'extension `Wincache <http://php.net/wincache>`_
+  Wincache est similaire aux fonctionnalités APC au niveau des fonctionnalités
+  et des performances, mais optimisé pour Windows et IIS.
+* ``XcacheEngine``  Similaire à APC, `Xcache <http://xcache.lighttpd.net/>`_
+  est une extension PHP qui fournit des fonctionnalités similaires à APC.
+* ``MemcacheEngine`` Utilise l'extension `Memcache <http://php.net/memcache>`_
+  Memcache fournit un cache très rapide qui peut être distribué au travers
+  de nombreux serveurs, et fournit les opérations atomiques.
 
-Regardless of the CacheEngine you choose to use, your application interacts with
-:php:class:`Cache` in a consistent manner.  This means you can easily swap cache engines
-as your application grows. In addition to the :php:class:`Cache` class, the 
-:doc:`/core-libraries/helpers/cache` allows for full page caching, which
-can greatly improve performance as well.
+Quelque soit le moteur de cache que vous choisirez d'utiliser, votre application
+interagit avec :php:class:`Cache` de manière cohérente. Cela signifie que vous
+pouvez aisément permuter les moteurs de cache en fonction de l'évolution de
+votre application. En plus de la classe :php:class:`Cache`, le Helper
+:doc:`/core-libraries/helpers/cache` vous permets la cache pleine page, qui
+peut ainsi grandement améliorer les performances.
+
+Configuration de la classe Cache
+================================
+
+La configuration de la classe Cache peut être effectuée n'importe où, mais
+généralement vous voudrez configurer le cache dans ``app/Config/bootstrap.php``.
+Vous pouvez configurer autant de configurations de cache dont vous avez
+besoin, et utiliser tous les mélanges de moteurs de cache. CakePHP utilise
+deux configurations de cache en interne, qui sont configurés dans
+``app/Config/core.php``. Si vous utilisez APC ou Memcache vous devrez vous
+assurer de définir des clefs uniques pour les caches du noyau. Ceci vous
+évitera que de multiples applications viennent réécrire les données cache
+de l'autre. 
 
 
-Configuring Cache class
-=======================
+L'utilisation de multiples configurations de cache peut aider à réduire 
+le nombre de fois ou vous aurez à utiliser :php:func:`Cache::set()` .
+Aussi bien que centraliser tout vos paramètres de cache. L'utilisation
+de configurations multiples vous permets également de changer le stockage
+comme vous l'entendez.
 
-Configuring the Cache class can be done anywhere, but generally
-you will want to configure Cache in ``app/Config/bootstrap.php``.  You
-can configure as many cache configurations as you need, and use any 
-mixture of cache engines.  CakePHP uses two cache configurations internally,
-which are configured in ``app/Config/core.php``. If you are using APC or
-Memcache you should make sure to set unique keys for the core caches.  This will
-prevent multiple applications from overwriting each other's cached data.
-
-Using multiple cache configurations can help reduce the
-number of times you need to use :php:func:`Cache::set()` as well as
-centralize all your cache settings.  Using multiple configurations
-also lets you incrementally change the storage as needed.
 
 .. note::
 
-    You must specify which engine to use. It does **not** default to
-    File.
+    Vous devez spécifier quel moteur utiliser. Il ne met **pas** par défaut
+    à `File`.
+    
 
-Example::
+Exemple::
 
     <?php
     Cache::config('short', array(
@@ -78,102 +89,114 @@ Example::
         'path' => CACHE . 'long' . DS,  
     ));
 
-By placing the above code in your ``app/Config/bootstrap.php`` you will
-have two additional Cache configurations. The name of these
-configurations 'short' or 'long' is used as the ``$config``
-parameter for :php:func:`Cache::write()` and :php:func:`Cache::read()`.
+En insérant le code ci-dessus dans votre ``app/Config/bootstrap.php`` vous
+aurez deux configurations de cache additionnelles. Le nom de ces 
+configurations 'short' ou 'long' est utilisé comme le paramètre ``$config``
+pour :php:func:`Cache::write()` et  :php:func:`Cache::read()`.
+
 
 .. note::
 
-    When using the FileEngine you might need to use the ``mask`` option to
-    ensure cache files are made with the correct permissions.
+    Quand vous utilisez le moteur FileEngine vous pourriez avoir besoin de
+    l'option ``mask`` pour vous assurer que les fichiers cachés sont
+    créés avec les bonnes permissions.
 
-Creating a storage engine for Cache
-===================================
+    
+Création d'un moteur de stockage pour le cache
+==============================================
 
-You can provide custom ``Cache`` adapters in ``app/Lib`` as well
-as in plugins using ``$plugin/Lib``. App/plugin cache engines can
-also override the core engines. Cache adapters must be in a cache
-directory. If you had a cache engine named ``MyCustomCacheEngine``
-it would be placed in either ``app/Lib/Cache/Engine/MyCustomCacheEngine.php``
-as an app/libs. Or in ``$plugin/Lib/Cache/Engine/MyCustomCacheEngine.php`` as
-part of a plugin. Cache configs from plugins need to use the plugin
-dot syntax.::
+Vous pouvez fournir vos propre adaptateurs ``Cache`` dans ``app/Lib``
+aussi bien que dans un plugin en utilisant  ``$plugin/Lib``.
+Les moteurs de cache App/plugin peuvent aussi  remplacer les moteurs
+du noyau. Les adaptateurs de cache doivent être dans un répertoire cache.
+Si vous avez un moteur de cache nommé ``MonMoteurDeCachePerso`` il devra
+être placé soit dans ``app/Lib/Cache/Engine/MonMoteurDeCachePerso.php``
+comme une app/libs. Ou dans ``$plugin/Lib/Cache/Engine/MonMoteurDeCachePerso.php``
+comme partie d'un plugin. Les configurations de cache provenant de plugin
+doivent utiliser la notation par points de plugin.::
+
 
     <?php
     Cache::config('custom', array(
-        'engine' => 'CachePack.MyCustomCache',
+        'engine' => 'PackCache.MonCachePerso',
         ...
     ));
 
 .. note::
 
-    App and Plugin cache engines should be configured in
-    ``app/Config/bootstrap.php``. If you try to configure them in core.php
-    they will not work correctly.
+    Le cache App et plugin doit être configuré dans
+    ``app/Config/bootstrap.php``. Si vous essayez de les configurer
+    dans core.php il ne fonctionneront pas correctement.
 
-Custom Cache engines must extend :php:class:`CacheEngine` which defines
-a number of abstract methods as well as provides a few initialization 
-methods.
+Les moteurs de cache personnalisés doivent entendre 
+:php:class:`CacheEngine` qui définit un nombre de méthodes d'abstraction
+ainsi que quelques méthodes d'initialisation.    
 
-The required API for a CacheEngine is
+
+L'API requise pour le moteur de cache est
+
 
 .. php:class:: CacheEngine
 
-    The base class for all cache engines used with Cache.
+    La classe de base pour tous les moteurs de cache utilisé avec le Cache.
 
 .. php:method:: write($key, $value, $duration)
 
-    :return: boolean for success.
+    :retourne: un booléen en cas de succès.
 
-    Write value for a key into cache, $duration specifies
-    how long the entry should exist in the cache.
+    Écrit la valeur d'une clef dans le cache, $duration spécifie
+    la durée ou l'entrée existera dans le cache
 
 .. php:method:: read($key)
 
-    :return: The cached value or false for failure.
+    :retourne: La valeur cachée ou false en cas d'échec.
 
-    Read a key from the cache.  Return false to indicate
-    the entry has expired or does not exist.
-
+    Lit une clef depuis le cache. Retourne false pour indiquer
+    que l'entrée à expirée ou n'existe pas.
+    
 .. php:method:: delete($key)
 
-    :return: Boolean true on success.
+    :retourne: Un booléen true en cas de succès.
 
-    Delete a key from the cache. Return false to indicate that
-    the entry did not exist or could not be deleted.
+    Efface une clef depuis le cache. Retourne false pour indiquer que
+    l'entrée n'existe pas ou ne peut être effacée.
 
 .. php:method:: clear($check)
 
-    :return: Boolean true on success.
+    :retourne: Un Booléen true en cas de succès.
 
-    Delete all keys from the cache.  If $check is true, you should
-    validate that each value is actually expired.
+    Efface toutes les clefs depuis le cache. Si $check est true, vous devez
+    valider que chacune des valeurs est actuellement expirée.
 
+    
 .. php:method:: decrement($key, $offset = 1)
 
-    :return: Boolean true on success.
+    :retourne: Un booléen true en cas de succès.
 
-    Decrement a number under the key and return decremented value
-
+    Décrémente un nombre dans la clef et retourne la valeur décrémentée
+   
 .. php:method:: increment($key, $offset = 1)
 
-    :return: Boolean true on success.
+    :retourne: Un bouléen true en cas de succès.
 
-    Increment a number under the key and return incremented value
-
+    Incrémente un nombre dans la clef et retourne la valeur incrémentée
+   
 .. php:method:: gc()
 
-    Not required, but used to do clean up when resources expire.
-    FileEngine uses this to delete files containing expired content.
+    Non requit, mais utilisé pour faire du nettoyage quand les ressources expires.
+    Le moteur FileEngine utilise cela pour effacer les fichiers qui contiennent des
+    contenus expirés
 
-Using Cache to store common query results
-=========================================
+    
+Utilisation du Cache pour stocker le résultat des requêtes les plus courantes
+=============================================================================
 
-You can greatly improve the performance of your application by putting
-results that infrequently change, or that are subject to heavy reads into the
-cache.  A perfect example of this are the results from :php:meth:`Model::find()`
-A method that uses Cache to store results could look like::
+Vous pouvez considérablement améliorer les performances de vos applications
+en plaçant les résultats qui ne changent que peu fréquemment, ou qui peuvent
+être sujets à de nombreuses lectures dans le cache. Un exemple parfait de
+ceci sont les résultats d'un find :php:meth:`Model::find()`
+Une méthode qui utilise Le Cache pour stocker les résultats pourrait ressembler à
+cela ::
 
     <?php 
     class Post extends AppModel {
@@ -188,66 +211,71 @@ A method that uses Cache to store results could look like::
         }
     }
 
-You could improve the above code by moving the cache reading logic into
-a behavior, that read from the cache, or ran the associated model method.
-That is an exercise you can do though.
+Vous pouvez améliorer le code ci-dessus en déplaçant la lecture du cache 
+dans un comportement, qui lit depuis le cache, ou qui exécute les méthodes
+de modèle. 
+C'est un exercice que vous pouvez faire.
 
 
-Using Cache to store counters
-=============================
+Utilisation du Cache pour stocker les compteurs
+==============================================
 
-Counters for various things are easily stored in a cache.  For example a simple
-countdown for remaining 'slots' in a contest could be store in Cache.  The
-Cache class exposes atomic ways to increment/decrement counter values in an easy
-way.  Atomic operations are important for these values as it reduces the risk of
-contention, and ability for two users to simultaneously lower the value by one
-resulting in an incorrect value.
+L'utilisation de compteurs dans le cache peut être une chose intéressante. Par
+exemple un simple compte à rebours pour retenir les 'slots' restants d'un concours 
+pourraient être stockés en Cache. La classe Cache propose des moyens atomiques pour
+incrémenter/décrémenter des valeurs de compteur facilement.
+Les opérations atomiques sont importantes pour ces valeurs parce que ça réduit
+le risque de contention, et la capacité de deux utilisateurs à simultanément
+en abaisser la valeur et de résulter à une valeur incorrecte.
 
-After setting an integer value you can manipulate it using 
+Après avoir définit une valeur entière vous pouvez la manipuler en utilisant
 :php:meth:`Cache::increment()` and :php:meth:`Cache::decrement()`::
 
+
     <?php
-    Cache::write('initial_count', 10);
+    Cache::write('compteur_initial', 10);
 
     // Later on
-    Cache::decrement('initial_count');
+    Cache::decrement('compteur_initial');
 
     //or 
-    Cache::increment('initial_count');
+    Cache::increment('compteur_initial');
 
 .. note::
 
-    Incrementing and decrementing do not work with FileEngine. You should use
-    APC or Memcache instead.
+    L'incrémentation et la décrémentation ne fonctionne pas avec le moteur FileEngine.
+    Vous devez utiliser APC ou Memcache en remplacement.
 
-
-Cache API
-=========
+    
+l'API Cache
+===========
 
 .. php:class:: Cache
 
-    The Cache class in CakePHP provides a generic frontend for several
-    backend caching systems. Different Cache configurations and engines
-    can be setup in your app/Config/core.php
+    La classe Cache dans CakePHP fournit un frontend générique pour
+    plusieurs systèmes de cache backend. Différentes configurations
+    de Cache et de moteurs peuvent être configurés dans votre
+    app/Config/core.php
 
 .. php:staticmethod:: config($name = null, $settings = array())
 
-    ``Cache::config()`` is used to create additional Cache
-    configurations. These additional configurations can have different
-    duration, engines, paths, or prefixes than your default cache
-    config. 
+    ``Cache::config()`` est utilisé pour créer des configurations 
+    de cache supplémentaire. Ces configurations supplémentaires
+    peuvent avoir différentes durées, moteurs, chemins, ou préfixes
+    que la configuration par défaut du cache.
 
 .. php:staticmethod:: read($key, $config = 'default')
 
-    Cache::read() is used to read the cached value stored under
-    ``$key`` from the ``$config``. If $config is null the default
-    config will be used. ``Cache::read()`` will return the cached value
-    if it is a valid cache or ``false`` if the cache has expired or
-    doesn't exist. The contents of the cache might evaluate false, so
-    make sure you use the strict comparison operator ``===`` or
-    ``!==``.
+    Cache::read() est utilisé pour lire la valeur en cache stockée
+    dans ``$key`` depuis le ``$config``. Si $config est null la
+    configuration par défaut sera utilisée. ``Cache::read()`` retournera
+    la valeur en cache si c'est un cache valide ou ``false`` si le
+    cache a expiré ou n'existe pas. Le contenu du cache pourrait
+    évaluer false, donc soyez sure que vous utilisez l'opérateur
+    de comparaison stricte ``===`` ou ``!==``.
 
-    For example::
+    
+    Par exemple::
 
         <?php
         $cloud = Cache::read('cloud');
@@ -256,82 +284,85 @@ Cache API
             return $cloud;
         }
 
-        // generate cloud data
+        // génération des données cloud
         // ...
 
-        // store data in cache
+        // stockage des donnée en cache 
         Cache::write('cloud', $cloud);
         return $cloud;
 
 
 .. php:staticmethod:: write($key, $value, $config = 'default')
 
-    Cache::write() will write a $value to the Cache. You can read or
-    delete this value later by referring to it by ``$key``. You may
-    specify an optional configuration to store the cache in as well. If
-    no ``$config`` is specified default will be used. Cache::write()
-    can store any type of object and is ideal for storing results of
-    model finds.::
+    Cache::write() Ecrira $value dans le cache. Vous pouvez lire ou 
+    effacer cette valeur plus tard en vous y référant avec ``$key``..
+    Vous pouvez spécifier une configuration optionnelle pour stocker
+    le cache. Si il n'y a pas de ``$config`` de spécifié c'est la
+    configuration par défaut qui sera appliquée. Cache::write()
+    peut stocker n'importe quel type d'objet est est idéal pour
+    stocker les résultats des finds de vos modèles.::
 
+   
             if (($posts = Cache::read('posts')) === false) {
                 $posts = $this->Post->find('all');
                 Cache::write('posts', $posts);
             }
 
-    Using Cache::write() and Cache::read() to easily reduce the number
-    of trips made to the database to fetch posts.
+   Utiliser Cache::write() et Cache::read() pour aisément réduire le nombre
+   de déplacement fait dans la base de donnée pour rechercher les posts.
 
 .. php:staticmethod:: delete($key, $config = 'default')
 
-    ``Cache::delete()`` will allow you to completely remove a cached
-    object from the Cache store.
-
+    ``Cache::delete()`` vous permets d'enlever complètement un objet en cache
+    du lieu de stockage.
+    
 .. php:staticmethod:: set($settings = array(), $value = null, $config = 'default')
 
-    ``Cache::set()`` allows you to temporarily override a cache configs
-    settings for one operation (usually a read or write). If you use
-    ``Cache::set()`` to change the settings for a write, you should
-    also use ``Cache::set()`` before reading the data back in. If you
-    fail to do so, the default settings will be used when the cache key
-    is read.::
+     ``Cache::set()`` vous permets de réécrire temporairement les paramètres 
+    de configs pour une opération (habituellement une lecture ou écriture). 
+    Si vous utilisez ``Cache::set()`` pour changer les paramètres pour une
+    écriture, vous devez aussi utiliser ``Cache::set()`` avant de lire les données
+    en retour. Si vous ne faites pas cela, les paramètres par défauts seront 
+    utilisés quand la clef de cache est lu.::
 
+   
         <?php
         Cache::set(array('duration' => '+30 days'));
         Cache::write('results', $data);
     
-        // Later on
+        // plus tard
     
         Cache::set(array('duration' => '+30 days'));
         $results = Cache::read('results');
 
-    If you find yourself repeatedly calling ``Cache::set()`` perhaps
-    you should create a new :php:func:`Cache::config()`. This will remove the 
-    need to call ``Cache::set()``.
+    Si vous trouvez que vous répétez l'appel à ``Cache::set()`` peut être
+    devriez-vous créer une nouvelle  :php:func:`Cache::config()`. Qui 
+    enlèvera les besoins d'appeler ``Cache::set()``.
 
+    
 .. php:staticmethod:: increment($key, $offset = 1, $config = 'default')
 
-    Atomically increment a value stored in the cache engine. Ideal for
-    modifing counters or semaphore type values.
-
+    Incrémente de manière atomique une valeur stockée dans le moteur de cache.
+    Idéal pour modifier un compteur ou des valeurs de sémaphore.
+   
 .. php:staticmethod:: decrement($key, $offset = 1, $config = 'default')
 
-    Atomically decrement a value stored in the cache engine. Ideal for
-    modifing counters or semaphore type values.
+    Décrémente de manière atomique une valeur stockée dans le moteur de cache.
+    Idéal pour modifier un compteur ou des valeurs de sémaphore.
 
 .. php:staticmethod:: clear($check, $config = 'default')
 
-    Destroy all cached values for a cache configuration.  In engines like Apc,
-    Memcache and Wincache, the cache configuration's prefix is used to remove
-    cache entries.  Make sure that different cache configurations have different
-    prefixes.
+    Détruit toutes les valeurs en cache pour une configuration de cache. Dans
+    les moteurs comme Apc, Memcache et Wincache le préfixe de configuration de
+    cache est utilisé pour enlever les entrées de cache.
+    Soyez sûre que différentes configuration de cache ont différent préfixe.
 
 .. php:staticmethod:: gc($config)
 
-    Garbage collects entries in the cache configuration.  This is primarily
-    used by FileEngine. It should be implemented by any Cache engine
-    that requires manual eviction of cached data.
-
-
+    Entrée Garbage collects dans la configuration du cache . Utiliser principalement
+    par FileEngine. Il devrait être mis en œuvre par n'importe quel moteur de cache
+    qui requiert des évictions manuelle de donnée en cache.
+    
 .. meta::
     :title lang=en: Caching
     :keywords lang=en: uniform api,xcache,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apc,memcache,queries,cakephp,elements,servers,memory
