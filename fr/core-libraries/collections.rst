@@ -49,7 +49,7 @@ sur eux::
     $this->Components->unload('Cookie');
     $this->Cookie->read(); // Fatal error.
 
-Déclanchement de callbacks
+Déclenchement de callbacks
 ===========================
 
 Les callbacks sont supportés par les collections d'objets. Quand une collection
