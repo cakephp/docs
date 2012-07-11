@@ -1,82 +1,89 @@
-CakePHP Structure
-#################
+Structure de CakePHP
+####################
 
-CakePHP features Controller, Model, and View classes, but it also
-features some additional classes and objects that make development
-in MVC a little quicker and more enjoyable. Components, Behaviors,
-and Helpers are classes that provide extensibility and reusability
-to quickly add functionality to the base MVC classes in your
-applications. Right now we’ll stay at a higher level, so look for
-the details on how to use these tools later on.
+CakePHP dispose de classes de Contrôleurs, de Modèles, et de Vues, mais il 
+dispose de classes et objets supplémentaires qui rendent le développement 
+en MVC plus rapide et amusant. 
+Les Composants (Components), Comportements (Behaviors) et Assistants (Helpers) 
+sont des classes qui offrent une extensibilité et une réutilisation, 
+permettant d'ajouter rapidement des fonctionnalités aux classes MVC 
+de base de vos applications. A ce stade de lecture, nous survolerons ces 
+concepts, mais vous pourrez découvrir comment utiliser ces outils en 
+détails plus tard.
 
-Application Extensions
-======================
+Extensions de l'Application
+===========================
 
-Controllers, helpers and models each have a parent class you can use to define
-application-wide changes. AppController (located at
-``/app/Controller/AppController.php``), AppHelper (located at
-``/app/View/Helper/AppHelper.php``) and AppModel (located at
-``/app/Model/AppModel.php``) are great places to put methods you want to share
-between all controllers, helpers or models.
+Contrôleurs, Helpers et Modèles ont chacun une classe parente, que vous 
+pouvez utiliser pour définir des modifications impactant toute l'application. 
+AppController (disponible dans ``/app/Controller/AppController.php``), 
+AppHelper (disponible dans ``/app/View/Helper/AppHelper.php``) et 
+AppModel (disponible dans ``/app/Model/AppModel.php``) sont de bons choix 
+pour écrire les méthodes que vous souhaitez partager entre tous vos 
+contrôleurs, helpers ou modèles.
 
-Although they aren’t classes or files, routes play a role in
-requests made to CakePHP. Route definitions tell CakePHP how to map
-URLs to controller actions. The default behavior assumes that the
-URL ``/controller/action/var1/var2`` maps to
-Controller::action($var1, $var2), but you can use routes to
-customize URLs and how they are interpreted by your application.
+Bien qu'elles ne soient pas une classe ou un fichier, les Routes jouent un 
+rôle important dans les requêtes faites à CakePHP. La définition des routes 
+indique à CakePHP comment lier les URLs aux actions des contrôleurs. Le 
+comportement par défaut suppose que l'URL ``/controller/action/var1/var2`` est 
+liée au Controller::action($var1, $var2) et à son action "action" qui prend deux 
+paramètres ($var1, $var2). Mais vous pouvez utiliser les routes pour 
+personnaliser les URLs et la manière dont elles sont interprétées par votre 
+application.
 
-Some features in an application merit packaging as a whole. A
-plugin is a package of models, controllers and views that
-accomplishes a specific purpose that can span multiple
-applications. A user management system or a simplified blog might
-be a good fit for CakePHP plugins.
+Il peut être judicieux de regrouper certaines fonctionnalités. Un Greffon 
+ou Plugin est un ensemble de modèles, de contrôleurs et de vues qui 
+accomplissent une tâche spécifique pouvant s'étendre à plusieurs applications. 
+Un système de gestion des utilisateurs ou un blog simplifié pourraient être de 
+bons exemples de "plugins" CakePHP.
 
+Extensions du Controller ("Components")
+=======================================
 
-Controller Extensions ("Components")
-====================================
+Un Composant (Component) est une classe qui s'intègre dans la logique du 
+contrôleur. Si vos contrôleurs ou vos applications doivent partager une 
+logique, alors créer un Composant est une bonne solution. A titre d'exemple, 
+la classe intégrée EmailComponent rend triviale la création et l'envoi de 
+courriels. Plutôt que d'écrire une méthode dans un seul contrôleur qui effectue 
+ce traitement, vous pouvez empaqueter ce code et ainsi le partager.
 
-A Component is a class that aids in controller logic. If you have
-some logic you want to share between controllers (or applications),
-a component is usually a good fit. As an example, the core
-EmailComponent class makes creating and sending emails a snap.
-Rather than writing a controller method in a single controller that
-performs this logic, you can package the logic so it can be
-shared.
+Les contrôleurs sont également équipés de fonctions de rappel (callbacks). 
+Ces fonctions sont à votre disposition au cas où vous avez besoin d'ajouter 
+du code entre les différentes opérations internes de CakePHP. Les callbacks 
+disponibles sont :
 
-Controllers are also fitted with callbacks. These callbacks are
-available for your use, just in case you need to insert some logic
-between CakePHP’s core operations. Callbacks available include:
+-  ``beforeFilter()``, exécutée avant toute action d'un contrôleur
+-  ``beforeRender()``, exécuté après le traitement du contrôleur, mais avant 
+    l'affichage de la vue
+-  ``afterFilter()``, exécuté après la logique du contrôleur, y compris 
+    l'affichage de la vue. Il peut n'y avoir aucune différence entre 
+    ``beforeRender()`` et ``afterFilter()``, à moins que vous n'ayez effectué 
+    un appel manuel à ``render()`` dans les actions de votre contrôleur et 
+    que vous ayez inclus du code après cet appel.
 
--  ``beforeFilter()``, executed before any controller action logic
--  ``beforeRender()``, executed after controller logic, but before
-   the view is rendered
--  ``afterFilter()``, executed after all controller logic,
-   including the view render. There may be no difference between
-   ``afterRender()`` and ``afterFilter()`` unless you’ve manually made
-   a call to ``render()`` in your controller action and have included
-   some logic after that call.
+Extensions du Modèle ("Behaviors")
+==================================
 
-Model Extensions ("Behaviors")
-==============================
+De même, les Comportements ou Behaviors fonctionnent comme des passerelles pour 
+ajouter une fonctionnalité commune aux modèles. Par exemple, si vous stockez 
+les données d'un utilisateur dans une structure en arbre, vous pouvez spécifier 
+que votre modèle Utilisateur se comporte comme un arbre, et il acquèrera 
+automatiquement la capacité de suppression, d'ajout, et de déplacement des 
+noeuds dans votre structure en arbre sous-jacente.
 
-Similarly, Behaviors work as ways to add common functionality
-between models. For example, if you store user data in a tree
-structure, you can specify your User model as behaving like a tree,
-and gain free functionality for removing, adding, and shifting
-nodes in your underlying tree structure.
+Les modèles sont aussi soutenus par une autre classe nommée une DataSource 
+(source de données). Il s'agit d'une couche d'abstraction qui permet aux 
+modèles de manipuler différents types de données de manière consistante. La 
+plupart du temps la source principale de données dans CakePHP est une base 
+de données, vous pouvez cependant écrire des DataSources additionnelles pour 
+représenter des flux RSS, des fichiers CSV, des entrées LDAP ou des évènements 
+iCal. Les DataSources vous permettent d'associer des enregistrements issus de 
+sources différentes : plutôt que d'être limité à des jointures SQL, les 
+DataSources vous permettent de dire à votre modèle LDAP qu'il est associé à 
+plusieurs événements iCal.
 
-Models also are supported by another class called a DataSource.
-DataSources are an abstraction that enable models to manipulate
-different types of data consistently. While the main source of data
-in a CakePHP application is often a database, you might write
-additional DataSources that allow your models to represent RSS
-feeds, CSV files, LDAP entries, or iCal events. DataSources allow
-you to associate records from different sources: rather than being
-limited to SQL joins, DataSources allow you to tell your LDAP model
-that it is associated to many iCal events.
-
-Just like controllers, models are featured with callbacks as well:
+Tout comme les contrôleurs, les modèles sont également caractérisés par des 
+fonctions de rappel (callbacks) :
 
 -  beforeFind()
 -  afterFind()
@@ -86,24 +93,26 @@ Just like controllers, models are featured with callbacks as well:
 -  beforeDelete()
 -  afterDelete()
 
-The names of these methods should be descriptive enough to let you
-know what they do. You can find the details in the models chapter.
+Les noms de ces méthodes devraient être suffisamment explicites pour que 
+vous compreniez leurs rôles. Vous obtiendrez plus de détails dans le chapître 
+sur les modèles.
 
-View Extensions ("Helpers")
-===========================
+Extension de la Vue ("Helpers")
+===============================
 
-A Helper is a class that aids in view logic. Much like a component
-used among controllers, helpers allow presentational logic to be
-accessed and shared between views. One of the core helpers,
-AjaxHelper, makes Ajax requests within views much easier.
+Un Helper ou assistant est une classe d'assistance pour les vues. De même 
+que les composants sont utilisés par plusieurs contrôleurs, les assistants 
+permettent à différentes vues d'accéder et de partager une même logique de 
+présentation. L'un des assistants intégrés à Cake, AjaxHelper, facilite les 
+requêtes Ajax dans les vues.
 
-Most applications have pieces of view code that are used
-repeatedly. CakePHP facilitates view code reuse with layouts and
-elements. By default, every view rendered by a controller is placed
-inside a layout. Elements are used when small snippets of content
-need to be reused in multiple views.
+La plupart des applications ont des portions de code pour les vues qui sont 
+répétitives. CakePHP facilite la réutilisabilité de ce code grâce aux Layouts 
+(mises en pages) et aux Elements. Par défaut, toutes les vues affichées par 
+un contrôleur ont le même layout. Les elements sont utilisés lorsque de petites 
+portions de contenu doivent apparaître dans plusieurs vues.
 
 
 .. meta::
-    :title lang=en: CakePHP Structure
-    :keywords lang=en: user management system,controller actions,application extensions,default behavior,maps,logic,snap,definitions,aids,models,route map,blog,plugins,fit
+    :title lang=fr: Structure de CakePHP
+    :keywords lang=fr: gestion d'utilisateurs system,actions du contrôleur,application extensions,défaut behavior,maps,logique,snap,définitions,aids,modèles,route map,blog,plugins,fit

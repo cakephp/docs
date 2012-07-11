@@ -1,8 +1,8 @@
-CakePHP Folder Structure
-########################
+Structure du dossier de CakePHP
+###############################
 
-After you've downloaded and extracted CakePHP, these are the files
-and folders you should see:
+Après avoir téléchargé et extrait CakePHP, voici les fichiers et 
+répertoires que vous devriez voir :
 
 -  app
 -  lib
@@ -12,67 +12,71 @@ and folders you should see:
 -  index.php
 -  README
 
-You'll notice three main folders:
+Vous remarquerez trois dossiers principaux :
 
--  The *app* folder will be where you work your magic: it’s where
-   your application’s files will be placed.
--  The *lib* folder is where we’ve worked our magic. Make a
-   personal commitment **not** to edit files in this folder. We can’t
-   help you if you’ve modified the core.
--  Finally, the *vendors* folder is where you’ll place third-party
-   PHP libraries you need to use with your CakePHP applications.
+-  Le dossier *app* sera celui où vous exercerez votre magie : c'est là 
+   que vous placerez les fichiers de votre application.
+-  Le dossier *lib* est l'endroit où nous avons exercé notre propre magie. 
+   Engagez-vous personnellement à ne **pas** modifier les fichiers dans ce 
+   dossier. Nous ne pourrons pas vous aider si vous avez modifié le cœur 
+   du framework.
+-  Enfin, le dossier *vendors* est l'endroit où vous placerez vos librairies 
+   PHP tierces dont vous avez besoin pour vos applications CakePHP.
 
-The App Folder
+Le dossier App
 ==============
 
-CakePHP’s app folder is where you will do most of your application
-development. Let’s look a little closer at the folders inside of
-app.
+Le répertoire app de CakePHP est l'endroit où vous réaliserez la majorité 
+du développement de votre application. Regardons de plus près le contenu de 
+ce répertoire.
 
 Config
-    Holds the (few) configuration files CakePHP uses. Database
-    connection details, bootstrapping, core configuration files and
-    more should be stored here.
+    Contient les (quelques) fichiers de configuration utilisés par CakePHP. 
+    Informations de connexion à la base de données, démarrage, fichiers de 
+    configuration de base et tous fichiers du même genre doivent être rangés 
+    ici.
 Controller
-    Contains your application’s controllers and their components.
+    Contient vos contrôleurs et leurs composants.
 Lib
     Contains 1st party libraries that do not come from 3rd parties or
     external vendors. This allows you to separate your organization's
     internal libraries from vendor libraries.
 Locale
-    Stores string files for internationalization.
+    Stocke les fichiers pour l'internationalisation.
 Model
-    Contains your application’s models, behaviors, and datasources.
+    Pour les modèles, comportements et sources de données de votre 
+    application.
 Plugin
-    Contains plugin packages.
+    Contient les packages des Plugins.
 tmp
-    This is where CakePHP stores temporary data. The actual data it
-    stores depends on how you have CakePHP configured, but this folder
-    is usually used to store model descriptions, logs, and sometimes
-    session information.
+    C'est ici que CakePHP enregistre les données temporaires. La manière dont 
+    sont stockées les données actuelles dépend de la configuration que vous 
+    avez effectuée, mais ce répertoire est habituellement utilisé pour déposer 
+    les descriptions de modèles, les logs et parfois les informations de 
+    session.
 
-    Make sure that this folder exists and that it is writable,
-    otherwise the performance of your application will be severely
-    impacted. In debug mode, CakePHP will warn you if it is not the
-    case.
+    Assurez vous que ce dossier existe et qu'il est en écriture, autrement la 
+    performance de votre application sera sévèrement impactée. En mode debug, 
+    CakePHP vous avertira si ce n'est pas le cas.
 
 Vendor
-    Any third-party classes or libraries should be placed here. Doing
-    so makes them easy to access using the App::import('vendor',
-    'name') function. Keen observers will note that this seems
-    redundant, as there is also a vendors folder at the top level of
-    our directory structure. We'll get into the differences between the
-    two when we discuss managing multiple applications and more complex
-    system setups.
+    Toutes classes ou librairies tierces doivent être mises ici, de sorte qu'il 
+    sera facile d'y accéder par la fonction App::import('vendor','name'). Les 
+    observateurs avisés noteront que cela semble redondant avec le répertoire 
+    "vendors" à la racine de l'arborescence. Nous aborderons les différences 
+    entre les deux lorsque nous discuterons de la gestion multi-applications 
+    et des configurations systèmes plus complexes.
+    
 View
-    Presentational files are placed here: elements, error pages,
-    helpers, layouts, and view files.
+    Les fichiers de présentation sont placés ici : éléments, pages d'erreur, 
+    helpers, layouts et vues.
+    
 webroot
-    In a production setup, this folder should serve as the document
-    root for your application. Folders here also serve as holding
-    places for CSS stylesheets, images, and JavaScript files.
-
+    Dans un environnement de production, ce dossier doit être la racine de 
+    votre application. Les sous-répertoires sont utilisés pour les feuilles 
+    de style CSS, les images et les fichiers Javascript.
+    
 
 .. meta::
-    :title lang=en: CakePHP Folder Structure
-    :keywords lang=en: internal libraries,core configuration,model descriptions,external vendors,connection details,folder structure,party libraries,personal commitment,database connection,internationalization,configuration files,folders,application development,readme,lib,configured,logs,config,third party,cakephp
+    :title lang=fr: Structure du dossier de CakePHP
+    :keywords lang=fr: librairies internes,configuration du coeur,descriptions du modèle,librairies externes,détails de connection,structure de dossier,librairies tierces,engagement personnel,connexion base de données,internationalisation,fichiersd e configuration,dossiers,développement de l'application,à lire,lib,configuré,logs,config,tierce partie,cakephp

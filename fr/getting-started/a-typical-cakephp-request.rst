@@ -47,4 +47,4 @@ Noir = élément obligatoire, Gris = élément optionnel, Bleu = rappel (callbac
 
 .. meta::
     :title lang=fr: Une requête CakePHP typique
-    :keywords lang=fr: élement optionnel,modèle utilisation,contrôleur classe,custom cake,business logic,exemple requête,requête url,flow diagram,ingrédients basiques,bases de données,envoyer emails,callback,cakes,manipulation,authentification,router,web server,paramètres,cakephp,modèles
+    :keywords lang=fr: élement optionnel,modèle utilisation,contrôleur classe,custom cake,business logic,exemple requête,requête url,flow diagram,ingrédients basiques,bases de données,envoyer emails,callback,cakes,manipulation,authentification,router,serveur web,paramètres,cakephp,modèles
