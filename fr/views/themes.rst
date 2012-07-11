@@ -1,85 +1,93 @@
-Themes
+Thèmes
 ######
 
-You can take advantage of themes, making it easy to switch the look and feel of
-your page quickly and easily.
+Vous pouvez profiter des thèmes, ce qui facilite le changement du look and feel 
+de votre page rapidement et facilement.
 
-To use themes, specify the theme name in your
-controller::
+Pour utiliser les thèmes, spécifiez le nom du thème dans votre contrôleur::
 
     <?php
-    class ExampleController extends AppController {
-        public $theme = 'Example';
+    class ExempleController extends AppController {
+        public $theme = 'Exemple';
     }
 
     .. versionchanged:: 2.1
-        Versions previous to 2.1 required setting the ``$this->viewClass = 'Theme'``.
-        2.1 removes this requirement as the normal ``View`` class supports themes
+        Les version antérieures à 2.1 ont besoin de définir 
+        ``$this->viewClass = 'Theme'``.
+        2.1 enlève cette condition puisque la classe normale ``View`` class 
+        supporte les thèmes.
 
-You can also set or change the theme name within an action or within the
-``beforeFilter`` or ``beforeRender`` callback functions::
-
-    <?php
-    $this->theme = 'AnotherExample';
-
-Theme view files need to be within the ``/app/View/Themed/`` folder.  Within the
-themed folder, create a folder using the same name as your theme name. Beyond
-that, the folder structure within the ``/app/View/Themed/Example/`` folder is
-exactly the same as ``/app/View/``.
-
-For example, the view file for an edit action of a Posts controller would reside
-at ``/app/View/Themed/Example/Posts/edit.ctp``. Layout files would reside in
-``/app/View/Themed/Example/Layouts/``.
-
-If a view file can't be found in the theme, CakePHP will try to locate the view
-file in the ``/app/View/`` folder. This way, you can create master view files
-and simply override them on a case-by-case basis within your theme folder.
-
-Theme assets
-------------
-
-Themes can contain static assets as well as view files.  A theme can include any
-necessary assets in its webroot directory. This allows for easy packaging and
-distribution of themes.  While in development, requests for theme assets will be
-handled by :php:class:`Dispatcher`.  To improve performance for production
-environments, it's recommended that you either symlink or copy theme assets into
-the application's webroot. See below for more information.
-
-To use the new theme webroot create directories like
-``app/View/Themed/<themeName>/webroot<path_to_file>`` in your theme. The
-Dispatcher will handle finding the correct theme assets in your view paths.
-
-All of CakePHP's built-in helpers are aware of themes and will create the
-correct paths automatically. Like view files, if a file isn't in the theme
-folder, it will default to the main webroot folder::
+Vous pouvez également définir ou modifier le nom du thème dans une action ou 
+dans les fonctions de callback``beforeFilter`` ou ``beforeRender``::
 
     <?php
-    //When in a theme with the name of 'purple_cupcake'
+    $this->theme = 'AutreExemple';
+
+Les fichiers de vue du thème ont besoin d'être dans le dossier 
+``/app/View/Themed/``. Dans le dossier du thème, créez un dossier utilisant 
+le même nom que le nom de votre thème. Au-delà de ça, la structure de dossier 
+dans le dossier ``/app/View/Themed/Exemple/`` est exactement le même que 
+``/app/View/``.
+
+Par exemple, le fichier de vue pour une action edit d'un contôleur Posts 
+residera dans ``/app/View/Themed/Exemple/Posts/edit.ctp``. Les fichiers de 
+Layout résideront dans ``/app/View/Themed/Exemple/Layouts/``.
+
+Si un fichier de vue ne peut pas être trouvé dans le thème, CakePHP va 
+essayer de localiser le fichier de vue dans le dossier ``/app/View/``.
+De cette façon, vous pouvez créer des fichiers de vue master et simplement 
+les remplacer au cas par cas au sein de votre dossier de thème.
+
+Assets du thème
+---------------
+
+Les thèmes peuvent contenir des assets statiques ainsi que des fichiers de vue.
+Un thème peut inclure tout asset nécessaire dans son répertoire webroot. Cela 
+permet un packaging facile et une distribution des thèmes. Pendant le 
+développement, les requêtes pour les assets du thème seront gérés par
+:php:class:`Dispatcher`. Pour améliorer la performance des environnements de 
+production, il est recommandé soit que vous symlink soit que vous copiez les 
+assets du thème dans le webroot de application. Voir ci-dessus pour plus
+d'informations.
+
+Pour utiliser le nouveau thème, créez des répertoires de type
+``app/View/Themed/<nomDuTheme>/webroot<chemin_vers_fichier>`` dans votre thème.
+Le Dispatcher se chargera de trouver les assets du thème corrects dans vos 
+chemins de vue.
+
+Tous les helpers integrés dans CakePHP sont conscients de thèmes et vont créer 
+des chemins d'accès corrects automatiquement. Comme pour les fichiers de vue, 
+si un fichier n'est pas dans le dossier du thème, il sera par défaut dans le 
+dossier principal webroot ::
+
+    <?php
+    //Quand dans un thème avec un nom de 'purple_cupcake'
     $this->Html->css('main.css');
      
-    //creates a path like
+    //crée un chemin comme
     /theme/purple_cupcake/css/main.css
      
-    //and links to
+    //et fait un lien vers
     app/View/Themed/PurpleCupcake/webroot/css/main.css 
 
-Increasing performance of plugin and theme assets
--------------------------------------------------
+Augmenter la performance des assets du plug-in et du thème
+----------------------------------------------------------
 
-It's a well known fact that serving assets through PHP is guaranteed to be slower
-than serving those assets without invoking PHP. And while the core team has
-taken steps to make plugin and theme asset serving as fast as possible, there
-may be situations where more performance is required. In these situations it's
-recommended that you either symlink or copy out plugin/theme assets to
-directories in ``app/webroot`` with paths matching those used by cakephp.
+C'est un fait bien connu que de servir les assets par le biais de PHP est 
+assuré d'être plus lent que de servir ces assets sans invoquer PHP. Et 
+tandis que l'équipe du coeur a pris des mesures pour rendre le plugin et 
+l'asset du thème servis aussi vite que possible, il peut y avoir des 
+situations où plus de performance est requis. Dans ces situations, il 
+est recommandé soit que vous fassiez un lien symbolique soit que vous 
+fassiez une copie sur les assets du plug-in/thème à des répertoires 
+dans ``app/webroot`` avec des chemins correspondant à ceux utilisés par cakephp.
 
-
--  ``app/Plugin/DebugKit/webroot/js/my_file.js`` becomes
+-  ``app/Plugin/DebugKit/webroot/js/my_file.js`` devient
    ``app/webroot/DebugKit/js/my_file.js``
--  ``app/View/Themed/Navy/webroot/css/navy.css`` becomes
+-  ``app/View/Themed/Navy/webroot/css/navy.css`` devient
    ``app/webroot/theme/Navy/css/navy.css``
 
 
 .. meta::
-    :title lang=en: Themes
-    :keywords lang=en: production environments,theme folder,layout files,development requests,callback functions,folder structure,default view,dispatcher,symlink,case basis,layouts,assets,cakephp,themes,advantage
+    :title lang=fr: Thèmes
+    :keywords lang=fr: environnements de production,dossier du thème,fichiers layout,requêtes de développement,fonctions de callback,structure de dossier,vue par défaut,dispatcher,symlink,cas de base,layouts,assets,cakephp,thèmes,avantage

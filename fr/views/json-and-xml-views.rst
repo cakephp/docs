@@ -1,45 +1,49 @@
-JSON and XML views
-##################
+Vues JSON et XML
+################
 
-New in CakePHP 2.1 are two new view classes. The ``XmlView`` and ``JsonView``
-let you easily create XML and JSON responses, and integrate with the
-:php:class:`RequestHandlerComponent`.
+Deux nouvelles classes de vue dans CakePHP 2.1. Les vues ``XmlView`` et 
+``JsonView`` vous laisse créer facilement du des réponses XML et JSON,
+et intégre avec le :php:class:`RequestHandlerComponent`.
 
-By enabling ``RequestHandlerComponent`` in your application, and enabling
-support for the ``xml`` and or ``json`` extensions, you can automatically
-leverage the new view classes.  ``XmlView`` and ``JsonView`` will be referred to
-as data views for the rest of this page.
+En activant ``RequestHandlerComponent`` dans votre application, et en activant 
+le support pour les extensions ``xml`` et/ou ``json``, vous pouvez 
+automatiquement  vous appuyer sur les nouvelles classes de vue. ``XmlView`` et 
+``JsonView`` feront référence aux vues de données pour le reste de cette page.
 
-There are two ways you can generate data views.  The first is by using the
-``_serialize`` key, and the second is by creating normal view files.
+Il y a deux façons de générer des vues de données. La première est en utilisant
+la clé ``_serialize``, et la seconde en créant des fichiers de vue normaux.
 
-Enabling data views in your application
-=======================================
+Activation des vues de données dans votre application
+=====================================================
 
-Before you can use the data view classes, you'll need to do a bit of setup:
+Avant que vous puissiez utiliser les classes de vue de données, vous aurez 
+besoin de faire un peu de configuration:
 
-#. Enable the json and or xml extensions with
-   :php:meth:`Router::parseExtensions()`.  This will enable Router to handle
-   mulitple extensions.
-#. Add the :php:class:`RequestHandlerComponent` to your controller's list of
-   components.  This will enable automatic view class switching on content
-   types.
+#. Activer les extensions json et/ou xml avec
+   :php:meth:`Router::parseExtensions()`.  Cela activera Router pour gérer les
+   mulitples extensions.
+#. Ajouter le :php:class:`RequestHandlerComponent` à la liste de composants de
+   votre contrôleur. Cela activera automatiquement le changement de la classe 
+   de vue pour les types de contenu.
 
-After adding ``Router::parseExtensions('json');`` to your routes file, CakePHP
-will automatically switch view classes when a request is done with the ``.json``
-extension, or the Accept header is ``application/json``.
+Après avoir ajouté ``Router::parseExtensions('json');`` à votre fichier de 
+routes, CakePHP changera automatiquement les classes de vue quand une requête
+sera faite avec l'extension ``.json``, ou quand l'en-tête Accept sera
+``application/json``.
 
-Using data views with the serialize key
-=======================================
+Utilisation des vues de données avec la clé sérializée
+======================================================
 
-The ``_serialize`` key is a special view variable that indicates which other view
-variable(s) should be serialized when using a data view.  This lets you skip
-defining view files for your controller actions if you don't need to do any
-custom formatting before your data is converted into json/xml.
+La clé ``_serialize`` est une variable de vue spéciale qui indique quel autre(s) 
+variable(s) de vue devraient être sérializée(s) quan on utilise la vue de 
+données. Cela vous permet de sauter la définition des fichiers de vue pour vos 
+actions de contrôleur si vous n'avez pas besoin de faire un formatage avant que
+vos données soient converties en json/xml.
 
-If you need to do any formatting or manipulation of your view variables before
-generating the response, you should use view files.  The value of ``_serialize``
-can be either a string or an array of view variables to serialize::
+Si vous avez besoin de faire n'importe quel formatage ou manipulation de vos
+variables de vue avant la génération de la réponse, vous devriez utiliser les
+fichiers de vue. La valeur de ``_serialize`` peut être soit une chaîne de 
+caractère, soit un tableau de variables de vue pour sérialiser::
 
     <?php
     class PostsController extends AppController {
@@ -49,7 +53,8 @@ can be either a string or an array of view variables to serialize::
         }
     }
 
-You can also define ``_serialize`` as an array of view variables to combine::
+Vous pouvez aussi définir ``_serialize`` en tableau de variables de vue pour 
+combiner::
 
     <?php
     class PostsController extends AppController {
@@ -60,48 +65,49 @@ You can also define ``_serialize`` as an array of view variables to combine::
         }
     }
 
-Defining ``_serialize`` as an array has the added benefit of automatically
-appending a top-level ``<response>`` element when using :php:class:`XmlView`.
-If you use a string value for ``_serialize`` and XmlView, make sure that your
-view variable has a single top-level element.  Without a single top-level
-element the Xml will fail to generate.
+Définir ``_serialize`` en tableau a le bénéfice ajouté d'ajouter automatiquement
+un elément de top-niveau ``<response>`` en utilisant :php:class:`XmlView`.
+Si vous utilisez une valeur de chaîne de caractère pour ``_serialize`` et 
+XmlView, assurez vous que vos variables de vue aient un elément unique de 
+top-niveau. Sans un elément de top-niveau, le Xml ne pourra être généré.
 
-Using a data view with view files
-=================================
+Utilisation d'une vue de données avec les fichiers de vue
+=========================================================
 
-You should use view files if you need to do some manipulation of your view
-content before creating the final output. For example if we had posts, that had
-a field containing generated HTML, we would probably want to omit that from a
-JSON response.  This is a situation where a view file would be useful::
+Vous devriez utiliser les fichiers de vue si vous avez besoin de faire des 
+manipulations du contenu de votre vue avant de créer la sortie finale. Par 
+exemple, si vous avez des posts, qui ont un champ contenant du HTML généré, 
+nous voudrons probablement omettre ceci à partir d'une réponse JSON. C'est 
+une situation où un fichier de vue serait utile::
 
     <?php
-    // Controller code
+    // Code du contrôleur
     class PostsController extends AppController {
         public function index() {
             $this->set(compact('posts', 'comments'));
         }
     }
 
-    // View code - app/View/Posts/json/index.ctp
+    // Code de la vue - app/View/Posts/json/index.ctp
     foreach ($posts as &$post) {
         unset($post['Post']['generated_html']);
     }
     echo json_encode(compact('posts', 'comments'));
 
-You can do more more complex manipulations, or use helpers to do formatting as
-well.
+Vous pouvez faire des manipulations encore beaucoup plus complexes, ou
+utiliser les helpers pour formater aussi.
 
 .. note::
 
-    The data view classes don't support layouts.  They assume that the view file
-    will output the serialized content. 
+    Les classes de vue de données ne supportent pas les layouts. Elles 
+    supposent que le fichier de vue va afficher le contenu sérialisé. 
 
 .. php:class:: XmlView
 
-    A view class for generating Xml view data.  See above for how you can use
-    XmlView in your application
+    Une classe de vue pour la génération de vue de données Xml. Voir au-dessus 
+    pour savoir comment vous pouvez utiliser XmlView dans votre application
 
 .. php:class:: JsonView
 
-    A view class for generating Json view data.  See above for how you can use
-    JsonView in your application.
+    Une classe de vue pour la génération de vue de données Json. Voir au-dessus 
+    pour savoir comment vous pouvez utiliser XmlView dans votre application

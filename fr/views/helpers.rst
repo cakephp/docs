@@ -1,47 +1,48 @@
-Helpers
-#######
+Helpers (Assistants)
+####################
 
+Les Helpers (Assistants) sont des classes comme les composants, pour la couche 
+de présentation de votre application. Ils contiennent la logique de 
+présentation qui est partagée entre plusieurs vues, éléments ou layouts. Ce 
+chapitre vous montrera comment créer vos propres assistants et soulignera les 
+tâches basiques que les assistants du cœur de CakePHP peuvent vous aider à 
+accomplir. 
 
-Helpers are the component-like classes for the presentation layer
-of your application. They contain presentational logic that is
-shared between many views, elements, or layouts. This chapter will
-show you how to create your own helpers, and outline the basic
-tasks CakePHP’s core helpers can help you accomplish.
-
-CakePHP features a number of helpers that aid in view creation.
-They assist in creating well-formed markup (including forms), aid
-in formatting text, times and numbers, and can even speed up Ajax
-functionality. For more information on the helpers included in CakePHP,
-check out :ref:`core-helpers`.
+CakePHP dispose d'un nombre de helpers qui aident à la création des vues.
+Ils aident à la création de balises bien-formées (y compris les formulaires), 
+aident à la mise en forme du texte, les durées et les numéros, et peut même 
+accélérer la fonctionnalité Ajax. Pour plus d'informations sur les helpers 
+inclus dans CakePHP, allez voir :ref:`core-helpers`.
 
 .. _configuring-helpers:
 
-Using and Configuring Helpers
-=============================
+Utiliser et configurer les Helpers
+==================================
 
-You enable helpers in CakePHP by making a controller aware of them.  Each
-controller has a :php:attr:`~Controller::$helpers` property that lists the
-helpers to be made available in the view.  To enable a helper in your view, add
-the name of the helper to the controller's ``$helpers`` array::
+Vous activez les helpers (assistants) dans CakePHP, en faisant 
+"prendre conscience" à un contrôleur qu'ils existent. Chaque contrôleur a une 
+propriété :php:attr:`~Controller::$helpers`, qui liste les helpers 
+disponibles dans la vue. Pour activer un helper dans votre vue, ajoutez 
+son nom au tableau ``$helpers`` du contrôleur::
 
     <?php
     class BakeriesController extends AppController {
         public $helpers = array('Form', 'Html', 'Js', 'Time');
     }
 
-Adding helpers from plugins uses the :term:`plugin syntax` used elsewhere in
-CakePHP::
+L'ajout des helpers depuis les plugins utilise la :term:`plugin syntax`
+utilisée partout ailleurs dans CakePHP::
 
     <?php
     class BakeriesController extends AppController {
         public $helpers = array('Blog.Comment');
     }
-
-You can also add helpers from within an action, so they will only
-be available to that action and not the other actions in the
-controller. This saves processing power for the other actions that
-do not use the helper as well as help keep the controller better
-organized::
+    
+Vous pouvez aussi ajoutez les helpers depuis une action, dans ce cas, 
+ils seront uniquement accessibles pour cette action et aucune autre dans le 
+contrôleur. Ceci économise de la puissance de calcul pour les autres actions 
+qui n'utilisent pas le helper, tout en permettant de conserver le contrôleur 
+mieux organisé::
 
     <?php
     class BakeriesController extends AppController {
@@ -49,22 +50,24 @@ organized::
             $this->helpers[] = 'Time';
         }
         public function mix {
-            // The Time helper is not loaded here and thus not available
+            // Le Helper Time n'est pas chargé ici et n'est par conséquent 
+            pas disponible
         }
     }
 
-If you need to enable a helper for all controllers add the name of
-the helper to the ``$helpers`` array in ``/app/Controller/AppController.php`` (or
-create if not present). Remember to include the default Html and
-Form helpers::
+Si vous avez besoin d'activer un helper pour tous les contrôleurs, ajoutez 
+son nom dans le tableau ``$helpers`` du fichier 
+``/app/Controller/AppController.php`` (à créer si pas présent). N'oubliez pas 
+d'inclure les helpers par défaut Html et Form::
 
     <?php
     class AppController extends Controller {
         public $helpers = array('Form', 'Html', 'Js', 'Time');
     }
 
-You can pass options to helpers. These options can be used to set
-attribute values or modify behavior of a helper::
+Vous pouvez passer des options dans les helpers. Ces options peuvent être 
+utilisées pour définir les valeurs d'attributs ou modifier le behavior du
+helper::
 
     <?php
     class AwesomeHelper extends AppHelper {
@@ -75,13 +78,13 @@ attribute values or modify behavior of a helper::
     }
 
     class AwesomeController extends AppController {
-        public $helpers = array('Awesome' => array('option1' => 'value1'));
+        public $helpers = array('Awesome' => array('option1' => 'valeur1'));
     }
 
-One common setting to use is the ``className`` option, which allows you to
-create aliased helpers in your views.  This feature is useful when you want to
-replace ``$this->Html`` or another common Helper reference with a custom
-implementation::
+Une configuration courante est d'utilisez l'option ``className``, qui vous 
+permet de créer des helpers alias dans vos vues. Cette fonctionnalité est 
+utile quand vous voulez remplacer ``$this->Html`` ou tout autre Helper de
+référence avec une mise en oeuvre personnalisée::
 
     <?php
     // app/Controller/PostsController.php
@@ -96,27 +99,29 @@ implementation::
     // app/View/Helper/MyHtmlHelper.php
     App::uses('HtmlHelper', 'View/Helper');
     class MyHtmlHelper extends HtmlHelper {
-        // Add your code to override the core HtmlHelper
+        // Ajouter votre code pour écraser le HtmlHelper du coeur
     }
 
-The above would *alias* ``MyHtmlHelper`` to ``$this->Html`` in your views.
+Ce qui est au-dessus ferait un *alias* de ``MyHtmlHelper`` vers ``$this->Html`` 
+dans vos vues.
 
 .. note::
 
-    Aliasing a helper replaces that instance anywhere that helper is used,
-    including inside other Helpers.
+    Faire un alias d'un helper remplace cette instance partout où le helper 
+    est utilisé, y compris dans les autres Helpers.
 
 .. tip::
 
-    Aliasing the Html or Session Helper while using the core PagesController 
-    will not work. It is better to copy 
-    ``lib/Cake/Controller/PagesController.php`` into your ``app/Controller/`` 
-    folder.
+    Faire un alias des Helpers Html ou Session pendant que vous utilisez le 
+    coeur de PagesController  ne fonctionnera pas. Il est préférable de copier
+    ``lib/Cake/Controller/PagesController.php`` dans le dossier 
+    ``app/Controller/``.
 
-Using helper settings allows you to declaratively configure your helpers and
-keep configuration logic out of your controller actions.  If you have
-configuration options that cannot be included as part of a class declaration,
-you can set those in your controller's beforeRender callback::
+L'utilisation des configurations du helper vous permet de configurer de manière
+déclarative vos helpers et de garder la logique de configuration de vos actions
+des contrôleurs. Si vous avez des options de configuration qui ne peuvent pas 
+être inclues comme des parties de déclaration de classe, vous pouvez les définir
+dans le callback beforeRender de votre contrôleur::
 
     <?php
     class PostsController extends AppController {
@@ -126,81 +131,82 @@ you can set those in your controller's beforeRender callback::
         }
     }
 
-Using Helpers
-=============
+Utiliser les Helpers
+====================
 
-Once you've configured which helpers you want to use in your controller, 
-each helper is exposed as a public property in the view.  For example, if you
-were using the :php:class:`HtmlHelper` you would be able to access it by 
-doing the following::
+Une fois que vous avez configuré les helpers que vous souhaitiez utiliser, dans 
+votre contrôleur, chaque helper est exposé en propriété publique dans la vue. 
+Par exemple, si vous utilisiez :php:class:`HtmlHelper`, vous seriez capable 
+d'y accéder en faisant ce qui suit::
 
     <?php
     echo $this->Html->css('styles');
 
-The above would call the ``css`` method on the HtmlHelper.  You can
-access any loaded helper using ``$this->{$helperName}``.  There may
-come a time where you need to dynamically load a helper from inside
-a view.  You can use the view's :php:class:`HelperCollection` to 
-do this::
+Ce qui est au-dessus appelerait la méthode ``css`` du HtmlHelper.  Vous pouvez
+accéder à n'importe quel helper chargé en utilisant ``$this->{$helperName}``. 
+Il peut venir un temps où vous aurez besoin de charger dynamiquement un helper 
+à partir d'une vue. Vous pouvez utiliser la vue du :php:class:`HelperCollection`
+pour le faire::
 
     <?php
     $mediaHelper = $this->Helpers->load('Media', $mediaSettings);
 
-The HelperCollection is a :doc:`collection </core-libraries/collections>` and 
-supports the collection API used elsewhere in CakePHP.
+Le HelperCollection est une :doc:`collection </core-libraries/collections>` et 
+supporte l'API collection utilisée partout ailleurs dans CakePHP.
 
-Callback methods
-================
+Méthodes de Callback
+====================
 
-Helpers feature several callbacks that allow you to augment the 
-view rendering process.  See the :ref:`helper-api` and the
-:doc:`/core-libraries/collections` documentation for more information.
+Les Helpers disposent de plusieurs callbacks qui vous permettent d'augmenter 
+le processus de rendu de vue. Allez voir la documentation de :ref:`helper-api` 
+et :doc:`/core-libraries/collections` pour plus d'informations.
 
-Creating Helpers
-================
+Créer des Helpers
+=================
 
-If a core helper (or one showcased on github or the Bakery)
-doesn’t fit your needs, helpers are easy to create.
+Si un helper du coeur (ou l'un présenté sur github ou dans la Boulangerie)
+ne correspond pas à vos besoins, les helpers sont faciles à créer.
 
-Let's say we wanted to create a helper that could be used to output
-a specifically crafted CSS-styled link you needed many different
-places in your application. In order to fit your logic in to
-CakePHP's existing helper structure, you'll need to create a new
-class in ``/app/View/Helper``. Let's call our helper LinkHelper. The
-actual PHP class file would look something like this::
+Mettons que nous voulions créer un assistant, qui pourrait être utilisé pour 
+produire un lien CSS, façonné spécialement selon vos besoins, à différents 
+endroits de votre application. Afin de trouver une place à votre logique dans 
+la structure d'assistant existante dans CakePHP, vous devrez créer une nouvelle 
+classe dans ``/app/View/Helper``. Appelons notre assistant LienHelper. Le 
+fichier de la classe PHP devrait ressembler à quelque chose comme ceci::
 
     <?php
-    /* /app/View/Helper/LinkHelper.php */
+    /* /app/View/Helper/LienHelper.php */
     App::uses('AppHelper', 'View/Helper');
     
-    class LinkHelper extends AppHelper {
-        public function makeEdit($title, $url) {
-            // Logic to create specially formatted link goes here...
+    class LienHelper extends AppHelper {
+        public function lancerEdition($titre, $url) {
+            // La logique pour créer le lien spécialement formaté se place 
+            ici...
         }
     }
 
 .. note::
 
-    Helpers must extend either ``AppHelper`` or :php:class:`Helper` or implement all the callbacks
-    in the :ref:`helper-api`.
+    Les Helpers doivent étendre soit ``AppHelper`` soit :php:class:`Helper` ou
+    implémenter tous les callbacks dans :ref:`helper-api`.
 
-Including other Helpers
------------------------
+Inclure d'autres Helpers
+------------------------
 
-You may wish to use some functionality already existing in another
-helper. To do so, you can specify helpers you wish to use with a
-``$helpers`` array, formatted just as you would in a controller::
+Vous souhaitez peut-être utiliser quelques fonctionnalités déjà existantes dans 
+un autre helper. Pour faire cela, vous pouvez spécifier les helpers que 
+vous souhaitez utiliser avec un tableau ``$helpers``, formaté comme vous le feriez 
+dans un contrôleur::
 
     <?php
-    /* /app/View/Helper/LinkHelper.php (using other helpers) */
+    /* /app/View/Helper/LienHelper.php (Utilisant d'autres helpers) */
     App::uses('AppHelper', 'View/Helper');
     
-    class LinkHelper extends AppHelper {
+    class LienHelper extends AppHelper {
         public $helpers = array('Html');
     
-        public function makeEdit($title, $url) {
-            // Use the HTML helper to output
-            // formatted data:
+        public function lancerEdition($titre, $url) {
+            // Utilisation du helper HTML pour sortir une donnée formatée
     
             $link = $this->Html->link($title, $url, array('class' => 'edit'));
     
@@ -211,32 +217,31 @@ helper. To do so, you can specify helpers you wish to use with a
 
 .. _using-helpers:
 
-Using your Helper
------------------
+Utiliser votre Helper
+---------------------
 
-Once you've created your helper and placed it in
-``/app/View/Helper/``, you'll be able to include it in your
-controllers using the special variable :php:attr:`~Controller::$helpers`::
+Une fois que vous avez créez votre helper et l'avez placé dans 
+``/app/View/Helper/``, vous serez capable de l'inclure dans vos contrôleurs 
+en utilisant la variable spéciale :php:attr:`~Controller::$helpers`::
 
     <?php
     class PostsController extends AppController {
-        public $helpers = array('Link');
+        public $helpers = array('Lien');
     }
 
-Once your controller has been made aware of this new class, you can
-use it in your views by accessing an object named after the
-helper::
+Une fois que votre contrôleur est au courant de cette nouvelle classe, vous
+pouvez l'utiliser dans vos vues en accédant un objet nommé après le helper::
 
-    <!-- make a link using the new helper -->
-    <?php echo $this->Link->makeEdit('Change this Recipe', '/recipes/edit/5'); ?>
+    <!-- fait un lien en utilisant le nouveau helper -->
+    <?php echo $this->Link->lancerEdition('Changer cette recette', '/recipes/edit/5'); ?>
 
 
-Creating Functionality for All Helpers
-======================================
+Créer des fonctionnalités à vos Helpers
+=======================================
 
-All helpers extend a special class, AppHelper (just like models
-extend AppModel and controllers extend AppController). To create
-functionality that would be available to all helpers, create
+Tous les helpers étendent une classe spéciale, AppHelper (comme les modèles 
+étendent AppModel et les contrôleurs étendent AppController). Pour créer la
+fonctionnalité qui serait disponible pour tous les helpers, créez
 ``/app/View/Helper/AppHelper.php``::
 
     <?php
@@ -255,94 +260,97 @@ Helper API
 
 .. php:class:: Helper
 
-    The base class for Helpers. It provides a number of utility methods and 
-    features for loading other helpers.
+    La classe de base pour les Helpers. Elle fournit un nombre de méthodes 
+    utiles et des fonctionnalités pour le chargement d'autres helpers.
 
 .. php:method:: webroot($file)
 
-    Resolve a file name to the webroot of the application. If a theme is active
-    and the file exists in the current theme's webroot, the path to the themed
-    file will be returned.
-
+    Décide du nom de fichier du webroot de l'application. Si un thème est actif 
+    et que le fichier existe dans le webroot du thème courant, le chemin du
+    fichier du thème sera retourné.
+    
 .. php:method:: url($url, $full = false)
 
-    Generates an HTML escaped URL, delegates to :php:meth:`Router::url()`.
+    Génère une HTML escaped URL, qui délégue à :php:meth:`Router::url()`.
 
 .. php:method:: value($options = array(), $field = null, $key = 'value')
 
-    Get the value for a given input name.
+    Récupère la valeur pour un nom d'input donné.
 
 .. php:method:: domId($options = null, $id = 'id')
 
-    Generate a CamelCased id value for the currently selected field. 
-    Overriding this method in your AppHelper will allow you to change 
-    how CakePHP generates ID attributes.
+    Génère une valeur id en CamelCased pour la le champ sélectionné courant. 
+    Ecraser cette méthode dans votre AppHelper vous permettra de changer la 
+    façon dont CakePHP génére les attributs ID.
 
 Callbacks
 ---------
 
 .. php:method:: beforeRenderFile($viewFile)
 
-    Is called before all view files are rendered.  This includes elements,
-    views, parent views, and layouts.
+    Est appelé avant que tout fichier de vue soit rendu. Cela inclut les 
+    eléments, le vues, les vues parentes et les layouts.
 
 .. php:method:: afterRenderFile($viewFile, $content)
 
-    Is called after all view files are rendered.  This includes elements, views,
-    parent views, and layouts.  A callback can modify and return ``$content`` to
-    change how the rendered content will be displayed in the browser.
+    Est appelé après que tout fichier de vue est rendu. Cela inclut les 
+    eléments, le vues, les vues parentes et les layouts. Un callback
+    peut modifier et retourner ``$content`` pour changer la manière dont
+    le contenu rendu est affiché dans le navigateur.
 
 .. php:method:: beforeRender($viewFile)
 
-    The beforeRender method is called after the controller's
-    beforeRender method but before the controller renders view and
-    layout. Receives the file being rendered as an argument.
+    La méthode beforeRender est appelé après la méthode beforeRender du 
+    contrôleur, mais avant les rendus du contôleur de la vue et du layout
+    Reçoit le fichier à rendre en argument.
 
 .. php:method:: afterRender($viewFile)
 
-    Is called after the view has been rendered but before layout rendering has
-    started.
+    Est appelé après que la vue est rendu, mais avant que le rendu du 
+    layout ait commencé.
 
 .. php:method:: beforeLayout($layoutFile)
 
-    Is called before layout rendering starts. Receives the layout filename as an
-    argument.
+    Est appelé avant que le rendu du layout commence. Reçoit le nom du fichier 
+    layout en argument.
 
 .. php:method:: afterLayout($layoutFile)
 
-    Is called after layout rendering is complete. Receives the layout filename as an
-    argument.
+    Est appelé après que le rendu du layout est fini. Reçoit le nom du fichier
+    layout en argument.
 
-Core Helpers
-============
+Helpers du coeur
+================
 
 :doc:`/core-libraries/helpers/cache`
-    Used by the core to cache view content.
+    Utilisé par le coeur pour mettre en cache le contenu de la vue.
 :doc:`/core-libraries/helpers/form`
-    Creates HTML forms and form elements that self populate and handle
-    validation problems.
+    Créé les formulaires HTML et les éléments du formulaire qui gèrent
+    eux-mêmes les problèmes de validation.
 :doc:`/core-libraries/helpers/html`
-    Convenience methods for crafting well-formed markup. Images, links,
-    tables, header tags and more.
+    Méthodes bien pratiques pour des balises bien formatées. Les images, 
+    les liens, les tables, les balises d'en-tête etc ....
 :doc:`/core-libraries/helpers/js`
-    Used to create Javascript compatible with various Javascript
-    libraries.
+    Utilisé pour créer du Javascript compatible avec de nombreuses librairies 
+    Javascript.
 :doc:`/core-libraries/helpers/number`
-    Number and currency formatting.
+    Formate les nombres et les monnaies.
 :doc:`/core-libraries/helpers/paginator`
-    Model data pagination and sorting.
+    Pagination à partir des données de Modèles et tri.
 :doc:`/core-libraries/helpers/rss`
-    Convenience methods for outputting RSS feed XML data.
+    Méthodes bien pratiques pour la sortie de contenu RSS et de données XML.
 :doc:`/core-libraries/helpers/session`
-    Access for reading session values in views.
+    Accès pour la lecture des valeurs de session dans les vues.
 :doc:`/core-libraries/helpers/text`
-    Smart linking, highlighting, word smart truncation.
+    Mise en lien intelligente, Misse en évidence, truchement intelligent des 
+    mots.
 :doc:`/core-libraries/helpers/time`
-    Proximity detection (is this next year?), nice string
-    formatting(Today, 10:30 am) and time zone conversion.
+    Détection de proximité (Est-ce l'année prochaine?), formatage sympa des 
+    chaînes de caractère (Today, 10:30 am) et conversion entre les zones de 
+    temps.
 
 
 
 .. meta::
-    :title lang=en: Helpers
-    :keywords lang=en: php class,time function,presentation layer,processing power,ajax,markup,array,functionality,logic,syntax,elements,cakephp,plugins
+    :title lang=fr: Helpers (Assistants)
+    :keywords lang=fr: classe php,fonction time,couche de présentation,puissance du processeur,ajax,balise,tableau,fonctionnalité,logique,syntaxe,élements,cakephp,plugins

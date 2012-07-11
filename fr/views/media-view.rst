@@ -1,26 +1,28 @@
-Media Views
-===========
+Vues Media
+==========
 
 .. php:class:: MediaView
 
-Media views allow you to send binary files to the user. For example, you may
-wish to have a directory of files outside of the webroot to prevent users from
-direct linking them. You can use the Media view to pull the file from a special
-folder within /app/, allowing you to perform authentication before delivering
-the file to the user.
+Les vues Media vous permettent d'envoyer des fichiers binaires à l'utilisateur. 
+Par exemple, vous souhaiteriez avoir un répertoire de fichiers en dehors de 
+webroot pour empêcher les utilisateurs de faire un lien direct sur eux. Vous
+pouvez utiliser la vue Media pour tirer le fichier à partir d'un fichier spécial
+dans /app/, vous permettant d'améliorer l'authentification avant la livraison 
+du fichier à l'utilisateur.
 
-To use the Media view, you need to tell your controller to use the MediaView
-class instead of the default View class. After that, just pass in additional
-parameters to specify where your file is located::
+Pour utiliser la vue Media, vous avez besoin de dire à votre controller
+d'utilise la classe MediaView au lieu de la classe de vue par défaut. Après 
+ça, passez juste les paramètres en plus pour spécifier où votre fichier 
+se trouve::
 
     <?php
-    class ExampleController extends AppController {
-        public function download () {
+    class ExempleController extends AppController {
+        public function telecharger () {
             $this->viewClass = 'Media';
-            // Download app/outside_webroot_dir/example.zip
+            // Telecharge app/outside_webroot_dir/exemple.zip
             $params = array(
-                'id'        => 'example.zip',
-                'name'      => 'example',
+                'id'        => 'exemple.zip',
+                'name'      => 'exemple',
                 'download'  => true,
                 'extension' => 'zip',
                 'path'      => APP . 'outside_webroot_dir' . DS
@@ -29,17 +31,17 @@ parameters to specify where your file is located::
         }
     }
 
-Here's an example of rendering a file whose mime type is not included in the
-MediaView's ``$mimeType`` array. We are also using a relative path which will 
-default to your ``app/webroot`` folder::
+Ici vous trouvez un exemple de rendu d'un fichier qui a un type mime qui n'est 
+pas inclu dans le tableau ``$mimeType`` de MediaView. Nous utilisons aussi un
+chemin relatif qui va être par défaut dans votre dossier ``app/webroot``::
 
     <?php
-    public function download () {
+    public function telecharger () {
         $this->viewClass = 'Media';
-        // Render app/webroot/files/example.docx
+        // Rend app/webroot/files/exemple.docx
         $params = array(
-            'id'        => 'example.docx',
-            'name'      => 'example',
+            'id'        => 'exemple.docx',
+            'name'      => 'exemple',
             'extension' => 'docx',
             'mimeType'  => array(
                 'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
@@ -49,47 +51,47 @@ default to your ``app/webroot`` folder::
         $this->set($params);
     }
 
-Settable Parameters
--------------------
+Parmètres configurables
+-----------------------
 
 ``id``
-    The ID is the file name as it resides on the file server including
-    the file extension.
+    L'ID est le nom du fichier tel qu'il réside sur le serveur de fichiers, y 
+    compris l'extension de fichier.
 
 ``name``
-    The name allows you to specify an alternate file name to be sent to
-    the user. Specify the name without the file extension.
+    Le nom vous permet de spécifier un nom de fichier alternatif à envoyer à
+    l'utilisateur. Spécifier le nom sans l'extension du fichier.
 
 ``download``
-    A boolean value indicating whether headers should be set to force
-    download.
+    Une valeur boléenne indiquant si les en-têtes doivent être définis pour
+    forcer le téléchargement.
 
 ``extension``
-    The file extension. This is matched against an internal list of
-    acceptable mime types. If the mime type specified is not in the
-    list (or sent in the mimeType parameter array), the file will not
-    be downloaded.
+    L'extension du fichier. Ceci est en correspondance avec une liste 
+    interne de types mime acceptables. Si le type MIME spécifié n'est
+    pas dans la liste (ou envoyé dans le tableau de paramètres mimeType),
+    le fichier ne sera pas téléchargé.
 
 ``path``
-    The folder name, including the final directory separator. The path
-    should be absolute but can be relative to the ``app/webroot`` folder.
+    Le nom du dossier, y compris le séparateur de répertoire finale. 
+    Le chemin doit être absolu, mais peut être par rapport au dossier
+    ``app/webroot``.
 
 ``mimeType``
-    An array with additional mime types to be merged with MediaView
-    internal list of acceptable mime types.
+    Un tableau avec des types MIME supplémentaires à fusionner avec 
+    une liste interne dans MediaView de types mime acceptables.
 
 ``cache``
-    A boolean or integer value - If set to true it will allow browsers
-    to cache the file (defaults to false if not set); otherwise set it
-    to the number of seconds in the future for when the cache should
-    expire.
-
+    Une valeur booléenne ou entière - Si la valeur est vraie, elle permettra 
+    aux navigateurs de mettre en cache le fichier (par défaut à false si non 
+    définie), sinon réglez le sur le nombre de secondes dans le futur pour
+    lorsque le cache expirera.
 
 .. todo::
 
-    Include examples of how to send files with Media View.
+    Inclut des exemples de la façon d'envoyer des fichiers avec Media View.
 
 
 .. meta::
-    :title lang=en: Media Views
-    :keywords lang=en: array php,true extension,zip name,document path,mimetype,boolean value,binary files,webroot,file extension,mime type,default view,file server,authentication,parameters
+    :title lang=fr: Vues Media
+    :keywords lang=fr: tableau php,extension true,nom zip,chemin du document,mimetype,valeur booléenne,fichiers binaires,webroot,extension du fichier,type mime,vue par défault,fichier serveur,authentification,paramètres
