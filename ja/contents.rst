@@ -15,6 +15,7 @@
    plugins
    development
    deployment
+   console-and-shells
    tutorials-and-examples
    contributing
    appendices
