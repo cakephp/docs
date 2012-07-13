@@ -1,26 +1,27 @@
 Transactions
 ############
 
-To perform a transaction, a model's tables must be of a type that
-supports transactions.
+Pour effectuer une transaction, les tables d'un modèle doivent être d'un type 
+qui supporte les transactions.
 
-All transaction methods must be performed on a model's DataSource
-object. To get a model's DataSource from within the model, use:
+Toutes les méthodes de transaction doivent être effectuées sur un objet de 
+Source de Données. Pour obtenir le modèle de Source de Données à partir du 
+modèle, utilisez:
 
 ::
 
     <?php
     $dataSource = $this->getDataSource();
 
-You can then use the data source to start, commit, or roll back
-transactions.
+Vous pouvez utiliser la source de données pour commencer, committer, ou faire 
+des transactions roll back.
 
 ::
 
     <?php
     $dataSource->begin();
     
-    // Perform some tasks
+    // Effectue certaine tâche
     
     if (/*all's well*/) {
         $dataSource->commit();
@@ -28,9 +29,11 @@ transactions.
         $dataSource->rollback();
     }
 
-Transaction nesting support. Now it is possible to start a transaction several times. It will only be committed if the commit method is called the same amount of times.
+Transaction nesting support. Maintenant, il est possible de démarrer 
+une transaction à plusieurs reprises. Il ne peut être que committé si la 
+méthode de validation est appelée la même quantité de fois.
 
 
 .. meta::
-    :title lang=en: Transactions
-    :keywords lang=en: transaction methods,datasource,rollback,data source
+    :title lang=fr: Transactions
+    :keywords lang=fr: méthodes de transaction,source de données,rollback

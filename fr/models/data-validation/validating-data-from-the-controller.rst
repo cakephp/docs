@@ -12,8 +12,9 @@ Tout d'abord, mettez les données au modèle::
     <?php
     $this->ModelName->set($this->request->data);
 
-Ensuite, pour vérifier si les données sont validées, utilisez la méthide validates
-du modèle, qui va retourner true si elles sont valides et false si elles ne le sont pas::
+Ensuite, pour vérifier si les données sont validées, utilisez la méthide 
+validates du modèle, qui va retourner true si elles sont valides et false 
+si elles ne le sont pas::
 
     <?php
     if ($this->ModelName->validates()) {
@@ -31,13 +32,13 @@ vous ne voulez pas valider les 4 règles des champs. Pourtant quant un
 utilisateur se connecte, vous voulez validez seulement les règles de
 l'email et du mot_de_passe. Pour le faire, vous pouvez passer un tableau
 d'options spécifiant les champs sur lesquels vous voulez la validation.
-For example ::
+Par exemple ::
 
     <?php
     if ($this->User->validates(array('fieldList' => array('email', 'mot_de_passe')))) {
-        // valid
+        // valide
     } else {
-        // invalid
+        // invalide
     }
 
 La méthode validates invoque la méthode invalidFields qui
@@ -45,12 +46,14 @@ remplit la propriété validationErrors du modèle. La méthode
 invalidFields retourne aussi cette donnée comme résultat::
 
     <?php
-    $errors = $this->ModelName->invalidFields(); // contains validationErrors array
+    $errors = $this->ModelName->invalidFields(); // contient le tableau des 
+    ErreursDeValidation (validationErrors)
 
-La liste des erreurs de validation n'est pas supprimée entre les différents appels à ``invalidFields()``
-Donc si vous validez dans une boucle et que vous voulez chaque jeu d'erreurs séparement,
-n'utilisez pas ``invalidFields()``. Utilisez plutôt ``validates()``
-et accéder à la propriété ``validationErrors`` du modèle.
+La liste des erreurs de validation n'est pas supprimée entre les différents 
+appels à ``invalidFields()``. Donc si vous validez dans une boucle et que vous 
+voulez chaque jeu d'erreurs séparement, n'utilisez pas ``invalidFields()``. 
+Utilisez plutôt ``validates()`` et accéder à la propriété ``validationErrors`` 
+du modèle.
 
 Il est important de noter que les données doivent être envoyées au modèle
 avant que les données soient validées. C'est différent de la méthode save
@@ -68,8 +71,8 @@ Pour valider de multiple modèles, l'approche suivante devrait être utilisée::
       // ne valide pas
     }
 
-Si vous avez validé les données avant l'enregistrement, vous pouvez stopper la validation du save
-pour éviter un deuxième contrôle::
+Si vous avez validé les données avant l'enregistrement, vous pouvez stopper la 
+validation du save pour éviter un deuxième contrôle::
 
     <?php
     if ($this->ModelName->saveAll($this->request->data, array('validate' => false))) {

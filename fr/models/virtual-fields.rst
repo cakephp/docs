@@ -1,117 +1,120 @@
-Virtual fields
-##############
+Champs virtuels
+###############
 
-Virtual fields allow you to create arbitrary SQL expressions and
-assign them as fields in a Model. These fields cannot be saved, but
-will be treated like other model fields for read operations. They
-will be indexed under the model's key alongside other model
-fields.
+Les champs virtuels vous permettent de créer des expressions SQL arbitraires et 
+de les assigner à des champs dans un Modèle. Ces champs ne peuvent pas être 
+sauvegardés, mais seront traités comme les autres champs du modèle pour les
+opérations de lecture. Ils seront indexés sous la clé du modèle à travers les 
+autres champs du modèle.
 
-Creating virtual fields
-=======================
+Créer des champs virtuels
+=========================
 
-Creating virtual fields is easy. In each model you can define a
-``$virtualFields`` property that contains an array of field =>
-expressions. An example of a virtual field definition using MySQL
-would be::
-
-    <?php
-    public $virtualFields = array(
-        'full_name' => 'CONCAT(User.first_name, " ", User.last_name)'
-    );
-
-And with PostgreSQL::
+Créer des champs virtuels est facile. Dans chaque modèle, vous pouvez définir 
+une propriété ``$virtualFields`` qui contient un tableau de champ =>
+expressions. Un exemple d'une définition de champ virtuel en utilisant MySQL 
+serait::
 
     <?php
     public $virtualFields = array(
-        'name' => 'User.first_name || \' \' || User.last_name'
+        'nom_complet' => 'CONCAT(Utilisateur.prenom, " ", Utilisateur.nom_de_famille)'
     );
 
-In subsequent find operations, your User results would contain a
-``name`` key with the result of the concatenation. It is not
-advisable to create virtual fields with the same names as columns
-on the database, this can cause SQL errors.
+et avec PostgreSQL::
 
-It is not always useful to have **User.first\_name** fully
-qualified. If you do not follow the convention (i.e. you have
-multiple relations to other tables) this would result in an error.
-In this case it may be better to just use
-``first_name || \'\' || last_name`` without the Model
-Name.
+    <?php
+    public $virtualFields = array(
+        'nom' => 'Utilisateur.prenom || \' \' || Utilisateur.nom_de_famille'
+    );
 
-Using virtual fields
-====================
+Par conséquent, avec les opérations find, les résultats de l'Utilisateur 
+contiendraient une clé ``name`` avec le résultat de la concaténation. Il 
+n'est pas conseillé de créer des champs virtuels avec les mêmes noms que 
+les colonnes sur la base de données, ce qui peut provoquer des erreurs SQL.
 
-Creating virtual fields is straightforward and easy, interacting
-with virtual fields can be done through a few different methods.
+Il n'est pas toujours utile d'avoir **User.prenom** complètement qualifié. 
+Si vous ne suivez pas la convention (ex: vous avez des relations multiples 
+avec d'autres tables) cela entrainerait une erreur. Dans ce cas, il est 
+parfois préferable de juste utiliser ``prenom || \'\' || nom`` sans le nom
+du Modèle.
+
+Utiliser les champs virtuels
+============================
+
+Créer des champs virtuels est simple et facile, interagir avec les 
+champs virtuels peut être fait à travers quelques différentes méthodes.
 
 Model::hasField()
 -----------------
 
-Model::hasField() will return true if the model has a concrete field passed by
-the first parameter. By setting the second parameter of `hasField()` to true,
-virtualFields will also be checked when checking if a model has a field.
-Using the example field above::
+Model::hasField() retournera true si le modèle a un champ concret passé en 
+premier paramètre. En définissant le second paramètre de `hasField()` à true, 
+Les champs virtuels seront aussi vérifiés quand on vérifiera si le modèle a 
+un champ.
+En utilisant le champ exemple ci-dessus::
 
     <?php
-    $this->User->hasField('name'); // Will return false, as there is no concrete field called name
-    $this->User->hasField('name', true); // Will return true as there is a virtual field called name
+    $this->User->hasField('nom'); // Retournera false, puisqu'il n'y a pas 
+    de champ concret appelé nom.
+    $this->User->hasField('nom', true); // Retournera true puisqu'il n'y a pas
+    de champ virtuel appelé nom.
 
 Model::isVirtualField()
 -----------------------
 
-This method can be used to check if a field/column is a virtual
-field or a concrete field. Will return true if the column is
-virtual::
+Cette méthode peut être utilisée pour vérifier si un champ/colonne est un champ 
+virtuel ou champ concret. Retournera true si la colonne est virtuelle::
 
     <?php
-    $this->User->isVirtualField('name'); //true
-    $this->User->isVirtualField('first_name'); //false
+    $this->User->isVirtualField('nom'); //true
+    $this->User->isVirtualField('prenom'); //false
 
 Model::getVirtualField()
 ------------------------
 
-This method can be used to access the SQL expression that comprises
-a virtual field. If no argument is supplied it will return all
-virtual fields in a Model::
+Cette méthode peut être utilisée pour accéder aux expressions SQL qui 
+contiennent un champ virtuel. Si aucun argument n'est fourni, il retournera 
+tout champ virtuel dans un Modèle::
 
     <?php
-    $this->User->getVirtualField('name'); //returns 'CONCAT(User.first_name, ' ', User.last_name)'
+    $this->User->getVirtualField('nom'); //retoune 'CONCAT(Utilisateur.prenom, ' ', Utilisateur.nom_famille)'
 
 Model::find() and virtual fields
 --------------------------------
 
-As stated earlier ``Model::find()`` will treat virtual fields much
-like any other field in a model. The value of a virtual field will
-be placed under the model's key in the resultset::
+Comme écrit précédemment, ``Model::find()`` traitera les champs virtuels un peu 
+comme tout autre champ dans un modèle. La valeur du champ virtuel sera placé 
+sous la clé du modèle dans l'ensemble de résultats::
 
     <?php
-    $results = $this->User->find('first');
+    $results = $this->Utilisateur->find('first');
 
-    // results contains the following
+    // les résultats contiennent le tableau suivant
     array(
         'User' => array(
-            'first_name' => 'Mark',
-            'last_name' => 'Story',
-            'name' => 'Mark Story',
-            //more fields.
+            'prenom' => 'Mark',
+            'nom_famille' => 'Story',
+            'nom' => 'Mark Story',
+            //plus de champs.
         )
     );
 
-Pagination and virtual fields
+Pagination et champs virtuels
 -----------------------------
 
-Since virtual fields behave much like regular fields when doing
-find's, ``Controller::paginate()`` will be able to sort by virtual fields too.
+Depuis que les champs virtuels se comportent un peu plus comme des champs 
+réguliers quand on fait des find, ``Controller::paginate()`` sera aussi 
+capable de trier selon les champs virtuels.
 
-Virtual fields and model aliases
-================================
+Champs virtuels et alias de modèles
+===================================
 
-When you are using virtualFields and models with aliases that are
-not the same as their name, you can run into problems as
-virtualFields do not update to reflect the bound alias. If you are
-using virtualFields in models that have more than one alias it is
-best to define the virtualFields in your model's constructor::
+Quand on utilise les champsVirtuels et les modèles avec des alias qui ne sont 
+pas les mêmes que leur nom, on peut se retrouver avec des problèmes 
+comme des champsVirtuels qui ne se mettent pas à jour pour refléter l'alias lié.
+Si vous utilisez les champsVirtuels dans les modèles qui ont plus d'un alias,
+il est mieux de définir les champsVirtuels dans le constructeur de votre 
+modèle::
 
     <?php
     public function __construct($id = false, $table = null, $ds = null) {
@@ -119,19 +122,20 @@ best to define the virtualFields in your model's constructor::
         $this->virtualFields['name'] = sprintf('CONCAT(%s.first_name, " ", %s.last_name)', $this->alias, $this->alias);
     }
 
-This will allow your virtualFields to work for any alias you give a
-model.
+Cel permet à vos champsVirtuels de travailler pour n'importe quel alias que 
+vous donnez à un modèle.
 
-Virtual fields in SQL queries
-=============================
+Champs virtuels dans les requêtes SQL
+=====================================
 
-Using functions in direct SQL queries will prevent data from being returned in the same array as your model's data. 
-For example this::
+Utiliser les fonctions dans les requêtes SQL directes assureront que les 
+données seront retournées dans le même tableau que les données du modèle.
+Par exemple comme ceci::
 
     <?php
     $this->Timelog->query("SELECT project_id, SUM(id) as TotalHours FROM timelogs AS Timelog GROUP BY project_id;");
 
-would return something like this::
+retourne quelque chose comme ceci::
 	
    Array
    (
@@ -148,23 +152,24 @@ would return something like this::
            )
     )
 
-If we want to group TotalHours into our Timelog array we should specify a
-virtual field for our aggregate column.  We can add this new virtual field on
-the fly rather than permanently declaring it in the model. We will provide a
-default value of ``0`` in case another query attempts to use this virtual field.
-If that were to occur, ``0`` would be returned in the TotalHours column::
+Si nous voulons grouper les HeuresTotales dans notre tableau de TimeLog, nous 
+devrions spécifier un champ virtuel pour notre colonne aggregée. Nous pouvons 
+ajouter ce nouveau champ virtuel au vol plutôt que de le déclarer de façon 
+permanente dans le modèle. Nous fournirons une valeur par défaut à ``0`` au cas 
+où d'autres requêtes attendent d'utiliser ce champ virtuel.
+Si cela arrive, ``0`` serait retourné dans la colonne HeuresTotales::
 
     <?php
-    $this->Timelog->virtualFields['TotalHours'] = 0;
+    $this->Timelog->virtualFields['HeuresTotales'] = 0;
 
-In addition to adding the virtual field we also need to alias our column using
-the form of ``MyModel__MyField`` like this::
+En plus d'ajouter le champ virtuel, nous avons aussi besoin de faire un alias 
+de notre colonne en utilisant la forme ``MonModel__MonChamp`` comme ceci::
 
     <?php
-    $this->Timelog->query("SELECT project_id, SUM(id) as Timelog__TotalHours FROM timelogs AS Timelog GROUP BY project_id;");
+    $this->Timelog->query("SELECT project_id, SUM(id) as Timelog__HeuresTotales FROM timelogs AS Timelog GROUP BY project_id;");
 
-Running the query again after specifying the virtual field should result in a
-cleaner grouping of values::
+Lancer la requête de nouveau après avoir specifié le champ virtuel résulterait en 
+un groupement plus propre des valeurs::
 
     Array
     (
@@ -173,27 +178,27 @@ cleaner grouping of values::
                 [Timelog] => Array
                     (
                         [project_id] => 1234
-                        [TotalHours] => 25.5
+                        [HeuresTotales] => 25.5
                     )
             )
     )
 	
-Limitations of virtualFields
-============================
+Limitations des champs virtuels
+===============================
 
-The implementation of ``virtualFields`` has a few
-limitations. First you cannot use ``virtualFields`` on associated
-models for conditions, order, or fields arrays. Doing so will
-generally result in an SQL error as the fields are not replaced by
-the ORM. This is because it difficult to estimate the depth at
-which an associated model might be found.
+L'implémentation de ``virtualFields`` a quelques limitations. Premièrement, 
+vous ne pouvez pas utiliser ``virtualFields`` sur les modèles associés pour 
+les conditions, les order, ou les tableaux de champs. Faire ainsi résulte 
+généralement en une erreur SQL puisque les champs ne sont pas remplacés par
+l'ORM. Cela est du à la difficulté d'estimer la profondeur à laquelle un
+modèle associé peut être trouvé.
 
-A common workaround for this implementation issue is to copy
-``virtualFields`` from one model to another at runtime when you
-need to access them::
+Une solution de contournement pour ce problème commun de mise en œuvre 
+consiste à copier ``virtualFields`` d'un modèle à l'autre lors de 
+l'exécution, lorsque vous avez besoin d'y accéder ::
 
     <?php
-    $this->virtualFields['full_name'] = $this->Author->virtualFields['full_name'];
+    $this->virtualFields['full_name'] = $this->Author->virtualFields['nom_complet'];
 
 or::
 
@@ -201,5 +206,5 @@ or::
     $this->virtualFields += $this->Author->virtualFields;
 
 .. meta::
-    :title lang=en: Virtual fields
-    :keywords lang=en: sql expressions,array name,model fields,sql errors,virtual field,concatenation,model name,first name last name
+    :title lang=fr: Champs virtuels
+    :keywords lang=fr: expressions sql,tableau de nom,champs du modèle,erreurs sql,champ virtuel,concatenation,nom du modèle,prénom nom

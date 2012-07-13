@@ -1,124 +1,126 @@
-Saving Your Data
-################
+Sauvegarder vos Données
+#######################
 
-CakePHP makes saving model data a snap. Data ready to be saved
-should be passed to the model’s ``save()`` method using the
-following basic format::
+CakePHP rend la sauvegarde des données d’un modèle très rapide. Les données 
+prêtes à être sauvegardées doivent être passées à la méthode ``save()`` du modèle 
+en utilisant le format basique suivant ::
 
     Array
     (
-        [ModelName] => Array
+        [NomDuModele] => Array
         (
-            [fieldname1] => 'value'
-            [fieldname2] => 'value'
+            [nomduchamp1] => 'valeur'
+            [nomduchamp2] => 'valeur'
         )
     )
 
-Most of the time you won’t even need to worry about this format:
-CakePHP's :php:class:`FormHelper`, and model find methods all
-package data in this format. If you're using either of the helpers,
-the data is also conveniently available in ``$this->request->data`` for
-quick usage.
+La plupart du temps vous n’aurez même pas à vous préoccuper de ce format : 
+le :php:class:`FormHelper` et les méthodes de recherche de CakePHP réunissent 
+les données sous cette forme. Si vous utilisez un de ces helpers, les données 
+sont également disponibles dans ``$this->request->data`` pour un usage rapide 
+et pratique.
 
-Here's a quick example of a controller action that uses a CakePHP
-model to save data to a database table::
+Voici un exemple simple d’une action de contrôleur qui utilise un modèle 
+CakePHP pour sauvegarder les données dans une table de la base de données ::
 
     <?php
-    public function edit($id) {
-        // Has any form data been POSTed?
+    public function modifier($id) {
+        //Est-ce que des données de formulaires ont été POSTées ?
         if ($this->request->is('post')) {
-            // If the form data can be validated and saved...
-            if ($this->Recipe->save($this->request->data)) {
-                // Set a session flash message and redirect.
-                $this->Session->setFlash("Recipe Saved!");
-                $this->redirect('/recipes');
-            }
+           //Si les données du formulaire peuvent être validées et sauvegardées ...
+           if($this->Recette->save($this->request->data)) {
+               //On définit une message flash en session et on redirige.
+               $this->Session->setFlash("Recette sauvegardée !");
+               $this->redirect('/recettes');
+           }
         }
-
-        // If no form data, find the recipe to be edited
-        // and hand it to the view.
-        $this->set('recipe', $this->Recipe->findById($id));
+        //Si aucune données de formulaire, on récupère la recette à éditer
+        //et on la passe à la vue
+        $this->set('recette', $this->Recette->findById($id));
     }
 
-When save is called, the data passed to it in the first parameter is validated
-using CakePHP validation mechanism (see :doc:`/models/data-validation` chapter for more
-information). If for some reason your data isn't saving, be sure to check to see
-if some validation rules are being broken. You can debug this situation by
-outputting :php:attr:`Model::$validationErrors`::
+quand save() est appelée, la donnée qui lui est passée en premier paramètre 
+est validée en utilisant le mécanisme de validation de CakePHP (voir le 
+chapitre :doc:`/models/data-validation` pour plus d’informations). Si pour une 
+raison quelconque vos données ne se sauvegardent pas, pensez à regarder si 
+des règles de validation ne sont pas insatisfaites. Vous pouvez débugger cette
+situation en produisant :php:attr:`Model::$validationErrors`::
 
     <?php
-    if ($this->Recipe->save($this->request->data)) {
-        // handle the success.
+    if ($this->Recette->save($this->request->data)) {
+        // Traite le succès.
     }
     debug($this->Recipe->validationErrors);
 
-There are a few other save-related methods in the model that you'll
-find useful:
+Il y a quelques autres méthodes du modèle liées à la sauvegarde que vous 
+trouverez utiles :
 
 :php:meth:`Model::set($one, $two = null)`
 =========================================
 
-``Model::set()`` can be used to set one or many fields of data to the
-data array inside a model. This is useful when using models with
-the ActiveRecord features offered by Model::
+``Model::set()`` peut être utilisé pour définir un ou plusieurs champs de 
+données du tableau de donnés à l'intérieur d'un modèle. C'est utile pour 
+l'utilisation de modèles avec les fonctionnalités d'ActiveRecord offert 
+par le Modèle::
 
     <?php
     $this->Post->read(null, 1);
-    $this->Post->set('title', 'New title for the article');
+    $this->Post->set('title', 'Nouveau titre pour l'article');
     $this->Post->save();
 
-Is an example of how you can use ``set()`` to update and save
-single fields, in an ActiveRecord approach. You can also use
-``set()`` to assign new values to multiple fields::
+Dans un exemple de l'utilisation de ``set()`` pour mettre à jour et sauvegarder 
+les champs uniques, dans une approche ActiveRecord. Vous pouvez aussi utiliser 
+``set()`` pour assigner de nouvelles valeurs aux champs multiples::
 
     <?php
     $this->Post->read(null, 1);
     $this->Post->set(array(
-        'title' => 'New title',
-        'published' => false
+        'titre' => 'Nouveau titre',
+        'publie' => false
     ));
     $this->Post->save();
 
-The above would update the title and published fields and save them
-to the database.
+Ce qui est au-dessus met à jour les champs titre et publie et les sauvegarde 
+dans le base de données.
 
 :php:meth:`Model::save(array $data = null, boolean $validate = true, array $fieldList = array())`
 =================================================================================================
 
-Featured above, this method saves array-formatted data. The second
-parameter allows you to sidestep validation, and the third allows
-you to supply a list of model fields to be saved. For added
-security, you can limit the saved fields to those listed in
-``$fieldList``.
+La méthode ci-dessus sauvegarde des données formatées sous forme tabulaire. 
+Le second paramètre vous permet de mettre de côté la validation, et le 
+troisième vous permet de fournir une liste des champs du modèle devant être 
+sauvegardés. Pour une sécurité accrue, vous pouvez limiter les champs 
+sauvegardés à ceux listés dans ``$fieldList``.
 
 .. note::
+    Si ``$fieldList`` n'est pas fourni, un utilisateur malicieux peut ajouter 
+    des champs additionnels dans le formulaire de données (si vous n'utilisez 
+    pas :php:class:`SecurityComponent`), et ainsi changer la valeur de champs 
+    qui n'étaient pas prévus à l'origine.
 
-    If ``$fieldList`` is not supplied, a malicious user can add additional
-    fields to the form data (if you are not using
-    :php:class:`SecurityComponent`), and by this change fields that were not
-    originally intended to be changed.
-
-The save method also has an alternate syntax::
+La méthode save a aussi une syntaxe alternative::
 
     <?php
     save(array $data = null, array $params = array())
 
-``$params`` array can have any of the following available options
-as keys:
+Le tableau ``$params`` peut avoir n'importe quelles des options disponibles 
+suivantes en clés:
 
-* ``validate`` Set to true/false to enable disable validation.
-* ``fieldList`` An array of fields you want to allow for saving.
-* ``callbacks`` Set to false to disable callbacks.  Using 'before' or 'after'
-  will enable only those callbacks.
+* ``validate`` Définit à true/false pour activer/désactiver la validation.
+* ``fieldList`` Un tableau de champs que vous souhaitez autoriser pour la 
+  sauvegarde.
+* ``callbacks`` Définit à false la désactivation des callbacks. En utilisant
+ 'before' ou 'after' activera seulement ces callbacks.
 
-More information about model callbacks is available
-:doc:`here <callback-methods>`
+Plus d'informations sur les callbacks du modèle sont disponibles 
+:doc:`ici <callback-methods>`
 
 
 .. tip::
 
-    If you don't want the updated field to be updated when saving some
-    data add ``'updated' => false`` to your ``$data`` array
+    Si vous ne voulez pas le que champ mis à jour soit mis à jour pendant 
+    la sauvegarde de certaines données, ajoutez ``'updated' => false`` 
+    à votre tableau de ``$data``.
 
 Once a save has been completed, the ID for the object can be found
 in the ``$id`` attribute of the model object - something especially
@@ -875,4 +877,3 @@ the Model::save() to always do it for you::
 .. meta::
     :title lang=en: Saving Your Data
     :keywords lang=en: doc models,validation rules,data validation,flash message,null model,table php,request data,php class,model data,database table,array,recipes,success,reason,snap,data model
-
