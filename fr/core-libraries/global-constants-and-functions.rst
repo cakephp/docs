@@ -1,47 +1,55 @@
-Global Constants and Functions
-##############################
 
-While most of your day-to-day work in CakePHP will be utilizing
-core classes and methods, CakePHP features a number of global
-convenience functions that may come in handy. Many of these
-functions are for use with CakePHP classes (loading model or
-component classes), but many others make working with arrays or
-strings a little easier.
+Constantes globales et fonctions
+################################
 
-We’ll also cover some of the constants available in CakePHP
-applications. Using these constants will help make upgrades more
-smooth, but are also convenient ways to point to certain files or
-directories in your CakePHP application.
+Alors que la plupart de vos activité quotidiennes avec CakePHP
+sera d'initialiser des classes du noyau, Cake PHP dispose d'un
+certain nombre de fonctions globales de confort qui peuvent
+arriver à point nommé. La plupart de ses fonctions sont à
+utiliser avec les classes cakePHP (classes de chargement ou de
+composant), mais beaucoup d'autres rendent le travail avec les
+tableaux ou les chaînes un peu plus simple.
 
-Global Functions
-================
+Nous allons aussi couvrir une partie des constantes disponibles 
+dans les applications CakePHP. L'utilisation des constantes 
+disponibles vous aidera à faire des mises à jour plus lisse,
+mais sont aussi des moyens pratiques pour pointer certains
+fichiers ou répertoires dans vos application CakePHP.
 
-Here are CakePHP's globally available functions. Most of them
-are just convenience wrappers for other CakePHP functionality,
-such as debugging and translating content.
+
+Fonctions Globales
+==================
+
+Voici les fonctions disponibles dans le monde CakePHP. La plupart
+sont juste des emballages pratique pour d'autres fonctionnalités
+Cake PHP, comme le débogage et la traduction de contenu.
+
 
 .. php:function:: \_\_(string $string_id, [$formatArgs])
 
-    This function handles localization in CakePHP applications. The
-    ``$string_id`` identifies the ID for a translation.  Strings
-    used for translations are treated as format strings for 
-    ``sprintf()``.  You can supply additional arguments to replace
-    placeholders in your string::
+    Cette fonction gère la localisation dans les applications 
+    CakePHP. ``$string_id`` identifie l'ID de la traduction.
+    Les chaînes utilisées pour la traduction sont traitées 
+    comme chaîne formatées pour ``sprintf()``. Vous pouvez fournir
+    des arguments additionnels pour remplacer les espaces
+    réservés dans votre chaîne::
 
+    
         <?php
         __('You have %s unread messages', $number);
 
     .. note::
 
-        Check out the
+        Regardez la section
         :doc:`/core-libraries/internationalization-and-localization`
-        section for more information.
+        pour plus d'information.
 
 .. php:function:: __c(string $msg, integer $category, mixed $args = null)
 
-    Note that the category must be specified with a numeric value, instead of 
-    the constant name. The values are:
+    Notez que la catégorie doit être spécifiée avec une valeur numérique,
+    au lieu d'un nom de constante. Les valeurs sont:
 
+   
     - 0 - LC_ALL
     - 1 - LC_COLLATE
     - 2 - LC_CTYPE
@@ -52,18 +60,20 @@ such as debugging and translating content.
 
 .. php:function:: __d(string $domain, string $msg, mixed $args = null)
 
-    Allows you to override the current domain for a single message lookup.
+    Vous permet de remplacer le domaine courant pour la recherche d'un message.
 
-    Useful when internationalizing a plugin: 
-    ``echo __d('PluginName', 'This is my plugin');``
+    Utile pour internationaliser un plugin:
+     ``echo __d('PluginName', 'This is my plugin');``
 
 .. php:function:: __dc(string $domain, string $msg, integer $category, mixed $args = null)
 
-    Allows you to override the current domain for a single message lookup. It 
-    also allows you to specify a category.
+    Vous permet de remplacer le domaine courant pour la recherche d'un message. 
+    Permet également de spécifier une catégorie. 
+    
 
-    Note that the category must be specified with a numeric value, instead of 
-    the constant name. The values are:
+    Notez que la catégorie doit être spécifiée avec une valeur numérique,
+    au lieu du nom de la constante. Les valeurs sont:
+    
 
     - 0 - LC_ALL
     - 1 - LC_COLLATE
@@ -75,14 +85,17 @@ such as debugging and translating content.
 
 .. php:function:: __dcn(string $domain, string $singular, string $plural, integer $count, integer $category, mixed $args = null)
 
-    Allows you to override the current domain for a single plural message 
-    lookup. It also allows you to specify a category. Returns correct plural 
-    form of message identified by $singular and $plural for count $count from 
-    domain $domain.
+    Vous permet de remplacer le domaine courant pour la recherche simple au pluriel
+    d'un message.  Cela permet également de spécifier une catégorie.
+    Retourne la forme correcte d'un message identifié par $singular et $plural
+    pour le compteur $count depuis le domaine $domain. Certaines langues ont plus 
+    d'une forme de pluriel dépendant du compteur
 
-    Note that the category must be specified with a numeric value, instead of 
-    the constant name. The values are:
 
+    Notez que la catégorie doit être spécifiée avec des valeurs numériques,
+    au lieu des noms de constantes. Les valeurs sont:
+
+   
     - 0 - LC_ALL
     - 1 - LC_COLLATE
     - 2 - LC_CTYPE
@@ -93,181 +106,193 @@ such as debugging and translating content.
 
 .. php:function:: __dn(string $domain, string $singular, string $plural, integer $count, mixed $args = null)
 
-    Allows you to override the current domain for a single plural message 
-    lookup. Returns correct plural form of message identified by $singular and 
-    $plural for count $count from domain $domain.
-
+    Vous permet de redéfinir le domaine courant pour une recherche simple
+    au pluriel d'un message. Retourne la forme pluriel correcte d'un
+    message identifié par $singular et $plural pour le compteur $count
+    depuis le domaine $domain.
+  
 .. php:function:: __n(string $singular, string $plural, integer $count, mixed $args = null)
 
-    Returns correct plural form of message identified by $singular and $plural 
-    for count $count. Some languages have more than one form for plural 
-    messages dependent on the count.
+    Retourne la forme correcte d'un message identifié par $singular et $plural
+    pour le compteur $count. Certaines langues ont plus d'une forme de pluriel 
+    dépendant du compteur
 
+    
 .. php:function:: am(array $one, $two, $three...)
 
-    Merges all the arrays passed as parameters and returns the merged
-    array.
-
+    Fusionne tous les tableaux passés en paramètre et retourne le tableau
+    fusionné.
+   
 .. php:function:: config()
 
-    Can be used to load files from your application ``config``-folder
-    via include\_once. Function checks for existence before include and
-    returns boolean. Takes an optional number of arguments.
+    Peut être utilisé pour charger des fichiers depuis le dossier config 
+    de votre application via include\_once. La fonction vérifie l'existence 
+    du fichier avant de l'inclure et retourne un booléen. 
+    Prends un nombre optionnel d'arguments.
 
-    Example: ``config('some_file', 'myconfig');``
+   
+    Example: ``config('un_fichier', 'maconfig');``
 
 .. php:function:: convertSlash(string $string)
 
-    Converts forward slashes to underscores and removes the first and
-    last underscores in a string. Returns the converted string.
+    Convertit les slashes en underscores et supprime le premier et 
+    le dernier underscores dans une chaîne. Retourne la chaîne convertie.
 
+    
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
-    If the application's DEBUG level is non-zero, $var is printed out.
-    If ``$showHTML`` is trueor left null, the data is rendered to be
-    browser-friendly.
-    If $showFrom is not set to false, the debug output will start with the line from
-    which it was called
-    Also see :doc:`/development/debugging`
+    Si le niveau de DEBUG de l'application est différent de zéro, $var est 
+    affiché. Si ``$showHTML`` est true (vrai) ou laissé null, la donnée est
+    formatée pour être visualisée facilement dans un navigateur.
+
+    Si ``$showFrom`` n'est pas définit à false,  debug retournera en sortie
+    la ligne depuis laquelle il a été appelé
+    Voir aussi  :doc:`/development/debugging`
+
 
 .. php:function:: env(string $key)
 
-    Gets an environment variable from available sources. Used as a
-    backup if ``$_SERVER`` or ``$_ENV`` are disabled.
+    Récupère une variable d'environnement depuis les sources disponibles. 
+    Utilisé en secours si $_SERVER ou $_ENV sont désactivés.
 
-    This function also emulates PHP\_SELF and DOCUMENT\_ROOT on
-    unsupporting servers. In fact, it's a good idea to always use
-    ``env()`` instead of ``$_SERVER`` or ``getenv()`` (especially if
-    you plan to distribute the code), since it's a full emulation
-    wrapper.
+    Cette fonction émule également PHP_SELF et DOCUMENT_ROOT sur 
+    les serveurs ne les supportant pas. En fait, c'est une bonne idée 
+    de toujours utiliser env() plutôt que $_SERVER ou getenv() 
+    (notamment si vous prévoyez de distribuer le code), puisque 
+    c'est un wrapper d'émulation totale.
 
+   
 .. php:function:: fileExistsInPath(string $file)
 
-    Checks to make sure that the supplied file is within the current
-    PHP include\_path. Returns a boolean result.
+    Vérifie que le fichier donné est dans le include\_path PHP actuel. 
+    Renvoie une valeur booléenne.
 
+    
 .. php:function:: h(string $text, boolean $double = true, string $charset = null)
 
-    Convenience wrapper for ``htmlspecialchars()``.
+    Raccourci pratique pour ``htmlspecialchars()``.
 
 .. php:function:: LogError(string $message)
 
-    Shortcut to :php:meth:`Log::write()`.
-
+    Raccourci pour: :php:meth:`Log::write()`.
+ 
 .. php:function:: pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)
 
-    Splits a dot syntax plugin name into its plugin and classname. If $name 
-    does not have a dot, then index 0 will be null.
+    Divise le nom d'un plugin en notation par point en plugin et 
+    classname (nom de classe). Si $name de contient pas de point,
+    alors l'index 0 sera null.
 
-    Commonly used like ``list($plugin, $name) = pluginSplit('Users.User');``
-
+    Communément utiliser comme ceci ``list($plugin, $name) = pluginSplit('Users.User');``
+    
 .. php:function:: pr(mixed $var)
 
-    Convenience wrapper for ``print_r()``, with the addition of
-    wrapping <pre> tags around the output.
-
+    Raccourci pratique pour print_r(), avec un ajout de balises <pre> 
+    autour du résultat (sortie).
+   
 .. php:function:: sortByKey(array &$array, string $sortby, string $order = 'asc', integer $type = SORT_NUMERIC)
 
-    Sorts given $array by key $sortby.
-
+    Tris de $array par la clef $sortby. 
+   
 .. php:function:: stripslashes_deep(array $value)
 
-    Recursively strips slashes from the supplied ``$value``. Returns
-    the modified array.
+    Enlève récursivement les slashes de la $valeur passée. 
+    Renvoie le tableau modifié.
 
-Core Definition Constants
-=========================
+Définitions des constantes du noyau
+===================================
 
-Most of the following constants refer to paths in your application.
+La plupart des constantes suivantes font références aux chemins
+dans votre application.
 
 .. php:const:: APP
 
-   Path to the application's directory.
+   Chemin du répertoire de l'application.
 
 .. php:const:: APP_DIR
 
-    Equals ``app`` or the name of your application directory.
+    La même chose que ``app`` ou le nom du répertoire de votre application.
 
 .. php:const:: APPLIBS
 
-    Path to the application's Lib directory.
+    Le chemin du répertoire Lib de votre application.
 
 .. php:const:: CACHE
 
-    Path to the cache files directory. It can be shared between hosts in a 
-    multi-server setup.
-
+    Chemin vers le répertoire de cache. il peut être partagé entre les
+    hôtes dans une configuration multi-serveurs.
+    
 .. php:const:: CAKE
 
-    Path to the cake directory.
+    Chemin vers le répertoire de CAKE.
 
 .. php:const:: CAKE_CORE_INCLUDE_PATH
 
-    Path to the root lib directory.
+    Chemin vers la racine du répertoire lib. 
 
 .. php:const:: CORE_PATH
 
-   Path to the root directory with ending directory slash.
+   Chemin vers le répertoire racine avec un slash à la fin.
 
 .. php:const:: CSS
 
-    Path to the public CSS directory.
+    Chemin vers le répertoire CSS publique.
 
 .. php:const:: CSS_URL
 
-    Web path to the CSS files directory.
-
+    Chemin web vers le répertoire CSS.
+   
 .. php:const:: DS
 
-    Short for PHP's DIRECTORY\_SEPARATOR, which is / on Linux and \\ on windows.
+    Raccourci pour la constante PHP DIRECTORY\_SEPARATOR, qui est égale à / 
+    pour Linux et \\ pour Windows.
 
 .. php:const:: FULL_BASE_URL
 
-    Full url prefix. Such as ``https://example.com``
-
+    Préfix url complet. Comme ``https://example.com``
+   
 .. php:const:: IMAGES
 
-    Path to the public images directory.
+    Chemin vers le répertoire images publique.
 
 .. php:const:: IMAGES_URL
 
-    Web path to the public images directory.
+    Chemin web vers le répertoire image publique.
 
 .. php:const:: JS
 
-    Path to the public JavaScript directory.
+    Chemin vers le répertoire Javascript publique.
 
 .. php:const:: JS_URL
 
-    Web path to the js files directory.
+    Chemin web vers le répertoire Javascript publique.
 
 .. php:const:: LOGS
 
-    Path to the logs directory.
+    Chemin du répertoire des logs.
 
 .. php:const:: ROOT
 
-    Path to the root directory.
+    Chemin vers le répertoire racine.
 
 .. php:const:: TESTS
 
-    Path to the tests directory.
+    Chemin vers le répertoire de test.
 
 .. php:const:: TMP
 
-    Path to the temporary files directory.
+    Chemin vers le répertoire des fichiers temporaires.
 
 .. php:const:: VENDORS
 
-    Path to the vendors directory.
+    Chemin vers le répertoire vendors.
 
 .. php:const:: WEBROOT_DIR
 
-    Equals ``webroot`` or the name of your webroot directory.
-
+    La même chose que ``webroot`` ou le nom du répertoire webroot.
+    
 .. php:const:: WWW\_ROOT
 
-    Full path to the webroot.
+    Chemin d'accès complet vers la racine web (webroot).
 
 
 Timing Definition Constants
@@ -275,35 +300,35 @@ Timing Definition Constants
 
 .. php:const:: TIME_START
 
-    Unix timestamp in microseconds as a float from when the application started.
-
+    timestamp Unix en microseconde au format float du démarrage de l'application.
+  
 .. php:const:: SECOND
 
-    Equals 1
+    Égale 1
 
 .. php:const:: MINUTE
 
-    Equals 60
+    Égale 60
 
 .. php:const:: HOUR
 
-    Equals 3600
+    Égale 3600
 
 .. php:const:: DAY
 
-    Equals 86400
+    Égale 86400
 
 .. php:const:: WEEK
 
-    Equals 604800
+    Égale 604800
 
 .. php:const:: MONTH
 
-    Equals 2592000
+    Égale 2592000
 
 .. php:const:: YEAR
 
-    Equals 31536000
+    Égale 31536000
 
 
 .. meta::
