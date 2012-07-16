@@ -127,6 +127,7 @@ with CakePHP::
             $this->Session->setFlash(__('User was not deleted'));
             $this->redirect(array('action' => 'index'));
         }
+    }
 
 In the same way we created the views for our blog posts or by using the code
 generation tool, we implement the views. For the purpose of this tutorial, we
