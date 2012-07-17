@@ -742,8 +742,8 @@ En plus de la méthode générique ``input()`` , le ``FormHelper`` à des
 méthodes spécifiques pour générer différents types d'inputs. Ceci peut
 être utilisé pour générer juste un extrait de code  input , et combiné avec d'autres
 méthodes comme :php:meth:`~FormHelper::label()` et 
- :php:meth:`~FormHelper::error()`  pour générer des layouts (mise en page) 
- complètements personnalisées.
+:php:meth:`~FormHelper::error()`  pour générer des layouts (mise en page) 
+complètements personnalisées.
 
 
 .. _general-input-options:
@@ -757,37 +757,37 @@ par ``input()``. Pour réduire les répétitions les options communes
 partagées par toutes les méthodes input sont :
 
 
-* ``$options['class']`` Vous pouvez définir le nom de classe pour un input::
+*   ``$options['class']`` Vous pouvez définir le nom de classe pour un input::
 
-    <?php
-    echo $this->Form->input('title', array('class' => 'class-perso'));
+        <?php
+        echo $this->Form->input('title', array('class' => 'class-perso'));
 
-* ``$options['id']`` Définir cette clef pour forcer la valeur du DOM id pour cet input.
+*   ``$options['id']`` Définir cette clef pour forcer la valeur du DOM id pour cet input.
 
-* ``$options['default']`` Utilisé pour définir une valeur par défaut au champ input. La
+*   ``$options['default']`` Utilisé pour définir une valeur par défaut au champ input. La
     valeur est utilisée si les données passées au formulaire ne contiennent pas de
     valeur pour le champ (ou si aucune donnée n'est transmise)
 
 
-  Exemple d'utilisation::
+    Exemple d'utilisation::
 
-    <?php
-    echo $this->Form->input('ingredient', array('default' => 'Sucre'));
+        <?php
+        echo $this->Form->input('ingredient', array('default' => 'Sucre'));
 
-  Exemple avec un champ sélectionné (Taille "Moyen" sera sélectionné par défaut)::
+    Exemple avec un champ sélectionné (Taille "Moyen" sera sélectionné par défaut)::
 
-    <?php
-    $tailles = array('p' => 'Petit', 'm' => 'Moyen', 'g' => 'Grand');
-    echo $this->Form->input('taille', array('options' => $tailles, 'default' => 'm'));
+        <?php
+        $tailles = array('p' => 'Petit', 'm' => 'Moyen', 'g' => 'Grand');
+        echo $this->Form->input('taille', array('options' => $tailles, 'default' => 'm'));
 
-  .. note::
+    .. note::
 
     Vous ne pouvez pas utiliser ``default``  pour sélectionner une chekbox - 
     vous devez plutôt définir cette valeur dans ``$this->request->data`` dans
     votre contrôleur, ou définir l'option ``checked`` de input à true.
 
     
-  .. note::
+    .. note::
 
     La valeur par défaut des champs Date et datetime peut être définis en utilisant 
     la clef 'selected'.
@@ -801,37 +801,37 @@ Les options pour  select, checkbox et inputs radio
 -----------------------------------------------------------------
 
 
-* ``$options['selected']`` Utilisé en combinaison avec un input de type select
-(ex. Pour les types select, date, heure, datetime) . Définissez 'selected' pour
-définir l'élément que vous souhaiteriez définir par défaut au rendu de l'input::
+*   ``$options['selected']`` Utilisé en combinaison avec un input de type select
+    (ex. Pour les types select, date, heure, datetime) . Définissez 'selected' pour
+    définir l'élément que vous souhaiteriez définir par défaut au rendu de l'input::
 
+    
+        <?php
+        echo $this->Form->input('heure_fermeture', array(
+            'type' => 'time',
+            'selected' => '13:30:00'
+        ));
 
-    <?php
-    echo $this->Form->input('heure_fermeture', array(
-        'type' => 'time',
-        'selected' => '13:30:00'
-    ));
+    .. note::
 
-  .. note::
+        La clef selected pour les inputs de type date et datetime peuvent  aussi être des timestamps UNIX.
 
-    La clef selected pour les inputs de type date et datetime peuvent  aussi être des timestamps UNIX.
+*   ``$options['empty']`` Est définit à true, pour forcer l'input à rester vide.
 
-* ``$options['empty']`` Est définit à true, pour forcer l'input à rester vide.
-
-  Quand passé à une list select (liste de selection), ceci créera une
-  option vide avec une valeur vide dans la liste déroulante. Si vous
-  voulez une valeur vide avec un texte affiché ou juste une option
-  vide, passer une chaîne pour vider::
+    Quand passé à une list select (liste de selection), ceci créera une
+    option vide avec une valeur vide dans la liste déroulante. Si vous
+    voulez une valeur vide avec un texte affiché ou juste une option
+    vide, passer une chaîne pour vider::
 
   
 
-      <?php
-      echo $this->Form->input('field', array(
-          'options' => array(1, 2, 3, 4, 5),
-          'empty' => '(choisissez)'
-      ));
+          <?php
+          echo $this->Form->input('field', array(
+              'options' => array(1, 2, 3, 4, 5),
+              'empty' => '(choisissez)'
+          ));
 
-  Output::
+    Output::
 
       <div class="input">
           <label for="UserField">Field</label>
@@ -845,62 +845,62 @@ définir l'élément que vous souhaiteriez définir par défaut au rendu de l'in
           </select>
       </div>
 
-  .. note::
+    .. note::
 
-      Si vous avez besoin de définir la valeur par défaut d'un champ password
-      à vide, utilisez 'value'=> '' (deux fois simple cote) à la place.
+        Si vous avez besoin de définir la valeur par défaut d'un champ password
+        à vide, utilisez 'value'=> '' (deux fois simple cote) à la place.
  
-  Les Options peuvent aussi fournir une paire de clef-valeur.
+    Les Options peuvent aussi fournir une paire de clef-valeur.
 
-* ``$options['hiddenField']`` Pour certain types d' input (checkboxes, radios) un input
-  caché est créé ainsi la clef dans $this->request->data existera même sans valeur 
-  spécifiée::
+*   ``$options['hiddenField']`` Pour certain types d' input (checkboxes, radios) un input
+    caché est créé ainsi la clef dans $this->request->data existera même sans valeur 
+    spécifiée::
 
 
-    <input type="hidden" name="data[Post][Published]" id="PostPublished_" value="0" />
-    <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
+        <input type="hidden" name="data[Post][Published]" id="PostPublished_" value="0" />
+        <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
 
-  Ceci peut être désactivé en définissant l'option ``$options['hiddenField'] = false``::
+    Ceci peut être désactivé en définissant l'option ``$options['hiddenField'] = false``::
+    
+        <?php
+        echo $this->Form->checkbox('published', array('hiddenField' => false));
 
-    <?php
-    echo $this->Form->checkbox('published', array('hiddenField' => false));
+    Retournera::
 
-  Retournera::
+        <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
 
-    <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
+    Si vous voulez créer de multiples blocs d'entrés regroupés 
+    ensemble dans un formulaire, vous devriez utiliser ce paramètre
+    sur tous les inputs excepté le premier. Si le input caché est en
+    place à différents endroits c'est seulement le dernier groupe
+    de valeur d'input qui sera sauvegardé.
 
- Si vous voulez créer de multiples blocs d'entrés regroupés 
- ensemble dans un formulaire, vous devriez utiliser ce paramètre
- sur tous les inputs excepté le premier. Si le input caché est en
- place à différents endroits c'est seulement le dernier groupe
- de valeur d'input qui sera sauvegardé.
-
-  Dans cet exemple , seules les couleurs tertiaires seront passées, 
-  et les couleurs primaires seront réécrite::
+    Dans cet exemple , seules les couleurs tertiaires seront passées, 
+    et les couleurs primaires seront réécrite::
   
   
-    <h2>Couleurs Primaires</h2>
-    <input type="hidden" name="data[Color][Color]" id="Couleurs_" value="0" />
-    <input type="checkbox" name="data[Color][Color][]" value="5" id="CouleursRouges" />
-    <label for="CouleursRouges">Rouge</label>
-    <input type="checkbox" name="data[Color][Color][]" value="5" id="CouleursBleus" />
-    <label for="CouleursBleus">Bleu</label>
-    <input type="checkbox" name="data[Color][Color][]" value="5" id="CouleursJaunes" />
-    <label for="CouleursJaunes">Jaune</label>
+        <h2>Couleurs Primaires</h2>
+        <input type="hidden" name="data[Color][Color]" id="Couleurs_" value="0" />
+        <input type="checkbox" name="data[Color][Color][]" value="5" id="CouleursRouges" />
+        <label for="CouleursRouges">Rouge</label>
+        <input type="checkbox" name="data[Color][Color][]" value="5" id="CouleursBleus" />
+        <label for="CouleursBleus">Bleu</label>
+        <input type="checkbox" name="data[Color][Color][]" value="5" id="CouleursJaunes" />
+        <label for="CouleursJaunes">Jaune</label>
+    
+        <h2>Couleurs Tertiaires</h2>
+        <input type="hidden" name="data[Color][Color]" id="Couleurs_" value="0" />
+        <input type="checkbox" name="data[Color][Color][]" value="5" id="CouleursVertes" />
+        <label for="CouleursVertes">Vert</label>
+        <input type="checkbox" name="data[Color][Color][]" value="5" id="CouleursPourpres" />
+        <label for="CouleursPourpres">Pourpre</label>
+        <input type="checkbox" name="data[Addon][Addon][]" value="5" id="CouleursOranges" />
+        <label for="CouleursOranges">Orange</label>
 
-    <h2>Couleurs Tertiaires</h2>
-    <input type="hidden" name="data[Color][Color]" id="Couleurs_" value="0" />
-    <input type="checkbox" name="data[Color][Color][]" value="5" id="CouleursVertes" />
-    <label for="CouleursVertes">Vert</label>
-    <input type="checkbox" name="data[Color][Color][]" value="5" id="CouleursPourpres" />
-    <label for="CouleursPourpres">Pourpre</label>
-    <input type="checkbox" name="data[Addon][Addon][]" value="5" id="CouleursOranges" />
-    <label for="CouleursOranges">Orange</label>
+    En désactivant le champ caché ``'hiddenField'`` dans le second groupe d'input empêchera
+    ce comportement.
 
-  En désactivant le champ caché ``'hiddenField'`` dans le second groupe d'input empêchera
-  ce comportement.
-
-  Vous pouvez définir une valeur différente pour le champ caché autre que  0 comme 'N'::
+    Vous pouvez définir une valeur différente pour le champ caché autre que  0 comme 'N'::
 
       <?php
       echo $this->Form->checkbox('published', array(
@@ -911,34 +911,34 @@ définir l'élément que vous souhaiteriez définir par défaut au rendu de l'in
 Les options de Datetime
 --------------------------------
 
-* ``$options['timeFormat']`` .Utilisé pour spécifier le format des inputs select
-  (menu de sélection) pour un jeu d'input en relation avec le temps. 
-  Les valeurs valides sont '12', '24', et ``null``.
+*   ``$options['timeFormat']`` .Utilisé pour spécifier le format des inputs select
+    (menu de sélection) pour un jeu d'input en relation avec le temps. 
+    Les valeurs valides sont '12', '24', et ``null``.
 
-* ``$options['dateFormat']`` Utilisé pour spécifier le format des inputs select
- (menu de sélection) pour un jeu d'input en relation avec le temps.
-  Les valeurs valides comprennent  n'importe quelle combinaison de 'D',
-  'M' et 'Y' or ``null``. Les input seront placés dans l'ordre définit par l'option dateFormat.
+*   ``$options['dateFormat']`` Utilisé pour spécifier le format des inputs select
+    (menu de sélection) pour un jeu d'input en relation avec le temps.
+    Les valeurs valides comprennent  n'importe quelle combinaison de 'D',
+    'M' et 'Y' or ``null``. Les input seront placés dans l'ordre définit par l'option dateFormat.
 
-* ``$options['minYear'], $options['maxYear']`` Utilisé en combinaison avec un 
-  input date/datetime. Définit les valeurs minimales et/ou maximales de fin montrées
-  dans le champ select years. 
+*   ``$options['minYear'], $options['maxYear']`` Utilisé en combinaison avec un 
+    input date/datetime. Définit les valeurs minimales et/ou maximales de fin montrées
+    dans le champ select years. 
   
 
-* ``$options['orderYear']`` Utilisé en combinaison avec un input date/datetime.
-  Définit l'ordre dans lequel la valeur de l'année sera délivré. Les valeurs valides
-  sont  'asc', 'desc'. La valeur par défaut est  'desc'.
+*   ``$options['orderYear']`` Utilisé en combinaison avec un input date/datetime.
+    Définit l'ordre dans lequel la valeur de l'année sera délivré. Les valeurs valides
+    sont  'asc', 'desc'. La valeur par défaut est  'desc'.
 
-* ``$options['interval']`` Cette option spécifie l'écart de minutes
-  entre chaque option dans la select box minute::
+*   ``$options['interval']`` Cette option spécifie l'écart de minutes
+    entre chaque option dans la select box minute::
 
-    <?php
-    echo $this->Form->input('Model.time', array(
-        'type' => 'time',
-        'interval' => 15
-    ));
+        <?php
+        echo $this->Form->input('Model.time', array(
+            'type' => 'time',
+            'interval' => 15
+        ));
 
-  Créera 4 options dans la select box minute . Une toute les 15 minutes.
+    Créera 4 options dans la select box minute . Une toute les 15 minutes.
 
 Éléments de Formulaire-Méthodes spécifiques
 ====================================
