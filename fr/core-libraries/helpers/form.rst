@@ -123,7 +123,7 @@ Il y plusieurs options pour create():
 
 
 
-* ``$options['type']`` Cette clé est utilisée pour spécifier le type de 
+*   ``$options['type']`` Cette clé est utilisée pour spécifier le type de 
     formulaire à créer. Les valeurs que peuvent prendre cette variable 
     sont 'post', 'get', 'file', 'put' et 'delete'.
 
@@ -165,8 +165,8 @@ Il y plusieurs options pour create():
 
     Affichera::
 
-    <form id="UserLoginForm" method="post" action="/users/login">
-    </form>
+        <form id="UserLoginForm" method="post" action="/users/login">
+        </form>
 
 *   ``$options['url']`` Si l'action que vous désirez appeler avec le formulaire 
     n'est pas dans le contrôleur courant, vous pouvez spécifier une URL 
@@ -200,35 +200,35 @@ Il y plusieurs options pour create():
     Regardez aussi la méthode  :php:meth:`HtmlHelper::url()` pour plus d'exemples
     sur les différents types d'Urls.
 
-* ``$options['default']`` Si la variable 'default' est définit à false, l'action de 
-soumission du formulaire est changée de telle manière que le bouton 
-submit (de soumission) ne soumet plus le formulaire. Si le formulaire a été 
-créé pour être soumit par AJAX, mettre la variable 'default' à FALSE supprime 
-le comportement par défaut du formulaire, ainsi vous pouvez collecter les 
-données et les soumettre par AJAX à la place.
+*   ``$options['default']`` Si la variable 'default' est définit à false, l'action de 
+    soumission du formulaire est changée de telle manière que le bouton 
+    submit (de soumission) ne soumet plus le formulaire. Si le formulaire a été 
+    créé pour être soumit par AJAX, mettre la variable 'default' à FALSE supprime 
+    le comportement par défaut du formulaire, ainsi vous pouvez collecter les 
+    données et les soumettre par AJAX à la place.
 
 
-* ``$options['inputDefaults']`` Vous pouvez déclarer un jeu d'options 
+*   ``$options['inputDefaults']`` Vous pouvez déclarer un jeu d'options 
     par défaut pour ``input()`` avec la clef ``inputDefaults`` pour personnaliser
     vos input par défaut::
 
-    <?php
-    echo $this->Form->create('User', array(
-        'inputDefaults' => array(
-            'label' => false,
-            'div' => false
-        )
-    ));
+        <?php
+        echo $this->Form->create('User', array(
+            'inputDefaults' => array(
+             'label' => false,
+             'div' => false
+            )
+         ));
 
-  Tous les input créés à partir de ce point hériteraient 
-  des options déclarées dans inputDefaults. Vous pouvez
-  redéfinir le  defaultOptions en déclarant l'option dans
-  l'appel  input()::
+    Tous les input créés à partir de ce point hériteraient 
+    des options déclarées dans inputDefaults. Vous pouvez
+    redéfinir le  defaultOptions en déclarant l'option dans
+    l'appel  input()::
 
   
-    <?php
-    echo $this->Form->input('password'); // Pas de , Pas de label
-    echo $this->Form->input('username', array('label' => 'Username')); // a un élément label 
+        <?php
+        echo $this->Form->input('password'); // Pas de , Pas de label
+        echo $this->Form->input('username', array('label' => 'Username')); // a un élément label 
 
 Fermer le Formulaire
 ================
@@ -258,7 +258,7 @@ Fermer le Formulaire
     Affichera::
 
         <div class="submit">
-            <input type="submit" value="Termine" />
+        <input type="submit" value="Termine" />
         </div>
         </form>
 
