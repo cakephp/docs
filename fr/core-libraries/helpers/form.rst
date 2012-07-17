@@ -155,7 +155,7 @@ Il y plusieurs options pour create():
     Cela permettra à CakePHP de créer son propre support 
     REST dans les navigateurs web.
 
- * ``$options['action']`` La clef action vous permet de définir vers quelle 
+*   ``$options['action']`` La clef action vous permet de définir vers quelle 
     action de votre contrôleur pointera le formulaire. Par exemple, si vous 
     voulez que le formulaire appelle l'action login() de votre contrôleur courant, 
     vous créeriez le tableau $options comme ceci ::
@@ -168,7 +168,7 @@ Il y plusieurs options pour create():
     <form id="UserLoginForm" method="post" action="/users/login">
     </form>
 
-* ``$options['url']`` Si l'action que vous désirez appeler avec le formulaire 
+*   ``$options['url']`` Si l'action que vous désirez appeler avec le formulaire 
     n'est pas dans le contrôleur courant, vous pouvez spécifier une URL 
     dans le formulaire en utilisant la clé 'url' de votre tableau $options. 
     L'URL ainsi fournie peut être relative à votre application CakePHP ::
@@ -195,10 +195,10 @@ Il y plusieurs options pour create():
 
      Affichera::
 
-    <form method="get" action="http://www.google.com/search">
+        <form method="get" action="http://www.google.com/search">
 
-  Regardez aussi la méthode  :php:meth:`HtmlHelper::url()` pour plus d'exemples
-  sur les différents types d'Urls.
+    Regardez aussi la méthode  :php:meth:`HtmlHelper::url()` pour plus d'exemples
+    sur les différents types d'Urls.
 
 * ``$options['default']`` Si la variable 'default' est définit à false, l'action de 
 soumission du formulaire est changée de telle manière que le bouton 
