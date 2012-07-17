@@ -437,7 +437,7 @@ Conventions de nommage des champs
 Le Helper Form est assez évolué. Lorsque vous définissez un nom 
 de champ avec les méthodes du Helper Form, celui-ci génère 
 automatiquement une balise input basée sur le nom de modèle courant, 
-selon le format suivant :
+selon le format suivant ::
 
 
     <input type="text" id="ModelnameFieldname" name="data[Modelname][fieldname]">
@@ -489,170 +489,170 @@ propres options ``input()`` accepte des options pour les champs input générés
 comme les attributs html. Ce qui suit va couvrir les options spécifiques de
 ``FormHelper::input()``.
 
-* ``$options['type']`` Vous pouvez forcer le type d'un input, remplaçant l'introspection
-du modèle, en spécifiant un type. En plus des types de champs vus dans  
- :ref:`automagic-form-elements`, vous pouvez aussi créez des 'fichiers', 'password'
-et divers types supportés par HTML5::
+*   ``$options['type']`` Vous pouvez forcer le type d'un input, remplaçant l'introspection
+    du modèle, en spécifiant un type. En plus des types de champs vus dans  
+    :ref:`automagic-form-elements`, vous pouvez aussi créez des 'fichiers', 'password'
+    et divers types supportés par HTML5::
 
  
-    <?php
-    echo $this->Form->input('field', array('type' => 'file'));
-    echo $this->Form->input('email', array('type' => 'email'));
+        <?php
+        echo $this->Form->input('field', array('type' => 'file'));
+        echo $this->Form->input('email', array('type' => 'email'));
 
-  Affichera::
+    Affichera::
 
-    <div class="input file">
-        <label for="UserField">Field</label>
-        <input type="file" name="data[User][field]" value="" id="UserField" />
-    </div>
-    <div class="input email">
-        <label for="UserEmail">Email</label>
-        <input type="email" name="data[User][email]" value="" id="UserEmail" />
-    </div>
+        <div class="input file">
+            <label for="UserField">Field</label>
+            <input type="file" name="data[User][field]" value="" id="UserField" />
+        </div>
+        <div class="input email">
+            <label for="UserEmail">Email</label>
+            <input type="email" name="data[User][email]" value="" id="UserEmail" />
+        </div>
 
-* ``$options['div']`` Utilisez cette option pour définir les attributs de la div contentant
-l'input. En utilisant une valeur chaîne configurera le nom de classe de la div. 
-Un tableau clefs/valeurs paramétrera les attributs de la div. Alternativement
-, vous pouvez définir cet clef à false pour désactiver le rendu de la div. 
+*   ``$options['div']`` Utilisez cette option pour définir les attributs de la div contentant
+    l'input. En utilisant une valeur chaîne configurera le nom de classe de la div. 
+    Un tableau clefs/valeurs paramétrera les attributs de la div. Alternativement,
+    vous pouvez définir cet clef à false pour désactiver le rendu de la div. 
 
 
-  Définir le nom de classe::
+    Définir le nom de classe::
 
-    <?php
-    echo $this->Form->input('User.name', array(
-        'div' => 'class_name'
-    ));
+        <?php
+        echo $this->Form->input('User.name', array(
+            'div' => 'class_name'
+        ));
 
-  Affichera::
+    Affichera::
 
-    <div class="class_name">
+        <div class="class_name">
+            <label for="UserName">Name</label>
+            <input name="data[User][name]" type="text" value="" id="UserName" />
+        </div>
+
+    Paramétrage de plusieurs attibuts::
+
+        <?php
+        echo $this->Form->input('User.name', array(
+            'div' => array(
+              'id' => 'mainDiv',
+             'title' => 'Div Title',
+               'style' => 'display:block'
+         )
+        ));
+
+    Affichera::
+
+        <div class="input text" id="mainDiv" title="Div Title" style="display:block">
+            <label for="UserName">Name</label>
+            <input name="data[User][name]" type="text" value="" id="UserName" />
+        </div>
+
+    Désactiver le rendu de la div ::
+
+        <?php
+        echo $this->Form->input('User.name', array('div' => false)); ?>
+
+    Affichera::
+
         <label for="UserName">Name</label>
         <input name="data[User][name]" type="text" value="" id="UserName" />
-    </div>
 
-  Paramétrage de plusieurs attibuts::
-
-    <?php
-    echo $this->Form->input('User.name', array(
-        'div' => array(
-            'id' => 'mainDiv',
-            'title' => 'Div Title',
-            'style' => 'display:block'
-        )
-    ));
-
- Affichera::
-
-    <div class="input text" id="mainDiv" title="Div Title" style="display:block">
-        <label for="UserName">Name</label>
-        <input name="data[User][name]" type="text" value="" id="UserName" />
-    </div>
-
-  Désactiver le rendu de la div ::
-
-    <?php
-    echo $this->Form->input('User.name', array('div' => false)); ?>
-
-  Affichera::
-
-    <label for="UserName">Name</label>
-    <input name="data[User][name]" type="text" value="" id="UserName" />
-
-* ``$options['label']`` Définissez cette clef à la chaîne que vous voudriez 
+*   ``$options['label']`` Définissez cette clef à la chaîne que vous voudriez 
     afficher dans le label qui accompagne le input::
+    
+        <?php
+        echo $this->Form->input('User.name', array(
+            'label' => 'Alias de l'utilisateur'
+        ));
 
-    <?php
-    echo $this->Form->input('User.name', array(
-        'label' => 'Alias de l'utilisateur'
-    ));
+    Affichera::
 
-  Affichera::
+        <div class="input">
+            <label for="UserName">Alias de l'utilisateur</label>
+            <input name="data[User][name]" type="text" value="" id="UserName" />
+        </div>
 
-    <div class="input">
-        <label for="UserName">Alias de l'utilisateur</label>
-        <input name="data[User][name]" type="text" value="" id="UserName" />
-    </div>
+    Alternativement , définissez cette clef à false pour désactiver le rendu du label::
 
-  Alternativement , définissez cette clef à false pour désactiver le rendu du label::
+        <?php
+        echo $this->Form->input('User.name', array('label' => false));
 
-    <?php
-    echo $this->Form->input('User.name', array('label' => false));
+    Affichera::
 
-  Affichera::
+        <div class="input">
+            <input name="data[User][name]" type="text" value="" id="UserName" />
+        </div>
 
-    <div class="input">
-        <input name="data[User][name]" type="text" value="" id="UserName" />
-    </div>
-
-  Définissez ceci dans un tableau pour fournir des options additionnelles pour l'élément 
-   ``label``. Si vous faites cela, vous pouvez utiliser une clef ``text`` dans
-   le tableau pour personnaliser le texte du label::
-
-
-    <?php
-    echo $this->Form->input('User.name', array(
-        'label' => array(
-            'class' => 'bidule',
-            'text' => 'le traducteur est fou hihaaarrrr!!!'
-        )
-    ));
-
-  Output::
-
-    <div class="input">
-        <label for="UserName" class="bidule">le traducteur est fou hihaaarrrr!!!</label>
-        <input name="data[User][name]" type="text" value="" id="UserName" />
-    </div>
+    Définissez ceci dans un tableau pour fournir des options additionnelles pour l'élément 
+    ``label``. Si vous faites cela, vous pouvez utiliser une clef ``text`` dans
+    le tableau pour personnaliser le texte du label::
 
 
-* ``$options['error']`` En utilisant cette clef vous permettra de transformer
-  les messages de modèle par défaut et de les utiliser, par exemple, pour
-  définir des messages i18n. (cf  internationalisation).
-  comporte un nombre de sous-options qui contrôles l'enveloppe de l'élément 
-  (wrapping) . Le nom de classe de l'élément enveloppé , ainsi que 
-  les messages d'erreurs qui contiennent du HTML devront être échappés.
+        <?php
+        echo $this->Form->input('User.name', array(
+            'label' => array(
+                'class' => 'bidule',
+                'text' => 'le traducteur est fou hihaaarrrr!!!'
+            )
+        ));
 
-  Pour désactiver le rendu des messages d'erreurs définissez la clef error
-  à false::
+    Output::
 
-  
-    <?php
-    $this->Form->input('Model.field', array('error' => false));
+        <div class="input">
+            <label for="UserName" class="bidule">le traducteur est fou hihaaarrrr!!!</label>
+            <input name="data[User][name]" type="text" value="" id="UserName" />
+        </div>
 
-  Pour modifier le type d'enveloppe de l'élément et sa classe, utilisez
-  le format suivant::
 
-    <?php
-    $this->Form->input('Model.field', array(
-        'error' => array('attributes' => array('wrap' => 'span', 'class' => 'bzzz'))
-    ));
+*   ``$options['error']`` En utilisant cette clef vous permettra de transformer
+    les messages de modèle par défaut et de les utiliser, par exemple, pour
+    définir des messages i18n. (cf  internationalisation).
+    comporte un nombre de sous-options qui contrôles l'enveloppe de l'élément 
+    (wrapping) . Le nom de classe de l'élément enveloppé , ainsi que 
+    les messages d'erreurs qui contiennent du HTML devront être échappés.
 
-  Pour éviter que le code HTML soit automatiquement échappé dans le rendu 
-  du message d'erreur, définissez la sous-option escape à false::
-
-    <?php
-    $this->Form->input('Model.field', array(
-        'error' => array('escape' => false)
-    ));
-
-  Pour remplacer les messages d'erreurs du modèle utilisez un tableau
- avec les clefs respectant les règles de validation::
-  
-    <?php
-    $this->Form->input('Model.field', array(
-        'error' => array('tooShort' => __('Ceci n'est pas assez long'))
-    ));
-
-  Comme vu ci-dessus vous pouvez définir les messages d'erreurs
- pour chacune des règles de validation de vos modèles.
- Vous pouvez de plus fournir des messages i18n pour vos formulaires.
+    Pour désactiver le rendu des messages d'erreurs définissez la clef error
+    à false::
 
   
-* ``$options['before']``, ``$options['between']``, ``$options['separator']``,
-  et ``$options['after']``
+        <?php
+        $this->Form->input('Model.field', array('error' => false));
 
-  Utilisez ces clés si vous avez besoin d'injecter quelques balises à la
-  sortie de la méthode input().::
+    Pour modifier le type d'enveloppe de l'élément et sa classe, utilisez
+    le format suivant::
+
+        <?php
+        $this->Form->input('Model.field', array(
+            'error' => array('attributes' => array('wrap' => 'span', 'class' => 'bzzz'))
+        ));
+
+    Pour éviter que le code HTML soit automatiquement échappé dans le rendu 
+    du message d'erreur, définissez la sous-option escape à false::
+
+        <?php
+        $this->Form->input('Model.field', array(
+            'error' => array('escape' => false)
+        ));
+
+    Pour remplacer les messages d'erreurs du modèle utilisez un tableau
+    avec les clefs respectant les règles de validation::
+  
+        <?php
+        $this->Form->input('Model.field', array(
+            'error' => array('tooShort' => __('Ceci n'est pas assez long'))
+        ));
+
+    Comme vu ci-dessus vous pouvez définir les messages d'erreurs
+    pour chacune des règles de validation de vos modèles.
+    Vous pouvez de plus fournir des messages i18n pour vos formulaires.
+
+  
+*   ``$options['before']``, ``$options['between']``, ``$options['separator']``,
+    et ``$options['after']``
+
+    Utilisez ces clés si vous avez besoin d'injecter quelques balises à la
+    sortie de la méthode input().::
 
   
       <?php
@@ -662,7 +662,7 @@ Un tableau clefs/valeurs paramétrera les attributs de la div. Alternativement
           'between' => '--entre---'
       ));
 
-  Affichera::
+    Affichera::
 
       <div class="input">
       --avant--
@@ -672,11 +672,11 @@ Un tableau clefs/valeurs paramétrera les attributs de la div. Alternativement
       --après--
       </div>
 
-  Pour les input de type radio l'attribut 'separator' peut être 
-  utilisé pour injecter des balise pour séparer input/label.::
+    Pour les input de type radio l'attribut 'separator' peut être 
+    utilisé pour injecter des balise pour séparer input/label.::
 
        <?php
-      echo $this->Form->input('field', array(
+        echo $this->Form->input('field', array(
           'before' => '--avant--',
           'after' => '--après--',
           'between' => '--entre---',
@@ -684,7 +684,7 @@ Un tableau clefs/valeurs paramétrera les attributs de la div. Alternativement
           'options' => array('1', '2')
       ));
 
-  Affichera::
+    Affichera::
 
       <div class="input">
       --avant--
@@ -697,43 +697,43 @@ Un tableau clefs/valeurs paramétrera les attributs de la div. Alternativement
       --après--
       </div>
 
-  Pour un élément de type  ``date`` et ``datetime`` l'attribut 'separator' peut 
-  être utilisé pour modifier la chaîne entre les select. Par défaut '-'.
+    Pour un élément de type  ``date`` et ``datetime`` l'attribut 'separator' peut 
+    être utilisé pour modifier la chaîne entre les select. Par défaut '-'.
 
  
-* ``$options['format']`` L'ordre du code HTML généré par FormHelper est 
-contrôlable comme vous le souhaitez. l'option 'format' supporte un tableau 
-de chaîne  décrivant le modèle de page que vous voudriez que l'élément 
-suive. Les clefs de tableau supportées sont:
+*   ``$options['format']`` L'ordre du code HTML généré par FormHelper est 
+    contrôlable comme vous le souhaitez. l'option 'format' supporte un tableau 
+    de chaîne  décrivant le modèle de page que vous voudriez que l'élément 
+    suive. Les clefs de tableau supportées sont:
 
-   ``array('before', 'input', 'between', 'label', 'after','error')``.
-
-
-* ``$options['inputDefaults']`` S'il vous semble répéter la même option dans
-de multiples appels input(), vous pouvez utiliser ``inputDefaults`` pour garder
-un code propre.::
+        ``array('before', 'input', 'between', 'label', 'after','error')``.
 
 
-    <?php
-    echo $this->Form->create('User', array(
-        'inputDefaults' => array(
-            'label' => false,
-            'div' => false
-        )
-    ));
-
-  Tous les inputs créés a partir de ce point  hériterons
- des valeurs déclarées dans inputDefaults. Vous pouvez
- redéfinir defaultOptions en déclarant l'option dans l'appel
- de l'input()::
+*   ``$options['inputDefaults']`` S'il vous semble répéter la même option dans
+    de multiples appels input(), vous pouvez utiliser ``inputDefaults`` pour garder
+    un code propre.::
 
 
-    <?php
-    // Pas de div, ni label
-    echo $this->Form->input('password');
+        <?php
+        echo $this->Form->create('User', array(
+            'inputDefaults' => array(
+                'label' => false,
+                'div' => false
+            )
+        ));
 
-    // comme un élément label
-    echo $this->Form->input('username', array('label' => 'Username'));
+    Tous les inputs créés a partir de ce point  hériterons
+    des valeurs déclarées dans inputDefaults. Vous pouvez
+    redéfinir defaultOptions en déclarant l'option dans l'appel
+    de l'input()::
+
+
+        <?php
+        // Pas de div, ni label
+        echo $this->Form->input('password');
+    
+        // comme un élément label
+        echo $this->Form->input('username', array('label' => 'Username'));
 
 Générer des types de inputs spécifiques
 ================================
