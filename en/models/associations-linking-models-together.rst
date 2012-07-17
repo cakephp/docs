@@ -574,6 +574,19 @@ index. If you plan to add any extra information to this table, or use
 a 'with' model, you should add an additional primary key field (by convention
 'id').
 
+.. note::
+
+  If you plan on generating fixtures for testing based on your model definitions,
+Cake will expect every table including HABTM-join tables to have an 'id' field 
+as its unique primary key,
+even if your app does not ever need to use it for any other purpose.
+Failure to add the 'id' field and declare it as the primary key of your HABTM table
+will generate a SQL error that Cake will ignore without even a log message
+(unless maintainers choose to integrate a patch I just contributed)
+when it builds the fixture tables in the test database.
+The test or test-suite will then fail when it attempts to access the table in the test
+database and discovers that it is missing.
+
 **HABTM** requires a separate join table that includes both *model*
 names.
 
