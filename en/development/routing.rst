@@ -769,6 +769,8 @@ Router API
         For example, if 3 routes have been added, the last route would be 2.
 
     Promote a route (by default, the last one added) to the beginning of the list.
+    This will move the chosen route to the top of its subsection in the named
+    route table as well.
 
 .. php:staticmethod:: url($url = null, $full = false)
 
