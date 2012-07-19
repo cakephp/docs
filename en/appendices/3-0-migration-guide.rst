@@ -63,6 +63,8 @@ Route
   CakePHP applications behind load balancers.
 * :php:attr:`Request::$data` is no longer merged with the prefixed data 
   key, as that prefix has been removed.
+* The signature of ``match()`` has changed to ``match($url, $context = array())``
+  See :php:meth:`CakeRoute::match()` for information on the new signature.
 
 Controller\Components
 =====================

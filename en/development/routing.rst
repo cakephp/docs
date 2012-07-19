@@ -840,6 +840,9 @@ Router API
     match the route parameters, false will be returned.  This method handles
     the reverse routing or conversion of URL arrays into string URLs.
 
+    .. versionchanged:: 3.0
+        The ``$context`` parameter was added to support new routing features.
+
 .. php:method:: compile()
 
     Force a route to compile its regular expression.
