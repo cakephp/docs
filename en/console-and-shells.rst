@@ -922,8 +922,10 @@ Shell API
     Loads tasks defined in public :php:attr:`Shell::$tasks`
 
 .. php:method:: nl($multiplier = 1)
-
-    Outputs a number of newlines.
+    
+    :param int $multiplier Number of times the linefeed sequence should be repeated
+    
+    Returns a number of linefeed sequences.
 
 .. php:method:: out($message = null, $newlines = 1, $level = Shell::NORMAL)
 
