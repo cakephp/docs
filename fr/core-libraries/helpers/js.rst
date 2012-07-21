@@ -1,82 +1,84 @@
-JsHelper
+Helper JS
 ########
 
-.. php:class:: JsHelper(View $view, array $settings = array())
+.. php:class:: Helper Js(View $view, array $settings = array())
 
-Since the beginning CakePHP's support for Javascript has been with
-Prototype/Scriptaculous. While we still think these are an
-excellent Javascript library, the community has been asking for
-support for other libraries. Rather than drop Prototype in favour
-of another Javascript library. We created an Adapter based helper,
-and included 3 of the most requested libraries.
-Prototype/Scriptaculous, Mootools/Mootools-more, and jQuery/jQuery
-UI. And while the API is not as expansive as the previous
-AjaxHelper we feel that the adapter based solution allows for a
-more extensible solution giving developers the power and
-flexibility they need to address their specific application needs.
+Depuis le début le support de CakePHP pour Javascript a été
+orienté vers  Prototype/Scriptaculous (librairie javascript) . 
+Tandis que nous continuons de penser qu'il s'agit d'une excellente 
+bibliothèque Javascript, il a été demandé à la communauté de
+supporter d'autres librairies. Plutôt que d'enlever Prototype en faveur
+d'une autre librairie javascript. Nous avons crées un adaptateur fonctionnant
+sur le principe d'un Helper et inclus 3 des librairies les plus demandées.
+Prototype/scriptaculous, Mootools/Mootools-more, and jQuery/jQueryUI.
+Et biens que l'API n'est pas aussi vaste que le Helper Ajax nous 
+pensons que la solution basée sur l'adaptateur permet une solution
+plus extensible offrant aux développeurs la puissance et la
+la flexibilité dont ils ont besoin pour répondre à leurs besoins spécifiques.
 
-Javascript Engines form the backbone of the new JsHelper. A
-Javascript engine translates an abstract Javascript element into
-concrete Javascript code specific to the Javascript library being
-used. In addition they create an extensible system for others to
-use.
+Les moteurs Javascript forment l'épine dorsale du nouveau Helper Js.
+Um moteur javascript traduit un élément Javascript abstrait dans
+un code javascript concret spécifique à la librairie en cours 
+d'utilisation. De plus ils crées un système extensible à utiliser
+pour les autres.
 
 
-Using a specific Javascript engine
+Utilisation d'un moteur Javascript spécifique
 ==================================
 
-First of all download your preferred javascript library and place
-it in ``app/webroot/js``
+Avant tout téléchargez votre librairie javascript préférée et placez la
+dans ``app/webroot/js``
 
-Then you must include the library in your page. To include it in
-all pages, add this line to the <head> section of
-``app/View/Layouts/default.ctp`` (copy this file from
-``lib/Cake/View/Layouts/default.ctp`` if you have not created your
-own)::
-
-    <?php
-    echo $this->Html->script('jquery'); // Include jQuery library
-
-Replace ``jquery`` with the name of your library file (.js will be
-added to the name).
-
-By default scripts are cached, and you must explicitly print out
-the cache. To do this at the end of each page, include this line
-just before the ending ``</body>`` tag::
+Puis vous devez inclure la librairie dans votre page. Pour l'inclure
+dans toutes les pages, ajoutez cette ligne dans la section <head>
+de ``app/View/Layouts/default.ctp`` (copiez ce fichier depuis
+``lib/Cake/View/Layouts/default.ctp`` si vous n'avez pas créé le votre)::
 
     <?php
-    echo $this->Js->writeBuffer(); // Write cached scripts
+    echo $this->Html->script('jquery'); // Inclus la librairie Jquery
 
-.. warning::
+Remplacez ``jquery`` par le nom de votre fichier de librairie (.js sera
+ajouté au nom).
 
-    You must include the library in your page and print the cache for
-    the helper to function.
+Par défaut les scripts sont mis en cache, et vous devez explicitement 
+imprimer le cache. Pour faire cela a la fin de chacune des pages, incluez
+cette ligne juste avant la balise de fin de ``</body>`::
 
-Javascript engine selection is declared when you include the helper
-in your controller::
+    <?php
+    echo $this->Js->writeBuffer(); // Écrit les scripts en mémoire cache
+
+.. attention::
+
+    Vous devez inclure la librairie dans votre page et imprimer le cache
+    pour que le helper fonctionne.
+
+La selection du moteur Javascript est déclarée quand vous incluez le 
+helper dans votre contrôleur ::
 
     <?php
     public $helpers = array('Js' => array('Jquery'));
 
-The above would use the Jquery Engine in the instances of JsHelper
-in your views. If you do not declare a specific engine, the jQuery
-engine will be used as the default. As mentioned before, there are
-three engines implemented in the core, but we encourage the
-community to expand the library compatibility.
+La partie ci-dessus utilise le moteur Jquery dans les instances 
+du Helper Js dans vos vues. Si vous ne déclarez pas un moteur 
+spécifique, le moteur Jquery sera utilisé par défaut. Comme il est
+mentionné ci-dessus, il y a trois moteurs implémentés dans le noyau, 
+mais nous encourageons la communauté à étendre la compatibilité
+de librairie. 
 
-Using jQuery with other libraries
----------------------------------
 
-The jQuery library, and virtually all of its plugins are
-constrained within the jQuery namespace. As a general rule,
-"global" objects are stored inside the jQuery namespace as well, so
-you shouldn't get a clash between jQuery and any other library
-(like Prototype, MooTools, or YUI).
+Utilisation de jQuery avec d'autre librairies
+--------------------------------------------------------
 
-That said, there is one caveat:
-**By default, jQuery uses "$" as a shortcut for "jQuery"**
+La librairie jQuery, et virtuellement tous ses plugins sont limités
+au sein de l'espace jQuery. Comme règle générale, les objets
+"globaux" sont stockés dans l'espace JQuery, ainsi vous de devriez
+pas avoir de clash entre Jquery et d'autre librairies 
+(comme Prototype, MooTools, ou YUI).
 
-To override the "$" shortcut, use the jQueryObject variable::
+Ceci dit, il y a une mise en garde:
+**Par défaut, jQuery utilise "$" comme raccourci de "jQuery"**
+
+Pour redéfinir le raccourci "$", utilisez la variable jQueryObject ::
 
     <?php
     $this->Js->JqueryEngine->jQueryObject = '$j';
@@ -84,24 +86,25 @@ To override the "$" shortcut, use the jQueryObject variable::
         'var $j = jQuery.noConflict();', 
         array('inline' => false)
     );
-    // Tell jQuery to go into noconflict mode
+    // Demande à jQuery de se placer dans un mode noconflict
 
-Using the JsHelper inside customHelpers
----------------------------------------
+Utilisation du Helper Js dans des helpers personnalisés
+-------------------------------------------------------------------------
 
-Declare the JsHelper in the ``$helpers`` array in your
-customHelper::
+Déclarez le Helper Js dans le tableau ``$helpers`` de votre 
+Helper personnalisé::
 
     <?php
     public $helpers = array('Js');
 
 .. note::
 
-    It is not possible to declare a javascript engine inside a custom
-    helper. Doing that will have no effect.
+    Il n'est pas possible de déclarer le moteur javascript dans un 
+    Helper personnalisé . Ceci n'aurait aucun effet.
 
-If you are willing to use an other javascript engine than the
-default, do the helper setup in your controller as follows::
+Si vous êtes prêt à utiliser un moteur javascript autre que celui
+par défaut, faites le paramétrage du Helper dans votre contrôleur
+comme ceci::
 
     <?php
     public $helpers = array(
@@ -110,123 +113,133 @@ default, do the helper setup in your controller as follows::
     );
 
 
-.. warning::
+.. attention::
 
-    Be sure to declare the JsHelper and its engine **on top** of the
-    ``$helpers`` array in your controller.
+    Soyez certain de déclarer le Helper Js  et sont moteur **en haut** 
+    du tableau ``$helpers`` dans votre contrôleur.
 
-The selected javascript engine may disappear (replaced by the
-default) from the jsHelper object in your helper, if you miss to do
-so and you will get code that does not fit your javascript
-library.
+Le moteur javascript peut disparaître (remplacé par celui par défaut)
+de l'objet Helper Js dans votre helper, si vous oubliez de faire cela
+et vous obtiendrez du code qui ne correspond pas à votre 
+librairie javascript.
 
-Creating a Javascript Engine
-============================
+Création d'un moteur Javascript
+=========================
 
-Javascript engine helpers follow normal helper conventions, with a
-few additional restrictions. They must have the ``Engine`` suffix.
-``DojoHelper`` is not good, ``DojoEngineHelper`` is correct.
-Furthermore, they should extend ``JsBaseEngineHelper`` in order to
-leverage the most of the new API.
+Les helpers de moteur Javascript suivent les conventions normales
+des helper, avec quelques restrictions additionnelles. Ils doivent avoir
+le suffixe ``Engine``.``DojoHelper`` n'est pas bon, ``DojoEngineHelper``
+est correct. De plus ils doivent étendre ``JsBaseEngineHelper`` afin
+de tirer parti du meilleur de la nouvelle API. 
 
-Javascript engine usage
-=======================
+Utilisation du moteur Javascript
+=========================
 
-The ``JsHelper`` provides a few methods, and acts as a facade for
-the the Engine helper. You should not directly access the Engine
-helper except in rare occasions. Using the facade features of the
-``JsHelper`` allows you to leverage the buffering and method
-chaining features built-in; (method chaining only works in PHP5).
+Le ``Helper Js`` fournit quelques méthodes , et agit 
+comme une façade pour le moteur helper. Vous de devriez pas
+accéder au moteur helper excepté dans de rares occasions.
+Utilisez les fonctionnalités de façade du ``Helper Js``
+vous permets de tirer parti de la mise en mémoire tampon et 
+de la méthode caractéristiques de chaînage 
+intégré; (le chaînage de méthode ne fonctionne que dans PHP5).
 
-The ``JsHelper`` by default buffers almost all script code
-generated, allowing you to collect scripts throughout the view,
-elements and layout, and output it in one place. Outputting
-buffered scripts is done with ``$this->Js->writeBuffer();`` this
-will return the buffer contents in a script tag. You can disable
-buffering wholesale with the ``$bufferScripts`` property or setting
-``buffer => false`` in methods taking ``$options``.
+Par défaut le ``Helper Js`` bufferise  Presque tous les codes du 
+script générés, ce qui vous permet de récupérer les scripts partout
+dans la vue, les éléments  et les mise en page, et de les ressortir
+à un endroit.  La Récupération des scripts bufferisés est réalisé
+avec ``$this->Js->writeBuffer();`` ceci retournera le contenu
+du buffer dans une balise script. Vous pouvez désactiver le 
+buffering généralisé avec la propriété  ``$bufferScripts`` ou en
+définissant ``buffer => false`` dans les méthodes qui prennent
+des ``$options``.
 
-Since most methods in Javascript begin with a selection of elements
-in the DOM, ``$this->Js->get()`` returns a $this, allowing you to
-chain the methods using the selection. Method chaining allows you
-to write shorter, more expressive code::
+Étant donné que la plupart des méthodes en Javascript commencent
+avec une sélection d'éléments dans le DOM, ``$this->Js->get()`` 
+retourne un $this, vous permettent d'enchaîner les méthodes en 
+utilisant la selection.  Le chaînage de méthode vous permet 
+d'écrire moins, et de rendre votre code plus expressif .::
  
     <?php
     $this->Js->get('#foo')->event('click', $eventCode);
 
-Is an example of method chaining. Method chaining is not possible
-in PHP4 and the above sample would be written like::
+Est un exemple de chaînage de méthode. Le chaînage de méthode 
+n'est pas possible dans PHP4 et l'exemple ci-dessus devrait être
+écrit comme::
 
     <?php
     $this->Js->get('#foo');
     $this->Js->event('click', $eventCode);
 
-Common options
---------------
+Options communes
+-------------------------
 
-In attempts to simplify development where Js libraries can change,
-a common set of options is supported by ``JsHelper``, these common
-options will be mapped out to the library specific options
-internally. If you are not planning on switching Javascript
-libraries, each library also supports all of its native callbacks
-and options.
+Dans le but de simplifier le développement ou les librairies Js peuvent
+changer. Un jeu commun d'options est pris en charge par le Helper Js,
+Ces options communes seront  mappées en dehors des options
+spécifiques de la librairies en interne. Si vous ne prévoyez pas  la
+commutation des librairies, chaque librairie supporte toutes les fonctions
+de callback natives et les options. 
 
-Callback wrapping
------------------
+Enveloppement de Callback
+-------------------------------------
 
-By default all callback options are wrapped with the an anonymous
-function with the correct arguments. You can disable this behavior
-by supplying the ``wrapCallbacks = false`` in your options array.
+Par défaut toutes les options de callback sont enveloppées dans la
+fonction anonyme an avec les arguments corrects. Vous pouvez 
+désactiver ce comportement  en  fournissant ``wrapCallbacks = false`` 
+dans votre tableau d'options.
 
-Working with buffered scripts
------------------------------
+Travailler avec des scripts bufferisés
+-------------------------------------------------
 
-One drawback to previous implementation of 'Ajax' type features was
-the scattering of script tags throughout your document, and the
-inability to buffer scripts added by elements in the layout. The
-new JsHelper if used correctly avoids both of those issues. It is
-recommended that you place ``$this->Js->writeBuffer()`` at the
-bottom of your layout file above the ``</body>`` tag. This will
-allow all scripts generated in layout elements to be output in one
-place. It should be noted that buffered scripts are handled
-separately from included script files.
+Un inconvénient au précédente implémentation des fonctionnalités
+type d'Ajax était la dispersion des balises de script partout dans 
+le document , et l'impossibilité de bufferiser les scripts ajoutés par
+les éléments dans la mise en page. Le nouveau Helper Js si il est
+utilisé correctement évite ces deux questions. Il est recommandé
+de placer ``$this->Js->writeBuffer()`` à la fin du fichier layout 
+au dessus la balise ``</body>``. Ceci permettra à tous les scripts
+générés dans les éléments du layout d'être ressortis (output)
+à un endroit. Il doit être noté que les scripts bufferisés sont gérés
+séparément des scripts de fichiers inclus. 
+
 
 .. php:method:: writeBuffer($options = array())
 
-Writes all Javascript generated so far to a code block or caches
-them to a file and returns a linked script.
+Écrit tous le codes Javascript générés jusqu'ici dans un bloc de code ou les 
+mets en mémoire cache dans un fichier et retourne un script lié.
+
 
 **Options**
 
--  ``inline`` - Set to true to have scripts output as a script
-   block inline if ``cache`` is also true, a script link tag will be
-   generated. (default true)
--  ``cache`` - Set to true to have scripts cached to a file and
-   linked in (default false)
--  ``clear`` - Set to false to prevent script cache from being
-   cleared (default true)
--  ``onDomReady`` - wrap cached scripts in domready event (default
-   true)
--  ``safe`` - if an inline block is generated should it be wrapped
-   in <![CDATA[ ... ]]> (default true)
+-  ``inline`` - Définit à true pour avoir la sortie des scripts dans
+   un bloc de script inline. si cache est aussi à true, une balise 
+   de lien de script sera générée (par défaut à true)
+-  ``cache`` - Définit à true pour avoir les scripts dans un fichier
+   de la mémoire cache et s'y relié (false par défaut)
+-  ``clear`` - Définit à false pour éviter au fichier de cache d'être 
+   effacé (true par défaut)
+-  ``onDomReady`` - enveloppe les scripts en mémoire cache
+   dans un evénement domready (par défaut à true)
+-  ``safe`` - si un block inline est généré il sera enveloppé
+   dans <![CDATA[ ... ]]> (true par défaut)
 
-Creating a cache file with ``writeBuffer()`` requires that
-``webroot/js`` be world writable and allows a browser to cache
-generated script resources for any page.
+La création d'un fichier de cache avec ``writeBuffer()`` nécessite que
+``webroot/js`` soit accessible en écriture et permette au navigateur de
+placer dans le cache les ressources de script généré pour la page.
 
 .. php:method:: buffer($content)
 
-Add ``$content`` to the internal script buffer.
+Ajoute ``$content`` au buffer de script interne.
 
 .. php:method:: getBuffer($clear = true)
 
-Get the contents of the current buffer. Pass in false to not clear
-the buffer at the same time.
+Prend le contenu du buffer courant. Passe false pour ne pas
+effacer le buffer en même temps.
 
-**Buffering methods that are not normally buffered**
+**Bufferiser des méthodes qui ne sont normalement pas bufferisée**
 
-Some methods in the helpers are buffered by default. The engines
-buffer the following methods by default:
+Quelques méthodes dans le Helper sont bufferisée par défaut.
+Le moteur bufferise les méthodes suivante par défaut:
 
 -  event
 -  sortable
@@ -234,83 +247,84 @@ buffer the following methods by default:
 -  drop
 -  slider
 
-Additionally you can force any other method in JsHelper to use the
-buffering. By appending an boolean to the end of the arguments you
-can force other methods to go into the buffer. For example the
-``each()`` method does not normally buffer::
+De plus vous pouvez forcer une autre méthode du Helper Js à utiliser
+la mise en mémoire cache. En ajoutant un booléen à la fin des arguments
+vous pouvez forcer d'autres méthodes d'aller en mémoire cache. Par 
+exemple la méthode ``each()`` qui n'est normalement pas bufferisée::
 
     <?php
-    $this->Js->each('alert("whoa!");', true);
+    $this->Js->each('alert("sapristi!");', true);
 
-The above would force the ``each()`` method to use the buffer.
-Conversely if you want a method that does buffer to not buffer, you
-can pass a ``false`` in as the last argument::
+Ce qui est ci dessus va forcer la méthode ``each()``à utiliser le buffer.
+En revanche si vous souhaitez qu'une méthode bufferisée ne bufferise
+plus, vous pouvez passer un ``false`` comme le dernier argument::
 
     <?php
-    $this->Js->event('click', 'alert("whoa!");', false);
+    $this->Js->event('click', 'alert("sapristi!");', false);
 
-This would force the event function which normally buffers to
-return its result.
+Ceci forcera la fonction event qui est normalement mis en mémoire cache
+à retourner sont résultat.
 
-Other Methods
-=============
+D'autre Méthodes
+==============
 
-The core Javascript Engines provide the same feature set across all
-libraries, there is also a subset of common options that are
-translated into library specific options. This is done to provide
-end developers with as unified an API as possible. The following
-list of methods are supported by all the Engines included in the
-CakePHP core. Whenever you see separate lists for ``Options`` and
-``Event Options`` both sets of parameters are supplied in the
-``$options`` array for the method.
+Les moteurs Javascript du noyau fournissent les mêmes fonctionnalités
+définies a travers les autres librairies, il y a aussi un sous ensemble
+d'options communes qui sont traduites dans les options spécifiques des
+librairies. Tout cela pour fournir au développeurs finaux une Api unifiée
+autant que possible. La liste suivante de méthodes est supportée par tous
+les moteurs inclus dans le noyau CakePHP. Chaque fois que vous voyez 
+une liste séparée pour les  ``Options`` et  les ``Event Options`` Les deux
+jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
 
 .. php:method:: object($data, $options = array())
 
-    Serializes ``$data`` into JSON.  This method is a proxy for ``json_encode()``
-    with a few extra features added via the ``$options`` parameter.
+    Sérialise ``$data`` vers JSON.  Cette méthode est un proxy pour ``json_encode()``
+    avec quelques fonctionnalités supplémentaires ajoutée avec le paramètre ``$options``.
 
     **Options:**
 
-    -  ``prefix`` - String prepended to the returned data.
-    -  ``postfix`` - String appended to the returned data.
+    -  ``prefix`` - Chaîne ajoutée en début des données retournées.
+    -  ``postfix`` - Chaîne ajoutée aux donnée retournée.
 
-    **Example Use**::
+    **Exemple d'utilisation**::
     
         <?php
         $json = $this->Js->object($data);
 
 .. php:method:: sortable($options = array())
 
-    Sortable generates a javascript snippet to make a set of elements
-    (usually a list) drag and drop sortable.
+    Sortable génère un extrait de code (snippet) pour fabriquer un jeu
+    d'élément (souvent une liste ) drag and drop triable. 
 
-    The normalized options are:
+    Les options normalisées sont:
 
     **Options**
 
-    -  ``containment`` - Container for move action
-    -  ``handle`` - Selector to handle element. Only this element will
-       start sort action.
-    -  ``revert`` - Whether or not to use an effect to move sortable
-       into final position.
-    -  ``opacity`` - Opacity of the placeholder
-    -  ``distance`` - Distance a sortable must be dragged before
-       sorting starts.
+    -  ``containment`` - Conteneur de l'action de déplacement
+    -  ``handle`` - Selecteur de l'élement. Seul cet élément
+       commencera l'action de tri.
+    -  ``revert`` - S'il faut ou pas utiliser un effet pour déplacer l'élément
+       triable dans sa position finale.
+    -  ``opacity`` - Opacité de l'espace réservé
+    -  ``distance`` - Distance a laquelle l'élément triable doit être draggé (dragged)
+        avant que le tri n'opère.
 
     **Event Options**
 
-    -  ``start`` - Event fired when sorting starts
-    -  ``sort`` - Event fired during sorting
-    -  ``complete`` - Event fired when sorting completes.
+    -  ``start`` - Événement lancé quand le tri commence
+    -  ``sort`` - Événement lancé quand le tri est en cours
+    -  ``complete`` - Événement lancé quand le tri est terminé.
 
-    Other options are supported by each Javascript library, and you
-    should check the documentation for your javascript library for more
-    detailed information on its options and parameters.
-
+    D'autres options sont supportées par chacune des librairies
+    Javascript, et vous pouvez obtenir dans leurs documentation
+    respective des informations plus détaillées sur les options
+    et les paramètres.
+    l
     **Example Use**::
     
         <?php
-        $this->Js->get('#my-list');
+        $this->Js->get('#ma-liste');
         $this->Js->sortable(array(
             'distance' => 5,
             'containment' => 'parent',
@@ -320,41 +334,40 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
             'wrapCallbacks' => false
         ));
 
-    Assuming you were using the jQuery engine, you would get the
-    following code in your generated Javascript block
+    En imaginant que vous étiez en train d'utiliser le moteur Jquery, vous devriez avoir
+    le code suivant dans votre block Javascript généré
     
     .. code-block:: javascript
 
-        $("#myList").sortable({containment:"parent", distance:5, sort:onSort, start:onStart, stop:onStop});
+        $("#maListe").sortable({containment:"parent", distance:5, sort:onSort, start:onStart, stop:onStop});
 
 .. php:method:: request($url, $options = array())
 
-    Generate a javascript snippet to create an ``XmlHttpRequest`` or
-    'AJAX' request.
+    Génère in morceau de code Javascript pour créer in requète ``XmlHttpRequest`` ou
+    'AJAX'.
 
-    **Event Options**
+    **Options de l'événement**
 
-    -  ``complete`` - Callback to fire on complete.
-    -  ``success`` - Callback to fire on success.
-    -  ``before`` - Callback to fire on request initialization.
-    -  ``error`` - Callback to fire on request failure.
+    -  ``complete`` - Callback à lancer si complété.
+    -  ``success`` - Callback à lancer en cas de succès.
+    -  ``before`` - Callback à lancer à l'initialisation de la requête.
+    -  ``error`` - Callback à lancer en cas d'erreur de requête.
 
     **Options**
 
-    -  ``method`` - The method to make the request with defaults to GET
-       in more libraries
-    -  ``async`` - Whether or not you want an asynchronous request.
-    -  ``data`` - Additional data to send.
-    -  ``update`` - Dom id to update with the content of the request.
-    -  ``type`` - Data type for response. 'json' and 'html' are
-       supported. Default is html for most libraries.
-    -  ``evalScripts`` - Whether or not <script> tags should be
-       eval'ed.
-    -  ``dataExpression`` - Should the ``data`` key be treated as a
-       callback. Useful for supplying ``$options['data']`` as another
-       Javascript expression.
+    -  ``method`` - La méthode pour fabriquer la requête avec GET
+       dans plus de librairies
+    -  ``async`` - S'il faut ou pas utiliser une requête asynchrone.
+    -  ``data`` - Données additionnelles à envoyer.
+    -  ``update`` - L'ID du Dom id à mettre à jour avec le contenu de la requête.
+    -  ``type`` - Le Type des données de la réponse. 'json' et 'html' sont
+       supportés. Par défaut à html pour la plupart des librairies.
+    -  ``evalScripts`` - s'il faut ou pas évaluer la balise <script>.
+    -  ``dataExpression`` -Si la clef  ``data``doit être traitée comme un
+       callback. Utile pour fournir ``$options['data']`` comme une autre
+        expression Javascript.
 
-    **Example use**::
+    **Exemple d'utilisation**::
 
         <?php
         $this->Js->event(
@@ -367,43 +380,43 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
 .. php:method:: get($selector)
 
-    Set the internal 'selection' to a CSS selector. The active
-    selection is used in subsequent operations until a new selection is
-    made::
+    Définit la 'sélection' interne dans un sélecteur CSS. La sélection
+    active est utilisée dans les opérations ultérieures jusqu'à ce qu'une
+    nouvelle soit faite.::
     
         <?php
         $this->Js->get('#element');
 
-    The ``JsHelper`` now will reference all other element based methods
-    on the selection of ``#element``. To change the active selection,
-    call ``get()`` again with a new element.
+    Le ``Helper Js`` fait maintenant référence à toutes les méthodes de
+    la sélection basées sur #element. Pour changer la sélection active
+    appeler  ``get()`` à nouveau avec un nouvel élément.
 
 .. php:method:: set(mixed $one, mixed $two = null)
 
-    Pass variables into Javascript. Allows you to set variables that will be 
-    output when the buffer is fetched with :php:meth:`JsHelper::getBuffer()` or 
-    :php:meth:`JsHelper::writeBuffer()`. The Javascript variable used to output 
-    set variables can be controlled with :php:attr:`JsHelper::$setVariable`.
+    Passe des variables dans javascript. Vous permet  de définir des variables 
+    qui seront retournées quand le buffer est extrait avec :php:meth:`Helper Js::getBuffer()` 
+    ou :php:meth:`Helper Js::writeBuffer()`. La variable Javascript utilisée pour retourner 
+    les variables peux être controllé avec :php:attr:`Helper Js::$setVariable`.
 
 .. php:method:: drag($options = array())
 
-    Make an element draggable.
+    Rend un élément draggable.
 
     **Options**
 
-    -  ``handle`` - selector to the handle element.
-    -  ``snapGrid`` - The pixel grid that movement snaps to, an
-       array(x, y)
-    -  ``container`` - The element that acts as a bounding box for the
-       draggable element.
+    -  ``handle`` - selecteur de l'élement.
+    -  ``snapGrid`` - La grille de pixel qui  déclenche les mouvements, un
+       tableau(x, y)
+    -  ``container`` - L'élément qui agit comme un rectangle de selection pour
+        l'élément draggable.
 
-    **Event Options**
+    **Options d'événements**
 
-    -  ``start`` - Event fired when the drag starts
-    -  ``drag`` - Event fired on every step of the drag
-    -  ``stop`` - Event fired when dragging stops (mouse release)
+    -  ``start`` - Événement lancé quand le drag démarre
+    -  ``drag`` - Événement lancé à chaque étape du drag
+    -  ``stop`` - Événement lancé quand le drag s'arrête (souris relâchée)
 
-    **Example use**::
+    **Exemple d'utilisation**::
 
         <?php
         $this->Js->get('#element');
@@ -416,8 +429,9 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
             'wrapCallbacks' => false
         ));
 
-    If you were using the jQuery engine the following code would be
-    added to the buffer
+    
+   Si vous utilisiez le moteur Jquery le code suivant devrait être ajouté
+    au buffer
     
     .. code-block:: javascript
 
@@ -425,24 +439,23 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
 .. php:method:: drop($options = array())
 
-    Make an element accept draggable elements and act as a dropzone for
-    dragged elements.
+    Fabrique un élément accepte des éléments dragguables et agit comme 
+    dropzone pour les éléments draggés.
 
     **Options**
 
-    -  ``accept`` - Selector for elements this droppable will accept.
-    -  ``hoverclass`` - Class to add to droppable when a draggable is
-       over.
+    -  ``accept`` - Sélécteur des éléments que ce droppable acceptera.
+    -  ``hoverclass`` - Classe pour ajouter à droppable quand un draggable est over
 
     **Event Options**
 
-    -  ``drop`` - Event fired when an element is dropped into the drop
+    -  ``drop`` - Événement lancé quand un élément est droppé dans la drop
        zone.
-    -  ``hover`` - Event fired when a drag enters a drop zone.
-    -  ``leave`` - Event fired when a drag is removed from a drop zone
-       without being dropped.
+    -  ``hover`` - Événement lancé quand un drag entre dans une drop zone.
+    -  ``leave`` - Événement lancé quand un drag est retiré depuis une drop zone 
+       sans être droppé.
 
-    **Example use**::
+    **Exemple d'utilisation**::
 
         <?php
         $this->Js->get('#element');
@@ -454,8 +467,8 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
             'wrapCallbacks' => false
         ));
 
-    If you were using the jQuery engine the following code would be
-    added to the buffer
+    Si vous utilisiez le moteur jQuery le code suivant devrait être 
+    ajouté au buffer
     
     .. code-block:: javascript
 
@@ -463,34 +476,35 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     .. note::
 
-        Droppables in Mootools function differently from other libraries.
-        Droppables are implemented as an extension of Drag. So in addition
-        to making a get() selection for the droppable element. You must
-        also provide a selector rule to the draggable element. Furthermore,
-        Mootools droppables inherit all options from Drag.
+        Les éléments Droppables dans Mootools fonctionnent différemment des 
+        autres librairies.
+        Les Droppables sont implémentés comme une extension de Drag. Donc pour
+        faire une selection get() pour l'élément droppable. Vous devez aussi
+        fournir une règle de selecteur à l'élément draggable. De plus,
+        les droppables Mootools héritent de toutes les option de Drag.
 
 .. php:method:: slider($options = array())
 
-    Create snippet of Javascript that converts an element into a slider
-    ui widget. See your libraries implementation for additional usage
-    and features.
-
+    Créé un morceau de code Javascript qui converti un élément dans un 
+    morceau de code slider ui. Voir les implémentations des différentes 
+    librairies pour des utilisations supplémentaires et les fonctionnalités.
+    
     **Options**
 
-    -  ``handle`` - The id of the element used in sliding.
-    -  ``direction`` - The direction of the slider either 'vertical' or
+    -  ``handle`` - l' id de l'élément utilisé dans le sliding.
+    -  ``direction`` - La direction du slider soit 'vertical' ou
        'horizontal'
-    -  ``min`` - The min value for the slider.
-    -  ``max`` - The max value for the slider.
-    -  ``step`` - The number of steps or ticks the slider will have.
-    -  ``value`` - The initial offset of the slider.
+    -  ``min`` - La valeur minimale pour le slider.
+    -  ``max`` - La valeur maximale pour le slider.
+    -  ``step`` - Le nombre d'étapes que le curseur aura.
+    -  ``value`` - Le décalage initial du slider.
 
     **Events**
 
-    -  ``change`` - Fired when the slider's value is updated
-    -  ``complete`` - Fired when the user stops sliding the handle
+    -  ``change`` - Lancé quand la valeur du slider est actualisé
+    -  ``complete`` - Lancé quand un utilisateur arrête de slider le gestionnaire
 
-    **Example use**::
+    **Exemple d'utilisation**::
 
         <?php
         $this->Js->get('#element');
@@ -504,8 +518,8 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
             'wrapCallbacks' => false
         ));
 
-    If you were using the jQuery engine the following code would be
-    added to the buffer
+    Si vous utilisiez le moteur jQuery le code suivant devrait être 
+    ajouté au buffer
     
     .. code-block:: javascript
 
@@ -513,28 +527,28 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
 .. php:method:: effect($name, $options = array())
 
-    Creates a basic effect. By default this method is not buffered and
-    returns its result.
+    Créé un effet basique. Par défaut cette méthode n'est pas bufferisée et
+    retourne ses résultats.
 
-    **Supported effect names**
+    **noms des effets supportés**
 
-    The following effects are supported by all JsEngines
+    Les effets suivants sont supportés par tous les moteurs JS
 
-    -  ``show`` - reveal an element.
-    -  ``hide`` - hide an element.
-    -  ``fadeIn`` - Fade in an element.
-    -  ``fadeOut`` - Fade out an element.
-    -  ``slideIn`` - Slide an element in.
-    -  ``slideOut`` - Slide an element out.
+    -  ``show`` - révèle un élément.
+    -  ``hide`` - dissimule un élément.
+    -  ``fadeIn`` - Fade in un élément.
+    -  ``fadeOut`` - Fade out un élément.
+    -  ``slideIn`` - Slide un élément in.
+    -  ``slideOut`` - Slide un élément out.
 
     **Options**
 
-    -  ``speed`` - Speed at which the animation should occur. Accepted
-       values are 'slow', 'fast'. Not all effects use the speed option.
+    -  ``speed`` - Vitesse à laquelle l'animation devrait se produire. Les valeurs
+       acceptées sont 'slow', 'fast'. Tous les effets n'utilisent pas l'option speed
 
-    **Example use**
+    **Exemple d'utilisation**
 
-    If you were using the jQuery engine::
+    Si vous utilisez le moteur jQuery::
 
         <?php
         $this->Js->get('#element');
@@ -544,46 +558,45 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
 .. php:method:: event($type, $content, $options = array())
 
-    Bind an event to the current selection. ``$type`` can be any of the
-    normal DOM events or a custom event type if your library supports
-    them. ``$content`` should contain the function body for the
-    callback. Callbacks will be wrapped with
-    ``function (event) { ... }`` unless disabled with the
+    Attache un événement à la sélection courante. ``$type`` peut être un
+    événement DOM normal ou un type d'événement personnalisé si votre librairies 
+    les supportent. ``$content`` devrait contenir les fonctions du body pour le
+    callback. Les Callbacks seront enveloppés avec la fonction
+    ``function (event) { ... }`` à moins qu'ils ne soient désactivés avec
     ``$options``.
 
     **Options**
 
-    -  ``wrap`` - Whether you want the callback wrapped in an anonymous
-       function. (defaults to true)
-    -  ``stop`` - Whether you want the event to stopped. (defaults to
+    -  ``wrap`` - Si vous souhaitez que le callback soit enveloppé dans une 
+       fonction anonyme. (par défaut à true)
+    -  ``stop`` - Si vous souhaitez que l'événement s'arrète. (par défaut à
        true)
 
-    **Example use**::
+    **Exemple d'utilisation**::
     
         <?php
         $this->Js->get('#some-link');
-        $this->Js->event('click', $this->Js->alert('hey you!'));
+        $this->Js->event('click', $this->Js->alert('saperlipopette!'));
 
-    If you were using the jQuery library you would get the following
-    Javascript code:
+    Si vous employiez la librairie jQuery vous devriez avoir le code suivant:
     
     .. code-block:: javascript
 
         $('#some-link').bind('click', function (event) {
-            alert('hey you!');
+            alert(saperlipopette!');
             return false;
         });
 
-    You can remove the ``return false;`` by passing setting the
-    ``stop`` option to false::
+    Vous pouvez retirer le ``return false;`` en passant l'option
+    ``stop`` à false::
 
         <?php
         $this->Js->get('#some-link');
-        $this->Js->event('click', $this->Js->alert('hey you!'), array('stop' => false));
+        $this->Js->event('click', $this->Js->alert('saperlipopette!'), array('stop' => false));
 
-    If you were using the jQuery library you would the following
-    Javascript code would be added to the buffer. Note that the default
-    browser event is not cancelled:
+    Si vous employiez la librairie jQuery vous devriez avoir le code 
+    Javascript suivant ajouté au buffer. Notez que l'événement du navigateur
+    par défaut n'est pas annulé:
     
     .. code-block:: javascript
 
@@ -593,21 +606,21 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
 .. php:method:: domReady($callback)
 
-    Creates the special 'DOM ready' event. :php:func:`JsHelper::writeBuffer()`
-    automatically wraps the buffered scripts in a domReady method.
+    Créé l'événement spécial 'DOM ready'. :php:func:`JsHelper::writeBuffer()`
+    enveloppe automatiquement les scripts bufferisés dans une méthode domReady.
 
 .. php:method:: each($callback)
 
-    Create a snippet that iterates over the currently selected
-    elements, and inserts ``$callback``.
+    Créé un morceau de code qui effectue une itération sur les éléments 
+    sélectionnés , et insère " $callback".
 
-    **Example**::
+    **Exemple**::
 
         <?php
         $this->Js->get('div.message');
         $this->Js->each('$(this).css({color: "red"});');
 
-    Using the jQuery engine would create the following Javascript:
+    L'utilisation du moteur jQuery aurait créé le Javascript suivant:
     
     .. code-block:: javascript
 
@@ -615,99 +628,99 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
 .. php:method:: alert($message)
 
-    Create a javascript snippet containing an ``alert()`` snippet. By
-    default, ``alert`` does not buffer, and returns the script
-    snippet.::
+    Créé un extrait de code javascript contenant un ``alert()``. Par
+    défaut, ``alert`` ne bufferise pas, et retourne le morceau de script 
+    suivant.::
 
         <?php
-        $alert = $this->Js->alert('Hey there');
+        $alert = $this->Js->alert('Zogotunga!');
 
 .. php:method:: confirm($message)
 
-    Create a javascript snippet containing a ``confirm()`` snippet. By
-    default, ``confirm`` does not buffer, and returns the script
-    snippet.::
+    Créé un bout de code contenant ``confirm()``. Par
+    défaut, ``confirm`` ne bufferise pas, et retourne le morceau de script
+    suivant.::
 
         <?php
-        $alert = $this->Js->confirm('Are you sure?');
+        $alert = $this->Js->confirm('Vraiment certain?');
 
 .. php:method:: prompt($message, $default)
 
-    Create a javascript snippet containing a ``prompt()`` snippet. By
-    default, ``prompt`` does not buffer, and returns the script
-    snippet.::
+    Créé un bout de code Javascript contenant ``prompt()``. Par
+    défaut, ``prompt`` ne bufferise pas, et retourne le morceau de code 
+    suivant.::
 
         <?php
-        $prompt = $this->Js->prompt('What is your favorite color?', 'blue');
+        $prompt = $this->Js->prompt('C'est quoi ta couleur préférée?', 'bleu');
 
 .. php:method:: submit($caption = null, $options = array())
 
-    Create a submit input button that enables ``XmlHttpRequest``
-    submitted forms. Options can include
-    both those for :php:func:`FormHelper::submit()` and JsBaseEngine::request(),
-    JsBaseEngine::event();
+    Créé un bouton submit qui permet les formulaires de soumission ``XmlHttpRequest``
+    Les options peuvent inclure soit celles de :php:func:`FormHelper::submit()` et
+    JsBaseEngine::request(), JsBaseEngine::event();
 
-    Forms submitting with this method, cannot send files. Files do not
-    transfer over ``XmlHttpRequest``
-    and require an iframe, or other more specialized setups that are
-    beyond the scope of this helper.
+    La soumission a travers un formulaire avec cette méthode, ne permet pas l'envoi
+    de fichiers. Les fichiers ne se transferts pas à travers ``XmlHttpRequest``
+    et requièrent un iframe, ou d'autres paramétrages plus spécialisés qui sont
+    hors de portée de cet helper.
 
     **Options**
 
-    -  ``confirm`` - Confirm message displayed before sending the
-       request. Using confirm, does not replace any ``before`` callback
-       methods in the generated XmlHttpRequest.
-    -  ``buffer`` - Disable the buffering and return a script tag in
-       addition to the link.
-    -  ``wrapCallbacks`` - Set to false to disable automatic callback
-       wrapping.
+    -  ``confirm`` - Message de confirmation affiché avant l'envoi de la
+       requête. L'utilisation de 'confirm' , ne remplace pas les méthodes 
+       de callback ``before`` dans le XmlHttpRequest généré.
+    -  ``buffer`` - Désactive le buffering et retourne une balise script 
+       en plus du lien.
+    -  ``wrapCallbacks`` - Mis à false pour désactiver l'enveloppement 
+       automatique des callbacks.
 
-    **Example use**::
+    **Exemple d'utilisation**::
 
         <?php
         echo $this->Js->submit('Save', array('update' => '#content'));
 
-    Will create a submit button with an attached onclick event. The
-    click event will be buffered by default.::
+    Va créé un bouton submit et un événement onclick attaché. 
+    L'événement click sera bufferisé par défaut.::
 
         <?php
         echo $this->Js->submit('Save', array('update' => '#content', 'div' => false, 'type' => 'json', 'async' => false));
 
-    Shows how you can combine options that both
-    :php:func:`FormHelper::submit()` and :php:func:`JsHelper::request()` when using submit.
+    Montre comment vous pouvez combiner les options de 
+    :php:func:`FormHelper::submit()` et :php:func:`Helper Js::request()` à l'utilisation des submits.
 
 .. php:method:: link($title, $url = null, $options = array())
 
-    Create an html anchor element that has a click event bound to it.
-    Options can include both those for :php:func:`HtmlHelper::link()` and
-    :php:func:`JsHelper::request()`, :php:func:`JsHelper::event()`, ``$options``
-    is a :term:`html attributes` array that are appended to the generated 
-    anchor element. If an option is not part of the standard attributes 
-    or ``$htmlAttributes`` it will be passed to :php:func:`JsHelper::request()` 
-    as an option. If an id is not supplied, a randomly generated one will be
-    created for each link generated.
-
+    Créé un élément ancre html qui a un événement clic rattaché.
+    Les options peuvent inclure celle pour :php:func:`HtmlHelper::link()`
+    et :php:func:`Helper Js::request()`, :php:func:`Helper Js::event()`,
+    ``$options`` est un tableau d'attribut :term:`html attributes` qui sont
+    ajoutés à l'élément ancre généré. Si une option ne fait pas partie
+    des attributs standard de ``$htmlAttributes`` elle sera passée à
+    :php:func:`Helper Js::request()`  comme une option. Si une Id n'est
+    pas fournie, une valeur aléatoire sera créée pour chacun des
+    liens générés.
+    
     **Options**
 
-    -  ``confirm`` - Generate a confirm() dialog before sending the
-       event.
-    -  ``id`` - use a custom id.
-    -  ``htmlAttributes`` - additional non-standard htmlAttributes.
-       Standard attributes are class, id, rel, title, escape, onblur and
+    -  ``confirm`` - Génère une boite de dialogue de confirmation avant
+       l'envoi de l'événement.
+    -  ``id`` - utilise une id personnalisée .
+    -  ``htmlAttributes`` - attributs html non standard additionnels.
+       Les attibuts standards sont class, id, rel, title, escape, onblur et
        onfocus.
-    -  ``buffer`` - Disable the buffering and return a script tag in
-       addition to the link.
+    -  ``buffer`` - Désactive le buffering et retourne une balise script
+       en plus du lien.
 
-    **Example use**::
+    **Exemple d'utilisation**::
 
         <?php
         echo $this->Js->link('Page 2', array('page' => 2), array('update' => '#content'));
 
-    Will create a link pointing to ``/page:2`` and updating #content
-    with the response.
+    Va créé un lien pointant vers ``/page:2`` et mettre à jour  #content
+    avec la réponse.
 
-    You can use the ``htmlAttributes`` option to add in additional
-    custom attributes.::
+    Vous pouvez utiliser les options de ``htmlAttributes`` pour ajouter des 
+    attributs personnalisés.::
 
         <?php
         echo $this->Js->link('Page 2', array('page' => 2), array(
@@ -715,71 +728,72 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
             'htmlAttributes' => array('other' => 'value')
         ));
 
-        // Creates the following html
+        // Créé le html suivant
         <a href="/posts/index/page:2" other="value">Page 2</a>
 
 .. php:method:: serializeForm($options = array())
 
-    Serialize the form attached to $selector. Pass ``true`` for $isForm
-    if the current selection is a form element. Converts the form or
-    the form element attached to the current selection into a
-    string/json object (depending on the library implementation) for
-    use with XHR operations.
+    Sérialise le formulaire attaché au $selector. Passe ``true`` pour $isForm
+    si la selection courante est un élément de formulaire. Converti le formulaire
+    ou l'élément de formulaire attaché à la sélection courante dans 
+    un objet chaîne/json (dépendant de l'implémentation de la librairie) pour
+    utilisation avec les opérations XHR.
 
     **Options**
 
-    -  ``isForm`` - is the current selection a form, or an input?
-       (defaults to false)
-    -  ``inline`` - is the rendered statement going to be used inside
-       another JS statement? (defaults to false)
+    -  ``isForm`` - est ce que la sélection courante est un formulaire ou un input?
+       (par défaut à false)
+    -  ``inline`` - est ce que le traitement du rendu sera utilisé dans un autre
+       traitement JS? (par défaut à false)
 
-    Setting inline == false allows you to remove the trailing ``;``.
-    This is useful when you need to serialize a form element as part of
-    another Javascript operation, or use the serialize method in an
-    Object literal.
-
+    En définissant inline == false vous permet de retirer la bordure ``;``.
+    Ceci est utile quand vous avez besoin de sérialiser un élément de 
+    formulaire comme faisant parti d'une autre opération Javascript
+    ou utilisez la méthode de sérialisation dans un Objet littéral.
+    
 .. php:method:: redirect($url)
 
-    Redirect the page to ``$url`` using ``window.location``.
+    Redirige la page vers ``$url`` en utilisant  ``window.location``.
 
 .. php:method:: value($value)
 
-    Converts a PHP-native variable of any type to a JSON-equivalent
-    representation. Escapes any string values into JSON compatible
-    strings. UTF-8 characters will be escaped.
+    Converti une variable native PHP d'un type dans une représentation
+    JSON équivalente. Échappe une valeur de chaîne dans une chaîne 
+    compatible JSON. Les caractère UTF-8 seront échappés .
 
 .. _ajax-pagination:
 
-Ajax Pagination
+La Pagination Ajax 
 ===============
 
-Much like Ajax Pagination in 1.2, you can use the JsHelper to
-handle the creation of Ajax pagination links instead of plain HTML
-links.
+Bien mieux qu'avec la pagination Ajax de la 1.2, vous pouvez utiliser
+le Helper JS pour gérer les liens de pagination AJAX au lieu de 
+liens HTML.
 
-Making Ajax Links
------------------
+Fabriquer les liens Ajax
+-------------------------------
 
-Before you can create ajax links you must include the Javascript
-library that matches the adapter you are using with ``JsHelper``.
-By default the ``JsHelper`` uses jQuery. So in your layout include
-jQuery (or whichever library you are using). Also make sure to
-include ``RequestHandlerComponent`` in your components. Add the
-following to your controller::
+Avant de pouvoir créer les liens ajax vous devez inclure la librairie
+Javascript qui correspond à l'adaptateur que vous utilisez avec
+le ``Helper JS``. Par défaut le ``Helper Js`` utilise jQuery. Donc 
+dans votre layout incluez jQuery (ou la librairie que vous utilisez). 
+Assurez vous également d'inclure ``RequestHandlerComponent`` 
+dans votre comportement. Ajoutez ce qui suit dans votre 
+contrôleur::
 
     <?php
     public $components = array('RequestHandler');
     public $helpers = array('Js');
 
-Next link in the javascript library you want to use. For this
-example we'll be using jQuery::
+Ce qui suit relie la librairie Javascript que vous voulez utiliser.
+Pour cet exemple nous utiliserons jQuery::
 
     <?php
     echo $this->Html->script('jquery');
 
-Similar to 1.2 you need to tell the ``PaginatorHelper`` that you
-want to make Javascript enhanced links instead of plain HTML ones.
-To do so you use ``options()``::
+De même qu'avec la 1.2 vous devez dire au ``PaginatorHelper`` que vous
+voulez faire des liens Javascript avancés au lieu des plain HTML.
+Pour faire cela utilisez ``options()``::
     
     <?php
     $this->Paginator->options(array(
@@ -787,40 +801,41 @@ To do so you use ``options()``::
         'evalScripts' => true
     ));
 
-The :php:class:`PaginatorHelper` now knows to make javascript enhanced
-links, and that those links should update the ``#content`` element.
-Of course this element must exist, and often times you want to wrap
-``$content_for_layout`` with a div matching the id used for the
-``update`` option. You also should set ``evalScripts`` to true if
-you are using the Mootools or Prototype adapters, without
-``evalScripts`` these libraries will not be able to chain requests
-together. The ``indicator`` option is not supported by ``JsHelper``
-and will be ignored.
+La classe :php:class:`PaginatorHelper` sait maintenant qu'il faut
+créer des liens Javascript étendus, et  que ces liens devront mettre
+à jour le contenu ``#content`` de l'élément. Bien sûr cet élément doit
+exister, et la plupart du temps vous voulez envelopper 
+le ``$content_for_layout`` par une div qui correspond à l'id utilisée
+dans l'option ``update``. Vous devez également définir ``evalScripts``
+à true si vous utilisez des adaptateurs Mootools ou Prototype, sans
+ ``evalScripts`` ces librairies seront incapables de relier les requêtes
+ entrent elles. L'option ``indicator`` n'est pas supportée par le ``Helper
+ JS`` et sera ignorée.
 
-You then create all the links as needed for your pagination
-features. Since the ``JsHelper`` automatically buffers all
-generated script content to reduce the number of ``<script>`` tags
-in your source code you **must** call write the buffer out. At the
-bottom of your view file. Be sure to include::
+Vous venez donc de créer tous les liens demandés pour le fonctionnement
+de la pagination. Puisque le ``Helper Js`` bufferise automatiquement
+tous les contenus de scripts pour réduire les balises  ``<script>``
+dans vos codes sources vous **devez** appeler la restitution
+du buffer . A la fin de votre fichier de vue. Vérifiez l'inclusion de::
 
     <?php
     echo $this->Js->writeBuffer();
 
-If you omit this you will **not** be able to chain ajax pagination
-links. When you write the buffer, it is also cleared, so you don't
-have worry about the same Javascript being output twice.
+Si vous oubliez cela vous ne pourrez **pas** enchaîner les liens de 
+paginiation Ajax. Quand vous écrivez le buffer, cela l'efface également ,
+et vous n'avez donc pas à vous inquiéter de doublon de code Javascript.
 
-Adding effects and transitions
-------------------------------
+Ajouter des effets et des transitions
+-----------------------------------------------
 
-Since ``indicator`` is no longer supported, you must add any
-indicator effects yourself::
+Depuis que `indicator`` n'est plus supporté, vous devez ajouter 
+les effets d'indicator vous même.::
 
     <!DOCTYPE html>
     <html>
         <head>
             <?php echo $this->Html->script('jquery'); ?>
-            //more stuff here.
+            //plus de trucs ici.
         </head>
         <body>
         <div id="content">
@@ -830,15 +845,16 @@ indicator effects yourself::
         </body>
     </html>
 
-Remember to place the indicator.gif file inside app/webroot/img
-folder. You may see a situation where the indicator.gif displays
-immediately upon the page load. You need to put in this css
-``#busy-indicator { display:none; }`` in your main css file.
+Rappelez vous de placer le fichier indicator.gif dans le répertoire
+app/webroot/img. Vous devriez voir une situation ou le indicator.gif
+s'affiche immédiatement au chargement de la page. Vous avez
+besoin d'insérer cet indicateur  ``#busy-indicator { display:none; }``
+dans votre fichier css principal .
 
-With the above layout, we've included an indicator image file, that
-will display a busy indicator animation that we will show and hide
-with the ``JsHelper``. To do that we need to update our
-``options()`` function::
+Avec le layout ci-dessus , nous avons inclus un indicateur, qui affichera
+une  animation "occupé" " que nous aurons à montrer et cacher
+avec le ``Helper Js``. Pour faire cela nous avons besoin de mettre 
+à jour notre fonction  ``options()``::
 
     <?php
     $this->Paginator->options(array(
@@ -848,13 +864,14 @@ with the ``JsHelper``. To do that we need to update our
         'complete' => $this->Js->get('#busy-indicator')->effect('fadeOut', array('buffer' => false)),
     ));
 
-This will show/hide the busy-indicator element before and after the
-``#content`` div is updated. Although ``indicator`` has been
-removed, the new features offered by ``JsHelper`` allow for more
-control and more complex effects to be created.
+Ceci montrera/cachera l'élément 'indicateur occupé' avant et après
+que le contenu de la balise ``#content`` soit mis à jour. Bien que
+``indicator``  ait été enlevé, les nouvelles fonctionnalités du
+Helper Js permettent la création de plus de contrôle et
+d'effets plus complexes.
 
 
 .. meta::
-    :title lang=en: JsHelper
+    :title lang=en: Helper Js
     :description lang=en: The Js Helper supports the javascript libraries Prototype, jQuery and Mootools and provides methods for manipulating javascript.
     :keywords lang=en: js helper,javascript,cakephp jquery,cakephp mootools,cakephp prototype,cakephp jquery ui,cakephp scriptaculous,cakephp javascript,javascript engine
