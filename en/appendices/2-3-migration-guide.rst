@@ -42,7 +42,7 @@ CakeEmail
 ---------
 
 - The ``contentDisposition`` option was added to
-  :php:meth:`CakeEmail::addAttachment()`.  This allows you to disable the
+  :php:meth:`CakeEmail::attachments()`.  This allows you to disable the
   Content-Disposition header added to attached files.
 
 
