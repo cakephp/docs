@@ -11,6 +11,16 @@ Caching
   had difficulty setting up and deploying APC correctly both in cli + web.
   Using files should make setting up CakePHP simpler for new developers.
 
+Component
+=========
+
+PaginatorComponent
+------------------
+
+- PaginatorComponent now supports the ``findType`` option.  This can be used to
+  specify what find method you want used for pagination.  This is a bit easier
+  to manage and set than the 0'th index.
+
 Model
 =====
 
@@ -23,7 +33,17 @@ Validation
 Network
 =======
 
+CakeResponse
+------------
+
 - :php:meth:`CakeResponse::file()` was added.
+
+CakeEmail
+---------
+
+- The ``contentDisposition`` option was added to
+  :php:meth:`CakeEmail::addAttachment()`.  This allows you to disable the
+  Content-Disposition header added to attached files.
 
 
 View
@@ -32,3 +52,11 @@ View
 - MediaView is deprecated, and you can use new features in
   :php:class:`CakeResponse` to achieve the same results.
 -
+
+Testing
+=======
+
+- A core fixture for the default ``cake_sessions`` table was added. You can use
+  it by adding ``core.cake_sessions`` to your fixture list.
+
+
