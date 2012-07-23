@@ -489,7 +489,7 @@ elements you can use attribute matching with methods like ``extract()``.
             '1.Author.id' => 3,
             '1.Author.user' => Crystal,
         );
-        $res = Hash::flatten($data);
+        $res = Hash::expand($data);
         /* $res now looks like:
         array(
             array(
