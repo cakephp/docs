@@ -43,6 +43,11 @@ Security API
         // Later decrypt it.
         $decrypted = Security::rijndael($encrypted, Configure::read('Security.key'), 'decrypt');
 
+    ``rijndael()`` can be used to store data you need to decrypt later, like the
+    contents of cookies.  It should **never** be used to store passwords.
+    Instead you should use the one way hashing methods provided by
+    :php:method:`~Security::hash()`
+
     .. versionadded:: 2.2
         ``Security::rijndael()`` was added in 2.2.
 
@@ -65,19 +70,42 @@ Security API
 
     Create a hash from string using given method. Fallback on next
     available method. If ``$salt`` is set to true, the applications salt
-    value will be used.
-
-    ::
+    value will be used::
 
         <?php
-        //Using the application's salt value
+        // Using the application's salt value
         $sha1 = Security::hash('CakePHP Framework', 'sha1', true);
 
-        //Using a custom salt value
+        // Using a custom salt value
         $md5 = Security::hash('CakePHP Framework', 'md5', 'my-salt');
 
-        //Using the default hash algorithm
+        // Using the default hash algorithm
         $hash = Security::hash('CakePHP Framework');
+
+    ``hash()`` also supports more secure hashing algorithms like bcrypt.  When
+    using bcrypt, you should be mindful of the slightly different usage.
+    Creating an initial hash works the same as other algorithms::
+
+        <?php
+        // Create a hash using bcrypt
+        Security::setHash('blowfish');
+        $hash = Security::hash('CakePHP Framework');
+
+    Unlike other hash types comparing plain text values to hashed values should
+    be done as follows::
+
+        <?php
+        // $storedPassword, is a previously generated bcrypt hash.
+        $newHash = Security::hash($newPassword, 'blowfish', $storedPassword);
+
+    When comparing values hashed with bcrypt, the original hash should be
+    provided as the ``$salt`` parameter.  This allows bcrypt to reuse the same
+    cost and salt values, allowing the generated hash to end up with the same
+    resulting hash given the same input value.
+
+    .. versionchanged:: 2.3
+        Support for bcrypt was added in 2.3
+
 
 .. php:staticmethod:: inactiveMins( )
 
