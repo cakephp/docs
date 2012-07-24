@@ -46,7 +46,7 @@ Security API
     ``rijndael()`` can be used to store data you need to decrypt later, like the
     contents of cookies.  It should **never** be used to store passwords.
     Instead you should use the one way hashing methods provided by
-    :php:method:`~Security::hash()`
+    :php:meth:`~Security::hash()`
 
     .. versionadded:: 2.2
         ``Security::rijndael()`` was added in 2.2.
