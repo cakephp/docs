@@ -21,6 +21,12 @@ PaginatorComponent
   specify what find method you want used for pagination.  This is a bit easier
   to manage and set than the 0'th index.
 
+Console
+=======
+
+- The ``server`` shell was added.  You can use this to start the PHP5.4
+  webserver for your CakePHP application.
+
 Model
 =====
 
