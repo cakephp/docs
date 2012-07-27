@@ -17,7 +17,7 @@ Here's what you'll need:
    though the instructions for using other servers should be very
    similar. We might have to play a little with the server
    configuration, but most folks can get Cake up and running without
-   any configuration at all. Make sure you have PHP5.2.8 or greater.
+   any configuration at all. Make sure you have PHP 5.2.8 or greater.
 #. A database server. We're going to be using MySQL server in this
    tutorial. You'll need to know enough about SQL in order to create a
    database: Cake will be taking the reins from there.  Since we're using MySQL,
@@ -141,7 +141,8 @@ that Cake can successfully connect to the database.
 
 .. note::
 
-    Remember that you'll need to have PDO, and pdo_mysql available.
+    Remember that you'll need to have PDO, and pdo_mysql enabled in 
+    your php.ini.
 
 Optional Configuration
 ======================
