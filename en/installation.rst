@@ -119,10 +119,10 @@ http://www.example.com/cake\_2\_0/.
 Using one CakePHP checkout for multiple applications
 ----------------------------------------------------
 
-If you are developing a number of applications it often makes sense
-to have the share the same CakePHP core checkout. There are a few ways you can
+If you are developing a number of applications, it often makes sense
+to have them share the same CakePHP core checkout. There are a few ways in which you can
 accomplish this.  Often the easiest is to use PHP's ``include_path``. To start
-off, clone CakePHP into a directory.  For this example we'll use
+off, clone CakePHP into a directory.  For this example, we'll use
 ``~/projects``::
 
     git clone git://github.com/cakephp/cakephp.git ~/projects/cakephp
@@ -142,9 +142,9 @@ After restarting your webserver, you should see the changes reflected in
 
 .. note::
 
-    If you are on windows separate include paths with ; instead of :
+    If you are on windows, separate include paths with ; instead of :
 
-Once you have setup your ``include_path`` your applications should be able to
+Having finished setting up your ``include_path`` your applications should be able to
 find CakePHP automatically.
 
 Production
