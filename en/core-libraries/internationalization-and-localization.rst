@@ -108,7 +108,7 @@ Instead of __() and __n() you will have to use __d() and __dn(). The D means
 domain. So if you have a plugin called 'DebugKit' you would have to do this::
 
     <?php
-    __('debug_kit', 'My example text');
+    __d('debug_kit', 'My example text');
 
 Using the underscored syntax is important, if you don't use it CakePHP won't
 find your translation file.
