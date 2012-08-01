@@ -68,7 +68,7 @@ Google グループ
 `http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
 
 CakePHP には、非常にアクティブな Google グループがあります。
-過去に話し合われた解決策、よくある質問、直近の問題に対する解答などを見つけることのできる、優れたリソースセンターになるでしょう。（注：日本語では、http://cakephp.jpもどうぞ。）
+過去に話し合われた解決策、よくある質問、直近の問題に対する解答などを見つけることのできる、優れたリソースセンターになるでしょう。（注：日本語では、 http://cakephp.jp もどうぞ。）
 
 CakePHP Questions
 =================
