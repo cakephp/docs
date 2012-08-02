@@ -1,18 +1,19 @@
-Additional Methods and Properties
-#################################
+Méthodes et Propriétés additionnelles
+#####################################
 
-While CakePHP’s model functions should get you where you need to
-go, don’t forget that model classes are just that: classes that
-allow you to write your own methods or define your own properties.
+Bien que les fonctions de modèle de CakePHP devraient vous emmener là où vous 
+souhaitez aller, n'oubliez pas que les classes de modèles ne sont rien de plus 
+que cela : des classes qui vous permettent d'écrire vos propres méthodes ou de 
+définir vos propres propriétés.
 
-Any operation that handles the saving and fetching of data is best
-housed in your model classes. This concept is often referred to as
-the fat model.
+N'importe quelle opération qui prend en charge la sauvegarde ou la restitution 
+de données est mieux située dans vos classes de modèle. Ce concept est souvent 
+appelé fat model ("modèle gras").
 
 ::
 
     <?php
-    class Example extends AppModel {
+    class Exemple extends AppModel {
         public function getRecent() {
             $conditions = array(
                 'created BETWEEN (curdate() - interval 7 day) and (curdate() - interval 0 day))'
@@ -21,7 +22,7 @@ the fat model.
         }
     }
 
-This ``getRecent()`` method can now be used within the controller.
+Cette méthode ``getRecent()`` peut maintenant être utilisée dans le contrôleur.
 
 ::
 
@@ -31,47 +32,49 @@ This ``getRecent()`` method can now be used within the controller.
 :php:meth:`Model::associations()`
 =================================
 
-Get associations::
+Obtenir les associations::
 
     <?php
-    $result = $this->Example->associations();
-    // $result equals array('belongsTo', 'hasOne', 'hasMany', 'hasAndBelongsToMany')
+    $result = $this->Exemple->associations();
+    // $result équivaut à array('belongsTo', 'hasOne', 'hasMany', 'hasAndBelongsToMany')
 
 :php:meth:`Model::buildQuery(string $type = 'first', array $query = array())`
 =============================================================================
 
-Builds the query array that is used by the data source to generate the query to
-fetch the data.
+Construit la requête tableau qui est utilisée par la source de données pour 
+générer la requête pour récupérer les données.
 
 :php:meth:`Model::deconstruct(string $field, mixed $data)`
 ==========================================================
 
-Deconstructs a complex data type (array or object) into a single field value.
+Déconstruit un type de données complexe (tableau ou objet) dans une valeur de 
+champ unique.
 
 :php:meth:`Model::escapeField(string $field = null, string $alias = null)`
 ==========================================================================
 
-Escapes the field name and prepends the model name. Escaping is done according
-to the current database driver's rules.
+Echappe le nom du champ et ajoute le nom du modèle. L'echappement est fait en 
+fonction des règles du driver de la base de données courante.
 
 :php:meth:`Model::exists($id)`
 ==============================
 
-Returns true if a record with the particular ID exists.
+Retourne true si l'enregistrement avec un ID particulier existe.
 
-If ID is not provided it calls :php:meth:`Model::getID()` to obtain the current record ID to verify, and
-then performs a ``Model::find('count')`` on the currently configured datasource to
-ascertain the existence of the record in persistent storage.
-
+Si l'ID n'est pas fourni, elle appelle :php:meth:`Model::getID()` pour obtenir 
+l'ID de l'enregistrement courant pour vérifier, et execute ensuite un 
+``Model::find('count')`` sur la source de données actuellement configurée pour 
+vérifier l'existence de l'enregistrement dans un stockage persistant.
 .. note ::
 
-    Parameter $id was added in 2.1. Prior to that it does not take any parameter.
+    Le Paramètre $id a été ajouté dans 2.1. Avant cela, elle ne prenait aucun
+    paramètre.
 
 ::
 
     <?php
-    $this->Example->id = 9;
-    if ($this->Example->exists()) {
+    $this->Exemple->id = 9;
+    if ($this->Exemple->exists()) {
         // ...
     }
 
@@ -80,38 +83,38 @@ ascertain the existence of the record in persistent storage.
 :php:meth:`Model::getAffectedRows()`
 ====================================
 
-Returns the number of rows affected by the last query.
+Retourne le nombre de lignes affectées par la dernière requête.
 
 :php:meth:`Model::getAssociated(string $type = null)`
 =====================================================
 
-Gets all the models with which this model is associated.
+Récupère tous les modèles avec lesquels ce modèle est associé.
 
 :php:meth:`Model::getColumnType(string $column)`
 ================================================
 
-Returns the column type of a column in the model.
+Retourne le type de colonne d'une colonne du modèle.
 
 :php:meth:`Model::getColumnTypes()`
 ===================================
 
-Returns an associative array of field names and column types.
+Retourne un tableau associatif des noms de champs et des types de colonnes.
 
 :php:meth:`Model::getID(integer $list = 0)`
 ===========================================
 
-Returns the current record's ID.
+Retourne l'ID de l'enregistrement courant.
 
 :php:meth:`Model::getInsertID()`
 ================================
 
-Returns the ID of the last record this model inserted.
+Retourne l'ID du dernier enregistrement que ce modèle insère.
 
 :php:meth:`Model::getLastInsertID()`
 ====================================
 
-Alias to ``getInsertID()``.
+Alias pour ``getInsertID()``.
 
 .. meta::
-    :title lang=en: Additional Methods and Properties
-    :keywords lang=en: model classes,model functions,model class,interval,array
+    :title lang=fr: Méthodes et Propriétés additionnelles
+    :keywords lang=fr: classes de modèle,fonctions du modèle,classe de modèle,interval,tableau
