@@ -98,7 +98,7 @@ siguiente se muestran algunos ejemplos:
 -  El modelo con nombre **OptionValue** estará en el fichero **OptionValue.php**
 -  El comportamiento (behavior) **EspeciallyFunkableBehavior** podrás encontrarlo
    en el fichero **EspeciallyFunkableBehavior.php**
--  La vista **SuperSimpleView** estará en el fichero **SuperSimpleView.php**
+-  La vista **SuperSimpleView** estará en el fichero **SuperSimpleView.ctp**
 -  El helper **BestEverHelper** estará, seguro que lo has adivinado ya, en el 
    fichero **BestEverHelper.php**
 
