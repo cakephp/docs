@@ -51,6 +51,13 @@ CakeEmail
   :php:meth:`CakeEmail::attachments()`.  This allows you to disable the
   Content-Disposition header added to attached files.
 
+Routing
+=======
+
+Router
+------
+
+- Support for ``tel:``, ``sms:`` were added to :php:meth:`Router::url()`.
 
 View
 ====
