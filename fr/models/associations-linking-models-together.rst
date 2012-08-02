@@ -1,241 +1,248 @@
-Associations: Linking Models Together
-#####################################
+Associations : relier les modèles entre eux
+###########################################
 
-One of the most powerful features of CakePHP is the ability to link
-relational mapping provided by the model. In CakePHP, the links
-between models are handled through associations.
+Une des caractéristiques les plus puissantes de CakePHP est sa capacité 
+d'établir les liens nécessaires entre les modèles d'après les informations 
+fournies. Dans CakePHP, les liens entre modèles sont gérés par des associations.
 
-Defining relations between different objects in your application
-should be a natural process. For example: in a recipe database, a
-recipe may have many reviews, reviews have a single author, and
-authors may have many recipes. Defining the way these relations
-work allows you to access your data in an intuitive and powerful
-way.
+Definir les relations entre différents objets à l'intérieur de votre 
+application devrait être une tâche naturelle. Par exemple : dans une base de 
+données de recettes, une recette peut avoir plusieurs versions, chaque version 
+n'a qu'un seul auteur et les auteurs peuvent avoir plusieurs recettes. Le 
+fait de définir le fonctionnement de ces relations vous permet d'accéder à vos 
+données de manière intuitive et puissante.
 
-The purpose of this section is to show you how to plan for, define,
-and utilize associations between models in CakePHP.
+Le but de cette section est de vous montrer comment concevoir, définir et 
+utiliser les associations entre les modèles au sein de CakePHP.
 
-While data can come from a variety of sources, the most common form
-of storage in web applications is a relational database. Most of
-what this section covers will be in that context.
+Bien que les données peuvent être issues d'une grande variété de sources, 
+la forme de stockage la plus répandue dans les applications web est la base 
+de données relationnelle. La plupart de ce qui est couvert par cette section 
+le sera dans ce contexte.
 
-For information on associations with Plugin models, see
+Pour des informations sur les associations avec les modèles de Plugin, voyez 
 :ref:`plugin-models`.
 
-Relationship Types
+Types de relations
 ------------------
 
-The four association types in CakePHP are: hasOne, hasMany,
-belongsTo, and hasAndBelongsToMany (HABTM).
+Les quatre types d'associations dans CakePHP sont : hasOne (a un seul), 
+hasMany (a plusieurs), belongsTo (appartient à), et hasAndBelongsToMany (HABTM) 
+(appartient à et est composé de plusieurs).
 
-============= ===================== =======================================
-Relationship  Association Type      Example
-============= ===================== =======================================
-one to one    hasOne                A user has one profile.
-------------- --------------------- ---------------------------------------
-one to many   hasMany               A user can have multiple recipes.
-------------- --------------------- ---------------------------------------
-many to one   belongsTo             Many recipes belong to a user.
-------------- --------------------- ---------------------------------------
-many to many  hasAndBelongsToMany   Recipes have, and belong to many ingredients.
-============= ===================== =======================================
+========================== ===================== ============================================================
+Relation                   Type d'Association    Exemple
+========================== ===================== ============================================================
+un vers un                 hasOne                Un utilisateur a un profile.
+-------------------------- --------------------- ------------------------------------------------------------
+un vers plusieurs          hasMany               Un utilisateur peut avoir plusieurs recettes.
+-------------------------- --------------------- ------------------------------------------------------------
+plusieurs vers un          belongsTo             Plusieurs recettes appartiennent à un utilisateur.
+-------------------------- --------------------- ------------------------------------------------------------
+plusieurs vers plusieurs   hasAndBelongsToMany   Les recettes ont, et appartiennent à plusieurs ingrédients.
+========================== ===================== ============================================================
 
-Associations are defined by creating a class variable named after
-the association you are defining. The class variable can sometimes
-be as simple as a string, but can be as complete as a
-multidimensional array used to define association specifics.
+Les associations se définissent en créant une variable de classe nommée 
+comme l'association que vous souhaitez définir. La variable de classe peut 
+quelquefois se limiter à une chaîne de caractère, mais peut également être 
+aussi complète qu'un tableau multi-dimensionnel utilisé pour définir les 
+spécificité de l'association.
 
 ::
 
     <?php
-    class User extends AppModel {
-        public $name = 'User';
+    class Utilisateur extends AppModel {
+        public $name = 'Utilisateur';
         public $hasOne = 'Profile';
         public $hasMany = array(
             'Recipe' => array(
-                'className'  => 'Recipe',
-                'conditions' => array('Recipe.approved' => '1'),
-                'order'      => 'Recipe.created DESC'
+                'className'  => 'Recette',
+                'conditions' => array('Recette.approvee' => '1'),
+                'order'      => 'Recette.created DESC'
             )
         );
     }
 
-In the above example, the first instance of the word 'Recipe' is
-what is termed an 'Alias'. This is an identifier for the
-relationship and can be anything you choose. Usually, you will
-choose the same name as the class that it references. However,
-**aliases for each model must be unique app wide**. E.g. it is
-appropriate to have::
+Dans l'exemple ci-dessus, la première instance du mot 'Recette' est ce que 
+l'on appelle un 'Alias'. C'est un identifiant pour la relation et cela peut 
+être ce que vous souhaitez. En règle générale, on choisit le même nom que la 
+classe qu'il référence. Toutefois, **les alias pour chaque modèle doivent être 
+uniques dans une app entière**. Par exemple, il est approprié d'avoir::
 
     <?php
-    class User extends AppModel {
-        public $name = 'User';
+    class Utilisateur extends AppModel {
+        public $name = 'Utilisateur';
         public $hasMany = array(
-            'MyRecipe' => array('className' => 'Recipe'),
+            'MaRecette' => array('className' => 'Recette'),
         );
-        public $hasAndBelongsToMany => array('Member' => array('className' => 'User'));
+        public $hasAndBelongsToMany => array('Membre' => array('className' => 'Utilisateur'));
     }
     
-    class Group extends AppModel {
-        public $name = 'Group';
+    class Groupe extends AppModel {
+        public $name = 'Groupe';
         public $hasMany = array(
-            'MyRecipe' => array(
-                'className'  => 'Recipe',
+            'MaRecette' => array(
+                'className'  => 'Recette',
             )
         );
-        public $hasAndBelongsToMany => array('MemberOf' => array('className' => 'Group'));
+        public $hasAndBelongsToMany => array('MembreDe' => array('className' => 'Groupe'));
     }
 
-but the following will not work well in all circumstances:::
+mais ce qui suit ne travaillera pas bien dans toute circonstance:::
 
     <?php
-    class User extends AppModel {
-        public $name = 'User';
+    class Utilisateur extends AppModel {
+        public $name = 'Utilisateur';
         public $hasMany = array(
-            'MyRecipe' => 'Recipe',
+            'MaRecette' => 'Recette',
         );
-        public $hasAndBelongsToMany => array('Member' => 'User');
+        public $hasAndBelongsToMany => array('Membre' => 'Utilisateur');
     }
     
-    class Group extends AppModel {
-        public $name = 'Group';
+    class Groupe extends AppModel {
+        public $name = 'Groupe';
         public $hasMany = array(
-            'MyRecipe' => array(
-                'className'  => 'Recipe',
+            'MaRecette' => array(
+                'className'  => 'Recette',
             )
         );
-        public $hasAndBelongsToMany => array('Member' => 'Group');
+        public $hasAndBelongsToMany => array('Membre' => 'Groupe');
     }
 
-because here we have the alias 'Member' referring to both the User
-(in Group) and the Group (in User) model in the HABTM associations.
-Choosing non-unique names for model aliases across models can cause
-unexpected behavior.
+parce que ici nous avons l'alias 'Member' se référant aux deux modèles 
+Utilisateur (dans Groupe) et Groupe (dans Utilisateur) dans les associations 
+HABTM. Choisir des noms non-uniques pour les alias de modèles à travers les 
+modèles peut entraîner un comportement inattendu.
 
-Cake will automatically create links between associated model
-objects. So for example in your ``User`` model you can access the
-``Recipe`` model as::
-
-    <?php
-    $this->Recipe->someFunction();
-
-Similarly in your controller you can access an associated model
-simply by following your model associations::
+Cake va créer automatiquement des liens entre les objets modèle associés.
+Ainsi par exemple dans votre modèle ``Utilisateur``, vous pouvez accedez 
+au modèle ``Recette`` comme ceci::
 
     <?php
-    $this->User->Recipe->someFunction();
+    $this->Recette->uneFunctionQuelconque();
+
+De même dans votre contrôleur, vous pouvez acceder à un modèle associé 
+simplement en poursuivant les associations de votre modèle::
+
+    <?php
+    $this->Utilisateur->Recette->uneFunctionQuelconque();
 
 .. note::
 
-    Remember that associations are defined 'one way'. If you define
-    User hasMany Recipe that has no effect on the Recipe Model. You
-    need to define Recipe belongsTo User to be able to access the User
-    model from your Recipe model
+    Rappelez vous que les associations sont définis dans 'un sens'. Si vous 
+    définissez Utilisateur hasMany Recette, cela n'a aucun effet sur le modèle 
+    Recette. Vous avez besoin de définir Recette belongsTo Utilisateur pour 
+    pouvoir accéder au modèle Utilisateur à partir du modèle Recette.
 
 hasOne
 ------
 
-Let’s set up a User model with a hasOne relationship to a Profile
-model.
+Mettons en place un modèle Utilisateur avec une relation de type hasOne vers 
+un modèle Profil.
 
-First, your database tables need to be keyed correctly. For a
-hasOne relationship to work, one table has to contain a foreign key
-that points to a record in the other. In this case the profiles
-table will contain a field called user\_id. The basic pattern is:
+Tout d'abord, les tables de votre base de données doivent être saisies 
+correctement. Pour qu'une relation de type hasOne fonctionne, une table 
+doit contenir une clé étrangère qui pointe vers un enregistrement de l'autre. 
+Dans notre cas la table profils contiendra un champ nommé utilisateur\_id. 
+Le motif de base est :
 
-**hasOne:** the *other* model contains the foreign key.
+**hasOne:**, *l'autre* modèle contient la clé étrangère.
 
-==================== ==================
-Relation             Schema            
-==================== ==================
-Apple hasOne Banana  bananas.apple\_id 
--------------------- ------------------
-User hasOne Profile  profiles.user\_id 
--------------------- ------------------
-Doctor hasOne Mentor mentors.doctor\_id
-==================== ==================
+========================== =========================
+Relation                   Schéma            
+========================== =========================
+Pomme hasOne Banane        bananes.pomme\_id
+-------------------------- -------------------------
+Utilisateur hasOne Profil  profiles.utilisateur\_id 
+-------------------------- -------------------------
+Docteur hasOne Maitre      maitres.docteur\_id
+========================== =========================
 
 .. note::
 
-    It is not mandatory to follow CakePHP conventions, you can easily override
-    the use of any foreignKey in your associations definitions. Nevertheless sticking
-    to conventions will make your code less repetitive, easier to read and to maintain.
+    Il n'est pas obligatoire de suivre les conventions de CakePHP, vous pouvez 
+    facilement outrepasser l'utilisation de toute cléEtrangère dans les 
+    définitions de vos associations. Néanmoins, coller aux conventions fera un
+    code moins répétitif, plus facile à lire et à maintenir.
 
-The User model file will be saved in /app/Model/User.php. To
-define the ‘User hasOne Profile’ association, add the $hasOne
-property to the model class. Remember to have a Profile model in
-/app/Model/Profile.php, or the association won’t work::
+Le fichier modèle Utilisateur sera sauvegardé dans /app/Model/Utilisateur.php. 
+Pour définir l'association ‘Utilisateur hasOne Profil’, ajoutez la propriété 
+$hasOne à la classe de modèle. Pensez à avoir un modèle Profil dans
+/app/Model/Profil.php, ou l'association ne marchera pas::
 
     <?php
-    class User extends AppModel {
-        public $name = 'User';
-        public $hasOne = 'Profile';
+    class Utilisateur extends AppModel {
+        public $name = 'Utilisateur';
+        public $hasOne = 'Profil';
     }
 
-There are two ways to describe this relationship in your model
-files. The simplest method is to set the $hasOne attribute to a
-string containing the classname of the associated model, as we’ve
-done above.
+Il y a deux façons de décrire cette relation dans vos fichiers de modèle.
+La méthode la plus simple est de définir l'attribut $hasOne pour une chaîne 
+de caractère contenant le className du modèle associé, comme nous l'avons 
+fait au-dessus.
 
-If you need more control, you can define your associations using
-array syntax. For example, you might want to limit the association
-to include only certain records.
+Si vous avez besoin de plus de contrôle, vous pouvez définir vos associations 
+en utilisant la syntaxe des tableaux. Par exemple, vous voudrez peut-être 
+limiter l'association pour inclure seulement certains enregistrements.
 
 ::
 
     <?php
-    class User extends AppModel {
-        public $name = 'User';
+    class Utilisateur extends AppModel {
+        public $name = 'Utilisateur';
         public $hasOne = array(
-            'Profile' => array(
-                'className'    => 'Profile',
-                'conditions'   => array('Profile.published' => '1'),
+            'Profil' => array(
+                'className'    => 'Profil',
+                'conditions'   => array('Profil.publiee' => '1'),
                 'dependent'    => true
             )
         );
     }
 
-Possible keys for hasOne association arrays include:
+Les clés possibles pour les tableaux d'association incluent:
 
 
--  **className**: the classname of the model being associated to
-   the current model. If you’re defining a ‘User hasOne Profile’
-   relationship, the className key should equal ‘Profile.’
--  **foreignKey**: the name of the foreign key found in the other
-   model. This is especially handy if you need to define multiple
-   hasOne relationships. The default value for this key is the
-   underscored, singular name of the current model, suffixed with
-   ‘\_id’. In the example above it would default to 'user\_id'.
--  **conditions**: an array of find() compatible conditions or SQL
-   strings such as array('Profile.approved' => true)
--  **fields**: A list of fields to be retrieved when the associated
-   model data is fetched. Returns all fields by default.
--  **order**: an array of find() compatible order clauses or SQL
-   strings such as array('Profile.last_name' => 'ASC')
--  **dependent**: When the dependent key is set to true, and the
-   model’s delete() method is called with the cascade parameter set to
-   true, associated model records are also deleted. In this case we
-   set it true so that deleting a User will also delete her associated
-   Profile.
+-  **className**:  le nom de la classe du modèle que l'on souhaite 
+   associer au modèle actuel. Si l'on souhaite définir la relation 
+   'Utilisateur a un Profil’, la valeur associée à la clé 'className' 
+   devra être ‘Profil’.
+-  **foreignKey**: le nom de la clé etrangère que l'on trouve dans 
+   l'autre modèle. Ceci sera particulièrement pratique si vous avez 
+   besoin de définir des relations hasOne multiples. La valeur par 
+   défaut de cette clé est le nom du modèle actuel (avec des underscores) 
+   suffixé avec ‘\_id’. Dans l'exemple ci-dessus la valeur par défaut aurait 
+   été 'utilisateur\_id’.
+-  **conditions**: un tableau des conditions compatibles de find() ou un 
+   fragment de code SQL tel que array('Profil.approuve' => true)
+-  **fields**: une liste des champs à récupérer lorsque les données du modèle 
+   associé sont parcourues. Par défaut, cela retourne tous les champs.
+-  **order**: Un tableau des clauses order compatible de la fonction find() 
+   ou un fragment de code SQL tel que array('Profil.nom_de_famille' => 'ASC')
+-  **dependent**: lorsque la valeur de la clé 'dependent' est true et que la 
+   méthode delete() du modèle est appelée avec le paramètre 'cascade' valant 
+   true également, les enregistrements des modèles associés sont supprimés. 
+   Dans ce cas nous avons fixé la valeur à true de manière à ce que la 
+   suppression d'un Utilisateur supprime également le Profil associé.
 
-Once this association has been defined, find operations on the User
-model will also fetch a related Profile record if it exists::
+Une fois que cette association aura été définie, les opérations de recherche 
+sur le modèle Utilisateur récupèreront également les enregistrements Profils 
+liés s'il en existe::
 
-    //Sample results from a $this->User->find() call.
+    //Exemple de résultats d'un appel à $this->Utilisateur->find().
     
     Array
     (
-        [User] => Array
+        [Utilisateur] => Array
             (
                 [id] => 121
-                [name] => Gwoo the Kungwoo
+                [nom] => Gwoo the Kungwoo
                 [created] => 2007-05-01 10:31:01
             )
-        [Profile] => Array
+        [Profil] => Array
             (
                 [id] => 12
-                [user_id] => 121
-                [skill] => Baking Cakes
+                [utilisateur_id] => 121
+                [competences] => Baking Cakes
                 [created] => 2007-05-01 10:31:01
             )
     )
@@ -243,56 +250,57 @@ model will also fetch a related Profile record if it exists::
 belongsTo
 ---------
 
-Now that we have Profile data access from the User model, let’s
-define a belongsTo association in the Profile model in order to get
-access to related User data. The belongsTo association is a natural
-complement to the hasOne and hasMany associations: it allows us to
-see the data from the other direction.
+Maintenant que nous avons accès aux données du Profil depuis le modèle 
+Utilisateur, définissons une association belongsTo (appartient a) dans 
+le modèle Profil afin de pouvoir accéder aux données Utilisateur liées. 
+L'association belongsTo est un complément naturel aux associations hasOne et 
+hasMany : elle permet de voir les données dans le sens inverse.
 
-When keying your database tables for a belongsTo relationship,
-follow this convention:
+Lorsque vous définissez les clés de votre base de données pour une relation 
+de type belongsTo, suivez cette convention :
 
-**belongsTo:** the *current* model contains the foreign key.
+**belongsTo:** le modèle *courant* contient la clé étrangère.
 
-======================= ==================
-Relation                Schema
-======================= ==================
-Banana belongsTo Apple  bananas.apple\_id
------------------------ ------------------
-Profile belongsTo User  profiles.user\_id
------------------------ ------------------
-Mentor belongsTo Doctor mentors.doctor\_id
-======================= ==================
+============================= ==================
+Relation                      Schéma
+============================= ==================
+Banane belongsTo Pomme        bananes.pomme\_id
+----------------------------- ------------------
+Profil belongsTo Utilisateur  profiles.utilisateur\_id
+----------------------------- ------------------
+Maitres belongsTo Docteur     maitres.docteur\_id
+============================= ==================
 
 .. tip::
 
-    If a model(table) contains a foreign key, it belongsTo the other
-    model(table).
+    Si un modèle (table) contient une clé étrangère, elle appartient 
+    à (belongsTo) l'autre modèle (table).
 
-We can define the belongsTo association in our Profile model at
-/app/Model/Profile.php using the string syntax as follows::
+Nous pouvons définir l'association belongsTo dans notre modèle Profil dans
+/app/Model/Profil.php en utilisant la syntaxe de chaîne de caractère comme ce 
+qui suit::
 
     <?php
-    class Profile extends AppModel {
-        public $name = 'Profile';
-        public $belongsTo = 'User';
+    class Profil extends AppModel {
+        public $name = 'Profil';
+        public $belongsTo = 'Utilisateur';
     }
 
-We can also define a more specific relationship using array
-syntax::
+Nous pouvons aussi définir une relation plus spécifique en utilisant une 
+syntaxe de tableau::
 
     <?php
-    class Profile extends AppModel {
-        public $name = 'Profile';
+    class Profil extends AppModel {
+        public $name = 'Profil';
         public $belongsTo = array(
-            'User' => array(
-                'className'    => 'User',
-                'foreignKey'   => 'user_id'
+            'Utilisateur' => array(
+                'className'    => 'Utilisateur',
+                'foreignKey'   => 'utiilisateur_id'
             )
         );
     }
 
-Possible keys for belongsTo association arrays include:
+Les clés possibles pour les tableaux d'association belongsTo incluent:
 
 
 -  **className**: the classname of the model being associated to
@@ -1114,5 +1122,5 @@ SQL queries if combined with any of the former techniques described for associat
 
 
 .. meta::
-    :title lang=en: Associations: Linking Models Together
-    :keywords lang=en: relationship types,relational mapping,recipe database,relational database,this section covers,web applications,recipes,models,cakephp,storage
+    :title lang=fr: Associations : relier les modèles entre eux
+    :keywords lang=fr: relationship types,relational mapping,recipe database,relational database,this section covers,web applications,recipes,models,cakephp,storage
