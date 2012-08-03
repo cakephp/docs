@@ -64,7 +64,15 @@ View
 
 - MediaView is deprecated, and you can use new features in
   :php:class:`CakeResponse` to achieve the same results.
--
+
+Helpers
+=======
+
+FormHelper
+----------
+
+- :php:meth:`FormHelper::select()` now accepts a list of values in the disabled
+  attribute. The list should contain the values you want disabled.
 
 Testing
 =======
