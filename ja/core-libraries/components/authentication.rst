@@ -425,7 +425,7 @@ HTTP Basic認証の例を挙げると、ユーザ名とパスワードの値と�
 
 
 認証についてのフラッシュメッセージの表示
---------------------------------------
+----------------------------------------
 
 ..
   Displaying auth related flash messages
@@ -965,7 +965,7 @@ ControllerAuthorize を使うことで、コントローラのコールバック
 
 
 ActionsAuthorize の利用
-----------------------
+-----------------------
 
 ..
   Using ActionsAuthorize
@@ -980,7 +980,7 @@ ActionsAuthorize は DbAcl とペアで使うことが多く、アプリケー�
   It can however, be combined with other Acl implementations such as IniAcl and custom application Acl backends.
 
 CrudAuthorize の利用
--------------------
+--------------------
 
 ..
   Using CrudAuthorize
