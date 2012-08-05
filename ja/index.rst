@@ -9,10 +9,16 @@ Welcome
 CakePHP cookbookは、オープンに開発されている、コミュニティで編集可能なドキュメントのプロジェクトです。
 ドキュメンテーションの品質、正当性、正確性の高さを維持することを期待しています。
 
-ドキュメントのダウンロード:
+.. container:: offline-download
 
-- `epubフォーマット <../_downloads/ja/CakePHPCookbook.epub>`_
-- `オリジナルソース <http://github.com/cakephp/docs>`_
+    **cookbookをどこででも**
+
+    どこででもCakePHP cookbookをお楽しみください。PDFとEPUBがご利用いただけます。
+    多くのデバイス上でオフラインでドキュメントを読むことができます。
+
+    - `PDF <../_downloads/ja/CakePHPCookbook.pdf>`_
+    - `EPUB <../_downloads/ja/CakePHPCookbook.epub>`_
+    - `オリジナルソース <http://github.com/cakephp/docs>`_
 
 入門
 ====
@@ -58,4 +64,3 @@ CakePHPの動力となっている、典型的な :doc:`CakePHPのリクエス�
 もし何か困っていたら、 :doc:`いくつもの助けを求められる場所
 </cakephp-overview/where-to-get-help>`
 があります。
-
