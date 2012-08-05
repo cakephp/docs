@@ -13,9 +13,9 @@
    models
    core-libraries
    plugins
+   console-and-shells
    development
    deployment
-   console-and-shells
    tutorials-and-examples
    contributing
    appendices
