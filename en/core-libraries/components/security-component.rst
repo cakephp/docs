@@ -329,3 +329,15 @@ one-use tokens.
 .. meta::
     :title lang=en: Security
     :keywords lang=en: configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class
+
+Disabling Security Component For Specific Actions
+=================================================
+
+There may be cases where you want to disable all security checks for an action (ex. ajax request). 
+You may "unlock" these actions by listing them in ``$this->Security->unlockedActions`` in your 
+``beforeFilter``.
+
+.. versionadded:: 2.3
+.. meta::
+    :title lang=en: Security
+    :keywords lang=en: disable security,unlockActions
