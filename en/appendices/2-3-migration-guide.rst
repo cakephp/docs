@@ -84,6 +84,12 @@ Testing
 Utility
 =======
 
+Debugger
+--------
+
+- php:meth:`Debugger::exportVar()` now outputs private and protected properties
+  in PHP >= 5.3.0.
+
 Security
 --------
 
