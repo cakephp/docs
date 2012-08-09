@@ -1,8 +1,8 @@
 Exceptions
 ##########
 
-Exceptions can be used for a variety of uses in your application.  CakePHP uses 
-exceptions internally to indicate logic errors or misuse.  All of the exceptions 
+Exceptions can be used for a variety of uses in your application.  CakePHP uses
+exceptions internally to indicate logic errors or misuse.  All of the exceptions
 CakePHP raises extend :php:exc:`CakeException`, and there are class/task
 specific exceptions that extend this base class.
 
@@ -24,9 +24,9 @@ There are a few keys available for configuring exceptions::
 * ``handler`` - callback - The callback to handle exceptions. You can set this to
   any callback type, including anonymous functions.
 * ``renderer`` - string - The class responsible for rendering uncaught exceptions.
-  If you choose a custom class you should place the file for that class in app/Lib/Error. 
+  If you choose a custom class you should place the file for that class in app/Lib/Error.
   This class needs to implement a ``render()`` method.
-* ``log`` - boolean - When true, exceptions + their stack traces will be logged 
+* ``log`` - boolean - When true, exceptions + their stack traces will be logged
   to CakeLog.
 * ``consoleHandler`` - callback - The callback used to handle exceptions, in a
   console context.  If undefined, CakePHP's default handler will be used.
@@ -57,7 +57,7 @@ Creating your own application exceptions
 ========================================
 
 You can create your own application exceptions using any of the built
-in `SPL exceptions <http://php.net/manual/en/spl.exceptions.php>`_, ``Exception`` 
+in `SPL exceptions <http://php.net/manual/en/spl.exceptions.php>`_, ``Exception``
 itself, or :php:exc:`CakeException`.  Application exceptions that extend
 Exception or the SPL exceptions will be treated as 500 error in production mode.
 :php:exc:`CakeException` is special in that all :php:exc:`CakeException` objects
@@ -69,7 +69,7 @@ application contained the following exception::
     <?php
     class MissingWidgetException extends CakeException {};
 
-You could provide nice development errors, by creating 
+You could provide nice development errors, by creating
 ``app/View/Errors/missing_widget.ctp``.  When in production mode, the above
 error would be treated as a 500 error.  The constructor for :php:exc:`CakeException`
 has been extended, allowing you to pass in hashes of data.  These hashes are
@@ -108,8 +108,8 @@ you want. In development, if your exception doesn't have a specific
 template, and you use a code equal to or greater than ``500`` you will
 see the ``error500`` template. For any other error code you'll get the
 ``error400`` template. If you have defined an error template for your
-custom exception, that template will be used in development mode.  
-If you'd like your own exception handling logic even in production, 
+custom exception, that template will be used in development mode.
+If you'd like your own exception handling logic even in production,
 see the next section.
 
 
@@ -162,8 +162,8 @@ using PHP 5.3::
         echo 'Ruh roh ' . $error->getMessage();
     });
 
-By creating a custom exception handler you can provide custom error handling for 
-application exceptions. In the method provided as the exception handler you 
+By creating a custom exception handler you can provide custom error handling for
+application exceptions. In the method provided as the exception handler you
 could do the following::
 
     <?php
@@ -218,13 +218,13 @@ you can provide specialized handling for application specific errors::
 
 
 The above would handle any exceptions of the type ``MissingWidgetException``,
-and allow you to provide custom display/handling logic for those application 
+and allow you to provide custom display/handling logic for those application
 exceptions.  Exception handling methods get the exception being handled as
 their argument.
 
 .. note::
 
-    Your custom renderer should expect an exception in its constructor, and 
+    Your custom renderer should expect an exception in its constructor, and
     implement a render method. Failing to do so will cause additional errors.
 
 .. note::
@@ -239,8 +239,8 @@ In your ExceptionRenderer sub-class, you can use the ``_getController``
 method to allow you to return a custom controller to handle your errors.
 By default CakePHP uses ``CakeErrorController`` which omits a few of the normal
 callbacks to help ensure errors always display.  However, you may need a more
-custom error handling controller in your application.  By implementing 
-``_getController`` in your ``AppExceptionRenderer`` class, you can use any 
+custom error handling controller in your application.  By implementing
+``_getController`` in your ``AppExceptionRenderer`` class, you can use any
 controller you want::
 
     <?php
@@ -276,8 +276,8 @@ and the configured loggers.
 Built in Exceptions for CakePHP
 ===============================
 
-There are several built-in exceptions inside CakePHP, outside of the 
-internal framework exceptions, there are several 
+There are several built-in exceptions inside CakePHP, outside of the
+internal framework exceptions, there are several
 exceptions for HTTP methods
 
 .. php:exception:: BadRequestException
@@ -312,7 +312,7 @@ You can throw these exceptions from you controllers to indicate failure states,
 or HTTP errors. An example use of the HTTP exceptions could be rendering 404
 pages for items that have not been found::
 
-    <?php 
+    <?php
     public function view($id) {
         $post = $this->Post->findById($id);
         if (!$post) {
@@ -387,13 +387,26 @@ be thrown from a number of CakePHP core components:
 
 .. php:exception:: CakeException
 
-    Base exception class in CakePHP.  All exceptions thrown by
+    Base exception class in CakePHP.  All framework layer exceptions thrown by
     CakePHP will extend this class.
 
-These exception classes all extend :php:exc:`CakeException`. 
+These exception classes all extend :php:exc:`CakeException`.
 By extending CakeException, you can create your own 'framework' errors.
 All of the standard Exceptions that CakePHP will throw also extend CakeException.
 
+.. php:exception:: CakeBaseException
+
+    Base exception class in CakePHP.
+    All CakeExceptions and HttpExceptions above extend this class.
+
+.. php:method:: responseHeader($header = null, $value = null)
+
+    See :php:func:`CakeResponse::header()`
+
+All Http and Cake exceptions extend the CakeBaseException class, which has a method
+to add headers to the response. For instance when throwing a 405 MethodNotAllowedException
+the rfc2616 says:
+"The response MUST include an Allow header containing a list of valid methods for the requested resource."
 
 Using HTTP exceptions in your controllers
 =========================================

@@ -25,13 +25,23 @@ SecurityComponent
 ------------------
 
 - SecurityComponent now supports the ``unlockedActions`` option. This can be used to
-  disable all security checks for any actions listed in this option.  
+  disable all security checks for any actions listed in this option.
 
 Console
 =======
 
 - The ``server`` shell was added.  You can use this to start the PHP5.4
   webserver for your CakePHP application.
+
+Error
+=====
+
+Exceptions
+----------
+
+- CakeBaseException was added, which all core Exceptions now extend. The base exception
+  class also introduces the ``responseHeader()`` method which can be called on created Exception instances
+  to add headers for the response, as Exceptions dont reuse any response instance.
 
 Model
 =====
