@@ -290,7 +290,7 @@ elements you can use attribute matching with methods like ``extract()``.
             )
         */
 
-.. php:staticmethod:: format(array $data, $format, $keys)
+.. php:staticmethod:: format(array $data, array $paths, $format)
 
     :rtype: array
 
@@ -328,7 +328,7 @@ elements you can use attribute matching with methods like ``extract()``.
             )
         );
 
-        $res = Hash::format($data, '%2$d, %1$s', array('{n}.Person.first_name', '{n}.Person.something'));
+        $res = Hash::format($data, array('{n}.Person.first_name', '{n}.Person.something'), '%2$d, %1$s');
         /*
         Array
         (
@@ -338,7 +338,7 @@ elements you can use attribute matching with methods like ``extract()``.
         )
         */
 
-        $res = Hash::format($data, '%1$s, %2$d', array('{n}.Person.first_name', '{n}.Person.something'));
+        $res = Hash::format($data, array('{n}.Person.first_name', '{n}.Person.something'), '%1$s, %2$d');
         /*
         Array
         (
