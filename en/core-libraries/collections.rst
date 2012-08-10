@@ -126,7 +126,7 @@ Object callback priorities
 
 You can prioritize the triggering object callbacks similar to event callbacks.
 The handling of priority values and order of triggering is the same as
-explained :doc:`here <core-libraries/events>`.
+explained :doc:`here <events#establishing-priorities>`.
 Here's how you can specify priority at declaration time::
 
     <?php
@@ -154,6 +154,7 @@ Here's how you can specify priority at declaration time::
     }
 
 When dynamically loading objects to a collection you can specify the priority like this::
+
     <?php
     $this->MyComponent = $this->Components->load('MyComponent', array('priority' => 9));
 
