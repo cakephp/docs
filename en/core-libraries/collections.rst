@@ -121,8 +121,53 @@ if a specific object is still enabled using ``enabled()``::
     // $enabled will contain an array of helper currently enabled.
     $enabled = $this->Helpers->enabled();
 
+Object callback priorities
+==============================
+
+You can prioritize the triggering object callbacks similar to event callbacks.
+The handling of priority values and order of triggering is the same as
+explained :doc:`here <core-libraries/events#establishing-priorities>`.
+Here's how you can specify priority at declaration time.
+
+    <?php
+    class SomeController {
+        public $components = array(
+            'Foo', //Foo gets default priority 10
+            'Bar' => array('priority' => 9) //Bar's callbacks are triggered before Foo's    
+        );
+
+	public $helpers = array(
+            'Cache' => array('priority' => 12), //Cache's callbacks will be triggered last 
+            'Asset',
+            'Utility' //Utility has priority 10 same as Asset and its callbacks are trigger
+                      //after Asset's
+        );
+    }
+
+
+    <?php
+    class Post {
+        public $actsAs = array(
+            'DoFirst' => array('priority' => 1),
+            'Media'
+        );
+    }
+
+When dynamically loading objects to a collection you can specify the priority like this:
+    <?php
+    $this->MyComponent = $this->Components->load('MyComponent', array('priority' => 9));
+
+
+You can also change priorities at run time using the ``ObjectCollection::setPriority()`` function.
+
+    <?php
+    //For a single object
+    $this->Components->setPriority('Foo', 2);
+
+    //For multiple objects
+    $this->Behaviors->setPriority(array('Object1' => 8, 'Object2' => 9));
 
 
 .. meta::
     :title lang=en: Collections
-    :keywords lang=en: array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory
+    :keywords lang=en: array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory,priority,priorities
