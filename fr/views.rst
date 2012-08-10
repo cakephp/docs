@@ -1,72 +1,74 @@
-Views
-#####
+Vues
+####
 
-Views are the **V** in MVC. Views are responsible for generating
-the specific output required for the request. Often this is in the
-form of HTML, XML, or JSON, but streaming files and creating PDF's
-that users can download are also responsibilities of the View
-Layer.
+Les "Vues" sont le **V** dans MVC. Les vues sont chargées de générer la sortie 
+spécifique requise par la requête. Souvent, cela est fait sous forme HTML, 
+XML ou JSON, mais le streaming de fichiers et la création de PDFs que les 
+utilisateurs peuvent télécharger sont aussi de la responsabilité de la 
+couche Vues.
 
-CakePHP comes with a few built-in View classes for handling the most
-common rendering scenarios:
+CakePHP a quelques classes de vue déjà construites pour gérer les scénarios de 
+rendu les plus communs:
 
-- To create XML or JSON webservices you can use the :doc:`views/json-and-xml-views`.
-- To serve protected files, or dynamically generated files, you can use
-  :doc:`views/media-view`
-- To create multiple themed views, you can use :doc:`views/themes`
+- Pour créer des services web XML ou JSON, vous pouvez utiliser 
+  :doc:`views/json-and-xml-views`.
+- Pour servir des fichiers protégés, ou générer des fichiers dynamiquement, 
+  vous pouvez utiliser :doc:`views/media-view`
+- Pour créer des vues multiples par thème, vous pouvez utliser 
+  :doc:`views/themes`
 
-View Templates
-==============
+Templates de Vues
+=================
 
-The view layer of CakePHP is how you speak to your users. Most of
-the time your views will be showing (X)HTML documents to browsers,
-but you might also need to serve AMF data to a Flash object, reply
-to a remote application via SOAP, or output a CSV file for a user.
+La couche vue de CakePHP c'est la façon dont vous parlez à vos utilisateurs. 
+La plupart du temps, vos vues afficheront des documents (X)HTML pour les 
+navigateurs, mais vous pourriez aussi avoir besoin de fournir des données AMF 
+à un objet Flash, répondre à une application distante via SOAP ou produire un 
+fichier CSV pour un utilisateur.
 
-By default CakePHP view files are written in plain PHP and have a default
-extension of .ctp (CakePHP Template). These files contain all the
-presentational logic needed to get the data it received from the
-controller in a format that is ready for the audience you’re
-serving to. If you'd prefer using a templating language like
-Twig, or Smarty, a subclass of View will bridge your templating
-language and CakePHP
+Les fichiers de vues de CakePHP sont écrits en pur PHP et ont comme extension 
+par défaut .ctp (Cakephp TemPlate). Ces fichiers contiennent toute la logique 
+de présentation nécessaire à l'organisation des données reçues du contrôleur, 
+dans un format qui satisfasse l'audience que vous recherchez. Si vous préfèrez 
+utiliser un langage de template comme Twig, ou Smarty, une sous-classe de Vue 
+fera le pont entre votre language de template et CakePHP.
 
-View files are stored in ``/app/View/``, in a folder named after the
-controller that uses the files, and named after the action it
-corresponds to. For example, the view file for the Products
-controller's "view()" action, would normally be found in
-``/app/View/Products/view.ctp``.
+Les fichiers de vues sont stockées dans ``/app/View/``, dans un dossier portant 
+le nom du contrôleur qui utilise ces fichiers et le nom de la vue 
+correspondante. Par exemple, l'action "view()" du contrôleur Produits devrait 
+normalement se trouver dans ``/app/View/Products/view.ctp``.
 
-The view layer in CakePHP can be made up of a number of different
-parts. Each part has different uses, and will be covered in this
-chapter:
+La couche vue de CakePHP peut être constituée d'un certain nombre de parties 
+différentes. Chaque partie a différent usages qui seront présentés dans ce 
+chapitre :
 
-- **views**: Views are the part of the page that is unique to the
-  action being run. They form the meat of your application's response.
-- **elements**: smaller, reusable bits of view code. Elements are
-  usually rendered inside of views.
-- **layouts**: view files that contain presentational code that is
-  found wrapping many interfaces in your application. Most views are
-  rendered inside of a layout.
-- **helpers**: these classes encapsulate view logic that is needed
-  in many places in the view layer. Among other things, helpers in
-  CakePHP can help you build forms, build AJAX functionality,
-  paginate model data, or serve RSS feeds.
+- **vues**: Les Vues sont la partie de la page qui est unique pour l'action 
+  lancée. Elles sont la substance de la réponse de votre application.
+- **elements** : morceaux de code de vue plus petits, réutilisables. Les 
+  éléments sont habituellement rendus dans les vues.
+- **layouts** : fichiers de vue contenant le code de présentation qui se 
+  retrouve dans plusieurs interfaces de votre application. La plupart des 
+  vues sont rendues à l'intérieur d'un layout.
+- **helpers** : ces classes encapsulent la logique de vue qui est requise 
+  à de nombreux endroits de la couche vue. Parmi d'autres choses, les helpers 
+  (assistants) de CakePHP peuvent vous aider à créer des formulaires, des 
+  fonctionnalités AJAX, de paginer les données du modèle ou à délivrer des 
+  flux RSS.
 
 
 .. _extending-views:
 
-Extending Views
----------------
+Vues étendues
+-------------
 
 .. versionadded:: 2.1
 
-View extending allows you to wrap one view in another.  Combining this with
-:ref:`view blocks <view-blocks>` gives you a powerful way to keep your views
-:term:`DRY`.  For example, your application has a sidebar that needs to change depending
-on the specific view being rendered.  By extending a common view file you can
-avoid repeating the common markup for your sidebar, and only define the parts
-that change::
+Une vue étendue vous permet d'enrouler une vue dans une autre. En combinant 
+cela avec :ref:`view blocks <view-blocks>`, cela vous donne une façon puissante 
+pour garder vos vues :term:`DRY`. Par exemple, votre application a une sidebar 
+qui a besoin de changer selon la vue spécifique en train d'être rendue. En 
+étendant un fichier de vue commun, vous pouvez éviter de répeter la balise 
+commune pour votre sidebar, et seulement définir les parties qui changent::
 
     // app/View/Common/view.ctp
     <h1><?php echo $this->fetch('title'); ?></h1>
@@ -79,17 +81,18 @@ that change::
         </ul>
     </div>
 
-The above view file could be used as a parent view.  It expects that the view
-extending it will define the ``sidebar`` and ``title`` blocks.  The ``content``
-block is a special block that CakePHP creates. It will contain all the
-un-captured content from the extending view. Assuming our view file has a
-``$posts`` variable with the data about our post.  Our view could look like::
+Le fichier de vue ci-dessus peut être utilisé comme une vue parente. Il 
+s'attend à ce que la vue étendue, il va définir des blocks ``sidebar`` 
+et ``title``. Le block ``content`` est un block spécial que CakePHP 
+crée. Il contiendra tous les contenus non capturés de la vue étendue. 
+En admettant que notre fichier de vue a une variable ``$posts`` avec les 
+données sur notre post. Notre vue pourrait ressembler à ceci::
 
     // app/View/Posts/view.ctp
     <?php
     $this->extend('/Common/view');
 
-    $this->assign('title', $post)
+    $this->assign('titre', $post)
 
     $this->start('sidebar');
     ?>
@@ -694,8 +697,8 @@ To call any view method use ``$this->method()``
 
     .. versionadded:: 2.1
 
-More about Views
-================
+En savoir plus sur les vues
+===========================
 
 .. toctree::
 
@@ -706,5 +709,5 @@ More about Views
 
 
 .. meta::
-    :title lang=en: Views
-    :keywords lang=en: view logic,csv file,response elements,code elements,default extension,json,flash object,remote application,twig,subclass,ajax,reply,soap,functionality,cakephp,audience,xml,mvc
+    :title lang=fr: Vues
+    :keywords lang=fr: logique de vue,fichier csv,élements de réponse,éléments de code,extension par défaut,json,objet flash,remote application,twig,sous-classe,ajax,répondre,soap,fonctionnalité,cakephp,fréquentation,xml,mvc

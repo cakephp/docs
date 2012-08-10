@@ -3,70 +3,75 @@ Glossaire
 
 .. glossary::
 
-    routing array
-        An array of attributes that are passed to :php:meth:`Router::url()`.
-        They typically look like::
+    tableau routing
+        Un tableau d'attributs qui sont passés au :php:meth:`Router::url()`.
+        Typiquement, ils ressemblent à ça::
         
             array('controller' => 'posts', 'action' => 'view', 5)
 
-    html attributes
-        An array of key => values that are composed into html attributes. For example::
+    attributs html
+        Un tableau de clé => valeurs qui sont composées dans les attributs 
+        html. Par exemple::
             
             <?php
-            // Given
-            array('class' => 'my-class', '_target' => 'blank')
+            // Par exemple
+            array('class' => 'ma-classe', '_target' => 'blank')
 
-            // Would generate
-            class="my-class" _target="blank"
+            // générerait
+            class="ma-classe" _target="blank"
 
-        If an option can be minimized or accepts it's name as the value, then ``true`` 
-        can be used::
+        Si une option peut être minimisée ou a le même nom que sa valeur, alors 
+        ``true`` peut être utilisée::
         
             <?php
-            // Given
+            // Par exemple
             array('checked' => true)
             
-            // Would generate
+            // Générerait
             checked="checked"
     
-    plugin syntax
-        Plugin syntax refers to the dot separated classname indicating classes
-        are part of a plugin.  E.g. ``DebugKit.Toolbar`` The plugin is DebugKit,
-        and the classname is Toolbar.
+    syntaxe de plugin
+        La syntaxe de Plugin fait référence au nom de la classe avec un point 
+        en séparation indiquant que les classes sont une partie d'un plugin.
+        Par ex: ``DebugKit.Toolbar``, le plugin est DebugKit,
+        et le nom de classe est Toolbar.
     
-    dot notation
-        Dot notation defines an array path, by separating nested levels with ``.``
-        For example::
+    notation avec points
+        La notation avec points définit un chemin de tableau, en séparant les 
+        niveaux imbriqués avec ``.``
+        Par exemple::
         
-            Asset.filter.css
+            Asset.filtre.css
         
-        Would point to the following value::
+        Pointerait vers la valeur suivante::
         
             array(
                 'Asset' => array(
-                    'filter' => array(
-                        'css' => 'got me'
+                    'filtre' => array(
+                        'css' => 'vous m avez eu'
                     )
                 )
             )
 
     CSRF
-        Cross Site Request Forgery.  Prevents replay attacks, double
-        submissions and forged requests from other domains.
+        Les Reqûetes de site croisées de Contrefaçon. Emêche les attaques de 
+        replay, les soumissions doubles et les requêtes contrefaîtes provenant 
+        d'autres domaines.
 
     routes.php
-        A file in APP/Config that contains routing configuration.
-        This file is included before each request is processed.
-        It should connect all the routes your application needs so 
-        requests can be routed to the correct controller + action.
+        Un fichier dans APP/Config qui contient la configuration de routing.
+        Ce fichier est inclus avant que chaque requête soit traitée.
+        Il devrait connecter toutes les routes dont votre applications a besoin 
+        afin que les requêtes puissent être routées aux contrôleur + action 
+        corrects.
 
     DRY
-        Don't repeat yourself. Is a principle of software development aimed at
-        reducing repetition of information of all kinds.  In CakePHP DRY is used
-        to allow you to code things once and re-use them across your
-        application.
+        Ne vous répétez pas vous-même. Est un principe de développement de 
+        logiciel qui a pour objectif de réduire les répétitions d'information 
+        de tout type. Dans CakePHP, DRY est utilisé pout vous permettre de 
+        coder des choses et de les ré-utiliser à travers votre application.
 
 
 .. meta::
-    :title lang=en: Glossary
-    :keywords lang=en: html attributes,array class,array controller,glossary glossary,target blank,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions
+    :title lang=fr: Glossaire
+    :keywords lang=fr: attributs html,classe de tableau,tableau contrôleur,glossaire,cible blank,notation point,configuration du routing,contrefaçon,replay,routeur,syntaxe,config,soumissions

@@ -32,11 +32,11 @@ contiendraient une clé ``name`` avec le résultat de la concaténation. Il
 n'est pas conseillé de créer des champs virtuels avec les mêmes noms que 
 les colonnes sur la base de données, ce qui peut provoquer des erreurs SQL.
 
-Il n'est pas toujours utile d'avoir **User.prenom** complètement qualifié. 
-Si vous ne suivez pas la convention (ex: vous avez des relations multiples 
-avec d'autres tables) cela entrainerait une erreur. Dans ce cas, il est 
-parfois préferable de juste utiliser ``prenom || \'\' || nom`` sans le nom
-du Modèle.
+Il n'est pas toujours utile d'avoir **Utilisateur.prenom** complètement 
+qualifié. Si vous ne suivez pas la convention (ex: vous avez des relations 
+multiples avec d'autres tables) cela entrainerait une erreur. Dans ce cas, 
+il est parfois préferable de juste utiliser ``prenom || \'\' || nom`` sans 
+le nom du Modèle.
 
 Utiliser les champs virtuels
 ============================
@@ -119,7 +119,7 @@ modèle::
     <?php
     public function __construct($id = false, $table = null, $ds = null) {
         parent::__construct($id, $table, $ds);
-        $this->virtualFields['name'] = sprintf('CONCAT(%s.first_name, " ", %s.last_name)', $this->alias, $this->alias);
+        $this->virtualFields['name'] = sprintf('CONCAT(%s.prenom, " ", %s.nom_famille)', $this->alias, $this->alias);
     }
 
 Cel permet à vos champsVirtuels de travailler pour n'importe quel alias que 

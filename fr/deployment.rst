@@ -1,11 +1,12 @@
-Deployment
-##########
+Déploiement
+###########
 
-Once your application is complete, or even before that you'll want to deploy it.
-There are a few things you should do when deploying a CakePHP application.
+Une fois que votre application est terminée, ou même avant que vous 
+souhaitiez la déployer. Il y a quelques choses que vous devriez faire quand 
+vous déployez une application CakePHP.
 
-Check your security
-===================
+Vérifier votre sécurité
+=======================
 
 If you're throwing your application out into the wild, it's a good idea to make
 sure it doesn't have any leaks. Check the :doc:`/core-libraries/components/security-component` to guard against
@@ -26,8 +27,8 @@ Setting the document root is different for different webservers.  See the
 :doc:`/installation/advanced-installation` documentation for webserver specific
 information.
 
-Update core.php
-===============
+Mise à jour core.php
+====================
 
 Updating core.php, specifically the value of ``debug`` is extremely important.
 Turning debug = 0 disables a number of development features that should never be
@@ -46,8 +47,8 @@ In addition to the above, many plugins and application extensions use ``debug``
 to modify their behavior.
 
 
-Multiple CakePHP applications using the same core
-=================================================
+De multiples applications CakePHP en utilisant le même coeur
+============================================================
 
 There are a few ways you can configure multiple applications to use the same
 CakePHP core.  You can either use PHP's ``include_path`` or set the
@@ -65,5 +66,5 @@ This assumes you are running a \*nix server, and have CakePHP in
 
 
 .. meta::
-    :title lang=en: Deployment
-    :keywords lang=en: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications
+    :title lang=fr: Deployment
+    :keywords lang=fr: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications

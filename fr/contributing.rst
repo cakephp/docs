@@ -1,8 +1,9 @@
-Contributing
-############
+Contribuer
+##########
 
-There are a number of ways you can contribute to CakePHP. The following sections
-cover the various ways you can contribute to CakePHP:
+Il y a un certain nombre de moyens pour contribuer à CakePHP. Les sections 
+suivantes couvrent les différentes façons avec lesquelles vous pouvez 
+contribuer à CakePHP:
 
 .. toctree::
     :maxdepth: 1
@@ -15,5 +16,5 @@ cover the various ways you can contribute to CakePHP:
 
 
 .. meta::
-    :title lang=en: Contributing
-    :keywords lang=en: coding conventions,documentation,maxdepth
+    :title lang=fr: Contribuer
+    :keywords lang=fr: conventions de programmation,documentation,maxdepth

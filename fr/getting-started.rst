@@ -1,26 +1,27 @@
-Getting Started
-###############
+Pour Commencer
+##############
 
-The CakePHP framework provides a robust base for your application.
-It can handle every aspect, from the user’s initial request all the
-way to the final rendering of a web page. And since the framework
-follows the principles of MVC, it allows you to easily customize
-and extend most aspects of your application.
+Le framework CakePHP fournit une base robuste pour votre application. Il 
+peut gérer tous les aspects, de la requête initiale de l'utilisateur et le 
+cheminement jusqu'au rendu final de la page web. Et puisque le framework suit 
+les principes du MVC, il vous permet de facilement personnaliser et offre la 
+plupart des aspects de votre application.
 
-The framework also provides a basic organizational structure, from
-filenames to database table names, keeping your entire application
-consistent and logical. This concept is simple but powerful. Follow
-the conventions and you’ll always know exactly where things are and
-how they’re organized.
+Le framework fournit aussi une structure organisationnelle basique, des noms 
+de fichier jusqu'aux noms des tables de la base de données, en gardant toute 
+votre application cohérente et logique. Ce concept est simple mais puissant. 
+Suivez les conventions et vous saurez toujours exactement où les choses se 
+trouvent et comment elles sont organisées.
 
-The best way to experience and learn CakePHP is to sit down and build something.
-To start off we'll build a simple blog application.
+La meilleure façon de découvrir et d'apprendre CakePHP est de s'assoir et de 
+construire quelque chose. Pour commencer, nous construirons une application 
+simple de blog.
 
 .. include:: /tutorials-and-examples/blog/blog.rst
 .. include:: /tutorials-and-examples/blog/part-two.rst
 
-Additional Reading
-==================
+Lectures supplémentaires
+========================
 
 .. toctree::
     
@@ -31,5 +32,5 @@ Additional Reading
 
 
 .. meta::
-    :title lang=en: Getting Started
-    :keywords lang=en: folder structure,table names,initial request,database table,organizational structure,rst,filenames,conventions,mvc,web page,sit
+    :title lang=fr: Pour commencer
+    :keywords lang=fr: structure de dossier,noms de table,requête initiale,table base de données,structure organisationnelle,rst,noms de fichier,conventions,mvc,page web,emplacement

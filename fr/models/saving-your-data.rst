@@ -122,15 +122,15 @@ Plus d'informations sur les callbacks du modèle sont disponibles
     la sauvegarde de certaines données, ajoutez ``'updated' => false`` 
     à votre tableau de ``$data``.
 
-Once a save has been completed, the ID for the object can be found
-in the ``$id`` attribute of the model object - something especially
-handy when creating new objects.
+Une fois qu'une sauvegarde est terminée, l'ID de l'objet peut être trouvé dans 
+l'attribut ``$id`` de l'objet modèle - quelque chose de spécialement pratique 
+quand on crée de nouveaux objets.
 
 ::
 
     <?php
-    $this->Ingredient->save($newData);
-    $newIngredientId = $this->Ingredient->id;
+    $this->Ingredient->save($nouvellesDonnees);
+    $nouvelIngredientId = $this->Ingredient->id;
 
 Creating or updating is controlled by the model's ``id`` field. If
 ``$Model->id`` is set, the record with this primary key is updated.

@@ -1,108 +1,108 @@
-Models
-######
+Modèles
+#######
 
-Models are the classes that sit as the business layer in your application.
-This means that they should be responsible for managing almost everything
-that happens regarding your data, its validity, interactions and evolution
-of the information workflow in your domain of work.
+Les Modèles sont les classes qui représentent la couche de logique dans votre 
+application. Cela signifie qu'ils sont responsables de la gestion de presque 
+tout ce qui concerne les données, leur validité, les interactions et 
+l'évolution du flux d'informations dans votre domaine de travail.
 
-Usually model classes represent data and are used in CakePHP applications
-for data access, more specifically they represent a database table but they are
-not limited to this, but can be used to access anything that manipulates data
-such as files, external web services, iCal events, or rows in a CSV file.
+Habituellement, les classes de modèle représentent les données et sont 
+utilisées dans les applications CakePHP pour l'accès aux données, plus 
+spécifiquement elles représentent une table de la base de données, mais elles 
+ne sont pas limitées à cela et peuvent être utilisées pour accéder à tout ce 
+qui manipule des données comme des fichiers, des services web externes, des 
+évènements iCal ou des lignes dans un fichier CSV.
 
-A model can be associated with other models. For example, a Recipe
-may be associated with the Author of the recipe as well as the
-Ingredient in the recipe.
+Un modèle peut être associé avec d'autres modèles. Par exemple, une Recette 
+peut être associé avec l'Auteur de la recette ainsi qu'à l'Ingredient dans 
+la recette.
 
-This section will explain what features of the model can be
-automated, how to override those features, and what methods and
-properties a model can have. It'll explain the different ways to
-associate your data. It'll describe how to find, save, and delete
-data. Finally, it'll look at Datasources.
+Cette section vous expliquera quelles fonctionnalités du modèle peuvent 
+être automatisées, comment outrepasser ces fonctionnalités, et quelles 
+méthodes et propriétés un modèle peut avoir. Elle expliquera les différentes 
+façons d'associer vos données. Elle décrira comment trouver, sauvegarder, 
+et effacer des données. Au final, elle s'interessera aux sources de données.
 
-Understanding Models
-====================
+Comprendre les Modèles
+======================
 
-A Model represents your data model. In object-oriented programming
-a data model is an object that represents a "thing", like a car, a
-person, or a house. A blog, for example, may have many blog posts
-and each blog post may have many comments. The Blog, Post, and
-Comment are all examples of models, each associated with another.
+Un Modèle est à la fois votre modèle de données. En programmation orientée 
+objet, un objet qui représente une "chose", comme une voiture, une personne 
+ou une maison. Un blog, par exemple, peut avoir plusieurs posts et chaque 
+post peut avoir plusieurs commentaires. Blog, Post et Commentaire sont tous 
+des exemples de modèles, chacun étant associé avec un autre.
 
-Here is a simple example of a model definition in CakePHP::
+Voici un simple exemple de définition de modèle dans CakePHP :
 
     <?php
     class Ingredient extends AppModel {
         public $name = 'Ingredient';
     }
 
-With just this simple declaration, the Ingredient model is bestowed
-with all the functionality you need to create queries along with
-saving and deleting data. These magic methods come from CakePHP's
-Model class by the magic of inheritance. The Ingredient model
-extends the application model, AppModel, which extends CakePHP's
-internal Model class. It is this core Model class that bestows the
-functionality onto your Ingredient model.
+Avec juste cette simple déclaration, le modèle Ingredient est doté de toutes 
+les fonctionnalités dont vous avez besoin pour créer des requêtes, ainsi que 
+sauvegarder et supprimer des données. Ces méthodes magiques proviennent de la 
+classe Model de CakePHP, grâce à la magie de l'héritage. Le modèle Ingredient 
+étend le modèle de l'application AppModel, lequel étend la classe Model interne 
+de CakePHP. C'est cette classe Model du cœur qui fournit les fonctionnalités à 
+l'intérieur de votre modèle Ingredient.
 
-This intermediate class, AppModel, is empty and if you haven't
-created your own, is taken from within the CakePHP core folder. Overriding
-the AppModel allows you to define functionality that should be made
-available to all models within your application. To do so, you need
-to create your own ``AppModel.php`` file that resides in the Model folder,
-as all other models in your application. Creating a project using
-:doc:`Bake <console-and-shells/code-generation-with-bake>` will automatically
-generate this file for you.
+La classe intermédiaire AppModel est vide et si vous n'avez pas créé la vôtre, 
+elle provient du répertoire du coeur de cakePHP. Ecraser AppModel vous permet 
+de définir des fonctionnalités qui doivent être rendues disponibles pour tous 
+les modèles de votre application. Pour faire cela, vous avez besoin de créer 
+votre propre fichier ``AppModel.php`` qui se loge dans le dossier Model, comme 
+tous les autres modèles dans votre application. A la création d'un projet en 
+utilisant :doc:`Bake <console-and-shells/code-generation-with-bake>`, ce 
+fichier sera automatiquement créé pour vous.
 
-See also :doc:`Behaviors <models/behaviors>` for more information on
-how to apply similar logic to multiple models.
+Voir aussi :doc:`Behaviors <models/behaviors>` pour plus d'informations sur la 
+façon d'appliquer la même logique pour de multiples modèles.
 
-Back to our Ingredient model, in order to work on it, create the PHP file in the
-``/app/Model/`` directory. By convention it should have the same name as the class;
-for this example ``Ingredient.php``.
-
-.. note::
-
-    CakePHP will dynamically create a model object for you if it cannot
-    find a corresponding file in /app/Model. This also means that if
-    your model file isn't named correctly (i.e. ingredient.php or
-    Ingredients.php) CakePHP will use an instance of AppModel rather
-    than your missing (from CakePHP's perspective) model file. If
-    you're trying to use a method you've defined in your model, or a
-    behavior attached to your model and you're getting SQL errors that
-    are the name of the method you're calling - it's a sure sign
-    CakePHP can't find your model and you either need to check the file
-    names, your application cache, or both.
+Retournons à notre modèle Ingredient, pour que cela fonctionne, créez le 
+fichier PHP dans le repertoire ``/app/Model/``. Par convention, il devra avoir 
+le même nom que la classe; pour cet exemple ``Ingredient.php``.
 
 .. note::
 
-    Some class names are not usable for model names. For instance
-    "File" cannot be used as "File" is a class already existing in the
-    CakePHP core.
+    CakePHP créera dynamiquement un objet modèle pour vous si il ne peut 
+    pas trouver un fichier correspondant dans /app/Model. Cela veut également 
+    dire que si votre fichier de modèle n'est pas nommé correctement (ex : 
+    ingredient.php ou ingredients.php) CakePHP utilisera une instance de 
+    AppModel, plutôt que votre fichier de modèle "manquant" (d'un point de 
+    vue CakePHP). Si vous essayez d'utiliser une méthode que vous avez définie 
+    dans votre modèle ou dans un comportement attaché à votre modèle et que 
+    vous obtenez des erreurs SQL qui indiquent le nom de la méthode que vous 
+    appelez, c'est une indication certaine que CakePHP ne peut pas trouver 
+    votre modèle et que vous devez, soit vérifier les noms de fichier, soit 
+    nettoyer les fichiers temporaires ou les deux.
 
+.. note::
 
-With your model defined, it can be accessed from within your
-:doc:`Controller <controllers>`. CakePHP will automatically
-make the model available for access when its name matches that of
-the controller. For example, a controller named
-IngredientsController will automatically initialize the Ingredient
-model and attach it to the controller at ``$this->Ingredient``::
+    Certains noms de classe ne sont pas utilisables pour les noms de modèle.
+    Par exemple, "File" ne peut pas être utilisé puisque "File" est une classe 
+    existant déjà dans le coeur de CakePHP.
+
+Une fois votre modèle défini, il peut être accédé depuis vos 
+:doc:`Contrôleurs <controllers>`. CakePHP rend automatiquement un modèle 
+disponible en accès, dès lors que son nom valide celui du contrôleur. Par 
+exemple, un contrôleur nommé IngredientsController initialisera 
+automatiquement le modèle Ingredient et y accédera par ``$this->Ingredient``::
 
     <?php
     class IngredientsController extends AppController {
         public function index() {
-            //grab all ingredients and pass it to the view:
+            // Récupère tous les ingrédients et les transmet à la vue :
             $ingredients = $this->Ingredient->find('all');
             $this->set('ingredients', $ingredients);
         }
     }
 
-Associated models are available through the main model. In the
-following example, Recipe has an association with the Ingredient
-model::
+Les modèles associés sont accessibles à travers le modèle principal. Dans 
+l'exemple suivant, Recette a une association avec le modèle Ingredient::
 
     <?php
-    class Recipe extends AppModel {
+    class Recette extends AppModel {
 
         public function steakRecipes() {
             $ingredient = $this->Ingredient->findByName('Steak');
@@ -110,11 +110,12 @@ model::
         }
     }
 
-This shows how to use models that are already linked. To understand how associations are
-defined take a look at the :doc:`Associations section <models/associations-linking-models-together>`
+Cela montre comment utiliser les modèles qui sont déjà liés. Pour comprendre 
+comment les associations sont définies, allez voir la 
+:doc:`Section des associations <models/associations-linking-models-together>`.
 
-More on models
-==============
+Pour en savoir plus sur les modèles
+===================================
 
 .. toctree::
 
@@ -133,5 +134,5 @@ More on models
 
 
 .. meta::
-    :title lang=en: Models
-    :keywords lang=en: information workflow,csv file,object oriented programming,model class,model classes,model definition,internal model,core model,simple declaration,application model,php class,database table,data model,data access,external web,inheritance,different ways,validity,functionality,queries
+    :title lang=fr: Modèles
+    :keywords lang=fr: flux d'informations,fichier csv,programmation orientée objet,classe de modèle,classes de modèle,définition de modèle,modèle interne,modèle du coeur,déclaration simple,modèle application,classe php,table de base de données,modèle de données,accès aux données,web externe,héritage,différentes façons,validité,fonctionnalité,requêtes

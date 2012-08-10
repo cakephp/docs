@@ -1,15 +1,15 @@
-Core Libraries
-##############
+Librairies du Coeur
+###################
 
-CakePHP comes with a plethora of built-in functions and classes.  These classes
-and functions try to cover some of the most common features required in web
-applications.
+CakePHP est fourni avec une pléthore de fonctions et de classes intégrées. Ces 
+classes et fonctions tentent de couvrir certaines des fonctionnalités les plus 
+communes requises dans les applications web.
 
-General purpose
-===============
+Usage Général
+=============
 
-General purpose libraries are available and reused in many places across
-CakePHP.
+Des librairies à usage général sont disponibles et réutilisées dans plusieurs 
+endroits à travers CakePHP.
 
 .. toctree::
     :maxdepth: 2
@@ -20,12 +20,12 @@ CakePHP.
 
 .. _core-components:
 
-Components
-==========
+Composants (Components)
+=======================
 
-CakePHP has a selection of components to help take care of basic tasks in your
-controllers.  See the section on :doc:`/controllers/components` for how to
-configure and use components.
+CakePHP a une sélection de composants pour aider à s'occuper de tâches basiques 
+dans vos contrôleurs. Regardez la section sur :doc:`/controllers/components` 
+pour savoir comment configurer et utiliser les composants.
 
 .. toctree::
     :maxdepth: 2
@@ -41,16 +41,17 @@ configure and use components.
 
 .. _core-helpers:
 
-Helpers
-=======
+Helpers (Assistants)
+====================
 
-CakePHP features a number of helpers that aid in view creation. They assist in
-creating well-formed markup (including forms), aid in formatting text, times and
-numbers, and can even integrate with popular javascript libraries. Here is a
-summary of the built-in helpers. 
+CakePHP dispose d'un certain nombre de helpers qui aident à la création de 
+vues. Ils aident à la création d'un balisage bien formé (y compris les 
+formulaires), l'aide au formatage du texte, des temps et des nombres, et 
+peut même intégrer des bibliothèques javascript populaires. Voici une résumé 
+des helpers intégrés. 
 
-Read :doc:`/views/helpers` to learn more about helpers, their api, and how you
-can create and use your own helpers.
+Lire :doc:`/views/helpers` pour en apprendre plus sur les helpers, leur api, 
+et comment vous pouvez créer et utiliser vos propres helpers.
 
 .. toctree::
     :maxdepth: 2
@@ -71,12 +72,12 @@ can create and use your own helpers.
 Behaviors
 =========
 
-Behaviors add extra functionality to your models. CakePHP comes
-with a number of built-in behaviors such as :php:class:`TreeBehavior`
-and :php:class:`ContainableBehavior`.
+Les behaviors ajoutent des fonctionnalités supplémentaires à vos modèles. 
+CakePHP offre un nombre de behaviors integrés tels que 
+:php:class:`TreeBehavior` et :php:class:`ContainableBehavior`.
 
-To learn about creating and using behaviors, read the section
-on :doc:`/models/behaviors`.
+Pour en apprendre sur la création et l'utilisation des behaviors, lire la 
+section sur :doc:`/models/behaviors`.
 
 .. toctree::
     :maxdepth: 2
@@ -86,12 +87,12 @@ on :doc:`/models/behaviors`.
     core-libraries/behaviors/translate
     core-libraries/behaviors/tree
 
-Core Libraries
-==============
+Libraries du Coeur
+==================
 
-Beyond the core MVC components, CakePHP includes a great selection of utility
-classes that help you do everything from webservice requests, to caching, to
-logging, internationalization and more.
+Au-delà des composants MVC de base, CakePHP comprend une grande sélection 
+de classes d'utilitaires qui vous aident à tout faire, des demandes de service 
+web, la mise en cache, la connexion, l'internationalisation et plus.
 
 .. toctree::
     :maxdepth: 2
@@ -115,5 +116,5 @@ logging, internationalization and more.
 
 
 .. meta::
-    :title lang=en: Core Libraries
-    :keywords lang=en: core libraries,global constants,cookie,access control lists,number,text,time,security component,core components,general purpose,web applications,markup,authentication,api,cakephp,functionality,sessions,collections,events
+    :title lang=fr: Libraries du Coeur
+    :keywords lang=fr: librairies du coeur,constantes globales,cookie,listes de contrôle d'accès,nombre,texte,temps,composant de sécurité,composants du coeur,sujet général,applications web,balise,authentification,api,cakephp,fonctionnalité,sessions,collections,evènements

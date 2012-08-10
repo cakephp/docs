@@ -1,16 +1,16 @@
 Migrer de CakePHP 1.2 vers 1.3
 ##############################
 
-Ce guide résume plusieurs des changements nécessaires quand on migre
-du coeur de Cake 1.2 vers 1.3. Chaque section contient des informations
-pertinentes pour les modifications faîtes aux méthodes existantes
+Ce guide résume plusieurs des changements nécessaires quand on migre 
+du coeur de Cake 1.2 vers 1.3. Chaque section contient des informations 
+pertinentes pour les modifications faîtes aux méthodes existantes 
 ainsi que toute méthode qui a été retirée/renommée.
 
 **Remplacements du fichier App (important)**
 
 
--  webroot/index.php: Doit être remplacé à cause des changements dans le processus
-   de bootstrapping.
+-  webroot/index.php: Doit être remplacé à cause des changements dans le 
+   processus de bootstrapping.
 -  config/core.php: Des configurations additionnelles ont été mise en place
    qui sont requises pour PHP 5.3.
 -  webroot/test.php: Remplacez si vous voulez lancer des tests unitiaires.
@@ -21,9 +21,9 @@ Constantes retirées
 Les constantes suivantes ont été retirées de CakePHP. Si votre application
 dépend d'eux, vous devez les définir dans ``app/config/bootstrap.php``
 
--  ``CIPHER_SEED`` - Cela a été remplacé par la variable ``Security.cipherSeed``
-   de la classe de configuration qui doit être changée dans
-   ``app/config/core.php``
+-  ``CIPHER_SEED`` - Cela a été remplacé par la variable 
+   ``Security.cipherSeed`` de la classe de configuration qui doit être changée 
+   dans ``app/config/core.php``
 -  ``PEAR``
 -  ``INFLECTIONS``
 -  ``VALID_NOT_EMPTY``
@@ -36,10 +36,10 @@ Configuration et bootstrapping de l'application
 
 **Chemins de bootstrapping en plus.**
 
-Dans votre fichier app/config/bootstrap.php il se peut que vous ayez des variables
-telles que ``$pluginPaths`` ou ``$controllerPaths``.
-Il y a une nouvelle façon d'ajouter ces chemins. Comme dans la 1.3 RC1, les
-variables ``$pluginPaths`` ne fonctionneront plus. Vous devez utiliser
+Dans votre fichier app/config/bootstrap.php il se peut que vous ayez des 
+variables telles que ``$pluginPaths`` ou ``$controllerPaths``.
+Il y a une nouvelle façon d'ajouter ces chemins. Comme dans la 1.3 RC1, les 
+variables ``$pluginPaths`` ne fonctionneront plus. Vous devez utiliser 
 ``App::build()`` pour modifier les chemins.
 
 ::
@@ -61,17 +61,17 @@ variables ``$pluginPaths`` ne fonctionneront plus. Vous devez utiliser
 
 Ce qui a aussi changé est l'ordre dans lequel apparait le bootstrapping.
 Dans le passé, ``app/config/core.php`` était chargé **après**
-``app/config/bootstrap.php``. Cela entraînait que n'importe quel ``App::import()`` 
-dans le bootstrap d'une application n'était plus en cache et ralentissait 
-considérablement par rapport à une inclusion en cache. Dans 1.3, le fichier core.php
-est chargé et les configurations du coeur mises en cache sont créées
-**avant** que bootstrap.php soit chargé.
+``app/config/bootstrap.php``. Cela entraînait que n'importe quel 
+``App::import()`` dans le bootstrap d'une application n'était plus en cache 
+et ralentissait considérablement par rapport à une inclusion en cache. Dans 
+1.3, le fichier core.php est chargé et les configurations du coeur mises en 
+cache sont créées **avant** que bootstrap.php soit chargé.
 
 **Chargement des inflections**
 
 ``inflections.php`` a été retiré, c'était un fichier non nécessaire et les 
-fonctionnalités liées ont été reconstruites dans une méthode pour augmenter
-leur flexibilité. Vous pouvez maintenant utiliser ``Inflector::rules()`` pour
+fonctionnalités liées ont été reconstruites dans une méthode pour augmenter 
+leur flexibilité. Vous pouvez maintenant utiliser ``Inflector::rules()`` pour 
 charger les différentes inflections.
 
 ::
@@ -82,8 +82,8 @@ charger les différentes inflections.
         'irregular' => array('spins' => 'spinor')
     ));
 
-Fusionnera les règles fournies dans un ensemble d'inflections, avec les règles ajoutées
-prenant le pas sur les règles de base.
+Fusionnera les règles fournies dans un ensemble d'inflections, avec les règles 
+ajoutées prenant le pas sur les règles de base.
 
 Renommages de fichier et changements internes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -93,7 +93,7 @@ Renommages de fichier et changements internes
 Les librairies du coeur de libs/session.php, libs/socket.php,
 libs/model/schema.php et libs/model/behavior.php ont été renommées
 afin qu'il y ait une meilleure correspondance entre les noms de fichiers 
-et les principales classes contenues (ainsi que la gestion avec les problèmes
+et les principales classes contenues (ainsi que la gestion avec les problèmes 
 d'espaces de noms):
 
 -  session.php ⇒ cake\_session.php
@@ -121,7 +121,8 @@ d'espaces de noms):
       'ModelBehavior')
 
 
-Dans la plupart des cas, le renommage ci-dessus, n'affectera pas les codes existants.
+Dans la plupart des cas, le renommage ci-dessus, n'affectera pas les codes 
+existants.
 
 **Héritage de Object**
 
@@ -134,8 +135,8 @@ Les classes suivantes ne vont plus étendre Object:
 -  Cache
 -  CacheEngine
 
-Si vous utilisiez les méthodes de Object à partir de ces classes, vous devrez ne 
-plus utiliser ces méthodes.
+Si vous utilisiez les méthodes de Object à partir de ces classes, vous devrez 
+ne plus utiliser ces méthodes.
 
 Contrôleurs & Composants
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -149,7 +150,7 @@ Contrôleurs & Composants
 
 -  ``Controller::set('title', $var)`` ne fixe plus
    ``$title_for_layout`` quand il rend le layout.
-   ``$title_for_layout`` est toujours rempli par défaut. Mais si vous voulez
+   ``$title_for_layout`` est toujours rempli par défaut. Mais si vous voulez 
    le modifier, utilisez
    ``$this->set('title_for_layout', $var)``.
 
@@ -157,20 +158,18 @@ Contrôleurs & Composants
    ``$this->set('title_for_layout', $var);`` à la place.
 
 -  Controller a deux nouvelles méthodes ``startupProcess`` et
-   ``shutdownProcess``. Ces méthodes sont responsables de la gestion du startup
+   ``shutdownProcess``. Ces méthodes sont responsables de la gestion du startup 
    du contrôleur et des processus de shutdown.
    
 **Composant**
 
-
--  ``Component::triggerCallback`` a été ajouté. C'est un hook générique
+-  ``Component::triggerCallback`` a été ajouté. C'est un hook générique 
   dans le processus de callback du composant. Il supplante
    ``Component::startup()``, ``Component::shutdown()`` et
    ``Component::beforeRender()`` comme manière préférentielle pour
    déclencher les callbacks.
 
 **CookieComponent**
-
 
 -  ``del`` est dépreciée, utilisez ``delete``
 
@@ -187,8 +186,8 @@ past given the structure:
               Users/
                     edit
 
-Le chemin ``ROOT/Users`` correspondrait au dernier noeud Utilisateurs
-au lieu du premier. Dans 1.3, si vous vous attenidez à obtenir le dernier
+Le chemin ``ROOT/Users`` correspondrait au dernier noeud Utilisateurs 
+au lieu du premier. Dans 1.3, si vous vous attenidez à obtenir le dernier 
 noeud, vous deviez utiliser le chemin ``ROOT/Users/Users``
 
 **RequestHandlerComponent**
@@ -201,10 +200,10 @@ noeud, vous deviez utiliser le chemin ``ROOT/Users/Users``
 
 -  ``del`` est déprecié, utilisez ``delete``
 
-``SessionComponent::setFlash()`` Le second paramètre utilisé habituellement
+``SessionComponent::setFlash()`` Le second paramètre utilisé habituellement 
 pour configurer le layout et par conséquence le rendu du fichier layout.
-Cela a été modifié pour utiliser un élément. Si vous spécifiez des flash de
-session dans vos applications vous aurez besoin de faire les changements
+Cela a été modifié pour utiliser un élément. Si vous spécifiez des flash de 
+session dans vos applications vous aurez besoin de faire les changements 
 suivants.
 
 #. Déplacer les fichiers dde layout requis dans app/views/elements
@@ -244,9 +243,9 @@ Classes de Librairie
 **SessionComponent**
 
 
--  ``SessionComponent::setFlash()`` utilise maintenant un *élément*
-   au lieu d'un *layout* en second paramètre. Assurez vous de déplacer
-   tout flash layout de app/views/layouts vers app/views/elements et de
+-  ``SessionComponent::setFlash()`` utilise maintenant un *élément* 
+   au lieu d'un *layout* en second paramètre. Assurez vous de déplacer 
+   tout flash layout de app/views/layouts vers app/views/elements et de 
    changer les instances de $content\_for\_layout en $message.
 
 **Folder**
@@ -270,13 +269,12 @@ Classes de Librairie
 
 **Router**
 
-``Routing.admin`` est déprecié. Il fournit un behavior incompatible
-avec les autres styles de prefix de routes puisqu'il était traité
-différemment. A la place, vous devez utiliser ``Routing.prefixes``.
-Les préfixes de routes dans 1.3 ne nécessitent pas la déclaration
-manuelle de routes supplémentaires. Tous les préfixes de routes
-seront générés automatiquement. Pour mettre à jour, changez
-simplement votre core.php.
+``Routing.admin`` est déprecié. Il fournit un behavior incompatible avec 
+les autres styles de prefix de routes puisqu'il était traité différemment. 
+A la place, vous devez utiliser ``Routing.prefixes``. Les préfixes de routes 
+dans 1.3 ne nécessitent pas la déclaration manuelle de routes supplémentaires. 
+Tous les préfixes de routes seront générés automatiquement. Pour mettre à 
+jour, changez simplement votre core.php.
 
 ::
 
@@ -742,5 +740,5 @@ versions, it is recommend that the new path is used.
 
 
 .. meta::
-    :title lang=en: Migrating from CakePHP 1.2 to 1.3
-    :keywords lang=en: inflections,bootstrap,unit tests,constants,cipher,php 5,replacements,pear,array,variables,models,cakephp,plugins
+    :title lang=fr: Migrer de CakePHP 1.2 vers 1.3
+    :keywords lang=fr: inflections,bootstrap,tests unitaires,constantes,cipher,php 5,remplacements,pear,tableau,variables,modèles,cakephp,plugins

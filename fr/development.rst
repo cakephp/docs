@@ -1,9 +1,9 @@
-Development
-###########
+Développement
+#############
 
-In this section we'll cover the various aspects of developing a CakePHP
-application.  Topics like Configuration, handling errors & exceptions,
-debugging, and testing will be covered.
+Dans cette section, nous couvrirons les différents aspec du développement d'une 
+application CakePHP. Les sujets tels que la Configuration, la gestion des 
+erreurs & des exceptions, le débugging et le test seront couverts.
 
 .. toctree::
     :maxdepth: 1
@@ -21,5 +21,5 @@ debugging, and testing will be covered.
 
 
 .. meta::
-    :title lang=en: Development
-    :keywords lang=en: development sessions,debugging,exceptions
+    :title lang=fr: Développement
+    :keywords lang=fr: sessions de développement,débugging,exceptions
