@@ -364,7 +364,7 @@ This feature was also undocumented, and untested.
 **Object**
 
 
--  ``Object::$_log`` has been removed. ``CakeLog::write`` is now
+-  ``Object::$_log`` a été retiré. ``CakeLog::write`` is now
    called statically. See :doc:`/core-libraries/logging`
    for more information on changes made to logging.
 

@@ -1,7 +1,7 @@
 Tutoriels et exemples
 #####################
 
-Dans cette section, vous pouvez découvrir des applications CakePHP
+Dans cette section, vous pourrez découvrir des applications CakePHP
 typiques afin de voir comment toutes les pièces s'assemblent.
 
 Sinon, vous pouvez vous référer à la
