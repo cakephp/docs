@@ -21,11 +21,27 @@ PaginatorComponent
   specify what find method you want used for pagination.  This is a bit easier
   to manage and set than the 0'th index.
 
+SecurityComponent
+------------------
+
+- SecurityComponent now supports the ``unlockedActions`` option. This can be used to
+  disable all security checks for any actions listed in this option.
+
 Console
 =======
 
 - The ``server`` shell was added.  You can use this to start the PHP5.4
   webserver for your CakePHP application.
+
+Error
+=====
+
+Exceptions
+----------
+
+- CakeBaseException was added, which all core Exceptions now extend. The base exception
+  class also introduces the ``responseHeader()`` method which can be called on created Exception instances
+  to add headers for the response, as Exceptions dont reuse any response instance.
 
 Model
 =====
@@ -64,7 +80,15 @@ View
 
 - MediaView is deprecated, and you can use new features in
   :php:class:`CakeResponse` to achieve the same results.
--
+
+Helpers
+=======
+
+FormHelper
+----------
+
+- :php:meth:`FormHelper::select()` now accepts a list of values in the disabled
+  attribute. The list should contain the values you want disabled.
 
 Testing
 =======
@@ -75,6 +99,12 @@ Testing
 
 Utility
 =======
+
+Debugger
+--------
+
+- php:meth:`Debugger::exportVar()` now outputs private and protected properties
+  in PHP >= 5.3.0.
 
 Security
 --------
