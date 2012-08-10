@@ -83,7 +83,7 @@ Other request 'type' detection methods include:
     strings are:
 
     -  Android
-    -  AvantGo 
+    -  AvantGo
     -  BlackBerry
     -  DoCoMo
     -  Fennec
@@ -286,6 +286,33 @@ setting to false::
     public components = array(
         'RequestHandler' => array(
             'checkHttpCache' => false
+    ));
+
+Using custom ViewClasses
+========================
+
+.. versionadded:: 2.3
+
+When using JsonView/XmlView you might want to override the default serialization
+with a custom View class, or add View classes for other types.
+
+You can map existing and new types to your custom classes.
+
+.. php:method:: viewClassMap($type, $viewClass)
+
+    :param string|array $type: The type string or map array with format ``array('json' => 'MyJson')``
+    :param string $viewClass: The viewClass to be used for the type without `View` appended
+
+You can also set this automatically by using the ``viewClassMap`` setting::
+
+    <?php
+    public components = array(
+        'RequestHandler' => array(
+            'viewClassMap' => array(
+                'json' => 'ApiKit.MyJson',
+                'xml' => 'ApiKit.MyXml',
+                'csv' => 'ApiKit.Csv'
+            )
     ));
 
 .. meta::

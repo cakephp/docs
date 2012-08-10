@@ -30,7 +30,7 @@ SecurityComponent
 RequestHandlerComponent
 -----------------------
 
-- RequestHandlerComponent has a new method ``viewClassMap()`` which is used to map a type
+- :php:meth:`RequestHandlerComponent::viewClassMap()` has been added, which is used to map a type
   to view classname. You can add ``$settings['viewClassMap']`` for automatically setting
   the correct viewClass based on extension/content type.
 
