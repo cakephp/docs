@@ -394,6 +394,9 @@ These exception classes all extend :php:exc:`CakeException`.
 By extending CakeException, you can create your own 'framework' errors.
 All of the standard Exceptions that CakePHP will throw also extend CakeException.
 
+.. versionadded:: 2.3
+    CakeBaseException was added
+
 .. php:exception:: CakeBaseException
 
     Base exception class in CakePHP.
