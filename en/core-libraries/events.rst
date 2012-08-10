@@ -222,6 +222,8 @@ As you can see in the above code, the `attach` function can handle instances of
 the `CakeEventListener` interface. Internally, the event manager will read the
 array returned by `implementedEvents` method and wire the callbacks accordingly.
 
+.. _event-priorities:
+
 Establishing priorities
 -----------------------
 

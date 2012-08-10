@@ -126,7 +126,7 @@ Object callback priorities
 
 You can prioritize the triggering object callbacks similar to event callbacks.
 The handling of priority values and order of triggering is the same as
-explained :doc:`here <events#establishing-priorities>`.
+explained :ref:`here <event-priorities>`.
 Here's how you can specify priority at declaration time::
 
     <?php
