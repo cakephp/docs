@@ -27,6 +27,13 @@ SecurityComponent
 - SecurityComponent now supports the ``unlockedActions`` option. This can be used to
   disable all security checks for any actions listed in this option.
 
+RequestHandlerComponent
+-----------------------
+
+- RequestHandlerComponent has a new method ``viewClassMap()`` which is used to map a type
+  to view classname. You can add ``$settings['viewClassMap']`` for automatically setting
+  the correct viewClass based on extension/content type.
+
 Console
 =======
 
@@ -80,6 +87,7 @@ View
 
 - MediaView is deprecated, and you can use new features in
   :php:class:`CakeResponse` to achieve the same results.
+- Serialization in Json and Xml views has been moved to ``_serialize()``
 
 Helpers
 =======
