@@ -136,7 +136,7 @@ AuthとAclコンポーネントを追加する前に、多少の部品を加え�
     class User extends AppModel {
         // 他のコード。
 
-        public function beforeSave() {
+        public function beforeSave($options = array()) {
             $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
             return true;
         }
