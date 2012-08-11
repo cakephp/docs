@@ -72,21 +72,12 @@ Pour fabriquer des vues sur mesure
 #. Copier les dans le dossier: app/Console/Templates/[themename]/views
 #. Faire les changement pour la sortie HTML pour contrôler la façon dont "bake" 
    fabrique vos vues
+#. Passez le squelette du chemin en paramètre de la tâche du projet::
+
+    cake bake project -skel Console/Templates/skel
 
 La partie du chemin ``[themename]`` est le nom du theme de bake que vous créez.
 Les noms des thèmes de Bake doivent être uniques, donc n'utilisez pas 'default'.
-
-Pour fabriquer des projets sur mesure
-------------------------------------
-
-Allez dans le dossier: lib/Cake/Console/Templates/skel
-Remarquez l'application de base ici.
-Copiez les dans le dossier: app/Console/Templates/skel
-Faire les changements pour la sortie HTML pour contrôler la façon dont "bake" 
-fabrique vos vues.
-Passez le squelette du chemin en paramètre de la tâche du projet::
-
-    cake bake project -skel Console/Templates/skel
 
 .. note::
 

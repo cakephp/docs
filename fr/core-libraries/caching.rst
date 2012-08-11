@@ -218,7 +218,7 @@ C'est un exercice que vous pouvez faire.
 
 
 Utilisation du Cache pour stocker les compteurs
-==============================================
+===============================================
 
 L'utilisation de compteurs dans le cache peut être une chose intéressante. Par
 exemple un simple compte à rebours pour retenir les 'slots' restants d'un concours 
@@ -318,7 +318,7 @@ l'API Cache
     
 .. php:staticmethod:: set($settings = array(), $value = null, $config = 'default')
 
-     ``Cache::set()`` vous permets de réécrire temporairement les paramètres 
+    ``Cache::set()`` vous permets de réécrire temporairement les paramètres 
     de configs pour une opération (habituellement une lecture ou écriture). 
     Si vous utilisez ``Cache::set()`` pour changer les paramètres pour une
     écriture, vous devez aussi utiliser ``Cache::set()`` avant de lire les données

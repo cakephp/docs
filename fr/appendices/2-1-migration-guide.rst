@@ -165,7 +165,7 @@ Général
 -------
 
 - Les fichiers générés ne contiennent plus les timestamps avec la génération 
-des datetime.
+  des datetime.
 
 Routing
 =======
@@ -181,6 +181,7 @@ Router
   autorise à définir la classe route par défaut utilisée pour toutes les routes 
   à venir qui sont connectés.
 
+
 Réseau
 ======
 
@@ -188,7 +189,7 @@ CakeRequest
 -----------
 
 - Ajout de ``is('requested')`` et ``isRequested()`` pour la détection de 
-requestAction.
+  requestAction.
 
 CakeResponse
 ------------
@@ -210,9 +211,9 @@ Controller
     - ``true`` va charger le modèle par défaut et fusionnser avec AppController.
     - Un tableau va charger ces modèles et fusionner avec AppController.
     - Un tableau vide ne va charger aucun modèle, sauf ceux déclarés dans la 
-    classe de base.
+      classe de base.
     - ``false`` ne va charger aucun modèle, et ne va pas non plus fusionner 
-    avec la classe de base.
+      avec la classe de base.
 
 
 Components (Composants)
@@ -274,7 +275,7 @@ HtmlHelper
   :php:meth:`HtmlHelper::script()`, :php:meth:`HtmlHelper::css()`, 
   :php:meth:`HtmlHelper::image()`. Vous pouvez maintenant faciliter les liens 
   vers les assets des plugins en utilisant ``Plugin.asset``.
-- :php:meth:`HtmlHelper::getCrumbList()` a eu le paramètre ``$startText``ajouté.
+- :php:meth:`HtmlHelper::getCrumbList()` a eu le paramètre ``$startText`` ajouté.
 
 
 Vue
@@ -346,7 +347,7 @@ CacheHelper
 -----------
 
 - Les tags ``<!--nocache-->`` fonctionnent maintenant correctement à 
-l'intérieur des éléments.
+  l'intérieur des éléments.
 
 FormHelper
 ----------

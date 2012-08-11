@@ -71,7 +71,7 @@ Une fois qu'un lien est activé, il changera automatiquement de direction comme 
     Obtient la clef courante par laquelle le jeu d'enregistrement est trié.
 
 Création des liens de page numérotés
-===================================
+====================================
 
 .. php:method:: numbers($options = array())
 
@@ -289,7 +289,7 @@ Il y a un certain nombre d'options supportées pour ``counter()``. Certaines son
   la chaîne personnalisée de l'option 'format'.
 
 Modification des options que le Helper Paginator utilise
-==========================================
+========================================================
 
 .. php:method:: options($options = array())
 
@@ -373,7 +373,7 @@ pour être un Helper, tant que la classe implémente la méthode
 ``link()`` qui se comporte comme :php:meth:`HtmlHelper::link()`
 
 La Pagination dans les Vues
-======================
+===========================
 
 C'est à vous de décider comment afficher les enregistrements à 
 l'utilisateur, mais la plupart des fois, ce sera fait à l'intérieur des
@@ -445,7 +445,7 @@ en utilisant des marqueurs spéciaux ::
     )); 
 
 D'autres Méthodes
-===============
+=================
 
 .. php:method:: link($title, $url = array(), $options = array())
 
@@ -474,10 +474,9 @@ D'autres Méthodes
 
 .. php:method:: url($options = array(), $asArray = false, $model = null)
 
-    :param array $options:Tableau d'options Pagination/URL. Comme 
-        utilisé dans les méthodes ``options()`` ou ``link()``.
-    :param boolean $asArray: Retourne l'url comme dans un tableau, ou une chaîne
-        URL. Par défaut à false.
+    :param array $options:Tableau d'options Pagination/URL. Comme utilisé dans
+      les méthodes ``options()`` ou ``link()``.
+    :param boolean $asArray: Retourne l'url comme dans un tableau, ou une chaîne URL. Par défaut à false.
     :param string $model: Le modèle sur lequel paginer
 
     Par défaut retourne une chaîne d'Url complètement paginée à utiliser

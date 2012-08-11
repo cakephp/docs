@@ -1,5 +1,5 @@
 Liste de contrôle d'accès (ACL)
-####################
+###############################
 
 .. php:class:: AclComponent(ComponentCollection $collection, array $settings = array())
 
@@ -222,10 +222,10 @@ contrôle granulaire, tout en conservant encore la capacité de faire de grands
 changements pour les groupes d'AROs :
 
 -  Communauté de l'Anneau
-   (**Refuser**: tout)
+   (**Refuser** : tout)
    
    -  Guerriers
-      (**Autoriser**: Armes, Bière, Rations pour les Elfes, Porc salé)
+      (**Autoriser** : Armes, Bière, Rations pour les Elfes, Porc salé)
       
       -  Aragorn
          (Autoriser : Diplomatie)
@@ -249,7 +249,7 @@ changements pour les groupes d'AROs :
          (Autoriser : Diplomatie)
 
    -  Visiteurs
-      (**Autoriser **: Porc salé)
+      (**Autoriser** : Porc salé)
       
       -  Gollum
 
@@ -266,18 +266,20 @@ Communauté de l'Anneau  Refuse tout   Refuser l'accès à la bière.
 Hobbits   Autorise la bière   Autoriser l'accès à la bière !
 Merry   Refuse la bière   Refuser la bière
 
-======================= ================ =======================
-Nœud de l'ARO                Information sur la permission  Résultat                 
-======================= ================ =======================
-Communauté de l'Anneau  Refuse tout         Refuser l'accès à la bière. 
------------------------ ---------------- -----------------------
-Hobbits                 Autorise la bière      Autoriser l'accès à la bière !
------------------------ ---------------- -----------------------
-Merry                   Refuse la bière         Refuser la bière. 
-======================= ================ =======================
+
+======================= ============================== ===============================
+Nœud de l'ARO           Information sur la permission  Résultat                 
+======================= ============================== ===============================
+Communauté de l'Anneau  Refuse tout                    Refuser l'accès à la bière. 
+----------------------- ------------------------------ -------------------------------
+Hobbits                 Autorise la bière              Autoriser l'accès à la bière !
+----------------------- ------------------------------ -------------------------------
+Merry                   Refuse la bière                Refuser la bière. 
+======================= ============================== ===============================
+
 
 Définir les permissions : ACL de Cake basées sur des fichiers INI
-==========================================
+=================================================================
 
 La première implémentation d'ACL sur Cake était basée sur des fichiers 
 INI stockés dans l'installation de Cake. Bien qu'elle soit stable et pratique, 
@@ -376,11 +378,11 @@ Maintenant que vous avez défini vos permissions, vous pouvez passer à la secti
 sur la <vérification des permissions> utilisant le composant ACL.
 
 Maintenant que vos partitions sont définis, vous pouvez passer à la section
-:ref:`vérification des permissions <verification-permissions>avec le composant ACL.
+:ref:`vérification des permissions <verification-permissions>` avec le composant ACL.
 
 
 Définir les permissions : ACL de Cake via une base de données
-=========================================
+=============================================================
 
 Maintenant que nous avons vu les permissions ACL basées sur les fichiers INI, 
 voyons les ACL via une base de données (les plus communément utilisées).
@@ -474,7 +476,7 @@ Maintenant que nous avons tout configuré, attelons-nous à la création de
 quelques arbres ARO et ACO.
 
 Créer des Objet Contrôle d'Accès (ACOs) et des Objet Requête d'Accès (AROs)
-------------------------------------------------------------------------
+---------------------------------------------------------------------------
 
 Pour la création de nouveaux objets (ACOs et AROs), il y a deux principales 
 façons de nommer et d'accéder aux noeuds. La première méthode est de lier 
@@ -613,7 +615,7 @@ enregistrements spécifiques du modèle de notre base de données.
 .. note::
 
     Quand nous ajouterons un noeud enfant à un arbre, nous devrons nous assurer d'utiliser 
-les ID des noeuds ACL, plutôt que d'utiliser la valeur de la foreign_key (clé étrangère).
+    les ID des noeuds ACL, plutôt que d'utiliser la valeur de la foreign_key (clé étrangère).
 
 ::
 
@@ -778,7 +780,7 @@ le modèle Aco du coeur.
 
 
 Assigner les Permissions
----------------------
+------------------------
 
 Après la création de nos ACOs et AROs, nous pouvons finalement 
 assigner des permissions entre les deux groupes. Ceci est réalisé 
@@ -823,7 +825,7 @@ action à l'intérieur de ce contrôleur.
 Le premier appel que nous faisons au composant Acl donne, à tout 
 utilisateur appartenant au groupe ARO 'guerriers', un accès total à tout 
 ce qui appartient au groupe ACO 'Armes'. Ici nous adressons simplement
- les ACOs et AROs d'après leurs alias.
+les ACOs et AROs d'après leurs alias.
 
 Avez-vous noté l'usage du troisième paramètre ? C'est là où nous utilisons 
 ces actions bien pratiques qui sont intégrées à tous les ACOs de Cake. 

@@ -103,10 +103,11 @@ Dossiers en LowerCase:
 * webroot
 
 htaccess (URL Rewriting)
-===============================================
+========================
 Dans votre fichier ``app/webroot/.htaccess`` remplacez le 
 ``RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]`` avec 
 ``RewriteRule ^(.*)$ index.php?/$1 [QSA,L]``
+
 
 AppController / AppModel / AppHelper / AppShell
 ===============================================
@@ -217,7 +218,7 @@ params n'ont pas besoin de changement. Voir les nouvelles fonctionnalités de
 CakeRequest pour plus d'informations.
 
 Gestion des Requêtes, $_GET['url'] et fichiers .htaccess
-=======================================================
+========================================================
 
 CakePHP n'utilise plus ``$_GET['url']`` pour la gestion des chemins des 
 requêtes de l'application. A la place il utilise ``$_SERVER['PATH_INFO']``. 
@@ -785,13 +786,14 @@ JsHelper et HtmlHelper.
 JsHelper
 --------
 
--  ``JsBaseEngineHelper`` est maintenant abstrait, vous devrez implémenter 
-toutes les méthodes qui généraient avant des erreurs.
+- ``JsBaseEngineHelper`` est maintenant abstrait, vous devrez implémenter 
+   toutes les méthodes qui généraient avant des erreurs.
+
 
 PaginatorHelper
 ---------------
 
--  ``PaginatorHelper::sort()`` prend maintenant les arguments title et key dans 
+- ``PaginatorHelper::sort()`` prend maintenant les arguments title et key dans 
    l'ordre inversé. $key sera maintenant toujours le premier. Cela a été fait 
    pour prévenir les besoins d'échange des arguments lors de l'ajout d'un 
    second argument.

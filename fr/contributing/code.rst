@@ -1,10 +1,10 @@
 Code
 ####
 
-Les correctifs et les pull requests sont les meilleures façons de contribuer 
-au code de CakePHP. Les correctifs peuvent être attachés aux tickets dans 
-`lighthouse <http://cakephp.lighthouseapp.com>`_. Les pull requests peuvent 
-être crées dans github, et sont généralement la meilleure façon de contribuer 
+Les correctifs et les pull requests sont les meilleures façons de contribuer
+au code de CakePHP. Les correctifs peuvent être attachés aux tickets dans
+`lighthouse <http://cakephp.lighthouseapp.com>`_. Les pull requests peuvent
+être crées dans github, et sont généralement la meilleure façon de contribuer
 au code.
 
 Configuration initiale
@@ -20,6 +20,7 @@ Vous aurez besoin du logiciel suivant:
 
 Mettez en place vos informations d'utilisateur avec votre nom / titre et 
 adresse e-mail de travail ::
+
     git config --global user.name 'Bob Barker'
     git config --global user.email 'bob.barker@example.com'
 

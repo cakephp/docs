@@ -2,6 +2,7 @@ Cookie
 ######
 
 .. php:class:: CookieComponent(ComponentCollection $collection, array $settings = array())
+
 Le composant Cookie est un conteneur de la méthode native de PHP
 ``setcookie``.Il inclut également toutes sortes de fonctionnalités pour 
 rendre le codage de code pour les cookies très pratique.
@@ -43,7 +44,7 @@ Composant cookie fonctionne.
 |                 |              | appliqué. Si $cookiePath est paramétré à '/foo/', il |
 |                 |              | ne sera disponible que dans le repertoires /foo/     |
 |                 |              | et tous les sous repertoires comme /foo/bar/ de votre|
-|                 |              | domaine La valeur par défaut est le domaine entier. |
+|                 |              | domaine La valeur par défaut est le domaine entier.  |
 |                 |              | Vous pouvez définir cela directement  à l'intérieur  |
 |                 |              | de la méthode write().                               |
 +-----------------+--------------+------------------------------------------------------+
@@ -82,7 +83,7 @@ HTTP.
 Ensuite,regardons comment utiliser les différentes méthode du Composant Cookie.
 
 Utiliser le composant
-===================
+=====================
 
 Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
 
@@ -110,14 +111,14 @@ Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
             array('nom' => 'Rémy', 'role' => 'Chef')
         );
 
-    Toutes les valeurs dans le cookie sont encryptée par défaut. Si vous voulez 
-    stocker vos valeurs en texte clair, definissez le troisème paramêtre de la 
+    Toutes les valeurs dans le cookie sont encryptée par défaut. Si vous voulez
+    stocker vos valeurs en texte clair, definissez le troisème paramêtre de la
     méthode write() à false. L'encryption utilisée sur les valeurs de cookie est
     un système d'encryption très simple. Il utilise ``Security.salt`` et une
     variable de classe de configuration prédéfinie ``Security.cipherSeed`` pour
-    encripter les valeurs. Vous deviez changer ``Security.cipherSeed``dans 
+    encripter les valeurs. Vous deviez changer ``Security.cipherSeed`` dans
     app/Config/core.php pour assurer un meilleur cryptage.::
-    
+
         <?php
         $this->Cookie->write('nom', 'Rémy', false);
 

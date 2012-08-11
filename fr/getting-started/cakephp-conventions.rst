@@ -207,7 +207,7 @@ vous aviez besoin de toutes façons.
 
 Maintenant que vous avez été initié aux fondamentaux de CakePHP, vous devriez 
 essayer de dérouler le tutoriel du Blog CakePHP 
-:doc:`/tutorials-and-examples/blog/blog`pour voir comment les choses 
+:doc:`/tutorials-and-examples/blog/blog` pour voir comment les choses 
 s'articulent.
 
 -  Database table: "people"

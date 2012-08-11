@@ -30,10 +30,10 @@ Il y a trois constantes que vous devrez modifier: ``ROOT``,
 ``APP_DIR``, et ``CAKE_CORE_INCLUDE_PATH``.
 
 
--  ``ROOT`` doit être définie vers le chemin du répertoire qui contient le 
+- ``ROOT`` doit être définie vers le chemin du répertoire qui contient le 
   dossier app.
--  ``APP_DIR`` doit être définie vers le nom (de base) de votre dossier app.
--  ``CAKE_CORE_INCLUDE_PATH`` doit être définie vers le chemin du dossier 
+- ``APP_DIR`` doit être définie vers le nom (de base) de votre dossier app.
+- ``CAKE_CORE_INCLUDE_PATH`` doit être définie vers le chemin du dossier 
   des librairies de CakePHP.
 
 Testons cela avec un exemple pour que vous puissiez voir ce à quoi peut 

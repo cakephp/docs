@@ -90,7 +90,7 @@ dans le contrôleur.
     Le  paramètre ``$type`` peut avoir les valeurs suivantes:
 
     * 'auth' Indiques un erreur de validation de formulaire, ou une incohérence 
-    contrôleur/action.
+      contrôleur/action.
     * 'csrf' Indique une erreur CSRF.
     * 'get' Indique une problème sur la méthode de restriction HTTP.
     * 'post' Indique une problème sur la méthode de restriction HTTP.
@@ -313,7 +313,7 @@ dans le composant.::
         )
     );
 
-Vous pouvez aussi définir cette propriété dans la partie ``beforeFilter`
+Vous pouvez aussi définir cette propriété dans la partie ``beforeFilter``
 de votre contrôleur.::
 
     <?php
@@ -331,7 +331,7 @@ quand le composant est activé.
 
 
 Gérer les jetons manquants ou périmés
------------------------------------
+-------------------------------------
 
 Les jetons manquants ou périmés sont gérés de la même façon que d'autre violation
 de sécurité. Le blackHoleCallback du composant Sécurité sera appelé avec un

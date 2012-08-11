@@ -7,7 +7,6 @@ fournie une API unifiée pour interagir avec les collections et les objets
 similaires. L'objet collection dans cakePHP, vous donnes un moyen uniforme
 d'interagir avec différentes sortes d'objets dans votre application 
 
-
 Même si les exemples ci-dessous, utiliserons des Composants, le même comportement
 peut être envisager pour les Helpers, Comportements, et des tâches en addition
 aux composants.
@@ -66,22 +65,18 @@ contrôler comment les callbacks sont tués:
 
 
 - ``breakOn`` Définit a la valeur ou aux valeurs ou vous voulez stopper la propagation
-Peut être une valeur scalaire, ou un tableau de valeur à stopper. ``False`` par défaut.
-
+  Peut être une valeur scalaire, ou un tableau de valeur à stopper. ``False`` par défaut.
 - ``break`` Définit à true pour valider l'arrêt. Quand un déclancheur est cassé, la 
-dernière valeur sera retournée. Si utilisé en combinaison avec ``collectReturn` 
-les résultats collectés seront retournés.``False`` par défaut.
-
+  dernière valeur sera retournée. Si utilisé en combinaison avec ``collectReturn` 
+  les résultats collectés seront retournés.``False`` par défaut.
 - ``collectReturn`` Définit à true pour collecter le retour  de chaque objet dans un tableau.
-Ce tableau de données retournées seront retournées depuis l'appel trigger(). ``False`` par défaut.
-
+  Ce tableau de données retournées seront retournées depuis l'appel trigger(). ``False`` par défaut.
 - ``triggerDisabled`` Déclenchera le callback sur tous les objets dans la collection même ceux 
-qui sont non-activés. ``False`` par défaut
-
+  qui sont non-activés. ``False`` par défaut
 - ``modParams`` Permet à chacun des objets auquel le callback à fait des demandes de modifier 
-les paramètres de l'objet suivant.En paramétrant modParams dans une valeur entière vous 
-permettra de modifier le paramètre avec cet index.N'importe quelle valeur non-nulle modifiera 
-l'index de paramètre indiqué. ``False`` par défaut.
+  les paramètres de l'objet suivant.En paramétrant modParams dans une valeur entière vous 
+  permettra de modifier le paramètre avec cet index.N'importe quelle valeur non-nulle modifiera 
+  l'index de paramètre indiqué. ``False`` par défaut.
 
 Effacer des boucles de callback 
 -------------------------------

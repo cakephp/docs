@@ -173,7 +173,7 @@ sessions in a cache like APC, memcache, or Xcache.  There are some caveats to
 using cache sessions, in that if you exhaust the cache space, sessions will
 start to expire as records are evicted.
 
-To use Cache based sessions you can configure you Session config like::
+To use Cache based sessions you can configure you Session config like ::
 
     <?php
     Configure::write('Session', array(
@@ -182,6 +182,7 @@ To use Cache based sessions you can configure you Session config like::
             'config' => 'session'
         )
     ));
+
 
 This will configure CakeSession to use the ``CacheSession`` class as the
 delegate for saving the sessions.  You can use the 'config' key which cache

@@ -442,7 +442,7 @@ permutations en plus des méthodes find de bases.
 
     Cette fonction comme son nom l'indique, donne en retour le noeud 
     parent d'un nœud, ou * false * si le noeud n'a pas de parent (c'est
-     le nœud racine). Par exemple ::
+    le nœud racine). Par exemple ::
     
 
         <?php
@@ -488,7 +488,7 @@ permutations en plus des méthodes find de bases.
 
 
 Utilisation avancée
-==============
+===================
 
 Le comportement Tree ne fonctionne pas uniquement en tâche de fond,
 il y a un certain nombre de méthode spécifiques dans le comportement Tree
@@ -665,10 +665,11 @@ correcte. La source opposée de donnée sera peuplées en fonction de cette sour
 Ex: si le champ MPTT est corrompu ou vide, avec le ``$mode 'parent'`` la valeur du champ 
 ``parent_id`` sera utilisée pour peupler les champs gauche et droite.
 
-Le paramètre ``missingParentAction``s'applique uniquement aux
+Le paramètre ``missingParentAction`` s'applique uniquement aux
 "parent" mode et détermine ce qu'il faut faire si le champ parent
 contient un identifiant qui n'est pas présent.
-    
+
+
 Options ``$mode`` permises:
 
 -  ``'parent'`` - utilise l'actuel``parent_id``pour mettre à jour les champs``lft`` and ``rght``.

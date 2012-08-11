@@ -75,7 +75,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     au bloc ``css`` lequel sera intégré à la balise entête du document
    
     Vous pouvez utiliser  l'option ``block`` pour contrôler sur lequel
-    des blocs l'élément lié sera ajouté. Par défaut il sera ajouté au bloc ``css`.
+    des blocs l'élément lié sera ajouté. Par défaut il sera ajouté au bloc ``css``.
 
     Cette méthode d'inclusion CSS présume que le CSS spécifié se trouve dans
     le répertoire /app/webroot/css.::
@@ -203,7 +203,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     table suivante:
 
     +--------------------------+----------------------------------+
-    | type                     | valeur résultante                 |
+    | type                     | valeur résultante                |
     +==========================+==================================+
     | html4-strict             | HTML4 Strict                     |
     +--------------------------+----------------------------------+
@@ -554,7 +554,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Si vous voulez inclure un fichier de script qui partage un nom de fichier
     avec un plugin chargé vous pouvez faire cela. Par exemple si vous avez
-    Un plugin ``Blog``, et voulez inclure également ``app/webroot/js/Blog.plugins.js`,
+    Un plugin ``Blog``, et voulez inclure également ``app/webroot/js/Blog.plugins.js``,
     vous devriez::
 
         <?php
@@ -728,7 +728,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     :param mixed $url: Un tableau de routing :term:`routing array`.
     :param mixed $full: Soit un booléen s'il faut ou pas que la  base du chemin soit
-    incluse ou un tableau d'options pour le router :php:meth:`Router::url()`
+      incluse ou un tableau d'options pour le router :php:meth:`Router::url()`
 
     Retourne une URL pointant vers une combinaison contrôleur et action.
     Si $url est vide, cela retourne la REQUEST\_URI, sinon cela génère la combinaison
@@ -809,7 +809,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <form action="http://example.com" method="post" class="myform">
 
 Changer la restitution des balises avec le Helper Html
-======================================
+======================================================
 
 .. php:method:: loadConfig(mixed $configFile, string $path = null)
 
@@ -831,7 +831,7 @@ Changer la restitution des balises avec le Helper Html
     ``$html->loadConfig('tags');``
 
 Création d'un chemin de navigation avec le Helper Html
-===========================================
+======================================================
 
 .. php:method:: getCrumbs(string $separator = '&raquo;', string $startText = false)
 
@@ -880,10 +880,11 @@ Création d'un chemin de navigation avec le Helper Html
     que chacun des fils a ajouté. Vous pouvez utiliser le paramètre  ``$startText``
     pour fournir le premier lien de fil. C'est utile quand vous voulez inclure
     un lien racine. Cette option fonctionne de la même façon que l'option
-    ``$startText` pour  :php:meth:`~HtmlHelper::getCrumbs()`.
+    ``$startText`` pour  :php:meth:`~HtmlHelper::getCrumbs()`.
    
 
     ..versionchanged:: 2.1
+
         Le paramètre ``$startText`` a été ajouté.
 
 

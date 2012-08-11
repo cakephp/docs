@@ -1,5 +1,5 @@
 Journalisation (logging)
-#######################
+########################
 
 Bien que les réglages de la Classe Configure du cœur de CakePHP 
 puissent vraiment vous aider à voir ce qui se passe sous le capot,
@@ -24,7 +24,7 @@ loguer (journaliser) vos données. Vous pouvez aussi utiliser
 
 
 Création et Configuration des flux d'un log (journal) 
-====================================================
+=====================================================
 
 Les handlers de flux de log peuvent faire partie de votre 
 application, ou partie d'un plugin. Si par exemple vous
@@ -194,7 +194,7 @@ comme CakeLog le faisait dans les précédentes versions.
 
 
 l'API CakeLog
-===========
+=============
 
 .. php:class:: CakeLog
 

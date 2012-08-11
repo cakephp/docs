@@ -68,7 +68,7 @@ AUTORISÉ pour l'action ACO spécifiée (et les enfants de l'ACO, si ils existen
 
     ./Console/cake acl check Group.1 controllers/Posts read
 
-La sortie sera soit ``success``(succès), soit ``not allowed``(non autorisé).
+La sortie sera soit ``success``(succès), soit ``not allowed`` (non autorisé).
 
 Voir l'arbre de noeuds
 ======================

@@ -1,5 +1,5 @@
 Helper Nombre
-############
+#############
 
 .. php:class:: NumberHelper(View $view, array $settings = array())
 

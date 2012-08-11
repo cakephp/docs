@@ -1,5 +1,5 @@
 Helper JS
-########
+#########
 
 .. php:class:: Helper Js(View $view, array $settings = array())
 
@@ -24,7 +24,7 @@ pour les autres.
 
 
 Utilisation d'un moteur Javascript spécifique
-==================================
+=============================================
 
 Avant tout téléchargez votre librairie javascript préférée et placez la
 dans ``app/webroot/js``
@@ -40,9 +40,9 @@ de ``app/View/Layouts/default.ctp`` (copiez ce fichier depuis
 Remplacez ``jquery`` par le nom de votre fichier de librairie (.js sera
 ajouté au nom).
 
-Par défaut les scripts sont mis en cache, et vous devez explicitement 
+Par défaut les scripts sont mis en cache, et vous devez explicitement
 imprimer le cache. Pour faire cela a la fin de chacune des pages, incluez
-cette ligne juste avant la balise de fin de ``</body>`::
+cette ligne juste avant la balise de fin de ``</body>`` ::
 
     <?php
     echo $this->Js->writeBuffer(); // Écrit les scripts en mémoire cache
@@ -124,7 +124,7 @@ et vous obtiendrez du code qui ne correspond pas à votre
 librairie javascript.
 
 Création d'un moteur Javascript
-=========================
+===============================
 
 Les helpers de moteur Javascript suivent les conventions normales
 des helper, avec quelques restrictions additionnelles. Ils doivent avoir
@@ -133,7 +133,7 @@ est correct. De plus ils doivent étendre ``JsBaseEngineHelper`` afin
 de tirer parti du meilleur de la nouvelle API. 
 
 Utilisation du moteur Javascript
-=========================
+================================
 
 Le ``Helper Js`` fournit quelques méthodes , et agit 
 comme une façade pour le moteur helper. Vous de devriez pas
@@ -266,7 +266,7 @@ Ceci forcera la fonction event qui est normalement mis en mémoire cache
 à retourner sont résultat.
 
 D'autre Méthodes
-==============
+================
 
 Les moteurs Javascript du noyau fournissent les mêmes fonctionnalités
 définies a travers les autres librairies, il y a aussi un sous ensemble
@@ -363,8 +363,8 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
     -  ``type`` - Le Type des données de la réponse. 'json' et 'html' sont
        supportés. Par défaut à html pour la plupart des librairies.
     -  ``evalScripts`` - s'il faut ou pas évaluer la balise <script>.
-    -  ``dataExpression`` -Si la clef  ``data``doit être traitée comme un
-       callback. Utile pour fournir ``$options['data']`` comme une autre
+    -  ``dataExpression`` -Si la clef  ``data`` doit être traitée comme un
+        callback. Utile pour fournir ``$options['data']`` comme une autre
         expression Javascript.
 
     **Exemple d'utilisation**::
@@ -764,7 +764,7 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
 .. _ajax-pagination:
 
 La Pagination Ajax 
-===============
+==================
 
 Bien mieux qu'avec la pagination Ajax de la 1.2, vous pouvez utiliser
 le Helper JS pour gérer les liens de pagination AJAX au lieu de 
@@ -807,10 +807,10 @@ créer des liens Javascript étendus, et  que ces liens devront mettre
 exister, et la plupart du temps vous voulez envelopper 
 le ``$content_for_layout`` par une div qui correspond à l'id utilisée
 dans l'option ``update``. Vous devez également définir ``evalScripts``
-à true si vous utilisez des adaptateurs Mootools ou Prototype, sans
- ``evalScripts`` ces librairies seront incapables de relier les requêtes
- entrent elles. L'option ``indicator`` n'est pas supportée par le ``Helper
- JS`` et sera ignorée.
+à true si vous utilisez des adaptateurs Mootools ou Prototype, sans 
+``evalScripts`` ces librairies seront incapables de relier les requêtes
+entrent elles. L'option ``indicator`` n'est pas supportée par le ``Helper JS``
+et sera ignorée.
 
 Vous venez donc de créer tous les liens demandés pour le fonctionnement
 de la pagination. Puisque le ``Helper Js`` bufferise automatiquement

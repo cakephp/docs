@@ -44,17 +44,19 @@ Choosing the sender
 -------------------
 
 When sending email on behalf of other people it's often a good idea to define the
-original sender using the Sender header.  You can do so using ``sender()``::
+original sender using the Sender header.  You can do so using ``sender()`` ::
 
     <?php
     $email = new CakeEmail();
     $email->sender('app@example.com', 'MyApp emailer');
 
+
 .. note::
 
     It's also a good idea to set the envelope sender when sending mail on another
-    person's behalf.  This prevents them from getting any messages about
+    person's behalf. This prevents them from getting any messages about
     deliverability.
+
 
 Configuration
 =============

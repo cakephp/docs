@@ -1,5 +1,5 @@
 Authentification
-##############
+################
 
 .. php:class:: AuthComponent(ComponentCollection $collection, array $settings = array())
 
@@ -14,7 +14,7 @@ l'identification et le contrôle des autorisations de l'utilisateur.
 .. _authentication-objects:
 
 Authentification
-==============
+================
 
 L'authentification est le processus d'identification des utilisateurs 
 par des identifiants de connexion définis et permet d'assurer que 
@@ -25,19 +25,19 @@ Dans CakePHP il y a plusieurs construction pour l'authentification des
 utilisateurs enregistrés dans votre application.
 
 * ``FormAuthenticate`` vous permet d'authentifier les utilisateurs sur la 
-base de formulaire de donnée POST. Habituellement il s'agit d'un formulaire 
-de connexion ou les utilisateurs entrent des informations.
+  base de formulaire de donnée POST. Habituellement il s'agit d'un formulaire 
+  de connexion ou les utilisateurs entrent des informations.
 * ``BasicAuthenticate`` vous permet d'identifier les utilisateurs en 
-utilisant l'authentification Basic HTTP.
+  utilisant l'authentification Basic HTTP.
 * ``DigestAuthenticate`` vous permet d'identifier les utilisateurs en 
-utilisant l'authentification Digest HTTP.
+  utilisant l'authentification Digest HTTP.
 
 
 
 Par défaut Le composant Auth (``AutComponent``) utilise ``FormAuthenticate``.
 
 Choisir un type d'Authentification
-------------------------------------
+----------------------------------
 
 En général, vous aurez envie d'offrir l'authentification par formulaire. 
 C'est le plus facile pour les utilisateurs utilisant un navigateur Web. 
@@ -134,7 +134,7 @@ Configurer différents champs pour l'utilisateur dans le tableau ``$component``:
 .. note::
 
     Ne mettez pas d'autre clefs de configuration de Auth(comme authError, 
-loginAction etc). Ils doivent se trouver au même niveau que la clef d'authentification.
+    loginAction etc). Ils doivent se trouver au même niveau que la clef d'authentification.
    
     La configuration ci-dessus avec d'autres configurations ressemblerait à quelque chose
     comme.::
@@ -170,12 +170,12 @@ en charge les clefs suivantes:
 - ``nonce`` Un nonce utiliser pour l'authentification.  Par défaut à ``uniqid()``.
 - ``qop`` Par défaut à auth, pas d'autre valeur supportée pour le moment.
 - ``opaque`` Une chaîne qui doit être retourné à l'identique par les clients. 
-Par Défaut à ``md5($settings['realm'])``
+  Par Défaut à ``md5($settings['realm'])``
 
 Création d'objet 
 
 Créer des objets d'authentification personnalisés
-------------------------------------------------
+-------------------------------------------------
 
 Comme les objets d'authentification sont modulaires (pluggable) ,
 vous pouvez créer des objets d'authentification personnalisés pour
@@ -198,7 +198,7 @@ identifier l'utilisateur. Et un tableau d'information utilisateur si ils le
 peuvent.Il n'est pas utile d'étendre (extend) ``BaseAuthenticate``, simplement
 votre objet d'identification doit implémenter la méthode ``authenticate()``.
 La class ``BaseAuthenticate`` fournie un nombre de méthode très utiles communément
-utilisées. Vous pouvez aussi implémenter une méthode ``getUser()``si votre 
+utilisées. Vous pouvez aussi implémenter une méthode ``getUser()`` si votre 
 objet d'identification doit supporter des authentifications sans cookie 
 ou sans état (stateless). Regardez les sections portant sur l'authentification
 digest et basic plus bas pour plus d'information.
@@ -261,7 +261,7 @@ Si le login est en échec un message flash est défini.
 
 
 Utilisation de l'authentification Digest et Basic pour la connexion    
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Parce que l'authentification basic et digest ne demande pas d'effectuer un POST 
 initial avant d'initier la séquence de connexion, votre fonction ``login()`` 
@@ -329,8 +329,8 @@ Afficher les messages flash de Auth
 
 Pour afficher les messages d'erreur de session que Auth génère, vous devez ajouter
 les lignes de code suivante dans votre layout.Ajouter les deux lignes suivantes au fichier
- ``app/View/Layouts/default.ctp`` dans la section body de préférence  avant la ligne
- content_for_layout.::
+``app/View/Layouts/default.ctp`` dans la section body de préférence  avant la ligne
+content_for_layout.::
 
 
     <?php
@@ -392,7 +392,7 @@ AuthComponent::password() pour la génération de mots de passes. Regardez ci-de
 comment générer des hachages Digest
 
 Hachage de mot de passe pour l'authentification Digest
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Parce que l'authentification Digest nécessite un mot de passe hacher dans un format 
 défini par la RFC. Respectivement pour correctement hacher un mot de passe pour 
@@ -432,7 +432,7 @@ Connecter les utilisateurs manuellement
 
 Quelquefois le besoin se fait sentir de connecter un utilisateur manuellement, comme
 juste après qu'il se soit enregistré dans votre application. Vous pouvez faire cela en appelant
-``$this->Auth->login()``avec les données utilisateur que vous voulez pour la 'connexion'::
+``$this->Auth->login()`` avec les données utilisateur que vous voulez pour la 'connexion' ::
 
 
     <?php
@@ -510,13 +510,12 @@ vos propres gestionnaire comme faisant partie d'un plugin.
 Configurer les gestionnaires d'autorisation
 ---------------------------------------------
 
-Vous configurez les gestionnaires d'autorisation en utilisant 
- ``$this->Auth->authorize``.
- Vous pouvez configurer un ou plusieurs gestionnaires . L'utilisation de  plusieurs
- gestionnaires vous donnes la possibilité d'utiliser plusieurs moyens de vérifier les
- autorisations. Quand les gestionnaires d'autorisation sont vérifiés ils sont appelés 
- dans l'ordre ou ils sont déclarés. Les gestionnaires devraient retourner false, s'il ne sont
- pas capable de vérifier les autorisation, ou bien si la vérification a échouée.
+Vous configurez les gestionnaires d'autorisation en utilisant ``$this->Auth->authorize``.
+Vous pouvez configurer un ou plusieurs gestionnaires . L'utilisation de  plusieurs
+gestionnaires vous donnes la possibilité d'utiliser plusieurs moyens de vérifier les
+autorisations. Quand les gestionnaires d'autorisation sont vérifiés ils sont appelés 
+dans l'ordre ou ils sont déclarés. Les gestionnaires devraient retourner false, s'il ne sont
+pas capable de vérifier les autorisation, ou bien si la vérification a échouée.
 Le gestionnaire devrait retourner true si ils sont capables de vérifier correctement les
 autorisations. Les gestionnaires seront appelés dans l'ordre jusqu'à ce qu'un passe.
 Si toutes les vérifications échoues , l'utilisateur sera redirigé vers la page d'où il vient.
@@ -593,7 +592,7 @@ l'utilisateur, ``true`` devrait être retourné. Ça n'est pas nécessaire d'ét
 utiles qui sont communément utilisées.
 
 Utilisation d'objets Authorize personnalisés
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Une fois que vous avez créé votre objet authorize personnalisé, vous pouvez les utiliser
 en les incluant dans le tableau authorize:: 
@@ -853,8 +852,8 @@ et d'authentification intégrés dans CakePHP.
 .. php:method:: identify($request, $response)
 
     :param CakeRequest $request: La requête à utiliser.
-    :param CakeResponse $response: La réponse à utiliser, les en-tête peuvent 
-    être envoyées si l'authentification échoue.
+    :param CakeResponse $response: La réponse à utiliser, les en-tête peuvent
+      être envoyées si l'authentification échoue.
 
     Cette méthode est utilisée par le composant Auth pour identifier un utilisateur
     en se basant sur les informations contenues dans la requête courante.

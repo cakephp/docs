@@ -105,7 +105,7 @@ depuis le modèle. Ceci envoi également quelques statistiques de pagination,
 qui sont additionnées à l'objet de la requête. L'information additionnelle 
 est envoyée à ``$this->request->params['paging']``, et est utilisée par
 :php:class:`PaginatorHelper` pour la création de liens. 
-``Controller::paginate()` ajoute également  PaginatorHelper à la liste
+``Controller::paginate()`` ajoute également  PaginatorHelper à la liste
 des helpers de votre contrôleur, si il n'a pas encore été additionné::
 
 
@@ -118,7 +118,6 @@ des helpers de votre contrôleur, si il n'a pas encore été additionné::
 
 Vous pouvez filtrer les enregistrements en passant des conditions
 comme second paramètres à la fonction ``paginate()``.::
-
 
     <?php
     $data = $this->paginate('Recipe', array('Recipe.title LIKE' => 'a%'));
@@ -232,7 +231,7 @@ correctement le nombre total de lignes.
 
 
 Contrôle du champ à utiliser pour ordonner
-=========================================
+==========================================
 
 Par défaut le classement peut être effectué par n'importe quelle colonne dans
 un modèle. C'est parfois indésirable comme permettre aux utilisateurs de trier
@@ -251,7 +250,7 @@ Un utilisateur qui paramètre le tris à d'autres valeurs sera ignoré.
 
 
 Limitation du nombre maximum de lignes qui peuvent être recherchées
-==================================================================
+===================================================================
 
 Le nombre de résultats qui sont retournés à l'utilisateur est représenté
 par le paramètre ``limit``. Il est généralement indésirable de permettre
@@ -268,7 +267,7 @@ l'ajuster dans une partie des options de pagination::
     );
 
 Si les paramètres de limitation de la requête est supérieur à cette valeur,
-il sera réduit à la valeur de ``maxLimit`.
+il sera réduit à la valeur de ``maxLimit``.
 
 
 .. _pagination-with-get:

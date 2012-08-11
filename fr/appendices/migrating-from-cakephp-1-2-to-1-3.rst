@@ -164,7 +164,7 @@ Contrôleurs & Composants
 **Composant**
 
 -  ``Component::triggerCallback`` a été ajouté. C'est un hook générique 
-  dans le processus de callback du composant. Il supplante
+   dans le processus de callback du composant. Il supplante
    ``Component::startup()``, ``Component::shutdown()`` et
    ``Component::beforeRender()`` comme manière préférentielle pour
    déclencher les callbacks.

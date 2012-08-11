@@ -32,7 +32,7 @@ ou une maison. Un blog, par exemple, peut avoir plusieurs posts et chaque
 post peut avoir plusieurs commentaires. Blog, Post et Commentaire sont tous 
 des exemples de modèles, chacun étant associé avec un autre.
 
-Voici un simple exemple de définition de modèle dans CakePHP :
+Voici un simple exemple de définition de modèle dans CakePHP ::
 
     <?php
     class Ingredient extends AppModel {

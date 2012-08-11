@@ -80,7 +80,7 @@ Conclusion
 
 A partir de maintenant, chaque mise à jour/création d'un enregistrement fera que le Comportement Translate copiera la valeur de "nom" dans la table de traduction (par défaut : i18n), avec la locale courante. Une "locale" est un identifiant de langue.
 
-La *locale courante* est la valeur actuelle de ``Configure::read('Config.language')``. La valeur de *Config.language*est assignée dans la Classe L10n - à moins qu'elle ne soit déjà définie. Cependant, le Comportement Translate vous autorise à surcharger ceci à la volée, ce qui permet à l'utilisateur de votre page de créer de multiples versions sans avoir besoin de modifier ses préférences. Plus d'information sur ce point dans la prochaine section.
+La *locale courante* est la valeur actuelle de ``Configure::read('Config.language')``. La valeur de *Config.language* est assignée dans la Classe L10n - à moins qu'elle ne soit déjà définie. Cependant, le Comportement Translate vous autorise à surcharger ceci à la volée, ce qui permet à l'utilisateur de votre page de créer de multiples versions sans avoir besoin de modifier ses préférences. Plus d'information sur ce point dans la prochaine section.
 
 
 Récupérer tous les enregistrements de traduction pour un champ
@@ -251,7 +251,7 @@ Pour dire à un modèle dans quelle langue le contenu devra être sauvé, change
     }
 
 Traduction de Tables Multiples
-=============================
+==============================
 
 Si vous attendez beaucoup d'entrée vous vous demandez certainement
 comment gérer tout cela dans une base de donnée qui grossit rapidement.
@@ -307,7 +307,7 @@ Assurez vous de changer le ``$displayField`` en ``'field'``.::
 
 C'est tout ce qu'il faut. Vous pouvez aussi ajouter toutes les propriétés 
 des modèles comme $useTable. Mais pour une meilleure cohérence
- nous pouvons faire cela dans le modèle qui utilise ce modèle de traduction. 
+nous pouvons faire cela dans le modèle qui utilise ce modèle de traduction. 
 C'est là que l'option ``$translateTable`` entre en jeu. 
 
 

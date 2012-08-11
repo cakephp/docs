@@ -1,5 +1,5 @@
-Assistant Formulaire (HelperForm)
-########################
+Assistant Formulaire (FormHelper)
+#################################
 
 .. php:class:: FormHelper(View $view, array $settings = array())
 
@@ -14,7 +14,7 @@ uniquement que ce dont vous avez besoin.
 
 
 Création de Formulaire
-==================
+======================
 
 La première méthode dont vous aurez besoin d'utiliser pour prendre 
 pleinement avantage du Helper Form (Assistant Formulaire) est 
@@ -90,8 +90,8 @@ pleinement avantage du Helper Form (Assistant Formulaire) est
 
     .. note::
 
-    Comme c'est un formulaire de modification, un champ 
-    caché (hidden) est créé pour réécrire la méthode HTTP par défaut
+        Comme c'est un formulaire de modification, un champ 
+        caché (hidden) est créé pour réécrire la méthode HTTP par défaut
 
 
     A la création de formulaires pour les modèles dans des plugins. Nous
@@ -231,65 +231,61 @@ Il y plusieurs options pour create():
         echo $this->Form->input('username', array('label' => 'Username')); // a un élément label 
 
 Fermer le Formulaire
-================
+====================
 
 .. php:method:: end($options = null)
 
-    Le FormHelper inclus également une méthode ``end()`` qui 
-    complète le marquage du formulaire. Souvent, ``end()`` affiche juste
-    la base fermante du formulaire, mais l'utilisation de ``end()`` permet
-    également au FormHelper d'ajouter les champs cachées dont le composant
-    sécurité  :php:class:`SecurityComponent`à besoin.::
+Le FormHelper inclus également une méthode ``end()`` qui 
+complète le marquage du formulaire. Souvent, ``end()`` affiche juste
+la base fermante du formulaire, mais l'utilisation de ``end()`` permet
+également au FormHelper d'ajouter les champs cachées dont le composant
+sécurité  :php:class:`SecurityComponent` à besoin.::
 
-    
         <?php echo $this->Form->create(); ?>
-
         <!-- Ici les éléments de Formulaire -->
-
         <?php echo $this->Form->end(); ?>
 
-    Si une chaîne est fournie comme premier argument à end(), le FormHelper 
-    affichera un bouton submit nommé en conséquence en même temps 
-    que la balise de fermeture du formulaire.::
+Si une chaîne est fournie comme premier argument à end(), le FormHelper 
+affichera un bouton submit nommé en conséquence en même temps 
+que la balise de fermeture du formulaire.::
 
-   
-        <?php echo $this->Form->end('Termine'); ?>
+    <?php echo $this->Form->end('Termine'); ?>
 
-    Affichera::
+Affichera::
 
-        <div class="submit">
-        <input type="submit" value="Termine" />
-        </div>
-        </form>
+    <div class="submit">
+    <input type="submit" value="Termine" />
+    </div>
+    </form>
 
-    Vous pouvez spécifier des paramètres détaillés en passant un tableau à  ``end()``::
+Vous pouvez spécifier des paramètres détaillés en passant un tableau à  ``end()`` ::
 
-        <?php
-        $options = array(
-            'label' => 'Update',
-            'value' => 'Update!',
-            'div' => array(
-                'class' => 'glass-pill',
-            )
-        );
-        echo $this->Form->end($options);
+    <?php
+    $options = array(
+        'label' => 'Update',
+        'value' => 'Update!',
+        'div' => array(
+            'class' => 'glass-pill',
+        )
+    );
+    echo $this->Form->end($options);
 
-    Affichera::
+Affichera::
 
-        <div class="glass-pill"><input type="submit" value="Update!" name="Update"></div>
+    <div class="glass-pill"><input type="submit" value="Update!" name="Update"></div>
 
-    Voir l' `API <http://api20.cakephp.org>`_ pour plus de détails.
+Voir l' `API <http://api20.cakephp.org>`_ pour plus de détails.
 
-    .. note::
+.. note::
 
-        si vous utilisez le composant sécurité  :php:class:`SecurityComponent` 
-        dans votre application vous devez toujours terminer vos formulaires 
-        avec  ``end()``.
+    si vous utilisez le composant sécurité  :php:class:`SecurityComponent` 
+    dans votre application vous devez toujours terminer vos formulaires 
+    avec  ``end()``.
 
 .. _automagic-form-elements:
 
 Création d'éléments de Formulaire
-===========================
+=================================
 
 Il y a plusieurs façons pour créer des Forms inputs (entrée de formulaire) 
 Commençons par regarder ``input()``. Cette méthode inspecte automatiquement
@@ -736,7 +732,7 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
         echo $this->Form->input('username', array('label' => 'Username'));
 
 Générer des types de inputs spécifiques
-================================
+=======================================
 
 En plus de la méthode générique ``input()`` , le ``FormHelper`` à des
 méthodes spécifiques pour générer différents types d'inputs. Ceci peut
@@ -782,15 +778,15 @@ partagées par toutes les méthodes input sont :
 
     .. note::
 
-    Vous ne pouvez pas utiliser ``default``  pour sélectionner une chekbox - 
-    vous devez plutôt définir cette valeur dans ``$this->request->data`` dans
-    votre contrôleur, ou définir l'option ``checked`` de input à true.
+        Vous ne pouvez pas utiliser ``default``  pour sélectionner une chekbox - 
+        vous devez plutôt définir cette valeur dans ``$this->request->data`` dans
+        votre contrôleur, ou définir l'option ``checked`` de input à true.
 
     
     .. note::
 
-    La valeur par défaut des champs Date et datetime peut être définis en utilisant 
-    la clef 'selected'.
+        La valeur par défaut des champs Date et datetime peut être définis en utilisant 
+        la clef 'selected'.
 
 En plus des options ci-dessus, vous pouvez mixer n'importe quel attribut html
 que vous souhaitez utiliser. Chacun des nom d'options non-special sera 
@@ -941,7 +937,7 @@ Les options de Datetime
     Créera 4 options dans la select box minute . Une toute les 15 minutes.
 
 Éléments de Formulaire-Méthodes spécifiques
-====================================
+===========================================
 
 .. php:method:: label(string $fieldName, string $text, array $options)
 
@@ -1045,7 +1041,7 @@ Les options de Datetime
     spécifiques:
 
     * ``$options['rows'], $options['cols']`` Ces deux clefs spécifient le nombre de
-    lignes et de colonnes::
+      lignes et de colonnes::
 
         <?php
         echo $this->Form->textarea('textarea', array('rows' => '5', 'cols' => '5'));
@@ -1095,10 +1091,10 @@ Les options de Datetime
     * ``$attributes['value']`` pour définir quelle valeur sera sélectionnée par défaut.
 
     * ``$attributes['separator']`` pour spécifier du HTML entre les boutons 
-    (ex <br />).
+      (ex <br />).
 
     * ``$attributes['between']`` spécifie quelques contenus à insérer entre la légende
-    et le premier argument.
+      et le premier argument.
 
     * ``$attributes['disabled']`` définit a ``true`` ou ``'disabled'``
       désactivera tous les boutons radios générés.
@@ -1346,7 +1342,7 @@ Affichera::
    
 
 Création des boutons et des éléments submits
-====================================
+============================================
 
 .. php:method:: submit(string $caption, array $options)
 
@@ -1429,7 +1425,7 @@ Création des boutons et des éléments submits
 
    
 Créé des inputs de date et d'heure (date and time inputs)
-============================================
+=========================================================
 
 .. php:method:: dateTime($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $attributes = array())
 
@@ -1541,7 +1537,7 @@ Créé des inputs de date et d'heure (date and time inputs)
 
 
 Afficher et Displaying and checking errors
-==============================
+==========================================
 
 .. php:method:: error(string $fieldName, mixed $text, array $options)
 
@@ -1576,7 +1572,7 @@ Afficher et Displaying and checking errors
 
 
 Travailler avec le Composant Sécurité
-==============================
+=====================================
 
 :php:meth:`SecurityComponent` offre plusieurs fonctionnalités qui rendent
 vos formulaires plus sûres et plus sécurisés. En incluant simplement le
@@ -1608,7 +1604,7 @@ assurera que les inputs  jeton spéciaux ``_Token`` seront générés.
 .. _form-improvements-1-3:
 
 mise à jour 2.0
-===========
+===============
 
 **$selected parameter removed**
 

@@ -35,7 +35,7 @@ Nous maintenons 4 versions de CakePHP.
    la plus avancée et qui souhaitent contribuer à la communauté. Les branches 
    de fonctionnalité sont nommées selon la convention suivante de 
    *version-fonctionnalité*. Un exemple serait *1.3-routeur* qui contiendrait 
-    de nouvelles fonctionnalités pour le Routeur dans 1.3.
+   de nouvelles fonctionnalités pour le Routeur dans 1.3.
 
 Espèrons que cela vous aide à comprendre quel version est bonne pour vous.
 Une fois que vous choisissez votre version, vous vous sentirez peut-être 

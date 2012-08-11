@@ -47,7 +47,7 @@ est de créer votre fichier pot
 qui est le template pour toutes les chaînes traduisibles de votre 
 application. Pour générer votre (vos) fichier(s) pot, tout ce que 
 vous avez à faire est de lancer la tâche i18n 
-:doc:`i18n console task </console-and-shells>`de la console Cake,
+:doc:`i18n console task </console-and-shells>` de la console Cake,
 qui va chercher partout dans votre code où vous avez utilisé une 
 fonction de traduction, et générer le(s) fichier(s) pot pour vous. 
 Vous pouvez (et devez) relancer cette tâche console à chaque fois 

@@ -110,7 +110,7 @@ suivantes en clés:
 * ``fieldList`` Un tableau de champs que vous souhaitez autoriser pour la 
   sauvegarde.
 * ``callbacks`` Définit à false la désactivation des callbacks. En utilisant
- 'before' ou 'after' activera seulement ces callbacks.
+  'before' ou 'after' activera seulement ces callbacks.
 
 Plus d'informations sur les callbacks du modèle sont disponibles 
 :doc:`ici <callback-methods>`

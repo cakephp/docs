@@ -63,7 +63,7 @@ qui reçoit beaucoup de trafics qui ont besoins d'être cachés::
     );
 
 Ceci cachera l'action view 10 heures et l'action index 13 heures. En plaçant 
-une valeur usuelle de ``strtotime()`` dans ``$cacheAction``vous pouvez cacher
+une valeur usuelle de ``strtotime()`` dans ``$cacheAction`` vous pouvez cacher
 toutes les actions dans le contrôleur::
 
 

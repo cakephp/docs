@@ -1,5 +1,5 @@
 Containable
-########
+###########
 
 .. php:class:: ContainableBehavior
 
@@ -233,7 +233,9 @@ daniel est l'auteur::
                     )
             )
 
-Des filtre supplémentaires peuvent être utilisées en utilisant les options de recherche standard :ref:`model-find`:         
+Des filtre supplémentaires peuvent être utilisées en utilisant les options de recherche standard :ref:`model-find`:
+
+::
 
     <?php
     $this->Post->find('all', array('contain' => array(
@@ -283,9 +285,10 @@ Garder à l'esprit que la clef 'contain' n'est utilisée qu'une seule fois dans 
 
 .. note::
 
-En utilisant les options 'fields' et 'contain' - faites attention d'inclure  toutes
-les clefs étrangères que votre requête requiert directement ou indirectement.
-Notez également que c'est parce que le comportement Containable doit être attaché à tous les modèles utilisés dans le contenu, que vous devez l'attacher à votre AppModel. 
+    En utilisant les options 'fields' et 'contain' - faites attention d'inclure  toutes
+    les clefs étrangères que votre requête requiert directement ou indirectement.
+    
+    Notez également que c'est parce que le comportement Containable doit être attaché à tous les modèles utilisés dans le contenu, que vous devez l'attacher à votre AppModel. 
 
 Les options du Comportement Containable
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -307,7 +310,8 @@ Le comportement Containable peut quelque fois causer des problèles avec d'autre
     $this->Post->Behaviors->attach('Containable', array('autoFields' => false));
 
 Utilisation du comportement Containable avec la pagination
-===================================
+==========================================================
+
 En incluant le paramètre 'contain' dans la propriété ``$paginate``
 la pagination sera appliqué à la fois au find('count') et au find('all') dans le modèle
 

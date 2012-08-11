@@ -19,14 +19,13 @@ Astuce de traducteurs:
 - Parcourez et modifiez le contenu à traduire dans le langage voulu - sinon
   vous ne verrez pas ce qui a déjà été traduit.
 - N'hésitez pas à plonger droit dans votre langue qui existe déjà dans le livre.
-- Utilisez une 
-  `Forme Informelle <http://en.wikipedia.org/wiki/Register_(linguistics)>`_.
+- Utilisez une `Forme Informelle <http://en.wikipedia.org/wiki/Register_(linguistics)>`_.
 - Traduisez à la fois le contenu et le titre en même temps.
 - Comparez au contenu anglais avant de soumettre une correction
   (si vous corrigez quelque chose, mais n'intégrez pas un changement 'en amont',
   votre soumission ne sera pas acceptée).
 - Si vous avez besoin d'écrire un terme anglais, entourez le avec les tags
- ``<em>``. Ex: "asdf asdf *Controller* asdf" ou "asdf asdf Kontroller
+  ``<em>``. Ex: "asdf asdf *Controller* asdf" ou "asdf asdf Kontroller
   (*Controller*) asfd" comme il se doit.
 - Ne soumettez pas de traductions partielles.
 - Ne modifier pas une section avec un changement en attente.
@@ -345,19 +344,18 @@ importante, une note spécials ou un danger potentiel. Les avertissements
 dans sphinx sont justement utilisés pour cela. Il y a trois types 
 d'avertissements.
 
-* ``.. tip::`` Les astuces sont utilisées pour documenter ou ré-itérer des 
-informations intéressantes ou importantes. Le contenu de cette directive doit 
-être écrit dans des phrases complètes et inclure toutes les ponctuations 
-appropriées.
-  
-* ``.. note::`` Les notes sont utilisées pour documenter une information 
-particulièrement importante.
-  
-* ``.. warning::`` Les avertissements sont utilisés pour documenter des blocks 
-potentiellement dangereux, ou des informations relatives à la sécurité. Le 
-contenu de la directive doit être écrite en phrases complètes et inclure toute 
-la ponctuation appropriée.
-  
+* ``.. tip::`` Les astuces sont utilisées pour documenter ou ré-itérer des
+  informations intéressantes ou importantes. Le contenu de cette directive doit
+  être écrit dans des phrases complètes et inclure toutes les ponctuations
+  appropriées.
+* ``.. note::`` Les notes sont utilisées pour documenter une information
+  particulièrement importante.
+* ``.. warning::`` Les avertissements sont utilisés pour documenter des blocks
+  potentiellement dangereux, ou des informations relatives à la sécurité. Le
+  contenu de la directive doit être écrite en phrases complètes et inclure toute
+  la ponctuation appropriée.
+
+
 Tous les avertissements sont faits de la même façon::
 
     .. note::

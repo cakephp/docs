@@ -141,12 +141,12 @@ Obtenir des informations supplémentaires sur le client
 
     
 Décoder automatiquement les données de la requête
-================================================
+=================================================
 
 .. php:method:: addInputType($type, $handler)
 
     :param string $type: L'alias du type de contenu auquel 
-    ce décodeur est attaché. ex. 'json' ou 'xml'
+      ce décodeur est attaché. ex. 'json' ou 'xml'
     :param array $handler: L'information de gestionnaire pour le type.
 
     Ajoute une requête de décodage de donnée. Le gestionnaire devrait
@@ -254,7 +254,7 @@ de contenu corresponde à votre application.
 
     :param Controller $controller: Référence du contrôleur
     :param string $type: nom simplifié du type de contenu à rendre, par 
-    exemple : xml, rss.
+      exemple : xml, rss.
 
     Change le mode de rendu d'un contrôleur pour le type spécifié. 
     Ajoutera aussi l'assistant (helper) approprié au tableau des 
@@ -265,11 +265,11 @@ de contenu corresponde à votre application.
 .. php:method:: respondAs($type, $options)
 
     :param string $type: nom simplifié du type de contenu à rendre, par 
-    exemple : xml, rss ou un content-type complet, tel que
-    application/x-shockwave
+      exemple : xml, rss ou un content-type complet, tel que
+      application/x-shockwave
     :param array $options: Si $type est un nom simplifié de type, qui 
-    a plus d'une association avec des contenus, $index est utilisé pour
-    sélectionner le type de contenu.
+      a plus d'une association avec des contenus, $index est utilisé pour
+      sélectionner le type de contenu.
 
     Définit l'en-tête de réponse basé sur la correspondance content-type/noms.
 
