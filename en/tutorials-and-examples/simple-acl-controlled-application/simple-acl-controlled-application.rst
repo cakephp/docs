@@ -154,7 +154,7 @@ AuthComponent will expect that your passwords are hashed.  In
     class User extends AppModel {
         // other code.
 
-        public function beforeSave() {
+        public function beforeSave($options = array()) {
             $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
             return true;
         }
