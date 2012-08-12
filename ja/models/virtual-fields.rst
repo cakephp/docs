@@ -1,36 +1,63 @@
-Virtual fields
-##############
+..
+   Virtual fields
+   ##############
 
-Virtual fields allow you to create arbitrary SQL expressions and
-assign them as fields in a Model. These fields cannot be saved, but
-will be treated like other model fields for read operations. They
-will be indexed under the model's key alongside other model
-fields.
+バーチャルフィールド
+####################
 
-Creating virtual fields
-=======================
+..
+  Virtual fields allow you to create arbitrary SQL expressions and
+  assign them as fields in a Model. These fields cannot be saved, but
+  will be treated like other model fields for read operations. They
+  will be indexed under the model's key alongside other model
+  fields.
 
-Creating virtual fields is easy. In each model you can define a
-``$virtualFields`` property that contains an array of field =>
-expressions. An example of a virtual field definition using MySQL
-would be::
+バーチャルフィールドは任意のSQL表現を作り、\
+それをモデルのフィールドとして割り当てることを可能にします。これらのフィールドは保存することはできませんが、\
+読み込み操作時にモデルの他のフィールドと同じように扱われることになります。\
+また、モデルの他のフィールドと同じように、モデルのキーを元に配置されます。
+
+..
+   Creating virtual fields
+   =======================
+
+バーチャルフィールドの作成
+==========================
+
+..
+  Creating virtual fields is easy. In each model you can define a
+  ``$virtualFields`` property that contains an array of field =>
+  expressions. An example of a virtual field definition using MySQL
+  would be::
+
+バーチャルフィールドを作るのは簡単です。各々のモデルに、フィールド => 式 という内容の配列を用いた ``$virtualFields`` プロパティを\
+定義することができます。MySQLを用いたバーチャルフィールドの定義の例としては、\
+以下のようになります。 ::
 
     <?php
     public $virtualFields = array(
         'full_name' => 'CONCAT(User.first_name, " ", User.last_name)'
     );
 
-And with PostgreSQL::
+..
+  And with PostgreSQL
+
+PostgreSQLだと、以下のようになります。 ::
 
     <?php
     public $virtualFields = array(
         'name' => 'User.first_name || \' \' || User.last_name'
     );
 
-In subsequent find operations, your User results would contain a
-``name`` key with the result of the concatenation. It is not
-advisable to create virtual fields with the same names as columns
-on the database, this can cause SQL errors.
+..
+  In subsequent find operations, your User results would contain a
+  ``name`` key with the result of the concatenation. It is not
+  advisable to create virtual fields with the same names as columns
+  on the database, this can cause SQL errors.
+
+これを行った後、find操作で取得したデータのUserには ``name`` キーに連結された結果が格納されているでしょう。\
+データベースにバーチャルフィールドと同じ名前のカラムを作成するのは賢明ではありません。\
+これはSQLエラーを引き起こす場合があります。
 
 It is not always useful to have **User.first\_name** fully
 qualified. If you do not follow the convention (i.e. you have
@@ -39,30 +66,48 @@ In this case it may be better to just use
 ``first_name || \'\' || last_name`` without the Model
 Name.
 
-Using virtual fields
-====================
+..
+   Using virtual fields
+   ====================
 
-Creating virtual fields is straightforward and easy, interacting
-with virtual fields can be done through a few different methods.
+バーチャルフィールドの使用
+==========================
+
+..
+   Creating virtual fields is straightforward and easy, interacting
+   with virtual fields can be done through a few different methods.
+
+バーチャルフィールドを作るのは至極簡単ですが、\
+バーチャルフィールドとの対話はいくつかの異なった方法でなされます。
 
 Model::hasField()
 -----------------
 
-Model::hasField() will return true if the model has a concrete field passed by
-the first parameter. By setting the second parameter of `hasField()` to true,
-virtualFields will also be checked when checking if a model has a field.
-Using the example field above::
+..
+   Model::hasField() will return true if the model has a concrete field passed by
+   the first parameter. By setting the second parameter of `hasField()` to true,
+   virtualFields will also be checked when checking if a model has a field.
+   Using the example field above::
+
+Model::hasField() は、モデルが実際に持っているフィールドを一番目の引数で渡すと true を返します。\
+`hasField()` の二番目の引数を true にすることによって、\
+バーチャルフィールドもチェックされるようになります。\
+上記の例を用いれば、 ::
 
     <?php
-    $this->User->hasField('name'); // Will return false, as there is no concrete field called name
-    $this->User->hasField('name', true); // Will return true as there is a virtual field called name
+    $this->User->hasField('name'); // 「name」というフィールドが実在しないため false を返します。
+    $this->User->hasField('name', true); // 「name」というバーチャルフィールドがあるため true を返します。
 
 Model::isVirtualField()
 -----------------------
 
-This method can be used to check if a field/column is a virtual
-field or a concrete field. Will return true if the column is
-virtual::
+..
+   This method can be used to check if a field/column is a virtual
+   field or a concrete field. Will return true if the column is
+   virtual::
+
+このメソッドは、フィールド・カラムが\
+バーチャルフィールドか実在するフィールドかどうかを判定するときに用いられます。カラムがバーチャルであるときに true を返します。 ::
 
     <?php
     $this->User->isVirtualField('name'); //true
@@ -76,10 +121,10 @@ a virtual field. If no argument is supplied it will return all
 virtual fields in a Model::
 
     <?php
-    $this->User->getVirtualField('name'); //returns 'CONCAT(User.first_name, ' ', User.last_name)'
+    $this->User->getVirtualField('name'); // 'CONCAT(User.first_name, ' ', User.last_name)' を返します。
 
-Model::find() and virtual fields
---------------------------------
+Model::find()とバーチャルフィールド
+-----------------------------------
 
 As stated earlier ``Model::find()`` will treat virtual fields much
 like any other field in a model. The value of a virtual field will
@@ -98,14 +143,22 @@ be placed under the model's key in the resultset::
         )
     );
 
-Pagination and virtual fields
------------------------------
+..
+   Pagination and virtual fields
+   -----------------------------
+
+ページネーションとバーチャルフィールド
+--------------------------------------
 
 Since virtual fields behave much like regular fields when doing
 find's, ``Controller::paginate()`` will be able to sort by virtual fields too.
 
-Virtual fields and model aliases
-================================
+..
+   Virtual fields and model aliases
+   ================================
+
+バーチャルフィールドとモデルのエイリアス
+========================================
 
 When you are using virtualFields and models with aliases that are
 not the same as their name, you can run into problems as
@@ -122,8 +175,12 @@ best to define the virtualFields in your model's constructor::
 This will allow your virtualFields to work for any alias you give a
 model.
 
-Virtual fields in SQL queries
-=============================
+..
+   Virtual fields in SQL queries
+   =============================
+
+SQLクエリ内でのバーチャルフィールドの利用
+=========================================
 
 Using functions in direct SQL queries will prevent data from being returned in the same array as your model's data. 
 For example this::
@@ -178,8 +235,12 @@ cleaner grouping of values::
             )
     )
 	
-Limitations of virtualFields
-============================
+..
+   Limitations of virtualFields
+   ============================
+
+バーチャルフィールドの制限事項
+==============================
 
 The implementation of ``virtualFields`` has a few
 limitations. First you cannot use ``virtualFields`` on associated
