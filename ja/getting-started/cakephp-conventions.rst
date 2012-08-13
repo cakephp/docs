@@ -89,7 +89,7 @@ CakePHP の URL とパラメータの取り扱いに関するより詳細な情�
 Person、BigPerson、ReallyBigPerson などは規約に合ったモデル名です。
 
 CakePHP のモデルに対応するテーブル名は、複数形でアンダースコア記法です。
-上記の例で言えば、テーブル名はそれぞれ、 people、 ``big_people`` 、 ``really_big_people`` になります。
+上記の例で言えば、テーブル名はそれぞれ、 ``people`` 、 ``big_people`` 、 ``really_big_people`` になります。
 
 ユーティリティライブラリの :php:class:`Inflector` を使って、単語の単数形・複数形を判定することができます。
 より詳しい情報は、 :doc:`/core-utility-libraries/inflector` を読んでください。
