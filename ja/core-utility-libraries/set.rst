@@ -762,7 +762,7 @@ Set互換のパス記法
     :rtype: array
 
     ルート配列から空の要素を除きます。
-   「0」の要素は除きません::
+    「0」の要素は除きません::
 
         <?php
         $res = Set::filter(array('0', false, true, 0, array('one thing', 'I can tell you', 'is you got to be', false)));
