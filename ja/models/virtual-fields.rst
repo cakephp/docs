@@ -116,9 +116,13 @@ Model::isVirtualField()
 Model::getVirtualField()
 ------------------------
 
-This method can be used to access the SQL expression that comprises
-a virtual field. If no argument is supplied it will return all
-virtual fields in a Model::
+..
+   This method can be used to access the SQL expression that comprises
+   a virtual field. If no argument is supplied it will return all
+   virtual fields in a Model::
+
+このメソッドは、バーチャルフィールドを構成するSQL表現にアクセスするために用いられます。引数が与えられない場合、\
+そのモデルのすべてのバーチャルフィールドを返します。 ::
 
     <?php
     $this->User->getVirtualField('name'); // 'CONCAT(User.first_name, ' ', User.last_name)' を返します。
@@ -126,14 +130,19 @@ virtual fields in a Model::
 Model::find()とバーチャルフィールド
 -----------------------------------
 
-As stated earlier ``Model::find()`` will treat virtual fields much
-like any other field in a model. The value of a virtual field will
-be placed under the model's key in the resultset::
+..
+   As stated earlier ``Model::find()`` will treat virtual fields much
+   like any other field in a model. The value of a virtual field will
+   be placed under the model's key in the resultset::
+
+先に述べたように、 ``Model::find()`` はモデルの他のフィールドと同じように\
+バーチャルフィールドを扱います。返り値のセットの中で、バーチャルフィールドの値は\
+モデルのキーの下に置かれます。 ::
 
     <?php
     $results = $this->User->find('first');
 
-    // results contains the following
+    // 返り値は以下のものを含みます。
     array(
         'User' => array(
             'first_name' => 'Mark',
@@ -150,8 +159,12 @@ be placed under the model's key in the resultset::
 ページネーションとバーチャルフィールド
 --------------------------------------
 
-Since virtual fields behave much like regular fields when doing
-find's, ``Controller::paginate()`` will be able to sort by virtual fields too.
+..
+   Since virtual fields behave much like regular fields when doing
+   find's, ``Controller::paginate()`` will be able to sort by virtual fields too.
+
+バーチャルフィールドは find 時に普通のフィールドと同じように振舞うため、\
+``Controller::paginate()`` はバーチャルフィールドでもソートすることができます。
 
 ..
    Virtual fields and model aliases
