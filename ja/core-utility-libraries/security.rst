@@ -33,9 +33,6 @@ Security API
     :param string $key: 暗号化に利用するキー。32バイトより長くする必要があります。
     :param string $mode: モード。'encrypt' もしくは 'decrypt'
 
-    Encrypts/Decrypts text using the rijndael-256 cipher. This requires the
-    `mcrypt extension <http://php.net/mcrypt>`_ to be installed::
-
     rijndael-256 暗号を使って、テキストの暗号化・復号を行います。
     このメソッドを使うには `mcrypt extension <http://php.net/mcrypt>`
     がインストールされている必要があります。\ ::

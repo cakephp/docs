@@ -510,7 +510,9 @@ ini 指示子の設定
 
 .. php:staticmethod:: write($key, $value)
 
-.. ``$key`` should be the dot separated path you wish to write ``$value`` to::
+..
+   ``$key`` should be the dot separated path you wish to write ``$value`` to::
+
 ``$key`` はドット区切りで ``$value`` の書き込み先を指定します::
 
     <?php
@@ -518,7 +520,9 @@ ini 指示子の設定
 
 .. php:staticmethod:: delete($key)
 
-.. When you need to delete data from the session, you can use delete::
+..
+   When you need to delete data from the session, you can use delete::
+
 セッションからデータ削除が必要なら削除も可能です::
 
     <?php
