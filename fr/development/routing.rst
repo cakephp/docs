@@ -554,7 +554,7 @@ Either of the above would output::
     $this->passedArgs may also contain named parameters as a named
     array mixed with Passed arguments.
 
-When generating urls, using a :term:`routing array` you add passed 
+When generating urls, using a :term:`tableau routing` you add passed 
 arguments as values without string keys in the array::
 
     <?php
@@ -623,7 +623,7 @@ in the router use :php:meth:`Router::connectNamed()`::
 Will ensure that your chapter and section parameters reverse route
 correctly.
 
-When generating urls, using a :term:`routing array` you add named 
+When generating urls, using a :term:`tableau routing` you add named 
 parameters as values with string keys matching the name::
 
     <?php
@@ -774,7 +774,7 @@ Reverse routing
 
 Reverse routing is a feature in CakePHP that is used to allow you to
 easily change your url structure without having to modify all your code.
-By using :term:`routing arrays <routing array>` to define your urls, you can
+By using :term:`routing arrays <tableau routing>` to define your urls, you can
 later configure routes and the generated urls will automatically update.
 
 If you create urls using strings like::
@@ -954,7 +954,7 @@ Router API
 
     :param string $route: A route template that dictates which urls should
         be redirected.
-    :param mixed $url: Either a :term:`routing array` or a string url
+    :param mixed $url: Either a :term:`tableau routing` or a string url
         for the destination of the redirect.
     :param array $options: An array of options for the redirect.
 
@@ -983,7 +983,7 @@ Router API
 .. php:staticmethod:: url($url = null, $full = false)
 
     :param mixed $url: Cake-relative URL, like "/products/edit/92" or 
-        "/presidents/elect/4" or a :term:`routing array`
+        "/presidents/elect/4" or a :term:`tableau routing`
     :param mixed $full: If (bool) true, the full base URL will be prepended
         to the result. If an array accepts the following keys
         

@@ -95,7 +95,7 @@ pleinement avantage du Helper Form (Assistant Formulaire) est
 
 
     A la création de formulaires pour les modèles dans des plugins. Nous
-    devrons toujours utiliser la notation :term:`plugin syntax`  à la création 
+    devrons toujours utiliser la notation :term:`syntaxe de plugin` à la création 
     d'un formulaire. Cela assurera que le formulaire est correctement généré::
 
     

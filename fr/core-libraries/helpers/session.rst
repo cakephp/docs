@@ -14,7 +14,7 @@ Component is that the helper does *not* have the ability to write
 to the session.
 
 As with the Session Component, data is read by using
-:term:`dot notation` array structures::
+:term:`notation avec points` array structures::
 
     <?php
     array('User' => 

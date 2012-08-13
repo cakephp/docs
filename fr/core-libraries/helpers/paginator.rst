@@ -455,12 +455,9 @@ D'autres Méthodes
 
     Les clefs acceptées pour  ``$options``: 
 
-        * **update** - L' Id de l'élément DOM que vous souhaitez actualiser. Créé 
-            des liens près pou Ajax.
-        * **escape** Si vous voulez que le contenu soit encodé comme une entité html, 
-            par défaut à true.
-        * **model** Le modèle à utiliser, par défaut à  
-            PaginatorHelper::defaultModel() .
+    * **update** L' Id de l'élément DOM que vous souhaitez actualiser. Créé des liens près pou Ajax.
+    * **escape** Si vous voulez que le contenu soit encodé comme une entité html, par défaut à true.
+    * **model** Le modèle à utiliser, par défaut à PaginatorHelper::defaultModel().
 
     Créé un lien ordinaire ou Ajax avec des paramètres de pagination::
 
@@ -474,9 +471,10 @@ D'autres Méthodes
 
 .. php:method:: url($options = array(), $asArray = false, $model = null)
 
-    :param array $options:Tableau d'options Pagination/URL. Comme utilisé dans
-      les méthodes ``options()`` ou ``link()``.
-    :param boolean $asArray: Retourne l'url comme dans un tableau, ou une chaîne URL. Par défaut à false.
+    :param array $options: Tableau d'options Pagination/URL. Comme utilisé
+        dans les méthodes ``options()`` ou ``link()``.
+    :param boolean $asArray: Retourne l'url comme dans un tableau, ou une
+        chaîne URL. Par défaut à false.
     :param string $model: Le modèle sur lequel paginer
 
     Par défaut retourne une chaîne d'Url complètement paginée à utiliser

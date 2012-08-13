@@ -50,7 +50,7 @@ Key
 datasource
     The name of the datasource this configuration array is for.
     Examples: Database/Mysql, Database/Sqlserver, Database/Postgres, Database/Sqlite.
-    You can use :term:`plugin syntax` to indicate plugin datasource to use.
+    You can use :term:`syntaxe de plugin` to indicate plugin datasource to use.
 persistent
     Whether or not to use a persistent connection to the database.
 host
@@ -334,7 +334,7 @@ anywhere within your application, in a static context::
 
 .. php:staticmethod:: write($key, $value)
 
-    :param string $key: The key to write, can use be a :term:`dot notation` value.
+    :param string $key: The key to write, can use be a :term:`notation avec points` value.
     :param mixed $value: The value to store.
 
     Use ``write()`` to store data in the application’s configuration::
@@ -345,7 +345,7 @@ anywhere within your application, in a static context::
 
     .. note::
 
-        The :term:`dot notation` used in the ``$key`` parameter can be used to
+        The :term:`notation avec points` used in the ``$key`` parameter can be used to
         organize your configuration settings into logical groups.
 
     The above example could also be written in a single call::
@@ -362,7 +362,7 @@ anywhere within your application, in a static context::
 
 .. php:staticmethod:: read($key = null)
 
-    :param string $key: The key to read, can use be a :term:`dot notation` value
+    :param string $key: The key to read, can use be a :term:`notation avec points` value
 
     Used to read configuration data from the application. Defaults to
     CakePHP’s important debug value. If a key is supplied, the data is
@@ -382,7 +382,7 @@ anywhere within your application, in a static context::
 
 .. php:staticmethod:: delete($key)
 
-    :param string $key: The key to delete, can use be a :term:`dot notation` value
+    :param string $key: The key to delete, can use be a :term:`notation avec points` value
 
     Used to delete information from the application’s configuration::
 
@@ -576,7 +576,7 @@ Built-in Configuration readers
 
     Allows you to read configuration files that are stored as plain PHP files.
     You can read either files from your ``app/Config`` or from plugin configs
-    directories by using :term:`plugin syntax`.  Files **must** contain a ``$config``
+    directories by using :term:`syntaxe de plugin`.  Files **must** contain a ``$config``
     variable.  An example configuration file would look like::
 
         <?php

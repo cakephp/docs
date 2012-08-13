@@ -176,7 +176,7 @@ Création de messages de notification
         <?php
         $this->Session->setFlash('Message Exemple', 'default', array('class' => 'classe_exemple'));
 
-    La sortie en utilisant ``$this->Session->flash()` avec l'exemple ci
+    La sortie en utilisant ``$this->Session->flash()`` avec l'exemple ci
     dessus sera::
     
         <div id="flashMessage" class="classe_exemple">Message Exemple</div>

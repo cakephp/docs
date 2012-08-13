@@ -693,7 +693,7 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
     Créé un élément ancre html qui a un événement clic rattaché.
     Les options peuvent inclure celle pour :php:func:`HtmlHelper::link()`
     et :php:func:`Helper Js::request()`, :php:func:`Helper Js::event()`,
-    ``$options`` est un tableau d'attribut :term:`html attributes` qui sont
+    ``$options`` est un tableau d'attribut :term:`attributs html` qui sont
     ajoutés à l'élément ancre généré. Si une option ne fait pas partie
     des attributs standard de ``$htmlAttributes`` elle sera passée à
     :php:func:`Helper Js::request()`  comme une option. Si une Id n'est

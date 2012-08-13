@@ -10,7 +10,7 @@ CakePHP.
 
 .. figure:: /_static/img/typical-cake-request.gif
    :align: center
-   :alt:Diagramme représentant une requête CakePHP typique.
+   :alt: Diagramme représentant une requête CakePHP typique.
 
    Diagramme représentant une requête CakePHP typique.
 
