@@ -8,6 +8,7 @@ CakePHPは、上記を可能にする非常に便利な静的ユーティリテ�
 
 CakePHsのSetクラスはどのモデルやコントローラからも、Inflectorを呼ぶのと同じ方法で呼び出すことができます。
 例: :php:meth:`Set::combine()`
+
 .. deprecated:: 2.2
     Set クラスは :php:class:`Hash` クラスにその役割を譲り2.2で非推奨となりました。
     Hashクラスはより一貫性を持つインターフェイスとAPIを提供します。
