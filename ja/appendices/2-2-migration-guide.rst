@@ -152,8 +152,8 @@ CakeRequest
 - CakeRequestは、 ``PUT``, ``DELETE`` リクエスト時に、 ``application/x-www-form-urlencoded`` リクエストボディを自動的にデコードするようになりました。
   このデータは、POSTデータと同じように ``$this->data`` に格納されます
  
-Utility
-=======
+ユーティリティ
+==============
 
 Set
 ---
@@ -214,8 +214,8 @@ HtmlHelper
 - :php:meth:`HtmlHelper::tableHeaders()` メソッドは、テーブルセル単位に属性がセットできるようになりました
 
 
-Routing
-=======
+ルーティング
+============
 
 Dispatcher
 ----------
@@ -233,8 +233,8 @@ Router
 - :php:meth:`Router::setExtensions()` メソッドが追加されました。
   パースすべき拡張子が追加できるようになりました。
 
-Cache
-=====
+キャッシュ
+==========
 
 Redis エンジン
 ----------------------------------------------------------------------
@@ -262,8 +262,8 @@ Redis エンジン
 :php:meth:`Cache::clearGroup()` クラスメソッドが追加されました。
 これはグループ名を元に、同じ文字列のラベルのキャッシュを消すメソッドです
 
-Log
-===
+ログ
+====
 
 :php:class:`CakeLog` の変更によって、いくつかの設定を ``app/Config/bootstrap.php`` ファイルに追加する必要があります。
 詳細は、 :doc:`/core-libraries/logging` を参照ください。
