@@ -1,59 +1,59 @@
-Simple Acl controlled Application
-#################################
+Application Simple contrôlée par Acl
+####################################
 
-In this tutorial you will create a simple application with
-:doc:`/core-libraries/components/authentication` and
-:doc:`/core-libraries/components/access-control-lists`. This
-tutorial assumes you have read the :doc:`/tutorials-and-examples/blog/blog`
-tutorial, and you are familiar with
-:doc:`/console-and-shells/code-generation-with-bake`. You should have
-some experience with CakePHP, and be familiar with MVC concepts.
-This tutorial is a brief introduction to the
-:php:class:`AuthComponent` and :php:class:`AclComponent`\.
+Dans ce tutoriel, vous allez créer une application simple avec
+:doc:`/core-libraries/components/authentication` et
+:doc:`/core-libraries/components/access-control-lists`. Ce 
+tutoriel suppose que vous avez lu le tutoriel du 
+:doc:`/tutorials-and-examples/blog/blog`, et que vous êtes familier 
+avec :doc:`/console-and-shells/code-generation-with-bake`. Vous devrez avoir 
+un peu d'expérience avec CakePHP, et être familier avec les concepts MVC.
+Ce tutoriel est une briève introduction à :php:class:`AuthComponent` et 
+:php:class:`AclComponent`\.
 
-What you will need
-
-
-#. A running web server. We're going to assume you're using Apache,
-   though the instructions for using other servers should be very
-   similar. We might have to play a little with the server
-   configuration, but most folks can get Cake up and running without
-   any configuration at all.
-#. A database server. We're going to be using MySQL in this
-   tutorial. You'll need to know enough about SQL in order to create a
-   database: Cake will be taking the reins from there.
-#. Basic PHP knowledge. The more object-oriented programming you've
-   done, the better: but fear not if you're a procedural fan.
-
-Preparing our Application
-=========================
-
-First, let's get a copy of fresh Cake code.
-
-To get a fresh download, visit the CakePHP project at GitHub:
-http://github.com/cakephp/cakephp/downloads and download the stable
-release. For this tutorial you need the latest 2.0 release.
+Ce dont vous aurez besoin
 
 
-You can also clone the repository using
+#. Un serveur web opérationnel. Nous allons supposer que vous utilisez Apache, 
+   cependant les instructions pour utiliser d'autres serveurs devraient être 
+   très similaires. Nous pourrions avoir à jouer un peu avec la configuration 
+   du serveur, mais la plupart de gens peuvent se procurer CakePHP et le faire 
+   fonctionner sans qu'aucune configuration soit nécessaire.
+#. Un serveur de base de données. Nous utiliserons MySQL dans ce tutoriel. 
+   Vous aurez besoin de connaître suffisamment de chose en SQL, notamment 
+   pour pouvoir créer une base de données : Cake prendra les rènes à partir 
+   d'ici. 
+#. Une connaissance des bases PHP. Plus vous aurez pratiqué la programmation 
+   orientée objet, mieux ça vaudra : mais n'ayez pas peur si vous êtes un fan 
+   de programmation procédurale.
+
+Préparer notre Application
+==========================
+
+Premièrement, récupérons une copie récente de CakePHP
+
+Pour obtenir un téléchargement à jour, visitez le projet CakePHP sur Github: 
+http://github.com/cakephp/cakephp/downloads et téléchargez la version stable. 
+Pour ce tutoriel vous aurez besoin de la dernière version 2.x.
+
+Vous pouvez aussi dupliquer le dépôt en utilisant 
 `git <http://git-scm.com/>`_.
 ``git clone git://github.com/cakephp/cakephp.git``
 
-Once you've got a fresh copy of cake setup your database.php config
-file, and change the value of Security.salt in your
-app/Config/core.php. From there we will build a simple database
-schema to build our application on. Execute the following SQL
-statements into your database::
+Une fois que vous avez votre copie toute récente de Cake, configurez votre 
+fichier "app/Config/database.php" et changez la valeur du Security.salt 
+("grain" de sécurité) dans votre fichier "app/Config/core.php". A ce stade, 
+nous construirons un schéma simple de base de données sur lequel bâtir notre 
+application. Exécutez les commandes SQL suivantes sur votre base de données::
 
-   CREATE TABLE users (
+   CREATE TABLE utilisateurs (
        id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-       username VARCHAR(255) NOT NULL UNIQUE,
-       password CHAR(40) NOT NULL,
+       nom_utilisateur VARCHAR(255) NOT NULL UNIQUE,
+       mot_de_passe CHAR(40) NOT NULL,
        group_id INT(11) NOT NULL,
        created DATETIME,
        modified DATETIME
    );
-
 
    CREATE TABLE groups (
        id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -62,10 +62,9 @@ statements into your database::
        modified DATETIME
    );
 
-
    CREATE TABLE posts (
        id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-       user_id INT(11) NOT NULL,
+       utilisateur_id INT(11) NOT NULL,
        title VARCHAR(255) NOT NULL,
        body TEXT,
        created DATETIME,
@@ -79,43 +78,42 @@ statements into your database::
        quantity INT(11)
    );
 
-These are the tables we will be using to build the rest of our
-application. Once we have the table structure in the database we
-can start cooking. Use
-:doc:`/console-and-shells/code-generation-with-bake` to quickly
-create your models, controllers, and views.
+Ce sont les tables que nous utiliserons pour construire le reste de notre 
+application. Une fois que nous avons la structure des tables dans notre base 
+de données, nous pouvons commencer à cuisiner. Utilisez 
+:doc:`/console-and-shells/code-generation-with-bake` pour créer 
+rapidement vos modèles, contrôleurs et vues. 
 
-To use cake bake, call "cake bake all" and this will list the 4
-tables you inserted into mySQL. Select "1. Group", and follow the
-prompts. Repeat for the other 3 tables, and this will have
-generated the 4 controllers, models and your views for you.
+Pour utiliser cake bake, appelez "cake bake all" et cela listera les 4 tables 
+que vous avez inseré dans mySQL. Séléctionnez "1. Group", et suivez ce qui 
+est écrit sur l'écran. Répétez pour les 3 autres tables, et cela générera 
+les 4 contrôleurs, modèles et vues pour vous.
 
-Avoid using Scaffold here. The generation of the ACOs will be
-seriously affected if you bake the controllers with the Scaffold
-feature.
+Evitez d'utiliser le Scaffold ici. La génération des ACOs en sera sérieusement 
+affectée si vous cuisinez les contrôleurs avec la fonctionnalité Scaffold.
 
-While baking the Models cake will automagically detect the
-associations between your Models (or relations between your
-tables). Let cake supply the correct hasMany and belongsTo
-associations. If you are prompted to pick hasOne or hasMany,
-generally speaking you'll need a hasMany (only) relationships for
-this tutorial.
+Pendant la cuisson des Modèles, cake détectera auto-magiquement les 
+associations entre vos Modèles (ou relations entre vos tables). Laissez 
+Cake remplir les bonnes associations hasMany et belongsTo. Si vous êtes invité 
+à choisir hasOne ou hasMany, d'une manière générale, vous aurez besoin d'une 
+relation hasMany (seulement) pour ce tutoriel.
 
-Leave out admin routing for now, this is a complicated enough
-subject without them. Also be sure **not** to add either the Acl or
-Auth Components to any of your controllers as you are baking them.
-We'll be doing that soon enough. You should now have models,
-controllers, and baked views for your users, groups, posts and
-widgets.
+Laissez de côté les routing admin pour le moment, c'est déjà un assez compliqué 
+sujet comme cela sans eux. Assurez-vous aussi de **ne pas** ajouter les 
+Composants Acl et Auth à aucun de vos contrôleurs quand vous les cuisinez.
+Nous le ferons bien assez tôt. Vous devriez maintenant avoir des modèles, 
+contrôleurs, et des vues cuisinés pour vos utilisateurs, groupes, posts 
+et widgets.
 
-Preparing to Add Auth
-=====================
+Préparer l'ajout d'Auth
+=======================
 
-We now have a functioning CRUD application. Bake should have setup
-all the relations we need, if not add them in now. There are a few
-other pieces that need to be added before we can add the Auth and
-Acl components. First add a login and logout action to your
-``UsersController``::
+Nous avons maintenant une application CRUD (Créer Lire Editer Supprimer) 
+fonctionnelle. Bake devrait avoir mis en place toutes les relations dont 
+nous avons besoin, si ce n'est pas le cas, faites-le maintenant. Il y a 
+quelques autres éléments qui doivent être ajoutés avant de pouvoir ajouter 
+les composants Auth et Acl. Tout d'abord, ajoutez une action login et une 
+action logout à votre ``UtilisateursController``::
 
     <?php
     public function login() {
@@ -123,26 +121,26 @@ Acl components. First add a login and logout action to your
             if ($this->Auth->login()) {
                 $this->redirect($this->Auth->redirect());
             } else {
-                $this->Session->setFlash('Your username or password was incorrect.');
+                $this->Session->setFlash('Votre nom d\'utilisateur ou mot de passe sont incorrects.');
             }
         }
     }
      
     public function logout() {
-        //Leave empty for now.
+        //Laissez vide pour le moment.
     }
 
-Then create the following view file for login at
+Ensuite créer le fichier de vue suivant pour la connexion 
 ``app/View/Users/login.ctp``::
 
     <?php
-    echo $this->Form->create('User', array('action' => 'login'));
+    echo $this->Form->create('Utilisateur', array('action' => 'login'));
     echo $this->Form->inputs(array(
         'legend' => __('Login'),
-        'username',
-        'password'
+        'nom_utilisateur',
+        'mot_de_passe'
     ));
-    echo $this->Form->end('Login');
+    echo $this->Form->end('Connexion');
 
 Next we'll have to update our User model to hash passwords before they go into
 the database.  Storing plaintext passwords is extremely insecure and
@@ -205,43 +203,45 @@ actions. This is only temporary and will be removed once we get a
 few users and groups into our database. Don't add any users or
 groups just yet though.
 
-Initialize the Db Acl tables
-============================
+Initialiser les tables Acl dans la BdD
+======================================
 
-Before we create any users or groups we will want to connect them
-to the Acl. However, we do not at this time have any Acl tables and
-if you try to view any pages right now, you will get a missing
-table error ("Error: Database table acos for model Aco was not
-found."). To remove these errors we need to run a schema file. In a
-shell run the following::
+Avant de créer des utilisateurs et groupes, nous voulons les connecter à l'Acl. 
+Cependant, nous n'avons pour le moment aucune table d'Acl et si vous essayez 
+de visualiser les pages maintenant, vous aurez une erreur de table manquante 
+("Error: Database table acos for model Aco was not found.").
+Pour supprimer ces erreurs, nous devons exécuter un fichier de schéma. Dans un 
+shell, exécutez la commande suivante::
 
     ./Console/cake schema create DbAcl
+    
+Ce schéma vous invite à supprimer et créer les tables. Répondez Oui (Yes) à la 
+suppression et création des tables.
 
-This schema will prompt you to drop and create the tables. Say yes
-to dropping and creating the tables.
+Si vous n'avez pas d'accès au shell, ou si vous avez des problèmes pour 
+utiliser la console, vous pouvez exécuter le fichier sql se trouvant à 
+l'emplacement suivant : 
+/chemin/vers/votre/app/Config/Schema/db\_acl.sql. 
 
-If you don't have shell access, or are having trouble using the
-console, you can run the sql file found in
-/path/to/app/Config/Schema/db\_acl.sql.
+Avec les contrôleurs configurés pour l'entrée de données et les tables Acl 
+initialisées, nous sommes prêts à commencer, n'est-ce-pas ? Pas tout à fait, 
+nous avons encore un peu de travail à faire dans les modèles utilisateurs et 
+groupes. Concrètement, faire qu'ils s'attachent auto-magiquement à l'Acl.
 
-With the controllers setup for data entry, and the Acl tables
-initialized we are ready to go right? Not entirely, we still have a
-bit of work to do in the user and group models. Namely, making them
-auto-magically attach to the Acl.
+Agir comme un requêteur
+=======================
 
-Acts As a Requester
-===================
-
-For Auth and Acl to work properly we need to associate our users
-and groups to rows in the Acl tables. In order to do this we will
-use the ``AclBehavior``. The ``AclBehavior`` allows for the
-automagic connection of models with the Acl tables. Its use
-requires an implementation of ``parentNode()`` on your model. In
-our ``User`` model we will add the following::
+Pour que Auth et Acl fonctionnent correctement, nous devons associer nos 
+utilisateurs et groupes dans les entrées de nos tables Acl. Pour ce faire, 
+nous allons utiliser le comportement ``AclBehavior``. Le comportement 
+``AclBehavior`` permet de connecter automagiquement des modèles avec les 
+tables Acl. Son utilisation requiert l'implémentation de ``parentNode()`` 
+dans vos modèles. Dans notre Modèle ``Utilisateur`` nous allons ajouter le 
+code suivant ::
 
     <?php
-    class User extends Model {
-        public $name = 'User';
+    class Utilisateur extends Model {
+        public $name = 'Utilisateur';
         public $belongsTo = array('Group');
         public $actsAs = array('Acl' => array('type' => 'requester'));
          
@@ -249,8 +249,8 @@ our ``User`` model we will add the following::
             if (!$this->id && empty($this->data)) {
                 return null;
             }
-            if (isset($this->data['User']['group_id'])) {
-                $groupId = $this->data['User']['group_id'];
+            if (isset($this->data['Utilisateur']['group_id'])) {
+                $groupId = $this->data['Utilisateur']['group_id'];
             } else {
                 $groupId = $this->field('group_id');
             }
@@ -262,7 +262,7 @@ our ``User`` model we will add the following::
         }
     }
 
-Then in our ``Group`` Model Add the following::
+Ensuite dans notre Modèle ``Group`` ajoutons ce qui suit::
 
     <?php
     class Group extends Model {
@@ -273,28 +273,28 @@ Then in our ``Group`` Model Add the following::
         }
     }
 
-What this does, is tie the ``Group`` and ``User`` models to the
-Acl, and tell CakePHP that every-time you make a User or Group you
-want an entry on the ``aros`` table as well. This makes Acl
-management a piece of cake as your AROs become transparently tied
-to your ``users`` and ``groups`` tables. So anytime you create or
-delete a user/group the Aro table is updated.
+Cela permet de lier les modèles ``Group`` et ``Utilisateur`` à l'Acl, et de 
+dire à CakePHP que chaque fois que l'on créé un Utilisateur ou un Groupe, nous 
+voulons également ajouter une entrée dans la table ``aros``. Cela fait de la 
+gestion des Acl un jeu d'enfant, puisque vos AROs se lient de façon 
+transparente à vos tables ``utilisateurs`` et ``groups``. Ainsi, chaque fois 
+que vous créez ou supprimez un groupe/utilisateur, la table Aro est mise à jour.
 
-Our controllers and models are now prepped for adding some initial
-data, and our ``Group`` and ``User`` models are bound to the Acl
-table. So add some groups and users using the baked forms by
-browsing to http://example.com/groups/add and
-http://example.com/users/add. I made the following groups:
+Nos contrôleurs et modèles sont maintenant prêts à recevoir des données 
+initiales et nos modèles ``Group`` et ``Utilisateur`` sont reliés à la table 
+Acl. Ajoutez donc quelques groupes et utilisateurs en utilisant les 
+formulaires créés avec Bake en allant sur http://exemple.com/groups/add et 
+http://exemple.com/utilisateurs/add. J'ai créé les groupes suivants :
 
--  administrators
+-  administrateurs
 -  managers
--  users
+-  utilisateurs
 
-I also created a user in each group so I had a user of each
-different access group to test with later. Write everything down or
-use easy passwords so you don't forget. If you do a
-``SELECT * FROM aros;`` from a mysql prompt you should get
-something like the following::
+J'ai également créé un utilisateur dans chaque groupe, de façon à avoir un 
+utilisateur de chaque niveau d'accès pour les tests ultérieurs. Ecrivez tout 
+sur du papier ou utilisez des mots de passe faciles, de façon à ne pas les 
+oublier. Si vous faites un `SELECT * FROM aros;`` depuis une commande mysql, 
+vous devriez recevoir quelque chose comme cela::
 
     +----+-----------+-------+-------------+-------+------+------+
     | id | parent_id | model | foreign_key | alias | lft  | rght |
@@ -308,27 +308,29 @@ something like the following::
     +----+-----------+-------+-------------+-------+------+------+
     6 rows in set (0.00 sec)
 
-This shows us that we have 3 groups and 3 users. The users are
-nested inside the groups, which means we can set permissions on a
-per-group or per-user basis.
+Cela nous montre que nous avons 3 groupes et 3 utilisateurs. Les utilisateurs 
+sont imbriqués dans les groupes, ce qui signifie que nous pouvons définir des 
+permissions sur une base par groupe ou par utilisateur.
 
-Group-only ACL
---------------
+ACL basé sur les groupe uniquement
+----------------------------------
 
-In case we want simplified per-group only permissions, we need to
-implement ``bindNode()`` in ``User`` model::
+Dans la cas où nous souhaiterions simplifier en utilisant les permissions 
+par groupes, nous avons besoin d'implémenter ``bindNode()`` dans le modèle 
+``Utilisateur``::
 
     <?php
     public function bindNode($user) {
-        return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
+        return array('model' => 'Group', 'foreign_key' => $user['Utilisateur']['group_id']);
     }
 
-This method will tell ACL to skip checking ``User`` Aro's and to
-check only ``Group`` Aro's.
+Cette méthode va demander à ACL de ne pas vérifier les AROs de ``Utilisateur`` 
+mais de seulement vérifier les AROs de ``Group``.
 
-Every user has to have assigned ``group_id`` for this to work.
+Chaque utilisateur devra être assigné à un ``group_id`` pour que ceci fontionne 
+correctement.
 
-In this case our ``aros`` table will look like this::
+Dans ce cas, notre table `aros`` va ressembler à ceci ::
 
     +----+-----------+-------+-------------+-------+------+------+
     | id | parent_id | model | foreign_key | alias | lft  | rght |
@@ -339,45 +341,45 @@ In this case our ``aros`` table will look like this::
     +----+-----------+-------+-------------+-------+------+------+
     3 rows in set (0.00 sec)
 
-Creating ACOs (Access Control Objects)
-======================================
+Créer les ACOs (Access Control Objects)
+=======================================
 
-Now that we have our users and groups (aros), we can begin
-inputting our existing controllers into the Acl and setting
-permissions for our groups and users, as well as enabling login /
-logout.
+Maintenant que nous avons nos utilisateur et groupes (aros), nous pouvons 
+commencer à intégrer nos contrôleurs existants dans l'Acl et définir des 
+permissions pour nos groupes et utilisateurs, et permettre la 
+connexion / déconnexion.
 
-Our ARO are automatically creating themselves when new users and
-groups are created. What about a way to auto-generate ACOs from our
-controllers and their actions? Well unfortunately there is no magic
-way in CakePHP's core to accomplish this. The core classes offer a
-few ways to manually create ACO's though. You can create ACO
-objects from the Acl shell or You can use the ``AclComponent``.
-Creating Acos from the shell looks like::
+Nos AROs sont automatiquement créés lorsque de nouveaux utilisateurs et 
+groupes sont ajoutés. Qu'en est-t'il de l'auto-génération des ACOs pour 
+nos contrôleurs et leurs actions ? Et bien, il n'y a malheureusement pas 
+de solution magique dans le core de CakePHP pour réaliser cela. Les classes 
+du core offrent cependant quelques moyens pour créer manuellement les ACOs. 
+Vous pouvez créer des objets ACO depuis le shell Acl, ou alors vous pouvez 
+utiliser l'``AclComponent``. Créer les Acos depuis le shell ressemble à cela::
 
     ./Console/cake acl create aco root controllers
 
-While using the AclComponent would look like::
+En utilisant l'AclComposant, cela ressemblera à::
 
     <?php
     $this->Acl->Aco->create(array('parent_id' => null, 'alias' => 'controllers'));
     $this->Acl->Aco->save();
 
-Both of these examples would create our 'root' or top level ACO
-which is going to be called 'controllers'. The purpose of this root
-node is to make it easy to allow/deny access on a global
-application scope, and allow the use of the Acl for purposes not
-related to controllers/actions such as checking model record
-permissions. As we will be using a global root ACO we need to make
-a small modification to our ``AuthComponent`` configuration.
-``AuthComponent`` needs to know about the existence of this root
-node, so that when making ACL checks it can use the correct node
-path when looking up controllers/actions. In ``AppController`` ensure
-that you ``$components`` array contains the ``actionPath`` defined earlier.
+Ces deux exemples vont créer notre root ou ACO de plus haut niveau, qui sera 
+appelé 'controllers'. L'objectif de ce nœud root est d'autoriser/interdire 
+l'accès à l'échelle globale de l'application, et permet l'utilisation de l'Acl 
+dans des objectifs non liés aux contrôleurs/actions, tels que la vérification 
+des permissions d'un enregistrement d'un modèle. Puisque nous allons utiliser 
+un ACO root global, nous devons faire une petite modification à la 
+configuration de ``AuthComponent``. L'``AuthComponent`` doit être renseigné sur 
+l'existence de ce nœud root, de sorte que lors des contrôles de l'ACL, le 
+composant puisse utiliser le bon chemin de nœud lors de la recherche 
+contrôleurs/actions. Dans l'``AppController``, assurez vous que le tableau 
+``$components`` contient l'``actionPath`` défini avant.
 
-Continue to :doc:`part-two` to continue the tutorial.
+Continuez à :doc:`part-two` pour continuer le tutoriel.
 
 
 .. meta::
-    :title lang=en: Simple Acl controlled Application
-    :keywords lang=en: core libraries,auto increment,object oriented programming,database schema,sql statements,php class,stable release,code generation,database server,server configuration,reins,access control,shells,mvc,authentication,web server,cakephp,servers,checkout,apache
+    :title lang=fr: Application Simple contrôlée par Acl
+    :keywords lang=fr: librairies du coeur,incrémentation auto,programmation orientée objet,schéma de base de données,requêtes sql,classe php,version stable,génération de code,serveur de base de données,configuration du serveur,reins,contrôle d'accès,shells,mvc,authentification,serveur web,cakephp,serveurs,checkout,apache
