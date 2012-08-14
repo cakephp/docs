@@ -5,12 +5,12 @@ Nous sommes de grands fans des conventions plutôt que de la configuration.
 Bien que cela réclame un peu de temps pour apprendre les conventions de 
 CakePHP, à terme vous gagnerez du temps : en suivant les conventions,
 vous aurez des fonctionnalités automatiques et vous vous libérerez du 
-cauchemard de la maintenance par l'analyse des fichiers de configuration.
+cauchemar de la maintenance par l'analyse des fichiers de configuration.
 Les conventions sont aussi là pour créer un environnement de développement
 uniforme, permettant à d'autres développeurs de s'investir dans le code
 plus facilement.
 
-Les conventions de CakePHP ont été crées à partir de nombreuses années 
+Les conventions de CakePHP ont été créées à partir de nombreuses années 
 d'expérience dans le développement Web et de bonnes pratiques. Alors 
 que nous vous conseillons d'utiliser ces conventions lors de vos 
 développements CakePHP, nous devons mentionner que la plupart de ces 
@@ -41,7 +41,7 @@ disponible pour un usage interne. Exemple :
 Vous pouvez aussi changer la visibilité des méthodes des contrôleurs 
 dans CakePHP en préfixant les noms de méthode des contrôleurs avec des 
 underscores. Si une méthode du contrôleur a été préfixée avec un
-underscore, la méthode ne sera pas accesible directement à partir du web 
+underscore, la méthode ne sera pas accessible directement à partir du web 
 mais est disponible pour une utilisation interne. Par exemple::
 
     <?php

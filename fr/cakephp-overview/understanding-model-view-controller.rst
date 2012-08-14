@@ -4,23 +4,20 @@ Comprendre le modèle M-V-C (Modèle-Vue-Contrôleur)
 CakePHP suit le motif de conception logicielle
 `MVC <http://en.wikipedia.org/wiki/Model-view-controller>`_.
 Programmer en utilisant MVC sépare votre application en 3 couches principales :
-- Le Modèle représente les données de l'application.
-- La Vue affiche une présentation des données du modèle.
-- Le Contrôleur intercepte et route les requêtes faites par le client.
 
 La couche Modèle
 ================
 
-La couche Modèle représente la partie de l'application qui implémente la logique 
+La couche Modèle représente la partie de l'application qui exécute la logique 
 métier. Cela signifie qu'elle est responsable de récuperer les données, de les 
 convertir selon des concepts chargés de sens pour votre application, tels que le
-traitement, la validation, l'association et beaucoup d'autres tâches relatives à
+traitement, la validation, l'association et beaucoup d'autres tâches concernant 
 la manipulation des données.
 
 A première vue, l'objet Modèle peut être vu comme la première couche d'intéraction
 avec n'importe quelle base de données que vous pourriez utiliser pour votre 
-application. Mais plus globalement, ils font partis des concepts majeurs autour 
-desquels vous allez implémenter votre application.
+application. Mais plus globalement, ils font partie des concepts majeurs autour 
+desquels vous allez exécuter votre application.
 
 Dans le cas d'un réseau social, la couche Modèle s'occupe des tâches 
 comme de sauvegarder des données, de sauvegarder des associations d'amis,
@@ -77,10 +74,10 @@ correct traitant la requête.
 Une fois que la requête arrive au contrôleur, celui-ci va communiquer avec
 la couche Modèle pour traiter la récupération de données ou les opérations
 de sauvegarde qui seraient nécessaires. Après que cette communication est finie,
-le controlleur va donner à l'objet vue correct, la tâche de générer une sortie 
+le contrôleur va donner à l'objet vue correct, la tâche de générer une sortie 
 résultant des données fournies par le modèle.
 
-Finalement, quand cette sortie est générée, elle est immédiatemment rendu
+Finalement, quand cette sortie est générée, elle est immédiatement rendu
 à l'utilisateur.
 
 Presque chaque requête de votre application va suivre ce schéma classique.
@@ -93,7 +90,7 @@ Bénéfices
 Pourquoi utiliser MVC? Parce que c'est un logiciel vraiment construit selon le
 patron MVC, qui transforme une application en un dossier élaboré maintenable,
 modulable et rapide. Elaborer les tâches de l'application en séparant les 
-modèles, vues et controlleurs, allègent votre application. De nouvelles 
+modèles, vues et contrôleurs, allègent votre application. De nouvelles 
 fonctionnalités sont ajoutées facilement, et les améliorations sur les vieilles 
 fonctionnalités se font en un clin d'oeil. La conception modulable et séparée 
 permet aussi aux développeurs et designeurs de travailler simultanément, avec
@@ -108,7 +105,7 @@ première application construite avec CakePHP, vous ne voudrez plus faire d'une
 autre façon.
 
 Pour commencer votre première application CakePHP,
-:doc:`Essayez le tutorial du Blog maintenant </tutorials-and-examples/blog/blog>`
+:doc:`Essayez le tutoriel du Blog maintenant </tutorials-and-examples/blog/blog>`
 
 .. |Figure 1| image:: /_static/img/basic_mvc.png
 
