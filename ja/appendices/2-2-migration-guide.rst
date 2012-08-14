@@ -48,7 +48,7 @@ I18N extract shell
 ------------------
 
 
--  デフォルトで既存のPODファイルを上書きするオプションが追加されました::
+-  デフォルトで既存のPOTファイルを上書きするオプションが追加されました::
 
     ./Console/cake i18n extract --overwrite
 
