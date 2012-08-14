@@ -119,6 +119,26 @@ at prefix in the host and configure the port value accordingly.  Example::
     To use this feature, you will need to have the SSL configured in your PHP
     install.
 
+As of 2.3.0 you can also enable TLS SMTP using the ``tls`` option::
+
+    <?php
+    class EmailConfig {
+        public $gmail = array(
+            'host' => 'smtp.gmail.com',
+            'port' => 465,
+            'username' => 'my@gmail.com',
+            'password' => 'secret',
+            'transport' => 'Smtp',
+            'tls' => true
+        );
+    }
+
+The above configuration would enable TLS communication for email messages.
+
+.. versionadded: 2.3
+    Support for TLS delivery was added in 2.3
+
+
 .. _email-configurations:
 
 Configurations
