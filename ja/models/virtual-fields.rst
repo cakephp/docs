@@ -173,11 +173,18 @@ Model::find()とバーチャルフィールド
 バーチャルフィールドとモデルのエイリアス
 ========================================
 
-When you are using virtualFields and models with aliases that are
-not the same as their name, you can run into problems as
-virtualFields do not update to reflect the bound alias. If you are
-using virtualFields in models that have more than one alias it is
-best to define the virtualFields in your model's constructor::
+..
+   When you are using virtualFields and models with aliases that are
+   not the same as their name, you can run into problems as
+   virtualFields do not update to reflect the bound alias. If you are
+   using virtualFields in models that have more than one alias it is
+   best to define the virtualFields in your model's constructor::
+
+自身の名前と違うエイリアスを持つモデルと\
+バーチャルフィールドを同時に用いた場合、結びつけられたエイリアスが反映されないという\
+問題にぶつかることがあります。\
+別名を持つようなモデルでバーチャルフィールドを使用するには、\
+モデルのコンストラクタでバーチャルフィールドを定義するのがベストでしょう。 ::
 
     <?php
     public function __construct($id = false, $table = null, $ds = null) {
@@ -185,8 +192,11 @@ best to define the virtualFields in your model's constructor::
         $this->virtualFields['name'] = sprintf('CONCAT(%s.first_name, " ", %s.last_name)', $this->alias, $this->alias);
     }
 
-This will allow your virtualFields to work for any alias you give a
-model.
+..
+   This will allow your virtualFields to work for any alias you give a
+   model.
+
+これで、モデルにどんなエイリアスを与えても、バーチャルフィールドはうまく動くことでしょう。
 
 ..
    Virtual fields in SQL queries
