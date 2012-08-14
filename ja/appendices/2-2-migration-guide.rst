@@ -291,6 +291,8 @@ Redis エンジン
   バリデーションは後方互換が保たれます。バリデーションルールを、追加、変更、削除できるリッチなAPIを提供します。
   詳細は、 :doc:`/models/data-validation` ドキュメントを参照ください。
 
+- モデルのカスタムバリデーション関数は、 ``ModelValidator`` がアクセス可能なように "public" にしておく必要があります。
+
 - 追加された新しいバリデーションルール :
 
   * :php:meth:`Validation::naturalNumber()`
