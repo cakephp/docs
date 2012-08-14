@@ -8,7 +8,7 @@ imaginons que notre ami Ricardo vient de cliquer sur le lien "Achetez un
 Cake personnalisé maintenant !" sur la page d'accueil d'une application 
 CakePHP.
 
-.. figure:: /_static/img/typical-cake-request.gif
+.. figure:: /_static/img/typical-cake-request.png
    :align: center
    :alt: Diagramme représentant une requête CakePHP typique.
 
