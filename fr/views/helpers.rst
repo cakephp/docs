@@ -30,7 +30,7 @@ son nom au tableau ``$helpers`` du contrôleur::
         public $helpers = array('Form', 'Html', 'Js', 'Time');
     }
 
-L'ajout des helpers depuis les plugins utilise la :term:`plugin syntax`
+L'ajout des helpers depuis les plugins utilise la :term:`syntaxe de plugin`
 utilisée partout ailleurs dans CakePHP::
 
     <?php

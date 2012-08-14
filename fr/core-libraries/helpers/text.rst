@@ -19,7 +19,7 @@ truncating long stretches of text.
 .. php:method:: autoLinkEmails(string $text, array $options=array())
     
     :param string $text: The text to convert.
-    :param array $options: An array of :term:`html attributes` for the generated links.
+    :param array $options: An array of :term:`attributs html` for the generated links.
 
     Adds links to the well-formed email addresses in $text, according
     to any options defined in ``$htmlOptions`` (see
@@ -41,7 +41,7 @@ truncating long stretches of text.
 .. php:method:: autoLinkUrls(string $text, array $htmlOptions=array())
 
     :param string $text: The text to convert.
-    :param array $htmlOptions: An array :term:`html attributes` for the generated links
+    :param array $htmlOptions: An array :term:`attributs html` for the generated links
 
     Same as in ``autoLinkEmails()``, only this method searches for
     strings that start with https, http, ftp, or nntp and links them
@@ -54,7 +54,7 @@ truncating long stretches of text.
 .. php:method:: autoLink(string $text, array $htmlOptions=array())
 
     :param string $text: The text to autolink.
-    :param array $htmlOptions: An array :term:`html attributes` for the generated links
+    :param array $htmlOptions: An array :term:`attributs html` for the generated links
 
     Performs the functionality in both ``autoLinkUrls()`` and
     ``autoLinkEmails()`` on the supplied ``$text``. All URLs and emails

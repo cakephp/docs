@@ -52,6 +52,6 @@ Pour plus d'information vous devriez lire la documentation
 
 
 
-.. meta::     :title lang=en: EmailComponent     :keywords lang=en: component
-subject,component delivery,php class,template layout,custom headers,template
-method,filenames,alias,lib,array,email,migration,attachments,elements,sun
+.. meta::
+    :title lang=en: EmailComponent
+    :keywords lang=en: component subject,component delivery,php class,template layout,custom headers,template method,filenames,alias,lib,array,email,migration,attachments,elements,sun

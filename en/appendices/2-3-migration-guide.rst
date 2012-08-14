@@ -4,6 +4,12 @@
 CakePHP 2.3 is a fully API compatible upgrade from 2.2.  This page outlines
 the changes and improvements made in 2.3.
 
+Constants
+---------
+
+An application can now easily define :php:const:`CACHE` and :php:const:`LOGS`,
+as they are conditionally defined by CakePHP now.
+
 Caching
 =======
 
@@ -53,6 +59,14 @@ Exceptions
 Model
 =====
 
+Model
+-----
+
+- ``Model::find('list')`` now sets the ``recursive`` based on the max
+  containment depth or recursive value.  When list is used with
+  ContainableBehavior.
+
+
 Validation
 ----------
 
@@ -61,6 +75,11 @@ Validation
 
 Network
 =======
+
+SmtpTransport
+-------------
+
+- TLS/SSL support was added for SMTP connections.
 
 CakeResponse
 ------------
@@ -96,7 +115,8 @@ FormHelper
 ----------
 
 - :php:meth:`FormHelper::select()` now accepts a list of values in the disabled
-  attribute. The list should contain the values you want disabled.
+  attribute. Combined with ``'multiple' => 'checkbox'``, this allows you to
+  provide a list of values you want disabled.
 
 Testing
 =======

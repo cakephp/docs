@@ -368,7 +368,7 @@ Using layouts from plugins
 .. versionadded:: 2.1
 
 If you want to use a layout that exists in a plugin, you can use
-:term:`plugin syntax`.  For example to use the contact layout from the
+:term:`syntaxe de plugin`.  For example to use the contact layout from the
 Contacts plugin::
 
     <?php
@@ -535,7 +535,7 @@ To load an element from a plugin, use the `plugin` option (moved out of the `dat
 ---
 
 If you are using a plugin and wish to use elements from within the
-plugin, just use the familiar :term:`plugin syntax`. If the view is being
+plugin, just use the familiar :term:`syntaxe de plugin`. If the view is being
 rendered for a plugin controller/action, the plugin name will automatically
 be prefixed onto all elements used, unless another plugin name is present.
 If the element doesn't exist in the plugin, it will look in the main APP folder.::

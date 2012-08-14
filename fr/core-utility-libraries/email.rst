@@ -240,7 +240,7 @@ When setting helpers be sure to include 'Html' or it will be removed from the
 helpers loaded in your email template.
 
 If you want to send email using templates in a plugin you can use the familiar
-:term:`plugin syntax` to do so::
+:term:`syntaxe de plugin` to do so::
 
     <?php
     $email = new CakeEmail();

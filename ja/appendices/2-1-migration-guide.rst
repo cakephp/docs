@@ -324,7 +324,7 @@ Controller
         either.
 
 
-- :php:attr:`Controller::$uses` はデフォルトが false ではなく ``true` に変更となりました。
+- :php:attr:`Controller::$uses` はデフォルトが false ではなく ``true`` に変更となりました。
   その他、この変更については値により少しの違いがありますが、ほとんどの場合はこれまでと同じ動きをします。
 
     - ``true`` を指定した場合、デフォルトのモデルを読み込み、AppController へマージします。
