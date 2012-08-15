@@ -564,9 +564,9 @@ and creating boolean switches. Options are created with either
 
     <?php
     $parser->addOption('connection', array(
-        'short' => 'c'
+        'short' => 'c',
         'help' => 'connection',
-        'default' => 'default'
+        'default' => 'default',
     ));
 
 The above would allow you to use either ``cake myshell --connection=other``, 
