@@ -59,12 +59,17 @@ PostgreSQLだと、以下のようになります。 ::
 データベースにバーチャルフィールドと同じ名前のカラムを作成するのは賢明ではありません。\
 これはSQLエラーを引き起こす場合があります。
 
-It is not always useful to have **User.first\_name** fully
-qualified. If you do not follow the convention (i.e. you have
-multiple relations to other tables) this would result in an error.
-In this case it may be better to just use
-``first_name || \'\' || last_name`` without the Model
-Name.
+..
+   It is not always useful to have **User.first\_name** fully
+   qualified. If you do not follow the convention (i.e. you have
+   multiple relations to other tables) this would result in an error.
+   In this case it may be better to just use
+   ``first_name || \'\' || last_name`` without the Model
+   Name.
+
+**User.first\_name** のように完全に修飾することは、常に有用というわけではありません。\
+もし規約に従わない場合(すなわち、他のテーブルへの関連を複数持つ場合)、エラーになります。\
+この場合、 ``first_name || \'\' || last_name`` のように、モデル名なしで使用するほうがいいかもしれません。
 
 ..
    Using virtual fields
