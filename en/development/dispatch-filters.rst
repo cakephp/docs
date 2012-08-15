@@ -27,8 +27,8 @@ added::
 
     <?php
     Configure::write('Dispatcher.filters', array(
-	    'AssetDispatcher',
-	    'CacheDispatcher'
+        'AssetDispatcher',
+        'CacheDispatcher'
     ));
 
 Each of those array values are class names that will be instantiated and added
@@ -73,8 +73,8 @@ executed. Additionally to defining filters with the ``callable`` key, you also
 get the chance to define a priority for your filters, if none is specified then
 a default of ``10`` is selected for you
 
-As all filters will have default priotiry ``10``, should you want to run a filter before
-any other in te list, select lower priority numbers as needed::
+As all filters will have default priority ``10``, should you want to run a filter before
+any other in the list, select lower priority numbers as needed::
 
     <?php
     Configure::write('Dispatcher.filters', array(
@@ -99,7 +99,7 @@ plugins::
 
     <?php
     Configure::write('Dispatcher.filters', array(
-	    'MyPlugin.MyFilter',
+        'MyPlugin.MyFilter',
     ));
 
 Feel free to remove the default attached filters if you choose to use a more
@@ -199,7 +199,7 @@ few milliseconds for this mission-critical API endpoint::
         if ($event->data['request']->url !== 'posts/recent.json') {
             return;
         }
-        App::uses('ClassRegistry', Utility);
+        App::uses('ClassRegistry', 'Utility');
         $postModel = ClassRegistry::init('Post');
         $event->data['response']->body(json_encode($postModel->find('recent')));
         $event->stopPropagation();
