@@ -205,13 +205,20 @@ Model::find()とバーチャルフィールド
 SQLクエリ内でのバーチャルフィールドの利用
 =========================================
 
-Using functions in direct SQL queries will prevent data from being returned in the same array as your model's data. 
-For example this::
+..
+   Using functions in direct SQL queries will prevent data from being returned in the same array as your model's data. 
+   For example this::
+
+SQLクエリ中で直接使用される関数は、返されるデータがモデルのデータと同じ配列に格納されるのを防ぎます。\
+例えば以下のようなとき ::
 
     <?php
     $this->Timelog->query("SELECT project_id, SUM(id) as TotalHours FROM timelogs AS Timelog GROUP BY project_id;");
 
-would return something like this::
+..
+   would return something like this::
+
+戻り値はこのようになります。 ::
 	
    Array
    (
@@ -228,23 +235,35 @@ would return something like this::
            )
     )
 
-If we want to group TotalHours into our Timelog array we should specify a
-virtual field for our aggregate column.  We can add this new virtual field on
-the fly rather than permanently declaring it in the model. We will provide a
-default value of ``0`` in case another query attempts to use this virtual field.
-If that were to occur, ``0`` would be returned in the TotalHours column::
+..
+   If we want to group TotalHours into our Timelog array we should specify a
+   virtual field for our aggregate column.  We can add this new virtual field on
+   the fly rather than permanently declaring it in the model. We will provide a
+   default value of ``0`` in case another query attempts to use this virtual field.
+   If that were to occur, ``0`` would be returned in the TotalHours column::
+
+もし TotalHours を Timelog 配列にグループ化したい場合、集計カラムのためのバーチャルフィールドを指定する必要があります。\
+永続的にモデルに宣言しなくても、その場で新しいバーチャルフィールドを追加することができます。\
+別のクエリがバーチャルフィールドを使用しようとする場合、デフォルト値として ``0`` を与えます。\
+それが発生した場合、 ``0`` が TotalHours 列に入ります。 ::
 
     <?php
     $this->Timelog->virtualFields['TotalHours'] = 0;
 
-In addition to adding the virtual field we also need to alias our column using
-the form of ``MyModel__MyField`` like this::
+..
+   In addition to adding the virtual field we also need to alias our column using
+   the form of ``MyModel__MyField`` like this::
+
+また、バーチャルフィールドを追加することに加えて、カラムを ``MyModel__MyField`` の形式で別名にする必要があります。 ::
 
     <?php
     $this->Timelog->query("SELECT project_id, SUM(id) as Timelog__TotalHours FROM timelogs AS Timelog GROUP BY project_id;");
 
-Running the query again after specifying the virtual field should result in a
-cleaner grouping of values::
+..
+   Running the query again after specifying the virtual field should result in a
+   cleaner grouping of values::
+
+バーチャルフィールドを設定した後クエリを再度実行すると、きれいな値のグループになるはずです。 ::
 
     Array
     (
