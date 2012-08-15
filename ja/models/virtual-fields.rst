@@ -262,24 +262,34 @@ cleaner grouping of values::
    Limitations of virtualFields
    ============================
 
-バーチャルフィールドの制限事項
-==============================
+バーチャルフィールドの制限
+==========================
 
-The implementation of ``virtualFields`` has a few
-limitations. First you cannot use ``virtualFields`` on associated
-models for conditions, order, or fields arrays. Doing so will
-generally result in an SQL error as the fields are not replaced by
-the ORM. This is because it difficult to estimate the depth at
-which an associated model might be found.
+..
+   The implementation of ``virtualFields`` has a few
+   limitations. First you cannot use ``virtualFields`` on associated
+   models for conditions, order, or fields arrays. Doing so will
+   generally result in an SQL error as the fields are not replaced by
+   the ORM. This is because it difficult to estimate the depth at
+   which an associated model might be found.
 
-A common workaround for this implementation issue is to copy
-``virtualFields`` from one model to another at runtime when you
-need to access them::
+``virtualFields`` の実装はわずかな制限があります。\
+まず、関連モデルの「conditions」、「order」、「fields」に ``virtualFields`` を用いることが出来ません。\
+やってみると、ORMがフィールドを置き換えないため、まずSQLエラーが起きてしまいます。\
+これは関連モデルを見つけられるかもしれない深さを見積もるのが難しいということに起因します。
+
+..
+   A common workaround for this implementation issue is to copy
+   ``virtualFields`` from one model to another at runtime when you
+   need to access them::
+
+この実装の問題に対する一般的な回避策としては、
+利用する必要がある時に ``virtualFields`` をあるモデルから別のモデルにコピーすることです。 ::
 
     <?php
     $this->virtualFields['full_name'] = $this->Author->virtualFields['full_name'];
 
-or::
+もしくは以下のようにします。 ::
 
     <?php
     $this->virtualFields += $this->Author->virtualFields;
