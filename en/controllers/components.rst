@@ -69,7 +69,9 @@ configuration options to be set before the controller's
 configuration options be set in the ``$components`` array::
 
     <?php
-    public $components = array('DebugKit.Toolbar' => array('panels' => array('history', 'session')));
+    public $components = array(
+        'DebugKit.Toolbar' => array('panels' => array('history', 'session'))
+    );
 
 Consult the relevant documentation to determine what configuration
 options each component provides.
@@ -162,6 +164,7 @@ the file in ``/app/Controller/Component/MathComponent.php``. The basic
 structure for the component would look something like this::
 
     <?php
+    App::uses('Component', 'Controller');
     class MathComponent extends Component {
         public function doComplexOperation($amount1, $amount2) {
             return $amount1 + $amount2;
@@ -221,6 +224,7 @@ way you include them in controllers - using the ``$components`` var::
 
     <?php
     // app/Controller/Component/CustomComponent.php
+    App::uses('Component', 'Controller');
     class CustomComponent extends Component {
         // the other component your component uses
         public $components = array('Existing'); 
@@ -235,6 +239,7 @@ way you include them in controllers - using the ``$components`` var::
     }
 
     // app/Controller/Component/ExistingComponent.php
+    App::uses('Component', 'Controller');
     class ExistingComponent extends Component {
 
         public function initialize(Controller $controller) {
