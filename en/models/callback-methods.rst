@@ -27,7 +27,7 @@ user’s role, or make caching decisions based on the current load.
 afterFind
 =========
 
-``afterFind(array $results, boolean $primary)``
+``afterFind(array $results, boolean $primary = false)``
 
 Use this callback to modify results that have been returned from a
 find operation, or to perform any other post-find logic. The
@@ -71,7 +71,7 @@ Below is an example of how afterfind can be used for date
 formatting::
 
     <?php
-    public function afterFind($results) {
+    public function afterFind($results, $primary = false) {
         foreach ($results as $key => $val) {
             if (isset($val['Event']['begindate'])) {
                 $results[$key]['Event']['begindate'] = $this->dateFormatAfterFind($val['Event']['begindate']);
@@ -87,7 +87,7 @@ formatting::
 beforeValidate
 ==============
 
-``beforeValidate(array $options)``
+``beforeValidate(array $options = array())``
 
 Use this callback to modify model data before it is validated, or
 to modify validation rules if required. This function must also
@@ -96,7 +96,7 @@ return *true*, otherwise the current save() execution will abort.
 beforeSave
 ==========
 
-``beforeSave(array $options)``
+``beforeSave(array $options = array())``
 
 Place any pre-save logic in this function. This function executes
 immediately after model data has been successfully validated, but
@@ -148,7 +148,7 @@ The value of ``$created`` will be true if a new record was created
 beforeDelete
 ============
 
-``beforeDelete(boolean $cascade)``
+``beforeDelete(boolean $cascade = true)``
 
 Place any pre-deletion logic in this function. This function should
 return true if you want the deletion to continue, and false if you
