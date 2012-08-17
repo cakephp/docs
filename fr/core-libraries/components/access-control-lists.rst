@@ -377,9 +377,6 @@ nous avions façonnée pourrait ressembler dans une syntaxe INI :
 Maintenant que vous avez défini vos permissions, vous pouvez passer à la section
 sur la <vérification des permissions> utilisant le composant ACL.
 
-Maintenant que vos partitions sont définis, vous pouvez passer à la section
-:ref:`vérification des permissions <verification-permissions>` avec le composant ACL.
-
 
 Définir les permissions : ACL de Cake via une base de données
 =============================================================
@@ -390,7 +387,7 @@ voyons les ACL via une base de données (les plus communément utilisées).
 Pour commencer
 ---------------
 
-L'implémentation pas défaut des permissions ACL est propulsé par les 
+L'implémentation par défaut des permissions ACL est propulsé par les 
 bases de données. La base de données Cake pour les ACL est composé 
 d'un ensemble de modèles du cœur et d'une application en mode console 
 qui sont créés lors de votre installation de Cake. Les modèles sont utilisés 
