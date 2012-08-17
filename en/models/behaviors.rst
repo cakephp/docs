@@ -189,7 +189,7 @@ good practice to store the settings per alias/model name that is using the
 behavior.  When created behaviors will have their ``setup()`` method called::
 
     <?php
-    public function setup(Model $Model, $settings) {
+    public function setup(Model $Model, $settings = array()) {
         if (!isset($this->settings[$Model->alias])) {
             $this->settings[$Model->alias] = array(
                 'option1_key' => 'option1_default_value',
@@ -293,7 +293,7 @@ behavior class. Much like regular behavior methods, they receive a
 ``$Model`` parameter as the first argument. This parameter is the
 model that the behavior method was invoked on.
 
-.. php:method:: setup(Model $Model, array $settings)
+.. php:method:: setup(Model $Model, array $settings = array())
 
     Called when a behavior is attached to a model.  The settings come from the
     attached model's ``$actsAs`` property.
