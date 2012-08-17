@@ -209,6 +209,8 @@ use the ``String`` class::
             'ellipsis' => '...',
             'exact' => true
         )
+        
+    .. versionadded:: 2.3
 
     Example::
 
