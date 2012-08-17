@@ -149,7 +149,7 @@ use the ``String`` class::
     :param array $options: An array of options to use.
 
     Cuts a string to the ``$length`` and adds a suffix with
-    ``'ending'`` if the text is longer than ``$length``. If ``'exact'``
+    ``'ellipsis'`` if the text is longer than ``$length``. If ``'exact'``
     is passed as ``false``, the truncation will occur after the next
     word ending. If ``'html'`` is passed as ``true``, html tags will be
     respected and will not be cut off.
@@ -158,7 +158,7 @@ use the ``String`` class::
     following possible keys by default, all of which are optional::
 
         array(
-            'ending' => '...',
+            'ellipsis' => '...',
             'exact' => true,
             'html' => false
         )
@@ -171,7 +171,7 @@ use the ``String`` class::
             'The killer crept forward and tripped on the rug.',
             22,
             array(
-                'ending' => '...',
+                'ellipsis' => '...',
                 'exact' => false
             )
         );
@@ -182,7 +182,7 @@ use the ``String`` class::
             'The killer crept forward and tripped on the rug.',
             22,
             array(
-                'ending' => '...',
+                'ellipsis' => '...',
                 'exact' => false
             )
         );
@@ -191,16 +191,63 @@ use the ``String`` class::
 
         The killer crept...
 
-.. php:method:: excerpt(string $haystack, string $needle, integer $radius=100, string $ending="...")
+.. php:method:: tail(string $text, int $length=100, array $options)
+
+    :param string $text: The text to truncate.
+    :param int $length:  The length to trim to.
+    :param array $options: An array of options to use.
+
+    Cuts a string to the ``$length`` and adds a prefix with
+    ``'ellipsis'`` if the text is longer than ``$length``. If ``'exact'``
+    is passed as ``false``, the truncation will occur before the next
+    word ending.
+
+    ``$options`` is used to pass all extra parameters, and has the
+    following possible keys by default, all of which are optional::
+
+        array(
+            'ellipsis' => '...',
+            'exact' => true
+        )
+
+    Example::
+
+        <?php
+        // called as TextHelper
+        echo $this->Text->tail(
+            'I packed my bag and in it I put a PSP, a PS3, a TV, a C# program that can divide by zero, death metal t-shirts',
+            70,
+            array(
+                'ellipsis' => '...',
+                'exact' => false
+            )
+        );
+
+        // called as String
+        App::uses('String', 'Utility');
+        echo String::tail(
+            'I packed my bag and in it I put a PSP, a PS3, a TV, a C# program that can divide by zero, death metal t-shirts',
+            70,
+            array(
+                'ellipsis' => '...',
+                'exact' => false
+            )
+        );
+
+    Output::
+
+        ...a TV, a C# program that can divide by zero, death metal t-shirts
+        
+.. php:method:: excerpt(string $haystack, string $needle, integer $radius=100, string $ellipsis="...")
 
     :param string $haystack: The string to search.
     :param string $needle: The string to excerpt around.
     :param int $radius:  The number of characters on either side of $needle you want to include.
-    :param string $ending: Text to append/prepend to the beginning or end of the result.
+    :param string $ellipsis: Text to append/prepend to the beginning or end of the result.
 
     Extracts an excerpt from ``$haystack`` surrounding the ``$needle``
     with a number of characters on each side determined by ``$radius``,
-    and prefix/suffix with ``$ending``. This method is especially handy for
+    and prefix/suffix with ``$ellipsis``. This method is especially handy for
     search results. The query string or keywords can be shown within
     the resulting document.::
 
@@ -214,7 +261,7 @@ use the ``String`` class::
 
     Output::
 
-        ... by $radius, and prefix/suffix with $ending. This method is
+        ... by $radius, and prefix/suffix with $ellipsis. This method is
         especially handy for search results. The query...
 
 .. php:method:: toList(array $list, $and='and')
