@@ -20,7 +20,7 @@ Cakeインストールの環境設定をするには、以下のファイルを�
 
 
 -  /app/webroot/index.php
--  /app/webroot/test.php ( `テスト <view/1196/Testing>`_ 機能を使う場合。)
+-  /app/webroot/test.php ( :doc:`Testing </development/testing>` 機能を使う場合。)
 
 編集しなくてはいけない三つの定数は、 ``ROOT`` 、 ``APP_DIR`` 、 ``CAKE_CORE_INCLUDE_PATH`` です。
 
@@ -61,9 +61,6 @@ Apacheとmod\_rewrite(と.htaccess)
 =================================
 
 CakePHPは、展開した状態ではmod\_rewriteを使用するようになっており、自分のシステムでうまく動作するまで苦労するユーザもいます。
-While CakePHP is built to work with mod\_rewrite out of the box–and
-usually does–we've noticed that a few users struggle with getting
-everything to play nicely on their systems.
 
 ここでは、正しく動作させるために行うことをいくつか示します。
 まず始めにhttpd.confを見てください（ユーザーやサイト独自のhttpd.confではなく、必ずシステムのhttpd.confを編集してください）。
@@ -129,7 +126,7 @@ everything to play nicely on their systems.
            RewriteRule ^(.*)$ index.php [QSA,L]
        </IfModule>
 
-   まだあなたのcakephpサイトでmod\_rewriteの問題が起きているなら、仮想ホスト(*virtualhosts*)の設定の変更を試してみるといいかもしれません。
+   まだあなたのCakePHPサイトでmod\_rewriteの問題が起きているなら、仮想ホスト(*virtualhosts*)の設定の変更を試してみるといいかもしれません。
    ubuntu上なら、/etc/apache2/sites-available/default(場所はディストリビューションによる)のファイルを編集してください。
    このファイルの中で、 ``AllowOverride None`` が ``AllowOverride All`` に変更されているかを確かめてください。
    つまり以下のようになるでしょう::
@@ -164,94 +161,11 @@ everything to play nicely on their systems.
    この変更の詳細は設定に依り、Cakeとは関係ない事柄も含むことがあります。
    詳しくはApacheのオンラインドキュメントを参照するようにしてください。
 
-
-きれいなURLとLighttps
-=====================
-
-Lighttpdは書き換えモジュールを搭載していますが、それはApacheのmod\_rewriteと同じではありません。
-Lightyを使っている中で「きれいなURL」を得るには、二つの方法があります。
-一つ目はmod\_rewriteを使うことで、二つ目はLUAスクリプトとmod\_magnetを使うことです。
-
-**mod\_rewriteの使用**
-きれいなURLを得る最も簡単な方法は以下のスクリプトをlightyの設定に追加することです。
-URLを書き換えるだけで、うまくいくはずです。
-これはCakeがサブディレクトリにインストールされている場合は動作しないことに注意してください。
-
-::
-
-    $HTTP["host"] =~ "^(www\.)?example.com$" {
-            url.rewrite-once = (
-                    # リクエストがcssやfilesなどであったら、Cakeに渡さない
-                    "^/(css|files|img|js)/(.*)" => "/$1/$2",
-                    "^([^\?]*)(\?(.+))?$" => "/index.php/$1&$3",
-            )
-            evhost.path-pattern = "/home/%2-%1/www/www/%4/app/webroot/"
-    }
-
-**mod\_magnetの使用**
-CakePHPとLighttpdを用いてきれいなURLを使うには、以下のLUAスクリプトを/etc/lighttpd/cakeに置いてください。
-
-::
-
-    -- 簡単なヘルパーファンクション
-    function file_exists(path)
-      local attr = lighty.stat(path)
-      if (attr) then
-          return true
-      else
-          return false
-      end
-    end
-    function removePrefix(str, prefix)
-      return str:sub(1,#prefix+1) == prefix.."/" and str:sub(#prefix+2)
-    end
-    
-    -- 末尾のスラッシュを除いた接頭辞
-    local prefix = ''
-    
-    -- 魔法 ;)
-    if (not file_exists(lighty.env["physical.path"])) then
-        -- file still missing. pass it to the fastcgi backend
-        request_uri = removePrefix(lighty.env["uri.path"], prefix)
-        if request_uri then
-          lighty.env["uri.path"]          = prefix .. "/index.php"
-          local uriquery = lighty.env["uri.query"] or ""
-          lighty.env["uri.query"] = uriquery .. (uriquery ~= "" and "&" or "") .. "url=" .. request_uri
-          lighty.env["physical.rel-path"] = lighty.env["uri.path"]
-          lighty.env["request.orig-uri"]  = lighty.env["request.uri"]
-          lighty.env["physical.path"]     = lighty.env["physical.doc-root"] .. lighty.env["physical.rel-path"]
-        end
-    end
-    -- フォールスローは lighttpd のリクエストループに戻されます。
-    -- これは、 HTTP コードの 304 を好きなように扱えることを意味します ;)
-
-.. note::
-
-    サブディレクトリからCakePHPのインストールを実行する場合、prefix = 'サブディレクトリ名'を上記のスクリプトでセットする必要があります。
-
-次に、Lighttpd にバーチャルホストの設定を行います::
-
-    $HTTP["host"] =~ "example.com" {
-            server.error-handler-404  = "/index.php"
-
-            magnet.attract-physical-path-to = ( "/etc/lighttpd/cake.lua" )
-
-            server.document-root = "/var/www/cake-1.2/app/webroot/"
-
-            # vim の一時ファイルを除けることと同じような処理
-            url.access-deny = (
-                    "~", ".inc", ".sh", "sql", ".sql", ".tpl.php",
-                    ".xtmpl", "Entries", "Repository", "Root",
-                    ".ctp", "empty"
-            )
-    }
-
-
 nginxでのきれいなURL
 ====================
 
-nginxはポピュラーなサーバーで、Lighttpdのように少ないシステムリソースで使うことができます。
-短所として、ApacheやLighttpdのように.htaccessファイルを使うことが出来ない点があります。
+nginxはポピュラーなサーバーで、少ないシステムリソースで使うことができます。
+短所として、Apacheのように.htaccessファイルを使うことが出来ない点があります。
 つまり、site-available設定でそのようなURLの書き換えを作る必要があります。
 セットアップによりますが、以下を書き換える必要があるでしょう。
 少なくとも、PHPがFastCGIのインスタンスとして走るようにする必要があります。
@@ -267,17 +181,19 @@ nginxはポピュラーなサーバーで、Lighttpdのように少ないシス�
     server {
         listen   80;
         server_name example.com;
+    
+        # root directive should be global
+        root   /var/www/example.com/public/app/webroot/;
 
         access_log /var/www/example.com/log/access.log;
         error_log /var/www/example.com/log/error.log;
 
         location / {
-            root   /var/www/example.com/public/app/webroot/;
             index  index.php index.html index.htm;
             try_files $uri $uri/ /index.php?$uri&$args;
         }
 
-        location ~ .*\.php$ {
+        location ~ \.php$ {
             include /etc/nginx/fcgi.conf;
             fastcgi_pass    127.0.0.1:10005;
             fastcgi_index   index.php;
