@@ -35,7 +35,7 @@ les colonnes sur la base de données, ce qui peut provoquer des erreurs SQL.
 Il n'est pas toujours utile d'avoir **Utilisateur.prenom** complètement 
 qualifié. Si vous ne suivez pas la convention (ex: vous avez des relations 
 multiples avec d'autres tables) cela entrainerait une erreur. Dans ce cas, 
-il est parfois préferable de juste utiliser ``prenom || \'\' || nom`` sans 
+il est parfois préferable de juste utiliser ``prenom || \' \' || nom`` sans 
 le nom du Modèle.
 
 Utiliser les champs virtuels

@@ -64,12 +64,12 @@ PostgreSQLだと、以下のようになります。 ::
    qualified. If you do not follow the convention (i.e. you have
    multiple relations to other tables) this would result in an error.
    In this case it may be better to just use
-   ``first_name || \'\' || last_name`` without the Model
+   ``first_name || \' \' || last_name`` without the Model
    Name.
 
 **User.first\_name** のように完全に修飾することは、常に有用というわけではありません。\
 もし規約に従わない場合(すなわち、他のテーブルへの関連を複数持つ場合)、エラーになります。\
-この場合、 ``first_name || \'\' || last_name`` のように、モデル名なしで使用するほうがいいかもしれません。
+この場合、 ``first_name || \' \' || last_name`` のように、モデル名なしで使用するほうがいいかもしれません。
 
 ..
    Using virtual fields
