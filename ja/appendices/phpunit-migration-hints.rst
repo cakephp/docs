@@ -69,7 +69,7 @@ WEBテストランナーは基本的な正規表現を指定することが出�
     例 filter=myMethod
 
 ``myMethod`` 文字列を含むテストのみが次のリフレッシュ時実行されます。
-また、cakeのテストスイートシェルは、メソッドをフィルタするのに -filter オプションをサポートします。
+また、cakeのテストシェルは、メソッドをフィルタするのに -filter オプションをサポートします。
 
 アサート(*Assertion*)メソッド
 -----------------------------
@@ -174,11 +174,11 @@ PHPUnitが個々のテストケースとテストスイートをテストラン�
         public static function suite() {
             $suite = new PHPUnit_Framework_TestSuite('Js Helper and all Engine Helpers');
             
-            $helperTestPath = CORE_TEST_CASES . DS . 'libs' . DS . 'view' . DS . 'helpers' . DS;
-            $suite->addTestFile($helperTestPath . 'js.test.php');
-            $suite->addTestFile($helperTestPath . 'jquery_engine.test.php');
-            $suite->addTestFile($helperTestPath . 'mootools_engine.test.php');
-            $suite->addTestFile($helperTestPath . 'prototype_engine.test.php');
+            $helperTestPath = CORE_TEST_CASES . DS . 'View' . DS . 'Helper' . DS;
+            $suite->addTestFile($helperTestPath . 'JsHelperTest.php');
+            $suite->addTestFile($helperTestPath . 'JqueryEngineHelperTest.php');
+            $suite->addTestFile($helperTestPath . 'MootoolsEngineHelperTest.php');
+            $suite->addTestFile($helperTestPath . 'PrototypeEngineHelperTest.php');
             return $suite;
         }
     }
