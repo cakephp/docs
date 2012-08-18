@@ -23,7 +23,7 @@ CakePHPの使用で益を受ける幾つかの点をざっと挙げると次の�
 
 -  アクティブ、フレンドリーな `コミュニティ <http://cakephp.org/feeds>`_
 -  フレキシブルな `ライセンス <http://ja.wikipedia.org/wiki/MIT_License>`_
--  PHP5.2.6以上との互換性をもつ
+-  PHP5.2.8以上との互換性をもつ
 -  データベースとのやり取りのための、
    `CRUD <http://ja.wikipedia.org/wiki/CRUD>`_
    が統合済み
