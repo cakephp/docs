@@ -80,21 +80,17 @@ CakePHPのインストールは、Webサーバのドキュメントルートに�
 Cake のアーカイブを ``/var/www/html`` に展開してください。
 ドキュメントルートに、ダウンロードしたリリースの名前がついたフォルダ(例えば cake\_2.0.0)が取得できます。
 このフォルダを cake\_2\_0 という名前にリネームしてください。
-ファイルシステム上の開発用の設定は次のようになります:
+ファイルシステム上の開発用の設定は次のようになります::
 
-
--  /var/www/html
-
-  -  /cake\_2\_0
-
-     -  /app
-     -  /lib
-     -  /vendors
-     -  /plugins
-     -  /.htaccess
-     -  /index.php
-     -  /README
-
+    /var/www/html/
+        cake_2_0/
+            app/
+            lib/
+            plugins/
+            vendors/
+            .htaccess
+            index.php
+            README
 
 もしウェブサーバが適切に設定されていれば、 http://www.example.com/cake\_2\_0/ で Cake アプリケーションがアクセス可能になっているはずです。
 
@@ -108,21 +104,17 @@ Cake のアーカイブを ``/var/www/html`` に展開してください。
 
 Cake のアーカイブを好きなディレクトリに展開してください。
 この例において、Cake をインストールすると決めたディレクトリは /cake\_install であると仮定します。
-ファイルシステム上の運用向けの設定は次のようになります:
+ファイルシステム上の運用向けの設定は次のようになります::
 
-
--  /cake\_install/
-   
-   -  /app
-      
-      -  /webroot (このディレクトリを ``DocumentRoot`` ディレクティブとしてセットします)
-
-   -  /lib
-   -  /vendors
-   -  /.htaccess
-   -  /index.php
-   -  /README
-
+    /cake_install/
+        app/
+            webroot/ (このディレクトリを ``DocumentRoot`` ディレクティブとしてセットします)
+        lib/
+        plugins/
+        vendors/
+        .htaccess
+        index.php
+        README
 
 Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディレクティブを次のように設定してください::
 
