@@ -432,7 +432,9 @@ CakeResponseをどのように使えばよいかを示しています。
         $this->response->cache('-1 minute', '+5 days');
     }
 
-上記の例では、訪問者の体感スピード向上のため、クライアントにレスポンス結果を5日間キャッシュするように伝えています。
+上記の例では、訪問者の体感スピード向上のため、クライアントにレスポンス結果を5日間キャッシュするように伝えています。 ``cache()`` sets the
+Last-Modified value to the first argument. Expires, and Max-age are set based on
+the second parameter. Cache-Control is set to public as well.
 
 .. _cake-response-caching:
 
