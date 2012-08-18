@@ -429,7 +429,7 @@ CakeResponseをどのように使えばよいかを示しています。
     <?php
     public function index() {
         //do something
-        $this->response->cache(time(), '+5 days');
+        $this->response->cache('-1 minute', '+5 days');
     }
 
 上記の例では、訪問者の体感スピード向上のため、クライアントにレスポンス結果を5日間キャッシュするように伝えています。
