@@ -14,6 +14,7 @@ Components
 
 ::
 
+    <?php
     $this->Security->requirePost(array('edit', 'update'));
 
 **コンポーネントの設定**
@@ -23,6 +24,7 @@ Components
 
 ::
 
+    <?php
     var $components = array(
         'Cookie' => array(
             'name' => 'MyCookie'
@@ -70,6 +72,7 @@ PaginationヘルパはスタイリングのためにCSSのクラスの追加を�
 
 ::
 
+    <?php
     $path = 'css/cake.generic.css'
     $stamped = $this->Html->assetTimestamp($path);
     
@@ -89,6 +92,7 @@ highlight() はハイライトするための単語の配列を受け入れる�
 
 ::
 
+    <?php
     $this->Number->addFormat('NOK', array('before' => 'Kr. '));
     $formatted = $this->Number->currency(1000, 'NOK');
 
@@ -115,6 +119,7 @@ Cache アダプタは cache ディレクトリに置く必要があります。
 
 ::
 
+    <?php
     Cache::config('custom', array(
         'engine' => 'CachePack.MyCustomCache',
         ...
@@ -154,6 +159,7 @@ core.phpでこれらを設定しようとすると、正しく動作しないで
 
 ::
 
+    <?php
     var $lastFm = array(
         'datasource' => 'WebservicePack.LastFm'
         ...
@@ -216,6 +222,7 @@ MySQLは一番多くのテーブルパラメータをサポートしています
 
 ::
 
+    <?php
     var $comments => array(
         'id' => array('type' => 'integer', 'null' => false, 'default' => 0, 'key' => 'primary'),
         'post_id' => array('type' => 'integer', 'null' => false, 'default' => 0),
@@ -286,6 +293,7 @@ core.phpに ``Configure::write('Routing.prefixes', array('admin', 'member'));`` 
 
 ::
 
+    <?php
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => true));
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => true));
 
@@ -293,6 +301,7 @@ core.phpに ``Configure::write('Routing.prefixes', array('admin', 'member'));`` 
 
 ::
 
+    <?php
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => false));
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => false));
 
@@ -328,6 +337,7 @@ Setには新しく ``Set::apply()`` メソッドがあります。
 
 ::
 
+    <?php
     Set::apply('/Movie/rating', $data, 'array_sum');
 
 これは ``$data`` 内の映画の評価合計を返します。
@@ -360,12 +370,14 @@ Libsディレクトリは、サードパーティ、外部ベンダからのラ�
 
 ::
 
+    <?php
     App::import('Lib', 'ImageManipulation'); // app/libs/image_manipulation.php をインポートする
 
 プラグインからもlibsのファイルをインポートできます
 
 ::
 
+    <?php
     App::import('Lib', 'Geocoding.Geocode'); // app/plugins/geocoding/libs/geocode.php をインポートする
 
 その他のlibをインポートする文法は、ベンダーファイルと同様です。
@@ -390,6 +402,7 @@ LC\_TIMEに該当する部分をapp/locale/fr\_fr/LC\_TIME（ファイル）に�
 
 ::
 
+    <?php
     Configure::write('Config.language','fr-fr'); // 現在の言語をセットする
     $monthNames = __c('mon',LC_TIME,true); // フランス語の月の名前の配列を返す
     $dateFormat = __c('d_fmt',LC_TIME,true); // フランスで好まれる日にちのフォーマットを返す
@@ -415,6 +428,7 @@ error404に独自のエラーメソッドを変換したいなら、手動です
 
 ::
 
+    <?php
     Configure::write('Routing.prefixes', array('admin', 'member'));
     
     class PostsController extends AppController {
@@ -432,6 +446,7 @@ error404に独自のエラーメソッドを変換したいなら、手動です
 
 ::
 
+    <?php
     class NlValidation {
         function phone($check) {
             ...
@@ -446,6 +461,7 @@ error404に独自のエラーメソッドを変換したいなら、手動です
 
 ::
 
+    <?php
     var $validate = array(
         'phone_no' => array('rule' => array('phone', null, 'nl')),
         'postal_code' => array('rule' => array('postal', null, 'nl'))
@@ -463,6 +479,7 @@ IPアドレスのバリデーションは特定のIPバージョンの厳格な�
 
 ::
 
+    <?php
     Validation::ip($someAddress);         // IPv4 と IPv6 両方を検証
     Validation::ip($someAddress, 'IPv4'); // IPv4 だけを検証
     Validation::ip($someAddress, 'IPv6'); // IPv6 だけを検証

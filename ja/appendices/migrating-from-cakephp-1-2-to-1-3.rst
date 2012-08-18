@@ -38,6 +38,7 @@ app/config/bootstrap.php に、 ``$pluginPaths`` や ``$controllerPaths`` のよ
 
 ::
 
+    <?php
     App::build(array(
         'plugins' => array('/full/path/to/plugins/', '/next/full/path/to/plugins/'),
         'models' =>  array('/full/path/to/models/', '/next/full/path/to/models/'),
@@ -65,6 +66,7 @@ app/config/bootstrap.php に、 ``$pluginPaths`` や ``$controllerPaths`` のよ
 
 ::
 
+    <?php
     Inflector::rules('singular', array(
         'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),
         'uninflected' => array('singulars'),
@@ -191,6 +193,7 @@ Sessionヘルパーと Sessionコンポーネントは他のコンポーネン�
 
 ::
 
+    <?php
     var $components = array('Session', 'Auth', ...);
     var $helpers = array('Session', 'Html', 'Form' ...);
 
@@ -243,6 +246,7 @@ Sessionヘルパーと Sessionコンポーネントは他のコンポーネン�
 
 ::
 
+    <?php
     // このような書き方から:
     Configure::write('Routing.admin', 'admin');
    
@@ -255,6 +259,7 @@ prefixルートの更なる情報に関しては、新機能ガイドを見て�
 
 ::
 
+    <?php
     Router::connect('/:$%@#param/:action/*', array(...)); // ダメ
     Router::connect('/:can/:anybody/:see/:m-3/*', array(...)); // 許容可能
 
@@ -264,6 +269,7 @@ prefixルートの更なる情報に関しては、新機能ガイドを見て�
 
 ::
 
+    <?php
     Router::connect('/([0-9]+)-p-(.*)/', array('controller' => 'products', 'action' => 'show'));
 
 これらのルートは複雑なルートを悪化させ、リバースルーティングを不可能にします。
@@ -272,6 +278,7 @@ prefixルートの更なる情報に関しては、新機能ガイドを見て�
 
 ::
 
+    <?php
     Router::connect(
         '/pages/*/:event',
         array('controller' => 'pages', 'action' => 'display'),
@@ -286,6 +293,7 @@ prefixルートの更なる情報に関しては、新機能ガイドを見て�
 
 ::
 
+    <?php
     // 古いフォーマット:
     $url = array('controller' => 'posts', 'action' => 'view', 'id' => $id);
     // ユースケース:
@@ -399,7 +407,8 @@ Cacheはエンジン毎のシングルトンの使用をやめ、代わりに ``
 
 ::
 
-    <?php echo $this->element('sql_dump'); ?>
+    <?php
+    echo $this->element('sql_dump'); ?>
 
 このエレメントはレイアウトやビューのどこにでも置けます。
 ``sql_dump`` エレメントは ``Configure::read('debug')`` が2のときのみSQLログを生成します。
