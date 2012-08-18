@@ -94,6 +94,37 @@ Cake のアーカイブを ``/var/www/html`` に展開してください。
 
 もしウェブサーバが適切に設定されていれば、 http://www.example.com/cake\_2\_0/ で Cake アプリケーションがアクセス可能になっているはずです。
 
+Using one CakePHP checkout for multiple applications
+----------------------------------------------------
+
+If you are developing a number of applications, it often makes sense
+to have them share the same CakePHP core checkout. There are a few ways in which you can
+accomplish this.  Often the easiest is to use PHP's ``include_path``. To start
+off, clone CakePHP into a directory.  For this example, we'll use
+``~/projects``::
+
+    git clone git://github.com/cakephp/cakephp.git ~/projects/cakephp
+
+This will clone CakePHP into your ``~/projects`` directory.  If you don't want
+to use git, you can download a zipball and the remaining steps will be the
+same.  Next you'll have to locate and modify your ``php.ini``.  On \*nix systems
+this is often in ``/etc/php.ini``, but using ``php -i`` and looking for 'Loaded
+Configuration File'.  Once you've found the correct ini file, modify the
+``include_path`` configuration to include ``~/projects/cakephp/lib``.  An
+example would look like::
+
+    include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
+
+After restarting your webserver, you should see the changes reflected in
+``phpinfo()``.
+
+.. note::
+
+    If you are on windows, separate include paths with ; instead of :
+
+Having finished setting up your ``include_path`` your applications should be able to
+find CakePHP automatically.
+
 運用(*Production*)
 ==================
 
