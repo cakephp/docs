@@ -12,13 +12,11 @@ CakePHPのモデルクラスのファイルは、 ``/app/Model`` の中にあり
 
     <?php
     class Post extends AppModel {
-        public $name = 'Post';
     }
 
 命名規約は、CakePHPでは非常にに大切です。
 モデルをPostという名前にすることで、CakePHPは自動的に、このモデルはPostsControllerで使用されるのだろう、と考えます。
 また、 ``posts`` という名前のデータベーステーブルと結びつけられます。
-
 
 .. note::
 
@@ -39,7 +37,6 @@ Postsコントローラの作成
 
     <?php
     class PostsController extends AppController {
-        public $name = 'Posts';
         public $helpers = array('Html', 'Form');
     }
 
@@ -54,7 +51,6 @@ www.example.com/posts/index(www.example.com/posts/と同じです)
 
     <?php
     class PostsController extends AppController {
-        public $name = 'Posts';
         public $helpers = array('Html', 'Form');
 
         public function index() {
@@ -186,7 +182,6 @@ http://www.example.com/posts/index
 
     <?php
     class PostsController extends AppController {
-        public $name = 'Posts';
         public $helpers = array('Html', 'Form');
 
         public function index() {
@@ -216,11 +211,11 @@ http://www.example.com/posts/index
 
     <!-- File: /app/View/Posts/view.ctp -->
     
-    <h1><?php echo $post['Post']['title']?></h1>
+    <h1><?php echo h($post['Post']['title']); ?></h1>
     
-    <p><small>Created: <?php echo $post['Post']['created']?></small></p>
+    <p><small>Created: <?php echo $post['Post']['created']; ?></small></p>
     
-    <p><?php echo $post['Post']['body']?></p>
+    <p><?php echo h($post['Post']['body']); ?></p>
 
 ``/posts/index`` の中にあるリンクをクリックしたり、手動で、 ``/posts/view/1`` にアクセスしたりして、動作することを確認してください。
 
@@ -236,8 +231,7 @@ http://www.example.com/posts/index
 
     <?php
     class PostsController extends AppController {
-        public $name = 'Posts';
-        public $helpers = array('Html', 'Form');
+        public $helpers = array('Html', 'Form', 'Session');
         public $components = array('Session');
 
         public function index() {
@@ -336,9 +330,7 @@ addのビューは次のようなものになります::
 Postモデルを見直して、幾つか修正してみましょう::
 
     <?php
-    class Post extends AppModel {
-        public $name = 'Post';
-    
+    class Post extends AppModel {    
         public $validate = array(
             'title' => array(
                 'rule' => 'notEmpty'
@@ -368,7 +360,7 @@ CakePHPのバリデーションエンジンは強力で、組み込みのルー�
 PostsControllerの ``edit()`` アクションはこんな形になります::
 
     <?php
-    function edit($id = null) {
+    public function edit($id = null) {
         $this->Post->id = $id;
         if ($this->request->is('get')) {
             $this->request->data = $this->Post->read();
@@ -425,10 +417,10 @@ editビューは以下のようになります::
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
+                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id'])); ?>
             </td>
             <td>
-                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id']));?>
+                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?>
             </td>
             <td>
                 <?php echo $post['Post']['created']; ?>
@@ -445,7 +437,7 @@ editビューは以下のようになります::
 PostsControllerの ``delete()`` アクションを作るところから始めます::
 
     <?php
-    function delete($id) {
+    public function delete($id) {
         if ($this->request->is('get')) {
             throw new MethodNotAllowedException();
         }
@@ -473,7 +465,7 @@ PostsControllerの ``delete()`` アクションを作るところから始めま
         <tr>
             <th>Id</th>
             <th>Title</th>
-                    <th>Actions</th>
+            <th>Actions</th>
             <th>Created</th>
         </tr>
     
@@ -491,7 +483,7 @@ PostsControllerの ``delete()`` アクションを作るところから始めま
                     array('action' => 'delete', $post['Post']['id']),
                     array('confirm' => 'Are you sure?')); 
                 ?>
-                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id']));?>
+                <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?>
             </td>
             <td>
                 <?php echo $post['Post']['created']; ?>
