@@ -275,7 +275,7 @@ CakeRequest API
 
     Returns the current visitor's IP address.
 
-.. php:method header()
+.. php:method:: header()
 
     Allows you to access any of the ``HTTP_*`` headers that were used 
     for the request::

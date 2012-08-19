@@ -239,7 +239,7 @@ CakeRequest API
 
     現在アクセスしているクライアントのIPアドレスを返します。
 
-.. php:method header()
+.. php:method:: header()
 
     リクエストで使われている``HTTP_*``ヘッダにアクセスできます。::
 
