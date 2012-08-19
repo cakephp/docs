@@ -281,7 +281,7 @@ API do CakeRequest
 
     Retorna o endereço IP do visitante corrente.
 
-.. php:method header()
+.. php:method:: header()
 
     Permite você acessar qualquer cabeçalho ``HTTP_*`` que tenha sido usado na
     requisição::

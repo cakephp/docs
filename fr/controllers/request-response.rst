@@ -280,7 +280,7 @@ API CakeRequest
 
     Retourne l'adresse IP du visiteur courant.
 
-.. php:method header()
+.. php:method:: header()
 
     Vous permet d'accéder à tout en-tête ``HTTP_*`` utilisé pour la requête::
 
