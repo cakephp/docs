@@ -429,10 +429,12 @@ CakeResponseをどのように使えばよいかを示しています。
     <?php
     public function index() {
         //do something
-        $this->response->cache(time(), '+5 days');
+        $this->response->cache('-1 minute', '+5 days');
     }
 
-上記の例では、訪問者の体感スピード向上のため、クライアントにレスポンス結果を5日間キャッシュするように伝えています。
+上記の例では、訪問者の体感スピード向上のため、クライアントにレスポンス結果を5日間キャッシュするように伝えています。 ``cache()`` は\
+第一引数をLast-Modifiedヘッダの値に設定します。ExpiresヘッダとMax-ageヘッダは\
+第二引数の値をもとに設定されます。Cache-Controlヘッダにはpublicが設定されます。
 
 .. _cake-response-caching:
 
