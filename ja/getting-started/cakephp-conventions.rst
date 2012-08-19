@@ -25,11 +25,11 @@ CakePHPでの開発にはこれらの規約の利用をお勧めしますが、�
     <?php
     class NewsController extends AppController {
     
-        function latest() {
+        public function latest() {
             $this->_findNewArticles();
         }
         
-        function _findNewArticles() {
+        protected function _findNewArticles() {
             //最新のニュース記事を取得するロジック
         }
     }
