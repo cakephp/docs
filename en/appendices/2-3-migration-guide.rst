@@ -66,7 +66,6 @@ Model
   containment depth or recursive value.  When list is used with
   ContainableBehavior.
 
-
 Validation
 ----------
 
@@ -118,15 +117,28 @@ FormHelper
   attribute. Combined with ``'multiple' => 'checkbox'``, this allows you to
   provide a list of values you want disabled.
 
+TextHelper
+----------
+
+- :php:meth:`TextHelper::tail()` was added to truncate text starting from the end.
+
+- `beginning` in :php:meth:`TextHelper::truncate()` is deprecated in favor of `ellipsis`
+
 Testing
 =======
 
 - A core fixture for the default ``cake_sessions`` table was added. You can use
   it by adding ``core.cake_sessions`` to your fixture list.
 
-
 Utility
 =======
+
+String
+----------
+
+- :php:meth:`String::tail()` was added to truncate text starting from the end.
+
+- `beginning` in :php:meth:`String::truncate()` is deprecated in favor of `ellipsis`
 
 Debugger
 --------
