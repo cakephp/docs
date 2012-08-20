@@ -134,7 +134,7 @@ Utility
 =======
 
 String
-----------
+------
 
 - :php:meth:`String::tail()` was added to truncate text starting from the end.
 
