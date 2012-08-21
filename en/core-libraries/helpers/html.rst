@@ -328,6 +328,19 @@ methods of the HtmlHelper and how to use them.
 
         <a href="/pages/home" class="button" target="_blank">Enter</a>
 
+    Use ``'full_base'=>true`` option for absolute URLs::
+
+        <?php
+        echo $this->Html->link(
+            'Dashboard',
+            array('controller' => 'dashboards', 'action' => 'index', 'full_base' => true)
+        );
+
+    Will output::
+
+        <a href="http://www.yourdomain.com/dashboards/index">Dashboard</a>
+
+
     Specify ``$confirmMessage`` to display a javascript ``confirm()``
     dialog::
 
