@@ -28,7 +28,7 @@ que le coeur de votre application est bien testé et qu’il peut être constamm
 Voici un aperçu rapide des caractéristiques que vous apprécierez en utilisant CakePHP :
 
 -  `Communauté active et sympathique <http://cakephp.org/feeds>`_
--  `Système de license souple <http://en.wikipedia.org/wiki/MIT_License>`_
+-  `Système de licence souple <http://en.wikipedia.org/wiki/MIT_License>`_
 -  Compatible avec les versions PHP 5.2.8 et supérieures.
 -  Fonctions `CRUD <http://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_ 
    (create, read, update, delete) intégrées pour les interactions avec la base de données

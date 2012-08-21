@@ -2,7 +2,7 @@ Pour Commencer
 ##############
 
 Le framework CakePHP fournit une base robuste pour votre application. Il 
-peut gérer tous les aspects, de la requête initiale de l'utilisateur et le 
+peut gérer tous les aspects, de la requête initiale de l'utilisateur et son 
 cheminement jusqu'au rendu final de la page web. Et puisque le framework suit 
 les principes du MVC, il vous permet de facilement personnaliser et offre la 
 plupart des aspects de votre application.

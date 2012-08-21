@@ -1,62 +1,63 @@
 Installation
 ############
 
-CakePHP is fast and easy to install. The minimum requirements are a
-webserver and a copy of Cake, that's it! While this manual focuses
-primarily on setting up with Apache (because it's the most common),
-you can configure Cake to run on a variety of web servers such as
-LightHTTPD or Microsoft IIS.
+CakePHP est rapide et facile à installer. Les conditions minimum requises sont 
+un serveur web et une copie de Cake, c'est tout! Bien que ce manuel se focalise 
+principalement sur la configuration avec Apache (parce que c'est le cas le plus 
+commun), vous pouvez configurer Cake pour lancer une diversité de serveurs web 
+tels que LightHTTPD ou Microsoft IIS.
 
-Requirements
-============
+Conditions requises
+===================
 
--  HTTP Server. For example: Apache. mod\_rewrite is preferred, but
-   by no means required.
--  PHP 5.2.8 or greater.
+-  HTTP Server. Par exemple: Apache. mod\_rewrite est préférable, mais en 
+   aucun cas nécessaire. 
+-  PHP 5.2.8 ou plus.
 
-Technically a database engine isn't required, but we imagine that
-most applications will utilize one. CakePHP supports a variety of
-database storage engines:
+Techniquement, un moteur de base de données n'est pas nécessaire, mais nous 
+imaginons que la plupart des applications vont en utiliser une. CakePHP 
+supporte une diversité de moteurs de stockage de données:
 
--  MySQL (4 or greater)
+-  MySQL (4 ou plus)
 -  PostgreSQL
 -  Microsoft SQL Server
 -  SQLite
 
 .. note::
 
-    The built-in drivers all require PDO.  You should make sure you have the
-    correct PDO extensions installed.
+    Les drivers intégrés requièrent tous PDO. Vous devez vous assurer que vous 
+    avez les bonnes extensions PDO installées.
 
-License
+Licence
 =======
 
-CakePHP is licensed under the MIT license.  This means that you are free to
-modify, distribute and republish the source code on the condition that the
-copyright notices are left intact.  You are also free to incorporate CakePHP
-into any Commercial or closed source application.
+CakePHP est licencié sous la licence MIT. Cela signifie que vous êtes libre 
+de modifier, distribuer et reproduire le code source sous la condition que 
+les informations de copyright restent intactes. Vous êtes aussi libre 
+d'incorporer CakePHP dans toute code source d'application commerciale ou 
+fermée.
 
-Downloading CakePHP
+Télécharger CakePHP
 ===================
 
-There are two main ways to get a fresh copy of CakePHP. You can
-either download an archive copy (zip/tar.gz/tar.bz2) from the main
-website, or check out the code from the git repository.
+Il y a deux façons d'obtenir une copie récente de CakePHP. Vous pouvez soit 
+télécharger une copie archivée de (zip/tar.gz/tar.bz2) à partir du site web 
+principal, soit faire un check out du code sur dépôt de git.
 
-To download the latest major release of CakePHP. Visit the main
-website `http://www.cakephp.org <http://www.cakephp.org>`_ and
-follow the "Download Now" link.
+Pour télécharger la dernière version majeure de CakePHP. Visitez le site web 
+principal `http://www.cakephp.org <http://www.cakephp.org>`_ et
+suivez le lien "Télécharger maintenant".
 
-All current releases of CakePHP are hosted on
-`Github <http://github.com/cakephp/cakephp>`_. Github houses both CakePHP
-itself as well as many other plugins for CakePHP. The CakePHP
-releases are available at
-`Github downloads <http://github.com/cakephp/cakephp/downloads>`_.
+Toutes les version actuelles de CakePHP sont hébérgées sur 
+`Github <http://github.com/cakephp/cakephp>`_. Github héberge CakePHP
+lui-même ainsi que plusieurs autres plugins pour CakePHP. Les versions de 
+CakePHP sont disponibles à 
+`Téléchargements Github <http://github.com/cakephp/cakephp/downloads>`_.
 
-Alternatively you can get fresh off the press code, with all the
-bug-fixes and up to the minute enhancements.
-These can be accessed from github by cloning the 
-`Github`_ repository::
+Sinon, vous pouvez obtenir (Alternatively you can get fresh off the press 
+code??), avec tous les correctifs de bug et à jour des améliorations de 
+dernière minute. Ceux-ci peuvent être accessibles à partir de github en 
+clonant le répertoire de `Github`_ ::
 
     git clone git://github.com/cakephp/cakephp.git
 
@@ -64,44 +65,46 @@ These can be accessed from github by cloning the
 Permissions
 ===========
 
-CakePHP uses the ``app/tmp`` directory for a number of different
-operations. Model descriptions, cached views, and session
-information are just a few examples.
+CakePHP utilise le répertoire ``app/tmp`` pour un certain nombre d'opérations.
+Les descriptions de Modèle, les vues mises en cache, et les informations de 
+session sont juste quelques exemples.
 
-As such, make sure the directory ``app/tmp`` and all its subdirectories in your cake installation
-are writable by the web server user.
+De même, assurez-vous que le répertoire ``app/tmp`` et tous ses 
+sous-répertoires dans votre installation cake sont en écriture pour 
+l'utilisateur du serveur web.
 
-Setup
-=====
+Configuration
+=============
 
-Setting up CakePHP can be as simple as slapping it in your web
-server’s document root, or as complex and flexible as you wish.
-This section will cover the three main installation types for
-CakePHP: development, production, and advanced.
+Configurer CakePHP est aussi simple que de le flanquer dans le 
+document root de votre serveur web, ou aussi complexe et flexible 
+que vous le souhaitez.
+Cette section couvrira les trois types principaux d'installation pour CakePHP: 
+développement, production, and avancé.
 
--  Development: easy to get going, URLs for the application include
-   the CakePHP installation directory name, and less secure.
--  Production: Requires the ability to configure the web server’s
-   document root, clean URLs, very secure.
--  Advanced: With some configuration, allows you to place key
-   CakePHP directories in different parts of the filesystem, possibly
-   sharing a single CakePHP core library folder amongst many CakePHP
-   applications.
+-  Développement: Facile à mettre en oeuvre, mais les URLs de l’application 
+   contiennent le nom du répertoire d’installation de CakePHP et c’est moins 
+   sécurisé.
+-  Production: Nécessite d’être habilité à configurer le Document Root du 
+   serveur, URLs propres, très sécurisé.
+-  Avancé: Avec un peu de configuration, vous permet de placer les 
+   répertoires clés de CakePHP à différents endroits du système de fichiers, 
+   avec la possibilité de partager un seul répertoire de la librairie 
+   centrale CakePHP entre plusieurs applications.
 
-Development
-===========
+Développement
+=============
 
-A development installation is the fastest method to setup Cake.
-This example will help you install a CakePHP application and make
-it available at http://www.example.com/cake\_2\_0/. We assume for
-the purposes of this example that your document root is set to
-``/var/www/html``.
+Une installation "développement" est la méthode la plus rapide pour lancer 
+Cake. Cet exemple vous aidera à installer une application CakePHP et à la 
+rendre disponible à http://www.example.com/cake\_2\_0/. Nous considérons pour 
+les besoins de cet exemple que votre document root pointe sur ``/var/www/html``.
 
-Unpack the contents of the Cake archive into ``/var/www/html``. You now
-have a folder in your document root named after the release you've
-downloaded (e.g. cake\_2.0.0). Rename this folder to cake\_2\_0.
-Your development setup will look like this on the file system:
-
+Décompressez le contenu de l'archive Cake dans ``/var/www/html``. Vous avez 
+maintenant un dossier dans votre document root, nommé d'après la version que 
+vous avez téléchargée (par exemple : cake\_2.0.0). Renommez ce dossier en 
+"cake\_2\_0". Votre installation "développement" devrait ressembler à quelque 
+chose comme çà dans votre système de fichiers :
 
 -  /var/www/html
 
@@ -116,63 +119,64 @@ Your development setup will look like this on the file system:
      -  /README
 
 
-If your web server is configured correctly, you should now find
-your Cake application accessible at
+Si votre serveur web est configuré correctement, vous devriez trouver 
+maintenant votre application Cake accessible à 
 http://www.example.com/cake\_2\_0/.
 
-Using one CakePHP checkout for multiple applications
-----------------------------------------------------
+Utiliser un CakePHP pour de multiples applications
+--------------------------------------------------
 
-If you are developing a number of applications it often makes sense
-to have the share the same CakePHP core checkout. There are a few ways you can
-accomplish this.  Often the easiest is to use PHP's ``include_path``. To start
-off, clone CakePHP into a directory.  For this example we'll use
-``~/projects``::
+Si vous développez un certain nombre d'applicationsn il peut sembler être sensé 
+de partager le même coeur de CakePHP. Il y a peu de façon d'accomplir cela. 
+Souvent, le plus facile est d'utiliser le ``include_path`` de PHP. Pour 
+commencer, copiez CakePHP dans un répertoire. Pour cet exemple, nous 
+utiliserons ``~/projects``::
 
     git clone git://github.com/cakephp/cakephp.git ~/projects/cakephp
 
-This will clone CakePHP into your ``~/projects`` directory.  If you don't want
-to use git, you can download a zipball and the remaining steps will be the
-same.  Next you'll have to locate and modify your ``php.ini``.  On \*nix systems
-this is often in ``/etc/php.ini``, but using ``php -i`` and looking for 'Loaded
-Configuration File'.  Once you've found the correct ini file, modify the
-``include_path`` configuration to include ``~/projects/cakephp/lib``.  An
-example would look like::
+Cela copiera CakePHP dans votre répertoire de ``~/projects``. Si vous ne 
+voulez pas utiliser git, vous pouvez télécharger un zipball et les étapes 
+restantes seront les mêmes. Ensuite, vous devrez localiser et modifier 
+votre ``php.ini``.  Sur les systèmes \*nix, il se trouve souvent dans 
+``/etc/php.ini``, mais en utilisant ``php -i`` et en regardant 'Loaded
+Configuration File' (Fichier de Configuration Chargé). Une fois que 
+vous avez trouvé le bon fichier ini, modifier la configuration de 
+``include_path`` pour inclure ``~/projects/cakephp/lib``. Un 
+exemple ressemblerait à cela::
 
     include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
 
-After restarting your webserver, you should see the changes reflected in
-``phpinfo()``.
+Après avoir redémarré votre serveur web, vous devriez voir les changements 
+dans ``phpinfo()``.
 
 .. note::
 
-    If you are on windows separate include paths with ; instead of :
+    Si vous êtes sur windows, les chemins d'inclusion sont séparés par des 
+    ; au lieu de :
 
-Once you have setup your ``include_path`` your applications should be able to
-find CakePHP automatically.
+Une fois que vous avez configuré votre ``include_path``, vos applications 
+devraient être capable de trouver automatiquement CakePHP.
 
 Production
 ==========
 
-A production installation is a more flexible way to setup Cake.
-Using this method allows an entire domain to act as a single
-CakePHP application. This example will help you install Cake
-anywhere on your filesystem and make it available at
-http://www.example.com. Note that this installation may require the
-rights to change the ``DocumentRoot`` on Apache webservers.
+Une installation "production" est une façon plus flexible de lancer Cake. 
+Utiliser cette méthode permet à tout un domaine d'agir comme une seule 
+application CakePHP. Cet exemple vous aidera à installer Cake n'importe où 
+dans votre système de fichiers et à le rendre disponible à l'adresse : 
+http://www.exemple.com. Notez que cette installation demande d'avoir les 
+droits pour modifier le ``DocumentRoot`` sur le serveur web Apache.
 
-Unpack the contents of the Cake archive into a directory of your
-choosing. For the purposes of this example, we assume you choose to
-install Cake into /cake\_install. Your production setup will look
-like this on the filesystem:
-
+Décompressez les contenus de l'archive Cake dans un répertoire de votre 
+choix. Pour les besoins de cet exemple, nous considérons que vous avez choisi 
+d'installer Cake dans /cake\_install. Votre installation de production devrait 
+ressembler à quelque chose comme çà dans votre système de fichiers :
 
 -  /cake\_install/
    
    -  /app
       
-      -  /webroot (this directory is set as the ``DocumentRoot``
-         directive)
+      -  /webroot (répertoire défini comme le ``DocumentRoot`` du serveur)
 
    -  /lib
    -  /vendors
@@ -180,45 +184,45 @@ like this on the filesystem:
    -  /index.php
    -  /README
 
-
-Developers using Apache should set the ``DocumentRoot`` directive
-for the domain to::
+Les développeurs utilisant Apache devraient régler la directive 
+``DocumentRoot`` pour le domaine à::
 
     DocumentRoot /cake_install/app/webroot
 
-If your web server is configured correctly, you should now find
-your Cake application accessible at http://www.example.com.
+Si votre serveur web est configuré correctement, vous devriez maintenant 
+accéder à votre application Cake accessible à l'adresse : 
+http://www.exemple.com.
 
-Advanced Installation and server specific configuration
-=======================================================
+Installation avancée et configuration de serveur spécifique
+===========================================================
 
 .. toctree::
 
    installation/advanced-installation
 
-Fire It Up
-==========
+A vous de jouer!
+================
 
-Alright, let's see CakePHP in action. Depending on which setup you
-used, you should point your browser to http://example.com/ or
-http://example.com/cake\_install/. At this point, you'll be
-presented with CakePHP's default home, and a message that tells you
-the status of your current database connection.
+Ok, regardons CakePHP en action. Selon la configuration que vous utilisez, 
+vous pouvez pointer votre navigateur vers http://example.com/ ou
+http://example.com/cake\_install/. A ce niveau, vous serez sur le page home 
+par défaut de CakePHP, et un message qui vous donne le statut de la connection 
+de votre base de données courante.
 
-Congratulations! You are ready to :doc:`create your first CakePHP
-application </getting-started>`.
+Félicitations! Vous êtes prêt à :doc:`créer votre première application CakePHP 
+</getting-started>`.
 
-Not working? If you're getting timezone related error from PHP
-uncomment one line in ``app/Config/core.php``::
+Cela ne fonctionne pas? Si vous avez une erreur lié au timezone de PHP, 
+décommentez une ligne dans ``app/Config/core.php``::
 
    <?php
    /**
-    * Uncomment this line and correct your server timezone to fix 
-    * any date & time related errors.
+    * Décommentez cette ligne et corrigez votre serveur de timezone pour régler 
+    * toute erreur liée à la date & au temps.
     */
        date_default_timezone_set('UTC');
 
 
 .. meta::
-    :title lang=en: Installation
-    :keywords lang=en: apache mod rewrite,microsoft sql server,tar bz2,tmp directory,database storage,archive copy,tar gz,source application,current releases,web servers,microsoft iis,copyright notices,database engine,bug fixes,lighthttpd,repository,enhancements,source code,cakephp,incorporate
+    :title lang=fr: Installation
+    :keywords lang=fr: apache mod rewrite,serveur sql microsoft,tar bz2,répertoire tmp,stockage de base de données,copie d'archive,tar gz,source application,versions courantes,serveurs web,microsoft iis,copyright notices,moteur de base de données,bug fixes,lighthttpd,dépôt,améliorations,code source,cakephp,incorporate
