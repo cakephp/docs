@@ -69,7 +69,7 @@ manquants que vous pourriez obtenir en résultats en utilisant le mauvais
 délimiteur, et cela rend votre code plus portable.
 
 Apache et mod\_rewrite (et .htaccess)
-=======================================
+=====================================
 
 Tant que CakePHP est construit pour travailler avec mod\_rewrite –et
 habituellement il l'est–nous avons remarqué que certains utilisateurs
@@ -85,12 +85,11 @@ plutôt qu'un utilisateur- ou un site spécifique httpd.conf).
    All pour le DocumentRoot correct. Vous devriez voir quelque chose comme::
 
        # Chaque répertoire auquel Apache a accès peut être configuré avec
-         respect
-       # Pour leto which services and features are allowed and/or disabled in that
-       # directory (and its subdirectories). 
+       # respect pour lesquels les services et les fonctionnalités sont 
+       # autorisés et/ou désactivés dans ce répertoire (et ses sous-répertoires).
        #
-       # First, we configure the "default" to be a very restrictive set of 
-       # features.  
+       # Premièrement, nous configurons "par défault" pour être un ensemble 
+       # très restrictif de fonctionnalités
        #
        <Directory />
            Options FollowSymLinks
@@ -99,49 +98,49 @@ plutôt qu'un utilisateur- ou un site spécifique httpd.conf).
        #    Deny from all
        </Directory>
 
-#. Make sure you are loading up mod\_rewrite correctly. You should
-   see something like::
+#. Assurez-vous que vous avez chargé correctement mod\_rewrite. Vous devriez 
+   voir quelque chose comme::
 
        LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 
-   In many systems these will be commented out (by being prepended
-   with a #) by default, so you may just need to remove those leading
-   # symbols.
+   Dans la plupart des systèmes, ceux-ci vont être commentés (en étant 
+   précédé par un #) par défaut, donc vous aurez juste besoin de retirer 
+   les symboles # du début.
 
-   After you make changes, restart Apache to make sure the settings
-   are active.
+   Après que vous ayez fait des changements, re-démarrez Apache pour être sur 
+   que les paramètres soient actifs.
 
-   Verify that you your .htaccess files are actually in the right
-   directories.
+   Vérifiez que vos fichiers .htaccess sont effectivement dans le bon 
+   répertoire.
 
-   This can happen during copying because some operating systems treat
-   files that start with '.' as hidden and therefore won't see them to
-   copy.
+   Cela peut arriver pendant la copie parce que certains système 
+   d'exploitation traitent les fichiers qui commencent par '.' en caché et du 
+   coup ne les verront pas pour les copier.
 
-#. Make sure your copy of CakePHP is from the downloads section of
-   the site or our GIT repository, and has been unpacked correctly by
-   checking for .htaccess files.
+#. Assurez-vous que votre copie de CakePHP vient de la section des 
+   téléchargements du site de notre dépôt GIT, et a été dézippé correctement 
+   en vérifiant les fichiers .htaccess.
 
-   Cake root directory (needs to be copied to your document, this
-   redirects everything to your Cake app)::
-
+   Le répertoire root de Cake (a besoin d'être copié dans votre document, cela 
+   redirige tout vers votre app Cake)::
+   
        <IfModule mod_rewrite.c>
           RewriteEngine on
           RewriteRule    ^$ app/webroot/    [L]
           RewriteRule    (.*) app/webroot/$1 [L]
        </IfModule>
 
-   Cake app directory (will be copied to the top directory of your
-   application by bake)::
-
+   Le répertoire app de Cake (sera copié dans le répertoire supérieur de votre 
+   application avec Bake)::
+   
        <IfModule mod_rewrite.c>
           RewriteEngine on
           RewriteRule    ^$    webroot/    [L]
           RewriteRule    (.*) webroot/$1    [L]
        </IfModule>
 
-   Cake webroot directory (will be copied to your application's web
-   root by bake)::
+   Le répertoire webroot de Cake (sera copié dans le webroot de votre 
+   application avec Bake)::
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -150,11 +149,12 @@ plutôt qu'un utilisateur- ou un site spécifique httpd.conf).
            RewriteRule ^(.*)$ index.php/$1 [QSA,L]
        </IfModule>
 
-   If your cakephp site still has problems with mod\_rewrite you might 
-   want to try and modify settings for virtualhosts. If on ubuntu, 
-   edit the file /etc/apache2/sites-available/default (location is 
-   distribution dependent). In this file, ensure that 
-   ``AllowOverride None`` is changed to ``AllowOverride All``, so you have::
+   Si votre site cakephp a toujours des problèmes avec mod\_rewrite, vous 
+   voudrez essayer et modifier les paramètres pour les virtualhosts. Si vous 
+   êtes sur ubuntu, modifiez le fichier /etc/apache2/sites-available/default 
+   (l'endroit est dépendant de la distribution). Dans ce fichier, assurez-vous 
+   que ``AllowOverride None`` a changé en ``AllowOverride All``, donc vous 
+   avez::
 
        <Directory />
            Options FollowSymLinks
@@ -167,20 +167,19 @@ plutôt qu'un utilisateur- ou un site spécifique httpd.conf).
            Allow from all
        </Directory>
 
-   If on Mac OSX, another solution is to use the tool virtualhostx to
-   make a virtual host to point to your folder.  
+   Si vous êtes sur Mac OSX, une autre solution est d'utiliser l'outil 
+   virtualhostx pour faire un hôte virtuel pour pointer vers votre dossier.
 
-   For many hosting services (GoDaddy, 1and1), your web server is
-   actually being served from a user directory that already uses
-   mod\_rewrite. If you are installing CakePHP into a user directory
-   (http://example.com/~username/cakephp/), or any other URL structure
-   that already utilizes mod\_rewrite, you'll need to add RewriteBase
-   statements to the .htaccess files CakePHP uses (/.htaccess,
-   /app/.htaccess, /app/webroot/.htaccess).
+   Pour beaucoup de services s'hébergement (GoDaddy, 1and1), votre serveur web 
+   est en fait est déjà distribué à partir d'un répertoire utilisateur qui 
+   utilise déjà mod\_rewrite. Si vous installez CakePHP dans un répertoire 
+   utiisateur (http://exemple.com/~username/cakephp/), ou tout autre structure 
+   d'URL qui utilise déjà mod\_rewrite, vous aurez besoin d'ajouter les 
+   requêtes (statements) RewriteBase aux fichiers .htaccess que CakePHP 
+   utilise (/.htaccess, /app/.htaccess, /app/webroot/.htaccess).
 
-   This can be added to the same section with the RewriteEngine
-   directive, so for example your webroot .htaccess file would look
-   like::
+   Ceci peut être ajouté à la même section avec la directive RewriteEngine, 
+   donc par exemple, votre fichier .htacces dans webroot ressemblerait à ceci::
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -190,43 +189,44 @@ plutôt qu'un utilisateur- ou un site spécifique httpd.conf).
            RewriteRule ^(.*)$ index.php/$1 [QSA,L]
        </IfModule>
 
-   The details of those changes will depend on your setup, and can
-   include additional things that are not Cake related. Please refer
-   to Apache's online documentation for more information.
+   Les détails de ces changements dépendront de votre configuration, et peuvent 
+   inclure des choses supplémentaires qui ne sont pas liées à CakePHP. Merci de 
+   vous renseigner sur la documentation en ligne d'Apache pour plus 
+   d'informations.
 
+De belles URLs et Lighttpd
+==========================
 
-Pretty URLs and Lighttpd
-========================
+Alors que Lighttpd offre une fonctionnalité de module de rewrite, il n'est pas
+l'équivalent du mod\_rewrite de Apache. Pour obtenir de belles URLs en 
+utilisant Lighty, vous avez deux options. La première option est l'utilisation 
+de mod\_rewrite, la deuxième option est l'utilisation d'un script LUA et 
+mod\_magnet.
 
-While Lighttpd features a rewrite module, it is not an equivalent
-of Apache's mod\_rewrite. To get 'pretty URLs' while using Lighty,
-you have two options. Option one is using mod\_rewrite, the second
-one is by using a LUA script and mod\_magnet.
-
-**Using mod\_rewrite**
-The easiest way to get pretty URLs is by adding this script to your
-lighty config. Just edit the URL, and you should be okay. Please
-note that this doesn't work on Cake installations in
-subdirectories.
+**Utilisation de mod\_rewrite**
+La manière la plus simple d'obtenir de belles URLs est d'ajouter le 
+script à votre config lighty. Modifiez juste l'URL, et ça devrait 
+être bon. Merci de noter que cela ne fonctionne pas sur les installations 
+de Cake dans les sous-répertoires. 
 
 ::
 
     $HTTP["host"] =~ "^(www\.)?example.com$" {
             url.rewrite-once = (
-                    # if the request is for css|files etc, do not pass on to Cake
+                    # si la requête est pour les css|fichiers etc, ne les passez pas à Cake
                     "^/(css|files|img|js)/(.*)" => "/$1/$2",
                     "^([^\?]*)(\?(.+))?$" => "/index.php/$1&$3",
             )
             evhost.path-pattern = "/home/%2-%1/www/www/%4/app/webroot/"
     }
 
-**Using mod\_magnet**
-To use pretty URLs with CakePHP and Lighttpd, place this lua script
-in /etc/lighttpd/cake.
+**Utilisation de mod\_magnet**
+Pour utiliser les belles URLs avec CakePHP et Lighttpd, placez ce script lua 
+dans /etc/lighttpd/cake.
 
 ::
 
-    -- little helper function
+    -- Une petite fonction d\'aide
     function file_exists(path)
       local attr = lighty.stat(path)
       if (attr) then
@@ -260,12 +260,12 @@ in /etc/lighttpd/cake.
 
 .. note::
 
-    If you run your CakePHP installation from a subdirectory, you must
-    set prefix = 'subdirectory\_name' in the above script.
+    Si vous lancez votre installation CakePHP depuis un sous-répertoire, vous 
+    devez mettre prefix = 'subdirectory\_name' dans le script ci-dessus.
 
-Then tell Lighttpd about your vhost::
+Ensuite dîtes vos vhost à Lighttpd::
 
-    $HTTP["host"] =~ "example.com" {
+    $HTTP["host"] =~ "exemple.com" {
             server.error-handler-404  = "/index.php"
 
             magnet.attract-physical-path-to = ( "/etc/lighttpd/cake.lua" )
@@ -281,33 +281,33 @@ Then tell Lighttpd about your vhost::
     }
 
 
-Pretty URLs on nginx
-====================
+De belles URLs sur nginx
+========================
 
-nginx is a popular server that, like Lighttpd, uses less system
-resources. Its drawback is that it does not make use of .htaccess
-files like Apache and Lighttpd, so it is necessary to create those
-rewritten URLs in the site-available configuration. Depending upon
-your setup, you will have to modify this, but at the very least,
-you will need PHP running as a FastCGI instance.
+nginx est un serveur populaire qui, comme Lighttpd, utilise moins 
+de ressources système. Son inconvénient est qu'il ne fait pas usage de 
+fichiers .htaccess comme Apache et Lighttpd, il est donc nécessaire de créer 
+les URLs réécrites dans la configuration du site disponibles. selon 
+votre configuration, vous devrez modifier cela, mais à tout le moins, 
+vous aurez besoin PHP fonctionnant comme une instance FastCGI.
 
 ::
 
     server {
         listen   80;
-        server_name www.example.com;
-        rewrite ^(.*) http://example.com$1 permanent;
+        server_name www.exemple.com;
+        rewrite ^(.*) http://exemple.com$1 permanent;
     }
 
     server {
         listen   80;
-        server_name example.com;
+        server_name exemple.com;
     
         # root directive should be global
-        root   /var/www/example.com/public/app/webroot/;
+        root   /var/www/exemple.com/public/app/webroot/;
 
-        access_log /var/www/example.com/log/access.log;
-        error_log /var/www/example.com/log/error.log;
+        access_log /var/www/exemple.com/log/access.log;
+        error_log /var/www/exemple.com/log/error.log;
 
         location / {
             index  index.php index.html index.htm;
@@ -318,24 +318,23 @@ you will need PHP running as a FastCGI instance.
             include /etc/nginx/fcgi.conf;
             fastcgi_pass    127.0.0.1:10005;
             fastcgi_index   index.php;
-            fastcgi_param SCRIPT_FILENAME /var/www/example.com/public/app/webroot$fastcgi_script_name;
+            fastcgi_param SCRIPT_FILENAME /var/www/exemple.com/public/app/webroot$fastcgi_script_name;
         }
     }
 
-URL Rewrites on IIS7 (Windows hosts)
-====================================
+Rewrites d'URL sur IIS7 (serveurs Windows)
+==========================================
 
-IIS7 does not natively support .htaccess files. While there are
-add-ons that can add this support, you can also import htaccess
-rules into IIS to use CakePHP's native rewrites. To do this, follow
-these steps:
+IIS7 ne supporte pas nativement les fichiers .htaccess. Bien qu'il existe des 
+add-ons qui peuvent ajouter ce support, vous pouvez aussi importer les règles 
+des htaccess dans IIS pour utiliser les rewrites natifs de CakePHP. Pour ce 
+faire, suivez les étapes:
 
-
-#. Use Microsoft's Web Platform Installer to install the URL
-   Rewrite Module 2.0.
-#. Create a new file in your CakePHP folder, called web.config.
-#. Using Notepad or another XML-safe editor, copy the following
-   code into your new web.config file...
+#. Utilisez l'installeur de la plateforme Web de Microsoft pour installer le
+   Module de Rewrite 2.0.
+#. Créez un nouveau fichier dans votre dossier CakePHP, appelé web.config.
+#. Utilisez Notepad ou tout autre éditeur XML-safe, copiez le code suivant 
+   dans votre nouveau fichier web.config...
 
 ::
 
@@ -376,16 +375,18 @@ these steps:
         </system.webServer>
     </configuration>
 
-It is also possible to use the Import functionality in IIS's URL
-Rewrite module to import rules directly from CakePHP's .htaccess
-files in root, /app/, and /app/webroot/ - although some editing
-within IIS may be necessary to get these to work. When Importing
-the rules this way, IIS will automatically create your web.config
-file for you.
 
-Once the web.config file is created with the correct IIS-friendly
-rewrite rules, CakePHP's links, css, js, and rerouting should work
-correctly.
+Il est également possible d'utiliser la fonctionnalité Import dans l'URL 
+IIS de Réécriture du module pour importer des règles directement à 
+partir des fichiers .htaccess de CakePHP dans la racine, /app/, et 
+/app/webroot/ - même si quelques modifications dans IIS peuvent être 
+nécessaire pour faire fonctionner ces applications. Lors de l'importation
+des règles de cette façon, IIS crée automatiquement votre fichier web.config 
+pour vous.
+
+Une fois que le fichier web.config est créé avec les bonnes règles de 
+réécriture des liens de IIS, les liens CakePHP, les CSS, les JS, et 
+le reroutage devrait fonctionner correctement.
 
 
 .. meta::
