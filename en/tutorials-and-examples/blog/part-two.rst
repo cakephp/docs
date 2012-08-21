@@ -178,7 +178,7 @@ nice table, our view code might look something like this::
             <td><?php echo $post['Post']['created']; ?></td>
         </tr>
         <?php endforeach; ?>
-    
+        <?php unset($post); ?>
     </table>
 
 Hopefully this should look somewhat simple.
