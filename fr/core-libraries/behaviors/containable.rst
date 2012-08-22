@@ -22,7 +22,7 @@ Vous pouvez aussi attacher le comportement à la volée::
     $this->Post->Behaviors->attach('Containable');
 
 
-.. _Utilisation de Containable:
+.. _using-containable:
 
 Utilisation de Containable
 ~~~~~~~~~~~~~~~~~~~~~~~~~~

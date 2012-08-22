@@ -297,7 +297,7 @@ PostsController :
     Vous avez besoin d'inclure le composant Session (SessionComponent) et 
     l'assistant Session (SessionHelper) dans chaque contrôleur que vous 
     utiliserez. Si nécessaire, incluez-les dans le contrôleur principal 
-   (AppController) pour qu'ils soient accessibles à tout les contrôleurs.
+    (AppController) pour qu'ils soient accessibles à tout les contrôleurs.
 
 Voici ce que fait l'action ``add()`` : si la requête HTTP est de type POST, 
 essayez de sauvegarder les données en utilisant le modèle "Post". Si pour une 
@@ -528,7 +528,7 @@ confirmation après l'avoir redirigé sur ``/posts``. Si l'utilisateur tente
 une suppression en utilisant une requête GET, une exeception est levée.
 Les exceptions manquées sont capturées par le gestionnaire d'exceptions de 
 CakePHP et un joli message d'erreur est affiché. Il y a plusieurs 
-:doc:`development/exceptions` intégrées qui peuvent être utilisées pour 
+:doc:`/development/exceptions` intégrées qui peuvent être utilisées pour
 indiquer les différentes erreurs HTTP que votre application pourrait rencontrer.
 
 Etant donné que nous exécutons juste un peu de logique et de redirection, 
@@ -645,9 +645,10 @@ Si vous avez besoin d'aide, venez nous voir sur le canal IRC #cakephp.
 Bienvenue sur CakePHP !
 
 Prochaines lectures suggérrées
----------------------------
+------------------------------
 
 Voici les différents chapitres que les gens veulent souvent lire après :
+
 1. :ref:`view-layouts`: Personnaliser les Gabarits (Layouts) de votre 
    application
 2. :ref:`view-elements`: Inclure et ré-utiliser les portions de vues
