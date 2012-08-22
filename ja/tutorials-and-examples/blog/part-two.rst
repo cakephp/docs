@@ -155,7 +155,7 @@ Cakeのビューファイルは、 ``/app/View`` の中の、コントローラ�
             <td><?php echo $post['Post']['created']; ?></td>
         </tr>
         <?php endforeach; ?>
-    
+        <?php unset($post); ?>
     </table>
 
 シンプルですよね。
