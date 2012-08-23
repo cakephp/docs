@@ -17,7 +17,7 @@ would be::
 
     <?php
     public $virtualFields = array(
-        'full_name' => 'CONCAT(User.first_name, " ", User.last_name)'
+        'name' => 'CONCAT(User.first_name, " ", User.last_name)'
     );
 
 And with PostgreSQL::
@@ -193,7 +193,7 @@ A common workaround for this implementation issue is to copy
 need to access them::
 
     <?php
-    $this->virtualFields['full_name'] = $this->Author->virtualFields['full_name'];
+    $this->virtualFields['name'] = $this->Author->virtualFields['name'];
 
 or::
 

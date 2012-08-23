@@ -36,7 +36,7 @@
 
     <?php
     public $virtualFields = array(
-        'full_name' => 'CONCAT(User.first_name, " ", User.last_name)'
+        'name' => 'CONCAT(User.first_name, " ", User.last_name)'
     );
 
 ..
@@ -311,7 +311,7 @@ SQLクエリ中で直接使用される関数は、返されるデータがモ�
 利用する必要がある時に ``virtualFields`` をあるモデルから別のモデルにコピーすることです。 ::
 
     <?php
-    $this->virtualFields['full_name'] = $this->Author->virtualFields['full_name'];
+    $this->virtualFields['name'] = $this->Author->virtualFields['name'];
 
 もしくは以下のようにします。 ::
 
