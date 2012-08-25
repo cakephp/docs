@@ -80,23 +80,47 @@ CakePHPのインストールは、Webサーバのドキュメントルートに�
 Cake のアーカイブを ``/var/www/html`` に展開してください。
 ドキュメントルートに、ダウンロードしたリリースの名前がついたフォルダ(例えば cake\_2.0.0)が取得できます。
 このフォルダを cake\_2\_0 という名前にリネームしてください。
-ファイルシステム上の開発用の設定は次のようになります:
+ファイルシステム上の開発用の設定は次のようになります::
 
-
--  /var/www/html
-
-  -  /cake\_2\_0
-
-     -  /app
-     -  /lib
-     -  /vendors
-     -  /plugins
-     -  /.htaccess
-     -  /index.php
-     -  /README
-
+    /var/www/html/
+        cake_2_0/
+            app/
+            lib/
+            plugins/
+            vendors/
+            .htaccess
+            index.php
+            README
 
 もしウェブサーバが適切に設定されていれば、 http://www.example.com/cake\_2\_0/ で Cake アプリケーションがアクセス可能になっているはずです。
+
+複数のアプリケーションから一つのCakePHPを使用する
+-------------------------------------------------
+
+多数のアプリケーションを開発している場合、\
+それらがCakePHPのコアファイルを共有するのは理にかなっているといえます。\
+そのようにするには、いくつか方法があります。いちばん簡単なのが、PHPの ``include_path`` を使う方法です。\
+そのためにまずは、CakePHPを適当なディレクトリに複製します。この例では
+``~/projects`` ディレクトリにします。 ::
+
+    git clone git://github.com/cakephp/cakephp.git ~/projects/cakephp
+
+このコマンドを実行すると、CakePHPのファイルが ``~/projects`` ディレクトリの中に複製されます。\
+gitを使用したくない場合は、zip形式でのダウンロードも可能で、残りの手順も同じです。\
+次は、 ``php.ini`` を探して編集する必要があります。\*nix系のシステムならたいていは
+``/etc/php.ini`` にあります。もしくは ``php -i`` コマンドを実行して 'Loaded Configuration File' を確認してください。\
+iniファイルを見つけたら、 ``include_path`` の設定を変更して ``~/projects/cakephp/lib`` が含まれるようにしてください。\
+例としては次のようになります。 ::
+
+    include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
+
+Webサーバを再起動した後、 ``phpinfo()`` で変更が反映されているのを確認してください。
+
+.. note::
+
+    windowsでは、インクルードパスの区切りは : ではなく ; になります。
+
+``include_path`` の設定が完了したので、アプリケーションはCakePHPのファイルを見つけられるようになりました。
 
 運用(*Production*)
 ==================
@@ -108,21 +132,17 @@ Cake のアーカイブを ``/var/www/html`` に展開してください。
 
 Cake のアーカイブを好きなディレクトリに展開してください。
 この例において、Cake をインストールすると決めたディレクトリは /cake\_install であると仮定します。
-ファイルシステム上の運用向けの設定は次のようになります:
+ファイルシステム上の運用向けの設定は次のようになります::
 
-
--  /cake\_install/
-   
-   -  /app
-      
-      -  /webroot (このディレクトリを ``DocumentRoot`` ディレクティブとしてセットします)
-
-   -  /lib
-   -  /vendors
-   -  /.htaccess
-   -  /index.php
-   -  /README
-
+    /cake_install/
+        app/
+            webroot/ (このディレクトリを ``DocumentRoot`` ディレクティブとしてセットします)
+        lib/
+        plugins/
+        vendors/
+        .htaccess
+        index.php
+        README
 
 Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディレクティブを次のように設定してください::
 
