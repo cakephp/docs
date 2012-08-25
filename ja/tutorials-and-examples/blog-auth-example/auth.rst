@@ -120,13 +120,14 @@ UsersControllerもまた作成しましょう。
             $this->Session->setFlash(__('User was not deleted'));
             $this->redirect(array('action' => 'index'));
         }
+    }
 
 以前ビューを作成した方法と同様に、またはコード生成ツールを用いて、ビューを実装します。
 このチュートリアルの目的に沿って、add.ctpだけを示します::
 
     <!-- app/View/Users/add.ctp -->
     <div class="users form">
-    <?php echo $this->Form->create('User');?>
+    <?php echo $this->Form->create('User'); ?>
         <fieldset>
             <legend><?php echo __('Add User'); ?></legend>
         <?php
@@ -137,7 +138,7 @@ UsersControllerもまた作成しましょう。
             ));
         ?>
         </fieldset>
-    <?php echo $this->Form->end(__('Submit'));?>
+    <?php echo $this->Form->end(__('Submit')); ?>
     </div>
 
 認証(ログインとログアウト)
@@ -163,7 +164,7 @@ CakePHPではこれを :php:class:`AuthComponent` で処理します。
             )
         );
 
-        function beforeFilter() {
+        public function beforeFilter() {
             $this->Auth->allow('index', 'view');
         }
         //...
@@ -187,10 +188,12 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
     }
 
     public function login() {
-        if ($this->Auth->login()) {
-            $this->redirect($this->Auth->redirect());
-        } else {
-            $this->Session->setFlash(__('Invalid username or password, try again'));
+        if ($this->request->is('post')) {
+            if ($this->Auth->login()) {
+                $this->redirect($this->Auth->redirect());
+            } else {
+                $this->Session->setFlash(__('Invalid username or password, try again'));
+            }
         }
     }
 
@@ -223,7 +226,7 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
 
     <div class="users form">
     <?php echo $this->Session->flash('auth'); ?>
-    <?php echo $this->Form->create('User');?>
+    <?php echo $this->Form->create('User'); ?>
         <fieldset>
             <legend><?php echo __('Please enter your username and password'); ?></legend>
         <?php
@@ -231,7 +234,7 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
             echo $this->Form->input('password');
         ?>
         </fieldset>
-    <?php echo $this->Form->end(__('Login'));?>
+    <?php echo $this->Form->end(__('Login')); ?>
     </div>
 
 ``/user/add`` URLにアクセスして新しいユーザーを登録し、 ``/users/login`` URLに行き、新しく作られた認証情報を用いてログインすることができるようになりました。
@@ -291,9 +294,11 @@ Authコンポーネントの ``users()`` 関数は現在ログインしている
 
     public function isAuthorized($user) {
         if (isset($user['role']) && $user['role'] === 'admin') {
-            return true; // 管理者は全てのアクションにアクセスできる
+            return true;
         }
-        return false; // 残りはできない
+
+        // デフォルトは拒否
+        return false;
     }
 
 とても単純な承認機構を作成しました。
@@ -309,20 +314,20 @@ PostsControllerに追加しようとしているルールは投稿の作成を�
     // app/Controller/PostsController.php
 
     public function isAuthorized($user) {
-        if (parent::isAuthorized($user)) {
+        // 登録済ユーザーは投稿できる
+        if ($this->action === 'add') {
             return true;
         }
 
-        if ($this->action === 'add') {
-           // All registered users can add posts
-            return true;
-        }
+        // 投稿のオーナーは編集や削除ができる
         if (in_array($this->action, array('edit', 'delete'))) {
             $postId = $this->request->params['pass'][0];
-            return $this->Post->isOwnedBy($postId, $user['id']);
+            if ($this->Post->isOwnedBy($postId, $user['id'])) {
+                return true;
+            }
         }
-        
-        return false;
+
+        return parent::isAuthorized($user);
     }
 
 今AppControllerの ``isAuthorized()`` 呼び出しを上書きし、内部で親クラスが既にユーザーを承認しているかをチェックしています。
