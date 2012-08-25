@@ -266,10 +266,10 @@ http://www.example.com/posts/index
 何らかの理由で保存できなかった場合には、単にビューを表示します。
 この時に、ユーザバリデーションエラーやその他の警告が表示されることになります。
 
-Every CakePHP request includes a ``CakeRequest`` object which is accessible using 
-``$this->request``. The request object contains useful information regarding the 
-request that was just received, and can be used to control the flow of your application.
-In this case, we use the :php:meth:`CakeRequest::is()` method to check that the request is a HTTP POST request.
+すべてのCakePHPのリクエストは ``CakeRequest`` オブジェクトに格納されており、\
+``$this->request`` でアクセスできます。リクエストオブジェクトには、\
+受信したリクエストに関するいろんな情報が含まれているので、アプリケーションのフローの制御に利用できます。\
+今回は、リクエストがHTTP POSTかどうかの確認に :php:meth:`CakeRequest::is()` メソッドを使用しています。
 
 ユーザがフォームを使ってデータをPOSTした場合、その情報は、 ``$this->request->data`` の中に入ってきます。
 :php:func:`pr()` や :php:func:`debug()` を使うと、内容を画面に表示させて、確認することができます。
