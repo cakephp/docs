@@ -94,36 +94,33 @@ Cake のアーカイブを ``/var/www/html`` に展開してください。
 
 もしウェブサーバが適切に設定されていれば、 http://www.example.com/cake\_2\_0/ で Cake アプリケーションがアクセス可能になっているはずです。
 
-Using one CakePHP checkout for multiple applications
-----------------------------------------------------
+複数のアプリケーションから一つのCakePHPを使用する
+-------------------------------------------------
 
-If you are developing a number of applications, it often makes sense
-to have them share the same CakePHP core checkout. There are a few ways in which you can
-accomplish this.  Often the easiest is to use PHP's ``include_path``. To start
-off, clone CakePHP into a directory.  For this example, we'll use
-``~/projects``::
+多数のアプリケーションを開発している場合、\
+それらがCakePHPのコアファイルを共有するのは理にかなっているといえます。\
+そのようにするには、いくつか方法があります。いちばん簡単なのが、PHPの ``include_path`` を使う方法です。\
+そのためにまずは、CakePHPを適当なディレクトリに複製します。この例では
+``~/projects`` ディレクトリにします。 ::
 
     git clone git://github.com/cakephp/cakephp.git ~/projects/cakephp
 
-This will clone CakePHP into your ``~/projects`` directory.  If you don't want
-to use git, you can download a zipball and the remaining steps will be the
-same.  Next you'll have to locate and modify your ``php.ini``.  On \*nix systems
-this is often in ``/etc/php.ini``, but using ``php -i`` and looking for 'Loaded
-Configuration File'.  Once you've found the correct ini file, modify the
-``include_path`` configuration to include ``~/projects/cakephp/lib``.  An
-example would look like::
+このコマンドを実行すると、CakePHPのファイルが ``~/projects`` ディレクトリの中に複製されます。\
+gitを使用したくない場合は、zip形式でのダウンロードも可能で、残りの手順も同じです。\
+次は、 ``php.ini`` を探して編集する必要があります。\*nix系のシステムならたいていは
+``/etc/php.ini`` にあります。もしくは ``php -i`` コマンドを実行して 'Loaded Configuration File' を確認してください。\
+iniファイルを見つけたら、 ``include_path`` の設定を変更して ``~/projects/cakephp/lib`` が含まれるようにしてください。\
+例としては次のようになります。 ::
 
     include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
 
-After restarting your webserver, you should see the changes reflected in
-``phpinfo()``.
+Webサーバを再起動した後、 ``phpinfo()`` で変更が反映されているのを確認してください。
 
 .. note::
 
-    If you are on windows, separate include paths with ; instead of :
+    windowsでは、インクルードパスの区切りは : ではなく ; になります。
 
-Having finished setting up your ``include_path`` your applications should be able to
-find CakePHP automatically.
+``include_path`` の設定が完了したので、アプリケーションはCakePHPのファイルを見つけられるようになりました。
 
 運用(*Production*)
 ==================
