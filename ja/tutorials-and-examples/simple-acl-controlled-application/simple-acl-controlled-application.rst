@@ -175,7 +175,7 @@ ACL をセットアップし終わってしまう前に、ユーザとグルー�
 ``GroupsController`` と ``UsersController`` の **両方** に、次のコードを追加してください::
 
     <?php
-    function beforeFilter() {
+    public function beforeFilter() {
         parent::beforeFilter(); 
         $this->Auth->allow('*');
     }
@@ -215,7 +215,7 @@ AuthとACLをきちんと動作させるには、ユーザとグループをACL�
 ``User`` モデルに次のコードを追加してください::
 
     <?php
-    class User extends Model {
+    class User extends AppModel {
         public $name = 'User';
         public $belongsTo = array('Group');
         public $actsAs = array('Acl' => array('type' => 'requester'));
@@ -236,10 +236,11 @@ AuthとACLをきちんと動作させるには、ユーザとグループをACL�
             }
         }
     }
+
 ``Group`` モデルには、次のコードを追加します::
 
     <?php
-    class Group extends Model {
+    class Group extends AppModel {
         public $actsAs = array('Acl' => array('type' => 'requester'));
          
         public function parentNode() {
@@ -285,7 +286,7 @@ MySQLのプロンプトで ``SELECT * FROM aros;`` を実行した場合、次�
 グループごとのみのパーミッションに単純化したい場合、 ``User`` も出るに  ``bindNode()`` を実装する必要があります::
 
     <?php
-    function bindNode($user) {
+    public function bindNode($user) {
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
     }
 
@@ -329,7 +330,19 @@ AclComponentを使う方法は次のようになります::
 ひとつはアプリケーション全体に対するアクセス可否を簡単にすること、そしてモデルレコードのパーミッションをチェックするようなコントローラとアクションに関連することにはACLを使用しないということです。
 グローバルなルートACOを使用するには、 ``AuthComponent`` の設定を若干変更する必要があります。
 ACLがコントローラとアクションを走査するにあたり正しいノードパスを使用するために、 ``AuthComponent`` に根ノードの存在を教えてください。
-これを行うには、先のコードで定義してあるように、 ``AppController`` の ``$components`` で、配列が ``actionPAth`` を必ず含むようにしてください。
+これを行うには、先のコードで定義してあるように、 ``AppController`` の ``$components`` で、配列が ``actionPAth`` を必ず含むようにしてください::
+
+    <?php
+    class AppController extends Controller {
+        public $components = array(
+            'Acl',
+            'Auth' => array(
+                'authorize' => array(
+                    'Actions' => array('actionPath' => 'controllers')
+                )
+            ),
+            'Session'
+        );
 
 チュートリアルを続行するには、続けて :doc:`part-two` を見てください。
 
