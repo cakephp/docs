@@ -20,6 +20,13 @@ Caching
 Component
 =========
 
+AuthComponent
+-------------
+
+- A new authenticate adapter has been added to support blowfish/bcrypt hashed
+  passwords.  You can now use ``Blowfish`` in your ``$authenticate`` array to
+  allow bcrypt passwords to be used.
+
 PaginatorComponent
 ------------------
 
@@ -45,6 +52,8 @@ Console
 
 - The ``server`` shell was added.  You can use this to start the PHP5.4
   webserver for your CakePHP application.
+- Baking a new project now sets the application's cache prefix to the name of
+  the application.
 
 Error
 =====
@@ -127,7 +136,6 @@ TextHelper
 ----------
 
 - :php:meth:`TextHelper::tail()` was added to truncate text starting from the end.
-
 - `beginning` in :php:meth:`TextHelper::truncate()` is deprecated in favor of `ellipsis`
 
 Testing
@@ -143,7 +151,6 @@ String
 ------
 
 - :php:meth:`String::tail()` was added to truncate text starting from the end.
-
 - `beginning` in :php:meth:`String::truncate()` is deprecated in favor of `ellipsis`
 
 Debugger
