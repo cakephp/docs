@@ -21,8 +21,8 @@ que vous pouvez utiliser pour vous aider :
 Chacun de ces composants d’origine est détaillé dans des chapitres
 spécifiques. Pour l’heure, nous allons vous montrer comment créer 
 vos propres composants. La création de composants vous permet de garder
-le code de vos contrôleurs propre et vous permet de réutiliser 
-du code entre vos projet.
+le code de vos contrôleurs propres et vous permet de réutiliser 
+du code entre vos projets.
 
 .. _configuring-components:
 
@@ -61,7 +61,7 @@ C'est utile quand vous avez besoin d'assigner les résultats d'une fonction
         $this->Cookie->name = 'CookieMonster';
     }
 
-C'est possible, cependant, que le composant requiert certaines options de 
+C'est possible, cependant, que le composant nécessite certaines options de 
 configuration avant que le contrôleur ``beforeFilter()`` soit lancé.
 Pour cela, certains composants permettent aux options de configuration
 d'être définies dans le tableau ``$components``::
@@ -69,12 +69,12 @@ d'être définies dans le tableau ``$components``::
     <?php
     public $components = array('DebugKit.Toolbar' => array('panels' => array('history', 'session')));
 
-Consulter la documentation pertinente pour connaître les options de 
+Consultez la documentation pertinente pour connaître les options de 
 configuration que chaque composant fournit.
 
 Un paramètre commun à utiliser est l'option ``className``, qui vous autorise 
 les alias des composants. Cette fonctionnalité est utile quand vous voulez 
-remplacer ``$this->Auth`` ou à une autre référence de Composant commun avec 
+remplacer ``$this->Auth`` ou une autre référence de Composant commun avec 
 une implémentation sur mesure::
 
     <?php
@@ -143,7 +143,7 @@ l'intérieur d'un contrôleur, vous pouvez faire comme ce qui suit::
 Callbacks des composants
 ========================
 
-Les composants vous offrent aussi quelques callbacks durant le cycle de vie 
+Les composants vous offrent aussi quelques callbacks durant leur cycle de vie 
 qui vous permettent d'augmenter le cycle de la requête. Allez voir l'api 
 :ref:`component-api` pour plus d'informations sur les callbacks possibles 
 des composants.
@@ -262,9 +262,9 @@ API de Component
 
 .. php:method:: __construct(ComponentCollection $collection, $parametres = array())
 
-    Les Constructeurs pour la classe de base du composant. Tous les ``$parametres`` qui
-    sont aussi des propriétés publiques, vont avoir leurs valeurs changées pour matcher
-    avec les valeurs de ``$settings``.
+    Les Constructeurs pour la classe de base du composant. Tous les 
+    ``$parametres`` qui sont aussi des propriétés publiques, vont avoir leurs 
+    valeurs changées pour matcher avec les valeurs de ``$settings``.
 
 Les Callbacks
 -------------
@@ -282,7 +282,7 @@ Les Callbacks
 .. php:method:: beforeRender($controller)
 
     La méthode beforeRender est appelée après que le contrôleur exécute la 
-    logique de l'action requêté, mais avant le rendu de la vue et le 
+    logique de l'action requêtée, mais avant le rendu de la vue et le 
     layout du contrôleur.
 
 .. php:method:: shutdown($controller)

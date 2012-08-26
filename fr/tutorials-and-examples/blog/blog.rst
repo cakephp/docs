@@ -9,8 +9,8 @@ plus agréable : nous espérons que vous le découvrirez au fur et à mesure que
 vous plongerez dans le code.
 
 Ce tutoriel vous accompagnera à travers la création d'une simple application 
-de blog. Nous récupérons et installerons Cake, créerons et configurons une base 
-de données et ajouterons suffisamment de logique applicative pour lister, 
+de blog. Nous récupérerons et installerons Cake, créerons et configurerons une 
+base de données et ajouterons suffisamment de logique applicative pour lister, 
 ajouter, éditer et supprimer des posts.
 
 Voici ce dont vous aurez besoin :
@@ -18,7 +18,7 @@ Voici ce dont vous aurez besoin :
 
 #. Un serveur web fonctionnel. Nous supposerons que vous utiliser Apache,
    bien que les instructions pour utiliser d'autres serveurs devraient
-   être très semblable. Nous aurons peut-être besoin de jouer un peu sur la
+   être très semblables. Nous aurons peut-être besoin de jouer un peu sur la
    configuration du serveur, mais la plupart des personnes peuvent faire 
    fonctionner Cake sans aucune configuration préalable.
 #. Un serveur de base de données. Dans ce tutoriel, nous utiliserons MySQL. 
@@ -29,7 +29,7 @@ Voici ce dont vous aurez besoin :
    si vous êtes adepte de la programmation procédurale.
 #. Enfin, vous aurez besoin de connaissances de base à propos du motif de 
    conception MVC. Un bref aperçu de ce motif dans le chapitre 
-   "Débuter avec CakePHP", section : "Comprendre le modèle M-V-C".
+   :doc:`/cakephp-overview/understanding-model-view-controller`.
    Ne vous inquiétez pas : il n'y a qu'une demi-page de lecture.
 
 Maintenant, lançons-nous !
@@ -114,7 +114,7 @@ Configurer la base de données Cake
 ==================================
 
 En avant : indiquons à Cake où se trouve notre base de données et comment s'y 
-connecter. Pour la plupart d'entre vous, c'est première et dernière fois que 
+connecter. Pour la plupart d'entre vous, c'est la première et dernière fois que 
 vous configurerez quelque chose.
 
 Une copie du fichier de configuration Cake pour la base de données se trouve 
@@ -185,9 +185,9 @@ d'importance du moment qu'elle est difficile à deviner.
      */
     Configure::write('Security.cipherSeed', '7485712659625147843639846751');
 
-La dernière étape consiste à le dossier ``/app/tmp`` accessible en écriture. 
-Le meilleur moyen de faire cela est trouver sous quel utilisateur votre 
-serveur web s'exécute (``<?php echo `whoami`; ?>``) et de modifier le 
+La dernière étape consiste à rendre le dossier ``/app/tmp`` accessible en 
+écriture. Le meilleur moyen de faire cela est trouver sous quel utilisateur 
+votre serveur web s'exécute (``<?php echo `quisuisje`; ?>``) et de modifier le 
 propriétaire du dossier ``/app/tmp`` pour cet utilisateur. La commande à 
 exécuter (sous \*nix) devrait resembler à quelque chose comme ça ::
 
@@ -214,7 +214,7 @@ Voici quelques conseils pour vous aider à le faire fonctionner :
    à ``All`` dans ``<Directory />``. A la place, recherchez le bloc 
    ``Directory>`` qui correspond au dossier de votre site web.
 
-#. Assurez-vous que vous éditer le bon httpd.conf et non celui d'un utilisateur 
+#. Assurez-vous que vous éditez le bon httpd.conf et non celui d'un utilisateur 
    ou d'un site spécifique.
 
 #. Pour une raison ou une autre, vous avez peut être téléchargé une copie de 
@@ -250,8 +250,8 @@ Supprimez également ces fichiers .htaccess ::
 
 
 Vos URLs seront ainsi transformées en : 
-www.example.com/index.php/controllername/actionname/param plutôt que 
-www.example.com/controllername/actionname/param.
+www.exemple.com/index.php/nomducontroller/nomdelaction/param plutôt que 
+www.exemple.com/nomducontroller/nomdelaction/param.
 
 Si vous installez CakePHP sur un serveur web autre que Apache, vous trouverez 
 les instructions pour obtenir des "URLs enjolivées" avec d'autres serveurs 

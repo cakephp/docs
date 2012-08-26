@@ -1,8 +1,8 @@
 Thèmes
 ######
 
-Vous pouvez profiter des thèmes, ce qui facilite le changement du look and feel 
-de votre page rapidement et facilement.
+Vous pouvez profiter des thèmes, ce qui facilite le changement du visuel et 
+du ressenti de votre page rapidement et facilement.
 
 Pour utiliser les thèmes, spécifiez le nom du thème dans votre contrôleur::
 
@@ -46,19 +46,19 @@ Un thème peut inclure tout asset nécessaire dans son répertoire webroot. Cela
 permet un packaging facile et une distribution des thèmes. Pendant le 
 développement, les requêtes pour les assets du thème seront gérés par
 :php:class:`Dispatcher`. Pour améliorer la performance des environnements de 
-production, il est recommandé soit que vous symlink soit que vous copiez les 
-assets du thème dans le webroot de application. Voir ci-dessus pour plus
-d'informations.
+production, il est recommandé soit que vous fassiez un lien symbolique soit 
+que vous copiez les assets du thème dans le webroot de application. Voir 
+ci-dessous pour plus d'informations.
 
 Pour utiliser le nouveau thème, créez des répertoires de type
 ``app/View/Themed/<nomDuTheme>/webroot<chemin_vers_fichier>`` dans votre thème.
 Le Dispatcher se chargera de trouver les assets du thème corrects dans vos 
 chemins de vue.
 
-Tous les helpers integrés dans CakePHP sont conscients de thèmes et vont créer 
-des chemins d'accès corrects automatiquement. Comme pour les fichiers de vue, 
-si un fichier n'est pas dans le dossier du thème, il sera par défaut dans le 
-dossier principal webroot ::
+Tous les helpers integrés dans CakePHP ont intégrés l'existence des thèmes 
+et vont créer des chemins d'accès corrects automatiquement. Comme pour les 
+fichiers de vue, si un fichier n'est pas dans le dossier du thème, il sera 
+par défaut dans le dossier principal webroot ::
 
     <?php
     //Quand dans un thème avec un nom de 'purple_cupcake'
@@ -90,4 +90,4 @@ dans ``app/webroot`` avec des chemins correspondant à ceux utilisés par cakeph
 
 .. meta::
     :title lang=fr: Thèmes
-    :keywords lang=fr: environnements de production,dossier du thème,fichiers layout,requêtes de développement,fonctions de callback,structure de dossier,vue par défaut,dispatcher,symlink,cas de base,layouts,assets,cakephp,thèmes,avantage
+    :keywords lang=fr: environnements de production,dossier du thème,fichiers layout,requêtes de développement,fonctions de callback,structure de dossier,vue par défaut,dispatcher,lien symbolique,cas de base,layouts,assets,cakephp,thèmes,avantage

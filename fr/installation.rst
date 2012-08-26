@@ -15,7 +15,7 @@ Conditions requises
 -  PHP 5.2.8 ou plus.
 
 Techniquement, un moteur de base de données n'est pas nécessaire, mais nous 
-imaginons que la plupart des applications vont en utiliser une. CakePHP 
+imaginons que la plupart des applications vont en utiliser un. CakePHP 
 supporte une diversité de moteurs de stockage de données:
 
 -  MySQL (4 ou plus)
@@ -33,7 +33,7 @@ Licence
 
 CakePHP est licencié sous la licence MIT. Cela signifie que vous êtes libre 
 de modifier, distribuer et reproduire le code source sous la condition que 
-les informations de copyright restent intactes. Vous êtes aussi libre 
+les informations de copyright restent intactes. Vous êtes aussi libres 
 d'incorporer CakePHP dans toute code source d'application commerciale ou 
 fermée.
 
@@ -48,7 +48,7 @@ Pour télécharger la dernière version majeure de CakePHP. Visitez le site web
 principal `http://www.cakephp.org <http://www.cakephp.org>`_ et
 suivez le lien "Télécharger maintenant".
 
-Toutes les version actuelles de CakePHP sont hébérgées sur 
+Toutes les versions actuelles de CakePHP sont hébérgées sur 
 `Github <http://github.com/cakephp/cakephp>`_. Github héberge CakePHP
 lui-même ainsi que plusieurs autres plugins pour CakePHP. Les versions de 
 CakePHP sont disponibles à 
@@ -80,7 +80,7 @@ Configurer CakePHP est aussi simple que de le flanquer dans le
 document root de votre serveur web, ou aussi complexe et flexible 
 que vous le souhaitez.
 Cette section couvrira les trois types principaux d'installation pour CakePHP: 
-développement, production, and avancé.
+développement, production, et avancé.
 
 -  Développement: Facile à mettre en oeuvre, mais les URLs de l’application 
    contiennent le nom du répertoire d’installation de CakePHP et c’est moins 
@@ -104,7 +104,7 @@ Décompressez le contenu de l'archive Cake dans ``/var/www/html``. Vous avez
 maintenant un dossier dans votre document root, nommé d'après la version que 
 vous avez téléchargée (par exemple : cake\_2.0.0). Renommez ce dossier en 
 "cake\_2\_0". Votre installation "développement" devrait ressembler à quelque 
-chose comme çà dans votre système de fichiers :
+chose comme cela dans votre système de fichiers :
 
 -  /var/www/html
 
@@ -121,12 +121,12 @@ chose comme çà dans votre système de fichiers :
 
 Si votre serveur web est configuré correctement, vous devriez trouver 
 maintenant votre application Cake accessible à 
-http://www.example.com/cake\_2\_0/.
+http://www.exemple.com/cake\_2\_0/.
 
 Utiliser un CakePHP pour de multiples applications
 --------------------------------------------------
 
-Si vous développez un certain nombre d'applicationsn il peut sembler être sensé 
+Si vous développez un certain nombre d'applications il peut sembler être sensé 
 de partager le même coeur de CakePHP. Il y a peu de façon d'accomplir cela. 
 Souvent, le plus facile est d'utiliser le ``include_path`` de PHP. Pour 
 commencer, copiez CakePHP dans un répertoire. Pour cet exemple, nous 
@@ -203,16 +203,16 @@ Installation avancée et configuration de serveur spécifique
 A vous de jouer!
 ================
 
-Ok, regardons CakePHP en action. Selon la configuration que vous utilisez, 
-vous pouvez pointer votre navigateur vers http://example.com/ ou
-http://example.com/cake\_install/. A ce niveau, vous serez sur le page home 
-par défaut de CakePHP, et un message qui vous donne le statut de la connection 
-de votre base de données courante.
+Ok, voyons voir CakePHP en action. Selon la configuration que vous utilisez, 
+vous pouvez pointer votre navigateur vers http://exemple.com/ ou
+http://exemple.com/cake\_install/. A ce niveau, vous serez sur le page home 
+par défaut de CakePHP, et un message qui vous donnera le statut de la 
+connection de votre base de données courante.
 
 Félicitations! Vous êtes prêt à :doc:`créer votre première application CakePHP 
 </getting-started>`.
 
-Cela ne fonctionne pas? Si vous avez une erreur lié au timezone de PHP, 
+Cela ne fonctionne pas? Si vous avez une erreur liée au timezone de PHP, 
 décommentez une ligne dans ``app/Config/core.php``::
 
    <?php

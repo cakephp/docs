@@ -3,11 +3,11 @@ Les Objets Request et Response
 
 Les objets request et response sont nouveaux depuis CakePHP 2.0. Dans les 
 versions précédentes, ces objets étaient représentés à travers des array, 
-et les méthodes liées étaient répandues à travers 
+et les méthodes liées étaient utilisées à travers 
 :php:class:`RequestHandlerComponent`, :php:class:`Router`, 
 :php:class:`Dispatcher` et :php:class:`Controller`. Il n'y avait pas d'objet 
-authorisé qui reprenait les informations de la requête. Pour CakePHP 2.0, 
-:php:class:`CakeRequest` et :php:class:`CakeResponse` sont utilisées à ce sujet.
+global qui reprenait les informations de la requête. Pour CakePHP 2.0, 
+:php:class:`CakeRequest` et :php:class:`CakeResponse` sont utilisés pour cela.
 
 .. index:: $this->request
 .. _cake-request:
@@ -95,7 +95,7 @@ Les paramètres Querystring peuvent être lus en utilisant
 Accéder aux données POST
 ========================
 
-Toutes les données POST peuvent être accédées par 
+Toutes les données POST peuvent être atteintes à travers 
 :php:attr:`CakeRequest::$data`. N'importe quelle forme de tableau qui contient 
 un prefixe ``data``, va avoir sa donnée prefixée retirée. Par exemple::
 
@@ -147,7 +147,7 @@ déterminer si votre application est ou n'est pas dans un sous-dossier.
 Inspecter la requête
 ====================
 
-Détecter des conditions variées de la requête utilisée en utilisant 
+Détecter les différentes conditions de la requête utilisée en utilisant 
 :php:class:`RequestHandlerComponent`. Ces méthodes ont été déplacées dans 
 ``CakeRequest``, et offrent une nouvelle interface compatible avec les 
 utilisations anciennes::
