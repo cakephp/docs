@@ -20,7 +20,7 @@ et le fichier que nous allons créer maintenant sera enregistré dans
 
 La convention de nommage est vraiment très importante dans CakePHP. En nommant 
 notre modèle Post, CakePHP peut automatiquement déduire que ce modèle sera 
-utilisé dans le contrôleur PostsController, et sera lié à la table ``posts`` 
+utilisé dans le controller PostsController, et sera lié à la table ``posts`` 
 de la base de données.
 
 .. note::
@@ -35,15 +35,15 @@ Pour plus d'informations sur les modèles, comme les préfixes des tables,
 les callbacks, et la validation, consultez le chapitre :doc:`/models` du manuel.
 
 
-Créer un contrôleur Posts
+Créer un controller Posts
 =========================
 
-Nous allons maintenant créer un contrôleur pour nos posts. Le contrôleur est
+Nous allons maintenant créer un controller pour nos posts. Le controller est
 l'endroit où s'exécutera toute la logique métier pour l'intéraction du 
 processus de post. En un mot, c'est l'endroit où vous jouerez avec les modèles 
 et où les tâches liées aux posts s'exécutent. Nous placerons ce nouveau 
-contrôleur dans un fichier appelé ``PostsController.php`` à l'intérieur du 
-dossier ``/app/Controller``. Voici à quoi devrait ressembler le contrôleur 
+controller dans un fichier appelé ``PostsController.php`` à l'intérieur du 
+dossier ``/app/Controller``. Voici à quoi devrait ressembler le controller 
 de base ::
 
     <?php
@@ -51,7 +51,7 @@ de base ::
         public $helpers = array('Html', 'Form');
     }
 
-Maintenant, ajoutons une action à notre contrôleur. Les actions représentent 
+Maintenant, ajoutons une action à notre controller. Les actions représentent 
 souvent une simple fonction ou une interface dans une application. Par exemple, 
 quand les utilisateurs requêtent wwww.exemple.com/posts/index (qui est 
 également la même chose que www.exemple.com/posts/), ils pourraient s'attendre 
@@ -77,28 +77,28 @@ utilisateurs pourrait y accéder en demandant www.exemple.com/posts/foobar.
 
 .. warning::
 
-    Vous pourriez être tenté de nommer vos contrôleurs et vos actions d'une 
+    Vous pourriez être tenté de nommer vos controllers et vos actions d'une 
     certaine manière pour obtenir une certaine URL. Résistez à cette tentation. 
-    Suivez les conventions CakePHP (le nom des contrôleurs au pluriel, etc.) et 
+    Suivez les conventions CakePHP (le nom des controllers au pluriel, etc.) et 
     nommez vos actions de façon lisible et compréhensible. Vous pouvez lier les 
     URLs à votre code en utilisant ce qu'on appelle des "routes", on le verra 
     plus tard.
 
 La seule instruction que cette action utilise est ``set()``, pour transmettre 
-les données du contrôleur à la vue (que nous créerons à la prochaine étape). 
+les données du controller à la vue (que nous créerons à la prochaine étape). 
 La ligne définit la variable de vue appelée 'posts' qui est égale à la valeur 
 de retour de la méthode ``find('all')`` du modèle Post. Notre modèle Post est 
 automatiquement disponible via $this->Post, parce que nous avons suivi les 
 conventions de nommage de Cake.
 
-Pour en apprendre plus sur les contrôleurs de Cake, consultez le chapitre 
+Pour en apprendre plus sur les controllers de Cake, consultez le chapitre 
 :doc:`/controllers`.
 
 Créer les Vues Post
 ===================
 
 Maintenant que nous avons nos données en provenance du modèle, ainsi que la 
-logique applicative et les flux définis par notre contrôleur, nous allons créer 
+logique applicative et les flux définis par notre controller, nous allons créer 
 une vue pour l'action "index" que nous avons créé ci-dessus.
 
 Les vues de Cake sont juste des fragments de présentation "assaisonnée", 
@@ -157,7 +157,7 @@ chose comme ça :
     )
 
 Les fichiers des vues de Cake sont stockés dans ``/app/views`` à l'intérieur 
-d'un dossier dont le nom correspond à celui du contrôleur (nous aurons à créer 
+d'un dossier dont le nom correspond à celui du controller (nous aurons à créer 
 un dossier appelé 'posts' dans ce cas). Pour mettre en forme les données de 
 ces posts dans un joli tableau, le code de notre vue devrait ressembler à 
 quelque chose comme cela ::
@@ -213,7 +213,7 @@ vue (le lien sur le titre d'un post mène à l'URL : /posts/view/un_id_quelconqu
 vous avez sûrement été informé par CakePHP que l'action n'a pas encore été définie.
 Si vous n'avez pas été informé, soit quelque chose s'est mal passé, soit en fait
 vous aviez déjà défini l'action, auquel cas vous êtes vraiment sournois !
-Sinon, nous allons la créer sans plus tarder dans le Contrôleur Posts ::
+Sinon, nous allons la créer sans plus tarder dans le Controller Posts ::
 
     <?php
     class PostsController extends AppController {
@@ -295,9 +295,9 @@ PostsController :
 .. note::
 
     Vous avez besoin d'inclure le composant Session (SessionComponent) et 
-    l'assistant Session (SessionHelper) dans chaque contrôleur que vous 
-    utiliserez. Si nécessaire, incluez-les dans le contrôleur principal 
-    (AppController) pour qu'ils soient accessibles à tout les contrôleurs.
+    l'assistant Session (SessionHelper) dans chaque controller que vous 
+    utiliserez. Si nécessaire, incluez-les dans le controller principal 
+    (AppController) pour qu'ils soient accessibles à tout les controllers.
 
 Voici ce que fait l'action ``add()`` : si la requête HTTP est de type POST, 
 essayez de sauvegarder les données en utilisant le modèle "Post". Si pour une 
@@ -321,9 +321,9 @@ Session (SessionComponent) pour définir un message dans une variable session
 et qui sera affiché dans la page juste après la redirection. Dans le layout, 
 nous trouvons la fonction :php:func:`SessionHelper::flash` qui permet 
 d'afficher et de nettoyer la variable correspondante. La méthode 
-:php:meth:`Controller::redirect`` du contrôleur permet de rediriger vers une 
+:php:meth:`Controller::redirect`` du controller permet de rediriger vers une 
 autre URL. Le paramètre ``array('action' => 'index')`` sera traduit vers l'URL 
-/posts, c'est à dire l'action "index" du contrôleur "Posts" (PostsController).
+/posts, c'est à dire l'action "index" du controller "Posts" (PostsController).
 Vous pouvez vous référer à l'API de la fonction :php:func:`Router::url()`` 
 pour voir les différents formats d'URL acceptés dans les différentes fonctions 
 de Cake.
@@ -364,7 +364,7 @@ d'ouverture d'une formulaire HTML. Voici le code HTML généré par
 
 Si ``create()`` est appelée sans aucun paramètre, Cake suppose que vous 
 construisez un formulaire qui envoie les données en POST à l'action ``add()`` 
-(ou ``edit()`` quand ``id`` est dans les données du formulaire) du contrôleur 
+(ou ``edit()`` quand ``id`` est dans les données du formulaire) du controller 
 actuel.
 
 La méthode ``$this->Form->input()`` est utilisé pour créer des élements de 
@@ -425,7 +425,7 @@ Editer des Posts
 
 L'édition de posts : nous y voilà. Vous êtes un pro de CakePHP maintenant, vous 
 devriez donc avoir adopté le principe. Créez d'abord l'action puis la vue. 
-Voici à quoi l'action ``edit()`` du contrôleur Posts (PostsController) devrait 
+Voici à quoi l'action ``edit()`` du controller Posts (PostsController) devrait 
 ressembler ::
 
     <?php
@@ -508,7 +508,7 @@ Supprimer des Posts
 ===================
 
 A présent, mettons en place un moyen de supprimer les posts pour les 
-utilisateurs. Démarrons avec une action ``delete()`` dans le contrôleur 
+utilisateurs. Démarrons avec une action ``delete()`` dans le controller 
 Posts (PostsController)::
 
     <?php
@@ -595,9 +595,9 @@ Pour plus d'informations sur les techniques de routages, consultez le chapitre
 :ref:`routes-configuration`.
 
 Par défaut, CakePHP effectue une redirection d'une personne visitant la racine 
-de votre site (i.e. http://www.exemple.com) vers le contrôleur Pages 
+de votre site (i.e. http://www.exemple.com) vers le controller Pages 
 (PagesController) et affiche le rendu de la vue appelée "home". Au lieu de 
-cela, nous voudrions la remplacer avec notre contrôleur Posts (PostsController).
+cela, nous voudrions la remplacer avec notre controller Posts (PostsController).
 
 Le routage de Cake se trouve dans ``/app/Config/routes.php``. Vous devrez 
 commenter ou supprimer la ligne qui définit la route par défaut. Elle 
@@ -607,14 +607,14 @@ ressemble à cela ::
     Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
 Cette ligne connecte l'URL '/' à la page d'accueil par défaut de CakePHP. Nous 
-voulons que cette URL soit connectée à notre propre contrôleur, remplacez donc 
+voulons que cette URL soit connectée à notre propre controller, remplacez donc 
 la ligne par celle-ci ::
 
     <?php
     Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 
 Cela devrait connecter les utilisateurs demandant '/' à l'action ``index()`` de 
-notre contrôleur Posts (PostsController).
+notre controller Posts (PostsController).
 
 .. note::
 
