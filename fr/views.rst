@@ -5,7 +5,7 @@ Les "Vues" sont le **V** dans MVC. Les vues sont chargées de générer la sorti
 spécifique requise par la requête. Souvent, cela est fait sous forme HTML, 
 XML ou JSON, mais le streaming de fichiers et la création de PDFs que les 
 utilisateurs peuvent télécharger sont aussi de la responsabilité de la 
-couche Vues.
+couche View.
 
 CakePHP a quelques classes de vue déjà construites pour gérer les scénarios de 
 rendu les plus communs:
@@ -223,8 +223,8 @@ when used with the ``inline = false`` option::
         </head>
         // rest of the layout follows
 
-The :php:meth:`HtmlHelper` also allows you to control which block the scripts and CSS go
-to::
+The :php:meth:`HtmlHelper` also allows you to control which block the scripts 
+and CSS go to::
 
     <?php
     // in your view

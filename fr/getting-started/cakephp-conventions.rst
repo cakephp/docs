@@ -25,7 +25,7 @@ se terminent par 'Controller'. PersonnesController et
 DerniersArticlesController sont des exemples respectant cette convention.
 
 La première méthode que vous écrivez pour un contrôleur devrait être
-``index()``. Lorsqu'une requête adresse un contrôleur mais pas d'action, le 
+``index()``. Lorsqu'une requête pointe vers un contrôleur sans action, le 
 comportement par défaut de CakePHP est d'exécuter la fonction ``index()`` 
 de ce contrôleur. Ainsi, la requête http://www.exemple.com/pommes/ renvoie
 à la fonction ``index()`` de ``PommesController``, alors que
@@ -48,18 +48,18 @@ mais est disponible pour une utilisation interne. Par exemple::
     class NouvellesController extends AppController {
     
         public function derniers() {
-            $this->_findNewArticles();
+            $this->_trouveLesNouveauxArticles();
         }
         
-        protected function _findNewArticles() {
-            // Logique pour trouver les derniere articles de nouvelles
+        protected function _trouveLesNouveauxArticles() {
+            // Logique pour trouver les derniers articles de nouvelles
         }
     }
     
 
-Alors que la page http://www.example.com/news/latest/ est accessible 
+Alors que la page http://www.exemple.com/nouvelles/derniers/ est accessible 
 à l'utilisateur comme d'habitude, quelqu'un qui essaie d'aller sur la page 
-http://www.example.com/news/\_findNewArticles/ aura une erreur,
+http://www.example.com/nouvelles/\_trouveLesNouveauxArticles/ aura une erreur,
 car la méthode est précédée d'un underscore. Vous pouvez aussi utiliser les
 mots-clés de visibilité de PHP pour indiquer si la méthode peut ou non être
 accessible à partir d'une url. Les méthodes non-publiques ne sont pas 
@@ -77,14 +77,14 @@ Les contrôleurs à multiples mots *peuvent* être de forme 'inflecté' qui
 correspondent au nom du contrôleur:
 
 -  /pommesRouges
--  /PommesRougesRedApples
+-  /PommesRouges
 -  /Pomme\_rouges
 -  /pomme\_rouges
 
 iront tous vers l'index du contrôleur PommesRouges. Cependant, 
 la convention est que vos urls soient en minuscules et avec des underscores,
-c'est pourquoi /pommes\_rouges/go\_pick est la forme correcte pour accéder à 
-l'action ``RedApplesController::go_pick``.
+c'est pourquoi /pommes\_rouges/allez\_chercher est la forme correcte pour accéder à 
+l'action ``RedApplesController::allez_chercher``.
 
 Pour plus d'informations sur les URLs de CakePHP et la gestion des paramètres,
 allez voir :ref:`routes-configuration`.
@@ -95,7 +95,7 @@ Conventions des Fichiers et des Noms de Classe
 ==============================================
 
 En général, les noms de fichiers sont composés avec le caractère souligné 
-(underscore), alors que les noms de classe sont CamelCased. Donc si vous avez 
+(underscore), alors que les noms de classe sont en CamelCase. Donc si vous avez 
 une classe MaChouetteClasse, alors dans Cake, le fichier devrait être nommé 
 ma_chouette_classe.php. Voici des exemples de la manière dont on nomme les 
 fichiers, pour chacun des différents types de classes que vous utiliseriez 
@@ -114,12 +114,12 @@ habituellement dans une application CakePHP :
 -  La classe Assistant (Helper) **LeMeilleurQuiSoitHelper** devra se trouver 
    dans un fichier nommé **LeMeilleurQuiSoitHelper.php**
 
-Chaque fichier sera située dans le répertoire approprié dans votre dossier app.
+Chaque fichier sera situé dans le répertoire approprié dans votre dossier app.
 
 Conventions pour les Modèles et les Sources de données
 ======================================================
 
-Les noms de classe de modèle sont au singulier et CamelCased. "Personne", 
+Les noms de classe de modèle sont au singulier et en CamelCase. "Personne", 
 "GrossePersonne" et "VraimentGrossePersonne" en sont des exemples.
 
 Les noms de tables correspondant aux modèles CakePHP sont au pluriel et 
@@ -148,7 +148,7 @@ un nom de plusieurs mots comme "type\_categories", la clé étrangère sera
 "type\_categorie\_id".
 
 Les tables de jointure utilisées dans les relations hasAndBelongsToMany 
-(HABTM) entre modèles devraient être nommées d'après le nom des tables des 
+(HABTM) entre modèles doivent être nommées d'après le nom des tables des 
 modèles qu'elles unissent, dans l'ordre alphabétique ("pommes\_zebres" plutôt 
 que "zebres\_pommes").
 
@@ -197,7 +197,7 @@ abordées :
     /app/Controller/PersonnesController.php
     Gabarit de la Vue : trouvé dans /app/View/Personnes/index.ctp
 
-En utilisant ces conventions, CakePHP sait qu'une requête à 
+En utilisant ces conventions, CakePHP sait qu'une requête de type  
 http://exemple.com/personnes/ sera liée à un appel à la fonction index() du 
 Contrôleur PersonnesController, dans lequel le modèle Personne est 
 automatiquement disponible (et automatiquement lié à la table 'personnes' 
@@ -210,13 +210,7 @@ essayer de dérouler le tutoriel du Blog CakePHP
 :doc:`/tutorials-and-examples/blog/blog`pour voir comment les choses 
 s'articulent.
 
--  Database table: "people"
--  Model class: "Person", found at /app/Model/Person.php
--  Controller class: "PeopleController", found at
-   /app/Controller/PeopleController.php
--  View template, found at /app/View/People/index.ctp
-
 
 .. meta::
     :title lang=fr: Conventions de CakePHP
-    :keywords lang=fr: web development experience,maintenance cauchemard,méthode index,systèmes légaux,noms de méthode,classe php,système uniforme,fichiers de config,tenets,pommes,conventions,contrôleur conventionel,bonnes pratiques,maps,visibilité,nouveaux articles,fonctionnalité,logique,cakephp,développeurs
+    :keywords lang=fr: expérience de développement web,maintenance cauchemard,méthode index,systèmes légaux,noms de méthode,classe php,système uniforme,fichiers de config,tenets,pommes,conventions,contrôleur conventionel,bonnes pratiques,maps,visibilité,nouveaux articles,fonctionnalité,logique,cakephp,développeurs

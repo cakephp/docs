@@ -6,7 +6,7 @@ Le cœur de CakePHP est livré avec un contrôleur par défaut
 un contenu statique. La page d'accueil que vous voyez juste après 
 l'installation est d'ailleurs générée à l'aide de ce contrôleur. Ex : Si vous 
 écrivez un fichier de vue ``app/View/Pages/a_propos.ctp``, vous pouvez y 
-accéder en utilisant l'url ``http://example.com/pages/a_propos``. Vous pouvez 
+accéder en utilisant l'url ``http://exemple.com/pages/a_propos``. Vous pouvez 
 modifier le contrôleur Pages selon vos besoins.
 
 Quand vous "cuisinez" une application avec l'utilitaire console de CakePHP, 
@@ -28,4 +28,4 @@ fichier à partir de
 
 .. meta::
     :title lang=fr: Le Contrôleur Pages
-    :keywords lang=fr: contrôleur pages,contrôleur par défault,lib,cakephp,ships,php,fichier dossier
+    :keywords lang=fr: contrôleur pages,contrôleur par défaut,lib,cakephp,ships,php,fichier dossier

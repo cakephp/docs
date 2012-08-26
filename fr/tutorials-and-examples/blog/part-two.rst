@@ -32,7 +32,7 @@ de la base de données.
     ses objets modèle par défaut.
 
 Pour plus d'informations sur les modèles, comme les préfixes des tables, 
-les callbacks, et la validation, consulter le chapitre :doc:`/models` du manuel.
+les callbacks, et la validation, consultez le chapitre :doc:`/models` du manuel.
 
 
 Créer un contrôleur Posts
@@ -191,7 +191,7 @@ Bien entendu, cela donnera quelque chose de simple.
 
 Vous avez sans doute remarqué l'utilisation d'un objet appelé ``$this->Html``.
 C'est une instance de la classe CakePHP :php:class:`HtmlHelper`.
-CakePHP est livré avec un ensemble de "helpers" (des assistants) pour les vue, 
+CakePHP est livré avec un ensemble de "helpers" (des assistants) pour les vues, 
 qui réalisent en un clin d'oeil des choses comme le "linking" (mettre les liens 
 dans un texte), l'affichage des formulaires, du JavaScript et de l'Ajax. Vous 
 pouvez en apprendre plus sur la manière de les utiliser dans le chapitre 
@@ -200,7 +200,7 @@ méthode ``link()`` génèrera un lien HTML à partir d'un titre (le premier
 paramètre) et d'une URL (le second paramètre).
 
 Lorsque vous indiquez des URLs dans Cake, il est recommandé d'utiliser les 
-tableaux. Ceci est expliqué dans le chapitre des Routes. Utiliser les tableaux 
+tableaux. Ceci est expliqué dans le chapitre des Routes. Utilisez les tableaux 
 dans les URLs, vous permet de tirer avantage des capacités de CakePHP à 
 ré-inverser les routes. Vous pouvez aussi utiliser les URLs relatives depuis 
 la base de l'application comme suit /controller/action/param1/param2.
@@ -230,11 +230,11 @@ Sinon, nous allons la créer sans plus tarder dans le Contrôleur Posts ::
     }
 
 L'appel de ``set()`` devrait vous être familier. Notez que nous utilisons 
-``read()`` plutôt que ``find('all')`` parce que nous seulement récupérer les 
-incformations d'un seul post.
+``read()`` plutôt que ``find('all')`` parce que nous voulons seulement 
+récupérer les informations d'un seul post.
 
 Notez que notre action "view" prend un paramètre : l'ID du post que nous 
-aimerais voir. Ce paramètre est transmis à l'action grâce à l'URL demandée.
+aimerions voir. Ce paramètre est transmis à l'action grâce à l'URL demandée.
 Si un utilisateur demande /posts/view/3, alors la valeur '3' est transmise 
 à la variable ``$id``.
 
@@ -297,7 +297,7 @@ PostsController :
     Vous avez besoin d'inclure le composant Session (SessionComponent) et 
     l'assistant Session (SessionHelper) dans chaque contrôleur que vous 
     utiliserez. Si nécessaire, incluez-les dans le contrôleur principal 
-   (AppController) pour qu'ils soient accessibles à tout les contrôleurs.
+   (AppController) pour qu'ils soient accessibles à tous les contrôleurs.
 
 Voici ce que fait l'action ``add()`` : si la requête HTTP est de type POST, 
 essayez de sauvegarder les données en utilisant le modèle "Post". Si pour une 
@@ -307,7 +307,7 @@ d'autres erreurs.
 
 Chaque requête de CakePHP contient un objet ``CakeRequest`` qui est accessible 
 en utilisant ``$this->request``. Cet objet contient des informations utiles 
-sur la requête qui vient d'être reçue, et permet de controler les flux de votre 
+sur la requête qui vient d'être reçue, et permet de contrôler les flux de votre 
 application. Dans ce cas, nous utilisons la méthode 
 :php:meth:`CakeRequest::is()`` pour vérifier que la requête est de type POST.
 
@@ -379,7 +379,7 @@ et ajoute la balise de fermeture du formulaire. Si une chaîne de caractères es
 passée comme premier paramètre de la méthode ``end()``, l'assistant "Form" 
 affichera un bouton de soumission dont le nom correspond à celle-ci. Encore 
 une fois, référez-vous au chapitre :doc:`/views/helpers` pour en savoir plus 
-sur les assistants.
+sur les helpers.
 
 A présent, revenons en arrière et modifions notre vue 
 ``/app/View/Posts/index.ctp`` pour ajouter un lien "Ajouter un post". Ajoutez 
@@ -597,7 +597,7 @@ Pour plus d'informations sur les techniques de routages, consultez le chapitre
 Par défaut, CakePHP effectue une redirection d'une personne visitant la racine 
 de votre site (i.e. http://www.exemple.com) vers le contrôleur Pages 
 (PagesController) et affiche le rendu de la vue appelée "home". Au lieu de 
-celà, nous voudrions la remplacer avec notre contrôleur Posts (PostsController).
+cela, nous voudrions la remplacer avec notre contrôleur Posts (PostsController).
 
 Le routage de Cake se trouve dans ``/app/Config/routes.php``. Vous devrez 
 commenter ou supprimer la ligne qui définit la route par défaut. Elle 
@@ -644,8 +644,8 @@ du `Manuel </>`_ et de `l'API <http://api20.cakephp.org>`_.
 Si vous avez besoin d'aide, venez nous voir sur le canal IRC #cakephp. 
 Bienvenue sur CakePHP !
 
-Prochaines lectures suggérrées
----------------------------
+Prochaines lectures suggérées
+-----------------------------
 
 Voici les différents chapitres que les gens veulent souvent lire après :
 1. :ref:`view-layouts`: Personnaliser les Gabarits (Layouts) de votre 

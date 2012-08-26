@@ -3,9 +3,10 @@ Installation avancée
 
 Il peut y avoir des situations où vous voulez placer les répertoires de CakePHP
 à différents endroits du système de fichiers. Cela est peut être du à des 
-restrictions de l'hôte partagé, ou peut-être vous voulez juste un peu de vos 
-apps pour partager les mêmes librairies de CakePHP. Cette section décrit 
-comment déployer vos répertoires de CakePHP à travers le système de fichiers.
+restrictions de l'hôte partagé, ou peut-être souhaitez-vous juste que 
+quelques-unes de vos apps puissent partager les mêmes librairies de CakePHP. 
+Cette section décrit comment déployer vos répertoires de CakePHP à travers 
+le système de fichiers.
 
 Premièrement, réalisez qu'il y a trois parties principales d'une application 
 Cake:
@@ -17,7 +18,7 @@ Cake:
 Chacun de ces répertoires peut être situé n'importe où dans votre 
 système de fichier, avec l'exception de webroot, qui a besoin d'être acessible 
 pour votre serveur web. Vous pouvez même déplacer le dossier webroot en-dehors 
-du dosser app tant que vous dîtes à Cake où vous le mettez.
+du dossier app tant que vous dîtes à Cake où vous le mettez.
 
 Pour configurer votre installation de Cake, vous aurez besoin de faire quelques 
 changements aux fichiers suivants.
@@ -72,13 +73,13 @@ Apache et mod\_rewrite (et .htaccess)
 =====================================
 
 Tant que CakePHP est construit pour travailler avec mod\_rewrite –et
-habituellement il l'est–nous avons remarqué que certains utilisateurs
+habituellement il l'est– nous avons remarqué que certains utilisateurs 
 se battent pour obtenir un bon fonctionnement sur leurs systèmes.
 
 Ici il y a quelques trucs que vous pourriez essayer pour que cela
 fonctionne correctement. Premièrement, regardez votre fichier
-httpd.conf (Assurez vous que vous avez éditer le système httpd.conf 
-plutôt qu'un utilisateur- ou un site spécifique httpd.conf).
+httpd.conf (Assurez vous que vous avez éditer le httpd.conf du système 
+plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique ).
 
 
 #. Assurez vous qu'un .htaccess est permis et que AllowOverride est défini à 
@@ -113,9 +114,9 @@ plutôt qu'un utilisateur- ou un site spécifique httpd.conf).
    Vérifiez que vos fichiers .htaccess sont effectivement dans le bon 
    répertoire.
 
-   Cela peut arriver pendant la copie parce que certains système 
+   Cela peut arriver pendant la copie parce que certains systèmes 
    d'exploitation traitent les fichiers qui commencent par '.' en caché et du 
-   coup ne les verront pas pour les copier.
+   coup ne les voient pas pour les copier.
 
 #. Assurez-vous que votre copie de CakePHP vient de la section des 
    téléchargements du site de notre dépôt GIT, et a été dézippé correctement 
@@ -149,10 +150,10 @@ plutôt qu'un utilisateur- ou un site spécifique httpd.conf).
            RewriteRule ^(.*)$ index.php/$1 [QSA,L]
        </IfModule>
 
-   Si votre site cakephp a toujours des problèmes avec mod\_rewrite, vous 
-   voudrez essayer et modifier les paramètres pour les virtualhosts. Si vous 
+   Si votre site cakephp a toujours des problèmes avec mod\_rewrite, 
+   essayez de modifier les paramètres pour les virtualhosts. Si vous 
    êtes sur ubuntu, modifiez le fichier /etc/apache2/sites-available/default 
-   (l'endroit est dépendant de la distribution). Dans ce fichier, assurez-vous 
+   (l'endroit dépend de la distribution). Dans ce fichier, assurez-vous 
    que ``AllowOverride None`` a changé en ``AllowOverride All``, donc vous 
    avez::
 
@@ -179,7 +180,7 @@ plutôt qu'un utilisateur- ou un site spécifique httpd.conf).
    utilise (/.htaccess, /app/.htaccess, /app/webroot/.htaccess).
 
    Ceci peut être ajouté à la même section avec la directive RewriteEngine, 
-   donc par exemple, votre fichier .htacces dans webroot ressemblerait à ceci::
+   donc par exemple, votre fichier .htaccess dans webroot ressemblerait à ceci::
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -189,15 +190,15 @@ plutôt qu'un utilisateur- ou un site spécifique httpd.conf).
            RewriteRule ^(.*)$ index.php/$1 [QSA,L]
        </IfModule>
 
-   Les détails de ces changements dépendront de votre configuration, et peuvent 
-   inclure des choses supplémentaires qui ne sont pas liées à CakePHP. Merci de 
-   vous renseigner sur la documentation en ligne d'Apache pour plus 
-   d'informations.
+   Les détails de ces changements dépendront de votre configuration, et 
+   pourront inclure des choses supplémentaires qui ne sont pas liées à 
+   CakePHP. Merci de vous renseigner sur la documentation en ligne d'Apache 
+   pour plus d'informations.
 
 De belles URLs et Lighttpd
 ==========================
 
-Alors que Lighttpd offre une fonctionnalité de module de rewrite, il n'est pas
+Alors que Lighttpd offre une fonctionnalité de module de rewrite, il n'est pas 
 l'équivalent du mod\_rewrite de Apache. Pour obtenir de belles URLs en 
 utilisant Lighty, vous avez deux options. La première option est l'utilisation 
 de mod\_rewrite, la deuxième option est l'utilisation d'un script LUA et 
@@ -289,7 +290,7 @@ de ressources système. Son inconvénient est qu'il ne fait pas usage de
 fichiers .htaccess comme Apache et Lighttpd, il est donc nécessaire de créer 
 les URLs réécrites dans la configuration du site disponibles. selon 
 votre configuration, vous devrez modifier cela, mais à tout le moins, 
-vous aurez besoin PHP fonctionnant comme une instance FastCGI.
+vous aurez besoin de PHP fonctionnant comme une instance FastCGI.
 
 ::
 
@@ -327,7 +328,7 @@ Rewrites d'URL sur IIS7 (serveurs Windows)
 
 IIS7 ne supporte pas nativement les fichiers .htaccess. Bien qu'il existe des 
 add-ons qui peuvent ajouter ce support, vous pouvez aussi importer les règles 
-des htaccess dans IIS pour utiliser les rewrites natifs de CakePHP. Pour ce 
+des .htaccess dans IIS pour utiliser les rewrites natifs de CakePHP. Pour ce 
 faire, suivez les étapes:
 
 #. Utilisez l'installeur de la plateforme Web de Microsoft pour installer le
@@ -380,13 +381,13 @@ Il est également possible d'utiliser la fonctionnalité Import dans l'URL
 IIS de Réécriture du module pour importer des règles directement à 
 partir des fichiers .htaccess de CakePHP dans la racine, /app/, et 
 /app/webroot/ - même si quelques modifications dans IIS peuvent être 
-nécessaire pour faire fonctionner ces applications. Lors de l'importation
+nécessaires pour faire fonctionner ces applications. Lors de l'importation 
 des règles de cette façon, IIS crée automatiquement votre fichier web.config 
 pour vous.
 
 Une fois que le fichier web.config est créé avec les bonnes règles de 
 réécriture des liens de IIS, les liens CakePHP, les CSS, les JS, et 
-le reroutage devrait fonctionner correctement.
+le reroutage devraient fonctionner correctement.
 
 
 .. meta::
