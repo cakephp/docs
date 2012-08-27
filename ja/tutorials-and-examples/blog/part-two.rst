@@ -14,7 +14,7 @@ CakePHPのモデルクラスのファイルは、 ``/app/Model`` の中にあり
     class Post extends AppModel {
     }
 
-命名規約は、CakePHPでは非常にに大切です。
+命名規約は、CakePHPでは非常に大切です。
 モデルをPostという名前にすることで、CakePHPは自動的に、このモデルはPostsControllerで使用されるのだろう、と考えます。
 また、 ``posts`` という名前のデータベーステーブルと結びつけられます。
 
