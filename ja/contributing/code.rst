@@ -98,7 +98,7 @@ CakePHPのセットアップを済ませたなら、 ``$test``
 
     git push origin <branch-name>
 
-一旦githubにブランチが配置されたら、、
+一旦githubにブランチが配置されたら、
 `cakephp-core <http://groups.google.com/group/cakephp-core>`_
 メーリングリストで議論、またはgithubでプルリクエストを送ることができます。
 
