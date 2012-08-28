@@ -440,14 +440,18 @@ All of the methods that configure an option parser can be chained,
 allowing you to define an entire option parser in one series of method calls::
 
     <?php
-    $parser->addArgument('type', array(
-        'help' => 'Either a full path or type of class.'
-    ))->addArgument('className', array(
-        'help' => 'A CakePHP core class name (e.g: Component, HtmlHelper).'
-    ))->addOption('method', array(
-        'short' => 'm',
-        'help' => __('The specific method you want help on.')
-    ))->description(__('Lookup doc block comments for classes in CakePHP.'));
+    function getOptionParser() {
+        $parser = parent::getOptionParser();
+        $parser->addArgument('type', array(
+            'help' => 'Either a full path or type of class.'
+        ))->addArgument('className', array(
+            'help' => 'A CakePHP core class name (e.g: Component, HtmlHelper).'
+        ))->addOption('method', array(
+            'short' => 'm',
+            'help' => __('The specific method you want help on.')
+        ))->description(__('Lookup doc block comments for classes in CakePHP.'));
+        return $parser;
+    }
 
 The methods that allow chaining are:
 
