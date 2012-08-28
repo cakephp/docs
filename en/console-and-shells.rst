@@ -133,7 +133,7 @@ Creating a shell
 ================
 
 Let's create a shell for use in the Console. For this example,
-we'll create a simple Hello world shell.  In you applications 
+we'll create a simple Hello world shell.  In your applications 
 ``Console/Command`` directory create ``HelloShell.php``.  Put the following
 code inside it::
 
