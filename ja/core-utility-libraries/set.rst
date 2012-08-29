@@ -58,23 +58,23 @@ Set互換のパス記法
 
 .. php:staticmethod:: apply($path, $array, $callback, $options = array())
 
-		    :rtype: mixed
+    :rtype: mixed
 
-		    Set::extract互換のパスで展開された配列の要素にコールバックを適用します ::
+    Set::extract互換のパスで展開された配列の要素にコールバックを適用します ::
 
-		        <?php
-		        $data = array(
-		            array('Movie' => array('id' => 1, 'title' => 'movie 3', 'rating' => 5)),
-		            array('Movie' => array('id' => 1, 'title' => 'movie 1', 'rating' => 1)),
-		            array('Movie' => array('id' => 1, 'title' => 'movie 2', 'rating' => 3)),
-		        );
+        <?php
+        $data = array(
+            array('Movie' => array('id' => 1, 'title' => 'movie 3', 'rating' => 5)),
+            array('Movie' => array('id' => 1, 'title' => 'movie 1', 'rating' => 1)),
+            array('Movie' => array('id' => 1, 'title' => 'movie 2', 'rating' => 3)),
+        );
 
-		        $result = Set::apply('/Movie/rating', $data, 'array_sum');
-		        // resultは 9 に等しい
+        $result = Set::apply('/Movie/rating', $data, 'array_sum');
+        // resultは 9 に等しい
 
-		        $result = Set::apply('/Movie/title', $data, 'strtoupper', array('type' => 'map'));
-		        // resultは array('MOVIE 3', 'MOVIE 1', 'MOVIE 2') に等しい
-		        // $options： - type : 'pass'はcall_user_func_array()、'map'はarray_map()、'reduce'はarray_reduce()、が利用できます。
+        $result = Set::apply('/Movie/title', $data, 'strtoupper', array('type' => 'map'));
+        // resultは array('MOVIE 3', 'MOVIE 1', 'MOVIE 2') に等しい
+        // $options： - type : 'pass'はcall_user_func_array()、'map'はarray_map()、'reduce'はarray_reduce()、が利用できます。
 
 
 .. php:staticmethod:: check($data, $path = null)
