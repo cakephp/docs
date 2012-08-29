@@ -42,7 +42,7 @@ normally accessed statically. Example:
     * **Input:** Apple, UserProfileSetting, Person
     * **Output:** apples, user\_profile\_settings, people
 
-.. php:staticmethod: classify($underscored)
+.. php:staticmethod:: classify($underscored)
 
     * **Input:** apples, user\_profile\_settings, people
     * **Output:** Apple, UserProfileSetting, Person
