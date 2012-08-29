@@ -64,7 +64,7 @@ Example:
 .. php:staticmethod:: rules($type, $rules, $reset = false)
 
     rulesはInflectorに対して新しい変換ルールを定義します。
-    See :ref:`inflection-configuration` により詳細な情報があります。
+    :ref:`inflection-configuration` により詳細な情報があります。
 
 
 .. meta::
