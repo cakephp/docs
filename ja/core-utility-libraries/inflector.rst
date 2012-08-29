@@ -40,7 +40,7 @@ Example:
     * **入力:** Apple, UserProfileSetting, Person
     * **出力:** apples, user\_profile\_settings, people
 
-.. php:staticmethod: classify($underscored)
+.. php:staticmethod:: classify($underscored)
 
     * **入力:** apples, user\_profile\_settings, people
     * **出力:** Apple, UserProfileSetting, Person
@@ -64,7 +64,7 @@ Example:
 .. php:staticmethod:: rules($type, $rules, $reset = false)
 
     rulesはInflectorに対して新しい変換ルールを定義します。
-    See :ref:`inflection-configuration` により詳細な情報があります。
+    :ref:`inflection-configuration` により詳細な情報があります。
 
 
 .. meta::
