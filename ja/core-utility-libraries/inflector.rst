@@ -40,7 +40,7 @@ Example:
     * **入力:** Apple, UserProfileSetting, Person
     * **出力:** apples, user\_profile\_settings, people
 
-.. php:staticmethod: classify($underscored)
+.. php:staticmethod:: classify($underscored)
 
     * **入力:** apples, user\_profile\_settings, people
     * **出力:** Apple, UserProfileSetting, Person
