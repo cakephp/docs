@@ -136,7 +136,7 @@ TextHelper
 ----------
 
 - :php:meth:`TextHelper::tail()` was added to truncate text starting from the end.
-- `beginning` in :php:meth:`TextHelper::truncate()` is deprecated in favor of `ellipsis`
+- `ending` in :php:meth:`TextHelper::truncate()` is deprecated in favor of `ellipsis`
 
 Testing
 =======
@@ -151,7 +151,7 @@ String
 ------
 
 - :php:meth:`String::tail()` was added to truncate text starting from the end.
-- `beginning` in :php:meth:`String::truncate()` is deprecated in favor of `ellipsis`
+- `ending` in :php:meth:`String::truncate()` is deprecated in favor of `ellipsis`
 
 Debugger
 --------
