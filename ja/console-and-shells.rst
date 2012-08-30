@@ -227,7 +227,7 @@ almost entirely of tasks.  You define a shell's tasks by using the ``$tasks`` pr
         public $tasks = array('Template');
     }
 
-You can use tasks from plugins using the standard :term:`plugin syntax`.
+You can use tasks from plugins using the standard :term:` プラグイン記法`.
 Tasks are stored in ``Console/Command/Task/`` in files named after
 their classes. So if we were to create a new 'FileGenerator' task, you would create
 ``Console/Command/Task/FileGeneratorTask.php``.

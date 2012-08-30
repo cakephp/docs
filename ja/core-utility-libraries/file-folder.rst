@@ -237,9 +237,7 @@ Folder API
 
     :rtype: boolean
 
-    Returns true if the File is in given path::
-
-    指定されたファイルが与えられたパスの中に存在すれば true を返します。\ ::
+     指定されたファイルが与えられたパスの中に存在すれば true を返します。\ ::
 
         <?php
         $Folder = new Folder(WWW_ROOT);
