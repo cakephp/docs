@@ -191,6 +191,10 @@ use the ``String`` class::
 
         The killer crept...
 
+.. versionchanged:: 2.3
+   ``ending`` has been replaced by ``ellipsis``. ``ending`` is still used in 2.2.1
+
+
 .. php:method:: tail(string $text, int $length=100, array $options)
 
     :param string $text: The text to truncate.
