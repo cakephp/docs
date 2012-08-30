@@ -212,7 +212,7 @@ year, the update call might look something like::
 .. tip::
 
     The $fields array accepts SQL expressions. Literal values should be
-    quoted manually.
+    quoted manually using :php:meth:`Sanitize::escape()`.
 
 .. note::
 
