@@ -68,6 +68,9 @@ Exceptions
 Model
 =====
 
+- Support for the biginteger type was added to all core datasources, and
+  fixtures.
+
 Model
 -----
 
