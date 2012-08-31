@@ -264,7 +264,7 @@ ressembler à quelque chose comme çà::
 
     $groupesUsername = Array
     (
-        ['User'] => Array
+        ['Utilisateur'] => Array
         (
             ['PHPNut'] => 'Larry',
             ['gwoo'] => 'Gwoo',
@@ -696,7 +696,7 @@ pourrait retourner::
             [images] => Array
             (
                 [id] => 1304
-                [user_id] => 759
+                [utilisateur_id] => 759
             )
         )
 
@@ -705,7 +705,7 @@ pourrait retourner::
             [images] => Array
             (
                 [id] => 1305
-                [user_id] => 759
+                [utilisateur_id] => 759
             )
         )
     )
@@ -726,7 +726,7 @@ ce qui retourne::
             [Image] => Array
             (
                 [id] => 1304
-                [user_id] => 759
+                [utilisateur_id] => 759
             )
         )
 
@@ -735,7 +735,7 @@ ce qui retourne::
             [Image] => Array
             (
                 [id] => 1305
-                [user_id] => 759
+                [utilisateur_id] => 759
             )
         )
     )
@@ -1033,13 +1033,13 @@ une méthode "find", mais elle retournera uniquement la commande SQL. Après
 cela, nous construisons une expression et l'ajoutons au tableau des conditions::
 
     <?php
-    $conditionsSubQuery['"User2"."status"'] = 'B';
+    $conditionsSubQuery['"Utilisateur2"."status"'] = 'B';
 
-    $db = $this->User->getDataSource();
+    $db = $this->Utilisateur->getDataSource();
     $subQuery = $db->buildStatement(
         array(
-            'fields'     => array('"User2"."id"'),
-            'table'      => $db->fullTableName($this->User),
+            'fields'     => array('"Utilisateur2"."id"'),
+            'table'      => $db->fullTableName($this->Utilisateur),
             'alias'      => 'User2',
             'limit'      => null,
             'offset'     => null,
@@ -1055,7 +1055,7 @@ cela, nous construisons une expression et l'ajoutons au tableau des conditions::
 
     $conditions[] = $subQueryExpression;
 
-    $this->User->find('all', compact('conditions'));
+    $this->Utilisateur->find('all', compact('conditions'));
 
 Ceci devrait généré la commande SQL suivante::
 
@@ -1090,11 +1090,11 @@ souhaitez::
     <?php
     $db = $this->getDataSource();
     $db->fetchAll(
-        'SELECT * from users where username = ? AND password = ?',
+        'SELECT * from utilisateurs where username = ? AND password = ?',
         array('jhon', '12345')
     );
     $db->fetchAll(
-        'SELECT * from users where username = :username AND password = :password',
+        'SELECT * from utilisateurs where username = :username AND password = :password',
         array('username' => 'jhon','password' => '12345')
     );
 
