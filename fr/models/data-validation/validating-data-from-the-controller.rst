@@ -82,4 +82,4 @@ validation du save pour éviter un deuxième contrôle::
 
 .. meta::
     :title lang=fr: Validation des données depuis un controlleur
-    :keywords lang=fr: règles de mot de passe,validations,sous-ensemble,tableau,logs,logic,email,prénom nom,modèles,options,données du modèle
+    :keywords lang=fr: règles de mot de passe,validations,sous-ensemble,tableau,logs,logique,email,prénom nom,modèles,options,données du modèle
