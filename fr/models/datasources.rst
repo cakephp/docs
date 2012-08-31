@@ -1,13 +1,13 @@
 DataSources
 ###########
 
-DataSources are the link between models and the source of data that
-models represent. In many cases, the data is retrieved from a
-relational database such as MySQL, PostgreSQL or MSSQL. CakePHP is
-distributed with several database-specific datasources (see the
-class files in ``lib/Cake/Model/Datasource/Database``), a summary
-of which is listed here for your convenience:
-
+Les Sources de données (DataSources) sont les liens entre les modèles et la 
+source de données qu'ils représentent. Dans de nombreux cas, les données 
+sont récupérées depuis une base de données relationnelle telle MySQL, 
+PostgreSQL ou MSSQL. CakePHP est distribué avec de nombreuses sources de 
+données spécifiques d'une base de données (voir les fichiers de classe 
+dans ``lib/Cake/Model/Datasource/Database``), un résumé de ceux-ci est listé 
+ici pour votre confort :
 
 - MySql
 - Postgres
@@ -17,60 +17,63 @@ of which is listed here for your convenience:
 
 .. note::
 
-    You can find additional community contributed datasources in the 
-    `CakePHP DataSources repository at github <https://github.com/cakephp/datasources/tree/2.0>`_.
+    Vous pouvez trouver des sources de données de contribution de la communauté 
+    supplémentaites dans le 
+    `Dépôt de Sources de Données CakePHP sur github <https://github.com/cakephp/datasources/tree/2.0>`_.
 
-When specifying a database connection configuration in
-``app/Config/database.php``, CakePHP transparently uses the corresponding
-database datasource for all model operations. So, even though you might not have
-known about datasources, you've been using them all along.
+Quand vous spécifiez une configuration de connexion à une base de données 
+dans ``app/Config/database.php``, CakePHP utilise de manière transparente la 
+source de données correspondant à la base de données pour toutes les 
+opérations de modèle. Donc, même si vous pensiez ne rien connaître aux 
+sources de données, vous les utilisez tout le temps.
 
-All of the above sources derive from a base ``DboSource`` class, which
-aggregates some logic that is common to most relational databases. If you decide
-to write a RDBMS datasource, working from one of these (e.g. Mysql, or Sqlite is
-your best bet.)
+Toutes les sources ci-dessus dérivent d'une classe de base ``DboSource``, 
+qui agrège de la logique commune à la plupart des bases de données 
+relationnelles. Si vous décidez d'écrire une source de donnée RDBMS, 
+travailler à partir de l'une d'entre elles (par ex Mysql ou 
+Sqlite) est plus sûr.
 
-Most people, however, are interested in writing datasources for external sources
-of data, such as remote REST APIs or even an LDAP server. So that's what we're
-going to look at now.
+La plupart des gens cependant, sont intéressés par l'écriture de sources 
+de données pour des sources externes, telles les APIs REST distantes ou 
+même un serveur LDAP. C'est donc ce que nous allons voir maintenant.
 
 Basic API For DataSources
 =========================
 
-A datasource can, and *should* implement at least one of the
-following methods: ``create``, ``read``, ``update`` and/or
-``delete`` (the actual method signatures & implementation details
-are not important for the moment, and will be described later). You
-need not implement more of the methods listed above than necessary
-- if you need a read-only datasource, there's no reason to
-implement ``create``, ``update``, and ``delete``.
+Une source de données peut et *devrait* implémenter au moins l'une des méthodes 
+suivantes : ``create``, ``read``, ``update`` et/ou ``delete`` (les signatures 
+exactes de méthode et les détails d'implémentation ne sont pas importants 
+pour le moment, ils seront décrits plus tard). Vous n'êtes pas obligé 
+d'implémenter plus que nécessaire, parmi les méthodes listées ci-dessus - 
+si vous avez besoin d'une source de données en lecture seule, il n'y a 
+aucune raison d'implémenter ``create``, ``update`` et ``delete``.
 
-Methods that must be implemented for all CRUD methods:
+Méthodes qui doivent être implémentées pour toutes les méthodes CRUD:
 
 -  ``describe($Model)``
 -  ``listSources()``
 -  ``calculate($Model, $func, $params)``
--  At least one of:
+-  Au moins une des suivantes:
    
    -  ``create($Model, $fields = array(), $values = array())``
    -  ``read($Model, $queryData = array())``
    -  ``update($Model, $fields = array(), $values = array())``
    -  ``delete($Model, $conditions = null)``
 
-It is also possible (and sometimes quite useful) to define the
-``$_schema`` class attribute inside the datasource itself, instead
-of in the model.
+Il est possible également (et souvent très pratique), de définir 
+l'attribut de classe ``$_schema`` au sein de la source de données 
+elle-même, plutôt que dans le modèle.
 
-And that's pretty much all there is to it. By coupling this
-datasource to a model, you are then able to use
-``Model::find()/save()/delete()`` as you would normally, and the appropriate
-data and/or parameters used to call those methods will be passed on
-to the datasource itself, where you can decide to implement
-whichever features you need (e.g. Model::find options such as
-``'conditions'`` parsing, ``'limit'`` or even your own custom
-parameters).
+Et c'est à peu près tout ce qu'il y a dire ici. En couplant cette 
+source de données à un modèle, vous êtes alors en mesure d'utiliser 
+``Model::find()/save()/delete()``, comme vous le feriez normalement ;
+ les données et/ou paramètres appropriés, utilisés pour appeler ces 
+ méthodes, seront passés à la source de données elle-même, dans laquelle 
+ vous pouvez décider d'implémenter toutes les fonctionnalités dont vous 
+ avez besoin (par exemple les options de Model::find comme le parsing 
+ ``'conditions'``, ``'limit'`` ou même vos paramètres personnalisés).
 
-An Example
+Un Exemple
 ==========
 
 A common reason you would want to write your own datasource is when you would
@@ -296,5 +299,5 @@ and refer to it using the plugin notation::
     );
 
 .. meta::
-    :title lang=en: DataSources
-    :keywords lang=en: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,mssql,aggregates,apis,repository,signatures
+    :title lang=fr: Sources de Données
+    :keywords lang=fr: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,mssql,aggregates,apis,repository,signatures

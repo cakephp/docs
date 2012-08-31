@@ -132,129 +132,138 @@ quand on crée de nouveaux objets.
     $this->Ingredient->save($nouvellesDonnees);
     $nouvelIngredientId = $this->Ingredient->id;
 
-Creating or updating is controlled by the model's ``id`` field. If
-``$Model->id`` is set, the record with this primary key is updated.
-Otherwise a new record is created::
+La création ou la mise à jour est contrôlée par le champ ``id`` du modèle. 
+Si ``$Model->id`` est défini, l'enregistrement avec cette clé primaire est 
+mis à jour. Sinon, un nouvel enregistrement est créé::
 
     <?php
-    // Create: id isn't set or is null
+    // Création: id n'est pas défini ou est null
     $this->Recipe->create();
     $this->Recipe->save($this->request->data);
 
-    // Update: id is set to a numerical value
+    // Mise à jour: id est défini à une valeur numérique
     $this->Recipe->id = 2;
     $this->Recipe->save($this->request->data);
 
 .. tip::
 
-    When calling save in a loop, don't forget to call ``create()``
+    Lors de l'appel à save() dans une boucle, n'oubliez pas d'appeler 
+    ``create()``.
 
 
-If you want to update a value, rather than create a new one, make sure
-your are passing the primary key field into the data array::
+Si vous voulez mettre à jour une valeur, plutôt qu'en créer une, assurez-vous 
+que vous avez passé le champ de la clé primaire  dans le tableau data::
 
     <?php
-    $data = array('id' => 10, 'title' => 'My new title');
-    // This will update Recipe with id 10
-    $this->Recipe->save($data);
+    $data = array('id' => 10, 'title' => 'Mon Nouveau Titre');
+    // Cela mettra à jour la Recette avec un id 10
+    $this->Recette->save($data);
 
 :php:meth:`Model::create(array $data = array())`
 ================================================
 
-This method resets the model state for saving new information.
+Cette méthode initialise la classe du modèle pour sauvegarder de nouvelles 
+informations.
 
-If the ``$data`` parameter (using the array format outlined above)
-is passed, the model instance will be ready to save with that data
-(accessible at ``$this->data``).
+Si vous renseignez le paramètre ``$data`` (en utilisant le format de tableau 
+mentionné plus haut), le nouveau modèle créé sera prêt à être sauvegardé avec 
+ces données (accessibles à ``$this->data``).
 
-If ``false`` is passed instead of an array, the model instance will
-not initialize fields from the model schema that are not already
-set, it will only reset fields that have already been set, and
-leave the rest unset. Use this to avoid updating fields in the
-database that were already set.
+Si ``false`` est passé à la place d'un tableau, l'instance du modèle 
+n'initialisera pas les champs du schéma de modèle qui ne sont pas encore 
+définis, cela remettra à zéro les champs qui ont déjà été renseignés, et 
+laissera les autres vides. Utilisez ceci pour éviter de mettre à jour des 
+champs de la base données qui ont déjà été renseignés et doivent être mis 
+à jour.
 
 :php:meth:`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
 ======================================================================================
 
-Used to save a single field value. Set the ID of the model
-(``$this->ModelName->id = $id``) just before calling
-``saveField()``. When using this method, ``$fieldName`` should only
-contain the name of the field, not the name of the model and
-field.
+Utilisé pour sauvegarder la valeur d’un seul champ. Fixez l’ID du modèle 
+(``$this->ModelName->id = $id``) juste avant d’appeler ``saveField()``. Lors de 
+l'utilisation de cette méthode, ``$fieldName`` ne doit contenir que le nom du 
+champ, pas le nom du modèle et du champ.
 
-For example, to update the title of a blog post, the call to
-``saveField`` from a controller might look something like this::
+Par exemple, pour mettre à jour le titre d'un article de blog, l'appel 
+depuis un contrôleur à ``saveField`` ressemblerait à quelque chose comme::
 
     <?php
-    $this->Post->saveField('title', 'A New Title for a New Day');
+    $this->Post->saveField('title', 'Un nouveau titre pour un Nouveau Jour');
 
 .. warning::
 
-    You can't stop the updated field being updated with this method, you
-    need to use the save() method.
-
+    Vous ne pouvez pas arrêter la mise à jour du champ mis à jour avec cette 
+    méthode, vous devrez utiliser la méthode save().
+    
 :php:meth:`Model::updateAll(array $fields, array $conditions)`
 ==============================================================
 
-Updates many records in a single call. Records to be updated are
-identified by the ``$conditions`` array, and fields to be updated,
-along with their values, are identified by the ``$fields`` array.
+Met à jour plusieurs enregistrements en un seul appel. Les enregistrements à 
+mettre à jour sont identifiés par le tableau ``$conditions``, et les champs 
+devant être mis à jour, ainsi que leurs valeurs, sont identifiés par 
+le tableau ``$fields``.
 
-For example, to approve all bakers who have been members for over a
-year, the update call might look something like::
+Par exemple, si je voulais approuver tous les utilisateurs qui sont membres 
+depuis plus d’un an, l’appel à update devrait ressembler à quelque chose 
+du style:: 
 
     <?php
     $this_year = date('Y-m-d h:i:s', strtotime('-1 year'));
 
     $this->Baker->updateAll(
-        array('Baker.approved' => true),
-        array('Baker.created <=' => $this_year)
+        array('Baker.approve' => true),
+        array('Baker.created <=' => $cette_annee)
     );
 
 .. tip::
 
-    The $fields array accepts SQL expressions. Literal values should be
-    quoted manually.
+    Le tableau $fields accepte des expressions SQL. Les valeurs litérales 
+    doivent être manuellement quotées.
 
 .. note::
 
-    Even if the modified field exists for the model being updated, it is
-    not going to be updated automatically by the ORM. Just add it
-    manually to the array if you need it to be updated.
+    Même si le champ modifié existe pour le modèle qui vient d'être mis à jour, 
+    il ne sera pas mis à jour automatiquement par l'ORM. Ajoutez le seulement
+    manuellement au tableau si vous avez besoin de le mettre à jour.
 
-For example, to close all tickets that belong to a certain
-customer::
+Par exemple, pour fermer tous les tickets qui appartiennent à un certain 
+client::
 
     <?php
     $this->Ticket->updateAll(
         array('Ticket.status' => "'closed'"),
-        array('Ticket.customer_id' => 453)
+        array('Ticket.client_id' => 453)
     );
 
-By default, updateAll() will automatically join any belongsTo
-association for databases that support joins. To prevent this,
-temporarily unbind the associations.
+Par défaut, updateAll() joindra automatiquement toute association belongsTo 
+pour les bases de données qui suportent la jointure. Pour prévenir cela, 
+délier les associations temporairement.
 
 :php:meth:`Model::saveMany(array $data = null, array $options = array())`
 =========================================================================
 
-Method used to save multiple rows of the same model at once. The following
-options may be used:
+La méthode utilisée pour sauvegarder les lignes multiples du même modèle en 
+une fois. Les options suivantes peuvent être utilisées:
 
-* ``validate``: Set to false to disable validation, true to validate each record before saving,
-  'first' to validate *all* records before any are saved (default),
-* ``atomic``: If true (default), will attempt to save all records in a single transaction.
-  Should be set to false if database/table does not support transactions.
-*  ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
-*  ``deep``: (since 2.1) If set to true, also associated data is saved, see also saveAssociated
+* ``validate``: Défini à false pour désactiver la validation, true pour 
+  valider chaque enregistrement avant la sauvegarde, 'first' pour valider 
+  *tous* les enregistrements avant qu'un soit sauvegardé (par défaut),
+* ``atomic``: Si true (par défaut), essaiera de sauvegarder tous les 
+  enregistrements en une seule transaction.
+  Devrait être défini à false si la base de données/table ne supporte pas les 
+  transactions.
+*  ``fieldList``: Equivalent au paramètre $fieldList dans Model::save()
+*  ``deep``: (since 2.1) Si défini à true, les données associées sont aussi 
+  sauvegardées, regardez aussi saveAssociated
 
-For saving multiple records of single model, $data needs to be a
-numerically indexed array of records like this::
+Pour sauvegarder de multiples enregistrements d'un unique modèle, $data 
+a besoin d'être un tableau d'enregistrements indexé numériquement comme 
+ceci::
 
     <?php
     $data = array(
-        array('title' => 'title 1'),
-        array('title' => 'title 2'),
+        array('titre' => 'titre 1'),
+        array('titre' => 'titre 2'),
     )
 
 .. note::
@@ -875,5 +884,5 @@ the Model::save() to always do it for you::
     }
 
 .. meta::
-    :title lang=en: Saving Your Data
-    :keywords lang=en: doc models,validation rules,data validation,flash message,null model,table php,request data,php class,model data,database table,array,recipes,success,reason,snap,data model
+    :title lang=fr: Sauvegarder vos Données
+    :keywords lang=fr: modèles doc,règles de validation,donnée validation,message flash,modèle null,table php,donnée requêtée,classe php,donnée modèle,table de base de données,tableau,recettes,succès,raison,snap,modèle de données

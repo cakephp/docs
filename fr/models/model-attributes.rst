@@ -1,17 +1,20 @@
-Model Attributes
-################
+Attributs de Model
+##################
 
-Model attributes allow you to set properties that can override the
-default model behavior.
+Les attributs de Model vous permettent de configurer les propriétés qui 
+peuvent override le behavior du model par défaut.
 
-For a complete list of model attributes and their descriptions
-visit the CakePHP API. Check out
+Pour une liste complète d'attributs du model et ses descriptions, visitez 
+l'API de CakePHP. Allez voir 
 `http://api20.cakephp.org/class/model <http://api20.cakephp.org/class/model>`_.
 
 useDbConfig
 ===========
 
-The ``useDbConfig`` property is a string that specifies the name of
+La propriété ``useDbConfig`` est une chaîne de caractère qui spécifie le nom 
+de la connection à la base de données à utiliser pour lier votre classe model 
+à la table de la base de données liée. Vous pouvez la configurer 
+property is a string that specifies the name of
 the database connection to use to bind your model class to the
 related database table. You can set it to any of the database
 connections defined within your database configuration file. The
