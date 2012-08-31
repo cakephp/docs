@@ -1,26 +1,27 @@
 Configuration
 #############
 
-Configuring a CakePHP application is a piece of cake. After you
-have installed CakePHP, creating a basic web application requires
-only that you setup a database configuration.
+Configurer une application CakePHP c'est du gâteau. Après que vous ayez 
+installé CakePHP, créer une application web basique nécessite seulement 
+que vous définissiez une configuration à la base de données.
 
-There are, however, other optional configuration steps you can take
-in order to take advantage of CakePHP flexible architecture. You
-can easily add to the functionality inherited from the CakePHP
-core, configure additional/different URL mappings (routes), and
-define additional/different inflections.
+Il y a, toutefois, d'autres étapes optionnelles de configuration que vous 
+pouvez suivre afin de tirer avantage de l'architecture flexible de CakePHP. 
+Vous pouvez facilement ajouter des fonctionnalités héritant du cœur de 
+CakePHP, configurer des URLs additionnelles/différentes (routes) et définir 
+des inflexions additionnelles/différentes.
 
 .. index:: database.php, database.php.default
 .. _database-configuration:
 
-Database Configuration
-======================
+Configuration de la Base de Donnée
+==================================
 
-CakePHP expects database configuration details to be in a file at
-``app/Config/database.php``. An example database configuration file can
-be found at ``app/Config/database.php.default``. A finished
-configuration should look something like this::
+CakePHP s'attend à trouver les détails de configuration de la base de données 
+dans le fichier ``app/Config/database.php``. Un exemple de fichier de 
+configuration de base de données peut être trouvé dans 
+``app/Config/database.php.default``. Une configuration basique complète 
+devrait ressembler à quelque chose comme cela::
 
     <?php
     class DATABASE_CONFIG {
@@ -35,67 +36,73 @@ configuration should look something like this::
         );
     }
 
-The $default connection array is used unless another connection is
-specified by the ``$useDbConfig`` property in a model. For example, if
-my application has an additional legacy database in addition to the
-default one, I could use it in my models by creating a new $legacy
-database connection array similar to the $default array, and by
-setting ``public $useDbConfig = 'legacy';`` in the appropriate models.
+Le tableau de connexion $default est utilisé tant qu'aucune autre connexion 
+n'est spécifiée dans un modèle, par la propriété ``$useDbConfig``. Par exemple, 
+si mon application a une base de données pré-existante, outre celle par 
+défaut, je pourrais l'utiliser dans mes modèles, en créant un nouveau tableau 
+de connexion à la base de données, intitulé $ancienne, identique au tableau 
+$default, puis en initialisant la propriété 
+``public $useDbConfig = 'ancienne';`` dans les modèles appropriés. 
 
-Fill out the key/value pairs in the configuration array to best
-suit your needs.
+Complétez les couples clé/valeur du tableau de configuration pour répondre au 
+mieux à vos besoins.
 
-Key
-    Value
+Clé
+    Valeur
 datasource
-    The name of the datasource this configuration array is for.
-    Examples: Database/Mysql, Database/Sqlserver, Database/Postgres, Database/Sqlite.
-    You can use :term:`syntaxe de plugin` to indicate plugin datasource to use.
+    Le nom de la source de données pour lequel ce tableau de configuration 
+    est destiné. Exemples : Database/Mysql, Database/Sqlserver, 
+    Database/Postgres, Database/Sqlite. Vous pouvez utiliser
+    :term:`plugin syntax` pour indiquer la source de données du plugin à 
+    utiliser.
 persistent
-    Whether or not to use a persistent connection to the database.
+    Indique si l'on doit ou non utiliser une connexion persistante à la base.
 host
-    The database server’s hostname (or IP address).
+    Le nom du serveur de base de données (ou son adresse IP)
 login
-    The username for the account.
+    Le nom d'utilisateur pour ce compte.
 password
-    The password for the account.
+    Le mot de passe pour ce compte.
 database
-    The name of the database for this connection to use.
+    Le nom de la base de données à utiliser pour cette connexion.
 prefix (*optional*)
-    The string that prefixes every table name in the database. If your
-    tables don’t have prefixes, set this to an empty string.
+    La chaîne qui préfixe le nom de chaque table dans la base de données. 
+    Si vos tables n'ont pas de préfixe, laissez une chaîne vide pour cette 
+    valeur. 
 port (*optional*)
-    The TCP port or Unix socket used to connect to the server.
+    Le port TCP ou le socket Unix utilisé pour se connecter au serveur. 
 encoding
-    Indicates the character set to use when sending SQL statements to
-    the server. This defaults to the database's default encoding for
-    all databases other than DB2. If you wish to use UTF-8 encoding
-    with mysql/mysqli connections you must use 'utf8' without the
-    hyphen.
+    Indique quel jeu de caractères utiliser pour envoyer les instructions 
+    SQL au serveur. Ces valeurs pour l'encodage par défaut de la base de 
+    données sont valables pour toutes les bases autres que DB2. Si vous 
+    souhaitez utiliser l'encodage UTF-8 avec des connexions mysql/mysqli, 
+    vous devez écrire 'utf8' sans le tiret. 
 schema
-    Used in PostgreSQL database setups to specify which schema to use.
+    Utilisé dans les paramètres d'une base PostgreSQL pour indiquer quel 
+    schéma utiliser.    
 datasource
-    non-DBO datasource to use, e.g. 'ldap', 'twitter'
+    Source de données Non-DBO à utiliser, ex: 'ldap', 'twitter'.
 unix_socket
-    Used by drivers that support it to connect via unix socket files.
+    Utilisé par les pilotes qui le supportent pour connecter via les fichiers 
+    socket unix.
 
 .. note::
 
-    The prefix setting is for tables, **not** models. For example, if
-    you create a join table for your Apple and Flavor models, you name
-    it prefix\_apples\_flavors (**not**
-    prefix\_apples\_prefix\_flavors), and set your prefix setting to
-    'prefix\_'.
+    Le paramétrage du préfixe est valable pour les tables, **pas** pour les 
+    modèles. Par exemple, si vous créez une table de liaison entre vos 
+    modèles Pomme et Saveur, vous la nommerez "prefixe\_pommes\_saveurs" 
+    (et **non pas** "prefixe\_pommes\_prefixe\_saveurs") et vous paramétrerez 
+    votre propriété "prefix" sur "prefixe\_". 
 
-At this point, you might want to take a look at the
-:doc:`/getting-started/cakephp-conventions`. The correct
-naming for your tables (and the addition of some columns) can score
-you some free functionality and help you avoid configuration. For
-example, if you name your database table big\_boxes, your model
-BigBox, your controller BigBoxesController, everything just works
-together automatically. By convention, use underscores, lower case,
-and plural forms for your database table names - for example:
-bakers, pastry\_stores, and savory\_cakes.
+A présent, vous aurez peut-être envie de jeter un œil aux 
+:doc:`/getting-started/cakephp-conventions`. Le nommage correct de vos tables 
+(et de quelques colonnes en plus) peut vous rapporter quelques fonctionnalités 
+supplémentaires et vous éviter trop de configuration. Par exemple, si vous 
+nommer votre table grosse\_boites, votre modèle GrosseBoite, votre contrôleur 
+GrosseBoitesController, tout marchera ensemble automatiquement. Par convention, 
+utilisez les underscores, les minuscules et les formes plurielles pour les 
+noms de vos tables - par exemple : cuisiniers, magasin\_de\_pates et 
+bon\_biscuits.
 
 .. todo::
 
@@ -281,8 +288,8 @@ configuration settings on the fly. This can be especially handy if
 you want to turn the debug setting on for a limited section of
 logic in your application, for instance.
 
-Configuration Constants
------------------------
+Constantes de Configuration
+---------------------------
 
 While most configuration options are handled by Configure, there
 are a few constants that CakePHP uses during runtime.
@@ -306,8 +313,8 @@ As with all cached data stored in :php:class:`Cache` you can clear data using
 :php:meth:`Cache::clear()`.
 
 
-Configure Class
-===============
+Classe Configure
+================
 
 .. php:class:: Configure
 
@@ -416,8 +423,8 @@ anywhere within your application, in a static context::
 
 .. _loading-configuration-files:
 
-Loading configuration files
-===========================
+Chargement des fichiers de configuration
+========================================
 
 CakePHP comes with two built-in configuration file readers.  
 :php:class:`PhpReader` is able to read PHP config files, in the same 
@@ -694,5 +701,5 @@ controllers.
 
 
 .. meta::
-    :title lang=en: Configuration
-    :keywords lang=en: finished configuration,legacy database,database configuration,value pairs,default connection,optional configuration,example database,php class,configuration database,default database,configuration steps,index database,configuration details,class database,host localhost,inflections,key value,database connection,piece of cake,basic web
+    :title lang=fr: Configuration
+    :keywords lang=fr: configuration finie,legacy database,database configuration,value pairs,default connection,optional configuration,example database,php class,configuration database,default database,configuration steps,index database,configuration details,class database,host localhost,inflections,key value,database connection,piece of cake,basic web
