@@ -1,9 +1,6 @@
 データを取得する
 ################
 
-As stated before, one of the roles of the Model layer is to get data from multiple types of storage.
-The CakePHP Model class comes with some functions that will help you search for this data, sort it,
-paginate it, and filter it. The most common function you will use in models is :php:meth:`Model::find()`
 まず説明を始める前に、モデルの役割の一つはいろいろなタイプのストレージからデータを取得することです。\
 CakePHPのモデルクラスは、データの検索、ソート、ページング、フィルターなどの機能を提供しています。\
 モデルで一番良く使う関数は :php:meth:`Model::find()` です。
@@ -15,23 +12,15 @@ find
 
 ``find(string $type = 'first', array $params = array())``
 
-Find is the multifunctional workhorse of all model data-retrieval functions.
-``$type`` can be either ``'all'``, ``'first'``, ``'count'``, ``'list'``,
-``'neighbors'`` or ``'threaded'`` or any custom finder you can define.
-Keep in mind that ``$type`` is case sensitive. Using an upper case character
-(for example ``All``) will not produce the expected results.
 findはデータ取得のための、非常に多機能でとても良く働いてくれる関数です。\
 ``$type`` は ``'all'``, ``'first'``, ``'count'``, ``'list'``, ``'neighbors'``,
-``'threaded'`` または自分で定義したカスタム値を指定できます。\
+``'threaded'``, または自分で定義したカスタム値を指定できます。\
 ``$type`` は大文字と小文字を区別しますので、注意してください。\
 大文字が含まれると(例えば ``All`` のように)期待した結果になりません。
 
-``$params`` is used to pass all parameters to the various finds,
-and has the following possible keys by default - all of which are
-optional
 ``$params`` はいろいろな種類のfindへのパラメータを渡すために使われます。\
-デフォルトでは以下のキーのパラメータを渡すことができます。これら全てのキーの指定は\
-任意です。::
+デフォルトでは以下のキーのパラメータを渡すことができます。これらキーの指定は\
+任意です。 ::
 
     <?php
     array(
@@ -46,9 +35,6 @@ optional
         'callbacks' => true //other possible values are false, 'before', 'after'
     )
 
-It's also possible to add and use other parameters, as is made use
-of by some find types, behaviors and of course possibly with your
-own model methods.
 いくつかのfindでは、ここに挙げた以外のパラメータを使うこともできます。
 
 .. _model-find-first:
@@ -56,9 +42,8 @@ own model methods.
 find('first')
 =============
 
-``find('first', $params)`` will return one result, you'd use this for any case
-where you expect only one result. Below are a couple of simple (controller code)
-examples::
+``find('first', $params)`` は結果を1行返します。1行だけ取得したい時に使います。\
+以下の例を見てください。 ::
 
     <?php
     public function some_function() {
@@ -73,9 +58,8 @@ examples::
         // ...
     }
 
-In the first example, no parameters at all are passed to find -
-therefore no conditions or sort order will be used. The format
-returned from ``find('first')`` call is of the form::
+1行目のサンプルは、パラメータを渡していません。すなわち、検索条件の指定もソートの指定も\
+されないということです。 ``find('first')`` の戻り値はこのような形式になっています。 ::
 
     Array
     (
@@ -101,8 +85,7 @@ returned from ``find('first')`` call is of the form::
 find('count')
 =============
 
-``find('count', $params)`` returns an integer value. Below are a
-couple of simple (controller code) examples::
+``find('count', $params)`` は整数を返します。以下のサンプルを見てください。 ::
 
     <?php
     public function some_function() {
@@ -121,19 +104,17 @@ couple of simple (controller code) examples::
 
 .. note::
 
-    Don't pass ``fields`` as an array to ``find('count')``. You would
-    only need to specify fields for a DISTINCT count (since otherwise,
-    the count is always the same - dictated by the conditions).
+    ``find('count')`` には ``fields`` キーを配列で渡さないでください。\
+    DISTINCT countに渡されるフィールドだけを指定します。\
+    (それ以外は、conditionsで指定された値を元に、常に同じ結果になります。)
 
 .. _model-find-all:
 
 find('all')
 ===========
 
-``find('all', $params)`` returns an array of (potentially multiple) results.
-It is in fact the mechanism used by all ``find()`` variants, as
-well as ``paginate``. Below are a couple of simple (controller
-code) examples::
+``find('all', $params)`` は配列で結果を返します。 ``find('all')`` は、他のいろいろな\
+``find()`` や、 ``paginate`` でも使われています。以下のサンプルを見てください。 ::
 
     <?php
     public function some_function() {
@@ -151,12 +132,10 @@ code) examples::
 
 .. note::
 
-    In the above example ``$allAuthors`` will contain every user in the
-    users table. There will be no condition applied to the find as none
-    were passed.
+    上記サンプルの ``$allAuthors`` は、usersテーブルの全ユーザーデータを受け取ります。\
+    findに何もオプションパラメータを渡していないので、検索条件が適用されません。
 
-The results of a call to ``find('all')`` will be of the following
-form::
+``find('all')`` を呼び出すと、その戻り値は以下のような形式となります。 ::
 
     Array
     (
@@ -186,9 +165,8 @@ form::
 find('list')
 ============
 
-``find('list', $params)`` returns an indexed array, useful for any
-place where you would want a list such as for populating input select
-boxes. Below are a couple of simple (controller code) examples::
+``find('list', $params)`` はインデックス付きの配列を返します。よくあるフォームのセレクトボックスを\
+作るために、リストが欲しい場合などに使うと便利です。以下のサンプルを見てください。 ::
 
     <?php
     public function some_function() {
@@ -208,12 +186,10 @@ boxes. Below are a couple of simple (controller code) examples::
 
 .. note::
 
-    In the above example ``$allAuthors`` will contain every user in the
-    users table. There will be no condition applied to the find as none
-    were passed.
+    上記サンプルの ``$allAuthors`` は、usersテーブルの全ユーザーデータを受け取ります。\
+    findに何もオプションパラメータを渡していないので、検索条件が適用されません。
 
-The results of a call to ``find('list')`` will be in the following
-form::
+``find('list')`` を呼び出すと、その戻り値は以下のような形式となります。 ::
 
     Array
     (
@@ -226,13 +202,11 @@ form::
         [3] => 'displayValue3',
     )
 
-When calling ``find('list')`` the ``fields`` passed are used to
-determine what should be used as the array key, value and
-optionally what to group the results by. By default the primary key
-for the model is used for the key, and the display field (which can
-be configured using the model attribute
-:ref:`model-displayField`) is used for the value.
-Some further examples to clarify::
+``fields`` キーを渡して ``find('list')`` 呼び出せば、どのフィールドを検索結果の\
+配列の添字として使うのかを指定でき、必要に応じて結果をグループ化してくれます。\
+デフォルトではモデルのプライマリーキーが検索結果の配列の添字として使われます。\
+また、添字に対する値はvalueが使われます。(モデルの属性 :refs:`model-displayField` で\
+設定できます)以下に例を示します。::
 
     <?php
     public function some_function() {
@@ -249,8 +223,7 @@ Some further examples to clarify::
         // ...
     }
 
-With the above code example, the resultant vars would look
-something like this::
+上記サンプルを実行した結果、それぞれの変数の中身は次のようになっています。 ::
 
 
     $justusernames = Array
@@ -295,10 +268,8 @@ something like this::
 find('threaded')
 ================
 
-``find('threaded', $params)`` returns a nested array, and is
-appropriate if you want to use the ``parent_id`` field of your
-model data to build nested results. Below are a couple of simple
-(controller code) examples::
+``find('threaded', $params)`` は入れ子になった配列を返します。入れ子の構造を表現するために、\
+``parent_id`` フィールドがある場合に使います。以下のサンプルを見てください。 ::
 
     <?php
     public function some_function() {
@@ -312,12 +283,11 @@ model data to build nested results. Below are a couple of simple
 
 .. tip::
 
-    A better way to deal with nested data is using the :doc:`/core-libraries/behaviors/tree`
-    behavior
+    入れ子のデータを扱うための、もっと良い方法として :doc:`/core-libraries/behaviors/tree`
+    ビヘイビアがあります。
 
-In the above code example, ``$allCategories`` will contain a nested
-array representing the whole category structure. The results of a
-call to ``find('threaded')`` will be of the following form::
+上記サンプルでは、 ``$allCategories`` は全体のカテゴリ構造を表す、入れ子になった配列が\
+格納されています。 ``find('threaded')`` を呼び出すと、戻り値は次のような形式となります。 ::
 
     Array
     (
@@ -370,36 +340,30 @@ call to ``find('threaded')`` will be of the following form::
         )
     )
 
-The order results appear can be changed as it is influenced by the
-order of processing. For example, if ``'order' => 'name ASC'`` is
-passed in the params to ``find('threaded')``, the results will
-appear in name order. Likewise any order can be used, there is no
+there is no
 inbuilt requirement of this method for the top result to be
 returned first.
+結果の表示順は、並べ替えることができます。\
+たとえば、 ``'order' => 'name ASC'`` が ``find('threaded')`` に渡された場合、\
+結果は名前順になります。他のフィールドを指定しても同様です。
 
 .. _model-find-neighbors:
 
 find('neighbors')
 =================
 
-``find('neighbors', $params)`` will perform a find similar to 'first', but will
-return the row before and after the one you request. Below is a simple
-(controller code) example:
-
-::
+``find('neighbors', $params)`` はfindの'first'と似たような動きをします。ただ、それに加えて\
+指定した条件の前後の行も一緒に取得してきます。以下の例を見てください。 ::
 
     <?php
     public function some_function() {
        $neighbors = $this->Article->find('neighbors', array('field' => 'id', 'value' => 3));
     }
 
-You can see in this example the two required elements of the
-``$params`` array: field and value. Other elements are still
-allowed as with any other find (Ex: If your model acts as
-containable, then you can specify 'contain' in ``$params``). The
-format returned from a ``find('neighbors')`` call is in the form:
-
-::
+このサンプルでは、 ``$params`` 配列にfieldとvalueの2つの要素を指定しているのがわかります。\
+その他のキーについても、今まで見てきた他のfindと同じように指定できます。\
+(たとえばモデルがContainableビヘイビアを利用していれば、 ``$params`` に 'contain'を指定できます。)
+``find('neighbors')`` を呼び出すと、戻り値は以下の様な形式となります。 ::
 
     Array
     (
@@ -441,28 +405,26 @@ format returned from a ``find('neighbors')`` call is in the form:
 
 .. note::
 
-    Note how the result always contains only two root elements: prev
-    and next. This function does not honor a model's default recursive
-    var. The recursive setting must be passed in the parameters on each
-    call.
+    結果には、常に2つのルート要素(prevとnext)が含まれていることになります。\
+    この関数はモデルのデフォルトのrecursive値を無視します。\
+    recursiveは関数の各呼び出しにパラメータとして渡さなければなりません。
 
 .. _model-custom-find:
 
-Creating custom find types
-==========================
+カスタムfindを定義する
+======================
 
-The ``find`` method is flexible enough to accept your custom finders, this is
-done by declaring your own types in a model variable and by implementing a special
-function in your model class.
+``find`` メソッドはとてもフレキシブルで、カスタム動作を定義することができます。\
+モデルの変数にfind種別を宣言して、モデルのクラスとしてその関数を実装することで実現されます。
 
-A Model Find Type is a shortcut to find options. For example, the following two finds are equivalent
+モデルのfind種別は、find操作へのショートカットとなります。例えば、以下の2つのコードは同じ意味です。
 
 ::
 
     $this->User->find('first');
     $this->User->find('all', array('limit' => 1));
 
-The following are core find types:
+コアに含まれるfind種別は以下のものがあります。
 
 * ``first``
 * ``all``
@@ -471,8 +433,9 @@ The following are core find types:
 * ``threaded``
 * ``neighbors``
 
-But what about other types? Let's say you want a finder for all published articles in your database. The first
-change you need to do is add your type to the :php:attr:`Model::$findMethods` variable in the model
+では、その他の種別はどうでしょうか？データベースの中にある、公開された記事を全て取得するfindを\
+作ってみましょう。まず最初にやることは、モデルの :php:attr:`Model::$findMethods` 変数にfind種別を\
+追加することです。
 
 ::
 
@@ -481,10 +444,9 @@ change you need to do is add your type to the :php:attr:`Model::$findMethods` va
         public $findMethods = array('available' =>  true);
     }
 
-Basically this is just telling CakePHP to accept the value ``available`` as the first
-argument of the ``find`` function. Next step is to implement the function ``_findAvailable``.
-This is done by convention, if you wanted to implement a finder called ``myFancySearch`` then
-the method to implement would be named ``_findMyFancySearch``.
+これは、 ``find`` 関数の最初の引数として ``available`` を渡せるようにCakePHPに教えています。\
+次に ``_findAvailable`` 関数を実装します。規約に従って、 ``myFancySearch`` という\
+findを実装したければ、その関数の名前は ``_findMyFancySearch`` となります。
 
 ::
 
@@ -501,14 +463,14 @@ the method to implement would be named ``_findMyFancySearch``.
         }
     }
 
-This all comes together in the following example (controller code):
+次のようにして使えます。
 
 ::
 
     <?php
     class ArticlesController extends AppController {
 
-        // Will find all published articles and order them by the created column
+        // 公開されているすべての記事を検索して、createdカラムの順番に並び替える
         public function index() {
             $articles = $this->Article->find('available', array(
                 'order' => array('created' => 'desc')
@@ -517,24 +479,26 @@ This all comes together in the following example (controller code):
 
     }
 
-The special ``_find[Type]`` methods receive 3 arguments as shown above. The first one
-means the state of the query execution, which could be either ``before`` or ``after``. It
-is done this way because this function is just a sort of callback function that has the
-ability to modify the query before it is done, or to modify the results after they are fetched.
+``_find[Type]`` メソッドは上記の例で示したように3つの引数を受け取ります。\
+1つめはクエリの実行状態を表します。 ``before`` または ``after`` となります。\
+このメソッドは、クエリが実行される前にそのクエリを修正する、または結果を取得した後に\
+その結果を修正する、といったコールバック関数の一種です。\
 
-Typically the first thing to check in our custom find function is the state of the query.
-The ``before`` state is the moment to modify the query, bind new associations, apply more
-behaviors, and interpret any special key that is passed in the second argument of ``find``. This
-state requires you to return the $query argument (modified or not).
+カスタムfindメソッドでまずはじめにチェックすることは、クエリの状態です。\
+``before`` はクエリを修正、新しいアソシエーションの追加、振る舞いの追加、または\
+``find`` の2つめの引数に渡されるキーの追加、などを行うための状態です。\
+この ``before`` の状態の時、関数は$queryを返す必要があります\
+(クエリを修正していても、していなくても)。
 
-The ``after`` state is the perfect place to inspect the results, inject new data, process it
-to return it in another format, or do whatever you like to the recently fetched data. This state
-requires you to return the $results array (modified or not).
+``after`` はクエリの結果を調べるために良く使われます。たとえば結果に対して新しい行を挿入したり、\
+他のフォーマットに整形して返すための処理をしたり、他にも、取得したデータに対してどんな処理でも\
+することができます。この ``after`` の状態の時、関数は$results配列を返す必要があります\
+(結果を修正していても、していなくても)。
 
-You can create as many custom finders as you like, and they are a great way of reusing code in
-your application across models.
+自分が好きなようにカスタムfindをいくつも作ることができますし、これはアプリケーションのモデル全体で\
+再利用可能なコードとなるので、とても良いことです。
 
-It is also possible to paginate via a custom find type as follows:
+以下のようにして、カスタムfindでページネーションをすることも出来ます。
 
 ::
 
@@ -552,9 +516,11 @@ It is also possible to paginate via a custom find type as follows:
 
 Setting the ``$this->paginate`` property as above on the controller will result in the ``type``
 of the find becoming ``available``, and will also allow you to continue to modify the find results.
+上記のように ``$this->paginate`` 変数にカスタムfindをセットすることで、その結果が ``available`` の\
+find結果になります。
 
-If your pagination page count is becoming corrupt, it may be necessary to add the following code to
-your ``AppModel``, which should fix pagination count:
+ページネーションのページ数がおかしい時は、次のようなコードを ``AppModel`` に追加すると\
+正しいページ数が取得できるでしょう。
 
 ::
 
@@ -592,11 +558,11 @@ your ``AppModel``, which should fix pagination count:
 
 .. versionchanged:: 2.2
 
-You no longer need to override _findCount for fixing incorrect count results.
-The ``'before'`` state of your custom finder will now be called again with
-$query['operation'] = 'count'. The returned $query will be used in ``_findCount()``
-If needed you can distinguish by checking for ``'operation'`` key
-and return a different ``$query``::
+クエリのカウント数を正しく取得するために、_findCountのオーバーライドはしなくてよくなりました。\
+カスタムfindの ``'before'`` では、$query['operation'] = 'count'という値がセットされて\
+もう一度関数が呼び出され、関数から返された$queryは ``_findCount()`` で使われます。\
+必要であれば ``'operation'`` キーをチェックして、 関数から返された ``$query`` が違うかどうかを\
+区別できます。 ::
 
     protected function _findAvailable($state, $query, $results = array()) {
         if ($state == 'before') {
@@ -612,16 +578,16 @@ and return a different ``$query``::
         return $results;
     }
 
-Magic Find Types
+マジックメソッド
 ================
 
-These magic functions can be used as a shortcut to search your
-tables by a certain field. Just add the name of the field (in
-CamelCase format) to the end of these functions, and supply the
-criteria for that field as the first parameter.
+マジックメソッドはテーブルの特定のフィールドを検索するための\
+ショートカットとして使われます。これから紹介するマジックメソッドの最後に\
+フィールド名をキャメルケースにしたものをくっつけて、最初に引数に\
+そのフィールドの基準となる値を指定して使います。
 
-findAllBy() functions will return results in a format like ``find('all')``,
-while findBy() return in the same format as ``find('first')``
+findAllBy() の戻り値の形式は ``find('all')`` と似ていますし、\
+findBy() の戻り値の形式は ``find('first')`` と同じです。
 
 findAllBy
 ---------
@@ -629,7 +595,7 @@ findAllBy
 ``findAllBy<fieldName>(string $value, array $fields, array $order, int $limit, int $page, int $recursive)``
 
 +------------------------------------------------------------------------------------------+------------------------------------------------------------+
-| findAllBy<x> Example                                                                     | Corresponding SQL Fragment                                 |
+| findAllBy<x> サンプル                                                                    | 対応するSQL                                                |
 +==========================================================================================+============================================================+
 | ``$this->Product->findAllByOrderStatus('3');``                                           | ``Product.order_status = 3``                               |
 +------------------------------------------------------------------------------------------+------------------------------------------------------------+
@@ -646,20 +612,20 @@ findAllBy
 | ``$this->User->findAllByLastName('psychic', array(), array('User.user_name => 'asc'));`` | ``User.last_name = 'psychic' ORDER BY User.user_name ASC`` |
 +------------------------------------------------------------------------------------------+------------------------------------------------------------+
 
-The returned result is an array formatted just as it would be from ``find('all')``.
+この関数の戻り値は ``find('all')`` の戻り値と同じ形式です。
 
 findBy
 ------
 
 ``findBy<fieldName>(string $value);``
 
-The findBy magic functions also accept some optional parameters:
+findByマジックメソッドも同じようにいくつかオプションのパラメータを受け取ります。
 
 ``findBy<fieldName>(string $value[, mixed $fields[, mixed $order]]);``
 
 
 +------------------------------------------------------------+-------------------------------------------------------+
-| findBy<x> Example                                          | Corresponding SQL Fragment                            |
+| findBy<x> サンプル                                         | 対応するSQL                                           |
 +============================================================+=======================================================+
 | ``$this->Product->findByOrderStatus('3');``                | ``Product.order_status = 3``                          |
 +------------------------------------------------------------+-------------------------------------------------------+
@@ -674,7 +640,7 @@ The findBy magic functions also accept some optional parameters:
 | ``$this->Cake->findById(7);``                              | ``Cake.id = 7``                                       |
 +------------------------------------------------------------+-------------------------------------------------------+
 
-findBy() functions return results like ``find('first')``
+findBy() の戻り値は ``find('first')`` と同じです。
 
 .. _model-query:
 
@@ -686,27 +652,24 @@ findBy() functions return results like ``find('first')``
 SQL calls that you can't or don't want to make via other model
 methods (this should only rarely be necessary) can be made using
 the model's ``query()`` method.
+モデルのメソッドを使っては実行できないSQL(こういったSQLは稀ですが)などは、\
+モデルの ``query()`` メソッドを使うことができます。
 
-If you’re ever using this method in your application, be sure to
-check out CakePHP’s
-:doc:`/core-utility-libraries/sanitize`, which aids in
-cleaning up user-provided data from injection and cross-site
-scripting attacks.
+このメソッドを使う場合は、 :doc:`/core-utility-libraries/sanitize` を確認してください。\
+ユーザーからの入力に対して、XSSやSQLインジェクションの対策が書かれています。
 
 .. note::
 
-    ``query()`` does not honor $Model->cacheQueries as its
-    functionality is inherently disjoint from that of the calling
-    model. To avoid caching calls to query, supply a second argument of
-    false, ie: ``query($query, $cachequeries = false)``
+    ``query()`` は本質的に分離された機能のため、$Model->cacheQueries は無視されます。\
+    クエリ実行のキャッシュしないようにするには、2つ目の引数にfalseを指定してください。\
+    ``query($query, $cachequeries = false)``
 
-``query()`` uses the table name in the query as the array key for
-the returned data, rather than the model name. For example::
+``query()`` はクエリ中のテーブル名を戻り値の配列のキーとして使います。 ::
 
     <?php
     $this->Picture->query("SELECT * FROM pictures LIMIT 2;");
 
-might return::
+これは、以下の様な配列を返します。 ::
 
     Array
     (
@@ -729,14 +692,13 @@ might return::
         )
     )
 
-To use the model name as the array key, and get a result consistent
-with that returned by the Find methods, the query can be
-rewritten::
+findメソッドと同じように、戻り値の配列のキーにモデル名を使うためには、\
+次のようにクエリを書き換えます。 ::
 
     <?php
     $this->Picture->query("SELECT * FROM pictures AS Picture LIMIT 2;");
 
-which returns::
+すると以下の様な配列となります。 ::
 
     Array
     (
@@ -761,119 +723,104 @@ which returns::
 
 .. note::
 
-    This syntax and the corresponding array structure is valid for
-    MySQL only. Cake does not provide any data abstraction when running
-    queries manually, so exact results will vary between databases.
+    このSQL構文とそれに対応する配列の構造は、MySQLのみで有効です。\
+    Cakeは手動でクエリを実行した時のデータ抽象化の機能を提供していません。\
+    そのため、正確な結果はデータベース毎に違います。
 
 :php:meth:`Model::field()`
 ==========================
 
 ``field(string $name, array $conditions = null, string $order = null)``
 
-Returns the value of a single field, specified as ``$name``, from
-the first record matched by $conditions as ordered by $order. If no
-conditions are passed and the model id is set, will return the
-field value for the current model result. If no matching record is
-found returns false.
+``$conditions`` で指定された条件で検索して、 ``$order`` で並び替えられた\
+結果の一番最初の行について、 ``$name`` で指定したフィールドの値を返します。\
+検索条件を渡さずにモデルにIDがセットされていれば、そのIDの結果に対する\
+フィールドの値を返します。マッチする行がなければfalseを返します。
 
 ::
 
     <?php
     $this->Post->id = 22;
-    echo $this->Post->field('name'); // echo the name for row id 22
+    echo $this->Post->field('name'); // IDが22の行のnameフィールドを表示します
 
     echo $this->Post->field('name', array('created <' => date('Y-m-d H:i:s')), 'created DESC');
-    // echo the name of the last created instance
+    // 最新日付のデータのnameフィールドを表示します
 
 :php:meth:`Model::read()`
 =========================
 
 ``read($fields, $id)``
 
-``read()`` is a method used to set the current model data
-(``Model::$data``)--such as during edits--but it can also be used
-in other circumstances to retrieve a single record from the
-database.
+``read()`` はモデルにデータをセットするのに使われますが、\
+場合によっては、データベースから単一データを取得するのにも使われます。
 
-``$fields`` is used to pass a single field name, as a string, or an
-array of field names; if left empty, all fields will be fetched.
+``$fields`` は取得する対象のフィールドを文字列で1つ渡すか、もしくは配列で複数渡します。\
+特に指定しなければ、全てのフィールドが取得されます。
 
-``$id`` specifies the ID of the record to be read. By default, the
-currently selected record, as specified by ``Model::$id``, is used.
-Passing a different value to ``$id`` will cause that record to be
-selected.
+``$id`` は取得するデータのIDを指定します。デフォルトでは ``Model::$id`` に\
+指定される値が使われます。 ``$id`` に別の値を渡すと、そのレコードが取得されることになります。
 
-``read()`` always returns an array (even if only a single field
-name is requested). Use ``field`` to retrieve the value of a single
-field.
+``read()`` は、たとえ単一のフィールドを取得する場合でも、常に配列を返します。\
+単一の値を取得するには ``field`` を使ってください。
 
 .. warning::
 
-    As the ``read`` method overwrites any information stored in the ``data`` and ``id``
-    property of the model, you should be very careful when using this function in general,
-    especially using it in the model callback functions such as ``beforeValidate`` and
-    ``beforeSave``. Generally the ``find`` function provides a more robust and easy to work
-    with API than the ``read`` method.
+    ``read`` はモデルに保持されている ``data`` と ``id`` の値を上書きするので、\
+    このメソッドを使う時は気をつけてください。特に ``beforeValidate`` や ``beforeSave`` などの\
+    モデルのコールバック関数で使う場合などは注意が必要です。\
+    一般的に ``find`` の方が ``read`` よりも簡単でより安全にデータを取得することができます。
 
-Complex Find Conditions
-=======================
+複雑な検索条件
+==============
 
-Most of the model's find calls involve passing sets of conditions
-in one way or another. In general CakePHP prefers using arrays for
-expressing any conditions that needs to be put after the WHERE clause
-in any SQL query.
+ほとんどのモデルのfindの呼び出しは、検索条件をセットして呼び出されることでしょう。\
+一般的にCakePHPは、SQLのWHERE句にセットされる検索条件を配列で表現するようになっています。
 
-Using arrays is clearer and easier to read, and also makes it very
-easy to build queries. This syntax also breaks out the elements of
-your query (fields, values, operators, etc.) into discrete,
-manipulatable parts. This allows CakePHP to generate the most
-efficient query possible, ensure proper SQL syntax, and properly
-escape each individual part of the query. Using the array syntax
-also enables CakePHP to secure your queries against any SQL injection attack
+配列を使うことで可読性があがり、綺麗なコードになります。\
+また、クエリを組み立ても簡単になります。\
+この構文は、クエリの要素(フィールドや値、演算子)などをクエリ中から取り出すことができます。\
+配列を使うことでCakePHPは、可能な限り効率的で、適切な構文でクエリを生成することができ、\
+変数のエスケープもしてくれて、SQLインジェクションなどの対策にもなります。
 
-At its most basic, an array-based query looks like this::
+最も良く使われるのは、次のような配列ベースのクエリです。 ::
 
     <?php
     $conditions = array("Post.title" => "This is a post", "Post.author_id" => 1);
-    // Example usage with a model:
+    // モデルの使い方のサンプル
     $this->Post->find('first', array('conditions' => $conditions));
 
-The structure here is fairly self-explanatory: it will find any
-post where the title equals "This is a post". Note that we could
-have used just "title" as the field name, but when building
-queries, it is good practice to always specify the model name, as
-it improves the clarity of the code, and helps prevent collisions
-in the future, should you choose to change your schema.
+この書き方は非常にわかりやすいと思います。\
+これは、タイトルが"This is a post"という投稿を取得します。\
+フィールド名については単に"title"とすることもできますが、\
+モデル名も指定するように習慣付けましょう。\
+そうすることで、コードが明確になり、将来もしスキーマの変更があったとしても\
+他テーブルとのフィールド名の衝突を避けられます。
 
-What about other types of matches? These are equally simple. Let's
-say we wanted to find all the posts where the title is not "This is
-a post"::
+否定や比較などはどうするのでしょうか？とてもシンプルです。
+"This is a post"以外の投稿データを取得したい場合は以下のようにします。 ::
 
     <?php
     array("Post.title !=" => "This is a post")
 
-Notice the '!=' that follows the field name. CakePHP can parse out
-any valid SQL comparison operator, including match expressions
-using LIKE, BETWEEN, or REGEX, as long as you leave a space between
-field name and the operator. The one exception here is IN
-(...)-style matches. Let's say you wanted to find posts where the
-title was in a given set of values::
+フィールド名の前に'!='があるのがわかると思います。\
+演算子とフィールド名の間にスペース名をいれていれば、LIKEやBETWEEN、REGEX、それに\
+他の有効なSQLの比較演算子をCakePHPが解析してくれます。\
+ただ、例外としてIN (...)の場合は違います。\
+INを使って、リストから投稿タイトルを検索したい場合は以下のようにします。 ::
 
     <?php
     array(
         "Post.title" => array("First post", "Second post", "Third post")
     )
 
-To do a NOT IN(...) match to find posts where the title is not in
-the given set of values::
+NOT IN (...) でリストに含まれない投稿タイトルを検索した場合は以下のようにします。 ::
 
     <?php
     array(
         "NOT" => array("Post.title" => array("First post", "Second post", "Third post"))
     )
 
-Adding additional filters to the conditions is as simple as adding
-additional key/value pairs to the array::
+検索条件に新しい条件を追加したければ、キーと値のペアを配列に追加するだけです。 ::
 
     <?php
     array (
@@ -881,30 +828,27 @@ additional key/value pairs to the array::
         "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
     )
 
-You can also create finds that compare two fields in the database::
+データベースの2つのフィールドを比較する条件を指定することもできます。 ::
 
     <?php
     array("Post.created = Post.modified")
 
-This above example will return posts where the created date is
-equal to the modified date (ie it will return posts that have never
-been modified).
+上記サンプルは、作成日と変更日が同じ投稿データ\
+(つまりまだ編集されていない投稿)を返します。
 
-Remember that if you find yourself unable to form a WHERE clause in
-this method (ex. boolean operations), you can always specify it as
-a string like::
+この方法でWHERE句に指定できないようなものは、文字列で以下のようにして
+指定できます。 ::
 
     <?php
     array(
         'Model.field & 8 = 1',
-        // other conditions as usual
+        // キーと値のペアでは指定できないような条件
     )
 
-By default, CakePHP joins multiple conditions with boolean AND;
-which means, the snippet above would only match posts that have
-been created in the past two weeks, and have a title that matches
-one in the given set. However, we could just as easily find posts
-that match either condition::
+デフォルトでは、CakePHPはANDで複数の条件をつなげます。\
+つまりこれは、3つ上のサンプルコードでは、過去2週間の内に作られた投稿で、かつ\
+指定されたリストに含まれるタイトルの投稿だけが取得されます。\
+ただ、どちらかの条件にマッチする投稿を取得したいこともあるでしょう。 ::
 
     <?php
     array("OR" => array(
@@ -919,6 +863,12 @@ you had a belongsTo relationship between Posts and Authors. Let's
 say you wanted to find all the posts that contained a certain
 keyword (“magic”) or were created in the past two weeks, but you
 want to restrict your search to posts written by Bob::
+CakePHPはAND、OR、NOT、XOR(大文字、小文字は区別しません)などの、\
+有効なSQLの論理演算子は全て受け取れます。\
+これらの条件は際限なく入れ子にできます。\
+さて、今ここでPostsとAuthorsでbelongsToアソシエーションを定義しているとしましょう。\
+この時、特定のキーワード"magic"を含むか、もしくは過去2週間の間に投稿されて、かつ\
+
 
     <?php
     array(
