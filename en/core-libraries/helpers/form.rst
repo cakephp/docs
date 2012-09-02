@@ -1387,6 +1387,10 @@ Creating buttons and submit elements
     an existing form. Instead you should add a submit button using
     :php:meth:`FormHelper::submit()`
 
+
+    .. versionchanged:: 2.3
+        The ``method`` option was added.
+
 Creating date and time inputs
 =============================
 
