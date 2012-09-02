@@ -1,9 +1,10 @@
 データを取得する
 ################
 
-まず説明を始める前に、モデルの役割の一つはいろいろなタイプのストレージからデータを取得することです。\
-CakePHPのモデルクラスは、データの検索、ソート、ページング、フィルターなどの機能を提供しています。\
-モデルで一番良く使う関数は :php:meth:`Model::find()` です。
+まず説明を始める前に、モデルの役割についてですが、モデルの役割の一つはいろいろなタイプの\
+ストレージからデータを取得することです。CakePHPのモデルクラスは、データの検索、ソート、\
+ページング、フィルターなどの機能を提供しています。モデルで一番良く使われる関数は
+:php:meth:`Model::find()` です。
 
 .. _model-find:
 
@@ -24,15 +25,15 @@ findはデータ取得のための、非常に多機能でとても良く働い�
 
     <?php
     array(
-        'conditions' => array('Model.field' => $thisValue), //array of conditions
+        'conditions' => array('Model.field' => $thisValue), //検索条件の配列
         'recursive' => 1, //int
-        'fields' => array('Model.field1', 'DISTINCT Model.field2'), //array of field names
-        'order' => array('Model.created', 'Model.field3 DESC'), //string or array defining order
-        'group' => array('Model.field'), //fields to GROUP BY
+        'fields' => array('Model.field1', 'DISTINCT Model.field2'), //フィールド名の配列
+        'order' => array('Model.created', 'Model.field3 DESC'), //並び順を文字列または配列で指定
+        'group' => array('Model.field'), //GROUP BYのフィールド
         'limit' => n, //int
         'page' => n, //int
         'offset' => n, //int
-        'callbacks' => true //other possible values are false, 'before', 'after'
+        'callbacks' => true //falseの他に'before'、'after'を指定できます
     )
 
 いくつかのfindでは、ここに挙げた以外のパラメータを使うこともできます。
@@ -205,8 +206,8 @@ find('list')
 ``fields`` キーを渡して ``find('list')`` 呼び出せば、どのフィールドを検索結果の\
 配列の添字として使うのかを指定でき、必要に応じて結果をグループ化してくれます。\
 デフォルトではモデルのプライマリーキーが検索結果の配列の添字として使われます。\
-また、添字に対する値はvalueが使われます。(モデルの属性 :refs:`model-displayField` で\
-設定できます)以下に例を示します。::
+また、添字に対する値はvalueが使われます。(値については、モデルの属性
+:refs:`model-displayField` で設定できます)以下に例を示します。 ::
 
     <?php
     public function some_function() {
@@ -340,9 +341,6 @@ find('threaded')
         )
     )
 
-there is no
-inbuilt requirement of this method for the top result to be
-returned first.
 結果の表示順は、並べ替えることができます。\
 たとえば、 ``'order' => 'name ASC'`` が ``find('threaded')`` に渡された場合、\
 結果は名前順になります。他のフィールドを指定しても同様です。
@@ -405,16 +403,16 @@ find('neighbors')
 
 .. note::
 
-    結果には、常に2つのルート要素(prevとnext)が含まれていることになります。\
+    結果には、常に2つのルート要素(prevとnext)が含まれることになります。\
     この関数はモデルのデフォルトのrecursive値を無視します。\
-    recursiveは関数の各呼び出しにパラメータとして渡さなければなりません。
+    recursiveを指定するには関数の各呼び出しにパラメータとして渡さなければなりません。
 
 .. _model-custom-find:
 
 カスタムfindを定義する
 ======================
 
-``find`` メソッドはとてもフレキシブルで、カスタム動作を定義することができます。\
+``find`` メソッドはカスタム動作を定義することができます。\
 モデルの変数にfind種別を宣言して、モデルのクラスとしてその関数を実装することで実現されます。
 
 モデルのfind種別は、find操作へのショートカットとなります。例えば、以下の2つのコードは同じ意味です。
@@ -514,8 +512,6 @@ findを実装したければ、その関数の名前は ``_findMyFancySearch`` �
 
     }
 
-Setting the ``$this->paginate`` property as above on the controller will result in the ``type``
-of the find becoming ``available``, and will also allow you to continue to modify the find results.
 上記のように ``$this->paginate`` 変数にカスタムfindをセットすることで、その結果が ``available`` の\
 find結果になります。
 
@@ -583,7 +579,7 @@ find結果になります。
 
 マジックメソッドはテーブルの特定のフィールドを検索するための\
 ショートカットとして使われます。これから紹介するマジックメソッドの最後に\
-フィールド名をキャメルケースにしたものをくっつけて、最初に引数に\
+フィールド名をキャメルケースにしたものをくっつけて、最初の引数に\
 そのフィールドの基準となる値を指定して使います。
 
 findAllBy() の戻り値の形式は ``find('all')`` と似ていますし、\
@@ -649,9 +645,6 @@ findBy() の戻り値は ``find('first')`` と同じです。
 
 ``query(string $query)``
 
-SQL calls that you can't or don't want to make via other model
-methods (this should only rarely be necessary) can be made using
-the model's ``query()`` method.
 モデルのメソッドを使っては実行できないSQL(こういったSQLは稀ですが)などは、\
 モデルの ``query()`` メソッドを使うことができます。
 
@@ -777,9 +770,9 @@ findメソッドと同じように、戻り値の配列のキーにモデル名�
 一般的にCakePHPは、SQLのWHERE句にセットされる検索条件を配列で表現するようになっています。
 
 配列を使うことで可読性があがり、綺麗なコードになります。\
-また、クエリを組み立ても簡単になります。\
-この構文は、クエリの要素(フィールドや値、演算子)などをクエリ中から取り出すことができます。\
-配列を使うことでCakePHPは、可能な限り効率的で、適切な構文でクエリを生成することができ、\
+また、クエリの組み立ても簡単になります。\
+配列を使うことで、クエリの要素(フィールドや値、演算子)などをクエリ中から取り出すことが\
+できますので、CakePHPは可能な限り効率的で、適切な構文でクエリを生成することができ、\
 変数のエスケープもしてくれて、SQLインジェクションなどの対策にもなります。
 
 最も良く使われるのは、次のような配列ベースのクエリです。 ::
@@ -856,19 +849,12 @@ NOT IN (...) でリストに含まれない投稿タイトルを検索した場�
         "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
     ))
 
-Cake accepts all valid SQL boolean operations, including AND, OR,
-NOT, XOR, etc., and they can be upper or lower case, whichever you
-prefer. These conditions are also infinitely nest-able. Let's say
-you had a belongsTo relationship between Posts and Authors. Let's
-say you wanted to find all the posts that contained a certain
-keyword (“magic”) or were created in the past two weeks, but you
-want to restrict your search to posts written by Bob::
 CakePHPはAND、OR、NOT、XOR(大文字、小文字は区別しません)などの、\
 有効なSQLの論理演算子は全て受け取れます。\
 これらの条件は際限なく入れ子にできます。\
 さて、今ここでPostsとAuthorsでbelongsToアソシエーションを定義しているとしましょう。\
 この時、特定のキーワード"magic"を含むか、もしくは過去2週間の間に投稿されて、かつ\
-
+Bobが書いた投稿、に制限して取得したい場合、次のようにします。 ::
 
     <?php
     array(
@@ -879,9 +865,8 @@ CakePHPはAND、OR、NOT、XOR(大文字、小文字は区別しません)など
         )
     )
 
-If you need to set multiple conditions on the same field, like when
-you want to do a LIKE search with multiple terms, you can do so by
-using conditions similar to::
+同じフィールドに対して複数のLIKE条件を指定したい場合は、
+同じように以下のように条件を指定します。 ::
 
     <?php
     array('OR' => array(
@@ -889,8 +874,8 @@ using conditions similar to::
         array('Post.title LIKE' => '%two%')
     ))
 
-Cake can also check for null fields. In this example, the query
-will return records where the post title is not null::
+CakePHPはnullも受け入れることができます。次のクエリは、\
+投稿のタイトルがNOT NULLである投稿を返します。 ::
 
     <?php
     array("NOT" => array(
@@ -898,17 +883,16 @@ will return records where the post title is not null::
         )
     )
 
-To handle BETWEEN queries, you can use the following::
+BETWEENは、以下のように出来ます。 ::
 
     <?php
     array('Post.read_count BETWEEN ? AND ?' => array(1,10))
 
 .. note::
 
-    CakePHP will quote the numeric values depending on the field
-    type in your DB.
+    CakePHPはデータベースのフィールドの型によって、数値でもクォートで囲みます。
 
-How about GROUP BY?::
+GROUP BYは？ ::
 
     <?php
     array(
@@ -919,7 +903,7 @@ How about GROUP BY?::
         'group' => 'Product.type'
     )
 
-The data returned for this would be in the following format::
+この時の戻り値の配列は、次のような形式です。 ::
 
     Array
     (
@@ -937,8 +921,7 @@ The data returned for this would be in the following format::
         [1] => Array
         ...
 
-A quick example of doing a DISTINCT query. You can use other
-operators, such as MIN(), MAX(), etc., in a similar fashion::
+以下はDISTINCTのサンプルです。他にもMINやMAXなども同じように使えます。 ::
 
     <?php
     array(
@@ -946,8 +929,7 @@ operators, such as MIN(), MAX(), etc., in a similar fashion::
         'order' = >array('User.id DESC')
     )
 
-You can create very complex conditions, by nesting multiple
-condition arrays::
+とても複雑な検索条件も、複数の配列をネストすることで実現可能です。 ::
 
     <?php
     array(
@@ -967,7 +949,7 @@ condition arrays::
         )
     )
 
-Which produces the following SQL::
+上記サンプルは次のようなSQLを生成します。 ::
 
     SELECT `Company`.`id`, `Company`.`name`,
     `Company`.`description`, `Company`.`location`,
@@ -983,17 +965,16 @@ Which produces the following SQL::
        ((`Company`.`status` = 'active')
        OR (NOT (`Company`.`status` IN ('inactive', 'suspended'))))
 
-Sub-queries
------------
+サブクエリ
+----------
 
-For this example, imagine we have a "users" table with "id", "name"
-and "status". The status can be "A", "B" or "C". And we want to get
-all the users that have status other than "B" using sub-query.
+"id"、"name"、"status"というフィールドを持つ"users"テーブルがあって、\
+"status"は"A"、"B"、"C"のいずれかの値を取るものとします。\
+ここで、サブクエリを使って、statusが"B"以外のユーザーを取得してみます。
 
-In order to achieve that we are going to get the model data source
-and ask it to build the query as if we were calling a find method,
-but it will just return the SQL statement. After that we make an
-expression and add it to the conditions array::
+そのためにはまず、モデルのデータソースを取得して、クエリを組み立てます。\
+findメソッドを呼ぶような感じですが、これはSQL文字列を返します。 
+その後、expressionを呼び出し、その戻り値をconditions配列に追加します。 ::
 
     <?php
     $conditionsSubQuery['"User2"."status"'] = 'B';
@@ -1020,7 +1001,7 @@ expression and add it to the conditions array::
 
     $this->User->find('all', compact('conditions'));
 
-This should generate the following SQL::
+このサンプルは以下のようなSQLを生成します。 ::
 
     SELECT
         "User"."id" AS "User__id",
@@ -1038,17 +1019,16 @@ This should generate the following SQL::
                 "User2"."status" = 'B'
         )
 
-Also, if you need to pass just part of your query as raw SQL as the
-above, datasource **expressions** with raw SQL work for any part of
-the find query.
+また、クエリの一部(実際の生のSQL)で渡す必要がある場合も、\
+データソースの **expressions** を使えば、他のfindクエリでも\
+同じようにできます。
 
 
-Prepared Statements
--------------------
+準備済みステートメント
+----------------------
 
-Should you need even more control over your queries, you can make use of prepared
-statements. This allows you to talk directly to the database driver and send any
-custom query you like::
+よりクエリをコントロールするために、準備済みステートメントを使うことができます。\
+これでデータベースドライバと直接やり取りができ、好きなようにクエリを送信することができます。 ::
 
     <?php
     $db = $this->getDataSource();
@@ -1061,8 +1041,3 @@ custom query you like::
         array('username' => 'jhon','password' => '12345')
     );
 
-
-
-.. meta::
-    :title lang=en: Retrieving Your Data
-    :keywords lang=en: upper case character,array model,order array,controller code,retrieval functions,model layer,model methods,model class,model data,data retrieval,field names,workhorse,desc,neighbors,parameters,storage,models
