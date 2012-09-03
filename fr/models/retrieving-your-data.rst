@@ -144,7 +144,7 @@ simples (code du contrôleur)::
 .. note::
 
     Dans l'exemple ci-dessus ``$tousLesAuteurs`` contiendra chaque utilisateur 
-    de la table utilisateurs, il n'y aura pas de condition appliquée à la 
+    de la table users, il n'y aura pas de condition appliquée à la 
     recherche puisqu'aucune n'a été passée.
 
 Les résultats d'un appel à ``find('all')`` seront de la forme suivante :
@@ -188,9 +188,9 @@ Ci-dessous, une paire d'exemples simples (code du contôleur) :
         $en_attente = $this->Article->find('list', array(
             'conditions' => array('Article.status' => 'pending')
         ));
-        $tousLesAuteurs = $this->Article->Utilisateur->find('list');
+        $tousLesAuteurs = $this->Article->User->find('list');
         $tousLesAuteursPublies = $this->Article->find('list', array(
-            'fields' => array('User.id', 'Utilisateur.name'),
+            'fields' => array('User.id', 'User.name'),
             'conditions' => array('Article.status !=' => 'pending'),
             'recursive' => 0
         ));
@@ -200,7 +200,7 @@ Ci-dessous, une paire d'exemples simples (code du contôleur) :
 .. note::
 
     Dans l'exemple ci-dessus ``$tousLesAuteurs`` contiendra chaque utilisateur 
-    de la table utilisateurs, il n'y aura pas de condition appliquée à la 
+    de la table users, il n'y aura pas de condition appliquée à la 
     recherche puisqu'aucune n'a été passée.
 
 Les résultats d'un appel à ``find('list')`` seront de la forme suivante::
@@ -227,14 +227,14 @@ exemples complémentaires pour clarifier les choses::
     <?php
     public function une_function() {
         // ...
-        $juste_les_usernames = $this->Article->Utilisateur->find('list', array(
-            'fields' => array('Utilisateur.username')
+        $juste_les_usernames = $this->Article->User->find('list', array(
+            'fields' => array('User.username')
         ));
-        $correspondanceUsername = $this->Article->Utilisateur->find('list', array(
-            'fields' => array('User.username', 'Utilisateur.first_name')
+        $correspondanceUsername = $this->Article->User->find('list', array(
+            'fields' => array('User.username', 'User.first_name')
         ));
-        $groupesUsername = $this->Article->Utilisateur->find('list', array(
-            'fields' => array('Utilisateur.username', 'Utilisateur.first_name', 'Utilisateur.group')
+        $groupesUsername = $this->Article->User->find('list', array(
+            'fields' => array('User.username', 'User.first_name', 'User.group')
         ));
         // ...
     }
@@ -264,7 +264,7 @@ ressembler à quelque chose comme çà::
 
     $groupesUsername = Array
     (
-        ['Utilisateur'] => Array
+        ['User'] => Array
         (
             ['PHPNut'] => 'Larry',
             ['gwoo'] => 'Gwoo',
@@ -449,8 +449,8 @@ Par exemple, les deux finds suivants sont équivalents
 
 ::
 
-    $this->Utilisateur->find('first');
-    $this->Utilisateur->find('all', array('limit' => 1));
+    $this->User->find('first');
+    $this->User->find('all', array('limit' => 1));
 
 Ci-dessous les différents types de find du coeur:
 
@@ -671,7 +671,7 @@ vérifie), peuvent être exécutés en utilisant la méthode ``query()``.
 
 Si vous utilisez souvent cette méthode dans votre application, assurez-vous 
 de connaître la librairie :doc:`/core-utility-libraries/sanitize` de CakePHP, 
-qui vous aide à nettoyer les données provenant des utilisateurs, des 
+qui vous aide à nettoyer les données provenant des users, des 
 attaques par injection et cross-site scripting.
 
 .. note::
@@ -696,7 +696,7 @@ pourrait retourner::
             [images] => Array
             (
                 [id] => 1304
-                [utilisateur_id] => 759
+                [user_id] => 759
             )
         )
 
@@ -705,7 +705,7 @@ pourrait retourner::
             [images] => Array
             (
                 [id] => 1305
-                [utilisateur_id] => 759
+                [user_id] => 759
             )
         )
     )
@@ -726,7 +726,7 @@ ce qui retourne::
             [Image] => Array
             (
                 [id] => 1304
-                [utilisateur_id] => 759
+                [user_id] => 759
             )
         )
 
@@ -735,7 +735,7 @@ ce qui retourne::
             [Image] => Array
             (
                 [id] => 1305
-                [utilisateur_id] => 759
+                [user_id] => 759
             )
         )
     )
@@ -978,8 +978,8 @@ d'autres opérateurs, comme MIN(), MAX(), etc..., d'une manière analogue::
 
     <?php
     array(
-        'fields' => array('DISTINCT (Utilisateur.nom) AS nom_de_ma_colonne'),'),
-        'order' = >array('Utilisateur.id DESC')
+        'fields' => array('DISTINCT (User.nom) AS nom_de_ma_colonne'),'),
+        'order' = >array('User.id DESC')
     )
 
 Vous pouvez créer des conditions très complexes, en regroupant des tableaux 
@@ -1022,9 +1022,9 @@ Qui produira la requête SQL suivante::
 Sous requêtes
 -------------
 
-Par exemple, imaginons que nous ayons une table "utilisateurs" avec 
+Par exemple, imaginons que nous ayons une table "users" avec 
 "id", "nom" et "statuts". Le statuts peut être "A", "B" ou "C". Et 
-nous voulons récupérer tous les utilisateurs qui ont un statuts différent 
+nous voulons récupérer tous les users qui ont un statuts différent 
 de "B" en utilisant une sous requête.
 
 Pour pouvoir effectuer cela, nous allons appeler la source de données du 
@@ -1033,13 +1033,13 @@ une méthode "find", mais elle retournera uniquement la commande SQL. Après
 cela, nous construisons une expression et l'ajoutons au tableau des conditions::
 
     <?php
-    $conditionsSubQuery['"Utilisateur2"."status"'] = 'B';
+    $conditionsSubQuery['"User2"."status"'] = 'B';
 
-    $db = $this->Utilisateur->getDataSource();
+    $db = $this->User->getDataSource();
     $subQuery = $db->buildStatement(
         array(
-            'fields'     => array('"Utilisateur2"."id"'),
-            'table'      => $db->fullTableName($this->Utilisateur),
+            'fields'     => array('"User2"."id"'),
+            'table'      => $db->fullTableName($this->User),
             'alias'      => 'User2',
             'limit'      => null,
             'offset'     => null,
@@ -1055,24 +1055,24 @@ cela, nous construisons une expression et l'ajoutons au tableau des conditions::
 
     $conditions[] = $subQueryExpression;
 
-    $this->Utilisateur->find('all', compact('conditions'));
+    $this->User->find('all', compact('conditions'));
 
 Ceci devrait généré la commande SQL suivante::
 
     SELECT
-        "Utilisateur"."id" AS "Utilisateur__id",
-        "Utilisateur"."name" AS "Utilisateur__nom",
-        "Utilisateur"."status" AS "Utilisateur__status"
+        "User"."id" AS "User__id",
+        "User"."name" AS "User__nom",
+        "User"."status" AS "User__status"
     FROM
-        "utilisateurs" AS "Utilisateur"
+        "users" AS "User"
     WHERE
-        "Utilisateur"."id" NOT IN (
+        "User"."id" NOT IN (
             SELECT
-                "Utilisateur2"."id"
+                "User2"."id"
             FROM
-                "utilisateurs" AS "Utilisateur2"
+                "users" AS "User2"
             WHERE
-                "Utilisateur2"."status" = 'B'
+                "User2"."status" = 'B'
         )
 
 Aussi, si vous devez passer juste une partie de votre requête en 
@@ -1090,11 +1090,11 @@ souhaitez::
     <?php
     $db = $this->getDataSource();
     $db->fetchAll(
-        'SELECT * from utilisateurs where username = ? AND password = ?',
+        'SELECT * from users where username = ? AND password = ?',
         array('jhon', '12345')
     );
     $db->fetchAll(
-        'SELECT * from utilisateurs where username = :username AND password = :password',
+        'SELECT * from users where username = :username AND password = :password',
         array('username' => 'jhon','password' => '12345')
     );
 
