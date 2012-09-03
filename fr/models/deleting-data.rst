@@ -72,5 +72,5 @@ et ensuite supprimées. Cela impliquera souvent plus de requêtes faîtes.
     
 
 .. meta::
-    :title lang=en: Supprimer les Données
-    :keywords lang=en: modèles doc,logique custom,méthodes callback,classe model,modèle de base de données,callbacks,modèle information,request data,deleteall,fragment,leverage,tableau,cakephp,échec,recettes,bénéfice,suppression,modèle de données
+    :title lang=fr: Supprimer les Données
+    :keywords lang=fr: modèles doc,logique custom,méthodes callback,classe model,modèle de base de données,callbacks,modèle information,request data,deleteall,fragment,leverage,tableau,cakephp,échec,recettes,bénéfice,suppression,modèle de données

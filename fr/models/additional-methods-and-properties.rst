@@ -27,7 +27,7 @@ Cette méthode ``getRecent()`` peut maintenant être utilisée dans le contrôle
 ::
 
     <?php
-    $recent = $this->Example->getRecent();
+    $recent = $this->Exemple->getRecent();
 
 :php:meth:`Model::associations()`
 =================================
