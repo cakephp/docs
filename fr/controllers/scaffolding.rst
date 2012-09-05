@@ -48,7 +48,7 @@ $scaffold dans votre contrôleur ::
     
 En supposant que vous avez bien crée un modèle Category dans le bon
 dossier (/app/Model/Category.php), vous pouvez aller sur 
-http://example.com/categories pour voir votre nouveau scaffold.
+http://exemple.com/categories pour voir votre nouveau scaffold.
 
 .. note::
 
@@ -152,4 +152,4 @@ comme ceci::
 
 .. meta::
     :title lang=fr: Scaffolding
-    :keywords lang=en: base de données schémas,perte de structure,scaffolding,scaffold,php classe,base de données tables,developpeur web,downside,application web,logic,developpeurs,cakephp,running,current,delete,base de données application
+    :keywords lang=fr: schémas base de données,perte de structure,scaffolding,scaffold,classe php,base de données tables,développeur web,downside,application web,logique,developpeurs,cakephp,running,current,suppression,base de données application

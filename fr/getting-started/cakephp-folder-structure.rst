@@ -38,9 +38,9 @@ Config
 Controller
     Contient vos contrôleurs et leurs composants.
 Lib
-    Contains 1st party libraries that do not come from 3rd parties or
-    external vendors. This allows you to separate your organization's
-    internal libraries from vendor libraries.
+    Contient Les librairies internes qui ne proviennent pas de librairies 
+    externes. Cela vous permet de séparer les librairies internes de votre 
+    organisme des librairies externes.
 Locale
     Stocke les fichiers pour l'internationalisation.
 Model

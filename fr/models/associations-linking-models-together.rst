@@ -33,11 +33,11 @@ hasMany (a plusieurs), belongsTo (appartient à), et hasAndBelongsToMany (HABTM)
 ========================== ===================== ============================================================
 Relation                   Type d'Association    Exemple
 ========================== ===================== ============================================================
-un vers un                 hasOne                Un utilisateur a un profile.
+un vers un                 hasOne                Un user a un profile.
 -------------------------- --------------------- ------------------------------------------------------------
-un vers plusieurs          hasMany               Un utilisateur peut avoir plusieurs recettes.
+un vers plusieurs          hasMany               Un user peut avoir plusieurs recettes.
 -------------------------- --------------------- ------------------------------------------------------------
-plusieurs vers un          belongsTo             Plusieurs recettes appartiennent à un utilisateur.
+plusieurs vers un          belongsTo             Plusieurs recettes appartiennent à un user.
 -------------------------- --------------------- ------------------------------------------------------------
 plusieurs vers plusieurs   hasAndBelongsToMany   Les recettes ont, et appartiennent à plusieurs ingrédients.
 ========================== ===================== ============================================================
@@ -51,8 +51,8 @@ spécificité de l'association.
 ::
 
     <?php
-    class Utilisateur extends AppModel {
-        public $name = 'Utilisateur';
+    class User extends AppModel {
+        public $name = 'User';
         public $hasOne = 'Profile';
         public $hasMany = array(
             'Recipe' => array(
@@ -70,12 +70,12 @@ classe qu'il référence. Toutefois, **les alias pour chaque modèle doivent êt
 uniques dans une app entière**. Par exemple, il est approprié d'avoir::
 
     <?php
-    class Utilisateur extends AppModel {
-        public $name = 'Utilisateur';
+    class User extends AppModel {
+        public $name = 'User';
         public $hasMany = array(
             'MaRecette' => array('className' => 'Recette'),
         );
-        public $hasAndBelongsToMany => array('Membre' => array('className' => 'Utilisateur'));
+        public $hasAndBelongsToMany => array('Membre' => array('className' => 'User'));
     }
     
     class Groupe extends AppModel {
@@ -91,12 +91,12 @@ uniques dans une app entière**. Par exemple, il est approprié d'avoir::
 mais ce qui suit ne travaillera pas bien dans toute circonstance:::
 
     <?php
-    class Utilisateur extends AppModel {
-        public $name = 'Utilisateur';
+    class User extends AppModel {
+        public $name = 'User';
         public $hasMany = array(
             'MaRecette' => 'Recette',
         );
-        public $hasAndBelongsToMany => array('Membre' => 'Utilisateur');
+        public $hasAndBelongsToMany => array('Membre' => 'User');
     }
     
     class Groupe extends AppModel {
@@ -110,12 +110,12 @@ mais ce qui suit ne travaillera pas bien dans toute circonstance:::
     }
 
 parce que ici nous avons l'alias 'Member' se référant aux deux modèles 
-Utilisateur (dans Groupe) et Groupe (dans Utilisateur) dans les associations 
+User (dans Groupe) et Groupe (dans User) dans les associations 
 HABTM. Choisir des noms non-uniques pour les alias de modèles à travers les 
 modèles peut entraîner un comportement inattendu.
 
 Cake va créer automatiquement des liens entre les objets modèle associés.
-Ainsi par exemple dans votre modèle ``Utilisateur``, vous pouvez accedez 
+Ainsi par exemple dans votre modèle ``User``, vous pouvez accedez 
 au modèle ``Recette`` comme ceci::
 
     <?php
@@ -125,25 +125,25 @@ De même dans votre contrôleur, vous pouvez acceder à un modèle associé
 simplement en poursuivant les associations de votre modèle::
 
     <?php
-    $this->Utilisateur->Recette->uneFunctionQuelconque();
+    $this->User->Recette->uneFunctionQuelconque();
 
 .. note::
 
     Rappelez vous que les associations sont définis dans 'un sens'. Si vous 
-    définissez Utilisateur hasMany Recette, cela n'a aucun effet sur le modèle 
-    Recette. Vous avez besoin de définir Recette belongsTo Utilisateur pour 
-    pouvoir accéder au modèle Utilisateur à partir du modèle Recette.
+    définissez User hasMany Recette, cela n'a aucun effet sur le modèle 
+    Recette. Vous avez besoin de définir Recette belongsTo User pour 
+    pouvoir accéder au modèle User à partir du modèle Recette.
 
 hasOne
 ------
 
-Mettons en place un modèle Utilisateur avec une relation de type hasOne vers 
+Mettons en place un modèle User avec une relation de type hasOne vers 
 un modèle Profil.
 
 Tout d'abord, les tables de votre base de données doivent être saisies 
 correctement. Pour qu'une relation de type hasOne fonctionne, une table 
 doit contenir une clé étrangère qui pointe vers un enregistrement de l'autre. 
-Dans notre cas la table profils contiendra un champ nommé utilisateur\_id. 
+Dans notre cas la table profils contiendra un champ nommé user\_id. 
 Le motif de base est :
 
 **hasOne:**, *l'autre* modèle contient la clé étrangère.
@@ -153,7 +153,7 @@ Relation                   Schéma
 ========================== =========================
 Pomme hasOne Banane        bananes.pomme\_id
 -------------------------- -------------------------
-Utilisateur hasOne Profil  profiles.utilisateur\_id 
+User hasOne Profil  profiles.user\_id 
 -------------------------- -------------------------
 Docteur hasOne Maitre      maitres.docteur\_id
 ========================== =========================
@@ -165,14 +165,14 @@ Docteur hasOne Maitre      maitres.docteur\_id
     définitions de vos associations. Néanmoins, coller aux conventions fera un
     code moins répétitif, plus facile à lire et à maintenir.
 
-Le fichier modèle Utilisateur sera sauvegardé dans /app/Model/Utilisateur.php. 
-Pour définir l'association ‘Utilisateur hasOne Profil’, ajoutez la propriété 
+Le fichier modèle User sera sauvegardé dans /app/Model/User.php. 
+Pour définir l'association ‘User hasOne Profil’, ajoutez la propriété 
 $hasOne à la classe de modèle. Pensez à avoir un modèle Profil dans
 /app/Model/Profil.php, ou l'association ne marchera pas::
 
     <?php
-    class Utilisateur extends AppModel {
-        public $name = 'Utilisateur';
+    class User extends AppModel {
+        public $name = 'User';
         public $hasOne = 'Profil';
     }
 
@@ -188,8 +188,8 @@ limiter l'association pour inclure seulement certains enregistrements.
 ::
 
     <?php
-    class Utilisateur extends AppModel {
-        public $name = 'Utilisateur';
+    class User extends AppModel {
+        public $name = 'User';
         public $hasOne = array(
             'Profil' => array(
                 'className'    => 'Profil',
@@ -204,14 +204,14 @@ Les clés possibles pour les tableaux d'association incluent:
 
 -  **className**:  le nom de la classe du modèle que l'on souhaite 
    associer au modèle actuel. Si l'on souhaite définir la relation 
-   'Utilisateur a un Profil’, la valeur associée à la clé 'className' 
+   'User a un Profil’, la valeur associée à la clé 'className' 
    devra être ‘Profil’.
 -  **foreignKey**: le nom de la clé etrangère que l'on trouve dans 
    l'autre modèle. Ceci sera particulièrement pratique si vous avez 
    besoin de définir des relations hasOne multiples. La valeur par 
    défaut de cette clé est le nom du modèle actuel (avec des underscores) 
    suffixé avec ‘\_id’. Dans l'exemple ci-dessus la valeur par défaut aurait 
-   été 'utilisateur\_id’.
+   été 'user\_id’.
 -  **conditions**: un tableau des conditions compatibles de find() ou un 
    fragment de code SQL tel que array('Profil.approuve' => true)
 -  **fields**: une liste des champs à récupérer lorsque les données du modèle 
@@ -222,17 +222,17 @@ Les clés possibles pour les tableaux d'association incluent:
    méthode delete() du modèle est appelée avec le paramètre 'cascade' valant 
    true également, les enregistrements des modèles associés sont supprimés. 
    Dans ce cas nous avons fixé la valeur à true de manière à ce que la 
-   suppression d'un Utilisateur supprime également le Profil associé.
+   suppression d'un User supprime également le Profil associé.
 
 Une fois que cette association aura été définie, les opérations de recherche 
-sur le modèle Utilisateur récupèreront également les enregistrements Profils 
+sur le modèle User récupèreront également les enregistrements Profils 
 liés s'il en existe::
 
-    //Exemple de résultats d'un appel à $this->Utilisateur->find().
+    //Exemple de résultats d'un appel à $this->User->find().
     
     Array
     (
-        [Utilisateur] => Array
+        [User] => Array
             (
                 [id] => 121
                 [nom] => Gwoo the Kungwoo
@@ -241,7 +241,7 @@ liés s'il en existe::
         [Profil] => Array
             (
                 [id] => 12
-                [utilisateur_id] => 121
+                [user_id] => 121
                 [competences] => Baking Cakes
                 [created] => 2007-05-01 10:31:01
             )
@@ -251,8 +251,8 @@ belongsTo
 ---------
 
 Maintenant que nous avons accès aux données du Profil depuis le modèle 
-Utilisateur, définissons une association belongsTo (appartient a) dans 
-le modèle Profil afin de pouvoir accéder aux données Utilisateur liées. 
+User, définissons une association belongsTo (appartient a) dans 
+le modèle Profil afin de pouvoir accéder aux données User liées. 
 L'association belongsTo est un complément naturel aux associations hasOne et 
 hasMany : elle permet de voir les données dans le sens inverse.
 
@@ -266,7 +266,7 @@ Relation                      Schéma
 ============================= ==================
 Banane belongsTo Pomme        bananes.pomme\_id
 ----------------------------- ------------------
-Profil belongsTo Utilisateur  profiles.utilisateur\_id
+Profil belongsTo User  profiles.user\_id
 ----------------------------- ------------------
 Maitres belongsTo Docteur     maitres.docteur\_id
 ============================= ==================
@@ -283,7 +283,7 @@ qui suit::
     <?php
     class Profil extends AppModel {
         public $name = 'Profil';
-        public $belongsTo = 'Utilisateur';
+        public $belongsTo = 'User';
     }
 
 Nous pouvons aussi définir une relation plus spécifique en utilisant une 
@@ -293,8 +293,8 @@ syntaxe de tableau::
     class Profil extends AppModel {
         public $name = 'Profil';
         public $belongsTo = array(
-            'Utilisateur' => array(
-                'className'    => 'Utilisateur',
+            'User' => array(
+                'className'    => 'User',
                 'foreignKey'   => 'utiilisateur_id'
             )
         );

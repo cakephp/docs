@@ -1,129 +1,132 @@
-Controllers
-###########
+Contrôleurs (Controllers)
+#########################
 
-Controllers are the 'C' in MVC. After routing has been applied and the correct
-controller has been found, your controller's action is called.  Your controller
-should handle interpreting the request data, making sure the correct models
-are called, and the right response or view is rendered.  Controllers can be
-thought of as middle man between the Model and View.  You want to keep your
-controllers thin, and your models fat.  This will help you more easily reuse
-your code and makes your code easier to test.
+Les Contrôleurs sont le 'C' dans MVC. Après que le routage a été appliqué et 
+que le bon contrôleur a été trouvé, l'action de votre contrôleur est 
+appelé. Votre contrôleur devra gérer l'interpretation des données requetées, 
+s'assurer que les bon modèles sont appelés, et que la bonne réponse ou vue est 
+rendue. Les contrôleurs peuvent être imaginés come un homme au milieu entre 
+le Modèle et la Vue. Le mieux est de garder des contrôleurs peu chargés, et 
+des modèles plus fournis. Cela vous aidera à réutiliser plus facilement votre 
+code et facilitera le test de votre code.
 
-Commonly, controllers are used to manage the logic around a single model. For
-example, if you were building a site for an on-line bakery, you might have a
-RecipesController and an IngredientsController managing your recipes and their
-ingredients.  In CakePHP, controllers are named after the primary model they
-handle. It's totally possible to have controllers work with more than one model as
-well.
+Habituellement, les contrôleurs sont utilisés pour gérer la logique autour 
+d'un seul modèle. Par exemple, si vous construisez un site pour gérer une 
+boulangerie en-ligne, vous aurez sans doute un RecettesController et un 
+IngredientsController qui gérent les recettes et leurs ingrédients. Dans 
+CakePHP, les contrôleurs sont nommés d'après le modèle principal qu'ils 
+gèrent. Il est aussi totalement possible d'avoir des contrôleurs qui 
+travaillent avec plus d'un modèle. 
 
-Your application's controllers extend ``AppController`` class, which in turn
-extends the core :php:class:`Controller` class. The AppController
-class can be defined in ``/app/Controller/AppController.php`` and it should
-contain methods that are shared between all of your application's controllers.
+Les contrôleurs de votre application sont des classes qui étendent la classe 
+CakePHP ``AppController``, qui hérite elle-même de la classe 
+:php:class:`Controller` du cœur. La classe AppController peut être définie 
+dans ``/app/Controller/AppController.php`` et elle devrait contenir les 
+méthodes partagées par tous les contrôleurs de votre application. 
 
-Controllers provide a number of methods which are called *actions*.  Actions are
-methods on a controller that handle requests.  By default all public methods on
-a controller are an action, and accessible from a url.  Actions are responsible
-for interpreting the request and creating the response.  Usually responses are
-in the form of a rendered view, but there are other ways to create responses as
-well.
-
+Les contrôleurs peuvent inclure un certain nombre de méthodes qui sont 
+généralement appelées *actions*. Les actions sont les méthodes d'un contrôleur 
+qui gère les requêtes. Par défaut, toutes les méthodes publiques d'un 
+contrôleur sont des actions accessibles d'une url. Les actions sont 
+responsables de l'interpretation des requêtes et de la création de 
+la réponse. Habituellement, les réponses sont sous forme de vue rendue, mais 
+il y a d'autres façons de créer des réponses aussi.
 
 .. _app-controller:
 
-The App Controller
-==================
+Le Contrôleur App
+=================
 
-As stated in the introduction, the AppController class is the
-parent class to all of your application's controllers.
-AppController itself extends the Controller class included in the
-CakePHP core library. As such, AppController is defined in
-``/app/Controller/AppController.php`` like so::
+Comme indiqué dans l'introduction, la classe AppController est la classe 
+mère de tous les contrôleurs de votre application. AppController étend 
+elle-même la classe Controller incluse dans la librairie du cœur de CakePHP. 
+Ainsi, AppController est définie dans ``/app/Controller/AppController.php`` 
+comme ceci::
 
     <?php
     class AppController extends Controller {
     }
     
 
-Controller attributes and methods created in your AppController
-will be available to all of your application's controllers. It is
-the ideal place to create code that is common to all of your
-controllers. Components (which you'll learn about later) are best
-used for code that is used in many (but not necessarily all)
-controllers.
+Les attributs et méthodes de contrôleur créés dans AppController seront 
+disponibles dans tous les contrôleurs de votre application. C'est l'endroit 
+idéal pour créer du code commun à tous vos contrôleurs. Les Composants (que 
+vous découvrirez plus loin) sont mieux appropriés pour du code utilisé dans 
+la plupart (mais pas nécessairement tous) des contrôleurs.
 
-While normal object-oriented inheritance rules apply, CakePHP
-does a bit of extra work when it comes to special controller
-attributes. The list of components and helpers used by a
-controller are treated specially. In these cases, AppController
-value arrays are merged with child controller class arrays. The values in the
-child class will always override those in AppController.
+Bien que les règles habituelles d'héritage de la programmation orientée objet 
+soient appliquées, CakePHP exécute également un travail supplémentaire si des 
+attributs spécifiques des contrôleurs sont fournis, comme la liste des 
+composants ou assistants utilisés par un contrôleur. Dans ces situations, les 
+valeurs des tableaux de AppController sont fusionnées avec les tableaux de 
+la classe contrôleur enfant.
 
 .. note::
 
-    CakePHP merges the following variables from the AppController to
-    your application's controllers:
+    CakePHP fusionne les variables suivantes de la classe AppController avec 
+    celles des contrôleurs de votre application:
 
     -  $components
     -  $helpers
     -  $uses
 
-Remember to add the default Html and Form helpers, if you define
-var ``$helpers`` in your AppController
+N'oubliez pas d'ajouter les assistants Html et Form si vous avez défini var 
+``$helpers`` dans la classe AppController.
 
-Please also remember to call AppController's callbacks within child
-controller callbacks for best results::
+Pensez à appeler les fonctions de retour (callbacks) de AppController dans 
+celles du contrôleur enfant pour de meilleurs résultats::
 
     <?php
     public function beforeFilter() {
         parent::beforeFilter();
     }
  
-Request parameters
-==================
+Les paramètres de requête
+=========================
 
-When a request is made to a CakePHP application,  CakePHP's :php:class:`Router` and
-:php:class:`Dispatcher` classes use :ref:`routes-configuration` to find and
-create the correct controller. The request data is encapsulated into a request
-object. CakePHP puts all of the important request information into the
-``$this->request`` property.  See the section on
-:ref:`cake-request` for more information on the CakePHP request
-object.
+Quand une requête est faite dans une application CakePHP, Les classes 
+:php:class:`Router` et :php:class:`Dispatcher` de CakePHP utilisent 
+:ref:`routes-configuration` pour trouver et créer le bon contrôleur. La 
+requête de données est encapsulée dans un objet request.
+CakePHP met toutes les informations importantes de la requête dans la 
+propriété ``$this->request``. Regardez la section :ref:`cake-request` 
+pour plus d'informations sur l'objet request de CakePHP.
 
-Controller actions
-==================
+Les actions du Contrôleur
+=========================
 
-Controller actions are responsible for converting the request parameters into a
-response for the browser/user making the request.  CakePHP uses conventions to
-automate this process and remove some boiler-plate code you would otherwise need
-to write.
+Les actions du Contrôleur sont responsables de la conversion des paramètres de 
+la requête dans une réponse pour le navigateur/utilisateur faisant la requête.
+CakePHP utilise les conventions pour automatiser le processus et retirer 
+quelques codes boiler-plate que vous auriez besoin d'écrire autrement.
 
-By convention CakePHP renders a view with an inflected version of the action
-name.  Returning to our online bakery example, our RecipesController might contain the
-``view()``, ``share()``, and ``search()`` actions. The controller would be found
-in ``/app/Controller/RecipesController.php`` and contain::
+Par convention, CakePHP rend une vue avec une version inflectée du nom de 
+l'action. Revenons à notre boulangerie en-ligne par exemple, notre 
+RecipesController pourrait contenir les actions 
+``view()``, ``share()``, et ``search()``. Le contrôleur serait trouvé dans 
+``/app/Controller/RecettesController.php`` et contiendrait::
 
         <?php
-        # /app/Controller/RecipesController.php
+        # /app/Controller/RecettesController.php
         
-        class RecipesController extends AppController {
+        class RecettesController extends AppController {
             public function view($id) {
-                //action logic goes here..
+                //la logique de l'action logic va ici..
             }
         
-            public function share($customer_id, $recipe_id) {
-                //action logic goes here..
+            public function share($client_id, $recette_id) {
+                //la logique de l'action logic va ici..
             }
         
             public function search($query) {
-                //action logic goes here..
+                //la logique de l'action logic va ici..
             }
         }
 
-The view files for these actions would be ``app/View/Recipes/view.ctp``,
-``app/View/Recipes/share.ctp``, and ``app/View/Recipes/search.ctp``.  The
-conventional view file name is the lower cased and underscored version of the
-action name.
+Les fichiers de vue pour ces actions seraient ``app/View/Recettes/view.ctp``,
+``app/View/Recettes/share.ctp``, et ``app/View/Recettes/search.ctp``.  Le nom 
+du fichier de vue est par convention le nom de l'action en minuscules et avec 
+des underscores 
 
 Controller actions generally use :php:meth:`~Controller::set()` to create a
 context that :php:class:`View` uses to render the view.  Because of the
@@ -171,270 +174,282 @@ Request Life-cycle callbacks
 
 .. php:class:: Controller
 
-CakePHP controllers come fitted with callbacks you can use to
-insert logic around the request life-cycle:
+Les contrôleurs de CakePHP sont livrés par défaut avec des méthodes de rappel 
+(ou callback) qui vous pouvez utiliser pour insérer de la logique juste avant 
+ou juste après que les actions du contrôleur soient effectuées:
 
 .. php:method:: beforeFilter()
 
-    This function is executed before every action in the controller.
-    It's a handy place to check for an active session or inspect user
-    permissions.
+    Cette fonction est exécutée avant chaque action du contrôleur. C'est 
+    un endroit pratique pour vérifier le statut d'une session ou les 
+    permissions d'un utilisateur.
 
     .. note::
 
-        The beforeFilter() method will be called for missing actions,
-        and scaffolded actions.
+        La méthode beforeFilter() sera appelée pour les actions manquantes et 
+        les actions de scaffolding.
 
 .. php:method:: beforeRender()
 
-    Called after controller action logic, but before the view is
-    rendered. This callback is not used often, but may be needed if you
-    are calling render() manually before the end of a given action.
+    Cette méthode est appelée après l'action du contrôleur mais avant 
+    que la vue ne soit rendue. Ce callback n'est pas souvent utilisé, 
+    mais peut-être nécessaire si vous appellez render() manuellement à 
+    la fin d'une action donnée.
 
 .. php:method:: afterFilter()
 
-    Called after every controller action, and after rendering is
-    complete. This is the last controller method to run.
+    Cette méthode est appelée après chaque action du contrôleur, et après 
+    que l'affichage soit terminé. C'est la dernière méthode du contrôleur 
+    qui est exécutée.
 
-In addition to controller life-cycle callbacks, :doc:`/controllers/components`
-also provide a similar set of callbacks.
+En plus des callbacks, :doc:`/controllers/components` fournit aussi un ensemble 
+similaire de callbacks.
 
 .. _controller-methods:
 
-Controller Methods
-==================
+Les Méthodes du Contrôleur
+==========================
 
-For a complete list of controller methods and their descriptions
-visit the CakePHP API. Check out
+Pour une liste complète des méthodes de contrôleur avec leurs descriptions, 
+consultez l'API CakePHP 
 `http://api20.cakephp.org/class/controller <http://api20.cakephp.org/class/controller>`_.
 
-Interacting with Views
-----------------------
+Interactions avec les vues
+--------------------------
 
-Controllers interact with the view in a number of ways. First they
-are able to pass data to the views, using ``set()``. You can also
-decide which view class to use, and which view file should be
-rendered from the controller.
+Les Contrôleurs interagissent avec la vue d'un certain nombre de façons. 
+Premièrement, ils sont capables de passer des données aux vues, en utilisant 
+``set()``. Vous pouvez aussi décider quelle classe de vue utiliser, et quel 
+fichier de vue doit être rendu à partir du contrôleur.
 
 .. php:method:: set(string $var, mixed $value)
 
-    The ``set()`` method is the main way to send data from your
-    controller to your view. Once you've used ``set()``, the variable
-    can be accessed in your view::
+    La méthode ``set()`` est la voie principale utilisée pour transmettre des 
+    données de votre contrôleur à votre vue. Une fois ``set()`` utilisée, la 
+    variable de votre contrôleur devient accessible par la vue::
 
         <?php
-        // First you pass data from the controller:
+        // Dans un premier temps vous passez les données depuis le contrôleur:
 
-        $this->set('color', 'pink');
+        $this->set('couleur', 'rose');
 
-        // Then, in the view, you can utilize the data:
+        // Ensuite vous pouvez les utiliser dans la vue de cette manière:
         ?>
 
-        You have selected <?php echo $color; ?> icing for the cake.
+        Vous avez sélectionné un glaçage <?php echo $couleur; ?> pour le gâteau.
 
-    The ``set()`` method also takes an associative array as its first
-    parameter. This can often be a quick way to assign a set of
-    information to the view.
+    La méthode ``set()`` peut également prendre un tableau associatif comme 
+    premier paramètre. Cela peut souvent être une manière rapide d'affecter 
+    en une seule fois un jeu complet d'informations à la vue. 
 
     .. versionchanged:: 1.3
-        Array keys will no longer be inflected before they are assigned
-        to the view ('underscored\_key' does not become 'underscoredKey'
-        anymore, etc.):
+        Les clefs de votre tableau ne seront plus infléchies avant d'être 
+        assignées à la vue (‘clef\_avec\_underscore’ ne devient plus 
+        ‘clefAvecUnderscore’, etc...).
 
     ::
 
         <?php
         $data = array(
-            'color' => 'pink',
-            'type' => 'sugar',
-            'base_price' => 23.95
+            'couleur' => 'rose',
+            'type' => 'sucre',
+            'prix_de_base' => 23.95
         );
 
-        // make $color, $type, and $base_price 
-        // available to the view:
+        // donne $couleur, $type, et $prix_de_base 
+        // disponible dans la vue:
 
         $this->set($data);  
 
 
-    The attribute ``$pageTitle`` no longer exists, use ``set()`` to set
-    the title::
+    L'attribut ``$pageTitle`` n'existe plus, utilisez ``set()`` pour définir 
+    le titre::
 
         <?php
-        $this->set('title_for_layout', 'This is the page title');
+        $this->set('title_for_layout', 'Ceci est la page titre');
 
 
 .. php:method:: render(string $action, string $layout, string $file)
 
-    The ``render()`` method is automatically called at the end of each
-    requested controller action. This method performs all the view
-    logic (using the data you’ve given in using the ``set()`` method),
-    places the view inside its layout and serves it back to the end
-    user.
+    La méthode ``render()`` est automatiquement appelée à la fin de 
+    chaque action exécutée par le contrôleur. Cette méthode exécute 
+    toute la logique liée à la présentation (en utilisant les variables 
+    transmises via la méthode ``set()``), place le contenu de la vue 
+    à l'intérieur de sa mise en page et transmet le tout à l'utilisateur 
+    final.
 
-    The default view file used by render is determined by convention.
-    If the ``search()`` action of the RecipesController is requested,
-    the view file in /app/View/Recipes/search.ctp will be rendered::
+    Le fichier de vue utilisé par défaut est déterminé par convention. 
+    Ainsi, si l'action ``search()`` de notre contrôleur RecettesController 
+    est demandée, le fichier de vue situé dans /app/view/recettes/search.ctp 
+    sera utilisé::
 
         <?php
-        class RecipesController extends AppController {
+        class RecettesController extends AppController {
         // ...
             public function search() {
-                // Render the view in /View/Recipes/search.ctp
+                // Rend la vue dans /View/Recettes/search.ctp
                 $this->render();
             }
         // ...
         }
 
-    Although CakePHP will automatically call it (unless you’ve set
-    ``$this->autoRender`` to false) after every action’s logic, you can
-    use it to specify an alternate view file by specifying an action
-    name in the controller using ``$action``.
+    Bien que CakePHP appellera cette fonction automatiquement à la 
+    fin de chaque action (à moins que vous n'ayez défini ``$this->autoRender``
+    à false), vous pouvez l'utiliser pour spécifier un fichier de vue 
+    alternatif en précisant le nom d'une action dans le contrôleur, via 
+    le paramètre ``$action``.
 
-    If ``$action`` starts with '/' it is assumed to be a view or
-    element file relative to the ``/app/View`` folder. This allows
-    direct rendering of elements, very useful in ajax calls.
+    Si ``$action`` commence avec un '/' on suppose que c'est un fichier de 
+    vue ou un élément dont le chemin est relatif au dossier ``/app/View``. Cela 
+    permet un affichage direct des éléments, ce qui est très pratique lors 
+    d'appels ajax.
     ::
 
         <?php
-        // Render the element in /View/Elements/ajaxreturn.ctp
+        // Rend un élément dans /View/Elements/ajaxreturn.ctp
         $this->render('/Elements/ajaxreturn');
 
-    You can also specify an alternate view or element file using the
-    third parameter, ``$file``. The ``$layout`` parameter allows you to specify
-    the layout the view is rendered in.
+    Vous pouvez aussi spécifier une vue alternative ou un fichier element en 
+    utilisant le troisième paramètre, ``$file``. Le paramètre ``$layout`` 
+    vous permet de spécifier le layout de la vue qui est rendue.
 
-Rendering a specific view
+Rendre une vue spécifique
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In your controller you may want to render a different view than
-what would conventionally be done. You can do this by calling
-``render()`` directly. Once you have called ``render()`` CakePHP
-will not try to re-render the view::
+Dans votre contrôleur, vous pourriez avoir envie de rendre une vue 
+différente que celle rendue par défaut. Vous pouvez faire cela en appelant 
+directement ``render()``. Une fois que vous avez appelé ``render()`` CakePHP 
+n'essaiera pas de re-rendre la vue::
 
     <?php
     class PostsController extends AppController {
-        public function my_action() {
-            $this->render('custom_file');
+        public function mon_action() {
+            $this->render('fichier_personnalise');
         }
     }
 
-This would render ``app/View/Posts/custom_file.ctp`` instead of
-``app/View/Posts/my_action.ctp``
+Cela rendrait ``app/View/Posts/fichier_personnalise.ctp`` au lieu de 
+``app/View/Posts/mon_action.ctp``
 
-Flow Control
-------------
+Contrôle de FLux
+----------------
 
 .. php:method:: redirect(mixed $url, integer $status, boolean $exit)
 
-    The flow control method you’ll use most often is ``redirect()``.
-    This method takes its first parameter in the form of a
-    CakePHP-relative URL. When a user has successfully placed an order,
-    you might wish to redirect them to a receipt screen.::
+    La méthode de contrôle de flux que vous utiliserez le plus souvent est 
+    ``redirect()``. Cette méthode prend son premier paramètre sous la forme 
+    d'une URL relative à votre application CakePHP. Quand un utilisateur a 
+    réalisé un paiement avec succès, vous aimeriez le rediriger vers un 
+    écran affichant le reçu.::
 
         <?php
-        public function place_order() {
-            // Logic for finalizing order goes here
+        public function regler_achats() {
+            // Placez ici la logique pour finaliser l'achat...
             if ($success) {
-                $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));
+                $this->redirect(array('controller' => 'paiements', 'action' => 'remerciements'));
             } else {
-                $this->redirect(array('controller' => 'orders', 'action' => 'confirm'));
+                $this->redirect(array('controller' => 'paiements', 'action' => 'confirmations'));
             }
         }
 
-    You can also use a relative or absolute URL as the $url argument::
+    Vous pouvez aussi utiliser une URL relative ou absolue avec $url::
 
         <?php
-        $this->redirect('/orders/thanks'));
-        $this->redirect('http://www.example.com');
+        $this->redirect('/paiements/remerciements'));
+        $this->redirect('http://www.exemple.com');
 
-    You can also pass data to the action::
+    Vous pouvez aussi passer des données à l'action::
 
         <?php
-        $this->redirect(array('action' => 'edit', $id));
+        $this->redirect(array('action' => 'editer', $id));
 
-    The second parameter of ``redirect()`` allows you to define an HTTP
-    status code to accompany the redirect. You may want to use 301
-    (moved permanently) or 303 (see other), depending on the nature of
-    the redirect.
+    Le second paramètre de la fonction ``redirect()`` vous permet de 
+    définir un code de statut HTTP accompagnant la redirection. 
+    Vous aurez peut-être besoin d'utiliser le code 301 (document 
+    déplacé de façon permanente) ou 303 (voir ailleurs), en fonction 
+    de la nature de la redirection.
 
-    The method will issue an ``exit()`` after the redirect unless you
-    set the third parameter to ``false``.
+    Cette méthode réalise un ``exit()`` après la redirection, tant que vous 
+    ne mettez pas le troisième paramètre à false.
 
-    If you need to redirect to the referer page you can use::
+    Si vous avez besoin de rediriger à la page appelante, vous pouvez 
+    utiliser::
 
         <?php
         $this->redirect($this->referer());
 
-    The method also supports name based parameters. If you want to redirect
-    to a URL like: ``http://www.example.com/orders/confirm/product:pizza/quantity:5``
-    you can use::
+    Cette méthode supporte aussi les paramètres nommés de base. Si vous 
+    souhaitez être redirigé sur une URL comme: 
+    ``http://www.example.com/commandes/confirmation/produit:pizza/quantite:5``
+    vous pouvez utiliser::
 
         <?php
-        $this->redirect(array('controller' => 'orders', 'action' => 'confirm', 'product' => 'pizza', 'quantity' => 5));
+        $this->redirect(array('controller' => 'commandes', 'action' => 'confirmation', 'produit' => 'pizza', 'quantite' => 5));
 
 .. php:method:: flash(string $message, string $url, integer $pause, string $layout)
 
-    Like ``redirect()``, the ``flash()`` method is used to direct a
-    user to a new page after an operation. The ``flash()`` method is
-    different in that it shows a message before passing the user on to
-    another URL.
+    Tout comme ``redirect()``, la méthode ``flash()`` est utilisée pour 
+    rediriger un utilisateur vers une autre page à la fin d'une opération. 
+    La méthode ``flash()`` est toutefois différente en ce sens qu'elle affiche 
+    un message avant de diriger l'utilisateur vers une autre url.
 
-    The first parameter should hold the message to be displayed, and
-    the second parameter is a CakePHP-relative URL. CakePHP will
-    display the ``$message`` for ``$pause`` seconds before forwarding
-    the user on.
+    Le premier paramètre devrait contenir le message qui sera affiché et le 
+    second paramètre une URL relative à votre application CakePHP. CakePHP 
+    affichera le ``$message`` pendant ``$pause`` secondes avant de rediriger 
+    l'utilisateur.
 
-    If there's a particular template you'd like your flashed message to
-    use, you may specify the name of that layout in the ``$layout``
-    parameter.
-
-    For in-page flash messages, be sure to check out SessionComponent’s
-    setFlash() method.
+    Si vous souhaitez utiliser un template particulier pour messages flash,
+    vous pouvezspécifier le nom du layout dans le paramètre ``$layout``.
+    
+    Pour définir des messages flash dans une page, regardez du côté de la 
+    méthode setFlash() du composant Session (SessionComponent).
 
 Callbacks
 ---------
 
-In addition to the :ref:`controller-life-cycle`.
-CakePHP also supports callbacks related to scaffolding.
+En plus des :ref:`controller-life-cycle`, CakePHP supporte aussi les 
+callbacks liés au scaffolding.
 
 .. php:method:: beforeScaffold($method)
 
-    $method name of method called example index, edit, etc.
+    $method nom de la méthode appelée, par exemple index, edit, etc.
 
 .. php:method:: afterScaffoldSave($method)
 
-    $method name of method called either edit or update.
+    $method nom de la méthode appelée soit edit soit update.
 
 .. php:method:: afterScaffoldSaveError($method)
 
-    $method name of method called either edit or update.
+    $method nom de la méthode appelée soit edit soit update.
 
 .. php:method:: scaffoldError($method)
 
-    $method name of method called example index, edit, etc.
+    $method nom de la méthode appelée , par exemple index, edit, etc...
 
-Other Useful Methods
---------------------
+Autres Méthodes utiles
+----------------------
 
 .. php:method:: constructClasses
 
-    This method loads the models required by the controller. This
-    loading process is done by CakePHP normally, but this method is
-    handy to have when accessing controllers from a different
-    perspective. If you need CakePHP in a command-line script or some
-    other outside use, constructClasses() may come in handy.
+    Cette méthode charge en mémoire les modèles requis par le contrôleur. 
+    Cette procédure de chargement est normalement effectuée par CakePHP, 
+    mais cette méthode est à garder sous le coude quand vous avez besoin 
+    d'accéder à certains contrôleurs depuis une perspective différente. Si 
+    vous avez besoin de CakePHP dans un script utilisable en ligne de 
+    commande ou d'autres utilisations externes, constructClasses() peut 
+    devenir pratique.
 
 .. php:method:: referer(mixed $default = null, boolean $local = false)
 
-    Returns the referring URL for the current request. Parameter
-    ``$default`` can be used to supply a default URL to use if
-    HTTP\_REFERER cannot be read from headers. So, instead of doing
-    this::
+    Retourne l'URL référente de la requête courante. Le Paramètre 
+    ``$default`` peut être utilisé pour fournir une URL par défaut à 
+    utiliser si HTTP\_REFERER ne peut pas être lu par les headers. Donc, 
+    au lieu de faire ceci::
 
         <?php
-        class UserController extends AppController {
+        class UtilisateursController extends AppController {
             public function delete($id) {
-                // delete code goes here, and then...
+                // le code de suppression va ici, et ensuite...
                 if ($this->referer() != '/') {
                     $this->redirect($this->referer());
                 } else {
@@ -443,29 +458,29 @@ Other Useful Methods
             }
         }
 
-    you can do this::
+    vous pouvez faire ceci::
 
         <?php
-        class UserController extends AppController {
+        class UtilisateursController extends AppController {
             public function delete($id) {
-                // delete code goes here, and then...
+                // le code de suppression va ici, et ensuite...
                 $this->redirect($this->referer(array('action' => 'index')));
             }
         }
 
-    If ``$default`` is not set, the function defaults to the root of
-    your domain - '/'.
+    Si ``$default`` n'est pas défini, la fonction se met par défaut sur 
+    à la racine (root) de votre domaine - '/'.
 
-    Parameter ``$local`` if set to ``true``, restricts referring URLs
-    to local server.
+    Le paramètre ``$local`` si il est défini à ``true``, restreint les URLs se 
+    référant au serveur local.
 
 .. php:method:: disableCache
 
-    Used to tell the user’s **browser** not to cache the results of the
-    current request. This is different than view caching, covered in a
-    later chapter.
+    Utilisée pour indiquer au **navigateur** de l'utilisateur de ne pas 
+    mettre en cache le résultat de la requête courante. Ceci est différent 
+    du système de cache de vue couvert dans le chapitre suivant.
 
-    The headers sent to this effect are::
+    Les en-têtes HTTP envoyés à cet effet sont::
 
         Expires: Mon, 26 Jul 1997 05:00:00 GMT
         Last-Modified: [current datetime] GMT
@@ -475,36 +490,37 @@ Other Useful Methods
 
 .. php:method:: postConditions(array $data, mixed $op, string $bool, boolean $exclusive)
 
-    Use this method to turn a set of POSTed model data (from
-    HtmlHelper-compatible inputs) into a set of find conditions for a
-    model. This function offers a quick shortcut on building search
-    logic. For example, an administrative user may want to be able to
-    search orders in order to know which items need to be shipped. You
-    can use CakePHP's :php:class:`FormHelper` and :php:class:`HtmlHelper`
-    to create a quick form based on the Order model. Then a controller action
-    can use the data posted from that form to craft find conditions::
-
+    Utilisez cette méthode pour transformer des données de formulaire, 
+    transmises par POST (depuis les inputs du Helper Form), en des 
+    conditions de recherche pour un modèle. Cette fonction offre un 
+    raccourci appréciable pour la construction de la logique de recherche. 
+    Par exemple, un administrateur aimerait pouvoir chercher des commandes 
+    dans le but de connaître quels produits doivent être emballés. Vous 
+    pouvez utiliser les Helpers Form et Html pour construire un formulaire 
+    rapide basé sur le modèle Commande. Ensuite une action du contrôleur 
+    peut utiliser les données postées par ce formulaire pour construire 
+    automatiquement les conditions de la recherche::
         <?php
         public function index() {
             $conditions = $this->postConditions($this->request->data);
-            $orders = $this->Order->find('all', compact('conditions'));
-            $this->set('orders', $orders);
+            $commandes = $this->Commande->find('all', compact('conditions'));
+            $this->set('commandes', $orders);
         }
 
-    If ``$this->request->data['Order']['destination']`` equals "Old Towne Bakery",
-    postConditions converts that condition to an array compatible for
-    use in a Model->find() method. In this case,
-    ``array('Order.destination' => 'Old Towne Bakery')``.
+    Si ``$this->data[‘Commande’][‘destination’]`` vaut "Boulangerie du village", 
+    postConditions convertit cette condition en un tableau compatible avec 
+    la méthode Model->find(). Soit dans notre cas, 
+    ``array("Commande.destination" => "Boulangerie du village")``.
 
-    If you want to use a different SQL operator between terms, supply them
-    using the second parameter::
+    Si vous voulez utiliser un opérateur SQL différent entre chaque 
+    terme, remplacez-le en utilisant le second paramètre::
 
         <?php
         /*
-        Contents of $this->request->data
+        Contenu de $this->request->data
         array(
-            'Order' => array(
-                'num_items' => '4',
+            'Commande' => array(
+                'nb_items' => '4',
                 'referrer' => 'Ye Olde'
             )
         )
@@ -518,51 +534,53 @@ Other Useful Methods
                 'referrer' => 'LIKE'
             )
         );
-        $orders = $this->Order->find('all', compact('conditions'));
+        $commandes = $this->Commande->find('all', compact('conditions'));
 
-    The third parameter allows you to tell CakePHP what SQL boolean
-    operator to use between the find conditions. Strings like ‘AND’,
-    ‘OR’ and ‘XOR’ are all valid values.
+    Le troisième paramètre vous permet de dire à CakePHP quel opérateur 
+    booléen SQL utilisé entre les conditions de recherche. Les chaînes 
+    comme ‘AND’, ‘OR’ et ‘XOR’ sont des valeurs possibles.
 
-    Finally, if the last parameter is set to true, and the $op
-    parameter is an array, fields not included in $op will not be
-    included in the returned conditions.
+    Enfin, si le dernier paramètre est défini à vrai et que $op est un tableau, 
+    les champs non-inclus dans $op ne seront pas inclus dans les conditions 
+    retournées.
 
 .. php:method:: paginate()
 
-    This method is used for paginating results fetched by your models.
-    You can specify page sizes, model find conditions and more. See the
-    :doc:`pagination <core-libraries/components/pagination>` section for more details on
-    how to use paginate.
+    Cette méthode est utilisée pour paginer les résultats retournés par vos 
+    modèles. Vous pouvez définir les tailles de la page, les conditions à 
+    utiliser pour la recherche de ces données et bien plus. Consultez la 
+    section :doc:`pagination <core-libraries/components/pagination>` 
+    pour plus de détails sur l'utilisation de la pagination.
 
 .. php:method:: requestAction(string $url, array $options)
 
-    This function calls a controller's action from any location and
-    returns data from the action. The ``$url`` passed is a
-    CakePHP-relative URL (/controllername/actionname/params). To pass
-    extra data to the receiving controller action add to the $options
-    array.
+    Cette fonction appelle l'action d'un contrôleur depuis tout endroit 
+    du code et retourne les données associées à cette action. L'``$url`` 
+    passée est une adresse relative à votre application CakePHP 
+    (/nomducontroleur/nomaction/parametres). Pour passer des données 
+    supplémentaires au contrôleur destinataire ajoutez le tableau $options.
 
     .. note::
 
-        You can use ``requestAction()`` to retrieve a fully rendered view
-        by passing 'return' in the options:
-        ``requestAction($url, array('return'));``. It is important to note
-        that making a requestAction using 'return' from a controller method
-        can cause script and css tags to not work correctly.
+        Vous pouvez utiliser ``requestAction()`` pour récupérer 
+        l'intégralité de l'affichage d'une vue en passant la valeur 
+        'return' dans les options : ``requestAction($url, array('return'))``.
+        Il est important de noter que faire un requestAction en utilisant 
+        'return' à partir d'une méthode d'un contrôleur peut entraîner des 
+        problèmes de fonctionnement dans les script et tags css.
 
     .. warning::
 
-        If used without caching ``requestAction`` can lead to poor
-        performance. It is rarely appropriate to use in a controller or
-        model.
+        Si elle est utilisée sans cache, la méthode ``requestAction`` peut 
+        engendrer des faibles performances. Il est rarement approprié de 
+        l'utiliser dans un contrôleur ou un modèle.
 
-    ``requestAction`` is best used in conjunction with (cached)
-    elements – as a way to fetch data for an element before rendering.
-    Let's use the example of putting a "latest comments" element in the
-    layout. First we need to create a controller function that will
-    return the data::
-
+    ``requestAction`` est plutôt utilisé en conjonction avec des éléments 
+    (mis en cache) - comme moyen de récupérer les données pour un élément 
+    avant de l'afficher. Prenons l'exemple de la mise en place d'un élément 
+    "derniers commentaires" dans le gabarit (layout). Nous devons d'abord 
+    créer une méthode de controller qui retourne les données::
+    
         <?php
         // Controller/CommentsController.php
         class CommentsController extends AppController {
@@ -669,8 +687,8 @@ Other Useful Methods
         $user = $this->User->read();
 
 
-Controller Attributes
-=====================
+Les attributs du Contrôleur
+===========================
 
 For a complete list of controller attributes and their descriptions
 visit the CakePHP API. Check out
@@ -757,7 +775,7 @@ given by ``$helpers`` to the view as an object reference variable
     ``$helpers`` you can pass settings into components.  See :ref:`configuring-components`
     for more information.
 
-Other Attributes
+Autres Attributs
 ----------------
 
 While you can check out the details for all controller attributes
@@ -794,8 +812,8 @@ own sections in the manual.
     understand at first. The chapter should start with some example controllers
     and what they do.
 
-More on controllers
-===================
+En savoir plus sur les contrôleurs
+==================================
 
 .. toctree::
 
@@ -806,5 +824,5 @@ More on controllers
 
 
 .. meta::
-    :title lang=en: Controllers
-    :keywords lang=en: correct models,controller class,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,logic,recipes
+    :title lang=fr: Controllers (Contrôleurs)
+    :keywords lang=fr: bons modèles,classe controller,controller controller,librairie du coeur,modèle unique,donnée requêtée,homme du milieu,boulangerie,mvc,attributs,logique,recettes

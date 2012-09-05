@@ -4,13 +4,13 @@ Helpers (Assistants)
 Les Helpers (Assistants) sont des classes comme les composants, pour la couche 
 de présentation de votre application. Ils contiennent la logique de 
 présentation qui est partagée entre plusieurs vues, éléments ou layouts. Ce 
-chapitre vous montrera comment créer vos propres assistants et soulignera les 
-tâches basiques que les assistants du cœur de CakePHP peuvent vous aider à 
+chapitre vous montrera comment créer vos propres helpers et soulignera les 
+tâches basiques que les helpers du cœur de CakePHP peuvent vous aider à 
 accomplir. 
 
 CakePHP dispose d'un nombre de helpers qui aident à la création des vues.
 Ils aident à la création de balises bien-formées (y compris les formulaires), 
-aident à la mise en forme du texte, les durées et les numéros, et peut même 
+aident à la mise en forme du texte, les durées et les numéros, et peuvent même 
 accélérer la fonctionnalité Ajax. Pour plus d'informations sur les helpers 
 inclus dans CakePHP, allez voir :ref:`core-helpers`.
 
@@ -195,8 +195,8 @@ Inclure d'autres Helpers
 
 Vous souhaitez peut-être utiliser quelques fonctionnalités déjà existantes dans 
 un autre helper. Pour faire cela, vous pouvez spécifier les helpers que 
-vous souhaitez utiliser avec un tableau ``$helpers``, formaté comme vous le feriez 
-dans un contrôleur::
+vous souhaitez utiliser avec un tableau ``$helpers``, formaté comme vous le 
+feriez dans un contrôleur::
 
     <?php
     /* /app/View/Helper/LienHelper.php (Utilisant d'autres helpers) */
@@ -240,8 +240,8 @@ Créer des fonctionnalités à vos Helpers
 =======================================
 
 Tous les helpers étendent une classe spéciale, AppHelper (comme les modèles 
-étendent AppModel et les contrôleurs étendent AppController). Pour créer la
-fonctionnalité qui serait disponible pour tous les helpers, créez
+étendent AppModel et les contrôleurs étendent AppController). Pour créer une 
+fonctionnalité disponible pour tous les helpers, créez
 ``/app/View/Helper/AppHelper.php``::
 
     <?php
@@ -279,7 +279,7 @@ Helper API
 
 .. php:method:: domId($options = null, $id = 'id')
 
-    Génère une valeur id en CamelCased pour la le champ sélectionné courant. 
+    Génère une valeur id en CamelCase pour le champ sélectionné courant. 
     Ecraser cette méthode dans votre AppHelper vous permettra de changer la 
     façon dont CakePHP génére les attributs ID.
 

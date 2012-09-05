@@ -1,7 +1,8 @@
-Deleting Data
-#############
+Supprimer de Données
+####################
 
-CakePHP's Model class offers a few ways to delete records from your database.
+La classe Model de CakePHP offre de nombreuses façons de supprimer des 
+enregistrements de votre base de données.
 
 .. _model-delete:
 
@@ -10,28 +11,31 @@ delete
 
 ``delete(int $id = null, boolean $cascade = true);``
 
-Deletes the record identified by $id. By default, also deletes
-records dependent on the record specified to be deleted.
+Supprime l'enregistrement identifié par $id. Par défaut, supprime 
+également les enregistrements dépendants de l'enregistrement 
+mentionné comme devant être supprimé.
 
-For example, when deleting a User record that is tied to many
-Recipe records (User 'hasMany' or 'hasAndBelongsToMany' Recipes):
- 
--  if $cascade is set to true, the related Recipe records are also
-   deleted if the model's dependent-value is set to true.
--  if $cascade is set to false, the Recipe records will remain
-   after the User has been deleted.
+Par exemple, lors de la suppression d'un enregistrement Utilisateur 
+lié à plusieurs enregistrements Recette (Utilisateur 'hasMany' ou 
+'hasAndBelongsToMany' Recettes):
+-  si $cascade est fixé à true, les entrées Recette liées sont aussi 
+   supprimées si les valeurs "dependant" des modèles sont à true.
+-  si $cascade est fixé à false, les entrées Recette resteront après 
+   que l'Utilisateur ait été supprimé.
 
-If your database supports foreign keys and cascading deletes, it's often more
-efficient to rely on that feature than CakePHP's cascading. The one benefit to
-using the cascade feature of ``Model::delete()`` is that it allows you to
-leverage behaviors and model callbacks::
+Si votre base de données permet les clés étrangères et les suppressions en 
+cascade, il est souvent plus efficace de les utiliser plutôt que le cascade 
+de CakePHP. Le seul bénéfice pour l'utilisation de la fonctionnalité de 
+cascade de ``Model::delete()`` est qu'elle vous permet d'influencer les 
+callbacks des behaviors et des modèles:: 
 
     <?php
     $this->Comment->delete($this->request->data('Comment.id'));
 
-You can hook custom logic into the delete process using the ``beforeDelete`` and
-``afterDelete`` callbacks present in both Models and Behaviors.  See
-:doc:`/models/callback-methods` for more information.
+Vous pouvez brancher une logique personnalisée dans le processus de 
+suppression à l'aide des callbacks ``beforeDelete`` et ``afterDelete`` 
+présents dans les deux Modèles et Bahaviors. Allez voir 
+:doc:`/models/callback-methods` pour plus d'informations.
 
 .. _model-deleteall:
 
@@ -40,32 +44,33 @@ deleteAll
 
 ``deleteAll(mixed $conditions, $cascade = true, $callbacks = false)``
 
-``deleteAll()`` is similar to ``delete()``, except that
-``deleteAll()`` will delete all records that match the supplied
-conditions. The ``$conditions`` array should be supplied as a SQL
-fragment or array.
+``deleteAll()`` est identique à ``delete()``, sauf que
+``deleteAll()`` supprimera tous les enregistrements qui matchent les conditions
+fournies. Le tableau ``$conditions`` doit être fourni en tant que fragment ou 
+tableau SQL.
 
-* **conditions** Conditions to match
-* **cascade** Boolean, Set to true to delete records that depend on
-  this record
-* **callbacks** Boolean, Run callbacks
-  Return boolean True on success, false on failure.
+* **conditions** Conditions pour matcher
+* **cascade** Booléen, Mis à true pour supprimer les enregistrements qui 
+  dépendent de cet enregistrement
+* **callbacks** Booléen, Lance les callbacks
+  Retourne un booléen True en cas de succès, false en cas d'échec.
 
-Example::
+Exemple::
 
     <?php
-    // Delete with array conditions similar to find()
+    // Suppression avec un tableau de conditions similaires à find()
     $this->Comment->deleteAll(array('Comment.spam' => true), false);
 
-If you delete with either callbacks and/or cascade, rows will be found and then
-deleted. This will often result in more queries being issued.
+Si vous supprimez avec soit callbacks et/ou cascade, les lignes seront trouvées 
+et ensuite supprimées. Cela impliquera souvent plus de requêtes faîtes.
 
 .. note::
 
-    deleteAll() will return true even if no records are deleted, as the conditions
-    for the delete query were successful and no matching records remain.
-
+    deleteAll() retournera true même si aucun enregistrement n'est supprimé, 
+    puisque les conditions pour la requête de suppression est un succès et 
+    qu'auncun enregitrement correspondant ne reste
+    
 
 .. meta::
-    :title lang=en: Deleting Data
-    :keywords lang=en: doc models,custom logic,callback methods,model class,database model,callbacks,information model,request data,deleteall,fragment,leverage,array,cakephp,failure,recipes,benefit,delete,data model
+    :title lang=fr: Supprimer les Données
+    :keywords lang=fr: modèles doc,logique custom,méthodes callback,classe model,modèle de base de données,callbacks,modèle information,request data,deleteall,fragment,leverage,tableau,cakephp,échec,recettes,bénéfice,suppression,modèle de données

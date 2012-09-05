@@ -73,14 +73,14 @@ noeuds dans votre structure en arbre sous-jacente.
 
 Les modèles sont aussi soutenus par une autre classe nommée une DataSource 
 (source de données). Il s'agit d'une couche d'abstraction qui permet aux 
-modèles de manipuler différents types de données de manière consistante. La 
+modèles de manipuler différents types de données de manière cohérente. La 
 plupart du temps la source principale de données dans CakePHP est une base 
-de données, vous pouvez cependant écrire des DataSources additionnelles pour 
-représenter des flux RSS, des fichiers CSV, des entrées LDAP ou des évènements 
-iCal. Les DataSources vous permettent d'associer des enregistrements issus de 
-sources différentes : plutôt que d'être limité à des jointures SQL, les 
-DataSources vous permettent de dire à votre modèle LDAP qu'il est associé à 
-plusieurs événements iCal.
+de données, vous pouvez cependant écrire des Sources de Données additionnelles 
+pour représenter des flux RSS, des fichiers CSV, des entrées LDAP ou des 
+évènements iCal. Les Sources de Données vous permettent d'associer des 
+enregistrements issus de sources différentes : plutôt que d'être limité à des 
+jointures SQL, les Sources de Données vous permettent de dire à votre modèle 
+LDAP qu'il est associé à plusieurs événements iCal.
 
 Tout comme les contrôleurs, les modèles sont également caractérisés par des 
 fonctions de rappel (callbacks) :
@@ -115,4 +115,4 @@ portions de contenu doivent apparaître dans plusieurs vues.
 
 .. meta::
     :title lang=fr: Structure de CakePHP
-    :keywords lang=fr: gestion d'utilisateurs system,actions du contrôleur,application extensions,défaut behavior,maps,logique,snap,définitions,aids,modèles,route map,blog,plugins,fit
+    :keywords lang=fr: système de gestion d'utilisateurs,actions du contrôleur,application extensions,behavior par défaut,maps,logique,snap,définitions,aids,modèles,route map,blog,plugins,fit

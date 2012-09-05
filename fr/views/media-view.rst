@@ -11,7 +11,7 @@ dans /app/, vous permettant d'améliorer l'authentification avant la livraison
 du fichier à l'utilisateur.
 
 Pour utiliser la vue Media, vous avez besoin de dire à votre controller
-d'utilise la classe MediaView au lieu de la classe de vue par défaut. Après 
+d'utiliser la classe MediaView au lieu de la classe View par défaut. Après 
 ça, passez juste les paramètres en plus pour spécifier où votre fichier 
 se trouve::
 
@@ -60,7 +60,7 @@ Parmètres configurables
 
 ``name``
     Le nom vous permet de spécifier un nom de fichier alternatif à envoyer à
-    l'utilisateur. Spécifier le nom sans l'extension du fichier.
+    l'utilisateur. Spécifiez le nom sans l'extension du fichier.
 
 ``download``
     Une valeur boléenne indiquant si les en-têtes doivent être définis pour
@@ -89,7 +89,7 @@ Parmètres configurables
 
 .. todo::
 
-    Inclut des exemples de la façon d'envoyer des fichiers avec Media View.
+    Inclut des exemples sur la façon d'envoyer des fichiers avec Media View.
 
 
 .. meta::
