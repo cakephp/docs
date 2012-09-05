@@ -380,7 +380,7 @@ available.
             )
         */
 
-        $result = Set::combine($a, '{n}.User.id', '{n}.User.non-existant');
+        $result = Set::combine($a, '{n}.User.id', '{n}.User.non-existent');
         /* $result now looks like:
             Array
             (

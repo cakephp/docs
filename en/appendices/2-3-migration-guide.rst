@@ -63,7 +63,7 @@ Exceptions
 
 - CakeBaseException was added, which all core Exceptions now extend. The base exception
   class also introduces the ``responseHeader()`` method which can be called on created Exception instances
-  to add headers for the response, as Exceptions dont reuse any response instance.
+  to add headers for the response, as Exceptions don't reuse any response instance.
 
 Model
 =====

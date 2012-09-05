@@ -362,12 +362,12 @@ Cache API
 .. php:staticmethod:: increment($key, $offset = 1, $config = 'default')
 
     Atomically increment a value stored in the cache engine. Ideal for
-    modifing counters or semaphore type values.
+    modifying counters or semaphore type values.
 
 .. php:staticmethod:: decrement($key, $offset = 1, $config = 'default')
 
     Atomically decrement a value stored in the cache engine. Ideal for
-    modifing counters or semaphore type values.
+    modifying counters or semaphore type values.
 
 .. php:staticmethod:: clear($check, $config = 'default')
 
