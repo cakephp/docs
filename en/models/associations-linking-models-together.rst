@@ -108,7 +108,7 @@ but the following will not work well in all circumstances:::
         );
         public $hasAndBelongsToMany => array(
             'Member' => array(
-                'className' => 'User',
+                'className' => 'Group',
             )
         );
     }
@@ -122,7 +122,7 @@ but the following will not work well in all circumstances:::
         );
         public $hasAndBelongsToMany => array(
             'Member' => array(
-                'className' => 'Group',
+                'className' => 'User',
             )
         );
     }
