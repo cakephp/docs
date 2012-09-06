@@ -77,7 +77,7 @@ appropriate to have::
         );
         public $hasAndBelongsToMany => array(
             'Member' => array(
-                'className' => 'User',
+                'className' => 'Group',
             )
         );
     }
@@ -91,7 +91,7 @@ appropriate to have::
         );
         public $hasAndBelongsToMany => array(
             'MemberOf' => array(
-                'className' => 'Group',
+                'className' => 'User',
             )
         );
     }
