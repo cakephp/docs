@@ -71,9 +71,15 @@ appropriate to have::
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
-            'MyRecipe' => array('className' => 'Recipe'),
+            'MyRecipe' => array(
+                'className' => 'Recipe',
+            )
         );
-        public $hasAndBelongsToMany => array('Member' => array('className' => 'User'));
+        public $hasAndBelongsToMany => array(
+            'Member' => array(
+                'className' => 'User',
+            )
+        );
     }
     
     class Group extends AppModel {
@@ -83,7 +89,11 @@ appropriate to have::
                 'className'  => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array('MemberOf' => array('className' => 'Group'));
+        public $hasAndBelongsToMany => array(
+            'MemberOf' => array(
+                'className' => 'Group',
+            )
+        );
     }
 
 but the following will not work well in all circumstances:::
@@ -92,9 +102,15 @@ but the following will not work well in all circumstances:::
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
-            'MyRecipe' => 'Recipe',
+            'MyRecipe' => array(
+                'className' => 'Recipe',
+            )
         );
-        public $hasAndBelongsToMany => array('Member' => 'User');
+        public $hasAndBelongsToMany => array(
+            'Member' => array(
+                'className' => 'User',
+            )
+        );
     }
     
     class Group extends AppModel {
@@ -104,7 +120,11 @@ but the following will not work well in all circumstances:::
                 'className'  => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array('Member' => 'Group');
+        public $hasAndBelongsToMany => array(
+            'Member' => array(
+                'className' => 'Group',
+            )
+        );
     }
 
 because here we have the alias 'Member' referring to both the User
@@ -518,7 +538,9 @@ and set the value to ``true``::
     <?php
     class Image extends AppModel {
         public $belongsTo = array(
-            'ImageAlbum' => array('counterCache' => true)
+            'ImageAlbum' => array(
+                'counterCache' => true,
+            )
         );
     }
 
@@ -538,7 +560,8 @@ Using our Image model example, we can specify it like so::
             'ImageAlbum' => array(
                 'counterCache' => true,
                 'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1
-        ));
+            )
+        );
     }
 
 hasAndBelongsToMany (HABTM)
