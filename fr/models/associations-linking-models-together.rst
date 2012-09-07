@@ -73,19 +73,29 @@ uniques dans une app entière**. Par exemple, il est approprié d'avoir::
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
-            'MaRecette' => array('className' => 'Recette'),
+            'MaRecette' => array(
+                'className' => 'Recette',
+            ),
         );
-        public $hasAndBelongsToMany => array('Membre' => array('className' => 'User'));
+        public $hasAndBelongsToMany => array(
+            'MembreDe' => array(
+                'className' => 'Groupe',
+            ),
+        );
     }
-    
+
     class Groupe extends AppModel {
         public $name = 'Groupe';
         public $hasMany = array(
             'MaRecette' => array(
                 'className'  => 'Recette',
-            )
+            ),
         );
-        public $hasAndBelongsToMany => array('MembreDe' => array('className' => 'Groupe'));
+        public $hasAndBelongsToMany => array(
+            'Membre' => array(
+                'className' => 'User',
+            ),
+        );
     }
 
 mais ce qui suit ne travaillera pas bien dans toute circonstance:::
@@ -96,17 +106,25 @@ mais ce qui suit ne travaillera pas bien dans toute circonstance:::
         public $hasMany = array(
             'MaRecette' => 'Recette',
         );
-        public $hasAndBelongsToMany => array('Membre' => 'User');
+        public $hasAndBelongsToMany => array(
+            'Membere' => array(
+                'className' => 'Groupe',
+            ),
+        );
     }
-    
+
     class Groupe extends AppModel {
         public $name = 'Groupe';
         public $hasMany = array(
             'MaRecette' => array(
                 'className'  => 'Recette',
-            )
+            ),
         );
-        public $hasAndBelongsToMany => array('Membre' => 'Groupe');
+        public $hasAndBelongsToMany => array(
+            'Membere' => array(
+                'className' => 'User',
+            ),
+        );
     }
 
 parce que ici nous avons l'alias 'Member' se référant aux deux modèles 

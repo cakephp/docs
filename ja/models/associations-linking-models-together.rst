@@ -69,11 +69,17 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
-            'MyRecipe' => array('className' => 'Recipe'),
+            'MyRecipe' => array(
+                'className' => 'Recipe',
+            )
         );
-        public $hasAndBelongsToMany => array('Member' => array('className' => 'User'));
+        public $hasAndBelongsToMany => array(
+            'MemberOf' => array(
+                'className' => 'Group',
+            )
+        );
     }
-    
+
     class Group extends AppModel {
         public $name = 'Group';
         public $hasMany = array(
@@ -81,7 +87,11 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
                 'className'  => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array('MemberOf' => array('className' => 'Group'));
+        public $hasAndBelongsToMany => array(
+            'Member' => array(
+                'className' => 'User',
+            )
+        );
     }
 
 しかし、以下の例はうまく動きません。 ::
@@ -90,11 +100,17 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
-            'MyRecipe' => 'Recipe',
+            'MyRecipe' => array(
+                'className' => 'Recipe',
+            )
         );
-        public $hasAndBelongsToMany => array('Member' => 'User');
+        public $hasAndBelongsToMany => array(
+            'Member' => array(
+                'className' => 'Group',
+            )
+        );
     }
-    
+
     class Group extends AppModel {
         public $name = 'Group';
         public $hasMany = array(
@@ -102,7 +118,11 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
                 'className'  => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array('Member' => 'Group');
+        public $hasAndBelongsToMany => array(
+            'Member' => array(
+                'className' => 'User',
+            )
+        );
     }
 
 これはHABTMアソシエーションに、UserとGroupの両モデルを参照している\
