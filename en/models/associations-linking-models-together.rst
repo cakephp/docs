@@ -516,7 +516,7 @@ by a underscore and the word "count"::
     my_model_count
 
 Let's say you have a model called ``ImageComment`` and a model
-called ``Image``, you would add a new INT-field to the ``image``
+called ``Image``, you would add a new INT-field to the ``images``
 table and name it ``image_comment_count``.
 
 Here are some more examples:
@@ -538,14 +538,14 @@ and set the value to ``true``::
     <?php
     class Image extends AppModel {
         public $belongsTo = array(
-            'ImageAlbum' => array(
+            'ImageComment' => array(
                 'counterCache' => true,
             )
         );
     }
 
 From now on, every time you add or remove a ``Image`` associated to
-``ImageAlbum``, the number within ``image_count`` is adjusted
+``ImageComment``, the number within ``image_comment_count`` is adjusted
 automatically.
 
 You can also specify ``counterScope``. It allows you to specify a
@@ -557,7 +557,7 @@ Using our Image model example, we can specify it like so::
     <?php
     class Image extends AppModel {
         public $belongsTo = array(
-            'ImageAlbum' => array(
+            'ImageComment' => array(
                 'counterCache' => true,
                 'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1
             )

@@ -494,7 +494,7 @@ counterCache - count()結果をキャッシュする
 
     my_model_count
 
-``ImageComment`` と ``Image`` というモデルを準備して、 ``image`` テーブルに\
+``ImageComment`` と ``Image`` というモデルを準備して、 ``images`` テーブルに\
 ``image_comment_count`` という名前のINTフィールドを追加しましょう。
 
 以下のサンプルを参考にしてください。
