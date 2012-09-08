@@ -207,7 +207,7 @@ find('list')
 配列の添字として使うのかを指定でき、必要に応じて結果をグループ化してくれます。\
 デフォルトではモデルのプライマリーキーが検索結果の配列の添字として使われます。\
 また、添字に対する値はvalueが使われます。(値については、モデルの属性
-:refs:`model-displayField` で設定できます)以下に例を示します。 ::
+:ref:`model-displayField` で設定できます)以下に例を示します。 ::
 
     <?php
     public function some_function() {
