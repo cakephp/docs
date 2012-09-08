@@ -492,6 +492,7 @@ passedArgs が「url」オプションに自動的にマージされるように
 
 -  ``HtmlHelper::meta()`` の ``$inline`` 引数は削除されました。これは ``$options`` 配列にマージされました。
 -  ``HtmlHelper::link()`` の ``$escapeTitle`` 引数は削除されました。代わりに ``$options['escape']`` を使用してください。
+   ``escape`` オプションはタイトルと属性をエスケープするかどうかを同時に設定します。
 -  ``HtmlHelper::para()`` の ``$escape`` 引数は削除されました。代わりに ``$options['escape']`` を使用してください。
 -  ``HtmlHelper::div()`` の ``$escape`` 引数は削除されました。代わりに ``$options['escape']`` を使用してください。
 -  ``HtmlHelper::tag()`` の ``$escape`` 引数は削除されました。代わりに ``$options['escape']`` を使用してください。

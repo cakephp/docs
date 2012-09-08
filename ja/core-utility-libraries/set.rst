@@ -370,7 +370,7 @@ Set互換のパス記法
             )
         */
 
-        $result = Set::combine($a, '{n}.User.id', '{n}.User.non-existant');
+        $result = Set::combine($a, '{n}.User.id', '{n}.User.non-existent');
         /* $result は現段階で次のようになります。:
             Array
             (
