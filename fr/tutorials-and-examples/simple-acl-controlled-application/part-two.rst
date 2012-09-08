@@ -5,7 +5,7 @@ Un outil automatique pour la création des ACOs
 ==============================================
 
 Comme mentionné avant, il n'y a pas de façon pré-construite d'insérer tous vos 
-contrôleurs et actions dans Acl. Cependant, nous détestons tous faire des 
+controllers et actions dans Acl. Cependant, nous détestons tous faire des 
 choses répétitives comme faire ce qui pourrait être des centaines d'actions 
 dans une grande application.
 
@@ -74,7 +74,7 @@ configurées, retirez la fonction::
     }
 
     public function initDB() {
-        $group = $this->Utilisateur->Group;
+        $group = $this->User->Group;
         //Allow admins to everything
         $group->id = 1;
         $this->Acl->allow($group, 'controllers');
@@ -99,10 +99,10 @@ configurées, retirez la fonction::
 
 Nous avons maintenant configurer quelques règles basiques. Nous avons autorisé 
 les administrateurs pour tout. Les Manageurs peuvent accéder à tout dans 
-posts et widgets. Alors que les utilisateurs peuvent accéder aux add et 
+posts et widgets. Alors que les users peuvent accéder aux add et 
 edit des posts & widgets.
 
-Nous devions avoir une référence d'un modèle de ``Group`` et modifier son id 
+Nous devions avoir une référence d'un model de ``Group`` et modifier son id 
 pour être capable de spécifier l'ARO que nous voulons, cela est dû à la façon 
 dont fonctionne ``AclBehavior``. ``AclBehavior`` ne configure pas le champ 
 alias dans la table ``aros`` donc nous devons utiliser une référence d'objet 
@@ -110,15 +110,15 @@ ou un tableau pour référencer l'ARO que l'on souhaite.
 
 Vous avez peut-être remarqué que j'ai délibérement oublié index et view 
 des permissions Acl. Nous allons faire des actions publiques index et view 
-dans ``PostsController`` et ``WidgetsController``. Cela donne aux utilisateurs 
+dans ``PostsController`` et ``WidgetsController``. Cela donne aux users 
 non-autorisés l'autorisation de voir ces pages, en rendant ces pages publiques.
 Cependant, à tout moment, vous pouvez retirer ces actions des
 ``AuthComponent::allowedActions`` et les permissions pour view et 
 edit seront les mêmes que celles dans Acl.
 
 Maitenant, nous voulons enlever les références de ``Auth->allowedActions``
-dans les contrôleurs de vos utilisateurs et groupes. Ensuite ajouter ce qui 
-suit aux contrôleurs de vos posts et widgets::
+dans les controllers de vos users et groupes. Ensuite ajouter ce qui 
+suit aux controllers de vos posts et widgets::
 
     <?php
     public function beforeFilter() {
@@ -127,8 +127,8 @@ suit aux contrôleurs de vos posts et widgets::
     }
 
 Cela enlève le "basculement à off" que nous avions mis plus tôt dans les 
-contrôleurs utilisateurs et groupes et cela rend public l'accès aux 
-actions index et voir dans les contrôleurs Posts et Widgets. Dans 
+controllers users et groupes et cela rend public l'accès aux 
+actions index et voir dans les controllers Posts et Widgets. Dans 
 ``AppController::beforeFilter()`` ajoutez ce qui suit::
 
     <?php
@@ -150,18 +150,18 @@ ne l'avez pas déjà fait::
 
     <h2>Connexion</h2>
     <?php
-    echo $this->Form->create('Utilisateur', array('url' => array('controller' => 'utilisateurs', 'action' => 'login')));
-    echo $this->Form->input('Utilisateur.nom_utilisateur');
-    echo $this->Form->input('Utilisateur.mot_de_passe');
+    echo $this->Form->create('User', array('url' => array('controller' => 'users', 'action' => 'login')));
+    echo $this->Form->input('User.nom_user');
+    echo $this->Form->input('User.mot_de_passe');
     echo $this->Form->end('Connexion');
     ?>
 
-Si l'utilisateur est déjà connecté, on le redirige en ajoutant ceci au 
-contrôleur UtilisateursController::
+Si l'user est déjà connecté, on le redirige en ajoutant ceci au 
+controller UsersController::
 
     <?php
     public function login() {
-        if ($this->Session->read('Auth.Utilisateur')) {
+        if ($this->Session->read('Auth.User')) {
             $this->Session->setFlash('Vous êtes connecté!');
             $this->redirect('/', null, false);
         }
@@ -183,7 +183,7 @@ vide, il est maintenant temps de la remplir. Dans
     $this->Session->setFlash('Au-revoir');
     $this->redirect($this->Auth->logout());
 
-Cela définit un message flash en Session et déconnecte l'Utilisateur en 
+Cela définit un message flash en Session et déconnecte l'User en 
 utilisant la méthode logout de Auth. La méthode logout de Auth supprime tout 
 simplement la clé d'authentification en session et retourne une url qui peut 
 être utilisée dans une redirection. Si il y a d'autres données en sessions 
@@ -193,9 +193,9 @@ C'est fini!
 ===========
 
 Vous devriez maintenant avoir une application contrôlée par Auth et Acl. Les 
-permissions Utilisateurs sont définies au niveau du groupe, mais on peut 
-également les définir en même temps par utilisateur. Vous pouvez également 
-définir les permissions sur une base globale ou par contrôleur et par action. 
+permissions Users sont définies au niveau du groupe, mais on peut 
+également les définir en même temps par user. Vous pouvez également 
+définir les permissions sur une base globale ou par controller et par action. 
 De plus, vous avez un bloc de code réutilisable pour étendre facilement vos 
 tables ACO lorsque votre application grandit.
 

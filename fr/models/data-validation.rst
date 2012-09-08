@@ -2,38 +2,38 @@ Validation des Donnnées
 #######################
 
 La validation des données est une partie importante de toute application, 
-puisqu'elle permet de s'assurer que les données d'un modèle respectent les 
+puisqu'elle permet de s'assurer que les données d'un model respectent les 
 règles métiers de l'application. Par exemple, vous aimeriez vérifier que les 
 mots de passe sont longs d'au moins huit caractères ou bien vous assurer que 
-les noms d'utilisateurs sont uniques. La définition des règles de validation 
+les noms d'users sont uniques. La définition des règles de validation 
 facilite grandement la gestion des formulaires.
 
 Il y a de nombreux aspects différents dans le processus de validation. Ce 
-que nous aborderons dans cette section c'est le côté modèle des choses. En 
+que nous aborderons dans cette section c'est le côté model des choses. En 
 résumé : ce qui se produit lorsque vous appelez la méthode save() de votre 
-modèle. Pour obtenir plus d'informations sur la manière d'afficher les erreurs 
-de validation, regardez la section traitant de l'assistant 
+model. Pour obtenir plus d'informations sur la manière d'afficher les erreurs 
+de validation, regardez la section traitant des helpers  
 :doc:`/core-libraries/helpers/form`.
 
 La première étape pour la validation de données est de créer les règles dans 
-le Modèle. Pour ce faire, utilisez le tableau Model::validate dans la 
-définition du modèle, par exemple::
+le Model. Pour ce faire, utilisez le tableau Model::validate dans la 
+définition du model, par exemple::
 
     <?php
-    class Utilisateur extends AppModel {  
-        public $name = 'Utilisateur';
+    class User extends AppModel {  
+        public $name = 'User';
         public $validate = array();
     }
 
-Dans l'exemple ci-dessus, le tableau ``$validate`` est ajouté au modèle 
-Utilisateur, mais ce tableau ne contient pas de règles de validation. 
-En supposant que la table "utilisateurs" ait les champs "login", 
+Dans l'exemple ci-dessus, le tableau ``$validate`` est ajouté au model 
+User, mais ce tableau ne contient pas de règles de validation. 
+En supposant que la table "users" ait les champs "login", 
 "mot_de_passe", "email" et "date_de_naissance", l'exemple ci-dessous 
 montre quelques règles simples de validation qui s'appliquent à ces champs :
 
     <?php
-    class Utilisateur extends AppModel {
-        public $name = 'Utilisateur';
+    class User extends AppModel {
+        public $name = 'User';
         public $validate = array(
             'login' => 'alphaNumeric',
             'email' => 'email',
@@ -43,7 +43,7 @@ montre quelques règles simples de validation qui s'appliquent à ces champs :
 
 
 Ce dernier exemple montre comment des règles de validation peuvent être 
-ajoutées aux champs d'un modèle. Pour le champ 'login', seules les lettres 
+ajoutées aux champs d'un model. Pour le champ 'login', seules les lettres 
 et les chiffres sont autorisés, l'email doit être valide et la date de 
 naissance doit être une date valide. La définition de règles de validation 
 active l'affichage "automagique" de messages d'erreurs dans les formulaires 
@@ -58,7 +58,7 @@ Voici un autre exemple de validation plus complexe qui tire avantage de
 quelques-unes de ces règles pré-définies::
 
     <?php
-    class Utilisateur extends AppModel {
+    class User extends AppModel {
         public $name = 'User';
         public $validate = array(
             'login' => array(
@@ -98,7 +98,7 @@ vous pouvez toujours ajouter vos propres règles de validation, selon vos
 besoins.
 
 Maintenant que nous avons vu, en gros, comment la validation fonctionne, voyons 
-comme ces règles sont définies dans le modèle. Il y a trois manières 
+comme ces règles sont définies dans le model. Il y a trois manières 
 différentes pour définir les règles de validation : tableaux simples, une règle 
 par champ et plusieurs règles par champ.
 
@@ -115,11 +115,11 @@ manière est::
 Où 'nomChamp' est le nom du champ pour lequel la règle est définie, et 
 'nomRegle' est un nom prédéfini, comme 'alphaNumeric', 'email' ou 'isUnique'.
 
-Par exemple, pour s'assurer que l'utilisateur fourni une adresse email 
+Par exemple, pour s'assurer que l'user fourni une adresse email 
 correcte, vous pouvez utiliser cette règle::
 
     <?php
-    public $validate = array('email_utilisateur' => 'email');
+    public $validate = array('email_user' => 'email');
 
 
 Une règle par champ
@@ -155,7 +155,7 @@ La clé 'rule'
 
 La clé 'rule' définit la méthode de validation et attend soit une valeur 
 simple, soit un tableau. La règle spécifiée peut-être le nom d'une méthode 
-dans votre modèle, une méthode de la classe globale Validation ou une 
+dans votre model, une méthode de la classe globale Validation ou une 
 expression régulière. Pour une liste complète des règles pré-définies, 
 allez voir :ref:`core-validation-rules`.
 
@@ -200,7 +200,7 @@ création ou de mise à jour. Par exemple, si la règle de validation a
         )
     );
 
-Les données envoyées à la méthode save() du modèle doivent contenir des 
+Les données envoyées à la méthode save() du model doivent contenir des 
 données pour le champ 'login'. Dans le cas contraire, la validation 
 échouera. La valeur par défaut de cette clé est le booléen 'false'.
 
@@ -223,7 +223,7 @@ numérique est là pour que CakePHP fasse ce qu'il faut quand ``$valeur`` vaut
 zéro.
 
 La différence entre ``required`` et ``allowEmpty`` peut être confuse. 
-``'required' => true`` signifie que vous ne pouvez pas sauvegarder le modèle, 
+``'required' => true`` signifie que vous ne pouvez pas sauvegarder le model, 
 si la *clé* pour ce champ n'est pas présente dans ``$this->data`` (la 
 vérification est réalisé avec isset) ; tandis que ``'allowEmpty' => false`` 
 s'assure que la *valeur* du champ courant est "non vide", comme décrit 
@@ -265,7 +265,7 @@ La technique que nous venons de voir nous donne plus de flexibilité que
 l'assignation simple de règles, mais il y a une étape supplémentaire que 
 nous pouvons mettre en œuvre, pour avoir un contrôle encore plus fin sur la 
 validation des données. La prochaine technique que nous allons voir nous 
-permet d'affecter plusieurs règles de validation par champ de modèle.
+permet d'affecter plusieurs règles de validation par champ de model.
 
 Si vous souhaitiez affecter plusieurs règles de validation à un seul champ, 
 voici basiquement comment il faudrait faire::
@@ -362,8 +362,8 @@ suffit pas. Par exemple, si vous voulez vous assurer qu'un coupon de réduction
 propre méthode de validation, comme indiqué ci-dessous::
 
     <?php
-    class Utilisateur extends AppModel {
-        public $name = 'Utilisateur';
+    class User extends AppModel {
+        public $name = 'User';
 
         public $validate = array(
             'code_promo' => array(
@@ -392,15 +392,15 @@ validation, ajoutez des éléments dans le tableau ’rule’ et manipulez-les
 comme des paramètres supplémentaires (après le paramètre principal ``$check``) 
 dans votre fonction.
 
-Votre fonction de validation peut être dans le modèle (comme dans l'exemple) 
-ou dans un comportement (behavior) que votre modèle implémente. Ceci inclus 
+Votre fonction de validation peut être dans le model (comme dans l'exemple) 
+ou dans un behavior (comportement) que votre model implémente. Ceci inclus 
 les méthodes mappées.
 
-Les méthodes des modèles/behaviors sont vérifiées en premier, avant de 
+Les méthodes des models/behaviors sont vérifiées en premier, avant de 
 chercher pour une méthode dans la class ``Validation``. Cela veut dire que vous 
 pouvez écraser les méthodes de validation existantes (telle que 
 ``alphaNumeric()``) au niveau de l'application (en ajoutant la méthode dans 
-``AppModel``) ou au niveau du modèle.
+``AppModel``) ou au niveau du model.
 
 Quand vous écrivez une règle de validation qui peut être utilisée par 
 plusieurs champs, prenez soin d'extraire la valeur du champ du tableau 
@@ -438,7 +438,7 @@ Règles de validation incluses
 
 La classe de validation de CakePHP contient un certain nombre de règles 
 prédéfinies, qui rendent la validation des données plus simple dans vos 
-modèles. Cette classe contient de nombreuses règles souvent utilisées que 
+models. Cette classe contient de nombreuses règles souvent utilisées que 
 vous n'aurez pas à ré-écrire vous même. Ci-dessous vous trouverez une liste 
 complète de toutes les règles, illustrées par des exemples d'utilisation.
 
@@ -624,7 +624,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     format de date, vous devriez envisager de faire le plus gros du travail 
     en acceptant un large choix de formats et en essayant de les convertir, 
     plutôt que de forcer les gens à les soumettre dans un format donné. Le 
-    plus de travail vous ferez pour les utilisateurs, le mieux ce sera.
+    plus de travail vous ferez pour les users, le mieux ce sera.
     
 
 .. php:staticmethod:: datetime(array $check, mixed $dateFormat = 'ymd', string $regex = null)
@@ -777,7 +777,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
         public $validate = array(
             'login' => array(
                 'rule'    => 'isUnique',
-                'message' => 'Ce nom d\'utilisateur a déjà été choisi.'
+                'message' => 'Ce nom d\'user a déjà été choisi.'
             )
         );
 
@@ -798,7 +798,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
         public $validate = array(
             'login' => array(
                 'rule'    => array('maxLength', 15),
-                'message' => 'Les noms d\'utilisateur ne doivent pas dépasser 15 caractères.'
+                'message' => 'Les noms d\'user ne doivent pas dépasser 15 caractères.'
             )
         );
 
@@ -999,7 +999,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
 .. php:staticmethod:: userDefined(mixed $check, object $object, string $method, array $args = null)
 
-    Lance une validation de définition d'utilisateur.
+    Lance une validation de définition d'user.
 
 
 .. php:staticmethod:: uuid(string $check)
@@ -1014,4 +1014,4 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
 .. meta::
     :title lang=fr: Validation des Donnnées
-    :keywords lang=fr: règles de validation,données de validation,erreurs de validation,données validation,numéros de carte de crédit,librairies du coeur,mot de passe email,champs du modèle,champ login,définition du modèle,classe php,plusieurs aspects différents,huit caractères,lettres et nombres,règles business,processus de validation,validation de date,messages d'erreurs,tableau,format
+    :keywords lang=fr: règles de validation,données de validation,erreurs de validation,données validation,numéros de carte de crédit,librairies du coeur,mot de passe email,champs du model,champ login,définition du model,classe php,plusieurs aspects différents,huit caractères,lettres et nombres,règles business,processus de validation,validation de date,messages d'erreurs,tableau,format

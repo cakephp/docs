@@ -137,6 +137,7 @@ Ceci vous proposera les choix suivants::
     Are you sure you want to alter the tables? (y/n) (Êtes vous sur de vouloir modifier les tables?)
     [n] >
 
+
 .. meta::
     :title lang=fr: Gestion des Schémas et migrations
     :keywords lang=fr: fichiers de schéma,gestion des schémas,Objets schema,base de données schema,requêtes sur table,changements de base de données,migrations,versioning,snapshots,sql,snapshot,shell,config,fonctionnalité,choix,modèles,fichiers php,fichier php,répertoire,lancement

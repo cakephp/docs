@@ -5,7 +5,7 @@ Comme mentionné avant, un des rôles de la couche Model est d'obtenir les
 données à partir de multiples types de stockage. La classe Model de CakePHP 
 est livrée avec quelques fonctions qui vous aident à chercher ces données, à 
 les trier, les paginer, et les filtrer. La fonction la plus courante que 
-vous utiliserez dans les modèles est :php:meth:`Model::find()`.
+vous utiliserez dans les models est :php:meth:`Model::find()`.
 
 .. _model-find:
 
@@ -14,7 +14,7 @@ find
 
 ``find(string $type = 'first', array $params = array())``
 
-Find est, parmi toutes les fonctions de récupération de données des modèles, 
+Find est, parmi toutes les fonctions de récupération de données des models, 
 une véritable bête de somme multi-fonctionnelle. ``$type`` peut être ``'all'``, 
 ``'first'``, ``'count'``, ``'list'``, ``'neighbors'`` or ``'threaded'``, ou 
 tout autre fonction de recherche que vous définissez. 
@@ -39,8 +39,8 @@ toutes optionnelles::
     )
 
 Il est possible également, d'ajouter et d'utiliser d'autres paramètres, dont 
-il est fait usage dans quelques types de find, dans des comportements 
-(behaviors) et, bien sûr, dans vos propres méthodes de modèle.
+il est fait usage dans quelques types de find, dans des behaviors 
+(comportements) et, bien sûr, dans vos propres méthodes de model.
 
 .. _model-find-first:
 
@@ -125,7 +125,7 @@ find('all')
 ``find('all', $params)`` retourne un tableau de résultats (potentiellement 
 multiples). C'est en fait le mécanisme utilisé par toutes les variantes de 
 ``find()``, ainsi que par ``paginate``. Ci-dessous, une paire d'exemples 
-simples (code du contrôleur)::
+simples (code du controller)::
 
     <?php
     public function une_fonction() {
@@ -219,9 +219,9 @@ Les résultats d'un appel à ``find('list')`` seront de la forme suivante::
 En appelant ``find('list')``, les champs (``fields``) passés sont utilisés 
 pour déterminer ce qui devrait être utilisé comme clé, valeur du tableau 
 et, optionnellement, par quoi regrouper les résultats (group by). Par 
-défaut la clé primaire du modèle est utilisé comme clé et le champ affiché 
+défaut la clé primaire du model est utilisé comme clé et le champ affiché 
 (display field qui peut être configuré en utilisant l'attribut 
-:ref:`model-displayField` du modèle) est utilisé pour la valeur. Quelques 
+:ref:`model-displayField` du model) est utilisé pour la valeur. Quelques 
 exemples complémentaires pour clarifier les choses::
 
     <?php
@@ -286,8 +286,8 @@ find('threaded')
 
 ``find('threaded', $params)`` retourne un tableau imbriqué et est 
 particulièrement approprié si vous voulez utiliser le champ 
-``parent_id`` des données de votre modèle, pour construire les résultats 
-associés. Ci-dessous, une paire d'exemples simples (code du contrôleur)::
+``parent_id`` des données de votre model, pour construire les résultats 
+associés. Ci-dessous, une paire d'exemples simples (code du controller)::
 
     <?php
     public function une_function() {
@@ -384,7 +384,7 @@ un exemple simple (code du contôleur)
 
 Vous pouvez voir dans cet exemple, les deux éléments requis par le 
 tableau ``$params`` : field et value. Les autres éléments sont toujours 
-autorisés, comme dans tout autre find (Ex : si votre modèle agit comme 
+autorisés, comme dans tout autre find (Ex : si votre model agit comme 
 un containable, alors vous pouvez spécifiez 'contain' dans ``$params``). 
 Le format retourné par un appel à ``find('neighbors')`` est de la forme :
 
@@ -432,7 +432,7 @@ Le format retourné par un appel à ``find('neighbors')`` est de la forme :
 
     Notez que le résultat contient toujours seulement deux éléments 
     de premier niveau : prev et next. Cette fonction n'honore pas var 
-    par défaut récursive d'un modèle. Le paramètre récursif doit 
+    par défaut récursive d'un model. Le paramètre récursif doit 
     être passé dans les paramètres de chaque appel.
 
 .. _model-custom-find:
@@ -442,9 +442,9 @@ Créer des types de recherche personnalisées
 
 La méthode ``find`` est assez flexible pour accepter vos recherches 
 personnalisées, ceci est fait en déclarant vos propres types dans une variable 
-de modèle et en intégrant une fonction spéciale dans votre classe de modèle.
+de model et en intégrant une fonction spéciale dans votre classe de model.
 
-Un type de recherche Modèle est un raccourci pour les options de recherche. 
+Un type de recherche Model est un raccourci pour les options de recherche. 
 Par exemple, les deux finds suivants sont équivalents
 
 ::
@@ -464,7 +464,7 @@ Ci-dessous les différents types de find du coeur:
 Mais qu'en est-il des autres types? Mettons que vous souhaitiez un finder pour 
 tous les articles publiés dans votre base de données. Le premier changement que 
 vous devez faire est d'ajouter votre type dans la variable 
-:php:attr:`Model::$findMethods` dans le modèle
+:php:attr:`Model::$findMethods` dans le model
 
 ::
 
@@ -494,7 +494,7 @@ s'appellera ``_findMaSuperRecherche``.
         }
     }
 
-Cela vient avec l'exemple suivant (code du contrôleur):
+Cela vient avec l'exemple suivant (code du controller):
 
 ::
 
@@ -532,7 +532,7 @@ que vous retourniez le tableau $results (modifié ou non).
 
 Vous pouvez créer autant de finders personnalisés que vous souhaitez, et ils 
 sont une bonne façon de réutiliser du code dans votre application à travers 
-les modèles.
+les models.
 
 Il est aussi possble de paginer grâce à un type de find personnalisé comme suit:
 
@@ -550,7 +550,7 @@ Il est aussi possble de paginer grâce à un type de find personnalisé comme su
 
     }
 
-Configurer la propriété ``$this->paginate`` comme ci-dessus dans le contrôleur 
+Configurer la propriété ``$this->paginate`` comme ci-dessus dans le controller 
 fera que le ``type`` de find deviendra ``available``, et vous permettra aussi 
 de continuer à modifier les résultats trouvés.
 
@@ -666,7 +666,7 @@ Les fonctions findBy() retournent des résultats comme ``find('first')``
 ``query(string $query)``
 
 Les appels SQL que vous ne pouvez pas ou ne voulez pas faire grâce aux autres 
-méthodes de modèle (attention, il y a très peu de circonstances où cela se 
+méthodes de model (attention, il y a très peu de circonstances où cela se 
 vérifie), peuvent être exécutés en utilisant la méthode ``query()``.
 
 Si vous utilisez souvent cette méthode dans votre application, assurez-vous 
@@ -677,12 +677,12 @@ attaques par injection et cross-site scripting.
 .. note::
 
     ``query()`` ne respecte pas $Model->cacheQueries car cette fonctionnalité 
-    est par nature déconnectée de tout ce qui concerne l'appel du modèle. Pour 
+    est par nature déconnectée de tout ce qui concerne l'appel du model. Pour 
     éviter les appels au cache de requêtes, fournissez un second argument 
     false, par exemple : ``query($query, $cachequeries = false)``
 
 ``query()`` utilise le nom de la table déclaré dans la requête comme clé du 
-tableau de données retourné, plutôt que le nom du modèle. Par exemple::
+tableau de données retourné, plutôt que le nom du model. Par exemple::
 
     <?php
     $this->Image->query("SELECT * FROM images LIMIT 2;");
@@ -710,7 +710,7 @@ pourrait retourner::
         )
     )
 
-Pour utiliser le nom du modèle comme clé du tableau et obtenir un résultat 
+Pour utiliser le nom du model comme clé du tableau et obtenir un résultat 
 cohérent avec ce qui est retournée par les méthodes Find, la requête doit 
 être réécrite::
 
@@ -753,7 +753,7 @@ ce qui retourne::
 
 Retourne la valeur d'un unique champ, spécifié par ``$name``, du premier 
 enregistrement correspondant aux $conditions ordonnées par $order. Si 
-aucune condition n'est passée et que l'id du modèle est fixé, cela 
+aucune condition n'est passée et que l'id du model est fixé, cela 
 retournera la valeur du champ pour le résultat de l'enregistrement actuel.
 Si aucun enregistrement correspondant n'est trouvé cela retournera false.
 
@@ -771,7 +771,7 @@ Si aucun enregistrement correspondant n'est trouvé cela retournera false.
 
 ``read($fields, $id)``
 
-``read()`` est une méthode utilisée pour récupérer les données du modèle 
+``read()`` est une méthode utilisée pour récupérer les données du model 
 courant (``Model::$data``) - comme lors des mises à jour - mais elle peut 
 aussi être utilisée dans d'autres circonstances, pour récupérer un seul 
 enregistrement depuis la base de données.
@@ -791,16 +791,16 @@ unique est requis). Utilisez ``field`` pour retourner la valeur d'un seul champ.
 .. warning::
 
     Puisque la méthode ``read`` écrase toute information stockée dans les 
-    propriétés ``data`` and ``id`` du modèle, vous devez faire très attention 
+    propriétés ``data`` and ``id`` du model, vous devez faire très attention 
     quand vous utilisez cete fonction en général, spécialement en l'utilisant 
-    dans les fonctions de callbacks du modèle comme ``beforeValidate`` et 
+    dans les fonctions de callbacks du model comme ``beforeValidate`` et 
     ``beforeSave``. Généralement la fonction ``find`` est une façon de faire 
     plus robuste et facile à utiliser avec l'API que la méthode ``read``.
 
 Conditions de recherche complexes
 =================================
 
-La plupart des appels de recherche de modèles impliquent le passage d’un 
+La plupart des appels de recherche de models impliquent le passage d’un 
 jeu de conditions d’une manière ou d’une autre. Le plus simple est 
 d’utiliser un bout de clause WHERE SQL. Si vous vous avez besoin de plus 
 de contrôle, vous pouvez utiliser des tableaux.
@@ -819,13 +819,13 @@ ceci::
 
     <?php
     $conditions = array("Billet.titre" => "Il y a un billet", "Post.author_id" => 1);
-    // Exemple d'utilisation avec un modèle:
+    // Exemple d'utilisation avec un model:
     $this->Billet->find('first', array('conditions' => $conditions));
 
 La structure ici est assez significative : Tous les billets dont le 
 titre à pour valeur « Ceci est un billet » sont cherchés. Nous aurions 
 pu uniquement utiliser « titre » comme nom de champ, mais lorsque l’on 
-construit des requêtes, il vaut mieux toujours spécifier le nom du modèle. 
+construit des requêtes, il vaut mieux toujours spécifier le nom du model. 
 Cela améliore la clarté du code, et évite des collisions futures, dans 
 le cas où vous devriez changer votre schéma.
 
@@ -1028,7 +1028,7 @@ nous voulons récupérer tous les users qui ont un statuts différent
 de "B" en utilisant une sous requête.
 
 Pour pouvoir effectuer cela, nous allons appeler la source de données du 
-modèle et lui demander de construire la requête comme si nous appelions 
+model et lui demander de construire la requête comme si nous appelions 
 une méthode "find", mais elle retournera uniquement la commande SQL. Après 
 cela, nous construisons une expression et l'ajoutons au tableau des conditions::
 

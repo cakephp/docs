@@ -119,13 +119,13 @@ vous avez à faire est dans la partie suivante::
     <?php
     Configure::write('Config.language', 'eng'); 
 
-Ceci signale à Cake quelle locale utiliser(si vous utilisez une locale régionale,
-comme fr\_FR, la locale 
+Ceci signale à Cake quelle locale utiliser(si vous utilisez une locale 
+régionale, comme fr\_FR, la locale 
 `ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_) sera 
 utilisée au cas ou cela n'existerait pas), vous pouvez changer la langue
 a n'importe quel moment pendant une requête.ex. dans votre bootstrap
 si vous avez définis les paramètres de langue par défaut, dans la partie 
-beforefilter de votre (app) contrôleur si c'est spécifique à la requête ou
+beforefilter de votre (app) controller si c'est spécifique à la requête ou
 à l'utilisateur, ou en fait en tout lieu à tout moment avant de passer le
 message dans une autre langue. Pour définir la langue pour l'utilisateur
 courant, vous pouvez stocker le paramétrage dans l'objet Session, comme cela::
@@ -135,7 +135,7 @@ courant, vous pouvez stocker le paramétrage dans l'objet Session, comme cela::
     $this->Session->write('Config.language', 'fre');
 
 Au début de chacune des requêtes dans la partie ``beforeFilter`` de votre
-contrôleur vous devez configurer ``Configure`` ainsi::
+controller vous devez configurer ``Configure`` ainsi::
 
 
     <?php
@@ -168,14 +168,14 @@ vues. Le premier paramètre de la fonction est utilisé comme le
 msgid défini dans les fichiers .po.
 
 CakePHP suppose automatiquement que tous les messages d'erreur de 
-validation de votre modèle dans votre tableau ``$validate`` sont 
+validation de votre model dans votre tableau ``$validate`` sont 
 destinés à être localisées.
 En exécutant la console i18n ces chaînes seront elles aussi
 extraites.
 
 Il y a d'autres aspects de localisation de votre application qui
 ne sont pas couverts par l'utilisation des fonctions de traduction,
-c'est les formats date/monnaie. N'oubliez pas que CakePHP est PHP :),
+ce sont les formats date/monnaie. N'oubliez pas que CakePHP est PHP :),
 donc pour définir les formats de ses éléments vous devez utiliser
 `setlocale <http://www.php.net/setlocale>`_.
 
@@ -185,7 +185,6 @@ Vous pouvez trouver la liste des locales disponibles en exécutant
 la commande ``locale -a`` dans un terminal.
 
 
-
 .. meta::
-    :title lang=en: Internationalization & Localization
-    :keywords lang=en: internationalization localization,internationalization and localization,localization features,language application,gettext,l10n,daunting task,adaptation,pot,i18n,audience,translation,languages
+    :title lang=fr: Internationalization & Localization
+    :keywords lang=fr: internationalization localization,internationalization and localization,localization features,language application,gettext,l10n,daunting task,adaptation,pot,i18n,audience,traduction,languages

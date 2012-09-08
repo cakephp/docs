@@ -1,8 +1,8 @@
 Sauvegarder vos Données
 #######################
 
-CakePHP rend la sauvegarde des données d’un modèle très rapide. Les données 
-prêtes à être sauvegardées doivent être passées à la méthode ``save()`` du modèle 
+CakePHP rend la sauvegarde des données d’un model très rapide. Les données 
+prêtes à être sauvegardées doivent être passées à la méthode ``save()`` du model 
 en utilisant le format basique suivant ::
 
     Array
@@ -20,7 +20,7 @@ les données sous cette forme. Si vous utilisez un de ces helpers, les données
 sont également disponibles dans ``$this->request->data`` pour un usage rapide 
 et pratique.
 
-Voici un exemple simple d’une action de contrôleur qui utilise un modèle 
+Voici un exemple simple d’une action de controller qui utilise un model 
 CakePHP pour sauvegarder les données dans une table de la base de données ::
 
     <?php
@@ -52,16 +52,16 @@ situation en produisant :php:attr:`Model::$validationErrors`::
     }
     debug($this->Recipe->validationErrors);
 
-Il y a quelques autres méthodes du modèle liées à la sauvegarde que vous 
+Il y a quelques autres méthodes du model liées à la sauvegarde que vous 
 trouverez utiles :
 
 :php:meth:`Model::set($one, $two = null)`
 =========================================
 
 ``Model::set()`` peut être utilisé pour définir un ou plusieurs champs de 
-données du tableau de donnés à l'intérieur d'un modèle. C'est utile pour 
-l'utilisation de modèles avec les fonctionnalités d'ActiveRecord offert 
-par le Modèle::
+données du tableau de donnés à l'intérieur d'un Model. C'est utile pour 
+l'utilisation de models avec les fonctionnalités d'ActiveRecord offert 
+par le model::
 
     <?php
     $this->Post->read(null, 1);
@@ -88,7 +88,7 @@ dans le base de données.
 
 La méthode ci-dessus sauvegarde des données formatées sous forme tabulaire. 
 Le second paramètre vous permet de mettre de côté la validation, et le 
-troisième vous permet de fournir une liste des champs du modèle devant être 
+troisième vous permet de fournir une liste des champs du model devant être 
 sauvegardés. Pour une sécurité accrue, vous pouvez limiter les champs 
 sauvegardés à ceux listés dans ``$fieldList``.
 
@@ -112,7 +112,7 @@ suivantes en clés:
 * ``callbacks`` Définit à false la désactivation des callbacks. En utilisant
  'before' ou 'after' activera seulement ces callbacks.
 
-Plus d'informations sur les callbacks du modèle sont disponibles 
+Plus d'informations sur les callbacks du model sont disponibles 
 :doc:`ici <callback-methods>`
 
 
@@ -123,7 +123,7 @@ Plus d'informations sur les callbacks du modèle sont disponibles
     à votre tableau de ``$data``.
 
 Une fois qu'une sauvegarde est terminée, l'ID de l'objet peut être trouvé dans 
-l'attribut ``$id`` de l'objet modèle - quelque chose de spécialement pratique 
+l'attribut ``$id`` de l'objet Model - quelque chose de spécialement pratique 
 quand on crée de nouveaux objets.
 
 ::
@@ -132,7 +132,7 @@ quand on crée de nouveaux objets.
     $this->Ingredient->save($nouvellesDonnees);
     $nouvelIngredientId = $this->Ingredient->id;
 
-La création ou la mise à jour est contrôlée par le champ ``id`` du modèle. 
+La création ou la mise à jour est contrôlée par le champ ``id`` du model. 
 Si ``$Model->id`` est défini, l'enregistrement avec cette clé primaire est 
 mis à jour. Sinon, un nouvel enregistrement est créé::
 
@@ -162,15 +162,15 @@ que vous avez passé le champ de la clé primaire  dans le tableau data::
 :php:meth:`Model::create(array $data = array())`
 ================================================
 
-Cette méthode initialise la classe du modèle pour sauvegarder de nouvelles 
+Cette méthode initialise la classe du model pour sauvegarder de nouvelles 
 informations.
 
 Si vous renseignez le paramètre ``$data`` (en utilisant le format de tableau 
-mentionné plus haut), le nouveau modèle créé sera prêt à être sauvegardé avec 
+mentionné plus haut), le nouveau model créé sera prêt à être sauvegardé avec 
 ces données (accessibles à ``$this->data``).
 
-Si ``false`` est passé à la place d'un tableau, l'instance du modèle 
-n'initialisera pas les champs du schéma de modèle qui ne sont pas encore 
+Si ``false`` est passé à la place d'un tableau, l'instance du model 
+n'initialisera pas les champs du schéma de model qui ne sont pas encore 
 définis, cela remettra à zéro les champs qui ont déjà été renseignés, et 
 laissera les autres vides. Utilisez ceci pour éviter de mettre à jour des 
 champs de la base données qui ont déjà été renseignés et doivent être mis 
@@ -179,13 +179,13 @@ champs de la base données qui ont déjà été renseignés et doivent être mis
 :php:meth:`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
 ======================================================================================
 
-Utilisé pour sauvegarder la valeur d’un seul champ. Fixez l’ID du modèle 
+Utilisé pour sauvegarder la valeur d’un seul champ. Fixez l’ID du model 
 (``$this->ModelName->id = $id``) juste avant d’appeler ``saveField()``. Lors de 
 l'utilisation de cette méthode, ``$fieldName`` ne doit contenir que le nom du 
-champ, pas le nom du modèle et du champ.
+champ, pas le nom du model et du champ.
 
 Par exemple, pour mettre à jour le titre d'un article de blog, l'appel 
-depuis un contrôleur à ``saveField`` ressemblerait à quelque chose comme::
+depuis un controller à ``saveField`` ressemblerait à quelque chose comme::
 
     <?php
     $this->Post->saveField('title', 'Un nouveau titre pour un Nouveau Jour');
@@ -222,7 +222,7 @@ du style::
 
 .. note::
 
-    Même si le champ modifié existe pour le modèle qui vient d'être mis à jour, 
+    Même si le champ modifié existe pour le model qui vient d'être mis à jour, 
     il ne sera pas mis à jour automatiquement par l'ORM. Ajoutez le seulement
     manuellement au tableau si vous avez besoin de le mettre à jour.
 
@@ -242,7 +242,7 @@ délier les associations temporairement.
 :php:meth:`Model::saveMany(array $data = null, array $options = array())`
 =========================================================================
 
-La méthode utilisée pour sauvegarder les lignes multiples du même modèle en 
+La méthode utilisée pour sauvegarder les lignes multiples du même model en 
 une fois. Les options suivantes peuvent être utilisées:
 
 * ``validate``: Défini à false pour désactiver la validation, true pour 
@@ -256,7 +256,7 @@ une fois. Les options suivantes peuvent être utilisées:
 *  ``deep``: (since 2.1) Si défini à true, les données associées sont aussi 
   sauvegardées, regardez aussi saveAssociated
 
-Pour sauvegarder de multiples enregistrements d'un unique modèle, $data 
+Pour sauvegarder de multiples enregistrements d'un unique model, $data 
 a besoin d'être un tableau d'enregistrements indexé numériquement comme 
 ceci::
 
@@ -882,6 +882,7 @@ the Model::save() to always do it for you::
         }
 
     }
+
 
 .. meta::
     :title lang=fr: Sauvegarder vos Données

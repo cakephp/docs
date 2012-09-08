@@ -17,7 +17,6 @@ Définir ces variables spéciales dans la méthode beforeFilter ()
 de votre contrôleur vous permet de définir la façon dont le 
 Composant cookie fonctionne.
 
-
 +-----------------+--------------+------------------------------------------------------+
 | variable cookie | par defaut   | description                                          |
 +=================+==============+======================================================+
@@ -82,7 +81,7 @@ HTTP.
 Ensuite,regardons comment utiliser les différentes méthode du Composant Cookie.
 
 Utiliser le composant
-===================
+=====================
 
 Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
 
@@ -152,8 +151,8 @@ Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
 
 .. php:method:: delete(mixed $key)
 
-    Efface une variable de cookie du nom défini dans $key. Fonctionne avec la notation par point
-    notation::
+    Efface une variable de cookie du nom défini dans $key. Fonctionne avec la 
+    notation par point::
 
         <?php
         // Efface une variable
@@ -168,5 +167,5 @@ Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
 
 
 .. meta::
-    :title lang=en: Cookie
-    :keywords lang=en: array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null
+    :title lang=fr: Cookie
+    :keywords lang=fr: array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null

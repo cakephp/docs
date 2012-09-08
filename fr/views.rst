@@ -1,5 +1,5 @@
-Vues
-####
+Views (Vues)
+############
 
 Les "Vues" sont le **V** dans MVC. Les vues sont chargées de générer la sortie 
 spécifique requise par la requête. Souvent, cela est fait sous forme HTML, 
@@ -17,10 +17,10 @@ rendu les plus communs:
 - Pour créer des vues multiples par thème, vous pouvez utliser 
   :doc:`views/themes`
 
-Templates de Vues
+Templates de Views
 =================
 
-La couche vue de CakePHP c'est la façon dont vous parlez à vos utilisateurs. 
+La couche view de CakePHP c'est la façon dont vous parlez à vos utilisateurs. 
 La plupart du temps, vos vues afficheront des documents (X)HTML pour les 
 navigateurs, mais vous pourriez aussi avoir besoin de fournir des données AMF 
 à un objet Flash, répondre à une application distante via SOAP ou produire un 
@@ -30,7 +30,7 @@ Les fichiers de vues de CakePHP sont écrits en pur PHP et ont comme extension
 par défaut .ctp (Cakephp TemPlate). Ces fichiers contiennent toute la logique 
 de présentation nécessaire à l'organisation des données reçues du contrôleur, 
 dans un format qui satisfasse l'audience que vous recherchez. Si vous préfèrez 
-utiliser un langage de template comme Twig, ou Smarty, une sous-classe de Vue 
+utiliser un langage de template comme Twig, ou Smarty, une sous-classe de View 
 fera le pont entre votre language de template et CakePHP.
 
 Les fichiers de vues sont stockées dans ``/app/View/``, dans un dossier portant 
@@ -42,9 +42,9 @@ La couche vue de CakePHP peut être constituée d'un certain nombre de parties
 différentes. Chaque partie a différent usages qui seront présentés dans ce 
 chapitre :
 
-- **vues**: Les Vues sont la partie de la page qui est unique pour l'action 
+- **views**: Les Views sont la partie de la page qui est unique pour l'action 
   lancée. Elles sont la substance de la réponse de votre application.
-- **elements** : morceaux de code de vue plus petits, réutilisables. Les 
+- **elements** : morceaux de code de view plus petits, réutilisables. Les 
   éléments sont habituellement rendus dans les vues.
 - **layouts** : fichiers de vue contenant le code de présentation qui se 
   retrouve dans plusieurs interfaces de votre application. La plupart des 
@@ -58,7 +58,7 @@ chapitre :
 
 .. _extending-views:
 
-Vues étendues
+Views étendues
 -------------
 
 .. versionadded:: 2.1
@@ -709,5 +709,5 @@ En savoir plus sur les vues
 
 
 .. meta::
-    :title lang=fr: Vues
+    :title lang=fr: Views (Vues)
     :keywords lang=fr: logique de vue,fichier csv,élements de réponse,éléments de code,extension par défaut,json,objet flash,remote application,twig,sous-classe,ajax,répondre,soap,fonctionnalité,cakephp,fréquentation,xml,mvc

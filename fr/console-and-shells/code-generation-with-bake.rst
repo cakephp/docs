@@ -3,7 +3,7 @@ Génération de code avec Bake
 
 La console Bake de CakePHP est un autre outil permettant de réaliser son 
 application rapidement. La console Bake peut créer chacun des ingrédients 
-basiques de CakePHP : modèles, vues et contrôleurs. Et nous ne parlons pas 
+basiques de CakePHP : models, vues et controllers. Et nous ne parlons pas 
 seulement des squelettes de classes : Bake peut créer une application 
 fonctionnelle complète en seulement quelques minutes. En réalité, Bake est 
 une étape naturelle à suivre une fois qu'une application a été prototypée.
@@ -117,10 +117,10 @@ avec le rajout de fonctionnalités et améliorations.
 -  Le support de Plugin a été fortement amélioré. Vous pouvez maintenant 
    utiliser ``-plugin NomDuPlugin`` ou ``Plugin.class``.
 -  Les Questions ont été clarifiées, et sont plus facilement compréhensibles.
--  Les validations multiples sur les modèles ont été ajoutées.
--  Les associations des modèles sur eux-mêmes utilisant ``parent_id`` sont 
+-  Les validations multiples sur les models ont été ajoutées.
+-  Les associations des models sur eux-mêmes utilisant ``parent_id`` sont 
    maintenant détectées.
-   Par exemple, si votre modèle est appelé Thread, une association ParentThread 
+   Par exemple, si votre model est appelé Thread, une association ParentThread 
    et ChildThread sera créée.
 -  Fixtures et Tests peuvent être 'cuits' séparément.
 -  Les Tests 'Cuits' incluent autant de fixtures connues,
@@ -135,7 +135,7 @@ fonctionnalités mises à jour.
 
 Fixture et le test baking étaient un peu ardus dans le passé.
 Vous pouviez seulement générer des tests quand vous bakiez des classes, et 
-les fixtures pouvaient seulement être générées quand on bakait les modèles.
+les fixtures pouvaient seulement être générées quand on bakait les models.
 Cela faisait que l'ajout ultérieur de tests à vos applications ou même
 la régénération de fixtures avec de nouveaux schémas étaient difficiles.
 Dans 1.3, nous avons séparé Fixture et la fabrication des Tests en tâches
@@ -164,7 +164,7 @@ vous pouvez activer la génération de fixture en utilisant les données live.
 
 **Nouvelle commande bake**
 De nouvelles commandes ont été ajoutées pour rendre le baking plus facile
-et plus rapide. Les bakings des contrôleurs, Modèles et Vues ont tous
+et plus rapide. Les bakings des controllers, Models et Vues ont tous
 la fonctionnalité de sous-commande ``all``, qui construit tout en une fois
 et reconstruit rapidement et facilement.
 
@@ -172,8 +172,8 @@ et reconstruit rapidement et facilement.
 
     cake bake model all
 
-Bakerait tous les modèles pour une application en une fois. De même,
-``cake bake controller all`` bakerait tous les contrôleurs et 
+Bakerait tous les models pour une application en une fois. De même,
+``cake bake controller all`` bakerait tous les controllers et 
 ``cake bake view all`` générerait tous les fichiers vues. Les paramètres de
 la tâche ``ControllerTask`` ont aussi changé.
 ``cake bake controller scaffold`` est maintenant 
@@ -189,8 +189,8 @@ d'enregistrements faux qui sont créés. En lançant la tâche de fixture de fa�
 interactive, vous pouvez générer les fixtures en utilisant les données dons vos
 tables live. Vous pouvez utiliser ``cake bake test <type> <class>`` pour créer
 les cas de test pour les objets déjà crées dans votre app. Le type doit être 
-l'un des types standards de CakePHP ('composant',
-'contrôleur', 'modèle', 'helper', 'behavior') mais peut ne pas exister.
+l'un des types standards de CakePHP ('component',
+'controller', 'model', 'helper', 'behavior') mais peut ne pas exister.
 Les classes doivent être un objet existant d'un type choisi.
 
 **Des templates en abondance**
@@ -199,8 +199,8 @@ Une nouveauté dans bake pour 1.3 est l'addition de plus de templates.
 Dans 1.2, les vues bakées utilisaient les templates qui pouvaient être
 changés pour modifier les fichiers vues bakés générées. Dans 1.3, les
 templates sont utilisés pour générer toute sortie de bake générée.
-Il y a des templates séparés poour les contrôleurs, les ensembles d'action
-des contrôleurs, les fixtures, les modèles, les cas de test, et les fichiers
+Il y a des templates séparés poour les controllers, les ensembles d'action
+des controllers, les fixtures, les models, les cas de test, et les fichiers
 de vue de 1.2. Comme de plus en plus de templates, vous pouvez aussi avoir des
 ensembles de template multiple ou, de thèmes bakés. Les thèmes bakés peuvent
 être fournis dans votre app, ou dans une partie des plugins. Un exemple de 
@@ -221,7 +221,7 @@ il y a deux nouvelles formes. ``cake bake controller Todo.Posts`` et
 ``cake bake controller Posts -plugin Todo``. Le paramètre de plugin peut aussi
 exister en utilisant le bake interactif.
 ``cake bake controller -plugin Todo``, par exemple vous autorisera
-à utiliser le bake interactif pour ajouter des contrôleurs à votre plugin Todo.
+à utiliser le bake interactif pour ajouter des controllers à votre plugin Todo.
 Des chemins de plugin supplémentaires / multiples sont aussi supportés. Dans
 le passé, bake nécessitait que le plugin soit dans app/plugins. Dans 1.3, bake 
 trouvera le chemin du plugin pour le plugin nommé, et y ajoutera les fichiers.
@@ -229,4 +229,4 @@ trouvera le chemin du plugin pour le plugin nommé, et y ajoutera les fichiers.
 
 .. meta::
     :title lang=fr: Génération de code avec Bake
-    :keywords lang=fr: interface de commande en ligne,application fonctionnel,base de données,configuration de la base de données,script bash,ingrédients basiques,projet,modèle,chemin,génération de code,scaffolding,utilisateurs windows,configuration du fichier,quelques minutes,config,vue,shell,modèles,execution,mysql
+    :keywords lang=fr: interface de commande en ligne,application fonctionnel,base de données,configuration de la base de données,script bash,ingrédients basiques,projet,model,chemin,génération de code,scaffolding,utilisateurs windows,configuration du fichier,quelques minutes,config,vue,shell,models,execution,mysql

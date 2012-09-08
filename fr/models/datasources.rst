@@ -1,7 +1,7 @@
-DataSources
-###########
+DataSources (Sources de Données)
+################################
 
-Les Sources de données (DataSources) sont les liens entre les modèles et la 
+Les Sources de données (DataSources) sont les liens entre les models et la 
 source de données qu'ils représentent. Dans de nombreux cas, les données 
 sont récupérées depuis une base de données relationnelle telle MySQL, 
 PostgreSQL ou MSSQL. CakePHP est distribué avec de nombreuses sources de 
@@ -24,7 +24,7 @@ ici pour votre confort :
 Quand vous spécifiez une configuration de connexion à une base de données 
 dans ``app/Config/database.php``, CakePHP utilise de manière transparente la 
 source de données correspondant à la base de données pour toutes les 
-opérations de modèle. Donc, même si vous pensiez ne rien connaître aux 
+opérations de model. Donc, même si vous pensiez ne rien connaître aux 
 sources de données, vous les utilisez tout le temps.
 
 Toutes les sources ci-dessus dérivent d'une classe de base ``DboSource``, 
@@ -62,10 +62,10 @@ Méthodes qui doivent être implémentées pour toutes les méthodes CRUD:
 
 Il est possible également (et souvent très pratique), de définir 
 l'attribut de classe ``$_schema`` au sein de la source de données 
-elle-même, plutôt que dans le modèle.
+elle-même, plutôt que dans le model.
 
 Et c'est à peu près tout ce qu'il y a dire ici. En couplant cette 
-source de données à un modèle, vous êtes alors en mesure d'utiliser 
+source de données à un model, vous êtes alors en mesure d'utiliser 
 ``Model::find()/save()/delete()``, comme vous le feriez normalement ;
  les données et/ou paramètres appropriés, utilisés pour appeler ces 
  méthodes, seront passés à la source de données elle-même, dans laquelle 
@@ -101,9 +101,9 @@ based API. We'll call it ``FarAwaySource`` and we'll put it in
         );
 
     /**
-     * If we want to create() or update() we need to specify the fields
-     * available. We use the same array keys as we do with CakeSchema, eg.
-     * fixtures and schema migrations.
+     * Si nous voulons create() ou update(), nous avons besoin de spécifier la 
+     * disponibilité des champs. Nous utilisons le même tableau indicé comme nous le faisions avec CakeSchema, par exemple
+     * fixtures et schema de migrations.
      */
         protected $_schema = array(
             'id' => array(
@@ -124,7 +124,7 @@ based API. We'll call it ``FarAwaySource`` and we'll put it in
         );
 
     /**
-     * Create our HttpSocket and handle any config tweaks.
+     * Créons notre HttpSocket et gérons any config tweaks.
      */
         public function __construct($config) {
             parent::__construct($config);
@@ -298,6 +298,7 @@ and refer to it using the plugin notation::
         'apiKey'     => 'abcd1234',
     );
 
+
 .. meta::
-    :title lang=fr: Sources de Données
+    :title lang=fr: DataSources (Sources de Données)
     :keywords lang=fr: array values,model fields,connection configuration,implementation details,relational databases,best bet,mysql postgresql,sqlite,external sources,ldap server,database connection,rdbms,sqlserver,postgres,relational database,mssql,aggregates,apis,repository,signatures

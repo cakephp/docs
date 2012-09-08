@@ -4,7 +4,7 @@ Thèmes
 Vous pouvez profiter des thèmes, ce qui facilite le changement du visuel et 
 du ressenti de votre page rapidement et facilement.
 
-Pour utiliser les thèmes, spécifiez le nom du thème dans votre contrôleur::
+Pour utiliser les thèmes, spécifiez le nom du thème dans votre controller::
 
     <?php
     class ExempleController extends AppController {
@@ -12,9 +12,9 @@ Pour utiliser les thèmes, spécifiez le nom du thème dans votre contrôleur::
     }
 
     .. versionchanged:: 2.1
-        Les version antérieures à 2.1 ont besoin de définir 
+        Les versions antérieures à 2.1 ont besoin de définir 
         ``$this->viewClass = 'Theme'``.
-        2.1 enlève cette condition puisque la classe normale ``View`` class 
+        2.1 enlève cette condition puisque la classe normale ``View``  
         supporte les thèmes.
 
 Vous pouvez également définir ou modifier le nom du thème dans une action ou 

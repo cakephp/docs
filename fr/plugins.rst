@@ -2,7 +2,7 @@ Plugins
 #######
 
 CakePHP vous permet de mettre en place une combinaison de contrôleurs, 
-modèles et vues et de les distribuer comme un plugin d'application 
+models et vues et de les distribuer comme un plugin d'application 
 packagé que d'autres peuvent utiliser dans leurs applications CakePHP. 
 Vous avez un module de gestion des utilisateurs sympa, un simple blog, 
 ou un module de service web dans une de vos applications ? Packagez le 
@@ -19,8 +19,8 @@ Installer un Plugin
 Pour installer un plugin, commencez par simplement déplacer le dossier du 
 du plugin dans votre dossier app/Plugin. Si vous installez un plugin nommé 
 'ContactManager' alors vous devez avoir un dossier dans app/Plugin
-appelé 'ContactManager' dans lequel vous aurez les Vues, les Modèles, les 
-Contrôleurs, webroot et tout autre répertoire de Plugin.
+appelé 'ContactManager' dans lequel vous aurez les Vues, les Models, les 
+Controllers, webroot et tout autre répertoire de Plugin.
 
 Nouveau dans CakePHP 2.0, les plugins ont besoin d'être chargés manuellement 
 dans app/Config/bootstrap.php.
@@ -88,12 +88,12 @@ plugins nécessiteront plus de configuration que d'autres.
 Utiliser un Plugin
 ------------------
 
-Vous pouvez référencer les contrôleurs, modèles, composants, behaviors et 
+Vous pouvez référencer les controllers, models, components, behaviors et 
 helpers du plugin en préfixant le nom du plugin avant le nom de classe.
 
 Par exemple, disons que vous voulez utiliser le ContactInfoHelper du plugin 
 ContactManager pour sortir de bonnes informations de contact dans une de 
-vos vues. Dans votre contrôleur, le tableau $helpers pourrait ressembler 
+vos vues. Dans votre controller, le tableau $helpers pourrait ressembler 
 à ceci::
 
     <?php
@@ -130,7 +130,7 @@ que ce dossier ait le même nom que le plugin.
 Dans le dossier plugin, vous remarquerez qu'il ressemble beaucoup à une 
 application CakePHP, et c'est au fond ce que c'est. Vous n'avez à inclure 
 aucun de vos dossiers si vous ne les utilisez pas. Certains plugins peuvent 
-ne contenir qu'un Composant ou un Behavior, et dans certains cas, ils peuvent 
+ne contenir qu'un Component ou un Behavior, et dans certains cas, ils peuvent 
 carrément ne pas avoir de répertoire 'View'.
 
 Un plugin peut aussi avoir tous les autres répertoires que votre application a, 
@@ -178,10 +178,10 @@ Merci de vous référer au chapitre
 problème avec l'utilisation de la ligne de commande.
 
 
-Contrôleurs du Plugin
+Controllers du Plugin
 ---------------------
 
-Les contrôleurs pour notre plugin ContactManager seront stockés dans 
+Les controllers pour notre plugin ContactManager seront stockés dans 
 /app/Plugin/ContactManager/Controller/. Puisque la principale chose que 
 nous souhaitons faire est la gestion des contacts, nous aurons besoin de créer 
 un ContactsController pour ce plugin.
@@ -201,31 +201,31 @@ Ainsi, nous mettons notre nouveau ContactsController dans
 
 .. note::
 
-    Ce contrôleur étend AppController du plugin (appelé 
+    Ce controller étend AppController du plugin (appelé 
     ContactManagerAppController) plutôt que l'AppController de l'application 
     parente.
 
-    Notez aussi comment le nom du modèle est préfixé avec le nom du plugin. 
-    C'est nécessaire pour faire la différence entre les modèles dans les 
-    plugins et les modèles dans l'application principale.
+    Notez aussi comment le nom du model est préfixé avec le nom du plugin. 
+    C'est nécessaire pour faire la différence entre les models dans les 
+    plugins et les models dans l'application principale.
 
     Dans ce cas, le tableau $uses ne serait pas nécessaire comme dans 
-    ContactManager. Contact sera le modèle par défaut pour ce contrôleur, 
+    ContactManager. Contact sera le model par défaut pour ce controller, 
     cependant, il est inclu pour démontrer comment faire préceder proprement 
     le nom du plugin.
    
 Si vous souhaitez accéder à ce que nous avons obtenu jusqu'à présent, visitez 
 /contact_manager/contacts. Vous devriez obtenir une erreur “Missing Model” 
-parce que nous n'avons pas un modèle Contact déjà défini.
+parce que nous n'avons pas un model Contact déjà défini.
 
 .. _plugin-models:
 
-Modèles du Plugin
------------------
+Models du Plugin
+----------------
 
-Les Modèles pour le plugin sont stockés dans /app/Plugin/ContactManager/Model.
+Les Models pour le plugin sont stockés dans /app/Plugin/ContactManager/Model.
 Nous avons déjà défini un ContactsController pour ce plugin, donc créons le 
-modèles pour ce contrôleur, appelé Contact::
+models pour ce controller, appelé Contact::
 
     <?php
     // /app/Plugin/ContactManager/Model/Contact.php:
@@ -239,8 +239,8 @@ Créons la ensuite.
 
 .. note::
 
-    Si vous avez besoin de réferencer un modèle dans votre plugin, vous avez 
-    besoin d'inclure le nom du plugin avec le nom du modèle, séparé d'un 
+    Si vous avez besoin de réferencer un model dans votre plugin, vous avez 
+    besoin d'inclure le nom du plugin avec le nom du model, séparé d'un 
     point.
 
 Par exemple::
@@ -291,7 +291,7 @@ votre app en utilisant des chemins spéciaux. Si vous avez un plugin appelé
 'ContactManager', vous pouvez redéfinir les fichiers de vue du plugin avec 
 une logique de vue de l'application plus spécifique, en créant des fichiers en 
 utilisant le template suivant 
-"app/View/Plugin/[Plugin]/[Controller]/[view].ctp". Pour le contrôleur 
+"app/View/Plugin/[Plugin]/[Controller]/[view].ctp". Pour le controller 
 Contacts, vous pouvez faire le fichier suivant::
 
     /app/View/Plugin/ContactManager/Contacts/index.ctp
@@ -343,23 +343,23 @@ Components, Helpers et Behaviors
 
 Un plugin peut avoir des Components, Helpers et Behaviors tout comme un 
 une appplication CakePHP classique. Vous pouvez soit créer des plugins 
-qui sont composés seulement de Composants, Helpers ou Behaviors qui 
-peuvent être une bonne façon de construire des Composants réutilisables 
+qui sont composés seulement de Components, Helpers ou Behaviors qui 
+peuvent être une bonne façon de construire des Components réutilisables 
 qui peuvent être facilement déplacés dans tout projet.
 
-Construire ces composants est exactement le même chose que de les construire 
+Construire ces components est exactement le même chose que de les construire 
 à l'intérieur d'une application habituelle, avec aucune convention spéciale 
 de nommage.
 
-Faire référence avec votre composant, depuis l'intérieur ou l'extérieur de votre 
+Faire référence avec votre component, depuis l'intérieur ou l'extérieur de votre 
 plugin nécessite seulement que le préfixe du nom du plugin avant le nom du 
-composant. Par exemple::
+component. Par exemple::
     <?php
-    // Composant défini dans le plugin 'ContactManager'
+    // Component défini dans le plugin 'ContactManager'
     class ExampleComponent extends Component {
     }
     
-    // dans vos contrôleurs:
+    // dans vos controllers:
     public $components = array('ContactManager.Exemple'); 
 
 La même technique s'applique aux Helpers et aux Behaviors.
@@ -388,11 +388,11 @@ les fonctionnalités de votre plugin!
 
 Dans notre exemple ContactManager, nous pourrions créer des actions 
 add/remove/edit/delete dans le ContactsController, intégrez la validation 
-dans le modèle Contact, et intégrez la fonctionnalité à laquelle on 
+dans le model Contact, et intégrez la fonctionnalité à laquelle on 
 pourrait s'attendre quand on gère ses contacts. A vous de décider ce qu'il 
 fait intégrer dans vos plugins. N'oubliez juste pas de partager votre code 
 avec la communauté afin que tout le monde puisse bénéficier de votre 
-composant génial et réutilisable!
+component génial et réutilisable!
 
 Astuces pour les Plugins
 ------------------------
@@ -407,19 +407,19 @@ applications CakePHP:
 
 -  Si vous n'avez pas un [Plugin]AppController et
    [Plugin]AppModel, vous aurez des erreurs de type get missing Controller 
-   lorsque vous essayez d'accéder à un contrôleur d'un plugin.
+   lorsque vous essayez d'accéder à un controller d'un plugin.
 -  Vous pouvez définir vos propres layouts pour les plugins, dans le dossier 
    de app/Plugin/[Plugin]/View/Layouts. Sinon, les plugins utiliseront les 
    layouts du dossier /app/View/Layouts par défaut.
 -  Vous pouvez établir une communication inter-plugin en utilisant 
    ``$this->requestAction('/plugin_name/controller_name/action');`` dans vos 
-   contrôleurs.
--  Si vous utilisez requestAction, assurez-vous que les noms des contrôleurs 
-   et des modèles sont aussi uniques que possibles. Sinon, vous aurez des 
+   controllers.
+-  Si vous utilisez requestAction, assurez-vous que les noms des controllers 
+   et des models sont aussi uniques que possibles. Sinon, vous aurez des 
    erreurs PHP de type "redefined class ...".
 
 
 
 .. meta::
     :title lang=fr: Plugins
-    :keywords lang=fr: dossier plugin,configuration de la base de données,bootstrap,module de gestion,peu d'espace,connection base de données,webroot,gestion d'utilisateur,contactmanager,tableau,config,cakephp,modèles,php,répertoires,blog,plugins,applications
+    :keywords lang=fr: dossier plugin,configuration de la base de données,bootstrap,module de gestion,peu d'espace,connection base de données,webroot,gestion d'utilisateur,contactmanager,tableau,config,cakephp,models,php,répertoires,blog,plugins,applications

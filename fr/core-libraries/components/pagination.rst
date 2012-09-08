@@ -5,7 +5,7 @@ Pagination
 
 Un des principaux obstacle à la création d'une application flexible et
 ergonomique est le design et une interface utilisateur intuitive.
-De nombreuses applications ont tendances à augmenter en taille et en complexité
+De nombreuses applications ont tendances à augmenter en taille et en complexité 
 rapidement, et les designers ainsi que les programmeurs  trouvent même qu'ils
 sont incapables de faire face a l'affichage des centaines ou des milliers 
 d'enregistrements.
@@ -34,7 +34,6 @@ complétées par le tri, la direction, la limitation et les paramètres de page
 passés depuis l'url. Ici , il est important de noter que l'ordre des clefs 
 doit être définis dans une structure en tableau comme ci-dessous:: 
 
-
     <?php
     class PostsController extends AppController {
 
@@ -48,7 +47,6 @@ doit être définis dans une structure en tableau comme ci-dessous::
 
 Vous pouvez aussi inclure d'autres options :php:meth:`~Model::find()`,
 comme ``fields``::
-
 
     <?php
     class PostsController extends AppController {
@@ -69,8 +67,6 @@ qui sont: ``conditions``, ``fields``, ``order``, ``limit``, ``page``,
 ci dessus, chacune des clefs peut aussi être passé à la méthode find du 
 modèle. Ça devient alors très simple d'utiliser les comportement comme
 :php:class:`ContainableBehavior` avec la pagination::
-
-
 
     <?php
     class RecipesController extends AppController {
@@ -108,7 +104,6 @@ est envoyée à ``$this->request->params['paging']``, et est utilisée par
 ``Controller::paginate()` ajoute également  PaginatorHelper à la liste
 des helpers de votre contrôleur, si il n'a pas encore été additionné::
 
-
     <?php
     public function list_recipes() {
         // similaire à un  findAll(), mais récupère les résultats paginés
@@ -119,13 +114,11 @@ des helpers de votre contrôleur, si il n'a pas encore été additionné::
 Vous pouvez filtrer les enregistrements en passant des conditions
 comme second paramètres à la fonction ``paginate()``.::
 
-
     <?php
     $data = $this->paginate('Recipe', array('Recipe.title LIKE' => 'a%'));
 
 Ou vous pouvez aussi définir des  ``conditions`` et d'autre clefs dans
 le tableau ``$paginate`` à l'intérieur de votre action.::
-
 
     <?php
     public function list_recipes() {
@@ -145,11 +138,9 @@ la requête d'affichage de vos données, il y a quelques options.
 Vous pouvez utiliser  :ref:`custom find type <model-custom-find>`.
 Vous pouvez aussi implémenter les méthodes ``paginate()`` et ``paginateCount()``
 sur votre modèle, ou les inclure dans un comportement attaché à votre modèle.
-Les comportement qui implémentent ``paginate`` et/ou``paginateCount`` devraient
+Les comportement qui implémentent ``paginate`` et/ou``paginateCount`` devraient 
 implémenter les signatures de méthode définies ci-dessous avec le premier
 paramêtre normal additionnel de ``$model``::
-
-
 
     <?php
     // paginate et paginateCount implémentée dans le comportement.
@@ -161,14 +152,13 @@ paramêtre normal additionnel de ``$model``::
         // corp (body) de la méthode
     }
 
-C'est rare d'avoir besoin d'implémenter paginate() et paginateCount(). vous devriez
-vous assurer que vous ne pouvez pas atteindre votre but avec les méthodes du noyau
-du modèle, ou avec un finder personnalisé.
+C'est rare d'avoir besoin d'implémenter paginate() et paginateCount(). vous 
+devriez vous assurer que vous ne pouvez pas atteindre votre but avec les 
+méthodes du noyau du modèle, ou avec un finder personnalisé.
 
-
-La méthode ``paginate()`` devrait implémenter les signatures de méthode suivantes.
-Pour utiliser vos propre méthode/logique redéfinissez lès (override) dans le modèle dans lequel vous voulez prendre des données::
-
+La méthode ``paginate()`` devrait implémenter les signatures de méthode 
+suivantes. Pour utiliser vos propre méthode/logique redéfinissez lès (override) 
+dans le modèle dans lequel vous voulez prendre des données::
 
     <?php
     /**
@@ -183,8 +173,8 @@ Pour utiliser vos propre méthode/logique redéfinissez lès (override) dans le 
 Vous aurez aussi besoin de redéfinir (override) le noyau ``paginateCount()``,
 Cette méthode s'attend aux mêmes arguments que ``Model::find('count')``.
 L'exemple ci-dessous utilise quelques fonctionnalités Postgres spécifiques,
-Veuillez ajuster en conséquence en fonction de la base de données que vous utilisez::
-
+Veuillez ajuster en conséquence en fonction de la base de données que vous 
+utilisez::
 
     <?php
     /**
@@ -201,7 +191,6 @@ Le lecteur attentif aura noté que la méthode paginate que nous avons
 définis n'était pas réellement nécessaire - Tout ce que vous avez à
 faire est d'ajouter le mot clef dans les variables de la classes
 ``$paginate`` des contrôleurs::
-
 
     <?php
     /**
@@ -226,10 +215,9 @@ faire est d'ajouter le mot clef dans les variables de la classes
             )
         );
 
-Dans CalePHP 2.0 , vous n'avez plus besoin d'implémenter ``paginateCount()``
-quand vous utilisez des groupes de clauses. Le noyau ``find('count')`` comptera
+Dans CakePHP 2.0 , vous n'avez plus besoin d'implémenter ``paginateCount()``
+quand vous utilisez des groupes de clauses. Le noyau ``find('count')`` comptera 
 correctement le nombre total de lignes.
-
 
 Contrôle du champ à utiliser pour ordonner
 =========================================
@@ -241,17 +229,14 @@ de calculs. Vous pouvez utiliser le 3ème paramètres de
 ``Controller::paginate()`` pour restreindre les tries de colonnes qui pourront 
 être effectués::
 
-
-
     <?php
     $this->paginate('Post', array(), array('title', 'slug'));
 
 Ceci permettrait le tri uniquement sur les colonnes title et slug.
 Un utilisateur qui paramètre le tris à d'autres valeurs sera ignoré.
 
-
 Limitation du nombre maximum de lignes qui peuvent être recherchées
-==================================================================
+===================================================================
 
 Le nombre de résultats qui sont retournés à l'utilisateur est représenté
 par le paramètre ``limit``. Il est généralement indésirable de permettre
@@ -270,7 +255,6 @@ l'ajuster dans une partie des options de pagination::
 Si les paramètres de limitation de la requête est supérieur à cette valeur,
 il sera réduit à la valeur de ``maxLimit`.
 
-
 .. _pagination-with-get:
 
 Pagination avec des paramètres GET
@@ -280,21 +264,19 @@ Dans les versions précédentes de CAKEPHP vous ne pouviez générer des liens
 de pagination qu'en utilisant des paramètres nommés. Mais si les pages étaient
 recherchées avec des paramètres GET elle continueraient à travailler.
 Pour la version 2.0, nous avons décidés de rendre plus contrôler et cohérent
-comment vous générez les paramètres de pagination. Vous pouvez choisir d'utiliser
-une chaîne de requête ou bien des paramètre nommés dans le composant.
+comment vous générez les paramètres de pagination. Vous pouvez choisir 
+d'utiliser une chaîne de requête ou bien des paramètre nommés dans le composant.
 Les requêtes entrantes devront accepter le type choisi, et la
 :php:class:`PaginatorHelper` générera les liens  avec les paramètres choisis:: 
-
 
     <?php
     public $paginate = array(
         'paramType' => 'querystring'
     );
 
-Ci-dessus permettrait un paramètre de recherche par chaîne de caractères, de le
+Ci-dessus permettrait un paramètre de recherche par chaîne de caractères, de le 
 parser et de le générer. Vous pouvez aussi modifier  les propriétés de
 ``$settings`` du Composant Paginator (PaginatorComponent)::
-
 
     <?php
     $this->Paginator->settings['paramType'] = 'querystring';
@@ -304,15 +286,15 @@ arguments GET
 
 .. note::
 
-    Vous pouvez rentrez dans une situation ou assigner une valeur dans une propriété
-    inexistante retournera des erreurs::
-
+    Vous pouvez rentrez dans une situation ou assigner une valeur dans une 
+    propriété inexistante retournera des erreurs::
     
         <?php
         $this->paginate['limit'] = 10;
 
-Retournera l'erreur “Notice: Indirect modification of overloaded property $paginate has no effect”.
-En assignant une valeur initiale à la propriété cela résout le problème::
+Retournera l'erreur “Notice: Indirect modification of overloaded property 
+$paginate has no effect”. En assignant une valeur initiale à la propriété 
+cela résout le problème::
 
         <?php
         $this->paginate = array();
@@ -335,7 +317,6 @@ si vous voulez modifier les propriétés ``$settings`` du Composant Paginator.
 
 L'une ou l'autre de ces approches résoudra les erreurs rencontrés.
 
-
 Pagination AJAX 
 ===============
 
@@ -344,15 +325,13 @@ en utilisant :php:class:`JsHelper` et :php:class:`RequestHandlerComponent`
 vous pouvez facilement ajouter des paginations Ajax à votre application.
 Voir :ref:`ajax-pagination` pour plus d'information.
 
-
 Pagination dans la vue
 ======================
 
-Regardez la documentation  :php:class:`PaginatorHelper` pour voir comment créer des
-liens pour la navigation dans la pagination.
-
+Regardez la documentation  :php:class:`PaginatorHelper` pour voir comment 
+créer des liens pour la navigation dans la pagination.
 
 
 .. meta::
-    :title lang=en: Pagination
-    :keywords lang=en: order array,query conditions,php class,web applications,headaches,obstacles,complexity,programmers,parameters,paginate,designers,cakephp,satisfaction,developers
+    :title lang=fr: Pagination
+    :keywords lang=fr: order array,query conditions,php class,web applications,headaches,obstacles,complexity,programmers,parameters,paginate,designers,cakephp,satisfaction,developers
