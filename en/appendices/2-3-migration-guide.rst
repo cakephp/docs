@@ -134,6 +134,8 @@ FormHelper
 - :php:meth:`FormHelper::select()` now accepts a list of values in the disabled
   attribute. Combined with ``'multiple' => 'checkbox'``, this allows you to
   provide a list of values you want disabled.
+- :php:meth:`FormHelper::postLink()` now accepts a ``method`` key.  This allows
+  you to create link forms using HTTP methods other than POST.
 
 TextHelper
 ----------
