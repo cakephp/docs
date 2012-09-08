@@ -2,15 +2,15 @@
 Blog Tutoriel - Ajouter la logique
 ##################################
 
-Créer un modèle Post
-====================
+Créer un model Post
+===================
 
-La classe Modèle est le pain quotidien des applications CakePHP. En 
-créant un modèle CakePHP qui interagira avec notre base de données, 
+La classe Model est le pain quotidien des applications CakePHP. En 
+créant un model CakePHP qui interagira avec notre base de données, 
 nous aurons mis en place les fondations nécessaires pour faire plus 
 tard nos opérations de lecture, d'insertion, d'édition et de suppression.
 
-Les fichiers des classes Modèle de CakePHP se trouvent dans ``/app/Model``,
+Les fichiers des classes Model de CakePHP se trouvent dans ``/app/Model``,
 et le fichier que nous allons créer maintenant sera enregistré dans
 ``/app/Model/Post.php``. Le fichier complet devrait ressembler à ceci ::
 
@@ -19,19 +19,23 @@ et le fichier que nous allons créer maintenant sera enregistré dans
     }
 
 La convention de nommage est vraiment très importante dans CakePHP. En nommant 
+<<<<<<< HEAD
 notre modèle Post, CakePHP peut automatiquement déduire que ce modèle sera 
+=======
+notre model Post, CakePHP peut automatiquement déduire que ce model sera 
+>>>>>>> translation of french doc
 utilisé dans le controller PostsController, et sera lié à la table ``posts`` 
 de la base de données.
 
 .. note::
 
-    CakePHP créera dynamiquement un objet modèle pour vous, s'il ne trouve
+    CakePHP créera dynamiquement un objet model pour vous, s'il ne trouve
     pas le fichier correspondant dans /app/Model. Cela veut aussi dire que
     si vous n'avez pas nommé correctement votre fichier (i.e. post.php or 
     posts.php). CakePHP ne reconnaîtra pas votre configuration et utilisateur 
-    ses objets modèle par défaut.
+    ses objets model par défaut.
 
-Pour plus d'informations sur les modèles, comme les préfixes des tables, 
+Pour plus d'informations sur les models, comme les préfixes des tables, 
 les callbacks, et la validation, consultez le chapitre :doc:`/models` du manuel.
 
 
@@ -40,7 +44,7 @@ Créer un controller Posts
 
 Nous allons maintenant créer un controller pour nos posts. Le controller est
 l'endroit où s'exécutera toute la logique métier pour l'intéraction du 
-processus de post. En un mot, c'est l'endroit où vous jouerez avec les modèles 
+processus de post. En un mot, c'est l'endroit où vous jouerez avec les models 
 et où les tâches liées aux posts s'exécutent. Nous placerons ce nouveau 
 controller dans un fichier appelé ``PostsController.php`` à l'intérieur du 
 dossier ``/app/Controller``. Voici à quoi devrait ressembler le controller 
@@ -87,7 +91,7 @@ utilisateurs pourrait y accéder en demandant www.exemple.com/posts/foobar.
 La seule instruction que cette action utilise est ``set()``, pour transmettre 
 les données du controller à la vue (que nous créerons à la prochaine étape). 
 La ligne définit la variable de vue appelée 'posts' qui est égale à la valeur 
-de retour de la méthode ``find('all')`` du modèle Post. Notre modèle Post est 
+de retour de la méthode ``find('all')`` du model Post. Notre model Post est 
 automatiquement disponible via $this->Post, parce que nous avons suivi les 
 conventions de nommage de Cake.
 
@@ -97,7 +101,11 @@ Pour en apprendre plus sur les controllers de Cake, consultez le chapitre
 Créer les Vues Post
 ===================
 
+<<<<<<< HEAD
 Maintenant que nous avons nos données en provenance du modèle, ainsi que la 
+=======
+Maintenant que nous avons nos données en provenance du model, ainsi que la 
+>>>>>>> translation of french doc
 logique applicative et les flux définis par notre controller, nous allons créer 
 une vue pour l'action "index" que nous avons créé ci-dessus.
 
@@ -205,8 +213,9 @@ dans les URLs, vous permet de tirer avantage des capacités de CakePHP à
 ré-inverser les routes. Vous pouvez aussi utiliser les URLs relatives depuis 
 la base de l'application comme suit /controller/action/param1/param2.
 
-A ce stade, vous devriez être en mesure de pointer votre navigateur sur la page http://www.exemple.com/posts/index.
-Vous devriez voir votre vue, correctement formatée avec le titre et le tableau listant les posts.
+A ce stade, vous devriez être en mesure de pointer votre navigateur sur la 
+page http://www.exemple.com/posts/index. Vous devriez voir votre vue, 
+correctement formatée avec le titre et le tableau listant les posts.
 
 Si vous avez essayé de cliquer sur l'un des liens que nous avons créés dans cette
 vue (le lien sur le titre d'un post mène à l'URL : /posts/view/un_id_quelconque),
@@ -294,13 +303,20 @@ PostsController :
 
 .. note::
 
+<<<<<<< HEAD
     Vous avez besoin d'inclure le composant Session (SessionComponent) et 
     l'assistant Session (SessionHelper) dans chaque controller que vous 
     utiliserez. Si nécessaire, incluez-les dans le controller principal 
     (AppController) pour qu'ils soient accessibles à tout les controllers.
+=======
+    Vous avez besoin d'inclure le component Session (SessionComponent) et 
+    le helper Session (SessionHelper) dans chaque controller que vous 
+    utiliserez. Si nécessaire, incluez-les dans le controller principal 
+   (AppController) pour qu'ils soient accessibles à tous les controllers.
+>>>>>>> translation of french doc
 
 Voici ce que fait l'action ``add()`` : si la requête HTTP est de type POST, 
-essayez de sauvegarder les données en utilisant le modèle "Post". Si pour une 
+essayez de sauvegarder les données en utilisant le model "Post". Si pour une 
 raison quelconque, la sauvegarde a échouée, affichez simplement la vue. Cela 
 nous donne une chance de voir les erreurs de validation de l'utilisateur et 
 d'autres erreurs.
@@ -316,7 +332,7 @@ application, ces informations sont disponibles dans ``$this->request->data``.
 Vous pouvez utiliser les fonctions :php:func:`pr()` ou :php:func:`debug()` pour 
 les afficher si vous voulez voir à quoi cela ressemble.
 
-Nous utilisons la méthode :php:meth:`SessionComponent::setFlash()` du composant 
+Nous utilisons la méthode :php:meth:`SessionComponent::setFlash()` du component 
 Session (SessionComponent) pour définir un message dans une variable session 
 et qui sera affiché dans la page juste après la redirection. Dans le layout, 
 nous trouvons la fonction :php:func:`SessionHelper::flash` qui permet 
@@ -341,7 +357,7 @@ interminables et leurs routines de validations. Cake rend tout cela plus facile
 et plus rapide.
 
 Pour tirer avantage des fonctionnalités de validation, vous devez utiliser 
-l'assistant "Form" (FormHelper) dans vos vues. :php:class:`FormHelper` est 
+le helper "Form" (FormHelper) dans vos vues. :php:class:`FormHelper` est 
 disponible par défaut dans toutes les vues avec la variables ``$this->Form``.
 
 Voici le code de notre vue "add" (ajout) ::
@@ -372,11 +388,11 @@ formulaire du même nom. Le premier paramètre dit à CakePHP à quels champs il
 correspondent et le second paramètre vous permet de spécifier un large éventail 
 d'options - dans ce cas, le nombre de lignes du textarea. Il y a un peu 
 d'introspection et "d'automagie" ici : ``input()`` affichera différents 
-éléments de formulaire selon le champ spécifié du modèle.
+éléments de formulaire selon le champ spécifié du model.
 
 L'appel de la méthode ``$this->Form->end()`` génère un bouton de soumission 
 et ajoute la balise de fermeture du formulaire. Si une chaîne de caractères est 
-passée comme premier paramètre de la méthode ``end()``, l'assistant "Form" 
+passée comme premier paramètre de la méthode ``end()``, le helper "Form" 
 affichera un bouton de soumission dont le nom correspond à celle-ci. Encore 
 une fois, référez-vous au chapitre :doc:`/views/helpers` pour en savoir plus 
 sur les helpers.
@@ -389,7 +405,7 @@ la ligne suivante avant ``<table>`` ::
 
 Vous vous demandez peut-être : comment je fais pour indiquer à CakePHP mes 
 exigences de validation ? Les règles de validation sont définies dans le 
-modèle. Retournons donc à notre modèle Post et précédons à quelques 
+model. Retournons donc à notre model Post et précédons à quelques 
 ajustements ::
 
     <?php
@@ -416,7 +432,7 @@ plus d'informations sur cette configuration, consultez le chapitre
 Maintenant que vos règles de validation sont en place, utilisez l'application 
 pour essayer d'ajouter un post avec un titre et un contenu vide afin de voir 
 comment cela fonctionne. Puisque que nous avons utilisé la méthode 
-:php:meth:`FormHelper::input()`` de l'assistant "Form" pour créer nos éléments 
+:php:meth:`FormHelper::input()`` du helper "Form" pour créer nos éléments 
 de formulaire, nos messages d'erreurs de validation seront affichés 
 automatiquement.
 
@@ -465,9 +481,9 @@ La vue d'édition devrait ressembler à quelque chose comme cela ::
 Cette vue affiche le formulaire d'édition (avec les données pré-remplies) avec 
 les messages d'erreur de validation nécessaires.
 
-Une chose à noter ici : CakePHP supposera que vous éditez un modèle si le champ 
+Une chose à noter ici : CakePHP supposera que vous éditez un model si le champ 
 'id' est présent dans le tableau de données. S'il n'est pas présent (ce qui 
-revient à notre vue "add"), Cake supposera que nous insérez un nouveau modèle 
+revient à notre vue "add"), Cake supposera que nous insérez un nouveau model 
 lorsque ``save()`` sera appelé.
 
 Vous pouvez maintenant mettre à jour votre vue "index" avec des liens pour 
@@ -579,7 +595,7 @@ d'indexation qui peuvent tous les supprimer.
 
 .. note::
 
-    Ce code utilise aussi l'assistant "Form" pour demander à l'utilisateur
+    Ce code utilise aussi le helper "Form" pour demander à l'utilisateur
     une confirmation avant de supprimer le post.
 
 Routes
@@ -662,4 +678,8 @@ Voici les différents chapitres que les gens veulent souvent lire après :
 
 .. meta::
     :title lang=fr: Blog Tutoriel Ajouter la logique
+<<<<<<< HEAD
     :keywords lang=fr: doc modèles,vérification validation,controller actions,model post,php class,classe modèle,objet modèle,business logic,table base de données,convention de nommage,bread and butter,callbacks,prefixes,nutshell,intéraction,array,cakephp,interface,applications,suppression
+=======
+    :keywords lang=fr: doc models,vérification validation,controller actions,model post,php class,classe model,objet model,business logic,table base de données,convention de nommage,bread and butter,callbacks,prefixes,nutshell,intéraction,array,cakephp,interface,applications,suppression
+>>>>>>> translation of french doc

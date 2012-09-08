@@ -1,5 +1,5 @@
-Helper HTML
-###########
+HTMLHelper
+##########
 
 .. php:class:: HtmlHelper(View $view, array $settings = array())
 
@@ -14,24 +14,21 @@ De nombreuses méthodes du Helper Html contiennent un paramètre
 sur vos tags. Voici quelques exemples
 sur la façon d'utiliser les paramètres $htmlAttributes::
 
-
     Attributs souhaités: <tag class="someClass" />      
     Paramètre du tableau: array('class' => 'someClass')
      
     Attributs souhaités: <tag name="foo" value="bar" />  
     Paramètre du tableau:  array('name' => 'foo', 'value' => 'bar')
 
-
 .. note::
 
     Le Helper html est disponible dans toutes les vues par défaut. 
     Si vous recevez une erreur vous informant qu'il n'est pas disponible,
     c'est habituellement dû a son nom qui a été oublié de la configuration
-    manuelle de la variable $helpers du contrôleur. 
-
+    manuelle de la variable $helpers du controller. 
     
-Insertion d'élément correctement formatés 
-=========================================
+Insertion d'éléments correctement formatés 
+==========================================
 
 La tâche la plus importante que le Helper Html accomplit est la
 création d'un balisage bien formé. N'ayez pas peur de l'utiliser
@@ -65,17 +62,25 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
 .. php:method:: css(mixed $path, string $rel = null, array $options = array())
 
-    :param mixed $path: Soit une chaîne du fichier css à lier, ou un tableau avec plusieurs fichiers
-    :param string $rel: La valeur de l'attribut tag's rel (balise rel). SI null, 'stylesheet' sera utilisé
+    :param mixed $path: Soit une chaîne du fichier css à lier, ou un tableau 
+     avec plusieurs fichiers
+    :param string $rel: La valeur de l'attribut tag's rel (balise rel). Si 
+     null, 'stylesheet' sera utilisé
        
     :param array $options: Un tableau d'attributs  :term:`attributs html`.
 
-    Créé un ou plusieurs lien(s) vers un feuille de style CSS. Si la clef 'inline' est
-    définie à false dans les paramètres ``$options``, les balises de lien seront ajoutés
-    au bloc ``css`` lequel sera intégré à la balise entête du document
+    Créé un ou plusieurs lien(s) vers un feuille de style CSS. Si la clef 
+    'inline' est définie à false dans les paramètres ``$options``, les balises 
+    de lien seront ajoutés au bloc ``css`` lequel sera intégré à la balise 
+    entête du document.
    
     Vous pouvez utiliser  l'option ``block`` pour contrôler sur lequel
+<<<<<<< HEAD
     des blocs l'élément lié sera ajouté. Par défaut il sera ajouté au bloc ``css``.
+=======
+    des blocs l'élément lié sera ajouté. Par défaut il sera ajouté au bloc 
+    ``css`.
+>>>>>>> translation of french doc
 
     Cette méthode d'inclusion CSS présume que le CSS spécifié se trouve dans
     le répertoire /app/webroot/css.::
@@ -105,8 +110,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         echo $this->Html->css('DebugKit.toolbar.css');
 
     Si vous voulez inclure un fichier css qui partage un nom avec un plugin
-    chargé vous pouvez faire ce qui suit.  Par exemple vous avez un plugin ``Blog``,
-    et souhaitez inclure également ``app/webroot/css/Blog.common.css``::
+    chargé vous pouvez faire ce qui suit.  Par exemple vous avez un plugin 
+    ``Blog``, et souhaitez inclure également 
+    ``app/webroot/css/Blog.common.css``::
 
         <?php
         echo $this->Html->css('Blog.common.css', null, array('plugin' => false));
@@ -118,8 +124,14 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 .. php:method:: meta(string $type, string $url = null, array $options = array())
 
     :param string $type: Le type de balise meta  désiré.
+<<<<<<< HEAD
     :param mixed $url: L'url de la balise meta,  soit une chaîne ou un tableau :term:`tableau routing`.
     :param array $options: Un tableau d'attributs :term:`attributs html`.
+=======
+    :param mixed $url: L'url de la balise meta,  soit une chaîne ou un tableau 
+     :term:`routing array`.
+    :param array $options: Un tableau d'attributs :term:`html attributes`.
+>>>>>>> translation of french doc
 
     Cette méthode est fournie pour le lien vers des ressources externes
     comme RSS/Atom feeds et les favicons. Comme avec css(), vous pouvez
@@ -186,8 +198,8 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <meta name="description" content="entrez une description ici" />
 
     Si vous voulez ajouter une balise personnalisée alors le premier
-    paramètre devra être un tableau. Pour ressortir  une balise de robots noindex 
-    utilisez le code suivant::
+    paramètre devra être un tableau. Pour ressortir  une balise de robots 
+    noindex, utilisez le code suivant::
 
         <?php
         echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex')); 
@@ -242,9 +254,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     :param array $data: Un jeu de clef => valeurs avec des propriétés CSS.
     :param boolean $oneline: Le contenu sera sur une seule ligne.
 
-    Construit les définitions de style CSS en se basant sur les clefs et valeurs 
-    du tableau passé à la méthode. Particulièrement pratique si votre fichier 
-    CSS est dynamique.::
+    Construit les définitions de style CSS en se basant sur les clefs et 
+    valeurs du tableau passé à la méthode. Particulièrement pratique si votre 
+    fichier CSS est dynamique.::
 
         <?php
         echo $this->Html->style(array(
@@ -298,15 +310,21 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <img src="http://example.com/img/logo.jpg" alt="" />
 
     Vous pouvez inclure des fichiers images depuis un plugin chargé en utilisant
+<<<<<<< HEAD
     :term:`syntaxe de plugin`.  Pour inclure ``app/Plugin/DebugKit/webroot/img/icon.png``
     Vous pouvez faire cela::
+=======
+    :term:`plugin syntax`.  Pour inclure 
+    ``app/Plugin/DebugKit/webroot/img/icon.png``, vous pouvez faire cela::
+>>>>>>> translation of french doc
 
         <?php
         echo $this->Html->image('DebugKit.icon.png');
 
     Si vous voulez inclure un fichier image qui partage un nom
     avec un plugin chargé vous pouvez faire ce qui suit. Par exemple si vous
-    avez in plugin `Blog``, et voulez inclure également ``app/webroot/js/Blog.icon.png``::
+    avez in plugin `Blog``, et voulez inclure également 
+    ``app/webroot/js/Blog.icon.png``::
 
         <?php
         echo $this->Html->image('Blog.icon.png', array('plugin' => false));
@@ -321,8 +339,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     :param mixed $url: Soit la chaîne spécifiant le chemin, ou un :term:`tableau routing`.
     :param array $options: Un tableau d'attributs :`html attributes`.
 
-    Méthode générale pour la création de liens HTML. Utilisez les ``$options`` pour
-    spécifier les attributs des éléments et si le ``$title`` devra ou pas être échappé.::
+    Méthode générale pour la création de liens HTML. Utilisez les ``$options`` 
+    pour spécifier les attributs des éléments et si le ``$title`` devra ou 
+    pas être échappé.::
 
         <?php
         echo $this->Html->link('Entrez', '/pages/accueil', array('class' => 'button', 'target' => '_blank'));
@@ -462,10 +481,11 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Utilisé des sections de balisage enveloppés dans des div. Le premier
     paramètre spécifie une clasee CSS, et le second est utilisé pour fournir
-    le texte à envelopper par les balises div. Si le dernier paramètre à été défini
-    a true, $text sera affiché en HTML-échappé.
+    le texte à envelopper par les balises div. Si le dernier paramètre à été 
+    défini à true, $text sera affiché en HTML-échappé.
 
-    Si aucun texte n'est spécifié, seulement une balise div d'ouverture est retournée.::
+    Si aucun texte n'est spécifié, seulement une balise div d'ouverture est 
+    retournée.::
  
         <?php
         echo $this->Html->div('error', 'Entrez votre numéro de carte bleue S.V.P');
@@ -494,16 +514,17 @@ couvrira les méthodes du Helper Html et comment les utiliser.
        tableau de chaînes pour plusieurs fichiers.
     :param array $options: Un tableau d'attributs :term:`attributs html`.
 
-    Inclus un(des) fichier(s). Si la clef ``inline`` est définie à false dans $options, les
-    balises script sont additionnées au bloc ``script`` qui va s'insérer dans 
-    la balise d'en-tête du document. ``$options['once']`` contrôle si vous voulez
-    ou pas inclure le script une fois par requête  ou plus d'une fois. ``$options['block']``
-    vous permets de contrôler dans quel quel balise de script il sera inséré.
-    C'est utile quand vous voulez placer des scripts à la fin de la mise en page (layout).
+    Inclus un(des) fichier(s). Si la clef ``inline`` est définie à false dans 
+    $options, les balises script sont additionnées au bloc ``script`` qui va 
+    s'insérer dans la balise d'en-tête du document. ``$options['once']`` 
+    contrôle si vous voulez ou pas inclure le script une fois par requête 
+    ou plus d'une fois. ``$options['block']`` vous permets de contrôler dans 
+    quel quel balise de script il sera inséré. C'est utile quand vous voulez 
+    placer des scripts à la fin de la mise en page (layout).
 
     Vous pouvez utilisez $options pour définir des propriétés additionnelles
-    pour la balise script générée. Si un tableau de balise script est utilisé, les
-    attributs seront appliqués à toutes les balises script générées.
+    pour la balise script générée. Si un tableau de balise script est utilisé, 
+    les attributs seront appliqués à toutes les balises script générées.
 
     Cette méthode d'inclusion de fichier javascript suppose que les fichiers
     javascript spécifiés se trouvent dans le répertoire ``/app/webroot/js``.::
@@ -553,9 +574,15 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         echo $this->Html->script('DebugKit.toolbar.js');
 
     Si vous voulez inclure un fichier de script qui partage un nom de fichier
+<<<<<<< HEAD
     avec un plugin chargé vous pouvez faire cela. Par exemple si vous avez
     Un plugin ``Blog``, et voulez inclure également ``app/webroot/js/Blog.plugins.js``,
     vous devriez::
+=======
+    avec un plugin chargé vous pouvez faire cela. Par exemple si vous avez 
+    Un plugin ``Blog``, et voulez inclure également 
+    ``app/webroot/js/Blog.plugins.js`, vous devriez::
+>>>>>>> translation of french doc
 
         <?php
         echo $this->Html->script('Blog.plugins.js', array('plugin' => false));
@@ -569,17 +596,22 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     :param string $code: Le code à placer dans la balise script.
     :param array $options: Un tableau d'attributs :term:`attributs html`.
 
-    Génère un bloc de code contenant des options ``$options['inline']`` définies 
-    de ``$code`` a mettre à false pour voir le bloc de script apparaître dans
-    le bloc de ``script` de la vue. D'autre options définies seront ajoutée comme
-    attributs dans les balises de script.
-    ``$this->html->scriptBlock('stuff', array('defer' => true));`` créera une balise 
-    script avec l'attribut ``defer="defer"``.
+    Génère un bloc de code contenant des options ``$options['inline']`` 
+    définies de ``$code`` a mettre à false pour voir le bloc de script 
+    apparaître dans le bloc de ``script` de la vue. D'autre options définies 
+    seront ajoutée comme attributs dans les balises de script.
+    ``$this->html->scriptBlock('stuff', array('defer' => true));`` créera une 
+    balise script avec l'attribut ``defer="defer"``.
 
 .. php:method:: scriptStart($options = array())
 
+<<<<<<< HEAD
     :param array $options: Un tableau d'attributs :term:`attributs html` à utiliser 
         quand scriptEnd est appelé.
+=======
+    :param array $options: Un tableau d'attributs :term:`html attributes` à 
+        utiliser quand scriptEnd est appelé.
+>>>>>>> translation of french doc
 
     Débute la mise en mémoire tampon d'un bloc de code. Ce bloc de code 
     va capturer toutes les sorties entre ``scriptStart()`` et ``scriptEnd()`` 
@@ -604,9 +636,10 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 .. php:method:: nestedList(array $list, array $options = array(), array $itemOptions = array(), string $tag = 'ul')
 
     :param array $list: Jeu d'éléments à lister.
-    :param array $options: Attributs HTML additionnels des balises de listes (ol/ul)  
-        ou si ul/ol utilise cela comme une balise.
-    :param array $itemOptions: Attributs additionnels des balises de listes item(LI) .
+    :param array $options: Attributs HTML additionnels des balises de listes 
+        (ol/ul) ou si ul/ol utilise cela comme une balise.
+    :param array $itemOptions: Attributs additionnels des balises de listes 
+        item(LI).
         
     :param string $tag: Type de balise liste à utiliser (ol/ul).
 
@@ -646,8 +679,15 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 .. php:method:: tableHeaders(array $names, array $trOptions = null, array $thOptions = null)
 
     :param array $names: Un tableau de chaîne pour créé les entête de tableau.
+<<<<<<< HEAD
     :param array $trOptions: Un tableau d'attributs :term:`attributs html` pour le <tr>
     :param array $thOptions: Un tableau d'attributs :term:`attributs html` pour l'élément <th>
+=======
+    :param array $trOptions: Un tableau d'attributs :term:`html attributes` 
+        pour le <tr>
+    :param array $thOptions: Un tableau d'attributs :term:`html attributes` pour 
+        l'élément <th>
+>>>>>>> translation of french doc
 
     Créé une ligne de cellule d'en-tête à placer dans la balise <table>.::
 
@@ -676,16 +716,27 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
 .. php:method:: tableCells(array $data, array $oddTrOptions = null, array $evenTrOptions = null, $useCount = false, $continueOddEven = true)
 
+<<<<<<< HEAD
     :param array $data: Un tableau à deux dimensions avec les données pour les lignes.
     :param array $oddTrOptions: Un tableau d'attributs :term:`attributs html` pour les <tr> impairs.
     :param array $evenTrOptions: Un tableau d'attributs :term:`attributs html` pour les <tr> pairs.
+=======
+    :param array $data: Un tableau à deux dimensions avec les données pour les 
+        lignes.
+    :param array $oddTrOptions: Un tableau d'attributs :term:`html attributes` 
+        pour les <tr> impairs.
+    :param array $evenTrOptions: Un tableau d'attributs :term:`html attributes` 
+        pour les <tr> pairs.
+>>>>>>> translation of french doc
     :param boolean $useCount: Ajoute la classe "column-$i".
-    :param boolean $continueOddEven: Si à false, utilisera une variable $count non-statique,
-        ainsi le compteur impair/pair est remis à zéro juste pour cet appel.
+    :param boolean $continueOddEven: Si à false, utilisera une variable $count 
+        non-statique, ainsi le compteur impair/pair est remis à zéro juste pour 
+        cet appel.
 
-    Créé des cellules de table, en assignant aux lignes  des attributs <tr> différents
-    pour les lignes paires et les lignes impaires. Entoure une simple table de cellule
-    dans un array() pour des attributs <td> spécifiques. ::
+    Créé des cellules de table, en assignant aux lignes  des attributs <tr> 
+    différents pour les lignes paires et les lignes impaires. Entoure une 
+    simple table de cellule dans un array() pour des attributs <td> 
+    spécifiques. ::
 
         <?php
         echo $this->Html->tableCells(array(
@@ -726,14 +777,21 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
 .. php:method:: url(mixed $url = NULL, boolean $full = false)
 
+<<<<<<< HEAD
     :param mixed $url: Un tableau de routing :term:`tableau routing`.
     :param mixed $full: Soit un booléen s'il faut ou pas que la  base du chemin soit
       incluse ou un tableau d'options pour le router :php:meth:`Router::url()`
+=======
+    :param mixed $url: Un tableau de routing :term:`routing array`.
+    :param mixed $full: Soit un booléen s'il faut ou pas que la  base du 
+        chemin soit incluse ou un tableau d'options pour le router 
+        :php:meth:`Router::url()`
+>>>>>>> translation of french doc
 
-    Retourne une URL pointant vers une combinaison contrôleur et action.
-    Si $url est vide, cela retourne la REQUEST\_URI, sinon cela génère la combinaison
-    d'une url pour le contrôleur et d'une action.  Si full est à true , la base complète
-    de l'URL sera ajouter en amont du résultat::
+    Retourne une URL pointant vers une combinaison controller et action.
+    Si $url est vide, cela retourne la REQUEST\_URI, sinon cela génère la 
+    combinaison d'une url pour le controller et d'une action. Si full est à 
+    true, la base complète de l'URL sera ajouter en amont du résultat::
 
         <?php
         echo $this->Html->url(array(
@@ -813,9 +871,9 @@ Changer la restitution des balises avec le Helper Html
 
 .. php:method:: loadConfig(mixed $configFile, string $path = null)
 
-    Les jeux de balises pour le Helper Html :php:class:`HtmlHelper` sont conforme au 
-    standard XHTML, toutefois si vous avez besoin de générer du HTML 
-    pour les standards HTML4 vous aurez besoin de créer et de charger
+    Les jeux de balises pour le Helper Html :php:class:`HtmlHelper` sont 
+    conforme au standard XHTML, toutefois si vous avez besoin de générer 
+    du HTML pour les standards HTML4 vous aurez besoin de créer et de charger 
     un nouveau fichier de configuration de balise contenant les balises 
     que vous aimeriez utiliser. Pour changer les balises utilisées créez
     un fichier ``app/Config/tags.php`` contenant::
@@ -836,14 +894,14 @@ Création d'un chemin de navigation avec le Helper Html
 .. php:method:: getCrumbs(string $separator = '&raquo;', string $startText = false)
 
     CakePHP inclus la possibilité de créer automatiquement un chemin de
-    navigation (fil d’Ariane) dans votre application. Pour mettre cela en service , ajouter
-    cela dans votre modèle de mise en page (layout template)::
+    navigation (fil d’Ariane) dans votre application. Pour mettre cela en 
+    service , ajouter cela dans votre template de mise en page (layout template)::
 
         <?php
         echo $this->Html->getCrumbs(' > ', 'Home');
 
-    L'option ``$startText`` peut aussi accepter un tableau.  Cela donne plus de contrôle
-    a travers le premier lien généré::
+    L'option ``$startText`` peut aussi accepter un tableau.  Cela donne plus de 
+    contrôle à travers le premier lien généré::
 
         <?php
         echo $this->Html->getCrumbs(' > ', array(
@@ -874,7 +932,7 @@ Création d'un chemin de navigation avec le Helper Html
 
     Retourne le fil d'Ariane comme une liste (x)html.
 
-    Cette méthodes utilise :php:meth:`HtmlHelper::tag()` pour générer la 
+    Cette méthode utilise :php:meth:`HtmlHelper::tag()` pour générer la 
     liste et ces éléments. Fonctionne de la même manière 
     que  :php:meth:`~HtmlHelper::getCrumbs()`,  il utilise toutes les options
     que chacun des fils a ajouté. Vous pouvez utiliser le paramètre  ``$startText``
@@ -889,6 +947,6 @@ Création d'un chemin de navigation avec le Helper Html
 
 
 .. meta::
-    :title lang=en: HtmlHelper
-    :description lang=en: The role of the HtmlHelper in CakePHP is to make HTML-related options easier, faster, and more resilient to change.
-    :keywords lang=en: html helper,cakephp css,cakephp script,content type,html image,html link,html tag,script block,script start,html url,cakephp style,cakephp crumbs
+    :title lang=fr: HtmlHelper
+    :description lang=fr: Le rôle de HtmlHelper dans CakePHP est de faciliter la construction des options HTML-related, plus rapide, and more resilient to change.
+    :keywords lang=fr: html helper,cakephp css,cakephp script,content type,html image,html link,html tag,script block,script start,html url,cakephp style,cakephp crumbs

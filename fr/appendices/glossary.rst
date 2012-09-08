@@ -74,4 +74,4 @@ Glossaire
 
 .. meta::
     :title lang=fr: Glossaire
-    :keywords lang=fr: attributs html,classe de tableau,tableau contrôleur,glossaire,cible blank,notation point,configuration du routing,contrefaçon,replay,routeur,syntaxe,config,soumissions
+    :keywords lang=fr: attributs html,classe de tableau,tableau controller,glossaire,cible blank,notation point,configuration du routing,contrefaçon,replay,routeur,syntaxe,config,soumissions

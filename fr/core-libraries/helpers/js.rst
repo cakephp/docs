@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 Helper JS
 #########
+=======
+JSHelper
+########
+>>>>>>> translation of french doc
 
 .. php:class:: Helper Js(View $view, array $settings = array())
 
@@ -21,7 +26,6 @@ Um moteur javascript traduit un élément Javascript abstrait dans
 un code javascript concret spécifique à la librairie en cours 
 d'utilisation. De plus ils crées un système extensible à utiliser
 pour les autres.
-
 
 Utilisation d'un moteur Javascript spécifique
 =============================================
@@ -53,7 +57,7 @@ cette ligne juste avant la balise de fin de ``</body>`` ::
     pour que le helper fonctionne.
 
 La selection du moteur Javascript est déclarée quand vous incluez le 
-helper dans votre contrôleur ::
+helper dans votre controller ::
 
     <?php
     public $helpers = array('Js' => array('Jquery'));
@@ -67,7 +71,7 @@ de librairie.
 
 
 Utilisation de jQuery avec d'autre librairies
---------------------------------------------------------
+---------------------------------------------
 
 La librairie jQuery, et virtuellement tous ses plugins sont limités
 au sein de l'espace jQuery. Comme règle générale, les objets
@@ -89,7 +93,7 @@ Pour redéfinir le raccourci "$", utilisez la variable jQueryObject ::
     // Demande à jQuery de se placer dans un mode noconflict
 
 Utilisation du Helper Js dans des helpers personnalisés
--------------------------------------------------------------------------
+-------------------------------------------------------
 
 Déclarez le Helper Js dans le tableau ``$helpers`` de votre 
 Helper personnalisé::
@@ -103,7 +107,7 @@ Helper personnalisé::
     Helper personnalisé . Ceci n'aurait aucun effet.
 
 Si vous êtes prêt à utiliser un moteur javascript autre que celui
-par défaut, faites le paramétrage du Helper dans votre contrôleur
+par défaut, faites le paramétrage du Helper dans votre controller
 comme ceci::
 
     <?php
@@ -116,7 +120,7 @@ comme ceci::
 .. attention::
 
     Soyez certain de déclarer le Helper Js  et sont moteur **en haut** 
-    du tableau ``$helpers`` dans votre contrôleur.
+    du tableau ``$helpers`` dans votre controller.
 
 Le moteur javascript peut disparaître (remplacé par celui par défaut)
 de l'objet Helper Js dans votre helper, si vous oubliez de faire cela
@@ -171,7 +175,7 @@ n'est pas possible dans PHP4 et l'exemple ci-dessus devrait être
     $this->Js->event('click', $eventCode);
 
 Options communes
--------------------------
+----------------
 
 Dans le but de simplifier le développement ou les librairies Js peuvent
 changer. Un jeu commun d'options est pris en charge par le Helper Js,
@@ -181,15 +185,15 @@ commutation des librairies, chaque librairie supporte toutes les fonctions
 de callback natives et les options. 
 
 Enveloppement de Callback
--------------------------------------
+-------------------------
 
 Par défaut toutes les options de callback sont enveloppées dans la
 fonction anonyme an avec les arguments corrects. Vous pouvez 
-désactiver ce comportement  en  fournissant ``wrapCallbacks = false`` 
+désactiver ce behavior  en  fournissant ``wrapCallbacks = false`` 
 dans votre tableau d'options.
 
 Travailler avec des scripts bufferisés
--------------------------------------------------
+--------------------------------------
 
 Un inconvénient au précédente implémentation des fonctionnalités
 type d'Ajax était la dispersion des balises de script partout dans 
@@ -201,7 +205,6 @@ au dessus la balise ``</body>``. Ceci permettra à tous les scripts
 générés dans les éléments du layout d'être ressortis (output)
 à un endroit. Il doit être noté que les scripts bufferisés sont gérés
 séparément des scripts de fichiers inclus. 
-
 
 .. php:method:: writeBuffer($options = array())
 
@@ -763,7 +766,11 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
 
 .. _ajax-pagination:
 
+<<<<<<< HEAD
 La Pagination Ajax 
+=======
+La Pagination Ajax
+>>>>>>> translation of french doc
 ==================
 
 Bien mieux qu'avec la pagination Ajax de la 1.2, vous pouvez utiliser
@@ -771,15 +778,15 @@ le Helper JS pour gérer les liens de pagination AJAX au lieu de
 liens HTML.
 
 Fabriquer les liens Ajax
--------------------------------
+------------------------
 
 Avant de pouvoir créer les liens ajax vous devez inclure la librairie
 Javascript qui correspond à l'adaptateur que vous utilisez avec
 le ``Helper JS``. Par défaut le ``Helper Js`` utilise jQuery. Donc 
 dans votre layout incluez jQuery (ou la librairie que vous utilisez). 
 Assurez vous également d'inclure ``RequestHandlerComponent`` 
-dans votre comportement. Ajoutez ce qui suit dans votre 
-contrôleur::
+dans votre behavior. Ajoutez ce qui suit dans votre 
+controller::
 
     <?php
     public $components = array('RequestHandler');
@@ -826,7 +833,7 @@ paginiation Ajax. Quand vous écrivez le buffer, cela l'efface également ,
 et vous n'avez donc pas à vous inquiéter de doublon de code Javascript.
 
 Ajouter des effets et des transitions
------------------------------------------------
+-------------------------------------
 
 Depuis que `indicator`` n'est plus supporté, vous devez ajouter 
 les effets d'indicator vous même.::
@@ -872,6 +879,6 @@ d'effets plus complexes.
 
 
 .. meta::
-    :title lang=en: Helper Js
-    :description lang=en: The Js Helper supports the javascript libraries Prototype, jQuery and Mootools and provides methods for manipulating javascript.
-    :keywords lang=en: js helper,javascript,cakephp jquery,cakephp mootools,cakephp prototype,cakephp jquery ui,cakephp scriptaculous,cakephp javascript,javascript engine
+    :title lang=fr: JsHelper
+    :description lang=fr: JsHelper supporte les librairies javascript Prototype, jQuery et Mootools et fournit des méthodes pour la manipulation de javascript.
+    :keywords lang=fr: js helper,javascript,cakephp jquery,cakephp mootools,cakephp prototype,cakephp jquery ui,cakephp scriptaculous,cakephp javascript,javascript engine

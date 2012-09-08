@@ -1,19 +1,19 @@
 Validation des données à partir du Controller
 #############################################
 
-Alors que normalement vous n'utiliseriez que la méthode save du modèle,
+Alors que normalement vous n'utiliseriez que la méthode save du model,
 il peut arriver que vous souhaitiez valider les données sans les sauvegarder.
 Par exemple, vous souhaitez afficher des informations supplémentaires à
 l'utilisateur avant qu'il ne sauvegarde les données dans la base. Valider
 les données nécessite un processus légèrement différentde la méthode save.
 
-Tout d'abord, mettez les données au modèle::
+Tout d'abord, mettez les données au model::
 
     <?php
     $this->ModelName->set($this->request->data);
 
 Ensuite, pour vérifier si les données sont validées, utilisez la méthide 
-validates du modèle, qui va retourner true si elles sont valides et false 
+validates du model, qui va retourner true si elles sont valides et false 
 si elles ne le sont pas::
 
     <?php
@@ -24,7 +24,7 @@ si elles ne le sont pas::
         $errors = $this->ModelName->validationErrors;
     }
 
-Il peut être souhaité de valider votre modèle seulement en utilisant
+Il peut être souhaité de valider votre model seulement en utilisant
 un sous-ensemble des validations spécifiées dans le modèle. Par exemple,
 si vous avez un modèle Utilisateur avec les champs prenom, nom, email et 
 mot_de_passe. Dans ce cas, quand vous créez ou modifiez un utilisateur,
@@ -53,7 +53,7 @@ La liste des erreurs de validation n'est pas supprimée entre les différents
 appels à ``invalidFields()``. Donc si vous validez dans une boucle et que vous 
 voulez chaque jeu d'erreurs séparement, n'utilisez pas ``invalidFields()``. 
 Utilisez plutôt ``validates()`` et accéder à la propriété ``validationErrors`` 
-du modèle.
+du model.
 
 Il est important de noter que les données doivent être envoyées au modèle
 avant que les données soient validées. C'est différent de la méthode save
@@ -62,7 +62,7 @@ garder à l'esprit qu'il n'est pas requis d'appeler validates antérieurement
 à l'appel save puisque save va automatiquement valider les données avant 
 l'enregistrement effectif.
 
-Pour valider de multiple modèles, l'approche suivante devrait être utilisée::
+Pour valider de multiple models, l'approche suivante devrait être utilisée::
 
     <?php
     if ($this->ModelName->saveAll($this->request->data, array('validate' => 'only'))) {
@@ -81,5 +81,5 @@ validation du save pour éviter un deuxième contrôle::
 
 
 .. meta::
-    :title lang=fr: Validation des données depuis un controlleur
-    :keywords lang=fr: règles de mot de passe,validations,sous-ensemble,tableau,logs,logique,email,prénom nom,modèles,options,données du modèle
+    :title lang=fr: Validation des données depuis un controller
+    :keywords lang=fr: règles de mot de passe,validations,sous-ensemble,tableau,logs,logique,email,prénom nom,modèles,models,options,données du model
