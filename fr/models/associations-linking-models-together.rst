@@ -544,7 +544,9 @@ and set the value to ``true``::
     <?php
     class Image extends AppModel {
         public $belongsTo = array(
-            'ImageAlbum' => array('counterCache' => true)
+            'ImageAlbum' => array(
+                'counterCache' => true,
+            )
         );
     }
 
@@ -564,7 +566,8 @@ Using our Image model example, we can specify it like so::
             'ImageAlbum' => array(
                 'counterCache' => true,
                 'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1
-        ));
+            )
+        );
     }
 
 hasAndBelongsToMany (HABTM)

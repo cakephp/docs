@@ -516,7 +516,9 @@ counter-cache機能を有効にするためにアソシエーションの設定�
     <?php
     class Image extends AppModel {
         public $belongsTo = array(
-            'ImageComment' => array('counterCache' => true)
+            'ImageComment' => array(
+                'counterCache' => true,
+            )
         );
     }
 
@@ -535,7 +537,8 @@ Imageモデルのサンプルでは、次のようになるでしょう。 ::
             'ImageComment' => array(
                 'counterCache' => true,
                 'counterScope' => array('Image.active' => 1) // "Image" が active なデータのみカウントします
-        ));
+            )
+        );
     }
 
 hasAndBelongsToMany (HABTM)
