@@ -66,6 +66,15 @@ Route
 * The signature of ``match()`` has changed to ``match($url, $context = array())``
   See :php:meth:`CakeRoute::match()` for information on the new signature.
 
+Filter\AssetFilter
+------------------
+
+* Plugin & theme assets handled by the AssetFilter are no longer read via
+  ``include`` instead they are treated as plain text files.  This fixes a number
+  of issues with javascript libraries like TinyMCE and environments with
+  short_tags enabled.
+
+
 Controller\Components
 =====================
 
