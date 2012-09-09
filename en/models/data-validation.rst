@@ -324,7 +324,7 @@ in spite of a rule failing set key ``last`` to ``false`` for that rule.
 
 In the following example even if "rule1" fails "rule2" will be processed
 and error messages for both failing rules will be returned if "rule2" also
-fails.
+fails::
 
     <?php
     public $validate = array(
