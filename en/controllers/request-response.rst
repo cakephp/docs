@@ -96,7 +96,7 @@ that contains a ``data`` prefix, will have that data prefix removed.  For exampl
 
     <?php
     // An input with a name attribute equal to 'data[Post][title]' is accessible at
-    $this->request->data['Post']['title'];
+    $this->request->data['MyModel']['title'];
 
 You can either directly access the data property, or you can use
 :php:meth:`CakeRequest::data()` to read the data array in an error free manner.
