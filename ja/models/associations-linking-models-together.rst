@@ -514,9 +514,9 @@ counter-cache機能を有効にするためにアソシエーションの設定�
 ``counterCache`` キーに ``true`` をセットしましょう。 ::
 
     <?php
-    class Image extends AppModel {
+    class ImageComment extends AppModel {
         public $belongsTo = array(
-            'ImageComment' => array(
+            'Image' => array(
                 'counterCache' => true,
             )
         );
@@ -532,9 +532,9 @@ counter-cache機能を有効にするためにアソシエーションの設定�
 Imageモデルのサンプルでは、次のようになるでしょう。 ::
 
     <?php
-    class Image extends AppModel {
+    class ImageComment extends AppModel {
         public $belongsTo = array(
-            'ImageComment' => array(
+            'Image' => array(
                 'counterCache' => true,
                 'counterScope' => array('Image.active' => 1) // "Image" が active なデータのみカウントします
             )

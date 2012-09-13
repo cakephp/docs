@@ -542,9 +542,9 @@ counter-cache in your association by adding a ``counterCache`` key
 and set the value to ``true``::
 
     <?php
-    class Image extends AppModel {
+    class ImageComment extends AppModel {
         public $belongsTo = array(
-            'ImageComment' => array(
+            'Image' => array(
                 'counterCache' => true,
             )
         );
@@ -561,9 +561,9 @@ to, depending on how you look at it) the counter value.
 Using our Image model example, we can specify it like so::
 
     <?php
-    class Image extends AppModel {
+    class ImageComment extends AppModel {
         public $belongsTo = array(
-            'ImageComment' => array(
+            'Image' => array(
                 'counterCache' => true,
                 'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1
             )
