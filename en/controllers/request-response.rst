@@ -95,8 +95,8 @@ All POST data can be accessed using :php:attr:`CakeRequest::$data`.  Any form da
 that contains a ``data`` prefix, will have that data prefix removed.  For example::
 
     <?php
-    // An input with a name attribute equal to 'data[Post][title]' is accessible at
-    $this->request->data['Post']['title'];
+    // An input with a name attribute equal to 'data[MyModel][title]' is accessible at
+    $this->request->data['MyModel']['title'];
 
 You can either directly access the data property, or you can use
 :php:meth:`CakeRequest::data()` to read the data array in an error free manner.
