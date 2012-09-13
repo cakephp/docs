@@ -268,6 +268,7 @@ There are a few ways to create form inputs with the FormHelper.  We'll start by
 looking at ``input()``. This method will automatically inspect the model field it
 has been supplied in order to create an appropriate input for that
 field.  Internally ``input()`` delegates to other methods in FormHelper.
+field willInternally ``input()`` delegates to other methods in FormHelper.
 
 .. php:method:: input(string $fieldName, array $options = array())
 
@@ -299,6 +300,12 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
 
     The ``$options`` parameter allows you to customize how ``input()`` works,
     and finely control what is generated.
+
+    The wrapping div will will have a ``required`` classname appended if the
+    validation rules for the Model's field do not specify ``allowEmpty =>
+    true``. One limitation of this behavior is the field's model must have
+    been loaded during this request. Or be directly associated to the 
+    model supplied to :php:meth:`~FormHelper::create()`.
 
     For example, let’s assume that your User model includes fields for a
     username (varchar), password (varchar), approved (datetime) and
