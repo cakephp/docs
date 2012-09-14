@@ -152,6 +152,14 @@ Testing
 Utility
 =======
 
+Folder
+------
+
+- :php:meth:`Folder::copy()` and :php:meth:`Folder::move()` now support the
+  ability to merge the target and source directories in addition to
+  skip/overwrite.
+
+
 String
 ------
 
