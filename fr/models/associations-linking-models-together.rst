@@ -550,8 +550,8 @@ and set the value to ``true``::
         );
     }
 
-From now on, every time you add or remove a ``Image`` associated to
-``ImageComment``, the number within ``image_comment_count`` is adjusted
+From now on, every time you add or remove a ``ImageComment`` associated to
+``Image``, the number within ``image_comment_count`` is adjusted
 automatically.
 
 You can also specify ``counterScope``. It allows you to specify a
