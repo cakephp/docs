@@ -522,7 +522,7 @@ counter-cache機能を有効にするためにアソシエーションの設定�
         );
     }
 
-これで、 ``ImageComment`` を追加もしくは削除するたびに、関連する ``Image`` の\
+これで、 ``Image`` に関連する ``ImageComment`` を追加もしくは削除するたびに、\
 件数が ``image_comment_count`` フィールドにセットされるようになります。
 
 ``conterScope`` をセットすれば、カウンタ値の更新をする\
