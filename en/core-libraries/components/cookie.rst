@@ -149,6 +149,15 @@ The CookieComponent offers a number of methods for working with Cookies.
 
         // this outputs something like array('name' => 'Larry', 'role' => 'Lead')
 
+.. php:method:: check($key)
+
+    :param string $key: The key to check.
+
+    Used to check if a key/path exists and has not-null value.
+
+    .. versionadded:: 2.3
+        ``CookieComponent::check()`` was added in 2.3
+
 .. php:method:: delete(mixed $key)
 
     Deletes a cookie variable of the name in $key. Works with dot

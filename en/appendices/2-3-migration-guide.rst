@@ -47,6 +47,12 @@ RequestHandlerComponent
   to view classname. You can add ``$settings['viewClassMap']`` for automatically setting
   the correct viewClass based on extension/content type.
 
+CookieComponent
+---------------
+
+- :php:meth:`CookieComponent::check()` was added.  This method works the same as
+  :php:meth:`CakeSession::check()` does.
+
 Console
 =======
 
@@ -54,6 +60,16 @@ Console
   webserver for your CakePHP application.
 - Baking a new project now sets the application's cache prefix to the name of
   the application.
+
+
+Core
+====
+
+Configure
+---------
+
+- :php:meth:`Configure::check()` was added.  This method works the same as
+  :php:meth:`CakeSession::check()` does.
 
 Error
 =====

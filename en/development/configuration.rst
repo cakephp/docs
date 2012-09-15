@@ -374,6 +374,15 @@ anywhere within your application, in a static context::
 
     If $key is left null, all values in Configure will be returned.
 
+.. php:staticmethod:: check($key)
+
+    :param string $key: The key to check.
+
+    Used to check if a key/path exists and has not-null value.
+
+    .. versionadded:: 2.3
+        ``Configure::check()`` was added in 2.3
+
 .. php:staticmethod:: delete($key)
 
     :param string $key: The key to delete, can use be a :term:`dot notation` value
@@ -407,6 +416,7 @@ anywhere within your application, in a static context::
 .. php:staticmethod:: drop($name)
 
     Drops a connected reader object.
+
 
 Reading and writing configuration files
 =======================================
