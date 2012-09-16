@@ -224,7 +224,7 @@ the view file ``error400.ctp`` and ``error500.ctp`` are used respectively. You c
 customize them as per your needs. By default your ``app/Layouts/default.ctp`` is used
 for error pages too. If your eg. you want to use another layout ``app/Layouts/my_error.ctp``
 for your error pages then simply edit the error views and add the statement
-``$this->layout = 'my_error';` to the ``error400.ctp`` and ``error500.ctp``.
+``$this->layout = 'my_error';`` to the ``error400.ctp`` and ``error500.ctp``.
 
 .. index:: application exceptions
 
