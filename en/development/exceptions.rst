@@ -51,6 +51,181 @@ in exception handling will capture any uncaught exceptions and render a useful
 page.  Exceptions that do not specifically use a 400 range code, will be
 treated as an Internal Server Error.
 
+.. _built-in-exceptions:
+
+Built in Exceptions for CakePHP
+===============================
+
+There are several built-in exceptions inside CakePHP, outside of the
+internal framework exceptions, there are several
+exceptions for HTTP methods
+
+.. php:exception:: BadRequestException
+
+    Used for doing 400 Bad Request error.
+
+.. php:exception::UnauthorizedException
+
+    Used for doing a 401 Not found error.
+
+.. php:exception:: ForbiddenException
+
+    Used for doing a 403 Forbidden error.
+
+.. php:exception:: NotFoundException
+
+    Used for doing a 404 Not found error.
+
+.. php:exception:: MethodNotAllowedException
+
+    Used for doing a 405 Method Not Allowed error.
+
+.. php:exception:: InternalErrorException
+
+    Used for doing a 500 Internal Server Error.
+
+.. php:exception:: NotImplementedException
+
+    Used for doing a 501 Not Implemented Errors.
+
+You can throw these exceptions from you controllers to indicate failure states,
+or HTTP errors. An example use of the HTTP exceptions could be rendering 404
+pages for items that have not been found::
+
+    <?php
+    public function view($id) {
+        $post = $this->Post->findById($id);
+        if (!$post) {
+            throw new NotFoundException('Could not find that post');
+        }
+        $this->set('post', $post);
+    }
+
+By using exceptions for HTTP errors, you can keep your code both clean, and give
+RESTful responses to client applications and users.
+
+In addition, the following framework layer exceptions are available, and will
+be thrown from a number of CakePHP core components:
+
+.. php:exception:: MissingViewException
+
+    The chosen view file could not be found.
+
+.. php:exception:: MissingLayoutException
+
+    The chosen layout could not be found.
+
+.. php:exception:: MissingHelperException
+
+    A helper was not found.
+
+.. php:exception:: MissingBehaviorException
+
+    A configured behavior could not be found.
+
+.. php:exception:: MissingComponentException
+
+    A configured component could not be found.
+
+.. php:exception:: MissingTaskException
+
+    A configured task was not found.
+
+.. php:exception:: MissingShellException
+
+    The shell class could not be found.
+
+.. php:exception:: MissingShellMethodException
+
+    The chosen shell class has no method of that name.
+
+.. php:exception:: MissingDatabaseException
+
+    The configured database is missing.
+
+.. php:exception:: MissingConnectionException
+
+    A model's connection is missing.
+
+.. php:exception:: MissingTableException
+
+    A model's table is missing.
+
+.. php:exception:: MissingActionException
+
+    The requested controller action could not be found.
+
+.. php:exception:: MissingControllerException
+
+    The requested controller could not be found.
+
+.. php:exception:: PrivateActionException
+
+    Private action access.  Either accessing
+    private/protected/_ prefixed actions, or trying
+    to access prefixed routes incorrectly.
+
+.. php:exception:: CakeException
+
+    Base exception class in CakePHP.  All framework layer exceptions thrown by
+    CakePHP will extend this class.
+
+These exception classes all extend :php:exc:`CakeException`.
+By extending CakeException, you can create your own 'framework' errors.
+All of the standard Exceptions that CakePHP will throw also extend CakeException.
+
+.. versionadded:: 2.3
+    CakeBaseException was added
+
+.. php:exception:: CakeBaseException
+
+    Base exception class in CakePHP.
+    All CakeExceptions and HttpExceptions above extend this class.
+
+.. php:method:: responseHeader($header = null, $value = null)
+
+    See :php:func:`CakeResponse::header()`
+
+All Http and Cake exceptions extend the CakeBaseException class, which has a method
+to add headers to the response. For instance when throwing a 405 MethodNotAllowedException
+the rfc2616 says:
+"The response MUST include an Allow header containing a list of valid methods for the requested resource."
+
+Using HTTP exceptions in your controllers
+=========================================
+
+You can throw any of the HTTP related exceptions from your controller actions
+to indicate failure states.  For example::
+
+    <?php
+    public function view($id) {
+        $post = $this->Post->read(null, $id);
+        if (!$post) {
+            throw new NotFoundException();
+        }
+        $this->set(compact('post'));
+    }
+
+The above would cause the configured ``Exception.handler`` to catch and
+process the :php:exc:`NotFoundException`.  By default this will create an error page,
+and log the exception.
+
+.. _error-views:
+
+Exception Renderer
+=========================
+
+.. php:class:: ExceptionRenderer(Exception $exception)
+The ExceptionRenderer class takes care of rendering the error pages for all the
+exceptions thrown by you application.
+
+The error page views are located at ``app/View/Errors/``. For all 4xx and 5xx errors
+the view file ``error400.ctp`` and ``error500.ctp`` are used respectively. You can 
+customize them as per your needs. By default your ``app/Layouts/default.ctp`` is used
+for error pages too. If your eg. you want to use another layout ``app/Layouts/my_error.ctp``
+for your error pages then simply edit the error views and add the statement
+``$this->layout = 'my_error';` to the ``error400.ctp`` and ``error500.ctp``.
+
 .. index:: application exceptions
 
 Creating your own application exceptions
@@ -270,165 +445,6 @@ and the configured loggers.
 
     If you are using a custom ``Exception.handler`` this setting will have
     no effect. Unless you reference it inside your implementation.
-
-.. _built-in-exceptions:
-
-Built in Exceptions for CakePHP
-===============================
-
-There are several built-in exceptions inside CakePHP, outside of the
-internal framework exceptions, there are several
-exceptions for HTTP methods
-
-.. php:exception:: BadRequestException
-
-    Used for doing 400 Bad Request error.
-
-.. php:exception::UnauthorizedException
-
-    Used for doing a 401 Not found error.
-
-.. php:exception:: ForbiddenException
-
-    Used for doing a 403 Forbidden error.
-
-.. php:exception:: NotFoundException
-
-    Used for doing a 404 Not found error.
-
-.. php:exception:: MethodNotAllowedException
-
-    Used for doing a 405 Method Not Allowed error.
-
-.. php:exception:: InternalErrorException
-
-    Used for doing a 500 Internal Server Error.
-
-.. php:exception:: NotImplementedException
-
-    Used for doing a 501 Not Implemented Errors.
-
-You can throw these exceptions from you controllers to indicate failure states,
-or HTTP errors. An example use of the HTTP exceptions could be rendering 404
-pages for items that have not been found::
-
-    <?php
-    public function view($id) {
-        $post = $this->Post->findById($id);
-        if (!$post) {
-            throw new NotFoundException('Could not find that post');
-        }
-        $this->set('post', $post);
-    }
-
-By using exceptions for HTTP errors, you can keep your code both clean, and give
-RESTful responses to client applications and users.
-
-In addition, the following framework layer exceptions are available, and will
-be thrown from a number of CakePHP core components:
-
-.. php:exception:: MissingViewException
-
-    The chosen view file could not be found.
-
-.. php:exception:: MissingLayoutException
-
-    The chosen layout could not be found.
-
-.. php:exception:: MissingHelperException
-
-    A helper was not found.
-
-.. php:exception:: MissingBehaviorException
-
-    A configured behavior could not be found.
-
-.. php:exception:: MissingComponentException
-
-    A configured component could not be found.
-
-.. php:exception:: MissingTaskException
-
-    A configured task was not found.
-
-.. php:exception:: MissingShellException
-
-    The shell class could not be found.
-
-.. php:exception:: MissingShellMethodException
-
-    The chosen shell class has no method of that name.
-
-.. php:exception:: MissingDatabaseException
-
-    The configured database is missing.
-
-.. php:exception:: MissingConnectionException
-
-    A model's connection is missing.
-
-.. php:exception:: MissingTableException
-
-    A model's table is missing.
-
-.. php:exception:: MissingActionException
-
-    The requested controller action could not be found.
-
-.. php:exception:: MissingControllerException
-
-    The requested controller could not be found.
-
-.. php:exception:: PrivateActionException
-
-    Private action access.  Either accessing
-    private/protected/_ prefixed actions, or trying
-    to access prefixed routes incorrectly.
-
-.. php:exception:: CakeException
-
-    Base exception class in CakePHP.  All framework layer exceptions thrown by
-    CakePHP will extend this class.
-
-These exception classes all extend :php:exc:`CakeException`.
-By extending CakeException, you can create your own 'framework' errors.
-All of the standard Exceptions that CakePHP will throw also extend CakeException.
-
-.. versionadded:: 2.3
-    CakeBaseException was added
-
-.. php:exception:: CakeBaseException
-
-    Base exception class in CakePHP.
-    All CakeExceptions and HttpExceptions above extend this class.
-
-.. php:method:: responseHeader($header = null, $value = null)
-
-    See :php:func:`CakeResponse::header()`
-
-All Http and Cake exceptions extend the CakeBaseException class, which has a method
-to add headers to the response. For instance when throwing a 405 MethodNotAllowedException
-the rfc2616 says:
-"The response MUST include an Allow header containing a list of valid methods for the requested resource."
-
-Using HTTP exceptions in your controllers
-=========================================
-
-You can throw any of the HTTP related exceptions from your controller actions
-to indicate failure states.  For example::
-
-    <?php
-    public function view($id) {
-        $post = $this->Post->read(null, $id);
-        if (!$post) {
-            throw new NotFoundException();
-        }
-        $this->set(compact('post'));
-    }
-
-The above would cause the configured ``Exception.handler`` to catch and
-process the :php:exc:`NotFoundException`.  By default this will create an error page,
-and log the exception.
 
 
 .. meta::
