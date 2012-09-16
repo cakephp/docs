@@ -98,7 +98,7 @@ uniques dans une app entière**. Par exemple, il est approprié d'avoir::
         );
     }
 
-mais ce qui suit ne travaillera pas bien dans toute circonstance:::
+mais ce qui suit ne travaillera pas bien dans toute circonstance::
 
     <?php
     class User extends AppModel {

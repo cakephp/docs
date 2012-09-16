@@ -88,7 +88,7 @@ Avec un simple contrôleur ::
         }
     }
 
-et une définition de modèle encore plus simple :::
+et une définition de modèle encore plus simple ::
 
     <?php
     // app/Model/Category.php

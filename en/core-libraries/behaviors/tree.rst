@@ -89,7 +89,7 @@ tree to see what it looks like. With a simple controller::
         }
     }
 
-and an even simpler model definition:::
+and an even simpler model definition::
 
     <?php
     // app/Model/Category.php

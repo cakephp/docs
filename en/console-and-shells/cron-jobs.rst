@@ -28,7 +28,7 @@ needed paths to $PATH. Copy and save this to your Console folder as
     done
     $cmd
 
-You can call it like:::
+You can call it like::
 
     $ ./Console/cakeshell myshell myparam -cli /usr/bin -console /cakes/2.x.x/lib/Cake/Console
 

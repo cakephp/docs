@@ -27,7 +27,7 @@ en le nommant 'cakeshell' et n'oubliez pas de le rendre exécutable.
     done
     $cmd
 
-Vous l'appelez ainsi:::
+Vous l'appelez ainsi::
 
     $ ./vendors/cakeshell myshell myparam -cli /usr/bin -console /cakes/1.2.x.x/cake/console
 

@@ -96,7 +96,7 @@ appropriate to have::
         );
     }
 
-but the following will not work well in all circumstances:::
+but the following will not work well in all circumstances::
 
     <?php
     class User extends AppModel {
