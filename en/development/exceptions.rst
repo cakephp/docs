@@ -216,6 +216,7 @@ Exception Renderer
 =========================
 
 .. php:class:: ExceptionRenderer(Exception $exception)
+
 The ExceptionRenderer class with the help of ``CakeErrorController`` takes care of rendering
 the error pages for all the exceptions thrown by you application.
 
