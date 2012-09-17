@@ -1,6 +1,13 @@
 Simple Acl controlled Application
 #################################
 
+.. note::
+
+    This isn't a beginner level tutorial. If you are just starting out with
+    CakePHP we would advice you to get a better overall experience of the
+    framework's features before trying out this tutorial.
+
+
 In this tutorial you will create a simple application with
 :doc:`/core-libraries/components/authentication` and
 :doc:`/core-libraries/components/access-control-lists`. This
