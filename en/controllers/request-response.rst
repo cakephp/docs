@@ -40,8 +40,8 @@ third is as object properties::
 
     <?php
     $this->request['controller'];
-    $this->request->controller;
     $this->request->params['controller'];
+    $this->request->controller;
 
 All of the above will both access the same value. Multiple ways of accessing the
 parameters was done to ease migration for existing applications. All
