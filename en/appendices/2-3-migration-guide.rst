@@ -139,7 +139,10 @@ View
 - MediaView is deprecated, and you can use new features in
   :php:class:`CakeResponse` to achieve the same results.
 - Serialization in Json and Xml views has been moved to ``_serialize()``
-- beforeRender and afterRender callbacks are now being called in Json and Xml views when using view templates.
+- beforeRender and afterRender callbacks are now being called in Json and Xml 
+  views when using view templates.
+- :php:meth:`View::fetch()` now has a ``$default`` argument.  This argument can
+  be used to provide a default value should a block be empty.
 
 Helpers
 =======
