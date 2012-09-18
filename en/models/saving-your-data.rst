@@ -194,7 +194,7 @@ For example, to update the title of a blog post, the call to
 :php:meth:`Model::updateAll(array $fields, array $conditions)`
 ==============================================================
 
-Updates many records in a single call. Records to be updated are
+Updates one or more records in a single call. Records to be updated are
 identified by the ``$conditions`` array, and fields to be updated,
 along with their values, are identified by the ``$fields`` array.
 
