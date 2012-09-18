@@ -909,6 +909,24 @@ with usage examples.
             )
         );
 
+.. php:staticmethod:: fileSize($check, $operator = null, $size = null)
+
+    This rule allows you to check filesizes.  You can use ``$operator`` to
+    decide the type of comparison you want to use.  All the operators suppored
+    by :php:func:`~Validation::comparison()` are supported here as well.  This
+    method will automatically handle array values from ``$_FILES`` by reading
+    from the ``tmp_name`` key if ``$check`` is an array an contains that key::
+
+        <?php
+        public $validate = array(
+            'image' => array(
+                'rule' => array('filesize', '<=', '1MB'),
+                'message' => 'Image must be less than 1MB'
+            )
+        );
+
+    .. versionadded:: 2.3
+        This method was added in 2.3
 
 .. php:staticmethod:: inList(string $check, array $list)
 

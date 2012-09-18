@@ -168,6 +168,11 @@ Testing
 Utility
 =======
 
+CakeNumber
+----------
+
+- :php:meth:`CakeNumber::fromReadableSize()` was added.
+
 Folder
 ------
 
@@ -195,3 +200,7 @@ Security
   was added.  See the :php:class:`Security::hash()` documentation for more
   information on how to use bcrypt.
 
+Validation
+----------
+
+- :php:meth:`Validation::fileSize()` was added.

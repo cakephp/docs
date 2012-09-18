@@ -199,7 +199,17 @@ automatically echo the output into the view.
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::toPercentage(45.691873645);
 
-.. php:method:: toReadableSize(string $data_size)
+.. php:method:: fromReadableSize(string $size, $default)
+
+    :param string $size: The formatted human readable value.
+
+    This method unformats a number from a human readable byte size
+    to an integer number of bytes.
+
+    .. versionadded:: 2.3
+        This method was added in 2.3
+
+.. php:method:: toReadableSize(string $dataSize)
 
     :param string $data_size: The number of bytes to make readable. 
 
