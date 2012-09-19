@@ -34,9 +34,8 @@ also access it in Components by using the controller reference. Some of the duti
 Accessing request parameters
 ============================
 
-CakeRequest exposes several interfaces for accessing request parameters. The first
-is as as object properties, the second is array indexes, and the
-third is through ``$this->request->params``::
+CakeRequest exposes several interfaces for accessing request parameters. The first is as object
+properties, the second is array indexes, and the third is through ``$this->request->params``::
 
     <?php
     $this->request->controller;
