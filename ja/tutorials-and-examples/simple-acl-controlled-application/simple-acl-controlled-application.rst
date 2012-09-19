@@ -1,6 +1,12 @@
 ACLを制御するシンプルなアプリケーション
 #######################################
 
+.. note::
+
+    このチュートリアルは初心者向けではありません。もしCakePHPを始めたばかりなら、\
+    このチュートリアルに挑戦する前にまずはフレームワークの機能をひととおり体験しておくことをおすすめします。
+
+
 このチュートリアルでは :doc:`/core-libraries/components/authentication` と
 :doc:`/core-libraries/components/access-control-lists`
 を用いたシンプルなアプリケーションを作成します。
