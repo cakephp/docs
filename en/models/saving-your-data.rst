@@ -160,6 +160,9 @@ your are passing the primary key field into the data array::
 ================================================
 
 This method resets the model state for saving new information.
+It does not actually create a record in the database but prepares
+the model for the next save call to assert that on save
+a new record is inserted instead of updating an existing one.
 
 If the ``$data`` parameter (using the array format outlined above)
 is passed, the model instance will be ready to save with that data
