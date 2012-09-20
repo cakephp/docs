@@ -40,7 +40,7 @@ properties, the second is array indexes, and the third is through ``$this->reque
     <?php
     $this->request->controller;
     $this->request['controller'];
-    $this->request->params['controller']; // BC accesser, will be deprecated in future versions
+    $this->request->params['controller'];
 
 All of the above will both access the same value. Multiple ways of accessing the
 parameters was done to ease migration for existing applications. All
@@ -54,12 +54,12 @@ on the request object as well::
     // Passed arguments
     $this->request->pass;
     $this->request['pass'];
-    $this->request->params['pass']; // BC accesser, will be deprecated in future versions
+    $this->request->params['pass'];
 
     // named parameters
     $this->request->named;
     $this->request['named'];
-    $this->request->params['named']; // BC accesser, will be deprecated in future versions
+    $this->request->params['named'];
 
 Will all provide you access to the passed arguments and named parameters. There
 are several important/useful parameters that CakePHP uses internally, these
