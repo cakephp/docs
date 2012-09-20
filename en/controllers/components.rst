@@ -242,10 +242,6 @@ way you include them in controllers - using the ``$components`` var::
     App::uses('Component', 'Controller');
     class ExistingComponent extends Component {
 
-        public function initialize(Controller $controller) {
-            $this->Parent->bar();
-        }
-
         public function foo() {
             // ...
         }
