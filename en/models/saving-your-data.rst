@@ -145,7 +145,7 @@ Otherwise a new record is created::
 
 .. tip::
 
-    When calling save in a loop, don't forget to call ``create()``
+    When calling save in a loop, don't forget to call ``create()``.
 
 
 If you want to update a value, rather than create a new one, make sure
@@ -170,6 +170,11 @@ not initialize fields from the model schema that are not already
 set, it will only reset fields that have already been set, and
 leave the rest unset. Use this to avoid updating fields in the
 database that were already set.
+
+.. tip::
+
+    If you want to insert a new row instead of updating an existing one you should always call create() first.
+    This avoids conflicts with possible prior save calls in callbacks or other places.
 
 :php:meth:`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
 ======================================================================================
@@ -387,7 +392,7 @@ And save this data with::
     $Article->saveAssociated($data, array('deep' => true));
 
 .. versionchanged:: 2.1
-    ``Model::saveAll()`` and friends now support passing the `fieldList` for multiple models. 
+    ``Model::saveAll()`` and friends now support passing the `fieldList` for multiple models.
 
 Example of using ``fieldList`` with multiple models::
 
@@ -680,7 +685,7 @@ passed to ``save()`` for the Tag model is shown below::
             (
                 [id] => 42
             )
-        [Tag] => Array 
+        [Tag] => Array
             (
                 [name] => Italian
             )
