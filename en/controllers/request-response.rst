@@ -757,6 +757,11 @@ CakeResponse API
     the set headers as well as the body. This is done automatically at the
     end of each request by :php:class:`Dispatcher`
 
+.. php:method:: file($path, $options = array())
+
+    Allows you to set a file for display or download
+
+    .. versionadded:: 2.3
 
 
 .. meta::
