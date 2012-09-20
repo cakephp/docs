@@ -11,6 +11,10 @@ PHP Version Support
 
 CakePHP 3.x supports PHP Version 5.4.3 and above.
 
+Requirements
+============
+
+CakePHP 3.x requires the mbstring extension.
 
 Routing
 =======
@@ -111,3 +115,14 @@ Object
 
     - ``options[url]`` is now ``options[query]``.
     - ``options[data]`` is now ``options[post]``.
+
+I18n
+====
+
+- The methods methods below has been moved:
+
+  - From ``Cake\I18n\Multibyte::utf8()`` to ``Cake\Utility\String::utf8()``
+  - From ``Cake\I18n\Multibyte::ascii()`` to ``Cake\Utility\String::ascii()``
+  - From ``Cake\I18n\Multibyte::checkMultibyte()`` to ``Cake\Utility\String::isMultibyte()``
+
+- Once the mbstring extension is required, the ``Multibyte`` class was removed.
