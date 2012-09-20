@@ -143,7 +143,7 @@ of the route::
     <?php
     Router::connect(
         '/government',
-        array('controller' => 'products', 'action' => 'display', 5)
+        array('controller' => 'pages', 'action' => 'display', 5)
     );
 
 This example shows how you can use the second parameter of
