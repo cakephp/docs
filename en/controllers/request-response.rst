@@ -34,14 +34,13 @@ also access it in Components by using the controller reference. Some of the duti
 Accessing request parameters
 ============================
 
-CakeRequest exposes several interfaces for accessing request parameters.  The first
-is as array indexes, the second is through ``$this->request->params``, and the
-third is as object properties::
+CakeRequest exposes several interfaces for accessing request parameters. The first is as object
+properties, the second is array indexes, and the third is through ``$this->request->params``::
 
     <?php
+    $this->request->controller;
     $this->request['controller'];
     $this->request->params['controller'];
-    $this->request->controller;
 
 All of the above will both access the same value. Multiple ways of accessing the
 parameters was done to ease migration for existing applications. All
@@ -53,13 +52,13 @@ on the request object as well::
 
     <?php
     // Passed arguments
-    $this->request['pass'];
     $this->request->pass;
+    $this->request['pass'];
     $this->request->params['pass'];
 
     // named parameters
-    $this->request['named'];
     $this->request->named;
+    $this->request['named'];
     $this->request->params['named'];
 
 Will all provide you access to the passed arguments and named parameters. There
@@ -86,7 +85,15 @@ Querystring parameters can be read from using :php:attr:`CakeRequest::$query`::
     $this->request->query['page'];
 
     // You can also access it via array access
-    $this->request['url']['page'];
+    $this->request['url']['page']; // BC accesser, will be deprecated in future versions
+
+You can either directly access the query property, or you can use
+:php:meth:`CakeRequest::query()` to read the url query array in an error free manner.
+Any keys that do not exist will return ``null``::
+
+    <?php
+    $foo = $this->request->query('value_that_does_not_exist');
+    // $foo === null
 
 Accessing POST data
 ===================
@@ -308,6 +315,14 @@ CakeRequest API
 
         // You can also read out data.
         $value = $this->request->data('Post.title');
+
+.. php:method:: query($key)
+
+    Provides dot notation access to url query data::
+
+        <?php
+        // url is /posts/index?page=1&sort=title
+        $value = $this->request->query('page');
 
 .. php:method:: is($check)
 
