@@ -86,6 +86,8 @@ Model
 
 - Support for the biginteger type was added to all core datasources, and
   fixtures.
+- Support for ``FULLTEXT`` indexes was added for the MySQL driver.
+
 
 Model
 -----
