@@ -447,28 +447,33 @@ Usually you'll want to map additional content types in your controller's
 ``beforeFilter`` callback, so you can leverage the automatic view switching
 features of :php:class:`RequestHandlerComponent` if you are using it.
 
-Sending attachments
+.. _cake-response-file:
+
+Sending files
 ===================
 
-There are times when you want to send Controller responses as files for
-download.  You can either accomplish this using :doc:`/views/media-view`
-or by using the features of ``CakeResponse``.
-:php:meth:`CakeResponse::download()` allows you to send the response as file for
-download::
+There are times when you want to send files as responses for your requests.
+Prior to version 2.3 you could use :doc:`/views/media-view` to accomplish that.
+As of 2.3 MediaView is deprecated and you can use :php:meth:`CakeResponse::file()`
+to send a file as response.
 
     <?php
     public function sendFile($id) {
-        $this->autoRender = false;
-
         $file = $this->Attachment->getFile($id);
-        $this->response->type($file['type']);
-        $this->response->download($file['name']);
-        $this->response->body($file['content']);
+        $this->response->file($file['path']);
     }
 
-The above shows how you could use CakeResponse to generate a file download
-response without using :php:class:`MediaView`.  In general you will want to use
-MediaView as it provides a few additional features above what CakeResponse does.
+As shown in above example as expected you have to pass the file path to the method.
+Cake will send proper content type header if it's a known file type listed in
+`CakeReponse::$_mimeTypes`. You can add new types prior to calling :php:meth:`CakeResponse::file()`
+by using the :php:meth:`CakeResponse::type()` method.
+
+If you want you can also force a file to be downloaded instead of being displayed in
+the browser by specifying the options.
+
+    <?php
+    $this->response->file($file['path'], array('download' => true, 'name' => 'foo'));
+
 
 Setting headers
 ===============
@@ -596,7 +601,8 @@ no longer considered fresh. This header can be set using the
 This method also accepts a DateTime or any string that can be parsed by the
 DateTime class.
 
-
+.. deprecated:: 2.3
+   Use `CakeResponse::file()` instead.
 The Etag header
 ---------------
 

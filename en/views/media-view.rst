@@ -3,6 +3,9 @@ Media Views
 
 .. php:class:: MediaView
 
+.. deprecated:: 2.3
+   Use :ref:`cake-response-file` instead.
+   
 Media views allow you to send binary files to the user. For example, you may
 wish to have a directory of files outside of the webroot to prevent users from
 direct linking them. You can use the Media view to pull the file from a special
