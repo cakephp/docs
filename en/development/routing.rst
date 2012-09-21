@@ -249,6 +249,16 @@ in your controller.  For example, to map all urls to actions of the
     <?php
     Router::connect('/:action', array('controller' => 'home'));
 
+If you would like to provide a case insensitive url, you can use regular 
+expression inline modifiers::
+
+    <?php
+    Router::connect(
+        '/:userShortcut', 
+        array('controller' => 'teachers', 'action' => 'profile', 1),
+        array('userShortcut' => '(?i:principal)')
+    );
+
 One more example, and you'll be a routing pro::
 
     <?php
