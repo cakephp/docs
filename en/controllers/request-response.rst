@@ -455,7 +455,7 @@ Sending files
 There are times when you want to send files as responses for your requests.
 Prior to version 2.3 you could use :doc:`/views/media-view` to accomplish that.
 As of 2.3 MediaView is deprecated and you can use :php:meth:`CakeResponse::file()`
-to send a file as response.
+to send a file as response::
 
     <?php
     public function sendFile($id) {
@@ -469,7 +469,7 @@ Cake will send proper content type header if it's a known file type listed in
 by using the :php:meth:`CakeResponse::type()` method.
 
 If you want you can also force a file to be downloaded instead of being displayed in
-the browser by specifying the options.
+the browser by specifying the options::
 
     <?php
     $this->response->file($file['path'], array('download' => true, 'name' => 'foo'));
