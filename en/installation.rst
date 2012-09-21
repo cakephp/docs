@@ -14,6 +14,11 @@ Requirements
    by no means required.
 -  PHP 5.2.8 or greater.
 
+.. note::
+
+    From CakePHP 3.0, PHP 5.4.3 or greater and mbstring exntesion are
+    required.
+
 Technically a database engine isn't required, but we imagine that
 most applications will utilize one. CakePHP supports a variety of
 database storage engines:
