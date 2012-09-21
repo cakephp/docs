@@ -16,7 +16,7 @@ Requirements
 
 .. note::
 
-    From CakePHP 3.0, PHP 5.4.3 or greater and mbstring exntesion are
+    From CakePHP 3.0, PHP 5.4.3 or greater and mbstring extension are
     required.
 
 Technically a database engine isn't required, but we imagine that
