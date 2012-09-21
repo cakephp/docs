@@ -468,6 +468,10 @@ stored in $this->data member variable::
     Your own validation methods must have ``public`` visibility. Validation
     methods that are ``protected`` and ``private`` are not supported.
 
+The method should return ``true`` if the value is valid. If the validation
+faled, return ``false``. The other valid return value are strings which will
+be shown as the error message. Returning a string means the validation failed
+
 
 Dynamically change validation rules
 ===================================
