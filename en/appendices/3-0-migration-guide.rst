@@ -119,7 +119,7 @@ Object
 I18n
 ====
 
-- The methods methods below has been moved:
+- The methods below has been moved:
 
   - From ``Cake\I18n\Multibyte::utf8()`` to ``Cake\Utility\String::utf8()``
   - From ``Cake\I18n\Multibyte::ascii()`` to ``Cake\Utility\String::ascii()``
