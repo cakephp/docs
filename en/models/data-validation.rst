@@ -469,7 +469,7 @@ stored in $this->data member variable::
     methods that are ``protected`` and ``private`` are not supported.
 
 The method should return ``true`` if the value is valid. If the validation
-faled, return ``false``. The other valid return value are strings which will
+failed, return ``false``. The other valid return value are strings which will
 be shown as the error message. Returning a string means the validation failed.
 The string will overwrite the message set in the $validate array and be shown
 in the view's form as the reason why the field was not valid.
