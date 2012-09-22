@@ -85,7 +85,7 @@ Querystring parameters can be read from using :php:attr:`CakeRequest::$query`::
     $this->request->query['page'];
 
     // You can also access it via array access
-    $this->request['url']['page']; // BC accesser, will be deprecated in future versions
+    $this->request['url']['page']; // BC accessor, will be deprecated in future versions
 
 You can either directly access the query property, or you can use
 :php:meth:`CakeRequest::query()` to read the url query array in an error free manner.
@@ -603,6 +603,7 @@ DateTime class.
 
 .. deprecated:: 2.3
    Use `CakeResponse::file()` instead.
+
 The Etag header
 ---------------
 

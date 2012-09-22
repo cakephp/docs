@@ -500,6 +500,7 @@ Autres Méthodes utiles
     rapide basé sur le modèle Commande. Ensuite une action du contrôleur 
     peut utiliser les données postées par ce formulaire pour construire 
     automatiquement les conditions de la recherche::
+
         <?php
         public function index() {
             $conditions = $this->postConditions($this->request->data);

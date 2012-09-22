@@ -254,7 +254,7 @@ une fois. Les options suivantes peuvent être utilisées:
   transactions.
 *  ``fieldList``: Equivalent au paramètre $fieldList dans Model::save()
 *  ``deep``: (since 2.1) Si défini à true, les données associées sont aussi 
-  sauvegardées, regardez aussi saveAssociated
+  sauvegardées, regardez aussi saveAssociated.
 
 Pour sauvegarder de multiples enregistrements d'un unique modèle, $data 
 a besoin d'être un tableau d'enregistrements indexé numériquement comme 

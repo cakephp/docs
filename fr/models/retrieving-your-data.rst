@@ -147,7 +147,7 @@ simples (code du contrôleur)::
     de la table users, il n'y aura pas de condition appliquée à la 
     recherche puisqu'aucune n'a été passée.
 
-Les résultats d'un appel à ``find('all')`` seront de la forme suivante :
+Les résultats d'un appel à ``find('all')`` seront de la forme suivante::
 
     Array
     (

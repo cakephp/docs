@@ -29,7 +29,7 @@ Dans l'exemple ci-dessus, le tableau ``$validate`` est ajouté au modèle
 Utilisateur, mais ce tableau ne contient pas de règles de validation. 
 En supposant que la table "utilisateurs" ait les champs "login", 
 "mot_de_passe", "email" et "date_de_naissance", l'exemple ci-dessous 
-montre quelques règles simples de validation qui s'appliquent à ces champs :
+montre quelques règles simples de validation qui s'appliquent à ces champs::
 
     <?php
     class Utilisateur extends AppModel {
@@ -597,17 +597,17 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     de ce paramètre peut être l'une des suivantes :
 
     -  ‘dmy’, par exemple : 27-12-2006 ou 27-12-06 (les séparateurs peuvent 
-    être l'espace, le point, le tiret, le slash)
+       être l'espace, le point, le tiret, le slash)
     -  ‘mdy’, par exemple : 12-27-2006 ou 12-27-06 (les séparateurs peuvent 
-    être l'espace, le point, le tiret, le slash)
+       être l'espace, le point, le tiret, le slash)
     -  ‘ymd’, par exemple : 2006-12-27 ou 06-12-27 (les séparateurs peuvent 
-    être l'espace, le point, le tiret, le slash)
+       être l'espace, le point, le tiret, le slash)
     -  ‘dMy’, par exemple : 27 Décembre 2006 ou 27 Déc 2006
     -  ‘Mdy’, par exemple : Décembre 27, 2006 ou Déc 27, 2006 (la virgule 
-    est optionnelle)
+       est optionnelle)
     -  ‘My’, par exemple : (Décembre 2006 ou Déc 2006)
     -  ‘my’, par exemple : 12/2006 ou 12/06 (les séparateurs peuvent être 
-    l'espace, le point, le tiret, le slash)
+       l'espace, le point, le tiret, le slash)
 
     Si aucune clé n'est soumise, la clé par défaut 'ymd' sera utilisée::
 

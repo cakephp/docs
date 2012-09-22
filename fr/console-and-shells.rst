@@ -356,8 +356,7 @@ votre sortie.
 
 ConsoleOutput remplacera ces tags avec la bonne séquence de code ansi, ou 
 supprime les tags si vous êtes sur une console qui ne supporte pas les 
-codes ansi, 
-  these tags with the correct ansi code sequence, or 
+codes ansi, these tags with the correct ansi code sequence, or 
 remove the tags if you are on a console that doesn't support ansi codes. There 
 are several built in styles, and you can create more.  The built in ones are
 

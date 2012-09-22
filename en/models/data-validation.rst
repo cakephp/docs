@@ -918,7 +918,7 @@ with usage examples.
 .. php:staticmethod:: fileSize($check, $operator = null, $size = null)
 
     This rule allows you to check filesizes.  You can use ``$operator`` to
-    decide the type of comparison you want to use.  All the operators suppored
+    decide the type of comparison you want to use.  All the operators supported
     by :php:func:`~Validation::comparison()` are supported here as well.  This
     method will automatically handle array values from ``$_FILES`` by reading
     from the ``tmp_name`` key if ``$check`` is an array an contains that key::

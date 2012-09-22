@@ -171,7 +171,7 @@ Relation                   Schéma
 ========================== =========================
 Pomme hasOne Banane        bananes.pomme\_id
 -------------------------- -------------------------
-User hasOne Profil  profiles.user\_id 
+User hasOne Profil         profiles.user\_id 
 -------------------------- -------------------------
 Docteur hasOne Maitre      maitres.docteur\_id
 ========================== =========================
@@ -284,7 +284,7 @@ Relation                      Schéma
 ============================= ==================
 Banane belongsTo Pomme        bananes.pomme\_id
 ----------------------------- ------------------
-Profil belongsTo User  profiles.user\_id
+Profil belongsTo User         profiles.user\_id
 ----------------------------- ------------------
 Maitres belongsTo Docteur     maitres.docteur\_id
 ============================= ==================

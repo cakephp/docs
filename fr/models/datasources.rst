@@ -67,11 +67,11 @@ elle-même, plutôt que dans le modèle.
 Et c'est à peu près tout ce qu'il y a dire ici. En couplant cette 
 source de données à un modèle, vous êtes alors en mesure d'utiliser 
 ``Model::find()/save()/delete()``, comme vous le feriez normalement ;
- les données et/ou paramètres appropriés, utilisés pour appeler ces 
- méthodes, seront passés à la source de données elle-même, dans laquelle 
- vous pouvez décider d'implémenter toutes les fonctionnalités dont vous 
- avez besoin (par exemple les options de Model::find comme le parsing 
- ``'conditions'``, ``'limit'`` ou même vos paramètres personnalisés).
+les données et/ou paramètres appropriés, utilisés pour appeler ces 
+méthodes, seront passés à la source de données elle-même, dans laquelle 
+vous pouvez décider d'implémenter toutes les fonctionnalités dont vous 
+avez besoin (par exemple les options de Model::find comme le parsing 
+``'conditions'``, ``'limit'`` ou même vos paramètres personnalisés).
 
 Un Exemple
 ==========
