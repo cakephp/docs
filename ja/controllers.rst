@@ -56,7 +56,7 @@ AppControllerで ``$helpers`` 変数を定義したら、デフォルトでHtml�
 また、子コントローラのコールバック中でAppControllerのコールバックを呼び出すのは、このようにするのがベストです。::
 
     <?php
-    function beforeFilter() {
+    public function beforeFilter() {
         parent::beforeFilter();
     }
  
@@ -66,7 +66,7 @@ AppControllerで ``$helpers`` 変数を定義したら、デフォルトでHtml�
 CakePHPアプリケーションにリクエストがあった時、CakePHPの :php:class:`Router` クラスと :php:class:`Dispatcher` クラスは適切なコントローラを見つけて、それを生成するために :ref:`routes-configuration` を使います。
 リクエストデータはリクエストオブジェクトの中にカプセル化されています。
 CakePHPは、すべての重要なリクエスト情報を ``$this->request`` プロパティにセットします。
-CakePHPのリクエストオブジェクトについてのより詳しい情報は :doc:`/controllers/request-response` セクションを参照してください。
+CakePHPのリクエストオブジェクトについてのより詳しい情報は :ref:`cake-request` セクションを参照してください。
 
 コントローラのアクション
 ========================
@@ -79,19 +79,18 @@ Online Bakeryのサンプルに戻ってみてみると、RecipesControllerは `
 このコントローラは ``/app/Controller/RecipesController.php`` にあり、次のようなコードになっています。::
 
         <?php
-        
         # /app/Controller/RecipesController.php
         
         class RecipesController extends AppController {
-            function view($id) {
+            public function view($id) {
                 //action logic goes here..
             }
         
-            function share($customer_id, $recipe_id) {
+            public function share($customerId, $recipeId) {
                 //action logic goes here..
             }
         
-            function search($query) {
+            public function search($query) {
                 //action logic goes here..
             }
         }
@@ -113,7 +112,7 @@ CakePHPの規約があるので、手動でビューを描画したり生成し�
 
     <?php
     class RecipesController extends AppController {
-        function popular() {
+        public function popular() {
             $popular = $this->Recipe->popular();
             if (!empty($this->request->params['requested'])) {
                 return $popular;
@@ -227,7 +226,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
         <?php
         class RecipesController extends AppController {
         // ...
-            function search() {
+            public function search() {
                 // /View/Recipes/search.ctpのビューが描画されます
                 $this->render();
             }
@@ -256,7 +255,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 
     <?php
     class PostsController extends AppController {
-        function my_action() {
+        public function my_action() {
             $this->render('custom_file');
         }
     }
@@ -273,7 +272,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
     ユーザーが正常に注文を出した時、領収画面にリダイレクトさせるとすると::
 
         <?php
-        function placeOrder() {
+        public function place_order() {
             // 注文終了のためのロジック
             if ($success) {
                 $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));
@@ -359,7 +358,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 
         <?php
         class UserController extends AppController {
-            function delete($id) {
+            public function delete($id) {
                 // delete code goes here, and then...
                 if ($this->referer() != '/') {
                     $this->redirect($this->referer());
@@ -373,7 +372,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 
         <?php
         class UserController extends AppController {
-            function delete($id) {
+            public function delete($id) {
                 // delete code goes here, and then...
                 $this->redirect($this->referer(array('action' => 'index')));
             }
@@ -405,7 +404,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
     そうすると、コントローラのアクションはそのフォームからポストされたデータをfind条件を作るために使うことができます。::
 
         <?php
-        function index() {
+        public function index() {
             $conditions = $this->postConditions($this->request->data);
             $orders = $this->Order->find('all', compact('conditions'));
             $this->set('orders', $orders);
@@ -472,7 +471,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
         <?php
         // Controller/CommentsController.php
         class CommentsController extends AppController {
-            function latest() {
+            public function latest() {
                 if (empty($this->request->params['requested'])) {
                     throw new ForbiddenException();
                 }

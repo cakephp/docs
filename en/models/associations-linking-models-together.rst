@@ -71,9 +71,15 @@ appropriate to have::
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
-            'MyRecipe' => array('className' => 'Recipe'),
+            'MyRecipe' => array(
+                'className' => 'Recipe',
+            )
         );
-        public $hasAndBelongsToMany => array('Member' => array('className' => 'User'));
+        public $hasAndBelongsToMany => array(
+            'MemberOf' => array(
+                'className' => 'Group',
+            )
+        );
     }
     
     class Group extends AppModel {
@@ -83,18 +89,28 @@ appropriate to have::
                 'className'  => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array('MemberOf' => array('className' => 'Group'));
+        public $hasAndBelongsToMany => array(
+            'Member' => array(
+                'className' => 'User',
+            )
+        );
     }
 
-but the following will not work well in all circumstances:::
+but the following will not work well in all circumstances::
 
     <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
-            'MyRecipe' => 'Recipe',
+            'MyRecipe' => array(
+                'className' => 'Recipe',
+            )
         );
-        public $hasAndBelongsToMany => array('Member' => 'User');
+        public $hasAndBelongsToMany => array(
+            'Member' => array(
+                'className' => 'Group',
+            )
+        );
     }
     
     class Group extends AppModel {
@@ -104,7 +120,11 @@ but the following will not work well in all circumstances:::
                 'className'  => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array('Member' => 'Group');
+        public $hasAndBelongsToMany => array(
+            'Member' => array(
+                'className' => 'User',
+            )
+        );
     }
 
 because here we have the alias 'Member' referring to both the User
@@ -496,7 +516,7 @@ by a underscore and the word "count"::
     my_model_count
 
 Let's say you have a model called ``ImageComment`` and a model
-called ``Image``, you would add a new INT-field to the ``image``
+called ``Image``, you would add a new INT-field to the ``images``
 table and name it ``image_comment_count``.
 
 Here are some more examples:
@@ -516,14 +536,16 @@ counter-cache in your association by adding a ``counterCache`` key
 and set the value to ``true``::
 
     <?php
-    class Image extends AppModel {
+    class ImageComment extends AppModel {
         public $belongsTo = array(
-            'ImageAlbum' => array('counterCache' => true)
+            'Image' => array(
+                'counterCache' => true,
+            )
         );
     }
 
-From now on, every time you add or remove a ``Image`` associated to
-``ImageAlbum``, the number within ``image_count`` is adjusted
+From now on, every time you add or remove a ``ImageComment`` associated to
+``Image``, the number within ``image_comment_count`` is adjusted
 automatically.
 
 You can also specify ``counterScope``. It allows you to specify a
@@ -533,12 +555,13 @@ to, depending on how you look at it) the counter value.
 Using our Image model example, we can specify it like so::
 
     <?php
-    class Image extends AppModel {
+    class ImageComment extends AppModel {
         public $belongsTo = array(
-            'ImageAlbum' => array(
+            'Image' => array(
                 'counterCache' => true,
                 'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1
-        ));
+            )
+        );
     }
 
 hasAndBelongsToMany (HABTM)

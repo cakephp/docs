@@ -17,7 +17,7 @@ would be::
 
     <?php
     public $virtualFields = array(
-        'full_name' => 'CONCAT(User.first_name, " ", User.last_name)'
+        'name' => 'CONCAT(User.first_name, " ", User.last_name)'
     );
 
 And with PostgreSQL::
@@ -36,7 +36,7 @@ It is not always useful to have **User.first\_name** fully
 qualified. If you do not follow the convention (i.e. you have
 multiple relations to other tables) this would result in an error.
 In this case it may be better to just use
-``first_name || \'\' || last_name`` without the Model
+``first_name || \' \' || last_name`` without the Model
 Name.
 
 Using virtual fields
@@ -193,7 +193,7 @@ A common workaround for this implementation issue is to copy
 need to access them::
 
     <?php
-    $this->virtualFields['full_name'] = $this->Author->virtualFields['full_name'];
+    $this->virtualFields['name'] = $this->Author->virtualFields['name'];
 
 or::
 

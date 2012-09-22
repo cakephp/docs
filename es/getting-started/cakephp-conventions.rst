@@ -6,7 +6,7 @@ literal. Queremos expresar el uso por defecto de determinados acuerdos que
 nos permiten establecer un marco común de trabajo).
 
 Preferimos el uso de convenciones sobre la configuración. Aunque ocuparás
-algo de tu tiempo aprendiendo las convenciones usadas en CakePHP, ahorarás
+algo de tu tiempo aprendiendo las convenciones usadas en CakePHP, ahorrarás
 mucho más en el camino. Cuando usas las convenciones, aprovechas funcionalidad
 gratuita y te liberas de la pesadilla de mantener los ficheros de configuración.
 Trabajar con convenciones también estandariza el proceso de despliegue de tu

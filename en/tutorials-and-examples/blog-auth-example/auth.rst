@@ -127,6 +127,7 @@ with CakePHP::
             $this->Session->setFlash(__('User was not deleted'));
             $this->redirect(array('action' => 'index'));
         }
+    }
 
 In the same way we created the views for our blog posts or by using the code
 generation tool, we implement the views. For the purpose of this tutorial, we
@@ -224,7 +225,7 @@ and add the following::
 
     // ...
 
-    public function beforeSave() {
+    public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {
             $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
         }

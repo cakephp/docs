@@ -300,6 +300,12 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
     The ``$options`` parameter allows you to customize how ``input()`` works,
     and finely control what is generated.
 
+    The wrapping div will have a ``required`` classname appended if the
+    validation rules for the Model's field do not specify ``allowEmpty =>
+    true``. One limitation of this behavior is the field's model must have
+    been loaded during this request. Or be directly associated to the
+    model supplied to :php:meth:`~FormHelper::create()`.
+
     For example, let’s assume that your User model includes fields for a
     username (varchar), password (varchar), approved (datetime) and
     quote (text). You can use the input() method of the FormHelper to
@@ -581,7 +587,9 @@ html attributes. The following will cover the options specific to
 
     <?php
     $this->Form->input('Model.field', array(
-        'error' => array('escape' => false)
+        'error' => array(
+            'attributes' => array('escape' => false)
+        )
     ));
 
   To override the model error messages use an array with
@@ -1189,6 +1197,38 @@ Form Element-Specific Methods
            </div>
         </div>
 
+    * ``$options['disabled']`` When creating checkboxes, this option can be set
+      to disable all or some checkboxes. To disable all checkboxes set disabled
+      to ``true``::
+
+        <?php
+        $options = array(
+            'Value 1' => 'Label 1',
+            'Value 2' => 'Label 2'
+        );
+        echo $this->Form->select('Model.field', $options, array(
+            'multiple' => 'checkbox',
+            'disabled' => array('Value 1')
+        ));
+
+      Output::
+
+        <div class="input select">
+           <label for="ModelField">Field</label>
+           <input name="data[Model][field]" value="" id="ModelField" type="hidden">
+           <div class="checkbox">
+              <input name="data[Model][field][]" disabled="disabled" value="Value 1" id="ModelField1" type="checkbox">
+              <label for="ModelField1">Label 1</label>
+           </div>
+           <div class="checkbox">
+              <input name="data[Model][field][]" value="Value 2" id="ModelField2" type="checkbox">
+              <label for="ModelField2">Label 2</label>
+           </div>
+        </div>
+
+    .. versionchanged:: 2.3
+        Support for arrays in ``$options['disabled']`` was added in 2.3.
+
 .. php:method:: file(string $fieldName, array $options)
 
     To add a file upload field to a form, you must first make sure that
@@ -1352,6 +1392,10 @@ Creating buttons and submit elements
     This method creates a ``<form>`` element. So do not use this method inside
     an existing form. Instead you should add a submit button using
     :php:meth:`FormHelper::submit()`
+
+
+    .. versionchanged:: 2.3
+        The ``method`` option was added.
 
 Creating date and time inputs
 =============================

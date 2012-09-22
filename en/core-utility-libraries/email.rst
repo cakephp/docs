@@ -119,6 +119,26 @@ at prefix in the host and configure the port value accordingly.  Example::
     To use this feature, you will need to have the SSL configured in your PHP
     install.
 
+As of 2.3.0 you can also enable TLS SMTP using the ``tls`` option::
+
+    <?php
+    class EmailConfig {
+        public $gmail = array(
+            'host' => 'smtp.gmail.com',
+            'port' => 465,
+            'username' => 'my@gmail.com',
+            'password' => 'secret',
+            'transport' => 'Smtp',
+            'tls' => true
+        );
+    }
+
+The above configuration would enable TLS communication for email messages.
+
+.. versionadded: 2.3
+    Support for TLS delivery was added in 2.3
+
+
 .. _email-configurations:
 
 Configurations
@@ -263,6 +283,8 @@ the Blog plugin.  The template file needs to be created in the following path:
 Sending attachments
 -------------------
 
+.. php:method:: attachments($attachments = null)
+
 You can attach files to email messages as well.  There are a few
 different formats depending on what kind of files you have, and how
 you want the filenames to appear in the recipient's mail client:
@@ -290,8 +312,15 @@ you want the filenames to appear in the recipient's mail client:
    Content ID (when set the content ID the attachment is transformed to inline).
    The mimetype and contentId are optional in this form.
 
-  4.1. When you are using the ``contentId``, you can use the file in the html
-  body like ``<img src="cid:my-content-id">``.
+   4.1. When you are using the ``contentId``, you can use the file in the html
+   body like ``<img src="cid:my-content-id">``.
+
+   4.2. You can use the ``contentDisposition`` option to disable the
+   ``Content-Disposition`` header for an attachment.  This is useful when
+   sending ical invites to clients using outlook.
+
+.. versionchanged:: 2.3
+    The ``contentDisposition`` option was added in 2.3
 
 Using transports
 ----------------

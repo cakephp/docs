@@ -28,19 +28,16 @@ AppController, AppHelper, AppModel および AppShell
     }
 
     // app/Model/AppModel.php
-    <?php
     App::uses('Model', 'Model');
     class AppModel extends Model {
     }
 
     // app/Controller/AppController.php
-    <?php
     App::uses('Controller', 'Controller');
     class AppController extends Controller {
     }
 
     // app/Console/Command/AppShell.php
-    <?php
     App::uses('Shell', 'Console');
     class AppShell extends Shell {
     }
@@ -324,7 +321,7 @@ Controller
         either.
 
 
-- :php:attr:`Controller::$uses` はデフォルトが false ではなく ``true` に変更となりました。
+- :php:attr:`Controller::$uses` はデフォルトが false ではなく ``true`` に変更となりました。
   その他、この変更については値により少しの違いがありますが、ほとんどの場合はこれまでと同じ動きをします。
 
     - ``true`` を指定した場合、デフォルトのモデルを読み込み、AppController へマージします。

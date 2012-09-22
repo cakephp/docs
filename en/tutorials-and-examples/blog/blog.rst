@@ -13,19 +13,19 @@ list, add, edit, and delete blog posts.
 
 Here's what you'll need:
 
-
 #. A running web server. We're going to assume you're using Apache,
    though the instructions for using other servers should be very
    similar. We might have to play a little with the server
    configuration, but most folks can get Cake up and running without
-   any configuration at all.
+   any configuration at all. Make sure you have PHP 5.2.8 or greater.
 #. A database server. We're going to be using MySQL server in this
    tutorial. You'll need to know enough about SQL in order to create a
-   database: Cake will be taking the reins from there.
+   database: Cake will be taking the reins from there.  Since we're using MySQL,
+   also make sure that you have ``pdo_mysql`` enabled in PHP.
 #. Basic PHP knowledge. The more object-oriented programming you've
    done, the better: but fear not if you're a procedural fan.
 #. Finally, you'll need a basic knowledge of the MVC programming
-   pattern. A quick overview can be found in :doc:`/cakephp-overview/understanding-model-view-controller`. 
+   pattern. A quick overview can be found in :doc:`/cakephp-overview/understanding-model-view-controller`.
    Don't worry, it's only a half a page or so.
 
 Let's get started!
@@ -118,9 +118,7 @@ the same directory, but name it ``database.php``.
 The config file should be pretty straightforward: just replace the
 values in the ``$default`` array with those that apply to your
 setup. A sample completed configuration array might look something
-like the following:
-
-::
+like the following::
 
     <?php
     public $default = array(
@@ -140,6 +138,11 @@ Once you've saved your new ``database.php`` file, you should be
 able to open your browser and see the Cake welcome page. It should
 also tell you that your database connection file was found, and
 that Cake can successfully connect to the database.
+
+.. note::
+
+    Remember that you'll need to have PDO, and pdo_mysql enabled in 
+    your php.ini.
 
 Optional Configuration
 ======================

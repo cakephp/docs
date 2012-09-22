@@ -145,10 +145,23 @@ normal additional first parameter of ``$model``::
         // method body
     }
 
-
 It's seldom you'll need to implement paginate() and paginateCount().  You should
 make sure  you can't achieve your goal with the core model methods, or a custom
-finder.
+finder. To paginate with a custom find type, you should set the ``0``'th
+element, or the ``findType`` key as of 2.3::
+
+    <?php
+    public $paginate = array(
+        'popular'
+    );
+
+Since the 0th index is difficult to manage, in 2.3 the ``findType`` option was
+added::
+
+    <?php
+    public $paginate = array(
+        'findType' => 'popular'
+    );
 
 The ``paginate()`` method should implement the following method signature.  To
 use your own method/logic override it in the model you wish to get the data

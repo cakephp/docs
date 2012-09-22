@@ -299,7 +299,6 @@ This is better explained with a practical example::
             'loginRule-1' => array(
                 'rule'    => 'alphaNumeric',
                 'message' => 'Only alphabets and numbers allowed',
-                'last'    => true
              ),
             'loginRule-2' => array(
                 'rule'    => array('minLength', 8),
@@ -312,16 +311,51 @@ The above example defines two rules for the login field:
 loginRule-1 and loginRule-2. As you can see, each rule is
 identified with an arbitrary name.
 
-By default CakePHP tries to validate a field using all the
-validation rules declared for it and returns the error message for
-the last failing rule. But if the key ``last`` is set to ``true``
-for a rule and it fails, then the error message for that rule is
-returned and further rules are not validated. So if you prefer to
-show the error message for the first failing rule then set
-``'last' => true`` for each rule.
-
 When using multiple rules per field the 'required' and 'allowEmpty'
 keys need to be used only once in the first rule.
+
+last
+-------
+
+In case of multiple rules per field by default if a particular rule
+fails error message for that rule is returned and the following rules
+for that field are not processed. If you want validation to continue
+in spite of a rule failing set key ``last`` to ``false`` for that rule. 
+
+In the following example even if "rule1" fails "rule2" will be processed
+and error messages for both failing rules will be returned if "rule2" also
+fails::
+
+    <?php
+    public $validate = array(
+        'login' => array(
+            'rule1' => array(
+                'rule'    => 'alphaNumeric',
+                'message' => 'Only alphabets and numbers allowed',
+                'last'    => false
+             ),
+            'rule2' => array(
+                'rule'    => array('minLength', 8),
+                'message' => 'Minimum length of 8 characters'
+            )
+        )
+    );
+
+When specifying validation rules in this array form its possible to avoid
+providing the ``message`` key. Consider this example::
+
+    <?php
+    public $validate = array(
+        'login' => array(
+            'Only alphabets and numbers allowed' => array(
+                'rule'    => 'alphaNumeric',
+             ),
+        )
+    );
+
+If the ``alphNumeric`` rules fails the array key for this rule 
+'Only alphabets and numbers allowed' will be returned as error message since
+the ``message`` key is not set.
 
 
 Custom Validation Rules
@@ -875,6 +909,24 @@ with usage examples.
             )
         );
 
+.. php:staticmethod:: fileSize($check, $operator = null, $size = null)
+
+    This rule allows you to check filesizes.  You can use ``$operator`` to
+    decide the type of comparison you want to use.  All the operators suppored
+    by :php:func:`~Validation::comparison()` are supported here as well.  This
+    method will automatically handle array values from ``$_FILES`` by reading
+    from the ``tmp_name`` key if ``$check`` is an array an contains that key::
+
+        <?php
+        public $validate = array(
+            'image' => array(
+                'rule' => array('filesize', '<=', '1MB'),
+                'message' => 'Image must be less than 1MB'
+            )
+        );
+
+    .. versionadded:: 2.3
+        This method was added in 2.3
 
 .. php:staticmethod:: inList(string $check, array $list)
 

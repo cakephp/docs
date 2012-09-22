@@ -193,6 +193,19 @@ want to conditionally show headings or other markup::
     </div>
     <?php endif; ?>
 
+As of 2.3.0 you can also provide a default value for a block should it not have
+any content.  This allows you to easily add placeholder content, for empty
+states.  You can provide a default value using the 2nd argument::
+
+    <?php
+    <div class="shopping-cart">
+        <h3>Your Cart</h3>
+        <?php echo $this->fetch('cart', 'Your cart is empty');
+    </div>
+
+.. versionchanged:: 2.3
+    The ``$default`` argument was added in 2.3.
+
 Using blocks for script and CSS files
 -------------------------------------
 

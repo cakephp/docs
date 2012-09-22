@@ -157,16 +157,16 @@ CakeRequestはまたアプリケーションのパスについての役立つ情
     <?php
     // environment detectorを追加する
     $this->request->addDetector('post', array('env' => 'REQUEST_METHOD', 'value' => 'POST'));
-   
+
     // pattern value detectorを追加する
     $this->request->addDetector('iphone', array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i'));
-   
+
     // option detectorを追加する
     $this->request->addDetector('internalIp', array(
         'env' => 'CLIENT_IP',
         'options' => array('192.168.0.101', '192.168.0.100')
     ));
-   
+
     // callback detectorを追加する。匿名関数か通常のコールバックが指定可能。
     $this->request->addDetector('awesome', array('callback' => function ($request) {
         return isset($request->awesome);
@@ -205,8 +205,8 @@ CakePHP2.0にどのように収まるのかを理解するために再考する�
 
 * ``$this->request->webroot`` はwebrootディレクトリを含みます。
 * ``$this->request->base`` は基本パスを含みます。
-* ``$this->request->here`` は現在のリクエストへの完全なアドレスを含みます。 
-* `` $this->request->query`` はクエリ文字列パラメータを含みます。
+* ``$this->request->here`` は現在のリクエストへの完全なアドレスを含みます。
+* ``$this->request->query`` はクエリ文字列パラメータを含みます。
 
 CakeRequest API
 ===============
@@ -239,7 +239,7 @@ CakeRequest API
 
     現在アクセスしているクライアントのIPアドレスを返します。
 
-.. php:method header()
+.. php:method:: header()
 
     リクエストで使われている``HTTP_*``ヘッダにアクセスできます。::
 
@@ -260,7 +260,7 @@ CakeRequest API
         // リクエストデータを修正し、フォームフィールドを生成できます。
         $this->request->data('Post.title', 'New post')
             ->data('Comment.1.author', 'Mark');
-           
+
         // データの取得もできます。
         $value = $this->request->data('Post.title');
 
@@ -280,7 +280,7 @@ CakeRequest API
 
         <?php
         $this->request->accepts();
- 
+
     あるタイプについて調べる::
 
         <?php
@@ -429,10 +429,12 @@ CakeResponseをどのように使えばよいかを示しています。
     <?php
     public function index() {
         //do something
-        $this->response->cache(time(), '+5 days');
+        $this->response->cache('-1 minute', '+5 days');
     }
 
-上記の例では、訪問者の体感スピード向上のため、クライアントにレスポンス結果を5日間キャッシュするように伝えています。
+上記の例では、訪問者の体感スピード向上のため、クライアントにレスポンス結果を5日間キャッシュするように伝えています。 ``cache()`` は\
+第一引数をLast-Modifiedヘッダの値に設定します。ExpiresヘッダとMax-ageヘッダは\
+第二引数の値をもとに設定されます。Cache-Controlヘッダにはpublicが設定されます。
 
 .. _cake-response-caching:
 

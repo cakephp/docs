@@ -13,7 +13,7 @@
 サポートするPHPバージョン
 =========================
 
-CakePHP 2.xはPHP 5.2.6以上をサポートします。
+CakePHP 2.xはPHP 5.2.8以上をサポートします。
 PHP4のサポートは止めることになります。
 いまだPHP4環境での案件で働いている開発者のために、PHP4の開発とサポートの継続期間のうちまで、CakePHP1.xは続けてPHP4をサポートします。
 
@@ -27,7 +27,7 @@ PHP5に移行するということは、全てのメソッドとプロパティ�
 
 CakePHP 2.0では、ファイルとフォルダの構造化をする方法を考えなおしました。
 PHP 5.3が名前空間のサポートをしていることから、このPHPバージョンを近い将来採用するのに、コードベースを準備することに決めました。
-従って、 http://groups.google.com/group/php-standards/web/psr-0-final-proposal を採用することにしました。
+従って、 https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md を採用することにしました。
 まずはじめに、ここ数年の後にCakePHP 1.3の内部構造を振り返ると、明確なファイル構成が無いことと、またディレクトリ構成が各々のファイルがどこにあるべきかを真に指し示していないことに気づきました。
 この変更に伴い、全体的なフレームワークのパフォーマンスの向上のための（ほぼ）自動的なクラス読み込みについて多少の実験を行うことができるでしょう
 
@@ -78,6 +78,10 @@ PHP 5.3が名前空間のサポートをしていることから、このPHPバ�
 * webroot
 * tmp
 
+htaccess (URL リライティング)
+===============================================
+``app/webroot/.htaccess`` の ``RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]`` の行を ``RewriteRule ^(.*)$ index.php [QSA,L]`` に置き換えてください。
+
 AppController / AppModel / AppHelper / AppShell
 ===============================================
 
@@ -98,7 +102,7 @@ __() (二つのアンダースコアでのショートカット関数)
     <?php
     echo __('My Message');
     
-としてください。この変更は全ての翻訳のショートカット関数を含みます:::
+としてください。この変更は全ての翻訳のショートカット関数を含みます::
 
     __()
     __n()
@@ -130,7 +134,7 @@ CakePHPの前バージョンでは、これらの値が環境によって変わ�
 Basics.php
 ==========
 
--  ``getMicrotime()は削除されました。
+-  ``getMicrotime()`` は削除されました。
    代わりにネイティブの ``microtime(true)`` を使用してください。
 -  ``e()`` は削除されました。
    ``echo`` を使用してください。
@@ -147,7 +151,7 @@ Basics.php
 -  ``params()`` は削除されました。
    これはCakePHP内で使われることはありませんでした。
 -  ``ife()`` は削除されました。
-    三項演算子を使ってください。
+   三項演算子を使ってください。
 -  ``uses()`` は削除されました。
    ``App::import()`` を使ってください。
 -  PHP4互換のための関数は削除されました。
@@ -433,9 +437,9 @@ CakePHP 1.3の :php:meth:`App::import()` との主な違いは、前者が実際
     // は次のようになる 
     App::uses('Xml', 'Utility');
 
-    App::import('Datasource', 'MongoDb.MongoDbSource')
+    App::import('Datasource', 'MongoDb.MongoDbSource');
     // は次のようになる 
-    App::uses('MongoDbSource', 'MongoDb.Model/Datasource')
+    App::uses('MongoDbSource', 'MongoDb.Model/Datasource');
 
 以前 ``App::import('Core', $class);`` を用いて読み込んでいたすべてのクラスは、正しいパッケージを参照する ``App::uses()`` を用いて読み込む必要があります。
 APIを見て新しいフォルダでクラスを探索するようにしてください。いくつか例を挙げます::
@@ -465,13 +469,13 @@ App::build() とコアのパス
 例::
 
     <?php
-    App::build(array('controllers' => array('/full/path/to/controllers'))) 
+    App::build(array('controllers' => array('/full/path/to/controllers')));
     // は次のようになる 
-    App::build(array('Controller' => array('/full/path/to/Controller')))
+    App::build(array('Controller' => array('/full/path/to/Controller')));
 
-    App::build(array('helpers' => array('/full/path/to/controllers'))) 
+    App::build(array('helpers' => array('/full/path/to/controllers')));
     // は次のようになる 
-    App::build(array('View/Helper' => array('/full/path/to/View/Helper')))
+    App::build(array('View/Helper' => array('/full/path/to/View/Helper')));
 
 CakeLog
 -------
@@ -744,11 +748,13 @@ Helperクラスは更に3つのprotectedな属性を持つようになりまし�
 
 Html・Formヘルパー、またその他でこれを使うには、次のように書けます::
 
+    <?php
     $this->Form->checkbox('field', array('checked' => true, 'value' => 'some_value'));
 
 他の便宜的方法は最小化される属性をキーではなくアイテムとして渡すことです。
 例を挙げます::
 
+    <?php
     $this->Form->checkbox('field', array('checked', 'value' => 'some_value'));
 
 ``checked`` が数値添字であることに注意してください。
@@ -958,7 +964,7 @@ PHPUnitによって全てのコマンドラインオプションがサポート�
 
     <?php
     class Post {
-        public $nonexistantProperty = array();
+        public $nonexistentProperty = array();
     }
 
 これらのどちらかのアプローチでnoticeエラーを回避できることでしょう。

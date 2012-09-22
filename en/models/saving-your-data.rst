@@ -30,7 +30,7 @@ model to save data to a database table::
             // If the form data can be validated and saved...
             if ($this->Recipe->save($this->request->data)) {
                 // Set a session flash message and redirect.
-                $this->Session->setFlash("Recipe Saved!");
+                $this->Session->setFlash('Recipe Saved!');
                 $this->redirect('/recipes');
             }
         }
@@ -145,7 +145,7 @@ Otherwise a new record is created::
 
 .. tip::
 
-    When calling save in a loop, don't forget to call ``create()``
+    When calling save in a loop, don't forget to call ``create()``.
 
 
 If you want to update a value, rather than create a new one, make sure
@@ -160,6 +160,9 @@ your are passing the primary key field into the data array::
 ================================================
 
 This method resets the model state for saving new information.
+It does not actually create a record in the database but clears
+Model::$id if previously set and sets the default values in
+Model::$data based on your database field defaults.
 
 If the ``$data`` parameter (using the array format outlined above)
 is passed, the model instance will be ready to save with that data
@@ -170,6 +173,11 @@ not initialize fields from the model schema that are not already
 set, it will only reset fields that have already been set, and
 leave the rest unset. Use this to avoid updating fields in the
 database that were already set.
+
+.. tip::
+
+    If you want to insert a new row instead of updating an existing one you should always call create() first.
+    This avoids conflicts with possible prior save calls in callbacks or other places.
 
 :php:meth:`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
 ======================================================================================
@@ -194,7 +202,7 @@ For example, to update the title of a blog post, the call to
 :php:meth:`Model::updateAll(array $fields, array $conditions)`
 ==============================================================
 
-Updates many records in a single call. Records to be updated are
+Updates one or more records in a single call. Records to be updated are
 identified by the ``$conditions`` array, and fields to be updated,
 along with their values, are identified by the ``$fields`` array.
 
@@ -212,7 +220,7 @@ year, the update call might look something like::
 .. tip::
 
     The $fields array accepts SQL expressions. Literal values should be
-    quoted manually.
+    quoted manually using :php:meth:`Sanitize::escape()`.
 
 .. note::
 
@@ -253,7 +261,7 @@ numerically indexed array of records like this::
     $data = array(
         array('title' => 'title 1'),
         array('title' => 'title 2'),
-    )
+    );
 
 .. note::
 
@@ -268,7 +276,7 @@ It is also acceptable to have the data in the following format::
     $data = array(
         array('Article' => array('title' => 'title 1')),
         array('Article' => array('title' => 'title 2')),
-    )
+    );
 
 To save also associated data with ``$options['deep'] = true`` (since 2.1), the two above examples would look like::
 
@@ -276,21 +284,21 @@ To save also associated data with ``$options['deep'] = true`` (since 2.1), the t
     $data = array(
         array('title' => 'title 1', 'Assoc' => array('field' => 'value')),
         array('title' => 'title 2'),
-    )
+    );
     $data = array(
         array('Article' => array('title' => 'title 1'), 'Assoc' => array('field' => 'value')),
         array('Article' => array('title' => 'title 2')),
-    )
+    );
     $Model->saveMany($data, array('deep' => true));
 
 Keep in mind that if you want to update a record instead of creating a new
 one you just need to add the primary key index to the data row::
 
     <?php
-    array(
+    $data = array(
         array('Article' => array('title' => 'New article')), // This creates a new row
         array('Article' => array('id' => 2, 'title' => 'title 2')), // This updates an existing row
-    )
+    );
 
 
 :php:meth:`Model::saveAssociated(array $data = null, array $options = array())`
@@ -311,29 +319,29 @@ For saving a record along with its related record having a hasOne
 or belongsTo association, the data array should be like this::
 
     <?php
-    array(
+    $data = array(
         'User' => array('username' => 'billy'),
         'Profile' => array('sex' => 'Male', 'occupation' => 'Programmer'),
-    )
+    );
 
 For saving a record along with its related records having hasMany
 association, the data array should be like this::
 
     <?php
-    array(
+    $data = array(
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
             array('body' => 'Comment 1', 'user_id' => 1),
             array('body' => 'Comment 2', 'user_id' => 12),
             array('body' => 'Comment 3', 'user_id' => 40),
         ),
-    )
+    );
 
 And for saving a record along with its related records having hasMany with more than two
 levels deep associations, the data array should be as follow::
 
     <?php
-    array(
+    $data = array(
         'User' => array('email' => 'john-doe@cakephp.org'),
         'Cart' => array(
             array(
@@ -353,7 +361,7 @@ levels deep associations, the data array should be as follow::
                 )
             )
         )
-    )
+    );
 
 .. note::
 
@@ -377,9 +385,9 @@ the data array should be like this::
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
             array('body' => 'Comment 1', 'user_id' => 1),
-            array('body' => 'Save a new user as well', 'User' => array('first' => 'mad', 'last' => 'coder'))
+            array('body' => 'Save a new user as well', 'User' => array('first' => 'mad', 'last' => 'coder')),
         ),
-    )
+    );
 
 And save this data with::
 
@@ -387,7 +395,7 @@ And save this data with::
     $Article->saveAssociated($data, array('deep' => true));
 
 .. versionchanged:: 2.1
-    ``Model::saveAll()`` and friends now support passing the `fieldList` for multiple models. 
+    ``Model::saveAll()`` and friends now support passing the `fieldList` for multiple models.
 
 Example of using ``fieldList`` with multiple models::
 
@@ -680,7 +688,7 @@ passed to ``save()`` for the Tag model is shown below::
             (
                 [id] => 42
             )
-        [Tag] => Array 
+        [Tag] => Array
             (
                 [name] => Italian
             )
@@ -751,7 +759,8 @@ The simplest form might look something like this (we'll assume that
     <?php echo $this->Form->create('Tag'); ?>
         <?php echo $this->Form->input(
             'Recipe.id',
-            array('type' => 'hidden', 'value' => $recipe_id)); ?>
+            array('type' => 'hidden', 'value' => $recipe_id)
+        ); ?>
         <?php echo $this->Form->input('Tag.name'); ?>
     <?php echo $this->Form->end('Add Tag'); ?>
 
@@ -759,9 +768,7 @@ In this example, you can see the ``Recipe.id`` hidden field whose
 value is set to the ID of the recipe we want to link the tag to.
 
 When the ``save()`` method is invoked within the controller, it'll
-automatically save the HABTM data to the database.
-
-::
+automatically save the HABTM data to the database::
 
     <?php
     public function add() {

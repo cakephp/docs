@@ -2,9 +2,9 @@ Request and Response objects
 ############################
 
 New in CakePHP 2.0 are request and response objects.  In previous versions these
-objects were represented through arrays, and the related methods were spread 
-across :php:class:`RequestHandlerComponent`, :php:class:`Router`, 
-:php:class:`Dispatcher` and :php:class:`Controller`.  There was no authoritative 
+objects were represented through arrays, and the related methods were spread
+across :php:class:`RequestHandlerComponent`, :php:class:`Router`,
+:php:class:`Dispatcher` and :php:class:`Controller`.  There was no authoritative
 object on what information the request contained.  For 2.0,
 :php:class:`CakeRequest` and :php:class:`CakeResponse` are used for this
 purpose.
@@ -16,11 +16,11 @@ CakeRequest
 ###########
 
 :php:class:`CakeRequest` is the default request object used in CakePHP.  It centralizes
-a number of features for interrogating and interacting with request data.  
-On each request one CakeRequest is created and then passed by reference to the various 
+a number of features for interrogating and interacting with request data.
+On each request one CakeRequest is created and then passed by reference to the various
 layers of an application that use request data.  By default ``CakeRequest`` is assigned to
 ``$this->request``, and is available in Controller, Views and Helpers.  You can
-also access it in Components by using the controller reference. Some of the duties 
+also access it in Components by using the controller reference. Some of the duties
 ``CakeRequest`` performs include:
 
 * Process the GET, POST, and FILES arrays into the data structures you are
@@ -40,11 +40,11 @@ third is as object properties::
 
     <?php
     $this->request['controller'];
-    $this->request->controller;
     $this->request->params['controller'];
+    $this->request->controller;
 
 All of the above will both access the same value. Multiple ways of accessing the
-parameters was done to ease migration for existing applications. All 
+parameters was done to ease migration for existing applications. All
 :ref:`route-elements` are accessed through this interface.
 
 In addition to :ref:`route-elements` you also often need access to
@@ -85,14 +85,14 @@ Querystring parameters can be read from using :php:attr:`CakeRequest::$query`::
 Accessing POST data
 ===================
 
-All POST data can be accessed using :php:attr:`CakeRequest::$data`.  Any form data 
+All POST data can be accessed using :php:attr:`CakeRequest::$data`.  Any form data
 that contains a ``data`` prefix, will have that data prefix removed.  For example::
 
     <?php
-    // An input with a name attribute equal to 'data[Post][title]' is accessible at
-    $this->request->data['Post']['title'];
+    // An input with a name attribute equal to 'data[MyModel][title]' is accessible at
+    $this->request->data['MyModel']['title'];
 
-You can either directly access the data property, or you can use 
+You can either directly access the data property, or you can use
 :php:meth:`CakeRequest::data()` to read the data array in an error free manner.
 Any keys that do not exist will return ``null``::
 
@@ -157,12 +157,12 @@ usage::
 Both method calls will return the same value.  For the time being the methods
 are still available on RequestHandler, but are deprecated and still might be
 removed before the final release.  You can also easily extend the request
-detectors that are available, by using :php:meth:`CakeRequest::addDetector()` 
-to create new kinds of detectors.  There are four different types of detectors 
+detectors that are available, by using :php:meth:`CakeRequest::addDetector()`
+to create new kinds of detectors.  There are four different types of detectors
 that you can create:
 
 * Environment value comparison - An environment value comparison, compares a
-  value fetched from :php:func:`env()` to a known value the environment value is 
+  value fetched from :php:func:`env()` to a known value the environment value is
   equality checked against the provided value.
 * Pattern value comparison - Pattern value comparison allows you to compare a
   value fetched from :php:func:`env()` to a regular expression.
@@ -178,16 +178,16 @@ Some examples would be::
     <?php
     // Add an environment detector.
     $this->request->addDetector('post', array('env' => 'REQUEST_METHOD', 'value' => 'POST'));
-    
+
     // Add a pattern value detector.
     $this->request->addDetector('iphone', array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i'));
-    
+
     // Add an option detector
     $this->request->addDetector('internalIp', array(
-        'env' => 'CLIENT_IP', 
+        'env' => 'CLIENT_IP',
         'options' => array('192.168.0.101', '192.168.0.100')
     ));
-    
+
     // Add a callback detector. Can either be an anonymous function or a regular callable.
     $this->request->addDetector('awesome', array('callback' => function ($request) {
         return isset($request->awesome);
@@ -205,7 +205,7 @@ There are several built-in detectors that you can use:
 * ``is('delete')`` Check to see if the current request is a DELETE.
 * ``is('head')`` Check to see if the current request is HEAD.
 * ``is('options')`` Check to see if the current request is OPTIONS.
-* ``is('ajax')`` Check to see of the current request came with 
+* ``is('ajax')`` Check to see of the current request came with
   X-Requested-with = XmlHttpRequest.
 * ``is('ssl')`` Check to see if the request is via SSL
 * ``is('flash')`` Check to see if the request has a User-Agent of Flash
@@ -218,11 +218,11 @@ CakeRequest and RequestHandlerComponent
 
 Since many of the features ``CakeRequest`` offers used to be the realm of
 :php:class:`RequestHandlerComponent` some rethinking was required to figure out how it
-still fits into the picture.  For 2.0, :php:class:`RequestHandlerComponent` 
-acts as a sugar daddy.  Providing a layer of sugar on top of the utility 
-`CakeRequest` affords. Sugar like switching layout and views based on content 
-types or ajax is the domain of :php:class:`RequestHandlerComponent`.  
-This separation of utility and sugar between the two classes lets you 
+still fits into the picture.  For 2.0, :php:class:`RequestHandlerComponent`
+acts as a sugar daddy.  Providing a layer of sugar on top of the utility
+`CakeRequest` affords. Sugar like switching layout and views based on content
+types or ajax is the domain of :php:class:`RequestHandlerComponent`.
+This separation of utility and sugar between the two classes lets you
 more easily pick and choose what you want and what you need.
 
 Interacting with other aspects of the request
@@ -249,29 +249,34 @@ CakeRequest API
 
     Returns the domain name your application is running on.
 
-.. php:method:: subdomains() 
+.. php:method:: subdomains()
 
     Returns the subdomains your application is running on as an array.
 
-.. php:method:: host() 
+.. php:method:: host()
 
     Returns the host your application is on.
 
-.. php:method:: method() 
+.. php:method:: method()
 
     Returns the HTTP method the request was made with.
 
-.. php:method:: referer() 
+.. php:method:: onlyAllow()
+
+    Set allowed HTTP methods, if not matched will throw MethodNotAllowexException
+    The 405 response will include the required 'Allow' header with the passed methods
+
+.. php:method:: referer()
 
     Returns the referring address for the request.
 
-.. php:method:: clientIp() 
+.. php:method:: clientIp()
 
     Returns the current visitor's IP address.
 
-.. php:method header()
+.. php:method:: header()
 
-    Allows you to access any of the ``HTTP_*`` headers that were used 
+    Allows you to access any of the ``HTTP_*`` headers that were used
     for the request::
 
         <?php
@@ -285,7 +290,7 @@ CakeRequest API
     decoding function.  Additional parameters for the decoding function
     can be passed as arguments to input().
 
-.. php:method:: data($key) 
+.. php:method:: data($key)
 
     Provides dot notation access to request data.  Allows for reading and
     modification of request data, calls can be chained together as well::
@@ -294,7 +299,7 @@ CakeRequest API
         // Modify some request data, so you can prepopulate some form fields.
         $this->request->data('Post.title', 'New post')
             ->data('Comment.1.author', 'Mark');
-            
+
         // You can also read out data.
         $value = $this->request->data('Post.title');
 
@@ -311,14 +316,14 @@ CakeRequest API
 
 .. php:method:: accepts($type)
 
-    Find out which content types the client accepts or check if they accept a 
+    Find out which content types the client accepts or check if they accept a
     particular type of content.
 
     Get all types::
 
-        <?php 
+        <?php
         $this->request->accepts();
- 
+
     Check for a single type::
 
         <?php
@@ -332,12 +337,12 @@ CakeRequest API
     Get the list of accepted languages::
 
         <?php
-        CakeRequest::acceptLanguage(); 
+        CakeRequest::acceptLanguage();
 
     Check if a specific language is accepted::
 
         <?php
-        CakeRequest::acceptLanguage('es-es'); 
+        CakeRequest::acceptLanguage('es-es');
 
 .. php:attr:: data
 
@@ -358,7 +363,7 @@ CakeRequest API
 
 .. php:attr:: base
 
-    The base path to the application, usually ``/`` unless your 
+    The base path to the application, usually ``/`` unless your
     application is in a subdirectory.
 
 .. php:attr:: webroot
@@ -370,16 +375,16 @@ CakeRequest API
 CakeResponse
 ############
 
-:php:class:`CakeResponse` is the default response class in CakePHP.  It 
-encapsulates a number of features and functionality for generating HTTP 
-responses in your application. It also assists in testing, as it can be 
-mocked/stubbed allowing you to inspect headers that will be sent.  
+:php:class:`CakeResponse` is the default response class in CakePHP.  It
+encapsulates a number of features and functionality for generating HTTP
+responses in your application. It also assists in testing, as it can be
+mocked/stubbed allowing you to inspect headers that will be sent.
 Like :php:class:`CakeRequest`, :php:class:`CakeResponse` consolidates a number
 of methods previously found on :php:class:`Controller`,
 :php:class:`RequestHandlerComponent` and :php:class:`Dispatcher`.  The old
 methods are deprecated in favour of using :php:class:`CakeResponse`.
 
-``CakeResponse`` provides an interface to wrap the common response related 
+``CakeResponse`` provides an interface to wrap the common response related
 tasks such as:
 
 * Sending headers for redirects.
@@ -390,16 +395,16 @@ tasks such as:
 Changing the response class
 ===========================
 
-CakePHP uses ``CakeResponse`` by default. ``CakeResponse`` is a flexible and 
-transparent to use class.  But if you need to replace it with an application 
+CakePHP uses ``CakeResponse`` by default. ``CakeResponse`` is a flexible and
+transparent to use class.  But if you need to replace it with an application
 specific class, you can override and replace ``CakeResponse`` with
 your own class.  By replacing the CakeResponse used in index.php.
 
 This will make all the controllers in your application use ``CustomResponse``
 instead of :php:class:`CakeResponse`.  You can also replace the response
-instance used by setting ``$this->response`` in your controllers. Overriding the 
-response object is handy during testing, as it allows you to stub 
-out the methods that interact with ``header()``.  See the section on 
+instance used by setting ``$this->response`` in your controllers. Overriding the
+response object is handy during testing, as it allows you to stub
+out the methods that interact with ``header()``.  See the section on
 :ref:`cakeresponse-testing` for more information.
 
 Dealing with content types
@@ -418,7 +423,7 @@ with ``type()`` as well::
     $this->response->type('vcf');
 
 Usually you'll want to map additional content types in your controller's
-``beforeFilter`` callback, so you can leverage the automatic view switching 
+``beforeFilter`` callback, so you can leverage the automatic view switching
 features of :php:class:`RequestHandlerComponent` if you are using it.
 
 Sending attachments
@@ -669,15 +674,15 @@ CakeResponse API
     CakeResponse provides a number of useful methods for interacting with
     the response you are sending to a client.
 
-.. php:method:: header() 
+.. php:method:: header()
 
     Allows you to directly set one or many headers to be sent with the response.
 
-.. php:method:: charset() 
+.. php:method:: charset()
 
     Sets the charset that will be used in the response.
 
-.. php:method:: type($type) 
+.. php:method:: type($type)
 
     Sets the content type for the response.  You can either use a known content
     type alias or the full content type name.
@@ -728,11 +733,11 @@ CakeResponse API
 
     Turns on gzip compression for the request.
 
-.. php:method:: download() 
+.. php:method:: download()
 
     Allows you to send the response as an attachment and set the filename.
 
-.. php:method:: statusCode() 
+.. php:method:: statusCode()
 
     Allows you to set the status code for the response.
 
@@ -746,6 +751,11 @@ CakeResponse API
     the set headers as well as the body. This is done automatically at the
     end of each request by :php:class:`Dispatcher`
 
+.. php:method:: file($path, $options = array())
+
+    Allows you to set a file for display or download
+
+    .. versionadded:: 2.3
 
 
 .. meta::

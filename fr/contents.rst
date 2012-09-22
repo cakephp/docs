@@ -5,7 +5,6 @@ Contenu
    :maxdepth: 3
 
    index
-   basic-info
    cakephp-overview
    installation
    getting-started
@@ -13,7 +12,6 @@ Contenu
    views
    models
    core-libraries
-   core-utility-libraries
    plugins
    console-and-shells
    development

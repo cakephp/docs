@@ -172,13 +172,13 @@ nice table, our view code might look something like this::
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], 
+                <?php echo $this->Html->link($post['Post']['title'],
     array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
             </td>
             <td><?php echo $post['Post']['created']; ?></td>
         </tr>
         <?php endforeach; ?>
-    
+        <?php unset($post); ?>
     </table>
 
 Hopefully this should look somewhat simple.
@@ -278,6 +278,7 @@ PostsController:
 
         public function add() {
             if ($this->request->is('post')) {
+                $this->Post->create();
                 if ($this->Post->save($this->request->data)) {
                     $this->Session->setFlash('Your post has been saved.');
                     $this->redirect(array('action' => 'index'));
@@ -382,7 +383,7 @@ requirements? Validation rules are defined in the model. Let's look
 back at our Post model and make a few adjustments::
 
     <?php
-    class Post extends AppModel {    
+    class Post extends AppModel {
         public $validate = array(
             'title' => array(
                 'rule' => 'notEmpty'

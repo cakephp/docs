@@ -5,9 +5,7 @@ SessionHelper
 
 As a natural counterpart to the Session Component, the Session
 Helper replicates most of the components functionality and makes it
-available in your view. The Session Helper is no longer
-automatically added to your view — so it is necessary to add it to
-the ``$helpers`` array in your controller.
+available in your view.
 
 The major difference between the Session Helper and the Session
 Component is that the helper does *not* have the ability to write

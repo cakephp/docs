@@ -133,7 +133,7 @@ Creating a shell
 ================
 
 Let's create a shell for use in the Console. For this example,
-we'll create a simple Hello world shell.  In you applications 
+we'll create a simple Hello world shell.  In your applications 
 ``Console/Command`` directory create ``HelloShell.php``.  Put the following
 code inside it::
 
@@ -440,14 +440,18 @@ All of the methods that configure an option parser can be chained,
 allowing you to define an entire option parser in one series of method calls::
 
     <?php
-    $parser->addArgument('type', array(
-        'help' => 'Either a full path or type of class.'
-    ))->addArgument('className', array(
-        'help' => 'A CakePHP core class name (e.g: Component, HtmlHelper).'
-    ))->addOption('method', array(
-        'short' => 'm',
-        'help' => __('The specific method you want help on.')
-    ))->description(__('Lookup doc block comments for classes in CakePHP.'));
+    function getOptionParser() {
+        $parser = parent::getOptionParser();
+        $parser->addArgument('type', array(
+            'help' => 'Either a full path or type of class.'
+        ))->addArgument('className', array(
+            'help' => 'A CakePHP core class name (e.g: Component, HtmlHelper).'
+        ))->addOption('method', array(
+            'short' => 'm',
+            'help' => __('The specific method you want help on.')
+        ))->description(__('Lookup doc block comments for classes in CakePHP.'));
+        return $parser;
+    }
 
 The methods that allow chaining are:
 
@@ -564,9 +568,9 @@ and creating boolean switches. Options are created with either
 
     <?php
     $parser->addOption('connection', array(
-        'short' => 'c'
+        'short' => 'c',
         'help' => 'connection',
-        'default' => 'default'
+        'default' => 'default',
     ));
 
 The above would allow you to use either ``cake myshell --connection=other``, 
@@ -922,8 +926,10 @@ Shell API
     Loads tasks defined in public :php:attr:`Shell::$tasks`
 
 .. php:method:: nl($multiplier = 1)
-
-    Outputs a number of newlines.
+    
+    :param int $multiplier Number of times the linefeed sequence should be repeated
+    
+    Returns a number of linefeed sequences.
 
 .. php:method:: out($message = null, $newlines = 1, $level = Shell::NORMAL)
 

@@ -84,11 +84,11 @@ elements you can use attribute matching with methods like ``extract()``.
         <?php
         // Common Usage:
         $users = $this->User->find("all");
-        $results = Hash::extract('{n}.User.id', $users);
-        // results returns:
+        $results = Hash::extract($users, '{n}.User.id');
+        // $results equals:
         // array(1,2,3,4,5,...);
 
-.. php:staticmethod:: Hash::insert($data, $path, $values = null)
+.. php:staticmethod:: Hash::insert(array $data, $path, $values = null)
 
     :rtype: array
 
@@ -119,7 +119,7 @@ elements you can use attribute matching with methods like ``extract()``.
         $users = $this->User->find('all');
         $users = Set::insert($users, '{n}.User.new', 'value');
 
-.. php:staticmethod:: remove($data, $path = null)
+.. php:staticmethod:: remove(array $data, $path = null)
 
     :rtype: array
 
@@ -145,7 +145,7 @@ elements you can use attribute matching with methods like ``extract()``.
 
     Using ``{n}`` and ``{s}`` will allow you to remove multiple values at once.
 
-.. php:staticmethod:: combine($data, $keyPath = null, $valuePath = null, $groupPath = null)
+.. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
 
     :rtype: array
 
@@ -256,6 +256,7 @@ elements you can use attribute matching with methods like ``extract()``.
     the first value will be used as a format string, for values extracted by the
     other paths::
 
+        <?php
         $result = Hash::combine(
             $a,
             '{n}.User.id',
@@ -289,7 +290,7 @@ elements you can use attribute matching with methods like ``extract()``.
             )
         */
 
-.. php:staticmethod:: format($data, $format, $keys)
+.. php:staticmethod:: format(array $data, array $paths, $format)
 
     :rtype: array
 
@@ -327,7 +328,7 @@ elements you can use attribute matching with methods like ``extract()``.
             )
         );
 
-        $res = Hash::format($data, '%2$d, %1$s', array('{n}.Person.first_name', '{n}.Person.something'));
+        $res = Hash::format($data, array('{n}.Person.first_name', '{n}.Person.something'), '%2$d, %1$s');
         /*
         Array
         (
@@ -337,7 +338,7 @@ elements you can use attribute matching with methods like ``extract()``.
         )
         */
 
-        $res = Hash::format($data, '%1$s, %2$d', array('{n}.Person.first_name', '{n}.Person.something'));
+        $res = Hash::format($data, array('{n}.Person.first_name', '{n}.Person.something'), '%1$s, %2$d');
         /*
         Array
         (
@@ -347,7 +348,7 @@ elements you can use attribute matching with methods like ``extract()``.
         )
         */
 
-.. php:staticmethod:: contains($val1, $val2 = null)
+.. php:staticmethod:: contains(array $data, array $needle)
 
     :rtype: boolean
 
@@ -373,7 +374,7 @@ elements you can use attribute matching with methods like ``extract()``.
         $result = Hash::contains($b, $a);
         // true
 
-.. php:staticmethod:: check($data, $path = null)
+.. php:staticmethod:: check(array $data, string $path = null)
 
     :rtype: boolean
 
@@ -407,13 +408,13 @@ elements you can use attribute matching with methods like ``extract()``.
         $result = Hash::check($set, 'My Index 1.First.Seconds.Third.Fourth');
         // $result == False
 
-.. php:staticmethod:: filter($var, $callback = array('Hash', 'filter'))
+.. php:staticmethod:: filter(array $data, $callback = array('Hash', 'filter'))
 
     :rtype: array
 
     Filters empty elements out of array, excluding '0'. You can also supply a
-    custom $callback to filter the array elements.  You callback should return
-    ``false`` to remove elements from the resulting array.::
+    custom $callback to filter the array elements. You callback should return
+    ``false`` to remove elements from the resulting array::
 
         <?php
         $data = array(
@@ -423,9 +424,9 @@ elements you can use attribute matching with methods like ``extract()``.
             0,
             array('one thing', 'I can tell you', 'is you got to be', false)
         );
-        $res = Hash::filter();
+        $res = Hash::filter($data);
 
-        /* $res now looks like:
+        /* $data now looks like:
             Array (
                 [0] => 0
                 [2] => true
@@ -439,7 +440,7 @@ elements you can use attribute matching with methods like ``extract()``.
             )
         */
 
-.. php:staticmethod:: flatten(array $data, $separator='.')
+.. php:staticmethod:: flatten(array $data, string $separator = '.')
 
     :rtype: array
 
@@ -470,7 +471,7 @@ elements you can use attribute matching with methods like ``extract()``.
             )
         */
 
-.. php:staticmethod:: expand(array $data, $separator='.')
+.. php:staticmethod:: expand(array $data, string $separator = '.')
 
     :rtype: array
 
@@ -488,7 +489,7 @@ elements you can use attribute matching with methods like ``extract()``.
             '1.Author.id' => 3,
             '1.Author.user' => Crystal,
         );
-        $res = Hash::flatten($data);
+        $res = Hash::expand($data);
         /* $res now looks like:
         array(
             array(
@@ -502,7 +503,7 @@ elements you can use attribute matching with methods like ``extract()``.
         );
         */
 
-.. php:staticmethod:: merge(array $data, $merge)
+.. php:staticmethod:: merge(array $data, array $merge[, array $n])
 
     :rtype: array
 
@@ -560,7 +561,7 @@ elements you can use attribute matching with methods like ``extract()``.
         )
         */
 
-.. php:staticmethod:: numeric($array=null)
+.. php:staticmethod:: numeric(array $data)
 
     :rtype: boolean
 
@@ -575,7 +576,7 @@ elements you can use attribute matching with methods like ``extract()``.
         $res = Hash::numeric($data);
         // $res is false
 
-.. php:staticmethod:: dimensions ($array = null)
+.. php:staticmethod:: dimensions (array $data)
 
     :rtype: integer
 
@@ -609,6 +610,7 @@ elements you can use attribute matching with methods like ``extract()``.
     Similar to :php:meth:`~Hash::dimensions()`, however this method returns,
     the deepest number of dimensions of any element in the array::
 
+        <?php
         $data = array('1' => '1.1', '2', '3' => array('3.1' => '3.1.1'));
         $result = Hash::dimensions($data, true);
         // $result == 2
@@ -672,7 +674,7 @@ elements you can use attribute matching with methods like ``extract()``.
       sort ``foo10`` below ``foo2`` as an example. Natural sorting
       requires PHP 5.4 or greater.
 
-.. php:staticmethod:: diff(array $val1, array $val2)
+.. php:staticmethod:: diff(array $data, array $compare)
 
     :rtype: array
 
@@ -700,7 +702,7 @@ elements you can use attribute matching with methods like ``extract()``.
             )
         */
 
-.. php:staticmethod:: mergeDiff($data, $compare)
+.. php:staticmethod:: mergeDiff(array $data, array $compare)
 
     :rtype: array
 
@@ -750,7 +752,7 @@ elements you can use attribute matching with methods like ``extract()``.
             )
         */
 
-.. php:staticmethod:: normalize($list, $assoc = true)
+.. php:staticmethod:: normalize(array $data, $assoc = true)
 
     :rtype: array
 
@@ -807,7 +809,7 @@ elements you can use attribute matching with methods like ``extract()``.
             )
         */
 
-.. php:staticmethod:: nest(array $data, $options = array())
+.. php:staticmethod:: nest(array $data, array $options = array())
 
     Takes a flat array set, and creates a nested, or threaded data structure.
     Used by methods like ``Model::find('threaded')``.

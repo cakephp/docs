@@ -89,16 +89,41 @@ TranslateBehavior to copy the value of "title" to the translation
 table (default: i18n) along with the current locale. A locale is
 the identifier of the language, so to speak.
 
-The *current locale* is the current value of
-``Configure::read('Config.language')``. The value of
-*Config.language* is assigned in the L10n Class - unless it is
-already set. However, the TranslateBehavior allows you to override
-this on-the-fly, which allows the user of your page to create
-multiple versions without the need to change his preferences. More
-about this in the next section.
+
+Reading translated content
+==========================
+
+By default the TranslateBehavior will automatically fetch and add in data based
+on the current locale.  The current locale is read from ``Configure::read('Config.language')``
+which is assigned by the :php:class:`L10n` class.  You can override this
+default on the fly using ``$Model->locale``.
+
+Retrieve translated fields in a specific locale
+-----------------------------------------------
+
+By setting ``$Model->locale`` you can read translations for a specific locale::
+
+    <?php
+    // Read the spanish locale data.
+    $this->Post->locale = 'es';
+    $results = $this->Post->find('first', array(
+        'conditions' => array('Post.id' => $id)
+    ));
+    // $results will contain the spanish translation.
+
+If you need to read translated content for multiple locales at the same time you
+can do so by setting ``locale`` to an array of locales::
+
+    <?php
+    // Read the spanish locale data.
+    $this->Post->locale = array('es', 'pt');
+    $results = $this->Post->find('first', array(
+        'conditions' => array('Post.id' => $id)
+    ));
+    // $results will contain the portuguese and spanish translation.
 
 Retrieve all translation records for a field
-============================================
+--------------------------------------------
 
 If you want to have all translation records attached to the current
 model record you simply extend the *field array* in your behavior
@@ -161,7 +186,7 @@ translated because triggering callbacks on associated models is
 currently not supported.
 
 Using the bindTranslation method
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------
 
 You can also retrieve all translations, only when you need them,
 using the bindTranslation method
@@ -297,7 +322,7 @@ it fits one could just initialize a empty i18n table using the
 console and rename the table afterwards.
 
 Create the TranslateModel
-~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------
 
 For this to work you need to create the actual model file in your
 models folder. Reason is that there is no property to set the
@@ -317,7 +342,7 @@ model which actually uses this translation model. This is where the
 optional ``$translateTable`` comes into play.
 
 Changing the Table
-~~~~~~~~~~~~~~~~~~
+------------------
 
 If you want to change the name of the table you simply define
 $translateTable in your model, like so::

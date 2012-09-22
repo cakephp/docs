@@ -544,7 +544,7 @@ Using custom authorize objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Once you've created your custom authorize object, you can use them by
-including them in AuthComponents authorize array::
+including them in your AuthComponent's authorize array::
 
     <?php
     $this->Auth->authorize = array(

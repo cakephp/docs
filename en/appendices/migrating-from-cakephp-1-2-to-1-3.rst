@@ -609,7 +609,8 @@ new features in the FormHelper.
 -  ``HtmlHelper::meta()`` no longer has an ``$inline`` parameter.
    It has been merged with the ``$options`` array.
 -  ``HtmlHelper::link()`` no longer has an ``$escapeTitle``
-   parameter. Use ``$options['escape']`` instead.
+   parameter. Use ``$options['escape']`` instead. The ``escape`` option
+   now controls the escaping of the title and attributes at the same time.
 -  ``HtmlHelper::para()`` no longer has an ``$escape`` parameter.
    Use ``$options['escape']`` instead.
 -  ``HtmlHelper::div()`` no longer has an ``$escape`` parameter.

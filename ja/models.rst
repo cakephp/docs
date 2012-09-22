@@ -48,7 +48,8 @@ AppModel は CakePHP 内部の Model クラスを extend しています。\
 CakePHP のコアフォルダから取り込まれます。\
 AppModel をオーバーライドすることで、アプリケーション内の全てのモデルで利用可能な\
 機能を定義することができます。この場合、独自の ``AppModel.php`` ファイルを\
-他の全てのモデルと同様に Model フォルダに置きます。
+他の全てのモデルと同様に Model フォルダに置きます。 :doc:`Bake <console-and-shells/code-generation-with-bake>`
+を使用してプロジェクトを作成すると、自動的にこのファイルが生成されます。
 
 複数のモデルに同様のロジックを適用する方法に関しては
 :doc:`Behaviors <models/behaviors>` も参照してください。

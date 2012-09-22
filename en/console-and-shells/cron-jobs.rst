@@ -7,7 +7,7 @@ when you have added the console path to the PATH variable via
 ``~/.profile``, it will be unavailable to the cronjob.
 
 The following BASH script will call your shell and append the
-needed paths to $PATH. Copy and save this to your vendors folder as
+needed paths to $PATH. Copy and save this to your Console folder as
 'cakeshell' and don't forget to make it executable.
 (``chmod +x cakeshell``)
 
@@ -28,7 +28,7 @@ needed paths to $PATH. Copy and save this to your vendors folder as
     done
     $cmd
 
-You can call it like:::
+You can call it like::
 
     $ ./Console/cakeshell myshell myparam -cli /usr/bin -console /cakes/2.x.x/lib/Cake/Console
 
