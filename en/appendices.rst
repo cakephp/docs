@@ -2,7 +2,18 @@ Appendices
 ##########
 
 Appendices contain information regarding the new features
-introduced in 2.0, and the migration path from 1.3 to 2.0.
+introduced in each version and the migration path between versions.
+
+3.0 Migration Guide
+===================
+
+3.0 is still under development, and any documented changes
+may only be available in the ``3.0`` branch in git.
+
+.. toctree::
+    :maxdepth: 1
+
+    appendices/3-0-migration-guide
 
 2.3 Migration Guide
 ===================
