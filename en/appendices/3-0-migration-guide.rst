@@ -39,6 +39,11 @@ Log
   ``Log::config()`` will be removed for 3.0.0 stable.
 * Log engines are now lazily loaded upon the first write to the logs.
 * :php:meth:``Cake\\Log\\Log::engine()`` has been added.
+* ``Log::defaultLevels()`` was removed.
+* You can no longer create custom levels using ``Log::levels()``.
+* You can no longer invent custom log levels.  You must use the default set of
+  log levels.  You should use logging scopes to create custom log files or
+  specific handling for different sections of your application.
 
 
 Routing
