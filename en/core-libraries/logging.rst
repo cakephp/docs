@@ -245,6 +245,8 @@ level configuration.
     Fetch a connected logger by configuration name, or insert/replace
     a logger. Analogous to :php:meth:`Cake\\Cache\Cache::engine()`.
 
+    .. versionadded: 3.0
+
 Convenience methods
 -------------------
 
