@@ -100,44 +100,6 @@ bakers, pastry\_stores, and savory\_cakes.
     Add information about specific options for different database
     vendors, such as SQLServer, Postgres and MySQL.
 
-Additional Class Paths
-======================
-
-It’s occasionally useful to be able to share MVC classes between
-applications on the same system. If you want the same controller in
-both applications, you can use CakePHP’s bootstrap.php to bring
-these additional classes into view.
-
-By using :php:meth:`App::build()` in bootstrap.php we can define additional
-paths where CakePHP will look for classes::
-
-    <?php
-    App::build(array(
-        'Model'                     => array('/path/to/models', '/next/path/to/models'),
-        'Model/Behavior'            => array('/path/to/behaviors', '/next/path/to/behaviors'),
-        'Model/Datasource'          => array('/path/to/datasources', '/next/path/to/datasources'),
-        'Model/Datasource/Database' => array('/path/to/databases', '/next/path/to/database'),
-        'Model/Datasource/Session'  => array('/path/to/sessions', '/next/path/to/sessions'),
-        'Controller'                => array('/path/to/controllers', '/next/path/to/controllers'),
-        'Controller/Component'      => array('/path/to/components', '/next/path/to/components'),
-        'Controller/Component/Auth' => array('/path/to/auths', '/next/path/to/auths'),
-        'Controller/Component/Acl'  => array('/path/to/acls', '/next/path/to/acls'),
-        'View'                      => array('/path/to/views', '/next/path/to/views'),
-        'View/Helper'               => array('/path/to/helpers', '/next/path/to/helpers'),
-        'Console'                   => array('/path/to/consoles', '/next/path/to/consoles'),
-        'Console/Command'           => array('/path/to/commands', '/next/path/to/commands'),
-        'Console/Command/Task'      => array('/path/to/tasks', '/next/path/to/tasks'),
-        'Lib'                       => array('/path/to/libs', '/next/path/to/libs'),
-        'Locale'                    => array('/path/to/locales', '/next/path/to/locales'),
-        'Vendor'                    => array('/path/to/vendors', '/next/path/to/vendors'),
-        'Plugin'                    => array('/path/to/plugins', '/next/path/to/plugins'),
-    ));
-
-.. note::
-
-    All additional path configuration should be done at the top of your application's
-    bootstrap.php. This will ensure that the paths are available for the rest of your
-    application.
 
 
 .. index:: core.php, configuration
@@ -298,6 +260,84 @@ they are read on every request.  By default both of these configurations expire 
 As with all cached data stored in :php:class:`Cache` you can clear data using
 :php:meth:`Cache::clear()`.
 
+Additional Class Paths
+======================
+
+It’s occasionally useful to be able to share MVC classes between
+applications on the same system. If you want the same controller in
+both applications, you can use CakePHP’s bootstrap.php to bring
+these additional classes into view.
+
+By using :php:meth:`App::build()` in bootstrap.php we can define additional
+paths where CakePHP will look for classes::
+
+    <?php
+    App::build(array(
+        'Model'                     => array('/path/to/models', '/next/path/to/models'),
+        'Model/Behavior'            => array('/path/to/behaviors', '/next/path/to/behaviors'),
+        'Model/Datasource'          => array('/path/to/datasources', '/next/path/to/datasources'),
+        'Model/Datasource/Database' => array('/path/to/databases', '/next/path/to/database'),
+        'Model/Datasource/Session'  => array('/path/to/sessions', '/next/path/to/sessions'),
+        'Controller'                => array('/path/to/controllers', '/next/path/to/controllers'),
+        'Controller/Component'      => array('/path/to/components', '/next/path/to/components'),
+        'Controller/Component/Auth' => array('/path/to/auths', '/next/path/to/auths'),
+        'Controller/Component/Acl'  => array('/path/to/acls', '/next/path/to/acls'),
+        'View'                      => array('/path/to/views', '/next/path/to/views'),
+        'View/Helper'               => array('/path/to/helpers', '/next/path/to/helpers'),
+        'Console'                   => array('/path/to/consoles', '/next/path/to/consoles'),
+        'Console/Command'           => array('/path/to/commands', '/next/path/to/commands'),
+        'Console/Command/Task'      => array('/path/to/tasks', '/next/path/to/tasks'),
+        'Lib'                       => array('/path/to/libs', '/next/path/to/libs'),
+        'Locale'                    => array('/path/to/locales', '/next/path/to/locales'),
+        'Vendor'                    => array('/path/to/vendors', '/next/path/to/vendors'),
+        'Plugin'                    => array('/path/to/plugins', '/next/path/to/plugins'),
+    ));
+
+.. note::
+
+    All additional path configuration should be done at the top of your application's
+    bootstrap.php. This will ensure that the paths are available for the rest of your
+    application.
+
+.. _inflection-configuration:
+
+Inflection Configuration
+========================
+
+Cake's naming conventions can be really nice - you can name your
+database table big\_boxes, your model BigBox, your controller
+BigBoxesController, and everything just works together
+automatically. The way CakePHP knows how to tie things together is
+by *inflecting* the words between their singular and plural forms.
+
+There are occasions (especially for our non-English speaking
+friends) where you may run into situations where CakePHP's
+inflector (the class that pluralizes, singularizes, camelCases, and
+under\_scores) might not work as you'd like. If CakePHP won't
+recognize your Foci or Fish, you can tell CakePHP about your
+special cases.
+
+Loading custom inflections
+--------------------------
+
+You can use :php:meth:`Inflector::rules()` in the file
+``app/Config/bootstrap.php`` to load custom inflections::
+
+    <?php
+    Inflector::rules('singular', array(
+        'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),
+        'uninflected' => array('singulars'),
+        'irregular' => array('spins' => 'spinor')
+    ));
+
+or::
+
+    <?php
+    Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));
+
+Will merge the supplied rules into the inflection sets defined in
+lib/Cake/Utility/Inflector.php, with the added rules taking precedence
+over the core rules.
 
 Configure Class
 ===============
@@ -379,9 +419,6 @@ anywhere within your application, in a static context::
     :param string $key: The key to check.
 
     Used to check if a key/path exists and has not-null value.
-
-    .. versionadded:: 2.3
-        ``Configure::check()`` was added in 2.3
 
 .. php:staticmethod:: delete($key)
 
@@ -508,8 +545,6 @@ Save only the error handling configuration::
 ``Configure::dump()`` can be used to either modify or overwrite
 configuration files that are readable with :php:meth:`Configure::load()`
 
-.. versionadded:: 2.2
-    ``Configure::dump()`` was added in 2.2.
 
 Storing runtime configuration
 -----------------------------
@@ -664,45 +699,6 @@ Built-in Configuration readers
     through dot separated values, or sections.  Sections can contain
     dot separated keys for deeper nesting.
 
-.. _inflection-configuration:
-
-Inflection Configuration
-========================
-
-Cake's naming conventions can be really nice - you can name your
-database table big\_boxes, your model BigBox, your controller
-BigBoxesController, and everything just works together
-automatically. The way CakePHP knows how to tie things together is
-by *inflecting* the words between their singular and plural forms.
-
-There are occasions (especially for our non-English speaking
-friends) where you may run into situations where CakePHP's
-inflector (the class that pluralizes, singularizes, camelCases, and
-under\_scores) might not work as you'd like. If CakePHP won't
-recognize your Foci or Fish, you can tell CakePHP about your
-special cases.
-
-Loading custom inflections
---------------------------
-
-You can use :php:meth:`Inflector::rules()` in the file
-``app/Config/bootstrap.php`` to load custom inflections::
-
-    <?php
-    Inflector::rules('singular', array(
-        'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),
-        'uninflected' => array('singulars'),
-        'irregular' => array('spins' => 'spinor')
-    ));
-
-or::
-
-    <?php
-    Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));
-
-Will merge the supplied rules into the inflection sets defined in
-lib/Cake/Utility/Inflector.php, with the added rules taking precedence
-over the core rules.
 
 Bootstrapping CakePHP
 =====================
