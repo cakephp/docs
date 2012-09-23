@@ -233,7 +233,7 @@ level configuration.
 .. php:staticmethod:: engine($name, $engine = null)
 
     Fetch a connected logger by configuration name, or insert/replace
-    a logger. Analogous to :php:meth:`Cake\\Cache\Cache::engine()`.
+    a logger. Analogous to :php:meth:`Cake\\Cache\\Cache::engine()`.
 
     .. versionadded: 3.0
 
