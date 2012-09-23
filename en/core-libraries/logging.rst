@@ -19,18 +19,17 @@ CakePHP classes. If the context is a CakePHP class (Model,
 Controller, Component... almost anything), you can log your data.
 You can also use ``Log::write()`` directly. See :ref:`writing-to-logs`
 
-Creating and configuring log streams
-====================================
+Creating and configuring log adapters
+=====================================
 
-Log stream handlers can be part of your application, or part of
+Log adapters can be part of your application, or part of
 plugins. If for example you had a database logger called
 ``DatabaseLogger``. As part of your application it would be placed
 in ``App/Log/Engine/DatabaseLogger.php``. As part of a plugin it
 would be placed in
-``App/Plugin/LoggingPack/Log/Engine/DatabaseLogger.php``. When
-configured ``Log`` will attempt to load Configuring log streams
-is done by calling ``Configure::write()``. Configuring our
-DataBaseLogger would look like::
+``App/Plugin/LoggingPack/Log/Engine/DatabaseLogger.php``. To configure log
+adapters you should use Configure.  For example confguring our DatabaseLogger
+would look like::
 
     <?php
     // for App/Log
@@ -47,9 +46,9 @@ DataBaseLogger would look like::
         // ...
     ]);
 
-When configuring a log stream the ``engine`` parameter is used to
+When configuring a log adapter the ``engine`` parameter is used to
 locate and load the log handler. All of the other configuration
-properties are passed to the log stream's constructor as an array.::
+properties are passed to the log adapter's constructor as an array.::
 
     <?php
     use Cake\Log\LogInterface;
@@ -64,17 +63,13 @@ properties are passed to the log stream's constructor as an array.::
         }
     }
 
-CakePHP has no requirements for Log streams other than that they
-must implement a ``write`` method. This write method must take two
-parameters ``$type, $message`` in that order. ``$type`` is the
-string type of the logged message, core values are ``error``,
-``warning``, ``info`` and ``debug``. In addition you can define
-your own types by using them when you call ``Log::write``.
+CakePHP requires that all logging adapters implement
+:php:class:`Cake\\Log\\LogInterface`.
 
 .. note::
 
-    Always configure loggers during bootstrapping. ``app/Config/log.php`` is the
-    conventional place to configure loggers.
+    You should configure loggers during bootstrapping. ``app/Config/log.php`` is the
+    conventional place to configure log adapters.
 
 
 Error and Exception logging
@@ -82,8 +77,8 @@ Error and Exception logging
 
 Errors and Exceptions can also be logged.  By configuring the 
 co-responding values in your core.php file.  Errors will be 
-displayed when debug > 0 and logged when debug == 0. Set ``Exception.log`` 
-to true to log uncaught exceptions. See :doc:`/development/configuration` 
+displayed when debug > 0 and logged when debug == 0. Set ``Exception.log``
+to true to log uncaught exceptions. See :doc:`/development/configuration`
 for more information.
 
 Interacting with log streams
@@ -96,21 +91,13 @@ streams using :php:meth:`Cake\\Log\\Log::drop()`. Once a log stream has been
 dropped it will no longer receive messages.
 
 
-Using the default FileLog class
-===============================
+Using the FileLog adapter
+=========================
 
-While Log can be configured to write to a number of user
-configured logging adapters, it also comes with a default logging
-configuration. The default logging configuration will be
-used any time there are *no other* logging adapters configured.
-Once a logging adapter has been configured you will need to also
-configure FileLog if you want file logging to continue.
-
-As its name implies FileLog writes log messages to files. The type
-of log message being written determines the name of the file the
-message is stored in. If a type is not supplied, :php:const:`LOG_ERROR` is used
-which writes to the error log. The default log location is
-``app/tmp/logs/$type.log``::
+As its name implies FileLog writes log messages to files. The type of log
+message being written determines the name of the file the message is stored in.
+If a type is not supplied, :php:const:`LOG_ERROR` is used which writes to the
+error log. The default log location is ``app/tmp/logs/$level.log``::
 
     <?php
     // Executing this inside a CakePHP class
@@ -132,20 +119,23 @@ custom paths to be used::
         'path' => '/path/to/custom/place/'
     ]);
 
+.. warning::
+    If you do not configure a logging adapter, log messages will not be stored.
+
 .. _writing-to-logs:
 
 Writing to logs
 ===============
 
 Writing to the log files can be done in 2 different ways. The first
-is to use the static :php:meth:`Log::write()` method::
+is to use the static :php:meth:`Cake\\Log\\Log::write()` method::
 
     <?php
     Log::write('debug', 'Something did not work');
 
 The second is to use the log() shortcut function available on any
 class that extends ``Object``. Calling log() will internally call
-Log::write()::
+``Log::write()``::
 
     <?php
     // Executing this inside a CakePHP class:
@@ -259,6 +249,16 @@ appropriate log level.
 .. php:staticmethod:: notice($message, $scope = array())
 .. php:staticmethod:: debug($message, $scope = array())
 .. php:staticmethod:: info($message, $scope = array())
+
+
+.. php:interface:: LogInterface
+
+    This interface is required for logging adapters.
+
+.. php:method:: write($type, $message)
+
+    Write a message to the log storage system. ``$type`` will be the level of
+    the log message.  ``$message`` will be the content of the log message.
 
 .. meta::
     :title lang=en: Logging
