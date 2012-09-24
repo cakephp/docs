@@ -300,6 +300,8 @@ over the core rules.
 Configure Class
 ===============
 
+.. php:namespace:: Cake\Core
+
 .. php:class:: Configure
 
 Despite few things needing to be configured in CakePHP, it’s
@@ -579,11 +581,13 @@ In your ``app/Config/bootstrap.php`` you could attach this reader and use it::
     App::uses('XmlReader', 'Configure');
     Configure::config('xml', new XmlReader());
     ...
-
+    
     Configure::load('my_xml');
 
 The ``read()`` method of a config reader, must return an array of the configuration information 
 that the resource named ``$key`` contains.
+
+.. php:namespace:: Cake\Configure
 
 .. php:interface:: ConfigReaderInterface
 
@@ -628,8 +632,9 @@ Built-in Configuration readers
 
     Files without ``$config`` will cause an :php:exc:`ConfigureException`
 
-    Load your custom configuration file by inserting the following in app/Config/bootstrap.php:
+    Load your custom configuration file by inserting the following in app/Config/bootstrap.php::
 
+        <?php
         Configure::load('customConfig');
 
 .. php:class:: IniReader
