@@ -101,115 +101,58 @@ bakers, pastry\_stores, and savory\_cakes.
     vendors, such as SQLServer, Postgres and MySQL.
 
 
+.. index:: configuration
 
-.. index:: core.php, configuration
+Configuring your application
+============================
 
-Core Configuration
-==================
+While CakePHP is a conventions over configuration framework, it still exposes
+a number of points that you might need to customize for your application.  We've
+tried to ship CakePHP useful defaults to get you developing more rapidly.
 
-Each application in CakePHP contains a configuration file to 
-determine CakePHP's internal behavior.
-``app/Config/core.php``. This file is a collection of Configure class
-variable definitions and constant definitions that determine how
-your application behaves. Before we dive into those particular
-variables, you’ll need to be familiar with :php:class:`Configure`, CakePHP’s
-configuration registry class.
+Configuration in CakePHP is handled via the :php:class:`Cake\Core\Configure`
+class.  You should familiarize yourself with it before trying to dive to far
+into configuration.  ``Configure`` stores all configuration data in a CakePHP
+application, and gives a simple, consistent way for applications and plugins to
+read/write and persist configuration data.
 
-CakePHP Core Configuration
---------------------------
+Out of the box a CakePHP application comes with a number of configuration files
+that are loaded by ``App/Config/bootstrap.php``.  Feel free to remove/merge or
+add new file/sections as required by your application.
 
-The :php:class:`Configure` class is used to manage a set of core CakePHP
-configuration variables. These variables can be found in
-``app/Config/core.php``. Below is a description of each variable and
-how it affects your CakePHP application.
+General configuration
+---------------------
+
+General configuration is stored by default in ``App/Config/app.php``.
+
+Below is a description of each variable and how it affects your CakePHP
+application.
 
 debug
     Changes CakePHP debugging output.
-    0 = Production mode. No output.
-    1 = Show errors and warnings.
-    2 = Show errors, warnings, and SQL. [SQL log is only shown when you
-    add $this->element('sql\_dump') to your view or layout.]
 
-Error
-    Configure the Error handler used to handle errors for your application.  
-    By default :php:meth:`ErrorHandler::handleError()` is used.  It will display 
-    errors using :php:class:`Debugger`, when debug > 0
-    and log errors with :php:class:`CakeLog` when debug = 0.
+    * 0 = Production mode. No output.
+    * 1 = Show errors and warnings.
+    * 2 = Show errors, warnings, and enable SQL logging. SQL log is only shown when you
+      add ``$this->element('sql_dump');`` to your view or layout.
 
-    Sub-keys:
-
-    * ``handler`` - callback - The callback to handle errors. You can set this to any 
-      callback type, including anonymous functions.
-    * ``level`` - int - The level of errors you are interested in capturing.
-    * ``trace`` - boolean - Include stack traces for errors in log files.
-
-Exception
-    Configure the Exception handler used for uncaught exceptions.  By default, 
-    ErrorHandler::handleException() is used. It will display a HTML page for 
-    the exception, and while debug > 0, framework errors like 
-    Missing Controller will be displayed.  When debug = 0, 
-    framework errors will be coerced into generic HTTP errors.
-    For more information on Exception handling, see the :doc:`exceptions`
-    section.
-
+App.namespace
+    The namespace to find app classes under.
 App.baseUrl
     Un-comment this definition if you **don’t** plan to use Apache’s
     mod\_rewrite with CakePHP. Don’t forget to remove your .htaccess
     files too.
+App.base
+    The base directory the app resides in. If false this
+    will be auto detected.
 App.encoding
     Define what encoding your application uses.  This encoding
     is used to generate the charset in the layout, and encode entities.
     It should match the encoding values specified for your database.
-Routing.prefixes
-    Un-comment this definition if you’d like to take advantage of
-    CakePHP prefixed routes like admin. Set this variable with an array
-    of prefix names of the routes you’d like to use. More on this
-    later.
-Cache.disable
-    When set to true, persistent caching is disabled site-wide.
-    This will make all read/writes to :php:class:`Cache` fail.
-Cache.check
-    If set to true, enables view caching. Enabling is still needed in
-    the controllers, but this variable enables the detection of those
-    settings.
-Session
-    Contains an array of settings to use for session configuration. The defaults key is 
-    used to define a default preset to use for sessions, any settings declared here will override
-    the settings of the default config.
-
-    Sub-keys
-
-    * ``name`` - The name of the cookie to use. Defaults to 'CAKEPHP'
-    * ``timeout`` - The number of minutes you want sessions to live for. 
-      This timeout is handled by CakePHP
-    * ``cookieTimeout`` - The number of minutes you want session cookies to live for.
-    * ``checkAgent`` - Do you want the user agent to be checked when starting sessions? 
-      You might want to set the value to false, when dealing with older versions of 
-      IE, Chrome Frame or certain web-browsing devices and AJAX
-    * ``defaults`` - The default configuration set to use as a basis for your session.
-      There are four builtins: php, cake, cache, database.
-    * ``handler`` - Can be used to enable a custom session handler. 
-      Expects an array of callables, that can be used with `session_save_handler`.  
-      Using this option will automatically add `session.save_handler` to the ini array.
-    * ``autoRegenerate`` - Enabling this setting, turns on automatic renewal 
-      of sessions, and sessionids that change frequently. 
-      See :php:attr:`CakeSession::$requestCountdown`.
-    * ``ini`` - An associative array of additional ini values to set.
-
-    The built in defaults are:
-
-    * 'php' - Uses settings defined in your php.ini.
-    * 'cake' - Saves session files in CakePHP's /tmp directory.
-    * 'database' - Uses CakePHP's database sessions.
-    * 'cache' - Use the Cache class to save sessions.
-
-    To define a custom session handler, save it at ``app/Model/Datasource/Session/<name>.php``.
-    Make sure the class implements :php:interface:`CakeSessionHandlerInterface` 
-    and set Session.handler to <name>
-
-    To use database sessions, run the ``app/Config/Schema/sessions.php`` schema using
-    the cake shell command: ``cake schema create Sessions``
-
+App.webroot
+    The webroot directory.
+App.www_root
+    The file path to webroot.
 Security.salt
     A random string used in security hashing.
 Security.cipherSeed
@@ -227,14 +170,42 @@ Acl.classname, Acl.database
     Constants used for CakePHP’s Access Control List functionality. See
     the Access Control Lists chapter for more information.
 
-.. note::
-    Cache configuration is also found in core.php — We’ll be covering
-    that later on, so stay tuned.
+Caching Configuration
+---------------------
 
-The :php:class:`Configure` class can be used to read and write core
-configuration settings on the fly. This can be especially handy if
-you want to turn the debug setting on for a limited section of
-logic in your application, for instance.
+See the :ref:`cache-configuration` for information on configuring caching in
+CakePHP.
+
+Error and Exception handling configuration
+------------------------------------------
+
+See the sections on :ref:`error-configuration` and
+:ref:`exception-configuration` for information on configuring error and
+exception handlers.
+
+Logging configuration
+---------------------
+
+See the :ref:`log-configuration` for information on configuring logging in
+CakePHP.
+
+Email configuration
+-------------------
+
+See the :ref:`email-configuration` for information on configuring email presets in
+CakePHP.
+
+Session configuration
+---------------------
+
+See the :ref:`session-configuration` for information on configuring session
+handling in CakePHP.
+
+Routing configuration
+---------------------
+
+See :ref:`routes-configuration` for more information on configuring routing and
+creating routes for your application.
 
 Configuration Constants
 -----------------------
@@ -246,19 +217,6 @@ are a few constants that CakePHP uses during runtime.
 
     Error constant. Used for differentiating error logging and
     debugging. Currently PHP supports LOG\_DEBUG.
-
-Core Cache Configuration
-------------------------
-
-CakePHP uses two cache configurations internally.  ``_cake_model_`` and ``_cake_core_``.
-``_cake_core_`` is used to store file paths, and object locations.  ``_cake_model_`` is
-used to store schema descriptions, and source listings for datasources.  Using a fast
-cache storage like APC or Memcached is recommended for these configurations, as
-they are read on every request.  By default both of these configurations expire every
-10 seconds when debug is greater than 0.
-
-As with all cached data stored in :php:class:`Cache` you can clear data using
-:php:meth:`Cache::clear()`.
 
 Additional Class Paths
 ======================

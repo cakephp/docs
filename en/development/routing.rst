@@ -32,9 +32,21 @@ If you define two similar routes, the first defined route will
 have higher priority over the one defined latter.  After connecting routes you
 can manipulate the order of routes using :php:meth:`Router::promote()`.
 
-CakePHP also comes with a few default routes to get you started. These
+CakePHP comes with a few default routes to get you started. These
 can be disabled later on once you are sure you don't need them.
 See :ref:`disabling-default-routes` on how to disable the default routing.
+
+General configuration
+---------------------
+
+In addition to the actual routes there are a few general configuration options
+regarding routing:
+
+Routing.prefixes
+    Un-comment this definition if you’d like to take advantage of
+    CakePHP prefixed routes like admin. Set this variable with an array
+    of prefix names of the routes you’d like to use. See the section on
+    :ref:`prefix-routing` for more information.
 
 
 Default Routing

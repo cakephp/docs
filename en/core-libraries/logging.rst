@@ -19,8 +19,37 @@ CakePHP classes. If the context is a CakePHP class (Model,
 Controller, Component... almost anything), you can log your data.
 You can also use ``Log::write()`` directly. See :ref:`writing-to-logs`
 
-Creating and configuring log adapters
-=====================================
+.. _log-configuration:
+
+Logging Configuration
+=====================
+
+Configuring ``Log`` should be done during your application's bootstrap phase.
+The ``App/Config/logging.php`` file is intended for just this.  You can define
+as many or as few loggers as your application needs.  Loggers should be
+configured using :php:class:`Cake\\Core\\Configure`. An example would be::
+
+    <?php
+    Configure::write('Log.debug', [
+        'engine' => 'Cake\Log\Engine\FileLog',
+        'levels' => ['notice', 'info', 'debug'],
+        'file' => 'debug',
+    ]);
+
+    Configure::write('Log.error', [
+        'engine' => 'Cake\Log\Engine\FileLog',
+        'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
+        'file' => 'error',
+    ]);
+
+The above creates two loggers.  One named ``debug`` the other named ``error``.
+Each is configured to handle different levels of messages. They also store their
+log messages in separate files, so its easy to separate debug/notice/info logs
+from more serious errors. See the section on :ref:`logging-levels` for more
+information on the different levels and what they mean.
+
+Creating log adapters
+---------------------
 
 Log adapters can be part of your application, or part of
 plugins. If for example you had a database logger called
@@ -146,10 +175,32 @@ All configured log streams are written to sequentially each time
 logging adapters ``log()`` will return false and no log messages will be
 written.
 
+.. _logging-levels:
+
+Using levels
+------------
+
+CakePHP supports the standard POSIX set of logging levels. Each level represents
+an increasing level of severity:
+
+* Emergency: system is unusable
+* Alert: action must be taken immediately
+* Critical: critical conditions
+* Error: error conditions
+* Warning: warning conditions
+* Notice: normal but significant condition
+* Info: informational messages
+* Debug: debug-level messages
+
+You can refer to these levels by name when configuring loggers, and when writing
+log messages.  Alternatively, you can use convenience methods like
+:php:meth:`Cake\\Log\\Log::error()` to clearly and easily indicate the logging
+level.
+
 .. _logging-scopes:
 
 Logging Scopes
-==============
+--------------
 
 Often times you'll want to configure different logging behavior for different
 subsystems or parts of your application.  Take for example an e-commerce shop.

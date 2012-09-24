@@ -42,6 +42,7 @@ as your application grows. In addition to the :php:class:`Cache` class, the
 :doc:`/core-libraries/helpers/cache` allows for full page caching, which
 can greatly improve performance as well.
 
+.. _cache-configuration:
 
 Configuring Cache class
 =======================
@@ -61,14 +62,7 @@ each other's cached data.
 Using multiple cache configurations can help reduce the number of times you need
 to use :php:func:`Cache::set()` as well as centralize all your cache settings.
 Using multiple configurations also lets you incrementally change the storage as
-needed.
-
-.. note::
-
-    You must specify which engine to use. It does **not** default to
-    File.
-
-Example::
+needed. Example::
 
     <?php
     Configure::write('Cache.short', array(
@@ -86,6 +80,11 @@ Example::
         'path' => CACHE . 'long' . DS,
     ));
 
+.. note::
+
+    You must specify which engine to use. It does **not** default to
+    File.
+
 By placing the above code in your ``app/Config/cache.php`` you will
 have two additional Cache configurations. The name of these
 configurations 'short' or 'long' is used as the ``$config``
@@ -99,6 +98,20 @@ syntaxes:
   plugin.
 * Using a fully qualified namespaced classname.  This allows you to use
   classes located outside of the conventional locations.
+
+Other cache related configuration
+---------------------------------
+
+Other than configuring caching adapters, there are a few other cache related
+configuration variables:
+
+Cache.disable
+    When set to true, persistent caching is disabled site-wide.
+    This will make all read/writes to :php:class:`Cake\\Cache\\Cache` fail.
+Cache.check
+    If set to true, enables view caching. Enabling is still needed in
+    the controllers, but this variable enables the detection of those
+    settings.
 
 .. note::
 

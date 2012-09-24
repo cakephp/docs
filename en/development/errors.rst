@@ -10,21 +10,23 @@ There is more control than ever for error and exception handling in CakePHP 2.0.
 You can configure which methods you want to set as the default error handler,
 and exception handler using configure.
 
+.. _error-configuration:
+
 Error configuration
 ===================
 
-Error configuration is done inside your application's ``app/Config/core.php``
+Error configuration is done inside your application's ``app/Config/error.php``
 file.  You can define a callback to be fired each time your application triggers
 any PHP error - exceptions are handled :doc:`/development/exceptions` separately.
 The callback can be any PHP callable, including an anonymous function.  The 
 default error handling configuration looks like::
 
     <?php
-    Configure::write('Error', array(
+    Configure::write('Error', [
         'handler' => 'ErrorHandler::handleError',
         'level' => E_ALL & ~E_DEPRECATED,
         'trace' => true
-    ));
+    ]);
 
 You have 5 built-in options when configuring error handlers:
 
@@ -44,19 +46,14 @@ ErrorHandler by default, displays errors when ``debug`` > 0, and logs errors whe
 debug = 0.  The type of errors captured in both cases is controlled by ``Error.level``.
 The fatal error handler will be called independent of ``debug`` level or ``Error.level``
 configuration, but the result will be different based on ``debug`` level.
+The ``Error.handler`` and ``Error.consoleHandler`` will receive the fatal error
+codes as well. The default behavior is show a page to internal server error
+(``debug`` disabled) or a page with the message, file and line (``debug`` enabled).
 
 .. note::
 
-    If you use a custom error handler, the trace setting will have no effect, 
+    If you use a custom error handler, the trace setting will have no effect,
     unless you refer to it in your error handling function.
-
-.. versionadded:: 2.2
-    The ``Error.consoleHandler`` option was added in 2.2.
-
-.. versionchanged:: 2.2
-    The ``Error.handler`` and ``Error.consoleHandler`` will receive the fatal error
-    codes as well. The default behavior is show a page to internal server error
-    (``debug`` disabled) or a page with the message, file and line (``debug`` enabled).
 
 Creating your own error handler
 ===============================
