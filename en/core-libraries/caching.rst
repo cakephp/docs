@@ -60,7 +60,7 @@ for the core caches.  This will prevent multiple applications from overwriting
 each other's cached data.
 
 Using multiple cache configurations can help reduce the number of times you need
-to use :php:func:`Cache::set()` as well as centralize all your cache settings.
+to use :php:meth:`Cake\\Cache\\Cache::set()` as well as centralize all your cache settings.
 Using multiple configurations also lets you incrementally change the storage as
 needed. Example::
 
@@ -85,12 +85,12 @@ needed. Example::
     You must specify which engine to use. It does **not** default to
     File.
 
-By placing the above code in your ``app/Config/cache.php`` you will
-have two additional Cache configurations. The name of these
-configurations 'short' or 'long' is used as the ``$config``
-parameter for :php:func:`Cache::write()` and :php:func:`Cache::read()`. When
-configuring Cache engines you can refer to the class name using the following
-syntaxes:
+By placing the above code in your ``App/Config/cache.php`` you will have two
+additional Cache configurations. The name of these configurations 'short' or
+'long' is used as the ``$config`` parameter for
+:php:meth:`Cake\\Cache\\Cache::write()` and
+:php:meth:`Cake\\Cache\\Cache::read()`. When configuring Cache engines you can
+refer to the class name using the following syntaxes:
 
 * Short classname without 'Engine' or a namespace.  This will infer that you
   want to use a Cache engine in ``Cake\Cache\Engine`` or ``App\Cache\Engine``.
@@ -237,7 +237,7 @@ contention, and ability for two users to simultaneously lower the value by one
 resulting in an incorrect value.
 
 After setting an integer value you can manipulate it using
-:php:meth:`Cache::increment()` and :php:meth:`Cache::decrement()`::
+:php:meth:`Cake\\Cache\\Cache::increment()` and :php:meth:`Cake\\Cache\\Cache::decrement()`::
 
     <?php
     Cache::write('initial_count', 10);
@@ -256,8 +256,6 @@ After setting an integer value you can manipulate it using
 
 Using groups
 ============
-
-.. versionadded:: 2.2
 
 Sometimes you will want to mark multiple cache entries to belong to certain
 group or namespace. This is a common requirement for mass-invalidating keys
