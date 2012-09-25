@@ -170,7 +170,7 @@ The following configuration keys are used:
 
 All these configurations are optional, except ``'from'``. If you put more
 configuration in this array, the configurations will be used in the
-:php:meth:`Email::config()` method and passed to the transport class ``config()``.
+:php:meth:`Cake\\Network\Email\\Email::config()` method and passed to the transport class ``config()``.
 For example, if you are using smtp transport, you should pass the host, port and
 other configurations.
 
@@ -208,8 +208,8 @@ normal views::
         ->from('app@domain.com')
         ->send();
 
-The above would use ``app/View/Emails/html/welcome.ctp`` for the view,
-and ``app/View/Layouts/Emails/html/fancy.ctp`` for the layout. You can
+The above would use ``App/View/Emails/html/welcome.ctp`` for the view,
+and ``App/View/Layouts/Emails/html/fancy.ctp`` for the layout. You can
 send multipart templated email messages as well::
 
     <?php
@@ -222,10 +222,10 @@ send multipart templated email messages as well::
 
 This would use the following view files:
 
-* ``app/View/Emails/text/welcome.ctp``
-* ``app/View/Layouts/Emails/text/fancy.ctp``
-* ``app/View/Emails/html/welcome.ctp``
-* ``app/View/Layouts/Emails/html/fancy.ctp``
+* ``App/View/Emails/text/welcome.ctp``
+* ``App/View/Layouts/Emails/text/fancy.ctp``
+* ``App/View/Emails/html/welcome.ctp``
+* ``App/View/Layouts/Emails/html/fancy.ctp``
 
 When sending templated emails you have the option of sending either
 ``text``, ``html`` or ``both``.
@@ -270,7 +270,7 @@ You can do this using themes by telling Email to use appropriate theme using
 
 This allows you to override the `new_comment` template in your theme without modifying
 the Blog plugin.  The template file needs to be created in the following path:
-``APP/View/Themed/TestTheme/Blog/Emails/text/new_comment.ctp``.
+``App/View/Themed/TestTheme/Blog/Emails/text/new_comment.ctp``.
 
 Sending attachments
 -------------------
@@ -311,16 +311,13 @@ you want the filenames to appear in the recipient's mail client:
    ``Content-Disposition`` header for an attachment.  This is useful when
    sending ical invites to clients using outlook.
 
-.. versionchanged:: 2.3
-    The ``contentDisposition`` option was added in 2.3
-
 Using transports
 ----------------
 
 Transports are classes designed to send the e-mail over some protocol or method.
 CakePHP support the Mail (default), Debug and Smtp transports.
 
-To configure your method, you must use the :php:meth:`Email::transport()`
+To configure your method, you must use the :php:meth:`Cake\\Network\Email\\Email::transport()`
 method or have the transport in your configuration
 
 Creating custom Transports
@@ -328,11 +325,11 @@ Creating custom Transports
 
 You are able to create your custom transports to integrate with others email
 systems (like SwiftMailer). To create your transport, first create the file
-``app/Lib/Network/Email/ExampleTransport.php`` (where Example is the name of your
+``App/Lib/Network/Email/ExampleTransport.php`` (where Example is the name of your
 transport). To start off your file should look like::
 
     <?php
-    App::uses('AbstractTransport', 'Network/Email');
+    use Cake\Network\Email\AbstractTransport;
 
     class ExampleTransport extends AbstractTransport {
 
@@ -348,7 +345,7 @@ called before send() and allows you to accept user configurations. By default,
 this method puts the configuration in protected attribute ``$_config``.
 
 If you need to call additional methods on the transport before send, you can use
-:php:meth:`Email::transportClass()` to get an instance of the transport.
+:php:meth:`Cake\\Network\\Email\\Email::transportClass()` to get an instance of the transport.
 Example::
 
     <?php
@@ -362,7 +359,7 @@ Sending messages quickly
 
 Sometimes you need a quick way to fire off an email, and you don't necessarily
 want do setup a bunch of configuration ahead of time.
-:php:meth:`Email::deliver()` is intended for that purpose.
+:php:meth:`Cake\\Network\Email\\Email::deliver()` is intended for that purpose.
 
 You can create your configuration using ``Configure``, or use an array with all
 options that you need and use the static method ``Email::deliver()``.
