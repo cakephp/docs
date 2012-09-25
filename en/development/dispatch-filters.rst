@@ -1,8 +1,6 @@
 Dispatcher Filters
 ##################
 
-.. versionadded:: 2.2
-
 There are several reasons to want a piece of code to be run before any
 controller code is executed or right before the response is sent to the client,
 such as response caching, header tuning, special authentication or just to
@@ -110,12 +108,13 @@ Filter Classes
 ==============
 
 Dispatcher filters, when defined as class names in configuration, should extend
-the class ``DispatcherFilter`` provided in the `Routing` CakePHP's directory.
+the class ``DispatcherFilter`` provided in the ``Routing`` CakePHP's directory.
 Let's create a simple filter to respond to a specific url with a 'Hello World'
 text::
 
     <?php
-    App::uses('DispatcherFilter', 'Routing');
+    use Cake\Routing\DispatcherFilter;
+
     class HelloWorldFilter extends DispatcherFilter {
 
         public $priority = 9;
@@ -162,7 +161,8 @@ Let's now create another filter for altering response headers in any public
 page, in our case it would be anything served from the ``PagesController``::
 
     <?php
-    App::uses('DispatcherFilter', 'Routing');
+    use Cake\Routing\DispatcherFilter;
+
     class HttpCacheFilter extends DispatcherFilter {
 
         public function afterDispatch($event) {
