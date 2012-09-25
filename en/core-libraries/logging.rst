@@ -57,7 +57,7 @@ plugins. If for example you had a database logger called
 in ``App/Log/Engine/DatabaseLogger.php``. As part of a plugin it
 would be placed in
 ``App/Plugin/LoggingPack/Log/Engine/DatabaseLogger.php``. To configure log
-adapters you should use Configure.  For example confguring our DatabaseLogger
+adapters you should use Configure.  For example configuring our DatabaseLogger
 would look like::
 
     <?php
