@@ -42,32 +42,30 @@ as your application grows. In addition to the :php:class:`Cache` class, the
 :doc:`/core-libraries/helpers/cache` allows for full page caching, which
 can greatly improve performance as well.
 
+.. _cache-configuration:
 
 Configuring Cache class
 =======================
 
-Configuring the Cache class can be done anywhere, but generally
-you will want to configure Cache in ``app/Config/bootstrap.php``.  You
-can configure as many cache configurations as you need, and use any
-mixture of cache engines.  CakePHP uses two cache configurations internally,
-which are configured in ``app/Config/core.php``. If you are using APC or
-Memcache you should make sure to set unique keys for the core caches.  This will
-prevent multiple applications from overwriting each other's cached data.
+Configuring the Cache class can be done anywhere, but generally you will want to
+configure Cache during bootstrapping.  The ``app/Config/cache.php`` file is the
+conventional location to do this.  You can configure as many cache
+configurations as you need, and use any mixture of cache engines.  CakePHP uses
+two cache configurations internally.  ``_cake_core_`` is used for storing file
+maps, and parsed results of
+:doc:`/core-libraries/internationalization-and-localization` files.
+``_cake_model_``, is used to store schema descriptions for your applications
+models. If you are using APC or Memcache you should make sure to set unique keys
+for the core caches.  This will prevent multiple applications from overwriting
+each other's cached data.
 
-Using multiple cache configurations can help reduce the
-number of times you need to use :php:func:`Cache::set()` as well as
-centralize all your cache settings.  Using multiple configurations
-also lets you incrementally change the storage as needed.
-
-.. note::
-
-    You must specify which engine to use. It does **not** default to
-    File.
-
-Example::
+Using multiple cache configurations can help reduce the number of times you need
+to use :php:meth:`Cake\\Cache\\Cache::set()` as well as centralize all your cache settings.
+Using multiple configurations also lets you incrementally change the storage as
+needed. Example::
 
     <?php
-    Cache::config('short', array(
+    Configure::write('Cache.short', array(
         'engine' => 'File',
         'duration' => '+1 hours',
         'path' => CACHE,
@@ -75,17 +73,45 @@ Example::
     ));
 
     // long
-    Cache::config('long', array(
+    Configure::write('Cache.long', array(
         'engine' => 'File',
         'duration' => '+1 week',
         'probability' => 100,
         'path' => CACHE . 'long' . DS,
     ));
 
-By placing the above code in your ``app/Config/bootstrap.php`` you will
-have two additional Cache configurations. The name of these
-configurations 'short' or 'long' is used as the ``$config``
-parameter for :php:func:`Cache::write()` and :php:func:`Cache::read()`.
+.. note::
+
+    You must specify which engine to use. It does **not** default to
+    File.
+
+By placing the above code in your ``App/Config/cache.php`` you will have two
+additional Cache configurations. The name of these configurations 'short' or
+'long' is used as the ``$config`` parameter for
+:php:meth:`Cake\\Cache\\Cache::write()` and
+:php:meth:`Cake\\Cache\\Cache::read()`. When configuring Cache engines you can
+refer to the class name using the following syntaxes:
+
+* Short classname without 'Engine' or a namespace.  This will infer that you
+  want to use a Cache engine in ``Cake\Cache\Engine`` or ``App\Cache\Engine``.
+* Using :term:`plugin syntax` which allows you to load engines from a specific
+  plugin.
+* Using a fully qualified namespaced classname.  This allows you to use
+  classes located outside of the conventional locations.
+
+Other cache related configuration
+---------------------------------
+
+Other than configuring caching adapters, there are a few other cache related
+configuration variables:
+
+Cache.disable
+    When set to true, persistent caching is disabled site-wide.
+    This will make all read/writes to :php:class:`Cake\\Cache\\Cache` fail.
+Cache.check
+    If set to true, enables view caching. Enabling is still needed in
+    the controllers, but this variable enables the detection of those
+    settings.
 
 .. note::
 
@@ -95,32 +121,28 @@ parameter for :php:func:`Cache::write()` and :php:func:`Cache::read()`.
 Creating a storage engine for Cache
 ===================================
 
-You can provide custom ``Cache`` adapters in ``app/Lib`` as well
-as in plugins using ``$plugin/Lib``. App/plugin cache engines can
+You can provide custom ``Cache`` adapters in ``App\Cache\Engine`` as well
+as in plugins using ``$plugin\Cache\Engine``. App/plugin cache engines can
 also override the core engines. Cache adapters must be in a cache
 directory. If you had a cache engine named ``MyCustomCacheEngine``
-it would be placed in either ``app/Lib/Cache/Engine/MyCustomCacheEngine.php``
-as an app/libs. Or in ``$plugin/Lib/Cache/Engine/MyCustomCacheEngine.php`` as
+it would be placed in either ``App/Cache/Engine/MyCustomCacheEngine.php``
+as an app/libs. Or in ``$plugin/Cache/Engine/MyCustomCacheEngine.php`` as
 part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax.::
 
     <?php
-    Cache::config('custom', array(
+    Configure::write('Cache.custom', array(
         'engine' => 'CachePack.MyCustomCache',
         // ...
     ));
 
-.. note::
-
-    App and Plugin cache engines should be configured in
-    ``app/Config/bootstrap.php``. If you try to configure them in core.php
-    they will not work correctly.
-
-Custom Cache engines must extend :php:class:`CacheEngine` which defines
+Custom Cache engines must extend :php:class:`Cake\\Cache\\CacheEngine` which defines
 a number of abstract methods as well as provides a few initialization
 methods.
 
 The required API for a CacheEngine is
+
+.. php:namespace:: Cake\Cache
 
 .. php:class:: CacheEngine
 
@@ -215,7 +237,7 @@ contention, and ability for two users to simultaneously lower the value by one
 resulting in an incorrect value.
 
 After setting an integer value you can manipulate it using
-:php:meth:`Cache::increment()` and :php:meth:`Cache::decrement()`::
+:php:meth:`Cake\\Cache\\Cache::increment()` and :php:meth:`Cake\\Cache\\Cache::decrement()`::
 
     <?php
     Cache::write('initial_count', 10);
@@ -235,15 +257,13 @@ After setting an integer value you can manipulate it using
 Using groups
 ============
 
-.. versionadded:: 2.2
-
 Sometimes you will want to mark multiple cache entries to belong to certain
 group or namespace. This is a common requirement for mass-invalidating keys
 whenever some information changes that is shared among all entries in the same
 group. This is possible by declaring the groups in cache configuration::
 
     <?php
-    Cache::config('site_home', array(
+    Configure::write('Cache.site_home', array(
         'engine' => 'Redis',
         'duration' => '+999 days',
         'groups' => array('comment', 'post')
@@ -278,14 +298,7 @@ Cache API
 
     The Cache class in CakePHP provides a generic frontend for several
     backend caching systems. Different Cache configurations and engines
-    can be setup in your app/Config/core.php
-
-.. php:staticmethod:: config($name = null, $settings = array())
-
-    ``Cache::config()`` is used to create additional Cache
-    configurations. These additional configurations can have different
-    duration, engines, paths, or prefixes than your default cache
-    config.
+    can be setup in your ``App/Config/cache.php``
 
 .. php:staticmethod:: read($key, $config = 'default')
 
@@ -356,7 +369,7 @@ Cache API
         $results = Cache::read('results');
 
     If you find yourself repeatedly calling ``Cache::set()`` perhaps
-    you should create a new :php:func:`Cache::config()`. This will remove the
+    you should configure a separate cache engine. This will remove the
     need to call ``Cache::set()``.
 
 .. php:staticmethod:: increment($key, $offset = 1, $config = 'default')
@@ -387,6 +400,13 @@ Cache API
     Garbage collects entries in the cache configuration.  This is primarily
     used by FileEngine. It should be implemented by any Cache engine
     that requires manual eviction of cached data.
+
+.. php:staticmethod:: engine($name, $engine = null)
+
+    Allows you to fetch constructed cache engines.  By using the ``$engine``
+    parameter you can inject new engines or replace existing ones.
+
+    .. versionadded:: 3.0
 
 
 .. meta::

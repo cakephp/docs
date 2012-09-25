@@ -7,6 +7,7 @@ requests and store persistent data for specific users. Unlike Cookies, session
 data is not available on the client side.  Usage of the ``$_SESSION`` is generally
 avoided in CakePHP, and instead usage of the Session classes is preferred.
 
+.. _session-configuration:
 
 Session Configuration
 =====================
@@ -34,7 +35,8 @@ level ``Session`` key, and a number of options are available:
   needed to regenerate the session by modifying :php:attr:`CakeSession::$requestCountdown`.
 
 * ``Session.defaults`` - Allows you to use one the built-in default session
-  configurations as a base for your session configuration.
+  configurations as a base for your session configuration. See below for the
+  built-in defaults.
 
 * ``Session.handler`` - Allows you to define a custom session handler. The core
   database and cache session handlers use this.  This option replaces
@@ -291,7 +293,7 @@ also easy.  In your ``core.php`` make the session block look like the following:
     ));
 
     // Make sure to add a apc cache config
-    Cache::config('apc', array('Engine' => 'Apc'));
+    Configure::write('Cache.apc', array('Engine' => 'Apc'));
 
 Now our application will start using our custom session handler for reading &
 writing session data.

@@ -11,6 +11,40 @@ PHP Version Support
 
 CakePHP 3.x supports PHP Version 5.4.3 and above.
 
+Namespaces
+==========
+
+All of CakePHP's core classes are now namespaced under names matching the
+filesystem directories.  For example ``Cake/Cache/Cache.php`` is named
+``Cake\Cache\Cache``.  Global constants and helper methods like :php:meth:`__()`
+and :php:meth:`debug()` are not namespaced for convenience sake.
+
+
+
+Cache
+=====
+
+* Caching engines for :php:class:`Cake\\Cache\\Cache` are now configured using
+  :php:meth:`Cake\\Core\\Configure` instead of using the ``config()`` method.
+  ``Cache::config()`` will be removed for 3.0.0 stable.
+* Cache engines are now lazily loaded upon first use.
+* :php:meth:``Cake\\Cache\\Cache::engine()`` has been added.
+
+
+Log
+===
+
+* :php:class:`Cake\\Log\\Log` is now configured using
+  :php:meth:`Cake\\Core\\Configure` instead of using the ``config()`` method.
+  ``Log::config()`` will be removed for 3.0.0 stable.
+* Log engines are now lazily loaded upon the first write to the logs.
+* :php:meth:``Cake\\Log\\Log::engine()`` has been added.
+* ``Log::defaultLevels()`` was removed.
+* You can no longer create custom levels using ``Log::levels()``.
+* You can no longer invent custom log levels.  You must use the default set of
+  log levels.  You should use logging scopes to create custom log files or
+  specific handling for different sections of your application.
+
 
 Routing
 =======

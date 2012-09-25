@@ -9,17 +9,20 @@ specific exceptions that extend this base class.
 CakePHP also provides a number of exception classes that you can use for HTTP
 errors.  See the section on :ref:`built-in-exceptions` for more information.
 
+.. _exception-configuration:
+
 Exception configuration
 =======================
 
-There are a few keys available for configuring exceptions::
+Exception handlers are usually defined in ``App/Config/error.php``.  There are
+a few keys available for configuring exceptions::
 
     <?php
-    Configure::write('Exception', array(
+    Configure::write('Exception', [
         'handler' => 'ErrorHandler::handleException',
         'renderer' => 'ExceptionRenderer',
         'log' => true
-    ));
+    ]);
 
 * ``handler`` - callback - The callback to handle exceptions. You can set this to
   any callback type, including anonymous functions.
@@ -35,11 +38,9 @@ Exception rendering by default displays an HTML page, you can customize either t
 handler or the renderer by changing the settings.  Changing the handler, allows
 you to take full control over the exception handling process, while changing
 the renderer allows you to easily change the output type/contents, as well as
-add in application specific exception handling.
-
-
-.. versionadded:: 2.2
-    The ``Exception.consoleHandler`` option was added in 2.2.
+add in application specific exception handling.  When debug is set to 0, no
+development level errors or stack traces will be displayed.  Instead generic
+HTTP error pages will be displayed.
 
 Exception classes
 =================
