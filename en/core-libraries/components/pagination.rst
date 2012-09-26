@@ -307,7 +307,7 @@ arguments.
             public $paginate = array();
         }
 
-    Or use ``$this->Paginator->setting = array('limit' => 10);``
+    Or use ``$this->Paginator->settings = array('limit' => 10);``
 
     Make sure you have added the Paginator component to your $components array if
     you want to modify the ``$settings`` property of the PaginatorComponent.
