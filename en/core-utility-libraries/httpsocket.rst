@@ -80,6 +80,7 @@ HTTP methods.
     $request is a keyed array of various options. Here is the format
     and default settings::
 
+        <?php
         public $request = array(
             'method' => 'GET',
             'uri' => array(
