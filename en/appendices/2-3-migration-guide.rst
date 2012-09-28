@@ -61,6 +61,14 @@ Console
 - Baking a new project now sets the application's cache prefix to the name of
   the application.
 
+I18n
+====
+
+L10n
+---------
+
+- `nld` is now the default locale for Dutch as specified by ISO 639-3 and `dut` its alias.
+  The locale folders have to be adjusted accordingly (from `/locale/dut/` to `/locale/nld/`).
 
 Core
 ====
