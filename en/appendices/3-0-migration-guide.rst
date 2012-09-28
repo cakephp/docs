@@ -20,6 +20,10 @@ filesystem directories.  For example ``Cake/Cache/Cache.php`` is named
 and :php:meth:`debug()` are not namespaced for convenience sake.
 
 
+Basics
+======
+
+* ``LogError()`` was removed, it provided no benefit and is rarely/never used.
 
 Cache
 =====
