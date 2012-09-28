@@ -61,6 +61,14 @@ Console
 - Baking a new project now sets the application's cache prefix to the name of
   the application.
 
+I18n
+====
+
+L10n
+---------
+
+- `nld` is now the default locale for Dutch as specified by ISO 639-3 and `dut` its alias.
+  The locale folders have to be adjusted accordingly (from `/locale/dut/` to `/locale/nld/`).
 
 Core
 ====
@@ -139,7 +147,7 @@ View
 - MediaView is deprecated, and you can use new features in
   :php:class:`CakeResponse` to achieve the same results.
 - Serialization in Json and Xml views has been moved to ``_serialize()``
-- beforeRender and afterRender callbacks are now being called in Json and Xml 
+- beforeRender and afterRender callbacks are now being called in Json and Xml
   views when using view templates.
 - :php:meth:`View::fetch()` now has a ``$default`` argument.  This argument can
   be used to provide a default value should a block be empty.
