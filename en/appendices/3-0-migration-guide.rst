@@ -6,10 +6,17 @@ migration to 3.0, as well as reference to get up to date with the changes made
 to the core since the CakePHP 2.x branch. Be sure to read the other pages in
 this guide for all the new features and API changes.
 
-PHP Version Support
-===================
 
-CakePHP 3.x supports PHP Version 5.4.3 and above.
+Requirements
+============
+
+- CakePHP 3.x requires the mbstring extension.
+- CakePHP 3.x supports PHP Version 5.4.3 and above.
+
+.. warning::
+
+    CakePHP 3.0 will not work if you do not meet the above requirements.
+
 
 Namespaces
 ==========
@@ -24,6 +31,7 @@ Basics
 ======
 
 * ``LogError()`` was removed, it provided no benefit and is rarely/never used.
+
 
 Cache
 =====
@@ -131,6 +139,7 @@ ControllerTestCase
 
 - You can now simulate both query string, post data and cookie values when using ``testAction()``
 
+
 View\Helper
 ===========
 
@@ -138,6 +147,7 @@ FormHelper
 ----------
 
 - The ``data[`` prefix was removed from all generated inputs.  The prefix served no real purpose anymore.
+
 
 Core
 =====
@@ -149,3 +159,14 @@ Object
 
     - ``options[url]`` is now ``options[query]``.
     - ``options[data]`` is now ``options[post]``.
+
+I18n
+====
+
+- The methods below has been moved:
+
+  - From ``Cake\I18n\Multibyte::utf8()`` to ``Cake\Utility\String::utf8()``
+  - From ``Cake\I18n\Multibyte::ascii()`` to ``Cake\Utility\String::ascii()``
+  - From ``Cake\I18n\Multibyte::checkMultibyte()`` to ``Cake\Utility\String::isMultibyte()``
+
+- Once the mbstring extension is required, the ``Multibyte`` class was removed.
