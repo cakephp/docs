@@ -298,10 +298,10 @@ automatically echo the output into the view.
 
         <?php
         // called as NumberHelper
-        $this->Number->format($number, $options);
+        $this->Number->formatDelta($number, $options);
 
         // called as CakeNumber
-        CakeNumber::format($number, $options);
+        CakeNumber::formatDelta($number, $options);
 
     The $number parameter is the number that you are planning on
     formatting for output. With no $options supplied, the number
