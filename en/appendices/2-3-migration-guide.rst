@@ -67,8 +67,12 @@ I18n
 L10n
 ---------
 
-- `nld` is now the default locale for Dutch as specified by ISO 639-3 and `dut` its alias.
-  The locale folders have to be adjusted accordingly (from `/locale/dut/` to `/locale/nld/`).
+- ``nld`` is now the default locale for Dutch as specified by ISO 639-3 and ``dut`` its alias.
+  The locale folders have to be adjusted accordingly (from `/Locale/dut/` to `/Locale/nld/`).
+- Albanian is now ``sqi``, Basque is now ``eus``, Chinese is now ``zho``, Tibetan is now ``bod``,
+  Czech is now ``ces``, Farsi is now ``fas``, French is now ``fra``, Icelandic is now ``isl``,
+  Macedonian is now ``mkd``, Malaysian is now ``msa``, Romanian is now ``ron``, Serbian is now ``srp``
+  and Slovak is now ``slk``. The corresponding locale folders have to be adjusted, as well.
 
 Core
 ====
@@ -204,7 +208,7 @@ String
 Debugger
 --------
 
-- php:meth:`Debugger::exportVar()` now outputs private and protected properties
+- :php:meth:`Debugger::exportVar()` now outputs private and protected properties
   in PHP >= 5.3.0.
 
 Security
