@@ -211,7 +211,7 @@ automatically echo the output into the view.
 
 .. php:method:: toReadableSize(string $dataSize)
 
-    :param string $data_size: The number of bytes to make readable.
+    :param string $dataSize: The number of bytes to make readable.
 
     This method formats data sizes in human readable forms. It provides
     a shortcut way to convert bytes to KB, MB, GB, and TB. The size is
