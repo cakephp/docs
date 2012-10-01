@@ -170,13 +170,15 @@ can be used to clear or overwrite a block at any time::
 
 As of 2.3 you can also use ``prepend()`` to prepend content to an existing block.
 
+    <?php
+    // Prepend to sidebar
+    $this->prepend('sidebar', 'this content goes on top of sidebar');
+
+
 .. note::
 
     You should avoid using ``content`` as a block name.  This is used by CakePHP
     internally for extended views, and view content in the layout.
-
-    // Prepend to sidebar
-    $this->prepend('sidebar', 'this content goes on top of sidebar');
 
     
 Displaying blocks
