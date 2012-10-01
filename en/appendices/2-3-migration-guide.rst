@@ -156,8 +156,10 @@ View
 - Serialization in Json and Xml views has been moved to ``_serialize()``
 - beforeRender and afterRender callbacks are now being called in Json and Xml
   views when using view templates.
-- :php:meth:`View::fetch()` now has a ``$default`` argument.  This argument can
+- :php:meth:`View::fetch()` now has a ``$default`` argument. This argument can
   be used to provide a default value should a block be empty.
+- :php:meth:`View::prepend()` has been added to allow prepending content to
+  existing block.
 
 Helpers
 =======
