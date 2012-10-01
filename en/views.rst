@@ -168,7 +168,7 @@ can be used to clear or overwrite a block at any time::
 
 .. versionadded:: 2.3
 
-As of 2.3 you can also use ``prepend()`` to prepend content to an existing block.
+As of 2.3 you can also use ``prepend()`` to prepend content to an existing block::
 
     <?php
     // Prepend to sidebar
