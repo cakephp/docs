@@ -338,6 +338,9 @@ automatically echo the output into the view.
         ));
         // output '+123,456.79'
 
+    .. versionadded:: 2.3
+        This method was added in 2.3
+
 .. end-cakenumber
 
 .. meta::
