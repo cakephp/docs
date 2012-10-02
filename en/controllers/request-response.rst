@@ -324,6 +324,8 @@ CakeRequest API
         // url is /posts/index?page=1&sort=title
         $value = $this->request->query('page');
 
+    .. versionadded:: 2.3
+
 .. php:method:: is($check)
 
     Check whether or not a Request matches a certain criteria.  Uses
