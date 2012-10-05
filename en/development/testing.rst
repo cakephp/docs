@@ -327,6 +327,7 @@ test case:
 
 Creating fixtures
 -----------------
+
 When creating a fixture you will mainly define two things: how the table is created (which fields are part of the table), and which records will be initially populated to the table. Let's
 create our first fixture, that will be used to test our own Article
 model. Create a file named ``ArticleFixture.php`` in your
@@ -353,9 +354,13 @@ model. Create a file named ``ArticleFixture.php`` in your
      } 
 
 The ``$useDbConfig`` property defines the datasource of which the fixture will
-use.  You can specify an arbitrary name, eg.: ``myapp``, and the testsuite
-will use ``test_myapp`` if it exists.  Doing this is optional, and when
-unspecified, the default ``test`` datasource will be used.
+use.  If your application uses multiple datasources, you should make the
+fixtures match the model's datasources but prefixed with ``test_``.
+For example if your model uses the ``mydb`` datasource, your fixture should use
+the ``test_mydb`` datasource.  If the ``test_mydb`` connection doesn't exist,
+your models will use the default ``test`` datasource.  Fixture datasources must
+be prefixed with ``test`` to reduce the possibility of accidentally truncating
+all your application's data when running tests.
 
 We use ``$fields`` to specify which fields will be part of this table,
 and how they are defined. The format used to define these fields is
