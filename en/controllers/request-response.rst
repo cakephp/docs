@@ -603,9 +603,6 @@ no longer considered fresh. This header can be set using the
 This method also accepts a DateTime or any string that can be parsed by the
 DateTime class.
 
-.. deprecated:: 2.3
-   Use `CakeResponse::file()` instead.
-
 The Etag header
 ---------------
 
