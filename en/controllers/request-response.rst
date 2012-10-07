@@ -279,6 +279,8 @@ CakeRequest API
     Set allowed HTTP methods, if not matched will throw MethodNotAllowexException
     The 405 response will include the required 'Allow' header with the passed methods
 
+    .. versionadded:: 2.3
+
 .. php:method:: referer($local = false)
 
     Returns the referring address for the request.
