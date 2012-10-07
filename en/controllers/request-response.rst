@@ -258,11 +258,11 @@ CakeRequest API
 
     CakeRequest encapsulates request parameter handling, and introspection.
 
-.. php:method:: domain()
+.. php:method:: domain($tldLength = 1)
 
     Returns the domain name your application is running on.
 
-.. php:method:: subdomains()
+.. php:method:: subdomains($tldLength = 1)
 
     Returns the subdomains your application is running on as an array.
 
@@ -274,20 +274,20 @@ CakeRequest API
 
     Returns the HTTP method the request was made with.
 
-.. php:method:: onlyAllow()
+.. php:method:: onlyAllow($methods)
 
     Set allowed HTTP methods, if not matched will throw MethodNotAllowexException
     The 405 response will include the required 'Allow' header with the passed methods
 
-.. php:method:: referer()
+.. php:method:: referer($local = false)
 
     Returns the referring address for the request.
 
-.. php:method:: clientIp()
+.. php:method:: clientIp($safe = true)
 
     Returns the current visitor's IP address.
 
-.. php:method:: header()
+.. php:method:: header($name)
 
     Allows you to access any of the ``HTTP_*`` headers that were used
     for the request::
@@ -303,7 +303,7 @@ CakeRequest API
     decoding function.  Additional parameters for the decoding function
     can be passed as arguments to input().
 
-.. php:method:: data($key)
+.. php:method:: data($name)
 
     Provides dot notation access to request data.  Allows for reading and
     modification of request data, calls can be chained together as well::
@@ -316,7 +316,7 @@ CakeRequest API
         // You can also read out data.
         $value = $this->request->data('Post.title');
 
-.. php:method:: query($key)
+.. php:method:: query($name)
 
     Provides dot notation access to url query data::
 
@@ -326,18 +326,18 @@ CakeRequest API
 
     .. versionadded:: 2.3
 
-.. php:method:: is($check)
+.. php:method:: is($type)
 
     Check whether or not a Request matches a certain criteria.  Uses
     the built-in detection rules as well as any additional rules defined
     with :php:meth:`CakeRequest::addDetector()`.
 
-.. php:method:: addDetector($name, $callback)
+.. php:method:: addDetector($name, $options)
 
     Add a detector to be used with is().  See :ref:`check-the-request`
     for more information.
 
-.. php:method:: accepts($type)
+.. php:method:: accepts($type = null)
 
     Find out which content types the client accepts or check if they accept a
     particular type of content.
@@ -352,7 +352,7 @@ CakeRequest API
         <?php
         $this->request->accepts('application/json');
 
-.. php:staticmethod:: acceptLanguage($language)
+.. php:staticmethod:: acceptLanguage($language = null)
 
     Get either all the languages accepted by the client,
     or check if a specific language is accepted.
@@ -704,20 +704,20 @@ CakeResponse API
     CakeResponse provides a number of useful methods for interacting with
     the response you are sending to a client.
 
-.. php:method:: header()
+.. php:method:: header($header = null, $value = null)
 
     Allows you to directly set one or many headers to be sent with the response.
 
-.. php:method:: charset()
+.. php:method:: charset($charset = null)
 
     Sets the charset that will be used in the response.
 
-.. php:method:: type($type)
+.. php:method:: type($contentType = null)
 
     Sets the content type for the response.  You can either use a known content
     type alias or the full content type name.
 
-.. php:method:: cache()
+.. php:method:: cache($since, $time = '+1 day')
 
     Allows you to set caching headers in the response.
 
@@ -725,26 +725,26 @@ CakeResponse API
 
     Sets the headers to disable client caching for the response.
 
-.. php:method:: sharable($isPublic, $time)
+.. php:method:: sharable($public = null, $time = null)
 
     Sets the Cache-Control header to be either `public` or `private` and
     optionally sets a `max-age` directive of the resource
 
     .. versionadded:: 2.1
 
-.. php:method:: expires($date)
+.. php:method:: expires($time = null)
 
     Allows to set the `Expires` header to a specific date.
 
     .. versionadded:: 2.1
 
-.. php:method:: etag($tag, $weak)
+.. php:method:: etag($tag = null, $weak = false)
 
     Sets the `Etag` header to uniquely identify a response resource.
 
     .. versionadded:: 2.1
 
-.. php:method:: modified($time)
+.. php:method:: modified($time = null)
 
     Sets the `Last-Modified` header to a specific date and time in the correct
     format.
@@ -763,15 +763,15 @@ CakeResponse API
 
     Turns on gzip compression for the request.
 
-.. php:method:: download()
+.. php:method:: download($filename)
 
     Allows you to send the response as an attachment and set the filename.
 
-.. php:method:: statusCode()
+.. php:method:: statusCode($code = null)
 
     Allows you to set the status code for the response.
 
-.. php:method:: body()
+.. php:method:: body($content = null)
 
     Set the content body for the response.
 
