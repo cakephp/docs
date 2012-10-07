@@ -214,20 +214,20 @@ to an unknown scope, loggers that handle that level of message will log the
 message. For example::
 
     <?php
-    // configure tmp/logs/shops.log to receive all types (log levels), but only
+    // configure tmp/logs/shops.log to receive all levels, but only
     // those with `orders` and `payments` scope
     Configure::write('Log.shops', [
         'engine' => 'FileLog',
-        'types' => [],
+        'levels' => [],
         'scopes' => ['orders', 'payments'],
         'file' => 'shops.log',
     ]);
 
-    // configure tmp/logs/payments.log to receive all types, but only
+    // configure tmp/logs/payments.log to receive all levels, but only
     // those with `payments` scope
     Configure::write('Log.shops', [
         'engine' => 'FileLog',
-        'types' => [],
+        'levels' => [],
         'scopes' => ['payments'],
         'file' => 'payments.log',
     ]);
