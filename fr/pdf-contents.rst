@@ -11,8 +11,8 @@ Contents
    tutorials-and-examples
 
 
-Indices and tables
-==================
+Indices et tables
+=================
 
 * :ref:`genindex`
 * :ref:`modindex`

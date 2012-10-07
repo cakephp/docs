@@ -57,19 +57,16 @@ assurer de définir des clefs uniques pour les caches du noyau. Ceci vous
 évitera que de multiples applications viennent réécrire les données cache
 de l'autre. 
 
-
 L'utilisation de multiples configurations de cache peut aider à réduire 
 le nombre de fois ou vous aurez à utiliser :php:func:`Cache::set()` .
 Aussi bien que centraliser tout vos paramètres de cache. L'utilisation
 de configurations multiples vous permets également de changer le stockage
 comme vous l'entendez.
 
-
 .. note::
 
     Vous devez spécifier quel moteur utiliser. Il ne met **pas** par défaut
     à `File`.
-    
 
 Exemple::
 
@@ -94,13 +91,11 @@ aurez deux configurations de cache additionnelles. Le nom de ces
 configurations 'short' ou 'long' est utilisé comme le paramètre ``$config``
 pour :php:func:`Cache::write()` et  :php:func:`Cache::read()`.
 
-
 .. note::
 
     Quand vous utilisez le moteur FileEngine vous pourriez avoir besoin de
     l'option ``mask`` pour vous assurer que les fichiers cachés sont
     créés avec les bonnes permissions.
-
     
 Création d'un moteur de stockage pour le cache
 ==============================================
@@ -114,7 +109,6 @@ Si vous avez un moteur de cache nommé ``MonMoteurDeCachePerso`` il devra
 comme une app/libs. Ou dans ``$plugin/Lib/Cache/Engine/MonMoteurDeCachePerso.php``
 comme partie d'un plugin. Les configurations de cache provenant de plugin
 doivent utiliser la notation par points de plugin.::
-
 
     <?php
     Cache::config('custom', array(
@@ -132,9 +126,7 @@ Les moteurs de cache personnalisés doivent entendre
 :php:class:`CacheEngine` qui définit un nombre de méthodes d'abstraction
 ainsi que quelques méthodes d'initialisation.    
 
-
 L'API requise pour le moteur de cache est
-
 
 .. php:class:: CacheEngine
 
@@ -165,10 +157,9 @@ L'API requise pour le moteur de cache est
 
     :retourne: Un Booléen true en cas de succès.
 
-    Efface toutes les clefs depuis le cache. Si $check est true, vous devez
+    Efface toutes les clefs depuis le cache. Si $check est true, vous devez 
     valider que chacune des valeurs est actuellement expirée.
 
-    
 .. php:method:: decrement($key, $offset = 1)
 
     :retourne: Un booléen true en cas de succès.
@@ -183,11 +174,10 @@ L'API requise pour le moteur de cache est
    
 .. php:method:: gc()
 
-    Non requit, mais utilisé pour faire du nettoyage quand les ressources expires.
-    Le moteur FileEngine utilise cela pour effacer les fichiers qui contiennent des
-    contenus expirés
-
-    
+    Non requit, mais utilisé pour faire du nettoyage quand les ressources 
+    expires. Le moteur FileEngine utilise cela pour effacer les fichiers 
+    qui contiennent des contenus expirés
+ 
 Utilisation du Cache pour stocker le résultat des requêtes les plus courantes
 =============================================================================
 
@@ -216,37 +206,34 @@ dans un comportement, qui lit depuis le cache, ou qui exécute les méthodes
 de modèle. 
 C'est un exercice que vous pouvez faire.
 
-
 Utilisation du Cache pour stocker les compteurs
 ===============================================
 
-L'utilisation de compteurs dans le cache peut être une chose intéressante. Par
-exemple un simple compte à rebours pour retenir les 'slots' restants d'un concours 
-pourraient être stockés en Cache. La classe Cache propose des moyens atomiques pour
-incrémenter/décrémenter des valeurs de compteur facilement.
-Les opérations atomiques sont importantes pour ces valeurs parce que ça réduit
-le risque de contention, et la capacité de deux utilisateurs à simultanément
+L'utilisation de compteurs dans le cache peut être une chose intéressante. Par 
+exemple un simple compte à rebours pour retenir les 'slots' restants d'un 
+concours pourraient être stockés en Cache. La classe Cache propose des moyens 
+atomiques pour incrémenter/décrémenter des valeurs de compteur facilement.
+Les opérations atomiques sont importantes pour ces valeurs parce que ça réduit 
+le risque de contention, et la capacité de deux utilisateurs à simultanément 
 en abaisser la valeur et de résulter à une valeur incorrecte.
 
 Après avoir définit une valeur entière vous pouvez la manipuler en utilisant
 :php:meth:`Cache::increment()` and :php:meth:`Cache::decrement()`::
 
-
     <?php
     Cache::write('compteur_initial', 10);
 
-    // Later on
+    // Plus tard sur 
     Cache::decrement('compteur_initial');
 
-    //or 
+    //ou 
     Cache::increment('compteur_initial');
 
 .. note::
 
-    L'incrémentation et la décrémentation ne fonctionne pas avec le moteur FileEngine.
-    Vous devez utiliser APC ou Memcache en remplacement.
+    L'incrémentation et la décrémentation ne fonctionne pas avec le moteur 
+    FileEngine. Vous devez utiliser APC ou Memcache en remplacement.
 
-    
 l'API Cache
 ===========
 
@@ -273,7 +260,6 @@ l'API Cache
     cache a expiré ou n'existe pas. Le contenu du cache pourrait
     évaluer false, donc soyez sure que vous utilisez l'opérateur
     de comparaison stricte ``===`` ou ``!==``.
-
     
     Par exemple::
 
@@ -290,7 +276,6 @@ l'API Cache
         // stockage des donnée en cache 
         Cache::write('cloud', $cloud);
         return $cloud;
-
 
 .. php:staticmethod:: write($key, $value, $config = 'default')
 
@@ -321,10 +306,9 @@ l'API Cache
     ``Cache::set()`` vous permets de réécrire temporairement les paramètres 
     de configs pour une opération (habituellement une lecture ou écriture). 
     Si vous utilisez ``Cache::set()`` pour changer les paramètres pour une
-    écriture, vous devez aussi utiliser ``Cache::set()`` avant de lire les données
-    en retour. Si vous ne faites pas cela, les paramètres par défauts seront 
-    utilisés quand la clef de cache est lu.::
-
+    écriture, vous devez aussi utiliser ``Cache::set()`` avant de lire les 
+    données en retour. Si vous ne faites pas cela, les paramètres par défauts 
+    seront utilisés quand la clef de cache est lu.::
    
         <?php
         Cache::set(array('duration' => '+30 days'));
@@ -339,7 +323,6 @@ l'API Cache
     devriez-vous créer une nouvelle  :php:func:`Cache::config()`. Qui 
     enlèvera les besoins d'appeler ``Cache::set()``.
 
-    
 .. php:staticmethod:: increment($key, $offset = 1, $config = 'default')
 
     Incrémente de manière atomique une valeur stockée dans le moteur de cache.
@@ -352,17 +335,18 @@ l'API Cache
 
 .. php:staticmethod:: clear($check, $config = 'default')
 
-    Détruit toutes les valeurs en cache pour une configuration de cache. Dans
-    les moteurs comme Apc, Memcache et Wincache le préfixe de configuration de
+    Détruit toutes les valeurs en cache pour une configuration de cache. Dans 
+    les moteurs comme Apc, Memcache et Wincache le préfixe de configuration de 
     cache est utilisé pour enlever les entrées de cache.
     Soyez sûre que différentes configuration de cache ont différent préfixe.
 
 .. php:staticmethod:: gc($config)
 
-    Entrée Garbage collects dans la configuration du cache . Utiliser principalement
-    par FileEngine. Il devrait être mis en œuvre par n'importe quel moteur de cache
-    qui requiert des évictions manuelle de donnée en cache.
+    Entrée Garbage collects dans la configuration du cache . Utiliser 
+    principalement par FileEngine. Il devrait être mis en œuvre par n'importe 
+    quel moteur de cache qui requiert des évictions manuelle de donnée en cache.
     
+
 .. meta::
-    :title lang=en: Caching
-    :keywords lang=en: uniform api,xcache,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apc,memcache,queries,cakephp,elements,servers,memory
+    :title lang=fr: Mise en cache
+    :keywords lang=fr: uniform api,xcache,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apc,memcache,queries,cakephp,elements,servers,memory
