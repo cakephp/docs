@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-Helper Nombre
-#############
-=======
 NumberHelper 
 ############
->>>>>>> translation of french doc
 
 .. php:class:: NumberHelper(View $view, array $settings = array())
 

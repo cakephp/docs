@@ -75,12 +75,8 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     entête du document.
    
     Vous pouvez utiliser  l'option ``block`` pour contrôler sur lequel
-<<<<<<< HEAD
-    des blocs l'élément lié sera ajouté. Par défaut il sera ajouté au bloc ``css``.
-=======
     des blocs l'élément lié sera ajouté. Par défaut il sera ajouté au bloc 
     ``css`.
->>>>>>> translation of french doc
 
     Cette méthode d'inclusion CSS présume que le CSS spécifié se trouve dans
     le répertoire /app/webroot/css.::
@@ -124,14 +120,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 .. php:method:: meta(string $type, string $url = null, array $options = array())
 
     :param string $type: Le type de balise meta  désiré.
-<<<<<<< HEAD
-    :param mixed $url: L'url de la balise meta,  soit une chaîne ou un tableau :term:`tableau routing`.
-    :param array $options: Un tableau d'attributs :term:`attributs html`.
-=======
     :param mixed $url: L'url de la balise meta,  soit une chaîne ou un tableau 
      :term:`routing array`.
     :param array $options: Un tableau d'attributs :term:`html attributes`.
->>>>>>> translation of french doc
 
     Cette méthode est fournie pour le lien vers des ressources externes
     comme RSS/Atom feeds et les favicons. Comme avec css(), vous pouvez
@@ -310,13 +301,8 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <img src="http://example.com/img/logo.jpg" alt="" />
 
     Vous pouvez inclure des fichiers images depuis un plugin chargé en utilisant
-<<<<<<< HEAD
-    :term:`syntaxe de plugin`.  Pour inclure ``app/Plugin/DebugKit/webroot/img/icon.png``
-    Vous pouvez faire cela::
-=======
     :term:`plugin syntax`.  Pour inclure 
     ``app/Plugin/DebugKit/webroot/img/icon.png``, vous pouvez faire cela::
->>>>>>> translation of french doc
 
         <?php
         echo $this->Html->image('DebugKit.icon.png');
@@ -574,15 +560,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         echo $this->Html->script('DebugKit.toolbar.js');
 
     Si vous voulez inclure un fichier de script qui partage un nom de fichier
-<<<<<<< HEAD
-    avec un plugin chargé vous pouvez faire cela. Par exemple si vous avez
-    Un plugin ``Blog``, et voulez inclure également ``app/webroot/js/Blog.plugins.js``,
-    vous devriez::
-=======
     avec un plugin chargé vous pouvez faire cela. Par exemple si vous avez 
     Un plugin ``Blog``, et voulez inclure également 
     ``app/webroot/js/Blog.plugins.js`, vous devriez::
->>>>>>> translation of french doc
 
         <?php
         echo $this->Html->script('Blog.plugins.js', array('plugin' => false));
@@ -605,13 +585,8 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
 .. php:method:: scriptStart($options = array())
 
-<<<<<<< HEAD
-    :param array $options: Un tableau d'attributs :term:`attributs html` à utiliser 
-        quand scriptEnd est appelé.
-=======
     :param array $options: Un tableau d'attributs :term:`html attributes` à 
         utiliser quand scriptEnd est appelé.
->>>>>>> translation of french doc
 
     Débute la mise en mémoire tampon d'un bloc de code. Ce bloc de code 
     va capturer toutes les sorties entre ``scriptStart()`` et ``scriptEnd()`` 
@@ -679,15 +654,10 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 .. php:method:: tableHeaders(array $names, array $trOptions = null, array $thOptions = null)
 
     :param array $names: Un tableau de chaîne pour créé les entête de tableau.
-<<<<<<< HEAD
-    :param array $trOptions: Un tableau d'attributs :term:`attributs html` pour le <tr>
-    :param array $thOptions: Un tableau d'attributs :term:`attributs html` pour l'élément <th>
-=======
     :param array $trOptions: Un tableau d'attributs :term:`html attributes` 
         pour le <tr>
     :param array $thOptions: Un tableau d'attributs :term:`html attributes` pour 
         l'élément <th>
->>>>>>> translation of french doc
 
     Créé une ligne de cellule d'en-tête à placer dans la balise <table>.::
 
@@ -715,19 +685,12 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         </tr>
 
 .. php:method:: tableCells(array $data, array $oddTrOptions = null, array $evenTrOptions = null, $useCount = false, $continueOddEven = true)
-
-<<<<<<< HEAD
-    :param array $data: Un tableau à deux dimensions avec les données pour les lignes.
-    :param array $oddTrOptions: Un tableau d'attributs :term:`attributs html` pour les <tr> impairs.
-    :param array $evenTrOptions: Un tableau d'attributs :term:`attributs html` pour les <tr> pairs.
-=======
     :param array $data: Un tableau à deux dimensions avec les données pour les 
         lignes.
     :param array $oddTrOptions: Un tableau d'attributs :term:`html attributes` 
         pour les <tr> impairs.
     :param array $evenTrOptions: Un tableau d'attributs :term:`html attributes` 
         pour les <tr> pairs.
->>>>>>> translation of french doc
     :param boolean $useCount: Ajoute la classe "column-$i".
     :param boolean $continueOddEven: Si à false, utilisera une variable $count 
         non-statique, ainsi le compteur impair/pair est remis à zéro juste pour 
@@ -777,16 +740,10 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
 .. php:method:: url(mixed $url = NULL, boolean $full = false)
 
-<<<<<<< HEAD
-    :param mixed $url: Un tableau de routing :term:`tableau routing`.
-    :param mixed $full: Soit un booléen s'il faut ou pas que la  base du chemin soit
-      incluse ou un tableau d'options pour le router :php:meth:`Router::url()`
-=======
     :param mixed $url: Un tableau de routing :term:`routing array`.
     :param mixed $full: Soit un booléen s'il faut ou pas que la  base du 
         chemin soit incluse ou un tableau d'options pour le router 
         :php:meth:`Router::url()`
->>>>>>> translation of french doc
 
     Retourne une URL pointant vers une combinaison controller et action.
     Si $url est vide, cela retourne la REQUEST\_URI, sinon cela génère la 

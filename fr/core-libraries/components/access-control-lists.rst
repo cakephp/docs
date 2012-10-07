@@ -257,10 +257,6 @@ Communauté de l'Anneau  Refuse tout   Refuser l'accès à la bière.
 Hobbits   Autorise la bière   Autoriser l'accès à la bière !
 Merry   Refuse la bière   Refuser la bière
 
-<<<<<<< HEAD
-
-=======
->>>>>>> translation of french doc
 ======================= ============================== ===============================
 Nœud de l'ARO           Information sur la permission  Résultat                 
 ======================= ============================== ===============================
@@ -270,10 +266,6 @@ Hobbits                 Autorise la bière              Autoriser l'accès à la
 ----------------------- ------------------------------ -------------------------------
 Merry                   Refuse la bière                Refuser la bière. 
 ======================= ============================== ===============================
-<<<<<<< HEAD
-
-=======
->>>>>>> translation of french doc
 
 Définir les permissions : ACL de Cake basées sur des fichiers INI
 =================================================================
@@ -365,14 +357,8 @@ nous avions façonnée pourrait ressembler dans une syntaxe INI :
     allow = porc_sale
 
 Maintenant que vous avez défini vos permissions, vous pouvez passer à la 
-section sur la <vérification des permissions> utilisant le composant ACL.
-
-<<<<<<< HEAD
-=======
-Maintenant que vos partitions sont définis, vous pouvez passer à la section
-:ref:`vérification des permissions <verification-permissions>avec le composant 
-ACL.
->>>>>>> translation of french doc
+section sur la :ref:`vérification des permissions <verification-permissions>
+en utilisant le component ACL.
 
 Définir les permissions : ACL de Cake via une base de données
 =============================================================
@@ -596,14 +582,9 @@ enregistrements spécifiques du modèle de notre base de données.
 
 .. note::
 
-<<<<<<< HEAD
-    Quand nous ajouterons un noeud enfant à un arbre, nous devrons nous assurer d'utiliser 
-    les ID des noeuds ACL, plutôt que d'utiliser la valeur de la foreign_key (clé étrangère).
-=======
     Quand nous ajouterons un noeud enfant à un arbre, nous devrons nous 
     assurer d'utiliser les ID des noeuds ACL, plutôt que d'utiliser la valeur 
     de la foreign_key (clé étrangère).
->>>>>>> translation of french doc
 
 ::
 
@@ -804,13 +785,8 @@ dans une action à l'intérieur de ce contrôleur.
 
 Le premier appel que nous faisons au composant Acl donne, à tout 
 utilisateur appartenant au groupe ARO 'guerriers', un accès total à tout 
-<<<<<<< HEAD
-ce qui appartient au groupe ACO 'Armes'. Ici nous adressons simplement
-les ACOs et AROs d'après leurs alias.
-=======
 ce qui appartient au groupe ACO 'Armes'. Ici nous adressons simplement 
  les ACOs et AROs d'après leurs alias.
->>>>>>> translation of french doc
 
 Avez-vous noté l'usage du troisième paramètre ? C'est là où nous utilisons 
 ces actions bien pratiques qui sont intégrées à tous les ACOs de Cake. 

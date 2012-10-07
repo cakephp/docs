@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-Assistant Formulaire (FormHelper)
-#################################
-=======
 FormHelper
 ##########
->>>>>>> translation of french doc
 
 .. php:class:: FormHelper(View $view, array $settings = array())
 
@@ -98,13 +93,8 @@ pleinement avantage du Helper Form (Helper Formulaire) est
         caché (hidden) est créé pour réécrire la méthode HTTP par défaut
 
 
-<<<<<<< HEAD
-    A la création de formulaires pour les modèles dans des plugins. Nous
-    devrons toujours utiliser la notation :term:`syntaxe de plugin` à la création 
-=======
     A la création de formulaires pour les models dans des plugins. Nous
     devrons toujours utiliser la notation :term:`plugin syntax` à la création 
->>>>>>> translation of french doc
     d'un formulaire. Cela assurera que le formulaire est correctement généré::
     
         <?php
@@ -236,37 +226,21 @@ Fermer le Formulaire
 
 .. php:method:: end($options = null)
 
-<<<<<<< HEAD
-Le FormHelper inclus également une méthode ``end()`` qui 
-complète le marquage du formulaire. Souvent, ``end()`` affiche juste
-la base fermante du formulaire, mais l'utilisation de ``end()`` permet
-également au FormHelper d'ajouter les champs cachées dont le composant
-sécurité  :php:class:`SecurityComponent` à besoin.::
-=======
     Le FormHelper inclus également une méthode ``end()`` qui 
     complète le marquage du formulaire. Souvent, ``end()`` affiche juste
     la base fermante du formulaire, mais l'utilisation de ``end()`` permet
     également au FormHelper d'ajouter les champs cachées dont le component 
     sécurité  :php:class:`SecurityComponent`à besoin.::
->>>>>>> translation of french doc
 
         <?php echo $this->Form->create(); ?>
         <!-- Ici les éléments de Formulaire -->
         <?php echo $this->Form->end(); ?>
 
-<<<<<<< HEAD
-Si une chaîne est fournie comme premier argument à end(), le FormHelper 
-affichera un bouton submit nommé en conséquence en même temps 
-que la balise de fermeture du formulaire.::
-
-    <?php echo $this->Form->end('Termine'); ?>
-=======
     Si une chaîne est fournie comme premier argument à end(), le FormHelper 
     affichera un bouton submit nommé en conséquence en même temps 
     que la balise de fermeture du formulaire.::
    
         <?php echo $this->Form->end('Termine'); ?>
->>>>>>> translation of french doc
 
 Affichera::
 
@@ -275,12 +249,8 @@ Affichera::
     </div>
     </form>
 
-<<<<<<< HEAD
-Vous pouvez spécifier des paramètres détaillés en passant un tableau à  ``end()`` ::
-=======
     Vous pouvez spécifier des paramètres détaillés en passant un tableau à  
     ``end()``::
->>>>>>> translation of french doc
 
     <?php
     $options = array(
@@ -300,15 +270,9 @@ Voir l' `API <http://api20.cakephp.org>`_ pour plus de détails.
 
 .. note::
 
-<<<<<<< HEAD
-    si vous utilisez le composant sécurité  :php:class:`SecurityComponent` 
-    dans votre application vous devez toujours terminer vos formulaires 
-    avec  ``end()``.
-=======
         si vous utilisez le component sécurité  :php:class:`SecurityComponent` 
         dans votre application vous devez toujours terminer vos formulaires 
         avec  ``end()``.
->>>>>>> translation of french doc
 
 .. _automagic-form-elements:
 
@@ -786,25 +750,14 @@ partagées par toutes les méthodes input sont :
 
     .. note::
 
-<<<<<<< HEAD
         Vous ne pouvez pas utiliser ``default``  pour sélectionner une chekbox - 
         vous devez plutôt définir cette valeur dans ``$this->request->data`` dans
         votre contrôleur, ou définir l'option ``checked`` de input à true.
-=======
-    Vous ne pouvez pas utiliser ``default``  pour sélectionner une chekbox - 
-    vous devez plutôt définir cette valeur dans ``$this->request->data`` dans
-    votre controller, ou définir l'option ``checked`` de input à true.
->>>>>>> translation of french doc
 
     .. note::
 
-<<<<<<< HEAD
-        La valeur par défaut des champs Date et datetime peut être définis en utilisant 
-        la clef 'selected'.
-=======
     La valeur par défaut des champs Date et datetime peut être définis en 
     utilisant la clef 'selected'.
->>>>>>> translation of french doc
 
 En plus des options ci-dessus, vous pouvez mixer n'importe quel attribut html
 que vous souhaitez utiliser. Chacun des nom d'options non-special sera 
@@ -1056,13 +1009,8 @@ Les options de Datetime
     En plus de :ref:`general-input-options`, textarea() supporte quelques 
     options spécifiques:
 
-<<<<<<< HEAD
-    * ``$options['rows'], $options['cols']`` Ces deux clefs spécifient le nombre de
-      lignes et de colonnes::
-=======
     * ``$options['rows'], $options['cols']`` Ces deux clefs spécifient le 
     nombre de lignes et de colonnes::
->>>>>>> translation of french doc
 
         <?php
         echo $this->Form->textarea('textarea', array('rows' => '5', 'cols' => '5'));
@@ -1588,18 +1536,9 @@ Afficher et Displaying and checking errors
 Travailler avec le Component Sécurité
 =====================================
 
-<<<<<<< HEAD
-Travailler avec le Composant Sécurité
-=====================================
-
-:php:meth:`SecurityComponent` offre plusieurs fonctionnalités qui rendent
-vos formulaires plus sûres et plus sécurisés. En incluant simplement le
-composant sécurité  ``SecurityComponent`` dans votre contrôleur,
-=======
 :php:meth:`SecurityComponent` offre plusieurs fonctionnalités qui rendent 
 vos formulaires plus sûres et plus sécurisés. En incluant simplement le 
 component sécurité  ``SecurityComponent`` dans votre controller, 
->>>>>>> translation of french doc
 vous bénéficierez automatiquement de CSRF (Cross-site request forgery) 
 et des fonctionnalités pour éviter la falsification.
 
@@ -1663,4 +1602,4 @@ cachés le nom de classe error-field sera appliqué.
 .. meta::
     :title lang=fr: FormHelper
     :description lang=fr: The FormHelper focuses on creating forms quickly, in a way that will streamline validation, re-population and layout.
-    :keywords lang=en: html helper,cakephp html,form create,form input,form select,form file field,form label,form text,form password,form checkbox,form radio,form submit,form date time,form error,validate upload,unlock field,form security
+    :keywords lang=fr: html helper,cakephp html,form create,form input,form select,form file field,form label,form text,form password,form checkbox,form radio,form submit,form date time,form error,validate upload,unlock field,form security

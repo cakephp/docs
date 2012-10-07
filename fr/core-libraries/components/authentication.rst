@@ -312,17 +312,6 @@ La méthode ``_findUser()`` fait partie de ``BaseAuthenticate`` et identifie un
 utilisateur en se basant sur un nom d'utilisateur et un mot de passe.
 
 Afficher les messages flash de Auth
-<<<<<<< HEAD
---------------------------------------
-
-Pour afficher les messages d'erreur de session que Auth génère, vous devez ajouter
-les lignes de code suivante dans votre layout.Ajouter les deux lignes suivantes au fichier
-``app/View/Layouts/default.ctp`` dans la section body de préférence  avant la ligne
-content_for_layout.::
-=======
------------------------------------
->>>>>>> translation of french doc
-
 Pour afficher les messages d'erreur de session que Auth génère, vous devez 
 ajouter les lignes de code suivante dans votre layout. Ajouter les deux lignes 
 suivantes au fichier ``app/View/Layouts/default.ctp`` dans la section body de 
@@ -385,17 +374,6 @@ passes. Regardez ci-dessous comment générer des hachages Digest.
 
 Hachage de mot de passe pour l'authentification Digest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<<<<<<< HEAD
-
-Parce que l'authentification Digest nécessite un mot de passe hacher dans un format 
-défini par la RFC. Respectivement pour correctement hacher un mot de passe pour 
-l'utilisation de l'authentification Digest vous devriez utilisez la fonction spéciale
-``DigestAuthenticate``.
-Si vous vous apprêtez à combiner l'authentification Digest avec d'autres stratégies 
-d'authentifications, il est aussi recommandé de stocker le mot de passe  Digest dans 
-une colonne séparée, pour le hachage normal de mot de passe::
-=======
->>>>>>> translation of french doc
 
 Parce que l'authentification Digest nécessite un mot de passe hacher dans un 
 format défini par la RFC. Respectivement pour correctement hacher un mot de 
@@ -429,15 +407,6 @@ le hachage Digest vous ne pourrez pas vous connecter.
     voulez un hachage permanent dans des environnements multiples.
    
 Connecter les utilisateurs manuellement
-<<<<<<< HEAD
---------------------------------------------
-
-Quelquefois le besoin se fait sentir de connecter un utilisateur manuellement, comme
-juste après qu'il se soit enregistré dans votre application. Vous pouvez faire cela en appelant
-``$this->Auth->login()`` avec les données utilisateur que vous voulez pour la 'connexion' ::
-=======
----------------------------------------
->>>>>>> translation of french doc
 
 Quelquefois le besoin se fait sentir de connecter un utilisateur manuellement, 
 comme juste après qu'il se soit enregistré dans votre application. Vous pouvez 
@@ -517,26 +486,6 @@ pouvez créer vos propres gestionnaire comme faisant partie d'un plugin.
 Configurer les gestionnaires d'autorisation
 -------------------------------------------
 
-<<<<<<< HEAD
-Vous configurez les gestionnaires d'autorisation en utilisant ``$this->Auth->authorize``.
-Vous pouvez configurer un ou plusieurs gestionnaires . L'utilisation de  plusieurs
-gestionnaires vous donnes la possibilité d'utiliser plusieurs moyens de vérifier les
-autorisations. Quand les gestionnaires d'autorisation sont vérifiés ils sont appelés 
-dans l'ordre ou ils sont déclarés. Les gestionnaires devraient retourner false, s'il ne sont
-pas capable de vérifier les autorisation, ou bien si la vérification a échouée.
-Le gestionnaire devrait retourner true si ils sont capables de vérifier correctement les
-autorisations. Les gestionnaires seront appelés dans l'ordre jusqu'à ce qu'un passe.
-Si toutes les vérifications échoues , l'utilisateur sera redirigé vers la page d'où il vient.
-Vous pouvez également stopper les autorisations en levant une exception.
-Vous aurez besoin de traiter toutes les exceptions levées , et les manipuler.
-
-Vous pouvez configurer les gestionnaires d'autorisation dans le ``beforeFilter`` de 
-votre contrôleur ou , dans  le tableau ``$components``. Vous pouvez passer les 
-informations de configuration dans chaque objet d'autorisation , en utilisant un 
-tableau::
-
-
-=======
 Vous configurez les gestionnaires d'autorisation en utilisant 
  ``$this->Auth->authorize``.
 Vous pouvez configurer un ou plusieurs gestionnaires . L'utilisation de 
@@ -556,7 +505,6 @@ Vous pouvez configurer les gestionnaires d'autorisation dans le
 ``beforeFilter`` de votre contrôleur ou , dans  le tableau ``$components``. 
 Vous pouvez passer les informations de configuration dans chaque objet 
 d'autorisation, en utilisant un tableau::
->>>>>>> translation of french doc
 
     <?php
     // paramétrage Basique

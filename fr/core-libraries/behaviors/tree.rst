@@ -427,7 +427,7 @@ de permutations en plus des méthodes find de bases.
 
     Cette fonction comme son nom l'indique, donne en retour le noeud 
     parent d'un nœud, ou * false * si le noeud n'a pas de parent (c'est
-     le nœud racine). Par exemple ::
+    le nœud racine). Par exemple ::
 
         <?php
         $parent = $this->Category->getParentNode(2); //<- id de fun
@@ -473,7 +473,7 @@ Utilisation avancée
 
 Le behavior Tree ne fonctionne pas uniquement en tâche de fond,
 il y a un certain nombre de méthode spécifiques dans le behavior Tree 
-pour répondre a vos besoin de données hierarchique, et des problèmes 
+pour répondre a vos besoins de données hierarchiques, et des problèmes 
 inattendus qui pourraient survenir durant le processus.
 
 .. php:method:: moveDown()
@@ -636,7 +636,7 @@ d'information. Ex: si le champ MPTT est corrompu ou vide, avec le
 les champs gauche et droite.
 
 Le paramètre ``missingParentAction`` s'applique uniquement aux
-"parent" mode et détermine ce qu'il faut faire si le champ parent 
+"parent" mode et détermine ce qu'il faut faire si le champ parent
 contient un identifiant qui n'est pas présent.
 
 

@@ -1,4 +1,4 @@
-Comprendre le système M-V-C (Modèle-Vue-Contrôleur)
+Comprendre le système M-V-C (Model-View-Controller)
 ###################################################
 
 CakePHP suit le motif de conception logicielle
@@ -23,7 +23,7 @@ Dans le cas d'un réseau social, la couche Model s'occupe des tâches
 comme de sauvegarder des données, de sauvegarder des associations d'amis,
 d'enregistrer et de récupérer les photos des utilisateurs,
 de trouver des suggestions de nouveaux amis, etc ...
-Tandis que les objets Models seront "Ami", "Utilisateur", "Commentaire", "Photo"
+Tandis que les objets Models seront "Ami", "User", "Commentaire", "Photo"
 
 Le couche Vue
 =============
@@ -111,5 +111,5 @@ Pour commencer votre première application CakePHP,
 
 
 .. meta::
-    :title lang=fr: Comprendre le système MVC (Modèle-Vue-Contrôleur)
+    :title lang=fr: Comprendre le système MVC (Model-View-Controller)
     :keywords lang=fr: modèle vue controller,couche modèle,résultat formaté,objets modèles,music documents,business logic,représentation du texte,first glance,récupération des données,software design,page html,videos music,nouveaux amis,interaction,cakephp,interface,photo,presentation,mvc,photos

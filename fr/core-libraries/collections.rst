@@ -7,15 +7,9 @@ fournie une API unifiée pour interagir avec les collections et les objets
 similaires. L'objet collection dans cakePHP, vous donnes un moyen uniforme 
 d'interagir avec différentes sortes d'objets dans votre application.
 
-<<<<<<< HEAD
-Même si les exemples ci-dessous, utiliserons des Composants, le même comportement
-peut être envisager pour les Helpers, Comportements, et des tâches en addition
-aux composants.
-=======
 Même si les exemples ci-dessous utiliserons des Components, le même behavior 
 peut être envisagé pour les Helpers, Behaviors, et des tâches en plus 
 des components.
->>>>>>> translation of french doc
 
 Charger et Décharger les objets
 ===============================
@@ -69,31 +63,16 @@ Ci-dessus ``$viewFile`` sera passé comme premier argument à toutes les méthod
 beforeRender des helpers. Ils y a plusieurs options qui peuvent être utilisées 
 pour contrôler comment les callbacks sont tués:
 
-<<<<<<< HEAD
-- ``breakOn`` Définit a la valeur ou aux valeurs ou vous voulez stopper la propagation
-  Peut être une valeur scalaire, ou un tableau de valeur à stopper. ``False`` par défaut.
-- ``break`` Définit à true pour valider l'arrêt. Quand un déclancheur est cassé, la 
-  dernière valeur sera retournée. Si utilisé en combinaison avec ``collectReturn` 
-  les résultats collectés seront retournés.``False`` par défaut.
-- ``collectReturn`` Définit à true pour collecter le retour  de chaque objet dans un tableau.
-  Ce tableau de données retournées seront retournées depuis l'appel trigger(). ``False`` par défaut.
-- ``triggerDisabled`` Déclenchera le callback sur tous les objets dans la collection même ceux 
-  qui sont non-activés. ``False`` par défaut
-- ``modParams`` Permet à chacun des objets auquel le callback à fait des demandes de modifier 
-  les paramètres de l'objet suivant.En paramétrant modParams dans une valeur entière vous 
-  permettra de modifier le paramètre avec cet index.N'importe quelle valeur non-nulle modifiera 
-  l'index de paramètre indiqué. ``False`` par défaut.
-=======
-- ``breakOn`` Définit a la valeur ou aux valeurs ou vous voulez stopper la 
+- ``breakOn`` Défini a la valeur ou aux valeurs ou vous voulez stopper la 
 propagation. Peut être une valeur scalaire, ou un tableau de valeur à stopper. 
 ``False`` par défaut.
 
-- ``break`` Définit à true pour valider l'arrêt. Quand un déclancheur est 
+- ``break`` Défini à true pour valider l'arrêt. Quand un déclancheur est 
 cassé, la dernière valeur sera retournée. Si utilisé en combinaison avec 
 ``collectReturn` les résultats collectés seront retournés.``False`` par 
 défaut.
 
-- ``collectReturn`` Définit à true pour collecter le retour  de chaque objet 
+- ``collectReturn`` Défini à true pour collecter le retour  de chaque objet 
 dans un tableau. Ce tableau de données retournées seront retournées depuis 
 l'appel trigger(). ``False`` par défaut.
 
@@ -105,7 +84,6 @@ demandes de modifier les paramètres de l'objet suivant.En paramétrant modParam
 dans une valeur entière vous permettra de modifier le paramètre avec cet index. 
 N'importe quelle valeur non-nulle modifiera l'index de paramètre indiqué. 
 ``False`` par défaut.
->>>>>>> translation of french doc
 
 Effacer des boucles de callback 
 -------------------------------

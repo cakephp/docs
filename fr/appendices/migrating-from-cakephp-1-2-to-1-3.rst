@@ -164,11 +164,7 @@ Controllers & Components
 **Component**
 
 -  ``Component::triggerCallback`` a été ajouté. C'est un hook générique 
-<<<<<<< HEAD
-   dans le processus de callback du composant. Il supplante
-=======
   dans le processus de callback du component. Il supplante
->>>>>>> translation of french doc
    ``Component::startup()``, ``Component::shutdown()`` et
    ``Component::beforeRender()`` comme manière préférentielle pour
    déclencher les callbacks.

@@ -18,14 +18,9 @@ longues étendues de texte.
 
 .. php:method:: autoLinkEmails(string $text, array $options=array())
     
-<<<<<<< HEAD
-    :param string $text: The text to convert.
-    :param array $options: An array of :term:`attributs html` for the generated links.
-=======
     :param string $text: Le texte à convertir.
     :param array $options: Un tableau de :term:`html attributes` pour générer 
         les liens.
->>>>>>> translation of french doc
 
     Ajoute les liens aux adresses email bien formées dans $text, selon toute 
     les options définies dans ``$htmlOptions`` (regardez 
@@ -46,14 +41,9 @@ longues étendues de texte.
 
 .. php:method:: autoLinkUrls(string $text, array $htmlOptions=array())
 
-<<<<<<< HEAD
-    :param string $text: The text to convert.
-    :param array $htmlOptions: An array :term:`attributs html` for the generated links
-=======
     :param string $text: Le texte à convertir.
     :param array $htmlOptions: Un tableau de :term:`html attributes` pour 
         la génération de liens
->>>>>>> translation of french doc
 
     De même que dans ``autoLinkEmails()``, seule cette méthode cherche les 
     chaînes de caractère qui commence par https, http, ftp, ou nntp et les 
@@ -65,14 +55,9 @@ longues étendues de texte.
 
 .. php:method:: autoLink(string $text, array $htmlOptions=array())
 
-<<<<<<< HEAD
-    :param string $text: The text to autolink.
-    :param array $htmlOptions: An array :term:`attributs html` for the generated links
-=======
     :param string $text: Le texte à lier automatiquement.
     :param array $htmlOptions: Un tableau de :term:`html attributes` pour 
     générer les liens
->>>>>>> translation of french doc
 
     Execute la fonctionnalité dans les deux ``autoLinkUrls()`` et 
     ``autoLinkEmails()`` sur le ``$text`` fourni. Tous les URLs et emails 

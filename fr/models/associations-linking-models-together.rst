@@ -83,15 +83,9 @@ uniques dans une app entière**. Par exemple, il est approprié d'avoir::
             ),
         );
     }
-<<<<<<< HEAD
-
-    class Groupe extends AppModel {
-        public $name = 'Groupe';
-=======
-    
+     
     class Group extends AppModel {
         public $name = 'Group';
->>>>>>> translation of french doc
         public $hasMany = array(
             'MaRecette' => array(
                 'className'  => 'Recette',
@@ -102,10 +96,7 @@ uniques dans une app entière**. Par exemple, il est approprié d'avoir::
                 'className' => 'User',
             ),
         );
-<<<<<<< HEAD
-=======
         public $hasAndBelongsToMany => array('MembreDe' => array('className' => 'Group'));
->>>>>>> translation of french doc
     }
 
 mais ce qui suit ne travaillera pas bien dans toute circonstance::
@@ -122,15 +113,9 @@ mais ce qui suit ne travaillera pas bien dans toute circonstance::
             ),
         );
     }
-<<<<<<< HEAD
-
-    class Groupe extends AppModel {
-        public $name = 'Groupe';
-=======
     
     class Group extends AppModel {
         public $name = 'Group';
->>>>>>> translation of french doc
         public $hasMany = array(
             'MaRecette' => array(
                 'className'  => 'Recette',
@@ -141,10 +126,7 @@ mais ce qui suit ne travaillera pas bien dans toute circonstance::
                 'className' => 'User',
             ),
         );
-<<<<<<< HEAD
-=======
         public $hasAndBelongsToMany => array('Membre' => 'Group');
->>>>>>> translation of french doc
     }
 
 parce que ici nous avons l'alias 'Member' se référant aux deux models 

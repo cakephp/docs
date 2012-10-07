@@ -209,21 +209,12 @@ C'est un exercice que vous pouvez faire.
 Utilisation du Cache pour stocker les compteurs
 ===============================================
 
-<<<<<<< HEAD
-L'utilisation de compteurs dans le cache peut être une chose intéressante. Par
-exemple un simple compte à rebours pour retenir les 'slots' restants d'un concours 
-pourraient être stockés en Cache. La classe Cache propose des moyens atomiques pour
-incrémenter/décrémenter des valeurs de compteur facilement.
-Les opérations atomiques sont importantes pour ces valeurs parce que ça réduit
-le risque de contention, et la capacité de deux utilisateurs à simultanément
-=======
 L'utilisation de compteurs dans le cache peut être une chose intéressante. Par 
 exemple un simple compte à rebours pour retenir les 'slots' restants d'un 
 concours pourraient être stockés en Cache. La classe Cache propose des moyens 
 atomiques pour incrémenter/décrémenter des valeurs de compteur facilement.
 Les opérations atomiques sont importantes pour ces valeurs parce que ça réduit 
 le risque de contention, et la capacité de deux utilisateurs à simultanément 
->>>>>>> translation of french doc
 en abaisser la valeur et de résulter à une valeur incorrecte.
 
 Après avoir définit une valeur entière vous pouvez la manipuler en utilisant

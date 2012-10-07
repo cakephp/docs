@@ -257,14 +257,8 @@ l'auteur::
                     )
             )
 
-<<<<<<< HEAD
-Des filtre supplémentaires peuvent être utilisées en utilisant les options de recherche standard :ref:`model-find`:
-
-::
-=======
 Des filtre supplémentaires peuvent être utilisées en utilisant les options 
-de recherche standard :ref:`model-find`:         
->>>>>>> translation of french doc
+de recherche standard :ref:`model-find`:
 
     <?php
     $this->Post->find('all', array('contain' => array(
@@ -315,22 +309,15 @@ le model principal, vous n'avez pas besoin d'utiliser 'contain' a nouveau
 dans les modèles liés.
 
 .. note::
-
-<<<<<<< HEAD
-    En utilisant les options 'fields' et 'contain' - faites attention d'inclure  toutes
-    les clefs étrangères que votre requête requiert directement ou indirectement.
-    
-    Notez également que c'est parce que le comportement Containable doit être attaché à tous les modèles utilisés dans le contenu, que vous devez l'attacher à votre AppModel. 
-=======
-En utilisant les options 'fields' et 'contain' - faites attention d'inclure 
-toutes les clefs étrangères que votre requête requiert directement ou 
-indirectement. Notez également que c'est parce que le behavior Containable 
-doit être attaché à tous les modèles utilisés dans le contenu, que vous devez 
-l'attacher à votre AppModel. 
->>>>>>> translation of french doc
+    En utilisant les options 'fields' et 'contain' - faites attention d'inclure 
+    toutes les clefs étrangères que votre requête requiert directement ou 
+    indirectement. 
+    Notez également que c'est parce que le behavior Containable 
+    doit être attaché à tous les modèles utilisés dans le contenu, que vous devez 
+    l'attacher à votre AppModel. 
 
 Les options du Behavior Containable
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Le ``Behavior Containable`` a plusieurs options qui peuvent être définies 
 quand le behavior est attaché à un modèle. Ces paramètres vous permettent 
@@ -361,14 +348,10 @@ de champs aggrégés et non-aggrégés, essayer de désactiver le paramètre
     <?php
     $this->Post->Behaviors->attach('Containable', array('autoFields' => false));
 
-<<<<<<< HEAD
-Utilisation du comportement Containable avec la pagination
-==========================================================
 
-=======
 Utilisation du behavior Containable avec la pagination
 ======================================================
->>>>>>> translation of french doc
+
 En incluant le paramètre 'contain' dans la propriété ``$paginate``
 la pagination sera appliqué à la fois au find('count') et au find('all') dans 
 le model.

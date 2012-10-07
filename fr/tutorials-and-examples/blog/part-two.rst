@@ -19,11 +19,7 @@ et le fichier que nous allons créer maintenant sera enregistré dans
     }
 
 La convention de nommage est vraiment très importante dans CakePHP. En nommant 
-<<<<<<< HEAD
-notre modèle Post, CakePHP peut automatiquement déduire que ce modèle sera 
-=======
 notre model Post, CakePHP peut automatiquement déduire que ce model sera 
->>>>>>> translation of french doc
 utilisé dans le controller PostsController, et sera lié à la table ``posts`` 
 de la base de données.
 
@@ -101,11 +97,7 @@ Pour en apprendre plus sur les controllers de Cake, consultez le chapitre
 Créer les Vues Post
 ===================
 
-<<<<<<< HEAD
-Maintenant que nous avons nos données en provenance du modèle, ainsi que la 
-=======
 Maintenant que nous avons nos données en provenance du model, ainsi que la 
->>>>>>> translation of french doc
 logique applicative et les flux définis par notre controller, nous allons créer 
 une vue pour l'action "index" que nous avons créé ci-dessus.
 
@@ -303,17 +295,10 @@ PostsController :
 
 .. note::
 
-<<<<<<< HEAD
-    Vous avez besoin d'inclure le composant Session (SessionComponent) et 
-    l'assistant Session (SessionHelper) dans chaque controller que vous 
-    utiliserez. Si nécessaire, incluez-les dans le controller principal 
-    (AppController) pour qu'ils soient accessibles à tout les controllers.
-=======
     Vous avez besoin d'inclure le component Session (SessionComponent) et 
     le helper Session (SessionHelper) dans chaque controller que vous 
     utiliserez. Si nécessaire, incluez-les dans le controller principal 
    (AppController) pour qu'ils soient accessibles à tous les controllers.
->>>>>>> translation of french doc
 
 Voici ce que fait l'action ``add()`` : si la requête HTTP est de type POST, 
 essayez de sauvegarder les données en utilisant le model "Post". Si pour une 
@@ -678,8 +663,5 @@ Voici les différents chapitres que les gens veulent souvent lire après :
 
 .. meta::
     :title lang=fr: Blog Tutoriel Ajouter la logique
-<<<<<<< HEAD
-    :keywords lang=fr: doc modèles,vérification validation,controller actions,model post,php class,classe modèle,objet modèle,business logic,table base de données,convention de nommage,bread and butter,callbacks,prefixes,nutshell,intéraction,array,cakephp,interface,applications,suppression
-=======
     :keywords lang=fr: doc models,vérification validation,controller actions,model post,php class,classe model,objet model,business logic,table base de données,convention de nommage,bread and butter,callbacks,prefixes,nutshell,intéraction,array,cakephp,interface,applications,suppression
 >>>>>>> translation of french doc

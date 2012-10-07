@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-Helper JS
-#########
-=======
 JSHelper
 ########
->>>>>>> translation of french doc
 
 .. php:class:: Helper Js(View $view, array $settings = array())
 
@@ -766,11 +761,7 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
 
 .. _ajax-pagination:
 
-<<<<<<< HEAD
-La Pagination Ajax 
-=======
 La Pagination Ajax
->>>>>>> translation of french doc
 ==================
 
 Bien mieux qu'avec la pagination Ajax de la 1.2, vous pouvez utiliser
