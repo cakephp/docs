@@ -46,12 +46,12 @@ variables ``$pluginPaths`` ne fonctionneront plus. Vous devez utiliser
 
     App::build(array(
         'plugins' => array('/chemin/complet/vers/plugins/', '/prochain/chemin/complet/vers/plugins/'),
-        'models' =>  array('/chemin/complet/vers/modèles/', '/prochain/chemin/complet/vers/modèles/'),
+        'models' =>  array('/chemin/complet/vers/models/', '/prochain/chemin/complet/vers/models/'),
         'views' => array('/chemin/complet/vers/vues/', '/prochain/chemin/complet/vers/vues/'),
-        'controllers' => array('/chemin/complet/vers/contrôleurs/', '/prochain/chemin/complet/vers/contrôleurs/'),
+        'controllers' => array('/chemin/complet/vers/controllers/', '/prochain/chemin/complet/vers/controllers/'),
         'datasources' => array('/chemin/complet/vers/sources_de_données/', '/prochain/chemin/complet/vers/source_de_données/'),
         'behaviors' => array('/chemin/complet/vers/behaviors/', '/prochain/chemin/complet/vers/behaviors/'),
-        'components' => array('/chemin/complet/vers/composants/', '/prochain/chemin/complet/vers/composants/'),
+        'components' => array('/chemin/complet/vers/components/', '/prochain/chemin/complet/vers/components/'),
         'helpers' => array('/chemin/complet/vers/helpers/', '/prochain/chemin/complet/vers/helpers/'),
         'vendors' => array('/chemin/complet/vers/vendors/', '/prochain/chemin/complet/vers/vendors/'),
         'shells' => array('/chemin/complet/vers/shells/', '/prochain/chemin/complet/vers/shells/'),
@@ -138,10 +138,10 @@ Les classes suivantes ne vont plus étendre Object:
 Si vous utilisiez les méthodes de Object à partir de ces classes, vous devrez 
 ne plus utiliser ces méthodes.
 
-Contrôleurs & Composants
+Controllers & Components
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Contrôleur**
+**Controller**
 
 
 -  ``Controller::set()`` ne change plus les variables à partir de
@@ -159,12 +159,12 @@ Contrôleurs & Composants
 
 -  Controller a deux nouvelles méthodes ``startupProcess`` et
    ``shutdownProcess``. Ces méthodes sont responsables de la gestion du startup 
-   du contrôleur et des processus de shutdown.
+   du controller et des processus de shutdown.
    
-**Composant**
+**Component**
 
 -  ``Component::triggerCallback`` a été ajouté. C'est un hook générique 
-   dans le processus de callback du composant. Il supplante
+  dans le processus de callback du component. Il supplante
    ``Component::startup()``, ``Component::shutdown()`` et
    ``Component::beforeRender()`` comme manière préférentielle pour
    déclencher les callbacks.
@@ -175,9 +175,9 @@ Contrôleurs & Composants
 
 **AclComponent + DbAcl**
 
-Node reference checks done with paths are now less greedy and will
-no longer consume intermediary nodes when doing searches. In the
-past given the structure:
+La vérification de la référence du Noeud faite avec les chemins sont 
+maintenant moins gourmands et ne consommeront plus les noeuds intermédiaires 
+quand on fait des recherches. Dans le passé, étant donné la structure:
 
 ::
 
@@ -186,7 +186,7 @@ past given the structure:
               Users/
                     edit
 
-Le chemin ``ROOT/Users`` correspondrait au dernier noeud Utilisateurs 
+Le chemin ``ROOT/Users`` correspondrait au dernier noeud Users 
 au lieu du premier. Dans 1.3, si vous vous attenidez à obtenir le dernier 
 noeud, vous deviez utiliser le chemin ``ROOT/Users/Users``
 
@@ -206,15 +206,15 @@ Cela a été modifié pour utiliser un élément. Si vous spécifiez des flash d
 session dans vos applications vous aurez besoin de faire les changements 
 suivants.
 
-#. Déplacer les fichiers dde layout requis dans app/views/elements
+#. Déplacer les fichiers de layout requis dans app/views/elements
 #. Renommer la variable $content\_for\_layout en $message
 #. Assurez vous d'avoir ``echo $session->flash();`` dans votre layout
 
 ``SessionComponent`` et ``SessionHelper`` ne sont pas chargés automatiquement.
 Les deux helpers ``SessionComponent`` et ``SessionHelper`` ne sont plus inclus
 automatiquement sans que vous le demandiez. SessionHelper
-et SessionComponent se comportent maintenant comme chaque autre composant et
-doivent être déclarés comme tout autre helper/composant. Vous devriez mettre
+et SessionComponent se comportent maintenant comme chaque autre component et 
+doivent être déclarés comme tout autre helper/component. Vous devriez mettre
 à jour ``AppController::$components`` et ``AppController::$helpers`` pour
 inclure ces classes pour conserver les behaviors existants.
 
@@ -228,7 +228,7 @@ déclaratifs dans quelles classes, vous le développeur d'applications,
 veut l'utiliser. Dans le passé, il n'y avait aucun moyen d'éviter le
 chargement des classes de Session sans modifier les fichiers du coeur.
 Ce qui est quelque chose que nous souhaitions que vous soyez capable
-d'éviter. De plus, les classes de Session étaient le seul composant
+d'éviter. De plus, les classes de Session étaient le seul component
 ou helper magique. Ce changement aide à unifier et normaliser
 le behavior pour toutes les classes.
 
@@ -295,22 +295,22 @@ alphanumériques, - et \_ ou ``/[A-Z0-9-_+]+/``.
     Router::connect('/:$%@#param/:action/*', array(...)); // BAD
     Router::connect('/:can/:anybody/:see/:m-3/*', array(...)); //Acceptable
 
-Dans 1.3, lesFor 1.3 the internals of the Router were heavily refactored to
-increase performance and reduce code clutter. The side effect of
-this is two seldom used features were removed, as they were
-problematic and buggy even with the existing code base. First path
-segments using full regular expressions was removed. You can no
-longer create routes like
+Dans 1.3, les entrailles du Router étaient hautement reconstruites pour 
+améliorer la performance et réduire le fouillis du code. L'effet secondaire 
+de cela est que deux fonctions rarement utilisées ont été supprimées, car ils 
+étaient problématique et entraînait des bugs même avec le code de base 
+existant. Les premiers segments de chemin utilisant les expressions régulières 
+ont été retirés. Vous ne pouvez plus créer des routes comme
 
 ::
 
     Router::connect('/([0-9]+)-p-(.*)/', array('controller' => 'products', 'action' => 'show'));
 
-These routes complicated route compilation and impossible to
-reverse route. If you need routes like this, it is recommended that
-you use route parameters with capture patterns. Next mid-route
-greedy star support has been removed. It was previously possible to
-use a greedy star in the middle of a route.
+Ces routes compliquent la compilation des routes et rendent impossibles les 
+routes inversées. Si vous avez besoin de routes comme cela, il est recommandé 
+que vous utilisiez les paramètres de route avec des patrons de capture. Le 
+support de la next mid-route greedy star a été retirée. Il a été précedemment 
+possible d'utiliser une greedy star dans le milieu de la route.
 
 ::
 
@@ -323,19 +323,19 @@ use a greedy star in the middle of a route.
 This is no longer supported as mid-route greedy stars behaved
 erratically, and complicated route compiling. Outside of these two
 edge-case features and the above changes the router behaves exactly
-as it did in 1.2
+as it did in 1.2.
 
-Also, people using the 'id' key in array-form URLs will notice that
-Router::url() now treats this as a named parameter. If you
-previously used this approach for passing the ID parameter to
-actions, you will need to rewrite all your $html->link() and
-$this->redirect() calls to reflect this change.
+Aussi, les personnes utilisant la clé 'id' dans les URLs en forme de tableau 
+remarqueront que Router::url() traite maintenant ceci en paramètre nommé. Si 
+vous utilisiez précedemment cette approche pour passer le paramètre ID aux 
+actions, vous aurez besoin de réécrire tous vos appels $html->link() et 
+$this->redirect() pour refléter ce changement.
 
 ::
 
-    // old format:
+    // format ancien:
     $url = array('controller' => 'posts', 'action' => 'view', 'id' => $id);
-    // use cases:
+    // utilisations des cases:
     Router::url($url);
     $html->link($url);
     $this->redirect($url);
@@ -348,47 +348,47 @@ $this->redirect() calls to reflect this change.
 
 **Dispatcher**
 
-``Dispatcher`` is no longer capable of setting a controller's
-layout/viewPath with request parameters. Control of these
-properties should be handled by the Controller, not the Dispatcher.
-This feature was also undocumented, and untested.
+``Dispatcher`` n'est plus capable de définir un layout/viewPath de controller 
+avec les paramètres de requête. Le Contrôle de ces propriétés devrait être 
+géré par le Controller, pas le Dispatcher. Cette fonctionnalité n'était aussi 
+pas documenté, et pas testé.
 
 **Debugger**
 
 
--  ``Debugger::checkSessionKey()`` has been renamed to
+-  ``Debugger::checkSessionKey()`` a été renommé au profit de 
    ``Debugger::checkSecurityKeys()``
--  Calling ``Debugger::output("text")`` no longer works. Use
+-  Calling ``Debugger::output("text")`` ne fonctionne plus. Utilisez 
    ``Debugger::output("txt")``.
 
 **Object**
 
 
--  ``Object::$_log`` a été retiré. ``CakeLog::write`` is now
-   called statically. See :doc:`/core-libraries/logging`
-   for more information on changes made to logging.
+-  ``Object::$_log`` a été retiré. ``CakeLog::write`` est maintenant appelé 
+   statiquement. Regardez :doc:`/core-libraries/logging`
+   pour plus d'informations sur les changements faits pour se connecter.
 
 **Sanitize**
 
 
--  ``Sanitize::html()`` now actually always returns escaped
-   strings. In the past using the ``$remove`` parameter would skip
-   entity encoding, returning possibly dangerous content.
--  ``Sanitize::clean()`` now has a ``remove_html`` option. This
-   will trigger the ``strip_tags`` feature of ``Sanitize::html()``,
-   and must be used in conjunction with the ``encode`` parameter.
+-  ``Sanitize::html()`` retourne en général toujours des chaînes de caractère 
+   echappées. Dans le passé, utiliser le paramètre ``$remove`` would skip
+   entity encoding, en retournant possiblement le contenu dangereux.
+-  ``Sanitize::clean()`` a maintenant une option ``remove_html``. Cela 
+   déclenchera la fonctionnalité ``strip_tags`` de ``Sanitize::html()``,
+   et doit être utilisé en conjonction avec le paramètre ``encode``.
 
 **Configure and App**
 
 
--  Configure::listObjects() replaced by App::objects()
--  Configure::corePaths() replaced by App::core()
--  Configure::buildPaths() replaced by App::build()
--  Configure no longer manages paths.
--  Configure::write('modelPaths', array...) replaced by
+-  Configure::listObjects() remplacé par App::objects()
+-  Configure::corePaths() remplacé par App::core()
+-  Configure::buildPaths() remplacé par App::build()
+-  Configure ne gère plus les chemins.
+-  Configure::write('modelPaths', array...) remplacé par
    App::build(array('models' => array...))
--  Configure::read('modelPaths') replaced by App::path('models')
--  There is no longer a debug = 3. The controller dumps generated
+-  Configure::read('modelPaths') remplacé par App::path('models')
+-  Il n'y a plus de debug = 3. Le controller dumps generated
    by this setting often caused memory consumption issues making it an
    impractical and unusable setting. The ``$cakeDebug`` variable has
    also been removed from ``View::renderLayout`` You should remove
@@ -741,4 +741,4 @@ versions, it is recommend that the new path is used.
 
 .. meta::
     :title lang=fr: Migrer de CakePHP 1.2 vers 1.3
-    :keywords lang=fr: inflections,bootstrap,tests unitaires,constantes,cipher,php 5,remplacements,pear,tableau,variables,modèles,cakephp,plugins
+    :keywords lang=fr: inflections,bootstrap,tests unitaires,constantes,cipher,php 5,remplacements,pear,tableau,variables,models,cakephp,plugins

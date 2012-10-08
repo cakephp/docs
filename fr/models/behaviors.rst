@@ -1,38 +1,38 @@
-Behaviors
-#########
+Behaviors (Comportements)
+#########################
 
-Les comportements (behaviors) de Modèle sont une manière d'organiser certaines 
-des fonctionnalités définies dans les modèles CakePHP. Ils nous permettent de 
-séparer la logique qui ne doit pas être directement reliée à un modèle, mais 
+Les behaviors (comportements) de Model sont une manière d'organiser certaines 
+des fonctionnalités définies dans les models CakePHP. Ils nous permettent de 
+séparer la logique qui ne doit pas être directement reliée à un model, mais 
 qui nécessite d'être là. En offrant une simple, mais puissante, manière 
-d'étendre les modèles, les comportements nous permettent d'attacher des 
-fonctionnalités aux modèles en définissant une simple variable de classe. 
-C'est comme çà que les comportements permettent de débarrasser les modèles de 
+d'étendre les models, les behaviors nous permettent d'attacher des 
+fonctionnalités aux models en définissant une simple variable de classe. 
+C'est comme çà que les behaviors permettent de débarrasser les models de 
 tout le "sur-poids" qui ne devrait pas faire partie du contrat métier qu'ils 
-modèlent ou de ce qui est aussi nécessité par différents modèles et qui peut 
+modèlent ou de ce qui est aussi nécessité par différents models et qui peut 
 alors être extrapolé.
 
-Par exemple, considérez un modèle qui nous donne accès à une table qui stocke 
+Par exemple, considérez un model qui nous donne accès à une table qui stocke 
 des informations sur la structure d'un arbre hiérarchique. Supprimer, ajouter 
 ou déplacer les nœuds dans l'arbre n'est pas aussi simple que d'effacer, 
 d'insérer ou d'éditer les lignes d'une table. De nombreux enregistrements 
 peuvent nécessiter une mise à jour suite au déplacement des éléments. Plutôt 
-que de créer ces méthodes de manipulation d'arbre une fois par modèle de base 
-(pour chaque modèle nécessitant cette fonctionnalité), nous pourrions 
-simplement dire à notre modèle d'utiliser le Comportement Tree (TreeBehavior) 
-ou, en des termes plus formels, nous dirions à notre modèle de se comporter 
-comme un Arbre. On appelle cela attacher un comportement à un modèle. Avec 
-une seule ligne de code, notre modèle CakePHP disposera d'un nouvel ensemble 
+que de créer ces méthodes de manipulation d'arbre une fois par model de base 
+(pour chaque model nécessitant cette fonctionnalité), nous pourrions 
+simplement dire à notre model d'utiliser le behavior Tree (TreeBehavior) 
+ou, en des termes plus formels, nous dirions à notre model de se comporter 
+comme un Arbre. On appelle cela attacher un behavior à un model. Avec 
+une seule ligne de code, notre model CakePHP disposera d'un nouvel ensemble 
 complet de méthodes lui permettant d'interagir avec la structure sous-jacente.
 
-CakePHP contient déjà des comportements pour les structures en arbre, les 
+CakePHP contient déjà des behaviors pour les structures en arbre, les 
 contenus traduits, les interactions par liste de contrôle d'accès, sans 
-oublier les comportements des contributeurs de la communauté déjà disponibles 
+oublier les behaviors des contributeurs de la communauté déjà disponibles 
 dans la Boulangerie (Bakery) CakePHP 
 (`http://bakery.cakephp.org <http://bakery.cakephp.org>`_). Dans cette 
 section nous couvrirons le schéma d'usage classique pour ajouter des 
-comportements aux modèles, l'utilisation des comportements intégrés à 
-CakePHP et la manière de créer nos propres comportements. 
+behaviors aux models, l'utilisation des behaviors intégrés à 
+CakePHP et la manière de créer nos propres behaviors. 
 
 Au final, les Behaviors sont 
 `Mixins <http://en.wikipedia.org/wiki/Mixin>`_ avec les callbacks.
@@ -40,8 +40,8 @@ Au final, les Behaviors sont
 Utiliser les Behaviors
 ======================
 
-Les Behaviors sont attachés aux modèles grâce à la variable ``$actsAs`` 
-des classes modèle::
+Les Behaviors sont attachés aux models grâce à la variable ``$actsAs`` 
+des classes model::
 
     <?php
     class Category extends AppModel {
@@ -49,10 +49,10 @@ des classes modèle::
         public $actsAs = array('Tree');
     }
 
-Cette exemple montre comme un modèle Catégory pourrait être gérer dans 
-une structure en arbre en utilisant le comportement Tree. Une fois 
-qu'un comportement a été spécifié, utilisez les méthodes qu'il ajoute 
-comme si elles avaient toujours existé et fait partie du modèle original::
+Cette exemple montre comme un model Category pourrait être gérer dans 
+une structure en arbre en utilisant le behavior Tree. Une fois 
+qu'un behavior a été spécifié, utilisez les méthodes qu'il ajoute 
+comme si elles avaient toujours existé et fait partie du model original::
 
     <?php
     // Définir ID
@@ -62,7 +62,7 @@ comme si elles avaient toujours existé et fait partie du modèle original::
     $kids = $this->Category->children();
 
 Quelques behaviors peuvent nécessiter ou permettre des réglages quand 
-ils sont attachés au modèle. Ici, nous indiquons à notre behavior 
+ils sont attachés au model. Ici, nous indiquons à notre behavior 
 Tree les noms des champs "left" et "right" de la table sous-jacente::
 
     <?php
@@ -74,8 +74,8 @@ Tree les noms des champs "left" et "right" de la table sous-jacente::
         ));
     }
 
-Nous pouvons aussi attacher plusieurs behaviors à un modèle. Il n'y 
-aucune raison pour que, par exemple, notre modèle Category se comporte 
+Nous pouvons aussi attacher plusieurs behaviors à un model. Il n'y 
+aucune raison pour que, par exemple, notre model Category se comporte 
 seulement comme un arbre, il pourrait aussi supporter l'internationalisation::
 
     <?php
@@ -90,78 +90,78 @@ seulement comme un arbre, il pourrait aussi supporter l'internationalisation::
         );
     }
 
-Jusqu'à présent, nous avons ajouter les comportements aux modèles en utilisant 
-une variable de classe. Cela signifie que nos comportements seront attachés 
-à nos modèles de tout au long de leur durée vie. Pourtant, nous pourrions 
-avoir besoin de "détacher" les comportements des modèles à l'exécution. 
-Considérons que dans notre précédent modèle Catégorie, lequel agit comme un 
-modèle Tree et Translate, nous ayons besoin pour quelque raison de le forcer 
-à ne plus agir comme un modèle Translate:: 
+Jusqu'à présent, nous avons ajouter les behaviors aux models en utilisant 
+une variable de classe. Cela signifie que nos behaviors seront attachés 
+à nos models de tout au long de leur durée vie. Pourtant, nous pourrions 
+avoir besoin de "détacher" les behaviors des models à l'exécution. 
+Considérons que dans notre précédent model Category, lequel agit comme un 
+model Tree et Translate, nous ayons besoin pour quelque raison de le forcer 
+à ne plus agir comme un model Translate:: 
 
     <?php
-    // Détache un behavior de notre modèle :
+    // Détache un behavior de notre model :
     $this->Category->Behaviors->unload('Translate');
 
-Cela fera que notre modèle Categorie arrêtera dorénavant de se comporter 
-comme un modèle Translate. Nous pourrions avoir besoin, sinon, de désactiver 
-simplement le comportement Translate pour qu'il n'agisse pas sur les 
-opérations normales de notre modèle : nos finds, nos saves, etc. En fait, 
-nous cherchons à désactiver le comportement qui agit sur nos callbacks de 
-modèle CakePHP. Au lieu de détacher le comportement, nous allons dire à notre 
-modèle d'arrêter d'informer ses callbacks du comportement Translate:: 
+Cela fera que notre model Categorie arrêtera dorénavant de se comporter 
+comme un model Translate. Nous pourrions avoir besoin, sinon, de désactiver 
+simplement le behavior Translate pour qu'il n'agisse pas sur les 
+opérations normales de notre model : nos finds, nos saves, etc. En fait, 
+nous cherchons à désactiver le behavior qui agit sur nos callbacks de 
+model CakePHP. Au lieu de détacher le behavior, nous allons dire à notre 
+model d'arrêter d'informer ses callbacks du behavior Translate:: 
 
     <?php
-    // Empêcher le behavior de manipuler nos callbacks de modèle
+    // Empêcher le behavior de manipuler nos callbacks de model
     $this->Category->Behaviors->disable('Translate');
 
-Nous pourrions également avoir besoin de chercher si notre comportement 
-manipule ces callbacks de modèle et si ce n'est pas le cas, alors de 
+Nous pourrions également avoir besoin de chercher si notre behavior 
+manipule ces callbacks de model et si ce n'est pas le cas, alors de 
 restaurer sa capacité à réagir avec eux::
 
     <?php
-    // Si notre comportement ne manipule pas nos callbacks de modèle
+    // Si notre behavior ne manipule pas nos callbacks de model
     if (!$this->Category->Behaviors->enabled('Translate')) {
         // Disons lui de le faire maintenant !
         $this->Category->Behaviors->enable('Translate');
     }
 
 De la même manière que nous pouvons détacher complètement un behavior 
-d'un modèle à l'exécution, nous pouvons aussi attacher de nouveaux 
-comportements. Disons que notre modèle familier Category nécessite de 
-se comporter comme un modèle de Noël, mais seulement le jour de Noël::
+d'un model à l'exécution, nous pouvons aussi attacher de nouveaux 
+behaviors. Disons que notre model familier Category nécessite de 
+se comporter comme un model de Noël, mais seulement le jour de Noël::
 
     <?php
     // Si nous sommes le 25 déc
     if (date('m/d') == '12/25') {
-        // Notre modèle nécessite de se comporter comme un modèle de Noël
+        // Notre model nécessite de se comporter comme un model de Noël
         $this->Category->Behaviors->load('Christmas');
     }
 
 Nous pouvons aussi utiliser la méthode attach pour réécrire les réglages 
-du comportement::
+du behavior::
 
     <?php
-    // Nous changerons un réglage de notre comportement déjà attaché
+    // Nous changerons un réglage de notre behavior déjà attaché
     $this->Category->Behaviors->load('Tree', array('left' => 'new_left_node'));
 
-Il y a aussi une méthode pour obtenir la liste des comportements qui sont 
-attachés à un modèle. Si nous passons le nom d'un comportement à une méthode, 
-elle nous dira si ce comportement est attaché au modèle, sinon elle nous 
-donnera la liste des comportements attachés::
+Il y a aussi une méthode pour obtenir la liste des behaviors qui sont 
+attachés à un model. Si nous passons le nom d'un behavior à une méthode, 
+elle nous dira si ce behavior est attaché au model, sinon elle nous 
+donnera la liste des behaviors attachés::
 
     <?php
-    // Si le comportement Translate n'est pas attaché
+    // Si le behavior Translate n'est pas attaché
     if (!$this->Category->Behaviors->attached('Translate')) {
-        // Obtenir la liste de tous les comportements qui sont attachés au modèle
+        // Obtenir la liste de tous les behaviors qui sont attachés au model
         $behaviors = $this->Category->Behaviors->attached();
     }
 
 Créer des Behaviors
 ===================
 
-Les behaviors qui sont attachés aux Modèles voient leurs callbacks appelés 
+Les behaviors qui sont attachés aux Models voient leurs callbacks appelés 
 automatiquement. Ces callbacks sont similaires à ceux qu'on trouve dans les 
-Modèles : ``beforeFind``, ``afterFind``, ``beforeSave``, ``afterSave``, 
+Models : ``beforeFind``, ``afterFind``, ``beforeSave``, ``afterSave``, 
 ``beforeDelete``, ``afterDelete`` et ``onError``. Voir 
 :doc:`/models/callback-methods`.
 
@@ -170,16 +170,16 @@ nommés en CamelCase et suffixé par ``Behavior``, par ex. NomBehavior.php.
 Il est utile d'utiliser un behavior du coeur comme template quand on crée 
 son propre behavior. Vous les trouverez dans ``lib/Cake/Model/Behavior/``.
 
-Chaque callback prend comme premier paramètre, une référence du modèle par 
+Chaque callback prend comme premier paramètre, une référence du model par 
 lequel il est appelé.
 
 En plus de l'implémentation des callbacks, vous pouvez ajouter des réglages 
-par comportement et/ou par liaison d'un comportement au modèle. Des 
+par behavior et/ou par liaison d'un behavior au model. Des 
 informations à propos des réglages spécifiques peuvent être trouvées dans 
-les chapitres concernant les comportements du cœur et leur configuration.
+les chapitres concernant les behaviors du cœur et leur configuration.
 
 Voici un exemple rapide qui illustre comment les réglages peuvent êtres passés 
-du modèle au comportement::
+du model au behavior::
 
     <?php
     class Post extends AppModel {
@@ -191,9 +191,9 @@ du modèle au comportement::
         );
     }
 
-Puisque les behaviors sont partagés à travers toutes les instances de modèle 
+Puisque les behaviors sont partagés à travers toutes les instances de model 
 qui l'utilisent, une bonne pratique pour stocker les paramètres par nom 
-d'alias/modèle qui utilise le behavior. La création des behaviors entraînera 
+d'alias/model qui utilise le behavior. La création des behaviors entraînera 
 l'appel de leur méthode ``setup()``::
 
     <?php
@@ -212,7 +212,7 @@ l'appel de leur méthode ``setup()``::
 Créer les méthodes du behavior
 ==============================
 
-Les méthodes du Behavior sont automatiquement disponibles sur tout modèle 
+Les méthodes du Behavior sont automatiquement disponibles sur tout model 
 qui 'act as' le behavior. Par exemple si vous avez::
 
     <?php
@@ -222,8 +222,8 @@ qui 'act as' le behavior. Par exemple si vous avez::
     }
 
 Vous seriez capable d'appeler les méthodes de ``FlyingBehavior`` comme si 
-elles étaient des méthodes du modèle Duck. Quand on créer des méthodes d'un 
-behavior, vous obtenez automatiquement une référence du modèle appelé en 
+elles étaient des méthodes du model Duck. Quand on créer des méthodes d'un 
+behavior, vous obtenez automatiquement une référence du model appelé en 
 premier paramètre. Tous les autres paramètres fournis sont shifté one 
 place to the right. Par exemple::
 
@@ -265,11 +265,11 @@ celle d'une méthode mixin normal d'un behavior::
     }
 
 Ce qui est au-dessus mappera chaque méthode ``doXXX()`` appélé vers le 
-behavior. Comme vous pouvez le voir, le modèle est toujours le premier 
+behavior. Comme vous pouvez le voir, le model est toujours le premier 
 paramètre, mais le nom de la méthode appelée sera le deuxième paramètre. 
 Cela vous permet de munge le nom de la méthode pour des informations 
 supplémentaires, un peu comme ``Model::findAllByXX``. Si le behavior 
-du dessus est attaché à un modèle, ce qui suit arrivera::
+du dessus est attaché à un model, ce qui suit arrivera::
 
     <?php
     $model->doReleaseTheHounds('homer', 'lenny');
@@ -280,54 +280,54 @@ du dessus est attaché à un modèle, ce qui suit arrivera::
 Callbacks du Behavior
 =====================
 
-Les Behaviors d'un Modèle peuvent définir un nombre de callbacks qui sont 
-déclenchés before/after les callbacks du modèle du même nom. Les callbacks 
-du Behavior vous permettent de capturer des évènements dans les modèles 
-attachés et d'augmenter les paramètres ou accoler dans un beahvior 
+Les Behaviors d'un Model peuvent définir un nombre de callbacks qui sont 
+déclenchés before/after les callbacks du model du même nom. Les callbacks 
+du Behavior vous permettent de capturer des évènements dans les models 
+attachés et d'augmenter les paramètres ou accoler dans un behavior 
 supplémentaire.
 
 Les callbacks disponibles sont:
 
--  ``beforeValidate`` est lancé avant beforeValidate du modèle
--  ``beforeFind`` est lancé avant beforeFind du modèle
--  ``afterFind`` est lancé avant afterFind du modèle
--  ``beforeSave`` est lancé avant beforeSave du modèle
--  ``afterSave`` est lancé avant afterSave du modèle
--  ``beforeDelete`` est lancé après beforeDelete du modèle
--  ``afterDelete`` est lancé avant afterDelete du modèle
+-  ``beforeValidate`` est lancé avant beforeValidate du model
+-  ``beforeFind`` est lancé avant beforeFind du model
+-  ``afterFind`` est lancé avant afterFind du model
+-  ``beforeSave`` est lancé avant beforeSave du model
+-  ``afterSave`` est lancé avant afterSave du model
+-  ``beforeDelete`` est lancé après beforeDelete du model
+-  ``afterDelete`` est lancé avant afterDelete du model
 
 Créer un callback du behavior
 -----------------------------
 
 .. php:class:: ModelBehavior
 
-Les callbacks d'un behavior d'un modèle sont définis comme de simples méthodes 
+Les callbacks d'un behavior d'un model sont définis comme de simples méthodes 
 dans votre classe de behavior. Un peu comme les méthodes classiques du 
 behavior, ils reçoivent un paramètre ``$Model`` en premier argument. Ce 
-paramètre est le modèle pour lequel la méthode du behavior a été invoquée.
+paramètre est le model pour lequel la méthode du behavior a été invoquée.
 
 .. php:method:: setup(Model $Model, array $settings = array())
 
-    Appelé quand un behavior est attaché à un modèle. Les paramètres viennent 
-    de la propriété ``$actsAs`` du modèle attaché.
+    Appelé quand un behavior est attaché à un model. Les paramètres viennent 
+    de la propriété ``$actsAs`` du model attaché.
 
 .. php:method:: cleanup(Model $Model)
 
-    Appelé quand un behavior est détaché d'un modèle. La méthode de base retire 
-    les paramètres du modèle basées sur ``$model->alias``. Vous pouvez écraser 
+    Appelé quand un behavior est détaché d'un model. La méthode de base retire 
+    les paramètres du model basées sur ``$model->alias``. Vous pouvez écraser 
     cette méthode et fournir une fonctionnalité personnalisée nettoyée.
 
 .. php:method:: beforeFind(Model $Model, array $query)
 
-    If a behavior's beforeFind return's false it will abort the find().
-    Returning an array will augment the query parameters used for the
-    find operation.
+    Si le beforeFind du behavior retourne false, cela annulera le find().
+    Retourner un tableau augmentera les paramètres de requête utilisés 
+    pour l'opération find.
 
 .. php:method:: afterFind(Model $Model, mixed $results, boolean $primary)
 
     Vous pouvez utiliser le afterFind pour augmenter les résultats d'un find. 
     La valeur retournée sera passée en résultats soit au behavior suivant dans 
-    la chaîne, soit au afterFind du modèle.
+    la chaîne, soit au afterFind du model.
 
 .. php:method:: beforeDelete(Model $Model, boolean $cascade = true)
 
@@ -353,9 +353,8 @@ paramètre est le modèle pour lequel la méthode du behavior a été invoquée.
 .. php:method:: beforeValidate(Model $Model)
 
     Vous pouvez utiliser beforeValidate pour modifier un tableau de validation 
-    de modèle ou gérer tout autrre logique de pré-validation. Retourner false 
+    de model ou gérer tout autrre logique de pré-validation. Retourner false 
     d'un callback beforeValidate annulera la validation et entraînera son echec.
-
 
 
 .. meta::

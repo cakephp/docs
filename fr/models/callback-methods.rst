@@ -2,8 +2,8 @@ Méthodes Callback
 #################
 
 Si vous voulez glisser un bout de logique applicative juste avant ou 
-après une opération d’un modèle CakePHP, utilisez les callbacks de modèle. 
-Ces fonctions peuvent être définies dans les classes de modèle (cela 
+après une opération d’un model CakePHP, utilisez les callbacks de model. 
+Ces fonctions peuvent être définies dans les classes de model (cela 
 comprend également votre classe AppModel). Notez bien les valeurs de 
 retour attendues pour chacune de ces méthodes spéciales. 
 
@@ -35,7 +35,7 @@ afterFind
 Utilisez cette méthode de callback pour modifier les résultats qui ont 
 été retournés par une opération de recherche, ou pour effectuer toute 
 logique post-recherche. Le paramètre $results passé à cette méthode contient 
-les résultats retournés par l'opération find() du modèle, càd quelque 
+les résultats retournés par l'opération find() du model, càd quelque 
 chose comme::
 
     <?php
@@ -51,12 +51,13 @@ chose comme::
 La valeur de retour de ce callback doit être le résultat de l'opération 
 de recherche (potentiellement modifié) qui a déclenché ce callback.
 
-The ``$primary`` parameter indicates whether or not the current
+Le paramètre ``$primary`` indique si oui ou non le model courant est le model 
+que la requête originelle  parameter indicates whether or not the current
 model was the model that the query originated on or whether or not
 this model was queried as an association. If a model is queried as
-an association the format of ``$results`` can differ; instead of the
-result you would normally get from a find operation, you may get
-this::
+an association the format of ``$results`` can differ; à la place du résultat, 
+que vous auriez normalement obtenu à partir d'une opération find, vous 
+obtiendriez peut-être ça::
 
     <?php
     $results = array(
@@ -92,7 +93,7 @@ beforeValidate
 
 ``beforeValidate()``
 
-Utilisez ce rappel pour modifier les données du modèle avant qu'elles ne 
+Utilisez ce rappel pour modifier les données du model avant qu'elles ne 
 soient validées ou pour modifier les règles de validation si nécessaire. 
 Cette fonction doit aussi retourner *vrai*, sinon l'exécution du save() 
 courant sera annulée.
@@ -103,7 +104,7 @@ beforeSave
 ``beforeSave()``
 
 Placez toute logique de pré-enregistrement dans cette fonction. Cette fonction 
-s'exécute immediatement après que les données du modèle ont été validées avec 
+s'exécute immediatement après que les données du model ont été validées avec 
 succès, mais juste avant que les données ne soient sauvegardées. Cette fonction 
 devrait toujours retourner vrai si voulez que l'opération d'enregistrement 
 se poursuive.
@@ -117,7 +118,7 @@ Ci-dessous un exemple montrant comment beforeSave peut-être utilisé pour la
 conversion de date. Le code de l'exemple est utilisé pour une application qui 
 a une date de début, au format YYYY-MM-DD dans la base de données et au format 
 DD-MM-YYYY dans l'affichage de l'application. Bien sûr, ceci peut être très 
-facilement modifié. Utilisez le code ci-dessous dans le modèle approprié.
+facilement modifié. Utilisez le code ci-dessous dans le model approprié.
 
 ::
 
@@ -173,7 +174,7 @@ dépendent de cet enregistrement soient aussi supprimés.
     // using app/Model/ProduitCategory.php
     // Dans l'exemple suivant, ne laissez pas une catégorie être supprimée si elle contient des produits.
     // Un appel de $this->Produit->delete($id) de ProduitsController.php a défini $this->id .
-    // En admettant que 'ProduitCategory hasMany Produit', nous pouvons accéder à $this->Produit dans le modèle.
+    // En admettant que 'ProduitCategory hasMany Produit', nous pouvons accéder à $this->Produit dans le model.
     public function beforeDelete() {
         $count = $this->Product->find("count", array(
             "conditions" => array("produit_category_id" => $this->id)

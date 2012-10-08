@@ -1,17 +1,17 @@
 Console et Shells
 #################
 
-CakePHP ne dispose pas seulement d'un framework web
-features not only a web framework but also a console framework
-for creating console applications.  Console applications are ideal for handling
-a variety of background tasks such as maintenance, and completing work outside
-of the request-response cycle.  CakePHP console applications allow you
-to reuse your application classes from the command line.
+CakePHP ne dispose pas seulement d'un framework web mais aussi d'une console 
+de framework pour la création d'applications. Les applications par console 
+sont idéales pour la gestion d'une variété de tâches d'arrière-plan comme la 
+maintenance et l'achèvement du travail en-dehors du cycle de requête-réponse. 
+Les applications par la console CakePHP vous permettent de réutilise les 
+classes de votre application à partir de lignes de commande.
 
-CakePHP comes with a number of console applications out of the box.
-Some of these applications are used in concert with other CakePHP
-features (like ACL or i18n), and others are for general use in
-getting you working faster.
+CakePHP dispose d'un certain nombre d'applications fournies pour la console.
+Certaines de ces applications sont utilisées de concert avec les 
+fonctionnalités de CakePHP (comme ACL ou i18n), et d'autres sont pour 
+une utilisation générale pour que votre travail se fasse plus vite.
 
 La console de CakePHP
 =====================
@@ -191,27 +191,27 @@ de position ou l'option est interprétée en tant que nom de commande. Si vous
 voulez utiliser des arguments et des options, vous devriez utiliser un autre 
 nom de méthode que ``main``.
 
-Utiliser les Modèles dans vos shells
-------------------------------------
+Utiliser les Models dans vos shells
+-----------------------------------
 
 Vous avez souvent besoin d'accéder à la logique métier de votre application 
 dans les utilitaires de shell. CakePHP rend cela super facile. En configurant 
-une propriété ``$uses``, vous pouvez définir un tableau de modèles auxquels 
-vous voulez accéder dans votre shell. Les modèles définis sont chargés en 
-propriétés attachées à votre shell, juste comme un contrôleur obtient les 
-modèles qui lui sont attachés::
+une propriété ``$uses``, vous pouvez définir un tableau de models auxquels 
+vous voulez accéder dans votre shell. Les models définis sont chargés en 
+propriétés attachées à votre shell, juste comme un controller obtient les 
+models qui lui sont attachés::
 
     <?php
-    class UtilisateurShell extends AppShell {
-        public $uses = array('Utilisateur');
+    class UserShell extends AppShell {
+        public $uses = array('User');
 
         public function show() {
-            $user = $this->Utilisateur->findByUsername($this->args[0]);
-            $this->out(print_r($utilisateur, true));
+            $user = $this->User->findByUsername($this->args[0]);
+            $this->out(print_r($user, true));
         }
     }
 
-Le shell ci-dessus récupérera un utilisateur par son nom username et affichera 
+Le shell ci-dessus récupérera un utilisateur par son username et affichera 
 l'information stockée dans la base de données.
 
 Les tâches Shell
@@ -242,7 +242,7 @@ une classe de tâche ressemble à cela::
 
     <?php
     class FileGeneratorTask extends Shell {
-        public $uses = array('Utilisateur');
+        public $uses = array('User');
         public function execute() {
 
         }
@@ -355,27 +355,29 @@ La Style de sortie est fait en incluant les tags - juste comme le html - dans
 votre sortie.
 
 ConsoleOutput remplacera ces tags avec la bonne séquence de code ansi, ou 
-supprime les tags si vous êtes sur une console qui ne supporte pas les 
-codes ansi, these tags with the correct ansi code sequence, or 
-remove the tags if you are on a console that doesn't support ansi codes. There 
-are several built in styles, and you can create more.  The built in ones are
+supprimera les tags si vous êtes sur une console qui ne supporte pas les 
+codes ansi. Il y a plusieurs styles intégrés, et vous pouvez en créer plus. 
+Ceux intégrés sont 
 
-* ``error`` Error messages. Red underlined text.
-* ``warning`` Warning messages. Yellow text.
-* ``info`` Informational messages. Cyan text.
-* ``comment`` Additional text. Blue text.
-* ``question`` Text that is a question, added automatically by shell.
+* ``error`` Messages d'Erreur. Texte rouge souligné.
+* ``warning`` Warning messages. Texte jaune.
+* ``info`` Messages d'informations. Texte cyan.
+* ``comment`` Texte supplémentaire. Texte bleu.
+* ``question`` Texte qui est une question, ajouté automatiquement par shell.
 
-You can create additional styles using `$this->stdout->styles()`.  To declare a 
-new output style you could do::
+Vous pouvez créer des styles supplémentaires en utilisant 
+`$this->stdout->styles()`. Pour déclarer un nouveau style de sortie, 
+vous pouvez faire::
 
     <?php
     $this->stdout->styles('flashy', array('text' => 'magenta', 'blink' => true));
 
-This would then allow you to use a ``<flashy>`` tag in your shell output, and if ansi 
-colours are enabled, the following would be rendered as blinking magenta text 
-``$this->out('<flashy>Whoooa</flashy> Something went wrong');``.  When defining 
-styles you can use the following colours for the `text` and `background` attributes:
+Cela vous permettra d'utiliser un tag ``<flashy>`` dans la sortie de votre 
+shell, et si les couleurs ansi sont activées, ce qui suit sera rendu en texte 
+magenta clignotant 
+``$this->out('<flashy>Whoooa</flashy> Quelque chose a posé problème');``. Quand 
+vous définissez les styles, vous pouvez utiliser les couleurs suivantes pour 
+les attributs `text` et `background`:
 
 * black
 * red
@@ -386,39 +388,40 @@ styles you can use the following colours for the `text` and `background` attribu
 * cyan
 * white
 
-You can also use the following options as boolean switches, setting them to a 
-truthy value enables them.
+Vous pouvez aussi utiliser les options suivantes en commutateurs boléens, 
+en les définissant à une valeur true qui les activent.
 
 * bold
 * underline
 * blink
 * reverse
 
-Adding a style makes it available on all instances of ConsoleOutput as well, 
-so you don't have to redeclare styles for both stdout and stderr objects.
+Ajouter un style le rend aussi disponible pour toutes les instances de 
+ConsoleOutput, donc vous n'avez pas à redeclarer les styles pour les 
+deux objets stdout et stderr.
 
 Enlever la coloration
 ---------------------
 
-Although colouring is pretty awesome, there may be times when you want to turn it off, 
-or force it on::
-
+Bien que la coloration soit vraiment géniale, il peut y avoir des fois où vous 
+voulez l'arrêter, ou forcer à l'avoir::
     <?php
     $this->output->outputAs(ConsoleOutput::RAW);
 
-The above will put the output object into raw output mode.  In raw output mode, 
-no styling is done at all.  There are three modes you can use.
+Ce qui est au-dessus met la sortie objet dans un mode de sortie en ligne. Dans 
+le mode de sortie en ligne, il n'y a aucun style du tout. Il y a trois modes que 
+vous pouvez utiliser.
 
-* ``ConsoleOutput::RAW`` - Raw output, no styling or formatting will be done. 
-  This is a good mode to use if you are outputting XML or, want to debug why 
-  your styling isn't working.
-* ``ConsoleOutput::PLAIN`` - Plain text output, known style tags will be stripped
-  from the output.
-* ``ConsoleOutput::COLOR`` - Output with color escape codes in place.
+* ``ConsoleOutput::RAW`` - Sortie en ligne, aucun style ou format ne sera fait 
+  C'est un bon mode à utiliser si vous sortez du XML ou si voulez débugger 
+  pourquoi votre style ne marche pas.
+* ``ConsoleOutput::PLAIN`` - Sortie en texte plein, les tags de style connus 
+  seront enlevés de la sortie.
+* ``ConsoleOutput::COLOR`` - La sortie avec couleur enlève les codes en place.
 
-By default on \*nix systems ConsoleOutput objects default to colour output.  
-On windows systems, plain output is the default unless the ``ANSICON`` environment 
-variable is present.
+Par défaut sur les systèmes \*nix, les objets ConsoleOutput ont par défaut 
+de la couleur. Sur les systèmes windows, la sortie simple est mise par défaut 
+sauf si la variable d'environnement ``ANSICON`` est présente. 
 
 Configurer les options et générer de l'aide
 ===========================================
