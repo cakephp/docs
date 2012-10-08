@@ -200,7 +200,7 @@ message. For example::
 
     // configure tmp/logs/payments.log to receive all types, but only
     // those with `payments` scope
-    CakeLog::config('shops', array(
+    CakeLog::config('payments', array(
         'engine' => 'FileLog',
         'types' => array(),
         'scopes' => array('payments'),
