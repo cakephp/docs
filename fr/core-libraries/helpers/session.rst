@@ -119,6 +119,5 @@ Affichage de notifications ou de messages flash
 
 .. meta::
     :title lang=fr: SessionHelper
-    :description lang=fr: Équivalent du component Session, le helper Session offre la majorité des 
-fonctionnalités du component et les rend disponible dans votre vue.
+    :description lang=fr: Équivalent du component Session, le helper Session offre la majorité des fonctionnalités du component et les rend disponible dans votre vue.
     :keywords lang=fr: session helper,flash messages,session flash,session read,session check

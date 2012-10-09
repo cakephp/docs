@@ -18,7 +18,7 @@ rendu les plus communs:
   :doc:`views/themes`
 
 Templates de Views
-=================
+==================
 
 La couche view de CakePHP c'est la façon dont vous parlez à vos utilisateurs. 
 La plupart du temps, vos vues afficheront des documents (X)HTML pour les 
@@ -59,7 +59,7 @@ chapitre :
 .. _extending-views:
 
 Views étendues
--------------
+--------------
 
 .. versionadded:: 2.1
 

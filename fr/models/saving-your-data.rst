@@ -252,8 +252,8 @@ une fois. Les options suivantes peuvent être utilisées:
   enregistrements en une seule transaction.
   Devrait être défini à false si la base de données/table ne supporte pas les 
   transactions.
-*  ``fieldList``: Equivalent au paramètre $fieldList dans Model::save()
-*  ``deep``: (since 2.1) Si défini à true, les données associées sont aussi 
+* ``fieldList``: Equivalent au paramètre $fieldList dans Model::save()
+* ``deep``: (since 2.1) Si défini à true, les données associées sont aussi 
   sauvegardées, regardez aussi saveAssociated.
 
 Pour sauvegarder de multiples enregistrements d'un unique model, $data 

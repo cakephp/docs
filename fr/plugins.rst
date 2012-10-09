@@ -354,6 +354,7 @@ de nommage.
 Faire référence avec votre component, depuis l'intérieur ou l'extérieur de votre 
 plugin nécessite seulement que le préfixe du nom du plugin avant le nom du 
 component. Par exemple::
+
     <?php
     // Component défini dans le plugin 'ContactManager'
     class ExampleComponent extends Component {

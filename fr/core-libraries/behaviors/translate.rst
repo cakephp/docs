@@ -91,7 +91,7 @@ traduction (par défaut : i18n), avec la locale courante. Une "locale" est un
 identifiant de langue.
 
 La *locale courante* est la valeur actuelle de 
-``Configure::read('Config.language')``. La valeur de *Config.language*est 
+``Configure::read('Config.language')``. La valeur de *Config.language* est 
 assignée dans la Classe L10n - à moins qu'elle ne soit déjà définie. Cependant, 
 le Behavior Translate vous autorise à surcharger ceci à la volée, ce qui 
 permet à l'utilisateur de votre page de créer de multiples versions sans avoir 

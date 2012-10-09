@@ -56,8 +56,8 @@ longues étendues de texte.
 .. php:method:: autoLink(string $text, array $htmlOptions=array())
 
     :param string $text: Le texte à lier automatiquement.
-    :param array $htmlOptions: Un tableau de :term:`html attributes` pour 
-    générer les liens
+    :param array $htmlOptions: Un tableau de :term:`html attributes` pour
+        générer les liens
 
     Execute la fonctionnalité dans les deux ``autoLinkUrls()`` et 
     ``autoLinkEmails()`` sur le ``$text`` fourni. Tous les URLs et emails 
