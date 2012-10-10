@@ -293,7 +293,7 @@ model data to build nested results. Below are a couple of simple
     public function some_function() {
         // ...
         $allCategories = $this->Category->find('threaded');
-        $someCategories = $this->Comment->find('threaded', array(
+        $comments = $this->Comment->find('threaded', array(
             'conditions' => array('article_id' => 50)
         ));
         // ...
@@ -365,6 +365,19 @@ passed in the params to ``find('threaded')``, the results will
 appear in name order. Likewise any order can be used, there is no
 inbuilt requirement of this method for the top result to be
 returned first.
+
+.. warning::
+
+    If you specify ``fields``, you need to always include the parent_id (or its current alias):
+
+    <?php
+    public function some_function() {
+       $categories = $this->Category->find('threaded', array(
+            'fields' => array('id', 'name', 'parent_id')
+        ));
+    }
+
+    Otherwise the returned array will not be of the expected nested structure from above.
 
 .. _model-find-neighbors:
 
