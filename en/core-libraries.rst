@@ -1,11 +1,11 @@
 Core Libraries
 ##############
 
-CakePHP comes with a plethora of built-in functions and classes.  These classes
+CakePHP comes with a plethora of built-in functions and classes. These classes
 and functions try to cover some of the most common features required in web
 applications.
 
-General purpose
+General Purpose
 ===============
 
 General purpose libraries are available and reused in many places across
@@ -14,9 +14,24 @@ CakePHP.
 .. toctree::
     :maxdepth: 2
 
-    core-libraries/global-constants-and-functions
-    core-libraries/events
-    core-libraries/collections
+    core-libraries/toc-general-purpose
+
+.. _core-behaviors:
+
+Behaviors
+=========
+
+Behaviors add extra functionality to your models. CakePHP comes
+with a number of built-in behaviors such as :php:class:`TreeBehavior`
+and :php:class:`ContainableBehavior`.
+
+To learn about creating and using behaviors, read the section
+on :doc:`/models/behaviors`.
+
+.. toctree::
+    :maxdepth: 2
+
+    core-libraries/toc-behaviors
 
 .. _core-components:
 
@@ -30,14 +45,7 @@ configure and use components.
 .. toctree::
     :maxdepth: 2
 
-    core-libraries/components/access-control-lists
-    core-libraries/components/authentication
-    core-libraries/components/cookie
-    core-libraries/components/email
-    core-libraries/components/request-handling
-    core-libraries/components/pagination
-    core-libraries/components/security-component
-    core-libraries/components/sessions
+    core-libraries/toc-components
 
 .. _core-helpers:
 
@@ -55,39 +63,10 @@ can create and use your own helpers.
 .. toctree::
     :maxdepth: 2
 
-    core-libraries/helpers/cache
-    core-libraries/helpers/form
-    core-libraries/helpers/html
-    core-libraries/helpers/js
-    core-libraries/helpers/number
-    core-libraries/helpers/paginator
-    core-libraries/helpers/rss
-    core-libraries/helpers/session
-    core-libraries/helpers/text
-    core-libraries/helpers/time
+    core-libraries/toc-helpers
 
-.. _core-behaviors:
-
-Behaviors
+Utilities
 =========
-
-Behaviors add extra functionality to your models. CakePHP comes
-with a number of built-in behaviors such as :php:class:`TreeBehavior`
-and :php:class:`ContainableBehavior`.
-
-To learn about creating and using behaviors, read the section
-on :doc:`/models/behaviors`.
-
-.. toctree::
-    :maxdepth: 2
-
-    core-libraries/behaviors/acl
-    core-libraries/behaviors/containable
-    core-libraries/behaviors/translate
-    core-libraries/behaviors/tree
-
-Core Libraries
-==============
 
 Beyond the core MVC components, CakePHP includes a great selection of utility
 classes that help you do everything from webservice requests, to caching, to
@@ -96,24 +75,7 @@ logging, internationalization and more.
 .. toctree::
     :maxdepth: 2
 
-    core-utility-libraries/app
-    core-libraries/caching
-    core-utility-libraries/email
-    core-utility-libraries/number
-    core-utility-libraries/time
-    core-utility-libraries/sanitize
-    core-utility-libraries/file-folder
-    core-utility-libraries/httpsocket
-    core-utility-libraries/inflector
-    core-libraries/internationalization-and-localization
-    core-libraries/logging
-    core-utility-libraries/router
-    core-utility-libraries/security
-    core-utility-libraries/hash
-    core-utility-libraries/set
-    core-utility-libraries/string
-    core-utility-libraries/xml
-
+    core-libraries/toc-utilities
 
 .. meta::
     :title lang=en: Core Libraries
