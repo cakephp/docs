@@ -368,14 +368,15 @@ returned first.
 
 .. warning::
 
-    If you specify ``fields``, you need to always include the parent_id (or its current alias):
+    If you specify ``fields``, you need to always include the
+    parent_id (or its current alias)::
 
-    <?php
-    public function some_function() {
-       $categories = $this->Category->find('threaded', array(
-            'fields' => array('id', 'name', 'parent_id')
-        ));
-    }
+        <?php
+        public function some_function() {
+            $categories = $this->Category->find('threaded', array(
+                'fields' => array('id', 'name', 'parent_id')
+            ));
+        }
 
     Otherwise the returned array will not be of the expected nested structure from above.
 
