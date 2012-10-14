@@ -86,7 +86,7 @@ CakePHP には多くの例外クラスが存在します。
 旧来の ``cakeError()`` によるエラーメッセージはそれぞれの例外に置き代わっています。
 例外は、継承したり、ロジックを組み込んだりという柔軟さも提供してくれます。
 組み込みの例外ハンドリングでは、キャッチされなかった例外をどんなものであれキャッチし、有益な情報を表示します。
-400番代のコードを特に使わない例外なら、Internal Server Error として扱われます。
+400番台のコードを特に使わない例外なら、Internal Server Error として扱われます。
 
 ..
   There are a number of exception classes in CakePHP.  Each exception replaces
@@ -317,7 +317,6 @@ CakePHP が投げる標準的な例外もすべて、CakeException を継承し�
 
     CakePHP での例外の基底クラスです。
     前述の CakeExceptions と HttpExceptions はすべて、このクラスを継承しています。
-    All CakeExceptions and HttpExceptions above extend this class.
 
 ..
     Base exception class in CakePHP.
@@ -330,7 +329,7 @@ CakePHP が投げる標準的な例外もすべて、CakeException を継承し�
 ..
     See :php:func:`CakeResponse::header()`
 
-HTTP 例外と Cake 例外はすべて、CakeBaseException クラスを継承おり、このクラスはレスポンスにヘッダーを加えるメソッドを持っています。
+HTTP 例外と Cake 例外はすべて、CakeBaseException クラスを継承しており、このクラスはレスポンスにヘッダーを加えるメソッドを持っています。
 405 MethodNotAllowedException を投げる場合について例を挙げると、RFC2616 ではこう言っています：
 「レスポンスは、要求されたリソースへの正しいメソッドのリストを含む Allow ヘッダーを含有していなければ【なりません】。」
 
