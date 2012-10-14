@@ -182,7 +182,7 @@ TextHelper
 PaginatorHelper
 ----------
 
-- :php:meth:`PaginatorHelper::number()` now has a new option ``currentTag`` to
+- :php:meth:`PaginatorHelper::numbers()` now has a new option ``currentTag`` to
   allow specifying extra tag for wrapping current page number.
 
 Testing
