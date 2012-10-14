@@ -179,6 +179,12 @@ TextHelper
 - :php:meth:`TextHelper::tail()` was added to truncate text starting from the end.
 - `ending` in :php:meth:`TextHelper::truncate()` is deprecated in favor of `ellipsis`
 
+PaginatorHelper
+----------
+
+- :php:meth:`PaginatorHelper::number()` now has a new option ``currentTag`` to
+  allow specifying extra tag for wrapping current page number.
+
 Testing
 =======
 
