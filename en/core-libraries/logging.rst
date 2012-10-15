@@ -225,7 +225,7 @@ message. For example::
 
     // configure tmp/logs/payments.log to receive all levels, but only
     // those with `payments` scope
-    Configure::write('Log.shops', [
+    Configure::write('Log.payments', [
         'engine' => 'FileLog',
         'levels' => [],
         'scopes' => ['payments'],
@@ -237,7 +237,7 @@ message. For example::
     Log::warning('this gets written to both shops.log and payments.log', 'unknown');
 
 Log API
-===========
+=======
 
 .. php:namespace:: Cake\Log
 

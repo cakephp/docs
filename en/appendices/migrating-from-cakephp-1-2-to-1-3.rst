@@ -100,28 +100,28 @@ classes contained within (as well as dealing with some name-spacing
 issues):
 
 
--  session.php ⇒ cake\_session.php
+-  session.php -> cake\_session.php
 
    
-   -  App::import('Core', 'Session') ⇒ App::import('Core',
+   -  App::import('Core', 'Session') -> App::import('Core',
       'CakeSession')
 
--  socket.php ⇒ cake\_socket.php
+-  socket.php -> cake\_socket.php
 
    
-   -  App::import('Core', 'Socket') ⇒ App::import('Core',
+   -  App::import('Core', 'Socket') -> App::import('Core',
       'CakeSocket')
 
--  schema.php ⇒ cake\_schema.php
+-  schema.php -> cake\_schema.php
 
    
-   -  App::import('Model', 'Schema') ⇒ App::import('Model',
+   -  App::import('Model', 'Schema') -> App::import('Model',
       'CakeSchema')
 
--  behavior.php ⇒ model\_behavior.php
+-  behavior.php -> model\_behavior.php
 
    
-   -  App::import('Core', 'Behavior') ⇒ App::import('Core',
+   -  App::import('Core', 'Behavior') -> App::import('Core',
       'ModelBehavior')
 
 

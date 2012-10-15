@@ -46,14 +46,14 @@ Les fichiers ``.htaccess`` par défaut ont changé, vous devrez vous rappeler de
 les mettre à jour ou de mettre à jour les schémas URL de re-writing de vos 
 serveurs web pour correspondre aux changements faits dans ``.htaccess``
 
-Modèles
-=======
+Models
+======
 
 - Le callback ``beforeDelete`` sera vidé avant les callbacks beforeDelete des 
   behaviors. Cela donne plus de cohérence avec le reste des évènements 
-  déclenchés dans la couche Modèle.
+  déclenchés dans la couche Model.
 - ``Model::find('threaded')`` accepte maintenant ``$options['parent']`` si vous 
-  utilisez un autre champ, alors ``parent_id``. Aussi, si le modèle a 
+  utilisez un autre champ, alors ``parent_id``. Aussi, si le model a 
   TreeBehavior attaché et configuré avec un autre champ parent, le find 
   threaded l'utilisera par défaut.
 - Les paramètres pour les requêtes utilisant les requêtes préparées vont 
@@ -65,7 +65,7 @@ Modèles
   datasources by modifying :php:attr:`Model::$useDbConfig` you should also
   modify ``schemaName`` or use :php:meth:`Model::setDataSource()` method which
   handles this for you.
-  Le Modèle a maintenant une propriété ``schemaName``. Si votre application 
+  Le Model a maintenant une propriété ``schemaName``. Si votre application 
   change de sources de données en modifiant :php:attr:`Model::$useDbConfig`, 
   vous devriez aussi modifier ``schemaName`` ou utiliser la méthode 
   :php:meth:`Model::setDataSource()` qui gère cela pour vous.
@@ -155,7 +155,7 @@ Un nouveau TestShell a été ajouté. Il réduit le typage requis pour exécuter
 tests unitaires, et offre un chemin de fichier en fonction d'interface 
 utilisateur ::
 
-    # Execute les tests du modèle post
+    # Execute les tests du model post
     Console/cake test app/Model/Post.php
     Console/cake test app/Controller/PostsController.php
 
@@ -197,7 +197,7 @@ CakeResponse
 - Ajout :php:meth:`CakeResponse::cookie()` pour la définition des cookies.
 - Ajout d'un nombre de méthodes pour :ref:`cake-response-caching`
 
-Contrôleur
+Controller
 ==========
 
 Controller
@@ -207,14 +207,12 @@ Controller
   maintenant ``true`` à la place de false. De plus, les différentes valeurs 
   sont traitées de façon légèrement différente, mais se comportera comme cela 
   dans la plupart des cas.
-
-    - ``true`` va charger le modèle par défaut et fusionnser avec AppController.
-    - Un tableau va charger ces modèles et fusionner avec AppController.
-    - Un tableau vide ne va charger aucun modèle, sauf ceux déclarés dans la 
+    - ``true`` va charger le model par défaut et fusionnser avec AppController.
+    - Un tableau va charger ces models et fusionner avec AppController.
+    - Un tableau vide ne va charger aucun model, sauf ceux déclarés dans la 
       classe de base.
-    - ``false`` ne va charger aucun modèle, et ne va pas non plus fusionner 
+    - ``false`` ne va charger aucun model, et ne va pas non plus fusionner 
       avec la classe de base.
-
 
 Components (Composants)
 =======================
@@ -383,13 +381,13 @@ Testing
 - Les Web test runner configurent par défaut l'affichage des test des app.
 - Les Fixtures peuvent être créées pour différentes sources de données autre
   que $test.
-- Les Modèles chargés utilisant la ClassRegistry et utilisant une autre source 
+- Les Models chargés utilisant la ClassRegistry et utilisant une autre source 
   de données aura son nom de source donnée préfixé par ``test_`` (ex: source 
   de données `master` essaiera d'utiliser `test_master` dans la testsuite)
 - Les cas de Test sont générés avec des méthodes de configuration de la classe 
   spécifique.
 
-Evènements
+Evénements
 ==========
 
 - Un nouveau système générique des évènements a été construit et a remplacé la 

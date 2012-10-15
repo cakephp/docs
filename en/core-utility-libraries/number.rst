@@ -115,7 +115,7 @@ automatically echo the output into the view.
         echo CakeNumber::currency('1234.56', 'FOO');
 
 .. php:method:: addFormat(string $formatName, array $options)
-    
+
     :param string $formatName: The format name to be used in the future
     :param array $options: The array of options for this format. Uses the
         same ``$options`` keys as :php:meth:`CakeNumber::currency()`.
@@ -211,7 +211,7 @@ automatically echo the output into the view.
 
 .. php:method:: toReadableSize(string $dataSize)
 
-    :param string $data_size: The number of bytes to make readable. 
+    :param string $dataSize: The number of bytes to make readable.
 
     This method formats data sizes in human readable forms. It provides
     a shortcut way to convert bytes to KB, MB, GB, and TB. The size is
@@ -291,6 +291,55 @@ automatically echo the output into the view.
             'thousands' => ','
         ));
         // output '¥ 123,456.79'
+
+.. php:method:: formatDelta(mixed $number, mixed $options=array())
+
+    This method displays differences in value as a signed number::
+
+        <?php
+        // called as NumberHelper
+        $this->Number->formatDelta($number, $options);
+
+        // called as CakeNumber
+        CakeNumber::formatDelta($number, $options);
+
+    The $number parameter is the number that you are planning on
+    formatting for output. With no $options supplied, the number
+    1236.334 would output as 1,236. Note that the default precision is
+    zero decimal places.
+
+    The $options parameter takes the same keys as :php:meth:`CakeNumber::format()` itself:
+
+       -  places (integer): the amount of desired precision
+       -  before (string): to be put before the outputted number
+       -  after (string): to be put after the outputted number
+       -  decimals (string): used to delimit the decimal places in a
+          number
+       -  thousands (string): used to mark off thousand, millions, …
+          places
+
+    Example::
+
+        <?php
+        // called as NumberHelper
+        echo $this->Number->formatDelta('123456.7890', array(
+            'places' => 2,
+            'decimals' => '.',
+            'thousands' => ','
+        ));
+        // output '+123,456.79'
+
+        // called as CakeNumber
+        App::uses('CakeNumber', 'Utility');
+        echo CakeNumber::formatDelta('123456.7890', array(
+            'places' => 2,
+            'decimals' => '.',
+            'thousands' => ','
+        ));
+        // output '+123,456.79'
+
+    .. versionadded:: 2.3
+        This method was added in 2.3
 
 .. end-cakenumber
 

@@ -61,6 +61,18 @@ Console
 - Baking a new project now sets the application's cache prefix to the name of
   the application.
 
+I18n
+====
+
+L10n
+---------
+
+- ``nld`` is now the default locale for Dutch as specified by ISO 639-3 and ``dut`` its alias.
+  The locale folders have to be adjusted accordingly (from `/Locale/dut/` to `/Locale/nld/`).
+- Albanian is now ``sqi``, Basque is now ``eus``, Chinese is now ``zho``, Tibetan is now ``bod``,
+  Czech is now ``ces``, Farsi is now ``fas``, French is now ``fra``, Icelandic is now ``isl``,
+  Macedonian is now ``mkd``, Malaysian is now ``msa``, Romanian is now ``ron``, Serbian is now ``srp``
+  and Slovak is now ``slk``. The corresponding locale folders have to be adjusted, as well.
 
 Core
 ====
@@ -114,6 +126,7 @@ CakeRequest
 -----------
 
 - :php:meth:`CakeRequest::onlyAllow()` was added.
+- :php:meth:`CakeRequest::query()` was added.
 
 CakeResponse
 ------------
@@ -141,10 +154,12 @@ View
 - MediaView is deprecated, and you can use new features in
   :php:class:`CakeResponse` to achieve the same results.
 - Serialization in Json and Xml views has been moved to ``_serialize()``
-- beforeRender and afterRender callbacks are now being called in Json and Xml 
+- beforeRender and afterRender callbacks are now being called in Json and Xml
   views when using view templates.
-- :php:meth:`View::fetch()` now has a ``$default`` argument.  This argument can
+- :php:meth:`View::fetch()` now has a ``$default`` argument. This argument can
   be used to provide a default value should a block be empty.
+- :php:meth:`View::prepend()` has been added to allow prepending content to
+  existing block.
 
 Helpers
 =======
@@ -164,6 +179,12 @@ TextHelper
 - :php:meth:`TextHelper::tail()` was added to truncate text starting from the end.
 - `ending` in :php:meth:`TextHelper::truncate()` is deprecated in favor of `ellipsis`
 
+PaginatorHelper
+----------
+
+- :php:meth:`PaginatorHelper::numbers()` now has a new option ``currentTag`` to
+  allow specifying extra tag for wrapping current page number.
+
 Testing
 =======
 
@@ -177,6 +198,7 @@ CakeNumber
 ----------
 
 - :php:meth:`CakeNumber::fromReadableSize()` was added.
+- :php:meth:`CakeNumber::formatDelta()` was added.
 
 Folder
 ------
@@ -195,7 +217,7 @@ String
 Debugger
 --------
 
-- php:meth:`Debugger::exportVar()` now outputs private and protected properties
+- :php:meth:`Debugger::exportVar()` now outputs private and protected properties
   in PHP >= 5.3.0.
 
 Security

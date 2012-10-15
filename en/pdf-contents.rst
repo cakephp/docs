@@ -16,7 +16,7 @@ Contents
    development
    deployment
    tutorials-and-examples
-   appendices/glossary
+   appendices
 
 
 Indices and tables

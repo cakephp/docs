@@ -1,5 +1,5 @@
-Supprimer de Données
-####################
+Supprimer des Données
+#####################
 
 La classe Model de CakePHP offre de nombreuses façons de supprimer des 
 enregistrements de votre base de données.
@@ -18,23 +18,23 @@ mentionné comme devant être supprimé.
 Par exemple, lors de la suppression d'un enregistrement Utilisateur 
 lié à plusieurs enregistrements Recette (Utilisateur 'hasMany' ou 
 'hasAndBelongsToMany' Recettes):
--  si $cascade est fixé à true, les entrées Recette liées sont aussi 
-   supprimées si les valeurs "dependant" des modèles sont à true.
--  si $cascade est fixé à false, les entrées Recette resteront après 
-   que l'Utilisateur ait été supprimé.
+    - si $cascade est fixé à true, les entrées Recette liées sont aussi 
+      supprimées si les valeurs "dependant" des models sont à true.
+    - si $cascade est fixé à false, les entrées Recette resteront après 
+      que l'Utilisateur ait été supprimé.
 
 Si votre base de données permet les clés étrangères et les suppressions en 
 cascade, il est souvent plus efficace de les utiliser plutôt que le cascade 
 de CakePHP. Le seul bénéfice pour l'utilisation de la fonctionnalité de 
 cascade de ``Model::delete()`` est qu'elle vous permet d'influencer les 
-callbacks des behaviors et des modèles:: 
+callbacks des behaviors et des Models:: 
 
     <?php
     $this->Comment->delete($this->request->data('Comment.id'));
 
 Vous pouvez brancher une logique personnalisée dans le processus de 
 suppression à l'aide des callbacks ``beforeDelete`` et ``afterDelete`` 
-présents dans les deux Modèles et Bahaviors. Allez voir 
+présents dans les deux models et Bahaviors. Allez voir 
 :doc:`/models/callback-methods` pour plus d'informations.
 
 .. _model-deleteall:
@@ -72,5 +72,5 @@ et ensuite supprimées. Cela impliquera souvent plus de requêtes faîtes.
     
 
 .. meta::
-    :title lang=fr: Supprimer les Données
+    :title lang=fr: Supprimer des Données
     :keywords lang=fr: modèles doc,logique custom,méthodes callback,classe model,modèle de base de données,callbacks,modèle information,request data,deleteall,fragment,leverage,tableau,cakephp,échec,recettes,bénéfice,suppression,modèle de données

@@ -20,10 +20,10 @@ Utiliser et configurer les Helpers
 ==================================
 
 Vous activez les helpers (assistants) dans CakePHP, en faisant 
-"prendre conscience" à un contrôleur qu'ils existent. Chaque contrôleur a une 
+"prendre conscience" à un controller qu'ils existent. Chaque controller a une 
 propriété :php:attr:`~Controller::$helpers`, qui liste les helpers 
 disponibles dans la vue. Pour activer un helper dans votre vue, ajoutez 
-son nom au tableau ``$helpers`` du contrôleur::
+son nom au tableau ``$helpers`` du controller::
 
     <?php
     class BakeriesController extends AppController {
@@ -40,8 +40,8 @@ utilisée partout ailleurs dans CakePHP::
     
 Vous pouvez aussi ajoutez les helpers depuis une action, dans ce cas, 
 ils seront uniquement accessibles pour cette action et aucune autre dans le 
-contrôleur. Ceci économise de la puissance de calcul pour les autres actions 
-qui n'utilisent pas le helper, tout en permettant de conserver le contrôleur 
+controller. Ceci économise de la puissance de calcul pour les autres actions 
+qui n'utilisent pas le helper, tout en permettant de conserver le controller 
 mieux organisé::
 
     <?php
@@ -55,7 +55,7 @@ mieux organisé::
         }
     }
 
-Si vous avez besoin d'activer un helper pour tous les contrôleurs, ajoutez 
+Si vous avez besoin d'activer un helper pour tous les controllers, ajoutez 
 son nom dans le tableau ``$helpers`` du fichier 
 ``/app/Controller/AppController.php`` (à créer si pas présent). N'oubliez pas 
 d'inclure les helpers par défaut Html et Form::
@@ -119,9 +119,9 @@ dans vos vues.
 
 L'utilisation des configurations du helper vous permet de configurer de manière
 déclarative vos helpers et de garder la logique de configuration de vos actions
-des contrôleurs. Si vous avez des options de configuration qui ne peuvent pas 
+des controllers. Si vous avez des options de configuration qui ne peuvent pas 
 être inclues comme des parties de déclaration de classe, vous pouvez les définir
-dans le callback beforeRender de votre contrôleur::
+dans le callback beforeRender de votre controller::
 
     <?php
     class PostsController extends AppController {
@@ -135,7 +135,7 @@ Utiliser les Helpers
 ====================
 
 Une fois que vous avez configuré les helpers que vous souhaitiez utiliser, dans 
-votre contrôleur, chaque helper est exposé en propriété publique dans la vue. 
+votre controller, chaque helper est exposé en propriété publique dans la vue. 
 Par exemple, si vous utilisiez :php:class:`HtmlHelper`, vous seriez capable 
 d'y accéder en faisant ce qui suit::
 
@@ -196,7 +196,7 @@ Inclure d'autres Helpers
 Vous souhaitez peut-être utiliser quelques fonctionnalités déjà existantes dans 
 un autre helper. Pour faire cela, vous pouvez spécifier les helpers que 
 vous souhaitez utiliser avec un tableau ``$helpers``, formaté comme vous le 
-feriez dans un contrôleur::
+feriez dans un controller::
 
     <?php
     /* /app/View/Helper/LienHelper.php (Utilisant d'autres helpers) */
@@ -221,7 +221,7 @@ Utiliser votre Helper
 ---------------------
 
 Une fois que vous avez créez votre helper et l'avez placé dans 
-``/app/View/Helper/``, vous serez capable de l'inclure dans vos contrôleurs 
+``/app/View/Helper/``, vous serez capable de l'inclure dans vos controllers 
 en utilisant la variable spéciale :php:attr:`~Controller::$helpers`::
 
     <?php
@@ -229,7 +229,7 @@ en utilisant la variable spéciale :php:attr:`~Controller::$helpers`::
         public $helpers = array('Lien');
     }
 
-Une fois que votre contrôleur est au courant de cette nouvelle classe, vous
+Une fois que votre controller est au courant de cette nouvelle classe, vous
 pouvez l'utiliser dans vos vues en accédant un objet nommé après le helper::
 
     <!-- fait un lien en utilisant le nouveau helper -->
@@ -240,7 +240,7 @@ Créer des fonctionnalités à vos Helpers
 =======================================
 
 Tous les helpers étendent une classe spéciale, AppHelper (comme les modèles 
-étendent AppModel et les contrôleurs étendent AppController). Pour créer une 
+étendent AppModel et les controllers étendent AppController). Pour créer une 
 fonctionnalité disponible pour tous les helpers, créez
 ``/app/View/Helper/AppHelper.php``::
 
@@ -301,7 +301,7 @@ Callbacks
 .. php:method:: beforeRender($viewFile)
 
     La méthode beforeRender est appelé après la méthode beforeRender du 
-    contrôleur, mais avant les rendus du contôleur de la vue et du layout
+    controller, mais avant les rendus du contôleur de la vue et du layout
     Reçoit le fichier à rendre en argument.
 
 .. php:method:: afterRender($viewFile)

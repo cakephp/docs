@@ -143,7 +143,7 @@ allows you to define slots or blocks in your views/layouts that will be defined
 elsewhere.  For example blocks are ideal for implementing things such as
 sidebars, or regions to load assets at the bottom/top of the layout.
 Blocks can be defined in two ways.  Either as a capturing block, or by direct
-assignment.  The ``start()``, ``append()`` and ``end()`` methods allow to to
+assignment.  The ``start()``, ``append()`` and ``end()`` methods allow to
 work with capturing blocks::
 
     <?php
@@ -166,11 +166,21 @@ can be used to clear or overwrite a block at any time::
     // Clear the previous content from the sidebar block.
     $this->assign('sidebar', '');
 
+.. versionadded:: 2.3
+
+As of 2.3 you can also use ``prepend()`` to prepend content to an existing block::
+
+    <?php
+    // Prepend to sidebar
+    $this->prepend('sidebar', 'this content goes on top of sidebar');
+
+
 .. note::
 
     You should avoid using ``content`` as a block name.  This is used by CakePHP
     internally for extended views, and view content in the layout.
 
+    
 Displaying blocks
 -----------------
 

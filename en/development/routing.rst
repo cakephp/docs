@@ -241,12 +241,22 @@ in your controller.  For example, to map all urls to actions of the
     <?php
     Router::connect('/:action', ['controller' => 'home']);
 
+If you would like to provide a case insensitive url, you can use regular 
+expression inline modifiers::
+
+    <?php
+    Router::connect(
+        '/:userShortcut', 
+        array('controller' => 'teachers', 'action' => 'profile', 1),
+        array('userShortcut' => '(?i:principal)')
+    );
+
 One more example, and you'll be a routing pro::
 
     <?php
     Router::connect(
         '/:controller/:year/:month/:day',
-        ['action' => 'index', 'day' => null],
+        ['action' => 'index'],
         [
             'year' => '[12][0-9]{3}',
             'month' => '0[1-9]|1[012]',
@@ -260,9 +270,7 @@ familiar to us: it's a default route element that tells CakePHP to
 expect a controller name.
 
 Next, we specify some default values. Regardless of the controller,
-we want the index() action to be called. We set the day parameter
-(the fourth element in the URL) to null to flag it as being
-optional.
+we want the index() action to be called.
 
 Finally, we specify some regular expressions that will match years,
 months and days in numerical form. Note that parenthesis (grouping)
@@ -270,8 +278,7 @@ are not supported in the regular expressions. You can still specify
 alternates, as above, but not grouped with parenthesis.
 
 Once defined, this route will match ``/articles/2007/02/01``,
-``/posts/2004/11/16``, and ``/products/2001/05`` (as defined, the day
-parameter is optional as it has a default), handing the requests to
+``/posts/2004/11/16``, handing the requests to
 the index() actions of their respective controllers, with the date
 parameters in ``$this->request->params``.
 

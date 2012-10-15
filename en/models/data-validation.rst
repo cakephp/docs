@@ -468,6 +468,12 @@ stored in $this->data member variable::
     Your own validation methods must have ``public`` visibility. Validation
     methods that are ``protected`` and ``private`` are not supported.
 
+The method should return ``true`` if the value is valid. If the validation
+failed, return ``false``. The other valid return value are strings which will
+be shown as the error message. Returning a string means the validation failed.
+The string will overwrite the message set in the $validate array and be shown
+in the view's form as the reason why the field was not valid.
+
 
 Dynamically change validation rules
 ===================================
@@ -912,7 +918,7 @@ with usage examples.
 .. php:staticmethod:: fileSize($check, $operator = null, $size = null)
 
     This rule allows you to check filesizes.  You can use ``$operator`` to
-    decide the type of comparison you want to use.  All the operators suppored
+    decide the type of comparison you want to use.  All the operators supported
     by :php:func:`~Validation::comparison()` are supported here as well.  This
     method will automatically handle array values from ``$_FILES`` by reading
     from the ``tmp_name`` key if ``$check`` is an array an contains that key::
