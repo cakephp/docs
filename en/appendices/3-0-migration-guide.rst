@@ -121,6 +121,15 @@ Filter\AssetFilter
   of issues with javascript libraries like TinyMCE and environments with
   short_tags enabled.
 
+Controller
+==========
+
+Controller
+----------
+
+- The ``$helpers``, ``$components``, and ``$uses`` properties are now merged
+  with **all** parent classes not just ``AppController`` and the plugin
+  app controller.
 
 Controller\Components
 =====================

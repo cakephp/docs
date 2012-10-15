@@ -57,12 +57,12 @@ does a bit of extra work when it comes to special controller
 attributes. The list of components and helpers used by a
 controller are treated specially. In these cases, AppController
 value arrays are merged with child controller class arrays. The values in the
-child class will always override those in AppController.
+child class will always override those in the parent classes.
 
 .. note::
 
-    CakePHP merges the following variables from the AppController to
-    your application's controllers:
+    Controllers will merge the following properties with all declarations
+    on parent classes:
 
     -  $components
     -  $helpers
@@ -740,13 +740,13 @@ given by ``$helpers`` to the view as an object reference variable
 
     Each of these variables are merged with their inherited values,
     therefore it is not necessary (for example) to redeclare the Form
-    helper, or anything that is declared in your App controller.
+    helper, or anything that is declared in parent classes.
 
 .. php:attr:: components
 
     The components array allows you to set which :doc:`/controllers/components`
     a controller will use.  Like ``$helpers`` and ``$uses`` components in your 
-    controllers are merged with those in ``AppController``.  As with
+    controllers are merged with those in parent classes.  As with
     ``$helpers`` you can pass settings into components.  See :ref:`configuring-components`
     for more information.
 
