@@ -45,9 +45,7 @@ You can also clone the repository using
 
 Regardless of how you downloaded it, place the code inside of your
 DocumentRoot. Once finished, your directory setup should look
-something like the following:
-
-::
+something like the following::
 
     /path_to_document_root
         /app
@@ -70,9 +68,7 @@ haven't already done so, create an empty database for use in this
 tutorial, with a name of your choice. Right now, we'll just create
 a single table to store our posts. We'll also throw in a few posts
 right now to use for testing purposes. Execute the following SQL
-statements into your database:
-
-::
+statements into your database::
 
     /* First, create our posts table: */
     CREATE TABLE posts (
@@ -157,9 +153,7 @@ write access to its ``tmp`` folder.
 The security salt is used for generating hashes. Change the default
 salt value by editing ``/app/Config/core.php`` line 187. It doesn't
 much matter what the new value is, as long as it's not easily
-guessed.
-
-::
+guessed::
 
     <?php
     /**
@@ -170,9 +164,7 @@ guessed.
 The cipher seed is used for encrypt/decrypt strings. Change the
 default seed value by editing ``/app/Config/core.php`` line 192. It
 doesn't much matter what the new value is, as long as it's not
-easily guessed.
-
-::
+easily guessed::
 
     <?php
     /**

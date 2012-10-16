@@ -54,9 +54,7 @@ Now, lets add an action to our controller. Actions often represent
 a single function or interface in an application. For example, when
 users request www.example.com/posts/index (which is also the same
 as www.example.com/posts/), they might expect to see a listing of
-posts. The code for that action would look something like this:
-
-::
+posts. The code for that action would look something like this::
 
     <?php
     class PostsController extends AppController {
@@ -89,7 +87,7 @@ automatically available at ``$this->Post`` because we've followed
 Cake's naming conventions.
 
 To learn more about Cake's controllers, check out
- :doc:`/controllers` chapter.
+:doc:`/controllers` chapter.
 
 Creating Post Views
 ===================
@@ -108,9 +106,7 @@ the default.
 
 Remember in the last section how we assigned the 'posts' variable
 to the view using the ``set()`` method? That would hand down data
-to the view that would look something like this:
-
-::
+to the view that would look something like this::
 
     // print_r($posts) output:
     
@@ -235,9 +231,7 @@ the requested URL. If a user requests /posts/view/3, then the value
 '3' is passed as ``$id``.
 
 Now let's create the view for our new 'view' action and place it in
-``/app/View/Posts/view.ctp``.
-
-::
+``/app/View/Posts/view.ctp``::
 
     <!-- File: /app/View/Posts/view.ctp -->
     
@@ -257,9 +251,7 @@ Reading from the database and showing us the posts is a great
 start, but let's allow for the adding of new posts.
 
 First, start by creating an ``add()`` action in the
-PostsController:
-
-::
+PostsController::
 
     <?php
     class PostsController extends AppController {
