@@ -120,6 +120,8 @@ Filter\AssetFilter
   ``include`` instead they are treated as plain text files.  This fixes a number
   of issues with javascript libraries like TinyMCE and environments with
   short_tags enabled.
+* Support for the ``Asset.filter`` configuration and hooks were removed. This
+  feature can easily be replaced with a plugin or dispatcher filter.
 
 Controller
 ==========
