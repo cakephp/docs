@@ -65,7 +65,7 @@ I18n
 ====
 
 L10n
----------
+----
 
 - ``nld`` is now the default locale for Dutch as specified by ISO 639-3 and ``dut`` its alias.
   The locale folders have to be adjusted accordingly (from `/Locale/dut/` to `/Locale/nld/`).
@@ -180,7 +180,7 @@ TextHelper
 - `ending` in :php:meth:`TextHelper::truncate()` is deprecated in favor of `ellipsis`
 
 PaginatorHelper
-----------
+---------------
 
 - :php:meth:`PaginatorHelper::numbers()` now has a new option ``currentTag`` to
   allow specifying extra tag for wrapping current page number.

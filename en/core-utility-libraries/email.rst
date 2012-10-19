@@ -404,12 +404,14 @@ Sending emails from CLI
 .. versionchanged:: 2.2
     The ``domain()`` method was added in 2.2
 
-When sending emails via CLI script (Shells, Tasks, ...) you should manually set the domain name for CakeEmail to use.
-It will serve as the host name for the message id (since there is no host name in CLI environment):
+When sending emails within a CLI script (Shells, Tasks, ...) you should manually
+set the domain name for CakeEmail to use. It will serve as the host name for the
+message id (since there is no host name in a CLI environment)::
 
     <?php
     $email->domain('www.example.org');
-    // results in message ids like ``<UUID@www.example.org>`` (valid) instead of `<UUID@>`` (invalid)
+    // Results in message ids like ``<UUID@www.example.org>`` (valid)
+    // instead of `<UUID@>`` (invalid)
 
 A valid message id can help to prevent emails ending up in spam folders.
 
