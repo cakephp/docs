@@ -398,6 +398,21 @@ configurations in the 4th parameter (as array or using ``EmailConfig``).
 Check the list of :ref:`configurations <email-configurations>` to see all accepted configs.
 
 
+Sending emails from CLI
+========================
+
+.. versionchanged:: 2.2
+    The ``domain()`` method was added in 2.2
+
+When sending emails via CLI script (Shells, Tasks, ...) you should manually set the domain name for CakeEmail to use.
+It will serve as the host name for the message id (since there is no host name in CLI environment):
+
+    <?php
+    $email->domain('www.example.org');
+    // results in message ids like ``<UUID@www.example.org>`` (valid) instead of `<UUID@>`` (invalid)
+
+A valid message id can help to prevent emails ending up in spam folders.
+
 .. meta::
     :title lang=en: CakeEmail
     :keywords lang=en: sending mail,email sender,envelope sender,php class,database configuration,sending emails,meth,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models
