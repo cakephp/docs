@@ -24,7 +24,7 @@ Voici un exemple simple d’une action de controller qui utilise un model
 CakePHP pour sauvegarder les données dans une table de la base de données ::
 
     <?php
-    public function modifier($id) {
+    public function edit($id) {
         //Est-ce que des données de formulaires ont été POSTées ?
         if ($this->request->is('post')) {
            //Si les données du formulaire peuvent être validées et sauvegardées ...
@@ -60,7 +60,7 @@ trouverez utiles :
 
 ``Model::set()`` peut être utilisé pour définir un ou plusieurs champs de 
 données du tableau de donnés à l'intérieur d'un Model. C'est utile pour 
-l'utilisation de models avec les fonctionnalités d'ActiveRecord offert 
+l'utilisation de models avec les fonctionnalités ActiveRecord offertes 
 par le model::
 
     <?php
@@ -103,14 +103,14 @@ La méthode save a aussi une syntaxe alternative::
     <?php
     save(array $data = null, array $params = array())
 
-Le tableau ``$params`` peut avoir n'importe quelles des options disponibles 
-suivantes en clés:
+Le tableau ``$params`` peut avoir n'importe quelle option disponible 
+suivante en clé:
 
-* ``validate`` Définit à true/false pour activer/désactiver la validation.
+* ``validate`` Défini à true/false pour activer/désactiver la validation.
 * ``fieldList`` Un tableau de champs que vous souhaitez autoriser pour la 
   sauvegarde.
-* ``callbacks`` Définit à false la désactivation des callbacks. En utilisant
-  'before' ou 'after' activera seulement ces callbacks.
+* ``callbacks`` Défini à false permet la désactivation des callbacks. En 
+  utilisant 'before' ou 'after' activera seulement ces callbacks.
 
 Plus d'informations sur les callbacks du model sont disponibles 
 :doc:`ici <callback-methods>`
@@ -203,7 +203,7 @@ mettre à jour sont identifiés par le tableau ``$conditions``, et les champs
 devant être mis à jour, ainsi que leurs valeurs, sont identifiés par 
 le tableau ``$fields``.
 
-Par exemple, si je voulais approuver tous les utilisateurs qui sont membres 
+Par exemple, si je voulais approuver tous les boulangers qui sont membres 
 depuis plus d’un an, l’appel à update devrait ressembler à quelque chose 
 du style:: 
 
@@ -217,7 +217,7 @@ du style::
 
 .. tip::
 
-    Le tableau $fields accepte des expressions SQL. Les valeurs litérales 
+    Le tableau $fields accepte des expressions SQL. Les valeurs littérales 
     doivent être manuellement quotées.
 
 .. note::
@@ -268,12 +268,12 @@ ceci::
 
 .. note::
 
-    Note that we are passing numerical indices instead of usual
-    ``$data`` containing the Article key. When saving multiple records
-    of same model the records arrays should be just numerically indexed
-    without the model key.
+    Notez que nous passons les indices numériques de la variable habituelle 
+    ``$data`` contenant le clé Article. Quand vous passez plusieurs 
+    enregistrements du même modèle, les tableaux d'enregistrements doivent 
+    être seulement indexés numériquement sans la clé model.
 
-It is also acceptable to have the data in the following format::
+Il est aussi possible d'avoir les données dans le format suivant::
 
     <?php
     $data = array(
@@ -281,7 +281,8 @@ It is also acceptable to have the data in the following format::
         array('Article' => array('title' => 'title 2')),
     )
 
-To save also associated data with ``$options['deep'] = true`` (since 2.1), the two above examples would look like::
+Pour sauvegarder les données associées avec ``$options['deep'] = true`` 
+(depuis 2.1), les deux exemples ci-dessus ressembleraient à cela::
 
     <?php
     $data = array(
@@ -294,32 +295,37 @@ To save also associated data with ``$options['deep'] = true`` (since 2.1), the t
     )
     $Model->saveMany($data, array('deep' => true));
 
-Keep in mind that if you want to update a record instead of creating a new
-one you just need to add the primary key index to the data row::
+Gardez à l'esprit que si vous souhaitez mettre à jour un enregistrement au lieu 
+d'en créer un nouveau, vous devez juste ajouter en index la clé primaire à la 
+ligne de donnée::
 
     <?php
     array(
-        array('Article' => array('title' => 'New article')), // This creates a new row
-        array('Article' => array('id' => 2, 'title' => 'title 2')), // This updates an existing row
+        array('Article' => array('title' => 'New article')), // Ceci crée une nouvelle ligne
+        array('Article' => array('id' => 2, 'title' => 'title 2')), // Ceci met à jour une ligne existante
     )
 
 
 :php:meth:`Model::saveAssociated(array $data = null, array $options = array())`
 ===============================================================================
 
-Method used to save multiple model associations at once. The following
-options may be used:
+Méthode utilisée pour sauvegarder des associations de model en une seule fois. 
+Les options suivantes peuvent être utilisées:
 
-* ``validate``: Set to false to disable validation, true to validate each record before saving,
-  'first' to validate *all* records before any are saved (default),
-* ``atomic``: If true (default), will attempt to save all records in a single transaction.
-  Should be set to false if database/table does not support transactions.
-* ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
-* ``deep``: (since 2.1) If set to true, not only directly associated data is saved,
-  but deeper nested associated data as well. Defaults to false.
+* ``validate``: Défini à false pour désactiver la validation, true pour valider 
+  chaque enregistrement avant sauvegarde, 'first' pour valider *tous* les 
+  enregistrements avant toute sauvegarde (par défaut),
+* ``atomic``: Si à true (par défaut), va tenter de sauvegarder tous les 
+  enregistrements en une seule transaction.
+  Devrait être défini à false si la base de données/table ne supporte pas les 
+  transactions.
+* ``fieldList``: Equivalent au paramètre $fieldList de Model::save().
+* ``deep``: (depuis 2.1) Si défini à true, les données pas seulement associées 
+  directement vont être sauvegardées, mais aussi les données associées 
+  imbriquées plus profondément. Par défaut à false.
 
-For saving a record along with its related record having a hasOne
-or belongsTo association, the data array should be like this::
+Pour sauvegarder un enregistrement et tous ses enregistrements liés avec une 
+association hasOne ou belongsTo, le tableau de données devra ressembler à cela::
 
     <?php
     array(
@@ -327,12 +333,12 @@ or belongsTo association, the data array should be like this::
         'Profile' => array('sex' => 'Male', 'occupation' => 'Programmer'),
     )
 
-For saving a record along with its related records having hasMany
-association, the data array should be like this::
+Pour sauvegarder un enregistrement et ses enregistrements liés avec une 
+association hasMany, le tableau de données devra ressembler à cela::
 
     <?php
     array(
-        'Article' => array('title' => 'My first article'),
+        'Article' => array('title' => 'Mon premier article'),
         'Comment' => array(
             array('body' => 'Comment 1', 'user_id' => 1),
             array('body' => 'Comment 2', 'user_id' => 12),
@@ -342,39 +348,42 @@ association, the data array should be like this::
 
 .. note::
 
-    If successful, the foreign key of the main model will be stored in
-    the related models' id field, i.e. ``$this->RelatedModel->id``.
+    Si cela réussit, la clé étrangère du model principal va être stocké dans 
+    le champ id du model lié, par ex: ``$this->RelatedModel->id``.
 
 .. warning::
 
-    Be careful when checking saveAssociated calls with atomic option set to
-    false. It returns an array instead of boolean.
+    Attention quand vous vérifiez les appels saveAssociated avec l'option 
+    atomic définie à false. Elle retourne un tableau au lieu d'un boléen.
 
 .. versionchanged:: 2.1
-    You can now save deeper associated data as well with setting ``$options['deep'] = true;``
+    Vous pouvez maintenant aussi sauvegarder les données associées avec 
+    la configuration ``$options['deep'] = true;``
 
-For saving a record along with its related records having hasMany
-association and deeper associated Comment belongsTo User data as well,
-the data array should be like this::
+Pour sauvegarder un enregistrement et ses enregistrements liés avec une 
+association hasMany ainsi que les données associées plus profondément 
+de type Comment belongsTo User, le tableau de données devra ressembler à 
+ceci::
 
     <?php
     $data = array(
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
             array('body' => 'Comment 1', 'user_id' => 1),
-            array('body' => 'Save a new user as well', 'User' => array('first' => 'mad', 'last' => 'coder'))
+            array('body' => 'Sauvegarder aussi un nouveau user', 'User' => array('first' => 'mad', 'last' => 'coder'))
         ),
     )
 
-And save this data with::
+Et sauvegarder cette donnée avec::
 
     <?php
     $Article->saveAssociated($data, array('deep' => true));
 
 .. versionchanged:: 2.1
-    ``Model::saveAll()`` and friends now support passing the `fieldList` for multiple models. 
+    ``Model::saveAll()`` et ses amis supportent maintenant qu'on leur passe 
+    `fieldList` pour des models multiples. 
 
-Example of using ``fieldList`` with multiple models::
+Exemple d'utilisation de ``fieldList`` avec de multiples models::
 
     <?php
     $this->SomeModel->saveAll($data, array(
@@ -384,91 +393,94 @@ Example of using ``fieldList`` with multiple models::
         )
     ));
 
-The fieldList will be an array of model aliases as keys and arrays with fields as values.
-The model names are not nested like in the data to be saved.
+La fieldList sera un tableau d'alias de model en clé et de tableaux avec les 
+champs en valeur. Les noms de model ne sont pas imbriqués comme dans les 
+données à sauvegarder.
 
 :php:meth:`Model::saveAll(array $data = null, array $options = array())`
 ========================================================================
 
-The ``saveAll`` function is just a wrapper around the ``saveMany`` and ``saveAssociated``
-methods. it will inspect the data and determine what type of save it should perform. If
-data is formatted in a numerical indexed array, ``saveMany`` will be called, otherwise
-``saveAssociated`` is used.
+La fonction ``saveAll`` est juste un wrapper autour des méthodes ``saveMany`` 
+et ``saveAssociated``. Elle va inspecter les données et déterminer quel type 
+de sauvegarde elle devra effectuer. Si les données sont bien formatées en 
+un tableau indicé numériquement, ``saveMany`` sera appelé, sinon 
+``saveAssociated`` sera utilisé.
 
-This function receives the same options as the former two, and is generally a backwards
-compatible function. It is recommended using either ``saveMany`` or ``saveAssociated``
-depending on the case.
+Cette fonction reçoit les mêmes options que les deux précédentes, et est 
+généralement une fonction compatible backwards. Il est recommandé d'utiliser 
+soit ``saveMany`` soit ``saveAssociated`` selon le cas.
 
 
-Saving Related Model Data (hasOne, hasMany, belongsTo)
-======================================================
+Sauvegarder les Données de Models Liés (hasOne, hasMany, belongsTo)
+===================================================================
 
-When working with associated models, it is important to realize
-that saving model data should always be done by the corresponding
-CakePHP model. If you are saving a new Post and its associated
-Comments, then you would use both Post and Comment models during
-the save operation.
+Quand vous travaillez avec des models associés, il est important de réaliser 
+que la sauvegarde de données de model devrait toujours être faite avec le model 
+CakePHP correspondant. Si vous sauvegardez un nouveau Post et ses Comments 
+associés, alors vous devriez utiliser les deux models Post et Comment pendant 
+l'opération de sauvegarde.
 
-If neither of the associated model records exists in the system yet
-(for example, you want to save a new User and their related Profile
-records at the same time), you'll need to first save the primary,
-or parent model.
+Si aucun des enregistrements du model associé n'existe pour l'instant dans le 
+système (par exemple, vous voulez sauvegarder un nouveau Uset et ses 
+enregitrements du Profile lié en même temps), vous aurez besoin de sauvegarder 
+d'abord le principal, ou le model parent.
 
-To get an idea of how this works, let's imagine that we have an
-action in our UsersController that handles the saving of a new User
-and a related Profile. The example action shown below will assume
-that you've POSTed enough data (using the FormHelper) to create a
-single User and a single Profile::
+Pour avoir une bonne idée de la façon de faire, imaginons que nous ayons une 
+action dans notre UsersController qui gère la sauvegarde d'un nouveau User et 
+son Profile lié. L'action montré en exemple ci-dessous supposera que vous 
+avez POSTé assez de données (en utilisant FormHelper) pour créer un User 
+unique et un Profile unique::
 
     <?php
     public function add() {
         if (!empty($this->request->data)) {
-            // We can save the User data:
+            // Nous pouvons sauvegarder les données de l'User:
             // it should be in $this->request->data['User']
 
             $user = $this->User->save($this->request->data);
 
-            // If the user was saved, Now we add this information to the data
-            // and save the Profile.
+            // Si l'user a été sauvegardé, maintenant nous ajoutons cette information aux données
+            // et sauvegardons le Profile.
 
             if (!empty($user)) {
-                // The ID of the newly created user has been set
-                // as $this->User->id.
+                // L'ID de l'user nouvellement crée a été défini
+                // dans $this->User->id.
                 $this->request->data['Profile']['user_id'] = $this->User->id;
 
-                // Because our User hasOne Profile, we can access
-                // the Profile model through the User model:
+                // Parce que notre User hasOne Profile, nous pouvons accéder
+                // au model Profile à travers le model User:
                 $this->User->Profile->save($this->request->data);
             }
         }
     }
 
-As a rule, when working with hasOne, hasMany, and belongsTo
-associations, it's all about keying. The basic idea is to get the
-key from one model and place it in the foreign key field on the
-other. Sometimes this might involve using the ``$id`` attribute of
-the model class after a ``save()``, but other times it might just
-involve gathering the ID from a hidden input on a form that’s just
-been POSTed to a controller action.
+Comme règle, quand vous travaillez avec des associations hasOne, hasMany, 
+et belongsTo, Tout est question de clé. L'idée de base est de récupérer la clé 
+d'un autre model et de la placer dans le champ clé étrangère sur l'autre.
+Parfois, cela pourra gêner l'utilisation de l'attribut ``$id`` de la classe 
+model après un ``save()``, mais d'autres fois, cela impliquera juste la 
+collecte de l'ID provenant d'un champ caché d'un formulaire qui vient 
+d'être POSTé d'une action d'un controller.
 
-To supplement the basic approach used above, CakePHP also offers a
-very handy method ``saveAssociated()``, which allows you to validate and
-save multiple models in one shot. In addition, ``saveAssociated()``
-provides transactional support to ensure data integrity in your
-database (i.e. if one model fails to save, the other models will
-not be saved either).
+Pour compléter l'approche fondamentale utilisée ci-dessus, CakePHP offre 
+également une méthode très pratique ``saveAssociated()``, qui vous permet 
+de valider et de sauvegarder de multiples models en une fois. De plus, 
+``saveAssociated()`` fournit un support transactionnel pour s'assurer 
+de l'intégrité des données dans votre base de données (par ex: si un model 
+échoue dans la sauvegarde, les autres models ne seront également pas 
+sauvegardés).
 
 .. note::
 
-    For transactions to work correctly in MySQL your tables must use
-    InnoDB engine. Remember that MyISAM tables do not support
-    transactions.
+    Pour que les transactions fonctionnent correctement dans MySQL, vos tables 
+    doivent utiliser le moteur InnoDB. Souvenez vous que les tables MyISAM ne 
+    supportent pas les transactions.
 
-Let's see how we can use ``saveAssociated()`` to save Company and Account
-models at the same time.
+Voyons comment nous pouvons utiliser ``saveAssociated()`` pour sauvegarder les 
+models Company et Account en même temps.
 
-First, you need to build your form for both Company and Account
-models (we'll assume that Company hasMany Account)::
+Tout d'abord, vous avez besoin de construire votre formulaire pour les deux 
+models Company and Account (nous supposerons que Company hasMany Account)::
 
     <?php
     echo $form->create('Company', array('action' => 'add'));
@@ -482,41 +494,45 @@ models (we'll assume that Company hasMany Account)::
 
     echo $form->end('Add');
 
-Take a look at the way we named the form fields for the Account
-model. If Company is our main model, ``saveAssociated()`` will expect the
-related model's (Account) data to arrive in a specific format. And
-having ``Account.0.fieldName`` is exactly what we need.
+Regardez comment nous avons nommé les champs de formulaire pour le model 
+Account. Si Company est notre model principal, ``saveAssociated()`` va 
+s'attendre à ce que les données du model lié (Account) arrivent dans un 
+format spécifique. Et avoir ``Account.0.fieldName`` est exactement ce dont 
+nous avons besoin.
 
 .. note::
 
-    The above field naming is required for a hasMany association. If
-    the association between the models is hasOne, you have to use
-    ModelName.fieldName notation for the associated model.
+    Le champ ci-dessus est nécessaire pour une association hasMany. Si 
+    l'association entre les models est hasOne, vous devrez utiliser la 
+    notation ModelName.fieldName pour le model associé.
 
-Now, in our CompaniesController we can create an ``add()``
-action::
+Maintenant, dans notre CompaniesController nous pouvons créer une action 
+``add()``::
 
     <?php
     public function add() {
         if (!empty($this->request->data)) {
-            // Use the following to avoid validation errors:
+            // Utilisez ce qui suit pour éviter les erreurs de validation:
             unset($this->Company->Account->validate['company_id']);
             $this->Company->saveAssociated($this->request->data);
         }
     }
 
-That's all there is to it. Now our Company and Account models will
-be validated and saved all at the same time. By default ``saveAssociated``
-will validate all values passed and then try to perform a save for each.
+C'est tout pour le moment. Maintenant nos models Company et Account seront 
+validés et sauvegardé en même temps. Par défaut ``saveAssociated``
+validera toutes les valeurs passées et ensuite essaiera d'effectuer une 
+sauvegarde pour chacun.
 
-Saving hasMany through data
-===========================
+Sauvegarder hasMany through data
+================================
 
-Let's see how data stored in a join table for two models is saved. As shown in the :ref:`hasMany-through`
-section, the join table is associated to each model using a `hasMany` type of relationship.
-Our example involves the Head of Cake School asking us to write an application that allows
-him to log a student's attendance on a course with days attended and grade. Take
-a look at the following code.::
+Regardons comment les données stockées dans une table jointe pour deux models 
+sont sauvegardées. Comme montré dans la section :ref:`hasMany-through`, 
+la table jointe est associée pour chaque model en utilisant un type de relation 
+`hasMany`. Notre exemple est une problématique lancée par la Tête de l'Ecole 
+Cake qui nous demande d'écrire une application qui lui permette de connecter 
+la présence d'un étudiant à un cours avec les journées assistées et de 
+validées. Jettez un oeil au code suivant.::
 
    <?php
    // Controller/CourseMembershipController.php
@@ -548,7 +564,7 @@ a look at the following code.::
    <?php echo  $this->Form->end(); ?>
 
 
-The data array will look like this when submitted.::
+Le tableau de données ressemblera à ceci quand il sera soumis.::
 
     Array
     (
@@ -571,11 +587,11 @@ The data array will look like this when submitted.::
 
     )
 
-Cake will happily be able to save the lot together and assign
-the foreign keys of the Student and Course into CourseMembership
-with a `saveAssociated` call with this data structure. If we run the index
-action of our CourseMembershipsController the data structure
-received now from a find('all') is::
+Cake va être heureusement capable de sauvegarder le lot ensemble et d'assigner 
+les clés étrangères de Student et de Course dans CourseMembership avec 
+un appel `saveAssociated` avec cette structure de données. Si nous lançons 
+l'action index de notre CourseMembershipsController, la structure de données 
+reçue maintenant par un find('all') est::
 
     Array
     (
@@ -605,13 +621,13 @@ received now from a find('all') is::
         )
     )
 
-There are of course many ways to work with a join model. The
-version above assumes you want to save everything at-once. There
-will be cases where you want to create the Student and Course
-independently and at a later point associate the two together with
-a CourseMembership. So you might have a form that allows selection
-of existing students and courses from pick lists or ID entry and
-then the two meta-fields for the CourseMembership, e.g.::
+Il y a bien sur beaucoup de façons de travailler avec un model joint. La 
+version ci-dessus suppose que vous voulez sauvegarder tout en une fois. 
+Il y aura des cas où vous voudrez créer les Student et Course 
+indépendamment et associer les deux ensemble avec CourseMemberShip plus tard.
+Donc, vous aurez peut-être un formulaire qui permet la sélection de students 
+et de courses existants à partir d'une liste de choix ou d'une entrée d'un ID 
+et ensuite les deux meta-champs pour CourseMembership, par ex.::
 
         // View/CourseMemberships/add.ctp
 
@@ -623,7 +639,7 @@ then the two meta-fields for the CourseMembership, e.g.::
             <button type="submit">Save</button>
         <?php echo $this->Form->end(); ?>
 
-And the resultant POST::
+Et le POST résultant::
 
     Array
     (
@@ -644,20 +660,20 @@ And the resultant POST::
         )
     )
 
-Again Cake is good to us and pulls the Student id and Course id
-into the CourseMembership with the `saveAssociated`.
+Encore une fois, Cake est bon pour nous et envoit les id de Student et de 
+Course dans CourseMembership avec `saveAssociated`.
 
 .. _saving-habtm:
 
-Saving Related Model Data (HABTM)
----------------------------------
+Sauvegarder les Données de Model Lié (HABTM=HasAndBelongsToMany)
+----------------------------------------------------------------
 
-Saving models that are associated by hasOne, belongsTo, and hasMany
-is pretty simple: you just populate the foreign key field with the
-ID of the associated model. Once that's done, you just call the
-``save()`` method on the model, and everything gets linked up
-correctly. An example of the required format for the data array
-passed to ``save()`` for the Tag model is shown below::
+Sauvegarder les models qui sont associés avec hasOne, belongsTo, et hasMany 
+est assez simple: vous venez de remplir le champ de la clé étrangère avec l'ID 
+du model associé. Une fois que c'est fait, vous appelez juste la méthode 
+``save()`` sur un model, et tout se relie correctement. Un exemple du format 
+requis pour le tableau de données passé à ``save()`` pour le model Tag model 
+est montré ci-dessous::
 
     Array
     (
@@ -671,9 +687,9 @@ passed to ``save()`` for the Tag model is shown below::
             )
     )
 
-You can also use this format to save several records and their
-HABTM associations with ``saveAll()``, using an array like the
-following::
+Vous pouvez aussi utiliser ce format pour sauvegarder plusieurs enregistrements 
+et leurs associations HABTM avec ``saveAll()``, en utilisant un tableau comme 
+celui qui suit::
 
     Array
     (
@@ -723,15 +739,15 @@ following::
             )
     )
 
-Passing the above array to ``saveAll()`` will create the contained tags,
-each associated with their respective recipes.
+Passer le tableau ci-dessus à ``saveAll()`` va créer les tags contenus, chacun 
+associé avec leur recettes respectives.
 
-As an example, we'll build a form that creates a new tag and
-generates the proper data array to associate it on the fly with
-some recipe.
+Pour exemple, nous allons construire un formulaire qui crée un nouveau tag et 
+générerons le tableau de données approprié pour l'associer à la volée avec 
+certaines recettes.
 
-The simplest form might look something like this (we'll assume that
-``$recipe_id`` is already set to something)::
+Le formulaire le plus simple ressemblerait à ceci (nous supposerons que 
+``$recipe_id`` est déjà défini à une valeur)::
 
     <?php echo $this->Form->create('Tag');?>
         <?php echo $this->Form->input(
@@ -740,140 +756,145 @@ The simplest form might look something like this (we'll assume that
         <?php echo $this->Form->input('Tag.name'); ?>
     <?php echo $this->Form->end('Add Tag'); ?>
 
-In this example, you can see the ``Recipe.id`` hidden field whose
-value is set to the ID of the recipe we want to link the tag to.
+Dans cet exemple, vous pouvez voir le champ caché ``Recipe.id`` dont la valeur 
+est définie selon l'ID de la recette que nous voulons lier au tag.
 
-When the ``save()`` method is invoked within the controller, it'll
-automatically save the HABTM data to the database.
+Quand la méthode ``save()`` est appelées dans le controller, elle va 
+automatiquement sauvegarder les données HABTM dans la base de données.
 
 ::
 
     <?php
     public function add() {
-        // Save the association
+        // Sauvegarder l'association
         if ($this->Tag->save($this->request->data)) {
-            // do something on success
+            // faire quelque chose en cas de succès
         }
     }
 
-With the preceding code, our new Tag is created and associated with
-a Recipe, whose ID was set in ``$this->request->data['Recipe']['id']``.
+Avec le code précédent, notre Tag nouveau est crée et associé avec un Recipe, 
+dont l'ID a été défini dans ``$this->request->data['Recipe']['id']``.
 
-Other ways we might want to present our associated data can include
-a select drop down list. The data can be pulled from the model
-using the ``find('list')`` method and assigned to a view variable
-of the model name. An input with the same name will automatically
-pull in this data into a ``<select>``::
+Les autres façons que nous pouvons avoir envie pour présenter nos données 
+associées peuvent inclure une liste de select drop down. Les données peuvent 
+être envoyées d'un model en utilisant la méthode ``find('list')`` et assignées 
+à une variable de vue du nom du model. Une entrée avec le même nom va 
+automatiquement envoyer dans ces données dans un ``<select>``::
 
     <?php
-    // in the controller:
+    // dans le controller:
     $this->set('tags', $this->Recipe->Tag->find('list'));
 
-    // in the view:
+    // dans la vue:
     $form->input('tags');
 
-A more likely scenario with a HABTM relationship would include a
-``<select>`` set to allow multiple selections. For example, a
-Recipe can have multiple Tags assigned to it. In this case, the
-data is pulled out of the model the same way, but the form input is
-declared slightly different. The tag name is defined using the
-``ModelName`` convention::
+Un scénario plus probable avec une relation HABTM incluerait un 
+``<select>`` défini pour permettre des sélections multiples. Par exemple, un 
+Recipe peut avoir plusieurs Tags lui étant assignés. Dans ce cas, les données 
+sort du model de la même façon, mais l'entrée du formulaire est déclarée 
+légèrement différemment. Le nom du Tag est défini en utilisant la convention 
+``ModelName``::
 
     <?php
-    // in the controller:
+    // dans le controller:
     $this->set('tags', $this->Recipe->Tag->find('list'));
 
-    // in the view:
+    // dans la vue:
     $this->Form->input('Tag');
 
-Using the preceding code, a multiple select drop down is created,
-allowing for multiple choices to automatically be saved to the
-existing Recipe being added or saved to the database.
+En utilisant le code précédent, un select drop down est crée, permettant aux 
+multiples choix d'être automatiquement sauvegarder au Recipe existant en étant 
+ajouté à la base de données.
 
-What to do when HABTM becomes complicated?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Que faire quand HABTM devient compliqué?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default when saving a HasAndBelongsToMany relationship, Cake
-will delete all rows on the join table before saving new ones. For
-example if you have a Club that has 10 Children associated. You
-then update the Club with 2 children. The Club will only have 2
-Children, not 12.
+Par défaut, quand vous sauvegardez une relation HasAndBelongsToMany, Cake 
+supprime toutes les lignes de la table jointe avant d'en sauvegarder de 
+nouvelles. Par exemple, si vous avez un Club qui a 10 Children (Enfant) associés. Vous 
+mettez ensuite à jour le Club avec 2 Children. Le Club aura seulement 2 
+Children, et pas 12.
 
-Also note that if you want to add more fields to the join (when it
-was created or meta information) this is possible with HABTM join
-tables, but it is important to understand that you have an easy
-option.
+Notez aussi que si vous voulez ajouter plus de champs à joindre (quand il a été 
+crée ou les meta informations), c'est possible avec les tables jointes HABTM, 
+mais il est important de comprendre que vous avez une option facile.
 
-HasAndBelongsToMany between two models is in reality shorthand for
-three models associated through both a hasMany and a belongsTo
-association.
+HasAndBelongsToMany entre deux models est en réalité un raccourci pour trois 
+models associés à travers les deux associations hasMany et belongsTo.
 
-Consider this example::
+Etudiez cet exemple::
 
     Child hasAndBelongsToMany Club
 
-Another way to look at this is adding a Membership model::
+Une autre façon de regarder cela est d'ajouter un model Membership::
 
     Child hasMany Membership
     Membership belongsTo Child, Club
     Club hasMany Membership.
 
-These two examples are almost the exact same. They use the same
-amount of named fields in the database and the same amount of
-models. The important differences are that the "join" model is
-named differently and its behavior is more predictable.
+Ces deux exemples sont presque les mêmes. Ils utilisent le même montant de 
+champs nommés dans la base de données et le même montant de models.
+Les différrences importantes sont que le model "join" est nommé différemment 
+et que son comportement est plus prévisible.
 
 .. tip::
 
-    When your join table contains extra fields besides two foreign
-    keys, you can prevent losing the extra field values by setting
-    ``'unique'`` array key to ``'keepExisting'``. You could think of
-    this similar to 'unique' => true, but without losing data from
-    the extra fields during save operation. See: :ref:`HABTM
-    association arrays <ref-habtm-arrays>`.
+    Quand votre table jointe contient des champs supplémentaires en plus 
+    des deux clés étrangères, vous pouvez éviter de perdre les valeurs des 
+    champs supplémentaires en définissant la clé ``'unique'`` du tableau à 
+    ``'keepExisting'``. Vous pouvez penser le penser comme quelque chose de 
+    similaire à 'unique' => true, mais sans perdre les données des champs 
+    supplémentaires pendant l'opération de sauvegarde. Regardez: 
+    :ref:`les tablaux des associations HABTM <ref-habtm-arrays>`.
 
-However, in most cases it's easier to make a model for the join table
-and setup hasMany, belongsTo associations as shown in example above
-instead of using HABTM association.
+Cependant, dans la plupart des cas, il est plus facile de faire un model pour 
+la table jointe et de configurer les associations hasMany, belongsTo comme 
+montré dans l'exemple ci-dessus au lieu d'utiliser une association HABTM.
 
 Datatables
 ==========
 
-While CakePHP can have datasources that aren't database driven, most of the
-time, they are. CakePHP is designed to be agnostic and will work with MySQL,
-MSSQL, Oracle, PostgreSQL and others. You can create your database tables as you
-normally would. When you create your Model classes, they'll automatically map to
-the tables that you've created. Table names are by convention lowercase and
-pluralized with multi-word table names separated by underscores. For example, a
-Model name of Ingredient expects the table name ingredients. A Model name of
-EventRegistration would expect a table name of event_registrations. CakePHP will
-inspect your tables to determine the data type of each field and uses this
-information to automate various features such as outputting form fields in the
-view. Field names are by convention lowercase and separated by underscores.
+Tandis que CakePHP peut avoir des sources de données qui ne sont pas des driven
+de base de données, la plupart du temps, elles le sont. CakePHP est pensé pour 
+être agnostique et va fonctionner avec MySQL, MSSQL, Oracle, PostgreSQL et 
+autres. Vous pouvez créer vos tables de base de données comme vous l'auriez 
+fait normalement. Quand vous créez vos classes Model, elles seront 
+automatiquement mappées aux tables que vous avez créees. Les noms de table sont 
+par convention en minuscules et au pluriel avec tous les mots de la table 
+séparés par des underscores. Par exemple, un nom de mode Ingredient s'attendra 
+à un nom de table ingredients. Un nom de Model de EventRegistration s'attendra 
+à un nom de table de event_registrations. CakePHP va inspecter vos tables 
+pour déterminer le type de données de chaque champ et utiliser cette 
+information pour automatiser plusieurs fonctionnalités comme l'affichage des 
+champs de formulaires dans la vue. Les noms de champ sont par convention en 
+minuscules et séparés par des underscores.
 
-Using created and modified
---------------------------
+Utiliser created et modified
+----------------------------
 
-By defining a created or modified field in your database table as datetime
-fields, CakePHP will recognize those fields and populate them automatically
-whenever a record is created or saved to the database (unless the data being
-saved already contains a value for these fields).
+En définissant un champ created or modified dans votre table de base de données 
+en type datetime, CakePHP va reconnaître ces champs et les remplir 
+automatiquement dès qu'un enregistrement est crée ou sauvegardé dans la 
+base de données (à moins que les données déjà sauvegardées contiennent 
+une valeur pour ces champs).
 
-The created and modified fields will be set to the current date and time when
-the record is initially added. The modified field will be updated with the
-current date and time whenever the existing record is saved.
+Les champs created et modified vont être définis à la date et heure courante 
+quand l'enregistrement est ajouté pour la première fois. Le champ modifié 
+sera mis à jour avec la date et l'heure courante dès que l'enregistrement sera 
+sauvegardé.
 
-If you have updated, created or modified data in your $this->data (e.g. from a
-Model::read or Model::set) before a Model::save() then the values will be taken
-from $this->data and not automagically updated. Either use
-``unset($this->data['Model']['modified'])``, etc. Alternatively you can override
-the Model::save() to always do it for you::
+Si vous avez mis à jour, crée ou modifié des données dans votre $this->data 
+(par ex à partir d'un Model::read ou d'un Model::set) avant un Model::save(), 
+alors les valeurs seront prises à partir de $this->data et ne seront pas mises 
+à jour automagiquement. Preférez l'utilisation de 
+``unset($this->data['Model']['modified'])``, etc. Alternativement vous pouvez 
+écraser Model::save() pour toujours le faire pour vous::
 
     <?php
     class AppModel extends Model {
 
         public function save($data = null, $validate = true, $fieldList = array()) }
-            // Clear modified field value before each save
+            // Nettoie la valeur du champ modified avant chaque sauvegarde
             $this->set($data);
             if (isset($this->data[$this->alias]['modified'])) {
                 unset($this->data[$this->alias]['modified']);
@@ -886,4 +907,4 @@ the Model::save() to always do it for you::
 
 .. meta::
     :title lang=fr: Sauvegarder vos Données
-    :keywords lang=fr: modèles doc,règles de validation,donnée validation,message flash,modèle null,table php,donnée requêtée,classe php,donnée modèle,table de base de données,tableau,recettes,succès,raison,snap,modèle de données
+    :keywords lang=fr: models doc,modèles doc,règles de validation,donnée validation,message flash,modèle null,table php,donnée requêtée,classe php,donnée modèle,table de base de données,tableau,recettes,succès,raison,snap,modèle de données

@@ -664,4 +664,3 @@ Voici les différents chapitres que les gens veulent souvent lire après :
 .. meta::
     :title lang=fr: Blog Tutoriel Ajouter la logique
     :keywords lang=fr: doc models,vérification validation,controller actions,model post,php class,classe model,objet model,business logic,table base de données,convention de nommage,bread and butter,callbacks,prefixes,nutshell,intéraction,array,cakephp,interface,applications,suppression
->>>>>>> translation of french doc

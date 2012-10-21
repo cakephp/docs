@@ -54,4 +54,3 @@ Pour plus d'information vous devriez lire la documentation
     :title lang=fr: EmailComponent
     :keywords lang=fr: component subject,component delivery,php class,template layout,custom headers,template
 method,filenames,alias,lib,array,email,migration,attachments,elements,sun
->>>>>>> translation of french doc

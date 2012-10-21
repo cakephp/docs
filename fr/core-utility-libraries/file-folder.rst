@@ -1,43 +1,44 @@
 Folder & File
 #############
 
-The Folder and File utilities are convenience classes to help you read, write,
-and append to files; list files within a folder and other common directory
-related tasks.
+Les utilitaires Folder et File sont des classes pratiques pour aider à la 
+lecture, l'écriture; et l'ajout de fichiers; Lister les fichiers d'un dossier 
+et autres tâches habituelles liées aux répertoires.
 
-Basic usage
-===========
+Utilisation basique
+===================
 
-Ensure the classes are loaded using :php:meth:`App::uses()`::
+Assurez vous que les classes sont chargées en utilisant 
+:php:meth:`App::uses()`::
 
     <?php
     App::uses('Folder', 'Utility');
     App::uses('File', 'Utility');
 
-Then we can setup a new folder instance::
+Ensuite nous pouvons configurer une nouvelle instance de dossier::
 
     <?php
     $dir = new Folder('/path/to/folder');
 
-and search for all *.ctp* files within that folder using regex::
+et chercher tous les fichiers *.ctp* à l'intérieur de ce dossier en utilisant 
+les regex::
 
     <?php
     $files = $dir->find('.*\.ctp');
 
-Now we can loop through the files and read, write or append to the contents or
-simply delete the file::
+Maintenant nous pouvons boucler sur les fichiers et les lire, écrire ou ajouter 
+aux contenus, ou simplement supprimer le fichier::
 
     <?php
     foreach ($files as $file) {
         $file = new File($dir->pwd() . DS . $file);
         $contents = $file->read();
-        // $file->write('I am overwriting the contents of this file');
-        // $file->append('I am adding to the bottom of this file.');
-        // $file->delete(); // I am deleting this file
-        $file->close(); // Be sure to close the file when you're done
-    }
+        // $file->write('J'écris dans ce fichier');
+        // $file->append('J'ajoute à la fin de ce fichier.');
+        // $file->delete(); // Je supprime ce fichier
+        $file->close(); // Assurez vous de fermer le fichier quand c'est fini    }
 
-Folder API
+API Folder
 ==========
 
 .. php:class:: Folder(string $path = false, boolean $create = false, mixed $mode = false)
@@ -45,45 +46,45 @@ Folder API
 ::
 
     <?php
-    // Create a new folder with 0755 permissions
+    // Crée un nouveau dossier avec les permissions à 0755
     $dir = new Folder('/path/to/folder', true, 0755);
 
 .. php:attr:: path
 
-    Current path to the folder. :php:meth:`Folder::pwd()` will return the same
-    information.
+    Le chemin habituel pour le dossier. :php:meth:`Folder::pwd()` retournera la 
+    même information.
 
 .. php:attr:: sort
 
-    Whether or not the list results should be sorted by name.
-
+    Dis si la liste des résultats doit être oui ou non rangée par name.
+    
 .. php:attr:: mode
 
-    Mode to be used when creating folders. Defaults to ``0755``. Does nothing on
-    windows machines.
-
+    Mode à utiliser pour la création de dossiers. par défaut à ``0755``. Ne 
+    fait rien sur les machines windows.
+    
 .. php:staticmethod:: addPathElement( $path, $element )
 
     :rtype: string
 
-    Returns $path with $element added, with correct slash in-between::
+    Retourne $path avec $element ajouté, avec le bon slash entre-deux::
 
         <?php
         $path = Folder::addPathElement('/a/path/for', 'testing');
-        // $path equals /a/path/for/testing
+        // $path égal /a/path/for/testing
 
 
 .. php:method:: cd( $path )
 
     :rtype: string
 
-    Change directory to $path. Returns false on failure::
+    Change le répertoire en $path. Retourne false si échec::
 
         <?php
         $folder = new Folder('/foo');
-        echo $folder->path; // Prints /foo
+        echo $folder->path; // Affiche /foo
         $folder->cd('/bar');
-        echo $folder->path; // Prints /bar
+        echo $folder->path; // Affiche /bar
         $false = $folder->cd('/non-existent-folder');
 
 
@@ -91,8 +92,8 @@ Folder API
 
     :rtype: boolean
 
-    Change the mode on a directory structure recursively. This includes
-    changing the mode on files as well::
+    Change le mode sur la structure de répertoire de façon récursive. Ceci 
+    inclut aussi le changement du mode des fichiers::
 
         <?php
         $dir = new Folder();
@@ -103,18 +104,18 @@ Folder API
 
     :rtype: boolean
 
-    Recursively copy a directory. The only parameter $options can either
-    be a path into copy to or an array of options::
-
+    Copie de façon récursive un répertoire. Le seul paramètre $options peut 
+    être soit un chemin à copier soit un tableau d'options::
+    
         <?php
         $folder1 = new Folder('/path/to/folder1');
         $folder1->copy('/path/to/folder2');
-        // Will put folder1 and all its contents into folder2
+        // Va mettre folder1 et tous son contenu dans folder2
 
         $folder = new Folder('/path/to/folder');
         $folder->copy(array(
             'to' => '/path/to/new/folder',
-            'from' => '/path/to/copy/from', // will cause a cd() to occur
+            'from' => '/path/to/copy/from', // va causer un cd() to occur
             'mode' => 0755,
             'skip' => array('skip-me.php', '.git'),
         ));
@@ -124,16 +125,16 @@ Folder API
 
     :rtype: string
 
-    Returns a correct set of slashes for given $path. (\\ for
-    Windows paths and / for other paths.)
+    Retourne un ensemble correct de slashes pour un $path donné. (\\ pour
+    les chemins Windows et / pour les autres chemins.)
 
 
 .. php:method:: create( $pathname, $mode = false )
 
     :rtype: boolean
 
-    Create a directory structure recursively. Can be used to create
-    deep path structures like `/foo/bar/baz/shoe/horn`::
+    Crée une structure de répertoire de façon récursive. Peut être utilisé pour créer
+    des structures de chemin profond comme `/foo/bar/baz/shoe/horn`::
 
         <?php
         $folder = new Folder();
@@ -145,7 +146,7 @@ Folder API
 
     :rtype: boolean
 
-    Recursively remove directories if the system allows::
+    Efface de façon récursive les répertoires si le système le permet::
 
         <?php
         $folder = new Folder('foo');
@@ -157,24 +158,24 @@ Folder API
 
     :rtype: integer
 
-    Returns the size in bytes of this Folder and its contents.
-
+    Retourne la taille en bytes de ce Dossier et ses contenus.
 
 .. php:method:: errors( )
 
     :rtype: array
 
-    Get error from latest method.
+    Récupère une erreur de la dernière méthode.
 
 
 .. php:method:: find( $regexpPattern = '.*', $sort = false )
 
     :rtype: array
 
-    Returns an array of all matching files in current directory::
+    Retourne un tableau de tous les fichiers correspondants dans le répertoire 
+    courant::
 
         <?php
-        // Find all .png in your app/webroot/img/ folder and sort the results
+        // Trouve tous les .png dans votre dossier app/webroot/img/ et range les résultats
         $dir = new Folder(WWW_ROOT . 'img');
         $files = $dir->find('.*\.png', true);
         /*
@@ -190,19 +191,20 @@ Folder API
 
 .. note::
 
-    The folder find and findRecursive methods will only find files. If you
-    would like to get folders and files see :php:meth:`Folder::read()` or
-    :php:meth:`Folder::tree()`
+    Les méthodes find et findRecursive de folder ne trouvent seulement que 
+    des fichiers. Si vous voulez obtenir des dossiers et fichiers, regardez 
+    :php:meth:`Folder::read()` ou :php:meth:`Folder::tree()`
 
 
 .. php:method:: findRecursive( $pattern = '.*', $sort = false )
 
     :rtype: array
 
-    Returns an array of all matching files in and below current directory::
-
+    Retourne un tableau de tous les fichiers correspondants dans et 
+    en-dessous du répertoire courant::
+    
         <?php
-        // Recursively find files beginning with test or index
+        // Trouve de façon récursive les fichiers commençant par test ou index
         $dir = new Folder(WWW_ROOT);
         $files = $dir->findRecursive('(test|index).*');
         /*
@@ -222,14 +224,14 @@ Folder API
 
     :rtype: boolean
 
-    Returns true if the File is in a given CakePath.
+    Retourne true si le Fichier est dans un CakePath donné.
 
 
 .. php:method:: inPath( $path = '', $reverse = false )
 
     :rtype: boolean
 
-    Returns true if the File is in given path::
+    Retourne true si le Fichier est dans un chemin donné::
 
         <?php
         $Folder = new Folder(WWW_ROOT);
@@ -237,21 +239,21 @@ Folder API
         // $result = true, /var/www/example/app/ is in /var/www/example/app/webroot/
 
         $result = $Folder->inPath(WWW_ROOT . 'img' . DS, true);
-        // $result = true, /var/www/example/app/webroot/ is in /var/www/example/app/webroot/img/
+        // $result = true, /var/www/example/app/webroot/ est dans /var/www/example/app/webroot/img/
 
 
 .. php:staticmethod:: isAbsolute( $path )
 
     :rtype: boolean
 
-    Returns true if given $path is an absolute path.
+    Retourne true si le $path donné est un chemin absolu.
 
 
 .. php:staticmethod:: isSlashTerm( $path )
 
     :rtype: boolean
 
-    Returns true if given $path ends in a slash (i.e. is slash-terminated)::
+    Retourne true si le $path donné finit par un slash (par exemple. se termine-par-un-slash)::
 
         <?php
         $result = Folder::isSlashTerm('/my/test/path');
@@ -264,49 +266,51 @@ Folder API
 
     :rtype: boolean
 
-    Returns true if given $path is a Windows path.
+    Retourne true si le $path donné est un chemin Windows.
 
 
 .. php:method:: messages( )
 
     :rtype: array
 
-    Get messages from latest method.
+    Récupère les messages de la dernière méthode.
 
 
 .. php:method:: move( $options )
 
     :rtype: boolean
 
-    Recursive directory move.
+    Déplace le répertoire de façon récursive.
 
 
 .. php:staticmethod:: normalizePath( $path )
 
     :rtype: string
 
-    Returns a correct set of slashes for given $path. (\\ for
-    Windows paths and / for other paths.)
+    Retourne un ensemble correct de slashes pour un $path donné. (\\ pour 
+    les chemins Windows et / pour les autres chemins.)
 
 
 .. php:method:: pwd( )
 
     :rtype: string
 
-    Return current path.
+    Retourne le chemin courant.
 
 
 .. php:method:: read( $sort = true, $exceptions = false, $fullPath = false )
 
     :rtype: mixed
 
-    :param boolean $sort: If true will sort results.
-    :param mixed $exceptions: An array of files and folder names to ignore. If
-        true or '.' this method will ignore hidden or dot files.
-    :param boolean $fullPath: If true will return results using absolute paths.
+    :param boolean $sort: Si à true, triera les résultats.
+    :param mixed $exceptions: Un tableau de noms de fichiers et de dossiers 
+    à ignorer. Si à true ou '.' cette méthode va ignorer les fichiers cachés ou 
+    les fichiers commençant par '.'.
+    :param boolean $fullPath: Si à true, va retourner les résultats en 
+    utilisant des chemins absolus.
 
-    Returns an array of the contents of the current directory. The
-    returned array holds two arrays: One of directories and one of files::
+    Retourne un tableau du contenu du répertoire courant. Le tableau retourné 
+    contient deux tableaux: Un des repertoires et un des fichiers::
 
         <?php
         $dir = new Folder(WWW_ROOT);
@@ -334,250 +338,254 @@ Folder API
 
     :rtype: string
 
-    Get the real path (taking ".." and such into account).
+    Récupère le vrai chemin (taking ".." and such into account).
 
 
 .. php:staticmethod:: slashTerm( $path )
 
     :rtype: string
 
-    Returns $path with added terminating slash (corrected for
-    Windows or other OS).
+    Retourne $path avec le slash ajouté à la fin (corrigé pour 
+    Windows ou d'autres OS).
 
 
 .. php:method:: tree( $path = NULL, $exceptions = true, $type = NULL )
 
     :rtype: mixed
 
-    Returns an array of nested directories and files in each directory.
+    Retourne un tableau de répertoires imbriqués et de fichiers dans chaque 
+    répertoire.
 
 
-File API
-========
+L'API File
+==========
 
 .. php:class:: File(string $path, boolean $create = false, integer $mode = 493)
 
 ::
 
     <?php
-    // Create a new file with 0644 permissions
+    // Crée un nouveau fichier avec les permissions à 0644
     $file = new File('/path/to/file.php', true, 0644);
 
 .. php:attr:: Folder
 
-    The Folder object of the file.
+    L'objet Folder du fichier.
 
 .. php:attr:: name
 
-    The name of the file with the extension. Differs from
-    :php:meth:`File::name()` which returns the name without the extension.
+    Le nom du fichier avec l'extension. Différe de :php:meth:`File::name()` 
+    qui retourne le nom sans l'extension.
 
 .. php:attr:: info
 
-    An array of file info. Use :php:meth:`File::info()` instead.
+    Un tableau du fichier info. Utilisez :php:meth:`File::info()` à la place.
 
 .. php:attr:: handle
 
-    Holds the file handler resource if the file is opened.
+    Maintient le fichier de gestion des ressources si le fichier est ouvert.
 
 .. php:attr:: lock
 
-    Enable locking for file reading and writing.
+    Active le blocage du fichier en lecture et écriture.
 
 .. php:attr:: path
 
-    Current file's absolute path.
+    Le chemin absolu du fichier courant.
 
 .. php:method:: append( $data, $force = false )
 
     :rtype: boolean
 
-    Append given data string to this File.
+    Ajoute une chaîne de caractères $data à ce Fichier.
 
 
 .. php:method:: close( )
 
     :rtype: boolean
 
-    Closes the current file if it is opened.
+    Ferme le fichier courant si il est ouvert.
 
 
 .. php:method:: copy( $dest, $overwrite = true )
 
     :rtype: boolean
 
-    Copy the File to $dest
+    Copie le Fichier vers $dest
 
 
 .. php:method:: create( )
 
     :rtype: boolean
 
-    Creates the File.
+    Crée le Fichier.
 
 
 .. php:method:: delete( )
 
     :rtype: boolean
 
-    Deletes the File.
+    Supprime le Fichier.
 
 
 .. php:method:: executable( )
 
     :rtype: boolean
 
-    Returns true if the File is executable.
+    Retourne true si le Fichier est executable.
 
 
 .. php:method:: exists( )
 
     :rtype: boolean
 
-    Returns true if the File exists.
+    Retourne true si le Fichier existe.
 
 
 .. php:method:: ext( )
 
     :rtype: string
 
-    Returns the File extension.
+    Retourne l'extension du Fichier.
 
 
 .. php:method:: Folder( )
 
     :rtype: Folder
 
-    Returns the current folder.
+    Retourne le dossier courant.
 
 
 .. php:method:: group( )
 
     :rtype: integer
 
-    Returns the File's group.
+    Retourne le groupe du Fichier.
 
 
 .. php:method:: info( )
 
     :rtype: string
 
-    Returns the File info.
+    Retourne l'info du Fichier.
 
     .. versionchanged:: 2.1
-        ``File::info()`` now includes filesize & mimetype information.
+        ``File::info()`` inclut maintenant les informations filesize & mimetype.
 
 .. php:method:: lastAccess( )
 
     :rtype: integer
 
-    Returns last access time.
+    Retourne le dernier temps d'accès.
 
 
 .. php:method:: lastChange( )
 
     :rtype: integer
 
-    Returns last modified time.
+    Retourne le dernier temps modifié.
 
 
 .. php:method:: md5( $maxsize = 5 )
 
     :rtype: string
 
-    Get md5 Checksum of file with previous check of Filesize
+    Récupère la md5 Checksum du fichier avec la vérification précédente du 
+    Filesize.
 
 
 .. php:method:: name( )
 
     :rtype: string
 
-    Returns the File name without extension.
+    Retourne le nom du Fichier sans l'extension.
 
 
 .. php:method:: offset( $offset = false, $seek = 0 )
 
     :rtype: mixed
 
-    Sets or gets the offset for the currently opened file.
+    Définit ou récupère l'offset pour le fichier ouvert.
 
 
 .. php:method:: open( $mode = 'r', $force = false )
 
     :rtype: boolean
 
-    Opens the current file with a given $mode
+    Ouvre le fichier courant avec un $mode donné.
 
 .. php:method:: owner( )
 
     :rtype: integer
 
-    Returns the File's owner.
+    Retourne le propriétaire du Fichier.
 
 
 .. php:method:: perms( )
 
     :rtype: string
 
-    Returns the "chmod" (permissions) of the File.
+    Retourne le "chmod" (permissions) du Fichier.
 
 
 .. php:staticmethod:: prepare( $data, $forceWindows = false )
 
     :rtype: string
 
-    Prepares a ascii string for writing. Converts line endings to the
-    correct terminator for the current platform. If windows "\r\n"
-    will be used all other platforms will use "\n"
+    Prépare une chaîne de caractères ascii pour l'écriture. Convertit les 
+    lignes de fin en un terminator correct pour la plateforme courante. Si 
+    c'est windows "\r\n" sera utilisé, toutes les autres plateformes 
+    utiliseront "\n"
 
 
 .. php:method:: pwd( )
 
     :rtype: string
 
-    Returns the full path of the File.
+    Retourne un chemin complet du Fichier.
 
 
 .. php:method:: read( $bytes = false, $mode = 'rb', $force = false )
 
     :rtype: mixed
 
-    Return the contents of this File as a string or return false on failure.
+    Retourne les contenus du Fichier en chaîne de caractère ou retourne false 
+    en cas d'échec.
 
 
 .. php:method:: readable( )
 
     :rtype: boolean
 
-    Returns true if the File is readable.
+    Retourne true si le Fichier est lisible.
 
 
 .. php:method:: safe( $name = NULL, $ext = NULL )
 
     :rtype: string
 
-    Makes filename safe for saving.
+    Rend le nom de fichier bon pour la sauvegarde.
 
 
 .. php:method:: size( )
 
     :rtype: integer
 
-    Returns the Filesize.
+    Retourne le Filesize.
 
 
 .. php:method:: writable( )
 
     :rtype: boolean
 
-    Returns true if the File is writable.
+    Retourne si le Fichier est ouvert en écriture.
 
 
 .. php:method:: write( $data, $mode = 'w', $force = false )
 
     :rtype: boolean
 
-    Write given data to this File.
+    Ecrit le $data donné dans le Fichier.
 
 .. versionadded:: 2.1 ``File::mime()``
 
@@ -585,14 +593,15 @@ File API
 
     :rtype: mixed
 
-    Get the file's mimetype, returns false on failure.
+    Récupère le mimetype du Fichier, retourne false en cas d'échec.
 
 
 .. todo::
 
-    Better explain how to use each method with both classes.
-
+    Mieux Expliquer la façon d'utiliser chaque méthode avec les deux classes.
+    
+    
 .. meta::
-    :title lang=en: Folder & File
-    :description lang=en: The Folder and File utilities are convenience classes to help you read, write, and append to files; list files within a folder and other common directory related tasks.
-    :keywords lang=en: file,folder,cakephp utility,read file,write file,append file,recursively copy,copy options,folder path,class folder,file php,php files,change directory,file utilities,new folder,directory structure,delete file
+    :title lang=fr: Folder & File
+    :description lang=fr: Les utilitaires Folder et File sont des classes pratiques pour aider à la lecture, l'écriture; et l'ajout de fichiers; Lister les fichiers d'un dossier et autres tâches habituelles liées aux répertoires.
+    :keywords lang=fr: file,folder,cakephp utility,read file,write file,append file,recursively copy,copy options,folder path,class folder,file php,php files,change directory,file utilities,new folder,directory structure,delete file

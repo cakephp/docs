@@ -48,8 +48,8 @@ find('first')
 =============
 
 ``find('first', $params)``  retournera un résultat, vous devriez utiliser 
-ceci dans tous les cas où vous attendez un seul résultat. Ci-dessous, une 
-paire d'exemples simples (code du contôleur)::
+ceci dans tous les cas où vous attendez un seul résultat. Ci-dessous, 
+quelques exemples simples (code du controller)::
 
     <?php
     public function une_fonction() {
@@ -93,7 +93,7 @@ find('count')
 =============
 
 ``find('count', $params)`` retourne une valeur de type entier. Ci-dessous, 
-une paire d'exemples simples (code du contôleur)::
+quelques exemples simples (code du controller)::
 
     <?php
     public function une_fonction() {
@@ -124,7 +124,7 @@ find('all')
 
 ``find('all', $params)`` retourne un tableau de résultats (potentiellement 
 multiples). C'est en fait le mécanisme utilisé par toutes les variantes de 
-``find()``, ainsi que par ``paginate``. Ci-dessous, une paire d'exemples 
+``find()``, ainsi que par ``paginate``. Ci-dessous, quelques exemples 
 simples (code du controller)::
 
     <?php
@@ -287,7 +287,7 @@ find('threaded')
 ``find('threaded', $params)`` retourne un tableau imbriqué et est 
 particulièrement approprié si vous voulez utiliser le champ 
 ``parent_id`` des données de votre model, pour construire les résultats 
-associés. Ci-dessous, une paire d'exemples simples (code du controller)::
+associés. Ci-dessous, quelques exemples simples (code du controller)::
 
     <?php
     public function une_function() {
@@ -372,8 +372,8 @@ find('neighbors')
 =================
 
 ``find('neighbors', $params)`` exécutera un find similaire à 'first', mais 
-retournera la ligne précédant et suivant celle que vous requêtez. Ci-dessous, 
-un exemple simple (code du contôleur)
+retournera les lignes précédente et suivante à celle que vous requêtez. 
+Ci-dessous, un exemple simple (code du controller)
 
 ::
 
@@ -431,8 +431,8 @@ Le format retourné par un appel à ``find('neighbors')`` est de la forme :
 .. note::
 
     Notez que le résultat contient toujours seulement deux éléments 
-    de premier niveau : prev et next. Cette fonction n'honore pas var 
-    par défaut récursive d'un model. Le paramètre récursif doit 
+    de premier niveau : prev et next. Cette fonction ne possède pas  
+    de variable récursive par défaut d'un model. Le paramètre récursif doit 
     être passé dans les paramètres de chaque appel.
 
 .. _model-custom-find:
@@ -473,7 +473,7 @@ vous devez faire est d'ajouter votre type dans la variable
         public $findMethods = array('available' =>  true);
     }
 
-Basiquement, cela dit juste à CakePHP d'accepter la valeur ``available`` pour 
+Au fond, cela dit juste à CakePHP d'accepter la valeur ``available`` pour 
 premier argument de la fonction ``find``. Prochaine étape est l'intégration 
 de la fonction ``_findAvailable``. Cela est fait par convention, si vous voulez 
 intégrer un finder appelé ``maSuperRecherche`` ensuite la méthode à intégrer 
@@ -501,8 +501,7 @@ Cela vient avec l'exemple suivant (code du controller):
     <?php
     class ArticlesController extends AppController {
 
-        // Trouvera tous les articles publiés et les ordonne en fonction 
-        de la colonne created
+        // Trouvera tous les articles publiés et les ordonne en fonction de la colonne created
         public function index() {
             $articles = $this->Article->find('available', array(
                 'order' => array('created' => 'desc')
@@ -511,8 +510,8 @@ Cela vient avec l'exemple suivant (code du controller):
 
     }
 
-Les méthodes ``_find[Type]`` spéciales recoivent 3 arguments comme montré 
-ci-dessus. Le premier signifie que l'état de l'execution de la requête, 
+Les méthodes spéciales ``_find[Type]`` reçoivent 3 arguments comme montré 
+ci-dessus. Le premier signifie que l'état de l'exécution de la requête, 
 qui peut être soit ``before`` ou ``after``. Cela est fait de cette façon 
 parce que cette fonction est juste une sorte de fonction callback qui 
 a la capacité de modifier la requête avant qu'elle se fasse, ou de modifier 
@@ -534,14 +533,15 @@ Vous pouvez créer autant de finders personnalisés que vous souhaitez, et ils
 sont une bonne façon de réutiliser du code dans votre application à travers 
 les models.
 
-Il est aussi possble de paginer grâce à un type de find personnalisé comme suit:
+Il est aussi possible de paginer grâce à un type de find personnalisé comme 
+suit:
 
 ::
 
     <?php
     class ArticlesController extends AppController {
 
-        // Will paginate all published articles
+        // Va paginer tous les articles publiés
         public function index() {
             $this->paginate = array('available');
             $articles = $this->paginate();
@@ -681,7 +681,7 @@ attaques par injection et cross-site scripting.
     éviter les appels au cache de requêtes, fournissez un second argument 
     false, par exemple : ``query($query, $cachequeries = false)``
 
-``query()`` utilise le nom de la table déclaré dans la requête comme clé du 
+``query()`` utilise le nom de la table déclarée dans la requête comme clé du 
 tableau de données retourné, plutôt que le nom du model. Par exemple::
 
     <?php
@@ -696,7 +696,7 @@ pourrait retourner::
             [images] => Array
             (
                 [id] => 1304
-                [utilisateur_id] => 759
+                [user_id] => 759
             )
         )
 
@@ -705,13 +705,13 @@ pourrait retourner::
             [images] => Array
             (
                 [id] => 1305
-                [utilisateur_id] => 759
+                [user_id] => 759
             )
         )
     )
 
 Pour utiliser le nom du model comme clé du tableau et obtenir un résultat 
-cohérent avec ce qui est retournée par les méthodes Find, la requête doit 
+cohérent avec ce qui est retourné par les méthodes Find, la requête doit 
 être réécrite::
 
     <?php
@@ -726,7 +726,7 @@ ce qui retourne::
             [Image] => Array
             (
                 [id] => 1304
-                [utilisateur_id] => 759
+                [user_id] => 759
             )
         )
 
@@ -735,23 +735,24 @@ ce qui retourne::
             [Image] => Array
             (
                 [id] => 1305
-                [utilisateur_id] => 759
+                [user_id] => 759
             )
         )
     )
 
 .. note::
 
-    This syntax and the corresponding array structure is valid for
-    MySQL only. Cake does not provide any data abstraction when running
-    queries manually, so exact results will vary between databases.
+    Cette syntaxe et la structure de tableau correspondante est valide 
+    seulement pour MySQL. Cake ne fournit pas de données d'abstraction quand 
+    les requêtes sont lancées manuellement, donc les résultats exacts vont 
+    entre les bases de données.
 
 :php:meth:`Model::field()`
 ==========================
 
 ``field(string $name, array $conditions = null, string $order = null)``
 
-Retourne la valeur d'un unique champ, spécifié par ``$name``, du premier 
+Retourne la valeur d'un champ unique, spécifié par ``$name``, du premier 
 enregistrement correspondant aux $conditions ordonnées par $order. Si 
 aucune condition n'est passée et que l'id du model est fixé, cela 
 retournera la valeur du champ pour le résultat de l'enregistrement actuel.
@@ -872,8 +873,8 @@ base de données::
     array("Billet.created = Billet.modified")
 
 L'exemple ci-dessus retournera les billets où la date de création est égale 
-à la date de modification (ie les billets qui n'ont jamais été modifiés sont 
-retournés).
+à la date de modification (par ex les billets qui n'ont jamais été modifiés 
+sont retournés).
 
 Souvenez-vous que si vous vous trouvez dans l'incapacité de formuler une 
 clause WHERE par cette méthode (ex. opérations booléennes),il vous est toujours 
@@ -1033,13 +1034,13 @@ une méthode "find", mais elle retournera uniquement la commande SQL. Après
 cela, nous construisons une expression et l'ajoutons au tableau des conditions::
 
     <?php
-    $conditionsSubQuery['"Utilisateur2"."status"'] = 'B';
+    $conditionsSubQuery['"User2"."status"'] = 'B';
 
     $db = $this->Utilisateur->getDataSource();
     $subQuery = $db->buildStatement(
         array(
-            'fields'     => array('"Utilisateur2"."id"'),
-            'table'      => $db->fullTableName($this->Utilisateur),
+            'fields'     => array('"User2"."id"'),
+            'table'      => $db->fullTableName($this->User),
             'alias'      => 'User2',
             'limit'      => null,
             'offset'     => null,
@@ -1055,7 +1056,7 @@ cela, nous construisons une expression et l'ajoutons au tableau des conditions::
 
     $conditions[] = $subQueryExpression;
 
-    $this->Utilisateur->find('all', compact('conditions'));
+    $this->User->find('all', compact('conditions'));
 
 Ceci devrait généré la commande SQL suivante::
 
@@ -1084,17 +1085,17 @@ Requêtes Préparées
 
 Si vous avez besoin d'encore plus de contrôle sur vos requêtes, vous pouvez 
 utiliser des requêtes préparées. Cela vous permet de parler directement au 
-driver de la base de données et d'envoyer toute requête custom que vous 
+driver de la base de données et d'envoyer toute requête personnalisée que vous 
 souhaitez::
 
     <?php
     $db = $this->getDataSource();
     $db->fetchAll(
-        'SELECT * from utilisateurs where username = ? AND password = ?',
+        'SELECT * from users where username = ? AND password = ?',
         array('jhon', '12345')
     );
     $db->fetchAll(
-        'SELECT * from utilisateurs where username = :username AND password = :password',
+        'SELECT * from users where username = :username AND password = :password',
         array('username' => 'jhon','password' => '12345')
     );
 
