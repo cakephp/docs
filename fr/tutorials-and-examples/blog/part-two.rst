@@ -298,7 +298,7 @@ PostsController :
     Vous avez besoin d'inclure le component Session (SessionComponent) et 
     le helper Session (SessionHelper) dans chaque controller que vous 
     utiliserez. Si nécessaire, incluez-les dans le controller principal 
-    (AppController) pour qu'ils soient accessibles à tous les controllers.
+   (AppController) pour qu'ils soient accessibles à tous les controllers.
 
 Voici ce que fait l'action ``add()`` : si la requête HTTP est de type POST, 
 essayez de sauvegarder les données en utilisant le model "Post". Si pour une 
