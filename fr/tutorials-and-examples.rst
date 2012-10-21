@@ -4,11 +4,10 @@ Tutoriels et exemples
 Dans cette section, vous pourrez découvrir des applications CakePHP
 typiques afin de voir comment toutes les pièces s'assemblent.
 
-Sinon, vous pouvez vous référer à la
-`Forge de CakePHP <http://cakeforge.org/>`_ (CakeForge) ainsi que la
+Sinon, vous pouvez vous référer au dépôt de plugins non-officiels de CakePHP 
+`CakePackages <http://cakepackages.com/>`_ ainsi que la
 `Boulangerie <http://bakery.cakephp.org/>`_ (Bakery) pour des applications
-et composants existants. N'oubliez pas que vous pouvez également voir
-`le code source de ce livre de cuisine <http://thechaw.com/cakebook/>`_ (Cookbook).
+et components existants.
 
 .. toctree::
     :glob:
