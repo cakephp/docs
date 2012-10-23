@@ -3,10 +3,10 @@ Inflector
 
 .. php:class:: Inflector
 
-The Inflector class takes a string and can manipulate it to handle
-word variations such as pluralizations or camelizing and is
-normally accessed statically. Example:
-``Inflector::pluralize('example')`` returns "examples".
+La classe Inflector prend une chaîne de caractères et peut la manipuler 
+pour gérer les variations de mot comme les mises au pluriel ou les mises 
+en Camel et est normalement accessible statiquement. Exemple:
+``Inflector::pluralize('example')`` retourne "examples".
 
 .. php:staticmethod:: pluralize($singular)
 
@@ -25,9 +25,9 @@ normally accessed statically. Example:
 
 .. php:staticmethod:: underscore($camelCase)
 
-    It should be noted that underscore will only convert camelCase
-    formatted words. Words that contains spaces will be lower-cased,
-    but will not contain an underscore.
+    Il doit être noté que les underscores vont seulement convertir les mots 
+    formatés en camelCase. Les mots qui contiennent des espaces seront en 
+    minuscules, mais ne contiendront pas d'underscore.
     
     * **Input:** applePie, someThing
     * **Output:** apple\_pie, some\_thing
@@ -63,14 +63,15 @@ normally accessed statically. Example:
 
 .. php:staticmethod:: reset()
 
-    Resets Inflector back to its initial state, useful in testing.
+    Remet l'Inflector à son état initial, utile pour les tests.
     
 .. php:staticmethod:: rules($type, $rules, $reset = false)
 
-    Define new inflection and transliteration rules for Inflector to use.
-    See :ref:`inflection-configuration` for more information.
+    Définit de nouvelles règles d'inflection et de transliteraion à utiliser 
+    pour Inflector.
+    Regardez :ref:`inflection-configuration` pour plus d'informations.
 
 
 .. meta::
-    :title lang=en: Inflector
-    :keywords lang=en: apple orange,word variations,apple pie,person man,latin versions,profile settings,php class,initial state,puree,slug,apples,oranges,user profile,underscore
+    :title lang=fr: Inflector
+    :keywords lang=fr: apple orange,word variations,apple pie,person man,latin versions,profile settings,php class,initial state,puree,slug,apples,oranges,user profile,underscore

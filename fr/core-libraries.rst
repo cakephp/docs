@@ -110,6 +110,7 @@ web, la mise en cache, la connexion, l'internationalisation et plus.
     core-libraries/logging
     core-utility-libraries/router
     core-utility-libraries/security
+    core-utility-libraries/hash
     core-utility-libraries/set
     core-utility-libraries/string
     core-utility-libraries/xml

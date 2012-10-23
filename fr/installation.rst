@@ -54,10 +54,9 @@ lui-même ainsi que plusieurs autres plugins pour CakePHP. Les versions de
 CakePHP sont disponibles à 
 `Téléchargements Github <http://github.com/cakephp/cakephp/downloads>`_.
 
-Sinon, vous pouvez obtenir (Alternatively you can get fresh off the press 
-code??), avec tous les correctifs de bug et à jour des améliorations de 
-dernière minute. Ceux-ci peuvent être accessibles à partir de github en 
-clonant le répertoire de `Github`_ ::
+Sinon, vous pouvez obtenir du code frais avec tous les correctifs de bug 
+et à jour des améliorations de dernière minute. Ceux-ci peuvent être 
+accessibles à partir de github en clonant le répertoire de `Github`_ ::
 
     git clone git://github.com/cakephp/cakephp.git
 
