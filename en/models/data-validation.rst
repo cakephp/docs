@@ -1286,7 +1286,7 @@ In your model validation you could use your NlValidation class by doing the foll
         public $validate = array(
             'phone_no' => array('rule' => array('phone', null, 'nl')),
             'postal_code' => array('rule' => array('postal', null, 'nl'))
-);
+        );
 
 When your model data is validated, Validation will see that it cannot handle the ‘nl’ locale and will attempt to delegate
 out to NlValidation::postal() and the return of that method will be used as the pass/fail for the validation.
