@@ -21,7 +21,6 @@ Model definition, for example::
 
     <?php
     class User extends AppModel {
-        public $name = 'User';
         public $validate = array();
     }
 
@@ -33,7 +32,6 @@ those fields::
 
     <?php
     class User extends AppModel {
-        public $name = 'User';
         public $validate = array(
             'login' => 'alphaNumeric',
             'email' => 'email',
@@ -58,7 +56,6 @@ some of these built-in validation rules::
 
     <?php
     class User extends AppModel {
-        public $name = 'User';
         public $validate = array(
             'login' => array(
                 'alphaNumeric' => array(
@@ -398,7 +395,6 @@ function, as shown below::
 
     <?php
     class User extends AppModel {
-        public $name = 'User';
 
         public $validate = array(
             'promotion_code' => array(
@@ -444,7 +440,6 @@ stored in $this->data member variable::
 
     <?php
     class Post extends AppModel {
-        public $name = 'Post';
 
         public $validate = array(
             'slug' => array(

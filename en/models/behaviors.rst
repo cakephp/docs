@@ -39,7 +39,6 @@ variable::
 
     <?php
     class Category extends AppModel {
-        public $name   = 'Category';
         public $actsAs = array('Tree');
     }
 
@@ -62,7 +61,6 @@ database table::
 
     <?php
     class Category extends AppModel {
-        public $name   = 'Category';
         public $actsAs = array('Tree' => array(
             'left'  => 'left_node',
             'right' => 'right_node'
@@ -75,7 +73,6 @@ it may also need internationalization support::
 
     <?php
     class Category extends AppModel {
-        public $name   = 'Category';
         public $actsAs = array(
             'Tree' => array(
               'left'  => 'left_node',
@@ -176,7 +173,6 @@ passed from the model to the behavior::
 
     <?php
     class Post extends AppModel {
-        public $name = 'Post'
         public $actsAs = array(
             'YourBehavior' => array(
                 'option1_key' => 'option1_value'
@@ -209,7 +205,6 @@ the behavior. For example if you had::
 
     <?php
     class Duck extends AppModel {
-        public $name = 'Duck';
         public $actsAs = array('Flying');
     }
 

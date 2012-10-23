@@ -134,7 +134,7 @@ Acl components. First add a login and logout action to your
             }
         }
     }
-     
+
     public function logout() {
         //Leave empty for now.
     }
@@ -185,7 +185,7 @@ site controlled with Auth and Acl, we will set them up in
             'Session'
         );
         public $helpers = array('Html', 'Form', 'Session');
-    
+
         public function beforeFilter() {
             //Configure AuthComponent
             $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
@@ -203,7 +203,7 @@ and users. In **both** your ``GroupsController`` and your
 
     <?php
     public function beforeFilter() {
-        parent::beforeFilter(); 
+        parent::beforeFilter();
         $this->Auth->allow('*');
     }
 
@@ -248,10 +248,9 @@ our ``User`` model we will add the following::
 
     <?php
     class User extends AppModel {
-        public $name = 'User';
         public $belongsTo = array('Group');
         public $actsAs = array('Acl' => array('type' => 'requester'));
-         
+
         public function parentNode() {
             if (!$this->id && empty($this->data)) {
                 return null;
@@ -274,7 +273,7 @@ Then in our ``Group`` Model Add the following::
     <?php
     class Group extends AppModel {
         public $actsAs = array('Acl' => array('type' => 'requester'));
-         
+
         public function parentNode() {
             return null;
         }

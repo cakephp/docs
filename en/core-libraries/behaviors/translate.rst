@@ -35,7 +35,6 @@ following example.::
 
     <?php
     class Post extends AppModel {
-        public $name = 'Post';
         public $actsAs = array(
             'Translate'
         );
@@ -54,7 +53,6 @@ value with another array, like so::
 
     <?php
     class Post extends AppModel {
-        public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
                 'fieldOne', 'fieldTwo', 'and_so_on'
@@ -68,7 +66,6 @@ our current example the model should now look something like this::
 
     <?php
     class Post extends AppModel {
-        public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
                 'title'
@@ -131,7 +128,6 @@ setup as shown below. The naming is completely up to you.::
 
     <?php
     class Post extends AppModel {
-        public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
                 'title' => 'titleTranslation'
@@ -147,11 +143,11 @@ something like this::
          [Post] => Array
              (
                  [id] => 1
-                 [title] => Beispiel Eintrag 
+                 [title] => Beispiel Eintrag
                  [body] => lorem ipsum...
                  [locale] => de_de
              )
-    
+
          [titleTranslation] => Array
              (
                  [0] => Array
@@ -163,7 +159,7 @@ something like this::
                          [field] => title
                          [content] => Example entry
                      )
-    
+
                  [1] => Array
                      (
                          [id] => 2
@@ -173,7 +169,7 @@ something like this::
                          [field] => title
                          [content] => Beispiel Eintrag
                      )
-    
+
              )
     )
 
@@ -254,7 +250,6 @@ your controller or you can define it directly in the model.
 
     <?php
     class PostsController extends AppController {
-        public $name = 'Posts';
 
         public function add() {
             if (!empty($this->request->data)) {
@@ -271,7 +266,6 @@ your controller or you can define it directly in the model.
 
     <?php
     class Post extends AppModel {
-        public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
                 'title'
@@ -303,13 +297,12 @@ you need to setup your model like this::
 
     <?php
     class Post extends AppModel {
-        public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
                 'title'
             )
         );
-        
+
         // Use a different model (and table)
         public $translateModel = 'PostI18n';
     }
@@ -331,7 +324,7 @@ displayField directly in the model using this behavior yet.
 Make sure that you change the ``$displayField`` to ``'field'``.::
 
     <?php
-    class PostI18n extends AppModel { 
+    class PostI18n extends AppModel {
         public $displayField = 'field'; // important
     }
     // filename: PostI18n.php
@@ -349,16 +342,15 @@ $translateTable in your model, like so::
 
     <?php
     class Post extends AppModel {
-        public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
                 'title'
             )
         );
-        
+
         // Use a different model
         public $translateModel = 'PostI18n';
-        
+
         // Use a different table for translateModel
         public $translateTable = 'post_translations';
     }

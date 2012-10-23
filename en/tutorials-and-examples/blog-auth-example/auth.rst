@@ -32,7 +32,6 @@ validating any user data::
     <?php
     // app/Model/User.php
     class User extends AppModel {
-        public $name = 'User';
         public $validate = array(
             'username' => array(
                 'required' => array(
