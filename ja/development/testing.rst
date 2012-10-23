@@ -72,8 +72,6 @@ tests:
 最初のテストケースを作成する
 ====================
 
- The helper we're going to test will be formatting progress bar HTML.
-Our helper looks like
 一例として、非常に簡単なヘルパーメソッドのためのテストケースを作成します。これからテストのために作成するメソッドはHTMLでプログレスバーを作成します。おおよそこのような感じです。::
 
     <?php
@@ -139,80 +137,65 @@ expectations and assertions your tests make
 .. _running-tests:
 
 テストの実行
-=============
+========
 
-Once you have PHPUnit installed and some test cases written, you'll want to run
-the test cases very frequently. It's a good idea to run tests before committing
-any changes to help ensure you haven't broken anything.
+PHPUnitをインストールし、テストケースをいくつか書いたら、テストを何度も何度も実行したくなるでしょう。
+何らかの変更をコミットする前に、テストを実行することで何も壊していないか確認することはとてもいい考えです。
 
 ブラウザからテストを実行する
 --------------------
 
-CakePHP provides a web interface for running tests, so you can execute your
-tests through a browser if you're more comfortable in that environment.  You can
-access the web runner by going to ``http://localhost/your_app/test.php``.  The
-exact location of test.php will change depending on your setup.  But the file is
-at the same level as ``index.php``.
+CakePHPはテストを実行するためのwebベースのインタフェースを提供しており、ブラウザを通してテストを実行することができます。Webランナーには ``http://localhost/your_app/test.php`` からアクセスすることができます。test.phpの実際の場所は、あなたのセットアップのしかたによって変わるものの、 ``index.php`` と同じ階層にあります。
+if you're more comfortable in that environment. 
 
-Once you've loaded up the test runner, you can navigate App, Core and Plugin test
-suites.  Clicking an individual test case will run that test and display the
-results.
+テストランナーを起動したら、あなたのアプリとコア、プラグインのテストスイートを実行できます。それぞれのリンクをクリックすrとテストケースを実行し、結果を表示します。
 
 コードカバレッジの確認
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
-If you have `XDebug <http://xdebug.org>`_ installed, you can view code coverage
-results.  Code coverage is useful for telling you what parts of your code your
-tests do not reach. Coverage is useful for determining where you should add
-tests in the future, and gives you one measurement to track your testing
-progress with.
+`XDebug <http://xdebug.org>`_ をインストールしてあればコードカバレッジの結果を見ることができます。
+コードカバレッジはあなたの書いたテストが網羅していないコードの部分があるか知るために有用です。
+また、将来テストを追加するべきか決定するときにも有用ですし、テストの進捗率を計測する指標のひとつとしても一役買ってくれます。
 
 .. |Code Coverage| image:: /_static/img/code-coverage.png
 
 |Code Coverage|
 
-The inline code coverage uses green lines to indicate lines that have been run.
-If you hover over a green line a tooltip will indicate which tests covered the
-line. Lines in red did not run, and have not been exercised by your tests.  Grey
-lines are considered unexecutable code by xdebug.
+インラインコードカバレッジでは緑色の行は実行したことを示しています。緑色の行にポインタを置くと、どのテストがカバーしているか示してくれます。実行されなかった赤で示されます。これはテストがうまく働かなかったことを示します。
+グレーの行はXDebugによって実行できないと考えられた行です。
 
 .. _run-tests-from-command-line:
 
 コマンドラインからのテスト実行
 -------------------------------
 
-CakePHP provides a ``test`` shell for running tests. You can run app, core
-and plugin tests easily using the test shell. It accepts all the arguments
-you would expect to find on the normal PHPUnit command line tool as well. From
-your app directory you can do the following to run tests::
+CakePHPはテストを実行するために ``test`` シェルを提供します。testシェルを使うことでアプリやコア、プラグインのテストを簡単に行うことができます。
+It accepts all the arguments you would expect to find on the normal PHPUnit command line tool as well. 
+``App`` ディレクトリから以下のようなコマンドを打つことでテストを実行できます。::
 
-    # Run a model tests in the app
+    # アプリのモデルのテストを実行する
     ./Console/cake test app Model/Article
 
-    # Run a component test in a plugin
+    # プラグインのコンポーネントのテストを実行する
     ./Console/cake test DebugKit Controller/Component/ToolbarComponent
 
-    # Run the configure class test in CakePHP
+    # CakePHPのConfigueクラスのテストを実行する
     ./Console/cake test core Core/Configure
 
 .. note::
 
-    If you are running tests that interact with the session it's generally a good
-    idea to use the ``--stderr`` option.  This will fix issues with tests
-    failing because of headers_sent warnings.
+    セッションと相互作用するテストを実行するときは、基本的に ``--stder`` オプションを使うようにするとうまくいきます。
+    これにより、<em>headers_sent warning</em>によってテストが失敗する問題が解決するでしょう。
 
 .. versionchanged:: 2.1
-    The ``test`` shell was added in 2.1. The 2.0 ``testsuite`` shell is still
-    available but the new syntax is preferred.
+    ``test`` シェルは2.1で追加されました。 2.0の ``testsuite`` シェルは現在も利用できますが、こちらを使うことをおすすめします。
 
-You can also run ``test`` shell in the project root directory. This shows
-you a full list of all the tests that you currently have. You can then freely
-choose what test(s) to run::
+``test`` シェルはプロジェクトのルートディレクトリからも実行できます。このときは今実行できるすべてのテストのリストを見ることができます。どちらのテストを実行するかは自由に選ぶことができます。::
 
-    # Run test in project root directory for application folder called app
+    # プロジェクトのルートディレクトリでアプリのテストケースを実行する
     lib/Cake/Console/cake test app
 
-    # Run test in project root directory for an application in ./myapp
+    # プロジェクトのルートディレクトリで./myappのアプリケーションのテストを実行する
     lib/Cake/Console/cake test --app myapp app
 
 テストケースのフィルタリング
@@ -244,17 +227,12 @@ should be able to view the results by going to
 テストケースのライフサイクルコールバック
 ===========================
 
-Test cases have a number of lifecycle callbacks you can use when doing testing:
+テストケースは以下のようにいくつかのライフサイクルコールバックを持っており、テストの際にを使うことができます。:
 
-* ``setUp`` is called before every test method. Should be used to create the
-  objects that are going to be tested, and initialize any data for the test.
-  Always remember to call ``parent::setUp()``
-* ``tearDown`` is called after every test method. Should be used to cleanup after
-  the test is complete. Always remember to call ``parent::tearDown()``.
-* ``setupBeforeClass`` is called once before test methods in a case are started.
-  This method must be *static*.
-* ``tearDownAfterClass`` is called once after test methods in a case are started.
-  This method must be *static*.
+* ``setUp`` はテストメソッドの前に毎回呼ばれます。 テストされるオブジェクトの生成や、テストのためのデータの初期化に使われるべきです。 ``parent::setUp()`` を呼び出すのを忘れてはいけません。
+* ``tearDown`` はテストメソッドの後に毎回呼ばれます。テストが完了した後のクリーンアップに使われるべきです。 ``parent::tearDown()`` を忘れてはいけません。
+* ``setupBeforeClass`` はクラスのテストメソッドを実行する前に一度だけ呼ばれます。このメソッドは *static* でなければなりません。
+* ``tearDownAfterClass`` はクラスのテストメソッドをすべて実行した後に一度だけ呼ばれます。このメソッドは *static* でなければなりません。
 
 フィクスチャ
 ========
