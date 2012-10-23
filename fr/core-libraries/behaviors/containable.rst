@@ -258,7 +258,7 @@ l'auteur::
             )
 
 Des filtre supplémentaires peuvent être utilisées en utilisant les options 
-de recherche standard :ref:`model-find`:
+de recherche standard :ref:`model-find`::
 
     <?php
     $this->Post->find('all', array('contain' => array(

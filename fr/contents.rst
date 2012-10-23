@@ -5,9 +5,9 @@ Contenu
    :maxdepth: 3
 
    index
-   cakephp-overview
    installation
    getting-started
+   cakephp-overview
    controllers
    views
    models
@@ -17,7 +17,11 @@ Contenu
    development
    deployment
    tutorials-and-examples
+   contributing
    appendices
 
 .. todolist::
 
+.. meta::
+    :title lang=fr: Contents
+    :keywords lang=en: core libraries,ref search,shells,deployment,appendices,glossary,models

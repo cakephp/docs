@@ -230,7 +230,7 @@ Fermer le Formulaire
     complète le marquage du formulaire. Souvent, ``end()`` affiche juste
     la base fermante du formulaire, mais l'utilisation de ``end()`` permet
     également au FormHelper d'ajouter les champs cachées dont le component 
-    sécurité  :php:class:`SecurityComponent`à besoin.::
+    sécurité :php:class:`SecurityComponent` à besoin.::
 
         <?php echo $this->Form->create(); ?>
         <!-- Ici les éléments de Formulaire -->
@@ -756,8 +756,8 @@ partagées par toutes les méthodes input sont :
 
     .. note::
 
-    La valeur par défaut des champs Date et datetime peut être définis en 
-    utilisant la clef 'selected'.
+        La valeur par défaut des champs Date et datetime peut être définis en
+        utilisant la clef 'selected'.
 
 En plus des options ci-dessus, vous pouvez mixer n'importe quel attribut html
 que vous souhaitez utiliser. Chacun des nom d'options non-special sera 
@@ -1010,7 +1010,7 @@ Les options de Datetime
     options spécifiques:
 
     * ``$options['rows'], $options['cols']`` Ces deux clefs spécifient le 
-    nombre de lignes et de colonnes::
+      nombre de lignes et de colonnes::
 
         <?php
         echo $this->Form->textarea('textarea', array('rows' => '5', 'cols' => '5'));

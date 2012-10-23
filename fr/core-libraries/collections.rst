@@ -64,26 +64,26 @@ beforeRender des helpers. Ils y a plusieurs options qui peuvent être utilisées
 pour contrôler comment les callbacks sont tués:
 
 - ``breakOn`` Défini a la valeur ou aux valeurs ou vous voulez stopper la 
-propagation. Peut être une valeur scalaire, ou un tableau de valeur à stopper. 
-``False`` par défaut.
+  propagation. Peut être une valeur scalaire, ou un tableau de valeur à stopper. 
+  ``False`` par défaut.
 
 - ``break`` Défini à true pour valider l'arrêt. Quand un déclancheur est 
-cassé, la dernière valeur sera retournée. Si utilisé en combinaison avec 
-``collectReturn` les résultats collectés seront retournés.``False`` par 
-défaut.
+  cassé, la dernière valeur sera retournée. Si utilisé en combinaison avec 
+  ``collectReturn` les résultats collectés seront retournés.``False`` par 
+  défaut.
 
 - ``collectReturn`` Défini à true pour collecter le retour  de chaque objet 
-dans un tableau. Ce tableau de données retournées seront retournées depuis 
-l'appel trigger(). ``False`` par défaut.
+  dans un tableau. Ce tableau de données retournées seront retournées depuis 
+  l'appel trigger(). ``False`` par défaut.
 
 - ``triggerDisabled`` Déclenchera le callback sur tous les objets dans la 
-collection même ceux qui sont non-activés. ``False`` par défaut.
+  collection même ceux qui sont non-activés. ``False`` par défaut.
 
 - ``modParams`` Permet à chacun des objets auquel le callback à fait des 
-demandes de modifier les paramètres de l'objet suivant.En paramétrant modParams 
-dans une valeur entière vous permettra de modifier le paramètre avec cet index. 
-N'importe quelle valeur non-nulle modifiera l'index de paramètre indiqué. 
-``False`` par défaut.
+  demandes de modifier les paramètres de l'objet suivant.En paramétrant modParams 
+  dans une valeur entière vous permettra de modifier le paramètre avec cet index. 
+  N'importe quelle valeur non-nulle modifiera l'index de paramètre indiqué. 
+  ``False`` par défaut.
 
 Effacer des boucles de callback 
 -------------------------------

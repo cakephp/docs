@@ -210,9 +210,9 @@ Controller
     - ``true`` va charger le model par défaut et fusionnser avec AppController.
     - Un tableau va charger ces models et fusionner avec AppController.
     - Un tableau vide ne va charger aucun model, sauf ceux déclarés dans la 
-    classe de base.
+      classe de base.
     - ``false`` ne va charger aucun model, et ne va pas non plus fusionner 
-    avec la classe de base.
+      avec la classe de base.
 
 Components (Composants)
 =======================

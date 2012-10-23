@@ -405,6 +405,7 @@ Enlever la coloration
 
 Bien que la coloration soit vraiment géniale, il peut y avoir des fois où vous 
 voulez l'arrêter, ou forcer à l'avoir::
+
     <?php
     $this->output->outputAs(ConsoleOutput::RAW);
 

@@ -179,7 +179,7 @@ find('list')
 
 ``find('list', $params)`` retourne un tableau indexé, pratique pour tous les 
 cas où vous voudriez une liste telle que celles remplissant les champs select. 
-Ci-dessous, une paire d'exemples simples (code du contôleur) :
+Ci-dessous, une paire d'exemples simples (code du contôleur)::
 
     <?php
     public function une_function() {

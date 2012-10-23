@@ -495,7 +495,7 @@ D'autres Méthodes
 
 .. php:method:: url($options = array(), $asArray = false, $model = null)
 
-    :param array $options:Tableau d'options Pagination/URL. Comme 
+    :param array $options: Tableau d'options Pagination/URL. Comme 
         utilisé dans les méthodes ``options()`` ou ``link()``.
     :param boolean $asArray: Retourne l'url comme dans un tableau, ou une chaîne
         URL. Par défaut à false.

@@ -76,7 +76,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
    
     Vous pouvez utiliser  l'option ``block`` pour contrôler sur lequel
     des blocs l'élément lié sera ajouté. Par défaut il sera ajouté au bloc 
-    ``css`.
+    ``css``.
 
     Cette méthode d'inclusion CSS présume que le CSS spécifié se trouve dans
     le répertoire /app/webroot/css.::
@@ -562,7 +562,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Si vous voulez inclure un fichier de script qui partage un nom de fichier
     avec un plugin chargé vous pouvez faire cela. Par exemple si vous avez 
     Un plugin ``Blog``, et voulez inclure également 
-    ``app/webroot/js/Blog.plugins.js`, vous devriez::
+    ``app/webroot/js/Blog.plugins.js``, vous devriez::
 
         <?php
         echo $this->Html->script('Blog.plugins.js', array('plugin' => false));
@@ -685,6 +685,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         </tr>
 
 .. php:method:: tableCells(array $data, array $oddTrOptions = null, array $evenTrOptions = null, $useCount = false, $continueOddEven = true)
+
     :param array $data: Un tableau à deux dimensions avec les données pour les 
         lignes.
     :param array $oddTrOptions: Un tableau d'attributs :term:`html attributes` 

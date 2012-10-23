@@ -90,9 +90,6 @@ Supported options are:
   defaults to 8.
 * ``separator`` Separator content defaults to `` | ``
 * ``tag`` The tag to wrap links in, defaults to 'span'.
-* ``class`` The classname used on the wrapping tag.
-* ``currentClass`` The classname to use on the current/active link. Defaults to
-  *current*.
 * ``first`` Whether you want first links generated, set to an integer to
   define the number of 'first' links to generate. Defaults to false.  If a
   string is set a link to the first page will be generated with the value as the
@@ -108,7 +105,13 @@ Supported options are:
   you wish.
 
 * ``ellipsis`` Ellipsis content, defaults to '...'
-
+* ``class`` The classname used on the wrapping tag.
+* ``currentClass`` The classname to use on the current/active link. Defaults to
+  *current*.
+* ``currentTag`` Tag to use for current page number, defaults to null.
+  This allows you to generate for example Twitter bootstrap like links with the
+  current page number wrapped in extra 'a' or 'span' tag.
+  
 While this method allows a lot of customization for its output. It is
 also ok to just call the method without any params.::
 
@@ -122,9 +125,12 @@ include links to the first 2 and last 2 pages in the paged results::
     <?php
     echo $this->Paginator->numbers(array('first' => 2, 'last' => 2));
 
-.. versionchanged:: 2.1
+.. versionadded:: 2.1
     The ``currentClass`` option was added in 2.1.
 
+.. versionadded:: 2.3
+    The ``currentTag`` option was added in 2.1.
+    
 Creating jump links
 ===================
 

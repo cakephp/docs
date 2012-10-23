@@ -410,7 +410,7 @@ Connecter les utilisateurs manuellement
 
 Quelquefois le besoin se fait sentir de connecter un utilisateur manuellement, 
 comme juste après qu'il se soit enregistré dans votre application. Vous pouvez 
-faire cela en appelant ``$this->Auth->login()``avec les données utilisateur que 
+faire cela en appelant ``$this->Auth->login()`` avec les données utilisateur que 
 vous voulez pour la 'connexion'::
 
     <?php
@@ -487,23 +487,23 @@ Configurer les gestionnaires d'autorisation
 -------------------------------------------
 
 Vous configurez les gestionnaires d'autorisation en utilisant 
- ``$this->Auth->authorize``.
-Vous pouvez configurer un ou plusieurs gestionnaires . L'utilisation de 
-plusieurs gestionnaires vous donnes la possibilité d'utiliser plusieurs 
-moyens de vérifier les autorisations. Quand les gestionnaires d'autorisation 
-sont vérifiés ils sont appelés dans l'ordre ou ils sont déclarés. Les 
-gestionnaires devraient retourner false, s'il ne sont pas capable de vérifier 
-les autorisation, ou bien si la vérification a échouée. Le gestionnaire 
-devrait retourner true si ils sont capables de vérifier correctement les 
-autorisations. Les gestionnaires seront appelés dans l'ordre jusqu'à ce qu'un 
-passe. Si toutes les vérifications échoues , l'utilisateur sera redirigé 
-vers la page d'où il vient. Vous pouvez également stopper les autorisations 
-en levant une exception. Vous aurez besoin de traiter toutes les exceptions 
+ ``$this->Auth->authorize``. Vous pouvez configurer un ou plusieurs
+gestionnaires . L'utilisation de plusieurs gestionnaires vous donnes la
+possibilité d'utiliser plusieurs moyens de vérifier les autorisations.
+Quand les gestionnaires d'autorisation sont vérifiés ils sont appelés
+dans l'ordre ou ils sont déclarés. Les gestionnaires devraient retourner
+false, s'il ne sont pas capable de vérifier les autorisation, ou bien si
+la vérification a échouée. Le gestionnaire devrait retourner true si ils
+sont capables de vérifier correctement les autorisations. Les gestionnaires
+seront appelés dans l'ordre jusqu'à ce qu'un passe. Si toutes les
+vérifications échoues , l'utilisateur sera redirigé vers la page
+d'où il vient. Vous pouvez également stopper les autorisations
+en levant une exception. Vous aurez besoin de traiter toutes les exceptions
 levées , et les manipuler.
 
-Vous pouvez configurer les gestionnaires d'autorisation dans le 
-``beforeFilter`` de votre contrôleur ou , dans  le tableau ``$components``. 
-Vous pouvez passer les informations de configuration dans chaque objet 
+Vous pouvez configurer les gestionnaires d'autorisation dans le
+``beforeFilter`` de votre contrôleur ou , dans  le tableau ``$components``.
+Vous pouvez passer les informations de configuration dans chaque objet
 d'autorisation, en utilisant un tableau::
 
     <?php
@@ -905,17 +905,17 @@ d'autorisation et d'authentification intégrés dans CakePHP.
 .. php:method:: startup($Controller)
 
     Méthode d’exécution principale. Gères la redirection des utilisateurs 
-    invalides  et traite les données des formulaires de connexion.
+    invalides et traite les données des formulaires de connexion.
     
 .. php:staticmethod:: user($key = null)
 
-    :param string $key:  La clef de la donné utilisateur que vous voulez 
+    :param string $key: La clef de la donné utilisateur que vous voulez 
     récupérer est null, tous les utilisateurs seront retournés. Peut aussi 
     être appelé comme une instance de méthode.
 
-   Prend les données concernant l'utilisateur connecté, vous pouvez utiliser
-   une clef propriétaire pour appeler une donnée spécifique à propos d'un 
-   utilisateur::
+    Prend les données concernant l'utilisateur connecté, vous pouvez utiliser
+    une clef propriétaire pour appeler une donnée spécifique à propos d'un 
+    utilisateur::
 
         <?php
         $id = $this->Auth->user('id');

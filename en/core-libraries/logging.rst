@@ -193,16 +193,16 @@ message. For example::
     // those with `orders` and `payments` scope
     CakeLog::config('shops', array(
         'engine' => 'FileLog',
-        'types' => array(),
+        'types' => array('warning', 'error'),
         'scopes' => array('orders', 'payments'),
         'file' => 'shops.log',
     ));
 
     // configure tmp/logs/payments.log to receive all types, but only
     // those with `payments` scope
-    CakeLog::config('shops', array(
+    CakeLog::config('payments', array(
         'engine' => 'FileLog',
-        'types' => array(),
+        'types' => array('info', 'error', 'warning'),
         'scopes' => array('payments'),
         'file' => 'payments.log',
     ));
@@ -210,6 +210,9 @@ message. For example::
     CakeLog::warning('this gets written only to shops.log', 'orders');
     CakeLog::warning('this gets written to both shops.log and payments.log', 'payments');
     CakeLog::warning('this gets written to both shops.log and payments.log', 'unknown');
+
+In order for scopes to work correctly, you **must** define the accepted
+``types`` on all loggers you want to use scopes with.
 
 CakeLog API
 ===========

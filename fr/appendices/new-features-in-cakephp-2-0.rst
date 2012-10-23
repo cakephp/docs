@@ -82,7 +82,7 @@ CakeRequest
 :php:class:`CakeRequest` est une nouvelle classe introduite dans 2.0. Elle 
 encapsule les méthodes d'introspection de requêtes utilisées couramment et 
 remplace le tableau params avec un objet plus utile. Lisez en plus sur
- :php:class:`CakeRequest`.
+:php:class:`CakeRequest`.
 
 CakeResponse
 ------------
