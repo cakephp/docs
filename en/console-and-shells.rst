@@ -529,7 +529,7 @@ to add multiple arguments at once.::
 
     <?php
     $parser->addArguments(array(
-        'node', array('help' => 'The node to create', 'required' => true),
+        'node' => array('help' => 'The node to create', 'required' => true),
         'parent' => array('help' => 'The parent node', 'required' => true)
     ));
 
