@@ -181,9 +181,9 @@ Docteur hasOne Maitre      maitres.docteur\_id
 .. note::
 
     Il n'est pas obligatoire de suivre les conventions de CakePHP, vous pouvez 
-    facilement outrepasser l'utilisation de toute cléEtrangère dans les 
-    définitions de vos associations. Néanmoins, coller aux conventions fera un
-    code moins répétitif, plus facile à lire et à maintenir.
+    facilement outrepasser l'utilisation de toute clé Etrangère dans les 
+    définitions de vos associations. Néanmoins, coller aux conventions donnera 
+    un code moins répétitif, plus facile à lire et à maintenir.
 
 Le fichier model User sera sauvegardé dans /app/Model/User.php. 
 Pour définir l'association ‘User hasOne Profil’, ajoutez la propriété 
