@@ -1267,6 +1267,8 @@ Localized Validation
 The validation rules phone() and postal() will pass off any country prefix they do not know how to handle to another class
 with the appropriate name. For example if you lived in the Netherlands you would create a class like
 
+    ::
+
         <?php
         class NlValidation {
             public static function phone($check) {
@@ -1278,7 +1280,7 @@ with the appropriate name. For example if you lived in the Netherlands you would
         }
 
 This file could be placed in ``APP/Validation/`` or ``App/PluginName/Validation/``, but must be imported via App::uses() before attempting to use it.
-In your model validation you could use your NlValidation class by doing the following:
+In your model validation you could use your NlValidation class by doing the following::
 
         <?php
         public $validate = array(
