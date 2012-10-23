@@ -87,10 +87,7 @@ Our helper looks like
         }
     }
 
- After creating and saving our helper, we'll create the test
-case file in ``app/Test/Case/View/Helper/ProgressHelperTest.php``.  In that file
-we'll start with the following
-非常に簡単な例ですが、シンプルなテストケースを作成する方法をお見せするのに役立つことでしょう。ヘルパーを作成し、保存したら、 ``app/Test/Case/View/Helper/ProgressHelperTest.php`` にテストケースを作成します。このファイルにまず、以下のように書き込みます。::
+非常に簡単な例ですが、シンプルなテストケースを作成する方法をお見せするのに役立つことでしょう。ヘルパーを作成し、保存したら、 ``app/Test/Case/View/Helper/ProgressHelperTest.php`` にテストケースのファイルを作成します。このファイルにまず、以下のように書き込みます。::
 
     <?php
     App::uses('Controller', 'Controller');
@@ -107,7 +104,7 @@ we'll start with the following
         }
     }
 
-この骨組みから中身を増やしていきます。まずはメソッドを2つ加えました。
+ここからすぐに中身を増やしていきます。まずはメソッドを2つ加えました。
 ひとつは ``setUp()`` です。このメソッドはこのテストケースクラスのテストメソッドが呼び出される前に毎回呼び出されます。セットアップメソッドはテストに必要なオブジェクトの初期化や設定を行います。今回のセットアップメソッドには次のように書き加えます。::
 
     <?php
@@ -244,8 +241,8 @@ This will put the coverage results in your application's webroot directory.  You
 should be able to view the results by going to
 ``http://localhost/your_app/coverage``.
 
-Test Case Lifecycle Callbacks
-=============================
+テストケースのライフサイクルコールバック
+===========================
 
 Test cases have a number of lifecycle callbacks you can use when doing testing:
 
@@ -465,8 +462,8 @@ as it was shown on previous section. For example::
         );
     }
 
-Loading fixtures in your test cases
------------------------------------
+テストケースからのフィクスチャの読み込み
+---------------------------
 
 After you've created your fixtures, you'll want to use them in your test cases.
 In each test case you should load the fixtures you will need.  You should load a
@@ -877,7 +874,7 @@ following::
 By using ``staticExpects`` you will be able to mock and manipulate static
 methods on components and models.
 
-Testing a JSON Responding Controller
+JSONを返すコントローラーのテスト
 ------------------------------------
 
 JSON is a very friendly and common format to use when building a web service. 
