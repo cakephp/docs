@@ -72,9 +72,9 @@ tests:
 最初のテストケースを作成する
 ====================
 
-In the following example, we'll create a test case for a very simple helper
-method.  The helper we're going to test will be formatting progress bar HTML.
-Our helper looks like::
+ The helper we're going to test will be formatting progress bar HTML.
+Our helper looks like
+一例として、非常に簡単なヘルパーメソッドのためのテストケースを作成します。これからテストのために作成するメソッドはHTMLでプログレスバーを作成します。おおよそこのような感じです。::
 
     <?php
     class ProgressHelper extends AppHelper {
@@ -87,10 +87,10 @@ Our helper looks like::
         }
     }
 
-This is a very simple example, but it will be useful to show how you can create
-a simple test case.  After creating and saving our helper, we'll create the test
+ After creating and saving our helper, we'll create the test
 case file in ``app/Test/Case/View/Helper/ProgressHelperTest.php``.  In that file
-we'll start with the following::
+we'll start with the following
+非常に簡単な例ですが、シンプルなテストケースを作成する方法をお見せするのに役立つことでしょう。ヘルパーを作成し、保存したら、 ``app/Test/Case/View/Helper/ProgressHelperTest.php`` にテストケースを作成します。このファイルにまず、以下のように書き込みます。::
 
     <?php
     App::uses('Controller', 'Controller');
@@ -107,11 +107,8 @@ we'll start with the following::
         }
     }
 
-We'll flesh out this skeleton in a minute.  We've added two methods to start
-with.  First is ``setUp()``.  This method is called before every *test* method
-in a test case class.  Setup methods should initialize the objects needed for the
-test, and do any configuration needed.  In our setup method we'll add the
-following::
+この骨組みから中身を増やしていきます。まずはメソッドを2つ加えました。
+ひとつは ``setUp()`` です。このメソッドはこのテストケースクラスのテストメソッドが呼び出される前に毎回呼び出されます。セットアップメソッドはテストに必要なオブジェクトの初期化や設定を行います。今回のセットアップメソッドには次のように書き加えます。::
 
     <?php
     public function setUp() {
@@ -121,12 +118,9 @@ following::
         $this->Progress = new ProgressHelper($View);
     }
 
-Calling the parent method is important in test cases, as CakeTestCase::setUp()
-does a number things like backing up the values in :php:class:`Configure` and,
-storing the paths in :php:class:`App`.
+<pending>親クラスのメソッドを呼ぶことは重要です。Calling the parent method is important in test cases, as CakeTestCase::setUp() does a number things like backing up the values in :php:class:`Configure` and, storing the paths in :php:class:`App`.</pending>
 
-Next, we'll fill out the test method.  We'll use some assertions to ensure that
-our code creates the output we expect::
+次に、テストメソッドの内容を充実させていきます。あなたの書いたコードが期待した結果を出力するかどうか保証するため、アサーションを使います。::
 
     <?php
     public function testBar() {
@@ -138,18 +132,12 @@ our code creates the output we expect::
         $this->assertContains('width: 33%', $result);
     }
 
-The above test is a simple one but shows the potential benefit of using test
-cases.  We use ``assertContains()`` to ensure that our helper is returning a
-string that contains the content we expect.  If the result did not contain the
-expected content the test would fail, and we would know that our code is
-incorrect.
+上記のテストはシンプルですが、テストケースを使うことによる利益の可能性を示しています。 このコードでは ``assertContains()`` を使うことで、ヘルパーが返した値に、期待した文字列が含まれていることを保証しています。もし期待した文字列が含まれていなければテストは失敗し、コードが正しくないことがわかります。
 
-By using test cases you can easily describe the relationship between a set of
-known inputs and their expected output.  This helps you be more confident of the
+テストケースを使うことにより、 あなたは既知の入力セットと期待される出力結果との関係を簡単に記述することができます。これにより、あなたの書いたコードが期待した動作を満たしているかどうか簡単に確かめることができます。あなたはより自信を持ってコードを書くことができるようになる手助けをしてくれます。This helps you be more confident of the
 code you're writing as you can easily check that the code you wrote fulfills the
-expectations and assertions your tests make.  Additionally because tests are
-code, they are easy to re-run whenever you make a change.  This helps prevent
-the creation of new bugs.
+expectations and assertions your tests make
+くわえて、テストはコードなので、変更を加えたときに再度実行することが容易となります。これは新たなバグの生成を防ぐ手助けをしてくれるでしょう。
 
 .. _running-tests:
 
@@ -161,7 +149,7 @@ the test cases very frequently. It's a good idea to run tests before committing
 any changes to help ensure you haven't broken anything.
 
 ブラウザからテストを実行する
-----------------------------
+--------------------
 
 CakePHP provides a web interface for running tests, so you can execute your
 tests through a browser if you're more comfortable in that environment.  You can
