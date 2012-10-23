@@ -1269,15 +1269,15 @@ with the appropriate name. For example if you lived in the Netherlands you would
 
         <?php
         class NlValidation {
-            function phone($check) {
+            public static function phone($check) {
                 ...
             }
-            function postal($check) {
+            public static function postal($check) {
                 ...
             }
         }
 
-This file could be placed anywhere in your application, but must be imported via App::uses() before attempting to use it.
+This file could be placed in ``APP/Validation/`` or ``App/PluginName/Validation/``, but must be imported via App::uses() before attempting to use it.
 In your model validation you could use your NlValidation class by doing the following:
 
         <?php
