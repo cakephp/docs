@@ -308,7 +308,7 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 
 レコードのフィクスチャを暮らすプロパティとして定義すると、関数を使ったり、フィクスチャの定義に他の動的なデータを使用することは易しいものではありません。
 解決策として、 ``$records`` をフィクスチャクラスの関数 init() で定義するという方法があります。
-たとえば、created と updated のタイムスタンプに今日の日付を反映させたいのであれば、以下のようにするとよいでしょう。::
+たとえば、「created」と「updated」のタイムスタンプに今日の日付を反映させたいのであれば、以下のようにするとよいでしょう。::
 
     <?php
     class ArticleFixture extends CakeTestFixture {
@@ -343,66 +343,47 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 テーブル情報とレコードのインポート
 ---------------------------------------
 
-Your application may have already working models with real data
-associated to them, and you might decide to test your application with
-that data. It would be then a duplicate effort to have to define
-the table definition and/or records on your fixtures. Fortunately,
-there's a way for you to define that table definition and/or
-records for a particular fixture come from an existing model or an
-existing table.
+アプリケーションに動作するモデルがあり、モデルが扱うテーブルに実際のデータがある場合、
+そのデータとモデルをテストに使いたいと思うことがあるでしょう。
+しかし、そのためにわざわざテーブルとフィクスチャの定義をすることは二重の努力となってしまうでしょう。
+幸いにもCakePHPには、既存のモデルとテーブルから特定のフィクスチャのテーブルとレコードを定義する方法があります。
 
-Let's start with an example. Assuming you have a model named
-Article available in your application (that maps to a table named
-articles), change the example fixture given in the previous section
-(``app/Test/Fixture/ArticleFixture.php``) to::
+例を見てみましょう。アプリケーション中に「Article」という名前のモデルがあり、それが「articles」というテーブルにマップされているとします。前節で作成した例のフィクスチャ(``app/Test/Fixture/ArticleFixture.php``)を、次のように書き換えてください。::
 
     <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = 'Article';
     }
 
-This statement tells the test suite to import your table definition from the
-table linked to the model called Article. You can use any model available in
-your application. The statement will only import the Article schema, and  does
-not import records. To import records you can do the following::
+この構文は、「Article」モデルにリンクしたテーブルから、テーブル定義を読み込むよう統合テストツール(test suite)に伝えます。モデルは、アプリケーションに存在する全てのものを扱えます。上記の構文では「Article」のスキーマを読み込むだけなのでレコードを読み込みません。読み込むためにはコードを次のように変更してください。::
 
     <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = array('model' => 'Article', 'records' => true);
     }
 
-If on the other hand you have a table created but no model
-available for it, you can specify that your import will take place
-by reading that table information instead. For example::
+一方、モデルが存在しないテーブルの場合はどうするのでしょうか。その場合、代わりにテーブルの情報を読み込みよう定義することができます。例は次の通りです。::
 
     <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles');
     }
 
-Will import table definition from a table called 'articles' using
-your CakePHP database connection named 'default'. If you want to
-use a different connection use::
+この例では「articles」というテーブルから定義をインポートします。このときCakePHPは「default」という名前のデータベース接続設定を使います。これを変更したい場合は次のように書き換えます。::
 
     <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'connection' => 'other');
     }
 
-Since it uses your CakePHP database connection, if there's any
-table prefix declared it will be automatically used when fetching
-table information. The two snippets above do not import records
-from the table. To force the fixture to also import its records,
-change the import to::
+CakePHP のデータベース接続においてテーブル名のプレフィックスが指定されていたら、テーブル情報を取得するときにそのプレフィックスは自動的に使用されます。また、前述したふたつの例において、レコードは読み込まれません。読み込むには、次のようにします。::
 
     <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'records' => true);
     }
 
-You can naturally import your table definition from an existing
-model/table, but have your records defined directly on the fixture
-as it was shown on previous section. For example::
+既存のテーブルやモデルからテーブルの定義をインポートすることができますが、前節で紹介したようにフィクスチャに対して読み込むレコードを直接定義することができます。方法は例のとおりです。::
 
     <?php
     class ArticleFixture extends CakeTestFixture {
@@ -417,30 +398,26 @@ as it was shown on previous section. For example::
 テストケースからのフィクスチャの読み込み
 ---------------------------
 
-After you've created your fixtures, you'll want to use them in your test cases.
-In each test case you should load the fixtures you will need.  You should load a
-fixture for every model that will have a query run against it.  To load fixtures
-you define the ``$fixtures`` property in your model::
+フィクスチャを作成したらそれらをテストで使いたくなることでしょう。
+各テストケースではクエリの実行に際して必要となるモデルのフィクスチャをロードすることができます。
+フィクスチャをロードするには、テストケースに ``$fixtures`` プロパティを設定します。::
 
     <?php
     class ArticleTest extends CakeTestCase {
         public $fixtures = array('app.article', 'app.comment');
     }
 
-The above will load the Article and Comment fixtures from the application's
-Fixture directory.  You can also load fixtures from CakePHP core, or plugins::
+上記の例では、「Article」と「Comment」フィクスチャをアプリケーションの「Fixture」ディレクトリからロードします。
+同じようにCakePHPのコアやプラグインからもロードすることができます。::
 
     <?php
     class ArticleTest extends CakeTestCase {
         public $fixtures = array('plugin.debug_kit.article', 'core.comment');
     }
 
-Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
-name as the prefix, will load the fixture from the named plugin.
+``core`` のプレフィックスを使えばCakePHPから、プラグイン名をプレフィックスとして使えばその名前のプラグインからフィクスチャをロードします。
 
-You can control when your fixtures are loaded by setting
-:php:attr:`CakeTestCase::$autoFixtures` to ``false`` and later load them using
-:php:meth:`CakeTestCase::loadFixtures()`::
+フィクスチャのロードは :php:attr:`CakeTestCase::$autoFixtures` を ``false`` に設定したあと、テストメソッドの中で :php:meth:`CakeTestCase::loadFixtures()`:: を使ってを制御することもできます。
 
     <?php
     class ArticleTest extends CakeTestCase {
