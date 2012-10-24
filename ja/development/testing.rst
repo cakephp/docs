@@ -201,28 +201,21 @@ It accepts all the arguments you would expect to find on the normal PHPUnit comm
 テストケースのフィルタリング
 ~~~~~~~~~~~~~~~~~~~~
 
-When you have larger test cases, you will often want to run a subset of the test
-methods when you are trying to work on a single failing case. With the
-CLI runner you can use an option to filter test methods::
+たくさんのテストケースがあると、その中からサブセットだけをテストしたいときや、失敗したテストだけを実行したいときがあると思います。
+コマンドラインからテストメソッドをフィルタリングするときは以下のようにします。::
 
     ./Console/cake test core Console/ConsoleOutput --filter testWriteArray
 
-The filter parameter is used as a case-sensitive regular expression for filtering
-which test methods to run.
+実行したいテストメソッドは、大文字小文字を区別する正規表現を使ってフィルタリングすることができます。
 
 コードカバレッジの作成
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can generate code coverage reports from the command line using PHPUnit's
-built-in code coverage tools. PHPUnit will generate a set of static HTML files
-containing the coverage results.  You can generate coverage for a test case by
-doing the following::
+コマンドラインからPHPUnitに組み込まれたコードカバレッジツールを用いて、コードカバレッジのレポートを作成することができます。PHPUnitはカバレッジの結果を含む静的なHTMLファイルをいくつか生成するでしょう。テストケースのカバレッジを生成するには以下のようにします。::
 
     ./Console/cake test app Model/Article --coverage-html webroot/coverage
 
-This will put the coverage results in your application's webroot directory.  You
-should be able to view the results by going to
-``http://localhost/your_app/coverage``.
+カバレッジの結果はアプリケーションのwebrootディレクトリに配置されます。これらのファイルにはは ``http://localhost/your_app/coverage`` からアクセスすることができます。
 
 テストケースのライフサイクルコールバック
 ===========================
@@ -237,32 +230,26 @@ should be able to view the results by going to
 フィクスチャ
 ========
 
-When testing code that depends on models and the database, one can use
-**fixtures** as a way to generate temporary data tables loaded with sample data
-that can be used by the test. The benefit of using fixtures is that your test
-has no chance of disrupting live application data. In addition, you can begin
-testing your code prior to actually developing live content for an application.
+テストコードの挙動がデータベースやモデルに依存するとき、テストに使うためのテーブルを生成し、一時的なデータをロードするために **フィクスチャ** を使うことができます。フィクスチャを使うことにより、実際のアプリケーションに使われているデータに惑わされることなくテストができるというメリットがあります。加えて、アプリケーションのためのコンテンツを実際に用意するより先にコードをテストすることができます。
 
-CakePHP uses the connection named ``$test`` in your ``app/Config/database.php``
-configuration file. If this connection is not usable, an exception will be
-raised and you will not be able to use database fixtures.
+このとき、CakePHPは設定ファイル  ``app/Config/database.php`` にある ``$test`` という名前のデータベース接続設定を使います。この接続が使えないときは例外が発生し、フィクスチャを使うことができません。
 
-CakePHP performs the following during the course of a fixture based
-test case:
+CakePHPはフィクスチャに基づいたテストケースを実行するにあたり、以下の動作をします。
 
-#. Creates tables for each of the fixtures needed.
-#. Populates tables with data, if data is provided in fixture.
-#. Runs test methods.
-#. Empties the fixture tables.
-#. Removes fixture tables from database.
+#. 各フィクスチャで必要なテーブルを作成する
+#. フィクスチャにデータが存在すれば、それをテーブルに投入する
+#. テストメソッドを実行する
+#. フィクスチャのテーブルを空にする
+#. データベースからフィクスチャが作成していたテーブルを削除する
 
 フィクスチャの作成
------------------
+-------------
 
-When creating a fixture you will mainly define two things: how the table is created (which fields are part of the table), and which records will be initially populated to the table. Let's
-create our first fixture, that will be used to test our own Article
+フィクスチャを作成するときは主にふたつのことを定義します。ひとつはどのようなフィールドを持ったテーブルを作成するか、もうひとつは初期状態でどのようなレコードをテーブルに配置するかです。
+that will be used to test our own Article
 model. Create a file named ``ArticleFixture.php`` in your
-``app/Test/Fixture`` directory, with the following content::
+``app/Test/Fixture`` directory, with the following content
+それでは最初のフィクスチャを作成してみましょう。この例ではArticleモデルのフィクスチャを作成します。 ``app/Test/Fixture`` というディレクトリに ``app/Test/Fixture`` という名前のファイルを作成し、以下のとおりに記述してください。::
 
     <?php
     class ArticleFixture extends CakeTestFixture { 
@@ -284,57 +271,44 @@ model. Create a file named ``ArticleFixture.php`` in your
           ); 
      } 
 
-The ``$useDbConfig`` property defines the datasource of which the fixture will
-use.  If your application uses multiple datasources, you should make the
-fixtures match the model's datasources but prefixed with ``test_``.
-For example if your model uses the ``mydb`` datasource, your fixture should use
-the ``test_mydb`` datasource.  If the ``test_mydb`` connection doesn't exist,
-your models will use the default ``test`` datasource.  Fixture datasources must
-be prefixed with ``test`` to reduce the possibility of accidentally truncating
-all your application's data when running tests.
+``$useDbConfig`` プロパティはフィクスチャが使うデータソースの定義をします。複数のデータソースを使うときは、モデルのデータソースと合わせてフィクスチャを作るようにします。ただし、 ``test_`` というプレフィックスをつけてください。たとえば、 ``mydb`` というデータソースを使うモデルの場合は、フィクスチャのデータソースを ``test_mydb`` とします。もし ``test_mydb`` の接続が存在しなかったときは規定値として ``mydb`` がデータソースとして使われます。テストを実行するときにテーブル名の衝突を避けるため、フィクスチャのデータソースには ``test`` の接頭辞が必ず付きます。
 
-We use ``$fields`` to specify which fields will be part of this table,
-and how they are defined. The format used to define these fields is
-the same used with :php:class:`CakeSchema`. The keys available for table
-definition are:
+
+``$fields`` ではテーブルを構成するフィールドと、その定義を記述します。
+フィールドの定義には :php:class:`CakeSchema` と同じ書式を使います。
+テーブルの定義で特に重要な変数を以下に示します。
 
 ``type``
-    CakePHP internal data type. Currently supported:
-        - ``string``: maps to ``VARCHAR``
-        - ``text``: maps to ``TEXT``
-        - ``integer``: maps to ``INT``
-        - ``float``: maps to ``FLOAT``
-        - ``datetime``: maps to ``DATETIME``
-        - ``timestamp``: maps to ``TIMESTAMP``
-        - ``time``: maps to ``TIME``
-        - ``date``: maps to ``DATE``
-        - ``binary``: maps to ``BLOB``
+    CakePHPの内部型定義です。現在サポートしているのは以下の型です
+        - ``string``: ``VARCHAR`` と対応
+        - ``text``: ``TEXT`` と対応
+        - ``integer``: ``INT`` と対応
+        - ``float``: ``FLOAT`` と対応
+        - ``datetime``: ``DATETIME`` と対応
+        - ``timestamp``: ``TIMESTAMP`` と対応
+        - ``time``: ``TIME`` と対応
+        - ``date``: ``DATE`` と対応
+        - ``binary``: ``BLOB`` と対応
 ``key``
-    Set to ``primary`` to make the field AUTO\_INCREMENT, and a PRIMARY KEY
-    for the table.
+    ``primary`` を設定するとフィールドに<em>field AUTO\_INCREMENT</em>と<em>PRIMARY KEY</em>が適用されます。
 ``length``
-    Set to the specific length the field should take.
+    フィールドが許容するサイズを設定します。
 ``null``
-    Set to either ``true`` (to allow NULLs) or ``false`` (to disallow NULLs).
+    ``true`` (<em>NULL</em>を許容する)または ``false`` (<em>NULL</em>を許容しない)のいずれかを設定します。
 ``default``
-    Default value the field takes.
+    フィールドの規定値を設定します。
 
-We can define a set of records that will be populated after the fixture table is
-created. The format is fairly straight forward, ``$records`` is an array of
-records.  Each item in ``$records`` should be a single row.  Inside each row,
-should be an associative array of the columns and values for the row.  Just keep
-in mind that each record in the $records array must have a key for **every**
-field specified in the ``$fields`` array. If a field for a particular record needs
-to have a ``null`` value, just specify the value of that key as ``null``.
+フィクスチャのテーブルを作成してから、そのテーブルに投入するレコードを定義することができます。
+``$records`` はレコードの配列であり、データの書式もとても簡単です。
+``$records`` の各アイテムはひとつの行を表し、カラム名と値の連想配列で構成されます。
+$records の持つ配列は各要素 **ごとに** ``$fields`` で指定した特定のキーを持たなければならないことを覚えておいてください。あるフィールドの値を ``null`` としたいときは、そのキーの値を ``null`` とします。
 
 動的データとフィクスチャ
--------------------------
+-----------------
 
-Since records for a fixture are declared as a class property, you cannot easily
-use functions or other dynamic data to define fixtures.  To solve this problem,
-you can define ``$records`` in the init() function of your fixture. For example
-if you wanted all the created and updated timestamps to reflect today's date you
-could do the following::
+レコードのフィクスチャを暮らすプロパティとして定義すると、関数を使ったり、フィクスチャの定義に他の動的なデータを使用することは易しいものではありません。
+解決策として、 ``$records`` をフィクスチャクラスの関数 init() で定義するという方法があります。
+たとえば、created と updated のタイムスタンプに今日の日付を反映させたいのであれば、以下のようにするとよいでしょう。::
 
     <?php
     class ArticleFixture extends CakeTestFixture {
@@ -363,7 +337,7 @@ could do the following::
         }
     }
 
-When overriding ``init()`` just remember to always call ``parent::init()``.
+``init()`` をオーバーライドするときは ``parent::init()`` を呼び出すのを忘れないようにしましょう。
 
 
 テーブル情報とレコードのインポート
