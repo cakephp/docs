@@ -113,7 +113,8 @@ tests:
         $this->Progress = new ProgressHelper($View);
     }
 
-<pending>親クラスのメソッドを呼ぶことは重要です。Calling the parent method is important in test cases, as CakeTestCase::setUp() does a number things like backing up the values in :php:class:`Configure` and, storing the paths in :php:class:`App`.</pending>
+テストケースで親クラスのメソッドを呼ぶことは重要です。 ``CakeTestCase::setUp()``
+は :php:class:`Configure` に値を後退させたり、 :php:class:`App` にパスを保管したりといったいくつかの作業をしているからです。
 
 次に、テストメソッドの内容を充実させていきます。あなたの書いたコードが期待した結果を出力するかどうか保証するため、アサーションを使います。::
 
@@ -170,7 +171,7 @@ if you're more comfortable in that environment.
 -------------------------------
 
 CakePHPはテストを実行するために ``test`` シェルを提供します。testシェルを使うことでアプリやコア、プラグインのテストを簡単に行うことができます。
-It accepts all the arguments you would expect to find on the normal PHPUnit command line tool as well. 
+また、コマンドラインから通常どおりPHPUnitを使う際に利用できる引数をすべて使うことができます。
 ``App`` ディレクトリから以下のようなコマンドを打つことでテストを実行できます。::
 
     # アプリのモデルのテストを実行する
@@ -513,15 +514,11 @@ CakePHPのテストスイートはテストの独立性を確保するため、�
 コントローラーのテスト
 ==============
 
-While you can test controller classes in a similar fashion to Helpers, Models,
-and Components, CakePHP offers a specialized ``ControllerTestCase`` class.
-Using this class as the base class for your controller test cases allows you to
-use ``testAction()`` for simpler test cases.  ``ControllerTestCase`` allows you
-to easily mock out components and models, as well as potentially difficult to
-test methods like :php:meth:`~Controller::redirect()`.
+コントローラークラスをテストするとき、ヘルパーやモデル、コンポーネントも同じように、CakePHPは ``ControllerTestCase`` という特化型クラスを提供します。
+このクラスをコントローラーのテストケースの親クラスとすることで、コントローラーのテストケースを ``testAction()`` というメソッドでより簡単にすることができます。
+``ControllerTestCase`` は擬似的にコンポーネントやモデルを動かすだけでなく、 :php:meth:`~Controller::redirect()` のように潜在的にテストが難しいメソッドのテストも簡単にしてくれます。
 
-Say you have a typical Articles controller, and its corresponding
-model. The controller code looks like::
+下記のように、「Article」モデルに対応した典型的なコントローラーがあるとします。::
 
     <?php
     class ArticlesController extends AppController {
@@ -546,8 +543,7 @@ model. The controller code looks like::
         }
     }
 
-Create a file named ``ArticlesControllerTest.php`` in your
-``app/Test/Case/Controller`` directory and put the following inside::
+ディレクトリ ``app/Test/Case/Controller`` に ``ArticlesControllerTest.php`` というファイルを作成し、次のように記述します。::
 
     <?php
     class ArticlesControllerTest extends ControllerTestCase {
@@ -641,11 +637,9 @@ once the redirect is reached.
 GETリクエストのシミュレート
 -----------------------
 
-As seen in the ``testIndexPostData()`` example above, you can use
-``testAction()`` to test POST actions as well as GET actions.  By supplying the
-``data`` key, the request made to the controller will be POST.  By default all
-requests will be POST requests.  You can simulate a GET request by setting the
-method key::
+上の例の ``testIndexPostData()`` では、 ``testAction()`` はPOSTだけでなくGETリクエストのアクションとしても使えます。
+``data`` キーによってPOSTされるであろう値を設定します。規定ではすべてのリクエストはPOSTと扱われます。
+GETリクエストをシミュレートしたい場合は ``method`` キーを設定します。::
 
     <?php
     public function testAdding() {
@@ -659,25 +653,21 @@ method key::
         // some assertions.
     }
 
-The data key will be used as query string parameters when simulating a GET
-request.
+``data`` キーはGETリクエストのクエリ文字列のパラメータをシミュレートするときに使われます。
 
 returnする値の選択
 ------------------------
 
-You can choose from a number of ways to inspect the success of your controller
-action. Each offers a different way to ensure your code is doing what you
-expect:
+コントローラーのアクションが成功したかどうかを調査する方法はいくつかから選択することができます。
+それぞれは違った方法であなたのコードが期待した動きをしているか保証するための手段を提供します。
 
-* ``vars`` Get the set view variables.
-* ``view`` Get the rendered view, without a layout.
-* ``contents`` Get the rendered view including the layout.
-* ``result`` Get the return value of the controller action. Useful
-  for testing requestAction methods.
+* ``vars`` ビューの値を取得します。
+* ``view`` レイアウト以外の描画されるビューを取得します。
+* ``contents`` レイアウトを含む描画されるビューを取得します。
+* ``result`` コントローラーのアクションが返す値を取得します。requestAction メソッドのテストに対して有用です。
 
-The default value is ``result``. As long as your return type is not ``result``
-you can also access the various other return types as properties in the test
-case::
+規定値は ``result`` です。 戻り値の属性を ``result`` 以外にしない限り、
+テストケース内で他の種類の戻り値の属性にアクセスすることができます。::
 
     <?php
     public function testIndex() {
@@ -1045,7 +1035,7 @@ Jenkinsとのインテグレーション
 CakePHPとJenkinsはかなり簡単にインテグレーションすることができます。
 ここでの解説は、すでにUnixライクな環境にJenkinsがインストールされていて、管理者権限を持つことができる状態を前提とします。
 また、ジョブの作成とビルドの方法も知っているものとします。もしわからない場合は
-`Jenkins documentation <http://jenkins-ci.org/>`_ または `Jenkins Wiki日本語版<https://wiki.jenkins-ci.org/display/JA/Jenkins>`_ を参考にしてください。
+`Jenkins documentation <http://jenkins-ci.org/>`_ または `Jenkins Wiki日本語版 <https://wiki.jenkins-ci.org/display/JA/Jenkins>`_ を参考にしてください。
 
 ジョブの作成
 ------------
