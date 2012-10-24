@@ -432,8 +432,7 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 モジュールのテスト
 ==============
 
-Let's say we already have our Article model defined on
-``app/Model/Article.php``, which looks like this::
+まず ``app/Model/Article.php`` に「Article」モデルを定義しましょう。以下のように記述します。::
 
     <?php
     class Article extends AppModel {
@@ -449,13 +448,12 @@ Let's say we already have our Article model defined on
         }
     }
 
-We now want to set up a test that will use this model definition, but through
-fixtures, to test some functionality in the model.  CakePHP test suite loads a
-very minimum set of files (to keep tests isolated), so we have to start by
-loading our model - in this case the Article model which we already defined.
+このモデルの機能をテストするために、このモデルの定義とフィクスチャを使ってテストのセットアップを行います。
+CakePHPのテストスイートはテストの独立性を確保するため、ごく最小限のファイルしかロードしません。
+そこで、まずはモデルをロードするところからはじめなければなりません。この場合、すでに定義した「Article」モデルのことを指します。
 
-Let's now create a file named ``ArticleTest.php`` in your
-``app/Test/Case/Model`` directory, with the following contents::
+それでは ``ArticleTest.php`` というファイルを ``app/Test/Case/Model``
+というディレクトリに作成し、以下のように記述しましょう。::
 
     <?php
     App::uses('Article', 'Model');
@@ -464,23 +462,19 @@ Let's now create a file named ``ArticleTest.php`` in your
         public $fixtures = array('app.article');
     }
 
-In our test cases' variable ``$fixtures`` we define the set of fixtures that
-we'll use.  You should remember to include all the fixtures that will have
-queries run against them.
+このテストケースでは ``$fixtures`` にこの章で今まで定義してきたフィクスチャを設定します。
+クエリを実行するにあたり、必要なフィクスチャをすべてインクルードするのを忘れないでください。
 
 .. note::
 
-    You can override the test model database by specifying the ``$useDbConfig``
-    property. Ensure that the relevant fixture uses the same value so that the
-    table is created in the correct database.
+    ``$useDbConfig``プロパティを指定することで、テストモデルのデータベースをオーバーライドできます。
+    テーブルが正しいデータベースで生成されるように、関連するフィクスチャが同じ値を使うことを確認してください。
 
 テストメソッドの作成
 ----------------------
 
-Let's now add a method to test the function published() in the
-Article model. Edit the file
-``app/Test/Case/Model/ArticleTest.php`` so it now looks like
-this::
+それでは「Article」モデルの「published()」メソッドのためのテストメソッドを書き加えます。
+``app/Test/Case/Model/ArticleTest.php`` を編集して、以下のようにしてください。::
 
     <?php
     App::uses('Article', 'Model');
@@ -505,22 +499,19 @@ this::
         }
     }
 
-You can see we have added a method called ``testPublished()``. We start by
-creating an instance of our ``Article`` model, and then run our ``published()``
-method. In ``$expected`` we set what we expect should be the proper result (that
-we know since we have defined which records are initially populated to the
-article table.) We test that the result equals our expectation by using the
-``assertEquals`` method. See the :ref:`running-tests` section for more
-information on how to run your test case.
+``testPublished()`` というメソッドを追加したのがお分かりでしょう。
+まず ``Article`` モデルのインスタンスを作成し、次に ``published()`` メソッドを実行します。
+``$expected`` には、初期状態でどのようなレコードが「articles」テーブルに投入されているかを知っている上で、期待する値として適切なものを設定します。
+実行結果と期待した値が同じであるかは ``assertEquals`` メソッドを使ってテストします。
+:ref:`running-tests` には、テストケースを実行するためのより詳しい情報があります。
 
 .. note::
 
-    When setting up your Model for testing be sure to use 
-    ``ClassRegistry::init('YourModelName');`` as it knows to use your test 
-    database connection.
+    テストのためにモデルをセットアップするときは、テスト用のデータベース接続を使うようにするために必ず
+    ``ClassRegistry::init('YourModelName');`` を使ってください。
 
 コントローラーのテスト
-===================
+==============
 
 While you can test controller classes in a similar fashion to Helpers, Models,
 and Components, CakePHP offers a specialized ``ControllerTestCase`` class.
@@ -695,7 +686,7 @@ case::
     }
 
 
-Using mocks with testAction
+テストアクションによるモックの使用
 ---------------------------
 
 There will be times when you want to replace components or models with either
@@ -734,7 +725,7 @@ that does not send headers. After using ``generate()`` or ``testAction()`` you
 can access the controller object at ``$this->controller``.
 
 より複雑な例
-----------------------
+----------
 
 In its simplest form, ``testAction()`` will run ``PostsController::index()`` on 
 your testing controller (or an automatically generated one), including all of the
@@ -804,11 +795,11 @@ By using ``staticExpects`` you will be able to mock and manipulate static
 methods on components and models.
 
 JSONを返すコントローラーのテスト
-------------------------------------
+-----------------------
 
-JSON is a very friendly and common format to use when building a web service. 
-Testing the endpoints of your web service is very simple with CakePHP. Let us 
-begin with a simple example controller that responds in JSON::
+JSONはWebサービスの構築において、とてもフレンドリーで一般的なフォーマットです。
+CakePHPを用いたWebサービスのエンドポイントのテストはとてもシンプルです。
+JSONを返すコントローラーの簡単な例を示します。::
 
     <?php
     class MarkersController extends AppController {
@@ -819,8 +810,8 @@ begin with a simple example controller that responds in JSON::
         }
     }
 
-Now we create the file ``app/Test/Case/Controller/MarkersControllerTest.php`` 
-and make sure our web service is returning the proper response::
+Webサービスが適切なレスポンスを返しているか確認するテストを作成しましょう。
+``app/Test/Case/Controller/MarkersControllerTest.php`` というファイルを以下のように作成します。::
 
     <?php
     class MarkersControllerTest extends ControllerTestCase {
@@ -835,7 +826,7 @@ and make sure our web service is returning the proper response::
     }
 
 コンポーネントのテスト
-==================
+===============
 
 Lets pretend we have a component called PagematronComponent in our application. 
 This component helps us set the pagination limit value across all the 
@@ -984,13 +975,11 @@ Save this in and execute the test. You should see a green bar and messaging
 indicating 1 pass and 4 assertions.
 
 テストスイートの作成
-====================
+==============
 
-If you want several of your tests to run at the same time, you can
-creating a test suite. A testsuite is composed of several test cases.
-``CakeTestSuite`` offers a few methods for easily creating test suites based on
-the file system.  If we wanted to create a test suite for all our model tests we
-could would create ``app/Test/Case/AllModelTest.php``. Put the following in it::
+いくつかのテストを同時に実行したいときはテストスイートを作成することができます。テストスイートはいくつかのテストケースから構成されています。
+``CakeTestSuite`` は少しばかりですがファイルシステムをベースに簡単にテストスイートを作成するためのメソッドを提供します。
+すべてのモデルに対してのテストスイートを作成したいときは、 ``app/Test/Case/AllModelTest.php`` を作成します。内容は以下のとおりです。::
 
     <?php
     class AllModelTest extends CakeTestSuite {
@@ -1001,16 +990,14 @@ could would create ``app/Test/Case/AllModelTest.php``. Put the following in it::
         }
     }
 
-The code above will group all test cases found in the
-``/app/Test/Case/Model/`` folder. To add an individual file, use
-``$suite->addTestFile($filename);``. You can recursively add a directory
-for all tests using::
+上のコードは ``/app/Test/Case/Model/`` のフォルダ以下に見つかったテストケースをすべてグループ化します。
+個別にファイルを追加するときは ``$suite->addTestFile($filename);`` を使います。
+あるディレクトリから再帰的にすべてのテストをグループ化する場合は以下のようにします。::
 
     <?php
     $suite->addTestDirectoryRecursive(TESTS . 'Case');
 
-Would recursively add all test cases in the ``app/Test/Case/``
-directory.
+この例では、 ``app/Test/Case/`` のディレクトリ以下のすべてのテストをグループ化します。
 
 プラグインのためのテスト作成
 ==========================
@@ -1069,8 +1056,7 @@ unsure of any of these, refer to the `Jenkins documentation <http://jenkins-ci.o
 ジョブの作成
 ------------
 
-Start off by creating a job for your application, and connect your repository
-so that jenkins can access your code.
+アプリケーションのためのジョブを作成することから始めてください。次に、Jenkinsがあなたのコードにアクセスできるように、リポジトリと接続します。
 
 テスト用データベースの設定の追加
 ------------------------
