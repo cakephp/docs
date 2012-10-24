@@ -417,7 +417,7 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 
 ``core`` のプレフィックスを使えばCakePHPから、プラグイン名をプレフィックスとして使えばその名前のプラグインからフィクスチャをロードします。
 
-フィクスチャのロードは :php:attr:`CakeTestCase::$autoFixtures` を ``false`` に設定したあと、テストメソッドの中で :php:meth:`CakeTestCase::loadFixtures()`:: を使ってを制御することもできます。
+フィクスチャのロードは :php:attr:`CakeTestCase::$autoFixtures` を ``false`` に設定したあと、テストメソッドの中で :php:meth:`CakeTestCase::loadFixtures()`:: を使ってを制御することもできます。::
 
     <?php
     class ArticleTest extends CakeTestCase {
@@ -999,11 +999,10 @@ indicating 1 pass and 4 assertions.
 
 この例では、 ``app/Test/Case/`` のディレクトリ以下のすべてのテストをグループ化します。
 
-プラグインのためのテスト作成
-==========================
+プラグインのテスト作成
+================
 
-Tests for plugins are created in their own directory inside the
-plugins folder.::
+プラグインのテストは、プラグインのフォルダ内の指定されたディレクトリに作成します。::
 
     /app
         /Plugin
@@ -1012,12 +1011,10 @@ plugins folder.::
                     /Case
                     /Fixture
 
-They work just like normal tests but you have to remember to use
-the naming conventions for plugins when importing classes. This is
-an example of a testcase for the ``BlogPost`` model from the plugins
-chapter of this manual. A difference from other tests is in the
-first line where 'Blog.BlogPost' is imported. You also need to
-prefix your plugin fixtures with ``plugin.blog.blog_post``::
+これらは通常のテストと同じように実行できますが、クラスをインポートするときにプラグインの命名規則を使うことを覚えておいてください。
+これはこの本のプラグインの章で紹介した ``BlogPost`` モデルのテストケースの例です。
+他のテストとの違いは、最初の行で'Blog.BlogPost'をインポートしているところです。
+またプラグインのフィクスチャも ``plugin.blog.blog_post`` というプレフィックスをつける必要があります。::
 
     <?php
     App::uses('BlogPost', 'Blog.Model');
@@ -1037,21 +1034,18 @@ prefix your plugin fixtures with ``plugin.blog.blog_post``::
         }
     }
 
-If you want to use plugin fixtures in the app tests you can
-reference them using ``plugin.pluginName.fixtureName`` syntax in the
-``$fixtures`` array.
+アプリケーションのテストでプラグインのフィクスチャを使いたいときは、 ``$fixtures`` の
+配列で ``plugin.pluginName.fixtureName`` という構文を使うことで参照できます。
 
-Jenkinsとの統合
+Jenkinsとのインテグレーション
 ========================
 
-`Jenkins <http://jenkins-ci.org>`_ is a continuous integration server, that can
-help you automate the running of your test cases.  This helps ensure that all
-your tests stay passing and your application is always ready.
+`Jenkins <http://jenkins-ci.org>`_ は継続的インテグレーションサービスで、テストケースの自動化を手助けしてくれます。これにより、すべてのテストをパスし続けていることを保証し、あなたのアプリケーションをいつでも準備ができている状態にしてくれます。
 
-Integrating a CakePHP application with Jenkins is fairly straightforward.  The
-following assumes you've already installed Jenkins on \*nix system, and are able
-to administer it.  You also know how to create jobs, and run builds.  If you are
-unsure of any of these, refer to the `Jenkins documentation <http://jenkins-ci.org/>`_ .
+CakePHPとJenkinsはかなり簡単にインテグレーションすることができます。
+ここでの解説は、すでにUnixライクな環境にJenkinsがインストールされていて、管理者権限を持つことができる状態を前提とします。
+また、ジョブの作成とビルドの方法も知っているものとします。もしわからない場合は
+`Jenkins documentation <http://jenkins-ci.org/>`_ または `Jenkins Wiki日本語版<https://wiki.jenkins-ci.org/display/JA/Jenkins>`_ を参考にしてください。
 
 ジョブの作成
 ------------
@@ -1061,10 +1055,9 @@ unsure of any of these, refer to the `Jenkins documentation <http://jenkins-ci.o
 テスト用データベースの設定の追加
 ------------------------
 
-Using a separate database just for Jenkins is generally a good idea, as it stops
-bleed through and avoids a number of basic problems.  Once you've created a new
-database in a database server that jenkins can access (usually localhost).  Add
-a *shell script step* to the build that contains the following::
+Jenkinsのために別のデータベースを用意するのは、初歩的な問題を回避するためには良い考えです。
+一度Jenkinsがアクセスできる(通常はlocalhostの)データベースサーバに新しくデータベースを作成しました。
+以下のような *シェルスクリプトの実行* をビルドに加えてください。::
 
     cat > app/Config/database.php <<'DATABASE_PHP'
     <?php
@@ -1080,37 +1073,33 @@ a *shell script step* to the build that contains the following::
     }
     DATABASE_PHP
 
-This ensures that you'll always have the correct database configuration that
-Jenkins requires. Do the same for any other configuration files you need to.
-It's often a good idea to drop and re-create the database before each build as
-well. This insulates you from chained failures, where one broken build causes
-others to fail. Add another *shell script step* to the build that contains the
-following::
+これにより、Jenkinsが要求する正しいデータベース設定が常にあることを保証してくれます。
+他の設定ファイルにも同じことをしておきましょう。ときどきビルドする前ごとに、データベースをdropし、再度createするとよいでしょう。
+一度ビルドに失敗すると、立て続けに起きるであろう失敗の連鎖を断ち切ってくれるはずです。
+
+さらに以下の *シェルスクリプトの実行* をビルドに加えてください。::
 
     mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
 
 テストの追加
 --------------
 
-Add another *shell script step* to your build.  In this step run the tests for
-your application. Creating a junit log file, or clover coverage is often a nice
-bonus, as it gives you a nice graphical view of your testing results::
+また別の *シェルスクリプトの実行* をビルドに加えてください。このステップではアプリケーションのテストを実行します。
+junit のログファイル作成、またはCloverのカバレッジにより、テストの結果を視覚的に確認できるようになります。::
 
     app/Console/cake test app AllTests \
     --stderr \
     --log-junit junit.xml \
     --coverage-clover clover.xml
 
-If you use clover coverage, or the junit results, make sure to configure those
-in Jenkins as well. Failing to configure those steps will mean you won't see the results.
+Clover coverageとjUnitの結果を使えれば、Jenkinsが正しく設定できています。
+うまく設定できていないとこの結果は見ることができないでしょう。
 
 ビルドを実行する
 -----------
 
-これでビルドを実行することができるようになりました。Check the console output and make any
-necessary changes to get a passing build
-You should be able to run a build now.  Check the console output and make any
-necessary changes to get a passing build.
+これでビルドを実行することができるようになりました。
+コンソールの出力を確認して、ビルドをパスするように必要な変更を加えましょう。
 
 
 
