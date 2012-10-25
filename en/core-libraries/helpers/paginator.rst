@@ -109,7 +109,7 @@ Supported options are:
 * ``currentClass`` The classname to use on the current/active link. Defaults to
   *current*.
 * ``currentTag`` Tag to use for current page number, defaults to null.
-  This allows you to generate for example Twitter bootstrap like links with the
+  This allows you to generate for example Twitter Bootstrap like links with the
   current page number wrapped in extra 'a' or 'span' tag.
   
 While this method allows a lot of customization for its output. It is
@@ -129,7 +129,7 @@ include links to the first 2 and last 2 pages in the paged results::
     The ``currentClass`` option was added in 2.1.
 
 .. versionadded:: 2.3
-    The ``currentTag`` option was added in 2.1.
+    The ``currentTag`` option was added in 2.3.
     
 Creating jump links
 ===================
@@ -338,7 +338,7 @@ Sets all the options for the Paginator Helper. Supported options are:
     $this->Paginator->options(array('update' => '#content'));
 
   This is useful when doing :ref:`ajax-pagination`.  Keep in mind that the value
-  of update can be any valid CSS selector, but most often is is simpler to use an
+  of update can be any valid CSS selector, but most often is simpler to use an
   id selector.
 
 * ``model`` The name of the model being paginated, defaults to
