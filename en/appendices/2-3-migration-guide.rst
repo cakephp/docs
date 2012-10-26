@@ -199,6 +199,7 @@ CakeNumber
 
 - :php:meth:`CakeNumber::fromReadableSize()` was added.
 - :php:meth:`CakeNumber::formatDelta()` was added.
+- :php:meth:`CakeNumber::defaultCurrency()` was added.
 
 Folder
 ------
