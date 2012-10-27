@@ -154,7 +154,7 @@ Authentication (login and logout)
 We're now ready to add our authentication layer. In CakePHP this is handled
 by the :php:class:`AuthComponent`, a class responsible for requiring login for certain
 actions, handling user sign-in and sign-out, and also authorizing logged in
-users to the actions are allowed to reach.
+users to the actions they are allowed to reach.
 
 To add this component to your application open your ``app/Controller/AppController.php``
 file and add the following lines::
@@ -188,8 +188,8 @@ our visitors to be able to read and list the entries without registering in the
 site.
 
 Now, we need to be able to register new users, save their username and password,
-and more importantly hash their password so it is not stored as plain text in
-our database. Let's tell the AuthComponent to let un-authenticated users to access
+and, more importantly, hash their password so it is not stored as plain text in
+our database. Let's tell the AuthComponent to let un-authenticated users access
 the users add function and implement the login and logout action::
 
     <?php
@@ -258,7 +258,7 @@ that the application automatically redirects you to the login page.
 And that's it! It looks too simple to be truth. Let's go back a bit to explain what
 happened. The ``beforeFilter`` function is telling the AuthComponent to not require a
 login for the ``add`` action in addition to the ``index`` and ``view`` actions that were
-already allowed int the AppController's ``beforeFilter`` function.
+already allowed in the AppController's ``beforeFilter`` function.
 
 The ``login`` action calls the ``$this->Auth->login()`` function in the AuthComponent,
 and it works without any further config because we are following conventions as
@@ -270,12 +270,12 @@ adding the AuthComponent to our application.
 
 The logout works by just accessing the ``/users/logout`` url and will redirect
 the user to the configured logoutUrl formerly described. This url is the result
-of the ``AuthComponent::logout()`` function on success
+of the ``AuthComponent::logout()`` function on success.
 
 Authorization (who's allowed to access what)
 ============================================
 
-As stated before, we are converting this blog in a multi user authoring tool,
+As stated before, we are converting this blog into a multi-user authoring tool,
 and in order to do this, we need to modify the posts table a bit to add the
 reference to the User model::
 
@@ -300,10 +300,11 @@ The ``user()`` function provided by the component returns any column from the
 currently logged in user. We used this method to add the data into the request
 info that is saved.
 
-Let's secure our app to prevent some authors to edit or delete the others' posts.
-Basic rules for our app are that admin users can access every url, while normal
-users (the author role) can only access the permitted actions.
-Open again the AppController class and add a few more options to the Auth config::
+Let's secure our app to prevent some authors from editing or deleting the
+others' posts. Basic rules for our app are that admin users can access every
+url, while normal users (the author role) can only access the permitted actions.
+Open again the AppController class and add a few more options to the Auth
+config::
 
     <?php
     // app/Controller/AppController.php
@@ -332,7 +333,7 @@ with role ``admin`` will be able to access any url in the site when logged in,
 but the rest of them (i.e the role ``author``) can't do anything different from
 not logged in users.
 
-This is not exactly what we wanted, so we need to fix to supply more rules to
+This is not exactly what we wanted, so we need to supply more rules to
 our ``isAuthorized()`` method. But instead of doing it in AppController, let's
 delegate each controller to supply those extra rules. The rules we're going to
 add to PostsController should allow authors to create posts but prevent the
@@ -376,11 +377,11 @@ logic as possible into models. Let's then implement the function::
 
 
 This concludes our simple authentication and authorization tutorial. For securing
-the UsersController you can follow the same technique we did for PostsController,
-you could also be more creative and code something more general in AppController based
+the UsersController you can follow the same technique we did for PostsController.
+You could also be more creative and code something more general in AppController based
 on your own rules.
 
-Should you need more control, we suggest you reading the complete Auth guide in the
+Should you need more control, we suggest you read the complete Auth guide in the
 :doc:`/core-libraries/components/authentication` section where you will find more
 about configuring the component, creating custom Authorization classes, and much more.
 
