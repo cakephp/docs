@@ -63,7 +63,7 @@ structure works: check out
 Creating the Blog Database
 ==========================
 
-Next, lets set up the underlying database for our blog. if you
+Next, let's set up the underlying database for our blog. if you
 haven't already done so, create an empty database for use in this
 tutorial, with a name of your choice. Right now, we'll just create
 a single table to store our posts. We'll also throw in a few posts
@@ -186,7 +186,7 @@ informed by a warning while not in production mode.
 A Note on mod\_rewrite
 ======================
 
-Occasionally a new user will run in to mod\_rewrite issues, so I'll
+Occasionally a new user will run into mod\_rewrite issues, so I'll
 mention them marginally here. If the CakePHP welcome page looks a
 little funny (no images or css styles), it probably means
 mod\_rewrite isn't functioning on your system. Here are some tips
