@@ -37,21 +37,21 @@ Assuming you are paginating some posts, and are on page one::
     <?php
     echo $this->Paginator->sort('user_id');
     // creates
-    <a href="/posts/index/page:1/sort:user_id/dir:asc/">User Id</a>
+    <a href="/posts/index/page:1/sort:user_id/direction:asc/">User Id</a>
 
 You can use the title parameter to create custom text for your link::
 
     <?php
     echo $this->Paginator->sort('user_id', 'User account');
     // creates
-    <a href="/posts/index/page:1/sort:user_id/dir:asc/">User account</a>
+    <a href="/posts/index/page:1/sort:user_id/direction:asc/">User account</a>
 
 If you are using HTML like images in your links remember to set escaping off::
 
     <?php
     echo $this->Paginator->sort('user_id', '<em>User account</em>', array('escape' => false));
     // creates
-    <a href="/posts/index/page:1/sort:user_id/dir:asc/"><em>User account</em></a>
+    <a href="/posts/index/page:1/sort:user_id/direction:asc/"><em>User account</em></a>
 
 The direction option can be used to set the default direction for a link.  Once a
 link is active, it will automatically switch directions like normal::
@@ -59,7 +59,7 @@ link is active, it will automatically switch directions like normal::
     <?php
     echo $this->Paginator->sort('user_id', null, array('direction' => 'desc'));
     // creates
-    <a href="/posts/index/page:1/sort:user_id/dir:desc/">User Id</a>
+    <a href="/posts/index/page:1/sort:user_id/direction:desc/">User Id</a>
 
 .. php:method:: sortDir(string $model = null, mixed $options = array())
 
