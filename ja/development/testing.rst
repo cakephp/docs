@@ -665,16 +665,15 @@ CakePHPのテストスイートはテストの独立性を確保するため、�
         }
     }
 
-This example shows a few of the ways you can use testAction to test your
-controllers.  The first parameter of ``testAction`` should always be the URL you
-want to test.  CakePHP will create a request and dispatch the controller and
-action.
+この例はコントローラーのテストにtestActionを使う方法のいくつかを示しています。
+``testAction`` の第１引数は常にテストするURLを取ります。CakePHPはリクエストを作成し、
+コントローラーとアクションにディスパッチします。
 
-When testing actions that contain ``redirect()`` and other code following the
-redirect it is generally a good idea to return when redirecting.  The reason for
-this, is that ``redirect()`` is mocked in testing, and does not exit like
-normal.  And instead of your code exiting, it will continue to run code following
-the redirect.  For example::
+``redirect()`` を含むアクションやリダイレクトに従う他のコードをテストするときは、
+リダイレクトの際returnすることは通常良い考えです。
+この理由はテスト中、 ``redirect()`` がmockされており、通常通り終了しないからです。
+そしてあなたのコードを終了する代わりに、リダイレクトを追跡して実行を継続します。
+例を示します。::
 
     <?php
     class ArticlesController extends AppController {
@@ -690,6 +689,8 @@ the redirect.  For example::
 
 When testing the above code, you will still run ``// more code`` even when the
 redirect is reached.  Instead, you should write the code like::
+上記のコードをテストすると、リダイレクトに到達したにもかかわらず ``// more code`` が
+実行されるでしょう。代わりに、このようなコードを書くべきです。::
 
     <?php
     class ArticlesController extends AppController {
@@ -703,8 +704,7 @@ redirect is reached.  Instead, you should write the code like::
         }
     }
 
-In this case ``// more code`` will not be executed as the method will return
-once the redirect is reached.
+この例ではメソッドがリダイレクトに到達した際にreturnするので、 ``// more code`` は実行されません。
 
 GETリクエストのシミュレート
 -----------------------
@@ -853,8 +853,8 @@ following::
             ->will($this->returnValue(2));
     }
 
-By using ``staticExpects`` you will be able to mock and manipulate static
-methods on components and models.
+``staticExpects`` を使うことにより、コンポーネントやモデルの静的メソッドをモック、
+操作することができるようになります。
 
 JSONを返すコントローラーのテスト
 -----------------------
@@ -890,10 +890,10 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 コンポーネントのテスト
 ===============
 
-Lets pretend we have a component called PagematronComponent in our application. 
-This component helps us set the pagination limit value across all the 
-controllers that use it. Here is our example component located in 
-``app/Controller/Component/PagematronComponent.php``::
+``PagematronComponent`` というコンポーネントがアプリケーションにあったとしましょう。
+このコンポーネントは、このコンポーネントを使用している全てのコントローラーにおいて、
+ページネーションの limit 値を設定する手助けをします。例としてコンポーネントが、
+``app/Controller/Component/PagematronComponent.php`` にあったとします。::
 
     <?php
     class PagematronComponent extends Component {
@@ -923,9 +923,9 @@ controllers that use it. Here is our example component located in
         }
     }
 
-Now we can write tests to ensure our paginate ``limit`` parameter is being 
-set correctly by the ``adjust`` method in our component. We create the file 
-``app/Test/Case/Controller/Component/PagematronComponentTest.php``::
+ページネーションの limit 値がコンポーネントの ``adjust`` メソッドによって
+正しく設定されているかテストを書くことができます。このように
+``app/Test/Case/Controller/Component/PagematronComponentTest.php`` というファイルを作成します。::
 
     <?php
     App::uses('Controller', 'Controller');
@@ -979,12 +979,11 @@ set correctly by the ``adjust`` method in our component. We create the file
 
 Since a decent amount of logic resides in Helper classes, it's
 important to make sure those classes are covered by test cases.
+ヘルパークラスも適切な量のロジックが構築されているので、
+これらのクラスがテストケースによってカバーされているか確認することは重要です。
 
-First we create an example helper to test. The ``CurrencyRendererHelper`` will 
-help us display currencies in our views and for simplicity only has one method 
-``usd()``.
-
-::
+はじめに、テストのための例として、ヘルパーを作成します。 ``CurrencyRendererHelper`` は、
+ビューで通貨の表示を補助するための、 ``usd()`` という唯一の単純なメソッドを持っています。::
 
     <?php
     // app/View/Helper/CurrencyRendererHelper.php
@@ -994,10 +993,10 @@ help us display currencies in our views and for simplicity only has one method
         }
     }
 
-Here we set the decimal places to 2, decimal separator to dot, thousands
-separator to comma, and prefix the formatted number with 'USD' string.
+このメソッドは、小数点以下2桁を表示し、小数点としてドット、3桁ごとの区切りとして
+カンマを使用するフォーマットで数字を表し、さらに'USD'という文字列を数字の先頭に置きます。
 
-Now we create our tests::
+それではテストを作成します。::
 
     <?php
     // app/Test/Case/View/Helper/CurrencyRendererHelperTest.php
@@ -1030,11 +1029,11 @@ Now we create our tests::
         }
     }
 
-Here, we call ``usd()`` with different parameters and tell the test suite to
-check if the returned values are equal to what is expected.
+ここで、 ``usd()`` を異なるパラメータで呼び出すことで、このテストスイートは
+期待した値と同じ値を返しているかを確かめています。
 
-Save this in and execute the test. You should see a green bar and messaging 
-indicating 1 pass and 4 assertions.
+ファイルに保存しテストを実行します。これにより、グリーンバーと
+1つのテスト、4つのアサーションに成功したことを指し示すメッセージを見ることができるでしょう。
 
 テストスイートの作成
 ==============
