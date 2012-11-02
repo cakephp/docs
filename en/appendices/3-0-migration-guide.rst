@@ -57,6 +57,8 @@ Log
 * You can no longer invent custom log levels.  You must use the default set of
   log levels.  You should use logging scopes to create custom log files or
   specific handling for different sections of your application.
+* ``Cake\\Log\\LogTrait`` was added. You can use this trait in your classes to
+  add the ``log()`` method.
 
 
 Routing
