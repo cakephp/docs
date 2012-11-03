@@ -308,12 +308,29 @@ Log adapter interface
 
 .. php:interface:: LogInterface
 
-    This interface is required for logging adapters.
+    This interface is required for logging adapters. When creating a new logging
+    adapter you'll need to implement this interface.
 
 .. php:method:: write($type, $message)
 
     Write a message to the log storage system. ``$type`` will be the level of
     the log message.  ``$message`` will be the content of the log message.
+
+Logging Trait
+=============
+
+.. php:trait:: LogTrait
+
+    A trait that provides shortcut methods for logging
+
+    .. versionadded:: 3.0
+
+.. php:method:: log($msg, $type = LOG_ERR)
+
+    Log a message to the logs.  By default messages are logged as
+    ERROR messages.  If ``$msg`` isn't isn't a string it will be converted with
+    ``print_r`` before being logged.
+
 
 .. meta::
     :title lang=en: Logging

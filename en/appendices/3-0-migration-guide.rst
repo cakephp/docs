@@ -57,7 +57,7 @@ Log
 * You can no longer invent custom log levels.  You must use the default set of
   log levels.  You should use logging scopes to create custom log files or
   specific handling for different sections of your application.
-* ``Cake\\Log\\LogTrait`` was added. You can use this trait in your classes to
+* :php:trait:`Cake\\Log\\LogTrait` was added. You can use this trait in your classes to
   add the ``log()`` method.
 
 
@@ -173,6 +173,8 @@ Object
 
     - ``options[url]`` is now ``options[query]``.
     - ``options[data]`` is now ``options[post]``.
+
+- ``Object::log()`` was removed from Object and added to the :php:trait:`LogTrait` class.
 
 I18n
 ====
