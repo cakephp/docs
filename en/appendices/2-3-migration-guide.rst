@@ -101,12 +101,13 @@ Model
 - Support for ``FULLTEXT`` indexes was added for the MySQL driver.
 
 
-Model
+Models
 -----
 
 - ``Model::find('list')`` now sets the ``recursive`` based on the max
   containment depth or recursive value.  When list is used with
   ContainableBehavior.
+- ``Model::find('first')`` will now return an empty array when no records are found.
 
 Validation
 ----------
