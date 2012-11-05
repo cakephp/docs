@@ -160,6 +160,8 @@ View
   be used to provide a default value should a block be empty.
 - :php:meth:`View::prepend()` has been added to allow prepending content to
   existing block.
+- :php:class:`XmlView` now uses the ``_rootNode`` view variable to customize the
+  top level XML node.
 
 Helpers
 =======
