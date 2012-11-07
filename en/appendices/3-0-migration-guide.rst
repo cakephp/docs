@@ -70,6 +70,7 @@ Named Parameters
 Named parameters were removed in 3.0.0.  Named parameters were added in 1.2.0 as
 a 'pretty' version of query string parameters.  While the visual benefit is
 arguable, the problems named parameters created are not.
+
 Named parameters required special handling both in CakePHP as well as any PHP or
 javascript library that needed to interact with them, as named parameters are
 not implemented or understood by any library *except* CakePHP.  The additional
@@ -79,9 +80,18 @@ query string parameters or passed arguments.  By default ``Router`` will treat
 any additional parameters to ``Router::url()`` as querystring arguments.
 
 Since many applications will still need to parse incoming URL's containing named
-parameters.  ``Router::parseNamedParams()`` has been added to allow backwards
-compatiblity with existing URL's.
+parameters.  :php:meth:`Cake\\Routing\\Router::parseNamedParams()` has 
+been added to allow backwards compatiblity with existing URL's.
 
+
+RequestActionTrait
+------------------
+
+- :php:meth:`Cake\\Routing\\RequestActionTrait::requestAction()` has had
+  some of the extra options changed:
+
+    - ``options[url]`` is now ``options[query]``.
+    - ``options[data]`` is now ``options[post]``.
 
 Router
 ------
@@ -96,24 +106,18 @@ Router
 * Route classes are responsible for *all* url generation including
   query string parameters. This makes routes far more powerful and flexible.
 * Persistent parameters were removed. They were replaced with
-  :php:meth:`Router::urlFilter()` which allows a more flexible way to mutate
-  urls being reverse routed.
-* Calling `Router::parseExtensions()` with no parameters no longer parses all
-  extensions.  You need to whitelist the extensions your application supports.
+  :php:meth:`Cake\\Routing\\Router::urlFilter()` which allows 
+  a more flexible way to mutate urls being reverse routed.
+* Calling :php:meth:`Cake\\Routing\\Router::parseExtensions()` with no
+  parameters no longer parses all extensions.  You need to
+  whitelist the extensions your application supports.
 
 Route
 -----
 
 * ``CakeRoute`` was re-named to ``Route``.
-* :php:meth:`Request::port()` was added.
-* :php:meth:`Request::scheme()` was added.
-* :php:meth:`Request::cookie()` was added.
-* :php:attr:`Request::$trustProxy` was added.  This makes it easier to put
-  CakePHP applications behind load balancers.
-* :php:attr:`Request::$data` is no longer merged with the prefixed data 
-  key, as that prefix has been removed.
 * The signature of ``match()`` has changed to ``match($url, $context = array())``
-  See :php:meth:`CakeRoute::match()` for information on the new signature.
+  See :php:meth:`Cake\\Routing\\Route::match()` for information on the new signature.
 
 Filter\AssetFilter
 ------------------
@@ -124,6 +128,21 @@ Filter\AssetFilter
   short_tags enabled.
 * Support for the ``Asset.filter`` configuration and hooks were removed. This
   feature can easily be replaced with a plugin or dispatcher filter.
+
+Network
+=======
+
+Request
+-------
+
+* ``CakeRequest`` was renamed to :php:class:`Cake\\Network\\Request`.
+* :php:meth:`Cake\\Network\\Request::port()` was added.
+* :php:meth:`Cake\\Network\\Request::scheme()` was added.
+* :php:meth:`Cake\\Network\\Request::cookie()` was added.
+* :php:attr:`Cake\\Network\\Request::$trustProxy` was added.  This makes it easier to put
+  CakePHP applications behind load balancers.
+* :php:attr:`Cake\\Network\\Request::$data` is no longer merged with the prefixed data 
+  key, as that prefix has been removed.
 
 Controller
 ==========
@@ -169,12 +188,9 @@ Core
 Object
 ------
 
-- :php:meth:`Object::requestAction()` has had some of the extra options changed:
-
-    - ``options[url]`` is now ``options[query]``.
-    - ``options[data]`` is now ``options[post]``.
-
-- ``Object::log()`` was removed from Object and added to the :php:trait:`LogTrait` class.
+- ``Object::log()`` was removed from Object and added to the :php:trait:`Cake\\Log\\LogTrait` class.
+- ``Object::requestAction()`` was removed from Object and added to the
+  :php:trait:`Cake\\Routing\\RequestActionTrait`.
 
 I18n
 ====

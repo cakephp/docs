@@ -139,7 +139,8 @@ following techniques will by-pass the default view rendering behavior.
 * You can return a :php:class:`CakeResponse` object with the completely created
   response.
 
-When controller methods are used with :php:meth:`~Controller::requestAction()`
+When controller methods are used with
+:php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()`
 you will often want to return data that isn't a string.  If you have controller
 methods that are used for normal web requests + requestAction you should check
 the request type before returning::
@@ -535,118 +536,11 @@ Other Useful Methods
     :doc:`pagination <core-libraries/components/pagination>` section for more details on
     how to use paginate.
 
-.. php:method:: requestAction(string $url, array $options)
+.. php:method:: requestAction($url, $options)
 
-    This function calls a controller's action from any location and
-    returns data from the action. The ``$url`` passed is a
-    CakePHP-relative URL (/controllername/actionname/params). To pass
-    extra data to the receiving controller action add to the $options
-    array.
-
-    .. note::
-
-        You can use ``requestAction()`` to retrieve a fully rendered view
-        by passing 'return' in the options:
-        ``requestAction($url, array('return'));``. It is important to note
-        that making a requestAction using 'return' from a controller method
-        can cause script and css tags to not work correctly.
-
-    .. warning::
-
-        If used without caching ``requestAction`` can lead to poor
-        performance. It is rarely appropriate to use in a controller or
-        model.
-
-    ``requestAction`` is best used in conjunction with (cached)
-    elements – as a way to fetch data for an element before rendering.
-    Let's use the example of putting a "latest comments" element in the
-    layout. First we need to create a controller function that will
-    return the data::
-
-        <?php
-        // Controller/CommentsController.php
-        class CommentsController extends AppController {
-            public function latest() {
-                if (!$this->request->is('requested')) {
-                    throw new ForbiddenException();
-                }
-                return $this->Comment->find('all', array('order' => 'Comment.created DESC', 'limit' => 10));
-            }
-        }
-
-    You should always include checks to make sure your requestAction methods are
-    actually originating from ``requestAction``.  Failing to do so will allow
-    requestAction methods to be directly accessible from a URL, which is
-    generally undesirable.
-
-    If we now create a simple element to call that function::
-
-        <?php
-        // View/Elements/latest_comments.ctp
-
-        $comments = $this->requestAction('/comments/latest');
-        foreach ($comments as $comment) {
-            echo $comment['Comment']['title'];
-        }
-
-    We can then place that element anywhere to get the output
-    using::
-
-        <?php
-        echo $this->element('latest_comments');
-
-    Written in this way, whenever the element is rendered, a request
-    will be made to the controller to get the data, the data will be
-    processed, and returned. However in accordance with the warning
-    above it's best to make use of element caching to prevent needless
-    processing. By modifying the call to element to look like this::
-
-        <?php
-        echo $this->element('latest_comments', array('cache' => '+1 hour'));
-
-    The ``requestAction`` call will not be made while the cached
-    element view file exists and is valid.
-
-    In addition, requestAction now takes array based cake style urls::
-
-        <?php
-        echo $this->requestAction(
-            array('controller' => 'articles', 'action' => 'featured'),
-            array('return')
-        );
-
-    This allows the requestAction call to bypass the usage of
-    Router::url which can increase performance. The url based arrays
-    are the same as the ones that :php:meth:`HtmlHelper::link()` uses with one
-    difference - if you are using passed parameters, you must put them
-    in a second array and wrap them with the correct key. This is because
-    requestAction merges the extra parameters (requestAction's 2nd parameter)
-    with the ``request->params`` member array and does not explicitly place them
-    under the ``pass`` key. Any additional keys in the ``$option`` array will 
-    be made available in the requested action's ``request->params`` property::
-        
-        <?php
-        echo $this->requestAction('/articles/view/5');
-
-    As an array in the requestAction would then be::
-
-        <?php
-        echo $this->requestAction(
-            array('controller' => 'articles', 'action' => 'view'),
-            array('pass' => array(5))
-        );
-
-    .. note::
-
-        Unlike other places where array urls are analogous to string urls,
-        requestAction treats them differently.
-
-    When using an array url in conjunction with requestAction() you
-    must specify **all** parameters that you will need in the requested
-    action. This includes parameters like ``$this->request->data``.  In addition
-    to passing all required parameters, passed arguments must be done
-    in the second array as seen above.
-
+    See the documentation for
+    :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()` for more
+    information.
 
 .. php:method:: loadModel(string $modelClass, mixed $id)
 

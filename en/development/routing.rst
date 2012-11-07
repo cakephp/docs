@@ -30,7 +30,7 @@ save having to check a number of routes that won't match on each request.
 Routes are parsed and matched in the order they are connected in.
 If you define two similar routes, the first defined route will
 have higher priority over the one defined latter.  After connecting routes you
-can manipulate the order of routes using :php:meth:`Router::promote()`.
+can manipulate the order of routes using :php:meth:`Cake\\Routing\\Router::promote()`.
 
 CakePHP comes with a few default routes to get you started. These
 can be disabled later on once you are sure you don't need them.
@@ -85,7 +85,7 @@ Connecting Routes
 
 Defining your own routes allows you to define how your application
 will respond to a given URL. Define your own routes in the
-``app/Config/routes.php`` file using the :php:meth:`Router::connect()`
+``app/Config/routes.php`` file using the :php:meth:`Cake\\Routing\\Router::connect()`
 method.
 
 The ``connect()`` method takes up to three parameters: the URL you
@@ -143,7 +143,7 @@ included a ``/`` in it::
 The incoming URL of ``/pages/the-example-/-and-proof`` would result in a single
 passed argument of ``the-example-/-and-proof``.
 
-You can use the second parameter of :php:meth:`Router::connect()`
+You can use the second parameter of :php:meth:`Cake\\Routing\\Router::connect()`
 to provide any routing parameters that are composed of the default values
 of the route::
 
@@ -306,7 +306,7 @@ Passing parameters to action
 
 When connecting routes using :ref:`route-elements` you may want
 to have routed elements be passed arguments instead.  By using the 3rd
-argument of :php:meth:`Router::connect()` you can define which route
+argument of :php:meth:`Cake\\Routing\\Router::connect()` you can define which route
 elements should also be made available as passed arguments::
 
     <?php
@@ -669,7 +669,7 @@ Custom Route classes
 
 Custom route classes allow you to extend and change how individual
 routes parse requests and handle reverse routing. A route class
-should extend :php:class:`CakeRoute` and implement one or both of
+should extend :php:class:`Cake\\Routing\\Route` and implement one or both of
 ``match()`` and/or ``parse()``. ``parse()`` is used to parse requests and
 ``match()`` is used to handle reverse routing.
 
@@ -710,6 +710,8 @@ named parameter, will be removed from the list of passed arguments.
 
 Router API
 ==========
+
+.. php:namespace:: Cake\Routing
 
 .. php:class:: Router
 
@@ -828,13 +830,13 @@ Router API
 .. php:staticmethod:: setExtensions($extensions, $merge = true)
 
     Set or add valid extensions. To have the extensions parsed, you are still
-    required to call :php:meth:`Router::parseExtensions()`.
+    required to call :php:meth:`Cake\\Routing\\Router::parseExtensions()`.
 
 .. php:staticmethod:: defaultRouteClass($classname)
 
     Set the default route to be used when connecting routes in the future.
 
-.. php:class:: CakeRoute
+.. php:class:: Route
 
     The base class for custom routes to be based on.
 
@@ -865,6 +867,132 @@ Router API
 .. php:method:: compile()
 
     Force a route to compile its regular expression.
+
+
+.. php:trait:: RequestActionTrait
+
+    This trait allows classes which include it to create sub-requests or
+    request actions.
+
+.. php:method:: requestAction(string $url, array $options)
+
+    This function calls a controller's action from any location and
+    returns data from the action. The ``$url`` passed is a
+    CakePHP-relative URL (/controllername/actionname/params). To pass
+    extra data to the receiving controller action add to the $options
+    array.
+
+    .. note::
+
+        You can use ``requestAction()`` to retrieve a fully rendered view
+        by passing 'return' in the options:
+        ``requestAction($url, array('return'));``. It is important to note
+        that making a requestAction using 'return' from a controller method
+        can cause script and css tags to not work correctly.
+
+    .. warning::
+
+        If used without caching ``requestAction`` can lead to poor
+        performance. It is seldom appropriate to use in a controller.
+
+    ``requestAction`` is best used in conjunction with (cached)
+    elements – as a way to fetch data for an element before rendering.
+    Let's use the example of putting a "latest comments" element in the
+    layout. First we need to create a controller function that will
+    return the data::
+
+        <?php
+        // Controller/CommentsController.php
+        class CommentsController extends AppController {
+            public function latest() {
+                if (!$this->request->is('requested')) {
+                    throw new ForbiddenException();
+                }
+                return $this->Comment->find('all', array('order' => 'Comment.created DESC', 'limit' => 10));
+            }
+        }
+
+    You should always include checks to make sure your requestAction methods are
+    actually originating from ``requestAction``.  Failing to do so will allow
+    requestAction methods to be directly accessible from a URL, which is
+    generally undesirable.
+
+    If we now create a simple element to call that function::
+
+        <?php
+        // View/Elements/latest_comments.ctp
+
+        $comments = $this->requestAction('/comments/latest');
+        foreach ($comments as $comment) {
+            echo $comment['Comment']['title'];
+        }
+
+    We can then place that element anywhere to get the output
+    using::
+
+        <?php
+        echo $this->element('latest_comments');
+
+    Written in this way, whenever the element is rendered, a request
+    will be made to the controller to get the data, the data will be
+    processed, and returned. However in accordance with the warning
+    above it's best to make use of element caching to prevent needless
+    processing. By modifying the call to element to look like this::
+
+        <?php
+        echo $this->element('latest_comments', array('cache' => '+1 hour'));
+
+    The ``requestAction`` call will not be made while the cached
+    element view file exists and is valid.
+
+    In addition, requestAction now takes array based cake style urls::
+
+        <?php
+        echo $this->requestAction(
+            array('controller' => 'articles', 'action' => 'featured'),
+            array('return')
+        );
+
+    The url based array are the same as the ones that :php:meth:`HtmlHelper::link()`
+    uses with one difference - if you are using passed parameters, you must put them
+    in a second array and wrap them with the correct key. This is because
+    requestAction merges the extra parameters (requestAction's 2nd parameter)
+    with the ``request->params`` member array and does not explicitly place them
+    under the ``pass`` key. Any additional keys in the ``$option`` array will
+    be made available in the requested action's ``request->params`` property::
+
+        <?php
+        echo $this->requestAction('/articles/view/5');
+
+    As an array in the requestAction would then be::
+
+        <?php
+        echo $this->requestAction(
+            ['controller' => 'articles', 'action' => 'view'],
+            ['pass' => [5]]
+        );
+
+    You can also pass querystring arguments, post data or cookies using the
+    appropriate keys. Cookies can be passed using the ``cookies`` key.
+    Get parameters can be set with ``query`` and post data can be sent
+    using the ``post`` key::
+
+        <?php
+        $vars = $this->requestAction('/articles/popular', [
+          'query' => ['page' = > 1],
+          'cookies' => ['remember_me' => 1],
+        ]);
+
+    .. note::
+
+        Unlike other places where array urls are analogous to string urls,
+        requestAction treats them differently.
+
+    When using an array url in conjunction with requestAction() you
+    must specify **all** parameters that you will need in the requested
+    action. This includes parameters like ``$this->request->data``.  In addition
+    to passing all required parameters, passed arguments must be done
+    in the second array as seen above.
 
 
 .. meta::

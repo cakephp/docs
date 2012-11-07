@@ -859,8 +859,8 @@ Shell API
 
 .. php:method:: dispatchShell()
 
-    Dispatch a command to another Shell. Similar to 
-    :php:meth:`Controller::requestAction()` but intended for running shells 
+    Dispatch a command to another Shell. Similar to
+    :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()` but intended for running shells 
     from other shells.
 
     See :ref:`invoking-other-shells-from-your-shell`.
