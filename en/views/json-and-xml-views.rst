@@ -104,7 +104,14 @@ well.
 .. php:class:: XmlView
 
     A view class for generating Xml view data.  See above for how you can use
-    XmlView in your application
+    XmlView in your application.
+
+    By default when using ``_serialize`` the XmlView will wrap your serialized
+    view variables with a ``<response>`` node. You can set a custom name for
+    this node using the ``_rootNode`` view variable.
+
+    .. versionadded:: 2.3
+        The ``_rootNode`` feature was added.
 
 .. php:class:: JsonView
 

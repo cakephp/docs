@@ -40,7 +40,7 @@ En considérant que vous paginez des posts, qu'ils sont sur la page un::
     <?php
     echo $this->Paginator->sort('id_utilisateur');
     // créé
-    <a href="/posts/index/page:1/sort:id_utilisateur/dir:asc/">User Id</a>
+    <a href="/posts/index/page:1/sort:id_utilisateur/direction:asc/">User Id</a>
 
 Vous pouvez utiliser le paramètre titre pour créer des textes personnalisés 
 pour votre lien::
@@ -48,7 +48,7 @@ pour votre lien::
     <?php
     echo $this->Paginator->sort('id_utilisateur', 'Compte utilisateur');
     // creates
-    <a href="/posts/index/page:1/sort:id_utilisateur/dir:asc/">Compte utilisateur</a>
+    <a href="/posts/index/page:1/sort:id_utilisateur/direction:asc/">Compte utilisateur</a>
 
 Si vous utilisez du html comme des images dans vos liens rappelez-vous de 
 paramétrer l'échappement à off::
@@ -56,7 +56,7 @@ paramétrer l'échappement à off::
     <?php
     echo $this->Paginator->sort('id_utilisateur', '<em>Compte utilisateur</em>', array('escape' => false));
     // creates
-    <a href="/posts/index/page:1/sort:id_utilisateur/dir:asc/"><em>Compte utilisateur</em></a>
+    <a href="/posts/index/page:1/sort:id_utilisateur/direction:asc/"><em>Compte utilisateur</em></a>
 
 L'option de direction peut être utilisés pour paramétrer la direction par 
 défaut pour un lien. Une fois qu'un lien est activé, il changera 
@@ -65,7 +65,7 @@ automatiquement de direction comme normalement::
     <?php
     echo $this->Paginator->sort('id_utilisateur', null, array('direction' => 'desc'));
     // créé
-    <a href="/posts/index/page:1/sort:id_utilisateur/dir:desc/">Id Utilisateur</a>
+    <a href="/posts/index/page:1/sort:id_utilisateur/direction:desc/">Id Utilisateur</a>
 
 .. php:method:: sortDir(string $model = null, mixed $options = array())
 

@@ -21,7 +21,6 @@ Model definition, for example::
 
     <?php
     class User extends AppModel {
-        public $name = 'User';
         public $validate = array();
     }
 
@@ -33,7 +32,6 @@ those fields::
 
     <?php
     class User extends AppModel {
-        public $name = 'User';
         public $validate = array(
             'login' => 'alphaNumeric',
             'email' => 'email',
@@ -58,7 +56,6 @@ some of these built-in validation rules::
 
     <?php
     class User extends AppModel {
-        public $name = 'User';
         public $validate = array(
             'login' => array(
                 'alphaNumeric' => array(
@@ -320,7 +317,7 @@ last
 In case of multiple rules per field by default if a particular rule
 fails error message for that rule is returned and the following rules
 for that field are not processed. If you want validation to continue
-in spite of a rule failing set key ``last`` to ``false`` for that rule. 
+in spite of a rule failing set key ``last`` to ``false`` for that rule.
 
 In the following example even if "rule1" fails "rule2" will be processed
 and error messages for both failing rules will be returned if "rule2" also
@@ -353,7 +350,7 @@ providing the ``message`` key. Consider this example::
         )
     );
 
-If the ``alphNumeric`` rules fails the array key for this rule 
+If the ``alphaNumeric`` rules fails the array key for this rule
 'Only alphabets and numbers allowed' will be returned as error message since
 the ``message`` key is not set.
 
@@ -398,7 +395,6 @@ function, as shown below::
 
     <?php
     class User extends AppModel {
-        public $name = 'User';
 
         public $validate = array(
             'promotion_code' => array(
@@ -444,7 +440,6 @@ stored in $this->data member variable::
 
     <?php
     class Post extends AppModel {
-        public $name = 'Post';
 
         public $validate = array(
             'slug' => array(
@@ -1260,6 +1255,48 @@ with usage examples.
 
     Checks that a value is a valid uuid: http://tools.ietf.org/html/rfc4122
 
+
+Localized Validation
+====================
+
+The validation rules phone() and postal() will pass off any country prefix
+they do not know how to handle to another class with the appropriate name. For
+example if you lived in the Netherlands you would create a class like::
+
+    <?php
+    class NlValidation {
+        public static function phone($check) {
+            // ...
+        }
+        public static function postal($check) {
+            // ...
+        }
+    }
+
+This file could be placed in ``APP/Validation/`` or
+``App/PluginName/Validation/``, but must be imported via App::uses() before
+attempting to use it. In your model validation you could use your NlValidation
+class by doing the following::
+
+    <?php
+    public $validate = array(
+        'phone_no' => array('rule' => array('phone', null, 'nl')),
+        'postal_code' => array('rule' => array('postal', null, 'nl')),
+    );
+
+When your model data is validated, Validation will see that it cannot handle
+the ``nl`` locale and will attempt to delegate out to
+``NlValidation::postal()`` and the return of that method will be used as the
+pass/fail for the validation. This approach allows you to create classes that
+handle a subset or group of locales, something that a large switch would not
+have. The usage of the individual validation methods has not changed, the
+ability to pass off to another validator has been added.
+
+.. tip::
+
+    The Localized Plugin already contains a lot of rules ready to use:
+    https://github.com/cakephp/localized
+    Also feel free to contribute with your localized validation rules.
 
 .. toctree::
 

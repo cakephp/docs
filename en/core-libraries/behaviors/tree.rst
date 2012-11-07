@@ -58,7 +58,7 @@ data in it::
         name VARCHAR(255) DEFAULT '',
         PRIMARY KEY  (id)
     );
-    
+
     INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(1, 'My Categories', NULL, 1, 30);
     INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(2, 'Fun', 1, 2, 15);
     INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(3, 'Sport', 2, 3, 8);
@@ -81,11 +81,10 @@ tree to see what it looks like. With a simple controller::
 
     <?php
     class CategoriesController extends AppController {
-        public $name = 'Categories';
 
         public function index() {
             $data = $this->Category->generateTreeList(null, null, null, '&nbsp;&nbsp;&nbsp;');
-            debug($data); die;       
+            debug($data); die;
         }
     }
 
@@ -94,7 +93,6 @@ and an even simpler model definition::
     <?php
     // app/Model/Category.php
     class Category extends AppModel {
-        public $name = 'Category';
         public $actsAs = array('Tree');
     }
 
@@ -103,29 +101,29 @@ We can check what our category tree data looks like by visiting
 
 
 -  My Categories
-   
+
    -  Fun
-      
+
       -  Sport
-         
+
          -  Surfing
          -  Extreme knitting
 
       -  Friends
-         
+
          -  Gerald
          -  Gwendolyn
 
 
    -  Work
-      
+
       -  Reports
-         
+
          -  Annual
          -  Status
 
       -  Trips
-         
+
          -  National
          -  International
 
@@ -162,30 +160,30 @@ follows:
 
 
 -  My Categories
-   
+
    -  Fun
-      
+
       -  Sport
-         
+
          -  Surfing
          -  Extreme knitting
          -  Skating **New**
 
       -  Friends
-         
+
          -  Gerald
          -  Gwendolyn
 
 
    -  Work
-      
+
       -  Reports
-         
+
          -  Annual
          -  Status
 
       -  Trips
-         
+
          -  National
          -  International
 
@@ -214,28 +212,28 @@ the tree of data would now look like:
 -  My Categories
 
 -  Fun
- 
+
  -  Sport
-    
+
     -  Surfing
     -  Extreme fishing **Updated**
     -  Skating
 
  -  Friends
-    
+
     -  Gerald
     -  Gwendolyn
 
 
 -  Work
- 
+
  -  Reports
-    
+
     -  Annual
     -  Status
 
  -  Trips
-    
+
     -  National
     -  International
 
@@ -258,36 +256,36 @@ As would be expected the structure would be modified to:
 
 
 -  My Categories
- 
+
  -  Fun
-    
+
     -  Sport
-       
+
        -  Surfing
        -  Skating
 
     -  Friends
-       
+
        -  Gerald
        -  Gwendolyn
 
 
  -  Work
-    
+
     -  Reports
-       
+
        -  Annual
        -  Status
 
     -  Trips
-       
+
        -  National
        -  International
 
 
 
 -  Other People's Categories
- 
+
  -  Extreme fishing **Moved**
 
 
@@ -309,33 +307,33 @@ The category tree would be modified as follows:
 
 
 -  My Categories
- 
+
  -  Fun
-    
+
     -  Sport
-       
+
        -  Surfing
        -  Skating
 
     -  Friends
-       
+
        -  Gerald
        -  Gwendolyn
 
 
  -  Work
-    
+
     -  Trips
-       
+
        -  National
        -  International
 
 
 
 -  Other People's Categories
- 
+
  -  Extreme fishing
- 
+
 
 Querying and using your data
 ----------------------------
@@ -355,7 +353,7 @@ are a few more tree-orientated permutations at your disposal.
 .. php:class:: TreeBehavior
 
     .. php:method:: children($id = null, $direct = false, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null)
-    
+
     :param $id: The ID of the record to look up
     :param $direct: Set to true to return only the direct descendants
     :param $fields: Single string field name or array of fields to include in the return
@@ -453,12 +451,12 @@ are a few more tree-orientated permutations at your disposal.
 
 
     -  My Categories
- 
+
      -  ...
      -  Work
-    
+
         -  Trips
-       
+
            -  ...
            -  International
 
@@ -506,11 +504,11 @@ Advanced Usage
             if (!$this->Category->exists()) {
                throw new NotFoundException(__('Invalid category'));
             }
-            
+
             if ($delta > 0) {
                 $this->Category->moveDown($this->Category->id, abs($delta));
             } else {
-                $this->Session->setFlash('Please provide the number of positions the field should be moved down.'); 
+                $this->Session->setFlash('Please provide the number of positions the field should be moved down.');
             }
 
             $this->redirect(array('action' => 'index'), null, true);
@@ -530,16 +528,16 @@ Advanced Usage
     Categories) that moves a node up the tree::
 
         <?php
-        public function moveup($id = null, $delta = null) {            
+        public function moveup($id = null, $delta = null) {
             $this->Category->id = $id;
             if (!$this->Category->exists()) {
                throw new NotFoundException(__('Invalid category'));
             }
-      
+
             if ($delta > 0) {
                 $this->Category->moveUp($this->Category->id, abs($delta));
             } else {
-                $this->Session->setFlash('Please provide a number of positions the category should be moved up.'); 
+                $this->Session->setFlash('Please provide a number of positions the category should be moved up.');
             }
 
             $this->redirect(array('action' => 'index'), null, true);
@@ -576,7 +574,7 @@ Advanced Usage
     Running the following code with the id for 'Sport'::
 
         <?php
-        $this->Node->removeFromTree($id); 
+        $this->Node->removeFromTree($id);
 
     The Sport node will be become a top level node:
 
@@ -599,7 +597,7 @@ Advanced Usage
     'Sport'::
 
         <?php
-        $this->Node->removeFromTree($id, true); 
+        $this->Node->removeFromTree($id, true);
 
     The tree would become
 

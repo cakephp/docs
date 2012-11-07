@@ -132,10 +132,10 @@ de catégories, en visitant /categories. Vous devriez voir quelque chose comme :
 Ajouter des données
 --------------------
 
-Dans la section précédente, nous avons utilisés des données existentes 
-et nous avons vérifier qu'elles semblaient hierarchique avec la méthode
+Dans la section précédente, nous avons utilisé des données existentes 
+et nous avons vérifié qu'elles semblaient hiérarchiques avec la méthode
 ``generateTreeList``. Toutefois vous devez ajouter vos données de
-la même manière que vous le feriez pour n'importe quel modèle. Par exemple ::
+la même manière que vous le feriez pour n'importe quel model. Par exemple ::
 
     <?php
     // pseudo controller code
@@ -150,14 +150,14 @@ Si vous ne définissez pas l'id du parent (parent\_id),
 Le behavior Tree additionnera vos nouveaux ajouts au sommet de l'arbre::
 
     <?php
-    // pseudo code de controller 
+    // pseudo code du controller 
     $data = array();
     $data['Category']['name'] =  'd\'autre catégories de gens';
     $this->Category->save($data);
 
-En executant les extraits de code suivant devrait modifier l'arbre comme suit:
+En exécutant les extraits de code suivant devrait modifier l'arbre comme suit:
 
--  Mes Catégorie
+-  Mes Catégories
 
    -  Fun
 
@@ -192,18 +192,18 @@ Modification des données
 ---------------------------
 
 La modification des données est aussi transparente que l'addition
-des données. Si vous modifiez quelque chose, mais ne changer pas
+des données. Si vous modifiez quelque chose, mais ne changez pas
 le champ de l\'ID du parent (parent\_id) - la structure de vos données 
 reste inchangée. Par exemple ::
 
     <?php
     // pseudo controller code
-    $this->Category->id = 5; // id de Tricot Extreme 
+    $this->Category->id = 5; // id du Tricot Extreme 
     $this->Category->save(array('name' => 'Pêche Extreme' ));
 
 Le code ci-dessus n'affecterait pas le champ de l\'id du parent (parent\_id) - 
 même si l\'id du parent (parent\_id) est incluse dans les données passées 
-à sauvegarder si les données ne changent pas,pas plus que la structure de 
+à sauvegarder si les données ne changent pas, pas plus que la structure de 
 données. Donc l\'arbre de données devrait maintenant ressembler à:
 
 -  Mes Catégories
@@ -236,11 +236,11 @@ données. Donc l\'arbre de données devrait maintenant ressembler à:
 - D'autres catégories de gens
 
 Déplacer les données autour de votre arbre est aussi une affaire simple.
-Supposons que Pêche Extreme n'appartient pas à Sport, mais devrait se 
-trouver plutôt sous "D'autre catégorie de gens". Avec le code suivant ::
+Supposons que Pêche Extreme n'appartienne pas à Sport, mais devrait se 
+trouver plutôt sous "D'autres catégories de gens". Avec le code suivant ::
 
     <?php
-    // pseudo controller code
+    // pseudo code du controller
     $this->Category->id = 5; // id de Pêche Extreme
     $newParentId = $this->Category->field('id', array('name' => 'D\'autre catégorie de gens'));
     $this->Category->save(array('parent_id' => $newParentId));
@@ -274,7 +274,7 @@ Comme on pouvait s'y attendre, la structure serait modifiée comme suit:
          -  International
 
 
-- D'autre catégorie de gens
+- D'autres catégories de gens
 
    -  Pêche Extreme **Deplacé**
 
@@ -282,18 +282,18 @@ Comme on pouvait s'y attendre, la structure serait modifiée comme suit:
 Effacement des données
 ----------------------
 
-Le behavior Tree fournit un certain nombre de façons de gérer la suppression de
+Le behavior Tree fournit un certain nombre de façons de gérer la suppression 
 des données. Pour commencer par le plus simple exemple, disons que la
 catégorie des rapports n'est plus utile. Pour l'enlever * et tous les enfants 
-qu'il peut avoir * il suffit d'appeler et supprimer comme vous le feriez pour n'importe 
-quel modèle. Par exemple, avec le code suivant ::
+qu'il peut avoir * il suffit d'appeler et supprimer comme vous le feriez pour 
+n'importe quel model. Par exemple, avec le code suivant ::
 
     <?php
-    // pseudo controller code
+    // pseudo code du controller
     $this->Category->id = 10;
     $this->Category->delete();
 
-L'arbre Catégorie serait modifié comme suit:
+L'arbre Catégorie serait modifiée comme suit:
 
 -  Mes Catégories
    
@@ -317,7 +317,7 @@ L'arbre Catégorie serait modifié comme suit:
          -  International
 
 
-- D'autre catégorie de gens
+- D'autres catégories de gens
 
     -  Pêche Extreme
  
@@ -346,14 +346,14 @@ de permutations en plus des méthodes find de bases.
       dans le retour
     :param $order: Chaine SQL des conditions ORDER BY 
     :param $limit: SQL LIMIT déclaration
-    :param $page: pour acceder au resultats paginés
+    :param $page: pour accéder aux resultats paginés
     :param $recursive: Nombre de niveau de profondeur pour la recursivité des 
-      modèles associés
+      models associés
     
-    La méthode ``children`` prends la clef primaire (l\'id d'une ligne) et 
+    La méthode ``children`` prends la clé primaire (l\'id d'une ligne) et 
     retourne l'enfant (children), par défaut dans l'ordre d\'apparition dans 
-    l'arbre. Le second paramètre optionnel definit si il faut ou si il ne 
-    faut pas retourner les enfants directs. En utilisant l'exemple de donnée 
+    l'arbre. Le second paramètre optionnel definit si il faut ou non 
+    retourner les enfants directs. En utilisant l'exemple des données 
     de la section précédente::
      
         <?php
@@ -372,10 +372,10 @@ de permutations en plus des méthodes find de bases.
     .. php:method:: childCount($id = null, $direct = false)
 
     Comme avec la méthode ``children``, ``childCount`` prends la valeur 
-    de la clef primaire (l\'id) d'une ligne et retourne combien d'enfant elle 
+    de la clé primaire (l\'id) d'une ligne et retourne combien d'enfant elle 
     contient.
 
-    Le second paramêtre optionnel definit si il faut ou si il ne faut compter 
+    Le second paramêtre optionnel definit si il faut ou non compter 
     les enfants directs.En reprenant l\'exemple ci dessus ::
    
         <?php
@@ -384,22 +384,22 @@ de permutations en plus des méthodes find de bases.
         $this->Category->id = 1;
         $directChildren = $this->Category->childCount(); //retournenra 11
 
-        // Only counts the direct descendants of this category
+        // Seulement les comptes des descendants directs de cette category
         $numChildren = $this->Category->childCount(1, true); // retournera 2
 
     .. php:method:: generateTreeList ($conditions=null, $keyPath=null, $valuePath=null, $spacer= '_', $recursive=null)
 
     :param $conditions: Utilise les mêmes conditions qu'un find().
-    :param $keyPath: Chemin du champ à utiliser pour la clef.
+    :param $keyPath: Chemin du champ à utiliser pour la clé.
     :param $valuePath: Chemin du champ à utiliser pour le label.
-    :param $spacer: La chaine à utiliser devant chaque élément pour indiquer la 
+    :param $spacer: La chaîne à utiliser devant chaque élément pour indiquer la 
       profondeur.
     :param $recursive: Le nombre de niveaux de profondeur pour rechercher les 
       enregistrements associés
 
-    Cette méthode retourne des données similaires à :ref: `modèle-find-list`, 
+    Cette méthode retourne des données similaires à :ref: `model-find-list`, 
     avec un préfixe en retrait pour montrer la structure de vos données. Voici 
-    un exemple de ce que vous attendre comme retour de cette méthode ::
+    un exemple de ce à quoi vous attendre comme retour avec cette méthode ::
     
       <?php
       $treelist = $this->Category->generateTreeList();
@@ -435,7 +435,7 @@ de permutations en plus des méthodes find de bases.
 
     .. php:method:: getPath( $id = null, $fields = null, $recursive = null )
 
-    Le 'path' (chemin) quand vous vous referez à des données hiérarchiques 
+    Le 'path' (chemin) quand vous vous réferez à des données hiérarchiques, 
     c'est comment retrouver ou vous êtes depuis le sommet.
     Par exemple le path (chemin) de la catégorie "International" est:
 
@@ -472,7 +472,7 @@ Utilisation avancée
 ===================
 
 Le behavior Tree ne fonctionne pas uniquement en tâche de fond,
-il y a un certain nombre de méthode spécifiques dans le behavior Tree 
+il y a un certain nombre de méthodes spécifiques dans le behavior Tree 
 pour répondre a vos besoins de données hierarchiques, et des problèmes 
 inattendus qui pourraient survenir durant le processus.
 
@@ -483,8 +483,8 @@ ID de l'élément à déplacer et un nombre positif de combien de
 positions le noeud devrait être déplacé vers le bas. 
 Tous les nœuds enfants pour le noeud spécifié seront également déplacés.
 
-Voici l\'exemple  d'un controller action (dans un controlleur nommé Category )
-qui déplace un noeud spécifié vers le bas de l'arbre::
+Voici l\'exemple d'une action d'un controller (dans un controller nommé 
+Category) qui déplace un noeud spécifié vers le bas de l'arbre::
     
 
         <?php
@@ -504,7 +504,7 @@ qui déplace un noeud spécifié vers le bas de l'arbre::
             $this->redirect(array('action' => 'index'), null, true);
         }
 
-Par exemple , si vous souhaitez déplacer le "Sport" (id de 3) d'une catégorie 
+Par exemple, si vous souhaitez déplacer le "Sport" (id de 3) d'une catégorie 
 vers le bas, vous devriez requêter: /categories/movedown/3/1.
    
 .. php:method:: moveUp()
@@ -514,7 +514,7 @@ de l'élément à déplacer et un nombre positif de combien de positions le
 noeud devrait être déplacé vers le haut. Tous les nœuds enfants seront 
 également déplacés.
 
-Voici un exemple d\'un controlleur action (dans un controller categories)
+Voici un exemple d\'un controller action (dans un controller categories)
 déplacant un noeud plus haut dans un arbre::
 
         <?php
@@ -540,9 +540,15 @@ Maintenant l'ordre des Amis sera Gwendoline, Gérard.
 
 .. php:method:: removeFromTree($id = null, $delete = false)
 
+<<<<<<< HEAD
+En utilisant cette méthode, un neud sera supprimée ou déplacée, tout en 
+conservant son sous-arbre, qui sera apparenté à un niveau supérieur. 
+Il offre plus de contrôle que: ref: `model-delete` qui, pour un model
+=======
 En utilisant cette méthode sera supprimé ou déplacé un nœud, tout en conservant
 son sous-arbre, qui sera apparenté à un niveau supérieur. 
-Il offre plus de contrôle que: ref: `modèle-delete` qui, pour un modèle
+Il offre plus de contrôle que: ref: `model-delete` qui, pour un modèle
+>>>>>>> 5648f19a0bcbc77e37bb6dc66d6ea78e3d9f33ff
 en utilisant le behavior tree supprimera le noeud spécifié et tous
 ses enfants.
 
@@ -595,7 +601,7 @@ L'arbre deviendrait.
          -  Skate
 
 Ceci démontre l'utilisation alternative de ``removeFromTree``, les enfants 
-ont été reparenté et 'Sport' a été effacé.
+ont été reparentés et 'Sport' a été effacé.
 
 .. php:method:: reorder(array('id' => null, 'field' => $Model->displayField, 'order' => 'ASC', 'verify' => true))
 
@@ -614,23 +620,27 @@ parent d'un nœud.::
     .. note::
 
     Si vous avez sauvegardé vos données ou fait d'autres opérations sur le 
-    modèle, vous pouvez définir ``$model->id = null`` avant d'appeler 
+    model, vous pouvez définir ``$model->id = null`` avant d'appeler 
     ``reorder``. Sinon, seul les enfants du nœud actuel et ses enfants 
     seront réordonnés.    
 
-Intègrité des données
+Intégrité des données
 =====================
 
-En raison de la nature complexes auto-référentielle de ces structures de 
-données comme les arbres et listes chaînées, elles peuvent parfois se rompre 
-par un appel négligent. Rassurez-vous, tout n'est pas perdu! Le behavior 
-Tree contient plusieurs fonctionnalités précédemment non-documentées destinés 
+En raison de la nature complexe auto-référentielle de ces structures de 
+<<<<<<< HEAD
+données comme les arbres et les listes chaînées, elles peuvent parfois se 
+=======
+données comme les arbres et listes chaînées, elles peuvent parfois se 
+>>>>>>> 5648f19a0bcbc77e37bb6dc66d6ea78e3d9f33ff
+rompre par un appel négligent. Rassurez-vous, tout n'est pas perdu! Le behavior 
+Tree contient plusieurs fonctionnalités précédemment non-documentées destinées 
 à se remettre de telles situations.
     
 .. php:method:: recover($mode = 'parent', $missingParentAction = null)
 
 Le parmètre ``mode`` est utilisé pour spécifier la source de l'info qui est
-correcte. La source opposée de donnée sera peuplées en fonction de cette source 
+correcte. La source opposée de données sera peuplée en fonction de cette source 
 d'information. Ex: si le champ MPTT est corrompu ou vide, avec le 
 ``$mode 'parent'`` la valeur du champ ``parent_id`` sera utilisée pour peupler 
 les champs gauche et droite.
@@ -644,23 +654,27 @@ Options ``$mode`` permises:
 
 -  ``'parent'`` - utilise l'actuel``parent_id``pour mettre à jour les champs 
    ``lft`` and ``rght``.
--  ``'tree'`` - utilise  les actuels champs``lft``et``rght``pour mettre à jour 
+-  ``'tree'`` - utilise  les champs actuels ``lft``et``rght``pour mettre à jour 
    le champ ``parent_id``
 
 Les options de ``missingParentActions`` autorisées durant l\'utilisation de
 ``mode='parent'``:
     
--  ``null`` - ne fait rien et continu
+-  ``null`` - ne fait rien et continue
 -  ``'return'`` - ne fait rien et fait un return
 -  ``'delete'`` - efface le noeud
--  ``int`` - defini parent\_id à cet id
+<<<<<<< HEAD
+-  ``int`` - definit parent\_id à cet id
+=======
+-  ``int`` - définit parent\_id à cet id
+>>>>>>> 5648f19a0bcbc77e37bb6dc66d6ea78e3d9f33ff
 
 Exemple::
 
         <?php
         // Reconstruit tous les champs gauche et droit en se basant sur parent_id
         $this->Category->recover();
-        // or
+        // ou
         $this->Category->recover('parent');
 
         // Reconstruit tous les parent_id en se basant sur les champs lft et rght
@@ -669,19 +683,19 @@ Exemple::
 .. php:method:: reorder($options = array())
 
 Réordonne les nœuds (et nœuds enfants) de l'arbre en fonction du
-champ et de la direction spécifiée dans les paramètres. Cette méthode ne
+champ et de la direction spécifiés dans les paramètres. Cette méthode ne
 change pas le parent d'un nœud.
     
 La réorganisation affecte tous les nœuds dans l'arborescence par défaut, mais 
 les options suivantes peuvent influer sur le processus:
 
 -  ``'id'`` - ne réordonne que les noeuds sous ce noeud.
--  ``'field``' - champ à utiliser pour le tri, par défaut le ``displayField`` du modèle.
+-  ``'field``' - champ à utiliser pour le tri, par défaut le ``displayField`` du model.
 -  ``'order'`` - ``'ASC'`` pour tri ascendant, ``'DESC'`` pour tri descendant.
 -  ``'verify'`` - avec ou sans vérification avant tri.
 
 ``$options`` est utilisé pour passer tous les paramètres supplémentaires, et 
-les clefs suivantes par défaut, toutes sont facultatives::
+les clés suivantes par défaut, toutes sont facultatives::
      
         array(
             'id' => null,
@@ -741,4 +755,4 @@ Exemple de sortie::
 
 .. meta::
     :title lang=fr: Tree
-    :keywords lang=fr: auto increment,literal representation,parent id,table categories,database table,hierarchical data,null value,menu system,intricacies,access control,hierarchy,logic,elements,trees
+    :keywords lang=fr: auto increment,représentation littérale,parent id,table catégories,table base de données,données hiérarchisées,valeur null,système de menu,intricacies,contrôle accès,hiérarchie,logique,élements,trees, arbres

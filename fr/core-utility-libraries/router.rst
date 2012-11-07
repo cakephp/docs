@@ -1,16 +1,17 @@
 Router
 ######
 
-Router can be used to parse urls into arrays containing indexes for
-the controller, action, and any parameters, and the opposite: to
-convert url arrays (eg. array('controller' => 'posts',
-'action' => 'index')) to string urls.
+Le Router peut être utilisé pour parser les urls en tableaux contenant les 
+indexes pour le controller, l'action, et tout paramètre, et leur opposé:
+pour convertir les tableaux url (ex: array('controller' => 'posts',
+'action' => 'index')) en chaînes urls.
 
-Read more about ways to :ref:`configure the Router <routes-configuration>` and
-the :php:class:`Router` class.
+Lisez en plus sur les façons de 
+:ref:`configurer le Router <routes-configuration>` avec la classe 
+:php:class:`Router`.
 
 
 
 .. meta::
-    :title lang=en: Router
-    :keywords lang=en: array controller,php class,indexes,urls,configure router,parameters
+    :title lang=fr: Router
+    :keywords lang=fr: tableau controller,classe php,indexes,urls,configure router,paramètres

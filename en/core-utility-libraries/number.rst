@@ -114,6 +114,15 @@ automatically echo the output into the view.
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::currency('1234.56', 'FOO');
 
+.. php:method:: defaultCurrency(string $currency)
+
+    :param string $currency: Set a known currency for :php:meth:`CakeNumber::currency()`.
+
+    Setter/getter for default currency. This removes the need always passing the
+    currency to :php:meth:`CakeNumber::currency()` and change all currency outputs by setting other default.
+
+    .. versionadded:: 2.3 This method was added in 2.3
+
 .. php:method:: addFormat(string $formatName, array $options)
 
     :param string $formatName: The format name to be used in the future

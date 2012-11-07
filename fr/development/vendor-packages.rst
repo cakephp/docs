@@ -1,17 +1,16 @@
-Vendor packages
-###############
+Les packages Vendor
+###################
 
-Vendor file information goes here.
+Le fichier d'information sur Vendor ira ici.
 
 Vendor assets
 =============
 
-Support for vendor assets have been removed for 1.3. It is
-recommended that you take any vendor assets you have and repackage
-them into plugins. See :ref:`plugin-assets`
-for more information.
+Le support pour les assets vendor a été retiré pour 1.3. Il est recommandé que 
+vous preniez tout vendor asset que vous avez et que vous le repackagiez en 
+plugins. Regardez :ref:`plugin-assets` pour plus d'informations.
 
 
 .. meta::
-    :title lang=en: Vendor packages
-    :keywords lang=en: assets
+    :title lang=fr: Vendor packages
+    :keywords lang=fr: assets

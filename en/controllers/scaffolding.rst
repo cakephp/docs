@@ -41,7 +41,7 @@ $scaffold variable::
     class CategoriesController extends AppController {
         public $scaffold;
     }
-    
+
 Assuming you’ve created even the most basic Category model class
 file (in /app/Model/Category.php), you’re ready to go. Visit
 http://example.com/categories to see your new scaffold.
@@ -80,7 +80,6 @@ in many instances::
 
     <?php
     class User extends AppModel {
-        public $name = 'User';
         public $displayField = 'first_name';
     }
 
@@ -110,7 +109,7 @@ This is an easy way to create a simple backend interface quickly.
 Keep in mind that you cannot have both admin and non-admin methods
 scaffolded at the same time. As with normal scaffolding you can
 override individual methods and replace them with your own::
-    
+
     <?php
     public function admin_view($id = null) {
       // custom code here
