@@ -687,10 +687,8 @@ CakePHPのテストスイートはテストの独立性を確保するため、�
         }
     }
 
-When testing the above code, you will still run ``// more code`` even when the
-redirect is reached.  Instead, you should write the code like::
 上記のコードをテストすると、リダイレクトに到達したにもかかわらず ``// more code`` が
-実行されるでしょう。代わりに、このようなコードを書くべきです。::
+実行されるされてしまいます。代わりに、このようなコードを書くべきです。::
 
     <?php
     class ArticlesController extends AppController {
@@ -751,12 +749,10 @@ returnする値の選択
 テストアクションによるモックの使用
 ---------------------------
 
-There will be times when you want to replace components or models with either
-partially mocked objects or completely mocked objects.  You can do this by using
-:php:meth:`ControllerTestCase::generate()`. ``generate()`` takes the hard work
-out of generating mocks on your controller. If you decide to generate a
-controller to be used in testing, you can generate mocked versions of its models
-and components along with it::
+コンポーネントやモデルの一部または全部をモックにより置き換えたい時があるでしょう。
+そういったときは :php:meth:`ControllerTestCase::generate()` を使うとよいでしょう。
+``generate()`` はコントローラーにおいてモックを作成する強力なワークアウトを持ちます。
+テストで使われるコントローラーを決定したら、同時にモデルとコンポーネントのモックを生成できます。::
 
     <?php
     $Posts = $this->generate('Posts', array(
@@ -773,18 +769,19 @@ and components along with it::
         )
     ));
 
-The above would create a mocked ``PostsController``, stubbing out the ``isAuthorized``
-method. The attached Post model will have ``save()`` stubbed, and the attached
-components would have their respective methods stubbed. You can choose to stub
-an entire class by not passing methods to it, like Session in the example above.
+上の例では ``isAuthorized`` というメソッドをスタブにしている ``PostsController`` のモックを作成しました。
+付属されたPostモデルはスタブの ``save()`` メソッドを持っていて、
+付属されたコンポーネントも、めいめいにスタブされたメソッドを持っています。
+上の例での Session のように、メッソドがパスしないことにより、すべてのクラスのスタブを選ぶことができます。
 
-Generated controllers are automatically used as the testing controller to test.
-To enable automatic generation, set the ``autoMock`` variable on the test case to
-true. If ``autoMock`` is false, your original controller will be used in the test.
+生成されたコントローラーはテストのために自動的に使われます。
+自動的な生成を有効にするには、テストケースの ``autoMock`` という変数にtrueを設定します。
+``autoMock`` がfalseであれば、オリジナルのコントローラーがテストに使われるでしょう
 
-The response object in the generated controller is always replaced with a mock
-that does not send headers. After using ``generate()`` or ``testAction()`` you
-can access the controller object at ``$this->controller``.
+生成されたコントローラーのレスポンスオブジェクトは、
+常にヘッダーを送信しないモックを使って置き換えられます。
+``generate()`` か``testAction()`` を使ったあとは、 ``$this->controller`` から
+コントローラーのオブジェクトにアクセスできます。
 
 より複雑な例
 ----------
@@ -834,10 +831,9 @@ rendered contents, and checks the view for a form tag. As you can see, your
 freedom to test controllers and easily mock its classes is greatly expanded with
 these changes.
 
-When doing controller tests using mocks that use static methods you'll have to
-use a different method to register your mock expectations.  For example if you
-wanted to mock out :php:meth:`AuthComponent::user()` you'd have to do the
-following::
+静的メソッドを使うモックを用いてコントローラーのテストをするときは、
+モックに期待する値を登録する別のメソッドを用います。
+たとえば :php:meth:`AuthComponent::user()` のモックを使いたい場合は以下のようにします。::
 
     <?php
     public function testAdd() {
@@ -977,10 +973,8 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 ヘルパーのテスト
 ===============
 
-Since a decent amount of logic resides in Helper classes, it's
-important to make sure those classes are covered by test cases.
-ヘルパークラスも適切な量のロジックが構築されているので、
-これらのクラスがテストケースによってカバーされているか確認することは重要です。
+ヘルパークラスも十分な量のロジックが構築されているのであれば、
+テストケースによって機能を満たしているか確認することは重要です。
 
 はじめに、テストのための例として、ヘルパーを作成します。 ``CurrencyRendererHelper`` は、
 ビューで通貨の表示を補助するための、 ``usd()`` という唯一の単純なメソッドを持っています。::
