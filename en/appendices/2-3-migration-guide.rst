@@ -35,7 +35,7 @@ PaginatorComponent
   to manage and set than the 0'th index.
 
 SecurityComponent
-------------------
+-----------------
 
 - SecurityComponent now supports the ``unlockedActions`` option. This can be used to
   disable all security checks for any actions listed in this option.

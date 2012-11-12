@@ -30,7 +30,7 @@ Accepted keys for ``$options``:
 
 * ``escape`` Whether you want the contents html entity encoded, defaults to
   true.
-* ``model`` The model to use, defaults to PaginatorHelper::defaultModel().
+* ``model`` The model to use, defaults to :php:meth:`PaginatorHelper::defaultModel()`.
 
 Assuming you are paginating some posts, and are on page one::
 
@@ -153,7 +153,7 @@ pages in the paged data set.
     * ``tag`` The tag wrapping tag you want to use, defaults to 'span'.
     * ``escape`` Whether you want the contents html entity encoded, 
       defaults to true.
-    * ``model`` The model to use, defaults to PaginatorHelper::defaultModel()
+    * ``model`` The model to use, defaults to :php:meth:`PaginatorHelper::defaultModel()`.
         
     A simple example would be::
 
@@ -207,7 +207,7 @@ pages in the paged data set.
 
     - ``tag`` The tag wrapping tag you want to use, defaults to 'span'
     - ``after`` Content to insert after the link/tag
-    - ``model`` The model to use defaults to PaginatorHelper::defaultModel()
+    - ``model`` The model to use defaults to :php:meth:`PaginatorHelper::defaultModel()`
     - ``separator`` Content between the generated links, defaults to ' | '
     - ``ellipsis`` Content for ellipsis, defaults to '...'
 
@@ -292,8 +292,8 @@ There are a number of options for ``counter()``.  The supported ones are:
       ));
 
 * ``model`` The name of the model being paginated, defaults to
-  PaginatorHelper::defaultModel().  This is used in conjunction with the
-  custom string on 'format' option.
+  :php:meth:`PaginatorHelper::defaultModel()`. This is used in
+  conjunction with the custom string on 'format' option.
 
 Modifying the options PaginatorHelper uses
 ==========================================
@@ -342,7 +342,7 @@ Sets all the options for the Paginator Helper. Supported options are:
   id selector.
 
 * ``model`` The name of the model being paginated, defaults to
-  PaginatorHelper::defaultModel().
+  :php:meth:`PaginatorHelper::defaultModel()`.
 
 
 Using GET parameters for pagination
@@ -454,14 +454,14 @@ Other Methods
     :param mixed $url: Url for the action. See Router::url()
     :param array $options: Options for the link. See options() for list of keys.
 
-    Accepted keys for ``$options``: 
+    Accepted keys for ``$options``:
 
-        * **update** - The Id of the DOM element you wish to update. Creates 
-            Ajax enabled links.
-        * **escape** Whether you want the contents html entity encoded, 
-            defaults to true.
-        * **model** The model to use, defaults to 
-            PaginatorHelper::defaultModel() .
+    * ``update`` The Id of the DOM element you wish to update. Creates
+      Ajax enabled links.
+    * ``escape`` Whether you want the contents html entity encoded,
+      defaults to true.
+    * ``model`` The model to use, defaults to
+      :php:meth:`PaginatorHelper::defaultModel()`.
 
     Creates a regular or AJAX link with pagination parameters::
 
