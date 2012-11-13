@@ -141,6 +141,17 @@ CakeEmail
   :php:meth:`CakeEmail::attachments()`.  This allows you to disable the
   Content-Disposition header added to attached files.
 
+HttpSocket
+----------
+
+- :php:class:`HttpSocket` now verifies SSL certificates by default. If you are
+  using self-signed certificates or connecting through proxies you may need to
+  use some of the new options to augment this behavior. See
+  :ref:`http-socket-ssl-options` for more information.
+- ``HttpResponse`` was renamed to ``HttpSocketResponse``.  This
+  avoids a common issue with the http pecl extension. There is an
+  ``HttpResponse`` class provided as well for compatibility reasons.
+
 Routing
 =======
 
