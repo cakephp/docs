@@ -254,71 +254,90 @@ CakeLog API
 
 .. php:staticmethod:: levels()
 
-Call this method without arguments, eg: `CakeLog::levels()` to obtain current
-level configuration.
+    Call this method without arguments, eg: ``CakeLog::levels()`` to
+    obtain current level configuration.
 
-To append additional level 'user0' and 'user1' to to default log levels::
+    To append the additional levels 'user0' and 'user1' to the default
+    log levels use::
 
-    <?php
-    CakeLog::levels(array('user0', 'user1'));
-    // or
-    CakeLog::levels(array('user0', 'user1'), true);
+        <?php
+        CakeLog::levels(array('user0', 'user1'));
+        // or
+        CakeLog::levels(array('user0', 'user1'), true);
 
-will result in::
+    Calling ``CakeLog::levels()`` will result in::
 
-    <?php
-    array(
-        0 => 'emergency',
-        1 => 'alert',
-        ...
-        8 => 'user0',
-        9 => 'user1',
-    );
+        <?php
+        array(
+            0 => 'emergency',
+            1 => 'alert',
+            // ...
+            8 => 'user0',
+            9 => 'user1',
+        );
 
-To set/replace existing configuration, pass an array with the second argument
-set to false::
+    To set/replace an existing configuration, pass an array with the second
+    argument set to false::
 
-    <?php
-    CakeLog::levels(array('user0', 'user1'), false);
+        <?php
+        CakeLog::levels(array('user0', 'user1'), false);
 
-will result in::
+    Calling ``CakeLog::levels()`` will result in::
 
-    <?php
-    array(
-        0 => 'user0',
-        1 => 'user1',
-    );
+        <?php
+        array(
+            0 => 'user0',
+            1 => 'user1',
+        );
 
 .. php:staticmethod:: defaultLevels()
 
-    Resets log levels to the original value
+    :returns: An array of the default log levels values.
 
-    :returns: An array of the default log levels values
+    Resets log levels to their original values::
+
+        <?php
+        array(
+            'emergency' => LOG_EMERG,
+            'alert'     => LOG_ALERT,
+            'critical'  => LOG_CRIT,
+            'error'     => LOG_ERR,
+            'warning'   => LOG_WARNING,
+            'notice'    => LOG_NOTICE,
+            'info'      => LOG_INFO,
+            'debug'     => LOG_DEBUG,
+        );
 
 .. php:staticmethod:: enabled($streamName)
 
-    Checks wether $streamName is enable
-
     :returns: boolean
+
+    Checks whether ``$streamName`` has been enabled.
 
 .. php:staticmethod:: enable($streamName)
 
-    Enable stream $streamName
+    :returns: void
+
+    Enable the stream ``$streamName``.
 
 .. php:staticmethod:: disable($streamName)
 
-    Disable stream $streamName
+    :returns: void
+
+    Disable the stream ``$streamName``.
 
 .. php:staticmethod:: stream($streamName)
 
-    Gets $streamName from the active streams
+    :returns: Instance of ``BaseLog`` or ``false`` if not found.
+
+    Gets ``$streamName`` from the active streams.
 
 Convenience methods
 -------------------
 
 .. versionadded:: 2.2
 
-The following convenience methods were added to log `$message` with the
+The following convenience methods were added to log ``$message`` with the
 appropriate log level.
 
 .. php:staticmethod:: emergency($message, $scope = array())
