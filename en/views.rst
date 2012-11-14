@@ -665,6 +665,13 @@ To call any view method use ``$this->method()``
 
     .. versionadded:: 2.1
 
+.. php:method:: prepend($name, $content)
+
+    Prepend into the block with ``$name``.  See the section on
+    :ref:`view-blocks` for examples.
+
+    .. versionadded:: 2.3
+
 .. php:method:: assign($name, $content)
 
     Assign the value of a block.  This will overwrite any existing content. See
