@@ -577,6 +577,34 @@ Are equivalent and will result in the same element being rendered.
     ``Plugin.element`` was added.
 
 
+Creating your own view classes
+==============================
+
+You may need to create custom view classes to enable new types of data views, or
+add additional custom view rendering logic to your application. Like most
+components of CakePHP view classes have a few conventions:
+
+* View class files should be put in ``App/View``. For example
+  ``App/View/PdfView.php``
+* View classes should be suffixed with ``View``. For example ``PdfView``.
+* When referencing view class names you should omit the ``View`` suffix.  For
+  example ``$this->viewClass = 'Pdf';``.
+
+You'll also want to extend ``View`` to ensure things work correctly::
+
+    <?php
+    // in App/View/PdfView.php
+
+    App::uses('View', 'View');
+    class PdfView extends View {
+        public function render($view = null, $layout = null) {
+            // custom logic here.
+        }
+    }
+
+Replacing the render method lets you take full control over how your content is
+rendered.
+
 View API
 ========
 
