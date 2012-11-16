@@ -204,6 +204,8 @@ Testing
 
 - A core fixture for the default ``cake_sessions`` table was added. You can use
   it by adding ``core.cake_sessions`` to your fixture list.
+- :php:meth:`CakeTestCase::getMockForModel()` was added. This simplifies getting
+  mock objects for models.
 
 Utility
 =======

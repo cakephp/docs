@@ -637,6 +637,26 @@ information on how to run your test case.
     ``ClassRegistry::init('YourModelName');`` as it knows to use your test 
     database connection.
 
+Mocking model methods
+---------------------
+
+There will be times you'll want to mock methods on models when testing them.  You should
+use ``getMockForModel`` to create testing mocks of models.  It avoids issues
+with reflected properties that normal mocks have::
+
+    <?php
+    function testSendingEmails() {
+        $model = $this->getMockForModel('EmailVerification', array('send'));
+        $model->expects($this->once())
+            ->method('send')
+            ->will($this->returnValue(true));
+
+        $model->verifyEmail('test@example.com');
+    }
+
+.. versionadded:: 2.3
+    CakeTestCase::getMockForModel() was added in 2.3.
+
 Testing Controllers
 ===================
 
