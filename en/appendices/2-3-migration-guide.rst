@@ -187,6 +187,13 @@ FormHelper
 - :php:meth:`FormHelper::postLink()` now accepts a ``method`` key.  This allows
   you to create link forms using HTTP methods other than POST.
 
+HtmlHelper
+----------
+
+- :php:meth:`HtmlHelper::getCrumbList()` now has the ``separator``,
+  ``firstClass`` and ``lastClass`` options.  These allow you to better control
+  the HTML this method generates.
+
 TextHelper
 ----------
 
@@ -200,6 +207,7 @@ PaginatorHelper
   allow specifying extra tag for wrapping current page number.
 - For methods: :php:meth:`PaginatorHelper::prev()` and :php:meth:`PaginatorHelper::next()` it
   is now possible to set the ``tag`` option to ``false`` to disable the wrapper.
+
 
 Testing
 =======

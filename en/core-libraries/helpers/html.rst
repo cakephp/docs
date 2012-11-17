@@ -906,17 +906,25 @@ Creating breadcrumb trails with HtmlHelper
 
 .. php:method:: getCrumbList(array $options = array(), mixed $startText)
 
+    :param array $options: An array of :term:`html attributes` for the
+        containing ``<ul>`` element. Can also contain the 'separator',
+        'firstClass' and 'lastClass' options.
+    :param string|array $startText: The text or element that precedes the ul.
+
     Returns breadcrumbs as a (x)html list.
 
-    This method uses :php:meth:`HtmlHelper::tag()` to generate list and its 
-    elements. Works similar to :php:meth:`~HtmlHelper::getCrumbs()`, so it uses 
+    This method uses :php:meth:`HtmlHelper::tag()` to generate list and its
+    elements. Works similar to :php:meth:`~HtmlHelper::getCrumbs()`, so it uses
     options which every crumb was added with.  You can use the ``$startText``
     parameter to provide the first breadcrumb link/text.  This is useful when
     you always want to include a root link.  This option works the same as the
     ``$startText`` option for :php:meth:`~HtmlHelper::getCrumbs()`.
 
-    ..versionchanged:: 2.1
+    .. versionchanged:: 2.1
         The ``$startText`` parameter was added.
+
+    .. versionchanged:: 2.3
+        The 'separator', 'firstClass' and 'lastClass' options were added.
 
 
 .. meta::
