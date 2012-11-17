@@ -174,7 +174,7 @@ easily guessed::
 
 The final task is to make the ``app/tmp`` directory web-writable.
 The best way to do this is to find out what user your webserver
-runs as (``<?php echo `whoami`; ?>``) and change the ownership of
+runs as (``<?php echo exec(`whoami`); ?>``) and change the ownership of
 the ``app/tmp`` directory to that user. The final command you run
 (in \*nix) might look something like this::
 
