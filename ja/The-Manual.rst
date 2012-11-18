@@ -1,0 +1,77 @@
+マニュアル
+##########
+
+**`CakePHP 1.2.x
+のマニュアルへは、こちらをクリックしてください。 </ja/view/3/マニュアル>`_**
+
+CakePHP のドキュメント Cookbook にようこそ。Cookbook
+は、一般ユーザーでも貢献できる wiki
+ライクなシステムです。このシステムを公開する事で、高品質で妥当で正確な
+CakePHP のドキュメントを維持することを望みます。また、Cookbook
+で、誰でも簡単に貢献できるようになります。
+
+`AD7six <http://www.ad7six.com/>`_ には\ ***非常に***
+感謝したいと思います。彼は Cookbook
+の発起人でもあり、多くの時間をかけて、このアプリケーションの開発、テスト、改良にあたっています。
+
+手伝う方法：
+===========
+
+サイト上で何かのエラーや、不完全な部分、まったく触れられていない部分、または修正の必要がある部分を見つけた場合、、手助けする方法をここに示します。
+
+#. 変更を加えたいセクションの「編集」リンクをクリックしてください。
+#. ログインを促されたら、\ `Bakery <http://bakery.cakephp.org>`_\ のログインアカウントで、Cookbook
+   にログインしてください。誰でもBakeryのアカウントを取得できます！
+#. `Cookbook
+   への投稿のガイドライン </ja/view/482/contributing-to-the-cookbook>`_\ に則っているかどうかを再確認してください。
+#. 妥当でセマンティックな HTML
+   を使って、追加/編集したものをレビューのために投稿してください。
+#. 変更が承認されたかどうか確認するために、RSSフィードを使って提案の進行状況を見守るか、翌日くらいにまたアクセスしてください。
+
+翻訳
+====
+
+John David Anderson (docs at cakephp dot org)までEメールを送るか、IRC
+(#cakephp on freenode as
+\_psychic\_)で、参加したい旨を連絡してください。
+
+翻訳者Tips:
+
+-  翻訳する言語のページで閲覧・編集してください。そうしないと、英語ページの編集として記録されてしまいます。どの言語の翻訳なのかをレビューアーが知っていることはまれです。
+-  この本の中に読みたい言語を見つけたら、どうぞ遠慮なくご覧ください。
+-  読んでいる言語で留意すべき項目は、ページ右上にある Todo
+   リストを参照してください。
+-  `フレンドリーな文体 <http://en.wikipedia.org/wiki/Register_%28linguistics%29>`_\ を使ってください。
+-  タイトルと内容を同時に翻訳してください
+-  修正を投稿する前に、英語版との比較を行うようにしてください。どこかを修正しても、以前の変更が統合されていなかったら、投稿したものが受け付けられないことがあります。
+-  用語を英語で書く場合には、 ``<em>``
+   タグで囲んでください。例えば、"asdf asdf *Controller* asdf" や "asdf
+   asdf Kontroller (*Controller*) asfd" などです。
+-  一部だけ翻訳して投稿しないでください。
+-  保留されている項目があるセクションは編集しないでください。
+-  アクセント文字のために `HTML
+   エンティティ <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+   を使用しないでください。この本はUTF-8を使っています。
+-  記述(HTML)の変更や新しいコンテンツを、一度にたくさん加えないでください。元のコンテンツに不備がある場合は、まずそれを編集するようにしてください。
+
+CakePHP
+のドキュメントをより良いものにするため、出来る限りのことを行っています。Cookbook
+を活用して、わたしたちの皆が恩恵を受けている、この CakePHP
+プロジェクトにフィードバックしましょう。
+
+
+.. toctree::
+    :maxdepth: 1
+
+    The-Manual/Beginning-With-CakePHP
+    The-Manual/Basic-Principles-of-CakePHP
+    The-Manual/Developing-with-CakePHP
+    The-Manual/Common-Tasks-With-CakePHP
+    The-Manual/Core-Components
+    The-Manual/Core-Behaviors
+    The-Manual/Core-Helpers
+    The-Manual/Core-Utility-Libraries
+    The-Manual/Core-Console-Applications
+    The-Manual/Deployment
+    The-Manual/Tutorials-Examples
+    The-Manual/Appendices
