@@ -44,9 +44,7 @@ unten zeigen wir dir, wie du die standardmäßig verwendeten Feldernamen
 änderst, damit es trotzdem auf deinem System funktioniert.*
 
 Erstellen wir zunächst unser Benutzertablle mit folgender
-SQL-Anweisung::
-
-::
+SQL-Anweisung ::
 
     CREATE TABLE users (
         id integer auto_increment,

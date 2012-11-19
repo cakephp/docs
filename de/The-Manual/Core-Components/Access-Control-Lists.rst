@@ -261,7 +261,7 @@ Möglichkeit erhalten bleibt, pauschal Änderungen an ARO-Gruppen
 durchzuführen::
 
 -  Gemeinschaft des Rings
-   (**verboten**: alle)
+     (**verboten**: alle)
 
    -  Krieger
       (**erlaubt**: Waffen, Bier, Lambasbrot, gesalzenes

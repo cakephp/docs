@@ -242,7 +242,7 @@ following table:
 style
 -----
 
-``style(array $data, boolean $oneline = true)  ``
+``style(array $data, boolean $oneline = true)
 
 Construye una definición de estilo CSS basada en las claves y valores
 del vector pasado al metodo. Especialmente util si tu archivo CSS es
@@ -410,7 +410,7 @@ previous versions.
 div
 ---
 
-``div(string $class, string $text, array $options) ``
+``div(string $class, string $text, array $options)
 
 Used for creating div-wrapped sections of markup. The first parameter
 specifies a CSS class, and the second is used to supply the text to be

@@ -911,7 +911,7 @@ meridian
 error
 -----
 
-``error(string $fieldName, string $text, array $options) ``
+``error(string $fieldName, string $text, array $options)
 
 バリデーションエラーが起こったイベントで、指定されたフィールドの $text
 で指定したバリデーションエラーメッセージを表示します。

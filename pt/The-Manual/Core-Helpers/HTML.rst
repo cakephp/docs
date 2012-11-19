@@ -255,7 +255,7 @@ following table:
 style
 -----
 
-``style(array $data, boolean $oneline = true)  ``
+``style(array $data, boolean $oneline = true)
 
 Builds CSS style definitions based on the keys and values of the array
 passed to the method. Especially handy if your CSS file is dynamic.
@@ -293,7 +293,7 @@ Saída será:
     <img src="/img/cake_logo.png" alt="CakePHP" /> 
 
 Para criar um link de imagem especificando o link de destino usando a
-opção de ``url`` em ``$htmlAttributes. ``
+opção de ``url`` em ``$htmlAttributes.
 
 ::
 
@@ -422,7 +422,7 @@ previous versions.
 div
 ---
 
-``div(string $class, string $text, array $options) ``
+``div(string $class, string $text, array $options)
 
 Used for creating div-wrapped sections of markup. The first parameter
 specifies a CSS class, and the second is used to supply the text to be

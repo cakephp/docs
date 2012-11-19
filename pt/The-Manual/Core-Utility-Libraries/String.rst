@@ -19,7 +19,7 @@ de 128 bits no formato como 485fc381-e790-47a3-9794-1337c0a8fe68.
 tokenize
 ========
 
-``string tokenize ($data, $separator = ',', $leftBound = '(', $rightBound = ')') ``
+``string tokenize ($data, $separator = ',', $leftBound = '(', $rightBound = ')')
 
 Este método tokeniza uma string usando ``$separator``, ignorando
 qualquer instância de ``$separator`` que apareça entre ``$leftBound`` e

@@ -234,7 +234,7 @@ folgendes angegeben werden:
 style
 -----
 
-``style(array $data, boolean $inline = true)  ``
+``style(array $data, boolean $inline = true)``
 
 Mithilfe dieser Methode kann man CSS Stildefinitionen erzeugen. Die
 gewünschten Schlüssel/Wert-Paare können über das Array $data übergeben
@@ -407,7 +407,7 @@ Wenn kein Text in ``$text`` angegeben ist, wird nur das öffnende Tag
 div
 ---
 
-``div(string $class, string $text, array $htmlAttributes, boolean $escape = false) ``
+``div(string $class, string $text, array $htmlAttributes, boolean $escape = false)``
 
 Mithilfe dieser Funktion können Abschnitte erzeugt werden, die von einem
 ``div``-Tag umschlossen sind. Der erste Parameter gibt eine CSS-Klasse

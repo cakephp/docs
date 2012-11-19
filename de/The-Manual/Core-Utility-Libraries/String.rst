@@ -18,7 +18,7 @@ Die ``uid``-Methode generiert eindeutige 128bit-UUIDs nach `RFC
 tokenize
 ========
 
-``string tokenize ($data, $separator = ',', $leftBound = '(', $rightBound = ')') ``
+``string tokenize ($data, $separator = ',', $leftBound = '(', $rightBound = ')')``
 
 Spaltet eine Zeichenkette mit Hilfe von ``$separator`` in Token auf.
 Dabei werden alle Vorkommen von ``$separator`` ignoriert, wenn diese
