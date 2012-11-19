@@ -19,5 +19,5 @@ sys.path.insert(0, os.path.abspath('..'))
 # Pull in all the configuration options defined in the global config file..
 from config.all import *
 
-language = 'es'
+language = 'de'
 
