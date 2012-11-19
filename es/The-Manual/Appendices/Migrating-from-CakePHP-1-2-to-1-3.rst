@@ -41,7 +41,7 @@ In your app/config/bootstrap.php you may have variables like
 ``$pluginPaths`` or ``$controllerPaths``.
 
 ``$pluginPaths`` variables will no longer work. You must use
- ``App::build()`` to modify paths.
+
 
 ::
 
@@ -503,7 +503,7 @@ echo helper output.
 
 PaginatorHelper has had a number of enhancements applied to make styling
 easier.
- ``prev()``, ``next()``, ``first()`` and ``last()``
+
 
 The disabled state of these methods now defaults to ``<span>`` tags
 instead of ``<div>`` tags.

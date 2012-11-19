@@ -474,7 +474,7 @@ echo helper output.
 
 PaginatorHelper has had a number of enhancements applied to make styling
 easier.
- ``prev()``, ``next()``, ``first()`` and ``last()``
+
 
 The disabled state of these methods now defaults to ``<span>`` tags
 instead of ``<div>`` tags.
