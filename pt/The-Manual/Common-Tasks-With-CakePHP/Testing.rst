@@ -191,7 +191,7 @@ registros presentes para seus fixtures. Felizmente, é possível fazer com
 que a definição de tabelas e/ou os registros presentes sejam utilizados
 por um dado fixture a partir de um model exstente ou mesmo a partir
 diretamente das tabelas no banco de dados.
- Vamos começar com um exemplo. Considerando que você já tenha um model
+
 chamado Article disponível em sua aplicação (referente à tabela no banco
 chamada articles), modifique o fixture criado na seção anterior
 (**app/tests/fixtures/article\_fixture.php**) para:
@@ -310,28 +310,28 @@ individual do CakeTestCase, ou mesmo antes ou depois de seu CakeTestCase
 todo, os seguintes callbacks estão disponíveis:
 
 **start()**
- Primeiro método chamado em um *caso de teste*.
+
 
 **end()**
  Último método chamado em um *caso de teste*.
 
 **startCase()**
- Chamado logo antes de um *caso de teste* ser iniciado.
+
 
 **endCase()**
- Chamado logo depois que um *caso de teste* tenha sido executado.
+
 
 **before($method)**
- Anuncia o início de um *caso de teste*.
+
 
 **after($method)**
- Anuncia o final de um *caso de teste*.
+
 
 **startTest($method)**
- Chamado logo antes que um *método de teste* seja executado.
+
 
 **endTest($method)**
- Chamado logo depois que um *método de teste* tenha terminado.
+
 
 Testando models
 ===============
@@ -370,7 +370,7 @@ CakePHP habilita uma configuração de banco de dados chamada
 fixtures. Definir $useDbConfig para esta configuração fará com que o
 CakePHP saiba que este model usa a conexão de banco de dados da suíte de
 teste.
- Como queremos reutilizar todo o código de nosso model existente, vamos
+
 criar um model de teste que estenda de Article, definindo $useDbConfig e
 $name apropriadamente. Agora crie um arquivo chamado
 **article.test.php** em seu diretório **app/tests/cases/models**, com o
@@ -577,7 +577,7 @@ Problemas conhecidos
 Se você usar testAction para testar um método que faça um redirect em um
 controller, seu teste irá encerrar imediatamente sem sequem mostrar
 nenhum resultado.
- Veja
+
 `https://trac.cakephp.org/ticket/4154 <https://trac.cakephp.org/ticket/4154>`_
 para uma possível correção.
 
@@ -904,7 +904,7 @@ Personalizando o relatório de testes
 O relatório de testes padrão é **muito** minimalista. Se você quiser uma
 saída mais elaborada para impressionar alguém, não tema. Atualmente é
 muito fácil estender a saída do relatório de testes do CakePHP.
- O único risco é que você vai precisar dispender mais tempo com o código
+
 do núcleo do Cake, especificamente o
 **/cake/tests/libs/cake\_reporter.php**.
 

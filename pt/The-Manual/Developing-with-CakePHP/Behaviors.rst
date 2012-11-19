@@ -239,7 +239,7 @@ exemplo:
 
 Você poderá chamar qualquer método do MotoristaBehavior se ele estiver
 no model Usuario.
- Todo método que criar no Behavior, você automaticamente receberá como
+
 primeiro parâmetro uma referência do model que está chamando-o. Qualquer
 outro parâmetro é deslocado uma posição a direita. Por exemplo:
 

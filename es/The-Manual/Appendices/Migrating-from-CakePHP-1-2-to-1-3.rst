@@ -39,7 +39,7 @@ Configuration and application bootstrapping
 
 In your app/config/bootstrap.php you may have variables like
 ``$pluginPaths`` or ``$controllerPaths``.
- There is a new way to add those paths. As of 1.3 RC1 the
+
 ``$pluginPaths`` variables will no longer work. You must use
  ``App::build()`` to modify paths.
 

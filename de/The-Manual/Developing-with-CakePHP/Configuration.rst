@@ -25,7 +25,7 @@ folgendermassen aussehen:
 Der *$default*-Verbindung-Datensatz wird gebraucht, solange keine
 weitere Verbindung durch *$useDbConfig*-Inhalte in ein Model
 spezifiziert wurde.
- Zum Beispiel, wenn meine Anwendungen eine zweite Datenbank zusätzlich
+
 zur Standart-DB verwenden, dann könnte man diese in den Models verwenden
 in dem man einen neuen *$legacy*-Datensatz zum *$default*-Datensatz
 hinzu fügt und die Einstellung var $useDbConfig = ‘legacy’; in den
@@ -71,7 +71,7 @@ Gepflogenheiten </de/view/22/cakephp-conventions>`_ werfen. Die korrekte
 Benennung der Datensätze (und einiger zugehöriger Sparten) kann Dich
 durch einige zusätzliche Funktionen belohnen und hilft Dir,
 Konfiguration zu vermeiden.
- Zum Beispiel wenn Du Deine Datenbank big\_boxes nennst, Dein Model
+
 BigBox, Deinen Controller BigBoxesController, dann arbeiten alle
 automatisch zusammen. Falls möglich, nutze Unterstriche,
 Einzahl(Singular) und Mehrzahl(Plural) für Deine Datensatz(table)-Namen

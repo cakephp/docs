@@ -544,10 +544,10 @@ $options[‘div’]
 
 utiliser cette option pour mettre a jour les attributs contenus dans la
 balise div. L'introduction d'une chaine de caractère mettra a jour
- l'attribut class . L'introduction d'un tableau mettra a jour les
+
 attributs correspondants au champs clé/valeur du tableau .
 Alternativement ,
- vous pouvez mettre cette option a faux pour pour annuler l'affichage du
+
 div .
 
 Modification du nom de la class :
@@ -1119,7 +1119,7 @@ pour $timeFormat sont ‘12’, ‘24’, et ‘NONE’.
 
 Vous pouvez préciser de ne pas afficher de valeur vide, en spécifiant
 "array('empty' => false)" dans le paramètre 'attributes'.
- Vous pouvez aussi pré-sélectionner la date (et l'heure) courante en
+
 mettant $selected = null et $attributes = array("empty" => false).
 
 day

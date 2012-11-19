@@ -38,7 +38,7 @@ Configuração e Inicialização da Aplicação(bootstrapping)
 Se no seu app/config/bootstrap.php você precisa ter variáveis como
 ``$pluginPaths`` ou ``$controllerPaths``. Na versão 1.3 RC1 as variáveis
 ``$pluginPaths`` não irão mais funcionar.
- No novo modo de adicionar caminhos/paths você deve usar
+
 ``App::build()`` para modificar paths.
 
 ::

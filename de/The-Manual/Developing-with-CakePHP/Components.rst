@@ -128,7 +128,7 @@ ersten Parameter. Die ``initialize()`` Methode wird vor der
 ``beforeFilter()`` Methode der Kontrollklasse aufgerufen, während die
 ``startup()`` Methode erst nach der ``beforeFilter()`` Methode
 aufgerufen wird.
- Falls du aus irgendeinem Grund *nicht* möchtest, dass die ``startup()``
+
 Methode aufgerufen wird, kannst du die Klassenvariable
 ``$disableStartup`` auf *true* setzen.
 

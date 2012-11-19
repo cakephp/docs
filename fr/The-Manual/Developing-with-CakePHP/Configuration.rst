@@ -274,13 +274,13 @@ paramètres.
 Session.save
 
 Indique à CakePHP quel mécanisme de stockage des sessions utiliser.
- php = Utiliser le stockage de session PHP par défaut.
- cache = Utiliser le moteur de cache configuré par Cache::config(). Très
+
+
 utile en conjonction avec Memcache (dans une configuration comportant
 plusieurs serveurs) afin de stocker à la fois les données et sessions du
 cache.
- cake = Stocker les sessions dans /app/tmp
- database = Stocker les données de session dans une table de la base de
+
+
 données. Assurez-vous de configurer correctement la table en utilisant
 le fichier SQL situé dans /app/config/sql/sessions.sql.
 
@@ -316,13 +316,13 @@ Security.level
 Le niveau de sécurité CakePHP. Le temps de déconnexion de la session,
 défini par le paramètre 'Session.timeout', est multiplié par le
 paramètre indiqué ici.
- Valeurs possibles :
+
  'high' = x 10
  'medium' = x 100
  'low' = x 300
  'high' et 'medium' active également
 `session.referer\_check <http://www.php.net/manual/fr/session.configuration.php#ini.session.referer-check>`_
- Les IDs de session CakePHP sont aussi regénérés entre les requêtes si
+
 'Security.level' est défini à 'high'.
 
 Security.salt

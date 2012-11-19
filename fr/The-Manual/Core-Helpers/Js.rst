@@ -636,12 +636,12 @@ submit()
 
 Create a submit input button that enables ``XmlHttpRequest`` submitted
 forms. Options can include
- both those for FormHelper::submit() and JsBaseEngine::request(),
+
 JsBaseEngine::event();
 
 Forms submitting with this method, cannot send files. Files do not
 transfer over ``XmlHttpRequest``
- and require an iframe, or other more specialized setups that are beyond
+
 the scope of this helper.
 
 **Options**

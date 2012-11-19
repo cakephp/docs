@@ -299,28 +299,28 @@ CakeTestCase method, and/or before or after your entire CakeTestCase,
 the following callbacks are available:
 
 **start()**
- First method called in a *test case*.
+
 
 **end()**
- Last method called in a *test case*.
+
 
 **startCase()**
- called before a *test case* is started.
+
 
 **endCase()**
- called after a *test case* has run.
+
 
 **before($method)**
- Announces the start of a *test method*.
+
 
 **after($method)**
- Announces the end of a *test method*.
+
 
 **startTest($method)**
- Called just before a *test method* is executed.
+
 
 **endTest($method)**
- Called just after a *test method* has completed.
+
 
 Testing models
 ==============
@@ -365,7 +365,7 @@ test suite database connection.
 CakePHP Models will only use the test\_suite DB config if they rely on
 fixtures in your testcase!
 
- Since we also want to reuse all our existing model code we will create
+
 a test model that will extend from Article, set $useDbConfig and $name
 appropiately. Let's now create a file named **article.test.php** in your
 **app/tests/cases/models** directory, with the following contents:
@@ -419,7 +419,7 @@ now looks like this:
         }
         ?>    
 
- You can see we have added a method called **testPublished()**. We start
+
 by creating an instance of our fixture based **Article** model, and then
 run our **published()** method. In **$expected** we set what we expect
 should be the proper result (that we know since we have defined which
@@ -561,7 +561,7 @@ Pitfalls
 If you use testAction to test a method in a controller that does a
 redirect, your test will terminate immediately, not yielding any
 results.
- See
+
 `http://mark-story.com/posts/view/testing-cakephp-controllers-the-hard-way <http://mark-story.com/posts/view/testing-cakephp-controllers-the-hard-way>`_
 for a possible fix.
 

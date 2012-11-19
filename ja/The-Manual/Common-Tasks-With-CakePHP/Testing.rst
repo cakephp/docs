@@ -250,28 +250,28 @@ CakeTestCase method, and/or before or after your entire CakeTestCase,
 the following callbacks are available:
 
 **start()**
- First method called in a *test case*.
+
 
 **end()**
- Last method called in a *test case*.
+
 
 **startCase()**
- called before a *test case* is started.
+
 
 **endCase()**
- called after a *test case* has run.
+
 
 **before($method)**
- Announces the start of a *test method*.
+
 
 **after($method)**
- Announces the end of a *test method*.
+
 
 **startTest($method)**
- Called just before a *test method* is executed.
+
 
 **endTest($method)**
- Called just after a *test method* has completed.
+
 
 モデルのテスト
 ==============

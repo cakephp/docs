@@ -2175,7 +2175,7 @@ deletes all records that match the supplied conditions. The
 record. Note that you will need to set dependent to true in the relevant
 model associations
  **callbacks** Boolean, Run callbacks
- Return boolean True on success, false on failure
+
 
 Associations: Linking Models Together
 =====================================
