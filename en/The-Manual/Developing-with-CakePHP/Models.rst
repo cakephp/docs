@@ -1040,7 +1040,7 @@ findBy
 
 The findBy magic functions also accept some optional parameters:
 
-``findBy<fieldName>(string $value[, mixed $fields[, mixed $order]]); ``
+``findBy<fieldName>(string $value[, mixed $fields[, mixed $order]]);``
 
 These magic functions can be used as a shortcut to search your tables by
 a certain field. Just add the name of the field (in CamelCase format) to

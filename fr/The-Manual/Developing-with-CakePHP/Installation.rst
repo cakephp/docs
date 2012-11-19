@@ -231,10 +231,10 @@ d’un utilisateur ou d’un site spécifique).
    #. ``#``
    #. ``# Each directory to which Apache has access can be configured with respect``
    #. ``# to which services and features are allowed and/or disabled in that``
-   #. ``# directory (and its subdirectories). ``
+   #. ``# directory (and its subdirectories).``
    #. ``#``
-   #. ``# First, we configure the "default" to be a very restrictive set of ``
-   #. ``# features.  ``
+   #. ``# First, we configure the "default" to be a very restrictive set of``
+   #. ``# features.``
    #. ``#``
    #. ``<Directory />``
    #. ``    Options FollowSymLinks``

@@ -235,7 +235,7 @@ tableau suivant:
 style
 -----
 
-``style(array $data, boolean $oneline = true)  ``
+``style(array $data, boolean $oneline = true)``
 
 Construit des définitions de styles CSS, basées sur les clés et valeurs
 du tableau passé à la méthode. Particulièrement pratique si votre
@@ -398,7 +398,7 @@ spécifié, seul le <tag> ouvrant sera retourné.
 div
 ---
 
-``div(string $class, string $text, array $options) ``
+``div(string $class, string $text, array $options)``
 
 Used for creating div-wrapped sections of markup. The first parameter
 specifies a CSS class, and the second is used to supply the text to be

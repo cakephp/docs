@@ -229,7 +229,7 @@ joindre à la propriété des pièces jointes de la composante.
 
 Le premier fichier `` foo.doc `` sera joint avec le même nom. Pour le
 second fichier, nous indiquer un alias `` bar.doc `` sera être utilisé
-pour fixer la place de son nom réel du fichier `` Nom-du-fichier-réel ``
+pour fixer la place de son nom réel du fichier `` Nom-du-fichier-réel``
 
 Envoyer un Message par SMTP
 ===========================
