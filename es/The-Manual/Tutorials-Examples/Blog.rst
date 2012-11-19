@@ -609,7 +609,7 @@ Si ``create()`` es llamado sin suministrarle parámetros, este supone que
 está construyendo un formulario que suministra datos a la acción
 ``add()`` (o a la acción ``edit()`` cuando el parámetro ``id`` esta
 incluído en los datos del formulario
-(``$form->data)), a través del metodo POST.
+(``$form->data)), a través del metodo POST.                  ``
 
 El método ``$form->input()`` es utilizado para crear elementos de
 formulario del mismo nombre. El primer parámetro le dice a CakePHP a que

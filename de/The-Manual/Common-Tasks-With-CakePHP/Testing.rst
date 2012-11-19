@@ -232,7 +232,7 @@ werden.
 
 Tabelle
  **articles** veranlassen, indem die CakePHP-Datenbankverbindung
- **'default'**
+**'default'**
 
 
 musst du

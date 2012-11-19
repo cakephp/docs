@@ -20,7 +20,7 @@ chaîne de caractère de 128 bits dans un format de type
 tokenize
 ========
 
-``string tokenize ($data, $separator = ',', $leftBound = '(', $rightBound = ')')
+``string tokenize ($data, $separator = ',', $leftBound = '(', $rightBound = ')') ``
 
 Segmente une chaîne en utilisant ``$separator``, ignore les occurrences
 de ``$separator`` s'ils apparaissent entre ``$leftBound`` et

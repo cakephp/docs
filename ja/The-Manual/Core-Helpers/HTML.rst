@@ -195,7 +195,7 @@ $htmlAttributes パラメータを使用して "type"
     <?php echo $html->docType('html4-trans'); ?> 
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-``style(array $data, boolean $inline = true)
+``style(array $data, boolean $inline = true)  ``
 
 メソッドに渡された配列のキーと値に基づいて CSS
 スタイル定義を構築します。CSS ファイルが動的である場合に特に便利です。
@@ -225,7 +225,7 @@ $htmlAttributes パラメータを使用して "type"
     // 出力
     <img src="/img/cake_logo.png" alt="CakePHP" /> 
 
-``div(string $class, string $text, array $htmlAttributes, boolean $escape = false)
+``div(string $class, string $text, array $htmlAttributes, boolean $escape = false) ``
 
 マークアップを div で囲んだセクションを生成するために使用します。第 1
 引数は CSS クラスを指定し、第 2 引数は div
@@ -538,7 +538,7 @@ following table:
 style
 -----
 
-``style(array $data, boolean $oneline = true)
+``style(array $data, boolean $oneline = true)  ``
 
 Builds CSS style definitions based on the keys and values of the array
 passed to the method. Especially handy if your CSS file is dynamic.
@@ -705,7 +705,7 @@ previous versions.
 div
 ---
 
-``div(string $class, string $text, array $options)
+``div(string $class, string $text, array $options) ``
 
 Used for creating div-wrapped sections of markup. The first parameter
 specifies a CSS class, and the second is used to supply the text to be
