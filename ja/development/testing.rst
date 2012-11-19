@@ -50,7 +50,8 @@ CakePHPのテストフレームワークは、PHPUnitを基礎としています
 
 .. note::
 
-    実際に使うものとは別に、テスト用のデータベースを用意するのは良い考えです。後々に起こりうる厄介な失敗を防ぐでしょう。
+    実際に使うものとは別に、テスト用のデータベースを用意するのは良い考えです。
+    後々に起こりうる厄介な失敗を防ぐでしょう。
 
 テストが実行できるか確認する
 =====================
@@ -258,7 +259,8 @@ CakePHPはテストを実行するために ``test`` シェルを提供します
 
     ./Console/cake test app Model/Article --coverage-html webroot/coverage
 
-カバレッジの結果はアプリケーションのwebrootディレクトリに配置されます。これらのファイルにはは ``http://localhost/your_app/coverage`` からアクセスすることができます。
+カバレッジの結果はアプリケーションのwebrootディレクトリに配置されます。
+これらのファイルにはは ``http://localhost/your_app/coverage`` からアクセスすることができます。
 
 テストケースのライフサイクルコールバック
 ===========================
@@ -297,7 +299,9 @@ CakePHPはフィクスチャに基づいたテストケースを実行するに�
 that will be used to test our own Article
 model. Create a file named ``ArticleFixture.php`` in your
 ``app/Test/Fixture`` directory, with the following content
-それでは最初のフィクスチャを作成してみましょう。この例ではArticleモデルのフィクスチャを作成します。 ``app/Test/Fixture`` というディレクトリに ``app/Test/Fixture`` という名前のファイルを作成し、以下のとおりに記述してください。::
+それでは最初のフィクスチャを作成してみましょう。この例ではArticleモデルのフィクスチャを作成します。
+``app/Test/Fixture`` というディレクトリに ``app/Test/Fixture`` という名前のファイルを作成し、
+以下のとおりに記述してください。::
 
     <?php
     class ArticleFixture extends CakeTestFixture { 
@@ -319,12 +323,14 @@ model. Create a file named ``ArticleFixture.php`` in your
           ); 
      } 
 
-``$useDbConfig`` プロパティはフィクスチャが使うデータソースの定義をします。複数のデータソースを使うときは、
-モデルのデータソースと合わせてフィクスチャを作るようにします。ただし、 ``test_`` という
-プレフィックスをつけてください。たとえば、 ``mydb`` というデータソースを使うモデルの場合は、
-フィクスチャのデータソースを ``test_mydb`` とします。もし ``test_mydb`` の接続が
-存在しなかったときは規定値として ``mydb`` がデータソースとして使われます。テストを実行するときに
-テーブル名の衝突を避けるため、フィクスチャのデータソースには ``test`` の接頭辞が必ず付きます。
+``$useDbConfig`` プロパティはフィクスチャが使うデータソースの定義をします。
+複数のデータソースを使うときは、モデルのデータソースと合わせてフィクスチャを
+作るようにします。ただし、 ``test_`` というプレフィックスをつけてください。
+たとえば、 ``mydb`` というデータソースを使うモデルの場合は、フィクスチャの
+データソースを ``test_mydb`` とします。もし ``test_mydb`` の接続が
+存在しなかったときは規定値として ``mydb`` がデータソースとして使われます。
+テストを実行するときにテーブル名の衝突を避けるため、フィクスチャのデータソースには
+``test`` の接頭辞が必ず付きます。
 
 
 ``$fields`` ではテーブルを構成するフィールドと、その定義を記述します。
@@ -354,8 +360,9 @@ model. Create a file named ``ArticleFixture.php`` in your
 フィクスチャのテーブルを作成してから、そのテーブルに投入するレコードを定義することができます。
 ``$records`` はレコードの配列であり、データの書式もとても簡単です。
 ``$records`` の各アイテムはひとつの行を表し、カラム名と値の連想配列で構成されます。
-$records の持つ配列は各要素 **ごとに** ``$fields`` で指定した特定のキーを持たなければならないことを
-覚えておいてください。あるフィールドの値を ``null`` としたいときは、そのキーの値を ``null`` とします。
+$records の持つ配列は各要素 **ごとに** ``$fields`` で指定した特定のキーを
+持たなければならないことを覚えておいてください。あるフィールドの値を ``null`` と
+したいときは、そのキーの値を ``null`` とします。
 
 動的データとフィクスチャ
 -----------------
@@ -401,11 +408,13 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 
 アプリケーションに動作するモデルがあり、モデルが扱うテーブルに実際のデータがある場合、
 そのデータとモデルをテストに使いたいと思うことがあるでしょう。
-しかし、そのためにわざわざテーブルとフィクスチャの定義をすることは二重の努力となってしまうでしょう。
-幸いにもCakePHPには、既存のモデルとテーブルから特定のフィクスチャのテーブルとレコードを定義する方法があります。
+しかし、そのためにわざわざテーブルとフィクスチャの定義をすることは
+二重の努力となってしまうでしょう。幸いにもCakePHPには、既存のモデルとテーブルから
+特定のフィクスチャのテーブルとレコードを定義する方法があります。
 
-例を見てみましょう。アプリケーション中に「Article」という名前のモデルがあり、それが「articles」という
-テーブルにマップされているとします。前節で作成した例のフィクスチャ(``app/Test/Fixture/ArticleFixture.php``)を、
+例を見てみましょう。アプリケーション中に「Article」という名前のモデルがあり、
+それが「articles」というテーブルにマップされているとします。前節で作成した
+例のフィクスチャ(``app/Test/Fixture/ArticleFixture.php``)を、
 次のように書き換えてください。::
 
     <?php
@@ -432,7 +441,8 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
     }
 
 この例では「articles」というテーブルから定義をインポートします。このときCakePHPは
-「default」という名前のデータベース接続設定を使います。これを変更したい場合は次のように書き換えます。::
+「default」という名前のデータベース接続設定を使います。これを変更したい場合は
+次のように書き換えます。::
 
     <?php
     class ArticleFixture extends CakeTestFixture {
@@ -473,8 +483,9 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
         public $fixtures = array('app.article', 'app.comment');
     }
 
-上記の例では、「Article」と「Comment」フィクスチャをアプリケーションの「Fixture」ディレクトリからロードします。
-同じようにCakePHPのコアやプラグインからもロードすることができます。::
+上記の例では、「Article」と「Comment」フィクスチャをアプリケーションの
+「Fixture」ディレクトリからロードします。同じようにCakePHPのコアや
+プラグインからもロードすることができます。::
 
     <?php
     class ArticleTest extends CakeTestCase {
@@ -484,8 +495,9 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 ``core`` のプレフィックスを使えばCakePHPから、プラグイン名をプレフィックスとして使えば
 その名前のプラグインからフィクスチャをロードします。
 
-フィクスチャのロードは :php:attr:`CakeTestCase::$autoFixtures` を ``false`` に設定したあと、
-テストメソッドの中で :php:meth:`CakeTestCase::loadFixtures()`:: を使ってを制御することもできます。::
+フィクスチャのロードは :php:attr:`CakeTestCase::$autoFixtures` を 
+``false`` に設定したあと、テストメソッドの中で
+:php:meth:`CakeTestCase::loadFixtures()`:: を使ってを制御することもできます。::
 
     <?php
     class ArticleTest extends CakeTestCase {
@@ -516,10 +528,11 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
         }
     }
 
-このモデルの機能をテストするために、このモデルの定義とフィクスチャを使ってテストのセットアップを行います。
-CakePHPのテストスイートはテストの独立性を確保するため、ごく最小限のファイルしかロードしません。
-そこで、まずはモデルをロードするところからはじめなければなりません。この場合、すでに定義した
-「Article」モデルのことを指します。
+このモデルの機能をテストするために、このモデルの定義とフィクスチャを使って
+テストのセットアップを行います。CakePHPのテストスイートはテストの独立性を
+確保するため、ごく最小限のファイルしかロードしません。
+そこで、まずはモデルをロードするところからはじめなければなりません。
+この場合、すでに定義した「Article」モデルのことを指します。
 
 それでは ``ArticleTest.php`` というファイルを ``app/Test/Case/Model``
 というディレクトリに作成し、以下のように記述しましょう。::
@@ -536,8 +549,9 @@ CakePHPのテストスイートはテストの独立性を確保するため、�
 
 .. note::
 
-    ``$useDbConfig``プロパティを指定することで、テストモデルのデータベースをオーバーライドできます。
-    テーブルが正しいデータベースで生成されるように、関連するフィクスチャが同じ値を使うことを確認してください。
+    ``$useDbConfig``プロパティを指定することで、テストモデルの
+    データベースをオーバーライドできます。テーブルが正しいデータベースで
+    生成されるように、関連するフィクスチャが同じ値を使うことを確認してください。
 
 テストメソッドの作成
 ----------------------
@@ -577,8 +591,9 @@ CakePHPのテストスイートはテストの独立性を確保するため、�
 
 .. note::
 
-    テストのためにモデルをセットアップするときは、テスト用のデータベース接続を使うようにするために必ず
-    ``ClassRegistry::init('YourModelName');`` を使ってください。
+    テストのためにモデルをセットアップするときは、テスト用のデータベース接続を
+    使うようにするために必ず ``ClassRegistry::init('YourModelName');`` 
+    使ってください。
 
 コントローラーのテスト
 ==============
@@ -588,7 +603,8 @@ CakePHPのテストスイートはテストの独立性を確保するため、�
 このクラスをコントローラーのテストケースの親クラスとすることで、
 コントローラーのテストケースを ``testAction()`` というメソッドでより簡単にすることができます。
 ``ControllerTestCase`` は擬似的にコンポーネントやモデルを動かすだけでなく、
-:php:meth:`~Controller::redirect()` のように潜在的にテストが難しいメソッドのテストも簡単にしてくれます。
+:php:meth:`~Controller::redirect()` のように潜在的にテストが難しいメソッドの
+テストも簡単にしてくれます。
 
 下記のように、「Article」モデルに対応した典型的なコントローラーがあるとします。::
 
@@ -615,7 +631,8 @@ CakePHPのテストスイートはテストの独立性を確保するため、�
         }
     }
 
-ディレクトリ ``app/Test/Case/Controller`` に ``ArticlesControllerTest.php`` というファイルを作成し、次のように記述します。::
+ディレクトリ ``app/Test/Case/Controller`` に ``ArticlesControllerTest.php`` 
+というファイルを作成し、次のように記述します。::
 
     <?php
     class ArticlesControllerTest extends ControllerTestCase {
@@ -707,8 +724,9 @@ CakePHPのテストスイートはテストの独立性を確保するため、�
 GETリクエストのシミュレート
 -----------------------
 
-上の例の ``testIndexPostData()`` では、 ``testAction()`` はPOSTだけでなくGETリクエストのアクションとしても使えます。
-``data`` キーによってPOSTされるであろう値を設定します。規定ではすべてのリクエストはPOSTと扱われます。
+上の例の ``testIndexPostData()`` では、 ``testAction()`` はPOSTだけでなく
+GETリクエストのアクションとしても使えます。``data`` キーによって
+POSTされるであろう値を設定します。規定ではすべてのリクエストはPOSTと扱われます。
 GETリクエストをシミュレートしたい場合は ``method`` キーを設定します。::
 
     <?php
@@ -752,7 +770,8 @@ returnする値の選択
 コンポーネントやモデルの一部または全部をモックにより置き換えたい時があるでしょう。
 そういったときは :php:meth:`ControllerTestCase::generate()` を使うとよいでしょう。
 ``generate()`` はコントローラーにおいてモックを作成する強力なワークアウトを持ちます。
-テストで使われるコントローラーを決定したら、同時にモデルとコンポーネントのモックを生成できます。::
+テストで使われるコントローラーを決定したら、同時にモデルとコンポーネントの
+モックを生成できます。::
 
     <?php
     $Posts = $this->generate('Posts', array(
@@ -786,12 +805,12 @@ returnする値の選択
 より複雑な例
 ----------
 
-In its simplest form, ``testAction()`` will run ``PostsController::index()`` on 
-your testing controller (or an automatically generated one), including all of the
-mocked models and components. The results of the test are stored in the ``vars``,
-``contents``, ``view``, and ``return`` properties. Also available is a headers
-property which gives you access to the ``headers`` that would have been sent,
-allowing you to check for redirects::
+もっとも単純なフォームでは、 ``testAction()`` は作成したテスト用コントローラーや、
+モックされたすべてのモデルやコンポーネントを含め自動的に作成されたものを使い、
+``PostsController::index()`` を実行します。
+テストの結果は ``vars`` や ``contents`` 、 ``view`` 、 ``return`` といった
+プロパティに格納されます。送信されたヘッダー情報には ``headers`` から
+アクセスすることができ、リダイレクトを確認することができます。::
 
     <?php
     public function testAdd() {
@@ -821,15 +840,16 @@ allowing you to check for redirects::
         $this->assertRegExp('/<form/', $this->view);
     }
 
-This example shows a slightly more complex use of the ``testAction()`` and
-``generate()`` methods. First, we generate a testing controller and mock the
-:php:class:`SessionComponent`. Now that the SessionComponent is mocked, we have the ability
-to run testing methods on it. Assuming ``PostsController::add()`` redirects us to
-index, sends an email and sets a flash message, the test will pass. For the sake
-of example, we also check to see if the layout was loaded by checking the entire
-rendered contents, and checks the view for a form tag. As you can see, your
-freedom to test controllers and easily mock its classes is greatly expanded with
-these changes.
+ここでは、 ``testAction()`` と ``generate()`` メソッドの少々複雑な使用例を示しています。
+まず、テストするコントローラーを作成し、 :php:class:`SessionComponent` をモックします。
+SessionComponent がモックされたことで、それを用いたテストメソッドの実行が可能となります。
+
+``PostsController::add()`` がindexにリダイレクトを実行し、
+メールを送信したあと、flashメッセージを設定すればテストは合格です。
+例のために、レンダリングされたコンテンツ全体を確かめることでレイアウトがロードされたか、
+また、formタグのためにビューをチェックするかどうかを確認するため、同様にチェックします。
+見てのとおり、コントローラーをテストする自由度と、モックを扱う容易さは、
+これらの変更により大きく拡張されます。
 
 静的メソッドを使うモックを用いてコントローラーのテストをするときは、
 モックに期待する値を登録する別のメソッドを用います。
@@ -1106,7 +1126,8 @@ Jenkinsとのインテグレーション
 CakePHPとJenkinsはかなり簡単にインテグレーションすることができます。
 ここでの解説は、すでにUnixライクな環境にJenkinsがインストールされていて、管理者権限を持つことが
 できる状態を前提とします。また、ジョブの作成とビルドの方法も知っているものとします。もしわからない場合は
-`Jenkins documentation <http://jenkins-ci.org/>`_ または `Jenkins Wiki日本語版 <https://wiki.jenkins-ci.org/display/JA/Jenkins>`_ を参考にしてください。
+`Jenkins documentation <http://jenkins-ci.org/>`_ または
+`Jenkins Wiki日本語版 <https://wiki.jenkins-ci.org/display/JA/Jenkins>`_ を参考にしてください。
 
 ジョブの作成
 ------------
