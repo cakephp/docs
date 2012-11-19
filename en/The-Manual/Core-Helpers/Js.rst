@@ -23,14 +23,12 @@ Using a specific Javascript engine
 First of all download your preferred javascript library and place it in
 ``app/webroot/js``
 
-Then you must include the library in your page. To include it in all
-pages, add this ****\ line to the <head> section of
-``app/views/layouts/default.ctp`` (copy this file from
-``cake/libs/view/layouts/default.ctp`` if you have not created your
-own).
+Then you must include the library in your page. To include it in all pages, add
+this line to the <head> section of ``app/views/layouts/default.ctp`` (copy this
+file from ``cake/libs/view/layouts/default.ctp`` if you have not created your
+own)::
 
-::
-
+    <?php
     echo $this->Html->script('jquery'); // Include jQuery library
 
 Replace ``jquery`` with the name of your library file (.js will be added
@@ -38,20 +36,18 @@ to the name).
 
 By default scripts are cached, and you must explicitly print out the
 cache. To do this at the end of each page, include this line just before
-the ending ``</body>`` tag
+the ending ``</body>`` tag::
 
-::
-
+    <?php
     echo $this->Js->writeBuffer(); // Write cached scripts
 
 You must include the library in your page and print the cache for the
 helper to function.
 
 Javascript engine selection is declared when you include the helper in
-your controller.
+your controller::
 
-::
-
+    <?php
     var $helpers = array('Js' => array('Jquery'));
 
 The above would use the Jquery Engine in the instances of JsHelper in
@@ -254,6 +250,7 @@ see separate lists for ``Options`` and ``Event Options`` both sets of
 parameters are supplied in the ``$options`` array for the method.
 
 object($data, $options = array())
+---------------------------------
 
 Converts values into JSON. There are a few differences between this
 method and JavascriptHelper::object(). Most notably there is no
@@ -273,6 +270,7 @@ script tags.
     $json = $this->Js->object($data);
 
 sortable($options = array())
+----------------------------
 
 Sortable generates a javascript snippet to make a set of elements
 (usually a list) drag and drop sortable.
@@ -322,6 +320,7 @@ code in your generated Javascript block:
     $("#myList").sortable({containment:"parent", distance:5, sort:onSort, start:onStart, stop:onStop});
 
 request($url, $options = array())
+---------------------------------
 
 Generate a javascript snippet to create an ``XmlHttpRequest`` or 'AJAX'
 request.
@@ -358,6 +357,7 @@ request.
     'update' => '#element')));
 
 get($selector)
+--------------
 
 Set the internal 'selection' to a CSS selector. The active selection is
 used in subsequent operations until a new selection is made.
@@ -371,6 +371,7 @@ the selection of ``#element``. To change the active selection, call
 ``get()`` again with a new element.
 
 drag($options = array())
+------------------------
 
 Make an element draggable.
 
@@ -409,6 +410,7 @@ the buffer.
     $("#element").draggable({containment:"#content", drag:onDrag, grid:[10,10], start:onStart, stop:onStop});
 
 drop($options = array())
+------------------------
 
 Make an element accept draggable elements and act as a dropzone for
 dragged elements.
@@ -455,6 +457,7 @@ provide a selector rule to the draggable element. Furthermore, Mootools
 droppables inherit all options from Drag.
 
 slider()
+--------
 
 Create snippet of Javascript that converts an element into a slider ui
 widget. See your libraries implementation for additional usage and
@@ -498,6 +501,7 @@ the buffer:
     $("#element").slider({change:onChange, max:10, min:0, orientation:"vertical", stop:onComplete, value:2});
 
 effect($name, $options = array())
+---------------------------------
 
 Creates a basic effect. By default this method is not buffered and
 returns its result.
@@ -530,6 +534,7 @@ If you were using the jQuery engine.
     //$result contains $("#foo").fadeIn();
 
 event($type, $content, $options = array())
+------------------------------------------
 
 Bind an event to the current selection. ``$type`` can be any of the
 normal DOM events or a custom event type if your library supports them.
@@ -579,11 +584,13 @@ is not cancelled.
     });
 
 domReady($callback)
+-------------------
 
 Creates the special 'DOM ready' event. ``writeBuffer()`` automatically
 wraps the buffered scripts in a domReady method.
 
 each($callback)
+---------------
 
 Create a snippet that iterates over the currently selected elements, and
 inserts ``$callback``.
@@ -602,6 +609,7 @@ Using the jQuery engine would create the following Javascript
     $('div.message').each(function () { $(this).css({color: "red"});});
 
 alert($message)
+---------------
 
 Create a javascript snippet containing an ``alert()`` snippet. By
 default, ``alert`` does not buffer, and returns the script snippet.
@@ -611,6 +619,7 @@ default, ``alert`` does not buffer, and returns the script snippet.
     $alert = $this->Js->alert('Hey there');
 
 confirm($message)
+-----------------
 
 Create a javascript snippet containing a ``confirm()`` snippet. By
 default, ``confirm`` does not buffer, and returns the script snippet.
@@ -620,6 +629,7 @@ default, ``confirm`` does not buffer, and returns the script snippet.
     $alert = $this->Js->confirm('Are you sure?');
 
 prompt($message, $default)
+--------------------------
 
 Create a javascript snippet containing a ``prompt()`` snippet. By
 default, ``prompt`` does not buffer, and returns the script snippet.
@@ -629,26 +639,25 @@ default, ``prompt`` does not buffer, and returns the script snippet.
     $prompt = $this->Js->prompt('What is your favorite color?', 'blue');
 
 submit()
+--------
 
-Create a submit input button that enables ``XmlHttpRequest`` submitted
-forms. Options can include
+Create a submit input button that enables ``XmlHttpRequest`` submitted forms.
+Options can include both those for FormHelper::submit() and
+JsBaseEngine::request(), JsBaseEngine::event();
 
-JsBaseEngine::event();
-
-Forms submitting with this method, cannot send files. Files do not
-transfer over ``XmlHttpRequest``
-
-the scope of this helper.
+Forms submitting with this method, cannot send files. Files do not transfer over
+``XmlHttpRequest`` and require an iframe, or other more specialized setups that
+are beyond the scope of this helper.
 
 **Options**
 
--  ``confirm`` - Confirm message displayed before sending the request.
-   Using confirm, does not replace any ``before`` callback methods in
-   the generated XmlHttpRequest.
--  ``buffer`` - Disable the buffering and return a script tag in
-   addition to the link.
--  ``wrapCallbacks`` - Set to false to disable automatic callback
-   wrapping.
+- ``confirm`` - Confirm message displayed before sending the request.
+  Using confirm, does not replace any ``before`` callback methods in
+  the generated XmlHttpRequest.
+- ``buffer`` - Disable the buffering and return a script tag in
+  addition to the link.
+- ``wrapCallbacks`` - Set to false to disable automatic callback
+  wrapping.
 
 **Example use**
 
@@ -667,6 +676,7 @@ Shows how you can combine options that both ``FormHelper::submit()`` and
 ``Js::request()`` when using submit.
 
 link($title, $url = null, $options = array())
+---------------------------------------------
 
 Create an html anchor element that has a click event bound to it.
 Options can include both those for HtmlHelper::link() and
@@ -710,6 +720,7 @@ attributes.
     <a href="/posts/index/page:2" other="value">Page 2</a>
 
 serializeForm($options = array())
+---------------------------------
 
 Serialize the form attached to $selector. Pass ``true`` for $isForm if
 the current selection is a form element. Converts the form or the form
@@ -728,10 +739,12 @@ useful when you need to serialize a form element as part of another
 Javascript operation, or use the serialize method in an Object literal.
 
 redirect($url)
+--------------
 
 Redirect the page to ``$url`` using ``window.location``.
 
 value($value)
+-------------
 
 Converts a PHP-native variable of any type to a JSON-equivalent
 representation. Escapes any string values into JSON compatible strings.

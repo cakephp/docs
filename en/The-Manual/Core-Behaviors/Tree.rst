@@ -387,10 +387,10 @@ generatetreelist
 
 ``generatetreelist ($conditions=null, $keyPath=null, $valuePath=null, $spacer= '_', $recursive=null)``
 
-This method will return data similar to
-```find('list')`:doc:`/The-Manual/Developing-with-CakePHP/Models`, with an indented prefix to
-show the structure of your data. Below is an example of what you can
-expect this method to return.
+This method will return data similar to ``find('list')``
+:doc:`/The-Manual/Developing-with-CakePHP/Models`, with an indented prefix to
+show the structure of your data. Below is an example of what you can expect this
+method to return.
 
 -  ``$conditions`` - Uses the same conditional options as find().
 -  ``$keyPath`` - Path to the field to use for the key.
@@ -571,7 +571,7 @@ removeFromTree
 
 Using this method wil either delete or move a node but retain its
 sub-tree, which will be reparented one level higher. It offers more
-control than ```delete()`:doc:`/The-Manual/Core-Components/Sessions`, which for a model
+control than ``delete()`` :doc:`/The-Manual/Core-Components/Sessions`, which for a model
 using the tree behavior will remove the specified node and all of its
 children.
 
@@ -587,10 +587,9 @@ Taking the following tree as a starting point:
          -  Extreme knitting
          -  Skating
 
-Running the following code with the id for 'Sport'
+Running the following code with the id for 'Sport::
 
-::
-
+    <?php
     $this->Node->removeFromTree($id); 
 
 The Sport node will be become a top level node:
@@ -608,10 +607,9 @@ The Sport node will be become a top level node:
 This demonstrates the default behavior of ``removeFromTree`` of moving
 the node to have no parent, and re-parenting all children.
 
-If however the following code snippet was used with the id for 'Sport'
+If however the following code snippet was used with the id for 'Sport'::
 
-::
-
+    <?php
     $this->Node->removeFromTree($id,true); 
 
 The tree would become
@@ -634,10 +632,9 @@ reorder
 
 Reorders the nodes (and child nodes) of the tree according to the field
 and direction specified in the parameters. This method does not change
-the parent of any node.
+the parent of any node::
 
-::
-
+    <?php
     $model->reorder(array(
         'id' => ,    //id of record to use as top node for reordering, default: $Model->id
         'field' => , //which field to use in reordering, default: $Model->displayField

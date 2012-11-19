@@ -36,13 +36,10 @@ Configuration and application bootstrapping
 
 **Bootstrapping Additional Paths.**
 
-In your app/config/bootstrap.php you may have variables like
-``$pluginPaths`` or ``$controllerPaths``.
-
-``$pluginPaths`` variables will no longer work. You must use
-
-
-::
+In your app/config/bootstrap.php you may have variables like ``$pluginPaths`` or
+``$controllerPaths``.  There is a new way to add those paths. As of 1.3 RC1 the
+``$pluginPaths`` variables will no longer work. You must use ``App::build()`` to
+modify paths::
 
     App::build(array(
         'plugins' => array('/full/path/to/plugins/', '/next/full/path/to/plugins/'),
@@ -60,11 +57,10 @@ In your app/config/bootstrap.php you may have variables like
     ));
 
 Also changed is the order in which bootstrapping occurs. In the past
-``app/config/core.php`` was loaded **after**
-``app/config/bootstrap.php``. This caused any ``App::import()`` in an
-application bootstrap to be un-cached and considerably slower than a
-cached include. In 1.3 core.php is loaded and the core cache configs are
-created **before** bootstrap.php is loaded.
+``app/config/core.php`` was loaded **after** ``app/config/bootstrap.php``. This
+caused any ``App::import()`` in an application bootstrap to be un-cached and
+considerably slower than a cached include. In 1.3 core.php is loaded and the
+core cache configs are created **before** bootstrap.php is loaded.
 
 **Loading custom inflections**
 
@@ -501,12 +497,11 @@ echo helper output.
 
 **PaginatorHelper**
 
-PaginatorHelper has had a number of enhancements applied to make styling
-easier.
+PaginatorHelper has had a number of enhancements applied to make styling easier.
+``prev()``, ``next()``, ``first()`` and ``last()``
 
-
-The disabled state of these methods now defaults to ``<span>`` tags
-instead of ``<div>`` tags.
+The disabled state of these methods now defaults to ``<span>`` tags instead of
+``<div>`` tags.
 
 passedArgs are now auto merged with url options in paginator.
 

@@ -15,6 +15,7 @@ three main parts:
    :alt: Figure 1
 
    Figure 1
+
 Figure: 1: A Basic MVC Request
 
 Figure: 1 shows an example of a bare-bones MVC request in CakePHP. To
