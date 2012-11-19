@@ -224,8 +224,7 @@ debug
 Changes CakePHP debugging output.
  0 = Production mode. No output.
  1 = Show errors and warnings.
- 2 = Show errors, warnings, and SQL. [SQL log is only shown when you add
-$this->element('sql\_dump') to your view or layout.]
+ 2 = Show errors, warnings, and SQL. [SQL log is only shown when you add $this->element('sql\_dump') to your view or layout.]
 
 App.baseUrl
 
@@ -297,8 +296,7 @@ The level of CakePHP security. The session timeout time defined in
  'high' = x 10
  'medium' = x 100
  'low' = x 300
- 'high' and 'medium' also enable
-`session.referer\_check <http://www.php.net/manual/en/session.configuration.php#ini.session.referer-check>`_
+ 'high' and 'medium' also enable `session.referer\_check <http://www.php.net/manual/en/session.configuration.php#ini.session.referer-check>`_
 
 'Security.level' is set to 'high'.
 

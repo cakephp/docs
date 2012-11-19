@@ -218,8 +218,7 @@ a need for a corresponding Model file.
 
 It's bad practice to just add all the models your controller uses to the
 ``$uses`` array. Check
-`here <http://book.cakephp.org/view/1040/Relationship-Types>`_ and
-`here <http://book.cakephp.org/view/992/loadModel>`_ to see how to
+:doc:`/The-Manual/Developing-with-CakePHP/Models` to see how to
 properly access associated and unassociated models respectively.
 
 Page-related Attribute: $layout

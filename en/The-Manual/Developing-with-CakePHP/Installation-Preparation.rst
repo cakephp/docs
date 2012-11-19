@@ -33,7 +33,7 @@ downloads <http://github.com/cakephp/cakephp1x/downloads>`_.
 Alternatively you can get fresh off the press code, with all the
 bug-fixes and up to the minute(well, to the day) enhancements. These can
 be accessed from github by cloning the repository.
-`Github <http://github.com/cakephp/cakephp>`_.
+`CakePHP repository <http://github.com/cakephp/cakephp>`_.
 
 Permissions
 ===========
