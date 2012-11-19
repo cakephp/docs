@@ -247,12 +247,10 @@ following table:
 style
 -----
 
-``style(array $data, boolean $oneline = true)  ``
+``style(array $data, boolean $oneline = true)``
 
 Builds CSS style definitions based on the keys and values of the array
-passed to the method. Especially handy if your CSS file is dynamic.
-
-::
+passed to the method. Especially handy if your CSS file is dynamic::
 
     <?php echo $this->Html->style(array(
         'background'     => '#633',
@@ -260,9 +258,7 @@ passed to the method. Especially handy if your CSS file is dynamic.
         'padding' => '10px'
     )); ?>
 
-Will output:
-
-::
+Will output::
 
       background:#633; border-bottom:1px solid #000; padding:10px;
 
@@ -414,7 +410,7 @@ previous versions.
 div
 ---
 
-``div(string $class, string $text, array $options) ``
+``div(string $class, string $text, array $options)``
 
 Used for creating div-wrapped sections of markup. The first parameter
 specifies a CSS class, and the second is used to supply the text to be
