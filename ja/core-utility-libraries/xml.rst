@@ -1,42 +1,43 @@
-Xml
+XML
 ###
 
 .. php:class:: Xml
 
-The Xml class was all refactored. As PHP 5 have
-`SimpleXML <http://php.net/simplexml>`_ and
-`DOMDocument <http://php.net/domdocument>`_, the CakePHP doesn't need to
-re-implement an XML parser. The new XML class will basically transform an array
-into SimpleXMLElement or DOMDocument objects, and vice versa.
+Xml クラスはすべてリファクタリングされました。 PHP5 には
+`SimpleXML <http://php.net/simplexml>`_ と
+`DOMDocument <http://php.net/domdocument>`_ があり、
+CakePHP で XML パーサーを再実装する必要がないからです。
+新しい Xml クラスは配列から SimpleXMLElement や DOMDocument
+または逆方向への基本的な変換を行います。
 
-
-Importing data to Xml class
+Xml クラスへのデータのインポート
 ===========================
 
-In CakePHP 1.3 you can pass array, XML as string, URL or file path to the
-constructor of Xml class to import data. In CakePHP 2.0 you can do it using
-:php:meth:`Xml::build()`. Unless the return is an Xml object, it will return a
-SimpleXMLElement or DOMDocument object (depending of your options parameter -
-default is SimpleXMLElement). Below the samples how to import data from URL::
+CakePHP 1.3 では、 Xml クラスへデータをインポートするために、コンストラクタへ
+配列、 XML 文字列、 URL やファイルパスを渡すことができました。
+CakePHP 2.0 では、 :php:meth:`Xml::build()` を使うことで可能になります。
+Xml オブジェクトが返るまでの間、 SimpleXMLElement または DOMDocument 
+オブジェクトを返します。オブジェクトのクラスはオプションのパラメータに依存し、
+既定では SimpleEMLElement を返します。以下のサンプルは URL から
+データをインポートする方法を示しています。::
 
     <?php
-    // Old method:
+    // 今までの方法:
     $xml = new Xml('http://bakery.cakephp.org/articles/rss');
 
-    // New method using SimpleXML
+    // SimpleXML を使った新しい方法:
     $xml = Xml::build('http://bakery.cakephp.org/articles/rss');
-    // $xml now is a instance of SimpleXMLElement
+    // このとき、 $xml は SimpleXMLElement のインスタンスです。
 
-    //or
+    // もしくは
     $xml = Xml::build('http://bakery.cakephp.org/articles/rss', array('return' => 'simplexml'));
-    // $xml now is a instance of SimpleXMLElement
+    // このときも、 $xml は SimpleXMLElement のインスタンスです。
 
-    // New method using DOMDocument
+    // DOMDocument を使った新しい方法:
     $xml = Xml::build('http://bakery.cakephp.org/articles/rss', array('return' => 'domdocument'));
-    // $xml now is a instance of DOMDocument
+    // このとき、 $xml は DOMDocument のインスタンスです。
 
-You can use :php:meth:`Xml::build()` to build XML objects from a variety of sources.  You
-can use XML to build objects from string data::
+:php:meth:`Xml::build()` を使うことで、多様なソースから XML オブジェクトを作成することができます。たとえば、文字列から XMLオブジェクトを作成することができます。::
 
     <?php
     $text = '<?xml version="1.0" encoding="utf-8"?>
@@ -47,17 +48,17 @@ can use XML to build objects from string data::
     </post>';
     $xml = Xml::build($text);
 
-You can also build Xml objects from either local files, or remote files.  Remote
-files will be fetched with :php:class:`HttpSocket`::
+ローカルやリモートにあるファイルからも Xml オブジェクトを作成することができます。
+リモートのファイルは :php:class:`HttpSocket` を使って取得します。 ::
 
     <?php
-    // local file
+    // ローカルにあるファイル
     $xml = Xml::build('/home/awesome/unicorns.xml');
 
-    // remote file
+    // リモートにあるファイル
     $xml = Xml::build('http://bakery.cakephp.org/articles/rss');
 
-You can also build Xml objects using an array::
+配列を使っても Xml オブジェクトを作成できます。::
 
     <?php
     $data = array(
@@ -69,68 +70,67 @@ You can also build Xml objects using an array::
     );
     $xml = Xml::build($data);
 
-If your input is invalid the Xml class will throw a Exception::
+入力が正しくない場合、 Xml クラスは例外をスローします。::
 
     <?php
     $xmlString = 'What is XML?'
     try {
-        $xmlObject = Xml::build($xmlString); // Here will throw a Exception
+        $xmlObject = Xml::build($xmlString); // ここで例外をスローする
     } catch (XmlException $e) {
         throw new InternalErrorException();
     }
 
 .. note::
 
-    `DOMDocument <http://php.net/domdocument>`_ and 
-    `SimpleXML <http://php.net/simplexml>`_ implement different API's.
-    Be sure to use the correct methods on the object you request from Xml.
+    `DOMDocument <http://php.net/domdocument>`_ と 
+    `SimpleXML <http://php.net/simplexml>`_ は異なる API を実装しています。
+    必ずXmlから要求されたオブジェクトの正しいメソッドを使用してください。
 
+XML 文字列から配列への変換
+======================
 
-Transforming a XML string in array
-==================================
-
-Converting XML strings into arrays is simple with the Xml class as well.  By
-default you'll get a SimpleXml object back::
+XML から配列への変換は Xml クラスを使うのと同じくらい簡単です。
+既定では SimpleXML オブジェクトが返り値として得られます。::
 
     <?php
-    //Old method:
+    // 今までの方法:
     $xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
     $xmlObject = new Xml($xmlString);
     $xmlArray = $xmlObject->toArray();
 
-    // New method:
+    // 新しい方法:
     $xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
     $xmlArray = Xml::toArray(Xml::build($xmlString));
 
-If your XML is invalid it will throw a Exception.
+XML が正しくなければ例外がスローされます。
 
-Transforming an array into a string of XML
-==========================================
+配列から XML 文字列への変換
+=======================
 
 ::
 
     <?php
-    // Old method:
+    // 今までの方法:
     $xmlArray = array('root' => array('child' => 'value'));
     $xmlObject = new Xml($xmlArray, array('format' => 'tags'));
     $xmlString = $xmlObject->toString();
 
-    // New method:
+    // 新しい方法:
     $xmlArray = array('root' => array('child' => 'value'));
-    $xmlObject = Xml::fromArray($xmlArray, array('format' => 'tags')); // You can use Xml::build() too
+    $xmlObject = Xml::fromArray($xmlArray, array('format' => 'tags')); // Xml::build() を使うこともできます
     $xmlString = $xmlObject->asXML();
 
-Your array must have only one element in the "top level" and it can not be
-numeric. If the array is not in this format, Xml will throw a Exception.
-Examples of invalid arrays::
+引数にとる配列は、「トップレベル」に数値でないキーを持つ要素をひとつだけ
+持つものでなければなりません。この条件を満たさない場合、
+Xml クラスは例外をスローします。以下は正しくない例です。::
 
     <?php
-    // Top level with numeric key
+    // 数値のキーを用いたトップレベル要素
     array(
         array('key' => 'value')
     );
 
-    // Multiple keys in top level
+    // トップレベルに複数の要素がある
     array(
         'key1' => 'first value',
         'key2' => 'other value'
@@ -138,13 +138,13 @@ Examples of invalid arrays::
 
 .. warning::
 
-    The default format option was changed from `attributes` to `tags`. This was
-    done to make the Xml that the Xml class generates more compatible with XML
-    in the wild.  Be careful if you depend of this. In the new version you can
-    create a mixed array with tags, attributes and value, just use format as
-    tags (or do not say anything, because it is the default value) and prefix
-    keys that are supposed to be attributes with `@`.  For value text, use `@`
-    as the key.
+    既定のフォーマットオプションは `attributes` から `tags` に変更されました。
+    これは既存の XML 文書とより互換性のある Xml クラスを生成できるようにするための変更です。
+    この変更に依存するコードがある場合は気をつけてください。新しいバージョンでは、タグと要素、
+    値を混合した配列を作成することができます。タグを作るにはこのフォーマットを使うだけです。
+    (デフォルトでタグが作成されるので特に何もする必要はありません。)
+    `@` をキーの先頭につけることで属性が生成できます。 テキストノードを表すときは
+    `@` をキーとして用います。
 
 ::
 
@@ -159,17 +159,18 @@ Examples of invalid arrays::
     $xmlObject = Xml::fromArray($xmlArray);
     $xmlString = $xmlObject->asXML();
 
-The content of ``$xmlString`` will be::
+この例では、 ``$xmlString`` には::
 
-    <?php
     <?xml version="1.0"?>
     <project id="1">Value of project<name>Name of project, as tag</name></project>
 
+という値が格納されています。
+
 .. note::
 
-    The structure of array was changed. Now the child must have in a sub-tree
-    and not in the same tree. Moreover, the strings not will be changed by
-    :php:class:`Inflector`. See the sample below:
+    配列の構造は変更されました。子要素はサブツリーにあります。同じツリーにはありません。
+    加えて、文字列は :php:class:`Inflector` によって変更されません。
+    以下の例を見てください。
 
 ::
 
@@ -202,7 +203,7 @@ The content of ``$xmlString`` will be::
         )
     );
 
-The both will result the below XML::
+どちらの例も、以下のような XML になります。::
 
     <?xml version="1.0"?>
     <projects>
@@ -224,12 +225,12 @@ The both will result the below XML::
         </project>
     </projects>
 
-Using Namespaces
-----------------
+名前空間の使用
+------------
 
-To use XML Namespaces, in your array you must create a key with name ``xmlns:`` to
-generic namespace or input the prefix ``xmlns:`` in a custom namespace. See the
-samples::
+配列で XML 名前空間を定義するには、デフォルト名前空間は ``xmlns:`` という名前のキー、
+カスタム名前空間は ``xmlns:`` から始まる名前のキーを用いた要素を作成します。
+以下の例を見てください。::
 
     <?php
     $xmlArray = array(
@@ -253,7 +254,7 @@ samples::
     );
     $xml2 = Xml::fromArray($xmlArray);
 
-The value of ``$xml1`` and ``$xml2`` will be, respectively::
+``$xml1`` と ``$xml2`` の値は、それぞれ次のようになるでしょう。::
 
     <?xml version="1.0"?>
     <root xmlns="http://cakephp.org"><child>value</child>
@@ -262,12 +263,13 @@ The value of ``$xml1`` and ``$xml2`` will be, respectively::
     <?xml version="1.0"?>
     <root><tag xmlns:pref="http://cakephp.org"><pref:item>item 1</pref:item><pref:item>item 2</pref:item></tag></root>
 
-Creating a child
-----------------
+子要素の作成
+----------
 
-The Xml class of CakePHP 2.0 doesn't provide the manipulation of content, this
-must be made using SimpleXMLElement or DOMDocument. But, how CakePHP is so
-sweet, below has the steps to do for create a child node::
+CakePHP 2.0 の Xml クラスはコンテンツの操作をするメソッドを提供しません。
+これらの操作は SimpleXMLElement または DOMDocument を使ってしなければなりません。
+しかし CakePHP は非常に親切な作りになっています。
+以下のように、子ノードを作成するためにはいくつか段階を踏みます。::
 
     <?php
     // CakePHP 1.3
@@ -275,12 +277,12 @@ sweet, below has the steps to do for create a child node::
     $xml = new Xml($myXmlOriginal, array('format' => 'tags'));
     $xml->children[0]->createNode('young', 'new value');
 
-    // CakePHP 2.0 - Using SimpleXML
+    // CakePHP 2.0 - SimpleXML を使用
     $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
     $xml = Xml::build($myXmlOriginal);
     $xml->root->addChild('young', 'new value');
 
-    // CakePHP 2.0 - Using DOMDocument
+    // CakePHP 2.0 - DOMDocument を使用
     $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
     $xml = Xml::build($myXmlOriginal, array('return' => 'domdocument'));
     $child = $xml->createElement('young', 'new value');
@@ -288,42 +290,42 @@ sweet, below has the steps to do for create a child node::
 
 .. tip::
 
-    After manipulate your XML using SimpleXMLElement or DomDocument you can use
-    :php:meth:`Xml::toArray()` without problem.
+    SimpleXMLElement または DomDocument を使って操作したあとの XML も、問題なく
+    :php:meth:`Xml::toArray()` を使うことができます。
 
+Xml の API
+=========
 
-Xml API
-=======
-
-A factory and conversion class for creating SimpleXml or DOMDocument objects
-from a number of sources including strings, arrays and remote urls.
+文字列や配列、リモートの URL などを含むいくつかのソースから、
+SimpleXml または DOMDocument クラスのオブジェクトを生成する、
+factory クラスまたは変換クラスです。
 
 .. php:staticmethod:: build($input, $options = array())
 
-    Initialize SimpleXMLElement or DOMDocument from a given XML string, file
-    path, URL or array
+    XML の文字列やファイルパス、 URL 、配列を与えて
+    SimpleXMLElement または DOMDocument を初期化します。
 
-    Building XML from a string::
+    文字列から XML を作成する::
 
         <?php
         $xml = Xml::build('<example>text</example>');
 
-    Building XML from string (output DOMDocument)::
+    文字列から XML を作成し、 DOMDocument クラスのオブジェクトとして出力する::
 
         <?php
         $xml = Xml::build('<example>text</example>', array('return' => 'domdocument'));
 
-    Building XML from a file path::
+    ローカルのファイルパスから XML を作成する::
 
         <?php
         $xml = Xml::build('/path/to/an/xml/file.xml');
 
-    Building from a remote URL::
+    リモートURLから作成する::
 
         <?php
         $xml = Xml::build('http://example.com/example.xml');
 
-    Building from an array::
+    配列から作成する::
 
         <?php
         $value = array(
@@ -342,11 +344,11 @@ from a number of sources including strings, arrays and remote urls.
         );
         $xml = Xml::build($value);
 
-    When building XML from an array ensure that there is only one top level element.
-
+    配列から XML を作成する時は、トップレベルの要素が唯一であることを確認しましょう。
+    
 .. php:staticmethod:: toArray($obj)
 
-    Convert either a SimpleXml or DOMDocument object into an array.
+    SimpleXml または DOMDocument クラスのオブジェクトを配列に変換します。
 
 
 .. meta::
