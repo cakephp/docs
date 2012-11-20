@@ -7,7 +7,7 @@ original request example, let’s imagine that our friend Ricardo just
 clicked on the “Buy A Custom Cake Now!” link on a CakePHP application’s
 landing page.
 
-.. figure:: /img/typical-cake-request.gif
+.. figure:: /img/typical-cake-request.png
    :align: center
    :alt: Flow diagram showing a typical CakePHP request
 
