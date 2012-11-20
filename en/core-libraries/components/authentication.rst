@@ -758,6 +758,12 @@ and authentication mechanics in CakePHP.
     be returned from :php:meth:`AuthComponent::logout()`. Defaults to
     :php:attr:`AuthComponent::$loginAction`.
 
+.. php:attr:: unauthorizedRedirect
+
+    Controls handling of unauthorized access. By default unauthorized user is
+    redirected to the referrer url or ``AuthComponent::$loginAction`` or '/'.
+    If set to false a ForbiddenException exception is thrown instead of redirecting.
+
 .. php:attr:: request
 
     Request object
