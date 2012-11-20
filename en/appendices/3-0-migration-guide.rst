@@ -1,8 +1,8 @@
 3.0 Migration Guide
 ###################
 
-This page summarizes the changes from CakePHP 2.x that will assist in a project
-migration to 3.0, as well as reference to get up to date with the changes made
+This page summarizes the changes from CakePHP 2.x that will assist in migrating
+a project to 3.0, as well as reference to get up to date with the changes made
 to the core since the CakePHP 2.x branch. Be sure to read the other pages in
 this guide for all the new features and API changes.
 
@@ -10,8 +10,8 @@ this guide for all the new features and API changes.
 Requirements
 ============
 
-- CakePHP 3.x requires the mbstring extension.
 - CakePHP 3.x supports PHP Version 5.4.3 and above.
+- CakePHP 3.x requires the mbstring extension.
 
 .. warning::
 
@@ -39,7 +39,7 @@ Cache
 * Caching engines for :php:class:`Cake\\Cache\\Cache` are now configured using
   :php:meth:`Cake\\Core\\Configure` instead of using the ``config()`` method.
   ``Cache::config()`` will be removed for 3.0.0 stable.
-* Cache engines are now lazily loaded upon first use.
+* Cache engines are now lazy loaded upon first use.
 * :php:meth:``Cake\\Cache\\Cache::engine()`` has been added.
 
 
@@ -54,7 +54,7 @@ Log
 * ``Log::defaultLevels()`` was removed.
 * You can no longer create custom levels using ``Log::levels()``.
 * When configuring loggers you should use ``'levels'`` instead of 'types'.
-* You can no longer invent custom log levels.  You must use the default set of
+* You can no longer specify custom log levels.  You must use the default set of
   log levels.  You should use logging scopes to create custom log files or
   specific handling for different sections of your application.
 * :php:trait:`Cake\\Log\\LogTrait` was added. You can use this trait in your classes to
@@ -67,7 +67,7 @@ Routing
 Named Parameters
 -----------------
 
-Named parameters were removed in 3.0.0.  Named parameters were added in 1.2.0 as
+Named parameters are removed in 3.0. Named parameters were added in 1.2.0 as
 a 'pretty' version of query string parameters.  While the visual benefit is
 arguable, the problems named parameters created are not.
 
@@ -201,4 +201,4 @@ I18n
   - From ``Cake\I18n\Multibyte::ascii()`` to ``Cake\Utility\String::ascii()``
   - From ``Cake\I18n\Multibyte::checkMultibyte()`` to ``Cake\Utility\String::isMultibyte()``
 
-- Since the mbstring extension is required, the ``Multibyte`` class has been removed.
+- Since having mbstring extension is now a requirement, the ``Multibyte`` class has been removed.
