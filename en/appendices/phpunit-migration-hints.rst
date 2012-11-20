@@ -172,7 +172,6 @@ suites as composable entities in the runner. You can place group tests inside
 the cases directory and use ``PHPUnit_Framework_TestSuite`` as a base class. An
 example Testsuite would look like::
 
-    <?php
     class AllJavascriptHelpersTest extends PHPUnit_Framework_TestSuite {
     
     /**

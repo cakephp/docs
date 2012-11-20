@@ -12,7 +12,6 @@ removed from the CakePHP core.  If you do not already have these classes, you
 can use the following while upgrading::
 
     // app/View/Helper/AppHelper.php
-    <?php
     App::uses('Helper', 'View');
     class AppHelper extends Helper {
     }
@@ -262,7 +261,6 @@ View
   instead.
 - ``$scripts_for_layout`` is deprecated.  Use the following instead::
 
-        <?php
         echo $this->fetch('meta');
         echo $this->fetch('css');
         echo $this->fetch('script');

@@ -8,7 +8,6 @@ Model::saveAll(), Model::saveAssociated(), Model::validateAssociated()
 ----------------------------------------------------------------------
 ``Model::saveAll()`` and friends now support passing the `fieldList` for multiple models. Example::
 
-    <?php
     $this->SomeModel->saveAll($data, array(
         'fieldList' => array(
             'SomeModel' => array('field_1'),
@@ -18,7 +17,6 @@ Model::saveAll(), Model::saveAssociated(), Model::validateAssociated()
 
 ``Model::saveAll()`` and friends now can save unlimited levels deep. Example::
 
-    <?php
     $data = array(
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
@@ -71,7 +69,6 @@ In 2.1, the use of ``ThemeView`` is deprecated in favor of using the ``View`` cl
 
 All custom pathing code has been moved into the ``View`` class, meaning that it is now possible for classes extending the ``View`` class to automatically support themes. Whereas before we might set the ``$viewClass`` Controller property to ``Theme``, it is now possible to enable themes by simply setting the ``$theme`` property. Example::
 
-    <?php
     App::uses('Controller', 'Controller');
 
     class AppController extends Controller {
@@ -89,7 +86,6 @@ Previously, it was necessary to create a JSON layout (``APP/View/Layouts/json/de
 
 The :php:class:`JsonView` is used like any other view class, by defining it on the controller. Example::
 
-    <?php
     App::uses('Controller', 'Controller');
 
     class AppController extends Controller {
@@ -98,7 +94,6 @@ The :php:class:`JsonView` is used like any other view class, by defining it on t
 
 Once you have setup the controller, you need to identify what content should be serialized as JSON, by setting the view variable ``_serialize``. Example::
 
-    <?php
     $this->set(compact('users', 'posts', 'tags'));
     $this->set('_serialize', array('users', 'posts'));
 
@@ -112,7 +107,6 @@ Further customization of the output can be achieved by extending the :php:class:
 
 The following example wraps the result with ``{results: ... }``::
 
-    <?php
     App::uses('JsonView', 'View');
     class ResultsJsonView extends JsonView {
         public function render($view = null, $layout = null) {
@@ -127,13 +121,15 @@ The following example wraps the result with ``{results: ... }``::
 XmlView
 -------
 
-Much like the :php:class:`JsonView`, the :php:class:`XmlView` requires you to set the ``_serialize`` view variable in order to indicate what information should be serialized into XML for output.
+Much like the :php:class:`JsonView`, the :php:class:`XmlView` requires you to
+set the ``_serialize`` view variable in order to indicate what information
+should be serialized into XML for output::
 
-    <?php
     $this->set(compact('users', 'posts', 'tags'));
     $this->set('_serialize', array('users', 'posts'));
 
-The above example would result in only the ``users`` and ``posts`` variables being serialized for the XML output, like so::
+The above example would result in only the ``users`` and ``posts`` variables
+being serialized for the XML output, like so::
 
     <response><users>...</users><posts>...</posts></response>
 
@@ -156,7 +152,6 @@ response is already cached in the client and will send a `304 Not Modified`
 status code before rendering the view. Skipping the view rendering process saves
 CPU cycles and memory.::
 
-    <?php
     class ArticlesController extends AppController {
         public $components = array('RequestHandler');
 
@@ -180,7 +175,6 @@ and :php:class:`CakeNumber` classes respectively.
 
 To use the new utility classes::
 
-    <?php
     class AppController extends Controller {
 
         public function log($msg) {
@@ -193,7 +187,6 @@ You can override the default class to use by creating a new class in your
 ``APP/Utility`` folder, e.g.: ``Utility/MyAwesomeStringClass.php``, and specify
 it in ``engine`` key::
 
-    <?php
     // Utility/MyAwesomeStringClass.php
     class MyAwesomeStringClass extends String {
         // my truncate is better than yours

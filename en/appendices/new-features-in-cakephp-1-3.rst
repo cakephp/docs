@@ -16,7 +16,6 @@ as a collection of string names.
 
 ::
 
-    <?php
     $this->Security->requirePost(array('edit', 'update'));
 
 **Component settings**
@@ -27,7 +26,6 @@ settings for components when you declare the component.
 
 ::
 
-    <?php
     var $components = array(
         'Cookie' => array(
             'name' => 'MyCookie'
@@ -83,7 +81,6 @@ available to all helpers. Assuming ``Asset.timestamp == force``
 
 ::
 
-    <?php
     $path = 'css/cake.generic.css'
     $stamped = $this->Html->assetTimestamp($path);
     
@@ -100,11 +97,8 @@ highlight() now accepts an array of words to highlight.
 **NumberHelper**
 
 A new method ``addFormat()`` has been added. This method allows you
-to set currency parameter sets, so you don't have to retype them.
+to set currency parameter sets, so you don't have to retype them::
 
-::
-
-    <?php
     $this->Number->addFormat('NOK', array('before' => 'Kr. '));
     $formatted = $this->Number->currency(1000, 'NOK');
 
@@ -133,11 +127,8 @@ directory. If you had a cache engine named ``MyCustomCacheEngine``
 it would be placed in either ``app/libs/cache/my_custom_cache.php``
 as an app/libs. Or in ``$plugin/libs/cache/my_custom_cache.php`` as
 part of a plugin. Cache configs from plugins need to use the plugin
-dot syntax.
+dot syntax::
 
-::
-
-    <?php
     Cache::config('custom', array(
         'engine' => 'CachePack.MyCustomCache',
         ...
@@ -179,11 +170,8 @@ You can use plugin datasources by setting the datasource key with
 the plugin name. For example if you had a WebservicePack plugin
 with a LastFm datasource
 (plugin/webservice\_pack/models/datasources/last\_fm.php), you
-could do:
+could do::
 
-::
-
-    <?php
     var $lastFm = array(
         'datasource' => 'WebservicePack.LastFm'
         ...
@@ -242,11 +230,8 @@ your schema files.
 **Using tableParameters in schema files**
 
 You use ``tableParameters`` just as you would any other key in a
-schema file. Much like ``indexes``:
+schema file. Much like ``indexes``::
 
-::
-
-    <?php
     var $comments => array(
         'id' => array('type' => 'integer', 'null' => false, 'default' => 0, 'key' => 'primary'),
         'post_id' => array('type' => 'integer', 'null' => false, 'default' => 0),
@@ -322,20 +307,14 @@ admin routing did in 1.2. They use the same syntax and
 persist/behave in the same way. Assuming you have
 ``Configure::write('Routing.prefixes', array('admin', 'member'));``
 in your core.php you will be able to do the following from a
-non-prefixed url:
+non-prefixed url::
 
-::
-
-    <?php
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => true));
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => true));
 
 Likewise, if you are in a prefixed url and want to go to a
-non-prefixed url, do the following:
+non-prefixed url, do the following::
 
-::
-
-    <?php
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'member' => false));
     $this->Html->link('Go', array('controller' => 'posts', 'action' => 'index', 'admin' => false));
 
@@ -374,11 +353,8 @@ inflection (except slug method).
 
 Set has a new method ``Set::apply()``, which allows you to apply
 `callbacks <http://ca2.php.net/callback>`_ to the results of
-``Set::extract`` and do so in either a map or reduce fashion.
+``Set::extract`` and do so in either a map or reduce fashion::
 
-::
-
-    <?php
     Set::apply('/Movie/rating', $data, 'array_sum');
 
 Would return the sum of all Movie ratings in ``$data``.
@@ -412,18 +388,12 @@ been added. This directory can also be part of plugins, located at
 party libraries that do not come from 3rd parties or external
 vendors. This allows you to separate your organization's internal
 libraries from vendor libraries. ``App::import()`` has also been
-updated to import from libs directories.
+updated to import from libs directories::
 
-::
-
-    <?php
     App::import('Lib', 'ImageManipulation'); //imports app/libs/image_manipulation.php
 
-You can also import libs files from plugins
+You can also import libs files from plugins::
 
-::
-
-    <?php
     App::import('Lib', 'Geocoding.Geocode'); //imports app/plugins/geocoding/libs/geocode.php
 
 The remainder of lib importing syntax is identical to vendor files.
@@ -452,11 +422,8 @@ For example, if you have access to a machine running debian or
 ubuntu you can find a french locale file at:
 /usr/share/i18n/locales/fr\_FR. Copy the part corresponding to
 LC\_TIME into app/locale/fr\_fr/LC\_TIME file. You can then access
-the time preferences for French language this way:
+the time preferences for French language this way::
 
-::
-
-    <?php
     Configure::write('Config.language','fr-fr'); // set the current language
     $monthNames = __c('mon',LC_TIME,true); // returns an array with the month names in French
     $dateFormat = __c('d_fmt',LC_TIME,true); // return the preferred dates format for France
@@ -481,11 +448,8 @@ error404, then you will need to do it manually.
 **Scaffolding**
 
 With the addition of ``Routing.prefixes`` scaffolding has been
-updated to allow the scaffolding of any one prefix.
+updated to allow the scaffolding of any one prefix::
 
-::
-
-    <?php
     Configure::write('Routing.prefixes', array('admin', 'member'));
     
     class PostsController extends AppController {
@@ -504,11 +468,8 @@ not afford the flexibility needed for all cases, an alternate path
 was taken. In 1.3, ``phone()`` and ``postal()`` will pass off any
 country prefix it does not know how to handle to another class with
 the appropriate name. For example if you lived in the Netherlands
-you would create a class like
+you would create a class like::
 
-::
-
-    <?php
     class NlValidation {
         function phone($check) {
             ...
@@ -520,11 +481,8 @@ you would create a class like
 
 This file could be placed anywhere in your application, but must be
 imported before attempting to use it. In your model validation you
-could use your NlValidation class by doing the following.
+could use your NlValidation class by doing the following::
 
-::
-
-    <?php
     var $validate = array(
         'phone_no' => array('rule' => array('phone', null, 'nl')),
         'postal_code' => array('rule' => array('postal', null, 'nl'))
@@ -543,11 +501,8 @@ off to another validator has been added.
 
 Validation of IP Addresses has been extended to allow strict
 validation of a specific IP Version. It will also make use of PHP
-native validation mechanisms if available.
+native validation mechanisms if available::
 
-::
-
-    <?php
     Validation::ip($someAddress);         // Validates both IPv4 and IPv6
     Validation::ip($someAddress, 'IPv4'); // Validates IPv4 Addresses only
     Validation::ip($someAddress, 'IPv6'); // Validates IPv6 Addresses only
