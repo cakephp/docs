@@ -281,3 +281,9 @@ epub_tocdup = False
 
 # Languages available.
 languages = ['en', 'pt', 'es', 'ja', 'ru', 'fr']
+
+# Hack to render the php source code without the <?php tag
+from sphinx.highlighting import lexers
+from pygments.lexers.web import PhpLexer
+
+lexers['php'] = PhpLexer(startinline=True)
