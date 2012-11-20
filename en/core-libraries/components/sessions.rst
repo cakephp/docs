@@ -98,7 +98,6 @@ Creating notification messages
     This will create a one-time message that can be displayed to the user,
     using the SessionHelper::
 
-        <?php
         // In the view.
         echo $this->Session->flash();
 
@@ -142,7 +141,6 @@ Creating notification messages
     example adding "class" in the $params array will apply a class to the
     ``div`` output using ``$this->Session->flash()`` in your layout or view.::
 
-        <?php
         $this->Session->setFlash('Example message text', 'default', array('class' => 'example_class'));
 
     The output from using ``$this->Session->flash()`` with the above example
@@ -153,7 +151,6 @@ Creating notification messages
     To use an element from a plugin just specify the plugin in the 
     ``$params``::
 
-        <?php
         // Will use /app/Plugin/Comment/View/Elements/flash_no_spam.ctp
         $this->Session->setFlash('Message!', 'flash_no_spam', array('plugin' => 'Comment'));
 

@@ -29,7 +29,6 @@ us when implementing the user login.
 Next step is to create our User model, responsible for finding, saving and
 validating any user data::
 
-    <?php
     // app/Model/User.php
     class User extends AppModel {
         public $validate = array(
@@ -59,7 +58,6 @@ Let's also create our UsersController, the following contents correspond to a
 basic `baked` UsersController class using the code generation utilities bundled
 with CakePHP::
 
-    <?php
     // app/Controller/UsersController.php
     class UsersController extends AppController {
 
@@ -137,7 +135,6 @@ will show just the add.ctp::
     <?php echo $this->Form->create('User'); ?>
         <fieldset>
             <legend><?php echo __('Add User'); ?></legend>
-        <?php
             echo $this->Form->input('username');
             echo $this->Form->input('password');
             echo $this->Form->input('role', array(
@@ -159,7 +156,6 @@ users to the actions they are allowed to reach.
 To add this component to your application open your ``app/Controller/AppController.php``
 file and add the following lines::
 
-    <?php
     // app/Controller/AppController.php
     class AppController extends Controller {
         //...
@@ -192,7 +188,6 @@ and, more importantly, hash their password so it is not stored as plain text in
 our database. Let's tell the AuthComponent to let un-authenticated users access
 the users add function and implement the login and logout action::
 
-    <?php
     // app/Controller/UsersController.php
 
     public function beforeFilter() {
@@ -217,7 +212,6 @@ the users add function and implement the login and logout action::
 Password hashing is not done yet, open your ``app/Model/User.php`` model file
 and add the following::
 
-    <?php
     // app/Model/User.php
     App::uses('AuthComponent', 'Controller/Component');
     class User extends AppModel {
@@ -242,7 +236,6 @@ the login function, here it is::
     <?php echo $this->Form->create('User'); ?>
         <fieldset>
             <legend><?php echo __('Please enter your username and password'); ?></legend>
-        <?php
             echo $this->Form->input('username');
             echo $this->Form->input('password');
         ?>
@@ -284,7 +277,6 @@ reference to the User model::
 Also, a small change in the PostsController is required to store the currently
 logged in user as a reference for the created post::
 
-    <?php
     // app/Controller/PostsController.php
     public function add() {
         if ($this->request->is('post')) {
@@ -306,7 +298,6 @@ url, while normal users (the author role) can only access the permitted actions.
 Open again the AppController class and add a few more options to the Auth
 config::
 
-    <?php
     // app/Controller/AppController.php
 
     public $components = array(
@@ -340,7 +331,6 @@ add to PostsController should allow authors to create posts but prevent the
 edition of posts if the author does not match. Open the file ``PostsController.php``
 and add the following content::
 
-    <?php
     // app/Controller/PostsController.php
 
     public function isAuthorized($user) {
@@ -368,7 +358,6 @@ the user is authorized to edit the post or not, we're calling a ``isOwnedBy()``
 function in the Post model. It is in general a good practice to move as much
 logic as possible into models. Let's then implement the function::
 
-    <?php
     // app/Model/Post.php
 
     public function isOwnedBy($post, $user) {

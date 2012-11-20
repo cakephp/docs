@@ -13,7 +13,6 @@ CakePHP's model class files go in ``/app/Model``, and the file
 we'll be creating will be saved to ``/app/Model/Post.php``. The
 completed file should look like this::
 
-    <?php
     class Post extends AppModel {
     }
 
@@ -45,7 +44,6 @@ post-related work done. We'll place this new controller in a file
 called ``PostsController.php`` inside the ``/app/Controller``
 directory. Here's what the basic controller should look like::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
     }
@@ -56,7 +54,6 @@ users request www.example.com/posts/index (which is also the same
 as www.example.com/posts/), they might expect to see a listing of
 posts. The code for that action would look something like this::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
 
@@ -207,7 +204,6 @@ gone wrong, or you actually did define it already, in which case
 you are very sneaky. Otherwise, we'll create it in the
 PostsController now::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
 
@@ -253,7 +249,6 @@ start, but let's allow for the adding of new posts.
 First, start by creating an ``add()`` action in the
 PostsController::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form', 'Session');
         public $components = array('Session');
@@ -334,7 +329,6 @@ Here's our add view::
     <!-- File: /app/View/Posts/add.ctp -->   
         
     <h1>Add Post</h1>
-    <?php
     echo $this->Form->create('Post');
     echo $this->Form->input('title');
     echo $this->Form->input('body', array('rows' => '3'));
@@ -375,7 +369,6 @@ You may be wondering: how do I tell CakePHP about my validation
 requirements? Validation rules are defined in the model. Let's look
 back at our Post model and make a few adjustments::
 
-    <?php
     class Post extends AppModel {
         public $validate = array(
             'title' => array(
@@ -409,7 +402,6 @@ should have picked up a pattern. Make the action, then the view.
 Here's what the ``edit()`` action of the PostsController would look
 like::
 
-    <?php
     public function edit($id = null) {
         $this->Post->id = $id;
         if ($this->request->is('get')) {
@@ -434,7 +426,6 @@ The edit view might look something like this::
     <!-- File: /app/View/Posts/edit.ctp -->
         
     <h1>Edit Post</h1>
-    <?php
         echo $this->Form->create('Post', array('action' => 'edit'));
         echo $this->Form->input('title');
         echo $this->Form->input('body', array('rows' => '3'));
@@ -489,7 +480,6 @@ Deleting Posts
 Next, let's make a way for users to delete posts. Start with a
 ``delete()`` action in the PostsController::
 
-    <?php
     public function delete($id) {
         if ($this->request->is('get')) {
             throw new MethodNotAllowedException();
@@ -581,14 +571,12 @@ Cake's routing is found in ``/app/Config/routes.php``. You'll want
 to comment out or remove the line that defines the default root
 route. It looks like this::
 
-    <?php
     Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
 This line connects the URL '/' with the default CakePHP home page.
 We want it to connect with our own controller, so replace that line
 with this one::
 
-    <?php
     Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 
 This should connect users requesting '/' to the index() action of

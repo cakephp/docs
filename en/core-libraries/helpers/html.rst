@@ -98,14 +98,12 @@ methods of the HtmlHelper and how to use them.
     :term:`plugin syntax`.  To include ``app/Plugin/DebugKit/webroot/css/toolbar.css``
     You could use the following::
 
-        <?php
         echo $this->Html->css('DebugKit.toolbar.css');
 
     If you want to include a css file which shares a name with a loaded
     plugin you can do the following.  For example if you had a ``Blog`` plugin,
     and also wanted to include ``app/webroot/css/Blog.common.css``, you would::
 
-        <?php
         echo $this->Html->css('Blog.common.css', null, array('plugin' => false));
 
     .. versionchanged:: 2.1
@@ -137,7 +135,6 @@ methods of the HtmlHelper and how to use them.
 
     ::
 
-        <?php
         echo $this->Html->meta(
             'favicon.ico',
             '/favicon.ico',
@@ -166,7 +163,6 @@ methods of the HtmlHelper and how to use them.
     This method can also be used to add the meta keywords and
     descriptions. Example::
 
-        <?php
         echo $this->Html->meta(
             'keywords',
             'enter any meta keyword here'
@@ -185,7 +181,6 @@ methods of the HtmlHelper and how to use them.
     should be set to an array. To output a robots noindex tag use the
     following code::
 
-        <?php
         echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex')); 
 
     .. versionchanged:: 2.1
@@ -220,7 +215,6 @@ methods of the HtmlHelper and how to use them.
 
     ::
 
-        <?php
         echo $this->Html->docType();
         // Outputs: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
@@ -242,7 +236,6 @@ methods of the HtmlHelper and how to use them.
     array passed to the method. Especially handy if your CSS file is
     dynamic.::
 
-        <?php
         echo $this->Html->style(array(
             'background' => '#633',
             'border-bottom' => '1px solid #000',
@@ -261,7 +254,6 @@ methods of the HtmlHelper and how to use them.
     Creates a formatted image tag. The path supplied should be relative
     to /app/webroot/img/.::
 
-        <?php
         echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'));
 
     Will output::
@@ -271,7 +263,6 @@ methods of the HtmlHelper and how to use them.
     To create an image link specify the link destination using the
     ``url`` option in ``$htmlAttributes``.::
 
-        <?php
         echo $this->Html->image("recipes/6.jpg", array(
             "alt" => "Brownies",
             'url' => array('controller' => 'recipes', 'action' => 'view', 6)
@@ -286,7 +277,6 @@ methods of the HtmlHelper and how to use them.
     If you are creating images in emails, or want absolute paths to images you
     can use the ``fullBase`` option::
 
-        <?php
         echo $this->Html->image("logo.png", array('fullBase' => true));
 
     Will output::
@@ -297,14 +287,12 @@ methods of the HtmlHelper and how to use them.
     :term:`plugin syntax`.  To include ``app/Plugin/DebugKit/webroot/img/icon.png``
     You could use the following::
 
-        <?php
         echo $this->Html->image('DebugKit.icon.png');
 
     If you want to include a image file which shares a name with a loaded
     plugin you can do the following.  For example if you had a ``Blog`` plugin,
     and also wanted to include ``app/webroot/js/Blog.icon.png``, you would::
 
-        <?php
         echo $this->Html->image('Blog.icon.png', array('plugin' => false));
 
     .. versionchanged:: 2.1
@@ -321,7 +309,6 @@ methods of the HtmlHelper and how to use them.
     specify attributes for the element and whether or not the
     ``$title`` should be escaped.::
 
-        <?php
         echo $this->Html->link('Enter', '/pages/home', array('class' => 'button', 'target' => '_blank'));
 
     Will output::
@@ -330,7 +317,6 @@ methods of the HtmlHelper and how to use them.
 
     Use ``'full_base'=>true`` option for absolute URLs::
 
-        <?php
         echo $this->Html->link(
             'Dashboard',
             array('controller' => 'dashboards', 'action' => 'index', 'full_base' => true)
@@ -344,7 +330,6 @@ methods of the HtmlHelper and how to use them.
     Specify ``$confirmMessage`` to display a javascript ``confirm()``
     dialog::
 
-        <?php
         echo $this->Html->link(
             'Delete',
             array('controller' => 'recipes', 'action' => 'delete', 6),
@@ -358,7 +343,6 @@ methods of the HtmlHelper and how to use them.
 
     Query strings can also be created with ``link()``.::
 
-        <?php
         echo $this->Html->link('View image', array(
             'controller' => 'images',
             'action' => 'view',
@@ -413,7 +397,6 @@ methods of the HtmlHelper and how to use them.
 
     Returns a formatted audio/video tag::
 
-        <?php
         echo $this->Html->media('audio.mp4');
 
         // Output
@@ -444,7 +427,6 @@ methods of the HtmlHelper and how to use them.
     Returns text wrapped in a specified tag. If no text is specified
     then only the opening <tag> is returned.::
 
-        <?php
         echo $this->Html->tag('span', 'Hello World.', array('class' => 'welcome'));
          
         // Output
@@ -477,7 +459,6 @@ methods of the HtmlHelper and how to use them.
 
     If no text is specified, only an opening div tag is returned.::
  
-        <?php
         echo $this->Html->div('error', 'Please enter your credit card number.');
         
         // Output
@@ -492,7 +473,6 @@ methods of the HtmlHelper and how to use them.
     Returns a text wrapped in a CSS-classed <p> tag. If no text is
     supplied, only a starting <p> tag is returned.::
 
-        <?php
         echo $this->Html->para(null, 'Hello World.');
         
         // Output
@@ -520,7 +500,6 @@ methods of the HtmlHelper and how to use them.
     javascript file specified resides inside the ``/app/webroot/js``
     directory.::
 
-        <?php
         echo $this->Html->script('scripts');
 
     Will output::
@@ -530,12 +509,10 @@ methods of the HtmlHelper and how to use them.
     You can link to files with absolute paths as well to link files
     that are not in ``app/webroot/js``::
 
-        <?php
         echo $this->Html->script('/otherdir/script_file');
 
     The first parameter can be an array to include multiple files.::
 
-        <?php
         echo $this->Html->script(array('jquery', 'wysiwyg', 'scripts'));
 
     Will output::
@@ -547,26 +524,22 @@ methods of the HtmlHelper and how to use them.
     You can append the script tag to a specific block using the ``block``
     option::
 
-        <?php
         echo $this->Html->script('wysiwyg', array('block' => 'scriptBottom'));
         
     In your layout you can output all the script tags added to 'scriptBottom'::
 
-        <?php
         echo $this->fetch('scriptBottom');
 
     You can include script files from any loaded plugin using 
     :term:`plugin syntax`.  To include ``app/Plugin/DebugKit/webroot/js/toolbar.js``
     You could use the following::
 
-        <?php
         echo $this->Html->script('DebugKit.toolbar.js');
 
     If you want to include a script file which shares a name with a loaded
     plugin you can do the following.  For example if you had a ``Blog`` plugin,
     and also wanted to include ``app/webroot/js/Blog.plugins.js``, you would::
 
-        <?php
         echo $this->Html->script('Blog.plugins.js', array('plugin' => false));
 
     .. versionchanged:: 2.1
@@ -602,7 +575,6 @@ methods of the HtmlHelper and how to use them.
     An example of using ``scriptStart()`` and ``scriptEnd()`` would
     be::
 
-        <?php
         $this->Html->scriptStart(array('inline' => false));
 
         echo $this->Js->alert('I am in the javascript');
@@ -620,7 +592,6 @@ methods of the HtmlHelper and how to use them.
 
     Build a nested list (UL/OL) out of an associative array::
 
-        <?php
         $list = array(
             'Languages' => array(
                 'English' => array(
@@ -660,7 +631,6 @@ methods of the HtmlHelper and how to use them.
     Creates a row of table header cells to be placed inside of <table>
     tags.::
 
-        <?php
         echo $this->Html->tableHeaders(array('Date', 'Title', 'Active'));
 
         // Output 
@@ -689,7 +659,6 @@ methods of the HtmlHelper and how to use them.
     As of 2.2 you can set attributes per column, these are used instead of the
     defaults provided in the ``$thOptions``::
 
-        <?php
         echo $this->Html->tableHeaders(array(
             'id',
             array('Name' => array('class' => 'highlight')),
@@ -716,7 +685,6 @@ methods of the HtmlHelper and how to use them.
     for odd- and even-numbered rows. Wrap a single table cell within an
     array() for specific <td>-attributes. ::
 
-        <?php
         echo $this->Html->tableCells(array(
             array('Jul 7th, 2007', 'Best Brownies', 'Yes'),
             array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),
@@ -764,7 +732,6 @@ methods of the HtmlHelper and how to use them.
     generates the url for the controller and action combo. If full is
     true, the full base URL will be prepended to the result::
 
-        <?php
         echo $this->Html->url(array(
             "controller" => "posts",
             "action" => "view",
@@ -778,7 +745,6 @@ methods of the HtmlHelper and how to use them.
 
     URL with named parameters::
 
-        <?php
         echo $this->Html->url(array(
             "controller" => "posts",
             "action" => "view",
@@ -790,7 +756,6 @@ methods of the HtmlHelper and how to use them.
 
     URL with extension::
 
-        <?php
         echo $this->Html->url(array(
             "controller" => "posts",
             "action" => "list",
@@ -802,7 +767,6 @@ methods of the HtmlHelper and how to use them.
 
     URL (starting with '/') with the full base URL prepended::
 
-        <?php
         echo $this->Html->url('/posts', true);
 
         // Output
@@ -810,7 +774,6 @@ methods of the HtmlHelper and how to use them.
 
     URL with GET params and named anchor::
 
-        <?php
         echo $this->Html->url(array(
             "controller" => "posts",
             "action" => "search",
@@ -829,7 +792,6 @@ methods of the HtmlHelper and how to use them.
 
     Returns a formatted existent block of ``$tag``::
 
-        <?php
         $this->Html->useTag(
             'form',
             'http://example.com',
@@ -850,7 +812,6 @@ Changing the tags output by HtmlHelper
     like to use. To change the tags used create ``app/Config/html5_tags.php``
     containing::
 
-        <?php
         $config = array('tags' => array(
             'css' => '<link rel="%s" href="%s" %s>',
             'style' => '<style%s>%s</style>',
@@ -873,13 +834,11 @@ Creating breadcrumb trails with HtmlHelper
     breadcrumb trail in your app. To set this up, first add something
     similar to the following in your layout template::
 
-        <?php
         echo $this->Html->getCrumbs(' > ', 'Home');
 
     The ``$startText`` option can also accept an array.  This gives more control
     over the generated first link::
 
-        <?php
         echo $this->Html->getCrumbs(' > ', array(
             'text' => $this->Html->image('home.png'),
             'url' => array('controller' => 'pages', 'action' => 'display', 'home'),
@@ -897,7 +856,6 @@ Creating breadcrumb trails with HtmlHelper
     Now, in your view you'll want to add the following to start the
     breadcrumb trails on each of the pages::
 
-        <?php
         $this->Html->addCrumb('Users', '/users');
         $this->Html->addCrumb('Add User', '/users/add');
 
