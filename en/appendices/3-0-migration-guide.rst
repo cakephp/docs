@@ -80,7 +80,7 @@ query string parameters or passed arguments.  By default ``Router`` will treat
 any additional parameters to ``Router::url()`` as querystring arguments.
 
 Since many applications will still need to parse incoming URL's containing named
-parameters.  :php:meth:`Cake\\Routing\\Router::parseNamedParams()` has 
+parameters.  :php:meth:`Cake\\Routing\\Router::parseNamedParams()` has
 been added to allow backwards compatiblity with existing URL's.
 
 
@@ -106,7 +106,7 @@ Router
 * Route classes are responsible for *all* url generation including
   query string parameters. This makes routes far more powerful and flexible.
 * Persistent parameters were removed. They were replaced with
-  :php:meth:`Cake\\Routing\\Router::urlFilter()` which allows 
+  :php:meth:`Cake\\Routing\\Router::urlFilter()` which allows
   a more flexible way to mutate urls being reverse routed.
 * Calling :php:meth:`Cake\\Routing\\Router::parseExtensions()` with no
   parameters no longer parses all extensions.  You need to
@@ -141,7 +141,7 @@ Request
 * :php:meth:`Cake\\Network\\Request::cookie()` was added.
 * :php:attr:`Cake\\Network\\Request::$trustProxy` was added.  This makes it easier to put
   CakePHP applications behind load balancers.
-* :php:attr:`Cake\\Network\\Request::$data` is no longer merged with the prefixed data 
+* :php:attr:`Cake\\Network\\Request::$data` is no longer merged with the prefixed data
   key, as that prefix has been removed.
 
 Controller
@@ -201,4 +201,4 @@ I18n
   - From ``Cake\I18n\Multibyte::ascii()`` to ``Cake\Utility\String::ascii()``
   - From ``Cake\I18n\Multibyte::checkMultibyte()`` to ``Cake\Utility\String::isMultibyte()``
 
-- Once the mbstring extension is required, the ``Multibyte`` class was removed.
+- Since the mbstring extension is required, the ``Multibyte`` class has been removed.
