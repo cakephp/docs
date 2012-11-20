@@ -150,7 +150,7 @@ pages in the paged data set.
 
     ``$options`` and ``$disabledOptions`` supports the following keys:
 
-    * ``tag`` The tag wrapping tag you want to use, defaults to 'span'.
+    * ``tag`` The tag wrapping tag you want to use, defaults to 'span'. Set this to ``false`` to disable this option.
     * ``escape`` Whether you want the contents html entity encoded, 
       defaults to true.
     * ``model`` The model to use, defaults to :php:meth:`PaginatorHelper::defaultModel()`.
@@ -162,7 +162,7 @@ pages in the paged data set.
 
     If you were currently on the second page of posts, you would get the following::
 
-        <span class="prev"><a href="/posts/index/page:1/sort:title/order:desc" rel="prev"><< previous</a></span>
+        <span class="prev"><a rel="prev" href="/posts/index/page:1/sort:title/order:desc"><< previous</a></span>
 
     If there were no previous pages you would get::
 
@@ -173,7 +173,18 @@ pages in the paged data set.
         <?php
         echo $this->Paginator->prev(__('previous'), array('tag' => 'li'));
         // Would create
-        <li class="prev"><a href="/posts/index/page:1/sort:title/order:desc" rel="prev">previous</a></li>
+        <li class="prev"><a rel="prev" href="/posts/index/page:1/sort:title/order:desc">previous</a></li>
+
+    You can also disable the wrapping tag::
+
+        <?php
+        echo $this->Paginator->prev(__('previous'), array('tag' => false));
+        // Would create
+        <a class="prev" rel="prev" href="/posts/index/page:1/sort:title/order:desc">previous</a>
+
+.. versionchanged:: 2.3
+    For methods: :php:meth:`PaginatorHelper::prev()` and :php:meth:`PaginatorHelper::next()` it
+    is now possible to set the ``tag`` option to ``false`` to disable the wrapper.
 
     If you leave the ``$disabledOptions`` empty the ``$options`` parameter will be
     used.  This can save some additional typing if both sets of options are the
