@@ -10,13 +10,12 @@ three main parts:
 #. The View renders a presentation of model data
 #. The Controller handles and routes requests made by the client
 
-.. figure:: /img/basic_mvc.png
-   :align: center
-   :alt: Figure 1
+.. figure:: /_static/img/basic_mvc.png
+    :align: center
+    :alt: Figure 1
 
-   Figure 1
+    A Basic MVC Request
 
-Figure: 1: A Basic MVC Request
 
 Figure: 1 shows an example of a bare-bones MVC request in CakePHP. To
 illustrate, assume a client named "Ricardo" just clicked on the “Buy A

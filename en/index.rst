@@ -1,8 +1,8 @@
 The Manual
 ##########
 
-**`Click here for the CakePHP 1.2.x version of the
-manual </view/3/the-manual>`_**
+`Click here for the CakePHP 1.2.x version of the
+manual </view/3/the-manual>`_
 
 Welcome to the Cookbook, the CakePHP documentation. The Cookbook is a
 wiki-like system allowing contributions from the public. With an open
@@ -10,7 +10,7 @@ system, we hope to maintain a high level of quality, validity, and
 accuracy for the CakePHP documentation. The Cookbook also makes it easy
 for anybody to contribute.
 
-A ***huge*** thank you to `AD7six <http://www.ad7six.com/>`_, who
+A **huge** thank you to `AD7six <http://www.ad7six.com/>`_, who
 championed the Cookbook by putting in endless hours developing, testing
 and improving this application.
 
