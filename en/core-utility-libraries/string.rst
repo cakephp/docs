@@ -10,7 +10,6 @@ manipulating strings and is normally accessed statically. Example:
 If you need :php:class:`TextHelper` functionalities outside of a ``View``,
 use the ``String`` class::
 
-    <?php
     class UsersController extends AppController {
 
         public $components = array('Auth');
@@ -38,7 +37,6 @@ use the ``String`` class::
 
     ::
 
-        <?php
         String::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
 
@@ -50,7 +48,6 @@ use the ``String`` class::
     This method can be useful when splitting up data in that has regular
     formatting such as tag lists::
 
-        <?php
         $data = "cakephp 'great framework' php";
         $result = String::tokenize($data, ' ', "'", "'");
         // result contains
@@ -61,7 +58,6 @@ use the ``String`` class::
     The insert method is used to create string templates and to allow
     for key/value replacements::
 
-        <?php
         String::insert('My name is :name and I am :age years old.', array('name' => 'Bob', 'age' => '65'));
         // generates: "My name is Bob and I am 65 years old."
 
@@ -75,7 +71,6 @@ use the ``String`` class::
 
     You can use the following options in the options array::
 
-        <?php
         $options = array(
             'clean' => array(
                 'method' => 'text', // or html
@@ -89,7 +84,6 @@ use the ``String`` class::
     Wraps a block of text to a set width, and indent blocks as well.
     Can intelligently wrap text so words are not sliced across lines::
 
-        <?php
         $text = 'This is the song that never ends.';
         $result = String::wrap($text, 22);
 
@@ -125,7 +119,6 @@ use the ``String`` class::
 
     Example::
 
-        <?php
         // called as TextHelper
         echo $this->Text->highlight($lastSentence, 'using', array('format' => '<span class="highlight">\1</span>'));
 
@@ -165,7 +158,6 @@ use the ``String`` class::
 
     Example::
 
-        <?php
         // called as TextHelper
         echo $this->Text->truncate(
             'The killer crept forward and tripped on the rug.',
@@ -218,7 +210,6 @@ use the ``String`` class::
 
     Example::
 
-        <?php
         // called as TextHelper
         echo $this->Text->tail(
             'I packed my bag and in it I put a PSP, a PS3, a TV, a C# program that can divide by zero, death metal t-shirts',
@@ -257,7 +248,6 @@ use the ``String`` class::
     search results. The query string or keywords can be shown within
     the resulting document.::
 
-        <?php
         // called as TextHelper
         echo $this->Text->excerpt($lastParagraph, 'method', 50, '...');
 
@@ -278,7 +268,6 @@ use the ``String`` class::
     Creates a comma-separated list where the last two items are joined
     with ‘and’.::
 
-        <?php
         // called as TextHelper
         echo $this->Text->toList($colors);
 

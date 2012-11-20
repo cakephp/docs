@@ -23,7 +23,6 @@ define a path.
 
 Usage example (using :php:func:`Set::sort()`)::
 
-    <?php
     $a = array(
         0 => array('Person' => array('name' => 'Jeff'), 'Friend' => array(array('name' => 'Nate'))),
         1 => array('Person' => array('name' => 'Tracy'),'Friend' => array(array('name' => 'Lindsay'))),
@@ -68,7 +67,6 @@ available.
     Apply a callback to the elements of an array extracted
     by a Set::extract compatible path::
 
-        <?php
         $data = array(
             array('Movie' => array('id' => 1, 'title' => 'movie 3', 'rating' => 5)),
             array('Movie' => array('id' => 1, 'title' => 'movie 1', 'rating' => 1)),
@@ -90,7 +88,6 @@ available.
     Checks if a particular path is set in an array. If $path is empty,
     $data will be returned instead of a boolean value::
 
-        <?php
         $set = array(
             'My Index 1' => array('First' => 'The first item')
         );
@@ -131,7 +128,6 @@ available.
     **Example 1**
     ::
 
-        <?php
         $a = array(
             array('Article' => array('id' => 1, 'title' => 'Article 1')),
             array('Article' => array('id' => 2, 'title' => 'Article 2')),
@@ -164,7 +160,6 @@ available.
     **Example 2**
     ::
 
-        <?php
         $a = array(
             0 => array('pages' => array('name' => 'page')),
             1 => array('fruites' => array('name' => 'fruit')),
@@ -331,7 +326,6 @@ available.
     (useful for Set::merge). You can optionally group the values by
     what is obtained when following the path specified in $groupPath.::
 
-        <?php
         $result = Set::combine(array(), '{n}.User.id', '{n}.User.Data');
         // $result == array();
 
@@ -531,7 +525,6 @@ available.
     Determines if one Set or array contains the exact keys and values
     of another::
 
-        <?php
         $a = array(
             0 => array('name' => 'main'),
             1 => array('name' => 'about')
@@ -559,7 +552,6 @@ available.
     is the default) it will only consider the dimension of the first
     element in the array::
 
-        <?php
         $data = array('one', '2', 'three');
         $result = Set::countDim($data);
         // $result == 1
@@ -615,7 +607,6 @@ available.
     Computes the difference between a Set and an array, two Sets, or
     two arrays::
 
-        <?php
         $a = array(
             0 => array('name' => 'main'),
             1 => array('name' => 'about')
@@ -702,7 +693,6 @@ available.
 
     $list defaults to 0 = no 1 = yes if param is not passed::
 
-        <?php
         $res = Set::enum(1, 'one, two');
         // $res is 'two'
 
@@ -729,7 +719,6 @@ available.
 
     ::
 
-        <?php
         // Common Usage:
         $users = $this->User->find("all");
         $results = Set::extract('/User/id', $users);
@@ -780,7 +769,6 @@ available.
 
     Filters empty elements out of a route array, excluding '0'::
 
-        <?php
         $res = Set::filter(array('0', false, true, 0, array('one thing', 'I can tell you', 'is you got to be', false)));
 
         /* $res now looks like:
@@ -804,7 +792,6 @@ available.
 
     Collapses a multi-dimensional array into a single dimension::
 
-        <?php
         $arr = array(
             array(
                 'Post' => array('id' => '1', 'title' => 'First Post'),
@@ -837,7 +824,6 @@ available.
     Returns a series of values extracted from an array, formatted in a
     format string::
 
-        <?php
         $data = array(
             array('Person' => array('first_name' => 'Nate', 'last_name' => 'Abele', 'city' => 'Boston', 'state' => 'MA', 'something' => '42')),
             array('Person' => array('first_name' => 'Larry', 'last_name' => 'Masters', 'city' => 'Boondock', 'state' => 'TN', 'something' => '{0}')),
@@ -907,7 +893,6 @@ available.
 
     Inserts $data into an array as defined by $path.::
 
-        <?php
         $a = array(
             'pages' => array('name' => 'page')
         );
@@ -983,7 +968,6 @@ available.
     however you can map values into any type of class. Example:
     Set::map($array\_of\_values, 'nameOfYourClass');::
 
-        <?php
         $data = array(
             array(
                 "IndexedPage" => array(
@@ -1046,7 +1030,6 @@ available.
 
     ::
 
-        <?php
         class MyClass {
             public function sayHi() {
                 echo 'Hi!';
@@ -1066,7 +1049,6 @@ available.
     Set::matches can be used to see if a single item or a given xpath
     match certain conditions.::
 
-        <?php
         $a = array(
             array('Article' => array('id' => 1, 'title' => 'Article 1')),
             array('Article' => array('id' => 2, 'title' => 'Article 2')),
@@ -1122,7 +1104,6 @@ available.
 
     ::
 
-        <?php
         $arry1 = array(
             array(
                 'id' => '48c2570e-dfa8-4c32-a35e-0d71cbdd56cb',
@@ -1172,7 +1153,6 @@ available.
 
     Takes in a flat array and returns a nested array::
 
-        <?php
         $data = array(
             array('ModelName' => array('id' => 1, 'parent_id' => null)),
             array('ModelName' => array('id' => 2, 'parent_id' => 1)),
@@ -1235,7 +1215,6 @@ available.
 
     Normalizes a string or array list.::
 
-        <?php
         $a = array(
             'Tree',
             'CounterCache',
@@ -1352,7 +1331,6 @@ available.
 
     Checks to see if all the values in the array are numeric::
 
-        <?php
         $data = array('one');
         $res = Set::numeric(array_keys($data));
 
@@ -1414,7 +1392,6 @@ available.
     **Example 1**
     ::
 
-        <?php
         $array1 = array('ModelOne' => array('id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2'));
         $array2 = array('ModelOne' => array('id' => 1003, 'field_one' => 'a3.m1.f1', 'field_two' => 'a3.m1.f2', 'field_three' => 'a3.m1.f3'));
         $res = Set::pushDiff($array1, $array2);
@@ -1435,7 +1412,6 @@ available.
     **Example 2**
     ::
 
-        <?php
         $array1 = array("a" => "b", 1 => 20938, "c" => "string");
         $array2 = array("b" => "b", 3 => 238, "c" => "string", array("extra_field"));
         $res = Set::pushDiff($array1, $array2);
@@ -1461,7 +1437,6 @@ available.
 
     Removes an element from a Set or array as defined by $path::
 
-        <?php
         $a = array(
             'pages' => array('name' => 'page'),
             'files' => array('name' => 'files')
@@ -1488,7 +1463,6 @@ available.
     object into an array. If $object is not an object, reverse will
     simply return $object.::
 
-        <?php
         $result = Set::reverse(null);
         // Null
         $result = Set::reverse(false);
@@ -1594,7 +1568,6 @@ available.
 
     Sorts an array by any value, determined by a Set-compatible path::
 
-        <?php
         $a = array(
             0 => array('Person' => array('name' => 'Jeff'), 'Friend' => array(array('name' => 'Nate'))),
             1 => array('Person' => array('name' => 'Tracy'),'Friend' => array(array('name' => 'Lindsay'))),

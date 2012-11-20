@@ -47,7 +47,6 @@ multidimensional array used to define association specifics.
 
 ::
 
-    <?php
     class User extends AppModel {
         public $hasOne = 'Profile';
         public $hasMany = array(
@@ -66,7 +65,6 @@ choose the same name as the class that it references. However,
 **aliases for each model must be unique app wide**. E.g. it is
 appropriate to have::
 
-    <?php
     class User extends AppModel {
         public $hasMany = array(
             'MyRecipe' => array(
@@ -95,7 +93,6 @@ appropriate to have::
 
 but the following will not work well in all circumstances::
 
-    <?php
     class User extends AppModel {
         public $hasMany = array(
             'MyRecipe' => array(
@@ -131,13 +128,11 @@ Cake will automatically create links between associated model
 objects. So for example in your ``User`` model you can access the
 ``Recipe`` model as::
 
-    <?php
     $this->Recipe->someFunction();
 
 Similarly in your controller you can access an associated model
 simply by following your model associations::
 
-    <?php
     $this->User->Recipe->someFunction();
 
 .. note::
@@ -181,7 +176,6 @@ define the ‘User hasOne Profile’ association, add the $hasOne
 property to the model class. Remember to have a Profile model in
 /app/Model/Profile.php, or the association won’t work::
 
-    <?php
     class User extends AppModel {
         public $hasOne = 'Profile';
     }
@@ -197,7 +191,6 @@ to include only certain records.
 
 ::
 
-    <?php
     class User extends AppModel {
         public $hasOne = array(
             'Profile' => array(
@@ -285,7 +278,6 @@ Mentor belongsTo Doctor mentors.doctor\_id
 We can define the belongsTo association in our Profile model at
 /app/Model/Profile.php using the string syntax as follows::
 
-    <?php
     class Profile extends AppModel {
         public $belongsTo = 'User';
     }
@@ -293,7 +285,6 @@ We can define the belongsTo association in our Profile model at
 We can also define a more specific relationship using array
 syntax::
 
-    <?php
     class Profile extends AppModel {
         public $belongsTo = array(
             'User' => array(
@@ -390,7 +381,6 @@ Product hasMany Option  Option.product\_id
 We can define the hasMany association in our User model at
 /app/Model/User.php using the string syntax as follows::
 
-    <?php
     class User extends AppModel {
         public $hasMany = 'Comment';
     }
@@ -398,7 +388,6 @@ We can define the hasMany association in our User model at
 We can also define a more specific relationship using array
 syntax::
 
-    <?php
     class User extends AppModel {
         public $hasMany = array(
             'Comment' => array(
@@ -524,7 +513,6 @@ Once you have added the counter field you are good to go. Activate
 counter-cache in your association by adding a ``counterCache`` key
 and set the value to ``true``::
 
-    <?php
     class ImageComment extends AppModel {
         public $belongsTo = array(
             'Image' => array(
@@ -543,7 +531,6 @@ to, depending on how you look at it) the counter value.
 
 Using our Image model example, we can specify it like so::
 
-    <?php
     class ImageComment extends AppModel {
         public $belongsTo = array(
             'Image' => array(
@@ -613,7 +600,6 @@ Once this new table has been created, we can define the HABTM
 association in the model files. We're gonna skip straight to the
 array syntax this time::
 
-    <?php
     class Recipe extends AppModel {
         public $hasAndBelongsToMany = array(
             'Ingredient' =>
@@ -775,7 +761,6 @@ otherwise known as a **hasMany through** association.
 That is, the association is a model itself. So, we can create a new
 model CourseMembership. Take a look at the following models.::
 
-            <?php
             // Student.php
             class Student extends AppModel {
                 public $hasMany = array(
@@ -828,7 +813,6 @@ section about Built-in behaviors for more information). Let's set
 up a few models so we can see how bindModel() and unbindModel()
 work. We'll start with two models::
 
-    <?php
     class Leader extends AppModel {
         public $hasMany = array(
             'Follower' => array(
@@ -849,7 +833,6 @@ can see above, the association array in the Leader model defines a
 purposes, let's use unbindModel() to remove that association in a
 controller action::
 
-    <?php
     public function some_action() {
         // This fetches Leaders, and their associated Followers
         $this->Leader->find('all');
@@ -883,7 +866,6 @@ controller action::
 
 Here’s the basic usage pattern for unbindModel()::
 
-    <?php
     $this->Model->unbindModel(
         array('associationType' => array('associatedModelClassName'))
     );
@@ -896,7 +878,6 @@ Principles to our Leader on the fly (but remember–only for just the
 following find operation). This function appears in the
 LeadersController::
 
-    <?php
     public function another_action() {
         // There is no Leader hasMany Principles in
         // the leader.php model file, so a find here,
@@ -925,7 +906,6 @@ encapsulation of a normal association array inside an array whose
 key is named after the type of association you are trying to
 create::
 
-    <?php
     $this->Model->bindModel(
         array('associationName' => array(
                 'associatedModelClassName' => array(
@@ -949,7 +929,6 @@ message, and a second to the user that receives the message. The
 messages table will have a field user\_id, but also a field
 recipient\_id. Now your Message model can look something like::
 
-    <?php
     class Message extends AppModel {
         public $belongsTo = array(
             'Sender' => array(
@@ -966,7 +945,6 @@ recipient\_id. Now your Message model can look something like::
 Recipient is an alias for the User model. Now let's see what the
 User model would look like::
 
-    <?php
     class User extends AppModel {
         public $hasMany = array(
             'MessageSent' => array(
@@ -982,7 +960,6 @@ User model would look like::
 
 It is also possible to create self associations as shown below::
 
-    <?php
     class Post extends AppModel {
 
         public $belongsTo = array(
@@ -1031,7 +1008,6 @@ To force a join between tables you need to use the "modern" syntax
 for Model::find(), adding a 'joins' key to the $options array. For
 example::
 
-    <?php
     $options['joins'] = array(
         array('table' => 'channels',
             'alias' => 'Channel',
@@ -1064,7 +1040,6 @@ The keys that define the join are the following:
 With joins, you could add conditions based on Related model
 fields::
 
-    <?php
     $options['joins'] = array(
         array('table' => 'channels',
             'alias' => 'Channel',
@@ -1088,7 +1063,6 @@ uses a books\_tags table as join table, so you need to join the
 books table to the books\_tags table, and this with the tags
 table::
 
-    <?php
     $options['joins'] = array(
         array('table' => 'books_tags',
             'alias' => 'BooksTag',

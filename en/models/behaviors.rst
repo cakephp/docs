@@ -37,7 +37,6 @@ Using Behaviors
 Behaviors are attached to models through the ``$actsAs`` model class
 variable::
 
-    <?php
     class Category extends AppModel {
         public $actsAs = array('Tree');
     }
@@ -47,7 +46,6 @@ structure using the TreeBehavior. Once a behavior has been
 specified, use the methods added by the behavior as if they always
 existed as part of the original model::
 
-    <?php
     // Set ID
     $this->Category->id = 42;
 
@@ -59,7 +57,6 @@ behavior is attached to the model. Here, we tell our TreeBehavior
 the names of the "left" and "right" fields in the underlying
 database table::
 
-    <?php
     class Category extends AppModel {
         public $actsAs = array('Tree' => array(
             'left'  => 'left_node',
@@ -71,7 +68,6 @@ We can also attach several behaviors to a model. There's no reason
 why, for example, our Category model should only behave as a tree,
 it may also need internationalization support::
 
-    <?php
     class Category extends AppModel {
         public $actsAs = array(
             'Tree' => array(
@@ -90,7 +86,6 @@ our previous Category model, which is acting as a Tree and a
 Translate model, we need for some reason to force it to stop acting
 as a Translate model::
 
-    <?php
     // Detach a behavior from our model:
     $this->Category->Behaviors->unload('Translate');
 
@@ -102,7 +97,6 @@ behavior from acting upon our CakePHP model callbacks. Instead of
 detaching the behavior, we then tell our model to stop informing of
 these callbacks to the Translate behavior::
 
-    <?php
     // Stop letting the behavior handle our model callbacks
     $this->Category->Behaviors->disable('Translate');
 
@@ -110,7 +104,6 @@ We may also need to find out if our behavior is handling those
 model callbacks, and if not we then restore its ability to react to
 them::
 
-    <?php
     // If our behavior is not handling model callbacks
     if (!$this->Category->Behaviors->enabled('Translate')) {
         // Tell it to start doing so
@@ -122,7 +115,6 @@ runtime, we can also attach new behaviors. Say that our familiar
 Category model needs to start behaving as a Christmas model, but
 only on Christmas day::
 
-    <?php
     // If today is Dec 25
     if (date('m/d') == '12/25') {
         // Our model needs to behave as a Christmas model
@@ -131,7 +123,6 @@ only on Christmas day::
 
 We can also use the load method to override behavior settings::
 
-    <?php
     // We will change one setting from our already attached behavior
     $this->Category->Behaviors->load('Tree', array('left' => 'new_left_node'));
 
@@ -140,7 +131,6 @@ attached. If we pass the name of a behavior to the method, it will
 tell us if that behavior is attached to the model, otherwise it
 will give us the list of attached behaviors::
 
-    <?php
     // If the Translate behavior is not attached
     if (!$this->Category->Behaviors->attached('Translate')) {
         // Get the list of all behaviors the model has attached
@@ -171,7 +161,6 @@ the chapters about core behaviors and their configuration.
 A quick example that illustrates how behavior settings can be
 passed from the model to the behavior::
 
-    <?php
     class Post extends AppModel {
         public $actsAs = array(
             'YourBehavior' => array(
@@ -184,7 +173,6 @@ Since behaviors are shared across all the model instances that use them, it's a
 good practice to store the settings per alias/model name that is using the
 behavior.  When created behaviors will have their ``setup()`` method called::
 
-    <?php
     public function setup(Model $Model, $settings = array()) {
         if (!isset($this->settings[$Model->alias])) {
             $this->settings[$Model->alias] = array(
@@ -203,7 +191,6 @@ Creating behavior methods
 Behavior methods are automatically available on any model acting as
 the behavior. For example if you had::
 
-    <?php
     class Duck extends AppModel {
         public $actsAs = array('Flying');
     }
@@ -214,13 +201,11 @@ automatically get passed a reference of the calling model as the
 first parameter. All other supplied parameters are shifted one
 place to the right. For example::
 
-    <?php
     $this->Duck->fly('toronto', 'montreal');
 
 Although this method takes two parameters, the method signature
 should look like::
 
-    <?php
     public function fly(Model $Model, $from, $to) {
         // Do some flying.
     }
@@ -239,7 +224,6 @@ similar to ``Model::findAllByXXX`` methods on your behaviors.  Mapped methods ne
 to be declared in your behaviors ``$mapMethods`` array.  The method signature for
 a mapped method is slightly different than a normal behavior mixin method::
 
-    <?php
     class MyBehavior extends ModelBehavior {
         public $mapMethods = array('/do(\w+)/' => 'doSomething');
 
@@ -254,7 +238,6 @@ still the first parameter, but the called method name will be the 2nd parameter.
 you to munge the method name for additional information, much like ``Model::findAllByXX``.  If the above
 behavior was attached to a model the following would happen::
 
-    <?php
     $model->doReleaseTheHounds('homer', 'lenny');
 
     // would output

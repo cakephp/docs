@@ -16,7 +16,6 @@ To use the Media view, you need to tell your controller to use the MediaView
 class instead of the default View class. After that, just pass in additional
 parameters to specify where your file is located::
 
-    <?php
     class ExampleController extends AppController {
         public function download() {
             $this->viewClass = 'Media';
@@ -36,7 +35,6 @@ Here's an example of rendering a file whose mime type is not included in the
 MediaView's ``$mimeType`` array. We are also using a relative path which will 
 default to your ``app/webroot`` folder::
 
-    <?php
     public function download() {
         $this->viewClass = 'Media';
         // Render app/webroot/files/example.docx

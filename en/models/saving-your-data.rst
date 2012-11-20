@@ -23,7 +23,6 @@ quick usage.
 Here's a quick example of a controller action that uses a CakePHP
 model to save data to a database table::
 
-    <?php
     public function edit($id) {
         // Has any form data been POSTed?
         if ($this->request->is('post')) {
@@ -46,7 +45,6 @@ information). If for some reason your data isn't saving, be sure to check to see
 if some validation rules are being broken. You can debug this situation by
 outputting :php:attr:`Model::$validationErrors`::
 
-    <?php
     if ($this->Recipe->save($this->request->data)) {
         // handle the success.
     }
@@ -62,7 +60,6 @@ find useful:
 data array inside a model. This is useful when using models with
 the ActiveRecord features offered by Model::
 
-    <?php
     $this->Post->read(null, 1);
     $this->Post->set('title', 'New title for the article');
     $this->Post->save();
@@ -71,7 +68,6 @@ Is an example of how you can use ``set()`` to update and save
 single fields, in an ActiveRecord approach. You can also use
 ``set()`` to assign new values to multiple fields::
 
-    <?php
     $this->Post->read(null, 1);
     $this->Post->set(array(
         'title' => 'New title',
@@ -100,7 +96,6 @@ security, you can limit the saved fields to those listed in
 
 The save method also has an alternate syntax::
 
-    <?php
     save(array $data = null, array $params = array())
 
 ``$params`` array can have any of the following available options
@@ -126,7 +121,6 @@ handy when creating new objects.
 
 ::
 
-    <?php
     $this->Ingredient->save($newData);
     $newIngredientId = $this->Ingredient->id;
 
@@ -134,7 +128,6 @@ Creating or updating is controlled by the model's ``id`` field. If
 ``$Model->id`` is set, the record with this primary key is updated.
 Otherwise a new record is created::
 
-    <?php
     // Create: id isn't set or is null
     $this->Recipe->create();
     $this->Recipe->save($this->request->data);
@@ -151,7 +144,6 @@ Otherwise a new record is created::
 If you want to update a value, rather than create a new one, make sure
 your are passing the primary key field into the data array::
 
-    <?php
     $data = array('id' => 10, 'title' => 'My new title');
     // This will update Recipe with id 10
     $this->Recipe->save($data);
@@ -191,7 +183,6 @@ field.
 For example, to update the title of a blog post, the call to
 ``saveField`` from a controller might look something like this::
 
-    <?php
     $this->Post->saveField('title', 'A New Title for a New Day');
 
 .. warning::
@@ -209,7 +200,6 @@ along with their values, are identified by the ``$fields`` array.
 For example, to approve all bakers who have been members for over a
 year, the update call might look something like::
 
-    <?php
     $this_year = date('Y-m-d h:i:s', strtotime('-1 year'));
 
     $this->Baker->updateAll(
@@ -231,7 +221,6 @@ year, the update call might look something like::
 For example, to close all tickets that belong to a certain
 customer::
 
-    <?php
     $this->Ticket->updateAll(
         array('Ticket.status' => "'closed'"),
         array('Ticket.customer_id' => 453)
@@ -257,7 +246,6 @@ options may be used:
 For saving multiple records of single model, $data needs to be a
 numerically indexed array of records like this::
 
-    <?php
     $data = array(
         array('title' => 'title 1'),
         array('title' => 'title 2'),
@@ -272,7 +260,6 @@ numerically indexed array of records like this::
 
 It is also acceptable to have the data in the following format::
 
-    <?php
     $data = array(
         array('Article' => array('title' => 'title 1')),
         array('Article' => array('title' => 'title 2')),
@@ -280,7 +267,6 @@ It is also acceptable to have the data in the following format::
 
 To save also associated data with ``$options['deep'] = true`` (since 2.1), the two above examples would look like::
 
-    <?php
     $data = array(
         array('title' => 'title 1', 'Assoc' => array('field' => 'value')),
         array('title' => 'title 2'),
@@ -294,7 +280,6 @@ To save also associated data with ``$options['deep'] = true`` (since 2.1), the t
 Keep in mind that if you want to update a record instead of creating a new
 one you just need to add the primary key index to the data row::
 
-    <?php
     $data = array(
         array('Article' => array('title' => 'New article')), // This creates a new row
         array('Article' => array('id' => 2, 'title' => 'title 2')), // This updates an existing row
@@ -318,7 +303,6 @@ options may be used:
 For saving a record along with its related record having a hasOne
 or belongsTo association, the data array should be like this::
 
-    <?php
     $data = array(
         'User' => array('username' => 'billy'),
         'Profile' => array('sex' => 'Male', 'occupation' => 'Programmer'),
@@ -327,7 +311,6 @@ or belongsTo association, the data array should be like this::
 For saving a record along with its related records having hasMany
 association, the data array should be like this::
 
-    <?php
     $data = array(
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
@@ -340,7 +323,6 @@ association, the data array should be like this::
 And for saving a record along with its related records having hasMany with more than two
 levels deep associations, the data array should be as follow::
 
-    <?php
     $data = array(
         'User' => array('email' => 'john-doe@cakephp.org'),
         'Cart' => array(
@@ -380,7 +362,6 @@ For saving a record along with its related records having hasMany
 association and deeper associated Comment belongsTo User data as well,
 the data array should be like this::
 
-    <?php
     $data = array(
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
@@ -391,7 +372,6 @@ the data array should be like this::
 
 And save this data with::
 
-    <?php
     $Article->saveAssociated($data, array('deep' => true));
 
 .. versionchanged:: 2.1
@@ -399,7 +379,6 @@ And save this data with::
 
 Example of using ``fieldList`` with multiple models::
 
-    <?php
     $this->SomeModel->saveAll($data, array(
         'fieldList' => array(
             'SomeModel' => array('field_1'),
@@ -443,7 +422,6 @@ and a related Profile. The example action shown below will assume
 that you've POSTed enough data (using the FormHelper) to create a
 single User and a single Profile::
 
-    <?php
     public function add() {
         if (!empty($this->request->data)) {
             // We can save the User data:
@@ -493,7 +471,6 @@ models at the same time.
 First, you need to build your form for both Company and Account
 models (we'll assume that Company hasMany Account)::
 
-    <?php
     echo $form->create('Company', array('action' => 'add'));
     echo $form->input('Company.name', array('label' => 'Company name'));
     echo $form->input('Company.description');
@@ -519,7 +496,6 @@ having ``Account.0.fieldName`` is exactly what we need.
 Now, in our CompaniesController we can create an ``add()``
 action::
 
-    <?php
     public function add() {
         if (!empty($this->request->data)) {
             // Use the following to avoid validation errors:
@@ -541,7 +517,6 @@ Our example involves the Head of Cake School asking us to write an application t
 him to log a student's attendance on a course with days attended and grade. Take
 a look at the following code.::
 
-   <?php
    // Controller/CourseMembershipController.php
    class CourseMembershipsController extends AppController {
        public $uses = array('CourseMembership');
@@ -770,7 +745,6 @@ value is set to the ID of the recipe we want to link the tag to.
 When the ``save()`` method is invoked within the controller, it'll
 automatically save the HABTM data to the database::
 
-    <?php
     public function add() {
         // Save the association
         if ($this->Tag->save($this->request->data)) {
@@ -787,7 +761,6 @@ using the ``find('list')`` method and assigned to a view variable
 of the model name. An input with the same name will automatically
 pull in this data into a ``<select>``::
 
-    <?php
     // in the controller:
     $this->set('tags', $this->Recipe->Tag->find('list'));
 
@@ -801,7 +774,6 @@ data is pulled out of the model the same way, but the form input is
 declared slightly different. The tag name is defined using the
 ``ModelName`` convention::
 
-    <?php
     // in the controller:
     $this->set('tags', $this->Recipe->Tag->find('list'));
 
@@ -891,7 +863,6 @@ from $this->data and not automagically updated. Either use
 ``unset($this->data['Model']['modified'])``, etc. Alternatively you can override
 the Model::save() to always do it for you::
 
-    <?php
     class AppModel extends Model {
 
         public function save($data = null, $validate = true, $fieldList = array()) {

@@ -37,7 +37,6 @@ controller method has been prefixed with an underscore, the method
 will not be accessible directly from the web but is available for
 internal use. For example::
 
-    <?php
     class NewsController extends AppController {
     
         public function latest() {
