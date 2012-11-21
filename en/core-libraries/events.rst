@@ -55,7 +55,6 @@ Dispatching events
 So back to our example, we would have an `Order` model that will manage the buying logic,
 and probably a `place` method to save the order details and do any other logic::
 
-    <?php
     // Cart/Model/Order.php
     class Order extends AppModel {
 
@@ -77,7 +76,6 @@ about sending emails, and may not even have the inventory data to decrement the
 item from it, and definitely tracking usage statistics is not the best place to
 do it. So we need another solution, let's rewrite that using the event manager::
 
-    <?php
     // Cart/Model/Order.php
     App::uses('CakeEvent', 'Event');
     class Order extends AppModel {
@@ -106,7 +104,6 @@ and to dispatch events you use :php:meth:`CakeEventManager::dispatch()` which
 receives an instance of the :php:class:`CakeEvent` class. Let's dissect now the
 process of dispatching an event::
 
-    <?php
     new CakeEvent('Model.Order.afterPlace', $this, array(
         'order' => $order
     ));
@@ -145,7 +142,6 @@ For simplicity's sake, let's imagine we know in the plugin what the callbacks
 are available in the controller, and say this controller is responsible for
 attaching them. The possible code would look like this::
 
-    <?php
     // Listeners configured somewhere else, maybe a config file:
     Configure::write('Order.afterPlace', array(
         'email-sending' => 'EmailSender::sendBuyEmail',
@@ -199,7 +195,6 @@ statistics. It would be natural to pass an instance of this class as a callback,
 instead of implementing a custom static function or converting any other workaround
 to trigger methods in this class. A listener is created as follows::
 
-    <?php
     App::uses('CakeEventListener', 'Event');
     class UserStatistic implements CakeEventListener {
 
@@ -246,7 +241,6 @@ executed with a `FIFO` policy, the first listener method to be attached is calle
 first and so on. You set priorities using the `attach` method for callbacks, and
 declaring it in the `implementedEvents` function for event listeners::
 
-    <?php
     // Setting priority for a callback
     $callback = array($this, 'doSomething');
     $this->getEventManager()->attach($callback, 'Model.Order.afterPlace', array('priority' => 2));
@@ -278,7 +272,6 @@ In order to toggle this option you have to add the `passParams` option to the
 third argument of the `attach` method, or declare it in the `implementedEvents`
 returned array similar to what you do with priorities::
 
-    <?php
     // Setting priority for a callback
     $callback = array($this, 'doSomething');
     $this->getEventManager()->attach($callback, 'Model.Order.afterPlace', array('passParams' => true));
@@ -300,7 +293,6 @@ In the above code the `doSomething` function and `updateBuyStatistic` method wil
 receive `$orderData` instead of the `$event` object. This is so, because in our
 previous example we trigger the `Model.Order.afterPlace` event with some data::
 
-    <?php
     $this->getEventManager()->dispatch(new CakeEvent('Model.Order.afterPlace', $this, array(
         'order' => $order
     )));
@@ -322,7 +314,6 @@ the code detects it cannot proceed any further.
 In order to stop events you can either return `false` in your callbacks or call
 the `stopPropagation` method on the event object::
 
-    <?php
     public function doSomething($event) {
         // ...
         return false; // stops the event
@@ -342,7 +333,6 @@ we had a `beforePlace` stopping the event would have a valid meaning.
 
 To check if an event was stopped, you call the `isStopped()` method in the event object::
 
-    <?php
     public function place($order) {
         $event = new CakeEvent('Model.Order.beforePlace', $this, array('order' => $order));
         $this->getEventManager()->dispatch($event);
@@ -370,7 +360,6 @@ the $order data.
 Event results can be altered either using the event object result property
 directly or returning the value in the callback itself::
 
-    <?php
     // A listener callback
     public function doSomething($event) {
         // ...
@@ -410,7 +399,6 @@ If for any reason you want to remove any callback from the event manager just ca
 the :php:meth:`CakeEventManager::detach()` method using as arguments the first two
 params you used for attaching it::
 
-    <?php
     // Attaching a function
     $this->getEventManager()->attach(array($this, 'doSomething'), 'My.event');
 
@@ -459,7 +447,6 @@ the local callbacks will get called in the respective priority order.
 Accessing the global event manager is as easy as calling a static function,
 the following example will attach a global event to the `beforePlace` event::
 
-    <?php
     // In any configuration file or piece of code that executes before the event
     App::uses('CakeEventManager', 'Event');
     CakeEventManager::instance()->attach($aCallback, 'Model.Order.beforePlace');
@@ -476,7 +463,6 @@ to prevent some bugs. Remember that extreme flexibility implies extreme complexi
 Consider this callback that wants to listen for all Model beforeFinds but in
 reality, it cannot do its logic if the model is the Cart::
 
-    <?php
     App::uses('CakeEventManager', 'Event');
     CakeEventManager::instance()->attach('myCallback', 'Model.beforeFind');
 

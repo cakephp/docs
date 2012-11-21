@@ -19,7 +19,6 @@ constructor of Xml class to import data. In CakePHP 2.0 you can do it using
 SimpleXMLElement or DOMDocument object (depending of your options parameter -
 default is SimpleXMLElement). Below the samples how to import data from URL::
 
-    <?php
     // Old method:
     $xml = new Xml('http://bakery.cakephp.org/articles/rss');
 
@@ -38,7 +37,6 @@ default is SimpleXMLElement). Below the samples how to import data from URL::
 You can use :php:meth:`Xml::build()` to build XML objects from a variety of sources.  You
 can use XML to build objects from string data::
 
-    <?php
     $text = '<?xml version="1.0" encoding="utf-8"?>
     <post>
         <id>1</id>
@@ -50,7 +48,6 @@ can use XML to build objects from string data::
 You can also build Xml objects from either local files, or remote files.  Remote
 files will be fetched with :php:class:`HttpSocket`::
 
-    <?php
     // local file
     $xml = Xml::build('/home/awesome/unicorns.xml');
 
@@ -59,7 +56,6 @@ files will be fetched with :php:class:`HttpSocket`::
 
 You can also build Xml objects using an array::
 
-    <?php
     $data = array(
         'post' => array(
             'id' => 1,
@@ -71,7 +67,6 @@ You can also build Xml objects using an array::
 
 If your input is invalid the Xml class will throw a Exception::
 
-    <?php
     $xmlString = 'What is XML?'
     try {
         $xmlObject = Xml::build($xmlString); // Here will throw a Exception
@@ -92,7 +87,6 @@ Transforming a XML string in array
 Converting XML strings into arrays is simple with the Xml class as well.  By
 default you'll get a SimpleXml object back::
 
-    <?php
     //Old method:
     $xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
     $xmlObject = new Xml($xmlString);
@@ -109,7 +103,6 @@ Transforming an array into a string of XML
 
 ::
 
-    <?php
     // Old method:
     $xmlArray = array('root' => array('child' => 'value'));
     $xmlObject = new Xml($xmlArray, array('format' => 'tags'));
@@ -124,7 +117,6 @@ Your array must have only one element in the "top level" and it can not be
 numeric. If the array is not in this format, Xml will throw a Exception.
 Examples of invalid arrays::
 
-    <?php
     // Top level with numeric key
     array(
         array('key' => 'value')
@@ -148,7 +140,6 @@ Examples of invalid arrays::
 
 ::
 
-    <?php
     $xmlArray = array(
         'project' => array(
             '@id' => 1,
@@ -161,7 +152,6 @@ Examples of invalid arrays::
 
 The content of ``$xmlString`` will be::
 
-    <?php
     <?xml version="1.0"?>
     <project id="1">Value of project<name>Name of project, as tag</name></project>
 
@@ -173,7 +163,6 @@ The content of ``$xmlString`` will be::
 
 ::
 
-    <?php
     $oldArray = array(
         'Projects' => array(
             array(
@@ -231,7 +220,6 @@ To use XML Namespaces, in your array you must create a key with name ``xmlns:`` 
 generic namespace or input the prefix ``xmlns:`` in a custom namespace. See the
 samples::
 
-    <?php
     $xmlArray = array(
         'root' => array(
             'xmlns:' => 'http://cakephp.org',
@@ -269,7 +257,6 @@ The Xml class of CakePHP 2.0 doesn't provide the manipulation of content, this
 must be made using SimpleXMLElement or DOMDocument. But, how CakePHP is so
 sweet, below has the steps to do for create a child node::
 
-    <?php
     // CakePHP 1.3
     $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
     $xml = new Xml($myXmlOriginal, array('format' => 'tags'));
@@ -305,27 +292,22 @@ from a number of sources including strings, arrays and remote urls.
 
     Building XML from a string::
 
-        <?php
         $xml = Xml::build('<example>text</example>');
 
     Building XML from string (output DOMDocument)::
 
-        <?php
         $xml = Xml::build('<example>text</example>', array('return' => 'domdocument'));
 
     Building XML from a file path::
 
-        <?php
         $xml = Xml::build('/path/to/an/xml/file.xml');
 
     Building from a remote URL::
 
-        <?php
         $xml = Xml::build('http://example.com/example.xml');
 
     Building from an array::
 
-        <?php
         $value = array(
             'tags' => array(
                 'tag' => array(

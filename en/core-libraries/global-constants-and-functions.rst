@@ -28,7 +28,6 @@ such as debugging and translating content.
     ``sprintf()``.  You can supply additional arguments to replace
     placeholders in your string::
 
-        <?php
         __('You have %s unread messages', $number);
 
     .. note::

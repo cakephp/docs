@@ -65,7 +65,6 @@ set to a value greater than 0.
     Dump prints out the contents of a variable. It will print out all
     properties and methods (if any) of the supplied variable::
 
-        <?php
         $foo = array(1,2,3);
 
         Debugger::dump($foo);
@@ -110,7 +109,6 @@ set to a value greater than 0.
     the calling method, including which file and line the call
     originated from.::
 
-        <?php
         //In PostsController::index()
         pr(Debugger::trace());
         
@@ -135,7 +133,6 @@ set to a value greater than 0.
     filepath), highlights line number $line with $context number of
     lines around it.::
 
-        <?php
         pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
         
         //will output the following.
@@ -181,7 +178,6 @@ Logging messages is another good way to debug applications, and you can use
 extend :php:class:`Object` have an instance method `log()` which can be used
 to log messages::
 
-    <?php
     $this->log('Got here', 'debug');
 
 The above would write ``Got here`` into the debug log.  You can use log entries
@@ -189,7 +185,6 @@ to help debug methods that involve redirects or complicated loops. You can also
 use :php:meth:`CakeLog::write()` to write log messages.  This method can be called
 statically anywhere in your application one CakeLog has been loaded::
 
-    <?php
     // in app/Config/bootstrap.php
     App::uses('CakeLog', 'Log');
 

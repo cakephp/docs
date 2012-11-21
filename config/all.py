@@ -71,7 +71,7 @@ pygments_style = 'sphinx'
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
 
-highlight_language = 'php'
+highlight_language = 'phpinline'
 
 
 # -- Options for HTML output ---------------------------------------------------
@@ -281,3 +281,9 @@ epub_tocdup = False
 
 # Languages available.
 languages = ['en', 'pt', 'es', 'ja', 'ru', 'fr']
+
+# Hack to render the php source code without the <?php tag
+from sphinx.highlighting import lexers
+from pygments.lexers.web import PhpLexer
+
+lexers['phpinline'] = PhpLexer(startinline=True)

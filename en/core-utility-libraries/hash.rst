@@ -81,7 +81,6 @@ elements you can use attribute matching with methods like ``extract()``.
     structures.  Instead you use path expressions to qualify which elements you
     want returned ::
 
-        <?php
         // Common Usage:
         $users = $this->User->find("all");
         $results = Hash::extract($users, '{n}.User.id');
@@ -95,7 +94,6 @@ elements you can use attribute matching with methods like ``extract()``.
     Inserts $data into an array as defined by $path. This method only supports
     the expression types of :ref:`hash-path-syntax`::
 
-        <?php
         $a = array(
             'pages' => array('name' => 'page')
         );
@@ -126,7 +124,6 @@ elements you can use attribute matching with methods like ``extract()``.
     Removes all elements from an array that match $path. This method supports
     all the expression elements of :ref:`hash-path-syntax`::
 
-        <?php
         $a = array(
             'pages' => array('name' => 'page'),
             'files' => array('name' => 'files')
@@ -155,7 +152,6 @@ elements you can use attribute matching with methods like ``extract()``.
     You can optionally group the values by what is obtained when following the
     path specified in $groupPath.::
 
-        <?php
         $a = array(
             array(
                 'User' => array(
@@ -256,7 +252,6 @@ elements you can use attribute matching with methods like ``extract()``.
     the first value will be used as a format string, for values extracted by the
     other paths::
 
-        <?php
         $result = Hash::combine(
             $a,
             '{n}.User.id',
@@ -297,7 +292,6 @@ elements you can use attribute matching with methods like ``extract()``.
     Returns a series of values extracted from an array, formatted with a
     format string::
 
-        <?php
         $data = array(
             array(
                 'Person' => array(
@@ -355,7 +349,6 @@ elements you can use attribute matching with methods like ``extract()``.
     Determines if one Hash or array contains the exact keys and values
     of another::
 
-        <?php
         $a = array(
             0 => array('name' => 'main'),
             1 => array('name' => 'about')
@@ -380,7 +373,6 @@ elements you can use attribute matching with methods like ``extract()``.
 
     Checks if a particular path is set in an array::
 
-        <?php
         $set = array(
             'My Index 1' => array('First' => 'The first item')
         );
@@ -416,7 +408,6 @@ elements you can use attribute matching with methods like ``extract()``.
     custom $callback to filter the array elements. You callback should return
     ``false`` to remove elements from the resulting array::
 
-        <?php
         $data = array(
             '0',
             false,
@@ -446,7 +437,6 @@ elements you can use attribute matching with methods like ``extract()``.
 
     Collapses a multi-dimensional array into a single dimension::
 
-        <?php
         $arr = array(
             array(
                 'Post' => array('id' => '1', 'title' => 'First Post'),
@@ -478,7 +468,6 @@ elements you can use attribute matching with methods like ``extract()``.
     Expands an array that was previously flattened with
     :php:meth:`Hash::flatten()`::
 
-        <?php
         $data = array(
             '0.Post.id' => 1,
             '0.Post.title' => First Post,
@@ -520,7 +509,6 @@ elements you can use attribute matching with methods like ``extract()``.
 
     ::
 
-        <?php
         $array = array(
             array(
                 'id' => '48c2570e-dfa8-4c32-a35e-0d71cbdd56cb',
@@ -567,7 +555,6 @@ elements you can use attribute matching with methods like ``extract()``.
 
     Checks to see if all the values in the array are numeric::
 
-        <?php
         $data = array('one');
         $res = Hash::numeric(array_keys($data));
         // $res is true
@@ -583,7 +570,6 @@ elements you can use attribute matching with methods like ``extract()``.
     Counts the dimensions of an array. This method will only 
     consider the dimension of the first element in the array::
 
-        <?php
         $data = array('one', '2', 'three');
         $result = Hash::dimensions($data);
         // $result == 1
@@ -610,7 +596,6 @@ elements you can use attribute matching with methods like ``extract()``.
     Similar to :php:meth:`~Hash::dimensions()`, however this method returns,
     the deepest number of dimensions of any element in the array::
 
-        <?php
         $data = array('1' => '1.1', '2', '3' => array('3.1' => '3.1.1'));
         $result = Hash::dimensions($data, true);
         // $result == 2
@@ -638,7 +623,6 @@ elements you can use attribute matching with methods like ``extract()``.
     Sorts an array by any value, determined by a :ref:`hash-path-syntax`
     Only expression elements are supported by this method::
 
-        <?php
         $a = array(
             0 => array('Person' => array('name' => 'Jeff')),
             1 => array('Shirt' => array('color' => 'black'))
@@ -680,7 +664,6 @@ elements you can use attribute matching with methods like ``extract()``.
 
     Computes the difference between two arrays::
 
-        <?php
         $a = array(
             0 => array('name' => 'main'),
             1 => array('name' => 'about')
@@ -712,7 +695,6 @@ elements you can use attribute matching with methods like ``extract()``.
     **Example 1**
     ::
 
-        <?php
         $array1 = array('ModelOne' => array('id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2'));
         $array2 = array('ModelOne' => array('id' => 1003, 'field_one' => 'a3.m1.f1', 'field_two' => 'a3.m1.f2', 'field_three' => 'a3.m1.f3'));
         $res = Hash::mergeDiff($array1, $array2);
@@ -733,7 +715,6 @@ elements you can use attribute matching with methods like ``extract()``.
     **Example 2**
     ::
 
-        <?php
         $array1 = array("a" => "b", 1 => 20938, "c" => "string");
         $array2 = array("b" => "b", 3 => 238, "c" => "string", array("extra_field"));
         $res = Hash::mergeDiff($array1, $array2);
@@ -761,7 +742,6 @@ elements you can use attribute matching with methods like ``extract()``.
     converted to string keys with null values. Normalizing an array, makes using
     the results with :php:meth:`Hash::merge()` easier::
 
-        <?php
         $a = array('Tree', 'CounterCache',
             'Upload' => array(
                 'folder' => 'products',
@@ -826,7 +806,6 @@ elements you can use attribute matching with methods like ``extract()``.
 
     Example::
 
-        <?php
         $data = array(
             array('ModelName' => array('id' => 1, 'parent_id' => null)),
             array('ModelName' => array('id' => 2, 'parent_id' => 1)),

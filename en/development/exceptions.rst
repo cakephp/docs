@@ -14,7 +14,6 @@ Exception configuration
 
 There are a few keys available for configuring exceptions::
 
-    <?php
     Configure::write('Exception', array(
         'handler' => 'ErrorHandler::handleException',
         'renderer' => 'ExceptionRenderer',
@@ -92,7 +91,6 @@ You can throw these exceptions from you controllers to indicate failure states,
 or HTTP errors. An example use of the HTTP exceptions could be rendering 404
 pages for items that have not been found::
 
-    <?php
     public function view($id) {
         $post = $this->Post->findById($id);
         if (!$post) {
@@ -197,7 +195,6 @@ Using HTTP exceptions in your controllers
 You can throw any of the HTTP related exceptions from your controller actions
 to indicate failure states.  For example::
 
-    <?php
     public function view($id) {
         $post = $this->Post->read(null, $id);
         if (!$post) {
@@ -246,7 +243,6 @@ When in development mode :php:exc:`CakeException` objects simply need a new temp
 that matches the class name in order to provide useful information.  If your
 application contained the following exception::
 
-    <?php
     class MissingWidgetException extends CakeException {};
 
 You could provide nice development errors, by creating
@@ -259,7 +255,6 @@ exceptions, by providing more context for your errors.  You can also provide a m
 template which allows the native ``__toString()`` methods to work as normal::
 
 
-    <?php
     class MissingWidgetException extends CakeException {
         protected $_messageTemplate = 'Seems that %s is missing.';
     }
@@ -280,7 +275,6 @@ Creating custom status codes
 You can create custom HTTP status codes by changing the code used when
 creating an exception::
 
-    <?php
     throw new MissingWidgetHelperException('Its not here', 501);
 
 Will create a ``501`` response code, you can use any HTTP status code
@@ -316,7 +310,6 @@ define the handler as any callback type. By settings ``Exception.handler`` CakeP
 will ignore all other Exception settings.  A sample custom exception handling setup
 could look like::
 
-    <?php
     // in app/Config/core.php
     Configure::write('Exception.handler', 'AppExceptionHandler::handle');
 
@@ -337,7 +330,6 @@ simple print 'Oh noes! ' plus the exception message.  You can define exception
 handlers as any type of callback, even an anonymous function if you are
 using PHP 5.3::
 
-    <?php
     Configure::write('Exception.handler', function ($error) {
         echo 'Ruh roh ' . $error->getMessage();
     });
@@ -346,7 +338,6 @@ By creating a custom exception handler you can provide custom error handling for
 application exceptions. In the method provided as the exception handler you
 could do the following::
 
-    <?php
     // in app/Lib/AppErrorHandler.php
     class AppErrorHandler {
         public static function handleException($error) {
@@ -368,7 +359,6 @@ recommended for new applications. This controller method is called instead of
 the default exception rendering.  It receives the thrown exception as its only
 argument.  You should implement your error handling in that method::
 
-    <?php
     class AppController extends Controller {
         public function appError($error) {
             // custom logic goes here.
@@ -386,7 +376,6 @@ renderer class should be placed in ``app/Lib/Error``.  Or an ``Error```
 directory in any bootstrapped Lib path. In a custom exception rendering class
 you can provide specialized handling for application specific errors::
 
-    <?php
     // in app/Lib/Error/AppExceptionRenderer.php
     App::uses('ExceptionRenderer', 'Error');
 
@@ -423,7 +412,6 @@ custom error handling controller in your application.  By implementing
 ``_getController`` in your ``AppExceptionRenderer`` class, you can use any
 controller you want::
 
-    <?php
     class AppExceptionRenderer extends ExceptionRenderer {
         protected function _getController($exception) {
             App::uses('SuperCustomError', 'Controller');
