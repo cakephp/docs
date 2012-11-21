@@ -646,7 +646,12 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     Will create a submit button with an attached onclick event. The
     click event will be buffered by default.::
 
-        echo $this->Js->submit('Save', array('update' => '#content', 'div' => false, 'type' => 'json', 'async' => false));
+        echo $this->Js->submit('Save', array(
+            'update' => '#content',
+            'div' => false,
+            'type' => 'json',
+            'async' => false
+        ));
 
     Shows how you can combine options that both
     :php:func:`FormHelper::submit()` and :php:func:`JsHelper::request()` when using submit.
@@ -688,7 +693,10 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
             'htmlAttributes' => array('other' => 'value')
         ));
 
-        // Creates the following html
+    Outputs the following html:
+
+    .. code-block:: html
+
         <a href="/posts/index/page:2" other="value">Page 2</a>
 
 .. php:method:: serializeForm($options = array())
@@ -783,7 +791,9 @@ Adding effects and transitions
 ------------------------------
 
 Since ``indicator`` is no longer supported, you must add any
-indicator effects yourself::
+indicator effects yourself:
+
+.. code-block:: php
 
     <!DOCTYPE html>
     <html>

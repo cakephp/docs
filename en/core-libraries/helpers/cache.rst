@@ -86,7 +86,9 @@ For example, certain parts of the page may look different whether a
 user is currently logged in or browsing your site as a guest.
 
 To indicate blocks of content that are *not* to be cached, wrap
-them in ``<!--nocache--> <!--/nocache-->`` like so::
+them in ``<!--nocache--> <!--/nocache-->`` like so:
+
+.. code-block:: php
 
     <!--nocache-->
     <?php if ($this->Session->check('User.name')): ?>

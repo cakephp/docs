@@ -64,7 +64,9 @@ Displaying notifications or flash messages
 
         echo $this->Session->flash();
 
-    The above will output a simple message, with the following html::
+    The above will output a simple message, with the following html:
+
+    .. code-block:: html
 
         <div id="flashMessage" class="message">
             Your stuff has been saved.
@@ -80,7 +82,6 @@ Displaying notifications or flash messages
     When outputting this message, you can choose the element used to display
     this message::
 
-        <?php 
         // in a layout.
         echo $this->Session->flash('flash', array('element' => 'failure'));
 
@@ -88,7 +89,9 @@ Displaying notifications or flash messages
     message text would be available as ``$message`` in the element.
 
     Inside the failure element file would be something like
-    this::
+    this:
+
+    .. code-block:: php
 
         <div class="flash flash-failure">
             <?php echo $message; ?>

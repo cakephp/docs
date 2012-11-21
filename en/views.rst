@@ -66,7 +66,9 @@ View extending allows you to wrap one view in another.  Combining this with
 :term:`DRY`.  For example, your application has a sidebar that needs to change depending
 on the specific view being rendered.  By extending a common view file you can
 avoid repeating the common markup for your sidebar, and only define the parts
-that change::
+that change:
+
+.. code-block:: php
 
     // app/View/Common/view.ctp
     <h1><?php echo $this->fetch('title'); ?></h1>
@@ -83,8 +85,11 @@ The above view file could be used as a parent view.  It expects that the view
 extending it will define the ``sidebar`` and ``title`` blocks.  The ``content``
 block is a special block that CakePHP creates. It will contain all the
 un-captured content from the extending view. Assuming our view file has a
-``$posts`` variable with the data about our post.  Our view could look like::
+``$posts`` variable with the data about our post.  Our view could look like:
 
+.. code-block:: php
+
+    <?php
     // app/View/Posts/view.ctp
     $this->extend('/Common/view');
 
@@ -92,7 +97,9 @@ un-captured content from the extending view. Assuming our view file has a
 
     $this->start('sidebar');
     ?>
-    <li>    echo $this->Html->link('edit', array(
+    <li>
+    <?php
+    echo $this->Html->link('edit', array(
         'action' => 'edit',
         $post['Post']['id']
     )); ?>
@@ -101,7 +108,7 @@ un-captured content from the extending view. Assuming our view file has a
 
     // The remaining content will be available as the 'content' block
     // in the parent view.
-    echo h($post['Post']['body']);
+    <?php echo h($post['Post']['body']);
 
 The post view above shows how you can extend a view, and populate a set of
 blocks.  Any content not already in a defined block will captured and put
@@ -182,11 +189,13 @@ Displaying blocks
 You can display blocks using the ``fetch()`` method.  ``fetch()`` will safely
 output a block, returning '' if a block does not exist::
 
-    <?php echo $this->fetch('sidebar'); ?>
+    echo $this->fetch('sidebar');
 
 You can also use fetch to conditionally show content that should surround a
 block should it exist.  This is helpful in layouts, or extended views where you
-want to conditionally show headings or other markup::
+want to conditionally show headings or other markup:
+
+.. code-block:: php
 
     // in app/View/Layouts/default.ctp
     <?php if ($this->fetch('menu')): ?>
@@ -198,7 +207,9 @@ want to conditionally show headings or other markup::
 
 As of 2.3.0 you can also provide a default value for a block should it not have
 any content.  This allows you to easily add placeholder content, for empty
-states.  You can provide a default value using the 2nd argument::
+states.  You can provide a default value using the 2nd argument:
+
+.. code-block:: php
 
     <div class="shopping-cart">
         <h3>Your Cart</h3>
@@ -217,8 +228,11 @@ Blocks replace the deprecated ``$scripts_for_layout`` layout variable.  Instead
 you should use blocks.  The :php:class:`HtmlHelper` ties into view blocks, and its
 :php:meth:`~HtmlHelper::script()`, :php:meth:`~HtmlHelper::css()`, and
 :php:meth:`~HtmlHelper::meta()` methods each update a block with the same name
-when used with the ``inline = false`` option::
+when used with the ``inline = false`` option:
 
+.. code-block:: php
+
+    <?php
     // in your view file
     $this->Html->script('carousel', array('inline' => false));
     $this->Html->css('carousel', null, array('inline' => false));
@@ -261,7 +275,9 @@ default layout when the page is rendered.
 When you create a layout, you need to tell CakePHP where to place
 the code for your views. To do so, make sure your layout includes a
 place for ``$this->fetch('content')`` Here's an example of what a default layout
-might look like::
+might look like:
+
+.. code-block:: php
 
    <!DOCTYPE html>
    <html lang="en">
@@ -269,6 +285,7 @@ might look like::
    <title><?php echo $title_for_layout?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
    <!-- Include external files and scripts here (See HTML helper for more info.) -->
+   <?php
    echo $this->fetch('meta');
    echo $this->fetch('css');
    echo $this->fetch('script');
@@ -475,7 +492,9 @@ the Post example::
 
 And then in the element we can access the paginated posts model. To
 get the latest five posts in an ordered list we would do something
-like the following::
+like the following:
+
+.. code-block:: php
 
     <h2>Latest Posts</h2>
     <?php $posts = $this->requestAction('posts/index/sort:created/direction:asc/limit:5'); ?>
@@ -538,7 +557,7 @@ rendered for a plugin controller/action, the plugin name will automatically
 be prefixed onto all elements used, unless another plugin name is present.
 If the element doesn't exist in the plugin, it will look in the main APP folder.::
 
-    <?php echo $this->element('Contacts.helpbox'); ?>
+    echo $this->element('Contacts.helpbox');
 
 If your view is a part of a plugin you can omit the plugin name.  For example,
 if you are in the ``ContactsController`` of the Contacts plugin::

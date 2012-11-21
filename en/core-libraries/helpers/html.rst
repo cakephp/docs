@@ -11,7 +11,9 @@ a domain.
 
 Many HtmlHelper methods include a ``$htmlAttributes`` parameter,
 that allow you to tack on any extra attributes on your tags. Here
-are a few examples of how to use the $htmlAttributes parameter::
+are a few examples of how to use the $htmlAttributes parameter:
+
+.. code-block:: html
 
     Desired attributes: <tag class="someClass" />      
     Array parameter: array('class' => 'someClass')
@@ -46,17 +48,21 @@ methods of the HtmlHelper and how to use them.
 
     Example use::
  
-        <?php echo $this->Html->charset(); ?> 
+        echo $this->Html->charset();
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     Alternatively, ::
 
-        <?php echo $this->Html->charset('ISO-8859-1'); ?>
+        echo $this->Html->charset('ISO-8859-1');
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
@@ -78,17 +84,21 @@ methods of the HtmlHelper and how to use them.
     This method of CSS inclusion assumes that the CSS file specified
     resides inside the /app/webroot/css directory.::
 
-        <?php echo $this->Html->css('forms'); ?> 
+        echo $this->Html->css('forms');
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <link rel="stylesheet" type="text/css" href="/css/forms.css" />
 
     The first parameter can be an array to include multiple files.::
 
-        <?php echo $this->Html->css(array('forms', 'tables', 'menu')); ?>
+        echo $this->Html->css(array('forms', 'tables', 'menu'));
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <link rel="stylesheet" type="text/css" href="/css/forms.css" />
         <link rel="stylesheet" type="text/css" href="/css/tables.css" />
@@ -133,25 +143,29 @@ methods of the HtmlHelper and how to use them.
     icon     image/x-icon
     ======== ======================
 
-    ::
 
+    .. code-block:: php
+
+        <?php
         echo $this->Html->meta(
             'favicon.ico',
             '/favicon.ico',
             array('type' => 'icon')
         );
+        ?>
         // Output (line breaks added)
         <link
             href="http://example.com/favicon.ico"
             title="favicon.ico" type="image/x-icon"
             rel="alternate"
         />
-         
+        <?php
         echo $this->Html->meta(
             'Comments',
             '/comments/index.rss',
             array('type' => 'rss')
         );
+        ?>
         // Output (line breaks added)
         <link
             href="http://example.com/comments/index.rss"
@@ -161,19 +175,25 @@ methods of the HtmlHelper and how to use them.
         />
 
     This method can also be used to add the meta keywords and
-    descriptions. Example::
+    descriptions. Example:
 
+    .. code-block:: php
+
+        <?php
         echo $this->Html->meta(
             'keywords',
             'enter any meta keyword here'
         );
+        ?>
         // Output
         <meta name="keywords" content="enter any meta keyword here" />
 
+        <?php
         echo $this->Html->meta(
             'description',
             'enter any meta description here'
         );
+        ?>
         // Output
         <meta name="description" content="enter any meta description here" />
 
@@ -256,7 +276,9 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'));
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <img src="/img/cake_logo.png" alt="CakePHP" /> 
 
@@ -268,7 +290,9 @@ methods of the HtmlHelper and how to use them.
             'url' => array('controller' => 'recipes', 'action' => 'view', 6)
         ));
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <a href="/recipes/view/6">
             <img src="/img/recipes/6.jpg" alt="Brownies" />
@@ -279,7 +303,9 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->image("logo.png", array('fullBase' => true));
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <img src="http://example.com/img/logo.jpg" alt="" />
 
@@ -311,7 +337,9 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->link('Enter', '/pages/home', array('class' => 'button', 'target' => '_blank'));
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <a href="/pages/home" class="button" target="_blank">Enter</a>
 
@@ -322,7 +350,9 @@ methods of the HtmlHelper and how to use them.
             array('controller' => 'dashboards', 'action' => 'index', 'full_base' => true)
         );
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <a href="http://www.yourdomain.com/dashboards/index">Dashboard</a>
 
@@ -337,7 +367,9 @@ methods of the HtmlHelper and how to use them.
             "Are you sure you wish to delete this recipe?"
         );
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <a href="/recipes/delete/6" onclick="return confirm('Are you sure you wish to delete this recipe?');">Delete</a>
 
@@ -350,22 +382,26 @@ methods of the HtmlHelper and how to use them.
             '?' => array('height' => 400, 'width' => 500))
         );
 
-    Will output::
+    Will output:
   
+    .. code-block:: html
+
         <a href="/images/view/1?height=400&width=500">View image</a>
 
     HTML special characters in ``$title`` will be converted to HTML
     entities. To disable this conversion, set the escape option to
     false in the ``$options`` array.::
 
-        <?php 
+        <?php
         echo $this->Html->link(
             $this->Html->image("recipes/6.jpg", array("alt" => "Brownies")),
             "recipes/view/6",
             array('escape' => false)
         );
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <a href="/recipes/view/6">
             <img src="/img/recipes/6.jpg" alt="Brownies" />
@@ -395,22 +431,27 @@ methods of the HtmlHelper and how to use them.
 
     .. versionadded:: 2.1
 
-    Returns a formatted audio/video tag::
+    Returns a formatted audio/video tag:
 
-        echo $this->Html->media('audio.mp4');
+    .. code-block:: php
+
+        <?php echo $this->Html->media('audio.mp4'); ?>
 
         // Output
         <video src="/files/audio.mp3"></audio>
 
-        echo $this->Html->media('video.mp4', array('fullBase' => true, 'text' => 'Fallback text'));
+        <?php echo $this->Html->media('video.mp4', array(
+            'fullBase' => true,
+            'text' => 'Fallback text'
+        )); ?>
 
         // Output
         <video src="http://www.somehost.com/files/video.mp4">Fallback text</video>
 
-        echo $this->Html->media(
+       <?php echo $this->Html->media(
             array('video.mp4', array('src' => 'video.ogg', 'type' => "video/ogg; codecs='theora, vorbis'")),
             array('autoplay')
-        );
+        ); ?>
 
         // Output
         <video autoplay="autoplay">
@@ -425,16 +466,21 @@ methods of the HtmlHelper and how to use them.
     :param array $options: An array of :term:`html attributes`.
 
     Returns text wrapped in a specified tag. If no text is specified
-    then only the opening <tag> is returned.::
+    then only the opening <tag> is returned.:
 
+    .. code-block:: php
+
+        <?php
         echo $this->Html->tag('span', 'Hello World.', array('class' => 'welcome'));
+        ?>
          
         // Output
         <span class="welcome">Hello World</span>
          
         // No text specified.
-        <?php 
+        <?php
         echo $this->Html->tag('span', null, array('class' => 'welcome'));
+        ?>
          
         // Output
         <span class="welcome">
@@ -457,9 +503,13 @@ methods of the HtmlHelper and how to use them.
     the text to be wrapped by div tags. If the last parameter has been
     set to true, $text will be printed HTML-escaped.
 
-    If no text is specified, only an opening div tag is returned.::
+    If no text is specified, only an opening div tag is returned.:
  
+    .. code-block:: php
+
+        <?php
         echo $this->Html->div('error', 'Please enter your credit card number.');
+        ?>
         
         // Output
         <div class="error">Please enter your credit card number.</div>
@@ -471,9 +521,13 @@ methods of the HtmlHelper and how to use them.
     :param array $options: An array of :term:`html attributes`.
 
     Returns a text wrapped in a CSS-classed <p> tag. If no text is
-    supplied, only a starting <p> tag is returned.::
+    supplied, only a starting <p> tag is returned.:
 
+    .. code-block:: php
+
+        <?php
         echo $this->Html->para(null, 'Hello World.');
+        ?>
         
         // Output
         <p>Hello World.</p>
@@ -502,7 +556,9 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->script('scripts');
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <script type="text/javascript" href="/js/scripts.js"></script>
 
@@ -515,7 +571,9 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->script(array('jquery', 'wysiwyg', 'scripts'));
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <script type="text/javascript" href="/js/jquery.js"></script>
         <script type="text/javascript" href="/js/wysiwyg.js"></script>
@@ -605,6 +663,10 @@ methods of the HtmlHelper and how to use them.
         );
         echo $this->Html->nestedList($list);
 
+    Output:
+
+    .. code-block:: html
+
         // Output (minus the whitespace)
         <ul>
             <li>Languages
@@ -633,20 +695,28 @@ methods of the HtmlHelper and how to use them.
 
         echo $this->Html->tableHeaders(array('Date', 'Title', 'Active'));
 
-        // Output 
+    Output:
+
+    .. code-block:: html
+
         <tr>
             <th>Date</th>
             <th>Title</th>
             <th>Active</th>
         </tr>
-        
+
+    ::
+
         echo $this->Html->tableHeaders(
             array('Date','Title','Active'),
             array('class' => 'status'),
             array('class' => 'product_table')
         );
-         
-        // Output
+
+    Output:
+
+    .. code-block:: html
+
         <tr class="status">
              <th class="product_table">Date</th>
              <th class="product_table">Title</th>
@@ -665,7 +735,10 @@ methods of the HtmlHelper and how to use them.
             array('Date' => array('class' => 'sortable'))
         ));
 
-        // Output
+    Output:
+
+    .. code-block:: html
+
         <tr>
             <th>id</th>
             <th class="highlight">Name</th>
@@ -691,22 +764,32 @@ methods of the HtmlHelper and how to use them.
             array('Aug 1st, 2006', 'Anti-Java Cake', 'No'),
         ));
          
-        // Output
+    Output:
+
+    .. code-block:: html
+
         <tr><td>Jul 7th, 2007</td><td>Best Brownies</td><td>Yes</td></tr>
         <tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>
         <tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td>No</td></tr>
-        
+
+    ::
+
         echo $this->Html->tableCells(array(
             array('Jul 7th, 2007', array('Best Brownies', array('class' => 'highlight')) , 'Yes'),
             array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),
             array('Aug 1st, 2006', 'Anti-Java Cake', array('No', array('id' => 'special'))),
         ));
-         
-        // Output
+
+    Output:
+
+    .. code-block:: html
+
         <tr><td>Jul 7th, 2007</td><td class="highlight">Best Brownies</td><td>Yes</td></tr>
         <tr><td>Jun 21st, 2007</td><td>Smart Cookies</td><td>Yes</td></tr>
         <tr><td>Aug 1st, 2006</td><td>Anti-Java Cake</td><td id="special">No</td></tr>
-        
+
+    ::
+
         echo $this->Html->tableCells(
             array(
                 array('Red', 'Apple'),
@@ -716,7 +799,10 @@ methods of the HtmlHelper and how to use them.
             array('class' => 'darker')
         );
         
-        // Output
+    Output:
+
+    .. code-block:: html
+
         <tr class="darker"><td>Red</td><td>Apple</td></tr>
         <tr><td>Orange</td><td>Orange</td></tr>
         <tr class="darker"><td>Yellow</td><td>Banana</td></tr>
@@ -798,7 +884,10 @@ methods of the HtmlHelper and how to use them.
             array('method' => 'post', 'class' => 'myform')
         );
 
-        // Output
+    Output:
+
+    .. code-block:: html
+
         <form action="http://example.com" method="post" class="myform">
 
 Changing the tags output by HtmlHelper

@@ -27,7 +27,9 @@ opening form tag.
     generated using the name of the model, and the name of the
     controller action, CamelCased. If I were to call ``create()``
     inside a UsersController view, I’d see something like the following
-    output in the rendered view::
+    output in the rendered view:
+
+    .. code-block:: html
 
         <form id="UserAddForm" method="post" action="/users/add">
 
@@ -47,9 +49,11 @@ opening form tag.
     you are using the default model for the current controller::
 
         // If you are on /recipes/add
-        <?php echo $this->Form->create('Recipe'); ?>
+        echo $this->Form->create('Recipe');
 
-    Output::
+    Output:
+
+    .. code-block:: php
 
         <form id="RecipeAddForm" method="post" action="/recipes/add">
 
@@ -76,7 +80,9 @@ opening form tag.
         // Since $this->request->data['Recipe']['id'] = 5, we will get an edit form
         <?php echo $this->Form->create('Recipe'); ?>
 
-    Output::
+    Output:
+
+    .. code-block:: html
 
         <form id="RecipeEditForm" method="post" action="/recipes/edit/5">
         <input type="hidden" name="_method" value="PUT" />
@@ -113,11 +119,13 @@ There are a number of options for create():
   Supplying either 'post' or 'get' changes the form submission method
   accordingly::
 
-      <?php echo $this->Form->create('User', array('type' => 'get')); ?>
+      echo $this->Form->create('User', array('type' => 'get'));
 
-  Output::
+  Output:
 
-      <form id="UserAddForm" method="get" action="/users/add">
+  .. code-block:: html
+
+     <form id="UserAddForm" method="get" action="/users/add">
 
   Specifying 'file' changes the form submission method to 'post', and
   includes an enctype of "multipart/form-data" on the form tag. This
@@ -125,11 +133,13 @@ There are a number of options for create():
   absence of the proper enctype attribute will cause the file uploads
   not to function::
 
-      <?php echo $this->Form->create('User', array('type' => 'file')); ?>
+      echo $this->Form->create('User', array('type' => 'file'));
 
-  Output::
+  Output:
 
-      <form id="UserAddForm" enctype="multipart/form-data" method="post" action="/users/add">
+  .. code-block:: html
+
+     <form id="UserAddForm" enctype="multipart/form-data" method="post" action="/users/add">
 
   When using 'put' or 'delete', your form will be functionally
   equivalent to a 'post' form, but when submitted, the HTTP request
@@ -142,12 +152,13 @@ There are a number of options for create():
   point the form to the login() action of the current controller, you would
   supply an $options array like the following::
 
-    <?php echo $this->Form->create('User', array('action' => 'login')); ?>
+    echo $this->Form->create('User', array('action' => 'login'));
 
-  Output::
+  Output:
 
-    <form id="UserLoginForm" method="post" action="/users/login">
-    </form>
+  .. code-block:: html
+
+     <form id="UserLoginForm" method="post" action="/users/login">
 
 * ``$options['url']`` If the desired form action isn’t in the current
   controller, you can specify a URL for the form action using the ‘url’ key of
@@ -160,9 +171,11 @@ There are a number of options for create():
         'url' => array('controller' => 'recipes', 'action' => 'add')
     ));
 
-  Output::
+  Output:
 
-    <form method="post" action="/recipes/add">
+  .. code-block:: html
+
+     <form method="post" action="/recipes/add">
 
   or can point to an external domain::
 
@@ -171,7 +184,9 @@ There are a number of options for create():
         'type' => 'get'
     ));
 
-  Output::
+  Output:
+
+  .. code-block:: html
 
     <form method="get" action="http://www.google.com/search">
 
@@ -210,7 +225,9 @@ Closing the Form
     The FormHelper includes an ``end()`` method that completes the
     form. Often, ``end()`` only outputs a closing form tag, but
     using ``end()`` also allows the FormHelper to insert needed hidden
-    form elements that :php:class:`SecurityComponent` requires::
+    form elements that :php:class:`SecurityComponent` requires:
+
+    .. code-block:: php
 
         <?php echo $this->Form->create(); ?>
 
@@ -224,7 +241,9 @@ Closing the Form
 
         <?php echo $this->Form->end('Finish'); ?>
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <div class="submit">
             <input type="submit" value="Finish" />
@@ -241,7 +260,9 @@ Closing the Form
         );
         echo $this->Form->end($options);
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <div class="glass-pill"><input type="submit" value="Update" name="Update"></div>
 
@@ -390,7 +411,9 @@ Field naming conventions
 
 The Form helper is pretty smart. Whenever you specify a field name
 with the form helper methods, it'll automatically use the current
-model name to build an input with a format like the following::
+model name to build an input with a format like the following:
+
+.. code-block:: html
 
     <input type="text" id="ModelnameFieldname" name="data[Modelname][fieldname]">
 
@@ -407,7 +430,9 @@ saveAll(), use the following convention::
     echo $this->Form->input('Modelname.0.fieldname');
     echo $this->Form->input('Modelname.1.fieldname');
 
-Output::
+Output:
+
+.. code-block:: html
 
     <input type="text" id="Modelname0Fieldname" name="data[Modelname][0][fieldname]">
     <input type="text" id="Modelname1Fieldname" name="data[Modelname][1][fieldname]">
@@ -440,7 +465,9 @@ html attributes. The following will cover the options specific to
     echo $this->Form->input('field', array('type' => 'file'));
     echo $this->Form->input('email', array('type' => 'email'));
 
-  Output::
+  Output:
+
+  .. code-block:: html
 
     <div class="input file">
         <label for="UserField">Field</label>
@@ -462,7 +489,9 @@ html attributes. The following will cover the options specific to
         'div' => 'class_name'
     ));
 
-  Output::
+  Output:
+
+  .. code-block:: html
 
     <div class="class_name">
         <label for="UserName">Name</label>
@@ -479,7 +508,9 @@ html attributes. The following will cover the options specific to
         )
     ));
 
-  Output::
+  Output:
+
+  .. code-block:: html
 
     <div class="input text" id="mainDiv" title="Div Title" style="display:block">
         <label for="UserName">Name</label>
@@ -490,7 +521,9 @@ html attributes. The following will cover the options specific to
 
     echo $this->Form->input('User.name', array('div' => false)); ?>
 
-  Output::
+  Output:
+
+  .. code-block:: html
 
     <label for="UserName">Name</label>
     <input name="data[User][name]" type="text" value="" id="UserName" />
@@ -502,7 +535,9 @@ html attributes. The following will cover the options specific to
         'label' => 'The User Alias'
     ));
 
-  Output::
+  Output:
+
+  .. code-block:: html
 
     <div class="input">
         <label for="UserName">The User Alias</label>
@@ -514,7 +549,9 @@ html attributes. The following will cover the options specific to
 
     echo $this->Form->input('User.name', array('label' => false));
 
-  Output::
+  Output:
+
+  .. code-block:: html
 
     <div class="input">
         <input name="data[User][name]" type="text" value="" id="UserName" />
@@ -531,7 +568,9 @@ html attributes. The following will cover the options specific to
         )
     ));
 
-  Output::
+  Output:
+
+  .. code-block:: html
 
     <div class="input">
         <label for="UserName" class="thingy">The User Alias</label>
@@ -587,7 +626,9 @@ html attributes. The following will cover the options specific to
           'between' => '--between---'
       ));
 
-  Output::
+  Output:
+
+  .. code-block:: html
 
       <div class="input">
       --before--
@@ -608,7 +649,9 @@ html attributes. The following will cover the options specific to
           'options' => array('1', '2')
       ));
 
-  Output::
+  Output:
+
+  .. code-block:: html
 
       <div class="input">
       --before--
@@ -699,12 +742,8 @@ common options shared by all input methods are as follows:
     set the value in ``$this->request->data`` in your controller,
     or set the input option ``checked`` to true.
 
-  .. note::
-
     Date and datetime fields' default values can be set by using the
     'selected' key.
-
-  .. note::
 
     Beware of using false to assign a default value. A false value is used to
     disable/exclude options of an input field, so ``'default' => false`` would
@@ -717,7 +756,6 @@ applied to the generated HTML input element.
 
 Options for select, checkbox and  radio inputs
 ----------------------------------------------
-
 
 * ``$options['selected']`` Used in combination with a select-type input (i.e.
   For types select, date, time, datetime). Set ‘selected’ to the value of the
@@ -745,7 +783,9 @@ Options for select, checkbox and  radio inputs
           'empty' => '(choose one)'
       ));
 
-  Output::
+  Output:
+
+  .. code-block:: html
 
       <div class="input">
           <label for="UserField">Field</label>
@@ -768,7 +808,9 @@ Options for select, checkbox and  radio inputs
 
 * ``$options['hiddenField']`` For certain input types (checkboxes, radios) a
   hidden input is created so that the key in $this->request->data will exist
-  even without a value specified::
+  even without a value specified:
+
+  .. code-block:: html
 
     <input type="hidden" name="data[Post][Published]" id="PostPublished_" value="0" />
     <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
@@ -777,7 +819,9 @@ Options for select, checkbox and  radio inputs
 
     echo $this->Form->checkbox('published', array('hiddenField' => false));
 
-  Which outputs::
+  Which outputs:
+
+  .. code-block:: html
 
     <input type="checkbox" name="data[Post][Published]" value="1" id="PostPublished" />
 
@@ -787,7 +831,9 @@ Options for select, checkbox and  radio inputs
   places, only the last group of input's values will be saved
 
   In this example, only the tertiary colors would be passed, and the
-  primary colors would be overridden::
+  primary colors would be overridden:
+
+  .. code-block:: html
 
     <h2>Primary Colors</h2>
     <input type="hidden" name="data[Color][Color]" id="Colors_" value="0" />
@@ -859,7 +905,9 @@ Form Element-Specific Methods
         echo $this->Form->label('User.name');
         echo $this->Form->label('User.name', 'Your username');
 
-    Output::
+    Output:
+
+    .. code-block:: html
 
         <label for="UserName">Name</label>
         <label for="UserName">Your username</label>
@@ -870,7 +918,9 @@ Form Element-Specific Methods
         echo $this->Form->label('User.name', null, array('id' => 'user-label'));
         echo $this->Form->label('User.name', 'Your username', 'highlight');
 
-    Output::
+    Output:
+
+    .. code-block:: html
 
         <label for="UserName" id="user-label">Name</label>
         <label for="UserName" class="highlight">Your username</label>
@@ -883,9 +933,11 @@ Form Element-Specific Methods
     $options is used primarily to specify HTML tag attributes (such as
     the value or DOM id of an element in the form)::
 
-        <?php echo $this->Form->text('username', array('class' => 'users')); ?>
+        echo $this->Form->text('username', array('class' => 'users'));
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <input name="data[User][username]" type="text" class="users" id="UserUsername" />
 
@@ -895,7 +947,9 @@ Form Element-Specific Methods
 
         echo $this->Form->password('password');
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <input name="data[User][password]" value="" id="UserPassword" type="password" />
 
@@ -905,7 +959,9 @@ Form Element-Specific Methods
 
         echo $this->Form->hidden('id');
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <input name="data[User][id]" value="10" id="UserId" type="hidden" />
 
@@ -920,7 +976,9 @@ Form Element-Specific Methods
 
         echo $this->Form->textarea('notes');
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <textarea name="data[User][notes]" id="UserNotes"></textarea>
 
@@ -947,7 +1005,9 @@ Form Element-Specific Methods
 
         echo $this->Form->textarea('textarea', array('rows' => '5', 'cols' => '5'));
 
-      Output::
+      Output:
+
+    .. code-block:: html
 
         <textarea name="data[Form][textarea]" cols="5" rows="5" id="FormTextarea">
         </textarea>
@@ -958,9 +1018,11 @@ Form Element-Specific Methods
     associated hidden form input to force the submission of data for
     the specified field.::
 
-        <?php echo $this->Form->checkbox('done'); ?>
+        echo $this->Form->checkbox('done');
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <input type="hidden" name="data[User][done]" value="0" id="UserDone_" />
         <input type="checkbox" name="data[User][done]" value="1" id="UserDone" />
@@ -968,18 +1030,22 @@ Form Element-Specific Methods
     It is possible to specify the value of the checkbox by using the
     $options array::
 
-        <?php echo $this->Form->checkbox('done', array('value' => 555)); ?>
+        echo $this->Form->checkbox('done', array('value' => 555));
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <input type="hidden" name="data[User][done]" value="0" id="UserDone_" />
         <input type="checkbox" name="data[User][done]" value="555" id="UserDone" />
 
     If you don't want the Form helper to create a hidden input::
 
-        <?php echo $this->Form->checkbox('done', array('hiddenField' => false)); ?>
+        echo $this->Form->checkbox('done', array('hiddenField' => false));
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <input type="checkbox" name="data[User][done]" value="1" id="UserDone" />
 
@@ -1009,7 +1075,9 @@ Form Element-Specific Methods
         $attributes = array('legend' => false);
         echo $this->Form->radio('gender', $options, $attributes);
 
-      Will output::
+      Will output:
+
+      .. code-block:: html
 
         <input name="data[User][gender]" id="UserGender_" value="" type="hidden" />
         <input name="data[User][gender]" id="UserGenderM" value="M" type="radio" />
@@ -1035,7 +1103,9 @@ Form Element-Specific Methods
         $options = array('M' => 'Male', 'F' => 'Female');
         echo $this->Form->select('gender', $options);
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <select name="data[User][gender]" id="UserGender">
         <option value=""></option>
@@ -1057,7 +1127,9 @@ Form Element-Specific Methods
 
         echo $this->Form->select('field', array(1,2,3,4,5));
 
-      Output::
+      Output:
+
+      .. code-block:: html
 
         <select name="data[User][field]" id="UserField">
             <option value="0">1</option>
@@ -1075,7 +1147,9 @@ Form Element-Specific Methods
             'Value 3' => 'Label 3'
         ));
 
-      Output::
+      Output:
+
+      .. code-block:: html
 
         <select name="data[User][field]" id="UserField">
             <option value="Value 1">Label 1</option>
@@ -1098,7 +1172,9 @@ Form Element-Specific Methods
         );
         echo $this->Form->select('field', $options);
 
-      Output::
+      Output:
+
+      .. code-block:: html
 
         <select name="data[User][field]" id="UserField">
             <optgroup label="Group 1">
@@ -1126,7 +1202,9 @@ Form Element-Specific Methods
             'multiple' => 'checkbox'
         ));
 
-      Output::
+      Output:
+
+      .. code-block:: html
 
         <div class="input select">
            <label for="ModelField">Field</label>
@@ -1154,7 +1232,9 @@ Form Element-Specific Methods
             'disabled' => array('Value 1')
         ));
 
-      Output::
+      Output:
+
+      .. code-block:: html
 
         <div class="input select">
            <label for="ModelField">Field</label>
@@ -1238,7 +1318,9 @@ Creates a file input::
     echo $this->Form->create('User', array('type' => 'file'));
     echo $this->Form->file('avatar');
 
-Will output::
+Will output:
+
+.. code-block:: html
 
     <form enctype="multipart/form-data" method="post" action="/users/add">
     <input name="data[User][avatar]" value="" id="UserAvatar" type="file">
@@ -1264,7 +1346,9 @@ Creating buttons and submit elements
 
         echo $this->Form->submit();
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <div class="submit"><input value="Submit" type="submit"></div>
 
@@ -1273,7 +1357,9 @@ Creating buttons and submit elements
 
         echo $this->Form->submit('ok.png');
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <div class="submit"><input type="image" src="/img/ok.png"></div>
 
@@ -1295,7 +1381,9 @@ Creating buttons and submit elements
         echo $this->Form->button('Reset the Form', array('type' => 'reset'));
         echo $this->Form->button('Submit Form', array('type' => 'submit'));
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <button type="submit">A Button</button>
         <button type="button">Another Button</button>
@@ -1353,7 +1441,9 @@ Creating date and time inputs
 
         echo $this->Form->year('purchased', 2000, date('Y'));
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <select name="data[User][purchased][year]" id="UserPurchasedYear">
         <option value=""></option>
@@ -1375,7 +1465,9 @@ Creating date and time inputs
 
         echo $this->Form->month('mob');
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <select name="data[User][mob][month]" id="UserMobMonth">
         <option value=""></option>
@@ -1411,7 +1503,9 @@ Creating date and time inputs
 
         echo $this->Form->day('created');
 
-    Will output::
+    Will output:
+
+    .. code-block:: html
 
         <select name="data[User][created][day]" id="UserCreatedDay">
         <option value=""></option>
