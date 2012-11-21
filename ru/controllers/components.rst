@@ -29,6 +29,7 @@
 :doc:`/core-libraries/components/cookie` и :doc:`/core-libraries/components/email` 
 требуют конфигурации. Конфигурация для этих компонентов и компонентов в целом обычно делается в
 ``$components`` массиве или в вашем методе контроллера ``beforeFilter()``::
+
     <?php
     class PostsController extends AppController {
         public $components = array(

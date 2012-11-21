@@ -303,7 +303,7 @@ These routes complicated route compilation and impossible to
 reverse route. If you need routes like this, it is recommended that
 you use route parameters with capture patterns. Next mid-route
 greedy star support has been removed. It was previously possible to
-use a greedy star in the middle of a route.
+use a greedy star in the middle of a route::
 
     Router::connect(
         '/pages/*/:event',

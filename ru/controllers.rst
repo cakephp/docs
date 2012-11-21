@@ -166,9 +166,7 @@ CakePHP API - `http://api20.cakephp.org/class/controller <http://api20.cakephp.o
 
     Метод ``set()`` это основной метод для передачи данных от контроллера
     в представление. Когда вы используете ``set()``, то появляется возможность
-    использовать эту переменную в представлении.
-    
-        view::
+    использовать эту переменную в представлении::
 
         <?php
         // Для начала, передадим данные из контроллера:
@@ -217,10 +215,10 @@ CakePHP API - `http://api20.cakephp.org/class/controller <http://api20.cakephp.o
     запрос пользователя.
 
     Дефолтный файл представления определяется по соглашению.
-    Для экшена ``search()`` контроллера RecipesController будет отоьражен фаил передставления
-  	 /app/View/Recipes/search.ctp ::
+    Для экшена ``search()`` контроллера RecipesController будет отоьражен фаил передставления::
 
         <?php
+        // /app/View/Recipes/search.ctp
         class RecipesController extends AppController {
         // ...
             function search() {
