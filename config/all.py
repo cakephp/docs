@@ -71,7 +71,7 @@ pygments_style = 'sphinx'
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
 
-highlight_language = 'php'
+highlight_language = 'phpinline'
 
 
 # -- Options for HTML output ---------------------------------------------------
@@ -286,4 +286,4 @@ languages = ['en', 'pt', 'es', 'ja', 'ru', 'fr']
 from sphinx.highlighting import lexers
 from pygments.lexers.web import PhpLexer
 
-lexers['php'] = PhpLexer(startinline=True)
+lexers['phpinline'] = PhpLexer(startinline=True)
