@@ -16,7 +16,6 @@ Security API
 
     Encrypts/Decrypts a text using the given key.::
 
-        <?php
         // Encrypt your secret password with my_key
         $secret = Security::cipher('my secret password', 'my_key');
 
@@ -36,7 +35,6 @@ Security API
     Encrypts/Decrypts text using the rijndael-256 cipher. This requires the
     `mcrypt extension <http://php.net/mcrypt>`_ to be installed::
 
-        <?php
         // Encrypt some data.
         $encrypted = Security::rijndael('a secret', Configure::read('Security.key'), 'encrypt');
 
@@ -72,7 +70,6 @@ Security API
     available method. If ``$salt`` is set to true, the applications salt
     value will be used::
 
-        <?php
         // Using the application's salt value
         $sha1 = Security::hash('CakePHP Framework', 'sha1', true);
 
@@ -86,7 +83,6 @@ Security API
     using bcrypt, you should be mindful of the slightly different usage.
     Creating an initial hash works the same as other algorithms::
 
-        <?php
         // Create a hash using bcrypt
         Security::setHash('blowfish');
         $hash = Security::hash('CakePHP Framework');
@@ -94,7 +90,6 @@ Security API
     Unlike other hash types comparing plain text values to hashed values should
     be done as follows::
 
-        <?php
         // $storedPassword, is a previously generated bcrypt hash.
         $newHash = Security::hash($newPassword, 'blowfish', $storedPassword);
 
@@ -113,7 +108,6 @@ Security API
 
     Get allowed minutes of inactivity based on security level.::
 
-        <?php
         $mins = Security::inactiveMins();
         // If your config Security.level is set to 'medium' then $mins will equal 100
 

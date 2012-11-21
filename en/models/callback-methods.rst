@@ -34,7 +34,6 @@ find operation, or to perform any other post-find logic. The
 $results parameter passed to this callback contains the returned
 results from the model's find operation, i.e. something like::
 
-    <?php
     $results = array(
         0 => array(
             'ModelName' => array(
@@ -55,7 +54,6 @@ an association the format of ``$results`` can differ; instead of the
 result you would normally get from a find operation, you may get
 this::
 
-    <?php
     $results = array(
         'field_1' => 'value1',
         'field_2' => 'value2'
@@ -70,7 +68,6 @@ this::
 Below is an example of how afterfind can be used for date
 formatting::
 
-    <?php
     public function afterFind($results, $primary = false) {
         foreach ($results as $key => $val) {
             if (isset($val['Event']['begindate'])) {
@@ -116,7 +113,6 @@ changed very easily. Use the code below in the appropriate model.
 
 ::
 
-    <?php
     public function beforeSave($options = array()) {
         if (!empty($this->data['Event']['begindate']) && !empty($this->data['Event']['enddate'])) {
             $this->data['Event']['begindate'] = $this->dateFormatBeforeSave($this->data['Event']['begindate']);
@@ -164,7 +160,6 @@ on this record will also be deleted.
 
 ::
 
-    <?php
     // using app/Model/ProductCategory.php
     // In the following example, do not let a product category be deleted if it still contains products.
     // A call of $this->Product->delete($id) from ProductsController.php has set $this->id .

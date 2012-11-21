@@ -78,7 +78,6 @@ methods. Let's write a datasource that will access a fictitious remote JSON
 based API. We'll call it ``FarAwaySource`` and we'll put it in
 ``app/Model/Datasource/FarAwaySource.php``::
 
-    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     class FarAwaySource extends DataSource {
@@ -236,7 +235,6 @@ based API. We'll call it ``FarAwaySource`` and we'll put it in
 We can then configure the datasource in our ``app/Config/database.php`` file
 by adding something like this::
 
-    <?php
     public $faraway = array(
         'datasource' => 'FarAwaySource',
         'apiKey'     => '1234abcd',
@@ -244,14 +242,12 @@ by adding something like this::
 
 Then use the database config in our models like this::
 
-    <?php
     class MyModel extends AppModel {
         public $useDbConfig = 'faraway';
     }
 
 We can retrieve data from our remote source using the familiar model methods::
 
-    <?php
     // Get all messages from 'Some Person'
     $messages = $this->MyModel->find('all', array(
         'conditions' => array('name' => 'Some Person'),
@@ -259,7 +255,6 @@ We can retrieve data from our remote source using the familiar model methods::
 
 Similarly we can save a new message::
 
-    <?php
     $this->MyModel->save(array(
         'name' => 'Some Person',
         'message' => 'New Message',
@@ -267,7 +262,6 @@ Similarly we can save a new message::
 
 Update the previous message::
 
-    <?php
     $this->MyModel->id = 42;
     $this->MyModel->save(array(
         'message' => 'Updated message',
@@ -275,7 +269,6 @@ Update the previous message::
 
 And delete the message::
 
-    <?php
     $this->MyModel->delete(42);
 
 Plugin DataSources
@@ -287,7 +280,6 @@ Simply place your datasource file into
 ``Plugin/[YourPlugin]/Model/Datasource/[YourSource].php``
 and refer to it using the plugin notation::
 
-    <?php
     public $faraway = array(
         'datasource' => 'MyPlugin.FarAwaySource',
         'apiKey'     => 'abcd1234',

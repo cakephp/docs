@@ -73,7 +73,6 @@ Loading classes in plugins works much the same as loading app and
 core classes except you must specify the plugin you are loading
 from::
 
-    <?php
     // Load the class Comment in app/Plugin/PluginName/Model/Comment.php
     App::uses('Comment', 'PluginName.Model');
 
@@ -90,14 +89,12 @@ Finding paths to packages using App::path()
 
     Used to read information stored path::
 
-        <?php
         // return the model paths in your application
         App::path('Model');
 
     This can be done for all packages that are apart of your application. You
     can also fetch paths for a plugin::
 
-        <?php
         // return the component paths in DebugKit
         App::path('Component', 'DebugKit');
 
@@ -115,7 +112,6 @@ Finding paths to packages using App::path()
 
     Used for finding the path to a package inside CakePHP::
 
-        <?php
         // Get the path to Cache engines.
         App::core('Cache/Engine');
 
@@ -143,7 +139,6 @@ Adding paths for App to find packages in
 
     Usage::
 
-        <?php
         //will setup a new search path for the Model package
         App::build(array('Model' => array('/a/full/path/to/models/'))); 
 
@@ -159,7 +154,6 @@ Adding paths for App to find packages in
 
     Examples::
 
-        <?php
         App::build(array('controllers' => array('/full/path/to/controllers')));
         //becomes 
         App::build(array('Controller' => array('/full/path/to/Controller')));
@@ -181,7 +175,6 @@ Add new packages to an application
 when you want to add new top level packages or, sub-packages to your
 application::
 
-    <?php
     App::build(array(
         'Service' => array('%s' . 'Service' . DS)
     ), App::REGISTER);
@@ -207,7 +200,6 @@ Finding which objects CakePHP knows about
 
     Example usage::
 
-        <?php
         //returns array('DebugKit', 'Blog', 'User');
         App::objects('plugin');
 
@@ -216,7 +208,6 @@ Finding which objects CakePHP knows about
 
     You can also search only within a plugin's objects by using the plugin dot syntax.::
 
-        <?php
         // returns array('MyPluginPost', 'MyPluginComment');
         App::objects('MyPlugin.Model');
 
@@ -237,7 +228,6 @@ Locating plugins
     Plugins can be located with App as well. Using ``App::pluginPath('DebugKit');``
     for example, will give you the full path to the DebugKit plugin::
 
-        <?php
         $path = App::pluginPath('DebugKit');
 
 Locating themes
@@ -269,7 +259,6 @@ Including files with App::import()
 
     ::
 
-        <?php
         // The same as require('Controller/UsersController.php');
         App::import('Controller', 'Users');
         
@@ -320,14 +309,12 @@ Loading Vendor Files
 You can use ``App::uses()`` to load classes in vendors directories. It follows
 the same conventions as loading other files::
 
-    <?php
     // Load the class Geshi in app/Vendor/Geshi.php
     App::uses('Geshi', 'Vendor');
 
 To load classes in subdirectories, you'll need to add those paths 
 with ``App::build()``::
 
-    <?php
     // Load the class ClassInSomePackage in app/Vendor/SomePackage/ClassInSomePackage.php
     App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage')));
     App::uses('ClassInSomePackage', 'Vendor');
@@ -340,7 +327,6 @@ any of the vendor folders.
 
 To load **app/Vendor/geshi.php**::
 
-    <?php
     App::import('Vendor', 'geshi');
 
 .. note::
@@ -350,17 +336,14 @@ To load **app/Vendor/geshi.php**::
 
 To load **app/Vendor/flickr/flickr.php**::
 
-    <?php
     App::import('Vendor', 'flickr/flickr');
 
 To load **app/Vendor/some.name.php**::
 
-    <?php
     App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));
 
 To load **app/Vendor/services/well.named.php**::
 
-    <?php
     App::import('Vendor', 'WellNamed', array('file' => 'services' . DS . 'well.named.php'));
 
 It wouldn't make a difference if your vendor files are inside your /vendors 
@@ -368,7 +351,6 @@ directory. Cake will automatically find it.
 
 To load **vendors/vendorName/libFile.php**::
 
-    <?php
     App::import('Vendor', 'aUniqueIdentifier', array('file' => 'vendorName' . DS . 'libFile.php'));
 
 App Init/Load/Shutdown Methods

@@ -11,7 +11,6 @@ the fat model.
 
 ::
 
-    <?php
     class Example extends AppModel {
         public function getRecent() {
             $conditions = array(
@@ -25,7 +24,6 @@ This ``getRecent()`` method can now be used within the controller.
 
 ::
 
-    <?php
     $recent = $this->Example->getRecent();
 
 :php:meth:`Model::associations()`
@@ -33,7 +31,6 @@ This ``getRecent()`` method can now be used within the controller.
 
 Get associations::
 
-    <?php
     $result = $this->Example->associations();
     // $result equals array('belongsTo', 'hasOne', 'hasMany', 'hasAndBelongsToMany')
 
@@ -69,7 +66,6 @@ ascertain the existence of the record in persistent storage.
 
 ::
 
-    <?php
     $this->Example->id = 9;
     if ($this->Example->exists()) {
         // ...

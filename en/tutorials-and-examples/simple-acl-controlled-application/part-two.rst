@@ -18,7 +18,6 @@ First grab a copy of the plugin and unzipped or clone it using git into
 `app/Plugin/AclExtras`. Then activate the plugin in your `app/Config/boostrap.php`
 file as shown below::
 
-    <?php
     //app/Config/boostrap.php
     // ...
     CakePlugin::load('AclExtras');
@@ -50,7 +49,6 @@ Note: \* needs to be quoted ('\*')
 In order to allow with the ``AclComponent`` we would use the
 following code syntax in a custom method::
 
-    <?php
     $this->Acl->allow($aroAlias, $acoAlias);
 
 We are going to add in a few allow/deny statements now. Add the
@@ -61,7 +59,6 @@ http://localhost/cake/app/users/initdb). If you do a
 -1's. Once you've confirmed your permissions are set, remove the
 function::
 
-    <?php
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -115,7 +112,6 @@ Now we want to take out the references to ``Auth->allowedActions``
 in your users and groups controllers. Then add the following to
 your posts and widgets controllers::
 
-    <?php
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('index', 'view');
@@ -126,7 +122,6 @@ groups controllers, and gives public access on the index and view
 actions in posts and widgets controllers. In
 ``AppController::beforeFilter()`` add the following::
 
-    <?php
      $this->Auth->allow('display');
 
 This makes the 'display' action public. This will keep our
@@ -144,7 +139,6 @@ the following to ``app/View/Users/login.ctp`` if you haven't done
 so already::
 
     <h2>Login</h2>
-    <?php
     echo $this->Form->create('User', array('url' => array('controller' => 'users', 'action' => 'login')));
     echo $this->Form->input('User.username');
     echo $this->Form->input('User.password');
@@ -154,7 +148,6 @@ so already::
 If a user is already logged in, redirect him by adding this to your
 UsersController::
 
-    <?php
     public function login() {
         if ($this->Session->read('Auth.User')) {
             $this->Session->setFlash('You are logged in!');
@@ -173,7 +166,6 @@ Now onto the logout. Earlier we left this function blank, now is
 the time to fill it. In ``UsersController::logout()`` add the
 following::
 
-    <?php
     $this->Session->setFlash('Good-Bye');
     $this->redirect($this->Auth->logout());
 

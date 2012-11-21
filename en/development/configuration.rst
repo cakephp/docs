@@ -22,7 +22,6 @@ CakePHP expects database configuration details to be in a file at
 be found at ``app/Config/database.php.default``. A finished
 configuration should look something like this::
 
-    <?php
     class DATABASE_CONFIG {
         public $default = array(
             'datasource'  => 'Database/Mysql',
@@ -111,7 +110,6 @@ these additional classes into view.
 By using :php:meth:`App::build()` in bootstrap.php we can define additional
 paths where CakePHP will look for classes::
 
-    <?php
     App::build(array(
         'Model'                     => array('/path/to/models', '/next/path/to/models'),
         'Model/Behavior'            => array('/path/to/behaviors', '/next/path/to/behaviors'),
@@ -323,7 +321,6 @@ won't end up breaking the MVC structure we’ve set in place.
 This class can be called from
 anywhere within your application, in a static context::
 
-    <?php
     Configure::read('debug');
 
 .. php:staticmethod:: write($key, $value)
@@ -333,7 +330,6 @@ anywhere within your application, in a static context::
 
     Use ``write()`` to store data in the application’s configuration::
 
-        <?php
         Configure::write('Company.name','Pizza, Inc.');
         Configure::write('Company.slogan','Pizza for your body and soul');
 
@@ -344,7 +340,6 @@ anywhere within your application, in a static context::
 
     The above example could also be written in a single call::
 
-        <?php
         Configure::write(
             'Company', array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul')
         );
@@ -363,7 +358,6 @@ anywhere within your application, in a static context::
     returned. Using our examples from write() above, we can read that
     data back::
 
-        <?php
         Configure::read('Company.name');    //yields: 'Pizza, Inc.'
         Configure::read('Company.slogan');  //yields: 'Pizza for your body and soul'
 
@@ -389,7 +383,6 @@ anywhere within your application, in a static context::
 
     Used to delete information from the application’s configuration::
 
-        <?php
         Configure::delete('Company.name');
 
 .. php:staticmethod:: version()
@@ -429,7 +422,6 @@ for more information on the specifics of ini files.
 To use a core config reader, you'll need to attach it to Configure
 using :php:meth:`Configure::config()`::
 
-    <?php
     App::uses('PhpReader', 'Configure');
     // Read config files from app/Config
     Configure::config('default', new PhpReader());
@@ -443,7 +435,6 @@ different types of sources.  You can interact with attached readers
 using a few other methods on Configure. To see check which reader
 aliases are attached you can use :php:meth:`Configure::configured()`::
 
-    <?php
     // Get the array of aliases for attached readers.
     Configure::configured();
 
@@ -469,7 +460,6 @@ Loading configuration files
 
 Once you've attached a config reader to Configure you can load configuration files::
 
-    <?php
     // Load my_file.php using the 'default' reader object.
     Configure::load('my_file', 'default');
 
@@ -497,12 +487,10 @@ configuration file loadable by the :php:class:`PhpReader`
 Given that the 'default' reader is an instance of PhpReader.
 Save all data in Configure to the file `my_config.php`::
 
-    <?php
     Configure::dump('my_config.php', 'default');
 
 Save only the error handling configuration::
 
-    <?php
     Configure::dump('error.php', 'default', array('Error', 'Exception'));
 
 ``Configure::dump()`` can be used to either modify or overwrite
@@ -527,7 +515,6 @@ Since configure only remembers values for the current request, you will
 need to store any modified configuration information if you want to 
 use it in subsequent requests::
 
-    <?php
     // Store the current configuration in the 'user_1234' key in the 'default' cache.
     Configure::store('user_1234', 'default');
 
@@ -545,7 +532,6 @@ Restoring runtime configuration
 Once you've stored runtime configuration, you'll probably need to restore it 
 so you can access it again.  ``Configure::restore()`` does exactly that::
 
-    <?php
     // restore runtime configuration from the cache.
     Configure::restore('user_1234', 'default');
 
@@ -563,7 +549,6 @@ This interface defines a read method, as the only required method.
 If you really like XML files, you could create a simple Xml config 
 reader for you application::
 
-    <?php
     // in app/Lib/Configure/XmlReader.php
     App::uses('Xml', 'Utility');
     class XmlReader implements ConfigReaderInterface {
@@ -582,7 +567,6 @@ reader for you application::
 
 In your ``app/Config/bootstrap.php`` you could attach this reader and use it::
 
-    <?php
     App::uses('XmlReader', 'Configure');
     Configure::config('xml', new XmlReader());
     ...
@@ -620,7 +604,6 @@ Built-in Configuration readers
     directories by using :term:`plugin syntax`.  Files **must** contain a ``$config``
     variable.  An example configuration file would look like::
 
-        <?php
         $config = array(
             'debug' => 0,
             'Security' => array(
@@ -688,7 +671,6 @@ Loading custom inflections
 You can use :php:meth:`Inflector::rules()` in the file
 ``app/Config/bootstrap.php`` to load custom inflections::
 
-    <?php
     Inflector::rules('singular', array(
         'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),
         'uninflected' => array('singulars'),
@@ -697,7 +679,6 @@ You can use :php:meth:`Inflector::rules()` in the file
 
 or::
 
-    <?php
     Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));
 
 Will merge the supplied rules into the inflection sets defined in

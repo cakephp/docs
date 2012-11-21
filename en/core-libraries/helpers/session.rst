@@ -14,7 +14,6 @@ to the session.
 As with the Session Component, data is read by using
 :term:`dot notation` array structures::
 
-    <?php
     array('User' => array(
         'username' => 'super@example.com'
     ));
@@ -63,10 +62,11 @@ Displaying notifications or flash messages
     display them. Once a message is displayed, it will be removed and 
     not displayed again::
 
-        <?php
         echo $this->Session->flash();
 
-    The above will output a simple message, with the following html::
+    The above will output a simple message, with the following html:
+
+    .. code-block:: html
 
         <div id="flashMessage" class="message">
             Your stuff has been saved.
@@ -76,14 +76,12 @@ Displaying notifications or flash messages
     and customize which element is used. In the controller you might 
     have code like::
 
-        <?php
         // in a controller
         $this->Session->setFlash('The user could not be deleted.');
 
     When outputting this message, you can choose the element used to display
     this message::
 
-        <?php 
         // in a layout.
         echo $this->Session->flash('flash', array('element' => 'failure'));
 
@@ -91,7 +89,9 @@ Displaying notifications or flash messages
     message text would be available as ``$message`` in the element.
 
     Inside the failure element file would be something like
-    this::
+    this:
+
+    .. code-block:: php
 
         <div class="flash flash-failure">
             <?php echo $message; ?>
@@ -100,7 +100,6 @@ Displaying notifications or flash messages
     You can also pass additional parameters into the ``flash()`` method, which
     allow you to generate customized messages::
 
-        <?php
         // In the controller
         $this->Session->setFlash('Thanks for your payment %s');
 

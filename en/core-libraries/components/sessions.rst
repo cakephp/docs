@@ -23,7 +23,6 @@ It should be noted that Array structures can be created in the
 Session by using :term:`dot notation`. So ``User.username`` would
 reference the following::
 
-    <?php
     array('User' => array(
         'username' => 'clark-kent@dailyplanet.com'
     ));
@@ -36,7 +35,6 @@ all Session component methods wherever a name/key is used.
     Write to the Session puts $value into $name. $name can be a dot
     separated array. For example::
 
-        <?php
         $this->Session->write('Person.eyeColor', 'Green');
 
     This writes the value 'Green' to the session under Person =>
@@ -48,7 +46,6 @@ all Session component methods wherever a name/key is used.
     Returns the value at $name in the Session. If $name is null the
     entire session will be returned. E.g::
 
-        <?php
         $green = $this->Session->read('Person.eyeColor');
 
     Retrieve the value Green from the session. Reading data that does not exist
@@ -63,14 +60,12 @@ all Session component methods wherever a name/key is used.
 
     Clear the session data at $name. E.g::
 
-        <?php
         $this->Session->delete('Person.eyeColor');
 
     Our session data no longer has the value 'Green', or the index
     eyeColor set. However, Person is still in the Session. To delete
     the entire Person information from the session use::
 
-        <?php
         $this->Session->delete('Person');
 
 .. php:method:: destroy()
@@ -79,7 +74,6 @@ all Session component methods wherever a name/key is used.
     session data stored in the temporary file system. It will then
     destroy the PHP session and then create a fresh session::
 
-        <?php
         $this->Session->destroy();
 
 
@@ -98,14 +92,12 @@ Creating notification messages
     message with the SessionComponent and display them with the
     :php:meth:`SessionHelper::flash()`. To set a message, use ``setFlash``::
 
-        <?php
         // In the controller.
         $this->Session->setFlash('Your stuff has been saved.');
 
     This will create a one-time message that can be displayed to the user,
     using the SessionHelper::
 
-        <?php
         // In the view.
         echo $this->Session->flash();
 
@@ -120,7 +112,6 @@ Creating notification messages
     Using the ``$key`` parameter you can store multiple messages, which can be
     output separately::
 
-        <?php
         // set a bad message.
         $this->Session->setFlash('Something bad.', 'default', array(), 'bad');
 
@@ -129,7 +120,6 @@ Creating notification messages
 
     In the view, these messages can be output and styled differently::
 
-        <?php
         // in a view.
         echo $this->Session->flash('good');
         echo $this->Session->flash('bad');
@@ -139,7 +129,6 @@ Creating notification messages
     message in. In the element the message is available as ``$message``.
     First we set the flash in our controller::
 
-        <?php
         $this->Session->setFlash('Something custom!', 'flash_custom');
 
     Then we create the file ``app/View/Elements/flash_custom.ctp`` and build our
@@ -152,7 +141,6 @@ Creating notification messages
     example adding "class" in the $params array will apply a class to the
     ``div`` output using ``$this->Session->flash()`` in your layout or view.::
 
-        <?php
         $this->Session->setFlash('Example message text', 'default', array('class' => 'example_class'));
 
     The output from using ``$this->Session->flash()`` with the above example
@@ -163,7 +151,6 @@ Creating notification messages
     To use an element from a plugin just specify the plugin in the 
     ``$params``::
 
-        <?php
         // Will use /app/Plugin/Comment/View/Elements/flash_no_spam.ctp
         $this->Session->setFlash('Message!', 'flash_no_spam', array('plugin' => 'Comment'));
 

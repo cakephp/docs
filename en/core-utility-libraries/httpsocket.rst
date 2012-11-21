@@ -19,7 +19,6 @@ HTTP methods.
     and values. The get method makes a simple HTTP GET request returning the
     results::
 
-        <?php
         App::uses('HttpSocket', 'Network/Http');
 
         $HttpSocket = new HttpSocket();
@@ -40,7 +39,6 @@ HTTP methods.
     made; ``$query`` is the data to be posted, either as s string, or as 
     an array of keys and values::
 
-        <?php
         App::uses('HttpSocket', 'Network/Http');
 
         $HttpSocket = new HttpSocket();
@@ -80,7 +78,6 @@ HTTP methods.
     $request is a keyed array of various options. Here is the format
     and default settings::
 
-        <?php
         public $request = array(
             'method' => 'GET',
             'uri' => array(
@@ -121,7 +118,6 @@ contents of an HTTP response. This class implements the
 so you can continue using the ``$http->response`` as array and the return of
 request methods as string::
 
-    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     $http = new HttpSocket();
@@ -173,7 +169,6 @@ keys sent. In order to safely access the header fields, it's best to use
 
 You could fetch the above headers by calling::
 
-    <?php
     // $response is an instance of HttpResponse
     // get the Content-Type header.
     $response->getHeader('Content-Type');
@@ -227,7 +222,6 @@ configure how SSL certificates are handled:
 
 These options are provided as constructor arguments::
 
-    <?php
     $socket = new HttpSocket(array(
         'ssl_allow_self_signed' => true
     ));
@@ -244,7 +238,6 @@ Creating a custom response class
 You can create your own response class to use with HttpSocket. You could create
 the file ``app/Lib/Network/Http/YourResponse.php`` with the content::
 
-    <?php
     App::uses('HttpResponse', 'Network/Http');
 
     class YourResponse extends HttpResponse {
@@ -258,7 +251,6 @@ the file ``app/Lib/Network/Http/YourResponse.php`` with the content::
 
 Before your request you'll need to change the responseClass property::
 
-    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     $http = new HttpSocket();
@@ -275,7 +267,6 @@ HttpSocket has a new method called `setContentResource()`. By setting a resource
 with this method, the content will be written to this resource, using
 `fwrite()`. To you download a file, you can do::
 
-    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     $http = new HttpSocket();
@@ -298,7 +289,6 @@ box.  You can also create custom authentication objects to support protocols
 like OAuth.  To use any authentication system you need to configure the
 ``HttpSocket`` instance::
 
-    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     $http = new HttpSocket();
@@ -314,7 +304,6 @@ You can now create your own authentication method to use with HttpSocket. You
 could create the file ``app/Lib/Network/Http/YourMethodAuthentication.php`` with the
 content::
 
-    <?php
 
     class YourMethodAuthentication {
 
@@ -334,7 +323,6 @@ content::
 To configure HttpSocket to use your auth configuration, you can use the new
 method ``configAuth()``::
 
-    <?php
     $http->configAuth('YourMethod', array('config1' => 'value1', 'config2' => 'value2'));
     $http->get('http://secure.your-site.com');
 
@@ -347,7 +335,6 @@ As part of auth configuration, you can configure proxy authentication. You can
 create your customized method to proxy authentication in the same class of
 authentication. For example::
 
-    <?php
 
     class YourMethodAuthentication {
 

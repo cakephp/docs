@@ -22,7 +22,6 @@ parsed into an array which is assigned to ``$this->request->data``,
 and can then be saved as model data. In order to make use of
 RequestHandler it must be included in your $components array::
 
-    <?php
     class WidgetController extends AppController {
 
         public $components = array('RequestHandler');
@@ -44,7 +43,6 @@ the client and its request.
     types is accepted by the client. If null returns an array of the
     content-types that the client accepts. For example::
 
-        <?php
         class PostsController extends AppController {
 
             public $components = array('RequestHandler');
@@ -120,7 +118,6 @@ want to disable browser caching, and change the debug level.
 However, you want to allow caching for non-ajax requests. The
 following would accomplish that::
 
-        <?php
         if ($this->request->is('ajax')) {
             $this->disableCache();
         }
@@ -150,7 +147,6 @@ Automatically decoding request data
     an array of data contained in the request input.  For example adding a CSV
     handler in your controllers' beforeFilter could look like::
 
-        <?php
         $parser = function ($data) {
             $rows = str_getcsv($data, "\n");
             foreach ($rows as &$row) {
@@ -165,7 +161,6 @@ Automatically decoding request data
     also pass additional arguments to the callback, this is useful for callbacks
     like ``json_decode``::
 
-        <?php
         $this->RequestHandler->addInputType('json', array('json_decode', true));
 
     The above will make ``$this->request->data`` an array of the JSON input data,
@@ -282,7 +277,6 @@ bandwidth. The response status code is then set to `304 Not Modified`.
 You can opt-out this automatic checking by setting the ``checkHttpCache``
 setting to false::
 
-    <?php
     public components = array(
         'RequestHandler' => array(
             'checkHttpCache' => false
@@ -305,7 +299,6 @@ You can map existing and new types to your custom classes.
 
 You can also set this automatically by using the ``viewClassMap`` setting::
 
-    <?php
     public components = array(
         'RequestHandler' => array(
             'viewClassMap' => array(
