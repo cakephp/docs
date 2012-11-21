@@ -147,7 +147,9 @@ to the view that would look something like this::
 Cake's view files are stored in ``/app/View`` inside a folder
 named after the controller they correspond to (we'll have to create
 a folder named 'Posts' in this case). To format this post data in a
-nice table, our view code might look something like this::
+nice table, our view code might look something like this
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
     
@@ -227,7 +229,9 @@ the requested URL. If a user requests /posts/view/3, then the value
 '3' is passed as ``$id``.
 
 Now let's create the view for our new 'view' action and place it in
-``/app/View/Posts/view.ctp``::
+``/app/View/Posts/view.ctp``
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/view.ctp -->
     
@@ -324,11 +328,14 @@ To take advantage of the validation features, you'll need to use
 Cake's FormHelper in your views. The :php:class:`FormHelper` is available by
 default to all views at ``$this->Form``.
 
-Here's our add view::
+Here's our add view:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/add.ctp -->   
         
     <h1>Add Post</h1>
+    <?php
     echo $this->Form->create('Post');
     echo $this->Form->input('title');
     echo $this->Form->input('body', array('rows' => '3'));
@@ -336,7 +343,9 @@ Here's our add view::
     ?>
 
 Here, we use the FormHelper to generate the opening tag for an HTML
-form. Here's the HTML that ``$this->Form->create()`` generates::
+form. Here's the HTML that ``$this->Form->create()`` generates:
+
+.. code-block:: html
 
     <form id="PostAddForm" method="post" action="/posts/add">
 
@@ -361,7 +370,9 @@ along with the closing form tag. Again, refer to
 
 Now let's go back and update our ``/app/View/Posts/index.ctp``
 view to include a new "Add Post" link. Before the ``<table>``, add
-the following line::
+the following line:
+
+.. code-block:: php
 
     <?php echo $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add')); ?>
 
@@ -421,11 +432,14 @@ we find the Post and hand it to the view.  If the user request is not a GET, it
 probably contains POST data.  We'll use the POST data to update our Post record 
 with, or kick back and show the user the validation errors.
 
-The edit view might look something like this::
+The edit view might look something like this:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/edit.ctp -->
         
     <h1>Edit Post</h1>
+    <?php
         echo $this->Form->create('Post', array('action' => 'edit'));
         echo $this->Form->input('title');
         echo $this->Form->input('body', array('rows' => '3'));
@@ -441,7 +455,9 @@ present (look back at our add view), Cake will assume that you are
 inserting a new model when ``save()`` is called.
 
 You can now update your index view with links to edit specific
-posts::
+posts:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp  (edit links added) -->
 
@@ -501,7 +517,9 @@ to generate.
 
 Because we're just executing some logic and redirecting, this
 action has no view. You might want to update your index view with
-links that allow users to delete posts, however::
+links that allow users to delete posts, however:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
     
