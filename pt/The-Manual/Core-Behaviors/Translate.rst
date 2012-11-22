@@ -47,7 +47,7 @@ Defining the Fields
 ===================
 
 Você pode configurar os campos, simplesmente, que prorroga o
-``'Traduzir' `` com outro valor array, assim:
+``'Traduzir'`` com outro valor array, assim:
 
 ::
 
@@ -89,7 +89,7 @@ tradução (por defeito: i18n), juntamente com o actual local. A
 localidade é o identificador do idioma, por assim dizer.
 
 O actual *locale* é o valor actual dos
-`` Configure:: read ( 'Config.language') ``. O valor da
+``Configure::read('Config.language')``. O valor da
 *Config.language* é atribuído na l10n classe - a menos que ele já está
 definido. No entanto, o TranlateBehavior lhe permite substituir esta
 on-the-fly, que permite que o usuário da sua página para criar múltiplas

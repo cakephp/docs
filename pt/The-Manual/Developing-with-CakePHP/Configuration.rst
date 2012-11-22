@@ -80,7 +80,7 @@ controller como BigBoxesController, tudo isso já estará funcionando
 automaticamente. Por convenção, utilize caracteres underscore, letras em
 minúsculas e nomes no plural para as tabelas de sua base de dados - por
 exemplo: bakers, pastry\_stores e savory\_cakes.
- **N.T.:** Em inglês, substantivos compostos mantêm a flexão no plural
+**N.T.:** Em inglês, substantivos compostos mantêm a flexão no plural
 sempre na última palavra (p.ex., savory\_cakes). O CakePHP por padrão
 reconhece esta regra. Já em português, os substantivos compostos quase
 sempre flexionam todas as palavras (p.ex., bolos\_salgados). Assim,

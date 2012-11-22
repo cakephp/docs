@@ -2639,7 +2639,7 @@ As possíveis chaves do array para associações hasMany são:
 -  **finderQuery**: Uma completa consulta SQL CakePHP que pode-se usar
    para buscar registros associados. Isto deve ser utilizado em
    situações que exijam muito resultado personalizado.
-    Se uma consulta que vocês está constuindo requer uma referência ao
+   Se uma consulta que vocês está constuindo requer uma referência ao
    ID do modelo associado, use o marcador especial ``{$__cakeID__$}`` na
    consulta. Por exemplo, se seu modelo Apple hasMany Orange, a consulta
    deve se parecer com isto:
