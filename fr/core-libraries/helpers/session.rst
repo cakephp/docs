@@ -65,7 +65,9 @@ Affichage de notifications ou de messages flash
 
         echo $this->Session->flash();
 
-    Ce qui est au-dessus sortira un message simple, avec le html suivant::
+    Ce qui est au-dessus sortira un message simple, avec le html suivant:
+
+    .. code-block:: html
 
         <div id="flashMessage" class="message">
             Vos trucs on été sauvegardés.
@@ -81,7 +83,6 @@ Affichage de notifications ou de messages flash
     Quand le message sort, vous pouvez choisir l'élément utilisé pour afficher 
     ce message::
 
-        <?php 
         // dans un layout.
         echo $this->Session->flash('flash', array('element' => 'failure'));
 
@@ -89,7 +90,9 @@ Affichage de notifications ou de messages flash
     message texte serait disponible dans ``$message`` dans l'élément.
 
     A l'intérieur du fichier élément d'echec, il y aurait quelque chose comme 
-    ceci::
+    ceci:
+
+    .. code-block:: php
 
         <div class="flash flash-failure">
             <?php echo $message ?>

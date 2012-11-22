@@ -100,9 +100,7 @@ Les options supportées sont:
   false. Si une chaîne est définie un lien pour la première page sera générée 
   avec la valeur comme titre::
 
-      <?php 
       echo $this->Paginator->numbers(array('first' => 'Première page')); 
-      ?>
 
 * ``last`` Si vous voulez que les derniers liens soit générés, définit à un 
   entier pour définir le nombre de 'dernier' liens à générer. Par défaut à 
@@ -158,11 +156,15 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
         echo $this->Paginator->prev(' << ' . __('previous'), array(), null, array('class' => 'prev disabled'));
 
     Si vous étiez actuellement sur la secondes pages des posts (articles) , 
-    vous obtenez le résultat suivant::
+    vous obtenez le résultat suivant:
+
+    .. code-block:: html
 
         <span class="prev"><a href="/posts/index/page:1/sort:title/order:desc" rel="prev"><< previous</a></span>
 
-    Si il n'y avait pas de page précédente vous obtenez::
+    Si il n'y avait pas de page précédente vous obtenez:
+
+    .. code-block:: html
 
         <span class="prev disabled"><< previous</span>
 
@@ -387,7 +389,9 @@ Voir les détails sur
 `PaginatorHelper <http://api20.cakephp.org/class/paginator-helper>`_
 dans l' API. Comme mentionné précédemment, le Helper Paginator 
 offre également des fonctionnalités de tri qui peuvent être facilement 
-intégrés dans vos en-têtes de colonne de table ::
+intégrés dans vos en-têtes de colonne de table :
+
+.. code-block:: php
 
     // app/View/Posts/index.ctp
     <table>
@@ -407,7 +411,9 @@ Les liens en retour de la méthode ``sort()`` du ``Helper Paginator``
 permettent au utilisateurs de cliquer sur les entêtes de table pour
 faire basculer l'ordre de tri des données d'un champ donné.
 
-Il est aussi possible de trier une colonne basée sur des associations::
+Il est aussi possible de trier une colonne basée sur des associations:
+
+.. code-block:: php
 
     <table>
         <tr> 
@@ -426,7 +432,6 @@ L'ingrédient final pour l'affichage de la pagination dans les vues
 est l'addition de pages de navigation, aussi fournies par le
 Helper de Pagination::
 
-    <?php 
     // Montre les numéros de page 
     echo $this->Paginator->numbers();
     

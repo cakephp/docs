@@ -94,7 +94,9 @@ l'utilisateur est actuellement identifié ou qu'il visite votre site en tant
 qu'invité.
 
 Pour indiquer que des blocs de contenu *ne doivent pas* être mis en cache, 
-entourez-les par <!--nocache--> <!--/nocache-->`` comme ci-dessous ::
+entourez-les par <!--nocache--> <!--/nocache-->`` comme ci-dessous :
+
+.. code-block:: php
 
     <!--nocache-->
     <?php if ($this->Session->check('User.name')) : ?>

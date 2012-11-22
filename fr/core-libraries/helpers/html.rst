@@ -12,7 +12,9 @@ domaine.
 De nombreuses méthodes du Helper Html contiennent un paramètre
 ``$htmlAttributes``, qui vous permet d'insérer un  attribut supplémentaire 
 sur vos tags. Voici quelques exemples
-sur la façon d'utiliser les paramètres $htmlAttributes::
+sur la façon d'utiliser les paramètres $htmlAttributes:
+
+.. code-block:: html
 
     Attributs souhaités: <tag class="someClass" />      
     Paramètre du tableau: array('class' => 'someClass')
@@ -46,17 +48,21 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Exemple d'utilisation::
  
-        <?php echo $this->Html->charset(); ?> 
+        echo $this->Html->charset();
 
-    Affichera::
+    Affichera:
+
+    .. code-block:: html
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     Sinon::
 
-        <?php echo $this->Html->charset('ISO-8859-1'); ?>
+        echo $this->Html->charset('ISO-8859-1');
 
-    Affichera::
+    Affichera:
+
+    .. code-block:: html
 
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
@@ -81,18 +87,22 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Cette méthode d'inclusion CSS présume que le CSS spécifié se trouve dans
     le répertoire /app/webroot/css.::
 
-        <?php echo $this->Html->css('forms'); ?> 
+        echo $this->Html->css('forms');
 
-    Affichera::
+    Affichera:
+
+    .. code-block:: html
 
         <link rel="stylesheet" type="text/css" href="/css/forms.css" />
 
     Le premier paramètre peut être un tableau pour inclure des fichiers 
     multiples.::
 
-        <?php echo $this->Html->css(array('forms', 'tables', 'menu')); ?>
+        echo $this->Html->css(array('forms', 'tables', 'menu'));
 
-    Affichera::
+    Affichera:
+
+    .. code-block:: html
 
         <link rel="stylesheet" type="text/css" href="/css/forms.css" />
         <link rel="stylesheet" type="text/css" href="/css/tables.css" />
@@ -263,7 +273,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'));
 
-    Affichera::
+    Affichera:
+
+    .. code-block:: html
 
         <img src="/img/cake_logo.png" alt="CakePHP" /> 
 
@@ -275,7 +287,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             'url' => array('controller' => 'recettes', 'action' => 'view', 6)
         ));
 
-   Affichera::
+   Affichera:
+
+    .. code-block:: html
 
         <a href="/recettes/view/6">
             <img src="/img/recettes/6.jpg" alt="Crèpes" />
@@ -286,7 +300,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         echo $this->Html->image("logo.png", array('fullBase' => true));
 
-    Affichera::
+    Affichera:
+
+    .. code-block:: html
 
         <img src="http://example.com/img/logo.jpg" alt="" />
 
@@ -319,7 +335,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         echo $this->Html->link('Entrez', '/pages/accueil', array('class' => 'button', 'target' => '_blank'));
 
-    Affichera::
+    Affichera:
+
+    .. code-block:: html
 
         <a href="/pages/accueil" class="button" target="_blank">Entrez</a>
 
@@ -333,7 +351,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             "Etes-vous sûre de vouloir effacer cette recette ?"
         );
 
-    Affichera::
+    Affichera:
+
+    .. code-block:: html
 
         <a href="/recettes/delete/6" onclick="return confirm('Etes-vous sûre de vouloir effacer cette recette ?');">Efface</a>
 
@@ -346,8 +366,10 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             '?' => array('height' => 400, 'width' => 500))
         );
 
-    Affichera::
+    Affichera:
   
+    .. code-block:: html
+
         <a href="/images/view/1?height=400&width=500">Voir image</a>
 
     Les caractères spéciaux HTML de ``$title``seront convertis en entités 
@@ -361,7 +383,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             array('escape' => false)
         );
 
-    Will output::
+    Affichera:
+
+    .. code-block:: html
 
         <a href="/recettes/view/6">
             <img src="/img/recettes/6.jpg" alt="Crêpes" />
@@ -498,7 +522,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         echo $this->Html->script('scripts');
 
-    Affichera::
+    Affichera:
+
+    .. code-block:: html
 
         <script type="text/javascript" href="/js/scripts.js"></script>
 
@@ -512,7 +538,9 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         echo $this->Html->script(array('jquery', 'wysiwyg', 'scripts'));
 
-    Affichera::
+    Affichera:
+
+    .. code-block:: html
 
         <script type="text/javascript" href="/js/jquery.js"></script>
         <script type="text/javascript" href="/js/wysiwyg.js"></script>
