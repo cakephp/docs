@@ -1,8 +1,6 @@
 Controladores
 #############
 
- 
-
 Introducción
 ============
 
@@ -127,7 +125,7 @@ Atributos del Controlador
 
 Para ver la lista completa de atributos visite la API de CakePHP en la
 sección
-`http://api.cakephp.org/class/controller <http://api.cakephp.org/class/controller>`_.
+`Controller <http://api.cakephp.org/class/controller>`_.
 
 $name
 -----

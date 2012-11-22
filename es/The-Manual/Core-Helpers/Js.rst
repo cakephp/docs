@@ -25,7 +25,7 @@ First of all download your preferred javascript library and place it in
 ``app/webroot/js``
 
 Then you must include the library in your page. To include it in all
-pages, add this ****\ line to the <head> section of
+pages, add this line to the <head> section of
 ``app/views/layouts/default.ctp`` (copy this file from
 ``cake/libs/view/layouts/default.ctp`` if you have not created your
 own).

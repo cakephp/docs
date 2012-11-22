@@ -110,11 +110,13 @@ Creando fixtures
 ----------------
 
 Cuando se crea un fixture se deben definir 2 cosas:
+
  1) cómo se crea la tabla (que campos serán parte de la tabla)
  2) cómo se guardarán los registros en la tabla de prueba. Luego
+
 podremos crear nuestro primer fixture, que utilizaremos para testear
 nuestro modelo Article. Creamos un archivo llamado
-**article\_fixture.php** en la carpeta **app/tests/fixtures**, con el
+``article\_fixture.php`` en la carpeta ``app/tests/fixtures``, con el
 siguiente código:
 
 ::

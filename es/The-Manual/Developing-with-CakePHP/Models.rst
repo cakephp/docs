@@ -1,8 +1,6 @@
 Modelos
 #######
 
- 
-
 La Comprensión de Modelos
 =========================
 
@@ -1407,8 +1405,7 @@ modelo de CakePHP para salvar datos en una tabla de una base de datos:
 
 Una nota adicional: cuando se llama a ``save()``, los datos pasados a la
 función como primer parámetro son validados usando el mecanismo de
-validación de CakePHP (ver el capítulo de `validación de
-datos </es/view/125>`_ para más información). Si por alguna razón tus
+validación de CakePHP. Si por alguna razón tus
 datos no se graban, comprueba si alguna regla de validación se está
 incumpliendo.
 
@@ -2952,9 +2949,6 @@ segunda relación con el usuario que recibe el mensaje. La tabla mensaje
 tendrá el campo usuario\_id, pero tendrá además un campo receptor\_id.
 Tu Modelo Mensaje luciría así::
 
-::
-
-    <?php
     class Mensaje extends AppModel {
         var $name = 'Mensaje';
         var $belongsTo = array(
@@ -2968,7 +2962,6 @@ Tu Modelo Mensaje luciría así::
             )
         );
     }
-    ?>
 
 Receptor es un alias para el Modelo Usuario. Ahora veamos como se vería
 el Modelo Usuario.

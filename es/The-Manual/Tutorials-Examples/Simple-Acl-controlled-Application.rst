@@ -162,8 +162,8 @@ Antes de configurar la ACL en todo tendrá que añadir algunos usuarios y
 grupos. Con ``AuthComponent`` en uso no podremos acceder a ninguna de
 nuestras acciones, ya que no se ha iniciado sesión. Ahora vamos a añadir
 algunas excepciones de manera que ``AuthComponent`` nos permitirá crear
-algunos grupos y usuarios. **Por lo tanto** en `` GroupsController`` y
-``UsersController `` añadiremos lo siguiente.
+algunos grupos y usuarios. **Por lo tanto** en ``GroupsController`` y
+``UsersController`` añadiremos lo siguiente.
 
 ::
 
