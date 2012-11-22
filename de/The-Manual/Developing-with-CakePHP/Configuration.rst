@@ -667,7 +667,7 @@ Users-Controller weitergereicht wird.
 
 Bei der Generierung von URLs werden Routes ebenfalls genutzt ("Reverse
 Routing").
-``array('controller' => 'users', 'action' => 'someAction', 5) `` als URL
+``array('controller' => 'users', 'action' => 'someAction', 5)`` als URL
 wird zu /cooks/someAction/5 aufgelöst, sofern die obige Route die erste
 auf diese URL passende Route ist.
 

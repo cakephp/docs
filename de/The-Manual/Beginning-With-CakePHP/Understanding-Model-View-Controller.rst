@@ -8,12 +8,11 @@ präsentiert die Anwendungsdaten, die View generiert eine Präsentation
 der Model-Daten, und der Controller behandelt und steuert
 Benutzeranfragen.
 
-.. figure:: /img/basic_mvc.png
+.. figure:: /_static/img/basic_mvc.png
    :align: center
    :alt: Abblidung 1
 
    Abblidung 1
-Abbildung 1: Eine elementare MVC Anfrage
 
 Abbildung 1 zeigt ein Beispiel einer einfachen MVC Anfrage in CakePHP.
 Zur Veranschaulichung nehmen wir an, ein Benutzer namens Ricardo hat

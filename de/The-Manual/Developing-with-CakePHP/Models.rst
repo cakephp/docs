@@ -2148,10 +2148,10 @@ Same as with ``delete()`` and ``remove()``, except that ``deleteAll()``
 deletes all records that match the supplied conditions. The
 ``$conditions`` array should be supplied as an SQL fragment or array.
 
-**conditions** Conditions to match
+ **conditions** Conditions to match
  **cascade** Boolean, Set to true to delete records that depend on this
-record. Note that you will need to set dependent to true in the relevant
-model associations
+ record. Note that you will need to set dependent to true in the relevant
+ model associations
  **callbacks** Boolean, Run callbacks
 
 
@@ -2559,7 +2559,7 @@ Possible keys for hasMany association arrays include:
 -  **finderQuery**: A complete SQL query CakePHP can use to fetch
    associated model records. This should be used in situations that
    require very custom results.
-    If a query you're building requires a reference to the associated
+   If a query you're building requires a reference to the associated
    model ID, use the special ``{$__cakeID__$}`` marker in the query. For
    example, if your Apple model hasMany Orange, the query should look
    something like this:

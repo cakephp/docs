@@ -7,16 +7,11 @@ zusammenarbeiten. Nehmen wir unser ursprüngliches Beispiel wieder auf
 und erinnern uns, dass unser Freund Ricardo gerade auf den “Buy A Custom
 Cake Now!” Link der Seite einer CakePHP Anwendung geklickt hat.
 
-.. figure:: http://tempdocs.cakephp.org/index_files/droppedImage_1.png
-   :align: center
-   :alt: 
-
-.. figure:: /img/typical-cake-request.gif
+.. figure:: /_static/img/typical-cake-request.png
    :align: center
    :alt: Flow diagram showing a typical CakePHP request
 
    Flow diagram showing a typical CakePHP request
-Figure: 2. Standardmässige Cake Anfrage.
 
 Schwarz = benötiges Element, Grau = optionales Element, Blau = callback
 
