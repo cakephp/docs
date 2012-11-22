@@ -193,9 +193,9 @@ d'une ``View``, utilisez la classe ``String``::
     :param string $haystack: La chaîne à chercher.
     :param string $needle: La chaîne to excerpt around.
     :param int $radius: Le nombre de caractères de chaque côté de $needle que 
-    vous souhaitez inclure.
+        vous souhaitez inclure.
     :param string $ending: Le Texte à ajouter/préfixer au début ou à la fin 
-    du résultat.
+        du résultat.
 
     Extrait un excerpt de ``$haystack`` surrounding the ``$needle``
     with a number of characters on each side determined by ``$radius``,

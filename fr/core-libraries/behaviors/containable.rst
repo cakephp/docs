@@ -313,15 +313,15 @@ d'affiner le behavior de Containable et de travailler plus facilement avec
 les autres behaviors.
 
 - **recursive** (boolean, optional), définir à true pour permettre au behavior 
-Containable, de déterminer automatiquement le niveau de récursivité nécessaire 
-pour récupérer les modèles spécifiés et de paramétrer la récursivité du modèle 
-à ce niveau. Le définir à false désactive cette fonctionnalité. La valeur par 
-défaut est ``true``.
+  Containable, de déterminer automatiquement le niveau de récursivité nécessaire 
+  pour récupérer les modèles spécifiés et de paramétrer la récursivité du modèle 
+  à ce niveau. Le définir à false désactive cette fonctionnalité. La valeur par 
+  défaut est ``true``.
 - **notices** (boolean, optional), émet des alertes E_NOTICES pour les liaisons 
-référencées dans un appel containable et qui ne sont pas valides. La valeur par 
-défaut est true.
+  référencées dans un appel containable et qui ne sont pas valides. La valeur par 
+  défaut est true.
 - **autoFields** (boolean, optional), ajout automatique des champs nécessaires 
-pour récupérer les liaisons requêtées. La valeur par défaut est ``true``.
+  pour récupérer les liaisons requêtées. La valeur par défaut est ``true``.
 
 Vous pouvez changer les paramètres du Behavior Containable à l'exécution, en 
 ré-attachant le behavior comme vu au chapitre Utiliser les behaviors 

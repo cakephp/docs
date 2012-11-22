@@ -357,11 +357,11 @@ dans un contexte statique::
 
 .. php:staticmethod:: write($key, $value)
 
-    :param string $key: La clé à écrire, peut utiliser une valeur de 
-    :term:`notation avec points`.
+    :param string $key: La clé à écrire, peut utiliser une valeur de
+        :term:`notation avec points`.
     :param mixed $value: La valeur à stocker.
 
-    Utilisez ``write()`` pour stocker les données dans configuration de 
+    Utilisez ``write()`` pour stocker les données dans configuration de
     l'application::
 
         Configure::write('Company.name','Pizza, Inc.');
@@ -386,8 +386,8 @@ dans un contexte statique::
 
 .. php:staticmethod:: read($key = null)
 
-    :param string $key: La clé à lire, peut utiliser une valeur avec 
-    :term:`notation avec points`
+    :param string $key: La clé à lire, peut utiliser une valeur avec
+        :term:`notation avec points`
 
     Utilisée pour lire les données de configuration à partir de l'application. 
     Par défaut, la valeur de de bug de CakePHP est au plus important. Si une 
@@ -407,8 +407,8 @@ dans un contexte statique::
 
 .. php:staticmethod:: delete($key)
 
-    :param string $key: La clé à supprimer, peut être utilisé avec une valeur 
-    :term:`notation avec points`
+    :param string $key: La clé à supprimer, peut être utilisé avec une valeur
+        :term:`notation avec points`
 
     Utilisé pour supprimer l'information à partir de la configuration de 
     l'application::

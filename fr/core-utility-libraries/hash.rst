@@ -671,7 +671,7 @@ les méthodes comme ``extract()``.
 
     * ``regular`` pour le trier régulier.
     * ``numeric`` pour le tri des valeurs avec leurs valeurs numériques 
-    équivalentes.
+      équivalentes.
     * ``string`` pour le tri des valeurs avec leur valeur de chaîne.
     * ``natural`` pour trier les valeurs d'une façon humaine. Va trier 
       ``foo10`` en-dessous de ``foo2`` par exemple. Le tri naturel 

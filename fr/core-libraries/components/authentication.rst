@@ -470,8 +470,8 @@ pouvez créer vos propres gestionnaire comme faisant partie d'un plugin.
 Configurer les gestionnaires d'autorisation
 -------------------------------------------
 
-Vous configurez les gestionnaires d'autorisation en utilisant 
- ``$this->Auth->authorize``. Vous pouvez configurer un ou plusieurs
+Vous configurez les gestionnaires d'autorisation en utilisant
+``$this->Auth->authorize``. Vous pouvez configurer un ou plusieurs
 gestionnaires . L'utilisation de plusieurs gestionnaires vous donnes la
 possibilité d'utiliser plusieurs moyens de vérifier les autorisations.
 Quand les gestionnaires d'autorisation sont vérifiés ils sont appelés
@@ -727,13 +727,13 @@ d'autorisation et d'authentification intégrés dans CakePHP.
 
     Erreur à afficher quand les utilisateurs font une tentative d'accès à un 
     objet ou une action à laquelle ils n'ont pas accès.
-    
+
 .. php:attr:: authorize
 
     Définir un tableau d'objets d'autorisation que vous voulez utiliser quand 
     les utilisateurs sont autorisés sur chaque requête, cd la section 
     :ref:`authorization-objects`
-    
+
 .. php:attr:: components
 
     D'autre composants utilisés par le composant Auth
@@ -741,9 +741,10 @@ d'autorisation et d'authentification intégrés dans CakePHP.
 .. php:attr:: flash
 
     Paramétrage à utiliser quand Auth à besoin de faire un message flash avec 
-     :php:meth:`SessionComponent::setFlash()`.
-     Les clefs disponibles sont:
-   
+    :php:meth:`SessionComponent::setFlash()`.
+
+    Les clefs disponibles sont:
+
     - ``element`` - L'élement à utiliser , par défaut à  'default'.
     - ``key`` - La clef à utiliser, par défaut à 'auth'
     - ``params`` - Un tableau de paramêtres additionnels à utiliser par défaut 
@@ -886,8 +887,8 @@ d'autorisation et d'authentification intégrés dans CakePHP.
 .. php:staticmethod:: user($key = null)
 
     :param string $key: La clef de la donné utilisateur que vous voulez 
-    récupérer est null, tous les utilisateurs seront retournés. Peut aussi 
-    être appelé comme une instance de méthode.
+      récupérer est null, tous les utilisateurs seront retournés. Peut aussi 
+      être appelé comme une instance de méthode.
 
     Prend les données concernant l'utilisateur connecté, vous pouvez utiliser
     une clef propriétaire pour appeler une donnée spécifique à propos d'un 

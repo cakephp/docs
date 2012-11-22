@@ -642,15 +642,11 @@ Options ``$mode`` permises:
 
 Les options de ``missingParentActions`` autorisées durant l\'utilisation de
 ``mode='parent'``:
-    
+
 -  ``null`` - ne fait rien et continue
 -  ``'return'`` - ne fait rien et fait un return
 -  ``'delete'`` - efface le noeud
-<<<<<<< HEAD
 -  ``int`` - definit parent\_id à cet id
-=======
--  ``int`` - définit parent\_id à cet id
->>>>>>> 5648f19a0bcbc77e37bb6dc66d6ea78e3d9f33ff
 
 Exemple::
 

@@ -783,7 +783,7 @@ dans une action à l'intérieur de ce contrôleur.
 Le premier appel que nous faisons au composant Acl donne, à tout 
 utilisateur appartenant au groupe ARO 'guerriers', un accès total à tout 
 ce qui appartient au groupe ACO 'Armes'. Ici nous adressons simplement 
- les ACOs et AROs d'après leurs alias.
+les ACOs et AROs d'après leurs alias.
 
 Avez-vous noté l'usage du troisième paramètre ? C'est là où nous utilisons 
 ces actions bien pratiques qui sont intégrées à tous les ACOs de Cake. 
