@@ -32,8 +32,9 @@
 
 app/config/bootstrap.php に、\ ``$pluginPaths`` や ``$controllerPaths``
 のような変数が置かれているかもしれません。
+
  以下はパスを追加する新しい方法です。1.3 RC1 では ``$pluginPaths``
-変数はもはや働かないでしょう。
+ 変数はもはや働かないでしょう。
  パスを更新するには ``App::build()`` を使う必要があります。
 
 ::

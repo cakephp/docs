@@ -33,7 +33,7 @@ downloads <http://github.com/cakephp/cakephp1x/downloads>`_\ で入手できま�
 
 他の手段を用いて、バグ修正や日ごとに行われる細かな機能追加が含まれた、できたてホヤホヤのコードを手に入れることができます。これらは
 github
-からレポジトリを複製することでアクセスすることができます。\ `Github <http://github.com/cakephp/cakephp>`_\ 。
+からレポジトリを複製することでアクセスすることができます。\ `CakePHP Repository <http://github.com/cakephp/cakephp>`_\ 。
 
 パーミッションの設定
 ====================
