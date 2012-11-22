@@ -321,7 +321,7 @@ paramètre indiqué ici.
  'medium' = x 100
  'low' = x 300
  'high' et 'medium' active également
-`session.referer\_check <http://www.php.net/manual/fr/session.configuration.php#ini.session.referer-check>`_
+ `session.referer\_check <http://www.php.net/manual/fr/session.configuration.php#ini.session.referer-check>`_
 
 'Security.level' est défini à 'high'.
 
@@ -953,8 +953,8 @@ Classes de route personnalisés
 Les classes de route personnalisés vous permettent d'étendre et de
 modifier la façon dont certaines routes demandes d'analyser et de
 traiter des routes inversés. Une classe de la route devrait hériter de
-la classe `` CakeRoute `` et mettre en œuvre un ou des deux
-`` match () `` et `` parse () ``. Parse est utilisée pour analyser les
+la classe ``CakeRoute`` et mettre en œuvre un ou des deux
+``match()`` et ``parse()``. Parse est utilisée pour analyser les
 demandes et correspondance et il est utilisée pour traiter les routes
 inversés.
 

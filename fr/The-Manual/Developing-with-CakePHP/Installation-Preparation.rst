@@ -34,7 +34,7 @@ Github <http://github.com/cakephp/cakephp1x/downloads>`_.
 Sinon vous pouvez récupérer le code encore tout chaud, avec toutes les
 corrections de bug et les améliorations de chaque minute (enfin, de
 chaque jour). Celles-ci sont accessibles sur Github en clonant le
-repository. `Github <http://github.com/cakephp/cakephp>`_.
+repository.
 
 Droits fichiers
 ===============

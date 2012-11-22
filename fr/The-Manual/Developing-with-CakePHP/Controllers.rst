@@ -219,8 +219,8 @@ modèle correspondant.
 
 Il n'est pas conseillé d'ajouter tous les modèles systématiquement à
 votre contrôleur via le tableau ``$uses``. Allez regarder
-`ici <http://book.cakephp.org/fr/view/1040/Relationship-Types>`_ et
-`ici <http://book.cakephp.org/fr/view/922/loadModel>`_ pour voir comment
+`ici <http://book.cakephp.org/fr/view/1040/Relationship-Types>`_
+`et ici <http://book.cakephp.org/fr/view/922/loadModel>`_ pour voir comment
 accéder proprement aux modèles respectivement associés ou pas.
 
 Les attributs en relation avec la page : $layout

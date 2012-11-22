@@ -7,8 +7,7 @@ logique de présentation qui est partagée entre plusieurs vues, éléments
 ou layouts. Ce chapitre vous montrera comment créer vos propres
 assistants et soulignera les tâches basiques que les assistants du cœur
 de CakePHP peuvent vous aider à accomplir. Pour plus d'information sur
-les *helpers*, lisez `Assistants
-intégrés </fr/view/181/assistants-integres>`_.
+les *helpers*, lisez `Assistants intégrés`.
 
 Utiliser les Assistants
 =======================
@@ -190,8 +189,7 @@ dans la création de vues. Ils vous assistent à la création de marquage
 bien formaté (dont les formulaires), vous aident à formater du texte,
 des heures et des nombres, et peuvent même accélérer les fonctionnalités
 Ajax. Voici un résumé de assistants livrés de base. Pour plus
-d'informations, rendez-vous sur `Assistants
-intégrés <http://book.cakephp.org/fr/view/181/Core-Helpers>`_.
+d'informations, rendez-vous sur `Assistants intégrés`.
 
 +------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Assistant CakePHP                                    | Description                                                                                                                                                                                                                           |
