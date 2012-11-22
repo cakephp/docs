@@ -8,12 +8,11 @@ representa los datos de la aplicación, la vista hace una presentación
 del modelo de datos, y el controlador maneja y enruta las peticiones
 [requests] hechas por los usuarios.
 
-.. figure:: /img/basic_mvc.png
+.. figure:: /_static/img/basic_mvc.png
    :align: center
-   :alt: Figure 1
+   :alt: Figura 1
 
-   Figure 1
-**Figura 1: Una petición MVC básica**
+   Figura 1
 
 La figura 1 muestra un ejemplo sencillo de una petición [request] MVC en
 CakePHP. A efectos ilustrativos, supongamos que un usuario llamado

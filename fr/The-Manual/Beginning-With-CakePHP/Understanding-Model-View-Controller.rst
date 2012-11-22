@@ -12,7 +12,7 @@ La Vue affiche une présentation des données du modèle
 
 Le Contrôleur intercepte et route les requêtes faites par le client
 
-.. figure:: /img/basic_mvc.png
+.. figure:: /_static/img/basic_mvc.pn
    :align: center
    :alt: Figure 1
 

@@ -9,12 +9,11 @@ separa sua aplicação em três partes principais:
 #. A view representa a visualização dos dados;
 #. O controller manipula e roteia as requisições dos usuários.
 
-.. figure:: /img/basic_mvc.png
+.. figure:: /_static/img/basic_mvc.png
    :align: center
    :alt: Figure 1
 
    Figure 1
-Figura 1: Requisição básica de MVC
 
 A Figura 1 mostra um exemplo de uma simples requisição MVC em CakePHP.
 Para fins ilustrativos, digamos que um usuário chamado Ricardo apenas

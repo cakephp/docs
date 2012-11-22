@@ -8,12 +8,11 @@ que nuestro amigo Ricardo acaba de hacer clic en el enlace "¡Comprar un
 pastel personalizado ahora!" en una página de bienvenida de una
 aplicación CakePHP.
 
-.. figure:: /img/typical-cake-request.gif
+.. figure:: /_static/img/typical-cake-request.png
    :align: center
-   :alt: Flow diagram showing a typical CakePHP request
+   :alt: Diagrama de flujo mostrando una peteición típica en CakePHP
 
-   Flow diagram showing a typical CakePHP request
-**Figura 2. Petición típica de Cake.**
+   Diagrama de flujo mostrando una peteición típica en CakePHP
 
 Negro = elemento requerido, Gris = elemento opcional, Azul = callback
 
