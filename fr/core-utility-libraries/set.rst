@@ -20,7 +20,6 @@ définir un chemin.
 
 Exemple d'utilisation (en utilisant :php:func:`Set::sort()`)::
 
-    <?php
     $a = array(
         0 => array('Person' => array('name' => 'Jeff')),
         1 => array('Shirt' => array('color' => 'black'))
@@ -77,7 +76,6 @@ quelles options sont disponibles.
     Appliquer un callback aux éléments d'un tableau extrait par un chemin 
     Set::extract compatible::
 
-        <?php
         $data = array(
             array('Movie' => array('id' => 1, 'title' => 'movie 3', 'rating' => 5)),
             array('Movie' => array('id' => 1, 'title' => 'movie 1', 'rating' => 1)),
@@ -99,7 +97,6 @@ quelles options sont disponibles.
     Vérifie si un chemin particulier est défini dans un tableau. Si $path est 
     vide, $data va être retournée au lieu d'une valeur boléenne::
 
-        <?php
         $set = array(
             'My Index 1' => array('First' => 'The first item')
         );
@@ -140,7 +137,6 @@ quelles options sont disponibles.
     **Exemple 1**
     ::
 
-        <?php
         $a = array(
             array('Article' => array('id' => 1, 'title' => 'Article 1')),
             array('Article' => array('id' => 2, 'title' => 'Article 2')),
@@ -172,7 +168,6 @@ quelles options sont disponibles.
     **Exemple 2**
     ::
 
-        <?php
         $a = array(
             0 => array('pages' => array('name' => 'page')),
             1 => array('fruites' => array('name' => 'fruit')),
@@ -339,7 +334,6 @@ quelles options sont disponibles.
     (utile pour Set::merge). Vous pouvez en option grouper les valeurs par 
     ce qui est obtenu quand on suit le chemin spécifié dans $groupPath.::
 
-        <?php
         $result = Set::combine(array(), '{n}.User.id', '{n}.User.Data');
         // $result == array();
 
@@ -539,7 +533,6 @@ quelles options sont disponibles.
     Detérmine si un Set ou un tableau contient les clés exactes et les valeurs 
     d'un autre::
 
-        <?php
         $a = array(
             0 => array('name' => 'main'),
             1 => array('name' => 'about')
@@ -567,7 +560,6 @@ quelles options sont disponibles.
     est la valeur par défaut) il va seulement considérer la dimension du 
     premier élément dans le tableau::
 
-        <?php
         $data = array('one', '2', 'three');
         $result = Set::countDim($data);
         // $result == 1
@@ -623,7 +615,6 @@ quelles options sont disponibles.
     Compute la différence entre un Set et un tableau, deux Sets, ou 
     deux tableaux::
 
-        <?php
         $a = array(
             0 => array('name' => 'main'),
             1 => array('name' => 'about')
@@ -710,7 +701,6 @@ quelles options sont disponibles.
 
     $list par défaut à 0 = no 1 = yes si param n'est pas passé::
 
-        <?php
         $res = Set::enum(1, 'one, two');
         // $res est 'two'
 
@@ -738,7 +728,6 @@ quelles options sont disponibles.
 
     ::
 
-        <?php
         // Utilisation habituelle:
         $users = $this->User->find("all");
         $results = Set::extract('/User/id', $users);
@@ -794,7 +783,6 @@ quelles options sont disponibles.
 
     Filtre les éléments vide d'un tableau route, en excluant '0'::
 
-        <?php
         $res = Set::filter(array('0', false, true, 0, array('one thing', 'I can tell you', 'is you got to be', false)));
 
         /* $res ressemble maintenant à:
@@ -818,7 +806,6 @@ quelles options sont disponibles.
 
     Transforme un tableau multi-dimensional en un tableau à dimension unique::
 
-        <?php
         $arr = array(
             array(
                 'Post' => array('id' => '1', 'title' => 'First Post'),
@@ -851,7 +838,6 @@ quelles options sont disponibles.
     Retourne une série de valeurs extraites d'un tableau, formaté en un format 
     de chaîne::
 
-        <?php
         $data = array(
             array('Person' => array('first_name' => 'Nate', 'last_name' => 'Abele', 'city' => 'Boston', 'state' => 'MA', 'something' => '42')),
             array('Person' => array('first_name' => 'Larry', 'last_name' => 'Masters', 'city' => 'Boondock', 'state' => 'TN', 'something' => '{0}')),
@@ -920,7 +906,6 @@ quelles options sont disponibles.
 
     Insére $data dans un tableau comme défini dans $path.::
 
-        <?php
         $a = array(
             'pages' => array('name' => 'page')
         );
@@ -996,7 +981,6 @@ quelles options sont disponibles.
     stdClass, cependant vous pouvez mapper les valeurs en un type de classe.
     Exemple: Set::map($array\_of\_values, 'nameOfYourClass');::
 
-        <?php
         $data = array(
             array(
                 "IndexedPage" => array(
@@ -1079,7 +1063,6 @@ quelles options sont disponibles.
     Set::matches peut être utilisé pour voir si un item unique ou un xpath 
     donné admet certaines conditions.::
 
-        <?php
         $a = array(
             array('Article' => array('id' => 1, 'title' => 'Article 1')),
             array('Article' => array('id' => 2, 'title' => 'Article 2')),
@@ -1135,7 +1118,6 @@ quelles options sont disponibles.
 
     ::
 
-        <?php
         $arry1 = array(
             array(
                 'id' => '48c2570e-dfa8-4c32-a35e-0d71cbdd56cb',
@@ -1185,7 +1167,6 @@ quelles options sont disponibles.
 
     Normalise une liste de chaîne ou de tableau.::
 
-        <?php
         $a = array('Tree', 'CounterCache',
                 'Upload' => array(
                     'folder' => 'products',
@@ -1296,7 +1277,6 @@ quelles options sont disponibles.
 
     Vérifie si toutes les valeurs dans le tableau sont numériques::
 
-        <?php
         $data = array('one');
         $res = Set::numeric(array_keys($data));
 
@@ -1358,7 +1338,6 @@ quelles options sont disponibles.
     **Exemple 1**
     ::
 
-        <?php
         $array1 = array('ModelOne' => array('id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2'));
         $array2 = array('ModelOne' => array('id' => 1003, 'field_one' => 'a3.m1.f1', 'field_two' => 'a3.m1.f2', 'field_three' => 'a3.m1.f3'));
         $res = Set::pushDiff($array1, $array2);
@@ -1379,7 +1358,6 @@ quelles options sont disponibles.
     **Exemple 2**
     ::
 
-        <?php
         $array1 = array("a" => "b", 1 => 20938, "c" => "string");
         $array2 = array("b" => "b", 3 => 238, "c" => "string", array("extra_field"));
         $res = Set::pushDiff($array1, $array2);
@@ -1405,7 +1383,6 @@ quelles options sont disponibles.
 
     Retire un élémént d'un Set ou d'un tableau selon ce qui est défini par $path::
 
-        <?php
         $a = array(
             'pages'     => array('name' => 'page'),
             'files'     => array('name' => 'files')
@@ -1432,7 +1409,6 @@ quelles options sont disponibles.
     un objet en un tableau. Si $object n'est pas un objet, reverse va 
     simplement retourner $object.::
 
-        <?php
         $result = Set::reverse(null);
         // Null
         $result = Set::reverse(false);
@@ -1538,7 +1514,6 @@ quelles options sont disponibles.
 
     Trie un tableau selon toute valeur, detérminé par un chemin Set-compatible::
 
-        <?php
         $a = array(
             0 => array('Person' => array('name' => 'Jeff')),
             1 => array('Shirt' => array('color' => 'black'))
@@ -1619,8 +1594,7 @@ quelles options sont disponibles.
 		    Applique un callback aux éléments d'un tableau extait par un chemin 
 		    compatible Set::extract::
 
-		        <?php
-		        $data = array(
+				        $data = array(
 		            array('Movie' => array('id' => 1, 'title' => 'movie 3', 'rating' => 5)),
 		            array('Movie' => array('id' => 1, 'title' => 'movie 1', 'rating' => 1)),
 		            array('Movie' => array('id' => 1, 'title' => 'movie 2', 'rating' => 3)),
@@ -1639,8 +1613,7 @@ quelles options sont disponibles.
 
 		    Prend un tableau plat et retourne un tableau imbriqué::
 
-		        <?php
-                        $data = array(
+		                        $data = array(
                             array('ModelName' => array('id' => 1, 'parent_id' => null)),
                             array('ModelName' => array('id' => 2, 'parent_id' => 1)),
                             array('ModelName' => array('id' => 3, 'parent_id' => 1)),

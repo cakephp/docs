@@ -33,7 +33,6 @@ des demandes.
 Une fois que vous avez décommenté la ligne ``Cache.check`` vous devez
 ajouter le helper à votre tableau de helper de votre contrôleur::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Cache');
     }
@@ -53,7 +52,6 @@ soit cachée. La valeur du temps peut être exprimé dans le format
 En utilisant l'exemple d'un contrôleur d'articles ArticlesController,
 qui reçoit beaucoup de trafics qui ont besoins d'être cachés:: 
 
-    <?php
     public $cacheAction = array(
         'view' => 36000,
         'index'  => 48000
@@ -63,7 +61,6 @@ Ceci cachera l'action view 10 heures et l'action index 13 heures. En plaçant
 une valeur usuelle de ``strtotime()`` dans ``$cacheAction`` vous pouvez cacher
 toutes les actions dans le contrôleur::
 
-    <?php
     public $cacheAction = "1 hour";
 
 Vous pouvez aussi activer les callbacks contrôleur/composant pour
@@ -71,7 +68,6 @@ les vues cachées créées avec  ``CacheHelper``. Pour faire cela
 vous devez utiliser le format de tableau pour ``$cacheAction``
 et créer un tableau comme ceci::
 
-    <?php
     public $cacheAction = array(
         'view' => array('callbacks' => true, 'duration' => 21600),
         'add' => array('callbacks' => true, 'duration' => 36000),

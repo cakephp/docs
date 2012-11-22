@@ -15,7 +15,6 @@ Comme pour le Component Session, les données sont écrites et lues en
 utilisant des structures de tableaux avec des :term:`dot notation`, 
 comme ci-dessous::
 
-    <?php
     array('User' => 
         array('username' => 'super@example.com')
     );
@@ -64,7 +63,6 @@ Affichage de notifications ou de messages flash
     voudrez les afficher. Une fois que le message est affiché, il sera 
     retiré et ne s'affichera plus::
 
-        <?php
         echo $this->Session->flash();
 
     Ce qui est au-dessus sortira un message simple, avec le html suivant::
@@ -77,7 +75,6 @@ Affichage de notifications ou de messages flash
     supplémentaires et personnaliser quel élément est utilisé. Dans le 
     controller, vous pouvez avoir du code comme::
 
-        <?php
         // dans un controller
         $this->Session->setFlash('Le user n'a pu être supprimé.');
 
@@ -101,7 +98,6 @@ Affichage de notifications ou de messages flash
     Vous pouvez aussi passer des paramètres supplémentaires dans la méthode 
     ``flash()``, ce qui vous permet de générer des messages personnalisés::
 
-        <?php
         // Dans le controller
         $this->Session->setFlash('Thanks for your payment %s');
 

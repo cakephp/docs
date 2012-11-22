@@ -128,7 +128,6 @@ ressembler à ce qui suit :
 
 ::
 
-    <?php
     public $default = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,
@@ -165,7 +164,6 @@ difficile à deviner.
 
 ::
 
-    <?php
     /**
      * Une chaîne aléatoire utilisée dans les méthodes de hachage sécurisées.
      */
@@ -178,7 +176,6 @@ d'importance du moment qu'elle est difficile à deviner.
 
 ::
 
-    <?php
     /**
      * Une chaîne aléatoire de chiffre utilisée pour le chiffrage/déchiffrage 
      * des chaînes de caractères.

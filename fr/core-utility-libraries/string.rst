@@ -11,7 +11,6 @@ statiquement. Exemple:
 Si vous avez besoin des fonctionnalités de :php:class:`TextHelper` en-dehors 
 d'une ``View``, utilisez la classe ``String``::
 
-    <?php
     class UsersController extends AppController {
 
         public $components = array('Auth');
@@ -49,7 +48,6 @@ d'une ``View``, utilisez la classe ``String``::
     Cette méthode peut être utile quand on sépare les données en formatage 
     régulier comme les listes de tag::
 
-        <?php
         $data = "cakephp 'great framework' php";
         $result = String::tokenize($data, ' ', "'", "'");
         // le résultat contient
@@ -73,7 +71,6 @@ d'une ``View``, utilisez la classe ``String``::
 
     Vous pouvez utiliser les options suivantes dans le tableau options::
 
-        <?php
         $options = array(
             'clean' => array(
                 'method' => 'text', // or html
@@ -89,7 +86,6 @@ d'une ``View``, utilisez la classe ``String``::
     blocks. Peut entourer intelligemment le texte ainsi les mots ne sont pas 
     sliced across lines::
 
-        <?php
         $text = 'Ceci est la chanson qui ne stoppe jamais.';
         $result = String::wrap($text, 22);
 
@@ -127,7 +123,6 @@ d'une ``View``, utilisez la classe ``String``::
 
     Exemple::
 
-        <?php
         // appelé par TextHelper
         echo $this->Text->highlight($last_sentence, 'using', array('format' => '<span class="highlight">\1</span>'));
 
@@ -168,7 +163,6 @@ d'une ``View``, utilisez la classe ``String``::
 
     Exemple::
 
-        <?php
         // appelé par TextHelper
         echo $this->Text->truncate(
             'The killer crept forward and tripped on the rug.',
@@ -209,7 +203,6 @@ d'une ``View``, utilisez la classe ``String``::
     search results. The query string or keywords can be shown within
     the resulting document.::
 
-        <?php
         // appelé par TextHelper
         echo $this->Text->excerpt($last_paragraph, 'method', 50, '...');
 
@@ -230,7 +223,6 @@ d'une ``View``, utilisez la classe ``String``::
     Crée une liste séparée avec des virgules, où les deux derniers items sont 
     joins avec ‘and’.::
 
-        <?php
         // appelé par TextHelper
         echo $this->Text->toList($colors);
 

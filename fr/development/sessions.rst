@@ -60,7 +60,6 @@ des problèmes avec les sessions étant perdues. Si vous avez besoin d'accéder
 à la session sur les deux domaines SSL et non-SSL, vous aurez envie de 
 désactiver cela::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'php',
         'ini' => array(
@@ -79,7 +78,6 @@ Pour utiliser les valeurs par défaut, définissez simplement la clé
 ensuite écraser toute sous-configuration en la déclarant dans votre config 
 Session::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'php'
     ));
@@ -88,7 +86,6 @@ Ce qui est au-dessus va utiliser la configuration de session intégrée dans
 'php'. Vous pourriez augmenter tout ou partie de celle-ci en faisant 
 ce qui suit::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'php',
         'cookie' => 'my_app',
@@ -118,7 +115,6 @@ que vous souhaitez utiliser pour sauvegarder la session. Il y a deux façons
 d'utiliser le 'handler'. La première est de fournir un tableau avec 5 
 callables. Ces callables sont ensuite appliqués à ``session_set_save_handler``::
 
-    <?php
     Configure::write('Session', array(
         'userAgent' => false,
         'cookie' => 'my_cookie',
@@ -175,7 +171,6 @@ La plupart du temps, vous aurez seulement besoin de définir
 ``Session.handler.model`` dans votre configuration ainsi que 
 choisir la base de données par défaut::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'database',
         'handler' => array(
@@ -199,7 +194,6 @@ start to expire as records are evicted.
 Pour utiliser les sessions basées sur le Cache, vous pouvez configurer votre 
 config Session comme ceci ::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'cache',
         'handler' => array(
@@ -224,7 +218,6 @@ La clé ``ini`` dans les configurations de session vous permet de spécifier les
 valeurs de configuration individuelles. Par exemple vous pouvez l'utiliser 
 pour contrôler les configurations comme ``session.gc_divisor``::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'php',
         'ini' => array(
@@ -247,7 +240,6 @@ D'abord, nous aurons besoin de créer notre classe personnalisée et de la
 mettre dans ``app/Model/Datasource/Session/ComboSession.php``. La classe 
 devrait ressembler à::
 
-    <?php
     App::uses('DatabaseSession', 'Model/Datasource/Session');
 
     class ComboSession extends DatabaseSession implements CakeSessionHandlerInterface {
@@ -299,7 +291,6 @@ quand nous remplissons le cache. Utilisez le gestionnaire de session est aussi
 facile. Dans votre ``core.php`` imitez le block de session ressemblant 
 à ce qui suit::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'database',
         'handler' => array(
@@ -333,14 +324,12 @@ de session, ``CakeSession`` fournit une interface simple de CRUD.
 Vous pouvez lire les valeurs de session en utilisant la syntaxe 
 compatible :php:meth:`Set::classicExtract()`::
 
-    <?php
     CakeSession::read('Config.language');
 
 .. php:staticmethod:: write($key, $value)
 
 ``$key`` devrait être le chemin séparé de point et ``$value`` sa valeur::
 
-    <?php
     CakeSession::write('Config.language', 'eng');
 
 .. php:staticmethod:: delete($key)
@@ -348,7 +337,6 @@ compatible :php:meth:`Set::classicExtract()`::
 Quand vous avez besoin de supprimer des données à partir de la session, 
 vous pouvez utiliser delete::
 
-    <?php
     CakeSession::delete('Config.language');
 
 Vous devriez aussi voir la documentation sur 

@@ -17,7 +17,6 @@ Charger et Décharger les objets
 Le chargement d'objets sur n'importe quelle collection peut être effectué
 en utilisant la méthode ``load()``::
 
-    <?php
     $this->Prg = $this->Components->load('Prg');
     $this->Prg->process();
 
@@ -26,7 +25,6 @@ nouvelle instance sera créée. Si le component est déjà chargé, une autre
 instance ne sera pas créée. Au chargement des components , vous pouvez aussi
 leurs fournir des configurations additionnelles::
 
-    <?php
     $this->Cookie = $this->Components->load('Cookie', array('name' => 'sweet'));
 
 Chacune des clés et valeurs fournit seront passées au constructeur de 
@@ -36,7 +34,6 @@ collection. Ceci permet d'avoir des noms de component qui ne reflètent pas
 les noms de classes, ce qui peut être utile quand on étends le noyau 
 Components::
 
-    <?php
     $this->Auth = $this->Components->load('Auth', array('className' => 'MonAuthPerso'));
     $this->Auth->user(); // Utilise actuellement MonAuthPerso::user();
 
@@ -44,7 +41,6 @@ L'inverse du chargement d'un objet, est son déchargement. Les objets déchargé
 sont retirés de la mémoire, et n'auront pas de callbacks additionnels déclenchés
 sur eux::
 
-    <?php
     $this->Components->unload('Cookie');
     $this->Cookie->read(); // Fatal error.
 
@@ -56,7 +52,6 @@ a un callback déclenché, cette méthode sera appelée sur tous les objets acti
 dans la collection. Vous pouvez passer des paramètres au boucle de callback 
 comme ceci ::
 
-    <?php
     $this->Behaviors->trigger('afterFind', array($this, $results, $primary));
 
 Ci-dessus ``$viewFile`` sera passé comme premier argument à toutes les méthodes 
@@ -92,7 +87,6 @@ En utilisant les options ``break`` et ``breakOn`` vous pouvez annuler une
 boucle de callback à mi-chemin semblable à interrompre la propagation 
 événementielle en JavaScript ::
 
-    <?php
     $this->Behaviors->trigger(
         'beforeFind', 
         array($this, $query), 
@@ -111,7 +105,6 @@ besoin de le déactiver. Désactiver un objet dans une collection empêche
 aux futurs callbacks d'être tués sur l'objet à moins que l'option 
 ``triggerDisabled`` soit utilisée::
 
-    <?php
     // Désactive le Helper HTML
     $this->Helpers->disable('Html');
     
@@ -124,7 +117,6 @@ ce fait en regard des callbacks. Vous pouvez interroger une collection pour
 connaître les objets activés , ou vérifier si un objet spécifique 
 est toujours activé en utilisant ``enabled()``::
 
-    <?php
     // Vérifie si oui ou on un Helper spécifique  est activé.
     $this->Helpers->enabled('Html');
 

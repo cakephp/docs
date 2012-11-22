@@ -34,7 +34,6 @@ nécéssaires pour permettre à vos utilisateurs de définir leur time zone.
 Maintenant que nous connaissons le time zone de l'utilisateur connecté, nous 
 pouvons corriger la date et le temps de nos posts en utilisant le Helper Time::
 
-    <?php
     echo $this->Time->format('F jS, Y h:i A', $post['Post']['created'], null, $user['User']['time_zone']);
     // Affichera August 22nd, 2011 11:53 PM pour un utilisateur dans GMT+0
     // August 22nd, 2011 03:53 PM pour un utilisateur dans GMT-8

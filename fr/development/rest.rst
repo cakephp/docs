@@ -25,7 +25,6 @@ Assurez-vous que ``mapResources()`` vienne avant
 permettre l'accès par REST à une base de données de recettes, nous ferions 
 comme cela::
 
-    <?php
     //Dans app/Config/routes.php...
         
     Router::mapResources('recipes');
@@ -71,7 +70,6 @@ REST à certaines actions de controller, nous pouvons nous mettre à créer
 la logique dans nos actions de controller. Un controller basique pourrait 
 ressembler à ceci::
 
-    <?php
     // Controller/RecipesController.php
     class RecipesController extends AppController {
     
@@ -118,7 +116,6 @@ ce que notre index donnerait::
     // app/View/Recipes/xml/index.ctp
     
     <recipes>
-        <?php
         $xml = Xml::build($recipes);
         echo $xml->saveXML();
         ?>
@@ -179,7 +176,6 @@ routes par défaut qui récupèrent l'ensemble avec
 :php:meth:`Router::mapResources()`. Quand vous utilisez cette méthode vous 
 devez définir *toutes* les valeurs par défaut que vous voulez utiliser::
 
-    <?php
     Router::resourceMap(array(
         array('action' => 'index', 'method' => 'GET', 'id' => false),
         array('action' => 'view', 'method' => 'GET', 'id' => true),
@@ -208,7 +204,6 @@ Nous allons fournir un exemple simple ici, et vous permettre de façonner cette
 route pour vos autres purposes RESTful. Ici c'est ce à quoi notre route REST 
 modifié ressemblerait, sans utiliser :php:meth:`Router::mapResources()`::
 
-    <?php
     Router::connect(
         "/:controller/:id",
         array("action" => "edit", "[method]" => "PUT"),

@@ -64,7 +64,6 @@ Revenons à notre exemple, nous aurions un modèle `Order` qui gérera la logiqu
 d'achat, et probablement  une méthode `place` pour enregistrer les détails de 
 la commande et faire d'autres logiques::
 
-    <?php
     // Cart/Model/Order.php
     class Order extends AppModel {
 
@@ -87,7 +86,6 @@ les données d'inventaire, et finalement le suivi statistique n'est pas le
 meilleur endroit pour le faire. Nous avons donc besoin d'une autre solution, 
 ré-écrivons en utilisant le gestionnaire d'événements. ::
 
-    <?php
     // Cart/Model/Order.php
     App::uses('CakeEvent', 'Event');
     class Order extends AppModel {
@@ -119,7 +117,6 @@ La méthode ``getEventManager`` retourne une instance de
 :php:class:`CakeEvent`. Disséquons maintenant le processus de dispatching 
 d'un événement::
 
-    <?php
     new CakeEvent('Model.Order.afterPlace', $this, array(
         'order' => $order
     ));
@@ -166,7 +163,6 @@ Par souci de simplicité, imaginons que nous savons dans le plugin de quoi les
 callbacks sont capables dans le controller, et disons que ce controller 
 est responsable de leur attachement. Le code possible pourrait être cela ::
 
-    <?php
     // Les écouteurs (Listeners) configurés quelque part ailleurs, un fichier de config par ex:
     Configure::write('Order.afterPlace', array(
         'email-sending' => 'EmailSender::sendBuyEmail',
@@ -226,7 +222,6 @@ personnalisé ou la conversion de n'importe quel autre contournement
 pour déclencher les méthodes de cette classe. Un écouteur (listener) est créé
 comme ci-dessous :: 
 
-    <?php
     App::uses('CakeEventListener', 'Event');
     class UserStatistic implements CakeEventListener {
 
@@ -276,7 +271,6 @@ seront exécutés avec une règle `FIFO`, la première méthode d'écouteur
 les priorités en utilisant la méthode `attach` pour les callbacks, et les 
 déclarer dans une fonction `implementedEvents` pour les écouteurs d'événements::
 
-    <?php
     // Paramétrage des priorités pour un callback
     $callback = array($this, 'doSomething');
     $this->getEventManager()->attach($callback, 'Model.Order.afterPlace', array('priority' => 2));
@@ -310,7 +304,6 @@ Afin de changer cette option vous devez ajouter l'option `passParams` au
 troisième argument de la méthode `attach`, ou le déclarer dans le tableau 
 de retour `implementedEvents` de la même façon qu'avec les priorités::
 
-    <?php
     // Paramétrage des priorités pour le callback
     $callback = array($this, 'doSomething');
     $this->getEventManager()->attach($callback, 'Model.Order.afterPlace', array('passParams' => true));
@@ -333,7 +326,6 @@ Dans l'exemple ci-dessus la fonction `doSomething` et la méthode
 C'est comme cela parce que dans notre premier exemple nous avons déclenché 
 l'événement `Model.Order.afterPlace` avec quelques données::
 
-    <?php
     $this->getEventManager()->dispatch(new CakeEvent('Model.Order.afterPlace', $this, array(
         'order' => $order
     )));
@@ -357,7 +349,6 @@ aller plus loin.
 Afin de stopper les événements vous pouvez soit retourner `false` dans vos 
 callbacks ou appeler la méthode `stopPropagation` sur l'objet événement::
 
-    <?php
     public function doSomething($event) {
         // ...
         return false; // stoppe l'événement
@@ -379,7 +370,6 @@ si nous avons une `beforePlace` arrêtant l'événement cela semble valable.
 Pour vérifier qu'un événement à été stoppé, vous appelez la méthode 
 `isStopped()` dans l'objet événement::
 
-    <?php
     public function place($order) {
         $event = new CakeEvent('Model.Order.beforePlace', $this, array('order' => $order));
         $this->getEventManager()->dispatch($event);
@@ -409,7 +399,6 @@ Les résultats d'événement peuvent être modifiés soit en utilisant directeme
 la propriété result de l'objet event  ou en retournant une valeur dans le 
 callback lui même.::
 
-    <?php
     // Un écouteur (listener) de callback
     public function doSomething($event) {
         // ...
@@ -452,7 +441,6 @@ gestionnaire d'événement appeler juste la méthode
 :php:meth:`CakeEventManager::detach()` en utilisant comme arguments les 
 deux premiers paramètres que vous avez utilisé pour les attacher ::
 
-    <?php
     // Attacher une fonction
     $this->getEventManager()->attach(array($this, 'doSomething'), 'My.event');
 
@@ -507,7 +495,6 @@ Accéder au gestionnaire d'événement global est aussi simple que d'appeler une
 fonction statique, l'exemple suivant va attacher un événement global à l'événement
 `beforePlace` ::
 
-    <?php
     // Dans n'importe quelle fichier de config ou morceau de code qui s'exécute avant l'événement
     App::uses('CakeEventManager', 'Event');
     CakeEventManager::instance()->attach($aCallback, 'Model.Order.beforePlace');
@@ -526,7 +513,6 @@ Souvenez-vous qu'une extrême flexibilité implique une extrême complexité.
 Examinez ce callback qui veut écouter tous les modèles beforeFinds mais en 
 réalité , il ne peut pas faire çà logique si le modèle est le caddie::
 
-    <?php
     App::uses('CakeEventManager', 'Event');
     CakeEventManager::instance()->attach('myCallback', 'Model.beforeFind');
 

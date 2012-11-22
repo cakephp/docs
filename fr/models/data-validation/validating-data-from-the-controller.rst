@@ -9,14 +9,12 @@ les données nécessite un processus légèrement différentde la méthode save.
 
 Tout d'abord, mettez les données au model::
 
-    <?php
     $this->ModelName->set($this->request->data);
 
 Ensuite, pour vérifier si les données sont validées, utilisez la méthide 
 validates du model, qui va retourner true si elles sont valides et false 
 si elles ne le sont pas::
 
-    <?php
     if ($this->ModelName->validates()) {
         // La logique est validée
     } else {
@@ -34,7 +32,6 @@ l'email et du mot_de_passe. Pour le faire, vous pouvez passer un tableau
 d'options spécifiant les champs sur lesquels vous voulez la validation.
 Par exemple ::
 
-    <?php
     if ($this->User->validates(array('fieldList' => array('email', 'mot_de_passe')))) {
         // valide
     } else {
@@ -45,7 +42,6 @@ La méthode validates invoque la méthode invalidFields qui
 remplit la propriété validationErrors du modèle. La méthode
 invalidFields retourne aussi cette donnée comme résultat::
 
-    <?php
     $errors = $this->ModelName->invalidFields(); // contient le tableau des 
     ErreursDeValidation (validationErrors)
 
@@ -64,7 +60,6 @@ l'enregistrement effectif.
 
 Pour valider de multiple models, l'approche suivante devrait être utilisée::
 
-    <?php
     if ($this->ModelName->saveAll($this->request->data, array('validate' => 'only'))) {
       // valide
     } else {
@@ -74,7 +69,6 @@ Pour valider de multiple models, l'approche suivante devrait être utilisée::
 Si vous avez validé les données avant l'enregistrement, vous pouvez stopper la 
 validation du save pour éviter un deuxième contrôle::
 
-    <?php
     if ($this->ModelName->saveAll($this->request->data, array('validate' => false))) {
         // saving without validation
     } 

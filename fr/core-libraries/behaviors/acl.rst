@@ -12,7 +12,6 @@ $actsAs de votre model. Quand vous l'ajoutez au tableau actsAs, vous
 choisissez de créer l'entrée Acl correspondante comme un ARO ou un ACO. 
 Par défaut cela crée des AROs::
 
-    <?php
     class User extends AppModel {
         public $actsAs = array('Acl' => array('type' => 'requester'));
     }
@@ -20,7 +19,6 @@ Par défaut cela crée des AROs::
 Ceci attacherait le behavior Acl en mode ARO. Pour joindre le behavior 
 ACL dans un mode ACO, utilisez ::
 
-    <?php
     class Post extends AppModel {
         public $actsAs = array('Acl' => array('type' => 'controlled'));
     }
@@ -28,14 +26,12 @@ ACL dans un mode ACO, utilisez ::
 Pour les models d'user et de group il est fréquent d'avoir à la fois 
 les noeuds ACO et ARO, pour permettre cela utilisez::
 
-    <?php
     class User extends AppModel {
         public $actsAs = array('Acl' => array('type' => 'both'));
     }
 
 Vous pouvez aussi attacher le behavior à la volée, comme ceci ::
 
-    <?php
     $this->Post->Behaviors->attach('Acl', array('type' => 'controlled'));
 
 .. changement de version:: 2.1
@@ -57,7 +53,6 @@ utilisé par le behavior Acl, pour déterminer les relations parent->enfant.
 Une méthode parentNode() de model doit retourner null ou une référence au 
 Model parent::
 
-    <?php
     function parentNode() {
         return null;
     }
@@ -65,7 +60,6 @@ Model parent::
 Si vous voulez définir un nœud ACO ou ARO comme parent pour votre Model, 
 parentNode() doit retourner l'alias du nœud ACO ou ARO::
 
-    <?php
     function parentNode() {
         return 'noeud_racine';
     }
@@ -74,7 +68,6 @@ Voici un exemple plus complet. Utilisons un model exemple User, avec User
 belongsTo Group::
 
 
-    <?php
     function parentNode() {
         if (!$this->id && empty($this->data)) {
             return null;
@@ -105,7 +98,6 @@ $model->node() pour récupérer le nœud Acl associé.
 Vous pouvez aussi récupérer le nœud Acl de n'importe quelle ligne, en passant 
 un tableau de données en paramètre::
 
-    <?php
     $this->User->id = 1;
     $noeud = $this->User->node();
 
@@ -119,7 +111,6 @@ Ces deux exemples retourneront la même information de nœud Acl.
 Si vous avez paramétrés le behavior Acl (AclBehavior) pour créer à la fois 
 les noeuds ARO et ACO, vous devez spécifier quel type de noeud vous desirez::
 
-    <?php
     $this->User->id = 1;
     $noeud = $this->User->node(null, 'Aro');
 

@@ -37,7 +37,6 @@ configuration des flux de logs en appelant``CakeLog::config()``.
 La configuration de notre ``DatabaseLogger`` pourrait ressembler
 à ceci::
     
-    <?php
     // pour app/Lib
     CakeLog::config('otherFile', array(
         'engine' => 'DatabaseLogger',
@@ -57,7 +56,6 @@ est utilisé pour localiser et charger le handler de log. Toutes
 les autres propriétés de configuration sont passées au constructeur 
 des flux de log comme un tableau.::
 
-    <?php
     App::uses('CakeLogInterface', 'Log');
 
     class DatabaseLogger implements CakeLogInterface {
@@ -122,7 +120,6 @@ le nom du fichier ou le message sera stocker. Si le type n'est pas
 fournit, LOG\_ERROR est utilisé ce qui à pour effet d'écrire dans le
 log error. Le chemin par défaut est ``app/tmp/logs/$type.log``::
 
-    <?php
     // Execute cela dans une classe CakePHP
     $this->log("Quelque chose ne fonctionne pas!");
     
@@ -133,7 +130,6 @@ Vous pouvez spécifier un nom personnalisé en utilisant le premier
 paramètre. La classe Filelog intégrée par défaut traitera ce nom
 de log comme le fichier dans lequel vous voulez écrire les logs::
 
-    <?php
     // appelé de manière statique
     CakeLog::write('activity', 'Un message spécial pour l'activité de logging');
     
@@ -147,7 +143,6 @@ Vous pouvez configurer/alterner la localisation de FileLog en
 utilisant :php:meth:`CakeLog::config()`. FileLog accepte un 
 ``chemin`` qui permet aux chemins personnalisés d'être utilisés.::
 
-    <?php
     CakeLog::config('chemin_perso', array(
         'engine' => 'FileLog',
         'path' => '/chemin/vers/endroit/perso/'
@@ -162,14 +157,12 @@ Ecrire dans les fichiers peut être réalisé de deux façons. La
 première est d'utilisé la méthode 
 statique  :php:meth:`CakeLog::write()`::
 
-    <?php
     CakeLog::write('debug', 'Quelque chose qui ne fonctionne pas');
 
 La seconde est d'utiliser la fonction raccourci log() disponible 
 dans chacune des classes qui extends (étendent)  ``Object``.
 En appelant log() cela appellera en interne  CakeLog::write()::
 
-    <?php
     // Exécuter cela dans une classe CakePHP:
     $this->log("Quelque chose qui ne fonctionne pas!", 'debug');
 

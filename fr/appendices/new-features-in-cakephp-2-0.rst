@@ -51,7 +51,6 @@ HtmlHelper
 
 Exemple sur la façon de définir le fichier de configuration sur les contrôleurs::
 
-    <?php
     public $helpers = array(
         'Html' => array(
             'configFile' => array('config_file', 'php') // Option une: un tableau avec le nom du fichier et le nom de lecture
@@ -111,7 +110,6 @@ pouvait être utilisé pour créer des routes pour la gestion de
 sous-domaines, ou pour l'activation de flags https/http. Un exemple 
 de classe de route qui supporte les sous-domaines serait::
 
-    <?php
     class SubdomainRoute extends CakeRoute {
         
         public function match ($params) {
@@ -130,7 +128,6 @@ les liens vers d'autres sous-domaines.
 
 ::
 
-    <?php
     echo $this->Html->link(
         'Autre domaine',
          array('subdomain' => 'test', 'controller' => 'posts', 'action' => 'add')
@@ -212,7 +209,6 @@ commencez par activer les extensions dans ``app/Config/routes.php``
 
 ::
 
-    <?php
     Router::parseExtensions('json', 'xml');
 
 Une fois que vous avez créé les layouts et les vues pour vos extensions, vous 
@@ -264,7 +260,6 @@ le Controller.
 
 ::
 
-    <?php
     $this->paginate = array('maxLimit' => 1000);
 
 Cette valeur par défaut est fournie pour empêcher l'utilisateur de manipuler 
@@ -284,7 +279,6 @@ les modèles.
 
 ::
 
-    <?php
     public $helpers = array( 
         'Html' => array( 
             'className' => 'MyHtml' 
@@ -295,7 +289,6 @@ De même, vous pouvez mettre en alias les components pour l'utilisation dans vos
 
 ::
 
-    <?php
     public $components = array( 
         'Email' => array( 
             'className' => 'QueueEmailer' 
@@ -307,7 +300,6 @@ Finalement, vous pouvez aussi mettre en alias les behaviors.
 
 ::
 
-    <?php
     public $actsAs = array( 
         'Containable' => array( 
             'className' => 'SuperContainable' 

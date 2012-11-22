@@ -70,7 +70,6 @@ comme vous l'entendez.
 
 Exemple::
 
-    <?php
     Cache::config('short', array(
         'engine' => 'File',  
         'duration' => '+1 hours',  
@@ -110,7 +109,6 @@ comme une app/libs. Ou dans ``$plugin/Lib/Cache/Engine/MonMoteurDeCachePerso.php
 comme partie d'un plugin. Les configurations de cache provenant de plugin
 doivent utiliser la notation par points de plugin.::
 
-    <?php
     Cache::config('custom', array(
         'engine' => 'PackCache.MonCachePerso',
         ...
@@ -220,7 +218,6 @@ en abaisser la valeur et de résulter à une valeur incorrecte.
 Après avoir définit une valeur entière vous pouvez la manipuler en utilisant
 :php:meth:`Cache::increment()` and :php:meth:`Cache::decrement()`::
 
-    <?php
     Cache::write('compteur_initial', 10);
 
     // Plus tard sur 
@@ -263,7 +260,6 @@ l'API Cache
     
     Par exemple::
 
-        <?php
         $cloud = Cache::read('cloud');
 
         if ($cloud !== false) {
@@ -310,7 +306,6 @@ l'API Cache
     données en retour. Si vous ne faites pas cela, les paramètres par défauts 
     seront utilisés quand la clef de cache est lu.::
    
-        <?php
         Cache::set(array('duration' => '+30 days'));
         Cache::write('results', $data);
     

@@ -12,25 +12,21 @@ puisqu'elles ont été retirées du coeur de CakePHP. Si vous n'avez toujours pa
 ces classes, vous pouvez utiliser ce qui suit pour la mise à jour::
 
     // app/View/Helper/AppHelper.php
-    <?php
     App::uses('Helper', 'View');
     class AppHelper extends Helper {
     }
 
     // app/Model/AppModel.php
-    <?php
     App::uses('Model', 'Model');
     class AppModel extends Model {
     }
 
     // app/Controller/AppController.php
-    <?php
     App::uses('Controller', 'Controller');
     class AppController extends Controller {
     }
 
     // app/Console/Command/AppShell.php
-    <?php
     App::uses('Shell', 'Console');
     class AppShell extends Shell {
     }
@@ -284,7 +280,6 @@ Vue
   à la place.
 - ``$scripts_for_layout`` est déprécié. Utilisez ce qui suit à la place::
 
-        <?php
         echo $this->fetch('meta');
         echo $this->fetch('css');
         echo $this->fetch('script');

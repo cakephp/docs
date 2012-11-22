@@ -26,7 +26,6 @@ filtres est fait par la classe `Configure`, en utilisant la clé spéciale
 filtre déjà activés pour toutes les requêtes, allons voir comment elles ont 
 été ajoutées::
 
-    <?php
     Configure::write('Dispatcher.filters', array(
         'AssetDispatcher',
         'CacheDispatcher'
@@ -54,7 +53,6 @@ seront exécutés dans l'ordre dans lequel ils ont été défini. Il y aussi une
 façon alternative pour attacher les filtres qui n'impliquent pas les 
 classes spéciales ``DispatcherFilter``::
 
-    <?php
     Configure::write('Dispatcher.filters', array(
         'my-filter' => array('callable' => array($classInstance, 'methodName'), 'on' => 'after')
     ));
@@ -67,7 +65,6 @@ fournie, elle sera traitée comme un nom de classe, et pas comme un nom de
 fonction possible. Ceci bien sur donne la capacité aux utilisateurs 
 de PHP5.3 d'attacher des fonctions anonymes en tant que filtres::
 
-    <?php
     Configure::write('Dispatcher.filters', array(
        'my-filter' => array('callable' => function($event) {...}, 'on' => 'before'),
        //plus de filtres ici
@@ -84,7 +81,6 @@ Puisque tous les filtres auront une priorité par défaut à ``10``, vous aurez
 envie de lancer un filtre avant tout autre dans la liste, sélectionner des 
 nombres d'une priorité plus faible comme souhaité::
 
-    <?php
     Configure::write('Dispatcher.filters', array(
        'my-filter' => array(
             'callable' => function($event) {...},
@@ -106,7 +102,6 @@ il n'y a pas d'options pour définir la priorité in-line, nous y
 viendront bientôt. Au final, la notation de plugin de CakePHP peut 
 être utilisée pour définir les filtres localisés dans les plugins::
 
-    <?php
     Configure::write('Dispatcher.filters', array(
         'MyPlugin.MyFilter',
     ));
@@ -125,7 +120,6 @@ dans le répertoire `Routing` de CakePHP.
 Créeons un simple filtre pour répondre à une url spécifique avec un texte 
 'Hello World'::
 
-    <?php
     App::uses('DispatcherFilter', 'Routing');
     class HelloWorldFilter extends DispatcherFilter {
 
@@ -177,7 +171,6 @@ Créeons maintenant un autre filtre pour modifier les headers de réponse dans
 toute page publique, dans notre cas, ce serait tout ce qui est servi à 
 partir de ``PagesController``::
 
-    <?php
     App::uses('DispatcherFilter', 'Routing');
     class HttpCacheFilter extends DispatcherFilter {
 
@@ -211,7 +204,6 @@ vous encourageons à faire ainsi l'utilisation des controllers et la classe
 :php:class:`JsonView`, mais imaginons que vous ayez besoin de gagner une tout 
 petite milliseconde pour cette mission-critical API endpoint::
 
-    <?php
     $postsList = function($event) {
         if ($event->data['request']->url !== 'posts/recent.json') {
             return;

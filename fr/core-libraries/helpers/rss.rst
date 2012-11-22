@@ -19,7 +19,6 @@ de lancer notre service Web, nous avons besoin de faire un certain nombre
 de choses. Premièrement, le parsing d'extensions doit être activé dans 
 ``app/config/routes.php``::
 
-    <?php
     Router::parseExtensions('rss');
 
 Dans l'appel ci-dessus, nous avons activé l'extension .rss. Quand vous 
@@ -36,13 +35,11 @@ Code du Controller
 C'est une bonne idée d'ajouter RequestHandler au tableau $components de votre 
 controller Posts. Cela permettra à beaucoup d'automagie de se produire::
 
-    <?php
     public $components = array('RequestHandler');
 
 Notre vue utilise aussi :php:class:`TextHelper` pour le formatage, ainsi il 
 doit aussi être ajouté au controller::
 
-    <?php
     public $helpers = array('Text');
 
 Avant que nous puissions faire une version RSS de notre posts/index, nous 
@@ -56,7 +53,6 @@ le flux RSS et les données pour la page HTML, vous pouvez utiliser la méthode
 :php:meth:`RequestHandler::isRss()`, sinon votre controller pourrait rester 
 le même::
 
-    <?php
     // Modifie l'action du Controller Posts correspondant à
     // l'action qui délivre le flux rss, laquelle est
     // l'action index dans notre exemple
@@ -84,7 +80,6 @@ Layout
 Un layout Rss est très simple, mettez les contenus suivants dans 
 ``app/View/Layouts/rss/default.ctp``::
 
-    <?php
     if (!isset($documentData)) {
         $documentData = array();
     }
@@ -119,7 +114,6 @@ en utilisant la méthode :php:meth:`View::set()`` qui est analogue à la
 méthode Controller::set(). Ici nous passons les canaux de données en retour au 
 layout::
 
-    <?php
     $this->set('documentData', array(
         'xmlns:dc' => 'http://purl.org/dc/elements/1.1/'));
 
@@ -150,7 +144,6 @@ pour chaque pair de valeur de clé.
 
 ::
 
-    <?php
     // Vous devez importer Sanitize
     App::uses('Sanitize', 'Utility');
 

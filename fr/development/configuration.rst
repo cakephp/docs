@@ -23,7 +23,6 @@ configuration de base de données peut être trouvé dans
 ``app/Config/database.php.default``. Une configuration basique complète 
 devrait ressembler à quelque chose comme cela::
 
-    <?php
     class DATABASE_CONFIG {
         public $default = array(
             'datasource'  => 'Database/Mysql',
@@ -120,7 +119,6 @@ amener ces classes additionnelles dans la vue.
 En utilisant :php:meth:`App::build()` dans bootstrap.php nous pouvons définir des 
 chemins supplémentaires où CakePHP va recherchez les classes::
 
-    <?php
     App::build(array(
         'plugins' => array('/full/path/to/plugins/', '/next/full/path/to/plugins/'),
         'Model' =>  array('/full/path/to/models/', '/next/full/path/to/models/'),
@@ -366,7 +364,6 @@ dans un contexte statique::
     Utilisez ``write()`` pour stocker les données dans configuration de 
     l'application::
 
-        <?php
         Configure::write('Company.name','Pizza, Inc.');
         Configure::write('Company.slogan','Pizza for your body and soul');
 
@@ -378,7 +375,6 @@ dans un contexte statique::
 
     L'exemple ci-dessus pourrait aussi être écrit en un appel unique::
 
-        <?php
         Configure::write(
             'Company', array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul')
         );
@@ -398,7 +394,6 @@ dans un contexte statique::
     clé est fournie, la donnée est retournée. En utilisant nos exemples du 
     write() ci-dessus, nous pouvons lire cette donnée::
 
-        <?php
         Configure::read('Company.name');    //yields: 'Pizza, Inc.'
         Configure::read('Company.slogan');  //yields: 'Pizza for your body and soul'
 
@@ -418,7 +413,6 @@ dans un contexte statique::
     Utilisé pour supprimer l'information à partir de la configuration de 
     l'application::
 
-        <?php
         Configure::delete('Company.name');
 
 .. php:staticmethod:: version()
@@ -461,7 +455,6 @@ pour plus d'informations sur les fichiers ini spécifiés. Pour utiliser un
 reader de config du coeur, vous aurez besoin de l'attacher au Configure 
 en utilisant :php:meth:`Configure::config()`::
 
-    <?php
     App::uses('PhpReader', 'Configure');
     // Lire les fichiers de config à partir de app/Config
     Configure::config('default', new PhpReader());
@@ -476,7 +469,6 @@ en utilisant quelques autres méthodes sur Configure. Pour voir, vérifier
 quels alias de reader sont attachés, vous pouvez utiliser 
 :php:meth:`Configure::configured()`::
 
-    <?php
     // Récupère le tableau d'alias pour les readers attachés.
     Configure::configured()
 
@@ -497,7 +489,6 @@ les fichiers de configuration avec ce reader serait en échec.
 Une fois que vous attachez un reader de config à Configure, vous pouvez charger 
 les fichiers de configuration::
 
-    <?php
     // Charge my_file.php en utilisant l'objet reader 'default'.
     Configure::load('my_file', 'default');
 
@@ -524,7 +515,6 @@ seulement que des valeurs pour la requête courante, vous aurez besoin de
 stocker toute information de configuration modifiée si vous souhaitez 
 l'utiliser dans des requêtes suivantes::
 
-    <?php
     // Stocke la configuration courante dans la clé 'user_1234' dans le cache 'default'.
     Configure::store('user_1234', 'default');
 
@@ -546,7 +536,6 @@ Une fois que vous avez stocké la configuration executée, vous aurez
 probablement besoin de la restaurer afin que vous puissiez y accéder à nouveau.
 ``Configure::restore()`` fait exactement cela::
 
-    <?php
     // restaure la configuration exécutée à partir du cache.
     Configure::restore('user_1234', 'default');
 
@@ -565,7 +554,6 @@ plugins. Les readers de configuration ont besoin d'implémenter l'
 lecture, comme seule méthode requise. Si vous aimez vraiment les fichiers XML, 
 vous pouvez créer un reader de config simple Xml pour votre application::
 
-    <?php
     // dans app/Lib/Configure/XmlReader.php
     App::uses('Xml', 'Utility');
     class XmlReader implements ConfigReaderInterface {
@@ -585,7 +573,6 @@ vous pouvez créer un reader de config simple Xml pour votre application::
 Dans votre ``app/Config/bootstrap.php``, vous pouvez attacher ce reader et 
 l'utiliser::
 
-    <?php
     App::uses('XmlReader', 'Configure');
     Configure::config('xml', new XmlReader());
     ...
@@ -625,7 +612,6 @@ Readers de Configuration intégrés
     :term:`syntaxe de plugin`. Les fichiers **doivent** contenir une variable 
     ``$config``. Un fichier de configuration d'exemple ressemblerait à cela::
 
-        <?php
         $config = array(
             'debug' => 0,
             'Security' => array(
@@ -696,7 +682,6 @@ Chargement d'inflections personnalisées
 Vous pouvez utiliser :php:meth:`Inflector::rules()` dans le fichier 
 ``app/Config/bootstrap.php`` pour charger des inflections personnalisées::
 
-    <?php
     Inflector::rules('singular', array(
         'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),
         'uninflected' => array('singulars'),
@@ -705,7 +690,6 @@ Vous pouvez utiliser :php:meth:`Inflector::rules()` dans le fichier
 
 ou::
 
-    <?php
     Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));
 
 Va fusionner les règles fournies dans les ensembles d'inflection définies dans 

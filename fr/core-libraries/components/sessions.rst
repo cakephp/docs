@@ -24,7 +24,6 @@ Il est important de noter que ces structures en tableaux peuvent
 être créées dans la session en utilisant la notation avec un point. 
 Par exemple, Utilisateur.identifiant se référera au tableau suivant :: 
 
-    <?php
     array('User' => 
         array('username' => 'clark-kent@dailyplanet.com')
     );
@@ -38,7 +37,6 @@ Session dans lesquelles un nom/clef est utilisé.
     Écrit dans la Session, en mettant $value dans $name. 
     $name peut-être un tableau séparé par un point. Par exemple ::
 
-        <?php
         $this->Session->write('Personne.couleurYeux', 'Vert');
 
     Cela écrit la valeur 'Vert' dans la session sous Personne => couleurYeux.
@@ -48,7 +46,6 @@ Session dans lesquelles un nom/clef est utilisé.
     Retourne la valeur de $name dans la session. Si $name vaut 
     null, la session entière sera retournée. Par ex ::
     
-        <?php
         $vert = $this->Session->read('Personne.couleurYeux');
 
     Récupère la valeur "vert" dans la session. La lecture de donnée
@@ -64,7 +61,6 @@ Session dans lesquelles un nom/clef est utilisé.
 
     Supprime les données de Session de $name. Par ex 
 
-        <?php
         $this->Session->delete('Personne.couleurYeux');
 
     Notre donnée de session n'a plus la valeur 'Vert' ni même l'index
@@ -72,7 +68,6 @@ Session dans lesquelles un nom/clef est utilisé.
     dans la Session. Pour supprimer de la session toutes les 
     informations de Personne, utilisez ::
 
-        <?php
         $this->Session->delete('Personne');
 
 .. php:method:: destroy()
@@ -82,7 +77,6 @@ Session dans lesquelles un nom/clef est utilisé.
     du système. Cela va détruire la session PHP et ainsi en créer
     une nouvelle.::
     
-        <?php
         $this->Session->destroy();
 
 .. _creating-notification-messages:
@@ -102,14 +96,12 @@ Création de messages de notification
     le helper session :php:meth:`SessionHelper::flash()`. Pour définir un 
     message, utiliser ``setFlash``::
 
-        <?php
         // Dans le contrôleur.
         $this->Session->setFlash('Votre travail a été sauvegardé !');
 
     Ceci créera un message instantané qui peut être affiché à l'utilisateur,
     en utilisant le Helper Session SessionHelper::
 
-        <?php
         // Dans la vue.
         echo $this->Session->flash();
 
@@ -125,7 +117,6 @@ Création de messages de notification
     En utilisant le paramètre ``$key`` vous pouvez stocker différents messages,
     qui peuvent être séparément récupérer en sortie.::
 
-        <?php
         // définit le message que ca va mal
         $this->Session->setFlash('Ca va mal.', 'default', array(), 'mal');
 
@@ -134,7 +125,6 @@ Création de messages de notification
 
     Dans la vue, ces messages peuvent être ressortis et stylisés différemment::
        
-        <?php
         // dans la vue.
         echo $this->Session->flash('bien');
         echo $this->Session->flash('mal');
@@ -145,7 +135,6 @@ Création de messages de notification
     tant que ``$message``.
     D'abord nous paramétrons le flash dans notre contrôleur::
 
-        <?php
         $this->Session->setFlash('truc customisés', 'flash_custom');
 
     alors nous créons le fichier ``app/View/Elements/flash_custom.ctp`` et
@@ -159,7 +148,6 @@ Création de messages de notification
     $params ca appliquera une classe à la div de sortie en utilisant
     ``$this->Session->flash()`` dans votre layout ou vue.::
 
-        <?php
         $this->Session->setFlash('Message Exemple', 'default', array('class' => 'classe_exemple'));
 
     La sortie en utilisant ``$this->Session->flash()`` avec l'exemple ci
@@ -170,7 +158,6 @@ Création de messages de notification
     Pour utiliser un élément depuis un plugin spécifiez le plugin
     dans le ``$params``::
     
-        <?php
         // Utilisera  /app/Plugin/Comment/View/Elements/flash_no_spam.ctp
         $this->Session->setFlash('Message!', 'flash_no_spam', array('plugin' => 'Comment'));
 

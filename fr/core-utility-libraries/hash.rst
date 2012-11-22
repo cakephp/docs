@@ -92,7 +92,6 @@ les méthodes comme ``extract()``.
     A la place, vous utilisez les expressions de chemin pour qualifier 
     les éléments que vous souhaitez retourner ::
 
-        <?php
         // Utilisation habituelle:
         $users = $this->User->find("all");
         $results = Hash::extract($users, '{n}.User.id');
@@ -106,7 +105,6 @@ les méthodes comme ``extract()``.
     Insère $data dans un tableau comme défini par $path. Cette méthode 
     supporte seulement les types d'expression de :ref:`hash-path-syntax`::
 
-        <?php
         $a = array(
             'pages' => array('name' => 'page')
         );
@@ -138,7 +136,6 @@ les méthodes comme ``extract()``.
     méthode supporte tous les éléments d'expression de 
     :ref:`hash-path-syntax`::
 
-        <?php
         $a = array(
             'pages' => array('name' => 'page'),
             'files' => array('name' => 'files')
@@ -169,7 +166,6 @@ les méthodes comme ``extract()``.
     valeurs par ce qui est obtenu en suivant le chemin spécifié dans 
     $groupPath.::
 
-        <?php
         $a = array(
             array(
                 'User' => array(
@@ -270,7 +266,6 @@ les méthodes comme ``extract()``.
     vous le faîtes, la première valeur sera utlisée comme un format de chaîne 
     de caractères, pour les valeurs extraites par les autres chemins::
 
-        <?php
         $result = Hash::combine(
             $a,
             '{n}.User.id',
@@ -311,7 +306,6 @@ les méthodes comme ``extract()``.
     Retourne une série de valeurs extraites d'un tableau, formaté avec un 
     format de chaîne de caractères::
 
-        <?php
         $data = array(
             array(
                 'Person' => array(
@@ -369,7 +363,6 @@ les méthodes comme ``extract()``.
     Détermine si un Hash ou un tableau contient les clés et valeurs exactes 
     d'un autre::
 
-        <?php
         $a = array(
             0 => array('name' => 'main'),
             1 => array('name' => 'about')
@@ -394,7 +387,6 @@ les méthodes comme ``extract()``.
 
    Vérifie si un chemin particulier est défini dans un tableau::
 
-        <?php
         $set = array(
             'My Index 1' => array('First' => 'The first item')
         );
@@ -431,7 +423,6 @@ les méthodes comme ``extract()``.
     de tabelau. Votre callback devrait retourner ``false`` pour retirer 
     les éléments du tableau résultant::
 
-        <?php
         $data = array(
             '0',
             false,
@@ -461,7 +452,6 @@ les méthodes comme ``extract()``.
 
     Réduit un tableau multi-dimensionnel en un tableau à une seule dimension::
 
-        <?php
         $arr = array(
             array(
                 'Post' => array('id' => '1', 'title' => 'First Post'),
@@ -493,7 +483,6 @@ les méthodes comme ``extract()``.
     Développe un tableau qui a déjà été aplatie avec 
     :php:meth:`Hash::flatten()`::
 
-        <?php
         $data = array(
             '0.Post.id' => 1,
             '0.Post.title' => First Post,
@@ -536,7 +525,6 @@ les méthodes comme ``extract()``.
 
     ::
 
-        <?php
         $array = array(
             array(
                 'id' => '48c2570e-dfa8-4c32-a35e-0d71cbdd56cb',
@@ -583,7 +571,6 @@ les méthodes comme ``extract()``.
 
     Vérifie pour voir si toutes les valeurs dans le tableau sont numériques::
 
-        <?php
         $data = array('one');
         $res = Hash::numeric(array_keys($data));
         // $res est à true
@@ -599,7 +586,6 @@ les méthodes comme ``extract()``.
     Compte les dimensions d'un tableau. Cette méthode va seulement considérer 
     la dimension du premier élément dans le tableau::
 
-        <?php
         $data = array('one', '2', 'three');
         $result = Hash::dimensions($data);
         // $result == 1
@@ -627,7 +613,6 @@ les méthodes comme ``extract()``.
     retourne le nombre le plus profond de dimensions de tout élément dans 
     le tableau::
 
-        <?php
         $data = array('1' => '1.1', '2', '3' => array('3.1' => '3.1.1'));
         $result = Hash::dimensions($data, true);
         // $result == 2
@@ -656,7 +641,6 @@ les méthodes comme ``extract()``.
     :ref:`hash-path-syntax`. Seules les élements de type expression sont 
     supportés par cette méthode::
 
-        <?php
         $a = array(
             0 => array('Person' => array('name' => 'Jeff')),
             1 => array('Shirt' => array('color' => 'black'))
@@ -699,7 +683,6 @@ les méthodes comme ``extract()``.
 
     Calcule la différence entre deux tableaux::
 
-        <?php
         $a = array(
             0 => array('name' => 'main'),
             1 => array('name' => 'about')
@@ -731,7 +714,6 @@ les méthodes comme ``extract()``.
     **Exemple 1**
     ::
 
-        <?php
         $array1 = array('ModelOne' => array('id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2'));
         $array2 = array('ModelOne' => array('id' => 1003, 'field_one' => 'a3.m1.f1', 'field_two' => 'a3.m1.f2', 'field_three' => 'a3.m1.f3'));
         $res = Hash::mergeDiff($array1, $array2);
@@ -752,7 +734,6 @@ les méthodes comme ``extract()``.
     **Exemple 2**
     ::
 
-        <?php
         $array1 = array("a" => "b", 1 => 20938, "c" => "string");
         $array2 = array("b" => "b", 3 => 238, "c" => "string", array("extra_field"));
         $res = Hash::mergeDiff($array1, $array2);
@@ -781,7 +762,6 @@ les méthodes comme ``extract()``.
     Normaliser un tableau, facilite l'utilisation des résultats avec 
     :php:meth:`Hash::merge()`::
 
-        <?php
         $a = array('Tree', 'CounterCache',
             'Upload' => array(
                 'folder' => 'products',
@@ -848,7 +828,6 @@ les méthodes comme ``extract()``.
 
     Exemple::
 
-        <?php
         $data = array(
             array('ModelName' => array('id' => 1, 'parent_id' => null)),
             array('ModelName' => array('id' => 2, 'parent_id' => 1)),

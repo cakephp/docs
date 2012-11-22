@@ -27,7 +27,6 @@ Exemple d'utilisation:
 
 ::
 
-    <?php
     class Exemple extends AppModel {
         public $useDbConfig = 'alternate';
     }
@@ -43,14 +42,12 @@ table.
 
 Example usage::
 
-    <?php
     class Exemple extends AppModel {
         public $useTable = false; // This model does not use a database table
     }
 
 Alternatively::
 
-    <?php
     class Exemple extends AppModel {
         public $useTable = 'exmp'; // This model uses a database table 'exmp'
     }
@@ -66,7 +63,6 @@ the model.
 
 Exemple d'utilisation::
 
-    <?php
     class Example extends AppModel {
         public $tablePrefix = 'alternate_'; // will look for 'alternate_examples'
     }
@@ -82,7 +78,6 @@ setting CakePHP to use an existing database table.
 
 Example usage::
 
-    <?php
     class Example extends AppModel {
         public $primaryKey = 'example_id'; // example_id is the field name in the database
     }
@@ -100,7 +95,6 @@ scaffolding and in ``find('list')`` calls. The model will use
 
 For example, to use the ``username`` field::
 
-    <?php
     class User extends AppModel {
         public $displayField = 'username';
     }
@@ -145,7 +139,6 @@ order
 The default ordering of data for any find operation. Possible
 values include::
 
-    <?php
     $order = "field"
     $order = "Model.field";
     $order = "Model.field asc";
@@ -175,7 +168,6 @@ Each field is described by:
 
 Example Usage::
 
-    <?php
     public $_schema = array(
         'first_name' => array(
             'type' => 'string', 
@@ -216,7 +208,6 @@ other fields in a model but will not be saveable.
 
 Example usage for MySQL::
 
-    <?php
     public $virtualFields = array(
         'name' => "CONCAT(User.first_name, ' ', User.last_name)"
     );
@@ -239,7 +230,6 @@ as the model name.
 
 Exemple d'utilisation::
 
-    <?php
     class Exemple extends AppModel {
         public $name = 'Exemple';
     }

@@ -19,7 +19,6 @@ les différentes méthodes HTTP.
     tableau de clés et de valeurs. La méthode get fait une simple requête 
     HTTP GET retournant les résultats::
 
-        <?php
         App::uses('HttpSocket', 'Network/Http');
 
         $HttpSocket = new HttpSocket();
@@ -39,7 +38,6 @@ les différentes méthodes HTTP.
     ``$query`` est la donnée à poster, que ce soit en chaîne, ou en un 
     tableau de clés et de valeurs::
 
-        <?php
         App::uses('HttpSocket', 'Network/Http');
 
         $HttpSocket = new HttpSocket();
@@ -118,7 +116,6 @@ au contenu de la réponse HTTP. Cette classe intégre le
 donc vous pouvez continuer en utilisant ``$http->response`` en tableau et le 
 retour des méthodes de requête en chaîne::
 
-    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     $http = new HttpSocket();
@@ -175,7 +172,6 @@ ressemblent à ceci::
 
 Vous pouvez récupérer les headers ci-dessus en appelant::
 
-    <?php
     // $response est une instance de HttpResponse
     // récupère le header Content-Type.
     $response->getHeader('Content-Type');
@@ -218,7 +214,6 @@ Vous pouvez créer votre propre classe de réponse pour utiliser HttpSocket. Vou
 pourriez créer le fichier ``app/Lib/Network/Http/YourResponse.php`` avec le 
 contenu::
 
-    <?php
     App::uses('HttpResponse', 'Network/Http');
 
     class YourResponse extends HttpResponse {
@@ -232,7 +227,6 @@ contenu::
 
 Avant votre requête, vous devrez changer la propriété responseClass::
 
-    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     $http = new HttpSocket();
@@ -246,7 +240,6 @@ configurant une ressource avec cette méthode, le contenu sera écrit
 dans la ressource, en utilisant `fwrite()`. Pour télécharger un fichier, 
 vous pouvez faire::
 
-    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     $http = new HttpSocket();
@@ -269,7 +262,6 @@ pouvez maintenant créer des objets d'authenrification personnalisée pour
 supporter des protocoles comme OAuth. Pour utiliser un système 
 d'authentification, vous devez configurer l'instance ``HttpSocket``::
 
-    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     $http = new HttpSocket();
@@ -286,7 +278,6 @@ Vous pouvez maintenant créer votre propre méthode d'authentification à
 utiliser avec HttpSocket. Vous pouvez créer le fichier 
 ``app/Lib/Network/Http/YourMethodAuthentication.php`` avec le contenu::
 
-    <?php
 
     class YourMethodAuthentication {
 
@@ -306,7 +297,6 @@ utiliser avec HttpSocket. Vous pouvez créer le fichier
 Pour configurer HttpSocket afin d'utiliser votre configuraiton auth, vous 
 pouvez utiliser la nouvelle méthode ``configAuth()``::
 
-    <?php
     $http->configAuth('YourMethod', array('config1' => 'value1', 'config2' => 'value2'));
     $http->get('http://secure.your-site.com');
 
@@ -319,7 +309,6 @@ En tant que configuration de auth, vous pouvez configurer une authentification
 de proxy. Vous pouvez créer votre méthode personnalisée pour authentifier 
 le proxy dans la même classe d'authentification. Par exemple::
 
-    <?php
 
     class YourMethodAuthentication {
 

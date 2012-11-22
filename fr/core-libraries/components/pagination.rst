@@ -34,7 +34,6 @@ complétées par le tri, la direction, la limitation et les paramètres de page
 passés depuis l'url. Ici , il est important de noter que l'ordre des clefs 
 doit être définis dans une structure en tableau comme ci-dessous:: 
 
-    <?php
     class PostsController extends AppController {
 
         public $paginate = array(
@@ -48,7 +47,6 @@ doit être définis dans une structure en tableau comme ci-dessous::
 Vous pouvez aussi inclure d'autres options :php:meth:`~Model::find()`,
 comme ``fields``::
 
-    <?php
     class PostsController extends AppController {
 
         public $paginate = array(
@@ -68,7 +66,6 @@ ci dessus, chacune des clefs peut aussi être passé à la méthode find du
 modèle. Ça devient alors très simple d'utiliser les comportement comme
 :php:class:`ContainableBehavior` avec la pagination::
 
-    <?php
     class RecipesController extends AppController {
 
         public $paginate = array(
@@ -81,7 +78,6 @@ En plus de définir des valeurs de pagination générales, vous pouvez définir
 plus d'un jeu de pagination par défaut dans votre contrôleur , vous avez juste
 à nommer les clefs du tableau après le modèle que vous souhaitez configurer::
 
-    <?php
     class PostsController extends AppController {
 
         public $paginate = array(
@@ -104,7 +100,6 @@ est envoyée à ``$this->request->params['paging']``, et est utilisée par
 ``Controller::paginate()`` ajoute également  PaginatorHelper à la liste
 des helpers de votre contrôleur, si il n'a pas encore été additionné::
 
-    <?php
     public function list_recipes() {
         // similaire à un  findAll(), mais récupère les résultats paginés
         $data = $this->paginate('Recipe');
@@ -114,13 +109,11 @@ des helpers de votre contrôleur, si il n'a pas encore été additionné::
 Vous pouvez filtrer les enregistrements en passant des conditions
 comme second paramètres à la fonction ``paginate()``.::
 
-    <?php
     $data = $this->paginate('Recipe', array('Recipe.title LIKE' => 'a%'));
 
 Ou vous pouvez aussi définir des  ``conditions`` et d'autre clefs dans
 le tableau ``$paginate`` à l'intérieur de votre action.::
 
-    <?php
     public function list_recipes() {
         $this->paginate = array(
             'conditions' => array('Recipe.title LIKE' => 'a%'),
@@ -142,7 +135,6 @@ Les comportement qui implémentent ``paginate`` et/ou``paginateCount`` devraient
 implémenter les signatures de méthode définies ci-dessous avec le premier
 paramêtre normal additionnel de ``$model``::
 
-    <?php
     // paginate et paginateCount implémentée dans le comportement.
     public function paginate(Model $model, $conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
         // contenu de la méthode
@@ -160,7 +152,6 @@ La méthode ``paginate()`` devrait implémenter les signatures de méthode
 suivantes. Pour utiliser vos propre méthode/logique redéfinissez lès (override) 
 dans le modèle dans lequel vous voulez prendre des données::
 
-    <?php
     /**
      * Redéfition (overriden) de la méthode paginate - groupée par semaine, away_team_id and home_team_id
      */
@@ -176,7 +167,6 @@ L'exemple ci-dessous utilise quelques fonctionnalités Postgres spécifiques,
 Veuillez ajuster en conséquence en fonction de la base de données que vous 
 utilisez::
 
-    <?php
     /**
      * Redefinition (Overridden) de la méthode paginateCount
      */
@@ -192,7 +182,6 @@ définis n'était pas réellement nécessaire - Tout ce que vous avez à
 faire est d'ajouter le mot clef dans les variables de la classes
 ``$paginate`` des contrôleurs::
 
-    <?php
     /**
      * Ajout d'une clause GROUP BY
      */
@@ -229,7 +218,6 @@ de calculs. Vous pouvez utiliser le 3ème paramètres de
 ``Controller::paginate()`` pour restreindre les tries de colonnes qui pourront 
 être effectués::
 
-    <?php
     $this->paginate('Post', array(), array('title', 'slug'));
 
 Ceci permettrait le tri uniquement sur les colonnes title et slug.
@@ -246,7 +234,6 @@ valeur par défaut n'est pas appropriée pour votre application, vous pouvez
 l'ajuster dans une partie des options de pagination::
 
 
-    <?php
     public $paginate = array(
         // d'autre clefs ici.
         'maxLimit' => 10
@@ -269,7 +256,6 @@ d'utiliser une chaîne de requête ou bien des paramètre nommés dans le compos
 Les requêtes entrantes devront accepter le type choisi, et la
 :php:class:`PaginatorHelper` générera les liens  avec les paramètres choisis:: 
 
-    <?php
     public $paginate = array(
         'paramType' => 'querystring'
     );
@@ -278,7 +264,6 @@ Ci-dessus permettrait un paramètre de recherche par chaîne de caractères, de 
 parser et de le générer. Vous pouvez aussi modifier  les propriétés de
 ``$settings`` du Composant Paginator (PaginatorComponent)::
 
-    <?php
     $this->Paginator->settings['paramType'] = 'querystring';
 
 Par défaut tous les paramètre de pagination typiques seront convertis en 
@@ -289,14 +274,12 @@ arguments GET
     Vous pouvez rentrez dans une situation ou assigner une valeur dans une 
     propriété inexistante retournera des erreurs::
     
-        <?php
         $this->paginate['limit'] = 10;
 
 Retournera l'erreur “Notice: Indirect modification of overloaded property 
 $paginate has no effect”. En assignant une valeur initiale à la propriété 
 cela résout le problème::
 
-        <?php
         $this->paginate = array();
         $this->paginate['limit'] = 10;
         //ou
@@ -305,7 +288,6 @@ cela résout le problème::
 Ou juste en déclarant la propriété dans la classe du contrôleur ::
     
 
-        <?php
         class PostsController {
             public $paginate = array();
         }

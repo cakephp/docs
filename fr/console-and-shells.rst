@@ -201,7 +201,6 @@ vous voulez accéder dans votre shell. Les models définis sont chargés en
 propriétés attachées à votre shell, juste comme un controller obtient les 
 models qui lui sont attachés::
 
-    <?php
     class UserShell extends AppShell {
         public $uses = array('User');
 
@@ -240,7 +239,6 @@ Chaque tâche doit au moins intégrer une méthode ``execute()``. Le
 ShellDispatcher appelera cette méthode quand la tâche est invoquée. 
 une classe de tâche ressemble à cela::
 
-    <?php
     class FileGeneratorTask extends Shell {
         public $uses = array('User');
         public function execute() {
@@ -281,13 +279,11 @@ Vous pouvez charger les tâches à la volée en utilisant l'objet Task Collectio
 Vous pouvez charger les tâches qui ne sont pas déclarées dans $tasks de cette 
 façon::
 
-    <?php
     $Project = $this->Tasks->load('Project');
 
 Chargera et retournera une instance ProjectTask. Vous pouvez charger les tâches 
 à partir des plugins en utilisant::
 
-    <?php
     $ProgressBar = $this->Tasks->load('ProgressBar.ProgressBar');
 
 .. _invoking-other-shells-from-your-shell:
@@ -301,7 +297,6 @@ Il y a cependant beaucoup de cas où vous voulez invoquer un shell à partir d'u
 fournissant le `argv` pour le shell sub. Vous pouvez fournir des arguments et des 
 options soit en variables args ou en chaînes de caractères::
 
-    <?php
     // En chaînes de caractère
     $this->dispatchShell('schema create Blog --plugin Blog');
 
@@ -332,7 +327,6 @@ shell. :php:meth:`Shell::out()` supporte 3 types de sortie par défaut.
 
 Vous pouvez marquer la sortie comme suit::
 
-    <?php
     // apparaitra à tous les niveaux.
     $this->out('Quiet message', 1, Shell::QUIET);
 
@@ -369,7 +363,6 @@ Vous pouvez créer des styles supplémentaires en utilisant
 `$this->stdout->styles()`. Pour déclarer un nouveau style de sortie, 
 vous pouvez faire::
 
-    <?php
     $this->stdout->styles('flashy', array('text' => 'magenta', 'blink' => true));
 
 Cela vous permettra d'utiliser un tag ``<flashy>`` dans la sortie de votre 
@@ -406,7 +399,6 @@ Enlever la coloration
 Bien que la coloration soit vraiment géniale, il peut y avoir des fois où vous 
 voulez l'arrêter, ou forcer à l'avoir::
 
-    <?php
     $this->output->outputAs(ConsoleOutput::RAW);
 
 Ce qui est au-dessus met la sortie objet dans un mode de sortie en ligne. Dans 
@@ -446,7 +438,6 @@ have different option parsers for subcommands and tasks.
 The ConsoleOptionParser implements a fluent interface and includes 
 methods for easily setting multiple options/arguments at once.::
 
-    <?php
     public function getOptionParser() {
         $parser = parent::getOptionParser();
         //configure parser
@@ -459,7 +450,6 @@ Configurer un option parser avec l'interface courante
 All of the methods that configure an option parser can be chained, 
 allowing you to define an entire option parser in one series of method calls::
 
-    <?php
     $parser->addArgument('type', array(
         'help' => 'Either a full path or type of class.'
     ))->addArgument('className', array(
@@ -488,7 +478,6 @@ displays above the argument and option information. By passing in
 either an array or a string, you can set the value of the description.
 Calling with no arguments will return the current value::
 
-    <?php
     // Set multiple lines at once
     $parser->description(array('line one', 'line two'));
 
@@ -502,7 +491,6 @@ is displayed after the argument and option information. By passing in
 either an array or a string, you can set the value of the epilog.
 Calling with no arguments will return the current value::
 
-    <?php
     // Set multiple lines at once
     $parser->epilog(array('line one', 'line two'));
 
@@ -520,7 +508,6 @@ arguments as well as make them required.  You can add arguments
 one at a time with ``$parser->addArgument();`` or multiple at once 
 with ``$parser->addArguments();``::
 
-    <?php
     $parser->addArgument('model', array('help' => 'The model to bake'));
 
 You can use the following options when creating an argument:
@@ -543,7 +530,6 @@ handle that in your shell.
 If you have an array with multiple arguments you can use ``$parser->addArguments()`` 
 to add multiple arguments at once.::
 
-    <?php
     $parser->addArguments(array(
         'node', array('help' => 'The node to create', 'required' => true),
         'parent' => array('help' => 'The parent node', 'required' => true)
@@ -560,7 +546,6 @@ indicate that an argument must be present when a shell is called.
 Additionally you can use ``choices`` to force an argument to 
 be from a list of valid choices::
 
-    <?php
     $parser->addArgument('type', array(
         'help' => 'The type of node to interact with.',
         'required' => true,
@@ -582,7 +567,6 @@ with both verbose and short aliases, supplying defaults
 and creating boolean switches. Options are created with either 
 ``$parser->addOption()`` or ``$parser->addOptions()``.::
 
-    <?php
     $parser->addOption('connection', array(
         'short' => 'c'
         'help' => 'connection',
@@ -595,7 +579,6 @@ when invoking the shell. You can also create boolean switches, these switches do
 consume values, and their presence just enables them in the 
 parsed parameters.::
 
-    <?php
     $parser->addOption('no-commit', array('boolean' => true));
 
 With this option, when calling a shell like ``cake myshell --no-commit something`` 
@@ -620,7 +603,6 @@ define the behavior of the option:
 If you have an array with multiple options you can use ``$parser->addOptions()`` 
 to add multiple options at once.::
 
-    <?php
     $parser->addOptions(array(
         'node', array('short' => 'n', 'help' => 'The node to create'),
         'parent' => array('short' => 'p', 'help' => 'The parent node')
@@ -636,7 +618,6 @@ Options can be provided with a set of choices much like positional arguments
 can be.  When an option has defined choices, those are the only valid choices
 for an option.  All other values will raise an ``InvalidArgumentException``::
 
-    <?php
     $parser->addOption('accept', array(
         'help' => 'What version to accept.',
         'choices' => array('working', 'theirs', 'mine')
@@ -650,7 +631,6 @@ some flag options.  Like options with defaults, boolean options always include
 themselves into the parsed parameters.  When the flags are present they are set 
 to true, when they are absent false::
 
-    <?php
     $parser->addOption('verbose', array(
         'help' => 'Enable verbose output.',
         'boolean' => true
@@ -660,7 +640,6 @@ The following option would result in ``$this->params['verbose']`` always
 being available.  This lets you omit ``empty()`` or ``isset()`` 
 checks for boolean flags::
 
-    <?php
     if ($this->params['verbose']) {
         // do something
     }
@@ -680,7 +659,6 @@ have their own help and options. ``ConsoleOptionParser`` allows you to
 define subcommands and provide command specific option parsers so the 
 shell knows how to parse commands for its tasks::
 
-    <?php
     $parser->addSubcommand('model', array(
         'help' => 'Bake a model',
         'parser' => $this->Model->getOptionParser()
@@ -717,7 +695,6 @@ As previously mentioned, when creating subcommand option parsers,
 you can define the parser spec as an array for that method. This can help 
 make building subcommand parsers easier, as everything is an array::
 
-    <?php
     $parser->addSubcommand('check', array(
         'help' => __('Check the permissions between an ACO and ARO.'),
         'parser' => array(
@@ -741,7 +718,6 @@ arguments, and options, should follow the format that
 :php:func:`ConsoleOptionParser::addArguments()` and :php:func:`ConsoleOptionParser::addOptions()`
 use.  You can also use buildFromArray on its own, to build an option parser::
 
-    <?php
     public function getOptionParser() {
         return ConsoleOptionParser::buildFromArray(array(
             'description' => array(
@@ -927,7 +903,6 @@ API de Shell
     It will return the users answer to the prompt, and allows you to provide a 
     list of valid options the user can choose from::
 
-        <?php
         $selection = $this->in('Red or Green?', array('R', 'G'), 'R');
 
     The selection validation is case-insensitive.
@@ -965,7 +940,6 @@ API de Shell
 
     By formatting messages with style tags you can display styled output::
 
-        <?php
         $this->out('<warning>This will remove data from the filesystems.</warning>');
 
     By default on \*nix systems ConsoleOutput objects default to colour output. 

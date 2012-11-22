@@ -23,7 +23,6 @@ et pratique.
 Voici un exemple simple d’une action de controller qui utilise un model 
 CakePHP pour sauvegarder les données dans une table de la base de données ::
 
-    <?php
     public function edit($id) {
         //Est-ce que des données de formulaires ont été POSTées ?
         if ($this->request->is('post')) {
@@ -46,7 +45,6 @@ raison quelconque vos données ne se sauvegardent pas, pensez à regarder si
 des règles de validation ne sont pas insatisfaites. Vous pouvez débugger cette
 situation en produisant :php:attr:`Model::$validationErrors`::
 
-    <?php
     if ($this->Recette->save($this->request->data)) {
         // Traite le succès.
     }
@@ -63,7 +61,6 @@ données du tableau de donnés à l'intérieur d'un Model. C'est utile pour
 l'utilisation de models avec les fonctionnalités ActiveRecord offertes 
 par le model::
 
-    <?php
     $this->Post->read(null, 1);
     $this->Post->set('title', 'Nouveau titre pour l'article');
     $this->Post->save();
@@ -72,7 +69,6 @@ Dans un exemple de l'utilisation de ``set()`` pour mettre à jour et sauvegarder
 les champs uniques, dans une approche ActiveRecord. Vous pouvez aussi utiliser 
 ``set()`` pour assigner de nouvelles valeurs aux champs multiples::
 
-    <?php
     $this->Post->read(null, 1);
     $this->Post->set(array(
         'titre' => 'Nouveau titre',
@@ -100,7 +96,6 @@ sauvegardés à ceux listés dans ``$fieldList``.
 
 La méthode save a aussi une syntaxe alternative::
 
-    <?php
     save(array $data = null, array $params = array())
 
 Le tableau ``$params`` peut avoir n'importe quelle option disponible 
@@ -128,7 +123,6 @@ quand on crée de nouveaux objets.
 
 ::
 
-    <?php
     $this->Ingredient->save($nouvellesDonnees);
     $nouvelIngredientId = $this->Ingredient->id;
 
@@ -136,7 +130,6 @@ La création ou la mise à jour est contrôlée par le champ ``id`` du model.
 Si ``$Model->id`` est défini, l'enregistrement avec cette clé primaire est 
 mis à jour. Sinon, un nouvel enregistrement est créé::
 
-    <?php
     // Création: id n'est pas défini ou est null
     $this->Recipe->create();
     $this->Recipe->save($this->request->data);
@@ -154,7 +147,6 @@ mis à jour. Sinon, un nouvel enregistrement est créé::
 Si vous voulez mettre à jour une valeur, plutôt qu'en créer une, assurez-vous 
 que vous avez passé le champ de la clé primaire  dans le tableau data::
 
-    <?php
     $data = array('id' => 10, 'title' => 'Mon Nouveau Titre');
     // Cela mettra à jour la Recette avec un id 10
     $this->Recette->save($data);
@@ -187,7 +179,6 @@ champ, pas le nom du model et du champ.
 Par exemple, pour mettre à jour le titre d'un article de blog, l'appel 
 depuis un controller à ``saveField`` ressemblerait à quelque chose comme::
 
-    <?php
     $this->Post->saveField('title', 'Un nouveau titre pour un Nouveau Jour');
 
 .. warning::
@@ -207,7 +198,6 @@ Par exemple, si je voulais approuver tous les boulangers qui sont membres
 depuis plus d’un an, l’appel à update devrait ressembler à quelque chose 
 du style:: 
 
-    <?php
     $this_year = date('Y-m-d h:i:s', strtotime('-1 year'));
 
     $this->Baker->updateAll(
@@ -229,7 +219,6 @@ du style::
 Par exemple, pour fermer tous les tickets qui appartiennent à un certain 
 client::
 
-    <?php
     $this->Ticket->updateAll(
         array('Ticket.status' => "'closed'"),
         array('Ticket.client_id' => 453)
@@ -260,7 +249,6 @@ Pour sauvegarder de multiples enregistrements d'un unique model, $data
 a besoin d'être un tableau d'enregistrements indexé numériquement comme 
 ceci::
 
-    <?php
     $data = array(
         array('titre' => 'titre 1'),
         array('titre' => 'titre 2'),
@@ -275,7 +263,6 @@ ceci::
 
 Il est aussi possible d'avoir les données dans le format suivant::
 
-    <?php
     $data = array(
         array('Article' => array('title' => 'title 1')),
         array('Article' => array('title' => 'title 2')),
@@ -284,7 +271,6 @@ Il est aussi possible d'avoir les données dans le format suivant::
 Pour sauvegarder les données associées avec ``$options['deep'] = true`` 
 (depuis 2.1), les deux exemples ci-dessus ressembleraient à cela::
 
-    <?php
     $data = array(
         array('title' => 'title 1', 'Assoc' => array('field' => 'value')),
         array('title' => 'title 2'),
@@ -299,7 +285,6 @@ Gardez à l'esprit que si vous souhaitez mettre à jour un enregistrement au lie
 d'en créer un nouveau, vous devez juste ajouter en index la clé primaire à la 
 ligne de donnée::
 
-    <?php
     array(
         array('Article' => array('title' => 'New article')), // Ceci crée une nouvelle ligne
         array('Article' => array('id' => 2, 'title' => 'title 2')), // Ceci met à jour une ligne existante
@@ -327,7 +312,6 @@ Les options suivantes peuvent être utilisées:
 Pour sauvegarder un enregistrement et tous ses enregistrements liés avec une 
 association hasOne ou belongsTo, le tableau de données devra ressembler à cela::
 
-    <?php
     array(
         'User' => array('username' => 'billy'),
         'Profile' => array('sex' => 'Male', 'occupation' => 'Programmer'),
@@ -336,7 +320,6 @@ association hasOne ou belongsTo, le tableau de données devra ressembler à cela
 Pour sauvegarder un enregistrement et ses enregistrements liés avec une 
 association hasMany, le tableau de données devra ressembler à cela::
 
-    <?php
     array(
         'Article' => array('title' => 'Mon premier article'),
         'Comment' => array(
@@ -365,7 +348,6 @@ association hasMany ainsi que les données associées plus profondément
 de type Comment belongsTo User, le tableau de données devra ressembler à 
 ceci::
 
-    <?php
     $data = array(
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
@@ -376,7 +358,6 @@ ceci::
 
 Et sauvegarder cette donnée avec::
 
-    <?php
     $Article->saveAssociated($data, array('deep' => true));
 
 .. versionchanged:: 2.1
@@ -385,7 +366,6 @@ Et sauvegarder cette donnée avec::
 
 Exemple d'utilisation de ``fieldList`` avec de multiples models::
 
-    <?php
     $this->SomeModel->saveAll($data, array(
         'fieldList' => array(
             'SomeModel' => array('field_1'),
@@ -431,7 +411,6 @@ son Profile lié. L'action montré en exemple ci-dessous supposera que vous
 avez POSTé assez de données (en utilisant FormHelper) pour créer un User 
 unique et un Profile unique::
 
-    <?php
     public function add() {
         if (!empty($this->request->data)) {
             // Nous pouvons sauvegarder les données de l'User:
@@ -482,7 +461,6 @@ models Company et Account en même temps.
 Tout d'abord, vous avez besoin de construire votre formulaire pour les deux 
 models Company and Account (nous supposerons que Company hasMany Account)::
 
-    <?php
     echo $form->create('Company', array('action' => 'add'));
     echo $form->input('Company.name', array('label' => 'Company name'));
     echo $form->input('Company.description');
@@ -509,7 +487,6 @@ nous avons besoin.
 Maintenant, dans notre CompaniesController nous pouvons créer une action 
 ``add()``::
 
-    <?php
     public function add() {
         if (!empty($this->request->data)) {
             // Utilisez ce qui suit pour éviter les erreurs de validation:
@@ -534,7 +511,6 @@ Cake qui nous demande d'écrire une application qui lui permette de connecter
 la présence d'un étudiant à un cours avec les journées assistées et de 
 validées. Jettez un oeil au code suivant.::
 
-   <?php
    // Controller/CourseMembershipController.php
    class CourseMembershipsController extends AppController {
        public $uses = array('CourseMembership');
@@ -764,7 +740,6 @@ automatiquement sauvegarder les données HABTM dans la base de données.
 
 ::
 
-    <?php
     public function add() {
         // Sauvegarder l'association
         if ($this->Tag->save($this->request->data)) {
@@ -781,7 +756,6 @@ associées peuvent inclure une liste de select drop down. Les données peuvent
 à une variable de vue du nom du model. Une entrée avec le même nom va 
 automatiquement envoyer dans ces données dans un ``<select>``::
 
-    <?php
     // dans le controller:
     $this->set('tags', $this->Recipe->Tag->find('list'));
 
@@ -795,7 +769,6 @@ sort du model de la même façon, mais l'entrée du formulaire est déclarée
 légèrement différemment. Le nom du Tag est défini en utilisant la convention 
 ``ModelName``::
 
-    <?php
     // dans le controller:
     $this->set('tags', $this->Recipe->Tag->find('list'));
 
@@ -890,7 +863,6 @@ alors les valeurs seront prises à partir de $this->data et ne seront pas mises
 ``unset($this->data['Model']['modified'])``, etc. Alternativement vous pouvez 
 écraser Model::save() pour toujours le faire pour vous::
 
-    <?php
     class AppModel extends Model {
 
         public function save($data = null, $validate = true, $fieldList = array()) }

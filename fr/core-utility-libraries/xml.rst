@@ -21,7 +21,6 @@ cela retournera un objet SimpleXMLElement ou DOMDocument (selon votre paramètre
 options - par défault SimpleXMLElement). Ci-dessous les échantillons sur la 
 façon d'importer des données depuis une URL::
 
-    <?php
     // Vieille méthode:
     $xml = new Xml('http://bakery.cakephp.org/articles/rss');
 
@@ -41,7 +40,6 @@ Vous pouvez utiliser :php:meth:`Xml::build()` pour construire les objets XML
 à partir d'une variété de sources. Vous pouvez utiliser XML pour construire 
 des objets à partir d'une chaîne de caractère::
 
-    <?php
     $text = '<?xml version="1.0" encoding="utf-8"?>
     <post>
         <id>1</id>
@@ -54,7 +52,6 @@ Vous pouvez aussi construire des objets Xml à partir de fichiers locaux,
 ou de fichiers distants. Les fichiers distants seront récupérés avec 
 :php:class:`HttpSocket`::
 
-    <?php
     // fichier local
     $xml = Xml::build('/home/awesome/unicorns.xml');
 
@@ -63,7 +60,6 @@ ou de fichiers distants. Les fichiers distants seront récupérés avec
 
 Vous pouvez aussi construire des objets Xml en utilisant un tableau::
 
-    <?php
     $data = array(
         'post' => array(
             'id' => 1,
@@ -75,7 +71,6 @@ Vous pouvez aussi construire des objets Xml en utilisant un tableau::
 
 Si votre entrée est invalide, la classe Xml enverra une Exception::
 
-    <?php
     $xmlString = 'What is XML?'
     try {
         $xmlObject = Xml::build($xmlString); // Ici enverra une Exception
@@ -97,7 +92,6 @@ Transformer une chaîne de caractères XML en tableau
 Convertir des chaînes XML en tableaux est aussi facile avec la classe Xml. Par 
 défaut, vous obtiendrez un objet SimpleXml en retour::
 
-    <?php
     //Vieille méthode:
     $xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
     $xmlObject = new Xml($xmlString);
@@ -114,7 +108,6 @@ Transformer un tableau en une chaîne de caractères XML
 
 ::
 
-    <?php
     // Vieille méthode:
     $xmlArray = array('root' => array('child' => 'value'));
     $xmlObject = new Xml($xmlArray, array('format' => 'tags'));
@@ -130,7 +123,6 @@ Votre tableau ne doit avoir qu'un élément de "niveau supérieur" et il ne pas
 Exception.
 Des Exemples de tableaux invalides::
 
-    <?php
     // Niveau supérieur avec une clé numérique
     array(
         array('cle' => 'valeur')
@@ -154,7 +146,6 @@ Des Exemples de tableaux invalides::
 
 ::
 
-    <?php
     $xmlArray = array(
         'projet' => array(
             '@id' => 1,
@@ -167,7 +158,6 @@ Des Exemples de tableaux invalides::
 
 Le contenu de ``$xmlString`` sera::
 
-    <?php
     <?xml version="1.0"?>
     <project id="1">Valeur du projet<name>Nom du projet, en tag</name></project>
 
@@ -180,7 +170,6 @@ Le contenu de ``$xmlString`` sera::
 
 ::
 
-    <?php
     $oldArray = array(
         'Projets' => array(
             array(
@@ -238,7 +227,6 @@ Pour utiliser les Namespaces XML, dans votre tableau vous devez créer une clé
 avec le nom ``xmlns:`` vers un namespace générique ou avec le préfixe 
 ``xmlns:`` dans un namespace personnalisé. Regardez les exemples::
 
-    <?php
     $xmlArray = array(
         'root' => array(
             'xmlns:' => 'http://cakephp.org',
@@ -277,7 +265,6 @@ doit être fait en utilisant SimpleXMLElement ou DOMDocument. Mais, comme
 CakePHP est trop sympa, ci-dessous vous avez les étapes pour créer un noeud 
 enfant::
 
-    <?php
     // CakePHP 1.3
     $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
     $xml = new Xml($myXmlOriginal, array('format' => 'tags'));
@@ -331,7 +318,6 @@ et des urls distantes.
 
     Construire à partir d'un tableau::
 
-        <?php
         $value = array(
             'tags' => array(
                 'tag' => array(

@@ -16,7 +16,6 @@ Configuration de Exception
 
 Il y a certaines clés disponibles pour configurer les exceptions::
 
-    <?php
     Configure::write('Exception', array(
         'handler' => 'ErrorHandler::handleException',
         'renderer' => 'ExceptionRenderer',
@@ -69,7 +68,6 @@ ont besoin simplement d'un nouveau template qui matche le nom de classe afin
 fournir des informations utiles. Si votre application contenait l'exception 
 suivante::
 
-    <?php
     class MissingWidgetException extends CakeException {};
 
 Vous pourriez fournir des erreurs de bon développement, en créant 
@@ -84,7 +82,6 @@ aussi fournir un template de message qui permet les méthodes natives
 ``__toString()`` pour fonctionner normalement::
 
 
-    <?php
     class MissingWidgetException extends CakeException {
         protected $_messageTemplate = 'Seems that %s is missing.';
     }
@@ -105,7 +102,6 @@ Créer des codes de statut personnalisés
 Vous pouvez créer des codes de statut HTTP personnalisés en changeant le code 
 utilisé quand vous créez une exception::
 
-    <?php
     throw new MissingWidgetHelperException('Its not here', 501);
 
 Va créer un code de réponse ``501``, vous pouvez utiliser le code de statut 
@@ -143,7 +139,6 @@ va ignorer toutes les configurations d'Exception. Une configuration de
 gestionnaire d'exception personnalisée pourrait par exemple ressembler à 
 ceci::
 
-    <?php
     // dans app/Config/core.php
     Configure::write('Exception.handler', 'AppExceptionHandler::handle');
 
@@ -165,7 +160,6 @@ plus le message d'exception. Vouspouvez définir des gestionnaires d'exception
 comme tout type de callback, même une fonction anonyme si vous utilisez 
 PHP 5.3::
 
-    <?php
     Configure::write('Exception.handler', function ($error) {
         echo 'Ruh roh ' . $error->getMessage();
     });
@@ -175,7 +169,6 @@ gestionnaire d'erreur personnalisé pour les exceptions de l'application. Dans
 la méthode fournie comme un gestionnaire d'exception, vous pourriez faire 
 comme suit::
 
-    <?php
     // dans app/Lib/AppErrorHandler.php
     class AppErrorHandler {
         public static function handleException($error) {
@@ -198,7 +191,6 @@ méthode de controller est appelée à la place du rendu d'exception par défaut
 Il reçoit l'exception lancée comme son seul argument. Vous devriez implémenter 
 votre gestionnaire d'erreur dans cette méthode:: 
 
-    <?php
     class AppController extends Controller {
         public function appError($error) {
             // logique personnalisée va ici.
@@ -218,7 +210,6 @@ répertoire ``Error``` dans tout chemin bootstrapped Lib. Dans une classe
 de rendu d'exception, vous pouvez fournir une gestion spécialisée pour les 
 erreurs spécifiques de l'application::
 
-    <?php
     // dans app/Lib/Error/AppExceptionRenderer.php
     App::uses('ExceptionRenderer', 'Error');
 
@@ -258,7 +249,6 @@ controller de gestionnaire d'erreur plus personnalisé dans votre application.
 En implémentant ``_getController`` dans votre classe ``AppExceptionRenderer``, 
 vous pouvez utiliser tout controller que vous souhaitez::
 
-    <?php
     class AppExceptionRenderer extends ExceptionRenderer {
         protected function _getController($exception) {
             App::uses('SuperCustomError', 'Controller');
@@ -415,7 +405,6 @@ Utiliser les exceptions HTTP dans vos controllers
 Vous pouvez envoyer n'importe quelle exception HTTP lié à partir des actions 
 de votre controller pour indiquer les états d'échec. Par exemple::
 
-    <?php
     public function view($id) {
         $post = $this->Post->read(null, $id);
         if (!$post) {

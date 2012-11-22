@@ -102,7 +102,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     :term:`syntaxe de plugin`.  Pour inclure ``app/Plugin/DebugKit/webroot/css/toolbar.css``
     Vous pouvez utiliser ce qui suit::
 
-        <?php
         echo $this->Html->css('DebugKit.toolbar.css');
 
     Si vous voulez inclure un fichier css qui partage un nom avec un plugin
@@ -110,7 +109,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     ``Blog``, et souhaitez inclure également 
     ``app/webroot/css/Blog.common.css``::
 
-        <?php
         echo $this->Html->css('Blog.common.css', null, array('plugin' => false));
 
     .. versionchanged:: 2.1
@@ -144,7 +142,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     ::
 
-        <?php
         echo $this->Html->meta(
             'favicon.ico',
             '/favicon.ico',
@@ -173,7 +170,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Cette méthode peut aussi être utilisée pour ajouter les balise de mots clés
     et les descriptions. Exemple::
 
-        <?php
         echo $this->Html->meta(
             'mot clef',
             'entrez une balise de mot clef ici'
@@ -192,7 +188,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     paramètre devra être un tableau. Pour ressortir  une balise de robots 
     noindex, utilisez le code suivant::
 
-        <?php
         echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex')); 
 
     .. versionchanged:: 2.1
@@ -227,7 +222,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     ::
 
-        <?php
         echo $this->Html->docType();
         // Affichera: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
@@ -249,7 +243,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     valeurs du tableau passé à la méthode. Particulièrement pratique si votre 
     fichier CSS est dynamique.::
 
-        <?php
         echo $this->Html->style(array(
             'background' => '#633',
             'border-bottom' => '1px solid #000',
@@ -268,7 +261,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Créé une balise image formatée. Le chemin fournit devra être relatif à
     /app/webroot/img/.::
 
-        <?php
         echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'));
 
     Affichera::
@@ -278,7 +270,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Pour créé un lien d'image spécifiez le lien de destination en 
     utilisant l'option ``url`` dans ``$htmlAttributes``.::
 
-        <?php
         echo $this->Html->image("recettes/6.jpg", array(
             "alt" => "Crèpes",
             'url' => array('controller' => 'recettes', 'action' => 'view', 6)
@@ -293,7 +284,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Si vous créez des images dans des mails, ou voulez des chemins
     absolus pour les images vous pouvez utiliser l'option ``fullBase``::
 
-        <?php
         echo $this->Html->image("logo.png", array('fullBase' => true));
 
     Affichera::
@@ -304,7 +294,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     :term:`plugin syntax`.  Pour inclure 
     ``app/Plugin/DebugKit/webroot/img/icon.png``, vous pouvez faire cela::
 
-        <?php
         echo $this->Html->image('DebugKit.icon.png');
 
     Si vous voulez inclure un fichier image qui partage un nom
@@ -312,7 +301,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     avez in plugin `Blog``, et voulez inclure également 
     ``app/webroot/js/Blog.icon.png``::
 
-        <?php
         echo $this->Html->image('Blog.icon.png', array('plugin' => false));
 
     .. versionchanged:: 2.1
@@ -329,7 +317,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     pour spécifier les attributs des éléments et si le ``$title`` devra ou 
     pas être échappé.::
 
-        <?php
         echo $this->Html->link('Entrez', '/pages/accueil', array('class' => 'button', 'target' => '_blank'));
 
     Affichera::
@@ -339,7 +326,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Spécifiez ``$confirmMessage`` pour afficher une boite de dialogue de 
     confirmation ``confirm()`` javascript::
 
-        <?php
         echo $this->Html->link(
             'Efface',
             array('controller' => 'recettes', 'action' => 'delete', 6),
@@ -353,7 +339,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Les chaînes de requête peuvent aussi être créées avec ``link()``.::
 
-        <?php
         echo $this->Html->link('Voir image', array(
             'controller' => 'images',
             'action' => 'view',
@@ -408,7 +393,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Retourne une balise formatée audio/video ::
 
-        <?php
         echo $this->Html->media('audio.mp4');
 
         // Affichera
@@ -439,7 +423,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Retourne des textes enveloppé dans une balise spécifiée. Si il n'y a
     pas de texte spécifié alors le contenu du <tag> sera retourné.::
 
-        <?php
         echo $this->Html->tag('span', 'Bonjour le Monde', array('class' => 'bienvenue'));
          
         // Affichera
@@ -473,7 +456,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Si aucun texte n'est spécifié, seulement une balise div d'ouverture est 
     retournée.::
  
-        <?php
         echo $this->Html->div('error', 'Entrez votre numéro de carte bleue S.V.P');
         
         // Affichera
@@ -488,7 +470,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Retourne un texte enveloppé dans une balise CSS <p>. Si aucun texte
     CSS est fourni, un simple <p> de démarrage est retourné.::
 
-        <?php
         echo $this->Html->para(null, 'Bonjour le Monde');
         
         // Affichera
@@ -515,7 +496,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Cette méthode d'inclusion de fichier javascript suppose que les fichiers
     javascript spécifiés se trouvent dans le répertoire ``/app/webroot/js``.::
 
-        <?php
         echo $this->Html->script('scripts');
 
     Affichera::
@@ -525,13 +505,11 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Vous pouvez lier à des fichiers avec des chemins absolus
     tant qu'ils ne se trouvent pas dans ``app/webroot/js``::
 
-        <?php
         echo $this->Html->script('/autrerep/fichier_script');
 
     Le premier paramètre peut être un tableau pour inclure des 
     fichiers multiples.::
 
-        <?php
         echo $this->Html->script(array('jquery', 'wysiwyg', 'scripts'));
 
     Affichera::
@@ -543,20 +521,17 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Vous pouvez insérer dans la balise script un bloc spécifique en 
     utilisant l'option ``block``.::
 
-        <?php
         echo $this->Html->script('wysiwyg', array('block' => 'scriptPied'));
         
     Dans votre mise en page (layout)  vous pouvez ressortir toutes les 
     balises script ajoutées dans 'scriptPied'::
 
-        <?php
         echo $this->fetch('scriptPied');
 
     Vous pouvez inclure des fichiers de script depuis un plugin en utilisant 
     la syntaxe :term:`syntaxe de plugin`.  Pour inclure 
     ``app/Plugin/DebugKit/webroot/js/toolbar.js`` vous devriez faire cela::
 
-        <?php
         echo $this->Html->script('DebugKit.toolbar.js');
 
     Si vous voulez inclure un fichier de script qui partage un nom de fichier
@@ -564,7 +539,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Un plugin ``Blog``, et voulez inclure également 
     ``app/webroot/js/Blog.plugins.js``, vous devriez::
 
-        <?php
         echo $this->Html->script('Blog.plugins.js', array('plugin' => false));
 
     .. versionchanged:: 2.1
@@ -601,7 +575,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Un exemple de l'utilisation de ``scriptStart()`` et ``scriptEnd()`` pourrait
     être::
 
-        <?php
         $this->Html->scriptStart(array('inline' => false));
 
         echo $this->Js->alert('je suis dans le javascript');
@@ -620,7 +593,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Fabrique une liste imbriquée  (UL/OL) dans un tableau associatif::
 
-        <?php
         $list = array(
             'Languages' => array(
                 'English' => array(
@@ -661,7 +633,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Créé une ligne de cellule d'en-tête à placer dans la balise <table>.::
 
-        <?php
         echo $this->Html->tableHeaders(array('Date', 'Titre', 'Actif'));
 
         // Affichera
@@ -702,7 +673,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     simple table de cellule dans un array() pour des attributs <td> 
     spécifiques. ::
 
-        <?php
         echo $this->Html->tableCells(array(
             array('le 07 juil, 2007', 'Meilleure Crêpe', 'Yes'),
             array('le 21 juin, 2007', 'Super Galette', 'Yes'),
@@ -751,7 +721,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     combinaison d'une url pour le controller et d'une action. Si full est à 
     true, la base complète de l'URL sera ajouter en amont du résultat::
 
-        <?php
         echo $this->Html->url(array(
             "controller" => "posts",
             "action" => "view",
@@ -765,7 +734,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     URL avec des paramètres nommés::
 
-        <?php
         echo $this->Html->url(array(
             "controller" => "posts",
             "action" => "view",
@@ -777,7 +745,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     URL avec une extension::
 
-        <?php
         echo $this->Html->url(array(
             "controller" => "posts",
             "action" => "list",
@@ -789,7 +756,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     URL (commençant par  '/') avec la base complète d'URL ajoutée::
 
-        <?php
         echo $this->Html->url('/posts', true);
 
         // Restituera
@@ -814,7 +780,6 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Retourne un bloc existant formaté de balise ``$tag``::
 
-        <?php
         $this->Html->useTag(
             'form',
             'http://example.com',
@@ -836,7 +801,6 @@ Changer la restitution des balises avec le Helper Html
     que vous aimeriez utiliser. Pour changer les balises utilisées créez
     un fichier ``app/Config/tags.php`` contenant::
    
-        <?php
         $tags = array(
             'metalink' => '<link href="%s"%s >',
             'input' => '<input name="%s" %s >',
@@ -855,13 +819,11 @@ Création d'un chemin de navigation avec le Helper Html
     navigation (fil d’Ariane) dans votre application. Pour mettre cela en 
     service , ajouter cela dans votre template de mise en page (layout template)::
 
-        <?php
         echo $this->Html->getCrumbs(' > ', 'Home');
 
     L'option ``$startText`` peut aussi accepter un tableau.  Cela donne plus de 
     contrôle à travers le premier lien généré::
 
-        <?php
         echo $this->Html->getCrumbs(' > ', array(
             'text' => $this->Html->image('home.png'),
             'url' => array('controller' => 'pages', 'action' => 'display', 'home'),
@@ -879,7 +841,6 @@ Création d'un chemin de navigation avec le Helper Html
     Maintenant, dans votre vue vous allez devoir ajouter ce qui suit 
     pour démarrer le fil d'Ariane sur chacune de vos pages.::
 
-        <?php
         $this->Html->addCrumb('Users', '/users');
         $this->Html->addCrumb('Add User', '/users/add');
 

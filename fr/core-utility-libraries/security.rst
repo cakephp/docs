@@ -16,7 +16,6 @@ L'API Security
 
     Crypte/Décrypte un texte selon la clé donnée::
 
-        <?php
         // Crypte votre mot de passe secret avec my_key
         $secret = Security::cipher('mon mot de passe secret', 'my_key');
 
@@ -50,7 +49,6 @@ L'API Security
     Pour avoir les minutes d'inactivité autorisées basée sur le niveau de 
     sécurité.::
 
-        <?php
         $mins = Security::inactiveMins();
         // Si votre config Security.level est défini à 'medium' alors $mins 
         sera égal 100

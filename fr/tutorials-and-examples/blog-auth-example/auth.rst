@@ -32,7 +32,6 @@ réalisera la connexion de l'user.
 La prochaine étape est de créer notre modèle User, qui a la 
 responsablilité de trouver, sauvegarder et valider toute donnée d'user::
 
-    <?php
     // app/Model/User.php
     class User extends AppModel {
         public $name = 'User';
@@ -63,7 +62,6 @@ Créeons aussi notre UsersController, le contenu suivant correspond à la
 classe `cuisinée` basique UsersController en utilisant les utilitaires 
 de génération de code fournis avec CakePHP::
 
-    <?php
     // app/Controller/UsersController.php
     class UsersController extends AppController {
 
@@ -140,7 +138,6 @@ le cadre de ce tutoriel, nous allons juste montrer le add.ctp::
     <?php echo $this->Form->create('User');?>
         <fieldset>
             <legend><?php echo __('Ajouter User'); ?></legend>
-        <?php
             echo $this->Form->input('nom_user');
             echo $this->Form->input('mot_de_passe');
             echo $this->Form->input('role', array(
@@ -163,7 +160,6 @@ que l'on souhaite leur voir autorisées.
 Pour ajouter ce composant à votre application, ouvrez votre fichier 
 ``app/Controller/AppController.php`` et ajoutez les lignes suivantes::
 
-    <?php
     // app/Controller/AppController.php
     class AppController extends Controller {
         //...
@@ -199,7 +195,6 @@ texte plain dans notre base de données. Disons à AuthComponent de laisser
 des users non-authentifiés d'accéder à la fonction add des users 
 et de réaliser l'action connexion et deconnexion::
 
-    <?php
     // app/Controller/UsersController.php
 
     public function beforeFilter() {
@@ -224,7 +219,6 @@ et de réaliser l'action connexion et deconnexion::
 Le hash du mot de passe n'est pas encore fait, ouvrez votre fichier de modèle
 ``app/Model/User.php`` et ajoutez ce qui suit::
 
-    <?php
     // app/Model/User.php
     App::uses('AuthComponent', 'Controller/Component');
     class User extends AppModel {
@@ -250,7 +244,6 @@ fonction de connexion, et le voilà::
     <?php echo $this->Form->create('User');?>
         <fieldset>
             <legend><?php echo __('Merci de rentrer votre nom d\'user et mot de passe'); ?></legend>
-        <?php
             echo $this->Form->input('nom_user');
             echo $this->Form->input('mot_de_passe');
         ?>
@@ -296,7 +289,6 @@ posts pour ajouter la référence au modèle User::
 Aussi, un petit changement dans PostsController est nécessaire pour stocker 
 l'user connecté courant en référence pour le post créé::
 
-    <?php
     // app/Controller/PostsController.php
     public function add() {
         if ($this->request->is('post')) {
@@ -319,7 +311,6 @@ normaux (le role auteur) peuvent seulement accéder aux actions permises.
 Ouvrez encore la classe AppController et ajoutez un peu plus d'options à la 
 config de Auth::
 
-    <?php
     // app/Controller/AppController.php
 
     public $components = array(
@@ -354,7 +345,6 @@ fourniture de ces règles supplémentaires. Les règles que nous allons ajouter
 l'édition des posts si l'auteur ne correspond pas. Ouvrez le fichier 
 ``PostsController.php`` et ajoutez le contenu suivant::
 
-    <?php
     // app/Controller/PostsController.php
 
     public function isAuthorized($user) {
@@ -384,7 +374,6 @@ une fonction ``isOwnedBy()`` dans le modèle Post. C'est généralement une
 bonne pratique de déplacer autant que possible la logique dans les modèles. 
 Laissons la fonction s'exécuter::
 
-    <?php
     // app/Model/Post.php
 
     public function isOwnedBy($post, $user) {

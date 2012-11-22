@@ -18,7 +18,6 @@ de la sortie/affichage.
 Tout ce dont vous avez besoin est d'inclure la librairie du coeur Sanitize
 (par ex: avant la définition de la classe de controller)::
 
-    <?php
     App::uses('Sanitize', 'Utility');
     
     class MyController extends AppController {
@@ -67,7 +66,6 @@ Uen fois qu c'est fait, vous pouvez faire des appels statiquement de Sanitize.
 
     L'utilisation de clean() avec options ressemble à ce qui suit::
 
-        <?php
         $this->data = Sanitize::clean($this->data, array('encode' => false));
 
 
@@ -93,7 +91,6 @@ Uen fois qu c'est fait, vous pouvez faire des appels statiquement de Sanitize.
     à true, le contenu HTML détecté est retiré plutôt que rendu en entités 
     HTML::
 
-        <?php
         $badString = '<font size="99" color="#FF0000">HEY</font><script>...</script>';
         echo Sanitize::html($badString);
         // output: &lt;font size=&quot;99&quot; color=&quot;#FF0000&quot;&gt;HEY&lt;/font&gt;&lt;script&gt;...&lt;/script&gt;
@@ -115,7 +112,6 @@ Uen fois qu c'est fait, vous pouvez faire des appels statiquement de Sanitize.
     overlook certain characters by passing them in $allowedChars
     array::
 
-        <?php
         $badString = ";:<script><html><   // >@@#";
         echo Sanitize::paranoid($badString);
         // sort: scripthtml

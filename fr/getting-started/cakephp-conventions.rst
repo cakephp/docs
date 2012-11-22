@@ -44,7 +44,6 @@ underscores. Si une méthode du controller a été préfixée avec un
 underscore, la méthode ne sera pas accessible directement à partir du web 
 mais est disponible pour une utilisation interne. Par exemple::
 
-    <?php
     class NouvellesController extends AppController {
     
         public function derniers() {

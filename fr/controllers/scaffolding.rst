@@ -41,7 +41,6 @@ particulier.
 Pour ajouter le Scaffolding dans votre application, ajoutez la variable 
 $scaffold dans votre controller ::
 
-    <?php
     class CategoriesController extends AppController {
         public $scaffold;
     }
@@ -69,7 +68,6 @@ User belongsTo Group, vous devrez ajouter manuellement le code suivant
 dans vos models User et Group. Avant d'ajouter le code suivant, la 
 vue affiche un select pour le Group dans le nouveau formulaire User::
 
-    <?php
     // In Group.php
     public $hasMany = 'User';
     // In User.php
@@ -82,7 +80,6 @@ Voyons comme définir la variable $displayField dans la classe des users,
 afin que le prénom soit montré en lieu et place de l'unique identifiant. 
 Cette astuce permet de rendre le scaffolding plus lisible dans de nombreux cas::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $displayField = 'first_name';
@@ -100,7 +97,6 @@ d'administration.
 Une fois que vous avez activé le routage admin, assignez votre préfixe 
 d'administration à la variable de scaffolding::
 
-    <?php
     public $scaffold = 'admin';
 
 Vous serez maintenant capable d'accéder aux actions scaffoldées ::
@@ -118,7 +114,6 @@ dans la partie non-admin en même temps. Comme avec le scaffolding normal,
 vous pouvez surcharger les méthodes individuelles et les remplacer par
 vos propres méthodes::
     
-    <?php
     public function admin_view($id = null) {
       // du code ici
     }
