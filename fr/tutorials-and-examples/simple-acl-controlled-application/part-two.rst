@@ -141,9 +141,12 @@ Notre application est désormais sous contrôle d'accès, et toute tentative
 d'accès à des pages non publiques vous redirigera vers la page de connexion. 
 Cependant, vous devrez créer une vue login avant que quelqu'un puisse se 
 connecter. Ajoutez ce qui suit à ``app/View/Users/login.ctp`` si vous 
-ne l'avez pas déjà fait::
+ne l'avez pas déjà fait:
+
+.. code-block:: php
 
     <h2>Connexion</h2>
+    <?php
     echo $this->Form->create('User', array('url' => array('controller' => 'users', 'action' => 'login')));
     echo $this->Form->input('User.nom_user');
     echo $this->Form->input('User.mot_de_passe');

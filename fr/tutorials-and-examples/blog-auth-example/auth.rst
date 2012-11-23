@@ -131,7 +131,9 @@ de génération de code fournis avec CakePHP::
 
 De la même façon, nous avons crée les vues pour nos posts de blog ou en 
 utilisant l'outil de génération de code, nous exécutons les vues. Dans 
-le cadre de ce tutoriel, nous allons juste montrer le add.ctp::
+le cadre de ce tutoriel, nous allons juste montrer le add.ctp:
+
+.. code-block:: php
 
     <!-- app/View/Users/add.ctp -->
     <div class="users form">
@@ -237,7 +239,9 @@ Le hash du mot de passe n'est pas encore fait, ouvrez votre fichier de modèle
 Ainsi, maintenant à chaque fois qu'un user est sauvegardé, le mot de 
 passe est hashé en utilisant le hashing fourni par défaut par la classe 
 AuthComponent. Il nous manque juste un fichier template de vue pour la 
-fonction de connexion, et le voilà::
+fonction de connexion, et le voilà:
+
+.. code-block:: php
 
     <div class="users form">
     <?php echo $this->Session->flash('auth'); ?>

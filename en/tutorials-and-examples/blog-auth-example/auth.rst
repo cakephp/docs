@@ -128,7 +128,9 @@ with CakePHP::
 
 In the same way we created the views for our blog posts or by using the code
 generation tool, we implement the views. For the purpose of this tutorial, we
-will show just the add.ctp::
+will show just the add.ctp:
+
+.. code-block:: php
 
     <!-- app/View/Users/add.ctp -->
     <div class="users form">
@@ -229,7 +231,9 @@ and add the following::
 
 So, now every time a user is saved, the password is hashed using the default hashing
 provided by the AuthComponent class. We're just missing a template view file for
-the login function, here it is::
+the login function, here it is:
+
+.. code-block:: php
 
     <div class="users form">
     <?php echo $this->Session->flash('auth'); ?>

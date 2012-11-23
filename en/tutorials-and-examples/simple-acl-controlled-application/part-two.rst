@@ -136,9 +136,12 @@ Our application is now under access control, and any attempt to
 view non-public pages will redirect you to the login page. However,
 we will need to create a login view before anyone can login. Add
 the following to ``app/View/Users/login.ctp`` if you haven't done
-so already::
+so already:
+
+.. code-block:: php
 
     <h2>Login</h2>
+    <?php
     echo $this->Form->create('User', array('url' => array('controller' => 'users', 'action' => 'login')));
     echo $this->Form->input('User.username');
     echo $this->Form->input('User.password');

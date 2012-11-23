@@ -128,7 +128,9 @@ básica `cozida` usando o ferramenta de geração de códigos presente no CakePH
 
 Da mesma forma criamos as views para nossos posts no blog ou usando a ferramanta
 de geração de código, nós implementamos as views. Para o propósito de nosso tutorial, iremos
-mostrar somente o add.ctp::
+mostrar somente o add.ctp:
+
+.. code-block:: php
 
     <!-- app/View/Users/add.ctp -->
     <div class="users form">
@@ -225,7 +227,9 @@ e adicione o seguinte::
     // ...
 
 Então, agora toda vez que um usuário for salvo, a senha será  encriptada usando o hashing padrão disponibilizado pela
-classe AuthComponent. Está faltando somente um arquivo view para a função de login, Aqui está ele::
+classe AuthComponent. Está faltando somente um arquivo view para a função de login, Aqui está ele:
+
+.. code-block:: php
 
     <div class="users form">
     <?php echo $this->Session->flash('auth'); ?>
