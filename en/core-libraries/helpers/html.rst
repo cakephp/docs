@@ -538,7 +538,7 @@ methods of the HtmlHelper and how to use them.
        array of strings for multiple files.
     :param array $options: An array of :term:`html attributes`.
 
-    Include a script file(s). If key ``inline`` is set to false in $options, the
+    Include a script file(s), contained either locally or as a remote url. If key ``inline`` is set to false in $options, the
     script tags are added to the ``script`` block which you can print inside the
     head tag of the document. ``$options['once']`` controls, whether or
     not you want to include this script once per request or more than
@@ -552,7 +552,7 @@ methods of the HtmlHelper and how to use them.
 
     This method of javascript file inclusion assumes that the
     javascript file specified resides inside the ``/app/webroot/js``
-    directory.::
+    directory::
 
         echo $this->Html->script('scripts');
 
@@ -566,6 +566,16 @@ methods of the HtmlHelper and how to use them.
     that are not in ``app/webroot/js``::
 
         echo $this->Html->script('/otherdir/script_file');
+
+    You can also link to a remote URL::
+
+        echo $this->Html->script('http://code.jquery.com/jquery.min.js');
+
+    Will output:
+
+    .. code-block:: html
+
+        <script type="text/javascript" href="http://code.jquery.com/jquery.min.js"></script>
 
     The first parameter can be an array to include multiple files.::
 
