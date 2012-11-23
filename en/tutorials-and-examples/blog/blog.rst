@@ -1,5 +1,5 @@
 Blog Tutorial
-#############
+*************
 
 Welcome to CakePHP. You're probably checking out this tutorial
 because you want to learn more about how CakePHP works. It's our

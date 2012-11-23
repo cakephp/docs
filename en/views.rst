@@ -421,7 +421,7 @@ Elements live in the ``/app/View/Elements/`` folder, and have the .ctp
 filename extension. They are output using the element method of the
 view::
 
-    <?php echo $this->element('helpbox'); ?>
+    echo $this->element('helpbox');
 
 Passing Variables into an Element
 ---------------------------------
@@ -513,7 +513,7 @@ cache parameter. If set to true, it will cache the element in the
 should be used. See :doc:`/core-libraries/caching` for more information on
 configuring :php:class:`Cache`. A simple example of caching an element would be::
 
-    <?php echo $this->element('helpbox', array(), array('cache' => true)); ?>
+    echo $this->element('helpbox', array(), array('cache' => true));
 
 If you render the same element more than once in a view and have
 caching enabled be sure to set the 'key' parameter to a different
@@ -546,7 +546,7 @@ Requesting Elements from a Plugin
 
 To load an element from a plugin, use the `plugin` option (moved out of the `data` option in 1.x)::
 
-    <?php echo $this->element('helpbox', array(), array('plugin' => 'Contacts'));
+    echo $this->element('helpbox', array(), array('plugin' => 'Contacts'));
 
 2.1
 ---
