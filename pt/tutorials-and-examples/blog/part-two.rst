@@ -14,7 +14,6 @@ Os arquivos de classe do tipo model do CakePHP ficam em ``/app/Model`` e o
 arquivo que iremos criar será salvo em ``/app/Model/Post.php``. O conteúdo
 completo deste arquivo deve ficar assim::
 
-    <?php
     
     class Post extends AppModel {
         public $name = 'Post';
@@ -47,7 +46,6 @@ nossos posts. Vamos pôr este novo controller num arquivo chamado
 ``PostsController.php`` dentro do diretório ``/app/Controller``. Aqui está como
 um controller básico deve se parecer::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array ('Html','Form');
         public $name = 'Posts';
@@ -59,7 +57,6 @@ usuários acessarem o endereço www.exemplo.com/posts/index (que, neste caso é 
 mesmo que www.exemplo.com/posts/), eles esperam ver a listagem dos posts. O
 código para tal ação deve se parecer com algo assim::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array ('Html','Form');
         public $name = 'Posts';
@@ -211,7 +208,6 @@ deu errado ou então você já tinha definido uma action anteriormente, e neste
 caso, você é muito afoito. Se não, vamos criá-la em nosso PostsController
 agora::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
         public $name = 'Posts';
@@ -257,7 +253,6 @@ precisamos permitir também que os usuários adicionem novos posts.
 
 Primeiramente, comece criando uma action ``add()`` no PostsController::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
         public $name = 'Posts';
@@ -332,7 +327,6 @@ Aqui está nossa view add::
     <!-- File: /app/View/Posts/add.ctp -->   
     
     <h1>Add Post</h1>
-    <?php
     echo $this->Form->create('Post');
     echo $this->Form->input('title');
     echo $this->Form->input('body', array('rows' => '3'));
@@ -372,7 +366,6 @@ Você pode estar imaginando: como eu informo ao CakePHP sobre os requisitos de
 validação de meus dados? Regras de validação são definidas no model. Vamos olhar
 de volta nosso model Post e fazer alguns pequenos ajustes::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
     
@@ -409,7 +402,6 @@ CakePHP, então você deve ter identificado um padrão. Criar a action e então
 criar a view. Aqui está como o código da action ``edit()`` do PostsController
 deve se parecer::
 
-    <?php
     
     function edit($id = null) {
         $this->Post->id = $id;
@@ -434,7 +426,6 @@ A view edit pode ser algo parecido com isto::
     <!-- File: /app/View/Posts/edit.ctp -->
     
     <h1>Edit Post</h1>
-    <?php
         echo $this->Form->create('Post', array('action' => 'edit'));
         echo $this->Form->input('title');
         echo $this->Form->input('body', array('rows' => '3'));
@@ -494,7 +485,6 @@ Deletando Posts
 A seguir, vamos criar uma maneira para os usuários excluírem posts. Comece com
 uma action ``delete()`` no PostsController::
 
-    <?php
     function delete($id) {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
@@ -582,14 +572,12 @@ As rotas do Cake são encontrada no arquivo ``/app/Config/routes.php``. Você va
 querer comentar ou remover a linha que define a rota raiz padrão. Ela se parece
 com::
 
-    <?php
     Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
 Esta linha conecta a URL '/' com a home page padrão do CakePHP. Queremos
 conectá-la com nosso próprio controller, então adicionamos uma linha parecida
 com isto::
 
-    <?php
     Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 
 Isto deve conectar as requisições de '/' à action ``index()`` que criaremos em

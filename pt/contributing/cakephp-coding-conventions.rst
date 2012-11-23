@@ -17,7 +17,6 @@ Um tab é usado para a indentação.
 
 Dessa forma, o código deve ser algo parecido com isto::
 
-    <?php
     // base level
         // level 1
             // level 2
@@ -26,7 +25,6 @@ Dessa forma, o código deve ser algo parecido com isto::
 
 Ou::
 
-    <?php
     $booleanVariable = true;
     $stringVariable = "moose";
     if ($booleanVariable) {
@@ -85,7 +83,6 @@ Ternários mais longos devem ser divididos em uma instrução ``if else``. Você
 aninhar operadores ternários. Opcionalmente, parênteses podem ser utilizados em 
 volta da condição de verificação do ternário para dar mais clareza::
 
-    <?php
     //Good, simple and readable
     $variable = isset($options['variable']) ? $options['variable'] : true;
 
@@ -163,7 +160,6 @@ As tags PhpDoc são bem parecidas com as tags JavaDoc em Java. As tags
 só são processadas se elas forem a primeira coisa a aparecer numa linha 
 de um bloco de documentação. Por exemplo::
 
-    <?php
     /**
      * Tag example.
      * @author this tag is parsed, but this @version is ignored
@@ -209,7 +205,6 @@ Metódos
 
 Escreva todos os metódos em camelBack::
 
-    <?php
     function longFunctionName() {
     }
 
@@ -218,7 +213,6 @@ Classes
 
 Nome de Classes devem ser escritar em CamelCase, por exemplo::
 
-    <?php
     class ExampleClass {
     }
 
@@ -231,7 +225,6 @@ por mais de uma palavra. Variáveis que contenham objetos devem iniciar com uma 
 e estar associadas de alguma maneira ao nome da classe a que o objeto pertence. 
 Por exemplo::
 
-    <?php
     $user = 'John';
     $users = array('John', 'Hans', 'Arne');
 
@@ -243,7 +236,6 @@ Visibilidade de Membros
 Use private e protected para metódos e variáveis. Em adicional, metódos ou variáveis
 protected começa com um underscore("\_"). Exemplo::
 
-    <?php
     class A {
         protected $_iAmAProtectedVariable;
 
@@ -254,7 +246,6 @@ protected começa com um underscore("\_"). Exemplo::
 
 Métodos ou variáveis private começa com dois underscore ("\_\_"). Exemplo::
 
-    <?php
     class A {
         private $__iAmAPrivateVariable;
 
@@ -269,7 +260,6 @@ Métodos Encadeados
 
 Métodos encadeados devem ser chamandos em múltiplas linhas e indentado com um tab::
 
-    <?php
     $email->from('foo@example.com')
         ->to('bar@example.com')
         ->subject('A great message')
@@ -333,12 +323,10 @@ Contantes devem ser definidas em letras maiúsculas:
 
 ::
 
-    <?php
     define('CONSTANT', 1);
 
 Se você escolher o nome de uma constante com múltiplas palavras, elas devem ser separadas por um caracter underscore. Por exemplo:
 
 ::
 
-    <?php
     define('LONG_NAMED_CONSTANT', 2);

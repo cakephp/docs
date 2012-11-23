@@ -27,7 +27,6 @@ app/Config/bootstrap.php.
 
 Você pode carregá-los um por um ou todos eles em uma única chamada:: 
 
-    <?php
     CakePlugin::loadAll(); // Carrega todos os plugins de uma vez
     CakePlugin::load('ContactManager'); // Carrega um único plugin
 
@@ -44,7 +43,6 @@ plugins.
 
 Sem problema::
 
-    <?php
     CakePlugin::loadAll(array(
         'Blog' => array('routes' => true),
         'ContactManager' => array('bootstrap' => true),
@@ -63,7 +61,6 @@ que se aplicará a cada plugin que não tem uma configuração mais específica.
 
 Carrega o arquivo bootstrap de todos os plugins, e as rotas do plugin Blog::
     
-    <?php
     CakePlugin::loadAll(array(
         array('bootstrap' => true),
         'Blog' => array('routes' => true)
@@ -95,13 +92,11 @@ Por exemplo, digamos que você queira usar o ContactInfoHelper do plugin
 CantactManager para a saída de algumas informações de contato em uma de suas
 views. Em seu controller, seu array $helpers poderia ser assim::
 
-    <?php
     public $helpers = array('ContactManager.ContactInfo');
 
 Você então será capaz de acessar o ContactInfoHelper como qualquer outro 
 helper em sua view, tal como::
 
-    <?php
     echo $this->ContactInfo->address($contact);
 
 
@@ -145,14 +140,12 @@ sua aplicação pode, como Config, Console, Lib, webroot, etc.
 
 ::
 
-    <?php
     // /app/Plugin/ContactManager/Controller/ContactManagerAppController.php:
     class ContactManagerAppController extends AppController {
     }
 
 ::
 
-    <?php
     // /app/Plugin/ContactManager/Model/ContactManagerAppModel.php:
     class ContactManagerAppModel extends AppModel {
     }
@@ -188,7 +181,6 @@ plugin.
 Então, nós colocamos nosso novo ContactsController em
 /app/Plugin/ContactManager/Controller e deve se parecer com isso::
 
-    <?php
     // app/Plugin/ContactManager/Controller/ContactsController.php
     class ContactsController extends ContactManagerAppController {
         public $uses = array('ContactManager.Contact');
@@ -226,7 +218,6 @@ Models para plugins são armazenados em /app/Plugin/ContactManager/Model.
 Nós já definimos um ContactsController para este plugin, então vamos 
 criar o model para o controller, chamado Contact::
 
-    <?php
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
     }
@@ -244,7 +235,6 @@ Vamos criar na próxima.
 	
 Por exemplo::
 
-    <?php
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
         public $hasMany = array('ContactManager.AltName');
@@ -253,7 +243,6 @@ Por exemplo::
 Se você preferir que as chaves do array para associação não tenha o 
 prefixo do plugin nelas, use uma sintaxe alternativa::
 
-    <?php
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
             public $hasMany = array(
@@ -351,7 +340,6 @@ Referindo-se ao seu componente de dentro ou fora do seu plugin, exige
 somente que o nome do plugin esteja prefixado antes do nome do 
 componente. Por exemplo::
 
-    <?php
     // Componente definido no plugin 'ContactManager'
     class ExampleComponent extends Component {
     }
@@ -367,7 +355,6 @@ A mesma técnica se aplica aos Helpers e Behaviors.
     automaticamente. Você deve declarar os recursos que precisar com 
     Uses::
 	
-        <?php
         // Declare o uso do AppHelper para seu Helper Plugin
         App::uses('AppHelper', 'View/Helper');
 

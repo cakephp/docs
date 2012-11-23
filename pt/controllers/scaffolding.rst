@@ -37,7 +37,6 @@ e views padronizadas para visualização de um único registro da base de dados.
 Para adicionar o recurso de `scaffold` à sua aplicação, no controller, adicione
 o atributo ``$scaffold``::
 
-    <?php
     
     class CategoriesController extends AppController {
         public $scaffold;
@@ -83,7 +82,6 @@ Em muitos casos, este recurso torna o `scaffold` mais legível.
 
 ::
 
-    <?php
 
     class User extends AppModel {
         public $name = 'User';
@@ -117,7 +115,6 @@ rapidamente. Tenha em mente que você não pode ter ambos os métodos de scaffol
 um para admin e outro para não-admin ao mesmo tempo. Assim como em um `scaffold` 
 normal você pode sobrescrever um método individual com seu próprio código::
     
-    <?php
     function admin_view($id = null) {
       // código customizado aqui
     }
