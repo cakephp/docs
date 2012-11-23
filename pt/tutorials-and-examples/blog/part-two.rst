@@ -151,7 +151,9 @@ formato parecido com este::
 Os arquivos de view do Cake são armazenados na pasta ``/app/View`` dentro de uma
 pasta com o mesmo nome do controller a que correspondem (em nosso caso, vamos
 criar uma pasta chamada 'Posts'). Para apresentar os dados do post num formato
-adequado de tabela, o código de nossa view deve ser algo como::
+adequado de tabela, o código de nossa view deve ser algo como:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
     
@@ -232,7 +234,9 @@ usuário acessar uma URL /posts/view/3, então o valor '3' será atribuído ao
 parâmetro ``$id``.
 
 Agora vamos criar a view para nossa nova action 'view' e colocá-la em
-``/app/View/Posts/view.ctp``::
+``/app/View/Posts/view.ctp``:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/view.ctp -->
     
@@ -322,18 +326,23 @@ Para usufruir das vantagens dos recursos de validação, você vai precisar usar
 FormHelper do Cake em suas views. O :php:class:`FormHelper` está disponível por
 padrão em todas as suas views na variável ``$this->Form``.
 
-Aqui está nossa view add::
+Aqui está nossa view add:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/add.ctp -->   
     
     <h1>Add Post</h1>
+    <?php
     echo $this->Form->create('Post');
     echo $this->Form->input('title');
     echo $this->Form->input('body', array('rows' => '3'));
     echo $this->Form->end('Save Post');
 
 Aqui, usamos o FormHelper para gerar a tag de abertura para um formulário. Aqui
-está o HTML gerado pelo ``$this->Form->create()``::
+está o HTML gerado pelo ``$this->Form->create()``:
+
+.. code-block:: html
 
     <form id="PostAddForm" method="post" action="/posts/add">
 
@@ -360,7 +369,7 @@ Agora vamos voltar e atualizar nossa view ``/app/View/Post/index.ctp`` para
 incluir um novo link para "Adicionar Post". Antes de <table>, adicione a
 seguinte linha::
 
-    <?php echo $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add')); ?>
+    echo $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add'));
 
 Você pode estar imaginando: como eu informo ao CakePHP sobre os requisitos de
 validação de meus dados? Regras de validação são definidas no model. Vamos olhar
@@ -421,11 +430,14 @@ provavelmente esta contém dados de um formulário POST. Nós usaremos estes dad
 para atualizar o registro do nosso Post ou exibir novamente a view mostrando
 para o usuário os erros de validação.
 
-A view edit pode ser algo parecido com isto::
+A view edit pode ser algo parecido com isto:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/edit.ctp -->
     
     <h1>Edit Post</h1>
+    <?php
         echo $this->Form->create('Post', array('action' => 'edit'));
         echo $this->Form->input('title');
         echo $this->Form->input('body', array('rows' => '3'));
@@ -442,7 +454,9 @@ assumir que você está inserindo um novo model quando o método ``save()`` for
 chamado.
 
 Você agora pode atualizar sua view index com os links para editar os posts
-específicos::
+específicos:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp  (links para edição adicionados) -->
 
@@ -510,7 +524,9 @@ action não tem uma view. Você pode querer atualizar sua view index com links q
 permitam ao usuários excluir posts, porém, como um link executa uma requisição
 do tipo GET, nossa action irá lançar uma exceção. Precisamos então criar um
 pequeno formulário que enviará um método POST adequado. Para estes casos o
-helper FormHelper fornece o método ``postLink()``::
+helper FormHelper fornece o método ``postLink()``:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
     
