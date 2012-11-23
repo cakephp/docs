@@ -170,7 +170,6 @@ vete a la línea 203 del fichero ``/app/Config/core.php`` y verás algo así:
 
 ::
 
-    <?php
     /**
      * A random string used in security hashing methods.
      */
@@ -183,7 +182,6 @@ qué numero pongas, que sea difícil de adivinar.
 
 ::
 
-    <?php
     /**
      * A random numeric string (digits only) used to encrypt/decrypt strings.
      */
@@ -250,7 +248,6 @@ Si no puedes (o no quieres) configurar mod\_rewrite o algún otro módulo
 compatible, necesitarás activar las url amigables en CakePHP. En el fichero
 ``/app/Config/core.php``, quita el comentario a la línea::
 
-    <?php
     Configure::write('App.baseUrl', env('SCRIPT_NAME'));
 
 Borra también los ficheros .htaccess que ya no serán necesarios::

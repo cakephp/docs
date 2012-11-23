@@ -12,7 +12,6 @@ Los ficheros en los que se definen los modelos se ubican en la carpeta
 ``/app/Model``, y el fichero que vamos a crear debe guardarse en la ruta
 ``/app/Model/Post.php``. El contenido de este ficheró será::
 
-        <?php
 
         class Post extends AppModel {
                 public $name = 'Post';
@@ -60,7 +59,6 @@ defecto de cada controlador es index por convención) esperan ver un listado de
 
 ::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array ('Html','Form');
     
@@ -215,7 +213,6 @@ ya que esa acción no está definida y debería mostrar la página de error
 correspondiente. Cosa muy rara.
 Creemos esta acción para evitar el error::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
         public $name = 'Posts';
@@ -267,7 +264,6 @@ Lo primero, añadir una nueva acción ``add()`` en nuestro controlador PostsCont
 
 ::
 
-    <?php
     class PostsController extends AppController {
         public $name = 'Posts';
         public $components = array('Session');
@@ -343,7 +339,6 @@ Nuestra vista sería así
     <!-- File: /app/View/Posts/add.ctp -->   
         
     <h1>Add Post</h1>
-    <?php
     echo $this->Form->create('Post');
     echo $this->Form->input('title');
     echo $this->Form->input('body', array('rows' => '3'));
@@ -390,7 +385,6 @@ Abre el modelo Post y vamos a escribir allí algunas reglas sencillas :
 
 ::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
     
@@ -426,7 +420,6 @@ Aquí está el método edit():
 
 ::
 
-    <?php
     function edit($id = null) {
         $this->Post->id = $id;
         if ($this->request->is('get')) {
@@ -453,7 +446,6 @@ La vista quedará así:
     <!-- File: /app/View/Posts/edit.ctp -->
         
     <h1>Edit Post</h1>
-    <?php
         echo $this->Form->create('Post', array('action' => 'edit'));
         echo $this->Form->input('title');
         echo $this->Form->input('body', array('rows' => '3'));
@@ -514,7 +506,6 @@ nuestro controlador:
 
 ::
 
-    <?php
     function delete($id) {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
@@ -599,7 +590,6 @@ primero la regla de la que hemos hablado:
 
 ::
 
-    <?php
     Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
 Como habíamos dicho, esta regla conecta la URL '/' con el controlador 'pages' la
@@ -608,7 +598,6 @@ regla por esta otra:
 
 ::
 
-  <?php
     Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 
 Ahora la URL '/' nos llevará al controlador 'posts' y la acción 'index'.

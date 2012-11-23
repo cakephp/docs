@@ -38,7 +38,6 @@ será accesible internamente. Por ejemplo:
 
 ::
 
-    <?php
     class NewsController extends AppController {
     
         function latest() {
