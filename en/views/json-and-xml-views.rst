@@ -20,7 +20,7 @@ Before you can use the data view classes, you'll need to do a bit of setup:
 
 #. Enable the json and or xml extensions with
    :php:meth:`Router::parseExtensions()`.  This will enable Router to handle
-   mulitple extensions.
+   multiple extensions.
 #. Add the :php:class:`RequestHandlerComponent` to your controller's list of
    components.  This will enable automatic view class switching on content
    types. You can also set the component up with the ``viewClassMap`` setting,
