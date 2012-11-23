@@ -140,7 +140,7 @@ le cadre de ce tutoriel, nous allons juste montrer le add.ctp:
     <?php echo $this->Form->create('User');?>
         <fieldset>
             <legend><?php echo __('Ajouter User'); ?></legend>
-            echo $this->Form->input('nom_user');
+            <?php echo $this->Form->input('nom_user');
             echo $this->Form->input('mot_de_passe');
             echo $this->Form->input('role', array(
                 'options' => array('admin' => 'Admin', 'auteur' => 'Auteur')
@@ -248,7 +248,7 @@ fonction de connexion, et le voilà:
     <?php echo $this->Form->create('User');?>
         <fieldset>
             <legend><?php echo __('Merci de rentrer votre nom d\'user et mot de passe'); ?></legend>
-            echo $this->Form->input('nom_user');
+            <?php echo $this->Form->input('nom_user');
             echo $this->Form->input('mot_de_passe');
         ?>
         </fieldset>
