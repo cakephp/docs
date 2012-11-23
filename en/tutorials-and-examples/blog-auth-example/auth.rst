@@ -137,7 +137,7 @@ will show just the add.ctp:
     <?php echo $this->Form->create('User'); ?>
         <fieldset>
             <legend><?php echo __('Add User'); ?></legend>
-            echo $this->Form->input('username');
+            <?php echo $this->Form->input('username');
             echo $this->Form->input('password');
             echo $this->Form->input('role', array(
                 'options' => array('admin' => 'Admin', 'author' => 'Author')
@@ -240,7 +240,7 @@ the login function, here it is:
     <?php echo $this->Form->create('User'); ?>
         <fieldset>
             <legend><?php echo __('Please enter your username and password'); ?></legend>
-            echo $this->Form->input('username');
+            <?php echo $this->Form->input('username');
             echo $this->Form->input('password');
         ?>
         </fieldset>
