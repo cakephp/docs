@@ -30,7 +30,6 @@
 требуют конфигурации. Конфигурация для этих компонентов и компонентов в целом обычно делается в
 ``$components`` массиве или в вашем методе контроллера ``beforeFilter()``::
 
-    <?php
     class PostsController extends AppController {
         public $components = array(
             'Auth' => array(
@@ -48,7 +47,6 @@ method. This is useful when you need to assign the results of a
 function to a component property. The above could also be expressed
 as::
 
-    <?php
     public function beforeFilter() {
         $this->Auth->authorize = array('controller');
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
@@ -61,7 +59,6 @@ configuration options to be set before the controller's
 ``beforeFilter()`` is run. To this end, some components allow
 configuration options be set in the ``$components`` array::
 
-    <?php
     public $components = array('DebugKit.Toolbar' => array('panels' => array('history', 'session')));
 
 Consult the relevant documentation to determine what configuration
@@ -76,7 +73,6 @@ controller.  If you had loaded up the :php:class:`SessionComponent` and
 the :php:class:`CookieComponent` in your controller, you could access
 them like so::
 
-    <?php
     class PostsController extends AppController {
         public $components = array('Session', 'Cookie');
         
@@ -101,7 +97,6 @@ In situations like this you can load a component at runtime using the
 :doc:`Component Collection </core-libraries/collections>`.  From inside a
 controller you can do the following::
     
-    <?php
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
 
@@ -125,7 +120,6 @@ The first step is to create a new component file and class. Create
 the file in ``/app/Controller/Component/MathComponent.php``. The basic
 structure for the component would look something like this::
 
-    <?php
     class MathComponent extends Component {
         function doComplexOperation($amount1, $amount2) {
             return $amount1 + $amount2;
@@ -146,7 +140,6 @@ part) in the controller's ``$components`` array. The controller will
 automatically be given a new attribute named after the component,
 through which we can access an instance of it::
 
-    <?php
     /* Make the new component available at $this->Math,
     as well as the standard $this->Session */
     public $components = array('Math', 'Session');
@@ -160,7 +153,6 @@ set of parameters that will be passed on to the Component's
 constructor. These parameters can then be handled by
 the Component::
 
-    <?php
     public $components = array(
         'Math' => array(
             'precision' => 2,
@@ -183,7 +175,6 @@ Sometimes one of your components may need to use another component.
 In this case you can include other components in your component the exact same
 way you include them in controllers - using the ``$components`` var::
 
-    <?php
     // app/Controller/Component/CustomComponent.php
     class CustomComponent extends Component {
         // the other component your component uses

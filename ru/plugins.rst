@@ -28,7 +28,6 @@ CakePHP позволяет настроить комбинацию контро�
 
 Вы можете подключать их как по одному, так и все сразу::
 
-    <?php
     CakePlugin::loadAll(); // Загружает все плагины
     CakePlugin::load('ContactManager'); //Загружает один плагин
 
@@ -44,7 +43,6 @@ loadAll() загружает все доступные плагины и поз�
 
 Без проблем::
 
-    <?php
     CakePlugin::loadAll(array(
         'Blog' => array('routes' => true),
         'ContactManager' => array('bootstrap' => true),
@@ -62,7 +60,6 @@ include() или require() настроек или маршрутизации п
 Например, чтобы загрузить файлы bootstrap для всех плагинов и маршрутизацию
 для плагина Blog необходимо::
     
-    <?php
     CakePlugin::loadAll(array(
         array('bootstrap' => true),
         'Blog' => array('routes' => true)
@@ -98,13 +95,11 @@ include() или require() настроек или маршрутизации п
 В таком случае в контроллере массив $helpers приобретет 
 следующий вид::
 
-    <?php
     public $helpers = array('ContactManager.ContactInfo');
 
 После этого к помошнику можно обращаться, как и к другим помошникам
 в представлении::
 
-    <?php
     echo $this->ContactInfo->address($contact);
 
 
@@ -149,14 +144,12 @@ include() или require() настроек или маршрутизации п
 ::
 
     // /app/Plugin/ContactManager/Controller/ContactManagerAppController.php:
-    <?php
     class ContactManagerAppController extends AppController {
     }
 
 ::
 
     // /app/Plugin/ContactManager/Model/ContactManagerAppModel.php:
-    <?php
     class ContactManagerAppModel extends AppModel {
     }
 
@@ -191,7 +184,6 @@ URL, CakePHP будет выдавать ошибку "Missing Controller", по
 Итак, мы размещаем новый ContactsController в
 /app/Plugin/ContactManager/Controller с кодом::
 
-    <?php
     // /app/Plugin/ContactManager/Controller/ContactsController.php
     class ContactsController extends ContactManagerAppController {
         public $uses = array('ContactManager.Contact');
@@ -228,7 +220,6 @@ URL, CakePHP будет выдавать ошибку "Missing Controller", по
 Мы уже создали ContactsController, теперь сделаем
 модель Contact для этого контроллера::
 
-    <?php
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
     }
@@ -244,7 +235,6 @@ URL, CakePHP будет выдавать ошибку "Missing Controller", по
 
 Например::
 
-    <?php
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
         public $hasMany = array('ContactManager.AltName');
@@ -253,7 +243,6 @@ URL, CakePHP будет выдавать ошибку "Missing Controller", по
 Если вы не желаете, чтобы ключи массивов связанной модели содержали
 префикс с именем плагина, используйте альтернативный синтаксис::
 
-    <?php
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
             public $hasMany = array(
@@ -344,7 +333,6 @@ mime-тип статического контента.
 Обращение к компоненту из плагина или из приложения требует только
 наличия префикса имени плагина. Например::
 
-    <?php
     // Компонент определенный в плагине 'ContactManager'
     class ExampleComponent extends Component {
     }
@@ -359,7 +347,6 @@ mime-тип статического контента.
     При создании помощников класс AppHelper не доступен. Вы должны подключить
     его с помощью App::uses::
     
-        <?php
         // Подключение AppHelper для помощника плагина
         App::uses('AppHelper', 'View/Helper');
 

@@ -36,7 +36,6 @@ RecipesController и/или IngredientsController, которые будут у�
 в ядро CakePHP. AppController который может быть определен в 
 ``/app/Controller/AppController.php``. Определение класса::
 
-    <?php
     class AppController extends Controller {
     }
 
@@ -68,7 +67,6 @@ RecipesController и/или IngredientsController, которые будут у�
 Также, помните, не забудьте вызывать обратные вызовы(callbacks) AppController в обратном вызове в дочернем
 контроллере для правильной работы сценария::
 
-    <?php
     function beforeFilter() {
         parent::beforeFilter();
     }
@@ -88,7 +86,6 @@ RecipesController и/или IngredientsController, которые будут у�
 Вернемся к нашему примеру с онлайн пекарней. Наш RecipesController может содержать
 ``view()``, ``share()``, и ``search()`` экшены. Это выглядит так::
 
-        <?php
         
         # /app/Controller/RecipesController.php
         
@@ -168,7 +165,6 @@ CakePHP API - `http://api20.cakephp.org/class/controller <http://api20.cakephp.o
     в представление. Когда вы используете ``set()``, то появляется возможность
     использовать эту переменную в представлении::
 
-        <?php
         // Для начала, передадим данные из контроллера:
 
         $this->set('color', 'pink');
@@ -187,7 +183,6 @@ CakePHP API - `http://api20.cakephp.org/class/controller <http://api20.cakephp.o
         
     ::
 
-        <?php
         $data = array(
             'color' => 'pink',
             'type' => 'sugar',
@@ -202,7 +197,6 @@ CakePHP API - `http://api20.cakephp.org/class/controller <http://api20.cakephp.o
     Аттрибут ``$pageTitle`` больше не существует. Используйте ``set()`` to set
     the title::
 
-        <?php
         $this->set('title_for_layout', 'Это заголовок страницы');
 
 
@@ -217,7 +211,6 @@ CakePHP API - `http://api20.cakephp.org/class/controller <http://api20.cakephp.o
     Дефолтный файл представления определяется по соглашению.
     Для экшена ``search()`` контроллера RecipesController будет отоьражен фаил передставления::
 
-        <?php
         // /app/View/Recipes/search.ctp
         class RecipesController extends AppController {
         // ...
@@ -238,7 +231,6 @@ CakePHP API - `http://api20.cakephp.org/class/controller <http://api20.cakephp.o
 	 какие файлы следует отобразить, что очень удобно, например, при работе с Ajax запросами.
  	 ::
 
-        <?php
         // Отображается элемент /View/Elements/ajaxreturn.ctp
         $this->render('/Elements/ajaxreturn');
 
@@ -253,7 +245,6 @@ CakePHP API - `http://api20.cakephp.org/class/controller <http://api20.cakephp.o
 от представлений по умолчанию. Вы можете сделать это вызвав ``render()`` в ручную.
 После вызова ``render()`` CakePHP не будет пытаться сделать повторный вызов ``render()`` ::
 
-    <?php
     class PostsController extends AppController {
         function my_action() {
             $this->render('custom_file');
@@ -273,7 +264,6 @@ CakePHP API - `http://api20.cakephp.org/class/controller <http://api20.cakephp.o
     CakePHP-relative URL. When a user has successfully placed an order,
     you might wish to redirect them to a receipt screen.::
 
-        <?php
         function placeOrder() {
             // Logic for finalizing order goes here
             if ($success) {
@@ -287,13 +277,11 @@ CakePHP API - `http://api20.cakephp.org/class/controller <http://api20.cakephp.o
 
     You can also use a relative or absolute URL as the $url argument::
 
-        <?php
         $this->redirect('/orders/thanks'));
         $this->redirect('http://www.example.com');
 
     You can also pass data to the action::
 
-        <?php
         $this->redirect(array('action' => 'edit', $id));
 
     The second parameter of ``redirect()`` allows you to define an HTTP
@@ -306,7 +294,6 @@ CakePHP API - `http://api20.cakephp.org/class/controller <http://api20.cakephp.o
 
     If you need to redirect to the referer page you can use::
 
-        <?php
         $this->redirect($this->referer());
 
 .. php:method:: flash(string $message, string $url, integer $pause, string $layout)
@@ -368,7 +355,6 @@ Other Useful Methods
     HTTP\_REFERER cannot be read from headers. So, instead of doing
     this::
 
-        <?php
         class UserController extends AppController {
             function delete($id) {
                 // delete code goes here, and then...
@@ -382,7 +368,6 @@ Other Useful Methods
 
     you can do this::
 
-        <?php
         class UserController extends AppController {
             function delete($id) {
                 // delete code goes here, and then...
@@ -421,7 +406,6 @@ Other Useful Methods
     to create a quick form based on the Order model. Then a controller action
     can use the data posted from that form to craft find conditions::
 
-        <?php
         function index() {
             $conditions = $this->postConditions($this->request->data);
             $orders = $this->Order->find('all', compact('conditions'));
@@ -436,7 +420,6 @@ Other Useful Methods
     If you want to use a different SQL operator between terms, supply them
     using the second parameter::
 
-        <?php
         /*
         Contents of $this->request->data
         array(
@@ -500,7 +483,6 @@ Other Useful Methods
     layout. First we need to create a controller function that will
     return the data::
 
-        <?php
         // Controller/CommentsController.php
         class CommentsController extends AppController {
             function latest() {
@@ -510,7 +492,6 @@ Other Useful Methods
 
     If we now create a simple element to call that function::
 
-        <?php
         // View/Elements/latest_comments.ctp
 
         $comments = $this->requestAction('/comments/latest');
@@ -521,7 +502,6 @@ Other Useful Methods
     We can then place that element anywhere to get the output
     using::
 
-        <?php
         echo $this->element('latest_comments');
 
     Written in this way, whenever the element is rendered, a request
@@ -530,7 +510,6 @@ Other Useful Methods
     above it's best to make use of element caching to prevent needless
     processing. By modifying the call to element to look like this::
 
-        <?php
         echo $this->element('latest_comments', array('cache' => '+1 hour'));
 
     The ``requestAction`` call will not be made while the cached
@@ -538,7 +517,6 @@ Other Useful Methods
 
     In addition, requestAction now takes array based cake style urls::
 
-        <?php
         echo $this->requestAction(
             array('controller' => 'articles', 'action' => 'featured'),
             array('return')
@@ -555,13 +533,11 @@ Other Useful Methods
     array will also be made available in the requested action's
     Controller::params array::
         
-        <?php
         echo $this->requestAction('/articles/featured/limit:3');
         echo $this->requestAction('/articles/view/5');
 
     As an array in the requestAction would then be::
 
-        <?php
         echo $this->requestAction(
             array('controller' => 'articles', 'action' => 'featured'),
             array('named' => array('limit' => 3))
@@ -590,7 +566,6 @@ Other Useful Methods
     which is not the controller's default model or its associated
     model::
     
-        <?php
         $this->loadModel('Article');
         $recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));
 
@@ -612,7 +587,6 @@ visit the CakePHP API. Check out
     primary model the controller uses. This property is not required,
     but saves CakePHP from inflecting it::
 
-        <?php
         // $name controller attribute usage example
         class RecipesController extends AppController {
            public $name = 'Recipes';
@@ -661,7 +635,6 @@ given by ``$helpers`` to the view as an object reference variable
     Let’s look at how to tell a CakePHP controller that you plan to use
     additional MVC classes::
 
-        <?php
         class RecipesController extends AppController {
             public $uses = array('Recipe', 'User');
             public $helpers = array('Js');
@@ -699,7 +672,6 @@ own sections in the manual.
     loads and configures the :php:class:`PaginatorComponent`.  It is recommended
     that you update your code to use normal component settings::
 
-        <?php
         class ArticlesController extends AppController {
             public $components = array(
                 'Paginator' => array(
