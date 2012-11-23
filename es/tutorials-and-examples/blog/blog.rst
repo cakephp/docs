@@ -174,7 +174,6 @@ vete a la línea 203 del fichero ``/app/Config/core.php`` y verás algo así:
      * A random string used in security hashing methods.
      */
     Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
-    ?>
 
 El número semilla se utiliza para encriptar y desencriptar cadenas. Cambia el
 valor por defecto en el ficharo ``/app/Config/core.php`` línea 208. No importa
@@ -186,7 +185,6 @@ qué numero pongas, que sea difícil de adivinar.
      * A random numeric string (digits only) used to encrypt/decrypt strings.
      */
     Configure::write('Security.cipherSeed', '7485712659625147843639846751');
-    ?>
 
 Para dar permisos al directorio ``app/Tmp``, la mejor forma es ver qué usuario
 está ejecutando el servidor web (``<?php echo `whoami`; ?>``) y cambiar el
