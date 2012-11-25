@@ -1,4 +1,3 @@
-/* @override http://localhost/cake_docs/build/html/en/_static/default.css */
 /*
  * default.css
  * ~~~~~~~~~~~~~
@@ -187,6 +186,9 @@ body {
 .headerlink {
 	display: none;
 }
+.staticattr:hover .headerlink,
+.attr:hover .headerlink,
+.staticmethod:hover .headerlink,
 .method:hover .headerlink,
 h1:hover .headerlink,
 h2:hover .headerlink,
