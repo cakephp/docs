@@ -13,7 +13,6 @@ Glossaire
         Un tableau de clé => valeurs qui sont composées dans les attributs 
         html. Par exemple::
             
-            <?php
             // Par exemple
             array('class' => 'ma-classe', '_target' => 'blank')
 
@@ -23,7 +22,6 @@ Glossaire
         Si une option peut être minimisée ou a le même nom que sa valeur, alors 
         ``true`` peut être utilisée::
         
-            <?php
             // Par exemple
             array('checked' => true)
             
@@ -74,4 +72,4 @@ Glossaire
 
 .. meta::
     :title lang=fr: Glossaire
-    :keywords lang=fr: attributs html,classe de tableau,tableau contrôleur,glossaire,cible blank,notation point,configuration du routing,contrefaçon,replay,routeur,syntaxe,config,soumissions
+    :keywords lang=fr: attributs html,classe de tableau,tableau controller,glossaire,cible blank,notation point,configuration du routing,contrefaçon,replay,routeur,syntaxe,config,soumissions

@@ -164,7 +164,6 @@ Parabéns! Você já está pronto para :doc:`criar sua primeira aplicação Cake
 Não está funcionando? Se você estiver recebendo erros do PHP relacionados ao
 fuso horário, descomente uma linha no app/Config/core.php::
 
-   <?php
    /**
     * Uncomment this line and correct your server timezone to fix 
     * any date & time related errors.

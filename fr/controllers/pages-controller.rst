@@ -1,23 +1,23 @@
-Le Contrôleur Pages
+Le Controller Pages
 ###################
 
-Le cœur de CakePHP est livré avec un contrôleur par défaut 
-``PagesController.php``. C'est un contrôleur simple et optionnel pour rendre 
+Le cœur de CakePHP est livré avec un controller par défaut 
+``PagesController.php``. C'est un controller simple et optionnel pour rendre 
 un contenu statique. La page d'accueil que vous voyez juste après 
-l'installation est d'ailleurs générée à l'aide de ce contrôleur. Ex : Si vous 
+l'installation est d'ailleurs générée à l'aide de ce controller. Ex : Si vous 
 écrivez un fichier de vue ``app/View/Pages/a_propos.ctp``, vous pouvez y 
-accéder en utilisant l'url ``http://example.com/pages/a_propos``. Vous pouvez 
-modifier le contrôleur Pages selon vos besoins.
+accéder en utilisant l'url ``http://exemple.com/pages/a_propos``. Vous pouvez 
+modifier le controller Pages selon vos besoins.
 
 Quand vous "cuisinez" une application avec l'utilitaire console de CakePHP, 
-le contrôleur Pages est copié dans votre dossier ``app/Controller/`` et vous 
+le controller Pages est copié dans votre dossier ``app/Controller/`` et vous 
 pouvez le modifier selon vos besoins. Ou vous pouvez simplement copier le 
 fichier à partir de 
 ``lib/Cake/Console/Templates/skel/Controller/PagesController.php``.
 
 .. versionchanged:: 2.1
-    Avec CakePHP 2.0, le contrôleur Pages était une partie de ``lib/Cake``. 
-    Depuis 2.1, le contrôleur Pages ne fait plus partie du coeur, mais se situe 
+    Avec CakePHP 2.0, le controller Pages était une partie de ``lib/Cake``. 
+    Depuis 2.1, le controller Pages ne fait plus partie du coeur, mais se situe 
     dans le dossier app.
 
 .. warning::
@@ -27,5 +27,5 @@ fichier à partir de
 
 
 .. meta::
-    :title lang=fr: Le Contrôleur Pages
-    :keywords lang=fr: contrôleur pages,contrôleur par défault,lib,cakephp,ships,php,fichier dossier
+    :title lang=fr: Le Controller Pages
+    :keywords lang=fr: controller pages,controller par défaut,lib,cakephp,ships,php,fichier dossier

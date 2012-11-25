@@ -58,7 +58,7 @@ data in it::
         name VARCHAR(255) DEFAULT '',
         PRIMARY KEY  (id)
     );
-    
+
     INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(1, 'My Categories', NULL, 1, 30);
     INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(2, 'Fun', 1, 2, 15);
     INSERT INTO `categories` (`id`, `name`, `parent_id`, `lft`, `rght`) VALUES(3, 'Sport', 2, 3, 8);
@@ -79,22 +79,18 @@ For the purpose of checking that everything is setup correctly, we
 can create a test method and output the contents of our category
 tree to see what it looks like. With a simple controller::
 
-    <?php
     class CategoriesController extends AppController {
-        public $name = 'Categories';
 
         public function index() {
             $data = $this->Category->generateTreeList(null, null, null, '&nbsp;&nbsp;&nbsp;');
-            debug($data); die;       
+            debug($data); die;
         }
     }
 
-and an even simpler model definition:::
+and an even simpler model definition::
 
-    <?php
     // app/Model/Category.php
     class Category extends AppModel {
-        public $name = 'Category';
         public $actsAs = array('Tree');
     }
 
@@ -103,29 +99,29 @@ We can check what our category tree data looks like by visiting
 
 
 -  My Categories
-   
+
    -  Fun
-      
+
       -  Sport
-         
+
          -  Surfing
          -  Extreme knitting
 
       -  Friends
-         
+
          -  Gerald
          -  Gwendolyn
 
 
    -  Work
-      
+
       -  Reports
-         
+
          -  Annual
          -  Status
 
       -  Trips
-         
+
          -  National
          -  International
 
@@ -140,7 +136,6 @@ looked hierarchal via the method ``generateTreeList``. However,
 usually you would add your data in exactly the same way as you
 would for any model. For example::
 
-    <?php
     // pseudo controller code
     $data['Category']['parent_id'] = 3;
     $data['Category']['name'] = 'Skating';
@@ -151,7 +146,6 @@ set the parent\_id, and the tree behavior will take care of the
 rest. If you don't set the parent\_id, the tree behavior will add
 to the tree making your new addition a new top level entry::
 
-    <?php
     // pseudo controller code
     $data = array();
     $data['Category']['name'] = 'Other People\'s Categories';
@@ -162,30 +156,30 @@ follows:
 
 
 -  My Categories
-   
+
    -  Fun
-      
+
       -  Sport
-         
+
          -  Surfing
          -  Extreme knitting
          -  Skating **New**
 
       -  Friends
-         
+
          -  Gerald
          -  Gwendolyn
 
 
    -  Work
-      
+
       -  Reports
-         
+
          -  Annual
          -  Status
 
       -  Trips
-         
+
          -  National
          -  International
 
@@ -200,7 +194,6 @@ Modifying data is as transparent as adding new data. If you modify
 something, but do not change the parent\_id field - the structure
 of your data will remain unchanged. For example::
 
-    <?php
     // pseudo controller code
     $this->Category->id = 5; // id of Extreme knitting
     $this->Category->save(array('name' => 'Extreme fishing'));
@@ -214,28 +207,28 @@ the tree of data would now look like:
 -  My Categories
 
 -  Fun
- 
+
  -  Sport
-    
+
     -  Surfing
     -  Extreme fishing **Updated**
     -  Skating
 
  -  Friends
-    
+
     -  Gerald
     -  Gwendolyn
 
 
 -  Work
- 
+
  -  Reports
-    
+
     -  Annual
     -  Status
 
  -  Trips
-    
+
     -  National
     -  International
 
@@ -248,7 +241,6 @@ that Extreme fishing does not belong under Sport, but instead
 should be located under Other People's Categories. With the
 following code::
 
-    <?php
     // pseudo controller code
     $this->Category->id = 5; // id of Extreme fishing
     $newParentId = $this->Category->field('id', array('name' => 'Other People\'s Categories'));
@@ -258,36 +250,36 @@ As would be expected the structure would be modified to:
 
 
 -  My Categories
- 
+
  -  Fun
-    
+
     -  Sport
-       
+
        -  Surfing
        -  Skating
 
     -  Friends
-       
+
        -  Gerald
        -  Gwendolyn
 
 
  -  Work
-    
+
     -  Reports
-       
+
        -  Annual
        -  Status
 
     -  Trips
-       
+
        -  National
        -  International
 
 
 
 -  Other People's Categories
- 
+
  -  Extreme fishing **Moved**
 
 
@@ -300,7 +292,6 @@ reports category is no longer useful. To remove it
 *and any children it may have* just call delete as you would for
 any model. For example with the following code::
 
-    <?php
     // pseudo controller code
     $this->Category->id = 10;
     $this->Category->delete();
@@ -309,33 +300,33 @@ The category tree would be modified as follows:
 
 
 -  My Categories
- 
+
  -  Fun
-    
+
     -  Sport
-       
+
        -  Surfing
        -  Skating
 
     -  Friends
-       
+
        -  Gerald
        -  Gwendolyn
 
 
  -  Work
-    
+
     -  Trips
-       
+
        -  National
        -  International
 
 
 
 -  Other People's Categories
- 
+
  -  Extreme fishing
- 
+
 
 Querying and using your data
 ----------------------------
@@ -355,7 +346,7 @@ are a few more tree-orientated permutations at your disposal.
 .. php:class:: TreeBehavior
 
     .. php:method:: children($id = null, $direct = false, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null)
-    
+
     :param $id: The ID of the record to look up
     :param $direct: Set to true to return only the direct descendants
     :param $fields: Single string field name or array of fields to include in the return
@@ -370,7 +361,6 @@ are a few more tree-orientated permutations at your disposal.
     only direct children should be returned. Using the example data
     from the previous section::
 
-        <?php
         $allChildren = $this->Category->children(1); // a flat array with 11 items
         // -- or --
         $this->Category->id = 1;
@@ -391,7 +381,6 @@ are a few more tree-orientated permutations at your disposal.
     children are counted. Using the example data from the previous
     section::
 
-        <?php
         $totalChildren = $this->Category->childCount(1); // will output 11
         // -- or --
         $this->Category->id = 1;
@@ -413,7 +402,6 @@ are a few more tree-orientated permutations at your disposal.
     to show the structure of your data. Below is an example of what you
     can expect this method to return::
 
-      <?php
       $treelist = $this->Category->generateTreeList();
 
     Output::
@@ -441,7 +429,6 @@ are a few more tree-orientated permutations at your disposal.
     parent node for any node, or *false* if the node has no parent (it's
     the root node). For example::
 
-        <?php
         $parent = $this->Category->getParentNode(2); //<- id for fun
         // $parent contains All categories
 
@@ -453,12 +440,12 @@ are a few more tree-orientated permutations at your disposal.
 
 
     -  My Categories
- 
+
      -  ...
      -  Work
-    
+
         -  Trips
-       
+
            -  ...
            -  International
 
@@ -468,7 +455,6 @@ are a few more tree-orientated permutations at your disposal.
     Using the id of "International" getPath will return each of the
     parents in turn (starting from the top).::
 
-        <?php
         $parents = $this->Category->getPath(15);
 
     ::
@@ -500,17 +486,16 @@ Advanced Usage
     Here is an example of a controller action (in a controller named
     Categories) that moves a specified node down the tree::
 
-        <?php
         public function movedown($id = null, $delta = null) {
             $this->Category->id = $id;
             if (!$this->Category->exists()) {
                throw new NotFoundException(__('Invalid category'));
             }
-            
+
             if ($delta > 0) {
                 $this->Category->moveDown($this->Category->id, abs($delta));
             } else {
-                $this->Session->setFlash('Please provide the number of positions the field should be moved down.'); 
+                $this->Session->setFlash('Please provide the number of positions the field should be moved down.');
             }
 
             $this->redirect(array('action' => 'index'), null, true);
@@ -529,17 +514,16 @@ Advanced Usage
     Here's an example of a controller action (in a controller named
     Categories) that moves a node up the tree::
 
-        <?php
-        public function moveup($id = null, $delta = null) {            
+        public function moveup($id = null, $delta = null) {
             $this->Category->id = $id;
             if (!$this->Category->exists()) {
                throw new NotFoundException(__('Invalid category'));
             }
-      
+
             if ($delta > 0) {
                 $this->Category->moveUp($this->Category->id, abs($delta));
             } else {
-                $this->Session->setFlash('Please provide a number of positions the category should be moved up.'); 
+                $this->Session->setFlash('Please provide a number of positions the category should be moved up.');
             }
 
             $this->redirect(array('action' => 'index'), null, true);
@@ -575,8 +559,7 @@ Advanced Usage
 
     Running the following code with the id for 'Sport'::
 
-        <?php
-        $this->Node->removeFromTree($id); 
+        $this->Node->removeFromTree($id);
 
     The Sport node will be become a top level node:
 
@@ -598,8 +581,7 @@ Advanced Usage
     If however the following code snippet was used with the id for
     'Sport'::
 
-        <?php
-        $this->Node->removeFromTree($id, true); 
+        $this->Node->removeFromTree($id, true);
 
     The tree would become
 
@@ -623,7 +605,6 @@ Advanced Usage
     field and direction specified in the parameters. This method does
     not change the parent of any node.::
 
-        <?php
         $model->reorder(array(
             'id' => ,    //id of record to use as top node for reordering, default: $Model->id
             'field' => , //which field to use in reordering, default: $Model->displayField
@@ -675,7 +656,6 @@ Data Integrity
 
     Example::
 
-        <?php
         // Rebuild all the left and right fields based on the parent_id
         $this->Category->recover();
         // or
@@ -727,7 +707,6 @@ Data Integrity
 
     Example Use::
 
-        <?php
         $this->Category->verify();
 
     Example output::

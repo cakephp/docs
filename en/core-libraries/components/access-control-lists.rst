@@ -286,7 +286,6 @@ updating the following lines in app/Config/core.php
 
 ::
 
-    <?php
     // Change these lines:
     Configure::write('Acl.classname', 'DbAcl');
     Configure::write('Acl.database', 'default');
@@ -444,8 +443,7 @@ permissions information between the two trees).
     tables, read up on modified database tree traversal. The ACL
     component uses CakePHP's :doc:`/core-libraries/behaviors/tree`
     to manage the trees' inheritances. The model class files for ACL
-    are all compiled in a single file
-    `db\_acl.php <http://api.cakephp.org/file/cake/libs/model/db_acl.php>`_.
+    can be found in ``lib/Cake/Model/``.
 
 Now that we're all set up, let's work on creating some ARO and ACO
 trees.
@@ -496,7 +494,6 @@ ACL Component in your controller's $components array:
 
 ::
 
-    <?php
     public $components = array('Acl');
 
 Once we've got that done, let's see what some examples of creating
@@ -521,7 +518,6 @@ models to save data like we always do:
 
 ::
 
-    <?php
     function any_action() {
         $aro = $this->Acl->Aro;
         
@@ -586,7 +582,6 @@ specific model records in our database.
 
 ::
 
-    <?php
     function any_action() {
         $aro = new Aro();
         
@@ -753,7 +748,6 @@ because permissions are managed by the Acl Component.
 
 ::
 
-    <?php
     class SomethingsController extends AppController {
         // You might want to place this in the AppController
         // instead, but here works great too.
@@ -767,7 +761,6 @@ action inside this controller.
 
 ::
 
-    <?php
     function index() {
         // Allow warriors complete access to weapons
         // Both these examples use the alias syntax
@@ -802,7 +795,6 @@ yourself. What we have above is equivalent to this:
 
 ::
 
-    <?php
     // 6342 = Legolas
     // 1564 = Gimli
     
@@ -831,14 +823,12 @@ we've created. The basic syntax for making a permissions check is:
 
 ::
 
-    <?php
     $this->Acl->check($aro, $aco, $action = '*');
 
 Let's give it a try inside a controller action:
 
 ::
 
-    <?php
     function index() {
         // These all return true:
         $this->Acl->check('warriors/Aragorn', 'Weapons');

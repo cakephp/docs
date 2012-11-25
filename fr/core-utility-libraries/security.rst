@@ -3,74 +3,74 @@ Security
 
 .. php:class:: Security
 
-The `security library <http://api20.cakephp.org/class/security>`_
-handles basic security measures such as providing methods for
-hashing and encrypting data.
+La `librairie security <http://api20.cakephp.org/class/security>`_
+gère des mesures basiques de sécurité comme des méthodes fournies pour 
+le hashage et les données encryptées.
 
-Security API
-============
+L'API Security
+==============
 
 .. php:staticmethod:: cipher( $text, $key )
 
     :rtype: string
 
-    Encrypts/Decrypts a text using the given key.::
+    Crypte/Décrypte un texte selon la clé donnée::
 
-        <?php
-        // Encrypt your secret password with my_key
-        $secret = Security::cipher('my secret password', 'my_key');
+        // Crypte votre mot de passe secret avec my_key
+        $secret = Security::cipher('mon mot de passe secret', 'my_key');
 
-        // Later decrypt your secret password
+        // Plus tard, décryptez votre mot de passe secret
         $nosecret = Security::cipher($secret, 'my_key');
 
 .. php:staticmethod:: generateAuthKey( )
 
     :rtype: string
 
-        Generate authorization hash.
+        Génére un hash d'autorisation.
 
 .. php:staticmethod:: getInstance( )
 
     :rtype: object
 
-    Singleton implementation to get object instance.
+    L'implémentation Singleton pour obtenir l'instance de l'objet.
 
 
 .. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 
     :rtype: string
 
-    Create a hash from string using given method. Fallback on next
-    available method.
+    Créer un hash à partir d'une chaîne en utilisant la méthode donnée. Le 
+    Fallback sur la prochaine méthode disponible.
 
 .. php:staticmethod:: inactiveMins( )
 
     :rtype: integer
 
-    Get allowed minutes of inactivity based on security level.::
+    Pour avoir les minutes d'inactivité autorisées basée sur le niveau de 
+    sécurité.::
 
-        <?php
         $mins = Security::inactiveMins();
-        // If your config Security.level is set to 'medium' then $mins will equal 100
+        // Si votre config Security.level est défini à 'medium' alors $mins 
+        sera égal 100
 
 .. php:staticmethod:: setHash( $hash )
 
     :rtype: void
 
-    Sets the default hash method for the Security object. This 
-    affects all objects using Security::hash().
+    Définit la méthode de hash par défaut pour l'objet Security.
+    Cela affecte tous les objets en utilisant Security::hash().
 
 .. php:staticmethod:: validateAuthKey( $authKey )
 
     :rtype: boolean
 
-    Validate authorization hash.
+    Valide les hash d'autorisation.
 
 
 .. todo::
 
-    Add more examples :|
+    Ajoutez plus d'exemples :|
 
 .. meta::
-    :title lang=en: Security
-    :keywords lang=en: security api,secret password,cipher text,php class,class security,text key,security library,object instance,security measures,basic security,security level,string type,fallback,hash,data security,singleton,inactivity,php encrypt,implementation,php security
+    :title lang=fr: Security
+    :keywords lang=fr: Security api,secret password,cipher text,php class,class security,text key,security library,objet instance,security measures,basic security,security level,string type,fallback,hash,data security,singleton,inactivity,php encrypt,implementation,php sécurité

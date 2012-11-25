@@ -64,7 +64,6 @@ a cookie named 'baker\_id' for the domain 'example.com' which needs
 a secure connection, is available on the path
 ‘/bakers/preferences/’, expires in one hour and is HTTP only::
 
-    <?php
     public $components = array('Cookie');
     public function beforeFilter() {
         parent::beforeFilter();
@@ -91,20 +90,17 @@ The CookieComponent offers a number of methods for working with Cookies.
     cookie variable name you want, and the $value is the information to
     be stored::
 
-        <?php
         $this->Cookie->write('name', 'Larry');
 
     You can also group your variables by supplying dot notation in the
     key parameter::
 
-        <?php
         $this->Cookie->write('User.name', 'Larry');
         $this->Cookie->write('User.role', 'Lead');
 
     If you want to write more than one value to the cookie at a time,
     you can pass an array::
 
-        <?php
         $this->Cookie->write('User',
             array('name' => 'Larry', 'role' => 'Lead')
         );
@@ -118,7 +114,6 @@ The CookieComponent offers a number of methods for working with Cookies.
     more secure you should change ``Security.cipherSeed`` in
     app/Config/core.php to ensure a better encryption.::
 
-        <?php
         $this->Cookie->write('name', 'Larry', false);
 
     The last parameter to write is $expires – the number of seconds
@@ -126,7 +121,6 @@ The CookieComponent offers a number of methods for working with Cookies.
     also be passed as a string that the php strtotime() function
     understands::
 
-        <?php
         // Both cookies expire in one hour.
         $this->Cookie->write('first_name', 'Larry', false, 3600);
         $this->Cookie->write('last_name', 'Masters', false, '1 hour');
@@ -136,7 +130,6 @@ The CookieComponent offers a number of methods for working with Cookies.
     This method is used to read the value of a cookie variable with the
     name specified by $key.::
 
-        <?php
         // Outputs “Larry”
         echo $this->Cookie->read('name');
 
@@ -149,12 +142,20 @@ The CookieComponent offers a number of methods for working with Cookies.
 
         // this outputs something like array('name' => 'Larry', 'role' => 'Lead')
 
+.. php:method:: check($key)
+
+    :param string $key: The key to check.
+
+    Used to check if a key/path exists and has not-null value.
+
+    .. versionadded:: 2.3
+        ``CookieComponent::check()`` was added in 2.3
+
 .. php:method:: delete(mixed $key)
 
     Deletes a cookie variable of the name in $key. Works with dot
     notation::
 
-        <?php
         // Delete a variable
         $this->Cookie->delete('bar');
 

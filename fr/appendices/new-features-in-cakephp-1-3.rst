@@ -1,28 +1,29 @@
-New features in CakePHP 1.3
---------------------------------
+Nouvelles caractéristiques dans CakePHP 1.3
+-------------------------------------------
 
-CakePHP 1.3 introduced a number of new features. This guide
-attempts to summarize those changes and point to expanded
-documentation where necessary.
+CakePHP 1.3 introduit un nombre de nouvelles fonctionnalités. Ce guide 
+tente de résumer ces changements et de pointer vers la documentation 
+nouvelle quand c'est nécéssaire.
 
 Components
 ~~~~~~~~~~
 
 **SecurityComponent**
 
-The various requireXX methods like ``requireGet`` and
-``requirePost`` now accept a single array as their argument as well
-as a collection of string names.
+Les différentes méthodes requireXX comme ``requireGet`` et 
+``requirePost`` acceptent maintenant un tableau unique en argument ainsi 
+qu'une collection de noms en chaînes de caractère.
 
 ::
 
     $this->Security->requirePost(array('edit', 'update'));
 
-**Component settings**
+**Paramètres du Component**
 
-Component settings for all core components can now be set from the
-``$components`` array. Much like behaviors, you can declare
-settings for components when you declare the component.
+Les paramètres du Component pour tous les components du coeur peuvent 
+maintenant être définis à partir du tableau ``$components``. Un peu 
+comme les behaviors, vous pouvez déclarer les paramètres pour les 
+components quand vous déclarer le component.
 
 ::
 
@@ -36,16 +37,15 @@ settings for components when you declare the component.
         )
     );
 
-This should reduce clutter in your Controller's ``beforeFilter()``
-methods.
+Ceci devrait réduire le désordre dans vos méthodes ``beforeFilter()`` de 
+Controller.
 
 **EmailComponent**
 
-
--  You can now retrieve the rendered contents of sent Email
-   messages, by reading ``$this->Email->htmlMessage`` and
-   ``$this->Email->textMessage``. These properties will contain the
-   rendered email content matching their name.
+-  Vous pouvez maintenant récupérer les contenus rendus des messages Email 
+   envoyés, en lisant ``$this->Email->htmlMessage`` et 
+   ``$this->Email->textMessage``. Ces propriétés contiendront le contenu de 
+   l'email rendu correspondant à son nom.
 -  Many of EmailComponent's private methods have been made
    protected for easier extension.
 -  EmailComponent::$to can now be an array. Allowing easier setting
@@ -543,5 +543,5 @@ only. It does not ensure uniqueness of the given uuid.
 
 
 .. meta::
-    :title lang=en: New features in CakePHP 1.3
-    :keywords lang=en: component settings,array name,array controller,private methods,necessary components,core components,share names,collisions,func,message id,new features,clutter,consistency,messageid,email,htmlmessage,variables,doc
+    :title lang=fr: Nouvelles caractéristiques dans CakePHP 1.3
+    :keywords lang=fr: component settings,array name,array controller,private methods,necessary components,core components,share names,collisions,func,message id,new features,clutter,consistency,messageid,email,htmlmessage,variables,doc

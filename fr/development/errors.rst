@@ -1,85 +1,90 @@
-Error Handling
-##############
+Gestion des Error
+#################
 
-For 2.0 ``Object::cakeError()`` has been removed. Instead it has been replaced with
-a number of exceptions.  All of the core classes that previously called cakeError
-are now throwing exceptions.  This lets you either choose to handle the errors
-in your application code, or let the built in exception handling deal with them.
+Pour 2.0 ``Object::cakeError()`` a été retiré. A la place, il a été remplacé 
+par un certain nombre d'exceptions. Toutes les classes du coeur qui appelaient 
+avant cakeError envoient maintenant des exceptions. Cela vous laisse choisir 
+soit la gestion des erreurs dans le code de votre application, soit laisser 
+la gestion intégrée des exceptions le faire pour vous.
 
-There is more control than ever for error and exception handling in CakePHP 2.0.
-You can configure which methods you want to set as the default error handler,
-and exception handler using configure.
+Il y a plus de contrôles que jamais pour les erreurs et la gestion des 
+exceptions dans CakePHP 2.0. Vous pouvez configurer quelles méthodes vous 
+voulez définir en tant que gestionnaire d'erreur, et en gestionnaire 
+d'exception en utilisant configure.
 
-Error configuration
-===================
+Configuration d'Error
+=====================
 
-Error configuration is done inside your application's ``app/Config/core.php``
-file.  You can define a callback to be fired each time your application triggers
-any PHP error - exceptions are handled :doc:`/development/exceptions` separately.
-The callback can be any PHP callable, including an anonymous function.  The 
-default error handling configuration looks like::
+La configuration des Error est faite à l'intérieur du fichier 
+``app/Config/core.php`` de votre application. Vous pouvez définir un callback 
+pour être effectué chaque fois que votre application attrape une erreur PHP - 
+les exceptions sont gérées séparément :doc:`/development/exceptions`.
+Le callback peut être n'importe quel PHP appelable, incluant une fontion 
+anonyme. L'erreur par défaut de la configuration de gestion ressemble à 
+ceci::
 
-    <?php
     Configure::write('Error', array(
         'handler' => 'ErrorHandler::handleError',
         'level' => E_ALL & ~E_DEPRECATED,
         'trace' => true
     ));
 
-You have 3 built-in options when configuring error handlers:
+Vous avez 3 options intégrées quand vous gérez la configuration des erreurs:
 
-* ``handler`` - callback - The callback to handle errors. You can set this to any
-  callback type, including anonymous functions.
-* ``level`` - int - The level of errors you are interested in capturing. Use the 
-  built-in php error constants, and bitmasks to select the level of error you 
-  are interested in.
-* ``trace`` - boolean - Include stack traces for errors in log files.  Stack traces 
-  will be included in the log after each error.  This is helpful for finding 
-  where/when errors are being raised.
+* ``handler`` - callback - Le callback pour la gestion des erreurs. Vous pouvez 
+  définir ceci à n'importe quel type, incluant des fonctions anonymes.
+* ``level`` - int - Le niveau d'erreurs qui vous interesse dans la capture.
+  Utilisez les constantes d'erreur intégrées dans PHP, et bitmasks pour 
+  séléctionner le niveau d'erreur qui vous intéressent.
+* ``trace`` - boolean - Inclut stack traces pour les erreurs dans les fichiers 
+  de log. Les Stack traces seront inclus dans le log après chaque erreur. C'est 
+  utile pour trouver où/quand les erreurs ont été faites.
 
-ErrorHandler by default, displays errors when ``debug`` > 0, and logs errors when 
-debug = 0.  The type of errors captured in both cases is controlled by ``Error.level``.
+ErrorHandler par défaut, affiche les erreurs quand ``debug`` > 0, et les 
+erreurs de logs quand debug = 0. Le type d'erreurs capté dans les deux cas est 
+contrôlé par ``Error.level``.
 
 .. note::
 
-    If you use a custom error handler, the trace setting will have no effect, 
-    unless you refer to it in your error handling function.
+    Si vous utilisez un gestionnaire d'erreur personnalisé, le trace setting 
+    n'aura aucun effet, à moins que vous y fassiez référence dans votre 
+    fonction de gestion d'erreur.
 
-Creating your own error handler
-===============================
+Créer vos propres gestionnaires d'erreurs
+=========================================
 
-You can create an error handler out of any callback type.  For example you could 
-use a class called ``AppError`` to handle your errors.  The following would 
-need to be done::
+Vous pouvez créer un gestionnaire d'erreur à partir de n'importe quel type 
+de callback. Par exemple, vous pouvez utiliser une classe appelée ``AppError`` 
+pour gérer vos erreurs. Ce qui suit serait à faire::
 
-    <?php
-    //in app/Config/core.php
+    //dans app/Config/core.php
     Configure::write('Error.handler', 'AppError::handleError');
 
-    //in app/Config/bootstrap.php
+    //dans app/Config/bootstrap.php
     App::uses('AppError', 'Lib');
 
-    //in app/Lib/AppError.php
+    //dans app/Lib/AppError.php
     class AppError {
         public static function handleError($code, $description, $file = null, $line = null, $context = null) {
-            echo 'There has been an error!';
+            echo 'Il y a eu une erreur!';
         }
     }
 
-This class/method will print out 'There has been an error!' each time an error 
-occurs.  Since you can define an error handler as any callback type, you could
-use an anonymous function if you are using PHP5.3 or greater.::
+Cete classe/méthode va afficher 'Il y a eu une erreur!' chaque fois qu'une 
+erreur apparaît. Depuis que vous pouvez définir un gestionnaire d'erreur comme 
+tout type de callback, vous pouvez utiliser une fonction anonyme si vous 
+utilisez PHP5.3 ou supérieur.::
 
-    <?php
     Configure::write('Error.handler', function($code, $description, $file = null, $line = null, $context = null) {
-        echo 'Oh no something bad happened';
+        echo 'Oh non quelque chose est apparu';
     });
 
-It is important to remember that errors captured by the configured error handler will be php
-errors, and that if you need custom error handling, you probably also want to configure
-:doc:`/development/exceptions` handling as well.
+Il est important de se rappeler que les erreurs captées par le gestionnaire 
+d'erreurs configuré seront des erreurs php, et si vous avez besoin de gestion 
+d'erreurs personnalisée, vous aurez probablement aussi envie de configurer la 
+gestion des :doc:`/development/exceptions`.
 
 
 .. meta::
-    :title lang=en: Error Handling
-    :keywords lang=en: stack traces,error constants,error array,default displays,anonymous functions,error handlers,default error,error level,exception handler,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks
+    :title lang=fr: Gestion des Erreurs
+    :keywords lang=fr: stack traces,error constants,tableau erreur,défaut affichages,fonctions anonymes,gestionnaires d'erreurs,erreur par défaut,niveau erreur,gestionnaite handler exception,php error,error handler,write error,core classes,exception handling,configuration error,application code,callback,custom error,exceptions,bitmasks

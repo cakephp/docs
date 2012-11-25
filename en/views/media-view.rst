@@ -3,6 +3,9 @@ Media Views
 
 .. php:class:: MediaView
 
+.. deprecated:: 2.3
+   Use :ref:`cake-response-file` instead.
+   
 Media views allow you to send binary files to the user. For example, you may
 wish to have a directory of files outside of the webroot to prevent users from
 direct linking them. You can use the Media view to pull the file from a special
@@ -13,7 +16,6 @@ To use the Media view, you need to tell your controller to use the MediaView
 class instead of the default View class. After that, just pass in additional
 parameters to specify where your file is located::
 
-    <?php
     class ExampleController extends AppController {
         public function download() {
             $this->viewClass = 'Media';
@@ -33,7 +35,6 @@ Here's an example of rendering a file whose mime type is not included in the
 MediaView's ``$mimeType`` array. We are also using a relative path which will 
 default to your ``app/webroot`` folder::
 
-    <?php
     public function download() {
         $this->viewClass = 'Media';
         // Render app/webroot/files/example.docx

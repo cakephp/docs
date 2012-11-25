@@ -1,26 +1,24 @@
 Thèmes
 ######
 
-Vous pouvez profiter des thèmes, ce qui facilite le changement du look and feel 
-de votre page rapidement et facilement.
+Vous pouvez profiter des thèmes, ce qui facilite le changement du visuel et 
+du ressenti de votre page rapidement et facilement.
 
-Pour utiliser les thèmes, spécifiez le nom du thème dans votre contrôleur::
+Pour utiliser les thèmes, spécifiez le nom du thème dans votre controller::
 
-    <?php
     class ExempleController extends AppController {
         public $theme = 'Exemple';
     }
 
     .. versionchanged:: 2.1
-        Les version antérieures à 2.1 ont besoin de définir 
+        Les versions antérieures à 2.1 ont besoin de définir 
         ``$this->viewClass = 'Theme'``.
-        2.1 enlève cette condition puisque la classe normale ``View`` class 
+        2.1 enlève cette condition puisque la classe normale ``View``  
         supporte les thèmes.
 
 Vous pouvez également définir ou modifier le nom du thème dans une action ou 
 dans les fonctions de callback``beforeFilter`` ou ``beforeRender``::
 
-    <?php
     $this->theme = 'AutreExemple';
 
 Les fichiers de vue du thème ont besoin d'être dans le dossier 
@@ -46,21 +44,20 @@ Un thème peut inclure tout asset nécessaire dans son répertoire webroot. Cela
 permet un packaging facile et une distribution des thèmes. Pendant le 
 développement, les requêtes pour les assets du thème seront gérés par
 :php:class:`Dispatcher`. Pour améliorer la performance des environnements de 
-production, il est recommandé soit que vous symlink soit que vous copiez les 
-assets du thème dans le webroot de application. Voir ci-dessus pour plus
-d'informations.
+production, il est recommandé soit que vous fassiez un lien symbolique soit 
+que vous copiez les assets du thème dans le webroot de application. Voir 
+ci-dessous pour plus d'informations.
 
 Pour utiliser le nouveau thème, créez des répertoires de type
 ``app/View/Themed/<nomDuTheme>/webroot<chemin_vers_fichier>`` dans votre thème.
 Le Dispatcher se chargera de trouver les assets du thème corrects dans vos 
 chemins de vue.
 
-Tous les helpers integrés dans CakePHP sont conscients de thèmes et vont créer 
-des chemins d'accès corrects automatiquement. Comme pour les fichiers de vue, 
-si un fichier n'est pas dans le dossier du thème, il sera par défaut dans le 
-dossier principal webroot ::
+Tous les helpers integrés dans CakePHP ont intégrés l'existence des thèmes 
+et vont créer des chemins d'accès corrects automatiquement. Comme pour les 
+fichiers de vue, si un fichier n'est pas dans le dossier du thème, il sera 
+par défaut dans le dossier principal webroot ::
 
-    <?php
     //Quand dans un thème avec un nom de 'purple_cupcake'
     $this->Html->css('main.css');
      
@@ -90,4 +87,4 @@ dans ``app/webroot`` avec des chemins correspondant à ceux utilisés par cakeph
 
 .. meta::
     :title lang=fr: Thèmes
-    :keywords lang=fr: environnements de production,dossier du thème,fichiers layout,requêtes de développement,fonctions de callback,structure de dossier,vue par défaut,dispatcher,symlink,cas de base,layouts,assets,cakephp,thèmes,avantage
+    :keywords lang=fr: environnements de production,dossier du thème,fichiers layout,requêtes de développement,fonctions de callback,structure de dossier,vue par défaut,dispatcher,lien symbolique,cas de base,layouts,assets,cakephp,thèmes,avantage

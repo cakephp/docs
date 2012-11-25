@@ -1,16 +1,15 @@
 Transactions
 ############
 
-Pour effectuer une transaction, les tables d'un modèle doivent être d'un type 
+Pour effectuer une transaction, les tables d'un model doivent être d'un type 
 qui supporte les transactions.
 
 Toutes les méthodes de transaction doivent être effectuées sur un objet de 
-Source de Données. Pour obtenir le modèle de Source de Données à partir du 
-modèle, utilisez:
+Source de Données. Pour obtenir le model de Source de Données à partir du 
+model, utilisez:
 
 ::
 
-    <?php
     $dataSource = $this->getDataSource();
 
 Vous pouvez utiliser la source de données pour commencer, committer, ou faire 
@@ -18,7 +17,6 @@ des transactions roll back.
 
 ::
 
-    <?php
     $dataSource->begin();
     
     // Effectue certaine tâche

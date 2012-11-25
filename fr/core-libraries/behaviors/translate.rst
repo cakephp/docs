@@ -1,32 +1,39 @@
-Le Comportement Translate
-#########################
+Le behavior Translate
+#####################
 
 .. php:class:: TranslateBehavior()
 
-Le comportement Translate est en fait assez simple à paramétrer 
-et à faire fonctionner out of the box, le tout avec très peu de configuration. 
-Dans cette section, vous apprendrez comment ajouter et configurer ce comportement, pour l'utiliser dans n'importe quel modèle.
+Le behavior Translate est en fait assez simple à paramétrer et à faire 
+fonctionner out of the box, le tout avec très peu de configuration. 
+Dans cette section, vous apprendrez comment ajouter et configurer ce behavior, 
+pour l'utiliser dans n'importe quel model.
 
-Si vous utilisez le comportement Translate en parallèle de Containable, assurez-vous de définir la clé 'fields' pour vos requêtes. Sinon, vous pourriez vous retrouver avec des fragments SQL générés invalides.
-
-
+Si vous utilisez le behavior Translate en parallèle de Containable, 
+assurez-vous de définir la clé 'fields' pour vos requêtes. Sinon, vous 
+pourriez vous retrouver avec des fragments SQL générés invalides.
 
 Initialisation des tables  de la Base de donnée i18n
 ====================================================
 
-Vous pouvez soit utiliser la console CakePHP, soit les créer manuellement. Il est recommandé d'utiliser la console pour cela, parce qu'il pourrait arriver que le layout change dans les futures versions de CakePHP. En restant fidèle à la console, cela garantira que vous ayez le layout correct.::
-
+Vous pouvez soit utiliser la console CakePHP, soit les créer manuellement. 
+Il est recommandé d'utiliser la console pour cela, parce qu'il pourrait 
+arriver que le layout change dans les futures versions de CakePHP. En 
+restant fidèle à la console, cela garantira que vous ayez le bon layout::
 
     ./cake i18n
 
-Sélectionner``[I]``, ce qui lancera le script d'initialisation de la base de données i18n. Il vous sera demandé si vous voulez supprimer toute base existante et si vous voulez en créer une. Répondez par oui si vous êtes certain qu'il n'y a pas encore une table i18n et répondez encore par oui pour créer la table.
+Sélectionner``[I]``, ce qui lancera le script d'initialisation de la base 
+de données i18n. Il vous sera demandé si vous voulez supprimer toute base 
+existante et si vous voulez en créer une. Répondez par oui si vous êtes 
+certain qu'il n'y a pas encore une table i18n et répondez encore par oui 
+pour créer la table.
 
-Attacher le Comportement Translate à vos Modèles
-================================================
+Attacher le Behavior Translate à vos Models
+============================================
 
-Ajoutez-le à votre modèle en utilisant la propriété ``$actsAs`` comme dans l'exemple suivant.::
+Ajoutez-le à votre model en utilisant la propriété ``$actsAs`` comme dans 
+l'exemple suivant.::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
         public $actsAs = array(
@@ -34,20 +41,17 @@ Ajoutez-le à votre modèle en utilisant la propriété ``$actsAs`` comme dans l
         );
     }
 
-Ceci ne produira encore rien, parce qu'il faut un couple d'options 
-avant que que cela ne commence à fonctionner. 
-Vous devez définir, quels champs du modèle courant devront être 
-détectés dans la table de traduction que nous avons créée précédemment.
+Ceci ne produira encore rien, parce qu'il faut un couple d'options avant 
+que que cela ne commence à fonctionner. Vous devez définir, quels champs 
+du model courant devront être détectés dans la table de traduction que nous 
+avons créée précédemment.
 
-
-
-Definir les Champs
+Définir les Champs
 ==================
 
-Vous pouvez définir les champs en étendant simplement la valeur ``'Translate'`` avec un autre tableau, comme ::
+Vous pouvez définir les champs en étendant simplement la valeur ``'Translate'`` 
+avec un autre tableau, comme ::
 
-
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
         public $actsAs = array(
@@ -57,10 +61,10 @@ Vous pouvez définir les champs en étendant simplement la valeur ``'Translate'`
         );
     }
 
-Après avoir fait cela (par exemple, en précisant "nom" comme l'un des champs), vous avez déjà terminé la configuration de base. Super ! D'après notre exemple courant, le modèle devrait maintenant ressembler à quelque chose comme çà ::
+Après avoir fait cela (par exemple, en précisant "nom" comme l'un des champs), 
+vous avez déjà terminé la configuration de base. Super ! D'après notre exemple 
+courant, le model devrait maintenant ressembler à quelque chose comme cela ::
 
-
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
         public $actsAs = array(
@@ -70,26 +74,35 @@ Après avoir fait cela (par exemple, en précisant "nom" comme l'un des champs),
         );
     }
 
-Quand vous définissez vos champs à traduire dans le Comportement Translate,
+Quand vous définissez vos champs à traduire dans le Behavior Translate, 
 assurez-vous d'omettre les champs du schéma de model traduits.
 Si vous laissez les champs en place, il peut y avoir un problème de 
-récupération de donnée avec fallback locales (traduction très approximative)
+récupération de donnée avec fallback locales (traduction très approximative).
 
 Conclusion
 ==========
 
-A partir de maintenant, chaque mise à jour/création d'un enregistrement fera que le Comportement Translate copiera la valeur de "nom" dans la table de traduction (par défaut : i18n), avec la locale courante. Une "locale" est un identifiant de langue.
+A partir de maintenant, chaque mise à jour/création d'un enregistrement fera 
+que le Behavior Translate copiera la valeur de "nom" dans la table de 
+traduction (par défaut : i18n), avec la locale courante. Une "locale" est un 
+identifiant de langue.
 
-La *locale courante* est la valeur actuelle de ``Configure::read('Config.language')``. La valeur de *Config.language* est assignée dans la Classe L10n - à moins qu'elle ne soit déjà définie. Cependant, le Comportement Translate vous autorise à surcharger ceci à la volée, ce qui permet à l'utilisateur de votre page de créer de multiples versions sans avoir besoin de modifier ses préférences. Plus d'information sur ce point dans la prochaine section.
-
+La *locale courante* est la valeur actuelle de 
+``Configure::read('Config.language')``. La valeur de *Config.language* est 
+assignée dans la Classe L10n - à moins qu'elle ne soit déjà définie. Cependant, 
+le Behavior Translate vous autorise à surcharger ceci à la volée, ce qui 
+permet à l'utilisateur de votre page de créer de multiples versions sans avoir 
+besoin de modifier ses préférences. Plus d'information sur ce point dans la 
+prochaine section.
 
 Récupérer tous les enregistrements de traduction pour un champ
 ==============================================================
 
-Si vous voulez avoir tous les enregistrements de traduction attachés à l'enregistrement de modèle courant, vous étendez simplement le *tableau champ* dans votre paramétrage du comportement, comme montré ci-dessous. Vous êtes complètement libre de choisir le nommage.::
+Si vous voulez avoir tous les enregistrements de traduction attachés à 
+l'enregistrement de model courant, vous étendez simplement le *tableau champ* 
+dans votre paramétrage du behavior, comme montré ci-dessous. Vous êtes 
+complètement libre de choisir le nommage.::
 
-
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
         public $actsAs = array(
@@ -99,9 +112,8 @@ Si vous voulez avoir tous les enregistrements de traduction attachés à l'enreg
         );
     }
 
-Avec ce paramétrage, le résultat de votre find() devrait ressembler 
-à quelque chose comme çà ::
-
+Avec ce paramétrage, le résultat de votre find() devrait ressembler à quelque 
+chose comme cela ::
 
     Array
     (
@@ -138,8 +150,8 @@ Avec ce paramétrage, le résultat de votre find() devrait ressembler
              )
     )
 
-**Note**: L'enregistrement de modèle contient un champ *virtuel* appelée "locale". 
-Il indique quelle locale est utilisée dans ce résultat.
+**Note**: L'enregistrement de model contient un champ *virtuel* appelée 
+"locale". Il indique quelle locale est utilisée dans ce résultat.
 
 Note that only fields of the model you are directly doing \`find\`
 on will be translated. Models attached via associations won't be
@@ -147,11 +159,10 @@ translated because triggering callbacks on associated models is
 currently not supported.
 
 Utiliser la méthode bindTranslation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Vous pouvez aussi récupérer toutes les traductions seulement 
-quand vous en avez besoin, en utilisant la méthode bindTranslation
-
+Vous pouvez aussi récupérer toutes les traductions seulement quand vous en 
+avez besoin, en utilisant la méthode bindTranslation.
 
 ``bindTranslation($fields, $reset)``
 
@@ -159,14 +170,12 @@ quand vous en avez besoin, en utilisant la méthode bindTranslation
 l'association, dans lequel la clé est le champ traduisible et la valeur 
 est le nom fictif de l'association.::
 
-    <?php
     $this->Post->bindTranslation(array('name' => 'nomTraduction'));
-    $this->Post->find('all', array('recursive' => 1)); // il est nécessaire d'avoir au moins un recursive à 1 pour que ceci fonctionne
+    $this->Post->find('all', array('recursive' => 1)); // il est nécessaire 
+    d'avoir au moins un recursive à 1 pour que ceci fonctionne
 
-Avec ce paramétrage, le résultat de votre find() devrait ressembler à quelque chose
-comme çà ::
-
-    
+Avec ce paramétrage, le résultat de votre find() devrait ressembler à quelque 
+chose comme ceci ::
    
     Array
     (
@@ -206,16 +215,16 @@ comme çà ::
 Sauvegarder dans une autre Langue
 =================================
 
-Vous pouvez forcer le modèle qui utilise le TranslateBehavior à sauvegarder dans une autre langue que celle détectée.
+Vous pouvez forcer le model qui utilise le TranslateBehavior à sauvegarder 
+dans une autre langue que celle détectée.
 
-Pour dire à un modèle dans quelle langue le contenu devra être sauvé, changez simplement la valeur de la propriété $locale du modèle, avant que vous ne sauvegardiez les données dans la base. Vous pouvez faire çà dans votre contrôleur ou vous pouvez le définir directement dans le modèle.
-
-
+Pour dire à un model dans quelle langue le contenu devra être sauvé, changez 
+simplement la valeur de la propriété $locale du model, avant que vous ne 
+sauvegardiez les données dans la base. Vous pouvez faire çà dans votre 
+controller ou vous pouvez le définir directement dans le model.
 
 **Example A:** Dans votre controller::
-
     
-    <?php
     class PostsController extends AppController {
         public $name = 'Posts';
 
@@ -230,9 +239,8 @@ Pour dire à un modèle dans quelle langue le contenu devra être sauvé, change
         }
     }
 
-**Example B:** In your model::
+**Exemple B:** Dans votre model::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
         public $actsAs = array(
@@ -241,7 +249,7 @@ Pour dire à un modèle dans quelle langue le contenu devra être sauvé, change
             )
         );
 
-        // Option 1) definir la propriéré directement tout simplement
+        // Option 1) definir la propriété directement tout simplement
         public $locale = 'fr_fr';
 
         // Option 2) créer une méthode simple 
@@ -253,21 +261,19 @@ Pour dire à un modèle dans quelle langue le contenu devra être sauvé, change
 Traduction de Tables Multiples
 ==============================
 
-Si vous attendez beaucoup d'entrée vous vous demandez certainement
+Si vous attendez beaucoup d'entrée, vous vous demandez certainement
 comment gérer tout cela dans une base de donnée qui grossit rapidement.
 
-Il y a deux propriétés introduite dans le Comportement Translate
-qui permettent de spécifier quel modèle doit être relié au model
+Il y a deux propriétés introduite dans le Behavior Translate
+qui permettent de spécifier quel model doit être relié au model
 qui contient les traductions.
 
 Les voici **$translateModel** et **$translateTable**.
 
-
 Disons que nous voulons sauver nos traductions pour tous les posts dans la
 table "post-Files _i18ns" au lieu de la valeur par défaut "i18n" de la table.
-Pour faire cela vous avez besoin de paramétrer votre modèle comme cela ::
+Pour faire cela vous avez besoin de paramétrer votre model comme cela ::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
         public $actsAs = array(
@@ -284,41 +290,35 @@ Pour faire cela vous avez besoin de paramétrer votre modèle comme cela ::
 un model habituel et il peut être traité en tant que tel avec les conventions 
 qui en découlent.
 
-Le schéma de la table elle-même doit être identique à celui généré par la console 
-CakePHP. Pour vous assurer qu'il s'intègre vous pourriez initialiser une table i18n
-vide au travers de la console et renommer la table après coup.
-
+Le schéma de la table elle-même doit être identique à celui généré par la 
+console CakePHP. Pour vous assurer qu'il s'intègre vous pourriez initialiser 
+une table i18n vide au travers de la console et renommer la table après coup.
 
 Créer le Model de Traduction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Pour que cela fonctionne vous devez créer le fichier de l'actuel
-modèle dans le dossier des modèles. 
-La raison est qu'il n'y a pas de propriété pour définir le displayField directement dans le modèle utilisant ce comportement.
+model dans le dossier des models. La raison est qu'il n'y a pas de propriété 
+pour définir le displayField directement dans le model utilisant ce behavior.
 
 Assurez vous de changer le ``$displayField`` en ``'field'``.::
 
-
-    <?php
     class PostI18n extends AppModel { 
         public $displayField = 'field'; // important
     }
     // nom du fichier: post_i18n.php
 
 C'est tout ce qu'il faut. Vous pouvez aussi ajouter toutes les propriétés 
-des modèles comme $useTable. Mais pour une meilleure cohérence
-nous pouvons faire cela dans le modèle qui utilise ce modèle de traduction. 
+des models comme $useTable. Mais pour une meilleure cohérence nous 
+pouvons faire cela dans le model qui utilise ce model de traduction. 
 C'est là que l'option ``$translateTable`` entre en jeu. 
-
 
 Modification d'une Table
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Si vous voulez changer le nom de la table, il vous suffit simplement 
-de définir $translateTable dans votre modèle, comme ceci ::
+de définir $translateTable dans votre model, comme ceci ::
 
-
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
         public $actsAs = array(
@@ -335,10 +335,11 @@ de définir $translateTable dans votre modèle, comme ceci ::
     }
 
 A noter que **vous ne pouvez pas utiliser $translateTable seule**. 
-Si vous n'avez pas l'intention d'utiliser un Modèle de traduction ``$translateModel`` 
-personnalisé.alors laissez cette propriété inchangée. 
-La raison est qu'elle casserait votre configuration et vous afficherait un message "Missing Table" pour le modèle I18n par défaut, lequel est créé à l'exécution.
-
+Si vous n'avez pas l'intention d'utiliser un Model de traduction 
+``$translateModel`` personnalisé, alors laissez cette propriété inchangée. 
+La raison est qu'elle casserait votre configuration et vous afficherait un 
+message "Missing Table" pour le model I18n par défaut, lequel est créé à 
+l'exécution.
 
 
 .. meta::

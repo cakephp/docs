@@ -46,15 +46,15 @@ implement ``create``, ``update``, and ``delete``.
 
 Methods that must be implemented for all CRUD methods:
 
--  ``describe($Model)``
--  ``listSources()``
--  ``calculate($Model, $func, $params)``
+-  ``describe($model)``
+-  ``listSources($data = null)``
+-  ``calculate($model, $func, $params)``
 -  At least one of:
    
-   -  ``create($Model, $fields = array(), $values = array())``
-   -  ``read($Model, $queryData = array())``
-   -  ``update($Model, $fields = array(), $values = array())``
-   -  ``delete($Model, $conditions = null)``
+   -  ``create(Model $model, $fields = null, $values = null)``
+   -  ``read(Model $model, $queryData = array(), $recursive = null)``
+   -  ``update(Model $model, $fields = null, $values = null, $conditions = null)``
+   -  ``delete(Model $model, $id = null)``
 
 It is also possible (and sometimes quite useful) to define the
 ``$_schema`` class attribute inside the datasource itself, instead
@@ -78,7 +78,6 @@ methods. Let's write a datasource that will access a fictitious remote JSON
 based API. We'll call it ``FarAwaySource`` and we'll put it in
 ``app/Model/Datasource/FarAwaySource.php``::
 
-    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     class FarAwaySource extends DataSource {
@@ -136,7 +135,7 @@ based API. We'll call it ``FarAwaySource`` and we'll put it in
      * listSources() is for caching. You'll likely want to implement caching in
      * your own way with a custom datasource. So just ``return null``.
      */
-        public function listSources() {
+        public function listSources($data = null) {
             return null;
         }
 
@@ -145,9 +144,9 @@ based API. We'll call it ``FarAwaySource`` and we'll put it in
      *
      * You may want a different schema for each model but still use a single
      * datasource. If this is your case then set a ``schema`` property on your
-     * models and simply return ``$Model->schema`` here instead.
+     * models and simply return ``$model->schema`` here instead.
      */
-        public function describe(Model $Model) {
+        public function describe($model) {
             return $this->_schema;
         }
 
@@ -160,41 +159,41 @@ based API. We'll call it ``FarAwaySource`` and we'll put it in
      * return the string 'COUNT' and check for it in ``read()`` where
      * ``$data['fields'] == 'COUNT'``.
      */
-        public function calculate(Model $Model, $func, $params = array()) {
+        public function calculate(Model $model, $func, $params = array()) {
             return 'COUNT';
         }
 
     /**
      * Implement the R in CRUD. Calls to ``Model::find()`` arrive here.
      */
-        public function read(Model $Model, $data = array()) {
+        public function read(Model $model, $queryData = array(), $recursive = null) {
             /**
              * Here we do the actual count as instructed by our calculate()
              * method above. We could either check the remote source or some
              * other way to get the record count. Here we'll simply return 1 so
              * ``update()`` and ``delete()`` will assume the record exists.
              */
-            if ($data['fields'] == 'COUNT') {
+            if ($queryData['fields'] == 'COUNT') {
                 return array(array(array('count' => 1)));
             }
             /**
              * Now we get, decode and return the remote data.
              */
-            $data['conditions']['apiKey'] = $this->config['apiKey'];
-            $json = $this->Http->get('http://example.com/api/list.json', $data['conditions']);
+            $queryData['conditions']['apiKey'] = $this->config['apiKey'];
+            $json = $this->Http->get('http://example.com/api/list.json', $queryData['conditions']);
             $res = json_decode($json, true);
             if (is_null($res)) {
                 $error = json_last_error();
                 throw new CakeException($error);
             }
-            return array($Model->alias => $res);
+            return array($model->alias => $res);
         }
 
     /**
-     * Implement the C in CRUD. Calls to ``Model::save()`` without $Model->id
+     * Implement the C in CRUD. Calls to ``Model::save()`` without $model->id
      * set arrive here.
      */
-        public function create(Model $Model, $fields = array(), $values = array()) {
+        public function create(Model $model, $fields = null, $values = null) {
             $data = array_combine($fields, $values);
             $data['apiKey'] = $this->config['apiKey'];
             $json = $this->Http->post('http://example.com/api/set.json', $data);
@@ -211,17 +210,16 @@ based API. We'll call it ``FarAwaySource`` and we'll put it in
      * set arrive here. Depending on the remote source you can just call
      * ``$this->create()``.
      */
-        public function update(Model $Model, $fields = array(), $values = array()) {
-            return $this->create($Model, $fields, $values);
+        public function update(Model $model, $fields = null, $values = null, $conditions = null) {
+            return $this->create($model, $fields, $values);
         }
 
     /**
      * Implement the D in CRUD. Calls to ``Model::delete()`` arrive here.
      */
-        public function delete(Model $Model, $conditions = null) {
-            $id = $conditions[$Model->alias . '.id'];
+        public function delete(Model $model, $id = null) {
             $json = $this->Http->get('http://example.com/api/remove.json', array(
-                'id' => $id,
+                'id' => $id[$model->alias . '.id'],
                 'apiKey' => $this->config['apiKey'],
             ));
             $res = json_decode($json, true);
@@ -237,7 +235,6 @@ based API. We'll call it ``FarAwaySource`` and we'll put it in
 We can then configure the datasource in our ``app/Config/database.php`` file
 by adding something like this::
 
-    <?php
     public $faraway = array(
         'datasource' => 'FarAwaySource',
         'apiKey'     => '1234abcd',
@@ -245,14 +242,12 @@ by adding something like this::
 
 Then use the database config in our models like this::
 
-    <?php
     class MyModel extends AppModel {
         public $useDbConfig = 'faraway';
     }
 
 We can retrieve data from our remote source using the familiar model methods::
 
-    <?php
     // Get all messages from 'Some Person'
     $messages = $this->MyModel->find('all', array(
         'conditions' => array('name' => 'Some Person'),
@@ -260,7 +255,6 @@ We can retrieve data from our remote source using the familiar model methods::
 
 Similarly we can save a new message::
 
-    <?php
     $this->MyModel->save(array(
         'name' => 'Some Person',
         'message' => 'New Message',
@@ -268,7 +262,6 @@ Similarly we can save a new message::
 
 Update the previous message::
 
-    <?php
     $this->MyModel->id = 42;
     $this->MyModel->save(array(
         'message' => 'Updated message',
@@ -276,7 +269,6 @@ Update the previous message::
 
 And delete the message::
 
-    <?php
     $this->MyModel->delete(42);
 
 Plugin DataSources
@@ -288,7 +280,6 @@ Simply place your datasource file into
 ``Plugin/[YourPlugin]/Model/Datasource/[YourSource].php``
 and refer to it using the plugin notation::
 
-    <?php
     public $faraway = array(
         'datasource' => 'MyPlugin.FarAwaySource',
         'apiKey'     => 'abcd1234',

@@ -1,5 +1,5 @@
-Helper JS
-#########
+JSHelper
+########
 
 .. php:class:: Helper Js(View $view, array $settings = array())
 
@@ -22,7 +22,6 @@ un code javascript concret spécifique à la librairie en cours
 d'utilisation. De plus ils crées un système extensible à utiliser
 pour les autres.
 
-
 Utilisation d'un moteur Javascript spécifique
 =============================================
 
@@ -34,7 +33,6 @@ dans toutes les pages, ajoutez cette ligne dans la section <head>
 de ``app/View/Layouts/default.ctp`` (copiez ce fichier depuis
 ``lib/Cake/View/Layouts/default.ctp`` si vous n'avez pas créé le votre)::
 
-    <?php
     echo $this->Html->script('jquery'); // Inclus la librairie Jquery
 
 Remplacez ``jquery`` par le nom de votre fichier de librairie (.js sera
@@ -44,7 +42,6 @@ Par défaut les scripts sont mis en cache, et vous devez explicitement
 imprimer le cache. Pour faire cela a la fin de chacune des pages, incluez
 cette ligne juste avant la balise de fin de ``</body>`` ::
 
-    <?php
     echo $this->Js->writeBuffer(); // Écrit les scripts en mémoire cache
 
 .. attention::
@@ -53,9 +50,8 @@ cette ligne juste avant la balise de fin de ``</body>`` ::
     pour que le helper fonctionne.
 
 La selection du moteur Javascript est déclarée quand vous incluez le 
-helper dans votre contrôleur ::
+helper dans votre controller ::
 
-    <?php
     public $helpers = array('Js' => array('Jquery'));
 
 La partie ci-dessus utilise le moteur Jquery dans les instances 
@@ -67,7 +63,7 @@ de librairie.
 
 
 Utilisation de jQuery avec d'autre librairies
---------------------------------------------------------
+---------------------------------------------
 
 La librairie jQuery, et virtuellement tous ses plugins sont limités
 au sein de l'espace jQuery. Comme règle générale, les objets
@@ -80,7 +76,6 @@ Ceci dit, il y a une mise en garde:
 
 Pour redéfinir le raccourci "$", utilisez la variable jQueryObject ::
 
-    <?php
     $this->Js->JqueryEngine->jQueryObject = '$j';
     echo $this->Html->scriptBlock(
         'var $j = jQuery.noConflict();', 
@@ -89,12 +84,11 @@ Pour redéfinir le raccourci "$", utilisez la variable jQueryObject ::
     // Demande à jQuery de se placer dans un mode noconflict
 
 Utilisation du Helper Js dans des helpers personnalisés
--------------------------------------------------------------------------
+-------------------------------------------------------
 
 Déclarez le Helper Js dans le tableau ``$helpers`` de votre 
 Helper personnalisé::
 
-    <?php
     public $helpers = array('Js');
 
 .. note::
@@ -103,10 +97,9 @@ Helper personnalisé::
     Helper personnalisé . Ceci n'aurait aucun effet.
 
 Si vous êtes prêt à utiliser un moteur javascript autre que celui
-par défaut, faites le paramétrage du Helper dans votre contrôleur
+par défaut, faites le paramétrage du Helper dans votre controller
 comme ceci::
 
-    <?php
     public $helpers = array(
         'Js' => array('Prototype'),
         'CustomHelper'
@@ -116,7 +109,7 @@ comme ceci::
 .. attention::
 
     Soyez certain de déclarer le Helper Js  et sont moteur **en haut** 
-    du tableau ``$helpers`` dans votre contrôleur.
+    du tableau ``$helpers`` dans votre controller.
 
 Le moteur javascript peut disparaître (remplacé par celui par défaut)
 de l'objet Helper Js dans votre helper, si vous oubliez de faire cela
@@ -159,19 +152,17 @@ retourne un $this, vous permettent d'enchaîner les méthodes en
 utilisant la selection.  Le chaînage de méthode vous permet 
 d'écrire moins, et de rendre votre code plus expressif .::
  
-    <?php
     $this->Js->get('#foo')->event('click', $eventCode);
 
 Est un exemple de chaînage de méthode. Le chaînage de méthode 
 n'est pas possible dans PHP4 et l'exemple ci-dessus devrait être
 écrit comme::
 
-    <?php
     $this->Js->get('#foo');
     $this->Js->event('click', $eventCode);
 
 Options communes
--------------------------
+----------------
 
 Dans le but de simplifier le développement ou les librairies Js peuvent
 changer. Un jeu commun d'options est pris en charge par le Helper Js,
@@ -181,15 +172,15 @@ commutation des librairies, chaque librairie supporte toutes les fonctions
 de callback natives et les options. 
 
 Enveloppement de Callback
--------------------------------------
+-------------------------
 
 Par défaut toutes les options de callback sont enveloppées dans la
 fonction anonyme an avec les arguments corrects. Vous pouvez 
-désactiver ce comportement  en  fournissant ``wrapCallbacks = false`` 
+désactiver ce behavior  en  fournissant ``wrapCallbacks = false`` 
 dans votre tableau d'options.
 
 Travailler avec des scripts bufferisés
--------------------------------------------------
+--------------------------------------
 
 Un inconvénient au précédente implémentation des fonctionnalités
 type d'Ajax était la dispersion des balises de script partout dans 
@@ -201,7 +192,6 @@ au dessus la balise ``</body>``. Ceci permettra à tous les scripts
 générés dans les éléments du layout d'être ressortis (output)
 à un endroit. Il doit être noté que les scripts bufferisés sont gérés
 séparément des scripts de fichiers inclus. 
-
 
 .. php:method:: writeBuffer($options = array())
 
@@ -252,14 +242,12 @@ la mise en mémoire cache. En ajoutant un booléen à la fin des arguments
 vous pouvez forcer d'autres méthodes d'aller en mémoire cache. Par 
 exemple la méthode ``each()`` qui n'est normalement pas bufferisée::
 
-    <?php
     $this->Js->each('alert("sapristi!");', true);
 
 Ce qui est ci dessus va forcer la méthode ``each()``à utiliser le buffer.
 En revanche si vous souhaitez qu'une méthode bufferisée ne bufferise
 plus, vous pouvez passer un ``false`` comme le dernier argument::
 
-    <?php
     $this->Js->event('click', 'alert("sapristi!");', false);
 
 Ceci forcera la fonction event qui est normalement mis en mémoire cache
@@ -289,7 +277,6 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
 
     **Exemple d'utilisation**::
     
-        <?php
         $json = $this->Js->object($data);
 
 .. php:method:: sortable($options = array())
@@ -323,7 +310,6 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
     l
     **Example Use**::
     
-        <?php
         $this->Js->get('#ma-liste');
         $this->Js->sortable(array(
             'distance' => 5,
@@ -369,7 +355,6 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
 
     **Exemple d'utilisation**::
 
-        <?php
         $this->Js->event(
             'click',
             $this->Js->request(
@@ -384,7 +369,6 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
     active est utilisée dans les opérations ultérieures jusqu'à ce qu'une
     nouvelle soit faite.::
     
-        <?php
         $this->Js->get('#element');
 
     Le ``Helper Js`` fait maintenant référence à toutes les méthodes de
@@ -418,7 +402,6 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
 
     **Exemple d'utilisation**::
 
-        <?php
         $this->Js->get('#element');
         $this->Js->drag(array(
             'container' => '#content',
@@ -457,7 +440,6 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
 
     **Exemple d'utilisation**::
 
-        <?php
         $this->Js->get('#element');
         $this->Js->drop(array(
             'accept' => '.items',
@@ -506,7 +488,6 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
 
     **Exemple d'utilisation**::
 
-        <?php
         $this->Js->get('#element');
         $this->Js->slider(array(
             'complete' => 'onComplete',
@@ -550,7 +531,6 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
 
     Si vous utilisez le moteur jQuery::
 
-        <?php
         $this->Js->get('#element');
         $result = $this->Js->effect('fadeIn');
 
@@ -574,7 +554,6 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
 
     **Exemple d'utilisation**::
     
-        <?php
         $this->Js->get('#some-link');
         $this->Js->event('click', $this->Js->alert('saperlipopette!'));
 
@@ -590,7 +569,6 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
     Vous pouvez retirer le ``return false;`` en passant l'option
     ``stop`` à false::
 
-        <?php
         $this->Js->get('#some-link');
         $this->Js->event('click', $this->Js->alert('saperlipopette!'), array('stop' => false));
 
@@ -616,7 +594,6 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
 
     **Exemple**::
 
-        <?php
         $this->Js->get('div.message');
         $this->Js->each('$(this).css({color: "red"});');
 
@@ -632,7 +609,6 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
     défaut, ``alert`` ne bufferise pas, et retourne le morceau de script 
     suivant.::
 
-        <?php
         $alert = $this->Js->alert('Zogotunga!');
 
 .. php:method:: confirm($message)
@@ -641,7 +617,6 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
     défaut, ``confirm`` ne bufferise pas, et retourne le morceau de script
     suivant.::
 
-        <?php
         $alert = $this->Js->confirm('Vraiment certain?');
 
 .. php:method:: prompt($message, $default)
@@ -650,7 +625,6 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
     défaut, ``prompt`` ne bufferise pas, et retourne le morceau de code 
     suivant.::
 
-        <?php
         $prompt = $this->Js->prompt('C'est quoi ta couleur préférée?', 'bleu');
 
 .. php:method:: submit($caption = null, $options = array())
@@ -676,13 +650,11 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
 
     **Exemple d'utilisation**::
 
-        <?php
         echo $this->Js->submit('Save', array('update' => '#content'));
 
     Va créé un bouton submit et un événement onclick attaché. 
     L'événement click sera bufferisé par défaut.::
 
-        <?php
         echo $this->Js->submit('Save', array('update' => '#content', 'div' => false, 'type' => 'json', 'async' => false));
 
     Montre comment vous pouvez combiner les options de 
@@ -713,7 +685,6 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
 
     **Exemple d'utilisation**::
 
-        <?php
         echo $this->Js->link('Page 2', array('page' => 2), array('update' => '#content'));
 
     Va créé un lien pointant vers ``/page:2`` et mettre à jour  #content
@@ -722,7 +693,6 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
     Vous pouvez utiliser les options de ``htmlAttributes`` pour ajouter des 
     attributs personnalisés.::
 
-        <?php
         echo $this->Js->link('Page 2', array('page' => 2), array(
             'update' => '#content',
             'htmlAttributes' => array('other' => 'value')
@@ -763,7 +733,7 @@ jeux de paramètres sont fournis dans le tableau ``$options`` pour la méthode.
 
 .. _ajax-pagination:
 
-La Pagination Ajax 
+La Pagination Ajax
 ==================
 
 Bien mieux qu'avec la pagination Ajax de la 1.2, vous pouvez utiliser
@@ -771,31 +741,28 @@ le Helper JS pour gérer les liens de pagination AJAX au lieu de
 liens HTML.
 
 Fabriquer les liens Ajax
--------------------------------
+------------------------
 
 Avant de pouvoir créer les liens ajax vous devez inclure la librairie
 Javascript qui correspond à l'adaptateur que vous utilisez avec
 le ``Helper JS``. Par défaut le ``Helper Js`` utilise jQuery. Donc 
 dans votre layout incluez jQuery (ou la librairie que vous utilisez). 
 Assurez vous également d'inclure ``RequestHandlerComponent`` 
-dans votre comportement. Ajoutez ce qui suit dans votre 
-contrôleur::
+dans votre behavior. Ajoutez ce qui suit dans votre 
+controller::
 
-    <?php
     public $components = array('RequestHandler');
     public $helpers = array('Js');
 
 Ce qui suit relie la librairie Javascript que vous voulez utiliser.
 Pour cet exemple nous utiliserons jQuery::
 
-    <?php
     echo $this->Html->script('jquery');
 
 De même qu'avec la 1.2 vous devez dire au ``PaginatorHelper`` que vous
 voulez faire des liens Javascript avancés au lieu des plain HTML.
 Pour faire cela utilisez ``options()``::
     
-    <?php
     $this->Paginator->options(array(
         'update' => '#content',
         'evalScripts' => true
@@ -818,7 +785,6 @@ tous les contenus de scripts pour réduire les balises  ``<script>``
 dans vos codes sources vous **devez** appeler la restitution
 du buffer . A la fin de votre fichier de vue. Vérifiez l'inclusion de::
 
-    <?php
     echo $this->Js->writeBuffer();
 
 Si vous oubliez cela vous ne pourrez **pas** enchaîner les liens de 
@@ -826,7 +792,7 @@ paginiation Ajax. Quand vous écrivez le buffer, cela l'efface également ,
 et vous n'avez donc pas à vous inquiéter de doublon de code Javascript.
 
 Ajouter des effets et des transitions
------------------------------------------------
+-------------------------------------
 
 Depuis que `indicator`` n'est plus supporté, vous devez ajouter 
 les effets d'indicator vous même.::
@@ -856,7 +822,6 @@ une  animation "occupé" " que nous aurons à montrer et cacher
 avec le ``Helper Js``. Pour faire cela nous avons besoin de mettre 
 à jour notre fonction  ``options()``::
 
-    <?php
     $this->Paginator->options(array(
         'update' => '#content',
         'evalScripts' => true,
@@ -872,6 +837,6 @@ d'effets plus complexes.
 
 
 .. meta::
-    :title lang=en: Helper Js
-    :description lang=en: The Js Helper supports the javascript libraries Prototype, jQuery and Mootools and provides methods for manipulating javascript.
-    :keywords lang=en: js helper,javascript,cakephp jquery,cakephp mootools,cakephp prototype,cakephp jquery ui,cakephp scriptaculous,cakephp javascript,javascript engine
+    :title lang=fr: JsHelper
+    :description lang=fr: JsHelper supporte les librairies javascript Prototype, jQuery et Mootools et fournit des méthodes pour la manipulation de javascript.
+    :keywords lang=fr: js helper,javascript,cakephp jquery,cakephp mootools,cakephp prototype,cakephp jquery ui,cakephp scriptaculous,cakephp javascript,javascript engine

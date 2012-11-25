@@ -22,16 +22,19 @@ sur les « entrailles » de votre application.
 CakePHP dispose 
 `d’une équipe de développement <http://cakephp.lighthouseapp.com/contributors>`_
 et d’une communauté actives, qui donnent au projet une forte valeur ajoutée.
-En plus de vous éviter la ré-invention de la roue, l’utilisation de CakePHP implique 
-que le coeur de votre application est bien testé et qu’il peut être constamment amélioré.
+En plus de vous éviter la ré-invention de la roue, l’utilisation de CakePHP 
+implique que le coeur de votre application est bien testé et qu’il peut être 
+constamment amélioré.
 
-Voici un aperçu rapide des caractéristiques que vous apprécierez en utilisant CakePHP :
+Voici un aperçu rapide des caractéristiques que vous apprécierez en utilisant 
+CakePHP :
 
 -  `Communauté active et sympathique <http://cakephp.org/feeds>`_
 -  `Système de licence souple <http://en.wikipedia.org/wiki/MIT_License>`_
 -  Compatible avec les versions PHP 5.2.8 et supérieures.
 -  Fonctions `CRUD <http://en.wikipedia.org/wiki/Create,_read,_update_and_delete>`_ 
-   (create, read, update, delete) intégrées pour les interactions avec la base de données
+   (create, read, update, delete) intégrées pour les interactions avec la base 
+   de données
 -  `Scaffolding <http://en.wikipedia.org/wiki/Scaffold_(programming)>`_ 
    (maquettage rapide) d’application.
 -  Génération de code.
@@ -42,16 +45,17 @@ Voici un aperçu rapide des caractéristiques que vous apprécierez en utilisant
 -  Système de `template <http://en.wikipedia.org/wiki/Web_template_system>`_
    rapide et souple (syntaxe PHP avec des Helpers)
 -  Helpers (assistants) de vue pour AJAX, JavaScript, formulaires HTML...
--  Components (composants) intégrés : Email, Cookie, Security, Session et Request Handling
--  Système de contrôle d’accès `ACL <http://en.wikipedia.org/wiki/Access_control_list>`_ 
-   flexible.
+-  Components (composants) intégrés : Email, Cookie, Security, Session et 
+   Request Handling.
+-  Système de contrôle d’accès 
+   `ACL <http://en.wikipedia.org/wiki/Access_control_list>`_  flexible.
 -  Nettoyage des données.
 -  Système de `cache <http://en.wikipedia.org/wiki/Web_cache>`_ souple.
 -  Localisation et internationalisation.
--  Fonctionne sur n’importe quelle arborescence de site web, avec un zest de
-   configuration `Apache <http://httpd.apache.org/>`_ pas très compliquée
+-  Fonctionne sur n’importe quelle arborescence de site web, avec un zest de 
+   configuration `Apache <http://httpd.apache.org/>`_ pas très compliquée.
 
 
 .. meta::
     :title lang=fr: Qu'est-ce que CakePHP? Pourquoi l'utiliser?
-    :keywords lang=fr: custom urls,php syntax,cookie security,database interaction,security session,rapid manner,developer team,free open source,javascript html,apache configuration,web site directory,html forms,code generation,development framework,monotony,rapid development,scaffolding,dispatcher,friendly community,crud
+    :keywords lang=fr: urls personnalisées,syntaxe php,sécurité cookie,interaction avec base de données,sécurité session,rapid manner,equipe de programmeurs,gratuit open source,javascript html,apache configuration,répertoire site web,formulaires html,génération de code,développement framework,monotonie,développement rapide,scaffolding,dispatcher,communauté amicale,crud

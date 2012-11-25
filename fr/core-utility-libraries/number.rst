@@ -3,10 +3,9 @@ CakeNumber
 
 .. php:class:: CakeNumber()
 
-If you need :php:class:`NumberHelper` functionalities outside of a ``View``,
-use the ``CakeNumber`` class::
+Si vous avez besoin des fonctionnalités de :php:class:`NumberHelper` en dehors 
+d'une ``View``, utilisez la classe ``CakeNumber``::
 
-    <?php
     class UsersController extends AppController {
 
         public $components = array('Auth');
@@ -22,37 +21,36 @@ use the ``CakeNumber`` class::
     }
 
 .. versionadded:: 2.1
-    ``CakeNumber`` has been factored out from :php:class:`NumberHelper`.
+    ``CakeNumber`` a été refondu à partir de :php:class:`NumberHelper`.
 
 .. start-cakenumber
 
-All of these functions return the formatted number; They do not
-automatically echo the output into the view.
+Toutes ces fonctions retournent le nombre formaté; Elles n'affichent pas 
+automatiqement la sortie dans la vue.
 
 .. php:method:: currency(mixed $number, string $currency = 'USD', array $options = array())
 
-    :param float $number: The value to covert.
-    :param string $currency: The known currency format to use.
-    :param array $options: Options, see below.
+    :param float $number: La valeur à convertir.
+    :param string $currency: Le format de monnaie connu à utiliser.
+    :param array $options: Options, voir ci-dessous.
 
-    This method is used to display a number in common currency formats
-    (EUR,GBP,USD). Usage in a view looks like::
+    Cette méthode est utilisée pour afficher un nombre dans des formats de 
+    monnaie courante (EUR,GBP,USD). L'utilisation dans une vue ressemble à 
+    ceci::
 
-        <?php
-        // called as NumberHelper
+        // Appelé par NumberHelper
         echo $this->Number->currency($number, $currency);
 
-        // called as CakeNumber
+        // Appelé par CakeNumber
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::currency($number, $currency);
 
-    The first parameter, $number, should be a floating point number
-    that represents the amount of money you are expressing. The second
-    parameter is used to choose a predefined currency formatting
-    scheme:
+    Le premier paramètre, $number, doit être un nombre à virgule qui représente 
+    le montant d'argent que vous désirez. Le second paramètre est utilisé pour 
+    choisir un schéma de formatage de monnaie courante:
 
     +---------------------+----------------------------------------------------+
-    | $currency           | 1234.56, formatted by currency type                |
+    | $currency           | 1234.56, formaté par le type courant               |
     +=====================+====================================================+
     | EUR                 | € 1.236,33                                         |
     +---------------------+----------------------------------------------------+
@@ -67,98 +65,105 @@ automatically echo the output into the view.
     +---------------------+----------------------------------------------------+
     | Option              | Description                                        |
     +=====================+====================================================+
-    | before              | The currency symbol to place before whole numbers  |
-    |                     | ie. '$'                                            |
+    | before              | Le symbole de la monnaie à placer avant les nombres|
+    |                     | ex: '$'                                            |
     +---------------------+----------------------------------------------------+
-    | after               | The currency symbol to place after decimal numbers |
-    |                     | ie. 'c'. Set to boolean false to use no decimal    |
-    |                     | symbol. eg. 0.35 => $0.35.                         |
+    | after               | Le symbole de la monnaie à placer après les nombres|
+    |                     | décimaux                                           |
+    |                     | ex: 'c'. Définit le boléeen à false pour utiliser  |
+    |                     | aucun symbole décimal                              |
+    |                     | ex: 0.35 => $0.35.                                 |
     +---------------------+----------------------------------------------------+
-    | zero                | The text to use for zero values, can be a string or|
-    |                     | a number. ie. 0, 'Free!'                           |
+    | zero                | Le texte à utiliser pour des valeurs à zéro, peut  |
+    |                     | être une chaîne de caractères ou un nombre.        |
+    |                     | ex: 0, 'Free!'                                     |
     +---------------------+----------------------------------------------------+
-    | places              | Number of decimal places to use. ie. 2             |
+    | places              | Nombre de décimales à utiliser. ex: 2              |
     +---------------------+----------------------------------------------------+
-    | thousands           | Thousands separator ie. ','                        |
+    | thousands           | Séparateur des milliers ex: ','                    |
     +---------------------+----------------------------------------------------+
-    | decimals            | Decimal separator symbol ie. '.'                   |
+    | decimals            | Symbole de Séparateur des décimales. ex: '.'       |
     +---------------------+----------------------------------------------------+
-    | negative            | Symbol for negative numbers. If equal to '()', the |
-    |                     | number will be wrapped with ( and )                |
+    | negative            | Symbole pour les nombres négatifs. Si égal à '()', |
+    |                     | le nombre sera entouré avec ( et )                 |
     +---------------------+----------------------------------------------------+
-    | escape              | Should the output be htmlentity escaped? Defaults  |
-    |                     | to true                                            |
+    | escape              | La sortie doit-elle être échappée de htmlentity?   |
+    |                     | Par défaut défini à true                           |
     +---------------------+----------------------------------------------------+
-    | wholeSymbol         | String to use for whole numbers ie. ' dollars'     |
+    | wholeSymbol         | La chaîne de caractères à utiliser pour les tous   |
+    |                     | nombres. ex: ' dollars'                            |
     +---------------------+----------------------------------------------------+
-    | wholePosition       | Either 'before' or 'after' to place the whole      |
-    |                     | symbol                                             |
+    | wholePosition       | Soit 'before' soit 'after' pour placer le symbole  |
+    |                     | entier                                             |
     +---------------------+----------------------------------------------------+
-    | fractionSymbol      | String to use for fraction numbers ie. ' cents'    |
+    | fractionSymbol      | Chaîne de caractères à utiliser pour les nombres   |
+    |                     | en fraction. ex: ' cents'                          |
     +---------------------+----------------------------------------------------+
-    | fractionPosition    | Either 'before' or 'after' to place the fraction   |
-    |                     | symbol                                             |
+    | fractionPosition    | Soit 'before' soit 'after' pour placer le symbole  |
+    |                     | de fraction                                        |
     +---------------------+----------------------------------------------------+
 
-    If a non-recognized $currency value is supplied, it is prepended to
-    a USD formatted number. For example::
+    Si une valeur $currency non reconnue est fournie, elle est préfixée par un 
+    nombre formaté en USD. Par exemple::
 
-        <?php
-        // called as NumberHelper
+        // Appelé par NumberHelper
         echo $this->Number->currency('1234.56', 'FOO');
 
-        // Outputs
+        // Sortie
         FOO 1,234.56
 
-        // called as CakeNumber
+        // Appelé par CakeNumber
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::currency('1234.56', 'FOO');
 
 .. php:method:: addFormat(string $formatName, array $options)
     
-    :param string $formatName: The format name to be used in the future
-    :param array $options: The array of options for this format.
+    :param string $formatName: Le nom du format à utiliser dans le futur.
+    :param array $options: Le tableau d'options pour ce format.
 
-        - `before` Currency symbol before number. False for none.
-        - `after` Currency symbol after number. False for none.
-        - `zero` The text to use for zero values, can be a string or a number.
-          ie. 0, 'Free!'
-        - `places` Number of decimal places to use. ie. 2.
-        - `thousands` Thousands separator ie. ','.
-        - `decimals` Decimal separator symbol ie. '.'.
-        - `negative` Symbol for negative numbers. If equal to '()', the number
-          will be wrapped with ( and ).
-        - `escape` Should the output be htmlentity escaped? Defaults to true.
-        - `wholeSymbol` String to use for whole numbers ie. ' dollars'.
-        - `wholePosition` Either 'before' or 'after' to place the whole symbol.
-        - `fractionSymbol` String to use for fraction numbers ie. ' cents'.
-        - `fractionPosition` Either 'before' or 'after' to place the fraction
-          symbol.
+        - `before` Symbole de monnaie avant le nombre. False pour aucun.
+        - `after` Symbole de monnaie après le nombre. False pour aucun.
+        - `zero` Le texte à utiliser pour les valeurs à zéro, peut être 
+          une chaîne de caractères ou un nombre.
+          ex: 0, 'Free!'
+        - `places` Nombre de décimal à utiliser. ex. 2.
+        - `thousands` Séparateur des milliers. ex: ','.
+        - `decimals` Symbole de Séparateur des Decimales. ex: '.'.
+        - `negative` Symbole pour les nombres négatifs. Si égal à '()', le 
+          nombre sera entouré avec ( et ).
+        - `escape` La sortie doit-elle être échappée de htmlentity? Par défaut 
+          à true
+        - `wholeSymbol` Chaîne de caractères à utiliser pour tous les nombres. 
+          ex: ' dollars'.
+        - `wholePosition` Soit 'before' soit 'after' pour placer le symbole 
+          complet.
+        - `fractionSymbol` Chaîne de caractères à utiliser pour les nombres à 
+          fraction. ex: ' cents'.
+        - `fractionPosition` Soit 'before' soit 'after' pour placer le symbole 
+          de fraction.
 
-    Add a currency format to the Number helper. Makes reusing
-    currency formats easier.::
+    Ajouter le format de monnaie au helper Number. Facilite la réutilisation 
+    des formats de monnaie.::
 
-        <?php
-        // called as NumberHelper
+        // appelé par NumberHelper
         $this->Number->addFormat('BRR', array('before' => 'R$ '));
 
-        // called as CakeNumber
+        // appelé par CakeNumber
         App::uses('CakeNumber', 'Utility');
         CakeNumber::addFormat('BRR', array('before' => 'R$ '));
 
-    You can now use `BRR` as a short form when formatting currency amounts::
+    Vous pouvez maintenant utiliser `BRR` de manière courte quand vous 
+    formattez les montants de monnaie::
 
-        <?php
-        // called as NumberHelper
+        // appelé par NumberHelper
         echo $this->Number->currency($value, 'BRR');
 
-        // called as CakeNumber
+        // appelé par CakeNumber
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::currency($value, 'BRR');
 
-    Added formats are merged with the following defaults::
+    Les formats ajoutés sont fusionnés avec les formats par défaut suivants::
 
-       <?php
        array(
            'wholeSymbol'      => '',
            'wholePosition'    => 'before',
@@ -174,64 +179,61 @@ automatically echo the output into the view.
 
 .. php:method:: precision(mixed $number, int $precision = 3)
 
-    :param float $number: The value to covert
-    :param integer $precision: The number of decimal places to display
+    :param float $number: La valeur à convertir
+    :param integer $precision: Le nombre de décimal à afficher
 
-    This method displays a number with the specified amount of
-    precision (decimal places). It will round in order to maintain the
-    level of precision defined.::
+    Cette méthode affiche un nombre avec le montant de précision spécifié 
+    (place de la décimal). Elle arrondira afin de maintenir le niveau de 
+    précision défini.:: 
 
-        <?php
-        // called as NumberHelper
+        // appelé par NumberHelper
         echo $this->Number->precision(456.91873645, 2 );
 
-        // Outputs
+        // Sortie
         456.92
 
-        // called as CakeNumber
+        // appelé par CakeNumber
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::precision(456.91873645, 2 );
 
 
 .. php:method:: toPercentage(mixed $number, int $precision = 2)
 
-    :param float $number: The value to covert
-    :param integer $precision: The number of decimal places to display
+    :param float $number: La valeur à convertir
+    :param integer $precision: Le nomnbre de décimal à afficher
 
-    Like precision(), this method formats a number according to the
-    supplied precision (where numbers are rounded to meet the given
-    precision). This method also expresses the number as a percentage
-    and prepends the output with a percent sign.::
-
-        <?php
-        // called as NumberHelper
+    Comme precision(), cette méthode formate un nombre selon la précision 
+    fournie (où les nombres sont arrondis pour parvenir à ce degré de 
+    précision). Cette méthode exprime aussi le nombre en tant que 
+    pourcentage et préfixe la sortie avec un signe de pourcent.::
+    
+        // appelé par NumberHelper
         echo $this->Number->toPercentage(45.691873645);
 
-        // Outputs
+        // Sortie
         45.69%
 
-        // called as CakeNumber
+        // appelé par CakeNumber
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::toPercentage(45.691873645);
 
 .. php:method:: toReadableSize(string $data_size)
 
-    :param string $data_size: The number of bytes to make readable. 
+    :param string $data_size: Le nombre de bytes pour le rendre lisible. 
 
-    This method formats data sizes in human readable forms. It provides
-    a shortcut way to convert bytes to KB, MB, GB, and TB. The size is
-    displayed with a two-digit precision level, according to the size
-    of data supplied (i.e. higher sizes are expressed in larger
-    terms)::
+    Cette méthode formate les tailles de données dans des formes lisibles 
+    pour l'homme. Elle fournit une manière raccourcie de convertir les 
+    en KB, MB, GB, et TB. La taille est affichée avec un niveau de précision 
+    à deux chiffres, selon la taille de données fournie (ex: les tailles 
+    supérieurs sont exprimées dans des termes plus larges)::
 
-        <?php
-        // called as NumberHelper
+        // appelé par NumberHelper
         echo $this->Number->toReadableSize(0); // 0 Bytes
         echo $this->Number->toReadableSize(1024); // 1 KB
         echo $this->Number->toReadableSize(1321205.76); // 1.26 MB
         echo $this->Number->toReadableSize(5368709120); // 5.00 GB
 
-        // called as CakeNumber
+        // appelé par CakeNumber
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::toReadableSize(0); // 0 Bytes
         echo CakeNumber::toReadableSize(1024); // 1 KB
@@ -240,43 +242,40 @@ automatically echo the output into the view.
 
 .. php:method:: format(mixed $number, mixed $options=false)
 
-    This method gives you much more control over the formatting of
-    numbers for use in your views (and is used as the main method by
-    most of the other NumberHelper methods). Using this method might
-    looks like::
+    Cette méthode vous donne beaucoup plus de contrôle sur le formatage des 
+    nombres pour l'utilisation dans vos vues (et est utilisée en tant que 
+    méthode principale par la plupart des autres méthodes de NumberHelper). 
+    L'utilisation de cette méthode pourrait ressembler à cela::
 
-        <?php
-        // called as NumberHelper
+        // appelé par NumberHelper
         $this->Number->format($number, $options);
 
-        // called as CakeNumber
+        // appelé par CakeNumber
         CakeNumber::format($number, $options);
 
-    The $number parameter is the number that you are planning on
-    formatting for output. With no $options supplied, the number
-    1236.334 would output as 1,236. Note that the default precision is
-    zero decimal places.
+    Le paramètre $number est le nombre que vous souhaitez formater pour la 
+    sortie. Avec aucun $options fourni, le nombre 1236.334 sortirait comme 
+    ceci : 1,236. Notez que la précision par défaut est d'aucun chiffre après 
+    la virgule.
 
-    The $options parameter is where the real magic for this method
-    resides.
+    Le paramètre $options est là où réside la réelle magie de cette méthode.
 
 
-    -  If you pass an integer then this becomes the amount of precision
-       or places for the function.
-    -  If you pass an associated array, you can use the following keys:
+    -  Si vous passez un entier alors celui-ci devient le montant de précision 
+       pour la fonction.
+    -  Si vous passez un tableau associatif, vous pouvez utiliser les clés 
+       suivantes:
 
-       -  places (integer): the amount of desired precision
-       -  before (string): to be put before the outputted number
-       -  escape (boolean): if you want the value in before to be escaped
-       -  decimals (string): used to delimit the decimal places in a
-          number
-       -  thousands (string): used to mark off thousand, millions, …
-          places
+       -  places (integer): le montant de précision désiré.
+       -  before (string): à mettre avant le nombre à sortir.
+       -  escape (boolean): si vous voulez la valeur avant d'être échappée
+       -  decimals (string): utilisé pour délimiter les places des décimales 
+          dans le nombre.
+       -  thousands (string): utilisé pour marquer les milliers, millions, …
 
-    Example::
+    Exemple::
 
-        <?php
-        // called as NumberHelper
+        // appelé par NumberHelper
         echo $this->Number->format('123456.7890', array(
             'places' => 2,
             'before' => '¥ ',
@@ -284,9 +283,9 @@ automatically echo the output into the view.
             'decimals' => '.',
             'thousands' => ','
         ));
-        // output '¥ 123,456.79'
+        // sortie '¥ 123,456.79'
 
-        // called as CakeNumber
+        // appelé par CakeNumber
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::format('123456.7890', array(
             'places' => 2,
@@ -295,11 +294,12 @@ automatically echo the output into the view.
             'decimals' => '.',
             'thousands' => ','
         ));
-        // output '¥ 123,456.79'
+        // sortie '¥ 123,456.79'
 
 .. end-cakenumber
 
+
 .. meta::
-    :title lang=en: NumberHelper
-    :description lang=en: The Number Helper contains convenience methods that enable display numbers in common formats in your views.
-    :keywords lang=en: number helper,currency,number format,number precision,format file size,format numbers
+    :title lang=fr: NumberHelper
+    :description lang=fr: Le Helper Number contient des méthodes pratiques qui permettent l'affichage de nombres dans des formats habituels dans vos vues.
+    :keywords lang=fr: number helper,monnaie,format nombre,précision nombre,format fichier taille,format nombres

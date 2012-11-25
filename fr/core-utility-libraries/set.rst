@@ -3,29 +3,29 @@ Set
 
 .. php:class:: Set
 
-Array management, if done right, can be a very powerful and useful
-tool for building smarter, more optimized code. CakePHP offers a
-very useful set of static utilities in the Set class that allow you
-to do just that.
+La gestion de tableau, si elle est bien faite, peut être un outil très 
+puissant et utile pour construire plus malin, et du code plus optimisé. 
+CakePHP offre un ensemble d'utilitaires statiquestrès utiles dans la 
+classe Set qui vous permet justement de faire cela.
 
-CakePHP's Set class can be called from any model or controller in
-the same way Inflector is called. Example: :php:meth:`Set::combine()`.
+La classe Set de CakePHP peut être appelée par n'importe quel model ou 
+controller de la même façon que l'Inflector est appelé. 
+Exemple: :php:meth:`Set::combine()`.
 
-Set-compatible Path syntax
-==========================
+La syntaxe du Chemin Set-compatible
+===================================
 
-The Path syntax is used by (for example) sort, and is used to
-define a path.
+La syntaxe de Chemin est utilisée par sorte (par exemple), et est utilisée pour 
+définir un chemin.
 
-Usage example (using :php:func:`Set::sort()`)::
+Exemple d'utilisation (en utilisant :php:func:`Set::sort()`)::
 
-    <?php
     $a = array(
         0 => array('Person' => array('name' => 'Jeff')),
         1 => array('Shirt' => array('color' => 'black'))
     );
     $result = Set::sort($a, '{n}.Person.name', 'asc');
-    /* $result now looks like:
+    /* $result ressemble maintenant à:
         Array
         (
             [0] => Array
@@ -45,37 +45,37 @@ Usage example (using :php:func:`Set::sort()`)::
         )
     */
 
-As you can see in the example above, some things are wrapped in
-{}'s, others not. In the table below, you can see which options are
-available.
+Comme vous pouvez le voir dans l'exemple ci-dessus, certaines choses sont 
+entourées de {}, d'autres non. Dans la table ci-dessous, vous pouvez voir 
+quelles options sont disponibles.
 
 +--------------------------------+--------------------------------------------+
 | Expression                     | Definition                                 |
 +================================+============================================+
-| {n}                            | Represents a numeric key                   |
+| {n}                            | Représente une clé numérique               |
 +--------------------------------+--------------------------------------------+
-| {s}                            | Represents a string                        |
+| {s}                            | Représente une chaîne                      |
 +--------------------------------+--------------------------------------------+
-| Foo                            | Any string (without enclosing brackets)    |
-|                                | is treated like a string literal.          |
+| Foo                            | Toute chaîne (sans les accolades           |
+|                                | fermantes) est traitée comme une chaîne    |
+|                                | littérale.                                 |
 +--------------------------------+--------------------------------------------+
-| {[a-z]+}                       | Any string enclosed in brackets (besides   |
-|                                | {n} and {s}) is interpreted as a regular   |
-|                                | expression.                                |
+| {[a-z]+}                       | Toute chaîne entre accolades (à part       |
+|                                | {n} et {s}) est interpretée comme une      |
+|                                | expression régulière.                      |
 +--------------------------------+--------------------------------------------+
 
 .. todo:
 
-    This section needs to be expanded.
+    Cette section a besoin d'être etoffée.
 
 .. php:staticmethod:: apply($path, $array, $callback, $options = array())
 
     :rtype: mixed
 
-    Apply a callback to the elements of an array extracted
-    by a Set::extract compatible path::
+    Appliquer un callback aux éléments d'un tableau extrait par un chemin 
+    Set::extract compatible::
 
-        <?php
         $data = array(
             array('Movie' => array('id' => 1, 'title' => 'movie 3', 'rating' => 5)),
             array('Movie' => array('id' => 1, 'title' => 'movie 1', 'rating' => 1)),
@@ -83,21 +83,20 @@ available.
         );
 
         $result = Set::apply('/Movie/rating', $data, 'array_sum');
-        // result equals 9
+        // résultat égal à 9
 
         $result = Set::apply('/Movie/title', $data, 'strtoupper', array('type' => 'map'));
-        // result equals array('MOVIE 3', 'MOVIE 1', 'MOVIE 2')
-        // $options are: - type : can be 'pass' uses call_user_func_array(), 'map' uses array_map(), or 'reduce' uses array_reduce()
+        // résultat égal à array('MOVIE 3', 'MOVIE 1', 'MOVIE 2')
+        // $options sont: - type : peut être 'pass' uses call_user_func_array(), 'map' uses array_map(), ou 'reduce' uses array_reduce()
 
 
 .. php:staticmethod:: check($data, $path = null)
 
     :rtype: boolean/array
 
-    Checks if a particular path is set in an array. If $path is empty,
-    $data will be returned instead of a boolean value::
+    Vérifie si un chemin particulier est défini dans un tableau. Si $path est 
+    vide, $data va être retournée au lieu d'une valeur boléenne::
 
-        <?php
         $set = array(
             'My Index 1' => array('First' => 'The first item')
         );
@@ -127,24 +126,23 @@ available.
 
     :rtype: array
 
-    Gets a value from an array or object that is contained in a given
-    path using an array path syntax, i.e.:
+    Récupère une valeur d'un tableau ou d'un objet qui est contenu dans un 
+    chemin donné en utilisant un tableau en une syntaxe de tableau, par ex:
 
-    -  "{n}.Person.{[a-z]+}" - Where "{n}" represents a numeric key,
-       "Person" represents a string literal
-    -  "{[a-z]+}" (i.e. any string literal enclosed in brackets besides
-       {n} and {s}) is interpreted as a regular expression.
+    -  "{n}.Person.{[a-z]+}" - Où "{n}" représente une clé numérique,
+       "Person" représente une chaîne littérale
+    -  "{[a-z]+}" (par ex: toute chaîne littérale fermée par des accolades en 
+       plus de {n} et {s}) est interpreté comme une expressoin régulière.
 
-    **Example 1**
+    **Exemple 1**
     ::
 
-        <?php
         $a = array(
             array('Article' => array('id' => 1, 'title' => 'Article 1')),
             array('Article' => array('id' => 2, 'title' => 'Article 2')),
             array('Article' => array('id' => 3, 'title' => 'Article 3')));
         $result = Set::classicExtract($a, '{n}.Article.id');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [0] => 1
@@ -153,7 +151,7 @@ available.
             )
         */
         $result = Set::classicExtract($a, '{n}.Article.title');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [0] => Article 1
@@ -167,10 +165,9 @@ available.
         $result = Set::classicExtract($a, '3.Article.title');
         // $result == null
 
-    **Example 2**
+    **Exemple 2**
     ::
 
-        <?php
         $a = array(
             0 => array('pages' => array('name' => 'page')),
             1 => array('fruites' => array('name' => 'fruit')),
@@ -179,7 +176,7 @@ available.
         );
 
         $result = Set::classicExtract($a, '{n}.{s}.name');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [0] => Array
@@ -193,7 +190,7 @@ available.
             )
         */
         $result = Set::classicExtract($a, '{s}.{n}.name');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [0] => Array
@@ -207,7 +204,7 @@ available.
             )
         */
         $result = Set::classicExtract($a,'{\w+}.{\w+}.name');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [0] => Array
@@ -229,7 +226,7 @@ available.
             )
         */
         $result = Set::classicExtract($a,'{\d+}.{\w+}.name');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [0] => Array
@@ -243,7 +240,7 @@ available.
             )
         */
         $result = Set::classicExtract($a,'{n}.{\w+}.name');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [0] => Array
@@ -257,7 +254,7 @@ available.
             )
         */
         $result = Set::classicExtract($a,'{s}.{\d+}.name');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [0] => Array
@@ -271,7 +268,7 @@ available.
             )
         */
         $result = Set::classicExtract($a,'{s}');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
 
@@ -292,7 +289,7 @@ available.
             )
         */
         $result = Set::classicExtract($a,'{[a-z]}');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [test] => Array
@@ -313,7 +310,7 @@ available.
             )
         */
         $result = Set::classicExtract($a, '{dot\.test}.{n}');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [dot.test] => Array
@@ -331,13 +328,12 @@ available.
 
     :rtype: array
 
-    Creates an associative array using a $path1 as the path to build
-    its keys, and optionally $path2 as path to get the values. If
-    $path2 is not specified, all values will be initialized to null
-    (useful for Set::merge). You can optionally group the values by
-    what is obtained when following the path specified in $groupPath.::
+    Crée un tableau associatif utilisant un $path1 comme chemin à build
+    en clé, et en option $path2 comme chemin pour obtenir les valeurs. Si 
+    $path2 n'est pas spécifié, toutes les valeurs seront initialisées à null
+    (utile pour Set::merge). Vous pouvez en option grouper les valeurs par 
+    ce qui est obtenu quand on suit le chemin spécifié dans $groupPath.::
 
-        <?php
         $result = Set::combine(array(), '{n}.User.id', '{n}.User.Data');
         // $result == array();
 
@@ -377,7 +373,7 @@ available.
             )
         );
         $result = Set::combine($a, '{n}.User.id');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [2] =>
@@ -387,7 +383,7 @@ available.
         */
 
         $result = Set::combine($a, '{n}.User.id', '{n}.User.non-existant');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [2] =>
@@ -397,7 +393,7 @@ available.
         */
 
         $result = Set::combine($a, '{n}.User.id', '{n}.User.Data');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [2] => Array
@@ -419,7 +415,7 @@ available.
         */
 
         $result = Set::combine($a, '{n}.User.id', '{n}.User.Data.name');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [2] => Mariano Iglesias
@@ -429,7 +425,7 @@ available.
         */
 
         $result = Set::combine($a, '{n}.User.id', '{n}.User.Data', '{n}.User.group_id');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [1] => Array
@@ -457,7 +453,7 @@ available.
         */
 
         $result = Set::combine($a, '{n}.User.id', '{n}.User.Data.name', '{n}.User.group_id');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [1] => Array
@@ -473,7 +469,7 @@ available.
         */
 
         $result = Set::combine($a, '{n}.User.id', array('{0}: {1}', '{n}.User.Data.user', '{n}.User.Data.name'), '{n}.User.group_id');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [1] => Array
@@ -489,7 +485,7 @@ available.
         */
 
         $result = Set::combine($a, array('{0}: {1}', '{n}.User.Data.user', '{n}.User.Data.name'), '{n}.User.id');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [mariano.iglesias: Mariano Iglesias] => 2
@@ -499,7 +495,7 @@ available.
         */
 
         $result = Set::combine($a, array('{1}: {0}', '{n}.User.Data.user', '{n}.User.Data.name'), '{n}.User.id');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [Mariano Iglesias: mariano.iglesias] => 2
@@ -510,7 +506,7 @@ available.
 
         $result = Set::combine($a, array('%1$s: %2$d', '{n}.User.Data.user', '{n}.User.id'), '{n}.User.Data.name');
 
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [mariano.iglesias: 2] => Mariano Iglesias
@@ -520,7 +516,7 @@ available.
         */
 
         $result = Set::combine($a, array('%2$d: %1$s', '{n}.User.Data.user', '{n}.User.id'), '{n}.User.Data.name');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [2: mariano.iglesias] => Mariano Iglesias
@@ -534,10 +530,9 @@ available.
 
     :rtype: boolean
 
-    Determines if one Set or array contains the exact keys and values
-    of another::
+    Detérmine si un Set ou un tableau contient les clés exactes et les valeurs 
+    d'un autre::
 
-        <?php
         $a = array(
             0 => array('name' => 'main'),
             1 => array('name' => 'about')
@@ -561,11 +556,10 @@ available.
 
     :rtype: integer
 
-    Counts the dimensions of an array. If $all is set to false (which
-    is the default) it will only consider the dimension of the first
-    element in the array::
+    Compte les dimensions d'un tableau. Si $all est défini à false (qui 
+    est la valeur par défaut) il va seulement considérer la dimension du 
+    premier élément dans le tableau::
 
-        <?php
         $data = array('one', '2', 'three');
         $result = Set::countDim($data);
         // $result == 1
@@ -618,10 +612,9 @@ available.
 
     :rtype: array
 
-    Computes the difference between a Set and an array, two Sets, or
-    two arrays::
+    Compute la différence entre un Set et un tableau, deux Sets, ou 
+    deux tableaux::
 
-        <?php
         $a = array(
             0 => array('name' => 'main'),
             1 => array('name' => 'about')
@@ -633,7 +626,7 @@ available.
         );
 
         $result = Set::diff($a, $b);
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [2] => Array
@@ -643,7 +636,7 @@ available.
             )
         */
         $result = Set::diff($a, array());
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [0] => Array
@@ -657,7 +650,7 @@ available.
             )
         */
         $result = Set::diff(array(), $b);
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [0] => Array
@@ -696,100 +689,103 @@ available.
 
     :rtype: string
 
-    The enum method works well when using html select elements. It
-    returns a value from an array list if the key exists.
+    La méthode enum fonctionne bien quand on utilise les éléments html select. 
+    Elle retourne une valeur d'un tableau listé si la clé existe.
 
-    If a comma separated $list is passed arrays are numeric with the
-    key of the first being 0 $list = 'no, yes' would translate to $list
+    Si un $list séparé par des virgules est passé dans les tableaux sont 
+    numériques avec la clé allant de 0 $list = 'no, yes' traduirait à $list
     = array(0 => 'no', 1 => 'yes');
 
-    If an array is used, keys can be strings example: array('no' => 0,
-    'yes' => 1);
+    Si un tableau est utilisé, les clés peuvent être des chaînes exemple: 
+    array('no' => 0,'yes' => 1);
 
-    $list defaults to 0 = no 1 = yes if param is not passed::
+    $list par défaut à 0 = no 1 = yes si param n'est pas passé::
 
-        <?php
         $res = Set::enum(1, 'one, two');
-        // $res is 'two'
+        // $res est 'two'
 
         $res = Set::enum('no', array('no' => 0, 'yes' => 1));
-        // $res is 0
+        // $res est 0
 
         $res = Set::enum('first', array('first' => 'one', 'second' => 'two'));
-        // $res is 'one'
+        // $res est 'one'
 
 
 .. php:staticmethod:: extract($path, $data=null, $options=array())
 
     :rtype: array
 
-    Set::extract uses basic XPath 2.0 syntax to return subsets of your
-    data from a find or a find all. This function allows you to
-    retrieve your data quickly without having to loop through multi
-    dimensional arrays or traverse through tree structures.
-
+    Set::extract utilise la syntaxe basique XPath 2.0 pour retourner les 
+    sous-ensembles de vos données à partir d'un fin ou d'un find all. Cette 
+    fonction vous permet de récupèrer vos données rapidement sans avoir 
+    à boucler à travers des tableaux multi-dimensionnels ou de traverser 
+    à travers les structures en arbre.
+    
     .. note::
 
-        If ``$path`` does not contain a '/' the call will be delegated to
+        Si ``$path`` ne contient pas un '/', l'appel sera délégué à 
         :php:meth:`Set::classicExtract()`
 
     ::
 
-        <?php
-        // Common Usage:
+        // Utilisation habituelle:
         $users = $this->User->find("all");
         $results = Set::extract('/User/id', $users);
-        // results returns:
+        // results retourne:
         // array(1,2,3,4,5,...);
 
-    Currently implemented selectors:
+    Les sélecteurs implémentés actuellement:
 
     +------------------------------------------+--------------------------------------------+
     | Selector                                 | Note                                       |
     +==========================================+============================================+
-    | /User/id                                 | Similar to the classic {n}.User.id         |
+    | /User/id                                 | Similaire au {n}.User.id classique         |
     +------------------------------------------+--------------------------------------------+
-    | /User[2]/name                            | Selects the name of the second User        |
+    | /User[2]/name                            | Sélectionne le nom du deuxième User        |
     +------------------------------------------+--------------------------------------------+
-    | /User[id<2]                              | Selects all Users with an id < 2           |
+    | /User[id<2]                              | Sélectionne tous les Users avec un id < 2  |
     +------------------------------------------+--------------------------------------------+
-    | /User[id>2][<5]                          | Selects all Users with an id > 2 but 5     |
+    | /User[id>2][<5]                          | Sélectionne tous les Users avec un id > 2  |
+    |                                          | mais 5                                     |
     +------------------------------------------+--------------------------------------------+
-    | /Post/Comment[author\_name=john]/../name | Selects the name of all Posts that have at |
-    |                                          | least one Comment written by john          |
+    | /Post/Comment[author\_name=john]/../name | Sélectionne le nom de tous les Posts qui   |
+    |                                          | ont au moins un Comment écrit par john     |
     +------------------------------------------+--------------------------------------------+
-    | /Posts[title]                            | Selects all Posts that have a 'title' key  |
+    | /Posts[title]                            | Sélectionne tous les Posts qui ont une clé |
+    |                                          | 'title'                                    |
     +------------------------------------------+--------------------------------------------+
-    | /Comment/.[1]                            | Selects the contents of the first comment  |
+    | /Comment/.[1]                            | Sélectionne les contenus du premier contenu|
     +------------------------------------------+--------------------------------------------+
-    | /Comment/.[:last]                        | Selects the last comment                   |
+    | /Comment/.[:last]                        | Sélectionne le dernier comment             |
     +------------------------------------------+--------------------------------------------+
-    | /Comment/.[:first]                       | Selects the first comment                  |
+    | /Comment/.[:first]                       | Sélectionne le premier comment             |
     +------------------------------------------+--------------------------------------------+
-    | /Comment[text=/cakephp/i]                | Selects all comments that have a text      |
-    |                                          | matching the regex /cakephp/i              |
+    | /Comment[text=/cakephp/i]                | Sélectionne tous les comments qui ont un   |
+    |                                          | texte correspondant au regex /cakephp/i    |
     +------------------------------------------+--------------------------------------------+
-    | /Comment/\@\*                            | Selects the key names of all comments      |
-    |                                          | Currently only absolute paths starting with|
-    |                                          | a single '/' are supported. Please report  |
-    |                                          | any bugs as you find them. Suggestions for |
+    | /Comment/\@\*                            | Sélectionne les noms de clé de tous les    |
+    |                                          | comments. Actuellement seuls les chemins   |
+    |                                          | absolus commançant par un unique '/' sont  |
+    |                                          | supportés. Merci de reporter tout bug si   |
+    |                                          | vous en trouvez. Les suggestions pour des  |
+    |                                          | fonctionnalités supplémentaires sont       |
+    |                                          | bienvenues                                 |
     |                                          | additional features are welcome.           |
     +------------------------------------------+--------------------------------------------+
 
-    To learn more about Set::extract() refer to the function testExtract()
-    in ``/lib/Cake/Test/Case/Utility/SetTest.php``.
+    Pour en apprendre plus sur Set::extract() référez vous à la fonction 
+    testExtract() dans ``/lib/Cake/Test/Case/Utility/SetTest.php``.
 
 
 .. php:staticmethod:: filter($var, $isArray=null)
 
     :rtype: array
 
-    Filters empty elements out of a route array, excluding '0'::
+    Filtre les éléments vide d'un tableau route, en excluant '0'::
 
-        <?php
         $res = Set::filter(array('0', false, true, 0, array('one thing', 'I can tell you', 'is you got to be', false)));
 
-        /* $res now looks like:
+        /* $res ressemble maintenant à:
             Array (
                 [0] => 0
                 [2] => 1
@@ -808,9 +804,8 @@ available.
 
     :rtype: array
 
-    Collapses a multi-dimensional array into a single dimension::
+    Transforme un tableau multi-dimensional en un tableau à dimension unique::
 
-        <?php
         $arr = array(
             array(
                 'Post' => array('id' => '1', 'title' => 'First Post'),
@@ -822,7 +817,7 @@ available.
             ),
         );
         $res = Set::flatten($arr);
-        /* $res now looks like:
+        /* $res ressemble maintenant à:
             Array (
                 [0.Post.id] => 1
                 [0.Post.title] => First Post
@@ -840,10 +835,9 @@ available.
 
     :rtype: array
 
-    Returns a series of values extracted from an array, formatted in a
-    format string::
+    Retourne une série de valeurs extraites d'un tableau, formaté en un format 
+    de chaîne::
 
-        <?php
         $data = array(
             array('Person' => array('first_name' => 'Nate', 'last_name' => 'Abele', 'city' => 'Boston', 'state' => 'MA', 'something' => '42')),
             array('Person' => array('first_name' => 'Larry', 'last_name' => 'Masters', 'city' => 'Boondock', 'state' => 'TN', 'something' => '{0}')),
@@ -910,14 +904,13 @@ available.
 
     :rtype: array
 
-    Inserts $data into an array as defined by $path.::
+    Insére $data dans un tableau comme défini dans $path.::
 
-        <?php
         $a = array(
             'pages' => array('name' => 'page')
         );
         $result = Set::insert($a, 'files', array('name' => 'files'));
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [pages] => Array
@@ -935,7 +928,7 @@ available.
             'pages' => array('name' => 'page')
         );
         $result = Set::insert($a, 'pages.name', array());
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [pages] => Array
@@ -954,7 +947,7 @@ available.
             )
         );
         $result = Set::insert($a, 'pages.1.vars', array('title' => 'page title'));
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [pages] => Array
@@ -980,15 +973,14 @@ available.
 
     :rtype: object
 
-    This method Maps the contents of the Set object to an object
-    hierarchy while maintaining numeric keys as arrays of objects.
+    Cette méthode Mappe le contenu de l'objet Set en un objet hiérarchisé 
+    et maintient les clés numériques en tableaux d'objets.
 
-    Basically, the map function turns array items into initialized
-    class objects. By default it turns an array into a stdClass Object,
-    however you can map values into any type of class. Example:
-    Set::map($array\_of\_values, 'nameOfYourClass');::
+    Basiquement, la fonction map transforme le tableau d'items en classe 
+    d'objets initialisée. Par défaut il transforme un tableau en un Objet 
+    stdClass, cependant vous pouvez mapper les valeurs en un type de classe.
+    Exemple: Set::map($array\_of\_values, 'nameOfYourClass');::
 
-        <?php
         $data = array(
             array(
                 "IndexedPage" => array(
@@ -1015,7 +1007,7 @@ available.
         );
         $mapped = Set::map($data);
 
-        /* $mapped now looks like:
+        /* $mapped ressemble maintenant à:
 
             Array
             (
@@ -1047,7 +1039,7 @@ available.
 
         */
 
-    Using Set::map() with a custom class for second parameter:
+    Utilisation de Set::map() avec une classe personnalisée en second paramètre:
 
     ::
 
@@ -1058,8 +1050,9 @@ available.
         }
 
         $mapped = Set::map($data, 'MyClass');
-        //Now you can access all the properties as in the example above,
-        //but also you can call MyClass's methods
+        //Maintenant vous pouvez accéder à toutes les propriétés comme dans 
+        //l'exemple ci-dessus, mais aussi vous pouvez appeler les méthodes 
+        //MyClass
         $mapped->[0]->sayHi();
 
 
@@ -1067,65 +1060,64 @@ available.
 
     :rtype: boolean
 
-    Set::matches can be used to see if a single item or a given xpath
-    match certain conditions.::
+    Set::matches peut être utilisé pour voir si un item unique ou un xpath 
+    donné admet certaines conditions.::
 
-        <?php
         $a = array(
             array('Article' => array('id' => 1, 'title' => 'Article 1')),
             array('Article' => array('id' => 2, 'title' => 'Article 2')),
             array('Article' => array('id' => 3, 'title' => 'Article 3')));
         $res=Set::matches(array('id>2'), $a[1]['Article']);
-        // returns false
+        // retourne false
         $res=Set::matches(array('id>=2'), $a[1]['Article']);
-        // returns true
+        // retourne true
         $res=Set::matches(array('id>=3'), $a[1]['Article']);
-        // returns false
+        // retourne false
         $res=Set::matches(array('id<=2'), $a[1]['Article']);
-        // returns true
+        // retourne true
         $res=Set::matches(array('id<2'), $a[1]['Article']);
-        // returns false
+        // retourne false
         $res=Set::matches(array('id>1'), $a[1]['Article']);
-        // returns true
+        // retourne true
         $res=Set::matches(array('id>1', 'id<3', 'id!=0'), $a[1]['Article']);
-        // returns true
+        // retourne true
         $res=Set::matches(array('3'), null, 3);
-        // returns true
+        // retourne true
         $res=Set::matches(array('5'), null, 5);
-        // returns true
+        // retourne true
         $res=Set::matches(array('id'), $a[1]['Article']);
-        // returns true
+        // retourne true
         $res=Set::matches(array('id', 'title'), $a[1]['Article']);
-        // returns true
+        // retourne true
         $res=Set::matches(array('non-existent'), $a[1]['Article']);
-        // returns false
+        // retourne false
         $res=Set::matches('/Article[id=2]', $a);
-        // returns true
+        // retourne true
         $res=Set::matches('/Article[id=4]', $a);
-        // returns false
+        // retourne false
         $res=Set::matches(array(), $a);
-        // returns true
+        // retourne true
 
 
 .. php:staticmethod:: merge($arr1, $arr2=null)
 
     :rtype: array
 
-    This function can be thought of as a hybrid between PHP's
-    array\_merge and array\_merge\_recursive. The difference to the two
-    is that if an array key contains another array then the function
-    behaves recursive (unlike array\_merge) but does not do if for keys
-    containing strings (unlike array\_merge\_recursive). See the unit
-    test for more information.
+    Cette fonction peut être imaginée comme un hybride entre 
+    array\_merge et array\_merge\_recursive de PHP. La différence entre les 
+    deux est que si une clé de tableau contient un autre tableau alors la 
+    fonction se comporte de façon récursive (pas comme array\_merge) mais le ne 
+    fait pas pour les clés contenant des chaînes (pas comme 
+    array\_merge\_recursive). Regardez le test unitaire pour plus 
+    d'informations.
 
     .. note::
 
-        This function will work with an unlimited amount of arguments and
-        typecasts non-array parameters into arrays.
+        Cette fonction va fonctionner avec un montant illimité d'arguments et 
+        de paramètres non-tableaux typecasts dans des tableaux.
 
     ::
 
-        <?php
         $arry1 = array(
             array(
                 'id' => '48c2570e-dfa8-4c32-a35e-0d71cbdd56cb',
@@ -1143,7 +1135,7 @@ available.
         $arry4 = array("cats" => "felines", "dog" => "angry");
         $res = Set::merge($arry1, $arry2, $arry3, $arry4);
 
-        /* $res now looks like:
+        /* $res ressemble maintenant à:
         Array
         (
             [0] => Array
@@ -1157,7 +1149,7 @@ available.
                 (
                     [id] => 48c257a8-cf7c-4af2-ac2f-114ecbdd56cb
                     [name] => pbpaste | grep -i Unpaid | pbcopy
-                    [description] => Remove all lines that say "Unpaid".
+                    [description] => Retire toutes les lignes qui disent "Unpaid".
                 )
 
             [2] => 4
@@ -1173,9 +1165,8 @@ available.
 
     :rtype: array
 
-    Normalizes a string or array list.::
+    Normalise une liste de chaîne ou de tableau.::
 
-        <?php
         $a = array('Tree', 'CounterCache',
                 'Upload' => array(
                     'folder' => 'products',
@@ -1186,7 +1177,7 @@ available.
                 'Validator',
                 'Transactional');
         $result = Set::normalize($a);
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [Tree] =>
@@ -1206,7 +1197,7 @@ available.
             )
         */
         $result = Set::normalize($b);
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [Cacheable] => Array
@@ -1220,8 +1211,8 @@ available.
                 [Transactional] =>
             )
         */
-        $result = Set::merge($a, $b); // Now merge the two and normalize
-        /* $result now looks like:
+        $result = Set::merge($a, $b); // Fusionne maintenant les deux et normalize
+        /* $result ressemble maintenant à:
             Array
             (
                 [0] => Tree
@@ -1250,7 +1241,7 @@ available.
             )
         */
         $result = Set::normalize(Set::merge($a, $b));
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [Tree] =>
@@ -1284,76 +1275,74 @@ available.
 
     :rtype: boolean
 
-    Checks to see if all the values in the array are numeric::
+    Vérifie si toutes les valeurs dans le tableau sont numériques::
 
-        <?php
         $data = array('one');
         $res = Set::numeric(array_keys($data));
 
-        // $res is true
+        // $res est true
 
         $data = array(1 => 'one');
         $res = Set::numeric($data);
 
-        // $res is false
+        // $res est false
 
         $data = array('one');
         $res = Set::numeric($data);
 
-        // $res is false
+        // $res est false
 
         $data = array('one' => 'two');
         $res = Set::numeric($data);
 
-        // $res is false
+        // $res est false
 
         $data = array('one' => 1);
         $res = Set::numeric($data);
 
-        // $res is true
+        // $res est true
 
         $data = array(0);
         $res = Set::numeric($data);
 
-        // $res is true
+        // $res est true
 
         $data = array('one', 'two', 'three', 'four', 'five');
         $res = Set::numeric(array_keys($data));
 
-        // $res is true
+        // $res est true
 
         $data = array(1 => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five');
         $res = Set::numeric(array_keys($data));
 
-        // $res is true
+        // $res est true
 
         $data = array('1' => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five');
         $res = Set::numeric(array_keys($data));
 
-        // $res is true
+        // $res est true
 
         $data = array('one', 2 => 'two', 3 => 'three', 4 => 'four', 'a' => 'five');
         $res = Set::numeric(array_keys($data));
 
-        // $res is false
+        // $res est false
 
 
 .. php:staticmethod:: pushDiff($array1, $array2)
 
     :rtype: array
 
-    This function merges two arrays and pushes the differences in
-    array2 to the bottom of the resultant array.
+    Cette fonction fusionne deux tableaux et pousse les différences dans 
+    array2 à la fin du tableau résultant.
 
-    **Example 1**
+    **Exemple 1**
     ::
 
-        <?php
         $array1 = array('ModelOne' => array('id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2'));
         $array2 = array('ModelOne' => array('id' => 1003, 'field_one' => 'a3.m1.f1', 'field_two' => 'a3.m1.f2', 'field_three' => 'a3.m1.f3'));
         $res = Set::pushDiff($array1, $array2);
 
-        /* $res now looks like:
+        /* $res ressemble maintenant à:
             Array
             (
                 [ModelOne] => Array
@@ -1366,14 +1355,13 @@ available.
             )
         */
 
-    **Example 2**
+    **Exemple 2**
     ::
 
-        <?php
         $array1 = array("a" => "b", 1 => 20938, "c" => "string");
         $array2 = array("b" => "b", 3 => 238, "c" => "string", array("extra_field"));
         $res = Set::pushDiff($array1, $array2);
-        /* $res now looks like:
+        /* $res ressemble maintenant à:
             Array
             (
                 [a] => b
@@ -1393,16 +1381,15 @@ available.
 
     :rtype: array
 
-    Removes an element from a Set or array as defined by $path::
+    Retire un élémént d'un Set ou d'un tableau selon ce qui est défini par $path::
 
-        <?php
         $a = array(
             'pages'     => array('name' => 'page'),
             'files'     => array('name' => 'files')
         );
 
         $result = Set::remove($a, 'files');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [pages] => Array
@@ -1418,44 +1405,43 @@ available.
 
     :rtype: array
 
-    Set::reverse is basically the opposite of :php:func:`Set::map`. It converts an
-    object into an array. If $object is not an object, reverse will
-    simply return $object.::
+    Set::reverse est au fond l'opposé de :php:func:`Set::map`. Elle convertit 
+    un objet en un tableau. Si $object n'est pas un objet, reverse va 
+    simplement retourner $object.::
 
-        <?php
         $result = Set::reverse(null);
         // Null
         $result = Set::reverse(false);
         // false
         $a = array(
-            'Post' => array('id' => 1, 'title' => 'First Post'),
+            'Post' => array('id' => 1, 'title' => 'Premier Post'),
             'Comment' => array(
-                array('id' => 1, 'title' => 'First Comment'),
-                array('id' => 2, 'title' => 'Second Comment')
+                array('id' => 1, 'title' => 'Premier Comment'),
+                array('id' => 2, 'title' => 'Deuxième Comment')
             ),
             'Tag' => array(
-                array('id' => 1, 'title' => 'First Tag'),
-                array('id' => 2, 'title' => 'Second Tag')
+                array('id' => 1, 'title' => 'Premier Tag'),
+                array('id' => 2, 'title' => 'Deuxième Tag')
             ),
         );
-        $map = Set::map($a); // Turn $a into a class object
-        /* $map now looks like:
+        $map = Set::map($a); // Change $a dans une classe object
+        /* $map ressemble maintenant à:
             stdClass Object
             (
                 [_name_] => Post
                 [id] => 1
-                [title] => First Post
+                [title] => Premier Post
                 [Comment] => Array
                     (
                         [0] => stdClass Object
                             (
                                 [id] => 1
-                                [title] => First Comment
+                                [title] => Premier Comment
                             )
                         [1] => stdClass Object
                             (
                                 [id] => 2
-                                [title] => Second Comment
+                                [title] => Deuxième Comment
                             )
                     )
                 [Tag] => Array
@@ -1463,36 +1449,36 @@ available.
                         [0] => stdClass Object
                             (
                                 [id] => 1
-                                [title] => First Tag
+                                [title] => Premier Tag
                             )
                         [1] => stdClass Object
                             (
                                 [id] => 2
-                                [title] => Second Tag
+                                [title] => Deuxième Tag
                             )
                     )
             )
         */
 
         $result = Set::reverse($map);
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [Post] => Array
                     (
                         [id] => 1
-                        [title] => First Post
+                        [title] => Premier Post
                         [Comment] => Array
                             (
                                 [0] => Array
                                     (
                                         [id] => 1
-                                        [title] => First Comment
+                                        [title] => Premier Comment
                                     )
                                 [1] => Array
                                     (
                                         [id] => 2
-                                        [title] => Second Comment
+                                        [title] => Deuxième Comment
                                     )
                             )
                         [Tag] => Array
@@ -1512,12 +1498,12 @@ available.
             )
         */
 
-        $result = Set::reverse($a['Post']); // Just return the array
-        /* $result now looks like:
+        $result = Set::reverse($a['Post']); // Retourne juste un tableau
+        /* $result ressemble maintenant à:
             Array
             (
                 [id] => 1
-                [title] => First Post
+                [title] => Premier Post
             )
         */
 
@@ -1526,15 +1512,14 @@ available.
 
     :rtype: array
 
-    Sorts an array by any value, determined by a Set-compatible path::
+    Trie un tableau selon toute valeur, detérminé par un chemin Set-compatible::
 
-        <?php
         $a = array(
             0 => array('Person' => array('name' => 'Jeff')),
             1 => array('Shirt' => array('color' => 'black'))
         );
         $result = Set::sort($a, '{n}.Person.name', 'asc');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [0] => Array
@@ -1555,7 +1540,7 @@ available.
         */
 
         $result = Set::sort($a, '{n}.Shirt', 'asc');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [0] => Array
@@ -1576,7 +1561,7 @@ available.
         */
 
         $result = Set::sort($a, '{n}', 'desc');
-        /* $result now looks like:
+        /* $result ressemble maintenant à:
             Array
             (
                 [0] => Array
@@ -1606,31 +1591,29 @@ available.
 
 		    :rtype: mixed
 
-		    Apply a callback to the elements of an array extracted
-		    by a Set::extract compatible path::
+		    Applique un callback aux éléments d'un tableau extait par un chemin 
+		    compatible Set::extract::
 
-		        <?php
-		        $data = array(
+				        $data = array(
 		            array('Movie' => array('id' => 1, 'title' => 'movie 3', 'rating' => 5)),
 		            array('Movie' => array('id' => 1, 'title' => 'movie 1', 'rating' => 1)),
 		            array('Movie' => array('id' => 1, 'title' => 'movie 2', 'rating' => 3)),
 		        );
 
 		        $result = Set::apply('/Movie/rating', $data, 'array_sum');
-		        // result equals 9
+		        // résultat égal à 9
 
 		        $result = Set::apply('/Movie/title', $data, 'strtoupper', array('type' => 'map'));
-		        // result equals array('MOVIE 3', 'MOVIE 1', 'MOVIE 2')
-		        // $options are: - type : can be 'pass' uses call_user_func_array(), 'map' uses array_map(), or 'reduce' uses array_reduce()
+		        // résultat égal à array('MOVIE 3', 'MOVIE 1', 'MOVIE 2')
+		        // $options sont: - type : peut être 'pass' utilise call_user_func_array(), 'map' utilise array_map(), ou 'reduce' utilise array_reduce()
 
 .. php:staticmethod:: nest($data, $options = array())
 
 		    :rtype: array
 
-		    Takes in a flat array and returns a nested array::
+		    Prend un tableau plat et retourne un tableau imbriqué::
 
-		        <?php
-                        $data = array(
+		                        $data = array(
                             array('ModelName' => array('id' => 1, 'parent_id' => null)),
                             array('ModelName' => array('id' => 2, 'parent_id' => 1)),
                             array('ModelName' => array('id' => 3, 'parent_id' => 1)),
@@ -1644,7 +1627,7 @@ available.
                         );
 
 		        $result = Set::nest($data, array('root' => 6));
-		        /* $result now looks like:
+		        /* $result ressemble maintenant à:
                             array(
                                     (int) 0 => array(
                                             'ModelName' => array(
@@ -1687,5 +1670,5 @@ available.
 
 
 .. meta::
-    :title lang=en: Set
-    :keywords lang=en: array array,path array,array name,numeric key,regular expression,result set,person name,brackets,syntax,cakephp,elements,php,set path
+    :title lang=fr: Set
+    :keywords lang=fr: tableau array,tableau chemin,path array,nom tableau,array name,clé numérique,expression régulière,result set,person name,brackets,syntax,cakephp,elements,php,set path

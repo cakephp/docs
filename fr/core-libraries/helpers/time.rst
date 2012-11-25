@@ -3,49 +3,51 @@ TimeHelper
 
 .. php:class:: TimeHelper(View $view, array $settings = array())
 
-The Time Helper does what it says on the tin: saves you time. It
-allows for the quick processing of time related information. The
-Time Helper has two main tasks that it can perform:
+Le Helper Time vous permet, comme il l'indique de gagner du temps. Il permet 
+le traitement rapide des informations se rapportant au temps. Le Helper 
+Time a deux tâches principales qu'il peut accomplir:
 
-#. It can format time strings.
-#. It can test time (but cannot bend time, sorry).
+#. Il peut formater les chaines de temps.
+#. Il peut tester le temps (mais ne peut pas le courber, désolé).
 
 .. versionchanged:: 2.1
-   ``TimeHelper`` have been refactored into :php:class:`CakeTime` class to allow
-   easier use outside of the ``View`` layer.
-   Within a view, these methods are accessible via the `TimeHelper`
-   class and you can called it as you would call a normal helper method:
+   ``TimeHelper`` a été reconstruit dans la classe :php:class:`CakeTime` 
+   pour faciliter l'utilisation en-dehors de la couche ``View``.
+   Dans une vue, ces méthodes sont accessibles via la classe `TimeHelper`
+   et vous pouvez l'appeler comme vous appelleriez une méthode normale 
+   de helper:
    ``$this->Time->method($args);``.
 
-Using the Helper
-================
+Utiliser le Helper
+==================
 
-A common use of the Time Helper is to offset the date and time to match a
-user's time zone. Lets use a forum as an example. Your forum has many users who
-may post messages at any time from any part of the world. An easy way to
-manage the time is to save all dates and times as GMT+0 or UTC. Uncomment the
-line ``date_default_timezone_set('UTC');`` in ``app/Config/core.php`` to ensure
-your application's time zone is set to GMT+0.
+Une utilisation courante de Time Helper est de compenser la date et le time 
+pour correspondre au time zone de l'utilisateur. Utilisons un exemple de forum.
+Votre forum a plusieurs utilisateurs qui peuvent poster des messages depuis 
+n'importe quelle partie du monde. Une façon facile de gérer le temps est de 
+sauvegarder toutes les dates et les times à GMT+0 or UTC. Décommenter la 
+ligne ``date_default_timezone_set('UTC');`` dans ``app/Config/core.php`` pour 
+s'assurer que le time zone de votre aplication est défini à GMT+0.
 
-Next add a time zone field to your users table and make the necessary
-modifications to allow your users to set their time zone. Now that we know
-the time zone of the logged in user we can correct the date and time on our
-posts using the Time Helper::
+Ensuite, ajoutez un time zone à votre table users et faîtes les modifications 
+nécéssaires pour permettre à vos utilisateurs de définir leur time zone. 
+Maintenant que nous connaissons le time zone de l'utilisateur connecté, nous 
+pouvons corriger la date et le temps de nos posts en utilisant le Helper Time::
 
-    <?php
     echo $this->Time->format('F jS, Y h:i A', $post['Post']['created'], null, $user['User']['time_zone']);
-    // Will display August 22nd, 2011 11:53 PM for a user in GMT+0
-    // August 22nd, 2011 03:53 PM for a user in GMT-8
-    // and August 23rd, 2011 09:53 AM GMT+10
+    // Affichera August 22nd, 2011 11:53 PM pour un utilisateur dans GMT+0
+    // August 22nd, 2011 03:53 PM pour un utilisateur dans GMT-8
+    // et August 23rd, 2011 09:53 AM GMT+10
 
-Most of the Time Helper methods contain a $userOffset. The $userOffset parameter
-accepts a decimal number between -12 and 12.
+La plupart des méthodes du Helper Time contiennent un $userOffset. Le paramètre 
+$userOffset accèpte un nombre décimal entre -12 and 12.
 
 .. include:: ../../core-utility-libraries/time.rst
     :start-after: start-caketime
     :end-before: end-caketime
 
+
 .. meta::
-    :title lang=en: TimeHelper
-    :description lang=en: The Time Helper will help you format time and test time.
-    :keywords lang=en: time helper,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt
+    :title lang=fr: TimeHelper
+    :description lang=fr: Time Helper vous aide à formater le temps et à tester le temps.
+    :keywords lang=fr: time helper,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt

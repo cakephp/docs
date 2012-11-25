@@ -1,16 +1,18 @@
-New Features in CakePHP 2.0
-###########################
+Nouvelles caractéristiques dans CakePHP 2.0
+###########################################
 
-Models
-======
+Model
+=====
 
-The model construction process has been made lighter. Model associations are
-now lazy loaded, applications with lots of models and associations will see
-great time reductions in the bootstrap process.
+Le processus de construction du modèle a été allegé. Les associations des 
+Modèles sont maintenant en lazy loaded, les applications avec beaucoup de 
+modèles et d'associations vont voir une grande réduction de temps dans le 
+processus de bootstrap.
 
-Now models won't require a database connection in the construction process.
-The database will be accessed for the first time only when a find operation is
-issued or information for one of the columns is required.
+Les modèles ne requièrent maintenant plus de connection à la base de données 
+dans le processus de construction. La base de données ne sera accédée pour la 
+première fois seulement quand une opération de recherche est délivrée ou 
+une information pour une des colonnes est requise.
 
 View
 ====
@@ -18,9 +20,10 @@ View
 View::$output
 -------------
 
-View will now always have the last rendered content (view or layout) accessible
-through ``$this->output``. In helpers you can use ``$this->_View->output``. Modifying
-this property will change the content that comes out of the view rendering.
+View n'aura pas toujours le dernier rendu de contenu (view ou layout) 
+accessible avec ``$this->output``. Dans les helpers, vous pouvez utiliser 
+``$this->_View->output``. Modifier cette propriété changera le contenu 
+qui sort de la vue rendue.
 
 Helpers
 =======
@@ -28,42 +31,46 @@ Helpers
 HtmlHelper
 ----------
 
-* ``getCrumbList()`` Creates breadcrumb links wrapped in ``<li>`` elements.
-  See `#856 <http://cakephp.lighthouseapp.com/projects/42648/tickets/856>`_.
-* ``loadConfig()`` has moved from :php:class:`Helper` to :php:class:`HtmlHelper`
-  class. This method now uses the new reader classes (see 2.0 :php:class:`Configure`)
-  to load your config file. As an option you can pass the path as second parameter
-  (``app/Config`` is default). To simplify, you can set the configuration file
-  (and the reader) in ``Controller::$helpers`` (example below) to load on helper
-  constructor. In configuration file you can set the below keys:
+* ``getCrumbList()`` Créé un fil d'ariane de liens entourés d'éléments ``<li>``.
+  Regardez `#856 <http://cakephp.lighthouseapp.com/projects/42648/tickets/856>`_.
+* ``loadConfig()`` a été déplacé de :php:class:`Helper` vers la classe 
+  :php:class:`HtmlHelper`. Cette méthode utilise maintenant les nouvelles 
+  classes de lecture (voir 2.0 :php:class:`Configure`)
+  pour  charger votre fichier de config. En option vous pouvez passer le chemin 
+  en deuxième paramètre (``app/Config`` par défaut). Pour simplifier, vous 
+  pouvez définir le fichier de configuration (et le lecteur) dans 
+  ``Controller::$helpers`` (exemple ci-dessous) pour charger le constructeur 
+  du helper. Dans le fichier de configuration, vous pouvez définir les clés 
+  ci-dessous:
 
- * ``tags`` Should be an array with key value;
- * ``minimizedAttributes`` Should be a list;
- * ``docTypes`` Should be an array with key value;
- * ``attributeFormat`` Should be a string;
- * ``minimizedAttributeFormat`` Should be a string.
+ * ``tags`` Doit être un tableau avec une valeur clé;
+ * ``minimizedAttributes`` Doit être une liste;
+ * ``docTypes`` Doit être un tableau avec une valeur clé;
+ * ``attributeFormat`` Doit être une chaîne de caractère;
+ * ``minimizedAttributeFormat`` Doit être une chaîne de caractère.
 
-Example of how to set configuration file on controller::
+Exemple sur la façon de définir le fichier de configuration sur les contrôleurs::
 
-    <?php
     public $helpers = array(
         'Html' => array(
-            'configFile' => array('config_file', 'php') // Option one: an array with filename and reader name
-            'configFile' => 'config_file' // Option two: a string with filename. The PhpReader will be used
+            'configFile' => array('config_file', 'php') // Option une: un tableau avec le nom du fichier et le nom de lecture
+            'configFile' => 'config_file' // Option deux: une chaîne de caractère avec le nom du fichier. Le PhpReader sera utilisé
         )
     );
 
 FormHelper
 ----------
 
-* :php:class:`FormHelper` now supports all HTML5 input types and custom input
-  types. Just use the input type you want as the method on the helper. For
-  example ``range()`` would create an input with type = range.
-* ``postLink()`` and ``postButton()`` Creates link/button to
-  access some page using HTTP method POST. With this, in your controller you can
-  avoid some action, like delete, to be accessed by GET method.
-* ``select()`` with multiple = checkbox, now treats the ``'id'``
-  attribute as a prefix for all the generated options.
+* :php:class:`FormHelper` supporte maintenant tout type d'entrée HTML5 et 
+  tout type d'entrée personnalisé. Utilisez simplement le type d'entrée 
+  que vous souhaitez en méthode sur le helper. Par exemple ``range()`` 
+  créera une entrée avec type = range.
+* ``postLink()`` et ``postButton()`` Crée un lien/bouton permettant d'accéder 
+  à certaine pasge utilisant la méthode HTTP POST. Avec ceci dans votre 
+  controller vous pouvez empêcher certaines actions, comme delete, d'être 
+  accédées par la méthode GET.
+* ``select()`` avec multiple = checkbox, traite maintenant l'attribut ``'id'`` 
+  en préfixe pour toutes les options générées.
 
 Libs
 ====
@@ -71,36 +78,38 @@ Libs
 CakeRequest
 -----------
 
-:php:class:`CakeRequest` is a new class introduced in 2.0. It encapsulates
-commonly used request introspection methods and replaces the params array with a
-more useful object. Read more about :php:class:`CakeRequest`.
+:php:class:`CakeRequest` est une nouvelle classe introduite dans 2.0. Elle 
+encapsule les méthodes d'introspection de requêtes utilisées couramment et 
+remplace le tableau params avec un objet plus utile. Lisez en plus sur
+:php:class:`CakeRequest`.
 
 CakeResponse
 ------------
 
-:php:class:`CakeResponse` is a new class introduced in 2.0. It encapsulates
-commonly used methods and properties in the HTTP response your application
-generates. It consolidates several features in CakePHP. Read more about
-:php:class:`CakeResponse`.
+:php:class:`CakeResponse` est une nouvelle classe introduite dans 2.0. Elle 
+encapsule les méthodes et propriétés utilisées couramment dans la réponse HTTP 
+que votre application génére. Elle consolide plusieurs caractéristiques dans 
+CakePHP. Lisez en plus sur :php:class:`CakeResponse`.
 
 CakeSession, SessionComponent
 -----------------------------
 
-:php:class:`CakeSession` and the :php:class:`SessionComponent` have had a number
-of changes, see the session section for more information.
+:php:class:`CakeSession` et le :php:class:`SessionComponent` ont connu un 
+nombre de changements, regardez la section session pour plus d'informations.
 
 Router
 ------
 
-Routes can return full urls
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Routes peuvent retourner des urls complètes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Route objects can now return full urls, and :php:class:`Router` will not further
-modify them beyond adding the query string and fragment elements. For example
-this could be used to create routes to handle subdomains, or enabling https/http
-flags. An example of a route class that supports subdomains would be::
+Les Objets Route peuvent maintenant retourner des urls complètes, et 
+:php:class:`Router` ne les modifiera plus au-delà de l'ajout de la 
+chaîne de requête et des éléments de fragments. Par exemple, ceci 
+pouvait être utilisé pour créer des routes pour la gestion de 
+sous-domaines, ou pour l'activation de flags https/http. Un exemple 
+de classe de route qui supporte les sous-domaines serait::
 
-    <?php
     class SubdomainRoute extends CakeRoute {
         
         public function match ($params) {
@@ -114,55 +123,57 @@ flags. An example of a route class that supports subdomains would be::
         }
     }
 
-When creating links you could do the following to make links pointing at other
-subdomains.
+Quand vous créez des liens, vous pouvez faire ce qui suit pour faire pointer 
+les liens vers d'autres sous-domaines.
 
 ::
 
-    <?php
     echo $this->Html->link(
-        'Other domain',
+        'Autre domaine',
          array('subdomain' => 'test', 'controller' => 'posts', 'action' => 'add')
     );
 
-The above would create a link with http://test.localhost/posts/add as the url.
+Ce qui est ci-dessus créera un lien avec l'url http://test.localhost/posts/add.
 
 Xml
 ---
 
-:php:class:`Xml` has had a number of changes. Read more about
-:doc:`/core-utility-libraries/xml` class.
+:php:class:`Xml` a connu un certain nombre de changements. Lisez en plus sur la 
+classe :doc:`/core-utility-libraries/xml`.
 
-New Lib features
-================
+Nouvelles caractéristiques de Lib
+=================================
 
 Configure readers
 -----------------
 
-:php:class:`Configure` can now be configured to load configuration files from a
-variety of sources and formats. The :doc:`/development/configuration` section
-contains more information about the changes made to configure.
+:php:class:`Configure` peut maintenant être configuré pour le chargement de 
+fichiers à partir d'une variété de sources et de formats. La section 
+:doc:`/development/configuration` contient plus d'informations sur les 
+changements faits à configure.
 
-:php:meth:`Configure::read()` without any arguments allows you to read all
-values from configure, instead of just the debug value.
+:php:meth:`Configure::read()` sans autre argument vous permet de lire 
+toutes les valeurs de configure, plutôt que uniquement  la valeur du debug.
 
-Error and exception handling
-----------------------------
+Error et gestion des exceptions
+-------------------------------
 
-CakePHP 2.0 has had :doc:`/development/exceptions` and :doc:`/development/errors`
-handling rebuilt, to be more flexible and give more power to developers.
+CakePHP 2.0 a reconstruit la gestion des :doc:`/development/exceptions` 
+et des :doc:`/development/errors`, pour être plus flexible et donner 
+plus de puissance aux développeurs.
 
 String::wrap()
 --------------
 
-:php:meth:`String::wrap()` was added to help make fixed width formatting of
-text easier. It's used in Shells whenever you use :php:meth:`Shell::wrapText()`.
+:php:meth:`String::wrap()` a été ajouté pour faciliter les formatages de 
+largeur fixe des textes. Il est utilisé dans les Shells quand vous utilisez 
+:php:meth:`Shell::wrapText()`.
 
 debug()
 -------
 
-:php:func:`debug()` no longer outputs html in the console. Instead it makes
-output like the following::
+:php:func:`debug()` ne sort plus de html dans la console. A la place, elle 
+donne des sorties comme ce qui suit::
 
     ########## DEBUG ##########
     Array
@@ -171,142 +182,145 @@ output like the following::
     )
     ###########################
 
-This should improve readability of ``debug()`` on the command line.
+Ceci devrait améliorer la lecture de ``debug()`` dans les lignes de commande.
 
 Components
 ==========
 
-Components received a similar treatment to helpers and behaviors,
-:php:class:`Component` is now the base class for components. Read more about the
-component changes.
+Components reçoit un traitement identique aux helpers et aux behaviors,
+:php:class:`Component` est maintenant la classe de base pour les components. 
+Lisez en plus sur les changements sur les components.
 
 RequestHandler
 --------------
 
-:php:class:`RequestHandler` was heavily refactored due to the introduction of
-:php:class:`CakeRequest`. These changes allowed for some new features to be
-introduced as well.
+:php:class:`RequestHandler` a été fortement remaniée du fait de l'introduction 
+de :php:class:`CakeRequest`. Ces changements permettent à certaines nouvelles 
+fonctionnalités d'être aussi introduites.
 
-Automatic parsing of Accept headers
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Parsing automatique d'Acceptation des headers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If a client sends a single Accept mime type that matches one of the extensions
-enabled in :php:class`Router`, :php:class:`RequestHandler` will treat it the
-same an extension. This expands CakePHP's support for REST style endpoints. To
-use this feature start off by enabling extensions in ``app/Config/routes.php``
+Si un client envoie un unique mime type Accept qui correspond à l'une  des 
+extensions activées dans :php:class`Router`, :php:class:`RequestHandler` 
+le traitera de la même façon qu'une extension. Cela étendra le support de 
+CakePHP pour les terminaux de type REST. Pour utiliser cette fonctionnalité, 
+commencez par activer les extensions dans ``app/Config/routes.php``
 
 ::
 
-    <?php
     Router::parseExtensions('json', 'xml');
 
-Once you have created layouts and views for your extensions, you will be able to
-visit a url like posts/view/1 and send Accept: ``application/json`` in the
-headers to receive the json version of that url.
+Une fois que vous avez créé les layouts et les vues pour vos extensions, vous 
+pourrez visiter une url comme posts/view/1 et envoyer Accept: 
+``application/json`` dans les headers pour recevoir la version json de cette 
+url.
 
 CookieComponent
 ---------------
 
-:php:class:`CookieComponent` now supports http only cookies. You can enable
-their use by setting ``$this->Cookie->httpOnly = true;``. Having http only
-cookies will make them inaccessible from the browser.
+:php:class:`CookieComponent` supporte maintenant seulement les cookies http. 
+Vous pouvez les activer en utilisant ``$this->Cookie->httpOnly = true;``. 
+Avoir seulement les cookies http les rendra inaccessible à partir du navigateur.
 
 Security Component CSRF separation
 ----------------------------------
 
-CakePHP has had CSRF protection since 1.2. For 2.0 the existing CSRF has a new
-more paranoid mode, and is its own standalone feature. In the past CSRF features
-were coupled with form tampering safe-guards. Developers often disabled
-validatePost in order to do dynamic forms, disabling the CSRF protection at the
-same time. For 2.0 CSRF checking has been separated from form tampering giving
-you greater control.
+CakePHP a une protection CSRF depuis 1.2. Pour 2.0, le CSRF existant a un 
+nouveau mode plus paranoïaque, et est sa caractéristique propre autonome. 
+Dans le passé, les fonctionnalités CSRF étaient couplées avec des gardes-fous 
+de tampering de formulaires. Les développeurs désactivent souvent 
+validatePost pour faire des formulaires dynamiques, en désactivant la 
+protection CSRF en même temps. Pour 2.0, la vérification CSRF a été séparée 
+du tampering des formulaires vous donnant plus de contrôle.
 
-For more information see :ref:`security-csrf`
+Pour plus d'informations, regardez :ref:`security-csrf`
 
 Controller
 ==========
 
-Controllers now have access to request and response objects. You can read more
-about these objects on their specific pages.
+Les Controllers ont maintenant accès aux objets request et response. Vous 
+pouvez en lire plus sur ces objets sur leurs pages spécifiques.
 
 Console
 =======
 
-The console for CakePHP 2.0 was almost entirely rebuilt. Several new features as
-well as some backwards incompatible changes were made. Read more about console
-changes.
+La console pour CakePHP 2.0 a été preque entièrement reconstruite. De 
+nombreuses nouvelles caractéristiques ainsi que quelques changements 
+incompatibles avec antérieurement. Lisez en plus sur les changements sur 
+la console.
 
 Pagination
 ==========
 
-Pagination now provides a default maxLimit for pagination at 100.
+Pagination fournit maintenant un maxLimit par défaut à 100 pour la pagination.
 
-This limit can be overridden with the paginate variable on Controller.
+Cette limite peut maintenant être dépassée avec la variable paginate dans 
+le Controller.
 
 ::
 
-    <?php
     $this->paginate = array('maxLimit' => 1000);
 
-This default is provided to prevent user URL manipulation causing excessive
-strain on the database for subsequent requests, where a user would edit the
-'limit' parameter to a very large number.
+Cette valeur par défaut est fournie pour empêcher l'utilisateur de manipuler 
+les URL provoquant une pression excessive sur la base de données pour les 
+requêtes suivantes, où un utilisateur modifierait le paramètre 'limit' pour 
+une nombre très important.
 
-Aliasing
-========
+Mettre un Alias
+===============
 
-You can now alias helpers, components and behaviors to use your class instead of
-a different one. This means that you can very easily make a ``MyHtml`` helper
-and not need to replace every instance of ``$this->Html`` in your views. To do
-this, pass the 'className' key along with your class, like you would with
-models.
+Vous pouvez maintenant mettre un alias les helpers, les components et les 
+behaviors pour utiliser votre classe plutôt qu'une autre. Cela signifie que 
+vous pouvez très facilement faire un helper ``MyHtml`` et n'avez pas besoin 
+de remplacer chaque instance de ``$this->Html`` dans vos vues. Pour le faire, 
+passez la clé 'className' tout au long de votre classe, comme vous feriez avec 
+les modèles.
 
 ::
 
-    <?php
     public $helpers = array( 
         'Html' => array( 
             'className' => 'MyHtml' 
         )
     );
 
-Similarly, you can alias components for use in your controllers.
+De même, vous pouvez mettre en alias les components pour l'utilisation dans vos controllers.
 
 ::
 
-    <?php
     public $components = array( 
         'Email' => array( 
             'className' => 'QueueEmailer' 
         )
     );
 
-Calls to the Email component would call the QueueEmailer component instead.
-Finally, you can alias behaviors as well.
+Appeller le component Email appelle le component QueueEmailer à la place.
+Finalement, vous pouvez aussi mettre en alias les behaviors.
 
 ::
 
-    <?php
     public $actsAs = array( 
         'Containable' => array( 
             'className' => 'SuperContainable' 
         ) 
     );
 
-Because of the way 2.0 utilizes collections and shares them across the
-application, any classes you alias will be used throughout your application.
-Whenever your application tries to access the alias, it will access your class.
-For instance, when we aliased the Html helper in the example above, any helpers
-that use the Html helper or elements that load the Html helper, will use MyHtml
-instead.
+Du fait de la façon dont 2.0 utilise les collections et les partage dans 
+toute l'application, toute classe que vous mettez en alias sera utilisée 
+dans toute votre application. Quelque soit le moment où votre application 
+essaie d'accéder à l'alias, elle aura accès à votre classe. Par exemple, 
+quand vous mettez en alias le helper Html dans l'exemple ci-dessus, tous 
+les helpers qui utilisent le helper Html ou les éléments qui chargent le 
+helper Html, utiliseront MyHtml à la place.
 
 ConnectionManager
 =================
 
-A new method :php:meth:`ConnectionManager::drop()` was added to allow
-removing connections at runtime.
+Une nouvelle méthode :php:meth:`ConnectionManager::drop()` a été ajoutée pour permettre 
+de retirer les connections lors de l'éxecution.
 
 
 .. meta::
-    :title lang=en: New Features in CakePHP 2.0
-    :keywords lang=en: time reductions,doctypes,model construction,key value,option one,database connection,content view,configuration file,constructor,great time,array,new features,bootstrap process,elements,new models
+    :title lang=fr: Nouvelles caractéristiques dans CakePHP 2.0
+    :keywords lang=fr: réductions de temps,doctypes,construction de modèles,valeur clé,option une,connection base de données,vue du contenu,fichier de configuration,constructeur,temps bon,tableau,nouvelles caractéristiques,processus bootstrap,éléments,nouveaux modèles

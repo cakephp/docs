@@ -6,7 +6,6 @@ CakeNumber
 If you need :php:class:`NumberHelper` functionalities outside of a ``View``,
 use the ``CakeNumber`` class::
 
-    <?php
     class UsersController extends AppController {
 
         public $components = array('Auth');
@@ -38,7 +37,6 @@ automatically echo the output into the view.
     This method is used to display a number in common currency formats
     (EUR,GBP,USD). Usage in a view looks like::
 
-        <?php
         // called as NumberHelper
         echo $this->Number->currency($number, $currency);
 
@@ -103,7 +101,6 @@ automatically echo the output into the view.
     If a non-recognized $currency value is supplied, it is prepended to
     a USD formatted number. For example::
 
-        <?php
         // called as NumberHelper
         echo $this->Number->currency('1234.56', 'FOO');
 
@@ -114,8 +111,17 @@ automatically echo the output into the view.
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::currency('1234.56', 'FOO');
 
+.. php:method:: defaultCurrency(string $currency)
+
+    :param string $currency: Set a known currency for :php:meth:`CakeNumber::currency()`.
+
+    Setter/getter for default currency. This removes the need always passing the
+    currency to :php:meth:`CakeNumber::currency()` and change all currency outputs by setting other default.
+
+    .. versionadded:: 2.3 This method was added in 2.3
+
 .. php:method:: addFormat(string $formatName, array $options)
-    
+
     :param string $formatName: The format name to be used in the future
     :param array $options: The array of options for this format. Uses the
         same ``$options`` keys as :php:meth:`CakeNumber::currency()`.
@@ -123,7 +129,6 @@ automatically echo the output into the view.
     Add a currency format to the Number helper. Makes reusing
     currency formats easier::
 
-        <?php
         // called as NumberHelper
         $this->Number->addFormat('BRR', array('before' => 'R$ '));
 
@@ -133,7 +138,6 @@ automatically echo the output into the view.
 
     You can now use `BRR` as a short form when formatting currency amounts::
 
-        <?php
         // called as NumberHelper
         echo $this->Number->currency($value, 'BRR');
 
@@ -143,7 +147,6 @@ automatically echo the output into the view.
 
     Added formats are merged with the following defaults::
 
-       <?php
        array(
            'wholeSymbol'      => '',
            'wholePosition'    => 'before',
@@ -166,7 +169,6 @@ automatically echo the output into the view.
     precision (decimal places). It will round in order to maintain the
     level of precision defined.::
 
-        <?php
         // called as NumberHelper
         echo $this->Number->precision(456.91873645, 2);
 
@@ -188,7 +190,6 @@ automatically echo the output into the view.
     precision). This method also expresses the number as a percentage
     and prepends the output with a percent sign.::
 
-        <?php
         // called as NumberHelper
         echo $this->Number->toPercentage(45.691873645);
 
@@ -199,9 +200,19 @@ automatically echo the output into the view.
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::toPercentage(45.691873645);
 
-.. php:method:: toReadableSize(string $data_size)
+.. php:method:: fromReadableSize(string $size, $default)
 
-    :param string $data_size: The number of bytes to make readable. 
+    :param string $size: The formatted human readable value.
+
+    This method unformats a number from a human readable byte size
+    to an integer number of bytes.
+
+    .. versionadded:: 2.3
+        This method was added in 2.3
+
+.. php:method:: toReadableSize(string $dataSize)
+
+    :param string $dataSize: The number of bytes to make readable.
 
     This method formats data sizes in human readable forms. It provides
     a shortcut way to convert bytes to KB, MB, GB, and TB. The size is
@@ -209,7 +220,6 @@ automatically echo the output into the view.
     of data supplied (i.e. higher sizes are expressed in larger
     terms)::
 
-        <?php
         // called as NumberHelper
         echo $this->Number->toReadableSize(0); // 0 Bytes
         echo $this->Number->toReadableSize(1024); // 1 KB
@@ -230,7 +240,6 @@ automatically echo the output into the view.
     most of the other NumberHelper methods). Using this method might
     looks like::
 
-        <?php
         // called as NumberHelper
         $this->Number->format($number, $options);
 
@@ -260,7 +269,6 @@ automatically echo the output into the view.
 
     Example::
 
-        <?php
         // called as NumberHelper
         echo $this->Number->format('123456.7890', array(
             'places' => 2,
@@ -281,6 +289,53 @@ automatically echo the output into the view.
             'thousands' => ','
         ));
         // output '¥ 123,456.79'
+
+.. php:method:: formatDelta(mixed $number, mixed $options=array())
+
+    This method displays differences in value as a signed number::
+
+        // called as NumberHelper
+        $this->Number->formatDelta($number, $options);
+
+        // called as CakeNumber
+        CakeNumber::formatDelta($number, $options);
+
+    The $number parameter is the number that you are planning on
+    formatting for output. With no $options supplied, the number
+    1236.334 would output as 1,236. Note that the default precision is
+    zero decimal places.
+
+    The $options parameter takes the same keys as :php:meth:`CakeNumber::format()` itself:
+
+       -  places (integer): the amount of desired precision
+       -  before (string): to be put before the outputted number
+       -  after (string): to be put after the outputted number
+       -  decimals (string): used to delimit the decimal places in a
+          number
+       -  thousands (string): used to mark off thousand, millions, …
+          places
+
+    Example::
+
+        // called as NumberHelper
+        echo $this->Number->formatDelta('123456.7890', array(
+            'places' => 2,
+            'decimals' => '.',
+            'thousands' => ','
+        ));
+        // output '+123,456.79'
+
+        // called as CakeNumber
+        App::uses('CakeNumber', 'Utility');
+        echo CakeNumber::formatDelta('123456.7890', array(
+            'places' => 2,
+            'decimals' => '.',
+            'thousands' => ','
+        ));
+        // output '+123,456.79'
+
+    .. versionadded:: 2.3
+        This method was added in 2.3
 
 .. end-cakenumber
 

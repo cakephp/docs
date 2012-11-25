@@ -3,22 +3,21 @@ Data Sanitization
 
 .. php:class:: Sanitize
 
-The CakePHP Sanitize class can be used to rid user-submitted data
-of malicious data and other unwanted information. Sanitize is a
-core library, so it can be used anywhere inside of your code, but
-is probably best used in controllers or models.
+La classe Sanitize de CakePHP peut être utilisée pour rid user-submitted data
+of malicious data and other unwanted information. Sanitize est une librairie du 
+coeur, donc elle peut être utilisée n'importe où à l'intérieur de votre code, 
+mais est probablement mieux utilisée dans les controllers ou les models.
 
-CakePHP already protects you against SQL Injection **if** you use
-CakePHP's ORM methods (such as find() and save()) and proper array
-notation (ie. array('field' => $value)) instead of raw SQL. For
-sanitization against XSS it's generally better to save raw HTML in
-database without modification and sanitize at the time of
-output/display.
+CakePHP vous protège déjà contre les Injections SQL **si** vous utilisez 
+les méthodes ORM de CakePHP (comme find() et save()) et la notation de 
+tableau appropriée (par ex: array('field' => $value)) au lieu d'un raw SQL. 
+Pour la sanitization contre XSS, il est généralement meilleur de sauvegarder 
+le raw HTML dans la base de données sans modification et sanitize au moment 
+de la sortie/affichage.
 
-All you need to do is include the Sanitize core library (e.g.
-before the controller class definition)::
+Tout ce dont vous avez besoin est d'inclure la librairie du coeur Sanitize
+(par ex: avant la définition de la classe de controller)::
 
-    <?php
     App::uses('Sanitize', 'Utility');
     
     class MyController extends AppController {
@@ -26,29 +25,33 @@ before the controller class definition)::
         ...
     }
 
-Once you've done that, you can make calls to Sanitize statically.
+Uen fois qu c'est fait, vous pouvez faire des appels statiquement de Sanitize.
 
 .. php:staticmethod:: Sanitize::clean($data, $options)
 
-    :param mixed $data: Data to clean.
-    :param mixed $options: Options to use when cleaning, see below.
+    :param mixed $data: Donnée à nettoyer.
+    :param mixed $options: Options à utiliser pour le nettoyage, voir 
+        ci-dessous.
 
-    This function is an industrial-strength, multi-purpose cleaner,
-    meant to be used on entire arrays (like $this->data, for example).
-    The function takes an array (or string) and returns the clean
-    version. The following cleaning operations are performed on each
-    element in the array (recursively):
+    Cette fonction est une force industrielle, multi-purpose cleaner,
+    amené à être utilisé pour des tableaux entiers (comme $this->data, 
+    par exemple). Cette fonction prend un tableau (ou une chaîne) et 
+    retourne la version propre. Les opérations de nettoyage suivants 
+    sont effectuées sur chaque élément dans le tableau (de façon 
+    récursive):
 
-    -  Odd spaces (including 0xCA) are replaced with regular spaces.
-    -  Double-checking special chars and removal of carriage returns
-       for increased SQL security.
-    -  Adding of slashes for SQL (just calls the sql function outlined
-       above).
+    -  Espaces étranges (incluant 0xCA) sont remplacés par des espaces 
+       réguliers.
+    -  Double-vérification des chars spéciaux et removal of carriage 
+       returns pour augmenter la sécurité SQL.
+    -  Ajout de slashes pour SQL (appelle justela fonction sql outlined
+       ci-dessus).
     -  Swapping of user-inputted backslashes with trusted backslashes.
 
-    The $options argument can either be a string or an array. When a
-    string is provided it's the database connection name. If an array
-    is provided it will be merged with the following options:
+    L'argument $options peut être soit une chaîne, soit un tableau. Quand 
+    une chaîne est fournie, c'est le nom de la connection à la base de 
+    données. Si un tableau est fourni il sera fusionné avec les options 
+    suivantes:
 
 
     -  connection
@@ -59,37 +62,35 @@ Once you've done that, you can make calls to Sanitize statically.
     -  unicode
     -  escape
     -  backslash
-    -  remove\_html (must be used in conjunction with the encode
-       parameter)
+    -  remove\_html (doit être utilisé en conjonction avec le paramètre encode)
 
-    Usage of clean() with options looks something like the following::
+    L'utilisation de clean() avec options ressemble à ce qui suit::
 
-        <?php
         $this->data = Sanitize::clean($this->data, array('encode' => false));
 
 
 .. php:staticmethod:: Sanitize::escape($string, $connection)
 
-    :param string $string: Data to clean.
-    :param string $connection: The name of the database to quote the string for, 
-        as named in your app/Config/database.php file.
+    :param string $string: Donnée à nettoyer.
+    :param string $connection: Le nom de la base de données to quote the 
+        string for, as named in your app/Config/database.php file.
 
-    Used to escape SQL statements by adding slashes, depending on the
-    system's current magic\_quotes\_gpc setting,
+    Utilisé pour échapper les requêtes SQL en ajoutant les slashes, selon la 
+    configuration de magic\_quotes\_gpc su système courant.
 
 
 .. php:staticmethod:: Sanitize::html($string, $options = array())
 
-    :param string $string: Data to clean.
-    :param array $options: An array of options to use, see below.
+    :param string $string: Donnée à nettoyer.
+    :param array $options: Un tableau d'options à utiliser, voir ci-dessous.
 
-    This method prepares user-submitted data for display inside HTML.
-    This is especially useful if you don't want users to be able to
-    break your layouts or insert images or scripts inside of your HTML
-    pages. If the $remove option is set to true, HTML content detected
-    is removed rather than rendered as HTML entities::
+    Cette méthode prépare user-submitted data pour l'affichage à l'intérieur 
+    du HTML. C'est particulièrement utilise si vous ne voulez pas que les 
+    utilisateurs soient capables de casser vos layouts ou d'insérer des images 
+    ou scripts à l'intérieur de vos pages HTML/ Si l'option $remove est définie 
+    à true, le contenu HTML détecté est retiré plutôt que rendu en entités 
+    HTML::
 
-        <?php
         $badString = '<font size="99" color="#FF0000">HEY</font><script>...</script>';
         echo Sanitize::html($badString);
         // output: &lt;font size=&quot;99&quot; color=&quot;#FF0000&quot;&gt;HEY&lt;/font&gt;&lt;script&gt;...&lt;/script&gt;
@@ -102,22 +103,22 @@ Once you've done that, you can make calls to Sanitize statically.
 
 .. php:staticmethod:: Sanitize::paranoid($string, $allowedChars)
 
-    :param string $string: Data to clean.
-    :param string $allowedChars: An array of non alpha numeric characters allowed.
+    :param string $string: Donnée à nettoyer.
+    :param string $allowedChars: Un tableau de caractères non alpha numériques 
+        autorisé.
 
-    This function strips anything out of the target $string that is not
+    Cette fonction strips anything out of the target $string that is not
     a plain-jane alphanumeric character. The function can be made to
     overlook certain characters by passing them in $allowedChars
     array::
 
-        <?php
         $badString = ";:<script><html><   // >@@#";
         echo Sanitize::paranoid($badString);
-        // output: scripthtml
+        // sort: scripthtml
         echo Sanitize::paranoid($badString, array(' ', '@'));
-        // output: scripthtml    @@
+        // sort: scripthtml    @@
 
 
 .. meta::
-    :title lang=en: Data Sanitization
-    :keywords lang=en: array notation,sql security,sql function,malicious data,controller class,data options,raw html,core library,carriage returns,database connection,orm,industrial strength,slashes,chars,multi purpose,arrays,cakephp,element,models
+    :title lang=fr: Data Sanitization
+    :keywords lang=fr: notation tableau,sécurité sql,fonction sql,donnée malicieuse,classe controller,donnée options,raw html,librairie du coeur,carriage returns,connection base de données,orm,industrial strength,slashes,chars,multi purpose,arrays,cakephp,element,models

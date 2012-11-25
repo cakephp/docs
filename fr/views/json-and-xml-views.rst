@@ -23,7 +23,7 @@ besoin de faire un peu de configuration:
    :php:meth:`Router::parseExtensions()`.  Cela activera Router pour gérer les
    mulitples extensions.
 #. Ajouter le :php:class:`RequestHandlerComponent` à la liste de composants de
-   votre contrôleur. Cela activera automatiquement le changement de la classe 
+   votre controller. Cela activera automatiquement le changement de la classe 
    de vue pour les types de contenu.
 
 Après avoir ajouté ``Router::parseExtensions('json');`` à votre fichier de 
@@ -37,7 +37,7 @@ Utilisation des vues de données avec la clé sérializée
 La clé ``_serialize`` est une variable de vue spéciale qui indique quel autre(s) 
 variable(s) de vue devraient être sérializée(s) quan on utilise la vue de 
 données. Cela vous permet de sauter la définition des fichiers de vue pour vos 
-actions de contrôleur si vous n'avez pas besoin de faire un formatage avant que
+actions de controller si vous n'avez pas besoin de faire un formatage avant que
 vos données soient converties en json/xml.
 
 Si vous avez besoin de faire n'importe quel formatage ou manipulation de vos
@@ -45,7 +45,6 @@ variables de vue avant la génération de la réponse, vous devriez utiliser les
 fichiers de vue. La valeur de ``_serialize`` peut être soit une chaîne de 
 caractère, soit un tableau de variables de vue pour sérialiser::
 
-    <?php
     class PostsController extends AppController {
         public function index() {
             $this->set('posts', $this->paginate());
@@ -56,7 +55,6 @@ caractère, soit un tableau de variables de vue pour sérialiser::
 Vous pouvez aussi définir ``_serialize`` en tableau de variables de vue pour 
 combiner::
 
-    <?php
     class PostsController extends AppController {
         public function index() {
             // some code that created $posts and $comments
@@ -80,8 +78,7 @@ exemple, si vous avez des posts, qui ont un champ contenant du HTML généré,
 nous voudrons probablement omettre ceci à partir d'une réponse JSON. C'est 
 une situation où un fichier de vue serait utile::
 
-    <?php
-    // Code du contrôleur
+    // Code du controller
     class PostsController extends AppController {
         public function index() {
             $this->set(compact('posts', 'comments'));

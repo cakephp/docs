@@ -3,110 +3,108 @@ SessionHelper
 
 .. php:class:: SessionHelper(View $view, array $settings = array())
 
-As a natural counterpart to the Session Component, the Session
-Helper replicates most of the components functionality and makes it
-available in your view. The Session Helper is no longer
-automatically added to your view — so it is necessary to add it to
-the ``$helpers`` array in your controller.
+Équivalent du component Session, le helper Session offre la majorité des 
+fonctionnalités du component et les rend disponible dans votre vue. 
+Le Helper session est automatiquement ajouté à la vue, il n'est pas nécessaire 
+de l'ajouter à la variable tableau ``$helpers`` dans votre controller.
 
-The major difference between the Session Helper and the Session
-Component is that the helper does *not* have the ability to write
-to the session.
+La grande différence entre le Component Session et le Helper Session 
+est que ce dernier *ne* peut pas écrire dans la session.
 
-As with the Session Component, data is read by using
-:term:`notation avec points` array structures::
+Comme pour le Component Session, les données sont écrites et lues en 
+utilisant des structures de tableaux avec des :term:`dot notation`, 
+comme ci-dessous::
 
-    <?php
     array('User' => 
         array('username' => 'super@example.com')
     );
 
-Given the previous array structure, the node would be accessed by
-``User.username``, with the dot indicating the nested array. This
-notation is used for all Session helper methods wherever a ``$key`` is
-used.
+Étant donné ce tableau, le nœud sera accessible par ``User.username``, 
+le point indiquant le tableau imbriqué. Cette notation est utilisée pour 
+toutes les méthodes de l'assistant Session où une variable ``$key`` est 
+utilisée.
 
 .. php:method:: read(string $key)
 
     :rtype: mixed
 
-    Read from the Session. Returns a string or array depending on the
-    contents of the session.
+    Lire à partir de la Session. Retourne une chaîne de caractère ou un 
+    tableau dépendant des contenus de la session.
 
 .. php:method:: check(string $key)
 
     :rtype: boolean
 
-    Check to see if a key is in the Session. Returns a boolean on the
-    key's existence.
+    Vérifie si une clé est dans la Session. Retourne un boléen sur 
+    l'existence d'un clé.
 
 .. php:method:: error()
 
     :rtype: string
 
-    Returns last error encountered in a session.
+    Retourne la dernière erreur encourue dans une session.
 
 .. php:method:: valid()
 
     :rtype: boolean
 
-    Used to check is a session is valid in a view.
+    Utilisé pour vérifier si une session est valide dans une vue.
 
-Displaying notifications or flash messages
-==========================================
+Affichage de notifications ou de messages flash
+===============================================
 
 .. php:method:: flash(string $key = 'flash', array $params = array())
 
     :rtype: string
 
-    As explained in :ref:`creating-notification-messages` you can
-    create one-time notifications for feedback. After creating messages 
-    with :php:meth:`SessionComponent::setFlash()` you will want to 
-    display them. Once a message is displayed, it will be removed and 
-    not displayed again::
+    Comme expliqué dans :ref:`creating-notification-messages` vous pouvez 
+    créer des notifications uniques pour le le feedback. Après avoir 
+    créé les messages avec :php:meth:`SessionComponent::setFlash()`, vous 
+    voudrez les afficher. Une fois que le message est affiché, il sera 
+    retiré et ne s'affichera plus::
 
-        <?php
         echo $this->Session->flash();
 
-    The above will output a simple message, with the following html::
+    Ce qui est au-dessus sortira un message simple, avec le html suivant:
+
+    .. code-block:: html
 
         <div id="flashMessage" class="message">
-            Your stuff has been saved.
+            Vos trucs on été sauvegardés.
         </div>
 
-    As with the component method you can set additional properties
-    and customize which element is used. In the controller you might 
-    have code like::
+    Comme pour la méthode du component, vous pouvez définir des propriétés 
+    supplémentaires et personnaliser quel élément est utilisé. Dans le 
+    controller, vous pouvez avoir du code comme::
 
-        <?php
-        // in a controller
-        $this->Session->setFlash('The user could not be deleted.');
+        // dans un controller
+        $this->Session->setFlash('Le user n'a pu être supprimé.');
 
-    When outputting this message, you can choose the element used to display
-    this message::
+    Quand le message sort, vous pouvez choisir l'élément utilisé pour afficher 
+    ce message::
 
-        <?php 
-        // in a layout.
+        // dans un layout.
         echo $this->Session->flash('flash', array('element' => 'failure'));
 
-    This would use ``View/Elements/failure.ctp`` to render the message.  The 
-    message text would be available as ``$message`` in the element.
+    Ceci utilise ``View/Elements/failure.ctp`` pour rendre le message. Le 
+    message texte serait disponible dans ``$message`` dans l'élément.
 
-    Inside the failure element file would be something like
-    this::
+    A l'intérieur du fichier élément d'echec, il y aurait quelque chose comme 
+    ceci:
+
+    .. code-block:: php
 
         <div class="flash flash-failure">
             <?php echo $message ?>
         </div>
 
-    You can also pass additional parameters into the ``flash()`` method, which
-    allow you to generate customized messages::
+    Vous pouvez aussi passer des paramètres supplémentaires dans la méthode 
+    ``flash()``, ce qui vous permet de générer des messages personnalisés::
 
-        <?php
-        // In the controller
+        // Dans le controller
         $this->Session->setFlash('Thanks for your payment %s');
 
-        // In the layout.
+        // Dans le layout.
         echo $this->Session->flash('flash', array(
             'params' => array('name' => $user['User']['name'])
             'element' => 'payment'
@@ -119,6 +117,6 @@ Displaying notifications or flash messages
 
 
 .. meta::
-    :title lang=en: SessionHelper
-    :description lang=en: As a natural counterpart to the Session Component, the Session Helper replicates most of the components functionality and makes it available in your view.
-    :keywords lang=en: session helper,flash messages,session flash,session read,session check
+    :title lang=fr: SessionHelper
+    :description lang=fr: Équivalent du component Session, le helper Session offre la majorité des fonctionnalités du component et les rend disponible dans votre vue.
+    :keywords lang=fr: session helper,flash messages,session flash,session read,session check

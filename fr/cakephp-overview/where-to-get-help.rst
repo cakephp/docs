@@ -17,11 +17,11 @@ Le Cookbook
 
 Ce manuel devrait probablement être le premier endroit où vous rendre 
 pour obtenir des réponses. Comme pour beaucoup d'autres projets open source,
-nous accueillons de nouvelles personnes régulièrement. Faîtes tout votre possible
-pour répondre à vos questions par vous même dans un premier temps.
+nous accueillons de nouvelles personnes régulièrement. Faîtes tout votre 
+possible pour répondre à vos questions par vous même dans un premier temps.
 Les réponses peuvent venir lentement, mais elles resteront longtemps et vous 
-aurez ainsi allégé notre charge de travail en support utilisateur. Le manuel et
-l'API ont tous deux une version en ligne.
+aurez ainsi allégé notre charge de travail en support utilisateur. Le manuel 
+et l'API ont tous deux une version en ligne.
 
 La Boulangerie
 ==============
@@ -41,7 +41,7 @@ L'API
 
 Allez droit au but et atteignez le graal des développeurs, 
 l'API CakePHP (Application Programming Interface) est la documentation 
-la plus complète sur tous les détails essentiels au fonctionnement interne
+la plus complète sur tous les détails essentiels au fonctionnement interne 
 du framework.
 C'est une référence directe au code, donc apportez votre chapeau à hélice.
 
@@ -50,7 +50,7 @@ Les cas de Test
 
 Si vous avez toujours le sentiment que l'information fournie par 
 l'API est insuffisante, regardez le code des cas de test fournis avec CakePHP. 
-Ils peuvent servir d'exemples pratiques pour l'utilisation d'une fonction et de
+Ils peuvent servir d'exemples pratiques pour l'utilisation d'une fonction et de 
 donnée membres d'une classe.::
 
     lib/Cake/Test/Case

@@ -3,61 +3,59 @@ RSS
 
 .. php:class:: RssHelper(View $view, array $settings = array())
 
-The RSS helper makes generating XML for RSS feeds easy.
+Le Helper RSS permet de générer facilement des XML pour les flux RSS.
 
-Creating an RSS feed with the RssHelper
-=======================================
+Créer un flux RSS avec RssHelper
+================================
 
-This example assumes you have a Posts Controller and Post Model
-already created and want to make an alternative view for RSS.
+Cet exemple suppose que vous ayez un Controller Posts et un Model Post 
+déjà créés et que vous vouliez créer une vue alternative pour les flux RSS.
 
-Creating an xml/rss version of posts/index is a snap with CakePHP.
-After a few simple steps you can simply append the desired
-extension .rss to ``posts/index`` making your URL ``posts/index.rss``.
-Before we jump too far ahead trying to get our webservice up and
-running we need to do a few things. First parseExtensions needs to
-be activated, this is done in ``app/Config/routes.php``::
+Créer une version xml/rss de l'index de vos posts est vraiment simple avec 
+CakePHP. Après quelques étapes faciles, vous pouvez tout simplement ajouter 
+l'extension .rss demandée à ``posts/index`` pour en faire votre URL 
+``posts/index.rss``. Avant d'aller plus loin en essayant d'initialiser et 
+de lancer notre service Web, nous avons besoin de faire un certain nombre 
+de choses. Premièrement, le parsing d'extensions doit être activé dans 
+``app/config/routes.php``::
 
-    <?php
     Router::parseExtensions('rss');
 
-In the call above we’ve activated the .rss extension. When using
-:php:meth:`Router::parseExtensions()` you can pass as many arguments or
-extensions as you want. This will activate each
-extension/content-type for use in your application. Now when the
-address ``posts/index.rss`` is requested you will get an xml version of
-your ``posts/index``. However, first we need to edit the controller to
-add in the rss-specific code.
+Dans l'appel ci-dessus, nous avons activé l'extension .rss. Quand vous 
+utilisez :php:meth:`Router::parseExtensions()`, vous pouvez passer autant 
+d'arguments ou d'extensions que vous le souhaitez. Cela activera le 
+content-type de chaque extension utilisée dans votre application. Maintenant, 
+quand l'adresse ``posts/index.rss`` est demandée, vous obtiendrez une version 
+XML de votre ``posts/index``. Cependant, nous avons d'abord besoin d'éditer 
+le controller pour y ajouter le code "rss-spécifique".
 
-Controller Code
----------------
+Code du Controller
+------------------
 
-It is a good idea to add RequestHandler to your PostsController's
-$components array. This will allow a lot of automagic to occur::
+C'est une bonne idée d'ajouter RequestHandler au tableau $components de votre 
+controller Posts. Cela permettra à beaucoup d'automagie de se produire::
 
-    <?php
     public $components = array('RequestHandler');
 
-Our view will also use the :php:class:`TextHelper` for formatting, so that
-should be added to the controller as well::
+Notre vue utilise aussi :php:class:`TextHelper` pour le formatage, ainsi il 
+doit aussi être ajouté au controller::
 
-    <?php
     public $helpers = array('Text');
 
-Before we can make an RSS version of our posts/index we need to get
-a few things in order. It may be tempting to put the channel
-metadata in the controller action and pass it to your view using
-the :php:meth:`Controller::set()` method but this is inappropriate. That
-information can also go in the view. That will come later though,
-for now if you have a different set of logic for the data used to
-make the RSS feed and the data for the html view you can use the
-:php:meth:`RequestHandler::isRss()` method, otherwise your controller can stay
-the same::
+Avant que nous puissions faire une version RSS de notre posts/index, nous 
+avons besoin de mettre certaines choses en ordre. Il pourrait être tentant 
+de mettre le canal des métadonnées dans l'action du controller et de le 
+passer à votre vue en utilisant la méthode :php:meth:`Controller::set()`, 
+mais ceci est inapproprié. Cette information pourrait également aller dans 
+la vue. Cela arrivera sans doute plus tard, mais pour l'instant, si vous 
+avez un ensemble de logique différent entre les données utilisées pour créer 
+le flux RSS et les données pour la page HTML, vous pouvez utiliser la méthode 
+:php:meth:`RequestHandler::isRss()`, sinon votre controller pourrait rester 
+le même::
 
-    <?php
-    // Modify the Posts Controller action that corresponds to
-    // the action which deliver the rss feed, which is the
-    // index action in our example
+    // Modifie l'action du Controller Posts correspondant à
+    // l'action qui délivre le flux rss, laquelle est
+    // l'action index dans notre exemple
 
     public function index() {
         if ($this->RequestHandler->isRss() ) {
@@ -65,23 +63,23 @@ the same::
             return $this->set(compact('posts'));
         }
 
-        // this is not an Rss request, so deliver
-        // data used by website's interface
+        // ceci n'est pas une requête RSS
+        // donc on retourne les données utilisées par l'interface du site web
         $this->paginate['Post'] = array('order' => 'Post.created DESC', 'limit' => 10);
         
         $posts = $this->paginate();
         $this->set(compact('posts'));
     }
 
-With all the View variables set we need to create an rss layout.
+Maintenant que toutes ces variables de Vue sont définies, nous avons besoin de 
+créer un layout rss.
 
 Layout
 ------
 
-An Rss layout is very simple, put the following contents in
+Un layout Rss est très simple, mettez les contenus suivants dans 
 ``app/View/Layouts/rss/default.ctp``::
 
-    <?php
     if (!isset($documentData)) {
         $documentData = array();
     }
@@ -94,29 +92,28 @@ An Rss layout is very simple, put the following contents in
     $channel = $this->Rss->channel(array(), $channelData, $content_for_layout);
     echo $this->Rss->document($documentData,$channel);
 
-It doesn't look like much but thanks to the power in the ``RssHelper``
-it's doing a lot of lifting for us. We haven't set ``$documentData`` or
-``$channelData`` in the controller, however in CakePHP your views
-can pass variables back to the layout. Which is where our
-``$channelData`` array will come from setting all of the meta data for
-our feed.
+Il ne ressemble pas à plus mais grâce à la puissance du ``RssHelper``
+il fait beaucoup pour améliorer le visuel pour nous. Nous n'avons pas défini 
+``$documentData`` ou ``$channelData`` dans le controller, cependant dans 
+CakePHP vos vues peuvent retourner les variables au layout. Ce qui est 
+l'endroit où notre tableau ``$channelData`` va venir définir toutes les 
+données meta pour notre flux.
 
-Next up is view file for my posts/index. Much like the layout file
-we created, we need to create a ``View/Posts/rss/`` directory and
-create a new ``index.ctp`` inside that folder. The contents of the file
-are below.
+Ensuite il y a le fichier de vue pour mes posts/index. Un peu comme le fichier 
+de layout que nous avons crée, nous avons besoin de créer un répertoire 
+``View/Posts/rss/`` et un nouveau ``index.ctp`` à l'intérieur de ce répertoire.
+Les contenus du fichier sont ci-dessous.
 
 View
 ----
 
-Our view, located at ``app/View/Posts/rss/index.ctp``, begins by
-setting the ``$documentData`` and ``$channelData`` variables for the
-layout, these contain all the metadata for our RSS feed. This is
-done by using the :php:meth:`View::set()`` method which is analogous to the
-Controller::set() method. Here though we are passing the channel's
-metadata back to the layout::
+Notre vue, localisée dans ``app/View/Posts/rss/index.ctp``, commence par 
+définir les variables ``$documentData`` et ``$channelData`` pour le layout, 
+celles-ci contiennent toutes les metadonnées pour notre flux RSS. C'est fait 
+en utilisant la méthode :php:meth:`View::set()`` qui est analogue à la 
+méthode Controller::set(). Ici nous passons les canaux de données en retour au 
+layout::
 
-    <?php
     $this->set('documentData', array(
         'xmlns:dc' => 'http://purl.org/dc/elements/1.1/'));
 
@@ -126,29 +123,28 @@ metadata back to the layout::
         'description' => __("Most recent posts."),
         'language' => 'en-us'));
 
-The second part of the view generates the elements for the actual
-records of the feed. This is accomplished by looping through the
-data that has been passed to the view ($items) and using the
-:php:meth:`RssHelper::item()` method. The other method you can use,
-:php:meth:`RssHelper::items()` which takes a callback and an array of items for
-the feed. (The method I have seen used for the callback has always
-been called ``transformRss()``. There is one downfall to this method,
-which is that you cannot use any of the other helper classes to
-prepare your data inside the callback method because the scope
-inside the method does not include anything that is not passed
-inside, thus not giving access to the TimeHelper or any other
-helper that you may need. The :php:meth:`RssHelper::item()` transforms the
-associative array into an element for each key value pair.
+La seconde partie de la vie génére les éléments pour les enregistrements 
+actuels du flux. Ceci est accompli en bouclant sur les données qui ont 
+été passées à la vue ($items) et en utilisant la méthode 
+:php:meth:`RssHelper::item()`. L'autre méthode que vous pouvez utiliser 
+:php:meth:`RssHelper::items()` qui prend un callback et un tableau des items 
+pour le flux. (La méthode que j'ai vu utilisée pour le callback a toujours 
+été appelée ``transformRss()``. Il y a un problème pour cette méthode, qui est 
+qu'elle n'utilise aucune des classes de helper pour préparer vos données à 
+l'intérieur de la méthode de callback parce que la portée à l'intérieur de la 
+méthode n'inclut pas tout ce qui n'est pas passé à l'intérieur, ainsi ne 
+donne pas accès au TimeHelper ou à tout autre helper dont vous auriez besoin. 
+:php:meth:`RssHelper::item()` transforme le tableau associatif en un élément 
+pour chaque pair de valeur de clé.
 
 .. note::
 
-    You will need to modify the $postLink variable as appropriate to
-    your application.
+    Vous devrez modifier la variable $postLink comme il se doit pour 
+    votre application.
 
 ::
 
-    <?php
-    // You should import Sanitize
+    // Vous devez importer Sanitize
     App::uses('Sanitize', 'Utility');
 
     foreach ($posts as $post) {
@@ -201,17 +197,18 @@ Feed Validator or the w3c site at http://validator.w3.org/feed/.
 
 .. note::
 
-    You may need to set the value of 'debug' in your core configuration
-    to 1 or to 0 to get a valid feed, because of the various debug
-    information added automagically under higher debug settings that
-    break XML syntax or feed validation rules.
+    Vous aurez besoin de définir la valeur de 'debug' dans votre configuration 
+    du coeur à 1 ou à 0 pour obtenir un flux valide, à cause des différentes 
+    informations de debug ajoutées automatiquement sous des paramètres de 
+    debug plus haut qui cassent la syntaxe XML ou les règles de validation du 
+    flux.
 
 Rss Helper API
 ==============
 
 .. php:attr:: action
 
-    Current action
+    Action courante
 
 .. php:attr:: base
 
@@ -219,72 +216,72 @@ Rss Helper API
 
 .. php:attr:: data
 
-    POSTed model data
+    donnée du model POSTée
 
 .. php:attr:: field
 
-    Name of the current field
+    Nom du champ courant
 
 .. php:attr:: helpers
 
-    Helpers used by the RSS Helper
+    Helpers utilisés par le Helper RSS
 
 .. php:attr:: here
 
-    URL to current action
+    URL de l'action courante
 
 .. php:attr:: model
 
-    Name of current model
+    Nom du model courant
 
 .. php:attr:: params
 
-    Parameter array
+    Paramètre tableau
 
 .. php:attr:: version
 
-    Default spec version of generated RSS.
+    Version de spec par défaut de la génération de RSS.
 
 .. php:method:: channel(array $attrib = array (), array $elements = array (), mixed $content = null)
 
     :rtype: string
 
-    Returns an RSS ``<channel />`` element.
+    Retourne un élément RSS ``<channel />``.
 
 .. php:method:: document(array $attrib = array (), string $content = null)
 
     :rtype: string
 
-    Returns an RSS document wrapped in ``<rss />`` tags.
+    Retourne un document RSS entouré de tags ``<rss />``.
 
 .. php:method:: elem(string $name, array $attrib = array (), mixed $content = null, boolean $endTag = true)
 
     :rtype: string
 
-    Generates an XML element.
+    Génére un élément XML.
 
 .. php:method:: item(array $att = array (), array $elements = array ())
 
     :rtype: string
 
-    Converts an array into an ``<item />`` element and its contents.
+    Convertit un tableau en un élément ``<item />`` et ses contenus.
 
 .. php:method:: items(array $items, mixed $callback = null)
 
     :rtype: string
 
-    Transforms an array of data using an optional callback, and maps it to a 
-    set of ``<item />`` tags.
+    Transforme un tableau de données en utilisant un callback optionnel, et le 
+    map pour un ensemble de tags ``<item />``.
 
 .. php:method:: time(mixed $time)
 
     :rtype: string
 
-    Converts a time in any format to an RSS time. See 
+    Convertit un time de tout format en time de RSS. Regardez 
     :php:meth:`TimeHelper::toRSS()`.
 
 
 .. meta::
-    :title lang=en: RssHelper
-    :description lang=en: The RSS helper makes generating XML for RSS feeds easy.
-    :keywords lang=en: rss helper,rss feed,isrss,rss item,channel data,document data,parse extensions,request handler
+    :title lang=fr: RssHelper
+    :description lang=fr: RSSHelper permet de générer facilement les XML pour les flux RSS.
+    :keywords lang=fr: rss helper,rss feed,isrss,rss item,channel data,document data,parse extensions,request handler

@@ -66,5 +66,5 @@ This assumes you are running a \*nix server, and have CakePHP in
 
 
 .. meta::
-    :title lang=fr: Deployment
+    :title lang=fr: Deploiement
     :keywords lang=fr: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications

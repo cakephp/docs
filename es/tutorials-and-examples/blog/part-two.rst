@@ -12,13 +12,9 @@ Los ficheros en los que se definen los modelos se ubican en la carpeta
 ``/app/Model``, y el fichero que vamos a crear debe guardarse en la ruta
 ``/app/Model/Post.php``. El contenido de este ficheró será::
 
-        <?php
-
-        class Post extends AppModel {
-                public $name = 'Post';
-        }
-
-        ?>
+    class Post extends AppModel {
+            public $name = 'Post';
+    }
 
 Los convenios usados para los nombres son importantes. Cuando llamamos a nuestro
 modelo *Post*, CakePHP deducirá automáticamente que este modelo se utilizará en
@@ -47,7 +43,7 @@ nuestros artículos. Vamos a crear un nuevo fichero llamado
 ``PostsController.php`` dentro de la ruta ``/app/Controller``. El contenido de
 este fichero será::
 
-    <?php class PostsController extends AppController { 
+    class PostsController extends AppController { 
         public $helpers = array('Html','Form'); 
     }
 
@@ -60,7 +56,6 @@ defecto de cada controlador es index por convención) esperan ver un listado de
 
 ::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array ('Html','Form');
     
@@ -159,7 +154,9 @@ variable en la vista con esta pinta:
 Las vistas en CakePHP se almacenan en la ruta ``/app/View`` y en un directorio
 con el mismo nombre que el controlador al que pertenecen, en nuestro caso
 *Posts*, así que para mostrar estos elementos formateados mediante una tabla
-tendremos algo como esto::
+tendremos algo como esto:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
     
@@ -215,7 +212,6 @@ ya que esa acción no está definida y debería mostrar la página de error
 correspondiente. Cosa muy rara.
 Creemos esta acción para evitar el error::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
         public $name = 'Posts';
@@ -229,7 +225,6 @@ Creemos esta acción para evitar el error::
             $this->set('post', $this->Post->read());
         }
     }
-    ?>
 
 Si observas la función view(), ahora el método set() debería serte familiar.
 Verás que estamos usando ``read()`` en vez de ``find('all')`` ya que sólo
@@ -243,7 +238,7 @@ parámetro $id.
 Vamos a definir la vista para esta nueva función, como hicimos antes para
 index() salvo que el nombre ahora será ``/app/View/Posts/view.ctp``.
 
-::
+.. code-block:: php
 
     <!-- File: /app/View/Posts/view.ctp -->
     
@@ -267,7 +262,6 @@ Lo primero, añadir una nueva acción ``add()`` en nuestro controlador PostsCont
 
 ::
 
-    <?php
     class PostsController extends AppController {
         public $name = 'Posts';
         public $components = array('Session');
@@ -291,7 +285,6 @@ Lo primero, añadir una nueva acción ``add()`` en nuestro controlador PostsCont
             }
         }
     }
-    ?>
 
 .. note::
 
@@ -338,7 +331,7 @@ defecto mediante llamadas del estilo ``$this->Form``.
 
 Nuestra vista sería así
 
-::
+.. code-block:: php
 
     <!-- File: /app/View/Posts/add.ctp -->   
         
@@ -353,7 +346,8 @@ Nuestra vista sería así
 Hemos usado FormHelper para generar la etiqueta 'form'. Esta llamada al
 FormHelper :  ``$this->Form->create()`` generaría el siguiente código
 
-::
+
+.. code-block:: html
 
     <form id="PostAddForm" method="post" action="/posts/add">
 
@@ -378,19 +372,14 @@ tag <form>. Puedes ver todos los detalles aquí :doc:`/views/helpers`.
 
 Volvamos atrás un minuto para añadir un enlace en ``/app/View/Post/index.ctp``
 que nos permita agregar nuevos artículos. Justo antes del tag <table> añade la
-siguiente línea
+siguiente línea::
 
-::
-
-    <?php echo $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add')); ?>
+    echo $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add'));
 
 Te estarás preguntando: ¿ Cómo le digo a CakePHP la forma en la que debe validar
 estos datos ? Muy sencillo, las reglas de validación se escriben en el modelo.
-Abre el modelo Post y vamos a escribir allí algunas reglas sencillas :
+Abre el modelo Post y vamos a escribir allí algunas reglas sencillas ::
 
-::
-
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
     
@@ -426,7 +415,6 @@ Aquí está el método edit():
 
 ::
 
-    <?php
     function edit($id = null) {
         $this->Post->id = $id;
         if ($this->request->is('get')) {
@@ -448,7 +436,7 @@ pueda corregirlos.
 
 La vista quedará así:
 
-::
+.. code-block:: php
 
     <!-- File: /app/View/Posts/edit.ctp -->
         
@@ -459,7 +447,6 @@ La vista quedará así:
         echo $this->Form->input('body', array('rows' => '3'));
         echo $this->Form->input('id', array('type' => 'hidden')); 
         echo $this->Form->end('Save Post');
-    ?>
 
 Mostramos el formulario de edición (con los valores actuales de ese artículo),
 junto a los errores de validación que hubiese.
@@ -470,7 +457,7 @@ que es un nuevo elemento al llamar a la función ``save()``. Puedes actualizar u
 poco tu vista 'index' para añadir los enlaces de edición de un artículo
 específico:
 
-::
+.. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp  (edit links added) -->
 
@@ -514,7 +501,6 @@ nuestro controlador:
 
 ::
 
-    <?php
     function delete($id) {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
@@ -537,7 +523,7 @@ Como estamos ejecutando algunos métodos y luego redirigiendo a otra acción de
 nuestro controlador, no es necesaria ninguna vista (nunca se usa). Lo que si
 querrás es actualizar la vista index.ctp para incluír el ya habitual enlace:
 
-::
+.. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
     
@@ -599,7 +585,6 @@ primero la regla de la que hemos hablado:
 
 ::
 
-    <?php
     Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
 Como habíamos dicho, esta regla conecta la URL '/' con el controlador 'pages' la
@@ -608,7 +593,6 @@ regla por esta otra:
 
 ::
 
-  <?php
     Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 
 Ahora la URL '/' nos llevará al controlador 'posts' y la acción 'index'.

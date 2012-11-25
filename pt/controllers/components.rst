@@ -35,7 +35,6 @@ de componentes que requerem configuração são:
 As configurações para estes componentes, e outros em geral, são feitas no array
 ``$components`` ou no método ``beforeFilter()`` do seu controller::
 
-    <?php
     class PostsController extends AppController {
         public $components = array(
             'Auth' => array(
@@ -52,7 +51,6 @@ método ``beforeFilter()`` de seus controllers. Isto é útil quando você preci
 atribuir os resultados de uma função para uma propriedade do componente. O
 exemplo acima também pode ser expressado da seguinte maneira::
 
-    <?php
     public function beforeFilter() {
         $this->Auth->authorize = array('controller');
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
@@ -65,7 +63,6 @@ feita antes do método ``beforeFilter()`` do controller ser executado. Para este
 fim, alguns componentes permitem que configurações sejam feitas no array
 ``$components``::
 
-    <?php
     public $components = array('DebugKit.Toolbar' => array('panels' => array('history', 'session')));
 
 Consulte a documentação relevante para determinar quais opções de configuração
@@ -79,7 +76,6 @@ Cada componente que você usa é exposto como uma propriedade em seu controller.
 Se você carregou o :php:class:`SessionComponent` e o :php:class:`CookieComponent`
 no seu controller, você pode acessá-los da seguinte maneira::
 
-    <?php
     class PostsController extends AppController {
         public $components = array('Session', 'Cookie');
         
@@ -104,7 +100,6 @@ dos controllers. Nestas situações você pode carregar um componente em tempo d
 execução usando o :doc:`Component Collection </core-libraries/collections>`.
 Dentro de um controller você pode fazer o seguinte::
     
-    <?php
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
 
@@ -128,7 +123,6 @@ O primeiro passo é criar um novo arquivo para a classe do componente.
 Crie o arquivo em ``/app/Controller/Component/MathComponent.php``. A estrutura
 básica para o componente irá se parecer com algo assim::
 
-    <?php
     
     class MathComponent extends Component {
         function doComplexOperation($amount1, $amount2) {
@@ -152,7 +146,6 @@ da classe componente que queremos.
 
 ::
 
-    <?php
     /* Torna o novo componente acessível em $this->Math,
     bem como o $this->Session */
     public $components = array('Math', 'Session');
@@ -167,7 +160,6 @@ podem ser usados pelo componente.
 
 ::
 
-    <?php
     public $components = array(
         'Math' => array(
             'precision' => 2,
@@ -192,7 +184,6 @@ Neste caso você pode incluir outros componentes no seu da mesma forma que inclu
 em controllers, usando o atributo ``$components``::
 
     // app/Controller/Component/CustomComponent.php
-    <?php
     class CustomComponent extends Component {
         // O outro componente que seu componente utiliza
         public $components = array('Existing'); 
@@ -207,7 +198,6 @@ em controllers, usando o atributo ``$components``::
     }
 
     // app/Controller/Component/ExistingComponent.php
-    <?php
     class ExistingComponent extends Component {
     
         function initialize(Controller $controller) {

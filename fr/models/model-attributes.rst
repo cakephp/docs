@@ -1,17 +1,20 @@
-Model Attributes
-################
+Attributs de Model
+##################
 
-Model attributes allow you to set properties that can override the
-default model behavior.
+Les attributs de Model vous permettent de configurer les propriétés qui 
+peuvent override le behavior du model par défaut.
 
-For a complete list of model attributes and their descriptions
-visit the CakePHP API. Check out
+Pour une liste complète d'attributs du model et ses descriptions, visitez 
+l'API de CakePHP. Allez voir 
 `http://api20.cakephp.org/class/model <http://api20.cakephp.org/class/model>`_.
 
 useDbConfig
 ===========
 
-The ``useDbConfig`` property is a string that specifies the name of
+La propriété ``useDbConfig`` est une chaîne de caractère qui spécifie le nom 
+de la connection à la base de données à utiliser pour lier votre classe model 
+à la table de la base de données liée. Vous pouvez la configurer 
+property is a string that specifies the name of
 the database connection to use to bind your model class to the
 related database table. You can set it to any of the database
 connections defined within your database configuration file. The
@@ -20,12 +23,11 @@ database configuration file is stored in /app/Config/database.php.
 The ``useDbConfig`` property is defaulted to the 'default' database
 connection.
 
-Example usage:
+Exemple d'utilisation:
 
 ::
 
-    <?php
-    class Example extends AppModel {
+    class Exemple extends AppModel {
         public $useDbConfig = 'alternate';
     }
 
@@ -40,15 +42,13 @@ table.
 
 Example usage::
 
-    <?php
-    class Example extends AppModel {
+    class Exemple extends AppModel {
         public $useTable = false; // This model does not use a database table
     }
 
 Alternatively::
 
-    <?php
-    class Example extends AppModel {
+    class Exemple extends AppModel {
         public $useTable = 'exmp'; // This model uses a database table 'exmp'
     }
 
@@ -61,9 +61,8 @@ is initially set in the database connection file at
 override the default by setting the ``tablePrefix`` attribute in
 the model.
 
-Example usage::
+Exemple d'utilisation::
 
-    <?php
     class Example extends AppModel {
         public $tablePrefix = 'alternate_'; // will look for 'alternate_examples'
     }
@@ -79,7 +78,6 @@ setting CakePHP to use an existing database table.
 
 Example usage::
 
-    <?php
     class Example extends AppModel {
         public $primaryKey = 'example_id'; // example_id is the field name in the database
     }
@@ -97,7 +95,6 @@ scaffolding and in ``find('list')`` calls. The model will use
 
 For example, to use the ``username`` field::
 
-    <?php
     class User extends AppModel {
         public $displayField = 'username';
     }
@@ -142,7 +139,6 @@ order
 The default ordering of data for any find operation. Possible
 values include::
 
-    <?php
     $order = "field"
     $order = "Model.field";
     $order = "Model.field asc";
@@ -172,7 +168,6 @@ Each field is described by:
 
 Example Usage::
 
-    <?php
     public $_schema = array(
         'first_name' => array(
             'type' => 'string', 
@@ -213,7 +208,6 @@ other fields in a model but will not be saveable.
 
 Example usage for MySQL::
 
-    <?php
     public $virtualFields = array(
         'name' => "CONCAT(User.first_name, ' ', User.last_name)"
     );
@@ -234,11 +228,10 @@ As you saw earlier in this chapter, the name attribute is a
 compatibility feature for PHP4 users and is set to the same value
 as the model name.
 
-Example usage::
+Exemple d'utilisation::
 
-    <?php
-    class Example extends AppModel {
-        public $name = 'Example';
+    class Exemple extends AppModel {
+        public $name = 'Exemple';
     }
 
 cacheQueries
@@ -251,5 +244,5 @@ is handled by the cache.
 
 
 .. meta::
-    :title lang=en: Model Attributes
-    :keywords lang=en: alternate table,default model,database configuration,model example,database table,default database,model class,model behavior,class model,plural form,database connections,database connection,attribute,attributes,complete list,config,cakephp,api,class example
+    :title lang=fr: Attributs de Model
+    :keywords lang=fr: alternate table,default model,database configuration,model example,database table,default database,model class,model behavior,class model,plural form,database connections,database connection,attribute,attributes,complete list,config,cakephp,api,class example

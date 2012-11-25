@@ -17,74 +17,73 @@ développements CakePHP, nous devons mentionner que la plupart de ces
 principes sont facilement contournables - ce qui est particulièrement 
 utile lorsque vous travaillez avec d'anciennes applications.
 
-Les conventions des Contrôleurs
+Les conventions des Controllers
 ===============================
 
-Les noms des classes de contrôleur sont au pluriel, CamelCased et
+Les noms des classes de controller sont au pluriel, CamelCased et
 se terminent par 'Controller'. PersonnesController et 
 DerniersArticlesController sont des exemples respectant cette convention.
 
-La première méthode que vous écrivez pour un contrôleur devrait être
-``index()``. Lorsqu'une requête adresse un contrôleur mais pas d'action, le 
+La première méthode que vous écrivez pour un controller devrait être
+``index()``. Lorsqu'une requête pointe vers un controller sans action, le 
 comportement par défaut de CakePHP est d'exécuter la fonction ``index()`` 
-de ce contrôleur. Ainsi, la requête http://www.exemple.com/pommes/ renvoie
+de ce controller. Ainsi, la requête http://www.exemple.com/pommes/ renvoie
 à la fonction ``index()`` de ``PommesController``, alors que
 http://www.exemple.com/pommes/view renvoie vers la fonction ``view()`` de 
 ``PommesController``.
 
 Dans CakePHP, vous pouvez aussi changer la visibilité des fonctions 
-d'un contrôleur en préfixant le nom par des caractères soulignés. 
-Si une fonction d'un contrôleur a été préfixée avec un souligné, elle
+d'un controller en préfixant le nom par des caractères soulignés. 
+Si une fonction d'un controller a été préfixée avec un souligné, elle
 ne sera pas visible sur le Web, via le répartiteur, mais elle sera 
 disponible pour un usage interne. Exemple :
 
-Vous pouvez aussi changer la visibilité des méthodes des contrôleurs 
-dans CakePHP en préfixant les noms de méthode des contrôleurs avec des 
-underscores. Si une méthode du contrôleur a été préfixée avec un
+Vous pouvez aussi changer la visibilité des méthodes des controllers 
+dans CakePHP en préfixant les noms de méthode des controllers avec des 
+underscores. Si une méthode du controller a été préfixée avec un
 underscore, la méthode ne sera pas accessible directement à partir du web 
 mais est disponible pour une utilisation interne. Par exemple::
 
-    <?php
     class NouvellesController extends AppController {
     
         public function derniers() {
-            $this->_findNewArticles();
+            $this->_trouveLesNouveauxArticles();
         }
         
-        protected function _findNewArticles() {
-            // Logique pour trouver les derniere articles de nouvelles
+        protected function _trouveLesNouveauxArticles() {
+            // Logique pour trouver les derniers articles de nouvelles
         }
     }
     
 
-Alors que la page http://www.example.com/news/latest/ est accessible 
+Alors que la page http://www.exemple.com/nouvelles/derniers/ est accessible 
 à l'utilisateur comme d'habitude, quelqu'un qui essaie d'aller sur la page 
-http://www.example.com/news/\_findNewArticles/ aura une erreur,
+http://www.example.com/nouvelles/\_trouveLesNouveauxArticles/ aura une erreur,
 car la méthode est précédée d'un underscore. Vous pouvez aussi utiliser les
 mots-clés de visibilité de PHP pour indiquer si la méthode peut ou non être
 accessible à partir d'une url. Les méthodes non-publiques ne sont pas 
 accessibles.
 
-Considérations URL pour les noms de Contrôleur
+Considérations URL pour les noms de Controller
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Comme vous venez de voir, un contrôleur à mot unique map facilement vers
+Comme vous venez de voir, un controller à mot unique map facilement vers
 un chemin URL en minuscules. Par exemple, ``PommesController`` (qui serait
 défini dans le nom de fichier 'PommesController.php') est accessible à l'adresse
 http://exemple.com/pommes.
 
-Les contrôleurs à multiples mots *peuvent* être de forme 'inflecté' qui 
-correspondent au nom du contrôleur:
+Les controllers à multiples mots *peuvent* être de forme 'inflecté' qui 
+correspondent au nom du controller:
 
 -  /pommesRouges
--  /PommesRougesRedApples
+-  /PommesRouges
 -  /Pomme\_rouges
 -  /pomme\_rouges
 
-iront tous vers l'index du contrôleur PommesRouges. Cependant, 
+iront tous vers l'index du controller PommesRouges. Cependant, 
 la convention est que vos urls soient en minuscules et avec des underscores,
-c'est pourquoi /pommes\_rouges/go\_pick est la forme correcte pour accéder à 
-l'action ``RedApplesController::go_pick``.
+c'est pourquoi /pommes\_rouges/allez\_chercher est la forme correcte pour accéder à 
+l'action ``RedApplesController::allez_chercher``.
 
 Pour plus d'informations sur les URLs de CakePHP et la gestion des paramètres,
 allez voir :ref:`routes-configuration`.
@@ -95,36 +94,36 @@ Conventions des Fichiers et des Noms de Classe
 ==============================================
 
 En général, les noms de fichiers sont composés avec le caractère souligné 
-(underscore), alors que les noms de classe sont CamelCased. Donc si vous avez 
+(underscore), alors que les noms de classe sont en CamelCase. Donc si vous avez 
 une classe MaChouetteClasse, alors dans Cake, le fichier devrait être nommé 
 ma_chouette_classe.php. Voici des exemples de la manière dont on nomme les 
 fichiers, pour chacun des différents types de classes que vous utiliseriez 
 habituellement dans une application CakePHP :
 
--  La classe Contrôleur **BisousEtCalinsController** devra se trouver dans un 
+-  La classe controller **BisousEtCalinsController** devra se trouver dans un 
    fichier nommé **BisousEtCalinsController.php**.
--  La classe Composant (Component) **MonSuperComponent** devra se trouver dans 
+-  La classe Component (Composant) **MonSuperComponent** devra se trouver dans 
    un fichier nommé **MonSuperComponent.php**.
--  La classe Modèle **ValeurOption** devra se trouver dans un fichier 
+-  La classe Model **ValeurOption** devra se trouver dans un fichier 
    nommé **ValeurOption.php**
--  La classe Comportement (Behavior) **SpecialementFunkableBehavior** devra 
+-  La classe Behavior (Comportement) **SpecialementFunkableBehavior** devra 
    se trouver dans un fichier nommé **SpecialementFunkableBehavior.php**.
--  La classe Vue **SuperSimpleView** devra se trouver dans un fichier nommé 
-   **SuperSimpleView.ctp**.
--  La classe Assistant (Helper) **LeMeilleurQuiSoitHelper** devra se trouver 
+-  La classe View (Vue) **SuperSimpleView** devra se trouver dans un fichier 
+   nommé **SuperSimpleView.ctp**.
+-  La classe Helper (Assistant) **LeMeilleurQuiSoitHelper** devra se trouver 
    dans un fichier nommé **LeMeilleurQuiSoitHelper.php**
 
-Chaque fichier sera située dans le répertoire approprié dans votre dossier app.
+Chaque fichier sera situé dans le répertoire approprié dans votre dossier app.
 
-Conventions pour les Modèles et les Sources de données
+Conventions pour les Models et les Sources de données
 ======================================================
 
-Les noms de classe de modèle sont au singulier et CamelCased. "Personne", 
+Les noms de classe de model sont au singulier et en CamelCase. "Personne", 
 "GrossePersonne" et "VraimentGrossePersonne" en sont des exemples.
 
-Les noms de tables correspondant aux modèles CakePHP sont au pluriel et 
+Les noms de tables correspondant aux models CakePHP sont au pluriel et 
 utilisent le caractère souligné (underscore). Les tables correspondantes 
-aux modèles mentionnés ci-dessus seront donc respectivement : ``personnes``, 
+aux models mentionnés ci-dessus seront donc respectivement : ``personnes``, 
 ``grosse\_personnes`` et ``vraiment\_grosse\_personnes``.
 
 Note des traducteurs francophones : seul le dernier mot est au pluriel et 
@@ -141,18 +140,18 @@ Les noms des champs avec deux mots ou plus doivent être soulignés (underscore)
 comme ici : nom\_de\_famille.
 
 Les clés étrangères des relations hasMany, belongsTo ou hasOne sont reconnues 
-par défaut grâce au nom (singulier) du modèle associé, suivi de "\_id". Donc, 
+par défaut grâce au nom (singulier) du model associé, suivi de "\_id". Donc, 
 si un Cuisinier hasMany Cake, la table "cakes" se référera à un cuisinier de la 
 table "cuisiniers" via une clé étrangère "cuisinier\_id". Pour une table avec 
 un nom de plusieurs mots comme "type\_categories", la clé étrangère sera 
 "type\_categorie\_id".
 
 Les tables de jointure utilisées dans les relations hasAndBelongsToMany 
-(HABTM) entre modèles devraient être nommées d'après le nom des tables des 
-modèles qu'elles unissent, dans l'ordre alphabétique ("pommes\_zebres" plutôt 
+(HABTM) entre models doivent être nommées d'après le nom des tables des 
+models qu'elles unissent, dans l'ordre alphabétique ("pommes\_zebres" plutôt 
 que "zebres\_pommes").
 
-Toutes les tables avec lesquelles les modèles de CakePHP interagissent (à 
+Toutes les tables avec lesquelles les models de CakePHP interagissent (à 
 l'exception des tables de jointure), nécessitent une clé primaire simple pour 
 identifier chaque ligne de manière unique. Si vous souhaitez modéliser une 
 table qui n'a pas de clé primaire sur un seul champ, la convention de CakePHP 
@@ -162,7 +161,7 @@ CakePHP n'accepte pas les clés primaires composées. Dans l'éventualité où v
 voulez manipuler directement les données de votre table de jointure, cela veut 
 dire que vous devez soit utiliser les appels directs à 
 :ref:`query <model-query>`, soit ajouter une clé primaire pour être en mesure 
-d'agir sur elle comme un modèle normal. Exemple :
+d'agir sur elle comme un model normal. Exemple :
 
     CREATE TABLE posts_tags (
     id INT(10) NOT NULL AUTO_INCREMENT,
@@ -179,7 +178,7 @@ Conventions des vues
 ====================
 
 Les fichiers de gabarits de vue (template) sont nommés d'après les fonctions 
-du contrôleur qu'elles affichent, sous une forme "soulignée" (underscored). 
+du controller qu'elles affichent, sous une forme "soulignée" (underscored). 
 La fonction soyezPret() de la classe PersonnesController cherchera un gabarit 
 de vue dans : /app/View/Personnes/soyez\_pret.ctp
 
@@ -192,14 +191,14 @@ affres de la configuration. Voici un exemple récapitulant les conventions
 abordées :
 
     Nom de la table dans la base de données : "personnes"
-    Classe du Modèle : "Personne", trouvée dans /app/Model/Personne.php
-    Classe du Contrôleur : "PersonnesController", trouvée dans 
+    Classe du Model : "Personne", trouvée dans /app/Model/Personne.php
+    Classe du Controller : "PersonnesController", trouvée dans 
     /app/Controller/PersonnesController.php
     Gabarit de la Vue : trouvé dans /app/View/Personnes/index.ctp
 
-En utilisant ces conventions, CakePHP sait qu'une requête à 
+En utilisant ces conventions, CakePHP sait qu'une requête de type  
 http://exemple.com/personnes/ sera liée à un appel à la fonction index() du 
-Contrôleur PersonnesController, dans lequel le modèle Personne est 
+Controller PersonnesController, dans lequel le model Personne est 
 automatiquement disponible (et automatiquement lié à la table 'personnes' 
 dans la base) et rendue dans un fichier. Aucune de ces relations n'a été 
 configurée par rien d'autre que la création des classes et des fichiers dont 
@@ -210,13 +209,8 @@ essayer de dérouler le tutoriel du Blog CakePHP
 :doc:`/tutorials-and-examples/blog/blog` pour voir comment les choses 
 s'articulent.
 
--  Database table: "people"
--  Model class: "Person", found at /app/Model/Person.php
--  Controller class: "PeopleController", found at
-   /app/Controller/PeopleController.php
--  View template, found at /app/View/People/index.ctp
-
 
 .. meta::
     :title lang=fr: Conventions de CakePHP
-    :keywords lang=fr: web development experience,maintenance cauchemard,méthode index,systèmes légaux,noms de méthode,classe php,système uniforme,fichiers de config,tenets,pommes,conventions,contrôleur conventionel,bonnes pratiques,maps,visibilité,nouveaux articles,fonctionnalité,logique,cakephp,développeurs
+    :keywords lang=fr: expérience de développement web,maintenance cauchemard,méthode index,systèmes légaux,noms de méthode,classe php,système uniforme,fichiers de config,tenets,pommes,conventions,controller conventionel,bonnes pratiques,maps,visibilité,nouveaux articles,fonctionnalité,logique,cakephp,développeurs
+

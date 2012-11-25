@@ -69,11 +69,17 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
-            'MyRecipe' => array('className' => 'Recipe'),
+            'MyRecipe' => array(
+                'className' => 'Recipe',
+            )
         );
-        public $hasAndBelongsToMany => array('Member' => array('className' => 'User'));
+        public $hasAndBelongsToMany => array(
+            'MemberOf' => array(
+                'className' => 'Group',
+            )
+        );
     }
-    
+
     class Group extends AppModel {
         public $name = 'Group';
         public $hasMany = array(
@@ -81,7 +87,11 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
                 'className'  => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array('MemberOf' => array('className' => 'Group'));
+        public $hasAndBelongsToMany => array(
+            'Member' => array(
+                'className' => 'User',
+            )
+        );
     }
 
 しかし、以下の例はうまく動きません。 ::
@@ -90,11 +100,17 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
-            'MyRecipe' => 'Recipe',
+            'MyRecipe' => array(
+                'className' => 'Recipe',
+            )
         );
-        public $hasAndBelongsToMany => array('Member' => 'User');
+        public $hasAndBelongsToMany => array(
+            'Member' => array(
+                'className' => 'Group',
+            )
+        );
     }
-    
+
     class Group extends AppModel {
         public $name = 'Group';
         public $hasMany = array(
@@ -102,7 +118,11 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
                 'className'  => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array('Member' => 'Group');
+        public $hasAndBelongsToMany => array(
+            'Member' => array(
+                'className' => 'User',
+            )
+        );
     }
 
 これはHABTMアソシエーションに、UserとGroupの両モデルを参照している\
@@ -474,7 +494,7 @@ counterCache - count()結果をキャッシュする
 
     my_model_count
 
-``ImageComment`` と ``Image`` というモデルを準備して、 ``image`` テーブルに\
+``ImageComment`` と ``Image`` というモデルを準備して、 ``images`` テーブルに\
 ``image_comment_count`` という名前のINTフィールドを追加しましょう。
 
 以下のサンプルを参考にしてください。
@@ -494,13 +514,15 @@ counter-cache機能を有効にするためにアソシエーションの設定�
 ``counterCache`` キーに ``true`` をセットしましょう。 ::
 
     <?php
-    class Image extends AppModel {
+    class ImageComment extends AppModel {
         public $belongsTo = array(
-            'ImageComment' => array('counterCache' => true)
+            'Image' => array(
+                'counterCache' => true,
+            )
         );
     }
 
-これで、 ``Image`` を追加もしくは削除するたびに、関連する ``ImageComment`` の\
+これで、 ``Image`` に関連する ``ImageComment`` を追加もしくは削除するたびに、\
 件数が ``image_comment_count`` フィールドにセットされるようになります。
 
 ``conterScope`` をセットすれば、カウンタ値の更新をする\
@@ -510,12 +532,13 @@ counter-cache機能を有効にするためにアソシエーションの設定�
 Imageモデルのサンプルでは、次のようになるでしょう。 ::
 
     <?php
-    class Image extends AppModel {
+    class ImageComment extends AppModel {
         public $belongsTo = array(
-            'ImageComment' => array(
+            'Image' => array(
                 'counterCache' => true,
                 'counterScope' => array('Image.active' => 1) // "Image" が active なデータのみカウントします
-        ));
+            )
+        );
     }
 
 hasAndBelongsToMany (HABTM)

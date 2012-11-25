@@ -18,7 +18,6 @@ Définir ces variables spéciales dans la méthode beforeFilter ()
 de votre contrôleur vous permet de définir la façon dont le 
 Composant cookie fonctionne.
 
-
 +-----------------+--------------+------------------------------------------------------+
 | variable cookie | par defaut   | description                                          |
 +=================+==============+======================================================+
@@ -67,7 +66,6 @@ HTTP.
 
 ::
 
-    <?php
     public $components = array('Cookie');
     public function beforeFilter() {
         parent::beforeFilter();
@@ -93,20 +91,17 @@ Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
     nom de la variable désiré, et $value est l'information à stocker::
     
 
-        <?php
         $this->Cookie->write('nom', 'Rémy');
 
     Vous pouvez également grouper vos variables en utilsant la notation point '.' 
     dans les paramêtres de clef::
 
-        <?php
         $this->Cookie->write('Utilisateur.nom', 'Rémy');
         $this->Cookie->write('Utilisateur.role', 'Chef');
 
     Si vous vouler écrire plus d'une valeur dans le cookie en une fois, vous 
     pouvez passer un tableau::
 
-        <?php
         $this->Cookie->write('Utilisateur',
             array('nom' => 'Rémy', 'role' => 'Chef')
         );
@@ -119,7 +114,6 @@ Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
     encripter les valeurs. Vous deviez changer ``Security.cipherSeed`` dans
     app/Config/core.php pour assurer un meilleur cryptage.::
 
-        <?php
         $this->Cookie->write('nom', 'Rémy', false);
 
     Le dernier paramètre à écrire est $expires - le nombre de secondes
@@ -127,7 +121,6 @@ Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
     être passé comme une chaîne de texte que la fonction strtotime() de
     php comprends::
 
-        <?php
         // Both cookies expire in one hour.
         $this->Cookie->write('prénom', 'Rémy', false, 3600);
         $this->Cookie->write('nom', 'Masters', false, '1 hour');
@@ -137,7 +130,6 @@ Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
     Cette méthode est utilisée pour lire la valeur d'une variable de cookie
     avec le nom spécifié dans $key.::    
 
-        <?php
         // Sortie "Rémy"
         echo $this->Cookie->read('nom');
 
@@ -153,10 +145,9 @@ Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
 
 .. php:method:: delete(mixed $key)
 
-    Efface une variable de cookie du nom défini dans $key. Fonctionne avec la notation par point
-    notation::
+    Efface une variable de cookie du nom défini dans $key. Fonctionne avec la 
+    notation par point::
 
-        <?php
         // Efface une variable
         $this->Cookie->delete('bar')
 
@@ -169,5 +160,5 @@ Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
 
 
 .. meta::
-    :title lang=en: Cookie
-    :keywords lang=en: array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null
+    :title lang=fr: Cookie
+    :keywords lang=fr: array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null

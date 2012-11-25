@@ -33,9 +33,7 @@ Attaching the Translate Behavior to your Models
 Add it to your model by using the ``$actsAs`` property like in the
 following example.::
 
-    <?php
     class Post extends AppModel {
-        public $name = 'Post';
         public $actsAs = array(
             'Translate'
         );
@@ -52,9 +50,7 @@ Defining the Fields
 You can set the fields by simply extending the ``'Translate'``
 value with another array, like so::
 
-    <?php
     class Post extends AppModel {
-        public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
                 'fieldOne', 'fieldTwo', 'and_so_on'
@@ -66,9 +62,7 @@ After you have done that (for example putting "title" as one of the
 fields) you already finished the basic setup. Great! According to
 our current example the model should now look something like this::
 
-    <?php
     class Post extends AppModel {
-        public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
                 'title'
@@ -103,7 +97,6 @@ Retrieve translated fields in a specific locale
 
 By setting ``$Model->locale`` you can read translations for a specific locale::
 
-    <?php
     // Read the spanish locale data.
     $this->Post->locale = 'es';
     $results = $this->Post->find('first', array(
@@ -111,27 +104,14 @@ By setting ``$Model->locale`` you can read translations for a specific locale::
     ));
     // $results will contain the spanish translation.
 
-If you need to read translated content for multiple locales at the same time you
-can do so by setting ``locale`` to an array of locales::
-
-    <?php
-    // Read the spanish locale data.
-    $this->Post->locale = array('es', 'pt');
-    $results = $this->Post->find('first', array(
-        'conditions' => array('Post.id' => $id)
-    ));
-    // $results will contain the portuguese and spanish translation.
-
 Retrieve all translation records for a field
 --------------------------------------------
 
 If you want to have all translation records attached to the current
-model record you simply extend the *field array* in your behavior
+model record you simply extend the **field array** in your behavior
 setup as shown below. The naming is completely up to you.::
 
-    <?php
     class Post extends AppModel {
-        public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
                 'title' => 'titleTranslation'
@@ -139,7 +119,7 @@ setup as shown below. The naming is completely up to you.::
         );
     }
 
-With this setup the result of $this->Post->find() should look
+With this setup the result of ``$this->Post->find()`` should look
 something like this::
 
     Array
@@ -147,11 +127,11 @@ something like this::
          [Post] => Array
              (
                  [id] => 1
-                 [title] => Beispiel Eintrag 
+                 [title] => Beispiel Eintrag
                  [body] => lorem ipsum...
                  [locale] => de_de
              )
-    
+
          [titleTranslation] => Array
              (
                  [0] => Array
@@ -163,7 +143,7 @@ something like this::
                          [field] => title
                          [content] => Example entry
                      )
-    
+
                  [1] => Array
                      (
                          [id] => 2
@@ -173,12 +153,14 @@ something like this::
                          [field] => title
                          [content] => Beispiel Eintrag
                      )
-    
+
              )
     )
 
-**Note**: The model record contains a *virtual* field called
-"locale". It indicates which locale is used in this result.
+.. note::
+
+    The model record contains a *virtual* field called
+    "locale". It indicates which locale is used in this result.
 
 Note that only fields of the model you are directly doing \`find\`
 on will be translated. Models attached via associations won't be
@@ -191,13 +173,12 @@ Using the bindTranslation method
 You can also retrieve all translations, only when you need them,
 using the bindTranslation method
 
-``bindTranslation($fields, $reset)``
+.. php:method:: bindTranslation($fields, $reset)
 
 ``$fields`` is a named-key array of field and association name,
 where the key is the translatable field and the value is the fake
 association name.::
 
-    <?php
     $this->Post->bindTranslation(array('title' => 'titleTranslation'));
     $this->Post->find('all', array('recursive' => 1)); // need at least recursive 1 for this to work.
 
@@ -252,9 +233,7 @@ your controller or you can define it directly in the model.
 
 **Example A:** In your controller::
 
-    <?php
     class PostsController extends AppController {
-        public $name = 'Posts';
 
         public function add() {
             if (!empty($this->request->data)) {
@@ -269,9 +248,7 @@ your controller or you can define it directly in the model.
 
 **Example B:** In your model::
 
-    <?php
     class Post extends AppModel {
-        public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
                 'title'
@@ -301,25 +278,25 @@ Lets say we want to save our translations for all posts in the
 table "post\_i18ns" instead of the default "i18n" table. To do so
 you need to setup your model like this::
 
-    <?php
     class Post extends AppModel {
-        public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
                 'title'
             )
         );
-        
+
         // Use a different model (and table)
         public $translateModel = 'PostI18n';
     }
 
-**Important** is that you have to pluralize the table. It is now a
-usual model and can be treated as such and thus comes with the
-conventions involved. The table schema itself must be identical
-with the one generated by the CakePHP console script. To make sure
-it fits one could just initialize a empty i18n table using the
-console and rename the table afterwards.
+.. note::
+
+    It is important that you to pluralize the table. It is now a
+    usual model and can be treated as such and thus comes with the
+    conventions involved. The table schema itself must be identical
+    with the one generated by the CakePHP console script. To make sure
+    it fits one could just initialize a empty i18n table using the
+    console and rename the table afterwards.
 
 Create the TranslateModel
 -------------------------
@@ -330,8 +307,7 @@ displayField directly in the model using this behavior yet.
 
 Make sure that you change the ``$displayField`` to ``'field'``.::
 
-    <?php
-    class PostI18n extends AppModel { 
+    class PostI18n extends AppModel {
         public $displayField = 'field'; // important
     }
     // filename: PostI18n.php
@@ -347,18 +323,16 @@ Changing the Table
 If you want to change the name of the table you simply define
 $translateTable in your model, like so::
 
-    <?php
     class Post extends AppModel {
-        public $name = 'Post';
         public $actsAs = array(
             'Translate' => array(
                 'title'
             )
         );
-        
+
         // Use a different model
         public $translateModel = 'PostI18n';
-        
+
         // Use a different table for translateModel
         public $translateTable = 'post_translations';
     }

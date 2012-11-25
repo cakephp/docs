@@ -11,7 +11,6 @@ des informations complémentaires sur les types de contenus que le
 client accepte et modifie automatiquement dans le layout approprié, 
 quand les extensions de fichier sont disponibles.
 
-
 Par défaut, Le RequestHandler détectera automatiquement les requêtes 
 Ajax basée sur le header HTTP-X-Requested-With, qui est utilisé par 
 de nombreuses librairies javascript. Quand il est utilisé conjointement 
@@ -25,8 +24,6 @@ assigné à ``$this->request->data``, et pourra alors être sauvegardé
 comme une donnée de modèle. Afin d'utiliser le Request Handler il 
 doit être inclus dans votre tableau $components::
 
-
-    <?php
     class WidgetController extends AppController {
 
         public $components = array('RequestHandler');
@@ -48,8 +45,6 @@ contenu.Si c'est un tableau, accepts() renverra true si un des types
 du contenu est accepté par le client. Si c'est 'null', elle renverra 
 un tableau des types de contenu que le client accepte. Par exemple::
 
-   
-    <?php
     class PostsController extends AppController {
 
         public $components = array('RequestHandler');
@@ -79,14 +74,14 @@ D'autres méthodes de détections du contenu des requêtes:
 
 .. php:method:: isAtom()
 
-    Renvoie true si l'appel accepte les réponse Atom, false dans le cas contraire.
+    Renvoie true si l'appel accepte les réponse Atom, false dans le cas 
+    contraire.
 
 .. php:method:: isMobile()
 
-    Renvoie true si le navigateur du client correspond à un téléphone portable, 
-    ou si le client accepte le contenu WAP. Les navigateurs mobiles supportés 
-    sont les suivants:
-   
+    Renvoie true si le navigateur du client correspond à un téléphone 
+    portable, ou si le client accepte le contenu WAP. Les navigateurs 
+    mobiles supportés sont les suivants:
 
     -  iPhone
     -  MIDP
@@ -120,14 +115,10 @@ le cache du navigateur, et changer le niveau de débogage.
 Cependant, si vous voulez utiliser le cache pour les requêtes 
 non-AJAX. , le code suivant vous permettra de le faire::
 
-
-    <?php
     if ($this->request->is('ajax')) {
         $this->disableCache();
     }
     // Continue l'action du contrôleur
-
-
 
 Obtenir des informations supplémentaires sur le client
 ======================================================
@@ -139,7 +130,6 @@ Obtenir des informations supplémentaires sur le client
     La librairie 'Prototype' envoie une entête HTTP spéciale 
     "Prototype version"
 
-    
 Décoder automatiquement les données de la requête
 =================================================
 
@@ -153,11 +143,9 @@ Décoder automatiquement les données de la requête
     contenir un callback , est d'autres arguments additionnels pour
     le callback. Le callback devrait retourner un tableau de données 
     contenues dans l'entrée de la requête. Par exemple ajouter un
-    gestionnaire de CSV dans la partie 'beforeFilter'  de votre contrôleur
+    gestionnaire de CSV dans la partie 'beforeFilter'  de votre contrôleur 
     pourrait ressembler à ceci ::
-    
 
-        <?php
         $parser = function ($data) {
             $rows = str_getcsv($data, "\n");
             foreach ($rows as &$row) {
@@ -171,24 +159,19 @@ Décoder automatiquement les données de la requête
     n'importe quel  `callable <http://php.net/callback>`_ pour la fonction 
     de gestion. Vous pouvez aussi passer des arguments supplémentaires 
     au callback, c'est très utile pour les callbacks comme ``json_decode``::
-
    
-        <?php
         $this->RequestHandler->addInputType('json', array('json_decode', true));
-
     
     Le contenu ci-dessus créera ``$this->request->data`` un tableau des données 
-    d'entrée JSON, sans le ``true`` additionnel vous obtiendrez un jeu d'objets
+    d'entrée JSON, sans le ``true`` additionnel vous obtiendrez un jeu d'objets 
     ``StdClass``.
-
     
 Répondre aux requêtes
-======================
+=====================
 
 En plus de la détection de requêtes, RequestHandler fournit également 
 une solution simple pour modifier la sortie de façon à ce que le type 
 de contenu corresponde à votre application.
-
 
 .. php:method:: setContent($name, $type = null)
 
@@ -209,10 +192,7 @@ de contenu corresponde à votre application.
     contrôleurs, parce qu'il tirera un meilleur profit de l'automagie 
     des alias de content-type.
 
-    
-
     Les correspondances par défaut sont :
-
 
     -  **javascript** text/javascript
     -  **js** text/javascript
@@ -248,7 +228,6 @@ de contenu corresponde à votre application.
     l'extension de fichier analysée par Router, si il y en avait une de 
     fournie et secondairement, par la liste des content-types définis 
     dans HTTP_ACCEPT.
-
    
 .. php:method:: renderAs($controller, $type)
 
@@ -260,7 +239,6 @@ de contenu corresponde à votre application.
     Ajoutera aussi l'assistant (helper) approprié au tableau des 
     assistants du contrôleur, s'il est disponible et qu'il n'est pas 
     déjà dans le tableau.
-
     
 .. php:method:: respondAs($type, $options)
 
@@ -277,7 +255,6 @@ de contenu corresponde à votre application.
 
     Retourne l'en-tête Content-type du type de réponse courant ou null s'il 
     y en a déjà un de défini.
-
    
 Profiter du  cache de validation HTTP
 =========================================
@@ -293,24 +270,24 @@ ainsi gagner en temps de réponse.
 
 En activant le Composant RequestHandler ``RequestHandlerComponent`` dans 
 votre contrôleur vous validerez le contrôle automatique effectué avant 
-de rendre une vue. Ce contrôle compare l'objet réponse à la requête originale
+de rendre une vue. Ce contrôle compare l'objet réponse à la requête originale 
 pour déterminer si la réponse n'a pas été modifiée depuis la dernière fois
 que le client a fait sa demande.
 
 Si la réponse est évaluée comme non modifié, alors le processus de rendu de 
-vues est arrêter, réduisant le temps processeur. Un ``no content`` est retourné
+vues est arrêter, réduisant le temps processeur. Un ``no content`` est retourné 
 au client, augmentant la bande passante. Le code de réponse est défini
 à  `304 Not Modified`.
 
 Vous pouvez mettre en retrait ce contrôle automatique en paramétrant 
 ``checkHttpCache`` à false::
 
-    <?php
     public components = array(
         'RequestHandler' => array(
             'checkHttpCache' => false
     ));
 
+
 .. meta::
-    :title lang=en: Request Handling
-    :keywords lang=en: handler component,javascript libraries,public components,null returns,model data,request data,content types,file extensions,ajax,meth,content type,array,conjunction,cakephp,insight,php
+    :title lang=fr: Gestion des requêtes
+    :keywords lang=fr: handler component,javascript libraries,public components,null returns,model data,request data,content types,file extensions,ajax,meth,content type,array,conjunction,cakephp,insight,php

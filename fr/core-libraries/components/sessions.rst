@@ -3,7 +3,6 @@ Sessions
 
 .. php:class:: SessionComponent(ComponentCollection $collection, array $settings = array())
 
-
 Le composant session de CakePHP fournit le moyen de faire persister 
 les données client entre les pages requêtées. Il agit comme une 
 interface pour $_SESSION et offre aussi des méthodes pratiques 
@@ -12,8 +11,6 @@ pour de nombreuses fonctions relatives à $_SESSION.
 Les sessions peuvent être paramétrées de différentes façon dans CalePHP.
 Pour plus d'information, vous devriez lire la documentation
 :doc:`Session configuration </development/sessions>`
-
-
 
 Interagir avec les données de Session
 ======================================
@@ -27,8 +24,6 @@ Il est important de noter que ces structures en tableaux peuvent
 être créées dans la session en utilisant la notation avec un point. 
 Par exemple, Utilisateur.identifiant se référera au tableau suivant :: 
 
-
-    <?php
     array('User' => 
         array('username' => 'clark-kent@dailyplanet.com')
     );
@@ -37,32 +32,25 @@ Les points sont utilisés pour indiquer les tableaux imbriqués.
 Cette notation est utilisée pour toutes les méthodes du composant 
 Session dans lesquelles un nom/clef est utilisé.
 
-
 .. php:method:: write($name, $value)
 
     Écrit dans la Session, en mettant $value dans $name. 
     $name peut-être un tableau séparé par un point. Par exemple ::
 
-
-        <?php
         $this->Session->write('Personne.couleurYeux', 'Vert');
 
     Cela écrit la valeur 'Vert' dans la session sous Personne => couleurYeux.
-
     
 .. php:method:: read($name)
 
     Retourne la valeur de $name dans la session. Si $name vaut 
     null, la session entière sera retournée. Par ex ::
-
     
-        <?php
         $vert = $this->Session->read('Personne.couleurYeux');
 
     Récupère la valeur "vert" dans la session. La lecture de donnée
     inexistante retournera null.
 
-    
 .. php:method:: check($name)
 
     Utilisé pour vérifier qu'une variable de Session a été créée. 
@@ -73,7 +61,6 @@ Session dans lesquelles un nom/clef est utilisé.
 
     Supprime les données de Session de $name. Par ex 
 
-        <?php
         $this->Session->delete('Personne.couleurYeux');
 
     Notre donnée de session n'a plus la valeur 'Vert' ni même l'index
@@ -81,8 +68,6 @@ Session dans lesquelles un nom/clef est utilisé.
     dans la Session. Pour supprimer de la session toutes les 
     informations de Personne, utilisez ::
 
-    
-        <?php
         $this->Session->delete('Personne');
 
 .. php:method:: destroy()
@@ -91,11 +76,8 @@ Session dans lesquelles un nom/clef est utilisé.
     les données de session stockées dans le fichier temporaire 
     du système. Cela va détruire la session PHP et ainsi en créer
     une nouvelle.::
-
     
-        <?php
         $this->Session->destroy();
-
 
 .. _creating-notification-messages:
 
@@ -106,23 +88,20 @@ Création de messages de notification
 
     :rtype: void
 
-    Souvent dans les applications web , vous aurez besoin d'afficher des messages
-    de notification instantanés à l'utilisateur après avoir terminer un processus
-    ou une réception de donnée.
-    Dans CakePHP, ceci est appelé "messages flash". Vous pouvez définir des
+    Souvent dans les applications web , vous aurez besoin d'afficher des 
+    messages de notification instantanés à l'utilisateur après avoir 
+    terminer un processus ou une réception de donnée.
+    Dans CakePHP, ceci est appelé "messages flash". Vous pouvez définir des 
     messages flash avec le composant Session et les afficher avec
-    le helper session :php:meth:`SessionHelper::flash()`. Pour définir un message,
-    utiliser ``setFlash``::
-    
+    le helper session :php:meth:`SessionHelper::flash()`. Pour définir un 
+    message, utiliser ``setFlash``::
 
-        <?php
         // Dans le contrôleur.
         $this->Session->setFlash('Votre travail a été sauvegardé !');
 
     Ceci créera un message instantané qui peut être affiché à l'utilisateur,
     en utilisant le Helper Session SessionHelper::
 
-        <?php
         // Dans la vue.
         echo $this->Session->flash();
 
@@ -138,8 +117,6 @@ Création de messages de notification
     En utilisant le paramètre ``$key`` vous pouvez stocker différents messages,
     qui peuvent être séparément récupérer en sortie.::
 
-   
-        <?php
         // définit le message que ca va mal
         $this->Session->setFlash('Ca va mal.', 'default', array(), 'mal');
 
@@ -148,7 +125,6 @@ Création de messages de notification
 
     Dans la vue, ces messages peuvent être ressortis et stylisés différemment::
        
-        <?php
         // dans la vue.
         echo $this->Session->flash('bien');
         echo $this->Session->flash('mal');
@@ -159,7 +135,6 @@ Création de messages de notification
     tant que ``$message``.
     D'abord nous paramétrons le flash dans notre contrôleur::
 
-        <?php
         $this->Session->setFlash('truc customisés', 'flash_custom');
 
     alors nous créons le fichier ``app/View/Elements/flash_custom.ctp`` et
@@ -173,7 +148,6 @@ Création de messages de notification
     $params ca appliquera une classe à la div de sortie en utilisant
     ``$this->Session->flash()`` dans votre layout ou vue.::
 
-        <?php
         $this->Session->setFlash('Message Exemple', 'default', array('class' => 'classe_exemple'));
 
     La sortie en utilisant ``$this->Session->flash()`` avec l'exemple ci
@@ -184,10 +158,10 @@ Création de messages de notification
     Pour utiliser un élément depuis un plugin spécifiez le plugin
     dans le ``$params``::
     
-        <?php
         // Utilisera  /app/Plugin/Comment/View/Elements/flash_no_spam.ctp
         $this->Session->setFlash('Message!', 'flash_no_spam', array('plugin' => 'Comment'));
 
+
 .. meta::
-    :title lang=en: Sessions
-    :keywords lang=en: php array,dailyplanet com,configuration documentation,dot notation,feedback messages,reading data,session data,page requests,clark kent,dots,existence,sessions,convenience,cakephp
+    :title lang=fr: Sessions
+    :keywords lang=fr: php array,dailyplanet com,configuration documentation,dot notation,feedback messages,reading data,session data,page requests,clark kent,dots,existence,sessions,convenience,cakephp

@@ -54,7 +54,9 @@
 つまり、コンポーネントの中には ``$components`` 配列にオプションを設定することができるものがあります。::
 
     <?php
-    public $components = array('DebugKit.Toolbar' => array('panels' => array('history', 'session')));
+    public $components = array(
+        'DebugKit.Toolbar' => array('panels' => array('history', 'session'))
+    );
 
 各コンポーネントがどのような設定オプションを提供しているかは関連ドキュメントを参照してください。
 
@@ -134,6 +136,7 @@
 コンポーネントの基本構造は以下のようになります。::
 
     <?php
+    App::uses('Component', 'Controller');
     class MathComponent extends Component {
         public function doComplexOperation($amount1, $amount2) {
             return $amount1 + $amount2;
@@ -182,6 +185,7 @@
 
     <?php
     // app/Controller/Component/CustomComponent.php
+    App::uses('Component', 'Controller');
     class CustomComponent extends Component {
         // 実装中のコンポーネントが使っている他のコンポーネント
         public $components = array('Existing');
@@ -196,11 +200,8 @@
     }
 
     // app/Controller/Component/ExistingComponent.php
+    App::uses('Component', 'Controller');
     class ExistingComponent extends Component {
-
-        public function initialize(Controller $controller) {
-            $this->Parent->bar();
-        }
 
         public function foo() {
             // ...

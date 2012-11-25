@@ -34,7 +34,6 @@ all pages, add this line to the <head> section of
 ``lib/Cake/View/Layouts/default.ctp`` if you have not created your
 own)::
 
-    <?php
     echo $this->Html->script('jquery'); // Include jQuery library
 
 Replace ``jquery`` with the name of your library file (.js will be
@@ -44,7 +43,6 @@ By default scripts are cached, and you must explicitly print out
 the cache. To do this at the end of each page, include this line
 just before the ending ``</body>`` tag::
 
-    <?php
     echo $this->Js->writeBuffer(); // Write cached scripts
 
 .. warning::
@@ -55,7 +53,6 @@ just before the ending ``</body>`` tag::
 Javascript engine selection is declared when you include the helper
 in your controller::
 
-    <?php
     public $helpers = array('Js' => array('Jquery'));
 
 The above would use the Jquery Engine in the instances of JsHelper
@@ -78,7 +75,6 @@ That said, there is one caveat:
 
 To override the "$" shortcut, use the jQueryObject variable::
 
-    <?php
     $this->Js->JqueryEngine->jQueryObject = '$j';
     echo $this->Html->scriptBlock(
         'var $j = jQuery.noConflict();', 
@@ -92,7 +88,6 @@ Using the JsHelper inside customHelpers
 Declare the JsHelper in the ``$helpers`` array in your
 customHelper::
 
-    <?php
     public $helpers = array('Js');
 
 .. note::
@@ -103,7 +98,6 @@ customHelper::
 If you are willing to use an other javascript engine than the
 default, do the helper setup in your controller as follows::
 
-    <?php
     public $helpers = array(
         'Js' => array('Prototype'),
         'CustomHelper'
@@ -151,13 +145,11 @@ in the DOM, ``$this->Js->get()`` returns a $this, allowing you to
 chain the methods using the selection. Method chaining allows you
 to write shorter, more expressive code::
  
-    <?php
     $this->Js->get('#foo')->event('click', $eventCode);
 
 Is an example of method chaining. Method chaining is not possible
 in PHP4 and the above sample would be written like::
 
-    <?php
     $this->Js->get('#foo');
     $this->Js->event('click', $eventCode);
 
@@ -239,14 +231,12 @@ buffering. By appending an boolean to the end of the arguments you
 can force other methods to go into the buffer. For example the
 ``each()`` method does not normally buffer::
 
-    <?php
     $this->Js->each('alert("whoa!");', true);
 
 The above would force the ``each()`` method to use the buffer.
 Conversely if you want a method that does buffer to not buffer, you
 can pass a ``false`` in as the last argument::
 
-    <?php
     $this->Js->event('click', 'alert("whoa!");', false);
 
 This would force the event function which normally buffers to
@@ -276,7 +266,6 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     **Example Use**::
     
-        <?php
         $json = $this->Js->object($data);
 
 .. php:method:: sortable($options = array())
@@ -309,7 +298,6 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     **Example Use**::
     
-        <?php
         $this->Js->get('#my-list');
         $this->Js->sortable(array(
             'distance' => 5,
@@ -356,7 +344,6 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     **Example use**::
 
-        <?php
         $this->Js->event(
             'click',
             $this->Js->request(
@@ -371,7 +358,6 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     selection is used in subsequent operations until a new selection is
     made::
     
-        <?php
         $this->Js->get('#element');
 
     The ``JsHelper`` now will reference all other element based methods
@@ -405,7 +391,6 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     **Example use**::
 
-        <?php
         $this->Js->get('#element');
         $this->Js->drag(array(
             'container' => '#content',
@@ -444,7 +429,6 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     **Example use**::
 
-        <?php
         $this->Js->get('#element');
         $this->Js->drop(array(
             'accept' => '.items',
@@ -492,7 +476,6 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     **Example use**::
 
-        <?php
         $this->Js->get('#element');
         $this->Js->slider(array(
             'complete' => 'onComplete',
@@ -536,7 +519,6 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     If you were using the jQuery engine::
 
-        <?php
         $this->Js->get('#element');
         $result = $this->Js->effect('fadeIn');
 
@@ -560,7 +542,6 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     **Example use**::
     
-        <?php
         $this->Js->get('#some-link');
         $this->Js->event('click', $this->Js->alert('hey you!'));
 
@@ -577,7 +558,6 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     You can remove the ``return false;`` by passing setting the
     ``stop`` option to false::
 
-        <?php
         $this->Js->get('#some-link');
         $this->Js->event('click', $this->Js->alert('hey you!'), array('stop' => false));
 
@@ -603,7 +583,6 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     **Example**::
 
-        <?php
         $this->Js->get('div.message');
         $this->Js->each('$(this).css({color: "red"});');
 
@@ -619,7 +598,6 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     default, ``alert`` does not buffer, and returns the script
     snippet.::
 
-        <?php
         $alert = $this->Js->alert('Hey there');
 
 .. php:method:: confirm($message)
@@ -628,7 +606,6 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     default, ``confirm`` does not buffer, and returns the script
     snippet.::
 
-        <?php
         $alert = $this->Js->confirm('Are you sure?');
 
 .. php:method:: prompt($message, $default)
@@ -637,7 +614,6 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     default, ``prompt`` does not buffer, and returns the script
     snippet.::
 
-        <?php
         $prompt = $this->Js->prompt('What is your favorite color?', 'blue');
 
 .. php:method:: submit($caption = null, $options = array())
@@ -665,14 +641,17 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     **Example use**::
 
-        <?php
         echo $this->Js->submit('Save', array('update' => '#content'));
 
     Will create a submit button with an attached onclick event. The
     click event will be buffered by default.::
 
-        <?php
-        echo $this->Js->submit('Save', array('update' => '#content', 'div' => false, 'type' => 'json', 'async' => false));
+        echo $this->Js->submit('Save', array(
+            'update' => '#content',
+            'div' => false,
+            'type' => 'json',
+            'async' => false
+        ));
 
     Shows how you can combine options that both
     :php:func:`FormHelper::submit()` and :php:func:`JsHelper::request()` when using submit.
@@ -701,7 +680,6 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     **Example use**::
 
-        <?php
         echo $this->Js->link('Page 2', array('page' => 2), array('update' => '#content'));
 
     Will create a link pointing to ``/page:2`` and updating #content
@@ -710,13 +688,15 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
     You can use the ``htmlAttributes`` option to add in additional
     custom attributes.::
 
-        <?php
         echo $this->Js->link('Page 2', array('page' => 2), array(
             'update' => '#content',
             'htmlAttributes' => array('other' => 'value')
         ));
 
-        // Creates the following html
+    Outputs the following html:
+
+    .. code-block:: html
+
         <a href="/posts/index/page:2" other="value">Page 2</a>
 
 .. php:method:: serializeForm($options = array())
@@ -768,21 +748,18 @@ jQuery (or whichever library you are using). Also make sure to
 include ``RequestHandlerComponent`` in your components. Add the
 following to your controller::
 
-    <?php
     public $components = array('RequestHandler');
     public $helpers = array('Js');
 
 Next link in the javascript library you want to use. For this
 example we'll be using jQuery::
 
-    <?php
     echo $this->Html->script('jquery');
 
 Similar to 1.2 you need to tell the ``PaginatorHelper`` that you
 want to make Javascript enhanced links instead of plain HTML ones.
 To do so you use ``options()``::
     
-    <?php
     $this->Paginator->options(array(
         'update' => '#content',
         'evalScripts' => true
@@ -804,7 +781,6 @@ generated script content to reduce the number of ``<script>`` tags
 in your source code you **must** call write the buffer out. At the
 bottom of your view file. Be sure to include::
 
-    <?php
     echo $this->Js->writeBuffer();
 
 If you omit this you will **not** be able to chain ajax pagination
@@ -815,7 +791,9 @@ Adding effects and transitions
 ------------------------------
 
 Since ``indicator`` is no longer supported, you must add any
-indicator effects yourself::
+indicator effects yourself:
+
+.. code-block:: php
 
     <!DOCTYPE html>
     <html>
@@ -841,7 +819,6 @@ will display a busy indicator animation that we will show and hide
 with the ``JsHelper``. To do that we need to update our
 ``options()`` function::
 
-    <?php
     $this->Paginator->options(array(
         'update' => '#content',
         'evalScripts' => true,

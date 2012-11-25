@@ -3,7 +3,7 @@
 
 テーマにはページの見た目を簡単に素早く切り替えられるようになるという利点があります。
 
-テーマを使うためには、コントローラの中でテーマ名を指定して下さい。::
+テーマを使うためには、コントローラの中でテーマ名を指定して下さい。 ::
 
     <?php
     class ExampleController extends AppController {
@@ -14,13 +14,16 @@
    バージョン2.1より前では、``$this->viewClass = 'Theme'`` という設定が必要でした。
    2.1ではこの設定は不要になり、通常の ``View`` クラスがテーマをサポートします。
 
-またテーマの設定や変更はアクション、または ``beforeFilter`` や ``beforeRender`` などのコールバック関数の中から行えます。::
+またテーマの設定や変更はアクション、または ``beforeFilter`` や ``beforeRender`` などのコールバック関数の中から行えます。 ::
 
     <?php
     $this->theme = 'AnotherExample';
 
 テーマのビューファイルは ``/app/View/Themed/`` フォルダに配置する必要があります。
-Themed フォルダの中にテーマ名のフォルダを作成して下さい。さらに、``/app/View/Themed/Example/``
+Themed フォルダの中にテーマ名のフォルダを作成して下さい。上記の例でいうと、テーマは
+``/app/View/Themed/AnotherExample`` に配置するかたちになります。
+これは大事なことなのですが、CakePHPはCamelCaseのテーマ名を期待しているということを覚えておいてください。
+さらに、``/app/View/Themed/Example/``
 以下は ``/app/View/`` と全く同じ構造にして下さい。
 
 例えば、Postsコントローラのeditアクションのためのビューファイルは ``/app/View/Themed/Example/Posts/edit.ctp``
@@ -48,7 +51,7 @@ Themed フォルダの中にテーマ名のフォルダを作成して下さい�
   folder, it will default to the main webroot folder::
 
 CakePHPのすべての組み込みヘルパーはテーマに対応しており、自動的に正しいパスが作成されます。
-ビューファイルのようにテーマフォルダにファイルが無い場合、メインのwebrootフォルダがデフォルトととなります。::
+ビューファイルのようにテーマフォルダにファイルが無い場合、メインのwebrootフォルダがデフォルトととなります。 ::
 
     <?php
     //'purple_cupcake'という名前のテーマの時

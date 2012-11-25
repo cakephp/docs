@@ -128,7 +128,6 @@ la traduction (plus de echo).
 
 Si vous voulez changer les résultats de la traduction, utilisez::
 
-    <?php
     echo __('Mon Message');
     
 Cela remplace toutes les méthodes de traduction raccourcies::
@@ -145,7 +144,6 @@ A côté de cela, si vous passez des paramètres supplémentaires, la traduction
 appelera `sprintf <http://php.net/manual/en/function.sprintf.php>`_  avec 
 ces paramètres retournés précédemment avant de retourner. Par exemple::
 
-    <?php
     // Retournera quelque chose comme "Appelé: MaClasse:maMethode"
     echo __('Appelé: %s:%s', $nomdelaclasse, $nomdelamethode);
 
@@ -229,14 +227,13 @@ ces fichiers ont été changés pour accueillir les changements. De plus,
 ``$this->params['url']['url']`` n'existe plus. A la place, vous devrez utiliser 
 $this->request->url pour accéder à la même valeur.
 
-Composants (Components)
+Components (Composants)
 =======================
 
-Component est maintenant la classe de base requise pour tous les composants 
-(components). Vous devrez mettre à jour vos composants et leurs constructeurs, 
+Component est maintenant la classe de base requise pour tous les components 
+(components). Vous devrez mettre à jour vos components et leurs constructeurs, 
 puisque tous deux ont changé::
 
-    <?php
     class PrgComponent extends Component {
         function __construct(ComponentCollection $collection, $settings = array()) {
             parent::__construct($collection, $settings);
@@ -244,21 +241,21 @@ puisque tous deux ont changé::
     }
 
 Tout comme les helpers il est important d'appeler ``parent::__construct()`` 
-dans les composants avec les constructeurs surchargés. Les paramètres pour un 
-composant sont aussi maintenant passés à travers le constructeur, et non plus 
+dans les components avec les constructeurs surchargés. Les paramètres pour un 
+component sont aussi maintenant passés à travers le constructeur, et non plus 
 via le callback ``initialize()``. Cela aide à avoir de bons objets construits, 
 et autorise la classe de base à gérer les propriétés supérieures.
 
-Depuis que les paramètres ont été déplacés au constructeur du composant, le 
+Depuis que les paramètres ont été déplacés au constructeur du component, le 
 callback ``initialize()`` ne reçoit plus ``$settings`` en 2ème paramètre. Vous 
-devrez mettre à jour vos composants pour utiliser la signature méthode 
+devrez mettre à jour vos components pour utiliser la signature méthode 
 suivante::
 
     function initialize($controller) { }
 
-De plus, la méthode initialize() est seulement appelée sur les composants qui 
-sont permis. Cela signifie en général que les composants qui sont directement 
-attachés à l'objet contrôleur.
+De plus, la méthode initialize() est seulement appelée sur les components qui 
+sont permis. Cela signifie en général que les components qui sont directement 
+attachés à l'objet controller.
 
 Callbacks dépréciés supprimés
 -----------------------------
@@ -268,13 +265,12 @@ ComponentCollection. A la place, vous devriez utiliser la méthode `trigger()`
 pour intéragir avec les callbacks. Si vous avez besoin de déclencher un 
 callback, vous pouvez le faire en appelant::
 
-    <?php
     $this->Components->trigger('someCallback', array(&$this));
 
-Changement dans la désactivation des composants
+Changement dans la désactivation des components
 -----------------------------------------------
 
-Dans le passé, vous étiez capable de désactiver les composants via 
+Dans le passé, vous étiez capable de désactiver les components via 
 `$this->Auth->enabled = false;` par exemple. Dans CakePHP 2.0 vous devriez 
 utiliser la méthode de désactivation des ComponentCollection's, 
 `$this->Components->disable('Auth');`. Utiliser les propriétés actives ne va 
@@ -286,7 +282,7 @@ AclComponent
 -  Les implémentations ``AclComponent`` sont maintenant requises pour 
    implémenter ``AclInterface``.
 -  ``AclComponent::adapter()`` a été ajouté pour permettre l'éxecution de la 
-   modification de l'utilisation de l'implémentation du composant ``ACL``.
+   modification de l'utilisation de l'implémentation du component ``ACL``.
 -  ``AclComponent::grant()`` a été déprécié, il sera supprimé dans une version 
    future. Utilisez ``AclComponent::allow()`` à la place.
 -  ``AclComponent::revoke()`` a été déprécié, il sera supprimé dans une version 
@@ -334,7 +330,7 @@ De plus les propriétés suivantes ont été retirées:
 
 Le déplacement des fonctionalités verss Authcomponent a été faite pour fournir 
 un endroit unique pour tous les types d'authentification et pour rationaliser 
-les rôles de chaque composant.
+les rôles de chaque component.
 
 AuthComponent
 -------------
@@ -394,8 +390,8 @@ App::path()
 ~~~~~~~~~~~
 
 * Supporte maintenant les plugins, App::path('Controller', 'Users') va 
-  retourner la location du dossier des contrôleurs dans le plugin des 
-  utilisateurs.
+  retourner la localisation du dossier des controllers dans le plugin des 
+  users.
 * Ne fusionnera plus les chemins du coeur, il retournera seulement les chemins 
   définies dans App::build() et ceux par défaut dans app (ou correspondant au 
   plugin).
@@ -408,8 +404,8 @@ App::build()
 App::objects()
 ~~~~~~~~~~~~~~
 
-* Supporte maintenant les plugins, App::objects('Utilisateurs.Model') va 
-  retourner les modèles dans le plugin Utilisateurs.
+* Supporte maintenant les plugins, App::objects('Users.Model') va 
+  retourner les models dans le plugin Users.
 * Retourne array() au lieu de false pour les résultats vides ou les types 
   invalides.
 * Ne retourne plus les objets du coeur, App::objects('core') retournera array().
@@ -464,7 +460,6 @@ classes, pour quelques occasions, vous aurez besoin de changer le code de votre
 application pour respecter la façon que vous aviez l'habitude de faire. Le plus 
 grand changement est l'introduction d'une nouvelle méthode::
 
-    <?php
     App::uses('AuthComponent', 'Controller/Component');
 
 Nous avons décidé que le nom de la fonction devait imiter le mot-clé ``use`` 
@@ -479,7 +474,6 @@ utilisation de la classe, elle soit localisée.
 Quelques exemples de l'utilisation de :php:meth:`App::uses()` quand on migre de 
 :php:meth:`App::import()`::
 
-    <?php
     App::import('Controller', 'Pages');
     // devient 
     App::uses('PagesController', 'Controller');
@@ -505,7 +499,6 @@ Toutes les classes qui ont été chargées dans le passé utilisant
 ``App::uses()`` en référence au bon package. Voir l'api pour localiser les 
 classes dans leurs nouveaux dossiers. Quelques exemples::
 
-    <?php
     App::import('Core', 'CakeRoute');
     // devient 
     App::uses('CakeRoute', 'Routing/Route');
@@ -534,12 +527,11 @@ chemins du coeur.
 
 Exemples::
 
-    <?php
-    App::build(array('controllers' => array('/chemin/complet/vers/contrôleurs'))) 
+    App::build(array('controllers' => array('/chemin/complet/vers/controllers'))) 
     //devient 
-    App::build(array('Controller' => array('/chemin/complet/vers/contrôleurs')))
+    App::build(array('Controller' => array('/chemin/complet/vers/controllers')))
 
-    App::build(array('helpers' => array('/chemin/complet/vers/contrôleurs'))) 
+    App::build(array('helpers' => array('/chemin/complet/vers/controllers'))) 
     //devient 
     App::build(array('View/Helper' => array('/chemin/complet/vers/Vues/Helpers')))
 
@@ -568,7 +560,6 @@ Cache
    
 ::
 
-    <?php
     Cache::config('quelquechose');
     Cache::write('key', $valeur);
     
@@ -598,13 +589,12 @@ Router
   ``$this->request->params['ext']``.
 - Les routes des plugins par défaut ont changé. Les routes courtes de Plugin 
   ne sont plus construites que dans les actions index. Précédemment `/users`` 
-  et ``/users/add`` mappaient le UtilisateursController dans le plugin 
-  Utilisateurs. Dans 2.0, seule l'action ``index`` est donné par une route 
+  et ``/users/add`` mappaient le UsersController dans le plugin 
+  Users. Dans 2.0, seule l'action ``index`` est donné par une route 
   courte. Si vous souhaitez continuer à utiliser les routes courtes, vous 
   pouvez ajouter une route comme::
 
-    <?php
-    Router::connect('/utilisateurs/:action', array('controller' => 'utilisateurs', 'plugin' => 'utilisateurs'));
+    Router::connect('/users/:action', array('controller' => 'users', 'plugin' => 'users'));
   
   Pour votre fichier de routes pour chaque plugin, vous avez besoin de routes 
   courtes actives.
@@ -612,7 +602,6 @@ Router
 Votre fichier app/Config/routes.php doit être mis à jour en ajoutant cette 
 ligne en bas du fichier::
 
-    <?php
     require CAKE . 'Config' . DS . 'routes.php';
 
 Cela est nécessaire afin de générer les routes par défaut pour votre 
@@ -686,7 +675,7 @@ CakeSession
 
 CakeSession est maintenant une classe complètement statique, les deux 
 ``SessionHelper`` et ``SessionComponent`` sont des wrappers et du sucre pour 
-celui-ci. Il peut facilement être utilisé dans les modèles ou dans d'autres 
+celui-ci. Il peut facilement être utilisé dans les models ou dans d'autres 
 contextes. Toutes ses méthodes sont appelées de façon statique.
 
 La configuration de Session a aussi changé :doc:`Voir la section session pour 
@@ -718,7 +707,6 @@ Afin de prendre en considération le fait que View a été retiré de la
 ClassRegistry, la signature du Helper::__construct() a été changée. Vous devez 
 mettre à jour toutes les sous-classes pour utiliser ce qui suit::
 
-    <?php
     function __construct(View $View, $settings = array())
 
 Quand vous écrasez le constructeur, vous devez toujours aussi appeler 
@@ -886,13 +874,13 @@ et pas en clé. Par exemple::
 
 Notez que ``checked`` a une clé numérique.
 
-Contrôleur (Controller)
+Controller (Contrôleur)
 =======================
 
-- Le constructeur du Contrôleur prend maintenant deux paramètres. Les objets 
+- Le constructeur du Controller prend maintenant deux paramètres. Les objets 
   CakeRequest et CakeResponse. Ces objets sont utilisés pour remplir plusieurs 
   propriétés dépreciées et seront mis dans $request et $response à l'intérieur 
-  du contrôleur.
+  du controller.
 - ``Controller::$webroot`` est depréciée, utilisez la propriété webroot de 
   l'objet request.
 - ``Controller::$base`` est depréciée, utilisez la propriété base de l'objet 
@@ -914,17 +902,17 @@ Les propriétés depréciées dans Controller seront accessibles à travers la
 méthode ``__get()``. Cette méthode va être retirée dans les versions futures, 
 donc il est recommandé que vous mettiez votre application à jour.
 
-Le Contrôleur définit maintenant une limite Max (maxLimit) pour la pagination. 
+Le Controller définit maintenant une limite Max (maxLimit) pour la pagination. 
 Cette limite maximale est mise à 100, mais peut être écrasée dans les options 
 de $paginate.
 
 Pagination
 ----------
 
-La Pagination était traditionnellement une unique méthode dans le Contôleur, 
+La Pagination était traditionnellement une unique méthode dans le Controller, 
 cela créait pourtant un nombre de problèmes. La Pagination était difficile à 
 étendre, remplacer et modifier. Dans 2.0, la pagination a été extraite dans un 
-composant. :php:meth:`Controller::paginate()` existe toujours, et sert en tant 
+component. :php:meth:`Controller::paginate()` existe toujours, et sert en tant 
 que méthode commode pour le chargement et en utilisant le 
 :php:class:`PaginatorComponent`.
 
@@ -933,7 +921,7 @@ pagination dans 2.0, voir la documentation
 :doc:`/core-libraries/components/pagination`.
 
 Vue
-====
+===
 
 La Vue n'est plus enregistrée dans ClassRegistry
 ------------------------------------------------
@@ -1001,7 +989,7 @@ Par défaut, les objets Vue contiennent un :php:class:`HelperCollection` dans
 Thèmes
 ------
 
-Pour utiliser les thèmes dans vos Contrôleurs, vous n'avez plus à mettre 
+Pour utiliser les thèmes dans vos Controllers, vous n'avez plus à mettre 
 ``var $view = 'Theme';``. Utilisez ``public $viewClass = 'Theme';`` à la place.
 
 Changements de positionnement des callbacks
@@ -1026,7 +1014,6 @@ l'intérieur. Pour BeforeRender et afterRender, c'est le fichier vue qui est
 rendu. Pour beforeLayout et afterLayout, c'est le fichier layout qui est rendu.
 Vos signatures de fonction des helpers doivent ressembler à cela::
 
-    <?php
     function beforeRender($viewFile) {
 
     }
@@ -1117,14 +1104,13 @@ Cela supporte maintenant toutes les options de ligne de commande supportées
 par PHPUnit. ``cake testsuite help`` vous montrera une liste de toutes les 
 modifications possibles.
 
-Modèles
-=======
+Models
+======
 
-Les relations des Modèles sont maintenant facilement chargées. Vous pouvez être 
+Les relations des Models sont maintenant facilement chargées. Vous pouvez être 
 dans une situation où l'assignation d'une valeur à une propriété non-existante 
-d'un modèle vous enverra les erreurs::
+d'un model vous enverra les erreurs::
 
-    <?php
     $Post->inexistentProperty[] = 'value';
 
 enverra à traver l'erreur "Notice: Indirect modification of overloaded property 
@@ -1132,13 +1118,11 @@ $inexistentProperty has no effect"(Notice: La modification indirecte d'une
 propriété $propriétéInexistente n'a aucun effet). Assigner une valeur initiale 
 à la propriété résoud le problème::
 
-    <?php
     $Post->nonexistentProperty = array();
     $Post->nonexistentProperty[] = 'value';
 
-Ou déclare juste la propriété dans la classe modèle::
+Ou déclare juste la propriété dans la classe model::
 
-    <?php
     class Post {
         public $nonexistentProperty = array();
     }
@@ -1168,7 +1152,7 @@ pour chacune et fournit un comportement plus fiable et prévisible pour tous
 les drivers. Il nous a également permis d'écrire des tests plus précis et 
 portables pour le code de la base de données liée.
 
-La première chose qui va probablement manquer aux utilisateurs, est les 
+La première chose qui va probablement manquer aux users, est les 
 statistiques "lignes affectées" et "total de lignes", comme elles ne sont 
 pas reportées à cause d'un design de PDO plus performant et paresseux, il 
 y a des façons de régler ce problème, mais qui sont très spécifiques à chaque 
@@ -1186,12 +1170,10 @@ Liste des changements
 * API pour DboSource::execute a changé, elle prendra maintenant un tableau de 
   valeurs requêtées en second paramètre::
 
-    <?php
     public function execute($sql, $params = array(), $options = array())
 
   devient::
 
-    <?php
     public function execute($sql, $options = array(), $params = array())
 
   le troisième paramètre est supposé recevoir les options pour se connecter, 
@@ -1203,9 +1185,8 @@ Liste des changements
   pour passer les valeurs devant être liées à la requête, le troisième 
   paramètre a été abandonnée. Exemple::
 
-    <?php
-    $db->fetchAll('SELECT * from utilisateurs where nom_utilisateur = ? AND mot_de_passe = ?', array('jhon', '12345'));
-    $db->fetchAll('SELECT * from utilisateurs where nom_utilisateur = :nom_utilisateur AND mot_de_passe = :mot_de_passe', array('nom_utilisateur' => 'jhon', 'mot_de_passe' => '12345'));
+    $db->fetchAll('SELECT * from users where nom_utilisateur = ? AND mot_de_passe = ?', array('jhon', '12345'));
+    $db->fetchAll('SELECT * from users where nom_utilisateur = :nom_utilisateur AND mot_de_passe = :mot_de_passe', array('nom_utilisateur' => 'jhon', 'mot_de_passe' => '12345'));
 
 Le driver PDO va automatiquement echapper ces valeurs pour vous.
 
@@ -1222,7 +1203,7 @@ Le driver PDO va automatiquement echapper ces valeurs pour vous.
   tableau de champs et un tableau imbriqué de valeurs pour les insérer tous en 
   une fois.
 * TranslateBehavior a été reconstruit pour utiliser les vituaFields des 
-  modèles, cela rend l'implémentation plus portable.
+  models, cela rend l'implémentation plus portable.
 * Tous les cas de test avec les choses liées de Mysql ont été déplacés vers le 
   cas de test du driver correspondant. Cela a laissé le fichier DboSourceTest 
   un peu maigre.
@@ -1251,7 +1232,6 @@ AclBehavior et TreeBehavior
 
 - Ne supporte plus les chaînes de caractère pour la configuration. Exemple::
 
-    <?php
     public $actsAs = array(
         'Acl' => 'Controlled',
         'Tree' => 'nested'
@@ -1259,7 +1239,6 @@ AclBehavior et TreeBehavior
 
   devient::
 
-    <?php
     public $actsAs = array(
         'Acl' => array('type' => 'Controlled'),
         'Tree' => array('type' => 'nested')
@@ -1269,19 +1248,17 @@ AclBehavior et TreeBehavior
 Plugins
 =======
 
-Les plugins n'ajoutent plus de façon magique leur prefix plugin aux composants, 
-helpers et modèles utilisés à travers eux. Vous devez être explicites avec les 
-composants, modèles et helpers que vous souhaitez utiliser. Dans le passé::
+Les plugins n'ajoutent plus de façon magique leur prefix plugin aux components, 
+helpers et models utilisés à travers eux. Vous devez être explicites avec les 
+components, models et helpers que vous souhaitez utiliser. Dans le passé::
 
-    <?php
     var $components = array('Session', 'Comments');
 
-Aurait regardé dans le plugin du contrôleur avant de vérifier les composants 
-app/core. Il va maintenant seulement regarder dans les composants app/core. 
+Aurait regardé dans le plugin du controller avant de vérifier les components 
+app/core. Il va maintenant seulement regarder dans les components app/core. 
 Si vous souhaitez utiliser les objets à partir d'un plugin, vous devez mettre 
 le nom du plugin::
 
-    <?php
     public $components = array('Session', 'Comment.Commentaires');
 
 Cela a été fait pour réduire la difficulté des problèmes de debug causés par 
@@ -1293,7 +1270,7 @@ Plugin App Controller et Plugin App Model
 
 Les plugins AppController et AppModel ne sont plus directement localisés dans 
 le dossier plugin. Ils sont maintenant placés dans les dossiers des plugins des 
-Contrôleurs et des Modèles comme ceci::
+Controllers et des Models comme ceci::
 
     /app
         /Plugin
@@ -1386,7 +1363,6 @@ plus cohérente. Aussi, comme les sources de données ont été déplacées vers
 packages, vous aurez besoin de passer le package dans lequel ils sont 
 localisés. Exemple::
 
-    <?php
     public $default = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,

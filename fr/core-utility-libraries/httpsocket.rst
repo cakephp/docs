@@ -3,82 +3,78 @@ HttpSocket
 
 .. php:class:: HttpSocket(mixed $config = array())
 
-CakePHP includes an HttpSocket class which can be used easily for
-making requests. It is a great way to communicate with external webservices, or
-remote apis.
+CakePHP inclut une classe HttpSocket qui peut être utilisée pour faire des 
+requêtes. C'est un bon moyen pour communiquer avec des services web externes 
+ou des apis distantes.
 
-Making a request
-================
+Faire une requête
+=================
 
-You can use HttpSocket to create most kinds of HTTP requests with the different
-HTTP methods.
+Vous pouvez utiliser HttpSocket pour créer la plupart des requêtes HTTP avec 
+les différentes méthodes HTTP.
 
 .. php:method:: get($uri, $query, $request)
 
-    The ``$query`` parameter, can either be a query string, or an array of keys
-    and values. The get method makes a simple HTTP GET request returning the
-    results::
+    Le paramètre ``$query``, peut soit être une chaîne de caractères, soit un 
+    tableau de clés et de valeurs. La méthode get fait une simple requête 
+    HTTP GET retournant les résultats::
 
-        <?php
         App::uses('HttpSocket', 'Network/Http');
 
         $HttpSocket = new HttpSocket();
 
-        // string query
+        // requête chaîne
         $results = $HttpSocket->get('http://www.google.com/search', 'q=cakephp');
         
-        // array query
+        // requête tableau
         $results = $HttpSocket->get('http://www.google.com/search', array('q' => 'cakephp'));
 
 .. php:method:: post($uri, $data, $request)
 
-    The post method makes a simple HTTP POST request returning the
-    results.
+    La méthode post fait une simple requête HTTP POST retournant les résultats.
 
-    The parameters for the ``post`` method are almost the same as the
-    get method, ``$uri`` is the web address where the request is being
-    made; ``$query`` is the data to be posted, either as s string, or as 
-    an array of keys and values::
+    Les paramètres pour la méthode ``post`` sont presque les mêmes que pour la 
+    méthode get, ``$uri`` est l'adresse web où la requête a été faite; 
+    ``$query`` est la donnée à poster, que ce soit en chaîne, ou en un 
+    tableau de clés et de valeurs::
 
-        <?php
         App::uses('HttpSocket', 'Network/Http');
 
         $HttpSocket = new HttpSocket();
 
-        // string data
+        // donnée en chaîne
         $results = $HttpSocket->post(
             'http://example.com/add',
             'name=test&type=user'
         );
         
-        // array data
+        // donnée en tableau
         $data = array('name' => 'test', 'type' => 'user');
         $results = $HttpSocket->post('http://example.com/add', $data);
 
 .. php:method:: put($uri, $data, $request)
 
-    The put method makes a simple HTTP PUT request returning the
-    results.
+    La méthode put fait une simple requête HTTP PUT retournant les résultats.
 
-    The parameters for the ``put`` method is the same as the
-    :php:meth:`~HttpSocket::post()` method.
+    Les paramètres pour la méthode ``put`` est la même que pour la méthode 
+    :php:meth:`~HttpSocket::post()`.
 
 .. php:method:: delete($uri, $query, $request)
 
-    The put method makes a simple HTTP PUT request returning the
-    results.
+    La méthode put fait une requête simple HTTP PUT retournant les résultats.
 
-    The parameters for the ``delete`` method is the same as the
-    :php:meth:`~HttpSocket::get()` method. The ``$query`` parameter can either be a string or an array
-    of query string arguments for the request.
+    Les paramètres pour la méthode ``delete`` sont les mêmes que pour la 
+    méthode :php:meth:`~HttpSocket::get()`. Le paramètre ``$query`` peut soit 
+    être une chaîne, soit un tableau d'arguments d'une recherche sous forme de 
+    chaîne pour la requête.
 
 .. php:method:: request($request)
 
-    The base request method, which is called from all the wrappers
-    (get, post, put, delete). Returns the results of the request.
+    La méthode de base request, qui est appelé à partir de tous les wrappers 
+    (get, post, put, delete). Retourne les résultats de la requête.
 
-    $request is a keyed array of various options. Here is the format
-    and default settings::
+    $request est un tableau à clé avec des options diverses. Voici le format 
+    et les configuration par défaut::
 
         public $request = array(
             'method' => 'GET',
@@ -109,18 +105,17 @@ HTTP methods.
             'cookies' => array()
         );
 
-Handling the response
-=====================
+Gérer la réponse
+================
 
-Responses from requests made with ``HttpSocket`` are instances of
-``HttpResponse``.  This object gives you a few accessor methods to access the
-contents of an HTTP response. This class implements the
-`ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_ and
+Les réponses des requêtes faîtes avec ``HttpSocket`` sont des instances de 
+``HttpResponse``. L'objet vous donne quelques méthodes accessor pour accéder 
+au contenu de la réponse HTTP. Cette classe intégre le 
+`ArrayAccess <http://php.net/manual/en/class.arrayaccess.php>`_ et
 `__toString() <http://www.php.net/manual/en/language.oop5.magic.php#language.oop5.magic.tostring>`_,
-so you can continue using the ``$http->response`` as array and the return of
-request methods as string::
+donc vous pouvez continuer en utilisant ``$http->response`` en tableau et le 
+retour des méthodes de requête en chaîne::
 
-    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     $http = new HttpSocket();
@@ -132,61 +127,66 @@ request methods as string::
     // Get the status code for the response.
     $code = $response->code;
 
-The ``HttpResponse`` has the following attributes:
+``HttpResponse`` a les attributs suivants:
 
-* ``body`` returns body of HTTP response (normally the HTML).
-* ``headers`` returns array with headers.
-* ``cookies`` returns array with new cookies (cookies from others request are not stored here).
-* ``httpVersion`` returns string with HTTP version (from first line in response).
-* ``code`` returns the integer with HTTP code.
-* ``reasonPhrase`` returns the string with HTTP code response.
-* ``raw`` returns the unchanged response from server.
+* ``body`` retourne le corps de la réponse HTTP (normalement le HTML).
+* ``headers`` retourne un tableau avec les headers.
+* ``cookies`` retourne un tableau avec les nouveaux cookies (les cookies 
+  des autres requêtes ne sont pas stockés ici).
+* ``httpVersion`` retourne une chaîne avec la version de HTTP (à partir 
+  de la première ligne dans la réponse).
+* ``code`` retourne l'integer avec le code HTTP.
+* ``reasonPhrase`` retourne la chaîne avec la réponse du code HTTP.
+* ``raw`` retourne la réponse non changée du serveur.
 
-The ``HttpResponse`` also exposes the following methods:
+``HttpResponse`` expose aussi les méthodes suivantes:
 
-* ``body()`` returns the body
-* ``isOk()`` returns if code is 200;
-* ``isRedirect()`` returns if code is 301, 302, 303 or 307 and the *Location* header is set.
-* ``getHeader()`` allows you to fetch headers, see the next section.
+* ``body()`` retourne le corps
+* ``isOk()`` retourne si le code est 200;
+* ``isRedirect()`` retourne si le code est 301, 302, 303 or 307 et la 
+  *localisation* du header est définie.
+* ``getHeader()`` vous permet de récupèrer les headers, voir la prochaine 
+  section.
 
 
-Getting headers from a response
--------------------------------
+Obtenir des headers à partir d'une réponse
+------------------------------------------
 
-Following others places in core, the HttpSocket does not change the casing of
-headers.  :rfc:`2616` states that headers are case insensitive, and HttpSocket
-preserves the values the remote host sends::
+Suivant les autres places dans le coeur, HttpSocket ne change pas le cas des 
+headers. :rfc:`2616` indique que les headers sont insensibles à la casse, et 
+HttpSocket préserve les valeurs que l'hôte distant envoie::
 
     HTTP/1.1 200 OK
     Date: Mon, 16 Apr 2007 04:14:16 GMT
     server: CakeHttp Server
     content-tyPe: text/html
 
-Your ``$response->headers`` (or ``$response['header']``) will contain the exact
-keys sent. In order to safely access the header fields, it's best to use
-``getHeader()``.  If your headers looks like::
+Votre ``$response->headers`` (ou ``$response['header']``) va contenir les 
+bonnes clés envoyés. Afin d'accéder de manière sécurisé aux champs du 
+header, il est mieux d'utiliser ``getHeader()``. Si vos headers 
+ressemblent à ceci::
 
     Date: Mon, 16 Apr 2007 04:14:16 GMT
     server: CakeHttp Server
     content-tyPe: text/html
 
-You could fetch the above headers by calling::
+Vous pouvez récupérer les headers ci-dessus en appelant::
 
-    <?php
-    // $response is an instance of HttpResponse
-    // get the Content-Type header.
+    // $response est une instance de HttpResponse
+    // récupère le header Content-Type.
     $response->getHeader('Content-Type');
 
     // get the date
     $response->getHeader('date');
 
-Headers can be fetched case-insensitively.
+Les headers peuvent être récupèrer case-insensitively.
 
-Automatically handling a redirect response
-------------------------------------------
+Gérer automatiquement une réponse de redirection
+------------------------------------------------
 
-When the response has a valid redirect status code (see ``HttpResponse::isRedirect``), 
-an extra request can be automatically done according to the received *Location* header::
+Quand la réponse a un code de statut de redirection valide (voir 
+``HttpResponse::isRedirect``), une requête supplémentaire peut être 
+automatiquement faîte selon le header *Location* reçu::
 
     <?php 
     App::uses('HttpSocket', 'Network/Http');
@@ -195,22 +195,25 @@ an extra request can be automatically done according to the received *Location* 
     $response = $HttpSocket->get('http://example.com/redirecting_url', array(), array('redirect' => true));
 
 
-The *redirect* option can take the following values
+L'option *redirect* peut prendre les valeurs suivantes
 
-* **true** : all redirecting responses will fire a consequent new request
-* **integer** : the set value is the maximum number of redirections allowed (after reaching it, the *redirect* value is considered as **false**)
-* **false** (default) : no consequent request will be fired
+* **true** : toutes les réponses de redirection vont entraîner une nouvelle 
+  requête conséquente.
+* **integer** : La valeur définie est le nombre maximum de redirections 
+  autorisées (après l'avoir atteint, la valeur de *redirect* est consideré 
+  comme **false**)
+* **false** (par défaut) : aucune requête conséquente ne sera fired
 
 The returned ``$response`` will be the final one, according to the settings.
 
 
-Creating a custom response class
---------------------------------
+Créer une classe de réponse personnalisée
+-----------------------------------------
 
-You can create your own response class to use with HttpSocket. You could create
-the file ``app/Lib/Network/Http/YourResponse.php`` with the content::
+Vous pouvez créer votre propre classe de réponse pour utiliser HttpSocket. Vous 
+pourriez créer le fichier ``app/Lib/Network/Http/YourResponse.php`` avec le 
+contenu::
 
-    <?php
     App::uses('HttpResponse', 'Network/Http');
 
     class YourResponse extends HttpResponse {
@@ -222,22 +225,21 @@ the file ``app/Lib/Network/Http/YourResponse.php`` with the content::
     }
 
 
-Before your request you'll need to change the responseClass property::
+Avant votre requête, vous devrez changer la propriété responseClass::
 
-    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     $http = new HttpSocket();
     $http->responseClass = 'YourResponse';
 
-Downloading the results
------------------------
+Télécharger les résultats
+-------------------------
 
-HttpSocket has a new method called `setContentResource()`. By setting a resource
-with this method, the content will be written to this resource, using
-`fwrite()`. To you download a file, you can do::
+HttpSocket a une nouvelle méthode appelée `setContentResource()`. En 
+configurant une ressource avec cette méthode, le contenu sera écrit 
+dans la ressource, en utilisant `fwrite()`. Pour télécharger un fichier, 
+vous pouvez faire::
 
-    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     $http = new HttpSocket();
@@ -248,35 +250,34 @@ with this method, the content will be written to this resource, using
 
 .. note::
 
-    The headers are not included in file, you will only get the body content
-    written to your resource. To disable saving into the resource, use
-    ``$http->setContentResource(false)``.
+    Les headers ne sont pas inclus dans le fichier, vous récupèrerez seulement 
+    ke contenu du corps écrit dans votre ressource. Pour désactiver la 
+    sauvegarde dans la ressource, utilisez ``$http->setContentResource(false)``.
 
-Using authentication
-====================
+Utiliser l'authentification
+===========================
 
-HttpSocket supports a HTTP Basic and Digest authentication methods out of the
-box.  You can also create custom authentication objects to support protocols
-like OAuth.  To use any authentication system you need to configure the
-``HttpSocket`` instance::
+HttpSocket supporte des méthodes d'authentification HTTP Basic et Digest. Vous 
+pouvez maintenant créer des objets d'authenrification personnalisée pour 
+supporter des protocoles comme OAuth. Pour utiliser un système 
+d'authentification, vous devez configurer l'instance ``HttpSocket``::
 
-    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     $http = new HttpSocket();
     $http->configAuth('Basic', 'user', 'password');
 
-The above would configure the ``HttpSocket`` instance to use Basic
-authentication using ``user`` and ``password`` as the credentials.
+Ce qui est au-dessus configurerait l'instance ``HttpSocket`` pour utiliser 
+l'authentification Basic en utilisant 
+``user`` et ``password`` en credentials.
 
-Creating a custom authentication object
----------------------------------------
+Créer un objet d'authentification personnalisé
+----------------------------------------------
 
-You can now create your own authentication method to use with HttpSocket. You
-could create the file ``app/Lib/Network/Http/YourMethodAuthentication.php`` with the
-content::
+Vous pouvez maintenant créer votre propre méthode d'authentification à 
+utiliser avec HttpSocket. Vous pouvez créer le fichier 
+``app/Lib/Network/Http/YourMethodAuthentication.php`` avec le contenu::
 
-    <?php
 
     class YourMethodAuthentication {
 
@@ -288,28 +289,26 @@ content::
      * @return void
      */
         public static function authentication(HttpSocket $http, &$authInfo) {
-            // Do something, for example set $http->request['header']['Authentication'] value
+            // Faire quelque chose, par exemple définir la valeur $http->request['header']['Authentication']
         }
 
     }
 
-To configure HttpSocket to use your auth configuration, you can use the new
-method ``configAuth()``::
+Pour configurer HttpSocket afin d'utiliser votre configuraiton auth, vous 
+pouvez utiliser la nouvelle méthode ``configAuth()``::
 
-    <?php
     $http->configAuth('YourMethod', array('config1' => 'value1', 'config2' => 'value2'));
     $http->get('http://secure.your-site.com');
 
-The ``authentication()`` method will be called to append the request headers.
+La méthode ``authentication()`` va être appelée pour ajouter aux headers de la requête.
 
-Using a HttpSocket with a proxy
--------------------------------
+Utiliser un HttpSocket avec un proxy
+------------------------------------
 
-As part of auth configuration, you can configure proxy authentication. You can
-create your customized method to proxy authentication in the same class of
-authentication. For example::
+En tant que configuration de auth, vous pouvez configurer une authentification 
+de proxy. Vous pouvez créer votre méthode personnalisée pour authentifier 
+le proxy dans la même classe d'authentification. Par exemple::
 
-    <?php
 
     class YourMethodAuthentication {
 
@@ -321,7 +320,7 @@ authentication. For example::
      * @return void
      */
         public static function authentication(HttpSocket $http, &$authInfo) {
-            // Do something, for example set $http->request['header']['Authentication'] value
+            // Faire quelque chose, par exemple définir ma valeur $http->request['header']['Authentication']
         }
 
     /**
@@ -332,18 +331,18 @@ authentication. For example::
      * @return void
      */
         public static function proxyAuthentication(HttpSocket $http, &$proxyInfo) {
-            // Do something, for example set $http->request['header']['Proxy-Authentication'] value
+            // Faire quelque chose, par exemple définir la valeur $http->request['header']['Proxy-Authentication']
         }
 
     }
 
 .. note::
 
-    To use a proxy, you must call the ``HttpSocket::configProxy()`` similar to
-    ``HttpSocket::configAuth()``.
+    Pour utiliser un proxy, vous devez appeler ``HttpSocket::configProxy()`` 
+    semblalble à ``HttpSocket::configAuth()``.
 
 
 
 .. meta::
-    :title lang=en: HttpSocket
-    :keywords lang=en: array name,array data,query parameter,query string,php class,string query,test type,string data,google,query results,webservices,apis,parameters,cakephp,meth,search results
+    :title lang=fr: HttpSocket
+    :keywords lang=fr: tableau nommé,tableau donnée,paramètre query,query string,php class,string query,test type,string data,google,query results,webservices,apis,paramètres,cakephp,meth,résultats de recherche

@@ -8,7 +8,7 @@ disque pour découvrir ce qui se produit. Dans un monde devenu plus
 dépendant des technologies comme SOAP et AJAX, déboguer peut 
 s'avérer difficile.
 
-Le  logging (journalisation) peut aussi être une façon de découvrir 
+Le logging (journalisation) peut aussi être une façon de découvrir 
 ce qui s'est passé dans votre application à chaque instant. 
 Quels termes de recherche ont été utilisés ? Quelles sortes d'erreurs 
 ont été vues par mes utilisateurs ? A quelle fréquence est exécutée 
@@ -17,11 +17,9 @@ une requête particulière ?
 La journalisation des données dans CakePHP est facile - la fonction log() 
 est un élément de la classe Object, qui est l'ancêtre commun de la plupart 
 des classes CakePHP. Si le contexte est une classe CakePHP 
-(Modèle, Contrôleur, Composant... n'importe quoi d'autre), vous pouvez 
+(Model, Controller, Component... n'importe quoi d'autre), vous pouvez 
 loguer (journaliser) vos données. Vous pouvez aussi utiliser 
 ``CakeLog::write()`` directement. voir :ref:`writing-to-logs`
-
-
 
 Création et Configuration des flux d'un log (journal) 
 =====================================================
@@ -38,9 +36,7 @@ Une fois configuré ``CakeLog`` va tenter de charger la
 configuration des flux de logs en appelant``CakeLog::config()``.
 La configuration de notre ``DatabaseLogger`` pourrait ressembler
 à ceci::
-
     
-    <?php
     // pour app/Lib
     CakeLog::config('otherFile', array(
         'engine' => 'DatabaseLogger',
@@ -55,12 +51,11 @@ La configuration de notre ``DatabaseLogger`` pourrait ressembler
         // ...
     ));
 
-Lorsque vous configurez le flux d'un log le paramètre de ``engine``
-est utilisé pour localiser et charger le handler de log. Toutes
-les autres propriétés de configuration sont passées au constructeur
+Lorsque vous configurez le flux d'un log le paramètre de ``engine`` 
+est utilisé pour localiser et charger le handler de log. Toutes 
+les autres propriétés de configuration sont passées au constructeur 
 des flux de log comme un tableau.::
 
-    <?php
     App::uses('CakeLogInterface', 'Log');
 
     class DatabaseLogger implements CakeLogInterface {
@@ -81,14 +76,12 @@ est le type de chaîne du message logué, les valeurs de noyau sont
 définir vos propres types par leur utilisation en appelant  
 ``CakeLog::write``.
 
-
 .. note::
 
     Toujours configurer les loggers dans ``app/Config/bootstrap.php``
     Essayer de configurer les loggers  ou les loggers de plugin dans
     core.php provoquera des problèmes, les chemins d'applications
     n'étant pas encore configurés.
-
     
 Logging des Erreurs et des Exception
 ====================================
@@ -99,7 +92,6 @@ Les erreurs seront affichées quand debug > 0 et loguées quand
 debug == 0. Définir ``Exception.log`` à true  pour loguer les 
 exceptions non capturées. Voir :doc:`/development/configuration` 
 pour plus d'information.
-
 
 Interagir avec les flux de log
 ==============================
@@ -128,8 +120,6 @@ le nom du fichier ou le message sera stocker. Si le type n'est pas
 fournit, LOG\_ERROR est utilisé ce qui à pour effet d'écrire dans le
 log error. Le chemin par défaut est ``app/tmp/logs/$type.log``::
 
-
-    <?php
     // Execute cela dans une classe CakePHP
     $this->log("Quelque chose ne fonctionne pas!");
     
@@ -140,8 +130,6 @@ Vous pouvez spécifier un nom personnalisé en utilisant le premier
 paramètre. La classe Filelog intégrée par défaut traitera ce nom
 de log comme le fichier dans lequel vous voulez écrire les logs::
 
-
-    <?php
     // appelé de manière statique
     CakeLog::write('activity', 'Un message spécial pour l'activité de logging');
     
@@ -155,8 +143,6 @@ Vous pouvez configurer/alterner la localisation de FileLog en
 utilisant :php:meth:`CakeLog::config()`. FileLog accepte un 
 ``chemin`` qui permet aux chemins personnalisés d'être utilisés.::
 
-
-    <?php
     CakeLog::config('chemin_perso', array(
         'engine' => 'FileLog',
         'path' => '/chemin/vers/endroit/perso/'
@@ -171,16 +157,12 @@ Ecrire dans les fichiers peut être réalisé de deux façons. La
 première est d'utilisé la méthode 
 statique  :php:meth:`CakeLog::write()`::
 
-
-    <?php
     CakeLog::write('debug', 'Quelque chose qui ne fonctionne pas');
 
 La seconde est d'utiliser la fonction raccourci log() disponible 
 dans chacune des classes qui extends (étendent)  ``Object``.
 En appelant log() cela appellera en interne  CakeLog::write()::
 
-
-    <?php
     // Exécuter cela dans une classe CakePHP:
     $this->log("Quelque chose qui ne fonctionne pas!", 'debug');
 
@@ -191,7 +173,6 @@ Si il n'y a pas de flux configuré quand le log est écrit, un flux
 par ``défaut`` utilisant la classe de noyau ``FileLog`` sera 
 configuré pour envoyer en sortie vers ``app/tmp/logs/`` juste
 comme CakeLog le faisait dans les précédentes versions.
-
 
 l'API CakeLog
 =============
@@ -226,9 +207,8 @@ l'API CakeLog
     $log indique le type de message créé.
     $message est le message de l'entrée de log en cours d'écriture.
 
-    
 
 .. meta::
-    :title lang=en: Logging
-    :description lang=en: Log CakePHP data to the disk to help debug your application over longer periods of time.
+    :title lang=fr: Journalisation (Logging)
+    :description lang=fr: Log CakePHP data to the disk to help debug your application over longer periods of time.
     :keywords lang=en: cakephp logging,log errors,debug,logging data,cakelog class,ajax logging,soap logging,debugging,logs

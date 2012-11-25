@@ -9,7 +9,7 @@ Usage Général
 =============
 
 Des librairies à usage général sont disponibles et réutilisées dans plusieurs 
-endroits à travers CakePHP.
+endroits de CakePHP.
 
 .. toctree::
     :maxdepth: 2
@@ -20,12 +20,12 @@ endroits à travers CakePHP.
 
 .. _core-components:
 
-Composants (Components)
+Components (Composants)
 =======================
 
-CakePHP a une sélection de composants pour aider à s'occuper de tâches basiques 
-dans vos contrôleurs. Regardez la section sur :doc:`/controllers/components` 
-pour savoir comment configurer et utiliser les composants.
+CakePHP a une sélection de components pour aider à s'occuper de tâches basiques 
+dans vos controllers. Regardez la section sur :doc:`/controllers/components` 
+pour savoir comment configurer et utiliser les components.
 
 .. toctree::
     :maxdepth: 2
@@ -72,7 +72,7 @@ et comment vous pouvez créer et utiliser vos propres helpers.
 Behaviors
 =========
 
-Les behaviors ajoutent des fonctionnalités supplémentaires à vos modèles. 
+Les behaviors ajoutent des fonctionnalités supplémentaires à vos models. 
 CakePHP offre un nombre de behaviors integrés tels que 
 :php:class:`TreeBehavior` et :php:class:`ContainableBehavior`.
 
@@ -110,6 +110,7 @@ web, la mise en cache, la connexion, l'internationalisation et plus.
     core-libraries/logging
     core-utility-libraries/router
     core-utility-libraries/security
+    core-utility-libraries/hash
     core-utility-libraries/set
     core-utility-libraries/string
     core-utility-libraries/xml

@@ -6,7 +6,6 @@ CakeTime
 If you need :php:class:`TimeHelper` functionalities outside of a ``View``,
 use the ``CakeTime`` class::
 
-    <?php
     class UsersController extends AppController {
 
         public $components = array('Auth');
@@ -35,7 +34,6 @@ Formatting
     Converts given time (in server's time zone) to user's local
     time, given his/her timezone.::
 
-        <?php
         // called via TimeHelper
         echo $this->Time->convert(time(), 'Asia/Jakarta');
         // 1321038036
@@ -61,7 +59,6 @@ Formatting
     Creates a string in the same format as daysAsSql but
     only needs a single date object::
 
-        <?php
         // called via TimeHelper
         echo $this->Time->dayAsSql('Aug 22, 2011', 'modified');
         // (modified >= '2011-08-22 00:00:00') AND (modified <= '2011-08-22 23:59:59')
@@ -85,7 +82,6 @@ Formatting
     23:59:59')". This is handy if you need to search for records
     between two dates inclusively::
 
-        <?php
         // called via TimeHelper
         echo $this->Time->daysAsSql('Aug 22, 2011', 'Aug 25, 2011', 'created');
         // (created >= '2011-08-22 00:00:00') AND (created <= '2011-08-25 23:59:59')
@@ -107,7 +103,6 @@ Formatting
     Will return a string formatted to the given format using the
     `PHP date() formatting options <http://www.php.net/manual/en/function.date.php>`_::
 
-        <?php
         // called via TimeHelper
         echo $this->Time->format('Y-m-d H:i:s');
         // The Unix Epoch as 1970-01-01 00:00:00
@@ -137,7 +132,6 @@ Formatting
     Takes a string and uses `strtotime <http://us.php.net/manual/en/function.date.php>`_
     to convert it into a date integer::
 
-        <?php
         // called via TimeHelper
         echo $this->Time->fromString('Aug 22, 2011');
         // 1313971200
@@ -162,7 +156,6 @@ Formatting
 
     Will return the date as an integer set to Greenwich Mean Time (GMT).::
 
-        <?php
         // called via TimeHelper
         echo $this->Time->gmt('Aug 22, 2011');
         // 1313971200
@@ -189,7 +182,6 @@ Formatting
     Takes a date string and outputs it in the format "Tue, Jan
     1st 2008, 19:25"::
 
-        <?php
         // called via TimeHelper
         echo $this->Time->nice('2011-08-22 11:53:00');
         // Mon, Aug 22nd 2011, 11:53
@@ -207,7 +199,6 @@ Formatting
     "Today, 19:25". If the date object is yesterday, the format will be
     "Yesterday, 19:25"::
 
-        <?php
         // called via TimeHelper
         echo $this->Time->niceShort('2011-08-22 11:53:00');
         // Aug 22nd, 11:53
@@ -237,7 +228,6 @@ Formatting
     and convert it into a friendly word format like, "3 weeks, 3 days
     ago"::
 
-        <?php
         // called via TimeHelper
         echo $this->Time->timeAgoInWords('Aug 22, 2011');
         // on 22/8/11
@@ -252,7 +242,6 @@ Formatting
 
     Use the 'end' option to determine the cutoff point to no longer will use words; default '+1 month'::
 
-        <?php
         // called via TimeHelper
         echo $this->Time->timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y', 'end' => '+1 year'));
         // On Nov 10th, 2011 it would display: 2 months, 2 weeks, 6 days ago
@@ -264,7 +253,6 @@ Formatting
     Use the 'accuracy' option to determine how precise the output should be.
     You can use this to limit the output::
 
-        <?php
         // If $timestamp is 1 month, 1 week, 5 days and 6 hours ago
         echo CakeTime::timeAgoInWords($timestamp, array(
             'accuracy' => array('month' => 'month'),
@@ -299,7 +287,6 @@ Formatting
     array will be returned with start and end dates in the format
     "2008-03-31"::
 
-        <?php
         // called via TimeHelper
         echo $this->Time->toQuarter('Aug 22, 2011');
         // Would print 3
@@ -389,7 +376,6 @@ Testing Time
     string. ``wasWithinLast`` takes an additional ``$timeInterval``
     option::
 
-        <?php
         // called via TimeHelper
         $this->Time->wasWithinLast($timeInterval, $dateString);
 

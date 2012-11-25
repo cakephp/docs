@@ -82,7 +82,6 @@ Remember that po files are useful for short messages, if you find
 you want to translate long paragraphs, or even whole pages - you
 should consider implementing a different solution. e.g.::
 
-    <?php
     // App Controller Code.
     public function beforeFilter() {
         $locale = Configure::read('Config.language');
@@ -94,7 +93,6 @@ should consider implementing a different solution. e.g.::
 
 or::
 
-    <?php
     // View code
     echo $this->element(Configure::read('Config.language') . '/tos');
 
@@ -107,7 +105,6 @@ follow a few conventions.
 Instead of __() and __n() you will have to use __d() and __dn(). The D means 
 domain. So if you have a plugin called 'DebugKit' you would have to do this::
 
-    <?php
     __d('debug_kit', 'My example text');
 
 Using the underscored syntax is important, if you don't use it CakePHP won't
@@ -133,7 +130,6 @@ Localization in CakePHP
 To change or set the language for your application, all you need to
 do is the following::
 
-    <?php
     Configure::write('Config.language', 'fre');
 
 This tells Cake which locale to use (if you use a regional locale, such as
@@ -146,13 +142,11 @@ in fact anytime at all before you want a message in a different language.  To
 set the language for the current user, you can store the setting in the Session
 object, like this::
 
-    <?php
     $this->Session->write('Config.language', 'fre');
 
 At the beginning of each request in your controller's ``beforeFilter`` you 
 should configure ``Configure`` as well::
 
-    <?php
     class AppController extends Controller {
         public function beforeFilter() {
             Configure::write('Config.language', $this->Session->read('Config.language'));
@@ -198,7 +192,6 @@ CakePHP will automatically extract the validation error when you are using the
 :doc:`i18n console task </console-and-shells>`. By default, the default domain is used.
 This can be overwritten by setting the ``$validationDomain`` property in your model::
 
-    <?php
     class User extends AppModel {
 
         public $validationDomain = 'validation_errors';
@@ -207,7 +200,6 @@ This can be overwritten by setting the ``$validationDomain`` property in your mo
 Additional parameters defined in the validation rule are passed to the translation
 function. This allows you to create dynamic validation messages::
 
-    <?php
     class User extends AppModel {
 
         public $validationDomain = 'validation';
@@ -224,7 +216,6 @@ function. This allows you to create dynamic validation messages::
 
 Which will do the following internal call::
 
-    <?php
     __d('validation', 'Username should be between %d and %d characters', array(2, 10));
 
 .. meta::

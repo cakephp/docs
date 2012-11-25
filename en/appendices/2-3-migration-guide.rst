@@ -22,6 +22,9 @@ Component
 
 AuthComponent
 -------------
+- A new property ``AuthComponent::$unauthorizedRedirect`` has been added.
+  If set to false a ForbiddenException exception is thrown instead of redirecting
+  user to referrer url.
 
 - A new authenticate adapter has been added to support blowfish/bcrypt hashed
   passwords.  You can now use ``Blowfish`` in your ``$authenticate`` array to
@@ -35,7 +38,7 @@ PaginatorComponent
   to manage and set than the 0'th index.
 
 SecurityComponent
-------------------
+-----------------
 
 - SecurityComponent now supports the ``unlockedActions`` option. This can be used to
   disable all security checks for any actions listed in this option.
@@ -47,6 +50,12 @@ RequestHandlerComponent
   to view classname. You can add ``$settings['viewClassMap']`` for automatically setting
   the correct viewClass based on extension/content type.
 
+CookieComponent
+---------------
+
+- :php:meth:`CookieComponent::check()` was added.  This method works the same as
+  :php:meth:`CakeSession::check()` does.
+
 Console
 =======
 
@@ -54,6 +63,28 @@ Console
   webserver for your CakePHP application.
 - Baking a new project now sets the application's cache prefix to the name of
   the application.
+
+I18n
+====
+
+L10n
+----
+
+- ``nld`` is now the default locale for Dutch as specified by ISO 639-3 and ``dut`` its alias.
+  The locale folders have to be adjusted accordingly (from `/Locale/dut/` to `/Locale/nld/`).
+- Albanian is now ``sqi``, Basque is now ``eus``, Chinese is now ``zho``, Tibetan is now ``bod``,
+  Czech is now ``ces``, Farsi is now ``fas``, French is now ``fra``, Icelandic is now ``isl``,
+  Macedonian is now ``mkd``, Malaysian is now ``msa``, Romanian is now ``ron``, Serbian is now ``srp``
+  and Slovak is now ``slk``. The corresponding locale folders have to be adjusted, as well.
+
+Core
+====
+
+Configure
+---------
+
+- :php:meth:`Configure::check()` was added.  This method works the same as
+  :php:meth:`CakeSession::check()` does.
 
 Error
 =====
@@ -63,20 +94,23 @@ Exceptions
 
 - CakeBaseException was added, which all core Exceptions now extend. The base exception
   class also introduces the ``responseHeader()`` method which can be called on created Exception instances
-  to add headers for the response, as Exceptions dont reuse any response instance.
+  to add headers for the response, as Exceptions don't reuse any response instance.
 
 Model
 =====
 
 - Support for the biginteger type was added to all core datasources, and
   fixtures.
+- Support for ``FULLTEXT`` indexes was added for the MySQL driver.
 
-Model
------
+
+Models
+------
 
 - ``Model::find('list')`` now sets the ``recursive`` based on the max
   containment depth or recursive value.  When list is used with
   ContainableBehavior.
+- ``Model::find('first')`` will now return an empty array when no records are found.
 
 Validation
 ----------
@@ -96,6 +130,7 @@ CakeRequest
 -----------
 
 - :php:meth:`CakeRequest::onlyAllow()` was added.
+- :php:meth:`CakeRequest::query()` was added.
 
 CakeResponse
 ------------
@@ -108,6 +143,17 @@ CakeEmail
 - The ``contentDisposition`` option was added to
   :php:meth:`CakeEmail::attachments()`.  This allows you to disable the
   Content-Disposition header added to attached files.
+
+HttpSocket
+----------
+
+- :php:class:`HttpSocket` now verifies SSL certificates by default. If you are
+  using self-signed certificates or connecting through proxies you may need to
+  use some of the new options to augment this behavior. See
+  :ref:`http-socket-ssl-options` for more information.
+- ``HttpResponse`` was renamed to ``HttpSocketResponse``.  This
+  avoids a common issue with the http pecl extension. There is an
+  ``HttpResponse`` class provided as well for compatibility reasons.
 
 Routing
 =======
@@ -123,7 +169,14 @@ View
 - MediaView is deprecated, and you can use new features in
   :php:class:`CakeResponse` to achieve the same results.
 - Serialization in Json and Xml views has been moved to ``_serialize()``
-- beforeRender and afterRender callbacks are now being called in Json and Xml views when using view templates.
+- beforeRender and afterRender callbacks are now being called in Json and Xml
+  views when using view templates.
+- :php:meth:`View::fetch()` now has a ``$default`` argument. This argument can
+  be used to provide a default value should a block be empty.
+- :php:meth:`View::prepend()` has been added to allow prepending content to
+  existing block.
+- :php:class:`XmlView` now uses the ``_rootNode`` view variable to customize the
+  top level XML node.
 
 Helpers
 =======
@@ -134,6 +187,15 @@ FormHelper
 - :php:meth:`FormHelper::select()` now accepts a list of values in the disabled
   attribute. Combined with ``'multiple' => 'checkbox'``, this allows you to
   provide a list of values you want disabled.
+- :php:meth:`FormHelper::postLink()` now accepts a ``method`` key.  This allows
+  you to create link forms using HTTP methods other than POST.
+
+HtmlHelper
+----------
+
+- :php:meth:`HtmlHelper::getCrumbList()` now has the ``separator``,
+  ``firstClass`` and ``lastClass`` options.  These allow you to better control
+  the HTML this method generates.
 
 TextHelper
 ----------
@@ -141,14 +203,40 @@ TextHelper
 - :php:meth:`TextHelper::tail()` was added to truncate text starting from the end.
 - `ending` in :php:meth:`TextHelper::truncate()` is deprecated in favor of `ellipsis`
 
+PaginatorHelper
+---------------
+
+- :php:meth:`PaginatorHelper::numbers()` now has a new option ``currentTag`` to
+  allow specifying extra tag for wrapping current page number.
+- For methods: :php:meth:`PaginatorHelper::prev()` and :php:meth:`PaginatorHelper::next()` it
+  is now possible to set the ``tag`` option to ``false`` to disable the wrapper.
+
+
 Testing
 =======
 
 - A core fixture for the default ``cake_sessions`` table was added. You can use
   it by adding ``core.cake_sessions`` to your fixture list.
+- :php:meth:`CakeTestCase::getMockForModel()` was added. This simplifies getting
+  mock objects for models.
 
 Utility
 =======
+
+CakeNumber
+----------
+
+- :php:meth:`CakeNumber::fromReadableSize()` was added.
+- :php:meth:`CakeNumber::formatDelta()` was added.
+- :php:meth:`CakeNumber::defaultCurrency()` was added.
+
+Folder
+------
+
+- :php:meth:`Folder::copy()` and :php:meth:`Folder::move()` now support the
+  ability to merge the target and source directories in addition to
+  skip/overwrite.
+
 
 String
 ------
@@ -159,7 +247,7 @@ String
 Debugger
 --------
 
-- php:meth:`Debugger::exportVar()` now outputs private and protected properties
+- :php:meth:`Debugger::exportVar()` now outputs private and protected properties
   in PHP >= 5.3.0.
 
 Security
@@ -169,3 +257,7 @@ Security
   was added.  See the :php:class:`Security::hash()` documentation for more
   information on how to use bcrypt.
 
+Validation
+----------
+
+- :php:meth:`Validation::fileSize()` was added.

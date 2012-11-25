@@ -45,7 +45,6 @@ HtmlHelper
 
 Example of how to set configuration file on controller::
 
-    <?php
     public $helpers = array(
         'Html' => array(
             'configFile' => array('config_file', 'php') // Option one: an array with filename and reader name
@@ -100,7 +99,6 @@ modify them beyond adding the query string and fragment elements. For example
 this could be used to create routes to handle subdomains, or enabling https/http
 flags. An example of a route class that supports subdomains would be::
 
-    <?php
     class SubdomainRoute extends CakeRoute {
         
         public function match($params) {
@@ -119,7 +117,6 @@ subdomains.
 
 ::
 
-    <?php
     echo $this->Html->link(
         'Other domain',
          array('subdomain' => 'test', 'controller' => 'posts', 'action' => 'add')
@@ -193,11 +190,8 @@ Automatic parsing of Accept headers
 If a client sends a single Accept mime type that matches one of the extensions
 enabled in :php:class`Router`, :php:class:`RequestHandler` will treat it the
 same an extension. This expands CakePHP's support for REST style endpoints. To
-use this feature start off by enabling extensions in ``app/Config/routes.php``
+use this feature start off by enabling extensions in ``app/Config/routes.php``::
 
-::
-
-    <?php
     Router::parseExtensions('json', 'xml');
 
 Once you have created layouts and views for your extensions, you will be able to
@@ -241,11 +235,8 @@ Pagination
 
 Pagination now provides a default maxLimit for pagination at 100.
 
-This limit can be overridden with the paginate variable on Controller.
+This limit can be overridden with the paginate variable on Controller::
 
-::
-
-    <?php
     $this->paginate = array('maxLimit' => 1000);
 
 This default is provided to prevent user URL manipulation causing excessive
@@ -259,22 +250,16 @@ You can now alias helpers, components and behaviors to use your class instead of
 a different one. This means that you can very easily make a ``MyHtml`` helper
 and not need to replace every instance of ``$this->Html`` in your views. To do
 this, pass the 'className' key along with your class, like you would with
-models.
+models::
 
-::
-
-    <?php
     public $helpers = array( 
         'Html' => array( 
             'className' => 'MyHtml' 
         )
     );
 
-Similarly, you can alias components for use in your controllers.
+Similarly, you can alias components for use in your controllers::
 
-::
-
-    <?php
     public $components = array( 
         'Email' => array( 
             'className' => 'QueueEmailer' 
@@ -282,11 +267,8 @@ Similarly, you can alias components for use in your controllers.
     );
 
 Calls to the Email component would call the QueueEmailer component instead.
-Finally, you can alias behaviors as well.
+Finally, you can alias behaviors as well::
 
-::
-
-    <?php
     public $actsAs = array( 
         'Containable' => array( 
             'className' => 'SuperContainable' 

@@ -111,7 +111,6 @@ Internationalization / Localization
 
 If you want to echo the result of the translation, use::
 
-    <?php
     echo __('My Message');
     
 This change includes all shortcut translation methods::
@@ -128,7 +127,6 @@ Alongside this, if you pass additional parameters, the translation will call
 `sprintf <http://php.net/manual/en/function.sprintf.php>`_  with these
 parameters before returning. For example::
 
-    <?php
     // Will return something like "Called: MyClass:myMethod"
     echo __('Called: %s:%s', $className, $methodName);
 
@@ -215,7 +213,6 @@ Components
 Component is now the required base class for all components. You should update
 your components and their constructors, as both have changed::
 
-    <?php
     class PrgComponent extends Component {
         function __construct(ComponentCollection $collection, $settings = array()) {
             parent::__construct($collection, $settings);
@@ -245,7 +242,6 @@ All the deprecated callbacks in Component have not been transferred to
 ComponentCollection. Instead you should use the `trigger()` method to interact
 with callbacks.  If you need to trigger a callback you could do so by calling::
 
-    <?php
     $this->Components->trigger('someCallback', array(&$this));
 
 Changes in disabling components
@@ -429,7 +425,6 @@ Although there has been a huge refactoring in how the classes are loaded, in ver
 few occasions you will need to change your application code to respect the way you were 
 used to doing it. The biggest change is the introduction of a new method::
 
-    <?php
     App::uses('AuthComponent', 'Controller/Component');
 
 We decided the function name should emulate PHP 5.3's ``use`` keyword, just as a way
@@ -443,7 +438,6 @@ is used for the first time it will be located.
 Some examples on using :php:meth:`App::uses()` when migrating from
 :php:meth:`App::import()`::
 
-    <?php
     App::import('Controller', 'Pages');
     // becomes 
     App::uses('PagesController', 'Controller');
@@ -468,7 +462,6 @@ All classes that were loaded in the past using ``App::import('Core', $class);``
 will need to be loaded using ``App::uses()`` referring to the correct package.
 See the api to locate the classes in their new folders. Some examples::
 
-    <?php
     App::import('Core', 'CakeRoute');
     // becomes 
     App::uses('CakeRoute', 'Routing/Route');
@@ -494,7 +487,6 @@ App::build() and core paths
 
 Examples::
 
-    <?php
     App::build(array('controllers' => array('/full/path/to/controllers')));
     //becomes 
     App::build(array('Controller' => array('/full/path/to/Controller')));
@@ -526,7 +518,6 @@ Cache
 
 ::
 
-    <?php
     Cache::config('something');
     Cache::write('key', $value);
     
@@ -557,14 +548,12 @@ Router
   ``index`` action is given a short route.  If you wish to continue using short
   routes, you can add a route like::
 
-    <?php
     Router::connect('/users/:action', array('controller' => 'users', 'plugin' => 'users'));
   
   To your routes file for each plugin you need short routes on.
 
 Your app/Config/routes.php file needs to be updated adding this line at the bottom of the file::
 
-    <?php
     require CAKE . 'Config' . DS . 'routes.php';
 
 This is needed in order to generate the default routes for your application. If you do not wish to have such routes,
@@ -663,7 +652,6 @@ In order to accommodate View being removed from the ClassRegistry, the signature
 of Helper::__construct() was changed.  You should update any subclasses to use
 the following::
 
-    <?php
     function __construct(View $View, $settings = array())
 
 When overriding the constructor you should always call `parent::__construct` as
@@ -803,13 +791,11 @@ this, just change ``$_minimizedAttributeFormat`` in your AppHelper to ``%s``.
 
 To use with Html/Form helpers and others, you can write::
 
-    <?php
     $this->Form->checkbox('field', array('checked' => true, 'value' => 'some_value'));
 
 Other facility is that minimized attributes can be passed as item and not as
 key. For example::
 
-    <?php
     $this->Form->checkbox('field', array('checked', 'value' => 'some_value'));
 
 Note that ``checked`` have a numeric key.
@@ -938,7 +924,6 @@ afterRender it is the view file being rendered. For beforeLayout and afterLayout
 it is the layout file being rendered. Your helpers function signatures should
 look like::
 
-    <?php
     function beforeRender($viewFile) {
 
     }
@@ -1030,20 +1015,17 @@ Models
 Model relationships are now lazy loaded. You can run into a situation where
 assigning a value to a nonexistent model property will throw errors::
 
-    <?php
     $Post->inexistentProperty[] = 'value';
 
 will throw the error "Notice: Indirect modification of overloaded property
 $inexistentProperty has no effect". Assigning an initial value to the property
 solves the issue::
 
-    <?php
     $Post->nonexistentProperty = array();
     $Post->nonexistentProperty[] = 'value';
 
 Or just declare the property in the model class::
 
-    <?php
     class Post {
         public $nonexistentProperty = array();
     }
@@ -1087,12 +1069,10 @@ List of Changes
 * API for DboSource::execute has changed, it will now take an array of query
   values as second parameter::
 
-    <?php
     public function execute($sql, $params = array(), $options = array())
 
   became::
 
-    <?php
     public function execute($sql, $options = array(), $params = array())
 
   third parameter is meant to receive options for logging, currently it only
@@ -1102,7 +1082,6 @@ List of Changes
 * DboSource::fetchAll() now accepts an array as second parameter, to pass values
   to be bound to the query, third parameter was dropped. Example::
 
-    <?php
     $db->fetchAll('SELECT * from users where username = ? AND password = ?', array('jhon', '12345'));
     $db->fetchAll('SELECT * from users where username = :username AND password = :password', array('username' => 'jhon', 'password' => '12345'));
 
@@ -1145,7 +1124,6 @@ AclBehavior and TreeBehavior
 
 - No longer supports strings as configuration. Example::
 
-    <?php
     public $actsAs = array(
         'Acl' => 'Controlled',
         'Tree' => 'nested'
@@ -1153,7 +1131,6 @@ AclBehavior and TreeBehavior
 
   became::
 
-    <?php
     public $actsAs = array(
         'Acl' => array('type' => 'Controlled'),
         'Tree' => array('type' => 'nested')
@@ -1167,14 +1144,12 @@ Plugins no longer magically append their plugin prefix to components, helpers
 and models used within them. You must be explicit with the components, models,
 and helpers you wish to use. In the past::
 
-    <?php
     public $components = array('Session', 'Comments');
 
 Would look in the controller's plugin before checking app/core components. It
 will now only look in the app/core components. If you wish to use objects from a
 plugin you must put the plugin name::
 
-    <?php
     public $components = array('Session', 'Comment.Comments');
 
 This was done to reduce hard to debug issues caused by magic misfiring. It also
@@ -1272,7 +1247,6 @@ the key "driver" is not accepted anymore, only "datasource", in order to make it
 more consistent. Also, as the datasources have been moved to packages you will
 need to pass the package they are located in. Example::
 
-    <?php
     public $default = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,

@@ -40,7 +40,6 @@ O CakeRequest expõe várias maneiras de acessar os parâmetros de uma requisiç
 A primeira é o acesso por índices de array, a segunda maneira é pelo
 ``$this->request->params`` e a terceira por propriedades do objeto::
 
-    <?php
     $this->request['controller'];
     $this->request->controller;
     $this->request->params['controller']
@@ -54,7 +53,6 @@ além dos :ref:`route-elements`, muitas vezes você precisará ter acesso aos
 :ref:`passed-arguments` e os :ref:`named-parameters`.  Ambos estarão disponíveis
 no objeto da classe CakeRequest::
 
-    <?php
     // Argumentos passados
     $this->request['pass'];
     $this->request->pass;
@@ -89,7 +87,6 @@ Acessando parâmetros do tipo querystring
 Parâmetros do tipo "query string" presentes tipicamente em requisições do tipo
 GET podem ser lidos usando :php:attr:`CakeRequest::$query`::
 
-    <?php
     // Sendo a url /posts/index?page=1&sort=title
     $this->request->query['page'];
 
@@ -104,7 +101,6 @@ usando o atributo :php:attr:`CakeRequest::$data`. Qualquer dado passado por
 formulários que contenha o prefixo ``data`` terá este prefixo removido.
 Por exemplo::
 
-    <?php
     // Uma tag input com o atributo "name" igual a 'data[Post][title]' é
     acessavel em:
     
@@ -115,7 +111,6 @@ você pode acessar a propriedade data como também pode usar o método
 erros. Qualquer chave que não exista irá retornar o valor ``null``. Desta
 maneira não é preciso verificar se a chave existe antes de usá-la::
 
-    <?php
     $foo = $this->request->data('Valor.que.nao.existe');
     // $foo == null
 
@@ -128,7 +123,6 @@ entradas de dados com qualquer formato usando o método
 :php:meth:`CakeRequest::input()`. Fornecendo uma função de decodificação, você
 pode receber o conteúdo em um formato desserializado::
 
-    <?php
     // Obtém dados codificados no formato JSON submetidos por um método PUT/POST
     $data = $this->request->input('json_decode');
 
@@ -138,7 +132,6 @@ um XML convertido em um objeto ``DOMDocument``, o método
 :php:meth:`CakeRequest::input()` também suporta a passagem de parâmetros
 adicionais::
 
-    <?php
     // Obtém dados codificados em XML submetidos por um método PUT/POST
     $data = $this->request->input('Xml::build', array('return' => 'domdocument'));
 
@@ -159,7 +152,6 @@ para detectar vários aspectos de uma requisição. Estes métodos foram
 transferidos para o ``CakeRequest`` e esta classe oferece uma nova interface
 enquanto mantem certa compatibilidade com as versões anteriores do Cake::
 
-    <?php
     $this->request->is('post');
     $this->request->isPost();
 
@@ -184,7 +176,6 @@ detectores que você pode criar:
 
 Alguns exemplos de uso::
 
-    <?php
     // Adiciona um detector baseado em variáveis do ambiente
     $this->request->addDetector('post', array('env' => 'REQUEST_METHOD', 'value' => 'POST'));
     
@@ -286,7 +277,6 @@ API do CakeRequest
     Permite você acessar qualquer cabeçalho ``HTTP_*`` que tenha sido usado na
     requisição::
 
-        <?php
         $this->request->header('User-Agent');
 
     Retornaria o "user agent" utilizado para a solicitação.
@@ -304,7 +294,6 @@ API do CakeRequest
     leitura e modificação dos dados da requisição. Chamadas também podem ser
     encadeadas::
 
-        <?php
         // Modifica alguns dados da requisição, assim você pode popular
         // previamente alguns campos dos formulários.
         $this->request->data('Post.title', 'New post')
@@ -336,7 +325,6 @@ API do CakeRequest
  
     Verifica apenas um tipo::
 
-        <?php
         $this->request->accepts('application/json');
 
 .. php:staticmethod:: acceptLanguage($language)
@@ -346,12 +334,10 @@ API do CakeRequest
 
     Obtém uma lista dos idiomas aceitos::
 
-        <?php
         CakeRequest::acceptLanguage(); 
 
     Verifica se um idioma específico é aceito::
 
-        <?php
         CakeRequest::acceptLanguage('es-es'); 
 
 .. php:attr:: data
@@ -426,7 +412,6 @@ método :php:meth:`CakeResponse::type()`. Se sua aplicação precisa lidar com
 tipos de conteúdos que não estão inclusos no CakeResponse, você também poderá
 mapear estes tipos utilizando o método ``type()``::
 
-    <?php
     // Adiciona o tipo vCard
     $this->response->type(array('vcf' => 'text/v-card'));
 
@@ -447,7 +432,6 @@ sendo arquivos para downloads. Você pode conseguir este resultado usando
 O método :php:meth:`CakeResponse::download()` permite você enviar respostas
 como arquivos para download::
 
-    <?php
     function sendFile($id) {
         $this->autoRender = false;
 
@@ -470,7 +454,6 @@ Algumas vezes você precisará forçar o browser do cliente a não fazer cache d
 resultados de uma ação de um controller. :php:meth:`CakeResponse::disableCache()`
 é destinado para estes casos.::
 
-    <?php
     function index() {
         // faz alguma coisa.
         $this->response->disableCache();
@@ -484,7 +467,6 @@ resultados de uma ação de um controller. :php:meth:`CakeResponse::disableCache
 Você também poderá dizer ao cliente para fazer cache da resposta. Usando
 :php:meth:`CakeResponse::cache()`::
 
-    <?php
     function index() {
         // faz alguma coisa.
         $this->response->cache(time(), '+5 days');
@@ -500,7 +482,6 @@ Definindo Cabeçalhos
 :php:meth:`CakeResponse::header()`. Podendo ser chamada de algumas formas
 diferentes::
 
-    <?php
     // Define um único cabeçalho
     $this->response->header('Location', 'http://example.com');
 
@@ -525,7 +506,6 @@ espalhados em diversos objetos, você precisa de apenas um simples objeto para
 "forjar" e utilizar nos controllers e componentes. Isto lhe ajuda a criar seus
 testes unitários mais rapidamente::
 
-    <?php
     function testSomething() {
         $this->controller->response = $this->getMock('CakeResponse');
         $this->controller->response->expects($this->once())->method('header');

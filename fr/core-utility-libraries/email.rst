@@ -3,109 +3,106 @@ CakeEmail
 
 .. php:class:: CakeEmail(mixed $config = null)
 
-``CakeEmail`` is a new class to send email. With this
-class you can send email from any place of your application. In addition to
-using the EmailComponent from your controller, you can also send mail from
-Shells, and Models.
+``CakeEmail`` est une nouvelle classe pour envoyer des emails. Avec cette 
+classe, vous pouvez envoyer des emails de n'importe quel endroit de votre 
+application. En plus d'utiliser le EmailComponent à partir de vos 
+controllers, vous pouvez aussi envoyer des mails à partir des Shells et des 
+Models.
 
-This class replaces the :php:class:`EmailComponent` and gives more flexibility
-in sending emails. For example, you can create your own transports to send
-email instead of using the provided smtp and mail.
+Cette classe remplace :php:class:`EmailComponent` et donne plus de flexibilité 
+dans l'envoi d'emails. Par exemple, vous pouvez créer vos propres transports 
+pour envoyer l'email au lieu d'utiliser les smtp et mail fournis.
 
-Basic usage
-===========
+Utilisation basique
+===================
 
-First of all, you should ensure the class is loaded using :php:meth:`App::uses()`::
+Premièrement, vous devez vous assurer que la classe est chargée en utilisant 
+:php:meth:`App::uses()`::
 
-    <?php
     App::uses('CakeEmail', 'Network/Email');
 
-Using CakeEmail is similar to using :php:class:`EmailComponent`. But instead of
-using attributes you must use methods. Example::
+L'utilisation de CakeEmail est similaire à l'utilisation de 
+:php:class:`EmailComponent`. Mais au lieu d'utiliser les attributs, vous devez 
+utiliser les méthodes. Exemple::
 
-    <?php
     $email = new CakeEmail();
     $email->from(array('me@example.com' => 'My Site'));
     $email->to('you@example.com');
     $email->subject('About');
     $email->send('My message');
 
-To simplify things, all of the setter methods return the instance of class.
-You can re-write the above code as::
+Pour simplifier les choses, toutes les méthodes de setter retournent l'instance 
+de classe. Vous pouvez ré-écrire le code ci-dessous::
 
-    <?php
     $email = new CakeEmail();
     $email->from(array('me@example.com' => 'My Site'))
         ->to('you@example.com')
         ->subject('About')
-        ->send('My message');
+        ->send('Mon message');
 
-Choosing the sender
--------------------
+Choisir l'emetteur
+------------------
 
-When sending email on behalf of other people it's often a good idea to define the
-original sender using the Sender header.  You can do so using ``sender()`` ::
+Quand on envoie des emails de la part d'autre personne, c'est souvent une 
+bonne idée de définir l'emetteur original en utilisant le header Sender. 
+Vous pouvez faire ceci en utilisant ``sender()`` ::
 
-    <?php
     $email = new CakeEmail();
     $email->sender('app@example.com', 'MyApp emailer');
 
 
 .. note::
 
-    It's also a good idea to set the envelope sender when sending mail on another
-    person's behalf. This prevents them from getting any messages about
-    deliverability.
+    C'est aussi une bonne idée de définir l'envelope de l'emetteur quand on 
+    envoie un mail de la part d'une autre personne. Cela les empêche d'obtenir 
+    tout message sur la délivrance.
 
 
 Configuration
 =============
 
-Similar of database configuration, emails can have a class to centralize all the
-configuration.
+La configuration est la même que pour la base de données, les emails peuvent 
+avoir une classe pour centraliser toute la configuration.
 
-Create the file ``app/Config/email.php`` with the class ``EmailConfig``.
-The ``app/Config/email.php.default`` has an example of this file.
+Créer le fichier ``app/Config/email.php`` avec la classe ``EmailConfig``.
+Le fichier ``app/Config/email.php.default`` donne un exemple de ce fichier.
 
-``CakeEmail`` will create an instance of the ``EmailConfig`` class to access the
-config. If you have dynamic data to put in the configs, you can use the
-constructor to do that::
+``CakeEmail`` va créer une instance de la classe ``EmailConfig`` pour accéder à 
+config. Si vous avez des données dynamiques à mettre dans les configs, vous 
+pouvez utiliser le constructeur pour le faire::
 
-    <?php
     class EmailConfig {
         public function __construct() {
-            // Do conditional assignments here.
+            // Faire des assignments conditionnel ici.
         }
     }
 
-It is not required to create ``app/Config/email.php``, ``CakeEmail`` can be used
-without it and use respective methods to set all configurations separately or
-load an array of configs.
+Il n'est pas nécéssaire de créer ``app/Config/email.php``, ``CakeEmail`` peut 
+être utilisé sans lui et utiliser les méthodes respectives pour définir toutes 
+les configurations séparément ou charger un tableau de configs.
 
-To load a config from ``EmailConfig`` you can use the ``config()`` method or pass it
-to the constructor of ``CakeEmail``::
+Pour charger un config à partir de ``EmailConfig``, vous pouvez utiliser la 
+méthode ``config()`` ou la passer au constructeur de ``CakeEmail``::
 
-    <?php
     $email = new CakeEmail();
     $email->config('default');
 
-    //or in constructor::
+    //ou dans un constructeur::
     $email = new CakeEmail('default');
 
-Instead of passing a string which matches the configuration name in ``EmailConfig``
-you can also just load an array of configs::
+Plutôt que de passer une chaîne qui correspond au nom de la configuration dans 
+``EmailConfig``, vous pouvez aussi juste charger un tableau de configs::
 
-    <?php
     $email = new CakeEmail();
     $email->config(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
 
-    //or in constructor::
+    //ou dans un constructeur::
     $email = new CakeEmail(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
 
-You can configure SSL SMTP servers, like GMail. To do so, put the ``'ssl://'``
-at prefix in the host and configure the port value accordingly.  Example::
+Vous pouvez configurer les serveurs SSL SMTP, comme GMail. Pour faire ceci, 
+mettez ``'ssl://'`` en préfixe dans le host et configurez la valeur du port 
+selon. Exemple::
 
-    <?php
     class EmailConfig {
         public $gmail = array(
             'host' => 'ssl://smtp.gmail.com',
@@ -118,78 +115,88 @@ at prefix in the host and configure the port value accordingly.  Example::
 
 .. note::
 
-    To use this feature, you will need to have the SSL configured in your PHP
-    install.
+    Pour utiliser cette fonctionnalité, vous aurez besoin d'avoir SSL configuré 
+    dans votre installation PHP.
 
 .. _email-configurations:
 
 Configurations
 --------------
 
-The following configuration keys are used:
+La clés de configuration suivantes sont utilisés:
 
-- ``'from'``: Email or array of sender. See ``CakeEmail::from()``.
-- ``'sender'``: Email or array of real sender. See ``CakeEmail::sender()``.
-- ``'to'``: Email or array of destination. See ``CakeEmail::to()``.
-- ``'cc'``: Email or array of carbon copy. See ``CakeEmail::cc()``.
-- ``'bcc'``: Email or array of blind carbon copy. See ``CakeEmail::bcc()``.
-- ``'replyTo'``: Email or array to reply the e-mail. See ``CakeEmail::replyTo()``.
-- ``'readReceipt'``: Email address or an array of addresses to receive the
-  receipt of read. See ``CakeEmail::readReceipt()``.
-- ``'returnPath'``: Email address or and array of addresses to return if have
-  some error. See ``CakeEmail::returnPath()``.
-- ``'messageId'``: Message ID of e-mail. See ``CakeEmail::messageId()``.
-- ``'subject'``: Subject of the message. See ``CakeEmail::subject()``.
-- ``'message'``: Content of message. Do not set this field if you are using rendered content.
-- ``'headers'``: Headers to be included. See ``CakeEmail::setHeaders()``.
-- ``'viewRender'``: If you are using rendered content, set the view classname.
-  See ``CakeEmail::viewRender()``.
-- ``'template'``: If you are using rendered content, set the template name. See
-  ``CakeEmail::template()``.
-- ``'layout'``: If you are using rendered content, set the layout to render. If
-  you want to render a template without layout, set this field to null. See
-  ``CakeEmail::template()``.
-- ``'viewVars'``: If you are using rendered content, set the array with
-  variables to be used in the view. See ``CakeEmail::viewVars()``.
-- ``'attachments'``: List of files to attach. See ``CakeEmail::attachments()``.
-- ``'emailFormat'``: Format of email (html, text or both). See ``CakeEmail::emailFormat()``.
-- ``'transport'``: Transport name. See ``CakeEmail::transport()``.
-- ``'log'``: Log level to log the email headers and message. ``true`` will use
-  LOG_DEBUG. See also ``CakeLog::write()``
+- ``'from'``: Email ou un tableau d'emmeteur. Regardez ``CakeEmail::from()``.
+- ``'sender'``: Email ou un tableau d'emetteur réel. Regardez 
+  ``CakeEmail::sender()``.
+- ``'to'``: Email ou un tableau de destination. Regardez ``CakeEmail::to()``.
+- ``'cc'``: Email ou un tableau de copy carbon. Regardez ``CakeEmail::cc()``.
+- ``'bcc'``: Email ou un tableau de copy carbon blind. Regardez 
+  ``CakeEmail::bcc()``.
+- ``'replyTo'``: Email ou un tableau de repondre à cet e-mail. Regardez 
+  ``CakeEmail::replyTo()``.
+- ``'readReceipt'``: Adresse Email ou un tableau d'adresses pour recevoir un 
+  récepissé de lecture. Regardez ``CakeEmail::readReceipt()``.
+- ``'returnPath'``: Adresse Email ou un tableau des adresses à retourner si 
+  vous avez une erreur. Regardez ``CakeEmail::returnPath()``.
+- ``'messageId'``: ID du Message de l'e-mail. Regardez 
+  ``CakeEmail::messageId()``.
+- ``'subject'``: Sujet du message. Regardez ``CakeEmail::subject()``.
+- ``'message'``: Contenu du message. Ne définissez pas ce champ si vous 
+  utilisez un contenu rendu.
+- ``'headers'``: Headers à inclure. Regardez ``CakeEmail::setHeaders()``.
+- ``'viewRender'``: Si vous utilisez un contenu rendu, définissez le nom de 
+  classe de la vue. Regardez ``CakeEmail::viewRender()``.
+- ``'template'``: Si vous utilisez un contenu rendu, définissez le nom du 
+  template. Regardez ``CakeEmail::template()``.
+- ``'layout'``: Si vous utilisez un contenu rendu, définissez le layout à 
+  rendre. Si vous voulez rendre un template sans layout, définissez ce champ 
+  à null. Regardez ``CakeEmail::template()``.
+- ``'viewVars'``: Si vous utilisez un contenu rendu, définissez le tableau avec 
+  les variables devant être rendus dans la vue. Regardez 
+  ``CakeEmail::viewVars()``.
+- ``'attachments'``: Liste des fichiers à attacher. Regardez 
+  ``CakeEmail::attachments()``.
+- ``'emailFormat'``: Format de l'email (html, text ou both). Regardez 
+  ``CakeEmail::emailFormat()``.
+- ``'transport'``: Nom du Transport. Regardez ``CakeEmail::transport()``.
+- ``'log'``: Niveau de Log pour connecter les headers del'email headers et le 
+  message. ``true`` va utiliser LOG_DEBUG. Regardez aussi ``CakeLog::write()``
 
-All these configurations are optional, except ``'from'``. If you put more
-configuration in this array, the configurations will be used in the
-:php:meth:`CakeEmail::config()` method and passed to the transport class ``config()``.
-For example, if you are using smtp transport, you should pass the host, port and
-other configurations.
+Toutes ces configurations sont optionnelles, excepté ``'from'``. Si vous mettez 
+plus de configuration dasn ce tableau, les configurations seront utilisées dans 
+la méthode :php:meth:`CakeEmail::config()` et passées à la classe de transport 
+``config()``.
+Par exemple, si vous utilisez le transport smtp, vous devez passer le host, 
+port et autres configurations.
 
 .. note::
 
-    The values of above keys using Email or array, like from, to, cc etc. will be passed
-    as first parameter of corresponding methods. The equivalent for:
-    ``CakeEmail::from('my@example.com', 'My Site')``
-    would be defined as  ``'from' => array('my@example.com' => 'My Site')`` in your config
+    Les valeurs des clés ci-dessus utilisant Email ou un tableau, comme from, 
+    to, cc etc. seront passés en premier paramètre des méthodes 
+    correspondantes. L'equivalent pour 
+    ``CakeEmail::from('my@example.com', 'My Site')`` sera défini comme 
+    ``'from' => array('my@example.com' => 'My Site')`` dans votre config
 
-Setting headers
----------------
+Définir les headers
+-------------------
 
-In ``CakeEmail`` you are free to set whatever headers you want. When migrating
-to use CakeEmail, do not forget to put the ``X-`` prefix in your headers.
+Dans ``CakeEmail``, vous êtes libres de définir les headers que vous souhaitez.
+Si vous migrez pour utiliser CakeEmail, n'oubliez pas de mettre le préfixe 
+``X-`` dans vos headers.
 
-See ``CakeEmail::setHeaders()`` and ``CakeEmail::addHeaders()``
+Regardez ``CakeEmail::setHeaders()`` et ``CakeEmail::addHeaders()``
 
-Sending templated emails
-------------------------
+Envoyer les emails templatés
+----------------------------
 
-Emails are often much more than just a simple text message.  In order
-to facilitate that, CakePHP provides a way to send emails using CakePHP's
-:doc:`view layer </views>`.
+Les Emails sont souvent bien plus que de simples message textes. Afin de 
+faciliter cela, CakePHP fournit une façon d'envoyer les emails en utilisant la 
+:doc:`view layer </views>` de CakePHP.
 
-The templates for emails reside in a special folder in your applications
-``View`` directory.  Email views can also use layouts, and elements just like
-normal views::
+Les templates pour les emails se placent dans un dossier spécial dans le 
+répertoire ``View`` de votre application. Les vues des emails peuvent aussi 
+utiliser les layouts et éléments tout comme les vues normales::
 
-    <?php
     $email = new CakeEmail();
     $email->template('welcome', 'fancy')
         ->emailFormat('html')
@@ -197,11 +204,10 @@ normal views::
         ->from('app@domain.com')
         ->send();
 
-The above would use ``app/View/Emails/html/welcome.ctp`` for the view,
-and ``app/View/Layouts/Emails/html/fancy.ctp`` for the layout. You can
-send multipart templated email messages as well::
+Ce qui est au-dessus utilise ``app/View/Emails/html/welcome.ctp`` pour la vue,
+et ``app/View/Layouts/Emails/html/fancy.ctp`` pour le layout. Vous pouvez 
+aussi envoyer des messages email templaté multipart::
 
-    <?php
     $email = new CakeEmail();
     $email->template('welcome', 'fancy')
         ->emailFormat('both')
@@ -209,64 +215,63 @@ send multipart templated email messages as well::
         ->from('app@domain.com')
         ->send();
 
-This would use the following view files:
+Ceci utiliserait les fichiers de vue suivants:
 
 * ``app/View/Emails/text/welcome.ctp``
 * ``app/View/Layouts/Emails/text/fancy.ctp``
 * ``app/View/Emails/html/welcome.ctp``
 * ``app/View/Layouts/Emails/html/fancy.ctp``
 
-When sending templated emails you have the option of sending either
-``text``, ``html`` or ``both``.
+Quand on envoie les emails templatés, vous avez la possibilité d'envoyer soit 
+``text``, ``html`` soit ``both``.
 
-You can set view variables with ``CakeEmail::viewVars()``::
+Vous pouvez définir des variables de vue avec ``CakeEmail::viewVars()``::
 
-    <?php
     $email = new CakeEmail('templated');
     $email->viewVars(array('value' => 12345));
 
-In your email templates you can use these with::
+Dans votre email template, vous pouvez utiliser ceux-ci avec::
 
-    <p>Here is your value: <b><?php echo $value; ?></b></p>
+    <p>Ici est votre valeur: <b><?php echo $value; ?></b></p>
 
-You can use helpers in emails as well, much like you can in normal view files.
-By default only the :php:class:`HtmlHelper` is loaded.  You can load additional
-helpers using the ``helpers()`` method::
+Vous pouvez aussi utiliser les helpers dans les emails, un peu comme vous 
+pouvez dans des fichiers normaux de vue. Par défaut, seul 
+:php:class:`HtmlHelper` est chargé. Vous pouvez chargez des helpers 
+supplémentaires en utilisant la méthode ``helpers()``::
 
-    <?php
     $email->helpers(array('Html', 'Custom', 'Text'));
 
-When setting helpers be sure to include 'Html' or it will be removed from the
-helpers loaded in your email template.
+Quand vous définissez les helpers, assurez vous d'inclure 'Html' ou il sera 
+retiré des helpers chargés dans votre template d'email.
 
-If you want to send email using templates in a plugin you can use the familiar
-:term:`syntaxe de plugin` to do so::
+Si vous voulez envoyer un email en utilisant templates dans un plugin, vous 
+pouvez utiliser la :term:`syntaxe de plugin` familière pour le faire::
 
-    <?php
     $email = new CakeEmail();
     $email->template('Blog.new_comment', 'Blog.auto_message')
 
-The above would use templates from the Blog plugin as an example.
+Ce qui est au-dessus utiliserait les templates à partir d'un plugin de Blog par 
+exemple.
 
 
-Sending attachments
--------------------
+Envoyer les pièces jointes
+--------------------------
 
-You can attach files to email messages as well.  There are a few
-different formats depending on what kind of files you have, and how
-you want the filenames to appear in the recipient's mail client:
+Vous pouvez aussi attacher des fichiers aux messages d'email. Il y a quelques 
+formats différents qui dépendent de quel type de fichier vous avez, et comment 
+vous voulez que les noms de fichier apparaissent dans le mail de réception du 
+client:
 
-1. String: ``$email->attachments('/full/file/path/file.png')`` will attach this
-   file with the name file.png.
-2. Array: ``$email->attachments(array('/full/file/path/file.png')`` will have
-   the same behavior as using a string.
-3. Array with key:
-   ``$email->attachments(array('photo.png' => '/full/some_hash.png'))`` will
-   attach some_hash.png with the name photo.png. The recipient will see
-   photo.png, not some_hash.png.
-4. Nested arrays::
+1. Chaîne de caractères: ``$email->attachments('/full/file/path/file.png')`` va 
+   attacher ce fichier avec le nom file.png.
+2. Tableau: ``$email->attachments(array('/full/file/path/file.png')`` aura le 
+   même comportement qu'en utilisant une chaîne de caractères.
+3. Tableau avec clé:
+   ``$email->attachments(array('photo.png' => '/full/some_hash.png'))`` va
+   attacher some_hash.png avec le nom photo.png. Le récipiendaire va voir 
+   photo.png, pas some_hash.png.
+4. Tableaux imbriqués::
 
-    <?php
     $email->attachments(array(
         'photo.png' => array(
             'file' => '/full/some_hash.png',
@@ -275,89 +280,94 @@ you want the filenames to appear in the recipient's mail client:
         )
     ));
 
-   The above will attach the file with different mimetype and with custom
-   Content ID (when set the content ID the attachment is transformed to inline).
-   The mimetype and contentId are optional in this form.
+   Ce qui est au-dessus va attacher le fichier avec différent mimetype et avec 
+   un content ID personnalisé (Quand vous définissez le content ID, la pièce 
+   jointe est transformée en inline). Le mimetype et contentId sont optionels 
+   dans ce formulaire.
 
-  4.1. When you are using the ``contentId``, you can use the file in the html
-  body like ``<img src="cid:my-content-id">``.
+  4.1. Quand vous utilisez ``contentId``, vous pouvez utiliser le fichier dans 
+  corps html comme ``<img src="cid:my-content-id">``.
 
-Using transports
-----------------
+Utiliser les transports
+-----------------------
 
-Transports are classes designed to send the e-mail over some protocol or method.
-CakePHP support the Mail (default), Debug and Smtp transports.
+Les Transports sont des classes destinés à envoyer l'email selon certain 
+protocoles ou méthodes. CakePHP supporte les transports Mail (par défaut), 
+Debug et Smtp.
 
-To configure your method, you must use the :php:meth:`CakeEmail::transport()`
-method or have the transport in your configuration
+Pour configurer votre méthode, vous devez utiliser la méthode 
+:php:meth:`CakeEmail::transport()` ou avoir transport dans votre configuration.
 
-Creating custom Transports
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Créer des Transports personnalisés
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You are able to create your custom transports to integrate with others email
-systems (like SwiftMailer). To create your transport, first create the file
-``app/Lib/Network/Email/ExampleTransport.php`` (where Example is the name of your
-transport). To start off your file should look like::
+Vous pouvez créer vos transports personnalisés pour intégrer avec d'autres 
+systèmes email (comme SwiftMailer). Pour créer votre transport, créez tout 
+d'abord le fichier ``app/Lib/Network/Email/ExampleTransport.php`` (où 
+Exemple est le nom de votre transport). Pour commencer, votre fichier devrait 
+ressembler à cela::
 
-    <?php
     App::uses('AbstractTransport', 'Network/Email');
 
-    class ExampleTransport extends AbstractTransport {
+    class ExempleTransport extends AbstractTransport {
 
         public function send(CakeEmail $email) {
-            // magic inside!
+            // magique à l'intérieur!
         }
 
     }
 
-You must implement the method ``send(CakeEmail $email)`` with your custom logic.
-Optionally, you can implement the ``config($config)`` method.  ``config()`` is
-called before send() and allows you to accept user configurations. By default,
-this method puts the configuration in protected attribute ``$_config``.
+Vous devez intégrer la méthode ``send(CakeEmail $email)`` avec votre 
+logique personnalisée. En option, vous pouvez intégrer la méthode 
+``config($config)``. ``config()`` est appelé avant send() et vous permet 
+d'accepter les configurations de l'utilisateur. Par défaut, cette méthode 
+met la configuration dans l'attribut protégé ``$_config``.
 
-If you need to call additional methods on the transport before send, you can use
-:php:meth:`CakeEmail::transportClass()` to get an instance of the transport.
-Example::
+Si vous avez besoin d'appeler des méthodes supplémentaires sur le transport 
+avant l'envoi, vous pouvez utiliser :php:meth:`CakeEmail::transportClass()` 
+pour obtenir une instance du transport.
+Exemple::
 
-    <?php
     $yourInstance = $email->transport('your')->transportClass();
     $yourInstance->myCustomMethod();
     $email->send();
 
 
-Sending messages quickly
-========================
+Envoyer des messages rapidement
+===============================
 
-Sometimes you need a quick way to fire off an email, and you don't necessarily
-want do setup a bunch of configuration ahead of time.
-:php:meth:`CakeEmail::deliver()` is intended for that purpose.
+Parfois vous avez besoin d'une façon rapide d'envoyer un email, et vous n'avez 
+pas particulièrement envie en même temps de définir un tas de configuration.
+:php:meth:`CakeEmail::deliver()` est présent pour ce cas.
 
-You can create your configuration in ``EmailConfig``, or use an array with all
-options that you need and use the static method ``CakeEmail::deliver()``.
-Example::
+Vous pouvez créer votre configuration dans ``EmailConfig``, ou utiliser un 
+tableau avec toutes les options dont vous aurez besoin et utiliser 
+la méthode statique ``CakeEmail::deliver()``.
+Exemple::
 
-    <?php
     CakeEmail::deliver('you@example.com', 'Subject', 'Message', array('from' => 'me@example.com'));
 
-This method will send an email to you@example.com, from me@example.com with
-subject Subject and content Message.
+Cette méthode va envoyer un email à you@example.com, à partir de me@example.com 
+avec le sujet Subject et le contenu Message.
 
-The return of ``deliver()`` is a :php:class:`CakeEmail` instance with all
-configurations set.  If you do not want to send the email right away, and wish
-to configure a few things before sending, you can pass the 5th parameter as
-false.
+Le retour de ``deliver()`` est une instance de :php:class:`CakeEmail` avec 
+l'ensemble des configurations. Si vous ne voulez pas envoyer l'email 
+maintenant, et souhaitez configurer quelques trucs avant d'envoyer, vous pouvez 
+passer le 5ème paramètre à false.
 
-The 3rd parameter is the content of message or an array with variables (when
-using rendered content).
+Le 3ème paramètre est le contenu du message ou un tableau avec les variables 
+(quand on utilise le contenu rendu).
 
-The 4th parameter can be an array with the configurations or a string with the
-name of configuration in ``EmailConfig``.
+Le 4ème paramètre peut être un tableau avec les configurations ou une chaîne de 
+caractères avec le nom de configuration dans ``EmailConfig``.
 
-If you want, you can pass the to, subject and message as null and do all
-configurations in the 4th parameter (as array or using ``EmailConfig``).
-Check the list of :ref:`configurations <email-configurations>` to see all accepted configs.
+Si vous voulez, vous pouvez passer les to, subject et message à null et faire 
+toutes les configurations dans le 4ème paramètre (en tableau ou en utilisant 
+``EmailConfig``).
+Vérifiez la liste des :ref:`configurations <email-configurations>` pour voir 
+toutes les configs acceptées.
 
 
 .. meta::
-    :title lang=en: CakeEmail
-    :keywords lang=en: sending mail,email sender,envelope sender,php class,database configuration,sending emails,meth,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models
+    :title lang=fr: CakeEmail
+    :keywords lang=fr: envoyer mail,email emmetteur sender,envelope sender,classe php,database configuration,sending emails,meth,shells,smtp,transports,attributes,array,config,flexibilité,php email,nouvel email,sending email,models

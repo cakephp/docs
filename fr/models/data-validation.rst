@@ -1,62 +1,60 @@
-Data Validation
-###############
+Validation des Donnnées
+#######################
 
-Data validation is an important part of any application, as it
-helps to make sure that the data in a Model conforms to the
-business rules of the application. For example, you might want to
-make sure that passwords are at least eight characters long, or
-ensure that usernames are unique. Defining validation rules makes
-form handling much, much easier.
+La validation des données est une partie importante de toute application, 
+puisqu'elle permet de s'assurer que les données d'un model respectent les 
+règles métiers de l'application. Par exemple, vous aimeriez vérifier que les 
+mots de passe sont longs d'au moins huit caractères ou bien vous assurer que 
+les noms d'users sont uniques. La définition des règles de validation 
+facilite grandement la gestion des formulaires.
 
-There are many different aspects to the validation process. What
-we’ll cover in this section is the model side of things.
-Essentially: what happens when you call the save() method of your
-model. For more information about how to handle the displaying of
-validation errors, check out
+Il y a de nombreux aspects différents dans le processus de validation. Ce 
+que nous aborderons dans cette section c'est le côté model des choses. En 
+résumé : ce qui se produit lorsque vous appelez la méthode save() de votre 
+model. Pour obtenir plus d'informations sur la manière d'afficher les erreurs 
+de validation, regardez la section traitant des helpers  
 :doc:`/core-libraries/helpers/form`.
 
-The first step to data validation is creating the validation rules
-in the Model. To do that, use the Model::validate array in the
-Model definition, for example::
+La première étape pour la validation de données est de créer les règles dans 
+le Model. Pour ce faire, utilisez le tableau Model::validate dans la 
+définition du model, par exemple::
 
-    <?php
     class User extends AppModel {  
         public $name = 'User';
         public $validate = array();
     }
 
-In the example above, the ``$validate`` array is added to the User
-Model, but the array contains no validation rules. Assuming that
-the users table has login, password, email and born fields, the
-example below shows some simple validation rules that apply to
-those fields::
+Dans l'exemple ci-dessus, le tableau ``$validate`` est ajouté au model 
+User, mais ce tableau ne contient pas de règles de validation. 
+En supposant que la table "users" ait les champs "login", 
+"mot_de_passe", "email" et "date_de_naissance", l'exemple ci-dessous 
+montre quelques règles simples de validation qui s'appliquent à ces champs::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $validate = array(
             'login' => 'alphaNumeric',
             'email' => 'email',
-            'born'  => 'date'
+            'date_de_naissance'  => 'date'
         );
     }
 
-This last example shows how validation rules can be added to model
-fields. For the login field, only letters and numbers will be
-accepted, the email should be valid, and born should be a valid
-date. Defining validation rules enables CakePHP’s automagic showing
-of error messages in forms if the data submitted does not follow
-the defined rules.
 
-CakePHP has many validation rules and using them can be quite easy.
-Some of the built-in rules allow you to verify the formatting of
-emails, URLs, and credit card numbers – but we’ll cover these in
-detail later on.
+Ce dernier exemple montre comment des règles de validation peuvent être 
+ajoutées aux champs d'un model. Pour le champ 'login', seules les lettres 
+et les chiffres sont autorisés, l'email doit être valide et la date de 
+naissance doit être une date valide. La définition de règles de validation 
+active l'affichage "automagique" de messages d'erreurs dans les formulaires 
+par CakePHP, si les données saisies ne respectent pas les règles définies.
 
-Here is a more complex validation example that takes advantage of
-some of these built-in validation rules::
+CakePHP a de nombreuses règles et leur utilisation peut être très simple. 
+Certaines de ces règles intégrées vous permettent de vérifier le format des 
+adresses emails, des URLs, des numéros de carte de crédit, etc. - mais nous 
+couvrirons cela en détail plus loin.
 
-    <?php
+Voici un autre exemple de validation plus complexe qui tire avantage de 
+quelques-unes de ces règles pré-définies::
+
     class User extends AppModel {
         public $name = 'User';
         public $validate = array(
@@ -64,135 +62,128 @@ some of these built-in validation rules::
                 'alphaNumeric' => array(
                     'rule'     => 'alphaNumeric',
                     'required' => true,
-                    'message'  => 'Alphabets and numbers only'
+                    'message'  => 'Chiffres et lettres uniquement !'
                 ),
                 'between' => array(
                     'rule'    => array('between', 5, 15),
-                    'message' => 'Between 5 to 15 characters'
+                    'message' => 'Entre 5 et 15 caractères'
                 )
             ),
-            'password' => array(
+            'mot_de_passe' => array(
                 'rule'    => array('minLength', '8'),
-                'message' => 'Minimum 8 characters long'
+                'message' => '8 caractères minimum'
             ),
             'email' => 'email',
-            'born' => array(
+            'date_de_naissance' => array(
                 'rule'       => 'date',
-                'message'    => 'Enter a valid date',
+                'message'    => 'Entrez une date valide',
                 'allowEmpty' => true
             )
         );
     }
 
-Two validation rules are defined for login: it should contain
-letters and numbers only, and its length should be between 5 and
-15. The password field should be a minimum of 8 characters long.
-The email should be a valid email address, and born should be a
-valid date. Also, notice how you can define specific error messages
-that CakePHP will use when these validation rules fail.
+Deux règles de validation sont définies pour le login : il doit contenir 
+des lettres et des chiffres uniquement et sa longueur doit être comprise 
+entre 5 et 15. Le mot de passe doit avoir au minimum 8 caractères. L'email 
+doit avoir un format correct et la date de naissance être une date valide. 
+Vous pouvez voir dans cet exemple comment personnaliser les messages que 
+CakePHP affichera en cas de non respect de ces règles.
 
-As the example above shows, a single field can have multiple
-validation rules. And if the built-in rules do not match your
-criteria, you can always add your own validation rules as
-required.
+Comme le montre l'exemple ci-dessus, un seul champ peut avoir plusieurs règles 
+de validation. Si les règles pré-définies ne correspondent pas à vos critères, 
+vous pouvez toujours ajouter vos propres règles de validation, selon vos 
+besoins.
 
-Now that you’ve seen the big picture on how validation works, let’s
-look at how these rules are defined in the model. There are three
-different ways that you can define validation rules: simple arrays,
-single rule per field, and multiple rules per field.
+Maintenant que nous avons vu, en gros, comment la validation fonctionne, voyons 
+comme ces règles sont définies dans le model. Il y a trois manières 
+différentes pour définir les règles de validation : tableaux simples, une règle 
+par champ et plusieurs règles par champ.
 
+Règles simples
+==============
 
-Simple Rules
-============
+Comme le suggère le nom, c'est la manière la plus simple de définir une 
+règle de validation. La syntaxe générale pour définir des règles de cette 
+manière est::
 
-As the name suggests, this is the simplest way to define a
-validation rule. The general syntax for defining rules this way
-is::
+    public $validate = array('nomChamp' => 'nomRegle');
 
-    <?php
-    public $validate = array('fieldName' => 'ruleName');
+Où 'nomChamp' est le nom du champ pour lequel la règle est définie, et 
+'nomRegle' est un nom prédéfini, comme 'alphaNumeric', 'email' ou 'isUnique'.
 
-Where, 'fieldName' is the name of the field the rule is defined
-for, and ‘ruleName’ is a pre-defined rule name, such as
-'alphaNumeric', 'email' or 'isUnique'.
+Par exemple, pour s'assurer que l'user fourni une adresse email 
+correcte, vous pouvez utiliser cette règle::
 
-For example, to ensure that the user is giving a well formatted
-email address, you could use this rule::
-
-    <?php
-    public $validate = array('user_email' => 'email');
+    public $validate = array('email_user' => 'email');
 
 
-One Rule Per Field
-==================
+Une règle par champ
+===================
 
-This definition technique allows for better control of how the
-validation rules work. But before we discuss that, let’s see the
-general usage pattern adding a rule for a single field::
+Cette technique de définition permet un meilleur contrôle sur le fonctionnement 
+des règles de validation. Mais avant d'aborder ce point, regardons le schéma 
+d'utilisation général pour ajouter une règle à un seul champ::
 
-    <?php
     public $validate = array(
-        'fieldName1' => array(
-            'rule'       => 'ruleName', // or: array('ruleName', 'param1', 'param2' ...)
+        'champ1' => array(
+            'rule'       => 'nomRegle', // ou bien : array('nomRegle', 'parametre1', 'parametre2' ...)
             'required'   => true,
             'allowEmpty' => false,
-            'on'         => 'create', // or: 'update'
-            'message'    => 'Your Error Message'
+            'on'         => 'create', // ou bien: 'update'
+            'message'    => 'Votre message d\'erreur'
         )
     );
 
-The 'rule' key is required. If you only set 'required' => true, the
-form validation will not function correctly. This is because
-'required' is not actually a rule.
+La clé 'rule' est obligatoire. Si vous définissez uniquement 
+'required' => true, la validation du formulaire ne fonctionnera pas 
+correctement. C'est à cause du fait que 'required' n'est pas à proprement 
+parlé une règle.
 
-As you can see here, each field (only one field shown above) is
-associated with an array that contains five keys: ‘rule’,
-‘required’, ‘allowEmpty’, ‘on’ and ‘message’. Let’s have a closer
-look at these keys.
+Comme vous pouvez le voir ici, chaque champ (un seul est présenté ci-dessus) 
+est associé à un tableau contenant cinq clés : ‘rule‘, ‘required‘, 
+‘allowEmpty‘, ‘on‘ et ‘message‘. Toutes les clés sont optionnelles sauf 
+'rule'. Regardons en détail ces clés.
 
-rule
-----
+La clé 'rule'
+-------------
 
-The 'rule' key defines the validation method and takes either a
-single value or an array. The specified 'rule' may be the name of a
-method in your model, a method of the core Validation class, or a
-regular expression. For more information on the rules available by
-default, see
-:ref:`core-validation-rules`.
+La clé 'rule' définit la méthode de validation et attend soit une valeur 
+simple, soit un tableau. La règle spécifiée peut-être le nom d'une méthode 
+dans votre model, une méthode de la classe globale Validation ou une 
+expression régulière. Pour une liste complète des règles pré-définies, 
+allez voir :ref:`core-validation-rules`.
 
-If the rule does not require any parameters, 'rule' can be a single
-value e.g.::
+Si la règle ne nécessite pas de paramètre, 'rule' peut-être une simple 
+valeur, comme::
 
-    <?php
     public $validate = array(
         'login' => array(
             'rule' => 'alphaNumeric'
         )
     );
 
-If the rule requires some parameters (like the max, min or range),
-'rule' should be an array::
+Si la règle nécessite quelques paramètres (tels que un maximum, un 
+minimum ou une plage de valeurs), 'rule' doit être un tableau::
 
-    <?php
     public $validate = array(
-        'password' => array(
+        'mot_de_passe' => array(
             'rule' => array('minLength', 8)
         )
     );
 
-Remember, the 'rule' key is required for array-based rule
-definitions.
+Souvenez-vous, la clé 'rule' est obligatoire pour les définitions de 
+règles sous forme de tableau.
 
-required
---------
+La clé 'required'
+-----------------
 
-This key accepts either a boolean, or ``create`` or ``update``.  Setting this
-key to ``true`` will make the field always required.  While setting it to
-``create`` or ``update`` will make the field required only for update or  create
-operations. If 'required' is evaluated to true, the field must be present in the
-data array.  For example, if the validation rule has been defined as follows::
+Cette clé doit être définie par une valeur booléenne, ou ``create`` ou 
+``update``. Si 'required' est ``true`` alors le champ doit être présent 
+dans le tableau de données. Tandis que mettre le champ à ``create`` ou 
+``update`` rendra le champ nécessaire seulement lors des opérations de 
+création ou de mise à jour. Par exemple, si la règle de validation a 
+été définie comme suit::
 
-    <?php
     public $validate = array(
         'login' => array(
             'rule'     => 'alphaNumeric',
@@ -200,286 +191,280 @@ data array.  For example, if the validation rule has been defined as follows::
         )
     );
 
-The data sent to the model’s save() method must contain data for
-the login field. If it doesn’t, validation will fail. The default
-value for this key is boolean false.
+Les données envoyées à la méthode save() du model doivent contenir des 
+données pour le champ 'login'. Dans le cas contraire, la validation 
+échouera. La valeur par défaut de cette clé est le booléen 'false'.
 
-``required => true`` does not mean the same as the validation rule
-``notEmpty()``. ``required => true`` indicates that the array *key*
-must be present - it does not mean it must have a value. Therefore
-validation will fail if the field is not present in the dataset,
-but may (depending on the rule) succeed if the value submitted is
-empty ('').
+``required => true`` ne signifie pas la même chose que la règle de validation 
+``notEmpty()``. ``required => true`` indique que la *clé* du tableau doit être 
+présente - cela ne veut pas dire qu'elle doit avoir une valeur. Par 
+conséquent, la validation échouera si le champ n'est pas présent dans le jeu 
+de données, mais pourra réussir (en fonction de la règle) si la valeur soumise 
+est vide ('').
 
 .. versionchanged:: 2.1
-    Support for ``create`` and ``update`` were added.
+    Support pour ``create`` et ``update`` a été ajouté.
 
-allowEmpty
-----------
+La Clé 'allowEmpty'
+-------------------
 
-If set to ``false``, the field value must be **nonempty**, where
-"nonempty" is defined as ``!empty($value) || is_numeric($value)``.
-The numeric check is so that CakePHP does the right thing when
-``$value`` is zero.
+Si définie à ``false``, la valeur du champ doit être **non vide**, ceci 
+étant déterminé par ``!empty($value) || is_numeric($value)``. La vérification 
+numérique est là pour que CakePHP fasse ce qu'il faut quand ``$valeur`` vaut 
+zéro.
 
-The difference between ``required`` and ``allowEmpty`` can be
-confusing. ``'required' => true`` means that you cannot save the
-model without the *key* for this field being present in
-``$this->data`` (the check is performed with ``isset``); whereas,
-``'allowEmpty' => false`` makes sure that the current field *value*
-is nonempty, as described above.
+La différence entre ``required`` et ``allowEmpty`` peut être confuse. 
+``'required' => true`` signifie que vous ne pouvez pas sauvegarder le model, 
+si la *clé* pour ce champ n'est pas présente dans ``$this->data`` (la 
+vérification est réalisé avec isset) ; tandis que ``'allowEmpty' => false`` 
+s'assure que la *valeur* du champ courant est "non vide", comme décrit 
+ci-dessus. 
 
-on
---
+La clé 'on'
+-----------
 
-The 'on' key can be set to either one of the following values:
-'update' or 'create'. This provides a mechanism that allows a
-certain rule to be applied either during the creation of a new
-record, or during update of a record.
+La clé 'on' peut prendre l'une des valeurs suivantes : 'update' ou 'create'. 
+Ceci fournit un mécanisme qui permet à une règle donnée d'être appliquée 
+pendant la création ou la mise à jour d'un enregistrement.
 
-If a rule has defined 'on' => 'create', the rule will only be
-enforced during the creation of a new record. Likewise, if it is
-defined as 'on' => 'update', it will only be enforced during the
-updating of a record.
+Si une règle est définie à 'on' => 'create', elle sera seulement appliquée 
+lors de la création d'un nouvel enregistrement. Autrement, si elle est 
+définie à 'on' => 'update', elle s'appliquera uniquement lors de la mise 
+à jour de l'enregistrement.
 
-The default value for 'on' is null. When 'on' is null, the rule
-will be enforced during both creation and update.
+La valeur par défaut pour 'on' est 'null'. Quand 'on' est nul, la règle 
+s'applique à la fois pendant la création et la mise à jour.
 
-message
--------
+La clé 'message'
+----------------
 
-The message key allows you to define a custom validation error
-message for the rule::
+La clé ‘message’ vous permet de définir un message d'erreur de validation 
+personnalisé pour la règle::
 
-    <?php
     public $validate = array(
-        'password' => array(
+        'mot_de_passe' => array(
             'rule'    => array('minLength', 8),
-            'message' => 'Password must be at least 8 characters long'
+            'message' => 'Le mot de passe doit comporter au moins 8 caractères'
         )
     );
 
-Multiple Rules per Field
-========================
+Plusieurs règles par champs
+===========================
 
-The technique outlined above gives us much more flexibility than
-simple rules assignment, but there’s an extra step we can take in
-order to gain more fine-grained control of data validation. The
-next technique we’ll outline allows us to assign multiple
-validation rules per model field.
+La technique que nous venons de voir nous donne plus de flexibilité que 
+l'assignation simple de règles, mais il y a une étape supplémentaire que 
+nous pouvons mettre en œuvre, pour avoir un contrôle encore plus fin sur la 
+validation des données. La prochaine technique que nous allons voir nous 
+permet d'affecter plusieurs règles de validation par champ de model.
 
-If you would like to assign multiple validation rules to a single
-field, this is basically how it should look::
+Si vous souhaitiez affecter plusieurs règles de validation à un seul champ, 
+voici basiquement comment il faudrait faire::
 
-    <?php
     public $validate = array(
-        'fieldName' => array(
-            'ruleName' => array(
-                'rule' => 'ruleName',
-                // extra keys like on, required, etc. go here...
+        'nomChamp' => array(
+            'nomRegle' => array(
+                'rule' => 'nomRegle',
+                // clés supplémentaires comme 'on', 'required', etc. à mettre ici
             ),
-            'ruleName2' => array(
-                'rule' => 'ruleName2',
-                // extra keys like on, required, etc. go here...
+            'nomRegle2' => array(
+                'rule' => 'nomRegle2',
+                // clés supplémentaires comme 'on', 'required', etc. à mettre ici
             )
         )
     );
 
-As you can see, this is quite similar to what we did in the
-previous section. There, for each field we had only one array of
-validation parameters. In this case, each ‘fieldName’ consists of
-an array of rule indices. Each 'ruleName' contains a separate array
-of validation parameters.
+Comme vous pouvez le voir, cela ressemble beaucoup à ce que nous avons vu 
+dans la section précédente. Ici pour chaque champ, nous avons uniquement un 
+tableau de paramètres de validation. Dans ce cas, chaque ‘nomChamp‘ est un 
+tableau de règles indexé. Chaque 'nomRegle' contient un tableau indépendant 
+de paramètres de validation.
 
-This is better explained with a practical example::
+Ce sera plus explicite avec un exemple pratique::
 
-    <?php
     public $validate = array(
         'login' => array(
-            'loginRule-1' => array(
+            'regleLogin-1' => array(
                 'rule'    => 'alphaNumeric',  
-                'message' => 'Only alphabets and numbers allowed',
+                'message' => 'Lettres et chiffres uniquement',
                 'last'    => true
              ),
-            'loginRule-2' => array(
+            'regleLogin-2' => array(
                 'rule'    => array('minLength', 8),  
-                'message' => 'Minimum length of 8 characters'
+                'message' => 'Taille minimum de 8 caractères'
             )  
         )
     );
 
-The above example defines two rules for the login field:
-loginRule-1 and loginRule-2. As you can see, each rule is
-identified with an arbitrary name.
+L'exemple ci-dessus définit deux règles pour le champ 'login': 'regleLogin-1' 
+et 'regleLogin-2'. Comme vous pouvez le voir, chaque règle est identifiée avec 
+un nom arbitraire.
 
-By default CakePHP tries to validate a field using all the
-validation rules declared for it and returns the error message for
-the last failing rule. But if the key ``last`` is set to ``true``
-for a rule and it fails, then the error message for that rule is
-returned and further rules are not validated. So if you prefer to
-show the error message for the first failing rule then set
-``'last' => true`` for each rule.
+Par défaut, CakePHP essaye de valider un champ en utilisant toutes les règles 
+de validation déclarées pour lui et renvoie le message d'erreur pour la 
+dernière règle qui n'est pas passée. Mais si la clé ``last`` est définie à 
+``true`` pour une règle et qu'elle ne passe pas, le message d'erreur pour 
+cette règle est retourné et les règles suivantes ne sont pas validées. Donc 
+si vous préférez voir le message d'erreur de la première règle qui ne passe 
+pas au lieu de la dernière, définissez ``'last' => true`` pour chaque règle.
 
-When using multiple rules per field the 'required' and 'allowEmpty'
-keys need to be used only once in the first rule.
+Quand vous utilisez des règles multiples par champ, les clés 
+'required' and 'allowEmpty' ont besoin d'être utilisées seulement une fois 
+dans la première règle.
 
+Règles personnalisées de validation des données
+===============================================
 
-Custom Validation Rules
-=======================
+Si ce qui précède ne vous convient pas, vous pouvez toujours créer vos propres 
+règles de validation. Il y a deux moyens de réaliser cela : en définissant 
+des expressions régulières ou en créant des méthodes de validation 
+personnalisées.
 
-If you haven’t found what you need thus far, you can always create
-your own validation rules. There are two ways you can do this: by
-defining custom regular expressions, or by creating custom
-validation methods.
+Validation avec Expression Régulière personnalisée
+--------------------------------------------------
 
-Custom Regular Expression Validation
-------------------------------------
+Si la technique de validation dont vous avez besoin peut être complétée par 
+l'utilisation d'une expression régulière, vous pouvez définir une expression 
+personnalisée comme une règle de validation de champ::
 
-If the validation technique you need to use can be completed by
-using regular expression matching, you can define a custom
-expression as a field validation rule::
-
-    <?php
     public $validate = array(
         'login' => array(
             'rule'    => '/^[a-z0-9]{3,}$/i',
-            'message' => 'Only letters and integers, min 3 characters'
+            'message' => 'Seulement des lettres et des entiers, minimum 3 caractères'
         )
     );
 
-The example above checks if the login contains only letters and
-integers, with a minimum of three characters.
+L'exemple ci-dessus vérifie que le login contient seulement des lettres et des 
+entiers et qu'il a au minimum trois caractères.
 
-The regular expression in the ``rule`` must be delimited by
-slashes. The optional trailing 'i' after the last slash means the
-reg-exp is case *i*\ nsensitive.
+L'expression régulière dans ``rule`` doit être délimitée par des slashes (/). 
+Le 'i' final optionnel après le dernier slash signifie que l'expression 
+régulière est *i*\ nsensible à la casse.
 
-Adding your own Validation Methods
-----------------------------------
+Ajouter vos propres méthodes de validation
+------------------------------------------
 
-Sometimes checking data with regular expression patterns is not
-enough. For example, if you want to ensure that a promotional code
-can only be used 25 times, you need to add your own validation
-function, as shown below::
+Parfois, la vérification des données par un motif d'expression régulière ne 
+suffit pas. Par exemple, si vous voulez vous assurer qu'un coupon de réduction 
+(code promo) n'est pas utilisé plus de 25 fois, vous devez ajouter votre 
+propre méthode de validation, comme indiqué ci-dessous::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
 
         public $validate = array(
-            'promotion_code' => array(
-                'rule'    => array('limitDuplicates', 25),
-                'message' => 'This code has been used too many times.'
+            'code_promo' => array(
+                'rule'    => array('limiteUtilisations', 25),
+                'message' => 'Ce code promo a dépassé son nombre maximal d\'utilisation.'
             )
         );
 
-        public function limitDuplicates($check, $limit) {
-            // $check will have value: array('promomotion_code' => 'some-value')
-            // $limit will have value: 25
-            $existing_promo_count = $this->find('count', array(
+        public function limiteUtilisations($check, $limit) {
+            // $check aura comme valeur : array('code_promo' => 'une valeur')
+            // $limit aura comme valeur : 25
+             $compteur_code_actuel = $this->find( 'count', array(
                 'conditions' => $check,
                 'recursive' => -1
             ));
-            return $existing_promo_count < $limit;
+            return $compteur_code_actuel < $limit;
         }
     }
 
-The current field to be validated is passed into the function as
-first parameter as an associated array with field name as key and
-posted data as value.
+Le champ en cours de validation est passé à la fonction comme premier 
+paramètre, sous la forme d'un tableau associatif avec le nom du champ 
+comme clé et les données postées comme valeur.
 
-If you want to pass extra parameters to your validation function,
-add elements onto the ‘rule’ array, and handle them as extra params
-(after the main ``$check`` param) in your function.
+Si vous voulez passer des paramètres supplémentaires à votre fonction de 
+validation, ajoutez des éléments dans le tableau ’rule’ et manipulez-les 
+comme des paramètres supplémentaires (après le paramètre principal ``$check``) 
+dans votre fonction.
 
-Your validation function can be in the model (as in the example
-above), or in a behavior that the model implements. This includes
-mapped methods.
+Votre fonction de validation peut être dans le model (comme dans l'exemple) 
+ou dans un behavior (comportement) que votre model implémente. Ceci inclus 
+les méthodes mappées.
 
-Model/behavior methods are checked first, before looking for a
-method on the ``Validation`` class. This means that you can
-override existing validation methods (such as ``alphaNumeric()``)
-at an application level (by adding the method to ``AppModel``), or
-at model level.
+Les méthodes des models/behaviors sont vérifiées en premier, avant de 
+chercher pour une méthode dans la class ``Validation``. Cela veut dire que vous 
+pouvez écraser les méthodes de validation existantes (telle que 
+``alphaNumeric()``) au niveau de l'application (en ajoutant la méthode dans 
+``AppModel``) ou au niveau du model.
 
-When writing a validation rule which can be used by multiple
-fields, take care to extract the field value from the $check array.
-The $check array is passed with the form field name as its key and
-the field value as its value. The full record being validated is
-stored in $this->data member variable::
+Quand vous écrivez une règle de validation qui peut être utilisée par 
+plusieurs champs, prenez soin d'extraire la valeur du champ du tableau 
+$check. Le tableau $check est passé avec le nom du champ comme clé et la 
+valeur du champ comme valeur. Le champ complet qui doit être validé est 
+stocké dans une variable de $this->data::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
 
         public $validate = array(
             'slug' => array(
                 'rule'    => 'alphaNumericDashUnderscore',
-                'message' => 'Slug can only be letters, numbers, dash and underscore'
+                'message' => 'Le slug ne peut contenir que des lettres, des nombres, des tirets ou des underscores.'
             )
         );
 
         public function alphaNumericDashUnderscore($check) {
-            // $data array is passed using the form field name as the key
-            // have to extract the value to make the function generic
-            $value = array_values($check);
-            $value = $value[0];
+            // le tableau $check est passé en utilisant le nom du champ de formulaire comme clé
+            // nous devons extraire la valeur pour rendre la fonction générique
+            $valeur = array_values($check);
+            $valeur = $valeur[0];
 
-            return preg_match('|^[0-9a-zA-Z_-]*$|', $value);
+            return preg_match('|^[0-9a-zA-Z_-]*$|', $valeur);
         }
     }
 
 .. _core-validation-rules:
 
-Core Validation Rules
-=====================
+Règles de validation incluses
+=============================
 
 .. php:class:: Validation
 
-The Validation class in CakePHP contains many validation rules that
-can make model data validation much easier. This class contains
-many oft-used validation techniques you won’t need to write on your
-own. Below, you'll find a complete list of all the rules, along
-with usage examples.
+La classe de validation de CakePHP contient un certain nombre de règles 
+prédéfinies, qui rendent la validation des données plus simple dans vos 
+models. Cette classe contient de nombreuses règles souvent utilisées que 
+vous n'aurez pas à ré-écrire vous même. Ci-dessous vous trouverez une liste 
+complète de toutes les règles, illustrées par des exemples d'utilisation.
+
 
 .. php:staticmethod:: alphaNumeric(mixed $check)
 
-    The data for the field must only contain letters and numbers.::
+    Les données pour ce champ ne doivent contenir que chiffres et lettres::
 
-        <?php
         public $validate = array(
             'login' => array(
                 'rule'    => 'alphaNumeric',
-                'message' => 'Usernames must only contain letters and numbers.'
+                'message' => 'Les données pour ce champ ne doivent contenir que lettres et chiffres.'
             )
         );
+
 
 .. php:staticmethod:: between(string $check, integer $min, integer $max)
 
-    The length of the data for the field must fall within the specified
-    numeric range. Both minimum and maximum values must be supplied.
-    Uses = not.::
+    La longueur des données du champ doit être comprise dans la plage 
+    numérique spécifiée. Les valeurs minimum et maximum doivent être toutes 
+    les deux fournies. Cette méthode utilise <= et non <::
 
-        <?php
         public $validate = array(
-            'password' => array(
+            'mot_de_passe' => array(
                 'rule'    => array('between', 5, 15),
-                'message' => 'Passwords must be between 5 and 15 characters long.'
+                'message' => 'Le mot de passe doit avoir une longueur comprise entre 5 et 15 caractères.'
             )
         );
 
-    The length of data is "the number of bytes in the string
-    representation of the data". Be careful that it may be larger than
-    the number of characters when handling non-ASCII characters.
+    La longueur des données est "le nombre d'octets dans la représentation 
+    des données sous forme de chaîne". Faites attention, car elle peut être 
+    plus grande que le nombre de caractères quand vous manipulez des caractères 
+    non-ASCII.
 
 
 .. php:staticmethod:: blank(mixed $check)
 
-    This rule is used to make sure that the field is left blank or only
-    white space characters are present in its value. White space
-    characters include space, tab, carriage return, and newline.::
+    Cette règle est utilisé pour vérifier que le champ est laissé vide ou que 
+    seulement des caractères blancs y sont présent. Les caractères blancs 
+    incluent l'espace, la tabulation, le retour chariot et nouvelle ligne.::
 
-        <?php
         public $validate = array(
             'id' => array(
                 'rule' => 'blank',
@@ -490,25 +475,26 @@ with usage examples.
 
 .. php:staticmethod:: boolean(string $check)
 
-    The data for the field must be a boolean value. Valid values are
-    true or false, integers 0 or 1 or strings '0' or '1'.::
+    Les données pour ce champ doivent être une valeur booléenne. Les valeurs 
+    possibles sont : true ou false, les entiers 0 ou 1, les chaînes '0' ou 
+    '1'.::
 
-        <?php
         public $validate = array(
-            'myCheckbox' => array(
+            'maCaseACocher' => array(
                 'rule'    => array('boolean'),
-                'message' => 'Incorrect value for myCheckbox'
+                'message' => 'Valeur incorrecte pour maCaseACocher'
             )
         );
 
 
 .. php:staticmethod:: cc(mixed $check, mixed $type = 'fast', boolean $deep = false, string $regex = null)
 
-    This rule is used to check whether the data is a valid credit card
-    number. It takes three parameters: ‘type’, ‘deep’ and ‘regex’.
+    Cette règle est utilisée pour vérifier si une donnée est un numéro de 
+    carte de crédit valide. Elle prend trois paramètres : ‘type’, ‘deep’ et 
+    ‘regex’.
 
-    The ‘type’ key can be assigned to the values of ‘fast’, ‘all’ or
-    any of the following:
+    Le paramètre ‘type‘ peut être assigné aux valeurs ‘fast’, ‘all’ ou à 
+    l'une des suivantes :
 
     -  amex
     -  bankcard
@@ -524,150 +510,147 @@ with usage examples.
     -  visa
     -  voyager
 
-    If ‘type’ is set to ‘fast’, it validates the data against the major
-    credit cards’ numbering formats. Setting ‘type’ to ‘all’ will check
-    with all the credit card types. You can also set ‘type’ to an array
-    of the types you wish to match.
+    Si ‘type’ est défini à ‘fast’, cela valide les données de la majorité des 
+    formats numériques de cartes de crédits. Définir ‘type’ à ‘all’ vérifiera 
+    tous les types de cartes de crédits. Vous pouvez aussi définir 'type’ 
+    comme un tableau des types que vous voulez détecter.
 
-    The ‘deep’ key should be set to a boolean value. If it is set to
-    true, the validation will check the Luhn algorithm of the credit
-    card
-    (`http://en.wikipedia.org/wiki/Luhn\_algorithm <http://en.wikipedia.org/wiki/Luhn_algorithm>`_).
-    It defaults to false.
+    Le paramètre ‘deep’ devrait être défini comme une valeur booléenne. S'il 
+    est défini à true, la validation vérifiera l'algorithme Luhn de la carte 
+    de crédit 
+    (`http://en.wikipedia.org/wiki/Luhn\_algorithm <http://en.wikipedia.org/wiki/Luhn_algorithm>`_). 
+    Par défaut, elle est à false.
 
-    The ‘regex’ key allows you to supply your own regular expression
-    that will be used to validate the credit card number::
+    Le paramètre ‘regex’ vous permet de passer votre propre expression 
+    régulière, laquelle sera utilisée pour valider le numéro de la carte de 
+    crédit::
 
-        <?php
         public $validate = array(
-            'ccnumber' => array(
+            'numero_cc' => array(
                 'rule'    => array('cc', array('visa', 'maestro'), false, null),
-                'message' => 'The credit card number you supplied was invalid.'
+                'message' => 'Le numéro de carte de crédit que vous avez saisi était invalide.'
             )
         );
 
 
 .. php:staticmethod:: comparison(mixed $check1, string $operator = null, integer $check2 = null)
 
-    Comparison is used to compare numeric values. It supports “is
-    greater”, “is less”, “greater or equal”, “less or equal”, “equal
-    to”, and “not equal”. Some examples are shown below::
+    Comparison est utilisé pour comparer des valeurs numériques. Il supporte 
+    “est supérieur”, “est inférieur”, “supérieur ou égal”, “inférieur ou 
+    égal”, “égal à” et “non égal”. Quelques exemples sont indiqués 
+    ci-dessous::
 
-        <?php
         public $validate = array(
             'age' => array(
                 'rule'    => array('comparison', '>=', 18),
-                'message' => 'Must be at least 18 years old to qualify.'
+                'message' => 'Vous devez avoir 18 ans au moins pour vous inscrire.'
             )
         );
 
         public $validate = array(
             'age' => array(
                 'rule'    => array('comparison', 'greater or equal', 18),
-                'message' => 'Must be at least 18 years old to qualify.'
+                'message' => 'Vous devez avoir 18 ans au moins pour vous inscrire.'
             )
         );
 
 
 .. php:staticmethod:: custom(mixed $check, string $regex = null)
 
-    Used when a custom regular expression is needed::
+    Utilisé quand une règle personnalisée est nécessaire::
 
-        <?php
         public $validate = array(
             'infinite' => array(
                 'rule'    => array('custom', '\u221E'),
-                'message' => 'Please enter an infinite number.'
+                'message' => 'Merci de rentrer un nombre infini.'
             )
         );
 
 
 .. php:staticmethod:: date(string $check, mixed $format = 'ymd', string $regex = null)
 
-    This rule ensures that data is submitted in valid date formats. A
-    single parameter (which can be an array) can be passed that will be
-    used to check the format of the supplied date. The value of the
-    parameter can be one of the following:
+    Cette règle s'assure que les données soumises sont des formats de date 
+    valides. Un seul paramètre (qui peut être un tableau) doit être passé 
+    et sera utilisé pour vérifier le format de la date soumise. La valeur 
+    de ce paramètre peut être l'une des suivantes :
 
-    -  ‘dmy’ e.g. 27-12-2006 or 27-12-06 (separators can be a space,
-       period, dash, forward slash)
-    -  ‘mdy’ e.g. 12-27-2006 or 12-27-06 (separators can be a space,
-       period, dash, forward slash)
-    -  ‘ymd’ e.g. 2006-12-27 or 06-12-27 (separators can be a space,
-       period, dash, forward slash)
-    -  ‘dMy’ e.g. 27 December 2006 or 27 Dec 2006
-    -  ‘Mdy’ e.g. December 27, 2006 or Dec 27, 2006 (comma is optional)
-    -  ‘My’ e.g. (December 2006 or Dec 2006)
-    -  ‘my’ e.g. 12/2006 or 12/06 (separators can be a space, period,
-       dash, forward slash)
+    -  ‘dmy’, par exemple : 27-12-2006 ou 27-12-06 (les séparateurs peuvent 
+       être l'espace, le point, le tiret, le slash)
+    -  ‘mdy’, par exemple : 12-27-2006 ou 12-27-06 (les séparateurs peuvent 
+       être l'espace, le point, le tiret, le slash)
+    -  ‘ymd’, par exemple : 2006-12-27 ou 06-12-27 (les séparateurs peuvent 
+       être l'espace, le point, le tiret, le slash)
+    -  ‘dMy’, par exemple : 27 Décembre 2006 ou 27 Déc 2006
+    -  ‘Mdy’, par exemple : Décembre 27, 2006 ou Déc 27, 2006 (la virgule 
+       est optionnelle)
+    -  ‘My’, par exemple : (Décembre 2006 ou Déc 2006)
+    -  ‘my’, par exemple : 12/2006 ou 12/06 (les séparateurs peuvent être 
+       l'espace, le point, le tiret, le slash)
 
-    If no keys are supplied, the default key that will be used is
-    ‘ymd’::
+    Si aucune clé n'est soumise, la clé par défaut 'ymd' sera utilisée::
 
-        <?php
         public $validate = array(
-            'born' => array(
+            'date_de_naissance' => array(
                 'rule'       => array('date', 'ymd'),
-                'message'    => 'Enter a valid date in YY-MM-DD format.',
+                'message'    => 'Entrez une date valide au format AA-MM-JJ.',
                 'allowEmpty' => true
             )
         );
 
-    While many data stores require a certain date format, you might
-    consider doing the heavy lifting by accepting a wide-array of date
-    formats and trying to convert them, rather than forcing users to
-    supply a given format. The more work you can do for your users, the
-    better.
-
+    Etant donné que de nombreux moteurs de stockage réclament un certain 
+    format de date, vous devriez envisager de faire le plus gros du travail 
+    en acceptant un large choix de formats et en essayant de les convertir, 
+    plutôt que de forcer les gens à les soumettre dans un format donné. Le 
+    plus de travail vous ferez pour les users, le mieux ce sera.
+    
 
 .. php:staticmethod:: datetime(array $check, mixed $dateFormat = 'ymd', string $regex = null)
     
-    This rule ensures that the data is a valid datetime format. A
-    parameter (which can be an array) can be passed to specify the format
-    of the date. The value of the parameter can be one or more of the
-    following:
+    Cette règle s'assure que les données sont dans format datetime valide. 
+    Un paramètre (qui peut être un tableau) peut être passé pour spécifier le 
+    format de la date. La valeur du paramètre peut être une ou plusieurs des 
+    valeurs suivantes:
 
-    -  ‘dmy’ e.g. 27-12-2006 or 27-12-06 (separators can be a space,
-       period, dash, forward slash)
-    -  ‘mdy’ e.g. 12-27-2006 or 12-27-06 (separators can be a space,
-       period, dash, forward slash)
-    -  ‘ymd’ e.g. 2006-12-27 or 06-12-27 (separators can be a space,
-       period, dash, forward slash)
-    -  ‘dMy’ e.g. 27 December 2006 or 27 Dec 2006
-    -  ‘Mdy’ e.g. December 27, 2006 or Dec 27, 2006 (comma is optional)
-    -  ‘My’ e.g. (December 2006 or Dec 2006)
-    -  ‘my’ e.g. 12/2006 or 12/06 (separators can be a space, period,
-       dash, forward slash)
+    -  ‘dmy’, par exemple : 27-12-2006 or 27-12-06 (les séparateurs peuvent 
+       être l'espace, le point, le tiret, le slash)
+    -  ‘mdy’, par exemple : 12-27-2006 or 12-27-06 (les séparateurs peuvent 
+       être l'espace, le point, le tiret, le slash)
+    -  ‘ymd’, par exemple : 2006-12-27 or 06-12-27 (les séparateurs peuvent 
+       être l'espace, le point, le tiret, le slash)
+    -  ‘dMy’, par exemple : 27 December 2006 or 27 Dec 2006
+    -  ‘Mdy’, par exemple : December 27, 2006 or Dec 27, 2006 (le point est 
+       optionnel)
+    -  ‘My’, par exemple : (December 2006 or Dec 2006)
+    -  ‘my’, par exemple : 12/2006 or 12/06 (les séparateurs peuvent 
+       être l'espace, le point, le tiret, le slash)
 
-    If no keys are supplied, the default key that will be used is
+    Si aucune clé n'est fournie, la clé par défaut qui sera utilisée est 
     ‘ymd’::
 
-        <?php
         public $validate = array(
             'birthday' => array(
                 'rule'    => array('datetime', 'dmy'),
-                'message' => 'Please enter a valid date and time.'
+                'message' => 'Merci de rentrer une date et un time valide.'
             )
         );
 
-    Also a second parameter can be passed to specify a custom regular
-    expression. If this parameter is used, this will be the only
-    validation that will occur.
-
-    Note that unlike date(), datetime() will validate a date and a time.
+    Un second paramètre peut aussi être passé pour spécifier une expression 
+    réguière personnalisée. Si un paramètre est utilisé, ce sera la seule 
+    validation qui apparaitra.
+    
+    Notez que au contraire de date(), datetime() validera une date et un time.
 
 
 .. php:staticmethod:: decimal(integer $check, integer $places = null, string $regex = null)
 
-    This rule ensures that the data is a valid decimal number. A
-    parameter can be passed to specify the number of digits required
-    after the decimal point. If no parameter is passed, the data will
-    be validated as a scientific float, which will cause validation to
-    fail if no digits are found after the decimal point::
+    Cette règle s'assure que la donnée est un nombre décimal valide. Un 
+    paramètre peut être passé pour spécifier le nombre de décimales requises 
+    après le point. Si aucun paramètre n'est passé, la donnée sera validée 
+    comme un nombre scientifique à virgule flottante, entraînant une erreur 
+    si aucune décimale n'est trouvée après le point::
 
-        <?php
         public $validate = array(
-            'price' => array(
+            'prix' => array(
                 'rule' => array('decimal', 2)
             )
         );
@@ -675,67 +658,64 @@ with usage examples.
 
 .. php:staticmethod:: email(string $check, boolean $deep = false, string $regex = null)
 
-    This checks whether the data is a valid email address. Passing a
-    boolean true as the second parameter for this rule will also
-    attempt to verify that the host for the address is valid::
+    Celle-ci vérifie que la donnée soit une adresse email valide. En passant 
+    un booléen true comme second paramètre de cette règle, elle tentera de 
+    vérifier aussi, que l'hôte de l'adresse soit valide::
     
-        <?php
         public $validate = array('email' => array('rule' => 'email'));
         
         public $validate = array(
             'email' => array(
                 'rule'    => array('email', true),
-                'message' => 'Please supply a valid email address.'
+                'message' => 'Merci de soumettre une adresse email valide.'
             )
         );
 
 
 .. php:staticmethod:: equalTo(mixed $check, mixed $compareTo)
 
-    This rule will ensure that the value is equal to, and of the same
-    type as the given value.
+    Cette règle s'assurera que la valeur est égal à la valeur passée et 
+    qu'elle est du même type.
 
     ::
 
-        <?php
         public $validate = array(
-            'food' => array(
-                'rule'    => array('equalTo', 'cake'),
-                'message' => 'This value must be the string cake'
+            'nourriture' => array(
+                'rule'    => array('equalTo', 'gâteau'),
+                'message' => 'Cette valeur devrait être la chaîne gâteau'
             )
         );
 
 
 .. php:staticmethod:: extension(mixed $check, array $extensions = array('gif', 'jpeg', 'png', 'jpg'))
 
-    This rule checks for valid file extensions like .jpg or .png. Allow
-    multiple extensions by passing them in array form.
+    Cette règle vérifie les extensions valides de fichier, comme .jpg ou .png. 
+    Permet la vérification d'extensions multiples, en les passant sous forme 
+    de tableau.
 
     ::
 
-        <?php
         public $validate = array(
             'image' => array(
                 'rule'    => array('extension', array('gif', 'jpeg', 'png', 'jpg')),
-                'message' => 'Please supply a valid image.'
+                'message' => 'Merci de soumettre une image valide.'
             )
         );
 
 
 .. php:staticmethod:: inList(string $check, array $list)
 
-    This rule will ensure that the value is in a given set. It needs an
-    array of values. The field is valid if the field's value matches
-    one of the values in the given array.
+    Cette règle s'assurera que la valeur est dans un ensemble donné. Elle 
+    nécessite un tableau des valeurs. Le champ est valide si sa valeur 
+    vérifie l'une des valeurs du tableau donné.
 
-    Example::
+    Exemple::
 
-        <?php
         public $validate = array(
-            'function' => array(
-                 'allowedChoice' => array(
+            'fonction' => array(
+                 'choixAutorise' => array(
                      'rule'    => array('inList', array('Foo', 'Bar')),
-                     'message' => 'Enter either Foo or Bar.'
+                     'message' => 'Entrez soit Foo, soit Bar.'
                  )
              )
          );
@@ -743,54 +723,50 @@ with usage examples.
 
 .. php:staticmethod:: ip(string $check, string $type = 'both')
 
-    This rule will ensure that a valid IPv4 or IPv6 address has been
-    submitted. Accepts as option 'both' (default), 'IPv4' or 'IPv6'.
+    Cette règle s'assurera qu'une adresse IPv4 ou IPv6 valide ait été soumise.
+    Accepte 'both' en option (par défaut), 'IPv4' ou 'IPv6'.
 
     ::
 
-        <?php
         public $validate = array(
-            'clientip' => array(
-                'rule'    => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)
-                'message' => 'Please supply a valid IP address.'
+            'ip_client' => array(
+                'rule'    => array('ip', 'IPv4'), // or 'IPv6' ou 'both' (default)
+                'message' => 'Merci de soumettre une adresse IP valide.'
             )
         );
 
 
 .. php:staticmethod:: isUnique()
 
-    The data for the field must be unique, it cannot be used by any
-    other rows.
+    La donnée pour le champ doit être unique, elle ne peut être utilisée par 
+    aucune autre ligne.
 
     ::
 
-        <?php
         public $validate = array(
             'login' => array(
                 'rule'    => 'isUnique',
-                'message' => 'This username has already been taken.'
+                'message' => 'Ce nom d\'user a déjà été choisi.'
             )
         );
 
 .. php:staticmethod:: luhn(string|array $check, boolean $deep = false)
 
-    The Luhn algorithm: A checksum formula to validate a variety of 
-    identification numbers. See http://en.wikipedia.org/wiki/Luhn_algorithm for 
-    more information.
+    L'algorithme Luhn: A checksum formula to validate a variety of 
+    identification numbers. Regardez 
+    http://en.wikipedia.org/wiki/Luhn_algorithm pour plus d'informations.
 
 
 .. php:staticmethod:: maxLength(string $check, integer $max)
 
-    This rule ensures that the data stays within a maximum length
-    requirement.
+    Cette règle s'assure que la donnée respecte la longueur maximale requise.
 
     ::
 
-        <?php
         public $validate = array(
             'login' => array(
                 'rule'    => array('maxLength', 15),
-                'message' => 'Usernames must be no larger than 15 characters long.'
+                'message' => 'Les noms d\'user ne doivent pas dépasser 15 caractères.'
             )
         );
 
@@ -806,7 +782,6 @@ with usage examples.
 
     ::
 
-        <?php
         public $validate = array(
             'login' => array(
                 'rule'    => array('minLength', 8),
@@ -814,36 +789,33 @@ with usage examples.
             )
         );
 
-    The length here is "the number of bytes in the string
-    representation of the data". Be careful that it may be larger than
-    the number of characters when handling non-ASCII characters.
+    La longueur ici est "le nombre d'octets dans la représentation des données 
+    sous forme de chaîne". Faites attention car elle pourrait être plus grande 
+    que le nombre de caractères en manipulant des caractères non-ASCII.
 
 
 .. php:staticmethod:: money(string $check, string $symbolPosition = 'left')
 
-    This rule will ensure that the value is in a valid monetary
-    amount.
+    Cette règle s'assurera que la valeur est une somme monétaire valide.
 
-    Second parameter defines where symbol is located (left/right).
+    Le second paramètre définit où le symbole est situé (gauche/droite).
 
     ::
 
-        <?php
         public $validate = array(
-            'salary' => array(
+            'salaire' => array(
                 'rule'    => array('money', 'left'),
-                'message' => 'Please supply a valid monetary amount.'
+                'message' => 'Merci de soumettre une somme monétaire valide.'
             )
         );
 
 .. php:staticmethod:: multiple(mixed $check, mixed $options = array())
 
-    Use this for validating a multiple select input. It supports
-    parameters "in", "max" and "min".
+    Utilisez cette règle pour valider un champ select multiple. Elle 
+    accepte les paramètres "in", "max" et "min".
 
     ::
 
-        <?php
         public $validate = array(
             'multiple' => array(
                 'rule' => array('multiple', array(
@@ -851,51 +823,49 @@ with usage examples.
                     'min' => 1,
                     'max' => 3
                 )),
-                'message' => 'Please select one, two or three options'
+                'message' => 'Merci de choisir une, deux ou trois options'
             )
         );
 
 
 .. php:staticmethod:: notEmpty(mixed $check)
 
-    The basic rule to ensure that a field is not empty.::
+    La règle de base pour s'assurer qu'un champ n'est pas vide.::
 
-        <?php
         public $validate = array(
-            'title' => array( 
+            'titre' => array( 
                 'rule'    => 'notEmpty',
-                'message' => 'This field cannot be left blank'
+                'message' => 'Ce champ ne peut pas rester vide'
             )
         );
 
-    Do not use this for a multiple select input as it will cause an
-    error. Instead, use "multiple".
+    Ne l'utilisez pas pour un champ select multiple, sinon cela causera 
+    une erreur. A la place, utilisez "multiple".
 
 
 .. php:staticmethod:: numeric(string $check)
 
-    Checks if the data passed is a valid number.::
+    Vérifie si la donnée passée est un nombre valide.::
 
-        <?php
         public $validate = array(
             'cars' => array(
                 'rule'    => 'numeric',
-                'message' => 'Please supply the number of cars.'
+                'message' => 'Merci de soumettre le nombre de voitures.'
             )
         );
 
 
 .. php:staticmethod:: phone(mixed $check, string $regex = null, string $country = 'all')
 
-    Phone validates US phone numbers. If you want to validate non-US
-    phone numbers, you can provide a regular expression as the second
-    parameter to cover additional number formats.
+    Phone valide les numéros de téléphone US. Si vous voulez valider des 
+    numéros de téléphones non-US, vous pouvez fournir une expression 
+    régulière comme second paramètre pour couvrir des formats de numéros 
+    additionnels.
 
     ::
 
-        <?php
         public $validate = array(
-            'phone' => array(
+            'telephone' => array(
                 'rule' => array('phone', null, 'us')
             )
         );
@@ -903,16 +873,15 @@ with usage examples.
 
 .. php:staticmethod:: postal(mixed $check, string $regex = null, string $country = 'us')
 
-    Postal is used to validate ZIP codes from the U.S. (us), Canada
-    (ca), U.K (uk), Italy (it), Germany (de) and Belgium (be). For
-    other ZIP code formats, you may provide a regular expression as the
-    second parameter.
+    Postal est utilisé pour valider des codes postaux des U.S.A. (us), du 
+    Canada (ca), du Royaume-Uni (uk), de l'Italie (it), d'Allemagne (de) et 
+    de Belgique (be). Pour les autres formats de codes postaux, vous devez 
+    fournir une expression régulière comme second paramètre.
 
     ::
 
-        <?php
         public $validate = array(
-            'zipcode' => array(
+            'code_postal' => array(
                 'rule' => array('postal', null, 'us')
             )
         );
@@ -920,22 +889,22 @@ with usage examples.
 
 .. php:staticmethod:: range(string $check, integer $lower = null, integer $upper = null)
 
-    This rule ensures that the value is in a given range. If no range
-    is supplied, the rule will check to ensure the value is a legal
-    finite on the current platform.
+    Cette règle s'assure que la valeur est dans une fourchette donnée. Si 
+    aucune fourchette n'est soumise, la règle s'assurera que la valeur est 
+    un nombre limite valide pour la plateforme courante.
 
     ::
 
-        <?php
         public $validate = array(
-            'number' => array(
+            'nombre' => array(
                 'rule'    => array('range', -1, 11),
-                'message' => 'Please enter a number between 0 and 10'
+                'message' => 'Merci d\'entrer un nombre entre 0 et 10'
             )
         );
 
-    The above example will accept any value which is larger than 0
-    (e.g., 0.01) and less than 10 (e.g., 9.99). 
+    L'exemple ci-dessus acceptera toutes les valeurs qui sont plus grandes que 
+    0 (par ex, 0.01) et plus petite que 10 (par ex, 9.99). Note : Les deux 
+    extrémités données (-1 et 11) ne sont pas incluses !!!
     
     .. note::
     
@@ -944,13 +913,12 @@ with usage examples.
 
 .. php:staticmethod:: ssn(mixed $check, string $regex = null, string $country = null)
 
-    Ssn validates social security numbers from the U.S. (us), Denmark
-    (dk), and the Netherlands (nl). For other social security number
-    formats, you may provide a regular expression.
+    Ssn valide les numéros de sécurité sociale des U.S.A. (us), du Danemark 
+    (dk) et des Pays-Bas (nl). Pour les autres formats de numéros de sécurité 
+    sociale, vous devez fournir une expression régulière.
 
     ::
 
-        <?php
         public $validate = array(
             'ssn' => array(
                 'rule' => array('ssn', null, 'us')
@@ -960,29 +928,27 @@ with usage examples.
 
 .. php:staticmethod:: time(string $check)
 
-    Time validation, determines if the string passed is a valid time. Validates 
-    time as 24hr (HH:MM) or am/pm ([H]H:MM[a|p]m) Does not allow/validate 
-    seconds.
+    La validation du Time, détermine si une chaîne de caractères est un time 
+    valide. Valide le time en 24hr (HH:MM) ou am/pm ([H]H:MM[a|p]m). 
+    N'autorise/ne valide pas les secondes.
 
 
 .. php:staticmethod:: url(string $check, boolean $strict = false)
 
-    This rule checks for valid URL formats. Supports http(s), ftp(s),
-    file, news, and gopher protocols::
+    Cette règle vérifie les formats valides d'URL. Elle supporte les 
+    protocoles http(s), ftp(s), file, news et gopher::
 
-        <?php
         public $validate = array(
-            'website' => array(
+            'siteweb' => array(
                 'rule' => 'url'
             )
         );
 
-    To ensure that a protocol is in the url, strict mode can be enabled
-    like so::
+    Pour s'assurer qu'un protocole est présent dans l'url, le mode strict 
+    mode peut être activé comme ceci::
 
-        <?php
         public $validate = array(
-            'website' => array(
+            'siteweb' => array(
                 'rule' => array('url', true)
             )
         );
@@ -990,12 +956,12 @@ with usage examples.
 
 .. php:staticmethod:: userDefined(mixed $check, object $object, string $method, array $args = null)
 
-    Runs an user-defined validation.
+    Lance une validation de définition d'user.
 
 
 .. php:staticmethod:: uuid(string $check)
 
-    Checks that a value is a valid uuid: http://tools.ietf.org/html/rfc4122
+    Vérifie que la valeur est une valeur uuid valide: http://tools.ietf.org/html/rfc4122
 
 
 .. toctree::
@@ -1004,5 +970,5 @@ with usage examples.
 
 
 .. meta::
-    :title lang=en: Data Validation
-    :keywords lang=en: validation rules,validation data,validation errors,data validation,credit card numbers,core libraries,password email,model fields,login field,model definition,php class,many different aspects,eight characters,letters and numbers,business rules,validation process,date validation,error messages,array,formatting
+    :title lang=fr: Validation des Donnnées
+    :keywords lang=fr: règles de validation,données de validation,erreurs de validation,données validation,numéros de carte de crédit,librairies du coeur,mot de passe email,champs du model,champ login,définition du model,classe php,plusieurs aspects différents,huit caractères,lettres et nombres,règles business,processus de validation,validation de date,messages d'erreurs,tableau,format

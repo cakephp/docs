@@ -148,7 +148,6 @@ que o novo valor seja, basta que não seja fácil de adivinhar.
 
 ::
 
-    <?php
     /**
      * A random string used in security hashing methods.
      */
@@ -162,7 +161,6 @@ não seja fácil de adivinhar.
 
 ::
 
-    <?php
     /**
      * A random numeric string (digits only) used to encrypt/decrypt strings.
      */

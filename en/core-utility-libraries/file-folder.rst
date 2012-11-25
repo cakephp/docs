@@ -116,9 +116,24 @@ Folder API
             'to' => '/path/to/new/folder',
             'from' => '/path/to/copy/from', // will cause a cd() to occur
             'mode' => 0755,
-            'skip' => array('skip-me.php', '.git')
+            'skip' => array('skip-me.php', '.git'),
+            'scheme' => Folder::SKIP  // Skip directories/files that already exist.
         ));
 
+    There are 3 supported schemes:
+
+    * ``Folder::SKIP`` skip copying/moving files & directories that exist in the
+      destination directory.
+    * ``Folder::MERGE`` merge the source/destination directories. Files in the
+      source directory will replace files in the target directory.  Directory
+      contents will be merged.
+    * ``Folder::OVERWRITE`` overwrite existing files & directories in the target
+      directory with those in the source directory.  If both the target and
+      destination contain the same subdirectory, the target directory's contents
+      will be removed and replaced with the source's.
+
+    .. versionchanged:: 2.3
+        The merge, skip and overwrite schemes were added to ``copy()``
 
 .. php:staticmethod:: correctSlashFor( $path )
 

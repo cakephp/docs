@@ -1,43 +1,47 @@
-App Class
-#########
+Classe App
+##########
 
 .. php:class:: App
 
-The app class is responsible for path management, class location and class loading. 
-Make sure you follow the :ref:`file-and-classname-conventions`.
+La classe App est responsable de la gestion des chemins, la classe de 
+localisation et la classe de chargement.
+Assurez-vous que vous suivez les :ref:`file-and-classname-conventions`.
 
 Packages
 ========
 
-CakePHP is organized around the idea of packages, each class belongs to a
-package or folder where other classes reside. You can configure each package
-location in your application using ``App::build('APackage/SubPackage', $paths)``
-to inform the framework where should each class be loaded. Almost every class in
-the CakePHP framework can be swapped with your own compatible implementation. If
-you wish to use you own class instead of the classes the framework provides,
-just add the class to your libs folder emulating the directory location of where
-CakePHP expects to find it.
+CakePHP est organisé autour de l'idée de packages, chaque classe appartient à 
+un package ou dossier où d'autres classes se trouvent. Vous pouvez configurer 
+chaque localisation de package dans votre application en utilisant 
+``App::build('APackage/SubPackage', $paths)`` pour informer le framework où 
+chaque classe doit être chargée. Presque toute classe dans le framework 
+CakePHP peut être échangée avec une des votres compatible. Si vous souhaitez 
+utiliser votre propre classe à la place des classes que le framework fournit, 
+ajoutez seulement la classe à vos dossiers libs émulant la localisation du 
+répertoire à partir duquel CakePHP s'attend à le trouver.
 
-For instance if you'd like to use your own HttpSocket class, put it under::
+Par exemple, si vous voulez utiliser votre propre classe HttpSocket, mettez la 
+sous::
 
     app/Lib/Network/Http/HttpSocket.php
 
-Once you've done this App will load your override file instead of the file
-inside CakePHP.
+Une fois ceci fait, cette App va charger votre fichier à la place du fichier 
+de l'intérieur de CakePHP.
 
-Loading classes
-===============
+Chargement des classes
+======================
 
 .. php:staticmethod:: uses(string $class, string $package)
 
     :rtype: void
 
-    Classes are lazily loaded in CakePHP, however before the autoloader
-    can find your classes you need to tell App, where it can find the files.
-    By telling App which package a class can be found in, it can properly locate
-    the file and load it the first time a class is used.
+    Les classes sont chargées toutes seules dans CakePHP, cependant avant que 
+    l'autoloader puisse trouver vos classes que vous avez besoin de dire à App, 
+    où il peut trouver les fichiers. En disant à App dans quel package une 
+    classe peut être trouvée, il peut bien situer le fichier et le charger 
+    la première fois qu'une classe est utilisée.
 
-    Some examples for common types of classes are:
+    Quelques exemples pour les types courants de classes sont:
 
     Controller
         ``App::uses('PostsController', 'Controller');``
@@ -58,114 +62,111 @@ Loading classes
     Utility
         ``App::uses('String', 'Utility');``
 
-    So basically the second param should simply match the folder path of the class file in core or app.
+    Donc au fond, le deuxième paramètre devrait simplement correspondre 
+    au chemin du dossier de la classe de fichier dans core ou app.
 
 .. note::
 
-    Loading vendors usually means you are loading packages that do not follow 
-    conventions. For most vendor packages using ``App::import()`` is 
-    recommended.
+    Charger des vendors signifie généralement que vous chargez des packages 
+    qui ne suivent pas les conventions. Pour la plupart des packages vendor, 
+    l'utilisation de ``App::import()`` est recommandée.
 
-Loading files from plugins
---------------------------
+Chargement des fichiers à partir des plugins
+--------------------------------------------
 
-Loading classes in plugins works much the same as loading app and
-core classes except you must specify the plugin you are loading
-from::
+Le chargement des classes dans les plugins fonctionnnent un peu de la 
+même façon que le chargement des classes app et des classes du coeur sauf 
+que vous devez spécifier le plugin à partir du quel vous chargez::
 
-    <?php
-    // Load the class Comment in app/Plugin/PluginName/Model/Comment.php
+    // Charge la classe Comment dans app/Plugin/PluginName/Model/Comment.php
     App::uses('Comment', 'PluginName.Model');
 
-    // Load the class CommentComponent in app/Plugin/PluginName/Controller/Component/CommentComponent.php
+    // Charge la classe class CommentComponent dans app/Plugin/PluginName/Controller/Component/CommentComponent.php
     App::uses('CommentComponent', 'PluginName.Controller/Component');
 
 
-Finding paths to packages using App::path()
-===========================================
+Trouver des chemins vers les packages en utilisant App::path()
+==============================================================
 
 .. php:staticmethod:: path(string $package, string $plugin = null)
 
     :rtype: array
 
-    Used to read information stored path::
+    Utilisé pour lire les informations sur les chemins stockés::
 
-        <?php
-        // return the model paths in your application
+        // retourne les chemins de model dans votre application
         App::path('Model');
 
-    This can be done for all packages that are apart of your application. You
-    can also fetch paths for a plugin::
+    Ceci peut être fait pour tous les packages qui font parti de votre 
+    application. VOus pouvez aussi récupérer des chemins pour un plugin::
 
-        <?php
-        // return the component paths in DebugKit
+        // retourne les chemins de component dans DebugKit
         App::path('Component', 'DebugKit');
 
 .. php:staticmethod:: paths( )
 
     :rtype: array
 
-    Get all the currently loaded paths from App. Useful for inspecting or 
-    storing all paths App knows about. For a paths to a specific package 
-    use :php:meth:`App::path()`
+    Récupère tous les chemins chargés actuellement à partir de App. Utile pour 
+    inspecter ou stocker tous les chemins que App connait. Pour un chemin 
+    vers un package spécifique, utilisez :php:meth:`App::path()`
 
 .. php:staticmethod:: core(string $package)
 
     :rtype: array
 
-    Used for finding the path to a package inside CakePHP::
+    Utilisé pour trouver le chemin vers un package à l'intérieur de CakePHP::
 
-        <?php
-        // Get the path to Cache engines.
+        // Récupère le chemin vers les moteurs de Cache.
         App::core('Cache/Engine');
 
 .. php:staticmethod:: location(string $className)
 
     :rtype: string
 
-    Returns the package name where a class was defined to be located at.
+    Retourne le nom du package d'où une classe a été localisée.
 
-Adding paths for App to find packages in
-========================================
+Ajoutez des chemins dans App pour trouver des packages dans
+===========================================================
 
 .. php:staticmethod:: build(array $paths = array(), mixed $mode = App::PREPEND)
 
     :rtype: void
 
-    Sets up each package location on the file system. You can configure multiple
-    search paths for each package, those will be used to look for files one
-    folder at a time in the specified order. All paths should be terminated
-    with a directory separator.
+    Définit chaque localisaiton de package dans le système de fichier. Vous 
+    pouvez configurer des chemins de recherche multiples pour chaque package, 
+    ceux-ci vont être utilisés pour rechercher les fichiers, un dossier à la 
+    fois, dans l'ordre spécifié. Tous les chemins devraient être terminés par 
+    un séparateur de répertoire.
 
-    Adding additional controller paths for example would alter where CakePHP
-    looks for controllers. This allows you to split your application up across
-    the filesystem.
+    Ajouter des chemins de controller supplémentaires pourraient par exemple 
+    modifier où CakePHP regarde pour les controllers. Cela vous permet de 
+    séparer votre application à travers le système de fichier.
 
-    Usage::
+    Utilisation::
 
-        <?php
-        //will setup a new search path for the Model package
+        //Va configurer un nouveau chemin de recherche pour le package Model
         App::build(array('Model' => array('/a/full/path/to/models/'))); 
 
-        //will setup the path as the only valid path for searching models
+        //Va configurer le chemin comme le seule chemin valide pour chercher 
+        les models
         App::build(array('Model' => array('/path/to/models/')), App::RESET); 
 
-        //will setup multiple search paths for helpers
+        //Va configurer les chemins de recherche multiple pour les helpers
         App::build(array('View/Helper' => array('/path/to/helpers/', '/another/path/'))); 
 
 
-    If reset is set to true, all loaded plugins will be forgotten and they will
-    be needed to be loaded again.
+    Si reset est défini à true, tous les plugins chargés seront oubliés et ils 
+    devront être rechargés.
 
-    Examples::
+    Exemples::
 
-        <?php
         App::build(array('controllers' => array('/full/path/to/controllers'))) 
-        //becomes 
+        //devient 
         App::build(array('Controller' => array('/full/path/to/Controller')))
 
         App::build(array('helpers' => array('/full/path/to/views/helpers'))) 
-        //becomes 
+        //devient 
         App::build(array('View/Helper' => array('/full/path/to/View/Helper')))
 
     .. versionchanged:: 2.0
@@ -174,229 +175,230 @@ Adding paths for App to find packages in
 
 .. _app-build-register:
 
-Add new packages to an application
-----------------------------------
+Ajoutez de nouveaux packages vers une application
+-------------------------------------------------
 
-``App::build()`` can be used to add new package locations.  This is useful
-when you want to add new top level packages or, sub-packages to your
-application::
+``App::build()`` peut être utilisé pour ajouter de nouvelles localisations 
+de package. Ceci est utile quand vous voulez ajouter de nouveaux packages 
+de niveaux supérieurs ou, des sous-packages à votre application::
 
-    <?php
     App::build(array(
         'Service' => array('%s' . 'Service' . DS)
     ), App::REGISTER);
 
-The ``%s`` in newly registered packages will be replaced with the
-:php:const:`APP` path.  You must include a trailing ``/`` in registered
-packages.  Once packages are registered, you can use ``App::build()`` to
-append/prepend/reset paths like any other package.
+Le ``%s`` dans les packages nouvellement enregistrés, sera remplacé par 
+le chemin :php:const:`APP`. Vous devez inclure un trailing ``/`` dans les 
+packages enregistrés. Une fois que les packages sont enregistrés, vous 
+pouvez utiliser ``App::build()`` pour ajouter/préfixer/remettre les chemins 
+comme dans tout autre package.
 
 .. versionchanged:: 2.1
     Registering packages was added in 2.1
 
-Finding which objects CakePHP knows about
-=========================================
+Trouver quels objets CakePHP connaît
+====================================
 
 .. php:staticmethod:: objects(string $type, mixed $path = null, boolean $cache = true)
 
     :rtype: mixed Returns an array of objects of the given type or false if incorrect.
 
-    You can find out which objects App knows about using
-    ``App::objects('Controller')`` for example to find which application controllers
-    App knows about.
+    Vous pouvez trouver quels objets App connaît en utilisant 
+    ``App::objects('Controller')`` par exemple pour trouver quels controllers 
+    de l'application App connaît.
 
-    Example usage::
+    Exemple d'utilisation::
 
-        <?php
-        //returns array('DebugKit', 'Blog', 'User');
+        //retourne array('DebugKit', 'Blog', 'User');
         App::objects('plugin');
 
-        //returns array('PagesController', 'BlogController');
+        //retourne array('PagesController', 'BlogController');
         App::objects('Controller');
 
-    You can also search only within a plugin's objects by using the plugin dot syntax.::
+    Vous pouvez aussi chercher seulement dans les objets de plugin en utilisant 
+    la syntaxe de plugin avec les points.::
 
-        <?php
-        // returns array('MyPluginPost', 'MyPluginComment');
+        // retourne array('MyPluginPost', 'MyPluginComment');
         App::objects('MyPlugin.Model');
 
     .. versionchanged:: 2.0
 
-    1. Returns ``array()`` instead of false for empty results or invalid types
-    2. Does not return core objects anymore, ``App::objects('core')`` will
-       return ``array()``.
-    3. Returns the complete class name
+    1. Retourne ``array()`` au lieu de false pour les résultats vides ou les types invalides
+    2. Ne retourne plus les objets du coeur, ``App::objects('core')`` retournera ``array()``.
+    3. Retourne le nom de classe complète
 
-Locating plugins
-================
+Localiser les plugins
+=====================
 
 .. php:staticmethod:: pluginPath(string $plugin)
 
     :rtype: string
 
-    Plugins can be located with App as well. Using ``App::pluginPath('DebugKit');``
-    for example, will give you the full path to the DebugKit plugin::
+    Les Plugins peuvent être localisés aussi avec App. En utilisant 
+    ``App::pluginPath('DebugKit');`` par exemple, vous donnera le chemin 
+    complet vers le plugin DebugKit::
 
-        <?php
         $path = App::pluginPath('DebugKit');
 
-Locating themes
-===============
+Localiser les thèmes
+====================
 
 .. php:staticmethod:: themePath(string $theme)
 
     :rtype: string
 
-    Themes can be found ``App::themePath('purple');``, would give the full path to the
-    `purple` theme.
+    Les Thèmes peuvent être trouvés ``App::themePath('purple');``, vous 
+    donnerait le chemin complet vers le thème `purple`.
 
 .. _app-import:
 
-Including files with App::import()
-==================================
+Inclure les fichiers avec App::import()
+=======================================
 
 .. php:staticmethod:: import(mixed $type = null, string $name = null, mixed $parent = true, array $search = array(), string $file = null, boolean $return = false)
 
     :rtype: boolean
 
-    At first glance ``App::import`` seems complex, however in most use
-    cases only 2 arguments are required.
+    Au premier coup d'oeil, ``App::import`` a l'air compliqué, cependant pour 
+    la plupart des utilisations, seuls 2 arguments sont nécéssaires.
 
     .. note::
 
-        This method is equivalent to ``require``'ing the file.
-        It is important to realize that the class subsequently needs to be initialized.
+        Cette méthode est équivalente à faire un ``require`` sur le fichier.
+        Il est important de réaliser que la classe doit ensuite être 
+        initialisée.
 
     ::
 
-        <?php
-        // The same as require('Controller/UsersController.php');
+        // La même chose que require('Controller/UsersController.php');
         App::import('Controller', 'Users');
         
-        // We need to load the class
+        // Nous avons besoin de charger la classe
         $Users = new UsersController;
         
-        // If we want the model associations, components, etc to be loaded
+        // Si nous voulons que les associations de model, les components, etc 
+        soient chargées
         $Users->constructClasses();
 
-    **All classes that were loaded in the past using App::import('Core', $class) will need to be 
-    loaded using App::uses() referring to the correct package. This change has provided large
-    performance gains to the framework.**
+    **Toutes les classes qui sont chargées dans le passé utilisant 
+    App::import('Core', $class) devront être chargées en utilisant App::uses() 
+    se référant au bon package. Ce changement a fourni de grands gains de 
+    performances au framework.**
 
     .. versionchanged:: 2.0
 
-    * The method no longer looks for classes recursively, it strictly uses the values for the 
-      paths defined in :php:meth:`App::build()`
-    * It will not be able to load ``App::import('Component', 'Component')`` use
-      ``App::uses('Component', 'Controller');``.
-    * Using ``App::import('Lib', 'CoreClass');`` to load core classes is no longer possible.
-    * Importing a non-existent file, supplying a wrong type or package name, or
-      null values for ``$name`` and ``$file`` parameters will result in a false return
-      value.
-    * ``App::import('Core', 'CoreClass')`` is no longer supported, use
-      :php:meth:`App::uses()` instead and let the class autoloading do the rest.
-    * Loading Vendor files does not look recursively in the vendors folder, it
-      will also not convert the file to underscored anymore as it did in the
-      past.
+    * Cette méthode ne regarde plus les classes de façon récursive, elle 
+      utilise strictement les valeurs pour les chemins définis dans 
+      :php:meth:`App::build()`
+    * Elle ne sera pas capable de charger ``App::import('Component', 'Component')``, 
+      utilisez ``App::uses('Component', 'Controller');``.
+    * Utilisez ``App::import('Lib', 'CoreClass');`` pour charger les classes 
+      du coeur n'est plus possible.
+    * Importer un fichier non existant, fournir un mauvais type ou un mauvais 
+      nom de package, ou des valeurs null pour les paramètres ``$name`` et 
+      ``$file`` entraînera une valeur de retour à false.
+    * ``App::import('Core', 'CoreClass')`` n'est plus supporté, utilisez 
+      :php:meth:`App::uses()` à la place et laissez la classe d'autochargement 
+      faire le reste.
+    * Charger des fichiers de Chargement ne regarde pas de façon récursive dans 
+      le dossier vendors, il ne convertira plus aussi le fichier avec des 
+      underscores comme il le faisait dans le passé.
 
-Overriding classes in CakePHP
-=============================
+Ecraser les classes dans CakePHP
+================================
 
-You can override almost every class in the framework, exceptions are the
-:php:class:`App` and :php:class:`Configure` classes. whenever you like to
-perform such overriding, just add your class to your app/Lib folder mimicking
-the internal structure of the framework.  Some examples to follow
+Vous pouvez écraser preques toute classe dans le framework, les exceptions sont 
+les classes :php:class:`App` et :php:class:`Configure`. Quelque soit le moment 
+où vous souhaitez effectuer l'écrasement, ajoutez seulement votre classe dans 
+votre dossier app/Lib en imitant la structure interne du framework. Quelques 
+exemples suivants
 
-* To override the :php:class:`Dispatcher` class, create ``app/Lib/Routing/Dispatcher.php``
-* To override the :php:class:`CakeRoute` class, create ``app/Lib/Routing/Route/CakeRoute.php``
-* To override the :php:class:`Model` class, create ``app/Lib/Model/Model.php``
+* Pour écraser la classe :php:class:`Dispatcher`, créer ``app/Lib/Routing/Dispatcher.php``
+* Pour écraser la classe :php:class:`CakeRoute`, créer ``app/Lib/Routing/Route/CakeRoute.php``
+* Pour écraser la classe :php:class:`Model`, créer ``app/Lib/Model/Model.php``
 
-When you load the replaced files, the app/Lib files will be loaded instead of
-the built-in core classes.
+Quand vous chargez les fichiers remplacés, les fichiers de app/Lib seront 
+chargés à la place des classes intégrés au coeur.
 
-Loading Vendor Files
-====================
+Charger des fichiers Vendor
+===========================
 
-You can use ``App::uses()`` to load classes in vendors directories. It follows
-the same conventions as loading other files::
+Vous pouvez utiliser ``App::uses()`` pour charger des classes provenant des 
+répertoires vendors. Elle suit les mêmes conventions que pour le chargement 
+des autres fichiers::
 
-    <?php
-    // Load the class Geshi in app/Vendor/Geshi.php
+    // Charge la classe Geshi dans app/Vendor/Geshi.php
     App::uses('Geshi', 'Vendor');
 
-To load classes in subdirectories, you'll need to add those paths 
-with ``App::build()``::
+Pour charger les classes se trouvant dans des sous-répertoires, vous devrez 
+ajouter ces chemins avec ``App::build()``::
 
-    <?php
-    // Load the class ClassInSomePackage in app/Vendor/SomePackage/ClassInSomePackage.php
+    // Charge la classe ClassInSomePackage dans app/Vendor/SomePackage/ClassInSomePackage.php
     App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage')));
     App::uses('ClassInSomePackage', 'Vendor');
 
-Your vendor files may not follow conventions, have a class that differs from 
-the file name or does not contain classes. You can load those files using 
-``App::import()``. The following examples illustrate how to load vendor
-files from a number of path structures. These vendor files could be located in
-any of the vendor folders.
+Vos fichiers vendor ne suivent peut-être pas les conventions, ont une classe 
+qui diffère du nom de fichier ou ne contiennent pas de classes. Vous pouvez 
+charger ces fichiers en utilisant ``App::import()``. Les exemples siuvants 
+montrent comment charger les fichiers de vendor à partir d'un certain nombre 
+de structures de chemin. Ces fichiers vendor pourrraient être localisés dans 
+n'importe quel dossier vendor.
 
-To load **app/Vendor/geshi.php**::
+Pour charger **app/Vendor/geshi.php**::
 
-    <?php
     App::import('Vendor', 'geshi');
 
 .. note::
 
-    The geshi file must be a lower-case file name as Cake will not
-    find it otherwise.
+    Le nom du fichier geshi doit être en minuscule puisque Cake ne le trouvera 
+    pas sinon.
 
-To load **app/Vendor/flickr/flickr.php**::
+Pour charger **app/Vendor/flickr/flickr.php**::
 
-    <?php
     App::import('Vendor', 'flickr/flickr');
 
-To load **app/Vendor/some.name.php**::
+Pour charger **app/Vendor/some.name.php**::
 
-    <?php
     App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));
 
-To load **app/Vendor/services/well.named.php**::
+Pour charger **app/Vendor/services/well.named.php**::
 
-    <?php
     App::import('Vendor', 'WellNamed', array('file' => 'services' . DS . 'well.named.php'));
 
-It wouldn't make a difference if your vendor files are inside your /vendors 
-directory. Cake will automatically find it.
+Cela ne ferait pas de différence si vos fichiers vendor étaient à l'intérieur 
+du répertoire /vendors. Cake le trouvera automatiquement.
 
-To load **vendors/vendorName/libFile.php**::
+Pour charger **vendors/vendorName/libFile.php**::
 
-    <?php
     App::import('Vendor', 'aUniqueIdentifier', array('file' => 'vendorName' .DS . 'libFile.php'));
 
-App Init/Load/Shutdown Methods
-==============================
+Les Méthodes Init/Load/Shutdown de App
+======================================
 
 .. php:staticmethod:: init( )
 
     :rtype: void
 
-    Initializes the cache for App, registers a shutdown function.
+    Initialise le cache pour App, enregistre une fonction shutdown (fermeture).
 
 .. php:staticmethod:: load(string $className)
 
     :rtype: boolean
 
-    Method to handle the automatic class loading. It will look for each class'
-    package defined using :php:meth:`App::uses()` and with this information it
-    will resolve the package name to a full path to load the class from. File
-    name for each class should follow the class name. For instance, if a class
-    is name ``MyCustomClass`` the file name should be ``MyCustomClass.php``
+    Méthode pour la gestion automatique des classes. Elle cherchera chaque 
+    package de classe défini en utilisant :php:meth:`App::uses()` et avec 
+    cette information, elle va transformer le nom du package en un chemin 
+    complet pour charger la classe. Le nom de fichier pour chaque classe 
+    devrait suivre le nom de classe. Par exemple, si une classe est nommée 
+    ``MyCustomClass`` le nom de fichier devrait être ``MyCustomClass.php``
 
 .. php:staticmethod:: shutdown( )
 
     :rtype: void
 
-    Object destructor. Writes cache file if changes have been made to the 
-    ``$_map``.
+    Desctructeur de l'Objet. Ecrit le fichier de cache si les changements ont 
+    été faits à ``$_map``.
+
 
 .. meta::
-    :title lang=en: App Class
-    :keywords lang=en: compatible implementation,model behaviors,path management,loading files,php class,class loading,model behavior,class location,component model,management class,autoloader,classname,directory location,override,conventions,lib,textile,cakephp,php classes,loaded
+    :title lang=fr: Classe App
+    :keywords lang=fr: compatible implementation,model behaviors,path management,loading files,php class,class loading,model behavior,class location,component model,management class,autoloader,classname,directory location,override,conventions,lib,textile,cakephp,php classes,loaded

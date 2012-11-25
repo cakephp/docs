@@ -3,14 +3,14 @@ String
 
 .. php:class:: String
 
-The String class includes convenience methods for creating and
-manipulating strings and is normally accessed statically. Example:
+La classe String inclut des méthodes pratiques pour la création et la 
+manipulation des chaînes de caractères et est normalement accessible 
+statiquement. Exemple:
 ``String::uuid()``.
 
-If you need :php:class:`TextHelper` functionalities outside of a ``View``,
-use the ``String`` class::
+Si vous avez besoin des fonctionnalités de :php:class:`TextHelper` en-dehors 
+d'une ``View``, utilisez la classe ``String``::
 
-    <?php
     class UsersController extends AppController {
 
         public $components = array('Auth');
@@ -19,21 +19,20 @@ use the ``String`` class::
             App::uses('String', 'Utility');
             $message = $this->User->find('new_message');
             if (!empty($message)) {
-                // notify user of new message
-                $this->Session->setFlash(__('You have a new message: %s', String::truncate($message['Message']['body'], 255, array('html' => true))));
+                // notifie à l'utilisateur d'un nouveau message
+                $this->Session->setFlash(__('Vous avez un message: %s', String::truncate($message['Message']['body'], 255, array('html' => true))));
             }
         }
     }
 
 .. versionchanged:: 2.1
-   Several methods from :php:class:`TextHelper` have been moved to
-   ``String`` class.
+   Plusieurs méthodes de :php:class:`TextHelper` ont été déplacées dans la 
+   classe ``String``.
 
 .. php:staticmethod:: uuid()
 
-    The uuid method is used to generate unique identifiers as per
-    :rfc:`4122`. The uuid is a
-    128bit string in the format of
+    La méthode uuid est utilisée pour générer des identificateurs uniques comme 
+    per :rfc:`4122`. uuid est une chaîne de caractères de 128bit au format 
     485fc381-e790-47a3-9794-1337c0a8fe68.
 
     ::
@@ -43,37 +42,35 @@ use the ``String`` class::
 
 .. php:staticmethod:: tokenize($data, $separator = ',', $leftBound = '(', $rightBound = ')')
 
-    Tokenizes a string using ``$separator``, ignoring any instance of
-    ``$separator`` that appears between ``$leftBound`` and ``$rightBound``.
+    Tokenizes une chaîne en utilisant ``$separator``, en ignorant toute instance de 
+    ``$separator`` qui apparaissent entre ``$leftBound`` et ``$rightBound``.
 
-    This method can be useful when splitting up data in that has regular
-    formatting such as tag lists::
+    Cette méthode peut être utile quand on sépare les données en formatage 
+    régulier comme les listes de tag::
 
-        <?php
         $data = "cakephp 'great framework' php";
         $result = String::tokenize($data, ' ', "'", "'");
-        // result contains
+        // le résultat contient
         array('cakephp', "'great framework'", 'php');
 
 .. php:staticmethod:: insert($string, $data, $options = array())
 
-    The insert method is used to create string templates and to allow
-    for key/value replacements::
+    La méthode insérée est utilisée pour créer des chaînes templates et pour 
+    permettre les remplacements de clé/valeur::
 
-        String::insert('My name is :name and I am :age years old.', array('name' => 'Bob', 'age' => '65'));
-        // generates: "My name is Bob and I am 65 years old."
+        String::insert('Mon nom est :name et j'ai :age ans.', array('name' => 'Bob', 'age' => '65'));
+        // génére: "Mon nom est Bob et j'ai 65 ans."
 
 .. php:staticmethod:: cleanInsert($string, $options = array())
 
-    Cleans up a ``String::insert`` formatted string with given $options
-    depending on the 'clean' key in $options. The default method used
-    is text but html is also available. The goal of this function is to
-    replace all whitespace and unneeded markup around placeholders that
-    did not get replaced by Set::insert.
+    Nettoie une chaîne formatée ``String::insert`` avec $options donnée 
+    qui dépend de la clé 'clean' dans $options. La méthode par défaut utilisée 
+    est le texte mais html est aussi disponible. Le but de cette fonction est 
+    de remplacer tous les espaces blancs et les balises non nécessaires autour 
+    des placeholders qui ne sont pas remplacés par Set::insert.
 
-    You can use the following options in the options array::
+    Vous pouvez utiliser les options suivantes dans le tableau options::
 
-        <?php
         $options = array(
             'clean' => array(
                 'method' => 'text', // or html
@@ -85,76 +82,78 @@ use the ``String`` class::
 
 .. php:staticmethod:: wrap($text, $options = array())
 
-    Wraps a block of text to a set width, and indent blocks as well.
-    Can intelligently wrap text so words are not sliced across lines::
+    Entoure un block de texte pour un ensemble de largeur, et indente aussi les 
+    blocks. Peut entourer intelligemment le texte ainsi les mots ne sont pas 
+    sliced across lines::
 
-        <?php
-        $text = 'This is the song that never ends.';
+        $text = 'Ceci est la chanson qui ne stoppe jamais.';
         $result = String::wrap($text, 22);
 
-        // returns
-        This is the song
-        that never ends.
+        // retourne
+        Ceci est la chanson
+        qui ne stoppe jamais.
 
-    You can provide an array of options that control how wrapping is done.  The
-    supported options are:
+    Vous pouvez fournir un tableau d'options qui contrôlent la façon dont 
+    on entoure. Les options possibles sont:
 
-    * ``width`` The width to wrap to. Defaults to 72.
-    * ``wordWrap`` Whether or not to wrap whole words. Defaults to true.
-    * ``indent`` The character to indent lines with. Defaults to ''.
-    * ``indentAt`` The line number to start indenting text. Defaults to 0.
+    * ``width`` La largeur de l'enroulement. Par défaut à 72.
+    * ``wordWrap`` Entoure ou non les mots entiers. Par défaut à true.
+    * ``indent`` Le caractère avec lequel on indente les lignes. Par défaut 
+      à ''.
+    * ``indentAt`` Le nombre de ligne pour commencer l'indentation du texte. 
+      Par défaut à 0.
 
 .. start-string
 
 .. php:method:: highlight(string $haystack, string $needle, array $options = array() )
 
-    :param string $haystack: The string to search.
-    :param string $needle: The string to find.
-    :param array $options: An array of options, see below.
+    :param string $haystack: La chaîne de caractères à rechercher.
+    :param string $needle: La chaîne à trouver.
+    :param array $options: Un tableau d'options, voir ci-dessous.
 
-    Highlights ``$needle`` in ``$haystack`` using the
-    ``$options['format']`` string specified or a default string.
+    Mettre en avant ``$needle`` dans ``$haystack`` en utilisant la chaîne 
+    spécifique ``$options['format']`` ou une chaîne par défaut.
 
     Options:
 
-    -  'format' - string The piece of html with that the phrase will be
-       highlighted
-    -  'html' - bool If true, will ignore any HTML tags, ensuring that
-       only the correct text is highlighted
+    -  'format' - chaîne la partie de html avec laquelle la phrase sera mise 
+       en excergue
+    -  'html' - bool Si true, va ignorer tous les tags HTML, s'assurant que 
+       seul le bon texte est mise en avant.
 
-    Example::
+    Exemple::
 
-        <?php
-        // called as TextHelper
+        // appelé par TextHelper
         echo $this->Text->highlight($last_sentence, 'using', array('format' => '<span class="highlight">\1</span>'));
 
-        // called as String
+        // appelé par String
         App::uses('String', 'Utility');
         echo String::highlight($last_sentence, 'using', array('format' => '<span class="highlight">\1</span>'));
 
-    Output::
+    Sortie::
 
         Highlights $needle in $haystack <span class="highlight">using</span>
         the $options['format'] string specified  or a default string.
 
 .. php:method:: stripLinks($text)
 
-    Strips the supplied ``$text`` of any HTML links.
+    Enlève le ``$text`` fourni de tout lien HTML.
 
 .. php:method:: truncate(string $text, int $length=100, array $options)
 
-    :param string $text: The text to truncate.
-    :param int $length:  The length to trim to.
-    :param array $options: An array of options to use.
+    :param string $text: Le texte à tronquer.
+    :param int $length: La longueur de trim.
+    :param array $options: Un tableau d'options à utiliser.
 
-    Cuts a string to the ``$length`` and adds a suffix with
-    ``'ending'`` if the text is longer than ``$length``. If ``'exact'``
-    is passed as ``false``, the truncation will occur after the next
-    word ending. If ``'html'`` is passed as ``true``, html tags will be
-    respected and will not be cut off.
+    Coupe une chaîne avec ``$length`` et ajoute un suffixe avec 
+    ``'ending'`` si le texte est plus long que ``$length``. Si ``'exact'``
+    est passé à ``false``, le truchement va se faire après le mot de fin 
+    suivant. Si ``'html'`` est passé à ``true``, les tags html seront 
+    respectés et ne seront pas coupés.
 
-    ``$options`` is used to pass all extra parameters, and has the
-    following possible keys by default, all of which are optional::
+    ``$options`` est utilisé pour passer tous les paramètres supplémentaires, 
+    et a les clés suivantes possibles par défaut, celles-si étant toutes 
+    optionnelles::
 
         array(
             'ending' => '...',
@@ -162,10 +161,9 @@ use the ``String`` class::
             'html' => false
         )
 
-    Example::
+    Exemple::
 
-        <?php
-        // called as TextHelper
+        // appelé par TextHelper
         echo $this->Text->truncate(
             'The killer crept forward and tripped on the rug.',
             22,
@@ -175,7 +173,7 @@ use the ``String`` class::
             )
         );
 
-        // called as String
+        // appelé par String
         App::uses('String', 'Utility');
         echo String::truncate(
             'The killer crept forward and tripped on the rug.',
@@ -186,58 +184,58 @@ use the ``String`` class::
             )
         );
 
-    Output::
+    Sortie::
 
         The killer crept...
 
 .. php:method:: excerpt(string $haystack, string $needle, integer $radius=100, string $ending="...")
 
-    :param string $haystack: The string to search.
-    :param string $needle: The string to excerpt around.
-    :param int $radius:  The number of characters on either side of $needle you want to include.
-    :param string $ending: Text to append/prepend to the beginning or end of the result.
+    :param string $haystack: La chaîne à chercher.
+    :param string $needle: La chaîne to excerpt around.
+    :param int $radius: Le nombre de caractères de chaque côté de $needle que 
+        vous souhaitez inclure.
+    :param string $ending: Le Texte à ajouter/préfixer au début ou à la fin 
+        du résultat.
 
-    Extracts an excerpt from ``$haystack`` surrounding the ``$needle``
+    Extrait un excerpt de ``$haystack`` surrounding the ``$needle``
     with a number of characters on each side determined by ``$radius``,
     and prefix/suffix with ``$ending``. This method is especially handy for
     search results. The query string or keywords can be shown within
     the resulting document.::
 
-        <?php
-        // called as TextHelper
+        // appelé par TextHelper
         echo $this->Text->excerpt($last_paragraph, 'method', 50, '...');
 
-        // called as String
+        // appelé par String
         App::uses('String', 'Utility');
         echo String::excerpt($last_paragraph, 'method', 50, '...');
 
-    Output::
+    Sortie::
 
-        ... by $radius, and prefix/suffix with $ending. This method is
-        especially handy for search results. The query...
+        ... par $radius, et prefix/suffix avec $ending. Cette méthode est 
+        spécialement pratique pour les résultats de recherche. La requête...
 
 .. php:method:: toList(array $list, $and='and')
 
-    :param array $list: Array of elements to combine into a list sentence.
-    :param string $and: The word used for the last join.
+    :param array $list: Tableau d'éléments à combiner dans une list sentence.
+    :param string $and: Le mot utilisé pour le dernier join.
 
-    Creates a comma-separated list where the last two items are joined
-    with ‘and’.::
+    Crée une liste séparée avec des virgules, où les deux derniers items sont 
+    joins avec ‘and’.::
 
-        <?php
-        // called as TextHelper
+        // appelé par TextHelper
         echo $this->Text->toList($colors);
 
-        // called as String
+        // appelé par String
         App::uses('String', 'Utility');
         echo String::toList($colors);
 
-    Output::
+    Sortie::
 
-        red, orange, yellow, green, blue, indigo and violet
+        red, orange, yellow, green, blue, indigo et violet
 
 .. end-string
 
 .. meta::
-    :title lang=en: String
-    :keywords lang=en: array php,array name,string options,data options,result string,class string,string data,string class,placeholders,default method,key value,markup,rfc,replacements,convenience,templates
+    :title lang=fr: String
+    :keywords lang=fr: tableau php,tableau name,string options,data options,result string,class string,string data,string class,placeholders,méthode défaut,valeur clé key,markup,rfc,remplacements,convenience,templates

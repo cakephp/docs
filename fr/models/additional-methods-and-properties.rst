@@ -1,18 +1,17 @@
-Méthodes et Propriétés additionnelles
-#####################################
+Méthodes et Propriétés supplémentaires
+######################################
 
-Bien que les fonctions de modèle de CakePHP devraient vous emmener là où vous 
-souhaitez aller, n'oubliez pas que les classes de modèles ne sont rien de plus 
+Bien que les fonctions de model de CakePHP devraient vous emmener là où vous 
+souhaitez aller, n'oubliez pas que les classes de models ne sont rien de plus 
 que cela : des classes qui vous permettent d'écrire vos propres méthodes ou de 
 définir vos propres propriétés.
 
 N'importe quelle opération qui prend en charge la sauvegarde ou la restitution 
-de données est mieux située dans vos classes de modèle. Ce concept est souvent 
-appelé fat model ("modèle gras").
+de données est mieux située dans vos classes de model. Ce concept est souvent 
+appelé fat model ("model gras").
 
 ::
 
-    <?php
     class Exemple extends AppModel {
         public function getRecent() {
             $conditions = array(
@@ -22,19 +21,17 @@ appelé fat model ("modèle gras").
         }
     }
 
-Cette méthode ``getRecent()`` peut maintenant être utilisée dans le contrôleur.
+Cette méthode ``getRecent()`` peut maintenant être utilisée dans le controller.
 
 ::
 
-    <?php
-    $recent = $this->Example->getRecent();
+    $recent = $this->Exemple->getRecent();
 
 :php:meth:`Model::associations()`
 =================================
 
 Obtenir les associations::
 
-    <?php
     $result = $this->Exemple->associations();
     // $result équivaut à array('belongsTo', 'hasOne', 'hasMany', 'hasAndBelongsToMany')
 
@@ -53,7 +50,7 @@ champ unique.
 :php:meth:`Model::escapeField(string $field = null, string $alias = null)`
 ==========================================================================
 
-Echappe le nom du champ et ajoute le nom du modèle. L'echappement est fait en 
+Echappe le nom du champ et ajoute le nom du model. L'echappement est fait en 
 fonction des règles du driver de la base de données courante.
 
 :php:meth:`Model::exists($id)`
@@ -72,7 +69,6 @@ vérifier l'existence de l'enregistrement dans un stockage persistant.
 
 ::
 
-    <?php
     $this->Exemple->id = 9;
     if ($this->Exemple->exists()) {
         // ...
@@ -88,12 +84,12 @@ Retourne le nombre de lignes affectées par la dernière requête.
 :php:meth:`Model::getAssociated(string $type = null)`
 =====================================================
 
-Récupère tous les modèles avec lesquels ce modèle est associé.
+Récupère tous les models avec lesquels ce model est associé.
 
 :php:meth:`Model::getColumnType(string $column)`
 ================================================
 
-Retourne le type de colonne d'une colonne du modèle.
+Retourne le type de colonne d'une colonne du model.
 
 :php:meth:`Model::getColumnTypes()`
 ===================================
@@ -108,13 +104,14 @@ Retourne l'ID de l'enregistrement courant.
 :php:meth:`Model::getInsertID()`
 ================================
 
-Retourne l'ID du dernier enregistrement que ce modèle insère.
+Retourne l'ID du dernier enregistrement que ce model insère.
 
 :php:meth:`Model::getLastInsertID()`
 ====================================
 
 Alias pour ``getInsertID()``.
 
+
 .. meta::
-    :title lang=fr: Méthodes et Propriétés additionnelles
-    :keywords lang=fr: classes de modèle,fonctions du modèle,classe de modèle,interval,tableau
+    :title lang=fr: Méthodes et Propriétés supplémentaires
+    :keywords lang=fr: classes de model,fonctions du model,classe de model,interval,tableau

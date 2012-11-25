@@ -32,7 +32,6 @@ configured ``CakeLog`` will attempt to load Configuring log streams
 is done by calling ``CakeLog::config()``. Configuring our
 DataBaseLogger would look like::
     
-    <?php
     // for app/Lib
     CakeLog::config('otherFile', array(
         'engine' => 'DatabaseLogger',
@@ -51,7 +50,6 @@ When configuring a log stream the ``engine`` parameter is used to
 locate and load the log handler. All of the other configuration
 properties are passed to the log stream's constructor as an array.::
 
-    <?php
     App::uses('CakeLogInterface', 'Log');
 
     class DatabaseLogger implements CakeLogInterface {
@@ -113,7 +111,6 @@ message is stored in. If a type is not supplied, LOG\_ERROR is used
 which writes to the error log. The default log location is
 ``app/tmp/logs/$type.log``::
 
-    <?php
     // Executing this inside a CakePHP class
     $this->log("Something didn't work!");
     
@@ -124,7 +121,6 @@ You can specify a custom log name using the first parameter. The
 default built-in FileLog class will treat this log name as the file
 you wish to write logs to::
 
-    <?php
     // called statically
     CakeLog::write('activity', 'A special message for activity logging');
     
@@ -138,7 +134,6 @@ You can configure additional/alternate FileLog locations using
 :php:meth:`CakeLog::config()`. FileLog accepts a ``path`` which allows for
 custom paths to be used::
 
-    <?php
     CakeLog::config('custom_path', array(
         'engine' => 'FileLog',
         'path' => '/path/to/custom/place/'
@@ -152,14 +147,12 @@ Writing to logs
 Writing to the log files can be done in 2 different ways. The first
 is to use the static :php:meth:`CakeLog::write()` method::
 
-    <?php
     CakeLog::write('debug', 'Something did not work');
 
 The second is to use the log() shortcut function available on any
 class that extends ``Object``. Calling log() will internally call
 CakeLog::write()::
 
-    <?php
     // Executing this inside a CakePHP class:
     $this->log("Something did not work!", 'debug');
 
@@ -188,21 +181,20 @@ the log messages will be directed to those loggers.  If a log message is written
 to an unknown scope, loggers that handle that level of message will log the
 message. For example::
 
-    <?php
     // configure tmp/logs/shops.log to receive all types (log levels), but only
     // those with `orders` and `payments` scope
     CakeLog::config('shops', array(
         'engine' => 'FileLog',
-        'types' => array(),
+        'types' => array('warning', 'error'),
         'scopes' => array('orders', 'payments'),
         'file' => 'shops.log',
     ));
 
     // configure tmp/logs/payments.log to receive all types, but only
     // those with `payments` scope
-    CakeLog::config('shops', array(
+    CakeLog::config('payments', array(
         'engine' => 'FileLog',
-        'types' => array(),
+        'types' => array('info', 'error', 'warning'),
         'scopes' => array('payments'),
         'file' => 'payments.log',
     ));
@@ -210,6 +202,9 @@ message. For example::
     CakeLog::warning('this gets written only to shops.log', 'orders');
     CakeLog::warning('this gets written to both shops.log and payments.log', 'payments');
     CakeLog::warning('this gets written to both shops.log and payments.log', 'unknown');
+
+In order for scopes to work correctly, you **must** define the accepted
+``types`` on all loggers you want to use scopes with.
 
 CakeLog API
 ===========
@@ -251,71 +246,85 @@ CakeLog API
 
 .. php:staticmethod:: levels()
 
-Call this method without arguments, eg: `CakeLog::levels()` to obtain current
-level configuration.
+    Call this method without arguments, eg: ``CakeLog::levels()`` to
+    obtain current level configuration.
 
-To append additional level 'user0' and 'user1' to to default log levels::
+    To append the additional levels 'user0' and 'user1' to the default
+    log levels use::
 
-    <?php
-    CakeLog::levels(array('user0', 'user1'));
-    // or
-    CakeLog::levels(array('user0', 'user1'), true);
+        CakeLog::levels(array('user0', 'user1'));
+        // or
+        CakeLog::levels(array('user0', 'user1'), true);
 
-will result in::
+    Calling ``CakeLog::levels()`` will result in::
 
-    <?php
-    array(
-        0 => 'emergency',
-        1 => 'alert',
-        ...
-        8 => 'user0',
-        9 => 'user1',
-    );
+        array(
+            0 => 'emergency',
+            1 => 'alert',
+            // ...
+            8 => 'user0',
+            9 => 'user1',
+        );
 
-To set/replace existing configuration, pass an array with the second argument
-set to false::
+    To set/replace an existing configuration, pass an array with the second
+    argument set to false::
 
-    <?php
-    CakeLog::levels(array('user0', 'user1'), false);
+        CakeLog::levels(array('user0', 'user1'), false);
 
-will result in::
+    Calling ``CakeLog::levels()`` will result in::
 
-    <?php
-    array(
-        0 => 'user0',
-        1 => 'user1',
-    );
+        array(
+            0 => 'user0',
+            1 => 'user1',
+        );
 
 .. php:staticmethod:: defaultLevels()
 
-    Resets log levels to the original value
+    :returns: An array of the default log levels values.
 
-    :returns: An array of the default log levels values
+    Resets log levels to their original values::
+
+        array(
+            'emergency' => LOG_EMERG,
+            'alert'     => LOG_ALERT,
+            'critical'  => LOG_CRIT,
+            'error'     => LOG_ERR,
+            'warning'   => LOG_WARNING,
+            'notice'    => LOG_NOTICE,
+            'info'      => LOG_INFO,
+            'debug'     => LOG_DEBUG,
+        );
 
 .. php:staticmethod:: enabled($streamName)
 
-    Checks wether $streamName is enable
-
     :returns: boolean
+
+    Checks whether ``$streamName`` has been enabled.
 
 .. php:staticmethod:: enable($streamName)
 
-    Enable stream $streamName
+    :returns: void
+
+    Enable the stream ``$streamName``.
 
 .. php:staticmethod:: disable($streamName)
 
-    Disable stream $streamName
+    :returns: void
+
+    Disable the stream ``$streamName``.
 
 .. php:staticmethod:: stream($streamName)
 
-    Gets $streamName from the active streams
+    :returns: Instance of ``BaseLog`` or ``false`` if not found.
+
+    Gets ``$streamName`` from the active streams.
 
 Convenience methods
 -------------------
 
 .. versionadded:: 2.2
 
-The following convenience methods were added to log `$message` with the
+The following convenience methods were added to log ``$message`` with the
 appropriate log level.
 
 .. php:staticmethod:: emergency($message, $scope = array())

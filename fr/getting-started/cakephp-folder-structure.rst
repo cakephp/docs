@@ -36,15 +36,15 @@ Config
     configuration de base et tous fichiers du même genre doivent être rangés 
     ici.
 Controller
-    Contient vos contrôleurs et leurs composants.
+    Contient vos controllers et leurs components.
 Lib
-    Contains 1st party libraries that do not come from 3rd parties or
-    external vendors. This allows you to separate your organization's
-    internal libraries from vendor libraries.
+    Contient Les librairies internes qui ne proviennent pas de librairies 
+    externes. Cela vous permet de séparer les librairies internes de votre 
+    organisme des librairies externes.
 Locale
     Stocke les fichiers pour l'internationalisation.
 Model
-    Pour les modèles, comportements et sources de données de votre 
+    Pour les models, behaviors et sources de données de votre 
     application.
 Plugin
     Contient les packages des Plugins.
@@ -52,7 +52,7 @@ tmp
     C'est ici que CakePHP enregistre les données temporaires. La manière dont 
     sont stockées les données actuelles dépend de la configuration que vous 
     avez effectuée, mais ce répertoire est habituellement utilisé pour déposer 
-    les descriptions de modèles, les logs et parfois les informations de 
+    les descriptions de models, les logs et parfois les informations de 
     session.
 
     Assurez vous que ce dossier existe et qu'il est en écriture, autrement la 
@@ -79,4 +79,4 @@ webroot
 
 .. meta::
     :title lang=fr: Structure du dossier de CakePHP
-    :keywords lang=fr: librairies internes,configuration du coeur,descriptions du modèle,librairies externes,détails de connection,structure de dossier,librairies tierces,engagement personnel,connexion base de données,internationalisation,fichiersd e configuration,dossiers,développement de l'application,à lire,lib,configuré,logs,config,tierce partie,cakephp
+    :keywords lang=fr: librairies internes,configuration du coeur,descriptions du model,librairies externes,détails de connection,structure de dossier,librairies tierces,engagement personnel,connexion base de données,internationalisation,fichiersd e configuration,dossiers,développement de l'application,à lire,lib,configuré,logs,config,tierce partie,cakephp

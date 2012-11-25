@@ -1,14 +1,14 @@
-New Features in CakePHP 2.1
-###########################
+Nouvelles caractéristiques dans CakePHP 2.1
+###########################################
 
 Models
 ======
 
 Model::saveAll(), Model::saveAssociated(), Model::validateAssociated()
 ----------------------------------------------------------------------
-``Model::saveAll()`` and friends now support passing the `fieldList` for multiple models. Example::
+``Model::saveAll()`` et ses amis supportent maintenant le passement de 
+`fieldList` pour de multiples modèles. Exemple::
 
-    <?php
     $this->SomeModel->saveAll($data, array(
         'fieldList' => array(
             'SomeModel' => array('field_1'),
@@ -16,9 +16,9 @@ Model::saveAll(), Model::saveAssociated(), Model::validateAssociated()
         )
     ));
 
-``Model::saveAll()`` and friends now can save unlimited levels deep. Example::
+``Model::saveAll()`` et ses amis peuvent maintenant sauvegarder sur des niveaux 
+de profondeur illimités. Exemple::
 
-    <?php
     $data = array(
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
@@ -31,30 +31,36 @@ Model::saveAll(), Model::saveAssociated(), Model::validateAssociated()
 View
 ====
 
-View Blocks
------------
+View Blocks (Blocks de Vue)
+---------------------------
 
-View Blocks are a mechanism to allow the inclusion of slots of content, whilst allowing child view classes or elements to provide custom content for that block.
+View Blocks sont un mécanisme permettant l'inclusion de slots de contenu, 
+en autorisant les classes enfants de vue ou les éléments à fournir le contenu 
+personnalisé pour ce block.
 
-Blocks are output by calling the ``fetch`` method on the :php:class:`View`. For example, the following can be placed in your ``View/Layouts/default.ctp`` file::
+Les blocks sont sortis en appelant la méthode ``fetch`` sur :php:class:`View`. 
+Par exemple, ce qui suit peut être placé dans votre fichier 
+``View/Layouts/default.ctp``::
 
     <?php echo $this->fetch('my_block'); ?>
 
-This will echo the content of the block if available, or an empty string if it is undefined.
+Cela affichera le contenu du block si disponible, ou ue chaîne de caractère 
+vide si elle n'est pas définie.
 
-Setting the content of a block can be done in a number of ways. A simple assignment of data can be done using `assign`::
+Définir le contenu d'un block peut être fait de plusieurs façons. Une simple 
+attribution de donnée peut être faite en utilisant `assign`::
 
     <?php $this->assign('my_block', 'Hello Block'); ?>
 
-Or you can use it to capture a section of more complex content::
+Ou vous pouvez l'utiliser pour capturer une section de contenu plus complexe::
 
     <?php $this->start('my_block'); ?>
         <h1>Hello Block!</h1>
-        <p>This is a block of content</p>
+        <p>Ceci est block de contenu</p>
         <p>Page title: <?php echo $title_for_layout; ?></p>
     <?php $this->end(); ?>
 
-Block capturing also supports nesting::
+Le Block capturant aussi le support d'imbrication::
 
     <?php $this->start('my_block'); ?>
         <h1>Hello Block!</h1>
@@ -67,52 +73,61 @@ Block capturing also supports nesting::
 ThemeView
 ---------
 
-In 2.1, the use of ``ThemeView`` is deprecated in favor of using the ``View`` class itself. ``ThemeView`` is now a stub class.
+Dans 2.1, l'utilisation de ``ThemeView`` est dépréciée en faveur de 
+l'utilisation de la classe ``View`` elle-même. ``ThemeView`` est maintenant 
+une classe stub.
 
 All custom pathing code has been moved into the ``View`` class, meaning that it is now possible for classes extending the ``View`` class to automatically support themes. Whereas before we might set the ``$viewClass`` Controller property to ``Theme``, it is now possible to enable themes by simply setting the ``$theme`` property. Example::
 
-    <?php
     App::uses('Controller', 'Controller');
 
     class AppController extends Controller {
-        public $theme = 'Example';
+        public $theme = 'Exemple';
     }
 
-All View classes which extended ``ThemeView`` in 2.0 should now simply extend ``View``.
+Toutes les classe View qui étendent ``ThemeView`` dans 2.0 doivent maintenant 
+simplement étendre ``View``.
 
 JsonView
 --------
 
-A new view class that eases the output of JSON content.
+Une nouvelle classe qui facilite la sortie de contenu JSON.
 
-Previously, it was necessary to create a JSON layout (``APP/View/Layouts/json/default.ctp``) and a corresponding view for each action that would output JSON. This is no longer required with :php:class:`JsonView`.
+Précédemment, il était nécessaire de créer un layout JSON 
+(``APP/View/Layouts/json/default.ctp``) et une vue correspondante pour 
+chaque action qui sortirait le JSON. Ceci n'est plus requis avec 
+:php:class:`JsonView`.
 
-The :php:class:`JsonView` is used like any other view class, by defining it on the controller. Example::
+:php:class:`JsonView` est utilisée comme tout autre classe de vue, en 
+la définissant sur le controller. Exemple::
 
-    <?php
     App::uses('Controller', 'Controller');
 
     class AppController extends Controller {
         public $viewClass = 'Json';
     }
 
-Once you have setup the controller, you need to identify what content should be serialized as JSON, by setting the view variable ``_serialize``. Example::
+Une fois que vous avez configuré le controller, vous avez besoin d'identifier 
+quel contenu devrait être sérialisé en JSON, en paramètrant la variable vue 
+``_serialize``. Exemple::
 
-    <?php
     $this->set(compact('users', 'posts', 'tags'));
     $this->set('_serialize', array('users', 'posts'));
 
-The above example would result in only the ``users`` and ``posts`` variables being serialized for the JSON output, like so::
+L'exemple ci-dessus résulterait seulement dans les variables ``users`` et 
+``posts``, étant sérialisé pour la sortie JSON, comme ceci::
 
     {"users": [...], "posts": [...]}
 
-There is no longer any need to create view ``ctp`` files in order to display Json content.
+Il n'y a plus aucun besoin de créer des fichiers de vue ``ctp`` afin d'afficher 
+le contenu Json.
 
-Further customization of the output can be achieved by extending the :php:class:`JsonView` class with your own custom view class if required.
+La personnalisation future de la sortie peut être atteinte en étendant la 
+classe :php:class:`JsonView` avec votre propre classe de vue personnalisée si 
+requise.
 
-The following example wraps the result with ``{results: ... }``::
+Les exemples suivants entourent le résultat avec ``{results: ... }``::
 
-    <?php
     App::uses('JsonView', 'View');
     class ResultsJsonView extends JsonView {
         public function render($view = null, $layout = null) {
@@ -127,36 +142,39 @@ The following example wraps the result with ``{results: ... }``::
 XmlView
 -------
 
-Much like the :php:class:`JsonView`, the :php:class:`XmlView` requires you to set the ``_serialize`` view variable in order to indicate what information should be serialized into XML for output.
+Un peu comme :php:class:`JsonView`, :php:class:`XmlView` requièrt que vous 
+configuriez la variable de vue ``_serialize`` afin d'indiquer quelle 
+information serait sérialisée en XML pour la sortie.
 
-    <?php
     $this->set(compact('users', 'posts', 'tags'));
     $this->set('_serialize', array('users', 'posts'));
 
-The above example would result in only the ``users`` and ``posts`` variables being serialized for the XML output, like so::
+L'exemple ci-dessus résulterait dans seulement les variables ``users`` et 
+``posts`` étant sérialisées pour la sortie XML, comme ceci::
 
     <response><users>...</users><posts>...</posts></response>
 
-Note that the XmlView adds a ``response`` node to wrap all serialized content.
+Notez que XmlView ajoute un noeud de ``response`` pour entourer tout 
+contenu sérialisé.
 
 
-Conditional View Rendering
---------------------------
+Rendu de Vue conditionnel
+-------------------------
 
-Several new methods were added to :php:class:`CakeRequest` to ease the task of
-setting correct HTTP headers to foster HTTP caching. You can now define our
-caching strategy using the expiration or validation HTTP cache model, or combine
-both. Now there are specific methods in :php:class:`CakeRequest` to fine-tune
-Cache-Control directives, set the entity tag (Etag), set the Last-Modified time
-and much more.
+Plusieurs nouvelles méthodes ont été ajoutées à :php:class:`CakeRequest` 
+pour faciliter la tâche de paramètrer les headers HTTP corrects en mettant 
+le HTTP en cache. Vous pouvez maintenant définir notre stratégie de mise 
+en cache en utilisant l'expiration ou la validation HTTP du cache du model, 
+ou de combiner les deux. Maintenant, il y a des méthodes spécifiques dans 
+:php:class:`CakeRequest` to fine-tune Cache-Control directives, set the 
+entity tag (Etag), set the Last-Modified time and much more.
 
-When those methods are combined with having the :php:class:`RequestHandlerComponent`
-enabled in your controller, the component will automatically decide if the
-response is already cached in the client and will send a `304 Not Modified`
-status code before rendering the view. Skipping the view rendering process saves
-CPU cycles and memory.::
+Quand ces méthodes sont combinés avec le :php:class:`RequestHandlerComponent`
+activé dans votre controller, le component décidera automatiquement si la 
+réponse est déjà mise en cache dans le client et enverra un code de statut 
+`304 Not Modified` avant le rendu de la vue. Sauter le processus de rendu de 
+vue sauvegarde les cycles CPU et la mémoire.::
 
-    <?php
     class ArticlesController extends AppController {
         public $components = array('RequestHandler');
 
@@ -167,20 +185,19 @@ CPU cycles and memory.::
         }
     }
 
-In the above example the view will not be rendered if the client sent the
-header `If-Modified-Since`, and the response will have a 304 status.
+Dans l'exemple ci-dessus, la vue ne sera pas rendu si le client envoie le 
+header `If-Modified-Since`, et la réponse aura un statut 304.
 
 Helpers
 =======
 
-To allow easier use outside of the ``View`` layer, methods from
-:php:class:`TimeHelper`, :php:class:`TextHelper`, and :php:class:`NumberHelper`
-helpers have been extracted to :php:class:`CakeTime`, :php:class:`String`,
-and :php:class:`CakeNumber` classes respectively.
+Pour faciliter l'utilisation en dehors de la couche ``View``, les méthodes des 
+helpers :php:class:`TimeHelper`, :php:class:`TextHelper`, et 
+:php:class:`NumberHelper` ont été extraites respectivement des classes 
+:php:class:`CakeTime`, :php:class:`String`, et :php:class:`CakeNumber`.
 
-To use the new utility classes::
+Pour utiliser les nouvelles classes utilitaires::
 
-    <?php
     class AppController extends Controller {
 
         public function log($msg) {
@@ -189,14 +206,13 @@ To use the new utility classes::
         }
     }
 
-You can override the default class to use by creating a new class in your
-``APP/Utility`` folder, e.g.: ``Utility/MyAwesomeStringClass.php``, and specify
-it in ``engine`` key::
+Vous pouvez écraser la classe par défaut à utiliser en créant une nouvelle 
+classe dans votre dossier ``APP/Utility``, par exemple: 
+``Utility/MyAwesomeStringClass.php``, et le spécifier dans la clé ``engine``::
 
-    <?php
     // Utility/MyAwesomeStringClass.php
     class MyAwesomeStringClass extends String {
-        // my truncate is better than yours
+        // mon truchement est meilleur que les votres
         public function static truncate($text, $length = 100, $options = array()) {
             return null;
         }
@@ -213,5 +229,6 @@ it in ``engine`` key::
 
 HtmlHelper
 -----------
-A new function :php:meth:`HtmlHelper::media()` has been added for HTML5's audio/video element generation.
+Une nouvelle fonction :php:meth:`HtmlHelper::media()` a été ajoutée pour la 
+génération d'éléments HTML audio/video.
 

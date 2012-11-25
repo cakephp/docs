@@ -1,29 +1,26 @@
-
 Constantes globales et fonctions
 ################################
 
-Alors que la plupart de vos activité quotidiennes avec CakePHP
-sera d'initialiser des classes du noyau, Cake PHP dispose d'un
+Alors que la plupart de vos activités quotidiennes avec CakePHP
+sera d'initialiser des classes du noyau, CakePHP dispose d'un
 certain nombre de fonctions globales de confort qui peuvent
 arriver à point nommé. La plupart de ses fonctions sont à
 utiliser avec les classes cakePHP (classes de chargement ou de
-composant), mais beaucoup d'autres rendent le travail avec les
-tableaux ou les chaînes un peu plus simple.
+component), mais beaucoup d'autres rendent le travail avec les
+tableaux ou les chaînes de caractères un peu plus simple.
 
 Nous allons aussi couvrir une partie des constantes disponibles 
 dans les applications CakePHP. L'utilisation des constantes 
-disponibles vous aidera à faire des mises à jour plus lisse,
+disponibles vous aidera à faire des mises à jour plus lisses,
 mais sont aussi des moyens pratiques pour pointer certains
-fichiers ou répertoires dans vos application CakePHP.
-
+fichiers ou répertoires dans vos applications CakePHP.
 
 Fonctions Globales
 ==================
 
 Voici les fonctions disponibles dans le monde CakePHP. La plupart
-sont juste des emballages pratique pour d'autres fonctionnalités
-Cake PHP, comme le débogage et la traduction de contenu.
-
+sont juste des emballages pratiques pour d'autres fonctionnalités
+CakePHP, comme le débogage et la traduction de contenu.
 
 .. php:function:: \_\_(string $string_id, [$formatArgs])
 
@@ -31,11 +28,9 @@ Cake PHP, comme le débogage et la traduction de contenu.
     CakePHP. ``$string_id`` identifie l'ID de la traduction.
     Les chaînes utilisées pour la traduction sont traitées 
     comme chaîne formatées pour ``sprintf()``. Vous pouvez fournir
-    des arguments additionnels pour remplacer les espaces
+    des arguments supplémentaires pour remplacer les espaces
     réservés dans votre chaîne::
 
-    
-        <?php
         __('You have %s unread messages', $number);
 
     .. note::
@@ -49,7 +44,6 @@ Cake PHP, comme le débogage et la traduction de contenu.
     Notez que la catégorie doit être spécifiée avec une valeur numérique,
     au lieu d'un nom de constante. Les valeurs sont:
 
-   
     - 0 - LC_ALL
     - 1 - LC_COLLATE
     - 2 - LC_CTYPE
@@ -60,7 +54,8 @@ Cake PHP, comme le débogage et la traduction de contenu.
 
 .. php:function:: __d(string $domain, string $msg, mixed $args = null)
 
-    Vous permet de remplacer le domaine courant pour la recherche d'un message.
+    Vous permet de remplacer le domaine courant lors de la recherche d'un 
+    message.
 
     Utile pour internationaliser un plugin:
      ``echo __d('PluginName', 'This is my plugin');``
@@ -70,11 +65,9 @@ Cake PHP, comme le débogage et la traduction de contenu.
     Vous permet de remplacer le domaine courant pour la recherche d'un message. 
     Permet également de spécifier une catégorie. 
     
-
     Notez que la catégorie doit être spécifiée avec une valeur numérique,
     au lieu du nom de la constante. Les valeurs sont:
-    
-
+   
     - 0 - LC_ALL
     - 1 - LC_COLLATE
     - 2 - LC_CTYPE
@@ -85,16 +78,14 @@ Cake PHP, comme le débogage et la traduction de contenu.
 
 .. php:function:: __dcn(string $domain, string $singular, string $plural, integer $count, integer $category, mixed $args = null)
 
-    Vous permet de remplacer le domaine courant pour la recherche simple au pluriel
-    d'un message.  Cela permet également de spécifier une catégorie.
+    Vous permet de remplacer le domaine courant pour la recherche simple au 
+    pluriel d'un message. Cela permet également de spécifier une catégorie.
     Retourne la forme correcte d'un message identifié par $singular et $plural
-    pour le compteur $count depuis le domaine $domain. Certaines langues ont plus 
-    d'une forme de pluriel dépendant du compteur
-
+    pour le compteur $count depuis le domaine $domain. Certaines langues ont 
+    plus d'une forme de pluriel dépendant du compteur
 
     Notez que la catégorie doit être spécifiée avec des valeurs numériques,
     au lieu des noms de constantes. Les valeurs sont:
-
    
     - 0 - LC_ALL
     - 1 - LC_COLLATE
@@ -116,8 +107,7 @@ Cake PHP, comme le débogage et la traduction de contenu.
     Retourne la forme correcte d'un message identifié par $singular et $plural
     pour le compteur $count. Certaines langues ont plus d'une forme de pluriel 
     dépendant du compteur
-
-    
+ 
 .. php:function:: am(array $one, $two, $three...)
 
     Fusionne tous les tableaux passés en paramètre et retourne le tableau
@@ -129,9 +119,8 @@ Cake PHP, comme le débogage et la traduction de contenu.
     de votre application via include\_once. La fonction vérifie l'existence 
     du fichier avant de l'inclure et retourne un booléen. 
     Prends un nombre optionnel d'arguments.
-
    
-    Example: ``config('un_fichier', 'maconfig');``
+    Exemple: ``config('un_fichier', 'maconfig');``
 
 .. php:function:: convertSlash(string $string)
 
@@ -145,7 +134,7 @@ Cake PHP, comme le débogage et la traduction de contenu.
     affiché. Si ``$showHTML`` est true (vrai) ou laissé null, la donnée est
     formatée pour être visualisée facilement dans un navigateur.
 
-    Si ``$showFrom`` n'est pas définit à false,  debug retournera en sortie
+    Si ``$showFrom`` n'est pas défini à false, debug retournera en sortie
     la ligne depuis laquelle il a été appelé
     Voir aussi  :doc:`/development/debugging`
 
@@ -161,12 +150,10 @@ Cake PHP, comme le débogage et la traduction de contenu.
     (notamment si vous prévoyez de distribuer le code), puisque 
     c'est un wrapper d'émulation totale.
 
-   
 .. php:function:: fileExistsInPath(string $file)
 
     Vérifie que le fichier donné est dans le include\_path PHP actuel. 
     Renvoie une valeur booléenne.
-
     
 .. php:function:: h(string $text, boolean $double = true, string $charset = null)
 
@@ -201,7 +188,7 @@ Cake PHP, comme le débogage et la traduction de contenu.
 Définitions des constantes du noyau
 ===================================
 
-La plupart des constantes suivantes font références aux chemins
+La plupart des constantes suivantes font référence aux chemins
 dans votre application.
 
 .. php:const:: APP
@@ -300,7 +287,8 @@ Timing Definition Constants
 
 .. php:const:: TIME_START
 
-    timestamp Unix en microseconde au format float du démarrage de l'application.
+    timestamp Unix en microseconde au format float du démarrage de 
+    l'application.
   
 .. php:const:: SECOND
 
@@ -332,5 +320,5 @@ Timing Definition Constants
 
 
 .. meta::
-    :title lang=en: Global Constants and Functions
-    :keywords lang=en: internationalization and localization,global constants,example config,array php,convenience functions,core libraries,component classes,optional number,global functions,string string,core classes,format strings,unread messages,placeholders,useful functions,sprintf,arrays,parameters,existence,translations
+    :title lang=fr: Constantes Globales et Fonctions
+    :keywords lang=fr: internationalization et localization,constantes globales,exemple config,tableau php,convenience functions,core libraries,classes component,optional number,fonctions globales,string string,core classes,format strings,messages non lus,placeholders,fonctions utiles,sprintf,tableaux,paramètres,existence,traductions

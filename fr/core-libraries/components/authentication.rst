@@ -10,7 +10,6 @@ Le composant Auth vous permet de combiner l'authentification des objets ,
 l'autorisation des objets  pour créer un moyen souple  pour permettre 
 l'identification et le contrôle des autorisations de l'utilisateur.
 
-
 .. _authentication-objects:
 
 Authentification
@@ -31,8 +30,6 @@ utilisateurs enregistrés dans votre application.
   utilisant l'authentification Basic HTTP.
 * ``DigestAuthenticate`` vous permet d'identifier les utilisateurs en 
   utilisant l'authentification Digest HTTP.
-
-
 
 Par défaut Le composant Auth (``AutComponent``) utilise ``FormAuthenticate``.
 
@@ -56,9 +53,8 @@ Digest plus approprié pour des applications sans cryptage SSL.
 Vous pouvez également utiliser des systèmes d'authentification comme 
 OpenID , mais openid ne fait pas partie du cœur de CakePHP.
 
-
 Configuration des gestionnaires d'authentification
-------------------------------------------------------
+--------------------------------------------------
 
 Vous configurez les gestionnaires d'authentification en 
 utilisant ``$this->Auth->authenticate``.
@@ -77,8 +73,6 @@ Vous pouvez configurer le gestionnaire d'authentification dans les tableaux
 Vous pouvez passer l'information de configuration dans chaque objet 
 d'authentification en utilisant un tableau::
 
-
-    <?php
     // Configuration de base
     $this->Auth->authenticate = array('Form');
 
@@ -95,7 +89,6 @@ de définir les réglages qui sont passés à chaque objet attaché.
 La cle ``all`` est aussi utilisée comme cela
 ``AuthComponent::ALL``::
 
-    <?php
     // Passer la configuration en utilisant 'all'
     $this->Auth->authenticate = array(
         AuthComponent::ALL => array('userModel' => 'Membre'),
@@ -103,13 +96,11 @@ La cle ``all`` est aussi utilisée comme cela
         'Basic'
     );
 
-
 Dans l'exemple ci-dessus, à la fois ```Form`` et ``Basic`` prendrons
 les paramétrages définis dans la clef "all".
 Tous les paramètres transmis à un objet d'authentification particulier 
 remplacerons  la clef correspondante dans la clef 'all'.
 Les objets d'authentification supportent les clefs de configuration suivante.
-
 
 - ``fields`` Les champs à utiliser pour identifier un utilisateur .
 - ``userModel`` Le nom du modèle de l'utilisateur, Par défaut User.
@@ -118,8 +109,6 @@ Les objets d'authentification supportent les clefs de configuration suivante.
 
 Configurer différents champs pour l'utilisateur dans le tableau ``$component``::
 
-
-    <?php
     // Passer la configuration dans le tableau $components
     public $components = array(
         'Auth' => array(
@@ -139,7 +128,6 @@ Configurer différents champs pour l'utilisateur dans le tableau ``$component``:
     La configuration ci-dessus avec d'autres configurations ressemblerait à quelque chose
     comme.::
     
-        <?php
         // Passage de paramètre dans le tableau $components
         public $components = array(
             'Auth' => array(
@@ -184,7 +172,6 @@ d'authentification OpenID.
 Dans ``app/Controller/Component/Auth/OpenidAuthenticate.php``
 vous pourriez mettre ce qui suit::
 
-    <?php
     App::uses('BaseAuthenticate', 'Controller/Component/Auth');
 
     class OpenidAuthenticate extends BaseAuthenticate {
@@ -203,20 +190,16 @@ objet d'identification doit supporter des authentifications sans cookie
 ou sans état (stateless). Regardez les sections portant sur l'authentification
 digest et basic plus bas pour plus d'information.
 
-
 Utilisation d'objets d'authentification personnalisés
--------------------------------------------------------
+-----------------------------------------------------
 
 Une fois votre objet d'authentification créer, vous pouvez les utiliser
 en les incluant dans le tableau d'authentification AuthComponents::
 
-
-    <?php
     $this->Auth->authenticate = array(
         'Openid', // objet d'authentification app 
         'AuthBag.Combo', // plugin objet d'identification.
     );
-
 
 Identifier les utilisateurs et les connecter
 --------------------------------------------
@@ -233,8 +216,6 @@ vérifier dans l'ordre ou il ont été attachés. Une fois qu'un objet
 peut identifier un utilisateur, les autres objets ne sont pas vérifiés.
 Une simple fonction fonctionnant au login pourrait ressemblé à cela ::
 
-
-    <?php
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
@@ -246,29 +227,28 @@ Une simple fonction fonctionnant au login pourrait ressemblé à cela ::
         }
     }
 
-
 Le code ci-dessus (sans aucune donnée transmise à la méthode ``login``),tentera 
-de connecter un utilisateur en utilisant les données POST, et sera redirigé en cas 
-de succès sur la dernière page visitée, ou :php:attr:`AuthComponent::$loginRedirect`. 
-Si le login est en échec un message flash est défini. 
+de connecter un utilisateur en utilisant les données POST, et sera redirigé en 
+cas de succès sur la dernière page visitée, ou 
+:php:attr:`AuthComponent::$loginRedirect`. Si le login est en échec un message 
+flash est défini. 
 
 .. warning::
 
-    Dans la version 2.0 ``$this->Auth->login($this->request->data)`` connectera 
-    l'utilisateur avec les données postées., tandis que avec la
+    Dans la version 2.0 ``$this->Auth->login($this->request->data)`` 
+    connectera l'utilisateur avec les données postées., tandis que avec la 
     version 1.3 ``$this->Auth->login($this->data)`` tentera
-    d'identifier l'utilisateur en premier et le connectera seulement en cas de succès.
-
+    d'identifier l'utilisateur en premier et le connectera seulement en cas 
+    de succès.
 
 Utilisation de l'authentification Digest et Basic pour la connexion    
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Parce que l'authentification basic et digest ne demande pas d'effectuer un POST 
 initial avant d'initier la séquence de connexion, votre fonction ``login()`` 
-aura un aspect un petit peu différent qu'avec l'utilisation de ``FormAuthentication``::
+aura un aspect un petit peu différent qu'avec l'utilisation de 
+``FormAuthentication``::
 
-
-    <?php
     public function login() {
         if ($this->Auth->login()) {
             return $this->redirect($this->Auth->redirect());
@@ -278,36 +258,35 @@ aura un aspect un petit peu différent qu'avec l'utilisation de ``FormAuthentica
         }
     }
 
-Une fois connectés, les utilisateurs utilisant l'authentification digest et basic 
-ne sont pas tenus d'avoir des cookies. En fait, tous les objets d'authentification 
-sont capables de fournir une authentification *stateless* au travers l'implémentation
-de la méthode ``getUser()``.
-Si le client supporte les cookies, l'authentification basic et digest stockera 
-un utilisateur dans une session comme n'importe quel autre objet d'authentification. 
-Si le client ne supporte pas les cookies, (comme un simple client HTTP construit par 
-dessus CURL) l'authentification stateless est aussi supportée. L'authentification 
-stateless verifiera les informations d'identification à chaque requète, ce qui créé 
-une petite quantité de charge supplémentaire, mais permet au client qui ne peuvent 
-ou ne supportent pas les cookies de se connecter.
+Une fois connectés, les utilisateurs utilisant l'authentification digest et 
+basic ne sont pas tenus d'avoir des cookies. En fait, tous les objets 
+d'authentification sont capables de fournir une authentification *stateless* 
+au travers l'implémentation de la méthode ``getUser()``. Si le client supporte 
+les cookies, l'authentification basic et digest stockera un utilisateur dans 
+une session comme n'importe quel autre objet d'authentification. Si le client 
+ne supporte pas les cookies, (comme un simple client HTTP construit par dessus 
+CURL) l'authentification stateless est aussi supportée. L'authentification 
+stateless verifiera les informations d'identification à chaque requète, ce qui 
+créé une petite quantité de charge supplémentaire, mais permet au client qui 
+ne peuvent ou ne supportent pas les cookies de se connecter.
 
 Création de systèmes d'authentification stateless 
 -------------------------------------------------
 
 Les objets d'authentification peuvent implémenter une méthode ``getUser()``
-qui peut être utilisée pour supporter les systèmes de connexion des utilisateurs 
-qui ne reposent pas sur les cookies. Une méthode getUser typique regarde 
-l'environnement de la requête (request/environnement) et y utilise les informations 
-d'identification de l'utilisateur. L'authentification HTTP Basic utilise par exemple  
-``$_SERVER['PHP_AUTH_USER']`` et ``$_SERVER['PHP_AUTH_PW']`` pour les champs
-username et password. Pour chaque requête , si un client ne supporte pas les cookies, ces
-valeurs sont utilisées pour ré-identifier l'utilisateur et s'assurer que c'est un 
-utilisateur valide.
-Comme avec les méthodes d'authentification de l'objet  ``authenticate()`` la méthode
-``getuser()`` devrait retourner un tableau d'information utilisateur en cas de 
-succès, et ``false`` en cas d'echec.::
+qui peut être utilisée pour supporter les systèmes de connexion des 
+utilisateurs qui ne reposent pas sur les cookies. Une méthode getUser 
+typique regarde l'environnement de la requête (request/environnement) et 
+y utilise les informations d'identification de l'utilisateur. 
+L'authentification HTTP Basic utilise par exemple 
+``$_SERVER['PHP_AUTH_USER']`` et ``$_SERVER['PHP_AUTH_PW']`` pour les champs 
+username et password. Pour chaque requête , si un client ne supporte pas les 
+cookies, ces valeurs sont utilisées pour ré-identifier l'utilisateur et 
+s'assurer que c'est un utilisateur valide. Comme avec les méthodes 
+d'authentification de l'objet  ``authenticate()`` la méthode ``getuser()`` 
+devrait retourner un tableau d'information utilisateur en cas de succès, 
+et ``false`` en cas d'echec.::
 
-
-    <?php
     public function getUser($request) {
         $username = env('PHP_AUTH_USER');
         $pass = env('PHP_AUTH_PW');
@@ -323,60 +302,50 @@ getUser  pour les authentifications HTTP Basic.
 La méthode ``_findUser()`` fait partie de ``BaseAuthenticate`` et identifie un 
 utilisateur en se basant sur un nom d'utilisateur et un mot de passe.
 
-
 Afficher les messages flash de Auth
---------------------------------------
+Pour afficher les messages d'erreur de session que Auth génère, vous devez 
+ajouter les lignes de code suivante dans votre layout. Ajouter les deux lignes 
+suivantes au fichier ``app/View/Layouts/default.ctp`` dans la section body de 
+préférence  avant la ligne content_for_layout.::
 
-Pour afficher les messages d'erreur de session que Auth génère, vous devez ajouter
-les lignes de code suivante dans votre layout.Ajouter les deux lignes suivantes au fichier
-``app/View/Layouts/default.ctp`` dans la section body de préférence  avant la ligne
-content_for_layout.::
-
-
-    <?php
     echo $this->Session->flash();
     echo $this->Session->flash('auth');
     ?>
 
-Vous pouvez personnaliser les messages d'erreur, et les réglages  que le composant
-Aut ``AuthComponent`` utilise. En utilisant ``$this->Auth->flash`` vous pouvez 
-configurer les paramètres que le composant Aut utilise pour envoyer des messages flash.
-les clefs disponibles sont:
-
+Vous pouvez personnaliser les messages d'erreur, et les réglages  que le 
+composant Auth ``AuthComponent`` utilise. En utilisant ``$this->Auth->flash`` 
+vous pouvez configurer les paramètres que le composant Aut utilise pour 
+envoyer des messages flash. Les clefs disponibles sont:
 
 - ``element`` - L'élément à utiliser , 'default' par défaut.
 - ``key`` - La clef a utiliser , 'auth' par défaut
 - ``params`` - Le tableau des paramètres additionnels à utiliser, array() par défaut
 
-
 En plus des paramètres de message flash, vous pouvez personnaliser d'autres 
 messages d'erreurs que le composant auth utilise. Dans la partie beforeFilter
-de votre contrôleur , ou paramétrage du composant vous pouvez utiliser ``authError`` 
-pour personnaliser l'erreur
-à utiliser quand l'authentification échoue ::
+de votre contrôleur , ou paramétrage du composant vous pouvez utiliser 
+``authError`` pour personnaliser l'erreur à utiliser quand l'authentification 
+échoue ::
 
-
-    <?php
-    $this->Auth->authError = "Cette erreur se présente à l'utilisateur qui tente 
-    d'accéder à une partie du site qui est protégé.";
+    $this->Auth->authError = "Cette erreur se présente à l'utilisateur qui 
+    tente d'accéder à une partie du site qui est protégé.";
 
 Hachage de mot de passe
-----------------------------
+-----------------------
 
-Le composant Auth ne fait fait plus automatiquement le hachage de tous les mots de
-passe qu'il rencontre.
-Ceci à été enlevé parce qu'il rendait un certain nombre de tâches communes comme
-la validation difficile. Vous ne devriez **jamais** stocker un mot de passe en clair, et
-avant de sauvegarder un utilisateur vous devez toujours hacher le mot de passe.
-Vous pouvez utiliser la statique ``AuthComponent::password()`` pour hacher les mots de
-passes avant de les sauvegarder. Ceci utilisera la stratégie de hachage paramétrée 
-pour votre application. 
+Le composant Auth ne fait fait plus automatiquement le hachage de tous les mots 
+de passe qu'il rencontre.
+Ceci à été enlevé parce qu'il rendait un certain nombre de tâches communes 
+comme la validation difficile. Vous ne devriez **jamais** stocker un mot de 
+passe en clair, et avant de sauvegarder un utilisateur vous devez toujours 
+hacher le mot de passe. Vous pouvez utiliser la statique 
+``AuthComponent::password()`` pour hacher les mots de passes avant de les 
+sauvegarder. Ceci utilisera la stratégie de hachage paramétrée pour votre 
+application. 
 
-Après avoir validé le mot de passe, vous pouvez hacher un mot de passe dans le callback
-beforeSave de votre modèle::
+Après avoir validé le mot de passe, vous pouvez hacher un mot de passe dans le 
+callback beforeSave de votre modèle::
 
-
-    <?php
     class User extends AppModel {
         public function beforeSave($options = array()) {
             $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
@@ -386,24 +355,22 @@ beforeSave de votre modèle::
 
 Vous n'avez pas besoin de hacher le mot de passe avant d'appeler 
 ``$this->Auth->login()``.
-Les différents objets d'authentification hacherons les mots de passe individuellement.
-Si vous utiliser l'authentification Digest, vous ne devriez pas  utiliser 
-AuthComponent::password() pour la génération de mots de passes. Regardez ci-dessous
-comment générer des hachages Digest
+Les différents objets d'authentification hacherons les mots de passe 
+individuellement. Si vous utiliser l'authentification Digest, vous ne devriez 
+pas  utiliser AuthComponent::password() pour la génération de mots de 
+passes. Regardez ci-dessous comment générer des hachages Digest.
 
 Hachage de mot de passe pour l'authentification Digest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Parce que l'authentification Digest nécessite un mot de passe hacher dans un format 
-défini par la RFC. Respectivement pour correctement hacher un mot de passe pour 
-l'utilisation de l'authentification Digest vous devriez utilisez la fonction spéciale
-``DigestAuthenticate``.
-Si vous vous apprêtez à combiner l'authentification Digest avec d'autres stratégies 
-d'authentifications, il est aussi recommandé de stocker le mot de passe  Digest dans 
-une colonne séparée, pour le hachage normal de mot de passe::
+Parce que l'authentification Digest nécessite un mot de passe hacher dans un 
+format défini par la RFC. Respectivement pour correctement hacher un mot de 
+passe pour l'utilisation de l'authentification Digest vous devriez utilisez 
+la fonction spéciale ``DigestAuthenticate``. Si vous vous apprêtez à combiner 
+l'authentification Digest avec d'autres stratégies d'authentifications, il 
+est aussi recommandé de stocker le mot de passe  Digest dans une colonne 
+séparée, pour le hachage normal de mot de passe::
 
-
-    <?php
     class User extends AppModel {
         public function beforeSave($options = array()) {
             // fabrique un mot de passe pour l'auth Digest.
@@ -414,28 +381,25 @@ une colonne séparée, pour le hachage normal de mot de passe::
         }
     }
 
-Les mots de passes pour l'authentification Digest ont besoin d'un peu plus d'information.
-sI vous utilisez le composant AuthComponent::password() pour le hachage Digest vous 
-ne pourrez pas vous connecter.
+Les mots de passes pour l'authentification Digest ont besoin d'un peu plus 
+d'information. Si vous utilisez le composant AuthComponent::password() pour 
+le hachage Digest vous ne pourrez pas vous connecter.
 
 .. note::
 
-    le troisième paramètre de DigestAuthenticate::password() doit correspondre
-    à la valeur de la configuration 'realm' définie quand DigestAuthentication était
-    configuré dans  AuthComponent::$authenticate. Par défaut a ``env('SCRIPT_NAME)``. 
-    Vous devez utiliser une chaîne statique si vous voulez un hachage permanent dans des
-    environnements multiples.
-
+    le troisième paramètre de DigestAuthenticate::password() doit correspondre 
+    à la valeur de la configuration 'realm' définie quand DigestAuthentication 
+    était configuré dans  AuthComponent::$authenticate. Par défaut a 
+    ``env('SCRIPT_NAME)``. Vous devez utiliser une chaîne statique si vous 
+    voulez un hachage permanent dans des environnements multiples.
    
 Connecter les utilisateurs manuellement
---------------------------------------------
 
-Quelquefois le besoin se fait sentir de connecter un utilisateur manuellement, comme
-juste après qu'il se soit enregistré dans votre application. Vous pouvez faire cela en appelant
-``$this->Auth->login()`` avec les données utilisateur que vous voulez pour la 'connexion' ::
+Quelquefois le besoin se fait sentir de connecter un utilisateur manuellement, 
+comme juste après qu'il se soit enregistré dans votre application. Vous pouvez 
+faire cela en appelant ``$this->Auth->login()`` avec les données utilisateur que 
+vous voulez pour la 'connexion'::
 
-
-    <?php
     public function register() {
         if ($this->User->save($this->request->data)) {
             $id = $this->User->id;
@@ -447,89 +411,85 @@ juste après qu'il se soit enregistré dans votre application. Vous pouvez faire
 
 .. attention::
 
-    Soyez certain d'ajouter manuellement le nouveau User id au tableau passé
+    Soyez certain d'ajouter manuellement le nouveau User id au tableau passé 
     à la méthode de login. Sinon vous n'aurez l'id utilisateur disponible.
     
 Accéder à l'utilisateur connecté
----------------------------------
+--------------------------------
 
-Une fois que l'utilisateur est connecté, vous devriez souvent avoir besoin d'information
-particulière à propos de l'utilisateur courant.
-Vous pouvez accéder à l'utilisateur en cours de connexion en utilisant 
-``AuthComponent::user()``. Cette méthode est statique , et peut être utilisée globalement
-après le chargement du composant Auth. Vous pouvez y accéder à la fois avec l'instance 
-d'une méthode ou comme une méthode statique::
+Une fois que l'utilisateur est connecté, vous devriez souvent avoir besoin 
+d'information particulière à propos de l'utilisateur courant. Vous pouvez 
+accéder à l'utilisateur en cours de connexion en utilisant 
+``AuthComponent::user()``. Cette méthode est statique , et peut être utilisée 
+globalement après le chargement du composant Auth. Vous pouvez y accéder à la 
+fois avec l'instance d'une méthode ou comme une méthode statique::
 
-    <?php
     // Utilisez n'importe où
     AuthComponent::user('id')
 
     // Depuis l'interieur du controlleur
     $this->Auth->user('id');
 
-
 Déconnexion des utilisateurs
--------------------------------
+----------------------------
 
-Éventuellement vous aurez besoin d'un moyen rapide pour dés-authentifier les utilisateurs 
-et de les rediriger ou il devraient aller. Cette méthode est aussi très pratique si vous voulez
-fournir un lien 'Déconnecte moi' à l'intérieur de la zone membres de votre application ::
+Éventuellement vous aurez besoin d'un moyen rapide pour dés-authentifier 
+les utilisateurs et de les rediriger ou il devraient aller. Cette méthode 
+est aussi très pratique si vous voulez fournir un lien 'Déconnecte moi' 
+à l'intérieur de la zone membres de votre application ::
 
-
-    <?php
     public function logout() {
         $this->redirect($this->Auth->logout());
     }
 
-La déconnexion des utilisateurs connectés avec l'authentification Basic ou Digest est
-difficile à accomplir pour tous les client. La plupart des navigateurs retiennent 
-les autorisations pendant qu'il restent ouvert. Certains navigateurs peuvent être 
-forcés en envoyant un code 401.Le changement du realm de l'authentification est une 
-autre solution qui fonctionne pour certain clients.
-
+La déconnexion des utilisateurs connectés avec l'authentification Basic 
+ou Digest est difficile à accomplir pour tous les client. La plupart 
+des navigateurs retiennent les autorisations pendant qu'il restent ouvert. 
+Certains navigateurs peuvent être forcés en envoyant un code 401. Le 
+changement du realm de l'authentification est une autre solution qui 
+fonctionne pour certain clients.
 
 .. _authorization-objects:
 
 Autorisation
-=============
+============
 
-l'autorisation est le processus qui permet de s'assurer qu'un utilisateur identifier/authentifier 
-est autorisé à accéder aux ressources qu'il demande.
-Il y a plusieurs gestionnaires d'autorisation prés-construits , et vous pouvez créer 
-vos propres gestionnaire comme faisant partie d'un plugin.
+l'autorisation est le processus qui permet de s'assurer qu'un utilisateur 
+identifier/authentifier est autorisé à accéder aux ressources qu'il demande.
+Il y a plusieurs gestionnaires d'autorisation prés-construits , et vous 
+pouvez créer vos propres gestionnaire comme faisant partie d'un plugin.
 
-
-- ``ActionsAuthorize`` Utilise le Composant Acl pour vérifier les permissions d'un 
-  niveau d'action.
-- ``CrudAuthorize`` Utilise le Composant Acl et les action -> CRUD mappings pour 
-  verifier les permissions pour les ressources.
+- ``ActionsAuthorize`` Utilise le Composant Acl pour vérifier les permissions 
+  d'un niveau d'action.
+- ``CrudAuthorize`` Utilise le Composant Acl et les action -> CRUD mappings 
+  pour vérifier les permissions pour les ressources.
 - ``ControllerAuthorize`` Appel ``isAuthorized()`` sur le contrôleur actif ,
   et utilise ce retour pour autoriser l'utilisateur.  C'est souvent le moyen 
   le plus simple d'autoriser les utilisateurs.
 
 Configurer les gestionnaires d'autorisation
----------------------------------------------
+-------------------------------------------
 
-Vous configurez les gestionnaires d'autorisation en utilisant ``$this->Auth->authorize``.
-Vous pouvez configurer un ou plusieurs gestionnaires . L'utilisation de  plusieurs
-gestionnaires vous donnes la possibilité d'utiliser plusieurs moyens de vérifier les
-autorisations. Quand les gestionnaires d'autorisation sont vérifiés ils sont appelés 
-dans l'ordre ou ils sont déclarés. Les gestionnaires devraient retourner false, s'il ne sont
-pas capable de vérifier les autorisation, ou bien si la vérification a échouée.
-Le gestionnaire devrait retourner true si ils sont capables de vérifier correctement les
-autorisations. Les gestionnaires seront appelés dans l'ordre jusqu'à ce qu'un passe.
-Si toutes les vérifications échoues , l'utilisateur sera redirigé vers la page d'où il vient.
-Vous pouvez également stopper les autorisations en levant une exception.
-Vous aurez besoin de traiter toutes les exceptions levées , et les manipuler.
+Vous configurez les gestionnaires d'autorisation en utilisant
+``$this->Auth->authorize``. Vous pouvez configurer un ou plusieurs
+gestionnaires . L'utilisation de plusieurs gestionnaires vous donnes la
+possibilité d'utiliser plusieurs moyens de vérifier les autorisations.
+Quand les gestionnaires d'autorisation sont vérifiés ils sont appelés
+dans l'ordre ou ils sont déclarés. Les gestionnaires devraient retourner
+false, s'il ne sont pas capable de vérifier les autorisation, ou bien si
+la vérification a échouée. Le gestionnaire devrait retourner true si ils
+sont capables de vérifier correctement les autorisations. Les gestionnaires
+seront appelés dans l'ordre jusqu'à ce qu'un passe. Si toutes les
+vérifications échoues , l'utilisateur sera redirigé vers la page
+d'où il vient. Vous pouvez également stopper les autorisations
+en levant une exception. Vous aurez besoin de traiter toutes les exceptions
+levées , et les manipuler.
 
-Vous pouvez configurer les gestionnaires d'autorisation dans le ``beforeFilter`` de 
-votre contrôleur ou , dans  le tableau ``$components``. Vous pouvez passer les 
-informations de configuration dans chaque objet d'autorisation , en utilisant un 
-tableau::
+Vous pouvez configurer les gestionnaires d'autorisation dans le
+``beforeFilter`` de votre contrôleur ou , dans  le tableau ``$components``.
+Vous pouvez passer les informations de configuration dans chaque objet
+d'autorisation, en utilisant un tableau::
 
-
-
-    <?php
     // paramétrage Basique
     $this->Auth->authorize = array('Controller');
 
@@ -545,7 +505,6 @@ vous aides  à définir les paramètres qui sont passés à chaque objets attach
 La clef all est aussi exposée comme ``AuthComponent::ALL``::
 
 
-    <?php
     // passage de paramètre en utilisant 'all'
     $this->Auth->authorize = array(
         AuthComponent::ALL => array('actionPath' => 'controllers/'),
@@ -553,29 +512,28 @@ La clef all est aussi exposée comme ``AuthComponent::ALL``::
         'Controller'
     );
 
-Dans l'exemple ci-dessus , à la fois ``L' Actions`` et ``Le Contrôleur`` auront
+Dans l'exemple ci-dessus , à la fois ``L' Actions`` et ``Le Contrôleur`` auront 
 les paramètres définis pour la clef 'all'. Chaque paramètres passés a un objet
 d'autorisation spécifique remplacera la clef correspondante dans la clef 'all'.
 Le noyau authorize objects supporte les clefs de configuration suivantes.
 
 
-- ``actionPath`` Utilisé par ``ActionsAuthorize`` pour localiser le contrôleur action
-  ACO's dans l'arborescence ACO .
-- ``actionMap`` Action -> CRUD mappings.  Utilisé par ``CrudAuthorize`` et les objets
-  d'autorisation qui veulent  mapper les actions aux rôles CRUD.
-- ``userModel`` Le nom du nœud ARO/Model dans lequel l'information utilisateur peut 
-  être trouvé.  Utilisé avec ActionsAuthorize.
+- ``actionPath`` Utilisé par ``ActionsAuthorize`` pour localiser le contrôleur 
+  action ACO's dans l'arborescence ACO .
+- ``actionMap`` Action -> CRUD mappings.  Utilisé par ``CrudAuthorize`` et 
+  les objets d'autorisation qui veulent  mapper les actions aux rôles CRUD.
+- ``userModel`` Le nom du nœud ARO/Model dans lequel l'information utilisateur 
+  peut être trouvé.  Utilisé avec ActionsAuthorize.
 
 Création d'objets Authorize personnalisés
---------------------------------------------
+-----------------------------------------
 
-Parce que les objets authorize sons pluggable, vous pouvez créé des objets authorize 
-personnalisés dans votre application, ou plugins. Si par exemple vous voulez créer 
-un objet authorize LDAP. Dans ``app/Controller/Component/Auth/LdapAuthorize.php``
-vous pourriez mettre cela::
+Parce que les objets authorize sons pluggable, vous pouvez créé des objets 
+authorize personnalisés dans votre application, ou plugins. Si par exemple 
+vous voulez créer un objet authorize LDAP. Dans 
+``app/Controller/Component/Auth/LdapAuthorize.php``, vous pourriez mettre cela::
 
 
-    <?php
     App::uses('BaseAuthorize', 'Controller/Component/Auth');
 
     class LdapAuthorize extends BaseAuthorize {
@@ -584,47 +542,46 @@ vous pourriez mettre cela::
         }
     }
 
-L'objets Authorize devrait retourner `false ` si l'utilisateur se voit refuser l'accès, ou
-si l'objet est incapable de faire un contrôle. Si l'objet est capable de vérifier les accès de
-l'utilisateur, ``true`` devrait être retourné. Ça n'est pas nécessaire d'étendre 
-``BaseAuthorize``,  il faut simplement que votre objet authorize implémente la méthode 
-``authorize()``. La classe ``BaseAuthorize`` fourni un nombre intéressant de méthode 
-utiles qui sont communément utilisées.
+L'objets Authorize devrait retourner `false ` si l'utilisateur se voit refuser 
+l'accès, ou si l'objet est incapable de faire un contrôle. Si l'objet est 
+capable de vérifier les accès de l'utilisateur, ``true`` devrait être retourné. 
+Ça n'est pas nécessaire d'étendre ``BaseAuthorize``,  il faut simplement que 
+votre objet authorize implémente la méthode ``authorize()``. La classe 
+``BaseAuthorize`` fourni un nombre intéressant de méthodes utiles qui 
+sont communément utilisées.
 
 Utilisation d'objets Authorize personnalisés
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Une fois que vous avez créé votre objet authorize personnalisé, vous pouvez les utiliser
-en les incluant dans le tableau authorize:: 
+Une fois que vous avez créé votre objet authorize personnalisé, vous pouvez 
+les utiliser en les incluant dans le tableau authorize::
 
-    <?php
     $this->Auth->authorize = array(
         'Ldap', // objet app authorize .
         'AuthBag.Combo', // plugin objet authorize .
     );
 
 Ne pas utiliser d'autorisation
----------------------------------
+------------------------------
 
-Si vous souhaitez ne pas utiliser les objets d'autorisation intégrés, et vous
-voulez gérer les chose entièrement à l'extérieur du Composant Aut (AutComponent)
-vous pouvez définir ``$this->Auth->authorize = false;``. Par défaut le composant
-Aut démarre avec ``authorize = false``. Si vous n'utilisez pas de plan d'autorisation
-assurez-vous de vérifier les autorisations vous même dans la partie beforFilter de votre  
-contrôleur ou avec un autre composant.
+Si vous souhaitez ne pas utiliser les objets d'autorisation intégrés, et 
+vous voulez gérer les chose entièrement à l'extérieur du Composant Auth 
+(AuthComponent) vous pouvez définir ``$this->Auth->authorize = false;``. Par 
+défaut le composant Auth démarre avec ``authorize = false``. Si vous n'utilisez 
+pas de plan d'autorisation, assurez-vous de vérifier les autorisations vous 
+même dans la partie beforFilter de votre controller ou avec un autre composant.
 
 Rendre des actions publiques
---------------------------------
+----------------------------
 
-Il y a souvent des actions de contrôleur que vous souhaitez laisser entièrement publique,
-ou qui ne nécessite pas de connexion utilisateur.
-Le composant Auth (AuthComponnent) est pessimiste , et par défaut interdit l'accès. Vous
-pouvez marquer des actions comme publique en utilisant ``AuthComponent::allow()``.
-En marquant les actions comme publique, le composant Auth , ne vérifiera pas la connexion
-d'un utilisateur, ni n'autorisera la vérification des objets ::
+Il y a souvent des actions de contrôleur que vous souhaitez laisser 
+entièrement publique, ou qui ne nécessite pas de connexion utilisateur.
+Le composant Auth (AuthComponnent) est pessimiste , et par défaut interdit 
+l'accès. Vous pouvez marquer des actions comme publique en utilisant 
+``AuthComponent::allow()``. En marquant les actions comme publique, le 
+composant Auth , ne vérifiera pas la connexion d'un utilisateur, ni 
+n'autorisera la vérification des objets ::
 
-
-    <?php
     // Permet toutes les actions. CakePHP 2.0
     $this->Auth->allow('*');
 
@@ -641,12 +598,11 @@ Vous pouvez fournir autant de nom d'action dont vous avez besoin à ``allow()``.
 Vous pouvez aussi fournir un  tableau contenant tous les noms d'action.
 
 Fabriquer des actions qui requièrent des autorisations
------------------------------------------------------------
+------------------------------------------------------
 
-Si après avoir rendu les actions publiques, et que vous voulez révoquer les accès publics.
-Vous pouvez le faire en utilisant ``AuthComponent::deny()``::
+Si après avoir rendu les actions publiques, et que vous voulez révoquer les 
+accès publics. Vous pouvez le faire en utilisant ``AuthComponent::deny()``::
 
-    <?php
     // retire une action
     $this->Auth->deny('add');
 
@@ -661,38 +617,40 @@ Vous pouvez fournir autant de nom d'action dont vous avez besoin à ``deny()``.
 Vous pouvez aussi fournir un  tableau contenant tous les noms d'action.
 
 Mapper les actions en utilisant CrudAuthorize
---------------------------------------------------
+---------------------------------------------
 
-Quand vous utilisez CrudAuthorize ou d'autres objets authorize qui utilisent le mapping
-d'action, il peut être nécessaire de mapper des méthodes additionnelles. vous pouvez mapper
-des actions --> CRUD permissions en utilisant mapAction(). En les appelant 
-dans le composant Auth vous le déléguerez a tous objets authorize , ainsi 
-vous pouvez être sûre que le paramétrage sera appliqué partout::   
+Quand vous utilisez CrudAuthorize ou d'autres objets authorize qui utilisent 
+le mapping d'action, il peut être nécessaire de mapper des méthodes 
+additionnelles. vous pouvez mapper des actions --> CRUD permissions en 
+utilisant mapAction(). En les appelant dans le composant Auth vous le 
+déléguerez a tous objets authorize , ainsi vous pouvez être sûre que le 
+paramétrage sera appliqué partout::   
 
-    <?php
     $this->Auth->mapActions(array(
         'create' => array('register'),
         'view' => array('show', 'display')
     ));
 
-La clef pour mapActions devrait être les permissions CRUD que vous voulez définir,
-tandis que les valeurs devraient être un tableau de toutes les actions mapper
-vers les permissions CRUD.
+La clef pour mapActions devrait être les permissions CRUD que vous voulez 
+définir, tandis que les valeurs devraient être un tableau de toutes les 
+actions mapper vers les permissions CRUD.
 
 Utilisation de ControllerAuthorize
--------------------------------------
+----------------------------------
 
-ControllerAuthorize vous permet de gérer les vérifications d'autorisation dans le
-callback d'un contrôleur. C'est parfait quand vous avez des autorisations très simples,
-ou vous voulez utiliser une combinaison modèles + composants a faire pour vos autorisation,
-et ne voulez pas créer un objet authorize personnalisés.
+ControllerAuthorize vous permet de gérer les vérifications d'autorisation dans 
+le callback d'un contrôleur. C'est parfait quand vous avez des autorisations 
+très simples, ou vous voulez utiliser une combinaison modèles + composants à 
+faire pour vos autorisation, et ne voulez pas créer un objet authorize 
+personnalisés.
 
-Le callback est toujours appelé  ``isAuthorized()`` et devrait retourner un booléen
-pour indiquer si l'utilisateur est autorisé ou pas à accéder aux ressources de la requête.
-La callback est passé à l'utilisateur actif , il peut donc être vérifié. 
+Le callback est toujours appelé  ``isAuthorized()`` et devrait retourner un 
+booléen pour indiquer si l'utilisateur est autorisé ou pas à accéder aux 
+ressources de la requête. Le callback est passé à l'utilisateur actif , il 
+peut donc être vérifié. 
+
 ::
 
-    <?php
     class AppController extends Controller {
         public $components = array(
             'Auth' => array('authorize' => 'Controller'),
@@ -718,61 +676,64 @@ ou , simplement les utilisateurs ayant le rôle d'administrateur pourraient
 accéder aux actions qui sont dans le préfixe admin.
 
 Utilisation de ActionsAuthorize
----------------------------------
-
-ActionsAuthorize  s'intègre au composant ACL , et égraine finement chaque
-action ACL a chaque requête. ActionsAuthorize est souvent jumelé avec
-DbAcl pour apporter un système de permissions dynamiques et flexibles
-qui peuvent être édités par les utilisateurs administrateurs au travers de
-l'application. Il peut en outre être combiner avec d'autres implémentation 
-Acl comme IniAcl et des applications Acl backends personnalisées.   
-
-Utilisation de CrudAuthorize
 -------------------------------
 
-``CrudAuthorize`` s'intègre au composant Acl , et fournit la possibilité de mapper
-les requêtes aux opérations CRUD. Fournit la possibilité d'autoriser l'utilisation du
-mapping CRUD. Les résultats mappés sont alors vérifiés dans le composant Acl 
-comme des permissions spécifiques.
+ActionsAuthorize  s'intègre au composant ACL , et égraine finement chaque 
+action ACL a chaque requête. ActionsAuthorize est souvent jumelé avec
+DbAcl pour apporter un système de permissions dynamiques et flexibles 
+qui peuvent être édités par les utilisateurs administrateurs au travers de 
+l'application. Il peut en outre être combiner avec d'autres implémentation 
+Acl comme IniAcl et des applications Acl backends personnalisées.
+
+Utilisation de CrudAuthorize
+----------------------------
+
+``CrudAuthorize`` s'intègre au composant Acl , et fournit la possibilité de 
+mapper les requêtes aux opérations CRUD. Fournit la possibilité d'autoriser 
+l'utilisation du mapping CRUD. Les résultats mappés sont alors vérifiés dans 
+le composant Acl comme des permissions spécifiques.
 
 Par exemple, prendre ``/posts/index`` comme la requête courante. Le mapping
 par défaut pour `index`, est une vérification de la permission de ``lire``.
-La vérification de l'Acl serait alors pour le ``posts`` contrôleur avec les permission
-de ``lecture``. Ceci vous permet de créer un système de permission qui met
-d'avantage l'accent sur ce qui est en train d'être fait aux ressources, plutôt que
-sur l'action spécifique en cours de visite.
+La vérification de l'Acl serait alors pour le ``posts`` contrôleur avec les 
+permissions de ``lecture``. Ceci vous permet de créer un système de permission 
+qui met d'avantage l'accent sur ce qui est en train d'être fait aux ressources, 
+plutôt que sur l'action spécifique en cours de visite.
 
 AuthComponent API
 =================
 
-Le composant Auth est l'interface primaire à la  construction de mécanisme d'autorisation
-et d'authentification intégrés dans CakePHP.
+Le composant Auth est l'interface primaire à la  construction de mécanisme 
+d'autorisation et d'authentification intégrés dans CakePHP.
 
 .. php:attr:: ajaxLogin
 
-    Le nom d'une vue optionnelle d'un élément à rendre quand une requête Ajax est faite
-    avec une session expirée invalide.
+    Le nom d'une vue optionnelle d'un élément à rendre quand une requête Ajax 
+    est faite avec une session expirée invalide.
     
 .. php:attr: allowedActions
 
-    Le contrôleur action pour qui la validation de l'utilisateur n'est pas nécessaire.
+    Le contrôleur action pour qui la validation de l'utilisateur n'est pas 
+    nécessaire.
 
 .. php:attr:: authenticate
 
     Définit à un tableau d'objets d’identifications que vous voulez utiliser
-    quand les utilisateurs de connectent. Il y a plusieurs objets d'authentification
-    dans le noyau, cf la section :ref:`authentication-objects`
+    quand les utilisateurs de connectent. Il y a plusieurs objets 
+    d'authentification dans le noyau, cf la section 
+    :ref:`authentication-objects`
     
 .. php:attr:: authError
 
-    Erreur à afficher quand les utilisateurs font une tentative d'accès à un objet ou 
-    une action à laquelle ils n'ont pas accès.
-    
+    Erreur à afficher quand les utilisateurs font une tentative d'accès à un 
+    objet ou une action à laquelle ils n'ont pas accès.
+
 .. php:attr:: authorize
 
-    Définir un tableau d'objets d'autorisation que vous voulez utiliser quand les
-    utilisateurs sont autorisés sur chaque requête, cd la section :ref:`authorization-objects`
-    
+    Définir un tableau d'objets d'autorisation que vous voulez utiliser quand 
+    les utilisateurs sont autorisés sur chaque requête, cd la section 
+    :ref:`authorization-objects`
+
 .. php:attr:: components
 
     D'autre composants utilisés par le composant Auth
@@ -780,23 +741,26 @@ et d'authentification intégrés dans CakePHP.
 .. php:attr:: flash
 
     Paramétrage à utiliser quand Auth à besoin de faire un message flash avec 
-     :php:meth:`SessionComponent::setFlash()`.
-     Les clefs disponibles sont:
-   
+    :php:meth:`SessionComponent::setFlash()`.
+
+    Les clefs disponibles sont:
+
     - ``element`` - L'élement à utiliser , par défaut à  'default'.
     - ``key`` - La clef à utiliser, par défaut à 'auth'
-    - ``params`` - Un tableau de paramêtres additionnels à utiliser par défaut à array()
+    - ``params`` - Un tableau de paramêtres additionnels à utiliser par défaut 
+      à array()
 
 .. php:attr:: loginAction
 
-    L' URL (définie comme une chaîne de caractères ou un tableau) pour le contrôleur action
-    qui gère les connexions. par défaut à `/users/login`
+    L' URL (définie comme une chaîne de caractères ou un tableau) pour le 
+    controller action qui gère les connexions. par défaut à `/users/login`
     
 .. php:attr:: loginRedirect
 
-    L' URL (définie comme une chaîne de caractères ou un tableau) pour le contrôleur action
-    ou les utilisateurs seraient redirigés après la connexion. Cette valeur sera ignorée 
-    si l'utilisateur à une valeur ``Auth.redirect`` dans sa session.
+    L' URL (définie comme une chaîne de caractères ou un tableau) pour le 
+    contrôleur action ou les utilisateurs seraient redirigés après la 
+    connexion. Cette valeur sera ignorée si l'utilisateur à une valeur 
+    ``Auth.redirect`` dans sa session.
 
 .. php:attr:: logoutRedirect
 
@@ -805,8 +769,6 @@ et d'authentification intégrés dans CakePHP.
     une URL de redirection sera retournée depuis
     :php:meth:`AuthComponent::logout()`. Par défaut à 
     :php:attr:`AuthComponent::$loginAction`.
-
-    
 
 .. php:attr:: request
 
@@ -818,8 +780,8 @@ et d'authentification intégrés dans CakePHP.
 
 .. php:attr:: sessionKey
 
-    Le nom de la clef de session ou les enregistrement de l'utilisateur courant sont 
-    enregistrés.Si ça n'est pas spécifié cela sera "Auth.User".
+    Le nom de la clef de session ou les enregistrement de l'utilisateur courant 
+    sont enregistrés.Si ça n'est pas spécifié cela sera "Auth.User".
     
 .. php:method:: allow($action, [$action, ...])
 
@@ -827,7 +789,8 @@ et d'authentification intégrés dans CakePHP.
     qu'aucun contrôle d'autorisation ne sera effectué pour les actions 
     spécifiées.
     La valeur spéciale  ``'*'`` marquera les actions du  contrôleur courant  
-    comme publique. Sera mieux utilisé dans la méthode beforeFilter de votre contrôleur.
+    comme publique. Sera mieux utilisé dans la méthode beforeFilter de votre 
+    contrôleur.
    
 .. php:method:: constructAuthenticate()
 
@@ -855,8 +818,9 @@ et d'authentification intégrés dans CakePHP.
     :param CakeResponse $response: La réponse à utiliser, les en-tête peuvent
       être envoyées si l'authentification échoue.
 
-    Cette méthode est utilisée par le composant Auth pour identifier un utilisateur
-    en se basant sur les informations contenues dans la requête courante.
+    Cette méthode est utilisée par le composant Auth pour identifier un 
+    utilisateur en se basant sur les informations contenues dans la requête 
+    courante.
    
 .. php:method:: initialize($Controller)
 
@@ -865,8 +829,9 @@ et d'authentification intégrés dans CakePHP.
 .. php:method:: isAuthorized($user = null, $request = null)
 
     Utilise les autorisations des adaptateurs configurés à vérifier ou pas
-    qu'un utilisateur est configuré. Chaque adaptateur sera vérifié dans l'ordre,
-    si chacun d'eux retourne true, alors l'utilisateur sera autorisé pour la requête.
+    qu'un utilisateur est configuré. Chaque adaptateur sera vérifié dans 
+    l'ordre, si chacun d'eux retourne true, alors l'utilisateur sera autorisé 
+    pour la requête.
   
 .. php:method:: loggedIn()
 
@@ -880,9 +845,10 @@ et d'authentification intégrés dans CakePHP.
     Prends un tableau de donnée utilisateur pour se connecter. 
     Permet la connexion manuelle des utilisateurss. 
     L'appel de user() va renseigner la valeur de la session
-    avec les informations fournies. Si aucun utilisateur n'est fourni, le composant
-    Auth essayera d'identifier un utilisateur en utilisant les informations de la requête
-    en cours. cf  :php:meth:`AuthComponent::identify()` 
+    avec les informations fournies. Si aucun utilisateur n'est fourni, le 
+    composant Auth essayera d'identifier un utilisateur en utilisant les 
+    informations de la requête en cours. cf 
+    :php:meth:`AuthComponent::identify()` 
    
 .. php:method:: logout()
 
@@ -892,11 +858,10 @@ et d'authentification intégrés dans CakePHP.
 
 .. php:method:: mapActions($map = array())
 
-    Mappe les noms d'action aux opérations CRUD. Utiliser par les authentifications
-    basées sur le contrôleur. Soyez certain d'avoir configurer la propriété authorize
-    avant d'appeler cette méthode. Ainsi cela déléguera  $map a tous les objets 
-    autorize attachés.
-
+    Mappe les noms d'action aux opérations CRUD. Utiliser par les 
+    authentifications basées sur le contrôleur. Soyez certain d'avoir 
+    configurer la propriété authorize avant d'appeler cette méthode. Ainsi 
+    cela déléguera  $map a tous les objets autorize attachés.
     
 .. php:staticmethod:: password($pass)
 
@@ -904,11 +869,11 @@ et d'authentification intégrés dans CakePHP.
     
 .. php:method:: redirect($url = null)
 
-    Si il n'y a pas de paramètre passé, obtient l'authentification de redirection
-    de l'URL. Passe une URL pour définir la destination ou un utilisateur devrait 
-    être redirigé lors de la connexion.se repliera vers
-    :php:attr:`AuthComponent::$loginRedirect` si il n'y a pas de valeur de redirection
-    stockée.
+    Si il n'y a pas de paramètre passé, obtient l'authentification de 
+    redirection de l'URL. Passe une URL pour définir la destination ou un 
+    utilisateur devrait être redirigé lors de la connexion.se repliera vers 
+    :php:attr:`AuthComponent::$loginRedirect` si il n'y a pas de valeur de 
+    redirection stockée.
     
 .. php:method:: shutdown($Controller)
 
@@ -917,26 +882,24 @@ et d'authentification intégrés dans CakePHP.
 .. php:method:: startup($Controller)
 
     Méthode d’exécution principale. Gères la redirection des utilisateurs 
-    invalides  et traite les données des formulaires de connexion.
+    invalides et traite les données des formulaires de connexion.
     
 .. php:staticmethod:: user($key = null)
 
-    :param string $key:  La clef de la donné utilisateur que vous voulez récupérer est null,
-        tout les utilisateur seront retournés. Peut aussi être appelé comme une instance 
-        de méthode.
+    :param string $key: La clef de la donné utilisateur que vous voulez 
+      récupérer est null, tous les utilisateurs seront retournés. Peut aussi 
+      être appelé comme une instance de méthode.
 
-   Prend les données concernant l'utilisateur connecté, vous pouvez utiliser
-   une clef propriétaire pour appeler une donnée spécifique à propos d'un utilisateur::
+    Prend les données concernant l'utilisateur connecté, vous pouvez utiliser
+    une clef propriétaire pour appeler une donnée spécifique à propos d'un 
+    utilisateur::
 
-    
-
-        <?php
         $id = $this->Auth->user('id');
 
-    Si l'utilisateur courant n'est pas connecté ou que la clef n'existe pas ``null``
-    sera retourné
-   
+    Si l'utilisateur courant n'est pas connecté ou que la clef n'existe pas 
+    ``null`` sera retourné
+
 
 .. meta::
-    :title lang=en: Authentication
-    :keywords lang=en: authentication handlers,array php,basic authentication,web application,different ways,credentials
+    :title lang=fr: Authentification
+    :keywords lang=fr: authentication handlers,array php,basic authentication,web application,different ways,credentials

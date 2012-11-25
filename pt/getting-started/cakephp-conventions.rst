@@ -38,7 +38,6 @@ prefixando os nome dos métodos com underscores. Se um método de um controller
 for prefixado, o método não poderá ser acessado diretamente da web mas estará
 disponível para uso interno. Por exemplo::
 
-    <?php
     class NewsController extends AppController {
     
         function latest() {

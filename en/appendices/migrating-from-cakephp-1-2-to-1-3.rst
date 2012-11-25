@@ -46,7 +46,6 @@ There is a new way to add those paths. As of 1.3 RC1 the
 
 ::
 
-    <?php
     App::build(array(
         'plugins' => array('/full/path/to/plugins/', '/next/full/path/to/plugins/'),
         'models' =>  array('/full/path/to/models/', '/next/full/path/to/models/'),
@@ -74,11 +73,8 @@ configs are created **before** bootstrap.php is loaded.
 ``inflections.php`` has been removed, it was an unnecessary file
 hit, and the related features have been refactored into a method to
 increase their flexibility. You now use ``Inflector::rules()`` to
-load custom inflections.
+load custom inflections::
 
-::
-
-    <?php
     Inflector::rules('singular', array(
         'rules' => array('/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta'),
         'uninflected' => array('singulars'),
@@ -100,28 +96,28 @@ classes contained within (as well as dealing with some name-spacing
 issues):
 
 
--  session.php ⇒ cake\_session.php
+-  session.php -> cake\_session.php
 
    
-   -  App::import('Core', 'Session') ⇒ App::import('Core',
+   -  App::import('Core', 'Session') -> App::import('Core',
       'CakeSession')
 
--  socket.php ⇒ cake\_socket.php
+-  socket.php -> cake\_socket.php
 
    
-   -  App::import('Core', 'Socket') ⇒ App::import('Core',
+   -  App::import('Core', 'Socket') -> App::import('Core',
       'CakeSocket')
 
--  schema.php ⇒ cake\_schema.php
+-  schema.php -> cake\_schema.php
 
    
-   -  App::import('Model', 'Schema') ⇒ App::import('Model',
+   -  App::import('Model', 'Schema') -> App::import('Model',
       'CakeSchema')
 
--  behavior.php ⇒ model\_behavior.php
+-  behavior.php -> model\_behavior.php
 
    
-   -  App::import('Core', 'Behavior') ⇒ App::import('Core',
+   -  App::import('Core', 'Behavior') -> App::import('Core',
       'ModelBehavior')
 
 
@@ -223,11 +219,8 @@ automatically included without you asking for them. SessionHelper
 and SessionComponent now act like every other component and must be
 declared like any other helper/component. You should update
 ``AppController::$components`` and ``AppController::$helpers`` to
-include these classes to retain existing behavior.
+include these classes to retain existing behavior::
 
-::
-
-    <?php
     var $components = array('Session', 'Auth', ...);
     var $helpers = array('Session', 'Html', 'Form' ...);
 
@@ -281,11 +274,8 @@ behavior with other prefix style routes in that it was treated
 differently. Instead you should use ``Routing.prefixes``. Prefix
 routes in 1.3 do not require additional routes to be declared
 manually. All prefix routes will be generated automatically. To
-update simply change your core.php.
+update simply change your core.php::
 
-::
-
-    <?php
     //from:
     Configure::write('Routing.admin', 'admin');
     
@@ -295,11 +285,8 @@ update simply change your core.php.
 See the New features guide for more information on using prefix
 routes. A small change has also been done to routing params. Routed
 params should now only consist of alphanumeric chars, - and \_ or
-``/[A-Z0-9-_+]+/``.
+``/[A-Z0-9-_+]+/``::
 
-::
-
-    <?php
     Router::connect('/:$%@#param/:action/*', array(...)); // BAD
     Router::connect('/:can/:anybody/:see/:m-3/*', array(...)); //Acceptable
 
@@ -308,22 +295,16 @@ increase performance and reduce code clutter. The side effect of
 this is two seldom used features were removed, as they were
 problematic and buggy even with the existing code base. First path
 segments using full regular expressions was removed. You can no
-longer create routes like
+longer create routes like::
 
-::
-
-    <?php
     Router::connect('/([0-9]+)-p-(.*)/', array('controller' => 'products', 'action' => 'show'));
 
 These routes complicated route compilation and impossible to
 reverse route. If you need routes like this, it is recommended that
 you use route parameters with capture patterns. Next mid-route
 greedy star support has been removed. It was previously possible to
-use a greedy star in the middle of a route.
+use a greedy star in the middle of a route::
 
-::
-
-    <?php
     Router::connect(
         '/pages/*/:event',
         array('controller' => 'pages', 'action' => 'display'), 
@@ -343,7 +324,6 @@ $this->redirect() calls to reflect this change.
 
 ::
 
-    <?php
     // old format:
     $url = array('controller' => 'posts', 'action' => 'view', 'id' => $id);
     // use cases:
@@ -500,7 +480,6 @@ automatically outputs SQL logs. If you want to output SQL logs in
 
 ::
 
-    <?php
     echo $this->element('sql_dump');
 
 You can place this element anywhere in your layout or view. The

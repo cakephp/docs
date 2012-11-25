@@ -9,7 +9,6 @@ object. To get a model's DataSource from within the model, use:
 
 ::
 
-    <?php
     $dataSource = $this->getDataSource();
 
 You can then use the data source to start, commit, or roll back
@@ -17,7 +16,6 @@ transactions.
 
 ::
 
-    <?php
     $dataSource->begin();
 
     // Perform some tasks
@@ -37,7 +35,6 @@ the number of `commit` and `rollback` match with begin's.
 
 ::
 
-    <?php
     $dataSource->begin();
     // Perform some tasks
     $dataSource->begin();
