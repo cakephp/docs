@@ -66,7 +66,7 @@ website-dirs:
 	# Make downloads for each language
 	$(foreach lang, $(LANGS), [ ! -d $(DEST)/_downloads/$(lang) ] && mkdir $(DEST)/_downloads/$(lang) || true;)
 
-website: website-dirs html populate-index epub pdf
+website: website-dirs html populate-index
 	# Move HTML
 	$(foreach lang, $(LANGS), cp -r build/html/$(lang) $(DEST)/$(lang);)
 	
@@ -75,6 +75,9 @@ website: website-dirs html populate-index epub pdf
 
 	# Move PDF files
 	$(foreach lang, $(PDF_LANGS), [ -f build/latex/$(lang)/*.pdf ] && cp -r build/latex/$(lang)/*.pdf $(DEST)/_downloads/$(lang) || true;)
+
+	# Move redirects file
+	cp scripts/redirects.php $(DEST)/redirects.php
 
 clean:
 	rm -rf build/*
