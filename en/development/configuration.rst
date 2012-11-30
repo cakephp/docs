@@ -143,7 +143,7 @@ paths where CakePHP will look for classes::
 Core Configuration
 ==================
 
-Each application in CakePHP contains a configuration file to 
+Each application in CakePHP contains a configuration file to
 determine CakePHP's internal behavior.
 ``app/Config/core.php``. This file is a collection of Configure class
 variable definitions and constant definitions that determine how
@@ -167,23 +167,23 @@ debug
     add $this->element('sql\_dump') to your view or layout.]
 
 Error
-    Configure the Error handler used to handle errors for your application.  
-    By default :php:meth:`ErrorHandler::handleError()` is used.  It will display 
+    Configure the Error handler used to handle errors for your application.
+    By default :php:meth:`ErrorHandler::handleError()` is used.  It will display
     errors using :php:class:`Debugger`, when debug > 0
     and log errors with :php:class:`CakeLog` when debug = 0.
 
     Sub-keys:
 
-    * ``handler`` - callback - The callback to handle errors. You can set this to any 
+    * ``handler`` - callback - The callback to handle errors. You can set this to any
       callback type, including anonymous functions.
     * ``level`` - int - The level of errors you are interested in capturing.
     * ``trace`` - boolean - Include stack traces for errors in log files.
 
 Exception
-    Configure the Exception handler used for uncaught exceptions.  By default, 
-    ErrorHandler::handleException() is used. It will display a HTML page for 
-    the exception, and while debug > 0, framework errors like 
-    Missing Controller will be displayed.  When debug = 0, 
+    Configure the Exception handler used for uncaught exceptions.  By default,
+    ErrorHandler::handleException() is used. It will display a HTML page for
+    the exception, and while debug > 0, framework errors like
+    Missing Controller will be displayed.  When debug = 0,
     framework errors will be coerced into generic HTTP errors.
     For more information on Exception handling, see the :doc:`exceptions`
     section.
@@ -209,26 +209,26 @@ Cache.check
     the controllers, but this variable enables the detection of those
     settings.
 Session
-    Contains an array of settings to use for session configuration. The defaults key is 
+    Contains an array of settings to use for session configuration. The defaults key is
     used to define a default preset to use for sessions, any settings declared here will override
     the settings of the default config.
 
     Sub-keys
 
     * ``name`` - The name of the cookie to use. Defaults to 'CAKEPHP'
-    * ``timeout`` - The number of minutes you want sessions to live for. 
+    * ``timeout`` - The number of minutes you want sessions to live for.
       This timeout is handled by CakePHP
     * ``cookieTimeout`` - The number of minutes you want session cookies to live for.
-    * ``checkAgent`` - Do you want the user agent to be checked when starting sessions? 
-      You might want to set the value to false, when dealing with older versions of 
+    * ``checkAgent`` - Do you want the user agent to be checked when starting sessions?
+      You might want to set the value to false, when dealing with older versions of
       IE, Chrome Frame or certain web-browsing devices and AJAX
     * ``defaults`` - The default configuration set to use as a basis for your session.
       There are four builtins: php, cake, cache, database.
-    * ``handler`` - Can be used to enable a custom session handler. 
-      Expects an array of callables, that can be used with `session_save_handler`.  
+    * ``handler`` - Can be used to enable a custom session handler.
+      Expects an array of callables, that can be used with `session_save_handler`.
       Using this option will automatically add `session.save_handler` to the ini array.
-    * ``autoRegenerate`` - Enabling this setting, turns on automatic renewal 
-      of sessions, and sessionids that change frequently. 
+    * ``autoRegenerate`` - Enabling this setting, turns on automatic renewal
+      of sessions, and sessionids that change frequently.
       See :php:attr:`CakeSession::$requestCountdown`.
     * ``ini`` - An associative array of additional ini values to set.
 
@@ -240,7 +240,7 @@ Session
     * 'cache' - Use the Cache class to save sessions.
 
     To define a custom session handler, save it at ``app/Model/Datasource/Session/<name>.php``.
-    Make sure the class implements :php:interface:`CakeSessionHandlerInterface` 
+    Make sure the class implements :php:interface:`CakeSessionHandlerInterface`
     and set Session.handler to <name>
 
     To use database sessions, run the ``app/Config/Schema/sessions.php`` schema using
@@ -363,7 +363,7 @@ anywhere within your application, in a static context::
 
         Configure::read('Company');
 
-        //yields: 
+        //yields:
         array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
 
     If $key is left null, all values in Configure will be returned.
@@ -442,7 +442,7 @@ aliases are attached you can use :php:meth:`Configure::configured()`::
     Configure::configured('default');
 
 You can also remove attached readers.  ``Configure::drop('default')``
-would remove the default reader alias. Any future attempts to load configuration 
+would remove the default reader alias. Any future attempts to load configuration
 files with that reader would fail.
 
 
@@ -463,8 +463,8 @@ Once you've attached a config reader to Configure you can load configuration fil
     // Load my_file.php using the 'default' reader object.
     Configure::load('my_file', 'default');
 
-Loaded configuration files merge their data with the existing runtime configuration 
-in Configure.  This allows you to overwrite and add new values 
+Loaded configuration files merge their data with the existing runtime configuration
+in Configure.  This allows you to overwrite and add new values
 into the existing runtime configuration. By setting ``$merge`` to true, values
 will not ever overwrite the existing configuration.
 
@@ -481,7 +481,7 @@ Creating or modifying configuration files
 Dumps all or some of the data in Configure into a file or storage system
 supported by a config reader. The serialization format
 is decided by the config reader attached as $config.  For example, if the
-'default' adapter is a :php:class:`PhpReader`, the generated file will be a PHP 
+'default' adapter is a :php:class:`PhpReader`, the generated file will be a PHP
 configuration file loadable by the :php:class:`PhpReader`
 
 Given that the 'default' reader is an instance of PhpReader.
@@ -510,15 +510,15 @@ Storing runtime configuration
     :param mixed $data: Either the data to store, or leave null to store all data
         in Configure.
 
-You can also store runtime configuration values for use in a future request.  
-Since configure only remembers values for the current request, you will 
-need to store any modified configuration information if you want to 
+You can also store runtime configuration values for use in a future request.
+Since configure only remembers values for the current request, you will
+need to store any modified configuration information if you want to
 use it in subsequent requests::
 
     // Store the current configuration in the 'user_1234' key in the 'default' cache.
     Configure::store('user_1234', 'default');
 
-Stored configuration data is persisted in the :php:class:`Cache` class. This allows 
+Stored configuration data is persisted in the :php:class:`Cache` class. This allows
 you to store Configuration information in any storage engine that :php:class:`Cache` can talk to.
 
 Restoring runtime configuration
@@ -529,24 +529,24 @@ Restoring runtime configuration
     :param string $name: The storage key to load.
     :param string $cacheConfig: The cache configuration to load the data from.
 
-Once you've stored runtime configuration, you'll probably need to restore it 
+Once you've stored runtime configuration, you'll probably need to restore it
 so you can access it again.  ``Configure::restore()`` does exactly that::
 
     // restore runtime configuration from the cache.
     Configure::restore('user_1234', 'default');
 
 When restoring configuration information it's important to restore it with
-the same key, and cache configuration as was used to store it.  Restored 
+the same key, and cache configuration as was used to store it.  Restored
 information is merged on top of the existing runtime configuration.
 
 Creating your own Configuration readers
 =======================================
 
-Since configuration readers are an extensible part of CakePHP, 
-you can create configuration readers in your application and plugins.  
-Configuration readers need to implement the :php:interface:`ConfigReaderInterface`.  
-This interface defines a read method, as the only required method. 
-If you really like XML files, you could create a simple Xml config 
+Since configuration readers are an extensible part of CakePHP,
+you can create configuration readers in your application and plugins.
+Configuration readers need to implement the :php:interface:`ConfigReaderInterface`.
+This interface defines a read method, as the only required method.
+If you really like XML files, you could create a simple Xml config
 reader for you application::
 
     // in app/Lib/Configure/XmlReader.php
@@ -563,6 +563,11 @@ reader for you application::
             $xml = Xml::build($this->_path . $key . '.xml');
             return Xml::toArray($xml);
         }
+
+        // As of 2.3 a dump() method is also required
+        public function dump($key, $data) {
+            // code to dump data to file
+        }
     }
 
 In your ``app/Config/bootstrap.php`` you could attach this reader and use it::
@@ -573,7 +578,7 @@ In your ``app/Config/bootstrap.php`` you could attach this reader and use it::
 
     Configure::load('my_xml');
 
-The ``read()`` method of a config reader, must return an array of the configuration information 
+The ``read()`` method of a config reader, must return an array of the configuration information
 that the resource named ``$key`` contains.
 
 .. php:interface:: ConfigReaderInterface
@@ -587,6 +592,16 @@ that the resource named ``$key`` contains.
 
     This method should load/parse the configuration data identified by ``$key``
     and return an array of data in the file.
+
+.. php:method:: dump($key)
+
+    :param string $key: The identifier to write to.
+    :param array $data: The data to dump.
+
+    This method should dump/store the provided configuration data to a key identified by ``$key``.
+
+.. versionadded:: 2.3
+    ``ConfigReaderInterface::dump()`` was added in 2.3.
 
 .. php:exception:: ConfigureException
 
@@ -625,7 +640,7 @@ Built-in Configuration readers
 .. php:class:: IniReader
 
     Allows you to read configuration files that are stored as plain .ini files.
-    The ini files must be compatible with php's ``parse_ini_file`` function, and 
+    The ini files must be compatible with php's ``parse_ini_file`` function, and
     benefit from the following improvements
 
     * dot separated values are expanded into arrays.

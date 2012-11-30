@@ -86,6 +86,12 @@ Configure
 - :php:meth:`Configure::check()` was added.  This method works the same as
   :php:meth:`CakeSession::check()` does.
 
+- :php:meth:`ConfigReaderInterface::dump()` was added. Please ensure any custom readers you have now
+  implement a ``dump()`` method.
+
+- The ``$key`` parameter of :php:meth:`IniReader::dump()` now supports keys like `PluginName.keyname`
+  similar to ``PhpReader::dump()``.
+
 Error
 =====
 
