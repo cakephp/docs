@@ -181,6 +181,10 @@ View
 Helpers
 =======
 
+- New property ``Helper::$settings`` has been added for your helper setting. The
+  ``$settings`` parameter of ``Helper::__construct()`` is merged with
+  ``Helper::$settings``.
+
 FormHelper
 ----------
 

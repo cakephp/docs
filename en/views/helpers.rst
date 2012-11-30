@@ -73,6 +73,9 @@ attribute values or modify behavior of a helper::
         public $helpers = array('Awesome' => array('option1' => 'value1'));
     }
 
+As of 2.3 the options are merged with the ``Helper::$settings`` property of
+the helper.
+
 One common setting to use is the ``className`` option, which allows you to
 create aliased helpers in your views.  This feature is useful when you want to
 replace ``$this->Html`` or another common Helper reference with a custom
@@ -102,9 +105,9 @@ The above would *alias* ``MyHtmlHelper`` to ``$this->Html`` in your views.
 
 .. tip::
 
-    Aliasing the Html or Session Helper while using the core PagesController 
-    will not work. It is better to copy 
-    ``lib/Cake/Controller/PagesController.php`` into your ``app/Controller/`` 
+    Aliasing the Html or Session Helper while using the core PagesController
+    will not work. It is better to copy
+    ``lib/Cake/Controller/PagesController.php`` into your ``app/Controller/``
     folder.
 
 Using helper settings allows you to declaratively configure your helpers and
@@ -122,9 +125,9 @@ you can set those in your controller's beforeRender callback::
 Using Helpers
 =============
 
-Once you've configured which helpers you want to use in your controller, 
+Once you've configured which helpers you want to use in your controller,
 each helper is exposed as a public property in the view.  For example, if you
-were using the :php:class:`HtmlHelper` you would be able to access it by 
+were using the :php:class:`HtmlHelper` you would be able to access it by
 doing the following::
 
     echo $this->Html->css('styles');
@@ -132,18 +135,18 @@ doing the following::
 The above would call the ``css`` method on the HtmlHelper.  You can
 access any loaded helper using ``$this->{$helperName}``.  There may
 come a time where you need to dynamically load a helper from inside
-a view.  You can use the view's :php:class:`HelperCollection` to 
+a view.  You can use the view's :php:class:`HelperCollection` to
 do this::
 
     $mediaHelper = $this->Helpers->load('Media', $mediaSettings);
 
-The HelperCollection is a :doc:`collection </core-libraries/collections>` and 
+The HelperCollection is a :doc:`collection </core-libraries/collections>` and
 supports the collection API used elsewhere in CakePHP.
 
 Callback methods
 ================
 
-Helpers feature several callbacks that allow you to augment the 
+Helpers feature several callbacks that allow you to augment the
 view rendering process.  See the :ref:`helper-api` and the
 :doc:`/core-libraries/collections` documentation for more information.
 
@@ -162,7 +165,7 @@ actual PHP class file would look something like this::
 
     /* /app/View/Helper/LinkHelper.php */
     App::uses('AppHelper', 'View/Helper');
-    
+
     class LinkHelper extends AppHelper {
         public function makeEdit($title, $url) {
             // Logic to create specially formatted link goes here...
@@ -183,16 +186,16 @@ helper. To do so, you can specify helpers you wish to use with a
 
     /* /app/View/Helper/LinkHelper.php (using other helpers) */
     App::uses('AppHelper', 'View/Helper');
-    
+
     class LinkHelper extends AppHelper {
         public $helpers = array('Html');
-    
+
         public function makeEdit($title, $url) {
             // Use the HTML helper to output
             // formatted data:
-    
+
             $link = $this->Html->link($title, $url, array('class' => 'edit'));
-    
+
             return '<div class="editOuter">' . $link . '</div>';
         }
     }
@@ -228,7 +231,7 @@ functionality that would be available to all helpers, create
 ``/app/View/Helper/AppHelper.php``::
 
     App::uses('Helper', 'View');
-    
+
     class AppHelper extends Helper {
         public function customMethod() {
         }
@@ -242,7 +245,7 @@ Helper API
 
 .. php:class:: Helper
 
-    The base class for Helpers. It provides a number of utility methods and 
+    The base class for Helpers. It provides a number of utility methods and
     features for loading other helpers.
 
 .. php:method:: webroot($file)
@@ -261,8 +264,8 @@ Helper API
 
 .. php:method:: domId($options = null, $id = 'id')
 
-    Generate a CamelCased id value for the currently selected field. 
-    Overriding this method in your AppHelper will allow you to change 
+    Generate a CamelCased id value for the currently selected field.
+    Overriding this method in your AppHelper will allow you to change
     how CakePHP generates ID attributes.
 
 Callbacks
