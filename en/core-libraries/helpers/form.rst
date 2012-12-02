@@ -390,11 +390,11 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
 
     In addition to controller fields output, ``$fields`` can be used to control
     legend and fieldset rendering with the ``fieldset`` and ``legend`` keys.
-    ``$form->inputs(array('legend' => 'My legend'));``
+    ``$this->Form->inputs(array('legend' => 'My legend'));``
     Would generate an input set with a custom legend. You can customize
     individual inputs through ``$fields`` as well.::
 
-        echo $form->inputs(array(
+        echo $this->Form->inputs(array(
             'name' => array('label' => 'custom label')
         ));
 

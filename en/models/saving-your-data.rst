@@ -471,16 +471,16 @@ models at the same time.
 First, you need to build your form for both Company and Account
 models (we'll assume that Company hasMany Account)::
 
-    echo $form->create('Company', array('action' => 'add'));
-    echo $form->input('Company.name', array('label' => 'Company name'));
-    echo $form->input('Company.description');
-    echo $form->input('Company.location');
+    echo $this->Form->create('Company', array('action' => 'add'));
+    echo $this->Form->input('Company.name', array('label' => 'Company name'));
+    echo $this->Form->input('Company.description');
+    echo $this->Form->input('Company.location');
 
-    echo $form->input('Account.0.name', array('label' => 'Account name'));
-    echo $form->input('Account.0.username');
-    echo $form->input('Account.0.email');
+    echo $this->Form->input('Account.0.name', array('label' => 'Account name'));
+    echo $this->Form->input('Account.0.username');
+    echo $this->Form->input('Account.0.email');
 
-    echo $form->end('Add');
+    echo $this->Form->end('Add');
 
 Take a look at the way we named the form fields for the Account
 model. If Company is our main model, ``saveAssociated()`` will expect the
@@ -613,7 +613,7 @@ then the two meta-fields for the CourseMembership, e.g.::
 
         // View/CourseMemberships/add.ctp
 
-        <?php echo $form->create('CourseMembership'); ?>
+        <?php echo $this->Form->create('CourseMembership'); ?>
             <?php echo $this->Form->input('Student.id', array('type' => 'text', 'label' => 'Student ID', 'default' => 1)); ?>
             <?php echo $this->Form->input('Course.id', array('type' => 'text', 'label' => 'Course ID', 'default' => 1)); ?>
             <?php echo $this->Form->input('CourseMembership.days_attended'); ?>
@@ -765,7 +765,7 @@ pull in this data into a ``<select>``::
     $this->set('tags', $this->Recipe->Tag->find('list'));
 
     // in the view:
-    $form->input('tags');
+    $this->Form->input('tags');
 
 A more likely scenario with a HABTM relationship would include a
 ``<select>`` set to allow multiple selections. For example, a
