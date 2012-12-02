@@ -34,7 +34,6 @@ des exemples de models, chacun étant associé avec un autre.
 
 Voici un simple exemple de définition de model dans CakePHP::
 
-    <?php
     class Ingredient extends AppModel {
         public $name = 'Ingredient';
     }
@@ -89,7 +88,6 @@ disponible en accès, dès lors que son nom valide celui du controller. Par
 exemple, un controller nommé IngredientsController initialisera 
 automatiquement le model Ingredient et y accédera par ``$this->Ingredient``::
 
-    <?php
     class IngredientsController extends AppController {
         public function index() {
             // Récupère tous les ingrédients et les transmet à la vue :
@@ -101,7 +99,6 @@ automatiquement le model Ingredient et y accédera par ``$this->Ingredient``::
 Les models associés sont accessibles à travers le model principal. Dans 
 l'exemple suivant, Recette a une association avec le model Ingredient::
 
-    <?php
     class Recette extends AppModel {
 
         public function steakRecipes() {

@@ -19,14 +19,12 @@ Utilisation basique
 Premièrement, vous devez vous assurer que la classe est chargée en utilisant 
 :php:meth:`App::uses()`::
 
-    <?php
     App::uses('CakeEmail', 'Network/Email');
 
 L'utilisation de CakeEmail est similaire à l'utilisation de 
 :php:class:`EmailComponent`. Mais au lieu d'utiliser les attributs, vous devez 
 utiliser les méthodes. Exemple::
 
-    <?php
     $email = new CakeEmail();
     $email->from(array('me@example.com' => 'My Site'));
     $email->to('you@example.com');
@@ -36,7 +34,6 @@ utiliser les méthodes. Exemple::
 Pour simplifier les choses, toutes les méthodes de setter retournent l'instance 
 de classe. Vous pouvez ré-écrire le code ci-dessous::
 
-    <?php
     $email = new CakeEmail();
     $email->from(array('me@example.com' => 'My Site'))
         ->to('you@example.com')
@@ -50,7 +47,6 @@ Quand on envoie des emails de la part d'autre personne, c'est souvent une
 bonne idée de définir l'emetteur original en utilisant le header Sender. 
 Vous pouvez faire ceci en utilisant ``sender()`` ::
 
-    <?php
     $email = new CakeEmail();
     $email->sender('app@example.com', 'MyApp emailer');
 
@@ -75,7 +71,6 @@ Le fichier ``app/Config/email.php.default`` donne un exemple de ce fichier.
 config. Si vous avez des données dynamiques à mettre dans les configs, vous 
 pouvez utiliser le constructeur pour le faire::
 
-    <?php
     class EmailConfig {
         public function __construct() {
             // Faire des assignments conditionnel ici.
@@ -89,7 +84,6 @@ les configurations séparément ou charger un tableau de configs.
 Pour charger un config à partir de ``EmailConfig``, vous pouvez utiliser la 
 méthode ``config()`` ou la passer au constructeur de ``CakeEmail``::
 
-    <?php
     $email = new CakeEmail();
     $email->config('default');
 
@@ -99,7 +93,6 @@ méthode ``config()`` ou la passer au constructeur de ``CakeEmail``::
 Plutôt que de passer une chaîne qui correspond au nom de la configuration dans 
 ``EmailConfig``, vous pouvez aussi juste charger un tableau de configs::
 
-    <?php
     $email = new CakeEmail();
     $email->config(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
 
@@ -110,7 +103,6 @@ Vous pouvez configurer les serveurs SSL SMTP, comme GMail. Pour faire ceci,
 mettez ``'ssl://'`` en préfixe dans le host et configurez la valeur du port 
 selon. Exemple::
 
-    <?php
     class EmailConfig {
         public $gmail = array(
             'host' => 'ssl://smtp.gmail.com',
@@ -205,7 +197,6 @@ Les templates pour les emails se placent dans un dossier spécial dans le
 répertoire ``View`` de votre application. Les vues des emails peuvent aussi 
 utiliser les layouts et éléments tout comme les vues normales::
 
-    <?php
     $email = new CakeEmail();
     $email->template('welcome', 'fancy')
         ->emailFormat('html')
@@ -217,7 +208,6 @@ Ce qui est au-dessus utilise ``app/View/Emails/html/welcome.ctp`` pour la vue,
 et ``app/View/Layouts/Emails/html/fancy.ctp`` pour le layout. Vous pouvez 
 aussi envoyer des messages email templaté multipart::
 
-    <?php
     $email = new CakeEmail();
     $email->template('welcome', 'fancy')
         ->emailFormat('both')
@@ -237,7 +227,6 @@ Quand on envoie les emails templatés, vous avez la possibilité d'envoyer soit
 
 Vous pouvez définir des variables de vue avec ``CakeEmail::viewVars()``::
 
-    <?php
     $email = new CakeEmail('templated');
     $email->viewVars(array('value' => 12345));
 
@@ -250,7 +239,6 @@ pouvez dans des fichiers normaux de vue. Par défaut, seul
 :php:class:`HtmlHelper` est chargé. Vous pouvez chargez des helpers 
 supplémentaires en utilisant la méthode ``helpers()``::
 
-    <?php
     $email->helpers(array('Html', 'Custom', 'Text'));
 
 Quand vous définissez les helpers, assurez vous d'inclure 'Html' ou il sera 
@@ -259,7 +247,6 @@ retiré des helpers chargés dans votre template d'email.
 Si vous voulez envoyer un email en utilisant templates dans un plugin, vous 
 pouvez utiliser la :term:`syntaxe de plugin` familière pour le faire::
 
-    <?php
     $email = new CakeEmail();
     $email->template('Blog.new_comment', 'Blog.auto_message')
 
@@ -285,7 +272,6 @@ client:
    photo.png, pas some_hash.png.
 4. Tableaux imbriqués::
 
-    <?php
     $email->attachments(array(
         'photo.png' => array(
             'file' => '/full/some_hash.png',
@@ -321,7 +307,6 @@ d'abord le fichier ``app/Lib/Network/Email/ExampleTransport.php`` (où
 Exemple est le nom de votre transport). Pour commencer, votre fichier devrait 
 ressembler à cela::
 
-    <?php
     App::uses('AbstractTransport', 'Network/Email');
 
     class ExempleTransport extends AbstractTransport {
@@ -343,7 +328,6 @@ avant l'envoi, vous pouvez utiliser :php:meth:`CakeEmail::transportClass()`
 pour obtenir une instance du transport.
 Exemple::
 
-    <?php
     $yourInstance = $email->transport('your')->transportClass();
     $yourInstance->myCustomMethod();
     $email->send();
@@ -361,7 +345,6 @@ tableau avec toutes les options dont vous aurez besoin et utiliser
 la méthode statique ``CakeEmail::deliver()``.
 Exemple::
 
-    <?php
     CakeEmail::deliver('you@example.com', 'Subject', 'Message', array('from' => 'me@example.com'));
 
 Cette méthode va envoyer un email à you@example.com, à partir de me@example.com 

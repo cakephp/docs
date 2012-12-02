@@ -22,7 +22,6 @@ CakePHP expects database configuration details to be in a file at
 be found at ``app/Config/database.php.default``. A finished
 configuration should look something like this::
 
-    <?php
     class DATABASE_CONFIG {
         public $default = array(
             'datasource'  => 'Database/Mysql',
@@ -130,12 +129,10 @@ application.
 
 debug
     Changes CakePHP debugging output.
-
     * 0 = Production mode. No output.
     * 1 = Show errors and warnings.
     * 2 = Show errors, warnings, and enable SQL logging. SQL log is only shown when you
       add ``$this->element('sql_dump');`` to your view or layout.
-
 App.namespace
     The namespace to find app classes under.
 App.baseUrl
@@ -323,7 +320,6 @@ won't end up breaking the MVC structure we’ve set in place.
 This class can be called from
 anywhere within your application, in a static context::
 
-    <?php
     Configure::read('debug');
 
 .. php:staticmethod:: write($key, $value)
@@ -333,7 +329,6 @@ anywhere within your application, in a static context::
 
     Use ``write()`` to store data in the application’s configuration::
 
-        <?php
         Configure::write('Company.name','Pizza, Inc.');
         Configure::write('Company.slogan','Pizza for your body and soul');
 
@@ -344,7 +339,6 @@ anywhere within your application, in a static context::
 
     The above example could also be written in a single call::
 
-        <?php
         Configure::write(
             'Company', array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul')
         );
@@ -363,13 +357,12 @@ anywhere within your application, in a static context::
     returned. Using our examples from write() above, we can read that
     data back::
 
-        <?php
         Configure::read('Company.name');    //yields: 'Pizza, Inc.'
         Configure::read('Company.slogan');  //yields: 'Pizza for your body and soul'
 
         Configure::read('Company');
 
-        //yields: 
+        //yields:
         array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
 
     If $key is left null, all values in Configure will be returned.
@@ -386,7 +379,6 @@ anywhere within your application, in a static context::
 
     Used to delete information from the application’s configuration::
 
-        <?php
         Configure::delete('Company.name');
 
 .. php:staticmethod:: version()
@@ -426,7 +418,6 @@ for more information on the specifics of ini files.
 To use a core config reader, you'll need to attach it to Configure
 using :php:meth:`Configure::config()`::
 
-    <?php
     App::uses('PhpReader', 'Configure');
     // Read config files from app/Config
     Configure::config('default', new PhpReader());
@@ -440,7 +431,6 @@ different types of sources.  You can interact with attached readers
 using a few other methods on Configure. To see check which reader
 aliases are attached you can use :php:meth:`Configure::configured()`::
 
-    <?php
     // Get the array of aliases for attached readers.
     Configure::configured();
 
@@ -448,7 +438,7 @@ aliases are attached you can use :php:meth:`Configure::configured()`::
     Configure::configured('default');
 
 You can also remove attached readers.  ``Configure::drop('default')``
-would remove the default reader alias. Any future attempts to load configuration 
+would remove the default reader alias. Any future attempts to load configuration
 files with that reader would fail.
 
 
@@ -466,12 +456,11 @@ Loading configuration files
 
 Once you've attached a config reader to Configure you can load configuration files::
 
-    <?php
     // Load my_file.php using the 'default' reader object.
     Configure::load('my_file', 'default');
 
-Loaded configuration files merge their data with the existing runtime configuration 
-in Configure.  This allows you to overwrite and add new values 
+Loaded configuration files merge their data with the existing runtime configuration
+in Configure.  This allows you to overwrite and add new values
 into the existing runtime configuration. By setting ``$merge`` to true, values
 will not ever overwrite the existing configuration.
 
@@ -488,18 +477,16 @@ Creating or modifying configuration files
 Dumps all or some of the data in Configure into a file or storage system
 supported by a config reader. The serialization format
 is decided by the config reader attached as $config.  For example, if the
-'default' adapter is a :php:class:`PhpReader`, the generated file will be a PHP 
+'default' adapter is a :php:class:`PhpReader`, the generated file will be a PHP
 configuration file loadable by the :php:class:`PhpReader`
 
 Given that the 'default' reader is an instance of PhpReader.
 Save all data in Configure to the file `my_config.php`::
 
-    <?php
     Configure::dump('my_config.php', 'default');
 
 Save only the error handling configuration::
 
-    <?php
     Configure::dump('error.php', 'default', array('Error', 'Exception'));
 
 ``Configure::dump()`` can be used to either modify or overwrite
@@ -517,16 +504,15 @@ Storing runtime configuration
     :param mixed $data: Either the data to store, or leave null to store all data
         in Configure.
 
-You can also store runtime configuration values for use in a future request.  
-Since configure only remembers values for the current request, you will 
-need to store any modified configuration information if you want to 
+You can also store runtime configuration values for use in a future request.
+Since configure only remembers values for the current request, you will
+need to store any modified configuration information if you want to
 use it in subsequent requests::
 
-    <?php
     // Store the current configuration in the 'user_1234' key in the 'default' cache.
     Configure::store('user_1234', 'default');
 
-Stored configuration data is persisted in the :php:class:`Cache` class. This allows 
+Stored configuration data is persisted in the :php:class:`Cache` class. This allows
 you to store Configuration information in any storage engine that :php:class:`Cache` can talk to.
 
 Restoring runtime configuration
@@ -537,28 +523,26 @@ Restoring runtime configuration
     :param string $name: The storage key to load.
     :param string $cacheConfig: The cache configuration to load the data from.
 
-Once you've stored runtime configuration, you'll probably need to restore it 
+Once you've stored runtime configuration, you'll probably need to restore it
 so you can access it again.  ``Configure::restore()`` does exactly that::
 
-    <?php
     // restore runtime configuration from the cache.
     Configure::restore('user_1234', 'default');
 
 When restoring configuration information it's important to restore it with
-the same key, and cache configuration as was used to store it.  Restored 
+the same key, and cache configuration as was used to store it.  Restored
 information is merged on top of the existing runtime configuration.
 
 Creating your own Configuration readers
 =======================================
 
-Since configuration readers are an extensible part of CakePHP, 
-you can create configuration readers in your application and plugins.  
-Configuration readers need to implement the :php:interface:`ConfigReaderInterface`.  
-This interface defines a read method, as the only required method. 
-If you really like XML files, you could create a simple Xml config 
+Since configuration readers are an extensible part of CakePHP,
+you can create configuration readers in your application and plugins.
+Configuration readers need to implement the :php:interface:`ConfigReaderInterface`.
+This interface defines a read method, as the only required method.
+If you really like XML files, you could create a simple Xml config
 reader for you application::
 
-    <?php
     // in app/Lib/Configure/XmlReader.php
     App::uses('Xml', 'Utility');
     class XmlReader implements ConfigReaderInterface {
@@ -573,18 +557,22 @@ reader for you application::
             $xml = Xml::build($this->_path . $key . '.xml');
             return Xml::toArray($xml);
         }
+
+        // As of 2.3 a dump() method is also required
+        public function dump($key, $data) {
+            // code to dump data to file
+        }
     }
 
 In your ``app/Config/bootstrap.php`` you could attach this reader and use it::
 
-    <?php
     App::uses('XmlReader', 'Configure');
     Configure::config('xml', new XmlReader());
     ...
     
     Configure::load('my_xml');
 
-The ``read()`` method of a config reader, must return an array of the configuration information 
+The ``read()`` method of a config reader, must return an array of the configuration information
 that the resource named ``$key`` contains.
 
 .. php:namespace:: Cake\Configure
@@ -600,6 +588,16 @@ that the resource named ``$key`` contains.
 
     This method should load/parse the configuration data identified by ``$key``
     and return an array of data in the file.
+
+.. php:method:: dump($key)
+
+    :param string $key: The identifier to write to.
+    :param array $data: The data to dump.
+
+    This method should dump/store the provided configuration data to a key identified by ``$key``.
+
+.. versionadded:: 2.3
+    ``ConfigReaderInterface::dump()`` was added in 2.3.
 
 .. php:exception:: ConfigureException
 
@@ -617,7 +615,6 @@ Built-in Configuration readers
     directories by using :term:`plugin syntax`.  Files **must** contain a ``$config``
     variable.  An example configuration file would look like::
 
-        <?php
         $config = array(
             'debug' => 0,
             'Security' => array(
@@ -640,7 +637,7 @@ Built-in Configuration readers
 .. php:class:: IniReader
 
     Allows you to read configuration files that are stored as plain .ini files.
-    The ini files must be compatible with php's ``parse_ini_file`` function, and 
+    The ini files must be compatible with php's ``parse_ini_file`` function, and
     benefit from the following improvements
 
     * dot separated values are expanded into arrays.
@@ -661,7 +658,6 @@ Built-in Configuration readers
     as the PHP example above.  Array structures can be created either
     through dot separated values, or sections.  Sections can contain
     dot separated keys for deeper nesting.
-
 
 Bootstrapping CakePHP
 =====================

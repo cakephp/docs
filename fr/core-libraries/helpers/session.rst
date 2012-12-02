@@ -15,7 +15,6 @@ Comme pour le Component Session, les données sont écrites et lues en
 utilisant des structures de tableaux avec des :term:`dot notation`, 
 comme ci-dessous::
 
-    <?php
     array('User' => 
         array('username' => 'super@example.com')
     );
@@ -64,10 +63,11 @@ Affichage de notifications ou de messages flash
     voudrez les afficher. Une fois que le message est affiché, il sera 
     retiré et ne s'affichera plus::
 
-        <?php
         echo $this->Session->flash();
 
-    Ce qui est au-dessus sortira un message simple, avec le html suivant::
+    Ce qui est au-dessus sortira un message simple, avec le html suivant:
+
+    .. code-block:: html
 
         <div id="flashMessage" class="message">
             Vos trucs on été sauvegardés.
@@ -77,14 +77,12 @@ Affichage de notifications ou de messages flash
     supplémentaires et personnaliser quel élément est utilisé. Dans le 
     controller, vous pouvez avoir du code comme::
 
-        <?php
         // dans un controller
         $this->Session->setFlash('Le user n'a pu être supprimé.');
 
     Quand le message sort, vous pouvez choisir l'élément utilisé pour afficher 
     ce message::
 
-        <?php 
         // dans un layout.
         echo $this->Session->flash('flash', array('element' => 'failure'));
 
@@ -92,7 +90,9 @@ Affichage de notifications ou de messages flash
     message texte serait disponible dans ``$message`` dans l'élément.
 
     A l'intérieur du fichier élément d'echec, il y aurait quelque chose comme 
-    ceci::
+    ceci:
+
+    .. code-block:: php
 
         <div class="flash flash-failure">
             <?php echo $message ?>
@@ -101,7 +101,6 @@ Affichage de notifications ou de messages flash
     Vous pouvez aussi passer des paramètres supplémentaires dans la méthode 
     ``flash()``, ce qui vous permet de générer des messages personnalisés::
 
-        <?php
         // Dans le controller
         $this->Session->setFlash('Thanks for your payment %s');
 

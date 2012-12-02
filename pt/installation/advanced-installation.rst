@@ -43,7 +43,6 @@ Dado este tipo de configuração, eu preciso editar meu arquivo webroot/index.ph
 (que vai acabar em /var/www/mysite/index.php, neste exemplo) para algo como o
 seguinte::
 
-    <?php
     // /app/webroot/index.php (parcial, comentários removidos) 
     
     if (!defined('ROOT')) {

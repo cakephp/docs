@@ -20,7 +20,6 @@ Premièrement prenez une copie du plugin et dézipper le ou dupliquer le en
 utilisant git dans `app/Plugin/AclExtras`. Ensuite, activez le plugin dans 
 votre fichier `app/Config/boostrap.php` comme montré ci-dessus::
 
-    <?php
     //app/Config/boostrap.php
     // ...
     CakePlugin::load('AclExtras');
@@ -55,7 +54,6 @@ Note: \* a besoin d'être mis entre quotes ('\*')
 Pour donner des autorisations avec ``AclComponent``, nous utiliserons la 
 syntaxe de code suivante dans une méthode personnalisée::
 
-    <?php
     $this->Acl->allow($aroAlias, $acoAlias);
 
 Nous allons maintenant ajouter un peu d'autorisations/interdictions. 
@@ -66,7 +64,6 @@ faîtes un ``SELECT * FROM aros_acos``, vous devriez voir une pile
 entière de 1 et -1. Une fois que vous avez confirmé, vos permissions sont 
 configurées, retirez la fonction::
 
-    <?php
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -120,7 +117,6 @@ Maitenant, nous voulons enlever les références de ``Auth->allowedActions``
 dans les controllers de vos users et groupes. Ensuite ajouter ce qui 
 suit aux controllers de vos posts et widgets::
 
-    <?php
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('index', 'view');
@@ -131,7 +127,6 @@ controllers users et groupes et cela rend public l'accès aux
 actions index et voir dans les controllers Posts et Widgets. Dans 
 ``AppController::beforeFilter()`` ajoutez ce qui suit::
 
-    <?php
      $this->Auth->allow('display');
 
 Ce qui rend l'action 'display' publique. Cela rendra notre action 
@@ -146,7 +141,9 @@ Notre application est désormais sous contrôle d'accès, et toute tentative
 d'accès à des pages non publiques vous redirigera vers la page de connexion. 
 Cependant, vous devrez créer une vue login avant que quelqu'un puisse se 
 connecter. Ajoutez ce qui suit à ``app/View/Users/login.ctp`` si vous 
-ne l'avez pas déjà fait::
+ne l'avez pas déjà fait:
+
+.. code-block:: php
 
     <h2>Connexion</h2>
     <?php
@@ -159,7 +156,6 @@ ne l'avez pas déjà fait::
 Si l'user est déjà connecté, on le redirige en ajoutant ceci au 
 controller UsersController::
 
-    <?php
     public function login() {
         if ($this->Session->read('Auth.User')) {
             $this->Session->setFlash('Vous êtes connecté!');
@@ -179,7 +175,6 @@ Abordons maintenant la déconnexion. Nous avions plus tôt laissé cette fonctio
 vide, il est maintenant temps de la remplir. Dans 
 ``UsersController::logout()`` ajoutez ce qui suit ::
 
-    <?php
     $this->Session->setFlash('Au-revoir');
     $this->redirect($this->Auth->logout());
 

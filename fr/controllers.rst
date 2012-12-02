@@ -43,7 +43,6 @@ elle-même la classe Controller incluse dans la librairie du cœur de CakePHP.
 Ainsi, AppController est définie dans ``/app/Controller/AppController.php`` 
 comme ceci::
 
-    <?php
     class AppController extends Controller {
     }
     
@@ -76,7 +75,6 @@ N'oubliez pas d'ajouter les assistants Html et Form si vous avez défini var
 Pensez à appeler les fonctions de retour (callbacks) de AppController dans 
 celles du controller enfant pour de meilleurs résultats::
 
-    <?php
     public function beforeFilter() {
         parent::beforeFilter();
     }
@@ -106,7 +104,6 @@ RecipesController pourrait contenir les actions
 ``view()``, ``share()``, et ``search()``. Le controller serait trouvé dans 
 ``/app/Controller/RecettesController.php`` et contiendrait::
 
-        <?php
         # /app/Controller/RecettesController.php
         
         class RecettesController extends AppController {
@@ -147,7 +144,6 @@ you will often want to return data that isn't a string.  If you have controller
 methods that are used for normal web requests + requestAction you should check
 the request type before returning::
 
-    <?php
     class RecipesController extends AppController {
         public function popular() {
             $popular = $this->Recipe->popular();
@@ -228,7 +224,6 @@ fichier de vue doit être rendu à partir du controller.
     données de votre controller à votre vue. Une fois ``set()`` utilisée, la 
     variable de votre controller devient accessible par la vue::
 
-        <?php
         // Dans un premier temps vous passez les données depuis le controller:
 
         $this->set('couleur', 'rose');
@@ -249,7 +244,6 @@ fichier de vue doit être rendu à partir du controller.
 
     ::
 
-        <?php
         $data = array(
             'couleur' => 'rose',
             'type' => 'sucre',
@@ -265,7 +259,6 @@ fichier de vue doit être rendu à partir du controller.
     L'attribut ``$pageTitle`` n'existe plus, utilisez ``set()`` pour définir 
     le titre::
 
-        <?php
         $this->set('title_for_layout', 'Ceci est la page titre');
 
 
@@ -283,7 +276,6 @@ fichier de vue doit être rendu à partir du controller.
     est demandée, le fichier de vue situé dans /app/view/recettes/search.ctp 
     sera utilisé::
 
-        <?php
         class RecettesController extends AppController {
         // ...
             public function search() {
@@ -305,7 +297,6 @@ fichier de vue doit être rendu à partir du controller.
     d'appels ajax.
     ::
 
-        <?php
         // Rend un élément dans /View/Elements/ajaxreturn.ctp
         $this->render('/Elements/ajaxreturn');
 
@@ -321,7 +312,6 @@ différente que celle rendue par défaut. Vous pouvez faire cela en appelant
 directement ``render()``. Une fois que vous avez appelé ``render()`` CakePHP 
 n'essaiera pas de re-rendre la vue::
 
-    <?php
     class PostsController extends AppController {
         public function mon_action() {
             $this->render('fichier_personnalise');
@@ -342,7 +332,6 @@ Contrôle de FLux
     réalisé un paiement avec succès, vous aimeriez le rediriger vers un 
     écran affichant le reçu.::
 
-        <?php
         public function regler_achats() {
             // Placez ici la logique pour finaliser l'achat...
             if ($success) {
@@ -354,13 +343,11 @@ Contrôle de FLux
 
     Vous pouvez aussi utiliser une URL relative ou absolue avec $url::
 
-        <?php
         $this->redirect('/paiements/remerciements'));
         $this->redirect('http://www.exemple.com');
 
     Vous pouvez aussi passer des données à l'action::
 
-        <?php
         $this->redirect(array('action' => 'editer', $id));
 
     Le second paramètre de la fonction ``redirect()`` vous permet de 
@@ -375,7 +362,6 @@ Contrôle de FLux
     Si vous avez besoin de rediriger à la page appelante, vous pouvez 
     utiliser::
 
-        <?php
         $this->redirect($this->referer());
 
     Cette méthode supporte aussi les paramètres nommés de base. Si vous 
@@ -383,7 +369,6 @@ Contrôle de FLux
     ``http://www.example.com/commandes/confirmation/produit:pizza/quantite:5``
     vous pouvez utiliser::
 
-        <?php
         $this->redirect(array('controller' => 'commandes', 'action' => 'confirmation', 'produit' => 'pizza', 'quantite' => 5));
 
 .. php:method:: flash(string $message, string $url, integer $pause, string $layout)
@@ -446,7 +431,6 @@ Autres Méthodes utiles
     utiliser si HTTP\_REFERER ne peut pas être lu par les headers. Donc, 
     au lieu de faire ceci::
 
-        <?php
         class UtilisateursController extends AppController {
             public function delete($id) {
                 // le code de suppression va ici, et ensuite...
@@ -460,7 +444,6 @@ Autres Méthodes utiles
 
     vous pouvez faire ceci::
 
-        <?php
         class UtilisateursController extends AppController {
             public function delete($id) {
                 // le code de suppression va ici, et ensuite...
@@ -501,7 +484,6 @@ Autres Méthodes utiles
     peut utiliser les données postées par ce formulaire pour construire 
     automatiquement les conditions de la recherche::
 
-        <?php
         public function index() {
             $conditions = $this->postConditions($this->request->data);
             $commandes = $this->Commande->find('all', compact('conditions'));
@@ -516,7 +498,6 @@ Autres Méthodes utiles
     Si vous voulez utiliser un opérateur SQL différent entre chaque 
     terme, remplacez-le en utilisant le second paramètre::
 
-        <?php
         /*
         Contenu de $this->request->data
         array(
@@ -583,7 +564,6 @@ Autres Méthodes utiles
     "derniers commentaires" dans le gabarit (layout). Nous devons d'abord 
     créer une méthode de controller qui retourne les données::
     
-        <?php
         // Controller/CommentsController.php
         class CommentsController extends AppController {
             public function latest() {
@@ -602,7 +582,6 @@ Autres Méthodes utiles
 
     Si nous créons un élément simple pour appeler cette fonction::
 
-        <?php
         // View/Elements/latest_comments.ctp
 
         $comments = $this->requestAction('/comments/latest');
@@ -613,7 +592,6 @@ Autres Méthodes utiles
     On peut ensuite placer cet élément n'importe où pour obtenir la 
     sortie en utilisant::
 
-        <?php
         echo $this->element('latest_comments');
 
     Ecrit de cette manière, dès que l'élément est affiché, une requête 
@@ -623,7 +601,6 @@ Autres Méthodes utiles
     des traitements inutiles. En modifiant l'appel à l'élément pour qu'il 
     ressemble à ceci::
 
-        <?php
         echo $this->element('latest_comments', array('cache' => '+1 hour'));
 
     L'appel à ``requestAction`` ne sera pas effectué tant que le fichier de vue 
@@ -632,7 +609,6 @@ Autres Méthodes utiles
     De plus, ``requestAction`` prend désormais des urls basées sur des tableau 
     dans le style de cake::
 
-        <?php
         echo $this->requestAction(
             array('controller' => 'articles', 'action' => 'featured'),
             array('return')
@@ -650,13 +626,11 @@ Autres Méthodes utiles
     Des membres supplémentaires dans le tableau ``$option`` va aussi être rendu 
     disponible dans le tableau Controller::params de l'action requêtée ::
         
-        <?php
         echo $this->requestAction('/articles/featured/limit:3');
         echo $this->requestAction('/articles/view/5');
 
     En array dans requestAction serait ainsi::
 
-        <?php
         echo $this->requestAction(
             array('controller' => 'articles', 'action' => 'featured'),
             array('named' => array('limit' => 3))
@@ -685,7 +659,6 @@ Autres Méthodes utiles
     d'utiliser un model qui n'est pas le model du controller par défaut 
     ou un de ses models associés::
     
-        <?php
         $this->loadModel('Article');
         $recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));
 
@@ -707,7 +680,6 @@ visitez l'API de CakePHP. Regardez
     controller utilise. Cette propriété n'est pas requis, mais évite à 
     CakePHP d'inflecter dessus::
 
-        <?php
         // Exemple d'utilisation d'attribut $name du controller
         class RecipesController extends AppController {
            public $name = 'Recipes';
@@ -763,7 +735,6 @@ fournies par ``$helpers``, disponibles pour la vue comme une variable référenc
     Jetons maintenant un œil sur la façon d'indiquer à un controller CakePHP 
     que vous avez dans l'idée d'utiliser d'autres classes MVC::
 
-        <?php
         class RecipesController extends AppController {
             public $uses = array('Recipe', 'User');
             public $helpers = array('Js');
@@ -802,7 +773,6 @@ own sections in the manual.
     loads and configures the :php:class:`PaginatorComponent`.  It is recommended
     that you update your code to use normal component settings::
 
-        <?php
         class ArticlesController extends AppController {
             public $components = array(
                 'Paginator' => array(

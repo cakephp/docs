@@ -21,7 +21,6 @@ any PHP error - exceptions are handled :doc:`/development/exceptions` separately
 The callback can be any PHP callable, including an anonymous function.  The 
 default error handling configuration looks like::
 
-    <?php
     Configure::write('Error', [
         'handler' => 'ErrorHandler::handleError',
         'level' => E_ALL & ~E_DEPRECATED,
@@ -62,7 +61,6 @@ You can create an error handler out of any callback type.  For example you could
 use a class called ``AppError`` to handle your errors.  The following would 
 need to be done::
 
-    <?php
     //in app/Config/core.php
     Configure::write('Error.handler', 'AppError::handleError');
 
@@ -80,7 +78,6 @@ This class/method will print out 'There has been an error!' each time an error
 occurs.  Since you can define an error handler as any callback type, you could
 use an anonymous function if you are using PHP5.3 or greater.::
 
-    <?php
     Configure::write('Error.handler', function($code, $description, $file = null, $line = null, $context = null) {
         echo 'Oh no something bad happened';
     });
@@ -96,7 +93,6 @@ Changing fatal error behavior
 Since CakePHP 2.2 the ``Error.handler`` will receive the fatal error codes as well.
 If you do not want to show the cake error page, you can override it like::
 
-    <?php
     //in app/Config/core.php
     Configure::write('Error.handler', 'AppError::handleError');
 

@@ -14,7 +14,6 @@ Les fichiers des classes Model de CakePHP se trouvent dans ``/app/Model``,
 et le fichier que nous allons créer maintenant sera enregistré dans
 ``/app/Model/Post.php``. Le fichier complet devrait ressembler à ceci ::
 
-    <?php
     class Post extends AppModel {
     }
 
@@ -46,7 +45,6 @@ controller dans un fichier appelé ``PostsController.php`` à l'intérieur du
 dossier ``/app/Controller``. Voici à quoi devrait ressembler le controller 
 de base ::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
     }
@@ -60,7 +58,6 @@ quelque chose comme ça :
 
 ::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
 
@@ -160,7 +157,9 @@ Les fichiers des vues de Cake sont stockés dans ``/app/views`` à l'intérieur
 d'un dossier dont le nom correspond à celui du controller (nous aurons à créer 
 un dossier appelé 'posts' dans ce cas). Pour mettre en forme les données de 
 ces posts dans un joli tableau, le code de notre vue devrait ressembler à 
-quelque chose comme cela ::
+quelque chose comme cela
+
+.. code-block:: php
 
     <!-- Fichier: /app/View/Posts/index.ctp -->
 
@@ -216,7 +215,6 @@ Si vous n'avez pas été informé, soit quelque chose s'est mal passé, soit en 
 vous aviez déjà défini l'action, auquel cas vous êtes vraiment sournois !
 Sinon, nous allons la créer sans plus tarder dans le Controller Posts ::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
 
@@ -242,7 +240,7 @@ Si un utilisateur demande /posts/view/3, alors la valeur '3' est transmise
 Maintenant, créons la vue pour notre nouvelle action "view" et plaçons-la
 dans ``/app/View/Posts/view.ctp``.
 
-::
+.. code-block:: php
 
     <!-- Fichier : /app/View/Posts/view.ctp -->
 
@@ -266,7 +264,6 @@ PostsController :
 
 ::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
         public $components = array('Session');
@@ -345,7 +342,9 @@ Pour tirer avantage des fonctionnalités de validation, vous devez utiliser
 le helper "Form" (FormHelper) dans vos vues. :php:class:`FormHelper` est 
 disponible par défaut dans toutes les vues avec la variables ``$this->Form``.
 
-Voici le code de notre vue "add" (ajout) ::
+Voici le code de notre vue "add" (ajout)
+
+.. code-block:: php
 
     <!-- Fichier : /app/View/Posts/add.ctp -->
 
@@ -355,11 +354,12 @@ Voici le code de notre vue "add" (ajout) ::
     echo $this->Form->input('title');
     echo $this->Form->input('body', array('rows' => '3'));
     echo $this->Form->end('Sauvegarder le post');
-    ?>
 
 Nous utilisons ici le :php:class:`FormHelper` pour générer la balise 
 d'ouverture d'une formulaire HTML. Voici le code HTML généré par 
-``$this->Form->create()`` ::
+``$this->Form->create()``
+
+.. code-block:: html
 
     <form id="PostAddForm" method="post" action="/posts/add">
 
@@ -393,7 +393,6 @@ exigences de validation ? Les règles de validation sont définies dans le
 model. Retournons donc à notre model Post et précédons à quelques 
 ajustements ::
 
-    <?php
     class Post extends AppModel {
         public $validate = array(
             'title' => array(
@@ -429,7 +428,6 @@ devriez donc avoir adopté le principe. Créez d'abord l'action puis la vue.
 Voici à quoi l'action ``edit()`` du controller Posts (PostsController) devrait 
 ressembler ::
 
-    <?php
     public function edit($id = null) {
         $this->Post->id = $id;
         if ($this->request->is('get')) {
@@ -451,7 +449,9 @@ des données POST. Nous allons donc utiliser ces données POST pour mettre à
 jour notre enregistrement du post ou revenir en arrière et afficher les 
 erreurs de validation.
 
-La vue d'édition devrait ressembler à quelque chose comme cela ::
+La vue d'édition devrait ressembler à quelque chose comme cela:
+
+.. code-block:: php
 
     <!-- Fichier: /app/View/Posts/edit.ctp -->
 
@@ -472,7 +472,9 @@ revient à notre vue "add"), Cake supposera que nous insérez un nouveau model
 lorsque ``save()`` sera appelé.
 
 Vous pouvez maintenant mettre à jour votre vue "index" avec des liens pour 
-éditer des posts ::
+éditer des posts :
+
+.. code-block:: php
 
     <!-- Fichier: /app/View/Posts/index.ctp  (lien d'édition ajouté) -->
 
@@ -512,7 +514,6 @@ A présent, mettons en place un moyen de supprimer les posts pour les
 utilisateurs. Démarrons avec une action ``delete()`` dans le controller 
 Posts (PostsController)::
 
-    <?php
     public function delete($id) {
         if ($this->request->is('get')) {
             throw new MethodNotAllowedException();
@@ -535,7 +536,9 @@ indiquer les différentes erreurs HTTP que votre application pourrait rencontrer
 Etant donné que nous exécutons juste un peu de logique et de redirection, 
 cette action n'a pas de vue. Vous voudrez peut-être mettre à jour votre vue 
 "index" avec des liens pour permettre aux utilisateurs de supprimer des Posts, 
-ainsi ::
+ainsi :
+
+.. code-block:: php
 
     <!-- Fichier: /app/View/Posts/index.ctp -->
 
@@ -604,14 +607,12 @@ Le routage de Cake se trouve dans ``/app/Config/routes.php``. Vous devrez
 commenter ou supprimer la ligne qui définit la route par défaut. Elle 
 ressemble à cela ::
 
-    <?php
     Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
 Cette ligne connecte l'URL '/' à la page d'accueil par défaut de CakePHP. Nous 
 voulons que cette URL soit connectée à notre propre controller, remplacez donc 
 la ligne par celle-ci ::
 
-    <?php
     Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 
 Cela devrait connecter les utilisateurs demandant '/' à l'action ``index()`` de 

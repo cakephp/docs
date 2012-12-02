@@ -307,6 +307,7 @@ ContactManagerプラグインでは、ContactsController::index() actionのview�
     <!-- A sortable list of contacts would go here....-->
 
 .. note::
+
         プラグインからのエレメントの使い方に関する情報は、ここを参照してください。
         :ref:`view-elements`
 

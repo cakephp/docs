@@ -25,7 +25,6 @@ truncating long stretches of text.
     to any options defined in ``$htmlOptions`` (see
     :php:meth:`HtmlHelper::link()`).::
 
-        <?php
         $myText = 'For more information regarding our world-famous pastries and desserts, contact info@example.com';
         $linkedText = $this->Text->autoLinkEmails($myText);
 

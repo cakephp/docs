@@ -40,7 +40,6 @@ AppController itself extends the Controller class included in the
 CakePHP core library. As such, AppController is defined in
 ``/app/Controller/AppController.php`` like so::
 
-    <?php
     class AppController extends Controller {
     }
     
@@ -74,7 +73,6 @@ var ``$helpers`` in your AppController
 Please also remember to call AppController's callbacks within child
 controller callbacks for best results::
 
-    <?php
     public function beforeFilter() {
         parent::beforeFilter();
     }
@@ -103,7 +101,6 @@ name.  Returning to our online bakery example, our RecipesController might conta
 ``view()``, ``share()``, and ``search()`` actions. The controller would be found
 in ``/app/Controller/RecipesController.php`` and contain::
 
-        <?php
         # /app/Controller/RecipesController.php
         
         class RecipesController extends AppController {
@@ -145,7 +142,6 @@ you will often want to return data that isn't a string.  If you have controller
 methods that are used for normal web requests + requestAction you should check
 the request type before returning::
 
-    <?php
     class RecipesController extends AppController {
         public function popular() {
             $popular = $this->Recipe->popular();
@@ -223,7 +219,6 @@ rendered from the controller.
     controller to your view. Once you've used ``set()``, the variable
     can be accessed in your view::
 
-        <?php
         // First you pass data from the controller:
 
         $this->set('color', 'pink');
@@ -244,7 +239,6 @@ rendered from the controller.
 
     ::
 
-        <?php
         $data = array(
             'color' => 'pink',
             'type' => 'sugar',
@@ -260,7 +254,6 @@ rendered from the controller.
     The attribute ``$pageTitle`` no longer exists, use ``set()`` to set
     the title::
 
-        <?php
         $this->set('title_for_layout', 'This is the page title');
 
 
@@ -276,7 +269,6 @@ rendered from the controller.
     If the ``search()`` action of the RecipesController is requested,
     the view file in /app/View/Recipes/search.ctp will be rendered::
 
-        <?php
         class RecipesController extends AppController {
         // ...
             public function search() {
@@ -296,7 +288,6 @@ rendered from the controller.
     direct rendering of elements, very useful in ajax calls.
     ::
 
-        <?php
         // Render the element in /View/Elements/ajaxreturn.ctp
         $this->render('/Elements/ajaxreturn');
 
@@ -312,7 +303,6 @@ what would conventionally be done. You can do this by calling
 ``render()`` directly. Once you have called ``render()`` CakePHP
 will not try to re-render the view::
 
-    <?php
     class PostsController extends AppController {
         public function my_action() {
             $this->render('custom_file');
@@ -332,7 +322,6 @@ Flow Control
     CakePHP-relative URL. When a user has successfully placed an order,
     you might wish to redirect them to a receipt screen.::
 
-        <?php
         public function place_order() {
             // Logic for finalizing order goes here
             if ($success) {
@@ -344,13 +333,11 @@ Flow Control
 
     You can also use a relative or absolute URL as the $url argument::
 
-        <?php
         $this->redirect('/orders/thanks'));
         $this->redirect('http://www.example.com');
 
     You can also pass data to the action::
 
-        <?php
         $this->redirect(array('action' => 'edit', $id));
 
     The second parameter of ``redirect()`` allows you to define an HTTP
@@ -363,14 +350,12 @@ Flow Control
 
     If you need to redirect to the referer page you can use::
 
-        <?php
         $this->redirect($this->referer());
 
     The method also supports name based parameters. If you want to redirect
     to a URL like: ``http://www.example.com/orders/confirm/product:pizza/quantity:5``
     you can use::
 
-        <?php
         $this->redirect(array('controller' => 'orders', 'action' => 'confirm', 'product' => 'pizza', 'quantity' => 5));
 
 .. php:method:: flash(string $message, string $url, integer $pause, string $layout)
@@ -432,7 +417,6 @@ Other Useful Methods
     HTTP\_REFERER cannot be read from headers. So, instead of doing
     this::
 
-        <?php
         class UserController extends AppController {
             public function delete($id) {
                 // delete code goes here, and then...
@@ -446,7 +430,6 @@ Other Useful Methods
 
     you can do this::
 
-        <?php
         class UserController extends AppController {
             public function delete($id) {
                 // delete code goes here, and then...
@@ -485,7 +468,6 @@ Other Useful Methods
     to create a quick form based on the Order model. Then a controller action
     can use the data posted from that form to craft find conditions::
 
-        <?php
         public function index() {
             $conditions = $this->postConditions($this->request->data);
             $orders = $this->Order->find('all', compact('conditions'));
@@ -500,7 +482,6 @@ Other Useful Methods
     If you want to use a different SQL operator between terms, supply them
     using the second parameter::
 
-        <?php
         /*
         Contents of $this->request->data
         array(
@@ -536,7 +517,117 @@ Other Useful Methods
     :doc:`pagination <core-libraries/components/pagination>` section for more details on
     how to use paginate.
 
-.. php:method:: requestAction($url, $options)
+.. php:method:: requestAction(string $url, array $options)
+
+    This function calls a controller's action from any location and
+    returns data from the action. The ``$url`` passed is a
+    CakePHP-relative URL (/controllername/actionname/params). To pass
+    extra data to the receiving controller action add to the $options
+    array.
+
+    .. note::
+
+        You can use ``requestAction()`` to retrieve a fully rendered view
+        by passing 'return' in the options:
+        ``requestAction($url, array('return'));``. It is important to note
+        that making a requestAction using 'return' from a controller method
+        can cause script and css tags to not work correctly.
+
+    .. warning::
+
+        If used without caching ``requestAction`` can lead to poor
+        performance. It is rarely appropriate to use in a controller or
+        model.
+
+    ``requestAction`` is best used in conjunction with (cached)
+    elements – as a way to fetch data for an element before rendering.
+    Let's use the example of putting a "latest comments" element in the
+    layout. First we need to create a controller function that will
+    return the data::
+
+        // Controller/CommentsController.php
+        class CommentsController extends AppController {
+            public function latest() {
+                if (empty($this->request->params['requested'])) {
+                    throw new ForbiddenException();
+                }
+                return $this->Comment->find('all', array('order' => 'Comment.created DESC', 'limit' => 10));
+            }
+        }
+
+    You should always include checks to make sure your requestAction methods are
+    actually originating from ``requestAction``.  Failing to do so will allow
+    requestAction methods to be directly accessible from a URL, which is
+    generally undesirable.
+
+    If we now create a simple element to call that function::
+
+        // View/Elements/latest_comments.ctp
+
+        $comments = $this->requestAction('/comments/latest');
+        foreach ($comments as $comment) {
+            echo $comment['Comment']['title'];
+        }
+
+    We can then place that element anywhere to get the output
+    using::
+
+        echo $this->element('latest_comments');
+
+    Written in this way, whenever the element is rendered, a request
+    will be made to the controller to get the data, the data will be
+    processed, and returned. However in accordance with the warning
+    above it's best to make use of element caching to prevent needless
+    processing. By modifying the call to element to look like this::
+
+        echo $this->element('latest_comments', array('cache' => '+1 hour'));
+
+    The ``requestAction`` call will not be made while the cached
+    element view file exists and is valid.
+
+    In addition, requestAction now takes array based cake style urls::
+
+        echo $this->requestAction(
+            array('controller' => 'articles', 'action' => 'featured'),
+            array('return')
+        );
+
+    This allows the requestAction call to bypass the usage of
+    Router::url which can increase performance. The url based arrays
+    are the same as the ones that :php:meth:`HtmlHelper::link()` uses with one
+    difference - if you are using named or passed parameters, you must put them
+    in a second array and wrap them with the correct key. This is because
+    requestAction merges the named args array (requestAction's 2nd parameter)
+    with the Controller::params member array and does not explicitly place the
+    named args array into the key 'named'; Additional members in the ``$option``
+    array will also be made available in the requested action's
+    Controller::params array::
+        
+        echo $this->requestAction('/articles/featured/limit:3');
+        echo $this->requestAction('/articles/view/5');
+
+    As an array in the requestAction would then be::
+
+        echo $this->requestAction(
+            array('controller' => 'articles', 'action' => 'featured'),
+            array('named' => array('limit' => 3))
+        );
+
+        echo $this->requestAction(
+            array('controller' => 'articles', 'action' => 'view'),
+            array('pass' => array(5))
+        );
+
+    .. note::
+
+        Unlike other places where array urls are analogous to string urls,
+        requestAction treats them differently.
+
+    When using an array url in conjunction with requestAction() you
+    must specify **all** parameters that you will need in the requested
+    action. This includes parameters like ``$this->request->data``.  In addition
+    to passing all required parameters, named and pass parameters must be done
+    in the second array as seen above.
 
     See the documentation for
     :php:meth:`~Cake\\Routing\\RequestActionTrait::requestAction()` for more
@@ -548,7 +639,6 @@ Other Useful Methods
     which is not the controller's default model or its associated
     model::
     
-        <?php
         $this->loadModel('Article');
         $recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));
 
@@ -570,7 +660,6 @@ visit the CakePHP API. Check out
     primary model the controller uses. This property is not required,
     but saves CakePHP from inflecting it::
 
-        <?php
         // $name controller attribute usage example
         class RecipesController extends AppController {
            public $name = 'Recipes';
@@ -625,7 +714,6 @@ given by ``$helpers`` to the view as an object reference variable
     Let’s look at how to tell a CakePHP controller that you plan to use
     additional MVC classes::
 
-        <?php
         class RecipesController extends AppController {
             public $uses = array('Recipe', 'User');
             public $helpers = array('Js');
@@ -663,7 +751,6 @@ own sections in the manual.
     loads and configures the :php:class:`PaginatorComponent`.  It is recommended
     that you update your code to use normal component settings::
 
-        <?php
         class ArticlesController extends AppController {
             public $components = array(
                 'Paginator' => array(

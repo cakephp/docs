@@ -24,7 +24,6 @@ assigné à ``$this->request->data``, et pourra alors être sauvegardé
 comme une donnée de modèle. Afin d'utiliser le Request Handler il 
 doit être inclus dans votre tableau $components::
 
-    <?php
     class WidgetController extends AppController {
 
         public $components = array('RequestHandler');
@@ -46,7 +45,6 @@ contenu.Si c'est un tableau, accepts() renverra true si un des types
 du contenu est accepté par le client. Si c'est 'null', elle renverra 
 un tableau des types de contenu que le client accepte. Par exemple::
 
-    <?php
     class PostsController extends AppController {
 
         public $components = array('RequestHandler');
@@ -117,7 +115,6 @@ le cache du navigateur, et changer le niveau de débogage.
 Cependant, si vous voulez utiliser le cache pour les requêtes 
 non-AJAX. , le code suivant vous permettra de le faire::
 
-    <?php
     if ($this->request->is('ajax')) {
         $this->disableCache();
     }
@@ -149,7 +146,6 @@ Décoder automatiquement les données de la requête
     gestionnaire de CSV dans la partie 'beforeFilter'  de votre contrôleur 
     pourrait ressembler à ceci ::
 
-        <?php
         $parser = function ($data) {
             $rows = str_getcsv($data, "\n");
             foreach ($rows as &$row) {
@@ -164,7 +160,6 @@ Décoder automatiquement les données de la requête
     de gestion. Vous pouvez aussi passer des arguments supplémentaires 
     au callback, c'est très utile pour les callbacks comme ``json_decode``::
    
-        <?php
         $this->RequestHandler->addInputType('json', array('json_decode', true));
     
     Le contenu ci-dessus créera ``$this->request->data`` un tableau des données 
@@ -287,7 +282,6 @@ au client, augmentant la bande passante. Le code de réponse est défini
 Vous pouvez mettre en retrait ce contrôle automatique en paramétrant 
 ``checkHttpCache`` à false::
 
-    <?php
     public components = array(
         'RequestHandler' => array(
             'checkHttpCache' => false

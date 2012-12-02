@@ -37,7 +37,6 @@ Les clefs acceptée pour ``$options``:
 
 En considérant que vous paginez des posts, qu'ils sont sur la page un::
 
-    <?php
     echo $this->Paginator->sort('id_utilisateur');
     // créé
     <a href="/posts/index/page:1/sort:id_utilisateur/direction:asc/">User Id</a>
@@ -45,7 +44,6 @@ En considérant que vous paginez des posts, qu'ils sont sur la page un::
 Vous pouvez utiliser le paramètre titre pour créer des textes personnalisés 
 pour votre lien::
 
-    <?php
     echo $this->Paginator->sort('id_utilisateur', 'Compte utilisateur');
     // creates
     <a href="/posts/index/page:1/sort:id_utilisateur/direction:asc/">Compte utilisateur</a>
@@ -53,7 +51,6 @@ pour votre lien::
 Si vous utilisez du html comme des images dans vos liens rappelez-vous de 
 paramétrer l'échappement à off::
 
-    <?php
     echo $this->Paginator->sort('id_utilisateur', '<em>Compte utilisateur</em>', array('escape' => false));
     // creates
     <a href="/posts/index/page:1/sort:id_utilisateur/direction:asc/"><em>Compte utilisateur</em></a>
@@ -62,7 +59,6 @@ L'option de direction peut être utilisés pour paramétrer la direction par
 défaut pour un lien. Une fois qu'un lien est activé, il changera 
 automatiquement de direction comme normalement::
 
-    <?php
     echo $this->Paginator->sort('id_utilisateur', null, array('direction' => 'desc'));
     // créé
     <a href="/posts/index/page:1/sort:id_utilisateur/direction:desc/">Id Utilisateur</a>
@@ -104,9 +100,7 @@ Les options supportées sont:
   false. Si une chaîne est définie un lien pour la première page sera générée 
   avec la valeur comme titre::
 
-      <?php 
       echo $this->Paginator->numbers(array('first' => 'Première page')); 
-      ?>
 
 * ``last`` Si vous voulez que les derniers liens soit générés, définit à un 
   entier pour définir le nombre de 'dernier' liens à générer. Par défaut à 
@@ -118,7 +112,6 @@ Les options supportées sont:
 Bien que cette méthode permet beaucoup de customisation pour ses sorties. Elle 
 est aussi prête pour être appelée sans aucun paramètres.::
 
-    <?php
     echo $this->Paginator->numbers();
 
 En utilisant les options first et last vous pouvez créer des liens pour le 
@@ -126,7 +119,6 @@ début et la fin du jeu de page. Le code suivant pourrait créer un jeu de liens
 de page qui inclut les liens des deux premiers et deux derniers résultats de 
 pages::
     
-    <?php
     echo $this->Paginator->numbers(array('first' => 2, 'last' => 2));
 
 .. versionchanged:: 2.1
@@ -161,21 +153,23 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
         
     Un simple exemple serait::
 
-        <?php
         echo $this->Paginator->prev(' << ' . __('previous'), array(), null, array('class' => 'prev disabled'));
 
     Si vous étiez actuellement sur la secondes pages des posts (articles) , 
-    vous obtenez le résultat suivant::
+    vous obtenez le résultat suivant:
+
+    .. code-block:: html
 
         <span class="prev"><a href="/posts/index/page:1/sort:title/order:desc" rel="prev"><< previous</a></span>
 
-    Si il n'y avait pas de page précédente vous obtenez::
+    Si il n'y avait pas de page précédente vous obtenez:
+
+    .. code-block:: html
 
         <span class="prev disabled"><< previous</span>
 
     Vous pouvez changer la balise enveloppante en utilisant l'option ``tag`` ::
 
-        <?php
         echo $this->Paginator->prev(__('previous'), array('tag' => 'li'));
         // créera
         <li class="prev"><a href="/posts/index/page:1/sort:title/order:desc" rel="prev">previous</a></li>
@@ -197,14 +191,12 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
     fournie, alors un lien vers la première page avec le texte fourni sera 
     créé::
 
-        <?php
         echo $this->Paginator->first('< first');
 
     Ceci créé un simple lien pour la première page. Ne retournera rien si vous
     êtes sur la première page. Vous pouvez aussi utiliser un nombre entier pour 
     indiquer combien de premier liens paginés vous voulez générer::
 
-        <?php
         echo $this->Paginator->first(3);
 
     Ceci créera des liens pour les 3 premières pages, une fois la troisième 
@@ -232,7 +224,6 @@ ou suivant, première et dernière pages dans le jeu de données paginées.
 
     Obtient la page actuelle pour le jeu d'enregistrement du model donné::
 
-        <?php
         // Ou l'url est: http://example.com/comments/view/page:3
         echo $this->Paginator->current('Comment');
         // la sortie est 3
@@ -280,7 +271,6 @@ sont:
   Vous pouvez aussi fournir simplement une chaîne à la méthode counter en 
   utilisant les jetons autorisés. Par exemple:: 
 
-      <?php
       echo $this->Paginator->counter(
           'Page {:page} of {:pages}, showing {:current} records out of 
            {:count} total, starting on record {:start}, ending on {:end}'
@@ -288,7 +278,6 @@ sont:
   
   En définissant 'format' à 'range' ressortirait  ceci '1 - 3 of 13'::
       
-      <?php
       echo $this->Paginator->counter(array(
           'format' => 'range'
       ));
@@ -297,7 +286,6 @@ sont:
   Par défaut à ' of '. Ceci est utilisé en conjonction  avec 'format' ='pages' 
   qui la valeur par défaut de 'format'::
       
-      <?php
       echo $this->Paginator->counter(array(
           'separator' => ' sur un total de '
       ));
@@ -327,7 +315,6 @@ Définit toutes les options pour le Helper Paginator Helper. Les options support
   Vous pouvez aussi ajouter des contenu d'url additionnels dans toutes 
   les urls générées dans le helper::
   
-      <?php
       $this->Paginator->options(array(
           'url' => array(
               'sort' => 'email', 'direction' => 'desc', 'page' => 6,
@@ -348,7 +335,6 @@ Définit toutes les options pour le Helper Paginator Helper. Les options support
   l'appel de pagination  AJAX. Si cela n'est pas spécifié, des liens réguliers 
   seront créés::
 
-    <?php
     $this->Paginator->options('update' => '#content');
 
   Ceci est utile lors de l'utilisation de la pagination AJAX 
@@ -370,7 +356,6 @@ que la principale option de configuration pour cette fonctionnalité est dans
 vues. Vous pouvez utiliser `options()`` pour indiquer que vous voulez la 
 conversion d'autres paramètres nommés::
 
-    <?php
     $this->Paginator->options(array('convertKeys' => array('vos', 'clefs', 'ici')));
 
 Configurer le Helper Paginator pour utiliser le Helper Javascript
@@ -382,7 +367,6 @@ voulez utiliser un Helper personnalisé pour les liens Ajax, vous pouvez le
 faire en changeant le tableau ``$helpers`` dans votre controller.
 Après avoir lancé ``paginate()`` faites ce qui suit::
 
-    <?php
     // Dans l'action de votre controller.
     $this->set('posts', $this->paginate());
     $this->helpers['Paginator'] = array('ajax' => 'MonJs');
@@ -405,7 +389,9 @@ Voir les détails sur
 `PaginatorHelper <http://api20.cakephp.org/class/paginator-helper>`_
 dans l' API. Comme mentionné précédemment, le Helper Paginator 
 offre également des fonctionnalités de tri qui peuvent être facilement 
-intégrés dans vos en-têtes de colonne de table ::
+intégrés dans vos en-têtes de colonne de table :
+
+.. code-block:: php
 
     // app/View/Posts/index.ctp
     <table>
@@ -425,7 +411,9 @@ Les liens en retour de la méthode ``sort()`` du ``Helper Paginator``
 permettent au utilisateurs de cliquer sur les entêtes de table pour
 faire basculer l'ordre de tri des données d'un champ donné.
 
-Il est aussi possible de trier une colonne basée sur des associations::
+Il est aussi possible de trier une colonne basée sur des associations:
+
+.. code-block:: php
 
     <table>
         <tr> 
@@ -444,7 +432,6 @@ L'ingrédient final pour l'affichage de la pagination dans les vues
 est l'addition de pages de navigation, aussi fournies par le
 Helper de Pagination::
 
-    <?php 
     // Montre les numéros de page 
     echo $this->Paginator->numbers();
     
@@ -458,7 +445,6 @@ Helper de Pagination::
 Le texte de sortie de la méthode counter () peut également être personnalisé 
 en utilisant des marqueurs spéciaux ::
 
-    <?php
     echo $this->Paginator->counter(array(
         'format' => 'Page {:page} of {:pages}, showing {:current} records out of
                  {:count} total, starting on record {:start}, ending on {:end}'
@@ -485,7 +471,6 @@ D'autres Méthodes
 
     Créé un lien ordinaire ou Ajax avec des paramètres de pagination::
 
-        <?php
         echo $this->Paginator->link('Tri par titre sur la page 5', 
                 array('sort' => 'titre', 'page' => 5, 'direction' => 'desc'));
 
@@ -504,7 +489,6 @@ D'autres Méthodes
     Par défaut retourne une chaîne d'Url complètement paginée à utiliser
     dans des contextes non-standard (ex. JavaScript).::
 
-        <?php
         echo $this->Paginator->url(array('sort' => 'titre'), true); 
 
 .. php:method:: defaultModel()
@@ -517,7 +501,6 @@ D'autres Méthodes
     Retourne les paramètres courants de la pagination du jeu
     de résultat d'un model donné::
 
-        <?php
         debug($this->Paginator->params());
         /*
         Array

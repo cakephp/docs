@@ -29,7 +29,6 @@ de CakePHP. Le seul bénéfice pour l'utilisation de la fonctionnalité de
 cascade de ``Model::delete()`` est qu'elle vous permet d'influencer les 
 callbacks des behaviors et des Models:: 
 
-    <?php
     $this->Comment->delete($this->request->data('Comment.id'));
 
 Vous pouvez brancher une logique personnalisée dans le processus de 
@@ -57,7 +56,6 @@ tableau SQL.
 
 Exemple::
 
-    <?php
     // Suppression avec un tableau de conditions similaires à find()
     $this->Comment->deleteAll(array('Comment.spam' => true), false);
 

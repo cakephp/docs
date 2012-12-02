@@ -80,7 +80,6 @@ Dans le but de vérifier que tout est défini correctement, nous pouvons créer
 une méthode de test et afficher les contenus de notre arbre de catégories, 
 pour voir à quoi il ressemble. Avec un simple controller ::
 
-    <?php
     class CategoriesController extends AppController {
         public $name = 'Categories';
 
@@ -92,7 +91,6 @@ pour voir à quoi il ressemble. Avec un simple controller ::
 
 et une définition de model encore plus simple :::
 
-    <?php
     // app/Model/Category.php
     class Category extends AppModel {
         public $name = 'Category';
@@ -137,7 +135,6 @@ et nous avons vérifié qu'elles semblaient hiérarchiques avec la méthode
 ``generateTreeList``. Toutefois vous devez ajouter vos données de
 la même manière que vous le feriez pour n'importe quel model. Par exemple ::
 
-    <?php
     // pseudo controller code
     $data['Category']['parent_id'] =  3;
     $data['Category']['name'] =  'Faire du Skate';
@@ -149,7 +146,6 @@ tree prendra soin du reste.
 Si vous ne définissez pas l'id du parent (parent\_id),
 Le behavior Tree additionnera vos nouveaux ajouts au sommet de l'arbre::
 
-    <?php
     // pseudo code du controller 
     $data = array();
     $data['Category']['name'] =  'd\'autre catégories de gens';
@@ -196,7 +192,6 @@ des données. Si vous modifiez quelque chose, mais ne changez pas
 le champ de l\'ID du parent (parent\_id) - la structure de vos données 
 reste inchangée. Par exemple ::
 
-    <?php
     // pseudo controller code
     $this->Category->id = 5; // id du Tricot Extreme 
     $this->Category->save(array('name' => 'Pêche Extreme' ));
@@ -239,7 +234,6 @@ Déplacer les données autour de votre arbre est aussi une affaire simple.
 Supposons que Pêche Extreme n'appartienne pas à Sport, mais devrait se 
 trouver plutôt sous "D'autres catégories de gens". Avec le code suivant ::
 
-    <?php
     // pseudo code du controller
     $this->Category->id = 5; // id de Pêche Extreme
     $newParentId = $this->Category->field('id', array('name' => 'D\'autre catégorie de gens'));
@@ -288,7 +282,6 @@ catégorie des rapports n'est plus utile. Pour l'enlever * et tous les enfants
 qu'il peut avoir * il suffit d'appeler et supprimer comme vous le feriez pour 
 n'importe quel model. Par exemple, avec le code suivant ::
 
-    <?php
     // pseudo code du controller
     $this->Category->id = 10;
     $this->Category->delete();
@@ -356,7 +349,6 @@ de permutations en plus des méthodes find de bases.
     retourner les enfants directs. En utilisant l'exemple des données 
     de la section précédente::
      
-        <?php
         $allChildren = $this->Category->children(1); // un tableau plat à 11 éléments
                 // -- ou --
         $this->Category->id = 1;
@@ -378,7 +370,6 @@ de permutations en plus des méthodes find de bases.
     Le second paramêtre optionnel definit si il faut ou non compter 
     les enfants directs.En reprenant l\'exemple ci dessus ::
    
-        <?php
         $totalChildren = $this->Category->childCount(1); // retournera 11
         // -- or --
         $this->Category->id = 1;
@@ -401,7 +392,6 @@ de permutations en plus des méthodes find de bases.
     avec un préfixe en retrait pour montrer la structure de vos données. Voici 
     un exemple de ce à quoi vous attendre comme retour avec cette méthode ::
     
-      <?php
       $treelist = $this->Category->generateTreeList();
 
     Sort::
@@ -429,7 +419,6 @@ de permutations en plus des méthodes find de bases.
     parent d'un nœud, ou * false * si le noeud n'a pas de parent (c'est
     le nœud racine). Par exemple ::
 
-        <?php
         $parent = $this->Category->getParentNode(2); //<- id de fun
         // $parent contient toutes les catégories
 
@@ -455,7 +444,6 @@ de permutations en plus des méthodes find de bases.
     En utilisant l\'id d\'international' getPath retournera chacun des parents 
     rencontrés (depuis le haut)::
     
-        <?php
         $parents = $this->Category->getPath(15);
 
     ::
@@ -487,7 +475,6 @@ Voici l\'exemple d'une action d'un controller (dans un controller nommé
 Category) qui déplace un noeud spécifié vers le bas de l'arbre::
     
 
-        <?php
         public function movedown($id = null, $delta = null) {
             $this->Category->id = $id;
             if (!$this->Category->exists()) {
@@ -517,7 +504,6 @@ noeud devrait être déplacé vers le haut. Tous les nœuds enfants seront
 Voici un exemple d\'un controller action (dans un controller categories)
 déplacant un noeud plus haut dans un arbre::
 
-        <?php
         public function moveup($id = null, $delta = null) {            
             $this->Category->id = $id;
             if (!$this->Category->exists()) {
@@ -566,7 +552,6 @@ Prenons l\'arbre suivant au début:
 
 En executant le code suivant avec l\'id de 'Sport'::
 
-        <?php
         $this->Node->removeFromTree($id); 
 
 Le noeud Sport sera retiré du haut du noeud:
@@ -587,7 +572,6 @@ les enfants.
 
 Si toutefois  l'extrait de code suivant était utilisé avec l\'id  'Sport'::
 
-           <?php
         $this->Node->removeFromTree($id, true); 
 
 L'arbre deviendrait.
@@ -609,7 +593,6 @@ Réordonne les nœuds (et nœuds enfants) de l'arbre en fonction du champ et de 
 direction spécifiée dans les paramètres. Cette méthode ne changera pas le 
 parent d'un nœud.::
 
-        <?php
         $model->reorder(array(
             'id' => ,    //id de l\'enregistrement à utiliser comme noeud haut pour réordonner, default: $Model->id
             'field' => , //champ à utiliser pour réordonner, par défaut: $Model->displayField
@@ -659,19 +642,14 @@ Options ``$mode`` permises:
 
 Les options de ``missingParentActions`` autorisées durant l\'utilisation de
 ``mode='parent'``:
-    
+
 -  ``null`` - ne fait rien et continue
 -  ``'return'`` - ne fait rien et fait un return
 -  ``'delete'`` - efface le noeud
-<<<<<<< HEAD
 -  ``int`` - definit parent\_id à cet id
-=======
--  ``int`` - définit parent\_id à cet id
->>>>>>> 5648f19a0bcbc77e37bb6dc66d6ea78e3d9f33ff
 
 Exemple::
 
-        <?php
         // Reconstruit tous les champs gauche et droit en se basant sur parent_id
         $this->Category->recover();
         // ou
@@ -718,7 +696,6 @@ Chaque enregistrement dans le tableau de sortie est un tableau de la forme
 
 Exemple d'utilisation::
 
-        <?php
         $this->Category->verify();
 
 Exemple de sortie::

@@ -49,7 +49,6 @@ des tests, vous devrez vous assurer d'ajouter une configuration de base de
 données ``$test``. Cette configuration est utilisée par CakePHP pour les tables 
 fixture et les données::
 
-    <?php
     public $test = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,
@@ -117,7 +116,6 @@ Dans l'exemple suivant, nous allons créer un cas de test pour une méthode de
 helper très simple. Le helper que nous allons tester sera formaté en progress 
 bar HTML. Notre helper ressemblerait à cela::
 
-    <?php
     class ProgressHelper extends AppHelper {
         public function bar($value) {
             $width = round($value / 100, 2) * 100;
@@ -134,7 +132,6 @@ helper, nous allons créer le fichier de cas de tests dans
 ``app/Test/Case/View/Helper/ProgressHelperTest.php``. Dans ce fichier, nous 
 allons commencer avec ce qui suit::
 
-    <?php
     App::uses('Controller', 'Controller');
     App::uses('View', 'View');
     App::uses('ProgressHelper', 'View/Helper');
@@ -156,7 +153,6 @@ Les méthodes de configuration devraient initialiser les objets souhaités
 pour le test, et faire toute configuration souhaitée. Dans notre configuration 
 nous ajouterons ce qui suit::
 
-    <?php
     public function setUp() {
         parent::setUp();
         $Controller = new Controller();
@@ -171,7 +167,6 @@ dans :php:class:`Configure` et, stocker les chemins dans :php:class:`App`.
 Ensuite, nous allons remplir les méthodes de test. Nous utiliserons quelques 
 assertions pour nous assurer que notre code crée la sortie que nous attendions::
 
-    <?php
     public function testBar() {
         $result = $this->Progress->bar(90);
         $this->assertContains('width: 90%', $result);
@@ -358,7 +353,6 @@ première fixture, qui sera utilisée pour tester notre propre model Article.
 Crée un fichier nommé ``ArticleFixture.php`` dans votre répertoire 
 ``app/Test/Fixture`` avec le contenu suivant::
 
-    <?php
     class ArticleFixture extends CakeTestFixture { 
 
           /* Optionel. Définir cette propriété pour charger les fixtures dans une source de données de test différente */
@@ -431,7 +425,6 @@ vous pouvez définir ``$records`` dans la fonction init() de votre fixture. Par
 exemple, si vous voulez touts les timestamps crées et mis à jours pou 
 refleter la date d'aujourd'hui, vous pouvez faire ce qui suit::
 
-    <?php
     class ArticleFixture extends CakeTestFixture {
 
         public $fields = array( 
@@ -478,7 +471,6 @@ disponible dans votre application (qui est lié avec une table nommée
 articles), on changerait le fixture donné dans la section précédente 
 (``app/Test/Fixture/ArticleFixture.php``) en ce qui suit::
 
-    <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = 'Article';
     }
@@ -489,7 +481,6 @@ model disponible dans votre application. La déclaration ca seulement importer
 le schéma Article, et n'importe pas d'enregistrements. Pour importer les 
 enregistrements, vous pouvez faire ce qui suit::
 
-    <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = array('model' => 'Article', 'records' => true);
     }
@@ -498,7 +489,6 @@ Si d'un autre côté vous avez une table créee mais pas de model disponible pou
 elle, vous pouvez spécifier que votre import se fera en lisant l'information 
 de la table à la place. Par exemple::
 
-    <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles');
     }
@@ -507,7 +497,6 @@ Va importer la définition de la table à partir de la table appelée 'articles'
 en utilisant la connection à la base de donnée CakePHP nommée 'default'.
 Si vous voulez utiliser une connection différente, utilisez::
 
-    <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'connection' => 'other');
     }
@@ -517,7 +506,6 @@ préfixe de table déclaré, il sera automatiquement utilisé quand on récupèr
 l'information de la table. Pour forcer la fixture et aussi importer ses 
 enregistrements, changez l'importation en ::
 
-    <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'records' => true);
     }
@@ -527,7 +515,6 @@ model/d'une table existante, mais vous avez vos enregistrements directement
 définis dans le fixture comme il a été montré dans la section précédente. 
 Par exemple::
 
-    <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = 'Article';
         public $records = array(
@@ -546,7 +533,6 @@ Vous devriez charger une fixture pour chaque model qui aura une requête lancée
 contre elle. Pour charger les fixtures, vous définissez la propriété 
 ``$fixtures`` dans votre model::
 
-    <?php
     class ArticleTest extends CakeTestCase {
         public $fixtures = array('app.article', 'app.comment');
     }
@@ -555,7 +541,6 @@ Ce qui est au-dessus va charger les fixtures d'Article et de Comment à partir
 du répertoire de fixture de l'application. Vous pouvez aussi charger les 
 fixtures à partir du coeur de CakePHP ou des plugins:: 
 
-    <?php
     class ArticleTest extends CakeTestCase {
         public $fixtures = array('plugin.debug_kit.article', 'core.comment');
     }
@@ -568,7 +553,6 @@ Vous pouvez contrôler quand vos fixtures sont chargés en configurant
 :php:attr:`CakeTestCase::$autoFixtures` à ``false`` et plus tard les charger 
 en utilisant :php:meth:`CakeTestCase::loadFixtures()`::
 
-    <?php
     class ArticleTest extends CakeTestCase {
         public $fixtures = array('app.article', 'app.comment');
         public $autoFixtures = false;
@@ -584,7 +568,6 @@ Tester les Models
 Disons que nous avons déjà notre model Article défini dans 
 ``app/Model/Article.php``, qui ressemble à ceci::
 
-    <?php
     class Article extends AppModel {
         public function published($fields = null) {
             $params = array(
@@ -607,7 +590,6 @@ model - dans ce cas le model Article qui et déjà défini.
 Créons maintenant un fichier nommé ``ArticleTest.php`` dans votre répertoire 
 ``app/Test/Case/Model``, avec les contenus suivants::
 
-    <?php
     App::uses('Article', 'Model');
 
     class ArticleTestCase extends CakeTestCase {
@@ -631,7 +613,6 @@ Ajoutons maintenant une méthode pour tester la fonction published() dans le
 model Article. Modifier le fichier ``app/Test/Case/Model/ArticleTest.php`` 
 afin qu'il ressemble maintenant à ceci::
 
-    <?php
     App::uses('Article', 'Model');
 
     class ArticleTest extends CakeTestCase {
@@ -685,7 +666,6 @@ tester les méthodes comme :php:meth:`~Controller::redirect()`.
 Disons que vous avez un controller typique Articles, et son model correspondant.
 Le code du controller ressemble à ceci::
 
-    <?php
     class ArticlesController extends AppController {
         public $helpers = array('Form', 'Html');
 
@@ -711,7 +691,6 @@ Le code du controller ressemble à ceci::
 Créez un fichier nommé ``ArticlesControllerTest.php`` dans votre répertoire 
 ``app/Test/Case/Controller`` et mettez ce qui suit à l'intérieur::
 
-    <?php
     class ArticlesControllerTest extends ControllerTestCase {
         public $fixtures = array('app.article');
 
@@ -770,7 +749,6 @@ redirection. La raison pour cela est que ``redirect()`` est mocked dans les
 tests, et n'échappe pas comme normal. Et à la place de votre code existant, 
 il va continuer de lancer le code suivant le redirect. Par exemple::
 
-    <?php
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {
@@ -786,7 +764,6 @@ Quand vous testez le code ci-dessus, vous allez toujours lancer
 ``// plus de code`` même si le redirect est atteint. A la place, vous 
 devrier écrire le code comme ceci::
 
-    <?php
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {
@@ -810,7 +787,6 @@ fournissant la clé ``data``, la requête faîte par le controller sera POST. Pa
 défaut, toutes les requêtes seront des requêtes POST. Vous pouvez simuler une 
 requête GET en configurant la clé de la méthode::
 
-    <?php
     public function testAdding() {
         $data = array(
             'Post' => array(
@@ -842,7 +818,6 @@ La valeur par défaut est ``result``. Tant que votre type de retour n'est pas
 ``result``, vous pouvez aussi accéder aux autres types de retour en propriétés 
 dans les cas de test::
 
-    <?php
     public function testIndex() {
         $this->testAction('/posts/index');
         $this->assertInternalType('array', $this->vars['posts']);
@@ -859,7 +834,6 @@ pouvez faire ceci en utilisant :php:meth:`ControllerTestCase::generate()`.
 controller. Si vous décidez de générer un controller à utiliser dans les tests, 
 vous pouvez générer les versions mockés de ses models et components avec ceci::
 
-    <?php
     $Posts = $this->generate('Posts', array(
         'methods' => array(
             'isAuthorized'
@@ -900,7 +874,6 @@ dans les propriétés ``vars``, ``contents``, ``view``, et ``return``. Une
 propriété headers est aussi disponible qui vous donne accès à ``headers`` 
 qui aurait été envoyée, vous permettant de vérifier les redirects::
 
-    <?php
     public function testAdd() {
         $Posts = $this->generate('Posts', array(
             'components' => array(
@@ -944,7 +917,6 @@ les méthodes statiques, vous devrez utiliser une méthode différente pour
 inscrire vos attentes de mock. Par exemple si vous voulez mock out 
 :php:meth:`AuthComponent::user()` vous evrez faire ce qui suit::
 
-    <?php
     public function testAdd() {
         $Posts = $this->generate('Posts', array(
             'components' => array(
@@ -968,7 +940,6 @@ JSON est un format sympa et commun à utiliser quand on construit un service web
 Tester les endpoints de votre service web est très simple avec CakePHP. 
 Commençons par un exemple de controller simple qui réponde dans JSON::
 
-    <?php
     class MarkersController extends AppController {
         public $autoRender = false;
         public function index() {
@@ -981,7 +952,6 @@ Maintenant nous créons le fichier
 ``app/Test/Case/Controller/MarkersControllerTest.php`` 
 et nous assurons que notre service web retourne la réponse appropriée::
 
-    <?php
     class MarkersControllerTest extends ControllerTestCase {
         public function testIndex() {
             $result = $this->testAction('/markers/index.json');
@@ -1001,7 +971,6 @@ application. Ce component nous aide à paginer la valeur limite à travers tous
 les controllers qui l'utilisent. Voici notre exemple de component localisé dans 
 ``app/Controller/Component/PagematronComponent.php``::
 
-    <?php
     class PagematronComponent extends Component {
         public $Controller = null;
 
@@ -1034,7 +1003,6 @@ de pagination ``limit`` est défini correctement par la méthode ``adjust``
 dans notre component. Nous créons le fichier 
 ``app/Test/Case/Controller/Component/PagematronComponentTest.php``::
 
-    <?php
     App::uses('Controller', 'Controller');
     App::uses('CakeRequest', 'Network');
     App::uses('CakeResponse', 'Network');
@@ -1093,7 +1061,6 @@ et pour siplifier, il ne va avoir qu'une méthode ``usd()``.
 
 ::
 
-    <?php
     // app/View/Helper/CurrencyRendererHelper.php
     class CurrencyRendererHelper extends AppHelper {
         public function usd($amount) {
@@ -1107,7 +1074,6 @@ avec la chaîne 'USD' en préfixe.
 
 Maintenant nous créons nos tests::
 
-    <?php
     // app/Test/Case/View/Helper/CurrencyRendererHelperTest.php
 
     App::uses('Controller', 'Controller');
@@ -1155,7 +1121,6 @@ basé sur le système de fichier. Si nous voulions créer un test suite pour tou
 nos models tests, nous pourrions créer ``app/Test/Case/AllModelTest.php``. 
 Mettez ce qui suit dedans::
 
-    <?php
     class AllModelTest extends CakeTestSuite {
         public static function suite() {
             $suite = new CakeTestSuite('All model tests');
@@ -1169,7 +1134,6 @@ Le code ci-dessus va grouper tous les cas de test trouvés dans le dossier
 ``$suite->addTestFile($filename);``. Vous pouvez ajouter de façon récursive 
 un répertoire pour tous les tests en utilisant::
 
-    <?php
     $suite->addTestDirectoryRecursive(TESTS . 'Case');
 
 Ajouterait de façon récursive tous les cas de test dans le répertoire 
@@ -1196,7 +1160,6 @@ Une différence par rapport aux autres test est dans la première
 ligne où 'Blog.BlogPost' est importé. Vous devrez aussi préfixer 
 les fixtures de votre plugin avec ``plugin.blog.blog_post``::
 
-    <?php
     App::uses('BlogPost', 'Blog.Model');
 
     class BlogPostTest extends CakeTestCase {
@@ -1249,7 +1212,6 @@ localhost). Ajoutez une *étape de script shell* au build qui contient ce qui
 suit::
 
     cat > app/Config/database.php <<'DATABASE_PHP'
-    <?php
     class DATABASE_CONFIG {
         public $test = array(
             'datasource' => 'Database/Mysql',

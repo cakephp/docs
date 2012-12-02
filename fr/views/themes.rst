@@ -6,7 +6,6 @@ du ressenti de votre page rapidement et facilement.
 
 Pour utiliser les thèmes, spécifiez le nom du thème dans votre controller::
 
-    <?php
     class ExempleController extends AppController {
         public $theme = 'Exemple';
     }
@@ -20,7 +19,6 @@ Pour utiliser les thèmes, spécifiez le nom du thème dans votre controller::
 Vous pouvez également définir ou modifier le nom du thème dans une action ou 
 dans les fonctions de callback``beforeFilter`` ou ``beforeRender``::
 
-    <?php
     $this->theme = 'AutreExemple';
 
 Les fichiers de vue du thème ont besoin d'être dans le dossier 
@@ -60,7 +58,6 @@ et vont créer des chemins d'accès corrects automatiquement. Comme pour les
 fichiers de vue, si un fichier n'est pas dans le dossier du thème, il sera 
 par défaut dans le dossier principal webroot ::
 
-    <?php
     //Quand dans un thème avec un nom de 'purple_cupcake'
     $this->Html->css('main.css');
      

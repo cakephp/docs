@@ -92,7 +92,6 @@ ou des pages entières, vous devriez penser à l'implémentation
 d'une solution différente. Par ex ::
 
 
-    <?php
     // // Code du fichier App Controller.
     public function beforeFilter() {
         $locale = Configure::read('Config.language');
@@ -104,7 +103,6 @@ d'une solution différente. Par ex ::
 
 ou::
 
-    <?php
     // code de la Vue
     echo $this->element(Configure::read('Config.language') . '/tos')
 
@@ -116,7 +114,6 @@ Pour changer ou définir le langage de votre application, tout ce que
 vous avez à faire est dans la partie suivante::
 
 
-    <?php
     Configure::write('Config.language', 'eng'); 
 
 Ceci signale à Cake quelle locale utiliser(si vous utilisez une locale 
@@ -131,14 +128,12 @@ message dans une autre langue. Pour définir la langue pour l'utilisateur
 courant, vous pouvez stocker le paramétrage dans l'objet Session, comme cela::
 
 
-    <?php
     $this->Session->write('Config.language', 'fre');
 
 Au début de chacune des requêtes dans la partie ``beforeFilter`` de votre
 controller vous devez configurer ``Configure`` ainsi::
 
 
-    <?php
     class AppController extends Controller{
         public function beforeFilter() {
             Configure::write('Config.language', $this->Session->read('Config.language'));

@@ -37,7 +37,6 @@ outros controllers da sua aplicação. O próprio ``AppController`` é estendida
 classe ``Controller`` que faz parte da biblioteca do CakePHP. Assim sendo,
 ``AppController`` é definido em ``/app/Controller/AppController.php`` como::
 
-    <?php
     class AppController extends Controller {
     }
 
@@ -70,7 +69,6 @@ Lembre-se de adicionar os helpers Html e Form padrões se você incluiu o atribu
 Também lembre de fazer as chamadas de callbacks do ``AppController`` nos
 controllers filhos para obter melhores resultados::
 
-    <?php
     function beforeFilter() {
         parent::beforeFilter();
     }
@@ -94,7 +92,6 @@ Retornando ao nosso exemplo da padaria online, nosso controller
 ``search()`` e poderia ser encontrado em
 ``/app/Controller/RecipesController.php`` contendo o código a seguir::
 
-        <?php
         
         # /app/Controller/RecipesController.php
         
@@ -175,7 +172,6 @@ renderizado.
     para a sua view. Após ter usado o método ``set()``, a variável pode ser
     acessada em sua view::
 
-        <?php
 
         // Primeiro você passa os dados do controller:
 
@@ -196,7 +192,6 @@ renderizado.
 
     ::
 
-        <?php
 
         $data = array(
             'color' => 'pink',
@@ -212,7 +207,6 @@ renderizado.
     O atributo ``$pageTitle`` não existe mais, use o método ``set()`` para
     definir o título na view::
 
-        <?php
         $this->set('title_for_layout', 'This is the page title');
         ?>
 
@@ -228,7 +222,6 @@ renderizado.
     arquivo view encontrado em ``/app/View/Recipes/search.ctp`` será
     renderizado::
 
-        <?php
         class RecipesController extends AppController {
         ...
             function search() {
@@ -248,7 +241,6 @@ renderizado.
     permite a renderização direta de elementos, muito útil em chamadas Ajax.
     ::
 
-        <?php
         // Renderiza o elemento presente em /View/Elements/ajaxreturn.ctp
         $this->render('/Elements/ajaxreturn');
 
@@ -264,7 +256,6 @@ convenção proporciona automaticamente. Você pode fazer isso chamando o métod
 ``render()`` diretamente. Após ter chamado o método ``render()``, o CakePHP
 não irá tentar renderizar novamente a view::
 
-    <?php
     class PostsController extends AppController {
         function my_action() {
             $this->render('custom_file');
@@ -285,7 +276,6 @@ Controle de Fluxo
     dados no servidor, você pode querer redirecioná-lo para uma outra tela
     de recepção.::
 
-        <?php
         function place_order() {
             // Logic for finalizing order goes here
             if ($success) {
@@ -303,13 +293,11 @@ Controle de Fluxo
 
     Você também pode usar uma URL relativa ou absoluta como argumento::
 
-        <?php
         $this->redirect('/orders/thanks'));
         $this->redirect('http://www.example.com');
 
     Você também pode passar dados para a ação::
 
-        <?php
         // observe o parâmetro $id
         $this->redirect(array('action' => 'edit', $id));
     
@@ -324,7 +312,6 @@ Controle de Fluxo
     Se você precisa redirecionar o usuário de volta para a página que fez a
     requisição, você pode usar::
 
-        <?php
         $this->redirect($this->referer());
 
 .. php:method:: flash(string $message, string $url, integer $pause, string $layout)
@@ -386,7 +373,6 @@ Outros Métodos Úteis
     HTTP\_REFERER não puder ser lido do cabeçalho da requisição. Então, ao invés
     de fazer isto::
 
-        <?php
         class UserController extends AppController {
             function delete($id) {
                 // delete code goes here, and then...
@@ -400,7 +386,6 @@ Outros Métodos Úteis
 
     Você pode fazer isto::
 
-        <?php
         class UserController extends AppController {
             function delete($id) {
                 // delete code goes here, and then...
@@ -440,7 +425,6 @@ Outros Métodos Úteis
     os dados enviados deste formulário e criar as condições de busca
     necessárias para completar a tarefa::
 
-        <?php
         function index() {
             $conditions = $this->postConditions($this->request->data);
             $orders = $this->Order->find('all', compact('conditions'));
@@ -455,7 +439,6 @@ Outros Métodos Úteis
     Se você quiser usar um operador diferente entre os termos, informe-os usando
     o segundo parâmetro::
 
-        <?php
         /*
         Conteúdo do atributo $this->request->data
         array(
@@ -520,7 +503,6 @@ Outros Métodos Úteis
     no layout. Primeiro nós precisamos criar um método no controller que irá
     retornar os dados::
 
-        <?php
         // Controller/CommentsController.php
         class CommentsController extends AppController {
             function latest() {
@@ -530,7 +512,6 @@ Outros Métodos Úteis
 
     Se agora nós criarmos um elemento simples para chamar este método::
 
-        <?php
         // View/Elements/latest_comments.ctp
 
         $comments = $this->requestAction('/comments/latest');
@@ -540,7 +521,6 @@ Outros Métodos Úteis
 
     Nós podemos por este elemento em qualquer lugar para ter a saída usando::
 
-        <?php
         echo $this->element('latest_comments');
 
     Fazendo desta maneira, sempre que o elemento for renderizado, uma requisição
@@ -549,7 +529,6 @@ Outros Métodos Úteis
     caching do elemento para evitar um processamento desnecessário. Modificando
     a chamada do elemento para se parecer com isto::
 
-        <?php
         echo $this->element('latest_comments', array('cache' => '+1 hour'));
 
     A chamada para o ``requestAction`` não será feita enquanto o arquivo de
@@ -558,7 +537,6 @@ Outros Métodos Úteis
     Além disso, o ``requestAction`` pode receber uma URL no formato de
     array do Cake::
 
-        <?php
         echo $this->requestAction(
             array('controller' => 'articles', 'action' => 'featured'),
             array('return')
@@ -576,13 +554,11 @@ Outros Métodos Úteis
     nomeados na chave 'named'. Além disso, membros do array ``$options`` serão
     disponibilizados no array ``Controller::params`` da ação que for chamada.::
 
-        <?php
             echo $this->requestAction('/articles/featured/limit:3');
             echo $this->requestAction('/articles/view/5');
 
     Um array no ``requestAction`` poderia ser::
 
-        <?php
         echo $this->requestAction(
             array('controller' => 'articles', 'action' => 'featured'),
             array('named' => array('limit' => 3))
@@ -613,7 +589,6 @@ Outros Métodos Úteis
     este.
     ::
 
-        <?php
         $this->loadModel('Article');
         $recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));
 
@@ -634,7 +609,6 @@ a API do CakePHP. Siga para `http://api20.cakephp.org/class/controller
     Esta propriedade não é requerida mas salva o CakePHP de ter que flexionar
     o nome do model para chegar no valor correto::
 
-        <?php
         
         # Exemplo de uso do atributo $name do controller
         
@@ -684,7 +658,6 @@ como referências para objetos apropriados (``$this->{$helpername}``) na view.
     Vamos ver como dizer para um controller do Cake que você planeja usar
     classes MVC adicionais::
 
-        <?php
         class RecipesController extends AppController {
             public $uses = array('Recipe', 'User');
             public $helpers = array('Js');
@@ -724,7 +697,6 @@ próprias seções neste manual.
     carregado e configurado, no entanto, é recomendado atualizar seu código para
     usar as configurações normais de componentes::
 
-        <?php
         class ArticlesController extends AppController {
             public $components = array(
                 'Paginator' => array(

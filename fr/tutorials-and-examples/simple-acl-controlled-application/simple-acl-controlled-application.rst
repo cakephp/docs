@@ -115,7 +115,6 @@ quelques autres éléments qui doivent être ajoutés avant de pouvoir ajouter
 les components Auth et Acl. Tout d'abord, ajoutez une action login et une 
 action logout à votre ``UsersController``::
 
-    <?php
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
@@ -133,7 +132,6 @@ action logout à votre ``UsersController``::
 Ensuite créer le fichier de vue suivant pour la connexion 
 ``app/View/Users/login.ctp``::
 
-    <?php
     echo $this->Form->create('User', array('action' => 'login'));
     echo $this->Form->inputs(array(
         'legend' => __('Login'),
@@ -147,7 +145,6 @@ the database.  Storing plaintext passwords is extremely insecure and
 AuthComponent will expect that your passwords are hashed.  In
 ``app/Model/User.php`` add the following::
 
-    <?php
     App::uses('AuthComponent', 'Controller/Component');
     class User extends AppModel {
         // other code.
@@ -164,7 +161,6 @@ this goes in /app/Controller/, not /app/app_controllers.php. Since we want our e
 site controlled with Auth and Acl, we will set them up in
 ``AppController``::
 
-    <?php
     class AppController extends Controller {
         public $components = array(
             'Acl',
@@ -192,7 +188,6 @@ exceptions so :php:class:`AuthComponent` will allow us to create some groups
 and users. In **both** your ``GroupsController`` and your
 ``UsersController`` Add the following::
 
-    <?php
     public function beforeFilter() {
         parent::beforeFilter(); 
         $this->Auth->allow('*');
@@ -239,7 +234,6 @@ tables Acl. Son utilisation requiert l'implémentation de ``parentNode()``
 dans vos models. Dans notre Model ``User`` nous allons ajouter le 
 code suivant ::
 
-    <?php
     class User extends Model {
         public $name = 'User';
         public $belongsTo = array('Group');
@@ -264,7 +258,6 @@ code suivant ::
 
 Ensuite dans notre Model ``Group`` ajoutons ce qui suit::
 
-    <?php
     class Group extends Model {
         public $actsAs = array('Acl' => array('type' => 'requester'));
          
@@ -319,7 +312,6 @@ Dans la cas où nous souhaiterions simplifier en utilisant les permissions
 par groupes, nous avons besoin d'implémenter ``bindNode()`` dans le model 
 ``User``::
 
-    <?php
     public function bindNode($user) {
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
     }
@@ -361,7 +353,6 @@ utiliser l'``AclComponent``. Créer les Acos depuis le shell ressemble à cela::
 
 En utilisant l'AclComponent, cela ressemblera à::
 
-    <?php
     $this->Acl->Aco->create(array('parent_id' => null, 'alias' => 'controllers'));
     $this->Acl->Aco->save();
 

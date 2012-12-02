@@ -37,7 +37,6 @@ views for inspecting a single item in the database.
 To add scaffolding to your application, in the controller, add the
 $scaffold variable::
 
-    <?php
     class CategoriesController extends AppController {
         public $scaffold;
     }
@@ -65,7 +64,6 @@ select input for Group in the New User form. After you add the
 following code, the view displays a select input populated with IDs
 or names from the Group table in the New User form::
 
-    <?php
     // In Group.php
     public $hasMany = 'User';
     // In User.php
@@ -78,7 +76,6 @@ related to categories will be shown by first name rather than just
 an ID in scaffolding. This feature makes scaffolding more readable
 in many instances::
 
-    <?php
     class User extends AppModel {
         public $displayField = 'first_name';
     }
@@ -94,7 +91,6 @@ use scaffolding to generate an admin interface.
 Once you have enabled admin routing assign your admin prefix to the
 scaffolding variable::
 
-    <?php
     public $scaffold = 'admin';
 
 You will now be able to access admin scaffolded actions::
@@ -110,7 +106,6 @@ Keep in mind that you cannot have both admin and non-admin methods
 scaffolded at the same time. As with normal scaffolding you can
 override individual methods and replace them with your own::
 
-    <?php
     public function admin_view($id = null) {
       // custom code here
     }

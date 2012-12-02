@@ -50,7 +50,6 @@ spécificité de l'association.
 
 ::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasOne = 'Profile';
@@ -69,7 +68,6 @@ l'on appelle un 'Alias'. C'est un identifiant pour la relation et cela peut
 classe qu'il référence. Toutefois, **les alias pour chaque model doivent être 
 uniques dans une app entière**. Par exemple, il est approprié d'avoir::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
@@ -101,7 +99,6 @@ uniques dans une app entière**. Par exemple, il est approprié d'avoir::
 
 mais ce qui suit ne travaillera pas bien dans toute circonstance::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
@@ -138,13 +135,11 @@ Cake va créer automatiquement des liens entre les objets model associés.
 Ainsi par exemple dans votre model ``User``, vous pouvez accedez 
 au model ``Recette`` comme ceci::
 
-    <?php
     $this->Recette->uneFunctionQuelconque();
 
 De même dans votre controller, vous pouvez acceder à un model associé 
 simplement en poursuivant les associations de votre model::
 
-    <?php
     $this->User->Recette->uneFunctionQuelconque();
 
 .. note::
@@ -190,7 +185,6 @@ Pour définir l'association ‘User hasOne Profil’, ajoutez la propriété
 $hasOne à la classe de model. Pensez à avoir un model Profil dans
 /app/Model/Profil.php, ou l'association ne marchera pas::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasOne = 'Profil';
@@ -207,7 +201,6 @@ limiter l'association pour inclure seulement certains enregistrements.
 
 ::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasOne = array(
@@ -299,7 +292,6 @@ Nous pouvons définir l'association belongsTo dans notre model Profil dans
 /app/Model/Profil.php en utilisant la syntaxe de chaîne de caractère comme ce 
 qui suit::
 
-    <?php
     class Profil extends AppModel {
         public $name = 'Profil';
         public $belongsTo = 'User';
@@ -308,7 +300,6 @@ qui suit::
 Nous pouvons aussi définir une relation plus spécifique en utilisant une 
 syntaxe de tableau::
 
-    <?php
     class Profil extends AppModel {
         public $name = 'Profil';
         public $belongsTo = array(
@@ -406,7 +397,6 @@ On peut définir l'association hasMany dans notre model User
 (/app/Model/User.php) en utilisant une chaîne de caractères de cette 
 manière::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = 'Comment';
@@ -415,7 +405,6 @@ manière::
 Nous pouvons également définir une relation plus spécifique en utilisant 
 un tableau::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
@@ -545,7 +534,6 @@ Once you have added the counter field you are good to go. Activate
 counter-cache in your association by adding a ``counterCache`` key
 and set the value to ``true``::
 
-    <?php
     class ImageComment extends AppModel {
         public $belongsTo = array(
             'Image' => array(
@@ -564,7 +552,6 @@ to, depending on how you look at it) the counter value.
 
 Using our Image model example, we can specify it like so::
 
-    <?php
     class ImageComment extends AppModel {
         public $belongsTo = array(
             'Image' => array(
@@ -640,7 +627,6 @@ Une fois que cette nouvelle table a été créée, on peut définir l'associatio
 HABTM dans les fichiers de model. Cette fois ci, nous allons directement voir 
 la syntaxe en tableau::
 
-    <?php
     class Recipe extends AppModel {
         public $name = 'Recipe';   
         public $hasAndBelongsToMany = array(
@@ -811,7 +797,6 @@ otherwise known as a **hasMany through** association.
 That is, the association is a model itself. So, we can create a new
 model CourseMembership. Take a look at the following models.::
 
-            <?php
             // Student.php
             class Student extends AppModel {
                 public $hasMany = array(
@@ -864,7 +849,6 @@ Mettons en place quelques models pour pouvoir ensuite voir comment
 fonctionnent bindModel() et unbindModel(). Nous commencerons avec 
 deux models::
 
-    <?php
     class Leader extends AppModel {
         public $name = 'Leader';
         
@@ -888,7 +872,6 @@ hasMany (a plusieurs) Suiveurs". Dans un but démonstratif, utilisons
 unbindModel() pour supprimer cette association dans une action du 
 controller::
 
-    <?php
     public function some_action() {
         // Ceci récupère tous les Meneurs, ainsi que leurs Suiveurs
         $this->Leader->find('all');
@@ -922,7 +905,6 @@ controller::
 
 Voici un exemple basique d'utilisation de unbindModel()::
 
-    <?php
     $this->Model->unbindModel(
         array('associationType' => array('associatedModelClassName'))
     );
@@ -934,7 +916,6 @@ est dépouillé, il n'y a que la ligne var $name. Associons à la volée des
 Principes à notre Meneur (mais rappelons-le, seulement pour la prochaine 
 opération find). Cette fonction apparaît dans le controller MeneursController::
 
-    <?php
     public function another_action() {
         // Il n'y a pas d'association Meneur hasMany Principe
         // dans le fichier de model meneur.php, ainsi un find
@@ -962,7 +943,6 @@ opération find). Cette fonction apparaît dans le controller MeneursController:
 l'encapsulation d'un tableau d'association classique, dans un tableau dont 
 la clé est le nom du type d'association que vous essayez de créer::
 
-    <?php
     $this->Model->bindModel(
         array('associationName' => array(
                 'associatedModelClassName' => array(
@@ -986,7 +966,6 @@ une seconde avec l'user qui reçoit le message. La table messages aura
 un champ user\_id, mais aussi un champ receveur\_id. Maintenant, votre 
 model Message peut ressembler à quelque chose comme::
 
-    <?php
     class Message extends AppModel {
         public $name = 'Message';
         public $belongsTo = array(
@@ -1004,7 +983,6 @@ model Message peut ressembler à quelque chose comme::
 Receveur est un alias pour le model User. Maintenant, voyons à quoi 
 devrait ressembler le model User::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
@@ -1022,7 +1000,6 @@ devrait ressembler le model User::
 Il est aussi possible de créer des associations sur soi-même comme montré 
 ci-dessous::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
         
@@ -1073,7 +1050,6 @@ Pour forcer une jointure entre tables, vous avez besoin d'utiliser la syntaxe
 "moderne" de Model::find(), en ajoutant une clé 'joins' au tableau $options. 
 Par exemple::
 
-    <?php
     $options['joins'] = array(
         array('table' => 'channels',
             'alias' => 'Channel',
@@ -1104,7 +1080,6 @@ CakePHP.
 Avec joins, vous pourriez ajouter des conditions basées sur les champs du 
 model relié::
 
-    <?php
     $options['joins'] = array(
         array('table' => 'channels',
             'alias' => 'Channel',
@@ -1128,7 +1103,6 @@ Supposez une association Livre hasAndBelongsToMany Tag. Cette relation utilise
 une table livres\_tags comme table de jointure, donc vous avez besoin de 
 joindre la table livres à la table livres\_tags et celle-ci avec la table tags::
 
-    <?php
     $options['joins'] = array(
         array('table' => 'books_tags',
             'alias' => 'BooksTag',

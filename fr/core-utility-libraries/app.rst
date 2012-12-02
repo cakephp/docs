@@ -78,7 +78,6 @@ Le chargement des classes dans les plugins fonctionnnent un peu de la
 même façon que le chargement des classes app et des classes du coeur sauf 
 que vous devez spécifier le plugin à partir du quel vous chargez::
 
-    <?php
     // Charge la classe Comment dans app/Plugin/PluginName/Model/Comment.php
     App::uses('Comment', 'PluginName.Model');
 
@@ -95,14 +94,12 @@ Trouver des chemins vers les packages en utilisant App::path()
 
     Utilisé pour lire les informations sur les chemins stockés::
 
-        <?php
         // retourne les chemins de model dans votre application
         App::path('Model');
 
     Ceci peut être fait pour tous les packages qui font parti de votre 
     application. VOus pouvez aussi récupérer des chemins pour un plugin::
 
-        <?php
         // retourne les chemins de component dans DebugKit
         App::path('Component', 'DebugKit');
 
@@ -120,7 +117,6 @@ Trouver des chemins vers les packages en utilisant App::path()
 
     Utilisé pour trouver le chemin vers un package à l'intérieur de CakePHP::
 
-        <?php
         // Récupère le chemin vers les moteurs de Cache.
         App::core('Cache/Engine');
 
@@ -149,7 +145,6 @@ Ajoutez des chemins dans App pour trouver des packages dans
 
     Utilisation::
 
-        <?php
         //Va configurer un nouveau chemin de recherche pour le package Model
         App::build(array('Model' => array('/a/full/path/to/models/'))); 
 
@@ -166,7 +161,6 @@ Ajoutez des chemins dans App pour trouver des packages dans
 
     Exemples::
 
-        <?php
         App::build(array('controllers' => array('/full/path/to/controllers'))) 
         //devient 
         App::build(array('Controller' => array('/full/path/to/Controller')))
@@ -188,7 +182,6 @@ Ajoutez de nouveaux packages vers une application
 de package. Ceci est utile quand vous voulez ajouter de nouveaux packages 
 de niveaux supérieurs ou, des sous-packages à votre application::
 
-    <?php
     App::build(array(
         'Service' => array('%s' . 'Service' . DS)
     ), App::REGISTER);
@@ -215,7 +208,6 @@ Trouver quels objets CakePHP connaît
 
     Exemple d'utilisation::
 
-        <?php
         //retourne array('DebugKit', 'Blog', 'User');
         App::objects('plugin');
 
@@ -225,7 +217,6 @@ Trouver quels objets CakePHP connaît
     Vous pouvez aussi chercher seulement dans les objets de plugin en utilisant 
     la syntaxe de plugin avec les points.::
 
-        <?php
         // retourne array('MyPluginPost', 'MyPluginComment');
         App::objects('MyPlugin.Model');
 
@@ -246,7 +237,6 @@ Localiser les plugins
     ``App::pluginPath('DebugKit');`` par exemple, vous donnera le chemin 
     complet vers le plugin DebugKit::
 
-        <?php
         $path = App::pluginPath('DebugKit');
 
 Localiser les thèmes
@@ -279,7 +269,6 @@ Inclure les fichiers avec App::import()
 
     ::
 
-        <?php
         // La même chose que require('Controller/UsersController.php');
         App::import('Controller', 'Users');
         
@@ -337,14 +326,12 @@ Vous pouvez utiliser ``App::uses()`` pour charger des classes provenant des
 répertoires vendors. Elle suit les mêmes conventions que pour le chargement 
 des autres fichiers::
 
-    <?php
     // Charge la classe Geshi dans app/Vendor/Geshi.php
     App::uses('Geshi', 'Vendor');
 
 Pour charger les classes se trouvant dans des sous-répertoires, vous devrez 
 ajouter ces chemins avec ``App::build()``::
 
-    <?php
     // Charge la classe ClassInSomePackage dans app/Vendor/SomePackage/ClassInSomePackage.php
     App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage')));
     App::uses('ClassInSomePackage', 'Vendor');
@@ -358,7 +345,6 @@ n'importe quel dossier vendor.
 
 Pour charger **app/Vendor/geshi.php**::
 
-    <?php
     App::import('Vendor', 'geshi');
 
 .. note::
@@ -368,17 +354,14 @@ Pour charger **app/Vendor/geshi.php**::
 
 Pour charger **app/Vendor/flickr/flickr.php**::
 
-    <?php
     App::import('Vendor', 'flickr/flickr');
 
 Pour charger **app/Vendor/some.name.php**::
 
-    <?php
     App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));
 
 Pour charger **app/Vendor/services/well.named.php**::
 
-    <?php
     App::import('Vendor', 'WellNamed', array('file' => 'services' . DS . 'well.named.php'));
 
 Cela ne ferait pas de différence si vos fichiers vendor étaient à l'intérieur 
@@ -386,7 +369,6 @@ du répertoire /vendors. Cake le trouvera automatiquement.
 
 Pour charger **vendors/vendorName/libFile.php**::
 
-    <?php
     App::import('Vendor', 'aUniqueIdentifier', array('file' => 'vendorName' .DS . 'libFile.php'));
 
 Les Méthodes Init/Load/Shutdown de App

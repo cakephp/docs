@@ -24,7 +24,6 @@ controller has a :php:attr:`~Controller::$helpers` property that lists the
 helpers to be made available in the view.  To enable a helper in your view, add
 the name of the helper to the controller's ``$helpers`` array::
 
-    <?php
     class BakeriesController extends AppController {
         public $helpers = array('Form', 'Html', 'Js', 'Time');
     }
@@ -32,7 +31,6 @@ the name of the helper to the controller's ``$helpers`` array::
 Adding helpers from plugins uses the :term:`plugin syntax` used elsewhere in
 CakePHP::
 
-    <?php
     class BakeriesController extends AppController {
         public $helpers = array('Blog.Comment');
     }
@@ -43,7 +41,6 @@ controller. This saves processing power for the other actions that
 do not use the helper as well as help keep the controller better
 organized::
 
-    <?php
     class BakeriesController extends AppController {
         public function bake {
             $this->helpers[] = 'Time';
@@ -58,7 +55,6 @@ the helper to the ``$helpers`` array in ``/app/Controller/AppController.php`` (o
 create if not present). Remember to include the default Html and
 Form helpers::
 
-    <?php
     class AppController extends Controller {
         public $helpers = array('Form', 'Html', 'Js', 'Time');
     }
@@ -66,7 +62,6 @@ Form helpers::
 You can pass options to helpers. These options can be used to set
 attribute values or modify behavior of a helper::
 
-    <?php
     class AwesomeHelper extends AppHelper {
         public function __construct(View $view, $settings = array()) {
             parent::__construct($view, $settings);
@@ -78,12 +73,14 @@ attribute values or modify behavior of a helper::
         public $helpers = array('Awesome' => array('option1' => 'value1'));
     }
 
+As of 2.3 the options are merged with the ``Helper::$settings`` property of
+the helper.
+
 One common setting to use is the ``className`` option, which allows you to
 create aliased helpers in your views.  This feature is useful when you want to
 replace ``$this->Html`` or another common Helper reference with a custom
 implementation::
 
-    <?php
     // app/Controller/PostsController.php
     class PostsController extends AppController {
         public $helpers = array(
@@ -108,9 +105,9 @@ The above would *alias* ``MyHtmlHelper`` to ``$this->Html`` in your views.
 
 .. tip::
 
-    Aliasing the Html or Session Helper while using the core PagesController 
-    will not work. It is better to copy 
-    ``lib/Cake/Controller/PagesController.php`` into your ``app/Controller/`` 
+    Aliasing the Html or Session Helper while using the core PagesController
+    will not work. It is better to copy
+    ``lib/Cake/Controller/PagesController.php`` into your ``app/Controller/``
     folder.
 
 Using helper settings allows you to declaratively configure your helpers and
@@ -118,7 +115,6 @@ keep configuration logic out of your controller actions.  If you have
 configuration options that cannot be included as part of a class declaration,
 you can set those in your controller's beforeRender callback::
 
-    <?php
     class PostsController extends AppController {
         public function beforeRender() {
             parent::beforeRender();
@@ -129,30 +125,28 @@ you can set those in your controller's beforeRender callback::
 Using Helpers
 =============
 
-Once you've configured which helpers you want to use in your controller, 
+Once you've configured which helpers you want to use in your controller,
 each helper is exposed as a public property in the view.  For example, if you
-were using the :php:class:`HtmlHelper` you would be able to access it by 
+were using the :php:class:`HtmlHelper` you would be able to access it by
 doing the following::
 
-    <?php
     echo $this->Html->css('styles');
 
 The above would call the ``css`` method on the HtmlHelper.  You can
 access any loaded helper using ``$this->{$helperName}``.  There may
 come a time where you need to dynamically load a helper from inside
-a view.  You can use the view's :php:class:`HelperCollection` to 
+a view.  You can use the view's :php:class:`HelperCollection` to
 do this::
 
-    <?php
     $mediaHelper = $this->Helpers->load('Media', $mediaSettings);
 
-The HelperCollection is a :doc:`collection </core-libraries/collections>` and 
+The HelperCollection is a :doc:`collection </core-libraries/collections>` and
 supports the collection API used elsewhere in CakePHP.
 
 Callback methods
 ================
 
-Helpers feature several callbacks that allow you to augment the 
+Helpers feature several callbacks that allow you to augment the
 view rendering process.  See the :ref:`helper-api` and the
 :doc:`/core-libraries/collections` documentation for more information.
 
@@ -169,10 +163,9 @@ CakePHP's existing helper structure, you'll need to create a new
 class in ``/app/View/Helper``. Let's call our helper LinkHelper. The
 actual PHP class file would look something like this::
 
-    <?php
     /* /app/View/Helper/LinkHelper.php */
     App::uses('AppHelper', 'View/Helper');
-    
+
     class LinkHelper extends AppHelper {
         public function makeEdit($title, $url) {
             // Logic to create specially formatted link goes here...
@@ -191,19 +184,18 @@ You may wish to use some functionality already existing in another
 helper. To do so, you can specify helpers you wish to use with a
 ``$helpers`` array, formatted just as you would in a controller::
 
-    <?php
     /* /app/View/Helper/LinkHelper.php (using other helpers) */
     App::uses('AppHelper', 'View/Helper');
-    
+
     class LinkHelper extends AppHelper {
         public $helpers = array('Html');
-    
+
         public function makeEdit($title, $url) {
             // Use the HTML helper to output
             // formatted data:
-    
+
             $link = $this->Html->link($title, $url, array('class' => 'edit'));
-    
+
             return '<div class="editOuter">' . $link . '</div>';
         }
     }
@@ -218,7 +210,6 @@ Once you've created your helper and placed it in
 ``/app/View/Helper/``, you'll be able to include it in your
 controllers using the special variable :php:attr:`~Controller::$helpers`::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Link');
     }
@@ -239,9 +230,8 @@ extend AppModel and controllers extend AppController). To create
 functionality that would be available to all helpers, create
 ``/app/View/Helper/AppHelper.php``::
 
-    <?php
     App::uses('Helper', 'View');
-    
+
     class AppHelper extends Helper {
         public function customMethod() {
         }
@@ -255,7 +245,7 @@ Helper API
 
 .. php:class:: Helper
 
-    The base class for Helpers. It provides a number of utility methods and 
+    The base class for Helpers. It provides a number of utility methods and
     features for loading other helpers.
 
 .. php:method:: webroot($file)
@@ -274,8 +264,8 @@ Helper API
 
 .. php:method:: domId($options = null, $id = 'id')
 
-    Generate a CamelCased id value for the currently selected field. 
-    Overriding this method in your AppHelper will allow you to change 
+    Generate a CamelCased id value for the currently selected field.
+    Overriding this method in your AppHelper will allow you to change
     how CakePHP generates ID attributes.
 
 Callbacks

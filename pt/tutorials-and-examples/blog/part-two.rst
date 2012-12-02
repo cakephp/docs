@@ -14,7 +14,6 @@ Os arquivos de classe do tipo model do CakePHP ficam em ``/app/Model`` e o
 arquivo que iremos criar será salvo em ``/app/Model/Post.php``. O conteúdo
 completo deste arquivo deve ficar assim::
 
-    <?php
     
     class Post extends AppModel {
         public $name = 'Post';
@@ -47,7 +46,6 @@ nossos posts. Vamos pôr este novo controller num arquivo chamado
 ``PostsController.php`` dentro do diretório ``/app/Controller``. Aqui está como
 um controller básico deve se parecer::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array ('Html','Form');
         public $name = 'Posts';
@@ -59,7 +57,6 @@ usuários acessarem o endereço www.exemplo.com/posts/index (que, neste caso é 
 mesmo que www.exemplo.com/posts/), eles esperam ver a listagem dos posts. O
 código para tal ação deve se parecer com algo assim::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array ('Html','Form');
         public $name = 'Posts';
@@ -154,7 +151,9 @@ formato parecido com este::
 Os arquivos de view do Cake são armazenados na pasta ``/app/View`` dentro de uma
 pasta com o mesmo nome do controller a que correspondem (em nosso caso, vamos
 criar uma pasta chamada 'Posts'). Para apresentar os dados do post num formato
-adequado de tabela, o código de nossa view deve ser algo como::
+adequado de tabela, o código de nossa view deve ser algo como:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
     
@@ -211,7 +210,6 @@ deu errado ou então você já tinha definido uma action anteriormente, e neste
 caso, você é muito afoito. Se não, vamos criá-la em nosso PostsController
 agora::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
         public $name = 'Posts';
@@ -236,7 +234,9 @@ usuário acessar uma URL /posts/view/3, então o valor '3' será atribuído ao
 parâmetro ``$id``.
 
 Agora vamos criar a view para nossa nova action 'view' e colocá-la em
-``/app/View/Posts/view.ctp``::
+``/app/View/Posts/view.ctp``:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/view.ctp -->
     
@@ -257,7 +257,6 @@ precisamos permitir também que os usuários adicionem novos posts.
 
 Primeiramente, comece criando uma action ``add()`` no PostsController::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
         public $name = 'Posts';
@@ -327,7 +326,9 @@ Para usufruir das vantagens dos recursos de validação, você vai precisar usar
 FormHelper do Cake em suas views. O :php:class:`FormHelper` está disponível por
 padrão em todas as suas views na variável ``$this->Form``.
 
-Aqui está nossa view add::
+Aqui está nossa view add:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/add.ctp -->   
     
@@ -339,7 +340,9 @@ Aqui está nossa view add::
     echo $this->Form->end('Save Post');
 
 Aqui, usamos o FormHelper para gerar a tag de abertura para um formulário. Aqui
-está o HTML gerado pelo ``$this->Form->create()``::
+está o HTML gerado pelo ``$this->Form->create()``:
+
+.. code-block:: html
 
     <form id="PostAddForm" method="post" action="/posts/add">
 
@@ -366,13 +369,12 @@ Agora vamos voltar e atualizar nossa view ``/app/View/Post/index.ctp`` para
 incluir um novo link para "Adicionar Post". Antes de <table>, adicione a
 seguinte linha::
 
-    <?php echo $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add')); ?>
+    echo $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add'));
 
 Você pode estar imaginando: como eu informo ao CakePHP sobre os requisitos de
 validação de meus dados? Regras de validação são definidas no model. Vamos olhar
 de volta nosso model Post e fazer alguns pequenos ajustes::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
     
@@ -409,7 +411,6 @@ CakePHP, então você deve ter identificado um padrão. Criar a action e então
 criar a view. Aqui está como o código da action ``edit()`` do PostsController
 deve se parecer::
 
-    <?php
     
     function edit($id = null) {
         $this->Post->id = $id;
@@ -429,7 +430,9 @@ provavelmente esta contém dados de um formulário POST. Nós usaremos estes dad
 para atualizar o registro do nosso Post ou exibir novamente a view mostrando
 para o usuário os erros de validação.
 
-A view edit pode ser algo parecido com isto::
+A view edit pode ser algo parecido com isto:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/edit.ctp -->
     
@@ -451,7 +454,9 @@ assumir que você está inserindo um novo model quando o método ``save()`` for
 chamado.
 
 Você agora pode atualizar sua view index com os links para editar os posts
-específicos::
+específicos:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp  (links para edição adicionados) -->
 
@@ -494,7 +499,6 @@ Deletando Posts
 A seguir, vamos criar uma maneira para os usuários excluírem posts. Comece com
 uma action ``delete()`` no PostsController::
 
-    <?php
     function delete($id) {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
@@ -520,7 +524,9 @@ action não tem uma view. Você pode querer atualizar sua view index com links q
 permitam ao usuários excluir posts, porém, como um link executa uma requisição
 do tipo GET, nossa action irá lançar uma exceção. Precisamos então criar um
 pequeno formulário que enviará um método POST adequado. Para estes casos o
-helper FormHelper fornece o método ``postLink()``::
+helper FormHelper fornece o método ``postLink()``:
+
+.. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
     
@@ -582,14 +588,12 @@ As rotas do Cake são encontrada no arquivo ``/app/Config/routes.php``. Você va
 querer comentar ou remover a linha que define a rota raiz padrão. Ela se parece
 com::
 
-    <?php
     Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
 Esta linha conecta a URL '/' com a home page padrão do CakePHP. Queremos
 conectá-la com nosso próprio controller, então adicionamos uma linha parecida
 com isto::
 
-    <?php
     Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 
 Isto deve conectar as requisições de '/' à action ``index()`` que criaremos em

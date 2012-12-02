@@ -14,7 +14,6 @@ Quand on met à jour vers CakePHP 2.2, il est important d'ajouter quelques
 nouvelles valeurs de configuration dans ``app/Config/bootstrap.php``. 
 Les ajoutez va assurer que le behavior soit cohérent avec 2.1.x::
 
-    <?php
     // Active les filtres du Dispatcher pour les assets du plugin, et
     // du CacheHelper.
     Configure::write('Dispatcher.filters', array(
@@ -37,7 +36,6 @@ Les ajoutez va assurer que le behavior soit cohérent avec 2.1.x::
 Vous devrez aussi modifier ``app/Config/core.php``. Changez la valeur de 
 :php:const:`LOG_ERROR` en :php:const:`LOG_ERR`::
 
-    <?php
     define('LOG_ERROR', LOG_ERR);
 
 Quand on utilise ``Model::validateAssociated()`` ou ``Model::saveAssociated()`` 
@@ -301,7 +299,6 @@ groupes. Cela facilite pour supprimer en masse les entrées associées mise
 en cache avec le même label. Les groupes sont déclarés au moment de la 
 configuration quand on crée le moteur de cache::
 
-    <?php
     Cache::config(array(
         'engine' => 'Redis',
         ...

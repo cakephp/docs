@@ -25,7 +25,6 @@ caractère majuscule (par exemple ``All``) ne produira pas le résultat attendu.
 formes de find et il a les clés suivantes disponibles par défaut - qui sont 
 toutes optionnelles::
 
-    <?php
     array(
         'conditions' => array('Model.field' => $cetteValeur), //tableau de conditions
         'recursive' => 1, //int
@@ -51,7 +50,6 @@ find('first')
 ceci dans tous les cas où vous attendez un seul résultat. Ci-dessous, 
 quelques exemples simples (code du controller)::
 
-    <?php
     public function une_fonction() {
         // ...
         $articleADemiAleatoire = $this->Article->find('first');
@@ -95,7 +93,6 @@ find('count')
 ``find('count', $params)`` retourne une valeur de type entier. Ci-dessous, 
 quelques exemples simples (code du controller)::
 
-    <?php
     public function une_fonction() {
         // ...
         $total = $this->Article->find('count');
@@ -127,7 +124,6 @@ multiples). C'est en fait le mécanisme utilisé par toutes les variantes de
 ``find()``, ainsi que par ``paginate``. Ci-dessous, quelques exemples 
 simples (code du controller)::
 
-    <?php
     public function une_fonction() {
         // ...
         $tousLesArticles = $this->Article->find('all');
@@ -181,7 +177,6 @@ find('list')
 cas où vous voudriez une liste telle que celles remplissant les champs select. 
 Ci-dessous, une paire d'exemples simples (code du contôleur)::
 
-    <?php
     public function une_function() {
         // ...
         $tousLesArticles = $this->Article->find('list');
@@ -224,7 +219,6 @@ défaut la clé primaire du model est utilisé comme clé et le champ affiché
 :ref:`model-displayField` du model) est utilisé pour la valeur. Quelques 
 exemples complémentaires pour clarifier les choses::
 
-    <?php
     public function une_function() {
         // ...
         $juste_les_usernames = $this->Article->User->find('list', array(
@@ -289,7 +283,6 @@ particulièrement approprié si vous voulez utiliser le champ
 ``parent_id`` des données de votre model, pour construire les résultats 
 associés. Ci-dessous, quelques exemples simples (code du controller)::
 
-    <?php
     public function une_function() {
         // ...
         $toutesLesCategories = $this->Category->find('threaded');
@@ -377,7 +370,6 @@ Ci-dessous, un exemple simple (code du controller)
 
 ::
 
-    <?php
     public function une_function() {
        $neighbors = $this->Article->find('neighbors', array('field' => 'id', 'value' => 3));
     }
@@ -468,7 +460,6 @@ vous devez faire est d'ajouter votre type dans la variable
 
 ::
 
-    <?php
     class Article extends AppModel {
         public $findMethods = array('available' =>  true);
     }
@@ -481,7 +472,6 @@ s'appellera ``_findMaSuperRecherche``.
 
 ::
 
-    <?php
     class Article extends AppModel {
         public $findMethods = array('available' =>  true);
 
@@ -498,7 +488,6 @@ Cela vient avec l'exemple suivant (code du controller):
 
 ::
 
-    <?php
     class ArticlesController extends AppController {
 
         // Trouvera tous les articles publiés et les ordonne en fonction de la colonne created
@@ -538,7 +527,6 @@ suit:
 
 ::
 
-    <?php
     class ArticlesController extends AppController {
 
         // Va paginer tous les articles publiés
@@ -560,7 +548,6 @@ régler le compte de pagination:
 
 ::
 
-    <?php
     class AppModel extends Model {
 
     /**
@@ -684,7 +671,6 @@ attaques par injection et cross-site scripting.
 ``query()`` utilise le nom de la table déclarée dans la requête comme clé du 
 tableau de données retourné, plutôt que le nom du model. Par exemple::
 
-    <?php
     $this->Image->query("SELECT * FROM images LIMIT 2;");
 
 pourrait retourner::
@@ -714,7 +700,6 @@ Pour utiliser le nom du model comme clé du tableau et obtenir un résultat
 cohérent avec ce qui est retourné par les méthodes Find, la requête doit 
 être réécrite::
 
-    <?php
     $this->Image->query("SELECT * FROM images AS Image LIMIT 2;");
 
 ce qui retourne::
@@ -760,7 +745,6 @@ Si aucun enregistrement correspondant n'est trouvé cela retournera false.
 
 ::
 
-    <?php
     $this->Billet->id = 22;
     echo $this->Billet->field('nom'); // affiche le nom pour la ligne avec l'id 22
 
@@ -818,7 +802,6 @@ d'injection SQL.
 Dans sa forme la plus simple, une requête basée sur un tableau ressemble à 
 ceci::
 
-    <?php
     $conditions = array("Billet.titre" => "Il y a un billet", "Post.author_id" => 1);
     // Exemple d'utilisation avec un model:
     $this->Billet->find('first', array('conditions' => $conditions));
@@ -834,7 +817,6 @@ Qu’en est-il des autres types de correspondances ? Elles sont aussi simples.
 Disons que nous voulons trouver tous les billets dont le titre n’est pas 
 "Ceci est un billet":: 
 
-    <?php
     array("Billet.titre !=" => "Il y a un billet")
 
 Notez le '!=' qui précède l’expression. CakePHP peut parser tout opérateur 
@@ -844,7 +826,6 @@ l'opérateur et la valeur. La seule exception à ceci sont les correspondance
 du genre IN(...). Admettons que vous vouliez trouver les billets dont le titre 
 appartient à un ensemble de valeur données:: 
 
-    <?php
     array(
         "Billet.titre" => array("Premier billet", "Deuxième billet", "Troisième billet")
     )
@@ -852,7 +833,6 @@ appartient à un ensemble de valeur données::
 Faire un NOT IN(...) correspond à trouver les billets dont le titre n'est pas 
 dans le jeu de données passé::
 
-    <?php
     array(
         "NOT" => array("Billet.titre" => array("Premier billet", "Deuxième billet", "Troisième billet"))
     )
@@ -860,7 +840,6 @@ dans le jeu de données passé::
 Ajouter des filtres additionnels aux conditions est aussi simple que d’ajouter 
 des paires clé/valeur au tableau::
 
-    <?php
     array (
         "Billet.titre" => array("Premier billet", "Deuxième billet", "Troisième billet"),
         "Billet.created >" => date('Y-m-d', strtotime("-2 weeks"))
@@ -869,7 +848,6 @@ des paires clé/valeur au tableau::
 Vous pouvez également créer des recherches qui comparent deux champs de la 
 base de données::
 
-    <?php
     array("Billet.created = Billet.modified")
 
 L'exemple ci-dessus retournera les billets où la date de création est égale 
@@ -880,7 +858,6 @@ Souvenez-vous que si vous vous trouvez dans l'incapacité de formuler une
 clause WHERE par cette méthode (ex. opérations booléennes),il vous est toujours 
 possible de la spécifier sous forme de chaîne comme ceci::
 
-    <?php
     array(
         'Model.champ & 8 = 1',
         // autres conditions habituellement utilisées
@@ -892,7 +869,6 @@ aux billets qui ont été créés durant les deux dernières semaines, et qui on
 un titre correspondant à ceux donnés. Cependant, nous pouvons simplement 
 trouver les billets qui correspondent à l’une ou l’autre des conditions:: 
 
-    <?php
     array("OR" => array(
         "Billet.titre" => array("Premier billet", "Deuxième billet", "Troisième billet"),
         "Billet.created >" => date('Y-m-d', strtotime("-2 weeks"))
@@ -907,7 +883,6 @@ billets qui contiennent un certain mot-clé "magique" ou qui a été créé au
 cours des deux dernières semaines, mais que vous voulez restreindre votre 
 recherche aux billets écrits par Bob::
 
-    <?php
     array(
         "Auteur.nom" => "Bob",
         "OR" => array(
@@ -920,7 +895,6 @@ Si vous avez besoin de mettre plusieurs conditions sur le même champ, comme
 quand vous voulez faire une recherche LIKE avec des termses multiples, vous 
 pouvez faire ceci en utilisant des conditions identiques à::
 
-    <?php
     array('OR' => array(
         array('Billet.titre LIKE' => '%one%'),
         array('Billet.titre LIKE' => '%two%')
@@ -929,7 +903,6 @@ pouvez faire ceci en utilisant des conditions identiques à::
 Cake peut aussi vérifier les champs null. Dans cet exemple, la requête 
 retournera les enregistrements où le titre du billet n'est pas null::
 
-    <?php
     array("NOT" => array(
             "Billet.titre" => null
         )
@@ -937,7 +910,6 @@ retournera les enregistrements où le titre du billet n'est pas null::
 
 Pour gérer les requêtes BETWEEN, vous pouvez utiliser ceci::
 
-    <?php
     array('Billet.read_count BETWEEN ? AND ?' => array(1,10))
 
 .. note::
@@ -947,7 +919,6 @@ Pour gérer les requêtes BETWEEN, vous pouvez utiliser ceci::
 
 Qu'en est-il de GROUP BY ?::
 
-    <?php
     array(
         'fields' => array(
             'Produit.type',
@@ -977,7 +948,6 @@ Les données retournées seront dans le format suivant::
 Un exemple rapide pour faire une requête DISTINCT. Vous pouvez utiliser 
 d'autres opérateurs, comme MIN(), MAX(), etc..., d'une manière analogue::
 
-    <?php
     array(
         'fields' => array('DISTINCT (User.nom) AS nom_de_ma_colonne'),'),
         'order' = >array('User.id DESC')
@@ -986,7 +956,6 @@ d'autres opérateurs, comme MIN(), MAX(), etc..., d'une manière analogue::
 Vous pouvez créer des conditions très complexes, en regroupant des tableaux 
 de conditions multiples::
 
-    <?php
     array(
         'OR' => array(
             array('Entreprise.nom' => 'Futurs Gains'),
@@ -1033,7 +1002,6 @@ model et lui demander de construire la requête comme si nous appelions
 une méthode "find", mais elle retournera uniquement la commande SQL. Après 
 cela, nous construisons une expression et l'ajoutons au tableau des conditions::
 
-    <?php
     $conditionsSubQuery['"User2"."status"'] = 'B';
 
     $db = $this->Utilisateur->getDataSource();
@@ -1088,7 +1056,6 @@ utiliser des requêtes préparées. Cela vous permet de parler directement au
 driver de la base de données et d'envoyer toute requête personnalisée que vous 
 souhaitez::
 
-    <?php
     $db = $this->getDataSource();
     $db->fetchAll(
         'SELECT * from users where username = ? AND password = ?',

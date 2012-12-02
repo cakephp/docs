@@ -45,7 +45,6 @@ variables de vue avant la génération de la réponse, vous devriez utiliser les
 fichiers de vue. La valeur de ``_serialize`` peut être soit une chaîne de 
 caractère, soit un tableau de variables de vue pour sérialiser::
 
-    <?php
     class PostsController extends AppController {
         public function index() {
             $this->set('posts', $this->paginate());
@@ -56,7 +55,6 @@ caractère, soit un tableau de variables de vue pour sérialiser::
 Vous pouvez aussi définir ``_serialize`` en tableau de variables de vue pour 
 combiner::
 
-    <?php
     class PostsController extends AppController {
         public function index() {
             // some code that created $posts and $comments
@@ -80,7 +78,6 @@ exemple, si vous avez des posts, qui ont un champ contenant du HTML généré,
 nous voudrons probablement omettre ceci à partir d'une réponse JSON. C'est 
 une situation où un fichier de vue serait utile::
 
-    <?php
     // Code du controller
     class PostsController extends AppController {
         public function index() {

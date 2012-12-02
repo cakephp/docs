@@ -88,7 +88,6 @@ faire correspondre les éléments dans l'URL.
 
 Le format basique pour une définition de route est::
 
-    <?php
     Router::connect(
         'URL',
         array('default' => 'defaultValue'),
@@ -111,7 +110,6 @@ Les valeurs dans le tableau sont les valeurs par défaut pour ces clés.
 Regardons quelques exemples simples avant que nous commencions l'utilisation 
 le troisième paramètre de connect()::
 
-    <?php
     Router::connect(
         '/pages/*',
         array('controller' => 'pages', 'action' => 'display')
@@ -128,7 +126,6 @@ En plus de l'étoile greedy ``/*`` il y aussi la syntaxe de l'étoile trailing
 en tant qu'argument unique passé. Ceci est utile quand vous voulez utilisez 
 un argument qui incluait un ``/`` dedans::
 
-    <?php
     Router::connect(
         '/pages/**',
         array('controller' => 'pages', 'action' => 'show')
@@ -145,7 +142,6 @@ Vous pouvez utiliser le deuxième paramètre de :php:meth:`Router::connect()`
 pour fournir tout paramètre de routing qui est composé des valeurs par défaut 
 de la route::
 
-    <?php
     Router::connect(
         '/government',
         array('controller' => 'products', 'action' => 'display', 5)
@@ -170,7 +166,6 @@ un controller. Disons qu'au lieu d'accéder à notre URL régulière à
 ``/users/some_action/5``, nous aimerions être capable de l'accéder avec 
 ``/cooks/some_action/5``. La route suivante s'occupe facilement de cela::
 
-    <?php
     Router::connect(
         '/cooks/:action/*', array('controller' => 'users')
     );
@@ -194,7 +189,6 @@ vous devrez avertir le router de cela en utilisant la fonction
 :php:meth:`Router::connectNamed()`. Donc si vous voulez que la route ci-dessus 
 matchent les urls comme ``/cooks/some_action/type:chef``, nous faisons::
 
-    <?php
     Router::connectNamed(array('type'));
     Router::connect(
         '/cooks/:action/*', array('controller' => 'users')
@@ -220,7 +214,6 @@ savoir si l'URL est correctement formée ou non. Si vous choisissez de ne
 pas fournir une expression régulière, toute expression non ``/`` sera 
 traitée comme une partie du paramètre::
 
-    <?php
     Router::connect(
         '/:controller/:id',
         array('action' => 'view'),
@@ -253,12 +246,10 @@ tous les urls aux actions dans votre controller. Par exemple, pour mapper
 toutes les urls aux actions du controller ``home``, par ex avoir des urls 
 comme ``/demo`` à la place de ``/home/demo``, vous pouvez faire ce qui suit::
 
-    <?php
     Router::connect('/:action', array('controller' => 'home')); 
 
 Un exemple de plus, et vous serez un routing pro::
 
-    <?php
     Router::connect(
         '/:controller/:year/:month/:day',
         array('action' => 'index', 'day' => null),
@@ -310,7 +301,6 @@ soient passés aux arguments à la place. En utilisant le 3ème argument de
 :php:meth:`Router::connect()`, vous pouvez définir quels éléments de route 
 doivent aussi être rendus disponibles en arguments passés::
 
-    <?php
     // SomeController.php
     public function view($articleId = null, $slug = null) {
         // du code ici...
@@ -348,7 +338,6 @@ en utilisant :php:meth:`Router::connectNamed()`, vous pouvez aussi contrôler
 le comportement des paramètres nommés au niveau de la route en utilisant 
 le 3ème argument de ``Router::connect()``::
 
-    <?php
     Router::connect(
         '/:controller/:action/*',
         array(),
@@ -395,7 +384,6 @@ activés depuis le fichier de configuration du cœur en configurant les
 préfixes avec Routing.prefixes. Notez que les prefixes, bien que liés 
 au router sont configurés dans ``app/Config/core.php``::
 
-    <?php
     Configure::write('Routing.prefixes', array('admin'));
 
 Dans votre controller, toute action avec le préfixe ``admin_`` sera appelée. 
@@ -408,21 +396,18 @@ Le fichier de vue correspondant devra être
 Vous pouvez faire correspondre l'url /admin à votre action ``admin_index`` 
 du controller Pages en utilisant la route suivante::
 
-    <?php
     Router::connect('/admin', array('controller' => 'pages', 'action' => 'index', 'admin' => true)); 
 
 Vous pouvez aussi configurer le Router pour utiliser de multiples prefixes. 
 En ajoutant des valeurs supplémentaires dans ``Routing.prefixes``. Si vous 
 définissez::
 
-    <?php
     Configure::write('Routing.prefixes', array('admin', 'manager'));
 
 Cake va automatiquement générer les routes pour les deux prefixes admin et 
 manager. Chaque préfixe configuré va avoir les routes générées suivantes 
 pour cela::
 
-    <?php
     Router::connect("/{$prefix}/:plugin/:controller", array('action' => 'index', 'prefix' => $prefix, $prefix => true));
     Router::connect("/{$prefix}/:plugin/:controller/:action/*", array('prefix' => $prefix, $prefix => true));
     Router::connect("/{$prefix}/:controller", array('action' => 'index', 'prefix' => $prefix, $prefix => true));
@@ -439,7 +424,6 @@ Quand on utilise les routes préfixées, il est important de se rappeler qu'en
 utilisant le helper HTML pour construire vos liens va aider à maintenir les 
 appels préfixés. Voici comment construire le lien en utilisant le helper HMTL::
 
-    <?php
     // Allez dans une route préfixée.
     echo $html->link('Manage posts', array('manager' => true, 'controller' => 'posts', 'action' => 'add'));
 
@@ -455,14 +439,12 @@ Le routage des Plugins utilise la clé **plugin**. Vous pouvez créer des liens
 qui pointent vers un plugin, mais en ajoutant la clé plugin à votre tableau 
 d'url::
 
-    <?php
     echo $html->link('New todo', array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'));
 
 Inversement, si la requête active est une requête de plugin et que vous 
 voulez créer un lien qui ne pointe pas vers un plugin, vous pouvez faire 
 ce qui suit::
 
-    <?php
     echo $html->link('New todo', array('plugin' => null, 'controller' => 'users', 'action' => 'profile'));
 
 En définissant ``plugin => null``, vous indiquez au Routeur que vous souhaitez 
@@ -477,7 +459,6 @@ Extensions de Fichier
 Pour manipuler différentes extensions de fichier avec vos routes, vous avez 
 besoin d'une ligne supplémentaire dans votre fichier de config des routes::
 
-    <?php
     Router::parseExtensions('html', 'rss');
 
 Ceci indiquera au routeur de supprimer toutes extensions de fichiers 
@@ -486,7 +467,6 @@ correspondantes et ensuite d'analyser ce qui reste.
 Si vous voulez créer une URL comme /page/titre-de-page.html, vous devriez 
 créer votre route comme illustré ci-dessous::
 
-    <?php
     Router::connect(
         '/page/:title',
         array('controller' => 'pages', 'action' => 'view'),
@@ -497,7 +477,6 @@ créer votre route comme illustré ci-dessous::
 
 Ensuite pour créer des liens qui s'adapteront aux routes utilisez simplement::
 
-    <?php
     $html->link(
         'Link title', 
         array('controller' => 'pages', 'action' => 'view', 'title' => 'super-article', 'ext' => 'html')
@@ -534,7 +513,6 @@ d'informations.
 Si vous alliez visiter l'url mentionné précédemment, et que vous avez une 
 action de controller qui ressmeblerait à cela::
 
-    <?php
     CalendarsController extends AppController{
         public function view($arg1, $arg2) {
             debug(func_get_args());
@@ -556,7 +534,6 @@ dans lequel elles apparaissent dans l'url appelé.
 
 ::
 
-    <?php
     debug($this->request->params['pass']);
     debug($this->passedArgs); 
 
@@ -577,7 +554,6 @@ Quand vous générez des urls, en utilisant un :term:`tableau routing`, vous
 ajoutez des arguments passés en valeurs sans clés de type chaîne dans le 
 tableau::
 
-    <?php
     array('controller' => 'posts', 'action' => 'view', 5)
 
 Comme ``5`` a une clé numérique, il est traité comme un argument passé.
@@ -639,7 +615,6 @@ nommés ou des paramètres à router, et supposera par défaut que ce sont des
 paramètres à router. Pour connecter des paramètres nommés dans le routeur 
 utilisez :php:meth:`Router::connectNamed()`::
 
-    <?php
     Router::connectNamed(array('chapter', 'section'));
 
 Va s'assurer que votre chapitre et les paramètres de section inversent les 
@@ -649,7 +624,6 @@ Quand vous générez les urls, en utilisant un :term:`tableau routing`, vous
 ajoutez les paramètres nommés en valeurs avec les clés en chaîne matchant 
 le nom::
 
-    <?php
     array('controller' => 'posts', 'action' => 'view', 'chapter' => 'association')
 
 Puisque 'chapter' ne matche aucun élément de route défini, il est traité en 
@@ -666,7 +640,6 @@ générer et parser les urls. La syntaxe fonctionne de façon très similaire à
 la syntaxe de tableau utilisé pour les paramètres GET. Quand vous générez les 
 urls, vous pouvez utiliser la syntaxe suivante::
 
-    <?php
     $url = Router::url(array(
         'controller' => 'posts',
         'action' => 'index',
@@ -682,7 +655,6 @@ sont ensuite parsés et stockés dans la variable passedArgs de votre
 controller en tableai, de la même façon que vous les envoyez au 
 :php:meth:`Router::url`::
 
-    <?php
     $this->passedArgs['filter'] = array(
         'published' => 1
         'frontpage' => 1
@@ -691,7 +663,6 @@ controller en tableai, de la même façon que vous les envoyez au
 Les tableaux peuvent aussi être imbriqués en profondeur, vous autorisant même 
 à plus de flexibilité dans les arguments passés::
 
-    <?php
     $url = Router::url(array(
         'controller' => 'posts',
         'action' => 'search',
@@ -722,7 +693,6 @@ Vous finiriez avec une longue et belle url comme ceci (entouré pour une lecture
 Et le tableau résultant qui serait passé au controller matcherait ceci que 
 vous avez passé au router::
 
-    <?php
     $this->passedArgs['models'] = array(
         'post' => array(
             'order' => 'asc',
@@ -750,28 +720,23 @@ dont vous contrôlez le parsing du paramètre nommé avec connectNamed().
 
 Ne parsez aucun paramètre nommé::
 
-    <?php
     Router::connectNamed(false);
 
 Parsez seulement les paramètres par défaut utilisés pour la pagination de 
 CakePHP::
 
-    <?php
     Router::connectNamed(false, array('default' => true));
 
 Parsez seulement le paramètre de la page si sa valeur est un nombre::
 
-    <?php
     Router::connectNamed(array('page' => '[\d]+'), array('default' => false, 'greedy' => false));
 
 Parsez seulement le paramètre de la page dans tous les cas::
 
-    <?php
     Router::connectNamed(array('page'), array('default' => false, 'greedy' => false));
 
 Parsez seulement le paramètre de la page si l'action courante est 'index'::
 
-    <?php
     Router::connectNamed(
         array('page' => array('action' => 'index')),
         array('default' => false, 'greedy' => false)
@@ -780,7 +745,6 @@ Parsez seulement le paramètre de la page si l'action courante est 'index'::
 Parsez seulement le paramètre de la page si l'action courante est 'index' et 
 les controller est 'pages'::
 
-    <?php
     Router::connectNamed(
         array('page' => array('action' => 'index', 'controller' => 'pages')),
         array('default' => false, 'greedy' => false)
@@ -811,14 +775,12 @@ configurer les routes plus tard et les urls générés vont automatiquement
 
 Si vous créez des urls en utilisant des chaînes de caractères comme::
 
-    <?php
     $this->Html->link('View', '/posts/view/' + $id);
 
 Et ensuite plus tard, vous décidez que ``/posts`` devrait vraiment être 
 appelé 'articles' à la place, vous devrez aller dans toute votre application 
 en renommant les urls. Cependant, si vous définissiez votre lien comme::
 
-    <?php
     $this->Html->link(
         'View', 
         array('controller' => 'posts', 'action' => 'view', $id)
@@ -832,7 +794,6 @@ Quand vous utilisez les urls en tableau, vous pouvez définir les paramètres
 chaîne de la requête et les fragments de document en utilisant les clés 
 spéciales::
 
-    <?php
     Router::url(array(
         'controller' => 'posts',
         'action' => 'index',
@@ -859,7 +820,6 @@ effectuent une redirection du header actuel si une correspondance est trouvée.
 La redirection peut survenir vers une destination dans votre application 
 ou une localisation en-dehors::
 
-    <?php
     Router::redirect(
         '/home/*', 
         array('controller' => 'posts', 'action' => 'view', 
@@ -872,7 +832,6 @@ vous permet d'utiliser d'autres routes pour définir où une chaîne url
 devrait être redirigée. Vous pouvez rediriger vers des localisations 
 externes en utilisant les chaînes url en destination::
 
-    <?php
     Router::redirect('/posts/*', 'http://google.com', array('status' => 302));
 
 Cela redirigerait ``/posts/*`` vers ``http://google.com`` avec un état statut 
@@ -907,7 +866,6 @@ Vous pouvez utiliser une classe de route personnalisée lors d'un création
 d'une route à l'aide des options de la classe ``routeClass``, et en chargeant 
 le fichier contenant votre routes avant d'essayer de l'utiliser::
 
-    <?php
     Router::connect(
          '/:slug', 
          array('controller' => 'posts', 'action' => 'view'),
@@ -946,7 +904,6 @@ API du Router
     
     Exemples::
     
-        <?php
         Router::connect('/:controller/:action/*');
     
     Le premier paramètre va être utilisé comme nom de controller alors que 
@@ -954,13 +911,11 @@ API du Router
     greedy puisqu'elle ca matcher les requêtes comme `/posts/index` ainsi que 
     les requêtes comme ``/posts/edit/1/foo/bar`` .::
     
-        <?php
         Router::connect('/home-page', array('controller' => 'pages', 'action' => 'display', 'home'));
     
     Ce qui est au-dessus montre l'utilisation d'un paramètre de route par 
     défaut. Et fournir les paramètres de routing pour une route statique.::
     
-        <?php
         Router::connect(
             '/:lang/:controller/:action/:id',
             array(),

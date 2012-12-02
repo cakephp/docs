@@ -23,7 +23,6 @@ Le callback peut être n'importe quel PHP appelable, incluant une fontion
 anonyme. L'erreur par défaut de la configuration de gestion ressemble à 
 ceci::
 
-    <?php
     Configure::write('Error', array(
         'handler' => 'ErrorHandler::handleError',
         'level' => E_ALL & ~E_DEPRECATED,
@@ -58,7 +57,6 @@ Vous pouvez créer un gestionnaire d'erreur à partir de n'importe quel type
 de callback. Par exemple, vous pouvez utiliser une classe appelée ``AppError`` 
 pour gérer vos erreurs. Ce qui suit serait à faire::
 
-    <?php
     //dans app/Config/core.php
     Configure::write('Error.handler', 'AppError::handleError');
 
@@ -77,7 +75,6 @@ erreur apparaît. Depuis que vous pouvez définir un gestionnaire d'erreur comme
 tout type de callback, vous pouvez utiliser une fonction anonyme si vous 
 utilisez PHP5.3 ou supérieur.::
 
-    <?php
     Configure::write('Error.handler', function($code, $description, $file = null, $line = null, $context = null) {
         echo 'Oh non quelque chose est apparu';
     });

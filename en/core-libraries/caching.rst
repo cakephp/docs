@@ -64,7 +64,6 @@ to use :php:meth:`Cake\\Cache\\Cache::set()` as well as centralize all your cach
 Using multiple configurations also lets you incrementally change the storage as
 needed. Example::
 
-    <?php
     Configure::write('Cache.short', array(
         'engine' => 'File',
         'duration' => '+1 hours',
@@ -130,7 +129,6 @@ as an app/libs. Or in ``$plugin/Cache/Engine/MyCustomCacheEngine.php`` as
 part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax.::
 
-    <?php
     Configure::write('Cache.custom', array(
         'engine' => 'CachePack.MyCustomCache',
         // ...
@@ -208,7 +206,6 @@ results that infrequently change, or that are subject to heavy reads into the
 cache.  A perfect example of this are the results from :php:meth:`Model::find()`
 A method that uses Cache to store results could look like::
 
-    <?php
     class Post extends AppModel {
 
         public function newest() {
@@ -239,7 +236,6 @@ resulting in an incorrect value.
 After setting an integer value you can manipulate it using
 :php:meth:`Cake\\Cache\\Cache::increment()` and :php:meth:`Cake\\Cache\\Cache::decrement()`::
 
-    <?php
     Cache::write('initial_count', 10);
 
     // Later on
@@ -262,7 +258,6 @@ group or namespace. This is a common requirement for mass-invalidating keys
 whenever some information changes that is shared among all entries in the same
 group. This is possible by declaring the groups in cache configuration::
 
-    <?php
     Configure::write('Cache.site_home', array(
         'engine' => 'Redis',
         'duration' => '+999 days',
@@ -278,7 +273,6 @@ group names.
 For instance whenever a new post is added, we could tell the Cache engine to
 remove all entries associated to the ``post`` group::
 
-    <?php
     // Model/Post.php
 
     public function afterSave($created) {
@@ -312,7 +306,6 @@ Cache API
 
     For example::
 
-        <?php
         $cloud = Cache::read('cloud');
 
         if ($cloud !== false) {
@@ -336,7 +329,6 @@ Cache API
     can store any type of object and is ideal for storing results of
     model finds.::
 
-        <?php
         if (($posts = Cache::read('posts')) === false) {
             $posts = $this->Post->find('all');
             Cache::write('posts', $posts);
@@ -359,7 +351,6 @@ Cache API
     fail to do so, the default settings will be used when the cache key
     is read.::
 
-        <?php
         Cache::set(array('duration' => '+30 days'));
         Cache::write('results', $data);
 

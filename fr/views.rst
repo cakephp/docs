@@ -89,22 +89,19 @@ En admettant que notre fichier de vue a une variable ``$posts`` avec les
 données sur notre post. Notre vue pourrait ressembler à ceci::
 
     // app/View/Posts/view.ctp
-    <?php
     $this->extend('/Common/view');
 
     $this->assign('titre', $post)
 
     $this->start('sidebar');
     ?>
-    <li><?php
-    echo $this->Html->link('edit', array(
+    <li>    echo $this->Html->link('edit', array(
         'action' => 'edit',
         $post['Post']['id']
     )); ?>
     </li>
     <?php $this->end(); ?>
 
-    <?php
     // The remaining content will be available as the 'content' block
     // in the parent view.
     echo h($post['Post']['body']);
@@ -117,7 +114,6 @@ Once its complete, the extended view will be rendered.  Calling ``extend()``
 more than once in a view file will override the parent view that will be
 processed next::
 
-    <?php
     $this->extend('/Common/view');
     $this->extend('/Common/index');
 
@@ -149,7 +145,6 @@ Blocks can be defined in two ways.  Either as a capturing block, or by direct
 assignment.  The ``start()``, ``append()`` and ``end()`` methods allow to to
 work with capturing blocks::
 
-    <?php
     // create the sidebar block.
     $this->start('sidebar');
     echo $this->element('sidebar/recent_topics');
@@ -165,7 +160,6 @@ work with capturing blocks::
 You can also append into a block using ``start()`` multiple times.  ``assign()``
 can be used to clear or overwrite a block at any time::
 
-    <?php
     // Clear the previous content from the sidebar block.
     $this->assign('sidebar', '');
 
@@ -207,7 +201,6 @@ you should use blocks.  The :php:class:`HtmlHelper` ties into view blocks, and i
 :php:meth:`~HtmlHelper::meta()` methods each update a block with the same name
 when used with the ``inline = false`` option::
 
-    <?php
     // in your view file
     $this->Html->script('carousel', array('inline' => false));
     $this->Html->css('carousel', null, array('inline' => false));
@@ -226,7 +219,6 @@ when used with the ``inline = false`` option::
 The :php:meth:`HtmlHelper` also allows you to control which block the scripts 
 and CSS go to::
 
-    <?php
     // in your view
     $this->Html->script('carousel', array('block' => 'scriptBottom'));
 
@@ -259,7 +251,6 @@ might look like::
    <title><?php echo $title_for_layout?></title>
    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
    <!-- Include external files and scripts here (See HTML helper for more info.) -->
-   <?php
    echo $this->fetch('meta');
    echo $this->fetch('css');
    echo $this->fetch('script');
@@ -307,7 +298,6 @@ but you can override it by setting it in your controller/view.
 To set the title for the layout, it's easiest to do so in the
 controller, setting the ``$title_for_layout`` variable::
 
-   <?php
    class UsersController extends AppController {
        public function view_active() {
            $this->set('title_for_layout', 'View Active Users');
@@ -316,7 +306,6 @@ controller, setting the ``$title_for_layout`` variable::
 
 You can also set the title_for_layout variable from inside the view file::
 
-    <?php
     $this->set('title_for_layout', $titleContent);
 
 You can create as many layouts as you wish: just place them in the
@@ -324,7 +313,6 @@ You can create as many layouts as you wish: just place them in the
 controller actions using the controller or view's
 :php:attr:`~View::$layout` property::
 
-    <?php
     // from a controller
     public function admin_view() {
         // stuff
@@ -339,7 +327,6 @@ space, I might create a new layout with the smaller advertising
 space and specify it as the layout for all controllers' actions
 using something like::
 
-   <?php
    class UsersController extends AppController {
        public function view_active() {
            $this->set('title_for_layout', 'View Active Users');
@@ -371,7 +358,6 @@ If you want to use a layout that exists in a plugin, you can use
 :term:`syntaxe de plugin`.  For example to use the contact layout from the
 Contacts plugin::
 
-    <?php
     class UsersController extends AppController {
         public function view_active() {
             $this->layout = 'Contacts.contact';
@@ -408,7 +394,6 @@ Passing Variables into an Element
 You can pass data to an element through the element's second
 argument::
 
-    <?php
     echo $this->element('helpbox', array(
         "helptext" => "Oh, this text is very helpful."
     ));
@@ -419,14 +404,12 @@ the controller works with view files). In the above example, the
 ``/app/View/Elements/helpbox.ctp`` file can use the ``$helptext``
 variable::
 
-    <?php
     // inside app/View/Elements/helpbox.ctp
     echo $helptext; //outputs "Oh, this text is very helpful."
 
 The :php:meth:`View::element()` method also supports options for the element.
 The options supported are 'cache' and 'callbacks'. An example::
 
-    <?php
     echo $this->element('helpbox', array(
             "helptext" => "This is passed to the element as $helptext",
             "foobar" => "This is passed to the element as $foobar",
@@ -443,7 +426,6 @@ gives you a great amount of flexibility to decide where and for how long element
 are stored.  To cache different versions of the same element in an application,
 provide a unique cache key value using the following format::
 
-    <?php
     $this->element('helpbox', array(), array(
             "cache" => array('config' => 'short', 'key' => 'unique value')
         )
@@ -461,7 +443,6 @@ controller.
 To do this, in your controller add something like the following for
 the Post example::
 
-    <?php
     class PostsController extends AppController {
         // ...
         public function index() {
@@ -502,7 +483,6 @@ caching enabled be sure to set the 'key' parameter to a different
 name each time. This will prevent each successive call from
 overwriting the previous element() call's cached result. E.g.::
 
-    <?php
     echo $this->element(
         'helpbox',
         array('var' => $var),
@@ -545,7 +525,6 @@ If the element doesn't exist in the plugin, it will look in the main APP folder.
 If your view is a part of a plugin you can omit the plugin name.  For example,
 if you are in the ``ContactsController`` of the Contacts plugin::
 
-    <?php
     echo $this->element('helpbox');
     // and
     echo $this->element('Contacts.helpbox');
@@ -575,7 +554,6 @@ To call any view method use ``$this->method()``
 
     In your view file you can do::
 
-        <?php
         $this->set('activeMenuButton', 'posts');
 
     Then in your layout the ``$activeMenuButton`` variable will be
@@ -602,7 +580,6 @@ To call any view method use ``$this->method()``
     object type and url. This method is often used by helpers that need
     to generate unique DOM ID's for elements such as the :php:class:`JsHelper`::
 
-        <?php
         $uuid = $this->uuid('form', array('controller' => 'posts', 'action' => 'index'));
         //$uuid contains 'form0425fe3bad'
 

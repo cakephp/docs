@@ -34,7 +34,6 @@ Attacher le Behavior Translate à vos Models
 Ajoutez-le à votre model en utilisant la propriété ``$actsAs`` comme dans 
 l'exemple suivant.::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
         public $actsAs = array(
@@ -53,7 +52,6 @@ Définir les Champs
 Vous pouvez définir les champs en étendant simplement la valeur ``'Translate'`` 
 avec un autre tableau, comme ::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
         public $actsAs = array(
@@ -67,7 +65,6 @@ Après avoir fait cela (par exemple, en précisant "nom" comme l'un des champs),
 vous avez déjà terminé la configuration de base. Super ! D'après notre exemple 
 courant, le model devrait maintenant ressembler à quelque chose comme cela ::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
         public $actsAs = array(
@@ -106,7 +103,6 @@ l'enregistrement de model courant, vous étendez simplement le *tableau champ*
 dans votre paramétrage du behavior, comme montré ci-dessous. Vous êtes 
 complètement libre de choisir le nommage.::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
         public $actsAs = array(
@@ -174,7 +170,6 @@ avez besoin, en utilisant la méthode bindTranslation.
 l'association, dans lequel la clé est le champ traduisible et la valeur 
 est le nom fictif de l'association.::
 
-    <?php
     $this->Post->bindTranslation(array('name' => 'nomTraduction'));
     $this->Post->find('all', array('recursive' => 1)); // il est nécessaire 
     d'avoir au moins un recursive à 1 pour que ceci fonctionne
@@ -230,7 +225,6 @@ controller ou vous pouvez le définir directement dans le model.
 
 **Example A:** Dans votre controller::
     
-    <?php
     class PostsController extends AppController {
         public $name = 'Posts';
 
@@ -247,7 +241,6 @@ controller ou vous pouvez le définir directement dans le model.
 
 **Exemple B:** Dans votre model::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
         public $actsAs = array(
@@ -281,7 +274,6 @@ Disons que nous voulons sauver nos traductions pour tous les posts dans la
 table "post-Files _i18ns" au lieu de la valeur par défaut "i18n" de la table.
 Pour faire cela vous avez besoin de paramétrer votre model comme cela ::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
         public $actsAs = array(
@@ -311,7 +303,6 @@ pour définir le displayField directement dans le model utilisant ce behavior.
 
 Assurez vous de changer le ``$displayField`` en ``'field'``.::
 
-    <?php
     class PostI18n extends AppModel { 
         public $displayField = 'field'; // important
     }
@@ -328,7 +319,6 @@ Modification d'une Table
 Si vous voulez changer le nom de la table, il vous suffit simplement 
 de définir $translateTable dans votre model, comme ceci ::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
         public $actsAs = array(

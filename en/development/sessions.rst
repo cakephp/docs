@@ -53,7 +53,6 @@ non-SSL protocols, then you might have problems with sessions being lost.  If
 you need access to the session on both SSL and non-SSL domains you will want to
 disable this::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'php',
         'ini' => array(
@@ -64,7 +63,6 @@ disable this::
 Session cookie paths default to ``/`` in 2.0, to change this you can use the
 ``session.cookie_path`` ini flag to the directory path of your application::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'php',
         'ini' => array(
@@ -81,7 +79,6 @@ custom solution.  To use defaults, simply set the 'defaults' key to the name of
 the default you want to use.  You can then override any sub setting by declaring
 it in your Session config::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'php'
     ));
@@ -90,7 +87,6 @@ The above will use the built-in 'php' session configuration.  You could augment
 part or all of it by doing the following::
 
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'php',
         'cookie' => 'my_app',
@@ -116,7 +112,6 @@ object you want to use for session saving. There are two ways to use the
 'handler'.  The first is to provide an array with 5 callables.  These callables
 are then applied to ``session_set_save_handler``::
 
-    <?php
     Configure::write('Session', array(
         'userAgent' => false,
         'cookie' => 'my_cookie',
@@ -166,7 +161,6 @@ Most of the time you will only need to set ``Session.handler.model`` in your
 configuration as well as choose the database defaults::
 
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'database',
         'handler' => array(
@@ -188,7 +182,6 @@ start to expire as records are evicted.
 
 To use Cache based sessions you can configure you Session config like::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'cache',
         'handler' => array(
@@ -210,7 +203,6 @@ configurations, as well as custom ones. The ``ini`` key in the session settings,
 allows you to specify individual configuration values. For example you can use
 it to control settings like ``session.gc_divisor``::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'php',
         'ini' => array(
@@ -232,7 +224,6 @@ First we'll need to create our custom class and put it in
 ``app/Model/Datasource/Session/ComboSession.php``.  The class should look
 something like::
 
-    <?php
     App::uses('DatabaseSession', 'Model/Datasource/Session');
 
     class ComboSession extends DatabaseSession implements CakeSessionHandlerInterface {
@@ -282,7 +273,6 @@ operation.  This lets us fetch sessions from the fast cache, and not have to
 worry about what happens when we fill the cache.  Using this session handler is
 also easy.  In your ``core.php`` make the session block look like the following::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'database',
         'handler' => array(
@@ -316,21 +306,18 @@ session, ``CakeSession`` provides a simple CRUD interface.
 You can read values from the session using :php:meth:`Set::classicExtract()`
 compatible syntax::
 
-    <?php
     CakeSession::read('Config.language');
 
 .. php:staticmethod:: write($key, $value)
 
 ``$key`` should be the dot separated path you wish to write ``$value`` to::
 
-    <?php
     CakeSession::write('Config.language', 'eng');
 
 .. php:staticmethod:: delete($key)
 
 When you need to delete data from the session, you can use delete::
 
-    <?php
     CakeSession::delete('Config.language');
 
 You should also see the documentation on

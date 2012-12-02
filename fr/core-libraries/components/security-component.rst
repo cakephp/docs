@@ -72,7 +72,6 @@ dans le contrôleur.
     La fonction de rappel doit s'attendre a un paramètre indiquant le type
     d'erreur::
     
-        <?php
         public function beforeFilter() {
             $this->Security->blackHoleCallback = 'blackhole';
         }
@@ -205,7 +204,6 @@ beforeFilter() de votre contrôleur. Vous pouvez spécifier les restrictions
 de sécurité que vous voulez et le composant Security les forcera 
 au démarrage::
 
-    <?php
     class WidgetController extends AppController {
     
         public $components = array('Security');
@@ -218,7 +216,6 @@ au démarrage::
 Dans cette exemple, l'action delete peut être effectuée 
 avec succès si celui ci reçoit une requête POST::
 
-    <?php
     class WidgetController extends AppController {
     
         public $components = array('Security');
@@ -233,7 +230,6 @@ avec succès si celui ci reçoit une requête POST::
 Cette exemple forcera toutes les actions qui proviennent de la 
 "route" Admin à être effectuées via des requêtes sécurisées SSL::
 
-    <?php
     class WidgetController extends AppController {
     
         public $components = array('Security');
@@ -281,7 +277,6 @@ Par défaut les jetons CSRF sont valides 30 minutes et expire à l'utilisation.
 Vous pouvez contrôler la durée des jetons en paramétrant csrfExpires
 dans le composant.::
 
-    <?php
     public $components = array(
         'Security' => array(
             'csrfExpires' => '+1 hour'
@@ -291,7 +286,6 @@ dans le composant.::
 Vous pouvez aussi définir cette propriété dans la partie ``beforeFilter``
 de votre contrôleur.::
 
-    <?php
     public function beforeFilter() {
         $this->Security->csrfExpires = '+1 hour';
         // ...
@@ -324,7 +318,6 @@ activer la multi-utilisation des jetons en paramétrant ``csrfUseOnce`` à
 ``false``. Ceci peut être effectué dans le tableau components, ou dans la 
 partie ``beforeFilter`` de votre contrôleur::
 
-    <?php
     public $components = array(
         'Security' => array(
             'csrfUseOnce' => false

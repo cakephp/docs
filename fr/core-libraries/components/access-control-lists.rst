@@ -496,7 +496,6 @@ d'inclure les composants ACL de Cake dans le tableau $composents du controller :
 
 ::
 
-    <?php
     public $components = array('Acl');
 
 Quand ce sera fait, nous verrons quelques exemples de création de 
@@ -755,7 +754,6 @@ composant Acl.
 
 ::
 
-    <?php
     class SomethingsController extends AppController {
         // Vous pourriez placer çà dans AppController
         // mais cela fonctionne bien ici aussi.
@@ -769,7 +767,6 @@ dans une action à l'intérieur de ce contrôleur.
 
 ::
 
-    <?php
     function index() {
         //Autorise un accès complet aux armes pour les guerriers
         //Ces exemples utilisent tous deux la syntaxe avec un alias
@@ -786,7 +783,7 @@ dans une action à l'intérieur de ce contrôleur.
 Le premier appel que nous faisons au composant Acl donne, à tout 
 utilisateur appartenant au groupe ARO 'guerriers', un accès total à tout 
 ce qui appartient au groupe ACO 'Armes'. Ici nous adressons simplement 
- les ACOs et AROs d'après leurs alias.
+les ACOs et AROs d'après leurs alias.
 
 Avez-vous noté l'usage du troisième paramètre ? C'est là où nous utilisons 
 ces actions bien pratiques qui sont intégrées à tous les ACOs de Cake. 
@@ -805,7 +802,6 @@ est équivalent à ceci :
 
 ::
 
-    <?php
     // 6342 = Legolas
     // 1564 = Gimli
     
@@ -836,14 +832,12 @@ La syntaxe de base pour faire une vérification des permissions est :
 
 ::
 
-    <?php
     $this->Acl->check($aro, $aco, $action = '*');
 
 Faisons un essai dans une action de contrôleur :
 
 ::
 
-    <?php
     function index() {
         // Tout cela renvoi true:
         $this->Acl->check('guerriers/Aragorn', 'Armes');

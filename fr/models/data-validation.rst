@@ -19,7 +19,6 @@ La première étape pour la validation de données est de créer les règles dan
 le Model. Pour ce faire, utilisez le tableau Model::validate dans la 
 définition du model, par exemple::
 
-    <?php
     class User extends AppModel {  
         public $name = 'User';
         public $validate = array();
@@ -31,7 +30,6 @@ En supposant que la table "users" ait les champs "login",
 "mot_de_passe", "email" et "date_de_naissance", l'exemple ci-dessous 
 montre quelques règles simples de validation qui s'appliquent à ces champs::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $validate = array(
@@ -57,7 +55,6 @@ couvrirons cela en détail plus loin.
 Voici un autre exemple de validation plus complexe qui tire avantage de 
 quelques-unes de ces règles pré-définies::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $validate = array(
@@ -109,7 +106,6 @@ Comme le suggère le nom, c'est la manière la plus simple de définir une
 règle de validation. La syntaxe générale pour définir des règles de cette 
 manière est::
 
-    <?php
     public $validate = array('nomChamp' => 'nomRegle');
 
 Où 'nomChamp' est le nom du champ pour lequel la règle est définie, et 
@@ -118,7 +114,6 @@ Où 'nomChamp' est le nom du champ pour lequel la règle est définie, et
 Par exemple, pour s'assurer que l'user fourni une adresse email 
 correcte, vous pouvez utiliser cette règle::
 
-    <?php
     public $validate = array('email_user' => 'email');
 
 
@@ -129,7 +124,6 @@ Cette technique de définition permet un meilleur contrôle sur le fonctionnemen
 des règles de validation. Mais avant d'aborder ce point, regardons le schéma 
 d'utilisation général pour ajouter une règle à un seul champ::
 
-    <?php
     public $validate = array(
         'champ1' => array(
             'rule'       => 'nomRegle', // ou bien : array('nomRegle', 'parametre1', 'parametre2' ...)
@@ -162,7 +156,6 @@ allez voir :ref:`core-validation-rules`.
 Si la règle ne nécessite pas de paramètre, 'rule' peut-être une simple 
 valeur, comme::
 
-    <?php
     public $validate = array(
         'login' => array(
             'rule' => 'alphaNumeric'
@@ -172,7 +165,6 @@ valeur, comme::
 Si la règle nécessite quelques paramètres (tels que un maximum, un 
 minimum ou une plage de valeurs), 'rule' doit être un tableau::
 
-    <?php
     public $validate = array(
         'mot_de_passe' => array(
             'rule' => array('minLength', 8)
@@ -192,7 +184,6 @@ dans le tableau de données. Tandis que mettre le champ à ``create`` ou
 création ou de mise à jour. Par exemple, si la règle de validation a 
 été définie comme suit::
 
-    <?php
     public $validate = array(
         'login' => array(
             'rule'     => 'alphaNumeric',
@@ -250,7 +241,6 @@ La clé 'message'
 La clé ‘message’ vous permet de définir un message d'erreur de validation 
 personnalisé pour la règle::
 
-    <?php
     public $validate = array(
         'mot_de_passe' => array(
             'rule'    => array('minLength', 8),
@@ -270,7 +260,6 @@ permet d'affecter plusieurs règles de validation par champ de model.
 Si vous souhaitiez affecter plusieurs règles de validation à un seul champ, 
 voici basiquement comment il faudrait faire::
 
-    <?php
     public $validate = array(
         'nomChamp' => array(
             'nomRegle' => array(
@@ -292,7 +281,6 @@ de paramètres de validation.
 
 Ce sera plus explicite avec un exemple pratique::
 
-    <?php
     public $validate = array(
         'login' => array(
             'regleLogin-1' => array(
@@ -338,7 +326,6 @@ Si la technique de validation dont vous avez besoin peut être complétée par
 l'utilisation d'une expression régulière, vous pouvez définir une expression 
 personnalisée comme une règle de validation de champ::
 
-    <?php
     public $validate = array(
         'login' => array(
             'rule'    => '/^[a-z0-9]{3,}$/i',
@@ -361,7 +348,6 @@ suffit pas. Par exemple, si vous voulez vous assurer qu'un coupon de réduction
 (code promo) n'est pas utilisé plus de 25 fois, vous devez ajouter votre 
 propre méthode de validation, comme indiqué ci-dessous::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
 
@@ -408,7 +394,6 @@ $check. Le tableau $check est passé avec le nom du champ comme clé et la
 valeur du champ comme valeur. Le champ complet qui doit être validé est 
 stocké dans une variable de $this->data::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
 
@@ -447,7 +432,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     Les données pour ce champ ne doivent contenir que chiffres et lettres::
 
-        <?php
         public $validate = array(
             'login' => array(
                 'rule'    => 'alphaNumeric',
@@ -462,7 +446,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     numérique spécifiée. Les valeurs minimum et maximum doivent être toutes 
     les deux fournies. Cette méthode utilise <= et non <::
 
-        <?php
         public $validate = array(
             'mot_de_passe' => array(
                 'rule'    => array('between', 5, 15),
@@ -482,7 +465,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     seulement des caractères blancs y sont présent. Les caractères blancs 
     incluent l'espace, la tabulation, le retour chariot et nouvelle ligne.::
 
-        <?php
         public $validate = array(
             'id' => array(
                 'rule' => 'blank',
@@ -497,7 +479,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     possibles sont : true ou false, les entiers 0 ou 1, les chaînes '0' ou 
     '1'.::
 
-        <?php
         public $validate = array(
             'maCaseACocher' => array(
                 'rule'    => array('boolean'),
@@ -544,7 +525,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     régulière, laquelle sera utilisée pour valider le numéro de la carte de 
     crédit::
 
-        <?php
         public $validate = array(
             'numero_cc' => array(
                 'rule'    => array('cc', array('visa', 'maestro'), false, null),
@@ -560,7 +540,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     égal”, “égal à” et “non égal”. Quelques exemples sont indiqués 
     ci-dessous::
 
-        <?php
         public $validate = array(
             'age' => array(
                 'rule'    => array('comparison', '>=', 18),
@@ -580,7 +559,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     Utilisé quand une règle personnalisée est nécessaire::
 
-        <?php
         public $validate = array(
             'infinite' => array(
                 'rule'    => array('custom', '\u221E'),
@@ -611,7 +589,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     Si aucune clé n'est soumise, la clé par défaut 'ymd' sera utilisée::
 
-        <?php
         public $validate = array(
             'date_de_naissance' => array(
                 'rule'       => array('date', 'ymd'),
@@ -650,7 +627,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     Si aucune clé n'est fournie, la clé par défaut qui sera utilisée est 
     ‘ymd’::
 
-        <?php
         public $validate = array(
             'birthday' => array(
                 'rule'    => array('datetime', 'dmy'),
@@ -673,7 +649,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     comme un nombre scientifique à virgule flottante, entraînant une erreur 
     si aucune décimale n'est trouvée après le point::
 
-        <?php
         public $validate = array(
             'prix' => array(
                 'rule' => array('decimal', 2)
@@ -687,7 +662,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     un booléen true comme second paramètre de cette règle, elle tentera de 
     vérifier aussi, que l'hôte de l'adresse soit valide::
     
-        <?php
         public $validate = array('email' => array('rule' => 'email'));
         
         public $validate = array(
@@ -705,7 +679,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     ::
 
-        <?php
         public $validate = array(
             'nourriture' => array(
                 'rule'    => array('equalTo', 'gâteau'),
@@ -722,7 +695,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     ::
 
-        <?php
         public $validate = array(
             'image' => array(
                 'rule'    => array('extension', array('gif', 'jpeg', 'png', 'jpg')),
@@ -739,7 +711,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     Exemple::
 
-        <?php
         public $validate = array(
             'fonction' => array(
                  'choixAutorise' => array(
@@ -757,7 +728,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     ::
 
-        <?php
         public $validate = array(
             'ip_client' => array(
                 'rule'    => array('ip', 'IPv4'), // or 'IPv6' ou 'both' (default)
@@ -773,7 +743,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     ::
 
-        <?php
         public $validate = array(
             'login' => array(
                 'rule'    => 'isUnique',
@@ -794,7 +763,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     ::
 
-        <?php
         public $validate = array(
             'login' => array(
                 'rule'    => array('maxLength', 15),
@@ -814,7 +782,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     ::
 
-        <?php
         public $validate = array(
             'login' => array(
                 'rule'    => array('minLength', 8),
@@ -835,7 +802,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     ::
 
-        <?php
         public $validate = array(
             'salaire' => array(
                 'rule'    => array('money', 'left'),
@@ -850,7 +816,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     ::
 
-        <?php
         public $validate = array(
             'multiple' => array(
                 'rule' => array('multiple', array(
@@ -867,7 +832,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     La règle de base pour s'assurer qu'un champ n'est pas vide.::
 
-        <?php
         public $validate = array(
             'titre' => array( 
                 'rule'    => 'notEmpty',
@@ -883,7 +847,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     Vérifie si la donnée passée est un nombre valide.::
 
-        <?php
         public $validate = array(
             'cars' => array(
                 'rule'    => 'numeric',
@@ -901,7 +864,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     ::
 
-        <?php
         public $validate = array(
             'telephone' => array(
                 'rule' => array('phone', null, 'us')
@@ -918,7 +880,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     ::
 
-        <?php
         public $validate = array(
             'code_postal' => array(
                 'rule' => array('postal', null, 'us')
@@ -934,7 +895,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     ::
 
-        <?php
         public $validate = array(
             'nombre' => array(
                 'rule'    => array('range', -1, 11),
@@ -959,7 +919,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     ::
 
-        <?php
         public $validate = array(
             'ssn' => array(
                 'rule' => array('ssn', null, 'us')
@@ -979,7 +938,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     Cette règle vérifie les formats valides d'URL. Elle supporte les 
     protocoles http(s), ftp(s), file, news et gopher::
 
-        <?php
         public $validate = array(
             'siteweb' => array(
                 'rule' => 'url'
@@ -989,7 +947,6 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     Pour s'assurer qu'un protocole est présent dans l'url, le mode strict 
     mode peut être activé comme ceci::
 
-        <?php
         public $validate = array(
             'siteweb' => array(
                 'rule' => array('url', true)

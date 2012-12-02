@@ -63,7 +63,6 @@ in the controller.
     blackholed. A blackhole callback can be any public method on a controllers.
     The callback should expect an parameter indicating the type of error::
 
-        <?php
         public function beforeFilter() {
             $this->Security->blackHoleCallback = 'blackhole';
         }
@@ -194,7 +193,6 @@ Using the security component is generally done in the controller
 beforeFilter(). You would specify the security restrictions you
 want and the Security Component will enforce them on its startup::
 
-    <?php
     class WidgetController extends AppController {
     
         public $components = array('Security');
@@ -207,7 +205,6 @@ want and the Security Component will enforce them on its startup::
 In this example the delete action can only be successfully
 triggered if it receives a POST request::
 
-    <?php
     class WidgetController extends AppController {
     
         public $components = array('Security');
@@ -222,7 +219,6 @@ triggered if it receives a POST request::
 This example would force all actions that had admin routing to
 require secure SSL requests::
 
-    <?php
     class WidgetController extends AppController {
     
         public $components = array('Security');
@@ -267,7 +263,6 @@ you can benefit from the CSRF protection it provides. By default CSRF tokens are
 valid for 30 minutes and expire on use. You can control how long tokens last by setting
 csrfExpires on the component.::
 
-    <?php
     public $components = array(
         'Security' => array(
             'csrfExpires' => '+1 hour'
@@ -276,7 +271,6 @@ csrfExpires on the component.::
 
 You can also set this property in your controller's ``beforeFilter``::
 
-    <?php
     public function beforeFilter() {
         $this->Security->csrfExpires = '+1 hour';
         // ...
@@ -304,7 +298,6 @@ applications. You can toggle on longer, multi-use tokens by setting
 ``csrfUseOnce`` to ``false``. This can be done in the components array, or in
 the ``beforeFilter`` of your controller::
 
-    <?php
     public $components = array(
         'Security' => array(
             'csrfUseOnce' => false

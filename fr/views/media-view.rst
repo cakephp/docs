@@ -15,7 +15,6 @@ d'utiliser la classe MediaView au lieu de la classe View par défaut. Après
 ça, passez juste les paramètres en plus pour spécifier où votre fichier 
 se trouve::
 
-    <?php
     class ExempleController extends AppController {
         public function telecharger () {
             $this->viewClass = 'Media';
@@ -35,7 +34,6 @@ Ici vous trouvez un exemple de rendu d'un fichier qui a un type mime qui n'est
 pas inclu dans le tableau ``$mimeType`` de MediaView. Nous utilisons aussi un
 chemin relatif qui va être par défaut dans votre dossier ``app/webroot``::
 
-    <?php
     public function telecharger () {
         $this->viewClass = 'Media';
         // Rend app/webroot/files/exemple.docx

@@ -10,7 +10,6 @@ model, utilisez:
 
 ::
 
-    <?php
     $dataSource = $this->getDataSource();
 
 Vous pouvez utiliser la source de données pour commencer, committer, ou faire 
@@ -18,7 +17,6 @@ des transactions roll back.
 
 ::
 
-    <?php
     $dataSource->begin();
     
     // Effectue certaine tâche

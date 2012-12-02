@@ -25,7 +25,6 @@ propriété :php:attr:`~Controller::$helpers`, qui liste les helpers
 disponibles dans la vue. Pour activer un helper dans votre vue, ajoutez 
 son nom au tableau ``$helpers`` du controller::
 
-    <?php
     class BakeriesController extends AppController {
         public $helpers = array('Form', 'Html', 'Js', 'Time');
     }
@@ -33,7 +32,6 @@ son nom au tableau ``$helpers`` du controller::
 L'ajout des helpers depuis les plugins utilise la :term:`syntaxe de plugin`
 utilisée partout ailleurs dans CakePHP::
 
-    <?php
     class BakeriesController extends AppController {
         public $helpers = array('Blog.Comment');
     }
@@ -44,7 +42,6 @@ controller. Ceci économise de la puissance de calcul pour les autres actions
 qui n'utilisent pas le helper, tout en permettant de conserver le controller 
 mieux organisé::
 
-    <?php
     class BakeriesController extends AppController {
         public function bake {
             $this->helpers[] = 'Time';
@@ -60,7 +57,6 @@ son nom dans le tableau ``$helpers`` du fichier
 ``/app/Controller/AppController.php`` (à créer si pas présent). N'oubliez pas 
 d'inclure les helpers par défaut Html et Form::
 
-    <?php
     class AppController extends Controller {
         public $helpers = array('Form', 'Html', 'Js', 'Time');
     }
@@ -69,7 +65,6 @@ Vous pouvez passer des options dans les helpers. Ces options peuvent être
 utilisées pour définir les valeurs d'attributs ou modifier le behavior du
 helper::
 
-    <?php
     class AwesomeHelper extends AppHelper {
         public function __construct(View $view, $settings = array()) {
             parent::__construct($view, $settings);
@@ -86,7 +81,6 @@ permet de créer des helpers alias dans vos vues. Cette fonctionnalité est
 utile quand vous voulez remplacer ``$this->Html`` ou tout autre Helper de
 référence avec une mise en oeuvre personnalisée::
 
-    <?php
     // app/Controller/PostsController.php
     class PostsController extends AppController {
         public $helpers = array(
@@ -123,7 +117,6 @@ des controllers. Si vous avez des options de configuration qui ne peuvent pas
 être inclues comme des parties de déclaration de classe, vous pouvez les définir
 dans le callback beforeRender de votre controller::
 
-    <?php
     class PostsController extends AppController {
         public function beforeRender() {
             parent::beforeRender();
@@ -139,7 +132,6 @@ votre controller, chaque helper est exposé en propriété publique dans la vue.
 Par exemple, si vous utilisiez :php:class:`HtmlHelper`, vous seriez capable 
 d'y accéder en faisant ce qui suit::
 
-    <?php
     echo $this->Html->css('styles');
 
 Ce qui est au-dessus appelerait la méthode ``css`` du HtmlHelper.  Vous pouvez
@@ -148,7 +140,6 @@ Il peut venir un temps où vous aurez besoin de charger dynamiquement un helper
 à partir d'une vue. Vous pouvez utiliser la vue du :php:class:`HelperCollection`
 pour le faire::
 
-    <?php
     $mediaHelper = $this->Helpers->load('Media', $mediaSettings);
 
 Le HelperCollection est une :doc:`collection </core-libraries/collections>` et 
@@ -174,7 +165,6 @@ la structure d'assistant existante dans CakePHP, vous devrez créer une nouvelle
 classe dans ``/app/View/Helper``. Appelons notre assistant LienHelper. Le 
 fichier de la classe PHP devrait ressembler à quelque chose comme ceci::
 
-    <?php
     /* /app/View/Helper/LienHelper.php */
     App::uses('AppHelper', 'View/Helper');
     
@@ -198,7 +188,6 @@ un autre helper. Pour faire cela, vous pouvez spécifier les helpers que
 vous souhaitez utiliser avec un tableau ``$helpers``, formaté comme vous le 
 feriez dans un controller::
 
-    <?php
     /* /app/View/Helper/LienHelper.php (Utilisant d'autres helpers) */
     App::uses('AppHelper', 'View/Helper');
     
@@ -224,7 +213,6 @@ Une fois que vous avez créez votre helper et l'avez placé dans
 ``/app/View/Helper/``, vous serez capable de l'inclure dans vos controllers 
 en utilisant la variable spéciale :php:attr:`~Controller::$helpers`::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Lien');
     }
@@ -244,7 +232,6 @@ Tous les helpers étendent une classe spéciale, AppHelper (comme les modèles
 fonctionnalité disponible pour tous les helpers, créez
 ``/app/View/Helper/AppHelper.php``::
 
-    <?php
     App::uses('Helper', 'View');
     
     class AppHelper extends Helper {

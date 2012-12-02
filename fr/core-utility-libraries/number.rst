@@ -6,7 +6,6 @@ CakeNumber
 Si vous avez besoin des fonctionnalités de :php:class:`NumberHelper` en dehors 
 d'une ``View``, utilisez la classe ``CakeNumber``::
 
-    <?php
     class UsersController extends AppController {
 
         public $components = array('Auth');
@@ -39,7 +38,6 @@ automatiqement la sortie dans la vue.
     monnaie courante (EUR,GBP,USD). L'utilisation dans une vue ressemble à 
     ceci::
 
-        <?php
         // Appelé par NumberHelper
         echo $this->Number->currency($number, $currency);
 
@@ -108,7 +106,6 @@ automatiqement la sortie dans la vue.
     Si une valeur $currency non reconnue est fournie, elle est préfixée par un 
     nombre formaté en USD. Par exemple::
 
-        <?php
         // Appelé par NumberHelper
         echo $this->Number->currency('1234.56', 'FOO');
 
@@ -148,7 +145,6 @@ automatiqement la sortie dans la vue.
     Ajouter le format de monnaie au helper Number. Facilite la réutilisation 
     des formats de monnaie.::
 
-        <?php
         // appelé par NumberHelper
         $this->Number->addFormat('BRR', array('before' => 'R$ '));
 
@@ -159,7 +155,6 @@ automatiqement la sortie dans la vue.
     Vous pouvez maintenant utiliser `BRR` de manière courte quand vous 
     formattez les montants de monnaie::
 
-        <?php
         // appelé par NumberHelper
         echo $this->Number->currency($value, 'BRR');
 
@@ -169,7 +164,6 @@ automatiqement la sortie dans la vue.
 
     Les formats ajoutés sont fusionnés avec les formats par défaut suivants::
 
-       <?php
        array(
            'wholeSymbol'      => '',
            'wholePosition'    => 'before',
@@ -192,7 +186,6 @@ automatiqement la sortie dans la vue.
     (place de la décimal). Elle arrondira afin de maintenir le niveau de 
     précision défini.:: 
 
-        <?php
         // appelé par NumberHelper
         echo $this->Number->precision(456.91873645, 2 );
 
@@ -214,7 +207,6 @@ automatiqement la sortie dans la vue.
     précision). Cette méthode exprime aussi le nombre en tant que 
     pourcentage et préfixe la sortie avec un signe de pourcent.::
     
-        <?php
         // appelé par NumberHelper
         echo $this->Number->toPercentage(45.691873645);
 
@@ -235,7 +227,6 @@ automatiqement la sortie dans la vue.
     à deux chiffres, selon la taille de données fournie (ex: les tailles 
     supérieurs sont exprimées dans des termes plus larges)::
 
-        <?php
         // appelé par NumberHelper
         echo $this->Number->toReadableSize(0); // 0 Bytes
         echo $this->Number->toReadableSize(1024); // 1 KB
@@ -256,7 +247,6 @@ automatiqement la sortie dans la vue.
     méthode principale par la plupart des autres méthodes de NumberHelper). 
     L'utilisation de cette méthode pourrait ressembler à cela::
 
-        <?php
         // appelé par NumberHelper
         $this->Number->format($number, $options);
 
@@ -285,7 +275,6 @@ automatiqement la sortie dans la vue.
 
     Exemple::
 
-        <?php
         // appelé par NumberHelper
         echo $this->Number->format('123456.7890', array(
             'places' => 2,

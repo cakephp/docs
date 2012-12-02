@@ -208,7 +208,6 @@ application </getting-started>`.
 Not working? If you're getting timezone related error from PHP
 uncomment one line in ``app/Config/core.php``::
 
-   <?php
    /**
     * Uncomment this line and correct your server timezone to fix 
     * any date & time related errors.

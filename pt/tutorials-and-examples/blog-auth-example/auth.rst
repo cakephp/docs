@@ -29,7 +29,6 @@ o mecanismos de login de nossos usuários.
 A próxima etapa é criar o nosso model User, responsável pelas pesquisas, gravações e
 validações de dados dos usuários::
 
-    <?php
     // app/Model/User.php
     class User extends AppModel {
         public $name = 'User';
@@ -59,7 +58,6 @@ validações de dados dos usuários::
 Vamos criar também nosso UsersController, o conteúdo a seguir corresponde a classe UsersController
 básica `cozida` usando o ferramenta de geração de códigos presente no CakePHP::
 
-    <?php
     // app/Controller/UsersController.php
     class UsersController extends AppController {
 
@@ -130,15 +128,16 @@ básica `cozida` usando o ferramenta de geração de códigos presente no CakePH
 
 Da mesma forma criamos as views para nossos posts no blog ou usando a ferramanta
 de geração de código, nós implementamos as views. Para o propósito de nosso tutorial, iremos
-mostrar somente o add.ctp::
+mostrar somente o add.ctp:
+
+.. code-block:: php
 
     <!-- app/View/Users/add.ctp -->
     <div class="users form">
     <?php echo $this->Form->create('User');?>
         <fieldset>
             <legend><?php echo __('Add User'); ?></legend>
-        <?php
-            echo $this->Form->input('username');
+            <?php echo $this->Form->input('username');
             echo $this->Form->input('password');
             echo $this->Form->input('role', array(
                 'options' => array('admin' => 'Admin', 'author' => 'Author')
@@ -159,7 +158,6 @@ possuem permissão.
 Para adicionar esse componente em sua aplicação abra seu arquivo ``app/Controller/AppController.php``
 e adicione as seguintes linhas::
 
-    <?php
     // app/Controller/AppController.php
     class AppController extends Controller {
         //...
@@ -191,7 +189,6 @@ e o mais importante encriptar a senha pra que ela não seja armazenada como text
 Vamos dizer ao AuthComponet para permitir usuários deslogados acessarem a função
 add e implementar a ação de login e logout::
 
-    <?php
     // app/Controller/UsersController.php
 
     public function beforeFilter() {
@@ -214,7 +211,6 @@ add e implementar a ação de login e logout::
 Hash da senha não foi feito ainda, abra o seu arquivo de model ``app/Model/User.php`` 
 e adicione o seguinte::
 
-    <?php
     // app/Model/User.php
     App::uses('AuthComponent', 'Controller/Component');
     class User extends AppModel {
@@ -231,15 +227,16 @@ e adicione o seguinte::
     // ...
 
 Então, agora toda vez que um usuário for salvo, a senha será  encriptada usando o hashing padrão disponibilizado pela
-classe AuthComponent. Está faltando somente um arquivo view para a função de login, Aqui está ele::
+classe AuthComponent. Está faltando somente um arquivo view para a função de login, Aqui está ele:
+
+.. code-block:: php
 
     <div class="users form">
     <?php echo $this->Session->flash('auth'); ?>
     <?php echo $this->Form->create('User');?>
         <fieldset>
             <legend><?php echo __('Please enter your username and password'); ?></legend>
-        <?php
-            echo $this->Form->input('username');
+            <?php echo $this->Form->input('username');
             echo $this->Form->input('password');
         ?>
         </fieldset>
@@ -279,7 +276,6 @@ a referencia ao model User::
 Também, é necessária uma pequena mudança no PostsController para guardar a referência do usuário logado para o
 post criado::
 
-    <?php
     // app/Controller/PostsController.php
     public function add() {
         if ($this->request->is('post')) {
@@ -300,7 +296,6 @@ Uma regra basica para nossa aplicação é que usuários admin podem acessar qua
 (o papel author) pode somente acessar as actions permitidas.
 Abra novamente a classe AppController e adicione um pouco mais de opções para as configurações do Auth::
 
-    <?php
     // app/Controller/AppController.php
 
     public $components = array(
@@ -331,7 +326,6 @@ add de PostsController deve permitir ao autores criaresmo post mas evitar a
 edição de posts se não corresponde. Abra o arquivo ``PostsController.php``
 e adicione o seguinte conteúdo::
 
-    <?php
     // app/Controller/PostsController.php
 
     public function isAuthorized($user) {
@@ -356,7 +350,6 @@ autorizado a editar ou post ou não, nós estamos chamando a função ``isOwnedB
 no model Post. Isso normamlmente é uma boa prática para mover tanta lógica quanto possivél
 para dentro dos models. Vamos então implementar essa função::
 
-    <?php
     // app/Model/Post.php
 
     public function isOwnedBy($post, $user) {

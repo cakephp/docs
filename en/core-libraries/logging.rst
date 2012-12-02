@@ -60,7 +60,6 @@ would be placed in
 adapters you should use Configure.  For example configuring our DatabaseLogger
 would look like::
 
-    <?php
     // for App/Log
     Configure::write('Log.otherFile', [
         'engine' => 'DatabaseLogger',
@@ -79,7 +78,6 @@ When configuring a log adapter the ``engine`` parameter is used to
 locate and load the log handler. All of the other configuration
 properties are passed to the log adapter's constructor as an array.::
 
-    <?php
     use Cake\Log\LogInterface;
 
     class DatabaseLogger implements LogInterface {
@@ -128,7 +126,6 @@ message being written determines the name of the file the message is stored in.
 If a type is not supplied, :php:const:`LOG_ERROR` is used which writes to the
 error log. The default log location is ``app/tmp/logs/$level.log``::
 
-    <?php
     // Executing this inside a CakePHP class
     $this->log("Something didn't work!");
     
@@ -142,7 +139,6 @@ You can configure additional/alternate FileLog locations when configuring
 a logger.FileLog accepts a ``path`` which allows for
 custom paths to be used::
 
-    <?php
     Configure::write('Log.custom_path', [
         'engine' => 'FileLog',
         'path' => '/path/to/custom/place/'
@@ -159,14 +155,12 @@ Writing to logs
 Writing to the log files can be done in 2 different ways. The first
 is to use the static :php:meth:`Cake\\Log\\Log::write()` method::
 
-    <?php
     Log::write('debug', 'Something did not work');
 
 The second is to use the log() shortcut function available on any
 class that extends ``Object``. Calling log() will internally call
 ``Log::write()``::
 
-    <?php
     // Executing this inside a CakePHP class:
     $this->log("Something did not work!", 'debug');
 
@@ -213,7 +207,6 @@ the log messages will be directed to those loggers.  If a log message is written
 to an unknown scope, loggers that handle that level of message will log the
 message. For example::
 
-    <?php
     // configure tmp/logs/shops.log to receive all levels, but only
     // those with `orders` and `payments` scope
     Configure::write('Log.shops', [
@@ -269,17 +262,19 @@ level configuration.
 
 .. php:staticmethod:: enabled($streamName)
 
-    Checks wether $streamName is enable
-
-    :returns: boolean
+    Checks whether ``$streamName`` has been enabled.
 
 .. php:staticmethod:: enable($streamName)
 
-    Enable stream $streamName
+    :returns: void
+
+    Enable the stream ``$streamName``.
 
 .. php:staticmethod:: disable($streamName)
 
-    Disable stream $streamName
+    :returns: void
+
+    Disable the stream ``$streamName``.
 
 .. php:staticmethod:: engine($name, $engine = null)
 

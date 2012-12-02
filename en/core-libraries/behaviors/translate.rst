@@ -33,7 +33,6 @@ Attaching the Translate Behavior to your Models
 Add it to your model by using the ``$actsAs`` property like in the
 following example.::
 
-    <?php
     class Post extends AppModel {
         public $actsAs = array(
             'Translate'
@@ -51,7 +50,6 @@ Defining the Fields
 You can set the fields by simply extending the ``'Translate'``
 value with another array, like so::
 
-    <?php
     class Post extends AppModel {
         public $actsAs = array(
             'Translate' => array(
@@ -64,7 +62,6 @@ After you have done that (for example putting "title" as one of the
 fields) you already finished the basic setup. Great! According to
 our current example the model should now look something like this::
 
-    <?php
     class Post extends AppModel {
         public $actsAs = array(
             'Translate' => array(
@@ -100,7 +97,6 @@ Retrieve translated fields in a specific locale
 
 By setting ``$Model->locale`` you can read translations for a specific locale::
 
-    <?php
     // Read the spanish locale data.
     $this->Post->locale = 'es';
     $results = $this->Post->find('first', array(
@@ -115,7 +111,6 @@ If you want to have all translation records attached to the current
 model record you simply extend the **field array** in your behavior
 setup as shown below. The naming is completely up to you.::
 
-    <?php
     class Post extends AppModel {
         public $actsAs = array(
             'Translate' => array(
@@ -184,7 +179,6 @@ using the bindTranslation method
 where the key is the translatable field and the value is the fake
 association name.::
 
-    <?php
     $this->Post->bindTranslation(array('title' => 'titleTranslation'));
     $this->Post->find('all', array('recursive' => 1)); // need at least recursive 1 for this to work.
 
@@ -239,7 +233,6 @@ your controller or you can define it directly in the model.
 
 **Example A:** In your controller::
 
-    <?php
     class PostsController extends AppController {
 
         public function add() {
@@ -255,7 +248,6 @@ your controller or you can define it directly in the model.
 
 **Example B:** In your model::
 
-    <?php
     class Post extends AppModel {
         public $actsAs = array(
             'Translate' => array(
@@ -286,7 +278,6 @@ Lets say we want to save our translations for all posts in the
 table "post\_i18ns" instead of the default "i18n" table. To do so
 you need to setup your model like this::
 
-    <?php
     class Post extends AppModel {
         public $actsAs = array(
             'Translate' => array(
@@ -316,7 +307,6 @@ displayField directly in the model using this behavior yet.
 
 Make sure that you change the ``$displayField`` to ``'field'``.::
 
-    <?php
     class PostI18n extends AppModel {
         public $displayField = 'field'; // important
     }
@@ -333,7 +323,6 @@ Changing the Table
 If you want to change the name of the table you simply define
 $translateTable in your model, like so::
 
-    <?php
     class Post extends AppModel {
         public $actsAs = array(
             'Translate' => array(

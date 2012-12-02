@@ -214,7 +214,6 @@ Félicitations! Vous êtes prêt à :doc:`créer votre première application Cak
 Cela ne fonctionne pas? Si vous avez une erreur liée au timezone de PHP, 
 décommentez une ligne dans ``app/Config/core.php``::
 
-   <?php
    /**
     * Décommentez cette ligne et corrigez votre serveur de timezone pour régler 
     * toute erreur liée à la date & au temps.

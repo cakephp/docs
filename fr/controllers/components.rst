@@ -37,7 +37,6 @@ Toute configuration pour ces components, et pour les components en général,
 se fait dans le tableau des ``$components`` de la méthode ``beforeFilter()`` 
 de vos contrôleurs::
 
-    <?php
     class PostsController extends AppController {
         public $components = array(
             'Auth' => array(
@@ -53,7 +52,6 @@ d'être configurés dans la méthode de votre contrôleur ``beforeFilter()``.
 C'est utile quand vous avez besoin d'assigner les résultats d'une fonction
 à la propriété d'un component. Ceci peut aussi être exprimé comme ceci::
 
-    <?php
     public function beforeFilter() {
         $this->Auth->authorize = array('controller');
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
@@ -66,7 +64,6 @@ configuration avant que le contrôleur ``beforeFilter()`` soit lancé.
 Pour cela, certains components permettent aux options de configuration
 d'être définies dans le tableau ``$components``::
 
-    <?php
     public $components = array('DebugKit.Toolbar' => array('panels' => array('history', 'session')));
 
 Consultez la documentation pertinente pour connaître les options de 
@@ -77,7 +74,6 @@ les alias des components. Cette fonctionnalité est utile quand vous voulez
 remplacer ``$this->Auth`` ou une autre référence de Component commun avec 
 une implémentation sur mesure::
 
-    <?php
     // app/Controller/PostsController.php
     class PostsController extends AppController {
         public $components = array(
@@ -110,7 +106,6 @@ comme propriété dans votre contrôleur. Si vous avez chargé la
 :php:class:`SessionComponent` et le :php:class:`CookieComponent` dans votre 
 contrôleur, vous pouvez y accéder comme ceci::
 
-    <?php
     class PostsController extends AppController {
         public $components = array('Session', 'Cookie');
         
@@ -135,7 +130,6 @@ action. Dans ce cas là, vous pouvez charger à la volée en utilisant la
 :doc:`Component Collection </core-libraries/collections>`. A partir de 
 l'intérieur d'un contrôleur, vous pouvez faire comme ce qui suit::
     
-    <?php
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
 
@@ -161,7 +155,6 @@ le component. Créez le fichier dans
 ``/app/Controller/Component/MathComponent.php``. La structure de base pour 
 le component ressemblerait à quelque chose comme ça ::
 
-    <?php
     class MathComponent extends Component {
         public function faireDesOperationsComplexes($montant1, $montant2) {
             return $montant1 + $montant2;
@@ -183,7 +176,6 @@ Le contrôleur sera automatiquement pourvu d'un nouvel attribut nommé
 d'après le component, à travers lequel nous pouvons accéder à une instance 
 de celui-ci::
 
-    <?php
     /* Rend le nouveau component disponible par $this->Math
     ainsi que le component standard $this->Session */
     public $components = array('Math', 'Session');
@@ -197,7 +189,6 @@ aussi déclarer un ensemble de paramètres qui seront passés à la
 méthode initialize() du Component. Ces paramètres peuvent alors être 
 pris en charge par le Component::
 
-    <?php
     public $components = array(
         'Math' => array(
             'precision' => 2,
@@ -220,7 +211,6 @@ Dans ce cas, vous pouvez inclure d'autres components dans votre component
 exactement de la même manière que dans vos contrôleurs - en utilisant la 
 variable ``$components``::
 
-    <?php
     // app/Controller/Component/CustomComponent.php
     class CustomComponent extends Component {
         // l'autre component que votre component utilise

@@ -49,7 +49,6 @@ Etant donné ce type de configuration, j'aurais besoin de modifier mon fichier
 webroot/index.php (ce qui finira dans /var/www/mysite/index.php, dans cet 
 exemple) pour ressembler à ce qui suit::
 
-    <?php
     // /app/webroot/index.php (partiel, commentaires retirés) 
     
     if (!defined('ROOT')) {

@@ -1,5 +1,5 @@
 Blog Tutorial
-#############
+*************
 
 Welcome to CakePHP. You're probably checking out this tutorial
 because you want to learn more about how CakePHP works. It's our
@@ -116,7 +116,6 @@ values in the ``$default`` array with those that apply to your
 setup. A sample completed configuration array might look something
 like the following::
 
-    <?php
     public $default = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,
@@ -155,7 +154,6 @@ salt value by editing ``/app/Config/core.php`` line 187. It doesn't
 much matter what the new value is, as long as it's not easily
 guessed::
 
-    <?php
     /**
      * A random string used in security hashing methods.
      */
@@ -166,7 +164,6 @@ default seed value by editing ``/app/Config/core.php`` line 192. It
 doesn't much matter what the new value is, as long as it's not
 easily guessed::
 
-    <?php
     /**
      * A random numeric string (digits only) used to encrypt/decrypt strings.
      */

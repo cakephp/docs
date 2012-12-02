@@ -43,7 +43,6 @@ Utiliser les Behaviors
 Les Behaviors sont attachés aux models grâce à la variable ``$actsAs`` 
 des classes model::
 
-    <?php
     class Category extends AppModel {
         public $name   = 'Category';
         public $actsAs = array('Tree');
@@ -54,7 +53,6 @@ une structure en arbre en utilisant le behavior Tree. Une fois
 qu'un behavior a été spécifié, utilisez les méthodes qu'il ajoute 
 comme si elles avaient toujours existé et fait partie du model original::
 
-    <?php
     // Définir ID
     $this->Category->id = 42;
 
@@ -65,7 +63,6 @@ Quelques behaviors peuvent nécessiter ou permettre des réglages quand
 ils sont attachés au model. Ici, nous indiquons à notre behavior 
 Tree les noms des champs "left" et "right" de la table sous-jacente::
 
-    <?php
     class Category extends AppModel {
         public $name   = 'Category';
         public $actsAs = array('Tree' => array(
@@ -78,7 +75,6 @@ Nous pouvons aussi attacher plusieurs behaviors à un model. Il n'y
 aucune raison pour que, par exemple, notre model Category se comporte 
 seulement comme un arbre, il pourrait aussi supporter l'internationalisation::
 
-    <?php
     class Category extends AppModel {
         public $name   = 'Category';
         public $actsAs = array(
@@ -98,7 +94,6 @@ Considérons que dans notre précédent model Category, lequel agit comme un
 model Tree et Translate, nous ayons besoin pour quelque raison de le forcer 
 à ne plus agir comme un model Translate:: 
 
-    <?php
     // Détache un behavior de notre model :
     $this->Category->Behaviors->unload('Translate');
 
@@ -110,7 +105,6 @@ nous cherchons à désactiver le behavior qui agit sur nos callbacks de
 model CakePHP. Au lieu de détacher le behavior, nous allons dire à notre 
 model d'arrêter d'informer ses callbacks du behavior Translate:: 
 
-    <?php
     // Empêcher le behavior de manipuler nos callbacks de model
     $this->Category->Behaviors->disable('Translate');
 
@@ -118,7 +112,6 @@ Nous pourrions également avoir besoin de chercher si notre behavior
 manipule ces callbacks de model et si ce n'est pas le cas, alors de 
 restaurer sa capacité à réagir avec eux::
 
-    <?php
     // Si notre behavior ne manipule pas nos callbacks de model
     if (!$this->Category->Behaviors->enabled('Translate')) {
         // Disons lui de le faire maintenant !
@@ -130,7 +123,6 @@ d'un model à l'exécution, nous pouvons aussi attacher de nouveaux
 behaviors. Disons que notre model familier Category nécessite de 
 se comporter comme un model de Noël, mais seulement le jour de Noël::
 
-    <?php
     // Si nous sommes le 25 déc
     if (date('m/d') == '12/25') {
         // Notre model nécessite de se comporter comme un model de Noël
@@ -140,7 +132,6 @@ se comporter comme un model de Noël, mais seulement le jour de Noël::
 Nous pouvons aussi utiliser la méthode attach pour réécrire les réglages 
 du behavior::
 
-    <?php
     // Nous changerons un réglage de notre behavior déjà attaché
     $this->Category->Behaviors->load('Tree', array('left' => 'new_left_node'));
 
@@ -149,7 +140,6 @@ attachés à un model. Si nous passons le nom d'un behavior à une méthode,
 elle nous dira si ce behavior est attaché au model, sinon elle nous 
 donnera la liste des behaviors attachés::
 
-    <?php
     // Si le behavior Translate n'est pas attaché
     if (!$this->Category->Behaviors->attached('Translate')) {
         // Obtenir la liste de tous les behaviors qui sont attachés au model
@@ -181,7 +171,6 @@ les chapitres concernant les behaviors du cœur et leur configuration.
 Voici un exemple rapide qui illustre comment les réglages peuvent êtres passés 
 du model au behavior::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post'
         public $actsAs = array(
@@ -196,7 +185,6 @@ qui l'utilisent, une bonne pratique pour stocker les paramètres par nom
 d'alias/model qui utilise le behavior. La création des behaviors entraînera 
 l'appel de leur méthode ``setup()``::
 
-    <?php
     public function setup(Model $Model, $settings = array()) {
         if (!isset($this->settings[$Model->alias])) {
             $this->settings[$Model->alias] = array(
@@ -215,7 +203,6 @@ Créer les méthodes du behavior
 Les méthodes du Behavior sont automatiquement disponibles sur tout model 
 qui 'act as' le behavior. Par exemple si vous avez::
 
-    <?php
     class Duck extends AppModel {
         public $name = 'Duck';
         public $actsAs = array('Flying');
@@ -227,13 +214,11 @@ behavior, vous obtenez automatiquement une référence du model appelé en
 premier paramètre. Tous les autres paramètres fournis sont shifté one 
 place to the right. Par exemple::
 
-    <?php
     $this->Duck->fly('toronto', 'montreal');
 
 Bien que cette méthode prenne deux paramètres, la méthode signature 
 ressemblerait à cela::
 
-    <?php
     public function fly(Model $Model, $from, $to) {
         // Faire quelque chose à la volée.
     }
@@ -254,7 +239,6 @@ besoin d'être déclarées dans votre tableau ``$mapMethods`` de behaviors. La
 signature de la méthode pour une méthode mappée est légèrement différente de 
 celle d'une méthode mixin normal d'un behavior::
 
-    <?php
     class MyBehavior extends ModelBehavior {
         public $mapMethods = array('/do(\w+)/' => 'faireQuelqueChose');
 
@@ -271,7 +255,6 @@ Cela vous permet de munge le nom de la méthode pour des informations
 supplémentaires, un peu comme ``Model::findAllByXX``. Si le behavior 
 du dessus est attaché à un model, ce qui suit arrivera::
 
-    <?php
     $model->doReleaseTheHounds('homer', 'lenny');
 
     // sortira

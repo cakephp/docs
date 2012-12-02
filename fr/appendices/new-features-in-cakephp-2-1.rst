@@ -9,7 +9,6 @@ Model::saveAll(), Model::saveAssociated(), Model::validateAssociated()
 ``Model::saveAll()`` et ses amis supportent maintenant le passement de 
 `fieldList` pour de multiples modèles. Exemple::
 
-    <?php
     $this->SomeModel->saveAll($data, array(
         'fieldList' => array(
             'SomeModel' => array('field_1'),
@@ -20,7 +19,6 @@ Model::saveAll(), Model::saveAssociated(), Model::validateAssociated()
 ``Model::saveAll()`` et ses amis peuvent maintenant sauvegarder sur des niveaux 
 de profondeur illimités. Exemple::
 
-    <?php
     $data = array(
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
@@ -81,7 +79,6 @@ une classe stub.
 
 All custom pathing code has been moved into the ``View`` class, meaning that it is now possible for classes extending the ``View`` class to automatically support themes. Whereas before we might set the ``$viewClass`` Controller property to ``Theme``, it is now possible to enable themes by simply setting the ``$theme`` property. Example::
 
-    <?php
     App::uses('Controller', 'Controller');
 
     class AppController extends Controller {
@@ -104,7 +101,6 @@ chaque action qui sortirait le JSON. Ceci n'est plus requis avec
 :php:class:`JsonView` est utilisée comme tout autre classe de vue, en 
 la définissant sur le controller. Exemple::
 
-    <?php
     App::uses('Controller', 'Controller');
 
     class AppController extends Controller {
@@ -115,7 +111,6 @@ Une fois que vous avez configuré le controller, vous avez besoin d'identifier
 quel contenu devrait être sérialisé en JSON, en paramètrant la variable vue 
 ``_serialize``. Exemple::
 
-    <?php
     $this->set(compact('users', 'posts', 'tags'));
     $this->set('_serialize', array('users', 'posts'));
 
@@ -133,7 +128,6 @@ requise.
 
 Les exemples suivants entourent le résultat avec ``{results: ... }``::
 
-    <?php
     App::uses('JsonView', 'View');
     class ResultsJsonView extends JsonView {
         public function render($view = null, $layout = null) {
@@ -152,7 +146,6 @@ Un peu comme :php:class:`JsonView`, :php:class:`XmlView` requièrt que vous
 configuriez la variable de vue ``_serialize`` afin d'indiquer quelle 
 information serait sérialisée en XML pour la sortie.
 
-    <?php
     $this->set(compact('users', 'posts', 'tags'));
     $this->set('_serialize', array('users', 'posts'));
 
@@ -182,7 +175,6 @@ réponse est déjà mise en cache dans le client et enverra un code de statut
 `304 Not Modified` avant le rendu de la vue. Sauter le processus de rendu de 
 vue sauvegarde les cycles CPU et la mémoire.::
 
-    <?php
     class ArticlesController extends AppController {
         public $components = array('RequestHandler');
 
@@ -206,7 +198,6 @@ helpers :php:class:`TimeHelper`, :php:class:`TextHelper`, et
 
 Pour utiliser les nouvelles classes utilitaires::
 
-    <?php
     class AppController extends Controller {
 
         public function log($msg) {
@@ -219,7 +210,6 @@ Vous pouvez écraser la classe par défaut à utiliser en créant une nouvelle
 classe dans votre dossier ``APP/Utility``, par exemple: 
 ``Utility/MyAwesomeStringClass.php``, et le spécifier dans la clé ``engine``::
 
-    <?php
     // Utility/MyAwesomeStringClass.php
     class MyAwesomeStringClass extends String {
         // mon truchement est meilleur que les votres

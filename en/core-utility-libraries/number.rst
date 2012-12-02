@@ -6,7 +6,6 @@ CakeNumber
 If you need :php:class:`NumberHelper` functionalities outside of a ``View``,
 use the ``CakeNumber`` class::
 
-    <?php
     class UsersController extends AppController {
 
         public $components = array('Auth');
@@ -38,7 +37,6 @@ automatically echo the output into the view.
     This method is used to display a number in common currency formats
     (EUR,GBP,USD). Usage in a view looks like::
 
-        <?php
         // called as NumberHelper
         echo $this->Number->currency($number, $currency);
 
@@ -103,7 +101,6 @@ automatically echo the output into the view.
     If a non-recognized $currency value is supplied, it is prepended to
     a USD formatted number. For example::
 
-        <?php
         // called as NumberHelper
         echo $this->Number->currency('1234.56', 'FOO');
 
@@ -132,7 +129,6 @@ automatically echo the output into the view.
     Add a currency format to the Number helper. Makes reusing
     currency formats easier::
 
-        <?php
         // called as NumberHelper
         $this->Number->addFormat('BRR', array('before' => 'R$ '));
 
@@ -142,7 +138,6 @@ automatically echo the output into the view.
 
     You can now use `BRR` as a short form when formatting currency amounts::
 
-        <?php
         // called as NumberHelper
         echo $this->Number->currency($value, 'BRR');
 
@@ -152,7 +147,6 @@ automatically echo the output into the view.
 
     Added formats are merged with the following defaults::
 
-       <?php
        array(
            'wholeSymbol'      => '',
            'wholePosition'    => 'before',
@@ -175,7 +169,6 @@ automatically echo the output into the view.
     precision (decimal places). It will round in order to maintain the
     level of precision defined.::
 
-        <?php
         // called as NumberHelper
         echo $this->Number->precision(456.91873645, 2);
 
@@ -197,7 +190,6 @@ automatically echo the output into the view.
     precision). This method also expresses the number as a percentage
     and prepends the output with a percent sign.::
 
-        <?php
         // called as NumberHelper
         echo $this->Number->toPercentage(45.691873645);
 
@@ -228,7 +220,6 @@ automatically echo the output into the view.
     of data supplied (i.e. higher sizes are expressed in larger
     terms)::
 
-        <?php
         // called as NumberHelper
         echo $this->Number->toReadableSize(0); // 0 Bytes
         echo $this->Number->toReadableSize(1024); // 1 KB
@@ -249,7 +240,6 @@ automatically echo the output into the view.
     most of the other NumberHelper methods). Using this method might
     looks like::
 
-        <?php
         // called as NumberHelper
         $this->Number->format($number, $options);
 
@@ -279,7 +269,6 @@ automatically echo the output into the view.
 
     Example::
 
-        <?php
         // called as NumberHelper
         echo $this->Number->format('123456.7890', array(
             'places' => 2,
@@ -305,7 +294,6 @@ automatically echo the output into the view.
 
     This method displays differences in value as a signed number::
 
-        <?php
         // called as NumberHelper
         $this->Number->formatDelta($number, $options);
 
@@ -329,7 +317,6 @@ automatically echo the output into the view.
 
     Example::
 
-        <?php
         // called as NumberHelper
         echo $this->Number->formatDelta('123456.7890', array(
             'places' => 2,

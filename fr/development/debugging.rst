@@ -66,7 +66,6 @@ est défini à une valeur supérieure à 0.
     Dump prints out the contents of a variable. Elle affiche toutes les 
     propriétés et méthodes (si il y en a) de la variable fournie::
 
-        <?php
         $foo = array(1,2,3);
 
         Debugger::dump($foo);
@@ -112,7 +111,6 @@ est défini à une valeur supérieure à 0.
     the calling method, including which file and line the call
     originated from.::
 
-        <?php
         //In PostsController::index()
         pr( Debugger::trace() );
         
@@ -137,7 +135,6 @@ est défini à une valeur supérieure à 0.
     absolu), mettant en évidence le numéro de la ligne $line avec le nombre 
     de lignes $context autour.::
 
-        <?php
         pr( Debugger::excerpt(ROOT.DS.LIBS.'debugger.php', 321, 2) );
         
         //sortira ce qui suit.
@@ -183,7 +180,6 @@ et vous pouvez utiliser :php:class:`CakeLog` pour faire le logging dans votre
 application. Tous les objets qui étendent :php:class:`Object` ont une méthode 
 d'instanciation `log()` qui peut être utilisé pour les messages de log::
 
-    <?php
     $this->log('Got here', 'debug');
 
 Ce qui est au-dessus écrit ``Got here`` dans le debug du log. Vous pouvez 
@@ -193,7 +189,6 @@ les redirections ou les boucles compliquées. Vous pouvez aussi utiliser
 peut être appelée statiquement partout dans votre application où CakeLog 
 a été chargée::
 
-    <?php
     // dans app/Config/bootstrap.php
     App::uses('CakeLog', 'Log');
 

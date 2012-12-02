@@ -20,14 +20,12 @@ des "containements" pour génerer une série d'appels ``bindModel`` et
 Pour utiliser le nouveau behavior, vous pouvez l'ajouter à la propriété 
 $actAs de votre model::
 
-    <?php
     class Post extends AppModel {
         public $actsAs = array('Containable');
     }
 
 Vous pouvez aussi attacher le behavior à la volée::
 
-    <?php
     $this->Post->Behaviors->attach('Containable');
 
 
@@ -42,7 +40,6 @@ Post. Disons que ce Post a plusieurs (hasMany) Commentaire, et Post a et
 appartient à plusieurs (hasAndBelongsToMany) Tag. La quantité de données 
 récupérées par un appel find() normal est assez étendue :: 
 
-    <?php
     debug($this->Post->find('all'));
     
     [0] => Array
@@ -103,13 +100,11 @@ besoin d'autant d'information depuis le modèle Post. Le
 Par exemple, pour ne recuperer que les informations relative au post vous 
 pouvez faire cela::
 
-    <?php
     $this->Post->contain();
     $this->Post->find('all');
 
 Vous pouvez utiliser la magie de "Containable" à l'interieur d'un appel find():: 
 
-    <?php
     $this->Post->find('all', array('contain' => false));
 
 Après avoir fait cela, vous vous retrouvez avec quelque chose de plus concis::
@@ -138,7 +133,6 @@ Après avoir fait cela, vous vous retrouvez avec quelque chose de plus concis::
 Ceci n'est pas nouveau: en fait, vous pouvez obtenir le même résultat sans 
 le ``behavior Containable`` en faisant quelque chose comme ::
 
-    <?php
     $this->Post->recursive = -1;
     $this->Post->find('all');
 
@@ -153,13 +147,11 @@ modèles à garder lors du find. Si nous désirons aller chercher tous les posts
 et les tags annexes (sans aucune information de commentaire), nous devons 
 essayer quelque chose comme ::
 
-    <?php
     $this->Post->contain('Tag');
     $this->Post->find('all');
 
 Nous pouvons à nouveau utiliser la clef contain dans l'appel find()::
 
-    <?php
     $this->Post->find('all', array('contain' => 'Tag'));
 
 Sans le behavior Containable, nous finirions par utilisez la méthode 
@@ -177,7 +169,6 @@ d'un appel find() classique, notez le champ "auteur" dans le modèle
 commentaires des auteurs - et rien d'autre - vous devez faire quelque chose 
 comme ::
 
-    <?php
     $this->Post->contain('Commentaire.auteur');
     $this->Post->find('all');
 
@@ -222,7 +213,6 @@ CakePHP pour présenter le résultat)
 Vous pouvez également filtrer les donneés Commentaire associés en 
 spécifiant une condition ::
 
-    <?php
     $this->Post->contain('Commentaire.auteur = "Daniel"');
     $this->Post->find('all');
 
@@ -260,7 +250,6 @@ l'auteur::
 Des filtre supplémentaires peuvent être utilisées en utilisant les options 
 de recherche standard :ref:`model-find`::
 
-    <?php
     $this->Post->find('all', array('contain' => array(
         'Commentaire' => array(
             'conditions' => array('Commentaire.auteur =' => "Daniel"),
@@ -281,7 +270,6 @@ Examinons les associations de modèles suivants::
 Voici ce que nous recupérons des associations ci-dessus avec le behavior 
 Containable ::
 
-    <?php
     $this->User->find('all', array(
         'contain' => array(
             'Profil',
@@ -325,15 +313,15 @@ d'affiner le behavior de Containable et de travailler plus facilement avec
 les autres behaviors.
 
 - **recursive** (boolean, optional), définir à true pour permettre au behavior 
-Containable, de déterminer automatiquement le niveau de récursivité nécessaire 
-pour récupérer les modèles spécifiés et de paramétrer la récursivité du modèle 
-à ce niveau. Le définir à false désactive cette fonctionnalité. La valeur par 
-défaut est ``true``.
+  Containable, de déterminer automatiquement le niveau de récursivité nécessaire 
+  pour récupérer les modèles spécifiés et de paramétrer la récursivité du modèle 
+  à ce niveau. Le définir à false désactive cette fonctionnalité. La valeur par 
+  défaut est ``true``.
 - **notices** (boolean, optional), émet des alertes E_NOTICES pour les liaisons 
-référencées dans un appel containable et qui ne sont pas valides. La valeur par 
-défaut est true.
+  référencées dans un appel containable et qui ne sont pas valides. La valeur par 
+  défaut est true.
 - **autoFields** (boolean, optional), ajout automatique des champs nécessaires 
-pour récupérer les liaisons requêtées. La valeur par défaut est ``true``.
+  pour récupérer les liaisons requêtées. La valeur par défaut est ``true``.
 
 Vous pouvez changer les paramètres du Behavior Containable à l'exécution, en 
 ré-attachant le behavior comme vu au chapitre Utiliser les behaviors 
@@ -345,7 +333,6 @@ clauses GROUP BY. Si vous obtenez des erreurs SQL invalides à cause du mélange
 de champs aggrégés et non-aggrégés, essayer de désactiver le paramètre 
 ``autoFields``::
 
-    <?php
     $this->Post->Behaviors->attach('Containable', array('autoFields' => false));
 
 
@@ -360,7 +347,6 @@ Voir la section :ref:`using-containable` pour plus de détails.
 
 Voici un exemple pour limiter les associations en paginant::
 
-    <?php
     $this->paginate['User'] = array(
         'contain' => array('Profil', 'Compte'),
         'order' => 'User.pseudo'

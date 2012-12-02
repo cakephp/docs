@@ -12,7 +12,6 @@ appelé fat model ("model gras").
 
 ::
 
-    <?php
     class Exemple extends AppModel {
         public function getRecent() {
             $conditions = array(
@@ -26,7 +25,6 @@ Cette méthode ``getRecent()`` peut maintenant être utilisée dans le controlle
 
 ::
 
-    <?php
     $recent = $this->Exemple->getRecent();
 
 :php:meth:`Model::associations()`
@@ -34,7 +32,6 @@ Cette méthode ``getRecent()`` peut maintenant être utilisée dans le controlle
 
 Obtenir les associations::
 
-    <?php
     $result = $this->Exemple->associations();
     // $result équivaut à array('belongsTo', 'hasOne', 'hasMany', 'hasAndBelongsToMany')
 
@@ -72,7 +69,6 @@ vérifier l'existence de l'enregistrement dans un stockage persistant.
 
 ::
 
-    <?php
     $this->Exemple->id = 9;
     if ($this->Exemple->exists()) {
         // ...

@@ -73,7 +73,6 @@ Vous pouvez configurer le gestionnaire d'authentification dans les tableaux
 Vous pouvez passer l'information de configuration dans chaque objet 
 d'authentification en utilisant un tableau::
 
-    <?php
     // Configuration de base
     $this->Auth->authenticate = array('Form');
 
@@ -90,7 +89,6 @@ de définir les réglages qui sont passés à chaque objet attaché.
 La cle ``all`` est aussi utilisée comme cela
 ``AuthComponent::ALL``::
 
-    <?php
     // Passer la configuration en utilisant 'all'
     $this->Auth->authenticate = array(
         AuthComponent::ALL => array('userModel' => 'Membre'),
@@ -111,7 +109,6 @@ Les objets d'authentification supportent les clefs de configuration suivante.
 
 Configurer différents champs pour l'utilisateur dans le tableau ``$component``::
 
-    <?php
     // Passer la configuration dans le tableau $components
     public $components = array(
         'Auth' => array(
@@ -131,7 +128,6 @@ Configurer différents champs pour l'utilisateur dans le tableau ``$component``:
     La configuration ci-dessus avec d'autres configurations ressemblerait à quelque chose
     comme.::
     
-        <?php
         // Passage de paramètre dans le tableau $components
         public $components = array(
             'Auth' => array(
@@ -176,7 +172,6 @@ d'authentification OpenID.
 Dans ``app/Controller/Component/Auth/OpenidAuthenticate.php``
 vous pourriez mettre ce qui suit::
 
-    <?php
     App::uses('BaseAuthenticate', 'Controller/Component/Auth');
 
     class OpenidAuthenticate extends BaseAuthenticate {
@@ -201,7 +196,6 @@ Utilisation d'objets d'authentification personnalisés
 Une fois votre objet d'authentification créer, vous pouvez les utiliser
 en les incluant dans le tableau d'authentification AuthComponents::
 
-    <?php
     $this->Auth->authenticate = array(
         'Openid', // objet d'authentification app 
         'AuthBag.Combo', // plugin objet d'identification.
@@ -222,7 +216,6 @@ vérifier dans l'ordre ou il ont été attachés. Une fois qu'un objet
 peut identifier un utilisateur, les autres objets ne sont pas vérifiés.
 Une simple fonction fonctionnant au login pourrait ressemblé à cela ::
 
-    <?php
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
@@ -256,7 +249,6 @@ initial avant d'initier la séquence de connexion, votre fonction ``login()``
 aura un aspect un petit peu différent qu'avec l'utilisation de 
 ``FormAuthentication``::
 
-    <?php
     public function login() {
         if ($this->Auth->login()) {
             return $this->redirect($this->Auth->redirect());
@@ -295,7 +287,6 @@ d'authentification de l'objet  ``authenticate()`` la méthode ``getuser()``
 devrait retourner un tableau d'information utilisateur en cas de succès, 
 et ``false`` en cas d'echec.::
 
-    <?php
     public function getUser($request) {
         $username = env('PHP_AUTH_USER');
         $pass = env('PHP_AUTH_PW');
@@ -317,7 +308,6 @@ ajouter les lignes de code suivante dans votre layout. Ajouter les deux lignes
 suivantes au fichier ``app/View/Layouts/default.ctp`` dans la section body de 
 préférence  avant la ligne content_for_layout.::
 
-    <?php
     echo $this->Session->flash();
     echo $this->Session->flash('auth');
     ?>
@@ -337,7 +327,6 @@ de votre contrôleur , ou paramétrage du composant vous pouvez utiliser
 ``authError`` pour personnaliser l'erreur à utiliser quand l'authentification 
 échoue ::
 
-    <?php
     $this->Auth->authError = "Cette erreur se présente à l'utilisateur qui 
     tente d'accéder à une partie du site qui est protégé.";
 
@@ -357,7 +346,6 @@ application.
 Après avoir validé le mot de passe, vous pouvez hacher un mot de passe dans le 
 callback beforeSave de votre modèle::
 
-    <?php
     class User extends AppModel {
         public function beforeSave($options = array()) {
             $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
@@ -383,7 +371,6 @@ l'authentification Digest avec d'autres stratégies d'authentifications, il
 est aussi recommandé de stocker le mot de passe  Digest dans une colonne 
 séparée, pour le hachage normal de mot de passe::
 
-    <?php
     class User extends AppModel {
         public function beforeSave($options = array()) {
             // fabrique un mot de passe pour l'auth Digest.
@@ -413,7 +400,6 @@ comme juste après qu'il se soit enregistré dans votre application. Vous pouvez
 faire cela en appelant ``$this->Auth->login()`` avec les données utilisateur que 
 vous voulez pour la 'connexion'::
 
-    <?php
     public function register() {
         if ($this->User->save($this->request->data)) {
             $id = $this->User->id;
@@ -438,7 +424,6 @@ accéder à l'utilisateur en cours de connexion en utilisant
 globalement après le chargement du composant Auth. Vous pouvez y accéder à la 
 fois avec l'instance d'une méthode ou comme une méthode statique::
 
-    <?php
     // Utilisez n'importe où
     AuthComponent::user('id')
 
@@ -453,7 +438,6 @@ les utilisateurs et de les rediriger ou il devraient aller. Cette méthode
 est aussi très pratique si vous voulez fournir un lien 'Déconnecte moi' 
 à l'intérieur de la zone membres de votre application ::
 
-    <?php
     public function logout() {
         $this->redirect($this->Auth->logout());
     }
@@ -486,8 +470,8 @@ pouvez créer vos propres gestionnaire comme faisant partie d'un plugin.
 Configurer les gestionnaires d'autorisation
 -------------------------------------------
 
-Vous configurez les gestionnaires d'autorisation en utilisant 
- ``$this->Auth->authorize``. Vous pouvez configurer un ou plusieurs
+Vous configurez les gestionnaires d'autorisation en utilisant
+``$this->Auth->authorize``. Vous pouvez configurer un ou plusieurs
 gestionnaires . L'utilisation de plusieurs gestionnaires vous donnes la
 possibilité d'utiliser plusieurs moyens de vérifier les autorisations.
 Quand les gestionnaires d'autorisation sont vérifiés ils sont appelés
@@ -506,7 +490,6 @@ Vous pouvez configurer les gestionnaires d'autorisation dans le
 Vous pouvez passer les informations de configuration dans chaque objet
 d'autorisation, en utilisant un tableau::
 
-    <?php
     // paramétrage Basique
     $this->Auth->authorize = array('Controller');
 
@@ -522,7 +505,6 @@ vous aides  à définir les paramètres qui sont passés à chaque objets attach
 La clef all est aussi exposée comme ``AuthComponent::ALL``::
 
 
-    <?php
     // passage de paramètre en utilisant 'all'
     $this->Auth->authorize = array(
         AuthComponent::ALL => array('actionPath' => 'controllers/'),
@@ -552,7 +534,6 @@ vous voulez créer un objet authorize LDAP. Dans
 ``app/Controller/Component/Auth/LdapAuthorize.php``, vous pourriez mettre cela::
 
 
-    <?php
     App::uses('BaseAuthorize', 'Controller/Component/Auth');
 
     class LdapAuthorize extends BaseAuthorize {
@@ -575,7 +556,6 @@ Utilisation d'objets Authorize personnalisés
 Une fois que vous avez créé votre objet authorize personnalisé, vous pouvez 
 les utiliser en les incluant dans le tableau authorize::
 
-    <?php
     $this->Auth->authorize = array(
         'Ldap', // objet app authorize .
         'AuthBag.Combo', // plugin objet authorize .
@@ -602,7 +582,6 @@ l'accès. Vous pouvez marquer des actions comme publique en utilisant
 composant Auth , ne vérifiera pas la connexion d'un utilisateur, ni 
 n'autorisera la vérification des objets ::
 
-    <?php
     // Permet toutes les actions. CakePHP 2.0
     $this->Auth->allow('*');
 
@@ -624,7 +603,6 @@ Fabriquer des actions qui requièrent des autorisations
 Si après avoir rendu les actions publiques, et que vous voulez révoquer les 
 accès publics. Vous pouvez le faire en utilisant ``AuthComponent::deny()``::
 
-    <?php
     // retire une action
     $this->Auth->deny('add');
 
@@ -648,7 +626,6 @@ utilisant mapAction(). En les appelant dans le composant Auth vous le
 déléguerez a tous objets authorize , ainsi vous pouvez être sûre que le 
 paramétrage sera appliqué partout::   
 
-    <?php
     $this->Auth->mapActions(array(
         'create' => array('register'),
         'view' => array('show', 'display')
@@ -674,7 +651,6 @@ peut donc être vérifié.
 
 ::
 
-    <?php
     class AppController extends Controller {
         public $components = array(
             'Auth' => array('authorize' => 'Controller'),
@@ -751,13 +727,13 @@ d'autorisation et d'authentification intégrés dans CakePHP.
 
     Erreur à afficher quand les utilisateurs font une tentative d'accès à un 
     objet ou une action à laquelle ils n'ont pas accès.
-    
+
 .. php:attr:: authorize
 
     Définir un tableau d'objets d'autorisation que vous voulez utiliser quand 
     les utilisateurs sont autorisés sur chaque requête, cd la section 
     :ref:`authorization-objects`
-    
+
 .. php:attr:: components
 
     D'autre composants utilisés par le composant Auth
@@ -765,9 +741,10 @@ d'autorisation et d'authentification intégrés dans CakePHP.
 .. php:attr:: flash
 
     Paramétrage à utiliser quand Auth à besoin de faire un message flash avec 
-     :php:meth:`SessionComponent::setFlash()`.
-     Les clefs disponibles sont:
-   
+    :php:meth:`SessionComponent::setFlash()`.
+
+    Les clefs disponibles sont:
+
     - ``element`` - L'élement à utiliser , par défaut à  'default'.
     - ``key`` - La clef à utiliser, par défaut à 'auth'
     - ``params`` - Un tableau de paramêtres additionnels à utiliser par défaut 
@@ -910,14 +887,13 @@ d'autorisation et d'authentification intégrés dans CakePHP.
 .. php:staticmethod:: user($key = null)
 
     :param string $key: La clef de la donné utilisateur que vous voulez 
-    récupérer est null, tous les utilisateurs seront retournés. Peut aussi 
-    être appelé comme une instance de méthode.
+      récupérer est null, tous les utilisateurs seront retournés. Peut aussi 
+      être appelé comme une instance de méthode.
 
     Prend les données concernant l'utilisateur connecté, vous pouvez utiliser
     une clef propriétaire pour appeler une donnée spécifique à propos d'un 
     utilisateur::
 
-        <?php
         $id = $this->Auth->user('id');
 
     Si l'utilisateur courant n'est pas connecté ou que la clef n'existe pas 

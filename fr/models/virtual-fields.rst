@@ -15,14 +15,12 @@ une propriété ``$virtualFields`` qui contient un tableau de champ =>
 expressions. Un exemple d'une définition de champ virtuel en utilisant MySQL 
 serait::
 
-    <?php
     public $virtualFields = array(
         'nom' => 'CONCAT(Utilisateur.prenom, " ", Utilisateur.nom_famille)'
     );
 
 et avec PostgreSQL::
 
-    <?php
     public $virtualFields = array(
         'nom' => 'Utilisateur.prenom || \' \' || Utilisateur.nom_famille'
     );
@@ -53,7 +51,6 @@ Les champs virtuels seront aussi vérifiés quand on vérifiera si le model a
 un champ.
 En utilisant le champ exemple ci-dessus::
 
-    <?php
     $this->User->hasField('nom'); // Retournera false, puisqu'il n'y a pas 
     de champ concret appelé nom.
     $this->User->hasField('nom', true); // Retournera true puisqu'il n'y a pas
@@ -65,7 +62,6 @@ Model::isVirtualField()
 Cette méthode peut être utilisée pour vérifier si un champ/colonne est un champ 
 virtuel ou champ concret. Retournera true si la colonne est virtuelle::
 
-    <?php
     $this->User->isVirtualField('nom'); //true
     $this->User->isVirtualField('prenom'); //false
 
@@ -76,7 +72,6 @@ Cette méthode peut être utilisée pour accéder aux expressions SQL qui
 contiennent un champ virtuel. Si aucun argument n'est fourni, il retournera 
 tout champ virtuel dans un Model::
 
-    <?php
     $this->User->getVirtualField('nom'); //retoune 'CONCAT(Utilisateur.prenom, ' ', Utilisateur.nom_famille)'
 
 Model::find() and virtual fields
@@ -86,7 +81,6 @@ Comme écrit précédemment, ``Model::find()`` traitera les champs virtuels un p
 comme tout autre champ dans un model. La valeur du champ virtuel sera placé 
 sous la clé du model dans l'ensemble de résultats::
 
-    <?php
     $results = $this->Utilisateur->find('first');
 
     // les résultats contiennent le tableau suivant
@@ -116,7 +110,6 @@ Si vous utilisez les champsVirtuels dans les models qui ont plus d'un alias,
 il est mieux de définir les champsVirtuels dans le constructeur de votre 
 model::
 
-    <?php
     public function __construct($id = false, $table = null, $ds = null) {
         parent::__construct($id, $table, $ds);
         $this->virtualFields['nom'] = sprintf('CONCAT(%s.prenom, " ", %s.nom_famille)', $this->alias, $this->alias);
@@ -132,7 +125,6 @@ Utiliser les fonctions dans les requêtes SQL directes assureront que les
 données seront retournées dans le même tableau que les données du model.
 Par exemple comme ceci::
 
-    <?php
     $this->Timelog->query("SELECT project_id, SUM(id) as TotalHours FROM timelogs AS Timelog GROUP BY project_id;");
 
 retourne quelque chose comme ceci::
@@ -159,13 +151,11 @@ permanente dans le model. Nous fournirons une valeur par défaut à ``0`` au cas
 où d'autres requêtes attendent d'utiliser ce champ virtuel.
 Si cela arrive, ``0`` serait retourné dans la colonne HeuresTotales::
 
-    <?php
     $this->Timelog->virtualFields['HeuresTotales'] = 0;
 
 En plus d'ajouter le champ virtuel, nous avons aussi besoin de faire un alias 
 de notre colonne en utilisant la forme ``MonModel__MonChamp`` comme ceci::
 
-    <?php
     $this->Timelog->query("SELECT project_id, SUM(id) as Timelog__HeuresTotales FROM timelogs AS Timelog GROUP BY project_id;");
 
 Lancer la requête de nouveau après avoir specifié le champ virtuel résulterait en 
@@ -197,12 +187,10 @@ Une solution de contournement pour ce problème commun de mise en œuvre
 consiste à copier ``virtualFields`` d'un model à l'autre lors de 
 l'exécution, lorsque vous avez besoin d'y accéder ::
 
-    <?php
     $this->virtualFields['nom'] = $this->Author->virtualFields['nom'];
 
 or::
 
-    <?php
     $this->virtualFields += $this->Author->virtualFields;
 
 

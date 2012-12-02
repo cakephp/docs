@@ -38,7 +38,6 @@ logique post-recherche. Le paramètre $results passé à cette méthode contient
 les résultats retournés par l'opération find() du model, càd quelque 
 chose comme::
 
-    <?php
     $results = array(
         0 => array(
             'NomModel' => array(
@@ -59,7 +58,6 @@ an association the format of ``$results`` can differ; à la place du résultat,
 que vous auriez normalement obtenu à partir d'une opération find, vous 
 obtiendriez peut-être ça::
 
-    <?php
     $results = array(
         'champ1' => 'valeur1',
         'champ2' => 'valeur2'
@@ -74,7 +72,6 @@ obtiendriez peut-être ça::
 Ci-dessous un exemple de la manière dont afterfind peut être utilisé 
 pour formater des dates::
 
-    <?php
     public function afterFind($results) {
         foreach ($results as $key => $val) {
             if (isset($val['Event']['begindate'])) {
@@ -122,7 +119,6 @@ facilement modifié. Utilisez le code ci-dessous dans le model approprié.
 
 ::
 
-    <?php
     public function beforeSave() {
         if (!empty($this->data['Event']['begindate']) && !empty($this->data['Event']['enddate'])) {
             $this->data['Event']['begindate'] = $this->dateFormatBeforeSave($this->data['Event']['begindate']);
@@ -170,7 +166,6 @@ dépendent de cet enregistrement soient aussi supprimés.
 
 ::
 
-    <?php
     // using app/Model/ProduitCategory.php
     // Dans l'exemple suivant, ne laissez pas une catégorie être supprimée si elle contient des produits.
     // Un appel de $this->Produit->delete($id) de ProduitsController.php a défini $this->id .

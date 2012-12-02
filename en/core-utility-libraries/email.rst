@@ -19,13 +19,11 @@ Basic usage
 
 First of all, you should ensure the class is loaded::
 
-    <?php
     use Cake\Network\Email\Email;
 
 Using Email is similar to using :php:class:`EmailComponent`. But instead of
 using attributes you must use methods. Example::
 
-    <?php
     $email = new Email();
     $email->from(array('me@example.com' => 'My Site'));
     $email->to('you@example.com');
@@ -35,7 +33,6 @@ using attributes you must use methods. Example::
 To simplify things, all of the setter methods return the instance of class.
 You can re-write the above code as::
 
-    <?php
     $email = new Email();
     $email->from(array('me@example.com' => 'My Site'))
         ->to('you@example.com')
@@ -48,7 +45,6 @@ Choosing the sender
 When sending email on behalf of other people it's often a good idea to define the
 original sender using the Sender header.  You can do so using ``sender()``::
 
-    <?php
     $email = new Email();
     $email->sender('app@example.com', 'MyApp emailer');
 
@@ -69,8 +65,6 @@ Configuration for Email defaults is stored in
 You should put your email presets in the file ``App/Config/email.php``.  The
 ``App/Config/email.php.default`` has an example of this file.
 
-``Email`` will read data stored under the ``Email`` key.
-
 It is not required to create ``App/Config/email.php``, ``Email`` can be used
 without it and use respective methods to set all configurations separately or
 load an array of configs.
@@ -78,7 +72,6 @@ load an array of configs.
 To load a config from ``Configure`` you can use the ``config()`` method or pass it
 to the constructor of ``Email``::
 
-    <?php
     $email = new Email();
     $email->config('default');
 
@@ -88,7 +81,6 @@ to the constructor of ``Email``::
 Instead of passing a string which matches a preset configuration name you can
 also just load an array of configs::
 
-    <?php
     $email = new Email();
     $email->config(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
 
@@ -98,7 +90,6 @@ also just load an array of configs::
 You can configure SSL SMTP servers, like GMail. To do so, put the ``'ssl://'``
 at prefix in the host and configure the port value accordingly.  Example::
 
-    <?php
     use Cake\Core\Configure;
 
     Configure::write('Email.gmail', [
@@ -116,7 +107,6 @@ at prefix in the host and configure the port value accordingly.  Example::
 
 You can also enable TLS SMTP using the ``tls`` option::
 
-    <?php
     use Cake\Core\Configure;
 
     Confgure::write('Email.gmail', [
@@ -200,7 +190,6 @@ The templates for emails reside in a special folder in your applications
 ``View`` directory.  Email views can also use layouts, and elements just like
 normal views::
 
-    <?php
     $email = new Email();
     $email->template('welcome', 'fancy')
         ->emailFormat('html')
@@ -212,7 +201,6 @@ The above would use ``App/View/Emails/html/welcome.ctp`` for the view,
 and ``App/View/Layouts/Emails/html/fancy.ctp`` for the layout. You can
 send multipart templated email messages as well::
 
-    <?php
     $email = new Email();
     $email->template('welcome', 'fancy')
         ->emailFormat('both')
@@ -232,7 +220,6 @@ When sending templated emails you have the option of sending either
 
 You can set view variables with ``Email::viewVars()``::
 
-    <?php
     $email = new Email('templated');
     $email->viewVars(array('value' => 12345));
 
@@ -244,7 +231,6 @@ You can use helpers in emails as well, much like you can in normal view files.
 By default only the :php:class:`HtmlHelper` is loaded.  You can load additional
 helpers using the ``helpers()`` method::
 
-    <?php
     $email->helpers(array('Html', 'Custom', 'Text'));
 
 When setting helpers be sure to include 'Html' or it will be removed from the
@@ -253,7 +239,6 @@ helpers loaded in your email template.
 If you want to send email using templates in a plugin you can use the familiar
 :term:`plugin syntax` to do so::
 
-    <?php
     $email = new Email();
     $email->template('Blog.new_comment', 'Blog.auto_message');
 
@@ -263,7 +248,6 @@ In some cases, you might need to override the default template provided by plugi
 You can do this using themes by telling Email to use appropriate theme using
 ``Email::theme()`` method::
 
-    <?php
     $email = new Email();
     $email->template('Blog.new_comment', 'Blog.auto_message');
     $email->theme('TestTheme');
@@ -291,7 +275,6 @@ you want the filenames to appear in the recipient's mail client:
    photo.png, not some_hash.png.
 4. Nested arrays::
 
-    <?php
     $email->attachments(array(
         'photo.png' => array(
             'file' => '/full/some_hash.png',
@@ -328,7 +311,6 @@ systems (like SwiftMailer). To create your transport, first create the file
 ``App/Lib/Network/Email/ExampleTransport.php`` (where Example is the name of your
 transport). To start off your file should look like::
 
-    <?php
     use Cake\Network\Email\AbstractTransport;
 
     class ExampleTransport extends AbstractTransport {
@@ -348,7 +330,6 @@ If you need to call additional methods on the transport before send, you can use
 :php:meth:`Cake\\Network\\Email\\Email::transportClass()` to get an instance of the transport.
 Example::
 
-    <?php
     $yourInstance = $email->transport('your')->transportClass();
     $yourInstance->myCustomMethod();
     $email->send();
@@ -365,7 +346,6 @@ You can create your configuration using ``Configure``, or use an array with all
 options that you need and use the static method ``Email::deliver()``.
 Example::
 
-    <?php
     Email::deliver('you@example.com', 'Subject', 'Message', array('from' => 'me@example.com'));
 
 This method will send an email to you@example.com, from me@example.com with
@@ -397,7 +377,6 @@ When sending emails within a CLI script (Shells, Tasks, ...) you should manually
 set the domain name for CakeEmail to use. It will serve as the host name for the
 message id (since there is no host name in a CLI environment)::
 
-    <?php
     $email->domain('www.example.org');
     // Results in message ids like ``<UUID@www.example.org>`` (valid)
     // instead of `<UUID@>`` (invalid)
