@@ -416,10 +416,10 @@ helper to build your links will help maintain the prefix calls.
 Here's how to build this link using the HTML helper::
 
     // Go into a prefixed route.
-    echo $html->link('Manage posts', array('manager' => true, 'controller' => 'posts', 'action' => 'add'));
+    echo $this->Html->link('Manage posts', array('manager' => true, 'controller' => 'posts', 'action' => 'add'));
 
     // leave a prefix
-    echo $html->link('View Post', array('manager' => false, 'controller' => 'posts', 'action' => 'view', 5));
+    echo $this->Html->link('View Post', array('manager' => false, 'controller' => 'posts', 'action' => 'view', 5));
 
 .. index:: plugin routing
 
@@ -429,12 +429,12 @@ Plugin routing
 Plugin routing uses the **plugin** key. You can create links that
 point to a plugin, but adding the plugin key to your url array::
 
-    echo $html->link('New todo', array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'));
+    echo $this->Html->link('New todo', array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'));
 
 Conversely if the active request is a plugin request and you want
 to create a link that has no plugin you can do the following::
 
-    echo $html->link('New todo', array('plugin' => null, 'controller' => 'users', 'action' => 'profile'));
+    echo $this->Html->link('New todo', array('plugin' => null, 'controller' => 'users', 'action' => 'profile'));
 
 By setting ``plugin => null`` you tell the Router that you want to
 create a link that is not part of a plugin.
@@ -466,7 +466,7 @@ would create your route as illustrated below::
 
 Then to create links which map back to the routes simply use::
 
-    $html->link(
+    $this->Html->link(
         'Link title',
         array('controller' => 'pages', 'action' => 'view', 'title' => 'super-article', 'ext' => 'html')
     );
