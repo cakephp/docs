@@ -24,7 +24,6 @@ CakePHP のモデルの標準機能があれば、やりたいことはなんで
 
 ::
 
-    <?php
     class Example extends AppModel {
         public function getRecent() {
             $conditions = array(
@@ -41,7 +40,6 @@ CakePHP のモデルの標準機能があれば、やりたいことはなんで
 
 ::
 
-    <?php
     $recent = $this->Example->getRecent();
 
 :php:meth:`Model::associations()`
@@ -52,7 +50,6 @@ CakePHP のモデルの標準機能があれば、やりたいことはなんで
 
 関連を取得します。 ::
 
-    <?php
     $result = $this->Example->associations();
     // $result は array('belongsTo', 'hasOne', 'hasMany', 'hasAndBelongsToMany') になります
 
@@ -107,7 +104,6 @@ CakePHP のモデルの標準機能があれば、やりたいことはなんで
 
 ::
 
-    <?php
     $this->Example->id = 9;
     if ($this->Example->exists()) {
         // ...

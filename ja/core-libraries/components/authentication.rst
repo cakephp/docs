@@ -110,7 +110,6 @@ Basic認証では、ユーザ名とパスワードは平文のテキストとし
 コントローラの ``beforeFilter`` の中、もしくは ``$components`` 配列の中に、認証ハンドラをいくつでも設定することができます。
 次のようにすることで各認証オブジェクトへと設定情報を渡すことができます::
 
-    <?php
     // 基本的な設定法
     $this->Auth->authenticate = array('Form');
 
@@ -130,7 +129,6 @@ Basic認証では、ユーザ名とパスワードは平文のテキストとし
 この特別なキーを使うことで、列挙したオブジェクトすべてに設定が渡されることになります。
 all キーは ``AuthComponent::ALL`` と記述することもできます::
 
-    <?php
     // 'all' を使って設定を記述
     $this->Auth->authenticate = array(
         AuthComponent::ALL => array('userModel' => 'Member'),
@@ -170,7 +168,6 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 
 配列 ``$components`` の中でユーザの特定の列名を設定するには::
 
-    <?php
     // $components 配列の中で設定を記述
     public $components = array(
         'Auth' => array(
@@ -191,7 +188,6 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
     それらは authenticate キーと同じレベルであるべきです。
     上記の例を他の Auth 設定を使って書いた場合は次のようになります::
 
-        <?php
         // $components 配列の中で設定を記述
         public $components = array(
             'Auth' => array(
@@ -248,7 +244,6 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 認証オブジェクトはプラガブルなので、カスタム認証オブジェクトを自分のアプリケーション内にでも、プラグインとしてでも作成が可能です。
 もし例えば、OpenID 認証オブジェクトを作成したいのだとしたら、``app/Controller/Component/Auth/OpenidAuthenticate.php`` の中で次のように記述することができます::
 
-    <?php
     App::uses('BaseAuthenticate', 'Controller/Component/Auth');
 
     class OpenidAuthenticate extends BaseAuthenticate {
@@ -288,7 +283,6 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 
 カスタム認証オブジェクトを作成したら、AuthComponents の authenticate 配列内にそれを含めることで利用することができます::
 
-    <?php
     $this->Auth->authenticate = array(
         'Openid', // app内の認証オブジェクト
         'AuthBag.Combo', // プラグインの認証オブジェクト
@@ -317,7 +311,6 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 あるオブジェクトでユーザが識別できたら、以降のオブジェクトはチェックされません。
 ログインフォームと連携する単純な login 関数なら次のようになります::
 
-    <?php
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
@@ -358,7 +351,6 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 
 Basic認証・ダイジェスト認証では、ログイン処理の前に実行される、最初の POST を必要としないため、あなたが実装した ``login()`` 関数は ``FormAuthentication`` を使う場合とい若干異なります::
 
-    <?php
     public function login() {
         if ($this->Auth->login()) {
             return $this->redirect($this->Auth->redirect());
@@ -397,7 +389,6 @@ HTTP Basic認証の例を挙げると、ユーザ名とパスワードの値と�
 リクエストごとに、もしクライアントがクッキーをサポートしていないなら、それらの値を再度ユーザを識別するために使い、正規のユーザであることを確認します。
 認証オブジェクトの ``authenticate()`` メソッドと同様に、``getUser()`` メソッドも成功ならユーザ情報の配列を、失敗なら ``false`` を返すようにしてください::
 
-    <?php
     public function getUser($request) {
         $username = env('PHP_AUTH_USER');
         $pass = env('PHP_AUTH_PW');
@@ -433,10 +424,8 @@ HTTP Basic認証の例を挙げると、ユーザ名とパスワードの値と�
 Auth が生成するセッションエラーメッセージを表示するためには、次のコードをあなたのレイアウトに加えなければなりません。
 ``app/View/Layouts/default.ctp`` ファイルに次の２行を加えてください。content_for_layout 行の前にある body 部の中がよいでしょう::
 
-    <?php
     echo $this->Session->flash();
     echo $this->Session->flash('auth');
-    ?>
 
 ..
   In order to display the session error messages that Auth generates, you need to add the following code to your layout. 
@@ -461,7 +450,6 @@ AuthComponent の flash 設定を使うことでエラーメッセージをカ�
 フラッシュメッセージの設定だけでなく、AuthComponent が使用する他のエラーメッセージをカスタマイズすることもできます。
 あなた自身のコントローラの beforeFilter の中や component の設定で、認証が失敗した際に使われるエラーをカスタマイズするのに ``authError`` を使うことができます::
 
-    <?php
     $this->Auth->authError = "このエラーは保護されたWebサイトの一部にユーザがアクセスしようとした際に表示されます。";
 
 ..
@@ -489,7 +477,6 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
 
 パスワードの妥当性チェックのあと、あなたのモデルの beforeSave コールバックの中でパスワードをハッシュ化することができます::
 
-    <?php
     class User extends AppModel {
         public function beforeSave($options = array()) {
             $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
@@ -522,7 +509,6 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
 パスワードをダイジェスト認証で使用できるよう正しくハッシュ化するために、特別なパスワードハッシュ化の関数 ``DigestAuthenticate`` を使ってください。
 ダイジェスト認証とその他の認証戦略を合わせて利用する場合には、通常のハッシュ化パスワードとは別のカラムでダイジェストパスワードを保管するのをお勧めします::
 
-    <?php
     class User extends AppModel {
         public function beforeSave($options = array()) {
             // make a password for digest auth.
@@ -566,7 +552,6 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
 独自のアプリケーションを登録した直後など、時には手動によるログインが必要になる事態が発生することもあるでしょう。
 ログインさせたいユーザデータを引数に ``$this->Auth->login()`` を呼び出すことで、これを実現することができます::
 
-    <?php
     public function register() {
         if ($this->User->save($this->request->data)) {
             $id = $this->User->id;
@@ -598,7 +583,6 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
 このメソッドは static で、AuthComponent がロードされたあと、global に使うこともできます。
 インスタンスメソッドとしても、static メソッドとしてもアクセス可能です::
 
-    <?php
     // どこからでも利用できます。
     AuthComponent::user('id')
 
@@ -621,7 +605,6 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
 最終的には認証を解除し、適切な場所へとリダイレクトするためのてっとり早い方法がほしくなるでしょう。
 このメソッドはあなたのアプリケーション内のメンバーページに 'ログアウト' リンクを入れたい場合にも便利です::
 
-    <?php
     public function logout() {
         $this->redirect($this->Auth->logout());
     }
@@ -699,7 +682,6 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
 あなたのコントローラの ``beforeFilter`` の中や ``$components`` 配列の中で権限判定ハンドラの設定を行うことができます。
 配列を使って、各権限判定オブジェクトに設定情報を渡すことができます::
 
-    <?php
     // 基本的な設定法
     $this->Auth->authorize = array('Controller');
 
@@ -717,7 +699,6 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
 この特別なキーにより、設定されたすべてのオブジェクトに渡す設定を記述することができます。
 all キーは ``AuthComponent::ALL`` と記述することもできます::
 
-    <?php
     // 'all' を使って設定を記述
     $this->Auth->authorize = array(
         AuthComponent::ALL => array('actionPath' => 'controllers/'),
@@ -756,7 +737,6 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 権限判定オブジェクトはプラガブルなので、カスタム権限判定オブジェクトを自分のアプリケーション内にでも、プラグインとしてでも作成が可能です。
 もし例えば、LDAP 権限判定オブジェクトを作成したいのだとしたら、``app/Controller/Component/Auth/LdapAuthorize.php`` の中で次のように記述することができます::
 
-    <?php
     App::uses('BaseAuthorize', 'Controller/Component/Auth');
 
     class LdapAuthorize extends BaseAuthorize {
@@ -791,7 +771,6 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
 
 カスタム権限判定オブジェクトを作成したら、AuthComponents の authorize 配列にそれらを含めることで使うことができます::
 
-    <?php
     $this->Auth->authorize = array(
         'Ldap', // app内の権限判定オブジェクト
         'AuthBag.Combo', // プラグインの権限判定オブジェクト
@@ -828,7 +807,6 @@ AuthComponent は悲観的であり、デフォルトではアクセスを拒否
 ``AuthComponent::allow()`` を使うことで、公開すべきアクションに印をつけることができます。
 アクションに公開の印をつけることで、AuthComponent は該当のユーザがログインしているかのチェックも、権限判定オブジェクトによるチェックも行わなくなります::
 
-    <?php
     // すべてのアクションを許可。 CakePHP 2.0
     $this->Auth->allow('*');
 
@@ -864,7 +842,6 @@ AuthComponent は悲観的であり、デフォルトではアクセスを拒否
 アクションを公開する形で作成したなら、公開アクションを取り消したくなるかもしれません。
 そのためには ``AuthComponent::deny()`` を使うことができます::
 
-    <?php
     // アクション１つを取り除く
     $this->Auth->deny('add');
 
@@ -897,7 +874,6 @@ CrudAuthorize やアクションマッピングを使う他の権限判定オブ
 AuthComponent のこのメソッドを呼び出すことで、設定済みのすべての権限判定オブジェクトに設定が渡されます::
 ですので、設定がどこでも確実に適用されます::
 
-    <?php
     $this->Auth->mapActions(array(
         'create' => array('register'),
         'view' => array('show', 'display')
@@ -933,7 +909,6 @@ ControllerAuthorize を使うことで、コントローラのコールバック
 コールバックでは必ず ``isAuthorized()`` を呼んでください。これは該当ユーザがリクエスト内でリソースにアクセスすることが許可されるかを boolean で返します。
 コールバックにはアクティブなユーザが渡されますので、チェックが可能です::
 
-    <?php
     class AppController extends Controller {
         public $components = array(
             'Auth' => array('authorize' => 'Controller'),
@@ -1281,7 +1256,6 @@ AuthComponent は CakePHP に組み込み済みの権限判定・認証メカニ
 
     ログインしている現在のユーザのデータを取得する。プロパティのキーを使用することで、このユーザについて特定のデータをフェッチすることが可能::
     
-        <?php
         $id = $this->Auth->user('id');
 
     ..

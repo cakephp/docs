@@ -22,7 +22,6 @@ AppController, AppHelper, AppModel および AppShell
 場合は、次のような方法でアップグレードすることができます。::
 
     // app/View/Helper/AppHelper.php
-    <?php
     App::uses('Helper', 'View');
     class AppHelper extends Helper {
     }
@@ -450,7 +449,6 @@ HtmlHelper
     instead.
   - ``$scripts_for_layout`` is deprecated.  Use the following instead::
   
-          <?php
           echo $this->fetch('meta');
           echo $this->fetch('css');
           echo $this->fetch('script');
@@ -469,7 +467,6 @@ HtmlHelper
 
 - ``$scripts_for_layout`` は推奨されません。代わりに下記の記述を利用してください。 ::
 
-        <?php
         echo $this->fetch('meta');
         echo $this->fetch('css');
         echo $this->fetch('script');

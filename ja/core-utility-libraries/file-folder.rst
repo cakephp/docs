@@ -10,24 +10,20 @@ Folder と File ユーティリティは、ファイルの読み書きやフォ�
 
 :php:meth:`App::uses()` を使ってクラスをロードします。\ ::
 
-    <?php
     App::uses('Folder', 'Utility');
     App::uses('File', 'Utility');
 
 すると、新しいフォルダインスタンスをセットアップすることができるようになります。\ ::
 
-    <?php
     $dir = new Folder('/path/to/folder');
 
 インスタンスを作成したフォルダ内から *.ctp* の拡張子が付いたファイルを\
 正規表現検索する場合はこのようにします。\ ::
 
-    <?php
     $files = $dir->find('.*\.ctp');
 
 これでファイルの読み込みや、コンテンツの書き込み、ファイルの削除などが行えるようになります。\ ::
 
-    <?php
     foreach ($files as $file) {
         $file = new File($dir->pwd() . DS . $file);
         $contents = $file->read();
@@ -44,7 +40,6 @@ Folder API
 
 ::
 
-    <?php
     // 0755 のパーミッションで新しいフォルダを作成します
     $dir = new Folder('/path/to/folder', true, 0755);
 
@@ -68,7 +63,6 @@ Folder API
 
     $path と $element の間に適切なスラッシュを加えて返します。\ ::
 
-        <?php
         $path = Folder::addPathElement('/a/path/for', 'testing');
         // $path は /a/path/for/testing となります
 
@@ -79,7 +73,6 @@ Folder API
 
     カレントディレクトリを $path へ移動します。失敗時には false が返ります\ ::
 
-        <?php
         $folder = new Folder('/foo');
         echo $folder->path; // /foo が表示されます
         $folder->cd('/bar');
@@ -94,7 +87,6 @@ Folder API
     ディレクトリのモード（パーミッション）を再帰的に変更します。\
     ファイルのモードも同様に変更します。\ ::
 
-        <?php
         $dir = new Folder();
         $dir->chmod('/path/to/folder', 0755, true, array('skip_me.php'));
 
@@ -106,7 +98,6 @@ Folder API
     ディレクトリを再帰的にコピーします。\
     唯一のパラメータである $options にはコピー先のパスか、オプションの配列を指定します。\ ::
 
-        <?php
         $folder1 = new Folder('/path/to/folder1');
         $folder1->copy('/path/to/folder2');
         // Will put folder1 and all its contents into folder2
@@ -119,7 +110,6 @@ Folder API
             'skip' => array('skip-me.php', '.git')
         ));
 
-        <?php
         $folder1 = new Folder('/path/to/folder1');
         $folder1->copy('/path/to/folder2');
         // folder1 以下のファイルを folder2 へコピーします
@@ -147,7 +137,6 @@ Folder API
     ディレクトリを作成します。
     `/foo/bar/baz/shoe/horn` のような深い階層の作成も可能です。\ ::
 
-        <?php
         $folder = new Folder();
         if ($folder->create('foo' . DS . 'bar' . DS . 'baz' . DS . 'shoe' . DS . 'horn')) {
             // フォルダ作成に成功した場合の処理
@@ -159,7 +148,6 @@ Folder API
 
     システムが許可していた場合、再帰的にディレクトリを削除します。\ ::
 
-        <?php
         $folder = new Folder('foo');
         if ($folder->delete()) {
             // フォルダの削除が成功した場合の処理
@@ -183,7 +171,6 @@ Folder API
 
     現在のディレクトリで指定のパターンにマッチしたファイルを配列で返します。\ ::
 
-        <?php
         // app/webroot/img/ フォルダ内の .png を検索し、ソートして返す
         $dir = new Folder(WWW_ROOT . 'img');
         $files = $dir->find('.*\.png', true);
@@ -210,7 +197,6 @@ Folder API
 
     パターンにマッチした全てのファイルをカレントディレクトリを付けて返します。\ ::
 
-        <?php
         // test もしくは index で始まるファイルを再帰的に検索する
         $dir = new Folder(WWW_ROOT);
         $files = $dir->findRecursive('(test|index).*');
@@ -239,7 +225,6 @@ Folder API
 
      指定されたファイルが与えられたパスの中に存在すれば true を返します。\ ::
 
-        <?php
         $Folder = new Folder(WWW_ROOT);
         $result = $Folder->inPath(APP);
         // $result = true, /var/www/example/app/ は /var/www/example/app/webroot/ に含まれる
@@ -262,7 +247,6 @@ Folder API
     引数の $path がスラッシュで終了していれば true を返します。
     （つまり、 slash-terminated）\ ::
 
-        <?php
         $result = Folder::isSlashTerm('/my/test/path');
         // $result = false
         $result = Folder::isSlashTerm('/my/test/path/');
@@ -313,7 +297,6 @@ Folder API
     現在のディレクトリのコンテンツを配列で返します。
     戻り値は2つの配列となります。1つはディレクトリ名の配列。もう1つはファイル名の配列です。\ ::
 
-        <?php
         $dir = new Folder(WWW_ROOT);
         $files = $dir->read(true, array('files', 'index.php'));
         /*
@@ -362,7 +345,6 @@ File API
 
 ::
 
-    <?php
     // 0644 のパーミッションで新しいファイルを作成します
     $file = new File('/path/to/file.php', true, 0644);
 

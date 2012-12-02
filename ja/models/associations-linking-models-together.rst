@@ -46,7 +46,6 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
 
 ::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasOne = 'Profile';
@@ -65,7 +64,6 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
 **各モデルのエイリアスはアプリケーション全体でユニークでなければなりません。**\
 たとえば次の例を見てください。これは正しい書き方です。 ::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
@@ -96,7 +94,6 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
 
 しかし、以下の例はうまく動きません。 ::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
@@ -134,12 +131,10 @@ Cakeはアソシエーションを定義したモデルオブジェクト同士�
 たとえば、 ``User`` モデルの中では、以下のようにして ``Recipe`` モデルに\
 アクセスできます。 ::
 
-    <?php
     $this->Recipe->someFunction();
 
 同じようにコントローラーでも、関連モデルに簡単にアクセスできます。 ::
 
-    <?php
     $this->User->Recipe->someFunction();
 
 .. note::
@@ -187,7 +182,6 @@ $hasOneプロパティを追加します。ただし、Profileモデルが /app/
 ないと正常に動作しません。 ::
 
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasOne = 'Profile';
@@ -203,7 +197,6 @@ $hasOneプロパティを追加します。ただし、Profileモデルが /app/
 
 ::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasOne = array(
@@ -289,7 +282,6 @@ Mentor belongsTo Doctor mentors.doctor\_id
 Profileモデル(/app/Model/Profile.php)に文字列でbelongsToアソシエーションを\
 定義してみましょう。 ::
 
-    <?php
     class Profile extends AppModel {
         public $name = 'Profile';
         public $belongsTo = 'User';
@@ -297,7 +289,6 @@ Profileモデル(/app/Model/Profile.php)に文字列でbelongsToアソシエー�
 
 配列を使ってより詳しく設定することもできます。 ::
 
-    <?php
     class Profile extends AppModel {
         public $name = 'Profile';
         public $belongsTo = array(
@@ -389,7 +380,6 @@ Product hasMany Option  Option.product\_id
 Userモデル(/app/Model/Profile.php)に文字列でhasManyアソシエーションを\
 定義してみましょう。 ::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = 'Comment';
@@ -397,7 +387,6 @@ Userモデル(/app/Model/Profile.php)に文字列でhasManyアソシエーショ
 
 配列を使ってより詳しく設定することもできます。 ::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
@@ -513,7 +502,6 @@ BlogEntry  BlogEntryComment        blog\_entries.blog\_entry\_comment\_count
 counter-cache機能を有効にするためにアソシエーションの設定に \
 ``counterCache`` キーに ``true`` をセットしましょう。 ::
 
-    <?php
     class ImageComment extends AppModel {
         public $belongsTo = array(
             'Image' => array(
@@ -531,7 +519,6 @@ counter-cache機能を有効にするためにアソシエーションの設定�
 
 Imageモデルのサンプルでは、次のようになるでしょう。 ::
 
-    <?php
     class ImageComment extends AppModel {
         public $belongsTo = array(
             'Image' => array(
@@ -594,7 +581,6 @@ Foo HABTM Bar             **bars_foos**.id, **bars_foos**.foo_id, **bars_foos**.
 
 新しいテーブルを作れば、モデルにHABTMアソシエーションを定義できます。 ::
 
-    <?php
     class Recipe extends AppModel {
         public $name = 'Recipe';   
         public $hasAndBelongsToMany = array(
@@ -745,7 +731,6 @@ Course(授業)はStudent(生徒)に取られています。これは単純に多
 使えば解決できます。このアソシエーションはモデルそれ自身、\
 CourseMembershipモデルを作ります。以下のモデルを見てください。 ::
 
-            <?php
             // Student.php
             class Student extends AppModel {
                 public $hasMany = array(
@@ -793,7 +778,6 @@ CourseMembershipモデルはStudent(生徒)のCourse(授業)への参加して�
 より詳しくはビルトインビヘイビアについてのマニュアルを参照してください。)
 以下の2つのモデルを使って、bindModel()とunbindModel()の使い方を見てみましょう。 ::
 
-    <?php
     class Leader extends AppModel {
         public $name = 'Leader';
         
@@ -815,7 +799,6 @@ Followerを取得できます。上記のコードでは、Leaderモデルのア
 コントローラーのアクションで、アソシエーションを削除するためにunbindModel()を\
 使ってみましょう。 ::
 
-    <?php
     public function some_action() {
         // Leaderとそれに関連するFollowerを取得します。
         $this->Leader->find('all');
@@ -845,7 +828,6 @@ Followerを取得できます。上記のコードでは、Leaderモデルのア
 
 これはunbindModel()の基本的な使い方です。 ::
 
-    <?php
     $this->Model->unbindModel(
         array('associationType' => array('associatedModelClassName'))
     );
@@ -863,7 +845,6 @@ Principleモデルは$nameプロパティを除いては空っぽの状態です
 それでは、直接PrincipleをLeaderに関連付けてみましょう。\
 LeadersControllerで次のようにします。 ::
 
-    <?php
     public function another_action() {
         // leader.phpモデルファイルでは、hasManyアソシエーションは定義されていません。
         // ここでのfindはLeaderのみ取得します。
@@ -888,7 +869,6 @@ bindModel()は基本的には、生成したいアソシエーションの名前
 配列の中に、モデルに指定するのと同じアソシエーション配列をセットします。 ::
 
 
-    <?php
     $this->Model->bindModel(
         array('associationName' => array(
                 'associatedModelClassName' => array(
@@ -912,7 +892,6 @@ bindModel()は基本的には、生成したいアソシエーションの名前
 この場合、messagesテーブルはuser\_idとrecipient\_idというフィールドを\
 持っています。さて、ここではMessageモデルに次のように定義します。 ::
 
-    <?php
     class Message extends AppModel {
         public $name = 'Message';
         public $belongsTo = array(
@@ -930,7 +909,6 @@ bindModel()は基本的には、生成したいアソシエーションの名前
 RecipientはUserモデルに対するエイリアスです。Userモデルの方は\
 このようになっています。 ::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $hasMany = array(
@@ -947,7 +925,6 @@ RecipientはUserモデルに対するエイリアスです。Userモデルの方
 
 自分自身に対するアソシエーションも以下のようにして定義できます。 ::
 
-    <?php
     class Post extends AppModel {
         public $name = 'Post';
         
@@ -989,7 +966,6 @@ CakePHPのbelongsToとhasOneでは、関連データを取得するために\
 テーブルを結合するには、Model::find()の"モダン"な構文を使います。
 $options配列の'joins'というキーを追加します。以下の例を見てください。 ::
 
-    <?php
     $options['joins'] = array(
         array('table' => 'channels',
             'alias' => 'Channel',
@@ -1021,7 +997,6 @@ $options配列の'joins'というキーを追加します。以下の例を見�
 
 joinsと共に、joinsで指定した関連モデルに関する条件をconditionsに指定できます。 ::
 
-    <?php
     $options['joins'] = array(
         array('table' => 'channels',
             'alias' => 'Channel',
@@ -1044,7 +1019,6 @@ Book hasAndBelongsToMany Tag というアソシエーションを考えてみま
 booksテーブルとtagsテーブルを繋げるために、中間テーブルとして\
 books\_tagsテーブルを使うように定義してみます。 ::
 
-    <?php
     $options['joins'] = array(
         array('table' => 'books_tags',
             'alias' => 'BooksTag',

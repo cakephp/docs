@@ -106,7 +106,6 @@ bakeは必要なリレーションを全て行っているでしょうが、も�
 AuthとAclコンポーネントを追加する前に、多少の部品を加える必要があります。
 まずは ``UsersController`` にログインとログアウトのアクションを加えましょう::
 
-    <?php
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
@@ -124,7 +123,6 @@ AuthとAclコンポーネントを追加する前に、多少の部品を加え�
 更に、以下の様にビューファイルを
 ``app/View/Users/login.ctp`` に作成してください::
 
-    <?php
     echo $this->Form->create('User', array('action' => 'login'));
     echo $this->Form->inputs(array(
         'legend' => __('Login'),
@@ -137,7 +135,6 @@ AuthとAclコンポーネントを追加する前に、多少の部品を加え�
 平文のパスワードを保存するのは極めて危険であり、またAuthComponentはパスワードがハッシュ化されていることを期待します。
 ``app/Model/User.php`` で以下を追加してください::
 
-    <?php
     App::uses('AuthComponent', 'Controller/Component');
     class User extends AppModel {
         // 他のコード。
@@ -154,7 +151,6 @@ AuthとAclコンポーネントを追加する前に、多少の部品を加え�
 コントローラ全体に認証とACLを行うなら、この ``AppController`` に対してセットアップを行います。
 次のコードを加えてください::
 
-    <?php
     class AppController extends Controller {
         public $components = array(
             'Acl',
@@ -180,7 +176,6 @@ ACL をセットアップし終わってしまう前に、ユーザとグルー�
 そこで、グループとユーザを作成することを :php:class:`AuthComponent` に許可させるために、いくつかの例外を設けましょう。
 ``GroupsController`` と ``UsersController`` の **両方** に、次のコードを追加してください::
 
-    <?php
     public function beforeFilter() {
         parent::beforeFilter(); 
         $this->Auth->allow('*');
@@ -220,7 +215,6 @@ AuthとACLをきちんと動作させるには、ユーザとグループをACL�
 これを使用するにあたり、モデル中で ``parentNode()`` を実行する必要があります。
 ``User`` モデルに次のコードを追加してください::
 
-    <?php
     class User extends AppModel {
         public $name = 'User';
         public $belongsTo = array('Group');
@@ -245,7 +239,6 @@ AuthとACLをきちんと動作させるには、ユーザとグループをACL�
 
 ``Group`` モデルには、次のコードを追加します::
 
-    <?php
     class Group extends AppModel {
         public $actsAs = array('Acl' => array('type' => 'requester'));
          
@@ -291,7 +284,6 @@ MySQLのプロンプトで ``SELECT * FROM aros;`` を実行した場合、次�
 
 グループごとのみのパーミッションに単純化したい場合、 ``User`` も出るに  ``bindNode()`` を実装する必要があります::
 
-    <?php
     public function bindNode($user) {
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
     }
@@ -327,7 +319,6 @@ ACOオブジェクトを作成するには、ACLシェルを用いるか、 ``Ac
 
 AclComponentを使う方法は次のようになります::
 
-    <?php
     $this->Acl->Aco->create(array('parent_id' => null, 'alias' => 'controllers'));
     $this->Acl->Aco->save();
 
@@ -338,7 +329,6 @@ AclComponentを使う方法は次のようになります::
 ACLがコントローラとアクションを走査するにあたり正しいノードパスを使用するために、 ``AuthComponent`` に根ノードの存在を教えてください。
 これを行うには、先のコードで定義してあるように、 ``AppController`` の ``$components`` で、配列が ``actionPAth`` を必ず含むようにしてください::
 
-    <?php
     class AppController extends Controller {
         public $components = array(
             'Acl',

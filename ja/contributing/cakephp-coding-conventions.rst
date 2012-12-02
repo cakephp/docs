@@ -22,7 +22,6 @@ Cakeの開発者は以下のコーディング規約を使います。
 
 従って、インデントはこのようになります::
 
-    <?php
     // 基本レベル
         // レベル1
             // レベル2
@@ -31,7 +30,6 @@ Cakeの開発者は以下のコーディング規約を使います。
 
 または::
 
-    <?php
     $booleanVariable = true;
     $stringVariable = "大鹿";
     if ($booleanVariable) {
@@ -47,7 +45,6 @@ Cakeの開発者は以下のコーディング規約を使います。
 制御構造は例えば "``if``"、"``for``"、"``foreach``"、"``while``"、"``switch``"などです。
 下記に、 "``if``" の例を示します::
 
-    <?php 
     if ((expr_1) || (expr_2)) { 
         // action_1;
     } elseif (!(expr_3) && (expr_4)) {
@@ -65,7 +62,6 @@ Cakeの開発者は以下のコーディング規約を使います。
 
 ::
 
-    <?php 
     // 間違い＝中括弧が無い、ステートメントの場所が悪い
     if (expr) statement; 
 
@@ -86,7 +82,6 @@ Cakeの開発者は以下のコーディング規約を使います。
 どのような場合でも、三項演算子はネストしてはいけません。
 見やすさのために、丸括弧を三項の条件チェックの周りに使うことができます（任意）::
 
-    <?php
     //良い。シンプルで読みやすい
     $variable = isset($options['variable']) ? $options['variable'] : true;
 
@@ -99,7 +94,6 @@ Cakeの開発者は以下のコーディング規約を使います。
 関数は、関数の名前と開き括弧の間に空白を入れて呼び出してはいけません。
 関数呼び出しの引数各々に対して単一の空白がある必要があります::
 
-    <?php 
     $var = foo($bar, $bar2, $bar3); 
 
 上記をご覧の通り、イコール記号(=)の両サイドには単一の空白がある必要があります。
@@ -109,7 +103,6 @@ Cakeの開発者は以下のコーディング規約を使います。
 
 関数の定義の例::
 
-    <?php 
     function someFunction($arg1, $arg2 = '') {
         if (expr) {
             statement;
@@ -120,7 +113,6 @@ Cakeの開発者は以下のコーディング規約を使います。
 デフォルトを用いた引数は、関数の定義の最後に置く必要があります。
 関数は何かを、少なくともtrueかfalseを、関数呼び出しが成功したかどうかを判定できるように、返すように作ってみてください::
 
-    <?php 
     function connection($dns, $persistent = false) {
         if (is_array($dns)) {
             $dnsInfo = $dns;
@@ -160,7 +152,6 @@ PhpDocタグはJavaのJavaDocタグによく似ています。
 タグはドキュメントブロックの行の最初のもののみ処理されます。
 例を挙げます::
 
-    <?php
     /**
      * タグの例。
      * @author このタグは解析されますが、この@versionは無視されます
@@ -169,7 +160,6 @@ PhpDocタグはJavaのJavaDocタグによく似ています。
 
 ::
 
-    <?php 
     /**
      * インラインphpDocタグの例。
      *
@@ -206,7 +196,6 @@ PHPタグ
 
 全ての関数はキャメルバックで書いてください::
 
-    <?php
     function longFunctionName() {
     }
 
@@ -215,7 +204,6 @@ PHPタグ
 
 クラス名はキャメルケースで書かれる必要があります。例::
 
-    <?php
     class ExampleClass {
     }
 
@@ -227,7 +215,6 @@ PHPタグ
 オブジェクトを含む変数は大文字で始まり、何らかの方法で変数がオブジェクトとなっているクラスに関連したものになるべきです。
 例::
 
-    <?php
     $user = 'John';
     $users = array('John', 'Hans', 'Arne');
 
@@ -240,7 +227,6 @@ PHPタグ
 加えて、protectedなメソッドまたは変数の名前は単一のアンダースコア("\_")から始まります。
 例::
 
-    <?php
     class A {
         protected $_iAmAProtectedVariable;
 
@@ -252,7 +238,6 @@ PHPタグ
 privateなメソッドまたは変数の名前は二つののアンダースコア("\_\_")から始まります。
 例::
 
-    <?php
     class A {
         private $__iAmAPrivateVariable;
 
@@ -266,7 +251,6 @@ privateなメソッドまたは変数の名前は二つののアンダースコ�
 
 メソッドチェーンは複数の行にまたがる複数のメソッドとなり、単一のタブでインデントする必要があります::
 
-    <?php
     $email->from('foo@example.com')
         ->to('bar@example.com')
         ->subject('A great message')
@@ -325,7 +309,6 @@ resource
 
 ::
 
-    <?php
     define('CONSTANT', 1);
 
 もし定数の名前が複数の単語でできている場合は、アンダースコア文字によって分割する必要があります。
@@ -333,5 +316,4 @@ resource
 
 ::
 
-    <?php
     define('LONG_NAMED_CONSTANT', 2);

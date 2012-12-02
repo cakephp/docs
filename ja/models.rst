@@ -32,7 +32,6 @@ Blog、Post、Comment はすべてモデルの例で、それぞれが互いに�
 
 以下は CakePHP におけるモデル定義の簡単な例です。\ ::
 
-    <?php
     class Ingredient extends AppModel {
         public $name = 'Ingredient';
     }
@@ -85,7 +84,6 @@ CakePHP はそのモデルを自動的に呼び出し可能にします。\
 自動で Ingredient モデルを初期化して、\
 コントローラの ``$this->Ingredient`` に割り当てます。\ ::
 
-    <?php
     class IngredientsController extends AppController {
         public function index() {
             //全ての ingredients を取得してビューに渡す
@@ -97,7 +95,6 @@ CakePHP はそのモデルを自動的に呼び出し可能にします。\
 関連モデルはメインのモデルを通じて利用できます。\
 以下の例は、Recipe が Ingredient モデルと関連づけられている場合です。\ ::
 
-    <?php
     class Recipe extends AppModel {
 
         public function steakRecipes() {

@@ -34,7 +34,6 @@
 セッションコンポーネントと同じく、データは
 :term:`ドット記法` の配列構造で読み込みます::
 
-    <?php
     array('User' => array(
         'username' => 'super@example.com'
     ));
@@ -112,7 +111,6 @@
     でしょう。一度メッセージを表示すると、メッセージは削除され表示されなく\
     なります::
 
-        <?php
         echo $this->Session->flash();
 
     ..
@@ -133,7 +131,6 @@
     html 要素をカスタマイズすることも出来ます。コントローラー内で以下の\
     ようなコードを書くことも出来ます::
 
-        <?php
         // in a controller
         $this->Session->setFlash('The user could not be deleted.');
 
@@ -144,7 +141,6 @@
     このメッセージを出力する時、メッセージを表示するのに使用する \
     html 要素を選択出来ます::
 
-        <?php 
         // in a layout.
         echo $this->Session->flash('flash', array('element' => 'failure'));
 
@@ -172,7 +168,6 @@
     追加パラメーターを ``flash()`` メソッドに渡すことも出来ます。\
     これによってカスタマイズしたメッセージを生成することが出来ます::
 
-        <?php
         // In the controller
         $this->Session->setFlash('Thanks for your payment %s');
 

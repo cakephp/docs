@@ -14,7 +14,6 @@
 メディアビューを使うためにはデフォルトビューの代わりにメディアビューを使うことをコントローラの中で宣言する必要があります。
 あとは、ファイルが何処にあるかを示すために追加パラメータを渡して下さい。::
 
-    <?php
     class ExampleController extends AppController {
         public function download() {
             $this->viewClass = 'Media';
@@ -33,7 +32,6 @@
 ここではメディアビューの ``$mimeType`` に登録されていないmimeタイプのファイルを描画する例を示します。
 また、デフォルトの ``app/webroot`` ディレクトリへの相対パスを使っています。::
 
-    <?php
     public function download() {
         $this->viewClass = 'Media';
         // app/webroot/files/example.docx を描画

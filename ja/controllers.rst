@@ -30,7 +30,6 @@ AppController
 AppControllerはそれ自身、CakePHPのコアライブラリに含まれるControllerクラスを拡張しています。
 AppControllerは ``/app/Controller/AppController.php`` に次のように定義されます。::
 
-    <?php
     class AppController extends Controller {
     }
     
@@ -55,7 +54,6 @@ AppControllerで ``$helpers`` 変数を定義したら、デフォルトでHtml�
 
 また、子コントローラのコールバック中でAppControllerのコールバックを呼び出すのは、このようにするのがベストです。::
 
-    <?php
     public function beforeFilter() {
         parent::beforeFilter();
     }
@@ -78,7 +76,6 @@ CakePHPは規約に従って、アクション名のビューを描画します�
 Online Bakeryのサンプルに戻ってみてみると、RecipesControllerは ``view()``, ``share()``, ``search()`` アクションが含まれています。
 このコントローラは ``/app/Controller/RecipesController.php`` にあり、次のようなコードになっています。::
 
-        <?php
         # /app/Controller/RecipesController.php
         
         class RecipesController extends AppController {
@@ -110,7 +107,6 @@ CakePHPの規約があるので、手動でビューを描画したり生成し�
 コントローラのメソッドが :php:meth:`~Controller::requestAction()` から呼ばれた時、文字列ではないデータを返したい場合があると思います。
 もし通常のWebリクエストからもrequestActionからも呼ばれるコントローラのメソッドがあれば、値を返す前にリクエストタイプをチェックしましょう。::
 
-    <?php
     class RecipesController extends AppController {
         public function popular() {
             $popular = $this->Recipe->popular();
@@ -178,7 +174,6 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
     ``set()`` メソッドはコントローラからビューへデータを渡すための主な方法です。
     1度 ``set()`` を使えば、その変数はビュー内でアクセスできるようになります。::
 
-        <?php
         // まずコントローラからデータを渡します
 
         $this->set('color', 'pink');
@@ -197,7 +192,6 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 
     ::
 
-        <?php
         $data = array(
             'color' => 'pink',
             'type' => 'sugar',
@@ -211,7 +205,6 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 
     ``$pageTitle`` という変数はもう存在しません。タイトルをセットするには ``set()`` を使ってください。::
 
-        <?php
         $this->set('title_for_layout', 'This is the page title');
 
 
@@ -223,7 +216,6 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
     レンダリングに使用されるデフォルトのビューファイルは、規約によって決定されます。
     RecipesControllerの ``search()`` アクションがリクエストされたら、/app/View/Recipes/search.ctpのビューファイルが描画されます。::
 
-        <?php
         class RecipesController extends AppController {
         // ...
             public function search() {
@@ -239,7 +231,6 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
     ``$action`` が'/'で始まっていれば、 ``/app/View`` への相対パスでビューまたはエレメントを探そうとします。
     これはエレメントを直接描画することができ、Ajax呼び出しではとても有用です。::
 
-        <?php
         // /View/Elements/ajaxreturn.ctpのビューが描画されます
         $this->render('/Elements/ajaxreturn');
 
@@ -253,7 +244,6 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 これは ``render()`` を直接呼び出すことで出来ます。
 一度 ``render()`` を呼び出すと、CakePHPは再度ビューを描画することはありません。::
 
-    <?php
     class PostsController extends AppController {
         public function my_action() {
             $this->render('custom_file');
@@ -271,7 +261,6 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
     このメソッドは最初の引数に、CakePHPの相対URLを指定します。
     ユーザーが正常に注文を出した時、領収画面にリダイレクトさせるとすると::
 
-        <?php
         public function place_order() {
             // 注文終了のためのロジック
             if ($success) {
@@ -283,13 +272,11 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 
     $urlに相対URLまたは絶対URLを指定することも出来ます。::
 
-        <?php
         $this->redirect('/orders/thanks'));
         $this->redirect('http://www.example.com');
 
     アクションにデータを渡すこともできます。::
 
-        <?php
         $this->redirect(array('action' => 'edit', $id));
 
     ``redirect()`` の2つ目のパラメータは、リダイレクトに伴うHTTPステータスコードを定義することが出来ます。
@@ -299,13 +286,11 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 
     リファラのページにリダイレクトする必要があれば、次のように出来ます。::
 
-        <?php
         $this->redirect($this->referer());
 
     このメソッドは名前付きパラメータもサポートしています。
     たとえば ``http://www.example.com/orders/confirm/product:pizza/quantity:5`` のようなURLにリダイレクトしたい場合、以下のように使います。::
 
-        <?php
         $this->redirect(array('controller' => 'orders', 'action' => 'confirm', 'product' => 'pizza', 'quantity' => 5));
 
 .. php:method:: flash(string $message, string $url, integer $pause, string $layout)
@@ -356,7 +341,6 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
     ``$default`` パラメータは、HTTP\_REFERERがヘッダから読み取れなかった場合にデフォルトURLとして使うために指定します。
     つまり、このようにする代わりに::
 
-        <?php
         class UserController extends AppController {
             public function delete($id) {
                 // delete code goes here, and then...
@@ -370,7 +354,6 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 
     このように出来ます。::
 
-        <?php
         class UserController extends AppController {
             public function delete($id) {
                 // delete code goes here, and then...
@@ -403,7 +386,6 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
     ここで、Orderモデルに基づくフォームを作るために、CakePHPの :php:class:`FormHelper` と :php:class:`HtmlHelper` を使えます。
     そうすると、コントローラのアクションはそのフォームからポストされたデータをfind条件を作るために使うことができます。::
 
-        <?php
         public function index() {
             $conditions = $this->postConditions($this->request->data);
             $orders = $this->Order->find('all', compact('conditions'));
@@ -415,7 +397,6 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 
     もし他のSQL演算子を使いたければ、それらの演算子を2つ目のパラメータに渡してください。::
 
-        <?php
         /*
         $this->request->dataは以下のような形式です。
         array(
@@ -468,7 +449,6 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
     レイアウトの中に"最新のコメント"のエレメントを配置するサンプルを使ってみましょう。
     まず、データを返すコントローラの関数を作ります。::
 
-        <?php
         // Controller/CommentsController.php
         class CommentsController extends AppController {
             public function latest() {
@@ -484,7 +464,6 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 
     上記の関数を呼ぶための簡単なエレメントを作ったら::
 
-        <?php
         // View/Elements/latest_comments.ctp
 
         $comments = $this->requestAction('/comments/latest');
@@ -494,20 +473,17 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 
     どこか出力したい場所にさっきのエレメントを配置できます。::
 
-        <?php
         echo $this->element('latest_comments');
 
     ここに書かれた方法では、エレメントが描画されると毎回、データを取得するためにコントローラに対してリクエストが作られ、データが処理されて結果が返ってきます。
     したがって、不必要な処理を防ぐためにエレメントのキャッシュを使うのが良いでしょう。::
 
-        <?php
         echo $this->element('latest_comments', array('cache' => '+1 hour'));
 
     ``requestAction`` の呼び出しはキャッシュされたエレメントのビューファイルが存在してそれが有効な限り、リクエストの発行はしません。
 
     加えて、requestActionはCakePHP形式のURL配列を引数に取ることが出来ます。::
 
-        <?php
         echo $this->requestAction(
             array('controller' => 'articles', 'action' => 'featured'),
             array('return')
@@ -519,13 +495,11 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
     これは、requestActionが名前付きパラメータの配列(requestActionの2つ目の引数)をController::params配列にマージして、名前付きパラメータに対して明示的に'named'というキーを付けないからです。
     ``$option`` 配列で指定した追加の値は、リクエストされたアクションのController::params配列の中で使えるようになります。::
         
-        <?php
         echo $this->requestAction('/articles/featured/limit:3');
         echo $this->requestAction('/articles/view/5');
 
     上記の場合、requestActionの配列は次のようになります。::
 
-        <?php
         echo $this->requestAction(
             array('controller' => 'articles', 'action' => 'featured'),
             array('named' => array('limit' => 3))
@@ -549,7 +523,6 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 
     ``loadModel`` 関数は、コントローラのデフォルトモデルまたはそれに関連づいたモデル以外のモデルを使う必要がある時に便利です。::
     
-        <?php
         $this->loadModel('Article');
         $recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));
 
@@ -569,7 +542,6 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
     通常これは、コントローラが使うメインのモデルの複数形となります。
     このプロパティは必須ではありません。::
 
-        <?php
         // $name変数の使い方のサンプル
         class RecipesController extends AppController {
            public $name = 'Recipes';
@@ -605,7 +577,6 @@ $componentsと$helpersと$uses
 
     追加で利用するMVCクラス達をどうやってCakePHPのコントローラに伝えるのかを見てみましょう。::
 
-        <?php
         class RecipesController extends AppController {
             public $uses = array('Recipe', 'User');
             public $helpers = array('Js');
@@ -638,7 +609,6 @@ $componentsと$helpersと$uses
     この変数を使って、 :php:class:`PaginatorComponent` の読み込みと設定をします。
     次のように、コンポーネントの設定を使うように修正することが推奨されます。::
 
-        <?php
         class ArticlesController extends AppController {
             public $components = array(
                 'Paginator' => array(
