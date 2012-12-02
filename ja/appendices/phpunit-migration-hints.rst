@@ -163,7 +163,6 @@ PHPUnitが個々のテストケースとテストスイートをテストラン�
 グループテストをテストケースディレクトリの中に置いて、 ``PHPUnit_Framework_TestSuite`` を基底クラスとして使うことが出来ます。
 テストスイートの例は以下のようになります::
 
-    <?php
     class AllJavascriptHelpersTest extends PHPUnit_Framework_TestSuite {
     
     /**

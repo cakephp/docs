@@ -108,7 +108,6 @@ CakePHPのデータベース設定ファイルの元は、
 ``$default`` 配列の値を自分のセットアップに合わせて変更するだけです。
 完全な設定の配列の例は次のようなものになるでしょう::
 
-    <?php
     public $default = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,
@@ -144,7 +143,6 @@ CakePHPのデータベース設定ファイルの元は、
 
 ::
 
-    <?php
     /**
      * A random string used in security hashing methods.
      */
@@ -156,7 +154,6 @@ CakePHPのデータベース設定ファイルの元は、
 
 ::
 
-    <?php
     /**
      * A random numeric string (digits only) used to encrypt/decrypt strings.
      */

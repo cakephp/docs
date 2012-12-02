@@ -26,7 +26,6 @@ $id で特定されるレコードを削除します。
 ``Model::delete()`` のカスケード機能を使うメリットのひとつは、\
 ビヘイビアやモデルのコールバックを利用できることです。\ ::
 
-    <?php
     $this->Comment->delete($this->request->data('Comment.id'));
 
 モデルとビヘイビアが持つ ``beforeDelete`` と ``afterDelete``
@@ -52,7 +51,6 @@ deleteAll
 
 例::
 
-    <?php
     // find() と同様に、配列で与えられた条件で削除する
     $this->Comment->deleteAll(array('Comment.spam' => true), false);
 

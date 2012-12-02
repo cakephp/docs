@@ -31,7 +31,6 @@ CakeRequestはリクエストパラメータにアクセスするためにいく
 一つ目の方法は、添字付き配列です。二つ目の方法は ``$this->request->params`` を経由する方法です。
 三つ目はオブジェクトのプロパティとしてアクセスする方法です。::
 
-    <?php
     $this->request['controller'];
     $this->request->controller;
     $this->request->params['controller'];
@@ -42,7 +41,6 @@ CakeRequestはリクエストパラメータにアクセスするためにいく
 :ref:`route-elements` に加えて :ref:`passed-arguments` や :ref:`named-parameters` へのアクセスがしばしば必要になります。
 これらは両方ともリクエストオブジェクトと同様に利用可能です。::
 
-    <?php
     // 渡された引数
     $this->request['pass'];
     $this->request->pass;
@@ -68,7 +66,6 @@ CakeRequestはリクエストパラメータにアクセスするためにいく
 
 クエリ文字列パラメータは :php:attr:`CakeRequest::$query` を使って読み出すことができます。::
 
-    <?php
     // urlは /posts/index?page=1&sort=title
     $this->request->query['page'];
 
@@ -81,14 +78,12 @@ POSTデータにアクセスする
 すべてのPOSTデータは :php:attr:`CakeRequest::$data` を使ってアクセスされます。フォームデータが ``data``
 接頭辞を含んでいる場合、接頭辞は取り除かれるでしょう。例えば::
 
-    <?php
     // name属性が'data[Post][title]'だった入力は次のようにアクセスします。
     $this->request->data['Post']['title'];
 
 dataプロパティに直接アクセスするか、エラーが発生しない方法でdata配列を読むために
 :php:meth:`CakeRequest::data()` を使うことができます。キーが存在しない場合、 ``null`` が返ります。::
 
-    <?php
     $foo = $this->request->data('Value.that.does.not.exist');
     // $foo == null
 
@@ -109,7 +104,6 @@ XMLまたはJSONデータにアクセスする
 :php:meth:`CakeRequest::input()` を使っているどんな形式であっても入力データを読み込むことができます。
 デコード関数が提供されることでデシリアライズされたコンテンツを受け取ることができます。::
 
-    <?php
     // PUT/POSTアクションで投稿されたデータをJSON形式にエンコードで取得する
     $data = $this->request->input('json_decode');
 
@@ -117,7 +111,6 @@ XMLまたはJSONデータにアクセスする
 デシリアライズメソッドの中には呼び出し時に追加パラメータが必要なものがあるので :php:meth:`CakeRequest::input()`
 は追加パラメータを渡せるようになっています。::
 
-    <?php
     // PUT/POSTアクションで投稿されたデータをXmlエンコードで取得する
     $data = $this->request->input('Xml::build', array('return' => 'domdocument'));
 
@@ -136,7 +129,6 @@ CakeRequestはまたアプリケーションのパスについての役立つ情
 これらのメソッドは ``CakeRequest`` に移動され後方互換を保ちつつ新しいインターフェイスが提供されています。
 使い方は以下の通りです。::
 
-    <?php
     $this->request->is('post');
     $this->request->isPost();
 
@@ -154,7 +146,6 @@ CakeRequestはまたアプリケーションのパスについての役立つ情
 
 いくつかの例を示します。::
 
-    <?php
     // environment detectorを追加する
     $this->request->addDetector('post', array('env' => 'REQUEST_METHOD', 'value' => 'POST'));
 
@@ -243,7 +234,6 @@ CakeRequest API
 
     リクエストで使われている``HTTP_*``ヘッダにアクセスできます。::
 
-        <?php
         $this->request->header('User-Agent');
 
     この例の場合、リクエストで使われているユーザエージェントが返るでしょう。
@@ -256,7 +246,6 @@ CakeRequest API
 
     リクエストデータへドット記法によるアクセスを提供します。リクエストデータの読み込みと変更が可能です。また次のように連鎖的に呼び出す事をできます。::
 
-        <?php
         // リクエストデータを修正し、フォームフィールドを生成できます。
         $this->request->data('Post.title', 'New post')
             ->data('Comment.1.author', 'Mark');
@@ -278,12 +267,10 @@ CakeRequest API
 
     すべてのタイプを取得::
 
-        <?php
         $this->request->accepts();
 
     あるタイプについて調べる::
 
-        <?php
         $this->request->accepts('application/json');
 
 .. php:staticmethod:: acceptLanguage($language)
@@ -292,12 +279,10 @@ CakeRequest API
 
     受理される言語のリストを取得::
 
-        <?php
         CakeRequest::acceptLanguage();
 
     特定の言語が受理されるかどうかを調べる::
 
-        <?php
         CakeRequest::acceptLanguage('es-es');
 
 .. php:attr:: data
@@ -362,7 +347,6 @@ CakePHPはデフォルトで  ``CakeResponse`` を使います。 ``CakeResponse
 もしCakeResponseに組み込まれていないコンテンツタイプを扱う必要がある場合、以下のように
 ``type()`` を使って設定することが出来ます。::
 
-    <?php
     // vCard タイプを追加する
     $this->response->type(array('vcf' => 'text/v-card'));
 
@@ -379,7 +363,6 @@ CakePHPはデフォルトで  ``CakeResponse`` を使います。 ``CakeResponse
 :doc:`/views/media-view` を使うか、 ``CakeResponse`` の機能を使うことで実現できます。
 :php:meth:`CakeResponse::download()` はダウンロードファイルとしてレスポンスを送れるようにしてくれます。::
 
-    <?php
     public function sendFile($id) {
         $this->autoRender = false;
 
@@ -397,7 +380,6 @@ CakeResponseをどのように使えばよいかを示しています。
 
 ヘッダの設定は :php:meth:`CakeResponse::header()` で行われます。このメソッドは少し違ったパラメータ設定と一緒に呼ばれます。::
 
-    <?php
     // ヘッダを一つ設定する
     $this->response->header('Location', 'http://example.com');
 
@@ -414,7 +396,6 @@ CakeResponseをどのように使えばよいかを示しています。
 時々、コントローラアクションの結果をキャッシュしないようにブラウザに強制する必要がでてきます。
 :php:meth:`CakeResponse::disableCache()` はそういった目的で使われます。::
 
-    <?php
     public function index() {
         // do something.
         $this->response->disableCache();
@@ -426,7 +407,6 @@ CakeResponseをどのように使えばよいかを示しています。
 
 また、:php:meth:`CakeResponse::cache()` を使ってクライアントにレスポンスをキャッシュして欲しいことを伝えられます。::
 
-    <?php
     public function index() {
         //do something
         $this->response->cache('-1 minute', '+5 days');
@@ -470,7 +450,6 @@ privateにレスポンスを設定することは、レスポンスのすべて�
 このメソッドの二番目のパラメータはキャッシュの `max-age` を指定するために使われます。
 このパラメータはレスポンスが古いと見なされる秒数を表しています。::
 
-    <?php
     public function view() {
         ...
         // Cache-Control を3600秒の間、publicとして設定
@@ -493,7 +472,6 @@ Expirationヘッダ
 cache expirationモデルのもとではまた、 `Expires` ヘッダを設定することが出来ます。このヘッダは、
 HTTP仕様によるとレスポンスが古いと見なされる日時を表しています。このヘッダは :php:meth:`CakeResponse::expires()` メソッドを使って設定されます。::
 
-    <?php
     public function view() {
         $this->response->expires('+5 days');
     }
@@ -516,7 +494,6 @@ Etagヘッダ(entity tagと呼ばれる)は要求されたリソースを識別�
 実際にこのヘッダを使うメリットを得るためには、手動で :php:meth:`CakeResponse::checkNotModified()`
 メソッドを呼び出すかコントローラに :php:class:`RequestHandlerComponent` を読み込まなければなりません。::
 
-    <?php
     public function index() {
         $articles = $this->Article->find('all');
         $this->response->etag($this->Article->generateHash($articles));
@@ -537,7 +514,6 @@ HTTPキャッシュのvalidationモデルのもとでは、リソースが最後
 実際にこのヘッダを使うメリットを得るためには、 :php:meth:`CakeResponse::checkNotModified()` 
 メソッドを呼び出すかコントローラに :php:class:`RequestHandlerComponent` を読み込まなければなりません。::
 
-    <?php
     public function view() {
         $article = $this->Article->find('first');
         $this->response->modified($article['Article']['modified']);
@@ -553,7 +529,6 @@ Varyヘッダ
 時には同じURLで異なるコンテンツを提供したいと思うかもしれません。これは多国語対応ページがある場合やブラウザごとに異なるHTMLを返すようなケースでしばしばおこります。
 そのような状況ではVaryヘッダを使えます。::
 
-    <?php
         $this->response->vary('User-Agent');
         $this->response->vary('Accept-Encoding', 'User-Agent');
         $this->response->vary('Accept-Language');
@@ -567,7 +542,6 @@ CakeResponseとテスト
 いくつものオブジェクトを横断して使われるメソッドの代わりに、コントローラとコンポーネントが ``CakeResponse``
 に委譲しているのをまねる(mock)オブジェクトを準備するだけでよくなります。このことで'単体'テストを作りやすくなり、コントローラのテスト実施が簡単になります。::
 
-    <?php
     public function testSomething() {
         $this->controller->response = $this->getMock('CakeResponse');
         $this->controller->response->expects($this->once())->method('header');

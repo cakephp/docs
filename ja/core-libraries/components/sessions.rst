@@ -41,7 +41,6 @@ CakePHP ではセッションの複数の方法で設定を行えます。
 覚えておきたいことは、 :term:`ドット記法` により配列構造で作成可能ということです。
 そのため ``User.username`` は、次のような値が参照されます。::
 
-    <?php
     array('User' => array(
         'username' => 'clark-kent@dailyplanet.com'
     ));
@@ -63,7 +62,6 @@ CakePHP ではセッションの複数の方法で設定を行えます。
     $name には、ドット記法の配列を使用できます。
     たとえば::
 
-        <?php
         $this->Session->write('Person.eyeColor', 'Green');
 
     ..
@@ -81,7 +79,6 @@ CakePHP ではセッションの複数の方法で設定を行えます。
     セッション内の $name というキーの値を返します。
     もし $name が null の場合、セッション全体の値を返します。::
 
-        <?php
         $green = $this->Session->read('Person.eyeColor');
 
     ..
@@ -108,7 +105,6 @@ CakePHP ではセッションの複数の方法で設定を行えます。
     $name キーのセッションをクリアします。
     例::
 
-        <?php
         $this->Session->delete('Person.eyeColor');
 
     ..
@@ -120,7 +116,6 @@ CakePHP ではセッションの複数の方法で設定を行えます。
     しかし、 Person というキーはまだあります。
     Person 全体を削除するためには次のようにします。::
 
-        <?php
         $this->Session->delete('Person');
 
 .. php:method:: destroy()
@@ -133,7 +128,6 @@ CakePHP ではセッションの複数の方法で設定を行えます。
     ``destroy`` メソッドは、セッションクッキーと temporary file system 内のすべてのセッションデータを削除します。
     PHPセッションを無効にし、新鮮なセッションを作成します。::
 
-        <?php
         $this->Session->destroy();
 
 
@@ -161,7 +155,6 @@ CakePHP ではセッションの複数の方法で設定を行えます。
     セッションコンポーネントによって flash message をセットし、 :php:meth:`SessionHelper::flash()` を使用し表示します。
     メッセージのセットは、 ``setFlash`` を使用します。::
 
-        <?php
         // controller にて
         $this->Session->setFlash('Your stuff has been saved.');
 
@@ -172,7 +165,6 @@ CakePHP ではセッションの複数の方法で設定を行えます。
     ユーザに表示する一回限りのメッセージが作成されます。
     セッションヘルパーを使用します。::
 
-        <?php
         // view にて
         echo $this->Session->flash();
 
@@ -193,7 +185,6 @@ CakePHP ではセッションの複数の方法で設定を行えます。
     CakePHP は、そのような場合のやり方を用意しています。
     ``$key`` パラメータを使い、多数のメッセージを保存し、別々に出力することができます。::
 
-        <?php
         // bad message をセット
         $this->Session->setFlash('Something bad.', 'default', array(), 'bad');
 
@@ -205,7 +196,6 @@ CakePHP ではセッションの複数の方法で設定を行えます。
 
     ビュー内にて、次のように別々の見た目で出力できます。::
 
-        <?php
         // viewにて
         echo $this->Session->flash('good');
         echo $this->Session->flash('bad');
@@ -220,7 +210,6 @@ CakePHP ではセッションの複数の方法で設定を行えます。
     エレメント内では ``$message`` によってメッセージを利用できます。
     まずコントローラ内でメッセージをセットします。::
 
-        <?php
         $this->Session->setFlash('Something custom!', 'flash_custom');
 
     ..
@@ -241,7 +230,6 @@ CakePHP ではセッションの複数の方法で設定を行えます。
     パラメータは描画した div に影響を及ぼします。
     たとえば、配列 $params に "class" を追加し、レイアウトやビュー内で ``$this->Session->flash()`` を使用し ``div`` に class を適用します。::
 
-        <?php
         $this->Session->setFlash('Example message text', 'default', array('class' => 'example_class'));
 
     ..
@@ -258,6 +246,5 @@ CakePHP ではセッションの複数の方法で設定を行えます。
 
     ``$params`` 内でプラグインの使用を明示し、プラグイン内のエレメントを使用するには次のようにします。::
 
-        <?php
         // /app/Plugin/Comment/View/Elements/flash_no_spam.ctp が使用されます
         $this->Session->setFlash('Message!', 'flash_no_spam', array('plugin' => 'Comment'));

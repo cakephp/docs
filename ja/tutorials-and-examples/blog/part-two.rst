@@ -10,7 +10,6 @@ CakePHPのモデルを作成することで、データベースとやりとり�
 CakePHPのモデルクラスのファイルは、 ``/app/Model`` の中にあり、今回は、 ``/app/Model/Post.php`` というファイルを作って保存します。
 ファイルの中身全体は次のようになります::
 
-    <?php
     class Post extends AppModel {
     }
 
@@ -35,7 +34,6 @@ Postsコントローラの作成
 この新しいコントローラは、 ``PostsController.php`` という名前で、 ``/app/Controller`` ディレクトリの中に配置します。
 基本的なコントローラは次のようになります::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
     }
@@ -49,7 +47,6 @@ www.example.com/posts/index(www.example.com/posts/と同じです)
 
 ::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
 
@@ -180,7 +177,6 @@ http://www.example.com/posts/index
 もしそういう表示が出ない場合には、何かおかしくなってしまったか、もうすでにあなたがその定義作業をしてしまったから（仕事がハヤイ！）か、のどちらかです。
 そうでないなら、これからPostsControllerの中に作ってみましょう::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
 
@@ -229,7 +225,6 @@ http://www.example.com/posts/index
 
 ::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form', 'Session');
         public $components = array('Session');
@@ -334,7 +329,6 @@ addのビューは次のようなものになります::
 バリデーションのルールは、モデルの中で定義することができます。
 Postモデルを見直して、幾つか修正してみましょう::
 
-    <?php
     class Post extends AppModel {    
         public $validate = array(
             'title' => array(
@@ -364,7 +358,6 @@ CakePHPのバリデーションエンジンは強力で、組み込みのルー�
 アクションをつくり、それからビューを作る、というパターンです。
 PostsControllerの ``edit()`` アクションはこんな形になります::
 
-    <?php
     public function edit($id = null) {
         $this->Post->id = $id;
         if ($this->request->is('get')) {
@@ -441,7 +434,6 @@ editビューは以下のようになります::
 次に、ユーザが投稿記事を削除できるようにする機能を作りましょう。
 PostsControllerの ``delete()`` アクションを作るところから始めます::
 
-    <?php
     public function delete($id) {
         if ($this->request->is('get')) {
             throw new MethodNotAllowedException();
@@ -522,13 +514,11 @@ Cakeのルーティングは、 ``/app/Config/routes.php`` の中にあります
 デフォルトのトップページのルートをコメントアウトするか、削除します。
 この行です::
 
-    <?php
     Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
 この行は、「/」というURLをデフォルトのCakePHPのホームページに接続します。
 これを、自分のコントローラに接続させるために、次のような行を追加してください::
 
-    <?php
     Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 
 これで、「/」でリクエストしてきたユーザを、PostControllerのindex()アクションに接続させることができます。

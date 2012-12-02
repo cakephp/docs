@@ -23,7 +23,6 @@ findはデータ取得のための、非常に多機能でとても良く働い�
 デフォルトでは以下のキーのパラメータを渡すことができます。これらキーの指定は\
 任意です。 ::
 
-    <?php
     array(
         'conditions' => array('Model.field' => $thisValue), //検索条件の配列
         'recursive' => 1, //int
@@ -46,7 +45,6 @@ find('first')
 ``find('first', $params)`` は結果を1行返します。1行だけ取得したい時に使います。\
 以下の例を見てください。 ::
 
-    <?php
     public function some_function() {
         // ...
         $semiRandomArticle = $this->Article->find('first');
@@ -88,7 +86,6 @@ find('count')
 
 ``find('count', $params)`` は整数を返します。以下のサンプルを見てください。 ::
 
-    <?php
     public function some_function() {
         // ...
         $total = $this->Article->find('count');
@@ -117,7 +114,6 @@ find('all')
 ``find('all', $params)`` は配列で結果を返します。 ``find('all')`` は、他のいろいろな\
 ``find()`` や、 ``paginate`` でも使われています。以下のサンプルを見てください。 ::
 
-    <?php
     public function some_function() {
         // ...
         $allArticles = $this->Article->find('all');
@@ -169,7 +165,6 @@ find('list')
 ``find('list', $params)`` はインデックス付きの配列を返します。よくあるフォームのセレクトボックスを\
 作るために、リストが欲しい場合などに使うと便利です。以下のサンプルを見てください。 ::
 
-    <?php
     public function some_function() {
         // ...
         $allArticles = $this->Article->find('list');
@@ -209,7 +204,6 @@ find('list')
 また、添字に対する値はvalueが使われます。(値については、モデルの属性
 :ref:`model-displayField` で設定できます)以下に例を示します。 ::
 
-    <?php
     public function some_function() {
         // ...
         $justusernames = $this->Article->User->find('list', array(
@@ -272,7 +266,6 @@ find('threaded')
 ``find('threaded', $params)`` は入れ子になった配列を返します。入れ子の構造を表現するために、\
 ``parent_id`` フィールドがある場合に使います。以下のサンプルを見てください。 ::
 
-    <?php
     public function some_function() {
         // ...
         $allCategories = $this->Category->find('threaded');
@@ -353,7 +346,6 @@ find('neighbors')
 ``find('neighbors', $params)`` はfindの'first'と似たような動きをします。ただ、それに加えて\
 指定した条件の前後の行も一緒に取得してきます。以下の例を見てください。 ::
 
-    <?php
     public function some_function() {
        $neighbors = $this->Article->find('neighbors', array('field' => 'id', 'value' => 3));
     }
@@ -437,7 +429,6 @@ find('neighbors')
 
 ::
 
-    <?php
     class Article extends AppModel {
         public $findMethods = array('available' =>  true);
     }
@@ -448,7 +439,6 @@ findを実装したければ、その関数の名前は ``_findMyFancySearch`` �
 
 ::
 
-    <?php
     class Article extends AppModel {
         public $findMethods = array('available' =>  true);
 
@@ -465,7 +455,6 @@ findを実装したければ、その関数の名前は ``_findMyFancySearch`` �
 
 ::
 
-    <?php
     class ArticlesController extends AppController {
 
         // 公開されているすべての記事を検索して、createdカラムの順番に並び替える
@@ -520,7 +509,6 @@ find結果になります。
 
 ::
 
-    <?php
     class AppModel extends Model {
 
     /**
@@ -659,7 +647,6 @@ findBy() の戻り値は ``find('first')`` と同じです。
 
 ``query()`` はクエリ中のテーブル名を戻り値の配列のキーとして使います。 ::
 
-    <?php
     $this->Picture->query("SELECT * FROM pictures LIMIT 2;");
 
 これは、以下の様な配列を返します。 ::
@@ -688,7 +675,6 @@ findBy() の戻り値は ``find('first')`` と同じです。
 findメソッドと同じように、戻り値の配列のキーにモデル名を使うためには、\
 次のようにクエリを書き換えます。 ::
 
-    <?php
     $this->Picture->query("SELECT * FROM pictures AS Picture LIMIT 2;");
 
 すると以下の様な配列となります。 ::
@@ -732,7 +718,6 @@ findメソッドと同じように、戻り値の配列のキーにモデル名�
 
 ::
 
-    <?php
     $this->Post->id = 22;
     echo $this->Post->field('name'); // IDが22の行のnameフィールドを表示します
 
@@ -777,7 +762,6 @@ findメソッドと同じように、戻り値の配列のキーにモデル名�
 
 最も良く使われるのは、次のような配列ベースのクエリです。 ::
 
-    <?php
     $conditions = array("Post.title" => "This is a post", "Post.author_id" => 1);
     // モデルの使い方のサンプル
     $this->Post->find('first', array('conditions' => $conditions));
@@ -792,7 +776,6 @@ findメソッドと同じように、戻り値の配列のキーにモデル名�
 否定や比較などはどうするのでしょうか？とてもシンプルです。
 "This is a post"以外の投稿データを取得したい場合は以下のようにします。 ::
 
-    <?php
     array("Post.title !=" => "This is a post")
 
 フィールド名の前に'!='があるのがわかると思います。\
@@ -801,21 +784,18 @@ findメソッドと同じように、戻り値の配列のキーにモデル名�
 ただ、例外としてIN (...)の場合は違います。\
 INを使って、リストから投稿タイトルを検索したい場合は以下のようにします。 ::
 
-    <?php
     array(
         "Post.title" => array("First post", "Second post", "Third post")
     )
 
 NOT IN (...) でリストに含まれない投稿タイトルを検索した場合は以下のようにします。 ::
 
-    <?php
     array(
         "NOT" => array("Post.title" => array("First post", "Second post", "Third post"))
     )
 
 検索条件に新しい条件を追加したければ、キーと値のペアを配列に追加するだけです。 ::
 
-    <?php
     array (
         "Post.title" => array("First post", "Second post", "Third post"),
         "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
@@ -823,7 +803,6 @@ NOT IN (...) でリストに含まれない投稿タイトルを検索した場�
 
 データベースの2つのフィールドを比較する条件を指定することもできます。 ::
 
-    <?php
     array("Post.created = Post.modified")
 
 上記サンプルは、作成日と変更日が同じ投稿データ\
@@ -832,7 +811,6 @@ NOT IN (...) でリストに含まれない投稿タイトルを検索した場�
 この方法でWHERE句に指定できないようなものは、文字列で以下のようにして
 指定できます。 ::
 
-    <?php
     array(
         'Model.field & 8 = 1',
         // キーと値のペアでは指定できないような条件
@@ -843,7 +821,6 @@ NOT IN (...) でリストに含まれない投稿タイトルを検索した場�
 指定されたリストに含まれるタイトルの投稿だけが取得されます。\
 ただ、どちらかの条件にマッチする投稿を取得したいこともあるでしょう。 ::
 
-    <?php
     array("OR" => array(
         "Post.title" => array("First post", "Second post", "Third post"),
         "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
@@ -856,7 +833,6 @@ CakePHPはAND、OR、NOT、XOR(大文字、小文字は区別しません)など
 この時、特定のキーワード"magic"を含むか、もしくは過去2週間の間に投稿されて、かつ\
 Bobが書いた投稿、に制限して取得したい場合、次のようにします。 ::
 
-    <?php
     array(
         "Author.name" => "Bob",
         "OR" => array(
@@ -868,7 +844,6 @@ Bobが書いた投稿、に制限して取得したい場合、次のように�
 同じフィールドに対して複数のLIKE条件を指定したい場合は、
 同じように以下のように条件を指定します。 ::
 
-    <?php
     array('OR' => array(
         array('Post.title LIKE' => '%one%'),
         array('Post.title LIKE' => '%two%')
@@ -877,7 +852,6 @@ Bobが書いた投稿、に制限して取得したい場合、次のように�
 CakePHPはnullも受け入れることができます。次のクエリは、\
 投稿のタイトルがNOT NULLである投稿を返します。 ::
 
-    <?php
     array("NOT" => array(
             "Post.title" => null
         )
@@ -885,7 +859,6 @@ CakePHPはnullも受け入れることができます。次のクエリは、\
 
 BETWEENは、以下のように出来ます。 ::
 
-    <?php
     array('Post.read_count BETWEEN ? AND ?' => array(1,10))
 
 .. note::
@@ -894,7 +867,6 @@ BETWEENは、以下のように出来ます。 ::
 
 GROUP BYは？ ::
 
-    <?php
     array(
         'fields' => array(
             'Product.type',
@@ -923,7 +895,6 @@ GROUP BYは？ ::
 
 以下はDISTINCTのサンプルです。他にもMINやMAXなども同じように使えます。 ::
 
-    <?php
     array(
         'fields' => array('DISTINCT (User.name) AS my_column_name'),
         'order' = >array('User.id DESC')
@@ -931,7 +902,6 @@ GROUP BYは？ ::
 
 とても複雑な検索条件も、複数の配列をネストすることで実現可能です。 ::
 
-    <?php
     array(
         'OR' => array(
             array('Company.name' => 'Future Holdings'),
@@ -976,7 +946,6 @@ GROUP BYは？ ::
 findメソッドを呼ぶような感じですが、これはSQL文字列を返します。 
 その後、expressionを呼び出し、その戻り値をconditions配列に追加します。 ::
 
-    <?php
     $conditionsSubQuery['"User2"."status"'] = 'B';
 
     $db = $this->User->getDataSource();
@@ -1030,7 +999,6 @@ findメソッドを呼ぶような感じですが、これはSQL文字列を返�
 よりクエリをコントロールするために、準備済みステートメントを使うことができます。\
 これでデータベースドライバと直接やり取りができ、好きなようにクエリを送信することができます。 ::
 
-    <?php
     $db = $this->getDataSource();
     $db->fetchAll(
         'SELECT * from users where username = ? AND password = ?',

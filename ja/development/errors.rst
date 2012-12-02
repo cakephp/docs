@@ -33,7 +33,6 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
 コールバックは PHP が呼ぶことができるものなら無名関数であってもかまいません。
 エラーをハンドルするデフォルトの設定は以下のようになっています::
 
-    <?php
     Configure::write('Error', array(
         'handler' => 'ErrorHandler::handleError',
         'level' => E_ALL & ~E_DEPRECATED,
@@ -109,7 +108,6 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
 
 エラーハンドラはどのような種類のコールバックを使ってでも作ることができます。たとえば、``AppError`` というクラスをエラーをハンドルするのに使うことができます。その場合は次のようにすることになるでしょう::
 
-    <?php
     //app/Config/core.php の中で
     Configure::write('Error.handler', 'AppError::handleError');
 
@@ -131,7 +129,6 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
 このクラス／メソッドはエラーが発生するたびに「エラー発生！」と表示します。
 どのような種類のコールバックでも定義することができますので、PHP5.3 以降をお使いなのであれば無名関数を使用することもできます::
 
-    <?php
     Configure::write('Error.handler', function($code, $description, $file = null, $line = null, $context = null) {
         echo 'おっと、良くない事態発生';
     });
@@ -158,7 +155,6 @@ configure を使って、好きなメソッドをデフォルトのエラーハ�
 CakePHP 2.2 以降、``Error.handler`` は致命的(fatal)なエラーコードも受け取るようになりました。
 もしも cake のエラーページを表示させたくないのなら、次のように処理を上書くことができます::
 
-    <?php
     //app/Config/core.php の中で
     Configure::write('Error.handler', 'AppError::handleError');
 

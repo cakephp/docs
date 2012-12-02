@@ -12,7 +12,6 @@
     HTML属性
         HTMLの属性を構成するキー => 値の配列。例::
             
-            <?php
             // これを与えると
             array('class' => 'my-class', '_target' => 'blank')
 
@@ -21,7 +20,6 @@
 
         オプションが最小化できるか、名前そのもが値として許可される場合は、 ``true`` が利用できます::
         
-            <?php
             // これを与えると
             array('checked' => true)
             

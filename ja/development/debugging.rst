@@ -103,7 +103,6 @@ Debugger を使用する際にはまず、Configure::read('debug') に 0 より�
 
     dump は変数の内容を出力します。渡された変数のすべてのプロパティと（可能なら）メソッドを出力します::
 
-        <?php
         $foo = array(1,2,3);
 
         Debugger::dump($foo);
@@ -158,7 +157,6 @@ Debugger を使用する際にはまず、Configure::read('debug') に 0 より�
 
     現在のスタックトレースを返します。トレースの各行には、呼び出しているメソッド、どこから呼ばれたかというファイルと行番号が含まれています::
 
-        <?php
         //PostsController::index() の中で
         pr(Debugger::trace());
         
@@ -193,7 +191,6 @@ Debugger を使用する際にはまず、Configure::read('debug') に 0 より�
 
     $path （絶対パス） にあるファイルからの抜粋を取得します。$line 行目をハイライトし、$line 行目の前後 $context 行もあわせて取得します::
 
-        <?php
         pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
         
         //下記のように出力されます
@@ -262,7 +259,6 @@ Debugger を使用する際にはまず、Configure::read('debug') に 0 より�
 :php:class:`CakeLog` を使うことで、あなたのアプリケーションでログ出力をさせることができます。
 :php:class:`Object` を継承するすべてのオブジェクトは、インスタンスメソッド `log()` を持っており、ログメッセージを出力するのに使えます::
 
-    <?php
     $this->log('通ったよ', 'debug');
 
 ..
@@ -277,7 +273,6 @@ Debugger を使用する際にはまず、Configure::read('debug') に 0 より�
 また、 :php:meth:`CakeLog::write()` を使うことで、ログメッセージを書きだすことも可能です。
 このメソッドは CakeLog がロードされているなら static にあなたのアプリケーション内のどこからでも呼び出すことができるのです::
 
-    <?php
     // app/Config/bootstrap.php の中で
     App::uses('CakeLog', 'Log');
 

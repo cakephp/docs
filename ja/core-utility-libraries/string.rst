@@ -8,7 +8,6 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
 
 もし、``View`` 以外で :php:class:`TextHelper` が必要な場合、 ``String`` クラスを使ってください。\ ::
 
-    <?php
     class UsersController extends AppController {
 
         public $components = array('Auth');
@@ -31,7 +30,6 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
     uuid メソッドは、:rfc:`4122` で規定されているようなユニークIDを生成するために利用します。
     uuid とは、485fc381-e790-47a3-9794-1337c0a8fe68 のようなフォーマットの128ビットの文字列のことです。\ ::
 
-        <?php
         String::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
 .. php:staticmethod:: tokenize($data, $separator = ',', $leftBound = '(', $rightBound = ')')
@@ -41,7 +39,6 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
 
     このメソッドは、タグリストのような定形フォーマットのデータを分割するのに便利です。\ ::
 
-        <?php
         $data = "cakephp 'great framework' php";
         $result = String::tokenize($data, ' ', "'", "'");
         // 結果
@@ -51,7 +48,6 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
 
     insert メソッドは、テンプレートとキー・バリューの組み合わせから文字列を作成できます。\ ::
 
-        <?php
         String::insert('My name is :name and I am :age years old.', array('name' => 'Bob', 'age' => '65'));
         // 生成される文字列: "My name is Bob and I am 65 years old."
 
@@ -65,7 +61,6 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
 
     オプションは次のように指定します。\ ::
 
-        <?php
         $options = array(
             'clean' => array(
                 'method' => 'text', // or html
@@ -79,7 +74,6 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
     テキストのブロックを決められた幅や折り返し、インデントにも対応します。
     単語の途中で改行されたりしないように、賢く折り返しの処理を行います。\ ::
 
-       <?php
        $text = 'This is the song that never ends.';
        $result = String::wrap($text, 22);
 
@@ -114,7 +108,6 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
 
     例::
 
-        <?php
         // TextHelper として呼び出し
         echo $this->Text->highlight($lastSentence, 'using', array('format' => '<span class="highlight">\1</span>'));
 
@@ -153,7 +146,6 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
 
     例::
 
-        <?php
         // TextHelper として利用
         echo $this->Text->truncate(
             'The killer crept forward and tripped on the rug.',
@@ -191,7 +183,6 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
     このメソッドは検索結果の表示に特に役立ちます。
     検索結果のドキュメント内で、検索文字列やキーワードを示すことができます。\ ::
 
-        <?php
         // TextHelper として利用
         echo $this->Text->excerpt($lastParagraph, 'method', 50, '...');
 
@@ -212,7 +203,6 @@ String クラスは文字列の作成や走査に関する便利なクラスで�
 
     最後の2つの要素をを「and」で結合したカンマ区切りのリストを作成します。\ ::
 
-        <?php
         // TextHelper として利用
         echo $this->Text->toList($colors);
 

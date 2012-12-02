@@ -20,7 +20,6 @@ Set互換のパス記法
 
 使い方の例（ :php:func:`Set::sort()` を使っています） ::
 
-    <?php
     $a = array(
         0 => array('Person' => array('name' => 'Jeff'), 'Friend' => array(array('name' => 'Nate'))),
         1 => array('Person' => array('name' => 'Tracy'),'Friend' => array(array('name' => 'Lindsay'))),
@@ -62,7 +61,6 @@ Set互換のパス記法
 
     Set::extract互換のパスで展開された配列の要素にコールバックを適用します ::
 
-        <?php
         $data = array(
             array('Movie' => array('id' => 1, 'title' => 'movie 3', 'rating' => 5)),
             array('Movie' => array('id' => 1, 'title' => 'movie 1', 'rating' => 1)),
@@ -84,7 +82,6 @@ Set互換のパス記法
     特定のパスが配列にセットされているかを調べます。
     もし$pathが空なら、真偽(*boolean*)値の代わりに$dataを返します::
 
-        <?php
         $set = array(
             'My Index 1' => array('First' => 'The first item')
         );
@@ -123,7 +120,6 @@ Set互換のパス記法
     **Example 1**
     ::
 
-        <?php
         $a = array(
             array('Article' => array('id' => 1, 'title' => 'Article 1')),
             array('Article' => array('id' => 2, 'title' => 'Article 2')),
@@ -156,7 +152,6 @@ Set互換のパス記法
     **Example 2**
     ::
 
-        <?php
         $a = array(
             0 => array('pages' => array('name' => 'page')),
             1 => array('fruites' => array('name' => 'fruit')),
@@ -321,7 +316,6 @@ Set互換のパス記法
     もし $path2 で指定されたパスが定義されていなかったら、全ての値は null として初期化されます(Set::merge で便利です)。
     これらのパスの後に、オプションで $groupPath を設定すると、それが指定するパスの値でグループ化することができます。 ::
 
-        <?php
         $result = Set::combine(array(), '{n}.User.id', '{n}.User.Data');
         // $result == array();
 
@@ -520,7 +514,6 @@ Set互換のパス記法
 
     一つの配列が、もう片方の配列のキーと値を正確に含んでいるかを確認します。::
 
-        <?php
         $a = array(
             0 => array('name' => 'main'),
             1 => array('name' => 'about')
@@ -547,7 +540,6 @@ Set互換のパス記法
     配列の次元の数を数えます。
     もし $all を false (デフォルトの値です) に設定すると、配列の最初の要素を配列の次元の数とみなします。::
 
-        <?php
         $data = array('one', '2', 'three');
         $result = Set::countDim($data);
         // $result == 1
@@ -602,7 +594,6 @@ Set互換のパス記法
 
     セットと配列、二つのセット、あるいは二つの配列の間の差分を計算します。 ::
 
-        <?php
         $a = array(
             0 => array('name' => 'main'),
             1 => array('name' => 'about')
@@ -688,7 +679,6 @@ Set互換のパス記法
 
     もしパラメータが渡されなかった場合の $list のデフォルトは 0 = no 1 = yes です。::
 
-        <?php
         $res = Set::enum(1, 'one, two');
         // $res は「two」になる
 
@@ -712,7 +702,6 @@ Set互換のパス記法
 
     ::
 
-        <?php
         // 一般的な使い方:
         $users = $this->User->find("all");
         $results = Set::extract('/User/id', $users);
@@ -764,7 +753,6 @@ Set互換のパス記法
     ルート配列から空の要素を除きます。
     「0」の要素は除きません::
 
-        <?php
         $res = Set::filter(array('0', false, true, 0, array('one thing', 'I can tell you', 'is you got to be', false)));
 
         /* $res は現段階で次のようになります。:
@@ -788,7 +776,6 @@ Set互換のパス記法
 
     多次元配列を1次元配列に潰します::
 
-        <?php
         $arr = array(
             array(
                 'Post' => array('id' => '1', 'title' => 'First Post'),
@@ -820,7 +807,6 @@ Set互換のパス記法
 
     配列から、文字列にフォーマットしたものを抜粋して返します::
 
-        <?php
         $data = array(
             array('Person' => array('first_name' => 'Nate', 'last_name' => 'Abele', 'city' => 'Boston', 'state' => 'MA', 'something' => '42')),
             array('Person' => array('first_name' => 'Larry', 'last_name' => 'Masters', 'city' => 'Boondock', 'state' => 'TN', 'something' => '{0}')),
@@ -890,7 +876,6 @@ Set互換のパス記法
 
     $path で定義された配列の中に $data を挿入します。::
 
-        <?php
         $a = array(
             'pages' => array('name' => 'page')
         );
@@ -964,7 +949,6 @@ Set互換のパス記法
     デフォルトでは、この関数は配列を stdClass オブジェクトに変換しますが、任意のタイプのクラスを指定することができます。
     例：Set::map($array\_of\_values, 'nameOfYourClass');::
 
-        <?php
         $data = array(
             array(
                 "IndexedPage" => array(
@@ -1027,7 +1011,6 @@ Set互換のパス記法
 
     ::
 
-        <?php
         class MyClass {
             public function sayHi() {
                 echo 'Hi!';
@@ -1046,7 +1029,6 @@ Set互換のパス記法
 
     Set::matches は単一のアイテムあるいは与えられた XPath が、ある条件にマッチするかどうかを確認します::
 
-        <?php
         $a = array(
             array('Article' => array('id' => 1, 'title' => 'Article 1')),
             array('Article' => array('id' => 2, 'title' => 'Article 2')),
@@ -1099,7 +1081,6 @@ Set互換のパス記法
 
     ::
 
-        <?php
         $arry1 = array(
             array(
                 'id' => '48c2570e-dfa8-4c32-a35e-0d71cbdd56cb',
@@ -1149,7 +1130,6 @@ Set互換のパス記法
 
     フラットな配列を引数にとり、ネストされた配列を返します::
 
-        <?php
         $data = array(
             array('ModelName' => array('id' => 1, 'parent_id' => null)),
             array('ModelName' => array('id' => 2, 'parent_id' => 1)),
@@ -1212,7 +1192,6 @@ Set互換のパス記法
 
     文字列や配列のリストを正規化します。::
 
-        <?php
         $a = array(
             'Tree',
             'CounterCache',
@@ -1329,7 +1308,6 @@ Set互換のパス記法
 
     配列の全ての値が数字かどうかチェックします::
 
-        <?php
         $data = array('one');
         $res = Set::numeric(array_keys($data));
 
@@ -1390,7 +1368,6 @@ Set互換のパス記法
     **Example 1**
     ::
 
-        <?php
         $array1 = array('ModelOne' => array('id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2'));
         $array2 = array('ModelOne' => array('id' => 1003, 'field_one' => 'a3.m1.f1', 'field_two' => 'a3.m1.f2', 'field_three' => 'a3.m1.f3'));
         $res = Set::pushDiff($array1, $array2);
@@ -1411,7 +1388,6 @@ Set互換のパス記法
     **Example 2**
     ::
 
-        <?php
         $array1 = array("a" => "b", 1 => 20938, "c" => "string");
         $array2 = array("b" => "b", 3 => 238, "c" => "string", array("extra_field"));
         $res = Set::pushDiff($array1, $array2);
@@ -1438,7 +1414,6 @@ Set互換のパス記法
     セットや配列の中のから、$pathで定義されたパスの要素を削除します。::
 
 
-        <?php
         $a = array(
             'pages' => array('name' => 'page'),
             'files' => array('name' => 'files')
@@ -1465,7 +1440,6 @@ Set互換のパス記法
     これは、オブジェクトを配列に変換します。
     もし $object がオブジェクトでなかったら、単純に $object を返します。::
 
-        <?php
         $result = Set::reverse(null);
         // Null
         $result = Set::reverse(false);
@@ -1571,7 +1545,6 @@ Set互換のパス記法
 
     Set 互換のパスで確定したあらゆる値で配列をソートします。::
 
-        <?php
         $a = array(
             0 => array('Person' => array('name' => 'Jeff'), 'Friend' => array(array('name' => 'Nate'))),
             1 => array('Person' => array('name' => 'Tracy'),'Friend' => array(array('name' => 'Lindsay'))),
