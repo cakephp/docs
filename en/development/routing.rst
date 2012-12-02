@@ -241,11 +241,11 @@ in your controller.  For example, to map all urls to actions of the
 
     Router::connect('/:action', array('controller' => 'home'));
 
-If you would like to provide a case insensitive url, you can use regular 
+If you would like to provide a case insensitive url, you can use regular
 expression inline modifiers::
 
     Router::connect(
-        '/:userShortcut', 
+        '/:userShortcut',
         array('controller' => 'teachers', 'action' => 'profile', 1),
         array('userShortcut' => '(?i:principal)')
     );
@@ -384,7 +384,7 @@ In your controller, any action with an ``admin_`` prefix will be
 called. Using our users example, accessing the url
 ``/admin/users/edit/5`` would call the method ``admin_edit`` of our
 ``UsersController`` passing 5 as the first parameter. The view file
-used would be ``app/View/Users/admin\_edit.ctp``
+used would be ``app/View/Users/admin_edit.ctp``
 
 You can map the url /admin to your ``admin_index`` action of pages
 controller using following route::
