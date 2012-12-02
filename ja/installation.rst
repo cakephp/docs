@@ -171,7 +171,6 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
 動きませんか？
 もしPHPのタイムゾーンに関連するエラーが出るなら、 ``app/Config/core.php`` の中のとある一行のコメントを外してください::
 
-   <?php
    /**
     * If you are on PHP 5.3 uncomment this line and correct your server timezone
     * to fix the date & time related errors.

@@ -18,7 +18,6 @@ Security API
     Encrypts/Decrypts a text using the given key.::
     与えられたキーにを利用してテキストを暗号化・復号する。\ ::
 
-        <?php
         // 'my_key' で秘密のパスワードを暗号化する
         $secret = Security::cipher('my secret password', 'my_key');
 
@@ -37,7 +36,6 @@ Security API
     このメソッドを使うには `mcrypt extension <http://php.net/mcrypt>`
     がインストールされている必要があります。\ ::
 
-        <?php
         // データを暗号化
         $encrypted = Security::rijndael('a secret', Configure::read('Security.key'), 'encrypt');
 
@@ -69,7 +67,6 @@ Security API
 
     ::
 
-        <?php
         //アプリケーションの salt 値を利用します。
         $sha1 = Security::hash('CakePHP Framework', 'sha1', true);
 
@@ -85,7 +82,6 @@ Security API
 
     セキュリティレベルに基づいた未操作の許容時間（単位：分）を返します。\ ::
 
-        <?php
         $mins = Security::inactiveMins();
         // Security.level を 'medium' にしていた場合、$mins は 100 となります。
 

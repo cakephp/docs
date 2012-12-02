@@ -28,7 +28,6 @@ Cake がキャッシュされたビューを見つけられない場合、ある
 
 ::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Cache');
     }
@@ -43,7 +42,6 @@ Cake がキャッシュされたビューを見つけられない場合、ある
 
 ArticlesController の例を使用して、キャッシュする必要のある多くのトラフィックを受け取ります。\ ::
 
-    <?php
     public $cacheAction = array(
         'view' => 36000,
         'index'  => 48000
@@ -55,7 +53,6 @@ ArticlesController の例を使用して、キャッシュする必要のある�
 
 ::
 
-    <?php
     public $cacheAction = "1 hour";
 
 さらに、``CacheHelper`` で作成したコントローラー / コンポーネントの callbacks を true にすることができます。
@@ -63,7 +60,6 @@ ArticlesController の例を使用して、キャッシュする必要のある�
 
 ::
 
-    <?php
     public $cacheAction = array(
         'view' => array('callbacks' => true, 'duration' => 21600),
         'add' => array('callbacks' => true, 'duration' => 36000),

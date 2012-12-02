@@ -30,7 +30,6 @@ CakePHP はまた、HTTP エラーで使うことのできる数多くの例外�
 
 例外の設定として使えるキーがいくつかあります::
 
-    <?php
     Configure::write('Exception', array(
         'handler' => 'ErrorHandler::handleException',
         'renderer' => 'ExceptionRenderer',
@@ -163,7 +162,6 @@ CakePHP の組み込み例外
 あなたのコントローラが失敗のステータスや HTTP エラーを示すために、これらの例外を投げることができます。
 下記は、見つからなかったものがある場合の、 404 ページをレンダリングする HTTP 例外の使用例です::
 
-    <?php
     public function view($id) {
         $post = $this->Post->findById($id);
         if (!$post) {
@@ -347,7 +345,6 @@ HTTP 例外と Cake 例外はすべて、CakeBaseException クラスを継承し
 
 コントローラのアクションから失敗を示すために、 HTTP 関連のどの例外でも投げることができます。例::
 
-    <?php
     public function view($id) {
         $post = $this->Post->read(null, $id);
         if (!$post) {
@@ -422,7 +419,6 @@ Exception や SPL 例外を継承したアプリケーション例外は本番�
 開発モードでは、:php:exc:`CakeException` のオブジェクトは単純にクラス名と一致する新しいテンプレートを必要とし、これにて有益な情報を提供します。
 独自のアプリケーション次の例外が含まれていたなら::
 
-    <?php
     class MissingWidgetException extends CakeException {};
 
 ..
@@ -443,7 +439,6 @@ Exception や SPL 例外を継承したアプリケーション例外は本番�
 これにより、あなたのエラーによりたくさんのコンテキストを提供することで、豊富なデータを持つ例外を作ることができるのです。
 また、ネイティブな ``__toString()`` メソッドで通常で使われることになるメッセージテンプレートを提供することができます::
 
-    <?php
     class MissingWidgetException extends CakeException {
         protected $_messageTemplate = '%s が見つかりません。';
     }
@@ -480,7 +475,6 @@ Exception や SPL 例外を継承したアプリケーション例外は本番�
 
 例外を生成する際にコードを変えることで、独自の HTTP ステータスコードを作成することができます::
 
-    <?php
     throw new MissingWidgetHelperException('それはここではありません', 501);
 
 ..
@@ -544,7 +538,6 @@ Exception や SPL 例外を継承したアプリケーション例外は本番�
 ``Exception.handler`` をセットすることにより、CakePHP は他のすべての例外設定を無視します。
 独自の例外ハンドリングをセットアップする場合は次のようになります::
 
-    <?php
     // app/Config/core.php の中で
     Configure::write('Exception.handler', 'AppExceptionHandler::handle');
 
@@ -572,7 +565,6 @@ Exception や SPL 例外を継承したアプリケーション例外は本番�
 上記の例では単純に「Oh noes! 」＋例外のメッセージを表示しています。
 例外ハンドラはどのようなコールバックタイプでも（PHP 5.3 を使っているなら無名関数でも）定義することができます::
 
-    <?php
     Configure::write('Exception.handler', function ($error) {
         echo 'Ruh roh ' . $error->getMessage();
     });
@@ -586,7 +578,6 @@ Exception や SPL 例外を継承したアプリケーション例外は本番�
 独自の例外ハンドラを作成することで、アプリケーション例外についての独自のエラーハンドリングを提供することができます。
 例外ハンドラとして提供されるメソッド内で、下記のようにすることができます::
 
-    <?php
     // app/Lib/AppErrorHandler.php の中で
     class AppErrorHandler {
         public static function handleException($error) {
@@ -616,7 +607,6 @@ AppController::appError() を使う
 唯一の引数には投げられた例外が渡されます。
 このメソッドの中で独自のエラーハンドリングを実装します::
 
-    <?php
     class AppController extends Controller {
         public function appError($error) {
             // ここに独自ロジックを書きます。
@@ -642,7 +632,6 @@ Exception.renderer を使って独自のレンダラを使用し、アプリケ�
 もしくは、bootstrap にて指定された Lib のパスの中にある、 ``Error`` ディレクトリ内に置いてください。
 独自の例外レンダリングクラスの中であなたはアプリケーション固有のエラーに特化したハンドリングを提供することができます::
 
-    <?php
     // app/Lib/Error/AppExceptionRenderer.php の中で
     App::uses('ExceptionRenderer', 'Error');
 
@@ -698,7 +687,6 @@ Exception.renderer を使って独自のレンダラを使用し、アプリケ�
 しかしながら、あなたのアプリケーション内では独自のエラーハンドリングがもっと必要になるかもしれません。
 あなたの ``AppExceptionRenderer`` クラス内で ``_getController`` を実装することにより、好きなコントローラを使うことができます::
 
-    <?php
     class AppExceptionRenderer extends ExceptionRenderer {
         protected function _getController($exception) {
             App::uses('SuperCustomError', 'Controller');

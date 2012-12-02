@@ -16,7 +16,6 @@ ACOの作成を自動化するツール
 に解凍、またはgitを用いて複製(*clone*)してください。
 次に、次に示すように `app/Config/boostrap.php` ファイル中でプラグインを有効にしてください::
 
-    <?php
     //app/Config/boostrap.php
     // ...
     CakePlugin::load('AclExtras');
@@ -46,7 +45,6 @@ AROに対してACOへのアクセスをシェルインターフェースを用�
 
 ``AclComponent`` を用いて許可を行うには、独自の方法の中で以下の文法のコード使います::
 
-    <?php
     $this->Acl->allow($aroAlias, $acoAlias);
 
 いくつかの「許可」「拒否」の指定を行ってみましょう。
@@ -54,8 +52,6 @@ AROに対してACOへのアクセスをシェルインターフェースを用�
 http://localhost/cake/app/users/initdb)へ接続してください。
 ``SELECT * FROM aros_acos`` を実行すると、結果に 1 と -1 がたくさん含まれているはずです。
 パーミッションがセットできたことを確認したら、作成した関数を削除してください::
-
-    <?php
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -102,7 +98,6 @@ ACLパーミッションからindexアクションやviewアクションをわ�
 さて、usersとgroupsコントローラから ``Auth->allowedActions`` への参照を取り外したいですね。
 それが終わったら、postsとwidgetsコントローラに次の行を追加しましょう::
 
-    <?php
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('index', 'view');
@@ -111,7 +106,6 @@ ACLパーミッションからindexアクションやviewアクションをわ�
 これは先にusersとgroupsコントローラに設置した「オフスイッチ」を取り除き、postsとwidgetsコントローラのindexおよびviewアクションにパブリックなアクセスを与えています。
 ``AppController::beforeFilter()`` で以下を追加してください::
 
-    <?php
      $this->Auth->allow('display');
 
 これは「display」アクションをパブリックにし、PagesController::display()をパブリックに維持させます。
@@ -134,7 +128,6 @@ ACLパーミッションからindexアクションやviewアクションをわ�
 
 ユーザーが既にログインしていたら、以下をUsersコントローラに追加してリダイレクトさせるようにしましょう::
 
-    <?php
     public function login() {
         if ($this->Session->read('Auth.User')) {
             $this->Session->setFlash('You are logged in!');
@@ -152,7 +145,6 @@ ACLパーミッションからindexアクションやviewアクションをわ�
 先に、ログアウトの関数を空のままにしておきましたが、これを埋めていきます。
 ``UsersController::logout()`` に次の行を追加してください::
 
-    <?php
     $this->Session->setFlash('Good-Bye');
     $this->redirect($this->Auth->logout());
 

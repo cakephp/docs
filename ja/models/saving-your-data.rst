@@ -23,7 +23,6 @@ FormHelperを使っていれば、 ``$this->request->data`` で簡単にこの�
 データベースのテーブルにデータを保存するためにCakePHPのモデルを使った\
 簡単なサンプルを以下に示します。 ::
 
-    <?php
     public function edit($id) {
         // フォームからポストされたデータがあるかどうか
         if ($this->request->is('post')) {
@@ -46,7 +45,6 @@ saveが呼び出されると、最初に引数に渡されたデータは、Cake
 おかしくないかどうか確認してみてください。\
 :php:attr:`Model::$validationErrors` を出力することで、現在どういう状況なのかデバッグできます。 ::
 
-    <?php
     if ($this->Recipe->save($this->request->data)) {
         // 保存に成功した時の処理
     }
@@ -60,7 +58,6 @@ saveが呼び出されると、最初に引数に渡されたデータは、Cake
 ``Model::set()`` は、モデルに1つまたは複数のフィールドのデータをセットするのに使われます。\
 これは、モデルのActiveRecord機能を使う時に便利です。 ::
 
-    <?php
     $this->Post->read(null, 1);
     $this->Post->set('title', 'New title for the article');
     $this->Post->save();
@@ -68,7 +65,6 @@ saveが呼び出されると、最初に引数に渡されたデータは、Cake
 この例は、 ActiveRecordで ``set()`` を使って単一のフィールドを更新して保存する方法です。\
 複数のフィールドの値をセットするのにも ``set()`` が使えます。 ::
 
-    <?php
     $this->Post->read(null, 1);
     $this->Post->set(array(
         'title' => 'New title',
@@ -95,7 +91,6 @@ saveが呼び出されると、最初に引数に渡されたデータは、Cake
 
 以下のような引数を受け取るsaveメソッドもあります。 ::
 
-    <?php
     save(array $data = null, array $params = array())
 
 ``$params`` 配列には、以下のキーを指定できます。
@@ -119,7 +114,6 @@ saveが完了すると、モデルオブジェクトの ``$id`` に保存され�
 
 ::
 
-    <?php
     $this->Ingredient->save($newData);
     $newIngredientId = $this->Ingredient->id;
 
@@ -127,7 +121,6 @@ saveが完了すると、モデルオブジェクトの ``$id`` に保存され�
 ``$Model->id`` がセットされていれば、このIDをプライマリーキーにもつレコードが更新されます。\
 それ以外は新しくレコードが作られます。 ::
 
-    <?php
     // Create: idがセットされていない
     $this->Recipe->create();
     $this->Recipe->save($this->request->data);
@@ -144,7 +137,6 @@ saveが完了すると、モデルオブジェクトの ``$id`` に保存され�
 新しくデータを作るのではなく、データを更新したい場合は、\
 data配列にプライマリーキーのフィールドを渡してください。 ::
 
-    <?php
     $data = array('id' => 10, 'title' => 'My new title');
     // idが10のレシピを更新
     $this->Recipe->save($data);
@@ -183,7 +175,6 @@ data配列にプライマリーキーのフィールドを渡してください�
 たとえば、ブログ投稿のタイトルを更新する場合は、コントローラーからの
 ``saveField`` の呼び出しは以下のようになります。 ::
 
-    <?php
     $this->Post->saveField('title', 'A New Title for a New Day');
 
 .. warning::
@@ -201,7 +192,6 @@ data配列にプライマリーキーのフィールドを渡してください�
 たとえば、1年以上前にメンバーになったbakerを承認するには、\
 以下のようにメソッドを呼び出します。 ::
 
-    <?php
     $this_year = date('Y-m-d h:i:s', strtotime('-1 year'));
 
     $this->Baker->updateAll(
@@ -222,7 +212,6 @@ data配列にプライマリーキーのフィールドを渡してください�
 
 これは、特定の顧客に紐付くチケットを全て閉じる例です。 ::
 
-    <?php
     $this->Ticket->updateAll(
         array('Ticket.status' => "'closed'"),
         array('Ticket.customer_id' => 453)
@@ -249,7 +238,6 @@ data配列にプライマリーキーのフィールドを渡してください�
 単一モデルで複数レコードを保存するためには、$data配列は以下のように\
 数値をインデックスとしてもつ配列である必要があります。 ::
 
-    <?php
     $data = array(
         array('title' => 'title 1'),
         array('title' => 'title 2'),
@@ -264,7 +252,6 @@ data配列にプライマリーキーのフィールドを渡してください�
 
 以下のような形式のデータでも受け取る事ができます。 ::
 
-    <?php
     $data = array(
         array('Article' => array('title' => 'title 1')),
         array('Article' => array('title' => 'title 2')),
@@ -273,7 +260,6 @@ data配列にプライマリーキーのフィールドを渡してください�
 2.1からですが、 ``$options['deep'] = true`` と指定することで、アソシエーションデータも\
 保存できます。 以下の例を見てください。 ::
 
-    <?php
     $data = array(
         array('title' => 'title 1', 'Assoc' => array('field' => 'value')),
         array('title' => 'title 2'),
@@ -287,7 +273,6 @@ data配列にプライマリーキーのフィールドを渡してください�
 新しくレコードを作るのではなく、既存レコードの更新をしたい場合は、\
 データ配列にプライマリーキーを追加してください。 ::
 
-    <?php
     $data = array(
         array('Article' => array('title' => 'New article')), // これは新しくレコードを作ります
         array('Article' => array('id' => 2, 'title' => 'title 2')), // これは既存のレコードを更新します
@@ -312,7 +297,6 @@ $options配列には以下のキーが使われます。
 hasOneまたはbelongsToアソシエーションの関連レコードと一緒にレコードを保存する場合は、\
 データ配列は以下のようになります。 ::
 
-    <?php
     $data = array(
         'User' => array('username' => 'billy'),
         'Profile' => array('sex' => 'Male', 'occupation' => 'Programmer'),
@@ -321,7 +305,6 @@ hasOneまたはbelongsToアソシエーションの関連レコードと一緒�
 hasManyアソシエーションの関連レコードを保存するには、\
 以下のようなデータ配列を準備してください。 ::
 
-    <?php
     $data = array(
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
@@ -334,7 +317,6 @@ hasManyアソシエーションの関連レコードを保存するには、\
 2階層以上のhasManyアソシエーションの関連レコードを保存するには、\
 以下のようなデータを準備してください。 ::
 
-    <?php
     $data = array(
         'User' => array('email' => 'john-doe@cakephp.org'),
         'Cart' => array(
@@ -373,7 +355,6 @@ hasManyアソシエーションの関連レコードを保存するには、\
 hasManyアソシエーションの関連レコードを保存して、同時にComment belongsTo User という\
 アソシエーションのデータも保存するには、以下のようなデータ配列を準備します。 ::
 
-    <?php
     $data = array(
         'Article' => array('title' => 'My first article'),
         'Comment' => array(
@@ -384,7 +365,6 @@ hasManyアソシエーションの関連レコードを保存して、同時にC
 
 そしてこのようにして保存してください。 ::
 
-    <?php
     $Article->saveAssociated($data, array('deep' => true));
 
 .. versionchanged:: 2.1
@@ -393,7 +373,6 @@ hasManyアソシエーションの関連レコードを保存して、同時にC
 
 このようにして、複数モデルに対応する ``fieldList`` を渡すことができます。 ::
 
-    <?php
     $this->SomeModel->saveAll($data, array(
         'fieldList' => array(
             'SomeModel' => array('field_1'),
@@ -432,7 +411,6 @@ PostとCommentの両方のモデルを使うことになります。
 以下に示すサンプルは、ひとつのユーザーとひとつのプロフィールを生成するためのデータを\
 FormHelperを使ってPOSTしたときの処理です。 ::
 
-    <?php
     public function add() {
         if (!empty($this->request->data)) {
             // $this->request->data['User']のデータでユーザーデータを保存します。
@@ -475,7 +453,6 @@ POSTされたhiddenフォームからのIDかもしれません。
 まず、CompanyモデルとAccountモデルのフォームを作ります。\
 (ここではCompany hasMany Account の関係があるとします) ::
 
-    <?php
     echo $form->create('Company', array('action' => 'add'));
     echo $form->input('Company.name', array('label' => 'Company name'));
     echo $form->input('Company.description');
@@ -499,7 +476,6 @@ Companyモデルがメインの場合、 ``saveAssociated()`` は、関連する
 
 そして、CompaniesControllerに ``add()`` アクションを作ります。 ::
 
-    <?php
     public function add() {
         if (!empty($this->request->data)) {
             // バリデーションエラーを出さないために以下のようにします。
@@ -521,7 +497,6 @@ hasManyを保存する
 記録するアプリケーションをサンプルとして書いてみたいと思います。\
 以下のコードを見て下さい。 ::
 
-   <?php
    // Controller/CourseMembershipController.php
    class CourseMembershipsController extends AppController {
        public $uses = array('CourseMembership');
@@ -747,7 +722,6 @@ Tagを新しく作って、いくつかのレシピに関連付けるための\
 ``save()`` メソッドがコントローラーから呼ばれれば、自動的に\
 HABTMデータをデータベースに保存します。 ::
 
-    <?php
     public function add() {
         // アソシエーションデータを保存
         if ($this->Tag->save($this->request->data)) {
@@ -763,7 +737,6 @@ HABTMデータをデータベースに保存します。 ::
 モデルの名前のビュー変数に割り当てます。inputの引数に変数の名前と同じ値を指定すれば\
 ``<select>`` の中に自動的にデータを引っ張ってきてくれます。 ::
 
-    <?php
     // コントローラーのコード
     $this->set('tags', $this->Recipe->Tag->find('list'));
 
@@ -776,7 +749,6 @@ HABTMを使ったもうひとつのシナリオとしては、 複数選択で�
 フォームの作り方が少し違います。タグ名のフォームは ``ModelName`` (モデル名)を\
 渡すことで生成されます。 ::
 
-    <?php
     // コントローラーのコード
     $this->set('tags', $this->Recipe->Tag->find('list'));
 
@@ -856,7 +828,6 @@ Model::save()を呼び出す前に、updated、created、modifiedのキーが$th
 ``unset($this->data['Model']['modified']`` などとします。または、Model::save()を\
 オーバーライドして、常にunsetの動作をするようにも出来ます。 ::
 
-    <?php
     class AppModel extends Model {
 
         public function save($data = null, $validate = true, $fieldList = array()) {

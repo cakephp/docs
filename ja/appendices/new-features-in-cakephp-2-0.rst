@@ -41,7 +41,6 @@ HtmlHelper
 
 コントローラで設定ファイルを指定する方法の例::
 
-    <?php
     public $helpers = array(
         'Html' => array(
             'configFile' => array('config_file', 'php') // 一つ目の方法：ファイル名とリーダー名の配列
@@ -94,7 +93,6 @@ Router
 これは例えば、サブドメインやHTTPS/HTTPのフラグを扱うルートを作成するのに使用することができます。
 以下はサブドメインをサポートするルートクラスの一例です::
 
-    <?php
     class SubdomainRoute extends CakeRoute {
         
         public function match($params) {
@@ -112,7 +110,6 @@ Router
 
 ::
 
-    <?php
     echo $this->Html->link(
         'Other domain',
          array('subdomain' => 'test', 'controller' => 'posts', 'action' => 'add')
@@ -184,7 +181,6 @@ Acceptヘッダーの自動解析
 
 ::
 
-    <?php
     Router::parseExtensions('json', 'xml');
 
 いったん拡張子に対応するビューとレイアウトを作成すれば、posts/view/1のようなURLにAccept: ``application/json`` を含んだヘッダーを送ることで、そのURLのJSONバージョンを受け取ることができるようになるでしょう。
@@ -229,7 +225,6 @@ CakePHP2.0のコンソールはほとんど完全に書き直されました。
 
 ::
 
-    <?php
     $this->paginate = array('maxLimit' => 1000);
 
 このデフォルト値は、ユーザのURL操作で「limit」パラメータをとても大きな数値にしたリクエストのために、過大なデータベースの情報の引き出しを防ぐために提供されます。
@@ -243,7 +238,6 @@ CakePHP2.0のコンソールはほとんど完全に書き直されました。
 
 ::
 
-    <?php
     public $helpers = array( 
         'Html' => array( 
             'className' => 'MyHtml' 
@@ -254,7 +248,6 @@ CakePHP2.0のコンソールはほとんど完全に書き直されました。
 
 ::
 
-    <?php
     public $components = array( 
         'Email' => array( 
             'className' => 'QueueEmailer' 
@@ -266,7 +259,6 @@ Emailコンポーネントを呼び出すことは、代わりにQueueEmailerを
 
 ::
 
-    <?php
     public $actsAs = array( 
         'Containable' => array( 
             'className' => 'SuperContainable' 

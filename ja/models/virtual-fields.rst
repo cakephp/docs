@@ -34,7 +34,6 @@
 定義することができます。MySQLを用いたバーチャルフィールドの定義の例としては、\
 以下のようになります。 ::
 
-    <?php
     public $virtualFields = array(
         'name' => 'CONCAT(User.first_name, " ", User.last_name)'
     );
@@ -44,7 +43,6 @@
 
 PostgreSQLだと、以下のようになります。 ::
 
-    <?php
     public $virtualFields = array(
         'name' => 'User.first_name || \' \' || User.last_name'
     );
@@ -99,7 +97,6 @@ Model::hasField() は、モデルが実際に持っているフィールドを�
 バーチャルフィールドもチェックされるようになります。\
 上記の例を用いれば、 ::
 
-    <?php
     $this->User->hasField('name'); // 「name」というフィールドが実在しないため false を返します。
     $this->User->hasField('name', true); // 「name」というバーチャルフィールドがあるため true を返します。
 
@@ -114,7 +111,6 @@ Model::isVirtualField()
 このメソッドは、フィールド・カラムが\
 バーチャルフィールドか実在するフィールドかどうかを判定するときに用いられます。カラムがバーチャルであるときに true を返します。 ::
 
-    <?php
     $this->User->isVirtualField('name'); //true
     $this->User->isVirtualField('first_name'); //false
 
@@ -129,7 +125,6 @@ Model::getVirtualField()
 このメソッドは、バーチャルフィールドを構成するSQL表現にアクセスするために用いられます。引数が与えられない場合、\
 そのモデルのすべてのバーチャルフィールドを返します。 ::
 
-    <?php
     $this->User->getVirtualField('name'); // 'CONCAT(User.first_name, ' ', User.last_name)' を返します。
 
 Model::find()とバーチャルフィールド
@@ -144,7 +139,6 @@ Model::find()とバーチャルフィールド
 バーチャルフィールドを扱います。返り値のセットの中で、バーチャルフィールドの値は\
 モデルのキーの下に置かれます。 ::
 
-    <?php
     $results = $this->User->find('first');
 
     // 返り値は以下のものを含みます。
@@ -191,7 +185,6 @@ Model::find()とバーチャルフィールド
 別名を持つようなモデルでバーチャルフィールドを使用するには、\
 モデルのコンストラクタでバーチャルフィールドを定義するのがベストでしょう。 ::
 
-    <?php
     public function __construct($id = false, $table = null, $ds = null) {
         parent::__construct($id, $table, $ds);
         $this->virtualFields['name'] = sprintf('CONCAT(%s.first_name, " ", %s.last_name)', $this->alias, $this->alias);
@@ -217,7 +210,6 @@ SQLクエリ内でのバーチャルフィールドの利用
 SQLクエリ中で直接使用される関数は、返されるデータがモデルのデータと同じ配列に格納されるのを防ぎます。\
 例えば以下のようなとき ::
 
-    <?php
     $this->Timelog->query("SELECT project_id, SUM(id) as TotalHours FROM timelogs AS Timelog GROUP BY project_id;");
 
 ..
@@ -252,7 +244,6 @@ SQLクエリ中で直接使用される関数は、返されるデータがモ�
 別のクエリがバーチャルフィールドを使用しようとする場合、デフォルト値として ``0`` を与えます。\
 それが発生した場合、 ``0`` が TotalHours 列に入ります。 ::
 
-    <?php
     $this->Timelog->virtualFields['TotalHours'] = 0;
 
 ..
@@ -261,7 +252,6 @@ SQLクエリ中で直接使用される関数は、返されるデータがモ�
 
 また、バーチャルフィールドを追加することに加えて、カラムを ``MyModel__MyField`` の形式で別名にする必要があります。 ::
 
-    <?php
     $this->Timelog->query("SELECT project_id, SUM(id) as Timelog__TotalHours FROM timelogs AS Timelog GROUP BY project_id;");
 
 ..
@@ -310,12 +300,10 @@ SQLクエリ中で直接使用される関数は、返されるデータがモ�
 この実装の問題に対する一般的な回避策としては、
 利用する必要がある時に ``virtualFields`` をあるモデルから別のモデルにコピーすることです。 ::
 
-    <?php
     $this->virtualFields['name'] = $this->Author->virtualFields['name'];
 
 もしくは以下のようにします。 ::
 
-    <?php
     $this->virtualFields += $this->Author->virtualFields;
 
 .. meta::

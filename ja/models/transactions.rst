@@ -7,14 +7,12 @@
 
 ::
 
-    <?php
     $dataSource = $this->getDataSource();
 
 これで、データソースを用いてトランザクションを開始・コミット・ロールバックすることができるようになりました。
 
 ::
 
-    <?php
     $dataSource->begin();
 
     // 幾つかのタスクを実行する
@@ -32,7 +30,6 @@
 トランザクションは、beginと一致するコミットとロールバックの回数だけ実行されるでしょう。
 ::
 
-    <?php
     $dataSource->begin();
     // 幾つかのタスクを実行する
     $dataSource->begin();

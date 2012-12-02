@@ -83,7 +83,6 @@ CakePHPのビューレイヤーはいくつかの異なるパーツによって�
 ビューに ``extend()`` の呼び出しが含まれるとき、現在のビューファイルは最後まで実行されます。
 一度実行が完了すると、拡張されたビューが描画されます。一つのビューファイルで二回以上 ``extend()`` が呼び出される場合、次に処理される親ビューを上書きします。::
 
-    <?php
     $this->extend('/Common/view');
     $this->extend('/Common/index');
 
@@ -106,7 +105,6 @@ CakePHPのビューレイヤーはいくつかの異なるパーツによって�
 ビューブロックは ``$scripts_for_layout`` に代わって、ビュー/レイアウトの中であればどこででもスロットやブロックを定義できる拡張可能なAPIを提供します。
 例えばサイドバーや、レイアウトの末尾や先頭にアセット読込領域の実装なとがブロックの典型的な使用例です。ブロックを実装するには二つの方法があります。捕捉されるブロックとするか、直接割り当てるかです。``start()``, ``append()``, ``end()`` メソッドは捕捉されるブロックと共に動作します。::
 
-    <?php
     // sidebarブロックを作成する
     $this->start('sidebar');
     echo $this->element('sidebar/recent_topics');
@@ -121,7 +119,6 @@ CakePHPのビューレイヤーはいくつかの異なるパーツによって�
 
 ``start()`` を複数回使ってブロックを追加できます。 ``assign()`` はクリアしたり任意のタイミングでブロックを上書きするために使われます。::
 
-    <?php
     // sidebarブロックから以前のコンテンツを消去する
     $this->assign('sidebar', '');
 
@@ -136,7 +133,7 @@ CakePHPのビューレイヤーはいくつかの異なるパーツによって�
 
 ブロックの表示には、``fetch()`` メソッドを使います。 ``fetch()`` はブロックが存在しなかった場合、''を返すのでブロックが安全に出力されます。::
 
-    <?php echo $this->fetch('sidebar'); ?>
+    echo $this->fetch('sidebar');
 
 fetchを使うとブロックが存在するかどうかによってブロックに囲まれたコンテンツの表示を切り替えることができます。::
 
@@ -175,7 +172,6 @@ fetchを使うとブロックが存在するかどうかによってブロック
 
 :php:meth:`HtmlHelper` はスクリプトとCSSがどのブロックに対応するかを制御します。::
 
-    <?php
     // ビューの中
     $this->Html->script('carousel', array('block' => 'scriptBottom'));
 
@@ -248,7 +244,6 @@ fetchを使うとブロックが存在するかどうかによってブロック
 
 レイアウトのタイトルを設定するためには、コントローラにて ``$title_for_layout`` 変数を設定するのが一番簡単です。::
 
-   <?php
    class UsersController extends AppController {
        public function view_active() {
            $this->set('title_for_layout', 'View Active Users');
@@ -257,13 +252,11 @@ fetchを使うとブロックが存在するかどうかによってブロック
 
 また、ビューファイルの中からtitle_for_layout変数を設定することもできます。::
 
-    <?php
     $this->set('title_for_layout', $titleContent);
 
 好きなだけレイアウトを作ることが出来ます。レイアウトは、``app/View/Layouts`` ディレクトリにファイルを作って、
 コントローラアクションの中かビューの :php:attr:`~View::$layout` プロパティを切り替えるだけで作成できます。::
 
-    <?php
     // コントローラから
     public function admin_view() {
         // stuff
@@ -276,7 +269,6 @@ fetchを使うとブロックが存在するかどうかによってブロック
 例えば、私のサイトに小さな広告バナー枠があるとします。その場合、私は小さな広告枠が含まれる新しいレイアウトを作って、
 以下のように全コントローラのアクションで指定するかもしれません。::
 
-   <?php
    class UsersController extends AppController {
        public function view_active() {
            $this->set('title_for_layout', 'View Active Users');
@@ -304,7 +296,6 @@ flashレイアウトは :php:meth:`Controller::flash()` メソッドのメッセ
 もし既存のプラグインでレイアウトを使いたい場合、 :term:`プラグイン記法` を使うことが出来ます。
 コンタクトプラグインからコンタクトのレイアウトを使う場合は以下のようになります。::
 
-    <?php
     class UsersController extends AppController {
         public function view_active() {
             $this->layout = 'Contacts.contact';
@@ -328,14 +319,13 @@ flashレイアウトは :php:meth:`Controller::flash()` メソッドのメッセ
 エレメントは ``/app/View/Elements/`` フォルダの中に.ctpの拡張子を持つ名前で配置されます。
 次の例はビューのelementメソッドを使って出力しています。::
 
-    <?php echo $this->element('helpbox'); ?>
+    echo $this->element('helpbox');
 
 エレメントに変数を渡す
 ----------------------
 
 elementメソッドの第二引数を通してエレメントにデータを渡すことができます。::
 
-    <?php
     echo $this->element('helpbox', array(
         "helptext" => "Oh, this text is very helpful."
     ));
@@ -344,14 +334,12 @@ elementメソッドの第二引数を通してエレメントにデータを渡�
 (ビューファイルにおけるコントローラの :php:meth:`Controller::set()` メソッドと同様の動作です。)
 上記の例では ``/app/View/Elements/helpbox.ctp`` の中で ``$helptext`` 変数が使えます。::
 
-    <?php
     // app/View/Elements/helpbox.ctp の内部
     echo $helptext; //"Oh, this text is very helpful." と出力されます
 
 :php:meth:`View::element()` メソッドは、エレメントのためのオプションをサポートしています。
 サポートされるオプションは、'cache' と 'callbacks' です。例えば::
 
-    <?php
     echo $this->element('helpbox', array(
             "helptext" => "This is passed to the element as $helptext",
             "foobar" => "This is passed to the element as $foobar",
@@ -366,7 +354,6 @@ elementメソッドの第二引数を通してエレメントにデータを渡�
 その結果、何処にいつまでエレメントを保存しておくのかを非常に柔軟に制御することができます。
 あるアプリケーションの中で同じエレメントの異なるバージョンをキャッシュするためには、次の書式を使ってユニークなキャッシュキーを提供して下さい。::
 
-    <?php
     $this->element('helpbox', array(), array(
             "cache" => array('config' => 'short', 'key' => 'unique value')
         )
@@ -379,7 +366,6 @@ elementメソッドの第二引数を通してエレメントにデータを渡�
 
 これを実際確認するため、Postの例のコントローラに以下のようなコードを追加して下さい。::
 
-    <?php
     class PostsController extends AppController {
         // ...
         public function index() {
@@ -411,12 +397,11 @@ elementメソッドの第二引数を通してエレメントにデータを渡�
 どのキャッシュ設定を使うかを設定することができます。:php:class:`Cache` の設定についての詳細は
 :doc:`/core-libraries/caching` をみて下さい。エレメントキャッシュの単純な例は以下のようになります。::
 
-    <?php echo $this->element('helpbox', array(), array('cache' => true)); ?>
+    echo $this->element('helpbox', array(), array('cache' => true));
 
 あるビューの中で同じエレメントが二回以上描画される場合、毎回違う名前の'key'パラメータを設定することで確実にキャッシュすることができます。
 これによって、element()を以前呼び出し時に生成されたキャッシュをそれに続くelement()の呼び出しの結果で上書きすることが避けられます。::
 
-    <?php
     echo $this->element(
         'helpbox',
         array('var' => $var),
@@ -442,7 +427,7 @@ elementメソッドの第二引数を通してエレメントにデータを渡�
 
 プラグインからエレメントを読み込むために、 `plugin` オプションを使って下さい。(バージョン1.xの `data` オプションから移動しました。)::
 
-    <?php echo $this->element('helpbox', array(), array('plugin' => 'Contacts'));
+    echo $this->element('helpbox', array(), array('plugin' => 'Contacts'));
 
 2.1
 ---
@@ -451,11 +436,10 @@ elementメソッドの第二引数を通してエレメントにデータを渡�
 ビューがコントローラ/アクションプラグインの描画中のとき、他のプラグイン名が使われなければ、すべてのエレメントで使われているプラグイン名に自動的に接頭辞がつけられます。
 もしエレメントがプラグインに存在しない場合、メインアプリフォルダの中が検索されます。::
 
-    <?php echo $this->element('Contacts.helpbox'); ?>
+    echo $this->element('Contacts.helpbox');
 
 もしビューがプラグインの一部であれば、プラグイン名を省略できます。例えば、Contactsプラグインの ``ContactsController`` の中にいる場合、::
 
-    <?php
     echo $this->element('helpbox');
     // and
     echo $this->element('Contacts.helpbox');
@@ -481,7 +465,6 @@ elementメソッドの第二引数を通してエレメントにデータを渡�
 
     ビューファイルでは、次のように記述できます。::
 
-        <?php
         $this->set('activeMenuButton', 'posts');
 
     そしてレイアウトでは、 ``$activeMenuButton`` 変数が利用でき、'posts'という値になります。
@@ -503,7 +486,6 @@ elementメソッドの第二引数を通してエレメントにデータを渡�
     オブジェクトのタイプやURLに基づいてユニークでランダムではないDOM IDを生成します。
     このメソッドはしばしば、 :php:class:`JsHelper` のようなエレメントのためにユニークなDOM IDの生成を必要としているヘルパーによって使われます。::
 
-        <?php
         $uuid = $this->uuid('form', array('controller' => 'posts', 'action' => 'index'));
         //$uuid contains 'form0425fe3bad'
 
