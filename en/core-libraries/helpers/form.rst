@@ -587,10 +587,10 @@ html attributes. The following will cover the options specific to
 
     $this->Form->input('Model.field', array('error' => false));
 
-  To disable only the error message, but retain the field classes, set the error
-  key to ''::
+  To disable only the error message, but retain the field classes, set the
+  errorMessage key to false::
 
-    $this->Form->input('Model.field', array('error' => ''));
+    $this->Form->input('Model.field', array('errorMessage' => false));
 
   To modify the wrapping element type and its class, use the
   following format::
@@ -620,7 +620,7 @@ html attributes. The following will cover the options specific to
   messages for your forms.
 
   .. versionadded:: 2.3
-    Support for ``'error' => ''`` was added in 2.3
+    Support for the ``errorMessage`` option was added in 2.3
 
 * ``$options['before']``, ``$options['between']``, ``$options['separator']``,
   and ``$options['after']``

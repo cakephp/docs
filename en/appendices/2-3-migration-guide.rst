@@ -205,8 +205,8 @@ FormHelper
   provide a list of values you want disabled.
 - :php:meth:`FormHelper::postLink()` now accepts a ``method`` key.  This allows
   you to create link forms using HTTP methods other than POST.
-- When creating inputs with ``input()`` you can now set the ``error`` option to
-  ''. This will disable the error message display, but leave the error
+- When creating inputs with ``input()`` you can now set the ``errorMessage`` option to
+  false. This will disable the error message display, but leave the error
   classnames intact.
 
 HtmlHelper
