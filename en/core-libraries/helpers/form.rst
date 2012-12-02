@@ -583,9 +583,14 @@ html attributes. The following will cover the options specific to
   number of suboptions which control the wrapping element, wrapping element
   class name, and whether HTML in the error message will be escaped.
 
-  To disable error message output set the error key to false::
+  To disable error message output & field classes set the error key to false::
 
     $this->Form->input('Model.field', array('error' => false));
+
+  To disable only the error message, but retain the field classes, set the error
+  key to ''::
+
+    $this->Form->input('Model.field', array('error' => ''));
 
   To modify the wrapping element type and its class, use the
   following format::
@@ -613,6 +618,9 @@ html attributes. The following will cover the options specific to
   As seen above you can set the error message for each validation
   rule you have in your models. In addition you can provide i18n
   messages for your forms.
+
+  .. versionadded:: 2.3
+    Support for ``'error' => ''`` was added in 2.3
 
 * ``$options['before']``, ``$options['between']``, ``$options['separator']``,
   and ``$options['after']``
