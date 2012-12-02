@@ -183,6 +183,12 @@ View
   existing block.
 - :php:class:`XmlView` now uses the ``_rootNode`` view variable to customize the
   top level XML node.
+- :php:meth:`View::elementExists()` was added. You can use this method to check
+  if elements exist before using them.
+- :php:meth:`View::element()` had the ``ignoreMissing`` option added. You can
+  use this to suppress the errors triggered by missing view elements.
+- :php:meth:`View::startIfEmpty()` was added.
+
 
 Helpers
 =======

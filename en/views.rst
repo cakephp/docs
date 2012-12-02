@@ -167,13 +167,38 @@ can be used to clear or overwrite a block at any time::
     // Clear the previous content from the sidebar block.
     $this->assign('sidebar', '');
 
-.. versionadded:: 2.3
 
-As of 2.3 you can also use ``prepend()`` to prepend content to an existing block::
+In 2.3, a few new methods were added for working with blocks. The ``prepend()``
+to prepend content to an existing block::
 
     // Prepend to sidebar
     $this->prepend('sidebar', 'this content goes on top of sidebar');
 
+The method ``startIfEmpty()`` can be used to start a block **only** if its empty
+or undefined. If the block already exists the captured content will be
+discarded. This is useful when you want to conditionally define default content for
+a block should it not already exist::
+
+    // In a view file.
+    // Create a navbar block
+    $this->startIfEmpty('navbar');
+    echo $this->element('navbar');
+    echo $this->element('notifications');
+    $this->end();
+
+    // In a parent view/layout
+    $this->startIfEmpty('navbar');
+    Default content
+    $this->end();
+
+    echo $this->fetch('navbar');
+
+In the above example, the ``navbar`` block will only contain the content added
+in the first section.  Since the block was defined in the child view, the
+default content will be discarded.
+
+.. versionadded: 2.3
+    ``startIfEmpty()`` and ``prepend()`` were added in 2.3
 
 .. note::
 
@@ -248,8 +273,8 @@ when used with the ``inline = false`` option:
         </head>
         // rest of the layout follows
 
-The :php:meth:`HtmlHelper` also allows you to control which block the scripts and CSS go
-to::
+The :php:meth:`HtmlHelper` also allows you to control which block the scripts
+and CSS go to::
 
     // in your view
     $this->Html->script('carousel', array('block' => 'scriptBottom'));
@@ -690,6 +715,13 @@ To call any view method use ``$this->method()``
 
     Prepend into the block with ``$name``.  See the section on
     :ref:`view-blocks` for examples.
+
+    .. versionadded:: 2.3
+
+.. php:method:: startIfEmpty($name)
+
+    Conditionally start a block, only if its empty. All content in the block
+    will be captured and discarded if the block is already defined.
 
     .. versionadded:: 2.3
 
