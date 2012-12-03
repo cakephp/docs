@@ -3,64 +3,65 @@ HtmlHelper
 
 .. php:class:: HtmlHelper(View $view, array $settings = array())
 
-The role of the HtmlHelper in CakePHP is to make HTML-related
-options easier, faster, and more resilient to change. Using this
-helper will enable your application to be more light on its feet,
-and more flexible on where it is placed in relation to the root of
-a domain.
+CakePHP における HtmlHelper の役割は、 HTML に関連するオプションを
+より簡単、高速に作成し、より弾力的なものに変えることです。
+このヘルパーを使うことで、アプリケーションの足どりはより軽くなり、
+そしてドメインのルートが置かれている場所に関して、よりフレキシブル
+なものになるでしょう。
 
-Many HtmlHelper methods include a ``$htmlAttributes`` parameter,
-that allow you to tack on any extra attributes on your tags. Here
-are a few examples of how to use the $htmlAttributes parameter:
+HtmlHelper にある多くのメソッドは ``$htmlAttributes`` という
+引数を持っています。これにより、いかなる追加属性もタグに
+付け加えることができます。これは ``$htmlAttributes`` を使う
+方法についての簡単な例です。
 
 .. code-block:: html
 
-    Desired attributes: <tag class="someClass" />      
-    Array parameter: array('class' => 'someClass')
+    付けられる属性: <tag class="someClass" />      
+    配列での指定: array('class' => 'someClass')
      
-    Desired attributes: <tag name="foo" value="bar" />  
-    Array parameter:  array('name' => 'foo', 'value' => 'bar')
+    付けられる属性: <tag name="foo" value="bar" />  
+    配列での指定:  array('name' => 'foo', 'value' => 'bar')
 
 
 .. note::
 
-    The HtmlHelper is available in all views by default. If you're
-    getting an error informing you that it isn't there, it's usually
-    due to its name being missing from a manually configured $helpers
-    controller variable.
+    HtmlHelpler は既定ではすべてのビューで使うことができます。
+    このヘルパーが存在しないという旨のエラーが発生したとき、
+    たいていの原因はコントローラーで変数 ``$helpers`` を手動で
+    設定した際、名前を書き忘れたことです。
 
-Inserting Well-Formatted elements
-=================================
+Well-Formatted な要素の挿入
+===========================
 
-The most important task the HtmlHelper accomplishes is creating
-well formed markup. Don't be afraid to use it often - you can cache
-views in CakePHP in order to save some CPU cycles when views are
-being rendered and delivered. This section will cover some of the
-methods of the HtmlHelper and how to use them.
+HtmlHelper の果たすもっとも重要なタスクは、適切に定義された
+マークアップの生成です。 CakePHP はレンダリングと送信にかかる
+CPU のサイクルを減らすために、ビューをキャッシュすることが
+できます。この節では、いくつかのHtmlHelperのメソッドと、その
+使用方法について説明します。
 
 .. php:method:: charset($charset=null)
 
-    :param string $charset: Desired character set.  If null, the value of 
-       ``App.encoding`` will be used.
+    :param string $charset: 使用したい文字セットを設定します。
+       null の場合は ``App.encoding`` で設定した値が使われます。
 
-    Used to create a meta tag specifying the document's character.
-    Defaults to UTF-8
+    HTML 文書の文字セットを特定する meta タグを作成するために使います。
+    既定では UTF-8 になります。
 
-    Example use::
+    使用例::
  
         echo $this->Html->charset();
 
-    Will output:
+    出力結果
 
     .. code-block:: html
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    Alternatively, ::
+    このように使うと::
 
         echo $this->Html->charset('ISO-8859-1');
 
-    Will output:
+    以下のようになります。t:
 
     .. code-block:: html
 
@@ -68,35 +69,34 @@ methods of the HtmlHelper and how to use them.
 
 .. php:method:: css(mixed $path, string $rel = null, array $options = array())
 
-    :param mixed $path: Either a string of the css file to link, or an array with multiple files
-    :param string $rel: The value of the generated tag's rel attribute.  If null, 'stylesheet'
-       will be used.
-    :param array $options: An array of :term:`html attributes`.
+    :param mixed $path: リンクしたいCSSファイルのパスを含む文字列か複数のファイルパスを含む配列
+    :param string $rel: 生成されるタグの rel 属性を設定します。 null にすると 'stylesheet'
+        が設定されます。
+    :param array $options: :term:`html attributes` で説明した配列です。
 
-    Creates a link(s) to a CSS style-sheet. If key 'inline' is set to
-    false in ``$options`` parameter, the link tags are added to the
-    ``css`` block which you can print inside the head
-    tag of the document.
+    CSS のスタイルシートの link タグを生成します。 ``$options`` パラメータのキー 'inline' を
+    false に設定すると link タグは HTML文書の head タグ内にある ``css`` ブロック
+    に追加されます。
 
-    You can use the ``block`` option to control which block the link element
-    will be appended to.  By default it will append to the ``css`` block.
-
-    This method of CSS inclusion assumes that the CSS file specified
-    resides inside the /app/webroot/css directory.::
+    ``block`` オプションを使用することで、 link タグが追加されるブロックを制御できます。
+    既定では ``css`` ブロックに追加されます。
+    
+    ``/app/webroot/css`` ディレクトリ以下にある特定の CSS ファイルをインクルードするには
+    以下のようにします。::
 
         echo $this->Html->css('forms');
 
-    Will output:
+    このコードの出力は以下のようになります。
 
     .. code-block:: html
 
         <link rel="stylesheet" type="text/css" href="/css/forms.css" />
 
-    The first parameter can be an array to include multiple files.::
+    最初の引数は複数のファイルをインクルードするために配列を使用できます。::
 
         echo $this->Html->css(array('forms', 'tables', 'menu'));
 
-    Will output:
+    上の例は以下のようになります。
 
     .. code-block:: html
 
@@ -104,44 +104,44 @@ methods of the HtmlHelper and how to use them.
         <link rel="stylesheet" type="text/css" href="/css/tables.css" />
         <link rel="stylesheet" type="text/css" href="/css/menu.css" />
 
-    You can include css files from any loaded plugin using 
-    :term:`plugin syntax`.  To include ``app/Plugin/DebugKit/webroot/css/toolbar.css``
-    You could use the following::
+    ロードしたプラグインからも :term:`plugin syntax` を使うことで CSS ファイルを
+    インクルードすることができます。 ``app/Plugin/DebugKit/webroot/css/toolbar.css``
+    という CSS ファイルをインクルードするには以下のようにします。::
 
         echo $this->Html->css('DebugKit.toolbar.css');
 
-    If you want to include a css file which shares a name with a loaded
-    plugin you can do the following.  For example if you had a ``Blog`` plugin,
-    and also wanted to include ``app/webroot/css/Blog.common.css``, you would::
+    ロードしたプラグインと名前が共通する CSS ファイルをインクルードするときは
+    次のようにします。たとえば ``Blog`` プラグインを使っているときに、
+    ``app/webroot/css/Blog.common.css``をインクルードしたい場合は以下のようにします。::
 
         echo $this->Html->css('Blog.common.css', null, array('plugin' => false));
 
     .. versionchanged:: 2.1
-        The ``block`` option was added.
-        Support for :term:`plugin syntax` was added.
+        ``block`` オプションが追加されました。
+        :term:`plugin syntax` のサポートが追加されました。
 
 .. php:method:: meta(string $type, string $url = null, array $options = array())
 
-    :param string $type: The type meta tag you want.
-    :param mixed $url: The url for the meta tag, either a string or a :term:`routing array`.
-    :param array $options: An array of :term:`html attributes`.
+    :param string $type: 必要な meta タグのタイプを指定します。
+    :param mixed $url: meta タグのための URL です。文字列か :term:`routing array` を指定します。
+    :param array $options: :term:`html attributes` で説明した配列です。
 
-    This method is handy for linking to external resources like RSS/Atom feeds
-    and favicons. Like css(), you can specify whether or not you'd like this tag
-    to appear inline or appended to the ``meta`` block by setting the 'inline'
-    key in the $attributes parameter to false, ie - ``array('inline' => false)``.
+    このメソッドは、 RSS または Atom フィードや、 favicon といった外部リソースとリンクする際に有用です。
+    ``css()`` メソッド同様、 ``array('inline' => false)`` という風に ``$attributes`` の 'inline'
+    というキーに false を設定することで、タグをインラインで出力するか  ``meta`` ブロックに追加するかを
+    指定することができます。
 
-    If you set the "type" attribute using the $attributes parameter,
-    CakePHP contains a few shortcuts:
+    $attributes のパラメータを使って "type" 属性を設定するとき、 CakePHP では
+    少しですがショートカットを用意しています。
 
-    ======== ======================
-     type     translated value
-    ======== ======================
-    html     text/html
-    rss      application/rss+xml
-    atom     application/atom+xml
-    icon     image/x-icon
-    ======== ======================
+    ========= ======================
+     typeの値  変換後の値
+    ========= ======================
+    html      text/html
+    rss       application/rss+xml
+    atom      application/atom+xml
+    icon      image/x-icon
+    ========= ======================
 
 
     .. code-block:: php
@@ -153,7 +153,7 @@ methods of the HtmlHelper and how to use them.
             array('type' => 'icon')
         );
         ?>
-        // Output (line breaks added)
+        // 出力結果(改行を追加しています)
         <link
             href="http://example.com/favicon.ico"
             title="favicon.ico" type="image/x-icon"
@@ -166,7 +166,7 @@ methods of the HtmlHelper and how to use them.
             array('type' => 'rss')
         );
         ?>
-        // Output (line breaks added)
+        // 出力結果(改行を追加しています)
         <link
             href="http://example.com/comments/index.rss"
             title="Comments"
@@ -174,47 +174,47 @@ methods of the HtmlHelper and how to use them.
             rel="alternate"
         />
 
-    This method can also be used to add the meta keywords and
-    descriptions. Example:
+    このメソッドは meta キーワードと種類を記述することもできます。
+    以下に例を示します。
 
     .. code-block:: php
 
         <?php
         echo $this->Html->meta(
             'keywords',
-            'enter any meta keyword here'
+            'ここに meta キーワードを書き込む'
         );
         ?>
-        // Output
-        <meta name="keywords" content="enter any meta keyword here" />
+        // 出力結果
+        <meta name="keywords" content="ここに meta キーワードを書き込む" />
 
         <?php
         echo $this->Html->meta(
             'description',
-            'enter any meta description here'
+            'ここに何か説明を書き込む'
         );
         ?>
-        // Output
-        <meta name="description" content="enter any meta description here" />
+        // 出力結果
+        <meta name="description" content="ここに何か説明を書き込む" />
 
-    If you want to add a custom meta tag then the first parameter
-    should be set to an array. To output a robots noindex tag use the
-    following code::
+    独自の meta タグを出力するときは、配列を最初の引数として渡します。
+    クローラにインデックスを作成させないよう指定するタグを出力する例を
+    以下に示します。::
 
         echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex')); 
 
     .. versionchanged:: 2.1
-        The ``block`` option was added.
+        ``block`` オプションが追加されました。
 
 .. php:method:: docType(string $type = 'xhtml-strict')
 
-    :param string $type: The type of doctype being made.
+    :param string $type: 作成される DOCTYPE タグ
 
-    Returns a (X)HTML doctype tag. Supply the doctype according to the
-    following table:
+    (X)HTML の DOCTYPE タグを出力します。 以下は指定できる値と
+    その結果をまとめた表です。
 
     +--------------------------+----------------------------------+
-    | type                     | translated value                 |
+    | ``$type`` の値           | 出力されるタグの種類             |
     +==========================+==================================+
     | html4-strict             | HTML4 Strict                     |
     +--------------------------+----------------------------------+
@@ -236,25 +236,24 @@ methods of the HtmlHelper and how to use them.
     ::
 
         echo $this->Html->docType();
-        // Outputs: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        // 出力結果: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
         echo $this->Html->docType('html5');
-        // Outputs: <!DOCTYPE html>
+        // 出力結果: <!DOCTYPE html>
 
         echo $this->Html->docType('html4-trans');
-        // Outputs: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+        // 出力結果: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
     .. versionchanged:: 2.1
-        The default doctype is html5 in 2.1.
+        2.1では既定で出力される DOCTYPE タグが HTML5 のものになりました。
 
 .. php:method:: style(array $data, boolean $oneline = true)
 
-    :param array $data: A set of key => values with CSS properties.
-    :param boolean $oneline: Should the contents be on one line.
+    :param array $data: プロパティ => 値 という風な CSS プロパティの集合
+    :param boolean $oneline: 内容を1行にするかどうか
 
-    Builds CSS style definitions based on the keys and values of the
-    array passed to the method. Especially handy if your CSS file is
-    dynamic.::
+    メソッドに渡した配列のキーと値から CSS のスタイル定義を作成します。
+    特に動的な CSS の作成に有用です。::
 
         echo $this->Html->style(array(
             'background' => '#633',
@@ -262,135 +261,134 @@ methods of the HtmlHelper and how to use them.
             'padding' => '10px'
         )); 
 
-    Will output::
+    出力は以下のようになります。::
 
         background:#633; border-bottom:1px solid #000; padding:10px;
 
 .. php:method:: image(string $path, array $options = array())
 
-    :param string $path: Path to the image.
-    :param array $options: An array of :term:`html attributes`.
+    :param string $path: 画像のパス。
+    :param array $options: :term:`html attributes` の配列
 
-    Creates a formatted image tag. The path supplied should be relative
-    to /app/webroot/img/.::
+    書式にのっとった image タグを作成します。画像のパスは ``/app/webroot/img/``
+    からの相対パスを指定してください。::
 
         echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'));
 
-    Will output:
+    出力は以下のとおりです。
 
     .. code-block:: html
 
         <img src="/img/cake_logo.png" alt="CakePHP" /> 
 
-    To create an image link specify the link destination using the
-    ``url`` option in ``$htmlAttributes``.::
+    リンク付き画像を作成するには、リンク先を ``$htmlAttributes`` の
+    ``url`` オプションに設定します。::
 
         echo $this->Html->image("recipes/6.jpg", array(
-            "alt" => "Brownies",
+            "alt" => "ブラウニー",
             'url' => array('controller' => 'recipes', 'action' => 'view', 6)
         ));
 
-    Will output:
+    出力は以下のとおりです。
 
     .. code-block:: html
 
         <a href="/recipes/view/6">
-            <img src="/img/recipes/6.jpg" alt="Brownies" />
+            <img src="/img/recipes/6.jpg" alt="ブラウニー" />
         </a>
 
-    If you are creating images in emails, or want absolute paths to images you
-    can use the ``fullBase`` option::
+    電子メールで画像を使用したいときや、絶対パスで画像を指定したいときは
+    ``fullBase`` オプションを設定します。::
 
         echo $this->Html->image("logo.png", array('fullBase' => true));
 
-    Will output:
+    出力は以下のとおりです。
 
     .. code-block:: html
 
         <img src="http://example.com/img/logo.jpg" alt="" />
 
-    You can include image files from any loaded plugin using 
-    :term:`plugin syntax`.  To include ``app/Plugin/DebugKit/webroot/img/icon.png``
-    You could use the following::
+    :term:`plugin syntax` を使うことで、ロードしたプラグインの画像を
+    インクルードできます。 ``app/Plugin/DebugKit/webroot/img/icon.png``
+    をインクルードするには以下のようにします。::
 
         echo $this->Html->image('DebugKit.icon.png');
 
-    If you want to include a image file which shares a name with a loaded
-    plugin you can do the following.  For example if you had a ``Blog`` plugin,
-    and also wanted to include ``app/webroot/js/Blog.icon.png``, you would::
+    ロードしたプラグインと名前が共通する画像をインクルードするときは
+    次のようにします。たとえば ``Blog`` プラグインを使っているときに、
+    ``app/webroot/js/Blog.icon.png`` をインクルードしたい場合は次のようにします。::
 
         echo $this->Html->image('Blog.icon.png', array('plugin' => false));
 
     .. versionchanged:: 2.1
-        The ``fullBase`` option was added.
-        Support for :term:`plugin syntax` was added.
+        ``fullBase`` オプションが追加されました。
+        :term:`plugin syntax` のサポートが追加されました。
 
 .. php:method:: link(string $title, mixed $url = null, array $options = array(), string $confirmMessage = false)
 
-    :param string $title: The text to display as the body of the link.
-    :param mixed $url: Either the string location, or a :term:`routing array`.
-    :param array $options: An array of :term:`html attributes`.
+    :param string $title: リンクを本文に表示する際のテキストを設定します。
+    :param mixed $url: 文字列または :term:`routing array` によってリンク先のURLを設定します。
+    :param array $options: :term:`html attributes` の配列を設定します。
 
-    General purpose method for creating HTML links. Use ``$options`` to
-    specify attributes for the element and whether or not the
-    ``$title`` should be escaped.::
+    一般的な HTML のハイパーリンクを作成するためのメソッドです。
+    ``$options`` は、タグの属性や、 ``$title`` をエスケープするかどうかの設定に使います。::
 
         echo $this->Html->link('Enter', '/pages/home', array('class' => 'button', 'target' => '_blank'));
 
-    Will output:
+    出力は以下のようになります。
 
     .. code-block:: html
 
         <a href="/pages/home" class="button" target="_blank">Enter</a>
 
-    Use ``'full_base'=>true`` option for absolute URLs::
+    ``'full_base'=>true`` オプションを設定すると、URLをフルパスで出力します。::
 
         echo $this->Html->link(
             'Dashboard',
             array('controller' => 'dashboards', 'action' => 'index', 'full_base' => true)
         );
 
-    Will output:
+    出力は以下のようになります。
 
     .. code-block:: html
 
         <a href="http://www.yourdomain.com/dashboards/index">Dashboard</a>
 
 
-    Specify ``$confirmMessage`` to display a javascript ``confirm()``
-    dialog::
+    ``$confirmMessage`` を指定すると、JavaScript の ``confirm()``
+    で表示するダイアログのメッセージを設定できます。::
 
         echo $this->Html->link(
-            'Delete',
+            '削除',
             array('controller' => 'recipes', 'action' => 'delete', 6),
             array(),
-            "Are you sure you wish to delete this recipe?"
+            "本当にこのレシピを削除しますか?"
         );
 
-    Will output:
+    結果は以下の通りです。
 
     .. code-block:: html
 
-        <a href="/recipes/delete/6" onclick="return confirm('Are you sure you wish to delete this recipe?');">Delete</a>
+        <a href="/recipes/delete/6" onclick="return confirm('本当にこのレシピを削除しますか?');">削除</a>
 
-    Query strings can also be created with ``link()``.::
+    クエリ文字列も ``link()`` で作成できます。::
 
-        echo $this->Html->link('View image', array(
+        echo $this->Html->link('画像を表示する', array(
             'controller' => 'images',
             'action' => 'view',
             1,
             '?' => array('height' => 400, 'width' => 500))
         );
 
-    Will output:
+    結果は以下の通りです。
   
     .. code-block:: html
 
-        <a href="/images/view/1?height=400&width=500">View image</a>
+        <a href="/images/view/1?height=400&width=500">画像を表示する</a>
 
-    HTML special characters in ``$title`` will be converted to HTML
-    entities. To disable this conversion, set the escape option to
-    false in the ``$options`` array.::
+    HTML で特殊な意味を持つ文字が ``$title`` に含まれていた場合は、 HTML
+    エンティティに変換されます。これを無効にするには、 ``$options``
+    配列の ``escape`` オプションに ``false`` を設定します。::
 
         <?php
         echo $this->Html->link(
@@ -399,7 +397,7 @@ methods of the HtmlHelper and how to use them.
             array('escape' => false)
         );
 
-    Will output:
+    出力は以下のようになります。
 
     .. code-block:: html
 
@@ -407,8 +405,8 @@ methods of the HtmlHelper and how to use them.
             <img src="/img/recipes/6.jpg" alt="Brownies" />
         </a>
 
-    Also check :php:meth:`HtmlHelper::url` method
-    for more examples of different types of urls.
+    そのほかの種類のURLについては、 :php:meth:`HtmlHelper::url`
+    メソッドの項目も参考にしてください。 
 
 .. php:method:: media(string|array $path, array $options)
 
@@ -416,28 +414,26 @@ methods of the HtmlHelper and how to use them.
         `webroot/{$options['pathPrefix']}` directory. Or an array where each
         item itself can be a path string or an associate array containing keys
         `src` and `type`.
-    :param array $options: Array of HTML attributes, and special options.
+    :param array $options: HTML の属性や特別なオプションを設定します。
 
         Options:
 
-        - `type` Type of media element to generate, valid values are "audio"
-          or "video". If type is not provided media type is guessed based on
-          file's mime type.
-        - `text` Text to include inside the video tag
-        - `pathPrefix` Path prefix to use for relative urls, defaults to 
-          'files/'
-        - `fullBase` If provided the src attribute will get a full address
-          including domain name
+        - `type` メディアタグを作成する際の種類を指定します。有効な値は "audio"
+          か "video" です。指定しなかった場合はファイルの MIME タイプから判別します。
+        - `text` video タグに含めるテキストを設定します。
+        - `pathPrefix` 相対的な URL のパスに使うプレフィックスを設定します。既定では
+          'files/' が使われます。
+        - `fullBase` ドメイン名を含めた完全なアドレスを src 属性に指定したい場合に設定します。
 
     .. versionadded:: 2.1
 
-    Returns a formatted audio/video tag:
+    フォーマットされた audio/video タグを返します。
 
     .. code-block:: php
 
         <?php echo $this->Html->media('audio.mp4'); ?>
 
-        // Output
+        // 出力結果
         <video src="/files/audio.mp3"></audio>
 
         <?php echo $this->Html->media('video.mp4', array(
@@ -445,7 +441,7 @@ methods of the HtmlHelper and how to use them.
             'text' => 'Fallback text'
         )); ?>
 
-        // Output
+        // 出力結果
         <video src="http://www.somehost.com/files/video.mp4">Fallback text</video>
 
        <?php echo $this->Html->media(
@@ -453,7 +449,7 @@ methods of the HtmlHelper and how to use them.
             array('autoplay')
         ); ?>
 
-        // Output
+        // 出力結果
         <video autoplay="autoplay">
             <source src="/files/video.mp4" type="video/mp4"/>
             <source src="/files/video.ogg" type="video/ogg; codecs='theora, vorbis'"/>
@@ -461,12 +457,12 @@ methods of the HtmlHelper and how to use them.
 
 .. php:method:: tag(string $tag, string $text, array $htmlAttributes)
 
-    :param string $tag: The tag name being generated.
-    :param string $text: The contents for the tag.
-    :param array $options: An array of :term:`html attributes`.
+    :param string $tag: 生成するタグの名前
+    :param string $text: タグの内容
+    :param array $options: :term:`html attributes` の配列
 
-    Returns text wrapped in a specified tag. If no text is specified
-    then only the opening <tag> is returned.:
+    text を囲った tag 指定したタグを返します。textを指定しなかった場合、
+    <tag> という開始タグのみを返します。
 
     .. code-block:: php
 
@@ -474,36 +470,36 @@ methods of the HtmlHelper and how to use them.
         echo $this->Html->tag('span', 'Hello World.', array('class' => 'welcome'));
         ?>
          
-        // Output
+        // 出力結果
         <span class="welcome">Hello World</span>
          
-        // No text specified.
+        // text を指定しなかった場合です。
         <?php
         echo $this->Html->tag('span', null, array('class' => 'welcome'));
         ?>
          
-        // Output
+        // 出力結果
         <span class="welcome">
 
     .. note::
 
-        Text is not escaped by default but you may use
-        ``$htmlOptions['escape'] = true`` to escape your text. This
-        replaces a fourth parameter ``boolean $escape = false`` that was
-        available in previous versions.
+        text は既定ではエスケープされませんが、
+        ``$htmlOptions['escape'] = true`` と設定することでエスケープすることができます。
+        以前のバージョンでは、4つ目の引数に ``boolean $escape = false`` 
+        と設定することで行います。
 
 .. php:method:: div(string $class, string $text, array $options)
 
-    :param string $class: The classname for the div.
-    :param string $text: The content inside the div.
-    :param array $options: An array of :term:`html attributes`.
+    :param string $class: div タグのクラス名を設定します。
+    :param string $text: div タグに含まれる内容を設定します。
+    :param array $options: :term:`html attributes` の配列を設定します。
 
-    Used for creating div-wrapped sections of markup. The first
-    parameter specifies a CSS class, and the second is used to supply
-    the text to be wrapped by div tags. If the last parameter has been
-    set to true, $text will be printed HTML-escaped.
+    div タグで囲ったセクションを作成するために使います。最初の引数で
+    CSS のクラスを設定し、次の引数でdivタグで囲うテキストを設定します。
+    最後の引数を ``true`` に設定すると、 ``$text`` をエスケープされた
+    HTML で出力します。
 
-    If no text is specified, only an opening div tag is returned.:
+    text を指定しなかった場合は開始タグのみを返します。
  
     .. code-block:: php
 
@@ -511,17 +507,17 @@ methods of the HtmlHelper and how to use them.
         echo $this->Html->div('error', 'Please enter your credit card number.');
         ?>
         
-        // Output
+        // 出力結果
         <div class="error">Please enter your credit card number.</div>
 
 .. php:method::  para(string $class, string $text, array $options)
 
-    :param string $class: The classname for the paragraph.
-    :param string $text: The content inside the paragraph.
-    :param array $options: An array of :term:`html attributes`.
+    :param string $class: 段落のクラス名です。
+    :param string $text: 段落に含める内容です。
+    :param array $options: :term:`html attributes` の配列です。
 
-    Returns a text wrapped in a CSS-classed <p> tag. If no text is
-    supplied, only a starting <p> tag is returned.:
+    text を含め、 CSS のクラスを指定した <p> タグを出力します。 
+    text に何も指定しなかった場合は <p> の開始タグのみを出力します。
 
     .. code-block:: php
 
@@ -529,59 +525,57 @@ methods of the HtmlHelper and how to use them.
         echo $this->Html->para(null, 'Hello World.');
         ?>
         
-        // Output
+        // 出力結果
         <p>Hello World.</p>
 
 .. php:method:: script(mixed $url, mixed $options)
 
-    :param mixed $url: Either a string to a single Javascript file, or an
-       array of strings for multiple files.
-    :param array $options: An array of :term:`html attributes`.
+    :param mixed $url: 単一の Javascript ファイルを指定する文字列、または
+        複数のファイルを指定する文字列の配列です。
+    :param array $options: :term:`html attributes` の配列です。
 
-    Include a script file(s), contained either locally or as a remote url. If key ``inline`` is set to false in $options, the
-    script tags are added to the ``script`` block which you can print inside the
-    head tag of the document. ``$options['once']`` controls, whether or
-    not you want to include this script once per request or more than
-    once. ``$options['block']`` allows you to control which block the script tag
-    is appended to.  This is useful when you want to place some scripts at the
-    bottom of the layout.
+    URL で指定したローカルまたはリモートのスクリプトファイルをインクルードします。
+    $options の ``inline`` を false に設定すると、 script タグを head タグ内の 
+    ``script`` ブロックに追加することができます。 ``$options['once']`` の値を
+    操作することで、スクリプトをリクエストにつき1回のみインクルードするか、
+    またはそれ以上するかを制御できます。 ``$options['block']`` を指定することで、
+    script タグを追加するブロックを制御することができます。
+    これはいくつかのスクリプトをレイアウトの下部に置きたいときに有用でしょう。
 
-    You can use $options to set additional properties to the
-    generated script tag. If an array of script tags is used, the
-    attributes will be applied to all of the generated script tags.
+    $options を使って、生成する script タグの属性を設定することができます。
+    この設定は、配列を使ってファイルを指定した場合、
+    生成されるすべての script タグに適用されます。
 
-    This method of javascript file inclusion assumes that the
-    javascript file specified resides inside the ``/app/webroot/js``
-    directory::
+    このメソッドは、指定された JavaScript ファイルが ``/app/webroot/js``
+    というディレクトリにあると仮定して動作します。::
 
         echo $this->Html->script('scripts');
 
-    Will output:
+    結果は以下の通りです。
 
     .. code-block:: html
 
         <script type="text/javascript" href="/js/scripts.js"></script>
 
-    You can link to files with absolute paths as well to link files
-    that are not in ``app/webroot/js``::
+    ``app/webroot/js`` にないファイルをリンクする際は絶対パスを指定します。::
 
         echo $this->Html->script('/otherdir/script_file');
 
-    You can also link to a remote URL::
+    リモート URL のリンクを指定することもできます。::
 
         echo $this->Html->script('http://code.jquery.com/jquery.min.js');
 
-    Will output:
+    結果は以下の通りです。
 
     .. code-block:: html
 
         <script type="text/javascript" href="http://code.jquery.com/jquery.min.js"></script>
 
-    The first parameter can be an array to include multiple files.::
+    最初の引数を複数のファイル名を含む配列にすることもできます。::
 
         echo $this->Html->script(array('jquery', 'wysiwyg', 'scripts'));
 
-    Will output:
+    結果は以下の通りです。
 
     .. code-block:: html
 
@@ -589,59 +583,59 @@ methods of the HtmlHelper and how to use them.
         <script type="text/javascript" href="/js/wysiwyg.js"></script>
         <script type="text/javascript" href="/js/scripts.js"></script>
 
-    You can append the script tag to a specific block using the ``block``
-    option::
+    特定の script ブロックにタグを追加したい場合は ``block``
+    オプションを指定します。 ::
 
         echo $this->Html->script('wysiwyg', array('block' => 'scriptBottom'));
         
-    In your layout you can output all the script tags added to 'scriptBottom'::
+    レイアウトで以下のように記述すると、すべての script タグを
+    'scriptBottom' に出力することができます。::
 
         echo $this->fetch('scriptBottom');
 
-    You can include script files from any loaded plugin using 
-    :term:`plugin syntax`.  To include ``app/Plugin/DebugKit/webroot/js/toolbar.js``
-    You could use the following::
+    :term:`plugin syntax` を使うことにより、ロードしたプラグインのスクリプトを
+    使うことができます。 ``app/Plugin/DebugKit/webroot/js/toolbar.js`` を
+    インクルードするには以下のようにします。::
 
         echo $this->Html->script('DebugKit.toolbar.js');
 
-    If you want to include a script file which shares a name with a loaded
-    plugin you can do the following.  For example if you had a ``Blog`` plugin,
-    and also wanted to include ``app/webroot/js/Blog.plugins.js``, you would::
+    ロードしたプラグインと名前を共有するスクリプトファイルは、以下のようにすると
+    インクルードできます。たとえば ``Blog`` プラグインを使用しているときに
+    ``app/webroot/js/Blog.plugins.js`` をインクルードするには以下のようにします。::
 
         echo $this->Html->script('Blog.plugins.js', array('plugin' => false));
 
     .. versionchanged:: 2.1
-        The ``block`` option was added.
-        Support for :term:`plugin syntax` was added.
+        ``block`` オプションが追加されました。
+        :term:`plugin syntax` のサポートが追加されました。
 
 .. php:method::  scriptBlock($code, $options = array())
 
-    :param string $code: The code to go in the script tag.
-    :param array $options: An array of :term:`html attributes`.
+    :param string $code: script タグ内に含めるコード。
+    :param array $options: :term:`html attributes` の配列。
 
-    Generate a code block containing ``$code`` set
-    ``$options['inline']`` to false to have the script block appear in
-    the ``script`` view block. Other options defined will be added as attributes
-    to script tags.
-    ``$this->html->scriptBlock('stuff', array('defer' => true));`` will
-    create a script tag with ``defer="defer"`` attribute.
+    ``$code`` を含めた <script> タグを生成します。
+    ``$options['inline']`` を false 設定すると、コードブロックはビューブロックの
+    ``script`` に置かれます。 そのほかのオプションは script タグの属性として追加されます。
+    たとえば、 ``$this->html->scriptBlock('stuff', array('defer' => true));`` とすると、
+    ``defer="defer"`` という属性を持った script タグを生成します。
 
 .. php:method:: scriptStart($options = array())
 
-    :param array $options: An array of :term:`html attributes` to be used when 
-        scriptEnd is called.
+    :param array $options: :term:`html attributes` の配列を設定します。
+        これは scriptEnd が呼び出されたときに使われます。
 
-    Begin a buffering code block. This code block will capture all
-    output between ``scriptStart()`` and ``scriptEnd()`` and create an
-    script tag. Options are the same as ``scriptBlock()``
+    コードブロックのバッファリングを始めます。コードブロックは
+    ``scriptStart()`` と ``scriptEnd()`` の間にあるすべてのコードをキャプチャーし、
+    ひとつの script タグを生成します。オプションは ``scriptBlock()`` のものと同様です。
 
 .. php:method:: scriptEnd()
 
-    End a buffering script block, returns the generated script element
-    or null if the script block was opened with inline = false.
-
-    An example of using ``scriptStart()`` and ``scriptEnd()`` would
-    be::
+    コードブロックのバッファリングを終了し、生成した script 要素を
+    出力します。コードブロックをオープンする際、 ``inline => false``
+    としていた場合は nullを返します。
+    
+    ``scriptStart()`` と ``scriptEnd()`` の使用例を示します。::
 
         $this->Html->scriptStart(array('inline' => false));
 
@@ -651,14 +645,12 @@ methods of the HtmlHelper and how to use them.
 
 .. php:method:: nestedList(array $list, array $options = array(), array $itemOptions = array(), string $tag = 'ul')
 
-    :param array $list: Set of elements to list.
-    :param array $options: Additional HTML attributes of the list (ol/ul) tag 
-        or if ul/ol use that as tag.
-    :param array $itemOptions: Additional HTML attributes of the list item (LI) 
-        tag.
-    :param string $tag: Type of list tag to use (ol/ul).
+    :param array $list: リストにする要素の集合です
+    :param array $options: リストのタグについての HTML 属性を設定します。
+    :param array $itemOptions: リストアイテムのタグについての HTML 属性を設定します。
+    :param string $tag: リストのタグに ol か ul のどちらを使うか指定します。
 
-    Build a nested list (UL/OL) out of an associative array::
+    ネストしたリストを、連想配列から作成します。::
 
         $list = array(
             'Languages' => array(
@@ -677,7 +669,7 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: html
 
-        // Output (minus the whitespace)
+        // 出力結果 (空白は省かれます)
         <ul>
             <li>Languages
                 <ul>
@@ -696,16 +688,15 @@ methods of the HtmlHelper and how to use them.
 
 .. php:method:: tableHeaders(array $names, array $trOptions = null, array $thOptions = null)
 
-    :param array $names: An array of strings to create table headings.
-    :param array $trOptions: An array of :term:`html attributes` for the <tr>
-    :param array $thOptions: An array of :term:`html attributes` for the <th> elements
+    :param array $names: テーブルのヘッダー行を生成するためテキストの配列です。
+    :param array $trOptions: <tr> の設定のための :term:`html attributes` の配列です。
+    :param array $thOptions: それぞれの <th> タグ要素のための :term:`html attributes` の配列です。
 
-    Creates a row of table header cells to be placed inside of <table>
-    tags.::
+    <table> タグ内に置くためのヘッダー行を作成します。::
 
         echo $this->Html->tableHeaders(array('Date', 'Title', 'Active'));
 
-    Output:
+    結果は以下の通りです。
 
     .. code-block:: html
 
@@ -723,7 +714,7 @@ methods of the HtmlHelper and how to use them.
             array('class' => 'product_table')
         );
 
-    Output:
+    結果は以下の通りです。
 
     .. code-block:: html
 
@@ -734,10 +725,10 @@ methods of the HtmlHelper and how to use them.
         </tr>
 
     .. versionchanged:: 2.2
-        ``tableHeaders()`` now accepts attributes per cell, see below.
+        ``tableHeaders()`` はセルごとの属性を設定できます。以下をご覧ください。
 
-    As of 2.2 you can set attributes per column, these are used instead of the
-    defaults provided in the ``$thOptions``::
+    バージョン 2.2 からは、カラムごとに属性を設定できます。
+    既定では ``$thOptions`` で設定した値が使われます。::
 
         echo $this->Html->tableHeaders(array(
             'id',
@@ -745,7 +736,7 @@ methods of the HtmlHelper and how to use them.
             array('Date' => array('class' => 'sortable'))
         ));
 
-    Output:
+    結果は以下の通りです。
 
     .. code-block:: html
 
@@ -757,16 +748,16 @@ methods of the HtmlHelper and how to use them.
 
 .. php:method:: tableCells(array $data, array $oddTrOptions = null, array $evenTrOptions = null, $useCount = false, $continueOddEven = true)
 
-    :param array $data: A two dimensional array with data for the rows.
-    :param array $oddTrOptions: An array of :term:`html attributes` for the odd <tr>'s.
-    :param array $evenTrOptions: An array of :term:`html attributes` for the even <tr>'s.
-    :param boolean $useCount: Adds class "column-$i".
-    :param boolean $continueOddEven: If false, will use a non-static $count variable,
-        so that the odd/even count is reset to zero just for that call.
+    :param array $data: 行データの配列の2次元配列。
+    :param array $oddTrOptions: 奇数行の <tr> タグの設定をするための :term:`html attributes` の配列。
+    :param array $evenTrOptions: 偶数行の <tr> タグの設定をするための :term:`html attributes` の配列。
+    :param boolean $useCount: "column-$i" というクラスを追加するかどうかを指定します。
+    :param boolean $continueOddEven: false に設定すると、奇数偶数のカウントをリセットするために
+    static でない $count を変数として使います。
 
-    Creates table cells, in rows, assigning <tr> attributes differently
-    for odd- and even-numbered rows. Wrap a single table cell within an
-    array() for specific <td>-attributes. ::
+    奇数行と偶数行で異なる属性を割り当てた表のセルを作成します。
+    array() でひとつのセルを囲うと、特定の <td> タグについて属性を
+    設定できます。::
 
         echo $this->Html->tableCells(array(
             array('Jul 7th, 2007', 'Best Brownies', 'Yes'),
@@ -790,7 +781,7 @@ methods of the HtmlHelper and how to use them.
             array('Aug 1st, 2006', 'Anti-Java Cake', array('No', array('id' => 'special'))),
         ));
 
-    Output:
+    結果は以下の通りです。
 
     .. code-block:: html
 
@@ -809,7 +800,7 @@ methods of the HtmlHelper and how to use them.
             array('class' => 'darker')
         );
         
-    Output:
+    結果は以下の通りです。
 
     .. code-block:: html
 
@@ -819,14 +810,14 @@ methods of the HtmlHelper and how to use them.
 
 .. php:method:: url(mixed $url = NULL, boolean $full = false)
 
-    :param mixed $url: A :term:`routing array`.
-    :param mixed $full: Either a boolean to indicate whether or not the base path should 
-        be included on an array of options for :php:meth:`Router::url()`
+    :param mixed $url: :term:`routing array` 。
+    :param mixed $full: :php:meth:`Router::url()` のためのオプションを設定する配列または
+        ドメイン名を出力するかどうかを指定する boolean 型変数
 
-    Returns an URL pointing to a combination of controller and action.
-    If $url is empty, it returns the REQUEST\_URI, otherwise it
-    generates the url for the controller and action combo. If full is
-    true, the full base URL will be prepended to the result::
+    コントローラーとアクションの組み合わせが指し示す URL を返します。
+    $url を指定しなかった場合は REQUEST\_URI を、それ以外のときは
+    コントローラーとアクションの組み合わせから URL を生成して出力します。
+    full に true を設定すると、出力結果に ドメイン名を追加します。::
 
         echo $this->Html->url(array(
             "controller" => "posts",
@@ -834,12 +825,12 @@ methods of the HtmlHelper and how to use them.
             "bar"
         ));
          
-        // Output
+        // 出力結果
         /posts/view/bar
 
-    Here are a few more usage examples:
+    以下に更なる使用例を示します。
 
-    URL with named parameters::
+    名前付き引数と URL の指定::
 
         echo $this->Html->url(array(
             "controller" => "posts",
@@ -847,10 +838,10 @@ methods of the HtmlHelper and how to use them.
             "foo" => "bar"
         ));
          
-        // Output
+        // 出力結果
         /posts/view/foo:bar
 
-    URL with extension::
+    拡張子つきの URL::
 
         echo $this->Html->url(array(
             "controller" => "posts",
@@ -858,17 +849,17 @@ methods of the HtmlHelper and how to use them.
             "ext" => "rss"
         ));
          
-        // Output
+        // 出力結果
         /posts/list.rss
 
-    URL (starting with '/') with the full base URL prepended::
+    ドメイン名を含めた '/' で始まる URL::
 
         echo $this->Html->url('/posts', true);
 
-        // Output
+        // 出力結果
         http://somedomain.com/posts
 
-    URL with GET params and named anchor::
+    GET パラメーターとアンカーつきの URL::
 
         echo $this->Html->url(array(
             "controller" => "posts",
@@ -877,16 +868,16 @@ methods of the HtmlHelper and how to use them.
             "#" => "first"
         ));
         
-        // Output
+        // 出力結果
         /posts/search?foo=bar#first
 
-    For further information check
+    より詳しい情報は、API 集の
     `Router::url <http://api20.cakephp.org/class/router#method-Routerurl>`_
-    in the API.
+    を確認してください。
 
 .. php:method:: useTag(string $tag)
 
-    Returns a formatted existent block of ``$tag``::
+    フォーマットされた既存の ``$tag`` のブロックを返します。::
 
         $this->Html->useTag(
             'form',
@@ -894,22 +885,21 @@ methods of the HtmlHelper and how to use them.
             array('method' => 'post', 'class' => 'myform')
         );
 
-    Output:
+    結果は以下の通りです。
 
     .. code-block:: html
 
         <form action="http://example.com" method="post" class="myform">
 
-Changing the tags output by HtmlHelper
-======================================
+HtmlHelper が出力するタグの変更
+===============================
 
 .. php:method:: loadConfig(mixed $configFile, string $path = null)
 
-    The built in tag sets for :php:class:`HtmlHelper` are XHTML compliant,
-    however if you need to generate HTML for HTML5 you will need to
-    create and load a new tags config file containing the tags you'd
-    like to use. To change the tags used create ``app/Config/html5_tags.php``
-    containing::
+    :php:class:`HtmlHelper` 組み込みのタグ設定は、 XH|TML に準拠したものです。
+    そのため、 HTML5 に準拠した HTML を生成するためには、新しいタグの設定を
+    作成して読み込む必要があります。出力されるタグを変更するためには、
+    ``app/Config/html5_tags.php`` というファイルを作成し、以下の内容を記述します。::
 
         $config = array('tags' => array(
             'css' => '<link rel="%s" href="%s" %s>',
@@ -921,22 +911,21 @@ Changing the tags output by HtmlHelper
             // ...
         ));
 
-    You can then load this tag set by calling
-    ``$this->Html->loadConfig('html5_tags');``
+    そのあと、 ``$this->Html->loadConfig('html5_tags');``
+    と記述することでこのタグ設定をロードできます。
 
-Creating breadcrumb trails with HtmlHelper
-==========================================
+HtmlHelper を使ったパンくずリストの作成
+=======================================
 
 .. php:method:: getCrumbs(string $separator = '&raquo;', string $startText = false)
 
-    CakePHP has the built in ability to automatically create a
-    breadcrumb trail in your app. To set this up, first add something
-    similar to the following in your layout template::
+    CakePHP はパンくずリストを自動生成する組み込みメソッドを持っています。
+    設置するにはまず、レイアウトテンプレートに以下のようなコードを追加します。::
 
         echo $this->Html->getCrumbs(' > ', 'Home');
 
-    The ``$startText`` option can also accept an array.  This gives more control
-    over the generated first link::
+    ``$startText`` のオプションは1つの配列も受け付けます。 
+    これにより、生成された最初のリンクへのさらなる制御を可能にします。::
 
         echo $this->Html->getCrumbs(' > ', array(
             'text' => $this->Html->image('home.png'),
@@ -944,44 +933,45 @@ Creating breadcrumb trails with HtmlHelper
             'escape' => false
         ));
 
-    Any keys that are not ``text`` or ``url`` will be passed to
-    :php:meth:`~HtmlHelper::link()` as the ``$options`` parameter.
+    ``text`` または ``url`` でないキーは、 ``$options`` パラメータとして
+    :php:meth:`~HtmlHelper::link()` に渡されます。
 
     .. versionchanged:: 2.1
-        The ``$startText`` parameter now accepts an array.
+        ``$startText`` パラメータは配列も受け入れることができます。
 
 .. php:method:: addCrumb(string $name, string $link = null, mixed $options = null)
 
-    Now, in your view you'll want to add the following to start the
-    breadcrumb trails on each of the pages::
+   ビューでページのそれぞれにパンくずリストを作るため、
+   以下のコードを加えたとします。::
 
-        $this->Html->addCrumb('Users', '/users');
-        $this->Html->addCrumb('Add User', '/users/add');
+        $this->Html->addCrumb('ユーザー', '/users');
+        $this->Html->addCrumb('ユーザーの追加', '/users/add');
 
-    This will add the output of "**Home > Users > Add User**" in your
-    layout where getCrumbs was added.
+    すると、レイアウトで ``getCrumbs`` を書いたたところに、
+    "**Home > ユーザー > ユーザーの追加**" というパンくずリストが追加されます。
 
 .. php:method:: getCrumbList(array $options = array(), mixed $startText)
 
-    :param array $options: An array of :term:`html attributes` for the
-        containing ``<ul>`` element. Can also contain the 'separator',
-        'firstClass' and 'lastClass' options.
-    :param string|array $startText: The text or element that precedes the ul.
+    :param array $options: ``<ul>`` タグに含めたい :term:`html attributes`
+        の配列です。 'separator' と 'firstClass' 、 'lastClass' の
+        オプションも含めることができます。
+    :param string|array $startText: リストの先頭に表示するテキスト、または要素
 
-    Returns breadcrumbs as a (x)html list.
+    (X)HTML のリストとしてパンくずリストを返します。
 
-    This method uses :php:meth:`HtmlHelper::tag()` to generate list and its
-    elements. Works similar to :php:meth:`~HtmlHelper::getCrumbs()`, so it uses
-    options which every crumb was added with.  You can use the ``$startText``
-    parameter to provide the first breadcrumb link/text.  This is useful when
-    you always want to include a root link.  This option works the same as the
-    ``$startText`` option for :php:meth:`~HtmlHelper::getCrumbs()`.
+    このメソッドは、リストと要素の作成に :php:meth:`HtmlHelper::tag()` を使用します。
+    :php:meth:`~HtmlHelper::getCrumbs()` と同じように使うには、あらゆるパンくずリストの項目が
+    加えられたオプションを使用します。 ``$startText`` パラメータを設定すると
+    パンくずリストの最初のリンクとテキストを指定することができます。
+    これは、つねにパンくずリストにトップを含めておきたいときに便利です。  
+    このオプションは :php:meth:`~HtmlHelper::getCrumbs()` の ``$startText``
+    オプションと同じ働きをします。
 
     .. versionchanged:: 2.1
-        The ``$startText`` parameter was added.
+        ``$startText`` が追加されました。
 
     .. versionchanged:: 2.3
-        The 'separator', 'firstClass' and 'lastClass' options were added.
+        'separator'と 'firstClass' 、 'lastClass' のオプションが追加されました。
 
 
 .. meta::
