@@ -60,7 +60,7 @@ App.Book = (function() {
 App.InlineSearch = (function () {
 
 	var segments = location.pathname.split('/');
-	var base = location.href.replace(location.protocol + '//' + location.host, '').split('/').slice(0, 2).join('/') + '/';
+	var base = location.href.replace(location.protocol + '//' + location.host, '').split('/').slice(0, -2).join('/') + '/';
 	var searchResults;
 	var searchInput;
 	var doSearch;
