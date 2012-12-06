@@ -288,7 +288,6 @@ preferable before the content_for_layout line.::
 
     echo $this->Session->flash();
     echo $this->Session->flash('auth');
-    ?>
 
 You can customize the error messages, and flash settings AuthComponent
 uses.  Using ``$this->Auth->flash`` you can configure the parameters

@@ -22,7 +22,6 @@ Routerオブジェクトは、 ``mapResources()`` というメソッドを提供
 routesをオーバーライドする他のroutesよりも前に呼び出す必要があります。
 例えば、レシピ(recipe)データベースにアクセスするRESTは、下記のようにします ::
 
-    <?php
     //In app/Config/routes.php...
 
     Router::mapResources('recipes');
@@ -62,7 +61,6 @@ POSTリクエストの中の、 *\_method* の値を使う方法は、ブラウ�
 そのアクションに移動します。
 基本的なコントローラのサンプルは下記のようになります ::
 
-    <?php
     // Controller/RecipesController.php
     class RecipesController extends AppController {
 
@@ -126,7 +124,6 @@ RecipesControllerに対するビューファイルを  ``app/View/recipes/xml`` 
 ::
 
     // app/View/Recipes/xml/index.ctp
-    <?php
     // Do some formatting and manipulation on
     // the $recipes array.
     $xml = Xml::fromArray(array('response' => $recipes));
@@ -187,7 +184,6 @@ CakePHPでは、 :php:class:`RequestHandlerComponent` クラスが助けてく�
 
 ::
 
-    <?php
     Router::resourceMap(array(
         array('action' => 'index', 'method' => 'GET', 'id' => false),
         array('action' => 'view', 'method' => 'GET', 'id' => true),
@@ -215,7 +211,6 @@ Editアクション用RESTのルーティングはこのようになります。
 
 ::
 
-    <?php
     Router::connect(
         "/:controller/:id",
         array("action" => "edit", "[method]" => "PUT"),

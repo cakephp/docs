@@ -32,7 +32,6 @@ CakePHP2.1には新しい二つのビュークラスがあります。 ``XmlView
 もしレスポンスを生成する前にビュー変数の操作や整形が必要であればビューファイルを使うべきです。
 そのとき、 ``_serialize`` の値は文字列かシリアライズされるビュー変数の配列になります。::
 
-    <?php
     class PostsController extends AppController {
         public function index() {
             $this->set('posts', $this->paginate());
@@ -42,7 +41,6 @@ CakePHP2.1には新しい二つのビュークラスがあります。 ``XmlView
 
 連結されたビュー変数の配列として ``_serialize`` を定義することも出来ます。::
 
-    <?php
     class PostsController extends AppController {
         public function index() {
             // some code that created $posts and $comments
@@ -62,7 +60,6 @@ CakePHP2.1には新しい二つのビュークラスがあります。 ``XmlView
 例えば、自動生成されたHTMLを含んだフィールドがpostsにあったとすると、
 おそらくJSONレスポンスから除外したいと思うでしょう。このような状況でビューファイルは役立ちます。::
 
-    <?php
     // コントローラ コード
     class PostsController extends AppController {
         public function index() {

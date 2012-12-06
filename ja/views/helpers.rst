@@ -19,14 +19,12 @@ CakePHPでヘルパーを有効にするにはコントローラに認識させ�
 :php:attr:`~Controller::$helpers` プロパティを持っており、そのプロパティにはビューで利用できるヘルパーの一覧が保持されています。
 ビューでヘルパーを使用するにはヘルパーの名前をコントローラの ``$helpers`` 配列に追加して下さい。::
 
-    <?php
     class BakeriesController extends AppController {
         public $helpers = array('Form', 'Html', 'Js', 'Time');
     }
 
 プラグインからヘルパーを追加するにはCakePHPの様々な場所で使われている :term:`プラグイン記法` を使います。::
 
-    <?php
     class BakeriesController extends AppController {
         public $helpers = array('Blog.Comment');
     }
@@ -35,7 +33,6 @@ CakePHPでヘルパーを有効にするにはコントローラに認識させ�
 同じコントローラの他のアクションでは利用できないようにすることができます。このことはコントローラが整理された状態を維持するのに役立つだけでなく、
 さらに、ヘルパーを使わない他のアクションの処理コストを抑えることになります。::
 
-    <?php
     class BakeriesController extends AppController {
         public function bake {
             $this->helpers[] = 'Time';
@@ -48,14 +45,12 @@ CakePHPでヘルパーを有効にするにはコントローラに認識させ�
 もしすべてのコントローラでヘルパーを有効にする必要がある場合ヘルパーの名前を ``/app/Controller/AppController.php``
 (見つからない場合は作成して下さい)の ``$helpers`` 配列に追加して下さい。デフォルトのHtmlヘルパーとFormヘルパーも忘れずに読み込んで下さい。::
 
-    <?php
     class AppController extends Controller {
         public $helpers = array('Form', 'Html', 'Js', 'Time');
     }
 
 ヘルパーにはオプションを渡すことが出来ます。このオプションは属性の値を設定したり、ヘルパーの動作を変えるために使うことができます。::
 
-    <?php
     class AwesomeHelper extends AppHelper {
         public function __construct(View $view, $settings = array()) {
             parent::__construct($view, $settings);
@@ -70,7 +65,6 @@ CakePHPでヘルパーを有効にするにはコントローラに認識させ�
 すべてのヘルパーで共通して使える設定に ``className`` オプションがあります。このオプションを設定するとビューの中に別名のヘルパーを作ることができます。
 この機能は ``$this->Html`` や他の共通ヘルパーの参照を独自の実装に置き換えたい時に役立ちます。::
 
-    <?php
     // app/Controller/PostsController.php
     class PostsController extends AppController {
         public $helpers = array(
@@ -102,7 +96,6 @@ CakePHPでヘルパーを有効にするにはコントローラに認識させ�
 コントローラアクションの外に設定のロジックを置けるようになります。もし、クラス宣言の一部に含めることができない設定項目がある場合、
 コントローラのbeforeRenderコールバックの中でそれらを設定することが出来ます。::
 
-    <?php
     class PostsController extends AppController {
         public function beforeRender() {
             parent::beforeRender();
@@ -116,14 +109,12 @@ CakePHPでヘルパーを有効にするにはコントローラに認識させ�
 コントローラの中でどのヘルパーが使いたいのかを一度設定してしまえば、各ヘルパーはビューの中でパブリックプロパティのように扱えます。
 例えば :php:class:`HtmlHelper` を使っているとします。その場合、次のようにヘルパーにアクセスできます。::
 
-    <?php
     echo $this->Html->css('styles');
 
 上記の例ではHtmlHelperの ``css`` メソッドを呼び出しています。読み込み済みのヘルパーであれば
 ``$this->{$helperName}`` の形式でアクセスすることが出来ます。ビューの内部から動的にヘルパーを読み込む必要に迫られる時が来るかもしません。
 その時は、 ビューの :php:class:`HelperCollection` を使ってこのようにできます。::
 
-    <?php
     $mediaHelper = $this->Helpers->load('Media', $mediaSettings);
 
 HelperCollectionは :doc:`コレクション </core-libraries/collections>` であり、CakePHPの他の箇所でも使われているコレクションAPIをサポートしています。
@@ -144,7 +135,6 @@ HelperCollectionは :doc:`コレクション </core-libraries/collections>` で�
 CakePHPの既存のヘルパーの構造にロジックをあわせる為には、``/app/View/Helper`` に新しいクラスを作成する必要があります。
 これから作るヘルパーをLinkHelperと呼ぶことにしましょう。実際のPHPクラスファイルはこのようになるでしょう。::
 
-    <?php
     /* /app/View/Helper/LinkHelper.php */
     App::uses('AppHelper', 'View/Helper');
    
@@ -165,7 +155,6 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
 他のヘルパーに既に存在している機能を使いたいと思うかもしれません。その場合、``$helpers``
 配列に使いたいヘルパーを明示することで実現出来ます。フォーマットは、コントローラで指定する場合と同じようにして下さい。::
 
-    <?php
     /* /app/View/Helper/LinkHelper.php (他のヘルパーを使っている) */
     App::uses('AppHelper', 'View/Helper');
    
@@ -191,7 +180,6 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
 一旦ヘルパーを作って ``/app/View/Helper/`` に配置すると、コントローラで :php:attr:`~Controller::$helpers`
 という特別な変数を使うことでそのヘルパーを読み込めるようになります。::
 
-    <?php
     class PostsController extends AppController {
         public $helpers = array('Link');
     }
@@ -208,7 +196,6 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
 すべてのヘルパーは特別なクラスAppHelperを(モデルがAppModelを継承し、コントローラがAppControllerを継承するのと同じように）継承します。
 すべてのヘルパーで利用できる機能を作成するためには、 ``/app/View/Helper/AppHelper.php`` を作成して下さい。::
 
-    <?php
     App::uses('Helper', 'View');
    
     class AppHelper extends Helper {

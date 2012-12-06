@@ -10,7 +10,6 @@ CakePHP 2.2 は、2.0/2.1 の API の完全上位互換です。 このページ
 
 CakePHP2.2 にアップグレードする際には、 ``app/Config/bootstrap.php`` ファイルに新しい設定項目を追加する必要があります。この追加設定は、2.1.xと同じような振舞いをする設定です ::
 
-    <?php
     // アセットプラグイン、キャッシュヘルパープラグインの
     // ディスパッチャーフィルターを有効化
     Configure::write('Dispatcher.filters', array(
@@ -34,7 +33,6 @@ CakePHP2.2 にアップグレードする際には、 ``app/Config/bootstrap.php
 また、 ``app/Config/core.php`` ファイルも修正が必要です。
 定数 :php:const:`LOG_ERROR` に :php:const:`LOG_ERR` の値で定義してください。 ::
 
-    <?php
     define('LOG_ERROR', LOG_ERR);
 
 ``Model::validateAssociated()`` もしくは ``Model::saveAssociated()`` を利用していて、プライマリモデルでバリデーションが失敗した場合、関連モデルのバリデーションエラーもそのまま残ります。
@@ -250,7 +248,6 @@ Redis エンジン
 これにより、グループ単位で一度に同一ラベルのキャッシュを消すなどの処理が簡単になります。
 グループはキャッシュエンジン生成時の設定のものが定義されます ::
 
-    <?php
     Cache::config(array(
         'engine' => 'Redis',
         ...

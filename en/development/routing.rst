@@ -234,11 +234,11 @@ in your controller.  For example, to map all urls to actions of the
 
     Router::connect('/:action', ['controller' => 'home']);
 
-If you would like to provide a case insensitive url, you can use regular 
+If you would like to provide a case insensitive url, you can use regular
 expression inline modifiers::
 
     Router::connect(
-        '/:userShortcut', 
+        '/:userShortcut',
         array('controller' => 'teachers', 'action' => 'profile', 1),
         array('userShortcut' => '(?i:principal)')
     );
@@ -464,7 +464,7 @@ would create your route as illustrated below::
 
 Then to create links which map back to the routes simply use::
 
-    $html->link(
+    $this->Html->link(
         'Link title',
         ['controller' => 'pages', 'action' => 'view', 'title' => 'super-article', '_ext' => 'html']
     );

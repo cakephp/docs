@@ -5,7 +5,6 @@
 
 テーマを使うためには、コントローラの中でテーマ名を指定して下さい。 ::
 
-    <?php
     class ExampleController extends AppController {
         public $theme = 'Example';
     }
@@ -16,7 +15,6 @@
 
 またテーマの設定や変更はアクション、または ``beforeFilter`` や ``beforeRender`` などのコールバック関数の中から行えます。 ::
 
-    <?php
     $this->theme = 'AnotherExample';
 
 テーマのビューファイルは ``/app/View/Themed/`` フォルダに配置する必要があります。
@@ -53,7 +51,6 @@ Themed フォルダの中にテーマ名のフォルダを作成して下さい�
 CakePHPのすべての組み込みヘルパーはテーマに対応しており、自動的に正しいパスが作成されます。
 ビューファイルのようにテーマフォルダにファイルが無い場合、メインのwebrootフォルダがデフォルトととなります。 ::
 
-    <?php
     //'purple_cupcake'という名前のテーマの時
     $this->Html->css('main.css');
     

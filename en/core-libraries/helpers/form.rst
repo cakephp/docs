@@ -390,11 +390,11 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
 
     In addition to controller fields output, ``$fields`` can be used to control
     legend and fieldset rendering with the ``fieldset`` and ``legend`` keys.
-    ``$form->inputs(array('legend' => 'My legend'));``
+    ``$this->Form->inputs(array('legend' => 'My legend'));``
     Would generate an input set with a custom legend. You can customize
     individual inputs through ``$fields`` as well.::
 
-        echo $form->inputs(array(
+        echo $this->Form->inputs(array(
             'name' => array('label' => 'custom label')
         ));
 
@@ -587,10 +587,10 @@ html attributes. The following will cover the options specific to
 
     $this->Form->input('Model.field', array('error' => false));
 
-  To disable only the error message, but retain the field classes, set the error
-  key to ''::
+  To disable only the error message, but retain the field classes, set the
+  errorMessage key to false::
 
-    $this->Form->input('Model.field', array('error' => ''));
+    $this->Form->input('Model.field', array('errorMessage' => false));
 
   To modify the wrapping element type and its class, use the
   following format::
@@ -620,7 +620,7 @@ html attributes. The following will cover the options specific to
   messages for your forms.
 
   .. versionadded:: 2.3
-    Support for ``'error' => ''`` was added in 2.3
+    Support for the ``errorMessage`` option was added in 2.3
 
 * ``$options['before']``, ``$options['between']``, ``$options['separator']``,
   and ``$options['after']``

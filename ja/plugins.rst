@@ -26,7 +26,6 @@ CakePHP2.0 の変更点として、プラグインは app/Config/bootstrap.php �
 
 ::
 
-    <?php
     CakePlugin::loadAll(); // 全て読み込み 
     CakePlugin::load('ContactManager'); //一つだけ読み込み
 
@@ -44,7 +43,6 @@ load() も同様の働きですが、明示的に指定したプラグインだ�
 
 ::
 
-    <?php
     CakePlugin::loadAll(array(
         'Blog' => array('routes' => true),
         'ContactManager' => array('bootstrap' => true),
@@ -60,7 +58,6 @@ load() も同様の働きですが、明示的に指定したプラグインだ�
 
 ::
 
-    <?php
     CakePlugin::loadAll(array(
         array('bootstrap' => true),
         'Blog' => array('routes' => true)
@@ -87,7 +84,6 @@ Advanced bootstrapping
 
 ::
 
-    <?php
     CakePlugin::loadAll(array(
         'Blog' => array(
             'bootstrap' => array(
@@ -100,8 +96,6 @@ Advanced bootstrapping
 読み込み済みプラグインが呼ばれるのに必要な関数を指定できます。
 
 ::
-
-    <?php
 
     function aCallableFunction($pluginName, $config) {
         
@@ -124,14 +118,12 @@ ContacktMangerプラグインのContactInfoHelperを使いたい場合、
 
 ::
 
-    <?php
     public $helpers = array('ContactManager.ContactInfo');
 
 すると、他のヘルパー同様に、ContactInfoHelperにアクセスできるようになります。
 
 ::
 
-    <?php
     echo $this->ContactInfo->address($contact);
 
 
@@ -178,14 +170,12 @@ ContacktMangerプラグインのContactInfoHelperを使いたい場合、
 
 ::
 
-    <?php
     // /app/Plugin/ContactManager/Controller/ContactManagerAppController.php:
     class ContactManagerAppController extends AppController {
     }
 
 ::
 
-    <?php
     // /app/Plugin/ContactManager/Model/ContactManagerAppModel.php:
     class ContactManagerAppModel extends AppModel {
     }
@@ -222,7 +212,6 @@ ContactManagerプラグインのコントローラーは、/app/Plugin/ContactMa
 
 ::
 
-    <?php
     // app/Plugin/ContactManager/Controller/ContactsController.php
     class ContactsController extends ContactManagerAppController {
         public $uses = array('ContactManager.Contact');
@@ -256,7 +245,6 @@ Contact model をまだ定義してないので、“Missing Model”エラー�
 
 ::
 
-    <?php
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
     }
@@ -271,7 +259,6 @@ Contact model をまだ定義してないので、“Missing Model”エラー�
 
 ::
 
-    <?php
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
         public $hasMany = array('ContactManager.AltName');
@@ -281,7 +268,6 @@ Contact model をまだ定義してないので、“Missing Model”エラー�
 
 ::
 
-    <?php
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
             public $hasMany = array(
@@ -373,7 +359,6 @@ Contacts controllerにはこのファイルを作ります。
 
 ::
 
-    <?php
     // Component defined in 'ContactManager' plugin
     class ExampleComponent extends Component {
     }
@@ -389,7 +374,6 @@ Contacts controllerにはこのファイルを作ります。
         Usesに定義する必要があります。
         ::
 
-                <?php
                 // Declare use of AppHelper for your Plugin's Helper
                 App::uses('AppHelper', 'View/Helper');
 

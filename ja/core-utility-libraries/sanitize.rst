@@ -11,7 +11,6 @@ XSSの対策として生のHTMLをDBに保存して、そのデータを取り�
 Sanitizeのコアライブラリを読み込むには、次のようにします。
 (例：コントローラの定義の前に設置する場合) ::
 
-    <?php
     App::uses('Sanitize', 'Utility');
     
     class MyController extends AppController {
@@ -47,7 +46,6 @@ Sanitizeのコアライブラリを読み込むには、次のようにします
 
     cleanの使用例は、次のとおりです。 ::
 
-        <?php
         $this->data = Sanitize::clean($this->data, array('encode' => false));
 
 
@@ -65,7 +63,6 @@ Sanitizeのコアライブラリを読み込むには、次のようにします
 
     このメソッドは、ユーザが送信したデータをHTMLの中に表示する準備をします。これは、ユーザがレイアウトを壊したり画像やスクリプトを挿入することを防ぐ上で特に便利な機能です。もし「$remove」オプションを true にセットした場合、データに含まれるHTMLのタグ等は全て削除されます。false にセットした場合は HTML エンティティとして表示されます。::
 
-        <?php
         $badString = '<font size="99" color="#FF0000">HEY</font><script>...</script>';
         echo Sanitize::html($badString);
         // 出力: &lt;font size=&quot;99&quot; color=&quot;#FF0000&quot;&gt;HEY&lt;/font&gt;&lt;script&gt;...&lt;/script&gt;
@@ -81,7 +78,6 @@ Sanitizeのコアライブラリを読み込むには、次のようにします
 
     この機能は、半角英数字以外の文字を全て削除します。それらの他に削除したくない文字がある場合は、削除したくない文字を配列にして、引数「$allowedChars」として渡してください。::
 
-        <?php
         $badString = ";:<script><html><   // >@@#";
         echo Sanitize::paranoid($badString);
         // 出力: scripthtml

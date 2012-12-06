@@ -93,7 +93,6 @@ CakePHP のデフォルトは、アプリケーションが SSL プロトコル�
 SSL と SSL 以外のドメイン両方でセッションにアクセスする必要がある場合、\
 これを無効にします::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'php',
         'ini' => array(
@@ -109,7 +108,6 @@ SSL と SSL 以外のドメイン両方でセッションにアクセスする�
 場合は ``session.cookie_path`` ini フラグにアプリケーションのディレクトリパス\
 を指定することが出来ます::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'php',
         'ini' => array(
@@ -137,7 +135,6 @@ CakePHP にはいくつかビルトインなセッションの設定がありま
 'defaults' キーに使用したいデフォルト名をセットします。セッション \
 config で宣言をすればサブセッティングだけを上書きすることも出来ます::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'php'
     ));
@@ -149,7 +146,6 @@ config で宣言をすればサブセッティングだけを上書きするこ�
 上記はビルトインの 'php' 設定を使用します。下記のように全てまたは部分的に\
 設定を上書きすることも出来ます::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'php',
         'cookie' => 'my_app',
@@ -195,7 +191,6 @@ config で宣言をすればサブセッティングだけを上書きするこ�
 方法があります。一つ目は 5 つの呼び出し可能な (callable) 配列を一つ用意する\
 方法です。これは都度 ``session_set_save_handler`` に適用されます::
 
-    <?php
     Configure::write('Session', array(
         'userAgent' => false,
         'cookie' => 'my_cookie',
@@ -278,7 +273,6 @@ CakeSessionHandlerInterface
 設定の中の ``Session.handler.model`` をセットするだけです::
 
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'database',
         'handler' => array(
@@ -318,7 +312,6 @@ CakeSessionHandlerInterface
 セッションを元としたキャッシュを使うためセッション config を以下のように\
 設定します::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'cache',
         'handler' => array(
@@ -357,7 +350,6 @@ ini 指示子の設定
 することが可能です。例えば ``session.gc_divisor`` のようなセッティングを\
 コントロールするのに使えます::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'php',
         'ini' => array(
@@ -394,7 +386,6 @@ ini 指示子の設定
 まずカスタムクラスを作成し ``app/Model/Datasource/Session/ComboSession.php`` \
 として保存する必要があります。クラスは以下のようになります::
 
-    <?php
     App::uses('DatabaseSession', 'Model/Datasource/Session');
 
     class ComboSession extends DatabaseSession implements CakeSessionHandlerInterface {
@@ -457,7 +448,6 @@ ini 指示子の設定
 不要にしています。このセッションハンドラーを使うのもまた簡単です。 \
 ``core.php`` のセッションブロックを以下のように設定します::
 
-    <?php
     Configure::write('Session', array(
         'defaults' => 'database',
         'handler' => array(
@@ -505,7 +495,6 @@ ini 指示子の設定
 
 :php:meth:`Set::classicExtract()` 互換記法を用いてセッションから値を読み込みます::
 
-    <?php
     CakeSession::read('Config.language');
 
 .. php:staticmethod:: write($key, $value)
@@ -515,7 +504,6 @@ ini 指示子の設定
 
 ``$key`` はドット区切りで ``$value`` の書き込み先を指定します::
 
-    <?php
     CakeSession::write('Config.language', 'eng');
 
 .. php:staticmethod:: delete($key)
@@ -525,7 +513,6 @@ ini 指示子の設定
 
 セッションからデータ削除が必要なら削除も可能です::
 
-    <?php
     CakeSession::delete('Config.language');
 
 ..
