@@ -4,17 +4,15 @@ CakePHP Folder Structure
 After you've downloaded and extracted CakePHP, these are the files
 and folders you should see:
 
--  app
+-  App
 -  lib
--  vendors
--  plugins
 -  .htaccess
 -  index.php
 -  README
 
 You'll notice three main folders:
 
--  The *app* folder will be where you work your magic: it’s where
+-  The *App* folder will be where you work your magic: it’s where
    your application’s files will be placed.
 -  The *lib* folder is where we’ve worked our magic. Make a
    personal commitment **not** to edit files in this folder. We can’t
@@ -56,14 +54,10 @@ tmp
     impacted. In debug mode, CakePHP will warn you if it is not the
     case.
 
-Vendor
-    Any third-party classes or libraries should be placed here. Doing
-    so makes them easy to access using the App::import('vendor',
-    'name') function. Keen observers will note that this seems
-    redundant, as there is also a vendors folder at the top level of
-    our directory structure. We'll get into the differences between the
-    two when we discuss managing multiple applications and more complex
-    system setups.
+vendor
+    Any third-party classes or libraries should be placed here. 
+    If you're using composer, it will install all your application's
+    dependencies there.
 View
     Presentational files are placed here: elements, error pages,
     helpers, layouts, and view files.

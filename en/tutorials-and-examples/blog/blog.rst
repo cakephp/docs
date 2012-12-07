@@ -33,25 +33,23 @@ Let's get started!
 Getting Cake
 ============
 
-First, let's get a copy of fresh Cake code.
-
 To get a fresh download, visit the CakePHP project on GitHub:
 `http://github.com/cakephp/cakephp/downloads <http://github.com/cakephp/cakephp/downloads>`_
-and download the latest release of 2.0
+and download the latest release of 3.0
 
 You can also clone the repository using
 `git <http://git-scm.com/>`_.
-``git clone git://github.com/cakephp/cakephp.git``
+``git clone git://github.com/cakephp/cakephp.git`` or use composer to install
+CakePHP. For this tutorial we're just going to download the zip file as its the
+simplest option.
 
 Regardless of how you downloaded it, place the code inside of your
 DocumentRoot. Once finished, your directory setup should look
 something like the following::
 
     /path_to_document_root
-        /app
+        /App
         /lib
-        /plugins
-        /vendors
         .htaccess
         index.php
         README
@@ -108,7 +106,7 @@ connect to it. For many, this is the first and last time you
 configure anything.
 
 A copy of CakePHP's database configuration file is found in
-``/app/Config/database.php.default``. Make a copy of this file in
+``App/Config/database.php.default``. Make a copy of this file in
 the same directory, but name it ``database.php``.
 
 The config file should be pretty straightforward: just replace the
@@ -150,7 +148,7 @@ in security hashes. The second is defining a custom number (or
 write access to its ``tmp`` folder.
 
 The security salt is used for generating hashes. Change the default
-salt value by editing ``/app/Config/core.php`` line 187. It doesn't
+salt value by editing ``/App/Config/core.php`` line 187. It doesn't
 much matter what the new value is, as long as it's not easily
 guessed::
 
@@ -160,7 +158,7 @@ guessed::
     Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
 
 The cipher seed is used for encrypt/decrypt strings. Change the
-default seed value by editing ``/app/Config/core.php`` line 192. It
+default seed value by editing ``/App/Config/core.php`` line 192. It
 doesn't much matter what the new value is, as long as it's not
 easily guessed::
 
@@ -169,13 +167,13 @@ easily guessed::
      */
     Configure::write('Security.cipherSeed', '7485712659625147843639846751');
 
-The final task is to make the ``app/tmp`` directory web-writable.
+The final task is to make the ``App/tmp`` directory web-writable.
 The best way to do this is to find out what user your webserver
 runs as (``<?php echo `whoami`; ?>``) and change the ownership of
-the ``app/tmp`` directory to that user. The final command you run
+the ``App/tmp`` directory to that user. The final command you run
 (in \*nix) might look something like this::
 
-    $ chown -R www-data app/tmp
+    $ chown -R www-data App/tmp
 
 If for some reason CakePHP can't write to that directory, you'll be
 informed by a warning while not in production mode.
@@ -221,7 +219,7 @@ to help get you up and running:
 
 If you don't want or can't get mod\_rewrite (or some other
 compatible module) up and running on your server, you'll need to
-use Cake's built in pretty URLs. In ``/app/Config/core.php``,
+use Cake's built in pretty URLs. In ``/App/Config/app.php``,
 uncomment the line that looks like::
 
     Configure::write('App.baseUrl', env('SCRIPT_NAME'));
@@ -229,8 +227,8 @@ uncomment the line that looks like::
 Also remove these .htaccess files::
 
     /.htaccess
-    /app/.htaccess
-    /app/webroot/.htaccess
+    /App/.htaccess
+    /App/webroot/.htaccess
             
 
 This will make your URLs look like

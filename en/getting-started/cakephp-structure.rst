@@ -14,9 +14,9 @@ Application Extensions
 
 Controllers, helpers and models each have a parent class you can use to define
 application-wide changes. AppController (located at
-``/app/Controller/AppController.php``), AppHelper (located at
-``/app/View/Helper/AppHelper.php``) and AppModel (located at
-``/app/Model/AppModel.php``) are great places to put methods you want to share
+``App/Controller/AppController.php``), AppHelper (located at
+``App/View/Helper/AppHelper.php``) and AppModel (located at
+``App/Model/AppModel.php``) are great places to put methods you want to share
 between all controllers, helpers or models.
 
 Although they aren’t classes or files, routes play a role in
