@@ -10,14 +10,10 @@ LightHTTPD or Microsoft IIS.
 Requirements
 ============
 
--  HTTP Server. For example: Apache. mod\_rewrite is preferred, but
-   by no means required.
--  PHP 5.2.8 or greater.
-
-.. note::
-
-    From CakePHP 3.0, PHP 5.4.3 or greater and mbstring extension are
-    required.
+- HTTP Server. For example: Apache. mod\_rewrite is preferred, but
+  by no means required.
+- PHP 5.4.3 or greater.
+- mbstring extension
 
 Technically a database engine isn't required, but we imagine that
 most applications will utilize one. CakePHP supports a variety of
@@ -44,36 +40,52 @@ into any Commercial or closed source application.
 Downloading CakePHP
 ===================
 
-There are two main ways to get a fresh copy of CakePHP. You can
-either download an archive copy (zip/tar.gz/tar.bz2) from the main
-website, or check out the code from the git repository.
+There are a few ways to get a fresh copy of CakePHP. You can
+either download an archive copy (zip/tar.gz/tar.bz2) from the
+website, check out the code from the git repository, or use composer.
+
+Downloading a zip file
+----------------------
 
 To download the latest major release of CakePHP. Visit the main
 website `http://www.cakephp.org <http://www.cakephp.org>`_ and
 follow the "Download Now" link.
 
 All current releases of CakePHP are hosted on
-`Github <http://github.com/cakephp/cakephp>`_. Github houses both CakePHP
+`Github`_. Github houses both CakePHP
 itself as well as many other plugins for CakePHP. The CakePHP
 releases are available at
 `Github downloads <http://github.com/cakephp/cakephp/downloads>`_.
 
-Alternatively you can get fresh off the press code, with all the
-bug-fixes and up to the minute enhancements.
-These can be accessed from github by cloning the 
-`Github`_ repository::
+Using git & github
+------------------
+
+If you want to contribute to CakePHP, or have access to bug-fixes and changes as
+they happen, you can use git. The CakePHP git repository is hosted on github. Cloning the 
+`Github`_ repository can be done by running::
 
     git clone git://github.com/cakephp/cakephp.git
 
 
+Using composer
+--------------
+
+You can use `composer`_ to install CakePHP using the ``cakephp-app`` package.
+Assuming you've downloaded and installed composer, you can get a new CakePHP
+application by running::
+
+    php composer.phar create-project cakephp/cakephp-app
+
+This will download the CakePHP skeleton application and install CakePHP.
+
 Permissions
 ===========
 
-CakePHP uses the ``app/tmp`` directory for a number of different
+CakePHP uses the ``App/tmp`` directory for a number of different
 operations. Model descriptions, cached views, and session
 information are just a few examples.
 
-As such, make sure the directory ``app/tmp`` and all its subdirectories in your cake installation
+As such, make sure the directory ``App/tmp`` and all its subdirectories in your cake installation
 are writable by the web server user.
 
 Setup
@@ -98,59 +110,26 @@ Development
 
 A development installation is the fastest method to setup Cake.
 This example will help you install a CakePHP application and make
-it available at http://www.example.com/cake\_2\_0/. We assume for
+it available at http://www.example.com/cake3/. We assume for
 the purposes of this example that your document root is set to
 ``/var/www/html``.
 
 Unpack the contents of the Cake archive into ``/var/www/html``. You now
 have a folder in your document root named after the release you've
-downloaded (e.g. cake\_2.0.0). Rename this folder to cake\_2\_0.
+downloaded (e.g. cake3). Rename this folder to cake3.
 Your development setup will look like this on the file system::
 
     /var/www/html/
-        cake_2_0/
-            app/
+        cake3/
+            App/
             lib/
-            plugins/
-            vendors/
             .htaccess
             index.php
             README
 
 If your web server is configured correctly, you should now find
 your Cake application accessible at
-http://www.example.com/cake\_2\_0/.
-
-Using one CakePHP checkout for multiple applications
-----------------------------------------------------
-
-If you are developing a number of applications, it often makes sense
-to have them share the same CakePHP core checkout. There are a few ways in which you can
-accomplish this.  Often the easiest is to use PHP's ``include_path``. To start
-off, clone CakePHP into a directory.  For this example, we'll use
-``~/projects``::
-
-    git clone git://github.com/cakephp/cakephp.git ~/projects/cakephp
-
-This will clone CakePHP into your ``~/projects`` directory.  If you don't want
-to use git, you can download a zipball and the remaining steps will be the
-same.  Next you'll have to locate and modify your ``php.ini``.  On \*nix systems
-this is often in ``/etc/php.ini``, but using ``php -i`` and looking for 'Loaded
-Configuration File'.  Once you've found the correct ini file, modify the
-``include_path`` configuration to include ``~/projects/cakephp/lib``.  An
-example would look like::
-
-    include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
-
-After restarting your webserver, you should see the changes reflected in
-``phpinfo()``.
-
-.. note::
-
-    If you are on windows, separate include paths with ; instead of :
-
-Having finished setting up your ``include_path`` your applications should be able to
-find CakePHP automatically.
+http://www.example.com/cake3/.
 
 Production
 ==========
@@ -172,8 +151,6 @@ like this on the filesystem::
             webroot/ (this directory is set as the ``DocumentRoot``
              directive)
         lib/
-        plugins/
-        vendors/
         .htaccess
         index.php
         README
@@ -206,7 +183,7 @@ Congratulations! You are ready to :doc:`create your first CakePHP
 application </getting-started>`.
 
 Not working? If you're getting timezone related error from PHP
-uncomment one line in ``app/Config/core.php``::
+uncomment one line in ``App/Config/app.php``::
 
    /**
     * Uncomment this line and correct your server timezone to fix 
@@ -214,6 +191,9 @@ uncomment one line in ``app/Config/core.php``::
     */
        date_default_timezone_set('UTC');
 
+
+.. _Github: http://github.com/cakephp/cakephp
+.. _composer: http://getcomposer.com
 
 .. meta::
     :title lang=en: Installation
