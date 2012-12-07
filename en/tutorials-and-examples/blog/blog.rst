@@ -148,7 +148,7 @@ in security hashes. The second is defining a custom number (or
 write access to its ``tmp`` folder.
 
 The security salt is used for generating hashes. Change the default
-salt value by editing ``/App/Config/core.php`` line 187. It doesn't
+salt value by editing ``/App/Config/app.php``. It doesn't
 much matter what the new value is, as long as it's not easily
 guessed::
 
@@ -158,7 +158,7 @@ guessed::
     Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
 
 The cipher seed is used for encrypt/decrypt strings. Change the
-default seed value by editing ``/App/Config/core.php`` line 192. It
+default seed value by editing ``/App/Config/app.php``. It
 doesn't much matter what the new value is, as long as it's not
 easily guessed::
 
