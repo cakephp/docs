@@ -152,8 +152,8 @@ install Cake into /cake\_install. Your production setup will look
 like this on the filesystem::
 
     /cake_install/
-        app/
-            webroot/ (this directory is set as the ``DocumentRoot``
+        App/
+            webroot/ (this directory is set as the `DocumentRoot`
              directive)
         lib/
         .htaccess
@@ -163,7 +163,7 @@ like this on the filesystem::
 Developers using Apache should set the ``DocumentRoot`` directive
 for the domain to::
 
-    DocumentRoot /cake_install/app/webroot
+    DocumentRoot /cake_install/App/webroot
 
 If your web server is configured correctly, you should now find
 your Cake application accessible at http://www.example.com.
