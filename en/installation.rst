@@ -71,6 +71,11 @@ Using composer
 --------------
 
 You can use `composer`_ to install CakePHP using the ``cakephp-app`` package.
+First you'll need to download and install composer if you haven't done so
+already::
+
+    curl -s https://getcomposer.org/installer | php
+
 Assuming you've downloaded and installed composer, you can get a new CakePHP
 application by running::
 
