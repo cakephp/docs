@@ -3,8 +3,7 @@ Advanced Installation
 
 There may be some situations where you wish to place CakePHP's
 directories on different places on the filesystem. This may be due
-to a shared host restriction, or maybe you just want a few of your
-apps to share the same Cake libraries. This section describes how
+to a shared host restriction. This section describes how
 to spread your CakePHP directories across a filesystem.
 
 First, realize that there are three main parts to a Cake
@@ -12,8 +11,8 @@ application:
 
 
 #. The core CakePHP libraries, in /lib/Cake.
-#. Your application code, in /app.
-#. The application’s webroot, usually in /app/webroot.
+#. Your application code, in /App.
+#. The application’s webroot, usually in /App/webroot.
 
 Each of these directories can be located anywhere on your file
 system, with the exception of the webroot, which needs to be
@@ -33,44 +32,29 @@ There are three constants that you'll need to edit: ``ROOT``,
 ``APP_DIR``, and ``CAKE_CORE_INCLUDE_PATH``.
 
 
--  ``ROOT`` should be set to the path of the directory that
-   contains your app folder.
+-  ``ROOT`` should be set to the path of the directory that contains your
+  app folder.
 -  ``APP_DIR`` should be set to the (base)name of your app folder.
--  ``CAKE_CORE_INCLUDE_PATH`` should be set to the path of your
-   CakePHP libraries folder.
+-  ``CAKE_CORE_INCLUDE_PATH`` should be set to the path of your CakePHP
+  libraries folder. Generally you will not need to change this if you use any of
+  the :doc:`/installation <suggested installation>` methods.
 
 Let’s run through an example so you can see what an advanced
 installation might look like in practice. Imagine that I wanted to
 set up CakePHP to work as follows:
 
-
--  The CakePHP core libraries will be placed in /usr/lib/cake.
--  My application’s webroot directory will be /var/www/mysite/.
--  My application’s app directory will be /home/me/myapp.
+- My application’s webroot directory will be /var/www/mysite/.
+- My application’s app directory will be /home/me/myapp.
+- CakePHP is installed via composer.
 
 Given this type of setup, I would need to edit my webroot/index.php
 file (which will end up at /var/www/mysite/index.php, in this
 example) to look like the following::
 
-    // /app/webroot/index.php (partial, comments removed) 
-    
-    if (!defined('ROOT')) {
-        define('ROOT', DS . 'home' . DS . 'me');
-    }
-    
-    if (!defined('APP_DIR')) {
-        define ('APP_DIR', 'myapp');
-    }
-    
-    if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-        define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
-    }
+    // App/Config/paths.php (partial, comments removed)
+    define('ROOT', '/home/me');
 
-It is recommended to use the ``DS`` constant rather than slashes to
-delimit file paths. This prevents any missing file errors you might
-get as a result of using the wrong delimiter, and it makes your
-code more portable.
-
+    define('APP_DIR', 'myapp');
 
 Apache and mod\_rewrite (and .htaccess)
 =======================================
@@ -83,7 +67,6 @@ Here are a few things you might try to get it running correctly.
 First look at your httpd.conf (Make sure you are editing the system
 httpd.conf rather than a user- or site-specific httpd.conf).
 
-
 #. Make sure that an .htaccess override is allowed and that
    AllowOverride is set to All for the correct DocumentRoot. You
    should see something similar to::
@@ -93,7 +76,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
        # directory (and its subdirectories). 
        #
        # First, we configure the "default" to be a very restrictive set of 
-       # features.  
+       # features.
        #
        <Directory />
            Options FollowSymLinks
@@ -130,8 +113,8 @@ httpd.conf rather than a user- or site-specific httpd.conf).
 
        <IfModule mod_rewrite.c>
           RewriteEngine on
-          RewriteRule    ^$ app/webroot/    [L]
-          RewriteRule    (.*) app/webroot/$1 [L]
+          RewriteRule ^$ App/webroot/ [L]
+          RewriteRule (.*) App/webroot/$1 [L]
        </IfModule>
 
    Cake app directory (will be copied to the top directory of your
@@ -139,8 +122,8 @@ httpd.conf rather than a user- or site-specific httpd.conf).
 
        <IfModule mod_rewrite.c>
           RewriteEngine on
-          RewriteRule    ^$    webroot/    [L]
-          RewriteRule    (.*) webroot/$1    [L]
+          RewriteRule ^$ webroot/ [L]
+          RewriteRule (.*) webroot/$1 [L]
        </IfModule>
 
    Cake webroot directory (will be copied to your application's web
@@ -171,7 +154,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
        </Directory>
 
    If on Mac OSX, another solution is to use the tool virtualhostx to
-   make a virtual host to point to your folder.  
+   make a virtual host to point to your folder.
 
    For many hosting services (GoDaddy, 1and1), your web server is
    actually being served from a user directory that already uses
@@ -179,7 +162,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
    (http://example.com/~username/cakephp/), or any other URL structure
    that already utilizes mod\_rewrite, you'll need to add RewriteBase
    statements to the .htaccess files CakePHP uses (/.htaccess,
-   /app/.htaccess, /app/webroot/.htaccess).
+   /App/.htaccess, /App/webroot/.htaccess).
 
    This can be added to the same section with the RewriteEngine
    directive, so for example your webroot .htaccess file would look
@@ -205,9 +188,7 @@ resources than Apache. Its drawback is that it does not make use of .htaccess
 files like Apache, so it is necessary to create those
 rewritten URLs in the site-available configuration. Depending upon
 your setup, you will have to modify this, but at the very least,
-you will need PHP running as a FastCGI instance.
-
-::
+you will need PHP running as a FastCGI instance::
 
     server {
         listen   80;
@@ -220,7 +201,7 @@ you will need PHP running as a FastCGI instance.
         server_name example.com;
     
         # root directive should be global
-        root   /var/www/example.com/public/app/webroot/;
+        root   /var/www/example.com/public/App/webroot/;
 
         access_log /var/www/example.com/log/access.log;
         error_log /var/www/example.com/log/error.log;
@@ -251,9 +232,7 @@ these steps:
    Rewrite Module 2.0.
 #. Create a new file in your CakePHP folder, called web.config.
 #. Using Notepad or another XML-safe editor, copy the following
-   code into your new web.config file...
-
-::
+   code into your new web.config file.::
 
     <?xml version="1.0" encoding="UTF-8"?>
     <configuration>
