@@ -10,8 +10,8 @@ The Model layer
 ================
 
 The Model layer represents the part of your application that
-implements the business logic. this means that it is responsible
-for retrieving data, converting it into meaningful concepts to your
+implements the business logic. This means that it is responsible
+for retrieving data, converting it into meaningful concepts for your
 application, as well as processing, validating, associating and any
 other task relative to handling this data.
 
