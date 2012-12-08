@@ -124,7 +124,7 @@ action name.
 
 Controller actions generally use :php:meth:`~Controller::set()` to create a
 context that :php:class:`View` uses to render the view.  Because of the
-conventions that CakePHP uses, you don' need to create and render the view
+conventions that CakePHP uses, you don't need to create and render the view
 manually. Instead once a controller action has completed, CakePHP will handle
 rendering and delivering the View.
 
