@@ -8,17 +8,13 @@ information to the user before actually saving the data to the
 database. Validating data requires a slightly different process
 than just saving the data.
 
-First, set the data to the model:
-
-::
+First, set the data to the model::
 
     $this->ModelName->set($this->request->data);
 
 Then, to check if the data validates, use the validates method of
 the model, which will return true if it validates and false if it
-doesn't:
-
-::
+doesn't::
 
     if ($this->ModelName->validates()) {
         // it validated logic
@@ -33,9 +29,7 @@ User model with fields for first\_name, last\_name, email and
 password. In this instance when creating or editing a user you
 would want to validate all 4 field rules. Yet when a user logs in
 you would validate just email and password rules. To do this you
-can pass an options array specifying the fields to validate. e.g.
-
-::
+can pass an options array specifying the fields to validate::
 
     if ($this->User->validates(array('fieldList' => array('email', 'password')))) {
         // valid
@@ -45,9 +39,7 @@ can pass an options array specifying the fields to validate. e.g.
 
 The validates method invokes the invalidFields method which
 populates the validationErrors property of the model. The
-invalidFields method also returns that data as the result.
-
-::
+invalidFields method also returns that data as the result::
 
     $errors = $this->ModelName->invalidFields(); // contains validationErrors array
 
@@ -64,9 +56,7 @@ calling save as save will automatically validate the data before
 actually saving.
 
 To validate multiple models, the following approach should be
-used:
-
-::
+used::
 
     if ($this->ModelName->saveAll($this->request->data, array('validate' => 'only'))) {
       // validates
@@ -75,9 +65,7 @@ used:
     }
 
 If you have validated data before save, you can turn off validation
-to avoid second check.
-
-::
+to avoid second check::
 
     if ($this->ModelName->saveAll($this->request->data, array('validate' => false))) {
         // saving without validation

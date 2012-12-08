@@ -209,7 +209,7 @@ tableParameters to set a variety of MySQL specific settings.
 -  ``encoding`` Control the encoding used for tables.
 
 In addition to tableParameters MySQL dbo's implement
-``fieldParameters``. fieldParameters allow you to control MySQL
+``fieldParameters``. ``fieldParameters`` allow you to control MySQL
 specific settings per column.
 
 
@@ -343,7 +343,7 @@ Library classes
 **Inflector**
 
 You can now globally customize the default transliteration map used
-in Inflector::slug using Inflector::rules. eg.
+in Inflector::slug using Inflector::rules. Example
 ``Inflector::rules('transliteration', array('/å/' => 'aa', '/ø/' => 'oe'))``
 
 The Inflector now also internally caches all data passed to it for

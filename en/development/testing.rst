@@ -75,7 +75,7 @@ Congratulations, you are now ready to start writing tests!
 Test Case Conventions
 =====================
 
-Like most things in CakePHP, test cases have some conventions. concerning
+Like most things in CakePHP, test cases have some conventions. Concerning
 tests:
 
 #. PHP files containing tests should be in your

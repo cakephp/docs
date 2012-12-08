@@ -7,23 +7,23 @@ software design pattern. Programming using MVC separates your
 application into three main parts:
 
 The Model layer
-================
+===============
 
 The Model layer represents the part of your application that
-implements the business logic. This means that it is responsible
-for retrieving data, converting it into meaningful concepts for your
-application, as well as processing, validating, associating and any
-other task relative to handling this data.
+implements the business logic. It is responsible for retrieving data and
+converting it into meaningful concepts for your application. This includes
+processing, validating, associating or other tasks related to handling data.
 
 At a first glance, Model objects can be looked at as the first layer
-of interaction with any database you might be using for your application. 
+of interaction with any database you might be using for your application.
 But in general they stand for the major concepts around which you
 implement your application.
 
 In the case of a social network, the Model layer would take care of
 tasks such as Saving the user data, saving friends associations, storing
 and retrieving user photos, finding new friends for suggestions, etc.
-While the model objects can be thought as "Friend", "User", "Comment", "Photo"
+While the model objects can be thought as "Friend", "User", "Comment", or
+"Photo".
 
 The View layer
 ==============

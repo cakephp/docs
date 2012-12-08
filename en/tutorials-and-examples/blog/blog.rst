@@ -63,7 +63,7 @@ structure works: check out
 Creating the Blog Database
 ==========================
 
-Next, let's set up the underlying database for our blog. if you
+Next, let's set up the underlying database for our blog. If you
 haven't already done so, create an empty database for use in this
 tutorial, with a name of your choice. Right now, we'll just create
 a single table to store our posts. We'll also throw in a few posts

@@ -603,7 +603,7 @@ new features in the FormHelper.
 
 
 -  ``flash()`` no longer auto echos. You must add an
-   ``echo $session->flash();`` to your session->flash() calls. flash()
+   ``echo $session->flash();`` to your session->flash() calls. ``flash()``
    was the only helper method that auto outputted, and was changed to
    create consistency in helper methods.
 

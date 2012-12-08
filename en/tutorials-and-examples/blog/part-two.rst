@@ -370,11 +370,12 @@ along with the closing form tag. Again, refer to
 
 Now let's go back and update our ``/app/View/Posts/index.ctp``
 view to include a new "Add Post" link. Before the ``<table>``, add
-the following line:
+the following line::
 
-.. code-block:: php
-
-    <?php echo $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add')); ?>
+    <?php echo $this->Html->link(
+        'Add Post',
+        array('controller' => 'posts', 'action' => 'add')
+    ); ?>
 
 You may be wondering: how do I tell CakePHP about my validation
 requirements? Validation rules are defined in the model. Let's look
