@@ -58,10 +58,8 @@ CakePHP request cycle
 =====================
 
 |Figure 1|
-Figure: 1: A Basic MVC Request
 
-Figure: 1 Shows the typical handling of a client request in CakePHP
-
+Figure: 1: A typical MVC Request in CakePHP
 
 The typical CakePHP request cycle starts with a user requesting a page or
 resource in your application. This request is first processed by a dispatcher
