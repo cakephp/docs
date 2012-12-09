@@ -481,7 +481,7 @@ Using additional conditions when matching routes
 ------------------------------------------------
 
 When creating routes you might want to restrict certain URL's based on specific
-request/enviroment settings. A good example of this is :doc:`development/rest`
+request/environment settings. A good example of this is :doc:`rest`
 routing. You can specify additional conditions in the ``$defaults`` argument for
 :php:meth:`Router::connect()`.  By default CakePHP exposes 3 environment
 conditions, but you can add more using :ref:`custom-route-classes`. The built-in
@@ -501,7 +501,7 @@ option to create a custom RESTful route::
     );
 
 The above route will only match for ``PUT`` requests. Using these conditions,
-you can create custom REST routing, or other request data dependant information.
+you can create custom REST routing, or other request data dependent information.
 
 .. index:: passed arguments
 .. _passed-arguments:
