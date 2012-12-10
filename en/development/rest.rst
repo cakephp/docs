@@ -80,7 +80,7 @@ this::
             $recipes = $this->Recipe->find('all');
             $this->set(array(
                 'recipes' => $recipes,
-                '_serialize' => array('recipe')
+                '_serialize' => array('recipes')
             ));
         }
     
