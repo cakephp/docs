@@ -190,6 +190,17 @@ For example, to update the title of a blog post, the call to
     You can't stop the updated field being updated with this method, you
     need to use the save() method.
 
+The saveField method also has an alternate syntax::
+
+    saveField(string $fieldName, string $fieldValue, array $params = array())
+
+``$params`` array can have any of the following available options
+as keys:
+
+* ``validate`` Set to true/false to enable disable validation.
+* ``callbacks`` Set to false to disable callbacks.  Using 'before' or 'after'
+  will enable only those callbacks.
+
 :php:meth:`Model::updateAll(array $fields, array $conditions)`
 ==============================================================
 
