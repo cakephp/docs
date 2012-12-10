@@ -115,7 +115,7 @@ elements you can use attribute matching with methods like ``extract()``.
     points::
 
         $users = $this->User->find('all');
-        $users = Set::insert($users, '{n}.User.new', 'value');
+        $users = Hash::insert($users, '{n}.User.new', 'value');
 
 .. php:staticmethod:: remove(array $data, $path = null)
 
