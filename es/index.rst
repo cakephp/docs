@@ -73,20 +73,3 @@ Pautas para la traducción:
 Estamos comprometidos a hacer la documentación de CakePHP mejor de lo
 que nunca ha sido. Esperamos que te unas a nosotros usando el *Cookbook*
 y realimentando un proyecto del que tanto nos hemos beneficiado todos.
-
-
-.. toctree::
-    :maxdepth: 1
-
-    The-Manual/Beginning-With-CakePHP
-    The-Manual/Basic-Principles-of-CakePHP
-    The-Manual/Developing-with-CakePHP
-    The-Manual/Common-Tasks-With-CakePHP
-    The-Manual/Core-Components
-    The-Manual/Core-Behaviors
-    The-Manual/Core-Helpers
-    The-Manual/Core-Utility-Libraries
-    The-Manual/Core-Console-Applications
-    The-Manual/Deployment
-    The-Manual/Tutorials-Examples
-    The-Manual/Appendices

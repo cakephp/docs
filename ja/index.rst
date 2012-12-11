@@ -58,20 +58,3 @@ CakePHP
 のドキュメントをより良いものにするため、出来る限りのことを行っています。Cookbook
 を活用して、わたしたちの皆が恩恵を受けている、この CakePHP
 プロジェクトにフィードバックしましょう。
-
-
-.. toctree::
-    :maxdepth: 1
-
-    The-Manual/Beginning-With-CakePHP
-    The-Manual/Basic-Principles-of-CakePHP
-    The-Manual/Developing-with-CakePHP
-    The-Manual/Common-Tasks-With-CakePHP
-    The-Manual/Core-Components
-    The-Manual/Core-Behaviors
-    The-Manual/Core-Helpers
-    The-Manual/Core-Utility-Libraries
-    The-Manual/Core-Console-Applications
-    The-Manual/Deployment
-    The-Manual/Tutorials-Examples
-    The-Manual/Appendices

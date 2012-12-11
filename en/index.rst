@@ -69,19 +69,3 @@ We're committed to making the documentation for CakePHP better than it
 has ever been. We hope you'll join us by using the Cookbook and giving
 back to a project that we've all benefited so much from.
 
-
-.. toctree::
-    :maxdepth: 1
-
-    The-Manual/Beginning-With-CakePHP
-    The-Manual/Basic-Principles-of-CakePHP
-    The-Manual/Developing-with-CakePHP
-    The-Manual/Common-Tasks-With-CakePHP
-    The-Manual/Core-Components
-    The-Manual/Core-Behaviors
-    The-Manual/Core-Helpers
-    The-Manual/Core-Utility-Libraries
-    The-Manual/Core-Console-Applications
-    The-Manual/Deployment
-    The-Manual/Tutorials-Examples
-    The-Manual/Appendices
