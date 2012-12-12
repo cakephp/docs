@@ -338,7 +338,7 @@ Hashing passwords for digest authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Because Digest authentication requires a password hashed in the format
-defined by the RFC.  In order to correctly hash a password for use with
+defined by the RFC, in order to correctly hash a password for use with
 Digest authentication you should use the special password hashing
 function on ``DigestAuthenticate``.  If you are going to be combining
 digest authentication with any other authentication strategies, it's also
