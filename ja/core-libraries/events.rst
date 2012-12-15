@@ -36,7 +36,7 @@ CakePHPのストラクチャとデフォルトのライブラリの多くは、�
 別の箇所とクリーンにやりとりすることが必要な場面も確かにあり、そしてやがて凝集度は失われ、
 クラスの結合度は増加してしまいます。ソフトウェア工学においてまさに成功したデザインパターンと言えるのが、
 オブジェクトがイベントを発生させることができ、無名のリスナーに対して内部状態の変化について通知する
-オブザーバーパターンです。
+Observerパターンです。
 
 ..
   Listeners in the observer pattern can subscribe to such events and choose to act
@@ -44,7 +44,7 @@ CakePHPのストラクチャとデフォルトのライブラリの多くは、�
   javascript in the past, the chances are that you are already familiar with event
   driven programming.
 
-オブザーバーパターンにおけるリスナーは、そのようなイベントを受信することが可能で、
+Observerパターンにおけるリスナーは、そのようなイベントを受信することが可能で、
 それらに基づいて振る舞いを選択したり、サブジェクト(訳注:イベントオブジェクト)の状態を変更したり、
 単に何かを記録したりします。もしあなたがすでにjavascriptを使っていたなら、
 すでにイベント駆動プログラミングに親しんでいることでしょう。
@@ -66,7 +66,7 @@ CakePHPのストラクチャとデフォルトのライブラリの多くは、�
 状態とイベント自体を変更する機会を持ちます。
 
 .. Interacting with the event managers
-イベントマネージャーとの相互作用
+イベントマネージャーとの対話
 ===================================
 
 ..
@@ -78,9 +78,9 @@ CakePHPのストラクチャとデフォルトのライブラリの多くは、�
 
 さて、あなたが買い物カートのプラグインをビルドしていて、だけど、出荷の仕組み、メールの送信、
 在庫を減らすこととかをごちゃまぜにするなんてことは全く望んでおらず、
-他のプラグインやアプリコードで個別にそれらの事を処理することを望んでいるとしましょう。
-いつもの、それこそオブザーバーパターンを使用しない場合、不断の努力でビヘイビアをモデルに
-（ひょっとしたらいくつかのコンポーネントをコントローラーに）取り付けることによって、
+他のプラグインやアプリケーションコードで個別にそれらの事を処理することを望んでいるとしましょう。
+いつもの、それこそObserverパターンを使用しない場合、不断の努力でビヘイビアをモデルに
+（ひょっとしたらいくつかのコンポーネントをコントローラに）取り付けることによって、
 この望みをかなえるでしょう。
 
 ..
@@ -96,7 +96,7 @@ CakePHPのストラクチャとデフォルトのライブラリの多くは、�
 コードを用意しなくてはならないので、ほとんどの場合ひとつの挑戦を意味します。
 CakePHP2.1以前の何人かの開発者は、この問題を解決するために汎用イベントシステムを実装することにし、
 そのうちいくつかのシステムはプラグインとして提供されていました。今あなたは、組み込みの
-イベントマネージャによって、プラグインとアプリケーションコードの関係をきれいに切り離してくれる、
+イベントマネージャーによって、プラグインとアプリケーションコードの関係をきれいに切り離してくれる、
 標準的な多目的イベントシステムから恩恵を受けることができます。
 
 .. Dispatching events
@@ -107,8 +107,8 @@ CakePHP2.1以前の何人かの開発者は、この問題を解決するため�
   So back to our example, we would have an `Order` model that will manage the buying logic,
   and probably a `place` method to save the order details and do any other logic::
 
-それじゃ先ほどの例に戻りましょう。私たちは購買ロジックを管理する `Order` モデルと、
-恐らく、注文の詳細を保存したりその他のロジックを行うための `place` メソッドを持つことになるでしょう::
+それでは先ほどの例に戻りましょう。私たちは購買ロジックを管理する `Order` モデルと、
+恐らく、注文の詳細を保存したりその他もろもろのロジックを行うための `place` メソッドを持つことになるでしょう::
 
     // Cart/Model/Order.php
     class Order extends AppModel {
@@ -163,7 +163,7 @@ CakePHP2.1以前の何人かの開発者は、この問題を解決するため�
   nevertheless. We will review later how to overcome this implementation detail.
 
 イベントクラスとメソッドを導入することで、ずいぶんすっきりしましたね。最初に気づくことは
-``getEventManager()`` の呼び出しでしょうか。これはデフォルトの状態ですべてのモデル、コントローラ、
+``getEventManager()`` の呼び出しではないでしょうか。これはデフォルトの状態ですべてのモデル、コントローラ、
 ビューで使用可能なメソッドです。このメソッドは、モデル間で同じマネージャーのインスタンスを返すことはなく、
 コントローラとモデルの間でも共有されていないにも関わらず、コントローラとビューの間では共有されています。
 この実装の詳細をいかにして攻略するかは、後ほど検討します。
@@ -192,11 +192,11 @@ CakePHP2.1以前の何人かの開発者は、この問題を解決するため�
   for example `Model.User.afterRegister` or `Controller.Courses.invalidAccess`.
 
 :php:class:`CakeEvent` は、そのコンストラクタに3つの引数を受け取ります。最初のものはイベント名で、
-読みやすくすると同時にできるだけ唯一性を維持することに心掛けてください。
+読みやすくすると同時にできるだけ唯一性を維持することを心掛けてください。
 我々は次のような規則を提案します： レイヤーレベルで発生する一般的なイベントのためには
 `Layer.eventName` と言う記述方法 (例. `Controller.startup`, `View.beforeRender`) を、
 そして あるレイヤーの特定のクラスで発生するイベントのためには
-`Layer.Class.eventName` 例えば `Model.User.afterRegister` あるいは `Controller.Courses.invalidAccess`
+`Layer.Class.eventName` 例えば `Model.User.afterRegister` や `Controller.Courses.invalidAccess`
 と言う記述方法を。
 
 ..
@@ -219,8 +219,9 @@ CakePHP2.1以前の何人かの開発者は、この問題を解決するため�
   useful to pass around so listeners can act upon it. While this can be an argument
   of any type, we recommend passing an associative array, to make inspection easier.
 
-最後に、3番目の引数はイベントのパラメータです。これは、リスナーがそれに基づいて行動できるようにする任意のデータです。
-これは、どのような型の引数でも指定できますが、検査を容易にするために連想配列を渡すことをお勧めします。
+最後に、3番目の引数はイベントのパラメータです。これは、リスナーがそれに基づいて
+行動できるようにするための任意のデータです。これは、どのような型の引数でも指定できますが、
+検査を容易にするために連想配列を渡すことをお勧めします。
 
 ..
   :php:meth:`CakeEventManager::dispatch()` method accepts the event object as argument
@@ -231,7 +232,7 @@ CakePHP2.1以前の何人かの開発者は、この問題を解決するため�
 
 :php:meth:`CakeEventManager::dispatch()` メソッドは、引数としてイベントオブジェクトを受け取り、
 すべてのリスナーとコールバックにこのオブジェクトを伝達させながら通知します。このようにして、
-リスナーは afterPlace イベントにまつわる、その他のすべてのロジックを処理できるようになるので、
+リスナーは `afterPlace` イベントにまつわる、その他のすべてのロジックを処理できるようになるので、
 あなたは時間をログに取ったり、電子メールを送信したり、ユーザーの統計情報を更新したりを
 別々のオブジェクトで行うことができ、必要があればオフラインのタスクにそれを委任することさえできるのです。
 
@@ -247,11 +248,11 @@ CakePHP2.1以前の何人かの開発者は、この問題を解決するため�
   are available in the controller, and say this controller is responsible for
   attaching them. The possible code would look like this::
 
-新しいafterPlaceイベントにコールバックやオブザーバーを登録するにはどうすればよいのでしょうか？
+新しいafterPlaceイベントにコールバックやオブザーバを登録するにはどうすればよいのでしょうか？
 これは多種多様な異なる実装がなされますが、どのような場合であっても新しいアクターを登録する
 :php:meth:`CakeEventManager::attach()` メソッドを呼び出す必要はあります。わかりやすくするために、
-このプラグインにおいて、コントローラでコールバックを使用可能であることを我々は知っており、
-このコントローラーは、それらを責任を持って接続するとしましょう。可能なコードは次のようになります::
+このプラグインにおいてコントローラでコールバックを使用可能であることを我々は知っており、
+このコントローラは、それらを責任を持って接続するとしましょう。可能なコードは次のようになります::
 
     // Listeners configured somewhere else, maybe a config file:
     Configure::write('Order.afterPlace', array(
@@ -290,10 +291,10 @@ CakePHP2.1以前の何人かの開発者は、この問題を解決するため�
 アタッチするためのあなた自身のやり方を考えてください。 `Configure` クラスを使用してそれらを定義するという
 この単純な方法は単に教科書的に書いたにすぎません。この小さな例が私たちに示すことは、
 どのようなタイプのコールバックであってもマネージャーにアタッチ可能だということです。
-すでにお分かりだと思いますが、このattachメソッドはすべての有効なPHPコールバックのタイプ、
+すでにお分かりだと思いますが、この `attach` メソッドはすべての有効なPHPコールバックのタイプ、
 つまり文字列で表された static function の呼び出し、クラスインスタンスとメソッドを保持した配列、
-もしPHP5.3以上を利用しているなら無名関数、などをうけとります。アタッチされたコールバックは第1の引数として
-イベントオブジェクトを受け取ります。
+もしPHP5.3以上を利用しているなら無名関数、などをうけとります。アタッチされたコールバックは全て、
+第1の引数としてイベントオブジェクトを受け取ります。
 
 ..
   :php:meth:`CakeEventManager::attach()` Accepts three arguments. The leftmost one is
@@ -393,8 +394,8 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 
 プライオリティは、コールバック自体に関連付けられている数字を使用して処理されます。
 数字が大きいほど、後に実行されるメソッドです。すべてのコールバックとリスナメソッドの
-デフォルトの優先度は`10`に設定されています。メソッドを早く実行したい場合には、
-このデフォルトよりも小さい任意の値(`1`でもいいし負の値でも動作するでしょう)の使用が
+デフォルトの優先度は`10`に設定されています。もしメソッドをもっと早く実行したい場合は、
+このデフォルト値よりも小さい任意の値(`1`でもいいし負の値でも動作するでしょう)の使用が
 あなたを助けてくれます。逆に、コールバックを他よりもあとに実行させたいなら、
 `10`よりも大きい数字を用いてください。
 
@@ -455,7 +456,8 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
   returned array similar to what you do with priorities::
 
 この方法を選択する場合、プライオリティの設定でやったのと同じように、`attach`メソッドの
-3番目の引数に`passParams`オプションを追加するかimplementedEvents が返す配列にそれを宣言する必要があります::
+3番目の引数に`passParams`オプションを追加するか `implementedEvents` が返す配列に
+それを宣言する必要があります::
 
     // Setting priority for a callback
     $callback = array($this, 'doSomething');
@@ -509,7 +511,7 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
   (e.g. beforeSave) in which it is possible to stop the saving operation if
   the code detects it cannot proceed any further.
 
-開始した操作がキャンセルされるために、イベントを停止しなくてはならない状況があります。
+イベントを開始した操作がキャンセルされたために、イベントを停止しなくてはならない状況があります。
 それ以上進むことが不可能であることをコードが検出した時に保存操作を停止できるモデルの
 コールバック（例えばbeforeSave）において、そのような例を見いだせます。
 
@@ -637,7 +639,7 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
   the :php:meth:`CakeEventManager::detach()` method using as arguments the first two
   params you used for attaching it::
 
-何らかの理由でイベントマネージャから任意のコールバックを削除したい場合は、
+何らかの理由でイベントマネージャーから任意のコールバックを削除したい場合は、
 :php:meth:`CakeEventManager::detach()` を引数の最初の2つの変数を attach のときと
 同様の用い方で呼び出すだけで良いです::
 
@@ -676,13 +678,13 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
   of them a different mechanism for loading callbacks into managers based on
   configuration, CakePHP provides the concept of the global event manager.
 
-前述したように、あるオブジェクト内の任意のイベント·マネージャーにオブザーバーを
+前述したように、あるオブジェクト内の任意のイベント·マネージャーにObserverを
 アタッチするのが難しいことがあるかも知れません。あるイベントに対して、
 それをトリガーするオブジェクトのインスタンスにアクセスすること無しに、
 コールバックをアタッチできなくてはならない一定のケースがあります。また、
 設定に基づいて、コールバックのマネージャーへのローディングを、
 各々異なるメカニズムに実装してしまわないように、CakePHPは
-グローバルイベントマネージャの概念を提供します。
+グローバルイベントマネージャーの概念を提供します。
 
 ..
   The global manager is a singleton instance of a ``CakeEventManager`` class that
@@ -706,7 +708,7 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
 `getEventManager` 関数で返されたローカルのイベントマネージャーを用いていたころの
 私達を再び思い出しましょう。内部的には、このローカルイベントマネージャーは、
 アタッチされたコールバックをトリガーする前に、イベントをグローバルのイベントマネージャーに
-ディスパッチしています。各マネージャの優先度は独立しており、グローバルなコールバックは
+ディスパッチしています。各マネージャーの優先度は独立しており、グローバルなコールバックは
 独自のプライオリティキューで発生し、ローカルのコールバックは
 それぞれのプライオリティの順序で呼び出されます。
 
@@ -714,7 +716,7 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
   Accessing the global event manager is as easy as calling a static function,
   the following example will attach a global event to the `beforePlace` event::
 
-グローバルイベントマネージャにアクセスするには static 関数を呼び出すように簡単で、
+グローバルイベントマネージャーにアクセスするには static 関数を呼び出すように簡単で、
 次の例では、`beforePlace` イベントにグローバルイベントをアタッチしています::
 
     // In any configuration file or piece of code that executes before the event
@@ -726,7 +728,7 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
   and we can apply the same concepts we learned before about triggering, attaching,
   detaching, stopping events, etc.
 
-ご覧のとおり、イベント·マネージャ·インスタンスへのアクセスの取得方法を単に変更するだけで、
+ご覧のとおり、イベントマネージャーインスタンスへのアクセスの取得方法を単に変更するだけで、
 イベントのトリガー、アタッチ、デタッチ、ストップなど既に学習したのと同じ概念を適用することができます。
 
 ..
