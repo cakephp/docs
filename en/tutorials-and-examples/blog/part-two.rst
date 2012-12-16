@@ -214,19 +214,32 @@ PostsController now::
         }
 
         public function view($id = null) {
-            $this->Post->id = $id;
-            $this->set('post', $this->Post->read());
+            if (!id) {
+                throw new NotFoundException(__('Invalid post'));
+            }
+
+            $post = $this->Post->findById($id);
+            if (!$post) {
+                throw new NotFoundException(__('Invalid post'));
+            }
+            $this->set('post', $post);
         }
     }
 
 The ``set()`` call should look familiar. Notice we're using
-``read()`` rather than ``find('all')`` because we only really want
+``findById()`` rather than ``find('all')`` because we only really want
 a single post's information.
 
 Notice that our view action takes a parameter: the ID of the post
 we'd like to see. This parameter is handed to the action through
-the requested URL. If a user requests /posts/view/3, then the value
+the requested URL. If a user requests ``/posts/view/3``, then the value
 '3' is passed as ``$id``.
+
+We also do a bit of error checking to ensure a user is actually
+accessing a record. If a user requests ``/posts/view``, we will throw a
+``NotFoundException`` and let the CakePHP ErrorHandler take over. We
+also perform a similar check to make sure the user has accessed a
+record that exists.
 
 Now let's create the view for our new 'view' action and place it in
 ``/app/View/Posts/view.ctp``
@@ -262,9 +275,15 @@ PostsController::
         }
 
         public function view($id) {
-            $this->Post->id = $id;
-            $this->set('post', $this->Post->read());
+            if (!id) {
+                throw new NotFoundException(__('Invalid post'));
+            }
 
+            $post = $this->Post->findById($id);
+            if (!$post) {
+                throw new NotFoundException(__('Invalid post'));
+            }
+            $this->set('post', $post);
         }
 
         public function add() {
@@ -415,10 +434,17 @@ Here's what the ``edit()`` action of the PostsController would look
 like::
 
     public function edit($id = null) {
-        $this->Post->id = $id;
-        if ($this->request->is('get')) {
-            $this->request->data = $this->Post->read();
-        } else {
+        if (!$id) {
+            throw new NotFoundException(__('Invalid post'));
+        }
+
+        $post = $this->Post->findById($id);
+        if (!$post) {
+            throw new NotFoundException(__('Invalid post'));
+        }
+
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
                 $this->Session->setFlash('Your post has been updated.');
                 $this->redirect(array('action' => 'index'));
@@ -426,12 +452,22 @@ like::
                 $this->Session->setFlash('Unable to update your post.');
             }
         }
+
+        if (!$this->request->data) {
+            $this->request->data = $post;
+        }
     }
 
-This action first checks that the request is a GET request.  If it is, then
-we find the Post and hand it to the view.  If the user request is not a GET, it
-probably contains POST data.  We'll use the POST data to update our Post record
-with, or kick back and show the user the validation errors.
+This action first ensures that the user has tried to access an existing record.
+If they haven't passed in a passed in an ``$id`` parameter, or the post does not
+exist, we throw a ``NotFoundException`` for the CakePHP ErrorHandler to take care of.
+
+Next the action checks that the request is a POST request.  If it is, then we
+use the POST data to update our Post record, or kick back and show the user
+validation errors.
+
+If there is no data set to ``$this->request->data``, we simply set it to the
+previously retrieved post.
 
 The edit view might look something like this:
 
@@ -441,7 +477,7 @@ The edit view might look something like this:
 
     <h1>Edit Post</h1>
     <?php
-        echo $this->Form->create('Post', array('action' => 'edit'));
+        echo $this->Form->create('Post');
         echo $this->Form->input('title');
         echo $this->Form->input('body', array('rows' => '3'));
         echo $this->Form->input('id', array('type' => 'hidden'));
@@ -501,6 +537,7 @@ Next, let's make a way for users to delete posts. Start with a
         if ($this->request->is('get')) {
             throw new MethodNotAllowedException();
         }
+
         if ($this->Post->delete($id)) {
             $this->Session->setFlash('The post with id: ' . $id . ' has been deleted.');
             $this->redirect(array('action' => 'index'));
