@@ -214,7 +214,7 @@ PostsController now::
         }
 
         public function view($id = null) {
-            if (!id) {
+            if (!$id) {
                 throw new NotFoundException(__('Invalid post'));
             }
 
@@ -275,7 +275,7 @@ PostsController::
         }
 
         public function view($id) {
-            if (!id) {
+            if (!$id) {
                 throw new NotFoundException(__('Invalid post'));
             }
 
