@@ -106,7 +106,7 @@ to the view using the ``set()`` method? That would hand down data
 to the view that would look something like this::
 
     // print_r($posts) output:
-    
+
     Array
     (
         [0] => Array
@@ -152,7 +152,7 @@ nice table, our view code might look something like this
 .. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
-    
+
     <h1>Blog posts</h1>
     <table>
         <tr>
@@ -160,9 +160,9 @@ nice table, our view code might look something like this
             <th>Title</th>
             <th>Created</th>
         </tr>
-    
+
         <!-- Here is where we loop through our $posts array, printing out post info -->
-    
+
         <?php foreach ($posts as $post): ?>
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
@@ -234,11 +234,11 @@ Now let's create the view for our new 'view' action and place it in
 .. code-block:: php
 
     <!-- File: /app/View/Posts/view.ctp -->
-    
+
     <h1><?php echo h($post['Post']['title']); ?></h1>
-    
+
     <p><small>Created: <?php echo $post['Post']['created']; ?></small></p>
-    
+
     <p><?php echo h($post['Post']['body']); ?></p>
 
 Verify that this is working by trying the links at ``/posts/index`` or
@@ -291,8 +291,8 @@ request was POST, try to save the data using the Post model. If for some
 reason it doesn't save, just render the view. This gives us a
 chance to show the user validation errors or other warnings.
 
-Every CakePHP request includes a ``CakeRequest`` object which is accessible using 
-``$this->request``. The request object contains useful information regarding the 
+Every CakePHP request includes a ``CakeRequest`` object which is accessible using
+``$this->request``. The request object contains useful information regarding the
 request that was just received, and can be used to control the flow of your application.
 In this case, we use the :php:meth:`CakeRequest::is()` method to check that the request is a HTTP POST request.
 
@@ -332,8 +332,8 @@ Here's our add view:
 
 .. code-block:: php
 
-    <!-- File: /app/View/Posts/add.ctp -->   
-        
+    <!-- File: /app/View/Posts/add.ctp -->
+
     <h1>Add Post</h1>
     <?php
     echo $this->Form->create('Post');
@@ -402,8 +402,8 @@ setup, check the :doc:`/models/data-validation`.
 
 Now that you have your validation rules in place, use the app to
 try to add a post with an empty title or body to see how it works.
-Since we've used the :php:meth:`FormHelper::input()` method of the 
-FormHelper to create our form elements, our validation error 
+Since we've used the :php:meth:`FormHelper::input()` method of the
+FormHelper to create our form elements, our validation error
 messages will be shown automatically.
 
 Editing Posts
@@ -430,7 +430,7 @@ like::
 
 This action first checks that the request is a GET request.  If it is, then
 we find the Post and hand it to the view.  If the user request is not a GET, it
-probably contains POST data.  We'll use the POST data to update our Post record 
+probably contains POST data.  We'll use the POST data to update our Post record
 with, or kick back and show the user the validation errors.
 
 The edit view might look something like this:
@@ -438,13 +438,13 @@ The edit view might look something like this:
 .. code-block:: php
 
     <!-- File: /app/View/Posts/edit.ctp -->
-        
+
     <h1>Edit Post</h1>
     <?php
         echo $this->Form->create('Post', array('action' => 'edit'));
         echo $this->Form->input('title');
         echo $this->Form->input('body', array('rows' => '3'));
-        echo $this->Form->input('id', array('type' => 'hidden')); 
+        echo $this->Form->input('id', array('type' => 'hidden'));
         echo $this->Form->end('Save Post');
 
 This view outputs the edit form (with the values populated), along
@@ -511,7 +511,7 @@ This logic deletes the post specified by $id, and uses
 ``$this->Session->setFlash()`` to show the user a confirmation
 message after redirecting them on to ``/posts``.  If the user attempts to
 do a delete using a GET request, we throw an Exception.  Uncaught exceptions
-are captured by CakePHP's exception handler, and a nice error page is 
+are captured by CakePHP's exception handler, and a nice error page is
 displayed.  There are many built-in :doc:`/development/exceptions` that can
 be used to indicate the various HTTP errors your application might need
 to generate.
@@ -523,7 +523,7 @@ links that allow users to delete posts, however:
 .. code-block:: php
 
     <!-- File: /app/View/Posts/index.ctp -->
-    
+
     <h1>Blog posts</h1>
     <p><?php echo $this->Html->link('Add Post', array('action' => 'add')); ?></p>
     <table>
@@ -533,9 +533,9 @@ links that allow users to delete posts, however:
             <th>Actions</th>
             <th>Created</th>
         </tr>
-    
+
     <!-- Here's where we loop through our $posts array, printing out post info -->
-    
+
         <?php foreach ($posts as $post): ?>
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
@@ -544,9 +544,9 @@ links that allow users to delete posts, however:
             </td>
             <td>
                 <?php echo $this->Form->postLink(
-                    'Delete', 
+                    'Delete',
                     array('action' => 'delete', $post['Post']['id']),
-                    array('confirm' => 'Are you sure?')); 
+                    array('confirm' => 'Are you sure?'));
                 ?>
                 <?php echo $this->Html->link('Edit', array('action' => 'edit', $post['Post']['id'])); ?>
             </td>
@@ -555,7 +555,7 @@ links that allow users to delete posts, however:
             </td>
         </tr>
         <?php endforeach; ?>
-    
+
     </table>
 
 Using :php:meth:`~FormHelper::postLink()` will create a link that uses
