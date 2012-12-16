@@ -73,6 +73,7 @@ statements into your database::
     /* First, create our posts table: */
     CREATE TABLE posts (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        user_id INT (10),
         title VARCHAR(50),
         body TEXT,
         created DATETIME DEFAULT NULL,
