@@ -33,7 +33,7 @@ to your controller's ``$helpers`` array::
         public $helpers = array('Cache');
     }
 
-You will also need to add the CacheDispatcher to your dispatcher filters in your boostrap:
+You will also need to add the CacheDispatcher to your dispatcher filters in your boostrap::
 
     Configure::write('Dispatcher.filters', array(
         'CacheDispatcher'
