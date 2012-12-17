@@ -785,20 +785,13 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
   use it wisely, only for the stuff your really need, it will make you code easier
   to work with, test and integrate.
 
-..
-  a comment from Zuborawka@translator
-  この文の構造がよくわからないのでうまく訳せていないと思います。
-  Whereas in contrast, if you
-  use it wisely, only for the stuff your really need, it will make you code easier
-  to work with, test and integrate.
-
 偉大な力には偉大な責任が伴うことを心に留めておいてください。
 この方法でクラスを疎結合させるということは、コード上でより多くの
 そしてより良い結合テストの実行が要求されるということです。
 このツールの乱用はあなたのアプリケーションによりよいアーキテクチャをもたらすなんてことはなく、
 全くその逆に、コードの可読性を著しく下げるでしょう。一方それとは対照的に、
-本当に賢くそれを使用するなら、本当に必要としているもののためだけに限るというなら、
-作業しやすいコードをもたらすでしょう、テストして統合してください。
+本当に必要なものに限って賢くそれを使用するのならば、コードの取り扱い、テスト、
+そして統合させることを容易にしてくれることでしょう。
 
 .. Additional Reading
 その他の資料
