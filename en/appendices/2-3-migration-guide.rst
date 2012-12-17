@@ -17,6 +17,9 @@ Caching
   had difficulty setting up and deploying APC correctly both in cli + web.
   Using files should make setting up CakePHP simpler for new developers.
 
+- `Configure::write('Cache.viewPrefix', 'YOURPREFIX');` has been added to `core.php` to allow multiple domains/languages
+per setup.
+
 Component
 =========
 
