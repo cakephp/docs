@@ -31,9 +31,9 @@
   generate events and notify possibly anonymous listeners about changes in the
   internal state.
 
-CakePHPのストラクチャとデフォルトのライブラリの多くは、あなたのこのゴールの達成を
+CakePHPのストラクチャとデフォルトのライブラリの多くがあなたのこのゴールの達成を
 手助けしてくれるとは言え、依存関係をガチガチにコードすることなくシステム内の
-別の箇所とクリーンにやりとりすることが必要な場面も確かにあり、そしてやがて凝集度は失われ、
+別の箇所とクリーンにやりとりすることが必要な場面も確かにあり、やがて凝集度は失われ、
 クラスの結合度は増加してしまいます。ソフトウェア工学においてまさに成功したデザインパターンと言えるのが、
 オブジェクトがイベントを発生させることができ、無名のリスナーに対して内部状態の変化について通知する
 Observerパターンです。
@@ -94,7 +94,7 @@ Observerパターンにおけるリスナーは、そのようなイベントを
 
 そうすることは、外部でビヘイビアをロードするかフックをプラグインコントローラに取り付けるかするために
 コードを用意しなくてはならないので、ほとんどの場合ひとつの挑戦を意味します。
-CakePHP2.1以前の何人かの開発者は、この問題を解決するために汎用イベントシステムを実装することにし、
+CakePHP 2.1 以前の何人かの開発者は、この問題を解決するために汎用イベントシステムを実装することにし、
 そのうちいくつかのシステムはプラグインとして提供されていました。今あなたは、組み込みの
 イベントマネージャーによって、プラグインとアプリケーションコードの関係をきれいに切り離してくれる、
 標準的な多目的イベントシステムから恩恵を受けることができます。
@@ -512,7 +512,7 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
   the code detects it cannot proceed any further.
 
 イベントを開始した操作がキャンセルされたために、イベントを停止しなくてはならない状況があります。
-それ以上進むことが不可能であることをコードが検出した時に保存操作を停止できるモデルの
+それ以上処理を進めることが不可能であることをコードが検出した時に保存操作を停止できる、モデルの
 コールバック（例えばbeforeSave）において、そのような例を見いだせます。
 
 ..
@@ -624,7 +624,7 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
   object is the best solution as the reference is kept the same and modifications
   are shared across all callback calls.
 
-あなたもお気づきかもでしょうが、いかなるイベントのオブジェクトであっても変更可能であり、
+あなたもお気づきかも知れませんが、いかなるイベントのオブジェクトであっても変更可能であり、
 この新しいデータが次のコールバックに渡されることは明らかです。 ほとんどの場合、
 オブジェクトをイベント·データまたは結果として提供し、そのオブジェクトを直接変更することは、
 参照が同一に保たれていて変更がすべてのコールバックの呼び出しを超えて共有できるので、
@@ -782,6 +782,13 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
   classes this way also means that you need to perform more and better integration
   testing on your code. Abusing this tool won't make your apps have a better architecture,
   quite the opposite, it will make the code harder to read. Whereas in contrast, if you
+  use it wisely, only for the stuff your really need, it will make you code easier
+  to work with, test and integrate.
+
+..
+  a comment from Zuborawka@translator
+  この文の構造がよくわからないのでうまく訳せていないと思います。
+  Whereas in contrast, if you
   use it wisely, only for the stuff your really need, it will make you code easier
   to work with, test and integrate.
 
