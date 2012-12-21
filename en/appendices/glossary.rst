@@ -13,7 +13,7 @@ Glossary
         An array of key => values that are composed into html attributes. For example::
             
             // Given
-            array('class' => 'my-class', '_target' => 'blank')
+            array('class' => 'my-class', 'target' => '_blank')
 
             // Would generate
             class="my-class" _target="blank"
