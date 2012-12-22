@@ -191,6 +191,11 @@ View
   use this to suppress the errors triggered by missing view elements.
 - :php:meth:`View::startIfEmpty()` was added.
 
+Layout
+------
+
+- The doctype for layout files in the app folder and the bake templates in the
+  cake package has been changed from XHTML to HTML5.
 
 Helpers
 =======
