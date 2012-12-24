@@ -236,6 +236,7 @@ PaginatorHelper
   allow specifying extra tag for wrapping current page number.
 - For methods: :php:meth:`PaginatorHelper::prev()` and :php:meth:`PaginatorHelper::next()` it
   is now possible to set the ``tag`` option to ``false`` to disable the wrapper.
+  Also a new option `disabledTag` has been added for these two methods.
 
 
 Testing
