@@ -3022,5 +3022,5 @@ if (preg_match('#/1\.3/[a-z]{2, 3}/view/1571/?.*$#', $_SERVER['REQUEST_URI'], $m
 
 if (preg_match('#/1\.3/(en|es|fr|pt|de|ja).*$#', $_SERVER['REQUEST_URI'], $match)) { header("Location:http://book.cakephp.org/1.3/$match[1]/"); exit; }
 
-if (preg_match('#/1\.3.*$#', $_SERVER['REQUEST_URI'], $match)) { header("Location:http://book.cakephp.org/1.3/en/"); exit; }
+header("Location:http://book.cakephp.org/1.3/en/"); exit;
 
