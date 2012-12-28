@@ -39,6 +39,9 @@ PaginatorComponent
   specify what find method you want used for pagination.  This is a bit easier
   to manage and set than the 0'th index.
 
+- PaginatorComponent now throws a `NotFoundException` when trying to access a page
+  which is out of range (i.e. requested page is greater than total page count).
+
 SecurityComponent
 -----------------
 
