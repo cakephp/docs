@@ -1,4 +1,5 @@
 <?php 
+header('HTTP/1.1 301 Moved Permanently');
 
 if (preg_match('#/1\.3/(en|es|fr|pt|de|ja)/view/876/?.*$#', $_SERVER['REQUEST_URI'],  $match)) { header("Location:http://book.cakephp.org/1.3/$match[1]/The-Manual.html"); exit; }
 if (preg_match('#/1\.3/view/876/?.*$#', $_SERVER['REQUEST_URI'], $match)) { header("Location:http://book.cakephp.org/1.3/en/The-Manual.html"); exit; }
