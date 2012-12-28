@@ -44,7 +44,7 @@ latexpdf-%: $(SPHINX_DEPENDENCIES)
 	cd $* && make latexpdf LANG=$*
 
 populate-index-%: $(SPHINX_DEPENDENCIES)
-	php scripts/populate_search_index.php $*
+	php scripts/populate_search_index.php $* $(ES_HOST)
 
 website-dirs:
 	# Make the directory if its not there already.
