@@ -74,7 +74,7 @@ directories in ``app/webroot`` with paths matching those used by CakePHP.
 
 
 -  ``app/Plugin/DebugKit/webroot/js/my_file.js`` becomes
-   ``app/webroot/DebugKit/js/my_file.js``
+   ``app/webroot/debug_kit/js/my_file.js``
 -  ``app/View/Themed/Navy/webroot/css/navy.css`` becomes
    ``app/webroot/theme/Navy/css/navy.css``
 

@@ -17,6 +17,8 @@ Caching
   had difficulty setting up and deploying APC correctly both in cli + web.
   Using files should make setting up CakePHP simpler for new developers.
 
+- `Configure::write('Cache.viewPrefix', 'YOURPREFIX');` has been added to `core.php` to allow multiple domains/languages per setup.
+
 Component
 =========
 
@@ -36,6 +38,9 @@ PaginatorComponent
 - PaginatorComponent now supports the ``findType`` option.  This can be used to
   specify what find method you want used for pagination.  This is a bit easier
   to manage and set than the 0'th index.
+
+- PaginatorComponent now throws a `NotFoundException` when trying to access a page
+  which is out of range (i.e. requested page is greater than total page count).
 
 SecurityComponent
 -----------------
@@ -189,6 +194,11 @@ View
   use this to suppress the errors triggered by missing view elements.
 - :php:meth:`View::startIfEmpty()` was added.
 
+Layout
+------
+
+- The doctype for layout files in the app folder and the bake templates in the
+  cake package has been changed from XHTML to HTML5.
 
 Helpers
 =======
@@ -229,6 +239,7 @@ PaginatorHelper
   allow specifying extra tag for wrapping current page number.
 - For methods: :php:meth:`PaginatorHelper::prev()` and :php:meth:`PaginatorHelper::next()` it
   is now possible to set the ``tag`` option to ``false`` to disable the wrapper.
+  Also a new option `disabledTag` has been added for these two methods.
 
 
 Testing

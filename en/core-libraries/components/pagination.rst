@@ -206,6 +206,7 @@ the keyword in controller's ``$paginate`` class variable::
                 'group' => array('week', 'home_team_id', 'away_team_id')
             )
         );
+    }
 
 In CakePHP 2.0, you no longer need to implement ``paginateCount()`` when using
 group clauses.  The core ``find('count')`` will correctly count the total number
@@ -294,6 +295,23 @@ arguments.
 
     Either of these approaches will solve the notice errors.
 
+Out of range page requests
+==========================
+As of 2.3 the PaginatorComponent will throw a `NotFoundException` when trying to
+access a non-existent page, i.e. page number requested is greater than total
+page count.
+
+So you could either let the normal error page be rendered or use a try catch
+block and take appropriate action when a `NotFoundException` is caught.
+
+    public function index() {
+        try {
+            $this->paginate();
+        } catch (NotFoundException $e) {
+            //Do something here like redirecting to first or last page.
+            //$this->request->params['paging'] will give you required info.
+        }
+    }
 
 AJAX Pagination
 ===============
