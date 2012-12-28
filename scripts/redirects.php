@@ -1,4 +1,5 @@
 <?php 
+header('HTTP/1.1 301 Moved Permanently');
 
 if (preg_match('#/1\.1/(en)/view/305/?.*$#', $_SERVER['REQUEST_URI'],  $match)) {
 	header("Location: http://book.cakephp.org/1.1/$match[1]/index.html");
