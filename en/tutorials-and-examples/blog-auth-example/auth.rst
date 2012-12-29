@@ -170,9 +170,6 @@ file and add the following lines::
             )
         );
 
-        public function beforeFilter() {
-            $this->Auth->allow('index', 'view');
-        }
         //...
     }
 
@@ -191,7 +188,6 @@ our database. Let's tell the AuthComponent to let un-authenticated users access
 the users add function and implement the login and logout action::
 
     // app/Controller/UsersController.php
-
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('add'); // Letting users register themselves
@@ -303,7 +299,6 @@ Open again the AppController class and add a few more options to the Auth
 config::
 
     // app/Controller/AppController.php
-
     public $components = array(
         'Session',
         'Auth' => array(
@@ -336,7 +331,6 @@ edition of posts if the author does not match. Open the file ``PostsController.p
 and add the following content::
 
     // app/Controller/PostsController.php
-
     public function isAuthorized($user) {
         // All registered users can add posts
         if ($this->action === 'add') {
@@ -363,7 +357,6 @@ function in the Post model. It is in general a good practice to move as much
 logic as possible into models. Let's then implement the function::
 
     // app/Model/Post.php
-
     public function isOwnedBy($post, $user) {
         return $this->field('id', array('id' => $post, 'user_id' => $user)) === $post;
     }
