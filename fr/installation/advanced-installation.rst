@@ -295,30 +295,31 @@ vous aurez besoin de PHP fonctionnant comme une instance FastCGI.
 
     server {
         listen   80;
-        server_name www.exemple.com;
-        rewrite ^(.*) http://exemple.com$1 permanent;
+        server_name www.example.com;
+        rewrite ^(.*) http://example.com$1 permanent;
     }
 
     server {
         listen   80;
-        server_name exemple.com;
+        server_name example.com;
     
         # root directive should be global
-        root   /var/www/exemple.com/public/app/webroot/;
-
-        access_log /var/www/exemple.com/log/access.log;
-        error_log /var/www/exemple.com/log/error.log;
+        root   /var/www/example.com/public/app/webroot/;
+        index  index.php;
+        
+        access_log /var/www/example.com/log/access.log;
+        error_log /var/www/example.com/log/error.log;
 
         location / {
-            index  index.php index.html index.htm;
             try_files $uri $uri/ /index.php?$uri&$args;
         }
 
         location ~ \.php$ {
-            include /etc/nginx/fcgi.conf;
-            fastcgi_pass    127.0.0.1:10005;
+            include /etc/nginx/fastcgi_params;
+            try_files $uri =404;
+            fastcgi_pass    127.0.0.1:9000;
             fastcgi_index   index.php;
-            fastcgi_param SCRIPT_FILENAME /var/www/exemple.com/public/app/webroot$fastcgi_script_name;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         }
     }
 
