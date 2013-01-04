@@ -256,7 +256,7 @@ rendered from the controller.
         $this->set('title_for_layout', 'This is the page title');
 
 
-.. php:method:: render(string $action, string $layout, string $file)
+.. php:method:: render(string $view, string $layout)
 
     The ``render()`` method is automatically called at the end of each
     requested controller action. This method performs all the view
@@ -282,7 +282,7 @@ rendered from the controller.
     use it to specify an alternate view file by specifying an action
     name in the controller using ``$action``.
 
-    If ``$action`` starts with '/' it is assumed to be a view or
+    If ``$view`` starts with '/' it is assumed to be a view or
     element file relative to the ``/app/View`` folder. This allows
     direct rendering of elements, very useful in ajax calls.
     ::
@@ -290,9 +290,8 @@ rendered from the controller.
         // Render the element in /View/Elements/ajaxreturn.ctp
         $this->render('/Elements/ajaxreturn');
 
-    You can also specify an alternate view or element file using the
-    third parameter, ``$file``. The ``$layout`` parameter allows you to specify
-    the layout the view is rendered in.
+    The ``$layout`` parameter allows you to specify the layout the
+    view is rendered in.
 
 Rendering a specific view
 ~~~~~~~~~~~~~~~~~~~~~~~~~
