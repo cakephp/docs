@@ -26,7 +26,7 @@ your model::
 
 You can also attach the behavior on the fly::
 
-    $this->Post->Behaviors->attach('Containable');
+    $this->Post->Behaviors->load('Containable');
 
 .. _using-containable:
 
@@ -40,7 +40,7 @@ amount of data fetched in a normal find() call is rather
 extensive::
 
     debug($this->Post->find('all'));
-    
+
     [0] => Array
             (
                 [Post] => Array
@@ -172,9 +172,9 @@ and nothing else — you could do something like the following::
 
     $this->Post->contain('Comment.author');
     $this->Post->find('all');
-    
+
     // or..
-    
+
     $this->Post->find('all', array('contain' => 'Comment.author'));
 
 Here, we've told Containable to give us our post information, and
@@ -215,9 +215,9 @@ condition::
 
     $this->Post->contain('Comment.author = "Daniel"');
     $this->Post->find('all');
-    
+
     //or...
-    
+
     $this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
 
 This gives us a result that gives us posts with comments authored
@@ -330,7 +330,7 @@ or queries that use aggregate functions and/or GROUP BY statements.
 If you get invalid SQL errors due to mixing of aggregate and
 non-aggregate fields, try disabling the ``autoFields`` setting.::
 
-    $this->Post->Behaviors->attach('Containable', array('autoFields' => false));
+    $this->Post->Behaviors->load('Containable', array('autoFields' => false));
 
 Using Containable with pagination
 =================================

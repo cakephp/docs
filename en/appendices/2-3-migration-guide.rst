@@ -144,6 +144,8 @@ CakeResponse
 ------------
 
 - :php:meth:`CakeResponse::file()` was added.
+- The content types `application/javascript`, `application/xml`,
+  `application/rss+xml` now also send the application charset.
 
 CakeEmail
 ---------
@@ -287,3 +289,10 @@ Validation
 ----------
 
 - :php:meth:`Validation::fileSize()` was added.
+
+ObjectCollection
+----------------
+
+- :php:meth:`ObjectCollection::attached()` was deprecated in favor of the new
+  method :php:meth:`ObjectCollection::loaded()`. This unifies the access to the
+  ObjectCollection as load()/unload() already replaced attach()/detach().
