@@ -2499,7 +2499,7 @@ Possible keys for hasMany association arrays include:
 -  **finderQuery**: A complete SQL query CakePHP can use to fetch
    associated model records. This should be used in situations that
    require very custom results.
-    If a query you're building requires a reference to the associated
+   If a query you're building requires a reference to the associated
    model ID, use the special ``{$__cakeID__$}`` marker in the query. For
    example, if your Apple model hasMany Orange, the query should look
    something like this:

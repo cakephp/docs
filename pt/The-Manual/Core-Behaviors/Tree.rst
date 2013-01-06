@@ -521,7 +521,9 @@ Agora, a ordem de Amigos sera Gwendolyn, Gerald.
 removeFromTree
 --------------
 
-``removeFromTree($id=null, $delete=false)``
+::
+
+    removeFromTree($id=null, $delete=false)
 
 Use este método se quiser apagar ou mover um nó, mas manter a sua
 sub-árvore, que será reparentado um nível superior. Ele oferece mais

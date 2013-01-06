@@ -21,7 +21,7 @@ brauchbaren Format für den Nutzer zu präsentieren.
 View-Dateien sind normalerweise in /app/views/ gespeichert, in einem
 nach dem zuständigen Controller benannten Ordner. Weiterhin
 repräsentiert der Dateiname die dazugehörige Aktion des Controllers.
- Beispiel: Die View-Datei für die Aktion "view()" des
+Beispiel: Die View-Datei für die Aktion "view()" des
 "Products"-Controllers befindet sich normalerweise in
 /app/views/products/view.ctp.
 

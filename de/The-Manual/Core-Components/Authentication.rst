@@ -46,8 +46,6 @@ unten zeigen wir dir, wie du die standardmäßig verwendeten Feldernamen
 Erstellen wir zunächst unser Benutzertablle mit folgender
 SQL-Anweisung::
 
-::
-
     CREATE TABLE users (
         id integer auto_increment,
         username char(50),

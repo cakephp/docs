@@ -7,12 +7,11 @@ requisição original de exemplo, vamos imaginar que nosso amigo Ricardo
 tenha clicado no link "Comprar um bolo personalizado agora!" da sua
 aplicação CakePHP.
 
-.. figure:: /img/typical-cake-request.gif
+.. figure:: /_static/img/typical-cake-request.png
    :align: center
    :alt: Requisição típica no CakePHP
 
-   Requisição típica no CakePHP
-Figura 2. Requisição típica no CakePHP.
+   Figura 2. Requisição típica no CakePHP.
 
 Preto = elemento necessário, Cinza = elemento opcional, Azul = callback
 

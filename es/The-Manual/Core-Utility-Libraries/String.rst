@@ -20,7 +20,7 @@ El uuid es una cadena de 128 bits con el formato
 tokenize
 ========
 
-``string tokenize ($data, $separator = ',', $leftBound = '(', $rightBound = ')') ``
+``string tokenize ($data, $separator = ',', $leftBound = '(', $rightBound = ')')``
 
 Divide una cadena en subcadenas (tokens), ignorando cualquier instancia
 de ``$separator`` que aparece entre ``$leftBound`` y ``$rightBound``.

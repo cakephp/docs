@@ -244,7 +244,7 @@ tableau suivant:
 style
 -----
 
-``style(array $data, boolean $inline = true)  ``
+``style(array $data, boolean $inline = true)``
 
 Construit des définitions de styles CSS, basées sur les clés et valeurs
 du tableau passé à la méthode. Particulièrement pratique si votre
@@ -443,7 +443,7 @@ spécifié, seul le <tag> ouvrant sera retourné.
 div
 ---
 
-``div(string $class, string $text, array $htmlAttributes, boolean $escape = false) ``
+``div(string $class, string $text, array $htmlAttributes, boolean $escape = false)``
 
 Utilisé pour créer des sections de balisage entourées de div. Le premier
 paramètre spécifie une classe CSS et le second est utilisé pour fournir

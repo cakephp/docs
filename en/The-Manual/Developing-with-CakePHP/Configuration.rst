@@ -251,13 +251,14 @@ controllers, but this variable enables the detection of those settings.
 Session.save
 
 Tells CakePHP which session storage mechanism to use.
- php = Use the default PHP session storage.
- cache = Use the caching engine configured by Cache::config(). Very
-useful in conjunction with Memcache (in setups with multiple application
-servers) to store both cached data and sessions.
- cake = Store session data in /app/tmp
- database = store session data in a database table. Make sure to set up
-the table using the SQL file located at /app/config/sql/sessions.sql.
+
+- php = Use the default PHP session storage.
+- cache = Use the caching engine configured by Cache::config(). Very
+  useful in conjunction with Memcache (in setups with multiple application
+  servers) to store both cached data and sessions.
+- cake = Store session data in /app/tmp
+- database = store session data in a database table. Make sure to set up
+  the table using the SQL file located at /app/config/sql/sessions.sql.
 
 Session.table
 
@@ -289,13 +290,15 @@ Security.level
 
 The level of CakePHP security. The session timeout time defined in
 'Session.timeout' is multiplied according to the settings here.
- Valid values:
- 'high' = x 10
- 'medium' = x 100
- 'low' = x 300
- 'high' and 'medium' also enable
-`session.referer\_check <http://www.php.net/manual/en/session.configuration.php#ini.session.referer-check>`_
- CakePHP session IDs are also regenerated between requests if
+Valid values:
+
+- 'high' = x 10
+- 'medium' = x 100
+- 'low' = x 300
+- 'high' and 'medium' also enable
+  `session.referer\_check <http://www.php.net/manual/en/session.configuration.php#ini.session.referer-check>`_
+ 
+CakePHP session IDs are also regenerated between requests if
 'Security.level' is set to 'high'.
 
 Security.salt

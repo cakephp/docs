@@ -12,12 +12,11 @@ La Vue affiche une présentation des données du modèle
 
 Le Contrôleur intercepte et route les requêtes faites par le client
 
-.. figure:: /img/basic_mvc.png
+.. figure:: /_static/img/basic_mvc.png
    :align: center
    :alt: Figure 1
 
-   Figure 1
-Figure: 1: Une requête MVC basique
+   Figure: 1: Une requête MVC basique
 
 La figure 1 montre un exemple de requête MVC sommaire avec CakePHP. Pour
 illustrer cela, supposons qu'un client nommé "Ricardo" a simplement

@@ -8,12 +8,11 @@ imaginons que notre ami Ricardo vient de cliquer sur le lien "Achetez un
 Cake personnalisé maintenant !" sur la page d'accueil d'une application
 CakePHP.
 
-.. figure:: /img/typical-cake-request.gif
+.. figure:: /_static/img/typical-cake-request.png
    :align: center
    :alt: requête simple cakePHP
 
-   requête simple cakePHP
-Figure: 2. Requête type CakePHP
+   Figure: 2. Requête type CakePHP
 
 Noir = élément obligatoire, Gris = élément optionnel, Bleu = rappel
 (*callback*)

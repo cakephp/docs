@@ -1,8 +1,6 @@
 Controllers
 ###########
 
- 
-
 Introduction
 ============
 
@@ -208,7 +206,7 @@ a need for a corresponding Model file.
 It's bad practice to just add all the models your controller uses to the
 ``$uses`` array. Check
 `here <http://book.cakephp.org/view/79/Relationship-Types>`_ and
-`here <http://book.cakephp.org/view/845/loadModel>`_ to see how to
+`there <http://book.cakephp.org/view/845/loadModel>`_ to see how to
 properly access associated and unassociated models respectively.
 
 Page-related Attributes: $layout and $pageTitle

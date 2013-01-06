@@ -194,7 +194,7 @@ data. It would be then a duplicate effort to have to define the table
 definition and/or records on your fixtures. Fortunately, there's a way
 for you to define that table definition and/or records for a particular
 fixture come from an existing model or an existing table.
- Let's start with an example. Assuming you have a model named Article
+Let's start with an example. Assuming you have a model named Article
 available in your application (that maps to a table named articles),
 change the example fixture given in the previous section
 (**app/tests/fixtures/article\_fixture.php**) to:
@@ -373,7 +373,7 @@ suite database connection.
 CakePHP Models will only use the test DB config if they rely on fixtures
 in your testcase!
 
- Since we also want to reuse all our existing model code we will create
+Since we also want to reuse all our existing model code we will create
 a test model that will extend from Article, set $useDbConfig and $name
 appropiately. Let's now create a file named **article.test.php** in your
 **app/tests/cases/models** directory, with the following contents:
@@ -427,7 +427,7 @@ now looks like this:
         }
         ?>    
 
- You can see we have added a method called **testPublished()**. We start
+You can see we have added a method called **testPublished()**. We start
 by creating an instance of our fixture based **Article** model, and then
 run our **published()** method. In **$expected** we set what we expect
 should be the proper result (that we know since we have defined which
@@ -568,8 +568,7 @@ Pitfalls
 If you use testAction to test a method in a controller that does a
 redirect, your test will terminate immediately, not yielding any
 results.
- See
-`https://trac.cakephp.org/ticket/4154 <https://trac.cakephp.org/ticket/4154>`_
+See `https://trac.cakephp.org/ticket/4154 <https://trac.cakephp.org/ticket/4154>`_
 for a possible fix.
 
 For an in-depth explanation of controller testing please see this blog
@@ -882,7 +881,7 @@ Customizing the test reporter
 The standard test reporter is **very** minimalistic. If you want more
 shiny output to impress someone, fear not, it is actually very easy to
 extend.
- The only danger is that you have to fiddle with core Cake code,
+The only danger is that you have to fiddle with core Cake code,
 specifically **/cake/tests/libs/cake\_reporter.php**.
 
 To change the test output you can override the following methods:

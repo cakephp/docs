@@ -538,7 +538,9 @@ Maintenant l'ordre de Friends sera Gwendolyn, Gerald.
 removeFromTree
 --------------
 
-``removeFromTree($id=null, $delete=false)``
+::
+
+    removeFromTree($id=null, $delete=false)
 
 Utiliser cette méthode supprimera ou déplacera un nœud, mais conservera
 son sous-arbre, lequel sera ré-apparenté un niveau plus haut. Cela offre

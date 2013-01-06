@@ -490,7 +490,9 @@ Gwendolyn, Gerald となりました。
 removeFromTree
 --------------
 
-``removeFromTree($id=null, $delete=false)``
+::
+
+  removeFromTree($id=null, $delete=false)
 
 Using this method wil either delete or move a node but retain its
 sub-tree, which will be reparented one level higher. It offers more

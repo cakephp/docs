@@ -240,7 +240,7 @@ following table:
 style
 -----
 
-``style(array $data, boolean $inline = true)  ``
+``style(array $data, boolean $inline = true)``
 
 Builds CSS style definitions based on the keys and values of the array
 passed to the method. Especially handy if your CSS file is dynamic.
@@ -408,7 +408,7 @@ only the opening <tag> is returned.
 div
 ---
 
-``div(string $class, string $text, array $htmlAttributes, boolean $escape = false) ``
+``div(string $class, string $text, array $htmlAttributes, boolean $escape = false)``
 
 Used for creating div-wrapped sections of markup. The first parameter
 specifies a CSS class, and the second is used to supply the text to be

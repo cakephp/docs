@@ -19,13 +19,13 @@ Das in CakePHP 1.2 enthaltene Test-Framework ist aufgebaut auf dem
 SimpleTest-Test-Framework. SimpleTest ist in der
 Standard-CakePHP-Installation nicht enthalten, somit müssen wir das nun
 runterladen.
- Hier findest du SimpleTest:
+Hier findest du SimpleTest:
 `http://simpletest.sourceforge.net/ <http://simpletest.sourceforge.net/>`_.
- Besorg dir die letzte Version und entpack die Dateien entweder in
+Besorg dir die letzte Version und entpack die Dateien entweder in
 deinen /cake/vendors/ oder in den /app/vendors/ Ordner, je nach euren
 Anforderungen. Du solltest also jetzt einen ../vendors/simpletest/
 Ordner samt der dazugehörigen SimpleTest-Dateien haben!?
- Vergiss nicht, dass du in deiner app/config/core.php das "DEBUG-level"
+Vergiss nicht, dass du in deiner app/config/core.php das "DEBUG-level"
 mindestens auf 1 setzt, bevor du mit irgendwelchen Test\`s anfängst!
 
 Starten der integrierten Test-Funktionen
@@ -36,12 +36,12 @@ die Core-CakePHP-Funktionen, daher. Auf diese Test\`s kann zugegriffen
 werden indem man mit dem Browser
 http://deine.cake.adresse/dein\_cake\_ordner/test.php (je nachdem wie
 euer spezifisches Setup aussieht..), ansteuert.
- Probier eine von den Core-Test-Gruppen aus (indem du die Links
+Probier eine von den Core-Test-Gruppen aus (indem du die Links
 anklickst... ;-D).
- Das Ausführen der Test-Gruppen könnte möglicherweise ein Weilchen
+Das Ausführen der Test-Gruppen könnte möglicherweise ein Weilchen
 dauern, aber schlussendlich sollte etwas wie: "2/2 test casese complete:
 49 passes, 0 fails and 0 exceptions." angezeigt werden.
- Gratuliere, du bist jetzt bereit um Schreib-Test\`s zu machen!
+Gratuliere, du bist jetzt bereit um Schreib-Test\`s zu machen!
 
 Test Überblick - Einzel-Test vs. Web-Test
 =========================================
@@ -96,9 +96,9 @@ Beim Erstellen von **Vorrichtungen** solltest du hauptsächlich 2 Dinge
 definieren:
 Wie wurde die Tabelle erstellt (welche Felder sind ein Teil der Tabelle)
 und welche Datensätze werden zu Beginn die Test-Tabelle belegen.
- Dann lass uns mal die erste Vorrichtung (fixture) erstellen, womit wir
+Dann lass uns mal die erste Vorrichtung (fixture) erstellen, womit wir
 dann unsere Modell-Artikel testen.
- Erstelle eine Datei mit dem Namen **article\_test\_fixture.php** in
+Erstelle eine Datei mit dem Namen **article\_test\_fixture.php** in
 deinem **../app/tests/fixtures/** Ordner, mit folgendem Inhalt:
 
 ::
@@ -125,11 +125,11 @@ deinem **../app/tests/fixtures/** Ordner, mit folgendem Inhalt:
 
 Wir brauchen **$fields** um zu spezifizieren welche Felder Bestandteil
 der Tabelle sind und wie diese Felder definiert sind.
- Das Format das gebraucht wird, um diese Felder zu definieren, ist dass
+Das Format das gebraucht wird, um diese Felder zu definieren, ist dass
 gleiche das in der Funktion **generateColumnSchema()**, aus der
 Cake-Datenbank-Engineklasse, definiert wird (zum Beispiel die Datei
 dbo\_mysql.php).
- Lass uns mal schauen welche Attribute ein Feld haben kann und was diese
+Lass uns mal schauen welche Attribute ein Feld haben kann und was diese
 aussagen:
 
 type
@@ -164,23 +164,23 @@ Importieren von Datensätzen und Tabellen-Daten
 
 Deine Anwendung mag möglicherweise funktionierende Entwürfe beinhalten,
 mit echten
- untereinander verknüpften Daten, und du könntest dich dazu entscheiden
+untereinander verknüpften Daten, und du könntest dich dazu entscheiden
 deine Entwürfe
- mit diesen Daten zu testen... Das wäre wohl dann eine
+mit diesen Daten zu testen... Das wäre wohl dann eine
 Doppelanstrengung, wenn man die
- Tabellendefinition festlegen und/oder die Datensätze mitsamt deinen
+Tabellendefinition festlegen und/oder die Datensätze mitsamt deinen
 Inhalten definieren sollte.
- Glücklicherweise, gibt es da\`die Möglichkeit zum festlegen der
+Glücklicherweise, gibt es da\`die Möglichkeit zum festlegen der
 Tabellendefinition
- und/oder den Datensätzen für bestimmte Inhalte, die kommen von fertigen
+und/oder den Datensätzen für bestimmte Inhalte, die kommen von fertigen
 Modellen oder
- einer bereits vorhandenen Tabelle.
- Dann lass uns mal eine Musteraufgabe anfangen.
- Mal angenommen du hast ein Model mit dem Namen **Article** in deiner
+einer bereits vorhandenen Tabelle.
+Dann lass uns mal eine Musteraufgabe anfangen.
+Mal angenommen du hast ein Model mit dem Namen **Article** in deiner
 Anwendung
- verfügbar (das weist auf die Tabelle **articles** hin!), ändere die
+verfügbar (das weist auf die Tabelle **articles** hin!), ändere die
 Muster-Inhalte
- aus der vorherigen Sektion
+aus der vorherigen Sektion
 (**app/tests/fixtures/article\_test\_fixture.php**)
 wie folgt:
 
@@ -194,14 +194,12 @@ wie folgt:
        ?> 
      
 
- Die og Anweisungen weisen die Testfolge an, deine Tabellendefinition
-aus der Tabelle,
- welche im Model **Article** verlinkt ist, zu importieren.
- Du kannst dazu jegliches Muster verwenden, dass du in deiner Anwendung
+Die og Anweisungen weisen die Testfolge an, deine Tabellendefinition
+aus der Tabelle, welche im Model **Article** verlinkt ist, zu importieren.
+Du kannst dazu jegliches Muster verwenden, dass du in deiner Anwendung
 verfügbar ist.
- Oben die Anweisung importiert keinerlei Datensätze, dies kannst du dann
-tun wenn
- du die Anweisung umänderst zu:
+Oben die Anweisung importiert keinerlei Datensätze, dies kannst du dann
+tun wenn du die Anweisung umänderst zu:
 
 ::
 
@@ -212,13 +210,12 @@ tun wenn
     }
     ?> 
 
- Wenn du andererseits eine Tabelle erstellt hast, aber keine
+Wenn du andererseits eine Tabelle erstellt hast, aber keine
 Muster-Inhalte dazu
- vorhanden sind, dann kannst du anweisen dass ein **import** veranlasst
-wird, indem
- anstatt der Model-Daten dessen Tabellen-Informationen ausgelesen
+vorhanden sind, dann kannst du anweisen dass ein **import** veranlasst
+wird, indem anstatt der Model-Daten dessen Tabellen-Informationen ausgelesen
 werden.
- Zum Bsp:
+Zum Bsp:
 
 ::
 
@@ -229,14 +226,11 @@ werden.
        } 
      ?> 
 
- Der obere Code-Fetzen wird einen import der Tabellendefinition von der
-Tabelle
- **articles** veranlassen, indem die CakePHP-Datenbankverbindung
-**'default'**
- genutzt wird.
- Wenn du die aktuell verwendete Datenbank-Verbindung ändern möchtest,
-musst du
- folgende Zeilen ändern:
+Der obere Code-Fetzen wird einen import der Tabellendefinition von der
+Tabelle **articles** veranlassen, indem die CakePHP-Datenbankverbindung
+**'default'** genutzt wird.
+Wenn du die aktuell verwendete Datenbank-Verbindung ändern möchtest,
+musst du folgende Zeilen ändern:
 
 ::
 
@@ -247,14 +241,11 @@ musst du
        } 
        ?> 
 
- Seit es deine CakePHP Datenbankverbindung verwendet hat wird es, wenn
-da irgendwelche
- Tabellen-Vorzeichen erkennbar sind, automatisch gebraucht, da
-attraktive Tabellen-
- Informationen automatisch verwendet werden.
- Die zwei Code-Schnipsel da oben importieren keine Datensätze aus der
-Tabelle. Um also
- die Inhalte zum import der Datensätze zu zwingen, ädere folgende Dinge:
+Seit es deine CakePHP Datenbankverbindung verwendet hat wird es, wenn
+da irgendwelche Tabellen-Vorzeichen erkennbar sind, automatisch gebraucht, da
+attraktive Tabellen-Informationen automatisch verwendet werden.
+Die zwei Code-Schnipsel da oben importieren keine Datensätze aus der
+Tabelle. Um also die Inhalte zum import der Datensätze zu zwingen, ädere folgende Dinge:
 
 ::
 
@@ -265,11 +256,10 @@ Tabelle. Um also
        } 
      ?> 
 
- Du kannst natürlich auch deine Tabellendefinition aus einem
+Du kannst natürlich auch deine Tabellendefinition aus einem
 exitierenden Muster oder
- einer Tabelle importieren, aber halte deine Datensätze direkt
-definiert, genau nach den
-Vorgaben aus der vorhergehenden Sektion. zum Beispiel:
+einer Tabelle importieren, aber halte deine Datensätze direkt
+definiert, genau nach den Vorgaben aus der vorhergehenden Sektion. zum Beispiel:
 
 ::
 
@@ -367,10 +357,10 @@ sollte in etwa wie folgt aussehen:
        } 
      ?> 
 
- Wir möchten jetzt einen Versuch aufbauen welcher Beispielmodule
+Wir möchten jetzt einen Versuch aufbauen welcher Beispielmodule
 verwenden wird, allerdings durch Vorrichtungen für Versuche, lässt sich
 einiges an Funktionalität im Versuch testen.
- Die CakePHP Versuchs-Umgebung läd nur einen sehr kleinen Teil der
+Die CakePHP Versuchs-Umgebung läd nur einen sehr kleinen Teil der
 Anwendungen (um Versuche isoliert zu lassen), somit müssen wir zum
 starten das vorhergehende Module verwenden (in diesem Fall ist das
 Anwendungsmodul ja schon fertig definiert), dann informiere die
@@ -381,7 +371,7 @@ CakePHP Test-Umgebung ermöglicht eine Datenbank-Konfiguration namen\`s
 Vorrichtungen angewiesen sind. Der Datensatz $useDbConfig zu dieser
 Konfigurationsdatei lässt CakePHP wissen das dieses Modul die
 **test\_suite** DB-Verbindung benutzt.
- Seit wir darüber nachdenken all unsere Anwendungen nochmal
+Seit wir darüber nachdenken all unsere Anwendungen nochmal
 wiederzuverwerten umd das ganze dazu benutzen das wir alle want to reuse
 all our existing modules we will create a test model that will extend
 from Article, set $useDbConfig and $name appropiately. Let's now create
@@ -438,7 +428,7 @@ now looks like this:
         }
         ?>    
 
- You can see we have added a method called **testPublished()**. We start
+You can see we have added a method called **testPublished()**. We start
 by creating an instance of our fixture based **Article** model, and then
 run our **published()** method. In **$expected** we set what we expect
 should be the proper result (that we know since we have defined which
@@ -579,8 +569,7 @@ Pitfalls
 If you use testAction to test a method in a controller that does a
 redirect, your test will terminate immediately, not yielding any
 results.
- See
-`https://trac.cakephp.org/ticket/4154 <https://trac.cakephp.org/ticket/4154>`_
+See `https://trac.cakephp.org/ticket/4154 <https://trac.cakephp.org/ticket/4154>`_
 for a possible fix.
 
 For an in-depth explanation of controller testing please see this blog
@@ -894,7 +883,7 @@ Customizing the test reporter
 The standard test reporter is **very** minimalistic. If you want more
 shiny output to impress someone, fear not, it is actually very easy to
 extend.
- The only danger is that you have to fiddle with core Cake code,
+The only danger is that you have to fiddle with core Cake code,
 specifically **/cake/tests/libs/cake\_reporter.php**.
 
 To change the test output you can override the following methods:

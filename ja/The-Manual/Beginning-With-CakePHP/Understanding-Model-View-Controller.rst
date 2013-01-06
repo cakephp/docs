@@ -10,12 +10,11 @@ CakePHP
 #. ビューは、モデルデータの表示方法を扱います。
 #. コントローラは、ユーザによるリクエストを受け取って振り分けます。
 
-.. figure:: /img/basic_mvc.png
+.. figure:: /_static/img/basic_mvc.png
    :align: center
    :alt: Figure 1
 
-   Figure 1
-図1: 基本的な MVC リクエスト
+   図1: 基本的な MVC リクエスト
 
 図1は、CakePHP の基本的な MVC
 のリクエスト例です。説明のために、例えば、リカルドさんが、広告から入ってきたページの“特注ケーキを今すぐ購入！”というリンクをクリックしたとしましょう。

@@ -163,7 +163,7 @@ existence and false on non-existence.
 delete
 ------
 
-``delete($name)del($name) ``
+``delete($name)del($name)``
 
 Clear the session data at $name. del($name) is deprecated from 1.3.
 

@@ -19,7 +19,7 @@ string in the format of 485fc381-e790-47a3-9794-1337c0a8fe68.
 tokenize
 ========
 
-``string tokenize ($data, $separator = ',', $leftBound = '(', $rightBound = ')') ``
+``string tokenize ($data, $separator = ',', $leftBound = '(', $rightBound = ')')``
 
 Tokenizes a string using ``$separator``, ignoring any instance of
 ``$separator`` that appears between ``$leftBound`` and ``$rightBound``.

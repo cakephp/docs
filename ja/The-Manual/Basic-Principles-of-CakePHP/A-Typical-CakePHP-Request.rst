@@ -3,12 +3,11 @@ CakePHPの典型的なリクエスト
 
 CakePHPの基本的な構成要素について既に考えました。ここからは、基本的なリクエストがあった場合、個々のオブジェクトがそれをどう処理して完結させるのか、ということを調べてみましょう。前からの例として、我らのリカルドさんが、CakePHPアプリケーションの「特注ケーキを今すぐ購入！」というリンクをクリックしたとしましょう。
 
-.. figure:: /img/typical-cake-request.gif
+.. figure:: /_static/img/typical-cake-request.png
    :align: center
    :alt: Flow diagram showing a typical CakePHP request
 
-   Flow diagram showing a typical CakePHP request
-図２ よくあるCakeリクエスト
+   図２ よくあるCakeリクエスト
 
 黒 = 必要な要素、灰色 = 任意の要素、青 = コールバック
 
