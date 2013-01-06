@@ -1,5 +1,5 @@
 CakePHPって何？使う理由は？
-#########################
+###########################
 
 `CakePHP <http://www.cakephp.org/>`_\ は、\ `フリー <http://ja.wikipedia.org/wiki/MIT_License>`_\ 、また\ `オープンソース <http://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3%E3%82%BD%E3%83%BC%E3%82%B9>`_\ で作成されている、\ `PHP <http://www.php.net/>`_\ の\ `高速開発 <http://en.wikipedia.org/wiki/Rapid_application_development>`_
 `フレームワーク <http://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF>`_\ です。それは、プログラマーがwebアプリケーションを作る際の基本的な骨組みとなります。私たちの主要な目標は、柔軟性を失うことなく、構造化されたすばやい仕方での開発を可能にすることです。

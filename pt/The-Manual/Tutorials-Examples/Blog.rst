@@ -97,12 +97,12 @@ Execute este script SQL em seu banco de dados:
 
 Não é obrigatório utilizar estas mesmas opções e nomes das colunas, mas
 se você utilizar as convenções do Cake para banco de dadso e classes
-(ambas descritas em `"Convenções do CakePHP" </pt/view/22>`_), você irá
+(ambas descritas em "Convenções do CakePHP"), você irá
 tirar maior proveito das muitas funcionalidades do Cake. O Cake é
 flexivel suficiente para se adaptar a qualquer estrutura de banco de
 dados, entretanto, adotando as convenções você írá poupar muito tempo.
 
-Veja `"Convenções do CakePHP" </pt/view/22/>`_ para maiores informações.
+Veja "Convenções do CakePHP" para maiores informações.
 Por agora, basta você saber que dando o nome de 'post' para nossa tabela
 ela irá ser associada ao modelo Post automaticamente, e tendo campos
 chamados de 'modified' e 'created' serão automaticamante gerenciados

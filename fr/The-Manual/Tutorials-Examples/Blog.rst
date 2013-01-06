@@ -99,13 +99,13 @@ données :
 Les choix des noms pour la table et les colonnes ne sont pas
 arbitraires. Si vous respectez les conventions de nommage Cake pour la
 base de données et les classes (toutes deux expliquées ici :
-`Conventions CakePHP </fr/view/22>`_), vous tirerez avantage d'un grand
+`Conventions CakePHP`), vous tirerez avantage d'un grand
 nombre de fonctionnalités automatiques et vous éviterez des étapes de
 configuration. Cake est suffisamment souple pour implémenter les pires
 schémas de base de données, mais respecter les conventions vous fera
 gagner du temps.
 
-Consultez le chapître `Conventions CakePHP </fr/view/22/>`_ pour plus
+Consultez le chapître `Conventions CakePHP` pour plus
 d'information, mais il suffit de dire que nommer notre table 'posts'
 permet de la relier automatiquement à notre modèle Post, et que les
 champs nommés 'modified' et 'created' seront automatiquement gérés par

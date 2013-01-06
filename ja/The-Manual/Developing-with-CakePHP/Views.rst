@@ -244,7 +244,6 @@ MVC
 モデルにアクセスできます。最新の5つの Post
 をある順番で取得するために次のようにします::
 
-::
 
     <h2>最新の投稿</h2>
     <?php $posts = $this->requestAction('posts/index/sort:created/order:asc/limit:5'); ?>

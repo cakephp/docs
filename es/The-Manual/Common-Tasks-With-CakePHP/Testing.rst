@@ -110,9 +110,11 @@ Creando fixtures
 ----------------
 
 Cuando se crea un fixture se deben definir 2 cosas:
- 1) cómo se crea la tabla (que campos serán parte de la tabla)
- 2) cómo se guardarán los registros en la tabla de prueba. Luego
-podremos crear nuestro primer fixture, que utilizaremos para testear
+
+1. cómo se crea la tabla (que campos serán parte de la tabla)
+2. cómo se guardarán los registros en la tabla de prueba.
+
+Luego podremos crear nuestro primer fixture, que utilizaremos para testear
 nuestro modelo Article. Creamos un archivo llamado
 **article\_fixture.php** en la carpeta **app/tests/fixtures**, con el
 siguiente código:
@@ -362,7 +364,7 @@ suite database connection.
 CakePHP Models will only use the test DB config if they rely on fixtures
 in your testcase!
 
- Since we also want to reuse all our existing model code we will create
+Since we also want to reuse all our existing model code we will create
 a test model that will extend from Article, set $useDbConfig and $name
 appropiately. Let's now create a file named **article.test.php** in your
 **app/tests/cases/models** directory, with the following contents:
@@ -416,7 +418,7 @@ now looks like this:
         }
         ?>    
 
- You can see we have added a method called **testPublished()**. We start
+You can see we have added a method called **testPublished()**. We start
 by creating an instance of our fixture based **Article** model, and then
 run our **published()** method. In **$expected** we set what we expect
 should be the proper result (that we know since we have defined which
@@ -558,7 +560,7 @@ Pitfalls
 If you use testAction to test a method in a controller that does a
 redirect, your test will terminate immediately, not yielding any
 results.
- See
+See
 `https://trac.cakephp.org/ticket/4154 <https://trac.cakephp.org/ticket/4154>`_
 for a possible fix.
 
@@ -879,7 +881,7 @@ Customizing the test reporter
 The standard test reporter is **very** minimalistic. If you want more
 shiny output to impress someone, fear not, it is actually very easy to
 extend.
- The only danger is that you have to fiddle with core Cake code,
+The only danger is that you have to fiddle with core Cake code,
 specifically **/cake/tests/libs/cake\_reporter.php**.
 
 To change the test output you can override the following methods:

@@ -560,9 +560,6 @@ dont il est fait usage dans quelques types de find, dans des
 comportements (*behaviors*) et, bien sûr, dans vos propres méthodes de
 modèle.
 
-Plus d'informations sur les *callbacks* des modèles sont disponibles
-`ici </fr/view/76/M%C3%A9thodes-de-Callbacks-du-Mod%C3%A8le>`_
-
 find('first')
 ~~~~~~~~~~~~~
 
@@ -1617,9 +1614,6 @@ suivante comme clés :
         'callbacks' => true //o autres valeurs possibles : false, 'before', 'after'
     )
 
-Plus d'informations sur les callbacks de modèle est disponible
-`ici <http://book.cakephp.org/fr/view/76/M%C3%A9thodes-de-Callbacks-du-Mod%C3%A8le>`_
-
 Une fois qu’une sauvegarde a été effectuée, l’ID de l’objet peut-être
 trouvé dans l’attribut ``$id`` de l’objet modèle – ceci est
 particulièrement pratique lorsque l’on crée de nouveaux objets.
@@ -2604,14 +2598,14 @@ Les clés possibles pour les tableaux d'association hasMany sont :
    pour retrouver les enregistrements associés au modèle. Ceci ne
    devrait être utilisé que dans les situations qui nécessitent des
    résultats très personnalisés.
-    Si une de vos requêtes a besoin d'une référence à l'ID du modèle
+   Si une de vos requêtes a besoin d'une référence à l'ID du modèle
    associé, utilisez le marqueur spécial ``{$__cakeID__$}`` dans la
    requête. Par exemple, si votre modèle Pomme hasMany Orange, la
    requête devrait ressembler à ça :
 
-   ::
+::
 
-       SELECT Orange.* from oranges as Orange WHERE Orange.pomme_id = {$__cakeID__$};
+    SELECT Orange.* from oranges as Orange WHERE Orange.pomme_id = {$__cakeID__$};
 
 Une fois que cette association a été définie, les opérations de
 recherche sur le modèle Utilisateur récupèreront également les

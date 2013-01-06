@@ -204,7 +204,7 @@ structure de la table et/ou les enregistrements dans vos fixtures.
 Heureusement, il y a une manière pour vous de définir cette structure de
 table et/ou les enregistrements pour une fixture particulière provenant
 d'un modèle existant ou d'une table existante.
- Commençons par un exemple. Considérant que vous avez un modèle nommé
+Commençons par un exemple. Considérant que vous avez un modèle nommé
 Article disponible dans votre application (qui correspond à la table
 nommée articles), changez la fixture donnée en exemple dans la section
 précédente (**app/tests/fixtures/article\_fixture.php**) de cette façon
@@ -343,11 +343,11 @@ les méthodes "callbacks" suivants sont disponibles :
 
 **startTest($methode)**
  Appelée juste avant le démarrage de la méthode "$methode" du *test
-case* en cours.
+ case* en cours.
 
 **endTest($methode)**
  Appelée juste après la fin de la méthode "$methode" du *test case* en
-cours.
+ cours.
 
 Tester les modèles
 ==================
@@ -392,7 +392,7 @@ configuration indiquera à CakePHP que ce modèle utilise la connexion à
 la base de données de la suite de test.
 
 Les modèles CakePHP utiliseront seulement la configuration de BDD
-test\_suite s'ils sont reliés à des *fixtures* dans votre cas de test !
+test\_suite s'ils sont reliés à des *fixtures* dans votre cas de test!
 
 Puisque nous voulons également réutiliser tout le code existant de notre
 modèle, nous allons créer un test de modèle qui étendra Article et
@@ -593,7 +593,7 @@ Pièges
 Si vous utilisez testAction pour tester une méthode de l'un de vos
 contrôleurs qui fait une redirection, votre test se terminera
 immédiatement, sans retourner aucun résultat.
- Voyez
+Voyez
 `https://trac.cakephp.org/ticket/4154 <https://trac.cakephp.org/ticket/4154>`_
 pour une possible correction.
 
@@ -922,7 +922,7 @@ Customiser le reporter de test
 Le reporter de test standard est **très** minimaliste. Si vous voulez
 une sortie plus reluisante pour épater quelqu'un, ne vous inquiétez pas,
 il est très simple à étendre en fait.
- Le seul danger c'est que vous devez bidouiller le code du cœur de Cake,
+Le seul danger c'est que vous devez bidouiller le code du cœur de Cake,
 plus particulièrement **/cake/tests/libs/cake\_reporter.php**.
 
 Pour changer la sortie test, vous pouvez surcharger les méthodes

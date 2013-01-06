@@ -280,7 +280,7 @@ Saída será:
     <img src="/img/cake_logo.png" alt="CakePHP" /> 
 
 Para criar um link de imagem especificando o link de destino usando a
-opção de ``url`` em ``$htmlAttributes. ``
+opção de ``url`` em ``$htmlAttributes.``
 
 ::
 

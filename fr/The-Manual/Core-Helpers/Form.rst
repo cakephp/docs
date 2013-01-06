@@ -533,10 +533,10 @@ $options[‘div’]
 
 utiliser cette option pour mettre a jour les attributs contenus dans la
 balise div. L'introduction d'une chaine de caractère mettra a jour
- l'attribut class . L'introduction d'un tableau mettra a jour les
+l'attribut class . L'introduction d'un tableau mettra a jour les
 attributs correspondants au champs clé/valeur du tableau .
 Alternativement ,
- vous pouvez mettre cette option a faux pour pour annuler l'affichage du
+vous pouvez mettre cette option a faux pour pour annuler l'affichage du
 div .
 
 Modification du nom de la class :
