@@ -3,7 +3,7 @@ Contents
 .. toctree::
     :maxdepth: 3
 
-    The-Manual
+    index
     The-Manual/Beginning-With-CakePHP
     The-Manual/Basic-Principles-of-CakePHP
     The-Manual/Developing-with-CakePHP
