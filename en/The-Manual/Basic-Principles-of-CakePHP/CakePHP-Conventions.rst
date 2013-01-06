@@ -1,0 +1,188 @@
+CakePHP Conventions
+###################
+
+We are big fans of convention over configuration. While it takes a bit
+of time to learn CakePHP’s conventions, you save time in the long run:
+by following convention, you get free functionality, and you free
+yourself from the maintenance nightmare of tracking config files.
+Convention also makes for a very uniform system development, allowing
+other developers to jump in and help more easily.
+
+CakePHP’s conventions have been distilled out of years of web
+development experience and best practices. While we suggest you use
+these conventions while developing with CakePHP, we should mention that
+many of these tenets are easily overridden – something that is
+especially handy when working with legacy systems.
+
+File and Classname Conventions
+==============================
+
+In general, filenames are underscored while classnames are CamelCased.
+So if you have a class **MyNiftyClass**, then in Cake, the file should
+be named **my\_nifty\_class.php**. Below are examples of how to name the
+file for each of the different types of classes you would typically use
+in a CakePHP application:
+
+-  The Controller class **KissesAndHugsController** would be found in a
+   file named **kisses\_and\_hugs\_controller.php** (notice \_controller
+   in the filename)
+-  The Component class **MyHandyComponent** would be found in a file
+   named **my\_handy.php**
+-  The Model class **OptionValue** would be found in a file named
+   **option\_value.php**
+-  The Behavior class **EspeciallyFunkableBehavior** would be found in a
+   file named **especially\_funkable.php**
+-  The View class **SuperSimpleView** would be found in a file named
+   **super\_simple.php**
+-  The Helper class **BestEverHelper** would be found in a file named
+   **best\_ever.php**
+
+Each file would be located in or under (can be in a subfolder) the
+appropriate folder in your app folder.
+
+Model and Database Conventions
+==============================
+
+Model classnames are singular and CamelCased. Person, BigPerson, and
+ReallyBigPerson are all examples of conventional model names.
+
+Table names corresponding to CakePHP models are plural and underscored.
+The underlying tables for the above mentioned models would be people,
+big\_people, and really\_big\_people, respectively.
+
+You can use the utility library "Inflector" to check the singular/plural
+of words. See the :doc:`/The-Manual/Core-Utility-Libraries/Inflector` for
+more information.
+
+Field names with two or more words are underscored like, first\_name.
+
+Foreign keys in hasMany, belongsTo or hasOne relationships are
+recognized by default as the (singular) name of the related table
+followed by \_id. So if a Baker hasMany Cake, the cakes table will refer
+to the bakers table via a baker\_id foreign key. For a multiple worded
+table like category\_types, the foreign key would be category\_type\_id.
+
+Join tables, used in hasAndBelongsToMany (HABTM) relationships between
+models should be named after the model tables they will join in
+alphabetical order (apples\_zebras rather than zebras\_apples).
+
+All tables with which CakePHP models interact (with the exception of
+join tables), require a singular primary key to uniquely identify each
+row. If you wish to model a table which does not have a single-field
+primary key, such as the rows of your posts\_tags join table, CakePHP's
+convention is that a single-field primary key is added to the table.
+
+CakePHP does not support composite primary keys. If you want to directly
+manipulate your join table data, use direct :doc:`/The-Manual/Developing-with-CakePHP/Models`
+calls or add a primary key to act on it as a normal model. E.g.:
+
+::
+
+    CREATE TABLE posts_tags (
+    id INT(10) NOT NULL AUTO_INCREMENT,
+    post_id INT(10) NOT NULL,
+    tag_id INT(10) NOT NULL,
+    PRIMARY KEY(id)); 
+
+Rather than using an auto-increment key as the primary key, you may also
+use char(36). Cake will then use a unique 36 character uuid
+(String::uuid) whenever you save a new record using the Model::save
+method.
+
+Controller Conventions
+======================
+
+Controller classnames are plural, CamelCased, and end in ``Controller``.
+``PeopleController`` and ``LatestArticlesController`` are both examples
+of conventional controller names.
+
+The first method you write for a controller might be the ``index()``
+method. When a request specifies a controller but not an action, the
+default CakePHP behavior is to execute the ``index()`` method of that
+controller. For example, a request for http://www.example.com/apples/
+maps to a call on the ``index()`` method of the ``ApplesController``,
+whereas http://www.example.com/apples/view/ maps to a call on the
+``view()`` method of the ``ApplesController``.
+
+You can also change the visibility of controller methods in CakePHP by
+prefixing controller method names with underscores. If a controller
+method has been prefixed with an underscore, the method will not be
+accessible directly from the web but is available for internal use. For
+example:
+
+::
+
+    <?php
+    class NewsController extends AppController {
+
+        function latest() {
+            $this->_findNewArticles();
+        }
+        
+        function _findNewArticles() {
+            //Logic to find latest news articles
+        }
+    }
+
+    ?>
+
+While the page http://www.example.com/news/latest/ would be accessible
+to the user as usual, someone trying to get to the page
+http://www.example.com/news/\_findNewArticles/ would get an error,
+because the method is preceded with an underscore.
+
+URL Considerations for Controller Names
+---------------------------------------
+
+As you've just seen, single word controllers map easily to a simple
+lower case URL path. For example, ``ApplesController`` (which would be
+defined in the file name 'apples\_controller.php') is accessed from
+http://example.com/apples.
+
+Multiple word controllers *can* be any 'inflected' form which equals the
+controller name so:
+
+-  /redApples
+-  /RedApples
+-  /Red\_apples
+-  /red\_apples
+
+will all resolve to the index of the RedApples controller. However, the
+convention is that your urls are lowercase and underscored, therefore
+/red\_apples/go\_pick is the correct form to access the
+``RedApplesController::go_pick`` action.
+
+For more information on CakePHP URLs and parameter handling, see :doc:`/The-Manual/Developing-with-CakePHP/Configuration`.
+
+View Conventions
+================
+
+View template files are named after the controller functions they
+display, in an underscored form. The getReady() function of the
+PeopleController class will look for a view template in
+/app/views/people/get\_ready.ctp.
+
+The basic pattern is
+/app/views/controller/underscored\_function\_name.ctp.
+
+By naming the pieces of your application using CakePHP conventions, you
+gain functionality without the hassle and maintenance tethers of
+configuration. Here’s a final example that ties the conventions
+
+-  Database table: "people"
+-  Model class: "Person", found at /app/models/person.php
+-  Controller class: "PeopleController", found at
+   /app/controllers/people\_controller.php
+-  View template, found at /app/views/people/index.ctp
+
+Using these conventions, CakePHP knows that a request to
+http://example.com/people/ maps to a call on the index() function of the
+PeopleController, where the Person model is automatically available (and
+automatically tied to the ‘people’ table in the database), and renders
+to a file. None of these relationships have been configured by any means
+other than by creating classes and files that you’d need to create
+anyway.
+
+Now that you've been introduced to CakePHP's fundamentals, you might try
+a run through the :doc:`/The-Manual/Tutorials-Examples/Blog` to see how
+things fit together.

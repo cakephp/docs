@@ -1,0 +1,49 @@
+インストールの準備
+##################
+
+CakePHP
+は素早く簡単にインストールできます。最小構成で必要なものは、ウェブサーバと
+Cake のコピー、それだけです!このマニュアルでは主に(最も一般的である)
+Apache でのセットアップに主眼を置いていますが、 Cake を LightHTTPD や
+Microsoft IIS
+のような様々なウェブサーバで走らせるよう設定することもできます。
+
+インストールの準備は次のステップからなります。
+
+-  CakePHP のコピーをダウンロードする。
+-  もし必要であればウェブサーバが PHP をハンドルできるよう設定する。
+-  ファイルパーミッションをチェックする。
+
+CakePHPを入手する
+=================
+
+CakePHP
+の最新版を手に入れるには、主に二つの方法があります。ウェブサイトからアーカイブ(zip/tar.gz/tar.bz2)としてダウンロードする、あるいは
+git
+リポジトリからコードをチェックアウトする方法のいずれかにより取得できます。
+
+最新のアーカイブをダウンロードするには、
+`http://www.cakephp.org <http://www.cakephp.org>`_
+のウェブサイトに行き、"Download Now!"
+という大きなリンクに従って進みます。
+
+CakePHP の最新のリリースは CakePHP のホームである CakeForge
+でホストされています。このサイトは CakePHP
+の他のプロジェクトへのリンクがあり、それには CakePHP
+のプラグインやアプリケーションが含まれています。 CakePHP のリリースは
+`http://github.com/cakephp/cakephp/downloads <http://github.com/cakephp/cakephp/downloads>`_
+で入手できます。
+
+これらの代わりに、バグ修正や日ごとに行われる細かな機能追加が含まれたナイトリービルドを取得することもできます。これらは、
+`http://cakephp.org/downloads/index/nightly <http://cakephp.org/downloads/index/nightly>`_
+のダウンロードインデックスからアクセスできます。アップデート内容の詳細を得るには、
+`http://github.com/cakephp/cakephp <http://github.com/cakephp/cakephp>`_
+の git リポジトリの開発ブランチを直接チェックアウトしてください。
+
+パーミッションの設定
+====================
+
+CakePHP
+は、幾つかの操作のために/app/tmpディレクトリを使用します。モデルのdescriptionや、ビューのキャッシュ、セッション情報などです。
+
+なので、Cakeのインストール時には、/app/tmpディレクトリに書き込み権限があることを確認してください。
