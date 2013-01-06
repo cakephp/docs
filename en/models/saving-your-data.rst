@@ -859,8 +859,8 @@ view. Field names are by convention lowercase and separated by underscores.
 Using created and modified
 --------------------------
 
-By defining a created or modified field in your database table as datetime
-fields, CakePHP will recognize those fields and populate them automatically
+By defining a ``created`` and/or ``modified`` field in your database table as datetime
+fields (default null), CakePHP will recognize those fields and populate them automatically
 whenever a record is created or saved to the database (unless the data being
 saved already contains a value for these fields).
 
