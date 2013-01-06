@@ -36,10 +36,10 @@ copyright = u'2012, Cake Software Foundation, Inc'
 # built documents.
 #
 # The short X.Y version.
-version = '1.3'
+version = '1.2'
 
 # The full version, including alpha/beta/rc tags.
-release = '1.3'
+release = '1.2'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -94,7 +94,7 @@ html_theme_path = ['../themes']
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
-html_short_title = u'Cookbook 1.3'
+html_short_title = u'Cookbook 1.2'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
