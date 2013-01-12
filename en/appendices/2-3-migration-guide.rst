@@ -26,7 +26,7 @@ AuthComponent
 -------------
 - A new property ``AuthComponent::$unauthorizedRedirect`` has been added.
 
-  - For default true value user is redirected to referrer url upon authorization failure.
+  - For default ``true`` value user is redirected to referrer url upon authorization failure.
   - If set to a string or array user is redirected to that url.
   - If set to false a ForbiddenException exception is thrown instead of redirecting.
 
@@ -92,8 +92,8 @@ CakePlugin
 ----------
 
 - :php:meth:`CakePlugin::load()` can now take a new ``ignoreMissing`` option. Setting it to true will
-  prevent included file errors when you try to load routes or bootstrap but they don't exist for a plugin.
-  So essentially you can now do use the following statement which will load all plugins and routes and
+  prevent file include errors when you try to load routes or bootstrap but they don't exist for a plugin.
+  So essentially you can now use the following statement which will load all plugins and their routes and
   bootstrap for whatever plugin it can find::
   ``CakePlugin::loadAll(array('routes' => true, 'bootstrap' => true, 'ignoreMissing' => true))``
 
