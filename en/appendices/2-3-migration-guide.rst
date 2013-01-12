@@ -25,8 +25,11 @@ Component
 AuthComponent
 -------------
 - A new property ``AuthComponent::$unauthorizedRedirect`` has been added.
-  If set to false a ForbiddenException exception is thrown instead of redirecting
-  user to referrer url.
+
+  - For default true value user is redirected to referrer url upon authorization failure.
+  - If set to a string or array user is redirected to that url.
+  - If set to false a ForbiddenException exception is thrown instead of redirecting.
+
 
 - A new authenticate adapter has been added to support blowfish/bcrypt hashed
   passwords.  You can now use ``Blowfish`` in your ``$authenticate`` array to
