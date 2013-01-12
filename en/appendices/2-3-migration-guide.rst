@@ -85,6 +85,16 @@ L10n
 Core
 ====
 
+CakePlugin
+----------
+
+- :php:meth:`CakePlugin::load()` can now take a new ``ignoreMissing`` option. Setting it to true will
+  prevent included file errors when you try to load routes or bootstrap but they don't exist for a plugin.
+  So essentially you can now do use the following statement which will load all plugins and routes and
+  bootstrap for whatever plugin it can find::
+  ``CakePlugin::loadAll(array('routes' => true, 'bootstrap' => true, 'ignoreMissing' => true))``
+
+
 Configure
 ---------
 
