@@ -160,9 +160,8 @@ tests:
 テストケースを使うことにより、 あなたは既知の入力セットと期待される出力結果との関係を
 簡単に記述することができます。これにより、あなたの書いたコードが期待した動作を満たしているかどうか
 簡単に確かめることができます。あなたはより自信を持ってコードを書くことができるようになる
-手助けをしてくれます。This helps you be more confident of the
-code you're writing as you can easily check that the code you wrote fulfills the
-expectations and assertions your tests make
+手助けをしてくれます。
+これにより、あなたの書いたコードが、テストで作成したエクスペクテーションとアサーションを満たすことを簡単に確かめることができるので、より自身を持ってコードをかけるようになります。
 くわえて、テストはコードなので、変更を加えたときに再度実行することが容易となります。
 これは新たなバグの生成を防ぐ手助けをしてくれるでしょう。
 
@@ -296,9 +295,6 @@ CakePHPはフィクスチャに基づいたテストケースを実行するに�
 
 フィクスチャを作成するときは主にふたつのことを定義します。ひとつはどのようなフィールドを持った
 テーブルを作成するか、もうひとつは初期状態でどのようなレコードをテーブルに配置するかです。
-that will be used to test our own Article
-model. Create a file named ``ArticleFixture.php`` in your
-``app/Test/Fixture`` directory, with the following content
 それでは最初のフィクスチャを作成してみましょう。この例ではArticleモデルのフィクスチャを作成します。
 ``app/Test/Fixture`` というディレクトリに ``app/Test/Fixture`` という名前のファイルを作成し、
 以下のとおりに記述してください。::
@@ -306,7 +302,7 @@ model. Create a file named ``ArticleFixture.php`` in your
     <?php
     class ArticleFixture extends CakeTestFixture { 
 
-          /* Optional. Set this property to load fixtures to a different test datasource */
+          /* 任意。異なるテスト用データソースにフィクスチャを読み込む時にこのプロパティを指定してください。 */
           public $useDbConfig = 'test';
           public $fields = array( 
               'id' => array('type' => 'integer', 'key' => 'primary'), 
@@ -549,7 +545,7 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 
 .. note::
 
-    ``$useDbConfig``プロパティを指定することで、テストモデルの
+    ``$useDbConfig`` プロパティを指定することで、テストモデルの
     データベースをオーバーライドできます。テーブルが正しいデータベースで
     生成されるように、関連するフィクスチャが同じ値を使うことを確認してください。
 
@@ -593,7 +589,7 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 
     テストのためにモデルをセットアップするときは、テスト用のデータベース接続を
     使うようにするために必ず ``ClassRegistry::init('YourModelName');`` 
-    使ってください。
+    を使ってください。
 
 コントローラーのテスト
 ======================
@@ -722,7 +718,7 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 この例ではメソッドがリダイレクトに到達した際にreturnするので、 ``// more code`` は実行されません。
 
 GETリクエストのシミュレート
------------------------
+---------------------------
 
 上の例の ``testIndexPostData()`` では、 ``testAction()`` はPOSTだけでなく
 GETリクエストのアクションとしても使えます。``data`` キーによって
@@ -918,7 +914,7 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
         public function startup(Controller $controller) {
             parent::startup($controller);
             $this->Controller = $controller;
-            // Make sure the controller is using pagination
+            // コントローラがページネーションを使っているから確かめる
             if (!isset($this->Controller->paginate)) {
                 $this->Controller->paginate = array();
             }
@@ -950,7 +946,7 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
     App::uses('ComponentCollection', 'Controller');
     App::uses('PagematronComponent', 'Controller/Component');
 
-    // A fake controller to test against
+    // テストの対象となる偽物のコントローラ
     class TestPagematronController extends Controller {
         public $paginate = null;
     }
@@ -961,7 +957,7 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 
         public function setUp() {
             parent::setUp();
-            // Setup our component and fake test controller
+            // コンポーネントと偽のテストコントローラをセットアップする
             $Collection = new ComponentCollection();
             $this->PagematronComponent = new PagematronComponent($Collection);
             $CakeRequest = new CakeRequest();
@@ -971,7 +967,7 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
         }
 
         public function testAdjust() {
-            // Test our adjust method with different parameter settings
+            // 異なる値の設定を用いてadjustメソッドをテストする
             $this->PagematronComponent->adjust();
             $this->assertEquals(20, $this->Controller->paginate['limit']);
 
@@ -984,7 +980,7 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 
         public function tearDown() {
             parent::tearDown();
-            // Clean up after we're done
+            // 終了した後のお掃除
             unset($this->PagematronComponent);
             unset($this->Controller);
         }
@@ -1022,7 +1018,7 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
     class CurrencyRendererHelperTest extends CakeTestCase {
         public $CurrencyRenderer = null;
 
-        // Here we instantiate our helper
+        // ここでヘルパーをインスタンス化する
         public function setUp() {
             parent::setUp();
             $Controller = new Controller();
@@ -1030,15 +1026,15 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
             $this->CurrencyRenderer = new CurrencyRendererHelper($View);
         }
 
-        // Testing the usd() function
+        // usd()関数をテストする
         public function testUsd() {
             $this->assertEquals('USD 5.30', $this->CurrencyRenderer->usd(5.30));
 
-            // We should always have 2 decimal digits
+            // 常に小数点第二桁までになるべき
             $this->assertEquals('USD 1.00', $this->CurrencyRenderer->usd(1));
             $this->assertEquals('USD 2.05', $this->CurrencyRenderer->usd(2.05));
 
-            // Testing the thousands separator
+            // 千倍当たりの区切り文字をテスト
             $this->assertEquals('USD 12,000.70', $this->CurrencyRenderer->usd(12000.70));
         }
     }
@@ -1100,15 +1096,15 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 
     class BlogPostTest extends CakeTestCase {
 
-        // Plugin fixtures located in /app/Plugin/Blog/Test/Fixture/
+        // プラグインのフィクスチャは /app/Plugin/Blog/Test/Fixture/ に配置される
         public $fixtures = array('plugin.blog.blog_post');
         public $BlogPost;
 
         public function testSomething() {
-            // ClassRegistry makes the model use the test database connection
+            // ClassRegistry はテスト用のデータベースコネクションをモデルが使うようにしてくれる
             $this->BlogPost = ClassRegistry::init('Blog.BlogPost');
 
-            // do some useful test here
+            // その他の有用なテストをここに書く
             $this->assertTrue(is_object($this->BlogPost));
         }
     }
