@@ -266,7 +266,7 @@ CakeRequest API
 
 .. php:method:: onlyAllow($methods)
 
-    Set allowed HTTP methods, if not matched will throw MethodNotAllowexException
+    Set allowed HTTP methods, if not matched will throw MethodNotAllowedException
     The 405 response will include the required 'Allow' header with the passed methods
 
     .. versionadded:: 2.3
