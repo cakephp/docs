@@ -32,7 +32,7 @@ to achieve this use::
 
 You can also attach the behavior on the fly like so::
 
-    $this->Post->Behaviors->attach('Acl', array('type' => 'controlled'));
+    $this->Post->Behaviors->load('Acl', array('type' => 'controlled'));
 
 .. versionchanged:: 2.1
     You can now safely attach AclBehavior to AppModel. Aco, Aro and AclNode

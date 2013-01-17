@@ -7,23 +7,23 @@ software design pattern. Programming using MVC separates your
 application into three main parts:
 
 The Model layer
-================
+===============
 
 The Model layer represents the part of your application that
-implements the business logic. this means that it is responsible
-for retrieving data, converting it into meaningful concepts to your
-application, as well as processing, validating, associating and any
-other task relative to handling this data.
+implements the business logic. It is responsible for retrieving data and
+converting it into meaningful concepts for your application. This includes
+processing, validating, associating or other tasks related to handling data.
 
 At a first glance, Model objects can be looked at as the first layer
-of interaction with any database you might be using for your application. 
+of interaction with any database you might be using for your application.
 But in general they stand for the major concepts around which you
 implement your application.
 
 In the case of a social network, the Model layer would take care of
 tasks such as Saving the user data, saving friends associations, storing
 and retrieving user photos, finding new friends for suggestions, etc.
-While the model objects can be thought as "Friend", "User", "Comment", "Photo"
+While the model objects can be thought as "Friend", "User", "Comment", or
+"Photo".
 
 The View layer
 ==============
@@ -58,10 +58,8 @@ CakePHP request cycle
 =====================
 
 |Figure 1|
-Figure: 1: A Basic MVC Request
 
-Figure: 1 Shows the typical handling of a client request in CakePHP
-
+Figure: 1: A typical MVC Request in CakePHP
 
 The typical CakePHP request cycle starts with a user requesting a page or
 resource in your application. This request is first processed by a dispatcher

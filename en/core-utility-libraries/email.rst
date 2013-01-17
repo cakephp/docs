@@ -166,7 +166,7 @@ other configurations.
 
 .. note::
 
-    The values of above keys using Email or array, like from, to, cc etc. will be passed
+    The values of above keys using Email or array, like from, to, cc, etc will be passed
     as first parameter of corresponding methods. The equivalent for:
     ``Email::from('my@example.com', 'My Site')``
     would be defined as  ``'from' => array('my@example.com' => 'My Site')`` in your config

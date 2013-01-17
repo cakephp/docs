@@ -473,6 +473,33 @@ File extensions are used by :php:class:`RequestHandlerComponent` to do automatic
 view switching based on content types.  See the RequestHandlerComponent for
 more information.
 
+.. _route-conditions:
+
+Using additional conditions when matching routes
+------------------------------------------------
+
+When creating routes you might want to restrict certain URL's based on specific
+request/environment settings. A good example of this is :doc:`rest`
+routing. You can specify additional conditions in the ``$defaults`` argument for
+:php:meth:`Router::connect()`.  By default CakePHP exposes 3 environment
+conditions, but you can add more using :ref:`custom-route-classes`. The built-in
+options are:
+
+- ``[type]`` Only match requests for specific content types.
+- ``[method]`` Only match requests with specific HTTP verbs.
+- ``[server]`` Only match when $_SERVER['SERVER_NAME'] matches the given value.
+
+We'll provide a simple example here of how you can use the ``[method]``
+option to create a custom RESTful route::
+
+    Router::connect(
+        "/:controller/:id",
+        array("action" => "edit", "[method]" => "PUT"),
+        array("id" => "[0-9]+")
+    );
+
+The above route will only match for ``PUT`` requests. Using these conditions,
+you can create custom REST routing, or other request data dependent information.
 
 .. index:: passed arguments
 .. _passed-arguments:
@@ -515,9 +542,7 @@ You would get the following output::
 This same data is also available at ``$this->request->params['pass']``
 and ``$this->passedArgs`` in your controllers, views, and helpers.
 The values in the pass array are numerically indexed based on the
-order they appear in the called url.
-
-::
+order they appear in the called url::
 
     debug($this->request->params['pass']);
     debug($this->passedArgs);
@@ -829,6 +854,8 @@ application's routes.php file.
 This will cause CakePHP to serve errors, when users try to visit
 urls that would normally be provided by CakePHP but have not
 been connected explicitly.
+
+.. _custom-route-classes:
 
 Custom Route classes
 ====================

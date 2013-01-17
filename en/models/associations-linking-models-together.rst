@@ -62,7 +62,7 @@ In the above example, the first instance of the word 'Recipe' is
 what is termed an 'Alias'. This is an identifier for the
 relationship and can be anything you choose. Usually, you will
 choose the same name as the class that it references. However,
-**aliases for each model must be unique app wide**. E.g. it is
+**aliases for each model must be unique app wide**. For example it is
 appropriate to have::
 
     class User extends AppModel {

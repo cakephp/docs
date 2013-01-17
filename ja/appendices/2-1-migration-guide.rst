@@ -478,9 +478,6 @@ HtmlHelper
   やレイアウト、エレメントの名前を参照したい際に、どこでもこのシンタッ
   クスを利用できます。
 
-- The ``$options['plugin']`` option for :php:meth:`~View::element()` is
-  deprecated.  You should use ``Plugin.element_name`` instead.
-
 - :php:meth:`~View::element()` の ``$options['plugin']`` オプションは推奨されません。
   代わりに ``Plugin.element_name`` を利用してください。
 
@@ -592,9 +589,6 @@ FormHelper
   フィールドを除外するようになりました。これにより
   :php:class:`SecurityComponent` と disabled な input フィールドとの共
   存がしやすくなりました。
-
-- The ``between`` option when used in conjunction with radio inputs, now behaves
-  differently. The ``between`` value is now placed between the legend and first
 
 - ラジオボタンで ``between`` オプションを利用していた場合の挙動が変わりました。
   ``between`` の値は、legend タグと最初の input エレメントの間に表示されます。

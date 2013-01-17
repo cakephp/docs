@@ -18,12 +18,12 @@ We currently maintain 4 versions of CakePHP.
    branches once a stable release point has been reached. Maintenance
    branches are where all bugfixes are committed before making their way
    into a stable release. Maintenance branches have the same name as the
-   major version they are for. eg. *1.2*. If you are using a stable
+   major version they are for example *1.2*. If you are using a stable
    release and need fixes that haven't made their way into a stable
    release check here.
 -  **development branches** : Development branches contain leading edge
    fixes and features. They are named after the version number they are
-   for. eg. *1.3*. Once development branches have reached a stable
+   for example *1.3*. Once development branches have reached a stable
    release point they become maintenance branches, and no further new
    features are introduced unless absolutely necessary.
 -  **feature branches** : Feature branches contain unfinished or

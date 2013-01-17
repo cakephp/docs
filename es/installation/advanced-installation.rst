@@ -302,19 +302,22 @@ nginx es un servidor web que está ganando mucha popularidad. Igual que Lighttpd
     server {
         listen   80;
         server_name example.com;
-
+    
+        # root directive should be global
+        root   /var/www/example.com/public/app/webroot/;
+        index  index.php;
+        
         access_log /var/www/example.com/log/access.log;
         error_log /var/www/example.com/log/error.log;
 
         location / {
-            root   /var/www/example.com/public/app/webroot/;
-            index  index.php index.html index.htm;
             try_files $uri $uri/ /index.php?$uri&$args;
         }
 
-        location ~ .*\.php$ {
-            include /etc/nginx/fcgi.conf;
-            fastcgi_pass    127.0.0.1:10005;
+        location ~ \.php$ {
+            include /etc/nginx/fastcgi_params;
+            try_files $uri =404;
+            fastcgi_pass    127.0.0.1:9000;
             fastcgi_index   index.php;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         }

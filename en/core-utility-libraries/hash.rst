@@ -115,7 +115,7 @@ elements you can use attribute matching with methods like ``extract()``.
     points::
 
         $users = $this->User->find('all');
-        $users = Set::insert($users, '{n}.User.new', 'value');
+        $users = Hash::insert($users, '{n}.User.new', 'value');
 
 .. php:staticmethod:: remove(array $data, $path = null)
 
@@ -648,7 +648,7 @@ elements you can use attribute matching with methods like ``extract()``.
             )
         */
 
-    ``$dir`` can be either ``asc`` or ``desc`.  ``$type``
+    ``$dir`` can be either ``asc`` or ``desc``.  ``$type``
     can be one of the following values:
 
     * ``regular`` for regular sorting.
