@@ -115,7 +115,7 @@ AppController / AppModel / AppHelper / AppShell
 Les fichiers ``app/app_controller.php``, ``app/app_model.php``, 
 ``app/app_helper.php`` sont situés et nommés respectivement comme ceci 
 ``app/Controller/AppController.php``, ``app/Model/AppModel.php`` et 
-``app/Helper/AppHelper.php``.
+``app/View/Helper/AppHelper.php``.
 
 Aussi, les shell/task sont étendus (extend) Appshell. Vous pouvez avoir votre 
 propre AppShell.php dans ``app/Console/Command/AppShell.php``.
