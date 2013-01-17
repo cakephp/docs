@@ -86,7 +86,7 @@ AppController / AppModel / AppHelper / AppShell
 ===============================================
 
 ``app/app_controller.php`` 、 ``app/app_model.php`` 、 ``app/app_helper.php`` はそれぞれ、
-``app/Controller/AppController.php`` 、 ``app/Model/AppModel.php`` 、 ``app/Helper/AppHelper.php`` に配置・名称変更されました。
+``app/Controller/AppController.php`` 、 ``app/Model/AppModel.php`` 、 ``app/View/Helper/AppHelper.php`` に配置・名称変更されました。
 
 また、全てのシェル・タスクはAppShellを継承するようになりました。
 独自のAppShell.phpを ``app/Console/Command/AppShell.php`` にもつことができます。
