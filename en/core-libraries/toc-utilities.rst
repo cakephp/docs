@@ -10,7 +10,7 @@ Utilities
     ../core-utility-libraries/time
     ../core-utility-libraries/sanitize
     ../core-utility-libraries/file-folder
-    ../core-utility-libraries/httpsocket
+    ../core-utility-libraries/httpclient
     ../core-utility-libraries/inflector
     internationalization-and-localization
     logging
