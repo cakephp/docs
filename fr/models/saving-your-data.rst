@@ -829,7 +829,7 @@ Datatables
 
 Tandis que CakePHP peut avoir des sources de données qui ne sont pas des driven
 de base de données, la plupart du temps, elles le sont. CakePHP est pensé pour 
-être agnostique et va fonctionner avec MySQL, MSSQL, Oracle, PostgreSQL et 
+être agnostique et va fonctionner avec MySQL, MSSQL, PostgreSQL et 
 autres. Vous pouvez créer vos tables de base de données comme vous l'auriez 
 fait normalement. Quand vous créez vos classes Model, elles seront 
 automatiquement mappées aux tables que vous avez créees. Les noms de table sont 
