@@ -90,8 +90,8 @@ RequestActionTrait
 - :php:meth:`Cake\\Routing\\RequestActionTrait::requestAction()` has had
   some of the extra options changed:
 
-    - ``options[url]`` is now ``options[query]``.
-    - ``options[data]`` is now ``options[post]``.
+  - ``options[url]`` is now ``options[query]``.
+  - ``options[data]`` is now ``options[post]``.
 
 Router
 ------
@@ -143,6 +143,16 @@ Request
   CakePHP applications behind load balancers.
 * :php:attr:`Cake\\Network\\Request::$data` is no longer merged with the prefixed data
   key, as that prefix has been removed.
+
+Network\Http
+============
+
+* ``HttpSocket`` is now :php:class:`Cake\\Network\\Http\\Client`.
+* Http\Client has been re-written from the ground up. It has a simpler/easy to
+  use API, support for new authentication systems like Oauth, and file uploads.
+  It uses PHP's stream API's so there is no requirement for curl. See the
+  :doc:`/core-utility-libraries/httpclient` documentation for more information.
+
 
 Controller
 ==========
