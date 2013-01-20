@@ -91,6 +91,8 @@ you can do the following::
       ['type' => 'json']
     );
 
+.. _http_client_request_options:
+
 Request method options
 =======================
 
@@ -113,6 +115,8 @@ addition request information.  The following keys can be used in ``$options``:
   requests.
 
 The options parameter is always the 3rd parameter in each of the HTTP methods.
+They can also be use when constructing ``Client`` to create
+:ref:`scoped clients <http_client_scoped_client>`.
 
 Authentication
 ==============
@@ -192,6 +196,8 @@ Http\\Client will assume Basic authentication, unless the type key is set::
       ]
     ]);
 
+.. _http_client_scoped_client:
+
 Creating scoped clients
 =======================
 
@@ -230,6 +236,8 @@ host, scheme, proxy, port are overridden in the request URL::
 
 The above will replace the domain, scheme, and port.  However, this request will
 continue using all the other options defined when the scoped client was created.
+See :ref:`http_client_request_options` for more information on the options
+supported.
 
 
 Setting and managing cookies
