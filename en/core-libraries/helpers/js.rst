@@ -537,7 +537,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
 
     -  ``wrap`` - Whether you want the callback wrapped in an anonymous
        function. (defaults to true)
-    -  ``stop`` - Whether you want the event to stopped. (defaults to
+    -  ``stop`` - Whether you want the event to stop. (defaults to
        true)
 
     **Example use**::
