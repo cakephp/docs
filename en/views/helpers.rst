@@ -278,7 +278,7 @@ Callbacks
 
 .. php:method:: afterRenderFile($viewFile, $content)
 
-    Is called after each view files is rendered.  This includes elements, views,
+    Is called after each view file is rendered.  This includes elements, views,
     parent views and layouts.  A callback can modify and return ``$content`` to
     change how the rendered content will be displayed in the browser.
 
