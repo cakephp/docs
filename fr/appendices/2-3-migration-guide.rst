@@ -124,8 +124,8 @@ Model
 Validation
 ----------
 
-- Les méthodes de manque pour les validations vont **toujours** maintenant 
-attraper les erreurs au lieu de le faire seulement en mode développement.
+- Les méthodes de manque pour les validations vont **toujours** maintenant
+  attraper les erreurs au lieu de le faire seulement en mode développement.
 
 Network
 =======

@@ -304,6 +304,7 @@ API Folder
 
     :param boolean $sort: Si à true, triera les résultats.
     :param mixed $exceptions: Un tableau de noms de fichiers et de dossiers 
+
     à ignorer. Si à true ou '.' cette méthode va ignorer les fichiers cachés ou 
     les fichiers commençant par '.'.
     :param boolean $fullPath: Si à true, va retourner les résultats en 

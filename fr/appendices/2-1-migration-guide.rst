@@ -203,6 +203,7 @@ Controller
   maintenant ``true`` à la place de false. De plus, les différentes valeurs 
   sont traitées de façon légèrement différente, mais se comportera comme cela 
   dans la plupart des cas.
+
     - ``true`` va charger le model par défaut et fusionnser avec AppController.
     - Un tableau va charger ces models et fusionner avec AppController.
     - Un tableau vide ne va charger aucun model, sauf ceux déclarés dans la 
