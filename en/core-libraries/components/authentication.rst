@@ -568,7 +568,7 @@ user, nor will authorize objects be checked::
 
 .. warning::
 
-  If your using scaffolding, allow all will not identify and allow the
+  If you're using scaffolding, allow all will not identify and allow the
   scaffolded methods. You have to specify their action names.
 
 You can provide as many action names as you need to ``allow()``.  You can
