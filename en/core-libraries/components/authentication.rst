@@ -554,10 +554,6 @@ mark actions as public actions by using ``AuthComponent::allow()``.  By
 marking actions as public, AuthComponent, will not check for a logged in
 user, nor will authorize objects be checked::
 
-.. warning::
-
-  If your using scaffolding, allow all will not identify and allow the scaffolded methods. You have to specify their action names.
-
     // Allow all actions. CakePHP 2.0
     $this->Auth->allow('*');
 
@@ -569,6 +565,11 @@ user, nor will authorize objects be checked::
 
     // Allow only the view and index actions.
     $this->Auth->allow(array('view', 'index'));
+
+.. warning::
+
+  If your using scaffolding, allow all will not identify and allow the
+  scaffolded methods. You have to specify their action names.
 
 You can provide as many action names as you need to ``allow()``.  You can
 also supply an array containing all the action names.
