@@ -238,7 +238,7 @@ states.  You can provide a default value using the 2nd argument:
 
     <div class="shopping-cart">
         <h3>Your Cart</h3>
-        <?php echo $this->fetch('cart', 'Your cart is empty');
+        <?php echo $this->fetch('cart', 'Your cart is empty'); ?>
     </div>
 
 .. versionchanged:: 2.3
