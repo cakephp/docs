@@ -225,7 +225,7 @@ td, th, p, li {
 
 /* inline code */
 tt {
-	font-family: "Bitstream Vera Sans", "Consolas", "Monaco", monospace;
+	font-family: "Bitstream Vera Sans Mono", "Consolas", "Monaco", monospace;
 	font-size: 90%;
 	line-height: normal;
 	background: rgba(100, 100, 100, 0.10);
@@ -409,7 +409,7 @@ dt tt {
 .method .descclassname,
 .staticmethod .descname,
 .staticmethod .descclassname {
-	font-family: "Bitstream Vera Sans", "Consolas", "Monaco", monospace;
+	font-family: "Bitstream Vera Sans Mono", "Consolas", "Monaco", monospace;
 	font-size: 16px;
 }
 .role .descname,
