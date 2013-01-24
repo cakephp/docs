@@ -30,6 +30,9 @@ body {
 .masthead img {
 	margin-top: 6px;
 }
+.masthead .button.red {
+	border: 1px solid #66030C;
+}
 .header-backing {
 	height: 300px;
 }
