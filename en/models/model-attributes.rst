@@ -105,8 +105,7 @@ recursive
 =========
 
 The recursive property defines how deep CakePHP should go to fetch
-associated model data via ``find()``, ``findAll()`` and ``read()``
-methods.
+associated model data via ``find()``, and ``read()`` methods.
 
 Imagine your application features Groups which belong to a domain
 and have many Users which in turn have many Articles. You can set
