@@ -886,12 +886,12 @@ and authentication mechanics in CakePHP.
 
 .. php:method:: redirectUrl($url = null)
 
-.. versionadded:: 2.3
-
     If no parameter is passed, gets the authentication redirect URL. Pass a
     url in to set the destination a user should be redirected to upon logging
     in. Will fallback to :php:attr:`AuthComponent::$loginRedirect` if there is
     no stored redirect value.
+
+.. versionadded:: 2.3
 
 .. php:method:: shutdown($Controller)
 
