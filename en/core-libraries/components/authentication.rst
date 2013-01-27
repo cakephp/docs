@@ -112,29 +112,27 @@ To configure different fields for user in ``$components`` array::
         )
     );
 
-.. note::
+Do not put other Auth configuration keys (like authError, loginAction etc)
+within the authenticate or Form element. They should be at the same level as
+the authenticate key. The setup above with other Auth configuration
+should look like::
 
-    Do not put other Auth configuration keys (like authError, loginAction etc)
-    within the authenticate or Form element. They should be at the same level as
-    the authenticate key.
-    Above setup with other Auth configurations should look something like::
-
-        // Pass settings in $components array
-        public $components = array(
-            'Auth' => array(
-                'loginAction' => array(
-                    'controller' => 'users',
-                    'action' => 'login',
-                    'plugin' => 'users'
-                ),
-                'authError' => 'Did you really think you are allowed to see that?',
-                'authenticate' => array(
-                    'Form' => array(
-                        'fields' => array('username' => 'email')
-                    )
+    // Pass settings in $components array
+    public $components = array(
+        'Auth' => array(
+            'loginAction' => array(
+                'controller' => 'users',
+                'action' => 'login',
+                'plugin' => 'users'
+            ),
+            'authError' => 'Did you really think you are allowed to see that?',
+            'authenticate' => array(
+                'Form' => array(
+                    'fields' => array('username' => 'email')
                 )
             )
-        );
+        )
+    );
 
 In addition to the common configuration, Basic authentication supports
 the following keys:
@@ -368,6 +366,48 @@ to login.
     ``env('SCRIPT_NAME)``.  You may wish to use a static string if you
     want consistent hashes in multiple environments.
 
+Using bcrypt for passwords
+--------------------------
+
+.. versionadded:: 2.3
+
+As of CakePHP 2.3.0 you can use `bcrypt <https://en.wikipedia.org/wiki/Bcrypt>`_
+a.k.a Blowfish to hash passwords. Bcrypt hashes are much harder to brute force
+than passwords stored with sha1. Even though the default hashing strategy is
+``sha`` - for backwards compatibility reasons. It is recommended that new
+applications use bcrypt for passwords. Bcrypt provides improved security.
+reasons. To use bcrpyt you'll need to enable the ``Blowfish`` authentication
+adapter::
+
+    public $components = array(
+        'Auth' => array(
+            'authenticate' => array(
+                'Blowfish' => array(
+                    'scope' => array('User.is_active' => true)
+                )
+            )
+        )
+    );
+
+Other than how passwords are hashed and stored ``BlowfishAuthenticate`` works
+the same as ``FormAuthenticate``, and supports all the same options. Instead of
+using :php:meth:`AuthComponent::password()` to generate password hashes you
+should use the following::
+
+    App::uses('Security', 'Utility');
+    class User extends AppModel {
+
+        public function beforeSave($options = array()) {
+            // Use bcrypt
+            if (isset($this->data['User']['password'])) {
+                $hash = Security::hash($this->data['User']['password'], 'blowfish');
+                $this->data['User']['password'] = $hash;
+            }
+            return true;
+        }
+
+    }
+
 Manually logging users in
 -------------------------
 
@@ -577,8 +617,9 @@ also supply an array containing all the action names.
 Making actions require authorization
 ------------------------------------
 
-If after making actions public, you want to revoke the public access.
-You can do so using ``AuthComponent::deny()``::
+By default all actions require authorization. However, after making actions
+public, you want to revoke the public access.  You can do so using
+``AuthComponent::deny()``::
 
     // remove one action
     $this->Auth->deny('add');
@@ -593,23 +634,6 @@ You can do so using ``AuthComponent::deny()``::
 You can provide as many action names as you need to ``deny()``.  You can
 also supply an array containing all the action names.
 
-Mapping actions when using CrudAuthorize
-----------------------------------------
-
-When using CrudAuthorize or any other authorize objects that use action
-mappings, it might be necessary to map additional methods.  You can
-map actions -> CRUD permissions using mapAction().  Calling this on
-AuthComponent will delegate to all the of the configured authorize
-objects, so you can be sure the settings were applied every where::
-
-    $this->Auth->mapActions(array(
-        'create' => array('register'),
-        'view' => array('show', 'display')
-    ));
-
-The keys for mapActions should be the CRUD permissions you want to set,
-while the values should be an array of all the actions that are mapped
-to the CRUD permission.
 
 Using ControllerAuthorize
 -------------------------
@@ -674,6 +698,24 @@ then be for the ``posts`` controller with the ``read`` permission.  This
 allows you to create permission systems that focus more on what is being
 done to resources, rather than the specific actions being visited.
 
+Mapping actions when using CrudAuthorize
+----------------------------------------
+
+When using CrudAuthorize or any other authorize objects that use action
+mappings, it might be necessary to map additional methods.  You can
+map actions -> CRUD permissions using mapAction().  Calling this on
+AuthComponent will delegate to all the of the configured authorize
+objects, so you can be sure the settings were applied every where::
+
+    $this->Auth->mapActions(array(
+        'create' => array('register'),
+        'view' => array('show', 'display')
+    ));
+
+The keys for mapActions should be the CRUD permissions you want to set,
+while the values should be an array of all the actions that are mapped
+to the CRUD permission.
+
 AuthComponent API
 =================
 
@@ -683,7 +725,7 @@ and authentication mechanics in CakePHP.
 .. php:attr:: ajaxLogin
 
     The name of an optional view element to render when an Ajax request is made
-    with an invalid or expired session
+    with an invalid or expired session.
 
 .. php:attr: allowedActions
 
@@ -693,7 +735,7 @@ and authentication mechanics in CakePHP.
 
     Set to an array of Authentication objects you want to use when
     logging users in. There are several core authentication objects,
-    see the section on :ref:`authentication-objects`
+    see the section on :ref:`authentication-objects`.
 
 .. php:attr:: authError
 
@@ -704,7 +746,7 @@ and authentication mechanics in CakePHP.
 
     Set to an array of Authorization objects you want to use when
     authorizing users on each request, see the section on
-    :ref:`authorization-objects`
+    :ref:`authorization-objects`.
 
 .. php:attr:: components
 
