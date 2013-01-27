@@ -304,6 +304,10 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
         textarea
     text, with name of password, passwd, or psword
         password
+    text, with name of email
+        email
+    text, with name of tel, telephone, or phone
+        tel
     date
         day, month, and year selects
     datetime, timestamp
