@@ -202,7 +202,8 @@ working with a login form could look like::
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                return $this->redirect($this->Auth->redirect());
+                return $this->redirect($this->Auth->redirectUrl());
+                // Prior to 2.3 use `return $this->redirect($this->Auth->redirect());`
             } else {
                 $this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
             }
@@ -229,7 +230,8 @@ function will look a bit different than when using
 
     public function login() {
         if ($this->Auth->login()) {
-            return $this->redirect($this->Auth->redirect());
+            return $this->redirect($this->Auth->redirectUrl());
+            // Prior to 2.3 use `return $this->redirect($this->Auth->redirect());`
         } else {
             $this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
         }
@@ -879,6 +881,12 @@ and authentication mechanics in CakePHP.
     Hash a password with the application's salt value.
 
 .. php:method:: redirect($url = null)
+
+    Deprecated since 2.3. See :php:meth:`AuthComponent::redirectUrl()` for description.
+
+.. php:method:: redirectUrl($url = null)
+
+.. versionadded:: 2.3
 
     If no parameter is passed, gets the authentication redirect URL. Pass a
     url in to set the destination a user should be redirected to upon logging

@@ -17,7 +17,8 @@ Caching
   had difficulty setting up and deploying APC correctly both in cli + web.
   Using files should make setting up CakePHP simpler for new developers.
 
-- `Configure::write('Cache.viewPrefix', 'YOURPREFIX');` has been added to `core.php` to allow multiple domains/languages per setup.
+- `Configure::write('Cache.viewPrefix', 'YOURPREFIX');` has been added to `core.php`
+  to allow multiple domains/languages per setup.
 
 Component
 =========
@@ -30,11 +31,13 @@ AuthComponent
   - If set to a string or array user is redirected to that url.
   - If set to false a ForbiddenException exception is thrown instead of redirecting.
 
-
 - A new authenticate adapter has been added to support blowfish/bcrypt hashed
   passwords.  You can now use ``Blowfish`` in your ``$authenticate`` array to
   allow bcrypt passwords to be used.
 
+- :php:meth:`AuthComponent::redirect()` has been deprecated.
+  Use :php:meth:`AuthComponent::redirectUrl()` instead.
+  
 PaginatorComponent
 ------------------
 
