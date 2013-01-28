@@ -19,31 +19,15 @@ App.Book = (function() {
 		$('#tablet-nav').bind('click', function (e) {
 			e.preventDefault();
 
-			// Squirt the nav into the modal.
+			// Squirt the nav and page contents into the modal.
 			var contents = $('#sidebar-navigation').html();
+			var localToc = $('.page-contents').html();
 			var modal = $('#nav-modal').html(contents);
+			modal.append(localToc);
 			modal.append('<a href="#" class="close-reveal-modal">&#215;</a>');
 			modal.reveal({
 				animation: 'fade'
 			});
-		});
-
-		// Display page contents
-		$('#page-contents-button').bind('click', function (e) {
-			e.preventDefault();
-			e.stopPropagation();
-			$('#page-contents').fadeIn('fast');
-		});
-
-		var hideContents = function (e) {
-			$('#page-contents').fadeOut('fast');
-		};
-	
-		$(document).bind('click', hideContents);
-		$(document).bind('keyup', function (e) {
-			if (e.keyCode == 27) {
-				hideContents();
-			}
 		});
 	}
  

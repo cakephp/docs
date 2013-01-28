@@ -485,44 +485,23 @@ dt tt {
 	font-size: 14px;
 }
 
-/* -- page contents -- */
-#page-contents-button {
-	float: right;
-	padding: 7px 15px;
-}
-.body .panel {
-	padding: 0;
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	width: 100%;
-	display: none;
-	box-sizing: border-box;
-}
-.panel.flyout > ul {
-	list-style: none;
-	margin: 15px;
-}
-.panel.flyout li a {
-	font-size: 16px;
-	font-family: MuseoSlab500, Helvetica, Arial;
-	color: #C92434;
-}
-.panel.flyout li li a {
-	color: #417282;
-}
-
 /* -- Sidebar -- */
+.page-contents > ul,
 #sidebar-navigation > ul {
 	margin-left: 0;
 }
 .sidebar li {
 	list-style: none;
-	font-size: 16px;
+	font-size: 14px;
 	font-family: MuseoSlab500, Helvetica, Arial;
+	margin: 3px 0;
+	line-height: 21px;
 }
 .sidebar .current {
 	color: #C92434;
+}
+.sidebar li ul {
+	margin: 0 0 0 18px;
 }
 
 /* -- pagination -- */
