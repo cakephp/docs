@@ -338,6 +338,26 @@ from the following properties:
     debug($response->status);
     debug($response->headers);
 
+Reading JSON and XML response bodies
+------------------------------------
+
+Since JSON and XML responses are commonly used, response objects provide easy to
+use accessors to read decoded data. JSON data is decoded into an array, while
+XML data is decoded into a ``SimpleXMLElement`` tree::
+
+    // Get some XML
+    $http = new Client();
+    $response = $http->get('http://example.com/test.xml');
+    $xml = $response->xml;
+
+    // Get some JSON
+    $http = new Client();
+    $response = $http->get('http://example.com/test.json');
+    $json = $response->json;
+
+The decoded response data is stored in the response object, so accessing it
+multiple times has no additional cost.
+
 .. meta::
     :title lang=en: HttpClient
     :keywords lang=en: array name,array data,query parameter,query string,php class,string query,test type,string data,google,query results,webservices,apis,parameters,cakephp,meth,search results
