@@ -21,7 +21,7 @@ opening form tag.
 
     All parameters are optional. If ``create()`` is called with no
     parameters supplied, it assumes you are building a form that
-    submits to the current controller, via either the current URL.
+    submits to the current controller, via the current URL.
     The default method for form submission is POST.
     The form element is also returned with a DOM ID. The ID is
     generated using the name of the model, and the name of the
