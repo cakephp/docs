@@ -114,7 +114,7 @@ text::
 
         public $priority = 9;
 
-        public function beforeDispatch($event) {
+        public function beforeDispatch(CakeEvent $event) {
             $request = $event->data['request'];
             $response = $event->data['response'];
 
@@ -158,7 +158,7 @@ page, in our case it would be anything served from the ``PagesController``::
     App::uses('DispatcherFilter', 'Routing');
     class HttpCacheFilter extends DispatcherFilter {
 
-        public function afterDispatch($event) {
+        public function afterDispatch(CakeEvent $event) {
             $request = $event->data['request'];
             $response = $event->data['response'];
 
