@@ -1026,7 +1026,7 @@ cela, nous construisons une expression et l'ajoutons au tableau des conditions::
 
     $this->User->find('all', compact('conditions'));
 
-Ceci devrait généré la commande SQL suivante::
+Ceci devrait générer la commande SQL suivante::
 
     SELECT
         "User"."id" AS "User__id",
