@@ -333,7 +333,7 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
        in more libraries
     -  ``async`` - Whether or not you want an asynchronous request.
     -  ``data`` - Additional data to send.
-    -  ``update`` - Dom id to update with the content of the request.
+    -  ``update`` - Dom id to update with the content of the response.
     -  ``type`` - Data type for response. 'json' and 'html' are
        supported. Default is html for most libraries.
     -  ``evalScripts`` - Whether or not <script> tags should be
