@@ -16,10 +16,10 @@ Security API
 
     Encrypts/Decrypts a text using the given key.::
 
-        // Encrypt your secret password with my_key
-        $secret = Security::cipher('my secret password', 'my_key');
+        // Encrypt your text with my_key
+        $secret = Security::cipher('hello world', 'my_key');
 
-        // Later decrypt your secret password
+        // Later decrypt your text
         $nosecret = Security::cipher($secret, 'my_key');
 
     ``cipher()`` uses a **weak** XOR cipher and should **not** be used for
