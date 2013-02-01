@@ -248,10 +248,10 @@ rules into IIS to use CakePHP's native rewrites. To do this, follow
 these steps:
 
 
-#. Use Microsoft's Web Platform Installer to install the URL
-   Rewrite Module 2.0.
-#. Create a new file in your CakePHP folder, called web.config.
-#. Using Notepad or another XML-safe editor, copy the following
+#. Use `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_ to install the URL
+   `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ or download it directly (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+#. Create a new file in your CakePHP root folder, called web.config.
+#. Using Notepad or any XML-safe editor and copy the following
    code into your new web.config file...
 
 ::
@@ -261,33 +261,35 @@ these steps:
         <system.webServer>
             <rewrite>
                 <rules>
-                <rule name="Imported Rule 1" stopProcessing="true">
-                <match url="^(.*)$" ignoreCase="false" />
-                <conditions logicalGrouping="MatchAll">
+                    <clear/>
+                    <rule name="Imported Rule 0" stopProcessing="true">
+                        <match url="^(img|css|files|js)(.*)$"></match>
+                        <action type="Rewrite" url="app/webroot/{R:1}{R:2}" appendQueryString="false"></action>
+                    </rule>
+                    <rule name="Imported Rule 1" stopProcessing="true">
+                        <match url="^(.*)$" ignoreCase="false" />
+                        <conditions logicalGrouping="MatchAll">
                             <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
                             <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
-                </conditions>
-    
-                <action type="Rewrite" url="index.php?url={R:1}" appendQueryString="true" />
-    
-                </rule>
-    
-                <rule name="Imported Rule 2" stopProcessing="true">
-                  <match url="^$" ignoreCase="false" />
-                  <action type="Rewrite" url="/" />
-                </rule>
-                <rule name="Imported Rule 3" stopProcessing="true">
-                  <match url="(.*)" ignoreCase="false" />
-                  <action type="Rewrite" url="/{R:1}" />
-                </rule>
-                <rule name="Imported Rule 4" stopProcessing="true">
-                  <match url="^(.*)$" ignoreCase="false" />
-                  <conditions logicalGrouping="MatchAll">
+                        </conditions>
+                        <action type="Rewrite" url="index.php?url={R:1}" appendQueryString="true" />
+                    </rule>
+                    <rule name="Imported Rule 2" stopProcessing="true">
+                        <match url="^$" ignoreCase="false" />
+                        <action type="Rewrite" url="app/webroot/" />
+                    </rule>
+                    <rule name="Imported Rule 3" stopProcessing="true">
+                        <match url="(.*)" ignoreCase="false" />
+                        <action type="Rewrite" url="app/webroot/{R:1}" />
+                    </rule>
+                    <rule name="Imported Rule 4" stopProcessing="true">
+                        <match url="^(.*)$" ignoreCase="false" />
+                        <conditions logicalGrouping="MatchAll">
                             <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
                             <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
-                  </conditions>
-                  <action type="Rewrite" url="index.php/{R:1}" appendQueryString="true" />
-                </rule>
+                        </conditions>
+                        <action type="Rewrite" url="index.php?url={R:1}" appendQueryString="true" />
+                    </rule>
                 </rules>
             </rewrite>
         </system.webServer>
@@ -298,7 +300,7 @@ Rewrite module to import rules directly from CakePHP's .htaccess
 files in root, /app/, and /app/webroot/ - although some editing
 within IIS may be necessary to get these to work. When Importing
 the rules this way, IIS will automatically create your web.config
-file for you.
+file for you (in the currently selected folder within IIS).
 
 Once the web.config file is created with the correct IIS-friendly
 rewrite rules, CakePHP's links, css, js, and rerouting should work
