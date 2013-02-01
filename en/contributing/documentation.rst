@@ -41,7 +41,7 @@ Translator tips:
 Documentation formatting guide
 ==============================
 
-The new CakePHP documentation is written with ReST formatted text.  ReST 
+The new CakePHP documentation is written with `ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_.  ReST 
 (Re Structured Text) is a plain text markup syntax similar to markdown, or
 textile.  To maintain consistency it is recommended that when adding to the
 CakePHP documentation you follow the guidelines here on how to format and
