@@ -368,7 +368,7 @@ l'édition des posts si l'auteur ne correspond pas. Ouvrez le fichier
         return parent::isAuthorized($user);
     }
 
-Nous écrasons maintenant l'appel ``isAuthorized()`` de AppController's et 
+Nous surchargeons maintenant l'appel ``isAuthorized()`` de AppController's et 
 vérifions à l'intérieur si la classe parente autorise déjà l'user.
 Si elle ne le fait pas, alors nous ajoutons juste l'autorisation d'accéder 
 à l'action add, et éventuellement accés pour modifier et de supprimer.
