@@ -71,7 +71,7 @@ appropriate to have::
                 'className' => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array(
+        public $hasAndBelongsToMany = array(
             'MemberOf' => array(
                 'className' => 'Group',
             )
@@ -84,7 +84,7 @@ appropriate to have::
                 'className'  => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array(
+        public $hasAndBelongsToMany = array(
             'Member' => array(
                 'className' => 'User',
             )
@@ -99,7 +99,7 @@ but the following will not work well in all circumstances::
                 'className' => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array(
+        public $hasAndBelongsToMany = array(
             'Member' => array(
                 'className' => 'Group',
             )
@@ -112,7 +112,7 @@ but the following will not work well in all circumstances::
                 'className'  => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array(
+        public $hasAndBelongsToMany = array(
             'Member' => array(
                 'className' => 'User',
             )
