@@ -75,7 +75,7 @@ uniques dans une app entière**. Par exemple, il est approprié d'avoir::
                 'className' => 'Recette',
             ),
         );
-        public $hasAndBelongsToMany => array(
+        public $hasAndBelongsToMany = array(
             'MembreDe' => array(
                 'className' => 'Groupe',
             ),
@@ -89,12 +89,12 @@ uniques dans une app entière**. Par exemple, il est approprié d'avoir::
                 'className'  => 'Recette',
             ),
         );
-        public $hasAndBelongsToMany => array(
+        public $hasAndBelongsToMany = array(
             'Membre' => array(
                 'className' => 'User',
             ),
         );
-        public $hasAndBelongsToMany => array('MembreDe' => array('className' => 'Group'));
+        public $hasAndBelongsToMany = array('MembreDe' => array('className' => 'Group'));
     }
 
 mais ce qui suit ne travaillera pas bien dans toute circonstance::
@@ -104,7 +104,7 @@ mais ce qui suit ne travaillera pas bien dans toute circonstance::
         public $hasMany = array(
             'MaRecette' => 'Recette',
         );
-        public $hasAndBelongsToMany => array(
+        public $hasAndBelongsToMany = array(
             'Membere' => array(
                 'className' => 'Groupe',
             ),
@@ -118,12 +118,12 @@ mais ce qui suit ne travaillera pas bien dans toute circonstance::
                 'className'  => 'Recette',
             ),
         );
-        public $hasAndBelongsToMany => array(
+        public $hasAndBelongsToMany = array(
             'Membere' => array(
                 'className' => 'User',
             ),
         );
-        public $hasAndBelongsToMany => array('Membre' => 'Group');
+        public $hasAndBelongsToMany = array('Membre' => 'Group');
     }
 
 parce que ici nous avons l'alias 'Member' se référant aux deux models 

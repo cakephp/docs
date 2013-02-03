@@ -19,7 +19,7 @@ check out a copy of CakePHP and get started with the real guts of
 your application.
 
 CakePHP has an active
-`developer team <http://cakephp.lighthouseapp.com/contributors>`_
+`developer team <https://github.com/cakephp?tab=members>`_
 and community, bringing great value to the project. In addition to
 keeping you from wheel-reinventing, using CakePHP means your
 application’s core is well tested and is being constantly
