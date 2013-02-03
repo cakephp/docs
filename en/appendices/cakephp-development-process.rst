@@ -4,10 +4,10 @@ CakePHP Development Process
 Here we attempt to explain the process we use when developing the
 CakePHP framework. We rely heavily on community interaction through
 tickets and IRC chat. IRC is the best place to find members of the
-development team and discuss ideas, the latest code, and make general
-comments. If something more formal needs to be proposed or there is a
-problem with a release, the ticket system is the best place to share
-your thoughts.
+`development team <https://github.com/cakephp?tab=members>`_ and discuss
+ideas, the latest code, and make general comments. If something more
+formal needs to be proposed or there is a problem with a release, the
+ticket system is the best place to share your thoughts.
 
 We currently maintain 4 versions of CakePHP.
 

@@ -71,7 +71,7 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
                 'className' => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array(
+        public $hasAndBelongsToMany = array(
             'MemberOf' => array(
                 'className' => 'Group',
             )
@@ -85,7 +85,7 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
                 'className'  => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array(
+        public $hasAndBelongsToMany = array(
             'Member' => array(
                 'className' => 'User',
             )
@@ -101,7 +101,7 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
                 'className' => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array(
+        public $hasAndBelongsToMany = array(
             'Member' => array(
                 'className' => 'Group',
             )
@@ -115,7 +115,7 @@ belongsTo, hasAndBelongsToMany(HABTM)です。
                 'className'  => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array(
+        public $hasAndBelongsToMany = array(
             'Member' => array(
                 'className' => 'User',
             )
