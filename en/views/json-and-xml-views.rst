@@ -114,3 +114,14 @@ well.
 
     A view class for generating Json view data.  See above for how you can use
     JsonView in your application.
+
+JSONP response
+==============
+
+.. versionadded:: 2.3
+
+When using JsonView you can use the special view variable ``_jsonp`` to enable
+returning a JSONP response. Setting it to ``true`` makes the view class check if query
+string parameter named "callback" is set and if so wrap the json response in the
+function name provided. If you want to use a custom query string paramer name
+instead of "callback" set ``_jsonp`` to required name instead of ``true``.

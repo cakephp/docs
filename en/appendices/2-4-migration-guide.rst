@@ -15,6 +15,13 @@ Models
   now take a new ``counterCache`` option. You can set it to false to avoid
   updating counter cache values for the particular save operation.
 
+View
+====
+
+JsonView
+--------
+
+- JSONP support has been added to :php:class:`JsonView`.
 
 Network
 =======
