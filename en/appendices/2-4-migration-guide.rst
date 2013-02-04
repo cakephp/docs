@@ -10,7 +10,16 @@ Model
 Models
 ------
 
-- php:meth::`Model::save()`, php:meth::`Model::saveField()`, php:meth::`Model::saveAll()`,
-  php:meth::`Model::saveAssociated()`, php:meth::`Model::saveMany()`
+- :php:meth:`Model::save()`, :php:meth:`Model::saveField()`, :php:meth:`Model::saveAll()`,
+  :php:meth:`Model::saveAssociated()`, :php:meth:`Model::saveMany()`
   now take a new ``counterCache`` option. You can set it to false to avoid
   updating counter cache values for the particular save operation.
+
+
+Network
+=======
+
+CakeRequest
+-----------
+
+- :php:meth:`CakeRequest::param()` was added.

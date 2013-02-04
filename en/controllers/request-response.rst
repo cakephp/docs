@@ -759,6 +759,12 @@ CakeResponse API
 
     .. versionadded:: 2.3
 
+.. php:method:: param($name)
+
+    Safely read values in ``$request->params``. This removes the need to call
+    ``isset()`` or ``empty()`` before using param values.
+
+    .. versionadded:: 2.4
 
 .. meta::
     :title lang=en: Request and Response objects
