@@ -2264,7 +2264,7 @@ wide**. E.g. it is appropriate to have
                 'className'  => 'Recipe',
             )
         );
-        var $hasAndBelongsToMany => array('MemberOf' => 'Group');
+        var $hasAndBelongsToMany = array('MemberOf' => 'Group');
     }
     ?>
 
@@ -2278,7 +2278,7 @@ but the following will not work well in all circumstances:
         var $hasMany = array(
             'MyRecipe' => 'Recipe',
         );
-        var $hasAndBelongsToMany => array('Member' => 'User');
+        var $hasAndBelongsToMany = array('Member' => 'User');
     }
 
     class Group extends AppModel {
@@ -2288,7 +2288,7 @@ but the following will not work well in all circumstances:
                 'className'  => 'Recipe',
             )
         );
-        var $hasAndBelongsToMany => array('Member' => 'Group');
+        var $hasAndBelongsToMany = array('Member' => 'Group');
     }
     ?>
 
