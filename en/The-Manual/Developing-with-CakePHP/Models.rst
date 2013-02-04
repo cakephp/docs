@@ -2254,7 +2254,7 @@ wide**. E.g. it is appropriate to have
         var $hasMany = array(
             'MyRecipe' => 'Recipe',
         );
-        var $hasAndBelongsToMany => array('Member' => 'User');
+        var $hasAndBelongsToMany = array('Member' => 'User');
     }
 
     class Group extends AppModel {
