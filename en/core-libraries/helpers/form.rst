@@ -324,6 +324,17 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
     been loaded during this request. Or be directly associated to the
     model supplied to :php:meth:`~FormHelper::create()`.
 
+    .. versionadded:: 2.3
+
+    .. _html5-required:
+
+    Since 2.3 the HTML5 ``required`` attribute will also be added to the input
+    based on validation rules. You can explicitly set ``required`` key in
+    options array to override it for a field. To skip browser validation
+    triggering for the whole form you can set option ``'formnovalidate' => true``
+    for the input button you generate using :php:meth:`FormHelper::submit()` or
+    set ``'novalidate' => true`` in options for :php:meth:`FormHelper::create()`.
+
     For example, let’s assume that your User model includes fields for a
     username (varchar), password (varchar), approved (datetime) and
     quote (text). You can use the input() method of the FormHelper to
