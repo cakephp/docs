@@ -1,26 +1,23 @@
-Model Attributes
-################
+モデルの属性
+############
 
-Model attributes allow you to set properties that can override the
-default model behavior.
+モデルの属性を用いて、
+デフォルトのモデルの働きを上書きできるプロパティーを設定することができます。
 
-For a complete list of model attributes and their descriptions
-visit the CakePHP API. Check out
-`http://api20.cakephp.org/class/model <http://api20.cakephp.org/class/model>`_.
+モデルの属性の完全なリストと説明については、CakePHP APIを見てください。
+`http://api20.cakephp.org/class/model <http://api20.cakephp.org/class/model>`_
 
 useDbConfig
 ===========
 
-The ``useDbConfig`` property is a string that specifies the name of
-the database connection to use to bind your model class to the
-related database table. You can set it to any of the database
-connections defined within your database configuration file. The
-database configuration file is stored in /app/Config/database.php.
+``useDbConfig`` プロパティはモデルクラスを関連するデータベース・テーブルに紐付けるために用いられる、
+データベース・コネクションの名前を指定する文字列になります。
+データーベース設定ファイルに定義されたデータベースコレクションのうちどれか一つを設定できます。
+データベース設定ファイルは /app/Config/database.php に保存します。
 
-The ``useDbConfig`` property is defaulted to the 'default' database
-connection.
+``useDbConfig`` プロパティの初期値は「default」データベース・コネクションになります。
 
-Example usage:
+使用例:
 
 ::
 
@@ -31,37 +28,37 @@ Example usage:
 useTable
 ========
 
-The ``useTable`` property specifies the database table name. By
-default, the model uses the lowercase, plural form of the model's
-class name. Set this attribute to the name of an alternate table,
-or set it to ``false`` if you wish the model to use no database
-table.
+``useTable`` プロパティはデータベースのテーブル名を指定します。
+デフォルトでは、モデルのクラス名の小文字の複数形が用いられます。
+この属性を他のテーブル名にするか、
+データベース・テーブルをこのモデルで使いたくない場合、 ``false``
+を指定してください。
 
-Example usage::
+使用例::
 
     class Example extends AppModel {
-        public $useTable = false; // This model does not use a database table
+        public $useTable = false; // このモデルはデータベース・テーブルを使いません
     }
 
-Alternatively::
+あるいは::
 
     class Example extends AppModel {
-        public $useTable = 'exmp'; // This model uses a database table 'exmp'
+        public $useTable = 'exmp'; // このモデルは「exmp」というデータベース・テーブルを使います
     }
 
 tablePrefix
 ===========
 
-The name of the table prefix used for the model. The table prefix
-is initially set in the database connection file at
-/app/Config/database.php. The default is no prefix. You can
-override the default by setting the ``tablePrefix`` attribute in
-the model.
+モデルで使われるテーブルの接頭辞(*prefix*)の名前です。
+テーブル接頭辞は /app/Config/database.php
+にあるデータベース・コネクションのファイルで初期値が設定されます。
+デフォルトでは接頭辞はありません。
+モデルで ``tablePrefix`` 属性を設定することで初期値を上書きすることができます。
 
-Example usage::
+使用例::
 
     class Example extends AppModel {
-        public $tablePrefix = 'alternate_'; // will look for 'alternate_examples'
+        public $tablePrefix = 'alternate_'; // 「alternate_examples」を見に行く
     }
 
 .. _model-primaryKey:
@@ -69,14 +66,14 @@ Example usage::
 primaryKey
 ==========
 
-Each table normally has a primary key, ``id``. You may change which
-field name the model uses as its primary key. This is common when
-setting CakePHP to use an existing database table.
+各々のテーブルは通常、``id`` という主キーを持ちますが、
+モデルがどのフィールド名を主キーとして使うか変えることができます。
+これはCakePHPに既存のデータベース・テーブルを使用させる場合、よくあることです。
 
-Example usage::
+使用例::
 
     class Example extends AppModel {
-        public $primaryKey = 'example_id'; // example_id is the field name in the database
+        public $primaryKey = 'example_id'; // example_idはデータベースのフィールド名
     }
     
 
@@ -85,56 +82,51 @@ Example usage::
 displayField
 ============
 
-The ``displayField`` attribute specifies which database field
-should be used as a label for the record. The label is used in
-scaffolding and in ``find('list')`` calls. The model will use
-``name`` or ``title``, by default.
+``displayField`` 属性はどのデータベースのフィールドがレコードの表題(*label*)として使われるべきかを指定します。
+この表題はスキャフォールディングと ``find('list')`` の呼び出しで用いられます。
+モデルはデフォルトで、 ``name`` か ``title`` を使います。
 
-For example, to use the ``username`` field::
+例えば、 ``username`` フィールドを使うには以下のようにします::
 
     class User extends AppModel {
         public $displayField = 'username';
     }
 
-Multiple field names cannot be combined into a single display
-field. For example, you cannot specify,
-``array('first_name', 'last_name')`` as the display field. Instead
-create a virtual field with the Model attribute virtualFields
+複数のフィールド名は組み合わせて一つのディスプレイフィールド(*display field*)にk結合することはできません。
+例えば、 ``array('first_name', 'last_name')`` をディスプレイフィールドとして指定することはできません。
+代わりにモデルの属性であるvirtualFieldsでバーチャルフィールドを作成してください。
 
 recursive
 =========
 
-The recursive property defines how deep CakePHP should go to fetch
-associated model data via ``find()``, ``findAll()`` and ``read()``
-methods.
+recursiveプロパティはCakePHPが ``find()`` 、 ``findAll()`` 、 ``read()``
+らのメソッドを通して、どのぐらい深く関連モデルのデータを取得すべきか、
+を定義します。
 
-Imagine your application features Groups which belong to a domain
-and have many Users which in turn have many Articles. You can set
-$recursive to different values based on the amount of data you want
-back from a $this->Group->find() call:
+アプリケーションががあるドメインに属しているGroupがあり(belongsTo)、Groupが多くのUserをもち(hasMany)、同様にUserが多くのArticleを持っているとします。
+$this->Group->find()を呼び出し、取得したいデータ量に基づいて、$recursiveに異なる値を設定することができます:
 
-* -1 Cake fetches Group data only, no joins.
-* 0  Cake fetches Group data and its domain
-* 1  Cake fetches a Group, its domain and its associated Users
-* 2  Cake fetches a Group, its domain, its associated Users, and the
-  Users' associated Articles
+* -1 CakeはGroupのデータだけを取得します。joinしません。
+* 0  CakeはGroupのデータとそのドメインを取得します。
+* 1  Cake は１つのGroupとそのドメインとそれに関連したUserを取得します。
+* 2  Cake は１つのGroupとそのドメインとそれに関連したUserと各Userに関連したArticleを取得します。
 
-Set it no higher than you need. Having CakePHP fetch data you
-aren’t going to use slows your app unnecessarily. Also note that
-the default recursive level is 1.
+必要以上に高く設定しないでください。
+CakePHPがデータを取得する際に、
+不必要にアプリケーションを遅くしたくないでしょう。
+また、recursiveレベルの初期値が1であることも覚えていてください。
 
 .. note::
 
-    If you want to combine $recursive with the ``fields``
-    functionality, you will have to add the columns containing the
-    required foreign keys to the ``fields`` array manually. In the
-    example above, this could mean adding ``domain_id``.
+    $recursiveと ``fields`` の機能を組み合わせたい場合、
+    手動で ``fields`` 配列に必要な外部キーを含むカラムを追加しなければなりません。
+    上記の例では、 ``domain_id`` を追加することになります。
 
 order
 =====
 
-The default ordering of data for any find operation. Possible
-values include::
+find操作のデフォルトのデータの順番。
+下記のような設定が可能です。::
 
     $order = "field"
     $order = "Model.field";
@@ -146,16 +138,17 @@ values include::
 data
 ====
 
-The container for the model’s fetched data. While data returned
-from a model class is normally used as returned from a find() call,
-you may need to access information stored in $data inside of model
-callbacks.
+モデルの取得したデータ用のコンテナになります。
+モデルクラスから返されたデータは通常find()
+呼び出しの返り値として使用されますが、
+モデルのコールバック内で$data
+に保存された情報にアクセスする必要がある場合があります。
 
 \_schema
 ========
 
-Contains metadata describing the model’s database table fields.
-Each field is described by:
+デルのデータベーステーブルフィールドの詳細であるメタデータをもちます。
+各フィールドは次のようになっています:
 
 -  name
 -  type (integer, string, datetime, etc.)
@@ -163,7 +156,7 @@ Each field is described by:
 -  default value
 -  length
 
-Example Usage::
+使用例::
 
     public $_schema = array(
         'first_name' => array(
@@ -184,47 +177,46 @@ Example Usage::
 validate
 ========
 
-This attribute holds rules that allow the model to make data
-validation decisions before saving. Keys named after fields hold
-regex values allowing the model to try to make matches.
+この属性は、モデルが保存前にデータバリデーションの判定を行うルールを保持します。
+フィールドにちなんで名付けられたキーが正規表現の値をもつことで、
+モデルがマッチングをすることができます。
 
 .. note::
 
-    It is not necessary to call validate() before save() as save() will
-    automatically validate your data before actually saving.
+    save()はデータを実際に保存する前に自動的にバリデーションを行うので、
+    save()の前にvalidate()を呼ぶ必要はありません。    
 
-For more information on validation, see the :doc:`/models/data-validation`
-later on in this manual.
+バリデーションに関する詳しい情報は、このマニュアルの後にある `/models/data-validation` をみてください。
 
 virtualFields
 =============
 
-Array of virtual fields this model has. Virtual fields are aliased
-SQL expressions. Fields added to this property will be read as
-other fields in a model but will not be saveable.
+モデルが持つバーチャルフィールドの配列です。
+バーチャルフィールドはSQL表現へのエイリアスです。
+このプロパティに追加されたフィールドは、
+他のモデルフィールドと同じように読み込まれますが、保存することはできません。
 
+MySQLでの使用例::
 Example usage for MySQL::
 
     public $virtualFields = array(
         'name' => "CONCAT(User.first_name, ' ', User.last_name)"
     );
 
-In subsequent find operations, your User results would contain a
-``name`` key with the result of the concatenation. It is not
-advisable to create virtual fields with the same names as columns
-on the database, this can cause SQL errors.
+これを行った後、find操作で取得したデータのUserには ``name`` キーに連結された結果が格納されているでしょう。
+データベースにバーチャルフィールドと同じ名前のカラムを作成するのは賢明ではありません。
+これはSQLエラーを引き起こす場合があります。
 
-For more information on the ``virtualFields`` property, its proper
-usage, as well as limitations, see
-:doc:`/models/virtual-fields`.
+``virtualFields`` プロパティに関する詳しい情報、正しい用法、また制限については、
+:doc:`/models/virtual-fields` を見てください。
 
 name
 ====
 
-Name of the model. If you do not specify it in your model file it will
-be set to the class name by constructor.
+モデルの名前。
+モデルのファイルでこれを指定しない場合、コンストラクタでクラス名が設定されます。
 
-Example usage::
+使用例::
 
     class Example extends AppModel {
         public $name = 'Example';
@@ -233,12 +225,8 @@ Example usage::
 cacheQueries
 ============
 
-If set to true, data fetched by the model during a single request
-is cached. This caching is in-memory only, and only lasts for the
-duration of the request. Any duplicate requests for the same data
-is handled by the cache.
+trueを設定すると、モデルによって取得されたデータは１つのリクエストの間キャッシュされます。
+このキャッシュはメモリ内のみで、リクエストの間のみ持続します。
+同じデータに対する重複したリクエストはキャッシュによって処理されます。
 
 
-.. meta::
-    :title lang=en: Model Attributes
-    :keywords lang=en: alternate table,default model,database configuration,model example,database table,default database,model class,model behavior,class model,plural form,database connections,database connection,attribute,attributes,complete list,config,cakephp,api,class example
