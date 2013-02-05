@@ -23,6 +23,10 @@ JsonView
 
 - JSONP support has been added to :php:class:`JsonView`.
 
+HtmlHelper
+----------
+- The API for :php:meth::`HtmlHelper::css()` has been changed.
+
 Network
 =======
 
