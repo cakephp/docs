@@ -605,11 +605,7 @@ Intégrité des données
 =====================
 
 En raison de la nature complexe auto-référentielle de ces structures de 
-<<<<<<< HEAD
 données comme les arbres et les listes chaînées, elles peuvent parfois se 
-=======
-données comme les arbres et listes chaînées, elles peuvent parfois se 
->>>>>>> 5648f19a0bcbc77e37bb6dc66d6ea78e3d9f33ff
 rompre par un appel négligent. Rassurez-vous, tout n'est pas perdu! Le behavior 
 Tree contient plusieurs fonctionnalités précédemment non-documentées destinées 
 à se remettre de telles situations.
