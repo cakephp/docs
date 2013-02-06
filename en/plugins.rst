@@ -335,6 +335,12 @@ You may put any type of file in any directory, just like a regular
 webroot. The only restriction is that ``MediaView`` needs to know 
 the mime-type of that asset.
 
+But keep in mind that handling static assets, such as images, Javascript
+and CSS files of plugins, through the Dispatcher is incredibly inefficient.
+It is very recommended to symlink them for production.
+For example like this::
+
+    ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
 
 Linking to assets in plugins
 ----------------------------
