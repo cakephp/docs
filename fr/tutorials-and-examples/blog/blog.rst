@@ -190,7 +190,7 @@ exécuter (sous \*nix) devrait resembler à quelque chose comme ça ::
 
     $ chown -R www-data app/tmp
 
-Si pour une raison quelquonque CakePHP ne peut pas écrire dans ce répertoire, 
+Si pour une raison quelconque CakePHP ne peut pas écrire dans ce répertoire, 
 vous en serez informé par un message d'avertissement tant que vous n'êtes pas 
 en mode production.
 
