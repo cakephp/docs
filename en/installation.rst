@@ -181,12 +181,13 @@ for the domain to::
 If your web server is configured correctly, you should now find
 your Cake application accessible at http://www.example.com.
 
-Advanced Installation and server specific configuration
-=======================================================
+Advanced Installation and URL Rewriting
+=======================================
 
 .. toctree::
 
-   installation/advanced-installation
+    installation/advanced-installation
+    installation/url-rewriting
 
 Fire It Up
 ==========
