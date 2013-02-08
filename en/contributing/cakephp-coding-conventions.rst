@@ -100,8 +100,8 @@ clarity::
 View files
 ----------
 
-In view files (.ctp) files it is recommended to use the keyword variants of
-control structures. They are often easier to read in complex view files. Control
+In view files (.ctp files) developers should use keyword control structures.
+Keyword control structures are easier to read in complex view files. Control
 structures can either be contained in a larger PHP block, or in separate PHP
 tags::
 
