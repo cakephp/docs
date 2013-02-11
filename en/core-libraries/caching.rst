@@ -187,7 +187,7 @@ A method that uses Cache to store results could look like::
     class Post extends AppModel {
 
         public function newest() {
-            $result = Cache::read('newest_posts', 'longterm');
+            $result = Cache::read('newest_posts');
             if (!$result) {
                 $result = $this->find('all', array('order' => 'Post.updated DESC', 'limit' => 10));
                 Cache::write('newest_posts', $result, 'longterm');
