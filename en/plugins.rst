@@ -337,7 +337,7 @@ the mime-type of that asset.
 
 But keep in mind that handling static assets, such as images, Javascript
 and CSS files of plugins, through the Dispatcher is incredibly inefficient.
-It is very recommended to symlink them for production.
+It is strongly recommended to symlink them for production.
 For example like this::
 
     ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css

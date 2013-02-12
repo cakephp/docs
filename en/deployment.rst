@@ -67,7 +67,7 @@ Improve your application's performance
 ======================================
 
 Since handling static assets, such as images, Javascript and CSS files of plugins,
-through the Dispatcher is incredibly inefficient, it is very recommended to symlink
+through the Dispatcher is incredibly inefficient, it is strongly recommended to symlink
 them for production. For example like this::
 
     ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
