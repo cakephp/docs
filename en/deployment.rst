@@ -63,6 +63,14 @@ either append to it or add an ``include_path`` directive::
 This assumes you are running a \*nix server, and have CakePHP in
 ``/usr/share/cakephp-2.0``.
 
+Improve your application's performance
+======================================
+
+Since handling static assets, such as images, Javascript and CSS files of plugins,
+through the Dispatcher is incredibly inefficient, it is very recommended to symlink
+them for production. For example like this::
+
+    ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
 
 .. meta::
     :title lang=en: Deployment
