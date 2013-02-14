@@ -1,6 +1,21 @@
 <?php 
 header('HTTP/1.1 301 Moved Permanently');
 
+if (preg_match('#^/view/(\d+)(.*)?$#', $_SERVER['REQUEST_URI'],  $match)) {
+        if ($match[1] >= 876) {
+                header("Location:http://book.cakephp.org/1.3/en/view/$match[1]$match[2]");
+                exit;
+        }
+        if ($match[1] >= 305) {
+                header("Location:http://book.cakephp.org/1.1/en/view/$match[1]$match[2]");
+                exit;
+        }
+        if ($match[1] >= 3) {
+                header("Location:http://book.cakephp.org/1.2/en/view/$match[1]$match[2]");
+                exit;
+        }
+}
+
 if (preg_match('#/1\.3/(en|es|fr|pt|de|ja)/view/876/?.*$#', $_SERVER['REQUEST_URI'],  $match)) { header("Location:http://book.cakephp.org/1.3/$match[1]/The-Manual.html"); exit; }
 if (preg_match('#/1\.3/view/876/?.*$#', $_SERVER['REQUEST_URI'], $match)) { header("Location:http://book.cakephp.org/1.3/en/The-Manual.html"); exit; }
 if (preg_match('#/1\.3/[a-z]{2, 3}/view/876/?.*$#', $_SERVER['REQUEST_URI'], $match)) { header("Location:http://book.cakephp.org/1.3/en/The-Manual.html"); exit; }
