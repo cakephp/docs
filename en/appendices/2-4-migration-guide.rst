@@ -55,3 +55,12 @@ L10n
   ``p`` has been dropped in favor of ``pl`` (Polish),
   ``sz`` has been dropped in favor of ``se`` (Sami).
 - Kazakh has been added with ``kaz`` as locale and ``kk`` as catalog code.
+
+Logging
+=======
+
+FileLog
+-------
+
+- Two new config options ``size`` and ``rotate`` have been added for :ref:`FileLog <file-log>` engine.
+
