@@ -356,7 +356,7 @@ Flow Control
 
         $this->redirect(array('controller' => 'orders', 'action' => 'confirm', 'product' => 'pizza', 'quantity' => 5));
 
-.. php:method:: flash(string $message, string $url, integer $pause, string $layout)
+.. php:method:: flash(string $message, mixed $url, integer $pause, string $layout)
 
     Like ``redirect()``, the ``flash()`` method is used to direct a
     user to a new page after an operation. The ``flash()`` method is
