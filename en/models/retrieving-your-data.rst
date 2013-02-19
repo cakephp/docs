@@ -656,9 +656,9 @@ The findBy magic functions also accept some optional parameters:
 +------------------------------------------------------------+-------------------------------------------------------+
 | ``$this->User->findByLastName('Anderson');``               | ``User.last_name = 'Anderson';``                      |
 +------------------------------------------------------------+-------------------------------------------------------+
-| ``$this->User->findByEmailOrUsername('jhon');``            | ``User.email = 'jhon' OR User.username = 'jhon';``    |
+| ``$this->User->findByEmailOrUsername('john', 'john');``    | ``User.email = 'john' OR User.username = 'john';``    |
 +------------------------------------------------------------+-------------------------------------------------------+
-| ``$this->User->findByUsernameAndPassword('jhon', '123');`` | ``User.username = 'jhon' AND User.password = '123';`` |
+| ``$this->User->findByUsernameAndPassword('john', '123');`` | ``User.username = 'john' AND User.password = '123';`` |
 +------------------------------------------------------------+-------------------------------------------------------+
 | ``$this->Cake->findById(7);``                              | ``Cake.id = 7``                                       |
 +------------------------------------------------------------+-------------------------------------------------------+
