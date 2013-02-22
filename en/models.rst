@@ -44,7 +44,7 @@ Model class by the magic of inheritance. The Ingredient model
 extends the application model, AppModel, which extends CakePHP's
 internal Model class. It is this core Model class that bestows the
 functionality onto your Ingredient model. ``App::uses('AppModel', 'Model')``
-ensures that the model is lazy loaded in every instance of the controller.
+ensures that the model is lazy loaded in every instance of its usage.
 
 This intermediate class, AppModel, is empty and if you haven't
 created your own, is taken from within the CakePHP core folder. Overriding
