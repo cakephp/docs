@@ -64,3 +64,11 @@ FileLog
 
 - Two new config options ``size`` and ``rotate`` have been added for :ref:`FileLog <file-log>` engine.
 
+
+Utility
+=======
+
+Validation
+----------
+
+- :php:meth:`Validation::date()` now supports the ``y`` and ``ym`` formats.
