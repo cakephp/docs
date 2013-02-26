@@ -9,10 +9,10 @@ Most acl shell subcommands involve referencing aco/aro nodes.  As there are two
 'forms' of these nodes, there is two notations in the shell::
 
     # A Model + foreign_key reference
-    ./Console/cake acl view Model.1
+    ./Console/cake acl view aro Model.1
 
     # An alias path reference
-    ./Console/cake acl view root/controllers
+    ./Console/cake acl view aco root/controllers
 
 Using a ``.`` indicates that you are going to use a bound record style reference
 while using a ``/`` indicates an alias path.
