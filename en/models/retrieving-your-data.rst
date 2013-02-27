@@ -111,6 +111,12 @@ couple of simple (controller code) examples::
     only need to specify fields for a DISTINCT count (since otherwise,
     the count is always the same - dictated by the conditions).
 
+.. note::
+
+    If your model have HABTM associations the find('count') may return null.
+    In that case, remember to set the recursive property to -1.
+    I.e. `$this->Model->find('count', array('recursive'=>-1));`
+
 .. _model-find-all:
 
 find('all')
