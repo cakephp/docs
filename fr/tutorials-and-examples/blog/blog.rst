@@ -16,7 +16,7 @@ ajouter, éditer et supprimer des posts.
 Voici ce dont vous aurez besoin :
 
 
-#. Un serveur web fonctionnel. Nous supposerons que vous utiliser Apache,
+#. Un serveur web fonctionnel. Nous supposerons que vous utilisez Apache,
    bien que les instructions pour utiliser d'autres serveurs devraient
    être très semblables. Nous aurons peut-être besoin de jouer un peu sur la
    configuration du serveur, mais la plupart des personnes peuvent faire 
