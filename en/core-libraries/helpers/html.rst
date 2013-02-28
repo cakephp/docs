@@ -66,12 +66,12 @@ methods of the HtmlHelper and how to use them.
 
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-.. php:method:: css(mixed $path, string $rel = null, array $options = array())
+.. php:method:: css(mixed $path, array $options = array())
+
+    .. versionchanged:: 2.4
 
     :param mixed $path: Either a string of the css file to link, or an array with multiple files
-    :param string $rel: The value of the generated tag's rel attribute.  If null, 'stylesheet'
-       will be used.
-    :param array $options: An array of :term:`html attributes`.
+    :param array $options: An array of options or :term:`html attributes`.
 
     Creates a link(s) to a CSS style-sheet. If key 'inline' is set to
     false in ``$options`` parameter, the link tags are added to the
@@ -81,8 +81,10 @@ methods of the HtmlHelper and how to use them.
     You can use the ``block`` option to control which block the link element
     will be appended to.  By default it will append to the ``css`` block.
 
+    If key 'rel' in ``$options`` array is set to 'import' the stylesheet will be imported.
+
     This method of CSS inclusion assumes that the CSS file specified
-    resides inside the /app/webroot/css directory.::
+    resides inside the /app/webroot/css directory if path doesn't start with a '/'.::
 
         echo $this->Html->css('forms');
 
