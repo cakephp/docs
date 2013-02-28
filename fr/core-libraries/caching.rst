@@ -130,12 +130,12 @@ L'API requise pour le moteur de cache est
 
     La classe de base pour tous les moteurs de cache utilisé avec le Cache.
 
-.. php:method:: write($key, $value, $duration)
+.. php:method:: write($key, $value, $config = 'default')
 
     :retourne: un booléen en cas de succès.
 
-    Écrit la valeur d'une clef dans le cache, $duration spécifie
-    la durée ou l'entrée existera dans le cache
+    Écrit la valeur d'une clef dans le cache, la chaîne optionnel $config 
+    spécifie le nom de la configuration à écrire.
 
 .. php:method:: read($key)
 
