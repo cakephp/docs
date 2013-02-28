@@ -203,7 +203,9 @@ App.baseUrl
     serveur, vous aurez besoin d'utiliser le système de belles URLs 
     construit dans Cake. Dans ``/app/Config/core.php``,
     décommentez la ligne qui ressemble à cela::
+    
         Configure::write('App.baseUrl', env('SCRIPT_NAME'));
+        
     Retirez aussi ces fichiers .htaccess::
     
         /.htaccess
@@ -218,7 +220,7 @@ App.baseUrl
     Si vous installez CakePHP sur un serveur web autre que Apache, vous 
     pouvez trouver des instructions pour faire fonctionner l'URL rewriting 
     pour d'autres serveurs dans la section 
-  :doc:`/installation/url-rewriting`.
+    :doc:`/installation/url-rewriting`.
 App.encoding
     Définit quel encodage votre application utilise. Cet encodage est utilisé 
     pour générer le charset dans le layout, et les entités d'encodage.
