@@ -188,10 +188,30 @@ Exception
     For more information on Exception handling, see the :doc:`exceptions`
     section.
 
+.. _core-configuration-baseurl:
+
 App.baseUrl
-    Un-comment this definition if you **don’t** plan to use Apache’s
-    mod\_rewrite with CakePHP. Don’t forget to remove your .htaccess
-    files too.
+    If you don't want or can't get mod\_rewrite (or some other
+    compatible module) up and running on your server, you'll need to
+    use Cake's built in pretty URLs. In ``/app/Config/core.php``,
+    uncomment the line that looks like::
+
+        Configure::write('App.baseUrl', env('SCRIPT_NAME'));
+
+    Also remove these .htaccess files::
+
+        /.htaccess
+        /app/.htaccess
+        /app/webroot/.htaccess
+
+
+    This will make your URLs look like
+    www.example.com/index.php/controllername/actionname/param rather
+    than www.example.com/controllername/actionname/param.
+
+    If you are installing CakePHP on a webserver besides Apache, you
+    can find instructions for getting URL rewriting working for other
+    servers under the :doc:`/installation/url-rewriting` section.
 App.encoding
     Define what encoding your application uses.  This encoding
     is used to generate the charset in the layout, and encode entities.

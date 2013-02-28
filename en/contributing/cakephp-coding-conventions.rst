@@ -96,6 +96,26 @@ clarity::
     //Nested ternaries are bad
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
+
+View files
+----------
+
+In view files (.ctp files) developers should use keyword control structures.
+Keyword control structures are easier to read in complex view files. Control
+structures can either be contained in a larger PHP block, or in separate PHP
+tags::
+
+    <?php
+    if ($isAdmin):
+        echo "<p>You are the admin user.</p>";
+    endif;
+    ?>
+    <p>The following is also acceptable:</p>
+    <?php if ($isAdmin): ?>
+        <p>You are the admin user.</p>
+    <?php endif; ?>
+
+
 Function Calls
 ==============
 
