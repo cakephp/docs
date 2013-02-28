@@ -3,19 +3,19 @@ Shell ACL
 
 Le Shell Acl est utile pour gérer et inspecter les enregistrements de vos bases 
 de données Acl. Il est souvent plus pratique que l'ajout de modifications 
-ponctuelles dans les contrôleurs.
+ponctuelles dans les controllers.
 
 La plupart des sous-commandes shell acl implique le référencement des noeuds 
 aco/aro. Comme il y a deux 'formes' de ces noeuds, il existe deux notation dans 
 le shell::
 
-    # Un Modèle + référence de la clé étrangère
-    ./Console/cake acl view Model.1
+    # Un Model + référence de la clé étrangère
+    ./Console/cake acl view aro Model.1
 
     # Un chemin alias de référence
-    ./Console/cake acl view root/controllers
+    ./Console/cake acl view aco root/controllers
 
-Utiliser ``.`` indique que vous allez utiliser une référence d'eregistrement 
+Utiliser ``.`` indique que vous allez utiliser une référence d'enregistrement 
 liée au style, tandis qu'utiliser un ``/`` indique un chemin alias.
 
 Installer les tables de la base de données

@@ -17,7 +17,8 @@ Cela générera un fichier schema.php dans votre dossier ``app/Config/Schema``.
 
 .. note::
 
-    Le shell schema n'utilise que les tables pour lesquelles des modèles sont définis. 
+    Le shell schema n'utilise que les tables pour lesquelles des modèles 
+    sont définis. 
     Pour forcer le shell à considérer toutes les tables,
     vous devez ajouter l'option ``-f`` à votre ligne de commande.
 
@@ -38,6 +39,57 @@ nomdufichier.sql est le nom souhaité pour le fichier contenant le dump sql.
 Si vous omettez nomdufichier.sql, le dump sql sera affiché sur la console,
 mais ne sera pas écrit dans un fichier.
 
+callbacks de CakeSchema
+=======================
+
+Après avoir généré un schema, vous voudrez peut-être insérer des données de 
+départ à des tables de votre application. Ceci peut être accompli avec les 
+callbacks de CakeSchema.
+Chaque fichier de schema est généré avec les méthodes 
+``before($event = array())`` et ``after($event = array())``.
+
+Le paramètre ``$event`` contient un tableau avec deux clés. Une pour dire si 
+une table a été supprimée ou créée et une autre pour les erreurs. Exemples::
+
+    array('drop' => 'posts', 'errors' => null)
+    array('create' => 'posts', 'errors' => null)
+
+Ajouter des données à une table posts par exemple donnerait ceci::
+
+    App::uses('Post', 'Model');
+    public function after($event = array()) {
+        if (isset($event['create'])) {
+            switch ($event['create']) {
+                case 'posts':
+                    App::uses('ClassRegistry', 'Utility');
+                    $post = ClassRegistry::init('Post');
+                    $post->create();
+                    $post->save(
+                        array('Post' =>
+                            array('title' => 'CakePHP Schema Files')
+                        )
+                    );
+                    break;
+            }
+        }
+    }
+
+Les callbacks ``before()`` et ``after()`` se lancent à chaque fois qu'une 
+table est créée ou supprimée sur le schema courant.
+
+Quand vous insérez des données à plus d'une table, vous devrez faire un flush 
+du cache de la base de données après la création de chaque table. Le Cache 
+peut être désactivé en configurant 
+``$db->cacheSources = false`` dans l'action before(). ::
+
+    public $connection = 'default';
+
+    public function before($event = array()) {
+        $db = ConnectionManager::getDataSource($this->connection);
+        $db->cacheSources = false;
+        return true;
+    }
+    
 Migrations avec le shell schema de CakePHP
 ==========================================
 
@@ -60,8 +112,9 @@ Vous aurez alors les choix suivants ::
      [Q]uit      (Quitter)
     Would you like to do? (o/s/q) (Que voulez vous faire?)
 
-Choisir [s] (snapshot - vue instantanée) va créer un fichier schema.php incrémenté. 
-Ainsi, si vous avez schema.php, cela va créer schema\_2.php et ainsi de suite.
+Choisir [s] (snapshot - vue instantanée) va créer un fichier schema.php 
+incrémenté. Ainsi, si vous avez schema.php, cela va créer schema\_2.php et 
+ainsi de suite.
 Vous pouvez ensuite restaurer chacun de ces schémas en utilisant ::
 
     $ cake schema update -s 2

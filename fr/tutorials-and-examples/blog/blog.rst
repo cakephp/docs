@@ -190,71 +190,25 @@ exécuter (sous \*nix) devrait resembler à quelque chose comme ça ::
 
     $ chown -R www-data app/tmp
 
-Si pour une raison quelquonque CakePHP ne peut pas écrire dans ce répertoire, 
+Si pour une raison quelconque CakePHP ne peut pas écrire dans ce répertoire, 
 vous en serez informé par un message d'avertissement tant que vous n'êtes pas 
 en mode production.
 
 Une note sur mod\_rewrite
 =========================
 
-De temps en temps, un nouvel utilisateur rencontrera des problèmes avec 
-mod_rewrite, je vais donc les mentionner ici en marge. Si le page d'accueil 
-de CakePHP vous semble un peu singulière (pas d'images ou de style CSS), cela 
-signifie probablement que mod\_rewrite n'est pas activé sur votre système. 
-Voici quelques conseils pour vous aider à le faire fonctionner :
+Occasionnellement, un nouvel utilisateur peut avoir des problèmes de  
+mod\_rewrite. par exemple si la page d'accueil de CakePHP a l'air marrante 
+(pas d'images ou de styles css), cela signifie probablement que 
+mod\_rewrite ne fonctionne pas sur votre système. Merci de vous référer 
+à l'une des sections suivantes sur l'url rewriting pour que votre serveur 
+web fonctionne:
 
-#. Assurez-vous qu'une neutralisation (override) .htaccess est permise : dans 
-   votre fichier httpd.conf, vous devriez avoir une rubrique qui définit une 
-   section pour chaque répertoire de votre serveur. Vérifiez que 
-   ``AllowOverride`` est défini à ``All`` pour le bon répertoire. Pour des 
-   raisons de sécurité et de performance, *ne définissez pas* ``AllowOverride`` 
-   à ``All`` dans ``<Directory />``. A la place, recherchez le bloc 
-   ``Directory>`` qui correspond au dossier de votre site web.
+.. toctree::
 
-#. Assurez-vous que vous éditez le bon httpd.conf et non celui d'un utilisateur 
-   ou d'un site spécifique.
+    /installation/url-rewriting
 
-#. Pour une raison ou une autre, vous avez peut être téléchargé une copie de 
-   CakePHP sans les fichiers .htaccess nécessaires. Cela arrive parfois car 
-   certains systèmes d'exploitation masquent les fichiers qui commencent par 
-   '.' et ne les copient pas. Assurez vous que votre copie de CakePHP provient 
-   de la section téléchargements du site ou de GitHub.
-
-#. Assurez-vous qu'Apache charge correctement le mod_rewrite ! Vous devriez 
-   voir quelque chose comme ::
-
-       LoadModule rewrite_module             libexec/httpd/mod_rewrite.so
-
-   ou (pour Apache 1.3)::
-
-       AddModule             mod_rewrite.c
-
-   dans votre httpd.conf.
-
-
-Si vous ne voulez pas ou ne pouvez pas faire fonctionner le mod_rewrite 
-(ou tout autre module compatible) sur votre serveur, vous devrez utiliser les 
-"URLs enjolivées" intégrées à Cake. Dans ``/app/config/core.php``, décommentez 
-la ligne qui ressemble à cela ::
-
-    Configure::write('App.baseUrl', env('SCRIPT_NAME'));
-
-Supprimez également ces fichiers .htaccess ::
-
-    /.htaccess
-    /app/.htaccess
-    /app/webroot/.htaccess
-
-
-Vos URLs seront ainsi transformées en : 
-www.exemple.com/index.php/nomducontroller/nomdelaction/param plutôt que 
-www.exemple.com/nomducontroller/nomdelaction/param.
-
-Si vous installez CakePHP sur un serveur web autre que Apache, vous trouverez 
-les instructions pour obtenir des "URLs enjolivées" avec d'autres serveurs 
-dans le chapitre :doc:`/installation/advanced-installation`
-
-Continuez sur :doc:`/tutorials-and-examples/blog/part-two` pour commencer à 
+Maintenant continuez sur :doc:`/tutorials-and-examples/blog/part-two` pour commencer à 
 construire votre première application CakePHP.
 
 

@@ -192,12 +192,13 @@ Si votre serveur web est configuré correctement, vous devriez maintenant
 accéder à votre application Cake accessible à l'adresse : 
 http://www.exemple.com.
 
-Installation avancée et configuration de serveur spécifique
-===========================================================
+Installation avancée et URL Rewriting
+=====================================
 
 .. toctree::
 
-   installation/advanced-installation
+    installation/advanced-installation
+    installation/url-rewriting
 
 A vous de jouer!
 ================
