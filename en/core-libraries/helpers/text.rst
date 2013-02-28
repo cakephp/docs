@@ -63,6 +63,25 @@ truncating long stretches of text.
         In 2.1 this method automatically escapes its input. Use the ``escape``
         option to disable this if necessary.
 
+.. php:method:: autoParagraph(string $text)
+    
+    :param string $text: The text to convert.
+
+    Adds proper <p> around text where double-line returns are found and <br> where single-line returns
+    are found in $text
+
+        $myText = 'For more information 
+         regarding our world-famous pastries and desserts. 
+
+         contact info@example.com';
+        $formattedText = $this->Text->autoParagraph($myText);
+
+    Output::
+
+        <p>For more information<br /> 
+	regarding our world-famous pastries and desserts.<p>
+        <p>contact info@example.com</p>
+
 .. include:: ../../core-utility-libraries/string.rst
     :start-after: start-string
     :end-before: end-string
