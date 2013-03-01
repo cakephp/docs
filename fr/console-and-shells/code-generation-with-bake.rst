@@ -19,7 +19,9 @@ les droits d'exécution au script bash cake ou l'appeler avec la commande
 La console cake est exécutée en utilisant le CLI PHP 
 (Interface de Ligne de Commande). Si vous avez des problèmes en exécutant ce 
 script, vérifiez que le CLI PHP est installé et qu'il a les modules adéquats 
-autorisés (ex: MySQL).
+autorisés (ex: MySQL). Certains utilisateurs peuvent aussi rencontrer des 
+problèmes si la base de donnée host est 'localhost' et devront essayer 
+'127.0.0.1' à la place. Cela peut causer des soucis avec le CLI PHP.
 
 En exécutant Bake la première fois, vous serez invité à créer un fichier de 
 configuration de la base de données, si vous n'en avez pas créé auparavant.

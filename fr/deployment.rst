@@ -8,62 +8,77 @@ vous déployez une application CakePHP.
 Vérifier votre sécurité
 =======================
 
-If you're throwing your application out into the wild, it's a good idea to make
-sure it doesn't have any leaks. Check the :doc:`/core-libraries/components/security-component` to guard against
-CSRF attacks, form field tampering, and others. Doing :doc:`/models/data-validation`, and/or 
-:doc:`/core-utility-libraries/sanitize` is also a great idea, for protecting your
-database and also against XSS attacks. Check that only your ``webroot`` directory 
-should be publicly visible, and that your secrets (such as your app salt, and
-any security keys) are private and unique as well!
+Si vous sortez votre application dans la nature, il est bon de vous assurer 
+qu'elle n'a pas de fuites. Allez voir 
+:doc:`/core-libraries/components/security-component` pour vous sécuriser contre 
+les attaques CSRF, form field tampering, etc... Utiliser 
+:doc:`/models/data-validation`, et/ou :doc:`/core-utility-libraries/sanitize` 
+est aussi une bonne idée, pour protéger votre base de données et aussi contre 
+les attaques XSS. Vérifiez que seul votre répertoire ``webroot`` est visible 
+publiquement, et que vos secrets (comme le salt de votre app, et les clés de 
+sécurité) sont privés et uniques aussi!
 
 Set document root
 =================
 
-Setting the document root correctly on your application is an important step to
-keeping your code secure and your application safer. CakePHP applications,
-should have the document root set to the application's ``app/webroot``.  This
-makes the application and configuration files inaccessible through a URL.
-Setting the document root is different for different webservers.  See the
-:doc:`/installation/advanced-installation` documentation for webserver specific
-information.
+Configurer le document root correctement dans votre application est aussi
+une étape importante pour garder votre code sécurisé et votre application 
+plus sûre. Les applications CakePHP devraient avoir le document root configuré 
+au répertoire ``app/webroot`` de l'application. Cela rend les fichiers de 
+l'application et de configuration inaccessibles via une URL.
+Configurer le document root est différent selon les webserveurs. Regardez 
+la documentation :doc:`/installation/advanced-installation` pour une 
+information sur la spécificité de chaque webserveur.
 
 Mise à jour core.php
 ====================
 
-Updating core.php, specifically the value of ``debug`` is extremely important.
-Turning debug = 0 disables a number of development features that should never be
-exposed to internet at large.  Disabling debug changes the following types of
-things:
+Mettre à jour core.php, spécialement la valeur de ``debug`` est extrêmement 
+important. Mettre debug = 0 désactive un certain nombre de fonctionnalités de 
+développement qui ne devraient jamais être exposées sur internet. Désactiver 
+le debug change les types de choses suivantes:
 
-* Debug messages, created with :php:func:`pr()` and :php:func:`debug()` are
-  disabled.
-* Core CakePHP caches are flushed every 99 years, instead of every 10 seconds as
-  in development.
-* Error views are less informative, and give generic error messages instead.
-* Errors are not displayed.
-* Exception stack traces are disabled.
+* Les messages de Debug, créés avec :php:func:`pr()` et :php:func:`debug()` sont
+  désactivés.
+* Les caches du Coeur de CakePHP sont flushés tous les 99 years, au lieu de 
+  tous les 10 seconds en développement.
+* Les vues d'Erreur sont moins informatives, et renvoient des messages 
+  génériques d'erreur à la place.
+* Les Erreurs ne sont pas affichées.
+* Les traces de pile d'Exception sont désactivées.
 
-In addition to the above, many plugins and application extensions use ``debug``
-to modify their behavior.
-
+En plus des éléments ci-desssus, beaucoup de plugins et d'extensions 
+d'application utilisent ``debug`` pour modifier leur comportement.
 
 De multiples applications CakePHP en utilisant le même coeur
 ============================================================
 
-There are a few ways you can configure multiple applications to use the same
-CakePHP core.  You can either use PHP's ``include_path`` or set the
-``CAKE_CORE_INCLUDE_PATH`` in your application's ``webroot/index.php``.
-Generally using PHP's ``include_path`` is easier and more robust.  CakePHP comes
-preconfigured to look on the ``include_path`` as well so it's simple to use.
+Vous avez peu de façons de configurer de multiples applications qui utilisent 
+le même coeur de CakePHP. Vous pouvez soit utiliser le ``include_path`` de 
+PHP, ou configurer ``CAKE_CORE_INCLUDE_PATH`` dans le fichier 
+``webroot/index.php`` de votre application.
+Généralement, utiliser le ``include_path`` de PHP est plus facile et plus 
+robuste. CakePHP est fourni pré-configuré pour aussi regarder le 
+``include_path`` donc il est facile à utiliser.
 
-In your ``php.ini`` file locate the existing ``include_path`` directive, and
-either append to it or add an ``include_path`` directive::
+Dans votre fichier de ``php.ini``, repérez la directive existante 
+``include_path``, et vous pouvez soit ajouter à la suite de la directive, 
+soit créer la directive ``include_path``::
 
     include_path = '.:/usr/share/php:/usr/share/cakephp-2.0/lib'
 
-This assumes you are running a \*nix server, and have CakePHP in
+Cela suppose que vous êtes sur un serveur \*nix, et que CakePHP est dans 
 ``/usr/share/cakephp-2.0``.
 
+Améliorer les performances de votre application
+===============================================
+
+Comme la gestion des éléments statiques, comme les images, le Javascript et 
+les fichiers css des plugins à travers le Dispatcher est incroyablement 
+inéfficace, il est chaudement recommandé de les symlinker pour la 
+production. Par exemple comme ceci::
+
+    ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
 
 .. meta::
     :title lang=fr: Deploiement
