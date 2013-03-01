@@ -76,7 +76,7 @@ Certains plugins ont besoin en supplément de créer une ou plusieurs tables
 dans votre base de données. Dans ces cas, ils incluent souvent un fichier 
 de schéma que vous appelez à partir du shell de cake comme ceci::
 
-    user@host$ cake schema create -plugin ContactManager
+    user@host$ cake schema create --plugin ContactManager
 
 La plupart des plugins indiqueront dans leur documentation leur propre 
 procédure pour les configurer et configurer la base de données. Certains 

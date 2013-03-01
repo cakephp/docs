@@ -72,7 +72,7 @@ load() も同様の働きですが、明示的に指定したプラグインだ�
 
 ::
 
-    user@host$ cake schema create -plugin ContactManager
+    user@host$ cake schema create --plugin ContactManager
 
 ほとんどのプラグインで、設定するための正確な手続きとデータベースのセットアップするための方法が、ドキュメントに書かれています。
 他よりセットアップが必要なものもあります。
