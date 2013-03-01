@@ -76,7 +76,7 @@ include() или require() настроек или маршрутизации п
 В этих случаях плагины часто комплектуются schema-файлом, который можно
 вызвать из консоли Cake::
 
-    user@host$ cake schema create -plugin ContactManager
+    user@host$ cake schema create --plugin ContactManager
 
 В документации к большинству плагинов будет указано, как правильно их настроить
 и какие изменения в базу данных необходимо внести. Некоторые плагины
