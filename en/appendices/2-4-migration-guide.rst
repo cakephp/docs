@@ -68,6 +68,12 @@ FileLog
 Utility
 =======
 
+General
+-------
+
+- :php:func:`pr` no longer outputs HTML when running in cli mode.
+
+
 Validation
 ----------
 
