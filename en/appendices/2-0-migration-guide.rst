@@ -442,9 +442,9 @@ Some examples on using :php:meth:`App::uses()` when migrating from
     // becomes 
     App::uses('PagesController', 'Controller');
 
-    App::import('Component', 'Email');
+    App::import('Component', 'Auth');
     // becomes 
-    App::uses('EmailComponent', 'Controller/Component');
+    App::uses('AuthComponent', 'Controller/Component');
 
     App::import('View', 'Media');
     // becomes 
