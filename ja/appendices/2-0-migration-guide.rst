@@ -419,9 +419,9 @@ CakePHP 1.3の :php:meth:`App::import()` との主な違いは、前者が実際
     // は次のようになる 
     App::uses('PagesController', 'Controller');
 
-    App::import('Component', 'Email');
+    App::import('Component', 'Auth');
     // は次のようになる 
-    App::uses('EmailComponent', 'Controller/Component');
+    App::uses('AuthComponent', 'Controller/Component');
 
     App::import('View', 'Media');
     // は次のようになる 
