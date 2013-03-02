@@ -68,11 +68,11 @@ The IRC channel
    Bakery
 
 If you’re stumped, give us a holler in the CakePHP IRC channel.
-Someone from the development team is usually there, especially
-during the daylight hours for North and South America users. We’d
-love to hear from you, whether you need some help, want to find
-users in your area, or would like to donate your brand new sports
-car.
+Someone from the `development team <https://github.com/cakephp?tab=members>`_
+is usually there, especially during the daylight hours for North
+and South America users. We’d love to hear from you, whether you
+need some help, want to find users in your area, or would like to
+donate your brand new sports car.
 
 The Google Group
 ================

@@ -78,7 +78,7 @@ Example usage::
     class Example extends AppModel {
         public $primaryKey = 'example_id'; // example_id is the field name in the database
     }
-    
+
 
 .. _model-displayField:
 
@@ -166,11 +166,11 @@ Example Usage::
 
     public $_schema = array(
         'first_name' => array(
-            'type' => 'string', 
+            'type' => 'string',
             'length' => 30
         ),
         'last_name' => array(
-            'type' => 'string', 
+            'type' => 'string',
             'length' => 30
         ),
         'email' => array(

@@ -7,6 +7,9 @@ defined in model classes (including your AppModel) class. Be sure
 to note the expected return values for each of these special
 functions.
 
+When using callback methods you should remember that behavior callbacks are
+fired **before** model callbacks are.
+
 beforeFind
 ==========
 

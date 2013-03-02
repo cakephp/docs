@@ -928,7 +928,7 @@ with usage examples.
         );
 
 
-.. php:staticmethod:: isUnique()
+.. php:method:: Model::isUnique()
 
     The data for the field must be unique, it cannot be used by any
     other rows.

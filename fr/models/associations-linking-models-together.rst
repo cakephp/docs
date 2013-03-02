@@ -51,79 +51,74 @@ spécificité de l'association.
 ::
 
     class User extends AppModel {
-        public $name = 'User';
         public $hasOne = 'Profile';
         public $hasMany = array(
             'Recipe' => array(
-                'className'  => 'Recette',
-                'conditions' => array('Recette.approvee' => '1'),
-                'order'      => 'Recette.created DESC'
+                'className'  => 'Recipe',
+                'conditions' => array('Recipe.approved' => '1'),
+                'order'      => 'Recipe.created DESC'
             )
         );
     }
 
-Dans l'exemple ci-dessus, la première instance du mot 'Recette' est ce que 
+Dans l'exemple ci-dessus, la première instance du mot 'Recipe' est ce que 
 l'on appelle un 'Alias'. C'est un identifiant pour la relation et cela peut 
 être ce que vous souhaitez. En règle générale, on choisit le même nom que la 
 classe qu'il référence. Toutefois, **les alias pour chaque model doivent être 
 uniques dans une app entière**. Par exemple, il est approprié d'avoir::
 
-    class User extends AppModel {
-        public $name = 'User';
+     class User extends AppModel {
         public $hasMany = array(
-            'MaRecette' => array(
-                'className' => 'Recette',
-            ),
+            'MyRecipe' => array(
+                'className' => 'Recipe',
+            )
         );
-        public $hasAndBelongsToMany => array(
-            'MembreDe' => array(
-                'className' => 'Groupe',
-            ),
+        public $hasAndBelongsToMany = array(
+            'MemberOf' => array(
+                'className' => 'Group',
+            )
         );
-    }
-     
-    class Group extends AppModel {
-        public $name = 'Group';
-        public $hasMany = array(
-            'MaRecette' => array(
-                'className'  => 'Recette',
-            ),
-        );
-        public $hasAndBelongsToMany => array(
-            'Membre' => array(
-                'className' => 'User',
-            ),
-        );
-        public $hasAndBelongsToMany => array('MembreDe' => array('className' => 'Group'));
     }
 
-mais ce qui suit ne travaillera pas bien dans toute circonstance::
-
-    class User extends AppModel {
-        public $name = 'User';
+    class Group extends AppModel {
         public $hasMany = array(
-            'MaRecette' => 'Recette',
+            'MyRecipe' => array(
+                'className'  => 'Recipe',
+            )
         );
-        public $hasAndBelongsToMany => array(
-            'Membere' => array(
-                'className' => 'Groupe',
-            ),
+        public $hasAndBelongsToMany = array(
+            'Member' => array(
+                'className' => 'User',
+            )
         );
     }
-    
-    class Group extends AppModel {
-        public $name = 'Group';
+
+mais ce qui suit ne fonctionnera pas bien en toute circonstance::
+
+    class User extends AppModel {
         public $hasMany = array(
-            'MaRecette' => array(
-                'className'  => 'Recette',
-            ),
+            'MyRecipe' => array(
+                'className' => 'Recipe',
+            )
         );
-        public $hasAndBelongsToMany => array(
-            'Membere' => array(
+        public $hasAndBelongsToMany = array(
+            'Member' => array(
+                'className' => 'Group',
+            )
+        );
+    }
+
+    class Group extends AppModel {
+        public $hasMany = array(
+            'MyRecipe' => array(
+                'className'  => 'Recipe',
+            )
+        );
+        public $hasAndBelongsToMany = array(
+            'Member' => array(
                 'className' => 'User',
-            ),
+            )
         );
-        public $hasAndBelongsToMany => array('Membre' => 'Group');
     }
 
 parce que ici nous avons l'alias 'Member' se référant aux deux models 
@@ -133,21 +128,21 @@ models peut entraîner un comportement inattendu.
 
 Cake va créer automatiquement des liens entre les objets model associés.
 Ainsi par exemple dans votre model ``User``, vous pouvez accedez 
-au model ``Recette`` comme ceci::
+au model ``Recipe`` comme ceci::
 
-    $this->Recette->uneFunctionQuelconque();
+    $this->Recipe->someFunction();
 
 De même dans votre controller, vous pouvez acceder à un model associé 
 simplement en poursuivant les associations de votre model::
 
-    $this->User->Recette->uneFunctionQuelconque();
+    $this->User->Recipe->someFunction();
 
 .. note::
 
     Rappelez vous que les associations sont définis dans 'un sens'. Si vous 
-    définissez User hasMany Recette, cela n'a aucun effet sur le model 
-    Recette. Vous avez besoin de définir Recette belongsTo User pour 
-    pouvoir accéder au model User à partir du model Recette.
+    définissez User hasMany Recipe, cela n'a aucun effet sur le model 
+    Recipe. Vous avez besoin de définir Recipe belongsTo User pour 
+    pouvoir accéder au model User à partir du model Recipe.
 
 hasOne
 ------
@@ -163,15 +158,15 @@ Le motif de base est :
 
 **hasOne:**, *l'autre* model contient la clé étrangère.
 
-========================== =========================
-Relation                   Schéma            
-========================== =========================
-Pomme hasOne Banane        bananes.pomme\_id
--------------------------- -------------------------
-User hasOne Profil         profiles.user\_id 
--------------------------- -------------------------
-Docteur hasOne Maitre      maitres.docteur\_id
-========================== =========================
+==================== ==================
+Relation             Schema
+==================== ==================
+Apple hasOne Banana  bananas.apple\_id
+-------------------- ------------------
+User hasOne Profile  profiles.user\_id
+-------------------- ------------------
+Doctor hasOne Mentor mentors.doctor\_id
+==================== ==================
 
 .. note::
 
@@ -202,11 +197,10 @@ limiter l'association pour inclure seulement certains enregistrements.
 ::
 
     class User extends AppModel {
-        public $name = 'User';
         public $hasOne = array(
-            'Profil' => array(
-                'className'    => 'Profil',
-                'conditions'   => array('Profil.publiee' => '1'),
+            'Profile' => array(
+                'className'    => 'Profile',
+                'conditions'   => array('Profile.published' => '1'),
                 'dependent'    => true
             )
         );
@@ -247,14 +241,14 @@ liés s'il en existe::
         [User] => Array
             (
                 [id] => 121
-                [nom] => Gwoo the Kungwoo
+                [name] => Gwoo the Kungwoo
                 [created] => 2007-05-01 10:31:01
             )
         [Profil] => Array
             (
                 [id] => 12
                 [user_id] => 121
-                [competences] => Baking Cakes
+                [skill] => Baking Cakes
                 [created] => 2007-05-01 10:31:01
             )
     )
@@ -273,15 +267,15 @@ de type belongsTo, suivez cette convention :
 
 **belongsTo:** le model *courant* contient la clé étrangère.
 
-============================= ==================
-Relation                      Schéma
-============================= ==================
-Banane belongsTo Pomme        bananes.pomme\_id
------------------------------ ------------------
-Profil belongsTo User         profiles.user\_id
------------------------------ ------------------
-Maitres belongsTo Docteur     maitres.docteur\_id
-============================= ==================
+======================= ==================
+Relation                Schema
+======================= ==================
+Banana belongsTo Apple  bananas.apple\_id
+----------------------- ------------------
+Profile belongsTo User  profiles.user\_id
+----------------------- ------------------
+Mentor belongsTo Doctor mentors.doctor\_id
+======================= ==================
 
 .. tip::
 
@@ -312,47 +306,40 @@ syntaxe de tableau::
 
 Les clés possibles pour les tableaux d'association belongsTo incluent:
 
--  **className**: the classname of the model being associated to
-   the current model. If you’re defining a ‘Profile belongsTo User’
-   relationship, the className key should equal ‘User.’
--  **foreignKey**: the name of the foreign key found in the current
-   model. This is especially handy if you need to define multiple
-   belongsTo relationships. The default value for this key is the
-   underscored, singular name of the other model, suffixed with
+-  **className**: le nom de classe du model associé au model courant.
+   Si vous définissez une relation ‘Profile belongsTo User’, la clé du 
+    nom de classe devra être ‘User.’
+-  **foreignKey**: le nom de la clé étrangère trouvée dans le model courant.
+   C'est particulièrement pratique si vous avez besoin de définir de multiples 
+   relations belongsTo. La valeur par défaut pour cette clé est le nom au 
+   singulier de l'autre model avec des underscores, suffixé avec 
    ``_id``.
--  **conditions**: an array of find() compatible conditions or SQL
-   strings such as ``array('User.active' => true)``
--  **type**: the type of the join to use in the SQL query, default
-   is LEFT which may not fit your needs in all situations, INNER may
-   be helpful when you want everything from your main and associated
-   models or nothing at all! (effective when used with some conditions
-   of course).
-   **(NB: type value is in lower case - i.e. left, inner)**
--  **fields**: A list of fields to be retrieved when the associated
-   model data is fetched. Returns all fields by default.
--  **order**: an array of find() compatible order clauses or SQL
-   strings such as ``array('User.username' => 'ASC')``
--  **counterCache**: If set to true the associated Model will
-   automatically increase or decrease the
-   “[singular\_model\_name]\_count” field in the foreign table
-   whenever you do a ``save()`` or ``delete()``. If it's a string then it's the
-   field name to use. The value in the counter field represents the
-   number of related rows. You can also specify multiple counter caches
-   by using an array where the key is field name and value is the
-   conditions. E.g.::
+-  **conditions**: un tableau de conditions compatibles find() ou de chaînes 
+   SQL comme ``array('User.active' => true)``
+-  **type**: le type de join à utiliser dans la requête SQL, par défaut 
+   LEFT ce qui peut ne pas correspondre à vos besoins dans toutes les 
+   situations, INNER peut être utile quand vous voulez tout de votre model 
+   principal ainsi que de vos models associés! (Utile quand utilisé 
+   avec certaines conditions bien sur).
+   **(NB: la valeur de type est en lettre minuscule - ex. left, inner)**
+-  **fields**: Une liste des champs à retourner quand les données du model 
+   associé sont récupérées. Retourne tous les champs par défaut.
+-  **order**: un tableau de clauses orderqui sont compatibles avec find() 
+   ou des chaînes SQL comme ``array('User.username' => 'ASC')``
+-  **counterCache**: Si défini à true, le Model associé va automatiquement 
+   augmenter ou diminuer le champ “[singular\_model\_name]\_count” dans la 
+   table étrangère quand vous faites un ``save()`` ou un ``delete()``. Si 
+   c'est une chaîne alors il s'agit du nom du champ à utiliser. La valeur 
+   dans le champ counter représente le nombre de lignes liées. Vous pouvez 
+   aussi spécifier de multiples caches counter en définissant un tableau, 
+   regardez :ref:`multiple-counterCache`
+-  **counterScope**: Un tableau de conditions optionnelles à utiliser pour 
+   la mise à jour du champ du cache counter.
 
-       array(
-           'recipes_count' => true,
-           'recipes_published' => array('Recipe.published' => 1)
-       )
+Une fois que cette association a été définie, les opérations de find sur le 
+model Profile va aussi récupérer un enregistrement lié de User si il existe::
 
--  **counterScope**: Optional conditions array to use for updating
-   counter cache field.
-
-Once this association has been defined, find operations on the
-Profile model will also fetch a related User record if it exists::
-
-    //Sample results from a $this->Profile->find() call.
+    //Exemples de résultats d'un appel de $this->Profile->find().
     
     Array
     (
@@ -503,22 +490,22 @@ n'importe lequel des deux models.
 counterCache - Cache your count()
 ---------------------------------
 
-This function helps you cache the count of related data. Instead of
-counting the records manually via ``find('count')``, the model
-itself tracks any addition/deleting towards the associated
-``$hasMany`` model and increases/decreases a dedicated integer
-field within the parent model table.
+Cette fonction vous aide à mettre en cache le count des données liées.
+Au lieu de counting les enregistrements manuellement via ``find('count')``, 
+le model suit lui-même tout ajout/suppression à travers le model ``$hasMany``
+associé et augmente/diminue un champ numérique dedié dans la table du model 
+parent.
 
-The name of the field consists of the singular model name followed
-by a underscore and the word "count"::
+Le nom du champ est le nom du model particulier suivi par un underscore 
+et le mot "count"::
 
     my_model_count
 
-Let's say you have a model called ``ImageComment`` and a model
-called ``Image``, you would add a new INT-field to the ``images``
-table and name it ``image_comment_count``.
+Disons que vous avez un model appelé ``ImageComment`` et un model
+appelé ``Image``, vous ajouteriez un nouveau champ numérique (INT) à la 
+table ``images`` et l'appeleriez ``image_comment_count``.
 
-Here are some more examples:
+Ici vous trouverez quelques exemples supplémentaires:
 
 ========== ======================= =========================================
 Model      Associated Model        Example
@@ -530,9 +517,9 @@ Image      ImageComment            images.image\_comment\_count
 BlogEntry  BlogEntryComment        blog\_entries.blog\_entry\_comment\_count
 ========== ======================= =========================================
 
-Once you have added the counter field you are good to go. Activate
-counter-cache in your association by adding a ``counterCache`` key
-and set the value to ``true``::
+Une fois que vous avez ajouté le champ counter, c'est tout bon. Activez 
+counter-cache dans votre association en ajoutant une clé ``counterCache`` et
+configurez la valeur à ``true``::
 
     class ImageComment extends AppModel {
         public $belongsTo = array(
@@ -542,21 +529,57 @@ and set the value to ``true``::
         );
     }
 
-From now on, every time you add or remove a ``ImageComment`` associated to
-``Image``, the number within ``image_comment_count`` is adjusted
-automatically.
+A partir de maintenant, chaque fois que vous ajoutez ou retirez un 
+``ImageComment`` associé à ``Image``, le nombre dans ``image_comment_count``
+est ajusté automatiquement.
 
-You can also specify ``counterScope``. It allows you to specify a
-simple condition which tells the model when to update (or when not
-to, depending on how you look at it) the counter value.
+counterScope
+============
 
-Using our Image model example, we can specify it like so::
+Vous pouvez aussi spécifier ``counterScope``. Cela vous permet de spécifier une 
+condition simple qui dit au model quand mettre à jour (ou quand ne pas 
+le fair, selon la façon dont on le conçoit) la valeur counter.
+
+En utilisant notre exemple de model Image, nous pouvons le spécifier comme 
+cela::
 
     class ImageComment extends AppModel {
         public $belongsTo = array(
             'Image' => array(
                 'counterCache' => true,
-                'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1
+                'counterScope' => array('Image.active' => 1) // seulement count si "Image" est active = 1
+            )
+        );
+    }
+    
+Multiple counterCache
+=====================
+
+Depuis la 2.0, CakePHP supporte les multiples ``counterCache`` dans une seule 
+relation de model. Il est aussi possible de définir un ``counterScope`` pour 
+chaque ``counterCache``. En assumant que vous avez un model ``User`` et un 
+model ``Message`` et que vous souhaitez être capable de count le montant 
+de messages lus et non lus pour chaque utilisateur.
+
+========= ====================== ===========================================
+Model     Field                  Description
+========= ====================== ===========================================
+User      users.messages\_read   Count read ``Message``
+--------- ---------------------- -------------------------------------------
+User      users.messages\_unread Count unread ``Message``
+--------- ---------------------- -------------------------------------------
+Message   messages.is\_read      Determines if a ``Message`` is read or not.
+========= ====================== ===========================================
+
+Avec la configuration de votre ``belongsTo`` qui ressemblerait à cela::
+
+    class Message extends AppModel {
+        public $belongsTo = array(
+            'User' => array(
+                'counterCache' => array(
+                    'messages_read' => array('Message.is_read' => 1),
+                    'messages_unread' => array('Message.is_read' => 0)
+                )
             )
         );
     }
@@ -576,10 +599,10 @@ plusieurs fois, de plusieurs façons différentes.
 
 La principale différence entre les relations hasMany et HABTM est que le lien 
 entre les models n'est pas exclusif dans le cadre d'une relation HABTM. Par 
-exemple, relions notre model Recette avec un model Ingredient en utilisant 
+exemple, relions notre model Recipe avec un model Ingredient en utilisant 
 HABTM. Le fait d'utiliser les tomates en Ingredient pour la recette de 
 Spaghettis de ma grand-mère ne "consomme" pas l'Ingredient. Je peux aussi 
-utiliser mes Spaghettis pour une Recette Salade.
+utiliser mes Spaghettis pour une Recipe Salade.
 
 Les liens entre des objets liés par une association hasMany sont exclusifs. Si 
 mon User "hasMany" Comment, un commentaire ne sera lié qu'à un 
@@ -662,7 +685,7 @@ Les clés possibles pour un tableau définissant une association HABTM sont :
    tables de jointure HABTM).
 -  **with**: Définit le nom du model pour la table de jointure. Par 
    défaut CakePHP créera automatiquement un model pour vous. Dans 
-   l'exemple ci-dessus la valeur aurait été RecettesTag. En utilisant 
+   l'exemple ci-dessus la valeur aurait été RecipesTag. En utilisant 
    cette clé vous pouvez surcharger ce nom par défaut. Le model de la 
    table de jointure peut être utilisé comme tout autre model "classique" 
    pour accéder directement à la table de jointure. En créant une classe 
@@ -705,9 +728,9 @@ Les clés possibles pour un tableau définissant une association HABTM sont :
    dans les situations qui nécéssitent des résultats très personnalisés.
 
 Une fois que cette association a été définie, les opérations de recherche 
-sur le model Recette récupèreront également les Ingredient reliés si ils existent::
+sur le model Recipe récupèreront également les Ingredient reliés si ils existent::
 
-    // Exemple de résultats d'un appel a $this->Recette->find().
+    // Exemple de résultats d'un appel a $this->Recipe->find().
     
     Array
     (  
@@ -739,7 +762,7 @@ sur le model Recette récupèreront également les Ingredient reliés si ils exi
     )
 
 N'oubliez pas de définir une association HABTM dans le model Ingredient si 
-vous souhaitez retrouver les données de Recette lorsque vous manipulez le 
+vous souhaitez retrouver les données de Recipe lorsque vous manipulez le 
 model Ingredient.
 
 .. note::
@@ -762,40 +785,41 @@ model Ingredient.
 hasMany through (Le Model Join)
 -------------------------------
 
-It is sometimes desirable to store additional data with a many to
-many association. Consider the following
+Il est parfois nécéssaire de stocker des données supplémentaires avec une 
+association many to many. Considérons ce qui suit
 
 `Student hasAndBelongsToMany Course`
 
 `Course hasAndBelongsToMany Student`
 
-In other words, a Student can take many Courses and a Course can be
-taken by many Students. This is a simple many to many association
-demanding a table such as this::
+En d'autres termes, un Student peut avoir plusieurs (many) Courses et un 
+Course peut être pris par plusieurs (many) Students. C'est une association 
+simple de many to many nécéssitant une table comme ceci::
 
     id | student_id | course_id
 
-Now what if we want to store the number of days that were attended
-by the student on the course and their final grade? The table we'd
-want would be::
+Maintenant si nous souhaitions stocker le nombre de jours que les students 
+doivent faire pour leur course et leur grade final? La table que nous 
+souhaiterions serait comme ceci::
 
     id | student_id | course_id | days_attended | grade
 
-The trouble is, hasAndBelongsToMany will not support this type of
-scenario because when hasAndBelongsToMany associations are saved,
-the association is deleted first. You would lose the extra data in
-the columns as it is not replaced in the new insert.
+Le problème est que hasAndBelongsToMany ne vas pas supporter ce type de 
+scénario parce que quand les associations hasAndBelongsToMany sont sauvegardées,
+l'association est d'abord supprimée. Vous perderiez les données supplémentaires 
+dans les colonnes qui ne seraient pas remplacées dans le nouvel ajout.
 
     .. versionchanged:: 2.1
 
-    You can set ``unique`` setting to ``keepExisting`` circumvent
-    losing extra data during the save operation.  See ``unique``
-    key in :ref:`HABTM association arrays <ref-habtm-arrays>`.
+    Vous pouvez définir la configuration de ``unique`` à ``keepExisting`` 
+    contournant la perte de données supplémentaires pendant l'opération de
+    sauvegarde. Regardez la clé ``unique`` dans 
+    :ref:`HABTM association arrays <ref-habtm-arrays>`.
 
-The way to implement our requirement is to use a **join model**,
-otherwise known as a **hasMany through** association.
-That is, the association is a model itself. So, we can create a new
-model CourseMembership. Take a look at the following models.::
+La façon d'implémenter nos exigences est d'utiliser un **join model**,
+autrement connu comme une association **hasMany through**.
+Cela étant fait, l'association est elle-même un model. Ainsi, vous pouvez 
+créer un nouveau model CourseMembership. Regardez les models suivants.::
 
             // Student.php
             class Student extends AppModel {
@@ -820,18 +844,17 @@ model CourseMembership. Take a look at the following models.::
                 );
             }   
 
-The CourseMembership join model uniquely identifies a given
-Student's participation on a Course in addition to extra
-meta-information.
+Le model join CourseMembership identifie de façon unique une participation 
+d'un Student à un Course en plus d'ajouter des meta-informations.
 
-Join models are pretty useful things to be able to use and Cake
-makes it easy to do so with its built-in hasMany and belongsTo
-associations and saveAll feature.
+Les models Join sont des choses particulièrement pratiques à utiliser
+et Cake facilite cela avec les associations intégrées hasMany and belongsTo
+et la fonctionnalité de saveAll.
 
 .. _dynamic-associations:
 
-Creating and Destroying Associations on the Fly
------------------------------------------------
+Créer et Détruire des Associations à la Volée
+---------------------------------------------
 
 Quelquefois il devient nécessaire de créer et détruire les associations 
 de models à la volée. Cela peut être le cas pour un certain nombre de raisons :
@@ -850,8 +873,6 @@ fonctionnent bindModel() et unbindModel(). Nous commencerons avec
 deux models::
 
     class Leader extends AppModel {
-        public $name = 'Leader';
-        
         public $hasMany = array(
             'Follower' => array(
                 'className' => 'Follower',
@@ -859,21 +880,21 @@ deux models::
             )
         );
     }
-    
+
     class Follower extends AppModel {
         public $name = 'Follower';
     }
 
-Maintenant, dans le controller MeneursController, nous pouvons utiliser 
-la méthode find() du model Meneur pour retrouver un Meneur et les 
+Maintenant, dans le controller LeadersController, nous pouvons utiliser 
+la méthode find() du model Leader pour retrouver un Leader et les 
 Suiveurs associés. Comme vous pouvez le voir ci-dessus, le tableau 
-d'association dans le model Meneur définit une relation "Meneur 
+d'association dans le model Leader définit une relation "Leader 
 hasMany (a plusieurs) Suiveurs". Dans un but démonstratif, utilisons 
 unbindModel() pour supprimer cette association dans une action du 
 controller::
 
     public function some_action() {
-        // Ceci récupère tous les Meneurs, ainsi que leurs Suiveurs
+        // Ceci récupère tous les Leaders, ainsi que leurs Suiveurs
         $this->Leader->find('all');
       
         // Supprimons la relation hasMany() ...
@@ -882,7 +903,7 @@ controller::
         );
       
         // Désormais l'utilisation de la fonction find() retournera
-        // des Meneurs, sans aucun Suiveurs
+        // des Leaders, sans aucun Suiveurs
         $this->Leader->find('all');
       
         // NOTE : unbindModel n'affecte que la prochaine fonction find.
@@ -890,7 +911,7 @@ controller::
         // telles que configurée.
       
         // Nous avons déjà utilisé findAll('all') après unbindModel(),
-        // ainsi cette ligne récupèrera une fois encore les Meneurs
+        // ainsi cette ligne récupèrera une fois encore les Leaders
         // avec leurs Suiveurs ...
         $this->Leader->find('all');
     }
@@ -910,20 +931,20 @@ Voici un exemple basique d'utilisation de unbindModel()::
     );
 
 Maintenant que nous sommes arrivés à supprimer une association à la volée, 
-ajoutons-en une. Notre Meneur jusqu'à présent sans Principes a besoin d'être 
+ajoutons-en une. Notre Leader jusqu'à présent sans Principes a besoin d'être 
 associé à quelques Principes. Le fichier de model pour notre model Principe 
 est dépouillé, il n'y a que la ligne var $name. Associons à la volée des 
-Principes à notre Meneur (mais rappelons-le, seulement pour la prochaine 
-opération find). Cette fonction apparaît dans le controller MeneursController::
+Principes à notre Leader (mais rappelons-le, seulement pour la prochaine 
+opération find). Cette fonction apparaît dans le controller LeadersController::
 
     public function another_action() {
-        // Il n'y a pas d'association Meneur hasMany Principe
-        // dans le fichier de model meneur.php, ainsi un find
-        // situé ici ne récupèrera que les Meneurs.
+        // Il n'y a pas d'association Leader hasMany Principe
+        // dans le fichier de model Meneur.php, ainsi un find
+        // situé ici ne récupèrera que les Leaders.
         $this->Leader->find('all');
      
         // Utilisons bindModel() pour ajouter une nouvelle association
-        // au model Meneur :
+        // au model Leader :
         $this->Leader->bindModel(
             array('hasMany' => array(
                     'Principle' => array(
@@ -935,7 +956,7 @@ opération find). Cette fonction apparaît dans le controller MeneursController:
      
         // Maintenant que nous les avons associés correctement,
         // nous pouvons utiliser la fonction find une seule fois
-        // pour récupérer les Meneurs avec leurs Principes associés :
+        // pour récupérer les Leaders avec leurs Principes associés :
         $this->Leader->find('all');
     }
 
@@ -980,7 +1001,7 @@ model Message peut ressembler à quelque chose comme::
         );
     }
 
-Receveur est un alias pour le model User. Maintenant, voyons à quoi 
+Recipient est un alias pour le model User. Maintenant, voyons à quoi 
 devrait ressembler le model User::
 
     class User extends AppModel {

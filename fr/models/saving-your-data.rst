@@ -779,6 +779,40 @@ En utilisant le code précédent, un select drop down est crée, permettant aux
 multiples choix d'être automatiquement sauvegarder au Recipe existant en étant 
 ajouté à la base de données.
 
+Self HABTM
+~~~~~~~~~~
+
+Normalement HABTM est utilisé pour lier 2 models ensemble mais il peut 
+aussi être utilisé avec seulement 1 model, mais il nécéssite une attention
+plus grande encore.
+
+La clé est dans la configuration du model ``className``. En ajoutant 
+simplement une relation ``Project`` HABTM ``Project`` entraine des 
+problèmes lors des enregistrements de données. 
+En configurant le ``className`` au nom de models et en utilisant l'alias 
+en clé, nous évitions ces problèmes.::
+
+    class Project extends AppModel {
+        public $hasAndBelongsToMany = array(
+            'RelatedProject' => array(
+                'className'              => 'Project',
+                'foreignKey'             => 'projects_a_id',
+                'associationForeignKey'  => 'projects_b_id',
+            ),
+        );
+    }
+
+Créer des éléments de form et sauvegarder les données fonctionne de la même 
+façon qu'avant mais vous utilisez l'alias à la place. Ceci::
+
+    $this->set('projects', $this->Project->find('list'));
+    $this->Form->input('Project');
+
+Devient ceci::
+
+    $this->set('relatedProjects', $this->Project->find('list'));
+    $this->Form->input('RelatedProject');
+    
 Que faire quand HABTM devient compliqué?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

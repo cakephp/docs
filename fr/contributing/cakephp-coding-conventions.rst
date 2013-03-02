@@ -6,6 +6,9 @@ Les développeurs de Cake vont utiliser les normes de code suivantes.
 Il est recommandé que les autres personnes qui développent des IngredientsCake 
 suivent les mêmes normes.
 
+Vous pouvez utilisez le `CakePHP Code Sniffer
+<https://github.com/cakephp/cakephp-codesniffer>`_ pour vérifier que votre code suit les normes requises.
+
 Ajout de nouvelles fonctionnalités
 ==================================
 
@@ -63,9 +66,10 @@ Les structures de controle sont par exemple "``if``", "``for``", "``foreach``",
    lignes, et ils devraient avoir le même niveau d'indentation que la structure 
    de contrôle. La déclaration inclue dans les accolades doit commencer sur une
    nouvelle ligne, et le code qu'il contient doit gagner un nouveau niveau 
-   d'indentation::
+   d'indentation.
+   
+::
 
-    <?php 
     // wrong = pas de parenthèses, déclaration mal placée
     if (expr) statement; 
 
@@ -92,6 +96,26 @@ de l'opération pour clarifier::
 
     //Imbriquations des ternaires est mauvaise
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
+
+
+View files
+----------
+
+Dans les fichiers de vue (fichiers .ctp) les développeurs devront utiliser 
+les structures de contrôle en mot (keyword control structures).
+Les structures de contrôle en môt sont plus faciles à lire dans des fichiers 
+de vue complexes. Les structures de contrôle peuvent soit être contenues dans 
+un block PHP plus large, soit dans des tags PHP séparés::
+
+    <?php
+    if ($isAdmin):
+        echo "<p>You are the admin user.</p>";
+    endif;
+    ?>
+    <p>The following is also acceptable:</p>
+    <?php if ($isAdmin): ?>
+        <p>You are the admin user.</p>
+    <?php endif; ?>
 
 Appels des fonctions
 ====================
@@ -292,6 +316,7 @@ Fichiers
 
 Les noms de fichier qui ne contiennent pas de classes, doivent être écrits en 
 minuscules et soulignés, par exemple:
+
 ::
 
     nom_de_fichier_long.php

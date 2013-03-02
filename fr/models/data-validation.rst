@@ -736,7 +736,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
         );
 
 
-.. php:staticmethod:: isUnique()
+.. php:method:: Model::isUnique()
 
     La donnée pour le champ doit être unique, elle ne peut être utilisée par 
     aucune autre ligne.
