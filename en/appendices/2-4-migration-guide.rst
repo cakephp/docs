@@ -48,7 +48,9 @@ CakeRequest
 CakeEmail
 ---------
 
-- Logged email messages now have the scope of ``email`` by default.
+- Logged email messages now have the scope of ``email`` by default. If you are
+  not seeing email contents in your logs, be sure to add the ``email`` scope to
+  your logging configuration.
 
 
 I18n
