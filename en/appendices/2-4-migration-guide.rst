@@ -4,6 +4,15 @@
 CakePHP 2.4 is a fully API compatible upgrade from 2.3.  This page outlines
 the changes and improvements made in 2.4.
 
+Core
+====
+
+Object
+------
+
+- php:meth:`Object::log()` had the ``$scope`` parameter added.
+
+
 Model
 =====
 
@@ -35,6 +44,13 @@ CakeRequest
 
 - :php:meth:`CakeRequest::param()` was added.
 
+
+CakeEmail
+---------
+
+- Logged email messages now have the scope of ``email`` by default.
+
+
 I18n
 ====
 
@@ -55,6 +71,7 @@ L10n
   ``p`` has been dropped in favor of ``pl`` (Polish),
   ``sz`` has been dropped in favor of ``se`` (Sami).
 - Kazakh has been added with ``kaz`` as locale and ``kk`` as catalog code.
+- Kalaallisut has been added with ``kal`` as locale and ``kl`` as catalog code.
 
 Logging
 =======
