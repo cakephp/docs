@@ -109,8 +109,8 @@ window.lang = "{{ language }}";
 		<div class="columns nine">
 			<ul class="inline breadcrumb">
 			{%- for parent in parents %}
-			<li>
-				<a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %}>{{ parent.title }}</a>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %} itemprop="url"><span itemprop="title">{{ parent.title }}</span></a>
 			</li>
 			{%- endfor %}
 			</ul>
