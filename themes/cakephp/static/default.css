@@ -590,3 +590,8 @@ dt tt {
 		float: none;
 	}
 }
+
+/* -- Share -- */
+.share-links {
+	float: left;
+}
