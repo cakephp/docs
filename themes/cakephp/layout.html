@@ -5,6 +5,15 @@
 
 {% block extrahead %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+{% for lang in languages %}
+	{%- if lang != language -%}
+		{%- if has_lang(lang, pagename) -%}
+		<link rel="alternate" hreflang="{{ lang }}" href="{{ lang_link(lang, pagename) }}" />
+		{%- endif -%}
+	{%- endif -%}
+{% endfor %}
+
 <link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="{{ pathto('_static/opensearchdescription-book-2-x.xml', 1) }}">
 <script type="text/javascript">
 window.lang = "{{ language }}";
@@ -100,8 +109,8 @@ window.lang = "{{ language }}";
 		<div class="columns nine">
 			<ul class="inline breadcrumb">
 			{%- for parent in parents %}
-			<li>
-				<a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %}>{{ parent.title }}</a>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %} itemprop="url"><span itemprop="title">{{ parent.title }}</span></a>
 			</li>
 			{%- endfor %}
 			</ul>
