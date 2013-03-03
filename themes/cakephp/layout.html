@@ -5,6 +5,15 @@
 
 {% block extrahead %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+{% for lang in languages %}
+	{%- if lang != language -%}
+		{%- if has_lang(lang, pagename) -%}
+		<link rel="alternate" hreflang="{{ lang }}" href="{{ lang_link(lang, pagename) }}" />
+		{%- endif -%}
+	{%- endif -%}
+{% endfor %}
+
 <link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="{{ pathto('_static/opensearchdescription-book-2-x.xml', 1) }}">
 <script type="text/javascript">
 window.lang = "{{ language }}";
