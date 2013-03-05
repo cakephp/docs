@@ -149,7 +149,9 @@ should configure ``Configure`` as well::
 
     class AppController extends Controller {
         public function beforeFilter() {
-            Configure::write('Config.language', $this->Session->read('Config.language'));
+            if ($this->Session->check('Config.language')) {
+                Configure::write('Config.language', $this->Session->read('Config.language'));
+            }
         }
     }
 

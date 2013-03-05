@@ -129,6 +129,17 @@ the default recursive level is 1.
     required foreign keys to the ``fields`` array manually. In the
     example above, this could mean adding ``domain_id``.
 
+.. tip::
+
+    The recommended recursive level for your application should be -1.
+    This avoids retrieving related data where that is unnecessary or even
+    unwanted. This is most likely the case for most of your find() calls.
+    Raise it only when needed or use Containable behavior.
+
+    You can achieve that by adding it to the AppModel::
+
+        public $recursive = -1;
+
 order
 =====
 
