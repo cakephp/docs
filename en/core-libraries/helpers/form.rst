@@ -1601,7 +1601,7 @@ you to consolidate repeated options into a single method call::
             'div' => false,
             'class' => 'fancy'
         )
-    ));
+    );
 
 All inputs created from that point forward will inherit the options declared in
 inputDefaults. You can override the default options by declaring the option in the
