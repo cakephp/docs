@@ -74,7 +74,8 @@ schema
 datasource
     non-DBO datasource to use, e.g. 'ldap', 'twitter'
 unix_socket
-    Used by drivers that support it to connect via unix socket files.
+    Used by drivers that support it to connect via unix socket files. If you are
+    using postgres and want to use unix sockets, leave the host key blank.
 
 .. note::
 
