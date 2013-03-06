@@ -106,3 +106,10 @@ Validation
 ----------
 
 - :php:meth:`Validation::date()` now supports the ``y`` and ``ym`` formats.
+
+
+CakeNumber
+----------
+
+- The currencies ``AUD``, ``CAD`` and ``JPY`` have been added.
+- The symbols for ``GBP`` and ``EUR`` are now UTF-8. If you upgrade a non-UTF-8 application, make sure that you replace the static ``$_currencies`` attribute with the appropriate HTML entity symbols.
