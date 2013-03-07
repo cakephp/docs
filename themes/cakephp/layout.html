@@ -106,6 +106,21 @@ window.lang = "{{ language }}";
 		<div class="columns three root-link">
 			<a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a>
 		</div>
+		<div class="languages columns six">
+			<ul class="languages inline">
+			{% for lang in languages %}
+				<li>
+					{%- if lang == language -%}
+					<span class="active">{{ lang }}</span>
+					{%- elif has_lang(lang, pagename) -%}
+					<a href="{{ lang_link(lang, pagename) }}">{{ lang }}</a>
+					{%- else -%}
+					<span class="disabled">{{ lang }}</span>
+					{%- endif -%}
+				</li>
+			{% endfor %}
+			</ul>
+		</div>
 		<div class="columns nine">
 			<ul class="inline breadcrumb">
 			{%- for parent in parents %}
@@ -171,21 +186,6 @@ window.lang = "{{ language }}";
 			<strong>Found an issue?</strong>
 			Submit a correction on <a href="https://github.com/cakephp/docs">github</a><br />
 			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
-		</div>
-		<div class="languages columns three">
-			<ul class="languages inline">
-			{% for lang in languages %}
-				<li>
-					{%- if lang == language -%}
-					<span class="active">{{ lang }}</span>
-					{%- elif has_lang(lang, pagename) -%}
-					<a href="{{ lang_link(lang, pagename) }}">{{ lang }}</a>
-					{%- else -%}
-					<span class="disabled">{{ lang }}</span>
-					{%- endif -%}
-				</li>
-			{% endfor %}
-			</ul>
 		</div>
 	</div>
 
