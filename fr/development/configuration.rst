@@ -83,7 +83,8 @@ datasource
     Source de données Non-DBO à utiliser, ex: 'ldap', 'twitter'.
 unix_socket
     Utilisé par les pilotes qui le supportent pour connecter via les fichiers 
-    socket unix.
+    socket unix. Si vous utilisez postgres et voulez utiliser les sockets 
+    unix, laissez la clé host vide.
 
 .. note::
 
@@ -465,8 +466,8 @@ dans un contexte statique::
 
 .. _loading-configuration-files:
 
-Chargement des fichiers de configuration
-========================================
+Lire et écrire les fichiers de configuration
+============================================
 
 CakePHP est fourni avec deux fichiers readers de configuration intégrés.
 :php:class:`PhpReader` est capable de lire les fichiers de config de PHP, dans 
@@ -501,6 +502,11 @@ Vous pouvez aussi retirer les readers attachés. ``Configure::drop('default')``
 retirerait l'alias du reader par défaut. Toute tentative future pour charger 
 les fichiers de configuration avec ce reader serait en échec.
 
+.. _loading-configuration-files:
+
+Chargement des fichiers de configuration
+========================================
+
 .. php:staticmethod:: load($key, $config = 'default', $merge = true)
 
     :param string $key: L'identifieur du fichier de configuration à charger.
@@ -520,6 +526,38 @@ et d'ajouter de nouvelles valeurs dans la configuration existante exécutée.
 En configurant ``$merge`` à true, les valeurs ne vont pas toujours écraser 
 la configuration existante.
 
+Créer et modifier les fichiers de configuration
+-----------------------------------------------
+
+.. php:staticmethod:: dump($key, $config = 'default', $keys = array())
+
+    :param string $key: Le nom du fichier/configuration stockée à créer.
+    :param string $config: Le nom du reader avec lequel stocker les données.
+    :param array $keys: La liste des clés de haut-niveau à sauvegarder. Par 
+     défaut, pour toutes les clés.
+
+Déverse toute ou quelques données de Configure dans un fichier ou un système de
+stockage supporté par le reader. Le format de sérialisation est décidé en 
+configurant le reader de config attaché dans $config. Par exemple, si l'adaptateur
+'default' est un :php:class:`PhpReader`, le fichier généré sera un fichier de 
+configuration PHP qu'on pourra charger avec :php:class:`PhpReader`
+
+Etant donné que le reader 'default' est une instance de PhpReader.
+Sauvegarder toutes les données de Configure  dans le fichier `my_config.php`::
+
+    Configure::dump('my_config.php', 'default');
+
+Sauvegarder seulement les erreur gérant la configuration::
+
+    Configure::dump('error.php', 'default', array('Error', 'Exception'));
+
+``Configure::dump()`` peut être utilisé pour soit modifier, soit surcharger 
+les fichiers de configuration qui sont en lisibles avec 
+:php:meth:`Configure::load()`
+
+.. versionadded:: 2.2
+    ``Configure::dump()`` a été ajouté dans 2.2.
+    
 Stocker la configuration de runtime
 -----------------------------------
 
