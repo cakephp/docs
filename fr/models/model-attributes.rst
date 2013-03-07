@@ -2,7 +2,7 @@ Attributs de Model
 ##################
 
 Les attributs de Model vous permettent de configurer les propriétés qui 
-peuvent écraser (override) le behavior du model par défaut.
+peuvent surcharger le behavior du model par défaut.
 
 Pour une liste complète d'attributs du model et ses descriptions, visitez 
 l'API de CakePHP. Allez voir 
@@ -134,6 +134,19 @@ est 1.
     au tableau ``fields`` manuellement. Dans l'exemple ci-dessus, ceci 
     pourrait signifier d'ajouter ``domain_id``.
 
+.. tip::
+
+    Le niveau de recursive recommandé pour votre application devrait être -1.
+    Cela évite de récupérer des données liés dans les cas où ce n'est pas 
+    nécéssaire ou même non souhaités. C'est le plus souvent le cas pour la 
+    plupart de vos appels find().
+    Augmenter le seulement quand cela est souhaité ou utilisez le Containable 
+    behavior.
+
+    Vous pouvez réaliser cela en l'ajoutant à AppModel::
+
+        public $recursive = -1;
+
 order
 =====
 
@@ -227,9 +240,9 @@ ainsi que des limitations, regardez :doc:`/models/virtual-fields`.
 name
 ====
 
-Comme vous avez vu précédemment dans ce chapitre, l'attribut name est une 
-fonctionnalité compatible pour les utilisateurs de PHP4 et est défini selon 
-la même valeur que le nom du model.
+Nom du model. Si vous ne le spécifiez pas dans votre fichier model, 
+il sera défini automatiquement selon le nom de la classe par le 
+constructeur.
 
 Exemple d'utilisation::
 
