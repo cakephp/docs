@@ -317,18 +317,42 @@ ce champ. En interne ``input()`` délègue aux autre méthode du FormHelper.
         checkbox
     text
         textarea
-    text, with name of password, passwd, or psword
+    text, avec le nom de password, passwd, ou psword
         password
+    text, avec le nom de email
+        email
+    text, avec le nom de tel, telephone, ou phone
+        tel
     date
-        day, month, and year selects
+        day, month, et year selects
     datetime, timestamp
-        day, month, year, hour, minute, and meridian selects
+        day, month, year, hour, minute, et meridian selects
     time
-        hour, minute, and meridian selects
+        hour, minute, et meridian selects
 
-    Le paramètre ``$options`` vous permets de personnaliser le 
+    Le paramètre ``$options`` vous permet de personnaliser le 
     fonctionnement  de ``input()``, et contrôle finement ce qui est généré.
+    
+    Le div entourant aura un nom de classe ``required`` ajouté à la suite si
+    les règles de validation pour le champ du Model ne spécifient pas 
+    ``allowEmpty => true``. Une limitation de ce comportement est que le champ 
+    du model doit avoir été chargé pendant la requête. Ou être directement 
+    associé au model fourni par :php:meth:`~FormHelper::create()`.
 
+    .. versionadded:: 2.3
+
+    .. _html5-required:
+
+    Depuis 2.3, l'attribut HTML5 ``required`` va aussi être ajouté selon les 
+    règles de validation du champ. Vous pouvez explicitement définir 
+    la clé ``required`` dans le tableau d'options pour la surcharger pour un 
+    champ. Pour echapper à la validation attrapée par le navigateur pour 
+    l'ensemble du formulaire, vous pouvez définir l'option 
+    ``'formnovalidate' => true`` pour l'input button que vous générez en 
+    utilisant :php:meth:`FormHelper::submit()` ou définir 
+    ``'novalidate' => true`` dans les options pour 
+    :php:meth:`FormHelper::create()`.
+    
    Par exemple, supposons que votre model User contient les champs 
    username (varchar), password (varchar), approved (datetime) et quote (text). 
    Vous pouvez utiliser la méthode input() de l'helper Formulaires (Formhelper)
@@ -633,6 +657,9 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
     pour chacune des règles de validation de vos models.
     Vous pouvez de plus fournir des messages i18n pour vos formulaires.
   
+  .. versionadded:: 2.3
+    Support pour l'option ``errorMessage`` a été ajouté dans 2.3
+    
 *   ``$options['before']``, ``$options['between']``, ``$options['separator']``,
     et ``$options['after']``
 
@@ -712,9 +739,12 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
         // Pas de div, ni label
         echo $this->Form->input('password');
         
-        // comme un élément label
+        // a un élément label
         echo $this->Form->input('username', array('label' => 'Username'));
 
+    Si vous avez besoin de changer plus tard les valeurs par défaut, vous 
+    pourrez uiliser :php:meth:`FormHelper::inputDefaults()`.
+  
 Générer des types de inputs spécifiques
 =======================================
 
@@ -1404,6 +1434,9 @@ Création des boutons et des éléments submits
     Cette méthode créée un élément ``<form>``. Donc n'utilisez pas cette 
     méthode dans un formulaire existant. En remplacement vous devriez
     ajouter un bouton submit en utilisant :php:meth:`FormHelper::submit()`
+    
+    .. versionchanged:: 2.3
+    The ``method`` option was added.
 
    
 Créé des inputs de date et d'heure (date and time inputs)
@@ -1520,8 +1553,8 @@ Créé des inputs de date et d'heure (date and time inputs)
     Créé un élément select (menu de sélection) rempli avec ‘am’ et ‘pm’.
 
 
-Afficher et Displaying and checking errors
-==========================================
+Afficher et vérifier les erreurs
+================================
 
 .. php:method:: error(string $fieldName, mixed $text, array $options)
 
@@ -1556,6 +1589,30 @@ Afficher et Displaying and checking errors
     Retourne false si le champ fourni décrit par l'entité courante ne contient
     pas d'erreur. Sinon retourne le message de validation.
 
+Configuration par défaut pour tous les champs
+=============================================
+
+.. versionadded:: 2.2
+
+Vous pouvez déclarer un ensemble d'options par défaut pour ``input()`` en 
+utilisant :php:meth:`FormHelper::inputDefaults()`. Changer les options par 
+défaut vous permet de consolider les options répétées dans un appel à une 
+unique méthode::
+
+    echo $this->Form->inputDefaults(array(
+            'label' => false,
+            'div' => false,
+            'class' => 'fancy'
+        )
+    );
+
+Tous les champs créés à partir ce point de retour vont hériter des options 
+déclarées dans inputDefaults. Vous pouvez surcharger les options par défaut en 
+déclarant l'option dans l'appel input()::
+
+    echo $this->Form->input('password'); // Pas de div, pas de label avec la classe 'fancy'
+    echo $this->Form->input('username', array('label' => 'Username')); // a un élément label avec les mêmes valeurs par défaut
+    
 Travailler avec le Component Sécurité
 =====================================
 

@@ -478,9 +478,9 @@ Quelques exemples de l'utilisation de :php:meth:`App::uses()` quand on migre de
     // devient 
     App::uses('PagesController', 'Controller');
 
-    App::import('Component', 'Email');
+    App::import('Component', 'Auth');
     // devient 
-    App::uses('EmailComponent', 'Controller/Component');
+    App::uses('AuthComponent', 'Controller/Component');
 
     App::import('View', 'Media');
     // devient 
