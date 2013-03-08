@@ -50,21 +50,21 @@ parentNode() method defined. This is used by the AclBehavior to
 determine parent->child relationships. A model's parentNode()
 method must return null or return a parent Model reference::
 
-    function parentNode() {
+    public function parentNode() {
         return null;
     }
 
 If you want to set an ACO or ARO node as the parent for your Model,
 parentNode() must return the alias of the ACO or ARO node::
 
-    function parentNode() {
+    public function parentNode() {
         return 'root_node';
     }
 
 A more complete example. Using an example User Model, where User
 belongsTo Group::
 
-    function parentNode() {
+    public function parentNode() {
         if (!$this->id && empty($this->data)) {
             return null;
         }
