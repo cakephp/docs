@@ -5,9 +5,9 @@ CacheHelper
 
 The Cache helper assists in caching entire layouts and views, saving time
 repetitively retrieving data. View Caching in Cake temporarily stores parsed
-layouts and views as simple PHP + HTML files It should be noted that the Cache
+layouts and views as simple PHP + HTML files. It should be noted that the Cache
 helper works quite differently than other helpers. It does not have methods that
-are directly called. Instead a view is marked with cache tags indicating which
+are directly called. Instead, a view is marked with cache tags indicating which
 blocks of content should not be cached. The CacheHelper then uses helper
 callbacks to process the file and output to generate the cache file.
 
@@ -51,7 +51,7 @@ tweak its behavior. This is done through the ``$cacheAction``
 variable in your controllers. ``$cacheAction`` should be set to an
 array which contains the actions you want cached, and the duration
 in seconds you want those views cached. The time value can be
-expressed in a ``strtotime()`` format. (ie. "1 hour", or "3 minutes").
+expressed in a ``strtotime()`` format (e.g. "1 hour", or "3 minutes").
 
 Using the example of an ArticlesController, that receives a lot of
 traffic that needs to be cached::
@@ -126,7 +126,7 @@ and view variables are serialized with PHP's ``serialize()``.
 Clearing the Cache
 ==================
 
-It is important to remember that the CakePHP will clear a cached view
+It is important to remember that CakePHP will clear a cached view
 if a model used in the cached view is modified. For example, if a
 cached view uses data from the Post model, and there has been an
 INSERT, UPDATE, or DELETE query made to a Post, the cache for that
