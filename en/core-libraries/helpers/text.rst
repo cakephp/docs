@@ -17,7 +17,7 @@ truncating long stretches of text.
    ``$this->Text->method($args);``.
 
 .. php:method:: autoLinkEmails(string $text, array $options=array())
-    
+
     :param string $text: The text to convert.
     :param array $options: An array of :term:`html attributes` for the generated links.
 

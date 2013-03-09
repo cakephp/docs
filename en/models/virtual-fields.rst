@@ -118,13 +118,13 @@ model.
 Virtual fields in SQL queries
 =============================
 
-Using functions in direct SQL queries will prevent data from being returned in the same array as your model's data. 
+Using functions in direct SQL queries will prevent data from being returned in the same array as your model's data.
 For example this::
 
     $this->Timelog->query("SELECT project_id, SUM(id) as TotalHours FROM timelogs AS Timelog GROUP BY project_id;");
 
 would return something like this::
-	
+
    Array
    (
        [0] => Array
@@ -167,7 +167,7 @@ cleaner grouping of values::
                     )
             )
     )
-	
+
 Limitations of virtualFields
 ============================
 

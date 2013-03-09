@@ -52,16 +52,16 @@ Given this type of setup, I would need to edit my webroot/index.php
 file (which will end up at /var/www/mysite/index.php, in this
 example) to look like the following::
 
-    // /app/webroot/index.php (partial, comments removed) 
-    
+    // /app/webroot/index.php (partial, comments removed)
+
     if (!defined('ROOT')) {
         define('ROOT', DS . 'home' . DS . 'me');
     }
-    
+
     if (!defined('APP_DIR')) {
         define ('APP_DIR', 'myapp');
     }
-    
+
     if (!defined('CAKE_CORE_INCLUDE_PATH')) {
         define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
     }

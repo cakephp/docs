@@ -25,7 +25,7 @@ HTTP methods.
 
         // string query
         $results = $HttpSocket->get('http://www.google.com/search', 'q=cakephp');
-        
+
         // array query
         $results = $HttpSocket->get('http://www.google.com/search', array('q' => 'cakephp'));
 
@@ -36,7 +36,7 @@ HTTP methods.
 
     The parameters for the ``post`` method are almost the same as the
     get method, ``$uri`` is the web address where the request is being
-    made; ``$query`` is the data to be posted, either as s string, or as 
+    made; ``$query`` is the data to be posted, either as s string, or as
     an array of keys and values::
 
         App::uses('HttpSocket', 'Network/Http');
@@ -48,7 +48,7 @@ HTTP methods.
             'http://example.com/add',
             'name=test&type=user'
         );
-        
+
         // array data
         $data = array('name' => 'test', 'type' => 'user');
         $results = $HttpSocket->post('http://example.com/add', $data);
@@ -181,10 +181,10 @@ Headers can be fetched case-insensitively.
 Automatically handling a redirect response
 ------------------------------------------
 
-When the response has a valid redirect status code (see ``HttpResponse::isRedirect``), 
+When the response has a valid redirect status code (see ``HttpResponse::isRedirect``),
 an extra request can be automatically done according to the received *Location* header::
 
-    <?php 
+    <?php
     App::uses('HttpSocket', 'Network/Http');
 
     $HttpSocket = new HttpSocket();

@@ -798,12 +798,12 @@ existing Recipe being added or saved to the database.
 Self HABTM
 ~~~~~~~~~~
 
-Normally HABTM is used to bring 2 models together but it can also 
+Normally HABTM is used to bring 2 models together but it can also
 be used with only 1 model, though it requires some extra attention.
 
-The key is in the model setup the ``className``. Simply adding a 
-``Project`` HABTM ``Project`` relation causes issues saving data. 
-By setting the ``className`` to the models name and use the alias as 
+The key is in the model setup the ``className``. Simply adding a
+``Project`` HABTM ``Project`` relation causes issues saving data.
+By setting the ``className`` to the models name and use the alias as
 key we avoid those issues.::
 
     class Project extends AppModel {

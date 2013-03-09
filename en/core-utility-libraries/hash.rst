@@ -567,7 +567,7 @@ elements you can use attribute matching with methods like ``extract()``.
 
     :rtype: integer
 
-    Counts the dimensions of an array. This method will only 
+    Counts the dimensions of an array. This method will only
     consider the dimension of the first element in the array::
 
         $data = array('one', '2', 'three');

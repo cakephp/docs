@@ -31,14 +31,14 @@ would be placed in
 configured ``CakeLog`` will attempt to load Configuring log streams
 is done by calling ``CakeLog::config()``. Configuring our
 DataBaseLogger would look like::
-    
+
     // for app/Lib
     CakeLog::config('otherFile', array(
         'engine' => 'DatabaseLogger',
         'model' => 'LogEntry',
         // ...
     ));
-    
+
     // for plugin called LoggingPack
     CakeLog::config('otherFile', array(
         'engine' => 'LoggingPack.DatabaseLogger',
@@ -79,10 +79,10 @@ your own types by using them when you call ``CakeLog::write``.
 Error and Exception logging
 ===========================
 
-Errors and Exceptions can also be logged.  By configuring the 
-co-responding values in your core.php file.  Errors will be 
-displayed when debug > 0 and logged when debug == 0. Set ``Exception.log`` 
-to true to log uncaught exceptions. See :doc:`/development/configuration` 
+Errors and Exceptions can also be logged.  By configuring the
+co-responding values in your core.php file.  Errors will be
+displayed when debug > 0 and logged when debug == 0. Set ``Exception.log``
+to true to log uncaught exceptions. See :doc:`/development/configuration`
 for more information.
 
 Interacting with log streams
@@ -113,7 +113,7 @@ which writes to the error log. The default log location is
 
     // Executing this inside a CakePHP class
     $this->log("Something didn't work!");
-    
+
     // Results in this being appended to app/tmp/logs/error.log
     // 2007-11-02 10:22:02 Error: Something didn't work!
 
@@ -123,7 +123,7 @@ you wish to write logs to::
 
     // called statically
     CakeLog::write('activity', 'A special message for activity logging');
-    
+
     // Results in this being appended to app/tmp/logs/activity.log (rather than error.log)
     // 2007-11-02 10:22:02 Activity: A special message for activity logging
 
@@ -217,7 +217,7 @@ CakeLog API
 
     :param string $name: Name for the logger being connected, used
         to drop a logger later on.
-    :param array $config: Array of configuration information and 
+    :param array $config: Array of configuration information and
         constructor arguments for the logger.
 
     Connect a new logger to CakeLog.  Each connected logger

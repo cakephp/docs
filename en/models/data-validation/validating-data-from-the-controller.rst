@@ -69,7 +69,7 @@ to avoid second check::
 
     if ($this->ModelName->saveAll($this->request->data, array('validate' => false))) {
         // saving without validation
-    } 
+    }
 
 
 .. meta::

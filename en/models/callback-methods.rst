@@ -79,7 +79,7 @@ formatting::
         }
         return $results;
     }
-    
+
     public function dateFormatAfterFind($dateString) {
         return date('d-m-Y', strtotime($dateString));
     }

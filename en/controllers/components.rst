@@ -112,7 +112,7 @@ them like so::
 
     class PostsController extends AppController {
         public $components = array('Session', 'Cookie');
-        
+
         public function delete() {
             if ($this->Post->delete($this->request->data('Post.id')) {
                 $this->Session->setFlash('Post deleted.');
@@ -133,7 +133,7 @@ You might not need all of your components available on every controller action.
 In situations like this you can load a component at runtime using the
 :doc:`Component Collection </core-libraries/collections>`.  From inside a
 controller you can do the following::
-    
+
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
 
@@ -167,7 +167,7 @@ structure for the component would look something like this::
 .. note::
 
     All components must extend :php:class:`Component`.  Failing to do this
-    will trigger an exception. 
+    will trigger an exception.
 
 Including your component in your controllers
 --------------------------------------------
@@ -217,7 +217,7 @@ way you include them in controllers - using the ``$components`` var::
     App::uses('Component', 'Controller');
     class CustomComponent extends Component {
         // the other component your component uses
-        public $components = array('Existing'); 
+        public $components = array('Existing');
 
         public function initialize(Controller $controller) {
             $this->Existing->foo();

@@ -23,7 +23,7 @@ Set up your user information with your name/handle and working email address::
 
 .. note::
 
-    If you are new to Git, we highly recommend you to read the excellent and free 
+    If you are new to Git, we highly recommend you to read the excellent and free
     `ProGit <http://progit.org>`_ book.
 
 Get a clone of the CakePHP source code from github:
@@ -44,7 +44,7 @@ to date with CakePHP::
     git remote add upstream git://github.com/cakephp/cakephp.git
 
 Now that you have CakePHP setup you should be able to define a ``$test``
-:ref:`database connection <database-configuration>`, and 
+:ref:`database connection <database-configuration>`, and
 :ref:`run all the tests <running-tests>`.
 
 Working on a patch
@@ -105,7 +105,7 @@ fork::
 
 Once your branch is on github, you can discuss it on the
 `cakephp-core <http://groups.google.com/group/cakephp-core>`_ mailing list or
-submit a pull request on github. 
+submit a pull request on github.
 
 Choosing where your changes will be merged into
 -----------------------------------------------

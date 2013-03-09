@@ -205,7 +205,7 @@ default content will be discarded.
     You should avoid using ``content`` as a block name.  This is used by CakePHP
     internally for extended views, and view content in the layout.
 
-    
+
 Displaying blocks
 -----------------
 

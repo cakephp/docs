@@ -70,7 +70,7 @@ a secure connection, is available on the path
         $this->Cookie->name = 'baker_id';
         $this->Cookie->time = 3600;  // or '1 hour'
         $this->Cookie->path = '/bakers/preferences/';
-        $this->Cookie->domain = 'example.com';   
+        $this->Cookie->domain = 'example.com';
         $this->Cookie->secure = true;  // i.e. only sent if using secure HTTPS
         $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
         $this->Cookie->httpOnly = true;

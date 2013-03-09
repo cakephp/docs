@@ -31,8 +31,8 @@ strings in :php:func:`__()` like so::
 
 If you do nothing further, these two code examples are functionally
 identical - they will both send the same content to the browser.
-The :php:func:`__()` function will translate the passed string 
-if a translation is available, or return it unmodified. It works similar 
+The :php:func:`__()` function will translate the passed string
+if a translation is available, or return it unmodified. It works similar
 to other `Gettext <http://en.wikipedia.org/wiki/Gettext>`_ implementations
 (as do the other translate functions, such as
 :php:func:`__d()` , :php:func:`__n()` etc)
@@ -58,9 +58,9 @@ location::
 The default domain is 'default', therefore your locale folder would
 look something like this::
 
-    /app/Locale/eng/LC_MESSAGES/default.po (English)   
-    /app/Locale/fre/LC_MESSAGES/default.po (French)   
-    /app/Locale/por/LC_MESSAGES/default.po (Portuguese) 
+    /app/Locale/eng/LC_MESSAGES/default.po (English)
+    /app/Locale/fre/LC_MESSAGES/default.po (French)
+    /app/Locale/por/LC_MESSAGES/default.po (Portuguese)
 
 To create or edit your po files it's recommended that you do *not*
 use your favorite editor. To create a po file for the first time it
@@ -102,7 +102,7 @@ Internationalizing CakePHP Plugins
 If you want to include translation files within your application you'll need to
 follow a few conventions.
 
-Instead of __() and __n() you will have to use __d() and __dn(). The D means 
+Instead of __() and __n() you will have to use __d() and __dn(). The D means
 domain. So if you have a plugin called 'DebugKit' you would have to do this::
 
     __d('debug_kit', 'My example text');
@@ -116,9 +116,9 @@ Your translation file for this example should go into::
 
 And for other languages than the default::
 
-    /app/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)   
-    /app/Plugin/DebugKit/Locale/fre/LC_MESSAGES/debug_kit.po (French)   
-    /app/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese) 
+    /app/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)
+    /app/Plugin/DebugKit/Locale/fre/LC_MESSAGES/debug_kit.po (French)
+    /app/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese)
 
 The reason for that is that CakePHP will use the lower cased and underscored
 plugin name to compare it to the translation domain and is going to look into
@@ -144,7 +144,7 @@ object, like this::
 
     $this->Session->write('Config.language', 'fre');
 
-At the beginning of each request in your controller's ``beforeFilter`` you 
+At the beginning of each request in your controller's ``beforeFilter`` you
 should configure ``Configure`` as well::
 
     class AppController extends Controller {
