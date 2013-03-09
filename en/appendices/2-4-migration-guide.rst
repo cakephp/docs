@@ -33,6 +33,13 @@ Models
   now take a new ``counterCache`` option. You can set it to false to avoid
   updating counter cache values for the particular save operation.
 
+Datasource
+----------
+
+- Mysql, Postgres, and SQLserver now support a 'settings' array in the
+  connection definition. This key => value pair will be issued as ``SET`` commands when the 
+  connection is created.
+
 View
 ====
 
