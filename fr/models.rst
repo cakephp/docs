@@ -24,7 +24,7 @@ façons d'associer vos données. Elle décrira comment trouver, sauvegarder,
 et effacer des données. Au final, elle s'interessera aux sources de données.
 
 Comprendre les Models
-======================
+=====================
 
 Un Model est à la fois votre model de données. En programmation orientée 
 objet, un objet qui représente une "chose", comme une voiture, une personne 

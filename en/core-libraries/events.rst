@@ -96,7 +96,7 @@ That looks a lot cleaner, at gives us the opportunity to introduce the event
 classes and methods. The first thing you may notice is the call to ``getEventManager()``
 this is a method that is available by default in all Models, Controller and Views.
 This method will not return the same manager instance across models, and it is not
-shared between controllers and models, but they are between controllers and views, 
+shared between controllers and models, but they are between controllers and views,
 nevertheless. We will review later how to overcome this implementation detail.
 
 The ``getEventManager`` method returns an instance of :php:class:`CakeEventManager`,
@@ -109,7 +109,7 @@ process of dispatching an event::
     ));
 
 :php:class:`CakeEvent` receives 3 arguments in its constructor. The first one
-is the event name, you should try to keep this name as unique as possible, 
+is the event name, you should try to keep this name as unique as possible,
 while making it readable. We suggest a convention as follows: `Layer.eventName`
 for general events happening at a layer level (e.g. `Controller.startup`, `View.beforeRender`)
 and `Layer.Class.eventName` for events happening in specific classes on a layer,
@@ -138,7 +138,7 @@ Registering callbacks
 How do we register callbacks or observers to our new `afterPlace` event? This
 is subject to a wide variety of different implementations, but they all have
 to call the :php:meth:`CakeEventManager::attach()` method to register new actors.
-For simplicity's sake, let's imagine we know in the plugin what the callbacks 
+For simplicity's sake, let's imagine we know in the plugin what the callbacks
 are available in the controller, and say this controller is responsible for
 attaching them. The possible code would look like this::
 
@@ -415,7 +415,7 @@ params you used for attaching it::
     // Attaching a CakeEventListener
     $listener = new MyCakeEventLister();
     $this->getEventManager()->attach($listener);
-        
+
     // Detaching a single event key from a listener
     $this->getEventManager()->detach($listener, 'My.event');
 
@@ -466,7 +466,7 @@ reality, it cannot do its logic if the model is the Cart::
     App::uses('CakeEventManager', 'Event');
     CakeEventManager::instance()->attach('myCallback', 'Model.beforeFind');
 
-    function myCallback($event) {
+    public function myCallback($event) {
         if ($event->subject() instanceof Cart) {
             return;
         }
@@ -493,7 +493,7 @@ Additional Reading
 ==================
 
 .. toctree::
-    
+
     /core-libraries/collections
     /models/behaviors
     /controllers/components
