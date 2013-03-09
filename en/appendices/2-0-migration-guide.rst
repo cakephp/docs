@@ -208,8 +208,8 @@ changes. Additionally ``$this->params['url']['url']`` no longer exists. Instead
 you should be using $this->request->url to access the same value.
 This attribute now contains the url without the leading slash ``/`` prepended.
 
-Note: For the homepage itself (http://domain/) $this->request->url now returns
-boolean ``false`` instead of ``/``. Make sure you check on that accordingly:
+Note: For the homepage itself (``http://domain/``) $this->request->url now returns
+boolean ``false`` instead of ``/``. Make sure you check on that accordingly::
 
     if (!$this->request->url) {} // instead of $this->request->url === '/'
 
