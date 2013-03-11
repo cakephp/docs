@@ -112,7 +112,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     ロードしたプラグインと名前が共通する CSS ファイルをインクルードするときは
     次のようにします。たとえば ``Blog`` プラグインを使っているときに、
-    ``app/webroot/css/Blog.common.css``をインクルードしたい場合は以下のようにします。::
+    ``app/webroot/css/Blog.common.css`` をインクルードしたい場合は以下のようにします。::
 
         echo $this->Html->css('Blog.common.css', null, array('plugin' => false));
 
@@ -752,8 +752,8 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     :param array $oddTrOptions: 奇数行の <tr> タグの設定をするための :term:`html attributes` の配列。
     :param array $evenTrOptions: 偶数行の <tr> タグの設定をするための :term:`html attributes` の配列。
     :param boolean $useCount: "column-$i" というクラスを追加するかどうかを指定します。
-    :param boolean $continueOddEven: false に設定すると、奇数偶数のカウントをリセットするために
-    static でない $count を変数として使います。
+    :param boolean $continueOddEven: false に設定すると、奇数偶数のカウントを
+        static でない $count を変数として使います。
 
     奇数行と偶数行で異なる属性を割り当てた表のセルを作成します。
     array() でひとつのセルを囲うと、特定の <td> タグについて属性を
