@@ -283,6 +283,16 @@ This will put the coverage results in your application's webroot directory.  You
 should be able to view the results by going to
 ``http://localhost/your_app/coverage``.
 
+Running tests that use sessions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When running tests on the command line that use sessions you'll need to include
+the ``--stderr`` flag. Failing to do so will cause sessions to not work.
+PHPUnit outputs test progress to stdout by default, this causes PHP to assume
+that headers have been sent which prevents sessions from starting. By switching
+PHPUnit to output on stderr, this issue is avoided.
+
+
 Test Case Lifecycle Callbacks
 =============================
 
