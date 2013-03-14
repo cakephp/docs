@@ -19,7 +19,18 @@ Core
 Object
 ------
 
-- php:meth:`Object::log()` had the ``$scope`` parameter added.
+- :php:meth:`Object::log()` had the ``$scope`` parameter added.
+
+
+Components
+==========
+
+AuthComponent
+-------------
+- AuthComponent now supports proper stateless mode when using `Basic` or `Digest`
+  authenticators. Starting of session can be prevented by setting :php:property:`AuthComponent::$sessionKey`
+  to false. Also now when using only `Basic` or `Digest` you are no longer
+  redirected to login page. For more info check the :php:class:`AuthComponent` page.
 
 
 Model
@@ -37,7 +48,7 @@ Datasource
 ----------
 
 - Mysql, Postgres, and SQLserver now support a 'settings' array in the
-  connection definition. This key => value pair will be issued as ``SET`` commands when the 
+  connection definition. This key => value pair will be issued as ``SET`` commands when the
   connection is created.
 
 View
