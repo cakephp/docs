@@ -265,13 +265,13 @@ The above is how you could implement getUser method for HTTP basic
 authentication.  The ``_findUser()`` method is part of ``BaseAuthenticate``
 and identifies a user based on a username and password.
 
-Handling unathenticated requests
---------------------------------
+Handling unauthenticated requests
+---------------------------------
 
-When an unathenticated user tries to access a protected page first the
+When an unauthenticated user tries to access a protected page first the
 `unauthenticated()` method of the last authenticator in the chain is called.
 The authenticate object can handle sending response or redirection as appropriate
-and return `true` to indicate no furthur action is necessary. Due to this the
+and return `true` to indicate no further action is necessary. Due to this the
 order in which you specify the authenticate object in `AuthComponent::$authenticate`
 property matters.
 
