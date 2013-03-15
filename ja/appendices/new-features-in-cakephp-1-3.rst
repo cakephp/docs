@@ -72,7 +72,7 @@ PaginationヘルパはスタイリングのためにCSSのクラスの追加を�
 
     $path = 'css/cake.generic.css'
     $stamped = $this->Html->assetTimestamp($path);
-    
+
     //$stamped は 'css/cake.generic.css?5632934892' （のような）文字列が入る
 
 付加されたタイムスタンプはファイルの最終更新時刻に等しいです。
@@ -193,7 +193,7 @@ MySQLは一番多くのテーブルパラメータをサポートしています
 -  ``encoding``  テーブルで使われるエンコーディングをコントロールします。
 
 テーブルパラメータに加えて、MySQLのDBOは ``fieldParameters`` を実装しています。
-フィールドパラメータはカラム毎のMySQL特有の設定をコントロール可能にします。
+``fieldParameters`` はカラム毎のMySQL特有の設定をコントロール可能にします。
 
 
 -  ``charset`` カラムで使われる文字セットを指定します。
@@ -252,7 +252,7 @@ ShellDispatcherは、シェルとタスクが直近の親に *Shell* クラス�
 **Output**
 
 ``Shell::nl()`` が追加されました。
-これは単行・複数行の改行文字を返します。 
+これは単行・複数行の改行文字を返します。
 ``Shell::out()`` 、 ``err()`` 、 ``hr()`` は、 ``$newlines`` 引数を受け取ることができるようになりました。
 これは ``nl()`` に渡され、どれだけの新規行が出力に追加されるかをコントロールすることが可能です。
 
@@ -316,7 +316,7 @@ core.phpに ``Configure::write('Routing.prefixes', array('admin', 'member'));`` 
 
 **Inflector**
 
-Inflector::rulesを使い、Inflector::slugで使われる音訳マップのデフォルトをグローバルにカスタマイズすることができるようになりました。 
+Inflector::rulesを使い、Inflector::slugで使われる音訳マップのデフォルトをグローバルにカスタマイズすることができるようになりました。
 例： ``Inflector::rules('transliteration', array('/å/' => 'aa', '/ø/' => 'oe'))``
 
 また、Inflectorは今やinflectionのために渡された全てのデータを内部でキャッシュします。（slugメソッド以外）。
@@ -417,7 +417,7 @@ error404に独自のエラーメソッドを変換したいなら、手動です
 
     <?php
     Configure::write('Routing.prefixes', array('admin', 'member'));
-    
+
     class PostsController extends AppController {
         var $scaffold = 'member';
     }
@@ -434,10 +434,10 @@ error404に独自のエラーメソッドを変換したいなら、手動です
 ::
 
     class NlValidation {
-        function phone($check) {
+        public function phone($check) {
             ...
         }
-        function postal($check) {
+        public function postal($check) {
             ...
         }
     }
@@ -447,7 +447,7 @@ error404に独自のエラーメソッドを変換したいなら、手動です
 
 ::
 
-    var $validate = array(
+    public $validate = array(
         'phone_no' => array('rule' => array('phone', null, 'nl')),
         'postal_code' => array('rule' => array('postal', null, 'nl'))
     );

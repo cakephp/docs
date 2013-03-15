@@ -32,8 +32,8 @@ your php.ini file and making sure that the PHPUnit files are in one of the
 
 .. tip::
 
-    All output is swallowed when using PHPUnit 3.6+. Add the ``--debug`` 
-    modifier if using the CLI or add ``&debug=1`` to the url if using the web 
+    All output is swallowed when using PHPUnit 3.6+. Add the ``--debug``
+    modifier if using the CLI or add ``&debug=1`` to the url if using the web
     runner to display output.
 
 Test Database Setup
@@ -283,6 +283,16 @@ This will put the coverage results in your application's webroot directory.  You
 should be able to view the results by going to
 ``http://localhost/your_app/coverage``.
 
+Running tests that use sessions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When running tests on the command line that use sessions you'll need to include
+the ``--stderr`` flag. Failing to do so will cause sessions to not work.
+PHPUnit outputs test progress to stdout by default, this causes PHP to assume
+that headers have been sent which prevents sessions from starting. By switching
+PHPUnit to output on stderr, this issue is avoided.
+
+
 Test Case Lifecycle Callbacks
 =============================
 
@@ -328,24 +338,24 @@ create our first fixture, that will be used to test our own Article
 model. Create a file named ``ArticleFixture.php`` in your
 ``app/Test/Fixture`` directory, with the following content::
 
-    class ArticleFixture extends CakeTestFixture { 
+    class ArticleFixture extends CakeTestFixture {
 
           /* Optional. Set this property to load fixtures to a different test datasource */
           public $useDbConfig = 'test';
-          public $fields = array( 
-              'id' => array('type' => 'integer', 'key' => 'primary'), 
-              'title' => array('type' => 'string', 'length' => 255, 'null' => false), 
-              'body' => 'text', 
-              'published' => array('type' => 'integer', 'default' => '0', 'null' => false), 
-              'created' => 'datetime', 
-              'updated' => 'datetime' 
-          ); 
-          public $records = array( 
-              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'), 
-              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'), 
-              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31') 
-          ); 
-     } 
+          public $fields = array(
+              'id' => array('type' => 'integer', 'key' => 'primary'),
+              'title' => array('type' => 'string', 'length' => 255, 'null' => false),
+              'body' => 'text',
+              'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
+              'created' => 'datetime',
+              'updated' => 'datetime'
+          );
+          public $records = array(
+              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
+              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
+              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+          );
+     }
 
 The ``$useDbConfig`` property defines the datasource of which the fixture will
 use.  If your application uses multiple datasources, you should make the
@@ -401,13 +411,13 @@ could do the following::
 
     class ArticleFixture extends CakeTestFixture {
 
-        public $fields = array( 
-            'id' => array('type' => 'integer', 'key' => 'primary'), 
-            'title' => array('type' => 'string', 'length' => 255, 'null' => false), 
-            'body' => 'text', 
-            'published' => array('type' => 'integer', 'default' => '0', 'null' => false), 
-            'created' => 'datetime', 
-            'updated' => 'datetime' 
+        public $fields = array(
+            'id' => array('type' => 'integer', 'key' => 'primary'),
+            'title' => array('type' => 'string', 'length' => 255, 'null' => false),
+            'body' => 'text',
+            'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
+            'created' => 'datetime',
+            'updated' => 'datetime'
         );
 
         public function init() {
@@ -614,8 +624,8 @@ information on how to run your test case.
 
 .. note::
 
-    When setting up your Model for testing be sure to use 
-    ``ClassRegistry::init('YourModelName');`` as it knows to use your test 
+    When setting up your Model for testing be sure to use
+    ``ClassRegistry::init('YourModelName');`` as it knows to use your test
     database connection.
 
 Mocking model methods
@@ -625,7 +635,7 @@ There will be times you'll want to mock methods on models when testing them.  Yo
 use ``getMockForModel`` to create testing mocks of models.  It avoids issues
 with reflected properties that normal mocks have::
 
-    function testSendingEmails() {
+    public function testSendingEmails() {
         $model = $this->getMockForModel('EmailVerification', array('send'));
         $model->expects($this->once())
             ->method('send')
@@ -847,7 +857,7 @@ can access the controller object at ``$this->controller``.
 A more complex example
 ----------------------
 
-In its simplest form, ``testAction()`` will run ``PostsController::index()`` on 
+In its simplest form, ``testAction()`` will run ``PostsController::index()`` on
 your testing controller (or an automatically generated one), including all of the
 mocked models and components. The results of the test are stored in the ``vars``,
 ``contents``, ``view``, and ``return`` properties. Also available is a headers
@@ -915,8 +925,8 @@ methods on components and models.
 Testing a JSON Responding Controller
 ------------------------------------
 
-JSON is a very friendly and common format to use when building a web service. 
-Testing the endpoints of your web service is very simple with CakePHP. Let us 
+JSON is a very friendly and common format to use when building a web service.
+Testing the endpoints of your web service is very simple with CakePHP. Let us
 begin with a simple example controller that responds in JSON::
 
     class MarkersController extends AppController {
@@ -927,7 +937,7 @@ begin with a simple example controller that responds in JSON::
         }
     }
 
-Now we create the file ``app/Test/Case/Controller/MarkersControllerTest.php`` 
+Now we create the file ``app/Test/Case/Controller/MarkersControllerTest.php``
 and make sure our web service is returning the proper response::
 
     class MarkersControllerTest extends ControllerTestCase {
@@ -944,9 +954,9 @@ and make sure our web service is returning the proper response::
 Testing Components
 ==================
 
-Lets pretend we have a component called PagematronComponent in our application. 
-This component helps us set the pagination limit value across all the 
-controllers that use it. Here is our example component located in 
+Lets pretend we have a component called PagematronComponent in our application.
+This component helps us set the pagination limit value across all the
+controllers that use it. Here is our example component located in
 ``app/Controller/Component/PagematronComponent.php``::
 
     class PagematronComponent extends Component {
@@ -976,8 +986,8 @@ controllers that use it. Here is our example component located in
         }
     }
 
-Now we can write tests to ensure our paginate ``limit`` parameter is being 
-set correctly by the ``adjust`` method in our component. We create the file 
+Now we can write tests to ensure our paginate ``limit`` parameter is being
+set correctly by the ``adjust`` method in our component. We create the file
 ``app/Test/Case/Controller/Component/PagematronComponentTest.php``::
 
     App::uses('Controller', 'Controller');
@@ -1032,8 +1042,8 @@ Testing Helpers
 Since a decent amount of logic resides in Helper classes, it's
 important to make sure those classes are covered by test cases.
 
-First we create an example helper to test. The ``CurrencyRendererHelper`` will 
-help us display currencies in our views and for simplicity only has one method 
+First we create an example helper to test. The ``CurrencyRendererHelper`` will
+help us display currencies in our views and for simplicity only has one method
 ``usd()``.
 
 ::
@@ -1083,7 +1093,7 @@ Now we create our tests::
 Here, we call ``usd()`` with different parameters and tell the test suite to
 check if the returned values are equal to what is expected.
 
-Save this in and execute the test. You should see a green bar and messaging 
+Save this in and execute the test. You should see a green bar and messaging
 indicating 1 pass and 4 assertions.
 
 Creating Test Suites

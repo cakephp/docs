@@ -27,8 +27,8 @@ CakePHPのテストフレームワークは、PHPUnitを基礎としています
 
 .. tip::
 
-    PHPUnit 3.6以上では出力が少なくなります。コマンドラインから実行するときに ``--debug`` 
-オプションをつけるか、Webランナーを使って出力を表示するときに ``&debug=1`` とURLに付け足します。
+    PHPUnit 3.6以上では出力が少なくなります。コマンドラインから実行するときに ``--debug``
+    オプションをつけるか、Webランナーを使って出力を表示するときに ``&debug=1`` とURLに付け足します。
 
 テスト用データベースのセットアップ
 ==================================
@@ -38,7 +38,6 @@ CakePHPのテストフレームワークは、PHPUnitを基礎としています
 テストを実行する前には、必ず ``$test`` のデータベース設定を追加しましょう。この設定はCakePHPの
 フィクスチャテーブルやデータで使われます。::
 
-    <?php
     public $test = array(
         'datasource' => 'Database/Mysql',
         'persistent' => false,
@@ -74,10 +73,10 @@ tests:
 #. テストを含むPHPファイルは、 ``app/Test/Case/[Type]`` というディレクトリに置きます。
 #. ファイル名の最後は必ずただ .php とだけ書くのではなく ``Test.php`` とします。
 #. テストを含むクラスは必ず ``CakeTestCase`` または ``ControllerTestCase`` 、 ``PHPUnit_Framework_TestCase`` を継承します。
-#. 他のクラスと同じく、テストケースのクラスをを書いたファイル名もクラス名と同じにします。たとえば、 ``RouterTest.php`` は ``class RouterTest extends CakeTestCase`` を含んでいなければなりません。
-#. テストを含むすメソッド(つまりアサーションを含むメソッド)はいずれも ``testPublished()`` といったように ``test`` で始まる名前にします。 ``@test`` という注釈をメソッドにマークすることでテストメソッドとすることもできます。 
+#. 他のクラスと同じく、テストケースのクラスを書いたファイル名もクラス名と同じにします。たとえば、 ``RouterTest.php`` は ``class RouterTest extends CakeTestCase`` を含んでいなければなりません。
+#. テストを含むメソッド(つまりアサーションを含むメソッド)はいずれも ``testPublished()`` といったように ``test`` で始まる名前にします。 ``@test`` という注釈をメソッドにマークすることでテストメソッドとすることもできます。
 
-テストケースを作成すると、ブラウザから ``http://localhost/you_app/test.php`` 
+テストケースを作成すると、ブラウザから ``http://localhost/you_app/test.php``
 (あなたの環境にしたがってURLを読み替えてください)を開き、そこからテストを実行することができます。
 アプリのテストケースをクリックしたあと、テストしたい内容のリンクをクリックします。
 以下のようなコマンドを実行すればシェルからテストすることができます。::
@@ -92,7 +91,6 @@ tests:
 一例として、非常に簡単なヘルパーメソッドのためのテストケースを作成します。
 これからテストのために作成するメソッドはHTMLでプログレスバーを作成します。おおよそこのような感じです。::
 
-    <?php
     class ProgressHelper extends AppHelper {
         public function bar($value) {
             $width = round($value / 100, 2) * 100;
@@ -107,7 +105,6 @@ tests:
 ヘルパーを作成し、保存したら、 ``app/Test/Case/View/Helper/ProgressHelperTest.php`` にテストケースの
 ファイルを作成します。このファイルにまず、以下のように書き込みます。::
 
-    <?php
     App::uses('Controller', 'Controller');
     App::uses('View', 'View');
     App::uses('ProgressHelper', 'View/Helper');
@@ -127,7 +124,6 @@ tests:
 呼び出される前に毎回呼び出されます。セットアップメソッドはテストに必要なオブジェクトの
 初期化や設定を行います。今回のセットアップメソッドには次のように書き加えます。::
 
-    <?php
     public function setUp() {
         parent::setUp();
         $Controller = new Controller();
@@ -142,7 +138,6 @@ tests:
 次に、テストメソッドの内容を充実させていきます。あなたの書いたコードが期待した結果を
 出力するかどうか保証するため、アサーションを使います。::
 
-    <?php
     public function testBar() {
         $result = $this->Progress->bar(90);
         $this->assertContains('width: 90%', $result);
@@ -180,10 +175,10 @@ CakePHPはテストを実行するためのwebベースのインタフェース�
 テストを実行することができます。Webランナーには ``http://localhost/your_app/test.php`` から
 アクセスすることができます。test.phpの実際の場所は、あなたのセットアップのしかたによって変わるものの、
 ``index.php`` と同じ階層にあります。
-if you're more comfortable in that environment. 
+if you're more comfortable in that environment.
 
 テストランナーを起動したら、あなたのアプリとコア、プラグインのテストスイートを実行できます。
-それぞれのリンクをクリックすrとテストケースを実行し、結果を表示します。
+それぞれのリンクをクリックするとテストケースを実行し、結果を表示します。
 
 コードカバレッジの確認
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -198,7 +193,7 @@ if you're more comfortable in that environment.
 |Code Coverage|
 
 インラインコードカバレッジでは緑色の行は実行したことを示しています。緑色の行にポインタを置くと、
-どのテストがカバーしているか示してくれます。実行されなかった赤で示されます。これはテストが
+どのテストがカバーしているか示してくれます。実行されなかった行は赤で示されます。これはテストが
 うまく働かなかったことを示します。
 グレーの行はXDebugによって実行できないと考えられた行です。
 
@@ -228,7 +223,7 @@ CakePHPはテストを実行するために ``test`` シェルを提供します
 
 .. versionchanged:: 2.1
     ``test`` シェルは2.1で追加されました。 2.0の ``testsuite`` シェルは現在も利用できますが、
-こちらを使うことをおすすめします。
+    こちらを使うことをおすすめします。
 
 ``test`` シェルはプロジェクトのルートディレクトリからも実行できます。このときは今実行できるす
 べてのテストのリストを見ることができます。どちらのテストを実行するかは自由に選ぶことができます。::
@@ -264,7 +259,7 @@ CakePHPはテストを実行するために ``test`` シェルを提供します
 テストケースのライフサイクルコールバック
 ========================================
 
-テストケースは以下のようにいくつかのライフサイクルコールバックを持っており、テストの際にを使うことができます。:
+テストケースは以下のようにいくつかのライフサイクルコールバックを持っており、テストの際に使うことができます。:
 
 * ``setUp`` はテストメソッドの前に毎回呼ばれます。 テストされるオブジェクトの生成や、テストのためのデータの初期化に使われるべきです。 ``parent::setUp()`` を呼び出すのを忘れてはいけません。
 * ``tearDown`` はテストメソッドの後に毎回呼ばれます。テストが完了した後のクリーンアップに使われるべきです。 ``parent::tearDown()`` を忘れてはいけません。
@@ -299,25 +294,24 @@ CakePHPはフィクスチャに基づいたテストケースを実行するに�
 ``app/Test/Fixture`` というディレクトリに ``app/Test/Fixture`` という名前のファイルを作成し、
 以下のとおりに記述してください。::
 
-    <?php
-    class ArticleFixture extends CakeTestFixture { 
+    class ArticleFixture extends CakeTestFixture {
 
           /* 任意。異なるテスト用データソースにフィクスチャを読み込む時にこのプロパティを指定してください。 */
           public $useDbConfig = 'test';
-          public $fields = array( 
-              'id' => array('type' => 'integer', 'key' => 'primary'), 
-              'title' => array('type' => 'string', 'length' => 255, 'null' => false), 
-              'body' => 'text', 
-              'published' => array('type' => 'integer', 'default' => '0', 'null' => false), 
-              'created' => 'datetime', 
-              'updated' => 'datetime' 
-          ); 
-          public $records = array( 
-              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'), 
-              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'), 
-              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31') 
-          ); 
-     } 
+          public $fields = array(
+              'id' => array('type' => 'integer', 'key' => 'primary'),
+              'title' => array('type' => 'string', 'length' => 255, 'null' => false),
+              'body' => 'text',
+              'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
+              'created' => 'datetime',
+              'updated' => 'datetime'
+          );
+          public $records = array(
+              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
+              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
+              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
+          );
+     }
 
 ``$useDbConfig`` プロパティはフィクスチャが使うデータソースの定義をします。
 複数のデータソースを使うときは、モデルのデータソースと合わせてフィクスチャを
@@ -363,22 +357,21 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 動的データとフィクスチャ
 ------------------------
 
-レコードのフィクスチャを暮らすプロパティとして定義すると、関数を使ったり、フィクスチャの定義に
+レコードのフィクスチャをクラスプロパティとして定義すると、関数を使ったり、フィクスチャの定義に
 他の動的なデータを使用することは易しいものではありません。
 解決策として、 ``$records`` をフィクスチャクラスの関数 init() で定義するという方法があります。
 たとえば、「created」と「updated」のタイムスタンプに今日の日付を反映させたいのであれば、
 以下のようにするとよいでしょう。::
 
-    <?php
     class ArticleFixture extends CakeTestFixture {
 
-        public $fields = array( 
-            'id' => array('type' => 'integer', 'key' => 'primary'), 
-            'title' => array('type' => 'string', 'length' => 255, 'null' => false), 
-            'body' => 'text', 
-            'published' => array('type' => 'integer', 'default' => '0', 'null' => false), 
-            'created' => 'datetime', 
-            'updated' => 'datetime' 
+        public $fields = array(
+            'id' => array('type' => 'integer', 'key' => 'primary'),
+            'title' => array('type' => 'string', 'length' => 255, 'null' => false),
+            'body' => 'text',
+            'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
+            'created' => 'datetime',
+            'updated' => 'datetime'
         );
 
         public function init() {
@@ -413,7 +406,6 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 例のフィクスチャ(``app/Test/Fixture/ArticleFixture.php``)を、
 次のように書き換えてください。::
 
-    <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = 'Article';
     }
@@ -423,7 +415,6 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 上記の構文では「Article」のスキーマを読み込むだけなのでレコードを読み込みません。読み込むためには
 コードを次のように変更してください。::
 
-    <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = array('model' => 'Article', 'records' => true);
     }
@@ -431,7 +422,6 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 一方、モデルが存在しないテーブルの場合はどうするのでしょうか。その場合、代わりにテーブルの情報を
 読み込みよう定義することができます。例は次の通りです。::
 
-    <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles');
     }
@@ -440,7 +430,6 @@ $records の持つ配列は各要素 **ごとに** ``$fields`` で指定した�
 「default」という名前のデータベース接続設定を使います。これを変更したい場合は
 次のように書き換えます。::
 
-    <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'connection' => 'other');
     }
@@ -449,7 +438,6 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 取得するときにそのプレフィックスは自動的に使用されます。また、前述したふたつの例において、
 レコードは読み込まれません。読み込むには、次のようにします。::
 
-    <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = array('table' => 'articles', 'records' => true);
     }
@@ -457,7 +445,6 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 既存のテーブルやモデルからテーブルの定義をインポートすることができますが、前節で紹介したように
 フィクスチャに対して読み込むレコードを直接定義することができます。方法は例のとおりです。::
 
-    <?php
     class ArticleFixture extends CakeTestFixture {
         public $import = 'Article';
         public $records = array(
@@ -474,7 +461,6 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 各テストケースではクエリの実行に際して必要となるモデルのフィクスチャをロードすることができます。
 フィクスチャをロードするには、テストケースに ``$fixtures`` プロパティを設定します。::
 
-    <?php
     class ArticleTest extends CakeTestCase {
         public $fixtures = array('app.article', 'app.comment');
     }
@@ -483,7 +469,6 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 「Fixture」ディレクトリからロードします。同じようにCakePHPのコアや
 プラグインからもロードすることができます。::
 
-    <?php
     class ArticleTest extends CakeTestCase {
         public $fixtures = array('plugin.debug_kit.article', 'core.comment');
     }
@@ -491,11 +476,10 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 ``core`` のプレフィックスを使えばCakePHPから、プラグイン名をプレフィックスとして使えば
 その名前のプラグインからフィクスチャをロードします。
 
-フィクスチャのロードは :php:attr:`CakeTestCase::$autoFixtures` を 
+フィクスチャのロードは :php:attr:`CakeTestCase::$autoFixtures` を
 ``false`` に設定したあと、テストメソッドの中で
 :php:meth:`CakeTestCase::loadFixtures()`:: を使ってを制御することもできます。::
 
-    <?php
     class ArticleTest extends CakeTestCase {
         public $fixtures = array('app.article', 'app.comment');
         public $autoFixtures = false;
@@ -505,12 +489,11 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
         }
     }
 
-モジュールのテスト
-==================
+モデルのテスト
+==============
 
 まず ``app/Model/Article.php`` に「Article」モデルを定義しましょう。以下のように記述します。::
 
-    <?php
     class Article extends AppModel {
         public function published($fields = null) {
             $params = array(
@@ -533,7 +516,6 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 それでは ``ArticleTest.php`` というファイルを ``app/Test/Case/Model``
 というディレクトリに作成し、以下のように記述しましょう。::
 
-    <?php
     App::uses('Article', 'Model');
 
     class ArticleTest extends CakeTestCase {
@@ -555,7 +537,6 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 それでは「Article」モデルの「published()」メソッドのためのテストメソッドを書き加えます。
 ``app/Test/Case/Model/ArticleTest.php`` を編集して、以下のようにしてください。::
 
-    <?php
     App::uses('Article', 'Model');
 
     class ArticleTest extends CakeTestCase {
@@ -588,14 +569,14 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 .. note::
 
     テストのためにモデルをセットアップするときは、テスト用のデータベース接続を
-    使うようにするために必ず ``ClassRegistry::init('YourModelName');`` 
+    使うようにするために必ず ``ClassRegistry::init('YourModelName');``
     を使ってください。
 
 コントローラーのテスト
 ======================
 
-ヘルパーやモデル、コンポーネントとも同様に、CakePHPは ``ControllerTestCase`` という
-コントローラーのテスト特化したクラスを提供します。
+ヘルパーやモデル、コンポーネントも同様に、CakePHPは ``ControllerTestCase`` という
+コントローラーのテストに特化したクラスを提供します。
 このクラスをコントローラーのテストケースの親クラスとすることで、
 コントローラーのテストケースを ``testAction()`` というメソッドでより簡単にすることができます。
 ``ControllerTestCase`` は擬似的にコンポーネントやモデルを動かすだけでなく、
@@ -604,7 +585,6 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 
 下記のように、「Article」モデルに対応した典型的なコントローラーがあるとします。::
 
-    <?php
     class ArticlesController extends AppController {
         public $helpers = array('Form', 'Html');
 
@@ -627,10 +607,9 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
         }
     }
 
-ディレクトリ ``app/Test/Case/Controller`` に ``ArticlesControllerTest.php`` 
+ディレクトリ ``app/Test/Case/Controller`` に ``ArticlesControllerTest.php``
 というファイルを作成し、次のように記述します。::
 
-    <?php
     class ArticlesControllerTest extends ControllerTestCase {
         public $fixtures = array('app.article');
 
@@ -688,7 +667,6 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 そしてあなたのコードを終了する代わりに、リダイレクトを追跡して実行を継続します。
 例を示します。::
 
-    <?php
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {
@@ -701,9 +679,8 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
     }
 
 上記のコードをテストすると、リダイレクトに到達したにもかかわらず ``// more code`` が
-実行されるされてしまいます。代わりに、このようなコードを書くべきです。::
+実行されてしまいます。代わりに、このようなコードを書くべきです。::
 
-    <?php
     class ArticlesController extends AppController {
         public function add() {
             if ($this->request->is('post')) {
@@ -725,7 +702,6 @@ GETリクエストのアクションとしても使えます。``data`` キー�
 POSTされるであろう値を設定します。規定ではすべてのリクエストはPOSTと扱われます。
 GETリクエストをシミュレートしたい場合は ``method`` キーを設定します。::
 
-    <?php
     public function testAdding() {
         $data = array(
             'Post' => array(
@@ -753,7 +729,6 @@ returnする値の選択
 規定値は ``result`` です。 戻り値の属性を ``result`` 以外にしない限り、
 テストケース内で他の種類の戻り値の属性にアクセスすることができます。::
 
-    <?php
     public function testIndex() {
         $this->testAction('/posts/index');
         $this->assertInternalType('array', $this->vars['posts']);
@@ -769,7 +744,6 @@ returnする値の選択
 テストで使われるコントローラーを決定したら、同時にモデルとコンポーネントの
 モックを生成できます。::
 
-    <?php
     $Posts = $this->generate('Posts', array(
         'methods' => array(
             'isAuthorized'
@@ -791,11 +765,11 @@ returnする値の選択
 
 生成されたコントローラーはテストのために自動的に使われます。
 自動的な生成を有効にするには、テストケースの ``autoMock`` という変数にtrueを設定します。
-``autoMock`` がfalseであれば、オリジナルのコントローラーがテストに使われるでしょう
+``autoMock`` がfalseであれば、オリジナルのコントローラーがテストに使われるでしょう。
 
 生成されたコントローラーのレスポンスオブジェクトは、
 常にヘッダーを送信しないモックを使って置き換えられます。
-``generate()`` か``testAction()`` を使ったあとは、 ``$this->controller`` から
+``generate()`` か ``testAction()`` を使ったあとは、 ``$this->controller`` から
 コントローラーのオブジェクトにアクセスできます。
 
 より複雑な例
@@ -808,7 +782,6 @@ returnする値の選択
 プロパティに格納されます。送信されたヘッダー情報には ``headers`` から
 アクセスすることができ、リダイレクトを確認することができます。::
 
-    <?php
     public function testAdd() {
         $Posts = $this->generate('Posts', array(
             'components' => array(
@@ -851,7 +824,6 @@ SessionComponent がモックされたことで、それを用いたテストメ
 モックに期待する値を登録する別のメソッドを用います。
 たとえば :php:meth:`AuthComponent::user()` のモックを使いたい場合は以下のようにします。::
 
-    <?php
     public function testAdd() {
         $Posts = $this->generate('Posts', array(
             'components' => array(
@@ -875,7 +847,6 @@ JSONはWebサービスの構築において、とても馴染み深く、かつ�
 CakePHPを用いたWebサービスのエンドポイントのテストはとてもシンプルです。
 JSONを返すコントローラーの簡単な例を示します。::
 
-    <?php
     class MarkersController extends AppController {
         public $autoRender = false;
         public function index() {
@@ -887,7 +858,6 @@ JSONを返すコントローラーの簡単な例を示します。::
 Webサービスが適切なレスポンスを返しているか確認するテストを作成しましょう。
 ``app/Test/Case/Controller/MarkersControllerTest.php`` というファイルを以下のように作成します。::
 
-    <?php
     class MarkersControllerTest extends ControllerTestCase {
         public function testIndex() {
             $result = $this->testAction('/markers/index.json');
@@ -907,14 +877,13 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 ページネーションの limit 値を設定する手助けをします。例としてコンポーネントが、
 ``app/Controller/Component/PagematronComponent.php`` にあったとします。::
 
-    <?php
     class PagematronComponent extends Component {
         public $Controller = null;
 
         public function startup(Controller $controller) {
             parent::startup($controller);
             $this->Controller = $controller;
-            // コントローラがページネーションを使っているから確かめる
+            // コントローラがページネーションを使っているか確かめる
             if (!isset($this->Controller->paginate)) {
                 $this->Controller->paginate = array();
             }
@@ -935,11 +904,10 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
         }
     }
 
-ページネーションの limit 値がコンポーネントの ``adjust`` メソッドによって
+ページネーションの ``limit`` 値がコンポーネントの ``adjust`` メソッドによって
 正しく設定されているかテストを書くことができます。このように
 ``app/Test/Case/Controller/Component/PagematronComponentTest.php`` というファイルを作成します。::
 
-    <?php
     App::uses('Controller', 'Controller');
     App::uses('CakeRequest', 'Network');
     App::uses('CakeResponse', 'Network');
@@ -995,7 +963,6 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 はじめに、テストのための例として、ヘルパーを作成します。 ``CurrencyRendererHelper`` は、
 ビューで通貨の表示を補助するための、 ``usd()`` という唯一の単純なメソッドを持っています。::
 
-    <?php
     // app/View/Helper/CurrencyRendererHelper.php
     class CurrencyRendererHelper extends AppHelper {
         public function usd($amount) {
@@ -1008,7 +975,6 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 
 それではテストを作成します。::
 
-    <?php
     // app/Test/Case/View/Helper/CurrencyRendererHelperTest.php
 
     App::uses('Controller', 'Controller');
@@ -1055,7 +1021,6 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 すべてのモデルに対してのテストスイートを作成したいときは、 ``app/Test/Case/AllModelTest.php`` を作成します。
 内容は以下のとおりです。::
 
-    <?php
     class AllModelTest extends CakeTestSuite {
         public static function suite() {
             $suite = new CakeTestSuite('All model tests');
@@ -1068,7 +1033,6 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 個別にファイルを追加するときは ``$suite->addTestFile($filename);`` を使います。
 あるディレクトリから再帰的にすべてのテストをグループ化する場合は以下のようにします。::
 
-    <?php
     $suite->addTestDirectoryRecursive(TESTS . 'Case');
 
 この例では、 ``app/Test/Case/`` のディレクトリ以下のすべてのテストをグループ化します。
@@ -1091,7 +1055,6 @@ Webサービスが適切なレスポンスを返しているか確認するテ�
 他のテストとの違いは、最初の行で'Blog.BlogPost'をインポートしているところです。
 またプラグインのフィクスチャも ``plugin.blog.blog_post`` というプレフィックスをつける必要があります。::
 
-    <?php
     App::uses('BlogPost', 'Blog.Model');
 
     class BlogPostTest extends CakeTestCase {

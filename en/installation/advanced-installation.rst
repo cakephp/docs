@@ -74,7 +74,7 @@ code more portable.
 Apache and mod\_rewrite (and .htaccess)
 =======================================
 
-This section was moved to :doc:`URL rewriting <installation/url-rewriting>`.
+This section was moved to :doc:`URL rewriting </installation/url-rewriting>`.
 
 
 .. meta::
