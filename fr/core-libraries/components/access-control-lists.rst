@@ -132,15 +132,15 @@ chef raisonnable qu'il est, Gandalf choisit d'utiliser l'ACL dans son nouveau
 système et d'organiser ses objets de la manière suivante :   
 
 -  La Communauté de l'Anneau™
-   
+
    -  Les Guerriers
-      
+
       -  Aragorn
       -  Legolas
       -  Gimli
 
    -  Les Magiciens
-      
+
       -  Gandalf
 
    -  Les Hobbits
@@ -151,7 +151,7 @@ système et d'organiser ses objets de la manière suivante :
       -  Pippin
 
    -  Les Visiteurs
-      
+
       -  Gollum
 
 L'utilisation d'une structure en arbre pour les AROs permet à Gandalf, de définir
@@ -161,22 +161,22 @@ permissions de groupe :
 
 -  La Communauté de l'Anneau
    (**Refuser**: tout)
-   
+
    -  Guerriers
       (**Autoriser**:Armes, Bière, Rations pour les Elfes, Porc salé)
-      
+
       -  Aragorn
       -  Legolas
       -  Gimli
 
    -  Magiciens
       (**Autoriser**: Porc salé, Diplomatie, Bière)
-      
+
       -  Gandalf
 
    -  Hobbits
       (**Autoriser**: Bière)
-      
+
       -  Frodo
       -  Bilbo
       -  Merry
@@ -184,7 +184,7 @@ permissions de groupe :
 
    -  Visiteurs
       (**Autoriser**: Porc salé)
-      
+
       -  Gollum
 
 Si nous voulions utiliser les ACL pour voir si Pippin était autorisé à accéder 
@@ -208,17 +208,17 @@ Pippin                  --               Still allowing ale!
     Puisque le nœud "Pippin" dans l'arbre d'ACL ne refuse pas spécifiquement 
     l'accès à l'ACO bière, le résultat final est que nous donnons l'accès à 
     cet ACO.
-    
+
 L'arbre nous permet aussi de faire des ajustements plus fins pour un meilleur
 contrôle granulaire, tout en conservant encore la capacité de faire de grands 
 changements pour les groupes d'AROs :
 
 -  Communauté de l'Anneau
    (**Refuser** : tout)
-   
+
    -  Guerriers
       (**Autoriser** : Armes, Bière, Rations pour les Elfes, Porc salé)
-      
+
       -  Aragorn
          (Autoriser : Diplomatie)
       -  Legolas
@@ -226,12 +226,12 @@ changements pour les groupes d'AROs :
 
    -  Magiciens
       (**Autoriser** : Porc salé, Diplomatie, Bière)
-      
+
       -  Gandalf
 
    -  Hobbits
       (**Autoriser** : Bière)
-      
+
       -  Frodo
          (Autoriser : Anneau)
       -  Bilbo
@@ -242,7 +242,7 @@ changements pour les groupes d'AROs :
 
    -  Visiteurs
       (**Autoriser** : Porc salé)
-      
+
       -  Gollum
 
 Cette approche nous donne plus de possibilités pour faire des changements 
@@ -291,7 +291,7 @@ app/config/core.php
     // Pour qu'elles ressemblent à çà :
     Configure::write('Acl.classname', 'IniAcl');
     //Configure::write('Acl.database', 'default');
-    
+
 Les permissions des ARO/ACO sont spécifiées dans /app/config/acl.ini.php. 
 L'idée de base est que les AROs sont spécifiés dans une section INI qui a trois 
 propriétés : groups, allow et deny.
@@ -307,52 +307,52 @@ Par exemple, voyons à quoi la structure ARO de la Communauté que
 nous avions façonnée pourrait ressembler dans une syntaxe INI :
 
 ::
-  
+
     ;-------------------------------------
         ; AROs
     ;-------------------------------------
     [aragorn]
     groups = guerriers
     allow = diplomatie
-    
+
     [legolas]
     groups = guerriers
-    
+
     [gimli]
     groups = guerriers
-    
+
     [gandalf]
     groups = magiciens
-    
+
     [frodo]
     groups = hobbits
     allow = anneau
-    
+
     [bilbo]
     groups = hobbits
-    
+
     [merry]
     groups = hobbits
     deny = ale
-    
+
     [pippin]
     groups = hobbits
-    
+
     [gollum]
     groups = visiteurs
-    
+
     ;-------------------------------------
     ; ARO Groups
     ;-------------------------------------
     [guerriers]
     allow = armes, biere, porc_sale
-    
+
     [magiciens]
     allow = porc_sale, diplomatie, biere
-    
+
     [hobbits]
     allow = biere
-    
+
     [visiteurs]
     allow = porc_sale
 
@@ -387,7 +387,7 @@ Une fois que vous l'avez fait, utilisez la console de CakePHP
 pour créer vos tables d'ACL :
 
 ::
-    
+
     $ cake schema create DbAcl
 
 Lancer cette commande va supprimer et recréer les tables nécessaires 
@@ -395,28 +395,28 @@ au stockage des informations des ACO et des ARO sous forme d'arbre.
 La sortie console devrait ressembler à quelque chose comme ça :
 
 ::
-  
+
     ---------------------------------------------------------------
     Cake Schema Shell
     ---------------------------------------------------------------
-    
+
     The following tables will be dropped.
     acos
     aros
     aros_acos
-    
+
     Are you sure you want to drop the tables? (y/n) 
     [n] > y
     Dropping tables.
     acos updated.
     aros updated.
     aros_acos updated.
-    
+
     The following tables will be created.
     acos
     aros
     aros_acos
-    
+
     Are you sure you want to create the tables? (y/n) 
     [y] > y
     Creating tables.
@@ -507,7 +507,7 @@ l'action d'un contrôleur :
     Tant que les exemples que nous voyons ici nous montrent la création 
     d'ARO, les mêmes techniques pourront être utilisées pour la création 
     d'un arbre d'ACO.
-    
+
 Pour rester dans notre configuration de Communauté, nous allons d'abord 
 créer nos groups d'ARO. De fait que nos groupes n'ont pas réellement 
 d'enregistrements spécifiques qui leurs soient reliés, nous allons utiliser 
@@ -522,8 +522,8 @@ en train d'utiliser les modèles pour enregistrer les données comme nous
 le faisons toujours :
 
 ::
-    
-    function touteslesActions() {
+
+    public function touteslesActions() {
         $aro =& $this->Acl->Aro;
         //Ici ce sont toutes les informations sur le tableau de notre groupe que nous
         //pouvons itérer comme ceci
@@ -551,24 +551,24 @@ le faisons toujours :
         }
         //Les autres actions logiques seront à placer ici...
       }
-    
+
 Une fois que nous avons cela, nous pouvons utiliser la consile d'application 
 ACL pour vérifier la structure de l'arbre.
 
 ::
 
     $ cake acl view aro
-    
+
     Arbre d'Aro:
     ---------------------------------------------------------------
       [1]guerriers
-    
+
       [2]magiciens
-    
+
       [3]hobbits
-    
+
       [4]visiteurs
-    
+
     ---------------------------------------------------------------
 
 Je suppose qu'il n'y en a pas beaucoup dans l'arbre à ce niveau, 
@@ -587,7 +587,7 @@ enregistrements spécifiques du modèle de notre base de données.
 
 ::
 
-    function anyAction(){
+    public function anyAction(){
         $aro = new Aro();
         //Ici nous avons les enregistrement de nos utilisateurs prêts à être liés aux
         //nouveaux enregistrements d'ARO. Ces données peuvent venir d'un modèle et
@@ -672,7 +672,7 @@ Nous allons faire un essai :
 ::
 
     $ cake acl view aro
-     
+
 
   Arbre d'Aro:
   ---------------------------------------------------------------
@@ -757,9 +757,9 @@ composant Acl.
     class SomethingsController extends AppController {
         // Vous pourriez placer çà dans AppController
         // mais cela fonctionne bien ici aussi.
-    
+
         public $components = array('Acl');
-    
+
     }
 
 Configurons quelques permissions de base, en utilisant le Composant Acl 
@@ -767,16 +767,16 @@ dans une action à l'intérieur de ce contrôleur.
 
 ::
 
-    function index() {
+    public function index() {
         //Autorise un accès complet aux armes pour les guerriers
         //Ces exemples utilisent tous deux la syntaxe avec un alias
         $this->Acl->allow('guerriers', 'Armes');
-        
+
         //Encore que le Roi pourrait ne pas vouloir laisser n'importe qui
         //disposer d'un accès sans limites
         $this->Acl->deny('guerrier/Legolas', 'Armes', 'delete');
         $this->Acl->deny('guerrier/Gimli',   'Armes', 'delete');
-        
+
         die(print_r('done', 1));
     }
 
@@ -804,7 +804,7 @@ est équivalent à ceci :
 
     // 6342 = Legolas
     // 1564 = Gimli
-    
+
     $this->Acl->deny(array('model' => 'Utilisateur', 'foreign_key' => 6342), 'Armes', 'delete');
     $this->Acl->deny(array('model' => 'Utilisateur', 'foreign_key' => 1564), 'Armes', 'delete');
 
@@ -815,7 +815,7 @@ est équivalent à ceci :
     L'adressage d'un nœud en utilisant la syntaxe modèle/clé étrangère 
     nécessite un tableau avec deux paramètres : 
     ``array('model' => 'Utilisateur', 'foreign_key' => 8282)``.
-   
+
 La prochaine section nous aidera à valider notre configuration, en utilisant 
 le composant Acl pour contrôler les permissions que nous venons de définir
 
@@ -838,7 +838,7 @@ Faisons un essai dans une action de contrôleur :
 
 ::
 
-    function index() {
+    public function index() {
         // Tout cela renvoi true:
         $this->Acl->check('guerriers/Aragorn', 'Armes');
         $this->Acl->check('guerriers/Aragorn', 'Armes', 'create');
@@ -846,7 +846,7 @@ Faisons un essai dans une action de contrôleur :
         $this->Acl->check('guerriers/Aragorn', 'Armes', 'update');
         $this->Acl->check('guerriers/Aragorn', 'Armes', 'delete');
 
-        
+
         // Souvenez-vous, nous pouvons utiliser la syntaxe modèle/clé étrangère
         // pour nos AROs utilisateur
         $this->Acl->check(array('User' => array('id' => 2356)), 'Weapons');
@@ -854,8 +854,8 @@ Faisons un essai dans une action de contrôleur :
         // Tout cela renvoi true également:
         $result = $this->Acl->check('guerriers/Legolas', 'Armes', 'create');
         $result = $this->Acl->check('guerriers/Gimli', 'Armes', 'read');
-       
-        
+
+
         // Mais ceci retourne "false" :
         $result = $this->Acl->check('guerriers/Legolas', 'Armes', 'delete');
         $result = $this->Acl->check('guerriers/Gimli', 'Armes', 'delete');
