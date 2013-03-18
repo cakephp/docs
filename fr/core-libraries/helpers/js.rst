@@ -17,9 +17,9 @@ plus extensible offrant aux développeurs la puissance et la
 la flexibilité dont ils ont besoin pour répondre à leurs besoins spécifiques.
 
 Les moteurs Javascript forment l'épine dorsale du nouveau Helper Js.
-Um moteur javascript traduit un élément Javascript abstrait dans
+Un moteur javascript traduit un élément Javascript abstrait dans
 un code javascript concret spécifique à la librairie en cours 
-d'utilisation. De plus ils crées un système extensible à utiliser
+d'utilisation. De plus ils créent un système extensible à utiliser
 pour les autres.
 
 Utilisation d'un moteur Javascript spécifique
