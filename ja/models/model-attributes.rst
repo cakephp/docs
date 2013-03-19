@@ -75,7 +75,7 @@ primaryKey
     class Example extends AppModel {
         public $primaryKey = 'example_id'; // example_idはデータベースのフィールド名
     }
-    
+
 
 .. _model-displayField:
 
@@ -122,6 +122,17 @@ CakePHPがデータを取得する際に、
     手動で ``fields`` 配列に必要な外部キーを含むカラムを追加しなければなりません。
     上記の例では、 ``domain_id`` を追加することになります。
 
+.. tip::
+
+    recursiveレベルは-1にしておいたほうがよいでしょう。
+    こうしておくと、不要な関連データを取得してしまうのを回避できます。
+    これは、おそらく find() を呼び出すほとんどの場合に望ましい結果になります。
+    必要な場合にのみrecursiveレベルを設定して関連データを取得させるか、もしくはContainableビヘイビアを使いましょう。
+
+    AppModelに次のような設定を追加します。::
+
+        public $recursive = -1;
+
 order
 =====
 
@@ -160,11 +171,11 @@ data
 
     public $_schema = array(
         'first_name' => array(
-            'type' => 'string', 
+            'type' => 'string',
             'length' => 30
         ),
         'last_name' => array(
-            'type' => 'string', 
+            'type' => 'string',
             'length' => 30
         ),
         'email' => array(
@@ -184,7 +195,7 @@ validate
 .. note::
 
     save()はデータを実際に保存する前に自動的にバリデーションを行うので、
-    save()の前にvalidate()を呼ぶ必要はありません。    
+    save()の前にvalidate()を呼ぶ必要はありません。
 
 バリデーションに関する詳しい情報は、このマニュアルの後にある `/models/data-validation` をみてください。
 
@@ -228,5 +239,3 @@ cacheQueries
 trueを設定すると、モデルによって取得されたデータは１つのリクエストの間キャッシュされます。
 このキャッシュはメモリ内のみで、リクエストの間のみ持続します。
 同じデータに対する重複したリクエストはキャッシュによって処理されます。
-
-
