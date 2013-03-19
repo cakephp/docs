@@ -69,7 +69,7 @@ PHPを通してアセットを提供するとPHPを通さずにアセットを�
 CakePHPによって使われている ``app/webroot`` のパスに一致するディレクトリにコピーすることが推奨されます。
 
 -  ``app/Plugin/DebugKit/webroot/js/my_file.js`` は
-   ``app/webroot/DebugKit/js/my_file.js`` になります。
+   ``app/webroot/debug_kit/js/my_file.js`` になります。
 -  ``app/View/Themed/Navy/webroot/css/navy.css`` は
    ``app/webroot/theme/Navy/css/navy.css`` になります。
 
