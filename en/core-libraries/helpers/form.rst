@@ -890,7 +890,7 @@ Datetime options
 ----------------
 
 * ``$options['timeFormat']`` Used to specify the format of the select inputs for
-  a time-related set of inputs. Valid values include '12', '24', and ``null``.
+  a time-related set of inputs. Valid values include ``12``, ``24``, and ``null``.
 
 * ``$options['dateFormat']`` Used to specify the format of the select inputs for
   a date-related set of inputs. Valid values include any combination of 'D',
