@@ -24,7 +24,7 @@ You can install the phpdomain using:
 Building the documentation
 --------------------------
 
-After installing the require packages you can build the documentation using `Make`
+After installing the required packages, you can build the documentation using `Make`.
 
 	# Create all the HTML docs. Including all the languages.
 	make html
