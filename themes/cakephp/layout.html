@@ -4,6 +4,7 @@
 {% endblock -%}
 
 {% block extrahead %}
+<link href="{{ pathto('_static/favicon.ico', 1) }}" type="image/x-icon" rel="icon" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 {% for lang in languages %}
@@ -106,7 +107,7 @@ window.lang = "{{ language }}";
 		<div class="columns three root-link">
 			<a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a>
 		</div>
-		<div class="columns six">
+		<div class="columns nine">
 			<ul class="inline breadcrumb">
 			{%- for parent in parents %}
 			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -118,21 +119,6 @@ window.lang = "{{ language }}";
 				<li><a href="http://book.cakephp.org/1.3/{{ language }}/">1.3 Book</a></li>
 				<li><a href="http://book.cakephp.org/1.2/{{ language }}/">1.2 Book</a></li>
 				<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-			</ul>
-		</div>
-		<div class="columns three">
-			<ul class="languages inline">
-			{% for lang in languages %}
-				<li>
-					{%- if lang == language -%}
-					<span class="active">{{ lang }}</span>
-					{%- elif has_lang(lang, pagename) -%}
-					<a href="{{ lang_link(lang, pagename) }}">{{ lang }}</a>
-					{%- else -%}
-					<span class="disabled">{{ lang }}</span>
-					{%- endif -%}
-				</li>
-			{% endfor %}
 			</ul>
 		</div>
 	</div>
@@ -187,7 +173,23 @@ window.lang = "{{ language }}";
 			Submit a correction on <a href="https://github.com/cakephp/docs">github</a><br />
 			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
 		</div>
+		<div class="languages columns three">
+			<ul class="languages inline">
+			{% for lang in languages %}
+				<li>
+					{%- if lang == language -%}
+					<span class="active">{{ lang }}</span>
+					{%- elif has_lang(lang, pagename) -%}
+					<a href="{{ lang_link(lang, pagename) }}">{{ lang }}</a>
+					{%- else -%}
+					<span class="disabled">{{ lang }}</span>
+					{%- endif -%}
+				</li>
+			{% endfor %}
+			</ul>
+		</div>
 	</div>
+	
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 			{%- if show_copyright %}

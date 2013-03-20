@@ -60,16 +60,7 @@ body {
 	top: 0;
 	padding: 6px;
 }
-.breadcrumb-header .languages {
-	background: #417282;
-	display: block;
-	margin: 0;
-	position: absolute;
-	top: 0;
-	right: 0;
-	padding: 6px;
-}
-.versions a , .languages a {
+.versions a {
 	padding: 0 4px;
 }
 .root-link,
@@ -150,9 +141,6 @@ body {
 		display: none;
 	}
 	.versions.inline {
-		display: none;
-	}
-	.languages.inline {
 		display: none;
 	}
 	.masthead img {
@@ -569,6 +557,10 @@ dt tt {
 .languages ul {
     float: right;
     margin-right: 10px
+}
+.languages li,
+.languages a {
+  color: #417282;
 }
 .languages .disabled {
     opacity: 0.5;
