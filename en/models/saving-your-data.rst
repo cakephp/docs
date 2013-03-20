@@ -112,8 +112,8 @@ More information about model callbacks is available
 
 .. tip::
 
-    If you don't want the updated field to be updated when saving some
-    data add ``'updated' => false`` to your ``$data`` array
+    If you don't want the ``modified`` field to be automatically updated when saving some
+    data add ``'modified' => false`` to your ``$data`` array
 
 Once a save has been completed, the ID for the object can be found
 in the ``$id`` attribute of the model object - something especially
@@ -187,7 +187,7 @@ For example, to update the title of a blog post, the call to
 
 .. warning::
 
-    You can't stop the updated field being updated with this method, you
+    You can't stop the ``modified`` field being updated with this method, you
     need to use the save() method.
 
 The saveField method also has an alternate syntax::
@@ -798,12 +798,12 @@ existing Recipe being added or saved to the database.
 Self HABTM
 ~~~~~~~~~~
 
-Normally HABTM is used to bring 2 models together but it can also 
+Normally HABTM is used to bring 2 models together but it can also
 be used with only 1 model, though it requires some extra attention.
 
-The key is in the model setup the ``className``. Simply adding a 
-``Project`` HABTM ``Project`` relation causes issues saving data. 
-By setting the ``className`` to the models name and use the alias as 
+The key is in the model setup the ``className``. Simply adding a
+``Project`` HABTM ``Project`` relation causes issues saving data.
+By setting the ``className`` to the models name and use the alias as
 key we avoid those issues.::
 
     class Project extends AppModel {
@@ -895,11 +895,11 @@ fields (default null), CakePHP will recognize those fields and populate them aut
 whenever a record is created or saved to the database (unless the data being
 saved already contains a value for these fields).
 
-The created and modified fields will be set to the current date and time when
+The ``created`` and ``modified`` fields will be set to the current date and time when
 the record is initially added. The modified field will be updated with the
 current date and time whenever the existing record is saved.
 
-If you have updated, created or modified data in your $this->data (e.g. from a
+If you have ``created`` or ``modified`` data in your $this->data (e.g. from a
 Model::read or Model::set) before a Model::save() then the values will be taken
 from $this->data and not automagically updated. Either use
 ``unset($this->data['Model']['modified'])``, etc. Alternatively you can override
