@@ -113,8 +113,8 @@ Plus d'informations sur les callbacks du model sont disponibles
 
 .. tip::
 
-    Si vous ne voulez pas le que champ mis à jour soit mis à jour pendant 
-    la sauvegarde de certaines données, ajoutez ``'updated' => false`` 
+    Si vous ne voulez pas le que champ ``modified`` soit mis à jour pendant 
+    la sauvegarde de certaines données, ajoutez ``'modified' => false`` 
     à votre tableau de ``$data``.
 
 Une fois qu'une sauvegarde est terminée, l'ID de l'objet peut être trouvé dans 
@@ -168,6 +168,13 @@ laissera les autres vides. Utilisez ceci pour éviter de mettre à jour des
 champs de la base données qui ont déjà été renseignés et doivent être mis 
 à jour.
 
+.. tip::
+
+    Si vous voulez insérer une nouvelle ligne au lieu de mettre à jour une ligne 
+    existante, vous devriez toujours appeler en premier lieu create().
+    Cela évite les conflits avec d'éventuels appels à save en amont dans les 
+    callbacks ou à tout autre endroit.
+
 :php:meth:`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
 ======================================================================================
 
@@ -183,8 +190,19 @@ depuis un controller à ``saveField`` ressemblerait à quelque chose comme::
 
 .. warning::
 
-    Vous ne pouvez pas arrêter la mise à jour du champ mis à jour avec cette 
+    Vous ne pouvez pas arrêter la mise à jour du champ ``modified`` avec cette 
     méthode, vous devrez utiliser la méthode save().
+
+La méthode saveField a aussi une syntaxe alternative::
+
+    saveField(string $fieldName, string $fieldValue, array $params = array())
+
+Le tableau ``$params`` peut avoir en clé, les options disponibles
+suivantes:
+
+* ``validate`` Définie à true/false pour activer/désactiver la validation.
+* ``callbacks`` Définie à false pour désactiver les callbacks. Utiliser 
+  'before' ou 'after' activera seulement ces callbacks.
     
 :php:meth:`Model::updateAll(array $fields, array $conditions)`
 ==============================================================
@@ -885,12 +903,12 @@ automatiquement dès qu'un enregistrement est crée ou sauvegardé dans la
 base de données (à moins que les données déjà sauvegardées contiennent 
 une valeur pour ces champs).
 
-Les champs created et modified vont être définis à la date et heure courante 
-quand l'enregistrement est ajouté pour la première fois. Le champ modifié 
-sera mis à jour avec la date et l'heure courante dès que l'enregistrement sera 
-sauvegardé.
+Les champs ``created`` et ``modified`` vont être définis à la date et heure 
+courante quand l'enregistrement est ajouté pour la première fois. Le champ 
+modifié sera mis à jour avec la date et l'heure courante dès que 
+l'enregistrement sera sauvegardé.
 
-Si vous avez mis à jour, crée ou modifié des données dans votre $this->data 
+Si vous avez ``created`` ou ``modified`` des données dans votre $this->data 
 (par ex à partir d'un Model::read ou d'un Model::set) avant un Model::save(), 
 alors les valeurs seront prises à partir de $this->data et ne seront pas mises 
 à jour automagiquement. Preférez l'utilisation de 

@@ -917,7 +917,7 @@ Les options de Datetime
 
 *   ``$options['timeFormat']`` .Utilisé pour spécifier le format des inputs 
     select (menu de sélection) pour un jeu d'input en relation avec le temps. 
-    Les valeurs valides sont '12', '24', et ``null``.
+    Les valeurs valides sont ``12``, ``24``, et ``null``.
 
 *   ``$options['dateFormat']`` Utilisé pour spécifier le format des inputs 
     select (menu de sélection) pour un jeu d'input en relation avec le temps.
