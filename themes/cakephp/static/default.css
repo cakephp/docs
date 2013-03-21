@@ -560,7 +560,7 @@ dt tt {
 }
 .languages li,
 .languages a {
-	color: #417282;
+  color: #417282;
 }
 .languages .disabled {
     opacity: 0.5;

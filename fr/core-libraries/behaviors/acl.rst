@@ -53,14 +53,14 @@ utilisé par le behavior Acl, pour déterminer les relations parent->enfant.
 Une méthode parentNode() de model doit retourner null ou une référence au 
 Model parent::
 
-    function parentNode() {
+    public function parentNode() {
         return null;
     }
 
 Si vous voulez définir un nœud ACO ou ARO comme parent pour votre Model, 
 parentNode() doit retourner l'alias du nœud ACO ou ARO::
 
-    function parentNode() {
+    public function parentNode() {
         return 'noeud_racine';
     }
 
@@ -68,7 +68,7 @@ Voici un exemple plus complet. Utilisons un model exemple User, avec User
 belongsTo Group::
 
 
-    function parentNode() {
+    public function parentNode() {
         if (!$this->id && empty($this->data)) {
             return null;
         }
