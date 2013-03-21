@@ -26,12 +26,12 @@ CakePHP2.0 の変更点として、プラグインは app/Config/bootstrap.php �
 
 ::
 
-    CakePlugin::loadAll(); // 全て読み込み 
+    CakePlugin::loadAll(); // 全て読み込み
     CakePlugin::load('ContactManager'); //一つだけ読み込み
 
 
 設定で記述されたプラグインは、 loadAll ですべてのプラグインで利用できます。
-load() も同様の働きですが、明示的に指定したプラグインだけロードします。
+``load()`` も同様の働きですが、明示的に指定したプラグインだけロードします。
 
 プラグイン設定
 ==============
@@ -331,6 +331,12 @@ Contacts controllerにはこのファイルを作ります。
 通常のwebrootと同じようにどのディレクトリにどんなファイルでも置くことができます。
 ただ制限として、 ``MediaView`` はそのアセットのmime-typeを知っておく必要があります。
 
+ただ、プラグインの静的アセットや画像やJavaScriptまたはCSSは、
+ディスパチャーを経由しますが、非常に効率が悪くなることを覚えておいてください。
+ですので、本番環境ではそれらにシンボリックリンクを張っておくことを強くおすすめします。
+例えばこのようにします。::
+
+    ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
 
 プラグイン内のアセットへのリンク
 --------------------------------
