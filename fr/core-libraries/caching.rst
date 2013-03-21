@@ -22,12 +22,13 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
   de fonctionnalité pour les opérations atomiques. Cependant, le stockage
   sur disque est souvent peu consommateur en ressource, au stockage de 
   grands objets, ou des éléments qui sont rarement écrits fonctionnent
-  bien dans les fichiers.
+  bien dans les fichiers. C'est le moteur de Cache par défaut pour 2.3+.
 * ``ApcCache`` Le cache APC utilise l'extension PHP `APC <http://php.net/apc>`_.
   Cette extension utilise la mémoire partagée du serveur Web pour stocker
   les objets. Cela le rend très rapide, et capable de fournir les 
   fonctionnalités atomiques en lecture/écriture.
-  Par défaut CakePHP utilisera ce moteur de cache si il est disponible.
+  Par défaut CakePHP dans 2.0-2.2 utilisera ce moteur de cache si il est
+  disponible.
 * ``Wincache`` utilise l'extension `Wincache <http://php.net/wincache>`_.
   Wincache est similaire aux fonctionnalités APC au niveau des fonctionnalités
   et des performances, mais optimisé pour Windows et IIS.
@@ -36,6 +37,12 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
 * ``MemcacheEngine`` Utilise l'extension `Memcache <http://php.net/memcache>`_.
   Memcache fournit un cache très rapide qui peut être distribué au travers
   de nombreux serveurs, et fournit les opérations atomiques.
+
+. versionchanged:: 2.3
+    FileEngine est toujours le moteur de cache par défaut. Dans le passé, un 
+    certain nombre de personnes avait des difficultés à configurer et déployer 
+    APC correctement dans les deux cli + web. Utiliser les fichiers devrait
+    faciliter la configuration de CakePHP pour les nouveaux développeurs.
 
 Quelque soit le moteur de cache que vous choisirez d'utiliser, votre application
 interagit avec :php:class:`Cache` de manière cohérente. Cela signifie que vous

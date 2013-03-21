@@ -68,7 +68,7 @@ délimiter des chemins de fichier. Cela empêche les erreurs de fichiers
 manquants que vous pourriez obtenir en résultats en utilisant le mauvais
 délimiteur, et cela rend votre code plus portable.
 
-Cette section a été déplacée vers :doc:`URL rewriting <installation/url-rewriting>`.
+Cette section a été déplacée vers :doc:`URL rewriting </installation/url-rewriting>`.
 
 
 .. meta::
