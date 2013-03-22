@@ -274,11 +274,11 @@ have the plugin prefix on them, use the alternative syntax::
 
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
-            public $hasMany = array(
-                    'AltName' => array(
-                            'className' => 'ContactManager.AltName'
-                    )
-            );
+        public $hasMany = array(
+            'AltName' => array(
+                'className' => 'ContactManager.AltName'
+            )
+        );
     }
 
 Plugin Views
