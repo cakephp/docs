@@ -64,7 +64,7 @@ the same::
         // this is not an Rss request, so deliver
         // data used by website's interface
         $this->paginate['Post'] = array('order' => 'Post.created DESC', 'limit' => 10);
-        
+
         $posts = $this->paginate();
         $this->set(compact('posts'));
     }
@@ -85,7 +85,7 @@ An Rss layout is very simple, put the following contents in
     }
     if (!isset($channelData['title'])) {
         $channelData['title'] = $title_for_layout;
-    } 
+    }
     $channel = $this->Rss->channel(array(), $channelData, $content_for_layout);
     echo $this->Rss->document($documentData, $channel);
 
@@ -144,7 +144,7 @@ associative array into an element for each key value pair.
 
     foreach ($posts as $post) {
         $postTime = strtotime($post['Post']['created']);
-    
+
         $postLink = array(
             'controller' => 'posts',
             'action' => 'view',
@@ -154,7 +154,7 @@ associative array into an element for each key value pair.
             $post['Post']['slug']
         );
 
-        // This is the part where we clean the body text for output as the description 
+        // This is the part where we clean the body text for output as the description
         // of the rss item, this needs to have only text to make sure the feed validates
         $bodyText = preg_replace('=\(.*?\)=is', '', $post['Post']['body']);
         $bodyText = $this->Text->stripLinks($bodyText);
@@ -164,7 +164,7 @@ associative array into an element for each key value pair.
             'exact'  => true,
             'html'   => true,
         ));
-         
+
         echo  $this->Rss->item(array(), array(
             'title' => $post['Post']['title'],
             'link' => $postLink,
@@ -263,14 +263,14 @@ Rss Helper API
 
     :rtype: string
 
-    Transforms an array of data using an optional callback, and maps it to a 
+    Transforms an array of data using an optional callback, and maps it to a
     set of ``<item />`` tags.
 
 .. php:method:: time(mixed $time)
 
     :rtype: string
 
-    Converts a time in any format to an RSS time. See 
+    Converts a time in any format to an RSS time. See
     :php:meth:`TimeHelper::toRSS()`.
 
 

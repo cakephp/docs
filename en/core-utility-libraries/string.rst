@@ -205,7 +205,7 @@ use the ``String`` class::
             'ellipsis' => '...',
             'exact' => true
         )
-        
+
     .. versionadded:: 2.3
 
     Example::
@@ -234,7 +234,7 @@ use the ``String`` class::
     Output::
 
         ...a TV, a C# program that can divide by zero, death metal t-shirts
-        
+
 .. php:method:: excerpt(string $haystack, string $needle, integer $radius=100, string $ellipsis="...")
 
     :param string $haystack: The string to search.

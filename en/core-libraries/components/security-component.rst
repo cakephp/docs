@@ -156,7 +156,7 @@ will use the POST data to build the same structure and compare the hash.
     :php:meth:`FormHelper::unlockField()`.  Fields that have been unlocked are
     not required to be part of the POST and hidden unlocked fields do not have
     their values checked.
-    
+
 .. php:attr:: validatePost
 
     Set to ``false`` to completely skip the validation of POST
@@ -167,21 +167,21 @@ CSRF configuration
 
 .. php:attr:: csrfCheck
 
-    Whether to use CSRF protected forms. Set to ``false`` to disable 
+    Whether to use CSRF protected forms. Set to ``false`` to disable
     CSRF protection on forms.
 
 .. php:attr:: csrfExpires
 
    The duration from when a CSRF token is created that it will expire on.
-   Each form/page request will generate a new token that can only 
-   be submitted once unless it expires.  Can be any value compatible 
+   Each form/page request will generate a new token that can only
+   be submitted once unless it expires.  Can be any value compatible
    with ``strtotime()``. The default is +30 minutes.
 
 .. php:attr:: csrfUseOnce
 
-   Controls whether or not CSRF tokens are use and burn.  Set to 
-   ``false`` to not generate new tokens on each request.  One token 
-   will be reused until it expires. This reduces the chances of 
+   Controls whether or not CSRF tokens are use and burn.  Set to
+   ``false`` to not generate new tokens on each request.  One token
+   will be reused until it expires. This reduces the chances of
    users getting invalid requests because of token consumption.
    It has the side effect of making CSRF less secure, as tokens are reusable.
 
@@ -194,9 +194,9 @@ beforeFilter(). You would specify the security restrictions you
 want and the Security Component will enforce them on its startup::
 
     class WidgetController extends AppController {
-    
+
         public $components = array('Security');
-    
+
         public function beforeFilter() {
             $this->Security->requirePost('delete');
         }
@@ -206,9 +206,9 @@ In this example the delete action can only be successfully
 triggered if it receives a POST request::
 
     class WidgetController extends AppController {
-    
+
         public $components = array('Security');
-    
+
         public function beforeFilter() {
             if (isset($this->request->params['admin'])) {
                 $this->Security->requireSecure();
@@ -220,16 +220,16 @@ This example would force all actions that had admin routing to
 require secure SSL requests::
 
     class WidgetController extends AppController {
-    
+
         public $components = array('Security');
-    
+
         public function beforeFilter() {
             if (isset($this->params['admin'])) {
                 $this->Security->blackHoleCallback = 'forceSSL';
                 $this->Security->requireSecure();
             }
         }
-    
+
         public function forceSSL() {
             $this->redirect('https://' . env('SERVER_NAME') . $this->here);
         }
@@ -321,8 +321,8 @@ one-use tokens.
 Disabling Security Component For Specific Actions
 =================================================
 
-There may be cases where you want to disable all security checks for an action (ex. ajax request). 
-You may "unlock" these actions by listing them in ``$this->Security->unlockedActions`` in your 
+There may be cases where you want to disable all security checks for an action (ex. ajax request).
+You may "unlock" these actions by listing them in ``$this->Security->unlockedActions`` in your
 ``beforeFilter``.
 
 .. versionadded:: 2.3

@@ -124,7 +124,7 @@ Creating notification messages
         echo $this->Session->flash('good');
         echo $this->Session->flash('bad');
 
-    The ``$element`` parameter allows you to control which element 
+    The ``$element`` parameter allows you to control which element
     (located in ``/app/View/Elements``) should be used to render the
     message in. In the element the message is available as ``$message``.
     First we set the flash in our controller::
@@ -137,7 +137,7 @@ Creating notification messages
         <div id="myCustomFlash"><?php echo $message; ?></div>
 
     ``$params`` allows you to pass additional view variables to the
-    rendered layout. Parameters can be passed affecting the rendered div, for 
+    rendered layout. Parameters can be passed affecting the rendered div, for
     example adding "class" in the $params array will apply a class to the
     ``div`` output using ``$this->Session->flash()`` in your layout or view.::
 
@@ -148,7 +148,7 @@ Creating notification messages
 
         <div id="flashMessage" class="example_class">Example message text</div>
 
-    To use an element from a plugin just specify the plugin in the 
+    To use an element from a plugin just specify the plugin in the
     ``$params``::
 
         // Will use /app/Plugin/Comment/View/Elements/flash_no_spam.ctp

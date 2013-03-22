@@ -24,7 +24,7 @@ such as debugging and translating content.
 
     This function handles localization in CakePHP applications. The
     ``$string_id`` identifies the ID for a translation.  Strings
-    used for translations are treated as format strings for 
+    used for translations are treated as format strings for
     ``sprintf()``.  You can supply additional arguments to replace
     placeholders in your string::
 
@@ -38,7 +38,7 @@ such as debugging and translating content.
 
 .. php:function:: __c(string $msg, integer $category, mixed $args = null)
 
-    Note that the category must be specified with a numeric value, instead of 
+    Note that the category must be specified with a numeric value, instead of
     the constant name. The values are:
 
     - 0 - LC_ALL
@@ -53,15 +53,15 @@ such as debugging and translating content.
 
     Allows you to override the current domain for a single message lookup.
 
-    Useful when internationalizing a plugin: 
+    Useful when internationalizing a plugin:
     ``echo __d('PluginName', 'This is my plugin');``
 
 .. php:function:: __dc(string $domain, string $msg, integer $category, mixed $args = null)
 
-    Allows you to override the current domain for a single message lookup. It 
+    Allows you to override the current domain for a single message lookup. It
     also allows you to specify a category.
 
-    Note that the category must be specified with a numeric value, instead of 
+    Note that the category must be specified with a numeric value, instead of
     the constant name. The values are:
 
     - 0 - LC_ALL
@@ -74,12 +74,12 @@ such as debugging and translating content.
 
 .. php:function:: __dcn(string $domain, string $singular, string $plural, integer $count, integer $category, mixed $args = null)
 
-    Allows you to override the current domain for a single plural message 
-    lookup. It also allows you to specify a category. Returns correct plural 
-    form of message identified by $singular and $plural for count $count from 
+    Allows you to override the current domain for a single plural message
+    lookup. It also allows you to specify a category. Returns correct plural
+    form of message identified by $singular and $plural for count $count from
     domain $domain.
 
-    Note that the category must be specified with a numeric value, instead of 
+    Note that the category must be specified with a numeric value, instead of
     the constant name. The values are:
 
     - 0 - LC_ALL
@@ -92,14 +92,14 @@ such as debugging and translating content.
 
 .. php:function:: __dn(string $domain, string $singular, string $plural, integer $count, mixed $args = null)
 
-    Allows you to override the current domain for a single plural message 
-    lookup. Returns correct plural form of message identified by $singular and 
+    Allows you to override the current domain for a single plural message
+    lookup. Returns correct plural form of message identified by $singular and
     $plural for count $count from domain $domain.
 
 .. php:function:: __n(string $singular, string $plural, integer $count, mixed $args = null)
 
-    Returns correct plural form of message identified by $singular and $plural 
-    for count $count. Some languages have more than one form for plural 
+    Returns correct plural form of message identified by $singular and $plural
+    for count $count. Some languages have more than one form for plural
     messages dependent on the count.
 
 .. php:function:: am(array $one, $two, $three...)
@@ -155,7 +155,7 @@ such as debugging and translating content.
 
 .. php:function:: pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)
 
-    Splits a dot syntax plugin name into its plugin and classname. If $name 
+    Splits a dot syntax plugin name into its plugin and classname. If $name
     does not have a dot, then index 0 will be null.
 
     Commonly used like ``list($plugin, $name) = pluginSplit('Users.User');``
@@ -193,7 +193,7 @@ Most of the following constants refer to paths in your application.
 
 .. php:const:: CACHE
 
-    Path to the cache files directory. It can be shared between hosts in a 
+    Path to the cache files directory. It can be shared between hosts in a
     multi-server setup.
 
 .. php:const:: CAKE

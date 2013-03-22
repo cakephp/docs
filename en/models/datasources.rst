@@ -16,7 +16,7 @@ of which is listed here for your convenience:
 
 .. note::
 
-    You can find additional community contributed datasources in the 
+    You can find additional community contributed datasources in the
     `CakePHP DataSources repository at github <https://github.com/cakephp/datasources/tree/2.0>`_.
 
 When specifying a database connection configuration in
@@ -50,7 +50,7 @@ Methods that must be implemented for all CRUD methods:
 -  ``listSources($data = null)``
 -  ``calculate($model, $func, $params)``
 -  At least one of:
-   
+
    -  ``create(Model $model, $fields = null, $values = null)``
    -  ``read(Model $model, $queryData = array(), $recursive = null)``
    -  ``update(Model $model, $fields = null, $values = null, $conditions = null)``

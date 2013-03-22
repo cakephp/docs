@@ -18,7 +18,7 @@ needed paths to $PATH. Copy and save this to your Console folder as
     export TERM
     cmd="cake"
     while [ $# -ne 0 ]; do
-        if [ "$1" = "-cli" ] || [ "$1" = "-console" ]; then 
+        if [ "$1" = "-cli" ] || [ "$1" = "-console" ]; then
             PATH=$PATH:$2
             shift
         else

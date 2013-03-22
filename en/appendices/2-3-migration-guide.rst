@@ -37,7 +37,7 @@ AuthComponent
 
 - :php:meth:`AuthComponent::redirect()` has been deprecated.
   Use :php:meth:`AuthComponent::redirectUrl()` instead.
-  
+
 PaginatorComponent
 ------------------
 

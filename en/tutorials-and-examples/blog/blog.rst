@@ -78,7 +78,7 @@ statements into your database::
         created DATETIME DEFAULT NULL,
         modified DATETIME DEFAULT NULL
     );
-    
+
     /* Then insert some posts for testing: */
     INSERT INTO posts (title,body,created)
         VALUES ('The title', 'This is the post body.', NOW());
@@ -136,7 +136,7 @@ that Cake can successfully connect to the database.
 
 .. note::
 
-    Remember that you'll need to have PDO, and pdo_mysql enabled in 
+    Remember that you'll need to have PDO, and pdo_mysql enabled in
     your php.ini.
 
 Optional Configuration

@@ -19,10 +19,10 @@ httpd.conf rather than a user- or site-specific httpd.conf).
 
        # Each directory to which Apache has access can be configured with respect
        # to which services and features are allowed and/or disabled in that
-       # directory (and its subdirectories). 
+       # directory (and its subdirectories).
        #
-       # First, we configure the "default" to be a very restrictive set of 
-       # features.  
+       # First, we configure the "default" to be a very restrictive set of
+       # features.
        #
        <Directory />
            Options FollowSymLinks
@@ -82,10 +82,10 @@ httpd.conf rather than a user- or site-specific httpd.conf).
            RewriteRule ^(.*)$ index.php [QSA,L]
        </IfModule>
 
-   If your CakePHP site still has problems with mod\_rewrite you might 
-   want to try and modify settings for virtualhosts. If on ubuntu, 
-   edit the file /etc/apache2/sites-available/default (location is 
-   distribution dependent). In this file, ensure that 
+   If your CakePHP site still has problems with mod\_rewrite you might
+   want to try and modify settings for virtualhosts. If on ubuntu,
+   edit the file /etc/apache2/sites-available/default (location is
+   distribution dependent). In this file, ensure that
    ``AllowOverride None`` is changed to ``AllowOverride All``, so you have::
 
        <Directory />
@@ -100,7 +100,7 @@ httpd.conf rather than a user- or site-specific httpd.conf).
        </Directory>
 
    If on Mac OSX, another solution is to use the tool virtualhostx to
-   make a virtual host to point to your folder.  
+   make a virtual host to point to your folder.
 
    For many hosting services (GoDaddy, 1and1), your web server is
    actually being served from a user directory that already uses
@@ -147,7 +147,7 @@ you will need PHP running as a FastCGI instance.
     server {
         listen   80;
         server_name example.com;
-    
+
         # root directive should be global
         root   /var/www/example.com/public/app/webroot/;
         index  index.php;

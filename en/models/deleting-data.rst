@@ -15,7 +15,7 @@ records dependent on the record specified to be deleted.
 
 For example, when deleting a User record that is tied to many
 Recipe records (User 'hasMany' or 'hasAndBelongsToMany' Recipes):
- 
+
 -  if $cascade is set to true, the related Recipe records are also
    deleted if the model's dependent-value is set to true.
 -  if $cascade is set to false, the Recipe records will remain

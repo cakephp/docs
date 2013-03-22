@@ -19,7 +19,7 @@ All you need to do is include the Sanitize core library (e.g.
 before the controller class definition)::
 
     App::uses('Sanitize', 'Utility');
-    
+
     class MyController extends AppController {
         ...
         ...
@@ -69,7 +69,7 @@ Once you've done that, you can make calls to Sanitize statically.
 .. php:staticmethod:: Sanitize::escape($string, $connection)
 
     :param string $string: Data to clean.
-    :param string $connection: The name of the database to quote the string for, 
+    :param string $connection: The name of the database to quote the string for,
         as named in your app/Config/database.php file.
 
     Used to escape SQL statements by adding slashes, depending on the
@@ -94,7 +94,7 @@ Once you've done that, you can make calls to Sanitize statically.
         // output: HEY...
 
     Escaping is often a better strategy than stripping, as it has less room
-    for error, and isn't vulnerable to new types of attacks, the stripping 
+    for error, and isn't vulnerable to new types of attacks, the stripping
     function does not know about.
 
 .. php:staticmethod:: Sanitize::paranoid($string, $allowedChars)

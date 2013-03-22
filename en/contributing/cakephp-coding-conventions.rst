@@ -46,13 +46,13 @@ Control Structures
 Control structures are for example "``if``", "``for``", "``foreach``",
 "``while``", "``switch``" etc. Below, an example with "``if``"::
 
-    if ((expr_1) || (expr_2)) { 
+    if ((expr_1) || (expr_2)) {
         // action_1;
     } elseif (!(expr_3) && (expr_4)) {
-        // action_2; 
+        // action_2;
     } else {
-        // default_action; 
-    } 
+        // default_action;
+    }
 
 *  In the control structures there should be 1 (one) space before the
    first parenthesis and 1 (one) space between the last parenthesis and
@@ -70,11 +70,11 @@ Control structures are for example "``if``", "``for``", "``foreach``",
 ::
 
     // wrong = no brackets, badly placed statement
-    if (expr) statement; 
+    if (expr) statement;
 
     // wrong = no brackets
-    if (expr) 
-        statement; 
+    if (expr)
+        statement;
 
     // good
     if (expr) {
@@ -123,7 +123,7 @@ Functions should be called without space between function's name and
 starting bracket. There should be one space between every parameter of a
 function call::
 
-    $var = foo($bar, $bar2, $bar3); 
+    $var = foo($bar, $bar2, $bar3);
 
 As you can see above there should be one space on both sides of equals
 sign (=).
@@ -200,7 +200,7 @@ processed if they are the first thing in a DocBlock line, for example::
      */
     function bar() {
     }
-     
+
     /**
      * Foo function
      */

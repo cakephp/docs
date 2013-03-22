@@ -38,22 +38,22 @@ will not be accessible directly from the web but is available for
 internal use. For example::
 
     class NewsController extends AppController {
-    
+
         public function latest() {
             $this->_findNewArticles();
         }
-        
+
         protected function _findNewArticles() {
             // Logic to find latest news articles
         }
     }
-    
+
 
 While the page http://www.example.com/news/latest/ would be
 accessible to the user as usual, someone trying to get to the page
 http://www.example.com/news/\_findNewArticles/ would get an error,
 because the method is preceded with an underscore. You can also use
-PHP's visibility keywords to indicate whether or not a method can be 
+PHP's visibility keywords to indicate whether or not a method can be
 accessed from a url. Non-public methods cannot be accessed.
 
 URL Considerations for Controller Names
@@ -94,7 +94,7 @@ classes you would typically use in a CakePHP application:
 
 
 -  The Controller class **KissesAndHugsController** would be found
-   in a file named **KissesAndHugsController.php** 
+   in a file named **KissesAndHugsController.php**
 -  The Component class **MyHandyComponent** would be found in a
    file named **MyHandyComponent.php**
 -  The Model class **OptionValue** would be found in a file named
@@ -155,7 +155,7 @@ as a normal model. E.g.::
     id INT(10) NOT NULL AUTO_INCREMENT,
     post_id INT(10) NOT NULL,
     tag_id INT(10) NOT NULL,
-    PRIMARY KEY(id)); 
+    PRIMARY KEY(id));
 
 Rather than using an auto-increment key as the primary key, you may
 also use char(36). Cake will then use a unique 36 character uuid
