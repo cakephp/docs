@@ -29,6 +29,15 @@ App.Book = (function() {
 				animation: 'fade'
 			});
 		});
+
+		// Make dropdowns work with keyboard input.
+		var dropdown = $('.dropdown');
+		dropdown.find('> a').bind('focus', function () {
+			$(this).parents('.dropdown').find('ul').show();
+		});
+		dropdown.find('li:last-child a').bind('blur', function () {
+			$(this).parents('.dropdown').find('ul').css('display', '');
+		});
 	}
  
 	function compare_scores(a, b) {
