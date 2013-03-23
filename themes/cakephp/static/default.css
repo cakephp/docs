@@ -51,18 +51,7 @@ body {
 .breadcrumb-header a {
 	color: #fff;
 }
-.breadcrumb-header .versions {
-	background: #417282;
-	display: block;
-	margin: 0;
-	position: absolute;
-	right: 0;
-	top: 0;
-	padding: 6px;
-}
-.versions a {
-	padding: 0 4px;
-}
+
 .root-link,
 .breadcrumb {
 	line-height: 25px;
@@ -73,6 +62,73 @@ body {
 	font-size: 18px;
 	margin: 0;
 	vertical-align: middle;
+}
+
+
+/* Dropdown menu's for versions/languages */
+.dropdown {
+	position: relative;
+	width: 115px;
+	font-size: 1.4rem;
+	text-align: left;
+}
+.dropdown > a:after {
+	content: ' \25BE';
+}
+.dropdown a {
+	display: block;
+	width: 115px;
+	padding: 5px 4px;
+}
+.dropdown ul {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	background: #417282;
+	z-index: 10;
+	margin: 0;
+	padding: 0;
+}
+.dropdown:focus ul,
+.dropdown:hover ul {
+	display: block;
+}
+.dropdown li {
+	display: block;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+}
+.dropdown li a {
+	display: block;
+	padding: 5px 20px 5px 5px;
+	width: 85px;
+}
+
+.dropdown.versions,
+.dropdown.languages {
+	background: #417282;
+}
+
+.versions {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.languages {
+	position: absolute;
+	top: 0;
+	right: 130px;
+}
+
+/*  Languages  */
+.languages .disabled {
+	opacity: 0.5;
+}
+.languages .active {
+	text-decoration: underline;
 }
 
 /* Searchbox */
@@ -127,6 +183,7 @@ body {
 	display: block;
 	padding: 5px 10px;
 }
+#inline-search-results a:focus,
 #inline-search-results a:hover {
 	background: #eee;
 }
@@ -140,7 +197,7 @@ body {
 	.root-link {
 		display: none;
 	}
-	.versions.inline {
+	.dropdown {
 		display: none;
 	}
 	.masthead img {
@@ -543,7 +600,6 @@ dt tt {
 	color: #C92434;
 }
 .contribute,
-.languages,
 .related-pages a {
 	font-size: 14px;
 	font-family: MuseoSlab500, Helvetica, Arial;	
@@ -553,21 +609,6 @@ dt tt {
 	color: #003D4C;
 }
 
-/*  Languages  */
-.languages ul {
-    float: right;
-    margin-right: 10px
-}
-.languages li,
-.languages a {
-  color: #417282;
-}
-.languages .disabled {
-    opacity: 0.5;
-}
-.languages .active {
-    text-decoration: underline;
-}
 
 /* tablet and smaller */
 @media only screen and (max-width: 767px) {
