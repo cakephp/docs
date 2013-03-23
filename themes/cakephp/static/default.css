@@ -183,6 +183,7 @@ body {
 	display: block;
 	padding: 5px 10px;
 }
+#inline-search-results a:focus,
 #inline-search-results a:hover {
 	background: #eee;
 }
