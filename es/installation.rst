@@ -20,7 +20,7 @@ Tienes dos opciones: descargar un archivo comprimido con todo el código
 directamente desde el repositorio de git.
 
 Para descargar la última versión estable, puedes vistar la página oficial
-`http://www.cakephp.org <http://www.cakephp.org>`_ y pichar en la opción
+`http://cakephp.org <http://cakephp.org>`_ y pichar en la opción
 "Download Now".
 
 Además, todas las versiones de CakePHP están hospedadas en `Github

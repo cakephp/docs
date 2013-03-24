@@ -44,7 +44,7 @@ either download an archive copy (zip/tar.gz/tar.bz2) from the main
 website, or check out the code from the git repository.
 
 To download the latest major release of CakePHP. Visit the main
-website `http://www.cakephp.org <http://www.cakephp.org>`_ and
+website `http://cakephp.org <http://cakephp.org>`_ and
 follow the "Download Now" link.
 
 All current releases of CakePHP are hosted on

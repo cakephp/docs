@@ -42,7 +42,7 @@ o download de um arquivo comprimido (zip/tar.gz/tar.bz2) no site principal ou
 obter o código a partir do repositório git.
 
 Para fazer o download da versão estável mais recente do CakePHP, visite o site
-principal `http://www.cakephp.org <http://www.cakephp.org>`_. Lá haverá um link
+principal `http://cakephp.org <http://cakephp.org>`_. Lá haverá um link
 chamado “Download Now!” para baixar.
 
 Todas as versões liberadas do CakePHP estão hospedadas no
