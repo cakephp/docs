@@ -169,7 +169,7 @@ est responsable de leur attachement. Le code possible pourrait être cela ::
         'inventory' => array($this->InventoryManager, 'decrement'),
         'logger' => function($event) {
             // Les fonction Anonyme ne sont permises que dans PHP 5.3+
-            CakeLog::write('info', 'Un nouvel achat à été placé avec l'id: ' . $event->subject()->id);
+            CakeLog::write('info', 'Un nouvel achat à été placé avec l\'id: ' . $event->subject()->id);
         }
     ));
 
