@@ -24,10 +24,10 @@ Para descargar la última versión estable, puedes vistar la página oficial
 "Download Now".
 
 Además, todas las versiones de CakePHP están hospedadas en `Github
-<http://github.com/cakephp/cakephp>`_. Github almacena tanto el código de
+<https://github.com/cakephp/cakephp>`_. Github almacena tanto el código de
 CakePHP como muchos otros plugins para el sistema. Las versiones *release* de
-CakePHP están disponibles aquí `Github downloads
-<http://github.com/cakephp/cakephp/downloads>`_.
+CakePHP están disponibles aquí `Github tags
+<https://github.com/cakephp/cakephp/tags>`_.
 
 También puedes obtener la última versión, con todos los bugs y mejoras
 corregidos hasta el último minuto (o al menos en ese día). Para ello puedes

@@ -33,7 +33,7 @@ Préparer notre Application
 Premièrement, récupérons une copie récente de CakePHP
 
 Pour obtenir un téléchargement à jour, visitez le projet CakePHP sur Github: 
-http://github.com/cakephp/cakephp/downloads et téléchargez la version stable. 
+https://github.com/cakephp/cakephp/tags et téléchargez la version stable. 
 Pour ce tutoriel vous aurez besoin de la dernière version 2.x.
 
 Vous pouvez aussi dupliquer le dépôt en utilisant 

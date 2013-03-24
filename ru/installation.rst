@@ -48,7 +48,7 @@ git-репозитория.
 Все текущие релизы CakePHP размещены на 
 `Github <http://github.com/cakephp/cakephp>`_, так же, как и
 многие плагины для CakePHP. Релизы CakePHP доступны в
-`Github downloads <http://github.com/cakephp/cakephp/downloads>`_.
+`Github tags <https://github.com/cakephp/cakephp/tags>`_.
 
 К тому же вы можете получить самую последнюю версию кода с помощью
 клонирования репозитория на `Github`_ ::

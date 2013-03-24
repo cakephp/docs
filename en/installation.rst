@@ -51,7 +51,7 @@ All current releases of CakePHP are hosted on
 `Github <http://github.com/cakephp/cakephp>`_. Github houses both CakePHP
 itself as well as many other plugins for CakePHP. The CakePHP
 releases are available at
-`Github downloads <http://github.com/cakephp/cakephp/downloads>`_.
+`Github tags <https://github.com/cakephp/cakephp/tags>`_.
 
 Alternatively you can get fresh off the press code, with all the
 bug-fixes and up to the minute enhancements.

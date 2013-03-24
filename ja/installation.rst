@@ -42,7 +42,7 @@ CakePHP の最新版を手に入れるには、主に二つの方法がありま
 
 CakePHP の最新のリリースは `Github <http://github.com/cakephp/cakephp>`_ でホスティングされています。
 GithubにはCakePHP自身、また多くのCakePHPプラグインが含まれています。
-CakePHPのリリースは `Github downloads <http://github.com/cakephp/cakephp/downloads>`_ で入手できます。
+CakePHPのリリースは `Github tags <https://github.com/cakephp/cakephp/tags>`_ で入手できます。
 
 他の手段を用いて、バグ修正や日ごとに行われる細かな機能追加が含まれた、できたてホヤホヤのコードを手に入れることができます。
 これらは `Github`_ からレポジトリを複製することでアクセスすることができます::

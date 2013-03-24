@@ -38,7 +38,7 @@ Preparing our Application
 First, let's get a copy of fresh Cake code.
 
 To get a fresh download, visit the CakePHP project at GitHub:
-http://github.com/cakephp/cakephp/downloads and download the stable
+https://github.com/cakephp/cakephp/tags and download the stable
 release. For this tutorial you need the latest 2.0 release.
 
 

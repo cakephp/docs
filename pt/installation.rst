@@ -49,7 +49,7 @@ Todas as versões liberadas do CakePHP estão hospedadas no
 `Github <http://github.com/cakephp/cakephp>`_. O Github do CakePHP abriga o
 próprio Cake assim como muitos outros plugins para ele. As versões disponíveis
 estão na página
-`Github downloads <http://github.com/cakephp/cakephp/downloads>`_.
+`Github tags <https://github.com/cakephp/cakephp/tags>`_.
 
 Alternativamente você pode obter uma cópia contendo todas as correções de bugs e
 atualizações recentes clonando o repositório do Github::
