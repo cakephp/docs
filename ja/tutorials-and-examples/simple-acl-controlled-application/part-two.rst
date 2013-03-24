@@ -55,7 +55,7 @@ http://localhost/cake/app/users/initdb)へ接続してください。
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('initDB'); //この行は終わったあと削除できます 
+        $this->Auth->allow('initDB'); //この行は終わったあと削除できます
     }
 
     public function initDB() {
@@ -116,7 +116,9 @@ ACLパーミッションからindexアクションやviewアクションをわ�
 
 これでアプリケーションがアクセス制御下におかれましたので、パブリックでないページの表示に対するアクセスはログインページにリダイレクトされるようになりました。
 しかし、先にログインを行うまえに、それ用のビューを作成しなければなりません。
-もし ``app/View/Users/login.ctp`` をまだ作成していないなら、次のコードを設置してください::
+もし ``app/View/Users/login.ctp`` をまだ作成していないなら、次のコードを設置してください:
+
+.. code-block:: php
 
     <h2>Login</h2>
     <?php
@@ -160,5 +162,3 @@ Authのlogoutメソッドは基本的にAuthのSessionキーを削除し、リ�
 しかし、これらはユーザに対しても同じ時に行うことができます。
 パーミッションの設定は、グローバルに行ったり、コントローラ単位やアクション単位でも行えます。
 さらに、アプリケーションが拡大するにあたりACOテーブルを簡単に拡張し、再利用可能なコードのブロックを使うこともできます。
-
-

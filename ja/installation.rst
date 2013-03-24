@@ -150,12 +150,13 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
 
 もしウェブサーバが適切に設定されていれば、 http://www.example.com で Cake アプリケーションがアクセス可能になっているはずです。
 
-応用インストールとサーバー固有の設定
-====================================
+応用インストールと URL リライティング
+=====================================
 
 .. toctree::
 
-   installation/advanced-installation
+    installation/advanced-installation
+    installation/url-rewriting
 
 動作確認
 ========
@@ -172,7 +173,7 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
 もしPHPのタイムゾーンに関連するエラーが出るなら、 ``app/Config/core.php`` の中のとある一行のコメントを外してください::
 
    /**
-    * If you are on PHP 5.3 uncomment this line and correct your server timezone
-    * to fix the date & time related errors.
+    * Uncomment this line and correct your server timezone to fix 
+    * any date & time related errors.
     */
        date_default_timezone_set('UTC');
