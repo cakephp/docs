@@ -131,7 +131,8 @@ Validation
 ----------
 
 - :php:meth:`Validation::date()` now supports the ``y`` and ``ym`` formats.
-
+- The country code of :php:meth:`Validation::phone()` for Canada has been changed from ``can`` to
+  ``ca`` to unify the country codes for validation methods according to ISO 3166 (two letter codes).
 
 CakeNumber
 ----------
