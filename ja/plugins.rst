@@ -224,7 +224,7 @@ ContactManagerプラグインのコントローラーは、/app/Plugin/ContactMa
 
 .. note::
         このコントローラは、アプリケーションの AppController の親としてではなく、
-        プラグインのAppControllerを拡張します（ ContactManagerAppController という名前で）。
+        プラグインのAppControllerを継承します（ ContactManagerAppController という名前で）。
 
         また、モデルの名前の付け方は、プラグインの名前が接頭語としてつきます。
         これは、プラグイン内のモデルとメインのアプリケーション内のモデルの区別が必要だからです。
