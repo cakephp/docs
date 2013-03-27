@@ -62,8 +62,8 @@ mais nous encourageons la communauté à étendre la compatibilité
 de librairie. 
 
 
-Utilisation de jQuery avec d'autre librairies
----------------------------------------------
+Utilisation de jQuery avec d'autres librairies
+----------------------------------------------
 
 La librairie jQuery, et virtuellement tous ses plugins sont limités
 au sein de l'espace jQuery. Comme règle générale, les objets
