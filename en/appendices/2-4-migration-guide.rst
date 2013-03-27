@@ -141,3 +141,21 @@ CakeNumber
 - The symbols for ``GBP`` and ``EUR`` are now UTF-8. If you upgrade a non-UTF-8 application,
   make sure that you update the static ``$_currencies`` attribute with the appropriate
   HTML entity symbols (``&#163;`` and ``&#8364;``) before you use those currencies.
+
+Xml
+---
+
+- New option ``pretty`` has been added to :php:meth:`Xml::fromArray()` to return nicely formatted Xml
+
+
+Error
+=====
+
+ErrorHandler
+------------
+
+- New configuration option ``skipLog`` has been added, to allow skipping certain
+  Exception types to be logged. ``Configure::write('Exception.skipLog', array('NotFoundException', 'ForbiddenException'));``
+  will avoid these exceptions and the ones extending them to be be logged when
+  ``'Exception.log'`` config is ``true``
+
