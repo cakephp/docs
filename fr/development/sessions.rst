@@ -19,12 +19,15 @@ d'options sont disponibles:
 
 * ``Session.cookie`` - Change le nom du cookie de session.
 
-* ``Session.timeout`` - Le nombre de *minutes* que vous voulez que les 
-  sessions durent.
+* ``Session.timeout`` - Le nombre de *minutes* avant que le gestionnaire de
+  session de CakePHP ne fasse expirer la session.
+  Cela affecte ``Session.autoRegenerate`` (ci-dessous), et cela est geré par
+  CakeSession.
 
-* ``Session.cookieTimeout`` - Le nombre de *minutes* que vous souhaitez que les 
-  sessions durent. Si il n'est pas défini, la valeur de ``Session.timeout`` 
-  sera utilisée.
+* ``Session.cookieTimeout`` - Le nombre de *minutes* avant que le cookie de
+  session n'expire. Si il n'est pas défini, il utilisera la même valeur que
+  ``Session.timeout``. Cela affecte le cookie de session, et est geré
+  directement par PHP.
 
 * ``Session.checkAgent`` - Le user agent doit il être verifié, sur chaque 
   requête. Si le useragent ne matche pas, la session sera détruite.
