@@ -35,15 +35,17 @@ CakePHP は PHP のネイティヴ ``session`` 拡張上に、ユーティリテ
 
 ..
   * ``Session.cookie`` - Change the name of the session cookie.
-  
-  * ``Session.timeout`` - The number of *minutes* you want sessions to last.
-  
-  * ``Session.cookieTimeout`` - The number of *minutes* you want sessions to last.
-  If this is undefined, the value from ``Session.timeout`` will be used.
-  
+
+  * ``Session.timeout`` - The number of *minutes* before CakePHP's session handler expires the session.
+  This affects ``Session.autoRegenerate`` (below), and is handled by CakeSession.
+
+  * ``Session.cookieTimeout`` - The number of *minutes* before the session cookie expires.
+  If this is undefined, it will use the same value as ``Session.timeout``.
+  This affects the session cookie, and is handled by PHP itself.
+
   * ``Session.checkAgent`` - Should the user agent be checked, on each request.  If
   the useragent does not match the session will be destroyed.
-  
+
   * ``Session.autoRegenerate`` - Enabling this setting, turns on automatic
     renewal of sessions, and sessionids that change frequently. Enabling this
     value will use the session's ``Config.countdown`` value to keep track of requests.
@@ -51,24 +53,24 @@ CakePHP は PHP のネイティヴ ``session`` 拡張上に、ユーティリテ
     good option to use for applications that need frequently
     changing session ids for security reasons. You can control the number of requests
     needed to regenerate the session by modifying :php:attr:`CakeSession::$requestCountdown`.
-  
+
   * ``Session.defaults`` - Allows you to use one the built-in default session
     configurations as a base for your session configuration.
-  
+
   * ``Session.handler`` - Allows you to define a custom session handler. The core
     database and cache session handlers use this.  This option replaces
     ``Session.save`` in previous versions. See below for additional information on
     Session handlers.
-  
+
   * ``Session.ini`` - Allows you to set additional session ini settings for your
     config.  This combined with ``Session.handler`` replace the custom session
     handling features of previous versions
 
 * ``Session.cookie`` - セッションクッキーの名前を変更します。
 
-* ``Session.timeout`` - 任意のセッション継続時間を *分* 単位で指定します。
+* ``Session.timeout`` - CakePHP のセッションハンドラがセッションを破棄するまでの時間を *分* 単位で指定します。この値は下記の ``Session.autoRegenerate`` に影響を与えます。これは CakeSession により処理されています。
 
-* ``Session.cookieTimeout`` - 任意のセッション継続時間を *分* 単位で指定します。もしこれが未定義の場合、 ``Session.timeout`` の値が使用されます。
+* ``Session.cookieTimeout`` - 任意のセッション継続時間を *分* 単位で指定します。もしこれが未定義の場合、 ``Session.timeout`` の値が使用されます。これは session cookie に影響を与え、PHP 自体により処理されています。
 
 * ``Session.checkAgent`` - ユーザーエージェントはチェックされるべきです。ユーザーエージェントがセッションとマッチしない場合、そのセッションは破棄されます。
 
@@ -524,5 +526,3 @@ ini 指示子の設定
 コントローラーとビューからのセッションデータへのアクセス方法については、\
 合わせて :doc:`/core-libraries/components/sessions` と \
 :doc:`/core-libraries/helpers/session` をご覧下さい。
-
-
