@@ -32,11 +32,11 @@ So, indentation should look like this::
 Or::
 
     $booleanVariable = true;
-    $stringVariable = "moose";
+    $stringVariable = 'moose';
     if ($booleanVariable) {
-        echo "Boolean value is true";
-        if ($stringVariable == "moose") {
-            echo "We have encountered a moose";
+        echo 'Boolean value is true';
+        if ($stringVariable === 'moose') {
+            echo 'We have encountered a moose';
         }
     }
 
@@ -46,13 +46,13 @@ Control Structures
 Control structures are for example "``if``", "``for``", "``foreach``",
 "``while``", "``switch``" etc. Below, an example with "``if``"::
 
-    if ((expr_1) || (expr_2)) { 
+    if ((expr_1) || (expr_2)) {
         // action_1;
     } elseif (!(expr_3) && (expr_4)) {
-        // action_2; 
+        // action_2;
     } else {
-        // default_action; 
-    } 
+        // default_action;
+    }
 
 *  In the control structures there should be 1 (one) space before the
    first parenthesis and 1 (one) space between the last parenthesis and
@@ -70,11 +70,11 @@ Control structures are for example "``if``", "``for``", "``foreach``",
 ::
 
     // wrong = no brackets, badly placed statement
-    if (expr) statement; 
+    if (expr) statement;
 
     // wrong = no brackets
-    if (expr) 
-        statement; 
+    if (expr)
+        statement;
 
     // good
     if (expr) {
@@ -107,7 +107,7 @@ tags::
 
     <?php
     if ($isAdmin):
-        echo "<p>You are the admin user.</p>";
+        echo '<p>You are the admin user.</p>';
     endif;
     ?>
     <p>The following is also acceptable:</p>
@@ -123,7 +123,7 @@ Functions should be called without space between function's name and
 starting bracket. There should be one space between every parameter of a
 function call::
 
-    $var = foo($bar, $bar2, $bar3); 
+    $var = foo($bar, $bar2, $bar3);
 
 As you can see above there should be one space on both sides of equals
 sign (=).
@@ -145,7 +145,7 @@ definition. Try to make your functions return something, at least true
 or false = so it can be determined whether the function call was
 successful::
 
-    function connection($dns, $persistent = false) {
+    public function connection($dns, $persistent = false) {
         if (is_array($dns)) {
             $dnsInfo = $dns;
         } else {
@@ -328,7 +328,7 @@ float
 boolean
     Logical type (true or false).
 string
-    String type (any value in "" or ' ').
+    String type (any value in " " or ' ').
 array
     Array type.
 object

@@ -116,7 +116,7 @@ Category model needs to start behaving as a Christmas model, but
 only on Christmas day::
 
     // If today is Dec 25
-    if (date('m/d') == '12/25') {
+    if (date('m/d') === '12/25') {
         // Our model needs to behave as a Christmas model
         $this->Category->Behaviors->load('Christmas');
     }

@@ -485,7 +485,7 @@ the method to implement would be named ``_findMyFancySearch``.
         public $findMethods = array('available' =>  true);
 
         protected function _findAvailable($state, $query, $results = array()) {
-            if ($state == 'before') {
+            if ($state === 'before') {
                 $query['conditions']['Article.published'] = true;
                 return $query;
             }
@@ -588,9 +588,9 @@ If needed you can distinguish by checking for ``'operation'`` key
 and return a different ``$query``::
 
     protected function _findAvailable($state, $query, $results = array()) {
-        if ($state == 'before') {
+        if ($state === 'before') {
             $query['conditions']['Article.published'] = true;
-            if (!empty($query['operation']) && $query['operation'] == 'count') {
+            if (!empty($query['operation']) && $query['operation'] === 'count') {
                 return $query;
             }
             $query['joins'] = array(

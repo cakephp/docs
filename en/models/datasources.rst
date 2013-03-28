@@ -16,7 +16,7 @@ of which is listed here for your convenience:
 
 .. note::
 
-    You can find additional community contributed datasources in the 
+    You can find additional community contributed datasources in the
     `CakePHP DataSources repository at github <https://github.com/cakephp/datasources/tree/2.0>`_.
 
 When specifying a database connection configuration in
@@ -157,7 +157,7 @@ based API. We'll call it ``FarAwaySource`` and we'll put it in
      * We don't count the records here but return a string to be passed to
      * ``read()`` which will do the actual counting. The easiest way is to just
      * return the string 'COUNT' and check for it in ``read()`` where
-     * ``$data['fields'] == 'COUNT'``.
+     * ``$data['fields'] === 'COUNT'``.
      */
         public function calculate(Model $model, $func, $params = array()) {
             return 'COUNT';
@@ -173,7 +173,7 @@ based API. We'll call it ``FarAwaySource`` and we'll put it in
              * other way to get the record count. Here we'll simply return 1 so
              * ``update()`` and ``delete()`` will assume the record exists.
              */
-            if ($queryData['fields'] == 'COUNT') {
+            if ($queryData['fields'] === 'COUNT') {
                 return array(array(array('count' => 1)));
             }
             /**
