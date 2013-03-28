@@ -323,7 +323,7 @@ more easily.
 
 You can change ContainableBehavior settings at run time by
 reattaching the behavior as seen in
-:doc:`/models/behaviors`
+:doc:`/models/behaviors` (Using Behaviors).
 
 ContainableBehavior can sometimes cause issues with other behaviors
 or queries that use aggregate functions and/or GROUP BY statements.
