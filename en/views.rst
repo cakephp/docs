@@ -29,7 +29,7 @@ presentational logic needed to get the data it received from the
 controller in a format that is ready for the audience you’re
 serving to. If you'd prefer using a templating language like
 Twig, or Smarty, a subclass of View will bridge your templating
-language and CakePHP
+language and CakePHP.
 
 View files are stored in ``/app/View/``, in a folder named after the
 controller that uses the files, and named after the action it
@@ -205,7 +205,7 @@ default content will be discarded.
     You should avoid using ``content`` as a block name.  This is used by CakePHP
     internally for extended views, and view content in the layout.
 
-    
+
 Displaying blocks
 -----------------
 

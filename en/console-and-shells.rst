@@ -949,7 +949,7 @@ Shell API
 .. php:method:: startup()
 
     Starts up the Shell and displays the welcome message. Allows for checking
-    and configuring prior to command or main execution
+    and configuring prior to command or main execution.
 
     Override this method if you want to remove the welcome information, or
     otherwise modify the pre-command flow.
