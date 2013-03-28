@@ -476,7 +476,7 @@ s'appellera ``_findMaSuperRecherche``.
         public $findMethods = array('available' =>  true);
 
         protected function _findAvailable($state, $query, $results = array()) {
-            if ($state == 'before') {
+            if ($state === 'before') {
                 $query['conditions']['Article.publie'] = true;
                 return $query;
             }
@@ -578,6 +578,29 @@ régler le compte de pagination:
 
     }
 
+
+.. versionchanged:: 2.2
+
+Vous n'avez plus besoin de surcharger _findCount pour régler les problèmes des
+count de résultat incorrects. L'état ``'before'`` de vos finder personnalisés
+vous permettent maintenant d'être appelés à nouveaux avec 
+$query['operation'] = 'count'. Le $query retourné va être utilisé dans
+``_findCount()``. Si nécéssaire, vous pouvez distinguer en vérifiant pour
+la clé ``'operation'`` et retourner un ``$query`` différent::
+
+    protected function _findAvailable($state, $query, $results = array()) {
+        if ($state === 'before') {
+            $query['conditions']['Article.published'] = true;
+            if (!empty($query['operation']) && $query['operation'] === 'count') {
+                return $query;
+            }
+            $query['joins'] = array(
+                //array of required joins
+            );
+            return $query;
+        }
+        return $results;
+    }
 
 Types Magiques de Recherche
 ===========================

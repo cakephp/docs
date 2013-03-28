@@ -124,7 +124,7 @@ behaviors. Disons que notre model familier Category nécessite de
 se comporter comme un model de Noël, mais seulement le jour de Noël::
 
     // Si nous sommes le 25 déc
-    if (date('m/d') == '12/25') {
+    if (date('m/d') === '12/25') {
         // Notre model nécessite de se comporter comme un model de Noël
         $this->Category->Behaviors->load('Christmas');
     }
