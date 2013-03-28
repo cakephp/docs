@@ -29,7 +29,7 @@ en le nommant 'cakeshell' et n'oubliez pas de le rendre exécutable.
 
 Vous l'appelez ainsi::
 
-    $ ./vendors/cakeshell myshell myparam -cli /usr/bin -console /cakes/1.2.x.x/cake/console
+    $ ./Console/cakeshell myshell myparam -cli /usr/bin -console /cakes/2.x.x/lib/Cake/Console
 
 Le paramètre ``-cli`` prend un chemin qui pointe vers l'exécutable cli php 
 et le paramètre ``-console`` prend un chemin qui pointe vers la console CakePHP.
@@ -37,13 +37,13 @@ et le paramètre ``-console`` prend un chemin qui pointe vers la console CakePHP
 Pour une tâche cron, ceci devrait ressembler à ::
 
     # m h dom mon dow command
-    */5 *   *   *   * /chemin/complet/vers/cakeshell myshell myparam -cli /usr/bin -console /cakes/1.2.x.x/cake/console -app /chemin/complet/vers/app
+    */5 *   *   *   * /full/path/to/cakeshell myshell myparam -cli /usr/bin -console /cakes/2.x.x/lib/Cake/Console -app /full/path/to/app
 
-Une astuce simple pour débugger la tâche cron est d'envoyer sa sortie dans 
-un fichier de log. Vous pouvez faire comme cela ::
+A simple trick to debug a crontab is to set it up to dump it's
+output to a logfile. You can do this like::
 
     # m h dom mon dow command
-    */5 *   *   *   * /chemin/complet/vers/cakeshell myshell myparam -cli /usr/bin -console /cakes/1.2.x.x/cake/console -app /chemin/complet/vers/app >> /chemin/vers/fichier/log.log
+    */5 *   *   *   * /full/path/to/cakeshell myshell myparam -cli /usr/bin -console /cakes/2.x.x/lib/Cake/Console -app /full/path/to/app >> /path/to/log/file.log 2>&1
 
 
 .. meta::
