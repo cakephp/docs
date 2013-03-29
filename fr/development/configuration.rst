@@ -502,8 +502,6 @@ Vous pouvez aussi retirer les readers attachés. ``Configure::drop('default')``
 retirerait l'alias du reader par défaut. Toute tentative future pour charger 
 les fichiers de configuration avec ce reader serait en échec.
 
-.. _loading-configuration-files:
-
 Chargement des fichiers de configuration
 ========================================
 

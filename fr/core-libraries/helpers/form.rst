@@ -1436,6 +1436,7 @@ Création des boutons et des éléments submits
     ajouter un bouton submit en utilisant :php:meth:`FormHelper::submit()`
     
     .. versionchanged:: 2.3
+
     The ``method`` option was added.
 
    

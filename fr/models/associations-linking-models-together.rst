@@ -307,8 +307,8 @@ syntaxe de tableau::
 Les clés possibles pour les tableaux d'association belongsTo incluent:
 
 -  **className**: le nom de classe du model associé au model courant.
-   Si vous définissez une relation ‘Profile belongsTo User’, la clé du 
-    nom de classe devra être ‘User.’
+   Si vous définissez une relation ‘Profile belongsTo User’, la clé du
+   nom de classe devra être ‘User.’
 -  **foreignKey**: le nom de la clé étrangère trouvée dans le model courant.
    C'est particulièrement pratique si vous avez besoin de définir de multiples 
    relations belongsTo. La valeur par défaut pour cette clé est le nom au 
