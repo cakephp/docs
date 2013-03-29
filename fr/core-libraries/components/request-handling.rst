@@ -282,9 +282,39 @@ au client, augmentant la bande passante. Le code de réponse est défini
 Vous pouvez mettre en retrait ce contrôle automatique en paramétrant 
 ``checkHttpCache`` à false::
 
-    public components = array(
+    public $components = array(
         'RequestHandler' => array(
             'checkHttpCache' => false
+    ));
+    
+Utiliser les ViewClasses personnalisées
+=======================================
+
+.. versionadded:: 2.3
+
+Quand vous utilisez JsonView/XmlView vous aurez envie peut-être de surcharger
+la serialization par défaut avec une classe View par défaut, ou ajouter des
+classes View pour d'autres types.
+
+Vous pouvez mapper les types existants et les nouveaux types à vos classes
+personnalisées.
+
+.. php:method:: viewClassMap($type, $viewClass)
+
+    :param string|array $type: Le type string ou un tableau map avec le 
+      format ``array('json' => 'MyJson')``
+    :param string $viewClass: La viewClass à utiliser pour le type sans `View`
+      en suffixe
+
+Vous pouvez aussi définir ceci automatiquement en utilisant la configuration ``viewClassMap``::
+
+    public $components = array(
+        'RequestHandler' => array(
+            'viewClassMap' => array(
+                'json' => 'ApiKit.MyJson',
+                'xml' => 'ApiKit.MyXml',
+                'csv' => 'ApiKit.Csv'
+            )
     ));
 
 
