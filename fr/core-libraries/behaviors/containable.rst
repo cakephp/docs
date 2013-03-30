@@ -324,8 +324,8 @@ les autres behaviors.
   pour récupérer les liaisons requêtées. La valeur par défaut est ``true``.
 
 Vous pouvez changer les paramètres du Behavior Containable à l'exécution, en 
-ré-attachant le behavior comme vu au chapitre Utiliser les behaviors 
-:doc:`/models/additional-methods-and-properties`
+ré-attachant le behavior comme vu au chapitre
+:doc:`/models/behaviors` (Utiliser les Behaviors).
 
 Le behavior Containable peut quelque fois causer des problèles avec d'autres 
 behaviors ou des requêtes qui utilisent des fonctions d'aggrégations et/ou des 
