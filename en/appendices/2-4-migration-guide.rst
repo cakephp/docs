@@ -142,6 +142,12 @@ CakeNumber
   make sure that you update the static ``$_currencies`` attribute with the appropriate
   HTML entity symbols (``&#163;`` and ``&#8364;``) before you use those currencies.
 
+CakeTime
+--------
+
+- :php:meth:`CakeTime::isPast()` and :php:meth:`CakeTime::isFuture()` were
+  added.
+
 Xml
 ---
 

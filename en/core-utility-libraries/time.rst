@@ -364,6 +364,14 @@ Testing Time
 .. php:method:: isThisYear($dateString, $timezone = NULL)
 .. php:method:: wasYesterday($dateString, $timezone = NULL)
 .. php:method:: isTomorrow($dateString, $timezone = NULL)
+.. php:method:: isFuture($dateString, $timezone = NULL)
+
+    .. versionadded:: 2.4
+
+.. php:method:: isPast($dateString, $timezone = NULL)
+
+    .. versionadded:: 2.4
+
 .. php:method:: wasWithinLast($timeInterval, $dateString, $timezone = NULL)
 
     .. versionchanged:: 2.2
