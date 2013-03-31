@@ -5,7 +5,7 @@
 чтобы увидеть, как все части собираются в единое целое.
 
 Кроме того, вы можете обратиться к неофициальному репозитарию плагинов
-`CakePackages <http://cakepackages.com/>`_ и
+`CakePackages <http://plugins.cakephp.org/>`_ и
 `Bakery <http://bakery.cakephp.org/>`_ за существующими приложениями и
 компонентами.
 

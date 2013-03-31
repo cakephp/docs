@@ -40,7 +40,7 @@ Obtenir Cake
 Tout d'abord, récupérons une copie récente de Cake.
 
 Pour obtenir la dernière version, allez sur le site GitHub du projet CakePHP :
-`http://github.com/cakephp/cakephp/downloads <http://github.com/cakephp/cakephp/downloads>`_
+`https://github.com/cakephp/cakephp/tags <https://github.com/cakephp/cakephp/tags>`_
 et téléchargez la dernière version de la 2.0
 
 Vous pouvez aussi cloner le dépôt en utilisant

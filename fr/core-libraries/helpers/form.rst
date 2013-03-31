@@ -917,7 +917,7 @@ Les options de Datetime
 
 *   ``$options['timeFormat']`` .Utilisé pour spécifier le format des inputs 
     select (menu de sélection) pour un jeu d'input en relation avec le temps. 
-    Les valeurs valides sont '12', '24', et ``null``.
+    Les valeurs valides sont ``12``, ``24``, et ``null``.
 
 *   ``$options['dateFormat']`` Utilisé pour spécifier le format des inputs 
     select (menu de sélection) pour un jeu d'input en relation avec le temps.
@@ -1436,6 +1436,7 @@ Création des boutons et des éléments submits
     ajouter un bouton submit en utilisant :php:meth:`FormHelper::submit()`
     
     .. versionchanged:: 2.3
+
     The ``method`` option was added.
 
    

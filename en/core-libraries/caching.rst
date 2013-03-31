@@ -18,11 +18,11 @@ to implement your own caching systems. The built-in caching engines are:
   is the slowest cache engine, and doesn't provide as many features for
   atomic operations.  However, since disk storage is often quite cheap,
   storing large objects, or elements that are infrequently written
-  work well in files.
+  work well in files. This is the default Cache engine for 2.3+
 * ``ApcCache`` APC cache uses the PHP `APC <http://php.net/apc>`_ extension.
   This extension uses shared memory on the webserver to store objects.
   This makes it very fast, and able to provide atomic read/write features.
-  By default CakePHP will use this cache engine if it's available.
+  By default CakePHP in 2.0-2.2 will use this cache engine if it's available.
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
   extension.  Wincache is similar to APC in features and performance, but
   optimized for Windows and IIS.
@@ -35,6 +35,10 @@ to implement your own caching systems. The built-in caching engines are:
   extension. Redis provides a fast and persistent cache system similar to
   memcached, also provides atomic operations.
 
+.. versionchanged:: 2.3
+    FileEngine is always the default cache engine.  In the past a number of people
+    had difficulty setting up and deploying APC correctly both in cli + web.
+    Using files should make setting up CakePHP simpler for new developers.
 
 Regardless of the CacheEngine you choose to use, your application interacts with
 :php:class:`Cache` in a consistent manner.  This means you can easily swap cache engines

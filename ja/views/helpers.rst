@@ -137,7 +137,7 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
 
     /* /app/View/Helper/LinkHelper.php */
     App::uses('AppHelper', 'View/Helper');
-   
+
     class LinkHelper extends AppHelper {
         public function makeEdit($title, $url) {
             // 特別に整形されたリンクを作るためのロジックはここ...
@@ -157,16 +157,16 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
 
     /* /app/View/Helper/LinkHelper.php (他のヘルパーを使っている) */
     App::uses('AppHelper', 'View/Helper');
-   
+
     class LinkHelper extends AppHelper {
         public $helpers = array('Html');
-   
+
         public function makeEdit($title, $url) {
             // 整形されたデータを出力するために
             // HTMLヘルパーを使う:
-   
+
             $link = $this->Html->link($title, $url, array('class' => 'edit'));
-   
+
             return '<div class="editOuter">' . $link . '</div>';
         }
     }
@@ -197,7 +197,7 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
 すべてのヘルパーで利用できる機能を作成するためには、 ``/app/View/Helper/AppHelper.php`` を作成して下さい。::
 
     App::uses('Helper', 'View');
-   
+
     class AppHelper extends Helper {
         public function customMethod() {
         }
@@ -235,12 +235,12 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
 
 .. php:method:: beforeRenderFile($viewFile)
 
-    すべてのビューファイルが描画される前に呼び出されます。これにはエレメント、
+    各ビューファイルが描画される前に呼び出されます。これにはエレメント、
     ビュー、親ビュー、レイアウトを含みます。
 
 .. php:method:: afterRenderFile($viewFile, $content)
 
-    すべてのビューファイルが描画がされた後に呼び出されます。これにはエレメント、
+    各ビューファイルが描画された後に呼び出されます。これにはエレメント、
     ビュー、親ビュー、レイアウトを含みます。コールバックは描画されたコンテンツがブラウザにどのように描画されるかを変えるために ``$content`` を変更して返すことができます。
 
 .. php:method:: beforeRender($viewFile)
@@ -287,4 +287,3 @@ CakePHPの既存のヘルパーの構造にロジックをあわせる為には�
 .. meta::
     :title lang=en: Helpers
     :keywords lang=en: php class,time function,presentation layer,processing power,ajax,markup,array,functionality,logic,syntax,elements,cakephp,plugins
-

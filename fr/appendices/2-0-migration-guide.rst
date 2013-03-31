@@ -226,6 +226,13 @@ de mettre à jour vos fichiers .htaccess et ``app/webroot/index.php``, puisque
 ces fichiers ont été changés pour accueillir les changements. De plus, 
 ``$this->params['url']['url']`` n'existe plus. A la place, vous devrez utiliser 
 $this->request->url pour accéder à la même valeur.
+Cet attribut contient maintenant l'url sans slash ``/`` au début.
+
+Note: Pour la page d'accueil elle-même (``http://domain/``) $this->request->url 
+retourne maintenant le boléen ``false`` au lieu de ``/``. Assurez-vous de 
+vérifier cela de cette façon::
+
+    if (!$this->request->url) {} // au lieu de $this->request->url === '/'
 
 Components (Composants)
 =======================
@@ -235,7 +242,7 @@ Component est maintenant la classe de base requise pour tous les components
 puisque tous deux ont changé::
 
     class PrgComponent extends Component {
-        function __construct(ComponentCollection $collection, $settings = array()) {
+        public function __construct(ComponentCollection $collection, $settings = array()) {
             parent::__construct($collection, $settings);
         }
     }
@@ -251,7 +258,7 @@ callback ``initialize()`` ne reçoit plus ``$settings`` en 2ème paramètre. Vou
 devrez mettre à jour vos components pour utiliser la signature méthode 
 suivante::
 
-    function initialize($controller) { }
+    public function initialize($controller) { }
 
 De plus, la méthode initialize() est seulement appelée sur les components qui 
 sont permis. Cela signifie en général que les components qui sont directement 
@@ -475,23 +482,23 @@ Quelques exemples de l'utilisation de :php:meth:`App::uses()` quand on migre de
 :php:meth:`App::import()`::
 
     App::import('Controller', 'Pages');
-    // devient 
+    // devient
     App::uses('PagesController', 'Controller');
 
     App::import('Component', 'Auth');
-    // devient 
+    // devient
     App::uses('AuthComponent', 'Controller/Component');
 
     App::import('View', 'Media');
-    // devient 
+    // devient
     App::uses('MediaView', 'View');
 
     App::import('Core', 'Xml');
-    // devient 
+    // devient
     App::uses('Xml', 'Utility');
 
     App::import('Datasource', 'MongoDb.MongoDbSource')
-    // devient 
+    // devient
     App::uses('MongoDbSource', 'MongoDb.Model/Datasource')
 
 Toutes les classes qui ont été chargées dans le passé utilisant 
@@ -500,7 +507,7 @@ Toutes les classes qui ont été chargées dans le passé utilisant
 classes dans leurs nouveaux dossiers. Quelques exemples::
 
     App::import('Core', 'CakeRoute');
-    // devient 
+    // devient
     App::uses('CakeRoute', 'Routing/Route');
 
     App::import('Core', 'Sanitize');
@@ -508,7 +515,7 @@ classes dans leurs nouveaux dossiers. Quelques exemples::
     App::uses('Sanitize', 'Utility');
 
     App::import('Core', 'HttpSocket');
-    // devient 
+    // devient
     App::uses('HttpSocket', 'Network/Http');
 
 Au contraire de la façon dont fonctionnait :php:meth:`App::import()`, la 
@@ -528,11 +535,11 @@ chemins du coeur.
 Exemples::
 
     App::build(array('controllers' => array('/chemin/complet/vers/controllers'))) 
-    //devient 
+    //devient
     App::build(array('Controller' => array('/chemin/complet/vers/controllers')))
 
     App::build(array('helpers' => array('/chemin/complet/vers/controllers'))) 
-    //devient 
+    //devient
     App::build(array('View/Helper' => array('/chemin/complet/vers/Vues/Helpers')))
 
 CakeLog
@@ -557,7 +564,7 @@ Cache
    signifie que les opérations que vous souhaitez produire sur un moteur 
    spécifique doivent avoir le paramètre $config égale au nom de config
    que vous souhaitez.
-   
+
 ::
 
     Cache::config('quelquechose');
@@ -707,7 +714,7 @@ Afin de prendre en considération le fait que View a été retiré de la
 ClassRegistry, la signature du Helper::__construct() a été changée. Vous devez 
 mettre à jour toutes les sous-classes pour utiliser ce qui suit::
 
-    function __construct(View $View, $settings = array())
+    public function __construct(View $View, $settings = array())
 
 Quand vous écrasez le constructeur, vous devez toujours aussi appeler 
 `parent::__construct`. `Helper::__construct` stocke l'instance de vue dans 
@@ -1014,19 +1021,19 @@ l'intérieur. Pour BeforeRender et afterRender, c'est le fichier vue qui est
 rendu. Pour beforeLayout et afterLayout, c'est le fichier layout qui est rendu.
 Vos signatures de fonction des helpers doivent ressembler à cela::
 
-    function beforeRender($viewFile) {
+    public function beforeRender($viewFile) {
 
     }
 
-    function afterRender($viewFile) {
+    public function afterRender($viewFile) {
 
     }
 
-    function beforeLayout($layoutFile) {
+    public function beforeLayout($layoutFile) {
 
     }
 
-    function afterLayout($layoutFile) {
+    public function afterLayout($layoutFile) {
 
     }
 

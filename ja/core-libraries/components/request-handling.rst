@@ -122,7 +122,7 @@
     モバイルブラウザの User Agent 文字列は:
 
     -  Android
-    -  AvantGo 
+    -  AvantGo
     -  BlackBerry
     -  DoCoMo
     -  Fennec
@@ -419,7 +419,39 @@ HTTP キャッシュバリデーションモデルは、クライアントへの
 
 自動的なチェックは、 ``checkHttpCache`` を false にすることで行わないようにすることができます。::
 
-    public components = array(
+    public $components = array(
         'RequestHandler' => array(
             'checkHttpCache' => false
+    ));
+
+カスタム ViewClasses の利用
+=============================
+
+.. versionadded:: 2.3
+
+..
+    When using JsonView/XmlView you might want to override the default serialization
+    with a custom View class, or add View classes for other types.
+
+    You can map existing and new types to your custom classes.
+
+JsonView/XmlView を利用する場合、カスタムビュークラスの優先順位をデフォルトの順番から上書きしたり、独自のカスタムクラスを追加したい場合があるでしょう。
+
+その場合、既存のタイプや新規タイプのクラスをマッピングすることができます。
+
+
+.. php:method:: viewClassMap($type, $viewClass)
+
+    :param string|array $type: タイプ名の文字列または配列 ``array('json' => 'MyJson')`` のフォーマット
+    :param string $viewClass: ``View`` を取り除いたビュークラス名
+
+ ``viewClassMap`` を使って、自動的にセットすることも可能です。 ::
+
+    public $components = array(
+        'RequestHandler' => array(
+            'viewClassMap' => array(
+                'json' => 'ApiKit.MyJson',
+                'xml' => 'ApiKit.MyXml',
+                'csv' => 'ApiKit.Csv'
+            )
     ));

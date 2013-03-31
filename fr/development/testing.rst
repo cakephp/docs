@@ -299,6 +299,16 @@ Cela mettra la couverture des résultats dans le répertoire webroot de votre
 application. Vous pourrez voir les résultats en allant à 
 ``http://localhost/your_app/coverage``.
 
+Lancer les tests qui utilisent des sessions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Quand vous lancez des tests en ligne de commande qui utilisent des sessions, 
+vous devrez inclure le flag ``--stderr``. Ne pas le faire ne fera pas 
+fonctionner les sessions. PHPUnit outputs test progress to stdout par défaut, 
+cela entraine le fait que PHP suppose que les headers ont été envoyés ce qui 
+empêche les sessions de démarrer. En changeant PHPUnit pour qu'il output on 
+stderr, ce problème sera évité.
+
 Les Callbacks du Cycle de vie des cas de Test
 =============================================
 
@@ -650,6 +660,26 @@ sur la façon de lancer les cas de test.
     Quand vous configurez votre Model pour le test, assurez vous d'utiliser 
     ``ClassRegistry::init('YourModelName');`` puisqu'il sait comment utiliser 
     la connection à la base de données de votre test.
+
+Mocking model methods
+---------------------
+
+Il y aura des fois où vous voudrez mock les méhodes sur les models quand vous 
+les testez. Vous devrez utiliser ``getMockForModel`` pour créer les mocks de 
+test des models. Cela évite des problèmes avec les reflected properties that 
+normal mocks have::
+
+    public function testSendingEmails() {
+        $model = $this->getMockForModel('EmailVerification', array('send'));
+        $model->expects($this->once())
+            ->method('send')
+            ->will($this->returnValue(true));
+
+        $model->verifyEmail('test@example.com');
+    }
+
+.. versionadded:: 2.3
+    CakeTestCase::getMockForModel() a été ajouté dans 2.3.
 
 Tester les Controllers
 ======================

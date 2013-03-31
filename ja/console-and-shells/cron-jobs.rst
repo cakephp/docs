@@ -15,7 +15,7 @@ cronjobに登録してシェルを実行する
     export TERM
     cmd="cake"
     while [ $# -ne 0 ]; do
-        if [ "$1" = "-cli" ] || [ "$1" = "-console" ]; then 
+        if [ "$1" = "-cli" ] || [ "$1" = "-console" ]; then
             PATH=$PATH:$2
             shift
         else
@@ -39,5 +39,4 @@ cronjobに登録してシェルを実行する
 crontabをデバッグする簡単なやり方として、シェルの出力をログファイルにダンプする方法があります。 ::
 
     # m h dom mon dow command
-    */5 *   *   *   * /full/path/to/cakeshell myshell myparam -cli /usr/bin -console /cakes/2.x.x/lib/Cake/Console -app /full/path/to/app >> /path/to/log/file.log
-
+    */5 *   *   *   * /full/path/to/cakeshell myshell myparam -cli /usr/bin -console /cakes/2.x.x/lib/Cake/Console -app /full/path/to/app >> /path/to/log/file.log 2>&1

@@ -277,7 +277,7 @@ bandwidth. The response status code is then set to `304 Not Modified`.
 You can opt-out this automatic checking by setting the ``checkHttpCache``
 setting to false::
 
-    public components = array(
+    public $components = array(
         'RequestHandler' => array(
             'checkHttpCache' => false
     ));
@@ -299,7 +299,7 @@ You can map existing and new types to your custom classes.
 
 You can also set this automatically by using the ``viewClassMap`` setting::
 
-    public components = array(
+    public $components = array(
         'RequestHandler' => array(
             'viewClassMap' => array(
                 'json' => 'ApiKit.MyJson',

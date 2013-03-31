@@ -323,7 +323,7 @@ more easily.
 
 You can change ContainableBehavior settings at run time by
 reattaching the behavior as seen in
-:doc:`/models/additional-methods-and-properties`
+:doc:`/models/behaviors` (Using Behaviors).
 
 ContainableBehavior can sometimes cause issues with other behaviors
 or queries that use aggregate functions and/or GROUP BY statements.
@@ -337,7 +337,7 @@ Using Containable with pagination
 
 By including the 'contain' parameter in the ``$paginate`` property
 it will apply to both the find('count') and the find('all') done on
-the model
+the model.
 
 See the section :ref:`using-containable` for further details.
 

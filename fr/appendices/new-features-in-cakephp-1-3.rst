@@ -56,48 +56,50 @@ Controller.
 View & Helpers
 ~~~~~~~~~~~~~~
 
-Helpers can now be addressed at ``$this->Helper->func()`` in
-addition to ``$helper->func()``. This allows view variables and
-helpers to share names and not create collisions.
+Les Helpers peuvent maintenant être traités par ``$this->Helper->func()`` en 
+plus de ``$helper->func()``. Cela permet aux variables de vue et aux helpers 
+de partager les noms et de ne pas créer de collisions.
 
-**New JsHelper and new features in HtmlHelper**
+**Le nouveau JsHelper et les nouvelles fonctionnalités dans HtmlHelper**
 
-See :doc:`JsHelper documentation </core-libraries/helpers/js>` for more information
+Regardez la :doc:`documentation de JsHelper </core-libraries/helpers/js>` 
+pour plus d'informations.
 
 **Pagination Helper**
 
-Pagination helper provides additional css classes for styling and
-you can set the default sort() direction.
-``PaginatorHelper::next()`` and ``PaginatorHelper::prev()`` now
-generate span tags by default, instead of divs.
+Le helper Pagination fournit des classes css supplémentaires pour le style et
+vous pouvez configurer la direction de sort() par défaut.
+``PaginatorHelper::next()`` et ``PaginatorHelper::prev()`` générent maintenant
+des tags span par défaut, au lieu de divs.
 
 **Helper**
 
-``Helper::assetTimestamp()`` has been added. It will add timestamps
-to any asset under WWW\_ROOT. It works with
-``Configure::read('Asset.timestamp');`` just as before, but the
-functionality used in Html and Javascript helpers has been made
-available to all helpers. Assuming ``Asset.timestamp == force``
+``Helper::assetTimestamp()`` a été ajoutée. Elle ajoutera des timestamps
+à tout asset sous WWW\_ROOT. Elle fonctionne avec
+``Configure::read('Asset.timestamp');`` comme avant, mais la fonctionnalité
+utilisée dans les helpers Html et Javascript a été rendué disponible pour 
+tous les helpers. En supposant que ``Asset.timestamp == force``
 
 ::
 
     $path = 'css/cake.generic.css'
     $stamped = $this->Html->assetTimestamp($path);
     
-    //$stamped contains 'css/cake.generic.css?5632934892'
+    //$stamped contient 'css/cake.generic.css?5632934892'
 
-The appended timestamp contains the last modification time of the
-file. Since this method is defined in ``Helper`` it is available to
-all subclasses.
+Le timestamp ajouté contient la dernière modification de temps du fichier. 
+Depuis que cette méthode est définie dans ``Helper``, elle est disponible à 
+toutes les sous-classes.
 
 **TextHelper**
 
-highlight() now accepts an array of words to highlight.
+highlight() accepte maintenant un tableau de mots à surligner.
 
 **NumberHelper**
 
-A new method ``addFormat()`` has been added. This method allows you
-to set currency parameter sets, so you don't have to retype them.
+Une nouvelle méthode ``addFormat()`` a été ajoutée. Cette méthode vous permet
+de configurer des ensembles de paramètres de monnaie, pour que vous n'ayez pas 
+à les retaper.
 
 ::
 
@@ -106,30 +108,31 @@ to set currency parameter sets, so you don't have to retype them.
 
 **FormHelper**
 
-The form helper has had a number of improvements and API
-modifications, see
-`Form Helper improvements <http://book.cakephp.org/view/1616/x1-3-improvements>`_
-for more information.
+Le helper form a eu un certain nombre d'améliorations et de modifications de 
+l'API, regardez `les améliorations du Hemper Form <http://book.cakephp.org/view/1616/x1-3-improvements>`_
+pour plus d'informations.
 
 Logging
 ~~~~~~~
 
-Logging and ``CakeLog`` have been enhanced considerably, both in
-features and flexibility. See
-`New Logging features <http://book.cakephp.org/view/1194/Logging>`_ for more information.
+La connexion et ``CakeLog`` ont été améliorés considérablement, les deux dans 
+les fonctionnalités et la flexibilité. Regardez 
+`New Logging features <http://book.cakephp.org/view/1194/Logging>`_ pour plus 
+d'informations.
 
 Caching
 ~~~~~~~
 
-Cache engines have been made more flexible in 1.3. You can now
-provide custom ``Cache`` adapters in ``app/libs`` as well as in
-plugins using ``$plugin/libs``. App/plugin cache engines can also
-override the core engines. Cache adapters must be in a cache
-directory. If you had a cache engine named ``MyCustomCacheEngine``
-it would be placed in either ``app/libs/cache/my_custom_cache.php``
-as an app/libs. Or in ``$plugin/libs/cache/my_custom_cache.php`` as
-part of a plugin. Cache configs from plugins need to use the plugin
-dot syntax.
+Les moteurs de Cache ont été fabriqués plus flexibles dans 1.3. Vous pouvez 
+maintenant fournir des adapters de ``Cache`` personnalisés dans ``app/libs`` 
+ainsi que dans les plugins en utilisant ``$plugin/libs``. Les moteurs de 
+cache App/plugin peuvent aussi surcharger les moteurs du coeur. Les adapters 
+de Cache doivent être dans un répertoire de cache. Si vous aviez un moteur 
+de cache nommé ``MyCustomCacheEngine``, cela serait placé soit dans
+``app/libs/cache/my_custom_cache.php``, soit dans app/libs. Ou dans 
+``$plugin/libs/cache/my_custom_cache.php`` appartenant à un plugin. Les 
+configs de Cache à partir des plugins ont besoin d'utiliser la syntaxe avec 
+des points des plugins.
 
 ::
 
@@ -138,20 +141,21 @@ dot syntax.
         ...
     ));
 
-App and Plugin cache engines should be configured in
-``app/bootstrap.php``. If you try to configure them in core.php
-they will not work correctly.
+Les moteurs de cahce de App et Plugin doivent être configurés dans
+``app/bootstrap.php``. Si vous essayez de les configurer dans core.php,
+ils ne fonctionneront pas correctement.
 
-**New Cache methods**
+**Nouvelles méthodes de Cache**
 
-Cache has a few new methods for 1.3 which make introspection and
-testing teardown easier.
+Cache a quelques nouvelles méthodes pour 1.3 ce qui rend l'introspection et 
+le test bien plus facile.
 
 
--  ``Cache::configured()`` returns an array of configured Cache
-   engine keys.
--  ``Cache::drop($config)`` drops a configured Cache engine. Once
-   dropped cache engines are no longer readable or writeable.
+-  ``Cache::configured()`` retourne un tableau des clés de moteur de Cache
+   configurés.
+-  ``Cache::drop($config)`` retire un moteur de Cache configuré. Une fois
+   supprimé, les moteurs de cache ne sont plus lisible, et l'écriture n'est
+   plus disponible.
 -  ``Cache::increment()`` Perform an atomic increment on a numeric
    value. This is not implemented in FileEngine.
 -  ``Cache::decrement()`` Perform an atomic decrement on a numeric
@@ -162,19 +166,19 @@ Models, Behaviors and Datasource
 
 **App::import(), datasources & datasources from plugins**
 
-Datasources can now be included loaded with ``App::import()`` and
-be included in plugins! To include a datasource in your plugin you
-put it in ``my_plugin/models/datasources/your_datasource.php``. To
-import a Datasource from a plugin use
+Les sources de données peuvent maintenant être inclues chargées avec 
+``App::import()`` et être inclues dans les plugins! Pour inclure 
+un source de données dans votre plugin, vous pouvez la mettre 
+dans ``my_plugin/models/datasources/your_datasource.php``. Pour
+importer une Source de données à partir d'un plugin, utilisez
 ``App::import('Datasource', 'MyPlugin.YourDatasource');``
 
-**Using plugin datasources in your database.php**
+**Utiliser les sources de données dans votre database.php**
 
-You can use plugin datasources by setting the datasource key with
-the plugin name. For example if you had a WebservicePack plugin
-with a LastFm datasource
-(plugin/webservice\_pack/models/datasources/last\_fm.php), you
-could do:
+Vous pouvez utiliser les sources de données de plugin en configurant la clé
+de la source de données avec le nom du plugin. Par exemple, si vous avez un 
+plugin WebservicePack avec une source de données LastFm 
+(plugin/webservice\_pack/models/datasources/last\_fm.php), vous pouvez faire:
 
 ::
 
@@ -495,10 +499,10 @@ you would create a class like
 ::
 
     class NlValidation {
-        function phone($check) {
+        public function phone($check) {
             ...
         }
-        function postal($check) {
+        public function postal($check) {
             ...
         }
     }
@@ -509,7 +513,7 @@ could use your NlValidation class by doing the following.
 
 ::
 
-    var $validate = array(
+    public $validate = array(
         'phone_no' => array('rule' => array('phone', null, 'nl')),
         'postal_code' => array('rule' => array('postal', null, 'nl'))
     );
@@ -525,21 +529,21 @@ off to another validator has been added.
 
 **IP Address Validation**
 
-Validation of IP Addresses has been extended to allow strict
-validation of a specific IP Version. It will also make use of PHP
-native validation mechanisms if available.
+La validation des adresses IP a été étendu pour autoriser une stricte 
+validation d'une Version d'IP spécifique. Cela utilisera aussi les 
+méchanismes de validation natifs de PHP si ils sont disponibles.
 
 ::
 
-    Validation::ip($someAddress);         // Validates both IPv4 and IPv6
-    Validation::ip($someAddress, 'IPv4'); // Validates IPv4 Addresses only
-    Validation::ip($someAddress, 'IPv6'); // Validates IPv6 Addresses only
+    Validation::ip($someAddress);         // Valide les deux IPv4 et IPv6
+    Validation::ip($someAddress, 'IPv4'); // Valide les adresses IPv4 seulement
+    Validation::ip($someAddress, 'IPv6'); // Valide les adresses IPv6 seulement
 
 **Validation::uuid()**
 
-A uuid() pattern validation has been added to the ``Validation``
-class. It will check that a given string matches a uuid by pattern
-only. It does not ensure uniqueness of the given uuid.
+Un pattern de validation uuid() a été ajouté à la classe ``Validation``. 
+Cla vérifiera qu'une chaîne donnée correspondra à un uuid par pattern 
+uniquement. Cela ne garantit pas l'unicité du uuid donné.
 
 
 .. meta::

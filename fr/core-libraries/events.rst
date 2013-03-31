@@ -16,10 +16,10 @@ Tandis que la plupart des structures CakePHP et des librairies par défaut
 vous aiderons à atteindre ce but, il y a certains cas où vous avez besoin
 de communiquer proprement avec les autres partie du système sans avoir à
 coder en dur ces dépendances, ainsi réduire la cohésion et accroître le
-couplage de classe. Un motif de conception (design pattern) très réussi dans 
-l'ingénierie software est le modèle obervateur (Observer pattern) , où les 
-objets peuvent générés des événements et notifier à des écouteurs (listener) 
-possiblement anonymes des changements d'états internes. 
+couplage de classe. Un motif de conception (design pattern) très réussi dans
+l'ingénierie software est le modèle obervateur (Observer pattern) , où les
+objets peuvent générés des événements et notifier à des écouteurs (listener)
+possiblement anonymes des changements d'états internes.
 
 Les écouteurs (listener) dans le modèle observateur (Observer pattern) peuvent 
 s'abonner à de tel événements et choisir d'interagir sur eux, modifier l'état 
@@ -169,7 +169,7 @@ est responsable de leur attachement. Le code possible pourrait être cela ::
         'inventory' => array($this->InventoryManager, 'decrement'),
         'logger' => function($event) {
             // Les fonction Anonyme ne sont permises que dans PHP 5.3+
-            CakeLog::write('info', 'Un nouvel achat à été placé avec l'id: ' . $event->subject()->id);
+            CakeLog::write('info', 'Un nouvel achat à été placé avec l\'id: ' . $event->subject()->id);
         }
     ));
 
@@ -516,7 +516,7 @@ réalité , il ne peut pas faire çà logique si le modèle est le caddie::
     App::uses('CakeEventManager', 'Event');
     CakeEventManager::instance()->attach('myCallback', 'Model.beforeFind');
 
-    function myCallback($event) {
+    public function myCallback($event) {
         if ($event->subject() instanceof Cart) {
             return;
         }

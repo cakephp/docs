@@ -45,14 +45,14 @@ télécharger une copie archivée de (zip/tar.gz/tar.bz2) à partir du site web
 principal, soit faire un check out du code sur dépôt de git.
 
 Pour télécharger la dernière version majeure de CakePHP. Visitez le site web 
-principal `http://www.cakephp.org <http://www.cakephp.org>`_ et
+principal `http://cakephp.org <http://cakephp.org>`_ et
 suivez le lien "Télécharger maintenant".
 
 Toutes les versions actuelles de CakePHP sont hébérgées sur 
 `Github <http://github.com/cakephp/cakephp>`_. Github héberge CakePHP
 lui-même ainsi que plusieurs autres plugins pour CakePHP. Les versions de 
 CakePHP sont disponibles à 
-`Téléchargements Github <http://github.com/cakephp/cakephp/downloads>`_.
+`Téléchargements Github <https://github.com/cakephp/cakephp/tags>`_.
 
 Sinon, vous pouvez obtenir du code frais avec tous les correctifs de bug 
 et à jour des améliorations de dernière minute. Ceux-ci peuvent être 

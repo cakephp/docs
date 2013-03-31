@@ -245,11 +245,11 @@ URL, CakePHP будет выдавать ошибку "Missing Controller", по
 
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
-            public $hasMany = array(
-                    'AltName' => array(
-                            'className' => 'ContactManager.AltName'
-                    )
-            );
+        public $hasMany = array(
+            'AltName' => array(
+                'className' => 'ContactManager.AltName'
+            )
+        );
     }
 
 Представления плагинов

@@ -84,8 +84,7 @@ When a request is made to a CakePHP application, CakePHP's :php:class:`Router` a
 create the correct controller. The request data is encapsulated into a request
 object. CakePHP puts all of the important request information into the
 ``$this->request`` property.  See the section on
-:ref:`cake-request` for more information on the CakePHP request
-object.
+:ref:`cake-request` for more information on the CakePHP request object.
 
 Controller actions
 ==================
@@ -691,7 +690,7 @@ given by ``$helpers`` to the view as an object reference variable
     without a need for a corresponding Model file. However, the models
     defined in the ``AppController`` will still be loaded.  You can also use
     ``false`` to not load any models at all.  Even those defined in the
-    ``AppController``
+    ``AppController``.
 
     .. versionchanged:: 2.1
         Uses now has a new default value, it also handles ``false`` differently.

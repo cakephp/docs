@@ -1,7 +1,7 @@
 Primeiros Passos
 ################
 
-O framework CakePHP fornece uma base robusta para suas aplicações. 
+O framework CakePHP fornece uma base robusta e solida para suas aplicações. 
 Podendo tratar todos os aspectos, da requisição inicial do usuário até a
 renderização de uma página web. Visto que o framework segue o princípio MVC,
 ele lhe permite customizar e estender facilmente muitos dos aspectos de sua
