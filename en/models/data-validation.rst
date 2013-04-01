@@ -880,7 +880,7 @@ with usage examples.
 
         public $validate = array(
             'image' => array(
-                'rule' => array('filesize', '<=', '1MB'),
+                'rule' => array('fileSize', '<=', '1MB'),
                 'message' => 'Image must be less than 1MB'
             )
         );
