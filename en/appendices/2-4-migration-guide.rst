@@ -70,13 +70,17 @@ HtmlHelper
 ----------
 - The API for :php:meth::`HtmlHelper::css()` has been changed.
 
+TextHelper
+----------
+- :php:meth::`TextHelper::autoParagraph()` has been added. It allows to automatically convert text into HTML paragraphs.
+
 Network
 =======
 
 CakeRequest
 -----------
 
-- :php:meth:`CakeRequest::param()` was added.
+- :php:meth:`CakeRequest::param()` has been added.
 
 
 CakeEmail

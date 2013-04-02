@@ -17,7 +17,7 @@ truncating long stretches of text.
    ``$this->Text->method($args);``.
 
 .. php:method:: autoLinkEmails(string $text, array $options=array())
-    
+
     :param string $text: The text to convert.
     :param array $options: An array of :term:`html attributes` for the generated links.
 
@@ -62,6 +62,27 @@ truncating long stretches of text.
     .. versionchanged:: 2.1
         In 2.1 this method automatically escapes its input. Use the ``escape``
         option to disable this if necessary.
+
+.. php:method:: autoParagraph(string $text)
+
+    :param string $text: The text to convert.
+
+    Adds proper <p> around text where double-line returns and <br> where single-line returns
+    are found.::
+
+        $myText = 'For more information
+        regarding our world-famous pastries and desserts.
+
+        contact info@example.com';
+        $formattedText = $this->Text->autoParagraph($myText);
+
+    Output::
+
+        <p>For more information<br />
+        regarding our world-famous pastries and desserts.<p>
+        <p>contact info@example.com</p>
+
+    .. versionadded:: 2.4
 
 .. include:: ../../core-utility-libraries/string.rst
     :start-after: start-string
