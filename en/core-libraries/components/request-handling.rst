@@ -175,9 +175,9 @@ application.
 
 .. php:method:: setContent($name, $type = null)
 
-    -  $name string - The name or file extension of the Content-type
+    :param string $name: The name or file extension of the Content-type
        ie. html, css, json, xml.
-    -  $type mixed - The mime-type(s) that the Content-type maps to.
+    :param mixed $type: The mime-type(s) that the Content-type maps to.
 
     setContent adds/sets the Content-types for the given name. Allows
     content-types to be mapped to friendly aliases and or extensions.
