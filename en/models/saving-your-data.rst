@@ -901,7 +901,7 @@ current date and time whenever the existing record is saved.
 
 If you have ``created`` or ``modified`` data in your $this->data (e.g. from a
 Model::read or Model::set) before a Model::save() then the values will be taken
-from $this->data and not automagically updated. Either use
+from $this->data and not automagically updated. If you don't want that you can use
 ``unset($this->data['Model']['modified'])``, etc. Alternatively you can override
 the Model::save() to always do it for you::
 
