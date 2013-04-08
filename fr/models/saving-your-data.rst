@@ -836,9 +836,9 @@ Que faire quand HABTM devient compliqué?
 
 Par défaut, quand vous sauvegardez une relation HasAndBelongsToMany, Cake 
 supprime toutes les lignes de la table jointe avant d'en sauvegarder de 
-nouvelles. Par exemple, si vous avez un Club qui a 10 Children (Enfant) associés. Vous 
-mettez ensuite à jour le Club avec 2 Children. Le Club aura seulement 2 
-Children, et pas 12.
+nouvelles. Par exemple, si vous avez un Club qui a 10 Children (Enfant)
+associés. Vous mettez ensuite à jour le Club avec 2 Children. Le Club aura
+seulement 2 Children, et pas 12.
 
 Notez aussi que si vous voulez ajouter plus de champs à joindre (quand il a été 
 crée ou les meta informations), c'est possible avec les tables jointes HABTM, 
@@ -911,13 +911,13 @@ l'enregistrement sera sauvegardé.
 Si vous avez ``created`` ou ``modified`` des données dans votre $this->data 
 (par ex à partir d'un Model::read ou d'un Model::set) avant un Model::save(), 
 alors les valeurs seront prises à partir de $this->data et ne seront pas mises 
-à jour automagiquement. Preférez l'utilisation de 
-``unset($this->data['Model']['modified'])``, etc. Alternativement vous pouvez 
-écraser Model::save() pour toujours le faire pour vous::
+à jour automagiquement. Si vous ne souhaitez pas cela, vous pouvez utiliser
+``unset($this->data['Model']['modified'])``, etc... Alternativement vous pouvez
+surcharger Model::save() pour toujours le faire pour vous::
 
     class AppModel extends Model {
 
-        public function save($data = null, $validate = true, $fieldList = array()) }
+        public function save($data = null, $validate = true, $fieldList = array()) {
             // Nettoie la valeur du champ modified avant chaque sauvegarde
             $this->set($data);
             if (isset($this->data[$this->alias]['modified'])) {
