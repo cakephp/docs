@@ -106,83 +106,85 @@ données sur notre post. Notre vue pourrait ressembler à ceci::
     // in the parent view.
     echo h($post['Post']['body']);
 
-The post view above shows how you can extend a view, and populate a set of
-blocks.  Any content not in already in a defined block will captured and put
-into a special block named ``content``.  When a view contains a call to
-``extend()`` execution continues to the bottom of the current view file.
-Once its complete, the extended view will be rendered.  Calling ``extend()``
-more than once in a view file will override the parent view that will be
-processed next::
+L'emple ci-dessus vous montre comment vous pouvez étendre une vue, et
+remplir un ensemble de bloc. Tout contenu qui ne serait pas déjà dans un bloc
+définit, sera capturé et placé dans un bloc spécial appellé ``content``. Quand
+une vue contient un appel vers un ``extend()``, l'éxécution continue jusqu'à la
+fin de la vue actuelle. Une fois terminé, la vue étendue va être générée. En
+appellant ``extend()`` plus d'une fois dans un fichier de vue, le dernier appel
+va outrepasser les précédents::
 
     $this->extend('/Common/view');
     $this->extend('/Common/index');
 
-The above will result in ``/Common/index.ctp`` being rendered as the parent view
-to the current view.
+Le code précédent va définir ``/Common/index.ctp`` comme étant la vue parente de 
+la vue actuelle.
 
-You can nest extended views as many times as necessary. Each view can extend
-another view if desired.  Each parent view will get the previous view's content
-as the ``content`` block.
+Vous pouvez imbriquer les vues autant que vous le voulez et que cela vous est 
+nécessaire. Chaque vue peut étendre une autre vue si vous le souhaitez. Chaque
+vue parente va récupérer le contenu de la vue précédente en tant que bloc ``content``.
 
 .. note::
 
-    You should avoid using ``content`` as a block name in your application.
-    CakePHP uses this for un-captured content in extended views.
-
+    Vous devriez éviter d'utiliser ``content`` comme nom de bloc dans votre 
+    application. CakePHP l'utilise pour définir le contenu non-capturé pour 
+    les vues étendues.
 
 .. _view-blocks:
 
-Using view blocks
-=================
+Utiliser les bloc dans les vues
+===============================
 
 .. versionadded:: 2.1
 
-View blocks replace ``$scripts_for_layout`` and provide a flexible API that
-allows you to define slots or blocks in your views/layouts that will be defined
-elsewhere.  For example blocks are ideal for implementing things such as
-sidebars, or regions to load assets at the bottom/top of the layout.
-Blocks can be defined in two ways.  Either as a capturing block, or by direct
-assignment.  The ``start()``, ``append()`` and ``end()`` methods allow to to
-work with capturing blocks::
+Les blocs de vue remplacent les ``$scripts_for_layout`` et fournissent une
+API flexible qui vous permet de définir des slots (emplacements), ou blocs, dans vos 
+vues / gabarits qui peuvent être définies ailleurs. Par exemple, les blocs pour implémenter 
+des choses telles que les sidebars, ou des régions pour charger des ressources dans 
+l'en-tête / pied de page du gabarit. Un bloc peut être définit de deux manières. Soit en 
+tant que bloc capturant, soit en le déclarant explicitement. Les méthodes ``start()``,
+``append()`` et ``end()`` vous permettent de travailler avec les blocs capturant.
 
-    // create the sidebar block.
+    // Creer le bloc sidebar.
     $this->start('sidebar');
     echo $this->element('sidebar/recent_topics');
     echo $this->element('sidebar/recent_comments');
     $this->end();
 
 
-    // Append into the sidebar later on.
+    // Le rattacher a la sidebar plus tard.
     $this->append('sidebar');
     echo $this->element('sidebar/popular_topics');
     $this->end();
 
-You can also append into a block using ``start()`` multiple times.  ``assign()``
-can be used to clear or overwrite a block at any time::
+Vous pouvez aussi le rattacher à l'intérieur d'un bloc en utilisant ``start()`` pluieurs
+fois. La méthode ``assign()`` peut être utilisée pour nettoyer ou outrepasser un bloc à 
+n'importe quel moment::
 
-    // Clear the previous content from the sidebar block.
+    // Nettoyer le contenu précedent de la sidebar.
     $this->assign('sidebar', '');
 
 .. note::
 
-    You should avoid using ``content`` as a block name.  This is used by CakePHP
-    internally for extended views, and view content in the layout.
+    Vous devriez éviter d'utiliser ``content`` comme nom de bloc. Celui-ci est 
+    utilisé par CakePHP en interne pour étendre les vues, et le contenu des vues 
+    dans le layout.
 
-Displaying blocks
------------------
+Afficher les blocs
+------------------
 
 .. versionadded:: 2.1
 
-You can display blocks using the ``fetch()`` method.  ``fetch()`` will safely
-output a block, returning '' if a block does not exist::
+Vous pouvez afficher les blocs en utilisant la méthode ``fetch()``. Cette dernière 
+va, de manière sécurisée, générer un bloc, en retournant '' si le bloc n'existe pas::
 
     <?php echo $this->fetch('sidebar'); ?>
 
-You can also use fetch to conditionally show content that should surround a
-block should it exist.  This is helpful in layouts, or extended views where you
-want to conditionally show headings or other markup::
+Vous pouvez également utiliser fetch pour afficher du contenu, sous conditions, qui 
+va entourer un bloc existant. Ceci est très utile dans les gabarits, ou dans les vues 
+étendues où vous voulez, sous conditions, afficher des en-têtes ou autres marquages::
 
-    // in app/View/Layouts/default.ctp
+    // dans app/View/Layouts/default.ctp
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
