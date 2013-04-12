@@ -82,6 +82,10 @@ CakeRequest
 
 - :php:meth:`CakeRequest::param()` has been added.
 
+- :php:meth:`CakeRequest::is()` has been modified to support an array of types and will return true if the request matches any type.
+
+- :php:meth:`CakeRequest::isAll()` has been added to check that a request matches all the given types.
+
 
 CakeEmail
 ---------
