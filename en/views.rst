@@ -111,7 +111,7 @@ un-captured content from the extending view. Assuming our view file has a
     <?php echo h($post['Post']['body']);
 
 The post view above shows how you can extend a view, and populate a set of
-blocks.  Any content not already in a defined block will captured and put
+blocks.  Any content not already in a defined block will be captured and put
 into a special block named ``content``.  When a view contains a call to
 ``extend()`` execution continues to the bottom of the current view file.
 Once its complete, the extended view will be rendered.  Calling ``extend()``
