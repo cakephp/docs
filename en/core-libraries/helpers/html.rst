@@ -538,13 +538,17 @@ methods of the HtmlHelper and how to use them.
        array of strings for multiple files.
     :param array $options: An array of :term:`html attributes`.
 
-    Include a script file(s), contained either locally or as a remote url. If key ``inline`` is set to false in $options, the
-    script tags are added to the ``script`` block which you can print inside the
-    head tag of the document. ``$options['once']`` controls, whether or
+    Include a script file(s), contained either locally or as a remote url.
+
+    By default, script tags are added to the document inline.  If you override
+    this by setting ``$options['inline']`` to false, the script tags will instead
+    be added to the ``script`` block which you can print elsewhere in the document.
+    If you wish to override which block name is used, you can do so by setting
+    ``$options['block']``.
+
+    ``$options['once']`` controls whether or
     not you want to include this script once per request or more than
-    once. ``$options['block']`` allows you to control which block the script tag
-    is appended to.  This is useful when you want to place some scripts at the
-    bottom of the layout.
+    once. This defaults to true.
 
     You can use $options to set additional properties to the
     generated script tag. If an array of script tags is used, the
