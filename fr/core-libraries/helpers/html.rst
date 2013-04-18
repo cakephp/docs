@@ -341,6 +341,20 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         <a href="/pages/accueil" class="button" target="_blank">Entrez</a>
 
+    Utilisez l'option ``'full_base'=>true`` pour des URLs absolues::
+
+        echo $this->Html->link(
+            'Dashboard',
+            array('controller' => 'dashboards', 'action' => 'index', 'full_base' => true)
+        );
+
+    Affichera:
+
+    .. code-block:: html
+
+        <a href="http://www.yourdomain.com/dashboards/index">Dashboard</a>
+
+
     Spécifiez ``$confirmMessage`` pour afficher une boite de dialogue de 
     confirmation ``confirm()`` javascript::
 
@@ -417,12 +431,17 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Retourne une balise formatée audio/video ::
 
-        echo $this->Html->media('audio.mp4');
+    .. code-block:: php
+
+        <?php echo $this->Html->media('audio.mp4'); ?>
 
         // Affichera
         <video src="/files/audio.mp3"></audio>
 
-        echo $this->Html->media('video.mp4', array('fullBase' => true, 'text' => 'Texte de remplacement'));
+        <?php echo $this->Html->media('video.mp4', array(
+             'fullBase' => true,
+             'text' => 'Texte de remplacement')
+        ); ?>
 
         // Affichera
         <video src="http://www.somehost.com/files/video.mp4">Texte de remplacement</video>
@@ -447,15 +466,20 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Retourne des textes enveloppé dans une balise spécifiée. Si il n'y a
     pas de texte spécifié alors le contenu du <tag> sera retourné.::
 
+    .. code-block:: php
+
+        <?php
         echo $this->Html->tag('span', 'Bonjour le Monde', array('class' => 'bienvenue'));
-         
+        ?>
+
         // Affichera
         <span class="bienvenue">Bonjour le Monde</span>
-         
+
         // Pas de texte spécifié.
-        <?php 
+        <?php
         echo $this->Html->tag('span', null, array('class' => bienvenue'));
-         
+        ?>
+
         // Affichera 
         <span class="bienvenue">
 
@@ -479,9 +503,13 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Si aucun texte n'est spécifié, seulement une balise div d'ouverture est 
     retournée.::
- 
+
+    .. code-block:: php
+
+        <?php
         echo $this->Html->div('error', 'Entrez votre numéro de carte bleue S.V.P');
-        
+        ?>
+
         // Affichera
         <div class="error">Entrez votre numéro de carte bleue S.V.P</div>
 
@@ -494,24 +522,33 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     Retourne un texte enveloppé dans une balise CSS <p>. Si aucun texte
     CSS est fourni, un simple <p> de démarrage est retourné.::
 
+    .. code-block:: php
+
+        <?php
         echo $this->Html->para(null, 'Bonjour le Monde');
-        
+        ?>
+
         // Affichera
         <p>Bonjour le Monde</p>
 
 .. php:method:: script(mixed $url, mixed $options)
 
-    :param mixed $url: Soit un simple fichier javascript, ou un
+    :param mixed $url: Soit un simple fichier Javascript, ou un
        tableau de chaînes pour plusieurs fichiers.
     :param array $options: Un tableau d'attributs :term:`attributs html`.
 
-    Inclus un(des) fichier(s). Si la clef ``inline`` est définie à false dans 
-    $options, les balises script sont additionnées au bloc ``script`` qui va 
-    s'insérer dans la balise d'en-tête du document. ``$options['once']`` 
-    contrôle si vous voulez ou pas inclure le script une fois par requête 
-    ou plus d'une fois. ``$options['block']`` vous permets de contrôler dans 
-    quel quel balise de script il sera inséré. C'est utile quand vous voulez 
-    placer des scripts à la fin de la mise en page (layout).
+    Inclus un(des) fichier(s), présent soit localement soit à une url
+    distante.
+
+    Par défaut, les tags de script sont ajoutés au document inline. Si vous
+    le surcharger en configurant ``$options['inline']`` à false, les tags de
+    script vont plutôt être ajoutés au block ``script`` que vous pouvez
+    afficher aileurs dans le document. Si vous souhaitez surcharger le nom
+    du block utilisé, vous pouvez le faire en configurant
+    ``$options['block']``.
+   
+    ``$options['once']`` contrôle si vous voulez ou pas inclure le script une
+    fois par requête. Par défaut à true.
 
     Vous pouvez utilisez $options pour définir des propriétés additionnelles
     pour la balise script générée. Si un tableau de balise script est utilisé, 
@@ -532,6 +569,16 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     tant qu'ils ne se trouvent pas dans ``app/webroot/js``::
 
         echo $this->Html->script('/autrerep/fichier_script');
+
+    Vous pouvez aussi lier à une URL d'un dépôt distant::
+
+        echo $this->Html->script('http://code.jquery.com/jquery.min.js');
+
+    Affichera:
+
+    .. code-block:: html
+
+        <script type="text/javascript" href="http://code.jquery.com/jquery.min.js"></script>
 
     Le premier paramètre peut être un tableau pour inclure des 
     fichiers multiples.::
@@ -663,12 +710,17 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         echo $this->Html->tableHeaders(array('Date', 'Titre', 'Actif'));
 
-        // Affichera
+    // Affichera
+
+    .. code-block:: html
+
         <tr>
             <th>Date</th>
             <th>Titre</th>
             <th>Actif</th>
         </tr>
+
+    ::
         
         echo $this->Html->tableHeaders(
             array('Date','Titre','Actif'),
@@ -676,11 +728,37 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             array('class' => 'table_produit')
         );
          
-        // Output
+    Sortie:
+
+    .. code-block:: html
+
         <tr class="statut">
              <th class="table_produit">Date</th>
              <th class="table_produit">Titre</th>
              <th class="table_produit">Actif</th>
+        </tr>
+
+    .. versionchanged:: 2.2
+        ``tableHeaders()`` accèpte maintenant les attributs par cellule,
+        regardez ci-dessous.
+
+    Depuis 2.2 vous pouvez définir des attributs par colonne, ceux-ci sont
+    utilisés à la place de ceux par défaut dans ``$thOptions``::
+
+        echo $this->Html->tableHeaders(array(
+            'id',
+            array('Name' => array('class' => 'highlight')),
+            array('Date' => array('class' => 'sortable'))
+        ));
+
+    Sortie:
+
+    .. code-block:: html
+
+        <tr>
+            <th>id</th>
+            <th class="highlight">Name</th>
+            <th class="sortable">Date</th>
         </tr>
 
 .. php:method:: tableCells(array $data, array $oddTrOptions = null, array $evenTrOptions = null, $useCount = false, $continueOddEven = true)
@@ -824,19 +902,23 @@ Changer la restitution des balises avec le Helper Html
 
     Les jeux de balises pour le Helper Html :php:class:`HtmlHelper` sont 
     conforme au standard XHTML, toutefois si vous avez besoin de générer 
-    du HTML pour les standards HTML4 vous aurez besoin de créer et de charger 
+    du HTML pour les standards HTML5 vous aurez besoin de créer et de charger 
     un nouveau fichier de configuration de balise contenant les balises 
     que vous aimeriez utiliser. Pour changer les balises utilisées créez
-    un fichier ``app/Config/tags.php`` contenant::
+    un fichier ``app/Config/html5_tags.php`` contenant::
    
-        $tags = array(
-            'metalink' => '<link href="%s"%s >',
-            'input' => '<input name="%s" %s >',
+        $config = array('tags' => array(
+            'css' => '<link rel="%s" href="%s" %s>',
+            'style' => '<style%s>%s</style>',
+            'charset' => '<meta charset="%s">',
+            'javascriptblock' => '<script%s>%s</script>',
+            'javascriptstart' => '<script>',
+            'javascriptlink' => '<script src="%s"%s></script>',
             // ...
-        );
+        ));
 
     Vous pouvez alors charger ces balises définis en appelant
-    ``$html->loadConfig('tags');``
+    ``$this->Html->loadConfig('html5_tags');`
 
 Création d'un chemin de navigation avec le Helper Html
 ======================================================
@@ -877,6 +959,11 @@ Création d'un chemin de navigation avec le Helper Html
 
 .. php:method:: getCrumbList(array $options = array(), mixed $startText)
 
+    :param array $options: Un tableau de :term:`html attributes` pour les
+        elements contenant ``<ul>``. Peut aussi contenir les options
+        'separator', 'firstClass' et 'lastClass'.
+    :param string|array $startText: Le texte ou l'elément qui précède ul.
+
     Retourne le fil d'Ariane comme une liste (x)html.
 
     Cette méthode utilise :php:meth:`HtmlHelper::tag()` pour générer la 
@@ -888,9 +975,11 @@ Création d'un chemin de navigation avec le Helper Html
     ``$startText`` pour  :php:meth:`~HtmlHelper::getCrumbs()`.
    
 
-    ..versionchanged:: 2.1
-
+    .. versionchanged:: 2.1
         Le paramètre ``$startText`` a été ajouté.
+
+    .. versionchanged:: 2.3
+        Les options 'separator', 'firstClass' et 'lastClass' ont été ajoutées.
 
 
 .. meta::
