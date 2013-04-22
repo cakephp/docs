@@ -86,7 +86,7 @@ données qui va accéder à une API JSON distante et fictive. Nous allons l'appe
     class FarAwaySource extends DataSource {
 
     /**
-     * Une description opitionnelle de votre source de données
+     * Une description optionnelle de votre source de données
      */
         public $description = 'A far away datasource';
 
