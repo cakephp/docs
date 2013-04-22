@@ -284,7 +284,7 @@ Vous pouvez également empaqueter vos source de données dans des plugins.
 
 Placez simplement votre fichier de source de données à l'intérieur de 
 ``Plugin/[YourPlugin]/Model/Datasource/[YourSource].php`` et faites
-y référence en utilisant la notation pour les plugins::
+y référence en utilisant la syntaxe pour les plugins::
 
     public $faraway = array(
         'datasource' => 'MyPlugin.FarAwaySource',
