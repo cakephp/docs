@@ -75,18 +75,18 @@ avez besoin (par exemple les options de Model::find comme le parsing
 Un Exemple
 ==========
 
-A common reason you would want to write your own datasource is when you would
-like to access a 3rd party API using the usual ``Model::find()/save()/delete()``
-methods. Let's write a datasource that will access a fictitious remote JSON
-based API. We'll call it ``FarAwaySource`` and we'll put it in
-``app/Model/Datasource/FarAwaySource.php``::
+Une des raisons pour laquelle vous voudriez écrire votre propre source de données
+pourrait être la volonté d'accéder à l'API d'une librairie tierce en utilisant
+les méthodes habituelles ``Model::find()/save()/delete()``. Ecrivons une source de 
+données qui va accéder à une API JSON distante et fictive. Nous allons l'appeler
+``FarAwaySource`` et nous allons la placer dans ``app/Model/Datasource/FarAwaySource.php``::
 
     App::uses('HttpSocket', 'Network/Http');
 
     class FarAwaySource extends DataSource {
 
     /**
-     * An optional description of your datasource
+     * Une description opitionnelle de votre source de données
      */
         public $description = 'A far away datasource';
 
@@ -236,53 +236,55 @@ based API. We'll call it ``FarAwaySource`` and we'll put it in
 
     }
 
-We can then configure the datasource in our ``app/Config/database.php`` file
-by adding something like this::
+Nous pouvons à présent configurer la source de données dans notre fichier 
+``app/Config/database.php`` en y ajoutant quelque chose comme ceci::
 
     public $faraway = array(
         'datasource' => 'FarAwaySource',
         'apiKey'     => '1234abcd',
     );
 
-Then use the database config in our models like this::
+Et ensuite utiliser la configuration de notre source de données dans 
+nos models comme ceci::
 
     class MyModel extends AppModel {
         public $useDbConfig = 'faraway';
     }
 
-We can retrieve data from our remote source using the familiar model methods::
+Nous pouvons à présent récupérer les données depuis notre source distante 
+en utilisant les méthodes familières dans notre model::
 
     // Get all messages from 'Some Person'
     $messages = $this->MyModel->find('all', array(
         'conditions' => array('name' => 'Some Person'),
     ));
 
-Similarly we can save a new message::
+De la même façon, nous pouvons sauvegarder un nouveau message::
 
     $this->MyModel->save(array(
         'name' => 'Some Person',
         'message' => 'New Message',
     ));
 
-Update the previous message::
+Mettre à jour le précédent message::
 
     $this->MyModel->id = 42;
     $this->MyModel->save(array(
         'message' => 'Updated message',
     ));
 
-And delete the message::
+Et supprimer le message::
 
     $this->MyModel->delete(42);
 
-Plugin DataSources
-==================
+Plugin de source de données
+===========================
 
-You can also package Datasources into plugins.
+Vous pouvez également empaqueter vos source de données dans des plugins.
 
-Simply place your datasource file into
-``Plugin/[YourPlugin]/Model/Datasource/[YourSource].php``
-and refer to it using the plugin notation::
+Placez simplement votre fichier de source de données à l'intérieur de 
+``Plugin/[YourPlugin]/Model/Datasource/[YourSource].php`` et faites
+y référence en utilisant la notation pour les plugins::
 
     public $faraway = array(
         'datasource' => 'MyPlugin.FarAwaySource',
