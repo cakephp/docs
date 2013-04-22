@@ -132,7 +132,7 @@ Loading components on the fly
 You might not need all of your components available on every controller action.
 In situations like this you can load a component at runtime using the
 :doc:`Component Collection </core-libraries/collections>`.  From inside a
-controller you can do the following::
+controller's action you can do the following::
     
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
