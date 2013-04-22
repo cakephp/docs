@@ -429,9 +429,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     .. versionadded:: 2.1
 
-    Retourne une balise formatée audio/video ::
-
-    .. code-block:: php
+    Retourne une balise formatée audio/video::
 
         <?php echo $this->Html->media('audio.mp4'); ?>
 
@@ -439,15 +437,18 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <video src="/files/audio.mp3"></audio>
 
         <?php echo $this->Html->media('video.mp4', array(
-             'fullBase' => true,
-             'text' => 'Texte de remplacement')
-        ); ?>
+            'fullBase' => true,
+            'text' => 'Texte de remplacement'
+        )); ?>
 
         // Affichera
         <video src="http://www.somehost.com/files/video.mp4">Texte de remplacement</video>
 
         echo $this->Html->media(
-            array('video.mp4', array('src' => 'video.ogg', 'type' => "video/ogg; codecs='theora, vorbis'")),
+            array('video.mp4', array(
+                'src' => 'video.ogg',
+                'type' => "video/ogg; codecs='theora, vorbis'"
+            )),
             array('autoplay')
         );
 
@@ -464,9 +465,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     :param array $options: Un tableau d'attributs html :term:`attributs html`.
 
     Retourne des textes enveloppé dans une balise spécifiée. Si il n'y a
-    pas de texte spécifié alors le contenu du <tag> sera retourné.::
-
-    .. code-block:: php
+    pas de texte spécifié alors le contenu du <tag> sera retourné::
 
         <?php
         echo $this->Html->tag('span', 'Bonjour le Monde', array('class' => 'bienvenue'));
@@ -477,7 +476,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         // Pas de texte spécifié.
         <?php
-        echo $this->Html->tag('span', null, array('class' => bienvenue'));
+        echo $this->Html->tag('span', null, array('class' => 'bienvenue'));
         ?>
 
         // Affichera 
@@ -502,9 +501,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     défini à true, $text sera affiché en HTML-échappé.
 
     Si aucun texte n'est spécifié, seulement une balise div d'ouverture est 
-    retournée.::
-
-    .. code-block:: php
+    retournée::
 
         <?php
         echo $this->Html->div('error', 'Entrez votre numéro de carte bleue S.V.P');
@@ -520,9 +517,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     :param array $options: Un tableau d'attributs :term:`attributs html`.
 
     Retourne un texte enveloppé dans une balise CSS <p>. Si aucun texte
-    CSS est fourni, un simple <p> de démarrage est retourné.::
-
-    .. code-block:: php
+    CSS est fourni, un simple <p> de démarrage est retourné::
 
         <?php
         echo $this->Html->para(null, 'Bonjour le Monde');
@@ -625,11 +620,11 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     :param string $code: Le code à placer dans la balise script.
     :param array $options: Un tableau d'attributs :term:`attributs html`.
 
-    Génère un bloc de code contenant des options ``$options['inline']`` 
-    définies de ``$code`` a mettre à false pour voir le bloc de script 
-    apparaître dans le bloc de ``script` de la vue. D'autre options définies 
+    Génère un bloc de code contenant des options ``$options['inline']``
+    définies de ``$code`` a mettre à false pour voir le bloc de script
+    apparaître dans le bloc de ``script`` de la vue. D'autre options définies
     seront ajoutée comme attributs dans les balises de script.
-    ``$this->html->scriptBlock('stuff', array('defer' => true));`` créera une 
+    ``$this->html->scriptBlock('stuff', array('defer' => true));`` créera une
     balise script avec l'attribut ``defer="defer"``.
 
 .. php:method:: scriptStart($options = array())
@@ -918,7 +913,7 @@ Changer la restitution des balises avec le Helper Html
         ));
 
     Vous pouvez alors charger ces balises définis en appelant
-    ``$this->Html->loadConfig('html5_tags');`
+    ``$this->Html->loadConfig('html5_tags');``
 
 Création d'un chemin de navigation avec le Helper Html
 ======================================================
