@@ -358,7 +358,7 @@ would serve the asset
     It is important to note the **/your_plugin/** prefix before the
     asset path. That makes the magic happen!
 
-.. versionchanged: 2.1
+.. versionchanged:: 2.1
     Use :term:`plugin syntax` to request assets. For example in your View:
     <?php echo $this->Html->css("ContactManager.style"); ?>
 
