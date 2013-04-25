@@ -555,13 +555,13 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
             return false;
         });
 
-    You can remove the ``return false;`` by passing setting the
+    You can remove the ``return false;`` by setting the
     ``stop`` option to false::
 
         $this->Js->get('#some-link');
         $this->Js->event('click', $this->Js->alert('hey you!'), array('stop' => false));
 
-    If you were using the jQuery library you would the following
+    If you were using the jQuery library, the following
     Javascript code would be added to the buffer. Note that the default
     browser event is not cancelled:
     
