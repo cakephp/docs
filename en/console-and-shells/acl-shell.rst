@@ -70,10 +70,25 @@ The output will either be ``success`` or ``not allowed``.
 View the node trees
 ===================
 
-The view command will return the ARO or ACO tree.  The optional node parameter
-allows you to return only a portion of the requested tree::
+The view command will return the ARO or ACO tree. Note that your working
+directory needs to point to the correct ``app`` directory to view the ARO or
+ACO tree. You may check if this is the case by running the ``cake`` command.
 
-    ./Console/cake acl view
+To view the complete ARO tree::
+
+    ./Console/cake acl view aro
+
+To view the complete ACO tree::
+
+    ./Console/cake acl view aco
+	
+	
+The optional node parameter allows you to return only a portion of the requested tree.
+Assuming you have a "Widgets" node in your ACO tree, you can choose to view only the nodes under "Widgets" 
+with the following command::
+
+
+    ./Console/cake acl view aco Widgets
 
 
 
