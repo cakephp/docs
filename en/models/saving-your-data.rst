@@ -138,8 +138,8 @@ Otherwise a new record is created::
 
 .. warning::
 
-	In the Update example above, if '''$this->request->data['id']''' is	already set
-	the '''$this->Recipe->id = 2;''' will have no effect.
+	In the Update example above, if ``$this->request->data['id']`` is set
+	the line ``$this->Recipe->id = 2;`` will have no effect.
 
 	
 .. tip::
