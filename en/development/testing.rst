@@ -22,8 +22,8 @@ following::
 
 .. note::
 
-    Depending on your system's configuration, you make need to run the previous
-    commands with ``sudo``
+    Depending on your system's configuration, you may need to run the previous
+    commands with ``sudo``.
 
 Once PHPUnit is installed with the pear installer, you should confirm that the
 PHPUnit libraries are on PHP's ``include_path``. You can do this by checking
