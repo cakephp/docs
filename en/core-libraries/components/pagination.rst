@@ -140,13 +140,13 @@ normal additional first parameter of ``$model``::
 It's seldom you'll need to implement paginate() and paginateCount().  You should
 make sure  you can't achieve your goal with the core model methods, or a custom
 finder. To paginate with a custom find type, you should set the ``0``'th
-element, or the ``findType`` key as of 2.3::
+element, or the ``findType`` key as of CakePHP v2.3::
 
     public $paginate = array(
         'popular'
     );
 
-Since the 0th index is difficult to manage, in 2.3 the ``findType`` option was
+Since the 0th index is difficult to manage, in CakePHP v2.3 the ``findType`` option was
 added::
 
     public $paginate = array(
