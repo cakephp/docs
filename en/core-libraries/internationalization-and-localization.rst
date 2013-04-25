@@ -12,7 +12,8 @@ be localized. The term *localization* refers to the adaptation of
 an application to meet specific language (or culture) requirements
 (i.e., a "locale"). Internationalization and localization are often
 abbreviated as i18n and l10n respectively; 18 and 10 are the number
-of characters between the first and last character.
+of characters between the first and last character of the words
+"internationalization" and "localization" respectively.
 
 Internationalizing Your Application
 ===================================
