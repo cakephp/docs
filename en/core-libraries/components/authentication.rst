@@ -377,8 +377,8 @@ As of CakePHP 2.3.0 you can use `bcrypt <https://en.wikipedia.org/wiki/Bcrypt>`_
 a.k.a Blowfish to hash passwords. Bcrypt hashes are much harder to brute force
 than passwords stored with sha1. Even though the default hashing strategy is
 ``sha`` - for backwards compatibility reasons. It is recommended that new
-applications use bcrypt for passwords. Bcrypt provides improved security.
-reasons. To use bcrpyt you'll need to enable the ``Blowfish`` authentication
+applications use bcrypt for passwords, because bcrypt provides improved security.
+To use bcrpyt you'll need to enable the ``Blowfish`` authentication
 adapter::
 
     public $components = array(
