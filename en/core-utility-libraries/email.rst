@@ -93,7 +93,7 @@ you can also just load an array of configs::
     //or in constructor::
     $Email = new CakeEmail(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
 
-You can configure SSL SMTP servers, like GMail. To do so, put the ``'ssl://'``
+You can configure SSL SMTP servers, like Gmail. To do so, put the ``'ssl://'``
 at prefix in the host and configure the port value accordingly.  Example::
 
     class EmailConfig {
