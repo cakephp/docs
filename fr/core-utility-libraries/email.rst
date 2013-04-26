@@ -99,7 +99,7 @@ Plutôt que de passer une chaîne qui correspond au nom de la configuration dans
     //ou dans un constructeur::
     $Email = new CakeEmail(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
 
-Vous pouvez configurer les serveurs SSL SMTP, comme GMail. Pour faire ceci, 
+Vous pouvez configurer les serveurs SSL SMTP, comme Gmail. Pour faire ceci, 
 mettez ``'ssl://'`` en préfixe dans le host et configurez la valeur du port 
 selon. Exemple::
 
@@ -117,6 +117,27 @@ selon. Exemple::
 
     Pour utiliser cette fonctionnalité, vous aurez besoin d'avoir SSL configuré 
     dans votre installation PHP.
+
+Depuis 2.3.0, vous pouvez aussi activer TLS SMTP en utilisant l'option
+``tls``::
+
+    class EmailConfig {
+        public $gmail = array(
+            'host' => 'smtp.gmail.com',
+            'port' => 465,
+            'username' => 'my@gmail.com',
+            'password' => 'secret',
+            'transport' => 'Smtp',
+            'tls' => true
+        );
+    }
+
+La configuration ci-dessus va activer la communication TLS pour les messages
+emails.
+
+.. versionadded: 2.3
+    Le support pour le delivery TLS a été ajouté dans 2.3
+
 
 .. _email-configurations:
 
@@ -148,6 +169,8 @@ La clés de configuration suivantes sont utilisés:
   classe de la vue. Regardez ``CakeEmail::viewRender()``.
 - ``'template'``: Si vous utilisez un contenu rendu, définissez le nom du 
   template. Regardez ``CakeEmail::template()``.
+- ``'theme'``: Theme utilisé pour le rendu du template. Voir
+  ``CakeEmail::theme()``.
 - ``'layout'``: Si vous utilisez un contenu rendu, définissez le layout à 
   rendre. Si vous voulez rendre un template sans layout, définissez ce champ 
   à null. Regardez ``CakeEmail::template()``.
@@ -180,7 +203,7 @@ port et autres configurations.
 Définir les headers
 -------------------
 
-Dans ``CakeEmail``, vous êtes libres de définir les headers que vous souhaitez.
+Dans ``CakeEmail``, vous êtes libre de définir les headers que vous souhaitez.
 Si vous migrez pour utiliser CakeEmail, n'oubliez pas de mettre le préfixe 
 ``X-`` dans vos headers.
 
@@ -288,6 +311,13 @@ client:
   4.1. Quand vous utilisez ``contentId``, vous pouvez utiliser le fichier dans 
   corps html comme ``<img src="cid:my-content-id">``.
 
+  4.2. Vous pouvez utiliser l'option ``contentDisposition`` pour désactiver le
+   header ``Content-Disposition`` pour une pièce jointe. C'est utile pour
+  l'envoi d'invitations ical à des clients utilisant outlook.
+
+.. versionchanged:: 2.3
+    L'option ``contentDisposition`` a été ajoutée dans 2.3
+
 Utiliser les transports
 -----------------------
 
@@ -367,6 +397,23 @@ toutes les configurations dans le 4ème paramètre (en tableau ou en utilisant
 Vérifiez la liste des :ref:`configurations <email-configurations>` pour voir 
 toutes les configs acceptées.
 
+Envoyer des emails depuis CLI
+=============================
+
+.. versionchanged:: 2.2
+    La méthode ``domain()`` a été ajoutée dans 2.2
+
+Quand vous envoyez des emails à travers un script CLI (Shells, Tasks, ...),
+vous devez définir manuellement le nom de domaine que CakeEmail doit utiliser.
+Il sera utilisé comme nom d'hôte pour l'id du message (puisque il n'y a pas
+de nom d'hôte dans un environnement CLI)::
+
+    $Email->domain('www.example.org');
+    // Resulte en ids de message comme ``<UUID@www.example.org>`` (valid)
+    // au lieu de `<UUID@>`` (invalid)
+
+Un id de message valide peut permettre à ce message de ne pas finir dans un
+dossier de spam.
 
 .. meta::
     :title lang=fr: CakeEmail
