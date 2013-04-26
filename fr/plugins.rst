@@ -366,7 +366,7 @@ servirait l'asset
     Il est important de noter que le préfixe de **/votre_plugin/** avant le 
     chemin de asset. Et la magie opére!
 
-.. versionchanged: 2.1
+.. versionchanged:: 2.1
     Utilisez :term:`plugin syntax` pour accéder aux assets. Par exemple dasn
     votre View:
     <?php echo $this->Html->css("ContactManager.style"); ?>
