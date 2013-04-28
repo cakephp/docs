@@ -13,6 +13,7 @@ CakePHP's model class files go in ``/app/Model``, and the file
 we'll be creating will be saved to ``/app/Model/Post.php``. The
 completed file should look like this::
 
+    <?php
     class Post extends AppModel {
     }
 
@@ -44,6 +45,7 @@ post-related work done. We'll place this new controller in a file
 called ``PostsController.php`` inside the ``/app/Controller``
 directory. Here's what the basic controller should look like::
 
+    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
     }
@@ -54,6 +56,7 @@ users request www.example.com/posts/index (which is also the same
 as www.example.com/posts/), they might expect to see a listing of
 posts. The code for that action would look something like this::
 
+    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
 
@@ -206,6 +209,7 @@ gone wrong, or you actually did define it already, in which case
 you are very sneaky. Otherwise, we'll create it in the
 PostsController now::
 
+    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
 
@@ -266,6 +270,7 @@ start, but let's allow for the adding of new posts.
 First, start by creating an ``add()`` action in the
 PostsController::
 
+    <?php
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form', 'Session');
         public $components = array('Session');
@@ -400,6 +405,7 @@ You may be wondering: how do I tell CakePHP about my validation
 requirements? Validation rules are defined in the model. Let's look
 back at our Post model and make a few adjustments::
 
+    <?php
     class Post extends AppModel {
         public $validate = array(
             'title' => array(
