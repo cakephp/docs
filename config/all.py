@@ -240,7 +240,7 @@ man_pages = [
 epub_title = u'CakePHP Cookbook'
 epub_author = u'Cake Software Foundation, Inc.'
 epub_publisher = u'Cake Software Foundation, Inc.'
-epub_copyright = u'2012, Cake Software Foundation, Inc.'
+epub_copyright = u'2013, Cake Software Foundation, Inc.'
 
 epub_theme = 'cakephp-epub'
 
