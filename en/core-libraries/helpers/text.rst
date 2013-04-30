@@ -13,7 +13,7 @@ truncating long stretches of text.
    Several of ``TextHelper`` methods have been moved into :php:class:`String`
    class to allow easier use outside of the ``View`` layer.
    Within a view, these methods are accessible via the `TextHelper`
-   class and you can called it as you would call a normal helper method:
+   class and you can call it as you would call a normal helper method:
    ``$this->Text->method($args);``.
 
 .. php:method:: autoLinkEmails(string $text, array $options=array())

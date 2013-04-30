@@ -4,8 +4,8 @@ JsHelper
 .. php:class:: JsHelper(View $view, array $settings = array())
 
 Since the beginning CakePHP's support for Javascript has been with
-Prototype/Scriptaculous. While we still think these are an
-excellent Javascript library, the community has been asking for
+Prototype/Scriptaculous. While we still think these are excellent 
+Javascript libraries, the community has been asking for
 support for other libraries. Rather than drop Prototype in favour
 of another Javascript library. We created an Adapter based helper,
 and included 3 of the most requested libraries.
@@ -555,13 +555,13 @@ CakePHP core. Whenever you see separate lists for ``Options`` and
             return false;
         });
 
-    You can remove the ``return false;`` by passing setting the
+    You can remove the ``return false;`` by setting the
     ``stop`` option to false::
 
         $this->Js->get('#some-link');
         $this->Js->event('click', $this->Js->alert('hey you!'), array('stop' => false));
 
-    If you were using the jQuery library you would the following
+    If you were using the jQuery library, the following
     Javascript code would be added to the buffer. Note that the default
     browser event is not cancelled:
     

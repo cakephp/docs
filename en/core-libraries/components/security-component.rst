@@ -202,8 +202,8 @@ want and the Security Component will enforce them on its startup::
         }
     }
 
-In this example the delete action can only be successfully
-triggered if it receives a POST request::
+In the example above the delete action can only be successfully
+triggered if it receives a POST request.
 
     class WidgetController extends AppController {
     
@@ -216,8 +216,8 @@ triggered if it receives a POST request::
         }
     }
 
-This example would force all actions that had admin routing to
-require secure SSL requests::
+In the example above all actions that have admin routing would be forced to
+require secure SSL requests.
 
     class WidgetController extends AppController {
     
@@ -235,10 +235,8 @@ require secure SSL requests::
         }
     }
 
-This example would force all actions that had admin routing to
-require secure SSL requests. When the request is black holed, it
-will call the nominated forceSSL() callback which will redirect
-non-secure requests to secure requests automatically.
+In the example above, when the request is black holed, it will call the nominated
+forceSSL() callback which will redirect non-secure requests to secure requests automatically.
 
 .. _security-csrf:
 

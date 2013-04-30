@@ -10,7 +10,7 @@ transparently.
 To use the new behavior, you can add it to the $actsAs property of
 your model. When adding it to the actsAs array you choose to make
 the related Acl entry an ARO or an ACO. The default is to create
-ACOs::
+AROs::
 
     class User extends AppModel {
         public $actsAs = array('Acl' => array('type' => 'requester'));

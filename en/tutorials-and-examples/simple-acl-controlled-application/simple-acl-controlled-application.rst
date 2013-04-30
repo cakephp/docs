@@ -326,6 +326,15 @@ implement ``bindNode()`` in ``User`` model::
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
     }
 
+.. tip::
+	
+	If you are working from the previous example, you need to remove the Acl behaviour
+	in the ``User`` model (as well as the ``parentNode()`` function), and only have the above function present.
+	Failure to do this will result in the ``User`` still showing up in the ``aros`` table.
+	
+	If for some reason you still need Acl, you can add the behaviour like this: 
+	``public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));``
+	
 This method will tell ACL to skip checking ``User`` Aro's and to
 check only ``Group`` Aro's.
 

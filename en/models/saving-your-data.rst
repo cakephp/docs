@@ -136,6 +136,12 @@ Otherwise a new record is created::
     $this->Recipe->id = 2;
     $this->Recipe->save($this->request->data);
 
+.. warning::
+
+	In the Update example above, if ``$this->request->data['id']`` is set
+	the line ``$this->Recipe->id = 2;`` will have no effect.
+
+	
 .. tip::
 
     When calling save in a loop, don't forget to call ``create()``.
