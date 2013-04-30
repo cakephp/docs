@@ -29,7 +29,8 @@ Composer is a dependency management tool for PHP 5.3+. It solves many of the
 problems the PEAR installer has, and simplifies managing multiple versions of
 libraries.  Since CakePHP publishes a PEAR package you can install CakePHP using
 `composer <http:://getcomposer.org>`_. Before installing CakePHP you'll need to
-setup a ``composer.json`` file. An example composer.json file looks like::
+setup a ``composer.json`` file. An composer.json file for a CakePHP applications
+would look like the following::
 
     {
         "name": "example-app",
@@ -47,12 +48,14 @@ setup a ``composer.json`` file. An example composer.json file looks like::
         }
     }
 
-Add this file to the root directory of your project. After you've downloaded
-composer, install CakePHP. In the same directory as your ``composer.json``::
+Save this JSON into ``composer.json`` in the root directory of your project.
+Next dowload the composer.phar file into your project. After you've downloaded
+composer, install CakePHP. In the same directory as your ``composer.json`` run
+the following::
 
     $ php composer.phar install
 
-Once complete you should have a directory structure that looks like::
+Once composer has finished running you should have a directory structure that looks like::
 
     example-app/
         composer.phar
@@ -67,16 +70,16 @@ You are now ready to generate the rest of your application skeleton::
 
     $ Vendor/bin/cake bake project <path to project>
 
-By default ``bake`` will hard code the :php:const:`CAKE_CORE_INCLUDE_PATH`. To
-make your application more portable you should modify ``webroot/index.php`` and
-change ``CAKE_CORE_INCLUDE_PATH`` to be a relative path::
+By default ``bake`` will hard-code :php:const:`CAKE_CORE_INCLUDE_PATH`. To
+make your application more portable you should modify ``webroot/index.php``, 
+changing ``CAKE_CORE_INCLUDE_PATH`` to be a relative path::
 
     define(
         'CAKE_CORE_INCLUDE_PATH',
         ROOT . DS . APP_DIR . '/Vendor/pear-pear.cakephp.org/CakePHP'
     );
 
-If you're installing any other libraries with composer you'll also need to setup
+If you're installing any other libraries with composer, you'll need to setup
 the autoloader, and work around an issue in composer's autoloader. In your
 ``Config/bootstrap.php`` file add the following::
 
@@ -88,7 +91,9 @@ the autoloader, and work around an issue in composer's autoloader. In your
     spl_autoload_unregister(array('App', 'load'));
     spl_autoload_register(array('App', 'load'), true, true);
 
-Now you're ready to go!
+You should now have a functioning CakePHP application with CakePHP installed via
+composer. Be sure to keep the composer.json and composer.lock.json file with the
+rest of your source code.
 
 
 Sharing CakePHP libraries with multiple applications
