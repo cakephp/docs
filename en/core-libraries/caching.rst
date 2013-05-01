@@ -179,7 +179,6 @@ The required API for a CacheEngine is
     Not required, but used to do clean up when resources expire.
     FileEngine uses this to delete files containing expired content.
 
-
 Using Cache to store common query results
 =========================================
 
@@ -262,6 +261,26 @@ remove all entries associated to the ``post`` group::
     public function afterSave($created) {
         if ($created) {
             Cache::clearGroup('post', 'site_home');
+        }
+    }
+
+.. versionadded:: 2.4
+
+:php:func:`Cache::groupConfigs()` can be used to retrieve mapping between
+group and configurations, i.e.: having the same group::
+
+    // Model/Post.php
+
+    /**
+     * A variation of previous example that clears all Cache configurations
+     * having the same group
+     */
+    public function afterSave($created) {
+        if ($created) {
+            $configs = Cache::groupConfigs('post');
+            foreach ($configs['post'] as $config) {
+                Cache::clearGroup('post', $config);
+            }
         }
     }
 
@@ -383,6 +402,12 @@ Cache API
     used by FileEngine. It should be implemented by any Cache engine
     that requires manual eviction of cached data.
 
+
+.. php:staticmethod:: groupConfigs($group = null)
+
+    :return: Array of groups and its related configuration names.
+
+    Retrieve group names to config mapping.
 
 .. meta::
     :title lang=en: Caching
