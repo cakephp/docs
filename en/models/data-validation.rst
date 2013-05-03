@@ -1020,7 +1020,7 @@ with usage examples.
         public $validate = array(
             'multiple' => array(
                 'rule' => array('multiple', array(
-                    'in'  => array('do', 'ray', 'me', 'fa', 'so', 'la', 'ti'),
+                    'in'  => array('do', 're', 'mi', 'fa', 'sol', 'la', 'ti'),
                     'min' => 1,
                     'max' => 3
                 )),
