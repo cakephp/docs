@@ -292,7 +292,7 @@ Using per-session tokens instead of one-time use tokens
 -------------------------------------------------------
 
 By default a new CSRF token is generated for each request, and each token can
-only be used one. If a token is used twice, it will be blackholed. Sometimes,
+only be used once. If a token is used twice, it will be blackholed. Sometimes,
 this behaviour is not desirable, as it can create issues with single page
 applications. You can toggle on longer, multi-use tokens by setting
 ``csrfUseOnce`` to ``false``. This can be done in the components array, or in
