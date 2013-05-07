@@ -30,7 +30,8 @@ Create and delete nodes
 
 You can use the create and delete subcommands to create and delete nodes::
 
-    ./Console/cake acl create aco controllers/Posts
+    ./Console/cake acl create aco controllers Posts
+    ./Console/cake acl create aco Posts index
 
 Would create an aco record using an alias path.  You could do the following as
 well::
