@@ -13,12 +13,17 @@ SchemaShell
 - ``cake schema generate`` now supports the ``--exclude`` parameter.
 
 BakeShell
------------
+---------
 
 - ``cake bake model`` now supports baking ``$behaviors``. Finding `lft`, `rght` and `parent_id` fields
   in your table it will add the Tree behavior, for example. You can also extend the ModelTask to support your own
   behaviors to be recognized.
 
+FixtureTask
+-----------
+
+- ``cake bake fixture`` now supports a ``--schema`` parameter to allow baking all fixtures with noninteractive "all"
+  while using schema import.
 
 Core
 ====
