@@ -21,7 +21,7 @@ Configuring Filters
 Filters are usually configured in the ``bootstrap.php`` file, but you could easily
 load them from any other configuration file before the request is dispatched.
 Adding and removing filters is done through the `Configure` class, using the
-special key ``Dispatch.filters``. By default CakePHP comes with a couple filter
+special key ``Dispatcher.filters``. By default CakePHP comes with a couple filter
 classes already enabled for all requests, let's take a look at how they are
 added::
 
