@@ -118,9 +118,26 @@ permettront de rendre cake executable dans votre système path.
 #. Rechargez la configuration bash ou ouvrez un nouveau terminal, et 
    ``cake`` devrait fonctionner n'importe où.
 
-.. todo::
+Si vous êtes sur Windows Vista ou 7, vous devrez suivre les étapes suivantes.
 
-    Ajoutez comment configurer PATH pour les systèmes windows.
+#. Localisez l'emplacement où se trouvent votre installation CakePHP et
+   l'executable cake. Par exemple
+   ``C:\xampp\htdocs\cakephp\lib\Cake\Console``
+#. Ouvrez la fenêtre des propriétés du Système de votre ordinateur. Vous
+   essaierez le raccourci clavier Windows Key + Pause ou Windows Key + Break.
+   Ou, à partir du Bureau, faîtes un click droit sur Mon Ordinateur, clickez
+   sur Propriétés et clickez sur le lien Paramètres avancés du système dans la
+   colonne de gauche.
+#. Allez sous l'onglet Avancé et clickez sur le bouton des Variables
+   d'Environnement.
+#. Dans la portion des Variables Sytèmes, cherchez le chemin de la variable
+   et double-clickez dessus pour la modifier.
+#. Ajoutez le chemin de l'installation de ``cake`` suivi par un point virgule.
+   On pourrait avoir par exemple::
+
+    %SystemRoot%\system32;%SystemRoot%;C:\xampp\htdocs\cakephp\lib\Cake\Console;
+
+#. Clickez Ok et ``cake`` devrait fonctionner partout.
 
 Créer un shell
 ==============
