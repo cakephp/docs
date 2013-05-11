@@ -1047,7 +1047,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
         public $validate = array(
             'multiple' => array(
                 'rule' => array('multiple', array(
-                    'in'  => array('do', 'ray', 'me', 'fa', 'so', 'la', 'ti'),
+                    'in'  => array('do', 'ré', 'mi', 'fa', 'sol', 'la', 'si'),
                     'min' => 1,
                     'max' => 3
                 )),
