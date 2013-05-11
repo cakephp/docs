@@ -22,7 +22,7 @@ Les filtres sont généralement configurés dans le fichier ``bootstrap.php``,
 mais vous pouvez facilement les charger à partir d'un autre fichier de 
 configuration avant que la requête soit dispatchée. Ajouter et retirer les 
 filtres est fait par la classe `Configure`, en utilisant la clé spéciale 
-``Dispatch.filters``. Par défaut CakePHP est fourni avec des classes de 
+``Dispatcher.filters``. Par défaut CakePHP est fourni avec des classes de 
 filtre déjà activés pour toutes les requêtes, allons voir comment elles ont 
 été ajoutées::
 
