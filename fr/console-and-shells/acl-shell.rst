@@ -32,7 +32,8 @@ Créer et supprimer les noeuds
 You pouvez utiliser les sous-commandes de création et de suppression pour 
 créer et supprimer des noeuds::
 
-    ./Console/cake acl create aco controllers/Posts
+    ./Console/cake acl create aco controllers Posts
+    ./Console/cake acl create aco Posts index
 
 Cette commande crée un enregistrement aco en utilisant un chemin alias.
 Vous pouvez aussi faire comme ce qui suit::
