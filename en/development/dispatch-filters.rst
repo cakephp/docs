@@ -214,10 +214,10 @@ routing system. Although it is not required, it shows how to make your important
 code run first in case you need to trim as much fat as possible from some requests.
 
 For obvious reasons this has the potential of making your app very difficult
-to maintain. Filters are a extremely powerful tool when used wisely, adding
+to maintain. Filters are an extremely powerful tool when used wisely, adding
 response handlers for each url in your app is not a good use for it. But if you
 got a valid reason to do so, then you have a clean solution at hand. Keep in
-mind that not everything need to be a filter, `Controllers` and `Components` are
+mind that not everything needs to be a filter, `Controllers` and `Components` are
 usually a more accurate choice for adding any request handling code to your app.
 
 .. meta::
