@@ -431,10 +431,10 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Retourne une balise formatée audio/video::
 
-        <?php echo $this->Html->media('audio.mp4'); ?>
+        <?php echo $this->Html->media('audio.mp3'); ?>
 
         // Affichera
-        <video src="/files/audio.mp3"></audio>
+        <audio src="/files/audio.mp3"></audio>
 
         <?php echo $this->Html->media('video.mp4', array(
             'fullBase' => true,
