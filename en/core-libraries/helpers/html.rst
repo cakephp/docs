@@ -435,10 +435,10 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: php
 
-        <?php echo $this->Html->media('audio.mp4'); ?>
+        <?php echo $this->Html->media('audio.mp3'); ?>
 
         // Output
-        <video src="/files/audio.mp3"></audio>
+        <audio src="/files/audio.mp3"></audio>
 
         <?php echo $this->Html->media('video.mp4', array(
             'fullBase' => true,
