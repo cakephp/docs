@@ -152,6 +152,8 @@ custom paths to be used::
         'path' => '/path/to/custom/place/'
     ));
 
+.. _syslog-log:
+
 Logging to Syslog
 =================
 
@@ -177,18 +179,18 @@ be done in the `bootstrap.php` file.
 The configuration array accepted for the Syslog logging engine understands the
 following keys:
 
-    * `format`: An sprintf template strings with two placeholders, the first one
-      for the error type, and the second for the message itself. This key is
-      useful to add additional information about the server or process in the
-      logged message. For example: ``%s - Web Server 1 - %s`` will look like
-      ``error - Web Server 1 - An error occured in this request`` after
-      replacing the placeholders.
-    * `prefix`: An string that will be prefixed to every logged message.
-    * `flag`: An integer flag to be used for opening the connection to the
-      logger, by default `LOG_ODELAY` will be used. See `openlog` documentation
-      for more options
-    * `facility`: The logging slot to use in syslog. By default `LOG_USER` is
-      used. See `syslog` documentation for more options
+* `format`: An sprintf template strings with two placeholders, the first one
+  for the error type, and the second for the message itself. This key is
+  useful to add additional information about the server or process in the
+  logged message. For example: ``%s - Web Server 1 - %s`` will look like
+  ``error - Web Server 1 - An error occured in this request`` after
+  replacing the placeholders.
+* `prefix`: An string that will be prefixed to every logged message.
+* `flag`: An integer flag to be used for opening the connection to the
+  logger, by default `LOG_ODELAY` will be used. See `openlog` documentation
+  for more options
+* `facility`: The logging slot to use in syslog. By default `LOG_USER` is
+  used. See `syslog` documentation for more options
 
 .. _writing-to-logs:
 
