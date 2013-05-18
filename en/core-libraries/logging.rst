@@ -152,6 +152,44 @@ custom paths to be used::
         'path' => '/path/to/custom/place/'
     ));
 
+Logging to Syslog
+=================
+
+.. versionadded:: 2.4
+
+In production environments it is highly recomended that you setup your system to
+use syslog instead of the files logger. This will perform much better as any
+writes will be done in a (almost) non-bloking fashion and your operating  system
+logger can be configured separetly to rotate files, pre-process writes or use
+a completely different storage for your logs.
+
+Using syslog is pretty much like using the default FileLog engine, you just need
+to specify `SysloLog` as the engine to be used for logging. The following
+configuration snippet will replace the default logger with syslog, this should
+be done in the `bootstrap.php` file.
+
+::
+
+    CakeLog::config('default', array(
+        'engine' => 'SyslogLog'
+    ));
+
+The configuration array accepted for the Syslog logging engine understands the
+following keys:
+
+    * `format`: An sprintf template strings with two placeholders, the first one
+      for the error type, and the second for the message itself. This key is
+      useful to add additional information about the server or process in the
+      logged message. For example: ``%s - Web Server 1 - %s`` will look like
+      ``error - Web Server 1 - An error occured in this request`` after
+      replacing the placeholders.
+    * `prefix`: An string that will be prefixed to every logged message.
+    * `flag`: An integer flag to be used for opening the connection to the
+      logger, by default `LOG_ODELAY` will be used. See `openlog` documentation
+      for more options
+    * `facility`: The logging slot to use in syslog. By default `LOG_USER` is
+      used. See `syslog` documentation for more options
+
 .. _writing-to-logs:
 
 Writing to logs
@@ -206,15 +244,14 @@ message. For example::
     // configure tmp/logs/payments.log to receive all types, but only
     // those with `payments` scope
     CakeLog::config('payments', array(
-        'engine' => 'FileLog',
+        'engine' => 'SyslogLog',
         'types' => array('info', 'error', 'warning'),
-        'scopes' => array('payments'),
-        'file' => 'payments.log',
+        'scopes' => array('payments')
     ));
 
-    CakeLog::warning('this gets written only to shops.log', 'orders');
-    CakeLog::warning('this gets written to both shops.log and payments.log', 'payments');
-    CakeLog::warning('this gets written to both shops.log and payments.log', 'unknown');
+    CakeLog::warning('this gets written only to shops stream', 'orders');
+    CakeLog::warning('this gets written to both shops and payments streams', 'payments');
+    CakeLog::warning('this gets written to both shops and payments streams', 'unknown');
 
 In order for scopes to work correctly, you **must** define the accepted
 ``types`` on all loggers you want to use scopes with.
