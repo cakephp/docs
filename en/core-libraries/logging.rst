@@ -10,7 +10,7 @@ difficult.
 
 Logging can also be a way to find out what's been going on in your
 application over time. What search terms are being used? What sorts
-of errors are my users being shown? How often is a particular query
+of errors are my users being shown? How often is a particular querysepa
 being executed?
 
 Logging data in CakePHP is easy - the log() function is a part of
@@ -161,8 +161,8 @@ Logging to Syslog
 
 In production environments it is highly recomended that you setup your system to
 use syslog instead of the files logger. This will perform much better as any
-writes will be done in a (almost) non-bloking fashion and your operating  system
-logger can be configured separetly to rotate files, pre-process writes or use
+writes will be done in a (almost) non-blocking fashion and your operating  system
+logger can be configured separately to rotate files, pre-process writes or use
 a completely different storage for your logs.
 
 Using syslog is pretty much like using the default FileLog engine, you just need
