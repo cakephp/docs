@@ -10,7 +10,7 @@ difficult.
 
 Logging can also be a way to find out what's been going on in your
 application over time. What search terms are being used? What sorts
-of errors are my users being shown? How often is a particular querysepa
+of errors are my users being shown? How often is a particular query
 being executed?
 
 Logging data in CakePHP is easy - the log() function is a part of
@@ -159,7 +159,7 @@ Logging to Syslog
 
 .. versionadded:: 2.4
 
-In production environments it is highly recomended that you setup your system to
+In production environments it is highly recommended that you setup your system to
 use syslog instead of the files logger. This will perform much better as any
 writes will be done in a (almost) non-blocking fashion and your operating  system
 logger can be configured separately to rotate files, pre-process writes or use
@@ -183,7 +183,7 @@ following keys:
   for the error type, and the second for the message itself. This key is
   useful to add additional information about the server or process in the
   logged message. For example: ``%s - Web Server 1 - %s`` will look like
-  ``error - Web Server 1 - An error occured in this request`` after
+  ``error - Web Server 1 - An error occurred in this request`` after
   replacing the placeholders.
 * `prefix`: An string that will be prefixed to every logged message.
 * `flag`: An integer flag to be used for opening the connection to the
