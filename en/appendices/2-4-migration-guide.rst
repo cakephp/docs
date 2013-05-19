@@ -130,6 +130,10 @@ FileLog
 
 - Two new config options ``size`` and ``rotate`` have been added for :ref:`FileLog <file-log>` engine.
 
+SyslogLog
+---------
+
+- The new logging engine :ref:`SyslogLog <syslog-log>` was added to stream messages to syslog.
 
 Utility
 =======
