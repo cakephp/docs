@@ -37,7 +37,7 @@ Below some examples of using ``EmailComponent ($component)`` and now with
    ``$lib->addHeaders(array('X-Custom' => 'only my'));``
 -  From ``$component->send(null, 'template', 'layout');`` to
    ``$lib->template('template', 'layout')->send();``
--  From ``$component->delivery = 'smtp';`` to ``$lib->transport('smtp');``
+-  From ``$component->delivery = 'smtp';`` to ``$lib->transport('Smtp');``
 -  From ``$component->smtpOptions = array('host' => 'smtp.example.com');`` to
    ``$lib->config(array('host' => 'smtp.example.com'));``
 -  From ``$sent = $component->httpMessage;`` to
