@@ -10,8 +10,8 @@ repetitive things like typing in what could be hundreds of actions
 in a large application.
 
 For this purpose exists a very handy plugin available at github, called
-`AclExtras <https://github.com/markstory/acl_extras/tree/2.0>`_ which can
-be downloaded in `The Github Downloads page <https://github.com/markstory/acl_extras/zipball/2.0>`_.
+`AclExtras <https://github.com/markstory/acl_extras/>`_ which can
+be downloaded in `The Github Downloads page <https://github.com/markstory/acl_extras/zipball/master>`_.
 We're going to briefly describe how to use it to generate all our ACO's
 
 First grab a copy of the plugin and unzipped or clone it using git into
