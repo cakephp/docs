@@ -627,7 +627,7 @@ methods of the HtmlHelper and how to use them.
     ``$options['inline']`` to false to have the script block appear in
     the ``script`` view block. Other options defined will be added as attributes
     to script tags.
-    ``$this->html->scriptBlock('stuff', array('defer' => true));`` will
+    ``$this->Html->scriptBlock('stuff', array('defer' => true));`` will
     create a script tag with ``defer="defer"`` attribute.
 
 .. php:method:: scriptStart($options = array())
