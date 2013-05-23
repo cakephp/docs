@@ -624,7 +624,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     définies de ``$code`` a mettre à false pour voir le bloc de script
     apparaître dans le bloc de ``script`` de la vue. D'autre options définies
     seront ajoutée comme attributs dans les balises de script.
-    ``$this->html->scriptBlock('stuff', array('defer' => true));`` créera une
+    ``$this->Html->scriptBlock('stuff', array('defer' => true));`` créera une
     balise script avec l'attribut ``defer="defer"``.
 
 .. php:method:: scriptStart($options = array())

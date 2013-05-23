@@ -620,7 +620,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     ``$code`` を含めた <script> タグを生成します。
     ``$options['inline']`` を false 設定すると、コードブロックはビューブロックの
     ``script`` に置かれます。 そのほかのオプションは script タグの属性として追加されます。
-    たとえば、 ``$this->html->scriptBlock('stuff', array('defer' => true));`` とすると、
+    たとえば、 ``$this->Html->scriptBlock('stuff', array('defer' => true));`` とすると、
     ``defer="defer"`` という属性を持った script タグを生成します。
 
 .. php:method:: scriptStart($options = array())
