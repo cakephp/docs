@@ -7,9 +7,9 @@ ACOの作成を自動化するツール
 前述した通り、全てのコントローラとアクションをACLにあらかじめ入力し、構築しておく方法はありません。
 しかしながら、大きなアプリケーションにとてもたくさんのアクションがある場合、これを一々登録するというのは面倒です。
 
-この目的のために、 `AclExtras <https://github.com/markstory/acl_extras/tree/2.0>`_
+この目的のために、 `AclExtras <https://github.com/markstory/acl_extras/>`_
 という名のとても便利なプラグインが存在し、
-`Githubのダウンロードページ <https://github.com/markstory/acl_extras/zipball/2.0>`_ からダウンロードすることで、githubで入手することができます。
+`Githubのダウンロードページ <https://github.com/markstory/acl_extras/zipball/master>`_ からダウンロードすることで、githubで入手することができます。
 全てのACOを生成するための使用方法を簡単に説明しましょう。
 
 まず、プラグインのコピーを入手し、 `app/Plugin/AclExtras`
