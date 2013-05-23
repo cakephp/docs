@@ -1,44 +1,39 @@
-TimeHelper
+Timeヘルパー
 ##########
 
 .. php:class:: TimeHelper(View $view, array $settings = array())
 
-The Time Helper does what it says on the tin: saves you time. It
-allows for the quick processing of time related information. The
-Time Helper has two main tasks that it can perform:
+Time ヘルパーはメッキをかぶせることであなたの時間を節約します。
+Time ヘルパーには時間に関する情報を手早く処理するための2つの役割があります。
 
-#. It can format time strings.
-#. It can test time (but cannot bend time, sorry).
+#. 時間を形式にそって文字列にすることができます。
+#. 時間を調べることができます。ただし時間を変えることはできません。
 
 .. versionchanged:: 2.1
-   ``TimeHelper`` have been refactored into :php:class:`CakeTime` class to allow
-   easier use outside of the ``View`` layer.
-   Within a view, these methods are accessible via the `TimeHelper`
-   class and you can called it as you would call a normal helper method:
-   ``$this->Time->method($args);``.
+   ``TimeHelper`` は :php:class:`CakeTime` クラスに含まれるようにリファクタリングされました。
+   これにより、ビューの外からでもより簡単に使えるようになりました。
+   ビューで使う際は `TimeHelper` クラスからこれらのメソッドを使うことができます。
+   また、通常のヘルパーメソッドのように ``$this->Time->method($args);`` と
+   呼び出すこともできます。
 
-Using the Helper
+ヘルパーの使い方
 ================
 
-A common use of the Time Helper is to offset the date and time to match a
-user's time zone. Lets use a forum as an example. Your forum has many users who
-may post messages at any time from any part of the world. An easy way to
-manage the time is to save all dates and times as GMT+0 or UTC. Uncomment the
-line ``date_default_timezone_set('UTC');`` in ``app/Config/core.php`` to ensure
-your application's time zone is set to GMT+0.
+Time ヘルパーの基本的な使い道は、ユーザーのタイムゾーンにあった日時に時刻を調整することです。
+それでは掲示板を例にとりましょう。あなたの掲示板は世界各地からいろんな時間帯にたくさんのユーザーが
+メッセージを投稿します。時刻をGMT+0またはUTCで保存すると、投稿時刻を簡単に管理できるでしょう。
+あなたのアプリケーションで扱うタイムゾーンを確実にGMT+0へするために、 ``app/Config/core.php`` 
+の ``date_default_timezone_set('UTC');`` という記述のコメントアウトを解除します。
 
-Next add a time zone field to your users table and make the necessary
-modifications to allow your users to set their time zone. Now that we know
-the time zone of the logged in user we can correct the date and time on our
-posts using the Time Helper::
+次にタイムゾーンのフィールドをユーザーのテーブルに追加して、ユーザーがタイムゾーンを設定できるように必要な修正を加えます。これでログインしているユーザーのタイムゾーンが分かるようになり、 Time ヘルパーを使って投稿時刻を補正することができるようになりました。::
 
     echo $this->Time->format('F jS, Y h:i A', $post['Post']['created'], null, $user['User']['time_zone']);
-    // Will display August 22nd, 2011 11:53 PM for a user in GMT+0
-    // August 22nd, 2011 03:53 PM for a user in GMT-8
-    // and August 23rd, 2011 09:53 AM GMT+10
+    // GMT+0 での時刻が August 22nd, 2011 11:53 PMの場合、
+    // タイムゾーンが GMT-8 の場合は August 22nd, 2011 03:53 PM、
+    // GMT+10 の場合は August 23rd, 2011 09:53 AM が表示されます。
 
-Most of the Time Helper methods have a $timezone parameter. The $timezone parameter
-accepts a valid timezone identifier string or an instance of `DateTimeZone` class.
+Timeヘルパーのメソッドは多くが $timezone パラメーターを持っています。このパラメーターは
+タイムゾーンを表す文字列か、 `DateTimeZone` クラスのインスタンスを渡すことができます。
 
 .. include:: ../../core-utility-libraries/time.rst
     :start-after: start-caketime
