@@ -146,12 +146,12 @@ Formatage
     de la date par défaut pour le langage courant si un fichier LC_TIME est 
     utilisé.
 
-.. php:method:: nice($dateString = NULL, $userOffset = NULL)
+.. php:method:: nice($dateString = NULL, $timezone = NULL, $format = null)
 
     :rtype: string
 
     Prend une chaîne de date et la sort au format "Tue, Jan
-    1st 2008, 19:25"::
+    1st 2008, 19:25" ou avec le param optionnel ``$format``::
 
         // Appelé avec TimeHelper
         echo $this->Time->nice('2011-08-22 11:53:00');
