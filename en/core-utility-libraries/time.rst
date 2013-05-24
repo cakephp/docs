@@ -175,12 +175,12 @@ Formatting
     .. versionchanged:: 2.2
        ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
 
-.. php:method:: nice($dateString = NULL, $timezone = NULL)
+.. php:method:: nice($dateString = NULL, $timezone = NULL, $format = null)
 
     :rtype: string
 
     Takes a date string and outputs it in the format "Tue, Jan
-    1st 2008, 19:25"::
+    1st 2008, 19:25" or as per optional ``$format`` param passed::
 
         // called via TimeHelper
         echo $this->Time->nice('2011-08-22 11:53:00');
