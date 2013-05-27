@@ -99,6 +99,10 @@ keys.
 
   .. versionadded:: 2.2
 
+- ``passwordHasher`` Password hasher class. Defaults to ``Simple``.
+
+  .. versionadded:: 2.4
+
 To configure different fields for user in ``$components`` array::
 
     // Pass settings in $components array
@@ -187,7 +191,7 @@ Using Digest and Basic Authentication for logging in
 
 Because basic and digest authentication don't require an initial POST or a form
 so if using only basic / digest authenticators you don't require a login action
-in your controller. Also you can set `AuthComponent::$sessionKey` to false to
+in your controller. Also you can set ``AuthComponent::$sessionKey`` to false to
 ensure AuthComponent doesn't try to read user info from session. Stateless
 authentication will re-verify the user's credentials on each request, this creates
 a small amount of additional overhead, but allows clients that to login in without
@@ -197,7 +201,7 @@ using cookies.
 
   Prior to 2.4 you still need the login action as you are redirected to login
   when an unauthenticated user tries to access a protected page even when using
-  only basic or digest auth. Also setting `AuthComponent::$sessionKey` to false
+  only basic or digest auth. Also setting ``AuthComponent::$sessionKey`` to false
   will cause an error to 2.4.
 
 Creating Custom Authentication objects
@@ -309,6 +313,8 @@ for when authorization fails::
 
     $this->Auth->authError = "This error shows up with the user tries to access a part of the website that is protected.";
 
+.. _hashing-passwords:
+
 Hashing passwords
 -----------------
 
@@ -316,27 +322,67 @@ AuthComponent no longer automatically hashes every password it can find.
 This was removed because it made a number of common tasks like
 validation difficult.  You should **never** store plain text passwords,
 and before saving a user record you should always hash the password.
-You can use the static ``AuthComponent::password()`` to hash passwords
-before saving them.  This will use the configured hashing strategy for
-your application.
 
-After validating the password, you can hash a password in the beforeSave
-callback of your model::
+As of 2.4 the generation and checking of password hashes has been delegated to
+password hasher classes. Authenticating objects use a new setting ``passwordHasher``
+which specifies the password hasher class to use. It can be a string specifying class
+name or an array with key ``className`` stating the class name and any extra keys
+will be passed to password hasher constructor as config. The default hasher
+class ``Simple`` can be used for sha1, sha256, md5 hashing. By default the hash
+type set in Security class will be used. You can use specific hash type like this::
+
+    public $components = array(
+        'Auth' => array(
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => array(
+                        'className' => 'Simple',
+                        'hashType' => 'sha256'
+                    )
+                )
+            )
+        )
+    );
+
+When creating new user records you can hash a password in the beforeSave
+callback of your model using appropriate password hasher class::
+
+    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
     class User extends AppModel {
         public function beforeSave($options = array()) {
-            if (isset($this->data['User']['password'])) {
-                $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+            if (!$this->id) {
+                $passwordHasher = new SimplePasswordHasher();
+                $this->data['User']['password'] = $passwordHasher->hash($this->data['User']['password']);
             }
             return true;
         }
     }
 
 You don't need to hash passwords before calling ``$this->Auth->login()``.
-The various authentication objects will hash passwords individually. If
-you are using Digest authentication, you should not use
-AuthComponent::password() for generating passwords.  See below for how
-to generate digest hashes.
+The various authentication objects will hash passwords individually.
+
+Using bcrypt for passwords
+--------------------------
+
+In CakePHP 2.3 the ``BlowfishAuthenticate`` class was introduced to allow
+using `bcrypt <https://en.wikipedia.org/wiki/Bcrypt>`_ a.k.a Blowfish for hash passwords.
+Bcrypt hashes are much harder to brute force than passwords stored with sha1.
+But ``BlowfishAuthenticate`` has been deprecated in 2.4 and instead ``BlowfishPasswordHasher``
+has been added.
+
+A blowfish password hasher can be used with any authentication class. All you have
+to do with specify ``passwordHasher`` setting for the authenticating object::
+
+    public $components = array(
+        'Auth' => array(
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Blowfish'
+                )
+            )
+        )
+    );
 
 
 Hashing passwords for digest authentication
@@ -361,9 +407,7 @@ from the normal password hash::
     }
 
 Passwords for digest authentication need a bit more information than
-other password hashes, based on the RFC for digest authentication. If
-you use AuthComponent::password() for digest hashes you will not be able
-to login.
+other password hashes, based on the RFC for digest authentication.
 
 .. note::
 
@@ -373,46 +417,23 @@ to login.
     ``env('SCRIPT_NAME)``.  You may wish to use a static string if you
     want consistent hashes in multiple environments.
 
-Using bcrypt for passwords
---------------------------
+Creating custom password hasher classes
+---------------------------------------
+Custom password hasher classes need to extend the ``AbstractPasswordHasher``
+class and need to implement the abstract methods ``hash()`` and ``check()``.
+In ``app/Controller/Component/Auth/CustomPasswordHasher.php`` you could put
+the following::
 
-.. versionadded:: 2.3
+    App::uses('CustomPasswordHasher', 'Controller/Component/Auth');
 
-As of CakePHP 2.3.0 you can use `bcrypt <https://en.wikipedia.org/wiki/Bcrypt>`_
-a.k.a Blowfish to hash passwords. Bcrypt hashes are much harder to brute force
-than passwords stored with sha1. Even though the default hashing strategy is
-``sha`` - for backwards compatibility reasons. It is recommended that new
-applications use bcrypt for passwords. Bcrypt provides improved security.
-reasons. To use bcrpyt you'll need to enable the ``Blowfish`` authentication
-adapter::
-
-    public $components = array(
-        'Auth' => array(
-            'authenticate' => array(
-                'Blowfish' => array(
-                    'scope' => array('User.is_active' => true)
-                )
-            )
-        )
-    );
-
-Other than how passwords are hashed and stored ``BlowfishAuthenticate`` works
-the same as ``FormAuthenticate``, and supports all the same options. Instead of
-using :php:meth:`AuthComponent::password()` to generate password hashes you
-should use the following::
-
-    App::uses('Security', 'Utility');
-    class User extends AppModel {
-
-        public function beforeSave($options = array()) {
-            // Use bcrypt
-            if (isset($this->data['User']['password'])) {
-                $hash = Security::hash($this->data['User']['password'], 'blowfish');
-                $this->data['User']['password'] = $hash;
-            }
-            return true;
+    class CustomPasswordHasher extends AbstractPasswordHasher {
+        public function hash($password) {
+            // stuff here
         }
 
+        public function check($password, $hashedPassword) {
+            // stuff here
+        }
     }
 
 Manually logging users in
@@ -883,11 +904,11 @@ and authentication mechanics in CakePHP.
 
 .. php:staticmethod:: password($pass)
 
-    Hash a password with the application's salt value.
+.. deprecated:: 2.4
 
 .. php:method:: redirect($url = null)
 
-    Deprecated since 2.3. See :php:meth:`AuthComponent::redirectUrl()` for description.
+.. deprecated:: 2.3
 
 .. php:method:: redirectUrl($url = null)
 
