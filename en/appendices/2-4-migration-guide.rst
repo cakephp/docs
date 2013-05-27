@@ -44,6 +44,10 @@ AuthComponent
   to false. Also now when using only `Basic` or `Digest` you are no longer
   redirected to login page. For more info check the :php:class:`AuthComponent` page.
 
+PasswordHasher
+--------------
+- Authenticating objects now use new password hasher objects for password hash
+  generation and checking. See :ref:`hashing-passwords` for more info.
 
 Model
 =====
