@@ -175,10 +175,10 @@ de contenu corresponde à votre application.
 
 .. php:method:: setContent($name, $type = null)
 
-    -  $name string -Le nom du type de contenu (Content-type), par ex : 
+    :param string $name: Le nom du type de contenu (Content-type), par ex : 
         html, css, json, xml. 
     
-    -  $type mixed - Le(s) type(s) mime(s) auquel se réfère Content-type.
+    :param mixed $type: - Le(s) type(s) mime(s) auquel se réfère Content-type.
 
     setContent ajoute/définit les Content-types pour le nom précisé. 
     Permet aux content-types d'être associés à des alias simplifiés 

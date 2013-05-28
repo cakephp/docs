@@ -1596,7 +1596,7 @@ You can declare a set of default options for ``input()`` using
 :php:meth:`FormHelper::inputDefaults()`.  Changing the default options allows
 you to consolidate repeated options into a single method call::
 
-    echo $this->Form->inputDefaults(array(
+    $this->Form->inputDefaults(array(
             'label' => false,
             'div' => false,
             'class' => 'fancy'

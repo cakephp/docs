@@ -299,17 +299,52 @@ L'exemple ci-dessus définit deux règles pour le champ 'login': 'regleLogin-1'
 et 'regleLogin-2'. Comme vous pouvez le voir, chaque règle est identifiée avec 
 un nom arbitraire.
 
-Par défaut, CakePHP essaye de valider un champ en utilisant toutes les règles 
-de validation déclarées pour lui et renvoie le message d'erreur pour la 
-dernière règle qui n'est pas passée. Mais si la clé ``last`` est définie à 
-``true`` pour une règle et qu'elle ne passe pas, le message d'erreur pour 
-cette règle est retourné et les règles suivantes ne sont pas validées. Donc 
-si vous préférez voir le message d'erreur de la première règle qui ne passe 
-pas au lieu de la dernière, définissez ``'last' => true`` pour chaque règle.
+Quand vous utilisez des règles multiples par champ, les clés 'required' et
+'allowEmpty' doivent être utilisées seulement une fois dans la première règle.
 
-Quand vous utilisez des règles multiples par champ, les clés 
-'required' and 'allowEmpty' ont besoin d'être utilisées seulement une fois 
-dans la première règle.
+last
+-------
+
+Dans le cas de règles multiples par champ, si une des règles échoue, le message
+d'erreur pour cette règle va par défaut être retourné et les règles suivantes
+pour ce champ ne seront pas testées. Si vous voulez que la validation continue
+bien qu'une règle ait échouée, définissez la clé ``last`` à ``false`` pour
+cette règle.
+
+Dans l'exemple suivant, même si "rule1" échoue "rule2" va être testée
+et les messages d'erreur pour les deux règles ayant échoués seront retournées
+si "rule2" échoue aussi::
+
+    public $validate = array(
+        'login' => array(
+            'rule1' => array(
+                'rule'    => 'alphaNumeric',
+                'message' => 'Only alphabets and numbers allowed',
+                'last'    => false
+             ),
+            'rule2' => array(
+                'rule'    => array('minLength', 8),
+                'message' => 'Minimum length of 8 characters'
+            )
+        )
+    );
+
+Quand vous spécifiez des règles de validation dans ce tableau de formulaire, il
+est aussi possible d'éviter de fournir la clé ``message``. Regardez cette
+exemple::
+
+    public $validate = array(
+        'login' => array(
+            'Only alphabets and numbers allowed' => array(
+                'rule'    => 'alphaNumeric',
+             ),
+        )
+    );
+
+Si les règles de ``alphaNumeric`` échouent, la clé du tableau pour cette règle
+'Only alphabets and numbers allowed' sera retourné en message d'erreur si la
+clé ``message`` n'est pas définie.
+
 
 Règles personnalisées de validation des données
 ===============================================
@@ -413,6 +448,167 @@ stocké dans une variable de $this->data::
             return preg_match('|^[0-9a-zA-Z_-]*$|', $valeur);
         }
     }
+
+.. note::
+
+    Vos propres méthodes de validation doivent avoir une visibilité ``public``.
+    Les méthodes de Validation qui sont ``protected`` et ``private`` ne sont
+    pas supportées.
+
+Cette méthode devrait retourner ``true`` si la valeur est valide. Si la
+validation échoue, elle retourne ``false``. L'autre caleur de retour valide
+est une chaîne de caractères qui sera montrée en message d'erreur. Retourner
+une chaîne de caractères signifie que la validation a échoué. La chaîne de
+caractère va surcharger le message défini dans le tableau $validate et sera
+montré dans le formulaire de vue comme la raison pour laquelle le champ n'est
+pas valide.
+
+
+Changer dynamiquement les règles de validation
+==============================================
+
+Utiliser la propriété ``$validate`` pour déclarer les règles de validation est
+une bonne façon de définir des règles statiques pour chaque model. Néanmoins,
+il y a d'autres cas où vous voudrez ajouter, modifier ou retirer dynamiquement
+des règles de validation d'un ensemble pré-défini.
+
+Toutes les règles de validation sont stockées dans un objet ``ModelValidator``,
+qui contient chaque règle pour chaque champ définie dans votre model. Définir
+de nouvelles règles de validation est aussi facile que de dire à cet objet
+de stocker de nouvelles méthodes de validation pour les champs que vous
+souhaitez.
+
+
+Ajouter de nouvelles règles de validation
+-----------------------------------------
+
+.. versionadded:: 2.2
+
+Les objets ``ModelValidator`` permettent de nombreuses façons d'ajouter de
+nouveaux champs à définir. Le premier est l'utilisation de la méthode ``add``::
+
+    // Dans une classe de model
+    $this->validator()->add('password', 'required', array(
+        'rule' => 'notEmpty',
+        'required' => 'create'
+    ));
+
+Cela va ajouter une règle simple au champ `password` dans le model. Vous pouvez
+chainer plusieurs appels à ajouter pour créer autant de règles que vous
+souhaitez::
+
+    // Dans une classe de model
+    $this->validator()
+        ->add('password', 'required', array(
+            'rule' => 'notEmpty',
+            'required' => 'create'
+        ))
+        ->add('password', 'size', array(
+            'rule' => array('between', 8, 20),
+            'message' => 'Password should be at least 8 chars long'
+        ));
+
+Il est aussi possible d'ajouter des règles multiples en une fois pour un
+champ unique::
+
+    $this->validator()->add('password', array(
+        'required' => array(
+            'rule' => 'notEmpty',
+            'required' => 'create'
+        ),
+        'size' => array(
+            'rule' => array('between', 8, 20),
+            'message' => 'Password should be at least 8 chars long'
+        )
+    ));
+
+De façon alternative, vous pouvez utiliser l'objet validator pour définir
+les règles directement aux champs en utilisant l'interface de tableau::
+
+    $validator = $this->validator();
+    $validator['username'] = array(
+        'unique' => array(
+            'rule' => 'isUnique',
+            'required' => 'create'
+        ),
+        'alphanumeric' => array(
+            'rule' => 'alphanumeric'
+        )
+    );
+
+Modifier les règles de validation courantes
+-------------------------------------------
+
+.. versionadded:: 2.2
+
+Modifier les règles de validation courantes est aussi possible en utilisant
+l'objet validator, il y a plusieurs façons pour modifier les règles courantes,
+les méthodes d'ajout à un champ ou le retrait complet d'une règle à partir
+d'une règle définie d'un champ::
+
+    // Dans une classe de model
+    $this->validator()->getField('password')->setRule('required', array(
+        'rule' => 'required',
+        'required' => true
+    ));
+
+Vous pouvez aussi complètement remplacer toutes les règles pour un champ en
+utilisant une méthode similiare::
+
+    // Dans une classe de model
+    $this->validator()->getField('password')->setRules(array(
+        'required' => array(...),
+        'otherRule' => array(...)
+    ));
+
+Si vous souhaitez juste modifier une propriété unique dans une règle dans
+laquelle vous pouvez définir des propriétés directement dans l'objet
+``CakeValidationRule``::
+
+    // Dans une classe de model
+    $this->validator()->getField('password')
+        ->getRule('required')->message = 'This field cannot be left blank';
+
+Les propriétés dans toute ``CakeValidationRule`` sont nommées avec le tableau
+de clés valides que vous pouvez utiliser pour définir de telles règles en
+utilisant la propriété ``$validate`` dans le model.
+
+Comme avec l'ajout de nouvelle règle à l'ensemble, il est aussi possible de
+modifier les règles existantes en utilisant l'interface de tableau::
+
+    $validator = $this->validator();
+    $validator['username']['unique'] = array(
+        'rule' => 'isUnique',
+        'required' => 'create'
+    );
+
+    $validator['username']['unique']->last = true;
+    $validator['username']['unique']->message = 'Name already taken';
+
+
+Retirer des règles d'un ensemble
+--------------------------------
+
+.. versionadded:: 2.2
+
+Il est possible de retirer complètement toutes les règles pour un champ ou de
+supprimer une règle unique dans un ensemble de règles de champ::
+
+    // Retire complètement toutes les règles pour un champ
+    $this->validator()->remove('username');
+
+    // Retire la règle 'required' de password
+    $this->validator()->remove('password', 'required');
+
+De façon optionnelle, vous pouvez utiliser l'interface de tableau pour supprimer
+les règles à partir d'un ensemble::
+
+    $validator = $this->validator();
+    // Retire complètement toutes les règles pour un champ
+    unset($validator['username']);
+
+    // Retire la règle 'required' de password
+    unset($validator['password']['required']);
 
 .. _core-validation-rules:
 
@@ -702,6 +898,25 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
             )
         );
 
+.. php:staticmethod:: fileSize($check, $operator = null, $size = null)
+
+    Cette règle vous permet de vérifier les tailles de fichier. Vous pouvez
+    utiliser ``$operator`` pour décider du type de comparaison que vous
+    souhaitez utiliser. Tous les opérateurs supportés par
+    :php:func:`~Validation::comparison()` sont ici aussi supportés. Cette
+    méthode va gérer automatiquement les tableaux de valeur à partir de
+    ``$_FILES`` en lisant la clé ``tmp_name`` si ``$check`` est un tableau qui
+    contient cette clé::
+
+        public $validate = array(
+            'image' => array(
+                'rule' => array('fileSize', '<=', '1MB'),
+                'message' => 'L\'Image doit être inférieur à 1MB'
+            )
+        );
+
+    .. versionadded:: 2.3
+        Cette méthode a été ajoutée dans 2.3
 
 .. php:staticmethod:: inList(string $check, array $list)
 
@@ -774,11 +989,24 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     representation of the data". Be careful that it may be larger than
     the number of characters when handling non-ASCII characters.
 
+.. php:staticmethod:: mimeType(mixed $check, array $mimeTypes)
+
+    .. versionadded:: 2.2
+
+    Cette règle vérifie la validité d'un mimeType
+
+    ::
+
+        public $validate = array(
+            'image' => array(
+                'rule'    => array('mimeType', array('image/gif')),
+                'message' => 'Invalid mime type.'
+            ),
+        );
 
 .. php:staticmethod:: minLength(string $check, integer $min)
 
-    This rule ensures that the data meets a minimum length
-    requirement.
+    Cette règle s'assure que les données ont une obligation de longueur minimum.
 
     ::
 
@@ -819,7 +1047,7 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
         public $validate = array(
             'multiple' => array(
                 'rule' => array('multiple', array(
-                    'in'  => array('do', 'ray', 'me', 'fa', 'so', 'la', 'ti'),
+                    'in'  => array('do', 'ré', 'mi', 'fa', 'sol', 'la', 'si'),
                     'min' => 1,
                     'max' => 3
                 )),
@@ -854,6 +1082,26 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
             )
         );
 
+.. php:staticmethod:: naturalNumber(mixed $check, boolean $allowZero = false)
+
+    .. versionadded:: 2.2
+
+    Cette règle vérifie si une donnée passée est un nombre entier naturel
+    valide. Si ``$allowZero`` est défini à true, la valeur zero est aussi
+    acceptée.
+
+    ::
+
+        public $validate = array(
+            'wheels' => array(
+                'rule'    => 'naturalNumber',
+                'message' => 'Merci de fournir le nombre de pneus.'
+            ),
+            'airbags' => array(
+                'rule'    => array('naturalNumber', true),
+                'message' => 'Merci de remplir le nombre d'airbags.'
+            ),
+        );
 
 .. php:staticmethod:: phone(mixed $check, string $regex = null, string $country = 'all')
 
@@ -963,6 +1211,48 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
 
     Vérifie que la valeur est une valeur uuid valide: http://tools.ietf.org/html/rfc4122
 
+Localized Validation
+====================
+
+Les règles de validation phone() et postal() vont envoyer les 
+préfixes de pays qu'elles ne savent pas gérer à une autre classe avec le
+nom afférant. Par exemple si vous vivez aux Pays-Bas, vous pourriez créer une
+classe comme::
+
+    class NlValidation {
+        public static function phone($check) {
+            // ...
+        }
+        public static function postal($check) {
+            // ...
+        }
+    }
+
+Ce fichier pourra être placé dans ``APP/Validation/`` ou
+``App/PluginName/Validation/``, mais doit être importé via App::uses() avant
+tout tentative d'utilisation. Dans votre validation de model, vous pourrez
+utiliser votre classe NlValidation en faisant ce qui suit::
+
+    public $validate = array(
+        'phone_no' => array('rule' => array('phone', null, 'nl')),
+        'postal_code' => array('rule' => array('postal', null, 'nl')),
+    );
+
+Quand vos données de model sont validées, la Validation va voir qu'elle ne peut
+pas gérer la locale ``nl`` et va tenter de déléguer à
+``NlValidation::postal()`` et le retour de cette méthode va être utilisée comme
+réussite/echec pour la validation. Cette approche vous permet de créer des 
+classes qui gèrent un sous-ensemble ou groupe de locales, chose qu'un large
+switch ne pourrait pas faire. L'utilisation des méthodes de validation
+individuelle n'a pas changé, la possibilité de faire passer à un autre
+validateur a été ajouté.
+
+.. tip::
+
+    Le Plugin Localized contient déjà beaucoup de règles prêtes à être
+    utilisées: https://github.com/cakephp/localized
+    Aussi n'hésitez pas à contribuer aen donnant vos règles de validation
+    localisées.
 
 .. toctree::
 

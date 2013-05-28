@@ -431,10 +431,10 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     .. code-block:: php
 
-        <?php echo $this->Html->media('audio.mp4'); ?>
+        <?php echo $this->Html->media('audio.mp3'); ?>
 
         // 出力結果
-        <video src="/files/audio.mp3"></audio>
+        <audio src="/files/audio.mp3"></audio>
 
         <?php echo $this->Html->media('video.mp4', array(
             'fullBase' => true,
@@ -534,13 +534,16 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
         複数のファイルを指定する文字列の配列です。
     :param array $options: :term:`html attributes` の配列です。
 
-    URL で指定したローカルまたはリモートのスクリプトファイルをインクルードします。
-    $options の ``inline`` を false に設定すると、 script タグを head タグ内の 
-    ``script`` ブロックに追加することができます。 ``$options['once']`` の値を
-    操作することで、スクリプトをリクエストにつき1回のみインクルードするか、
-    またはそれ以上するかを制御できます。 ``$options['block']`` を指定することで、
-    script タグを追加するブロックを制御することができます。
-    これはいくつかのスクリプトをレイアウトの下部に置きたいときに有用でしょう。
+    ローカルファイルまたは URL で指定したリモートファイルをインクルードします。
+
+    デフォルトでは、ドキュメントのインラインに script タグが追加されます。
+    この動きは ``$options['inline']`` を false にすることで抑制することができ、
+    ドキュメント内にある他の ``script`` ブロック内に追加します。
+    もし、他のブロックへ出力したい場合は、 ``$options['block']`` を指定すると変更可能です。
+
+    ``$options['once']`` は、一回のリクエストで一度だけの読み込みにするか、
+    何度も読み込みをするかを制御します。デフォルトは true です。
+
 
     $options を使って、生成する script タグの属性を設定することができます。
     この設定は、配列を使ってファイルを指定した場合、
@@ -617,7 +620,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     ``$code`` を含めた <script> タグを生成します。
     ``$options['inline']`` を false 設定すると、コードブロックはビューブロックの
     ``script`` に置かれます。 そのほかのオプションは script タグの属性として追加されます。
-    たとえば、 ``$this->html->scriptBlock('stuff', array('defer' => true));`` とすると、
+    たとえば、 ``$this->Html->scriptBlock('stuff', array('defer' => true));`` とすると、
     ``defer="defer"`` という属性を持った script タグを生成します。
 
 .. php:method:: scriptStart($options = array())

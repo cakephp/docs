@@ -1600,7 +1600,7 @@ utilisant :php:meth:`FormHelper::inputDefaults()`. Changer les options par
 défaut vous permet de consolider les options répétées dans un appel à une 
 unique méthode::
 
-    echo $this->Form->inputDefaults(array(
+    $this->Form->inputDefaults(array(
             'label' => false,
             'div' => false,
             'class' => 'fancy'
@@ -1643,8 +1643,8 @@ Ceci assurera que les inputs  jeton spéciaux ``_Token`` seront générés.
 
 .. _form-improvements-1-3:
 
-mise à jour 2.0
-===============
+Mises à jour 2.0
+================
 
 **$selected parameter removed**
 
@@ -1678,6 +1678,7 @@ le second paramètre de ``$this->Form->create()``
 Les champs cachés n'enlève plus les attributs de classe. Cela 
 signifie que si il y a des erreurs de validation sur les champs
 cachés le nom de classe error-field sera appliqué.
+
 
 .. meta::
     :title lang=fr: FormHelper

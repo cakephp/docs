@@ -22,7 +22,7 @@ following::
 
 .. note::
 
-    Depending on your system's configuration, you make need to run the previous
+    Depending on your system's configuration, you may need to run the previous
     commands with ``sudo``
 
 Once PHPUnit is installed with the pear installer, you should confirm that the

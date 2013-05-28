@@ -14,13 +14,13 @@ données, etc.). Autrement, il fonctionne dans son propre espace, se comportant
 comme il l'aurait fait si il était une application à part entière.
 
 Installer un Plugin
--------------------
+===================
 
 Pour installer un plugin, commencez par simplement déplacer le dossier du 
 du plugin dans votre dossier app/Plugin. Si vous installez un plugin nommé 
 'ContactManager' alors vous devez avoir un dossier dans app/Plugin
 appelé 'ContactManager' dans lequel vous aurez les Vues, les Models, les 
-Controllers, webroot et tout autre répertoire de Plugin.
+Controllers, webroot et tout autre répertoire du Plugin.
 
 Nouveau dans CakePHP 2.0, les plugins ont besoin d'être chargés manuellement 
 dans app/Config/bootstrap.php.
@@ -32,9 +32,12 @@ Vous pouvez soit les charger un par un, soit tous d'un coup dans un seul appel::
 
 
 loadAll charge tous les plugins disponibles, bien que vous autorisant à 
-configurer certains paramètres pour des plugins spécifiques. load() fonctionne
-de la même manière, mais charge seulement les plugins que vous avez 
+configurer certains paramètres pour des plugins spécifiques. ``load()``
+fonctionne de la même manière, mais charge seulement les plugins que vous avez 
 explicitement spécifiés.
+
+Configuration du Plugin
+=======================
 
 Vous pouvez faire beaucoup de choses avec les méthodes load et loadAll pour 
 vous aider avec la configuration et le routing d'un plugin. Peut-être 
@@ -82,8 +85,38 @@ La plupart des plugins indiqueront dans leur documentation leur propre
 procédure pour les configurer et configurer la base de données. Certains 
 plugins nécessiteront plus de configuration que d'autres.
 
+Aller plus loin avec le bootstrapping
+=====================================
+
+Si vous souhaitez charger plus d'un fichier bootstrap pour un plugin. Vous
+pouvez spécifier un tableau de fichiers avec la clé de configuration
+bootstrap::
+
+    CakePlugin::loadAll(array(
+        'Blog' => array(
+            'bootstrap' => array(
+                'config1',
+                'config2'
+            )
+        )
+    ));
+
+Vous pouvez aussi spécifier une fonction qui pourra être appelée quand le
+plugin est chargé::
+
+
+    function aCallableFunction($pluginName, $config) {
+        
+    }
+
+    CakePlugin::loadAll(array(
+        'Blog' => array(
+            'bootstrap' => 'aCallableFunction'
+        )
+    ));
+
 Utiliser un Plugin
-------------------
+==================
 
 Vous pouvez référencer les controllers, models, components, behaviors et 
 helpers du plugin en préfixant le nom du plugin avant le nom de classe.
@@ -102,7 +135,7 @@ helper dans votre vue, comme ceci::
 
 
 Créer Vos Propres Plugins
--------------------------
+=========================
 
 En exemple de travail, commençons par créer le plugin ContactManager 
 référencé ci-dessus. Pour commencer, nous allons configurer votre structure 
@@ -172,7 +205,7 @@ problème avec l'utilisation de la ligne de commande.
 
 
 Controllers du Plugin
----------------------
+=====================
 
 Les controllers pour notre plugin ContactManager seront stockés dans 
 /app/Plugin/ContactManager/Controller/. Puisque la principale chose que 
@@ -213,7 +246,7 @@ parce que nous n'avons pas un model Contact déjà défini.
 .. _plugin-models:
 
 Models du Plugin
-----------------
+================
 
 Les Models pour le plugin sont stockés dans /app/Plugin/ContactManager/Model.
 Nous avons déjà défini un ContactsController pour ce plugin, donc créons le 
@@ -254,7 +287,7 @@ le préfixe du plugin sur eux, utilisez la syntaxe alternative::
     }
 
 Vues du Plugin
---------------
+==============
 
 Les Vues se comportent exactement comme elles le font dans les applications 
 normales. Placez les juste dans le bon dossier à l'intérieur du dossier 
@@ -273,7 +306,7 @@ ceci aussi::
     plugin, regardez :ref:`view-elements`
 
 Redéfinition des vues de plugin à partir de l'intérieur de votre application
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------------------------------------------------
 
 Vous pouvez redéfinir toutes les vues du plugin à partir de l'intérieur de 
 votre app en utilisant des chemins spéciaux. Si vous avez un plugin appelé 
@@ -292,7 +325,7 @@ Créer ce fichier vous permettra de redéfinir
 
 
 Plugin assets
--------------
+=============
 
 Les assets web du plugin (mais pas les fichiers de PHP) peuvent être servis 
 à travers le répertoire 'webroot' du plugin, juste comme les assets de 
@@ -307,7 +340,7 @@ l'application principale::
 
 Vous pouvez mettre tout type de fichier dans tout répertoire, juste comme 
 un webroot habituel. La seule restriction est que ``MediaView`` a besoin de 
-savoir le mime-type de cet asset.
+connaître le mime-type de cet asset.
 
 Mais garder à l'esprit que la gestion des assets statiques, comme les images, 
 le Javascript et les fichiers CSS des plugins à travers le Dispatcher est 
@@ -318,7 +351,7 @@ Par exemple comme ceci::
     ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
 
 Lier aux plugins
-~~~~~~~~~~~~~~~~
+----------------
 
 Faîtes précéder simplement /nom_plugin/ pour le début d'une requête pour 
 un asset dans ce plugin, et cela fonctionnera si l'asset était dans le 
@@ -333,9 +366,14 @@ servirait l'asset
     Il est important de noter que le préfixe de **/votre_plugin/** avant le 
     chemin de asset. Et la magie opére!
 
+.. versionchanged:: 2.1
+    Utilisez :term:`plugin syntax` pour accéder aux assets. Par exemple dasn
+    votre View:
+    <?php echo $this->Html->css("ContactManager.style"); ?>
+
 
 Components, Helpers et Behaviors
----------------------------------
+================================
 
 Un plugin peut avoir des Components, Helpers et Behaviors tout comme un 
 une appplication CakePHP classique. Vous pouvez soit créer des plugins 
@@ -370,7 +408,7 @@ La même technique s'applique aux Helpers et aux Behaviors.
         App::uses('AppHelper', 'View/Helper');
 
 Etendez votre Plugin
---------------------
+====================
 
 Cet exemple est un bon début pour un plugin, mais il y a beaucoup plus 
 à faire. En règle général, tout ce que vous pouvez faire avec votre 
@@ -390,7 +428,7 @@ avec la communauté afin que tout le monde puisse bénéficier de votre
 component génial et réutilisable!
 
 Astuces pour les Plugins
-------------------------
+========================
 
 Une fois qu'un plugin a été installé dans /app/Plugin, vous pouvez y accéder 
 à l'URL /nom_plugin/nom_controller/action. Dans notre exemple de plugin 

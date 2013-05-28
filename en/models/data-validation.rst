@@ -887,7 +887,7 @@ with usage examples.
 
         public $validate = array(
             'image' => array(
-                'rule' => array('filesize', '<=', '1MB'),
+                'rule' => array('fileSize', '<=', '1MB'),
                 'message' => 'Image must be less than 1MB'
             )
         );
@@ -1027,7 +1027,7 @@ with usage examples.
         public $validate = array(
             'multiple' => array(
                 'rule' => array('multiple', array(
-                    'in'  => array('do', 'ray', 'me', 'fa', 'so', 'la', 'ti'),
+                    'in'  => array('do', 're', 'mi', 'fa', 'sol', 'la', 'ti'),
                     'min' => 1,
                     'max' => 3
                 )),

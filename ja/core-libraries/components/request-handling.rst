@@ -445,7 +445,7 @@ JsonView/XmlView を利用する場合、カスタムビュークラスの優先
     :param string|array $type: タイプ名の文字列または配列 ``array('json' => 'MyJson')`` のフォーマット
     :param string $viewClass: ``View`` を取り除いたビュークラス名
 
- ``viewClassMap`` を使って、自動的にセットすることも可能です。 ::
+``viewClassMap`` を使って、自動的にセットすることも可能です。 ::
 
     public $components = array(
         'RequestHandler' => array(

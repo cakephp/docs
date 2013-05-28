@@ -118,9 +118,26 @@ permettront de rendre cake executable dans votre système path.
 #. Rechargez la configuration bash ou ouvrez un nouveau terminal, et 
    ``cake`` devrait fonctionner n'importe où.
 
-.. todo::
+Si vous êtes sur Windows Vista ou 7, vous devrez suivre les étapes suivantes.
 
-    Ajoutez comment configurer PATH pour les systèmes windows.
+#. Localisez l'emplacement où se trouvent votre installation CakePHP et
+   l'executable cake. Par exemple
+   ``C:\xampp\htdocs\cakephp\lib\Cake\Console``
+#. Ouvrez la fenêtre des propriétés du Système de votre ordinateur. Vous
+   essaierez le raccourci clavier Windows Key + Pause ou Windows Key + Break.
+   Ou, à partir du Bureau, faîtes un click droit sur Mon Ordinateur, clickez
+   sur Propriétés et clickez sur le lien Paramètres avancés du système dans la
+   colonne de gauche.
+#. Allez sous l'onglet Avancé et clickez sur le bouton des Variables
+   d'Environnement.
+#. Dans la portion des Variables Sytèmes, cherchez le chemin de la variable
+   et double-clickez dessus pour la modifier.
+#. Ajoutez le chemin de l'installation de ``cake`` suivi par un point virgule.
+   On pourrait avoir par exemple::
+
+    %SystemRoot%\system32;%SystemRoot%;C:\xampp\htdocs\cakephp\lib\Cake\Console;
+
+#. Clickez Ok et ``cake`` devrait fonctionner partout.
 
 Créer un shell
 ==============
@@ -447,8 +464,9 @@ methods for easily setting multiple options/arguments at once.::
 Configurer un option parser avec l'interface courante
 -----------------------------------------------------
 
-All of the methods that configure an option parser can be chained, 
-allowing you to define an entire option parser in one series of method calls::
+Toutes les méthodes utilisées pour configurer le parser peuvent
+être chainées, vous permettant de définir l'intégralité des options du
+parser en une unique série d'appel de méthodes::
 
     $parser->addArgument('type', array(
         'help' => 'Either a full path or type of class.'
@@ -459,7 +477,7 @@ allowing you to define an entire option parser in one series of method calls::
         'help' => __('The specific method you want help on.')
     ))->description(__('Lookup doc block comments for classes in CakePHP.'));
 
-The methods that allow chaining are:
+Les méthodes autorisant le chaining sont:
 
 - description()
 - epilog()
@@ -754,17 +772,17 @@ This would get you the help specific to bake's model task.
 Obtenir de l'aide en XML
 ------------------------
 
-When building automated tools or development tools that need to interact 
-with CakePHP shells, its nice to have help available in a machine parse-able 
-format.  The ConsoleOptionParser can provide help in xml by setting an 
-additional argument::
+Lorsque vous réalisez des outils d'automatisation ou de développement qui
+ont besoin d'interagir avec les shells de CakePHP, il est appréciable d'obtenir
+de l'aide dans un format parsable par une machine. ConsoleOptionParser peut
+fournir de l'aide au format XML en définissant un argument supplémentaire::
 
     cake bake --help xml
     cake bake -h xml
 
-The above would return an XML document with the generated help, options, 
-arguments and subcommands for the selected shell.  A sample XML document 
-would look like:
+Les commandes ci-dessus vont retourner un document XML contenant de l'aide
+à propos des options, arguments et sous-commandes du shell selectionné. Voici 
+un exemple de documentation:
 
 .. code-block:: xml
 

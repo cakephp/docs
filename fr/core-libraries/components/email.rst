@@ -40,7 +40,7 @@ Ci dessous quelques exemples d'utilisation du composant Email
    ``$lib->addHeaders(array('X-Custom' => 'only my'));``
 -  From ``$component->send(null, 'template', 'layout');`` to
    ``$lib->template('template', 'layout')->send();``
--  From ``$component->delivery = 'smtp';`` to ``$lib->transport('smtp');``
+-  From ``$component->delivery = 'smtp';`` to ``$lib->transport('Smtp');``
 -  From ``$component->smtpOptions = array('host' => 'smtp.exemple.com');`` to
    ``$lib->config(array('host' => 'smtp.exemple.com'));``
 -  From ``$sent = $component->httpMessage;`` to

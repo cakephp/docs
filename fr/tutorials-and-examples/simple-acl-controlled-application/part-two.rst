@@ -10,9 +10,9 @@ choses répétitives comme faire ce qui pourrait être des centaines d'actions
 dans une grande application.
 
 Pour cela, il existe un plugin disponible très branché sur github, appelé 
-`AclExtras <https://github.com/markstory/acl_extras/tree/2.0>`_ qui peut être 
+`AclExtras <https://github.com/markstory/acl_extras/>`_ qui peut être 
 téléchargé sur 
-`La page de Téléchargements de Github <https://github.com/markstory/acl_extras/zipball/2.0>`_.
+`La page de Téléchargements de Github <https://github.com/markstory/acl_extras/zipball/master>`_.
 Nous allons décrire brièvement la façon dont on l'utilise pour générer 
 tous nos ACOs.
 
