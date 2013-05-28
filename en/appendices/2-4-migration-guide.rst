@@ -7,6 +7,9 @@ the changes and improvements made in 2.4.
 Console
 =======
 
+- Logged notice messages will now be colourized in terminals that support
+  colours.
+
 SchemaShell
 -----------
 
