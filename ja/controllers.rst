@@ -11,7 +11,7 @@
 CakePHPでは、主に操作するモデルにちなんで、コントローラの名前が付けられます。
 コントローラは複数のモデルを扱う場合でも、問題なく動作します。
 
-アプリケーションのコントローラは ``AppController`` クラスを拡張し、そしてそれは :php:class:`Controller` クラスを拡張しています。
+アプリケーションのコントローラは ``AppController`` クラスを継承し、そしてそれは :php:class:`Controller` クラスを継承しています。
 AppControllerクラスは ``/app/Controller/AppController.php`` に定義し、アプリケーションのコントローラ全体で共有されるメソッドを含めるようにしましょう。
 
 コントローラは *アクション* と呼ばれるいくつかのメソッドを提供します。
@@ -27,7 +27,7 @@ AppController
 =============
 
 冒頭で述べたように、AppControllerクラスはアプリケーションのすべてのコントローラの親クラスとなります。
-AppControllerはそれ自身、CakePHPのコアライブラリに含まれるControllerクラスを拡張しています。
+AppControllerはそれ自身、CakePHPのコアライブラリに含まれるControllerクラスを継承しています。
 AppControllerは ``/app/Controller/AppController.php`` に次のように定義されます。::
 
     class AppController extends Controller {

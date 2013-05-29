@@ -12,14 +12,14 @@ sure it doesn't have any leaks. Check the :doc:`/core-libraries/components/secur
 CSRF attacks, form field tampering, and others. Doing :doc:`/models/data-validation`, and/or 
 :doc:`/core-utility-libraries/sanitize` is also a great idea, for protecting your
 database and also against XSS attacks. Check that only your ``webroot`` directory 
-should be publicly visible, and that your secrets (such as your app salt, and
+is publicly visible, and that your secrets (such as your app salt, and
 any security keys) are private and unique as well!
 
 Set document root
 =================
 
 Setting the document root correctly on your application is an important step to
-keeping your code secure and your application safer. CakePHP applications,
+keeping your code secure and your application safer. CakePHP applications
 should have the document root set to the application's ``app/webroot``.  This
 makes the application and configuration files inaccessible through a URL.
 Setting the document root is different for different webservers.  See the
@@ -31,7 +31,7 @@ Update core.php
 
 Updating core.php, specifically the value of ``debug`` is extremely important.
 Turning debug = 0 disables a number of development features that should never be
-exposed to internet at large.  Disabling debug changes the following types of
+exposed to the Internet at large. Disabling debug changes the following types of
 things:
 
 * Debug messages, created with :php:func:`pr()` and :php:func:`debug()` are
@@ -55,7 +55,7 @@ CakePHP core.  You can either use PHP's ``include_path`` or set the
 Generally using PHP's ``include_path`` is easier and more robust.  CakePHP comes
 preconfigured to look on the ``include_path`` as well so it's simple to use.
 
-In your ``php.ini`` file locate the existing ``include_path`` directive, and
+In your ``php.ini`` file, locate the existing ``include_path`` directive, and
 either append to it or add an ``include_path`` directive::
 
     include_path = '.:/usr/share/php:/usr/share/cakephp-2.0/lib'
@@ -63,6 +63,14 @@ either append to it or add an ``include_path`` directive::
 This assumes you are running a \*nix server, and have CakePHP in
 ``/usr/share/cakephp-2.0``.
 
+Improve your application's performance
+======================================
+
+Since handling static assets, such as images, JavaScript and CSS files of plugins,
+through the Dispatcher is incredibly inefficient, it is strongly recommended to symlink
+them for production. For example like this::
+
+    ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
 
 .. meta::
     :title lang=en: Deployment

@@ -42,13 +42,13 @@ CakePHP имеет MIT лицензию. Это значит, что вы име
 git-репозитория.
 
 Чтобы скачать последний релиз CakePHP, посетите официальный сайт
-`http://www.cakephp.org <http://www.cakephp.org>`_ и
+`http://cakephp.org <http://cakephp.org>`_ и
 нажмите ссылку "Download".
 
 Все текущие релизы CakePHP размещены на 
 `Github <http://github.com/cakephp/cakephp>`_, так же, как и
 многие плагины для CakePHP. Релизы CakePHP доступны в
-`Github downloads <http://github.com/cakephp/cakephp/downloads>`_.
+`Github tags <https://github.com/cakephp/cakephp/tags>`_.
 
 К тому же вы можете получить самую последнюю версию кода с помощью
 клонирования репозитория на `Github`_ ::

@@ -744,16 +744,20 @@ with usage examples.
     used to check the format of the supplied date. The value of the
     parameter can be one of the following:
 
-    -  ‘dmy’ e.g. 27-12-2006 or 27-12-06 (separators can be a space,
+    -  'dmy' e.g. 27-12-2006 or 27-12-06 (separators can be a space,
        period, dash, forward slash)
-    -  ‘mdy’ e.g. 12-27-2006 or 12-27-06 (separators can be a space,
+    -  'mdy' e.g. 12-27-2006 or 12-27-06 (separators can be a space,
        period, dash, forward slash)
-    -  ‘ymd’ e.g. 2006-12-27 or 06-12-27 (separators can be a space,
+    -  'ymd' e.g. 2006-12-27 or 06-12-27 (separators can be a space,
        period, dash, forward slash)
-    -  ‘dMy’ e.g. 27 December 2006 or 27 Dec 2006
-    -  ‘Mdy’ e.g. December 27, 2006 or Dec 27, 2006 (comma is optional)
-    -  ‘My’ e.g. (December 2006 or Dec 2006)
-    -  ‘my’ e.g. 12/2006 or 12/06 (separators can be a space, period,
+    -  'dMy' e.g. 27 December 2006 or 27 Dec 2006
+    -  'Mdy' e.g. December 27, 2006 or Dec 27, 2006 (comma is optional)
+    -  'My' e.g. (December 2006 or Dec 2006)
+    -  'my' e.g. 12/2006 or 12/06 (separators can be a space, period,
+       dash, forward slash)
+    -  'ym' e.g. 2006/12 or 06/12 (separators can be a space, period,
+       dash, forward slash)
+    -  'y' e.g. 2006 (separators can be a space, period,
        dash, forward slash)
 
     If no keys are supplied, the default key that will be used is
@@ -772,6 +776,9 @@ with usage examples.
     formats and trying to convert them, rather than forcing users to
     supply a given format. The more work you can do for your users, the
     better.
+
+    .. versionchanged:: 2.4
+        The ``ym`` and ``y`` formats were added.
 
 
 .. php:staticmethod:: datetime(array $check, mixed $dateFormat = 'ymd', string $regex = null)
@@ -880,7 +887,7 @@ with usage examples.
 
         public $validate = array(
             'image' => array(
-                'rule' => array('filesize', '<=', '1MB'),
+                'rule' => array('fileSize', '<=', '1MB'),
                 'message' => 'Image must be less than 1MB'
             )
         );
@@ -921,7 +928,7 @@ with usage examples.
         );
 
 
-.. php:staticmethod:: isUnique()
+.. php:method:: Model::isUnique()
 
     The data for the field must be unique, it cannot be used by any
     other rows.
@@ -1020,7 +1027,7 @@ with usage examples.
         public $validate = array(
             'multiple' => array(
                 'rule' => array('multiple', array(
-                    'in'  => array('do', 'ray', 'me', 'fa', 'so', 'la', 'ti'),
+                    'in'  => array('do', 're', 'mi', 'fa', 'sol', 'la', 'ti'),
                     'min' => 1,
                     'max' => 3
                 )),

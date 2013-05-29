@@ -440,6 +440,8 @@ to send a file as response::
     public function sendFile($id) {
         $file = $this->Attachment->getFile($id);
         $this->response->file($file['path']);
+        //Return reponse object to prevent controller from trying to render a view
+        return $this->response;
     }
 
 As shown in above example as expected you have to pass the file path to the method.
@@ -751,6 +753,12 @@ CakeResponse API
 
     .. versionadded:: 2.3
 
+.. php:method:: param($name)
+
+    Safely read values in ``$request->params``. This removes the need to call
+    ``isset()`` or ``empty()`` before using param values.
+
+    .. versionadded:: 2.4
 
 .. meta::
     :title lang=en: Request and Response objects

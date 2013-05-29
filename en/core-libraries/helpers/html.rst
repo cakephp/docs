@@ -66,12 +66,12 @@ methods of the HtmlHelper and how to use them.
 
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-.. php:method:: css(mixed $path, string $rel = null, array $options = array())
+.. php:method:: css(mixed $path, array $options = array())
+
+    .. versionchanged:: 2.4
 
     :param mixed $path: Either a string of the css file to link, or an array with multiple files
-    :param string $rel: The value of the generated tag's rel attribute.  If null, 'stylesheet'
-       will be used.
-    :param array $options: An array of :term:`html attributes`.
+    :param array $options: An array of options or :term:`html attributes`.
 
     Creates a link(s) to a CSS style-sheet. If key 'inline' is set to
     false in ``$options`` parameter, the link tags are added to the
@@ -81,8 +81,10 @@ methods of the HtmlHelper and how to use them.
     You can use the ``block`` option to control which block the link element
     will be appended to.  By default it will append to the ``css`` block.
 
+    If key 'rel' in ``$options`` array is set to 'import' the stylesheet will be imported.
+
     This method of CSS inclusion assumes that the CSS file specified
-    resides inside the /app/webroot/css directory.::
+    resides inside the /app/webroot/css directory if path doesn't start with a '/'.::
 
         echo $this->Html->css('forms');
 
@@ -435,10 +437,10 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: php
 
-        <?php echo $this->Html->media('audio.mp4'); ?>
+        <?php echo $this->Html->media('audio.mp3'); ?>
 
         // Output
-        <video src="/files/audio.mp3"></audio>
+        <audio src="/files/audio.mp3"></audio>
 
         <?php echo $this->Html->media('video.mp4', array(
             'fullBase' => true,
@@ -538,13 +540,17 @@ methods of the HtmlHelper and how to use them.
        array of strings for multiple files.
     :param array $options: An array of :term:`html attributes`.
 
-    Include a script file(s), contained either locally or as a remote url. If key ``inline`` is set to false in $options, the
-    script tags are added to the ``script`` block which you can print inside the
-    head tag of the document. ``$options['once']`` controls, whether or
+    Include a script file(s), contained either locally or as a remote url.
+
+    By default, script tags are added to the document inline.  If you override
+    this by setting ``$options['inline']`` to false, the script tags will instead
+    be added to the ``script`` block which you can print elsewhere in the document.
+    If you wish to override which block name is used, you can do so by setting
+    ``$options['block']``.
+
+    ``$options['once']`` controls whether or
     not you want to include this script once per request or more than
-    once. ``$options['block']`` allows you to control which block the script tag
-    is appended to.  This is useful when you want to place some scripts at the
-    bottom of the layout.
+    once. This defaults to true.
 
     You can use $options to set additional properties to the
     generated script tag. If an array of script tags is used, the
@@ -623,7 +629,7 @@ methods of the HtmlHelper and how to use them.
     ``$options['inline']`` to false to have the script block appear in
     the ``script`` view block. Other options defined will be added as attributes
     to script tags.
-    ``$this->html->scriptBlock('stuff', array('defer' => true));`` will
+    ``$this->Html->scriptBlock('stuff', array('defer' => true));`` will
     create a script tag with ``defer="defer"`` attribute.
 
 .. php:method:: scriptStart($options = array())

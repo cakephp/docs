@@ -17,9 +17,9 @@ plus extensible offrant aux développeurs la puissance et la
 la flexibilité dont ils ont besoin pour répondre à leurs besoins spécifiques.
 
 Les moteurs Javascript forment l'épine dorsale du nouveau Helper Js.
-Um moteur javascript traduit un élément Javascript abstrait dans
+Un moteur javascript traduit un élément Javascript abstrait dans
 un code javascript concret spécifique à la librairie en cours 
-d'utilisation. De plus ils crées un système extensible à utiliser
+d'utilisation. De plus ils créent un système extensible à utiliser
 pour les autres.
 
 Utilisation d'un moteur Javascript spécifique
@@ -62,8 +62,8 @@ mais nous encourageons la communauté à étendre la compatibilité
 de librairie. 
 
 
-Utilisation de jQuery avec d'autre librairies
----------------------------------------------
+Utilisation de jQuery avec d'autres librairies
+----------------------------------------------
 
 La librairie jQuery, et virtuellement tous ses plugins sont limités
 au sein de l'espace jQuery. Comme règle générale, les objets

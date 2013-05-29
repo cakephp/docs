@@ -87,7 +87,7 @@ also just load an array of configs::
     //or in constructor::
     $email = new Email(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
 
-You can configure SSL SMTP servers, like GMail. To do so, put the ``'ssl://'``
+You can configure SSL SMTP servers, like Gmail. To do so, put the ``'ssl://'``
 at prefix in the host and configure the port value accordingly.  Example::
 
     use Cake\Core\Configure;
@@ -231,7 +231,7 @@ You can use helpers in emails as well, much like you can in normal view files.
 By default only the :php:class:`HtmlHelper` is loaded.  You can load additional
 helpers using the ``helpers()`` method::
 
-    $email->helpers(array('Html', 'Custom', 'Text'));
+    $Email->helpers(array('Html', 'Custom', 'Text'));
 
 When setting helpers be sure to include 'Html' or it will be removed from the
 helpers loaded in your email template.
@@ -265,17 +265,17 @@ You can attach files to email messages as well.  There are a few
 different formats depending on what kind of files you have, and how
 you want the filenames to appear in the recipient's mail client:
 
-1. String: ``$email->attachments('/full/file/path/file.png')`` will attach this
+1. String: ``$Email->attachments('/full/file/path/file.png')`` will attach this
    file with the name file.png.
-2. Array: ``$email->attachments(array('/full/file/path/file.png')`` will have
+2. Array: ``$Email->attachments(array('/full/file/path/file.png')`` will have
    the same behavior as using a string.
 3. Array with key:
-   ``$email->attachments(array('photo.png' => '/full/some_hash.png'))`` will
+   ``$Email->attachments(array('photo.png' => '/full/some_hash.png'))`` will
    attach some_hash.png with the name photo.png. The recipient will see
    photo.png, not some_hash.png.
 4. Nested arrays::
 
-    $email->attachments(array(
+    $Email->attachments(array(
         'photo.png' => array(
             'file' => '/full/some_hash.png',
             'mimetype' => 'image/png',
@@ -330,9 +330,9 @@ If you need to call additional methods on the transport before send, you can use
 :php:meth:`Cake\\Network\\Email\\Email::transportClass()` to get an instance of the transport.
 Example::
 
-    $yourInstance = $email->transport('your')->transportClass();
+    $yourInstance = $Email->transport('your')->transportClass();
     $yourInstance->myCustomMethod();
-    $email->send();
+    $Email->send();
 
 
 Sending messages quickly
@@ -377,7 +377,7 @@ When sending emails within a CLI script (Shells, Tasks, ...) you should manually
 set the domain name for CakeEmail to use. It will serve as the host name for the
 message id (since there is no host name in a CLI environment)::
 
-    $email->domain('www.example.org');
+    $Email->domain('www.example.org');
     // Results in message ids like ``<UUID@www.example.org>`` (valid)
     // instead of `<UUID@>`` (invalid)
 

@@ -8,14 +8,13 @@ mais les fonctionnalités d'internationalisation et de
 localisation dans CalePHP rendront cela plus facile.
 
 D'abord il est important de comprendre quelques terminologies.
-*Internationalisation* ce réfère a la possibilité qu'a une
-application pour répondre au besoin d'une langue (ou culture) 
-spécifique.
-Le terme *localisation* se réfère  a la possibilité qu'a une
-application à être localisée. L'internationalisation et la 
-localisation sont abrégées comme i18n et l10n respectivement;
-18 et 10 sont le nombre de caractères entre le premier et le
-dernier caractère.
+*Internationalisation* se réfère a la possibilité qu'a une
+application d'être localisée.Le terme *localisation* se réfère 
+à l'adaptation qu'a une application pour répondre aux besoins 
+d'une langue (ou culture) spécifique (par ex: un "locale"). 
+L'internationalisation et la localisation sont souvent abrégées 
+en respectivement i18n et l10n; 18 et 10 sont le nombre de caractères 
+entre le premier et le dernier caractère.
 
 Internationaliser Votre Application
 ===================================
@@ -65,7 +64,7 @@ Le domaine par défaut est 'default', donc votre dossier "locale"
 devrait ressembler à cela ::
 
     /app/Locale/eng/LC_MESSAGES/default.po (Anglais)   
-    /app/Locale/fre/LC_MESSAGES/default.po (Français)   
+    /app/Locale/fra/LC_MESSAGES/default.po (Français)   
     /app/Locale/por/LC_MESSAGES/default.po (Portugais) 
 
 Pour créer ou éditer vos fichiers po, il est recommandé de ne pas 
@@ -91,12 +90,11 @@ Si vous pensez que vous aurez à traduire de longs paragraphes,
 ou des pages entières, vous devriez penser à l'implémentation 
 d'une solution différente. Par ex ::
 
-
-    // // Code du fichier App Controller.
+    // Code du fichier App Controller.
     public function beforeFilter() {
         $locale = Configure::read('Config.language');
         if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath)) {
-            // utilise /app/views/fre/pages/tos.ctp au lieu de /app/views/pages/tos.ctp
+            // utilise /app/views/fra/pages/tos.ctp au lieu de /app/views/pages/tos.ctp
             $this->viewPath = $locale . DS . $this->viewPath;
         }
     }
@@ -106,6 +104,35 @@ ou::
     // code de la Vue
     echo $this->element(Configure::read('Config.language') . '/tos')
 
+Internationaliser les plugins CakePHP
+=====================================
+
+Si vous souhaitez inclure des fichiers traduits dans votre application, vous 
+aurez besoin de suivre quelques conventions.
+follow a few conventions.
+
+Au lieu de __() et __n() vous devrez uiliser __d() et __dn(). Le D signifie 
+domain. Donc si vous avez un plugin appelé 'DebugKit' vous devrez faire ceci::
+
+    __d('debug_kit', 'My example text');
+
+Utiliser la syntaxe en underscore est important, si vous ne l'utilisez pas, 
+CakePHP ne trouvera pas votre fichier de traduction.
+
+Votre fichier de traduction pour cet exemple devra être dans ::
+
+    /app/Plugin/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
+
+Et pour les autres langues par rapport à celle par défaut::
+
+    /app/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)   
+    /app/Plugin/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (French)   
+    /app/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese) 
+
+La raison pour cela est que CakePHP va utiliser le nom du plugin en minuscule 
+et avec des underscore, pour le comparer avec le domaine de traduction et va 
+regarder dans le plugin si il y a une correspondance pour le fichier de 
+traduction donné.
 
 Localisation dans CakePHP
 =========================
@@ -113,30 +140,29 @@ Localisation dans CakePHP
 Pour changer ou définir le langage de votre application, tout ce que
 vous avez à faire est dans la partie suivante::
 
+    Configure::write('Config.language', 'fra'); 
 
-    Configure::write('Config.language', 'eng'); 
-
-Ceci signale à Cake quelle locale utiliser(si vous utilisez une locale 
+Ceci signale à Cake quelle locale utiliser (si vous utilisez une locale 
 régionale, comme fr\_FR, la locale 
 `ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_) sera 
 utilisée au cas ou cela n'existerait pas), vous pouvez changer la langue
-a n'importe quel moment pendant une requête.ex. dans votre bootstrap
-si vous avez définis les paramètres de langue par défaut, dans la partie 
+a n'importe quel moment pendant une requête. Ex: dans votre bootstrap
+si vous avez défini les paramètres de langue par défaut, dans la partie 
 beforefilter de votre (app) controller si c'est spécifique à la requête ou
 à l'utilisateur, ou en fait en tout lieu à tout moment avant de passer le
 message dans une autre langue. Pour définir la langue pour l'utilisateur
 courant, vous pouvez stocker le paramétrage dans l'objet Session, comme cela::
 
-
-    $this->Session->write('Config.language', 'fre');
+    $this->Session->write('Config.language', 'fra');
 
 Au début de chacune des requêtes dans la partie ``beforeFilter`` de votre
 controller vous devez configurer ``Configure`` ainsi::
 
-
     class AppController extends Controller{
         public function beforeFilter() {
-            Configure::write('Config.language', $this->Session->read('Config.language'));
+            if ($this->Session->check('Config.language')) {
+                Configure::write('Config.language', $this->Session->read('Config.language'));
+            }
         }
     }
 
@@ -157,7 +183,7 @@ autres choses.
 
 Comme mentionné dans la section précédente, l'affichage des contenus
 localisés est effectué en utilisant la fonction pratique
-:php:func:`__()`, ou une des autres fonctions  de traduction qui sont
+:php:func:`__()`, ou une des autres fonctions de traduction qui sont
 globalement disponibles, mais probablement la plus utilisée dans vos
 vues. Le premier paramètre de la fonction est utilisé comme le
 msgid défini dans les fichiers .po.
@@ -178,6 +204,40 @@ Si vous passez une locale qui n'existe pas sur votre ordinateur
 `setlocale <http://www.php.net/setlocale>`_ cela n'aura aucun effet.
 Vous pouvez trouver la liste des locales disponibles en exécutant 
 la commande ``locale -a`` dans un terminal.
+
+Traduire les erreurs de validation de model
+===========================================
+CakePHP va automatiquement extraire l'erreur de validation quand vous utilisez 
+:doc:`i18n console task </console-and-shells>`. Par défaut, le domaine default 
+est utilisé. Ceci peut être surchargé en configurant la propriété 
+``$validationDomain`` dans votre model::
+
+    class User extends AppModel {
+
+        public $validationDomain = 'validation_errors';
+    }
+
+Les paramètres supplémentaires définis dans la règle de validation sont passés 
+à la fonction de traduction. Cela vous permet de créer des messages de 
+validation dynamiques::
+
+    class User extends AppModel {
+
+        public $validationDomain = 'validation';
+
+        public $validate = array(
+            'username' => array(
+                    'length' => array(
+                    'rule' => array('between', 2, 10),
+                    'message' => 'Username devrait être entre %d et %d caractères'
+                )
+            )
+        )
+    }
+
+Ce qui va faire l'appel interne suivant::
+
+    __d('validation', 'Username devrait être entre %d et %d caractères', array(2, 10));
 
 
 .. meta::

@@ -116,7 +116,7 @@ Category model needs to start behaving as a Christmas model, but
 only on Christmas day::
 
     // If today is Dec 25
-    if (date('m/d') == '12/25') {
+    if (date('m/d') === '12/25') {
         // Our model needs to behave as a Christmas model
         $this->Category->Behaviors->load('Christmas');
     }
@@ -233,10 +233,11 @@ a mapped method is slightly different than a normal behavior mixin method::
         }
     }
 
-The above will map every ``doXXX()`` method call to the behavior.  As you can see, the model is
-still the first parameter, but the called method name will be the 2nd parameter.  This allows
-you to munge the method name for additional information, much like ``Model::findAllByXX``.  If the above
-behavior was attached to a model the following would happen::
+The above will map every ``doXXX()`` method call to the behavior.  As you can
+see, the model is still the first parameter, but the called method name will be
+the 2nd parameter.  This allows you to munge the method name for additional
+information, much like ``Model::findAllByXX``.  If the above behavior was
+attached to a model the following would happen::
 
     $model->doReleaseTheHounds('homer', 'lenny');
 
@@ -247,19 +248,20 @@ Behavior callbacks
 ==================
 
 Model Behaviors can define a number of callbacks that are triggered
-before/after the model callbacks of the same name. Behavior
+before the model callbacks of the same name. Behavior
 callbacks allow your behaviors to capture events in attached models
 and augment the parameters or splice in additional behavior.
 
-The available callbacks are:
+All behavior callbacks are fired **before** the model/behavior callbacks are:
 
--  ``beforeValidate`` is fired before a model's beforeValidate
--  ``beforeFind`` is fired before a model's beforeFind
--  ``afterFind`` is fired before a model's afterFind
--  ``beforeSave`` is fired before a model's beforeSave
--  ``afterSave`` is fired before a model's afterSave
--  ``beforeDelete`` is fired after a model's beforeDelete
--  ``afterDelete`` is fired before a model's afterDelete
+-  ``beforeValidate``
+-  ``beforeFind``
+-  ``afterFind``
+-  ``beforeSave``
+-  ``afterSave``
+-  ``beforeDelete``
+-  ``afterDelete``
+
 
 Creating a behavior callback
 ----------------------------

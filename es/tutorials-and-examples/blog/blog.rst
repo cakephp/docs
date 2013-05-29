@@ -37,7 +37,7 @@ Descargar CakePHP
 Vamos a descargar la última versión de CakePHP.
 
 Para ello, visita la web del proyecto en github:
-`http://github.com/cakephp/cakephp/downloads <http://github.com/cakephp/cakephp/downloads>`_ 
+`https://github.com/cakephp/cakephp/tags <https://github.com/cakephp/cakephp/tags>`_ 
 y descargar / descomprimir la última versión de la rama 2.0
 
 También puedes clonar el repositorio usando 

@@ -302,7 +302,7 @@ access a non-existent page, i.e. page number requested is greater than total
 page count.
 
 So you could either let the normal error page be rendered or use a try catch
-block and take appropriate action when a `NotFoundException` is caught.
+block and take appropriate action when a `NotFoundException` is caught::
 
     public function index() {
         try {

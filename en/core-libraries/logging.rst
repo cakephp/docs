@@ -93,6 +93,19 @@ properties are passed to the log adapter's constructor as an array.::
 CakePHP requires that all logging adapters implement
 :php:class:`Cake\\Log\\LogInterface`.
 
+.. versionadded:: 2.4
+
+.. _file-log:
+
+As of 2.4 ``FileLog`` engine takes two new configurations::
+
+  - ``size`` Used to implement basic log file rotation. If log file size
+    reaches specified size the existing file is renamed by appending timestamp
+    to filename and new log file is created. Can be integer bytes value or
+    human reabable string values like '10MB', '100KB' etc. Defaults to 10MB.
+  - ``rotate`` Log files are rotated specified times before being removed.
+    If value is 0, old versions are removed rather then rotated. Defaults to 10.
+
 .. note::
 
     You should configure loggers during bootstrapping. ``app/Config/log.php`` is the
@@ -146,6 +159,46 @@ custom paths to be used::
 
 .. warning::
     If you do not configure a logging adapter, log messages will not be stored.
+
+.. _syslog-log:
+
+Logging to Syslog
+=================
+
+.. versionadded:: 2.4
+
+In production environments it is highly recommended that you setup your system to
+use syslog instead of the files logger. This will perform much better as any
+writes will be done in a (almost) non-blocking fashion and your operating  system
+logger can be configured separately to rotate files, pre-process writes or use
+a completely different storage for your logs.
+
+Using syslog is pretty much like using the default FileLog engine, you just need
+to specify `SysloLog` as the engine to be used for logging. The following
+configuration snippet will replace the default logger with syslog, this should
+be done in the `bootstrap.php` file.
+
+::
+
+    CakeLog::config('default', array(
+        'engine' => 'SyslogLog'
+    ));
+
+The configuration array accepted for the Syslog logging engine understands the
+following keys:
+
+* `format`: An sprintf template strings with two placeholders, the first one
+  for the error type, and the second for the message itself. This key is
+  useful to add additional information about the server or process in the
+  logged message. For example: ``%s - Web Server 1 - %s`` will look like
+  ``error - Web Server 1 - An error occurred in this request`` after
+  replacing the placeholders.
+* `prefix`: An string that will be prefixed to every logged message.
+* `flag`: An integer flag to be used for opening the connection to the
+  logger, by default `LOG_ODELAY` will be used. See `openlog` documentation
+  for more options
+* `facility`: The logging slot to use in syslog. By default `LOG_USER` is
+  used. See `syslog` documentation for more options
 
 .. _writing-to-logs:
 

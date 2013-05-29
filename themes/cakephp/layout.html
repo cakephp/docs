@@ -4,8 +4,18 @@
 {% endblock -%}
 
 {% block extrahead %}
+<link href="{{ pathto('_static/favicon.ico', 1) }}" type="image/x-icon" rel="icon" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="_static/opensearchdescription-book-2-x.xml">
+
+{% for lang in languages %}
+	{%- if lang != language -%}
+		{%- if has_lang(lang, pagename) -%}
+		<link rel="alternate" hreflang="{{ lang }}" href="{{ lang_link(lang, pagename) }}" />
+		{%- endif -%}
+	{%- endif -%}
+{% endfor %}
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="{{ pathto('_static/opensearchdescription-book-2-x.xml', 1) }}">
 <script type="text/javascript">
 window.lang = "{{ language }}";
 </script>
@@ -23,7 +33,7 @@ window.lang = "{{ language }}";
 		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
 		<li class="primary"><a href="#" class="empty">Downloads</a>
 			<ul class="second-level">
-				<li><a href="http://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
 				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
 			</ul>
 		</li>
@@ -31,10 +41,11 @@ window.lang = "{{ language }}";
 			<ul class="second-level">
 				<li class="cake-version"><a href="http://api.cakephp.org">API</a>
 					<ul class="third-level">
-						<li><a href="http://api20.cakephp.org">2.0</a>&nbsp;|</li>
-						<li><a href="http://api13.cakephp.org">1.3</a>&nbsp;|</li>
-						<li><a href="http://api12.cakephp.org">1.2</a>&nbsp;|</li>
-						<li><a href="http://api11.cakephp.org">1.1</a></li>
+						<li><a href="http://api.cakephp.org">2.3</a>&nbsp;|</li>
+						<li><a href="http://api.cakephp.org/2.2">2.2</a>&nbsp;|</li>
+						<li><a href="http://api.cakephp.org/1.3">1.3</a>&nbsp;|</li>
+						<li><a href="http://api.cakephp.org/1.2">1.2</a>&nbsp;|</li>
+						<li><a href="http://api.cakephp.org/1.1">1.1</a></li>
 					</ul>
 				</li>
 				<li class="cake-version"><a href="http://book.cakephp.org">Book</a>
@@ -42,21 +53,28 @@ window.lang = "{{ language }}";
 						<li><a href="http://book.cakephp.org/2.0/en/">2.x</a>&nbsp;|</li>
 						<li><a href="http://book.cakephp.org/1.3/en/">1.3</a>&nbsp;|</li>
 						<li><a href="http://book.cakephp.org/1.2/en/">1.2</a>&nbsp;|</li>
-						<li><a href="http://book.cakephp.org/1.1/en">1.1</a></li>
+						<li><a href="http://book.cakephp.org/1.1/en/">1.1</a></li>
 					</ul>
 				</li>
 			</ul>
 		</li>
-		<li class="primary"><a href="#" class="empty">Community</a>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
 			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
 				<li><a href="http://cakephp.lighthouseapp.com">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">Bakery</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; packages</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
 				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Groups</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
 				<li><a href="http://cakephp.org/logos">Logo</a></li>
-				<li><a href="http://ask.cakephp.org">Q &amp; A</a></li>
-				<li><a href="http://tv.cakephp.org">TV (Screencasts)</a></li>
 			</ul>
 		</li>
 		<li class="primary"><a href="http://cakephp.org/services">Services</a>
@@ -92,16 +110,41 @@ window.lang = "{{ language }}";
 		<div class="columns nine">
 			<ul class="inline breadcrumb">
 			{%- for parent in parents %}
-			<li>
-				<a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %}>{{ parent.title }}</a>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %} itemprop="url"><span itemprop="title">{{ parent.title }}</span></a>
 			</li>
 			{%- endfor %}
 			</ul>
-			<ul class='versions inline'>
-				<li><a href="http://book.cakephp.org/1.3/{{ language }}/">1.3 Book</a></li>
-				<li><a href="http://book.cakephp.org/1.2/{{ language }}/">1.2 Book</a></li>
-				<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/1.3/{{ language }}/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/{{ language }}/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				{% for lang in languages %}
+					{%- if lang == language -%}
+						<a href="#">{{ lang }}</a>
+					{%- endif -%}
+				{% endfor %}
+
+				<ul>
+				{% for lang in languages %}
+					<li>
+						{%- if lang == language -%}
+						{# Do nothing, we print the active one above #}
+						{%- elif has_lang(lang, pagename) -%}
+						<a href="{{ lang_link(lang, pagename) }}">{{ lang }}</a>
+						{%- else -%}
+						<span class="disabled">{{ lang }}</span>
+						{%- endif -%}
+					</li>
+				{% endfor %}
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
@@ -155,23 +198,8 @@ window.lang = "{{ language }}";
 			Submit a correction on <a href="https://github.com/cakephp/docs">github</a><br />
 			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
 		</div>
-		<div class="languages columns three">
-			<ul class="languages inline">
-			{% for lang in languages %}
-				<li>
-					{%- if lang == language -%}
-					<span class="active">{{ lang }}</span>
-					{%- elif has_lang(lang, pagename) -%}
-					<a href="{{ lang_link(lang, pagename) }}">{{ lang }}</a>
-					{%- else -%}
-					<span class="disabled">{{ lang }}</span>
-					{%- endif -%}
-				</li>
-			{% endfor %}
-			</ul>
-		</div>
 	</div>
-
+	
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 			{%- if show_copyright %}

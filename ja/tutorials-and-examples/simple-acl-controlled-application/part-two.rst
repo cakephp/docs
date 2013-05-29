@@ -7,9 +7,9 @@ ACOの作成を自動化するツール
 前述した通り、全てのコントローラとアクションをACLにあらかじめ入力し、構築しておく方法はありません。
 しかしながら、大きなアプリケーションにとてもたくさんのアクションがある場合、これを一々登録するというのは面倒です。
 
-この目的のために、 `AclExtras <https://github.com/markstory/acl_extras/tree/2.0>`_
+この目的のために、 `AclExtras <https://github.com/markstory/acl_extras/>`_
 という名のとても便利なプラグインが存在し、
-`Githubのダウンロードページ <https://github.com/markstory/acl_extras/zipball/2.0>`_ からダウンロードすることで、githubで入手することができます。
+`Githubのダウンロードページ <https://github.com/markstory/acl_extras/zipball/master>`_ からダウンロードすることで、githubで入手することができます。
 全てのACOを生成するための使用方法を簡単に説明しましょう。
 
 まず、プラグインのコピーを入手し、 `app/Plugin/AclExtras`
@@ -55,7 +55,7 @@ http://localhost/cake/app/users/initdb)へ接続してください。
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('initDB'); //この行は終わったあと削除できます 
+        $this->Auth->allow('initDB'); //この行は終わったあと削除できます
     }
 
     public function initDB() {
@@ -116,7 +116,9 @@ ACLパーミッションからindexアクションやviewアクションをわ�
 
 これでアプリケーションがアクセス制御下におかれましたので、パブリックでないページの表示に対するアクセスはログインページにリダイレクトされるようになりました。
 しかし、先にログインを行うまえに、それ用のビューを作成しなければなりません。
-もし ``app/View/Users/login.ctp`` をまだ作成していないなら、次のコードを設置してください::
+もし ``app/View/Users/login.ctp`` をまだ作成していないなら、次のコードを設置してください:
+
+.. code-block:: php
 
     <h2>Login</h2>
     <?php
@@ -160,5 +162,3 @@ Authのlogoutメソッドは基本的にAuthのSessionキーを削除し、リ�
 しかし、これらはユーザに対しても同じ時に行うことができます。
 パーミッションの設定は、グローバルに行ったり、コントローラ単位やアクション単位でも行えます。
 さらに、アプリケーションが拡大するにあたりACOテーブルを簡単に拡張し、再利用可能なコードのブロックを使うこともできます。
-
-

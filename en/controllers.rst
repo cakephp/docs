@@ -42,7 +42,6 @@ CakePHP core library. As such, AppController is defined in
 
     class AppController extends Controller {
     }
-    
 
 Controller attributes and methods created in your AppController
 will be available to all of your application's controllers. It is
@@ -76,7 +75,7 @@ controller callbacks for best results::
     public function beforeFilter() {
         parent::beforeFilter();
     }
- 
+
 Request parameters
 ==================
 
@@ -85,8 +84,7 @@ When a request is made to a CakePHP application, CakePHP's :php:class:`Router` a
 create the correct controller. The request data is encapsulated into a request
 object. CakePHP puts all of the important request information into the
 ``$this->request`` property.  See the section on
-:ref:`cake-request` for more information on the CakePHP request
-object.
+:ref:`cake-request` for more information on the CakePHP request object.
 
 Controller actions
 ==================
@@ -102,16 +100,16 @@ name.  Returning to our online bakery example, our RecipesController might conta
 in ``/app/Controller/RecipesController.php`` and contain::
 
         # /app/Controller/RecipesController.php
-        
+
         class RecipesController extends AppController {
             public function view($id) {
                 //action logic goes here..
             }
-        
+
             public function share($customerId, $recipeId) {
                 //action logic goes here..
             }
-        
+
             public function search($query) {
                 //action logic goes here..
             }
@@ -131,7 +129,7 @@ rendering and delivering the View.
 If for some reason you'd like to skip the default behavior.  Both of the
 following techniques will by-pass the default view rendering behavior.
 
-* If you return a string, or an object that can be converted to a string from 
+* If you return a string, or an object that can be converted to a string from
   your controller action, it will be used as the response body.
 * You can return a :php:class:`CakeResponse` object with the completely created
   response.
@@ -245,10 +243,10 @@ rendered from the controller.
             'base_price' => 23.95
         );
 
-        // make $color, $type, and $base_price 
+        // make $color, $type, and $base_price
         // available to the view:
 
-        $this->set($data);  
+        $this->set($data);
 
 
     The attribute ``$pageTitle`` no longer exists, use ``set()`` to set
@@ -357,7 +355,7 @@ Flow Control
 
         $this->redirect(array('controller' => 'orders', 'action' => 'confirm', 'product' => 'pizza', 'quantity' => 5));
 
-.. php:method:: flash(string $message, string $url, integer $pause, string $layout)
+.. php:method:: flash(string $message, string|array $url, integer $pause, string $layout)
 
     Like ``redirect()``, the ``flash()`` method is used to direct a
     user to a new page after an operation. The ``flash()`` method is
@@ -495,7 +493,7 @@ Other Useful Methods
         $conditions = $this->postConditions(
             $this->request->data,
             array(
-                'num_items' => '>=', 
+                'num_items' => '>=',
                 'referrer' => 'LIKE'
             )
         );
@@ -601,7 +599,7 @@ Other Useful Methods
     named args array into the key 'named'; Additional members in the ``$option``
     array will also be made available in the requested action's
     Controller::params array::
-        
+
         echo $this->requestAction('/articles/featured/limit:3');
         echo $this->requestAction('/articles/view/5');
 
@@ -637,7 +635,7 @@ Other Useful Methods
     The ``loadModel`` function comes handy when you need to use a model
     which is not the controller's default model or its associated
     model::
-    
+
         $this->loadModel('Article');
         $recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));
 
@@ -656,14 +654,14 @@ visit the CakePHP API. Check out
 
     The ``$name`` attribute should be set to the
     name of the controller. Usually this is just the plural form of the
-    primary model the controller uses. This property is not required,
+    primary model the controller uses. This property can be omitted,
     but saves CakePHP from inflecting it::
 
         // $name controller attribute usage example
         class RecipesController extends AppController {
            public $name = 'Recipes';
         }
-        
+
 
 $components, $helpers and $uses
 -------------------------------
@@ -696,7 +694,7 @@ given by ``$helpers`` to the view as an object reference variable
     without a need for a corresponding Model file. However, the models
     defined in the ``AppController`` will still be loaded.  You can also use
     ``false`` to not load any models at all.  Even those defined in the
-    ``AppController``
+    ``AppController``.
 
     .. versionchanged:: 2.1
         Uses now has a new default value, it also handles ``false`` differently.

@@ -316,7 +316,7 @@ fois, il sera mis dans le trou noir. Parfois , ce comportement est indésirable,
 et peut créer des problèmes avec les applications "une page". Vous pouvez 
 activer la multi-utilisation des jetons en paramétrant ``csrfUseOnce`` à 
 ``false``. Ceci peut être effectué dans le tableau components, ou dans la 
-partie ``beforeFilter`` de votre contrôleur::
+partie ``beforeFilter`` de votre controller::
 
     public $components = array(
         'Security' => array(
@@ -338,6 +338,15 @@ pouvez définir ``$this->Security->csrfCheck = false;`` dans votre
 ``beforeFilter`` ou utiliser le tableau components. Par défaut la protection 
 CSRF est activée , et paramétrée pour l'utilisation une-utilisation des jetons.
 
+Désactiver le Component Security pour des Actions Spécifiques
+=============================================================
+
+Il peut arriver que vous souhaitiez désactiver toutes les vérifications de
+sécurité pour une action (ex. ajax request). 
+Vous pouvez "délocker" ces actions en les listant dans
+``$this->Security->unlockedActions`` dans votre ``beforeFilter``.
+
+.. versionadded:: 2.3
 
 .. meta::
     :title lang=fr: Securité

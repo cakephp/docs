@@ -9,10 +9,10 @@ CakePHP は素早く簡単にインストールできます。
 システム要件
 ============
 
--  HTTPサーバー。例: Apache。mod\_rewriteが推奨されますが、必要ではありません。
+-  HTTPサーバー。例: Apache。mod\_rewriteが推奨されますが、必須ではありません。
 -  PHP 5.2.8以上。
 
-技術的にはデータベースエンジンは必要ではありませんが、ほとんどのアプリケーションはこれを活用することが想像できます。
+技術的にはデータベースエンジンは必ずしも必要ではありませんが、ほとんどのアプリケーションはこれを活用することが想像できます。
 CakePHPは種々のデータベース・ストレージのエンジンをサポートしています：
 
 -  MySQL (4以上)
@@ -23,12 +23,12 @@ CakePHPは種々のデータベース・ストレージのエンジンをサポ�
 .. note::
 
     組み込みのドライバは全てPDOを必要とします。
-    正しいPDO拡張がインストールされているか必ず確かめてください。
+    正しいPDO拡張モジュールがインストールされているか必ず確かめてください。
 
 ライセンス
 ==========
 
-CakePHPはMITライセンスの元にライセンスされています。
+CakePHPはMIT Licenseの元にライセンスされています。
 これは著作権(*copyright*)の提示が全く改変されていない状態で残されているという条件の元で、ソースコードを自由に更新、配布、再公開できることを意味します。
 また、自由にCakePHPを宣伝やクローズソースのアプリケーションに組み込むこともできます。
 
@@ -38,11 +38,11 @@ CakePHPのダウンロード
 CakePHP の最新版を手に入れるには、主に二つの方法があります。
 ウェブサイトからアーカイブ(zip/tar.gz/tar.bz2)としてダウンロードする、あるいは git リポジトリからコードをチェックアウトする方法のいずれかにより取得できます。
 
-最新のアーカイブをダウンロードするには、 `http://www.cakephp.org <http://www.cakephp.org>`_ のウェブサイトに行き、"Download Now!" という大きなリンクに従って進みます。
+最新のアーカイブをダウンロードするには、 `http://cakephp.org <http://cakephp.org>`_ のウェブサイトに行き、"Download Now!" という大きなリンクに従って進みます。
 
 CakePHP の最新のリリースは `Github <http://github.com/cakephp/cakephp>`_ でホスティングされています。
 GithubにはCakePHP自身、また多くのCakePHPプラグインが含まれています。
-CakePHPのリリースは `Github downloads <http://github.com/cakephp/cakephp/downloads>`_ で入手できます。
+CakePHPのリリースは `Github tags <https://github.com/cakephp/cakephp/tags>`_ で入手できます。
 
 他の手段を用いて、バグ修正や日ごとに行われる細かな機能追加が含まれた、できたてホヤホヤのコードを手に入れることができます。
 これらは `Github`_ からレポジトリを複製することでアクセスすることができます::
@@ -150,12 +150,13 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
 
 もしウェブサーバが適切に設定されていれば、 http://www.example.com で Cake アプリケーションがアクセス可能になっているはずです。
 
-応用インストールとサーバー固有の設定
-====================================
+応用インストールと URL リライティング
+=====================================
 
 .. toctree::
 
-   installation/advanced-installation
+    installation/advanced-installation
+    installation/url-rewriting
 
 動作確認
 ========
@@ -172,7 +173,7 @@ Apache を使用する場合は、そのドメインの ``DocumentRoot`` ディ�
 もしPHPのタイムゾーンに関連するエラーが出るなら、 ``app/Config/core.php`` の中のとある一行のコメントを外してください::
 
    /**
-    * If you are on PHP 5.3 uncomment this line and correct your server timezone
-    * to fix the date & time related errors.
+    * Uncomment this line and correct your server timezone to fix 
+    * any date & time related errors.
     */
        date_default_timezone_set('UTC');

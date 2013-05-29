@@ -86,7 +86,7 @@ AppController / AppModel / AppHelper / AppShell
 ===============================================
 
 ``app/app_controller.php`` 、 ``app/app_model.php`` 、 ``app/app_helper.php`` はそれぞれ、
-``app/Controller/AppController.php`` 、 ``app/Model/AppModel.php`` 、 ``app/Helper/AppHelper.php`` に配置・名称変更されました。
+``app/Controller/AppController.php`` 、 ``app/Model/AppModel.php`` 、 ``app/View/Helper/AppHelper.php`` に配置・名称変更されました。
 
 また、全てのシェル・タスクはAppShellを継承するようになりました。
 独自のAppShell.phpを ``app/Console/Command/AppShell.php`` にもつことができます。
@@ -100,7 +100,7 @@ __() (二つのアンダースコアでのショートカット関数)
 翻訳の結果を表示させたい場合は::
 
     echo __('My Message');
-    
+
 としてください。この変更は全ての翻訳のショートカット関数を含みます::
 
     __()
@@ -198,6 +198,12 @@ CakePHPは ``$_GET['url']`` をアプリケーションのリクエストパス�
 これらの変更により、.htaccessファイルと ``app/webroot/index.php`` を、この変更を適用するために変更されたファイルに書き換える必要があります。
 また、 ``$this->params['url']['url']`` はもう存在しません。
 同等の値を得るには、代わりに$this->request->urlを使用する必要があります。
+この属性には、URLから先頭のスラッシュ ``/`` の直前までを除いた値が格納されています。
+
+Note: ホームページ自体(``http://domain/``)の $this->request->url は、
+``/`` の代わりに ``false`` を返します。必要に応じて判定に使ってください::
+
+    if (!$this->request->url) {} // $this->request->url === '/' の代わり
 
 コンポーネント
 ==============
@@ -206,7 +212,7 @@ Componentは、全てのコンポーネントが必須とする基底クラス�
 コンポーネントとそのコンストラクタが変更になったことから、これを書き換える必要があります::
 
     class PrgComponent extends Component {
-        function __construct(ComponentCollection $collection, $settings = array()) {
+        public function __construct(ComponentCollection $collection, $settings = array()) {
             parent::__construct($collection, $settings);
         }
     }
@@ -218,7 +224,7 @@ Componentは、全てのコンポーネントが必須とする基底クラス�
 設定がコンポーネントのコンストラクタに移動したことで、 ``initialize()`` コールバックは2番目の引数に ``$settings`` を受け取らないようになりました。
 以下のメソッド特性を使うようにコンポーネントを書き換える必要があります::
 
-    function initialize(Controller $controller) { }
+    public function initialize(Controller $controller) { }
 
 加えて、initialize()メソッドはコンポーネントが有効な時のみ呼び出されます。
 これは通常、コントローラに直接付随したコンポーネントを意味します。
@@ -416,38 +422,38 @@ CakePHP 1.3の :php:meth:`App::import()` との主な違いは、前者が実際
 :php:meth:`App::import()` から移行し :php:meth:`App::uses()` を使用するいくつかの例を挙げます::
 
     App::import('Controller', 'Pages');
-    // は次のようになる 
+    // は次のようになる
     App::uses('PagesController', 'Controller');
 
-    App::import('Component', 'Email');
-    // は次のようになる 
-    App::uses('EmailComponent', 'Controller/Component');
+    App::import('Component', 'Auth');
+    // は次のようになる
+    App::uses('AuthComponent', 'Controller/Component');
 
     App::import('View', 'Media');
-    // は次のようになる 
+    // は次のようになる
     App::uses('MediaView', 'View');
 
     App::import('Core', 'Xml');
-    // は次のようになる 
+    // は次のようになる
     App::uses('Xml', 'Utility');
 
     App::import('Datasource', 'MongoDb.MongoDbSource');
-    // は次のようになる 
+    // は次のようになる
     App::uses('MongoDbSource', 'MongoDb.Model/Datasource');
 
 以前 ``App::import('Core', $class);`` を用いて読み込んでいたすべてのクラスは、正しいパッケージを参照する ``App::uses()`` を用いて読み込む必要があります。
 APIを見て新しいフォルダでクラスを探索するようにしてください。いくつか例を挙げます::
 
     App::import('Core', 'CakeRoute');
-    // は次のようになる 
+    // は次のようになる
     App::uses('CakeRoute', 'Routing/Route');
 
     App::import('Core', 'Sanitize');
-    // は次のようになる 
+    // は次のようになる
     App::uses('Sanitize', 'Utility');
 
     App::import('Core', 'HttpSocket');
-    // は次のようになる 
+    // は次のようになる
     App::uses('HttpSocket', 'Network/Http');
 
 :php:meth:`App::import()` が以前どのように作用していたかとは対照的に、新しいクラスローダはクラスを再帰的に探索しません。
@@ -462,11 +468,11 @@ App::build() とコアのパス
 例::
 
     App::build(array('controllers' => array('/full/path/to/controllers')));
-    // は次のようになる 
+    // は次のようになる
     App::build(array('Controller' => array('/full/path/to/Controller')));
 
     App::build(array('helpers' => array('/full/path/to/controllers')));
-    // は次のようになる 
+    // は次のようになる
     App::build(array('View/Helper' => array('/full/path/to/View/Helper')));
 
 CakeLog
@@ -491,7 +497,7 @@ Cache
 
     Cache::config('something');
     Cache::write('key', $value);
-    
+
     // 上記は、以下のようになることでしょう。
     Cache::write('key', $value, 'something');
 
@@ -516,7 +522,7 @@ Router
   引き続きショートカットを利用したいと思う方は、以下のようにルートを追加できます::
 
     Router::connect('/users/:action', array('controller' => 'users', 'plugin' => 'users'));
-  
+
   ショートカットルートを有効にしたいプラグイン毎にroutesファイルにこれを追加してください。
 
 app/Config/routes.phpファイルは以下の行をファイルの後方に追加するように更新する必要があります::
@@ -613,7 +619,7 @@ HttpSocket
 ClassRegistryからViewが削除されたことに対応して、Helper::__construct()の特性(*signature*)が変わりました。
 以下のものを使うようにサブクラスを更新する必要があります::
 
-    function __construct(View $View, $settings = array())
+    public function __construct(View $View, $settings = array())
 
 コンストラクタをオーバーライドするとき、常に `parent::__construct` を呼ぶ必要もあります。
 `Helper::__construct` はビューのインスタンスをのちの参照のために `$this->_View` に格納します。
@@ -852,19 +858,19 @@ beforeRenderもまた同様で、ビューでの変数全てが操作される�
 ヘルパーのコールバックは常に一つの引数、beforeRenderとafterRenderにはレンダリングされるビューファイルが、beforeLayoutとafterLayoutにはレンダリングされるレイアウトファイルが与えられるようになりました。
 ヘルパーの関数特性は以下のようにする必要があります::
 
-    function beforeRender($viewFile) {
+    public function beforeRender($viewFile) {
 
     }
 
-    function afterRender($viewFile) {
+    public function afterRender($viewFile) {
 
     }
 
-    function beforeLayout($layoutFile) {
+    public function beforeLayout($layoutFile) {
 
     }
 
-    function afterLayout($layoutFile) {
+    public function afterLayout($layoutFile) {
 
     }
 
@@ -1021,6 +1027,9 @@ PDOドライバは自動的にこれらの値をエスケープします。
 * 真偽値カラムの値はPHPネイティブの真偽値型に自動的にキャストされます。
   従って、もし返り値を文字列や数値として期待しているなら、テストケースやコードを必ず書きなおしてください:
   例えば以前に「published」カラムを使っていなら、mysqlを使っていればfindから返ってくるの全ての値は以前数値でしたが、今は厳密に真偽値となりました。
+
+ビヘイビア
+==========
 
 BehaviorCollection
 ------------------

@@ -34,7 +34,7 @@ Getting Cake
 ============
 
 To get a fresh download, visit the CakePHP project on GitHub:
-`http://github.com/cakephp/cakephp/downloads <http://github.com/cakephp/cakephp/downloads>`_
+`http://github.com/cakephp/cakephp/tags <http://github.com/cakephp/cakephp/tags>`_
 and download the latest release of 3.0
 
 You can also clone the repository using
@@ -181,23 +181,16 @@ informed by a warning while not in production mode.
 A Note on mod\_rewrite
 ======================
 
-Occasionally a new user will run into mod\_rewrite issues, so I'll
-mention them marginally here. If the CakePHP welcome page looks a
-little funny (no images or css styles), it probably means
-mod\_rewrite isn't functioning on your system. Here are some tips
-to help get you up and running:
+Occasionally a new user will run into mod\_rewrite issues. For example
+if the CakePHP welcome page looks a little funny (no images or css styles),
+it probably means mod\_rewrite isn't functioning on your system. Please refer
+to one of the sections below about url rewriting for your webserver to get
+you up and running:
 
+.. toctree::
 
-#. Make sure that an .htaccess override is allowed: in your
-   httpd.conf, you should have a section that defines a section for
-   each Directory on your server. Make sure the ``AllowOverride`` is
-   set to ``All`` for the correct Directory. For security and
-   performance reasons, do *not* set ``AllowOverride`` to ``All`` in
-   ``<Directory />``. Instead, look for the ``<Directory>`` block that
-   refers to your actual website directory.
+    /installation/url-rewriting
 
-#. Make sure you are editing the correct httpd.conf rather than a
-   user- or site-specific httpd.conf.
 
 #. For some reason or another, you might have obtained a copy of
    CakePHP without the needed .htaccess files. This sometimes happens
@@ -239,7 +232,7 @@ If you are installing CakePHP on a webserver besides Apache, you
 can find instructions for getting URL rewriting working for other
 servers under the :doc:`/installation/advanced-installation` section.
 
-Continue to :doc:`/tutorials-and-examples/blog/part-two` to start building your first CakePHP application.
+Now continue to :doc:`/tutorials-and-examples/blog/part-two` to start building your first CakePHP application.
 
 
 .. meta::

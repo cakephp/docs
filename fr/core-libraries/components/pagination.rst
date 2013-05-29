@@ -9,7 +9,7 @@ De nombreuses applications ont tendances à augmenter en taille et en complexit�
 rapidement, et les designers ainsi que les programmeurs  trouvent même qu'ils
 sont incapables de faire face a l'affichage des centaines ou des milliers 
 d'enregistrements.
-Réécrire prend du temps , et les performances et la satisfaction des
+Réécrire prend du temps, et les performances et la satisfaction des
 utilisateurs peut en pâtir .
 
 Afficher un nombre raisonnable d'enregistrements par page à toujours été
@@ -19,19 +19,19 @@ des développeurs en fournissant un moyen rapide et facile de paginer
 les données.
 
 La pagination dans CakePHP est offerte par un Composant dans le contrôleur,
-pour rendre la création des requêtes de pagination plus faciles.
+pour rendre la création des requêtes de pagination plus facile.
 Dans la Vue :php:class:`PaginatorHelper` est utilisé pour rendre la
 génération de la pagination, des liens et des boutons simple.  
 
-Paramétrage des requête
-=======================
+Paramétrage des requêtes
+========================
 
-Dans le contrôleur , nous commençons par définir les conditions de la requête de
+Dans le contrôleur, nous commençons par définir les conditions de la requête de
 pagination qui seront utilisées par défaut dans la variable ``$paginate`` du
 contrôleur. 
-Ces conditions , vont servir de base à vos requêtes de pagination. Elles sont
+Ces conditions, vont servir de base à vos requêtes de pagination. Elles sont
 complétées par le tri, la direction, la limitation et les paramètres de page
-passés depuis l'url. Ici , il est important de noter que l'ordre des clefs 
+passés depuis l'url. Ici, il est important de noter que l'ordre des clefs 
 doit être définis dans une structure en tableau comme ci-dessous:: 
 
     class PostsController extends AppController {
@@ -75,7 +75,7 @@ modèle. Ça devient alors très simple d'utiliser les comportement comme
     }
 
 En plus de définir des valeurs de pagination générales, vous pouvez définir
-plus d'un jeu de pagination par défaut dans votre contrôleur , vous avez juste
+plus d'un jeu de pagination par défaut dans votre contrôleur, vous avez juste
 à nommer les clefs du tableau après le modèle que vous souhaitez configurer::
 
     class PostsController extends AppController {
@@ -89,7 +89,7 @@ plus d'un jeu de pagination par défaut dans votre contrôleur , vous avez juste
 Les valeurs des clefs  ``Post`` et ``Author`` pourraient contenir toutes
 les propriétés qu'un model/clef sans ``$paginate`` pourraient contenir.
 
-Une fois que la variable ``$paginate`` à été définie , nous pouvons
+Une fois que la variable ``$paginate`` à été définie, nous pouvons
 appeler la méthode ``paginate()`` dans l'action du contrôleur.
 Cette méthode chargera dynamiquement :php:class:`PaginatorComponent`,
 et appellera sa méthode paginate(). Ceci retournera le résultat du ``find()``
@@ -204,7 +204,7 @@ faire est d'ajouter le mot clef dans les variables de la classes
             )
         );
 
-Dans CakePHP 2.0 , vous n'avez plus besoin d'implémenter ``paginateCount()``
+Dans CakePHP 2.0, vous n'avez plus besoin d'implémenter ``paginateCount()``
 quand vous utilisez des groupes de clauses. Le noyau ``find('count')`` comptera 
 correctement le nombre total de lignes.
 

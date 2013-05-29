@@ -11,9 +11,22 @@ CakePHPは沢山の組込関数とクラスを備えています。これらの�
 .. toctree::
     :maxdepth: 2
 
-    core-libraries/global-constants-and-functions
-    core-libraries/events
-    core-libraries/collections
+    core-libraries/toc-general-purpose
+
+.. _core-behaviors:
+
+ビヘイビア
+==========
+
+ビヘイビアはモデルに拡張機能を追加します。CakePHPは :php:class:`TreeBehavior` や
+:php:class:`ContainableBehavior` など、沢山の組込みビヘイビアを備えています。
+
+ビヘイビアの作成方法と使い方については学ぶには :doc:`/models/behaviors` を読んでください。
+
+.. toctree::
+    :maxdepth: 2
+
+    core-libraries/toc-behaviors
 
 .. _core-components:
 
@@ -26,14 +39,7 @@ CakePHPはコントローラ内の基本的なタスクをこなすのに役立�
 .. toctree::
     :maxdepth: 2
 
-    core-libraries/components/access-control-lists
-    core-libraries/components/authentication
-    core-libraries/components/cookie
-    core-libraries/components/email
-    core-libraries/components/request-handling
-    core-libraries/components/pagination
-    core-libraries/components/security-component
-    core-libraries/components/sessions
+    core-libraries/toc-components
 
 .. _core-helpers:
 
@@ -49,36 +55,10 @@ CakePHPにはビューを作成を手助けする沢山のヘルパーがあり�
 .. toctree::
     :maxdepth: 2
 
-    core-libraries/helpers/cache
-    core-libraries/helpers/form
-    core-libraries/helpers/html
-    core-libraries/helpers/js
-    core-libraries/helpers/number
-    core-libraries/helpers/paginator
-    core-libraries/helpers/rss
-    core-libraries/helpers/session
-    core-libraries/helpers/text
-    core-libraries/helpers/time
+    core-libraries/toc-helpers
 
-.. _core-behaviors:
 
-ビヘイビア
-==========
-
-ビヘイビアはモデルに拡張機能を追加します。CakePHPは :php:class:`TreeBehavior` や
-:php:class:`ContainableBehavior` など、沢山の組込みビヘイビアを備えています。
-
-ビヘイビアの作成方法と使い方については学ぶには :doc:`/models/behaviors` を読んでください。
-
-.. toctree::
-    :maxdepth: 2
-
-    core-libraries/behaviors/acl
-    core-libraries/behaviors/containable
-    core-libraries/behaviors/translate
-    core-libraries/behaviors/tree
-
-コアライブラリ
+ユーティリティ
 ==============
 
 コアMVCコンポーネントに加えてCakePHPはキャッシュやロギング、国際化対応などwebサービスで必要とされるあらゆるユーティリティクラスを備えています。
@@ -86,24 +66,5 @@ CakePHPにはビューを作成を手助けする沢山のヘルパーがあり�
 .. toctree::
     :maxdepth: 2
 
-    core-utility-libraries/app
-    core-libraries/caching
-    core-utility-libraries/email
-    core-utility-libraries/number
-    core-utility-libraries/time
-    core-utility-libraries/sanitize
-    core-utility-libraries/file-folder
-    core-utility-libraries/httpsocket
-    core-utility-libraries/inflector
-    core-libraries/internationalization-and-localization
-    core-libraries/logging
-    core-utility-libraries/router
-    core-utility-libraries/security
-    core-utility-libraries/hash
-    core-utility-libraries/set
-    core-utility-libraries/string
-    core-utility-libraries/xml
+    core-libraries/toc-utilities
 
-.. meta::
-    :title lang=en: Core Libraries
-    :keywords lang=en: core libraries,global constants,cookie,access control lists,number,text,time,security component,core components,general purpose,web applications,markup,authentication,api,cakephp,functionality,sessions,collections,events

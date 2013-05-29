@@ -106,8 +106,8 @@ saveが呼び出されると、最初に引数に渡されたデータは、Cake
 
 .. tip::
 
-    updatedフィールドを更新したくない場合は、保存の際に ``$data`` 配列に\
-    ``'updated' => false`` を追加してください。
+    ``modified`` フィールドを自動更新したくない場合は、保存の際に ``$data`` 配列へ\
+    ``'modified' => false`` を追加してください。
 
 saveが完了すると、モデルオブジェクトの ``$id`` に保存されたデータのIDがセットされます。\
 このプロパティは、特に新しくオブジェクトを生成した時に使われます。
@@ -179,7 +179,7 @@ data配列にプライマリーキーのフィールドを渡してください�
 
 .. warning::
 
-    このメソッドを使うと、updatedフィールドは更新されてしまいます。\
+    このメソッドを使うと、 ``modified`` フィールドは更新されてしまいます。\
     更新したく無い場合はsave()メソッドを使う必要があります。
 
 :php:meth:`Model::updateAll(array $fields, array $conditions)`
@@ -642,7 +642,7 @@ Tagモデルの ``save()`` に対しては、以下のような形式のデー�
             (
                 [id] => 42
             )
-        [Tag] => Array 
+        [Tag] => Array
             (
                 [name] => Italian
             )
@@ -802,7 +802,7 @@ HABTMを使う代わりにhasManyやbelongsToアソシエーションを使っ�
 データテーブル
 ==============
 
-CakePHPは特定のDBMSに依存しないように設計されていて、MySQL, MSSQL, Oracle, PostgreSQL, \
+CakePHPは特定のDBMSに依存しないように設計されていて、MySQL, MSSQL, PostgreSQL, \
 また他のDBMSでも動作します。いつもやってるようにデータベースにテーブルを作れます。\
 モデルクラスを作れば、自動的にデータベースに作ったテーブルにマッピングされます。\
 テーブル名は規約に従って、小文字の複数形にして、単語同士はアンダースコアで区切ります。\
@@ -823,7 +823,7 @@ CakePHPはそれらのフィールドを認識して、自動的にレコード�
 createdとmodifiedフィールドには、新しくレコードが追加されるときには現在の日時がセットされます。\
 modifiedフィールドは既存のレコードが更新された時に、現在の日時がセットされます。
 
-Model::save()を呼び出す前に、updated、created、modifiedのキーが$this->dataにあると、\
+Model::save()を呼び出す前に、 ``created`` や ``modified`` のキーが$this->dataにあると、\
 自動的に更新はされずに、$this->dataの値が使われます。自動的に更新したい場合は、\
 ``unset($this->data['Model']['modified']`` などとします。または、Model::save()を\
 オーバーライドして、常にunsetの動作をするようにも出来ます。 ::
@@ -840,4 +840,3 @@ Model::save()を呼び出す前に、updated、created、modifiedのキーが$th
         }
 
     }
-

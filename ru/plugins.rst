@@ -76,7 +76,7 @@ include() или require() настроек или маршрутизации п
 В этих случаях плагины часто комплектуются schema-файлом, который можно
 вызвать из консоли Cake::
 
-    user@host$ cake schema create -plugin ContactManager
+    user@host$ cake schema create --plugin ContactManager
 
 В документации к большинству плагинов будет указано, как правильно их настроить
 и какие изменения в базу данных необходимо внести. Некоторые плагины
@@ -245,11 +245,11 @@ URL, CakePHP будет выдавать ошибку "Missing Controller", по
 
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
-            public $hasMany = array(
-                    'AltName' => array(
-                            'className' => 'ContactManager.AltName'
-                    )
-            );
+        public $hasMany = array(
+            'AltName' => array(
+                'className' => 'ContactManager.AltName'
+            )
+        );
     }
 
 Представления плагинов

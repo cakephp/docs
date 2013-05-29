@@ -105,6 +105,7 @@ as keys:
 * ``fieldList`` An array of fields you want to allow for saving.
 * ``callbacks`` Set to false to disable callbacks.  Using 'before' or 'after'
   will enable only those callbacks.
+* ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
 
 More information about model callbacks is available
 :doc:`here <callback-methods>`
@@ -112,8 +113,8 @@ More information about model callbacks is available
 
 .. tip::
 
-    If you don't want the updated field to be updated when saving some
-    data add ``'updated' => false`` to your ``$data`` array
+    If you don't want the ``modified`` field to be automatically updated when saving some
+    data add ``'modified' => false`` to your ``$data`` array
 
 Once a save has been completed, the ID for the object can be found
 in the ``$id`` attribute of the model object - something especially
@@ -187,7 +188,7 @@ For example, to update the title of a blog post, the call to
 
 .. warning::
 
-    You can't stop the updated field being updated with this method, you
+    You can't stop the ``modified`` field being updated with this method, you
     need to use the save() method.
 
 The saveField method also has an alternate syntax::
@@ -200,6 +201,7 @@ as keys:
 * ``validate`` Set to true/false to enable disable validation.
 * ``callbacks`` Set to false to disable callbacks.  Using 'before' or 'after'
   will enable only those callbacks.
+* ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
 
 :php:meth:`Model::updateAll(array $fields, array $conditions)`
 ==============================================================
@@ -253,6 +255,7 @@ options may be used:
   Should be set to false if database/table does not support transactions.
 *  ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
 *  ``deep``: (since 2.1) If set to true, also associated data is saved, see also saveAssociated
+* ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
 
 For saving multiple records of single model, $data needs to be a
 numerically indexed array of records like this::
@@ -310,6 +313,7 @@ options may be used:
 * ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
 * ``deep``: (since 2.1) If set to true, not only directly associated data is saved,
   but deeper nested associated data as well. Defaults to false.
+* ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
 
 For saving a record along with its related record having a hasOne
 or belongsTo association, the data array should be like this::
@@ -795,6 +799,37 @@ Using the preceding code, a multiple select drop down is created,
 allowing for multiple choices to automatically be saved to the
 existing Recipe being added or saved to the database.
 
+Self HABTM
+~~~~~~~~~~
+
+Normally HABTM is used to bring 2 models together but it can also
+be used with only 1 model, though it requires some extra attention.
+
+The key is in the model setup the ``className``. Simply adding a
+``Project`` HABTM ``Project`` relation causes issues saving data.
+By setting the ``className`` to the models name and use the alias as
+key we avoid those issues.::
+
+    class Project extends AppModel {
+        public $hasAndBelongsToMany = array(
+            'RelatedProject' => array(
+                'className'              => 'Project',
+                'foreignKey'             => 'projects_a_id',
+                'associationForeignKey'  => 'projects_b_id',
+            ),
+        );
+    }
+
+Creating form elements and saving the data works the same as before but you use the alias instead. This::
+
+    $this->set('projects', $this->Project->find('list'));
+    $this->Form->input('Project');
+
+Becomes this::
+
+    $this->set('relatedProjects', $this->Project->find('list'));
+    $this->Form->input('RelatedProject');
+
 What to do when HABTM becomes complicated?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -846,7 +881,7 @@ Datatables
 
 While CakePHP can have datasources that aren't database driven, most of the
 time, they are. CakePHP is designed to be agnostic and will work with MySQL,
-MSSQL, Oracle, PostgreSQL and others. You can create your database tables as you
+MSSQL, PostgreSQL and others. You can create your database tables as you
 normally would. When you create your Model classes, they'll automatically map to
 the tables that you've created. Table names are by convention lowercase and
 pluralized with multi-word table names separated by underscores. For example, a
@@ -864,13 +899,13 @@ fields (default null), CakePHP will recognize those fields and populate them aut
 whenever a record is created or saved to the database (unless the data being
 saved already contains a value for these fields).
 
-The created and modified fields will be set to the current date and time when
+The ``created`` and ``modified`` fields will be set to the current date and time when
 the record is initially added. The modified field will be updated with the
 current date and time whenever the existing record is saved.
 
-If you have updated, created or modified data in your $this->data (e.g. from a
+If you have ``created`` or ``modified`` data in your $this->data (e.g. from a
 Model::read or Model::set) before a Model::save() then the values will be taken
-from $this->data and not automagically updated. Either use
+from $this->data and not automagically updated. If you don't want that you can use
 ``unset($this->data['Model']['modified'])``, etc. Alternatively you can override
 the Model::save() to always do it for you::
 

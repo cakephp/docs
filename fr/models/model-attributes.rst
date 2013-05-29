@@ -2,7 +2,7 @@ Attributs de Model
 ##################
 
 Les attributs de Model vous permettent de configurer les propriétés qui 
-peuvent override le behavior du model par défaut.
+peuvent surcharger le behavior du model par défaut.
 
 Pour une liste complète d'attributs du model et ses descriptions, visitez 
 l'API de CakePHP. Allez voir 
@@ -14,14 +14,12 @@ useDbConfig
 La propriété ``useDbConfig`` est une chaîne de caractère qui spécifie le nom 
 de la connection à la base de données à utiliser pour lier votre classe model 
 à la table de la base de données liée. Vous pouvez la configurer 
-property is a string that specifies the name of
-the database connection to use to bind your model class to the
-related database table. You can set it to any of the database
-connections defined within your database configuration file. The
-database configuration file is stored in /app/Config/database.php.
+pour n'importe quelles connexions de base de données définies dans votre 
+fichier de configuration database. Le fichier de configuration database 
+est placé dans /app/Config/database.php.
 
-The ``useDbConfig`` property is defaulted to the 'default' database
-connection.
+La propriété ``useDbConfig`` est par défaut à la connection à la base de 
+données 'default'.
 
 Exemple d'utilisation:
 
@@ -34,37 +32,37 @@ Exemple d'utilisation:
 useTable
 ========
 
-The ``useTable`` property specifies the database table name. By
-default, the model uses the lowercase, plural form of the model's
-class name. Set this attribute to the name of an alternate table,
-or set it to ``false`` if you wish the model to use no database
-table.
+La propriété ``useTable`` spécifie le nom de la table de la base de données. 
+Par défaut, le model utilise le nom de classe du model en minuscule, au 
+pluriel. Configurer cette attribut du nom d'une table alternative ou 
+définissez le à ``false`` si vous souhaitez que le model utilise aucune table 
+de la base de données.
 
-Example usage::
+Exemple d'utilisation::
 
     class Exemple extends AppModel {
-        public $useTable = false; // This model does not use a database table
+        public $useTable = false; // Ce model n'utilise pas une table de la base de données
     }
 
 Alternatively::
 
     class Exemple extends AppModel {
-        public $useTable = 'exmp'; // This model uses a database table 'exmp'
+        public $useTable = 'exmp'; // Ce model utilise une table 'exmp' de la base de données
     }
 
 tablePrefix
 ===========
 
-The name of the table prefix used for the model. The table prefix
-is initially set in the database connection file at
-/app/Config/database.php. The default is no prefix. You can
-override the default by setting the ``tablePrefix`` attribute in
-the model.
+Le nom du préfixe de la table utilisé pour le model. Le préfixe de la table 
+est initialement configuré dans le fichier de connection à la base de données 
+dans /app/Config/database.php. Par défaut il n'y a pas de prefix. Vous pouvez 
+écraser la valeur par défaut en configurant l'attribut ``tablePrefix`` dans le
+model.
 
 Exemple d'utilisation::
 
     class Example extends AppModel {
-        public $tablePrefix = 'alternate_'; // will look for 'alternate_examples'
+        public $tablePrefix = 'alternate_'; // va regarder 'alternate_examples'
     }
 
 .. _model-primaryKey:
@@ -72,14 +70,15 @@ Exemple d'utilisation::
 primaryKey
 ==========
 
-Each table normally has a primary key, ``id``. You may change which
-field name the model uses as its primary key. This is common when
-setting CakePHP to use an existing database table.
+Chaque table a normalement une clé primaire, ``id``. Vous pouvez changer 
+le nom du champ que le model utlilise en clé primaire. Ceci est courant 
+quand on configure CakePHP pour utiliser une table d'une base de données 
+existante.
 
-Example usage::
+Exemple d'utilisation::
 
     class Example extends AppModel {
-        public $primaryKey = 'example_id'; // example_id is the field name in the database
+        public $primaryKey = 'example_id'; // example_id est le nom du champ dans la base de données
     }
     
 
@@ -88,56 +87,71 @@ Example usage::
 displayField
 ============
 
-The ``displayField`` attribute specifies which database field
-should be used as a label for the record. The label is used in
-scaffolding and in ``find('list')`` calls. The model will use
-``name`` or ``title``, by default.
+L'attribut ``displayField`` spécifie quel champ de la base de données doit 
+être utilisé comme lable pour un enregistrement. Le label est utilisé 
+dans le scaffolding et dans les appels avec ``find('list')``. Le model va 
+utiliser ``name`` ou ``title``, par défaut.
 
-For example, to use the ``username`` field::
+Par exemple, pour utiliser le champ ``username``::
 
     class User extends AppModel {
         public $displayField = 'username';
     }
 
-Multiple field names cannot be combined into a single display
-field. For example, you cannot specify,
-``array('first_name', 'last_name')`` as the display field. Instead
-create a virtual field with the Model attribute virtualFields
+Les noms de champ multiple ne peuvent pas être combinés en un champ 
+unique d'affichage. Par exemple, vous ne pouvez pas spécifier 
+``array('first_name', 'last_name')`` en champ à afficher. A la place,
+créez un champ virtuel avec l'attribut de Model virtualFields
 
 recursive
 =========
 
-The recursive property defines how deep CakePHP should go to fetch
-associated model data via ``find()``, ``findAll()`` and ``read()``
-methods.
+La propriété recursive définit la profondeur à laquelle CakePHP doit aller 
+attraper les modèles de données associés via les méthodes ``find()``, 
+``findAll()`` et ``read()``.
 
-Imagine your application features Groups which belong to a domain
-and have many Users which in turn have many Articles. You can set
-$recursive to different values based on the amount of data you want
-back from a $this->Group->find() call:
+Imaginez que votre application dispose de Groups qui appartiennent à un 
+domain et ont plusieurs (many) Users qui à leur tour ont plusieurs (many) 
+Articles. vous pouvez définir $recursive à différentes valeurs basées sur 
+la quantité de données que vous souhaitez retourner à partir d'un appel 
+$this->Group->find():
 
-* -1 Cake fetches Group data only, no joins.
-* 0  Cake fetches Group data and its domain
-* 1  Cake fetches a Group, its domain and its associated Users
-* 2  Cake fetches a Group, its domain, its associated Users, and the
-  Users' associated Articles
+* -1 Cake récupère seulement les données de Group, pas de joins.
+* 0  Cake récupère les données de Group et leur domain
+* 1  Cake récupère Group, son domaine et ses Users associés
+* 2  Cake récupère un Group, son domain, ses utilisateurs associés, et les
+  Articles associés des Users
 
-Set it no higher than you need. Having CakePHP fetch data you
-aren’t going to use slows your app unnecessarily. Also note that
-the default recursive level is 1.
+Ne le définissez pas à plus que vous n'avez besoin. Faire que CakePHP 
+récupère des données dont vous n'aurez pas besoin va ralentir votre 
+application inutilement. Notez aussi que par défaut le niveau de recursive 
+est 1.
 
 .. note::
 
-    If you want to combine $recursive with the ``fields``
-    functionality, you will have to add the columns containing the
-    required foreign keys to the ``fields`` array manually. In the
-    example above, this could mean adding ``domain_id``.
+    Si vous voulez combiner $recursive avec la fonctionnalité ``fields``,
+    vous devrez ajouter les colonnes contenant les clés étrangères nécéssaires 
+    au tableau ``fields`` manuellement. Dans l'exemple ci-dessus, ceci 
+    pourrait signifier d'ajouter ``domain_id``.
+
+.. tip::
+
+    Le niveau de recursive recommandé pour votre application devrait être -1.
+    Cela évite de récupérer des données liés dans les cas où ce n'est pas 
+    nécéssaire ou même non souhaités. C'est le plus souvent le cas pour la 
+    plupart de vos appels find().
+    Augmenter le seulement quand cela est souhaité ou utilisez le Containable 
+    behavior.
+
+    Vous pouvez réaliser cela en l'ajoutant à AppModel::
+
+        public $recursive = -1;
 
 order
 =====
 
-The default ordering of data for any find operation. Possible
-values include::
+L'ordre par défaut des donénes pour toute opération de type find. Les valeurs 
+possibles incluent::
 
     $order = "field"
     $order = "Model.field";
@@ -149,16 +163,17 @@ values include::
 data
 ====
 
-The container for the model’s fetched data. While data returned
-from a model class is normally used as returned from a find() call,
-you may need to access information stored in $data inside of model
-callbacks.
+Le contenu pour les données attrapées pour le model. Alors que les 
+données retournées d'une classe de model sont normalement utilisées 
+à partir d'un appel de find(), vous pourriez avoir besoin d'accéder 
+aux informations stockées dans $data à l'intérieur des callbacks du 
+model.
 
 \_schema
 ========
 
-Contains metadata describing the model’s database table fields.
-Each field is described by:
+Contient les metadata décrivant les champs de la table de la base de données 
+du model. Chaque champ est décrit par:
 
 -  name
 -  type (integer, string, datetime, etc.)
@@ -166,7 +181,7 @@ Each field is described by:
 -  default value
 -  length
 
-Example Usage::
+Exemple d'utilisation::
 
     public $_schema = array(
         'first_name' => array(
@@ -187,46 +202,47 @@ Example Usage::
 validate
 ========
 
-This attribute holds rules that allow the model to make data
-validation decisions before saving. Keys named after fields hold
-regex values allowing the model to try to make matches.
+Cet attribut maintient les règles qui permettent au model de 
+faire des décisions de validation de données avant la sauvegarde. 
+Les clés nommées selon les champs maintient les valeurs regex 
+autorisant le model à essayer de faire des correspondances.
 
 .. note::
 
-    It is not necessary to call validate() before save() as save() will
-    automatically validate your data before actually saving.
+    Il n'est pas nécéssaire d'appeler validate() avant save() puisque save() 
+    va automatiquement valider vos données avant d'effectivement les 
+    sauvegarder.
 
-For more information on validation, see the :doc:`/models/data-validation`
-later on in this manual.
+Pour plus d'informations sur la validation, regardez la section suivante 
+:doc:`/models/data-validation` du manuel.
 
 virtualFields
 =============
 
-Array of virtual fields this model has. Virtual fields are aliased
-SQL expressions. Fields added to this property will be read as
-other fields in a model but will not be saveable.
+Tableau de champs virtuels que le model a. Les champs virtuels sont des alias 
+des expressions SQL. Les champs ajoutés à cette propriété vont être lus comme 
+d'autres champs dans un model mais ne seront pas sauvegardables.
 
-Example usage for MySQL::
+Exemple d'utilisation pour MySQL::
 
     public $virtualFields = array(
         'name' => "CONCAT(User.first_name, ' ', User.last_name)"
     );
 
-In subsequent find operations, your User results would contain a
-``name`` key with the result of the concatenation. It is not
-advisable to create virtual fields with the same names as columns
-on the database, this can cause SQL errors.
+Dans les opérations ultérieures de find, vos résultats de User contiendraient 
+une clé ``name`` avec le résultat de la concaténation. Il n'est pas conseillé 
+de créer des champs virtuels avec les mêmes noms comme colonnes dans la base de 
+données, ceci peut causer des erreurs de SQL.
 
-For more information on the ``virtualFields`` property, its proper
-usage, as well as limitations, see
-:doc:`/models/virtual-fields`.
+Pour plus d'informations sur la propriété ``virtualFields``, son usage propre, 
+ainsi que des limitations, regardez :doc:`/models/virtual-fields`.
 
 name
 ====
 
-As you saw earlier in this chapter, the name attribute is a
-compatibility feature for PHP4 users and is set to the same value
-as the model name.
+Nom du model. Si vous ne le spécifiez pas dans votre fichier model, 
+il sera défini automatiquement selon le nom de la classe par le 
+constructeur.
 
 Exemple d'utilisation::
 
@@ -237,10 +253,10 @@ Exemple d'utilisation::
 cacheQueries
 ============
 
-If set to true, data fetched by the model during a single request
-is cached. This caching is in-memory only, and only lasts for the
-duration of the request. Any duplicate requests for the same data
-is handled by the cache.
+Si défini à true, les données récupérées par le model pendant une requête 
+unique est mise en cache. Cette mise en cache est seulement en mémoire, et 
+dure seulement le temps de la requête. Toute requête dupliquée pour les 
+mêmes données va être gérée par le cache.
 
 
 .. meta::

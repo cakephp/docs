@@ -19,7 +19,7 @@ Configuring Filters
 Filters are usually configured in the ``bootstrap.php`` file, but you could easily
 load them from any other configuration file before the request is dispatched.
 Adding and removing filters is done through the `Configure` class, using the
-special key ``Dispatch.filters``. By default CakePHP comes with a couple filter
+special key ``Dispatcher.filters``. By default CakePHP comes with a couple filter
 classes already enabled for all requests, let's take a look at how they are
 added::
 
@@ -113,7 +113,7 @@ text::
 
         public $priority = 9;
 
-        public function beforeDispatch($event) {
+        public function beforeDispatch(CakeEvent $event) {
             $request = $event->data['request'];
             $response = $event->data['response'];
 
@@ -158,7 +158,7 @@ page, in our case it would be anything served from the ``PagesController``::
 
     class HttpCacheFilter extends DispatcherFilter {
 
-        public function afterDispatch($event) {
+        public function afterDispatch(CakeEvent $event) {
             $request = $event->data['request'];
             $response = $event->data['response'];
 
@@ -214,10 +214,10 @@ routing system. Although it is not required, it shows how to make your important
 code run first in case you need to trim as much fat as possible from some requests.
 
 For obvious reasons this has the potential of making your app very difficult
-to maintain. Filters are a extremely powerful tool when used wisely, adding
+to maintain. Filters are an extremely powerful tool when used wisely, adding
 response handlers for each url in your app is not a good use for it. But if you
 got a valid reason to do so, then you have a clean solution at hand. Keep in
-mind that not everything need to be a filter, `Controllers` and `Components` are
+mind that not everything needs to be a filter, `Controllers` and `Components` are
 usually a more accurate choice for adding any request handling code to your app.
 
 .. meta::

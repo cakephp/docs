@@ -175,9 +175,9 @@ application.
 
 .. php:method:: setContent($name, $type = null)
 
-    -  $name string - The name or file extension of the Content-type
+    :param string $name: The name or file extension of the Content-type
        ie. html, css, json, xml.
-    -  $type mixed - The mime-type(s) that the Content-type maps to.
+    :param mixed $type: The mime-type(s) that the Content-type maps to.
 
     setContent adds/sets the Content-types for the given name. Allows
     content-types to be mapped to friendly aliases and or extensions.
@@ -277,7 +277,7 @@ bandwidth. The response status code is then set to `304 Not Modified`.
 You can opt-out this automatic checking by setting the ``checkHttpCache``
 setting to false::
 
-    public components = array(
+    public $components = array(
         'RequestHandler' => array(
             'checkHttpCache' => false
     ));
@@ -299,7 +299,7 @@ You can map existing and new types to your custom classes.
 
 You can also set this automatically by using the ``viewClassMap`` setting::
 
-    public components = array(
+    public $components = array(
         'RequestHandler' => array(
             'viewClassMap' => array(
                 'json' => 'ApiKit.MyJson',

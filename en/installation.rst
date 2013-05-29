@@ -48,14 +48,14 @@ Downloading a zip file
 ----------------------
 
 To download the latest major release of CakePHP. Visit the main
-website `http://www.cakephp.org <http://www.cakephp.org>`_ and
+website `http://cakephp.org <http://cakephp.org>`_ and
 follow the "Download Now" link.
 
 All current releases of CakePHP are hosted on
 `Github`_. Github houses both CakePHP
 itself as well as many other plugins for CakePHP. The CakePHP
 releases are available at
-`Github downloads <http://github.com/cakephp/cakephp/downloads>`_.
+`Github tags <https://github.com/cakephp/cakephp/tags>`_.
 
 Using git & github
 ------------------
@@ -168,12 +168,13 @@ for the domain to::
 If your web server is configured correctly, you should now find
 your Cake application accessible at http://www.example.com.
 
-Advanced Installation and server specific configuration
-=======================================================
+Advanced Installation and URL Rewriting
+=======================================
 
 .. toctree::
 
-   installation/advanced-installation
+    installation/advanced-installation
+    installation/url-rewriting
 
 Fire It Up
 ==========

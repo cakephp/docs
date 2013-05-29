@@ -18,6 +18,7 @@ mentionné comme devant être supprimé.
 Par exemple, lors de la suppression d'un enregistrement Utilisateur 
 lié à plusieurs enregistrements Recette (Utilisateur 'hasMany' ou 
 'hasAndBelongsToMany' Recettes):
+
     - si $cascade est fixé à true, les entrées Recette liées sont aussi 
       supprimées si les valeurs "dependant" des models sont à true.
     - si $cascade est fixé à false, les entrées Recette resteront après 

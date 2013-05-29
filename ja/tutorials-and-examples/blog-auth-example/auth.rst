@@ -25,7 +25,6 @@
 
     // app/Model/User.php
     class User extends AppModel {
-        public $name = 'User';
         public $validate = array(
             'username' => array(
                 'required' => array(
@@ -57,7 +56,7 @@ UsersControllerもまた作成しましょう。
 
         public function beforeFilter() {
             parent::beforeFilter();
-            $this->Auth->allow('add', 'logout');
+            $this->Auth->allow('add');
         }
 
         public function index() {
@@ -121,15 +120,16 @@ UsersControllerもまた作成しましょう。
     }
 
 以前ビューを作成した方法と同様に、またはコード生成ツールを用いて、ビューを実装します。
-このチュートリアルの目的に沿って、add.ctpだけを示します::
+このチュートリアルの目的に沿って、add.ctpだけを示します:
+
+.. code-block:: php
 
     <!-- app/View/Users/add.ctp -->
     <div class="users form">
     <?php echo $this->Form->create('User'); ?>
         <fieldset>
             <legend><?php echo __('Add User'); ?></legend>
-        <?php
-            echo $this->Form->input('username');
+            <?php echo $this->Form->input('username');
             echo $this->Form->input('password');
             echo $this->Form->input('role', array(
                 'options' => array('admin' => 'Admin', 'author' => 'Author')
@@ -217,15 +217,16 @@ AuthComponentに認証されていないユーザーがusersのadd関数にア�
 
 これで、ユーザーが保存されるときは毎回、AuthComponentクラスが提供するデフォルトのハッシュ方法を用いてパスワードがハッシュ化されます。
 あとはログイン関数のビューテンプレートファイルだけです。
-以下のものを使ってください::
+以下のものを使ってください:
+
+.. code-block:: php
 
     <div class="users form">
     <?php echo $this->Session->flash('auth'); ?>
     <?php echo $this->Form->create('User'); ?>
         <fieldset>
             <legend><?php echo __('Please enter your username and password'); ?></legend>
-        <?php
-            echo $this->Form->input('username');
+            <?php echo $this->Form->input('username');
             echo $this->Form->input('password');
         ?>
         </fieldset>

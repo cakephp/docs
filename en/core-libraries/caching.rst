@@ -14,19 +14,19 @@ dealing with all different types of Caching implementations.  CakePHP
 comes with several cache engines built-in, and provides an easy system
 to implement your own caching systems. The built-in caching engines are:
 
-* ``FileCache`` File cache is a simple cache that uses local files, it
+* ``FileCache`` File cache is a simple cache that uses local files. It
   is the slowest cache engine, and doesn't provide as many features for
   atomic operations.  However, since disk storage is often quite cheap,
   storing large objects, or elements that are infrequently written
-  work well in files.
-* ``ApcCache`` APC cache uses the PHP `APC <http://php.net/apc>`_ extension
+  work well in files. This is the default Cache engine for 2.3+
+* ``ApcCache`` APC cache uses the PHP `APC <http://php.net/apc>`_ extension.
   This extension uses shared memory on the webserver to store objects.
   This makes it very fast, and able to provide atomic read/write features.
-  By default CakePHP will use this cache engine if it's available.
+  By default CakePHP in 2.0-2.2 will use this cache engine if it's available.
 * ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
   extension.  Wincache is similar to APC in features and performance, but
-  optimized for windows and IIS.
-* ``XcacheEngine`` Similar to APC, `Xcache <http://xcache.lighttpd.net/>`_
+  optimized for Windows and IIS.
+* ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_
   is a PHP extension that provides similar features to APC.
 * ``MemcacheEngine`` Uses the `Memcache <http://php.net/memcache>`_
   extension.  Memcache provides a very fast cache system that can be
@@ -35,6 +35,10 @@ to implement your own caching systems. The built-in caching engines are:
   extension. Redis provides a fast and persistent cache system similar to
   memcached, also provides atomic operations.
 
+.. versionchanged:: 2.3
+    FileEngine is always the default cache engine.  In the past a number of people
+    had difficulty setting up and deploying APC correctly both in cli + web.
+    Using files should make setting up CakePHP simpler for new developers.
 
 Regardless of the CacheEngine you choose to use, your application interacts with
 :php:class:`Cache` in a consistent manner.  This means you can easily swap cache engines
@@ -146,12 +150,12 @@ The required API for a CacheEngine is
 
     The base class for all cache engines used with Cache.
 
-.. php:method:: write($key, $value, $duration)
+.. php:method:: write($key, $value, $config = 'default')
 
     :return: boolean for success.
 
-    Write value for a key into cache, $duration specifies
-    how long the entry should exist in the cache.
+    Write value for a key into cache, optional string $config
+    specifies configuration name to write to.
 
 .. php:method:: read($key)
 
@@ -197,13 +201,12 @@ The required API for a CacheEngine is
     Not required, but used to do clean up when resources expire.
     FileEngine uses this to delete files containing expired content.
 
-
 Using Cache to store common query results
 =========================================
 
 You can greatly improve the performance of your application by putting
 results that infrequently change, or that are subject to heavy reads into the
-cache.  A perfect example of this are the results from :php:meth:`Model::find()`
+cache. A perfect example of this are the results from :php:meth:`Model::find()`.
 A method that uses Cache to store results could look like::
 
     class Post extends AppModel {
@@ -226,11 +229,11 @@ That is an exercise you can do though.
 Using Cache to store counters
 =============================
 
-Counters for various things are easily stored in a cache.  For example a simple
-countdown for remaining 'slots' in a contest could be store in Cache. The
+Counters for various things are easily stored in a cache.  For example, a simple
+countdown for remaining 'slots' in a contest could be stored in Cache. The
 Cache class exposes atomic ways to increment/decrement counter values in an easy
 way.  Atomic operations are important for these values as it reduces the risk of
-contention, and ability for two users to simultaneously lower the value by one
+contention, and ability for two users to simultaneously lower the value by one,
 resulting in an incorrect value.
 
 After setting an integer value you can manipulate it using
@@ -264,13 +267,13 @@ group. This is possible by declaring the groups in cache configuration::
         'groups' => array('comment', 'post')
     ));
 
-Let's say you want to store the html generated for your homepage in cache, but
+Let's say you want to store the HTML generated for your homepage in cache, but
 would also want to automatically invalidate this cache every time a comment or
-post is added to your database. By adding the groups ``comment`` and ``post`` we
-have effectively tagged any key stored into this cache configuration with both
-group names.
+post is added to your database. By adding the groups ``comment`` and ``post``,
+we have effectively tagged any key stored into this cache configuration with
+both group names.
 
-For instance whenever a new post is added, we could tell the Cache engine to
+For instance, whenever a new post is added, we could tell the Cache engine to
 remove all entries associated to the ``post`` group::
 
     // Model/Post.php
@@ -281,8 +284,28 @@ remove all entries associated to the ``post`` group::
         }
     }
 
+.. versionadded:: 2.4
+
+:php:func:`Cache::groupConfigs()` can be used to retrieve mapping between
+group and configurations, i.e.: having the same group::
+
+    // Model/Post.php
+
+    /**
+     * A variation of previous example that clears all Cache configurations
+     * having the same group
+     */
+    public function afterSave($created) {
+        if ($created) {
+            $configs = Cache::groupConfigs('post');
+            foreach ($configs['post'] as $config) {
+                Cache::clearGroup('post', $config);
+            }
+        }
+    }
+
 Groups are shared across all cache configs using the same engine and same
-prefix. If you are using groups and what to take advantage of group deletion,
+prefix. If you are using groups and want to take advantage of group deletion,
 choose a common prefix for all your configs.
 
 Cache API
@@ -296,7 +319,7 @@ Cache API
 
 .. php:staticmethod:: read($key, $config = 'default')
 
-    Cache::read() is used to read the cached value stored under
+    ``Cache::read()`` is used to read the cached value stored under
     ``$key`` from the ``$config``. If $config is null the default
     config will be used. ``Cache::read()`` will return the cached value
     if it is a valid cache or ``false`` if the cache has expired or
@@ -322,19 +345,19 @@ Cache API
 
 .. php:staticmethod:: write($key, $value, $config = 'default')
 
-    Cache::write() will write a $value to the Cache. You can read or
+    ``Cache::write()`` will write a $value to the Cache. You can read or
     delete this value later by referring to it by ``$key``. You may
     specify an optional configuration to store the cache in as well. If
-    no ``$config`` is specified default will be used. Cache::write()
+    no ``$config`` is specified, default will be used. ``Cache::write()``
     can store any type of object and is ideal for storing results of
-    model finds.::
+    model finds::
 
         if (($posts = Cache::read('posts')) === false) {
             $posts = $this->Post->find('all');
             Cache::write('posts', $posts);
         }
 
-    Using Cache::write() and Cache::read() to easily reduce the number
+    Using ``Cache::write()`` and ``Cache::read()`` to easily reduce the number
     of trips made to the database to fetch posts.
 
 .. php:staticmethod:: delete($key, $config = 'default')
@@ -344,7 +367,7 @@ Cache API
 
 .. php:staticmethod:: set($settings = array(), $value = null, $config = 'default')
 
-    ``Cache::set()`` allows you to temporarily override a cache configs
+    ``Cache::set()`` allows you to temporarily override a cache config's
     settings for one operation (usually a read or write). If you use
     ``Cache::set()`` to change the settings for a write, you should
     also use ``Cache::set()`` before reading the data back in. If you
@@ -399,6 +422,12 @@ Cache API
 
     .. versionadded:: 3.0
 
+
+.. php:staticmethod:: groupConfigs($group = null)
+
+    :return: Array of groups and its related configuration names.
+
+    Retrieve group names to config mapping.
 
 .. meta::
     :title lang=en: Caching

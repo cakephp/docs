@@ -71,7 +71,7 @@ appropriate to have::
                 'className' => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array(
+        public $hasAndBelongsToMany = array(
             'MemberOf' => array(
                 'className' => 'Group',
             )
@@ -84,7 +84,7 @@ appropriate to have::
                 'className'  => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array(
+        public $hasAndBelongsToMany = array(
             'Member' => array(
                 'className' => 'User',
             )
@@ -99,7 +99,7 @@ but the following will not work well in all circumstances::
                 'className' => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array(
+        public $hasAndBelongsToMany = array(
             'Member' => array(
                 'className' => 'Group',
             )
@@ -112,7 +112,7 @@ but the following will not work well in all circumstances::
                 'className'  => 'Recipe',
             )
         );
-        public $hasAndBelongsToMany => array(
+        public $hasAndBelongsToMany = array(
             'Member' => array(
                 'className' => 'User',
             )
@@ -323,14 +323,7 @@ Possible keys for belongsTo association arrays include:
    whenever you do a ``save()`` or ``delete()``. If it's a string then it's the
    field name to use. The value in the counter field represents the
    number of related rows. You can also specify multiple counter caches
-   by using an array where the key is field name and value is the
-   conditions. E.g.::
-
-       array(
-           'recipes_count' => true,
-           'recipes_published' => array('Recipe.published' => 1)
-       )
-
+   by defining an array, see :ref:`multiple-counterCache`
 -  **counterScope**: Optional conditions array to use for updating
    counter cache field.
 
@@ -525,6 +518,9 @@ From now on, every time you add or remove a ``ImageComment`` associated to
 ``Image``, the number within ``image_comment_count`` is adjusted
 automatically.
 
+counterScope
+============
+
 You can also specify ``counterScope``. It allows you to specify a
 simple condition which tells the model when to update (or when not
 to, depending on how you look at it) the counter value.
@@ -536,6 +532,39 @@ Using our Image model example, we can specify it like so::
             'Image' => array(
                 'counterCache' => true,
                 'counterScope' => array('Image.active' => 1) // only count if "Image" is active = 1
+            )
+        );
+    }
+
+.. _multiple-counterCache:
+
+Multiple counterCache
+=====================
+
+Since 2.0 CakePHP supports having multiple ``counterCache`` in a single model
+relation. It is also possible to define a ``counterScope`` for each ``counterCache``.
+Assuming you have a ``User`` model and a ``Message`` model and you want to be able
+to count the amount of read and unread messages for each user.
+
+========= ====================== ===========================================
+Model     Field                  Description
+========= ====================== ===========================================
+User      users.messages\_read   Count read ``Message``
+--------- ---------------------- -------------------------------------------
+User      users.messages\_unread Count unread ``Message``
+--------- ---------------------- -------------------------------------------
+Message   messages.is\_read      Determines if a ``Message`` is read or not.
+========= ====================== ===========================================
+
+With this setup your ``belongsTo`` would look like this::
+
+    class Message extends AppModel {
+        public $belongsTo = array(
+            'User' => array(
+                'counterCache' => array(
+                    'messages_read' => array('Message.is_read' => 1),
+                    'messages_unread' => array('Message.is_read' => 0)
+                )
             )
         );
     }

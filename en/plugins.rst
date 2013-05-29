@@ -76,7 +76,7 @@ Some plugins additionally need to create one or more tables in your database. In
 those cases, they will often include a schema file which you can
 call from the cake shell like this::
 
-    user@host$ cake schema create -plugin ContactManager
+    user@host$ cake schema create --plugin ContactManager
 
 Most plugins will indicate the proper procedure for configuring
 them and setting up the database in their documentation. Some
@@ -274,11 +274,11 @@ have the plugin prefix on them, use the alternative syntax::
 
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
-            public $hasMany = array(
-                    'AltName' => array(
-                            'className' => 'ContactManager.AltName'
-                    )
-            );
+        public $hasMany = array(
+            'AltName' => array(
+                'className' => 'ContactManager.AltName'
+            )
+        );
     }
 
 Plugin Views
@@ -335,6 +335,12 @@ You may put any type of file in any directory, just like a regular
 webroot. The only restriction is that ``MediaView`` needs to know 
 the mime-type of that asset.
 
+But keep in mind that handling static assets, such as images, Javascript
+and CSS files of plugins, through the Dispatcher is incredibly inefficient.
+It is strongly recommended to symlink them for production.
+For example like this::
+
+    ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
 
 Linking to assets in plugins
 ----------------------------
@@ -351,6 +357,10 @@ would serve the asset
 
     It is important to note the **/your_plugin/** prefix before the
     asset path. That makes the magic happen!
+
+.. versionchanged:: 2.1
+    Use :term:`plugin syntax` to request assets. For example in your View:
+    <?php echo $this->Html->css("ContactManager.style"); ?>
 
 
 Components, Helpers and Behaviors

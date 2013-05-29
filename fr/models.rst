@@ -24,7 +24,7 @@ façons d'associer vos données. Elle décrira comment trouver, sauvegarder,
 et effacer des données. Au final, elle s'interessera aux sources de données.
 
 Comprendre les Models
-======================
+=====================
 
 Un Model est à la fois votre model de données. En programmation orientée 
 objet, un objet qui représente une "chose", comme une voiture, une personne 
@@ -34,6 +34,7 @@ des exemples de models, chacun étant associé avec un autre.
 
 Voici un simple exemple de définition de model dans CakePHP::
 
+    App::uses('AppModel', 'Model');
     class Ingredient extends AppModel {
         public $name = 'Ingredient';
     }
@@ -44,7 +45,9 @@ sauvegarder et supprimer des données. Ces méthodes magiques proviennent de la
 classe Model de CakePHP, grâce à la magie de l'héritage. Le model Ingredient 
 étend le model de l'application AppModel, lequel étend la classe Model interne 
 de CakePHP. C'est cette classe Model du cœur qui fournit les fonctionnalités à 
-l'intérieur de votre model Ingredient.
+l'intérieur de votre model Ingredient. ``App::uses('AppModel', 'Model')``
+s'assure que le model est chargé sans effort pour chaque utilisation de 
+l'instance.
 
 La classe intermédiaire AppModel est vide et si vous n'avez pas créé la vôtre, 
 elle provient du répertoire du coeur de cakePHP. Ecraser AppModel vous permet 
