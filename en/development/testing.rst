@@ -13,8 +13,15 @@ Installing PHPUnit
 CakePHP uses PHPUnit as its underlying test framework.  PHPUnit is the de-facto
 standard for unit testing in PHP.  It offers a deep and powerful set of features
 for making sure your code does what you think it does.  PHPUnit can be installed
-through the `pear installer <http://pear.php.net>`_.  To install PHPUnit run the
-following::
+through the `pear installer <http://pear.php.net>`_ or `composer
+<http://getcomposer.org>`_.
+
+Install PHPUnit with PEAR
+-------------------------
+
+The PEAR installer can be used to install PHPUnit systemwide on you machine. It
+is recommended that you use composer, but for compatibility reasons the PEAR installer
+is also supported. To install PHPUnit run the following::
 
     pear upgrade PEAR
     pear config-set auto_discover 1
@@ -30,45 +37,60 @@ PHPUnit libraries are on PHP's ``include_path``. You can do this by checking
 your php.ini file and making sure that the PHPUnit files are in one of the
 ``include_path`` directories.
 
-.. tip::
+Install PHPUnit with composer
+-----------------------------
 
-    All output is swallowed when using PHPUnit 3.6+. Add the ``--debug``
-    modifier if using the CLI or add ``&debug=1`` to the url if using the web
-    runner to display output.
+To install PHPUnit with composer, add the following to you application's
+``require`` section in its ``package.json``::
+
+    "phpunit/PHPUnit": ">=3.7.0",
+
+After updating your package.json, run composer again inside your application
+directory::
+
+    $ php composer.phar install
+
 
 Test Database Setup
 ===================
 
-Remember to have a debug level of at least 1 in your ``app/Config/core.php``
+Remember to have a debug level of at least 1 in your ``App/Config/core.php``
 file before running any tests.  Tests are not accessible via the web runner when
 debug is equal to 0.  Before running any tests you should be sure to add a
-``$test`` database configuration.  This configuration is used by CakePHP for
-fixture tables and data::
+``test`` datasource configuration to ``App/Config/datasources.php``.  This 
+configuration is used by CakePHP for fixture tables and data::
 
-    public $test = array(
-        'datasource' => 'Database/Mysql',
+    Configure::write('Datasource.test', [
+        'datasource' => 'Cake\Database\Driver\Mysql',
         'persistent' => false,
-        'host'       => 'dbhost',
-        'login'      => 'dblogin',
-        'password'   => 'dbpassword',
-        'database'   => 'test_database'
-    );
+        'host' => 'dbhost',
+        'login' => 'dblogin',
+        'password' => 'dbpassword',
+        'database' => 'test_database'
+    ]);
 
 .. note::
 
     It's a good idea to make the test database and your actual database
-    different databases.  This will prevent any embarrassing mistakes later.
+    different databases.  This will prevent embarrassing mistakes later.
 
 Checking the Test Setup
 =======================
 
-After installing PHPUnit and setting up your ``$test`` database configuration
+After installing PHPUnit and setting up your ``test`` datasource configuration
 you can make sure you're ready to write and run your own tests by running one of
 the core tests. There are two built-in runners for testing, we'll start off by
-using the web runner. The tests can then be accessed by browsing to
-http://localhost/your_app/test.php. You should see a list of the core test
-cases.  Click on the 'AllConfigure' test.  You should see a green bar with some
-additional information about the tests run, and number passed.
+using the cli runner. We'll start off by running one of the core tests to ensure
+everything is setup correctly::
+
+    $ Console/cake test core Core/Configure
+
+You should see a green bar with some additional information about the tests run,
+and number passed.
+
+.. note::
+
+    If you are on a windows system you probably won't see any colours.
 
 Congratulations, you are now ready to start writing tests!
 
@@ -79,22 +101,19 @@ Like most things in CakePHP, test cases have some conventions. Concerning
 tests:
 
 #. PHP files containing tests should be in your
-   ``app/Test/Case/[Type]`` directories.
+   ``app/Test/TestCase/[Type]`` directories.
 #. The filenames of these files should end in ``Test.php`` instead
    of just .php.
-#. The classes containing tests should extend ``CakeTestCase``,
-   ``ControllerTestCase`` or ``PHPUnit_Framework_TestCase``.
+#. The classes containing tests should extend ``Cake\TestSuite\TestCase``,
+   ``Cake\TestSuite\ControllerTestCase`` or ``\PHPUnit_Framework_TestCase``.
 #. Like other classnames, the test case classnames should match the filename.
-   ``RouterTest.php`` should contain ``class RouterTest extends CakeTestCase``.
+   ``RouterTest.php`` should contain ``class RouterTest extends TestCase``.
 #. The name of any method containing a test (i.e. containing an
    assertion) should begin with ``test``, as in ``testPublished()``.
    You can also use the ``@test`` annotation to mark methods as test methods.
 
-When you have created a test case, you can execute it by browsing
-to ``http://localhost/you_app/test.php`` (depending on
-how your specific setup looks). Click App test cases, and
-then click the link to your specific file.  You can run tests from the command
-line using the test shell::
+When you have created a test case, you can execute it using the test runner
+You can run tests from the command line using the test shell::
 
     ./Console/cake test app Model/Post
 
@@ -106,6 +125,8 @@ Creating Your First Test Case
 In the following example, we'll create a test case for a very simple helper
 method.  The helper we're going to test will be formatting progress bar HTML.
 Our helper looks like::
+
+    namespace App\View\Helper;
 
     class ProgressHelper extends AppHelper {
         public function bar($value) {
@@ -119,14 +140,17 @@ Our helper looks like::
 
 This is a very simple example, but it will be useful to show how you can create
 a simple test case.  After creating and saving our helper, we'll create the test
-case file in ``app/Test/Case/View/Helper/ProgressHelperTest.php``.  In that file
+case file in ``app/Test/TestCase/View/Helper/ProgressHelperTest.php``.  In that file
 we'll start with the following::
 
-    App::uses('Controller', 'Controller');
-    App::uses('View', 'View');
-    App::uses('ProgressHelper', 'View/Helper');
+    namespace App\Test\TestCase\View\Helper;
 
-    class ProgressHelperTest extends CakeTestCase {
+    use App\View\Helper\ProgressHelper;
+    use Cake\Controller\Controller;
+    use Cake\TestSuite\TestCase;
+    use Cake\View\View;
+
+    class ProgressHelperTest extends TestCase {
         public function setUp() {
 
         }
@@ -149,7 +173,7 @@ following::
         $this->Progress = new ProgressHelper($View);
     }
 
-Calling the parent method is important in test cases, as CakeTestCase::setUp()
+Calling the parent method is important in test cases, as TestCase::setUp()
 does a number things like backing up the values in :php:class:`Configure` and,
 storing the paths in :php:class:`App`.
 
@@ -242,10 +266,6 @@ your app directory you can do the following to run tests::
     If you are running tests that interact with the session it's generally a good
     idea to use the ``--stderr`` option.  This will fix issues with tests
     failing because of headers_sent warnings.
-
-.. versionchanged:: 2.1
-    The ``test`` shell was added in 2.1. The 2.0 ``testsuite`` shell is still
-    available but the new syntax is preferred.
 
 You can also run ``test`` shell in the project root directory. This shows
 you a full list of all the tests that you currently have. You can then freely
