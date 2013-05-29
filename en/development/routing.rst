@@ -819,7 +819,7 @@ a destination within your application or an outside location::
     Router::redirect(
         '/home/*',
         array('controller' => 'posts', 'action' => 'view'),
-        array('persist' => true)
+        array('persist' => true) // or array('persist'=>array('id')) for default routing where the view action expects $id as an argument
     );
 
 Redirects ``/home/*`` to ``/posts/view`` and passes the parameters to
