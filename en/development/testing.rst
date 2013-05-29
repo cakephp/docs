@@ -337,7 +337,7 @@ that can be used by the test. The benefit of using fixtures is that your test
 has no chance of disrupting live application data. In addition, you can begin
 testing your code prior to actually developing live content for an application.
 
-CakePHP uses the connection named ``$test`` in your ``app/Config/database.php``
+CakePHP uses the connection named ``test`` in your ``App/Config/datasources.php``
 configuration file. If this connection is not usable, an exception will be
 raised and you will not be able to use database fixtures.
 
@@ -353,31 +353,40 @@ test case:
 Creating fixtures
 -----------------
 
-When creating a fixture you will mainly define two things: how the table is created (which fields are part of the table), and which records will be initially populated to the table. Let's
-create our first fixture, that will be used to test our own Article
-model. Create a file named ``ArticleFixture.php`` in your
-``app/Test/Fixture`` directory, with the following content::
+When creating a fixture you will mainly define two things: how the table is
+created (which fields are part of the table), and which records will be
+initially populated to the table. Let's create our first fixture, that will be
+used to test our own Article model. Create a file named ``ArticleFixture.php``
+in your ``App/Test/Fixture`` directory, with the following content::
 
-    class ArticleFixture extends CakeTestFixture {
+    namespace App\Test\Fixture;
+
+    use Cake\Test\TestFixture;
+
+    class ArticleFixture extends TestFixture {
 
           /* Optional. Set this property to load fixtures to a different test datasource */
-          public $useDbConfig = 'test';
-          public $fields = array(
-              'id' => array('type' => 'integer', 'key' => 'primary'),
-              'title' => array('type' => 'string', 'length' => 255, 'null' => false),
+          public $connection = 'test';
+
+          public $fields = [
+              'id' => ['type' => 'integer'],
+              'title' => ['type' => 'string', 'length' => 255, 'null' => false],
               'body' => 'text',
-              'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
+              'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
               'created' => 'datetime',
-              'updated' => 'datetime'
-          );
-          public $records = array(
-              array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
-              array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
-              array('id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31')
-          );
+              'updated' => 'datetime',
+              '_constraints' => [
+                'primary' => ['type' => 'primary', 'columns' => ['id']]
+              ]
+          ];
+          public $records = [
+              ['id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'],
+              ['id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'],
+              ['id' => 3, 'title' => 'Third Article', 'body' => 'Third Article Body', 'published' => '1', 'created' => '2007-03-18 10:43:23', 'updated' => '2007-03-18 10:45:31']
+          ];
      }
 
-The ``$useDbConfig`` property defines the datasource of which the fixture will
+The ``$connection`` property defines the datasource of which the fixture will
 use.  If your application uses multiple datasources, you should make the
 fixtures match the model's datasources but prefixed with ``test_``.
 For example if your model uses the ``mydb`` datasource, your fixture should use
@@ -388,25 +397,28 @@ all your application's data when running tests.
 
 We use ``$fields`` to specify which fields will be part of this table,
 and how they are defined. The format used to define these fields is
-the same used with :php:class:`CakeSchema`. The keys available for table
+the same used with :php:class:`Cake\\Database\\Schema\\Table`. The keys available for table
 definition are:
 
 ``type``
     CakePHP internal data type. Currently supported:
-        - ``string``: maps to ``VARCHAR``
+        - ``string``: maps to ``VARCHAR`` or ``CHAR``
         - ``text``: maps to ``TEXT``
         - ``integer``: maps to ``INT``
+        - ``decimal``: maps to ``DECIMAL``
         - ``float``: maps to ``FLOAT``
         - ``datetime``: maps to ``DATETIME``
         - ``timestamp``: maps to ``TIMESTAMP``
         - ``time``: maps to ``TIME``
         - ``date``: maps to ``DATE``
         - ``binary``: maps to ``BLOB``
-``key``
-    Set to ``primary`` to make the field AUTO\_INCREMENT, and a PRIMARY KEY
-    for the table.
+``fixed``
+    Used with string types to create CHAR columns in platforms that support
+    them. Also used to force UUID types in Postgres when the length is also 36.
 ``length``
     Set to the specific length the field should take.
+``precision``
+    Set the number of decimal places used on float & decimal fields.
 ``null``
     Set to either ``true`` (to allow NULLs) or ``false`` (to disallow NULLs).
 ``default``
@@ -429,96 +441,73 @@ you can define ``$records`` in the init() function of your fixture. For example
 if you wanted all the created and updated timestamps to reflect today's date you
 could do the following::
 
-    class ArticleFixture extends CakeTestFixture {
+    namespace App\Test\Fixture;
+    
+    use Cake\TestSuite\Fixture\TestFixture;
 
-        public $fields = array(
-            'id' => array('type' => 'integer', 'key' => 'primary'),
-            'title' => array('type' => 'string', 'length' => 255, 'null' => false),
+    class ArticleFixture extends TestFixture {
+
+        public $fields = [
+            'id' => ['type' => 'integer'],
+            'title' => ['type' => 'string', 'length' => 255, 'null' => false],
             'body' => 'text',
-            'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
+            'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
             'created' => 'datetime',
-            'updated' => 'datetime'
-        );
+            'updated' => 'datetime',
+            '_constraints' => [
+                'primary' => ['type' => 'primary', 'columns' => ['id']],
+            ]
+        ];
 
         public function init() {
-            $this->records = array(
-                array(
+            $this->records = [
+                [
                     'id' => 1,
                     'title' => 'First Article',
                     'body' => 'First Article Body',
                     'published' => '1',
                     'created' => date('Y-m-d H:i:s'),
                     'updated' => date('Y-m-d H:i:s'),
-                ),
-            );
+                ],
+            ];
             parent::init();
         }
     }
 
 When overriding ``init()`` just remember to always call ``parent::init()``.
 
+Importing table information
+---------------------------
 
-Importing table information and records
----------------------------------------
+Defining the schema in fixture files can be really handy when creating plugins
+or libraries or if you are creating an application that needs to easily be
+portable. Redefining the schema in fixtures can become difficult to maintain in
+larger applications. Because of this CakePHP provides the ability to import the
+schema from an existing connection and use the reflected table definition to
+create the table definition used in the test suite.
 
-Your application may have already working models with real data
-associated to them, and you might decide to test your application with
-that data. It would be then a duplicate effort to have to define
-the table definition and/or records on your fixtures. Fortunately,
-there's a way for you to define that table definition and/or
-records for a particular fixture come from an existing model or an
-existing table.
-
-Let's start with an example. Assuming you have a model named
-Article available in your application (that maps to a table named
-articles), change the example fixture given in the previous section
+Let's start with an example. Assuming you have a table named articles available
+in your application, change the example fixture given in the previous section
 (``app/Test/Fixture/ArticleFixture.php``) to::
 
-    class ArticleFixture extends CakeTestFixture {
-        public $import = 'Article';
+
+    class ArticleFixture extends TestFixture {
+        public $import = ['table' => 'articles']
     }
 
-This statement tells the test suite to import your table definition from the
-table linked to the model called Article. You can use any model available in
-your application. The statement will only import the Article schema, and  does
-not import records. To import records you can do the following::
+If you want to use a different connection use::
 
-    class ArticleFixture extends CakeTestFixture {
-        public $import = array('model' => 'Article', 'records' => true);
+    class ArticleFixture extends TestFixture {
+        public $import = ['table' => 'articles', 'connection' => 'other'];
     }
 
-If on the other hand you have a table created but no model
-available for it, you can specify that your import will take place
-by reading that table information instead. For example::
-
-    class ArticleFixture extends CakeTestFixture {
-        public $import = array('table' => 'articles');
-    }
-
-Will import table definition from a table called 'articles' using
-your CakePHP database connection named 'default'. If you want to
-use a different connection use::
-
-    class ArticleFixture extends CakeTestFixture {
-        public $import = array('table' => 'articles', 'connection' => 'other');
-    }
-
-Since it uses your CakePHP database connection, if there's any
-table prefix declared it will be automatically used when fetching
-table information. The two snippets above do not import records
-from the table. To force the fixture to also import its records,
-change the import to::
-
-    class ArticleFixture extends CakeTestFixture {
-        public $import = array('table' => 'articles', 'records' => true);
-    }
 
 You can naturally import your table definition from an existing
 model/table, but have your records defined directly on the fixture
 as it was shown on previous section. For example::
 
-    class ArticleFixture extends CakeTestFixture {
-        public $import = 'Article';
+    class ArticleFixture extends TestFixture {
+        public $import = ['table' => 'articles'];
         public $records = array(
             array('id' => 1, 'title' => 'First Article', 'body' => 'First Article Body', 'published' => '1', 'created' => '2007-03-18 10:39:23', 'updated' => '2007-03-18 10:41:31'),
             array('id' => 2, 'title' => 'Second Article', 'body' => 'Second Article Body', 'published' => '1', 'created' => '2007-03-18 10:41:23', 'updated' => '2007-03-18 10:43:31'),
