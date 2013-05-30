@@ -192,7 +192,7 @@ these steps:
                 <rules>
                     <clear/>
                     <rule name="Imported Rule 0" stopProcessing="true">
-                        <match url="^(img|css|files|js)(.*)$"></match>
+                        <match url="^(img|css|files|js|favicon.ico)(.*)$"></match>
                         <action type="Rewrite" url="app/webroot/{R:1}{R:2}" appendQueryString="false"></action>
                     </rule>
                     <rule name="Imported Rule 1" stopProcessing="true">
