@@ -515,6 +515,11 @@ as it was shown on previous section. For example::
         );
     }
 
+Finally, you can not load/create any schema in a fixture. This is useful if you
+already have a test database setup with all the empty tables created. By
+defining neither ``$fields`` or ``$import`` a fixture will only insert its
+records and truncate the records on each test method.
+
 Loading fixtures in your test cases
 -----------------------------------
 
@@ -523,26 +528,26 @@ In each test case you should load the fixtures you will need.  You should load a
 fixture for every model that will have a query run against it.  To load fixtures
 you define the ``$fixtures`` property in your model::
 
-    class ArticleTest extends CakeTestCase {
-        public $fixtures = array('app.article', 'app.comment');
+    class ArticleTest extends TestCase {
+        public $fixtures = ['app.article', 'app.comment'];
     }
 
 The above will load the Article and Comment fixtures from the application's
 Fixture directory.  You can also load fixtures from CakePHP core, or plugins::
 
-    class ArticleTest extends CakeTestCase {
-        public $fixtures = array('plugin.debug_kit.article', 'core.comment');
+    class ArticleTest extends TestCase {
+        public $fixtures = ['plugin.debug_kit.article', 'core.comment'];
     }
 
 Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
 name as the prefix, will load the fixture from the named plugin.
 
 You can control when your fixtures are loaded by setting
-:php:attr:`CakeTestCase::$autoFixtures` to ``false`` and later load them using
-:php:meth:`CakeTestCase::loadFixtures()`::
+:php:attr:`Cake\\TestSuite\\TestCase::$autoFixtures` to ``false`` and later load them using
+:php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
 
-    class ArticleTest extends CakeTestCase {
-        public $fixtures = array('app.article', 'app.comment');
+    class ArticleTest extends TestCase {
+        public $fixtures = ['app.article', 'app.comment'];
         public $autoFixtures = false;
 
         public function testMyFunction() {
@@ -575,11 +580,14 @@ very minimum set of files (to keep tests isolated), so we have to start by
 loading our model - in this case the Article model which we already defined.
 
 Let's now create a file named ``ArticleTest.php`` in your
-``app/Test/Case/Model`` directory, with the following contents::
+``app/Test/TestCase/Model`` directory, with the following contents::
 
-    App::uses('Article', 'Model');
+    namespace App\Test\TestCase\Model;
 
-    class ArticleTest extends CakeTestCase {
+    use App\Model\Article;
+    use Cake\TestSuite\TestCase;
+
+    class ArticleTest extends TestCase {
         public $fixtures = array('app.article');
     }
 
@@ -598,13 +606,16 @@ Creating a test method
 
 Let's now add a method to test the function published() in the
 Article model. Edit the file
-``app/Test/Case/Model/ArticleTest.php`` so it now looks like
+``app/Test/TestCase/Model/ArticleTest.php`` so it now looks like
 this::
 
-    App::uses('Article', 'Model');
+    namespace App\Test\TestCase\Model;
 
-    class ArticleTest extends CakeTestCase {
-        public $fixtures = array('app.article');
+    use App\Model\Article;
+    use Cake\TestSuite\TestCase;
+
+    class ArticleTest extends TestCase {
+        public $fixtures = ['app.article'];
 
         public function setUp() {
             parent::setUp();
@@ -653,9 +664,6 @@ with reflected properties that normal mocks have::
         $model->verifyEmail('test@example.com');
     }
 
-.. versionadded:: 2.3
-    CakeTestCase::getMockForModel() was added in 2.3.
-
 Testing Controllers
 ===================
 
@@ -692,7 +700,7 @@ model. The controller code looks like::
     }
 
 Create a file named ``ArticlesControllerTest.php`` in your
-``app/Test/Case/Controller`` directory and put the following inside::
+``app/Test/TestCase/Controller`` directory and put the following inside::
 
     class ArticlesControllerTest extends ControllerTestCase {
         public $fixtures = array('app.article');
@@ -946,7 +954,7 @@ begin with a simple example controller that responds in JSON::
         }
     }
 
-Now we create the file ``app/Test/Case/Controller/MarkersControllerTest.php``
+Now we create the file ``app/Test/TestCase/Controller/MarkersControllerTest.php``
 and make sure our web service is returning the proper response::
 
     class MarkersControllerTest extends ControllerTestCase {
@@ -997,20 +1005,22 @@ controllers that use it. Here is our example component located in
 
 Now we can write tests to ensure our paginate ``limit`` parameter is being
 set correctly by the ``adjust`` method in our component. We create the file
-``app/Test/Case/Controller/Component/PagematronComponentTest.php``::
+``app/Test/TestCase/Controller/Component/PagematronComponentTest.php``::
 
-    App::uses('Controller', 'Controller');
-    App::uses('CakeRequest', 'Network');
-    App::uses('CakeResponse', 'Network');
-    App::uses('ComponentCollection', 'Controller');
-    App::uses('PagematronComponent', 'Controller/Component');
+    namespace App\Test\TestCase\Controller\Component;
+
+    use App\Controller\Component\PagematronComponent;
+    use Cake\Controller\Controller;
+    use Cake\Controller\ComponentCollection;
+    use Cake\Network\Request;
+    use Cake\Network\Response;
 
     // A fake controller to test against
     class TestPagematronController extends Controller {
         public $paginate = null;
     }
 
-    class PagematronComponentTest extends CakeTestCase {
+    class PagematronComponentTest extends TestCase {
         public $PagematronComponent = null;
         public $Controller = null;
 
@@ -1069,13 +1079,16 @@ separator to comma, and prefix the formatted number with 'USD' string.
 
 Now we create our tests::
 
-    // app/Test/Case/View/Helper/CurrencyRendererHelperTest.php
+    // app/Test/TestCase/View/Helper/CurrencyRendererHelperTest.php
 
-    App::uses('Controller', 'Controller');
-    App::uses('View', 'View');
-    App::uses('CurrencyRendererHelper', 'View/Helper');
+    namespace App\Test\TestCase\View\Helper;
 
-    class CurrencyRendererHelperTest extends CakeTestCase {
+    use App\View\Helper\CurrencyRendererHelper;
+    use Cake\Controller\Controller;
+    use Cake\TestSuite\TestCase;
+    use Cake\View\View;
+
+    class CurrencyRendererHelperTest extends TestCase {
         public $CurrencyRenderer = null;
 
         // Here we instantiate our helper
@@ -1112,9 +1125,9 @@ If you want several of your tests to run at the same time, you can
 creating a test suite. A testsuite is composed of several test cases.
 ``CakeTestSuite`` offers a few methods for easily creating test suites based on
 the file system.  If we wanted to create a test suite for all our model tests we
-could would create ``app/Test/Case/AllModelTest.php``. Put the following in it::
+could would create ``app/Test/TestCase/AllModelTest.php``. Put the following in it::
 
-    class AllModelTest extends CakeTestSuite {
+    class AllModelTest extends TestSuite {
         public static function suite() {
             $suite = new CakeTestSuite('All model tests');
             $suite->addTestDirectory(TESTS . 'Case' . DS . 'Model');
@@ -1123,13 +1136,13 @@ could would create ``app/Test/Case/AllModelTest.php``. Put the following in it::
     }
 
 The code above will group all test cases found in the
-``/app/Test/Case/Model/`` folder. To add an individual file, use
+``/app/Test/TestCase/Model/`` folder. To add an individual file, use
 ``$suite->addTestFile($filename);``. You can recursively add a directory
 for all tests using::
 
-    $suite->addTestDirectoryRecursive(TESTS . 'Case');
+    $suite->addTestDirectoryRecursive(TESTS . 'TestCase');
 
-Would recursively add all test cases in the ``app/Test/Case/``
+Would recursively add all test cases in the ``app/Test/TestCase/``
 directory.
 
 Creating Tests for Plugins
@@ -1142,7 +1155,7 @@ plugins folder.::
         /Plugin
             /Blog
                 /Test
-                    /Case
+                    /TestCase
                     /Fixture
 
 They work just like normal tests but you have to remember to use
@@ -1152,9 +1165,12 @@ chapter of this manual. A difference from other tests is in the
 first line where 'Blog.BlogPost' is imported. You also need to
 prefix your plugin fixtures with ``plugin.blog.blog_post``::
 
-    App::uses('BlogPost', 'Blog.Model');
+    namespace Blog\Test\TestCase\Model;
 
-    class BlogPostTest extends CakeTestCase {
+    use Blog\Model\BlogPost;
+    use Cake\TestSuite\TestCase;
+
+    class BlogPostTest extends TestCase {
 
         // Plugin fixtures located in /app/Plugin/Blog/Test/Fixture/
         public $fixtures = array('plugin.blog.blog_post');
