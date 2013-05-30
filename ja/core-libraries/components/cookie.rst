@@ -3,177 +3,154 @@ Cookie
 
 .. php:class:: CookieComponent(ComponentCollection $collection, array $settings = array())
 
-The CookieComponent is a wrapper around the native PHP ``setcookie``
-method. It also includes a host of delicious icing to make coding
-cookies in your controllers very convenient. Before attempting to
-use the CookieComponent, you must make sure that 'Cookie' is listed
-in your controllers' $components array.
+Cookie コンポーネントは PHP に組み込まれている ``setcookie`` メソッドに関連するラッパーです。
+コントローラーで Cookie を使ったコーディングをするのにとても便利な糖衣構文も多数含んでいます。 
+Cookie コンポーネントを使おうとする前に、コントローラーの $components の配列に 'Cookie' を必ず加えてください。
 
 
-Controller Setup
+コントローラーのセットアップ
 ================
 
-There are a number of controller variables that allow you to
-configure the way cookies are created and managed. Defining these
-special variables in the beforeFilter() method of your controller
-allows you to define how the CookieComponent works.
+Cookie の発行や操作の設定をすることができる値をいかに示します。これらの値によって
+Cookie コンポーネントがどのように動くかは、コントローラーの beforeFilter() メソッドでも特別に設定できます。
 
 +-----------------+--------------+------------------------------------------------------+
-| Cookie variable | default      | description                                          |
+| Cookie の変数    | 規定値        | 内容                                                  |
 +=================+==============+======================================================+
-| string $name    |'CakeCookie'  | The name of the cookie.                              |
+| string $name    |'CakeCookie'  | Cookie の名前です。                                    |
 +-----------------+--------------+------------------------------------------------------+
-| string $key     | null         | This string is used to encrypt                       |
-|                 |              | the value written to the cookie.                     |
-|                 |              | This string should be random and difficult to guess. |
+| string $key     | null         | この文字列は Cookie の値を暗号化するために使われます。          |
+|                 |              | ランダムで特定されにくい文字列を使うべきです。                  |
 |                 |              |                                                      |
-|                 |              | When using rijndael encryption this value            |
-|                 |              | must be longer than 32 bytes.                        |
+|                 |              | Rijndael 暗号化を使うときは32バイトより長い値にしなければなりません。|
 +-----------------+--------------+------------------------------------------------------+
-| string $domain  | ''           | The domain name allowed to access the cookie. e.g.   |
-|                 |              | Use '.yourdomain.com' to allow access from all your  |
-|                 |              | subdomains.                                          |
+| string $domain  | ''           | Cookie を読むことができるドメインの名前を設定します。たとえば、     |
+|                 |              | '.yourdomain.com' を使うと、あなたのサブドメインからの         |
+|                 |              | アクセスを許可します。                                     |
 +-----------------+--------------+------------------------------------------------------+
-| int or string   | '5 Days'     | The time when your cookie will expire. Integers are  |
-| $time           |              | Interpreted as seconds and a value of 0 is equivalent|
-|                 |              | to a 'session cookie': i.e. the cookie expires when  |
-|                 |              | the browser is closed. If a string is set, this will |
-|                 |              | be interpreted with PHP function strtotime(). You can|
-|                 |              | set this directly within the write() method.         |
+| int または string | '5 Days'     | Cookie が無効になる時間を設定します。整数ならば病として解釈され、 |
+| $time           |              | 0であればセッション Cookie として評価されます。すなわち、ブラウザを|
+|                 |              | 終了したときに破棄されます。文字列を設定したときは、 PHP の       |
+|                 |              | strtotime() 関数を使って解釈されます。 write() メソッドの中で  |
+|                 |              | 直接設定することもできます。                                |
 +-----------------+--------------+------------------------------------------------------+
-| string $path    | '/'          | The server path on which the cookie will be applied. |
-|                 |              | If $cookiePath is set to '/foo/', the cookie will    |
-|                 |              | only be available within the /foo/ directory and all |
-|                 |              | sub-directories such as /foo/bar/ of your domain. The|
-|                 |              | default value is the entire domain. You can set this |
-|                 |              | directly within the write() method.                  |
+| string $path    | '/'          | Cookie が適用される サーバーのパスを設定します。  '/foo/' を設定 |
+|                 |              | した場合、この Cookie は、あなたのドメインの /foo/ と、それ以下  |
+|                 |              | にあるすべてのサブディレクトリ( /foo/bar など) で有効になります。  |
+|                 |              | 既定ではドメイン全体で有効です。 write() メソッドで直接指定する  |
+|                 |              | こともできます。                                       |
 +-----------------+--------------+------------------------------------------------------+
-| boolean $secure | false        | Indicates that the cookie should only be transmitted |
-|                 |              | over a secure HTTPS connection. When set to true, the|
-|                 |              | cookie will only be set if a secure connection       |
-|                 |              | exists. You can set this directly within the write() |
-|                 |              | method.                                              |
+| boolean $secure | false        | セキュアな HTTPS 接続を通してのみ Cookie を伝送するかを設定     |
+|                 |              | します。 true に設定すると、セキュアな接続が確立しているときにのみ    |
+|                 |              | Cookie を発行するようになります。 write() メソッドで直接指定する  |
+|                 |              | することもできます。                                       |
 +-----------------+--------------+------------------------------------------------------+
-| boolean         | false        | Set to true to make HTTP only cookies. Cookies that  |
-| $httpOnly       |              | are HTTP only are not accessible in Javascript.      |
+| boolean         | false        | true に設定すると HTTP のみで有効な Cookie を作成します。これらの|
+| $httpOnly       |              | Cookie は Javascript からアクセスすることはできません。         |
 +-----------------+--------------+------------------------------------------------------+
 
-The following snippet of controller code shows how to include the
-CookieComponent and set up the controller variables needed to write
-a cookie named 'baker\_id' for the domain 'example.com' which needs
-a secure connection, is available on the path
-‘/bakers/preferences/’, expires in one hour and is HTTP only::
+以下のサンプルコードは、 Cookie コンポーネントをコントローラーにインクルードする方法と、
+セキュアな接続でのみ、 'example.com' というドメインの ‘/bakers/preferences/’
+というパス以下で、1時間だけ有効な 'baker\_id' という名前の HTTP のみで有効な
+Cookie の初期設定をするための例です。::
 
     public $components = array('Cookie');
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Cookie->name = 'baker_id';
-        $this->Cookie->time = 3600;  // or '1 hour'
+        $this->Cookie->time = 3600;  // または '1 hour'
         $this->Cookie->path = '/bakers/preferences/';
         $this->Cookie->domain = 'example.com';   
-        $this->Cookie->secure = true;  // i.e. only sent if using secure HTTPS
+        $this->Cookie->secure = true;  // セキュアな HTTPS で接続している時のみ発行されます
         $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
         $this->Cookie->httpOnly = true;
     }
 
-Next, let’s look at how to use the different methods of the Cookie
-Component.
+それでは、その他の Cookie コンポーネントのメソッドの使い方を見ていきましょう。
 
-Using the Component
-===================
+コンポーネントの使い方
+================
 
-The CookieComponent offers a number of methods for working with Cookies.
+CookieComponent は Cookie を使った動作をするためにいくつかのメソッドを提供します。
 
 .. php:method:: write(mixed $key, mixed $value = null, boolean $encrypt = true, mixed $expires = null)
 
-    The write() method is the heart of cookie component, $key is the
-    cookie variable name you want, and the $value is the information to
-    be stored::
+    write() は Cookie コンポーネントの中核をなすメソッドです。 $key は必要な Cookie の値につける名前を、
+    $value は保存しておきたい情報を設定します。::
 
         $this->Cookie->write('name', 'Larry');
 
-    You can also group your variables by supplying dot notation in the
-    key parameter::
+    $key にドット記法を使うことで値をグルーピングすることもできます。::
 
         $this->Cookie->write('User.name', 'Larry');
         $this->Cookie->write('User.role', 'Lead');
 
-    If you want to write more than one value to the cookie at a time,
-    you can pass an array::
+    一度に2つ以上の Cookie を書き込みたい場合は、配列を渡すことができます。::
 
         $this->Cookie->write('User',
             array('name' => 'Larry', 'role' => 'Lead')
         );
 
-    All values in the cookie are encrypted by default. If you want to
-    store the values as plain-text, set the third parameter of the
-    write() method to false. The encryption performed on cookie values
-    is fairly uncomplicated encryption system. It uses
-    ``Security.salt`` and a predefined Configure class var
-    ``Security.cipherSeed`` to encrypt values. To make your cookies
-    more secure you should change ``Security.cipherSeed`` in
-    app/Config/core.php to ensure a better encryption.::
+    すべての Cookie の値は、既定では暗号化されます。平文で値を保存したい場合は、3つ目の引数に 
+    false を設定します。 Cookie の値は非常に単純な暗号化システムで暗号化されます。値の暗号化には、
+    Configure クラスで予め定義された値である ``Security.salt`` と ``Security.cipherSeed``
+    が使われます。よりよい暗号化をして Cookie をよりセキュアにするために、 app/Config/core.php の
+    ``Security.cipherSeed`` を変更することをおすすめします。::
 
         $this->Cookie->write('name', 'Larry', false);
 
-    The last parameter to write is $expires – the number of seconds
-    before your cookie will expire. For convenience, this parameter can
-    also be passed as a string that the php strtotime() function
-    understands::
+    最後の引数 $expires は無効になる秒数を数値で指定します。使いやすくするために、
+    PHP の関数 strtotime() が解釈できる文字列を渡すこともできます。::
 
-        // Both cookies expire in one hour.
+        // いずれの Cookie も1時間で無効になります。
         $this->Cookie->write('first_name', 'Larry', false, 3600);
         $this->Cookie->write('last_name', 'Masters', false, '1 hour');
 
 .. php:method:: read(mixed $key = null)
 
-    This method is used to read the value of a cookie variable with the
-    name specified by $key.::
+    このメソッドは、 $key で指定した名前をつけた Cookie の値を得るために使われます。::
 
-        // Outputs “Larry”
+        // “Larry” を出力します
         echo $this->Cookie->read('name');
 
-        // You can also use the dot notation for read
+        // ドット記法も使うことができます
         echo $this->Cookie->read('User.name');
 
-        // To get the variables which you had grouped
-        // using the dot notation as an array use something like
+        // ドット記法でグループにした値を配列として得る場合、例えば、
         $this->Cookie->read('User');
 
-        // this outputs something like array('name' => 'Larry', 'role' => 'Lead')
+        // であれば、array('name' => 'Larry', 'role' => 'Lead') のような出力結果となります
 
 .. php:method:: check($key)
 
-    :param string $key: The key to check.
+    :param string $key: 確認のためのキー。
 
-    Used to check if a key/path exists and has not-null value.
+    key/path が存在し、値が null でない事を確認するために使われます。
 
     .. versionadded:: 2.3
-        ``CookieComponent::check()`` was added in 2.3
+        ``CookieComponent::check()`` は 2.3 で追加されました。
 
 .. php:method:: delete(mixed $key)
 
-    Deletes a cookie variable of the name in $key. Works with dot
-    notation::
+    $key で指定した名前のCookieの値を削除します。ドット記法を使うことができます。::
 
-        // Delete a variable
+        // ひとつの値を削除
         $this->Cookie->delete('bar');
 
-        // Delete the cookie variable bar, but not all under foo
+        // barという値を削除しますが、foo以下のすべてを削除するわけではありません
         $this->Cookie->delete('foo.bar');
 
 .. php:method:: destroy()
 
-    Destroys the current cookie.
+    現在の Cookie を破棄します。
 
 .. php:method:: type($type)
 
-    Allows you to change the encryption scheme.  By default the 'cipher' scheme
-    is used. However, you should use the 'rijndael' scheme for improved
-    security.
+    暗号化の方法を変更することができます。規定では 'cipher' 方式が使われます。しかし、
+    より安全にするためには 'rijndael' 方式を使うべきです。
 
     .. versionchanged:: 2.2
-        The 'rijndael' type was added.
+        'rijndael' タイプが追加されました。
 
 
 .. meta::
