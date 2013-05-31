@@ -30,7 +30,7 @@ Composer est un outil de gestion de dépendance pour PHP 5.3+. Il règle
 plusieurs problèmes que l'installeur PEAR a, et simplifie la gestion de
 plusieurs versions de librairies. Puisque CakePHP publie un package PEAR,
 vous pouvez installer CakePHP en utilisant
-`composer <http:://getcomposer.org>`_. Avant d'installer CakePHP, vous devrez
+`composer <http://getcomposer.org>`_. Avant d'installer CakePHP, vous devrez
 configurer un fichier ``composer.json``. Un fichier composer.json pour une
 application CakePHP ressemblerait à ce qui suit::
 
