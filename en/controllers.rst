@@ -308,6 +308,19 @@ will not try to re-render the view::
 This would render ``app/View/Posts/custom_file.ctp`` instead of
 ``app/View/Posts/my_action.ctp``
 
+
+You can also render views inside plugins using the following syntax:
+``$this->render('PluginName.PluginController/custom_file')``.
+For example::
+
+    class PostsController extends AppController {
+        public function my_action() {
+            $this->render('Users.UserDetails/custom_file');
+        }
+    }
+    
+This would render ``app/Plugin/Users/View/UserDetails/custom_file.ctp`` 
+
 Flow Control
 ------------
 
