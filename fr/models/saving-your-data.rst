@@ -156,17 +156,18 @@ que vous avez passé le champ de la clé primaire  dans le tableau data::
 
 Cette méthode initialise la classe du model pour sauvegarder de nouvelles 
 informations.
+Cela ne crée pas réellement un enregistrement dans la base de données mais
+efface Model::$id et défini Model::$data basé sur les champs par défaut dans
+votre base de données. Si vous n'avez défini aucun champ par défaut dans votre
+base de données, Model::$data sera défini comme un tableau vide.
 
-Si vous renseignez le paramètre ``$data`` (en utilisant le format de tableau 
-mentionné plus haut), le nouveau model créé sera prêt à être sauvegardé avec 
-ces données (accessibles à ``$this->data``).
+Si le paramètre ``$data`` (utilisant le format de tableau souligné ci-dessus)
+est passé, il sera fusionné avec les champs par défaut de la base de données
+et l'instance du model sera prête à être sauvegardée avec ces données
+(accessible dans ``$this->data``).
 
-Si ``false`` est passé à la place d'un tableau, l'instance du model 
-n'initialisera pas les champs du schéma de model qui ne sont pas encore 
-définis, cela remettra à zéro les champs qui ont déjà été renseignés, et 
-laissera les autres vides. Utilisez ceci pour éviter de mettre à jour des 
-champs de la base données qui ont déjà été renseignés et doivent être mis 
-à jour.
+Si ``false`` ou ``null`` sont passés pour le paramètre ``$data``, Model::data
+sera défini comme un tableau vide.
 
 .. tip::
 
