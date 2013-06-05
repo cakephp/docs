@@ -3,29 +3,30 @@ Cookie
 
 .. php:class:: CookieComponent(ComponentCollection $collection, array $settings = array())
 
-Le composant Cookie est un conteneur de la méthode native de PHP
-``setcookie``.Il inclut également toutes sortes de fonctionnalités pour 
+Le component Cookie est un conteneur de la méthode native de PHP
+``setcookie``. Il inclut également toutes sortes de fonctionnalités pour
 rendre le codage de code pour les cookies très pratique.
-Avant de tenter d'utiliser le composant Cookie, vous devez vous assurer
-que 'Cookie'est listé dnas la partie $components de votre controlleur.
+Avant de tenter d'utiliser le component Cookie, vous devez vous assurer
+que 'Cookie'est listé dans la partie $components de votre controller.
 
-Paramétrage du contrôleur
+Paramétrage du controller
 =========================
 
-Voici un certain nombre de variables de contrôleur qui vous permettent
-la manière dont les cookies sont créés et gérés.
-Définir ces variables spéciales dans la méthode beforeFilter () 
-de votre contrôleur vous permet de définir la façon dont le 
-Composant cookie fonctionne.
+Voici un certain nombre de variables du controller qui vous permettent de
+configurer la manière dont les cookies sont créés et gérés. Définir ces
+variables spéciales dans la méthode beforeFilter() de votre controller vous
+permet de définir la façon dont le Component cookie fonctionne.
 
 +-----------------+--------------+------------------------------------------------------+
-| variable cookie | par defaut   | description                                          |
+| variable Cookie | par défaut   | description                                          |
 +=================+==============+======================================================+
 | string $name    |'CakeCookie'  | Le nom du cookie                                     |
 +-----------------+--------------+------------------------------------------------------+
-| string $key     | null         | Cette chaîne de caractère est utilisée pour encrypter|
-|                 |              | la valeur écrite vers le cookie.Cette chaîne devrait |
-|                 |              | être aléatoire et difficile à deviner                |
+| string $key     | null         | Cette chaîne de caractère est utilisée pour chiffrer |
+|                 |              | la valeur écrite dans le cookie. Cette chaîne devrait|
+|                 |              | être aléatoire et difficile à deviner.               |
+|                 |              | Quand on utilise le chiffrement rijndael, cette      |
+|                 |              | valeur doit être plus grande que 32 bytes.           |
 +-----------------+--------------+------------------------------------------------------+
 | string $domain  | ''           | Le nom de domaine autoriser à accéder au cookie ex:  |
 |                 |              | Utiliser '.votredomaine.com' pour autoriser les      |
@@ -36,7 +37,7 @@ Composant cookie fonctionne.
 |                 |              | équivalente à une 'session cookie':ex. le cookie     |
 |                 |              | expire quand le navigateur est fermé. Si une chaîne  |
 |                 |              | est définie ce sera interprété avec la fonction PHP  |
-|                 |              | strtotime(). Vous pouvez définir cela a l'interieur  |
+|                 |              | strtotime(). Vous pouvez définir cela a l'intérieur  |
 |                 |              | de la méthode write().                               |
 +-----------------+--------------+------------------------------------------------------+
 | string $path    | '/'          | Le chemin d'accès au server sur lequel le cookie sera|
@@ -55,14 +56,14 @@ Composant cookie fonctionne.
 +-----------------+--------------+------------------------------------------------------+
 | boolean         | false        | Défini à true pour fabriquer uniquement des cookies  |
 | $httpOnly       |              | HTTP. Les cookies seulement HTTP ne sont pas         |
-|                 |              | disponible par javascript                            |
+|                 |              | disponibles en javascript                            |
 +-----------------+--------------+------------------------------------------------------+
 
-Les extraits de code de contrôleur suivant montre comment inclure le composant Cookie et
-paramétrer les variables de contrôleur nécessaires pour écrire un cookie nommé 'baker\_id'
-pour le domaine 'example.com' qui a besoin d'une connexion sécurisée, qui est disponible
-sur le chemin '/bakers/preferences/' ,qui expire dans une heure, et est uniquement en
-HTTP.
+Les extraits de code de controller suivants montrent comment inclure le
+component Cookie et paramétrer les variables du controller nécessaires pour
+écrire un cookie nommé 'baker\_id' pour le domaine 'example.com' qui a besoin
+d'une connexion sécurisée, qui est disponible au chemin
+'/bakers/preferences/', qui expire dans une heure, et est uniquement en HTTP.
 
 ::
 
@@ -70,93 +71,110 @@ HTTP.
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Cookie->name = 'baker_id';
-        $this->Cookie->time =  3600;  // ou '1 heure'
+        $this->Cookie->time = 3600;  // ou '1 hour'
         $this->Cookie->path = '/bakers/preferences/';
         $this->Cookie->domain = 'example.com';   
-        $this->Cookie->secure = true;  // ex. envoyé uniquement si la connexion est HTTPS
-        $this->Cookie->key = 'qSI232qs*&sXOw!';
+        $this->Cookie->secure = true;  // ex. seulement envoyé si on utilise un HTTPS sécurisé
+        $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
         $this->Cookie->httpOnly = true;
     }
 
-Ensuite,regardons comment utiliser les différentes méthode du Composant Cookie.
+Ensuite, regardons comment utiliser les différentes méthodes du Component
+Cookie.
 
-Utiliser le composant
+Utiliser le Component
 =====================
 
-Le composant Cookie offre plusieur méthode pour travailler avec les cookies.
+Le Component Cookie offre plusieurs méthodes pour travailler avec les Cookies.
 
 .. php:method:: write(mixed $key, mixed $value = null, boolean $encrypt = true, mixed $expires = null)
 
-    La méthode write() est le cœur du comosant cookie, $key est le 
-    nom de la variable désiré, et $value est l'information à stocker::
-    
+    La méthode write() est le cœur du composant cookie, $key est le
+    nom de la variable désirée, et $value est l'information à stocker::
 
         $this->Cookie->write('nom', 'Rémy');
 
-    Vous pouvez également grouper vos variables en utilsant la notation point '.' 
-    dans les paramêtres de clef::
+    Vous pouvez également grouper vos variables en utilisant la notation point
+    '.' dans les paramètres de clé::
 
-        $this->Cookie->write('Utilisateur.nom', 'Rémy');
-        $this->Cookie->write('Utilisateur.role', 'Chef');
+        $this->Cookie->write('User.name', 'Larry');
+        $this->Cookie->write('User.role', 'Lead');
 
-    Si vous vouler écrire plus d'une valeur dans le cookie en une fois, vous 
+    Si vous voulez écrire plus d'une valeur dans le cookie en une fois, vous
     pouvez passer un tableau::
 
-        $this->Cookie->write('Utilisateur',
-            array('nom' => 'Rémy', 'role' => 'Chef')
+        $this->Cookie->write('User',
+            array('name' => 'Larry', 'role' => 'Lead')
         );
 
-    Toutes les valeurs dans le cookie sont encryptée par défaut. Si vous voulez
-    stocker vos valeurs en texte clair, definissez le troisème paramêtre de la
-    méthode write() à false. L'encryption utilisée sur les valeurs de cookie est
-    un système d'encryption très simple. Il utilise ``Security.salt`` et une
-    variable de classe de configuration prédéfinie ``Security.cipherSeed`` pour
-    encripter les valeurs. Vous deviez changer ``Security.cipherSeed`` dans
-    app/Config/core.php pour assurer un meilleur cryptage.::
+    Toutes les valeurs dans le cookie sont chiffrées par défaut. Si vous voulez
+    stocker vos valeurs en texte clair, definissez le troisème paramètre de la
+    méthode write() à false. Le chiffrement utilisé sur les valeurs de cookie
+    est un système de chiffrement très simple. Il utilise ``Security.salt`` et
+    une variable de classe de configuration prédéfinie ``Security.cipherSeed``
+    pour chiffrer les valeurs. Vous devriez changer ``Security.cipherSeed``
+    dans app/Config/core.php pour assurer un meilleur chiffrement.::
 
-        $this->Cookie->write('nom', 'Rémy', false);
+        $this->Cookie->write('name', 'Larry', false);
 
     Le dernier paramètre à écrire est $expires - le nombre de secondes
     avant que le cookie n'expire. Par convention, ce paramètre peut aussi
     être passé comme une chaîne de texte que la fonction strtotime() de
-    php comprends::
+    php comprend::
 
-        // Both cookies expire in one hour.
-        $this->Cookie->write('prénom', 'Rémy', false, 3600);
-        $this->Cookie->write('nom', 'Masters', false, '1 hour');
+        // Les deux cookies expirent dans une heure.
+        $this->Cookie->write('first_name', 'Larry', false, 3600);
+        $this->Cookie->write('last_name', 'Masters', false, '1 hour');
 
 .. php:method:: read(mixed $key = null)
 
     Cette méthode est utilisée pour lire la valeur d'une variable de cookie
     avec le nom spécifié dans $key.::    
 
-        // Sortie "Rémy"
-        echo $this->Cookie->read('nom');
+        // Sortie “Larry”
+        echo $this->Cookie->read('name');
 
         // Vous pouvez aussi utiliser la notation par point pour lire
-        echo $this->Cookie->read('Utilisateur.nom');
+        echo $this->Cookie->read('User.name');
 
-        // Pour prendre les variables que vous aviez groupés 
-        // en utilisant la notation par point comme un tableau faites quelque chose comme
-        $this->Cookie->read('Utilisateur');
+        // Pour prendre les variables que vous aviez groupées en utilisant
+        // la notation par point comme tableau, faîtes quelque chose comme
+        $this->Cookie->read('User');
 
-        // ceci retourne quelque chose comme array('nom' => 'Rémy', 'role' => 'Chef')
-    
+        // ceci retourne quelque chose comme array('name' => 'Larry', 'role' => 'Lead')
+
+.. php:method:: check($key)
+
+    :param string $key: La clé à vérifier.
+
+    Utilisé pour vérifier si une clé/chemin existe et a une valeur non null.
+
+    .. versionadded:: 2.3
+        ``CookieComponent::check()`` a été ajoutée dans la versoin 2.3
 
 .. php:method:: delete(mixed $key)
 
-    Efface une variable de cookie du nom défini dans $key. Fonctionne avec la 
+    Efface une variable de cookie du nom défini dans $key. Fonctionne avec la
     notation par point::
 
         // Efface une variable
-        $this->Cookie->delete('bar')
+        $this->Cookie->delete('bar');
 
-        // Efface la variable de cookie bar , mais seulement dans foo
-        $this->Cookie->delete('foo.bar')
+        // Efface la variable bar du cookie, mais seulement dans foo.
+        $this->Cookie->delete('foo.bar');
 
 .. php:method:: destroy()
 
     Detruit le cookie actuel.
+
+.. php:method:: type($type)
+
+    Vous permet de changer le schéma de chiffrement. Par défaut, le schéma
+    'cipher' est utilisé. Cependant, vous devriez utiliser le schéma 'rijndael'
+    pour une sécurité améliorée.
+
+    .. versionchanged:: 2.2
+        Le type 'rijndael' a été ajouté.
 
 
 .. meta::
