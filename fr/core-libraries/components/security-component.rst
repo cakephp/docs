@@ -1,5 +1,5 @@
-Security
-########
+Security (Sécurité)
+###################
 
 .. php:class:: SecurityComponent(ComponentCollection $collection, array $settings = array())
 
@@ -348,5 +348,5 @@ Vous pouvez "délocker" ces actions en les listant dans
 .. versionadded:: 2.3
 
 .. meta::
-    :title lang=fr: Securité
+    :title lang=fr: Security (Securité)
     :keywords lang=fr: configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class
