@@ -3,7 +3,7 @@ Routing
 
 Routing est une fonctionnalité qui mappe les URLs aux actions du controller. 
 Elle a été ajoutée à CakePHP pour rendre les URLs belles et plus configurables 
-et flexibles. L'utilisation du mod\_rewrite de Apache n'est pas necéssaire pour 
+et flexibles. L'utilisation du mod\_rewrite de Apache n'est pas nécessaire pour 
 utiliser les routes, mais cela rendra votre barre d'adresse beaucoup plus 
 élégante.
 
@@ -46,13 +46,13 @@ Routing par défaut
 ==================
 
 Avant que vous appreniez à configurer vos propres routes, vous devez savoir 
-que CakePHP arrive configuré avec un ensemble de routes par défaut.
+que CakePHP est configuré avec un ensemble de routes par défaut.
 Le routing de CakePHP par défaut va vous faire aller assez loin dans toute 
 application. Vous pouvez accéder à une action directement par l'URL en 
 mettant son nom dans la requête. Vous pouvez aussi passer des paramètres aux 
 actions de votre controller en utilisant l'URL.::
 
-        pattern URL des routes par défaut: 
+        modèle URL des routes par défaut: 
         http://example.com/controller/action/param1/param2/param3
 
 L'URL /posts/view mappe à l'action view() de 
@@ -83,7 +83,7 @@ dans le fichier ``app/Config/routes.php`` en utilisant la méthode
 
 La méthode ``connect()`` prend trois paramètres: l'URL que vous souhaitez 
 faire correspondre, les valeurs par défaut pour les éléments de votre 
-route, et les règles d'expression régulière pour aider le router à 
+route, et les règles d'expression régulière pour aider le routeur à 
 faire correspondre les éléments dans l'URL.
 
 Le format basique pour une définition de route est::
@@ -94,10 +94,10 @@ Le format basique pour une définition de route est::
         array('option' => 'matchingRegex')
     );
 
-Le premier paramètre est utilisé pour dire au router quelle sorte d'URL 
+Le premier paramètre est utilisé pour dire au routeur quelle sorte d'URL 
 vous essayez de contrôler. L'URL est une chaîne normale délimitée par 
 des slashes, mais peut aussi contenir une wildcard (\*) ou 
-:ref:`route-elements`. Utiliser une wildcard dit au router que vous êtes prêt 
+:ref:`route-elements`. Utiliser une wildcard dit au routeur que vous êtes prêt 
 à accepter tout argument supplémentaire fourni. Les Routes sans un \* ne 
 matchent que le pattern template exact fourni.  
 
@@ -185,7 +185,7 @@ url va sortir /cooks/some_action/5 si la route ci-dessus est la
 première correspondante trouvée.
 
 Si vous pensez utiliser des arguments nommés personnalisés avec votre route, 
-vous devrez avertir le router de cela en utilisant la fonction 
+vous devrez avertir le routeur de cela en utilisant la fonction 
 :php:meth:`Router::connectNamed()`. Donc si vous voulez que la route ci-dessus 
 matchent les urls comme ``/cooks/some_action/type:chef``, nous faisons::
 
@@ -224,7 +224,7 @@ Cet exemple simple montre comment créer une manière rapide de voir les models
 à partir de tout controller en élaborant une URL qui ressemble à 
 ``/controllername/:id``. L'URL fourni à connect() spécifie deux éléments de 
 route: ``:controller`` et ``:id``. L'élément ``:controller`` est l'élément de 
-route par défaut de CakePHP, donc le router sait comment matcher et identifier 
+route par défaut de CakePHP, donc le routeur sait comment matcher et identifier 
 les noms de controller dans les URLs. L'élément ``:id`` est un élément de route 
 personnalisé, et doit être clarifié plus loin en spécifiant une expression 
 régulière correspondante dans le troisième paramètre de connect().
@@ -382,7 +382,7 @@ Ceci est souvent réalisé grâce à une URL spéciale telle que
 ``/admin/users/edit/5``. Dans CakePHP, les préfixes de routage peuvent être 
 activés depuis le fichier de configuration du cœur en configurant les 
 préfixes avec Routing.prefixes. Notez que les prefixes, bien que liés 
-au router sont configurés dans ``app/Config/core.php``::
+au routeur sont configurés dans ``app/Config/core.php``::
 
     Configure::write('Routing.prefixes', array('admin'));
 
@@ -609,7 +609,7 @@ Quelques exemples pour résumer les routes par défaut peuvent prouver leur aide
 Lorsque l'on fait des routes personnalisées, un piège classique est 
 d'utiliser des paramètres nommés qui casseront vos routes. Pour résoudre 
 cela vous devez informer le Router des paramètres qui sont censés être 
-des paramètres nommés. Sans cette information le Router est incapable de 
+des paramètres nommés. Sans cette information le Routeur est incapable de 
 déterminer si les paramètres nommés doivent en effet être des paramètres 
 nommés ou des paramètres à router, et supposera par défaut que ce sont des 
 paramètres à router. Pour connecter des paramètres nommés dans le routeur 
@@ -652,7 +652,7 @@ urls, vous pouvez utiliser la syntaxe suivante::
 Ce qui est au-dessus générerait l'url 
 ``/posts/index/filter[published]:1/filter[frontpage]:1``. Les paramètres 
 sont ensuite parsés et stockés dans la variable passedArgs de votre 
-controller en tableai, de la même façon que vous les envoyez au 
+controller en tableau, de la même façon que vous les envoyez au 
 :php:meth:`Router::url`::
 
     $this->passedArgs['filter'] = array(
@@ -691,7 +691,7 @@ Vous finiriez avec une longue et belle url comme ceci (entouré pour une lecture
       /users[]:1/users[]:2/users[]:3
 
 Et le tableau résultant qui serait passé au controller matcherait ceci que 
-vous avez passé au router::
+vous avez passé au routeur::
 
     $this->passedArgs['models'] = array(
         'post' => array(
@@ -823,7 +823,7 @@ ou une localisation en-dehors::
     Router::redirect(
         '/home/*', 
         array('controller' => 'posts', 'action' => 'view', 
-        array('persist' => true)
+        array('persist' => true) // ou array('persist'=>array('id')) pour un routing par défaut où la vue de l'action attend un argument $id
     );
 
 Redirige ``/home/*`` vers ``/posts/view`` et passe les paramètres vers 
@@ -958,7 +958,7 @@ API du Router
         pour la  destination du redirect.
     :param array $options: Un tableau d'options pour le redirect.
 
-    Connecte une nouvelle redirection de Route dans le router.
+    Connecte une nouvelle redirection de Route dans le routeur.
     Regardez :ref:`redirect-routing` pour plus d'informations.
 
 .. php:staticmethod:: connectNamed($named, $options = array())
@@ -1060,4 +1060,4 @@ API du Router
 
 .. meta::
     :title lang=fr: Routing
-    :keywords lang=fr: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router
+    :keywords lang=fr: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,routeur,router

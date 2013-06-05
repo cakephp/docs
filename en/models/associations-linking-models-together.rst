@@ -1012,6 +1012,8 @@ If your table has ``parent_id`` field you can also use :ref:`model-find-threaded
 to fetch nested array of records using a single query without
 setting up any associations.
 
+.. _joining-tables:
+
 Joining tables
 --------------
 

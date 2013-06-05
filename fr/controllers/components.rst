@@ -2,12 +2,12 @@ Components (Composants)
 #######################
 
 Les Components (Composants) sont des regroupements de logique applicative
-qui sont partagés entre les contrôleurs. Si vous vous surprenez à vouloir 
-copier et coller des choses entre vos contrôleurs, alors vous devriez envisager
-de regrouper plusieurs fonctionnalités dans un Component. 
+qui sont partagés entre les controllers. Si vous vous surprenez à vouloir
+copier et coller des choses entre vos controllers, alors vous devriez envisager
+de regrouper plusieurs fonctionnalités dans un Component.
 
 CakePHP est également livré avec un fantastique ensemble de components,
-que vous pouvez utiliser pour vous aider : 
+que vous pouvez utiliser pour vous aider :
 
 - Sécurité
 - Sessions
@@ -19,9 +19,9 @@ que vous pouvez utiliser pour vous aider :
 - Pagination
 
 Chacun de ces components d’origine est détaillé dans des chapitres
-spécifiques. Pour l’heure, nous allons vous montrer comment créer 
+spécifiques. Pour l’heure, nous allons vous montrer comment créer
 vos propres components. La création de components vous permet de garder
-le code de vos contrôleurs propres et vous permet de réutiliser 
+le code de vos controllers propres et vous permet de réutiliser
 du code entre vos projets.
 
 .. _configuring-components:
@@ -29,13 +29,14 @@ du code entre vos projets.
 Configuration des Components
 ============================
 
-De nombreux components du cœur nécessitent une configuration. Quelques exemples :
-:doc:`/core-libraries/components/authentication`, 
+De nombreux components du cœur nécessitent une configuration. Quelques
+exemples :
+:doc:`/core-libraries/components/authentication`,
 :doc:`/core-libraries/components/cookie`
 et :doc:`/core-libraries/components/email`.
-Toute configuration pour ces components, et pour les components en général, 
-se fait dans le tableau des ``$components`` de la méthode ``beforeFilter()`` 
-de vos contrôleurs::
+Toute configuration pour ces components, et pour les components en général,
+se fait dans le tableau des ``$components`` de la méthode ``beforeFilter()``
+de vos controllers::
 
     class PostsController extends AppController {
         public $components = array(
@@ -46,9 +47,9 @@ de vos contrôleurs::
             'Cookie' => array('name' => 'CookieMonster')
         );
 
-Serait un exemple de configuration d'un component avec le tableau 
+Serait un exemple de configuration d'un component avec le tableau
 ``$components``. Tous les components du coeur permettent aux paramètres
-d'être configurés dans la méthode de votre contrôleur ``beforeFilter()``.
+d'être configurés dans la méthode de votre controller ``beforeFilter()``.
 C'est utile quand vous avez besoin d'assigner les résultats d'une fonction
 à la propriété d'un component. Ceci peut aussi être exprimé comme ceci::
 
@@ -59,19 +60,21 @@ C'est utile quand vous avez besoin d'assigner les résultats d'une fonction
         $this->Cookie->name = 'CookieMonster';
     }
 
-C'est possible, cependant, que le component nécessite certaines options de 
-configuration avant que le contrôleur ``beforeFilter()`` soit lancé.
+C'est possible, cependant, que le component nécessite certaines options de
+configuration avant que le controller ``beforeFilter()`` soit lancé.
 Pour cela, certains components permettent aux options de configuration
 d'être définies dans le tableau ``$components``::
 
-    public $components = array('DebugKit.Toolbar' => array('panels' => array('history', 'session')));
+    public $components = array(
+        'DebugKit.Toolbar' => array('panels' => array('history', 'session'))
+    );
 
-Consultez la documentation pertinente pour connaître les options de 
+Consultez la documentation appropriée pour connaître les options de
 configuration que chaque component fournit.
 
-Un paramètre commun à utiliser est l'option ``className``, qui vous autorise 
-les alias des components. Cette fonctionnalité est utile quand vous voulez 
-remplacer ``$this->Auth`` ou une autre référence de Component commun avec 
+Un paramètre commun à utiliser est l'option ``className``, qui vous autorise
+les alias des components. Cette fonctionnalité est utile quand vous voulez
+remplacer ``$this->Auth`` ou une autre référence de Component commun avec
 une implémentation sur mesure::
 
     // app/Controller/PostsController.php
@@ -86,11 +89,11 @@ une implémentation sur mesure::
     // app/Controller/Component/MyAuthComponent.php
     App::uses('AuthComponent', 'Controller/Component');
     class MyAuthComponent extends AuthComponent {
-        // Ajouter votre code pour écraser le AuthComponent du coeur
+        // Ajouter votre code pour surcharger le AuthComponent du coeur
     }
 
-Ce qu'il y a au-dessous donnerait un *alias* ``MyAuthComponent`` à 
-``$this->Auth`` dans vos contrôleurs.
+Ce qu'il y a au-dessous donnerait un *alias* ``MyAuthComponent`` à
+``$this->Auth`` dans vos controllers.
 
 .. note::
 
@@ -100,11 +103,11 @@ Ce qu'il y a au-dessous donnerait un *alias* ``MyAuthComponent`` à
 Utiliser les Components
 =======================
 
-Une fois que vous avez inclu quelques components dans votre contrôleur, 
-les utiliser est très simple. Chaque component que vous utilisez est enregistré 
-comme propriété dans votre contrôleur. Si vous avez chargé la
-:php:class:`SessionComponent` et le :php:class:`CookieComponent` dans votre 
-contrôleur, vous pouvez y accéder comme ceci::
+Une fois que vous avez inclu quelques components dans votre controller,
+les utiliser est très simple. Chaque component que vous utilisez est enregistré
+comme propriété dans votre controller. Si vous avez chargé la
+:php:class:`SessionComponent` et le :php:class:`CookieComponent` dans votre
+controller, vous pouvez y accéder comme ceci::
 
     class PostsController extends AppController {
         public $components = array('Session', 'Cookie');
@@ -118,41 +121,41 @@ contrôleur, vous pouvez y accéder comme ceci::
 
 .. note::
 
-    Depuis que les Modèles et les Components sont tous deux ajoutés aux 
-    contrôleurs en tant que propriété, ils partagent le même 'espace de noms'.
-    Assurez vous de ne pas donner le même nom à un component et à un modèle.
+    Puisque les Models et les Components sont tous deux ajoutés aux
+    controllers en tant que propriété, ils partagent le même 'espace de noms'.
+    Assurez vous de ne pas donner le même nom à un component et à un model.
 
 Charger les components à la volée
 ---------------------------------
 
-Vous n'avez parfois pas besoin de rendre le component accessible sur chaque 
-action. Dans ce cas là, vous pouvez charger à la volée en utilisant la 
-:doc:`Component Collection </core-libraries/collections>`. A partir de 
-l'intérieur d'un contrôleur, vous pouvez faire comme ce qui suit::
+Vous n'avez parfois pas besoin de rendre le component accessible sur chaque
+action. Dans ce cas là, vous pouvez charger à la volée en utilisant la
+:doc:`Component Collection </core-libraries/collections>`. A partir de
+l'intérieur d'un controller, vous pouvez faire comme ce qui suit::
     
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
 
 
-Callbacks des components
+Callbacks des Components
 ========================
 
-Les components vous offrent aussi quelques callbacks durant leur cycle de vie 
-qui vous permettent d'augmenter le cycle de la requête. Allez voir l'api 
-:ref:`component-api` pour plus d'informations sur les callbacks possibles 
+Les components vous offrent aussi quelques callbacks durant leur cycle de vie
+qui vous permettent d'augmenter le cycle de la requête. Allez voir l'api
+:ref:`component-api` pour plus d'informations sur les callbacks possibles
 des components.
 
 Créer un Component
 ==================
 
-Supposons que notre application en ligne ait besoin de réaliser une opération 
+Supposons que notre application en ligne ait besoin de réaliser une opération
 mathématique complexe dans plusieurs sections différentes de l'application.
-Nous pourrions créer un component pour héberger cette logique partagée afin 
-de l'utiliser dans plusieurs contrôleurs différents.
+Nous pourrions créer un component pour héberger cette logique partagée afin
+de l'utiliser dans plusieurs controllers différents.
 
-La première étape consiste à créer un nouveau fichier et une classe pour 
-le component. Créez le fichier dans 
-``/app/Controller/Component/MathComponent.php``. La structure de base pour 
+La première étape consiste à créer un nouveau fichier et une classe pour
+le component. Créez le fichier dans
+``/app/Controller/Component/MathComponent.php``. La structure de base pour
 le component ressemblerait à quelque chose comme ça ::
 
     class MathComponent extends Component {
@@ -163,30 +166,30 @@ le component ressemblerait à quelque chose comme ça ::
 
 .. note::
 
-    Tous les components comme Math doivent étendre :php:class:`Component`. 
+    Tous les components comme Math doivent étendre :php:class:`Component`.
     Ne pas le faire vous enverra une exception.
 
-Inclure votre component dans vos contrôleurs
+Inclure votre component dans vos controllers
 --------------------------------------------
 
-Une fois notre component terminé, nous pouvons l’utiliser au sein 
-des contrôleurs de l’application en plaçant son nom 
-(sans la partie "Component") dans le tableau ``$components`` du contrôleur.
-Le contrôleur sera automatiquement pourvu d'un nouvel attribut nommé 
-d'après le component, à travers lequel nous pouvons accéder à une instance 
+Une fois notre component terminé, nous pouvons l’utiliser au sein
+des controllers de l’application en plaçant son nom
+(sans la partie "Component") dans le tableau ``$components`` du controller.
+Le controller sera automatiquement pourvu d'un nouvel attribut nommé
+d'après le component, à travers lequel nous pouvons accéder à une instance
 de celui-ci::
 
     /* Rend le nouveau component disponible par $this->Math
     ainsi que le component standard $this->Session */
     public $components = array('Math', 'Session');
 
-Les Components déclarés dans ``AppController`` seront fusionnés avec ceux 
-déclarés dans vos autres contrôleurs. Donc il n'y a pas besoin de re-déclarer 
+Les Components déclarés dans ``AppController`` seront fusionnés avec ceux
+déclarés dans vos autres controllers. Donc il n'y a pas besoin de re-déclarer
 le même component deux fois.
 
-Quand vous incluez des Components dans un Contrôleur, vous pouvez 
-aussi déclarer un ensemble de paramètres qui seront passés à la 
-méthode initialize() du Component. Ces paramètres peuvent alors être 
+Quand vous incluez des Components dans un Controller, vous pouvez
+aussi déclarer un ensemble de paramètres qui seront passés à la
+méthode initialize() du Component. Ces paramètres peuvent alors être
 pris en charge par le Component::
 
     public $components = array(
@@ -198,9 +201,9 @@ pris en charge par le Component::
     );
 
 L'exemple ci-dessus passerait le tableau contenant "precision"
-et "generateurAleatoire" comme second paramètre au 
+et "generateurAleatoire" comme second paramètre au
 ``MathComponent::__construct()``. Par convention, tout paramètre passé
-qui est aussi une propriété publique sur votre component aura 
+qui est aussi une propriété publique sur votre component aura
 la valeur basée sur ces paramètres.
 
 Utiliser d'autres Components dans votre Component
@@ -208,7 +211,7 @@ Utiliser d'autres Components dans votre Component
 
 Parfois un de vos components a besoin d'utiliser un autre component.
 Dans ce cas, vous pouvez inclure d'autres components dans votre component
-exactement de la même manière que dans vos contrôleurs - en utilisant la 
+exactement de la même manière que dans vos controllers - en utilisant la
 variable ``$components``::
 
     // app/Controller/Component/CustomComponent.php
@@ -237,6 +240,9 @@ variable ``$components``::
         }
     }
 
+Notez qu'au contraire d'un component inclu dans un controller, aucun callback
+ne sera attrapé pour un component inclu dans un component.
+
 .. _component-api:
 
 API de Component
@@ -244,53 +250,53 @@ API de Component
 
 .. php:class:: Component
 
-    La classe de base de Component vous offre quelques méthodes pour le 
-    chargement facile des autres Components à travers 
-    :php:class:`ComponentCollection` comme nous l'avons traité avec la gestion 
-    habituelle des paramètres. Elle fournit aussi des prototypes pour tous 
+    La classe de base de Component vous offre quelques méthodes pour le
+    chargement facile des autres Components à travers
+    :php:class:`ComponentCollection` comme nous l'avons traité avec la gestion
+    habituelle des paramètres. Elle fournit aussi des prototypes pour tous
     les callbacks des components.
 
-.. php:method:: __construct(ComponentCollection $collection, $parametres = array())
+.. php:method:: __construct(ComponentCollection $collection, $settings = array())
 
-    Les Constructeurs pour la classe de base du component. Tous les 
-    ``$parametres`` qui sont aussi des propriétés publiques, vont avoir leurs 
+    Les Constructeurs pour la classe de base du component. Tous les
+    ``$parametres`` qui sont aussi des propriétés publiques, vont avoir leurs
     valeurs changées pour matcher avec les valeurs de ``$settings``.
 
 Les Callbacks
 -------------
 
-.. php:method:: initialize($controller)
+.. php:method:: initialize(Controller $controller)
 
-    La méthode initialize est appelée avant la méthode du contrôleur 
+    La méthode initialize est appelée avant la méthode du controller
     beforeFilter.
 
-.. php:method:: startup($controller)
+.. php:method:: startup(Controller $controller)
 
-    La méthode startup est appelée après la méthode du contrôleur 
-    beforeFilter mais avant que le contrôleur n'exécute l'action prévue.
+    La méthode startup est appelée après la méthode du controller
+    beforeFilter mais avant que le controller n'exécute l'action prévue.
 
-.. php:method:: beforeRender($controller)
+.. php:method:: beforeRender(Controller $controller)
 
-    La méthode beforeRender est appelée après que le contrôleur exécute la 
-    logique de l'action requêtée, mais avant le rendu de la vue et le 
-    layout du contrôleur.
+    La méthode beforeRender est appelée après que le controller exécute la
+    logique de l'action requêtée, mais avant le rendu de la vue et le
+    layout du controller.
 
-.. php:method:: shutdown($controller)
+.. php:method:: shutdown(Controller $controller)
 
-    La méthode shutdown est appelée avant que la sortie soit envoyée au 
+    La méthode shutdown est appelée avant que la sortie soit envoyée au
     navigateur.
 
-.. php:method:: beforeRedirect($controller, $url, $status=null, $exit=true)
+.. php:method:: beforeRedirect(Controller $controller, $url, $status=null, $exit=true)
 
-    La méthode beforeRedirect est invoquée quand la méthode de redirection 
-    du contrôleur est appelée, mais avant toute action qui suit. Si cette 
-    méthode retourne false, le contrôleur ne continuera pas de rediriger la 
-    requête. Les variables $url, $status et $exit ont la même signification 
-    que pour la méthode du contrôleur. Vous pouvez aussi retourner une chaîne 
-    de caractère qui sera interpretée comme une url pour rediriger ou retourner 
+    La méthode beforeRedirect est invoquée quand la méthode de redirection
+    du controller est appelée, mais avant toute action qui suit. Si cette
+    méthode retourne false, le controller ne continuera pas de rediriger la
+    requête. Les variables $url, $status et $exit ont la même signification
+    que pour la méthode du controller. Vous pouvez aussi retourner une chaîne
+    de caractère qui sera interpretée comme une url pour rediriger ou retourner
     un array associatif avec la clé 'url' et éventuellement 'status' et 'exit'.
 
 
 .. meta::
     :title lang=fr: Components (Composants)
-    :keywords lang=fr: tableau contrôleur,librairies du coeur,authentification requêtes,tableau de nom,Liste contrôle accès,public components,contrôleur code,components du coeur,cookiemonster,cookie de connexion,paramètres de configuration,fonctionalité,logic,sessions,cakephp,doc
+    :keywords lang=fr: tableau controller,librairies du coeur,authentification requêtes,tableau de nom,Liste contrôle accès,public components,controller code,components du coeur,cookiemonster,cookie de connexion,paramètres de configuration,fonctionalité,logic,sessions,cakephp,doc

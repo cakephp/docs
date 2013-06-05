@@ -237,6 +237,8 @@ way you include them in controllers - using the ``$components`` var::
         }
     }
 
+Note that in contrast to a component included in a controller no callbacks will be triggered on an component's component.
+
 .. _component-api:
 
 Component API

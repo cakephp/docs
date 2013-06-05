@@ -1240,13 +1240,13 @@ Les options de Datetime
             </optgroup>
         </select>
 
-    * ``$options['multiple']`` Si  'multiple' a été définit à true pour 
+    * ``$attributes['multiple']`` Si  'multiple' a été définit à true pour 
       un input select, celui ci autorisera les sélections multiples::
 
         echo $this->Form->select('Model.field', $options, array('multiple' => true));
 
-      Vous pouvez également définir 'checkbox' à 'multiple' pour afficher une liste 
-      de check boxes reliés::
+      Vous pouvez également définir 'checkbox' à 'multiple' pour afficher une
+      liste de check boxes reliés::
 
         $options =  array(
             'Value 1' => 'Label 1',
@@ -1272,6 +1272,40 @@ Les options de Datetime
               <label for="ModelField2">Label 2</label>
            </div>
         </div>
+
+    * ``$attributes['disabled']`` Lors de la création de checkboxes, cette
+      option peut être défini pour désactiver tout ou quelques checkboxes.
+      Pour désactiver toutes les checkboxes, définissez disabled à ``true``::
+
+        $options = array(
+            'Value 1' => 'Label 1',
+            'Value 2' => 'Label 2'
+        );
+        echo $this->Form->select('Model.field', $options, array(
+            'multiple' => 'checkbox',
+            'disabled' => array('Value 1')
+        ));
+
+      Output:
+
+      .. code-block:: html
+
+        <div class="input select">
+           <label for="ModelField">Field</label>
+           <input name="data[Model][field]" value="" id="ModelField" type="hidden">
+           <div class="checkbox">
+              <input name="data[Model][field][]" disabled="disabled" value="Value 1" id="ModelField1" type="checkbox">
+              <label for="ModelField1">Label 1</label>
+           </div>
+           <div class="checkbox">
+              <input name="data[Model][field][]" value="Value 2" id="ModelField2" type="checkbox">
+              <label for="ModelField2">Label 2</label>
+           </div>
+        </div>
+
+    .. versionchanged:: 2.3
+        Le support pour les tableaux dans ``$attributes['disabled']`` a été
+        ajoutée dans 2.3.
 
 .. php:method:: file(string $fieldName, array $options)
 

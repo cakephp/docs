@@ -28,7 +28,7 @@ Installing CakePHP with composer
 Composer is a dependency management tool for PHP 5.3+. It solves many of the
 problems the PEAR installer has, and simplifies managing multiple versions of
 libraries.  Since CakePHP publishes a PEAR package you can install CakePHP using
-`composer <http:://getcomposer.org>`_. Before installing CakePHP you'll need to
+`composer <http://getcomposer.org>`_. Before installing CakePHP you'll need to
 setup a ``composer.json`` file. An composer.json file for a CakePHP applications
 would look like the following::
 
@@ -71,7 +71,7 @@ You are now ready to generate the rest of your application skeleton::
     $ Vendor/bin/cake bake project <path to project>
 
 By default ``bake`` will hard-code :php:const:`CAKE_CORE_INCLUDE_PATH`. To
-make your application more portable you should modify ``webroot/index.php``, 
+make your application more portable you should modify ``webroot/index.php``,
 changing ``CAKE_CORE_INCLUDE_PATH`` to be a relative path::
 
     define(
@@ -85,7 +85,7 @@ the autoloader, and work around an issue in composer's autoloader. In your
 
     // Load composer autoload.
     require APP . '/Vendor/autoload.php';
-    
+
     // Remove and re-prepend CakePHP's autoloader as composer thinks it is the most important.
     // See https://github.com/composer/composer/commit/c80cb76b9b5082ecc3e5b53b1050f76bb27b127b
     spl_autoload_unregister(array('App', 'load'));
@@ -147,16 +147,16 @@ Given this type of setup, I would need to edit my webroot/index.php
 file (which will end up at /var/www/mysite/index.php, in this
 example) to look like the following::
 
-    // /app/webroot/index.php (partial, comments removed) 
-    
+    // /app/webroot/index.php (partial, comments removed)
+
     if (!defined('ROOT')) {
         define('ROOT', DS . 'home' . DS . 'me');
     }
-    
+
     if (!defined('APP_DIR')) {
         define ('APP_DIR', 'myapp');
     }
-    
+
     if (!defined('CAKE_CORE_INCLUDE_PATH')) {
         define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
     }

@@ -3,21 +3,24 @@ Containable
 
 .. php:class:: ContainableBehavior
 
-Une nouvelle intégration au coeur de CakePHP est le Behavior "Containable" 
-``ContainableBehavior``. Ce behavior de modèle vous permet de filtrer et 
-limiter les opérations de récupération de données "find". Utiliser Containable 
-vous aidera a réduire l'utilisation inutile de votre base de données et 
-augmentera la vitesse et la plupart des performances de votre application. La 
-classe vous aidera aussi a chercher et filtrer vos données pour vos 
-utilisateurs d'une façon propre et consistante.
+Une nouvelle intégration au coeur de CakePHP 1.2 est le Behavior "Containable"
+``ContainableBehavior``. Ce behavior vous permet de filtrer et
+limiter les opérations de récupération de données "find". Utiliser Containable
+vous aidera a réduire l'utilisation inutile de votre base de données et
+augmentera la vitesse et la plupart des performances de votre application. La
+classe vous aidera aussi a chercher et filtrer vos données pour vos
+utilisateurs d'une façon propre et cohérente.
 
-Le behavior "Containable" vous permet de rationaliser et simplifier les 
-opérations de construction du model. Il agit en modifiant temporairement ou 
-définitivement les associations de vos modèles. Il fait cela en utilisant 
-des "containements" pour génerer une série d'appels ``bindModel`` et 
-``unbindModel``.  
+Le behavior "Containable" vous permet de rationaliser et simplifier les
+opérations de construction du model. Il agit en modifiant temporairement ou
+définitivement les associations de vos models. Il fait cela en utilisant
+des "containements" pour génerer une série d'appels ``bindModel`` et
+``unbindModel``. Étant donné que Containable modifie seulement les relations
+déjà existantes, il ne vous permettra pas de restreindre les résultats pour
+des associations distantes. Pour cela, vous devriez voir les
+:ref:`joining-tables`.
 
-Pour utiliser le nouveau behavior, vous pouvez l'ajouter à la propriété 
+Pour utiliser le nouveau behavior, vous pouvez l'ajouter à la propriété
 $actAs de votre model::
 
     class Post extends AppModel {
@@ -28,17 +31,16 @@ Vous pouvez aussi attacher le behavior à la volée::
 
     $this->Post->Behaviors->attach('Containable');
 
-
 .. _using-containable:
 
 Utilisation de Containable
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Pour voir comment Containable fonctionne, regardons quelques exemples. 
-Premièrement, nous commencerons avec un appel find() sur un modèle nommé 
-Post. Disons que ce Post a plusieurs (hasMany) Commentaire, et Post a et 
-appartient à plusieurs (hasAndBelongsToMany) Tag. La quantité de données 
-récupérées par un appel find() normal est assez étendue :: 
+Pour voir comment Containable fonctionne, regardons quelques exemples.
+Premièrement, nous commencerons avec un appel find() sur un model nommé
+Post. Disons que ce Post a plusieurs (hasMany) Commentaire, et Post a et
+appartient à plusieurs (hasAndBelongsToMany) Tag. La quantité de données
+récupérées par un appel find() normal est assez étendue ::
 
     debug($this->Post->find('all'));
     
@@ -93,17 +95,18 @@ récupérées par un appel find() normal est assez étendue ::
                 [Post] => Array
                     (...
 
-Pour certaines interfaces de votre application, vous pouvez ne pas avoir 
-besoin d'autant d'information depuis le modèle Post. Le 
+Pour certaines interfaces de votre application, vous pouvez ne pas avoir
+besoin d'autant d'information depuis le model Post. Le
 ``Behavior containable`` permet de reduire ce que le find() retourne.
 
-Par exemple, pour ne recuperer que les informations relative au post vous 
+Par exemple, pour ne récupérer que les informations relative au post vous
 pouvez faire cela::
 
     $this->Post->contain();
     $this->Post->find('all');
 
-Vous pouvez utiliser la magie de "Containable" à l'interieur d'un appel find():: 
+Vous pouvez utiliser la magie de "Containable" à l'interieur d'un appel
+find()::
 
     $this->Post->find('all', array('contain' => false));
 
@@ -130,21 +133,21 @@ Après avoir fait cela, vous vous retrouvez avec quelque chose de plus concis::
                     )
             )
 
-Ceci n'est pas nouveau: en fait, vous pouvez obtenir le même résultat sans 
-le ``behavior Containable`` en faisant quelque chose comme ::
+Ceci n'est pas nouveau: en fait, vous pouvez obtenir le même résultat sans
+le ``behavior Containable`` en faisant quelque chose comme::
 
     $this->Post->recursive = -1;
     $this->Post->find('all');
 
-Le ``behavior Containable`` s'exprime vraiment quand vous avez des associations 
-complexes, et que vous voulez rogner le nombre d'information au même niveau. La 
-propriété $recursive des modèles est utile si vous voulez éviter un niveau de 
-recursivité entier, mais pas pour choisir ce que vous garder à chaque niveau. 
+Le ``behavior Containable`` s'impose vraiment quand vous avez des associations
+complexes, et que vous voulez rogner le nombre d'information au même niveau. La
+propriété $recursive des models est utile si vous voulez éviter un niveau de
+recursivité entier, mais pas pour choisir ce que vous garder à chaque niveau.
 Regardons ensemble comment la methode ``contain()`` agit.
 
-Le premier argument de la méthode accepte le nom, ou un tableau de noms, des 
-modèles à garder lors du find. Si nous désirons aller chercher tous les posts 
-et les tags annexes (sans aucune information de commentaire), nous devons 
+Le premier argument de la méthode accepte le nom, ou un tableau de noms, des
+models à garder lors du find. Si nous désirons aller chercher tous les posts
+et les tags annexes (sans aucune information de commentaire), nous devons
 essayer quelque chose comme ::
 
     $this->Post->contain('Tag');
@@ -154,19 +157,19 @@ Nous pouvons à nouveau utiliser la clef contain dans l'appel find()::
 
     $this->Post->find('all', array('contain' => 'Tag'));
 
-Sans le behavior Containable, nous finirions par utilisez la méthode 
-``unbindModel()`` du modèle, plusieurs fois si nous épluchons des modèles 
-multiples. Le ``behavior Containable`` fourni un moyen plus propre pour 
+Sans le behavior Containable, nous finirions par utiliser la méthode
+``unbindModel()`` du model, plusieurs fois si nous épluchons des models
+multiples. Le ``behavior Containable`` fourni un moyen plus propre pour
 accomplir cette même tâche.Contenant des associations plus profondes.
 
 Des associations plus profondes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Le comportment Containable permet également d'aller un peu plus loin : vous 
-pouvez filtrer les données des modèles associés . si vous regardez le résultats 
-d'un appel find() classique, notez le champ "auteur" dans le modèle 
-"Commentaire". Si vous êtes interéssés dans les posts par les noms et les 
-commentaires des auteurs - et rien d'autre - vous devez faire quelque chose 
+Le component Containable permet également d'aller un peu plus loin : vous
+pouvez filtrer les données des models associés . si vous regardez le résultats
+d'un appel find() classique, notez le champ "auteur" dans le model
+"Commentaire". Si vous êtes interéssés dans les posts par les noms et les
+commentaires des auteurs - et rien d'autre - vous devez faire quelque chose
 comme ::
 
     $this->Post->contain('Commentaire.auteur');
@@ -176,9 +179,9 @@ comme ::
 
     $this->Post->find('all', array('contain' => 'Commentaire.auteur'));
 
-ici , nous avons dit au behavior Containable de nous donner l'informations 
-de post, et uniquement le champs auteur du modèle Commentaire associé.
-Le résultat du find ressemble à ::
+ici , nous avons dit au behavior Containable de nous donner l'informations
+de post, et uniquement le champs auteur du model Commentaire associé.
+Le résultat du find ressemble à::
 
     [0] => Array
             (
@@ -206,11 +209,11 @@ Le résultat du find ressemble à ::
     [1] => Array
             (...
 
-Comme vous pouvez le voir, les tableaux de Commentaire ne contiennent 
-uniquement que le champ auteur (avec le post_id qui est requit par 
+Comme vous pouvez le voir, les tableaux de Commentaire ne contiennent
+uniquement que le champ auteur (avec le post_id qui est requit par
 CakePHP pour présenter le résultat)
 
-Vous pouvez également filtrer les donneés Commentaire associés en 
+Vous pouvez également filtrer les donneés Commentaire associés en
 spécifiant une condition ::
 
     $this->Post->contain('Commentaire.auteur = "Daniel"');
@@ -220,7 +223,7 @@ spécifiant une condition ::
 
     $this->Post->find('all', array('contain' => 'Commentaire.auteur = "Daniel"'));
 
-Ceci nous donnes comme résultat les posts et commentaires dont daniel est 
+Ceci nous donnes comme résultat les posts et commentaires dont daniel est
 l'auteur::
 
     [0] => Array
@@ -247,7 +250,7 @@ l'auteur::
                     )
             )
 
-Des filtre supplémentaires peuvent être utilisées en utilisant les options 
+Des filtre supplémentaires peuvent être utilisées en utilisant les options
 de recherche standard :ref:`model-find`::
 
     $this->Post->find('all', array('contain' => array(
@@ -257,14 +260,14 @@ de recherche standard :ref:`model-find`::
         )
     )));
 
-Voici un exemple d'utilisation du behavior Containable quand vous avez de 
-profondes et complexes relations entre les modèles.
+Voici un exemple d'utilisation du behavior Containable quand vous avez de
+profondes et complexes relations entre les models.
 
-Examinons les associations de modèles suivants::
+Examinons les associations de models suivants::
 
-    User->Profil
-    User->Compte->ResumeCompte
-    User->Post->PieceJointe->HistoriquePieceJointe->HistoriqueNotes
+    User->Profile
+    User->Account->AccountSummary
+    User->Post->PostAttachment->PostAttachmentHistory->HistoryNotes
     User->Post->Tag
 
 Voici ce que nous recupérons des associations ci-dessus avec le behavior 
@@ -272,75 +275,76 @@ Containable ::
 
     $this->User->find('all', array(
         'contain' => array(
-            'Profil',
-            'Compte' => array(
-                'ResumeCompte'
+            'Profile',
+            'Account' => array(
+                'AccountSummary'
             ),
             'Post' => array(
-                'PieceJointe' => array(
-                    'fields' => array('id', 'nom'),
-                    'HistoriquePieceJointe' => array(
-                        'HistoriqueNotes' => array(
+                'PostAttachment' => array(
+                    'fields' => array('id', 'name'),
+                    'PostAttachmentHistory' => array(
+                        'HistoryNotes' => array(
                             'fields' => array('id', 'note')
                         )
                     )
                 ),
                 'Tag' => array(
-                    'conditions' => array('Tag.name LIKE' => '%joyeux%')
+                    'conditions' => array('Tag.name LIKE' => '%happy%')
                 )
             )
         )
     ));
 
-Garder à l'esprit que la clef 'contain' n'est utilisée qu'une seule fois dans 
-le model principal, vous n'avez pas besoin d'utiliser 'contain' a nouveau 
-dans les modèles liés.
+Gardez à l'esprit que la clef 'contain' n'est utilisée qu'une seule fois dans
+le model principal, vous n'avez pas besoin d'utiliser 'contain' a nouveau
+dans les models liés.
 
 .. note::
-    En utilisant les options 'fields' et 'contain' - faites attention d'inclure 
-    toutes les clefs étrangères que votre requête requiert directement ou 
-    indirectement. 
-    Notez également que c'est parce que le behavior Containable 
-    doit être attaché à tous les modèles utilisés dans le contenu, que vous devez 
-    l'attacher à votre AppModel. 
+
+    En utilisant les options 'fields' et 'contain' - faites attention d'inclure
+    toutes les clefs étrangères que votre requête requiert directement ou
+    indirectement.
+    Notez également que c'est parce que le behavior Containable
+    doit être attaché à tous les models utilisés dans le contenu, que vous
+    devez l'attacher à votre AppModel.
 
 Les options du Behavior Containable
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Le ``Behavior Containable`` a plusieurs options qui peuvent être définies 
-quand le behavior est attaché à un modèle. Ces paramètres vous permettent 
-d'affiner le behavior de Containable et de travailler plus facilement avec 
+Le ``Behavior Containable`` a plusieurs options qui peuvent être définies
+quand le behavior est attaché à un model. Ces paramètres vous permettent
+d'affiner le behavior de Containable et de travailler plus facilement avec
 les autres behaviors.
 
-- **recursive** (boolean, optional), définir à true pour permettre au behavior 
-  Containable, de déterminer automatiquement le niveau de récursivité nécessaire 
-  pour récupérer les modèles spécifiés et de paramétrer la récursivité du modèle 
-  à ce niveau. Le définir à false désactive cette fonctionnalité. La valeur par 
+
+- **recursive** (boolean, optional), définir à true pour permettre au behavior
+  Containable, de déterminer automatiquement le niveau de récursivité nécessaire
+  pour récupérer les models spécifiés et de paramétrer la récursivité du model
+  à ce niveau. Le définir à false désactive cette fonctionnalité. La valeur par
   défaut est ``true``.
-- **notices** (boolean, optional), émet des alertes E_NOTICES pour les liaisons 
-  référencées dans un appel containable et qui ne sont pas valides. La valeur par 
+- **notices** (boolean, optional), émet des alertes E_NOTICES pour les liaisons
+  référencées dans un appel containable et qui ne sont pas valides. La valeur par
   défaut est true.
-- **autoFields** (boolean, optional), ajout automatique des champs nécessaires 
+- **autoFields** (boolean, optional), ajout automatique des champs nécessaires
   pour récupérer les liaisons requêtées. La valeur par défaut est ``true``.
 
-Vous pouvez changer les paramètres du Behavior Containable à l'exécution, en 
+Vous pouvez changer les paramètres du Behavior Containable à l'exécution, en
 ré-attachant le behavior comme vu au chapitre
 :doc:`/models/behaviors` (Utiliser les Behaviors).
 
-Le behavior Containable peut quelque fois causer des problèles avec d'autres 
-behaviors ou des requêtes qui utilisent des fonctions d'aggrégations et/ou des 
-clauses GROUP BY. Si vous obtenez des erreurs SQL invalides à cause du mélange 
-de champs aggrégés et non-aggrégés, essayer de désactiver le paramètre 
+Le behavior Containable peut quelque fois causer des problèmes avec d'autres
+behaviors ou des requêtes qui utilisent des fonctions d'agrégations et/ou des
+clauses GROUP BY. Si vous obtenez des erreurs SQL invalides à cause du mélange
+de champs agrégés et non-agrégés, essayer de désactiver le paramètre
 ``autoFields``::
 
     $this->Post->Behaviors->attach('Containable', array('autoFields' => false));
 
-
 Utilisation du behavior Containable avec la pagination
 ======================================================
 
-En incluant le paramètre 'contain' dans la propriété ``$paginate``
-la pagination sera appliqué à la fois au find('count') et au find('all') dans 
+En incluant le paramètre 'contain' dans la propriété ``$paginate``,
+la pagination sera appliqué à la fois au find('count') et au find('all') dans
 le model.
 
 Voir la section :ref:`using-containable` pour plus de détails.
@@ -348,8 +352,8 @@ Voir la section :ref:`using-containable` pour plus de détails.
 Voici un exemple pour limiter les associations en paginant::
 
     $this->paginate['User'] = array(
-        'contain' => array('Profil', 'Compte'),
-        'order' => 'User.pseudo'
+        'contain' => array('Profile', 'Account'),
+        'order' => 'User.username'
     );
 
     $users = $this->paginate('User');
