@@ -129,12 +129,12 @@ Si vous n'êtes pas prêts à utiliser les options standards du find pour créer
 la requête d'affichage de vos données, il y a quelques options.
 Vous pouvez utiliser :ref:`custom find type <model-custom-find>`.
 Vous pouvez aussi implémenter les méthodes ``paginate()`` et ``paginateCount()``
-sur votre model, ou les inclure dans un component attaché à votre model.
-Les components qui implémentent ``paginate`` et/ou ``paginateCount`` devraient
+sur votre model, ou les inclure dans un behavior attaché à votre model.
+Les behaviors qui implémentent ``paginate`` et/ou ``paginateCount`` devraient
 implémenter les signatures de méthode définies ci-dessous avec le premier
 paramètre normal supplémentaire de ``$model``::
 
-    // paginate et paginateCount implémentés dans le component.
+    // paginate et paginateCount implémentés dans le behavior.
     public function paginate(Model $model, $conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) {
         // contenu de la méthode
     }
