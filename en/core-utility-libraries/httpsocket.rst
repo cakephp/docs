@@ -75,7 +75,7 @@ HTTP methods.
     The patch method makes a simple HTTP PATCH request returning the
     results.
 
-    The parameters for the ``put`` method is the same as the
+    The parameters for the ``patch`` method is the same as the
     :php:meth:`~HttpSocket::post()` method.
 
     .. versionadded:: 2.4
