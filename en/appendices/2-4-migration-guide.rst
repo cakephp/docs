@@ -106,6 +106,11 @@ CakeEmail
   not seeing email contents in your logs, be sure to add the ``email`` scope to
   your logging configuration.
 
+HttpSocket
+----------
+
+- :php:meth:`HttpSocket::patch()` has been added.
+
 
 I18n
 ====
