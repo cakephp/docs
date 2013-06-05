@@ -194,3 +194,12 @@ ErrorHandler
   will avoid these exceptions and the ones extending them to be be logged when
   ``'Exception.log'`` config is ``true``
 
+Routing
+=======
+
+Router
+------
+
+- :php:meth:`Router::baseUrl()` was added. This method replaces
+  :php:const:`FULL_BASE_URL`. Which is now deprecated.
+
