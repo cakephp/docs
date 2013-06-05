@@ -16,7 +16,7 @@ Authentification
 ================
 
 L'authentification est le processus d'identification des utilisateurs
-par des identifiants de connexion définis et permet d'assurer que
+par des identifiants de connexion définis et permet de s'assurer que
 l'utilisateur est bien celui qu'il prétend être. En général, cela se fait
 à travers un nom d'utilisateur et un mot de passe, qui sont comparés
 à une liste d'utilisateurs connus.
@@ -40,7 +40,7 @@ En général, vous aurez envie d'offrir l'authentification par formulaire.
 C'est le plus facile pour les utilisateurs utilisant un navigateur Web.
 Si vous construisez une API ou un service web, vous aurez peut-être à envisager
 l'utilisation de l'authentification de base ou l'authentification Digest.
-L’élément clef qui différencie l'authentification digest de l'authentification
+L’élément clé qui différencie l'authentification digest de l'authentification
 basic est la plupart du temps liée à la façon dont les mots de passe sont gérés.
 Avec l'authentification basic, le nom d'utilisateur et le mot de passe sont
 transmis en clair sur le serveur. Cela rend l'authentification de base non
@@ -83,8 +83,8 @@ d'authentification en utilisant un tableau::
     );
 
 Dans le deuxième exemple vous pourrez noter que nous avons à déclarer
-la clef ``userModel`` deux fois. Pour vous aider à garder un code "propre",
-vous pouvez utiliser la clef ``all``. Cette clef spéciale vous permet
+la clé ``userModel`` deux fois. Pour vous aider à garder un code "propre",
+vous pouvez utiliser la clé ``all``. Cette clé spéciale vous permet
 de définir les réglages qui sont passés à chaque objet attaché.
 La cle ``all`` est aussi utilisée comme cela
 ``AuthComponent::ALL``::
@@ -96,11 +96,11 @@ La cle ``all`` est aussi utilisée comme cela
         'Basic'
     );
 
-Dans l'exemple ci-dessus, à la fois ```Form`` et ``Basic`` prendrons
-les paramétrages définis dans la clef "all".
+Dans l'exemple ci-dessus, à la fois ```Form`` et ``Basic`` prendront
+les paramétrages définis dans la clé "all".
 Tous les paramètres transmis à un objet d'authentification particulier
-remplacerons la clef correspondante dans la clef 'all'.
-Les objets d'authentification supportent les clefs de configuration suivante.
+remplaceront la clé correspondante dans la clé 'all'.
+Les objets d'authentification supportent les clés de configuration suivante.
 
 - ``fields`` Les champs à utiliser pour identifier un utilisateur.
 - ``userModel`` Le nom du model de l'utilisateur, par défaut User.
@@ -124,8 +124,8 @@ Configurer différents champs pour l'utilisateur dans le tableau ``$components``
         )
     );
 
-Ne mettez pas d'autre clefs de configuration de Auth(comme authError,
-loginAction etc). Ils doivent se trouver au même niveau que la clef
+Ne mettez pas d'autre clés de configuration de Auth(comme authError,
+loginAction etc). Ils doivent se trouver au même niveau que la clé
 d'authentification. La configuration ci-dessus avec d'autres configurations
 ressemblerait à quelque chose comme.::
     
@@ -147,13 +147,13 @@ ressemblerait à quelque chose comme.::
         );
 
 En plus de la configuration courante, l'authentification de base
-prend en charge les clefs suivantes:
+prend en charge les clés suivantes:
 
 - ``realm`` Le domaine en cours d'authentification. Par défaut à
   ``env('SERVER_NAME')``.
 
 En plus de la configuration courante, l'authentification Digest prend en charge
-les clefs suivantes:
+les clés suivantes:
 
 - ``realm`` Le domaine en cours d'authentification. Par défaut à servername
 - ``nonce`` Un nonce utiliser pour l'authentification. Par défaut à
@@ -318,10 +318,10 @@ préférence avant la ligne content_for_layout.::
 Vous pouvez personnaliser les messages d'erreur, et les réglages que le
 component Auth ``AuthComponent`` utilise. En utilisant ``$this->Auth->flash``
 vous pouvez configurer les paramètres que le component Auth utilise pour
-envoyer des messages flash. Les clefs disponibles sont :
+envoyer des messages flash. Les clés disponibles sont :
 
 - ``element`` - L'élément à utiliser , 'default' par défaut.
-- ``key`` - La clef a utiliser , 'auth' par défaut
+- ``key`` - La clé a utiliser , 'auth' par défaut
 - ``params`` - Le tableau des paramètres additionnels à utiliser, array() par défaut
 
 En plus des paramètres de message flash, vous pouvez personnaliser d'autres
@@ -549,9 +549,9 @@ d'autorisation, en utilisant un tableau::
     );
 
 Tout comme  ``Auth->authenticate``,  ``Auth->authorize``, vous aides
-à garder un code "propre, en utilisant la clef ``all``. Cette clef spéciale
+à garder un code "propre, en utilisant la clé ``all``. Cette clé spéciale
 vous aides  à définir les paramètres qui sont passés à chaque objets attachés.
-La clef all est aussi exposée comme ``AuthComponent::ALL``::
+La clé all est aussi exposée comme ``AuthComponent::ALL``::
 
 
     // passage de paramètre en utilisant 'all'
@@ -562,9 +562,9 @@ La clef all est aussi exposée comme ``AuthComponent::ALL``::
     );
 
 Dans l'exemple ci-dessus, à la fois ``L' Actions`` et ``Le Controller`` auront
-les paramètres définis pour la clef 'all'. Chaque paramètres passés a un objet
-d'autorisation spécifique remplacera la clef correspondante dans la clef 'all'.
-Le noyau authorize objects supporte les clefs de configuration suivantes.
+les paramètres définis pour la clé 'all'. Chaque paramètres passés a un objet
+d'autorisation spécifique remplacera la clé correspondante dans la clé 'all'.
+Le noyau authorize objects supporte les clés de configuration suivantes.
 
 
 - ``actionPath`` Utilisé par ``ActionsAuthorize`` pour localiser le controller
@@ -751,7 +751,7 @@ pouvez être sûr que le paramétrage sera appliqué partout::
         'view' => array('show', 'display')
     ));
 
-La clef pour mapActions devra être les permissions CRUD que vous voulez
+La clé pour mapActions devra être les permissions CRUD que vous voulez
 définir, tandis que les valeurs devront être un tableau de toutes les
 actions qui sont mappées vers les permissions CRUD.
 
@@ -797,10 +797,10 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 
     Paramétrage à utiliser quand Auth à besoin de faire un message flash avec
     :php:meth:`SessionComponent::setFlash()`.
-    Les clefs disponibles sont:
+    Les clés disponibles sont:
 
     - ``element`` - L'élement à utiliser , par défaut à 'default'.
-    - ``key`` - La clef à utiliser, par défaut à 'auth'.
+    - ``key`` - La clé à utiliser, par défaut à 'auth'.
     - ``params`` - Un tableau de paramètres supplémentaires à utiliser par
       défaut à array()
 
@@ -963,7 +963,7 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 
         $id = $this->Auth->user('id');
 
-    Si l'utilisateur courant n'est pas connecté ou que la clef n'existe pas
+    Si l'utilisateur courant n'est pas connecté ou que la clé n'existe pas
     ``null`` sera retourné.
 
 
