@@ -326,7 +326,19 @@ n'essaiera pas de re-rendre la vue::
 Cela rendrait ``app/View/Posts/fichier_personnalise.ctp`` au lieu de
 ``app/View/Posts/mon_action.ctp``.
 
-Contrôle de FLux
+Vous pouvez aussi rendre les vues des plugins en utilisant la syntaxe suivante:
+``$this->render('PluginName.PluginController/custom_file')``.
+Par exemple::
+
+    class PostsController extends AppController {
+        public function my_action() {
+            $this->render('Users.UserDetails/custom_file');
+        }
+    }
+    
+Cela rendrait la vue ``app/Plugin/Users/View/UserDetails/custom_file.ctp`` 
+
+Contrôle de Flux
 ----------------
 
 .. php:method:: redirect(mixed $url, integer $status, boolean $exit)
