@@ -137,6 +137,12 @@ controller's method you can do the following::
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
 
+.. note::
+
+    Keep in mind that loading a component on the fly will not call its
+    initialize method. If the component you are calling has this method you
+    will need to call it manually after load.
+
 
 Component Callbacks
 ===================
