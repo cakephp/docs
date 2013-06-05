@@ -136,6 +136,11 @@ l'intérieur d'un controller, vous pouvez faire comme ce qui suit::
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
 
+.. note::
+
+    Gardez à l'esprit que le chargement d'un component à la volée ne va pas
+    appeler la méthode initialize. Si le component que vous appelez a cette
+    méthode, vous devrez l'appeler manuellement après le chargement.
 
 Callbacks des Components
 ========================
