@@ -197,7 +197,7 @@ feriez dans un controller::
         public function lancerEdition($titre, $url) {
             // Utilisation du helper HTML pour sortir une donnée formatée
     
-            $link = $this->Html->link($title, $url, array('class' => 'edit'));
+            $link = $this->Html->link($titre, $url, array('class' => 'edit'));
     
             return '<div class="editOuter">' . $link . '</div>';
         }
@@ -221,7 +221,7 @@ Une fois que votre controller est au courant de cette nouvelle classe, vous
 pouvez l'utiliser dans vos vues en accédant un objet nommé après le helper::
 
     <!-- fait un lien en utilisant le nouveau helper -->
-    <?php echo $this->Link->lancerEdition('Changer cette recette', '/recipes/edit/5'); ?>
+    <?php echo $this->Lien->lancerEdition('Changer cette recette', '/recipes/edit/5'); ?>
 
 
 Créer des fonctionnalités à vos Helpers
