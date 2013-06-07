@@ -41,7 +41,7 @@ permet de définir la façon dont le Component cookie fonctionne.
 |                 |              | de la méthode write().                               |
 +-----------------+--------------+------------------------------------------------------+
 | string $path    | '/'          | Le chemin d'accès au server sur lequel le cookie sera|
-|                 |              | appliqué. Si $cookiePath est paramétré à '/foo/', il |
+|                 |              | appliqué. Si $path est paramétré à '/foo/', il |
 |                 |              | ne sera disponible que dans le repertoires /foo/     |
 |                 |              | et tous les sous repertoires comme /foo/bar/ de votre|
 |                 |              | domaine La valeur par défaut est le domaine entier.  |
