@@ -42,7 +42,7 @@ allows you to define how the CookieComponent works.
 |                 |              | set this directly within the write() method.         |
 +-----------------+--------------+------------------------------------------------------+
 | string $path    | '/'          | The server path on which the cookie will be applied. |
-|                 |              | If $cookiePath is set to '/foo/', the cookie will    |
+|                 |              | If $path is set to '/foo/', the cookie will          |
 |                 |              | only be available within the /foo/ directory and all |
 |                 |              | sub-directories such as /foo/bar/ of your domain. The|
 |                 |              | default value is the entire domain. You can set this |
