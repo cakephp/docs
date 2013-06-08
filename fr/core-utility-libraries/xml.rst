@@ -3,22 +3,22 @@ Xml
 
 .. php:class:: Xml
 
-La classe Xml a été reconstruite.Comme PHP 5 a 
+La classe Xml a été reconstruite. Comme PHP 5 a
 `SimpleXML <http://php.net/simplexml>`_ et
-`DOMDocument <http://php.net/domdocument>`_, CakePHP ne nécéssite pas de 
-ré-implémenter un parser XML. La nouvelle classe XML va fondamentalement 
-transformer un tableau en objets SimpleXMLElement ou DOMDocument, et vice versa.
-
+`DOMDocument <http://php.net/domdocument>`_, CakePHP ne nécéssite pas de
+ré-implémenter un parser XML. La nouvelle classe XML va fondamentalement
+transformer un tableau en objets SimpleXMLElement ou DOMDocument, et vice
+versa.
 
 Importer les données vers la classe Xml
 =======================================
 
-Dans CakePHP 1.3, vous pouviez passez les tableaux, les XML et les chaînes de 
-caractère, les URL ou les chemins de fichier vers le constructeur de la classe 
-Xml pour importer les données. Dans CakePHP 2.0, vous pouvez le faire en 
-utilisant :php:meth:`Xml::build()`. A moins que le retour soit un objet Xml, 
-cela retournera un objet SimpleXMLElement ou DOMDocument (selon votre paramètre 
-options - par défault SimpleXMLElement). Ci-dessous les échantillons sur la 
+Dans CakePHP 1.3, vous pouviez passez les tableaux, les XML et les chaînes de
+caractère, les URL ou les chemins de fichier vers le constructeur de la classe
+Xml pour importer les données. Dans CakePHP 2.0, vous pouvez le faire en
+utilisant :php:meth:`Xml::build()`. A moins que le retour soit un objet Xml,
+cela retournera un objet SimpleXMLElement ou DOMDocument (selon votre paramètre
+options - par défault SimpleXMLElement). Ci-dessous les échantillons sur la
 façon d'importer des données depuis une URL::
 
     // Vieille méthode:
@@ -28,7 +28,7 @@ façon d'importer des données depuis une URL::
     $xml = Xml::build('http://bakery.cakephp.org/articles/rss');
     // $xml est maintenant une instance de SimpleXMLElement
 
-    //or
+    //ou
     $xml = Xml::build('http://bakery.cakephp.org/articles/rss', array('return' => 'simplexml'));
     // $xml est maintenant une instance de SimpleXMLElement
 
@@ -36,8 +36,8 @@ façon d'importer des données depuis une URL::
     $xml = Xml::build('http://bakery.cakephp.org/articles/rss', array('return' => 'domdocument'));
     // $xml est maintenant une instance de DOMDocument
 
-Vous pouvez utiliser :php:meth:`Xml::build()` pour construire les objets XML 
-à partir d'une variété de sources. Vous pouvez utiliser XML pour construire 
+Vous pouvez utiliser :php:meth:`Xml::build()` pour construire les objets XML
+à partir de diverses sources. Vous pouvez utiliser XML pour construire
 des objets à partir d'une chaîne de caractère::
 
     $text = '<?xml version="1.0" encoding="utf-8"?>
@@ -48,8 +48,8 @@ des objets à partir d'une chaîne de caractère::
     </post>';
     $xml = Xml::build($text);
 
-Vous pouvez aussi construire des objets Xml à partir de fichiers locaux, 
-ou de fichiers distants. Les fichiers distants seront récupérés avec 
+Vous pouvez aussi construire des objets Xml à partir de fichiers locaux,
+ou de fichiers distants. Les fichiers distants seront récupérés avec
 :php:class:`HttpSocket`::
 
     // fichier local
@@ -80,16 +80,15 @@ Si votre entrée est invalide, la classe Xml enverra une Exception::
 
 .. note::
 
-    `DOMDocument <http://php.net/domdocument>`_ et 
+    `DOMDocument <http://php.net/domdocument>`_ et
     `SimpleXML <http://php.net/simplexml>`_ implement different API's.
-    Assurez vous d'utiliser les bonnes méthodes sur l'objet que vous 
+    Assurez vous d'utiliser les bonnes méthodes sur l'objet que vous
     requêtez à partir d'un Xml.
-
 
 Transformer une chaîne de caractères XML en tableau
 ===================================================
 
-Convertir des chaînes XML en tableaux est aussi facile avec la classe Xml. Par 
+Convertir des chaînes XML en tableaux est aussi facile avec la classe Xml. Par
 défaut, vous obtiendrez un objet SimpleXml en retour::
 
     //Vieille méthode:
@@ -118,30 +117,30 @@ Transformer un tableau en une chaîne de caractères XML
     $xmlObject = Xml::fromArray($xmlArray, array('format' => 'tags')); // You can use Xml::build() too
     $xmlString = $xmlObject->asXML();
 
-Votre tableau ne doit avoir qu'un élément de "niveau supérieur" et il ne pas 
-être numérique. Si le tableau n'est pas dans le bon format, Xml va lancer une 
-Exception.
+Votre tableau ne doit avoir qu'un élément de "niveau supérieur" et il ne doit
+pas être numérique. Si le tableau n'est pas dans le bon format, Xml va lancer
+une Exception.
 Des Exemples de tableaux invalides::
 
     // Niveau supérieur avec une clé numérique
     array(
-        array('cle' => 'valeur')
+        array('key' => 'value')
     );
 
     // Plusieurs clés au niveau supérieur
     array(
-        'cle1' => 'première valeur',
-        'cle2' => 'autre valeur'
+        'key1' => 'première valeur',
+        'key2' => 'autre valeur'
     );
 
 .. warning::
 
-    L'option format par défault a été changée de `attributes` pour `tags`. Cela 
-    a été fait pour rendre le Xml que la classe Xml génére plus compatible avec 
-    le Xml dans la nature. Attention si vous dépendez de celui-ci. Dans la 
-    nouvelle version, vous pouvez créer un tableau mixte avec des tags, des 
-    attributs et valeurs, utilisez juste le format en tags (ou ne dîtes rien, 
-    car c'est la valeur par défaut) et les clés préfixéess qui sont sensées 
+    L'option format par défault a été changée de `attributes` pour `tags`. Cela
+    a été fait pour rendre le Xml que la classe Xml génère plus compatible avec
+    le Xml dans la nature. Attention si vous dépendez de celui-ci. Dans la
+    nouvelle version, vous pouvez créer un tableau mixte avec des tags, des
+    attributs et valeurs, utilisez juste le format en tags (ou ne dîtes rien,
+    car c'est la valeur par défaut) et les clés préfixées qui sont sensées
     être des attributs avec `@`. Pour une valeur texte, mettez la clé à `@`.
 
 ::
@@ -163,9 +162,9 @@ Le contenu de ``$xmlString`` sera::
 
 .. note::
 
-    La structure des tableaux a été changée. Maintenant l'enfant doit avoir 
-    un sous-arbre et ne pas être dans le même arbre. En plus, les chaînes 
-    de caractères ne seront pas changées par :php:class:`Inflector`. Regardez 
+    La structure des tableaux a été changée. Maintenant l'enfant doit avoir
+    un sous-arbre et ne pas être dans le même arbre. En plus, les chaînes
+    de caractères ne seront pas changées par :php:class:`Inflector`. Regardez
     l'exemple ci-dessous:
 
 ::
@@ -223,8 +222,8 @@ Les deux engendreront le XML ci-dessous::
 Utiliser des Namespaces
 -----------------------
 
-Pour utiliser les Namespaces XML, dans votre tableau vous devez créer une clé 
-avec le nom ``xmlns:`` vers un namespace générique ou avec le préfixe 
+Pour utiliser les Namespaces XML, dans votre tableau vous devez créer une clé
+avec le nom ``xmlns:`` vers un namespace générique ou avec le préfixe
 ``xmlns:`` dans un namespace personnalisé. Regardez les exemples::
 
     $xmlArray = array(
@@ -260,9 +259,9 @@ La valeur de ``$xml1`` et ``$xml2`` sera, respectivement::
 Créer un enfant
 ---------------
 
-La classe Xml de CakePHP 2.0 ne fournit pas la manipulation du contenu, cela 
-doit être fait en utilisant SimpleXMLElement ou DOMDocument. Mais, comme 
-CakePHP est trop sympa, ci-dessous vous avez les étapes pour créer un noeud 
+La classe Xml de CakePHP 2.0 ne fournit pas la manipulation du contenu, cela
+doit être fait en utilisant SimpleXMLElement ou DOMDocument. Mais, comme
+CakePHP est trop sympa, ci-dessous vous avez les étapes pour créer un noeud
 enfant::
 
     // CakePHP 1.3
@@ -283,26 +282,25 @@ enfant::
 
 .. tip::
 
-    Après avoir manipulé votre XML en utilisant SimpleXMLElement ou DomDocument 
+    Après avoir manipulé votre XML en utilisant SimpleXMLElement ou DomDocument
     vous pouvez utiliser :php:meth:`Xml::toArray()` sans problèmes.
 
-
-API Xml
-=======
+API de Xml
+==========
 
 Une classe usine de conversion pour créer des objets SimpleXML ou DOMDocument
-à partir d'un certain nombre de sources, y compris des chaînes, des tableaux 
+à partir d'un certain nombre de sources, y compris des chaînes, des tableaux
 et des urls distantes.
 
 .. php:staticmethod:: build($input, $options = array())
 
-    Initialisez SimpleXMLElement ou DOMDocument à partir d'une chaîne de 
-    caractère XML donnée, d'un chemin de fichier, d'une URL ou d'un 
-    tableau
+    Initialisez SimpleXMLElement ou DOMDocument à partir d'une chaîne de
+    caractère XML donnée, d'un chemin de fichier, d'une URL ou d'un
+    tableau.
 
     Construire du XML à partir d'une chaîne de caractères::
 
-        $xml = Xml::build('<example>text</example>');`
+        $xml = Xml::build('<example>text</example>');
 
     Construire du XML à partir d'une chaîne de caractères (sortie DOMDocument)::
 
@@ -334,12 +332,12 @@ et des urls distantes.
         );
         $xml = Xml::build($value);
 
-    Quand on construit du XML à partir d'un tableau, assurez-vous qu'il n'y a 
+    Quand on construit du XML à partir d'un tableau, assurez-vous qu'il n'y a
     qu'un seul élément de niveau supérieur.
 
 .. php:staticmethod:: toArray($obj)
 
-    Convertit soit un objet SimpleXml ou DOMDocument en un tableau.
+    Convertit soit un objet SimpleXml, soit DOMDocument en un tableau.
 
 
 .. meta::

@@ -3,7 +3,7 @@ CakeNumber
 
 .. php:class:: CakeNumber()
 
-Si vous avez besoin des fonctionnalités de :php:class:`NumberHelper` en dehors 
+Si vous avez besoin des fonctionnalités de :php:class:`NumberHelper` en-dehors
 d'une ``View``, utilisez la classe ``CakeNumber``::
 
     class UsersController extends AppController {
@@ -25,7 +25,7 @@ d'une ``View``, utilisez la classe ``CakeNumber``::
 
 .. start-cakenumber
 
-Toutes ces fonctions retournent le nombre formaté; Elles n'affichent pas 
+Toutes ces fonctions retournent le nombre formaté; Elles n'affichent pas
 automatiqement la sortie dans la vue.
 
 .. php:method:: currency(mixed $number, string $currency = 'USD', array $options = array())
@@ -34,19 +34,19 @@ automatiqement la sortie dans la vue.
     :param string $currency: Le format de monnaie connu à utiliser.
     :param array $options: Options, voir ci-dessous.
 
-    Cette méthode est utilisée pour afficher un nombre dans des formats de 
-    monnaie courante (EUR,GBP,USD). L'utilisation dans une vue ressemble à 
+    Cette méthode est utilisée pour afficher un nombre dans des formats de
+    monnaie courante (EUR,GBP,USD). L'utilisation dans une vue ressemble à
     ceci::
 
-        // Appelé par NumberHelper
+        // Appelé avec NumberHelper
         echo $this->Number->currency($number, $currency);
 
-        // Appelé par CakeNumber
+        // Appelé avec CakeNumber
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::currency($number, $currency);
 
-    Le premier paramètre, $number, doit être un nombre à virgule qui représente 
-    le montant d'argent que vous désirez. Le second paramètre est utilisé pour 
+    Le premier paramètre $number, doit être un nombre à virgule qui représente
+    le montant d'argent que vous désirez. Le second paramètre est utilisé pour
     choisir un schéma de formatage de monnaie courante:
 
     +---------------------+----------------------------------------------------+
@@ -59,8 +59,8 @@ automatiqement la sortie dans la vue.
     | USD                 | $ 1,236.33                                         |
     +---------------------+----------------------------------------------------+
 
-    The third parameter is an array of options for further defining the
-    output. The following options are available:
+    Le troisième paramètre est un tableau d'options pour définir la sortie. Les
+    options suivantes sont disponibles:
 
     +---------------------+----------------------------------------------------+
     | Option              | Description                                        |
@@ -103,46 +103,58 @@ automatiqement la sortie dans la vue.
     |                     | de fraction                                        |
     +---------------------+----------------------------------------------------+
 
-    Si une valeur $currency non reconnue est fournie, elle est préfixée par un 
+    Si une valeur $currency non reconnue est fournie, elle est préfixée par un
     nombre formaté en USD. Par exemple::
 
-        // Appelé par NumberHelper
+        // Appelé avec NumberHelper
         echo $this->Number->currency('1234.56', 'FOO');
 
         // Sortie
         FOO 1,234.56
 
-        // Appelé par CakeNumber
+        // Appelé avec CakeNumber
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::currency('1234.56', 'FOO');
+
+.. php:method:: defaultCurrency(string $currency)
+
+    :param string $currency: Défini une monnaie connu pour
+        :php:meth:`CakeNumber::currency()`.
+
+    Setter/getter pour la monnaie par défaut. Ceci retire la necessité de
+    toujours passer la monnaie à :php:meth:`CakeNumber::currency()` et change
+    toutes les sorties de monnaie en définissant les autres par défaut.
+
+    .. versionadded:: 2.3 Cette méthode a été ajoutée dans 2.3.
 
 .. php:method:: addFormat(string $formatName, array $options)
     
     :param string $formatName: Le nom du format à utiliser dans le futur.
-    :param array $options: Le tableau d'options pour ce format.
+    :param array $options: Le tableau d'options pour ce format. Utilise les
+        mêmes clés ``$options`` comme :php:meth:`CakeNumber::currency()`.
 
         - `before` Symbole de monnaie avant le nombre. False pour aucun.
         - `after` Symbole de monnaie après le nombre. False pour aucun.
-        - `zero` Le texte à utiliser pour les valeurs à zéro, peut être 
+        - `zero` Le texte à utiliser pour les valeurs à zéro, peut être
           une chaîne de caractères ou un nombre.
           ex: 0, 'Free!'
         - `places` Nombre de décimal à utiliser. ex. 2.
         - `thousands` Séparateur des milliers. ex: ','.
         - `decimals` Symbole de Séparateur des Decimales. ex: '.'.
-        - `negative` Symbole pour les nombres négatifs. Si égal à '()', le 
+        - `negative` Symbole pour les nombres négatifs. Si égal à '()', le
           nombre sera entouré avec ( et ).
-        - `escape` La sortie doit-elle être échappée de htmlentity? Par défaut 
-          à true
+        - `escape` La sortie doit-elle être échappée de htmlentity? Par défaut
+          à true.
         - `wholeSymbol` Chaîne de caractères à utiliser pour tous les nombres. 
           ex: ' dollars'.
-        - `wholePosition` Soit 'before' soit 'after' pour placer le symbole 
+        - `wholePosition` Soit 'before' soit 'after' pour placer le symbole
           complet.
-        - `fractionSymbol` Chaîne de caractères à utiliser pour les nombres à 
+        - `fractionSymbol` Chaîne de caractères à utiliser pour les nombres à
           fraction. ex: ' cents'.
-        - `fractionPosition` Soit 'before' soit 'after' pour placer le symbole 
+        - `fractionPosition` Soit 'before' soit 'after' pour placer le symbole
           de fraction.
 
-    Ajouter le format de monnaie au helper Number. Facilite la réutilisation 
+    Ajoute le format de monnaie au helper Number. Facilite la réutilisation
     des formats de monnaie.::
 
         // appelé par NumberHelper
@@ -152,7 +164,7 @@ automatiqement la sortie dans la vue.
         App::uses('CakeNumber', 'Utility');
         CakeNumber::addFormat('BRR', array('before' => 'R$ '));
 
-    Vous pouvez maintenant utiliser `BRR` de manière courte quand vous 
+    Vous pouvez maintenant utiliser `BRR` de manière courte quand vous
     formattez les montants de monnaie::
 
         // appelé par NumberHelper
@@ -182,58 +194,58 @@ automatiqement la sortie dans la vue.
     :param float $number: La valeur à convertir
     :param integer $precision: Le nombre de décimal à afficher
 
-    Cette méthode affiche un nombre avec le montant de précision spécifié 
-    (place de la décimal). Elle arrondira afin de maintenir le niveau de 
+    Cette méthode affiche un nombre avec le montant de précision spécifié
+    (place de la décimal). Elle arrondira afin de maintenir le niveau de
     précision défini.:: 
 
-        // appelé par NumberHelper
+        // appelé avec NumberHelper
         echo $this->Number->precision(456.91873645, 2 );
 
         // Sortie
         456.92
 
-        // appelé par CakeNumber
+        // appelé avec CakeNumber
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::precision(456.91873645, 2 );
 
 
 .. php:method:: toPercentage(mixed $number, int $precision = 2)
 
-    :param float $number: La valeur à convertir
-    :param integer $precision: Le nomnbre de décimal à afficher
+    :param float $number: La valeur à convertir.
+    :param integer $precision: Le nomnbre de décimal à afficher.
 
-    Comme precision(), cette méthode formate un nombre selon la précision 
-    fournie (où les nombres sont arrondis pour parvenir à ce degré de 
-    précision). Cette méthode exprime aussi le nombre en tant que 
+    Comme precision(), cette méthode formate un nombre selon la précision
+    fournie (où les nombres sont arrondis pour parvenir à ce degré de
+    précision). Cette méthode exprime aussi le nombre en tant que
     pourcentage et préfixe la sortie avec un signe de pourcent.::
     
-        // appelé par NumberHelper
+        // appelé avec NumberHelper
         echo $this->Number->toPercentage(45.691873645);
 
         // Sortie
         45.69%
 
-        // appelé par CakeNumber
+        // appelé avec CakeNumber
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::toPercentage(45.691873645);
 
-.. php:method:: toReadableSize(string $data_size)
+.. php:method:: toReadableSize(string $dataSize)
 
-    :param string $data_size: Le nombre de bytes pour le rendre lisible. 
+    :param string $data_size: Le nombre de bytes pour le rendre lisible.
 
-    Cette méthode formate les tailles de données dans des formes lisibles 
-    pour l'homme. Elle fournit une manière raccourcie de convertir les 
-    en KB, MB, GB, et TB. La taille est affichée avec un niveau de précision 
-    à deux chiffres, selon la taille de données fournie (ex: les tailles 
+    Cette méthode formate les tailles de données dans des formes lisibles
+    pour l'homme. Elle fournit une manière raccourcie de convertir les
+    en KB, MB, GB, et TB. La taille est affichée avec un niveau de précision
+    à deux chiffres, selon la taille de données fournie (ex: les tailles
     supérieurs sont exprimées dans des termes plus larges)::
 
-        // appelé par NumberHelper
+        // appelé avec NumberHelper
         echo $this->Number->toReadableSize(0); // 0 Bytes
         echo $this->Number->toReadableSize(1024); // 1 KB
         echo $this->Number->toReadableSize(1321205.76); // 1.26 MB
         echo $this->Number->toReadableSize(5368709120); // 5.00 GB
 
-        // appelé par CakeNumber
+        // appelé avec CakeNumber
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::toReadableSize(0); // 0 Bytes
         echo CakeNumber::toReadableSize(1024); // 1 KB
@@ -242,40 +254,40 @@ automatiqement la sortie dans la vue.
 
 .. php:method:: format(mixed $number, mixed $options=false)
 
-    Cette méthode vous donne beaucoup plus de contrôle sur le formatage des 
-    nombres pour l'utilisation dans vos vues (et est utilisée en tant que 
-    méthode principale par la plupart des autres méthodes de NumberHelper). 
+    Cette méthode vous donne beaucoup plus de contrôle sur le formatage des
+    nombres pour l'utilisation dans vos vues (et est utilisée en tant que
+    méthode principale par la plupart des autres méthodes de NumberHelper).
     L'utilisation de cette méthode pourrait ressembler à cela::
 
-        // appelé par NumberHelper
+        // appelé avec NumberHelper
         $this->Number->format($number, $options);
 
-        // appelé par CakeNumber
+        // appelé avec CakeNumber
         CakeNumber::format($number, $options);
 
-    Le paramètre $number est le nombre que vous souhaitez formater pour la 
-    sortie. Avec aucun $options fourni, le nombre 1236.334 sortirait comme 
-    ceci : 1,236. Notez que la précision par défaut est d'aucun chiffre après 
+    Le paramètre $number est le nombre que vous souhaitez formater pour la
+    sortie. Avec aucun $options fourni, le nombre 1236.334 sortirait comme
+    ceci : 1,236. Notez que la précision par défaut est d'aucun chiffre après
     la virgule.
 
     Le paramètre $options est là où réside la réelle magie de cette méthode.
 
 
-    -  Si vous passez un entier alors celui-ci devient le montant de précision 
+    -  Si vous passez un entier alors celui-ci devient le montant de précision
        pour la fonction.
-    -  Si vous passez un tableau associatif, vous pouvez utiliser les clés 
+    -  Si vous passez un tableau associatif, vous pouvez utiliser les clés
        suivantes:
 
        -  places (integer): le montant de précision désiré.
        -  before (string): à mettre avant le nombre à sortir.
-       -  escape (boolean): si vous voulez la valeur avant d'être échappée
-       -  decimals (string): utilisé pour délimiter les places des décimales 
+       -  escape (boolean): si vous voulez la valeur avant d'être échappée.
+       -  decimals (string): utilisé pour délimiter les places des décimales
           dans le nombre.
        -  thousands (string): utilisé pour marquer les milliers, millions, …
 
     Exemple::
 
-        // appelé par NumberHelper
+        // appelé avec NumberHelper
         echo $this->Number->format('123456.7890', array(
             'places' => 2,
             'before' => '¥ ',
@@ -285,7 +297,7 @@ automatiqement la sortie dans la vue.
         ));
         // sortie '¥ 123,456.79'
 
-        // appelé par CakeNumber
+        // appelé avec CakeNumber
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::format('123456.7890', array(
             'places' => 2,
@@ -295,6 +307,53 @@ automatiqement la sortie dans la vue.
             'thousands' => ','
         ));
         // sortie '¥ 123,456.79'
+
+.. php:method:: formatDelta(mixed $number, mixed $options=array())
+
+    Cette méthode affiche les différences en valeur comme un nombre signé::
+
+        // appelé avec NumberHelper
+        $this->Number->formatDelta($number, $options);
+
+        // appelé avec CakeNumber
+        CakeNumber::formatDelta($number, $options);
+
+    Le paramètre $number est le nombre que vous planifiez sur le formatage
+    de sortie. Avec aucun $options fourni, le nombre 1236.334 sortirait
+    1,236. Notez que la valeur de precision par défaut est aucune décimale.
+
+    Le paramètre $options prend les mêmes clés que
+    :php:meth:`CakeNumber::format()` lui-même:
+
+       -  places (integer): le montant de precision souhaité.
+       -  before (string): à mettre avant le nombre sorti.
+       -  after (string): à mettre après le nombre sorti.
+       -  decimals (string): utilisé pour délimiter les places de la décimal
+          dans un nombre.
+       -  thousands (string): utilisé pour marquer les places des centaines,
+          millions, …
+
+    Exemple::
+
+        // appelé avec NumberHelper
+        echo $this->Number->formatDelta('123456.7890', array(
+            'places' => 2,
+            'decimals' => '.',
+            'thousands' => ','
+        ));
+        // sortie '+123,456.79'
+
+        // appelé avec CakeNumber
+        App::uses('CakeNumber', 'Utility');
+        echo CakeNumber::formatDelta('123456.7890', array(
+            'places' => 2,
+            'decimals' => '.',
+            'thousands' => ','
+        ));
+        // sortie '+123,456.79'
+
+    .. versionadded:: 2.3
+        Cette méthode a été ajoutée dans 2.3.
 
 .. end-cakenumber
 

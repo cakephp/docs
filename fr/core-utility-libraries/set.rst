@@ -3,50 +3,43 @@ Set
 
 .. php:class:: Set
 
-La gestion de tableau, si elle est bien faite, peut être un outil très 
-puissant et utile pour construire plus malin, et du code plus optimisé. 
-CakePHP offre un ensemble d'utilitaires statiquestrès utiles dans la 
+La gestion de tableau, si elle est bien faite, peut être un outil très
+puissant et utile pour construire plus malin, et du code plus optimisé.
+CakePHP offre un ensemble d'utilitaires statiques très utile dans la
 classe Set qui vous permet justement de faire cela.
 
-La classe Set de CakePHP peut être appelée par n'importe quel model ou 
-controller de la même façon que l'Inflector est appelé. 
+La classe Set de CakePHP peut être appelée par n'importe quel model ou
+controller de la même façon que l'Inflector est appelé.
 Exemple: :php:meth:`Set::combine()`.
+
+.. deprecated:: 2.2
+    La classe Set a été dépréciée dans 2.2 en faveur de la classe
+    :php:class:`Hash`. Il offre une interface et une API plus cohérente.
 
 La syntaxe du Chemin Set-compatible
 ===================================
 
-La syntaxe de Chemin est utilisée par sorte (par exemple), et est utilisée pour 
+La syntaxe de Chemin est utilisée par sorte (par exemple), et est utilisée pour
 définir un chemin.
 
 Exemple d'utilisation (en utilisant :php:func:`Set::sort()`)::
 
     $a = array(
-        0 => array('Person' => array('name' => 'Jeff')),
-        1 => array('Shirt' => array('color' => 'black'))
+        0 => array('Person' => array('name' => 'Jeff'), 'Friend' => array(array('name' => 'Nate'))),
+        1 => array('Person' => array('name' => 'Tracy'),'Friend' => array(array('name' => 'Lindsay'))),
+        2 => array('Person' => array('name' => 'Adam'),'Friend' => array(array('name' => 'Bob')))
     );
     $result = Set::sort($a, '{n}.Person.name', 'asc');
-    /* $result ressemble maintenant à:
-        Array
-        (
-            [0] => Array
-                (
-                    [Shirt] => Array
-                        (
-                            [color] => black
-                        )
-                )
-            [1] => Array
-                (
-                    [Person] => Array
-                        (
-                            [name] => Jeff
-                        )
-                )
-        )
+    /* result now looks like
+     array(
+        0 => array('Person' => array('name' => 'Adam'),'Friend' => array(array('name' => 'Bob'))),
+        1 => array('Person' => array('name' => 'Jeff'), 'Friend' => array(array('name' => 'Nate'))),
+        2 => array('Person' => array('name' => 'Tracy'),'Friend' => array(array('name' => 'Lindsay')))
+    );
     */
 
-Comme vous pouvez le voir dans l'exemple ci-dessus, certaines choses sont 
-entourées de {}, d'autres non. Dans la table ci-dessous, vous pouvez voir 
+Comme vous pouvez le voir dans l'exemple ci-dessus, certaines choses sont
+entourées de {}, d'autres non. Dans la table ci-dessous, vous pouvez voir
 quelles options sont disponibles.
 
 +--------------------------------+--------------------------------------------+
@@ -73,7 +66,7 @@ quelles options sont disponibles.
 
     :rtype: mixed
 
-    Appliquer un callback aux éléments d'un tableau extrait par un chemin 
+    Appliquer un callback aux éléments d'un tableau extrait par un chemin
     Set::extract compatible::
 
         $data = array(
@@ -94,7 +87,7 @@ quelles options sont disponibles.
 
     :rtype: boolean/array
 
-    Vérifie si un chemin particulier est défini dans un tableau. Si $path est 
+    Vérifie si un chemin particulier est défini dans un tableau. Si $path est
     vide, $data va être retournée au lieu d'une valeur boléenne::
 
         $set = array(
@@ -126,12 +119,12 @@ quelles options sont disponibles.
 
     :rtype: array
 
-    Récupère une valeur d'un tableau ou d'un objet qui est contenu dans un 
+    Récupère une valeur d'un tableau ou d'un objet qui est contenu dans un
     chemin donné en utilisant un tableau en une syntaxe de tableau, par ex:
 
-    -  "{n}.Person.{[a-z]+}" - Où "{n}" représente une clé numérique,
-       "Person" représente une chaîne littérale
-    -  "{[a-z]+}" (par ex: toute chaîne littérale fermée par des accolades en 
+    -  "{n}.Person.{[a-z]+}" - O√π "{n}" représente une clé numérique,
+       "Person" représente une chaîne littérale.
+    -  "{[a-z]+}" (par ex: toute chaîne littérale fermée par des accolades en
        plus de {n} et {s}) est interpreté comme une expressoin régulière.
 
     **Exemple 1**
@@ -140,7 +133,8 @@ quelles options sont disponibles.
         $a = array(
             array('Article' => array('id' => 1, 'title' => 'Article 1')),
             array('Article' => array('id' => 2, 'title' => 'Article 2')),
-            array('Article' => array('id' => 3, 'title' => 'Article 3')));
+            array('Article' => array('id' => 3, 'title' => 'Article 3'))
+        );
         $result = Set::classicExtract($a, '{n}.Article.id');
         /* $result ressemble maintenant à:
             Array
@@ -973,11 +967,11 @@ quelles options sont disponibles.
 
     :rtype: object
 
-    Cette méthode Mappe le contenu de l'objet Set en un objet hiérarchisé 
+    Cette méthode Mappe le contenu de l'objet Set en un objet hiérarchisé
     et maintient les clés numériques en tableaux d'objets.
 
-    Basiquement, la fonction map transforme le tableau d'items en classe 
-    d'objets initialisée. Par défaut il transforme un tableau en un Objet 
+    Basiquement, la fonction map transforme le tableau d'items en classe
+    d'objets initialisée. Par défaut il transforme un tableau en un Objet
     stdClass, cependant vous pouvez mapper les valeurs en un type de classe.
     Exemple: Set::map($array\_of\_values, 'nameOfYourClass');::
 
@@ -1050,8 +1044,8 @@ quelles options sont disponibles.
         }
 
         $mapped = Set::map($data, 'MyClass');
-        //Maintenant vous pouvez accéder à toutes les propriétés comme dans 
-        //l'exemple ci-dessus, mais aussi vous pouvez appeler les méthodes 
+        //Maintenant vous pouvez accéder à toutes les propriétés comme dans
+        //l'exemple ci-dessus, mais aussi vous pouvez appeler les méthodes
         //MyClass
         $mapped->[0]->sayHi();
 
@@ -1060,7 +1054,7 @@ quelles options sont disponibles.
 
     :rtype: boolean
 
-    Set::matches peut être utilisé pour voir si un item unique ou un xpath 
+    Set::matches peut être utilisé pour voir si un item unique ou un xpath
     donné admet certaines conditions.::
 
         $a = array(
@@ -1103,17 +1097,17 @@ quelles options sont disponibles.
 
     :rtype: array
 
-    Cette fonction peut être imaginée comme un hybride entre 
-    array\_merge et array\_merge\_recursive de PHP. La différence entre les 
-    deux est que si une clé de tableau contient un autre tableau alors la 
-    fonction se comporte de façon récursive (pas comme array\_merge) mais le ne 
-    fait pas pour les clés contenant des chaînes (pas comme 
-    array\_merge\_recursive). Regardez le test unitaire pour plus 
+    Cette fonction peut être imaginée comme un hybride entre
+    array\_merge et array\_merge\_recursive de PHP. La différence entre les
+    deux est que si une clé de tableau contient un autre tableau alors la
+    fonction se comporte de façon récursive (pas comme array\_merge) mais le ne
+    fait pas pour les clés contenant des chaînes (pas comme
+    array\_merge\_recursive). Regardez le test unitaire pour plus
     d'informations.
 
     .. note::
 
-        Cette fonction va fonctionner avec un montant illimité d'arguments et 
+        Cette fonction va fonctionner avec un montant illimité d'arguments et
         de paramètres non-tableaux typecasts dans des tableaux.
 
     ::
@@ -1332,7 +1326,7 @@ quelles options sont disponibles.
 
     :rtype: array
 
-    Cette fonction fusionne deux tableaux et pousse les différences dans 
+    Cette fonction fusionne deux tableaux et pousse les différences dans
     array2 à la fin du tableau résultant.
 
     **Exemple 1**
@@ -1405,8 +1399,8 @@ quelles options sont disponibles.
 
     :rtype: array
 
-    Set::reverse est au fond l'opposé de :php:func:`Set::map`. Elle convertit 
-    un objet en un tableau. Si $object n'est pas un objet, reverse va 
+    Set::reverse est au fond l'opposé de :php:func:`Set::map`. Elle convertit
+    un objet en un tableau. Si $object n'est pas un objet, reverse va
     simplement retourner $object.::
 
         $result = Set::reverse(null);
@@ -1512,7 +1506,7 @@ quelles options sont disponibles.
 
     :rtype: array
 
-    Trie un tableau selon toute valeur, detérminé par un chemin Set-compatible::
+    Trie un tableau selon toute valeur, determiné par un chemin Set-compatible::
 
         $a = array(
             0 => array('Person' => array('name' => 'Jeff')),
@@ -1591,7 +1585,7 @@ quelles options sont disponibles.
 
 		    :rtype: mixed
 
-		    Applique un callback aux éléments d'un tableau extait par un chemin 
+		    Applique un callback aux éléments d'un tableau extait par un chemin
 		    compatible Set::extract::
 
 				        $data = array(

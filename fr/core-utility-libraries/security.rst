@@ -5,7 +5,7 @@ Security
 
 La `librairie security <http://api20.cakephp.org/class/security>`_
 gère les mesures basiques de sécurité comme les méthodes fournies pour
-le hashage et les données encryptées.
+le hashage et les données chiffrées.
 
 L'API de Security
 =================
@@ -30,7 +30,7 @@ L'API de Security
     :param string $text: Le texte à chiffrer.
     :param string $key: La clé à utiliser pour le chiffrement. Elle doit être
         plus longue que 32 bytes.
-    :param string $mode: Le mode à utiliser, soit 'encrypt' soit 'decrypt'
+    :param string $mode: Le mode à utiliser, soit 'encrypt' soit 'decrypt'.
 
     Chiffre/Déchiffre le texte en utilisant le cipher rijndael-256. Ceci
     nécessite que `l'extension mcrypt <http://php.net/mcrypt>`_ soit
@@ -49,7 +49,7 @@ L'API de Security
     :php:meth:`~Security::hash()`
 
     .. versionadded:: 2.2
-        ``Security::rijndael()`` a été ajouté pour la version 2.2.
+        ``Security::rijndael()`` a été ajoutée pour la version 2.2.
 
 .. php:staticmethod:: generateAuthKey( )
 
@@ -68,9 +68,9 @@ L'API de Security
 
     :rtype: string
 
-    Crée un hash à partir d'une chaîne en utilisant la méthode donnée. Le 
+    Crée un hash à partir d'une chaîne en utilisant la méthode donnée. Le
     Fallback sur la prochaine méthode disponible. Si ``$salt`` est défini à
-    true, la valeur de salt de l'applications sera utilisé::
+    true, la valeur de salt de l'application sera utilisé::
 
         // Utilise la valeur du salt de l'application
         $sha1 = Security::hash('CakePHP Framework', 'sha1', true);
@@ -81,7 +81,7 @@ L'API de Security
         // Utilise l'algorithme de hashage par défaut
         $hash = Security::hash('CakePHP Framework');
 
-    ``hash()`` supporte aussi des algortihms plus sécurisés de hashage comme
+    ``hash()`` supporte aussi des algorithms plus sécurisés de hashage comme
     bcrypt. Quand vous utilisez bcrypt, vous devez vous souvenir de son usage
     légèrement différent.
     Créer un hash initial fonctionne de la même façon que les autres
@@ -103,7 +103,7 @@ L'API de Security
     finir avec le même résultat de hash donnant la même valeur d'entrée.
 
     .. versionchanged:: 2.3
-        Le support pour bcrypt a été ajouté dans la version 2.3
+        Le support pour bcrypt a été ajouté dans la version 2.3.
 
 
 .. php:staticmethod:: inactiveMins( )
@@ -114,8 +114,7 @@ L'API de Security
     sécurité.::
 
         $mins = Security::inactiveMins();
-        // Si votre config Security.level est défini à 'medium' alors $mins
-        sera égal 100.
+        // Si votre config Security.level est défini à 'medium' alors $mins sera égal 100.
 
 .. php:staticmethod:: setHash( $hash )
 
