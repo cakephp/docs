@@ -32,7 +32,7 @@ AppControllerは ``/app/Controller/AppController.php`` に次のように定義�
 
     class AppController extends Controller {
     }
-    
+
 
 AppControllerで作られたクラス変数とメソッドはアプリケーション中のすべてのコントローラで有効となります。
 コントローラ共通のコードをAppControllerに書くのが理想的です。
@@ -57,7 +57,7 @@ AppControllerで ``$helpers`` 変数を定義したら、デフォルトでHtml�
     public function beforeFilter() {
         parent::beforeFilter();
     }
- 
+
 リクエストパラメータ
 ====================
 
@@ -77,16 +77,16 @@ Online Bakeryのサンプルに戻ってみてみると、RecipesControllerは `
 このコントローラは ``/app/Controller/RecipesController.php`` にあり、次のようなコードになっています。::
 
         # /app/Controller/RecipesController.php
-        
+
         class RecipesController extends AppController {
             public function view($id) {
                 //action logic goes here..
             }
-        
+
             public function share($customerId, $recipeId) {
                 //action logic goes here..
             }
-        
+
             public function search($query) {
                 //action logic goes here..
             }
@@ -200,7 +200,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 
         // ビューで$color, $type, $base_price の変数が使えるようになります
 
-        $this->set($data);  
+        $this->set($data);
 
 
     ``$pageTitle`` という変数はもう存在しません。タイトルをセットするには ``set()`` を使ってください。::
@@ -251,6 +251,19 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
     }
 
 これは ``app/View/Posts/my_action.ctp`` の代わりに ``app/View/Posts/custom_file.ctp`` を描画します。
+
+また、次のような書式で、プラグイン内のビューを描画することもできます。
+``$this->render('PluginName.PluginController/custom_file')``
+
+例::
+
+    class PostsController extends AppController {
+        public function my_action() {
+            $this->render('Users.UserDetails/custom_file');
+        }
+    }
+
+これは ``app/Plugin/Users/View/UserDetails/custom_file.ctp`` を描画します。
 
 フローコントロール
 ------------------
@@ -411,7 +424,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
         $conditions = $this->postConditions(
             $this->request->data,
             array(
-                'num_items' => '>=', 
+                'num_items' => '>=',
                 'referrer' => 'LIKE'
             )
         );
@@ -494,7 +507,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
     その違いは、名前付きパラメータやGETで渡されるパラメータを使う場合、それらを2つ目の引数に指定して、適切なキーでラップしなければならないということです。
     これは、requestActionが名前付きパラメータの配列(requestActionの2つ目の引数)をController::params配列にマージして、名前付きパラメータに対して明示的に'named'というキーを付けないからです。
     ``$option`` 配列で指定した追加の値は、リクエストされたアクションのController::params配列の中で使えるようになります。::
-        
+
         echo $this->requestAction('/articles/featured/limit:3');
         echo $this->requestAction('/articles/view/5');
 
@@ -522,7 +535,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 .. php:method:: loadModel(string $modelClass, mixed $id)
 
     ``loadModel`` 関数は、コントローラのデフォルトモデルまたはそれに関連づいたモデル以外のモデルを使う必要がある時に便利です。::
-    
+
         $this->loadModel('Article');
         $recentArticles = $this->Article->find('all', array('limit' => 5, 'order' => 'Article.created DESC'));
 
@@ -546,7 +559,7 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
         class RecipesController extends AppController {
            public $name = 'Recipes';
         }
-        
+
 
 $componentsと$helpersと$uses
 ----------------------------
