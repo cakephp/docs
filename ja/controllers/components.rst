@@ -91,7 +91,7 @@
 
     class PostsController extends AppController {
         public $components = array('Session', 'Cookie');
-       
+
         public function delete() {
             if ($this->Post->delete($this->request->data('Post.id')) {
                 $this->Session->setFlash('Post deleted.');
@@ -108,11 +108,17 @@
 --------------------------
 
 すべてのコントローラアクションで全コンポーネントを使えるようにする必要はないかもしれません。
-このような状況では、実行時に :doc:`コンポーネントコレクション </core-libraries/collections>` を使ってコンポーネントを読込むことができます。 
+このような状況では、実行時に :doc:`コンポーネントコレクション </core-libraries/collections>` を使ってコンポーネントを読込むことができます。
 コントローラ内部から以下のようにできます。::
 
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
+
+.. note::
+
+    コンポーネントを動的に読込みした場合、初期化メソッドが実行されないことを覚えておいて下さい。
+    このメソッドで読込んだ場合、ロード後に手動で実行する必要があります。
+
 
 コンポーネントのコールバック
 ============================
@@ -238,8 +244,7 @@
     $url, $status と $exit 変数はコントローラのメソッドの場合と同じ意味です。また、
     リダイレクト先のURL文字列を返すか、'url'と'status'と'exit'をキーに持つ連想配列を返すことができます。
     'status'と'exit'は任意です。
-    
+
 .. meta::
     :title lang=en: Components
     :keywords lang=en: array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc
-
