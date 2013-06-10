@@ -49,7 +49,7 @@ would look like the following::
     }
 
 Save this JSON into ``composer.json`` in the root directory of your project.
-Next dowload the composer.phar file into your project. After you've downloaded
+Next download the composer.phar file into your project. After you've downloaded
 composer, install CakePHP. In the same directory as your ``composer.json`` run
 the following::
 
