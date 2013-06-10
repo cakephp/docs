@@ -92,7 +92,7 @@ the autoloader, and work around an issue in composer's autoloader. In your
     spl_autoload_register(array('App', 'load'), true, true);
 
 You should now have a functioning CakePHP application with CakePHP installed via
-composer. Be sure to keep the composer.json and composer.lock.json file with the
+composer. Be sure to keep the composer.json and composer.lock file with the
 rest of your source code.
 
 
