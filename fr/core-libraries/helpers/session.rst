@@ -9,7 +9,7 @@ Le Helper session est automatiquement ajouté à la vue, il n'est pas nécessair
 de l'ajouter à la variable tableau ``$helpers`` dans votre controller.
 
 La grande différence entre le Component Session et le Helper Session
-est que ce dernier *ne* peut pas écrire dans la session.
+est que ce dernier *ne peut pas* écrire dans la session.
 
 Comme pour le Component Session, les données sont écrites et lues en
 utilisant des structures de tableaux avec des :term:`dot notation`,
@@ -87,9 +87,9 @@ Affichage de notifications ou de messages flash
         echo $this->Session->flash('flash', array('element' => 'failure'));
 
     Ceci utilise ``View/Elements/failure.ctp`` pour rendre le message. Le
-    message texte serait disponible dans ``$message`` dans l'élément.
+    message texte sera disponible dans une variable ``$message`` dans l'élément.
 
-    A l'intérieur du fichier élément d'echec, il y aurait quelque chose comme
+    A l'intérieur du fichier élément d'échec, il y aura quelque chose comme
     ceci:
 
     .. code-block:: php
