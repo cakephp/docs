@@ -15,10 +15,10 @@ CakePHPは、展開した状態ではmod\_rewriteを使用するようになっ�
 
        # Each directory to which Apache has access can be configured with respect
        # to which services and features are allowed and/or disabled in that
-       # directory (and its subdirectories). 
+       # directory (and its subdirectories).
        #
-       # First, we configure the "default" to be a very restrictive set of 
-       # features.  
+       # First, we configure the "default" to be a very restrictive set of
+       # features.
        #
        <Directory />
            Options FollowSymLinks
@@ -125,7 +125,7 @@ nginxはポピュラーなサーバーで、少ないシステムリソースで
     server {
         listen   80;
         server_name example.com;
-    
+
         # root directive should be global
         root   /var/www/example.com/public/app/webroot/;
         index  index.php;
@@ -167,7 +167,7 @@ IIS7はネイティブで.htaccessファイルをサポートしていません�
                 <rules>
                     <clear/>
                     <rule name="Imported Rule 0" stopProcessing="true">
-                        <match url="^(img|css|files|js)(.*)$"></match>
+                        <match url="^(img|css|files|js|favicon.ico)(.*)$"></match>
                         <action type="Rewrite" url="app/webroot/{R:1}{R:2}" appendQueryString="false"></action>
                     </rule>
                     <rule name="Imported Rule 1" stopProcessing="true">
