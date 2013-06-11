@@ -480,7 +480,7 @@ específico:
                 <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
                     </td>
                     <td>
-                <?php echo $this->Form->postLink(
+                <?php echo $this->Html->link(
                     'Delete',
                     array('action' => 'delete', $post['Post']['id']),
                     array('confirm' => 'Are you sure?')
@@ -546,7 +546,7 @@ querrás es actualizar la vista index.ctp para incluír el ya habitual enlace:
             <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
             </td>
             <td>
-            <?php echo $this->Form->postLink(
+            <?php echo $this->Html->link(
                 'Delete', 
                 array('action' => 'delete', $post['Post']['id']),
                 array('confirm' => 'Are you sure?')); 
