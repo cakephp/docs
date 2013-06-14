@@ -50,7 +50,7 @@ Formatage
 
     :rtype: string
 
-    Convertit une chaîne de caractères représentant le format pour la fonction 
+    Convertit une chaîne de caractères représentant le format pour la fonction
     strftime et retourne un format windows safe et i18n aware.
 
 .. php:method:: dayAsSql($dateString, $field_name, $timezone = NULL)
@@ -60,7 +60,7 @@ Formatage
     Crée une chaîne de caractères dans le même format que dayAsSql mais
     nécessite seulement un unique objet date::
 
-        // Appelé à travers TimeHelper
+        // Appelé avec TimeHelper
         echo $this->Time->dayAsSql('Aug 22, 2011', 'modified');
         // (modified >= '2011-08-22 00:00:00') AND (modified <= '2011-08-22 23:59:59')
 
@@ -81,7 +81,7 @@ Formatage
 
     Retourne une chaîne de caractères dans le format "($field\_name >=
     '2008-01-21 00:00:00') AND ($field\_name <= '2008-01-25
-    23:59:59')". C'est pratique si vous avez besoin de chercher des 
+    23:59:59')". C'est pratique si vous avez besoin de chercher des
     enregistrements entre deux dates incluses::
 
         // Appelé avec TimeHelper
@@ -103,7 +103,7 @@ Formatage
 
     :rtype: string
 
-    Va retourner une chaîne formatée avec le format donné en utilisant les 
+    Va retourner une chaîne formatée avec le format donné en utilisant les
     `options de formatage de la fonction PHP date() <http://www.php.net/manual/en/function.date.php>`_::
 
         // appel via TimeHelper
@@ -173,9 +173,9 @@ Formatage
 
     :rtype: string
 
-    Retourne une chaîne de date formatée, étant donné soit un timestamp UNIX 
-    soit une chaîne de date valide strtotime(). Il prend en compte le format 
-    de la date par défaut pour le langage courant si un fichier LC_TIME est 
+    Retourne une chaîne de date formatée, étant donné soit un timestamp UNIX
+    soit une chaîne de date valide strtotime(). Il prend en compte le format
+    de la date par défaut pour le langage courant si un fichier LC_TIME est
     utilisé.
 
     .. versionchanged:: 2.2
@@ -202,8 +202,8 @@ Formatage
     :rtype: string
 
     Prend une chaîne de date et la sort au format "Jan
-    1st 2008, 19:25". Si l'objet date est today, le format sera 
-    "Today, 19:25". Si l'objet date est yesterday, le format sera 
+    1st 2008, 19:25". Si l'objet date est today, le format sera
+    "Today, 19:25". Si l'objet date est yesterday, le format sera
     "Yesterday, 19:25"::
 
         // Appelé avec TimeHelper
@@ -248,8 +248,8 @@ Formatage
         echo CakeTime::timeAgoInWords('Aug 22, 2011');
         echo CakeTime::timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y'));
 
-    Utilisez l'option 'end' pour déterminer le point de cutoff pour ne plus 
-    utiliser de mots; default '+1 month'::
+    Utilisez l'option 'end' pour déterminer le point de cutoff pour ne plus
+    utiliser de mots; par défaut à '+1 month'::
 
         // Appelé avec TimeHelper
         echo $this->Time->timeAgoInWords('Aug 22, 2011', array('format' => 'F jS, Y', 'end' => '+1 year'));
@@ -292,9 +292,9 @@ Formatage
 
     :rtype: mixed
 
-    Va retourner 1, 2, 3 ou 4 dépendant du quart de l'année sur lequel 
-    la date tombe. Si range est défini à true, un tableau à deux éléments 
-    va être retourné avec les dates de début et de fin au format 
+    Va retourner 1, 2, 3 ou 4 dépendant du quart de l'année sur lequel
+    la date tombe. Si range est défini à true, un tableau à deux éléments
+    va être retourné avec les dates de début et de fin au format
     "2008-03-31"::
 
         // Appelé avec TimeHelper
@@ -387,8 +387,8 @@ Tester Time
     .. versionadded:: 2.2
        Le paramètre ``$dateString`` accepte aussi maintenant un objet DateTime.
 
-    Toutes les fonctions ci-dessus retourneront true ou false quand une chaîne 
-    de date est passé. ``wasWithinLast`` prend une option supplémentaire 
+    Toutes les fonctions ci-dessus retourneront true ou false quand une chaîne
+    de date est passé. ``wasWithinLast`` prend une option supplémentaire
     ``$time_interval``::
 
         // Appelé avec TimeHelper
@@ -398,12 +398,12 @@ Tester Time
         App::uses('CakeTime', 'Utility');
         CakeTime::wasWithinLast($time_interval, $dateString);
 
-    ``wasWithinLast`` prend un intervalle de time qui est une chaîne au format 
-    "3 months" et accepte un intervalle de time en secondes, minutes, heures, 
-    jours, semaines, mois et années (pluriels ou non). Si un intervalle de time 
-    n'est pas reconnu (par exemple, si il y a une faute de frappe) ensuite 
-    ce sera par défaut days.
-    
+    ``wasWithinLast`` prend un intervalle de time qui est une chaîne au format
+    "3 months" et accepte un intervalle de time en secondes, minutes, heures,
+    jours, semaines, mois et années (pluriels ou non). Si un intervalle de time
+    n'est pas reconnu (par exemple, si il y a une faute de frappe) ensuite
+    ce sera par défaut à days.
+
 
 .. end-caketime
 

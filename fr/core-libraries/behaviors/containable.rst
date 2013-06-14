@@ -153,7 +153,7 @@ essayer quelque chose comme ::
     $this->Post->contain('Tag');
     $this->Post->find('all');
 
-Nous pouvons à nouveau utiliser la clef contain dans l'appel find()::
+Nous pouvons à nouveau utiliser la clé contain dans l'appel find()::
 
     $this->Post->find('all', array('contain' => 'Tag'));
 
@@ -172,12 +172,12 @@ d'un appel find() classique, notez le champ "auteur" dans le model
 commentaires des auteurs - et rien d'autre - vous devez faire quelque chose
 comme ::
 
-    $this->Post->contain('Commentaire.auteur');
+    $this->Post->contain('Comment.auteur');
     $this->Post->find('all');
 
     // ou..
 
-    $this->Post->find('all', array('contain' => 'Commentaire.auteur'));
+    $this->Post->find('all', array('contain' => 'Comment.auteur'));
 
 ici , nous avons dit au behavior Containable de nous donner l'informations
 de post, et uniquement le champs auteur du model Commentaire associé.
@@ -209,19 +209,19 @@ Le résultat du find ressemble à::
     [1] => Array
             (...
 
-Comme vous pouvez le voir, les tableaux de Commentaire ne contiennent
+Comme vous pouvez le voir, les tableaux de Comment ne contiennent
 uniquement que le champ auteur (avec le post_id qui est requit par
 CakePHP pour présenter le résultat)
 
-Vous pouvez également filtrer les donneés Commentaire associés en
+Vous pouvez également filtrer les donneés associées à Comment en
 spécifiant une condition ::
 
-    $this->Post->contain('Commentaire.auteur = "Daniel"');
+    $this->Post->contain('Comment.author = "Daniel"');
     $this->Post->find('all');
 
     //ou...
 
-    $this->Post->find('all', array('contain' => 'Commentaire.auteur = "Daniel"'));
+    $this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
 
 Ceci nous donnes comme résultat les posts et commentaires dont daniel est
 l'auteur::
@@ -235,16 +235,16 @@ l'auteur::
                         [content] => aaa
                         [created] => 2008-05-18 00:00:00
                     )
-                [Commentaire] => Array
+                [Comment] => Array
                     (
                         [0] => Array
                             (
                                 [id] => 1
                                 [post_id] => 1
-                                [auteur] => Daniel
+                                [author] => Daniel
                                 [email] => dan@example.com
-                                [siteweb] => http://example.com
-                                [commentaire] => Premier commentaire
+                                [website] => http://example.com
+                                [comment] => Premier commentaire
                                 [created] => 2008-05-18 00:00:00
                             )
                     )
@@ -254,23 +254,23 @@ Des filtre supplémentaires peuvent être utilisées en utilisant les options
 de recherche standard :ref:`model-find`::
 
     $this->Post->find('all', array('contain' => array(
-        'Commentaire' => array(
-            'conditions' => array('Commentaire.auteur =' => "Daniel"),
-            'order' => 'Commentaire.created DESC'
+        'Comment' => array(
+            'conditions' => array('Comment.author =' => "Daniel"),
+            'order' => 'Comment.created DESC'
         )
     )));
 
-Voici un exemple d'utilisation du behavior Containable quand vous avez de
-profondes et complexes relations entre les models.
+Voici un exemple d'utilisation de ``ContainableBehavior`` quand vous avez des
+relations profondes et complexes entre les models.
 
-Examinons les associations de models suivants::
+Examinons les associations des models suivants::
 
     User->Profile
     User->Account->AccountSummary
     User->Post->PostAttachment->PostAttachmentHistory->HistoryNotes
     User->Post->Tag
 
-Voici ce que nous recupérons des associations ci-dessus avec le behavior 
+Voici comment nous recupérons les associations ci-dessus avec le behavior
 Containable ::
 
     $this->User->find('all', array(
@@ -295,14 +295,14 @@ Containable ::
         )
     ));
 
-Gardez à l'esprit que la clef 'contain' n'est utilisée qu'une seule fois dans
+Gardez à l'esprit que la clé 'contain' n'est utilisée qu'une seule fois dans
 le model principal, vous n'avez pas besoin d'utiliser 'contain' a nouveau
 dans les models liés.
 
 .. note::
 
-    En utilisant les options 'fields' et 'contain' - faites attention d'inclure
-    toutes les clefs étrangères que votre requête requiert directement ou
+    En utilisant les options 'fields' et 'contain' - faîtes attention d'inclure
+    toutes les clés étrangères que votre requête requiert directement ou
     indirectement.
     Notez également que c'est parce que le behavior Containable
     doit être attaché à tous les models utilisés dans le contenu, que vous
@@ -323,8 +323,8 @@ les autres behaviors.
   à ce niveau. Le définir à false désactive cette fonctionnalité. La valeur par
   défaut est ``true``.
 - **notices** (boolean, optional), émet des alertes E_NOTICES pour les liaisons
-  référencées dans un appel containable et qui ne sont pas valides. La valeur par
-  défaut est true.
+  référencées dans un appel containable et qui ne sont pas valides. La valeur
+  par défaut est true.
 - **autoFields** (boolean, optional), ajout automatique des champs nécessaires
   pour récupérer les liaisons requêtées. La valeur par défaut est ``true``.
 
@@ -338,7 +338,7 @@ clauses GROUP BY. Si vous obtenez des erreurs SQL invalides à cause du mélange
 de champs agrégés et non-agrégés, essayer de désactiver le paramètre
 ``autoFields``::
 
-    $this->Post->Behaviors->attach('Containable', array('autoFields' => false));
+    $this->Post->Behaviors->load('Containable', array('autoFields' => false));
 
 Utilisation du behavior Containable avec la pagination
 ======================================================

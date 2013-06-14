@@ -15,10 +15,10 @@ CakePHPは、展開した状態ではmod\_rewriteを使用するようになっ�
 
        # Each directory to which Apache has access can be configured with respect
        # to which services and features are allowed and/or disabled in that
-       # directory (and its subdirectories). 
+       # directory (and its subdirectories).
        #
-       # First, we configure the "default" to be a very restrictive set of 
-       # features.  
+       # First, we configure the "default" to be a very restrictive set of
+       # features.
        #
        <Directory />
            Options FollowSymLinks
@@ -53,7 +53,7 @@ CakePHPは、展開した状態ではmod\_rewriteを使用するようになっ�
           RewriteRule    (.*) app/webroot/$1 [L]
        </IfModule>
 
-   Cakeのアプリディレクトリ(bakeによるアプリケーションのトップディレクトリにコピーされる)::
+   Cakeのappディレクトリ(bakeによってアプリケーションのトップディレクトリにコピーされる)::
 
        <IfModule mod_rewrite.c>
           RewriteEngine on
@@ -61,7 +61,7 @@ CakePHPは、展開した状態ではmod\_rewriteを使用するようになっ�
           RewriteRule    (.*) webroot/$1    [L]
        </IfModule>
 
-   Cakeのwebrootディレクトリ(bakeによるアプリケーションのWEBルートディレクトリにコピーされる)::
+   Cakeのwebrootディレクトリ(bakeによってアプリケーションのWEBルートディレクトリにコピーされる)::
 
        <IfModule mod_rewrite.c>
            RewriteEngine On
@@ -88,7 +88,7 @@ CakePHPは、展開した状態ではmod\_rewriteを使用するようになっ�
 
    Mac OSX上での別解は、仮想ホストをフォルダに向けさせるのに、virtualhostxツールを使うことが挙げられます。
 
-   多くのホスティングサービス(GoDaddym、1and1)では、実際にWEBサーバーが既にmod\_rewriteを使っているユーザディレクトリから配信されます。
+   多くのホスティングサービス(GoDaddy、1and1)では、実際にWEBサーバーが既にmod\_rewriteを使っているユーザディレクトリから配信されます。
    CakePHPをユーザディレクトリ(http://example.com/~username/cakephp/)または既にmod\_rewriteを活用しているその他のURL構造にインストールしているなら、
    RewriteBaseステートメントをCakePHPが使う.htaccessファイル(/.htaccess、/app/.htaccess、/app/webroot/.htaccess)に追加する必要があります。
 
@@ -108,7 +108,7 @@ CakePHPは、展開した状態ではmod\_rewriteを使用するようになっ�
 nginxでのきれいなURL
 ====================
 
-nginxはポピュラーなサーバーで、少ないシステムリソースで使うことができます。
+nginxはポピュラーなサーバーで、Apacheよりも少ないシステムリソースで使うことができます。
 短所として、Apacheのように.htaccessファイルを使うことが出来ない点があります。
 つまり、site-available設定でそのようなURLの書き換えを作る必要があります。
 セットアップによりますが、以下を書き換える必要があるでしょう。
@@ -125,7 +125,7 @@ nginxはポピュラーなサーバーで、少ないシステムリソースで
     server {
         listen   80;
         server_name example.com;
-    
+
         # root directive should be global
         root   /var/www/example.com/public/app/webroot/;
         index  index.php;
@@ -154,7 +154,8 @@ IIS7はネイティブで.htaccessファイルをサポートしていません�
 これをするには、以下のステップを踏んでください:
 
 
-#. MictosoftのWeb Platform Installerを使ってURL Rewrite Module 2.0をインストールしてください。
+#. `MicrosoftのWeb Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_ を使って
+   `URL Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ をインストールするか、直接ダウンロードしてください (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_)。
 #. CakePHPフォルダにweb.configという新しいファイルを作成してください。
 #. メモ帳かXMLセーフなエディタを使って、以下のコードを真新しいweb.configファイルにコピーしてください。
 
@@ -167,7 +168,7 @@ IIS7はネイティブで.htaccessファイルをサポートしていません�
                 <rules>
                     <clear/>
                     <rule name="Imported Rule 0" stopProcessing="true">
-                        <match url="^(img|css|files|js)(.*)$"></match>
+                        <match url="^(img|css|files|js|favicon.ico)(.*)$"></match>
                         <action type="Rewrite" url="app/webroot/{R:1}{R:2}" appendQueryString="false"></action>
                     </rule>
                     <rule name="Imported Rule 1" stopProcessing="true">

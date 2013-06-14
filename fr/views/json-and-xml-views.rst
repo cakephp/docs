@@ -31,11 +31,11 @@ routes, CakePHP changera automatiquement les classes de vue quand une requête
 sera faite avec l'extension ``.json``, ou quand l'en-tête Accept sera
 ``application/json``.
 
-Utilisation des vues de données avec la clé sérializée
+Utilisation des vues de données avec la clé _serialize
 ======================================================
 
 La clé ``_serialize`` est une variable de vue spéciale qui indique quel autre(s) 
-variable(s) de vue devraient être sérializée(s) quan on utilise la vue de 
+variable(s) de vue devraient être sérialisée(s) quan on utilise la vue de 
 données. Cela vous permet de sauter la définition des fichiers de vue pour vos 
 actions de controller si vous n'avez pas besoin de faire un formatage avant que
 vos données soient converties en json/xml.
