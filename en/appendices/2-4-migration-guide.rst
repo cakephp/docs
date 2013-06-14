@@ -62,6 +62,7 @@ Models
   :php:meth:`Model::saveAssociated()`, :php:meth:`Model::saveMany()`
   now take a new ``counterCache`` option. You can set it to false to avoid
   updating counter cache values for the particular save operation.
+- :php:meth:`Model::clear()` was added.
 
 Datasource
 ----------

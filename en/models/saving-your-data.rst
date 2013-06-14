@@ -78,6 +78,15 @@ single fields, in an ActiveRecord approach. You can also use
 The above would update the title and published fields and save them
 to the database.
 
+:php:meth:`Model::clear()`
+==========================
+
+This method can be used to reset model state and clear out any unsaved data and
+validation errors.
+
+.. versionadded:: 2.4
+
+
 :php:meth:`Model::save(array $data = null, boolean $validate = true, array $fieldList = array())`
 =================================================================================================
 
