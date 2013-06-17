@@ -43,7 +43,7 @@ Components
 AuthComponent
 -------------
 - AuthComponent now supports proper stateless mode when using `Basic` or `Digest`
-  authenticators. Starting of session can be prevented by setting :php:property:`AuthComponent::$sessionKey`
+  authenticators. Starting of session can be prevented by setting :php:attr:`AuthComponent::$sessionKey`
   to false. Also now when using only `Basic` or `Digest` you are no longer
   redirected to login page. For more info check the :php:class:`AuthComponent` page.
 - Property :php:attr:`AuthComponent::$authError` can be set to boolean `false` to suppress flash message from being displayed.
