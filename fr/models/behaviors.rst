@@ -124,7 +124,7 @@ behaviors. Disons que notre model familier Category nécessite de
 se comporter comme un model de Noël, mais seulement le jour de Noël::
 
     // Si nous sommes le 25 déc
-    if (date('m/d') == '12/25') {
+    if (date('m/d') === '12/25') {
         // Notre model nécessite de se comporter comme un model de Noël
         $this->Category->Behaviors->load('Christmas');
     }
@@ -231,7 +231,7 @@ Méthodes mappées
 ----------------
 
 En plus de fournir des méthodes 'mixin', les behaviors peuvent aussi fournir 
-des méthodes d'appariemment de formes (pattern matching). Les Behaviors peuvent 
+des méthodes d'appariemment de formes (pattern matching). Les Behaviors peuvent
 aussi définir des méthodes mappées. Les méthodes mappées utilisent les 
 pattern matching for method invocation. Cela vous permet de créer des méthodes 
 du type ``Model::findAllByXXX`` sur vos behaviors. Les méthodes mappées ont 
@@ -264,20 +264,20 @@ Callbacks du Behavior
 =====================
 
 Les Behaviors d'un Model peuvent définir un nombre de callbacks qui sont 
-déclenchés before/after les callbacks du model du même nom. Les callbacks 
+déclenchés before les callbacks du model du même nom. Les callbacks 
 du Behavior vous permettent de capturer des évènements dans les models 
 attachés et d'augmenter les paramètres ou accoler dans un behavior 
 supplémentaire.
 
 Les callbacks disponibles sont:
 
--  ``beforeValidate`` est lancé avant beforeValidate du model
--  ``beforeFind`` est lancé avant beforeFind du model
--  ``afterFind`` est lancé avant afterFind du model
--  ``beforeSave`` est lancé avant beforeSave du model
--  ``afterSave`` est lancé avant afterSave du model
--  ``beforeDelete`` est lancé après beforeDelete du model
--  ``afterDelete`` est lancé avant afterDelete du model
+-  ``beforeValidate``
+-  ``beforeFind``
+-  ``afterFind``
+-  ``beforeSave``
+-  ``afterSave``
+-  ``beforeDelete``
+-  ``afterDelete``
 
 Créer un callback du behavior
 -----------------------------

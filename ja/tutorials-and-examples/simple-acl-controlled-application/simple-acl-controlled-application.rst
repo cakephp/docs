@@ -33,7 +33,7 @@ CakePHPのある程度の経験と、MVCの概念についての理解、
 
 まず、最新のCakePHPのコピーを取得しましょう。
 
-最新版をダウンロードするにはGithubのCakePHPプロジェクト(http://cakeforge.org/projects/cakephp/)にアクセスし、安定版のリリースをダウンロードしてください。
+最新版をダウンロードするにはGithubのCakePHPプロジェクト(https://github.com/cakephp/cakephp/tags)にアクセスし、安定版のリリースをダウンロードしてください。
 このチュートリアルで必要なバージョンは最新の2.0リリースです。
 
 `git <http://git-scm.com/>`_ を使ってレポジトリを複製(*clone*)することもできます。
@@ -115,7 +115,7 @@ AuthとAclコンポーネントを追加する前に、多少の部品を加え�
             }
         }
     }
-     
+
     public function logout() {
         //ここは、今は空にしておいてください
     }
@@ -162,7 +162,7 @@ AuthとAclコンポーネントを追加する前に、多少の部品を加え�
             'Session'
         );
         public $helpers = array('Html', 'Form', 'Session');
-    
+
         public function beforeFilter() {
             //AuthComponentの設定
             $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
@@ -177,8 +177,13 @@ ACL をセットアップし終わってしまう前に、ユーザとグルー�
 ``GroupsController`` と ``UsersController`` の **両方** に、次のコードを追加してください::
 
     public function beforeFilter() {
-        parent::beforeFilter(); 
+        parent::beforeFilter();
+
+        // CakePHP 2.0
         $this->Auth->allow('*');
+
+        // CakePHP 2.1以上
+        $this->Auth->allow();
     }
 
 この記述はAuthComponentに、全てのアクションに対するパブリックなアクセスを許可するよう指定するものです。
@@ -216,10 +221,9 @@ AuthとACLをきちんと動作させるには、ユーザとグループをACL�
 ``User`` モデルに次のコードを追加してください::
 
     class User extends AppModel {
-        public $name = 'User';
         public $belongsTo = array('Group');
         public $actsAs = array('Acl' => array('type' => 'requester'));
-         
+
         public function parentNode() {
             if (!$this->id && empty($this->data)) {
                 return null;
@@ -241,7 +245,7 @@ AuthとACLをきちんと動作させるには、ユーザとグループをACL�
 
     class Group extends AppModel {
         public $actsAs = array('Acl' => array('type' => 'requester'));
-         
+
         public function parentNode() {
             return null;
         }
@@ -282,7 +286,7 @@ MySQLのプロンプトで ``SELECT * FROM aros;`` を実行した場合、次�
 グループだけのACL
 -----------------
 
-グループごとのみのパーミッションに単純化したい場合、 ``User`` も出るに  ``bindNode()`` を実装する必要があります::
+グループごとのみのパーミッションに単純化したい場合、 ``User`` モデルに  ``bindNode()`` を実装する必要があります::
 
     public function bindNode($user) {
         return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
@@ -341,5 +345,3 @@ ACLがコントローラとアクションを走査するにあたり正しい�
         );
 
 チュートリアルを続行するには、続けて :doc:`part-two` を見てください。
-
-

@@ -96,7 +96,7 @@ Formatting
     .. versionadded:: 2.2
        ``$dateString`` parameter now also accepts a DateTime object.
 
-.. php:method:: format($format, $dateString = NULL, $invalid = false, $timezone = NULL)
+.. php:method:: format($date, $format = NULL, $default = false, $timezone = NULL)
 
     :rtype: string
 
@@ -104,26 +104,24 @@ Formatting
     `PHP date() formatting options <http://www.php.net/manual/en/function.date.php>`_::
 
         // called via TimeHelper
-        echo $this->Time->format('Y-m-d H:i:s');
-        // The Unix Epoch as 1970-01-01 00:00:00
-
-        echo $this->Time->format('F jS, Y h:i A', '2011-08-22 11:53:00');
+        echo $this->Time->format('2011-08-22 11:53:00', 'F jS, Y h:i A');
         // August 22nd, 2011 11:53 AM
 
-        echo $this->Time->format('r', '+2 days', true);
+        echo $this->Time->format('+2 days', 'r');
         // 2 days from now formatted as Sun, 13 Nov 2011 03:36:10 +0800
 
         // called as CakeTime
         App::uses('CakeTime', 'Utility');
-        echo CakeTime::format('Y-m-d H:i:s');
-        echo CakeTime::format('F jS, Y h:i A', '2011-08-22 11:53:00');
-        echo CakeTime::format('r', '+2 days', true);
+        echo CakeTime::format('2011-08-22 11:53:00', 'F jS, Y h:i A');
+        echo CakeTime::format('+2 days', 'r');
 
     .. versionchanged:: 2.2
+       ``$format`` and ``$date`` parameters are in opposite order as used in 2.1 and below.
        ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
+       ``$default`` parameter replaces ``$invalid`` parameter used in 2.1 and below.
 
     .. versionadded:: 2.2
-       ``$dateString`` parameter now also accepts a DateTime object.
+       ``$date`` parameter now also accepts a DateTime object.
 
 .. php:method:: fromString($dateString, $timezone = NULL)
 
@@ -175,12 +173,12 @@ Formatting
     .. versionchanged:: 2.2
        ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
 
-.. php:method:: nice($dateString = NULL, $timezone = NULL)
+.. php:method:: nice($dateString = NULL, $timezone = NULL, $format = null)
 
     :rtype: string
 
     Takes a date string and outputs it in the format "Tue, Jan
-    1st 2008, 19:25"::
+    1st 2008, 19:25" or as per optional ``$format`` param passed::
 
         // called via TimeHelper
         echo $this->Time->nice('2011-08-22 11:53:00');

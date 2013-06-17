@@ -266,7 +266,7 @@ CakeRequest API
 
 .. php:method:: onlyAllow($methods)
 
-    Set allowed HTTP methods, if not matched will throw MethodNotAllowexException
+    Set allowed HTTP methods, if not matched will throw MethodNotAllowedException
     The 405 response will include the required 'Allow' header with the passed methods
 
     .. versionadded:: 2.3
@@ -446,6 +446,8 @@ to send a file as response::
     public function sendFile($id) {
         $file = $this->Attachment->getFile($id);
         $this->response->file($file['path']);
+        //Return reponse object to prevent controller from trying to render a view
+        return $this->response;
     }
 
 As shown in above example as expected you have to pass the file path to the method.

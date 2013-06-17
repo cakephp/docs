@@ -485,7 +485,7 @@ the method to implement would be named ``_findMyFancySearch``.
         public $findMethods = array('available' =>  true);
 
         protected function _findAvailable($state, $query, $results = array()) {
-            if ($state == 'before') {
+            if ($state === 'before') {
                 $query['conditions']['Article.published'] = true;
                 return $query;
             }
@@ -588,9 +588,9 @@ If needed you can distinguish by checking for ``'operation'`` key
 and return a different ``$query``::
 
     protected function _findAvailable($state, $query, $results = array()) {
-        if ($state == 'before') {
+        if ($state === 'before') {
             $query['conditions']['Article.published'] = true;
-            if (!empty($query['operation']) && $query['operation'] == 'count') {
+            if (!empty($query['operation']) && $query['operation'] === 'count') {
                 return $query;
             }
             $query['joins'] = array(
@@ -628,7 +628,7 @@ findAllBy
 +------------------------------------------------------------------------------------------+------------------------------------------------------------+
 | ``$this->Cake->findAllById(7);``                                                         | ``Cake.id = 7``                                            |
 +------------------------------------------------------------------------------------------+------------------------------------------------------------+
-| ``$this->User->findAllByEmailOrUsername('jhon');``                                       | ``User.email = 'jhon' OR User.username = 'jhon';``         |
+| ``$this->User->findAllByEmailOrUsername('jhon', 'jhon');``                               | ``User.email = 'jhon' OR User.username = 'jhon';``         |
 +------------------------------------------------------------------------------------------+------------------------------------------------------------+
 | ``$this->User->findAllByUsernameAndPassword('jhon', '123');``                            | ``User.username = 'jhon' AND User.password = '123';``      |
 +------------------------------------------------------------------------------------------+------------------------------------------------------------+
@@ -656,7 +656,7 @@ The findBy magic functions also accept some optional parameters:
 +------------------------------------------------------------+-------------------------------------------------------+
 | ``$this->User->findByLastName('Anderson');``               | ``User.last_name = 'Anderson';``                      |
 +------------------------------------------------------------+-------------------------------------------------------+
-| ``$this->User->findByEmailOrUsername('jhon');``            | ``User.email = 'jhon' OR User.username = 'jhon';``    |
+| ``$this->User->findByEmailOrUsername('jhon', 'jhon');``    | ``User.email = 'jhon' OR User.username = 'jhon';``    |
 +------------------------------------------------------------+-------------------------------------------------------+
 | ``$this->User->findByUsernameAndPassword('jhon', '123');`` | ``User.username = 'jhon' AND User.password = '123';`` |
 +------------------------------------------------------------+-------------------------------------------------------+

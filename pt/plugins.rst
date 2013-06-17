@@ -76,7 +76,7 @@ Alguns plugins precisam que seja criado uma ou mais tabelas em sua
 base de dados. Nesses casos, muitas vezes eles vão incluir um arquivo de 
 esquema que você pode chamar a partir do cake shell dessa forma::
 
-    user@host$ cake schema create -plugin ContactManager
+    user@host$ cake schema create --plugin ContactManager
 
 A maioria dos plugins indicará o procedimento adequado para a configurá-los e
 configurar a base de dados, em sua documentação. Alguns plugins irão exigir 
@@ -245,11 +245,11 @@ prefixo do plugin nelas, use uma sintaxe alternativa::
 
     // /app/Plugin/ContactManager/Model/Contact.php:
     class Contact extends ContactManagerAppModel {
-            public $hasMany = array(
-                    'AltName' => array(
-                            'className' => 'ContactManager.AltName'
-                    )
-            );
+        public $hasMany = array(
+            'AltName' => array(
+                'className' => 'ContactManager.AltName'
+            )
+        );
     }
 
 Plugin Views

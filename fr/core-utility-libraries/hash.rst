@@ -5,12 +5,12 @@ Hash
 
 .. versionadded:: 2.2
 
-La gestion du tableau, si elle est bien faite, peut être un outil très 
-puissant et utile pour construire du code plus intelligent et plus 
-optimisé. CakePHP offre un ensemble d'utilitaires statiques très 
+La gestion du tableau, si elle est bien faite, peut être un outil très
+puissant et utile pour construire du code plus intelligent et plus
+optimisé. CakePHP offre un ensemble d'utilitaires statiques très
 utile dans la classe Hash qui vous permet de faire justement cela.
 
-La classe Hash de CakePHP peut être appelée à partir de n'inporte quel 
+La classe Hash de CakePHP peut être appelée à partir de n'inporte quel
 model ou controller de la même façon que pour un appel à Inflector
 Exemple: :php:meth:`Hash::combine()`.
 
@@ -19,16 +19,16 @@ Exemple: :php:meth:`Hash::combine()`.
 Syntaxe de chemin Hash
 ======================
 
-La syntaxe de chemin décrite ci-dessous est utilisée par toutes les méthodes 
-dans ``Hash``. Les parties de la syntaxe du chemin ne sont pas toutes 
-disponibles dans toutes les méthodes. Une expression en chemin est faite 
-depuis n'importe quel nombre de tokens. Les Tokens sont composés de deux 
-groupes. Les Expressions sont utilisées pour parcourir le tableau de données, 
-alors que les matchers sont utilisés pour qualifier les éléments. Vous 
+La syntaxe de chemin décrite ci-dessous est utilisée par toutes les méthodes
+dans ``Hash``. Les parties de la syntaxe du chemin ne sont pas toutes
+disponibles dans toutes les méthodes. Une expression en chemin est faite
+depuis n'importe quel nombre de tokens. Les Tokens sont composés de deux
+groupes. Les Expressions sont utilisées pour parcourir le tableau de données,
+alors que les matchers sont utilisés pour qualifier les éléments. Vous
 appliquez les matchers aux élements de l'expression.
 
 +--------------------------------+--------------------------------------------+
-| Expression                     | Definition                                 |
+| Expression                     | Définition                                 |
 +================================+============================================+
 | ``{n}``                        | Représente une clé numérique. Va matcher   |
 |                                | toute chaîne ou clé numérique.             |
@@ -41,8 +41,8 @@ appliquez les matchers aux élements de l'expression.
 |                                | valeur keys with the exact same value.     |
 +--------------------------------+--------------------------------------------+
 
-Tous les éléments d'expression supportent toutes les méthodes. En plus des 
-éléments d'expression, vous pouvez utiliser les attributs qui matchent avec 
+Tous les éléments d'expression supportent toutes les méthodes. En plus des
+éléments d'expression, vous pouvez utiliser les attributs qui matchent avec
 les méthodes comme ``extract()``.
 
 +--------------------------------+--------------------------------------------+
@@ -76,20 +76,20 @@ les méthodes comme ``extract()``.
 
     :rtype: mixed
 
-    ``get()`` est une version simplifiée de ``extract()``, elle ne supporte 
-    que les expressions de chemin direct. Les chemins avec ``{n}``, ``{s}`` 
-    ou les matchers ne sont pas supportés. Utilisez ``get()`` quand vous 
+    ``get()`` est une version simplifiée de ``extract()``, elle ne supporte
+    que les expressions de chemin direct. Les chemins avec ``{n}``, ``{s}``
+    ou les matchers ne sont pas supportés. Utilisez ``get()`` quand vous
     voulez exactement une valeur sortie d'un tableau.
 
 .. php:staticmethod:: extract(array $data, $path)
 
     :rtype: array
 
-    ``Hash::extract()`` supporte toutes les expressions, les components 
-    matcher de la :ref:`hash-path-syntax`. Vous pouvez utilisez l'extract pour 
-    récupèrer les données à partir des tableaux, le long des chemins 
-    arbitraires rapidement sans avoir à parcourir les structures de données. 
-    A la place, vous utilisez les expressions de chemin pour qualifier 
+    ``Hash::extract()`` supporte toutes les expressions, les components
+    matcher de la :ref:`hash-path-syntax`. Vous pouvez utilisez l'extract pour
+    récupèrer les données à partir des tableaux, le long des chemins
+    arbitraires rapidement sans avoir à parcourir les structures de données.
+    A la place, vous utilisez les expressions de chemin pour qualifier
     les éléments que vous souhaitez retourner ::
 
         // Utilisation habituelle:
@@ -102,7 +102,7 @@ les méthodes comme ``extract()``.
 
     :rtype: array
 
-    Insère $data dans un tableau comme défini par $path. Cette méthode 
+    Insère $data dans un tableau comme défini par $path. Cette méthode
     supporte seulement les types d'expression de :ref:`hash-path-syntax`::
 
         $a = array(
@@ -122,7 +122,7 @@ les méthodes comme ``extract()``.
                 )
         )
 
-    Vous pouvez utiliser les chemins en utilisant ``{n}`` et ``{s}`` pour 
+    Vous pouvez utiliser les chemins en utilisant ``{n}`` et ``{s}`` pour
     insérer des données dans des points multiples::
 
         $users = $this->User->find('all');
@@ -132,8 +132,8 @@ les méthodes comme ``extract()``.
 
     :rtype: array
 
-    Retire tous les éléments d'un tableau qui matche avec $path. Cette 
-    méthode supporte tous les éléments d'expression de 
+    Retire tous les éléments d'un tableau qui matche avec $path. Cette
+    méthode supporte tous les éléments d'expression de
     :ref:`hash-path-syntax`::
 
         $a = array(
@@ -152,18 +152,18 @@ les méthodes comme ``extract()``.
             )
         */
 
-    L'utilisation de ``{n}`` et ``{s}`` vous autorisera à retirer les valeurs 
+    L'utilisation de ``{n}`` et ``{s}`` vous autorisera à retirer les valeurs
     multiples en une fois.
 
 .. php:staticmethod:: combine(array $data, $keyPath = null, $valuePath = null, $groupPath = null)
 
     :rtype: array
 
-    Crée un tableau associatif en utilisant $keyPath en clé pour le chemin 
-    à construire, et optionnellement $valuePath comme chemin pour récupèrer 
-    les valeurs. Si $valuePath n'est pas spécifiée, ou ne matche rien, les 
-    valeurs seront initialisées à null. Vous pouvez grouper en option les 
-    valeurs par ce qui est obtenu en suivant le chemin spécifié dans 
+    Crée un tableau associatif en utilisant $keyPath en clé pour le chemin
+    à construire, et optionnellement $valuePath comme chemin pour récupèrer
+    les valeurs. Si $valuePath n'est pas spécifiée, ou ne matche rien, les
+    valeurs seront initialisées à null. Vous pouvez grouper en option les
+    valeurs par ce qui est obtenu en suivant le chemin spécifié dans
     $groupPath.::
 
         $a = array(
@@ -262,8 +262,8 @@ les méthodes comme ``extract()``.
             )
         */
 
-    Vous pouvez fournir des tableaux pour les deux $keyPath et $valuePath. Si 
-    vous le faîtes, la première valeur sera utlisée comme un format de chaîne 
+    Vous pouvez fournir des tableaux pour les deux $keyPath et $valuePath. Si
+    vous le faîtes, la première valeur sera utlisée comme un format de chaîne
     de caractères, pour les valeurs extraites par les autres chemins::
 
         $result = Hash::combine(
@@ -303,7 +303,7 @@ les méthodes comme ``extract()``.
 
     :rtype: array
 
-    Retourne une série de valeurs extraites d'un tableau, formaté avec un 
+    Retourne une série de valeurs extraites d'un tableau, formaté avec un
     format de chaîne de caractères::
 
         $data = array(
@@ -360,7 +360,7 @@ les méthodes comme ``extract()``.
 
     :rtype: boolean
 
-    Détermine si un Hash ou un tableau contient les clés et valeurs exactes 
+    Détermine si un Hash ou un tableau contient les clés et valeurs exactes
     d'un autre::
 
         $a = array(
@@ -418,9 +418,9 @@ les méthodes comme ``extract()``.
 
     :rtype: array
 
-    Filtre les éléments vides en dehors du tableau, en excluant '0'. Vous 
-    pouvez aussi fournir un $callback personnalisé pour filtrer les éléments 
-    de tabelau. Votre callback devrait retourner ``false`` pour retirer 
+    Filtre les éléments vides en dehors du tableau, en excluant '0'. Vous
+    pouvez aussi fournir un $callback personnalisé pour filtrer les éléments
+    de tableau. Votre callback devrait retourner ``false`` pour retirer
     les éléments du tableau résultant::
 
         $data = array(
@@ -480,7 +480,7 @@ les méthodes comme ``extract()``.
 
     :rtype: array
 
-    Développe un tableau qui a déjà été aplatie avec 
+    Développe un tableau qui a déjà été aplatie avec
     :php:meth:`Hash::flatten()`::
 
         $data = array(
@@ -511,16 +511,16 @@ les méthodes comme ``extract()``.
 
     :rtype: array
 
-    Cette fonction peut être vu comme un hybride entre le ``array_merge``  et 
-    le ``array_merge_recursive`` de PHP. La différence entre les eux est que 
-    si une clé du tableau contient un autre tableau, alors la fonction se 
-    comporte de façon récursive (pas comme ``array_merge``) mais ne le fait 
-    pas pour les clés contenant les chaînes de caractères (pas comme 
+    Cette fonction peut être vue comme un hybride entre le ``array_merge`` et
+    le ``array_merge_recursive`` de PHP. La différence entre les deux est que
+    si une clé du tableau contient un autre tableau, alors la fonction se
+    comporte de façon récursive (pas comme ``array_merge``) mais ne le fait
+    pas pour les clés contenant les chaînes de caractères (pas comme
     ``array_merge_recursive``).
 
     .. note::
 
-        Cette fonction va fonctionner avec un montant illimité d'arguments 
+        Cette fonction va fonctionner avec un montant illimité d'arguments
         et convertit les paramètres de non-tableau en tableaux.
 
     ::
@@ -583,7 +583,7 @@ les méthodes comme ``extract()``.
 
     :rtype: integer
 
-    Compte les dimensions d'un tableau. Cette méthode va seulement considérer 
+    Compte les dimensions d'un tableau. Cette méthode va seulement considérer
     la dimension du premier élément dans le tableau::
 
         $data = array('one', '2', 'three');
@@ -609,8 +609,8 @@ les méthodes comme ``extract()``.
 
 .. php:staticmethod:: maxDimensions(array $data)
 
-    Similaire à :php:meth:`~Hash::dimensions()`, cependant cette méthode 
-    retourne le nombre le plus profond de dimensions de tout élément dans 
+    Similaire à :php:meth:`~Hash::dimensions()`, cependant cette méthode
+    retourne le nombre le plus profond de dimensions de tout élément dans
     le tableau::
 
         $data = array('1' => '1.1', '2', '3' => array('3.1' => '3.1.1'));
@@ -623,22 +623,22 @@ les méthodes comme ``extract()``.
 
 .. php:staticmethod:: map(array $data, $path, $function)
 
-    Crée un nouveau tableau, en extrayant $path, et mappe $function à travers 
-    les résultats. Vous pouvez utiliser les deux, expression et le matching 
+    Crée un nouveau tableau, en extrayant $path, et mappe $function à travers
+    les résultats. Vous pouvez utiliser les deux, expression et le matching
     d'éléments avec cette méthode.
 
 .. php:staticmethod:: reduce(array $data, $path, $function)
 
-    Crée une valeur unique, en extrayant $path, et en réduisant les résultats 
-    extraits avec $function. Vous pouvez utiliser les deux, expression et le 
+    Crée une valeur unique, en extrayant $path, et en réduisant les résultats
+    extraits avec $function. Vous pouvez utiliser les deux, expression et le
     matching d'éléments avec cette méthode.
 
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
 
     :rtype: array
 
-    Trie un tableau selon n'importe quelle valeur, déterminé par une 
-    :ref:`hash-path-syntax`. Seules les élements de type expression sont 
+    Trie un tableau selon n'importe quelle valeur, déterminé par une
+    :ref:`hash-path-syntax`. Seuls les élements de type expression sont
     supportés par cette méthode::
 
         $a = array(
@@ -670,11 +670,11 @@ les méthodes comme ``extract()``.
     peut être une des valeurs suivantes:
 
     * ``regular`` pour le trier régulier.
-    * ``numeric`` pour le tri des valeurs avec leurs valeurs numériques 
+    * ``numeric`` pour le tri des valeurs avec leurs valeurs numériques
       équivalentes.
     * ``string`` pour le tri des valeurs avec leur valeur de chaîne.
-    * ``natural`` pour trier les valeurs d'une façon humaine. Va trier 
-      ``foo10`` en-dessous de ``foo2`` par exemple. Le tri naturel 
+    * ``natural`` pour trier les valeurs d'une façon humaine. Va trier
+      ``foo10`` en-dessous de ``foo2`` par exemple. Le tri naturel
       a besoin de PHP 5.4 ou supérieur.
 
 .. php:staticmethod:: diff(array $data, array $compare)
@@ -708,7 +708,7 @@ les méthodes comme ``extract()``.
 
     :rtype: array
 
-    Cette fonction fusionne les deux tableaux et pousse les différences 
+    Cette fonction fusionne les deux tableaux et pousse les différences
     dans les données à la fin du tableau résultant.
 
     **Exemple 1**
@@ -756,10 +756,10 @@ les méthodes comme ``extract()``.
 
     :rtype: array
 
-    Normalise un tableau. Si ``$assoc`` est à true, le tableau résultant 
-    sera normalisé en un tableau associatif. Les clés numériques avec les 
+    Normalise un tableau. Si ``$assoc`` est à true, le tableau résultant
+    sera normalisé en un tableau associatif. Les clés numériques avec les
     valeurs, seront convertis en clés de type chaîne avec des valeurs null.
-    Normaliser un tableau, facilite l'utilisation des résultats avec 
+    Normaliser un tableau, facilite l'utilisation des résultats avec
     :php:meth:`Hash::merge()`::
 
         $a = array('Tree', 'CounterCache',
@@ -811,19 +811,20 @@ les méthodes comme ``extract()``.
 
 .. php:staticmethod:: nest(array $data, array $options = array())
 
-    Prend un ensemble de tableau aplati, et crée une structure de données 
-    imbriquée ou chaînée. Utilisé par des méthodes comme 
+    Prend un ensemble de tableau aplati, et crée une structure de données
+    imbriquée ou chaînée. Utilisé par des méthodes comme
     ``Model::find('threaded')``.
 
     **Options:**
 
-    - ``children`` Le nom de la clé à utiliser dans l'ensemble de résultat 
+    - ``children`` Le nom de la clé à utiliser dans l'ensemble de résultat
       pour les enfants. Par défaut à 'children'.
-    - ``idPath`` Le chemin vers une clé qui identifie chaque entrée. Doit être 
-      compatible avec :php:meth:`Hash::extract()`. Par défaut à ``{n}.$alias.id``
-    - ``parentPath`` Le chemin vers une clé qui identifie le parent de chaque 
-      entrée. Doit être compatible avec :php:meth:`Hash::extract()`. Par défaut 
-      à ``{n}.$alias.parent_id``
+    - ``idPath`` Le chemin vers une clé qui identifie chaque entrée. Doit être
+      compatible avec :php:meth:`Hash::extract()`. Par défaut à
+      ``{n}.$alias.id``
+    - ``parentPath`` Le chemin vers une clé qui identifie le parent de chaque
+      entrée. Doit être compatible avec :php:meth:`Hash::extract()`. Par défaut
+      à ``{n}.$alias.parent_id``.
     - ``root`` L'id du résultat le plus désiré.
 
     Exemple::

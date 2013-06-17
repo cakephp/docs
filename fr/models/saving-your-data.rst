@@ -113,8 +113,8 @@ Plus d'informations sur les callbacks du model sont disponibles
 
 .. tip::
 
-    Si vous ne voulez pas le que champ mis à jour soit mis à jour pendant 
-    la sauvegarde de certaines données, ajoutez ``'updated' => false`` 
+    Si vous ne voulez pas le que champ ``modified`` soit mis à jour pendant 
+    la sauvegarde de certaines données, ajoutez ``'modified' => false`` 
     à votre tableau de ``$data``.
 
 Une fois qu'une sauvegarde est terminée, l'ID de l'objet peut être trouvé dans 
@@ -156,17 +156,25 @@ que vous avez passé le champ de la clé primaire  dans le tableau data::
 
 Cette méthode initialise la classe du model pour sauvegarder de nouvelles 
 informations.
+Cela ne crée pas réellement un enregistrement dans la base de données mais
+efface Model::$id et défini Model::$data basé sur les champs par défaut dans
+votre base de données. Si vous n'avez défini aucun champ par défaut dans votre
+base de données, Model::$data sera défini comme un tableau vide.
 
-Si vous renseignez le paramètre ``$data`` (en utilisant le format de tableau 
-mentionné plus haut), le nouveau model créé sera prêt à être sauvegardé avec 
-ces données (accessibles à ``$this->data``).
+Si le paramètre ``$data`` (utilisant le format de tableau souligné ci-dessus)
+est passé, il sera fusionné avec les champs par défaut de la base de données
+et l'instance du model sera prête à être sauvegardée avec ces données
+(accessible dans ``$this->data``).
 
-Si ``false`` est passé à la place d'un tableau, l'instance du model 
-n'initialisera pas les champs du schéma de model qui ne sont pas encore 
-définis, cela remettra à zéro les champs qui ont déjà été renseignés, et 
-laissera les autres vides. Utilisez ceci pour éviter de mettre à jour des 
-champs de la base données qui ont déjà été renseignés et doivent être mis 
-à jour.
+Si ``false`` ou ``null`` sont passés pour le paramètre ``$data``, Model::data
+sera défini comme un tableau vide.
+
+.. tip::
+
+    Si vous voulez insérer une nouvelle ligne au lieu de mettre à jour une ligne 
+    existante, vous devriez toujours appeler en premier lieu create().
+    Cela évite les conflits avec d'éventuels appels à save en amont dans les 
+    callbacks ou à tout autre endroit.
 
 :php:meth:`Model::saveField(string $fieldName, string $fieldValue, $validate = false)`
 ======================================================================================
@@ -183,8 +191,19 @@ depuis un controller à ``saveField`` ressemblerait à quelque chose comme::
 
 .. warning::
 
-    Vous ne pouvez pas arrêter la mise à jour du champ mis à jour avec cette 
+    Vous ne pouvez pas arrêter la mise à jour du champ ``modified`` avec cette 
     méthode, vous devrez utiliser la méthode save().
+
+La méthode saveField a aussi une syntaxe alternative::
+
+    saveField(string $fieldName, string $fieldValue, array $params = array())
+
+Le tableau ``$params`` peut avoir en clé, les options disponibles
+suivantes:
+
+* ``validate`` Définie à true/false pour activer/désactiver la validation.
+* ``callbacks`` Définie à false pour désactiver les callbacks. Utiliser 
+  'before' ou 'after' activera seulement ces callbacks.
     
 :php:meth:`Model::updateAll(array $fields, array $conditions)`
 ==============================================================
@@ -779,14 +798,48 @@ En utilisant le code précédent, un select drop down est crée, permettant aux
 multiples choix d'être automatiquement sauvegarder au Recipe existant en étant 
 ajouté à la base de données.
 
+Self HABTM
+~~~~~~~~~~
+
+Normalement HABTM est utilisé pour lier 2 models ensemble mais il peut 
+aussi être utilisé avec seulement 1 model, mais il nécéssite une attention
+plus grande encore.
+
+La clé est dans la configuration du model ``className``. En ajoutant 
+simplement une relation ``Project`` HABTM ``Project`` entraine des 
+problèmes lors des enregistrements de données. 
+En configurant le ``className`` au nom de models et en utilisant l'alias 
+en clé, nous évitions ces problèmes.::
+
+    class Project extends AppModel {
+        public $hasAndBelongsToMany = array(
+            'RelatedProject' => array(
+                'className'              => 'Project',
+                'foreignKey'             => 'projects_a_id',
+                'associationForeignKey'  => 'projects_b_id',
+            ),
+        );
+    }
+
+Créer des éléments de form et sauvegarder les données fonctionne de la même 
+façon qu'avant mais vous utilisez l'alias à la place. Ceci::
+
+    $this->set('projects', $this->Project->find('list'));
+    $this->Form->input('Project');
+
+Devient ceci::
+
+    $this->set('relatedProjects', $this->Project->find('list'));
+    $this->Form->input('RelatedProject');
+    
 Que faire quand HABTM devient compliqué?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Par défaut, quand vous sauvegardez une relation HasAndBelongsToMany, Cake 
 supprime toutes les lignes de la table jointe avant d'en sauvegarder de 
-nouvelles. Par exemple, si vous avez un Club qui a 10 Children (Enfant) associés. Vous 
-mettez ensuite à jour le Club avec 2 Children. Le Club aura seulement 2 
-Children, et pas 12.
+nouvelles. Par exemple, si vous avez un Club qui a 10 Children (Enfant)
+associés. Vous mettez ensuite à jour le Club avec 2 Children. Le Club aura
+seulement 2 Children, et pas 12.
 
 Notez aussi que si vous voulez ajouter plus de champs à joindre (quand il a été 
 crée ou les meta informations), c'est possible avec les tables jointes HABTM, 
@@ -829,7 +882,7 @@ Datatables
 
 Tandis que CakePHP peut avoir des sources de données qui ne sont pas des driven
 de base de données, la plupart du temps, elles le sont. CakePHP est pensé pour 
-être agnostique et va fonctionner avec MySQL, MSSQL, Oracle, PostgreSQL et 
+être agnostique et va fonctionner avec MySQL, MSSQL, PostgreSQL et 
 autres. Vous pouvez créer vos tables de base de données comme vous l'auriez 
 fait normalement. Quand vous créez vos classes Model, elles seront 
 automatiquement mappées aux tables que vous avez créees. Les noms de table sont 
@@ -851,21 +904,21 @@ automatiquement dès qu'un enregistrement est crée ou sauvegardé dans la
 base de données (à moins que les données déjà sauvegardées contiennent 
 une valeur pour ces champs).
 
-Les champs created et modified vont être définis à la date et heure courante 
-quand l'enregistrement est ajouté pour la première fois. Le champ modifié 
-sera mis à jour avec la date et l'heure courante dès que l'enregistrement sera 
-sauvegardé.
+Les champs ``created`` et ``modified`` vont être définis à la date et heure 
+courante quand l'enregistrement est ajouté pour la première fois. Le champ 
+modifié sera mis à jour avec la date et l'heure courante dès que 
+l'enregistrement sera sauvegardé.
 
-Si vous avez mis à jour, crée ou modifié des données dans votre $this->data 
+Si vous avez ``created`` ou ``modified`` des données dans votre $this->data 
 (par ex à partir d'un Model::read ou d'un Model::set) avant un Model::save(), 
 alors les valeurs seront prises à partir de $this->data et ne seront pas mises 
-à jour automagiquement. Preférez l'utilisation de 
-``unset($this->data['Model']['modified'])``, etc. Alternativement vous pouvez 
-écraser Model::save() pour toujours le faire pour vous::
+à jour automagiquement. Si vous ne souhaitez pas cela, vous pouvez utiliser
+``unset($this->data['Model']['modified'])``, etc... Alternativement vous pouvez
+surcharger Model::save() pour toujours le faire pour vous::
 
     class AppModel extends Model {
 
-        public function save($data = null, $validate = true, $fieldList = array()) }
+        public function save($data = null, $validate = true, $fieldList = array()) {
             // Nettoie la valeur du champ modified avant chaque sauvegarde
             $this->set($data);
             if (isset($this->data[$this->alias]['modified'])) {

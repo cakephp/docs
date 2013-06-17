@@ -29,7 +29,7 @@ presentational logic needed to get the data it received from the
 controller in a format that is ready for the audience you’re
 serving to. If you'd prefer using a templating language like
 Twig, or Smarty, a subclass of View will bridge your templating
-language and CakePHP
+language and CakePHP.
 
 View files are stored in ``/app/View/``, in a folder named after the
 controller that uses the files, and named after the action it
@@ -111,7 +111,7 @@ un-captured content from the extending view. Assuming our view file has a
     <?php echo h($post['Post']['body']);
 
 The post view above shows how you can extend a view, and populate a set of
-blocks.  Any content not already in a defined block will captured and put
+blocks.  Any content not already in a defined block will be captured and put
 into a special block named ``content``.  When a view contains a call to
 ``extend()`` execution continues to the bottom of the current view file.
 Once its complete, the extended view will be rendered.  Calling ``extend()``
@@ -205,7 +205,7 @@ default content will be discarded.
     You should avoid using ``content`` as a block name.  This is used by CakePHP
     internally for extended views, and view content in the layout.
 
-    
+
 Displaying blocks
 -----------------
 
@@ -238,7 +238,7 @@ states.  You can provide a default value using the 2nd argument:
 
     <div class="shopping-cart">
         <h3>Your Cart</h3>
-        <?php echo $this->fetch('cart', 'Your cart is empty');
+        <?php echo $this->fetch('cart', 'Your cart is empty'); ?>
     </div>
 
 .. versionchanged:: 2.3

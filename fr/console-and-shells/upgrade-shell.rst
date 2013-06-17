@@ -42,22 +42,22 @@ La structure de dossiers de votre application 1.3 ressemble à cela::
         .htaccess
         index.php
 
-La première étape est de télécharger (ou de faire ``git clone``) la nouvelle 
-version de CakePHP dans un autre dossier en dehors de votre dossier 
-``monsiteweb``, que nous appellerons ``cakephp``. Nous ne souhaitons pas que 
-le dossier téléchargé ``app`` écrase votre dossier app. Maintenant, il est 
+La première étape est de télécharger (ou de faire ``git clone``) la nouvelle
+version de CakePHP dans un autre dossier en dehors de votre dossier
+``monsiteweb``, que nous appellerons ``cakephp``. Nous ne souhaitons pas que
+le dossier téléchargé ``app`` écrase votre dossier app. Maintenant, il est
 grand temps de faire une sauvegarde de votre dossier app,
 par exemple:``cp -R app app-backup``.
 
-Copiez le dossier ``cakephp/lib`` dans votre dossier ``monsiteweb/lib`` pour 
+Copiez le dossier ``cakephp/lib`` dans votre dossier ``monsiteweb/lib`` pour
 mettre à jour la nouvelle version de CakePHP dans votre app, par exemple :
 ``cp -R ../cakephp/lib .``.
 Symlinking est aussi une bonne alternative pour copier, 
 par exemple.: ``ln -s /var/www/cakephp/lib``. 
 
-Avant de lancer notre shell de mise à jour, nous avons aussi besoin des nouveaux
-scripts de console. Copier le dossier ``cakephp/app/Console`` dans le dossier 
-``monsiteweb/app``, exemple.:
+Avant de lancer notre shell de mise à jour, nous avons aussi besoin des
+nouveaux scripts de console. Copier le dossier ``cakephp/app/Console`` dans le
+dossier ``monsiteweb/app``, exemple.:
 ``cp -R ../cakephp/app/Console ./app``.
 
 La structure de votre dossier devrait ressembler à cela maintenant::
@@ -74,14 +74,14 @@ La structure de votre dossier devrait ressembler à cela maintenant::
         .htaccess
         index.php
 
-Maintenant nous pouvons lancer la mise à jour shell en tapant ``cd`` puis le 
+Maintenant nous pouvons lancer la mise à jour shell en tapant ``cd`` puis le
 chemin vers votre app et en lancant la commande::
 
     ./Console/cake upgrade all
 
-Cela fera la **plupart** du travail pour mettre à jour votre app vers 2.x. 
-Vérifiez dans votre dossier ``app`` mis à jour. Si tout a l'air bien, félicitez 
-vous vous-mêmes et supprimez votre dossier ``mywebsite/cake``. Bienvenue dans 
+Cela fera la **plupart** du travail pour mettre à jour votre app vers 2.x.
+Vérifiez dans votre dossier ``app`` mis à jour. Si tout a l'air bien, félicitez
+vous vous-mêmes et supprimez votre dossier ``mywebsite/cake``. Bienvenue dans
 la version 2.x!
 
 

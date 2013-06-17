@@ -44,14 +44,14 @@ either download an archive copy (zip/tar.gz/tar.bz2) from the main
 website, or check out the code from the git repository.
 
 To download the latest major release of CakePHP. Visit the main
-website `http://www.cakephp.org <http://www.cakephp.org>`_ and
+website `http://cakephp.org <http://cakephp.org>`_ and
 follow the "Download Now" link.
 
 All current releases of CakePHP are hosted on
 `Github <http://github.com/cakephp/cakephp>`_. Github houses both CakePHP
 itself as well as many other plugins for CakePHP. The CakePHP
 releases are available at
-`Github downloads <http://github.com/cakephp/cakephp/downloads>`_.
+`Github tags <https://github.com/cakephp/cakephp/tags>`_.
 
 Alternatively you can get fresh off the press code, with all the
 bug-fixes and up to the minute enhancements.
@@ -119,8 +119,8 @@ http://www.example.com/cake\_2\_0/.
 Using one CakePHP checkout for multiple applications
 ----------------------------------------------------
 
-If you are developing a number of applications, it often makes sense
-to have them share the same CakePHP core checkout. There are a few ways in which you can
+If you are developing a number of applications, it often makes sense to have
+them share the same CakePHP core checkout. There are a few ways in which you can
 accomplish this.  Often the easiest is to use PHP's ``include_path``. To start
 off, clone CakePHP into a directory.  For this example, we'll use
 ``~/projects``::
@@ -181,12 +181,13 @@ for the domain to::
 If your web server is configured correctly, you should now find
 your Cake application accessible at http://www.example.com.
 
-Advanced Installation and server specific configuration
-=======================================================
+Advanced Installation and URL Rewriting
+=======================================
 
 .. toctree::
 
-   installation/advanced-installation
+    installation/advanced-installation
+    installation/url-rewriting
 
 Fire It Up
 ==========

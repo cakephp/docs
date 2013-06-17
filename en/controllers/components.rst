@@ -129,13 +129,19 @@ them like so::
 Loading components on the fly
 -----------------------------
 
-You might not need all of your components available on every controller action.
-In situations like this you can load a component at runtime using the
-:doc:`Component Collection </core-libraries/collections>`.  From inside a
-controller you can do the following::
-    
+You might not need all of your components available on every controller
+action. In situations like this you can load a component at runtime using the
+:doc:`Component Collection </core-libraries/collections>`. From inside a
+controller's method you can do the following::
+
     $this->OneTimer = $this->Components->load('OneTimer');
     $this->OneTimer->getTime();
+
+.. note::
+
+    Keep in mind that loading a component on the fly will not call its
+    initialize method. If the component you are calling has this method you
+    will need to call it manually after load.
 
 
 Component Callbacks
@@ -236,6 +242,8 @@ way you include them in controllers - using the ``$components`` var::
             // ...
         }
     }
+
+Note that in contrast to a component included in a controller no callbacks will be triggered on an component's component.
 
 .. _component-api:
 

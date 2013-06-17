@@ -16,8 +16,8 @@ pour contenir les données de notre user::
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        nom_user VARCHAR(50),
-        mot_de_passe VARCHAR(50),
+        username VARCHAR(50),
+        password VARCHAR(50),
         role VARCHAR(20),
         created DATETIME DEFAULT NULL,
         modified DATETIME DEFAULT NULL
@@ -36,13 +36,13 @@ responsablilité de trouver, sauvegarder et valider toute donnée d'user::
     class User extends AppModel {
         public $name = 'User';
         public $validate = array(
-            'nom_user' => array(
+            'username' => array(
                 'required' => array(
                     'rule' => array('notEmpty'),
                     'message' => 'Un nom d\'user est requis'
                 )
             ),
-            'mot_de_passe' => array(
+            'password' => array(
                 'required' => array(
                     'rule' => array('notEmpty'),
                     'message' => 'Un mot de passe est requis'
@@ -109,7 +109,7 @@ de génération de code fournis avec CakePHP::
                 }
             } else {
                 $this->request->data = $this->User->read(null, $id);
-                unset($this->request->data['User']['mot_de_passe']);
+                unset($this->request->data['User']['password']);
             }
         }
 
@@ -140,8 +140,8 @@ le cadre de ce tutoriel, nous allons juste montrer le add.ctp:
     <?php echo $this->Form->create('User');?>
         <fieldset>
             <legend><?php echo __('Ajouter User'); ?></legend>
-            <?php echo $this->Form->input('nom_user');
-            echo $this->Form->input('mot_de_passe');
+            <?php echo $this->Form->input('username');
+            echo $this->Form->input('password');
             echo $this->Form->input('role', array(
                 'options' => array('admin' => 'Admin', 'auteur' => 'Auteur')
             ));
@@ -228,8 +228,8 @@ Le hash du mot de passe n'est pas encore fait, ouvrez votre fichier de modèle
     // ...
 
     public function beforeSave() {
-        if (isset($this->data[$this->alias]['mot_de_passe'])) {
-            $this->data[$this->alias]['mot_de_passe'] = AuthComponent::password($this->data[$this->alias]['mot_de_passe']);
+        if (isset($this->data[$this->alias]['password'])) {
+            $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
         }
         return true;
     }
@@ -248,8 +248,8 @@ fonction de connexion, et le voilà:
     <?php echo $this->Form->create('User');?>
         <fieldset>
             <legend><?php echo __('Merci de rentrer votre nom d\'user et mot de passe'); ?></legend>
-            <?php echo $this->Form->input('nom_user');
-            echo $this->Form->input('mot_de_passe');
+            <?php echo $this->Form->input('username');
+            echo $this->Form->input('password');
         ?>
         </fieldset>
     <?php echo $this->Form->end(__('Connexion'));?>
@@ -270,7 +270,7 @@ la fonction ``beforeFilter`` de l'AppController.
 L'action ``login`` appelle la fonction ``$this->Auth->login()`` dans 
 AuthComponent, et cela fonctionne sans autre config car nous suivons les 
 conventions comme mentionnées plus tôt. C'est-à-dire, avoir un modèle 
-User avec les colonnes nom_user et un mot_de_passe, et 
+User avec les colonnes username et password, et 
 utiliser un formulaire posté à un contrôleur avec les données d'user. 
 Cette fonction retourne si la connexion a réussi ou non, et en cas de succès, 
 alors nous redirigeons l'user vers l'url configuré de redirection que 
@@ -368,7 +368,7 @@ l'édition des posts si l'auteur ne correspond pas. Ouvrez le fichier
         return parent::isAuthorized($user);
     }
 
-Nous écrasons maintenant l'appel ``isAuthorized()`` de AppController's et 
+Nous surchargeons maintenant l'appel ``isAuthorized()`` de AppController's et 
 vérifions à l'intérieur si la classe parente autorise déjà l'user.
 Si elle ne le fait pas, alors nous ajoutons juste l'autorisation d'accéder 
 à l'action add, et éventuellement accés pour modifier et de supprimer.

@@ -32,7 +32,7 @@ to achieve this use::
 
 You can also attach the behavior on the fly like so::
 
-    $this->Post->Behaviors->attach('Acl', array('type' => 'controlled'));
+    $this->Post->Behaviors->load('Acl', array('type' => 'controlled'));
 
 .. versionchanged:: 2.1
     You can now safely attach AclBehavior to AppModel. Aco, Aro and AclNode
@@ -50,21 +50,21 @@ parentNode() method defined. This is used by the AclBehavior to
 determine parent->child relationships. A model's parentNode()
 method must return null or return a parent Model reference::
 
-    function parentNode() {
+    public function parentNode() {
         return null;
     }
 
 If you want to set an ACO or ARO node as the parent for your Model,
 parentNode() must return the alias of the ACO or ARO node::
 
-    function parentNode() {
+    public function parentNode() {
         return 'root_node';
     }
 
 A more complete example. Using an example User Model, where User
 belongsTo Group::
 
-    function parentNode() {
+    public function parentNode() {
         if (!$this->id && empty($this->data)) {
             return null;
         }

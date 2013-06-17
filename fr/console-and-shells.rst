@@ -45,8 +45,8 @@ un exécutable::
     $ cd /path/to/cakephp/app
     $ Console/cake
 
-Mais il est préférable d'ajouter l'exécutable du coeur de cake dan votre 
-système de path afin que vous puissiez utiliser la commande cake de partout. 
+Mais il est préférable d'ajouter l'exécutable du coeur de cake dans votre 
+système de path afin que vous puissiez utiliser la commande cake de partout.
 C'est plus pratique quand vous créez de nouveaux projets. Regardez 
 :ref:`adding-cake-to-your-path` pour voir la façon de rendre ``cake`` 
 disponible dans tout le système.
@@ -73,10 +73,10 @@ Lancez la Console avec aucun argument entraîne ce message d'aide::
 
     Available Shells:
 
-     acl [CORE]                              i18n [CORE]                             
-     api [CORE]                              import [app]                            
-     bake [CORE]                             schema [CORE]                           
-     command_list [CORE]                     testsuite [CORE]                        
+     acl [CORE]                              i18n [CORE]
+     api [CORE]                              import [app]
+     bake [CORE]                             schema [CORE]
+     command_list [CORE]                     testsuite [CORE]
      console [CORE]                          upgrade [CORE]
 
     To run a command, type 'cake shell_name [args]'
@@ -105,7 +105,7 @@ forme de chemin absolu.
 Ajouter cake à votre système path
 ---------------------------------
 
-Si vous êtes sur un système \*nix (linux, MacOSX), les étapes suivantes vous 
+Si vous êtes sur un système \*nix (linux, MacOSX), les étapes suivantes vous
 permettront de rendre cake executable dans votre système path.
 
 #. Localisez où se trouve votre installation de cakephp et le cake executable. 
@@ -118,16 +118,33 @@ permettront de rendre cake executable dans votre système path.
 #. Rechargez la configuration bash ou ouvrez un nouveau terminal, et 
    ``cake`` devrait fonctionner n'importe où.
 
-.. todo::
+Si vous êtes sur Windows Vista ou 7, vous devrez suivre les étapes suivantes.
 
-    Ajoutez comment configurer PATH pour les systèmes windows.
+#. Localisez l'emplacement où se trouvent votre installation CakePHP et
+   l'executable cake. Par exemple
+   ``C:\xampp\htdocs\cakephp\lib\Cake\Console``
+#. Ouvrez la fenêtre des propriétés du Système de votre ordinateur. Vous
+   essaierez le raccourci clavier Windows Key + Pause ou Windows Key + Break.
+   Ou, à partir du Bureau, faîtes un click droit sur Mon Ordinateur, clickez
+   sur Propriétés et clickez sur le lien Paramètres avancés du système dans la
+   colonne de gauche.
+#. Allez sous l'onglet Avancé et clickez sur le bouton des Variables
+   d'Environnement.
+#. Dans la portion des Variables Sytèmes, cherchez le chemin de la variable
+   et double-clickez dessus pour la modifier.
+#. Ajoutez le chemin de l'installation de ``cake`` suivi par un point virgule.
+   On pourrait avoir par exemple::
+
+    %SystemRoot%\system32;%SystemRoot%;C:\xampp\htdocs\cakephp\lib\Cake\Console;
+
+#. Clickez Ok et ``cake`` devrait fonctionner partout.
 
 Créer un shell
 ==============
 
-Créons un shell pour l'utilisation dans la Console. Pour cet exemple, nous 
+Créons un shell pour l'utilisation dans la Console. Pour cet exemple, nous
 créerons un simple shell Hello world. Dans le répertoire ``Console/Command``
-de votre application, créez ``HelloShell.php``. Mettez le code suivant 
+de votre application, créez ``HelloShell.php``. Mettez le code suivant
 dedans::
 
     <?php 
@@ -140,9 +157,9 @@ dedans::
 Les conventions pour les classes de shell sont que les noms de classe doivent 
 correspondre au nom du fichier, avec Shell en suffixe. Dans notre shell, nous 
 avons crée une méthode ``main()``.
-Cette méthode est appelée quand un shell est appelé avec aucune commande 
-supplémentaire. Nous allons ajouter quelques commandes en plus dans un moment, 
-mais pour l'instant lançons juste notre shell. Depuis le répertoire de votre 
+Cette méthode est appelée quand un shell est appelé avec aucune commande
+supplémentaire. Nous allons ajouter quelques commandes en plus dans un moment,
+mais pour l'instant lançons juste notre shell. Depuis le répertoire de votre
 application, lancez::
 
     Console/cake hello
@@ -156,13 +173,13 @@ Vous devriez voir la sortie suivante::
     ---------------------------------------------------------------
     Hello world.
 
-Comme mentionné avant, la méthode ``main()`` dans les shells est une méthode 
-spéciale appelée tant qu'il n'y a pas d'autres commandes ou arguments donnés au 
-shell. Vous pouvez aussi remarquer que HelloShell étend ``AppShell``. Un peu 
-comme :ref:`app-controller`, AppShell vous donne une classe de base pour 
-contenir toutes les fonctions ordinaires ou logiques. Vous pouvez définir un 
-AppShell en créant ``app/Console/Command/AppShell.php``.  Si vous n'en avez pas 
-un, CakePHP en utilisera une integrée. Comme notre méthode principale n'était 
+Comme mentionné avant, la méthode ``main()`` dans les shells est une méthode
+spéciale appelée tant qu'il n'y a pas d'autres commandes ou arguments donnés au
+shell. Vous pouvez aussi remarquer que HelloShell étend ``AppShell``. Un peu
+comme :ref:`app-controller`, AppShell vous donne une classe de base pour
+contenir toutes les fonctions ordinaires ou logiques. Vous pouvez définir un
+AppShell en créant ``app/Console/Command/AppShell.php``.  Si vous n'en avez pas
+un, CakePHP en utilisera une integrée. Comme notre méthode principale n'était
 pas très intéressente, ajoutons une autre commande qui fait quelque chose::
 
     <?php 
@@ -447,8 +464,9 @@ methods for easily setting multiple options/arguments at once.::
 Configurer un option parser avec l'interface courante
 -----------------------------------------------------
 
-All of the methods that configure an option parser can be chained, 
-allowing you to define an entire option parser in one series of method calls::
+Toutes les méthodes utilisées pour configurer le parser peuvent
+être chainées, vous permettant de définir l'intégralité des options du
+parser en une unique série d'appel de méthodes::
 
     $parser->addArgument('type', array(
         'help' => 'Either a full path or type of class.'
@@ -459,7 +477,7 @@ allowing you to define an entire option parser in one series of method calls::
         'help' => __('The specific method you want help on.')
     ))->description(__('Lookup doc block comments for classes in CakePHP.'));
 
-The methods that allow chaining are:
+Les méthodes autorisant le chaining sont:
 
 - description()
 - epilog()
@@ -754,17 +772,17 @@ This would get you the help specific to bake's model task.
 Obtenir de l'aide en XML
 ------------------------
 
-When building automated tools or development tools that need to interact 
-with CakePHP shells, its nice to have help available in a machine parse-able 
-format.  The ConsoleOptionParser can provide help in xml by setting an 
-additional argument::
+Lorsque vous réalisez des outils d'automatisation ou de développement qui
+ont besoin d'interagir avec les shells de CakePHP, il est appréciable d'obtenir
+de l'aide dans un format parsable par une machine. ConsoleOptionParser peut
+fournir de l'aide au format XML en définissant un argument supplémentaire::
 
     cake bake --help xml
     cake bake -h xml
 
-The above would return an XML document with the generated help, options, 
-arguments and subcommands for the selected shell.  A sample XML document 
-would look like:
+Les commandes ci-dessus vont retourner un document XML contenant de l'aide
+à propos des options, arguments et sous-commandes du shell selectionné. Voici 
+un exemple de documentation:
 
 .. code-block:: xml
 

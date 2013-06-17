@@ -21,7 +21,7 @@ opening form tag.
 
     All parameters are optional. If ``create()`` is called with no
     parameters supplied, it assumes you are building a form that
-    submits to the current controller, via either the current URL.
+    submits to the current controller, via the current URL.
     The default method for form submission is POST.
     The form element is also returned with a DOM ID. The ID is
     generated using the name of the model, and the name of the
@@ -304,6 +304,10 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
         textarea
     text, with name of password, passwd, or psword
         password
+    text, with name of email
+        email
+    text, with name of tel, telephone, or phone
+        tel
     date
         day, month, and year selects
     datetime, timestamp
@@ -319,6 +323,17 @@ field.  Internally ``input()`` delegates to other methods in FormHelper.
     true``. One limitation of this behavior is the field's model must have
     been loaded during this request. Or be directly associated to the
     model supplied to :php:meth:`~FormHelper::create()`.
+
+    .. versionadded:: 2.3
+
+    .. _html5-required:
+
+    Since 2.3 the HTML5 ``required`` attribute will also be added to the input
+    based on validation rules. You can explicitly set ``required`` key in
+    options array to override it for a field. To skip browser validation
+    triggering for the whole form you can set option ``'formnovalidate' => true``
+    for the input button you generate using :php:meth:`FormHelper::submit()` or
+    set ``'novalidate' => true`` in options for :php:meth:`FormHelper::create()`.
 
     For example, let’s assume that your User model includes fields for a
     username (varchar), password (varchar), approved (datetime) and
@@ -875,7 +890,7 @@ Datetime options
 ----------------
 
 * ``$options['timeFormat']`` Used to specify the format of the select inputs for
-  a time-related set of inputs. Valid values include '12', '24', and ``null``.
+  a time-related set of inputs. Valid values include ``12``, ``24``, and ``null``.
 
 * ``$options['dateFormat']`` Used to specify the format of the select inputs for
   a date-related set of inputs. Valid values include any combination of 'D',
@@ -1194,7 +1209,7 @@ Form Element-Specific Methods
             </optgroup>
         </select>
 
-    * ``$options['multiple']`` If 'multiple' has been set to true for an input that
+    * ``$attributes['multiple']`` If 'multiple' has been set to true for an input that
       outputs a select, the select will allow multiple selections::
 
         echo $this->Form->select('Model.field', $options, array('multiple' => true));
@@ -1227,7 +1242,7 @@ Form Element-Specific Methods
            </div>
         </div>
 
-    * ``$options['disabled']`` When creating checkboxes, this option can be set
+    * ``$attributes['disabled']`` When creating checkboxes, this option can be set
       to disable all or some checkboxes. To disable all checkboxes set disabled
       to ``true``::
 
@@ -1258,7 +1273,7 @@ Form Element-Specific Methods
         </div>
 
     .. versionchanged:: 2.3
-        Support for arrays in ``$options['disabled']`` was added in 2.3.
+        Support for arrays in ``$attributes['disabled']`` was added in 2.3.
 
 .. php:method:: file(string $fieldName, array $options)
 
@@ -1581,12 +1596,12 @@ You can declare a set of default options for ``input()`` using
 :php:meth:`FormHelper::inputDefaults()`.  Changing the default options allows
 you to consolidate repeated options into a single method call::
 
-    echo $this->Form->inputDefaults(array(
+    $this->Form->inputDefaults(array(
             'label' => false,
             'div' => false,
             'class' => 'fancy'
         )
-    ));
+    );
 
 All inputs created from that point forward will inherit the options declared in
 inputDefaults. You can override the default options by declaring the option in the

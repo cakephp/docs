@@ -1,14 +1,14 @@
 Folder & File
 #############
 
-Les utilitaires Folder et File sont des classes pratiques pour aider à la 
-lecture, l'écriture; et l'ajout de fichiers; Lister les fichiers d'un dossier 
+Les utilitaires Folder et File sont des classes pratiques pour aider à la
+lecture, l'écriture, et l'ajout de fichiers; Lister les fichiers d'un dossier
 et autres tâches habituelles liées aux répertoires.
 
 Utilisation basique
 ===================
 
-Assurez vous que les classes sont chargées en utilisant 
+Assurez vous que les classes sont chargées en utilisant
 :php:meth:`App::uses()`::
 
     <?php
@@ -20,13 +20,13 @@ Ensuite nous pouvons configurer une nouvelle instance de dossier::
     <?php
     $dir = new Folder('/path/to/folder');
 
-et chercher tous les fichiers *.ctp* à l'intérieur de ce dossier en utilisant 
+et chercher tous les fichiers *.ctp* à l'intérieur de ce dossier en utilisant
 les regex::
 
     <?php
     $files = $dir->find('.*\.ctp');
 
-Maintenant nous pouvons boucler sur les fichiers et les lire, écrire ou ajouter 
+Maintenant nous pouvons boucler sur les fichiers et les lire, écrire ou ajouter
 aux contenus, ou simplement supprimer le fichier::
 
     <?php
@@ -36,10 +36,11 @@ aux contenus, ou simplement supprimer le fichier::
         // $file->write('J'écris dans ce fichier');
         // $file->append('J'ajoute à la fin de ce fichier.');
         // $file->delete(); // Je supprime ce fichier
-        $file->close(); // Assurez vous de fermer le fichier quand c'est fini    }
+        $file->close(); // Assurez vous de fermer le fichier quand c'est fini
+    }
 
-API Folder
-==========
+API de Folder
+=============
 
 .. php:class:: Folder(string $path = false, boolean $create = false, mixed $mode = false)
 
@@ -51,7 +52,7 @@ API Folder
 
 .. php:attr:: path
 
-    Le chemin habituel pour le dossier. :php:meth:`Folder::pwd()` retournera la 
+    Le chemin habituel pour le dossier. :php:meth:`Folder::pwd()` retournera la
     même information.
 
 .. php:attr:: sort
@@ -60,7 +61,7 @@ API Folder
     
 .. php:attr:: mode
 
-    Mode à utiliser pour la création de dossiers. par défaut à ``0755``. Ne 
+    Mode à utiliser pour la création de dossiers. par défaut à ``0755``. Ne
     fait rien sur les machines windows.
     
 .. php:staticmethod:: addPathElement( $path, $element )
@@ -92,7 +93,7 @@ API Folder
 
     :rtype: boolean
 
-    Change le mode sur la structure de répertoire de façon récursive. Ceci 
+    Change le mode sur la structure de répertoire de façon récursive. Ceci
     inclut aussi le changement du mode des fichiers::
 
         <?php
@@ -104,7 +105,7 @@ API Folder
 
     :rtype: boolean
 
-    Copie de façon récursive un répertoire. Le seul paramètre $options peut 
+    Copie de façon récursive un répertoire. Le seul paramètre $options peut
     être soit un chemin à copier soit un tableau d'options::
     
         <?php
@@ -118,8 +119,25 @@ API Folder
             'from' => '/path/to/copy/from', // va causer un cd() to occur
             'mode' => 0755,
             'skip' => array('skip-me.php', '.git'),
+            'scheme' => Folder::SKIP  // Skip directories/files that already exist.
         ));
 
+    y a 3 schémas supportés:
+
+    * ``Folder::SKIP`` échapper la copie/déplacement des fichiers & répertoires
+      qui existent dans le répertoire de destination.
+    * ``Folder::MERGE`` fusionne les répertoires source/destination. Les
+      fichiers dans le répertoire source vont remplacer les fichiers dans le
+      répertoire de cible. Les contenus du répertoire seront fusionnés.
+    * ``Folder::OVERWRITE`` écrase les fichiers & répertoires existant dans la
+      répertoire cible avec ceux dans le répertoire source. Si les deux source
+      et destination contiennent le même sous-répertoire, les contenus du
+      répertoire de cible vont être retirés et remplacés avec celui de la
+      source.
+
+    .. versionchanged:: 2.3
+        La fusion, l'évitement et la surcharge des schémas ont été ajoutés à
+        ``copy()``.
 
 .. php:staticmethod:: correctSlashFor( $path )
 
@@ -133,8 +151,8 @@ API Folder
 
     :rtype: boolean
 
-    Crée une structure de répertoire de façon récursive. Peut être utilisé pour créer
-    des structures de chemin profond comme `/foo/bar/baz/shoe/horn`::
+    Crée une structure de répertoire de façon récursive. Peut être utilisé
+    pour créer des structures de chemin profond comme `/foo/bar/baz/shoe/horn`::
 
         <?php
         $folder = new Folder();
@@ -171,7 +189,7 @@ API Folder
 
     :rtype: array
 
-    Retourne un tableau de tous les fichiers correspondants dans le répertoire 
+    Retourne un tableau de tous les fichiers correspondants dans le répertoire
     courant::
 
         <?php
@@ -191,16 +209,16 @@ API Folder
 
 .. note::
 
-    Les méthodes find et findRecursive de folder ne trouvent seulement que 
-    des fichiers. Si vous voulez obtenir des dossiers et fichiers, regardez 
-    :php:meth:`Folder::read()` ou :php:meth:`Folder::tree()`
+    Les méthodes find et findRecursive de folder ne trouvent seulement que
+    des fichiers. Si vous voulez obtenir des dossiers et fichiers, regardez
+    :php:meth:`Folder::read()` ou :php:meth:`Folder::tree()`.
 
 
 .. php:method:: findRecursive( $pattern = '.*', $sort = false )
 
     :rtype: array
 
-    Retourne un tableau de tous les fichiers correspondants dans et 
+    Retourne un tableau de tous les fichiers correspondants dans et
     en-dessous du répertoire courant::
     
         <?php
@@ -253,7 +271,8 @@ API Folder
 
     :rtype: boolean
 
-    Retourne true si le $path donné finit par un slash (par exemple. se termine-par-un-slash)::
+    Retourne true si le $path donné finit par un slash (par exemple. se
+    termine-par-un-slash)::
 
         <?php
         $result = Folder::isSlashTerm('/my/test/path');
@@ -287,7 +306,7 @@ API Folder
 
     :rtype: string
 
-    Retourne un ensemble correct de slashes pour un $path donné. (\\ pour 
+    Retourne un ensemble correct de slashes pour un $path donné. (\\ pour
     les chemins Windows et / pour les autres chemins.)
 
 
@@ -303,13 +322,13 @@ API Folder
     :rtype: mixed
 
     :param boolean $sort: Si à true, triera les résultats.
-    :param mixed $exceptions: Un tableau de noms de fichiers et de dossiers 
-    à ignorer. Si à true ou '.' cette méthode va ignorer les fichiers cachés ou 
-    les fichiers commençant par '.'.
+    :param mixed $exceptions: Un tableau de noms de fichiers et de dossiers
+        à ignorer. Si à true ou '.' cette méthode va ignorer les fichiers
+        cachés ou les fichiers commençant par '.'.
     :param boolean $fullPath: Si à true, va retourner les résultats en 
-    utilisant des chemins absolus.
+        utilisant des chemins absolus.
 
-    Retourne un tableau du contenu du répertoire courant. Le tableau retourné 
+    Retourne un tableau du contenu du répertoire courant. Le tableau retourné
     contient deux tableaux: Un des repertoires et un des fichiers::
 
         <?php
@@ -353,12 +372,12 @@ API Folder
 
     :rtype: mixed
 
-    Retourne un tableau de répertoires imbriqués et de fichiers dans chaque 
+    Retourne un tableau de répertoires imbriqués et de fichiers dans chaque
     répertoire.
 
 
-L'API File
-==========
+L'API de File
+=============
 
 .. php:class:: File(string $path, boolean $create = false, integer $mode = 493)
 
@@ -374,7 +393,7 @@ L'API File
 
 .. php:attr:: name
 
-    Le nom du fichier avec l'extension. Différe de :php:meth:`File::name()` 
+    Le nom du fichier avec l'extension. Différe de :php:meth:`File::name()`
     qui retourne le nom sans l'extension.
 
 .. php:attr:: info
@@ -411,7 +430,7 @@ L'API File
 
     :rtype: boolean
 
-    Copie le Fichier vers $dest
+    Copie le Fichier vers $dest.
 
 
 .. php:method:: create( )
@@ -490,7 +509,7 @@ L'API File
 
     :rtype: string
 
-    Récupère la md5 Checksum du fichier avec la vérification précédente du 
+    Récupère la md5 Checksum du fichier avec la vérification précédente du
     Filesize.
 
 
@@ -532,9 +551,9 @@ L'API File
 
     :rtype: string
 
-    Prépare une chaîne de caractères ascii pour l'écriture. Convertit les 
-    lignes de fin en un terminator correct pour la plateforme courante. Si 
-    c'est windows "\r\n" sera utilisé, toutes les autres plateformes 
+    Prépare une chaîne de caractères ascii pour l'écriture. Convertit les
+    lignes de fin en un terminator correct pour la plateforme courante. Si
+    c'est windows "\r\n" sera utilisé, toutes les autres plateformes
     utiliseront "\n"
 
 
@@ -549,7 +568,7 @@ L'API File
 
     :rtype: mixed
 
-    Retourne les contenus du Fichier en chaîne de caractère ou retourne false 
+    Retourne les contenus du Fichier en chaîne de caractère ou retourne false
     en cas d'échec.
 
 
@@ -587,7 +606,7 @@ L'API File
 
     Ecrit le $data donné dans le Fichier.
 
-.. versionadded:: 2.1 ``File::mime()``
+.. versionadded:: 2.1 ``File::mime()``.
 
 .. php:method:: mime()
 

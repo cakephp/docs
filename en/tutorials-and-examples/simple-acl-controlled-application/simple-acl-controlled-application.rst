@@ -38,7 +38,7 @@ Preparing our Application
 First, let's get a copy of fresh Cake code.
 
 To get a fresh download, visit the CakePHP project at GitHub:
-http://github.com/cakephp/cakephp/downloads and download the stable
+https://github.com/cakephp/cakephp/tags and download the stable
 release. For this tutorial you need the latest 2.0 release.
 
 
@@ -199,7 +199,12 @@ and users. In **both** your ``GroupsController`` and your
 
     public function beforeFilter() {
         parent::beforeFilter();
+
+        // For CakePHP 2.0
         $this->Auth->allow('*');
+
+        // For CakePHP 2.1 and up
+        $this->Auth->allow();
     }
 
 These statements tell AuthComponent to allow public access to all

@@ -84,25 +84,25 @@ this information were stored in a table, it might look like the
 following table:
 
 ======== ======== ========= ============ ========== =======
-x        Weapons  The Ring  Salted Pork  Diplomacy  Ale    
+x        Weapons  The Ring  Salted Pork  Diplomacy  Ale
 ======== ======== ========= ============ ========== =======
-Gandalf                     Allow        Allow      Allow  
+Gandalf                     Allow        Allow      Allow
 -------- -------- --------- ------------ ---------- -------
-Aragorn  Allow              Allow        Allow      Allow  
+Aragorn  Allow              Allow        Allow      Allow
 -------- -------- --------- ------------ ---------- -------
-Bilbo                                               Allow  
+Bilbo                                               Allow
 -------- -------- --------- ------------ ---------- -------
-Frodo             Allow                             Allow  
+Frodo             Allow                             Allow
 -------- -------- --------- ------------ ---------- -------
-Gollum                      Allow                          
+Gollum                      Allow
 -------- -------- --------- ------------ ---------- -------
-Legolas  Allow              Allow        Allow      Allow  
+Legolas  Allow              Allow        Allow      Allow
 -------- -------- --------- ------------ ---------- -------
-Gimli    Allow              Allow                          
+Gimli    Allow              Allow
 -------- -------- --------- ------------ ---------- -------
-Pippin                                   Allow      Allow  
+Pippin                                   Allow      Allow
 -------- -------- --------- ------------ ---------- -------
-Merry                                    Allow      Allow  
+Merry                                    Allow      Allow
 ======== ======== ========= ============ ========== =======
 
 At first glance, it seems that this sort of system could work
@@ -133,26 +133,26 @@ system, and organizes his objects along the following lines:
 
 
 -  Fellowship of the Ring™
-   
+
    -  Warriors
-      
+
       -  Aragorn
       -  Legolas
       -  Gimli
 
    -  Wizards
-      
+
       -  Gandalf
 
    -  Hobbits
-      
+
       -  Frodo
       -  Bilbo
       -  Merry
       -  Pippin
 
    -  Visitors
-      
+
       -  Gollum
 
 
@@ -164,22 +164,22 @@ our ARO tree, Gandalf can tack on a few group-based permissions:
 
 -  Fellowship of the Ring
    (**Deny**: all)
-   
+
    -  Warriors
       (**Allow**: Weapons, Ale, Elven Rations, Salted Pork)
-      
+
       -  Aragorn
       -  Legolas
       -  Gimli
 
    -  Wizards
       (**Allow**: Salted Pork, Diplomacy, Ale)
-      
+
       -  Gandalf
 
    -  Hobbits
       (**Allow**: Ale)
-      
+
       -  Frodo
       -  Bilbo
       -  Merry
@@ -187,7 +187,7 @@ our ARO tree, Gandalf can tack on a few group-based permissions:
 
    -  Visitors
       (**Allow**: Salted Pork)
-      
+
       -  Gollum
 
 
@@ -199,13 +199,13 @@ that reside at each of those points, and use the most specific
 permission relating to Pippin and the Ale.
 
 ======================= ================ =======================
-ARO Node                Permission Info  Result                 
+ARO Node                Permission Info  Result
 ======================= ================ =======================
-Fellowship of the Ring  Deny all         Denying access to ale. 
+Fellowship of the Ring  Deny all         Denying access to ale.
 ----------------------- ---------------- -----------------------
 Hobbits                 Allow 'ale'      Allowing access to ale!
 ----------------------- ---------------- -----------------------
-Pippin                  --               Still allowing ale!    
+Pippin                  --               Still allowing ale!
 ======================= ================ =======================
 
 .. note::
@@ -221,10 +221,10 @@ to groups of AROs:
 
 -  Fellowship of the Ring
    (**Deny**: all)
-   
+
    -  Warriors
       (**Allow**: Weapons, Ale, Elven Rations, Salted Pork)
-      
+
       -  Aragorn
          (Allow: Diplomacy)
       -  Legolas
@@ -232,12 +232,12 @@ to groups of AROs:
 
    -  Wizards
       (**Allow**: Salted Pork, Diplomacy, Ale)
-      
+
       -  Gandalf
 
    -  Hobbits
       (**Allow**: Ale)
-      
+
       -  Frodo
          (Allow: Ring)
       -  Bilbo
@@ -248,7 +248,7 @@ to groups of AROs:
 
    -  Visitors
       (**Allow**: Salted Pork)
-      
+
       -  Gollum
 
 
@@ -261,13 +261,13 @@ path in the tree: Fellowship->Hobbits->Merry and work our way down,
 keeping track of ale-related permissions:
 
 ======================= ================ =======================
-ARO Node                Permission Info  Result                 
+ARO Node                Permission Info  Result
 ======================= ================ =======================
-Fellowship of the Ring  Deny all         Denying access to ale. 
+Fellowship of the Ring  Deny all         Denying access to ale.
 ----------------------- ---------------- -----------------------
 Hobbits                 Allow 'ale'      Allowing access to ale!
 ----------------------- ---------------- -----------------------
-Merry                   Deny Ale         Denying ale. 
+Merry                   Deny Ale         Denying ale.
 ======================= ================ =======================
 
 Defining Permissions: Cake's INI-based ACL
@@ -289,7 +289,7 @@ updating the following lines in app/Config/core.php
     // Change these lines:
     Configure::write('Acl.classname', 'DbAcl');
     Configure::write('Acl.database', 'default');
-    
+
     // To look like this:
     Configure::write('Acl.classname', 'IniAcl');
     //Configure::write('Acl.database', 'default');
@@ -317,45 +317,45 @@ been crafting would look like in INI syntax:
     [aragorn]
     groups = warriors
     allow = diplomacy
-    
+
     [legolas]
     groups = warriors
-    
+
     [gimli]
     groups = warriors
-    
+
     [gandalf]
     groups = wizards
-    
+
     [frodo]
     groups = hobbits
     allow = ring
-    
+
     [bilbo]
     groups = hobbits
-    
+
     [merry]
     groups = hobbits
     deny = ale
-    
+
     [pippin]
     groups = hobbits
-    
+
     [gollum]
     groups = visitors
-    
+
     ;-------------------------------------
     ; ARO Groups
     ;-------------------------------------
     [warriors]
     allow = weapons, ale, salted_pork
-    
+
     [wizards]
     allow = salted_pork, diplomacy, ale
-    
+
     [hobbits]
     allow = ale
-    
+
     [visitors]
     allow = salted_pork
 
@@ -400,25 +400,25 @@ console application should look something like the following:
     ---------------------------------------------------------------
     Cake Schema Shell
     ---------------------------------------------------------------
-    
+
     The following tables will be dropped.
     acos
     aros
     aros_acos
-    
-    Are you sure you want to drop the tables? (y/n) 
+
+    Are you sure you want to drop the tables? (y/n)
     [n] > y
     Dropping tables.
     acos updated.
     aros updated.
     aros_acos updated.
-    
+
     The following tables will be created.
     acos
     aros
     aros_acos
-    
-    Are you sure you want to create the tables? (y/n) 
+
+    Are you sure you want to create the tables? (y/n)
     [y] > y
     Creating tables.
     acos updated.
@@ -518,9 +518,9 @@ models to save data like we always do:
 
 ::
 
-    function any_action() {
+    public function any_action() {
         $aro = $this->Acl->Aro;
-        
+
         // Here's all of our group info in an array we can iterate through
         $groups = array(
             0 => array(
@@ -536,16 +536,16 @@ models to save data like we always do:
                 'alias' => 'visitors'
             ),
         );
-        
+
         // Iterate and create ARO groups
         foreach ($groups as $data) {
             // Remember to call create() when saving in loops...
             $aro->create();
-            
+
             // Save data
             $aro->save($data);
         }
-    
+
         // Other action logic goes here...
     }
 
@@ -555,17 +555,17 @@ application to verify the tree structure.
 ::
 
     $ cake acl view aro
-    
+
     Aro tree:
     ---------------------------------------------------------------
       [1]warriors
-    
+
       [2]wizards
-    
+
       [3]hobbits
-    
+
       [4]visitors
-    
+
     ---------------------------------------------------------------
 
 I suppose it's not much of a tree at this point, but at least we've
@@ -582,13 +582,13 @@ specific model records in our database.
 
 ::
 
-    function any_action() {
+    public function any_action() {
         $aro = new Aro();
-        
+
         // Here are our user records, ready to be linked up to new ARO records
         // This data could come from a model and modified, but we're using static
         // arrays here for demonstration purposes.
-        
+
         $users = array(
             0 => array(
                 'alias' => 'Aragorn',
@@ -645,16 +645,16 @@ specific model records in our database.
                 'foreign_key' => 1337,
             ),
         );
-        
+
         // Iterate and create AROs (as children)
         foreach ($users as $data) {
             // Remember to call create() when saving in loops...
             $aro->create();
-    
+
             //Save data
             $aro->save($data);
         }
-        
+
         // Other action logic goes here...
     }
 
@@ -670,35 +670,35 @@ little more interesting. Let's give it a try:
 ::
 
     $ cake acl view aro
-    
+
     Aro tree:
     ---------------------------------------------------------------
       [1]warriors
-    
+
         [5]Aragorn
-    
+
         [6]Legolas
-    
+
         [7]Gimli
-    
+
       [2]wizards
-    
+
         [8]Gandalf
-    
+
       [3]hobbits
-    
+
         [9]Frodo
-    
+
         [10]Bilbo
-    
+
         [11]Merry
-    
+
         [12]Pippin
-    
+
       [4]visitors
-    
+
         [13]Gollum
-    
+
     ---------------------------------------------------------------
 
 Now that we've got our ARO tree setup properly, let's discuss a
@@ -751,9 +751,9 @@ because permissions are managed by the Acl Component.
     class SomethingsController extends AppController {
         // You might want to place this in the AppController
         // instead, but here works great too.
-    
+
         public $components = array('Acl');
-    
+
     }
 
 Let's set up some basic permissions using the AclComponent in an
@@ -761,16 +761,16 @@ action inside this controller.
 
 ::
 
-    function index() {
+    public function index() {
         // Allow warriors complete access to weapons
         // Both these examples use the alias syntax
         $this->Acl->allow('warriors', 'Weapons');
-        
+
         // Though the King may not want to let everyone
         // have unfettered access
         $this->Acl->deny('warriors/Legolas', 'Weapons', 'delete');
         $this->Acl->deny('warriors/Gimli',   'Weapons', 'delete');
-        
+
         die(print_r('done', 1));
     }
 
@@ -797,7 +797,7 @@ yourself. What we have above is equivalent to this:
 
     // 6342 = Legolas
     // 1564 = Gimli
-    
+
     $this->Acl->deny(array('model' => 'User', 'foreign_key' => 6342), 'Weapons', 'delete');
     $this->Acl->deny(array('model' => 'User', 'foreign_key' => 1564), 'Weapons', 'delete');
 
@@ -829,22 +829,22 @@ Let's give it a try inside a controller action:
 
 ::
 
-    function index() {
+    public function index() {
         // These all return true:
         $this->Acl->check('warriors/Aragorn', 'Weapons');
         $this->Acl->check('warriors/Aragorn', 'Weapons', 'create');
         $this->Acl->check('warriors/Aragorn', 'Weapons', 'read');
         $this->Acl->check('warriors/Aragorn', 'Weapons', 'update');
         $this->Acl->check('warriors/Aragorn', 'Weapons', 'delete');
-        
-        // Remember, we can use the model/id syntax 
+
+        // Remember, we can use the model/id syntax
         // for our user AROs
         $this->Acl->check(array('User' => array('id' => 2356)), 'Weapons');
-        
+
         // These also return true:
         $result = $this->Acl->check('warriors/Legolas', 'Weapons', 'create');
         $result = $this->Acl->check('warriors/Gimli', 'Weapons', 'read');
-        
+
         // But these return false:
         $result = $this->Acl->check('warriors/Legolas', 'Weapons', 'delete');
         $result = $this->Acl->check('warriors/Gimli', 'Weapons', 'delete');

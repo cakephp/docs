@@ -163,15 +163,15 @@ Controllers & Components
    
 **Component**
 
--  ``Component::triggerCallback`` a été ajouté. C'est un hook générique 
+- ``Component::triggerCallback`` a été ajouté. C'est un hook générique 
   dans le processus de callback du component. Il supplante
-   ``Component::startup()``, ``Component::shutdown()`` et
-   ``Component::beforeRender()`` comme manière préférentielle pour
-   déclencher les callbacks.
+  ``Component::startup()``, ``Component::shutdown()`` et
+  ``Component::beforeRender()`` comme manière préférentielle pour
+  déclencher les callbacks.
 
 **CookieComponent**
 
--  ``del`` est dépreciée, utilisez ``delete``
+- ``del`` est dépreciée, utilisez ``delete``
 
 **AclComponent + DbAcl**
 

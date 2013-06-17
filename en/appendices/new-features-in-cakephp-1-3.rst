@@ -83,7 +83,7 @@ available to all helpers. Assuming ``Asset.timestamp == force``
 
     $path = 'css/cake.generic.css'
     $stamped = $this->Html->assetTimestamp($path);
-    
+
     //$stamped contains 'css/cake.generic.css?5632934892'
 
 The appended timestamp contains the last modification time of the
@@ -451,7 +451,7 @@ With the addition of ``Routing.prefixes`` scaffolding has been
 updated to allow the scaffolding of any one prefix::
 
     Configure::write('Routing.prefixes', array('admin', 'member'));
-    
+
     class PostsController extends AppController {
         var $scaffold = 'member';
     }
@@ -471,10 +471,10 @@ the appropriate name. For example if you lived in the Netherlands
 you would create a class like::
 
     class NlValidation {
-        function phone($check) {
+        public function phone($check) {
             ...
         }
-        function postal($check) {
+        public function postal($check) {
             ...
         }
     }
@@ -483,7 +483,7 @@ This file could be placed anywhere in your application, but must be
 imported before attempting to use it. In your model validation you
 could use your NlValidation class by doing the following::
 
-    var $validate = array(
+    public $validate = array(
         'phone_no' => array('rule' => array('phone', null, 'nl')),
         'postal_code' => array('rule' => array('postal', null, 'nl'))
     );

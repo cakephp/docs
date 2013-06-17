@@ -65,7 +65,7 @@ past and load files it should not.
 Folder Names
 ------------
 
-Most folders should be also CamelCased, especially when containing classes. 
+Most folders should be also CamelCased, especially when containing classes.
 Think of namespaces, each folder represents a level in the namespacing
 hierarchy, folders that do not contain classes, or do not constitute a
 namespace on themselves, should be lowercased.
@@ -98,8 +98,8 @@ In your ``app/webroot/.htaccess`` replace line ``RewriteRule ^(.*)$ index.php?ur
 AppController / AppModel / AppHelper / AppShell
 ===============================================
 
-The ``app/app_controller.php``, ``app/app_model.php``, ``app/app_helper.php`` are now located and 
-named as ``app/Controller/AppController.php``, ``app/Model/AppModel.php`` and ``app/Helper/AppHelper.php`` respectively.
+The ``app/app_controller.php``, ``app/app_model.php``, ``app/app_helper.php`` are now located and
+named as ``app/Controller/AppController.php``, ``app/Model/AppModel.php`` and ``app/View/Helper/AppHelper.php`` respectively.
 
 Also all shell/task now extend AppShell. You can have your custom AppShell.php at ``app/Console/Command/AppShell.php``
 
@@ -112,7 +112,7 @@ Internationalization / Localization
 If you want to echo the result of the translation, use::
 
     echo __('My Message');
-    
+
 This change includes all shortcut translation methods::
 
     __()
@@ -159,7 +159,7 @@ Basics.php
 -  ``uses()`` was removed. Use ``App::import()`` instead.
 -  Compatibility functions for PHP4 have been removed.
 -  PHP5 constant has been removed.
--  Global var called ``$TIME_START`` was removed use the constant 
+-  Global var called ``$TIME_START`` was removed use the constant
    ``TIME_START`` or ``$_SERVER['REQUEST_TIME']`` instead.
 
 Removed Constants
@@ -206,6 +206,12 @@ of these changes, you'll need to update your .htaccess files and
 ``app/webroot/index.php``, as these files were changed to accommodate the
 changes. Additionally ``$this->params['url']['url']`` no longer exists. Instead
 you should be using $this->request->url to access the same value.
+This attribute now contains the url without the leading slash ``/`` prepended.
+
+Note: For the homepage itself (``http://domain/``) $this->request->url now returns
+boolean ``false`` instead of ``/``. Make sure you check on that accordingly::
+
+    if (!$this->request->url) {} // instead of $this->request->url === '/'
 
 Components
 ==========
@@ -214,7 +220,7 @@ Component is now the required base class for all components. You should update
 your components and their constructors, as both have changed::
 
     class PrgComponent extends Component {
-        function __construct(ComponentCollection $collection, $settings = array()) {
+        public function __construct(ComponentCollection $collection, $settings = array()) {
             parent::__construct($collection, $settings);
         }
     }
@@ -229,7 +235,7 @@ Since settings have been moved to the component constructor, the
 ``initialize()`` callback no longer receives ``$settings`` as its 2nd parameter.
 You should update your components to use the following method signature::
 
-    function initialize(Controller $controller) { }
+    public function initialize(Controller $controller) { }
 
 Additionally, the initialize() method is only called on components that are
 enabled.  This usually means components that are directly attached to the
@@ -311,7 +317,7 @@ AuthComponent
 
 The AuthComponent was entirely re-factored for 2.0, this was done to help reduce
 developer confusion and frustration. In addition, AuthComponent was made more
-flexible and extensible. You can find out more in 
+flexible and extensible. You can find out more in
 the :doc:`/core-libraries/components/authentication` guide.
 
 EmailComponent
@@ -421,8 +427,8 @@ App::core()
 Class loading with App::uses()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Although there has been a huge refactoring in how the classes are loaded, in very 
-few occasions you will need to change your application code to respect the way you were 
+Although there has been a huge refactoring in how the classes are loaded, in very
+few occasions you will need to change your application code to respect the way you were
 used to doing it. The biggest change is the introduction of a new method::
 
     App::uses('AuthComponent', 'Controller/Component');
@@ -439,23 +445,23 @@ Some examples on using :php:meth:`App::uses()` when migrating from
 :php:meth:`App::import()`::
 
     App::import('Controller', 'Pages');
-    // becomes 
+    // becomes
     App::uses('PagesController', 'Controller');
 
-    App::import('Component', 'Email');
-    // becomes 
-    App::uses('EmailComponent', 'Controller/Component');
+    App::import('Component', 'Auth');
+    // becomes
+    App::uses('AuthComponent', 'Controller/Component');
 
     App::import('View', 'Media');
-    // becomes 
+    // becomes
     App::uses('MediaView', 'View');
 
     App::import('Core', 'Xml');
-    // becomes 
+    // becomes
     App::uses('Xml', 'Utility');
 
     App::import('Datasource', 'MongoDb.MongoDbSource');
-    // becomes 
+    // becomes
     App::uses('MongoDbSource', 'MongoDb.Model/Datasource');
 
 All classes that were loaded in the past using ``App::import('Core', $class);``
@@ -463,7 +469,7 @@ will need to be loaded using ``App::uses()`` referring to the correct package.
 See the api to locate the classes in their new folders. Some examples::
 
     App::import('Core', 'CakeRoute');
-    // becomes 
+    // becomes
     App::uses('CakeRoute', 'Routing/Route');
 
     App::import('Core', 'Sanitize');
@@ -471,7 +477,7 @@ See the api to locate the classes in their new folders. Some examples::
     App::uses('Sanitize', 'Utility');
 
     App::import('Core', 'HttpSocket');
-    // becomes 
+    // becomes
     App::uses('HttpSocket', 'Network/Http');
 
 In contrast to how :php:meth:`App::import()` worked in the past, the new class
@@ -488,11 +494,11 @@ App::build() and core paths
 Examples::
 
     App::build(array('controllers' => array('/full/path/to/controllers')));
-    //becomes 
+    //becomes
     App::build(array('Controller' => array('/full/path/to/Controller')));
 
     App::build(array('helpers' => array('/full/path/to/controllers')));
-    //becomes 
+    //becomes
     App::build(array('View/Helper' => array('/full/path/to/View/Helper')));
 
 CakeLog
@@ -505,7 +511,7 @@ Cache
 -----
 
 -  :php:class:`Cache` is now a static class, it no longer has a getInstance() method.
--  CacheEngine is now an abstract class. You cannot directly create instances of 
+-  CacheEngine is now an abstract class. You cannot directly create instances of
    it anymore.
 -  CacheEngine implementations must extend CacheEngine, exceptions will be
    raised if a configured class does not.
@@ -520,7 +526,7 @@ Cache
 
     Cache::config('something');
     Cache::write('key', $value);
-    
+
     // would become
     Cache::write('key', $value, 'something');
 
@@ -537,7 +543,7 @@ Router
   ``Router::DAY``, ``Router::ID``, and ``Router::UUID`` instead.
 - ``Router::defaults()`` has been removed.  Delete the core routes file
   inclusion from your applications routes.php file to disable default routing.
-  Conversely if you want default routing, you will have to add an include to 
+  Conversely if you want default routing, you will have to add an include to
   ``Cake/Config/routes.php`` in your routes file.
 - When using Router::parseExtensions() the extension parameter is no longer
   under ``$this->params['url']['ext']``. Instead it is available at
@@ -549,7 +555,7 @@ Router
   routes, you can add a route like::
 
     Router::connect('/users/:action', array('controller' => 'users', 'plugin' => 'users'));
-  
+
   To your routes file for each plugin you need short routes on.
 
 Your app/Config/routes.php file needs to be updated adding this line at the bottom of the file::
@@ -579,7 +585,7 @@ Configure
 -  ``Configure::read()`` with no parameter no longer returns the value of
    'debug' instead it returns all values in Configure. Use
    ``Configure::read('debug');`` if you want the value of debug.
--  ``Configure::load()`` now requires a ConfigReader to be setup. Read 
+-  ``Configure::load()`` now requires a ConfigReader to be setup. Read
    :ref:`loading-configuration-files` for more information.
 -  ``Configure::store()`` now writes values to a given Cache configuration. Read
    :ref:`loading-configuration-files` for more information.
@@ -652,7 +658,7 @@ In order to accommodate View being removed from the ClassRegistry, the signature
 of Helper::__construct() was changed.  You should update any subclasses to use
 the following::
 
-    function __construct(View $View, $settings = array())
+    public function __construct(View $View, $settings = array())
 
 When overriding the constructor you should always call `parent::__construct` as
 well.  `Helper::__construct` stores the view instance at `$this->_View` for
@@ -803,8 +809,8 @@ Note that ``checked`` have a numeric key.
 Controller
 ==========
 
-- Controller's constructor now takes two parameters. A CakeRequest, and 
-  CakeResponse objects. These objects are used to populate several deprecated 
+- Controller's constructor now takes two parameters. A CakeRequest, and
+  CakeResponse objects. These objects are used to populate several deprecated
   properties and will be set to $request and $response inside the controller.
 - ``Controller::$webroot`` is deprecated, use the request object's webroot
   property.
@@ -883,7 +889,7 @@ you update your application.
 Removed methods
 ---------------
 
-* ``View::_triggerHelpers()`` Use ``$this->Helpers->trigger()`` instead.  
+* ``View::_triggerHelpers()`` Use ``$this->Helpers->trigger()`` instead.
 * ``View::_loadHelpers()`` Use ``$this->loadHelpers()`` instead.  Helpers now lazy
   load their own helpers.
 
@@ -901,7 +907,7 @@ By default View objects contain a :php:class:`HelperCollection` at ``$this->Help
 Themes
 ------
 
-To use themes in your Controller you no longer set ``public $view = 'Theme';``. 
+To use themes in your Controller you no longer set ``public $view = 'Theme';``.
 Use ``public $viewClass = 'Theme';`` instead.
 
 Callback positioning changes
@@ -924,19 +930,19 @@ afterRender it is the view file being rendered. For beforeLayout and afterLayout
 it is the layout file being rendered. Your helpers function signatures should
 look like::
 
-    function beforeRender($viewFile) {
+    public function beforeRender($viewFile) {
 
     }
 
-    function afterRender($viewFile) {
+    public function afterRender($viewFile) {
 
     }
 
-    function beforeLayout($layoutFile) {
+    public function beforeLayout($layoutFile) {
 
     }
 
-    function afterLayout($layoutFile) {
+    public function afterLayout($layoutFile) {
 
     }
 
@@ -1057,7 +1063,7 @@ The first thing users will probably miss is the "affected rows" and "total rows"
 statistics, as they are not reported due to the more performant and lazy design
 of PDO, there are ways to overcome this issue but very specific to each
 database. Those statistics are not gone, though, but could be missing or even
-inaccurate for some drivers. 
+inaccurate for some drivers.
 
 A nice feature added after the PDO adoption is the ability to use prepared
 statements with query placeholders using the native driver if available.
@@ -1113,6 +1119,9 @@ The PDO driver will automatically escape those values for you.
   the past using mysql all values returned from a find would be numeric in the
   past, now they are strict boolean values.
 
+Behaviors
+=========
+
 BehaviorCollection
 ------------------
 
@@ -1159,8 +1168,8 @@ reference them.
 Plugin App Controller and Plugin App Model
 ------------------------------------------
 
-The plugin AppController and AppModel are no longer located directly in the 
-plugin folder. They are now placed into the plugin's Controller and Model 
+The plugin AppController and AppModel are no longer located directly in the
+plugin folder. They are now placed into the plugin's Controller and Model
 folders as such::
 
     /app

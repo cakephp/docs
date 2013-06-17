@@ -33,7 +33,7 @@ Préparer notre Application
 Premièrement, récupérons une copie récente de CakePHP
 
 Pour obtenir un téléchargement à jour, visitez le projet CakePHP sur Github: 
-http://github.com/cakephp/cakephp/downloads et téléchargez la version stable. 
+https://github.com/cakephp/cakephp/tags et téléchargez la version stable. 
 Pour ce tutoriel vous aurez besoin de la dernière version 2.x.
 
 Vous pouvez aussi dupliquer le dépôt en utilisant 
@@ -48,8 +48,8 @@ application. Exécutez les commandes SQL suivantes sur votre base de données::
 
    CREATE TABLE users (
        id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-       nom_user VARCHAR(255) NOT NULL UNIQUE,
-       mot_de_passe CHAR(40) NOT NULL,
+       username VARCHAR(255) NOT NULL UNIQUE,
+       password CHAR(40) NOT NULL,
        group_id INT(11) NOT NULL,
        created DATETIME,
        modified DATETIME

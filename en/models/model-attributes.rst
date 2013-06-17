@@ -78,7 +78,7 @@ Example usage::
     class Example extends AppModel {
         public $primaryKey = 'example_id'; // example_id is the field name in the database
     }
-    
+
 
 .. _model-displayField:
 
@@ -105,8 +105,7 @@ recursive
 =========
 
 The recursive property defines how deep CakePHP should go to fetch
-associated model data via ``find()``, ``findAll()`` and ``read()``
-methods.
+associated model data via ``find()``, and ``read()`` methods.
 
 Imagine your application features Groups which belong to a domain
 and have many Users which in turn have many Articles. You can set
@@ -129,6 +128,17 @@ the default recursive level is 1.
     functionality, you will have to add the columns containing the
     required foreign keys to the ``fields`` array manually. In the
     example above, this could mean adding ``domain_id``.
+
+.. tip::
+
+    The recommended recursive level for your application should be -1.
+    This avoids retrieving related data where that is unnecessary or even
+    unwanted. This is most likely the case for most of your find() calls.
+    Raise it only when needed or use Containable behavior.
+
+    You can achieve that by adding it to the AppModel::
+
+        public $recursive = -1;
 
 order
 =====
@@ -167,11 +177,11 @@ Example Usage::
 
     public $_schema = array(
         'first_name' => array(
-            'type' => 'string', 
+            'type' => 'string',
             'length' => 30
         ),
         'last_name' => array(
-            'type' => 'string', 
+            'type' => 'string',
             'length' => 30
         ),
         'email' => array(

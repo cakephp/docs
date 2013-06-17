@@ -273,13 +273,13 @@ Callbacks
 
 .. php:method:: beforeRenderFile($viewFile)
 
-    Is called before all view files are rendered.  This includes elements,
-    views, parent views, and layouts.
+    Is called before each view file is rendered.  This includes elements,
+    views, parent views and layouts.
 
 .. php:method:: afterRenderFile($viewFile, $content)
 
-    Is called after all view files are rendered.  This includes elements, views,
-    parent views, and layouts.  A callback can modify and return ``$content`` to
+    Is called after each view file is rendered.  This includes elements, views,
+    parent views and layouts.  A callback can modify and return ``$content`` to
     change how the rendered content will be displayed in the browser.
 
 .. php:method:: beforeRender($viewFile)

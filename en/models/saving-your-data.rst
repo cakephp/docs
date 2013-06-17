@@ -112,8 +112,8 @@ More information about model callbacks is available
 
 .. tip::
 
-    If you don't want the updated field to be updated when saving some
-    data add ``'updated' => false`` to your ``$data`` array
+    If you don't want the ``modified`` field to be automatically updated when saving some
+    data add ``'modified' => false`` to your ``$data`` array
 
 Once a save has been completed, the ID for the object can be found
 in the ``$id`` attribute of the model object - something especially
@@ -153,18 +153,13 @@ your are passing the primary key field into the data array::
 
 This method resets the model state for saving new information.
 It does not actually create a record in the database but clears
-Model::$id if previously set and sets the default values in
-Model::$data based on your database field defaults.
+Model::$id and sets Model::$data based on your database field defaults. If you have
+not defined defaults for your database fields, Model::$data will be set to an empty array.
 
-If the ``$data`` parameter (using the array format outlined above)
-is passed, the model instance will be ready to save with that data
-(accessible at ``$this->data``).
+If the ``$data`` parameter (using the array format outlined above) is passed, it will be merged with the database 
+field defaults and the model instance will be ready to save with that data (accessible at ``$this->data``).
 
-If ``false`` is passed instead of an array, the model instance will
-not initialize fields from the model schema that are not already
-set, it will only reset fields that have already been set, and
-leave the rest unset. Use this to avoid updating fields in the
-database that were already set.
+If ``false`` or ``null`` are passed for the ``$data`` parameter, Model::data will be set to an empty array. 
 
 .. tip::
 
@@ -187,7 +182,7 @@ For example, to update the title of a blog post, the call to
 
 .. warning::
 
-    You can't stop the updated field being updated with this method, you
+    You can't stop the ``modified`` field being updated with this method, you
     need to use the save() method.
 
 The saveField method also has an alternate syntax::
@@ -795,6 +790,37 @@ Using the preceding code, a multiple select drop down is created,
 allowing for multiple choices to automatically be saved to the
 existing Recipe being added or saved to the database.
 
+Self HABTM
+~~~~~~~~~~
+
+Normally HABTM is used to bring 2 models together but it can also
+be used with only 1 model, though it requires some extra attention.
+
+The key is in the model setup the ``className``. Simply adding a
+``Project`` HABTM ``Project`` relation causes issues saving data.
+By setting the ``className`` to the models name and use the alias as
+key we avoid those issues.::
+
+    class Project extends AppModel {
+        public $hasAndBelongsToMany = array(
+            'RelatedProject' => array(
+                'className'              => 'Project',
+                'foreignKey'             => 'projects_a_id',
+                'associationForeignKey'  => 'projects_b_id',
+            ),
+        );
+    }
+
+Creating form elements and saving the data works the same as before but you use the alias instead. This::
+
+    $this->set('projects', $this->Project->find('list'));
+    $this->Form->input('Project');
+
+Becomes this::
+
+    $this->set('relatedProjects', $this->Project->find('list'));
+    $this->Form->input('RelatedProject');
+
 What to do when HABTM becomes complicated?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -846,7 +872,7 @@ Datatables
 
 While CakePHP can have datasources that aren't database driven, most of the
 time, they are. CakePHP is designed to be agnostic and will work with MySQL,
-MSSQL, Oracle, PostgreSQL and others. You can create your database tables as you
+MSSQL, PostgreSQL and others. You can create your database tables as you
 normally would. When you create your Model classes, they'll automatically map to
 the tables that you've created. Table names are by convention lowercase and
 pluralized with multi-word table names separated by underscores. For example, a
@@ -859,18 +885,18 @@ view. Field names are by convention lowercase and separated by underscores.
 Using created and modified
 --------------------------
 
-By defining a created or modified field in your database table as datetime
-fields, CakePHP will recognize those fields and populate them automatically
+By defining a ``created`` and/or ``modified`` field in your database table as datetime
+fields (default null), CakePHP will recognize those fields and populate them automatically
 whenever a record is created or saved to the database (unless the data being
 saved already contains a value for these fields).
 
-The created and modified fields will be set to the current date and time when
+The ``created`` and ``modified`` fields will be set to the current date and time when
 the record is initially added. The modified field will be updated with the
 current date and time whenever the existing record is saved.
 
-If you have updated, created or modified data in your $this->data (e.g. from a
+If you have ``created`` or ``modified`` data in your $this->data (e.g. from a
 Model::read or Model::set) before a Model::save() then the values will be taken
-from $this->data and not automagically updated. Either use
+from $this->data and not automagically updated. If you don't want that you can use
 ``unset($this->data['Model']['modified'])``, etc. Alternatively you can override
 the Model::save() to always do it for you::
 

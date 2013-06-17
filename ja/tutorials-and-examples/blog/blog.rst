@@ -1,5 +1,5 @@
 ブログチュートリアル
-####################
+********************
 
 Cakeをさっそく使ってみましょう。
 このチュートリアルを読んでいるのは、Cakeの動作に関してさらに学びたいと思っているからだと思います。
@@ -34,7 +34,7 @@ Cakeのダウンロード
 まずは、最新のCakeのコードをダウンロードしてきましょう。
 
 最新のCakeをダウンロードするには、githubにあるCakePHPプロジェクトを見てみましょう:
-`http://github.com/cakephp/cakephp/downloads <http://github.com/cakephp/cakephp/downloads>`_
+`https://github.com/cakephp/cakephp/tags <https://github.com/cakephp/cakephp/tags>`_
 そして、2.0の最新リリースをダウンロードします。
 
 または、
@@ -43,9 +43,7 @@ Cakeのダウンロード
 ``git clone git://github.com/cakephp/cakephp.git``
 
 どちらにしても、ダウンロードしたコードをDocumentRoot内に配置してください。
-そうすると、ディレクトリは次のようになります:
-
-::
+そうすると、ディレクトリは次のようになります::
 
     /path_to_document_root
         /app
@@ -65,9 +63,7 @@ Cakeのディレクトリ構造について少し学んでおきましょう:
 次に、ブログで使用する基礎的なデータベースをセットアップしましょう。
 データベースをまだ作成していないのであれば、このチュートリアル用に好きな名前で空のデータベースを作成しておいてください。
 このページでは、投稿記事を保存するためのテーブルをひとつ作成します。
-次のSQLをデータベースで実行してください。
-
-::
+次のSQLをデータベースで実行してください。::
 
     /* まず、postsテーブルを作成します: */
     CREATE TABLE posts (
@@ -139,9 +135,7 @@ CakePHPのデータベース設定ファイルの元は、
 
 セキュリティ用のsaltは、ハッシュの生成に用いられます。
 ``/app/Config/core.php`` の187行目を編集し、デフォルトのsalt値を変更してください。
-すぐに推測できるような値でなければ、何であってもかまいません。
-
-::
+すぐに推測できるような値でなければ、何であってもかまいません。::
 
     /**
      * A random string used in security hashing methods.
@@ -150,9 +144,7 @@ CakePHPのデータベース設定ファイルの元は、
 
 サイファシード(*cipher seed*)は暗号化・復号化のための文字列です。
 シード値を ``/app/Config/core.php`` の192行目を編集してデフォルト値から変えてください。
-すぐに推測できるような値でなければ、何であってもかまいません。
-
-::
+すぐに推測できるような値でなければ、何であってもかまいません。::
 
     /**
      * A random numeric string (digits only) used to encrypt/decrypt strings.
@@ -167,61 +159,18 @@ CakePHPのデータベース設定ファイルの元は、
 
 何かの理由でCakePHPがそのディレクトリに書き込めない場合、警告が表示されます。
 （運用モードでは表示されません。）
-If for some reason CakePHP can't write to that directory, you'll be
-informed by a warning while not in production mode.
 
 mod\_rewriteについて
 ====================
 
-新しいユーザはmod\_rewriteでつまずくことがよくあるので、少しだけ説明をしておきます。
-もし、CakePHPのwelcomeページが少しおかしい（画像が表示されず、cssのスタイルが適用されていない）なら、おそらく、システム上のmod\_rewriteが機能していないということです。
-動作させるための幾つかのヒントを掲載しておきます:
+新しいユーザはmod\_rewriteでつまずくことがよくあります。
+例えばCakePHPのwelcomeページが少しおかしくなったりします(画像が表示されない、CSSが効いていない)。
+これはおそらく、システム上のmod\_rewriteが機能していないということです。
+以下のいずれかの項目を参照して、URLリライティングが有効になるように設定してください。
 
+.. toctree::
 
-#. httpd.confの中で、.htaccessのoverrideが許可されているか、確かめてください。
-   各ディレクトリごとの設定を定義できる部分があります。
-   該当するディレクトリの ``AllowOverride`` が ``All`` になっていることを確認してください。
-   セキュリティとパフォーマンスの理由から、 ``<Directory />`` で ``AllowOverride`` を ``All`` に *しないでください* 。
-   代わりに、実際のWEBサイトディレクトリを参照している ``<Directory>`` ブロックを探してください。
-
-#. user-やサイト固有のhttpd.confではなく、正しいhttpd.confを編集していることを確認しましょう。
-
-#. 何かしらの理由で、.htaccessファイルが含まれていないCakePHPのファイルを入手した可能性もあります。
-   これは、「.」(ドット)ではじまるファイルを隠し属性のものとして扱い、それらをコピーしないオペレーティングシステムがあるためです。
-   必ずCakePHPを本家サイトのダウンロードセクションか、gitリポジトリからダウンロードしてください。
-
-#. Apacheが、mod\_rewriteを正しく読み込んでいることを確認しましょう。
-   httpd.confの中に、::
-
-       LoadModule rewrite_module             libexec/httpd/mod_rewrite.so
-
-   または(Apache 1.3で)::
-
-       AddModule             mod_rewrite.c
-   
-   というような部分があるはずです。
-
-サーバでmod\_rewrite（や、その他の互換モジュール）を使いたくない、または使えないという場合には、Cakeに組み込まれているURLを奇麗にする仕組みを使う必要があります。
-``/app/Config/core.php`` の中の次の箇所のコメントを外してください::
-
-    Configure::write('App.baseUrl', env('SCRIPT_NAME'));
-
-また以下の .htaccess ファイルを削除してください::
-
-    /.htaccess
-    /app/.htaccess
-    /app/webroot/.htaccess
-            
-
-そうすると、URLは、
-www.example.com/controllername/actionname/param
-ではなく、
-www.example.com/index.php/controllername/actionname/param
-という仕方でアクセスできるようになります。
-
-Apache以外のWEBサーバーでCakePHPをインストールしたなら、
-:doc:`/installation/advanced-installation`
-セクション以下に他のサーバーでURL書き換えが動作するような案内を受けることができます。
+    /installation/url-rewriting
 
 はじめてのCakePHPアプリケーションを構築しはじめるには、続けて
 :doc:`/tutorials-and-examples/blog/part-two`

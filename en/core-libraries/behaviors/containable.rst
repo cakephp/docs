@@ -15,7 +15,9 @@ Containable allows you to streamline and simplify operations on
 your model bindings. It works by temporarily or permanently
 altering the associations of your models. It does this by using
 supplied the containments to generate a series of ``bindModel`` and
-``unbindModel`` calls.
+``unbindModel`` calls. Since Containable only modifies existing relationships it
+will not allow you to restrict results by distant associations. Instead
+you should refer to :ref:`joining-tables`.
 
 To use the new behavior, you can add it to the $actsAs property of
 your model::
@@ -26,7 +28,7 @@ your model::
 
 You can also attach the behavior on the fly::
 
-    $this->Post->Behaviors->attach('Containable');
+    $this->Post->Behaviors->load('Containable');
 
 .. _using-containable:
 
@@ -40,7 +42,7 @@ amount of data fetched in a normal find() call is rather
 extensive::
 
     debug($this->Post->find('all'));
-    
+
     [0] => Array
             (
                 [Post] => Array
@@ -172,9 +174,9 @@ and nothing else — you could do something like the following::
 
     $this->Post->contain('Comment.author');
     $this->Post->find('all');
-    
+
     // or..
-    
+
     $this->Post->find('all', array('contain' => 'Comment.author'));
 
 Here, we've told Containable to give us our post information, and
@@ -215,9 +217,9 @@ condition::
 
     $this->Post->contain('Comment.author = "Daniel"');
     $this->Post->find('all');
-    
+
     //or...
-    
+
     $this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
 
 This gives us a result that gives us posts with comments authored
@@ -323,21 +325,21 @@ more easily.
 
 You can change ContainableBehavior settings at run time by
 reattaching the behavior as seen in
-:doc:`/models/additional-methods-and-properties`
+:doc:`/models/behaviors` (Using Behaviors).
 
 ContainableBehavior can sometimes cause issues with other behaviors
 or queries that use aggregate functions and/or GROUP BY statements.
 If you get invalid SQL errors due to mixing of aggregate and
 non-aggregate fields, try disabling the ``autoFields`` setting.::
 
-    $this->Post->Behaviors->attach('Containable', array('autoFields' => false));
+    $this->Post->Behaviors->load('Containable', array('autoFields' => false));
 
 Using Containable with pagination
 =================================
 
 By including the 'contain' parameter in the ``$paginate`` property
 it will apply to both the find('count') and the find('all') done on
-the model
+the model.
 
 See the section :ref:`using-containable` for further details.
 

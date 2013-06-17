@@ -17,7 +17,8 @@ Caching
   had difficulty setting up and deploying APC correctly both in cli + web.
   Using files should make setting up CakePHP simpler for new developers.
 
-- `Configure::write('Cache.viewPrefix', 'YOURPREFIX');` has been added to `core.php` to allow multiple domains/languages per setup.
+- `Configure::write('Cache.viewPrefix', 'YOURPREFIX');` has been added to `core.php`
+  to allow multiple domains/languages per setup.
 
 Component
 =========
@@ -25,13 +26,18 @@ Component
 AuthComponent
 -------------
 - A new property ``AuthComponent::$unauthorizedRedirect`` has been added.
-  If set to false a ForbiddenException exception is thrown instead of redirecting
-  user to referrer url.
+
+  - For default ``true`` value user is redirected to referrer url upon authorization failure.
+  - If set to a string or array user is redirected to that url.
+  - If set to false a ForbiddenException exception is thrown instead of redirecting.
 
 - A new authenticate adapter has been added to support blowfish/bcrypt hashed
   passwords.  You can now use ``Blowfish`` in your ``$authenticate`` array to
   allow bcrypt passwords to be used.
 
+- :php:meth:`AuthComponent::redirect()` has been deprecated.
+  Use :php:meth:`AuthComponent::redirectUrl()` instead.
+  
 PaginatorComponent
 ------------------
 
@@ -84,6 +90,16 @@ L10n
 
 Core
 ====
+
+CakePlugin
+----------
+
+- :php:meth:`CakePlugin::load()` can now take a new ``ignoreMissing`` option. Setting it to true will
+  prevent file include errors when you try to load routes or bootstrap but they don't exist for a plugin.
+  So essentially you can now use the following statement which will load all plugins and their routes and
+  bootstrap for whatever plugin it can find::
+  ``CakePlugin::loadAll(array('routes' => true, 'bootstrap' => true, 'ignoreMissing' => true))``
+
 
 Configure
 ---------
@@ -147,6 +163,8 @@ CakeResponse
 ------------
 
 - :php:meth:`CakeResponse::file()` was added.
+- The content types `application/javascript`, `application/xml`,
+  `application/rss+xml` now also send the application charset.
 
 CakeEmail
 ---------
@@ -215,9 +233,17 @@ FormHelper
   provide a list of values you want disabled.
 - :php:meth:`FormHelper::postLink()` now accepts a ``method`` key.  This allows
   you to create link forms using HTTP methods other than POST.
-- When creating inputs with ``input()`` you can now set the ``errorMessage`` option to
-  false. This will disable the error message display, but leave the error
-  classnames intact.
+- When creating inputs with :php:meth:`FormHelper::input()` you can now set the
+  ``errorMessage`` option to false. This will disable the error message display,
+  but leave the error classnames intact.
+- The FormHelper now also adds the HTML5 ``required`` attribute to your input
+  elements based on validation rules for a field. If you have a "Cancel" button
+  in your form which submits the form then you should add ``'formnovalidate' => true``
+  to your button options to prevent the triggering of validation in html. You
+  can also prevent the validation triggering for the whole form by adding
+  ``'novalidate' => true`` in your FormHelper::create() options.
+- :php:meth:`FormHelper::input()` now generates input elements of type ``tel``
+  and ``email`` based on field names if ``type`` option is not specified.
 
 HtmlHelper
 ----------
@@ -291,3 +317,10 @@ Validation
 ----------
 
 - :php:meth:`Validation::fileSize()` was added.
+
+ObjectCollection
+----------------
+
+- :php:meth:`ObjectCollection::attached()` was deprecated in favor of the new
+  method :php:meth:`ObjectCollection::loaded()`. This unifies the access to the
+  ObjectCollection as load()/unload() already replaced attach()/detach().
