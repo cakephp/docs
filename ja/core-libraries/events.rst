@@ -752,7 +752,7 @@ PHPが呼び出し可能な関数として扱うことができる何かです�
     App::uses('CakeEventManager', 'Event');
     CakeEventManager::instance()->attach('myCallback', 'Model.beforeFind');
 
-    function myCallback($event) {
+    public function myCallback($event) {
         if ($event->subject() instanceof Cart) {
             return;
         }
