@@ -1,14 +1,11 @@
 Annexes
 #######
 
-Les annexes contiennent des informations sur les nouvelles fonctionnalités 
+Les annexes contiennent des informations sur les nouvelles fonctionnalités
 de la version 2.0 ainsi qu’un guide de migration de la version 1.3 vers 2.0.
 
 2.3 Migration Guide
 ===================
-
-2.3 est toujours en développement, et tous les changements documentés peuvent 
-n'être disponibles que dans la branche ``2.3`` dans git.
 
 .. toctree::
     :maxdepth: 1

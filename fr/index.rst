@@ -1,17 +1,20 @@
 Bienvenue
 #########
 
-Le livre de cuisine CakePHP est un projet libre et communautaire d'édition de 
-la documentation. Nous espérons maintenir une documentation pointue et de 
+Le livre de cuisine CakePHP est un projet libre et communautaire d'édition de
+la documentation. Nous espérons maintenir une documentation pointue et de
 qualité. 
 
 .. container:: offline-download
 
-    Télécharger la documentation:
+    **Lire le livre partout**
 
-    - `format PDF <../_downloads/fr/CakePHPCookbook.pdf>`_
-    - `format EPUB <../_downloads/fr/CakePHPCookbook.epub>`_
-    - `Source originale <http://github.com/cakephp/docs>`_
+    Profitez du cookbook de CakePHP presque partout. Disponible, en PDF et en
+    EPUB, vous pouvez maintenant lire les docs sur plus d'appareils et offline.
+
+    - `format PDF <../_downloads/fr/CakePHPCookbook.pdf>`_.
+    - `format EPUB <../_downloads/fr/CakePHPCookbook.epub>`_.
+    - `Source originale <http://github.com/cakephp/docs>`_.
 
 Mise en route
 =============
@@ -19,7 +22,7 @@ Mise en route
 Créer un blog
 -------------
 
-Débutez avec le tutoriel sur 
+Débutez avec le tutoriel sur
 :doc:`la création d'un blog</tutorials-and-examples/blog/blog>`.
 Vous apprendrez les bases de CakePHP et développerez un blog simple.
 
@@ -33,28 +36,28 @@ Apprennez le :doc:`fonctionnement typique de CakePHP
 Controllers (contrôleurs)
 -------------------------
 
-Traitement des requêtes et renvoi des résultats au client web. En savoir 
-plus sur les :doc:`/controllers`
+Traitement des requêtes et renvoi des résultats au client web. En savoir
+plus sur les :doc:`/controllers`.
 
 Views (vues)
 ------------
 
-Les vues (views) sont la représentation graphique des données dans CakePHP. 
-Elles permettent de convertir les données extraites de models, dans le format 
-de sortie demande par le client. En savoir plus sur les :doc:`/views`
+Les vues (views) sont la représentation graphique des données dans CakePHP.
+Elles permettent de convertir les données extraites de models, dans le format
+de sortie demandé par le client. En savoir plus sur les :doc:`/views`.
 
 Models (modèles)
 ----------------
 
-Les modèles (Models) sont le coeur de votre application, ils gèrent la 
-validation, le stockage et la récupération de vos données. En savoir plus 
-sur les :doc:`/models`
+Les modèles (Models) sont le coeur de votre application, ils gèrent la
+validation, le stockage et la récupération de vos données. En savoir plus
+sur les :doc:`/models`.
 
 Obtenir de l'aide
 =================
 
-Si vous êtes bloqué, voici une :doc:`liste qui vous aidera 
-</cakephp-overview/where-to-get-help>`
+Si vous êtes bloqué, voici une :doc:`liste qui vous aidera
+</cakephp-overview/where-to-get-help>`.
 
 
 .. meta::

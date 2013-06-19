@@ -24,4 +24,4 @@ Contenu
 
 .. meta::
     :title lang=fr: Contents
-    :keywords lang=en: core libraries,ref search,shells,deployment,appendices,glossary,models
+    :keywords lang=fr: librairies du coeur,ref search,shells,déploiement,appendices,glossary,models

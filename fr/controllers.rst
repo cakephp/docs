@@ -45,7 +45,6 @@ comme ceci::
 
     class AppController extends Controller {
     }
-    
 
 Les attributs et méthodes de controller créés dans AppController seront
 disponibles dans tous les controllers de votre application. C'est l'endroit
@@ -58,7 +57,8 @@ soient appliquées, CakePHP exécute également un travail supplémentaire si de
 attributs spécifiques des controllers sont fournis, comme la liste des
 components ou helpers utilisés par un controller. Dans ces situations, les
 valeurs des tableaux de AppController sont fusionnées avec les tableaux de
-la classe controller enfant.
+la classe controller enfant. Les valeurs dans la classe enfant vont toujours
+surcharger celles dans AppController.
 
 .. note::
 
@@ -70,7 +70,7 @@ la classe controller enfant.
     -  $uses
 
 N'oubliez pas d'ajouter les helpers Html et Form si vous avez défini la var
-``$helpers`` dans la classe AppController.
+``$helpers`` dans votre classe AppController.
 
 Pensez à appeler les fonctions de rappel (callbacks) de AppController dans
 celles du controller enfant pour de meilleurs résultats::
@@ -108,15 +108,15 @@ RecipesController pourrait contenir les actions
         
         class RecettesController extends AppController {
             public function view($id) {
-                //la logique de l'action logic va ici..
+                //la logique de l'action va ici..
             }
         
             public function share($client_id, $recette_id) {
-                //la logique de l'action logic va ici..
+                //la logique de l'action va ici..
             }
         
             public function search($query) {
-                //la logique de l'action logic va ici..
+                //la logique de l'action va ici..
             }
         }
 
@@ -404,7 +404,7 @@ Contrôle de Flux
     vous pouvezspécifier le nom du layout dans le paramètre ``$layout``.
     
     Pour définir des messages flash dans une page, regardez du côté de la
-    méthode setFlash() du composant Session (SessionComponent).
+    méthode setFlash() du component Session (SessionComponent).
 
 Callbacks
 ---------
@@ -555,7 +555,7 @@ Autres Méthodes utiles
 .. php:method:: requestAction(string $url, array $options)
 
     Cette fonction appelle l'action d'un controller depuis tout endroit
-    du code et retourne les données associées à cette action. L'``$url`` 
+    du code et retourne les données associées à cette action. L'``$url``
     passée est une adresse relative à votre application CakePHP
     (/nomducontroleur/nomaction/parametres). Pour passer des données
     supplémentaires au controller destinataire ajoutez le tableau $options.
@@ -724,7 +724,7 @@ fournies par ``$helpers``, disponibles pour la vue comme une variable référenc
     Les controllers ont accès par défaut à leur model primaire respectif.
     Notre controller Recettes aura donc accès à son model Recette, disponible
     via ``$this->Recette``, et notre controller Produits proposera un accès à
-    son model via ``$this->Produit``.Cependant, quand vous autorisez un
+    son model via ``$this->Produit``. Cependant, quand vous autorisez un
     controller à accéder à d'autres models via la variable ``$uses``, le nom
     du model primaire du controller courant doit également être inclu. Ceci
     est illustré dans l'exemple ci-dessous.
@@ -759,7 +759,7 @@ fournies par ``$helpers``, disponibles pour la vue comme une variable référenc
             public $components = array('RequestHandler');
         }
 
-    Toutes ces variables sont fusionnées (merged) avec leurs valeurs héritées,
+    Toutes ces variables sont fusionnées avec leurs valeurs héritées,
     par conséquent ce n'est pas nécessaire de re-déclarer (par exemple) le
     helper Form ou tout autre déclaré dans votre controller App.
 
