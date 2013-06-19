@@ -125,7 +125,7 @@ de génération de code fournis avec CakePHP::
                 $this->Session->setFlash(__('User supprimé'));
                 $this->redirect(array('action' => 'index'));
             }
-            $this->Session->setFlash(__('L\'user n'a pas été supprimé'));
+            $this->Session->setFlash(__('L\'user n\'a pas été supprimé'));
             $this->redirect(array('action' => 'index'));
         }
 
