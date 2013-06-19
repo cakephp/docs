@@ -1,13 +1,13 @@
 Méthodes et Propriétés supplémentaires
 ######################################
 
-Bien que les fonctions de model de CakePHP devraient vous emmener là où vous 
-souhaitez aller, n'oubliez pas que les classes de models ne sont rien de plus 
-que cela : des classes qui vous permettent d'écrire vos propres méthodes ou de 
+Bien que les fonctions de model de CakePHP devraient vous emmener là où vous
+souhaitez aller, n'oubliez pas que les classes de models ne sont rien de plus
+que cela : des classes qui vous permettent d'écrire vos propres méthodes ou de
 définir vos propres propriétés.
 
-N'importe quelle opération qui prend en charge la sauvegarde ou la restitution 
-de données est mieux située dans vos classes de model. Ce concept est souvent 
+N'importe quelle opération qui prend en charge la sauvegarde ou la restitution
+de données est mieux située dans vos classes de model. Ce concept est souvent
 appelé fat model ("model gras").
 
 ::
@@ -38,19 +38,19 @@ Obtenir les associations::
 :php:meth:`Model::buildQuery(string $type = 'first', array $query = array())`
 =============================================================================
 
-Construit la requête tableau qui est utilisée par la source de données pour 
+Construit la requête tableau qui est utilisée par la source de données pour
 générer la requête pour récupérer les données.
 
 :php:meth:`Model::deconstruct(string $field, mixed $data)`
 ==========================================================
 
-Déconstruit un type de données complexe (tableau ou objet) dans une valeur de 
+Déconstruit un type de données complexe (tableau ou objet) dans une valeur de
 champ unique.
 
 :php:meth:`Model::escapeField(string $field = null, string $alias = null)`
 ==========================================================================
 
-Echappe le nom du champ et ajoute le nom du model. L'echappement est fait en 
+Echappe le nom du champ et ajoute le nom du model. L'echappement est fait en
 fonction des règles du driver de la base de données courante.
 
 :php:meth:`Model::exists($id)`
@@ -58,10 +58,11 @@ fonction des règles du driver de la base de données courante.
 
 Retourne true si l'enregistrement avec un ID particulier existe.
 
-Si l'ID n'est pas fourni, elle appelle :php:meth:`Model::getID()` pour obtenir 
-l'ID de l'enregistrement courant pour vérifier, et execute ensuite un 
-``Model::find('count')`` sur la source de données actuellement configurée pour 
+Si l'ID n'est pas fourni, elle appelle :php:meth:`Model::getID()` pour obtenir
+l'ID de l'enregistrement courant pour vérifier, et execute ensuite un
+``Model::find('count')`` sur la source de données actuellement configurée pour
 vérifier l'existence de l'enregistrement dans un stockage persistant.
+
 .. note ::
 
     Le Paramètre $id a été ajouté dans 2.1. Avant cela, elle ne prenait aucun

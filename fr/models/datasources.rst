@@ -1,12 +1,12 @@
 DataSources (Sources de Données)
 ################################
 
-Les Sources de données (DataSources) sont les liens entre les models et la 
-source de données qu'ils représentent. Dans de nombreux cas, les données 
-sont récupérées depuis une base de données relationnelle telle MySQL, 
-PostgreSQL ou MSSQL. CakePHP est distribué avec de nombreuses sources de 
-données spécifiques d'une base de données (voir les fichiers de classe 
-dans ``lib/Cake/Model/Datasource/Database``), un résumé de ceux-ci est listé 
+Les Sources de données (DataSources) sont les liens entre les models et la
+source de données qu'ils représentent. Dans de nombreux cas, les données
+sont récupérées depuis une base de données relationnelle telle MySQL,
+PostgreSQL ou MSSQL. CakePHP est distribué avec de nombreuses sources de
+données spécifiques d'une base de données (voir les fichiers de classe
+dans ``lib/Cake/Model/Datasource/Database``), un résumé de ceux-ci est listé
 ici pour votre confort :
 
 - MySql
@@ -17,34 +17,34 @@ ici pour votre confort :
 .. note::
 
     Vous pouvez trouver des sources de données de contribution de la communauté
-    supplémentaites dans le
+    supplémentaires dans le
     `Dépôt de Sources de Données CakePHP sur github <https://github.com/cakephp/datasources/tree/2.0>`_.
 
-Quand vous spécifiez une configuration de connexion à une base de données 
-dans ``app/Config/database.php``, CakePHP utilise de manière transparente la 
-source de données correspondant à la base de données pour toutes les 
-opérations de model. Donc, même si vous pensiez ne rien connaître aux 
+Quand vous spécifiez une configuration de connexion à une base de données
+dans ``app/Config/database.php``, CakePHP utilise de manière transparente la
+source de données correspondant à la base de données pour toutes les
+opérations de model. Donc, même si vous pensiez ne rien connaître aux
 sources de données, vous les utilisez tout le temps.
 
-Toutes les sources ci-dessus dérivent d'une classe de base ``DboSource``, 
-qui agrège de la logique commune à la plupart des bases de données 
-relationnelles. Si vous décidez d'écrire une source de donnée RDBMS, 
-travailler à partir de l'une d'entre elles (par ex Mysql ou 
+Toutes les sources ci-dessus dérivent d'une classe de base ``DboSource``,
+qui agrège de la logique commune à la plupart des bases de données
+relationnelles. Si vous décidez d'écrire une source de donnée RDBMS,
+travailler à partir de l'une d'entre elles (par ex Mysql ou
 Sqlite) est plus sûr.
 
-La plupart des gens cependant, sont intéressés par l'écriture de sources 
-de données pour des sources externes, telles les APIs REST distantes ou 
+La plupart des gens cependant, sont intéressés par l'écriture de sources
+de données pour des sources externes, telles les APIs REST distantes ou
 même un serveur LDAP. C'est donc ce que nous allons voir maintenant.
 
 Basic API For DataSources
 =========================
 
-Une source de données peut et *devrait* implémenter au moins l'une des méthodes 
-suivantes : ``create``, ``read``, ``update`` et/ou ``delete`` (les signatures 
-exactes de méthode et les détails d'implémentation ne sont pas importants 
-pour le moment, ils seront décrits plus tard). Vous n'êtes pas obligé 
-d'implémenter plus que nécessaire, parmi les méthodes listées ci-dessus - 
-si vous avez besoin d'une source de données en lecture seule, il n'y a 
+Une source de données peut et *devrait* implémenter au moins l'une des méthodes
+suivantes : ``create``, ``read``, ``update`` et/ou ``delete`` (les signatures
+exactes de méthode et les détails d'implémentation ne sont pas importants
+pour le moment, ils seront décrits plus tard). Vous n'êtes pas obligé
+d'implémenter plus que nécessaire, parmi les méthodes listées ci-dessus -
+si vous avez besoin d'une source de données en lecture seule, il n'y a
 aucune raison d'implémenter ``create``, ``update`` et ``delete``.
 
 Méthodes qui doivent être implémentées pour toutes les méthodes CRUD:
@@ -59,27 +59,28 @@ Méthodes qui doivent être implémentées pour toutes les méthodes CRUD:
    -  ``update($Model, $fields = array(), $values = array())``
    -  ``delete($Model, $conditions = null)``
 
-Il est possible également (et souvent très pratique), de définir 
-l'attribut de classe ``$_schema`` au sein de la source de données 
+Il est possible également (et souvent très pratique), de définir
+l'attribut de classe ``$_schema`` au sein de la source de données
 elle-même, plutôt que dans le model.
 
-Et c'est à peu près tout ce qu'il y a dire ici. En couplant cette 
-source de données à un model, vous êtes alors en mesure d'utiliser 
+Et c'est à peu près tout ce qu'il y a dire ici. En couplant cette
+source de données à un model, vous êtes alors en mesure d'utiliser
 ``Model::find()/save()/delete()``, comme vous le feriez normalement ;
-les données et/ou paramètres appropriés, utilisés pour appeler ces 
-méthodes, seront passés à la source de données elle-même, dans laquelle 
-vous pouvez décider d'implémenter toutes les fonctionnalités dont vous 
-avez besoin (par exemple les options de Model::find comme le parsing 
+les données et/ou paramètres appropriés, utilisés pour appeler ces
+méthodes, seront passés à la source de données elle-même, dans laquelle
+vous pouvez décider d'implémenter toutes les fonctionnalités dont vous
+avez besoin (par exemple les options de Model::find comme le parsing
 ``'conditions'``, ``'limit'`` ou même vos paramètres personnalisés).
 
 Un Exemple
 ==========
 
-Une des raisons pour laquelle vous voudriez écrire votre propre source de données
-pourrait être la volonté d'accéder à l'API d'une librairie tierce en utilisant
-les méthodes habituelles ``Model::find()/save()/delete()``. Ecrivons une source de 
-données qui va accéder à une API JSON distante et fictive. Nous allons l'appeler
-``FarAwaySource`` et nous allons la placer dans ``app/Model/Datasource/FarAwaySource.php``::
+Une des raisons pour laquelle vous voudriez écrire votre propre source de
+données pourrait être la volonté d'accéder à l'API d'une librairie tierce en
+utilisant les méthodes habituelles ``Model::find()/save()/delete()``. Ecrivons
+une source de données qui va accéder à une API JSON distante et fictive. Nous
+allons l'appeler ``FarAwaySource`` et nous allons la placer dans
+``app/Model/Datasource/FarAwaySource.php``::
 
     App::uses('HttpSocket', 'Network/Http');
 
@@ -99,7 +100,7 @@ données qui va accéder à une API JSON distante et fictive. Nous allons l'appe
         );
 
     /**
-     * Si nous voulons create() ou update(), nous avons besoin de spécifier la 
+     * Si nous voulons create() ou update(), nous avons besoin de spécifier la
      * disponibilité des champs. Nous utilisons le même tableau indicé comme nous le faisions avec CakeSchema, par exemple
      * fixtures et schema de migrations.
      */
@@ -236,7 +237,7 @@ données qui va accéder à une API JSON distante et fictive. Nous allons l'appe
 
     }
 
-Nous pouvons à présent configurer la source de données dans notre fichier 
+Nous pouvons à présent configurer la source de données dans notre fichier
 ``app/Config/database.php`` en y ajoutant quelque chose comme ceci::
 
     public $faraway = array(
@@ -244,14 +245,14 @@ Nous pouvons à présent configurer la source de données dans notre fichier
         'apiKey'     => '1234abcd',
     );
 
-Et ensuite utiliser la configuration de notre source de données dans 
+Et ensuite utiliser la configuration de notre source de données dans
 nos models comme ceci::
 
     class MyModel extends AppModel {
         public $useDbConfig = 'faraway';
     }
 
-Nous pouvons à présent récupérer les données depuis notre source distante 
+Nous pouvons à présent récupérer les données depuis notre source distante
 en utilisant les méthodes familières dans notre model::
 
     // Get all messages from 'Some Person'
@@ -282,7 +283,7 @@ Plugin de source de données
 
 Vous pouvez également empaqueter vos source de données dans des plugins.
 
-Placez simplement votre fichier de source de données à l'intérieur de 
+Placez simplement votre fichier de source de données à l'intérieur de
 ``Plugin/[YourPlugin]/Model/Datasource/[YourSource].php`` et faites
 y référence en utilisant la syntaxe pour les plugins::
 
