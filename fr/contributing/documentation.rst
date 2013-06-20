@@ -105,12 +105,12 @@ ordonnées commencent par une ligne avec un unique astérisque et un espace.
 Les listes numérotées peuvent être créées avec, soit les numéros, soit ``#``
 pour une numérotation automatique::
 
-    * C'est une balle
+    * C\'est une balle
     * Ici aussi. Mais cette ligne
       a deux lignes.
 
-    1. Première ligne
-    2. Deuxième ligne
+    1. Premi\ère ligne
+    2. Deuxi\ème ligne
 
     #. Numérotation automatique
     #. Va vous faire économiser du temps.
@@ -118,10 +118,10 @@ pour une numérotation automatique::
 Les listes indentées peuvent aussi être créées, en indentant les sections et en
 les séparant avec une ligne vide::
 
-    * Première ligne
-    * Deuxième ligne
+    * Premi\ère ligne
+    * Deuxi\ème ligne
 
-        * Allez plus profondément
+        * Allez plus profond\ément
         * Whoah
 
     * Retour au premier niveau.
@@ -129,7 +129,7 @@ les séparant avec une ligne vide::
 Les listes avec définitions peuvent être créées en faisant ce qui suit::
 
     term
-        définition
+        d\éfinition
     CakePHP
         Un framework MVC pour PHP
 
@@ -179,7 +179,7 @@ Les liens croisés de référencement
 
         .. _nom-label:
 
-        Section en-tête
+        Section en-t\ête
         ---------------
 
         Plus de contenu ici.
@@ -233,7 +233,7 @@ Chaque directive remplit l'index, et l'index des espaces de nom.
 
            .. php:method:: method($argument)
 
-           Description de la méthode
+           Description de la m\éthode
 
 
    Attributs, méthodes et constantes ne doivent pas être imbriqués. Ils peuvent
@@ -245,7 +245,7 @@ Chaque directive remplit l'index, et l'index des espaces de nom.
 
         .. php:method:: methodName()
 
-            Texte sur la méthode
+            Texte sur la m\éthode
 
 
    .. seealso:: :rst:dir:`php:method`, :rst:dir:`php:attr`, :rst:dir:`php:const`
@@ -257,12 +257,12 @@ Chaque directive remplit l'index, et l'index des espaces de nom.
    
         .. php:method:: instanceMethod($one, $two)
         
-            :param string $un: Le premier paramètre.
-            :param string $deux: Le deuxième paramètre.
+            :param string $un: Le premier param\ètre.
+            :param string $deux: Le deuxième param\ètre.
             :returns: Un tableau de trucs.
             :throws: InvalidArgumentException
         
-           C'est un méthode d'instanciation.
+           C\'est un m\éthode d\'instanciation.
 
 .. rst:directive:: .. php:staticmethod:: ClassName::methodName(signature)
 
@@ -334,7 +334,7 @@ séparé par des lignes uniques::
             faireDesTrucs()
         }
 
-    C'est un texte régulier de nouveau.
+    C\'est un texte r\égulier de nouveau.
 
 Le texte littéral n'est pas modifié ou formaté, la sauvegarde du niveau
 d'indentation est supprimée.
@@ -364,10 +364,10 @@ Tous les avertissements sont faits de la même façon::
 
     .. note::
 
-        Indenté, précedé et suivi par une ligne vide. Exactement comme
+        Indent\é, pr\éced\é et suivi par une ligne vide. Exactement comme
         un paragraphe.
 
-    Ce texte n'est pas une partie de la note.
+    Ce texte n\'est pas une partie de la note.
 
 Exemples
 ~~~~~~~~
