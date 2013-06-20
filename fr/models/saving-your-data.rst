@@ -62,7 +62,7 @@ l'utilisation de models avec les fonctionnalités ActiveRecord offertes
 par le model::
 
     $this->Post->read(null, 1);
-    $this->Post->set('title', 'Nouveau titre pour l'article');
+    $this->Post->set('title', 'Nouveau titre pour l\'article');
     $this->Post->save();
 
 Dans un exemple de l'utilisation de ``set()`` pour mettre à jour et sauvegarder 
