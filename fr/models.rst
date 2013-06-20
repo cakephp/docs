@@ -26,11 +26,11 @@ et effacer des données. Au final, elle s'interessera aux sources de données.
 Comprendre les Models
 =====================
 
-Un Model est à la fois votre model de données. En programmation orientée
-objet, un objet qui représente une "chose", comme une voiture, une personne
-ou une maison. Un blog, par exemple, peut avoir plusieurs posts et chaque
-post peut avoir plusieurs commentaires. Blog, Post et Commentaire sont tous
-des exemples de models, chacun étant associé avec un autre.
+Un Model représente votre model de données. En programmation orientée, un model
+est un objet qui représente une "chose", comme une voiture, une
+personne ou une maison. Un blog, par exemple, peut avoir plusieurs posts et
+chaque post peut avoir plusieurs commentaires. Blog, Post et Commentaire sont
+tous des exemples de models, chacun étant associé avec un autre.
 
 Voici un simple exemple de définition de model dans CakePHP::
 
