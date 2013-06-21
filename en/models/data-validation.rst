@@ -246,6 +246,10 @@ message for the rule::
         )
     );
 
+.. note::
+
+    Regardless of the rule, validation failure without a defined message defaults to "This field cannot be left blank."
+
 Multiple Rules per Field
 ========================
 
