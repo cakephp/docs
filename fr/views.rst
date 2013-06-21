@@ -70,8 +70,6 @@ qui a besoin de changer selon la vue spécifique en train d'être rendue. En
 étendant un fichier de vue commun, vous pouvez éviter de répeter la balise
 commune pour votre sidebar, et seulement définir les parties qui changent::
 
-.. code-block:: php
-
     // app/View/Common/view.ctp
     <h1><?php echo $this->fetch('title'); ?></h1>
     <?php echo $this->fetch('content'); ?>
@@ -89,8 +87,6 @@ et ``title``. Le block ``content`` est un block spécial que CakePHP
 crée. Il contiendra tous les contenus non capturés de la vue étendue.
 En admettant que notre fichier de vue a une variable ``$posts`` avec les
 données sur notre post. Notre vue pourrait ressembler à ceci::
-
-.. code-block:: php
 
     <?php
     // app/View/Posts/view.ctp
@@ -228,8 +224,6 @@ qui va entourer un bloc existant. Ceci est très utile dans les layouts, ou
 dans les vues étendues où vous voulez, sous conditions, afficher des en-têtes
 ou autres balises::
 
-.. code-block:: php
-
     // dans app/View/Layouts/default.ctp
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
@@ -241,9 +235,7 @@ ou autres balises::
 Depuis 2.3.0, vous pouvez aussi fournir une valeur par défaut pour un bloc
 qui ne devrait pas avoir de contenu. Cela vous permet d'ajouter facilement
 du contenu placeholder, pour des déclarations vides. Vous pouvez fournir
-une valeur par défaut en utilisant le 2ème argument:
-
-.. code-block:: php
+une valeur par défaut en utilisant le 2ème argument::
 
     <div class="shopping-cart">
         <h3>Your Cart</h3>
@@ -264,8 +256,6 @@ dépréciée. A la place, vous devrez utiliser les blocks.
 :php:meth:`~HtmlHelper::script()`, :php:meth:`~HtmlHelper::css()`, et
 :php:meth:`~HtmlHelper::meta()` qui chacune met à jour un block avec
 le même nom quand l'option ``inline = false`` est utilisée::
-
-.. code-block:: php
 
     <?php
     // dans votre fichier de vue
@@ -311,8 +301,6 @@ Quand vous créez un layout, vous devez dire à CakePHP où placer
 le code pour vos vues. Pour ce faire, assurez-vous que votre layout contienne
 ``$this->fetch('content')``. Voici un exemple auquel un layout pourrait
 ressembler::
-
-.. code-block:: php
 
    <!DOCTYPE html>
    <html lang="en">
@@ -532,8 +520,6 @@ en reprenant l'exemple du Post::
 Et ensuite dans l'element, nous pouvons accéder au model des posts paginés.
 Pour obtenir les cinq derniers posts dans une liste ordonnée, nous ferions
 ce qui suit::
-
-.. code-block:: php
 
     <h2>Derniers Posts</h2>
     <?php $posts = $this->requestAction('posts/index/sort:created/direction:asc/limit:5'); ?>

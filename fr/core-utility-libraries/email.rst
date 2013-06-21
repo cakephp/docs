@@ -308,11 +308,11 @@ client:
    dans ce formulaire.
 
   4.1. Quand vous utilisez ``contentId``, vous pouvez utiliser le fichier dans
-  corps html comme ``<img src="cid:my-content-id">``.
+       corps html comme ``<img src="cid:my-content-id">``.
 
   4.2. Vous pouvez utiliser l'option ``contentDisposition`` pour désactiver le
-   header ``Content-Disposition`` pour une pièce jointe. C'est utile pour
-  l'envoi d'invitations ical à des clients utilisant outlook.
+       header ``Content-Disposition`` pour une pièce jointe. C'est utile pour
+       l'envoi d'invitations ical à des clients utilisant outlook.
 
 .. versionchanged:: 2.3
     L'option ``contentDisposition`` a été ajoutée dans 2.3.

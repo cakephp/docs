@@ -158,7 +158,7 @@ allons l'appeler ``FarAwaySource`` et nous allons la placer dans
     /**
      * calculate() est pour determiner la façon dont nous allons compter
      * les enregistrements et est requis pour faire fonctionner ``update()``
-`    * et ``delete()``.
+     * et ``delete()``.
      *
      * Nous ne comptons pas les enregistrements ici mais retournons une chaîne
      * à passer à 

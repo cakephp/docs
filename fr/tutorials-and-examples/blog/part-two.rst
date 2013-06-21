@@ -155,8 +155,6 @@ un dossier appelé 'posts' dans ce cas). Pour mettre en forme les données de
 ces posts dans un joli tableau, le code de notre vue devrait ressembler à
 quelque chose comme cela::
 
-.. code-block:: php
-
     <!-- File: /app/View/Posts/index.ctp -->
 
     <h1>Blog posts</h1>
@@ -174,7 +172,7 @@ quelque chose comme cela::
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
                 <?php echo $this->Html->link($post['Post']['title'],
-    array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
+                array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
             </td>
             <td><?php echo $post['Post']['created']; ?></td>
         </tr>

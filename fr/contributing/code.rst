@@ -121,13 +121,13 @@ la branche de base correcte, puisque vous ne pouvez pas l'éditer une fois que
 la pull request est créée.
 
 * Si votre changement est un **bugfix** et n'introduit pas de nouvelles
-fonctionnalités et corrige seulement un comportement existant qui est présent
-dans la version courante. Dans ce cas, choisissez **master** comme votre cible
-de fusion.
+  fonctionnalités et corrige seulement un comportement existant qui est présent
+  dans la version courante. Dans ce cas, choisissez **master** comme votre cible
+  de fusion.
 * Si votre changement est une **nouvelle fonctionnalité** ou un ajout
-au framework, alors vous devez choisir la branche avec le nombre de la version
-prochaine. Par exemple si la version stable courante est ``2.2.2``, la branche
-acceptant les nouvelles fonctionnalités sera ``2.3``.
+  au framework, alors vous devez choisir la branche avec le nombre de la version
+  prochaine. Par exemple si la version stable courante est ``2.2.2``, la branche
+  acceptant les nouvelles fonctionnalités sera ``2.3``.
 * Si votre changement est une défailance d'une fonctionnalité existante, ou de
   l'API, alors vous devrez choisir la prochaine version majeure. Par exemple,
   si la version courante est ``2.2.2`` alors la prochaine fois qu'un

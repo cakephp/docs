@@ -592,7 +592,7 @@ méthode.
 .. php:method:: each($callback)
 
     Créé un morceau de code qui effectue une itération sur les éléments
-    sélectionnés, et insère ``$callback`.
+    sélectionnés, et insère ``$callback``.
 
     **Exemple**::
 

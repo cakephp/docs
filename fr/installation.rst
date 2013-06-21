@@ -167,11 +167,11 @@ droits pour modifier le ``DocumentRoot`` sur le serveur web Apache.
 Décompressez les contenus de l'archive Cake dans un répertoire de votre
 choix. Pour les besoins de cet exemple, nous considérons que vous avez choisi
 d'installer Cake dans /cake\_install. Votre installation de production devrait
-ressembler à quelque chose comme çà dans votre système de fichiers :
+ressembler à quelque chose comme çà dans votre système de fichiers::
 
     /cake_install/
         app/
-            webroot/ (ce répertoire est défini comme répertoire
+            webroot/ (ce répertoire est défini comme répertoire 
             ``DocumentRoot``)
         lib/
         plugins/

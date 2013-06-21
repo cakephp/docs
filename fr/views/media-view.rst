@@ -3,7 +3,7 @@ Vues Media
 
 .. php:class:: MediaView
 
-.. déprécié:: 2.3
+.. deprecated:: 2.3
    Utilisez :ref:`cake-response-file` à la place.
 
 Les vues Media vous permettent d'envoyer des fichiers binaires à l'utilisateur.

@@ -93,7 +93,7 @@ internes du framework, il y a plusieurs exceptions pour les méthodes HTTP.
 
 Vous pouvez lancer ces exceptions à partir de vos controllers pour indiquer
 les états d'échec, ou les erreurs HTTP. Un exemple d'utilisation des exceptions
-HTTP pourraient rendre les pages 404 pour les items qui n'ont pas été trouvés::
+HTTP pourraient rendre les pages 404 pour les items qui n'ont pas été trouvés
 
 Vous pouvez lancer ces exceptions à partir de vos controllers pour indiquer
 les états d'échecs, ou les erreurs HTTP. Un exemple d'utilisation des
@@ -474,9 +474,6 @@ dans votre core.php. Activer cela va lacer chaque exception vers
     Si vous utilisez un ``Exception.handler`` personnalisé, cette configuration
     n'aura aucun effet. A moins que vous le référenciez à l'intérieur de votre
     implémentation.
-
-.. _built-in-exceptions:
-
 
 .. meta::
     :title lang=fr: Exceptions
