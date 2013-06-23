@@ -827,7 +827,7 @@ a destination within your application or an outside location::
     Router::redirect(
         '/home/*',
         ['controller' => 'posts', 'action' => 'view'],
-        ['persist' => true]
+        ['persist' => true] // or ['persist'=>['id']] for default routing where the view action expects $id as an argument
     );
 
 Redirects ``/home/*`` to ``/posts/view`` and passes the parameters to
@@ -1002,7 +1002,7 @@ Router API
       to the current scheme.
     * ``_host`` - Set the host to use for the link.  Defaults to the current host.
     * ``_port`` - Set the port if you need to create links on non-standard ports.
-    * ``_full`` - If true the ``FULL_BASE_URL`` constant will be prepended to generated urls.
+    * ``_full`` - If true the value of :php:meth:`Router::baseUrl` will be prepended to generated urls.
     * ``#`` - Allows you to set url hash fragments.
     * ``ssl`` - Set to true to convert the generated url to https, or false to force http.
 
@@ -1024,6 +1024,15 @@ Router API
 .. php:staticmethod:: defaultRouteClass($classname)
 
     Set the default route to be used when connecting routes in the future.
+
+.. php:staticmethod:: baseUrl($url = null)
+
+    Get or set the baseURL used for generating URL's. When setting this value
+    you should be sure to include the fully qualified domain name including
+    protocol.
+
+    Setting values with this method will also update ``App.fullBaseUrl`` in
+    :php:class:`Cake\\Core\\Configure`.
 
 .. php:class:: Route
 

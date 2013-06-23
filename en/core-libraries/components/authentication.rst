@@ -313,6 +313,17 @@ for when authorization fails::
 
     $this->Auth->authError = "This error shows up with the user tries to access a part of the website that is protected.";
 
+.. versionchanged:: 2.4
+   Sometimes, you only want to display the authorization error only after
+   the user has already logged-in. You can suppress this message by setting
+   its value to boolean `false`
+
+In your controller's beforeFilter(), or component settings::
+
+    if (!$this->Auth->loggedIn()) {
+        $this->Auth->authError = false;
+    }
+
 .. _hashing-passwords:
 
 Hashing passwords
@@ -769,6 +780,10 @@ and authentication mechanics in CakePHP.
 
     Error to display when user attempts to access an object or action to which
     they do not have access.
+
+    .. versionchanged:: 2.4
+       You can suppress authError message from being displayed by setting this
+       value to boolean `false`.
 
 .. php:attr:: authorize
 

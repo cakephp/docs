@@ -78,6 +78,15 @@ single fields, in an ActiveRecord approach. You can also use
 The above would update the title and published fields and save them
 to the database.
 
+:php:meth:`Model::clear()`
+==========================
+
+This method can be used to reset model state and clear out any unsaved data and
+validation errors.
+
+.. versionadded:: 2.4
+
+
 :php:meth:`Model::save(array $data = null, boolean $validate = true, array $fieldList = array())`
 =================================================================================================
 
@@ -154,18 +163,13 @@ your are passing the primary key field into the data array::
 
 This method resets the model state for saving new information.
 It does not actually create a record in the database but clears
-Model::$id if previously set and sets the default values in
-Model::$data based on your database field defaults.
+Model::$id and sets Model::$data based on your database field defaults. If you have
+not defined defaults for your database fields, Model::$data will be set to an empty array.
 
-If the ``$data`` parameter (using the array format outlined above)
-is passed, the model instance will be ready to save with that data
-(accessible at ``$this->data``).
+If the ``$data`` parameter (using the array format outlined above) is passed, it will be merged with the database 
+field defaults and the model instance will be ready to save with that data (accessible at ``$this->data``).
 
-If ``false`` is passed instead of an array, the model instance will
-not initialize fields from the model schema that are not already
-set, it will only reset fields that have already been set, and
-leave the rest unset. Use this to avoid updating fields in the
-database that were already set.
+If ``false`` or ``null`` are passed for the ``$data`` parameter, Model::data will be set to an empty array. 
 
 .. tip::
 

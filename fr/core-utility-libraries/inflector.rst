@@ -3,8 +3,8 @@ Inflector
 
 .. php:class:: Inflector
 
-La classe Inflector prend une chaîne de caractères et peut la manipuler 
-pour gérer les variations de mot comme les mises au pluriel ou les mises 
+La classe Inflector prend une chaîne de caractères et peut la manipuler
+pour gérer les variations de mot comme les mises au pluriel ou les mises
 en Camel et est normalement accessible statiquement. Exemple:
 ``Inflector::pluralize('example')`` retourne "examples".
 
@@ -25,8 +25,8 @@ en Camel et est normalement accessible statiquement. Exemple:
 
 .. php:staticmethod:: underscore($camelCase)
 
-    Il doit être noté que les underscores vont seulement convertir les mots 
-    formatés en camelCase. Les mots qui contiennent des espaces seront en 
+    Il doit être noté que les underscores vont seulement convertir les mots
+    formatés en camelCase. Les mots qui contiennent des espaces seront en
     minuscules, mais ne contiendront pas d'underscore.
     
     * **Input:** applePie, someThing
@@ -54,20 +54,20 @@ en Camel et est normalement accessible statiquement. Exemple:
 
 .. php:staticmethod:: slug($word, $replacement = '_')
 
-    Slug converts special characters into latin versions and converting
-    unmatched characters and spaces to underscores. The slug method
-    expects UTF-8 encoding.
-    
+    Slug convertit les caractères spéciaux en version latins et convertit
+    les caractères ne correspondant pas et les espaces aux underscores. La
+    méthode slug s'attend à un encodage UTF-8.
+
     * **Input:** apple purée
     * **Output:** apple\_puree
 
 .. php:staticmethod:: reset()
 
     Remet l'Inflector à son état initial, utile pour les tests.
-    
+
 .. php:staticmethod:: rules($type, $rules, $reset = false)
 
-    Définit de nouvelles règles d'inflection et de transliteraion à utiliser 
+    Définit de nouvelles règles d'inflection et de translitération à utiliser
     pour Inflector.
     Regardez :ref:`inflection-configuration` pour plus d'informations.
 

@@ -43,9 +43,10 @@ Components
 AuthComponent
 -------------
 - AuthComponent now supports proper stateless mode when using `Basic` or `Digest`
-  authenticators. Starting of session can be prevented by setting :php:property:`AuthComponent::$sessionKey`
+  authenticators. Starting of session can be prevented by setting :php:attr:`AuthComponent::$sessionKey`
   to false. Also now when using only `Basic` or `Digest` you are no longer
   redirected to login page. For more info check the :php:class:`AuthComponent` page.
+- Property :php:attr:`AuthComponent::$authError` can be set to boolean `false` to suppress flash message from being displayed.
 
 PasswordHasher
 --------------
@@ -62,6 +63,7 @@ Models
   :php:meth:`Model::saveAssociated()`, :php:meth:`Model::saveMany()`
   now take a new ``counterCache`` option. You can set it to false to avoid
   updating counter cache values for the particular save operation.
+- :php:meth:`Model::clear()` was added.
 
 Datasource
 ----------
@@ -105,6 +107,11 @@ CakeEmail
 - Logged email messages now have the scope of ``email`` by default. If you are
   not seeing email contents in your logs, be sure to add the ``email`` scope to
   your logging configuration.
+
+HttpSocket
+----------
+
+- :php:meth:`HttpSocket::patch()` has been added.
 
 
 I18n
@@ -188,4 +195,13 @@ ErrorHandler
   Exception types to be logged. ``Configure::write('Exception.skipLog', array('NotFoundException', 'ForbiddenException'));``
   will avoid these exceptions and the ones extending them to be be logged when
   ``'Exception.log'`` config is ``true``
+
+Routing
+=======
+
+Router
+------
+
+- :php:meth:`Router::baseUrl()` was added. This method replaces
+  :php:const:`FULL_BASE_URL`. Which is now deprecated.
 

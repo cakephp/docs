@@ -1209,7 +1209,7 @@ Form Element-Specific Methods
             </optgroup>
         </select>
 
-    * ``$options['multiple']`` If 'multiple' has been set to true for an input that
+    * ``$attributes['multiple']`` If 'multiple' has been set to true for an input that
       outputs a select, the select will allow multiple selections::
 
         echo $this->Form->select('Model.field', $options, array('multiple' => true));
@@ -1242,7 +1242,7 @@ Form Element-Specific Methods
            </div>
         </div>
 
-    * ``$options['disabled']`` When creating checkboxes, this option can be set
+    * ``$attributes['disabled']`` When creating checkboxes, this option can be set
       to disable all or some checkboxes. To disable all checkboxes set disabled
       to ``true``::
 
@@ -1273,7 +1273,7 @@ Form Element-Specific Methods
         </div>
 
     .. versionchanged:: 2.3
-        Support for arrays in ``$options['disabled']`` was added in 2.3.
+        Support for arrays in ``$attributes['disabled']`` was added in 2.3.
 
 .. php:method:: file(string $fieldName, array $options)
 

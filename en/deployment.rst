@@ -23,8 +23,12 @@ keeping your code secure and your application safer. CakePHP applications
 should have the document root set to the application's ``app/webroot``.  This
 makes the application and configuration files inaccessible through a URL.
 Setting the document root is different for different webservers.  See the
-:doc:`/installation/advanced-installation` documentation for webserver specific
+:doc:`/installation/url-rewriting` documentation for webserver specific
 information.
+
+In all cases you will want to set the virtual host/domain's document to be
+``app/webroot/``. This removes the possibility of files outside of the webroot
+directory being executed.
 
 Update core.php
 ===============
@@ -44,24 +48,6 @@ things:
 
 In addition to the above, many plugins and application extensions use ``debug``
 to modify their behavior.
-
-
-Multiple CakePHP applications using the same core
-=================================================
-
-There are a few ways you can configure multiple applications to use the same
-CakePHP core.  You can either use PHP's ``include_path`` or set the
-``CAKE_CORE_INCLUDE_PATH`` in your application's ``webroot/index.php``.
-Generally using PHP's ``include_path`` is easier and more robust.  CakePHP comes
-preconfigured to look on the ``include_path`` as well so it's simple to use.
-
-In your ``php.ini`` file, locate the existing ``include_path`` directive, and
-either append to it or add an ``include_path`` directive::
-
-    include_path = '.:/usr/share/php:/usr/share/cakephp-2.0/lib'
-
-This assumes you are running a \*nix server, and have CakePHP in
-``/usr/share/cakephp-2.0``.
 
 Improve your application's performance
 ======================================

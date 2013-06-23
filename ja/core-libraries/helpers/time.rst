@@ -1,5 +1,5 @@
 Timeヘルパー
-##########
+############
 
 .. php:class:: TimeHelper(View $view, array $settings = array())
 

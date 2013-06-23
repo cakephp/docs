@@ -28,7 +28,7 @@ Installing CakePHP with composer
 Composer is a dependency management tool for PHP 5.3+. It solves many of the
 problems the PEAR installer has, and simplifies managing multiple versions of
 libraries.  Since CakePHP publishes a PEAR package you can install CakePHP using
-`composer <http:://getcomposer.org>`_. Before installing CakePHP you'll need to
+`composer <http://getcomposer.org>`_. Before installing CakePHP you'll need to
 setup a ``composer.json`` file. An composer.json file for a CakePHP applications
 would look like the following::
 
@@ -49,7 +49,7 @@ would look like the following::
     }
 
 Save this JSON into ``composer.json`` in the root directory of your project.
-Next dowload the composer.phar file into your project. After you've downloaded
+Next download the composer.phar file into your project. After you've downloaded
 composer, install CakePHP. In the same directory as your ``composer.json`` run
 the following::
 
@@ -71,7 +71,7 @@ You are now ready to generate the rest of your application skeleton::
     $ Vendor/bin/cake bake project <path to project>
 
 By default ``bake`` will hard-code :php:const:`CAKE_CORE_INCLUDE_PATH`. To
-make your application more portable you should modify ``webroot/index.php``, 
+make your application more portable you should modify ``webroot/index.php``,
 changing ``CAKE_CORE_INCLUDE_PATH`` to be a relative path::
 
     define(
@@ -85,14 +85,14 @@ the autoloader, and work around an issue in composer's autoloader. In your
 
     // Load composer autoload.
     require APP . '/Vendor/autoload.php';
-    
+
     // Remove and re-prepend CakePHP's autoloader as composer thinks it is the most important.
     // See https://github.com/composer/composer/commit/c80cb76b9b5082ecc3e5b53b1050f76bb27b127b
     spl_autoload_unregister(array('App', 'load'));
     spl_autoload_register(array('App', 'load'), true, true);
 
 You should now have a functioning CakePHP application with CakePHP installed via
-composer. Be sure to keep the composer.json and composer.lock.json file with the
+composer. Be sure to keep the composer.json and composer.lock file with the
 rest of your source code.
 
 
@@ -150,8 +150,8 @@ example) to look like the following::
 
     // App/Config/paths.php (partial, comments removed)
     define('ROOT', '/home/me');
-
-    define('APP_DIR', 'myapp');
+    define ('APP_DIR', 'myapp');
+    define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
 
 Apache and mod\_rewrite (and .htaccess)
 =======================================
