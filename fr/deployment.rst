@@ -57,13 +57,13 @@ d'application utilisent ``debug`` pour modifier leur comportement.
 Améliorer les performances de votre application
 ===============================================
 
-Comme la gestion des éléments statiques, comme les images, le Javascript et 
-les fichiers css des plugins à travers le Dispatcher est incroyablement 
-inéfficace, il est chaudement recommandé de les symlinker pour la 
+Comme la gestion des éléments statiques, comme les images, le Javascript et
+les fichiers CSS des plugins à travers le Dispatcher est incroyablement
+inéfficace, il est chaudement recommandé de les symlinker pour la
 production. Par exemple comme ceci::
 
     ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
 
 .. meta::
-    :title lang=fr: Deploiement
+    :title lang=fr: Déploiement
     :keywords lang=fr: stack traces,application extensions,set document,installation documentation,development features,generic error,document root,func,debug,caches,error messages,configuration files,webroot,deployment,cakephp,applications

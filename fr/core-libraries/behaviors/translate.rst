@@ -171,7 +171,7 @@ traduits parce que le déclenchement des callbacks sur les models associés n'es
 actuellement pas supporté.
 
 Utiliser la méthode bindTranslation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------
 
 Vous pouvez aussi récupérer toutes les traductions seulement quand vous en
 avez besoin, en utilisant la méthode bindTranslation.
@@ -302,7 +302,7 @@ Pour faire cela vous avez besoin de paramétrer votre model comme cela ::
     renommer la table après coup.
 
 Créer le Model de Traduction
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 
 Pour que cela fonctionne vous devez créer le fichier du model actuel dans le
 dossier des models. La raison est qu'il n'y a pas de propriété pour définir le
@@ -321,7 +321,7 @@ pouvons faire cela dans le model qui utilise ce model de traduction.
 C'est là que l'option ``$translateTable`` entre en jeu.
 
 Modification de la Table
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 Si vous voulez changer le nom de la table, il vous suffit simplement
 de définir $translateTable dans votre model, comme ceci ::

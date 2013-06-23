@@ -108,6 +108,7 @@ pleinement avantage du Helper Form (Helper Formulaire) est
     manière dont le formulaire sera créé.
     
     .. versionchanged:: 2.0
+
     L'Url par défaut pour tous les formulaires, est maintenant l'Url
     incluant passed, named, et les paramètres de requête (querystring). Vous
     pouvez redéfinir cette valeur par défaut en fournissant
@@ -188,11 +189,11 @@ Il y plusieurs options pour create():
     ou pointer vers un domaine extérieur::
 
         echo $this->Form->create(null, array(
-        'url' => 'http://www.google.com/search',
-        'type' => 'get'
+            'url' => 'http://www.google.com/search',
+            'type' => 'get'
         ));
 
-     Affichera:
+    Affichera:
 
     .. code-block:: html
 
@@ -715,6 +716,7 @@ comme les attributs html. Ce qui suit va couvrir les options spécifiques de
     contrôlable comme vous le souhaitez. l'option 'format' supporte un tableau
     de chaîne  décrivant le model de page que vous voudriez que l'élément
     suive. Les clés de tableau supportées sont::
+
         array('before', 'input', 'between', 'label', 'after','error')
 
 *   ``$options['inputDefaults']`` S'il vous semble répéter la même option dans

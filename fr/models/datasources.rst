@@ -1,12 +1,12 @@
 DataSources (Sources de Données)
 ################################
 
-Les Sources de données (DataSources) sont les liens entre les models et la 
-source de données qu'ils représentent. Dans de nombreux cas, les données 
-sont récupérées depuis une base de données relationnelle telle MySQL, 
-PostgreSQL ou MSSQL. CakePHP est distribué avec de nombreuses sources de 
-données spécifiques d'une base de données (voir les fichiers de classe 
-dans ``lib/Cake/Model/Datasource/Database``), un résumé de ceux-ci est listé 
+Les Sources de données (DataSources) sont les liens entre les models et la
+source de données qu'ils représentent. Dans de nombreux cas, les données
+sont récupérées depuis une base de données relationnelle telle MySQL,
+PostgreSQL ou MSSQL. CakePHP est distribué avec de nombreuses sources de
+données spécifiques d'une base de données (voir les fichiers de classe
+dans ``lib/Cake/Model/Datasource/Database``), un résumé de ceux-ci est listé
 ici pour votre confort :
 
 - MySql
@@ -16,70 +16,71 @@ ici pour votre confort :
 
 .. note::
 
-    Vous pouvez trouver des sources de données de contribution de la communauté
-    supplémentaites dans le
+    Vous pouvez trouver des sources de données contributives de la communauté
+    supplémentaires dans le
     `Dépôt de Sources de Données CakePHP sur github <https://github.com/cakephp/datasources/tree/2.0>`_.
 
-Quand vous spécifiez une configuration de connexion à une base de données 
-dans ``app/Config/database.php``, CakePHP utilise de manière transparente la 
-source de données correspondant à la base de données pour toutes les 
-opérations de model. Donc, même si vous pensiez ne rien connaître aux 
+Quand vous spécifiez une configuration de connexion à une base de données
+dans ``app/Config/database.php``, CakePHP utilise de manière transparente la
+source de données correspondant à la base de données pour toutes les
+opérations de model. Donc, même si vous pensiez ne rien connaître aux
 sources de données, vous les utilisez tout le temps.
 
-Toutes les sources ci-dessus dérivent d'une classe de base ``DboSource``, 
-qui agrège de la logique commune à la plupart des bases de données 
-relationnelles. Si vous décidez d'écrire une source de donnée RDBMS, 
-travailler à partir de l'une d'entre elles (par ex Mysql ou 
+Toutes les sources ci-dessus dérivent d'une classe de base ``DboSource``,
+qui agrège de la logique commune à la plupart des bases de données
+relationnelles. Si vous décidez d'écrire une source de donnée RDBMS,
+travailler à partir de l'une d'entre elles (par ex Mysql ou
 Sqlite) est plus sûr.
 
-La plupart des gens cependant, sont intéressés par l'écriture de sources 
-de données pour des sources externes, telles les APIs REST distantes ou 
+La plupart des gens cependant, sont intéressés par l'écriture de sources
+de données pour des sources externes, telles les APIs REST distantes ou
 même un serveur LDAP. C'est donc ce que nous allons voir maintenant.
 
-Basic API For DataSources
-=========================
+API basique pour les Sources de Données
+=======================================
 
-Une source de données peut et *devrait* implémenter au moins l'une des méthodes 
-suivantes : ``create``, ``read``, ``update`` et/ou ``delete`` (les signatures 
-exactes de méthode et les détails d'implémentation ne sont pas importants 
-pour le moment, ils seront décrits plus tard). Vous n'êtes pas obligé 
-d'implémenter plus que nécessaire, parmi les méthodes listées ci-dessus - 
-si vous avez besoin d'une source de données en lecture seule, il n'y a 
+Une source de données peut et *devrait* implémenter au moins l'une des méthodes
+suivantes : ``create``, ``read``, ``update`` et/ou ``delete`` (les signatures
+exactes de méthode et les détails d'implémentation ne sont pas importants
+pour le moment, ils seront décrits plus tard). Vous n'êtes pas obligé
+d'implémenter plus que nécessaire, parmi les méthodes listées ci-dessus -
+si vous avez besoin d'une source de données en lecture seule, il n'y a
 aucune raison d'implémenter ``create``, ``update`` et ``delete``.
 
 Méthodes qui doivent être implémentées pour toutes les méthodes CRUD:
 
--  ``describe($Model)``
--  ``listSources()``
--  ``calculate($Model, $func, $params)``
+-  ``describe($model)``
+-  ``listSources($data = null)``
+-  ``calculate($model, $func, $params)``
 -  Au moins une des suivantes:
    
-   -  ``create($Model, $fields = array(), $values = array())``
-   -  ``read($Model, $queryData = array())``
-   -  ``update($Model, $fields = array(), $values = array())``
-   -  ``delete($Model, $conditions = null)``
+   -  ``create(Model $model, $fields = null, $values = null)``
+   -  ``read(Model $model, $queryData = array(), $recursive = null)``
+   -  ``update(Model $model, $fields = null, $values = null, $conditions = null)``
+   -  ``delete(Model $model, $id = null)``
 
-Il est possible également (et souvent très pratique), de définir 
-l'attribut de classe ``$_schema`` au sein de la source de données 
+Il est possible également (et souvent très pratique), de définir
+l'attribut de classe ``$_schema`` au sein de la source de données
 elle-même, plutôt que dans le model.
 
-Et c'est à peu près tout ce qu'il y a dire ici. En couplant cette 
-source de données à un model, vous êtes alors en mesure d'utiliser 
+Et c'est à peu près tout ce qu'il y a dire ici. En couplant cette
+source de données à un model, vous êtes alors en mesure d'utiliser
 ``Model::find()/save()/delete()``, comme vous le feriez normalement ;
-les données et/ou paramètres appropriés, utilisés pour appeler ces 
-méthodes, seront passés à la source de données elle-même, dans laquelle 
-vous pouvez décider d'implémenter toutes les fonctionnalités dont vous 
-avez besoin (par exemple les options de Model::find comme le parsing 
+les données et/ou paramètres appropriés, utilisés pour appeler ces
+méthodes, seront passés à la source de données elle-même, dans laquelle
+vous pouvez décider d'implémenter toutes les fonctionnalités dont vous
+avez besoin (par exemple les options de Model::find comme le parsing
 ``'conditions'``, ``'limit'`` ou même vos paramètres personnalisés).
 
 Un Exemple
 ==========
 
-Une des raisons pour laquelle vous voudriez écrire votre propre source de données
-pourrait être la volonté d'accéder à l'API d'une librairie tierce en utilisant
-les méthodes habituelles ``Model::find()/save()/delete()``. Ecrivons une source de 
-données qui va accéder à une API JSON distante et fictive. Nous allons l'appeler
-``FarAwaySource`` et nous allons la placer dans ``app/Model/Datasource/FarAwaySource.php``::
+Une des raisons pour laquelle vous voudriez écrire votre propre source de
+données pourrait être la volonté d'accéder à l'API d'une librairie tierce en
+utilisant les méthodes habituelles ``Model::find()/save()/delete()``. Ecrivons
+une source de données qui va accéder à une API JSON distante et fictive. Nous
+allons l'appeler ``FarAwaySource`` et nous allons la placer dans
+``app/Model/Datasource/FarAwaySource.php``::
 
     App::uses('HttpSocket', 'Network/Http');
 
@@ -91,15 +92,15 @@ données qui va accéder à une API JSON distante et fictive. Nous allons l'appe
         public $description = 'A far away datasource';
 
     /**
-     * Our default config options. These options will be customized in our
-     * ``app/Config/database.php`` and will be merged in the ``__construct()``.
+     * Nos options de config par défaut. Ces options seront personnalisées dans notre
+     * ``app/Config/database.php`` et seront fusionnées dans le ``__construct()``.
      */
         public $config = array(
             'apiKey' => '',
         );
 
     /**
-     * Si nous voulons create() ou update(), nous avons besoin de spécifier la 
+     * Si nous voulons create() ou update(), nous avons besoin de spécifier la
      * disponibilité des champs. Nous utilisons le même tableau indicé comme nous le faisions avec CakeSchema, par exemple
      * fixtures et schema de migrations.
      */
@@ -130,60 +131,65 @@ données qui va accéder à une API JSON distante et fictive. Nous allons l'appe
         }
 
     /**
-     * Since datasources normally connect to a database there are a few things
-     * we must change to get them to work without a database.
+     * Puisque les sources de données se connectent normalement à une base de données
+     * il y a quelques modifications à faire pour les faire marcher sans base de données.
      */
 
     /**
-     * listSources() is for caching. You'll likely want to implement caching in
-     * your own way with a custom datasource. So just ``return null``.
+     * listSources() est pour la mise en cache. Vous voulez implémenter la mise en cache
+     * de votre façon avec une source de données personnalisée. Donc juste ``return null``.
      */
         public function listSources() {
             return null;
         }
 
     /**
-     * describe() tells the model your schema for ``Model::save()``.
+     * describe() dit au model votre schema pour ``Model::save()``.
      *
-     * You may want a different schema for each model but still use a single
-     * datasource. If this is your case then set a ``schema`` property on your
-     * models and simply return ``$Model->schema`` here instead.
+     * Vous voulez peut-être un schema différent pour chaque model mais utiliser
+     * toujours une unique source de données. Si c'est votre cas, alors
+     * définissez une propriété ``schema`` dans vos models et retournez
+     * simplement ``$Model->schema`` ici à la place.
      */
         public function describe(Model $Model) {
             return $this->_schema;
         }
 
     /**
-     * calculate() is for determining how we will count the records and is
-     * required to get ``update()`` and ``delete()`` to work.
+     * calculate() est pour determiner la façon dont nous allons compter
+     * les enregistrements et est requis pour faire fonctionner ``update()``
+     * et ``delete()``.
      *
-     * We don't count the records here but return a string to be passed to
-     * ``read()`` which will do the actual counting. The easiest way is to just
-     * return the string 'COUNT' and check for it in ``read()`` where
-     * ``$data['fields'] === 'COUNT'``.
+     * Nous ne comptons pas les enregistrements ici mais retournons une chaîne
+     * à passer à 
+     * ``read()`` qui va effectivement faire le comptage. La façon la plus
+     * facile est de juste retourner la chaîne 'COUNT' et de la vérifier
+     * dans ``read()`` où ``$data['fields'] === 'COUNT'``.
      */
-        public function calculate(Model $Model, $func, $params = array()) {
+        public function calculate(Model $model, $func, $params = array()) {
             return 'COUNT';
         }
 
     /**
-     * Implement the R in CRUD. Calls to ``Model::find()`` arrive here.
+     * Implémente le R dans CRUD. Appel à ``Model::find()`` se trouve ici.
      */
-        public function read(Model $Model, $data = array()) {
+        public function read(Model $model, $queryData = array(), $recursive = null) {
             /**
-             * Here we do the actual count as instructed by our calculate()
-             * method above. We could either check the remote source or some
-             * other way to get the record count. Here we'll simply return 1 so
-             * ``update()`` and ``delete()`` will assume the record exists.
+             * Ici nous faisons réellement le comptage comme demandé par notre
+             * méthode calculate() ci-dessus. Nous pouvons soit vérifier la
+             * source du dépôt, soit une autre façon pour récupérer le compte
+             * de l\'enregistrement. Ici nous allons simplement retourner 1
+             * ainsi ``update()`` et ``delete()`` vont estimer que l\'enregistrment
+             * existe.
              */
-            if ($data['fields'] === 'COUNT') {
+            if ($queryData['fields'] === 'COUNT') {
                 return array(array(array('count' => 1)));
             }
             /**
-             * Now we get, decode and return the remote data.
+             * Maintenant nous récupèrons, décodons et retournons les données du dépôt.
              */
-            $data['conditions']['apiKey'] = $this->config['apiKey'];
-            $json = $this->Http->get('http://example.com/api/list.json', $data['conditions']);
+            $queryData['conditions']['apiKey'] = $this->config['apiKey'];
+            $json = $this->Http->get('http://example.com/api/list.json', $queryData['conditions']);
             $res = json_decode($json, true);
             if (is_null($res)) {
                 $error = json_last_error();
@@ -193,10 +199,10 @@ données qui va accéder à une API JSON distante et fictive. Nous allons l'appe
         }
 
     /**
-     * Implement the C in CRUD. Calls to ``Model::save()`` without $Model->id
-     * set arrive here.
+     * Implémente le C dans CRUD. Appel à ``Model::save()`` sans $model->id
+     * défini se trouve ici.
      */
-        public function create(Model $Model, $fields = array(), $values = array()) {
+        public function create(Model $model, $fields = null, $values = null) {
             $data = array_combine($fields, $values);
             $data['apiKey'] = $this->config['apiKey'];
             $json = $this->Http->post('http://example.com/api/set.json', $data);
@@ -209,21 +215,20 @@ données qui va accéder à une API JSON distante et fictive. Nous allons l'appe
         }
 
     /**
-     * Implement the U in CRUD. Calls to ``Model::save()`` with $Model->id
-     * set arrive here. Depending on the remote source you can just call
+     * Implémente le U dans CRUD. Appel à ``Model::save()`` avec $Model->id
+     * défini se trouve ici. Selon la source du dépôt, vous pouvez just appeler
      * ``$this->create()``.
      */
-        public function update(Model $Model, $fields = array(), $values = array()) {
-            return $this->create($Model, $fields, $values);
+        public function update(Model $model, $fields = null, $values = null, $conditions = null) {
+            return $this->create($model, $fields, $values);
         }
 
     /**
-     * Implement the D in CRUD. Calls to ``Model::delete()`` arrive here.
+     * Implémente le D de CRUD. Appel à ``Model::delete()`` se trouve ici.
      */
-        public function delete(Model $Model, $conditions = null) {
-            $id = $conditions[$Model->alias . '.id'];
+        public function delete(Model $model, $id = null) {
             $json = $this->Http->get('http://example.com/api/remove.json', array(
-                'id' => $id,
+                'id' => $id[$model->alias . '.id'],
                 'apiKey' => $this->config['apiKey'],
             ));
             $res = json_decode($json, true);
@@ -236,7 +241,7 @@ données qui va accéder à une API JSON distante et fictive. Nous allons l'appe
 
     }
 
-Nous pouvons à présent configurer la source de données dans notre fichier 
+Nous pouvons à présent configurer la source de données dans notre fichier
 ``app/Config/database.php`` en y ajoutant quelque chose comme ceci::
 
     public $faraway = array(
@@ -244,17 +249,17 @@ Nous pouvons à présent configurer la source de données dans notre fichier
         'apiKey'     => '1234abcd',
     );
 
-Et ensuite utiliser la configuration de notre source de données dans 
+Et ensuite utiliser la configuration de notre source de données dans
 nos models comme ceci::
 
     class MyModel extends AppModel {
         public $useDbConfig = 'faraway';
     }
 
-Nous pouvons à présent récupérer les données depuis notre source distante 
+Nous pouvons à présent récupérer les données depuis notre source distante
 en utilisant les méthodes familières dans notre model::
 
-    // Get all messages from 'Some Person'
+    // Récupère tous les messages de 'Some Person'
     $messages = $this->MyModel->find('all', array(
         'conditions' => array('name' => 'Some Person'),
     ));
@@ -280,9 +285,9 @@ Et supprimer le message::
 Plugin de source de données
 ===========================
 
-Vous pouvez également empaqueter vos source de données dans des plugins.
+Vous pouvez également empaqueter vos sources de données dans des plugins.
 
-Placez simplement votre fichier de source de données à l'intérieur de 
+Placez simplement votre fichier de source de données à l'intérieur de
 ``Plugin/[YourPlugin]/Model/Datasource/[YourSource].php`` et faites
 y référence en utilisant la syntaxe pour les plugins::
 

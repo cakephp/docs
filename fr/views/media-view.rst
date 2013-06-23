@@ -3,25 +3,28 @@ Vues Media
 
 .. php:class:: MediaView
 
-Les vues Media vous permettent d'envoyer des fichiers binaires à l'utilisateur. 
-Par exemple, vous souhaiteriez avoir un répertoire de fichiers en dehors de 
+.. deprecated:: 2.3
+   Utilisez :ref:`cake-response-file` à la place.
+
+Les vues Media vous permettent d'envoyer des fichiers binaires à l'utilisateur.
+Par exemple, vous souhaiteriez avoir un répertoire de fichiers en dehors de
 webroot pour empêcher les utilisateurs de faire un lien direct sur eux. Vous
-pouvez utiliser la vue Media pour tirer le fichier à partir d'un fichier spécial
-dans /app/, vous permettant d'améliorer l'authentification avant la livraison 
-du fichier à l'utilisateur.
+pouvez utiliser la vue Media pour tirer le fichier à partir d'un fichier
+spécial dans /app/, vous permettant d'améliorer l'authentification avant la
+livraison du fichier à l'utilisateur.
 
 Pour utiliser la vue Media, vous avez besoin de dire à votre controller
-d'utiliser la classe MediaView au lieu de la classe View par défaut. Après 
-ça, passez juste les paramètres en plus pour spécifier où votre fichier 
+d'utiliser la classe MediaView au lieu de la classe View par défaut. Après
+ça, passez juste les paramètres en plus pour spécifier où votre fichier
 se trouve::
 
     class ExempleController extends AppController {
-        public function telecharger () {
+        public function download() {
             $this->viewClass = 'Media';
-            // Telecharge app/outside_webroot_dir/exemple.zip
+            // Download app/outside_webroot_dir/example.zip
             $params = array(
-                'id'        => 'exemple.zip',
-                'name'      => 'exemple',
+                'id'        => 'example.zip',
+                'name'      => 'example',
                 'download'  => true,
                 'extension' => 'zip',
                 'path'      => APP . 'outside_webroot_dir' . DS
@@ -30,16 +33,16 @@ se trouve::
         }
     }
 
-Ici vous trouvez un exemple de rendu d'un fichier qui a un type mime qui n'est 
+Ici vous trouvez un exemple de rendu d'un fichier qui a un type mime qui n'est
 pas inclu dans le tableau ``$mimeType`` de MediaView. Nous utilisons aussi un
 chemin relatif qui va être par défaut dans votre dossier ``app/webroot``::
 
-    public function telecharger () {
+    public function download() {
         $this->viewClass = 'Media';
-        // Rend app/webroot/files/exemple.docx
+        // Render app/webroot/files/example.docx
         $params = array(
-            'id'        => 'exemple.docx',
-            'name'      => 'exemple',
+            'id'        => 'example.docx',
+            'name'      => 'example',
             'extension' => 'docx',
             'mimeType'  => array(
                 'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
@@ -49,11 +52,11 @@ chemin relatif qui va être par défaut dans votre dossier ``app/webroot``::
         $this->set($params);
     }
 
-Parmètres configurables
------------------------
+Paramètres configurables
+------------------------
 
 ``id``
-    L'ID est le nom du fichier tel qu'il réside sur le serveur de fichiers, y 
+    L'ID est le nom du fichier tel qu'il réside sur le serveur de fichiers, y
     compris l'extension de fichier.
 
 ``name``
@@ -65,23 +68,23 @@ Parmètres configurables
     forcer le téléchargement.
 
 ``extension``
-    L'extension du fichier. Ceci est en correspondance avec une liste 
+    L'extension du fichier. Ceci est en correspondance avec une liste
     interne de types mime acceptables. Si le type MIME spécifié n'est
     pas dans la liste (ou envoyé dans le tableau de paramètres mimeType),
     le fichier ne sera pas téléchargé.
 
 ``path``
-    Le nom du dossier, y compris le séparateur de répertoire finale. 
+    Le nom du dossier, y compris le séparateur de répertoire finale.
     Le chemin doit être absolu, mais peut être par rapport au dossier
     ``app/webroot``.
 
 ``mimeType``
-    Un tableau avec des types MIME supplémentaires à fusionner avec 
+    Un tableau avec des types MIME supplémentaires à fusionner avec
     une liste interne dans MediaView de types mime acceptables.
 
 ``cache``
-    Une valeur booléenne ou entière - Si la valeur est vraie, elle permettra 
-    aux navigateurs de mettre en cache le fichier (par défaut à false si non 
+    Une valeur booléenne ou entière - Si la valeur est vraie, elle permettra
+    aux navigateurs de mettre en cache le fichier (par défaut à false si non
     définie), sinon réglez le sur le nombre de secondes dans le futur pour
     lorsque le cache expirera.
 

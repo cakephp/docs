@@ -220,7 +220,7 @@ Une simple fonction de connexion pourrait ressembler à cela ::
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirect());
             } else {
-                $this->Session->setFlash(__('Le nom d'utilisateur ou le mot de passe 
+                $this->Session->setFlash(__('Le nom d\'utilisateur ou le mot de passe 
                 est incorrect'), 'default', array(), 'auth');
             }
         }
@@ -252,7 +252,7 @@ aura un aspect un petit peu différent qu'avec l'utilisation de
         if ($this->Auth->login()) {
             return $this->redirect($this->Auth->redirect());
         } else {
-            $this->Session->setFlash(__('Le nom d'utilisateur ou le mot de passe 
+            $this->Session->setFlash(__('Le nom d\'utilisateur ou le mot de passe 
             est incorrect'), 'default', array(), 'auth');
         }
     }

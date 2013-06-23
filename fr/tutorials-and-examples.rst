@@ -4,7 +4,7 @@ Tutoriels et exemples
 Dans cette section, vous pourrez découvrir des applications CakePHP
 typiques afin de voir comment toutes les pièces s'assemblent.
 
-Sinon, vous pouvez vous référer au dépôt de plugins non-officiels de CakePHP 
+Sinon, vous pouvez vous référer au dépôt de plugins non-officiels de CakePHP
 `CakePackages <http://plugins.cakephp.org/>`_ ainsi que la
 `Boulangerie <http://bakery.cakephp.org/>`_ (Bakery) pour des applications
 et components existants.
