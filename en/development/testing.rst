@@ -328,6 +328,8 @@ Test cases have a number of lifecycle callbacks you can use when doing testing:
 * ``tearDownAfterClass`` is called once after test methods in a case are started.
   This method must be *static*.
 
+.. _test-fixtures:
+
 Fixtures
 ========
 
