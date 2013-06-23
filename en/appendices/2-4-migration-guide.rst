@@ -88,6 +88,11 @@ TextHelper
 ----------
 - :php:meth::`TextHelper::autoParagraph()` has been added. It allows to automatically convert text into HTML paragraphs.
 
+PaginatorHelper
+----------
+- :php:meth::`PaginatorHelper::param()` has been added.
+
+
 Network
 =======
 
@@ -138,6 +143,10 @@ L10n
 
 Logging
 =======
+
+- Log engines do not need the suffix ``Log`` anymore in their setup configuration. So for the
+  FileLog engine it suffices to define ``'engine' => 'File'`` now. This unifies the way engines
+  are named in configuration (see Cache engines for example).
 
 FileLog
 -------
