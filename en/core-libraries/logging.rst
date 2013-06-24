@@ -82,7 +82,7 @@ As of 2.4 ``FileLog`` engine takes two new configurations::
   - ``rotate`` Log files are rotated specified times before being removed.
     If value is 0, old versions are removed rather then rotated. Defaults to 10.
 
-.. note::
+.. warning::
 
     Prior to 2.4 you had to include the suffix ``Log``` in your configuration
     (``LoggingPack.DatabaseLog``). This is now not necessary anymore.
