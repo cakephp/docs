@@ -20,6 +20,11 @@ formatting numbers.
     :start-after: start-cakenumber
     :end-before: end-cakenumber
 
+.. warning::
+
+    Since 2.4 the symbols are now UTF-8. Please see the migration guide for details if you run a
+    non-UTF-8 app.
+
 .. meta::
     :title lang=en: NumberHelper
     :description lang=en: The Number Helper contains convenience methods that enable display numbers in common formats in your views.
