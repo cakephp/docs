@@ -24,24 +24,24 @@ Creating and configuring log streams
 
 Log stream handlers can be part of your application, or part of
 plugins. If for example you had a database logger called
-``DatabaseLogger``. As part of your application it would be placed
-in ``app/Lib/Log/Engine/DatabaseLogger.php``. As part of a plugin it
+``DatabaseLog``. As part of your application it would be placed
+in ``app/Lib/Log/Engine/DatabaseLog.php``. As part of a plugin it
 would be placed in
-``app/Plugin/LoggingPack/Lib/Log/Engine/DatabaseLogger.php``. When
+``app/Plugin/LoggingPack/Lib/Log/Engine/DatabaseLog.php``. When
 configured ``CakeLog`` will attempt to load Configuring log streams
 is done by calling ``CakeLog::config()``. Configuring our
-DataBaseLogger would look like::
-    
+DatabaseLog would look like::
+
     // for app/Lib
     CakeLog::config('otherFile', array(
-        'engine' => 'DatabaseLogger',
+        'engine' => 'Database',
         'model' => 'LogEntry',
         // ...
     ));
-    
+
     // for plugin called LoggingPack
     CakeLog::config('otherFile', array(
-        'engine' => 'LoggingPack.DatabaseLogger',
+        'engine' => 'LoggingPack.Database',
         'model' => 'LogEntry',
         // ...
     ));
@@ -52,7 +52,7 @@ properties are passed to the log stream's constructor as an array.::
 
     App::uses('CakeLogInterface', 'Log');
 
-    class DatabaseLogger implements CakeLogInterface {
+    class DatabaseLog implements CakeLogInterface {
         public function __construct($options = array()) {
             // ...
         }
@@ -82,20 +82,28 @@ As of 2.4 ``FileLog`` engine takes two new configurations::
   - ``rotate`` Log files are rotated specified times before being removed.
     If value is 0, old versions are removed rather then rotated. Defaults to 10.
 
+.. warning::
+
+    Prior to 2.4 you had to include the suffix ``Log``` in your configuration
+    (``LoggingPack.DatabaseLog``). This is now not necessary anymore.
+    If you have been using a Log engine like ```DatabaseLogger`` that does not follow
+    the convention to use a suffix ``Log`` for your class name you have to adjust your
+    class name to ``DatabaseLog``. You should also avoid class names like ``SomeLogLog``
+    which include the suffix twice at the end.
+
 .. note::
 
     Always configure loggers in ``app/Config/bootstrap.php``
     Trying to use Application or plugin loggers in core.php
     will cause issues, as application paths are not yet configured.
 
-
 Error and Exception logging
 ===========================
 
-Errors and Exceptions can also be logged.  By configuring the 
-co-responding values in your core.php file.  Errors will be 
-displayed when debug > 0 and logged when debug == 0. Set ``Exception.log`` 
-to true to log uncaught exceptions. See :doc:`/development/configuration` 
+Errors and Exceptions can also be logged.  By configuring the
+co-responding values in your core.php file.  Errors will be
+displayed when debug > 0 and logged when debug == 0. Set ``Exception.log``
+to true to log uncaught exceptions. See :doc:`/development/configuration`
 for more information.
 
 Interacting with log streams
@@ -126,7 +134,7 @@ which writes to the error log. The default log location is
 
     // Executing this inside a CakePHP class
     $this->log("Something didn't work!");
-    
+
     // Results in this being appended to app/tmp/logs/error.log
     // 2007-11-02 10:22:02 Error: Something didn't work!
 
@@ -136,7 +144,7 @@ you wish to write logs to::
 
     // called statically
     CakeLog::write('activity', 'A special message for activity logging');
-    
+
     // Results in this being appended to app/tmp/logs/activity.log (rather than error.log)
     // 2007-11-02 10:22:02 Activity: A special message for activity logging
 
@@ -148,7 +156,7 @@ You can configure additional/alternate FileLog locations using
 custom paths to be used::
 
     CakeLog::config('custom_path', array(
-        'engine' => 'FileLog',
+        'engine' => 'File',
         'path' => '/path/to/custom/place/'
     ));
 
@@ -173,7 +181,7 @@ be done in the `bootstrap.php` file.
 ::
 
     CakeLog::config('default', array(
-        'engine' => 'SyslogLog'
+        'engine' => 'Syslog'
     ));
 
 The configuration array accepted for the Syslog logging engine understands the
@@ -269,7 +277,7 @@ CakeLog API
 
     :param string $name: Name for the logger being connected, used
         to drop a logger later on.
-    :param array $config: Array of configuration information and 
+    :param array $config: Array of configuration information and
         constructor arguments for the logger.
 
     Connect a new logger to CakeLog.  Each connected logger
