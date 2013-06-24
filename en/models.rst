@@ -129,6 +129,7 @@ More on models
     models/additional-methods-and-properties
     models/virtual-fields
     models/transactions
+    models/schema-system
 
 
 .. meta::
