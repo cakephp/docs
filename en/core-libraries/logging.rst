@@ -86,6 +86,10 @@ As of 2.4 ``FileLog`` engine takes two new configurations::
 
     Prior to 2.4 you had to include the suffix ``Log``` in your configuration
     (``LoggingPack.DatabaseLog``). This is now not necessary anymore.
+    If you have been using a Log engine like ```DatabaseLogger`` that does not follow
+    the convention to use a suffix ``Log`` for your class name you have to adjust your
+    class name to ``DatabaseLog``. You should also avoid class names like ``SomeLogLog``
+    which include the suffix twice at the end.
 
 .. note::
 
@@ -130,7 +134,7 @@ which writes to the error log. The default log location is
 
     // Executing this inside a CakePHP class
     $this->log("Something didn't work!");
-    
+
     // Results in this being appended to app/tmp/logs/error.log
     // 2007-11-02 10:22:02 Error: Something didn't work!
 
@@ -140,7 +144,7 @@ you wish to write logs to::
 
     // called statically
     CakeLog::write('activity', 'A special message for activity logging');
-    
+
     // Results in this being appended to app/tmp/logs/activity.log (rather than error.log)
     // 2007-11-02 10:22:02 Activity: A special message for activity logging
 
