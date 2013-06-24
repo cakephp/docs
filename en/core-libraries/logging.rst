@@ -24,24 +24,24 @@ Creating and configuring log streams
 
 Log stream handlers can be part of your application, or part of
 plugins. If for example you had a database logger called
-``DatabaseLogger``. As part of your application it would be placed
-in ``app/Lib/Log/Engine/DatabaseLogger.php``. As part of a plugin it
+``DatabaseLog``. As part of your application it would be placed
+in ``app/Lib/Log/Engine/DatabaseLog.php``. As part of a plugin it
 would be placed in
-``app/Plugin/LoggingPack/Lib/Log/Engine/DatabaseLogger.php``. When
+``app/Plugin/LoggingPack/Lib/Log/Engine/DatabaseLog.php``. When
 configured ``CakeLog`` will attempt to load Configuring log streams
 is done by calling ``CakeLog::config()``. Configuring our
-DataBaseLogger would look like::
-    
+DatabaseLog would look like::
+
     // for app/Lib
     CakeLog::config('otherFile', array(
-        'engine' => 'DatabaseLogger',
+        'engine' => 'Database',
         'model' => 'LogEntry',
         // ...
     ));
-    
+
     // for plugin called LoggingPack
     CakeLog::config('otherFile', array(
-        'engine' => 'LoggingPack.DatabaseLogger',
+        'engine' => 'LoggingPack.Database',
         'model' => 'LogEntry',
         // ...
     ));
@@ -52,7 +52,7 @@ properties are passed to the log stream's constructor as an array.::
 
     App::uses('CakeLogInterface', 'Log');
 
-    class DatabaseLogger implements CakeLogInterface {
+    class DatabaseLog implements CakeLogInterface {
         public function __construct($options = array()) {
             // ...
         }
@@ -84,18 +84,22 @@ As of 2.4 ``FileLog`` engine takes two new configurations::
 
 .. note::
 
+    Prior to 2.4 you had to include the suffix ``Log``` in your configuration
+    (``LoggingPack.DatabaseLog``). This is now not necessary anymore.
+
+.. note::
+
     Always configure loggers in ``app/Config/bootstrap.php``
     Trying to use Application or plugin loggers in core.php
     will cause issues, as application paths are not yet configured.
 
-
 Error and Exception logging
 ===========================
 
-Errors and Exceptions can also be logged.  By configuring the 
-co-responding values in your core.php file.  Errors will be 
-displayed when debug > 0 and logged when debug == 0. Set ``Exception.log`` 
-to true to log uncaught exceptions. See :doc:`/development/configuration` 
+Errors and Exceptions can also be logged.  By configuring the
+co-responding values in your core.php file.  Errors will be
+displayed when debug > 0 and logged when debug == 0. Set ``Exception.log``
+to true to log uncaught exceptions. See :doc:`/development/configuration`
 for more information.
 
 Interacting with log streams
@@ -148,7 +152,7 @@ You can configure additional/alternate FileLog locations using
 custom paths to be used::
 
     CakeLog::config('custom_path', array(
-        'engine' => 'FileLog',
+        'engine' => 'File',
         'path' => '/path/to/custom/place/'
     ));
 
@@ -173,7 +177,7 @@ be done in the `bootstrap.php` file.
 ::
 
     CakeLog::config('default', array(
-        'engine' => 'SyslogLog'
+        'engine' => 'Syslog'
     ));
 
 The configuration array accepted for the Syslog logging engine understands the
@@ -269,7 +273,7 @@ CakeLog API
 
     :param string $name: Name for the logger being connected, used
         to drop a logger later on.
-    :param array $config: Array of configuration information and 
+    :param array $config: Array of configuration information and
         constructor arguments for the logger.
 
     Connect a new logger to CakeLog.  Each connected logger
