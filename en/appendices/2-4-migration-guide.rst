@@ -147,6 +147,9 @@ Logging
 - Log engines do not need the suffix ``Log`` anymore in their setup configuration. So for the
   FileLog engine it suffices to define ``'engine' => 'File'`` now. This unifies the way engines
   are named in configuration (see Cache engines for example).
+  Note: If you have a Log engine like ```DatabaseLogger`` that does not follow the convention to
+  use a suffix ``Log`` for your class name you have to adjust your class name to ``DatabaseLog``.
+  You should also avoid class names like ``SomeLogLog`` which include the suffix twice at the end.
 
 FileLog
 -------
