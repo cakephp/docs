@@ -78,6 +78,11 @@ The three-character locale codes conform to the
 standard, although if you create regional locales (en\_US, en\_GB,
 etc.) cake will use them if appropriate.
 
+.. warning::
+
+    In 2.3 and 2.4 some language codes have been corrected to meet the ISO standard.
+    Please see the corresponding migration guides for details.
+
 Remember that po files are useful for short messages, if you find
 you want to translate long paragraphs, or even whole pages - you
 should consider implementing a different solution. e.g.::
