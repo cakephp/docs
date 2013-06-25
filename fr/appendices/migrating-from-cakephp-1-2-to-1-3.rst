@@ -99,25 +99,25 @@ d'espaces de noms):
 -  session.php -> cake\_session.php
 
    
-   -  App::import('Core', 'Session') ⇒ App::import('Core',
+   -  App::import('Core', 'Session') -> App::import('Core',
       'CakeSession')
 
 -  socket.php -> cake\_socket.php
 
    
-   -  App::import('Core', 'Socket') ⇒ App::import('Core',
+   -  App::import('Core', 'Socket') -> App::import('Core',
       'CakeSocket')
 
 -  schema.php -> cake\_schema.php
 
    
-   -  App::import('Model', 'Schema') ⇒ App::import('Model',
+   -  App::import('Model', 'Schema') -> App::import('Model',
       'CakeSchema')
 
 -  behavior.php -> model\_behavior.php
 
    
-   -  App::import('Core', 'Behavior') ⇒ App::import('Core',
+   -  App::import('Core', 'Behavior') -> App::import('Core',
       'ModelBehavior')
 
 
@@ -300,9 +300,7 @@ améliorer la performance et réduire le fouillis du code. L'effet secondaire
 de cela est que deux fonctions rarement utilisées ont été supprimées, car ils 
 étaient problématique et entraînait des bugs même avec le code de base 
 existant. Les premiers segments de chemin utilisant les expressions régulières 
-ont été retirés. Vous ne pouvez plus créer des routes comme
-
-::
+ont été retirés. Vous ne pouvez plus créer des routes comme::
 
     Router::connect('/([0-9]+)-p-(.*)/', array('controller' => 'products', 'action' => 'show'));
 
@@ -310,9 +308,7 @@ Ces routes compliquent la compilation des routes et rendent impossibles les
 routes inversées. Si vous avez besoin de routes comme cela, il est recommandé 
 que vous utilisiez les paramètres de route avec des patrons de capture. Le 
 support de la next mid-route greedy star a été retirée. Il a été précedemment 
-possible d'utiliser une greedy star dans le milieu de la route.
-
-::
+possible d'utiliser une greedy star dans le milieu de la route::
 
     Router::connect(
         '/pages/*/:event',
@@ -329,9 +325,7 @@ Aussi, les personnes utilisant la clé 'id' dans les URLs en forme de tableau
 remarqueront que Router::url() traite maintenant ceci en paramètre nommé. Si 
 vous utilisiez précedemment cette approche pour passer le paramètre ID aux 
 actions, vous aurez besoin de réécrire tous vos appels $html->link() et 
-$this->redirect() pour refléter ce changement.
-
-::
+$this->redirect() pour refléter ce changement::
 
     // format ancien:
     $url = array('controller' => 'posts', 'action' => 'view', 'id' => $id);
@@ -485,9 +479,7 @@ log dump at the bottom of the page?. In previous versions the HTML
 SQL log generation was buried inside DboSource. For 1.3 there is a
 new core element called ``sql_dump``. ``DboSource`` no longer
 automatically outputs SQL logs. If you want to output SQL logs in
-1.3, do the following:
-
-::
+1.3, do the following::
 
     <?php echo $this->element('sql_dump'); ?>
 
