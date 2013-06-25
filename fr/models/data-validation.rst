@@ -244,6 +244,12 @@ personnalisé pour la règle::
         )
     );
 
+.. note::
+
+    Quelque soit la règle, l'échec de validation sans un message défini par
+    défaut sera "This field cannot be left blank." (Ce champ ne peut être
+    laissé vide)
+
 Plusieurs règles par champ
 ==========================
 
