@@ -693,7 +693,7 @@ quelles options sont disponibles.
     Si un tableau est utilisé, les clés peuvent être des chaînes exemple: 
     array('no' => 0,'yes' => 1);
 
-    $list par défaut à 0 = no 1 = yes si param n'est pas passé::
+    $list par défaut à 0 = no 1 = yes si param n'est pas passé::
 
         $res = Set::enum(1, 'one, two');
         // $res est 'two'
