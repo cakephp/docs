@@ -83,10 +83,13 @@ JsonView
 HtmlHelper
 ----------
 - The API for :php:meth::`HtmlHelper::css()` has been changed.
+- New option ``escapeTitle`` added to :php:meth:`HtmlHelper::link()` to control
+  escaping of only link title and not attributes.
 
 TextHelper
 ----------
-- :php:meth::`TextHelper::autoParagraph()` has been added. It allows to automatically convert text into HTML paragraphs.
+- :php:meth::`TextHelper::autoParagraph()` has been added. It allows to
+  automatically convert text into HTML paragraphs.
 
 PaginatorHelper
 ----------
