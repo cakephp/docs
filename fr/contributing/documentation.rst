@@ -2,7 +2,7 @@ Documentation
 #############
 
 Contribuer à la documentation est simple. Les fichiers sont hébergés sur
-http://github.com/cakephp/docs. N'hésitez pas à forker le dépôt, ajoutez vos
+https://github.com/cakephp/docs. N'hésitez pas à forker le dépôt, ajoutez vos
 changements/améliorations/traductions et retournez les avec un pull request.
 Vous pouvez même modifier les documents en ligne avec github, sans télécharger
 les fichiers.

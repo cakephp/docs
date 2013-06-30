@@ -491,10 +491,14 @@ dt tt {
 }
 
 /* Parameter lists */
-.field-list th,
 .field-list {
 	border: 0;
 	padding-top: 0;
+}
+.field-list .field-name,
+.field-list .field-body li {
+	line-height: 1.8rem;
+	font-size: 14px;
 }
 .field-list .field-name {
 	font-size: 15px;
@@ -512,9 +516,6 @@ dt tt {
 	font-family: "Bitstream Vera Sans", "Consolas", "Monaco", monospace;
 	color: #003D4C;
 	font-weight: normal;
-}
-.field-list .field-body {
-	font-size: 14px;
 }
 
 /* -- glossary -- */

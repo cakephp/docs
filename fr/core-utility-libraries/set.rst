@@ -122,7 +122,7 @@ quelles options sont disponibles.
     Récupère une valeur d'un tableau ou d'un objet qui est contenu dans un
     chemin donné en utilisant un tableau en une syntaxe de tableau, par ex:
 
-    -  "{n}.Person.{[a-z]+}" - O√π "{n}" représente une clé numérique,
+    -  "{n}.Person.{[a-z]+}" - "{n}" représente une clé numérique,
        "Person" représente une chaîne littérale.
     -  "{[a-z]+}" (par ex: toute chaîne littérale fermée par des accolades en
        plus de {n} et {s}) est interpreté comme une expressoin régulière.
@@ -693,7 +693,7 @@ quelles options sont disponibles.
     Si un tableau est utilisé, les clés peuvent être des chaînes exemple: 
     array('no' => 0,'yes' => 1);
 
-    $list par défaut à 0 = no 1 = yes si param n'est pas passé::
+    $list par défaut à 0 = no 1 = yes si param n'est pas passé::
 
         $res = Set::enum(1, 'one, two');
         // $res est 'two'

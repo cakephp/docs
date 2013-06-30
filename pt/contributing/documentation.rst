@@ -2,7 +2,7 @@ Documentação
 ############
 
 Contribuir na documentação é simples. Os arquivos estão
-no http://github.com/cakephp/docs. Sinta-se livre para fazer 
+no https://github.com/cakephp/docs. Sinta-se livre para fazer 
 um fork e adicionar suas alterações/melhorias/traduções e enviar 
 através de um pull request.
 Você também pode editar os arquivos online através do github, 
