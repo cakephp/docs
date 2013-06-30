@@ -14,7 +14,7 @@ httpd.conf (Assurez vous que vous avez éditer le httpd.conf du système
 plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
 
 
-#. Assurez vous qu'un .htaccess est permis et que AllowOverride est défini à
+#. Assurez-vous qu'un .htaccess est permis et que AllowOverride est défini à
    All pour le DocumentRoot correct. Vous devriez voir quelque chose comme::
 
        # Chaque répertoire auquel Apache a accès peut être configuré avec
@@ -226,15 +226,6 @@ faire, suivez ces étapes:
             </rewrite>
         </system.webServer>
     </configuration>
-
-
-Il est également possible d'utiliser la fonctionnalité Import dans l'URL
-IIS de Réécriture du module pour importer des règles directement à
-partir des fichiers .htaccess de CakePHP à la racine, dans /app/, et dans
-/app/webroot/ - même si quelques modifications dans IIS peuvent être
-nécessaires pour faire fonctionner ces applications. Lors de l'importation
-des règles de cette façon, IIS crée automatiquement votre fichier web.config
-pour vous (dans le dossier actuel selectionné dans IIS).
 
 Une fois que le fichier web.config est créé avec les bonnes règles de
 réécriture des liens de IIS, les liens CakePHP, les CSS, les JS, et
