@@ -224,13 +224,6 @@ these steps:
         </system.webServer>
     </configuration>
 
-It is also possible to use the Import functionality in IIS's URL
-Rewrite module to import rules directly from CakePHP's .htaccess
-files in root, /app/, and /app/webroot/ - although some editing
-within IIS may be necessary to get these to work. When Importing
-the rules this way, IIS will automatically create your web.config
-file for you (in the currently selected folder within IIS).
-
 Once the web.config file is created with the correct IIS-friendly
 rewrite rules, CakePHP's links, css, js, and rerouting should work
 correctly.
