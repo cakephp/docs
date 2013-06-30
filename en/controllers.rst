@@ -589,7 +589,7 @@ Other Useful Methods
     above it's best to make use of element caching to prevent needless
     processing. By modifying the call to element to look like this::
 
-        echo $this->element('latest_comments', array('cache' => '+1 hour'));
+        echo $this->element('latest_comments', array(), array('cache' => '+1 hour'));
 
     The ``requestAction`` call will not be made while the cached
     element view file exists and is valid.
