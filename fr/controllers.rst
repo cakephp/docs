@@ -618,7 +618,7 @@ Autres Méthodes utiles
     des traitements inutiles. En modifiant l'appel à l'élément pour qu'il
     ressemble à ceci::
 
-        echo $this->element('latest_comments', array('cache' => '+1 hour'));
+        echo $this->element('latest_comments', array(), array('cache' => true));
 
     L'appel à ``requestAction`` ne sera pas effectué tant que le fichier de vue
     de l'élément en cache existe et est valide.
