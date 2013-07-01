@@ -120,6 +120,9 @@ CakeEmail
 - Logged email messages now have the scope of ``email`` by default. If you are
   not seeing email contents in your logs, be sure to add the ``email`` scope to
   your logging configuration.
+- :php:meth:`CakeEmail::emailPattern()` was added. This method can be used to
+  relax email validation rules. This is useful when dealing with certain
+  Japanese hosts that allow non-compliant addresses to be used.
 
 HttpSocket
 ----------
