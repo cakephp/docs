@@ -82,18 +82,23 @@ JsonView
 
 HtmlHelper
 ----------
-- The API for :php:meth::`HtmlHelper::css()` has been changed.
+
+- The API for :php:meth:`HtmlHelper::css()` has been been simplified. You can
+  now provide an array of options as the second argument. When you do, the
+  ``rel`` attribute defaults to 'stylesheet'.
 - New option ``escapeTitle`` added to :php:meth:`HtmlHelper::link()` to control
   escaping of only link title and not attributes.
 
 TextHelper
 ----------
-- :php:meth::`TextHelper::autoParagraph()` has been added. It allows to
+
+- :php:meth:`TextHelper::autoParagraph()` has been added. It allows to
   automatically convert text into HTML paragraphs.
 
 PaginatorHelper
 ----------
-- :php:meth::`PaginatorHelper::param()` has been added.
+
+- :php:meth:`PaginatorHelper::param()` has been added.
 
 
 Network
