@@ -249,8 +249,13 @@ last
 The ‘last‘ key can be set to a boolean value equivalent to either true 
 or false.
 
-If set to true and the current rule does not validate, all following rules 
-for the current field will not be checked.
+If set to true and the current rule does not validate, the current 
+validation error message is then returned and all following rules for 
+the current field will not be checked.
+
+Practically, one should always use 'last' => true here since there is 
+only one rule to be validated. 
+For more relevant usages, see :doc:`#multiple-rules-per-field`
 
 The default value for ‘last‘ is false. 
 
