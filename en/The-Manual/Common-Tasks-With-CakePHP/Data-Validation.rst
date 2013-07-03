@@ -246,16 +246,13 @@ enforced during both creation and update.
 last
 ----
 
-The 'last' key can be set to a boolean value equivalent to either true 
+The ‘last‘ key can be set to a boolean value equivalent to either true 
 or false.
 
-If set to true and the current rule does not validate, all other rules 
-for the current field will not be checked. 
+If set to true and the current rule does not validate, all following rules 
+for the current field will not be checked.
 
-This does not affect the process of checking other validation rules for 
-other fields defined in the model.
-
-The default value for 'last' is false. 
+The default value for ‘last‘ is false. 
 
 message
 -------
