@@ -202,7 +202,7 @@ using cookies.
   Prior to 2.4 you still need the login action as you are redirected to login
   when an unauthenticated user tries to access a protected page even when using
   only basic or digest auth. Also setting ``AuthComponent::$sessionKey`` to false
-  will cause an error to 2.4.
+  will cause an error prior to 2.4.
 
 Creating Custom Authentication objects
 --------------------------------------
