@@ -951,6 +951,18 @@ and make sure our web service is returning the proper response::
         }
     }
 
+Testing Views
+=============
+
+Generally most applications will not directly test their HTML code. Doing so is
+often results in fragile, difficult to maintain test suites that are prone to
+breaking. When writing functional tests using :php:class:`ControllerTestCase`
+you can inspect the rendered view content by setting the ``return`` option to
+'view'. While it is possible to test view content using ControllerTestCase,
+a more robust and maintable integration/view testing can be accomplished using
+tools like `Selenium webdriver <http://seleniumhq.org>`_.
+
+
 Testing Components
 ==================
 
