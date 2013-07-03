@@ -1004,6 +1004,20 @@ et nous assurons que notre service web retourne la réponse appropriée::
         }
     }
 
+Tester les Views
+================
+
+Généralement, la plupart des applications ne va pas directement tester leur
+code HTML. Faire ça donne souvent des résultats fragiles, il est difficile de
+maintenir les suites de test qui sont sujet à se casser. En écrivant des
+tests fonctionnels en utilisant :php:class:`ControllerTestCase`, vous
+pouvez inspecter le contenu de la vue rendue en configurant l'option
+``return`` à 'view'. Alors qu'il est possible de tester le contenu de la vue
+en utilisant ControllerTestCase, un test d'intégration/vue plus robuste
+et maintenable peut être effectué en utilisant des outils comme
+`Selenium webdriver <http://seleniumhq.org>`_.
+
+
 Tester les Components
 =====================
 

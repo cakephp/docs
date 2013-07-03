@@ -98,9 +98,10 @@ Uen fois qu c'est fait, vous pouvez faire des appels statiquement de Sanitize.
         echo Sanitize::html($badString, array('remove' => true));
         // sort: HEY...
 
-    L'échappement est souvent une meilleur stratégie que le stripping, puisque
-    il a moins de chambres pour les erreurs, et n'est pas vulnérable pour des
-    nouveaux types d'attaques que la fonction stripping ne connait pas.
+    Echapper le contenu HTML en utilisant :php:func:`h` est souvent une
+    meilleur stratégie par rapport à la sanitization, puisqu'elle laisse
+    moins de place aux erreurs, et n'est pas vulnérable aux nouveaux types
+    d'attaques, que la fonction d'échappement ne connait pas.
 
 .. php:staticmethod:: Sanitize::paranoid($string, $allowedChars)
 
