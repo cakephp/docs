@@ -93,9 +93,9 @@ Once you've done that, you can make calls to Sanitize statically.
         echo Sanitize::html($badString, array('remove' => true));
         // output: HEY...
 
-    Escaping is often a better strategy than stripping, as it has less room
-    for error, and isn't vulnerable to new types of attacks, the stripping 
-    function does not know about.
+    Escaping HTML content using :php:func:`h` is often a better strategy than
+    sanitization, as it has less room for error, and isn't vulnerable to new
+    types of attacks, the stripping function does not know about.
 
 .. php:staticmethod:: Sanitize::paranoid($string, $allowedChars)
 
