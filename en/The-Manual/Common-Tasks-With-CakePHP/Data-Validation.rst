@@ -151,8 +151,8 @@ validation will not function correctly. This is because 'required' is
 not actually a rule.
 
 As you can see here, each field (only one field shown above) is
-associated with an array that contains five keys: ‘rule’, ‘required’,
-‘allowEmpty’, ‘on’ and ‘message’. Let’s have a closer look at these
+associated with an array that contains six keys: ‘rule’, ‘required’,
+‘allowEmpty’, ‘on’, 'last' and ‘message’. Let’s have a closer look at these
 keys.
 
 rule
@@ -242,6 +242,18 @@ during the creation of a new record. Likewise, if it is defined as ‘on’
 
 The default value for ‘on’ is null. When ‘on’ is null, the rule will be
 enforced during both creation and update.
+
+last
+----
+
+The 'last' key can be set to a boolean value equivalent to either true 
+or false.
+
+If set to true, the field in which it is set will be the last field to 
+be validated. Any other operation after validation will continue as 
+normal unless the current rule contained a validation error.
+
+The default value for 'last' is false. 
 
 message
 -------
