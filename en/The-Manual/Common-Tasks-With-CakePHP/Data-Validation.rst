@@ -249,9 +249,11 @@ last
 The 'last' key can be set to a boolean value equivalent to either true 
 or false.
 
-If set to true, the field in which it is set will be the last field to 
-be validated. Any other operation after validation will continue as 
-normal unless the current rule contained a validation error.
+If set to true and the current rule does not validate, all other rules 
+for the current field will not be checked. 
+
+This does not affect the process of checking other validation rules for 
+other fields defined in the model.
 
 The default value for 'last' is false. 
 
