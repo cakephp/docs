@@ -125,6 +125,26 @@ httpd.conf rather than a user- or site-specific httpd.conf).
    The details of those changes will depend on your setup, and can
    include additional things that are not Cake related. Please refer
    to Apache's online documentation for more information.
+   
+#. (Optional) To improve production setup, you should prevent invalid assets
+   from being parsed by CakePHP. Modify your webroot .htaccess to something like::
+
+       <IfModule mod_rewrite.c>
+           RewriteEngine On
+           RewriteBase /path/to/cake/app
+           RewriteCond %{REQUEST_FILENAME} !-d
+           RewriteCond %{REQUEST_FILENAME} !-f
+           RewriteCond %{REQUEST_URI} !^/(app/webroot/)?(img|css|js)/(.*)$
+           RewriteRule ^(.*)$ index.php [QSA,L]
+       </IfModule>
+       
+   The above will simply prevent incorrect assets from being sent to index.php
+   and instead display your webserver's 404 page.
+   
+   Additionally you can create a matching HTML 404 page, or use the default 
+   built-in CakePHP 404 by adding an ``ErrorDocument`` directive::
+       
+       ErrorDocument 404 /404-not-found
 
 Pretty URLs on nginx
 ====================
