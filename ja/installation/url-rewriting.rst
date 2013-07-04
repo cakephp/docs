@@ -200,10 +200,6 @@ IIS7はネイティブで.htaccessファイルをサポートしていません�
         </system.webServer>
     </configuration>
 
-IISのURL Rewrite moduleでImport機能を使ってroot、/app/、/app/webroot/にあるCakePHPの.htaccessファイルから直接ルールをインポートすることも可能です
-- 動作させるには、IISの内部でいくらかの編集が必要になるかもしれませんが。
-この方法でルールをインポートする際、IISは自動的にweb.configファイルを生成するでしょう。
-
 一旦IISフレンドリーな書き換えルールを含むweb.configが作成されれば、CakePHPのリンク、CSS、JS、再ルーティング(*rerouting*)は正しく動作するでしょう。
 
 URLリライティングを使わない/使えない場合
