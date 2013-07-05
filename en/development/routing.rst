@@ -994,7 +994,7 @@ Router API
       when using requestAction.
     * ``?`` - Takes an array of query string parameters
     * ``#`` - Allows you to set URL hash fragments.
-    * ``full_base`` - If true the :php:const:`FULL_BASE_URL` constant will
+    * ``full_base`` - If true the value of :php:meth:`Router::baseUrl()` will
       be prepended to generated URLs.
 
 .. php:staticmethod:: mapResources($controller, $options = array())
@@ -1019,6 +1019,17 @@ Router API
     .. versionadded:: 2.1
 
     Set the default route to be used when connecting routes in the future.
+
+.. php:staticmethod:: baseUrl($url = null)
+
+    .. versionadded:: 2.4
+
+    Get or set the baseURL used for generating URL's. When setting this value
+    you should be sure to include the fully qualified domain name including
+    protocol.
+
+    Setting values with this method will also update ``App.fullBaseUrl`` in
+    :php:class:`Configure`.
 
 .. php:class:: CakeRoute
 

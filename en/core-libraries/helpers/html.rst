@@ -15,10 +15,10 @@ are a few examples of how to use the $htmlAttributes parameter:
 
 .. code-block:: html
 
-    Desired attributes: <tag class="someClass" />      
+    Desired attributes: <tag class="someClass" />
     Array parameter: array('class' => 'someClass')
-     
-    Desired attributes: <tag name="foo" value="bar" />  
+
+    Desired attributes: <tag name="foo" value="bar" />
     Array parameter:  array('name' => 'foo', 'value' => 'bar')
 
 
@@ -40,14 +40,14 @@ methods of the HtmlHelper and how to use them.
 
 .. php:method:: charset($charset=null)
 
-    :param string $charset: Desired character set.  If null, the value of 
+    :param string $charset: Desired character set.  If null, the value of
        ``App.encoding`` will be used.
 
     Used to create a meta tag specifying the document's character.
     Defaults to UTF-8
 
     Example use::
- 
+
         echo $this->Html->charset();
 
     Will output:
@@ -66,12 +66,12 @@ methods of the HtmlHelper and how to use them.
 
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-.. php:method:: css(mixed $path, string $rel = null, array $options = array())
+.. php:method:: css(mixed $path, array $options = array())
+
+    .. versionchanged:: 2.4
 
     :param mixed $path: Either a string of the css file to link, or an array with multiple files
-    :param string $rel: The value of the generated tag's rel attribute.  If null, 'stylesheet'
-       will be used.
-    :param array $options: An array of :term:`html attributes`.
+    :param array $options: An array of options or :term:`html attributes`.
 
     Creates a link(s) to a CSS style-sheet. If key 'inline' is set to
     false in ``$options`` parameter, the link tags are added to the
@@ -81,8 +81,10 @@ methods of the HtmlHelper and how to use them.
     You can use the ``block`` option to control which block the link element
     will be appended to.  By default it will append to the ``css`` block.
 
+    If key 'rel' in ``$options`` array is set to 'import' the stylesheet will be imported.
+
     This method of CSS inclusion assumes that the CSS file specified
-    resides inside the /app/webroot/css directory.::
+    resides inside the /app/webroot/css directory if path doesn't start with a '/'.::
 
         echo $this->Html->css('forms');
 
@@ -104,7 +106,7 @@ methods of the HtmlHelper and how to use them.
         <link rel="stylesheet" type="text/css" href="/css/tables.css" />
         <link rel="stylesheet" type="text/css" href="/css/menu.css" />
 
-    You can include css files from any loaded plugin using 
+    You can include css files from any loaded plugin using
     :term:`plugin syntax`.  To include ``app/Plugin/DebugKit/webroot/css/toolbar.css``
     You could use the following::
 
@@ -201,7 +203,7 @@ methods of the HtmlHelper and how to use them.
     should be set to an array. To output a robots noindex tag use the
     following code::
 
-        echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex')); 
+        echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex'));
 
     .. versionchanged:: 2.1
         The ``block`` option was added.
@@ -260,7 +262,7 @@ methods of the HtmlHelper and how to use them.
             'background' => '#633',
             'border-bottom' => '1px solid #000',
             'padding' => '10px'
-        )); 
+        ));
 
     Will output::
 
@@ -280,7 +282,7 @@ methods of the HtmlHelper and how to use them.
 
     .. code-block:: html
 
-        <img src="/img/cake_logo.png" alt="CakePHP" /> 
+        <img src="/img/cake_logo.png" alt="CakePHP" />
 
     To create an image link specify the link destination using the
     ``url`` option in ``$htmlAttributes``.::
@@ -309,7 +311,7 @@ methods of the HtmlHelper and how to use them.
 
         <img src="http://example.com/img/logo.jpg" alt="" />
 
-    You can include image files from any loaded plugin using 
+    You can include image files from any loaded plugin using
     :term:`plugin syntax`.  To include ``app/Plugin/DebugKit/webroot/img/icon.png``
     You could use the following::
 
@@ -383,7 +385,7 @@ methods of the HtmlHelper and how to use them.
         );
 
     Will output:
-  
+
     .. code-block:: html
 
         <a href="/images/view/1?height=400&width=500">View image</a>
@@ -407,6 +409,28 @@ methods of the HtmlHelper and how to use them.
             <img src="/img/recipes/6.jpg" alt="Brownies" />
         </a>
 
+    Setting ``escape`` to false will also disable escaping of attributes of the
+    link. As of 2.4 you can use the option ``escapeTitle`` to disable just
+    escaping of title and not the attributes.::
+
+        <?php
+        echo $this->Html->link(
+            $this->Html->image('recipes/6.jpg', array('alt' => 'Brownies')),
+            'recipes/view/6',
+            array('escapeTitle' => false, 'title' => 'hi "howdy"')
+        );
+
+    Will output:
+
+    .. code-block:: html
+
+        <a href="/recipes/view/6" title="hi &quot;howdy&quot;">
+            <img src="/img/recipes/6.jpg" alt="Brownies" />
+        </a>
+
+   .. versionchanged:: 2.4
+        The ``escapeTitle`` option was added.
+
     Also check :php:meth:`HtmlHelper::url` method
     for more examples of different types of urls.
 
@@ -424,7 +448,7 @@ methods of the HtmlHelper and how to use them.
           or "video". If type is not provided media type is guessed based on
           file's mime type.
         - `text` Text to include inside the video tag
-        - `pathPrefix` Path prefix to use for relative urls, defaults to 
+        - `pathPrefix` Path prefix to use for relative urls, defaults to
           'files/'
         - `fullBase` If provided the src attribute will get a full address
           including domain name
@@ -473,15 +497,15 @@ methods of the HtmlHelper and how to use them.
         <?php
         echo $this->Html->tag('span', 'Hello World.', array('class' => 'welcome'));
         ?>
-         
+
         // Output
         <span class="welcome">Hello World</span>
-         
+
         // No text specified.
         <?php
         echo $this->Html->tag('span', null, array('class' => 'welcome'));
         ?>
-         
+
         // Output
         <span class="welcome">
 
@@ -504,13 +528,13 @@ methods of the HtmlHelper and how to use them.
     set to true, $text will be printed HTML-escaped.
 
     If no text is specified, only an opening div tag is returned.:
- 
+
     .. code-block:: php
 
         <?php
         echo $this->Html->div('error', 'Please enter your credit card number.');
         ?>
-        
+
         // Output
         <div class="error">Please enter your credit card number.</div>
 
@@ -528,7 +552,7 @@ methods of the HtmlHelper and how to use them.
         <?php
         echo $this->Html->para(null, 'Hello World.');
         ?>
-        
+
         // Output
         <p>Hello World.</p>
 
@@ -597,12 +621,12 @@ methods of the HtmlHelper and how to use them.
     option::
 
         echo $this->Html->script('wysiwyg', array('block' => 'scriptBottom'));
-        
+
     In your layout you can output all the script tags added to 'scriptBottom'::
 
         echo $this->fetch('scriptBottom');
 
-    You can include script files from any loaded plugin using 
+    You can include script files from any loaded plugin using
     :term:`plugin syntax`.  To include ``app/Plugin/DebugKit/webroot/js/toolbar.js``
     You could use the following::
 
@@ -632,7 +656,7 @@ methods of the HtmlHelper and how to use them.
 
 .. php:method:: scriptStart($options = array())
 
-    :param array $options: An array of :term:`html attributes` to be used when 
+    :param array $options: An array of :term:`html attributes` to be used when
         scriptEnd is called.
 
     Begin a buffering code block. This code block will capture all
@@ -656,9 +680,9 @@ methods of the HtmlHelper and how to use them.
 .. php:method:: nestedList(array $list, array $options = array(), array $itemOptions = array(), string $tag = 'ul')
 
     :param array $list: Set of elements to list.
-    :param array $options: Additional HTML attributes of the list (ol/ul) tag 
+    :param array $options: Additional HTML attributes of the list (ol/ul) tag
         or if ul/ol use that as tag.
-    :param array $itemOptions: Additional HTML attributes of the list item (LI) 
+    :param array $itemOptions: Additional HTML attributes of the list item (LI)
         tag.
     :param string $tag: Type of list tag to use (ol/ul).
 
@@ -777,7 +801,7 @@ methods of the HtmlHelper and how to use them.
             array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),
             array('Aug 1st, 2006', 'Anti-Java Cake', 'No'),
         ));
-         
+
     Output:
 
     .. code-block:: html
@@ -812,7 +836,7 @@ methods of the HtmlHelper and how to use them.
             ),
             array('class' => 'darker')
         );
-        
+
     Output:
 
     .. code-block:: html
@@ -824,7 +848,7 @@ methods of the HtmlHelper and how to use them.
 .. php:method:: url(mixed $url = NULL, boolean $full = false)
 
     :param mixed $url: A :term:`routing array`.
-    :param mixed $full: Either a boolean to indicate whether or not the base path should 
+    :param mixed $full: Either a boolean to indicate whether or not the base path should
         be included on an array of options for :php:meth:`Router::url()`
 
     Returns an URL pointing to a combination of controller and action.
@@ -837,7 +861,7 @@ methods of the HtmlHelper and how to use them.
             "action" => "view",
             "bar"
         ));
-         
+
         // Output
         /posts/view/bar
 
@@ -850,7 +874,7 @@ methods of the HtmlHelper and how to use them.
             "action" => "view",
             "foo" => "bar"
         ));
-         
+
         // Output
         /posts/view/foo:bar
 
@@ -861,7 +885,7 @@ methods of the HtmlHelper and how to use them.
             "action" => "list",
             "ext" => "rss"
         ));
-         
+
         // Output
         /posts/list.rss
 
@@ -880,7 +904,7 @@ methods of the HtmlHelper and how to use them.
             "?" => array("foo" => "bar"),
             "#" => "first"
         ));
-        
+
         // Output
         /posts/search?foo=bar#first
 

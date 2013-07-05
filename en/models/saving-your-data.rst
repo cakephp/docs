@@ -78,6 +78,15 @@ single fields, in an ActiveRecord approach. You can also use
 The above would update the title and published fields and save them
 to the database.
 
+:php:meth:`Model::clear()`
+==========================
+
+This method can be used to reset model state and clear out any unsaved data and
+validation errors.
+
+.. versionadded:: 2.4
+
+
 :php:meth:`Model::save(array $data = null, boolean $validate = true, array $fieldList = array())`
 =================================================================================================
 
@@ -105,6 +114,7 @@ as keys:
 * ``fieldList`` An array of fields you want to allow for saving.
 * ``callbacks`` Set to false to disable callbacks.  Using 'before' or 'after'
   will enable only those callbacks.
+* ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
 
 More information about model callbacks is available
 :doc:`here <callback-methods>`
@@ -195,6 +205,7 @@ as keys:
 * ``validate`` Set to true/false to enable disable validation.
 * ``callbacks`` Set to false to disable callbacks.  Using 'before' or 'after'
   will enable only those callbacks.
+* ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
 
 :php:meth:`Model::updateAll(array $fields, array $conditions)`
 ==============================================================
@@ -248,6 +259,7 @@ options may be used:
   Should be set to false if database/table does not support transactions.
 *  ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
 *  ``deep``: (since 2.1) If set to true, also associated data is saved, see also saveAssociated
+* ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
 
 For saving multiple records of single model, $data needs to be a
 numerically indexed array of records like this::
@@ -305,6 +317,7 @@ options may be used:
 * ``fieldList``: Equivalent to the $fieldList parameter in Model::save()
 * ``deep``: (since 2.1) If set to true, not only directly associated data is saved,
   but deeper nested associated data as well. Defaults to false.
+* ``counterCache`` (since 2.4) Boolean to control updating of counter caches (if any)
 
 For saving a record along with its related record having a hasOne
 or belongsTo association, the data array should be like this::

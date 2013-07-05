@@ -346,6 +346,23 @@ Example::
     $yourInstance->myCustomMethod();
     $Email->send();
 
+Relaxing address validation rules
+---------------------------------
+
+.. php:method:: emailPattern($pattern = null)
+
+If you are having validation issues when sending to non compliant addresses, you
+can relax the pattern used to validate email addresses. This is sometimes
+necessary when dealing with some Japanese ISP's::
+
+    $email = new CakeEmail('default');
+
+    // Relax the email pattern, so you can send
+    // to non-conformant addresses.
+    $email->emailPattern($newPattern);
+
+.. versionadded:: 2.4
+
 
 Sending messages quickly
 ========================

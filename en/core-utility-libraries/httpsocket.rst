@@ -70,6 +70,16 @@ HTTP methods.
     :php:meth:`~HttpSocket::get()` method. The ``$query`` parameter can either be a string or an array
     of query string arguments for the request.
 
+.. php:method:: patch($uri, $data, $request)
+
+    The patch method makes a simple HTTP PATCH request returning the
+    results.
+
+    The parameters for the ``patch`` method is the same as the
+    :php:meth:`~HttpSocket::post()` method.
+
+    .. versionadded:: 2.4
+
 .. php:method:: request($request)
 
     The base request method, which is called from all the wrappers

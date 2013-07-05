@@ -71,11 +71,16 @@ encoding
     hyphen.
 schema
     Used in PostgreSQL database setups to specify which schema to use.
-datasource
-    non-DBO datasource to use, e.g. 'ldap', 'twitter'
 unix_socket
     Used by drivers that support it to connect via unix socket files. If you are
     using postgres and want to use unix sockets, leave the host key blank.
+settings
+    An array of key/value pairs that should be sent to the database server as
+    ``SET`` commands when the connection is created. This option is only
+    supported by MySQL, Postgres, and SQLserver at this time.
+
+.. versionchanged:: 2.4
+    The ``settings`` key was added in 2.4.
 
 .. note::
 

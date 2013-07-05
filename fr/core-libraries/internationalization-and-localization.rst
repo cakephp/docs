@@ -80,6 +80,13 @@ Les codes des locales en trois caractères suivent la norme
 mais si vous créez des locales régionales (en\_US, en\_GB, etc.)
 Cake les utilisera dans les cas appropriés.
 
+.. warning::
+
+    Dans 2.3 et 2.4, certains codes de langues ont été corrigés pour
+    correspondre au standard ISO.
+    Merci de regarder les guides de migrations correspondants pour plus de
+    détails.
+
 Souvenez-vous que les fichiers po sont utiles pour des messages courts.
 Si vous pensez que vous aurez à traduire de longs paragraphes,
 ou des pages entières, vous devriez penser à l'implémentation
