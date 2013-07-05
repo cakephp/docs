@@ -116,7 +116,7 @@ rule. The general syntax for defining rules this way is:
     var $validate = array('fieldName' => 'ruleName');
 
 Where, 'fieldName' is the name of the field the rule is defined for, and
-‘ruleName’ is a pre-defined rule name, such as 'alphaNumeric', 'email'
+'ruleName' is a pre-defined rule name, such as 'alphaNumeric', 'email'
 or 'isUnique'.
 
 For example, to ensure that the user is giving a well formatted email
@@ -151,8 +151,8 @@ validation will not function correctly. This is because 'required' is
 not actually a rule.
 
 As you can see here, each field (only one field shown above) is
-associated with an array that contains six keys: ‘rule’, ‘required’,
-‘allowEmpty’, ‘on’, 'last' and ‘message’. Let’s have a closer look at these
+associated with an array that contains six keys: 'rule', 'required',
+'allowEmpty', 'on', 'last' and 'message'. Let’s have a closer look at these
 keys.
 
 rule
@@ -246,7 +246,7 @@ enforced during both creation and update.
 last
 ----
 
-The ‘last‘ key can be set to a boolean value equivalent to either true 
+The 'last' key can be set to a boolean value equivalent to either true 
 or false.
 
 If set to true and the current rule does not validate, the current 
@@ -255,9 +255,9 @@ the current field will not be checked.
 
 Practically, one should always use 'last' => true here since there is 
 only one rule to be validated. 
-For more relevant usages, see :doc:`#multiple-rules-per-field`
+For more relevant usages, see :ref:`multiple-rules-per-field`
 
-The default value for ‘last‘ is false. 
+The default value for 'last' is false. 
 
 message
 -------
