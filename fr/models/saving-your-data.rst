@@ -79,6 +79,15 @@ les champs uniques, dans une approche ActiveRecord. Vous pouvez aussi utiliser
 Ce qui est au-dessus met à jour les champs title et published et les sauvegarde
 dans le base de données.
 
+:php:meth:`Model::clear()`
+==========================
+
+Cette méthode peut être utilisée pour réinitialiser l'état du model et effacer
+toutes les données non sauvegardées et les erreurs de validation.
+
+.. versionadded:: 2.4
+
+
 :php:meth:`Model::save(array $data = null, boolean $validate = true, array $fieldList = array())`
 =================================================================================================
 
@@ -106,6 +115,8 @@ suivante en clé:
   sauvegarde.
 * ``callbacks`` Défini à false permet la désactivation des callbacks. En
   utilisant 'before' ou 'after' activera seulement ces callbacks.
+* ``counterCache`` (depuis 2.4) Booléen pour contrôler la mise à jour des
+  counter caches (si il y en a)
 
 Plus d'informations sur les callbacks du model sont disponibles
 :doc:`ici <callback-methods>`.
@@ -204,6 +215,9 @@ suivantes:
 * ``validate`` Définie à true/false pour activer/désactiver la validation.
 * ``callbacks`` Définie à false pour désactiver les callbacks. Utiliser
   'before' ou 'after' activera seulement ces callbacks.
+* ``counterCache`` (depuis 2.4) Booléen pour contrôler la mise à jour des
+  counter caches (si il y en a)
+
     
 :php:meth:`Model::updateAll(array $fields, array $conditions)`
 ==============================================================
@@ -264,6 +278,8 @@ une fois. Les options suivantes peuvent être utilisées:
 * ``fieldList``: Equivalent au paramètre $fieldList dans Model::save()
 * ``deep``: (since 2.1) Si défini à true, les données associées sont aussi
   sauvegardées, regardez aussi saveAssociated.
+* ``counterCache`` (depuis 2.4) Booléen pour contrôler la mise à jour des
+  counter caches (si il y en a)
 
 Pour sauvegarder de multiples enregistrements d'un unique model, $data
 a besoin d'être un tableau d'enregistrements indexé numériquement comme
@@ -328,6 +344,8 @@ Les options suivantes peuvent être utilisées:
 * ``deep``: (depuis 2.1) Si défini à true, les données pas seulement associées
   directement vont être sauvegardées, mais aussi les données associées
   imbriquées plus profondément. Par défaut à false.
+* ``counterCache`` (depuis 2.4) Booléen pour contrôler la mise à jour des
+  counter caches (si il y en a)
 
 Pour sauvegarder un enregistrement et tous ses enregistrements liés avec une
 association hasOne ou belongsTo, le tableau de données devra ressembler à

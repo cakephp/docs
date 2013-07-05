@@ -235,7 +235,11 @@ dans votre application.
 .. php:const:: FULL_BASE_URL
 
     Préfix url complet. Comme ``https://example.com``
-   
+
+    .. deprecated:: 2.4
+        Cette constante est dépréciée, vous devriez utiliser
+        :php:meth:`Router::baseUrl()` à la place.
+
 .. php:const:: IMAGES
 
     Chemin vers le répertoire images publique.

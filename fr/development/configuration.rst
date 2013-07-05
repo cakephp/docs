@@ -83,6 +83,14 @@ unix_socket
     Utilisé par les pilotes qui le supportent pour connecter via les fichiers
     socket unix. Si vous utilisez postgres et voulez utiliser les sockets
     unix, laissez la clé host vide.
+settings
+    Un tableau de clé/valeur qui doit être envoyé à la base de données du
+    serveur en tant que commandes ``SET`` quand la connection est créée.
+    Cette option est seulement supportée par MySQL, Postgres, et SQLserver en
+    ce moment.
+
+.. versionchanged:: 2.4
+    La clé ``settings`` a été ajoutée dans 2.4.
 
 .. note::
 

@@ -1050,8 +1050,8 @@ API du Router
       URLs Cake relative sont nécessaires quand on utilise requestAction.
     * ``?`` - Prend un tableau de paramètres de chaîne requêté.
     * ``#`` - Vous permet de définir les fragments hashés d'URL.
-    * ``full_base`` - Si à true, la constante :php:const:`FULL_BASE_URL` va
-      être précédée des URLs générées.
+    * ``full_base`` - Si à true, la valeur de :php:meth:`Router::baseUrl()`
+      sera ajoutée avant aux urls générées.
 
 .. php:staticmethod:: mapResources($controller, $options = array())
 
@@ -1077,6 +1077,17 @@ API du Router
 
     Définit la route par défaut à utiliser quand on connecte les routes
     dans le futur.
+
+.. php:staticmethod:: baseUrl($url = null)
+
+    .. versionadded:: 2.4
+
+    Récupère ou définit la baseURL utilisée pour la génération d'URLs. Quand
+    vous définissez cette valeur, vous devez vous assurer d'inclure le nom de
+    domaine complètement compétent en incluant le protocole.
+
+    Définir les valeurs avec cette méthode va aussi mettre à jour
+    ``App.fullBaseUrl`` dans :php:class:`Configure`.
 
 .. php:class:: CakeRoute
 

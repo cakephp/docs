@@ -123,3 +123,16 @@ utiliser les helpers pour formater aussi.
 
     Une classe de vue pour la génération de vue de données Json. Voir au-dessus
     pour savoir comment vous pouvez utiliser XmlView dans votre application.
+
+JSONP response
+==============
+
+.. versionadded:: 2.3
+
+Quand vous utilisez JsonView, vous pouvez utiliser la variable de vue spéciale
+``_jsonp`` pour permettre de retourner une réponse JSONP. La définir à ``true``
+fait que la classe de vue vérifie si le paramètre de chaine de la requête nommé
+"callback" est défini et si c'est la cas, d'enrouler la réponse json dans le
+nom de la fonction fournie. Si vous voulez utiliser un nom personnalisé de
+paramètre de requête à la place de "callback", définissez ``_jsonp`` avec le
+nom requis à la place de ``true``.

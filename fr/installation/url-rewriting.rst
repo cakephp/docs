@@ -127,6 +127,28 @@ plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
    CakePHP. Merci de vous renseigner sur la documentation en ligne d'Apache
    pour plus d'informations.
 
+#. (Optionel) Pour améliorer la configuration de production, vous devriez
+   empêcher les assets invalides d'être parsés par CakePHP. Modifier votre
+   webroot .htaccess pour quelque chose comme::
+
+       <IfModule mod_rewrite.c>
+           RewriteEngine On
+           RewriteBase /path/to/cake/app
+           RewriteCond %{REQUEST_FILENAME} !-d
+           RewriteCond %{REQUEST_FILENAME} !-f
+           RewriteCond %{REQUEST_URI} !^/(app/webroot/)?(img|css|js)/(.*)$
+           RewriteRule ^(.*)$ index.php [QSA,L]
+       </IfModule>
+       
+   Ce qui est au-dessus va simplement empêcher les assets incorrects d'être
+   envoyés à index.php et à la place d'afficher la page 404 de votre serveur
+   web.
+   
+   De plus, vous pouvez créer une page HTML 404 correspondante, ou utiliser la
+   page 404 de CakePHP intégrée en ajoutant une directive ``ErrorDocument``::
+       
+       ErrorDocument 404 /404-not-found
+
 De belles URLs sur nginx
 ========================
 

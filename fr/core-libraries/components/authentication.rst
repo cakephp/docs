@@ -78,8 +78,8 @@ d'authentification en utilisant un tableau::
 
     // Passer la configuration 
     $this->Auth->authenticate = array(
-        'Form' => array('userModel' => 'Membre'),
-        'Basic' => array('userModel' => 'Membre')
+        'Basic' => array('userModel' => 'Membre'),
+        'Form' => array('userModel' => 'Membre')
     );
 
 Dans le deuxième exemple vous pourrez noter que nous avons à déclarer
@@ -92,8 +92,8 @@ La cle ``all`` est aussi utilisée comme cela
     // Passer la configuration en utilisant 'all'
     $this->Auth->authenticate = array(
         AuthComponent::ALL => array('userModel' => 'Membre'),
-        'Form',
-        'Basic'
+        'Basic',
+        'Form'
     );
 
 Dans l'exemple ci-dessus, à la fois ```Form`` et ``Basic`` prendront
@@ -110,6 +110,10 @@ Les objets d'authentification supportent les clés de configuration suivante.
   est chargé.
 
 .. versionadded:: 2.2
+
+- ``passwordHasher`` Classe de hash de mot de passe. Par défaut à ``Simple``.
+
+  .. versionadded:: 2.4
 
 Configurer différents champs pour l'utilisateur dans le tableau ``$components``::
 
@@ -162,6 +166,67 @@ les clés suivantes:
 - ``opaque`` Une chaîne qui doit être retourné à l'identique par les clients.
   Par Défaut à ``md5($settings['realm'])``.
 
+Identifier les utilisateurs et les connecter
+--------------------------------------------
+
+Par le passé le component Auth ``AuthComponent`` connectait les utilisateurs
+automatiquement.
+C'était un peu déroutant pour certain, et rendait la création au travers
+du component Auth ``AuthComponent`` par moment un peu difficile.
+Avec la version 2.0, vous avez besoin d'appeler manuellement
+``$this->Auth->login()`` pour connecter un utilisateur.
+
+Quand les utilisateurs s'identifient, les objets d'identification sont
+vérifiés dans l'ordre où ils ont été attachés. Une fois qu'un objet
+peut identifier un utilisateur, les autres objets ne sont pas vérifiés.
+Une simple fonction de connexion pourrait ressembler à cela ::
+
+    public function login() {
+        if ($this->request->is('post')) {
+            if ($this->Auth->login()) {
+                return $this->redirect($this->Auth->redirectUrl());
+                // Avant 2.3, utilisez `return $this->redirect($this->Auth->redirect());`
+            } else {
+                $this->Session->setFlash(__('Username ou password est incorrect'), 'default', array(), 'auth');
+            }
+        }
+    }
+
+Le code ci-dessus (sans aucune donnée transmise à la méthode ``login``),
+tentera de connecter un utilisateur en utilisant les données POST, et sera
+redirigé en cas de succès sur la dernière page visitée, ou
+:php:attr:`AuthComponent::$loginRedirect`. Si le login est en échec, un message
+flash est défini.
+
+.. warning::
+
+    Dans la version 2.0 ``$this->Auth->login($this->request->data)``
+    connectera l'utilisateur avec les données postées., tandis que avec la
+    version 1.3 ``$this->Auth->login($this->data)`` tentera
+    d'identifier l'utilisateur en premier et le connectera seulement en cas
+    de succès.
+
+Utilisation de l'authentification Digest et Basic pour la connexion    
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Puisque les authentifications basic et digest ne nécessitent pas un POST
+initial ou un form, ainsi si vous utilisez seulement les authentificators
+basic / digest, vous n'avez pas besoin d'action login dans votre controller.
+Aussi, vous pouvez définir ``AuthComponent::$sessionKey`` à false pour vous
+assurer que AuthComponent n'essaie pas de lire les infos de l'user
+à partir des sessions. L'authentification stateless va re-vérifier les
+certificats de l'user à chaque requête, cela crée un petit montant de charges
+supplémentaires, mais permet aux clients de se connecter sans utiliser les
+cookies.
+
+.. note::
+
+  Avant 2.4, vous avez toujours besoin de l'action login puisque vous êtes
+  redirigés vers login quand un user non authentifié essaie d'accéder à une
+  page protégée même en utilisant seulement l'auth basic ou digest. Aussi
+  configurer ``AuthComponent::$sessionKey`` à false va causer une erreur avant
+  2.4.
+
 Créer des objets d'authentification personnalisés
 -------------------------------------------------
 
@@ -200,76 +265,6 @@ en les incluant dans le tableau d'authentification AuthComponents::
         'AuthBag.Combo', // plugin objet d'identification.
     );
 
-Identifier les utilisateurs et les connecter
---------------------------------------------
-
-Par le passé le component Auth ``AuthComponent`` connectait les utilisateurs
-automatiquement.
-C'était un peu déroutant pour certain, et rendait la création au travers
-du component Auth ``AuthComponent`` par moment un peu difficile.
-Avec la version 2.0, vous avez besoin d'appeler manuellement
-``$this->Auth->login()`` pour connecter un utilisateur.
-
-Quand les utilisateurs s'identifient, les objets d'identification sont
-vérifiés dans l'ordre où ils ont été attachés. Une fois qu'un objet
-peut identifier un utilisateur, les autres objets ne sont pas vérifiés.
-Une simple fonction de connexion pourrait ressembler à cela ::
-
-    public function login() {
-        if ($this->request->is('post')) {
-            if ($this->Auth->login()) {
-                return $this->redirect($this->Auth->redirect());
-            } else {
-                $this->Session->setFlash(__('Le nom d\'utilisateur ou le mot de passe 
-                est incorrect'), 'default', array(), 'auth');
-            }
-        }
-    }
-
-Le code ci-dessus (sans aucune donnée transmise à la méthode ``login``),
-tentera de connecter un utilisateur en utilisant les données POST, et sera
-redirigé en cas de succès sur la dernière page visitée, ou
-:php:attr:`AuthComponent::$loginRedirect`. Si le login est en échec, un message
-flash est défini.
-
-.. warning::
-
-    Dans la version 2.0 ``$this->Auth->login($this->request->data)``
-    connectera l'utilisateur avec les données postées., tandis que avec la
-    version 1.3 ``$this->Auth->login($this->data)`` tentera
-    d'identifier l'utilisateur en premier et le connectera seulement en cas
-    de succès.
-
-Utilisation de l'authentification Digest et Basic pour la connexion    
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Parce que l'authentification basic et digest ne demande pas d'effectuer un POST
-initial avant d'initier la séquence de connexion, votre fonction ``login()``
-aura un aspect un petit peu différent qu'avec l'utilisation de
-``FormAuthentication``::
-
-    public function login() {
-        if ($this->Auth->login()) {
-            return $this->redirect($this->Auth->redirect());
-        } else {
-            $this->Session->setFlash(__('Le nom d\'utilisateur ou le mot de passe 
-            est incorrect'), 'default', array(), 'auth');
-        }
-    }
-
-Une fois connectés, les utilisateurs utilisant l'authentification digest et
-basic ne sont pas tenus d'avoir des cookies. En fait, tous les objets
-d'authentification sont capables de fournir une authentification *stateless*
-au travers de l'implémentation de la méthode ``getUser()``. Si le client
-supporte les cookies, l'authentification basic et digest stockera un
-utilisateur dans une session comme n'importe quel autre objet
-d'authentification. Si le client ne supporte pas les cookies, (comme un simple
-client HTTP construit par dessus CURL) l'authentification stateless est
-aussi supportée. L'authentification stateless re-vérifiera les informations
-d'identification à chaque requête, ce qui crée une petite quantité de charge
-supplémentaire, mais permet aux clients qui ne peuvent ou ne supportent pas les
-cookies de se connecter.
-
 Création de systèmes d'authentification stateless
 -------------------------------------------------
 
@@ -302,6 +297,25 @@ getUser  pour les authentifications HTTP Basic.
 La méthode ``_findUser()`` fait partie de ``BaseAuthenticate`` et identifie un
 utilisateur en se basant sur un nom d'utilisateur et un mot de passe.
 
+Gestion des requêtes non authentifiées
+--------------------------------------
+
+Quand un user non authentifié essaie d'accéder à une page protégée en premier,
+la méthode `unauthenticated()` du dernier authenticator dans la chaîne est
+appelée. L'objet d'authentification peut gérer la réponse d'envoi ou la
+redirection appropriée et retourne `true` pour indiquer qu'aucune action
+suivante n'est nécessaire. Du fait de l'ordre dans lequel vous spécifiez
+l'objet d'authentification dans les propriétés de
+`AuthComponent::$authenticate`.
+
+Si authenticator retourne null, `AuthComponent` redirige l'user vers l'action
+login. Si c'est une requête ajax et `AuthComponent::$ajaxLogin` est spécifiée,
+cet element est rendu, sinon un code de statut http 403 est retourné.
+
+.. note::
+
+  Avant 2.4, les objets d'authentification n'ont pas une méthode
+  `unauthenticated()`.
 
 Afficher les messages flash de Auth
 -----------------------------------
@@ -313,7 +327,6 @@ préférence avant la ligne content_for_layout.::
 
     echo $this->Session->flash();
     echo $this->Session->flash('auth');
-    ?>
 
 Vous pouvez personnaliser les messages d'erreur, et les réglages que le
 component Auth ``AuthComponent`` utilise. En utilisant ``$this->Auth->flash``
@@ -332,6 +345,19 @@ l'authentification échoue ::
 
     $this->Auth->authError = "Cette erreur se présente à l'utilisateur qui tente d'accéder à une partie du site qui est protégé.";
 
+.. versionchanged:: 2.4
+   Parfois, vous voulez seulement afficher l'erreur d'autorisation après que
+   l'user se soit déja connecté. Vous pouvez supprimer ce message en
+   configurant sa valeur avec le boléen `false`.
+
+Dans le beforeFilter() de votre controller, ou les configurations du component::
+
+    if (!$this->Auth->loggedIn()) {
+        $this->Auth->authError = false;
+    }
+
+.. _hashing-passwords:
+
 Hachage des mots de passe
 -------------------------
 
@@ -340,18 +366,39 @@ de passe qu'il rencontre.
 Ceci à été enlevé parce qu'il rendait un certain nombre de tâches communes
 comme la validation difficile. Vous ne devriez **jamais** stocker un mot de
 passe en clair, et avant de sauvegarder un utilisateur vous devez toujours
-hacher le mot de passe. Vous pouvez utiliser la statique
-``AuthComponent::password()`` pour hacher les mots de passes avant de les
-sauvegarder. Ceci utilisera la stratégie de hachage paramétrée pour votre
-application.
+hacher le mot de passe.
 
-Après avoir validé le mot de passe, vous pouvez hacher un mot de passe dans le
-callback beforeSave de votre model::
+As of 2.4 the generation and checking of password hashes has been delegated to
+password hasher classes. Authenticating objects use a new setting ``passwordHasher``
+which specifies the password hasher class to use. It can be a string specifying class
+name or an array with key ``className`` stating the class name and any extra keys
+will be passed to password hasher constructor as config. The default hasher
+class ``Simple`` can be used for sha1, sha256, md5 hashing. By default the hash
+type set in Security class will be used. You can use specific hash type like this::
+
+    public $components = array(
+        'Auth' => array(
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => array(
+                        'className' => 'Simple',
+                        'hashType' => 'sha256'
+                    )
+                )
+            )
+        )
+    );
+
+When creating new user records you can hash a password in the beforeSave
+callback of your model using appropriate password hasher class::
+
+    App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
     class User extends AppModel {
         public function beforeSave($options = array()) {
-            if (isset($this->data['User']['password'])) {
-                $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+            if (!$this->id) {
+                $passwordHasher = new SimplePasswordHasher();
+                $this->data['User']['password'] = $passwordHasher->hash($this->data['User']['password']);
             }
             return true;
         }
@@ -360,9 +407,32 @@ callback beforeSave de votre model::
 Vous n'avez pas besoin de hacher le mot de passe avant d'appeler
 ``$this->Auth->login()``.
 Les différents objets d'authentification hacherons les mots de passe
-individuellement. Si vous utiliser l'authentification Digest, vous ne devriez
-pas  utiliser AuthComponent::password() pour la génération de mots de
-passe. Regardez ci-dessous comment générer des hachages Digest.
+individuellement.
+
+Utiliser bcrypt pour les mots de passe
+--------------------------------------
+
+Dans CakePHP 2.3, la classe ``BlowfishAuthenticate`` a été introduite pour
+permettre l'utilisation de `bcrypt <https://en.wikipedia.org/wiki/Bcrypt>`_
+c'est-à-dire Blowfish pour les mots de passe hashés.
+Les hashes Bcrypt sont plus difficiles à forcer sauvagement par rapport aux
+mots de passe stockés avec sha1. Mais ``BlowfishAuthenticate`` a été déprécié
+dans 2.4 et à la place ``BlowfishPasswordHasher`` a été ajoutée.
+
+Un hasher de mot de passe blowfish peut être utilisé avec toute classe
+d'authentification. Tout ce que vous avez à faire est de spécifier la
+configuration ``passwordHasher`` pour l'objet d'authentification::
+
+    public $components = array(
+        'Auth' => array(
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Blowfish'
+                )
+            )
+        )
+    );
+
 
 Hachage de mots de passe pour l'authentification Digest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -398,47 +468,23 @@ vous connecter.
     ``env('SCRIPT_NAME)``. Vous devez utiliser une chaîne statique si vous
     voulez un hachage permanent dans des environnements multiples.
 
-Utiliser bcrypt pour les mots de passe
---------------------------------------
+Creating custom password hasher classes
+---------------------------------------
+Custom password hasher classes need to extend the ``AbstractPasswordHasher``
+class and need to implement the abstract methods ``hash()`` and ``check()``.
+In ``app/Controller/Component/Auth/CustomPasswordHasher.php`` you could put
+the following::
 
-.. versionadded:: 2.3
+    App::uses('CustomPasswordHasher', 'Controller/Component/Auth');
 
-Depuis CakePHP 2.3.0 vous pouvez utiliser
-`bcrypt <https://en.wikipedia.org/wiki/Bcrypt>`_ a.k.a Blowfish pour hacher
-vos mots de passe. Les haches Bcrypt sont plus difficiles à casser que les mots
-de passe stockés en sha1. Même si la stratégie de hachage par défaut est
-``sha`` - pour des raisons de compatibilité rétro-actives. Il est recommandé
-que les nouvelles applications utilisent bcrypt pour les mots de passe. Bcrypt
-fournit une sécurité améliorée. Pour utiliser bcrpyt, vous devrez activer
-l'adaptateur d'authentification ``Blowfish``::
-
-    public $components = array(
-        'Auth' => array(
-            'authenticate' => array(
-                'Blowfish' => array(
-                    'scope' => array('User.is_active' => true)
-                )
-            )
-        )
-    );
-
-A part la façon dont les mots de passe sont hachés et stockés,
-``BlowfishAuthenticate`` fonctionne comme ``FormAuthenticate``, et supporte
-les mêmes options. Au lieu d'utiliser :php:meth:`AuthComponent::password()`
-pour générer les haches de mots de passe, vous devrez utiliser ce qui suit::
-
-    App::uses('Security', 'Utility');
-    class User extends AppModel {
-
-        public function beforeSave($options = array()) {
-            // Utilise bcrypt
-            if (isset($this->data['User']['password'])) {
-                $hash = Security::hash($this->data['User']['password'], 'blowfish');
-                $this->data['User']['password'] = $hash;
-            }
-            return true;
+    class CustomPasswordHasher extends AbstractPasswordHasher {
+        public function hash($password) {
+            // stuff here
         }
 
+        public function check($password, $hashedPassword) {
+            // stuff here
+        }
     }
 
 Connecter les utilisateurs manuellement
@@ -548,9 +594,9 @@ d'autorisation, en utilisant un tableau::
         'Controller'
     );
 
-Tout comme  ``Auth->authenticate``,  ``Auth->authorize``, vous aides
+Tout comme ``Auth->authenticate``, ``Auth->authorize``, vous aident
 à garder un code "propre, en utilisant la clé ``all``. Cette clé spéciale
-vous aides  à définir les paramètres qui sont passés à chaque objets attachés.
+vous aide à définir les paramètres qui sont passés à chaque objet attaché.
 La clé all est aussi exposée comme ``AuthComponent::ALL``::
 
 
@@ -783,6 +829,10 @@ d'autorisation et d'authentification intégrée dans CakePHP.
     Erreur à afficher quand les utilisateurs font une tentative d'accès à un
     objet ou une action à laquelle ils n'ont pas accès.
 
+    .. versionchanged:: 2.4
+       You can suppress authError message from being displayed by setting this
+       value to boolean `false`.
+
 .. php:attr:: authorize
 
     Défini comme un tableau d'objets d'autorisation que vous voulez utiliser
@@ -925,12 +975,11 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 
 .. php:staticmethod:: password($pass)
 
-    Hache un mot de passe avec la valeur du ``salt`` de l'application.
+.. deprecated:: 2.4
 
 .. php:method:: redirect($url = null)
 
-    Déprécié depuis 2.3. Regardez :php:meth:`AuthComponent::redirectUrl()` pour
-    une description.
+.. deprecated:: 2.3
 
 .. php:method:: redirectUrl($url = null)
 

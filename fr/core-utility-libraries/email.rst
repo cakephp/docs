@@ -361,6 +361,24 @@ Exemple::
     $yourInstance->myCustomMethod();
     $Email->send();
 
+Faciliter les règles de validation des adresses
+-----------------------------------------------
+
+.. php:method:: emailPattern($pattern = null)
+
+Si vous avez des problèmes de validation lors de l'envoi vers des adresses
+non conformes, vous pouvez faciliter le patron utilisé pour valider les
+adresses email. C'est parfois nécessaire quand il s'agit de certains
+ISP Japonais.
+
+    $email = new CakeEmail('default');
+
+    // Relax le patron d\'email, ainsi vous pouvez envoyer
+    // vers des adresses non conformes
+    $email->emailPattern($newPattern);
+
+.. versionadded:: 2.4
+
 
 Envoyer des messages rapidement
 ===============================

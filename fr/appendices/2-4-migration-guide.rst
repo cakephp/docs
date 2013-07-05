@@ -7,8 +7,8 @@ souligne les changements et améliorations faits dans 2.4.
 Console
 =======
 
-- Les messages de remarque Logged seront maintenant en couleur dans les terminaux
-qui supportent les couleurs.
+- Les messages de log de type notice seront maintenant en couleur dans les
+terminaux qui supportent les couleurs.
 
 SchemaShell
 -----------
@@ -18,7 +18,7 @@ SchemaShell
 BakeShell
 ---------
 
-- ``cake bake model`` permet maintenant la commnde pour baker les
+- ``cake bake model`` permet maintenant la commande pour baker les
   ``$behaviors``. Si les champs `lft`, `rght` et `parent_id` se trouvent dans
   votre table, cela va ajouter le behavior Tree, par exemple. Vous pouvez
   aussi étendre le ModelTask pour permettre à vos propres behaviors d'être
@@ -45,6 +45,7 @@ Components
 
 AuthComponent
 -------------
+
 - AuthComponent supporte maintenant le mode proper stateless lors de
   l'utilisation des authentifieurs `Basic` ou `Digest`. Partir de session
   peut être empêché en configurant :php:attr:`AuthComponent::$sessionKey`
@@ -56,6 +57,7 @@ AuthComponent
 
 PasswordHasher
 --------------
+
 - Les objets d'Authentification utilisent maintenant les nouveaux objets
   password hasher pour la génération et la vérification des password hashés
   Regardez :ref:`hashing-passwords` pour plus d'info.
@@ -86,19 +88,27 @@ View
 JsonView
 --------
 
-- Le support JSONP a été ajouté à :php:class:`JsonView`.
+- Le support de JSONP a été ajouté à :php:class:`JsonView`.
 
 HtmlHelper
 ----------
-- L'API pour :php:meth::`HtmlHelper::css()` a été changée.
+
+- The API for :php:meth:`HtmlHelper::css()` has been been simplified. You can
+  now provide an array of options as the second argument. When you do, the
+  ``rel`` attribute defaults to 'stylesheet'.
+- Une nouvelle option ``escapeTitle`` ajoutée à
+  :php:meth:`HtmlHelper::link()` pour contrôler l'échappement seulement du
+  titre du lien et pas des attributs.
 
 TextHelper
 ----------
+
 - :php:meth::`TextHelper::autoParagraph()` a été ajoutée. Elle permet de
   convertir automatiquement les paragraphes de test en HTML.
 
 PaginatorHelper
 ---------------
+
 - :php:meth::`PaginatorHelper::param()` a été ajoutée.
 
 
@@ -120,9 +130,13 @@ CakeRequest
 CakeEmail
 ---------
 
-- Les messages d'email Logged ont maintenant l'option ``email`` par défaut. Si
-  If vous ne voyez pas de contenus d'email dans vos logs, assure-vous d'ajouter
+- Les messages de log d'email ont maintenant l'option ``email`` par défaut. Si
+  vous ne voyez pas de contenus d'email dans vos logs, assurez-vous d'ajouter
   l'option ``email`` à votre configuration de log.
+- :php:meth:`CakeEmail::emailPattern()` a été ajoutée. Cette méthode peut être
+  utilisée pour faciliter les règles de validation d'email. C'est utile
+  quand vous gérez certains hôtes Japonais qui permettent aux adresses non
+  conformes d'être utilisées.
 
 HttpSocket
 ----------

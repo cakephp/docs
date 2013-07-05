@@ -17,7 +17,7 @@ longues étendues de texte.
    normale de helper: ``$this->Text->method($args);``.
 
 .. php:method:: autoLinkEmails(string $text, array $options=array())
-    
+
     :param string $text: Le texte à convertir.
     :param array $options: Un tableau de :term:`html attributes` pour générer
         les liens.
@@ -65,6 +65,27 @@ longues étendues de texte.
     .. versionchanged:: 2.1
         Dans 2.1, cette méthode échappe automatiquement son input. Utilisez
         l'option ``escape`` pour la désactiver si nécéssaire.
+
+.. php:method:: autoParagraph(string $text)
+
+    :param string $text: Le texte à convertir.
+
+    Ajoute <p> autour du texte où la double ligne retourne et <br> où une
+    simple ligne retourne, sont trouvés.::
+
+        $myText = 'For more information
+        regarding our world-famous pastries and desserts.
+
+        contact info@example.com';
+        $formattedText = $this->Text->autoParagraph($myText);
+
+    Output::
+
+        <p>Pour plus d\'information<br />
+        selon nos célèbres pâtes et desserts.<p>
+        <p>contact info@example.com</p>
+
+    .. versionadded:: 2.4
 
 .. include:: ../../core-utility-libraries/string.rst
     :start-after: start-string

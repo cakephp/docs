@@ -18,9 +18,10 @@ $htmlAttributes:
 
     Attributs souhaités: <tag class="someClass" />
     Paramètre du tableau: array('class' => 'someClass')
-     
+
     Attributs souhaités: <tag name="foo" value="bar" />
     Paramètre du tableau:  array('name' => 'foo', 'value' => 'bar')
+
 
 .. note::
 
@@ -41,13 +42,13 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 .. php:method:: charset($charset=null)
 
     :param string $charset: Jeu de caractère désiré. S'il est null, la valeur
-       de ``App.encoding`` sera utilisé.
+       de ``App.encoding`` sera utilisée.
 
-    Utilisé pour créé une balise meta spécifiant le jeu de caractères du
-    document. UTF-8 par défaut
+    Utilisé pour créer une balise meta spécifiant le jeu de caractères du
+    document. UTF-8 par défaut.
 
     Exemple d'utilisation::
- 
+
         echo $this->Html->charset();
 
     Affichera:
@@ -66,14 +67,13 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-.. php:method:: css(mixed $path, string $rel = null, array $options = array())
+.. php:method:: css(mixed $path, array $options = array())
+
+    .. versionchanged:: 2.4
 
     :param mixed $path: Soit une chaîne du fichier css à lier, ou un tableau
-     avec plusieurs fichiers
-    :param string $rel: La valeur de l'attribut tag's rel (balise rel). Si
-     null, 'stylesheet' sera utilisé.
-       
-    :param array $options: Un tableau d'attributs  :term:`attributs html`.
+       avec plusieurs fichiers.    
+    :param array $options: Un tableau d'options ou :term:`attributs html`.
 
     Créé un ou plusieurs lien(s) vers un feuille de style CSS. Si la clé
     'inline' est définie à false dans les paramètres ``$options``, les balises
@@ -84,8 +84,11 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     des blocs l'élément lié sera ajouté. Par défaut il sera ajouté au bloc
     ``css``.
 
+    Si la clé 'rel' dans le tableau ``$options`` est défini pour 'import',
+    la feuille de style sera importée.
+
     Cette méthode d'inclusion CSS présume que le CSS spécifié se trouve dans
-    le répertoire /app/webroot/css.::
+    le répertoire /app/webroot/css si un chemin ne commence par un '/'.::
 
         echo $this->Html->css('forms');
 
@@ -291,7 +294,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
         <img src="/img/cake_logo.png" alt="CakePHP" /> 
 
-    Pour créér un lien d'image, spécifiez le lien de destination en
+    Pour créer un lien d'image, spécifiez le lien de destination en
     utilisant l'option ``url`` dans ``$htmlAttributes``.::
 
         echo $this->Html->image("recipes/6.jpg", array(
@@ -416,6 +419,28 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         <a href="/recipes/view/6">
             <img src="/img/recipes/6.jpg" alt="Brownies" />
         </a>
+
+    Définir ``escape`` à false va aussi désactiver l'échappement des attributs
+    du lien. Puisque depuis 2.4, vous pouvez utiliser l'option ``escapeTitle``
+    pour juste désactiver l'échappement du titre et pas des attributs.::
+
+        <?php
+        echo $this->Html->link(
+            $this->Html->image('recipes/6.jpg', array('alt' => 'Brownies')),
+            'recipes/view/6',
+            array('escapeTitle' => false, 'title' => 'hi "howdy"')
+        );
+
+    Affichera:
+
+    .. code-block:: html
+
+        <a href="/recipes/view/6" title="hi &quot;howdy&quot;">
+            <img src="/img/recipes/6.jpg" alt="Brownies" />
+        </a>
+
+   .. versionchanged:: 2.4
+        L'option ``escapeTitle`` a été ajoutée.
 
     Regardez aussi la méthode :php:meth:`HtmlHelper::url` pour
     plus d'exemples des différents types d'urls.
@@ -609,7 +634,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
     utilisant l'option ``block``.::
 
         echo $this->Html->script('wysiwyg', array('block' => 'scriptBottom'));
-        
+
     Dans votre layout, vous pouvez ressortir toutes les balises script ajoutées
     dans 'scriptBottom'::
 
@@ -675,7 +700,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         (ol/ul) ou si ul/ol utilise cela comme une balise.
     :param array $itemOptions: Attributs additionnels des balises de listes
         item(LI).
-        
+
     :param string $tag: Type de balise liste à utiliser (ol/ul).
 
     Fabrique une liste imbriquée  (UL/OL) dans un tableau associatif::
@@ -737,13 +762,13 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         </tr>
 
     ::
-        
+
         echo $this->Html->tableHeaders(
             array('Date','Title','Active'),
             array('class' => 'status'),
             array('class' => 'product_table')
         );
-         
+
     Sortie:
 
     .. code-block:: html
@@ -802,7 +827,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         ));
 
     Sortie:
- 
+
     .. code-block:: html
 
         <tr><td>Jul 7th, 2007</td><td>Best Brownies</td><td>Yes</td></tr>
@@ -817,7 +842,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             array('Aug 1st, 2006', 'Anti-Java Cake', array('No', array('id' => 'special'))),
         ));
 
-         
+
     // Sortie
 
     .. code-block:: html
@@ -836,7 +861,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             ),
             array('class' => 'darker')
         );
-        
+
     Output:
 
     .. code-block:: html
@@ -862,7 +887,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             "action" => "view",
             "bar"
         ));
-         
+
         // Restituera
         /posts/view/bar
 
@@ -875,7 +900,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             "action" => "view",
             "foo" => "bar"
         ));
-         
+
         // Restituera
         /posts/view/foo:bar
 
@@ -886,7 +911,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             "action" => "list",
             "ext" => "rss"
         ));
-         
+
         // Restituera
         /posts/list.rss
 
@@ -904,7 +929,7 @@ couvrira les méthodes du Helper Html et comment les utiliser.
             "action" => "search",
             "?" => array("foo" => "bar"),
             "#" => "first"));
-        
+
         // Restituera
         /posts/search?foo=bar#first
 
@@ -939,7 +964,7 @@ Changer la restitution des balises avec le Helper Html
     un nouveau fichier de configuration de balise contenant les balises
     que vous aimeriez utiliser. Pour changer les balises utilisées créez
     un fichier ``app/Config/html5_tags.php`` contenant::
-   
+
         $config = array('tags' => array(
             'css' => '<link rel="%s" href="%s" %s>',
             'style' => '<style%s>%s</style>',
@@ -1006,7 +1031,7 @@ Création d'un chemin de navigation avec le Helper Html
     ``$startText`` pour fournir le premier lien de fil. C'est utile quand vous
     voulez inclure un lien racine. Cette option fonctionne de la même façon que
     l'option ``$startText`` pour :php:meth:`~HtmlHelper::getCrumbs()`.
-   
+
 
     .. versionchanged:: 2.1
         Le paramètre ``$startText`` a été ajouté.

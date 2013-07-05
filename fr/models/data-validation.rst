@@ -772,6 +772,10 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     -  ‘My’, par exemple : (Décembre 2006 ou Déc 2006)
     -  ‘my’, par exemple : 12/2006 ou 12/06 (les séparateurs peuvent être
        l'espace, le point, le tiret, le slash)
+    -  'ym' par ex. 2006/12 ou 06/12 (les séparateurs peuvent être un espace,
+       une période, un tiret, ou un slash)
+    -  'y' e.g. 2006 (les séparateurs peuvent être un espace, une période,
+       un tiret, ou un slash)
 
     Si aucune clé n'est soumise, la clé par défaut 'ymd' sera utilisée::
 
@@ -788,6 +792,9 @@ complète de toutes les règles, illustrées par des exemples d'utilisation.
     en acceptant un large choix de formats et en essayant de les convertir,
     plutôt que de forcer les gens à les soumettre dans un format donné. Le
     plus de travail vous ferez pour les users, le mieux ce sera.
+
+    .. versionchanged:: 2.4
+        Les formats ``ym`` et ``y`` ont été ajoutés.
 
 .. php:staticmethod:: datetime(array $check, mixed $dateFormat = 'ymd', string $regex = null)
     

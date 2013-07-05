@@ -193,7 +193,7 @@ L'API requise pour CacheEngine est
     Non requis, mais utilisé pour faire du nettoyage quand les ressources
     expires. Le moteur FileEngine utilise cela pour effacer les fichiers
     qui contiennent des contenus expirés.
- 
+
 Utilisation du Cache pour stocker le résultat des requêtes les plus courantes
 =============================================================================
 
@@ -279,6 +279,27 @@ Cache de retirer toutes les entrées associées au groupe ``post``::
     public function afterSave($created) {
         if ($created) {
             Cache::clearGroup('post', 'site_home');
+        }
+    }
+
+.. versionadded:: 2.4
+
+:php:func:`Cache::groupConfigs()` peut être utilisée pour récupérer les
+correspondances entre le groupe et les configurations, par ex: en ayant le
+même groupe::
+
+    // Model/Post.php
+
+    /**
+     * Une variation de l\'exemple précédent qui nettoie toutes les
+     * configurations de Cache ayant le même groupe
+     */
+    public function afterSave($created) {
+        if ($created) {
+            $configs = Cache::groupConfigs('post');
+            foreach ($configs['post'] as $config) {
+                Cache::clearGroup('post', $config);
+            }
         }
     }
 
@@ -405,6 +426,11 @@ l'API de Cache
     quel moteur de cache qui requiert des évictions manuelles de données en
     cache.
     
+.. php:staticmethod:: groupConfigs($group = null)
+
+    :return: Tableau de groups et leurs noms de configuration liés.
+
+    Récupère les noms de group pour configurer la coorespondance.
 
 .. meta::
     :title lang=fr: Mise en cache
