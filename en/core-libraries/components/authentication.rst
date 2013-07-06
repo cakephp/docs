@@ -287,7 +287,7 @@ is rendered else a 403 http status code is returned.
 
 .. note::
 
-  Prior to 2.4 the authenticate objects do not have an `unauthenticated()` method.
+  Prior to 2.4 the authenticate objects do not provide an `unauthenticated()` method.
 
 Displaying auth related flash messages
 --------------------------------------
@@ -316,7 +316,7 @@ for when authorization fails::
     $this->Auth->authError = "This error shows up with the user tries to access a part of the website that is protected.";
 
 .. versionchanged:: 2.4
-   Sometimes, you only want to display the authorization error only after
+   Sometimes, you want to display the authorization error only after
    the user has already logged-in. You can suppress this message by setting
    its value to boolean `false`
 
@@ -947,7 +947,7 @@ and authentication mechanics in CakePHP.
 
 .. php:staticmethod:: user($key = null)
 
-    :param string $key:  The user data key you want to fetch if null,
+    :param string $key:  The user data key you want to fetch. If null,
         all user data will be returned.  Can also be called as an instance
         method.
 
