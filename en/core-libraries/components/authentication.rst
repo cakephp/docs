@@ -217,7 +217,9 @@ the following::
 
     class OpenidAuthenticate extends BaseAuthenticate {
         public function authenticate(CakeRequest $request, CakeResponse $response) {
-            // Do things for openid here.
+            // Do things for OpenID here.
+            // Return an array of user if they could authenticate the user,
+            // return false if not
         }
     }
 
