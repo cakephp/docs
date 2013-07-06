@@ -240,7 +240,10 @@ vous pourriez mettre ce qui suit::
 
     class OpenidAuthenticate extends BaseAuthenticate {
         public function authenticate(CakeRequest $request, CakeResponse $response) {
-            // Faire les trucs d'openid ici.
+            // Faire les trucs d'OpenID ici.
+            // Retourne un tableau de l\'user si ils peuvent authentifier
+            // l\'user
+            // retourne false dans le cas contraire
         }
     }
 
