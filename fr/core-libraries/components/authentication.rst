@@ -317,7 +317,7 @@ cet element est rendu, sinon un code de statut http 403 est retourné.
 
 .. note::
 
-  Avant 2.4, les objets d'authentification n'ont pas une méthode
+  Avant 2.4, les objets d'authentification ne fournissent pas de méthode
   `unauthenticated()`.
 
 Afficher les messages flash de Auth
@@ -1005,9 +1005,9 @@ d'autorisation et d'authentification intégrée dans CakePHP.
 
 .. php:staticmethod:: user($key = null)
 
-    :param string $key: Si la clé des données utilisateur que vous voulez
-      récupérer est null, tous les utilisateurs seront retournés. Peut aussi
-      être appelée comme une instance de méthode.
+    :param string $key: La clé des données utilisateur que vous voulez
+      récupérer.Si elle est null, tous les utilisateurs seront retournés. Peut
+      aussi être appelée comme une instance de méthode.
 
     Prend les données concernant de l'utilisateur connecté, vous pouvez
     utiliser une clé propriétaire pour appeler une donnée spécifique à propos
