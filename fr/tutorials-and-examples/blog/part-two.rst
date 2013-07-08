@@ -51,7 +51,7 @@ de base ::
 
 Maintenant, ajoutons une action à notre controller. Les actions représentent
 souvent une simple fonction ou une interface dans une application. Par exemple,
-quand les utilisateurs requêtent wwww.exemple.com/posts/index (qui est
+quand les utilisateurs requêtent www.exemple.com/posts/index (qui est
 également la même chose que www.exemple.com/posts/), ils pourraient s'attendre
 à voir une liste de posts. Le code pour cette action devrait ressembler à
 quelque chose comme ça::

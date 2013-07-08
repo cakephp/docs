@@ -21,6 +21,8 @@ You can install the phpdomain using:
 
 	easy_install sphinxcontrib-phpdomain
 
+*To run the easy_install command, the setuptools package must be previously installed.*
+
 Building the documentation
 --------------------------
 
