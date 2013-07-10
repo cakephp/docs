@@ -66,6 +66,7 @@ Control structures are for example "``if``", "``for``", "``foreach``",
    structure. The statement included in curly brackets should begin on a
    new line, and code contained within it should gain a new level of
    indentation.
+*  Inline assignments should not be used inside of the control structures.
 
 ::
 
@@ -78,6 +79,17 @@ Control structures are for example "``if``", "``for``", "``foreach``",
 
     // good
     if (expr) {
+        statement;
+    }
+
+    // wrong = inline assignment
+    if ($variable = Class::function()) {
+        statement;
+    }
+
+    // good
+    $variable = Class::function()
+    if ($variable) {
         statement;
     }
 
