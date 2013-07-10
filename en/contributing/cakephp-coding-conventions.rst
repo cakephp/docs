@@ -88,7 +88,7 @@ Control structures are for example "``if``", "``for``", "``foreach``",
     }
 
     // good
-    $variable = Class::function()
+    $variable = Class::function();
     if ($variable) {
         statement;
     }
