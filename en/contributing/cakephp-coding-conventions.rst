@@ -292,7 +292,7 @@ Private methods or variable names start with double underscore ("\_\_"). Example
 
 Try to avoid private methods or variables, though, in favor of protected ones.
 The latter can be accessed or modified by subclasses, whereas private ones
-prevent extension or re-use.
+prevent extension or re-use. Private visibility also makes testing much more difficult.
 
 Method Chaining
 ---------------
