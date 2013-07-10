@@ -123,6 +123,8 @@ CakeEmail
 - :php:meth:`CakeEmail::emailPattern()` was added. This method can be used to
   relax email validation rules. This is useful when dealing with certain
   Japanese hosts that allow non-compliant addresses to be used.
+- :php:meth:`CakeEmail::attachments()` now allows you to provide the file
+  contents directly using the ``data`` key.
 
 HttpSocket
 ----------

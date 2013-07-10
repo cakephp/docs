@@ -303,8 +303,15 @@ you want the filenames to appear in the recipient's mail client:
    ``Content-Disposition`` header for an attachment.  This is useful when
    sending ical invites to clients using outlook.
 
+   4.3 Instead of the ``file`` option you can provide the file contents as
+   a string using the ``data`` option. This allows you to attach files without
+   needing file paths to them.
+
 .. versionchanged:: 2.3
-    The ``contentDisposition`` option was added in 2.3
+    The ``contentDisposition`` option was added.
+
+.. versionchanged:: 2.4
+    The ``data`` option was added.
 
 Using transports
 ----------------
