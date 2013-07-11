@@ -314,8 +314,15 @@ client:
        header ``Content-Disposition`` pour une pièce jointe. C'est utile pour
        l'envoi d'invitations ical à des clients utilisant outlook.
 
+   4.3 Au lieu de l'option ``file``, vous pouvez fournir les contenus de
+       fichier en chaîne en utilisant l'option ``data``. Cela vous permet
+       d'attacher les fichiers sans avoir besoin de chemins de fichier vers eux.
+
 .. versionchanged:: 2.3
-    L'option ``contentDisposition`` a été ajoutée dans 2.3.
+    L'option ``contentDisposition`` a été ajoutée.
+
+.. versionchanged:: 2.4
+    L'option ``data`` a été ajoutée.
 
 Utiliser les transports
 -----------------------

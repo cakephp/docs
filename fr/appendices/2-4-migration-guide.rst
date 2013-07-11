@@ -137,6 +137,8 @@ CakeEmail
   utilisée pour faciliter les règles de validation d'email. C'est utile
   quand vous gérez certains hôtes Japonais qui permettent aux adresses non
   conformes d'être utilisées.
+- :php:meth:`CakeEmail::attachments()` vous permet de fournir les contenus de
+  fichier directement en utilisant la clé ``data``.
 
 HttpSocket
 ----------
