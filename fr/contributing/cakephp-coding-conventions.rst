@@ -67,18 +67,31 @@ Les structures de contrôle sont par exemple "``if``", "``for``", "``foreach``",
    la structure de contrôle. La déclaration inclue dans les accolades doit
    commencer sur une nouvelle ligne, et le code qu'il contient doit gagner un
    nouveau niveau d'indentation.
+*  Les attributs Inline ne devraient pas être utilisés à l'intérieur de les
+   structures de contrôle.
 
 ::
 
-    // wrong = pas de parenthèses, déclaration mal placée
+    // mauvais = pas de parenthèses, déclaration mal placée
     if (expr) statement; 
 
-    // wrong = pas de parenthèses
+    // mauvais = pas de parenthèses
     if (expr) 
         statement; 
 
-    // good
+    // bon
     if (expr) {
+        statement;
+    }
+
+    // mauvais = inline assignment
+    if ($variable = Class::function()) {
+        statement;
+    }
+
+    // bon
+    $variable = Class::function();
+    if ($variable) {
         statement;
     }
 
