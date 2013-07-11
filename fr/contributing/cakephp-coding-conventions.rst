@@ -215,7 +215,7 @@ DocBlock, par exemple::
      */
     function bar() {
     }
-     
+
     /**
      * Foo function
      */
@@ -296,6 +296,12 @@ Les noms de méthodes et variables privées commencent avec un underscore double
             /*...*/
         }
     }
+
+Essayez cependant d'éviter les méthodes et variables privées, et de plutôt
+utiliser des protégées.
+Ce qui suivra peut être accessible ou modifié en sous-classes, tandis que
+celles privées évitent l'extension ou la réutilisation. La visibilité privée
+rend aussi le test beaucoup plus difficile.
 
 Chaînage des méthodes
 ---------------------
