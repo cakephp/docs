@@ -129,7 +129,7 @@ Acl components. First add a login and logout action to your
             if ($this->Auth->login()) {
                 $this->redirect($this->Auth->redirect());
             } else {
-                $this->Session->setFlash('Your username or password was incorrect.');
+                $this->Session->setFlash(__('Your username or password was incorrect.'));
             }
         }
     }
