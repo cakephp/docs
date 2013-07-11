@@ -16,10 +16,10 @@ HtmlHelper にある多くのメソッドは ``$htmlAttributes`` という
 
 .. code-block:: html
 
-    付けられる属性: <tag class="someClass" />      
+    付けられる属性: <tag class="someClass" />
     配列での指定: array('class' => 'someClass')
-     
-    付けられる属性: <tag name="foo" value="bar" />  
+
+    付けられる属性: <tag name="foo" value="bar" />
     配列での指定:  array('name' => 'foo', 'value' => 'bar')
 
 
@@ -48,7 +48,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     既定では UTF-8 になります。
 
     使用例::
- 
+
         echo $this->Html->charset();
 
     出力結果
@@ -61,7 +61,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
         echo $this->Html->charset('ISO-8859-1');
 
-    以下のようになります。t:
+    以下のようになります。:
 
     .. code-block:: html
 
@@ -80,7 +80,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     ``block`` オプションを使用することで、 link タグが追加されるブロックを制御できます。
     既定では ``css`` ブロックに追加されます。
-    
+
     ``/app/webroot/css`` ディレクトリ以下にある特定の CSS ファイルをインクルードするには
     以下のようにします。::
 
@@ -201,7 +201,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     クローラにインデックスを作成させないよう指定するタグを出力する例を
     以下に示します。::
 
-        echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex')); 
+        echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex'));
 
     .. versionchanged:: 2.1
         ``block`` オプションが追加されました。
@@ -259,7 +259,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
             'background' => '#633',
             'border-bottom' => '1px solid #000',
             'padding' => '10px'
-        )); 
+        ));
 
     出力は以下のようになります。::
 
@@ -279,7 +279,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     .. code-block:: html
 
-        <img src="/img/cake_logo.png" alt="CakePHP" /> 
+        <img src="/img/cake_logo.png" alt="CakePHP" />
 
     リンク付き画像を作成するには、リンク先を ``$htmlAttributes`` の
     ``url`` オプションに設定します。::
@@ -381,7 +381,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
         );
 
     結果は以下の通りです。
-  
+
     .. code-block:: html
 
         <a href="/images/view/1?height=400&width=500">画像を表示する</a>
@@ -406,7 +406,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
         </a>
 
     そのほかの種類のURLについては、 :php:meth:`HtmlHelper::url`
-    メソッドの項目も参考にしてください。 
+    メソッドの項目も参考にしてください。
 
 .. php:method:: media(string|array $path, array $options)
 
@@ -469,15 +469,15 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
         <?php
         echo $this->Html->tag('span', 'Hello World.', array('class' => 'welcome'));
         ?>
-         
+
         // 出力結果
         <span class="welcome">Hello World</span>
-         
+
         // text を指定しなかった場合です。
         <?php
         echo $this->Html->tag('span', null, array('class' => 'welcome'));
         ?>
-         
+
         // 出力結果
         <span class="welcome">
 
@@ -485,7 +485,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
         text は既定ではエスケープされませんが、
         ``$htmlOptions['escape'] = true`` と設定することでエスケープすることができます。
-        以前のバージョンでは、4つ目の引数に ``boolean $escape = false`` 
+        以前のバージョンでは、4つ目の引数に ``boolean $escape = false``
         と設定することで行います。
 
 .. php:method:: div(string $class, string $text, array $options)
@@ -500,13 +500,13 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     HTML で出力します。
 
     text を指定しなかった場合は開始タグのみを返します。
- 
+
     .. code-block:: php
 
         <?php
         echo $this->Html->div('error', 'Please enter your credit card number.');
         ?>
-        
+
         // 出力結果
         <div class="error">Please enter your credit card number.</div>
 
@@ -516,7 +516,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     :param string $text: 段落に含める内容です。
     :param array $options: :term:`html attributes` の配列です。
 
-    text を含め、 CSS のクラスを指定した <p> タグを出力します。 
+    text を含め、 CSS のクラスを指定した <p> タグを出力します。
     text に何も指定しなかった場合は <p> の開始タグのみを出力します。
 
     .. code-block:: php
@@ -524,7 +524,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
         <?php
         echo $this->Html->para(null, 'Hello World.');
         ?>
-        
+
         // 出力結果
         <p>Hello World.</p>
 
@@ -590,7 +590,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     オプションを指定します。 ::
 
         echo $this->Html->script('wysiwyg', array('block' => 'scriptBottom'));
-        
+
     レイアウトで以下のように記述すると、すべての script タグを
     'scriptBottom' に出力することができます。::
 
@@ -637,7 +637,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
     コードブロックのバッファリングを終了し、生成した script 要素を
     出力します。コードブロックをオープンする際、 ``inline => false``
     としていた場合は nullを返します。
-    
+
     ``scriptStart()`` と ``scriptEnd()`` の使用例を示します。::
 
         $this->Html->scriptStart(array('inline' => false));
@@ -767,7 +767,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
             array('Jun 21st, 2007', 'Smart Cookies', 'Yes'),
             array('Aug 1st, 2006', 'Anti-Java Cake', 'No'),
         ));
-         
+
     Output:
 
     .. code-block:: html
@@ -802,7 +802,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
             ),
             array('class' => 'darker')
         );
-        
+
     結果は以下の通りです。
 
     .. code-block:: html
@@ -827,7 +827,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
             "action" => "view",
             "bar"
         ));
-         
+
         // 出力結果
         /posts/view/bar
 
@@ -840,7 +840,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
             "action" => "view",
             "foo" => "bar"
         ));
-         
+
         // 出力結果
         /posts/view/foo:bar
 
@@ -851,7 +851,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
             "action" => "list",
             "ext" => "rss"
         ));
-         
+
         // 出力結果
         /posts/list.rss
 
@@ -870,7 +870,7 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
             "?" => array("foo" => "bar"),
             "#" => "first"
         ));
-        
+
         // 出力結果
         /posts/search?foo=bar#first
 
@@ -927,7 +927,7 @@ HtmlHelper を使ったパンくずリストの作成
 
         echo $this->Html->getCrumbs(' > ', 'Home');
 
-    ``$startText`` のオプションは1つの配列も受け付けます。 
+    ``$startText`` のオプションは1つの配列も受け付けます。
     これにより、生成された最初のリンクへのさらなる制御を可能にします。::
 
         echo $this->Html->getCrumbs(' > ', array(
@@ -944,8 +944,8 @@ HtmlHelper を使ったパンくずリストの作成
 
 .. php:method:: addCrumb(string $name, string $link = null, mixed $options = null)
 
-   ビューでページのそれぞれにパンくずリストを作るため、
-   以下のコードを加えたとします。::
+    ビューでページのそれぞれにパンくずリストを作るため、
+    以下のコードを加えたとします。::
 
         $this->Html->addCrumb('ユーザー', '/users');
         $this->Html->addCrumb('ユーザーの追加', '/users/add');
@@ -966,7 +966,7 @@ HtmlHelper を使ったパンくずリストの作成
     :php:meth:`~HtmlHelper::getCrumbs()` と同じように使うには、あらゆるパンくずリストの項目が
     加えられたオプションを使用します。 ``$startText`` パラメータを設定すると
     パンくずリストの最初のリンクとテキストを指定することができます。
-    これは、つねにパンくずリストにトップを含めておきたいときに便利です。  
+    これは、つねにパンくずリストにトップを含めておきたいときに便利です。
     このオプションは :php:meth:`~HtmlHelper::getCrumbs()` の ``$startText``
     オプションと同じ働きをします。
 
