@@ -159,7 +159,7 @@ controller UsersController::
     public function login() {
         if ($this->Session->read('Auth.User')) {
             $this->Session->setFlash('Vous êtes connecté!');
-            $this->redirect('/', null, false);
+            $this->redirect('/');
         }
     }
 
