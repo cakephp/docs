@@ -180,25 +180,38 @@ automatically echo the output into the view.
         echo CakeNumber::precision(456.91873645, 2);
 
 
-.. php:method:: toPercentage(mixed $number, int $precision = 2)
+.. php:method:: toPercentage(mixed $number, int $precision = 2, array $options = array())
 
-    :param float $number: The value to covert
-    :param integer $precision: The number of decimal places to display
+    :param float $number: The value to covert.
+    :param integer $precision: The number of decimal places to display.
+    :param array $options: Options, see below.
+
+    +---------------------+----------------------------------------------------+
+    | Option              | Description                                        |
+    +=====================+====================================================+
+    | multiply            | Boolean to indicate whether the value has to be    |
+    |                     | multiplied by 100. Useful for decimal percentages. |
+    +---------------------+----------------------------------------------------+
 
     Like precision(), this method formats a number according to the
     supplied precision (where numbers are rounded to meet the given
     precision). This method also expresses the number as a percentage
     and prepends the output with a percent sign.::
 
-        // called as NumberHelper
+        // Called as NumberHelper. Output: 45.69%
         echo $this->Number->toPercentage(45.691873645);
 
-        // Outputs
-        45.69%
-
-        // called as CakeNumber
+        // Called as CakeNumber. Output: 45.69%
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::toPercentage(45.691873645);
+
+        // Called with multiply. Output: 45.69%
+        echo CakeNumber::toPercentage(0.45691, 2, array(
+            'multiply' => true
+        ));
+
+    .. versionadded:: 2.4
+        The ``$options`` argument with the ``multiply`` option was added.
 
 .. php:method:: fromReadableSize(string $size, $default)
 
