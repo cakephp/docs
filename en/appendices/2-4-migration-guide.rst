@@ -227,6 +227,6 @@ Routing
 Router
 ------
 
-- :php:meth:`Router::baseUrl()` was added. This method replaces
-  :php:const:`FULL_BASE_URL`. Which is now deprecated.
+- :php:meth:`Router::baseUrl()` was added together with ``App.fullBaseURL`` Configure value. They replace
+  :php:const:`FULL_BASE_URL` which is now deprecated.
 
