@@ -203,6 +203,8 @@ CakeTime
 
 - :php:meth:`CakeTime::isPast()` and :php:meth:`CakeTime::isFuture()` were
   added.
+- :php:meth:`CakeTime::timeAgoInWords()` has two new options to customize the output strings:
+  ``relativeString`` (defaults to ``%s ago``) and ``absoluteString`` (defaults to ``on %s``).
 
 Xml
 ---
