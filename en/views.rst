@@ -85,7 +85,7 @@ The above view file could be used as a parent view.  It expects that the view
 extending it will define the ``sidebar`` and ``title`` blocks.  The ``content``
 block is a special block that CakePHP creates. It will contain all the
 un-captured content from the extending view. Assuming our view file has a
-``$posts`` variable with the data about our post.  Our view could look like:
+``$post`` variable with the data about our post.  Our view could look like:
 
 .. code-block:: php
 
