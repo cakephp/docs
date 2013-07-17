@@ -253,6 +253,11 @@ We can retrieve data from our remote source using the familiar model methods::
         'conditions' => array('name' => 'Some Person'),
     ));
 
+.. tip::
+
+    Using find types other than `'all'` can have unexpected results if the 
+    result of your `read` method is not a numerically indexed array.
+
 Similarly we can save a new message::
 
     $this->MyModel->save(array(
