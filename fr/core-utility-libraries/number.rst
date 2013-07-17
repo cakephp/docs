@@ -209,25 +209,49 @@ automatiqement la sortie dans la vue.
         echo CakeNumber::precision(456.91873645, 2 );
 
 
-.. php:method:: toPercentage(mixed $number, int $precision = 2)
+.. php:method:: toPercentage(mixed $number, int $precision = 2, array $options = array())
 
     :param float $number: La valeur à convertir.
     :param integer $precision: Le nomnbre de décimal à afficher.
+    :param array $options: Options, voir ci-dessous.
+
+    +---------------------+----------------------------------------------------+
+    | Option              | Description                                        |
+    +=====================+====================================================+
+    | multiply            | Booléen pour indiquer si la valeur doit être       |
+    |                     | multipliée par 100. Utile pour les pourcentages    |
+    |                     | avec décimal.                                      |
+    +---------------------+----------------------------------------------------+
 
     Comme precision(), cette méthode formate un nombre selon la précision
     fournie (où les nombres sont arrondis pour parvenir à ce degré de
     précision). Cette méthode exprime aussi le nombre en tant que
     pourcentage et préfixe la sortie avec un signe de pourcent.::
     
-        // appelé avec NumberHelper
+        // appelé avec NumberHelper. Sortie: 45.69%
         echo $this->Number->toPercentage(45.691873645);
 
-        // Sortie
-        45.69%
-
-        // appelé avec CakeNumber
+        // appelé avec CakeNumber. Sortie: 45.69%
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::toPercentage(45.691873645);
+
+        // Appelé avec multiply. Sortie: 45.69%
+        echo CakeNumber::toPercentage(0.45691, 2, array(
+            'multiply' => true
+        ));
+
+    .. versionadded:: 2.4
+        L'argument ``$options`` avec l'option ``multiply`` a été ajouté.
+
+.. php:method:: fromReadableSize(string $size, $default)
+
+    :param string $size: La valeur formatée lisible par un humain.
+
+    Cette méthode enlève le format d'un nombre à partir d'une taille de byte
+    lisible par un humain en un nombre entier de bytes.
+
+    .. versionadded:: 2.3
+        Cette méthode a été ajoutée dans 2.3
 
 .. php:method:: toReadableSize(string $dataSize)
 
