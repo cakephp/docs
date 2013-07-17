@@ -188,7 +188,7 @@ a block should it not already exist::
 
     // In a parent view/layout
     $this->startIfEmpty('navbar');
-    Default content
+    // Default content
     $this->end();
 
     echo $this->fetch('navbar');
