@@ -99,6 +99,8 @@ PaginatorHelper
 ----------
 
 - :php:meth:`PaginatorHelper::param()` has been added.
+- The first page now does not contain ``/page:1`` or ``?page=1`` in the URL anymore.
+  This helps to prevent duplicate content issues you would need to use canonical or noindex otherwise.
 
 
 Network
