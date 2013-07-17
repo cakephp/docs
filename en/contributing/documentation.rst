@@ -41,7 +41,7 @@ Translator tips:
 Documentation formatting guide
 ==============================
 
-The new CakePHP documentation is written with `ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_.  ReST 
+The new CakePHP documentation is written with `ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_.  ReST
 (Re Structured Text) is a plain text markup syntax similar to markdown, or
 textile.  To maintain consistency it is recommended that when adding to the
 CakePHP documentation you follow the guidelines here on how to format and
@@ -77,11 +77,11 @@ Paragraphs should be separated by more than one empty line.
 Inline markup
 -------------
 
-* one asterisk: *text* for emphasis (italics),
-* two asterisks: **text** for strong emphasis (boldface), and
-* backquotes: ``text`` for code samples.
+* one asterisk: ``*text*`` (result: *text*) for emphasis (italics),
+* two asterisks: ``**text**`` (result: **text**) for strong emphasis (boldface), and
+* two backquotes: ``\`text\``` (result: ``text``) for code samples.
 
-If asterisks or backquotes appear in running text and could be confused with inline markup 
+If asterisks or backquotes appear in running text and could be confused with inline markup
 delimiters, they have to be escaped with a backslash.
 
 Inline markup has a few restrictions:
