@@ -23,6 +23,9 @@ BakeShell
   votre table, cela va ajouter le behavior Tree, par exemple. Vous pouvez
   aussi étendre le ModelTask pour permettre à vos propres behaviors d'être
   reconnus.
+- ``cake bake`` pour les views, models, controllers, tests et fixtures
+  supportent maintenant les paramètres ``-f`` ou ``--force`` pour forcer
+  l'écrasement de fichiers.
 
 FixtureTask
 -----------
