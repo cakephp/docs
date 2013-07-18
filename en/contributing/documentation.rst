@@ -77,9 +77,17 @@ Paragraphs should be separated by more than one empty line.
 Inline markup
 -------------
 
-* one asterisk: ``*text*`` (result: *text*) for emphasis (italics),
-* two asterisks: ``**text**`` (result: **text**) for strong emphasis (boldface), and
-* two backquotes: ``\`text\``` (result: ``text``) for code samples.
+* One asterisk: *text* for emphasis (italics)
+
+  * ``*text* for emphasis``
+ 
+* Two asterisks: **text** for strong emphasis (boldface)
+
+  * ``**text** for strong emphasis``
+ 
+* Two backquotes: ``text`` for code samples
+
+  * ````text````
 
 If asterisks or backquotes appear in running text and could be confused with inline markup
 delimiters, they have to be escaped with a backslash.
