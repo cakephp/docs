@@ -330,6 +330,12 @@ Formatage
     .. versionadded:: 2.2
        Le paramètre ``$dateString`` accepte aussi maintenant un objet DateTime.
 
+    .. versionadded:: 2.4
+       Les nouveaux paramètres d'option ``relativeString`` (par défaut à
+       ``%s ago``) et ``absoluteString`` (par défaut à ``on %s``) pour
+       permettre la personnalisation de la chaîne de sortie résultante sont
+       maintenant disponibles.
+
 .. php:method:: toRSS($dateString, $timezone = NULL)
 
     :rtype: string
