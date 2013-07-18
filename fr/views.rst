@@ -85,7 +85,7 @@ Le fichier de vue ci-dessus peut être utilisé comme une vue parente. Il
 s'attend à ce que la vue étendue, il va définir des blocks ``sidebar``
 et ``title``. Le block ``content`` est un block spécial que CakePHP
 crée. Il contiendra tous les contenus non capturés de la vue étendue.
-En admettant que notre fichier de vue a une variable ``$posts`` avec les
+En admettant que notre fichier de vue a une variable ``$post`` avec les
 données sur notre post. Notre vue pourrait ressembler à ceci::
 
     <?php
