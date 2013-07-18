@@ -79,15 +79,15 @@ Inline markup
 
 * One asterisk: *text* for emphasis (italics)
 
-  * Example: ``*text* for emphasis``
+  * ``*text* for emphasis``
  
 * Two asterisks: **text** for strong emphasis (boldface)
 
-  * Example: ``**text** for strong emphasis``
+  * ``**text** for strong emphasis``
  
 * Two backquotes: ``text`` for code samples
 
-  * Example ````text````
+  * ````text````
 
 If asterisks or backquotes appear in running text and could be confused with inline markup
 delimiters, they have to be escaped with a backslash.
