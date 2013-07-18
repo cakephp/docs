@@ -290,10 +290,10 @@ PostsController::
             if ($this->request->is('post')) {
                 $this->Post->create();
                 if ($this->Post->save($this->request->data)) {
-                    $this->Session->setFlash('Your post has been saved.');
+                    $this->Session->setFlash(__('Your post has been saved.'));
                     $this->redirect(array('action' => 'index'));
                 } else {
-                    $this->Session->setFlash('Unable to add your post.');
+                    $this->Session->setFlash(__('Unable to add your post.'));
                 }
             }
         }
@@ -446,10 +446,10 @@ like::
         if ($this->request->is('post') || $this->request->is('put')) {
             $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash('Your post has been updated.');
+                $this->Session->setFlash(__('Your post has been updated.'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash('Unable to update your post.');
+                $this->Session->setFlash(__('Unable to update your post.'));
             }
         }
 
@@ -539,7 +539,7 @@ Next, let's make a way for users to delete posts. Start with a
         }
 
         if ($this->Post->delete($id)) {
-            $this->Session->setFlash('The post with id: ' . $id . ' has been deleted.');
+            $this->Session->setFlash(__('The post with id: %s has been deleted.', $id));
             $this->redirect(array('action' => 'index'));
         }
     }
