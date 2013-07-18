@@ -291,14 +291,15 @@ Un layout contient le code de présentation qui entoure une vue.
 Tout ce que vous voulez voir dans toutes vos vues devra être placé dans un
 layout.
 
-Les fichiers de layout doivent être placés dans ``/app/View/Layouts``. Le
-layout de CakePHP par défaut peut être surchargé en créant un nouveau layout
-par défaut dans ``/app/View/Layouts/default.ctp``. Une fois qu'un nouveau
-layout default a été crée, le code de la vue rendu par le controller est placé
-à l'intérieur du layout default quand la page est affichée.
+Le fichier de layout par défaut de CakePHP est placé dans
+``/app/View/Layouts``. Si vous voulez changer entièrement le look de votre
+application, alors c'est le bon endroit pour commencer, parce que le code de
+vue de rendu du controller est placé à l'intérieur du layout par défaut quand
+la page est rendue.
 
+Les autres fichiers de layout devront être placés dans ``/app/View/Layouts``.
 Quand vous créez un layout, vous devez dire à CakePHP où placer
-le code pour vos vues. Pour ce faire, assurez-vous que votre layout contienne
+la sortie pour vos vues. Pour ce faire, assurez-vous que votre layout contienne
 ``$this->fetch('content')``. Voici un exemple auquel un layout pourrait
 ressembler::
 
