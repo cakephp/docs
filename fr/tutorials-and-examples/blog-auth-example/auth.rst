@@ -298,7 +298,7 @@ l'user connecté courant en référence pour le post créé::
         if ($this->request->is('post')) {
             $this->request->data['Post']['user_id'] = $this->Auth->user('id'); //Ligne ajoutée
             if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash('Votre post a été sauvegardé.');
+                $this->Session->setFlash(__('Votre post a été sauvegardé.'));
                 $this->redirect(array('action' => 'index'));
             }
         }

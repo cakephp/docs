@@ -295,10 +295,10 @@ PostsController::
             if ($this->request->is('post')) {
                 $this->Post->create();
                 if ($this->Post->save($this->request->data)) {
-                    $this->Session->setFlash('Votre post a été sauvegardé.');
+                    $this->Session->setFlash(__('Votre post a été sauvegardé.'));
                     $this->redirect(array('action' => 'index'));
                 } else {
-                    $this->Session->setFlash('Impossible d\'ajouter votre post.');
+                    $this->Session->setFlash(__('Impossible d\'ajouter votre post.'));
                 }
             }
         }
@@ -459,10 +459,10 @@ ressembler ::
         if ($this->request->is('post') || $this->request->is('put')) {
             $this->Post->id = $id;
             if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash('Your post has been updated.');
+                $this->Session->setFlash(__('Your post has been updated.'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash('Unable to update your post.');
+                $this->Session->setFlash(__('Unable to update your post.'));
             }
         }
 
@@ -553,7 +553,7 @@ Posts (PostsController)::
             throw new MethodNotAllowedException();
         }
         if ($this->Post->delete($id)) {
-            $this->Session->setFlash('Le Post avec l\'id ' . $id . ' a été supprimé.');
+            $this->Session->setFlash(__('Le Post avec l\'id ' . $id . ' a été supprimé.'));
             $this->redirect(array('action' => 'index'));
         }
     }

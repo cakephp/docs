@@ -124,7 +124,7 @@ action logout à votre ``UsersController``::
             if ($this->Auth->login()) {
                 $this->redirect($this->Auth->redirect());
             } else {
-                $this->Session->setFlash('Votre nom d\'user ou mot de passe sont incorrects.');
+                $this->Session->setFlash(__('Votre nom d\'user ou mot de passe sont incorrects.'));
             }
         }
     }
