@@ -80,9 +80,9 @@ d'une ligne vide.
 Le balisage interne
 -------------------
 
-* Un astérisque: *text* pour une accentuation (italiques),
-* Deux astérisques: **text** pour une forte accentuation (caractères gras), et
-* backquotes: ``text`` pour les exemples de code.
+* Un astérisque: *text* (résultat: *text*) pour une accentuation (italiques),
+* Deux astérisques: **text** (résultat: **text**) pour une forte accentuation (caractères gras), et
+* backquotes: ``text`` (résultat: ``text``) pour les exemples de code.
 
 Si les astérisques ou les backquotes apparaissent dans le texte et peuvent être
 confondus avec les délimiteurs du balisage interne, ils doivent être echappés
