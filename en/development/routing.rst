@@ -1028,7 +1028,7 @@ Router API
     you should be sure to include the fully qualified domain name including
     protocol.
 
-    Setting values with this method will also update ``App.fullBaseURL`` in
+    Setting values with this method will also update ``App.fullBaseUrl`` in
     :php:class:`Configure`.
 
 .. php:class:: CakeRoute

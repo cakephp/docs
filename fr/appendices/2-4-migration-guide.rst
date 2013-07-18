@@ -257,6 +257,7 @@ Routing
 Router
 ------
 
-- :php:meth:`Router::baseUrl()` a été ajoutée. Cette méthode remplace
-  :php:const:`FULL_BASE_URL`. Qui est maintenant déprécié.
+- :php:meth:`Router::baseUrl()` a été ajoutée en même temps que la valeur
+     ``App.fullBaseURL`` de Configure. Cette méthode remplace
+     :php:const:`FULL_BASE_URL` qui est maintenant dépréciée.
 
