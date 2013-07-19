@@ -54,8 +54,8 @@ comme ceci ::
 
     $this->Behaviors->trigger('afterFind', array($this, $results, $primary));
 
-Ci-dessus ``$viewFile`` sera passé comme premier argument à toutes les méthodes
-beforeRender des helpers. Il y a plusieurs options qui peuvent être utilisées
+Ci-dessus ``$this`` sera passé comme premier argument à toutes les méthodes
+afterFind des helpers. Il y a plusieurs options qui peuvent être utilisées
 pour contrôler comment les callbacks sont tués:
 
 - ``breakOn`` Défini à la valeur ou aux valeurs pour lesquels vous voulez
