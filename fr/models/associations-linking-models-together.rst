@@ -54,9 +54,9 @@ spécificité de l'association.
         public $hasOne = 'Profile';
         public $hasMany = array(
             'Recipe' => array(
-                'className'  => 'Recipe',
+                'className' => 'Recipe',
                 'conditions' => array('Recipe.approved' => '1'),
-                'order'      => 'Recipe.created DESC'
+                'order' => 'Recipe.created DESC'
             )
         );
     }
@@ -83,7 +83,7 @@ uniques dans une app entière**. Par exemple, il est approprié d'avoir::
     class Group extends AppModel {
         public $hasMany = array(
             'MyRecipe' => array(
-                'className'  => 'Recipe',
+                'className' => 'Recipe',
             )
         );
         public $hasAndBelongsToMany = array(
@@ -111,7 +111,7 @@ mais ce qui suit ne fonctionnera pas bien en toute circonstance::
     class Group extends AppModel {
         public $hasMany = array(
             'MyRecipe' => array(
-                'className'  => 'Recipe',
+                'className' => 'Recipe',
             )
         );
         public $hasAndBelongsToMany = array(
@@ -198,9 +198,9 @@ limiter l'association pour inclure seulement certains enregistrements.
     class User extends AppModel {
         public $hasOne = array(
             'Profile' => array(
-                'className'    => 'Profile',
-                'conditions'   => array('Profile.published' => '1'),
-                'dependent'    => true
+                'className' => 'Profile',
+                'conditions' => array('Profile.published' => '1'),
+                'dependent' => true
             )
         );
     }
@@ -295,8 +295,8 @@ syntaxe de tableau::
     class Profile extends AppModel {
         public $belongsTo = array(
             'User' => array(
-                'className'    => 'User',
-                'foreignKey'   => 'user_id'
+                'className' => 'User',
+                'foreignKey' => 'user_id'
             )
         );
     }
@@ -391,12 +391,12 @@ un tableau::
     class User extends AppModel {
         public $hasMany = array(
             'Comment' => array(
-                'className'     => 'Comment',
-                'foreignKey'    => 'user_id',
-                'conditions'    => array('Comment.status' => '1'),
-                'order'         => 'Comment.created DESC',
-                'limit'         => '5',
-                'dependent'     => true
+                'className' => 'Comment',
+                'foreignKey' => 'user_id',
+                'conditions' => array('Comment.status' => '1'),
+                'order' => 'Comment.created DESC',
+                'limit' => '5',
+                'dependent' => true
             )
         );
     }
@@ -650,19 +650,19 @@ la syntaxe en tableau::
         public $hasAndBelongsToMany = array(
             'Ingredient' =>
                 array(
-                    'className'              => 'Ingredient',
-                    'joinTable'              => 'ingredients_recipes',
-                    'foreignKey'             => 'recipe_id',
-                    'associationForeignKey'  => 'ingredient_id',
-                    'unique'                 => true,
-                    'conditions'             => '',
-                    'fields'                 => '',
-                    'order'                  => '',
-                    'limit'                  => '',
-                    'offset'                 => '',
-                    'finderQuery'            => '',
-                    'deleteQuery'            => '',
-                    'insertQuery'            => ''
+                    'className' => 'Ingredient',
+                    'joinTable' => 'ingredients_recipes',
+                    'foreignKey' => 'recipe_id',
+                    'associationForeignKey' => 'ingredient_id',
+                    'unique' => true,
+                    'conditions' => '',
+                    'fields' => '',
+                    'order' => '',
+                    'limit' => '',
+                    'offset' => '',
+                    'finderQuery' => '',
+                    'deleteQuery' => '',
+                    'insertQuery' => ''
                 )
         );
     }
@@ -872,7 +872,7 @@ deux models::
         public $hasMany = array(
             'Follower' => array(
                 'className' => 'Follower',
-                'order'     => 'Follower.rank'
+                'order' => 'Follower.rank'
             )
         );
     }
