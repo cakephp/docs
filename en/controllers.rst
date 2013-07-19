@@ -319,7 +319,7 @@ For example::
         }
     }
     
-This would render ``app/Plugin/Users/View/UserDetails/custom_file.ctp`` 
+This would render ``app/Plugin/Users/View/UserDetails/custom_file.ctp``
 
 Flow Control
 ------------
@@ -366,6 +366,13 @@ Flow Control
     you can use::
 
         $this->redirect(array('controller' => 'orders', 'action' => 'confirm', 'product' => 'pizza', 'quantity' => 5));
+
+    An example using query strings and hash would look like::
+
+        $this->redirect(array(
+            'controller' => 'orders', 'action' => 'confirm', '?' => array('product' => 'pizza', 'quantity' => 5), '#' => 'top'));
+
+    The generated url would be: ``http://www.example.com/orders/confirm?product=pizza&quantity=5#top``
 
 .. php:method:: flash(string $message, string|array $url, integer $pause, string $layout)
 
