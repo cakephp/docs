@@ -388,6 +388,14 @@ Contrôle de Flux
 
         $this->redirect(array('controller' => 'commandes', 'action' => 'confirmation', 'produit' => 'pizza', 'quantite' => 5));
 
+    Un example d'utilisation des requêtes en chaînes et hashés ressemblerait
+    à ceci::
+
+        $this->redirect(array(
+            'controller' => 'commandes', 'action' => 'confirmation', '?' => array('produit' => 'pizza', 'quantite' => 5), '#' => 'top'));
+
+    L'url généré serait: ``http://www.example.com/commandes/confirmation?produit=pizza&quantite=5#top``
+
 .. php:method:: flash(string $message, string $url, integer $pause, string $layout)
 
     Tout comme ``redirect()``, la méthode ``flash()`` est utilisée pour
