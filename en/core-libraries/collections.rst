@@ -50,8 +50,8 @@ You can pass parameters to the callback loop as well::
 
     $this->Behaviors->trigger('afterFind', array($this, $results, $primary));
 
-In the above ``$viewFile`` would be passed as the first argument to every
-helper's beforeRender method. There are several options that can be used to
+In the above ``$this`` would be passed as the first argument to every
+behavior's afterFind method. There are several options that can be used to
 control how callbacks are fired:
 
 - ``breakOn`` Set to the value or values you want the callback propagation to stop on.
