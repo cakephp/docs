@@ -166,34 +166,21 @@ IIS7はネイティブで.htaccessファイルをサポートしていません�
         <system.webServer>
             <rewrite>
                 <rules>
-                    <clear/>
-                    <rule name="Imported Rule 0" stopProcessing="true">
-                        <match url="^(img|css|files|js|favicon.ico)(.*)$"></match>
-                        <action type="Rewrite" url="app/webroot/{R:1}{R:2}" appendQueryString="false"></action>
+                    <rule name="Rewrite requests to test.php" stopProcessing="true">
+                        <match url="^test.php(.*)$" ignoreCase="false" />
+                        <action type="Rewrite" url="app/webroot/test.php{R:1}" />
                     </rule>
-                    <rule name="Imported Rule 1" stopProcessing="true">
+                    <rule name="Exclude direct access to app/webroot/*" stopProcessing="true">
+                        <match url="^app/webroot/(.*)$" ignoreCase="false" />
+                        <action type="None" />
+                    </rule>
+                    <rule name="Rewrite routed access to assets (img, css, files, js, favicon)" stopProcessing="true">
+                        <match url="^(img|css|files|js|favicon.ico)(.*)$" />
+                        <action type="Rewrite" url="app/webroot/{R:1}{R:2}" appendQueryString="false" />
+                    </rule>
+                    <rule name="Rewrite requested file/folder to index.php" stopProcessing="true">
                         <match url="^(.*)$" ignoreCase="false" />
-                        <conditions logicalGrouping="MatchAll">
-                            <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
-                            <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
-                        </conditions>
-                        <action type="Rewrite" url="index.php?url={R:1}" appendQueryString="true" />
-                    </rule>
-                    <rule name="Imported Rule 2" stopProcessing="true">
-                        <match url="^$" ignoreCase="false" />
-                        <action type="Rewrite" url="app/webroot/" />
-                    </rule>
-                    <rule name="Imported Rule 3" stopProcessing="true">
-                        <match url="(.*)" ignoreCase="false" />
-                        <action type="Rewrite" url="app/webroot/{R:1}" />
-                    </rule>
-                    <rule name="Imported Rule 4" stopProcessing="true">
-                        <match url="^(.*)$" ignoreCase="false" />
-                        <conditions logicalGrouping="MatchAll">
-                            <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
-                            <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
-                        </conditions>
-                        <action type="Rewrite" url="index.php?url={R:1}" appendQueryString="true" />
+                        <action type="Rewrite" url="index.php" appendQueryString="true" />
                     </rule>
                 </rules>
             </rewrite>
