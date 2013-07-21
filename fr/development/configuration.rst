@@ -83,6 +83,15 @@ unix_socket
     Utilisé par les pilotes qui le supportent pour connecter via les fichiers
     socket unix. Si vous utilisez postgres et voulez utiliser les sockets
     unix, laissez la clé host vide.
+ssl_key
+    Le chemin vers le fichier de clé SSL. (Seulement supporté par MySQL,
+    nécessite PHP 5.3.7+).
+ssl_cert
+    Le chemin vers le fichier de certificat SSL. (Seulement supporté par MySQL,
+    nécessite PHP 5.3.7+).
+ssl_ca
+    Le chemin vers l'autorité de certification SSL. (Seulement supporté par
+    MySQL, nécessite PHP 5.3.7+).
 settings
     Un tableau de clé/valeur qui doit être envoyé à la base de données du
     serveur en tant que commandes ``SET`` quand la connection est créée.
@@ -90,7 +99,8 @@ settings
     ce moment.
 
 .. versionchanged:: 2.4
-    La clé ``settings`` a été ajoutée dans 2.4.
+    Les clés ``settings``, ``ssl_key``, ``ssl_cert`` et ``ssl_ca`` ont été
+    ajoutées dans 2.4.
 
 .. note::
 
