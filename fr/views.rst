@@ -745,10 +745,10 @@ Pour appeler toute méthode de view, utilisez ``$this->method()``
 
     .. versionadded:: 2.1
 
-.. php:method:: fetch($name)
+.. php:method:: fetch($name, $default = '')
 
-    Récupère la valeur d'un block. '' Va être retourné pour les blocks qui
-    ne sont pas définis. Regardez la section sur les :ref:`view-blocks` pour
+    Récupère la valeur d'un block. Si un block est vide ou non défini, '' va
+    être retourné. Regardez la section sur les :ref:`view-blocks` pour
     des exemples.
 
     .. versionadded:: 2.1
