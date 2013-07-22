@@ -130,7 +130,7 @@ Adding paths for App to find packages in
 
     Sets up each package location on the file system. You can configure multiple
     search paths for each package, those will be used to look for files one
-    folder at a time in the specified order. All paths should be terminated
+    folder at a time in the specified order. All paths must be terminated
     with a directory separator.
 
     Adding additional controller paths for example would alter where CakePHP
@@ -154,13 +154,13 @@ Adding paths for App to find packages in
 
     Examples::
 
-        App::build(array('controllers' => array('/full/path/to/controllers')));
+        App::build(array('controllers' => array('/full/path/to/controllers/')));
         //becomes 
-        App::build(array('Controller' => array('/full/path/to/Controller')));
+        App::build(array('Controller' => array('/full/path/to/Controller/')));
 
-        App::build(array('helpers' => array('/full/path/to/views/helpers')));
+        App::build(array('helpers' => array('/full/path/to/views/helpers/')));
         //becomes 
-        App::build(array('View/Helper' => array('/full/path/to/View/Helper')));
+        App::build(array('View/Helper' => array('/full/path/to/View/Helper/')));
 
     .. versionchanged:: 2.0
         ``App::build()`` will not merge app paths with core paths anymore.
