@@ -127,7 +127,7 @@ utiliser les helpers pour formater aussi.
 JSONP response
 ==============
 
-.. versionadded:: 2.3
+.. versionadded:: 2.4
 
 Quand vous utilisez JsonView, vous pouvez utiliser la variable de vue spéciale
 ``_jsonp`` pour permettre de retourner une réponse JSONP. La définir à ``true``
