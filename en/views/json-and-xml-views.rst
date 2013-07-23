@@ -118,7 +118,7 @@ well.
 JSONP response
 ==============
 
-.. versionadded:: 2.3
+.. versionadded:: 2.4
 
 When using JsonView you can use the special view variable ``_jsonp`` to enable
 returning a JSONP response. Setting it to ``true`` makes the view class check if query
