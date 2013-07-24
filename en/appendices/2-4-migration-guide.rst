@@ -117,6 +117,10 @@ CakeRequest
 
 - :php:meth:`CakeRequest::isAll()` has been added to check that a request matches all the given types.
 
+CakeResponse
+------------
+
+- :php:meth:`CakeResponse::location()` has been added to get or set the redirect location header.
 
 CakeEmail
 ---------
