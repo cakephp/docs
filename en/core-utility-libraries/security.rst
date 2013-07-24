@@ -3,7 +3,7 @@ Security
 
 .. php:class:: Security
 
-The `security library <http://api20.cakephp.org/class/security>`_
+The `security library <http://api.cakephp.org/2.3/class-Security.html>`_
 handles basic security measures such as providing methods for
 hashing and encrypting data.
 
