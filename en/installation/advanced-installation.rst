@@ -129,10 +129,10 @@ There are three constants that you'll need to edit: ``ROOT``,
 ``APP_DIR``, and ``CAKE_CORE_INCLUDE_PATH``.
 
 
--  ``ROOT`` should be set to the path of the directory that contains your
+- ``ROOT`` should be set to the path of the directory that contains your
   app folder.
--  ``APP_DIR`` should be set to the (base)name of your app folder.
--  ``CAKE_CORE_INCLUDE_PATH`` should be set to the path of your CakePHP
+- ``APP_DIR`` should be set to the (base)name of your app folder.
+- ``CAKE_CORE_INCLUDE_PATH`` should be set to the path of your CakePHP
   libraries folder. Generally you will not need to change this if you use any of
   the :doc:`/installation <suggested installation>` methods.
 
