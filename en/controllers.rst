@@ -308,6 +308,9 @@ will not try to re-render the view::
 This would render ``app/View/Posts/custom_file.ctp`` instead of
 ``app/View/Posts/my_action.ctp``
 
+    .. note::
+		Make sure you call any ``set()`` *before* calling ``render()``
+		to make sure your variables are really available to the view.
 
 You can also render views inside plugins using the following syntax:
 ``$this->render('PluginName.PluginController/custom_file')``.
