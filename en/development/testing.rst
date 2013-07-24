@@ -91,7 +91,7 @@ tests:
    You can also use the ``@test`` annotation to mark methods as test methods.
 
 When you have created a test case, you can execute it by browsing
-to ``http://localhost/you_app/test.php`` (depending on
+to ``http://localhost/your_app/test.php`` (depending on
 how your specific setup looks). Click App test cases, and
 then click the link to your specific file.  You can run tests from the command
 line using the test shell::
