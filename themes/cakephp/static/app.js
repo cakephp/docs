@@ -49,6 +49,44 @@ App.Book = (function() {
 	};
 })();
 
+App.Share = (function() {
+
+	function init() {
+		loadTwitter();
+		loadGooglePlus();
+		fixRedditButton();
+	};
+
+	function loadTwitter() {
+		window.twttr = function(d,s,id){
+			var js,fjs=d.getElementsByTagName(s)[0];
+			if(!d.getElementById(id)){
+				js=d.createElement(s);
+				js.id=id;
+				js.src="//platform.twitter.com/widgets.js";
+				fjs.parentNode.insertBefore(js,fjs);
+			}
+			return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+		}(document,"script","twitter-wjs");
+	};
+
+	function loadGooglePlus() {
+		var gp = document.createElement('script');
+		gp.type = 'text/javascript';
+		gp.src = 'https://apis.google.com/js/plusone.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(gp, s);
+	};
+
+	function fixRedditButton() {
+		$('iframe[src*="reddit"]').attr('height', 20);
+	};
+
+	return {
+		init : init
+	};
+})();
+
 // Inline search form, and standalone search form.
 App.InlineSearch = (function () {
 
@@ -240,3 +278,4 @@ $.fn.menuSelect = function (options) {
 
 $(App.Book.init);
 $(App.InlineSearch.init);
+$(App.Share.init);

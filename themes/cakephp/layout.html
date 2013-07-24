@@ -157,6 +157,12 @@ window.lang = "{{ language }}";
 		<div class="body">
 			{% block body %} {% endblock %}
 		</div>
+
+		<div class="share-links inline">
+			<a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="cakephp" data-lang="{{ language }}" data-text="{{ title|striptags|e }}">Tweet</a>
+			<div class="g-plusone" data-size="medium"></div>
+			<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"> </script>
+		</div>
 	</div>
 
 	<div class="sidebar columns three pull-nine">
