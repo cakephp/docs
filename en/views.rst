@@ -177,7 +177,9 @@ to prepend content to an existing block::
 The method ``startIfEmpty()`` can be used to start a block **only** if its empty
 or undefined. If the block already exists the captured content will be
 discarded. This is useful when you want to conditionally define default content for
-a block should it not already exist::
+a block should it not already exist:
+
+.. code-block:: php
 
     // In a view file.
     // Create a navbar block
@@ -186,16 +188,19 @@ a block should it not already exist::
     echo $this->element('notifications');
     $this->end();
 
-    // In a parent view/layout
-    $this->startIfEmpty('navbar');
-    Default content
-    $this->end();
+.. code-block:: php
 
+    // In a parent view/layout
+    <?php $this->startIfEmpty('navbar'); ?>
+    <p>If the block is not defined by now - show this instead</p>
+    <?php $this->end(); ?>
+
+    // Somewhere later in the parent view/layout
     echo $this->fetch('navbar');
 
 In the above example, the ``navbar`` block will only contain the content added
 in the first section.  Since the block was defined in the child view, the
-default content will be discarded.
+default content with the ``<p>`` tag will be discarded.
 
 .. versionadded: 2.3
     ``startIfEmpty()`` and ``prepend()`` were added in 2.3
