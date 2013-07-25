@@ -38,12 +38,12 @@ components, and for components in general, is usually done in the
 method::
 
     class PostsController extends AppController {
-        public $components = array(
-            'Auth' => array(
-                'authorize' => array('controller'),
-                'loginAction' => array('controller' => 'users', 'action' => 'login')
+        public $components = [
+            'Auth' => [
+                'authorize' => ['controller'],
+                'loginAction' => ['controller' => 'users', 'action' => 'login']
             ),
-            'Cookie' => array('name' => 'CookieMonster')
+            'Cookie' => ['name' => 'CookieMonster']
         );
 
 Would be an example of configuring a component with the
@@ -55,8 +55,8 @@ function to a component property. The above could also be expressed
 as::
 
     public function beforeFilter() {
-        $this->Auth->authorize = array('controller');
-        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
+        $this->Auth->authorize = ['controller'];
+        $this->Auth->loginAction = ['controller' => 'users', 'action' => 'login'];
 
         $this->Cookie->name = 'CookieMonster';
     }
@@ -66,9 +66,9 @@ configuration options to be set before the controller's
 ``beforeFilter()`` is run. To this end, some components allow
 configuration options be set in the ``$components`` array::
 
-    public $components = array(
-        'DebugKit.Toolbar' => array('panels' => array('history', 'session'))
-    );
+    public $components = [
+        'DebugKit.Toolbar' => ['panels' => ['history', 'session']]
+    ];
 
 Consult the relevant documentation to determine what configuration
 options each component provides.
@@ -78,17 +78,18 @@ alias components.  This feature is useful when you want to
 replace ``$this->Auth`` or another common Component reference with a custom
 implementation::
 
-    // app/Controller/PostsController.php
+    // App/Controller/PostsController.php
     class PostsController extends AppController {
-        public $components = array(
-            'Auth' => array(
+        public $components = [
+            'Auth' => [
                 'className' => 'MyAuth'
-            )
-        );
+            ]
+        ];
     }
 
-    // app/Controller/Component/MyAuthComponent.php
-    App::uses('AuthComponent', 'Controller/Component');
+    // App/Controller/Component/MyAuthComponent.php
+    use Cake\Controller\Component\AuthComponent;
+
     class MyAuthComponent extends AuthComponent {
         // Add your code to override the core AuthComponent
     }
@@ -104,19 +105,19 @@ controllers.
 Using Components
 ================
 
-Once you've included some components in your controller, using them is
-pretty simple.  Each component you use is exposed as a property on your
-controller.  If you had loaded up the :php:class:`SessionComponent` and
-the :php:class:`CookieComponent` in your controller, you could access
-them like so::
+Once you've included some components in your controller, using them is pretty
+simple.  Each component you use is exposed as a property on your controller.  If
+you had loaded up the :php:class:`Cake\\Controller\\Component\\SessionComponent`
+and the :php:class:`Cake\\Controller\\Component\\CookieComponent` in your
+controller, you could access them like so::
 
     class PostsController extends AppController {
-        public $components = array('Session', 'Cookie');
+        public $components = ['Session', 'Cookie'];
         
         public function delete() {
             if ($this->Post->delete($this->request->data('Post.id')) {
                 $this->Session->setFlash('Post deleted.');
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(['action' => 'index']);
             }
         }
 
@@ -131,7 +132,7 @@ Loading components on the fly
 
 You might not need all of your components available on every controller
 action. In situations like this you can load a component at runtime using the
-:doc:`Component Collection </core-libraries/collections>`. From inside a
+:doc:`Component Registry </core-libraries/registry-objects>`. From inside a
 controller's method you can do the following::
 
     $this->OneTimer = $this->Components->load('OneTimer');
@@ -161,10 +162,11 @@ We could create a component to house this shared logic for use in
 many different controllers.
 
 The first step is to create a new component file and class. Create
-the file in ``/app/Controller/Component/MathComponent.php``. The basic
+the file in ``/App/Controller/Component/MathComponent.php``. The basic
 structure for the component would look something like this::
 
-    App::uses('Component', 'Controller');
+    use Cake\Controller\Component;
+    
     class MathComponent extends Component {
         public function doComplexOperation($amount1, $amount2) {
             return $amount1 + $amount2;
@@ -187,7 +189,7 @@ through which we can access an instance of it::
 
     /* Make the new component available at $this->Math,
     as well as the standard $this->Session */
-    public $components = array('Math', 'Session');
+    public $components = ['Math', 'Session'];
 
 Components declared in ``AppController`` will be merged with those
 in your other controllers. So there is no need to re-declare the
@@ -198,13 +200,13 @@ set of parameters that will be passed on to the Component's
 constructor. These parameters can then be handled by
 the Component::
 
-    public $components = array(
-        'Math' => array(
+    public $components = [
+        'Math' => [
             'precision' => 2,
             'randomGenerator' => 'srand'
-        ),
+        ],
         'Session', 'Auth'
-    );
+    ];
 
 The above would pass the array containing precision and
 randomGenerator to ``MathComponent::__construct()`` as the
@@ -221,10 +223,11 @@ In this case you can include other components in your component the exact same
 way you include them in controllers - using the ``$components`` var::
 
     // app/Controller/Component/CustomComponent.php
-    App::uses('Component', 'Controller');
+    use Cake\Controller\Component;
+
     class CustomComponent extends Component {
         // the other component your component uses
-        public $components = array('Existing'); 
+        public $components = ['Existing'];
 
         public function initialize(Controller $controller) {
             $this->Existing->foo();
@@ -236,7 +239,8 @@ way you include them in controllers - using the ``$components`` var::
     }
 
     // app/Controller/Component/ExistingComponent.php
-    App::uses('Component', 'Controller');
+    use Cake\Controller\Component;
+
     class ExistingComponent extends Component {
 
         public function foo() {
@@ -254,11 +258,11 @@ Component API
 .. php:class:: Component
 
     The base Component class offers a few methods for lazily loading other
-    Components through :php:class:`Cake\\Controller\ComponentRegistry` as well
+    Components through :php:class:`Cake\\Controller\\ComponentRegistry` as well
     as dealing with common handling of settings.  It also provides prototypes
     for all the component callbacks.
 
-.. php:method:: __construct(ComponentRegistry $registry, $settings = array())
+.. php:method:: __construct(ComponentRegistry $registry, $settings = [])
 
     Constructor for the base component class.  All ``$settings`` that
     are also public properties will have their values changed to the
