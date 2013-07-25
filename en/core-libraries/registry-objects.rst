@@ -40,6 +40,20 @@ Callbacks are not provided by registry objects. You should use the
 :doc:`events system </core-libraries/events>` to dispatch any events/callbacks
 for your application.
 
+Disabling callbacks
+===================
+
+In previous versions collection objects provided a ``disable`` method to disable
+objects from recieving callbacks. To do this now, you should use the features in
+the events system. For example you could disable component callbacks in the
+following way::
+
+    // Remove Auth from callbacks.
+    $this->getEventManager()->detach($this->Auth);
+
+    // Re-enable Auth for callbacks.
+    $this->getEventManager()->attach($this->Auth);
+
 
 .. meta::
     :title lang=en: Object Registry
