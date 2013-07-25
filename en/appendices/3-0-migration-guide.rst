@@ -40,8 +40,30 @@ Cache
   :php:meth:`Cake\\Core\\Configure` instead of using the ``config()`` method.
   ``Cache::config()`` will be removed for 3.0.0 stable.
 * Cache engines are now lazy loaded upon first use.
-* :php:meth:``Cake\\Cache\\Cache::engine()`` has been added.
+* :php:meth:`Cake\\Cache\\Cache::engine()` has been added.
 
+Console
+=======
+
+TaskCollection
+----------------
+
+This class has been renamed to :php:class:`Cake\\Console\\TaskRegistry`.
+See the section on :doc:`/core-libraries/registry-objects` for more information
+on the features provided by the new class. You can use the ``cake upgrade
+rename_collections`` to assist in upgrading your code.
+
+
+Event
+=====
+
+* The Event subsystem has had a number of optional features removed. When
+  dispatching events you can no longer use the following options:
+
+  * ``passParams`` This option is now enabled always implicitly. You
+    cannot turn it off.
+  * ``break`` This option has been removed. You must now stop events.
+  * ``breakOn`` This option has been removed. You must now stop events.
 
 Log
 ===
@@ -164,8 +186,16 @@ Controller
   with **all** parent classes not just ``AppController`` and the plugin
   app controller.
 
-Controller\Components
-=====================
+ComponentCollection
+-------------------
+
+This class has been renamed to :php:class:`Cake\\Controller\\ComponentRegistry`.
+See the section on :doc:`/core-libraries/registry-objects` for more information
+on the features provided by the new class. You can use the ``cake upgrade
+rename_collections`` to assist in upgrading your code.
+
+Controller\\Components
+======================
 
 CookieComponent
 ---------------
@@ -182,9 +212,20 @@ ControllerTestCase
 
 - You can now simulate both query string, post data and cookie values when using ``testAction()``
 
+View
+====
 
-View\Helper
-===========
+HelperCollection
+----------------
+
+This class has been renamed to :php:class:`Cake\\View\\HelperRegistry`.
+See the section on :doc:`/core-libraries/registry-objects` for more information
+on the features provided by the new class. You can use the ``cake upgrade
+rename_collections`` to assist in upgrading your code.
+
+
+View\\Helper
+============
 
 FormHelper
 ----------

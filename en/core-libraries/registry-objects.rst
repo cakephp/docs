@@ -22,7 +22,7 @@ registry, a new instance will be created.  If the component is already loaded,
 another instance will not be created.  When loading components, you can also
 provide additional configuration for them::
 
-    $this->Cookie = $this->Components->load('Cookie', array('name' => 'sweet'));
+    $this->Cookie = $this->Components->load('Cookie', ['name' => 'sweet']);
 
 Any keys & values provided will be passed to the Component's constructor.  The
 one exception to this rule is ``className``.  Classname is a special key that is
