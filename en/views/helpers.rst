@@ -135,20 +135,20 @@ doing the following::
 The above would call the ``css`` method on the HtmlHelper.  You can
 access any loaded helper using ``$this->{$helperName}``.  There may
 come a time where you need to dynamically load a helper from inside
-a view.  You can use the view's :php:class:`HelperCollection` to
+a view.  You can use the view's :php:class:`Cake\\View\\HelperRegistry` to
 do this::
 
     $mediaHelper = $this->Helpers->load('Media', $mediaSettings);
 
-The HelperCollection is a :doc:`collection </core-libraries/collections>` and
-supports the collection API used elsewhere in CakePHP.
+The HelperRegistry is a :doc:`registry </core-libraries/registry-objects>` and
+supports the registry API used elsewhere in CakePHP.
 
 Callback methods
 ================
 
 Helpers feature several callbacks that allow you to augment the
 view rendering process.  See the :ref:`helper-api` and the
-:doc:`/core-libraries/collections` documentation for more information.
+:doc:`/core-libraries/events` documentation for more information.
 
 Creating Helpers
 ================
@@ -271,34 +271,39 @@ Helper API
 Callbacks
 ---------
 
-.. php:method:: beforeRenderFile($viewFile)
+By implementing a callback method in a helper, CakePHP will automatically
+subscribe your helper to the relevant event. Unlike previous versions of CakePHP
+you should *not* call ``parent`` in your callbacks, as the base Helper class
+does not implement any of the callback methods.
+
+.. php:method:: beforeRenderFile(Event $event, $viewFile)
 
     Is called before each view file is rendered.  This includes elements,
     views, parent views and layouts.
 
-.. php:method:: afterRenderFile($viewFile, $content)
+.. php:method:: afterRenderFile(Event $event, $viewFile, $content)
 
     Is called after each view file is rendered.  This includes elements, views,
     parent views and layouts.  A callback can modify and return ``$content`` to
     change how the rendered content will be displayed in the browser.
 
-.. php:method:: beforeRender($viewFile)
+.. php:method:: beforeRender(Event $event, $viewFile)
 
     The beforeRender method is called after the controller's
     beforeRender method but before the controller renders view and
     layout. Receives the file being rendered as an argument.
 
-.. php:method:: afterRender($viewFile)
+.. php:method:: afterRender(Event $event, $viewFile)
 
     Is called after the view has been rendered but before layout rendering has
     started.
 
-.. php:method:: beforeLayout($layoutFile)
+.. php:method:: beforeLayout(Event $event, $layoutFile)
 
     Is called before layout rendering starts. Receives the layout filename as an
     argument.
 
-.. php:method:: afterLayout($layoutFile)
+.. php:method:: afterLayout(Event $event, $layoutFile)
 
     Is called after layout rendering is complete. Receives the layout filename as an
     argument.

@@ -194,6 +194,12 @@ See the section on :doc:`/core-libraries/registry-objects` for more information
 on the features provided by the new class. You can use the ``cake upgrade
 rename_collections`` to assist in upgrading your code.
 
+Component
+---------
+
+* The ``_Collection`` property is now ``_registry``. It contains an instance
+  of :php:class:`Cake\\Controller\\ComponentRegistry` now.
+
 Controller\\Components
 ======================
 

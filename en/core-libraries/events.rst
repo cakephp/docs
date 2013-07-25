@@ -479,7 +479,6 @@ Additional Reading
 
 .. toctree::
 
-    /core-libraries/collections
     /models/behaviors
     /controllers/components
     /views/helpers

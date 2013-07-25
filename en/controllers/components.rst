@@ -147,9 +147,10 @@ controller's method you can do the following::
 Component Callbacks
 ===================
 
-Components also offer a few request life-cycle callbacks that allow them
-to augment the request cycle.  See the base :ref:`component-api` for
-more information on the callbacks components offer.
+Components also offer a few request life-cycle callbacks that allow them to
+augment the request cycle.  See the base :ref:`component-api` and
+:doc:`/core-libraries/events` for more information on the callbacks components
+offer.
 
 Creating a Component
 ====================
@@ -253,11 +254,11 @@ Component API
 .. php:class:: Component
 
     The base Component class offers a few methods for lazily loading other
-    Components through :php:class:`ComponentCollection` as well as dealing
-    with common handling of settings.  It also provides prototypes for all
-    the component callbacks.
+    Components through :php:class:`Cake\\Controller\ComponentRegistry` as well
+    as dealing with common handling of settings.  It also provides prototypes
+    for all the component callbacks.
 
-.. php:method:: __construct(ComponentCollection $collection, $settings = array())
+.. php:method:: __construct(ComponentRegistry $registry, $settings = array())
 
     Constructor for the base component class.  All ``$settings`` that
     are also public properties will have their values changed to the
@@ -266,37 +267,34 @@ Component API
 Callbacks
 ---------
 
-.. php:method:: initialize(Controller $controller)
+.. php:method:: initialize(Event $event, Controller $controller)
 
     The initialize method is called before the controller's
     beforeFilter method.
 
-.. php:method:: startup(Controller $controller)
+.. php:method:: startup(Event $event, Controller $controller)
 
     The startup method is called after the controller's beforeFilter
     method but before the controller executes the current action
     handler.
 
-.. php:method:: beforeRender(Controller $controller)
+.. php:method:: beforeRender(Event $event, Controller $controller)
 
     The beforeRender method is called after the controller executes the
     requested action's logic but before the controller's renders views
     and layout.
 
-.. php:method:: shutdown(Controller $controller)
+.. php:method:: shutdown(Event $event, Controller $controller)
 
     The shutdown method is called before output is sent to browser.
 
-.. php:method:: beforeRedirect(Controller $controller, $url, $status=null, $exit=true)
+.. php:method:: beforeRedirect(Event $event, Controller $controller, $url, $response)
 
     The beforeRedirect method is invoked when the controller's redirect
     method is called but before any further action. If this method
     returns false the controller will not continue on to redirect the
-    request. The $url, $status and $exit variables have same meaning as
-    for the controller's method. You can also return a string which
-    will be interpreted as the url to redirect to or return associative
-    array with key 'url' and optionally 'status' and 'exit'.
-
+    request. The $url, ane $response paramaters allow you to inspect and modify
+    the location or any other headers in the response.
 
 
 .. meta::
