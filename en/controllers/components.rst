@@ -140,10 +140,10 @@ controller's method you can do the following::
 
 .. note::
 
-    Keep in mind that loading a component on the fly will not call its
-    initialize method. If the component you are calling has this method you
-    will need to call it manually after load.
-
+    Keep in mind that components loaded on the fly will not have missed
+    callbacks called. If you rely on the ``initialize`` or ``startup`` callbacks
+    being called, you may need to call them manually depending on when you load
+    your component.
 
 Component Callbacks
 ===================

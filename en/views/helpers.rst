@@ -16,8 +16,8 @@ check out :ref:`core-helpers`.
 
 .. _configuring-helpers:
 
-Using and Configuring Helpers
-=============================
+Configuring Helpers
+===================
 
 You enable helpers in CakePHP by making a controller aware of them.  Each
 controller has a :php:attr:`~Controller::$helpers` property that lists the
@@ -73,7 +73,7 @@ attribute values or modify behavior of a helper::
         public $helpers = ['Awesome' => ['option1' => 'value1']];
     }
 
-As of 2.3 the options are merged with the ``Helper::$settings`` property of
+As of 2.3 the options are merged with the :php:attr:`~Cake\View\Helper::$settings` property of
 the helper.
 
 One common setting to use is the ``className`` option, which allows you to
@@ -134,8 +134,12 @@ doing the following::
     echo $this->Html->css('styles');
 
 The above would call the ``css`` method on the HtmlHelper.  You can
-access any loaded helper using ``$this->{$helperName}``.  There may
-come a time where you need to dynamically load a helper from inside
+access any loaded helper using ``$this->{$helperName}``.
+
+Loading helpers on the fly
+--------------------------
+
+There may be situations where you need to dynamically load a helper from inside
 a view.  You can use the view's :php:class:`Cake\\View\\HelperRegistry` to
 do this::
 
@@ -143,6 +147,7 @@ do this::
 
 The HelperRegistry is a :doc:`registry </core-libraries/registry-objects>` and
 supports the registry API used elsewhere in CakePHP.
+
 
 Callback methods
 ================
@@ -175,8 +180,7 @@ actual PHP class file would look something like this::
 
 .. note::
 
-    Helpers must extend either ``AppHelper`` or :php:class:`Helper` or implement all the callbacks
-    in the :ref:`helper-api`.
+    Helpers should extend either ``AppHelper`` or :php:class:`Helper`
 
 Including other Helpers
 -----------------------
