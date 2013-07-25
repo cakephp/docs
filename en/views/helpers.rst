@@ -25,14 +25,14 @@ helpers to be made available in the view.  To enable a helper in your view, add
 the name of the helper to the controller's ``$helpers`` array::
 
     class BakeriesController extends AppController {
-        public $helpers = array('Form', 'Html', 'Js', 'Time');
+        public $helpers = ['Form', 'Html', 'Js', 'Time'];
     }
 
 Adding helpers from plugins uses the :term:`plugin syntax` used elsewhere in
 CakePHP::
 
     class BakeriesController extends AppController {
-        public $helpers = array('Blog.Comment');
+        public $helpers = ['Blog.Comment'];
     }
 
 You can also add helpers from within an action, so they will only
@@ -51,26 +51,26 @@ organized::
     }
 
 If you need to enable a helper for all controllers add the name of
-the helper to the ``$helpers`` array in ``/app/Controller/AppController.php`` (or
+the helper to the ``$helpers`` array in ``/App/Controller/AppController.php`` (or
 create if not present). Remember to include the default Html and
 Form helpers::
 
     class AppController extends Controller {
-        public $helpers = array('Form', 'Html', 'Js', 'Time');
+        public $helpers = ['Form', 'Html', 'Js', 'Time'];
     }
 
 You can pass options to helpers. These options can be used to set
 attribute values or modify behavior of a helper::
 
     class AwesomeHelper extends AppHelper {
-        public function __construct(View $view, $settings = array()) {
+        public function __construct(View $view, $settings = []) {
             parent::__construct($view, $settings);
             debug($settings);
         }
     }
 
     class AwesomeController extends AppController {
-        public $helpers = array('Awesome' => array('option1' => 'value1'));
+        public $helpers = ['Awesome' => ['option1' => 'value1']];
     }
 
 As of 2.3 the options are merged with the ``Helper::$settings`` property of
@@ -81,17 +81,18 @@ create aliased helpers in your views.  This feature is useful when you want to
 replace ``$this->Html`` or another common Helper reference with a custom
 implementation::
 
-    // app/Controller/PostsController.php
+    // App/Controller/PostsController.php
     class PostsController extends AppController {
-        public $helpers = array(
-            'Html' => array(
+        public $helpers = [
+            'Html' => [
                 'className' => 'MyHtml'
-            )
-        );
+            ]
+        ];
     }
 
-    // app/View/Helper/MyHtmlHelper.php
-    App::uses('HtmlHelper', 'View/Helper');
+    // App/View/Helper/MyHtmlHelper.php
+    use Cake\View\Helper\HtmlHelper;
+
     class MyHtmlHelper extends HtmlHelper {
         // Add your code to override the core HtmlHelper
     }
@@ -107,7 +108,7 @@ The above would *alias* ``MyHtmlHelper`` to ``$this->Html`` in your views.
 
     Aliasing the Html or Session Helper while using the core PagesController
     will not work. It is better to copy
-    ``lib/Cake/Controller/PagesController.php`` into your ``app/Controller/``
+    ``lib/Cake/Controller/PagesController.php`` into your ``App/Controller/``
     folder.
 
 Using helper settings allows you to declaratively configure your helpers and
@@ -160,11 +161,11 @@ Let's say we wanted to create a helper that could be used to output
 a specifically crafted CSS-styled link you needed many different
 places in your application. In order to fit your logic in to
 CakePHP's existing helper structure, you'll need to create a new
-class in ``/app/View/Helper``. Let's call our helper LinkHelper. The
+class in ``/App/View/Helper``. Let's call our helper LinkHelper. The
 actual PHP class file would look something like this::
 
-    /* /app/View/Helper/LinkHelper.php */
-    App::uses('AppHelper', 'View/Helper');
+    /* /App/View/Helper/LinkHelper.php */
+    use Cake\View\Helper;
 
     class LinkHelper extends AppHelper {
         public function makeEdit($title, $url) {
@@ -184,17 +185,17 @@ You may wish to use some functionality already existing in another
 helper. To do so, you can specify helpers you wish to use with a
 ``$helpers`` array, formatted just as you would in a controller::
 
-    /* /app/View/Helper/LinkHelper.php (using other helpers) */
-    App::uses('AppHelper', 'View/Helper');
+    /* /App/View/Helper/LinkHelper.php (using other helpers) */
+    use App\View\Helper\AppHelper;
 
     class LinkHelper extends AppHelper {
-        public $helpers = array('Html');
+        public $helpers = ['Html'];
 
         public function makeEdit($title, $url) {
             // Use the HTML helper to output
             // formatted data:
 
-            $link = $this->Html->link($title, $url, array('class' => 'edit'));
+            $link = $this->Html->link($title, $url, ['class' => 'edit']);
 
             return '<div class="editOuter">' . $link . '</div>';
         }
@@ -207,11 +208,11 @@ Using your Helper
 -----------------
 
 Once you've created your helper and placed it in
-``/app/View/Helper/``, you'll be able to include it in your
+``/App/View/Helper/``, you'll be able to include it in your
 controllers using the special variable :php:attr:`~Controller::$helpers`::
 
     class PostsController extends AppController {
-        public $helpers = array('Link');
+        public $helpers = ['Link'];
     }
 
 Once your controller has been made aware of this new class, you can
@@ -228,9 +229,9 @@ Creating Functionality for All Helpers
 All helpers extend a special class, AppHelper (just like models
 extend AppModel and controllers extend AppController). To create
 functionality that would be available to all helpers, create
-``/app/View/Helper/AppHelper.php``::
+``/App/View/Helper/AppHelper.php``::
 
-    App::uses('Helper', 'View');
+    use App\View\Helper\AppHelper;
 
     class AppHelper extends Helper {
         public function customMethod() {
@@ -258,7 +259,7 @@ Helper API
 
     Generates an HTML escaped URL, delegates to :php:meth:`Router::url()`.
 
-.. php:method:: value($options = array(), $field = null, $key = 'value')
+.. php:method:: value($options = [], $field = null, $key = 'value')
 
     Get the value for a given input name.
 

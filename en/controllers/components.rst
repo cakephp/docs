@@ -222,7 +222,7 @@ Sometimes one of your components may need to use another component.
 In this case you can include other components in your component the exact same
 way you include them in controllers - using the ``$components`` var::
 
-    // app/Controller/Component/CustomComponent.php
+    // App/Controller/Component/CustomComponent.php
     use Cake\Controller\Component;
 
     class CustomComponent extends Component {
@@ -238,7 +238,7 @@ way you include them in controllers - using the ``$components`` var::
        }
     }
 
-    // app/Controller/Component/ExistingComponent.php
+    // App/Controller/Component/ExistingComponent.php
     use Cake\Controller\Component;
 
     class ExistingComponent extends Component {
