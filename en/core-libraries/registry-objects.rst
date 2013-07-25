@@ -36,7 +36,7 @@ components::
 Triggering callbacks
 ====================
 
-Callbacks are not supported by registry objects. You should use the
+Callbacks are not provided by registry objects. You should use the
 :doc:`events system </core-libraries/events>` to dispatch any events/callbacks
 for your application.
 
