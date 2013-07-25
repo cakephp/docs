@@ -94,16 +94,16 @@ This method will not return the same manager instance across models, and it is n
 shared between controllers and models, but they are between controllers and views,
 nevertheless. We will review later how to overcome this implementation detail.
 
-The ``getEventManager`` method returns an instance of :php:class:`Cake\Event\EventManager`,
-and to dispatch events you use :php:meth:`Cake\Event\EventManager::dispatch()` which
-receives an instance of the :php:class:`Cake\Event\Event` class. Let's dissect now the
+The ``getEventManager`` method returns an instance of :php:class:`Cake\\Event\\EventManager`,
+and to dispatch events you use :php:meth:`Cake\\Event\\EventManager::dispatch()` which
+receives an instance of the :php:class:`Cake\\Event\\Event` class. Let's dissect now the
 process of dispatching an event::
 
     new Event('Model.Order.afterPlace', $this, array(
         'order' => $order
     ));
 
-:php:class:`Cake\Event\Event` receives 3 arguments in its constructor. The first
+:php:class:`Cake\\Event\\Event` receives 3 arguments in its constructor. The first
 one is the event name, you should try to keep this name as unique as possible,
 while making it readable. We suggest a convention as follows:
 ``Layer.eventName`` for general events happening at a layer level (e.g.
@@ -114,7 +114,7 @@ events happening in specific classes on a layer, for example
 The second argument is the ``subject``, meaning the object associated to the
 event, usually when it is the same class triggering events about itself, using
 ``$this`` will be the most common case. Although
-a :php:class:`Cake\Controller\Component` could trigger controller events too.
+a :php:class:`Cake\\Controller\\Component` could trigger controller events too.
 The subject class is important because listeners will get immediate access to
 the object properties and have the chance to inspect or change them on the fly.
 
@@ -122,7 +122,7 @@ Finally, the third argument is the event's params. This can be any data you cons
 useful to pass around so listeners can act upon it. While this can be an argument
 of any type, we recommend passing an associative array, to make inspection easier.
 
-:php:meth:`Cake\Event\EventManager::dispatch()` method accepts the event object
+:php:meth:`Cake\\Event\\EventManager::dispatch()` method accepts the event object
 as an argument and notifies all listener and callbacks passing this object
 along. The listeners will handle all the extra logic around the
 ``afterPlace`` event, you can log the time, send emails, update user statistics
@@ -134,7 +134,7 @@ Registering callbacks
 
 How do we register callbacks or observers to our new ``afterPlace`` event? This
 is subject to a wide variety of different implementations, but they all have
-to call the :php:meth:`Cake\Event\EventManager::attach()` method to register new actors.
+to call the :php:meth:`Cake\\Event\\EventManager::attach()` method to register new actors.
 For simplicity's sake, let's imagine we know in the plugin what the callbacks
 are available in the controller, and say this controller is responsible for
 attaching them. The possible code would look like this::
@@ -164,14 +164,14 @@ attaching them. The possible code would look like this::
 
 This may not be the cleanest way to do it, so you can come up with your own ways
 for attaching listeners to an object's event manager. This simple way of defining
-them using the :php:class:`Configure` class is intended for didactic purposes only. This
+them using the :php:class:`Cake\\Core\\Configure` class is intended for didactic purposes only. This
 little example allows us to showcase what type of callbacks can be attached to
 the manager. As you may already have figured out, the ``attach`` method takes any
 valid  PHP ``callable`` type, this is a string representing a static function call,
 an array having a class instance and a method, an anonymous function if you use
 PHP 5.3, etc. Attached callbacks will all receive the event object as first argument
 
-:php:meth:`Cake\Event\EventManager::attach()` Accepts three arguments. The leftmost one is
+:php:meth:`Cake\\Event\\EventManager::attach()` Accepts three arguments. The leftmost one is
 the callback itself, anything that PHP can treat as a callable function. The second
 argument is the event name, and the callback will only get fired if the ``Event``
 object dispatched has a matching name. The last argument is an array of options to
@@ -181,7 +181,7 @@ Registering listeners
 ---------------------
 
 Listeners are an alternative, and often cleaner way of registering callbacks for
-an event. This is done by implementing the :php:class:`Cake\Event\EventListener` interface
+an event. This is done by implementing the :php:class:`Cake\\Event\\EventListener` interface
 in any class you wish to register some callbacks. Classes implementing it need to
 provide the ``implementedEvents()`` method and return an associative array with all
 event names that the class will handle.
@@ -379,7 +379,7 @@ Removing callbacks and listeners
 --------------------------------
 
 If for any reason you want to remove any callback from the event manager just call
-the :php:meth:`Cake\Event\EventManager::detach()` method using as arguments the first two
+the :php:meth:`Cake\\Event\\EventManager::detach()` method using as arguments the first two
 params you used for attaching it::
 
     // Attaching a function
