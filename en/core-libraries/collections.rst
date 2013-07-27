@@ -81,7 +81,7 @@ midway similar to stopping event propagation in JavaScript::
     $this->Behaviors->trigger(
         'beforeFind', 
         array($this, $query), 
-        array('break' => true, 'breakOn' => false),
+        array('break' => true, 'breakOn' => false)
     );
 
 In the above example, if any behavior returns ``false`` from its beforeFind
