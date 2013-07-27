@@ -479,6 +479,11 @@ values, just like regular header calls.  Headers are not sent when
 :php:meth:`CakeResponse::header()` is called either.  They are just buffered
 until the response is actually sent.
 
+.. versionadded:: 2.4
+
+You can now use the convenience method :php:meth:`CakeResponse::location()` to directly set or get
+the redirect location header.
+
 Interacting with browser caching
 ================================
 
@@ -679,6 +684,18 @@ CakeResponse API
 .. php:method:: header($header = null, $value = null)
 
     Allows you to directly set one or many headers to be sent with the response.
+
+.. php:method:: location($url = null)
+
+    Allows you to directly set the redirect location header to be sent with the response.
+
+    // Set the redirect location
+    $this->response->location('http://example.com');
+
+    // Get the current redirect location header
+    $location = $this->response->location();
+
+    .. versionadded:: 2.4
 
 .. php:method:: charset($charset = null)
 
