@@ -1,5 +1,7 @@
 .. Collections
-###########
+
+コレクション
+############
 
 ..
   Components, Helpers, Behaviors and Tasks all share a similar structure and set
@@ -13,7 +15,8 @@
   for Helpers, Behaviors, and Tasks in addition to Components.
 
 .. Loading and unloading objects
-=============================
+オブジェクトのロードとアンロード
+================================
 
 ..
   Loading objects on every kind of collection can be done using the ``load()``
@@ -48,7 +51,9 @@
     $this->Cookie->read(); // Fatal error.
 
 .. Triggering callbacks
-====================
+
+コールバックのトリガー
+======================
 
 ..
   Callbacks are supported by collection objects.  When a collection has a callback
@@ -86,7 +91,9 @@
     Defaults to false.
 
 .. Canceling a callback loop
--------------------------
+
+コールバックループのキャンセル
+------------------------------
 
 ..
   Using the ``break`` and ``breakOn`` options you can cancel a callback loop
@@ -104,7 +111,9 @@
   ``trigger()`` will be false.
 
 .. Enabling and disabling objects
-==============================
+
+オブジェクトの有効化と無効化
+============================
 
 ..
   Once an object is loaded into a collection you may need to disable it.
@@ -131,7 +140,9 @@
     $enabled = $this->Helpers->enabled();
 
 .. Object callback priorities
-==============================
+
+オブジェクトのコールバックのプロパティ
+======================================
 
 ..
   You can prioritize the triggering object callbacks similar to event callbacks.
