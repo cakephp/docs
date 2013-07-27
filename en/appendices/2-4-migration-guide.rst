@@ -161,6 +161,7 @@ L10n
   ``sz`` has been dropped in favor of ``se`` (Sami).
 - Kazakh has been added with ``kaz`` as locale and ``kk`` as catalog code.
 - Kalaallisut has been added with ``kal`` as locale and ``kl`` as catalog code.
+- The constant ``DEFAULT_LANGUAGE`` has been deprecated in favor of Configure value ``Config.language``.
 
 Logging
 =======
