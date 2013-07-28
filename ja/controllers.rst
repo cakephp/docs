@@ -306,6 +306,13 @@ CakePHPのコントローラは、リクエストのライフサイクル周り�
 
         $this->redirect(array('controller' => 'orders', 'action' => 'confirm', 'product' => 'pizza', 'quantity' => 5));
 
+    クエリストリングとハッシュを使う場合は次のようになります。 ::
+
+        $this->redirect(array(
+            'controller' => 'orders', 'action' => 'confirm', '?' => array('product' => 'pizza', 'quantity' => 5), '#' => 'top'));
+
+    生成される URL はこのようになります: ``http://www.example.com/orders/confirm?product=pizza&quantity=5#top``
+
 .. php:method:: flash(string $message, string $url, integer $pause, string $layout)
 
     ``redirect()`` のように、 ``flash()`` メソッドはある操作の後に、ユーザーを新しいページに誘導するために使われます。
