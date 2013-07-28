@@ -105,6 +105,24 @@ CakePHPは、展開した状態ではmod\_rewriteを使用するようになっ�
    この変更の詳細は設定に依り、Cakeとは関係ない事柄も含むことがあります。
    詳しくはApacheのオンラインドキュメントを参照するようにしてください。
 
+#. (オプション) プロダクション環境の設定では、正しくないアセットは、CakePHPを通さないようにしましょう。webrootの.htaccessファイルを次のように修正してください ::
+
+       <IfModule mod_rewrite.c>
+           RewriteEngine On
+           RewriteBase /path/to/cake/app
+           RewriteCond %{REQUEST_FILENAME} !-d
+           RewriteCond %{REQUEST_FILENAME} !-f
+           RewriteCond %{REQUEST_URI} !^/(app/webroot/)?(img|css|js)/(.*)$
+           RewriteRule ^(.*)$ index.php [QSA,L]
+       </IfModule>
+
+   上の例は、正しくないアセットをindex.phpへ送信せず、Webサーバの404ページを表示します。
+
+   また、HTMLで404ページを作成することもできますし、 ``ErrorDocument`` ディレクティブへ追記することで、CakePHPのビルトインの404ページを使うこともできます。 ::
+
+       ErrorDocument 404 /404-not-found
+
+
 nginxでのきれいなURL
 ====================
 
