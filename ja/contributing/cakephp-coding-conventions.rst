@@ -81,7 +81,7 @@ Cakeの開発者は以下のコーディング規約を使います。
     }
 
     // よろしい
-    $variable = Class::function()
+    $variable = Class::function();
     if ($variable) {
         statement;
     }
