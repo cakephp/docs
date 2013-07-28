@@ -249,6 +249,8 @@ all キーは ``AuthComponent::ALL`` と記述することもできます::
     class OpenidAuthenticate extends BaseAuthenticate {
         public function authenticate(CakeRequest $request, CakeResponse $response) {
             // OpenID 用の処理をここに記述します。
+            // ユーザ認証が通った場合は、user の配列を返します。
+            // 通らなかった場合は false を返します。
         }
     }
 
