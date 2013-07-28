@@ -59,20 +59,33 @@ Cakeの開発者は以下のコーディング規約を使います。
 *  開き中括弧は制御構造と同じ行に置かれる必要があります。
    閉じ中括弧は新しい行に置かれ、制御構造と同じレベルのインデントがされている必要があります。
    中括弧内に含まれているステートメントは新しい行で始まり、その中に含まれるコードは、新しいレベルのインデントが付けられる必要があります。
+* インラインの代入は、制御構造の中で使用するべきではありません。
 
 ::
 
     // 間違い＝中括弧が無い、ステートメントの場所が悪い
-    if (expr) statement; 
+    if (expr) statement;
 
     // 間違い＝中括弧が無い
-    if (expr) 
-        statement; 
+    if (expr)
+        statement;
 
     // よろしい
     if (expr) {
         statement;
     }
+
+    // 間違い＝インラインの代入
+    if ($variable = Class::function()) {
+        statement;
+    }
+
+    // よろしい
+    $variable = Class::function();
+    if ($variable) {
+        statement;
+    }
+
 
 三項演算子
 ----------
