@@ -1203,6 +1203,7 @@ database in a database server that jenkins can access (usually localhost).  Add
 a *shell script step* to the build that contains the following::
 
     cat > app/Config/database.php <<'DATABASE_PHP'
+    <?php
     class DATABASE_CONFIG {
         public $test = array(
             'datasource' => 'Database/Mysql',
