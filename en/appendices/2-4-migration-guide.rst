@@ -14,6 +14,7 @@ SchemaShell
 -----------
 
 - ``cake schema generate`` now supports the ``--exclude`` parameter.
+- The constant ``CAKEPHP_SHELL`` is now deprecated and will be removed in CakePHP 3.0.
 
 BakeShell
 ---------
