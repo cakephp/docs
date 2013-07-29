@@ -1267,6 +1267,7 @@ localhost). Ajoutez une *étape de script shell* au build qui contient ce qui
 suit::
 
     cat > app/Config/database.php <<'DATABASE_PHP'
+    <?php
     class DATABASE_CONFIG {
         public $test = array(
             'datasource' => 'Database/Mysql',
