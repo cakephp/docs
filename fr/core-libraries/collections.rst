@@ -90,7 +90,7 @@ boucle de callback à mi-chemin semblable à interrompre la propagation
     $this->Behaviors->trigger(
         'beforeFind', 
         array($this, $query), 
-        array('break' => true, 'breakOn' => false),
+        array('break' => true, 'breakOn' => false)
     );
 
 Dans l'exemple ci-dessus, si n'importe quel behavior retourne ``false``
