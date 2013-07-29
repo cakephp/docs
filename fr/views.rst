@@ -181,6 +181,8 @@ La méthode ``startIfEmpty()`` peut être utilisée pour commencer un bloc
 capturé va être écarté. C'est utile quand vous voulez définir le contenu par
 défaut de façon conditionnel pour un bloc, qui ne doit pas déjà exister::
 
+.. code-block:: php
+
     // Dans un fichier de vue.
     // Crée un bloc de navbar
     $this->startIfEmpty('navbar');
@@ -188,16 +190,19 @@ défaut de façon conditionnel pour un bloc, qui ne doit pas déjà exister::
     echo $this->element('notifications');
     $this->end();
 
-    // Dans une vue/layout parente
-    $this->startIfEmpty('navbar');
-    Contenu par défaut
-    $this->end();
+.. code-block:: php
 
+    // Dans une vue/layout parente
+    <?php $this->startIfEmpty('navbar'); ?>
+    <p>Si le block n est pas défini pour l instant - montrer ceci à la place</p>
+    <?php $this->end(); ?>
+
+    // Quelque part plus loin dans la vue/layout parent
     echo $this->fetch('navbar');
 
 Dans l'exemple ci-dessus, le bloc ``navbar`` va seulement contenir le contenu
 ajouté dans la première section. Puisque le bloc a été défini dans la vue
-enfant, le contenu par défaut sera écarté.
+enfant, le contenu par défaut avec la balise ``<p>`` sera écarté.
 
 .. versionadded: 2.3
     ``startIfEmpty()`` et ``prepend()`` ont été ajoutées dans 2.3.
