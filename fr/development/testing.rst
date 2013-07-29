@@ -72,7 +72,7 @@ la base de données, vous pouvez vous assurer que vous êtes prêt à écrire et
 lancer vos propres tests en lancant un de ceux présents dans le coeur. Il y a
 deux exécuteurs integrés pour le test, nous commencerons en utilisant
 l'exécution par le navigateur. Les tests peuvent être accessibles par le
-navigateur à http://localhost/your_app/test.php. Vous devriez voir une liste
+navigateur à http://localhost/votre_app/test.php. Vous devriez voir une liste
 des cas de test du coeur. Cliquez sur le test 'AllConfigure'. Vous devriez voir
 une barre verte avec quelques informations supplémentaires sur les tests
 lancés, et les nombres passés.
@@ -206,7 +206,7 @@ Lancer les tests à partir d'un navigateur
 CakePHP fournit une interface web pour lancer les tests, donc vous pouvez
 exécuter vos tests par le navigateur si vous êtes plus habitué à cet
 environnement. Vous pouvez accéder au web runner en allant sur
-``http://localhost/your_app/test.php``. La localisation exacte du
+``http://localhost/votre_app/test.php``. La localisation exacte du
 test.php va changer en fonction de votre configuration. Mais le fichier est
 au même niveau que ``index.php``.
 
@@ -301,7 +301,7 @@ test en faisant ce qui suit::
 
 Cela mettra la couverture des résultats dans le répertoire webroot de votre
 application. Vous pourrez voir les résultats en allant à
-``http://localhost/your_app/coverage``.
+``http://localhost/votre_app/coverage``.
 
 Lancer les tests qui utilisent des sessions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
