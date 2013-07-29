@@ -503,6 +503,12 @@ ne sont aussi pas envoyés quand :php:meth:`CakeResponse::header()` est appelé.
 Ils sont simplement conservés jusqu'à ce que la réponse soit effectivement
 envoyé.
 
+.. versionadded:: 2.4
+
+Vous pouvez maintenant utiliser la méthode pratique
+:php:meth:`CakeResponse::location()` pour directement définir ou récupérer
+l'en-tête de localisation du redirect.
+
 Interragir avec le cache du navigateur
 ======================================
 
@@ -719,6 +725,19 @@ API de CakeResponse
 
     Vois permet de configurer directement un ou plusieurs en-têtes à être
     envoyés avec la réponse.
+
+.. php:method:: location($url = null)
+
+    Vous permet de définir directement l'en-tête de localisation du redirect
+    à envoyer avec la réponse.
+
+    // Définit la localisation du redirect
+    $this->response->location('http://example.com');
+
+    // Récupère l'en-tête de localisation du redirect actuel
+    $location = $this->response->location();
+
+    .. versionadded:: 2.4
 
 .. php:method:: charset($charset = null)
 
