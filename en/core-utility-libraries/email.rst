@@ -4,7 +4,7 @@ CakeEmail
 .. php:class:: CakeEmail(mixed $config = null)
 
 ``CakeEmail`` is a new class to send email. With this
-class you can send email from any place of your application. In addition to
+class you can send email from any place in your application. In addition to
 using the EmailComponent from your controller, you can also send mail from
 Shells, and Models.
 
@@ -20,7 +20,7 @@ First of all, you should ensure the class is loaded using :php:meth:`App::uses()
     App::uses('CakeEmail', 'Network/Email');
 
 Using CakeEmail is similar to using :php:class:`EmailComponent`. But instead of
-using attributes you must use methods. Example::
+using attributes you use methods. Example::
 
     $Email = new CakeEmail();
     $Email->from(array('me@example.com' => 'My Site'));
@@ -55,8 +55,7 @@ original sender using the Sender header.  You can do so using ``sender()``::
 Configuration
 =============
 
-Similar of database configuration, emails can have a class to centralize all the
-configuration.
+Similar to database configuration, email configuration can be centralized in a class.
 
 Create the file ``app/Config/email.php`` with the class ``EmailConfig``.
 The ``app/Config/email.php.default`` has an example of this file.
@@ -93,8 +92,8 @@ you can also just load an array of configs::
     //or in constructor::
     $Email = new CakeEmail(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
 
-You can configure SSL SMTP servers, like Gmail. To do so, put the ``'ssl://'``
-at prefix in the host and configure the port value accordingly.  Example::
+You can configure SSL SMTP servers such as Gmail. To do so, prefix the host with 
+``'ssl://'`` and configure the port value accordingly.  Example::
 
     class EmailConfig {
         public $gmail = array(
@@ -196,8 +195,8 @@ to facilitate that, CakePHP provides a way to send emails using CakePHP's
 :doc:`view layer </views>`.
 
 The templates for emails reside in a special folder in your applications
-``View`` directory.  Email views can also use layouts, and elements just like
-normal views::
+``View`` directory called ``Emails``.  Email views can also use layouts, 
+and elements just like normal views::
 
     $Email = new CakeEmail();
     $Email->template('welcome', 'fancy')
