@@ -851,6 +851,28 @@ un exemple de documentation:
         </arguments>
     </shell>
 
+Routing dans shells / CLI
+=========================
+
+Dans l'interface en ligne de commande (CLI), spécialement vos shells et tasks,
+``env('HTTP_HOST')`` et les autres variables d'environnement spécifique à votre
+navigateur ne sont pas définis.
+
+Si vous générez des rapports ou envoyez des emails qui utilisent
+``Router::url()``, ceux-ci vont contenir l'hôte par défaut
+``http://localhost/``  et cela va entrainer des urls invalides. Dans ce cas,
+vous devrez spécifier le domaine manuellement. Vous pouvez faire cela en
+utilisant la valeur de Configure ``App.fullBaseURL`` de votre bootstrap ou
+config, par exemple.
+
+Pour envoyer des emails, vous devrez fournir à la classe CakeEmail l'hôte avec
+lequel vous souhaitez envoyer l'email en faisant:
+
+    $Email = new CakeEmail();
+    $Email->domain('www.example.org');
+
+Cela suppose que les ID du message généré sont valides et correspondent au
+domaine duquel les emails sont envoyés.
 
 API de Shell
 ============
