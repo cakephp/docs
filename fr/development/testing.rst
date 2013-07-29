@@ -100,7 +100,7 @@ conventions. En ce qui concerne les tests:
    en méthodes de test.
 
 Quand vous avez crée un cas de test, vous pouvez l'exécuter en naviguant sur
-``http://localhost/you_app/test.php`` (selon votre configuration spécifique)
+``http://localhost/votre_app/test.php`` (selon votre configuration spécifique)
 Cliquez sur les cas de test de App, et cliquez ensuite sur le lien de votre
 fichier spécifique. Vous pouvez lancer les tests à partir des lignes de
 commande en utilisant le shell de test::
