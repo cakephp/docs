@@ -58,7 +58,7 @@ CakePHPのこのコレクションオブジェクトは、アプリケーショ�
 これにより、クラス名を反映させないコンポーネント名（コアのコンポーネントを拡張する際に便利です）を使えるようになります::
 
     $this->Auth = $this->Components->load('Auth', array('className' => 'MyCustomAuth'));
-    $this->Auth->user(); // Actually using MyCustomAuth::user();
+    $this->Auth->user(); // 実際には MyCustomAuth::user() が使用されます
 
 ..
   The inverse of loading an object, is unloading it.  Unloaded objects are removed
