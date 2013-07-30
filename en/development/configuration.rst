@@ -134,11 +134,10 @@ Below is a description of each variable and how it affects your CakePHP
 application.
 
 debug
-    Changes CakePHP debugging output.
-    * 0 = Production mode. No output.
-    * 1 = Show errors and warnings.
-    * 2 = Show errors, warnings, and enable SQL logging. SQL log is only shown when you
-      add ``$this->element('sql_dump');`` to your view or layout.
+    Changes CakePHP debugging output. 0 = Production mode. No output. 1 = Show
+    errors and warnings. 2 = Show errors, warnings, and enable SQL logging. SQL
+    log is only shown when you add ``$this->element('sql_dump');`` to your view
+    or layout.
 App.namespace
     The namespace to find app classes under.
 App.baseUrl
