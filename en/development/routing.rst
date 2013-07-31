@@ -329,7 +329,7 @@ as defined in the routes::
         'slug' => 'CakePHP_Rocks'
     ]);
 
-.. _named-routes::
+.. _named-routes:
 
 Using named routes
 ------------------

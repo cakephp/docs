@@ -40,8 +40,31 @@ Cache
   :php:meth:`Cake\\Core\\Configure` instead of using the ``config()`` method.
   ``Cache::config()`` will be removed for 3.0.0 stable.
 * Cache engines are now lazy loaded upon first use.
-* :php:meth:``Cake\\Cache\\Cache::engine()`` has been added.
+* :php:meth:`Cake\\Cache\\Cache::engine()` has been added.
 
+Console
+=======
+
+TaskCollection replaced
+-----------------------
+
+This class has been renamed to :php:class:`Cake\\Console\\TaskRegistry`.
+See the section on :doc:`/core-libraries/registry-objects` for more information
+on the features provided by the new class. You can use the ``cake upgrade
+rename_collections`` to assist in upgrading your code. Tasks no longer have
+access to callbacks, as there were never any callbacks to use.
+
+
+Event
+=====
+
+* The Event subsystem has had a number of optional features removed. When
+  dispatching events you can no longer use the following options:
+
+  * ``passParams`` This option is now enabled always implicitly. You
+    cannot turn it off.
+  * ``break`` This option has been removed. You must now stop events.
+  * ``breakOn`` This option has been removed. You must now stop events.
 
 Log
 ===
@@ -50,7 +73,7 @@ Log
   :php:meth:`Cake\\Core\\Configure` instead of using the ``config()`` method.
   ``Log::config()`` will be removed for 3.0.0 stable.
 * Log engines are now lazily loaded upon the first write to the logs.
-* :php:meth:``Cake\\Log\\Log::engine()`` has been added.
+* :php:meth:`Cake\\Log\\Log::engine()` has been added.
 * ``Log::defaultLevels()`` was removed.
 * You can no longer create custom levels using ``Log::levels()``.
 * When configuring loggers you should use ``'levels'`` instead of 'types'.
@@ -164,8 +187,22 @@ Controller
   with **all** parent classes not just ``AppController`` and the plugin
   app controller.
 
-Controller\Components
-=====================
+ComponentCollection replaced
+----------------------------
+
+This class has been renamed to :php:class:`Cake\\Controller\\ComponentRegistry`.
+See the section on :doc:`/core-libraries/registry-objects` for more information
+on the features provided by the new class. You can use the ``cake upgrade
+rename_collections`` to assist in upgrading your code.
+
+Component
+---------
+
+* The ``_Collection`` property is now ``_registry``. It contains an instance
+  of :php:class:`Cake\\Controller\\ComponentRegistry` now.
+
+Controller\\Components
+======================
 
 CookieComponent
 ---------------
@@ -182,9 +219,20 @@ ControllerTestCase
 
 - You can now simulate both query string, post data and cookie values when using ``testAction()``
 
+View
+====
 
-View\Helper
-===========
+HelperCollection replaced
+-------------------------
+
+This class has been renamed to :php:class:`Cake\\View\\HelperRegistry`.
+See the section on :doc:`/core-libraries/registry-objects` for more information
+on the features provided by the new class. You can use the ``cake upgrade
+rename_collections`` to assist in upgrading your code.
+
+
+View\\Helper
+============
 
 FormHelper
 ----------
