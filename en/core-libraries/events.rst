@@ -92,7 +92,7 @@ do it. So we need another solution, let's rewrite that using the event manager::
         }
     }
 
-That looks a lot cleaner, at gives us the opportunity to introduce the event
+That looks a lot cleaner, as it gives us the opportunity to introduce the event
 classes and methods. The first thing you may notice is the call to ``getEventManager()``
 this is a method that is available by default in all Models, Controller and Views.
 This method will not return the same manager instance across models, and it is not
