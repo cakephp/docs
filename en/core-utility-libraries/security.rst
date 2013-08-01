@@ -1,29 +1,16 @@
 Security
 ########
 
+.. php:namespace:: Cake\Utility
+
 .. php:class:: Security
 
-The `security library <http://api20.cakephp.org/class/security>`_
+The `security library <http://api.cakephp.org/class/security>`_
 handles basic security measures such as providing methods for
 hashing and encrypting data.
 
 Security API
 ============
-
-.. php:staticmethod:: cipher( $text, $key )
-
-    :rtype: string
-
-    Encrypts/Decrypts a text using the given key.::
-
-        // Encrypt your text with my_key
-        $secret = Security::cipher('hello world', 'my_key');
-
-        // Later decrypt your text
-        $nosecret = Security::cipher($secret, 'my_key');
-
-    ``cipher()`` uses a **weak** XOR cipher and should **not** be used for
-    important or sensitive data.
 
 .. php:staticmethod:: rijndael($text, $key, $mode)
 
@@ -55,13 +42,6 @@ Security API
 
         Generate authorization hash.
 
-.. php:staticmethod:: getInstance( )
-
-    :rtype: object
-
-    Singleton implementation to get object instance.
-
-
 .. php:staticmethod:: hash( $string, $type = NULL, $salt = false )
 
     :rtype: string
@@ -74,7 +54,7 @@ Security API
         $sha1 = Security::hash('CakePHP Framework', 'sha1', true);
 
         // Using a custom salt value
-        $md5 = Security::hash('CakePHP Framework', 'md5', 'my-salt');
+        $sha1 = Security::hash('CakePHP Framework', 'sha1', 'my-salt');
 
         // Using the default hash algorithm
         $hash = Security::hash('CakePHP Framework');
