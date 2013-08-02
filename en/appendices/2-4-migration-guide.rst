@@ -99,7 +99,7 @@ TextHelper
   automatically convert text into HTML paragraphs.
 
 PaginatorHelper
-----------
+---------------
 
 - :php:meth:`PaginatorHelper::param()` has been added.
 - The first page no longer contains ``/page:1`` or ``?page=1`` in the URL. This helps prevent
