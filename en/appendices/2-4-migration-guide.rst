@@ -34,6 +34,14 @@ FixtureTask
 Core
 ====
 
+Constants
+---------
+
+- Constants ``IMAGES_URL``, ``JS_URL``, ``CSS_URL`` have been deprecated and
+  replaced with config variables ``App.imageBaseUrl``, ``App.jsBaseUrl``,
+  ``App.cssBaseUrl`` respectively.
+
+
 Object
 ------
 
@@ -238,6 +246,6 @@ Routing
 Router
 ------
 
-- :php:meth:`Router::baseUrl()` was added together with ``App.fullBaseURL`` Configure value. They replace
+- :php:meth:`Router::fullBaseUrl()` was added together with ``App.fullBaseUrl`` Configure value. They replace
   :php:const:`FULL_BASE_URL` which is now deprecated.
 
