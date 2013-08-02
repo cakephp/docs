@@ -132,9 +132,11 @@ CakePHPのビューレイヤーはいくつかの異なるパーツによって�
     // sidebarの先頭に追加する
     $this->prepend('sidebar', 'this content goes on top of sidebar');
 
-``startIfEmpty()`` ブロックが空もしくは未定義の場合 **だけ** ブロックを開始したいときに使用します。
+``startIfEmpty()`` はブロックが空もしくは未定義の場合 **だけ** ブロックを開始したいときに使用します。
 ブロックがすでに存在する場合は捕捉されたコンテンツは廃棄されます。
-ブロックの内容が存在しないときのためにデフォルトの内容を用意しておきたい、なんて場合に使うと便利です。::
+ブロックの内容が存在しないときのためにデフォルトの内容を用意しておきたい、なんて場合に使うと便利です。:
+
+.. code-block:: php
 
     // ビューファイル
     // navbarブロックを作成
@@ -143,15 +145,18 @@ CakePHPのビューレイヤーはいくつかの異なるパーツによって�
     echo $this->element('notifications');
     $this->end();
 
-    // 親のview/layout
-    $this->startIfEmpty('navbar');
-    Default content
-    $this->end();
+.. code-block:: php
 
+    // 親のview/layout
+    <?php $this->startIfEmpty('navbar'); ?>
+    <p>ブロックがこの時点で定義されていない場合、代わりにこの内容を表示する</p>
+    <?php $this->end(); ?>
+
+    // 親のview/layoutの、そのあとどこかで
     echo $this->fetch('navbar');
 
 上記の例では、 ``navbar`` ブロックには最初のセクションで追加された内容のみが格納されます。
-このブロックは子ビューで定義されているので、デフォルトの内容は破棄されます。
+このブロックは子ビューで定義されているので、デフォルトの内容は ``<p>`` タグとともに破棄されます。
 
 .. versionadded: 2.3
     ``startIfEmpty()`` と ``prepend()`` は 2.3 で追加されました。
