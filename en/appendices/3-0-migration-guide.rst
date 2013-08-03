@@ -207,8 +207,11 @@ Controller\\Components
 CookieComponent
 ---------------
 
-- Uses :php:meth:`Request::cookie()` to read cookie data,
+- Uses :php:meth:`Cake\\Network\\Request::cookie()` to read cookie data,
   this eases testing, and allows for ControllerTestCase to set cookies.
+- Cookies encrypted in previous versions of CakePHP using the ``cipher`` method
+  are now un-readable because ``Security::cipher()`` has been removed. You will
+  need to re-encrypt cookies with the ``rijndael`` method before upgrading.
 
 
 TestSuite
@@ -265,7 +268,22 @@ I18n
 Utility
 =======
 
+Sanitize
+--------
+
 - ``Sanitize::escape()`` has been removed. It promotes bad practices. SQL
   escaping should be done at time of query construction using the Database
   layer.
+
+Security
+--------
+
+- ``Security::cipher()`` has been removed. It is insecure and promotes bad
+  cryptographic practices. You should use :php:meth:`Security::rijndael()`
+  instead.
+- The Configure value ``Security.cipherSeed`` is no longer required. With the
+  removal of ``Security::cipher()`` it served no use.
+- Backwards compatibility in :php:meth:`Cake\\Utility\\Security::rijndael()` for values encrypted prior
+  to CakePHP 2.3.1 has been removed. You should re-encrypt values using a recent
+  version of CakePHP 2.x before migrating.
 
