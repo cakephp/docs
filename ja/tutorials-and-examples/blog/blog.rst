@@ -73,7 +73,7 @@ Cakeのディレクトリ構造について少し学んでおきましょう:
         created DATETIME DEFAULT NULL,
         modified DATETIME DEFAULT NULL
     );
-    
+
     /* それから、テスト用に記事をいくつか入れておきます: */
     INSERT INTO posts (title,body,created)
         VALUES ('タイトル', 'これは、記事の本文です。', NOW());
@@ -114,7 +114,7 @@ CakePHPのデータベース設定ファイルの元は、
         'database' => 'cake_blog_tutorial',
         'schema' => '',
         'prefix' => '',
-        'encoding' => 'utf8' //日本語ではencodingを指定しましょう。
+        'encoding' => 'utf8'
     );
 
 新しくできた ``database.php`` ファイルを保存したら、ブラウザをあけて、Cakeのwelcomeページを開いてください。
@@ -175,5 +175,3 @@ mod\_rewriteについて
 はじめてのCakePHPアプリケーションを構築しはじめるには、続けて
 :doc:`/tutorials-and-examples/blog/part-two`
 を見てください。
-
-
