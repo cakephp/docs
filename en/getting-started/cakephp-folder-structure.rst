@@ -36,7 +36,7 @@ Config
 Console
     Contains the console commands and console tasks for your application.
     This directory can also contain a ``Templates`` directory to customize the
-    output of bake. For more information see :doc:`console-and-shells`.
+    output of bake. For more information see :doc:`/console-and-shells`.
 Controller
     Contains your application’s controllers and their components.
 Lib
@@ -53,7 +53,7 @@ Test
     This directory contains all the test cases, and test fixtures for your
     application. The ``Test/Case`` directory should mirror your application and
     contain one or more test cases per class in your application. For more
-    information on test cases and test fixtures refer to the :doc:`development/testing`
+    information on test cases and test fixtures refer to the :doc:`/development/testing`
     documentation.
 tmp
     This is where CakePHP stores temporary data. The actual data it
