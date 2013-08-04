@@ -217,7 +217,7 @@ CakePHPのこのコレクションオブジェクトは、アプリケーショ�
             'Bar' => array('priority' => 9) //Bar のコールバックは Foo's の前にトリガーされます
         );
 
-  public $helpers = array(
+        public $helpers = array(
             'Cache' => array('priority' => 12), //Cache のコールバックは最後に
                                                 //トリガーされるでしょう
             'Asset',
