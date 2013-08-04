@@ -825,15 +825,21 @@ returnする値の選択
 
         $this->testAction('/posts/add', array(
             'data' => array(
-                'Post' => array('name' => 'New Post')
+                'Post' => array('title' => 'New Post')
             )
         ));
+        $this->assertContains('/posts', $this->headers['Location']);
+    }
 
-        $this->assertContains('/posts/index', $this->headers['Location']);
-        $this->assertEquals('New Post', $this->vars['post']['Post']['name']);
+    public function testAddGet() {
+        $this->testAction('/posts/add', array(
+            'method' => 'GET',
+            'return' => 'contents'
+        ));
         $this->assertRegExp('/<html/', $this->contents);
         $this->assertRegExp('/<form/', $this->view);
     }
+
 
 ここでは、 ``testAction()`` と ``generate()`` メソッドの少々複雑な使用例を示しています。
 まず、テストするコントローラーを作成し、 :php:class:`SessionComponent` をモックします。
