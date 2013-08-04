@@ -768,7 +768,7 @@ and authentication mechanics in CakePHP.
     The name of an optional view element to render when an Ajax request is made
     with an invalid or expired session.
 
-.. php:attr: allowedActions
+.. php:attr:: allowedActions
 
     Controller actions for which user validation is not required.
 
