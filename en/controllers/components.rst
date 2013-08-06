@@ -42,9 +42,9 @@ method::
             'Auth' => [
                 'authorize' => ['controller'],
                 'loginAction' => ['controller' => 'users', 'action' => 'login']
-            ),
+            ],
             'Cookie' => ['name' => 'CookieMonster']
-        );
+        ];
 
 Would be an example of configuring a component with the
 ``$components`` array. All core components allow their
@@ -113,7 +113,7 @@ controller, you could access them like so::
 
     class PostsController extends AppController {
         public $components = ['Session', 'Cookie'];
-        
+
         public function delete() {
             if ($this->Post->delete($this->request->data('Post.id')) {
                 $this->Session->setFlash('Post deleted.');
@@ -166,7 +166,7 @@ the file in ``/App/Controller/Component/MathComponent.php``. The basic
 structure for the component would look something like this::
 
     use Cake\Controller\Component;
-    
+
     class MathComponent extends Component {
         public function doComplexOperation($amount1, $amount2) {
             return $amount1 + $amount2;
@@ -176,7 +176,7 @@ structure for the component would look something like this::
 .. note::
 
     All components must extend :php:class:`Component`.  Failing to do this
-    will trigger an exception. 
+    will trigger an exception.
 
 Including your component in your controllers
 --------------------------------------------
