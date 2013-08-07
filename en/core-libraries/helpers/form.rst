@@ -919,6 +919,8 @@ Datetime options
 * ``$options['round']`` Can be set to `up` or `down` to force rounding in either direction.
   Defaults to null which rounds half up according to `interval`.
 
+  .. versionadded:: 2.4
+
 Form Element-Specific Methods
 =============================
 
