@@ -94,14 +94,14 @@ Displaying notifications or flash messages
     .. code-block:: php
 
         <div class="flash flash-failure">
-            <?php echo $message; ?>
+            <?php echo h($message); ?>
         </div>
 
     You can also pass additional parameters into the ``flash()`` method, which
     allow you to generate customized messages::
 
         // In the controller
-        $this->Session->setFlash('Thanks for your payment %s');
+        $this->Session->setFlash('Thanks for your payment.');
 
         // In the layout.
         echo $this->Session->flash('flash', array(
@@ -114,6 +114,10 @@ Displaying notifications or flash messages
             <?php printf($message, h($name)); ?>
         </div>
 
+    .. note::
+        By default CakePHP does not HTML escape flash messages. If you are using
+        any request or user data in your flash messages you should escape it
+        with :php:func:`h` when formatting your messages.
 
 .. meta::
     :title lang=en: SessionHelper
