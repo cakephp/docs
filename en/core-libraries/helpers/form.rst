@@ -916,6 +916,9 @@ Datetime options
   Would create 4 options in the minute select. One for each 15
   minutes.
 
+* ``$options['round']`` Can be set to `up` or `down` to force rounding in either direction.
+  Defaults to null which rounds half up according to `interval`.
+
 Form Element-Specific Methods
 =============================
 
