@@ -214,6 +214,8 @@ CakeNumber
 - The symbols for ``GBP`` and ``EUR`` are now UTF-8. If you upgrade a non-UTF-8 application,
   make sure that you update the static ``$_currencies`` attribute with the appropriate
   HTML entity symbols (``&#163;`` and ``&#8364;``) before you use those currencies.
+- The ``fractionExponent`` option was added to
+  :php:meth:`CakeNumber::currency()`.
 
 CakeTime
 --------

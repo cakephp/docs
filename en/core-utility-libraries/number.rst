@@ -97,6 +97,9 @@ automatically echo the output into the view.
     | fractionPosition    | Either 'before' or 'after' to place the fraction   |
     |                     | symbol                                             |
     +---------------------+----------------------------------------------------+
+    | fractionExponent    | Fraction exponent of this specific currency.       |
+    |                     | Defaults to 2.                                     |
+    +---------------------+----------------------------------------------------+
 
     If a non-recognized $currency value is supplied, it is prepended to
     a USD formatted number. For example::
@@ -110,6 +113,9 @@ automatically echo the output into the view.
         // called as CakeNumber
         App::uses('CakeNumber', 'Utility');
         echo CakeNumber::currency('1234.56', 'FOO');
+
+    .. versionchanged:: 2.4
+        The ``fractionExponent`` option was added.
 
 .. php:method:: defaultCurrency(string $currency)
 
