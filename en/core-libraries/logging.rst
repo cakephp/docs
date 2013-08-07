@@ -97,7 +97,7 @@ As of 2.4 ``FileLog`` engine takes two new configurations::
     Trying to use Application or plugin loggers in core.php
     will cause issues, as application paths are not yet configured.
 
-    In debug mode missing directories will now be automatically created to avoid unnecessary
+    Also new in 2.4: In debug mode missing directories will now be automatically created to avoid unnecessary
     errors thrown when using the FileEngine.
 
 Error and Exception logging
