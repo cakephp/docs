@@ -240,7 +240,7 @@ your controller or you can define it directly in the model.
                 $this->Post->locale = 'de_de'; // we are going to save the german version
                 $this->Post->create();
                 if ($this->Post->save($this->request->data)) {
-                    $this->redirect(array('action' => 'index'));
+                    return $this->redirect(array('action' => 'index'));
                 }
             }
         }

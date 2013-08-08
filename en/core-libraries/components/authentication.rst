@@ -495,7 +495,7 @@ you want to provide a 'Log me out' link inside a members' area of your
 application::
 
     public function logout() {
-        $this->redirect($this->Auth->logout());
+        return $this->redirect($this->Auth->logout());
     }
 
 Logging out users that logged in with Digest or Basic auth is difficult

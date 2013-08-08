@@ -120,7 +120,7 @@ with CakePHP::
                 return $this->redirect(array('action' => 'index'));
             }
             $this->Session->setFlash(__('User was not deleted'));
-            $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('action' => 'index'));
         }
     }
 
@@ -205,7 +205,7 @@ the users add function and implement the login and logout action::
     }
 
     public function logout() {
-        $this->redirect($this->Auth->logout());
+        return $this->redirect($this->Auth->logout());
     }
 
 Password hashing is not done yet, open your ``app/Model/User.php`` model file

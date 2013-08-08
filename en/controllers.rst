@@ -336,7 +336,7 @@ Flow Control
             if ($success) {
                 return $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));
             }
-            $this->redirect(array('controller' => 'orders', 'action' => 'confirm'));
+            return $this->redirect(array('controller' => 'orders', 'action' => 'confirm'));
         }
 
     You can also use a relative or absolute URL as the $url argument::
@@ -438,7 +438,7 @@ Other Useful Methods
                 if ($this->referer() != '/') {
                     return $this->redirect($this->referer());
                 }
-                $this->redirect(array('action' => 'index'));
+                return $this->redirect(array('action' => 'index'));
             }
         }
 
@@ -447,7 +447,7 @@ Other Useful Methods
         class UserController extends AppController {
             public function delete($id) {
                 // delete code goes here, and then...
-                $this->redirect($this->referer(array('action' => 'index')));
+                return $this->redirect($this->referer(array('action' => 'index')));
             }
         }
 
