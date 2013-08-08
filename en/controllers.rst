@@ -336,7 +336,7 @@ Flow Control
             if ($success) {
                 return $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));
             }
-            return $this->redirect(array('controller' => 'orders', 'action' => 'confirm'));
+            $this->redirect(array('controller' => 'orders', 'action' => 'confirm'));
         }
 
     You can also use a relative or absolute URL as the $url argument::
