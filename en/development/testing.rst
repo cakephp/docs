@@ -1119,10 +1119,10 @@ Creating Test Suites
 ====================
 
 If you want several of your tests to run at the same time, you can
-creating a test suite. A testsuite is composed of several test cases.
+create a test suite. A test suite is composed of several test cases.
 ``CakeTestSuite`` offers a few methods for easily creating test suites based on
 the file system.  If we wanted to create a test suite for all our model tests we
-could would create ``app/Test/Case/AllModelTest.php``. Put the following in it::
+would create ``app/Test/Case/AllModelTest.php``. Put the following in it::
 
     class AllModelTest extends CakeTestSuite {
         public static function suite() {
