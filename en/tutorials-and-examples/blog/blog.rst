@@ -57,7 +57,7 @@ something like the following::
         README
 
 Now might be a good time to learn a bit about how Cake's directory
-structure works: check out
+structure works: check out the
 :doc:`/getting-started/cakephp-folder-structure` section.
 
 Creating the Blog Database
