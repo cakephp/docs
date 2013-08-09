@@ -199,6 +199,10 @@ General
 
 - :php:func:`pr` no longer outputs HTML when running in cli mode.
 
+Sanitize
+--------
+
+- ``Sanitize`` class has been deprecated.
 
 Validation
 ----------
