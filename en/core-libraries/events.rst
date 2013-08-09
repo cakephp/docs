@@ -44,7 +44,7 @@ behaviors on the fly to your models, and perhaps some components to the controll
 Doing so represents a challenge most of the time, since you would have to come up
 with the code for externally loading those behaviors or attaching hooks to your
 plugin controllers. Prior to CakePHP 2.1 some developers chose to implement generic
-event systems to solve this problem, and some of those system were offered as plugins.
+event systems to solve this problem, and some of those systems were offered as plugins.
 Now, you can benefit from a standard general purpose event system that will let you
 cleanly separate the concerns of your plugins and application code with the built in
 events manager.
