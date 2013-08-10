@@ -42,10 +42,10 @@ do not use the helper as well as help keep the controller better
 organized::
 
     class BakeriesController extends AppController {
-        public function bake {
+        public function bake() {
             $this->helpers[] = 'Time';
         }
-        public function mix {
+        public function mix() {
             // The Time helper is not loaded here and thus not available
         }
     }
