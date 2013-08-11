@@ -48,7 +48,7 @@ mieux organisé::
         }
         public function mix() {
             // Le Helper Time n'est pas chargé ici et n'est par conséquent
-            pas disponible
+            // pas disponible
         }
     }
 
