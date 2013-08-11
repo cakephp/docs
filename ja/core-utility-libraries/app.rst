@@ -1,13 +1,17 @@
-App Class
-#########
+.. App Class
+
+App クラス
+##########
 
 .. php:class:: App
 
 The app class is responsible for path management, class location and class loading.
 Make sure you follow the :ref:`file-and-classname-conventions`.
 
-Packages
-========
+.. Packages
+
+パッケージ
+==========
 
 CakePHP is organized around the idea of packages, each class belongs to a
 package or folder where other classes reside. You can configure each package
@@ -25,8 +29,10 @@ For instance if you'd like to use your own HttpSocket class, put it under::
 Once you've done this App will load your override file instead of the file
 inside CakePHP.
 
-Loading classes
-===============
+.. Loading classes
+
+クラスのローディング
+====================
 
 .. php:staticmethod:: uses(string $class, string $package)
 
@@ -66,8 +72,10 @@ Loading classes
     conventions. For most vendor packages using ``App::import()`` is
     recommended.
 
-Loading files from plugins
---------------------------
+.. Loading files from plugins
+
+プラグインからのファイルをロードする
+------------------------------------
 
 Loading classes in plugins works much the same as loading app and
 core classes except you must specify the plugin you are loading
@@ -80,8 +88,10 @@ from::
     App::uses('CommentComponent', 'PluginName.Controller/Component');
 
 
-Finding paths to packages using App::path()
-===========================================
+.. Finding paths to packages using App::path()
+
+App::path() を用いたパッケージへのパスの探索
+============================================
 
 .. php:staticmethod:: path(string $package, string $plugin = null)
 
@@ -121,8 +131,10 @@ Finding paths to packages using App::path()
 
     Returns the package name where a class was defined to be located at.
 
-Adding paths for App to find packages in
-========================================
+.. Adding paths for App to find packages in
+
+App がパッケージを探索できるようにパスを追加する
+================================================
 
 .. php:staticmethod:: build(array $paths = array(), mixed $mode = App::PREPEND)
 
@@ -168,8 +180,10 @@ Adding paths for App to find packages in
 
 .. _app-build-register:
 
-Add new packages to an application
-----------------------------------
+.. Add new packages to an application
+
+アプリケーションに新しいパッケージを追加する
+--------------------------------------------
 
 ``App::build()`` can be used to add new package locations.  This is useful
 when you want to add new top level packages or, sub-packages to your
@@ -187,8 +201,10 @@ append/prepend/reset paths like any other package.
 .. versionchanged:: 2.1
     Registering packages was added in 2.1
 
-Finding which objects CakePHP knows about
-=========================================
+.. Finding which objects CakePHP knows about
+
+CakePHP が把握しているオブジェクトを探索する
+============================================
 
 .. php:staticmethod:: objects(string $type, mixed $path = null, boolean $cache = true)
 
@@ -218,7 +234,9 @@ Finding which objects CakePHP knows about
        return ``array()``.
     3. Returns the complete class name
 
-Locating plugins
+.. Locating plugins
+
+プラグインの設置
 ================
 
 .. php:staticmethod:: pluginPath(string $plugin)
@@ -230,8 +248,10 @@ Locating plugins
 
         $path = App::pluginPath('DebugKit');
 
-Locating themes
-===============
+.. Locating themes
+
+テーマの設置
+============
 
 .. php:staticmethod:: themePath(string $theme)
 
@@ -242,8 +262,10 @@ Locating themes
 
 .. _app-import:
 
-Including files with App::import()
-==================================
+.. Including files with App::import()
+
+App::import() でファイルをインクルードする
+==========================================
 
 .. php:staticmethod:: import(mixed $type = null, string $name = null, mixed $parent = true, array $search = array(), string $file = null, boolean $return = false)
 
@@ -288,8 +310,10 @@ Including files with App::import()
       will also not convert the file to underscored anymore as it did in the
       past.
 
-Overriding classes in CakePHP
-=============================
+.. Overriding classes in CakePHP
+
+CakePHP のクラスをオーバーライドする
+====================================
 
 You can override almost every class in the framework, exceptions are the
 :php:class:`App` and :php:class:`Configure` classes. Whenever you like to
@@ -303,8 +327,10 @@ the internal structure of the framework.  Some examples to follow
 When you load the replaced files, the app/Lib files will be loaded instead of
 the built-in core classes.
 
-Loading Vendor Files
-====================
+.. Loading Vendor Files
+
+Vendor ファイルをローディングする
+=================================
 
 You can use ``App::uses()`` to load classes in vendors directories. It follows
 the same conventions as loading other files::
@@ -357,8 +383,10 @@ To load **vendors/vendorName/libFile.php**::
 
     App::import('Vendor', 'aUniqueIdentifier', array('file' => 'vendorName' . DS . 'libFile.php'));
 
-App Init/Load/Shutdown Methods
-==============================
+.. App Init/Load/Shutdown Methods
+
+App init/load/shutdown メソッド
+===============================
 
 .. php:staticmethod:: init( )
 
