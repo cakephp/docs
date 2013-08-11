@@ -43,12 +43,12 @@ qui n'utilisent pas le helper, tout en permettant de conserver le controller
 mieux organisé::
 
     class BakeriesController extends AppController {
-        public function bake {
+        public function bake() {
             $this->helpers[] = 'Time';
         }
-        public function mix {
+        public function mix() {
             // Le Helper Time n'est pas chargé ici et n'est par conséquent
-            pas disponible
+            // pas disponible
         }
     }
 
