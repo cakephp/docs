@@ -34,10 +34,10 @@ CakePHPでヘルパーを有効にするにはコントローラに認識させ�
 さらに、ヘルパーを使わない他のアクションの処理コストを抑えることになります。::
 
     class BakeriesController extends AppController {
-        public function bake {
+        public function bake() {
             $this->helpers[] = 'Time';
         }
-        public function mix {
+        public function mix() {
             // ここにTimeヘルパーは読み込まれないので利用出来ません
         }
     }
