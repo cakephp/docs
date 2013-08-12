@@ -113,6 +113,11 @@ PaginatorHelper
 - The first page no longer contains ``/page:1`` or ``?page=1`` in the URL. This helps prevent
   duplicate content issues where you would need to use canonical or noindex otherwise.
 
+FormHelper
+----------
+
+- The ``round`` option was added to :php:meth:`FormHelper::dateTime()`. Can be set to `up` or `down`
+  to force rounding in either direction. Defaults to null which rounds half up according to `interval`.
 
 Network
 =======
