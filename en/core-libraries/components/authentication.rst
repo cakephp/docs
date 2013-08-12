@@ -461,7 +461,7 @@ calling ``$this->Auth->login()`` with the user data you want to 'login'::
             $id = $this->User->id;
             $this->request->data['User'] = array_merge($this->request->data['User'], array('id' => $id));
             $this->Auth->login($this->request->data['User']);
-            $this->redirect('/users/home');
+            return $this->redirect('/users/home');
         }
     }
 
@@ -495,7 +495,7 @@ you want to provide a 'Log me out' link inside a members' area of your
 application::
 
     public function logout() {
-        $this->redirect($this->Auth->logout());
+        return $this->redirect($this->Auth->logout());
     }
 
 Logging out users that logged in with Digest or Basic auth is difficult

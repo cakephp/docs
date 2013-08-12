@@ -30,7 +30,7 @@ model to save data to a database table::
             if ($this->Recipe->save($this->request->data)) {
                 // Set a session flash message and redirect.
                 $this->Session->setFlash('Recipe Saved!');
-                $this->redirect('/recipes');
+                return $this->redirect('/recipes');
             }
         }
 
@@ -166,10 +166,10 @@ It does not actually create a record in the database but clears
 Model::$id and sets Model::$data based on your database field defaults. If you have
 not defined defaults for your database fields, Model::$data will be set to an empty array.
 
-If the ``$data`` parameter (using the array format outlined above) is passed, it will be merged with the database 
+If the ``$data`` parameter (using the array format outlined above) is passed, it will be merged with the database
 field defaults and the model instance will be ready to save with that data (accessible at ``$this->data``).
 
-If ``false`` or ``null`` are passed for the ``$data`` parameter, Model::data will be set to an empty array. 
+If ``false`` or ``null`` are passed for the ``$data`` parameter, Model::data will be set to an empty array.
 
 .. tip::
 
@@ -547,7 +547,7 @@ a look at the following code.::
        public function add() {
            if ($this->request->is('post')) {
                if ($this->CourseMembership->saveAssociated($this->request->data)) {
-                   $this->redirect(array('action' => 'index'));
+                   return $this->redirect(array('action' => 'index'));
                }
            }
        }

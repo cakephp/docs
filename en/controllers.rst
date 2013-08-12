@@ -334,10 +334,9 @@ Flow Control
         public function place_order() {
             // Logic for finalizing order goes here
             if ($success) {
-                $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));
-            } else {
-                $this->redirect(array('controller' => 'orders', 'action' => 'confirm'));
+                return $this->redirect(array('controller' => 'orders', 'action' => 'thanks'));
             }
+            return $this->redirect(array('controller' => 'orders', 'action' => 'confirm'));
         }
 
     You can also use a relative or absolute URL as the $url argument::
@@ -437,10 +436,9 @@ Other Useful Methods
             public function delete($id) {
                 // delete code goes here, and then...
                 if ($this->referer() != '/') {
-                    $this->redirect($this->referer());
-                } else {
-                    $this->redirect(array('action' => 'index'));
+                    return $this->redirect($this->referer());
                 }
+                return $this->redirect(array('action' => 'index'));
             }
         }
 
@@ -449,7 +447,7 @@ Other Useful Methods
         class UserController extends AppController {
             public function delete($id) {
                 // delete code goes here, and then...
-                $this->redirect($this->referer(array('action' => 'index')));
+                return $this->redirect($this->referer(array('action' => 'index')));
             }
         }
 
