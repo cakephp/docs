@@ -217,17 +217,25 @@ along with their values, are identified by the ``$fields`` array.
 For example, to approve all bakers who have been members for over a
 year, the update call might look something like::
 
-    $this_year = date('Y-m-d h:i:s', strtotime('-1 year'));
+    $thisYear = date('Y-m-d h:i:s', strtotime('-1 year'));
 
     $this->Baker->updateAll(
         array('Baker.approved' => true),
-        array('Baker.created <=' => $this_year)
+        array('Baker.created <=' => $thisYear)
     );
 
-.. tip::
 
-    The $fields array accepts SQL expressions. Literal values should be
-    quoted manually using :php:meth:`Sanitize::escape()`.
+The ``$fields`` array accepts SQL expressions. Literal values should be 
+quoted manually using :php:meth:`DboSource::value()`. For example if one of your
+model methods was calling ``updateAll()`` you would do the following::
+
+    $db = $this->getDataSource();
+    $value = $db->value($value, 'string');
+    $this->updateAll(
+        array('Baker.approved' => true),
+        array('Baker.created <=' => $value)
+    );
+
 
 .. note::
 
@@ -246,6 +254,7 @@ customer::
 By default, updateAll() will automatically join any belongsTo
 association for databases that support joins. To prevent this,
 temporarily unbind the associations.
+
 
 :php:meth:`Model::saveMany(array $data = null, array $options = array())`
 =========================================================================
