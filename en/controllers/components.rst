@@ -116,7 +116,7 @@ them like so::
         public function delete() {
             if ($this->Post->delete($this->request->data('Post.id')) {
                 $this->Session->setFlash('Post deleted.');
-                $this->redirect(array('action' => 'index'));
+                return $this->redirect(array('action' => 'index'));
             }
         }
 
@@ -173,7 +173,7 @@ structure for the component would look something like this::
 .. note::
 
     All components must extend :php:class:`Component`.  Failing to do this
-    will trigger an exception. 
+    will trigger an exception.
 
 Including your component in your controllers
 --------------------------------------------
@@ -223,7 +223,7 @@ way you include them in controllers - using the ``$components`` var::
     App::uses('Component', 'Controller');
     class CustomComponent extends Component {
         // the other component your component uses
-        public $components = array('Existing'); 
+        public $components = array('Existing');
 
         public function initialize(Controller $controller) {
             $this->Existing->foo();

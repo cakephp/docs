@@ -538,7 +538,7 @@ Next, let's make a way for users to delete posts. Start with a
 
         if ($this->Post->delete($id)) {
             $this->Session->setFlash(__('The post with id: %s has been deleted.', h($id)));
-            $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('action' => 'index'));
         }
     }
 
