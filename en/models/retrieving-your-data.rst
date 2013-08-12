@@ -1062,6 +1062,7 @@ Also, if you need to pass just part of your query as raw SQL as the
 above, datasource **expressions** with raw SQL work for any part of
 the find query.
 
+.. _prepared-statements:
 
 Prepared Statements
 -------------------

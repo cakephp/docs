@@ -12,7 +12,7 @@ Instead of using the destructive input filtering features of Sanitize class you
 should instead apply more thorough :doc:`/models/data-validation` to the user
 data your application accepts. By rejecting invalid input you can often remove the
 need to destructively modify user data. You might also want to look at
-`http://php.net/filter <PHP's filter extension>`_ in situations you need to
+`PHP's filter extension <http://php.net/filter>`_ in situations you need to
 modify user input.
 
 Accepting user submitted HTML
@@ -27,5 +27,4 @@ SQL Escaping
 
 CakePHP handles SQL escaping on all parameters to :php:meth:`Model::find()` and
 :php:meth:`Model::save()`. In the rare case you need to construct SQL by hand
-using user input you should using :ref:`prepared-statementi <prepared statements>`
-and the datasource layer.
+using user input you should using :ref:`prepared-statements`.
