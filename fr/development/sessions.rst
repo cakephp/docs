@@ -12,10 +12,8 @@ la place l'utilisation des classes de Session est préférable.
 Session Configuration
 =====================
 
-La configuration de Session est stockée dans ``Configure``, et les classes de
-session la récupéreront de là quand c'est nécessaire. La configuration de
-Session est stockée dans la clé de top niveau ``Session``, et un certain nombre
-d'options sont disponibles:
+La configuration de Session est stockée dans ``Configure`` dans la clé de top
+niveau ``Session``, et un certain nombre d'options sont disponibles:
 
 * ``Session.cookie`` - Change le nom du cookie de session.
 
