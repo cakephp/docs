@@ -71,22 +71,22 @@ logué, les valeurs de noyau sont ``error``, ``warning``, ``info`` et ``debug``.
 De plus vous pouvez définir vos propres types par leur utilisation en appelant
 ``CakeLog::write``.
 
-.. versionadded:: 2.4
-
 .. _file-log:
+
+.. versionadded:: 2.4
 
 Depuis 2.4 le moteur de ``FileLog`` prend deux nouvelles configurations::
 
-  - ``size`` Utilisé pour implémenter la rotation de fichier de journal basic.
-    Si la taille d'un fichier de log atteint la taille spécifiée, le fichier
-    existant est renommé en ajoutant le timestamp au nom du fichier et un
-    nouveau fichier de log est crée. Peut être une valeur de bytes en entier
-    ou des valeurs de chaînes lisible par l'humain comme '10MB', '100KB' etc.
-    Par défaut à 10MB.
-  - ``rotate`` Les fichiers de log font une rotation à un temps spécifié
-    avant d\'être retiré.
-    Si la valeur est 0, les versions anciennes seront retirées plutôt que
-    mises en rotation. Par défaut à 10.
+* ``size`` Utilisé pour implémenter la rotation de fichier de journal basic.
+  Si la taille d'un fichier de log atteint la taille spécifiée, le fichier
+  existant est renommé en ajoutant le timestamp au nom du fichier et un
+  nouveau fichier de log est crée. Peut être une valeur de bytes en entier
+  ou des valeurs de chaînes lisible par l'humain comme '10MB', '100KB' etc.
+  Par défaut à 10MB.
+* ``rotate`` Les fichiers de log font une rotation à un temps spécifié
+  avant d\'être retiré.
+  Si la valeur est 0, les versions anciennes seront retirées plutôt que
+  mises en rotation. Par défaut à 10.
 
 .. warning::
 
