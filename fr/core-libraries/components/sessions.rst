@@ -3,10 +3,10 @@ Sessions
 
 .. php:class:: SessionComponent(ComponentCollection $collection, array $settings = array())
 
-Le component session de CakePHP fournit le moyen de faire persister les données
-client entre les pages requêtées. Il agit comme une interface pour $_SESSION
-et offre aussi des méthodes pratiques pour de nombreuses fonctions relatives à
-$_SESSION.
+Le component` session de CakePHP fournit le moyen de faire persister les données
+client entre les pages requêtées. Il agit comme une interface pour
+``$_SESSION`` et offre aussi des méthodes pratiques pour de nombreuses
+fonctions relatives à ``$_SESSION`.
 
 Les sessions peuvent être paramétrées de différentes façons dans CakePHP.
 Pour plus d'information, vous devriez lire la documentation
