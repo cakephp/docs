@@ -137,7 +137,7 @@ Création de messages de notification
     Ensuite nous créons le fichier ``app/View/Elements/flash_custom.ctp`` et
     créons notre élément flash personnalisé::
     
-        <div id="myCustomFlash"><?php echo $message; ?></div>
+        <div id="myCustomFlash"><?php echo h($message); ?></div>
 
     ``$params`` vous permet de passer des variables de vue supplémentaires
     au layout de rendu. Les paramètres peuvent être passés en affectant
@@ -157,6 +157,12 @@ Création de messages de notification
     
         // Utilisera  /app/Plugin/Comment/View/Elements/flash_no_spam.ctp
         $this->Session->setFlash('Message!', 'flash_no_spam', array('plugin' => 'Comment'));
+
+    .. note::
+        Par défaut, CakePHP n'échappe pas le html des messages flash. Si vous
+        utilisez une requête ou une donnée d'utilisateur dans vos messages
+        flash, vous devrez les échapper avec :php:func:`h` quand vous formatez
+        vos messages.
 
 .. meta::
     :title lang=fr: Sessions

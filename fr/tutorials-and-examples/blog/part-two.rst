@@ -553,7 +553,7 @@ Posts (PostsController)::
             throw new MethodNotAllowedException();
         }
         if ($this->Post->delete($id)) {
-            $this->Session->setFlash(__('Le Post avec l\'id ' . $id . ' a été supprimé.'));
+            $this->Session->setFlash(__('Le post avec id: %s a été supprimé.', h($id)));
             $this->redirect(array('action' => 'index'));
         }
     }
