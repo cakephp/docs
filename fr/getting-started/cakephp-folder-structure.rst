@@ -39,7 +39,7 @@ Console
     Contient les commandes de la console et les Tasks de la console pour votre
     application. Ce répertoire peut aussi contenir un répertoire ``Templates``
     pour personnaliser la sortie de bake. Pour plus d'informations, regardez
-    :doc:`console-and-shells`.
+    :doc:`/console-and-shells`.
 Controller
     Contient vos controllers et leurs components.
 Lib
@@ -58,7 +58,7 @@ Test
     votre application. Le répertoire ``Test/Case`` devra refléter votre
     application et contenir un ou plusieurs cas de test par classe dans votre
     application. Pour plus d'informations sur les cas de test et les fixtures
-    de test, référez-vous à la documentation :doc:`development/testing`.
+    de test, référez-vous à la documentation :doc:`/development/testing`.
 tmp
     C'est ici que CakePHP enregistre les données temporaires. La manière dont
     sont stockées les données actuelles dépend de la configuration que vous
