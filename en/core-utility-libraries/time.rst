@@ -104,16 +104,16 @@ Formatting
     `PHP date() formatting options <http://www.php.net/manual/en/function.date.php>`_::
 
         // called via TimeHelper
-        echo $this->Time->format('F jS, Y h:i A', '2011-08-22 11:53:00');
+        echo $this->Time->format('%F %jS, %Y %h:%i %A', '2011-08-22 11:53:00');
         // August 22nd, 2011 11:53 AM
 
-        echo $this->Time->format('r', '+2 days');
+        echo $this->Time->format('%r', '+2 days');
         // 2 days from now formatted as Sun, 13 Nov 2011 03:36:10 +0800
 
         // called as CakeTime
         App::uses('CakeTime', 'Utility');
-        echo CakeTime::format('2011-08-22 11:53:00', 'F jS, Y h:i A');
-        echo CakeTime::format('+2 days', 'r');
+        echo CakeTime::format('2011-08-22 11:53:00', '%F %jS, %Y %h:%i %A');
+        echo CakeTime::format('+2 days', '%r');
 
     You can also provide the date/time as the first argument. When doing this
     you should use ``strftime`` compatible formatting. This call signature
