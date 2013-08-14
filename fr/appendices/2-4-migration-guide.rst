@@ -123,6 +123,13 @@ PaginatorHelper
 
 - :php:meth::`PaginatorHelper::param()` a été ajoutée.
 
+FormHelper
+----------
+
+- L'option ``round`` a été ajoutée à :php:meth:`FormHelper::dateTime()`. Peut
+  être définie à `up` ou `down` pour forcer l'arrondi quelque soit la
+  direction. Par défaut à null qui arrondit à la moitié supérieure selon
+  `interval`.
 
 Network
 =======
