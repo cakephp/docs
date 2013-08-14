@@ -132,7 +132,7 @@ ressembler à ce qui suit::
         'database' => 'cake_blog_tutorial',
         'schema' => '',
         'prefix' => '',
-        'encoding' => ''
+        'encoding' => 'utf8'
     );
 
 Une fois votre nouveau fichier ``database.php`` sauvegardé, vous devriez
