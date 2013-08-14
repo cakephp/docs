@@ -39,6 +39,13 @@ FixtureTask
 Core
 ====
 
+Constantes
+----------
+
+- Les constantes ``IMAGES_URL``, ``JS_URL``, ``CSS_URL`` ont été dépréciées et
+  remplacées par les variables de config respectivement ``App.imageBaseUrl``,
+  ``App.jsBaseUrl``, ``App.cssBaseUrl``.
+
 Object
 ------
 
@@ -271,7 +278,7 @@ Routing
 Router
 ------
 
-- :php:meth:`Router::baseUrl()` a été ajoutée en même temps que la valeur
-     ``App.fullBaseURL`` de Configure. Cette méthode remplace
-     :php:const:`FULL_BASE_URL` qui est maintenant dépréciée.
+- :php:meth:`Router::fullBaseUrl()` a été ajoutée en même temps que la
+  valeur de Configure ``App.fullBaseUrl``. Elles remplacent
+  :php:const:`FULL_BASE_URL` qui est maintenant dépréciée.
 

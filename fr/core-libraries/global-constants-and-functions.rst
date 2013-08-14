@@ -226,6 +226,9 @@ dans votre application.
 .. php:const:: CSS_URL
 
     Chemin web vers le répertoire CSS.
+
+    .. deprecated:: 2.4
+        Utilisez la valeur de config ``App.cssBaseUrl`` à la place.
    
 .. php:const:: DS
 
@@ -238,7 +241,7 @@ dans votre application.
 
     .. deprecated:: 2.4
         Cette constante est dépréciée, vous devriez utiliser
-        :php:meth:`Router::baseUrl()` à la place.
+        :php:meth:`Router::fullbaseUrl()` à la place.
 
 .. php:const:: IMAGES
 
@@ -248,6 +251,9 @@ dans votre application.
 
     Chemin web vers le répertoire image publique.
 
+    .. deprecated:: 2.4
+        Utilisez la valeur de config ``App.imageBaseUrl`` à la place.
+
 .. php:const:: JS
 
     Chemin vers le répertoire Javascript publique.
@@ -255,6 +261,9 @@ dans votre application.
 .. php:const:: JS_URL
 
     Chemin web vers le répertoire Javascript publique.
+
+    .. deprecated:: 2.4
+        Utilisez la valeur de config ``App.jsBaseUrl`` à la place.
 
 .. php:const:: LOGS
 
