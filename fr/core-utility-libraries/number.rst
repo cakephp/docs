@@ -102,6 +102,9 @@ automatiqement la sortie dans la vue.
     | fractionPosition    | Soit 'before' soit 'after' pour placer le symbole  |
     |                     | de fraction                                        |
     +---------------------+----------------------------------------------------+
+    | fractionExponent    | Fraction exponent de cette monnaie spécifique.     |
+    |                     | Par défaut à 2.                                    |
+    +---------------------+----------------------------------------------------+
 
     Si une valeur $currency non reconnue est fournie, elle est préfixée par un
     nombre formaté en USD. Par exemple::

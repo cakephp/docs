@@ -242,6 +242,8 @@ CakeNumber
   à jour une application non-UTF-8, assurez-vous que vous mettez à jour
   l'attribut statique ``$_currencies`` avec les symboles d'entité HTML
   appropriés (``&#163;`` et ``&#8364;``) avant d'utiliser ces monnaies.
+- L'option ``fractionExponent`` a été ajoutée à
+  :php:meth:`CakeNumber::currency()`.
 
 CakeTime
 --------
