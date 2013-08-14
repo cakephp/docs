@@ -30,7 +30,7 @@ CakePHP pour sauvegarder les données dans une table de la base de données ::
            if($this->Recipe->save($this->request->data)) {
                //On définit une message flash en session et on redirige.
                $this->Session->setFlash("Recipe sauvegardée !");
-               $this->redirect('/recettes');
+               return $this->redirect('/recettes');
            }
         }
         //Si aucune données de formulaire, on récupère la recipe à éditer
@@ -587,7 +587,7 @@ validées. Jettez un oeil au code suivant.::
        public function add() {
            if ($this->request->is('post')) {
                if ($this->CourseMembership->saveAssociated($this->request->data)) {
-                   $this->redirect(array('action' => 'index'));
+                   return $this->redirect(array('action' => 'index'));
                }
            }
        }

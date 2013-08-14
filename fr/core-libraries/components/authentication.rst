@@ -503,7 +503,7 @@ utilisateur que vous voulez pour la 'connexion'::
             $id = $this->User->id;
             $this->request->data['User'] = array_merge($this->request->data['User'], array('id' => $id));
             $this->Auth->login($this->request->data['User']);
-            $this->redirect('/users/home');
+            return $this->redirect('/users/home');
         }
     }
 

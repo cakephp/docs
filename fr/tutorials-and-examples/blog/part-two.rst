@@ -552,7 +552,7 @@ Posts (PostsController)::
         }
         if ($this->Post->delete($id)) {
             $this->Session->setFlash(__('Le post avec id: %s a été supprimé.', h($id)));
-            $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('action' => 'index'));
         }
     }
 

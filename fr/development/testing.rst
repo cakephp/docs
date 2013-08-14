@@ -793,7 +793,7 @@ existant, il va continuer de lancer le code suivant le redirect. Par exemple::
         public function add() {
             if ($this->request->is('post')) {
                 if ($this->Article->save($this->request->data)) {
-                    $this->redirect(array('action' => 'index'));
+                    return $this->redirect(array('action' => 'index'));
                 }
             }
             // plus de code

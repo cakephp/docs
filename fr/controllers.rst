@@ -352,9 +352,9 @@ Contrôle de Flux
         public function regler_achats() {
             // Placez ici la logique pour finaliser l'achat...
             if ($success) {
-                $this->redirect(array('controller' => 'paiements', 'action' => 'remerciements'));
+                return $this->redirect(array('controller' => 'paiements', 'action' => 'remerciements'));
             } else {
-                $this->redirect(array('controller' => 'paiements', 'action' => 'confirmations'));
+                return $this->redirect(array('controller' => 'paiements', 'action' => 'confirmations'));
             }
         }
 
@@ -460,10 +460,9 @@ Autres Méthodes utiles
             public function delete($id) {
                 // le code de suppression va ici, et ensuite...
                 if ($this->referer() != '/') {
-                    $this->redirect($this->referer());
-                } else {
-                    $this->redirect(array('action' => 'index'));
+                    return $this->redirect($this->referer());
                 }
+                return $this->redirect(array('action' => 'index'));
             }
         }
 
@@ -472,7 +471,7 @@ Autres Méthodes utiles
         class UtilisateursController extends AppController {
             public function delete($id) {
                 // le code de suppression va ici, et ensuite...
-                $this->redirect($this->referer(array('action' => 'index')));
+                return $this->redirect($this->referer(array('action' => 'index')));
             }
         }
 
