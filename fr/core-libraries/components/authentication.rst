@@ -105,7 +105,7 @@ Les objets d'authentification supportent les clés de configuration suivante.
 - ``fields`` Les champs à utiliser pour identifier un utilisateur.
 - ``userModel`` Le nom du model de l'utilisateur, par défaut User.
 - ``scope`` Des conditions supplémentaires à utiliser lors de la recherche et
-  l'authentification des utilisateurs, ex ``array('User.is_active' => 1).``
+  l'authentification des utilisateurs, ex ``array('User.is_active' => 1)``.
 - ``contain`` options de Containable lorque l'enregistrement de l'utilisateur
   est chargé.
 
