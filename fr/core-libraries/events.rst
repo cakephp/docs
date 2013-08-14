@@ -105,7 +105,7 @@ ré-écrivons en utilisant le gestionnaire d'événements. ::
 Cela semble beaucoup plus clair, puisque cela nous donne l'opportunité
 d'introduire des classes d'événement et des méthodes. La première chose que
 vous devriez noter c'est l'appel à ``getEventManager()`` qui est une méthode
-disponible par défaut dans tous les Models, Controller, et les Vues. Cette
+disponible par défaut dans tous les Models, Controllers, et les Vues. Cette
 méthode ne retournera pas la même instance du gestionnaire aux travers des
 models, et n'est pas partagée entre les controllers et les models, mais elle
 l'est entre les controllers et les vues, cependant. Nous reverrons plus tard
