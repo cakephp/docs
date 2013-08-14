@@ -231,6 +231,11 @@ General
 
 - :php:func:`pr` ne sort plus le HTML lors du lancement en mode cli.
 
+Sanitize
+--------
+
+- La classe ``Sanitize`` a été dépréciée.
+
 
 Validation
 ----------
