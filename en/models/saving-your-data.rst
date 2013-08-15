@@ -236,7 +236,6 @@ model methods was calling ``updateAll()`` you would do the following::
         array('Baker.created <=' => $value)
     );
 
-
 .. note::
 
     Even if the modified field exists for the model being updated, it is
@@ -254,7 +253,6 @@ customer::
 By default, updateAll() will automatically join any belongsTo
 association for databases that support joins. To prevent this,
 temporarily unbind the associations.
-
 
 :php:meth:`Model::saveMany(array $data = null, array $options = array())`
 =========================================================================

@@ -676,11 +676,9 @@ SQL calls that you can't or don't want to make via other model
 methods (this should only rarely be necessary) can be made using
 the model's ``query()`` method.
 
-If you’re ever using this method in your application, be sure to
-check out CakePHP’s
-:doc:`/core-utility-libraries/sanitize`, which aids in
-cleaning up user-provided data from injection and cross-site
-scripting attacks.
+If you use this method be sure to properly escape all parameters using the
+``value()`` method on the database driver. Failing to not escape parameters
+will create SQL injection vulnerabilities.
 
 .. note::
 
