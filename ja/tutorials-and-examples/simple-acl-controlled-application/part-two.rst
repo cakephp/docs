@@ -91,25 +91,25 @@ http://localhost/cake/app/users/initdb)へ接続してください。
 ``AclBehavior`` は ``aros`` テーブルのaliasフィールドをセットしないので、AROを参照するためにオブジェクトの参照か配列を使う必要があります。
 
 ACLパーミッションからindexアクションやviewアクションをわざと省略したことに気づいたかもしれません。
-これらは、 ``PostsController`` と ``WidgetsController`` において作成していきます。
-これは許可されていないユーザもこれらのページを表示することを可能にし、パブリックなページにします。
-とはいえ、いつでも ``AuthComponent::allowedActions`` からそれらのアクションを削除できますし、ACLの中にviewとeditのパーミッションを差し戻すこともできます。
+こうすることで ``PostsController`` と ``WidgetsController`` にある index と view は、public になります。
+権限を持たないユーザでもこれらのページを表示することを可能にし、パブリックなページにします。
+とはいえ、いつでも ``AuthComponent::allowedActions`` からそれらのアクションを削除することで、ACLでのviewとeditのパーミッションを設定していない状態に戻すことができます。
 
 さて、usersとgroupsコントローラから ``Auth->allowedActions`` への参照を取り外したいですね。
-それが終わったら、postsとwidgetsコントローラに次の行を追加しましょう::
+その場合は、postsとwidgetsコントローラに次の行を追加しましょう::
 
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('index', 'view');
     }
 
-これは先にusersとgroupsコントローラに設置した「オフスイッチ」を取り除き、postsとwidgetsコントローラのindexおよびviewアクションにパブリックなアクセスを与えています。
+これはusersとgroupsコントローラに前もって設置されていた「スイッチオフ」の設定を取り除き、postsとwidgetsコントローラのindexおよびviewアクションにパブリックなアクセスを与えています。
 ``AppController::beforeFilter()`` で以下を追加してください::
 
      $this->Auth->allow('display');
 
-これは「display」アクションをパブリックにし、PagesController::display()をパブリックに維持させます。
-多くの場合、デフォルトのルーティングは、アプリケーションのホームページとしてこのアクションを持つので、これは重要です。
+これで「display」アクションはパブリックになります。PagesController::display()はパブリックに維持されます。
+デフォルトのルーティングがアプリケーションのトップページとしてこのアクションを持つことはよくあることで、これは重要です。
 
 ログイン
 ========
