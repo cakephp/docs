@@ -103,8 +103,8 @@ CakePHP のフレームワークのほぼすべてのクラスは、あなた独
 
 .. Loading files from plugins
 
-プラグインからのファイルをロードする
-------------------------------------
+プラグイン内のファイルをロードする
+----------------------------------
 
 ..
     Loading classes in plugins works much the same as loading app and
@@ -157,7 +157,7 @@ App::path() を用いたパッケージへのパスの探索
         use :php:meth:`App::path()`
 
     現在読み込まれているすべてのパスを App から取得します。
-    App が把握している全てのパスを調べたり記憶したりするのに便利。
+    App が把握している全てのパスを調べたり記憶したりするのに便利です。
     特定のパッケージのパスを扱う場合は :php:meth:`App::path()` を使用します。
 
 .. php:staticmethod:: core(string $package)
@@ -206,7 +206,8 @@ App がパッケージを探索できるようにパスを追加する
     例えばコントローラのパスを追加すると、CakePHPがコントローラを探すパスを置き換えることになるでしょう。
     この仕組みが、アプリケーションをファイルシステムから分離させてくれます。
 
-    .. Usage::
+    ..
+        Usage::
 
     使い方::
 
@@ -224,9 +225,10 @@ App がパッケージを探索できるようにパスを追加する
         If reset is set to true, all loaded plugins will be forgotten and they will
         be needed to be loaded again.
 
-    reset が true に設定されている場合、ロードされたすべてのプラグインは忘れ去られ、それらは再びロードされる必要があります
+    reset が true に設定されている場合、ロードされたすべてのプラグインは忘れ去られ、それらは再びロードされる必要があります。
 
-    .. Examples::
+    ..
+        Examples::
 
     例::
 
@@ -286,7 +288,9 @@ CakePHP が把握しているオブジェクトを探索する
 
 .. php:staticmethod:: objects(string $type, mixed $path = null, boolean $cache = true)
 
-    :rtype: mixed Returns an array of objects of the given type or false if incorrect.
+    .. :rtype: mixed Returns an array of objects of the given type or false if incorrect.
+
+    :rtype: mixed 与えられた型のオブジェクトの配列か、不正な場合は false を返します。
 
     ..
         You can find out which objects App knows about using
@@ -479,7 +483,7 @@ Vendor ファイルをローディングする
     To load classes in subdirectories, you'll need to add those paths
     with ``App::build()``
 
-サブディレクトリ内のクラスをロードするには、それらのパスを ``Appbuild()`` で追加する必要があります::
+サブディレクトリ内のクラスをロードするには、それらのパスを ``App::build()`` で追加する必要があります::
 
     // app/Vendor/SomePackage/ClassInSomePackage.php 内の ClassInSomePackage クラスをロードする
     App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage')));
@@ -509,7 +513,7 @@ Vendor ファイルをローディングする
         The geshi file must be a lower-case file name as Cake will not
         find it otherwise.
 
-    Cake が他のファイルを見出してしまわないために、geshi ファイルは、小文字でなくてはなりません。
+    Cake が他のファイルを見出してしまわないために、geshi のファイル名は、小文字でなくてはなりません。
 
 .. To load **app/Vendor/flickr/flickr.php**
 
@@ -542,7 +546,7 @@ Vendor ファイルをローディングする
 ベンダーファイルが /vendors ディレクトリ内にあるかどうかに違いはありません。
 Cake は自動的にそれを見出します。
 
-To load **vendors/vendorName/libFile.php**
+.. To load **vendors/vendorName/libFile.php**
 
 **vendors/vendorName/libFile.php** をロードする::
 
@@ -575,7 +579,7 @@ App init/load/shutdown メソッド
     自動的なクラスローディングを処理するメソッド。
     これは、:php:meth:`App::uses()` を使用して定義された各クラスのパッケージを探し出し、その情報を元に、クラスをロードするためのフルパスとしてパッケージ名を解決します。
     各クラスのファイル名はクラス名に従ってください。
-    たとえばクラス名が ``MyCustomClass`` である場合、ファイル名は ``MyCustomClass.php`` でなければなりません
+    たとえばクラス名が ``MyCustomClass`` である場合、ファイル名は ``MyCustomClass.php`` でなければなりません。
 
 .. php:staticmethod:: shutdown( )
 
