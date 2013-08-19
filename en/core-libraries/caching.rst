@@ -1,6 +1,8 @@
 Caching
 #######
 
+.. php:namespace::  Cake\Cache
+
 Caching is frequently used to reduce the time it takes to create or read from
 other resources.  Caching is often used to make reading from expensive
 resources less expensive.  You can easily store the results of expensive queries,
@@ -102,8 +104,8 @@ refer to the class name using the following syntaxes:
 * Using an object that extends the ``CacheEngine`` class.
 
 Once a configuration is created you cannot change it. Instead you should drop
-the configuration and re-create it using :php:meth:`Cache::drop()` and
-:php:meth:`Cache::config()`.
+the configuration and re-create it using :php:meth:`Cake\\Cache\\Cache::drop()` and
+:php:meth:`Cake\\Cache\\Cache::config()`.
 
 Other cache related configuration
 ---------------------------------
@@ -114,9 +116,9 @@ configuration properties:
 enabled
     When set to true, persistent caching is disabled site-wide.
     This will make all read/writes to :php:class:`Cake\\Cache\\Cache` fail.
-    You can control this value with :php:meth:`Cache::enable()` and
-    :php:meth:`Cache::disable()`. The current state can be read with
-    :php:meth:`Cache::enabled()`.
+    You can control this value with :php:meth:`Cake\\Cache\\Cache::enable()` and
+    :php:meth:`Cake\\Cache\\Cache::disable()`. The current state can be read with
+    :php:meth:`Cake\\Cache\\Cache::enabled()`.
 Cache.check
     If set to true, enables view caching. Enabling is still needed in
     the controllers, but this variable enables the detection of those
