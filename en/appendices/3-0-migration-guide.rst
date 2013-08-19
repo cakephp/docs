@@ -36,9 +36,6 @@ Basics
 Cache
 =====
 
-* Caching engines for :php:class:`Cake\\Cache\\Cache` are now configured using
-  :php:meth:`Cake\\Core\\Configure` instead of using the ``config()`` method.
-  ``Cache::config()`` will be removed for 3.0.0 stable.
 * Cache engines are now lazy loaded upon first use.
 * :php:meth:`Cake\\Cache\\Cache::engine()` has been added.
 
@@ -69,9 +66,6 @@ Event
 Log
 ===
 
-* :php:class:`Cake\\Log\\Log` is now configured using
-  :php:meth:`Cake\\Core\\Configure` instead of using the ``config()`` method.
-  ``Log::config()`` will be removed for 3.0.0 stable.
 * Log engines are now lazily loaded upon the first write to the logs.
 * :php:meth:`Cake\\Log\\Log::engine()` has been added.
 * ``Log::defaultLevels()`` was removed.
