@@ -644,8 +644,6 @@ array syntax this time::
                     'limit' => '',
                     'offset' => '',
                     'finderQuery' => '',
-                    'deleteQuery' => '',
-                    'insertQuery' => '',
                     'with' => ''
                 )
         );
@@ -697,10 +695,9 @@ Possible keys for HABTM association arrays include:
    returned.
 -  **offset**: The number of associated rows to skip over (given
    the current conditions and order) before fetching and associating.
--  **finderQuery, deleteQuery, insertQuery**: A complete SQL query
-   CakePHP can use to fetch, delete, or create new associated model
-   records. This should be used in situations that require very custom
-   results.
+-  **finderQuery**: A complete SQL query CakePHP can use to fetch associated
+  model records. This should be used in situations that require very custom
+  results.
 
 Once this association has been defined, find operations on the
 Recipe model will also fetch related Tag records if they exist::
