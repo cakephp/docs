@@ -27,17 +27,21 @@ Logging Configuration
 Configuring ``Log`` should be done during your application's bootstrap phase.
 The ``App/Config/logging.php`` file is intended for just this.  You can define
 as many or as few loggers as your application needs.  Loggers should be
-configured using :php:class:`Cake\\Core\\Configure`. An example would be::
+configured using :php:class:`Cake\\Core\\Log`. An example would be::
 
     <?php
-    Configure::write('Log.debug', [
-        'engine' => 'Cake\Log\Engine\FileLog',
+    use Cake\Log\Log;
+
+    // Short classname
+    Log::config('debug', [
+        'className' => 'FileLog',
         'levels' => ['notice', 'info', 'debug'],
         'file' => 'debug',
     ]);
 
-    Configure::write('Log.error', [
-        'engine' => 'Cake\Log\Engine\FileLog',
+    // Fully namespaced name.
+    Log::config('error', [
+        'className' => 'Cake\Log\Engine\FileLog',
         'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
         'file' => 'error',
     ]);
@@ -48,6 +52,10 @@ log messages in separate files, so its easy to separate debug/notice/info logs
 from more serious errors. See the section on :ref:`logging-levels` for more
 information on the different levels and what they mean.
 
+Once a configuration is created you cannot change it. Instead you should drop
+the configuration and re-create it using :php:meth:`Cake\\Log\\Log::drop()` and
+:php:meth:`Cake\\Log\\Log::config()`.
+
 Creating log adapters
 ---------------------
 
@@ -57,19 +65,19 @@ plugins. If for example you had a database logger called
 in ``App/Log/Engine/DatabaseLogger.php``. As part of a plugin it
 would be placed in
 ``App/Plugin/LoggingPack/Log/Engine/DatabaseLogger.php``. To configure log
-adapters you should use Configure.  For example configuring our DatabaseLogger
+adapters you should use :php:meth:`Cake\\Log\\Log::config()`.  For example configuring our DatabaseLogger
 would look like::
 
     // for App/Log
-    Configure::write('Log.otherFile', [
-        'engine' => 'DatabaseLogger',
+    Log::config('otherFile', [
+        'className' => 'DatabaseLogger',
         'model' => 'LogEntry',
         // ...
     ]);
     
     // for plugin called LoggingPack
-    Configure::write('Log.otherFile', [
-        'engine' => 'LoggingPack.DatabaseLogger',
+    Log::config('otherFile', [
+        'className' => 'LoggingPack.DatabaseLogger',
         'model' => 'LogEntry',
         // ...
     ]);
@@ -152,8 +160,8 @@ You can configure additional/alternate FileLog locations when configuring
 a logger.FileLog accepts a ``path`` which allows for
 custom paths to be used::
 
-    Configure::write('Log.custom_path', [
-        'engine' => 'FileLog',
+    Log::config('custom_path', [
+        'className' => 'FileLog',
         'path' => '/path/to/custom/place/'
     ]);
 
@@ -262,8 +270,8 @@ message. For example::
 
     // configure tmp/logs/shops.log to receive all levels, but only
     // those with `orders` and `payments` scope
-    Configure::write('Log.shops', [
-        'engine' => 'FileLog',
+    Log::config('shops', [
+        'className' => 'FileLog',
         'levels' => [],
         'scopes' => ['orders', 'payments'],
         'file' => 'shops.log',
@@ -271,8 +279,8 @@ message. For example::
 
     // configure tmp/logs/payments.log to receive all levels, but only
     // those with `payments` scope
-    Configure::write('Log.payments', [
-        'engine' => 'FileLog',
+    Log::config('payments', [
+        'className' => 'FileLog',
         'levels' => [],
         'scopes' => ['payments'],
         'file' => 'payments.log',
@@ -290,6 +298,11 @@ Log API
 .. php:class:: Log
 
     A simple class for writing to logs.
+
+.. php:staticmethod:: config($key, $config)
+
+    Get or set the configuration for a Logger. See :ref:`log-configuration` for
+    more information.
 
 .. php:staticmethod:: configured()
 
@@ -313,26 +326,9 @@ Log API
 Call this method without arguments, eg: `Log::levels()` to obtain current
 level configuration.
 
-.. php:staticmethod:: enabled($streamName)
-
-    Checks whether ``$streamName`` has been enabled.
-
-.. php:staticmethod:: enable($streamName)
-
-    :returns: void
-
-    Enable the stream ``$streamName``.
-
-.. php:staticmethod:: disable($streamName)
-
-    :returns: void
-
-    Disable the stream ``$streamName``.
-
 .. php:staticmethod:: engine($name, $engine = null)
 
-    Fetch a connected logger by configuration name, or insert/replace
-    a logger. Analogous to :php:meth:`Cake\\Cache\\Cache::engine()`.
+    Fetch a connected logger by configuration name.
 
     .. versionadded: 3.0
 

@@ -36,11 +36,15 @@ Basics
 Cache
 =====
 
-* Caching engines for :php:class:`Cake\\Cache\\Cache` are now configured using
-  :php:meth:`Cake\\Core\\Configure` instead of using the ``config()`` method.
-  ``Cache::config()`` will be removed for 3.0.0 stable.
 * Cache engines are now lazy loaded upon first use.
 * :php:meth:`Cake\\Cache\\Cache::engine()` has been added.
+* :php:meth:`Cake\\Cache\\Cache::enabled()` has been added. This replaced the
+  ``Cache.disable`` configure option.
+* :php:meth:`Cake\\Cache\\Cache::enable()` has been added.
+* :php:meth:`Cake\\Cache\\Cache::disable()` has been added.
+* Cache configurations are now immutable. If you need to change configuration
+  you must first drop the configuration and then re-create it. This prevents
+  synchronization issues with configuration options.
 
 Console
 =======
@@ -69,9 +73,9 @@ Event
 Log
 ===
 
-* :php:class:`Cake\\Log\\Log` is now configured using
-  :php:meth:`Cake\\Core\\Configure` instead of using the ``config()`` method.
-  ``Log::config()`` will be removed for 3.0.0 stable.
+* Log configurations are now immutable. If you need to change configuration
+  you must first drop the configuration and then re-create it. This prevents
+  synchronization issues with configuration options.
 * Log engines are now lazily loaded upon the first write to the logs.
 * :php:meth:`Cake\\Log\\Log::engine()` has been added.
 * ``Log::defaultLevels()`` was removed.
@@ -175,6 +179,23 @@ Network\Http
   use API, support for new authentication systems like Oauth, and file uploads.
   It uses PHP's stream API's so there is no requirement for curl. See the
   :doc:`/core-utility-libraries/httpclient` documentation for more information.
+
+Network\Email
+=============
+
+* :php:meth:`Cake\\Network\\Email\\Email::config()` is now used to define
+  configuration profiles. This replaces the ``EmailConfig`` classes in previous
+  versions.
+* :php:meth:`Cake\\Network\\Email\\Email::profile()` replaces ``config()`` as
+  the way to modify per instance configuration options.
+* :php:meth:`Cake\\Network\\Email\\Email::drop()` has been added to allow the
+  removal of email configuration.
+* :php:meth:`Cake\\Network\\Email\\Email::configTransport()` has been added to allow the
+  definition of transport configurations. This change removes transport options
+  from delivery profiles and allows you to easily re-use transports across email
+  profiles.
+* :php:meth:`Cake\\Network\\Email\\Email::dropTransport()` has been added to allow the
+  removal of transport configuration.
 
 
 Controller

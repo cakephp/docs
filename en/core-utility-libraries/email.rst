@@ -3,7 +3,7 @@ Email
 
 .. php:namespace:: Cake\Network\Email
 
-.. php:class:: Email(mixed $config = null)
+.. php:class:: Email(mixed $profile = null)
 
 ``Email`` is a new class to send email. With this
 class you can send email from any place of your application. In addition to
@@ -59,74 +59,98 @@ original sender using the Sender header.  You can do so using ``sender()``::
 Configuration
 =============
 
-Configuration for Email defaults is stored in
-:php:class:`Cake\\Core\\Configure`, like all configuration in CakePHP.
+Configuration for Email defaults is created using ``config()`` and
+``configTransport()``. You should put your email presets in the file
+``App/Config/email.php``.  The ``App/Config/email.php.default`` has an example
+of this file. It is not required to create ``App/Config/email.php``. ``Email``
+can be used without it and use respective methods to set all configurations
+separately or load an array of configs.
 
-You should put your email presets in the file ``App/Config/email.php``.  The
-``App/Config/email.php.default`` has an example of this file.
+By defining profiles and transports you can keep your application code free of
+configuration data, and avoid duplication that makes maintenance and deployment
+less difficult.
 
-It is not required to create ``App/Config/email.php``, ``Email`` can be used
-without it and use respective methods to set all configurations separately or
-load an array of configs.
-
-To load a config from ``Configure`` you can use the ``config()`` method or pass it
+To load a predefined configuration you can use the ``profile()`` method or pass it
 to the constructor of ``Email``::
 
     $email = new Email();
-    $email->config('default');
+    $email->profile('default');
 
     //or in constructor::
     $email = new Email('default');
 
 Instead of passing a string which matches a preset configuration name you can
-also just load an array of configs::
+also just load an array of options::
 
     $email = new Email();
-    $email->config(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
+    $email->profile(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
     //or in constructor::
-    $email = new Email(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
+    $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
-You can configure SSL SMTP servers, like Gmail. To do so, put the ``'ssl://'``
-at prefix in the host and configure the port value accordingly.  Example::
+Configuring transports
+----------------------
 
-    use Cake\Core\Configure;
+.. php:staticmethod:: configTransport($key, $config = null)
 
-    Configure::write('Email.gmail', [
+Email messages are deliverd by transports. Different transports allow you to
+send messages via PHP's ``mail()`` function, SMTP servers, or not at all which
+is useful for debugging. Configuring transports allows you to keep configuration
+data out of your application code and makes deployment simpler as you can simply
+change the configuration data. An example transport configuration looks like::
+
+    use Cake\Network\Email\Email;
+
+    // Sample Mail configuration
+    Email::configTransport('default', [
+        'className' => 'Mail'
+    ]);
+
+    // Sample smtp configuration.
+    Email::configTransport('gmail', [
         'host' => 'ssl://smtp.gmail.com',
         'port' => 465,
         'username' => 'my@gmail.com',
         'password' => 'secret',
-        'transport' => 'Smtp'
+        'className' => 'Smtp'
     ]);
 
-.. note::
+You can configure SSL SMTP servers, like Gmail. To do so, put the ``'ssl://'``
+at prefix in the host and configure the port value accordingly. You can also
+enable TLS SMTP using the ``tls`` option::
 
-    To use this feature, you will need to have the SSL configured in your PHP
-    install.
+    use Cake\Network\Email\Email;
 
-You can also enable TLS SMTP using the ``tls`` option::
-
-    use Cake\Core\Configure;
-
-    Confgure::write('Email.gmail', [
+    Email::configTransport('gmail', [
         'host' => 'smtp.gmail.com',
         'port' => 465,
         'username' => 'my@gmail.com',
         'password' => 'secret',
-        'transport' => 'Smtp',
+        'className' => 'Smtp',
         'tls' => true
     ]);
 
 The above configuration would enable TLS communication for email messages.
 
+.. note::
+
+    To use SSL + SMTP, you will need to have the SSL configured in your PHP
+    install.
+
+
+.. php:staticmethod:: dropTransport($key)
+
+Once configured, transports cannot be modified. In order to modify a transport
+you must first drop it and then reconfigure it.
 
 .. _email-configurations:
 
-Configurations
---------------
+Configuration Profiles
+----------------------
 
-The following configuration keys are used:
+Defining delivery profiles allows you to consolidate common email settings into
+re-usable profiles. Your application can have as many profiles as necessary. The
+following configuration keys are used:
 
 - ``'from'``: Email or array of sender. See ``Email::from()``.
 - ``'sender'``: Email or array of real sender. See ``Email::sender()``.
@@ -154,15 +178,12 @@ The following configuration keys are used:
   variables to be used in the view. See ``Email::viewVars()``.
 - ``'attachments'``: List of files to attach. See ``Email::attachments()``.
 - ``'emailFormat'``: Format of email (html, text or both). See ``Email::emailFormat()``.
-- ``'transport'``: Transport name. See ``Email::transport()``.
+- ``'transport'``: Transport configuration name. See
+  :php:meth:`~Cake\\Network\\Email\\Email::configTransport()`.
 - ``'log'``: Log level to log the email headers and message. ``true`` will use
   LOG_DEBUG. See also ``CakeLog::write()``
 
-All these configurations are optional, except ``'from'``. If you put more
-configuration in this array, the configurations will be used in the
-:php:meth:`Cake\\Network\Email\\Email::config()` method and passed to the transport class ``config()``.
-For example, if you are using smtp transport, you should pass the host, port and
-other configurations.
+All these configurations are optional, except ``'from'``.
 
 .. note::
 
@@ -172,7 +193,7 @@ other configurations.
     would be defined as  ``'from' => array('my@example.com' => 'My Site')`` in your config
 
 Setting headers
----------------
+===============
 
 In ``Email`` you are free to set whatever headers you want. When migrating
 to use Email, do not forget to put the ``X-`` prefix in your headers.
@@ -180,7 +201,7 @@ to use Email, do not forget to put the ``X-`` prefix in your headers.
 See ``Email::setHeaders()`` and ``Email::addHeaders()``
 
 Sending templated emails
-------------------------
+========================
 
 Emails are often much more than just a simple text message.  In order
 to facilitate that, CakePHP provides a way to send emails using CakePHP's
@@ -257,7 +278,7 @@ the Blog plugin.  The template file needs to be created in the following path:
 ``App/View/Themed/TestTheme/Blog/Emails/text/new_comment.ctp``.
 
 Sending attachments
--------------------
+===================
 
 .. php:method:: attachments($attachments = null)
 
@@ -295,16 +316,25 @@ you want the filenames to appear in the recipient's mail client:
    sending ical invites to clients using outlook.
 
 Using transports
-----------------
+================
 
 Transports are classes designed to send the e-mail over some protocol or method.
 CakePHP support the Mail (default), Debug and Smtp transports.
 
 To configure your method, you must use the :php:meth:`Cake\\Network\Email\\Email::transport()`
-method or have the transport in your configuration
+method or have the transport in your configuration::
+
+    $email = new Email();
+
+    // Use a named transport already configured using Email::configTransport()
+    $email->transport('gmail');
+
+    // Use a constructed object.
+    $transport = new DebugTransport();
+    $email->transport($transport);
 
 Creating custom Transports
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------
 
 You are able to create your custom transports to integrate with others email
 systems (like SwiftMailer). To create your transport, first create the file
@@ -342,7 +372,8 @@ Sometimes you need a quick way to fire off an email, and you don't necessarily
 want do setup a bunch of configuration ahead of time.
 :php:meth:`Cake\\Network\Email\\Email::deliver()` is intended for that purpose.
 
-You can create your configuration using ``Configure``, or use an array with all
+You can create your configuration using
+:php:meth:`Cake\\Network\\Email\\Email::config()`, or use an array with all
 options that you need and use the static method ``Email::deliver()``.
 Example::
 
