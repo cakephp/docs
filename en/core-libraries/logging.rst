@@ -53,8 +53,8 @@ from more serious errors. See the section on :ref:`logging-levels` for more
 information on the different levels and what they mean.
 
 Once a configuration is created you cannot change it. Instead you should drop
-the configuration and re-create it using :php:meth:`Cache::drop()` and
-:php:meth:`Cache::config()`.
+the configuration and re-create it using :php:meth:`Cake\\Log\\Log::drop()` and
+:php:meth:`Cake\\Log\\Log::config()`.
 
 Creating log adapters
 ---------------------

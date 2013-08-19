@@ -328,6 +328,11 @@ Cache API
     Used to set or read configuration for Caching. See
     :ref:`cache-configuration` for more information.
 
+.. php:staticmethod:: drop($key)
+
+    Remove a configuration name. This will also destroy any constructed
+    adapters.
+
 .. php:staticmethod:: read($key, $config = 'default')
 
     ``Cache::read()`` is used to read the cached value stored under
