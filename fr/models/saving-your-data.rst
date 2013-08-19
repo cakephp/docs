@@ -231,18 +231,24 @@ Par exemple, si je voulais approuver tous les boulangers qui sont membres
 depuis plus d’un an, l’appel à update devrait ressembler à quelque chose
 du style:: 
 
-    $this_year = date('Y-m-d h:i:s', strtotime('-1 year'));
+    $thisYear = date('Y-m-d h:i:s', strtotime('-1 year'));
 
     $this->Baker->updateAll(
         array('Baker.approve' => true),
-        array('Baker.created <=' => $cette_annee)
+        array('Baker.created <=' => $thisYear)
     );
 
-.. tip::
+Le tableau ``$fields`` accepte des expressions SQL. Les valeurs littérales
+doivent être manuellement quotées en utilisant :php:meth:`DboSource::value()`.
+Par exemple, si une de vos méthodes de model appelait ``updateAll()``,
+vous feriez ce qui suit::
 
-    Le tableau $fields accepte des expressions SQL. Les valeurs littérales
-    doivent être manuellement quotées en utilisant
-    :php:meth:`Sanitize::escape()`.
+    $db = $this->getDataSource();
+    $value = $db->value($value, 'string');
+    $this->updateAll(
+        array('Baker.approved' => true),
+        array('Baker.created <=' => $value)
+    );
 
 .. note::
 
