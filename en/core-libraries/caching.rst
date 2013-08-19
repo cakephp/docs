@@ -101,6 +101,10 @@ refer to the class name using the following syntaxes:
   classes located outside of the conventional locations.
 * Using an object that extends the ``CacheEngine`` class.
 
+Once a configuration is created you cannot change it. Instead you should drop
+the configuration and re-create it using :php:meth:`Cache::drop()` and
+:php:meth:`Cache::config()`.
+
 Other cache related configuration
 ---------------------------------
 

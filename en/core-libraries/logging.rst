@@ -52,6 +52,10 @@ log messages in separate files, so its easy to separate debug/notice/info logs
 from more serious errors. See the section on :ref:`logging-levels` for more
 information on the different levels and what they mean.
 
+Once a configuration is created you cannot change it. Instead you should drop
+the configuration and re-create it using :php:meth:`Cache::drop()` and
+:php:meth:`Cache::config()`.
+
 Creating log adapters
 ---------------------
 
@@ -295,6 +299,11 @@ Log API
 
     A simple class for writing to logs.
 
+.. php:staticmethod:: config($key, $config)
+
+    Get or set the configuration for a Logger. See :ref:`log-configuration` for
+    more information.
+
 .. php:staticmethod:: configured()
 
     :returns: An array of configured loggers.
@@ -317,26 +326,9 @@ Log API
 Call this method without arguments, eg: `Log::levels()` to obtain current
 level configuration.
 
-.. php:staticmethod:: enabled($streamName)
-
-    Checks whether ``$streamName`` has been enabled.
-
-.. php:staticmethod:: enable($streamName)
-
-    :returns: void
-
-    Enable the stream ``$streamName``.
-
-.. php:staticmethod:: disable($streamName)
-
-    :returns: void
-
-    Disable the stream ``$streamName``.
-
 .. php:staticmethod:: engine($name, $engine = null)
 
-    Fetch a connected logger by configuration name, or insert/replace
-    a logger. Analogous to :php:meth:`Cake\\Cache\\Cache::engine()`.
+    Fetch a connected logger by configuration name.
 
     .. versionadded: 3.0
 
