@@ -114,7 +114,7 @@ Cela montre comment utiliser les models qui sont déjà liés. Pour comprendre
 comment les associations sont définies, allez voir la
 :doc:`Section des associations <models/associations-linking-models-together>`.
 
-Pour en savoir plus sur les models
+Pour en savoir plus sur les Models
 ==================================
 
 .. toctree::

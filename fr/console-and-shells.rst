@@ -139,7 +139,7 @@ Si vous êtes sur Windows Vista ou 7, vous devrez suivre les étapes suivantes.
 
 #. Clickez Ok et ``cake`` devrait fonctionner partout.
 
-Créer un shell
+Créer un Shell
 ==============
 
 Créons un shell pour l'utilisation dans la Console. Pour cet exemple, nous
