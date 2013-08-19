@@ -661,8 +661,7 @@ la syntaxe en tableau::
                     'limit' => '',
                     'offset' => '',
                     'finderQuery' => '',
-                    'deleteQuery' => '',
-                    'insertQuery' => ''
+                    'with' => ''
                 )
         );
     }
@@ -718,9 +717,9 @@ Les clés possibles pour un tableau définissant une association HABTM sont :
 -  **offset**: Le nombre de lignes associées à enlever (étant donnés les
    conditions et l'order courant) avant la récupération et l'association.
 -  **finderQuery, deleteQuery, insertQuery**: Une requête SQL complète que
-   CakePHP peut utiliser pour récupérer, supprimer, ou créer des
-   enregistrements d'un model nouvellement associé. Ceci doit être utilisé
-   dans les situations qui nécéssitent des résultats très personnalisés.
+   CakePHP peut utiliser pour récupérer les enregistrements du model associé.
+   Ceci doit être utilisé dans les situations qui nécéssitent des résultats
+   très personnalisés.
 
 Une fois que cette association a été définie, les opérations de recherche
 sur le model Recipe récupèreront également les Ingredients liés si ils
