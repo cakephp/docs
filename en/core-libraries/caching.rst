@@ -35,11 +35,6 @@ to implement your own caching systems. The built-in caching engines are:
   extension. Redis provides a fast and persistent cache system similar to
   memcached, also provides atomic operations.
 
-.. versionchanged:: 2.3
-    FileEngine is always the default cache engine.  In the past a number of people
-    had difficulty setting up and deploying APC correctly both in cli + web.
-    Using files should make setting up CakePHP simpler for new developers.
-
 Regardless of the CacheEngine you choose to use, your application interacts with
 :php:class:`Cache` in a consistent manner.  This means you can easily swap cache engines
 as your application grows. In addition to the :php:class:`Cache` class, the
@@ -63,29 +58,32 @@ models. If you are using APC or Memcache you should make sure to set unique keys
 for the core caches.  This will prevent multiple applications from overwriting
 each other's cached data.
 
-Using multiple cache configurations can help reduce the number of times you need
-to use :php:meth:`Cake\\Cache\\Cache::set()` as well as centralize all your cache settings.
 Using multiple configurations also lets you incrementally change the storage as
 needed. Example::
 
-    Configure::write('Cache.short', array(
-        'engine' => 'File',
+    // Using a short name
+    Cache::config('short', array(
+        'className' => 'File',
         'duration' => '+1 hours',
         'path' => CACHE,
         'prefix' => 'cake_short_'
     ));
 
-    // long
-    Configure::write('Cache.long', array(
-        'engine' => 'File',
+    // Using a fully namespaced name.
+    Cache::config('long', array(
+        'className' => 'Cake\Cache\Engine\FileEngine',
         'duration' => '+1 week',
         'probability' => 100,
         'path' => CACHE . 'long' . DS,
     ));
 
+    // Using a constructed object.
+    $object = new FileEngine($settings);
+    Cache::config('other', $object);
+
 .. note::
 
-    You must specify which engine to use. It does **not** default to
+    You must specify which className to use. It does **not** default to
     File.
 
 By placing the above code in your ``App/Config/cache.php`` you will have two
@@ -101,16 +99,20 @@ refer to the class name using the following syntaxes:
   plugin.
 * Using a fully qualified namespaced classname.  This allows you to use
   classes located outside of the conventional locations.
+* Using an object that extends the ``CacheEngine`` class.
 
 Other cache related configuration
 ---------------------------------
 
 Other than configuring caching adapters, there are a few other cache related
-configuration variables:
+configuration properties:
 
-Cache.disable
+enabled
     When set to true, persistent caching is disabled site-wide.
     This will make all read/writes to :php:class:`Cake\\Cache\\Cache` fail.
+    You can control this value with :php:meth:`Cache::enable()` and
+    :php:meth:`Cache::disable()`. The current state can be read with
+    :php:meth:`Cache::enabled()`.
 Cache.check
     If set to true, enables view caching. Enabling is still needed in
     the controllers, but this variable enables the detection of those
@@ -133,8 +135,8 @@ as an app/libs. Or in ``$plugin/Cache/Engine/MyCustomCacheEngine.php`` as
 part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax.::
 
-    Configure::write('Cache.custom', array(
-        'engine' => 'CachePack.MyCustomCache',
+    Cache::config('custom', array(
+        'className' => 'CachePack.MyCustomCache',
         // ...
     ));
 
@@ -261,8 +263,8 @@ group or namespace. This is a common requirement for mass-invalidating keys
 whenever some information changes that is shared among all entries in the same
 group. This is possible by declaring the groups in cache configuration::
 
-    Configure::write('Cache.site_home', array(
-        'engine' => 'Redis',
+    Cache::config('site_home', array(
+        'className' => 'Redis',
         'duration' => '+999 days',
         'groups' => array('comment', 'post')
     ));
@@ -316,6 +318,11 @@ Cache API
     The Cache class in CakePHP provides a generic frontend for several
     backend caching systems. Different Cache configurations and engines
     can be setup in your ``App/Config/cache.php``
+
+.. php:staticmethod:: config($key, $config = null)
+
+    Used to set or read configuration for Caching. See
+    :ref:`cache-configuration` for more information.
 
 .. php:staticmethod:: read($key, $config = 'default')
 
@@ -417,17 +424,34 @@ Cache API
 
 .. php:staticmethod:: engine($name, $engine = null)
 
-    Allows you to fetch constructed cache engines.  By using the ``$engine``
-    parameter you can inject new engines or replace existing ones.
+    Allows you to fetch constructed cache engines.
 
     .. versionadded:: 3.0
-
 
 .. php:staticmethod:: groupConfigs($group = null)
 
     :return: Array of groups and its related configuration names.
 
     Retrieve group names to config mapping.
+
+.. php:staticmemthod:: enabled()
+
+    Check if caching is enabled.
+
+    .. versionadded:: 3.0
+
+.. php:staticmemthod:: enable()
+
+    Enable caching if it is disabled.
+
+    .. versionadded:: 3.0
+
+.. php:staticmemthod:: disable()
+
+    Disable caching. Once disabled, all reads and writes will fail and return
+    null.
+
+    .. versionadded:: 3.0
 
 .. meta::
     :title lang=en: Caching
