@@ -438,19 +438,19 @@ Cache API
 
     Retrieve group names to config mapping.
 
-.. php:staticmemthod:: enabled()
+.. php:staticmethod:: enabled()
 
     Check if caching is enabled.
 
     .. versionadded:: 3.0
 
-.. php:staticmemthod:: enable()
+.. php:staticmethod:: enable()
 
     Enable caching if it is disabled.
 
     .. versionadded:: 3.0
 
-.. php:staticmemthod:: disable()
+.. php:staticmethod:: disable()
 
     Disable caching. Once disabled, all reads and writes will fail and return
     null.
