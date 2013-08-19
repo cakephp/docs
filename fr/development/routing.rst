@@ -896,7 +896,8 @@ Classes de Route personnalisées
 
 Les classes de route personnalisées vous permettent d'étendre et de modifier la
 façon dont certaines routes parsent les demandes et de traiter le routing
-inversé. Une classe de la route devrait hériter de la classe
+inversé. Une classe personnalisée  de route devrait être créée dans
+``app/Lib/Routing/Route`` et étendre
 :php:class:`CakeRoute` et mettre en œuvre un ou les deux ``match()`` et/ou 
 ``parse()``. ``parse()`` est utilisée pour
 analyser les demandes et correspondance et ``match()`` est utilisée pour
@@ -905,6 +906,8 @@ traiter les routes inversées.
 Vous pouvez utiliser une classe de route personnalisée lors d'un création
 d'une route à l'aide des options de la classe ``routeClass``, et en chargeant
 le fichier contenant votre routes avant d'essayer de l'utiliser::
+
+    App::uses('SlugRoute', 'Routing/Route');
 
     Router::connect(
          '/:slug', 
