@@ -38,6 +38,10 @@ Cache
 
 * Cache engines are now lazy loaded upon first use.
 * :php:meth:`Cake\\Cache\\Cache::engine()` has been added.
+* :php:meth:`Cake\\Cache\\Cache::enabled()` has been added. This replaced the
+  ``Cache.disable`` configure option.
+* :php:meth:`Cake\\Cache\\Cache::enable()` has been added.
+* :php:meth:`Cake\\Cache\\Cache::disable()` has been added.
 * Cache configurations are now immutable. If you need to change configuration
   you must first drop the configuration and then re-create it. This prevents
   synchronization issues with configuration options.

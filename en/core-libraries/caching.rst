@@ -433,7 +433,7 @@ Cache API
     used by FileEngine. It should be implemented by any Cache engine
     that requires manual eviction of cached data.
 
-.. php:staticmethod:: engine($name, $engine = null)
+.. php:staticmethod:: engine($name)
 
     Allows you to fetch constructed cache engines.
 
