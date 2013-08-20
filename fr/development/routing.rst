@@ -1081,7 +1081,7 @@ API du Router
     Définit la route par défaut à utiliser quand on connecte les routes
     dans le futur.
 
-.. php:staticmethod:: baseUrl($url = null)
+.. php:staticmethod:: fullBaseUrl($url = null)
 
     .. versionadded:: 2.4
 
