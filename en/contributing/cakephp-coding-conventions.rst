@@ -19,7 +19,7 @@ should be passed before committing them to the repository.
 Indentation
 ===========
 
-One tab will be used for indentation.
+One tab is used for indentation.
 
 So, indentation should look like this::
 
@@ -102,10 +102,10 @@ statements. Ternary operators should not ever be nested. Optionally
 parentheses can be used around the condition check of the ternary for
 clarity::
 
-    //Good, simple and readable
+    // Good, simple and readable
     $variable = isset($options['variable']) ? $options['variable'] : true;
 
-    //Nested ternaries are bad
+    // Nested ternaries are bad
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
 
@@ -127,6 +127,36 @@ tags::
         <p>You are the admin user.</p>
     <?php endif; ?>
 
+
+Comparison
+==========
+
+For NULL there is no need to use a method like is_null(), a strict check suffices::
+
+    if ($value === null) {
+    	  // ...
+    }
+
+Also use strict comparison when working with strings::
+
+    if ($aStringValue === 'something') {
+    	  // ...
+    }
+
+Always try to be as strict as possible. So the same can apply to integers, boolean values and other
+types if it is asserted that they cannot be strings in some cases.
+
+The value to check against should be placed on the right side::
+
+    // wrong
+    if (null === $this->foo()) {
+        // ...
+    }
+
+    // good
+    if ($this->foo() === null) {
+        // ...
+    }
 
 Function Calls
 ==============
