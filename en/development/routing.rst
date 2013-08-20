@@ -1023,7 +1023,7 @@ Router API
 
     Set the default route to be used when connecting routes in the future.
 
-.. php:staticmethod:: baseUrl($url = null)
+.. php:staticmethod:: fullBaseUrl($url = null)
 
     .. versionadded:: 2.4
 
