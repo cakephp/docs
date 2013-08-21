@@ -190,11 +190,20 @@ FileLog
 -------
 
 - Two new config options ``size`` and ``rotate`` have been added for :ref:`FileLog <file-log>` engine.
+- In debug mode missing directories will now be automatically created to avoid unnecessary errors thrown.
 
 SyslogLog
 ---------
 
 - The new logging engine :ref:`SyslogLog <syslog-log>` was added to stream messages to syslog.
+
+Cache
+=====
+
+FileEngine
+----------
+
+- In debug mode missing directories will now be automatically created to avoid unnecessary errors thrown.
 
 Utility
 =======
