@@ -10,7 +10,7 @@ App クラス
     Make sure you follow the :ref:`file-and-classname-conventions`.
 
 App クラスはパスの管理、クラスのロケーション、そしてクラスのローディングの責務を担っています。
-:ref:`file-and-classname-conventions` に従っていることを確認して下さい。
+念のため :ref:`file-and-classname-conventions` に従っていることを確認して下さい。
 
 .. Packages
 
