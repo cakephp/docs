@@ -383,27 +383,6 @@ Cache API
     ``Cache::delete()`` will allow you to completely remove a cached
     object from the Cache store.
 
-.. php:staticmethod:: set($settings = array(), $value = null, $config = 'default')
-
-    ``Cache::set()`` allows you to temporarily override a cache config's
-    settings for one operation (usually a read or write). If you use
-    ``Cache::set()`` to change the settings for a write, you should
-    also use ``Cache::set()`` before reading the data back in. If you
-    fail to do so, the default settings will be used when the cache key
-    is read.::
-
-        Cache::set(array('duration' => '+30 days'));
-        Cache::write('results', $data);
-
-        // Later on
-
-        Cache::set(array('duration' => '+30 days'));
-        $results = Cache::read('results');
-
-    If you find yourself repeatedly calling ``Cache::set()`` perhaps
-    you should configure a separate cache engine. This will remove the
-    need to call ``Cache::set()``.
-
 .. php:staticmethod:: increment($key, $offset = 1, $config = 'default')
 
     Atomically increment a value stored in the cache engine. Ideal for

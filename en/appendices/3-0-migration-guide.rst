@@ -45,6 +45,9 @@ Cache
 * Cache configurations are now immutable. If you need to change configuration
   you must first drop the configuration and then re-create it. This prevents
   synchronization issues with configuration options.
+* ``Cache::set()`` has been removed. It is recommended that you create multiple
+  cache configurations to replace runtime configuration tweaks previously
+  possible with ``Cache::set()``.
 
 Console
 =======
