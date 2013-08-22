@@ -105,6 +105,10 @@ Depuis 2.4 le moteur de ``FileLog`` prend deux nouvelles configurations::
     core.php provoquera des problèmes, les chemins d'applications
     n'étant pas encore configurés.
 
+    Aussi nouveau dans 2.4: En mode debug, les répertoires manquants vont
+    maintenant être automatiquement créés pour éviter le lancement des erreurs
+    non nécessaires lors de l'utilisation de FileEngine.
+
 Journalisation des Erreurs et des Exception
 ===========================================
 
