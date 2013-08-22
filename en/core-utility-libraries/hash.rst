@@ -93,7 +93,7 @@ elements, you can use attribute matching with certain methods. They are ``extrac
 
     :rtype: array
 
-    Inserts $data into an array as defined by $path. This method only supports
+    Inserts $data into an array as defined by $path. This method **only** supports
     the expression types of :ref:`hash-path-syntax`::
 
         $a = array(
@@ -123,8 +123,8 @@ elements, you can use attribute matching with certain methods. They are ``extrac
 
     :rtype: array
 
-    Removes all elements from an array that match $path. This method supports
-    all the expression elements of :ref:`hash-path-syntax`::
+    Removes all elements from an array that match $path. This method **only** supports
+    the expression types of :ref:`hash-path-syntax`::
 
         $a = array(
             'pages' => array('name' => 'page'),
