@@ -105,7 +105,7 @@ certaines méthodes. Il y a ``extract()``,
     :rtype: array
 
     Insère $data dans un tableau comme défini par $path. Cette méthode
-    supporte seulement les types d'expression de :ref:`hash-path-syntax`::
+    supporte **seulement** les types d'expression de :ref:`hash-path-syntax`::
 
         $a = array(
             'pages' => array('name' => 'page')
@@ -135,7 +135,7 @@ certaines méthodes. Il y a ``extract()``,
     :rtype: array
 
     Retire tous les éléments d'un tableau qui matche avec $path. Cette
-    méthode supporte tous les éléments d'expression de
+    méthode supporte **seulement** tous les éléments d'expression de
     :ref:`hash-path-syntax`::
 
         $a = array(
