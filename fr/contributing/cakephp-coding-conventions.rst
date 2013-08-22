@@ -104,10 +104,10 @@ expression ``if else``. Les opérateurs ternaires ne doivent pas être imbriqué
 Des parenthèses optionnelles peuvent être utilisées autour de la condition
 vérifiée de l'opération pour clarifier::
 
-    //Bien, simple et lisible
+    // Bien, simple et lisible
     $variable = isset($options['variable']) ? $options['variable'] : true;
 
-    //Imbriquations des ternaires est mauvaise
+    // Imbriquations des ternaires est mauvaise
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
 
@@ -129,6 +129,32 @@ un block PHP plus large, soit dans des tags PHP séparés::
     <?php if ($isAdmin): ?>
         <p>You are the admin user.</p>
     <?php endif; ?>
+
+Comparison
+==========
+
+Toujours essayer d'être aussi strict que possible. Si un test non strict
+est délibéré, il peut être sage de le commenter afin d'éviter de le confondre
+avec une erreur.
+
+Pour tester si une variable est null, il est recommandé d'utiliser une
+vérification stricte::
+
+    if ($value === null) {
+    	  // ...
+    }
+
+La valeur avec laquelle on vérifie devra être placée sur le côté droit::
+
+    // non recommandé
+    if (null === $this->foo()) {
+        // ...
+    }
+
+    // recommandé
+    if ($this->foo() === null) {
+        // ...
+    }
 
 Appels des fonctions
 ====================
