@@ -200,6 +200,8 @@ L10n
 - Kazakh a été ajouté ``kaz`` comme locale et ``kk`` comme code de catalog.
 - Kalaallisut a été ajouté avec ``kal`` comme locale et ``kl`` comme code de
   catalog.
+- la constante ``DEFAULT_LANGUAGE`` a été dépréciée en faveur de la valeur de
+  Configuration ``Config.language``.
 
 Logging
 =======
