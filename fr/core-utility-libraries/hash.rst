@@ -43,7 +43,9 @@ appliquez les matchers aux élements de l'expression.
 
 Tous les éléments d'expression supportent toutes les méthodes. En plus des
 éléments d'expression, vous pouvez utiliser les attributs qui matchent avec
-les méthodes comme ``extract()``.
+certaines méthodes. Il y a ``extract()``,
+``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``,
+``apply()``, ``sort()`` et ``nest()``.
 
 +--------------------------------+--------------------------------------------+
 | Matcher                        | Definition                                 |
