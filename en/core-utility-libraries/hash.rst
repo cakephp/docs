@@ -37,8 +37,10 @@ elements.  You apply matchers to expression elements.
 | ``Foo``                        | Matches keys with the exact same value.    |
 +--------------------------------+--------------------------------------------+
 
-All expression elements are supported all methods.  In addition to expression
-elements you can use attribute matching with methods like ``extract()``.
+All expression elements are supported by all methods.  In addition to expression
+elements, you can use attribute matching with certain methods. They are ``extract()``, 
+``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``, 
+``apply()``, ``sort()`` and ``nest()``.
 
 +--------------------------------+--------------------------------------------+
 | Matcher                        | Definition                                 |
