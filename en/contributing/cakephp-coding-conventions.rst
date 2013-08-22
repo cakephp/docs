@@ -19,7 +19,7 @@ should be passed before committing them to the repository.
 Indentation
 ===========
 
-One tab is used for indentation.
+One tab will be used for indentation.
 
 So, indentation should look like this::
 
@@ -131,29 +131,23 @@ tags::
 Comparison
 ==========
 
-For NULL there is no need to use a method like is_null(), a strict check suffices::
+Always try to be as strict as possible. If a none strict test is deliberate it might be wise to
+comment it as such to avoid confusing it for a mistake.
+
+For testing if a variable is null, it is recommended to use a strict check::
 
     if ($value === null) {
     	  // ...
     }
 
-Also use strict comparison when working with strings::
-
-    if ($aStringValue === 'something') {
-    	  // ...
-    }
-
-Always try to be as strict as possible. So the same can apply to integers, boolean values and other
-types if it is asserted that they cannot be strings in some cases.
-
 The value to check against should be placed on the right side::
 
-    // wrong
+    // not recommended
     if (null === $this->foo()) {
         // ...
     }
 
-    // good
+    // recommended
     if ($this->foo() === null) {
         // ...
     }
