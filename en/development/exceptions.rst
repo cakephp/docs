@@ -147,7 +147,10 @@ be thrown from a number of CakePHP core components:
 
 .. php:exception:: MissingTableException
 
-    A model's table is missing.
+    A model's table is missing from CakePHP's cache or the datasource. Upon adding
+    a new table to a datasource, the model cache (found in tmp/cache/models by default)
+    must be removed.
+    
 
 .. php:exception:: MissingActionException
 
