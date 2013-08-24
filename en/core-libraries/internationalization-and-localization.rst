@@ -101,6 +101,20 @@ or::
     // View code
     echo $this->element(Configure::read('Config.language') . '/tos');
 
+.. _lc-time:
+
+For translation of strings of LC_TIME category CakePHP uses POSIX compliant LC_TIME
+files. The i18n functions of :php:class:`CakeTime` utility class and helper :php:class:`TimeHelper`
+use these LC_TIME files.
+
+Just place LC_TIME file in it's respective locale directory::
+
+    /app/Locale/fra/LC_TIME (French)
+    /app/Locale/por/LC_TIME (Portuguese)
+
+You can find these files for few popular languages from the official `Localized <https://github.com/cakephp/localized>`_
+repo.
+
 Internationalizing CakePHP Plugins
 ===================================
 
