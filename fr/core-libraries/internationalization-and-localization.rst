@@ -106,6 +106,21 @@ ou::
     // code de la Vue
     echo $this->element(Configure::read('Config.language') . '/tos')
 
+.. _lc-time:
+
+Pour la traduction de chaînes de catégorie LC_TIME, CakePHP utilise des fichiers
+POSIX compliant LC_TIME. Les fonctions i18n de la classe d'utilitaire
+:php:class:`CakeTime` et le helper :php:class:`TimeHelper` utilise ces fichiers
+LC_TIME.
+
+Placez juste le fichier LC_TIME dans son répertoire local respectif::
+
+    /app/Locale/fra/LC_TIME (French)
+    /app/Locale/por/LC_TIME (Portuguese)
+
+Vous pouvez trouver ces fichiers pour quelques langues populaires à partir du
+dépôt officiel `Localized <https://github.com/cakephp/localized>`_.
+
 Internationaliser les plugins CakePHP
 =====================================
 
