@@ -180,7 +180,8 @@ Formatting
 
     Returns a formatted date string, given either a UNIX timestamp or a
     valid strtotime() date string. It take in account the default date
-    format for the current language if a LC_TIME file is used.
+    format for the current language if a LC_TIME file is used. For more info
+    about LC_TIME file check :ref:`here <lc-time>`.
 
     .. versionchanged:: 2.2
        ``$timezone`` parameter replaces ``$userOffset`` parameter used in 2.1 and below.
