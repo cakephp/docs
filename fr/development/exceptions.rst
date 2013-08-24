@@ -157,7 +157,9 @@ seront lancées à partir de certains components du coeur de CakePHP:
 
 .. php:exception:: MissingTableException
 
-    Une table de model est manquante.
+    Une table de model est manquante du cache de CakePHP ou de la source de
+    données. Après l'ajout d'une nouvelle table à une source de données, le
+    cache du model (trouvé dans tmp/cache/models par défaut) devra être retiré.
 
 .. php:exception:: MissingActionException
 
