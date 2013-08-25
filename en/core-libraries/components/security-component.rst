@@ -45,7 +45,7 @@ Handling blackhole callbacks
 ============================
 
 If an action is restricted by the Security Component it is
-black-holed as an invalid request which will result in a 404 error
+black-holed as an invalid request which will result in a 400 error
 by default. You can configure this behavior by setting the
 ``$this->Security->blackHoleCallback`` property to a callback function
 in the controller.
