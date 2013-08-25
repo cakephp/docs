@@ -52,7 +52,7 @@ in the controller.
 
 .. php:method:: blackHole(object $controller, string $error)
 
-    Black-hole an invalid request with a 404 error or a custom
+    Black-hole an invalid request with a 400 error or a custom
     callback. With no callback, the request will be exited. If a
     controller callback is set to SecurityComponent::blackHoleCallback,
     it will be called and passed any error information.
