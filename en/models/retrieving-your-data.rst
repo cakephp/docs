@@ -677,7 +677,7 @@ methods (this should only rarely be necessary) can be made using
 the model's ``query()`` method.
 
 If you use this method be sure to properly escape all parameters using the
-``value()`` method on the database driver. Failing to not escape parameters
+``value()`` method on the database driver. Failing to escape parameters
 will create SQL injection vulnerabilities.
 
 .. note::

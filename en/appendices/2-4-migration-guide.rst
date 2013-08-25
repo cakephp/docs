@@ -175,6 +175,7 @@ L10n
   ``sz`` has been dropped in favor of ``se`` (Sami).
 - Kazakh has been added with ``kaz`` as locale and ``kk`` as catalog code.
 - Kalaallisut has been added with ``kal`` as locale and ``kl`` as catalog code.
+- The constant ``DEFAULT_LANGUAGE`` has been deprecated in favor of Configure value ``Config.language``.
 
 Logging
 =======
@@ -190,11 +191,20 @@ FileLog
 -------
 
 - Two new config options ``size`` and ``rotate`` have been added for :ref:`FileLog <file-log>` engine.
+- In debug mode missing directories will now be automatically created to avoid unnecessary errors thrown.
 
 SyslogLog
 ---------
 
 - The new logging engine :ref:`SyslogLog <syslog-log>` was added to stream messages to syslog.
+
+Cache
+=====
+
+FileEngine
+----------
+
+- In debug mode missing directories will now be automatically created to avoid unnecessary errors thrown.
 
 Utility
 =======

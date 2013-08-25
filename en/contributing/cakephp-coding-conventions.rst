@@ -102,10 +102,10 @@ statements. Ternary operators should not ever be nested. Optionally
 parentheses can be used around the condition check of the ternary for
 clarity::
 
-    //Good, simple and readable
+    // Good, simple and readable
     $variable = isset($options['variable']) ? $options['variable'] : true;
 
-    //Nested ternaries are bad
+    // Nested ternaries are bad
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
 
@@ -127,6 +127,30 @@ tags::
         <p>You are the admin user.</p>
     <?php endif; ?>
 
+
+Comparison
+==========
+
+Always try to be as strict as possible. If a none strict test is deliberate it might be wise to
+comment it as such to avoid confusing it for a mistake.
+
+For testing if a variable is null, it is recommended to use a strict check::
+
+    if ($value === null) {
+    	  // ...
+    }
+
+The value to check against should be placed on the right side::
+
+    // not recommended
+    if (null === $this->foo()) {
+        // ...
+    }
+
+    // recommended
+    if ($this->foo() === null) {
+        // ...
+    }
 
 Function Calls
 ==============

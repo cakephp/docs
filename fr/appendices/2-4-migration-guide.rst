@@ -105,9 +105,9 @@ JsonView
 HtmlHelper
 ----------
 
-- The API for :php:meth:`HtmlHelper::css()` has been been simplified. You can
-  now provide an array of options as the second argument. When you do, the
-  ``rel`` attribute defaults to 'stylesheet'.
+- L'API pour :php:meth:`HtmlHelper::css()` a été simplifiée. Vous pouvez
+  maintenant fournir un tableau d'options en deuxième argument. Quand vous
+  faîtes cela, l'attribut ``rel`` se met par défaut à 'stylesheet'.
 - Une nouvelle option ``escapeTitle`` ajoutée à
   :php:meth:`HtmlHelper::link()` pour contrôler l'échappement seulement du
   titre du lien et pas des attributs.
@@ -122,6 +122,9 @@ PaginatorHelper
 ---------------
 
 - :php:meth::`PaginatorHelper::param()` a été ajoutée.
+- La première page ne contient plus ``/page:1`` ou ``?page=1`` dans l'URL. Cela
+  évite les problèmes de contenu dupliqué, où vous avez besoin d'utiliser
+  canonical ou noindex de toute façon.
 
 FormHelper
 ----------
@@ -197,6 +200,8 @@ L10n
 - Kazakh a été ajouté ``kaz`` comme locale et ``kk`` comme code de catalog.
 - Kalaallisut a été ajouté avec ``kal`` comme locale et ``kl`` comme code de
   catalog.
+- la constante ``DEFAULT_LANGUAGE`` a été dépréciée en faveur de la valeur de
+  Configuration ``Config.language``.
 
 Logging
 =======
@@ -216,12 +221,23 @@ FileLog
 
 - Deux nouvelles options de config ``size`` et ``rotate`` ont été ajoutées pour
   le moteur :ref:`FileLog <file-log>`.
+- En mode debug, les répertoires manquants vont être maintenant automatiquement
+  créés pour éviter le lancement des erreurs non nécessaires.
 
 SyslogLog
 ---------
 
 - Le nouveau moteur de log :ref:`SyslogLog <syslog-log>` a été ajouté pour
   streamer les messages au syslog.
+
+Cache
+=====
+
+FileEngine
+----------
+
+- En mode debug, les répertoires manquants vont être automatiquement créés pour
+  éviter le lancement d'erreurs non nécessaires.
 
 Utility
 =======

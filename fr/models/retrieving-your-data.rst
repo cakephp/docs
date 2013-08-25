@@ -693,10 +693,10 @@ Les appels SQL que vous ne pouvez pas ou ne voulez pas faire grâce aux autres
 méthodes de model (attention, il y a très peu de circonstances où cela se
 vérifie), peuvent être exécutés en utilisant la méthode ``query()``.
 
-Si vous utilisez souvent cette méthode dans votre application, assurez-vous
-de connaître la librairie :doc:`/core-utility-libraries/sanitize` de CakePHP,
-qui vous aide à nettoyer les données provenant des users, des
-attaques par injection et cross-site scripting.
+Si vous utilisez cette méthode, assurez-vous d'échapper correctement tous les
+paramètres en utilisant la méthode ``value()`` sur le driver de la base de
+données. Ne pas échapper les paramètres va créer des vulnérabilités de type
+injection SQL.
 
 .. note::
 
@@ -1086,6 +1086,8 @@ Ceci devrait générer la commande SQL suivante::
 Aussi, si vous devez passer juste une partie de votre requête en
 colonne SQL comme ci-dessus, la source de données **expressions** avec
 la colonne SQL fonctionne pour toute partie de requête find.
+
+.. _prepared-statements:
 
 Requêtes Préparées
 ------------------

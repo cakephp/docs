@@ -188,7 +188,8 @@ Formatage
     Retourne une chaîne de date formatée, étant donné soit un timestamp UNIX
     soit une chaîne de date valide strtotime(). Il prend en compte le format
     de la date par défaut pour le langage courant si un fichier LC_TIME est
-    utilisé.
+    utilisé. Pour plus d'infos sur le fichier LC_TIME, allez voir
+    :ref:`ici <lc-time>`
 
     .. versionchanged:: 2.2
        Le paramètre ``$timezone`` remplace le paramètre ``$userOffset`` utilisé
