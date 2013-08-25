@@ -77,6 +77,8 @@ settings
     An array of key/value pairs that should be sent to the database server as
     ``SET`` commands when the connection is created. This option is only
     supported by MySQL, Postgres, and SQLserver at this time.
+dsn
+    A full PDO compatible data source name.
 
 At this point, you might want to take a look at the
 :doc:`/getting-started/cakephp-conventions`. The correct
