@@ -112,7 +112,7 @@ Advanced bootstrapping
 
 クラス名の前にプラグイン名を付けることで、プラグインのcontrollers,models,components,behaviors, そして helpersが参照できます。 
 
-例えば、viewsの一つにカワイイコンタクト情報を出力しようと、
+例えば、viewsの一つに必要なコンタクト情報をいくつか出力するために、
 ContacktMangerプラグインのContactInfoHelperを使いたい場合、
 コントローラ内で、このように$helplers配列をこのように用意します。
 
@@ -223,14 +223,14 @@ ContactManagerプラグインのコントローラーは、/app/Plugin/ContactMa
 
 
 .. note::
-        このコントローラは、アプリケーションの AppController の親としてではなく、
-        プラグインのAppControllerを継承します（ ContactManagerAppController という名前で）。
+        このコントローラは、親アプリケーションの AppController ではなく、
+        （ ContactManagerAppController という名前の）プラグインのAppControllerを継承します。
 
-        また、モデルの名前の付け方は、プラグインの名前が接頭語としてつきます。
+        モデルの名前の頭にプラグイン名がつくことにも注意してください。
         これは、プラグイン内のモデルとメインのアプリケーション内のモデルの区別が必要だからです。
 
-        この場合、 $uses 配列は、 ContactManager を必要としません。
-        Contactはこのコントローラのデフォルトのモデルで、プラグイン名がどう正確にプリペンドされるかのサンプルになります。
+        今回の例では、ContactManager.Contact はこのコントローラのデフォルトのモデルなのですから、 
+        $uses 配列に書く必要は無かったかもしれませんが、プラグイン名を正しく頭につける方法を示すためにここでは書いています。
 
 これまで行ってきたものにアクセスしたい場合、 /contact_manager/contacts にアクセスします。
 Contact model をまだ定義してないので、“Missing Model”エラーがでるはずです。
