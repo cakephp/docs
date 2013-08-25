@@ -85,7 +85,7 @@ cache after each table is created. Cache can be disable by setting
     public $connection = 'default';
 
     public function before($event = array()) {
-        $db = ConnectionManager::getDataSource($this->connection);
+        $db = ConnectionManager::get($this->connection);
         $db->cacheSources = false;
         return true;
     }
