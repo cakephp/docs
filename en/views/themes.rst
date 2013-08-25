@@ -11,10 +11,6 @@ controller::
         public $theme = 'Example';
     }
 
-.. versionchanged:: 2.1
-   Versions previous to 2.1 required setting the ``$this->viewClass = 'Theme'``.
-   2.1 removes this requirement as the normal ``View`` class supports themes
-
 You can also set or change the theme name within an action or within the
 ``beforeFilter`` or ``beforeRender`` callback functions::
 
@@ -55,12 +51,12 @@ folder, it will default to the main webroot folder::
 
     //When in a theme with the name of 'purple_cupcake'
     $this->Html->css('main.css');
-     
+
     //creates a path like
     /theme/purple_cupcake/css/main.css
-     
+
     //and links to
-    app/View/Themed/PurpleCupcake/webroot/css/main.css 
+    app/View/Themed/PurpleCupcake/webroot/css/main.css
 
 Increasing performance of plugin and theme assets
 -------------------------------------------------
