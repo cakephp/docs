@@ -12,3 +12,12 @@ Router
 
 - :php:meth:`Router::mapResources()` accepts ``connectOptions`` key in the
   ``$options`` argument. See :ref:`custom-rest-routing` for more details.
+
+Utility
+=======
+
+Hash
+----
+
+- :php:meth:`Hash::insert()` and :php:meth:`Hash::remove()` now support matcher
+  expressions in their path selectors.
