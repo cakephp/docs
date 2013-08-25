@@ -11,7 +11,7 @@ can easily add to the functionality inherited from the CakePHP
 core, configure additional/different URL mappings (routes), and
 define additional/different inflections.
 
-.. index:: database.php, database.php.default
+.. index:: datasources.php, datasources.php.default
 .. _database-configuration:
 
 Database Configuration
@@ -31,7 +31,8 @@ configuration would look like::
         'database' => 'my_app',
         'login' => 'my_app',
         'password' => 'sekret',
-        'host' => 'localhost'
+        'host' => 'localhost',
+        'encoding' => 'utf8',
     ])
 
 The ``default`` connection is used unless another connection is
