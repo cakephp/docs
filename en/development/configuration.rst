@@ -17,24 +17,24 @@ define additional/different inflections.
 Database Configuration
 ======================
 
-CakePHP expects database configuration details to be in a file at
-``app/Config/database.php``. An example database configuration file can
-be found at ``app/Config/database.php.default``. A finished
-configuration should look something like this::
+By convention database connections are configured in
+``App/Config/datasources.php``. In this file
+:php:class:`Cake\\Database\\ConnectionManager` is used to define the various
+connection configuration your application will be using. A sample file is
+can be found at ``App/Config/datasources.default.php``. A sample connection
+configuration would look like::
 
-    class DATABASE_CONFIG {
-        public $default = array(
-            'datasource'  => 'Database/Mysql',
-            'persistent'  => false,
-            'host'        => 'localhost',
-            'login'       => 'cakephpuser',
-            'password'    => 'c4k3roxx!',
-            'database'    => 'my_cakephp_project',
-            'prefix'      => ''
-        );
-    }
+    use Cake\Database\ConnectionManager;
 
-The $default connection array is used unless another connection is
+    ConnectionManager::config('default', [
+        'className' => 'Mysql',
+        'database' => 'my_app',
+        'login' => 'my_app',
+        'password' => 'sekret',
+        'host' => 'localhost'
+    ])
+
+The ``default`` connection is used unless another connection is
 specified by the ``$useDbConfig`` property in a model. For example, if
 my application has an additional legacy database in addition to the
 default one, I could use it in my models by creating a new $legacy
@@ -44,10 +44,11 @@ setting ``public $useDbConfig = 'legacy';`` in the appropriate models.
 Fill out the key/value pairs in the configuration array to best
 suit your needs.
 
-datasource
-    The name of the datasource this configuration array is for.
-    Examples: Database/Mysql, Database/Sqlserver, Database/Postgres, Database/Sqlite.
-    You can use :term:`plugin syntax` to indicate plugin datasource to use.
+className
+    The class name of the driver used to power the connection. This can either
+    be a short classname using :ref:`plugin-syntax`, a fully namespaced name, or
+    a constructed driver instance. Examples of short classnames are Mysql,
+    Sqlite, Postgres, Sqlserver.
 persistent
     Whether or not to use a persistent connection to the database.
 host
@@ -58,9 +59,6 @@ password
     The password for the account.
 database
     The name of the database for this connection to use.
-prefix (*optional*)
-    The string that prefixes every table name in the database. If your
-    tables don’t have prefixes, set this to an empty string.
 port (*optional*)
     The TCP port or Unix socket used to connect to the server.
 encoding
@@ -79,17 +77,6 @@ settings
     ``SET`` commands when the connection is created. This option is only
     supported by MySQL, Postgres, and SQLserver at this time.
 
-.. versionchanged:: 2.4
-    The ``settings`` key was added in 2.4.
-
-.. note::
-
-    The prefix setting is for tables, **not** models. For example, if
-    you create a join table for your Apple and Flavor models, you name
-    it prefix\_apples\_flavors (**not**
-    prefix\_apples\_prefix\_flavors), and set your prefix setting to
-    'prefix\_'.
-
 At this point, you might want to take a look at the
 :doc:`/getting-started/cakephp-conventions`. The correct
 naming for your tables (and the addition of some columns) can score
@@ -99,11 +86,6 @@ BigBox, your controller BigBoxesController, everything just works
 together automatically. By convention, use underscores, lower case,
 and plural forms for your database table names - for example:
 bakers, pastry\_stores, and savory\_cakes.
-
-.. todo::
-
-    Add information about specific options for different database
-    vendors, such as SQLServer, Postgres and MySQL.
 
 
 .. index:: configuration
@@ -116,10 +98,11 @@ a number of points that you might need to customize for your application.  We've
 tried to ship CakePHP useful defaults to get you developing more rapidly.
 
 Configuration in CakePHP is handled via the :php:class:`Cake\Core\Configure`
-class.  You should familiarize yourself with it before trying to dive to far
-into configuration.  ``Configure`` stores all configuration data in a CakePHP
-application, and gives a simple, consistent way for applications and plugins to
-read/write and persist configuration data.
+class, and the ``config()`` methods on various classes. You should familiarize
+yourself with it before trying to dive to far into configuration.  ``Configure``
+stores most configuration data in a CakePHP application, and gives a simple,
+consistent way for applications and plugins to read/write and persist
+configuration data.
 
 Out of the box a CakePHP application comes with a number of configuration files
 that are loaded by ``App/Config/bootstrap.php``.  Feel free to remove/merge or
@@ -322,8 +305,8 @@ centralized variables that can be shared between many objects.
 Remember to try to live by "convention over configuration" and you
 won't end up breaking the MVC structure we’ve set in place.
 
-This class can be called from
-anywhere within your application, in a static context::
+This class can be called from anywhere within your application, in a static
+context::
 
     Configure::read('debug');
 
@@ -601,9 +584,6 @@ that the resource named ``$key`` contains.
 
     This method should dump/store the provided configuration data to a key identified by ``$key``.
 
-.. versionadded:: 2.3
-    ``ConfigReaderInterface::dump()`` was added in 2.3.
-
 .. php:exception:: ConfigureException
 
     Thrown when errors occur when loading/storing/restoring configuration data.
@@ -620,17 +600,15 @@ Built-in Configuration readers
     directories by using :term:`plugin syntax`.  Files **must** contain a ``$config``
     variable.  An example configuration file would look like::
 
-        $config = array(
+        $config = [
             'debug' => 0,
-            'Security' => array(
+            'Security' => [
                 'salt' => 'its-secret'
-            ),
-            'Exception' => array(
-                'handler' => 'ErrorHandler::handleException',
-                'renderer' => 'ExceptionRenderer',
-                'log' => true
-            )
-        );
+            ],
+            'App' => [
+                'namespace' => 'App'
+            ]
+        ];
 
     Files without ``$config`` will cause an :php:exc:`ConfigureException`
 
@@ -652,12 +630,11 @@ Built-in Configuration readers
 
         debug = 0
 
-        Security.salt = its-secret
+        [Security]
+        salt = its-secret
 
-        [Exception]
-        handler = ErrorHandler::handleException
-        renderer = ExceptionRenderer
-        log = true
+        [App]
+        namespace = App
 
     The above ini file, would result in the same end configuration data
     as the PHP example above.  Array structures can be created either
