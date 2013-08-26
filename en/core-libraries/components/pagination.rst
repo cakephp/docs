@@ -30,6 +30,8 @@ here that the order key must be defined in an array structure like below::
 
     class PostsController extends AppController {
 
+        public $components = array('Paginator');
+
         public $paginate = array(
             'limit' => 25,
             'order' => array(
@@ -42,6 +44,8 @@ You can also include other :php:meth:`~Model::find()` options, such as
 ``fields``::
 
     class PostsController extends AppController {
+
+        public $components = array('Paginator');
 
         public $paginate = array(
             'fields' => array('Post.id', 'Post.created'),
@@ -62,6 +66,8 @@ pagination::
 
 
     class RecipesController extends AppController {
+
+        public $components = array('Paginator');
 
         public $paginate = array(
             'limit' => 25,
@@ -84,36 +90,38 @@ array after the model you wish to configure::
 The values of the ``Post`` and ``Author`` keys could contain all the properties
 that a model/key less ``$paginate`` array could.
 
-Once the ``$paginate`` variable has been defined, we can call the
-``paginate()`` method in a controller action. This method will dynamically load
-the :php:class:`PaginatorComponent`, and call its paginate() method. This will return
-``find()`` results from the model. It also sets some additional
-paging statistics, which are added to the request object. The additional
-information is set to ``$this->request->params['paging']``, and is used by
-:php:class:`PaginatorHelper` for creating links. ``Controller::paginate()`` also
-adds PaginatorHelper to the list of helpers in your controller, if it has not
-been added already.::
+Once the ``$paginate`` variable has been defined, we can use the
+:php:class:`PaginatorComponent`'s ``paginate()`` method from our controller
+action. This will return ``find()`` results from the model. It also sets some
+additional paging parameters, which are added to the request object. The
+additional information is set to ``$this->request->params['paging']``, and is
+used by :php:class:`PaginatorHelper` for creating links.
+:php:meth:`PaginatorComponent::paginate()` also adds
+:php:class:`PaginatorHelper` to the list of helpers in your controller, if it
+has not been added already.::
 
     public function list_recipes() {
+        $this->Paginator->settings = $this->paginate;
+
         // similar to findAll(), but fetches paged results
-        $data = $this->paginate('Recipe');
+        $data = $this->Paginator->paginate('Recipe');
         $this->set('data', $data);
     }
 
 You can filter the records by passing conditions as second
 parameter to the ``paginate()`` function.::
 
-    $data = $this->paginate('Recipe', array('Recipe.title LIKE' => 'a%'));
+    $data = $this->Paginator->paginate('Recipe', array('Recipe.title LIKE' => 'a%'));
 
-Or you can also set ``conditions`` and other keys in the
-``$paginate`` array inside your action.::
+Or you can also set ``conditions`` and other pagination settings array inside
+your action.::
 
     public function list_recipes() {
-        $this->paginate = array(
+        $this->Paginator->settings = array(
             'conditions' => array('Recipe.title LIKE' => 'a%'),
             'limit' => 10
         );
-        $data = $this->paginate('Recipe');
+        $data = $this->Paginator->paginate('Recipe');
         $this->set(compact('data'));
     );
 
@@ -199,7 +207,7 @@ the keyword in controller's ``$paginate`` class variable::
      * Or on-the-fly from within the action
      */
     public function index() {
-        $this->paginate = array(
+        $this->Paginator->settings = array(
             'MyModel' => array(
                 'limit' => 20,
                 'order' => array('week' => 'desc'),
@@ -218,9 +226,9 @@ Control which fields used for ordering
 By default sorting can be done with any column on a model.  This is sometimes
 undesirable as it can allow users to sort on un-indexed columns, or virtual
 fields that can be expensive to calculate. You can use the 3rd parameter of
-``Controller::paginate()`` to restrict the columns sorting will be done on::
+``PaginatorComponent::paginate()`` to restrict the columns sorting will be done on::
 
-    $this->paginate('Post', array(), array('title', 'slug'));
+    $this->Paginator->paginate('Post', array(), array('title', 'slug'));
 
 This would allow sorting on the title and slug columns only. A user that sets
 sort to any other value will be ignored.
@@ -306,7 +314,7 @@ block and take appropriate action when a `NotFoundException` is caught::
 
     public function index() {
         try {
-            $this->paginate();
+            $this->Paginator->paginate();
         } catch (NotFoundException $e) {
             //Do something here like redirecting to first or last page.
             //$this->request->params['paging'] will give you required info.
