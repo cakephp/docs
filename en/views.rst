@@ -12,8 +12,8 @@ common rendering scenarios:
 
 - To create XML or JSON webservices you can use the :doc:`views/json-and-xml-views`.
 - To serve protected files, or dynamically generated files, you can use
-  :doc:`views/media-view`
-- To create multiple themed views, you can use :doc:`views/themes`
+  :ref:`cake-response-file`.
+- To create multiple themed views, you can use :doc:`views/themes`.
 
 View Templates
 ==============
