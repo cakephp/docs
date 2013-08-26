@@ -155,7 +155,7 @@ Converting Tables into SQL
 Using the ``createSql()`` or ``dropSql()`` you can get
 platform specific SQL for creating or dropping a specific table::
 
-    $db = ConnectionManager::getDataSource('default');
+    $db = ConnectionManager::get('default');
     $schema = new Table('posts', $fields, $indexes);
 
     // Create a table
@@ -184,7 +184,7 @@ Schema Collections
 You an use it to get the list of tables or reflect tables into
 :php:class:`Table` objects. Basic usage of the class looks like::
 
-    $db = ConnectionManager::getDataSource('default');
+    $db = ConnectionManager::get('default');
 
     // Create a schema collection.
     $collection = $db->schemaCollection();

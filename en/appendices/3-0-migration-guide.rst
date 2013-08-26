@@ -238,6 +238,28 @@ CookieComponent
   need to re-encrypt cookies with the ``rijndael`` method before upgrading.
 
 
+Model
+=====
+
+ConnectionManager
+-----------------
+
+- ConnectionManager has been moved to the ``Cake\Database`` namespace.
+- ConnectionManager has had the following methods removed:
+
+    - ``sourceList``
+    - ``getSourceName``
+    - ``loadDataSource``
+    - ``enumConnectionObjects``
+
+- :php:meth:`~Cake\\Database\\ConnectionManager::config()` has been added and is
+  now the only way to configure connections.
+- :php:meth:`~Cake\\Database\\ConnectionManager::get()` has been added. It
+  replaces ``getDataSource()``.
+- :php:meth:`~Cake\\Database\\ConnectionManager::configured()` has been added. It
+  and ``config()`` replace ``sourceList()`` & ``enumConnectionObjects()`` with
+  a more standard and consistent API.
+
 TestSuite
 =========
 
