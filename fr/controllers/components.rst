@@ -9,14 +9,14 @@ de regrouper plusieurs fonctionnalités dans un Component.
 CakePHP est également livré avec un fantastique ensemble de components,
 que vous pouvez utiliser pour vous aider :
 
-- Sécurité
-- Sessions
-- Listes de contrôle d'accès (ACL)
-- Emails
-- Cookies
-- Authentification
-- Traitement de requêtes
-- Pagination
+- Sécurité (SecurityComponent)
+- Sessions (SessionComponent)
+- Listes de contrôle d'accès (ACLComponent)
+- Emails (EmailComponent)
+- Cookies (CookieComponent)
+- Authentification (AuthComponent)
+- Traitement de requêtes (RequestHandlerComponent)
+- Pagination (PaginationComponent)
 
 Chacun de ces components d’origine est détaillé dans des chapitres
 spécifiques. Pour l’heure, nous allons vous montrer comment créer
@@ -47,7 +47,7 @@ de vos controllers::
             'Cookie' => array('name' => 'CookieMonster')
         );
 
-Serait un exemple de configuration d'un component avec le tableau
+Est un exemple de configuration d'un component avec le tableau
 ``$components``. Tous les components du coeur permettent aux paramètres
 d'être configurés dans la méthode de votre controller ``beforeFilter()``.
 C'est utile quand vous avez besoin d'assigner les résultats d'une fonction
@@ -161,7 +161,7 @@ de l'utiliser dans plusieurs controllers différents.
 La première étape consiste à créer un nouveau fichier et une classe pour
 le component. Créez le fichier dans
 ``/app/Controller/Component/MathComponent.php``. La structure de base pour
-le component ressemblerait à quelque chose comme ça ::
+le component ressemblerait à quelque chose comme cela::
 
     class MathComponent extends Component {
         public function faireDesOperationsComplexes($montant1, $montant2) {
@@ -264,8 +264,9 @@ API de Component
 .. php:method:: __construct(ComponentCollection $collection, $settings = array())
 
     Les Constructeurs pour la classe de base du component. Tous les
-    ``$parametres`` qui sont aussi des propriétés publiques, vont avoir leurs
-    valeurs changées pour matcher avec les valeurs de ``$settings``.
+    paramètres se trouvent dans ``$settings`` et ont des propriétés publiques.
+    Ils vont avoir leur valeur changée pour correspondre aux valeurs de
+    ``$settings``.
 
 Les Callbacks
 -------------

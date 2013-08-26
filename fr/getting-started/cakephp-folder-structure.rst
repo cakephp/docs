@@ -41,7 +41,7 @@ Console
     pour personnaliser la sortie de bake. Pour plus d'informations, regardez
     :doc:`/console-and-shells`.
 Controller
-    Contient vos controllers et leurs components.
+    Contient vos Controllers et leurs Components.
 Lib
     Contient les librairies internes qui ne proviennent pas de librairies
     externes. Cela vous permet de séparer les librairies internes de votre
@@ -49,7 +49,7 @@ Lib
 Locale
     Stocke les fichiers pour l'internationalisation.
 Model
-    Pour les models, behaviors et sources de données de votre
+    Pour les Models, Behaviors et Sources de Données de votre
     application.
 Plugin
     Contient les packages des Plugins.
@@ -66,12 +66,12 @@ tmp
     les descriptions de models, les logs et parfois les informations de
     session.
 
-    Assurez vous que ce dossier existe et qu'il est en écriture, autrement la
+    Assurez-vous que ce dossier existe et qu'il est en écriture, autrement la
     performance de votre application sera sévèrement impactée. En mode debug,
     CakePHP vous avertira si ce n'est pas le cas.
 
 Vendor
-    Toutes classes ou librairies tierces doivent être mises ici, de sorte qu'il
+    Toute classe ou librairie tierce doit être mise ici, de sorte qu'il
     sera facile d'y accéder par la fonction App::import('vendor','name'). Les
     observateurs avisés noteront que cela semble redondant avec le répertoire
     "vendors" à la racine de l'arborescence. Nous aborderons les différences

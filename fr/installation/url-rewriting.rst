@@ -10,12 +10,12 @@ se battent pour obtenir un bon fonctionnement sur leurs systèmes.
 
 Ici il y a quelques trucs que vous pourriez essayer pour que cela
 fonctionne correctement. Premièrement, regardez votre fichier
-httpd.conf (Assurez vous que vous avez éditer le httpd.conf du système
+httpd.conf (Assurez-vous que vous avez édité le httpd.conf du système
 plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
 
 
 #. Assurez-vous qu'un .htaccess est permis et que AllowOverride est défini à
-   All pour le DocumentRoot correct. Vous devriez voir quelque chose comme::
+   All pour le bon DocumentRoot. Vous devriez voir quelque chose comme::
 
        # Chaque répertoire auquel Apache a accès peut être configuré avec
        # respect pour lesquels les services et les fonctionnalités sont
@@ -86,8 +86,8 @@ plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
    essayez de modifier les paramètres pour les virtualhosts. Si vous
    êtes sur ubuntu, modifiez le fichier /etc/apache2/sites-available/default
    (l'endroit dépend de la distribution). Dans ce fichier, assurez-vous
-   que ``AllowOverride None`` a changé en ``AllowOverride All``, donc vous
-   avez::
+   que ``AllowOverride None`` a été changé en ``AllowOverride All``, donc vous
+   devez avoir::
 
        <Directory />
            Options FollowSymLinks
@@ -111,7 +111,7 @@ plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
    les requêtes (statements) RewriteBase aux fichiers .htaccess que CakePHP
    utilise (/.htaccess, /app/.htaccess, /app/webroot/.htaccess).
 
-   Ceci peut être ajouté à la même section avec la directive RewriteEngine,
+   Ceci peut être ajouté dans la même section que la directive RewriteEngine,
    donc par exemple, votre fichier .htaccess dans webroot ressemblerait à ceci::
 
        <IfModule mod_rewrite.c>
@@ -128,7 +128,7 @@ plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
    pour plus d'informations.
 
 #. (Optionel) Pour améliorer la configuration de production, vous devriez
-   empêcher les assets invalides d'être parsés par CakePHP. Modifier votre
+   empêcher les assets invalides d'être parsés par CakePHP. Modifiez votre
    webroot .htaccess pour quelque chose comme::
 
        <IfModule mod_rewrite.c>
@@ -155,7 +155,7 @@ De belles URLs sur nginx
 nginx est un serveur populaire qui, comme Lighttpd, utilise moins
 de ressources système. Son inconvénient est qu'il ne fait pas usage de
 fichiers .htaccess comme Apache et Lighttpd, il est donc nécessaire de créer
-les URLs réécrites dans la configuration du site disponibles. selon
+les URLs réécrites disponibles dans la configuration du site. selon
 votre configuration, vous devrez modifier cela, mais à tout le moins,
 vous aurez besoin de PHP fonctionnant comme une instance FastCGI.
 
@@ -203,7 +203,7 @@ faire, suivez ces étapes:
    <http://www.microsoft.com/web/downloads/platform.aspx>`_ pour installer
    l'URL
    `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
-   ou télécharger le directement (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+   ou téléchargez le directement (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
 #. Créez un nouveau fichier dans votre dossier CakePHP, appelé web.config.
 #. Utilisez Notepad ou tout autre éditeur XML-safe, copiez le code suivant
    dans votre nouveau fichier web.config...

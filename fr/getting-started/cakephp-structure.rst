@@ -53,9 +53,9 @@ du code entre les différentes opérations internes de CakePHP. Les callbacks
 disponibles sont :
 
 -  ``beforeFilter()``, exécutée avant toute action d'un controller.
--  ``beforeRender()``, exécuté après le traitement du controller, mais avant
+-  ``beforeRender()``, exécutée après le traitement du controller, mais avant
     l'affichage de la vue.
--  ``afterFilter()``, exécuté après la logique du controller, y compris
+-  ``afterFilter()``, exécutée après la logique du controller, y compris
     l'affichage de la vue. Il peut n'y avoir aucune différence entre
     ``beforeRender()`` et ``afterFilter()``, à moins que vous n'ayez effectué
     un appel manuel à ``render()`` dans les actions de votre controller et

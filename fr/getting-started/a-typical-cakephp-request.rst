@@ -31,8 +31,8 @@ Noir = élément obligatoire, Gris = élément optionnel, Bleu = rappel (callbac
 #. Le controller peut utiliser des models pour accéder aux données de
    l'application. Dans cet exemple, le controller utilise un model pour
    récupérer les derniers achats de Ricardo depuis la base de données. Toute
-   méthode de rappel du model, tous behaviors ou sources de données
-   peuvent s'appliquer pendant cette opération. Bien que l'utilisation du
+   méthode de rappel du model, tout behavior ou toute source de données
+   peut s'appliquer pendant cette opération. Bien que l'utilisation du
    model ne soit pas obligatoire, tous les controllers CakePHP nécessitent
    au départ, au moins un model.
 #. Une fois que le model a récupéré les données, elles sont retournées au
@@ -44,8 +44,8 @@ Noir = élément obligatoire, Gris = élément optionnel, Bleu = rappel (callbac
    suffisamment les données, ces données sont passées à la vue grâce à la
    méthode set(). Les méthodes de rappel (callbacks) du controller peuvent être
    appliquées avant l'envoi des données. La logique de la vue est exécutée,
-   laquelle peut inclure l'utilisation d'éléments et/ou d'assistants.
-   Par défaut, la vue est rendue à travers une mise en page (layout).
+   laquelle peut inclure l'utilisation d'elements et/ou de helpers.
+   Par défaut, la vue est rendue à travers un layout (mise en page).
 #. D'autres fonctions de rappel (callbacks) du controller (comme afterFilter)
    peuvent être exécutées. La vue complète et finale est envoyée au navigateur
    de Ricardo.

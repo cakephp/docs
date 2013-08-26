@@ -108,7 +108,7 @@ utilisons juste celui par défaut.
 Vous souvenez-vous, dans la dernière section, comment nous avions assigné
 la variable 'posts' à la vue en utilisant la méthode ``set()`` ?
 Cela devrait transmettre les données à la vue qui ressemblerait à quelque
-chose comme ça::
+chose comme cela::
 
     // print_r($posts) sort:
 
@@ -193,8 +193,8 @@ méthode ``link()`` génèrera un lien HTML à partir d'un titre (le premier
 paramètre) et d'une URL (le second paramètre).
 
 Lorsque vous indiquez des URLs dans Cake, il est recommandé d'utiliser les
-tableaux. Ceci est expliqué dans le chapitre des Routes. Utilisez les tableaux
-dans les URLs, vous permet de tirer profit des capacités de CakePHP à
+tableaux. Ceci est expliqué dans le chapitre des Routes. Utiliser les tableaux
+dans les URLs vous permet de tirer profit des capacités de CakePHP à
 ré-inverser les routes. Vous pouvez aussi utiliser les URLs relatives depuis
 la base de l'application comme suit /controller/action/param1/param2.
 
@@ -208,7 +208,7 @@ cette vue (le lien sur le titre d'un post mène à l'URL :
 l'action n'a pas encore été définie. Si vous n'avez pas été informé, soit
 quelque chose s'est mal passé, soit en fait vous aviez déjà défini l'action,
 auquel cas vous êtes vraiment sournois ! Sinon, nous allons la créer sans plus
-tarder dans le Controller Posts ::
+tarder dans le Controller Posts::
 
     class PostsController extends AppController {
         public $helpers = array('Html', 'Form');
@@ -243,7 +243,7 @@ Nous faisons aussi une petite vérification d'erreurs pour nous assurer qu'un
 utilisateur accède bien à l'enregsitrement. Si un utilisateur requête
 ``/posts/view``, nous lancerons un ``NotFoundException`` et laisserons
 le Gestionnaire d'Erreur de CakePHP ErrorHandler prendre le dessus. Nous
-executons aussi une vérification similaire pour nous assurer que l'utilisateur
+exécutons aussi une vérification similaire pour nous assurer que l'utilisateur
 a accède à un enregistrement qui existe.
 
 Maintenant, créons la vue pour notre nouvelle action "view" et plaçons-la
@@ -340,7 +340,7 @@ pour voir les différents formats d'URL acceptés dans les différentes fonction
 de Cake.
 
 L'appel de la méthode ``save()`` vérifiera les erreurs de validation et
-interrompra l'enregistrement s'il y en a une qui survient. Nous verrons
+interrompra l'enregistrement si une erreur survient. Nous verrons
 la façon dont les erreurs sont traitées dans les sections suivantes.
 
 Valider les données
@@ -407,8 +407,8 @@ la ligne suivante avant ``<table>`` ::
 
 Vous vous demandez peut-être : comment je fais pour indiquer à CakePHP mes
 exigences de validation ? Les règles de validation sont définies dans le
-model. Retournons donc à notre model Post et précédons à quelques
-ajustements ::
+model. Retournons donc à notre model Post et procédons à quelques
+ajustements::
 
     class Post extends AppModel {
         public $validate = array(
@@ -425,7 +425,7 @@ Le tableau ``$validate`` indique à CakePHP comment valider vos données
 lorsque la méthode ``save()`` est appelée. Ici, j'ai spécifié que les
 deux champs "body" et "title" ne doivent pas être vides. Le moteur de
 validation de CakePHP est puissant, il dispose d'un certain nombre de
-règles pré-fabriquées (code de carte bancaire, adresse emails, etc.)
+règles intégrées (code de carte bancaire, adresse emails, etc.)
 et d'une souplesse pour ajouter vos propres règles de validation. Pour
 plus d'informations sur cette configuration, consultez le chapitre
 :doc:`/models/data-validation`.
@@ -443,7 +443,7 @@ Editer des Posts
 L'édition de posts : nous y voilà. Vous êtes un pro de CakePHP maintenant, vous
 devriez donc avoir adopté le principe. Créez d'abord l'action puis la vue.
 Voici à quoi l'action ``edit()`` du controller Posts (PostsController) devrait
-ressembler ::
+ressembler::
 
     public function edit($id = null) {
         if (!$id) {
@@ -470,7 +470,7 @@ ressembler ::
     }
 
 Cette action s'assure d'abord que l'utilisateur a essayé d'accéder à un
-enregistrement existant. Si il n'y a pas de paramètre ``$id``passé, ou si le
+enregistrement existant. Si il n'y a pas de paramètre ``$id`` passé, ou si le
 post n'existe pas, nous lançons une ``NotFoundException`` pour que le
 gestionnaire d'Erreurs ErrorHandler de CakePHP s'en occupe.
 
@@ -559,7 +559,7 @@ Posts (PostsController)::
 Cette logique supprime le Post spécifié par $id, et utilise
 ``$this->Session->setFlash()`` pour afficher à l'utilisateur un message de
 confirmation après l'avoir redirigé sur ``/posts``. Si l'utilisateur tente
-une suppression en utilisant une requête GET, une exeception est levée.
+une suppression en utilisant une requête GET, une exception est levée.
 Les exceptions manquées sont capturées par le gestionnaire d'exceptions de
 CakePHP et un joli message d'erreur est affiché. Il y a plusieurs
 :doc:`/development/exceptions` intégrées qui peuvent être utilisées pour
@@ -632,7 +632,7 @@ Pour plus d'informations sur les techniques de routages, consultez le chapitre
 :ref:`routes-configuration`.
 
 Par défaut, CakePHP effectue une redirection d'une personne visitant la racine
-de votre site (i.e. http://www.exemple.com) vers le controller Pages
+de votre site (par ex: http://www.exemple.com) vers le controller Pages
 (PagesController) et affiche le rendu de la vue appelée "home". Au lieu de
 cela, nous voudrions la remplacer avec notre controller Posts
 (PostsController).

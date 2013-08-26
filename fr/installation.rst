@@ -44,19 +44,19 @@ Il y a deux façons d'obtenir une copie récente de CakePHP. Vous pouvez soit
 télécharger une copie archivée de (zip/tar.gz/tar.bz2) à partir du site web
 principal, soit faire un check out du code sur dépôt de git.
 
-Pour télécharger la dernière version majeure de CakePHP. Visitez le site web
+Pour télécharger la dernière version majeure de CakePHP, visitez le site web
 principal `http://cakephp.org <http://cakephp.org>`_ et
 suivez le lien "Télécharger maintenant".
 
 Toutes les versions actuelles de CakePHP sont hébergées sur
 `Github <http://github.com/cakephp/cakephp>`_. Github héberge CakePHP
 lui-même ainsi que plusieurs autres plugins pour CakePHP. Les versions de
-CakePHP sont disponibles à
+CakePHP sont disponibles sur
 `Téléchargements Github <https://github.com/cakephp/cakephp/tags>`_.
 
 Sinon, vous pouvez obtenir du code frais avec tous les correctifs de bug
-et à jour des améliorations de dernière minute. Ceux-ci peuvent être
-accessibles à partir de github en clonant le répertoire de `Github`_ ::
+et à jour des améliorations de dernière minute. Celui-ci peut être
+accessible à partir de github en clonant le répertoire de `Github`_ ::
 
     git clone git://github.com/cakephp/cakephp.git
 
@@ -65,8 +65,8 @@ Permissions
 ===========
 
 CakePHP utilise le répertoire ``app/tmp`` pour un certain nombre d'opérations.
-Les descriptions de Modèle, les vues mises en cache, et les informations de
-session sont juste quelques exemples.
+Les descriptions de Model, les vues mises en cache, et les informations de
+session en sont juste quelques exemples.
 
 De même, assurez-vous que le répertoire ``app/tmp`` et tous ses
 sous-répertoires dans votre installation cake sont en écriture pour
@@ -78,7 +78,7 @@ Configuration
 Configurer CakePHP est aussi simple que de le flanquer dans le
 document root de votre serveur web, ou aussi complexe et flexible
 que vous le souhaitez.
-Cette section couvrira les trois types principaux d'installation pour CakePHP:
+Cette section couvrira les trois types principaux d'installation de CakePHP:
 développement, production, et avancé.
 
 -  Développement: Facile à mettre en oeuvre, mais les URLs de l’application
@@ -117,7 +117,7 @@ chose comme cela dans votre système de fichiers::
             README
 
 Si votre serveur web est configuré correctement, vous devriez trouver
-maintenant votre application Cake accessible à
+maintenant votre application Cake accessible à l'adresse
 http://www.exemple.com/cake\_2\_0/.
 
 Utiliser un CakePHP pour de multiples applications
@@ -202,7 +202,7 @@ A vous de jouer!
 
 Ok, voyons voir CakePHP en action. Selon la configuration que vous utilisez,
 vous pouvez pointer votre navigateur vers http://exemple.com/ ou
-http://exemple.com/cake\_install/. A ce niveau, vous serez sur le page home
+http://exemple.com/cake\_install/. A ce niveau, vous serez sur la page home
 par défaut de CakePHP, et un message qui vous donnera le statut de la
 connection de votre base de données courante.
 
@@ -210,7 +210,7 @@ Félicitations! Vous êtes prêt à :doc:`créer votre première application Cak
 </getting-started>`.
 
 Cela ne fonctionne pas? Si vous avez une erreur liée au timezone de PHP,
-décommentez une ligne dans ``app/Config/core.php``::
+décommentez la ligne dans ``app/Config/core.php``::
 
    /**
     * Décommentez cette ligne et corrigez votre serveur de timezone pour régler

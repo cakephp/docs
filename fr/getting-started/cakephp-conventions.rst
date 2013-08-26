@@ -196,7 +196,7 @@ Controller PersonnesController, dans lequel le model Personne est
 automatiquement disponible (et automatiquement lié à la table 'personnes'
 dans la base) et rendue dans un fichier. Aucune de ces relations n'a été
 configurée par rien d'autre que la création des classes et des fichiers dont
-vous aviez besoin de toutes façons.
+vous aviez besoin de toute façon.
 
 Maintenant que vous avez été initié aux fondamentaux de CakePHP, vous devriez
 essayer de dérouler le tutoriel du Blog CakePHP
