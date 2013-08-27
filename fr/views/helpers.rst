@@ -107,13 +107,6 @@ dans vos vues.
     Faire un alias d'un helper remplace cette instance partout où le helper
     est utilisé, y compris dans les autres Helpers.
 
-.. tip::
-
-    Faire un alias des Helpers Html ou Session pendant que vous utilisez le
-    coeur de PagesController ne fonctionnera pas. Il est préférable de copier
-    ``lib/Cake/Controller/PagesController.php`` dans le dossier
-    ``app/Controller/``.
-
 L'utilisation des configurations du helper vous permet de configurer de manière
 déclarative vos helpers et de garder la logique de configuration de vos actions
 des controllers. Si vous avez des options de configuration qui ne peuvent pas
