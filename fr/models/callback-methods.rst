@@ -66,9 +66,9 @@ find, vous obtiendriez peut-être ça::
 
 .. warning::
 
-    Un code nécessitant que ``$primaire`` soit vrai aura probablement
-    l'erreur fatale "Cannot use string offset as an array" de la part de
-    PHP si une recherche récursive est utilisée.
+    Un code nécessitant que ``$primaire`` soit à <em>true</em> aura
+    probablement l'erreur fatale <em>"Cannot use string offset as an
+    array"</em> de la part de PHP si une recherche récursive est utilisée.
 
 Ci-dessous un exemple de la manière dont afterfind peut être utilisée
 pour formater des dates::
@@ -93,7 +93,7 @@ beforeValidate
 
 Utilisez ce rappel pour modifier les données du model avant qu'elles ne
 soient validées ou pour modifier les règles de validation si nécessaire.
-Cette fonction doit aussi retourner *vrai*, sinon l'exécution du save()
+Cette fonction doit aussi retourner *true*, sinon l'exécution du save()
 courant sera annulée.
 
 beforeSave
@@ -104,7 +104,7 @@ beforeSave
 Placez toute logique de pré-enregistrement dans cette fonction. Cette fonction
 s'exécute immediatement après que les données du model ont été validées avec
 succès, mais juste avant que les données ne soient sauvegardées. Cette fonction
-devrait toujours retourner vrai si voulez que l'opération d'enregistrement
+devrait toujours retourner <em>true</em> si voulez que l'opération d'enregistrement
 se poursuive.
 
 Ce callback est particulièrement pratique, pour toute logique de manipulation
@@ -134,7 +134,7 @@ facilement modifié. Utilisez le code ci-dessous dans le model approprié.
 
 .. tip::
 
-    Assurez-vous que beforeSave() retourne vrai ou bien votre sauvegarde
+    Assurez-vous que beforeSave() retourne <em>true</em> ou bien votre sauvegarde
     échouera.
 
 afterSave
@@ -145,8 +145,8 @@ afterSave
 Si vous avez besoin d'exécuter de la logique juste après chaque opération de
 sauvegarde, placez-la dans cette méthode de rappel.
 
-La valeur de ``$created`` sera vrai si un nouvel objet a été créé (plutôt qu'un
-objet mis à jour). 
+La valeur de ``$created`` sera <em>true</em> si un nouvel objet a été créé
+(plutôt qu'un objet mis à jour). 
 
 beforeDelete
 ============
@@ -154,16 +154,16 @@ beforeDelete
 ``beforeDelete(boolean $cascade = true)``
 
 Placez dans cette fonction, toute logique de pré-suppression. Cette fonction
-doit retourner vrai si vous voulez que la suppression continue et faux si
-vous voulez l'annuler.
+doit retourner <em>true</em> si vous voulez que la suppression continue et
+<em>false</em> si vous voulez l'annuler.
 
 La valeur de ``$cascade`` sera ``true``, pour que les enregistrements qui
 dépendent de cet enregistrement soient aussi supprimés.
 
 .. tip::
 
-    Assurez vous que beforeDelete() retourne true, ou votre suppression ne va
-    pas marcher.
+    Assurez vous que beforeDelete() retourne <em>true</em>, ou votre
+    suppression ne va pas marcher.
 
 ::
 

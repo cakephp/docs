@@ -9,14 +9,14 @@ La couche Model
 ===============
 
 La couche Model représente la partie de l'application qui exécute la logique
-métier. Cela signifie qu'elle est responsable de récuperer les données, de les
+métier. Cela signifie qu'elle est responsable de récupérer les données, de les
 convertir selon des concepts chargés de sens pour votre application, tels que
 le traitement, la validation, l'association et beaucoup d'autres tâches
 concernant la manipulation des données.
 
 A première vue, l'objet Model peut être vu comme la première couche
-d'intéraction avec n'importe quelle base de données que vous pourriez utiliser
-pour votre application. Mais plus globalement, ils font partie des concepts
+d'interaction avec n'importe quelle base de données que vous pourriez utiliser
+pour votre application. Mais plus globalement, il fait partie des concepts
 majeurs autour desquels vous allez exécuter votre application.
 
 Dans le cas d'un réseau social, la couche Model s'occupe des tâches comme de
@@ -51,7 +51,7 @@ Model et Vue.
 Les Controllers peuvent être imaginés comme des managers qui ont pour mission
 que toutes les ressources souhaitées pour accomplir une tâche soient déléguées
 aux travailleurs corrects.
-Il attend des pétitions des clients, vérifie leur validité selon
+Il attend des requêtes des clients, vérifie leur validité selon
 l'authentification et les règles d'autorisation,
 délèguent les données récupérées et traitées par le Model, et sélectionne
 les type de présentation correctes que le client accepte, pour finalement
@@ -76,7 +76,7 @@ de sauvegarde qui seraient nécessaires. Après que cette communication est
 finie, le controller va donner à l'objet vue correct, la tâche de générer une
 sortie résultant des données fournies par le model.
 
-Finalement, quand cette sortie est générée, elle est immédiatement rendu
+Finalement, quand cette sortie est générée, elle est immédiatement rendue
 à l'utilisateur.
 
 Presque chaque requête de votre application va suivre ce schéma classique.

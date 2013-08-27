@@ -13,7 +13,7 @@ rendu les plus communs:
 - Pour créer des services web XML ou JSON, vous pouvez utiliser
   :doc:`views/json-and-xml-views`.
 - Pour servir des fichiers protégés, ou générer des fichiers dynamiquement,
-  vous pouvez utiliser :doc:`views/media-view`.
+  vous pouvez utiliser :ref:`cake-response-file`.
 - Pour créer des vues multiples par thème, vous pouvez utliser
   :doc:`views/themes`.
 
