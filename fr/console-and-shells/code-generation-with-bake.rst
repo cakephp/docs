@@ -90,7 +90,7 @@ va construire vos vues.
 Passez le paramètre de squelette du chemin à la tâche du projet.
 ::
 
-    cake bake project -skel Console/Templates/skel
+    cake bake project --skel Console/Templates/skel
 
 .. note::
 
