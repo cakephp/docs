@@ -92,7 +92,7 @@ your views
 Pass the skeleton path parameter to the project task
 ::
 
-    cake bake project -skel Console/Templates/skel
+    cake bake project --skel Console/Templates/skel
 
 .. note::
 
