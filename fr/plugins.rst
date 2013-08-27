@@ -340,8 +340,7 @@ l'application principale::
                                         pdf/
 
 Vous pouvez mettre tout type de fichier dans tout répertoire, juste comme
-un webroot habituel. La seule restriction est que ``MediaView`` a besoin de
-connaître le mime-type de cet asset.
+un webroot habituel.
 
 Mais garder à l'esprit que la gestion des assets statiques, comme les images,
 le Javascript et les fichiers CSS des plugins à travers le Dispatcher est
