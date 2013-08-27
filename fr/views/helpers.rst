@@ -3,27 +3,27 @@ Helpers (Assistants)
 
 Les Helpers (Assistants) sont des classes comme les components, pour la couche
 de présentation de votre application. Ils contiennent la logique de
-présentation qui est partagée entre plusieurs vues, éléments ou layouts. Ce
+présentation qui est partagée entre plusieurs vues, elements ou layouts. Ce
 chapitre vous montrera comment créer vos propres helpers et soulignera les
 tâches basiques que les helpers du cœur de CakePHP peuvent vous aider à
 accomplir.
 
-CakePHP dispose d'un nombre de helpers qui aident à la création des vues.
-Ils aident à la création de balises bien-formées (y compris les formulaires),
-aident à la mise en forme du texte, les durées et les numéros, et peuvent même
-accélérer la fonctionnalité Ajax. Pour plus d'informations sur les helpers
-inclus dans CakePHP, allez voir :ref:`core-helpers`.
+CakePHP dispose d'un certain nombre de helpers qui aident à la création des
+vues. Ils aident à la création de balises bien-formatées (y compris les
+formulaires), aident à la mise en forme du texte, les durées et les nombres,
+et peuvent même accélérer la fonctionnalité Ajax. Pour plus d'informations sur
+les helpers inclus dans CakePHP, allez voir :ref:`core-helpers`.
 
 .. _configuring-helpers:
 
 Utiliser et configurer les Helpers
 ==================================
 
-Vous activez les helpers (assistants) dans CakePHP, en faisant
-"prendre conscience" à un controller qu'ils existent. Chaque controller a une
-propriété :php:attr:`~Controller::$helpers`, qui liste les helpers
-disponibles dans la vue. Pour activer un helper dans votre vue, ajoutez
-son nom au tableau ``$helpers`` du controller::
+Vous activez les helpers dans CakePHP, en faisant "prendre conscience" à un
+controller qu'ils existent. Chaque controller a une propriété
+:php:attr:`~Controller::$helpers`, qui liste les helpers disponibles dans la
+vue. Pour activer un helper dans votre vue, ajoutez son nom au tableau
+``$helpers`` du controller::
 
     class BakeriesController extends AppController {
         public $helpers = array('Form', 'Html', 'Js', 'Time');
@@ -37,8 +37,8 @@ utilisée partout ailleurs dans CakePHP::
     }
     
 Vous pouvez aussi ajouter les helpers depuis une action, dans ce cas,
-ils seront uniquement accessibles pour cette action et aucune autre dans le
-controller. Ceci économise de la puissance de calcul pour les autres actions
+ils seront uniquement accessibles pour cette action et dans aucune autre action
+du controller. Ceci économise de la puissance de calcul pour les autres actions
 qui n'utilisent pas le helper, tout en permettant de conserver le controller
 mieux organisé::
 
@@ -80,7 +80,7 @@ Depuis 2.3 les options sont fusionnées avec la propriété ``Helper::$settings`
 du helper.
 
 Une configuration courante est d'utiliser l'option ``className``, qui vous
-permet de créer des helpers alias dans vos vues. Cette fonctionnalité est
+permet de créer des alias de helper dans vos vues. Cette fonctionnalité est
 utile quand vous voulez remplacer ``$this->Html`` ou tout autre Helper de
 référence avec une mise en oeuvre personnalisée::
 
@@ -99,7 +99,7 @@ référence avec une mise en oeuvre personnalisée::
         // Ajouter votre code pour écraser le HtmlHelper du coeur
     }
 
-Ce qui est au-dessus ferait un *alias* de ``MyHtmlHelper`` vers ``$this->Html``
+Ce qui est au-dessus fera un *alias* de ``MyHtmlHelper`` vers ``$this->Html``
 dans vos vues.
 
 .. note::
@@ -132,12 +132,12 @@ Utiliser les Helpers
 
 Une fois que vous avez configuré les helpers que vous souhaitiez utiliser, dans
 votre controller, chaque helper est exposé en propriété publique dans la vue.
-Par exemple, si vous utilisiez :php:class:`HtmlHelper`, vous seriez capable
+Par exemple, si vous utilisiez :php:class:`HtmlHelper`, vous serez capable
 d'y accéder en faisant ce qui suit::
 
     echo $this->Html->css('styles');
 
-Ce qui est au-dessus appelerait la méthode ``css`` du HtmlHelper. Vous pouvez
+Ce qui est au-dessus appelera la méthode ``css`` du HtmlHelper. Vous pouvez
 accéder à n'importe quel helper chargé en utilisant ``$this->{$helperName}``.
 Il peut venir un temps où vous aurez besoin de charger dynamiquement un helper
 à partir d'une vue. Vous pouvez utiliser la vue du
@@ -161,12 +161,12 @@ Créer des Helpers
 Si un helper du coeur (ou l'un présenté sur github ou dans la Boulangerie)
 ne correspond pas à vos besoins, les helpers sont faciles à créer.
 
-Mettons que nous voulions créer un helper, qui pourrait être utilisé pour
+Mettons que nous voulions créer un helper, qui pourra être utilisé pour
 produire un lien CSS, façonné spécialement selon vos besoins, à différents
 endroits de votre application. Afin de trouver une place à votre logique dans
 la structure de helper existante dans CakePHP, vous devrez créer une nouvelle
-classe dans ``/app/View/Helper``. Appelons notre assistant LienHelper. Le
-fichier de la classe PHP devrait ressembler à quelque chose comme ceci::
+classe dans ``/app/View/Helper``. Appelons notre helper LienHelper. Le
+fichier de la classe PHP ressemblera à quelque chose comme ceci::
 
     /* /app/View/Helper/LienHelper.php */
     App::uses('AppHelper', 'View/Helper');
@@ -181,7 +181,7 @@ fichier de la classe PHP devrait ressembler à quelque chose comme ceci::
 .. note::
 
     Les Helpers doivent étendre soit ``AppHelper`` soit :php:class:`Helper` ou
-    implémenter tous les callbacks dans :ref:`helper-api`.
+    implémenter tous les callbacks dans l':ref:`helper-api`.
 
 Inclure d'autres Helpers
 ------------------------
@@ -262,7 +262,7 @@ API de Helper
     
 .. php:method:: url($url, $full = false)
 
-    Génère une HTML escaped URL, qui délégue à :php:meth:`Router::url()`.
+    Génère une URL échappée de HTML, qui délégue à :php:meth:`Router::url()`.
 
 .. php:method:: value($options = array(), $field = null, $key = 'value')
 
@@ -272,7 +272,7 @@ API de Helper
 
     Génère une valeur id en CamelCase pour le champ sélectionné courant.
     Ecraser cette méthode dans votre AppHelper vous permettra de changer la
-    façon dont CakePHP génére les attributs ID.
+    façon dont CakePHP génère les attributs ID.
 
 Callbacks
 ---------
@@ -280,12 +280,12 @@ Callbacks
 .. php:method:: beforeRenderFile($viewFile)
 
     Est appelé avant que tout fichier de vue soit rendu. Cela inclut les
-    eléments, le vues, les vues parentes et les layouts.
+    elements, les vues, les vues parentes et les layouts.
 
 .. php:method:: afterRenderFile($viewFile, $content)
 
     Est appelé après que tout fichier de vue est rendu. Cela inclut les
-    eléments, le vues, les vues parentes et les layouts. Un callback
+    elements, les vues, les vues parentes et les layouts. Un callback
     peut modifier et retourner ``$content`` pour changer la manière dont
     le contenu rendu est affiché dans le navigateur.
 
@@ -327,7 +327,7 @@ Helpers du coeur
 :doc:`/core-libraries/helpers/number`
     Formate les nombres et les monnaies.
 :doc:`/core-libraries/helpers/paginator`
-    Pagination à partir des données de Modèles et tri.
+    Pagination et tri à partir des données de Models.
 :doc:`/core-libraries/helpers/rss`
     Méthodes bien pratiques pour la sortie de contenu RSS et de données XML.
 :doc:`/core-libraries/helpers/session`

@@ -1,9 +1,9 @@
 Views (Vues)
 ############
 
-Les "Vues" sont le **V** dans MVC. Les vues sont chargées de générer la sortie
-spécifique requise par la requête. Souvent, cela est fait sous forme HTML,
-XML ou JSON, mais le streaming de fichiers et la création de PDFs que les
+Les Views (Vues) sont le **V** dans MVC. Les vues sont chargées de générer la
+sortie spécifique requise par la requête. Souvent, cela est fait sous forme
+HTML, XML ou JSON, mais le streaming de fichiers et la création de PDFs que les
 utilisateurs peuvent télécharger sont aussi de la responsabilité de la
 couche View.
 
@@ -28,14 +28,14 @@ fichier CSV pour un utilisateur.
 
 Les fichiers de vues de CakePHP sont écrits en pur PHP et ont comme extension
 par défaut .ctp (Cakephp TemPlate). Ces fichiers contiennent toute la logique
-de présentation nécessaire à l'organisation des données reçues du contrôleur,
-dans un format qui satisfasse l'audience que vous recherchez. Si vous préfèrez
+de présentation nécessaire à l'organisation des données reçues du controller,
+dans un format qui satisfasse l'audience que vous recherchez. Si vous préférez
 utiliser un langage de template comme Twig, ou Smarty, une sous-classe de View
 fera le pont entre votre language de template et CakePHP.
 
 Les fichiers de vues sont stockées dans ``/app/View/``, dans un dossier portant
-le nom du contrôleur qui utilise ces fichiers et le nom de la vue
-correspondante. Par exemple, l'action "view()" du contrôleur Produits devrait
+le nom du controller qui utilise ces fichiers et le nom de la vue
+correspondante. Par exemple, l'action "view()" du controller Produits devrait
 normalement se trouver dans ``/app/View/Products/view.ctp``.
 
 La couche vue de CakePHP peut être constituée d'un certain nombre de parties
@@ -50,10 +50,9 @@ chapitre :
   retrouve dans plusieurs interfaces de votre application. La plupart des
   vues sont rendues à l'intérieur d'un layout.
 - **helpers** : ces classes encapsulent la logique de vue qui est requise
-  à de nombreux endroits de la couche vue. Parmi d'autres choses, les helpers
-  (assistants) de CakePHP peuvent vous aider à créer des formulaires, des
-  fonctionnalités AJAX, de paginer les données du modèle ou à délivrer des
-  flux RSS.
+  à de nombreux endroits de la couche view. Parmi d'autres choses, les helpers
+  de CakePHP peuvent vous aider à créer des formulaires, des fonctionnalités
+  AJAX, à paginer les données du model ou à délivrer des flux RSS.
 
 
 .. _extending-views:
@@ -82,7 +81,7 @@ commune pour votre sidebar, et seulement définir les parties qui changent::
     </div>
 
 Le fichier de vue ci-dessus peut être utilisé comme une vue parente. Il
-s'attend à ce que la vue étendue, il va définir des blocks ``sidebar``
+s'attend à ce que la vue l'étendant définisse des blocks ``sidebar``
 et ``title``. Le block ``content`` est un block spécial que CakePHP
 crée. Il contiendra tous les contenus non capturés de la vue étendue.
 En admettant que notre fichier de vue a une variable ``$post`` avec les
@@ -111,7 +110,7 @@ données sur notre post. Notre vue pourrait ressembler à ceci::
 
 L'exemple ci-dessus vous montre comment vous pouvez étendre une vue, et
 remplir un ensemble de bloc. Tout contenu qui ne serait pas déjà dans un bloc
-défini, sera capturé et placé dans un bloc spécial appellé ``content``. Quand
+défini, sera capturé et placé dans un block spécial appellé ``content``. Quand
 une vue contient un appel vers un ``extend()``, l'éxécution continue jusqu'à la
 fin de la vue actuelle. Une fois terminé, la vue étendue va être générée. En
 appellant ``extend()`` plus d'une fois dans un fichier de vue, le dernier appel
@@ -130,7 +129,7 @@ vue parente va récupérer le contenu de la vue précédente en tant que bloc
 
 .. note::
 
-    Vous devriez éviter d'utiliser ``content`` comme nom de bloc dans votre
+    Vous devriez éviter d'utiliser ``content`` comme nom de block dans votre
     application. CakePHP l'utilise pour définir le contenu non-capturé pour
     les vues étendues.
 
@@ -145,12 +144,12 @@ Les blocs de vue remplacent les ``$scripts_for_layout`` et fournissent une
 API flexible qui vous permet de définir des slots (emplacements), ou blocs,
 dans vos vues / layouts qui peuvent être définies ailleurs. Par exemple, les
 blocs pour implémenter des choses telles que les sidebars, ou des régions pour
-charger des ressources dans l'en-tête / pied de page du layout. Un bloc peut
-être définit de deux manières. Soit en tant que bloc capturant, soit en le
+charger des ressources dans l'en-tête / pied de page du layout. Un block peut
+être défini de deux manières. Soit en tant que block capturant, soit en le
 déclarant explicitement. Les méthodes ``start()``, ``append()`` et ``end()``
 vous permettent de travailler avec les blocs capturant.
 
-    // Creer le bloc sidebar.
+    // Creer le block sidebar.
     $this->start('sidebar');
     echo $this->element('sidebar/recent_topics');
     echo $this->element('sidebar/recent_comments');
@@ -162,29 +161,29 @@ vous permettent de travailler avec les blocs capturant.
     echo $this->element('sidebar/popular_topics');
     $this->end();
 
-Vous pouvez aussi le rattacher à l'intérieur d'un bloc en utilisant ``start()``
+Vous pouvez aussi le rattacher à l'intérieur d'un block en utilisant ``start()``
 pluieurs fois. La méthode ``assign()`` peut être utilisée pour nettoyer ou
-outrepasser un bloc à n'importe quel moment::
+outrepasser un block à n'importe quel moment::
 
     // Nettoyer le contenu précedent de la sidebar.
     $this->assign('sidebar', '');
 
 
 Dans 2.3, certaines nouvelles méthodes ont été ajoutées pour travailler avec
-les blocs. Le ``prepend()`` pour ajouter du contenu avant un bloc existant::
+les blocs. Le ``prepend()`` pour ajouter du contenu avant un block existant::
 
     // Ajoutez avant la sidebar
     $this->prepend('sidebar', 'ce contenu va au-dessus de la sidebar');
 
 La méthode ``startIfEmpty()`` peut être utilisée pour commencer un bloc
-**seulement** si il est vide ou non défini. Si le bloc existe déjà, le contenu
+**seulement** si il est vide ou non défini. Si le block existe déjà, le contenu
 capturé va être écarté. C'est utile quand vous voulez définir le contenu par
 défaut de façon conditionnel pour un bloc, qui ne doit pas déjà exister::
 
 .. code-block:: php
 
     // Dans un fichier de vue.
-    // Crée un bloc de navbar
+    // Crée un block de navbar
     $this->startIfEmpty('navbar');
     echo $this->element('navbar');
     echo $this->element('notifications');
@@ -200,8 +199,8 @@ défaut de façon conditionnel pour un bloc, qui ne doit pas déjà exister::
     // Quelque part plus loin dans la vue/layout parent
     echo $this->fetch('navbar');
 
-Dans l'exemple ci-dessus, le bloc ``navbar`` va seulement contenir le contenu
-ajouté dans la première section. Puisque le bloc a été défini dans la vue
+Dans l'exemple ci-dessus, le block ``navbar`` va seulement contenir le contenu
+ajouté dans la première section. Puisque le block a été défini dans la vue
 enfant, le contenu par défaut avec la balise ``<p>`` sera écarté.
 
 .. versionadded: 2.3
@@ -225,9 +224,9 @@ n'existe pas::
     echo $this->fetch('sidebar');
 
 Vous pouvez également utiliser fetch pour afficher du contenu, sous conditions,
-qui va entourer un bloc existant. Ceci est très utile dans les layouts, ou
-dans les vues étendues où vous voulez, sous conditions, afficher des en-têtes
-ou autres balises::
+qui va entourer un block existant. Ceci est très utile dans les layouts, ou
+dans les vues étendues lorsque vous voulez, sous conditions, afficher des
+en-têtes ou autres balises::
 
     // dans app/View/Layouts/default.ctp
     <?php if ($this->fetch('menu')): ?>
@@ -305,7 +304,7 @@ la page est rendue.
 Les autres fichiers de layout devront être placés dans ``/app/View/Layouts``.
 Quand vous créez un layout, vous devez dire à CakePHP où placer
 la sortie pour vos vues. Pour ce faire, assurez-vous que votre layout contienne
-``$this->fetch('content')``. Voici un exemple auquel un layout pourrait
+``$this->fetch('content')``. Voici un exemple de ce à quoi un layout pourrait
 ressembler::
 
    <!DOCTYPE html>
@@ -407,15 +406,15 @@ actions du controller en utilisant quelque chose comme::
    }
 
 CakePHP dispose de deux fonctionnalités de layout dans le coeur (en plus
-du layout default de CakePHP) vous pouvez utiliser dans votre propre
+du layout default de CakePHP) que vous pouvez utiliser dans votre propre
 application: 'ajax' et 'flash'.
 Le layout Ajax est pratique pour élaborer des réponses Ajax - c'est un layout
 vide (la plupart des appels ajax ne nécessitent qu'un peu de balise en retour,
 et pas une interface de rendu complète). Le layout flash est utilisé
 pour les messages montrés par la méthode :php:meth:`Controller::flash()`.
 
-Trois autres layouts, xml, js, et rss, existent dans le coeur pour une façon
-rapide et facile pour servir du contenu qui n'est pas du text/hmtl.
+Trois autres layouts, xml, js, et rss, existent dans le coeur permettant
+de servir rapidement et facilement du contenu qui n'est pas du text/html.
 
 Utiliser les layouts à partir de plugins
 ----------------------------------------
@@ -423,7 +422,7 @@ Utiliser les layouts à partir de plugins
 .. versionadded:: 2.1
 
 Si vous souhaitez utiliser un layout qui existe dans un plugin, vous pouvez
-utiliser :term:`syntaxe de plugin`. Par exemple pour utiliser le layout de
+utiliser la :term:`syntaxe de plugin`. Par exemple pour utiliser le layout de
 contact à partir du plugin Contacts::
 
     class UsersController extends AppController {
@@ -440,9 +439,9 @@ Elements
 
 Beaucoup d'applications ont des petits blocks de code de présentation qui
 doivent être répliqués d'une page à une autre, parfois à des endroits
-différents des le layout. CakePHP peut vous aider à répéter des parties
+différents dans le layout. CakePHP peut vous aider à répéter des parties
 de votre site web qui doivent être réutilisées. Ces parties réutilisables
-sont appelées des Elements. Les Publicités, les boites d'aides, les contrôles
+sont appelées des Elements. Les publicités, les boites d'aides, les contrôles
 de navigation, les menus supplémentaires, les formulaires de connexion et de
 sortie sont souvent intégrés dans CakePHP en elements. Un element est tout
 bêtement une mini-vue qui peut être inclue dans d'autres vues, dans les
@@ -489,11 +488,11 @@ l'element. Les options supoortés sont 'cache' et 'callbacks'. Un exemple::
     );
 
 La mise en cache d'element est facilitée par la classe :php:class:`Cache`. Vous
-pouvez configurer les elements pour être stockés dans toute configuration de
-Cache que vous avez défini. Cecla vous donne une grande flexibilité pour
+pouvez configurer les elements devant être stockés dans toute configuration de
+Cache que vous avez défini. Cela vous donne une grande flexibilité pour
 choisir où et combien de temps les elements sont stockés. Pour mettre en cache
 les différentes versions du même element dans une application,
-fournissez une valeur de clé cache unique en utilisant le format suivant::
+fournissez une valeur unique de la clé cache en utilisant le format suivant::
 
     $this->element('helpbox', array(), array(
             "cache" => array('config' => 'short', 'key' => 'unique value')
@@ -541,7 +540,7 @@ Mise en cache des Elements
 Vous pouvez tirer profit de la mise en cache de vue de CakePHP si vous
 fournissez un paramètre cache. Si défini à true, cela va mettre en cache
 l'element dans la configuration 'default' de Cache. Sinon, vous pouvez définir
-quelle configuration de cache doit être utilisée. Regardez
+la configuration de cache devant être utilisée. Regardez
 :doc:`/core-libraries/caching` pour plus d'informations sur la façon de
 configurer :php:class:`Cache`. Un exemple simple de mise en cache d'un element
 serait par exemple::
@@ -549,7 +548,7 @@ serait par exemple::
     echo $this->element('helpbox', array(), array('cache' => true));
 
 Si vous rendez le même element plus d'une fois dans une vue et que vous avez
-activer la mise en cache, assurez-vous de définir le paramètre 'key' avec
+activé la mise en cache, assurez-vous de définir le paramètre 'key' avec
 un nom différent à chaque fois. Cela évitera que chaque appel successif
 n'écrase le résultat de la mise en cache du précédent appel de element().
 Par exemple::
@@ -569,9 +568,9 @@ Par exemple::
 Ce qui est au-dessus va s'enquérir que les deux résultats d'element sont
 mis en cache séparément. Si vous voulez que tous les elements mis en cache
 utilisent la même configuration du cache, vous pouvez sauvegarder quelques
-répétitions, en configurant :php:attr:`View::$elementCache` à la configuration
-de Cache que vous souhaitez utiliser. CakePHP va utiliser cette configuration,
-quand aucune n'est donnée.
+répétitions, en configurant :php:attr:`View::$elementCache` dans la
+configuration de Cache que vous souhaitez utiliser. CakePHP va utiliser cette
+configuration, quand aucune n'est donnée.
 
 Requêter les Elements à partir d'un Plugin
 ------------------------------------------
@@ -579,7 +578,7 @@ Requêter les Elements à partir d'un Plugin
 2.0
 ---
 
-Pour charger un element d'un plugin, utilisez l'option `plugin` (enlevé de
+Pour charger un element d'un plugin, utilisez l'option `plugin` (retiré de
 l'option `data` dans 1.x)::
 
     echo $this->element('helpbox', array(), array('plugin' => 'Contacts'));
@@ -654,7 +653,7 @@ Pour appeler toute méthode de view, utilisez ``$this->method()``
 
     Les Views ont une méthode ``set()`` qui est analogue à ``set()`` qui
     se trouvent dans les objets du controller. Utiliser set() à partir
-    de votre fichier de vue va ajouter les variables au layout et elements
+    de votre fichier de vue va ajouter les variables au layout et aux elements
     qui seront rendus plus tard. Regarder :ref:`controller-methods` pour plus
     d'informations sur l'utilisation de set().
 
@@ -667,7 +666,7 @@ Pour appeler toute méthode de view, utilisez ``$this->method()``
 
 .. php:method:: getVar(string $var)
 
-    Récupère la valeur de viewVar avec le nom $var
+    Récupère la valeur de viewVar avec le nom $var.
 
 .. php:method:: getVars()
 
@@ -676,14 +675,14 @@ Pour appeler toute méthode de view, utilisez ``$this->method()``
 
 .. php:method:: element(string $elementPath, array $data, array $options = array())
 
-    Rend un element ou une vue partiel. Regardez la section sur
+    Rend un element ou une vue partielle. Regardez la section sur
     :ref:`view-elements` pour plus d'informations et d'exemples.
 
 .. php:method:: uuid(string $object, mixed $url)
 
-    Génére un ID de DOM unique pas au hasard pour un objet, basé sur le type
-    d'objet et l'url. Cette méthode est souvent utilisée par les helpers qui
-    ont besoin de générer un ID de DOM unique pour les elements comme
+    Génère un ID de DOM unique pour un objet non pris au hasard, basé sur le
+    type d'objet et l'url. Cette méthode est souvent utilisée par les helpers
+    qui ont besoin de générer un ID de DOM unique pour les elements comme
     le :php:class:`JsHelper`::
 
         $uuid = $this->uuid('form', array('controller' => 'posts', 'action' => 'index'));
@@ -709,8 +708,8 @@ Pour appeler toute méthode de view, utilisez ``$this->method()``
 
 .. php:method:: start($name)
 
-    Commence un block de capture pour un block de vue. Regardez la section sur
-    les :ref:`view-blocks` pour avoir des exemples.
+    Commence un block de capture pour un block de vue. Regardez la section
+    :ref:`view-blocks` pour avoir des exemples.
 
     .. versionadded:: 2.1
 
@@ -760,14 +759,14 @@ Pour appeler toute méthode de view, utilisez ``$this->method()``
 
 .. php:method:: extend($name)
 
-    Etend la vue/element/layout courant avec celle dans $name. Regardez la
-    section sur les :ref:`extending-views` pour les examples.
+    Etend la vue/element/layout courant avec celle contenu dans $name. Regardez
+    la section sur les :ref:`extending-views` pour les exemples.
 
     .. versionadded:: 2.1
 
 .. php:attr:: layout
 
-    Définissez le layout qui va entouré la vue courante.
+    Définit le layout qui va entourer la vue courante.
 
 .. php:attr:: elementCache
 

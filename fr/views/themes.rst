@@ -29,9 +29,9 @@ que CakePHP attend des noms de thème en CamelCase. Au-delà de ça, la structur
 de dossier dans le dossier ``/app/View/Themed/Exemple/`` est exactement le même
 que ``/app/View/``.
 
-Par exemple, le fichier de vue pour une action edit d'un contôleur Posts
-residera dans ``/app/View/Themed/Exemple/Posts/edit.ctp``. Les fichiers de
-Layout résideront dans ``/app/View/Themed/Exemple/Layouts/``.
+Par exemple, le fichier de vue pour une action edit d'un controller Posts
+se trouvera dans ``/app/View/Themed/Exemple/Posts/edit.ctp``. Les fichiers de
+Layout se trouveront dans ``/app/View/Themed/Exemple/Layouts/``.
 
 Si un fichier de vue ne peut pas être trouvé dans le thème, CakePHP va
 essayer de localiser le fichier de vue dans le dossier ``/app/View/``.
@@ -78,7 +78,7 @@ tandis que l'équipe du coeur a pris des mesures pour rendre le plugin et
 l'asset du thème servis aussi vite que possible, il peut y avoir des
 situations où plus de performance est requis. Dans ces situations, il
 est recommandé soit que vous fassiez un lien symbolique soit que vous
-fassiez une copie sur les assets du plug-in/thème à des répertoires
+fassiez une copie sur les assets du plug-in/thème vers des répertoires
 dans ``app/webroot`` avec des chemins correspondant à ceux utilisés par
 cakephp.
 

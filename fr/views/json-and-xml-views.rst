@@ -20,7 +20,7 @@ Avant que vous puissiez utiliser les classes de vue de données, vous aurez
 besoin de faire un peu de configuration:
 
 #. Activez les extensions json et/ou xml avec
-   :php:meth:`Router::parseExtensions()`.  Cela activera Router pour gérer les
+   :php:meth:`Router::parseExtensions()`. Cela permettra au Router de gérer les
    multiples extensions.
 #. Ajoutez le :php:class:`RequestHandlerComponent` à la liste de components de
    votre controller. Cela activera automatiquement le changement de la classe
@@ -41,15 +41,15 @@ Utilisation des vues de données avec la clé _serialize
 ======================================================
 
 La clé ``_serialize`` est une variable de vue spéciale qui indique quel
-autre(s) variable(s) de vue devraient être sérialisée(s) quan on utilise la vue
-de données. Cela vous permet de sauter la définition des fichiers de vue pour
-vos actions de controller si vous n'avez pas besoin de faire un formatage avant
-que vos données soient converties en json/xml.
+autre(s) variable(s) de vue devraient être sérialisée(s) quand on utilise la
+vue de données. Cela vous permet de sauter la définition des fichiers de vue
+pour vos actions de controller si vous n'avez pas besoin de faire un formatage
+avant que vos données ne soient converties en json/xml.
 
-Si vous avez besoin de faire n'importe quel formatage ou manipulation de vos
-variables de vue avant la génération de la réponse, vous devriez utiliser les
+Si vous avez besoin de faire tout type de formatage ou de manipulation de vos
+variables de vue avant la génération de la réponse, vous devrez utiliser les
 fichiers de vue. La valeur de ``_serialize`` peut être soit une chaîne de
-caractère, soit un tableau de variables de vue pour sérialiser::
+caractère, soit un tableau de variables de vue à sérialiser::
 
     class PostsController extends AppController {
         public function index() {
@@ -58,7 +58,7 @@ caractère, soit un tableau de variables de vue pour sérialiser::
         }
     }
 
-Vous pouvez aussi définir ``_serialize`` en tableau de variables de vue pour
+Vous pouvez aussi définir ``_serialize`` en tableau de variables de vue à
 combiner::
 
     class PostsController extends AppController {
@@ -69,10 +69,10 @@ combiner::
         }
     }
 
-Définir ``_serialize`` en tableau a le bénéfice ajouté d'ajouter
+Définir ``_serialize`` en tableau a le bénéfice supplémentaire d'ajouter
 automatiquement un elément de top-niveau ``<response>`` en utilisant
 :php:class:`XmlView`. Si vous utilisez une valeur de chaîne de caractère pour
-``_serialize`` et XmlView, assurez vous que vos variables de vue aient un
+``_serialize`` et XmlView, assurez-vous que vos variables de vue aient un
 elément unique de top-niveau. Sans un elément de top-niveau, le Xml ne pourra
 être généré.
 
@@ -82,8 +82,8 @@ Utilisation d'une vue de données avec les fichiers de vue
 Vous devriez utiliser les fichiers de vue si vous avez besoin de faire des
 manipulations du contenu de votre vue avant de créer la sortie finale. Par
 exemple, si vous avez des posts, qui ont un champ contenant du HTML généré,
-nous voudrons probablement omettre ceci à partir d'une réponse JSON. C'est
-une situation où un fichier de vue serait utile::
+vous aurez probablement envie d'omettre ceci à partir d'une réponse JSON.
+C'est une situation où un fichier de vue est utile::
 
     // Code du controller
     class PostsController extends AppController {
@@ -98,8 +98,8 @@ une situation où un fichier de vue serait utile::
     }
     echo json_encode(compact('posts', 'comments'));
 
-Vous pouvez faire des manipulations encore beaucoup plus complexes, ou
-utiliser les helpers pour formater aussi.
+Vous pouvez faire des manipulations encore beaucoup plus complexes, comme
+utiliser les helpers pour formater.
 
 .. note::
 
@@ -131,8 +131,8 @@ JSONP response
 
 Quand vous utilisez JsonView, vous pouvez utiliser la variable de vue spéciale
 ``_jsonp`` pour permettre de retourner une réponse JSONP. La définir à ``true``
-fait que la classe de vue vérifie si le paramètre de chaine de la requête nommé
-"callback" est défini et si c'est la cas, d'enrouler la réponse json dans le
-nom de la fonction fournie. Si vous voulez utiliser un nom personnalisé de
-paramètre de requête à la place de "callback", définissez ``_jsonp`` avec le
-nom requis à la place de ``true``.
+fait que la classe de vue vérifie si le paramètre de chaine de la requête
+nommée "callback" est définie et si c'est la cas, permet d'enrouler la réponse
+json dans le nom de la fonction fournie. Si vous voulez utiliser un nom
+personnalisé de paramètre de requête à la place de "callback", définissez
+``_jsonp`` avec le nom requis à la place de ``true``.
