@@ -59,7 +59,7 @@ fonction des règles du driver de la base de données courante.
 Retourne true si l'enregistrement avec un ID particulier existe.
 
 Si l'ID n'est pas fourni, elle appelle :php:meth:`Model::getID()` pour obtenir
-l'ID de l'enregistrement courant pour vérifier, et execute ensuite un
+l'ID de l'enregistrement courant pour vérifier, et exécute ensuite un
 ``Model::find('count')`` sur la source de données actuellement configurée pour
 vérifier l'existence de l'enregistrement dans un stockage persistant.
 
