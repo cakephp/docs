@@ -114,7 +114,7 @@ Advanced bootstrapping
 
 例えば、viewsの一つに必要なコンタクト情報をいくつか出力するために、
 ContacktMangerプラグインのContactInfoHelperを使いたい場合、
-コントローラ内で、このように$helplers配列をこのように用意します。
+コントローラ内で、$helplers配列をこのように用意します。
 
 ::
 
