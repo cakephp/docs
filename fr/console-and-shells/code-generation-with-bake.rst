@@ -222,9 +222,9 @@ vérifiés jusqu'à ce que le template correct soit trouvé.
 Nouveau dans 1.3 sont les chemins supplémentaires pour spécifier les noms de
 plugin quand on utilise bake. En plus de ``cake bake plugin Todo controller
 Posts``, il y a deux nouvelles formes. ``cake bake controller Todo.Posts`` et
-``cake bake controller Posts -plugin Todo``. Le paramètre de plugin peut aussi
+``cake bake controller Posts --plugin Todo``. Le paramètre de plugin peut aussi
 exister en utilisant le bake interactif.
-``cake bake controller -plugin Todo``, par exemple vous autorisera
+``cake bake controller --plugin Todo``, par exemple vous autorisera
 à utiliser le bake interactif pour ajouter des controllers à votre plugin Todo.
 Des chemins de plugin supplémentaires / multiples sont aussi supportés. Dans
 le passé, bake nécessitait que le plugin soit dans app/plugins. Dans 1.3, bake
