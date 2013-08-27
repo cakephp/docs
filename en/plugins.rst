@@ -332,8 +332,7 @@ plugin's 'webroot' directory, just like the main application's assets::
                                         pdf/
 
 You may put any type of file in any directory, just like a regular 
-webroot. The only restriction is that ``MediaView`` needs to know 
-the mime-type of that asset.
+webroot.
 
 But keep in mind that handling static assets, such as images, Javascript
 and CSS files of plugins, through the Dispatcher is incredibly inefficient.
