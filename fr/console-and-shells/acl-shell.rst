@@ -6,8 +6,8 @@ de données Acl. Il est souvent plus pratique que l'ajout de modifications
 ponctuelles dans les controllers.
 
 La plupart des sous-commandes shell acl implique le référencement des noeuds
-aco/aro. Comme il y a deux 'formes' de ces noeuds, il existe deux notation dans
-le shell::
+aco/aro. Comme il y a deux 'formes' de ces noeuds, il existe deux notations
+dans le shell::
 
     # Un Model + référence de la clé étrangère
     ./Console/cake acl view aro Model.1
