@@ -64,7 +64,7 @@ the ActiveRecord features offered by Model::
     $this->Post->set('title', 'New title for the article');
     $this->Post->save();
 
-Is an example of how you can use ``set()`` to update and save
+Is an example of how you can use ``set()`` to update
 single fields, in an ActiveRecord approach. You can also use
 ``set()`` to assign new values to multiple fields::
 
@@ -75,8 +75,8 @@ single fields, in an ActiveRecord approach. You can also use
     ));
     $this->Post->save();
 
-The above would update the title and published fields and save them
-to the database.
+The above would update the title and published fields and save the 
+record to the database.
 
 :php:meth:`Model::clear()`
 ==========================
