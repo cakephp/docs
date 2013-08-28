@@ -436,7 +436,7 @@ features of :php:class:`RequestHandlerComponent` if you are using it.
 .. _cake-response-file:
 
 Sending files
-===================
+=============
 
 There are times when you want to send files as responses for your requests.
 Prior to version 2.3 you could use :doc:`/views/media-view` to accomplish that.
