@@ -65,9 +65,9 @@ par le model::
     $this->Post->set('title', 'Nouveau titre pour l\'article');
     $this->Post->save();
 
-Dans un exemple de l'utilisation de ``set()`` pour mettre à jour et sauvegarder
-les champs uniques, dans une approche ActiveRecord. Vous pouvez aussi utiliser
-``set()`` pour assigner de nouvelles valeurs aux champs multiples::
+C'est un exemple de l'utilisation de ``set()`` pour mettre à jour les champs
+uniques, dans une approche ActiveRecord. Vous pouvez aussi utiliser ``set()``
+pour assigner de nouvelles valeurs aux champs multiples::
 
     $this->Post->read(null, 1);
     $this->Post->set(array(
@@ -76,8 +76,8 @@ les champs uniques, dans une approche ActiveRecord. Vous pouvez aussi utiliser
     ));
     $this->Post->save();
 
-Ce qui est au-dessus met à jour les champs title et published et les sauvegarde
-dans le base de données.
+Ce qui est au-dessus met à jour les champs title et published et sauvegarde
+l'enregistrement dans le base de données.
 
 :php:meth:`Model::clear()`
 ==========================
