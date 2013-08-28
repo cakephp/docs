@@ -460,6 +460,23 @@ the browser by specifying the options::
 
     $this->response->file($file['path'], array('download' => true, 'name' => 'foo'));
 
+Sending a string as file
+========================
+
+To send a file as response which does not exist on disk, for instance when you generate pdf or ics on the fly and want
+to serve the generated string as file you can do that by using::
+
+    public function sendIcs() {
+        $icsString = $this->Calendar->generateIcs();
+        $this->response->body($icsString);
+        $this->response->type('ics');
+
+        //Optionally force file download
+        $this->response->download('filename_for_download.ics')
+
+        //Return response object to prevent controller from trying to render a view
+        return $this->response;
+    }
 
 Setting headers
 ===============
