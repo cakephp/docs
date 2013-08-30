@@ -9,6 +9,7 @@ Console
 
 - Logged notice messages will now be colourized in terminals that support
   colours.
+- ConsoleShell is now deprecated.
 
 SchemaShell
 -----------
@@ -64,6 +65,12 @@ PasswordHasher
 - Authenticating objects now use new password hasher objects for password hash
   generation and checking. See :ref:`hashing-passwords` for more info.
 
+DbAcl
+-----
+
+- DbAcl now uses ``INNER`` joins instead of ``LEFT`` joins. This improves
+  performance for some database vendors.
+
 Model
 =====
 
@@ -82,6 +89,8 @@ Datasource
 - Mysql, Postgres, and SQLserver now support a 'settings' array in the
   connection definition. This key => value pair will be issued as ``SET`` commands when the
   connection is created.
+- Mysql driver now supports SSL options.
+
 
 View
 ====
@@ -90,6 +99,14 @@ JsonView
 --------
 
 - JSONP support has been added to :php:class:`JsonView`.
+- The ``_serialize`` key now supports renaming serialized variables.
+- When debug > 0 JSON will be pretty printed.
+
+XmlView
+-------
+
+- The ``_serialize`` key now supports renaming serialized variables.
+- When debug > 0 XML will be pretty printed.
 
 HtmlHelper
 ----------
@@ -126,9 +143,7 @@ CakeRequest
 -----------
 
 - :php:meth:`CakeRequest::param()` has been added.
-
 - :php:meth:`CakeRequest::is()` has been modified to support an array of types and will return true if the request matches any type.
-
 - :php:meth:`CakeRequest::isAll()` has been added to check that a request matches all the given types.
 
 CakeResponse
@@ -147,6 +162,7 @@ CakeEmail
   Japanese hosts that allow non-compliant addresses to be used.
 - :php:meth:`CakeEmail::attachments()` now allows you to provide the file
   contents directly using the ``data`` key.
+- Configuration data is now correctly merged with transport classes.
 
 HttpSocket
 ----------
@@ -243,6 +259,8 @@ CakeTime
   added.
 - :php:meth:`CakeTime::timeAgoInWords()` has two new options to customize the output strings:
   ``relativeString`` (defaults to ``%s ago``) and ``absoluteString`` (defaults to ``on %s``).
+- :php:meth:`CakeTime::timeAgoInWords()` uses fuzzy terms when time is below thresholds.
+
 
 Xml
 ---
@@ -269,4 +287,6 @@ Router
 
 - :php:meth:`Router::fullBaseUrl()` was added together with ``App.fullBaseUrl`` Configure value. They replace
   :php:const:`FULL_BASE_URL` which is now deprecated.
+- :php:meth:`Router::parse()` now parses query string arguments.
+
 
