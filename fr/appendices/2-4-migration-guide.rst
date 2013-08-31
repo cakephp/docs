@@ -9,6 +9,7 @@ Console
 
 - Les messages de log de type notice seront maintenant en couleur dans les
 terminaux qui supportent les couleurs.
+- ConsoleShell est maintenant dépréciée.
 
 SchemaShell
 -----------
@@ -74,6 +75,13 @@ PasswordHasher
   password hasher pour la génération et la vérification des password hashés
   Regardez :ref:`hashing-passwords` pour plus d'info.
 
+DbAcl
+-----
+
+- DbAcl utilise maintenant les jointures ``INNER`` au lieu des jointures
+``LEFT``. Ceci améliore les performances pour certaines bases de données
+  externes.
+
 Model
 =====
 
@@ -93,6 +101,7 @@ Datasource
 - Mysql, Postgres, et SQLserver supportent maintenant un tableau 'settings'
   dans la définition de connection. Cette paire de clé => valeur émettra des
   commandes ``SET`` lorque la connection est créée.
+- Mysql driver supporte maintenant les options SSL.
 
 View
 ====
@@ -101,6 +110,17 @@ JsonView
 --------
 
 - Le support de JSONP a été ajouté à :php:class:`JsonView`.
+- La clé ``_serialize`` supporte maintenant le renommage des variables
+  sérialisées.
+- Quand debug > 0, JSON va être bien imprimé.
+
+XmlView
+-------
+
+- La clé ``_serialize`` supporte maintenant le renommage des variables
+  sérialisées.
+- Quand debug > 0, XML va être bien imprimé.
+
 
 HtmlHelper
 ----------
@@ -166,6 +186,8 @@ CakeEmail
   conformes d'être utilisées.
 - :php:meth:`CakeEmail::attachments()` vous permet de fournir les contenus de
   fichier directement en utilisant la clé ``data``.
+- Les données de Configuration sont maintenant correctement fusionnées avec les
+  classes de transport.
 
 HttpSocket
 ----------
@@ -282,6 +304,8 @@ CakeTime
   personnaliser les chaînes de sortie:
   ``relativeString`` (par défaut à ``%s ago``) et ``absoluteString`` (par
   défaut à ``on %s``).
+- :php:meth:`CakeTime::timeAgoInWords()` utilise les termes fuzzy quand time
+  est inférieur à des seuils.
 
 Xml
 ---
@@ -311,4 +335,6 @@ Router
 - :php:meth:`Router::fullBaseUrl()` a été ajoutée en même temps que la
   valeur de Configure ``App.fullBaseUrl``. Elles remplacent
   :php:const:`FULL_BASE_URL` qui est maintenant dépréciée.
+- :php:meth:`Router::parse()` parse maintenant les arguments de chaîne de
+  requête.
 
