@@ -212,6 +212,8 @@ Most of the following constants refer to paths in your application.
 
     Path to the public CSS directory.
 
+    .. deprecated:: 2.4
+
 .. php:const:: CSS_URL
 
     Web path to the CSS files directory.
@@ -234,6 +236,8 @@ Most of the following constants refer to paths in your application.
 
     Path to the public images directory.
 
+    .. deprecated:: 2.4
+
 .. php:const:: IMAGES_URL
 
     Web path to the public images directory.
@@ -244,6 +248,8 @@ Most of the following constants refer to paths in your application.
 .. php:const:: JS
 
     Path to the public JavaScript directory.
+
+    .. deprecated:: 2.4
 
 .. php:const:: JS_URL
 
