@@ -4,6 +4,14 @@
 CakePHP 2.5 is a fully API compatible upgrade from 2.4.  This page outlines
 the changes and improvements made in 2.5.
 
+Cache
+=====
+
+- A new adapter has been added for ``Memcached``. This new adapter uses
+  ext/memcached instead of ext/memcache. It supports improved performance and
+  shared persistent connections.
+- The ``Memcache`` adapter is now deprecated in favor of ``Memcached``.
+
 Console
 =======
 

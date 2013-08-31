@@ -31,6 +31,8 @@ to implement your own caching systems. The built-in caching engines are:
 * ``MemcacheEngine`` Uses the `Memcache <http://php.net/memcache>`_
   extension.  Memcache provides a very fast cache system that can be
   distributed across many servers, and provides atomic operations.
+* ``MemcachedEngine`` Uses the `Memcached <http://php.net/memcached>`_
+  extension. It also interfaces with memcache but provides better performance.
 * ``RedisEngine`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
   extension. Redis provides a fast and persistent cache system similar to
   memcached, also provides atomic operations.
@@ -39,6 +41,9 @@ to implement your own caching systems. The built-in caching engines are:
     FileEngine is always the default cache engine.  In the past a number of people
     had difficulty setting up and deploying APC correctly both in cli + web.
     Using files should make setting up CakePHP simpler for new developers.
+
+.. versionchanged:: 2.5
+    The Memcached engine was added. And the Memecache engine was deprecated.
 
 Regardless of the CacheEngine you choose to use, your application interacts with
 :php:class:`Cache` in a consistent manner.  This means you can easily swap cache engines
@@ -233,7 +238,7 @@ After setting an integer value, you can manipulate it using
 .. note::
 
     Incrementing and decrementing do not work with FileEngine. You should use
-    APC, Redis or Memcache instead.
+    APC, Redis or Memcached instead.
 
 
 Using groups
@@ -391,7 +396,7 @@ Cache API
 .. php:staticmethod:: clear($check, $config = 'default')
 
     Destroy all cached values for a cache configuration.  In engines like Apc,
-    Memcache and Wincache, the cache configuration's prefix is used to remove
+    Memcached and Wincache, the cache configuration's prefix is used to remove
     cache entries.  Make sure that different cache configurations have different
     prefixes.
 
