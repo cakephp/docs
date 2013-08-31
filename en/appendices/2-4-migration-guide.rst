@@ -42,6 +42,7 @@ Constants
   replaced with config variables ``App.imageBaseUrl``, ``App.jsBaseUrl``,
   ``App.cssBaseUrl`` respectively.
 
+- Constants `IMAGES`, `JS`, `CSS` have been deprecated.
 
 Object
 ------
