@@ -208,49 +208,9 @@ Most of the following constants refer to paths in your application.
 
    Path to the root directory with ending directory slash.
 
-.. php:const:: CSS
-
-    Path to the public CSS directory.
-
-.. php:const:: CSS_URL
-
-    Web path to the CSS files directory.
-
-    .. deprecated:: 2.4
-        Use config value ``App.cssBaseUrl`` instead.
-
 .. php:const:: DS
 
     Short for PHP's DIRECTORY\_SEPARATOR, which is / on Linux and \\ on windows.
-
-.. php:const:: FULL_BASE_URL
-
-    Full url prefix. Such as ``https://example.com``
-
-    .. deprecated:: 2.4
-        This constant is deprecated, you should use :php:meth:`Router::fullbaseUrl()` instead.
-
-.. php:const:: IMAGES
-
-    Path to the public images directory.
-
-.. php:const:: IMAGES_URL
-
-    Web path to the public images directory.
-
-    .. deprecated:: 2.4
-        Use config value ``App.imageBaseUrl`` instead.
-
-.. php:const:: JS
-
-    Path to the public JavaScript directory.
-
-.. php:const:: JS_URL
-
-    Web path to the js files directory.
-
-    .. deprecated:: 2.4
-        Use config value ``App.jsBaseUrl`` instead.
 
 .. php:const:: LOGS
 
