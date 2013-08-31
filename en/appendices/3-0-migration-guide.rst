@@ -26,6 +26,18 @@ filesystem directories.  For example ``Cake/Cache/Cache.php`` is named
 ``Cake\Cache\Cache``.  Global constants and helper methods like :php:meth:`__()`
 and :php:meth:`debug()` are not namespaced for convenience sake.
 
+Constants
+=========
+
+The following deprecated constants have been removed::
+
+* `IMAGES`
+* `CSS`
+* `JS`
+* `IMAGES_URL`
+* `JS_URL`
+* `CSS_URL`
+
 
 Basics
 ======
