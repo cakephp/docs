@@ -147,7 +147,7 @@ blocs pour implémenter des choses telles que les sidebars, ou des régions pour
 charger des ressources dans l'en-tête / pied de page du layout. Un block peut
 être défini de deux manières. Soit en tant que block capturant, soit en le
 déclarant explicitement. Les méthodes ``start()``, ``append()`` et ``end()``
-vous permettent de travailler avec les blocs capturant.
+vous permettent de travailler avec les blocs capturant::
 
     // Creer le block sidebar.
     $this->start('sidebar');
@@ -178,7 +178,7 @@ les blocs. Le ``prepend()`` pour ajouter du contenu avant un block existant::
 La méthode ``startIfEmpty()`` peut être utilisée pour commencer un bloc
 **seulement** si il est vide ou non défini. Si le block existe déjà, le contenu
 capturé va être écarté. C'est utile quand vous voulez définir le contenu par
-défaut de façon conditionnel pour un bloc, qui ne doit pas déjà exister::
+défaut de façon conditionnel pour un bloc, qui ne doit pas déjà exister:
 
 .. code-block:: php
 
