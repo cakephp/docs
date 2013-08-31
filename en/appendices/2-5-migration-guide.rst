@@ -4,6 +4,16 @@
 CakePHP 2.5 is a fully API compatible upgrade from 2.4.  This page outlines
 the changes and improvements made in 2.5.
 
+Console
+=======
+
+SchemaShell
+-----------
+
+- The ``create`` and ``update`` subcommands now have a ``yes`` option. The
+  ``yes`` option allows you to skip the various interactive questions forcing
+  a yes reply.
+
 Network
 =======
 
