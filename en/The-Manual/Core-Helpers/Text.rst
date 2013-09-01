@@ -46,17 +46,17 @@ string or keywords can be shown within the resulting document.
     mined by $radius, and suffixed with $ending. This method is especially handy for
     search results. The query...
 
-**highlight (string $haystack, string $needle, $highlighter= '<span
+**highlight (string $text, string $phrase, $highlighter= '<span
 class="highlight">\\1</span >')**
 
-Highlights $needle in $haystack using the $highlighter string specified.
+Highlights $phrase in $text using the $highlighter string specified.
 
 ::
 
     <?php echo $text->highlight($last_sentence, 'using'); ?> 
     //Output
-    Highlights $needle in $haystack <span class="highlight">using</span> 
-    the $highlighter string specified. 
+    Highlights $phrase in $text <span class="highlight">using</span>
+    the $highlighter string specified.
 
 **stripLinks ($text)**
 
