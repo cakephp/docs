@@ -142,6 +142,9 @@ App.InlineSearch = (function () {
 			});
 			$(document).trigger('search.complete', [response]);
 		});
+
+		var _gaq = _gaq || [];
+		_gaq.push(['_trackEvent', 'Search', 'Search in ' + window.lang, value]);
 	};
 
 	var init = function () {
