@@ -677,7 +677,8 @@ Maintenant que vous avez créé une application Cake basique, vous êtes prêt
 pour les choses sérieuses. Commencez votre propre projet et lisez le reste
 du `Manuel </>`_ et de `l'API <http://api20.cakephp.org>`_.
 
-Si vous avez besoin d'aide, venez nous voir sur le canal IRC #cakephp.
+Si vous avez besoin d'aide, il y a plusieurs façons d'obtenir de l'aide -
+merci de regarder la page :doc:`/cakephp-overview/where-to-get-help`
 Bienvenue sur CakePHP !
 
 Prochaines lectures suggérées
