@@ -25,6 +25,7 @@ BakeShell
   behaviors to be recognized.
 - ``cake bake`` for views, models, controllers, tests and fixtures now supports a ``-f`` or ``--force`` parameter to
   force overwriting of files.
+- Tasks in core can now be aliased in the same way you would Helpers, Components and Behaviors
 
 FixtureTask
 -----------
