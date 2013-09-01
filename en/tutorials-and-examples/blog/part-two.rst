@@ -660,7 +660,7 @@ Now that you've created a basic Cake application you're ready for
 the real thing. Start your own project, read the rest of the
 :doc:`Cookbook </index>` and `API <http://api20.cakephp.org>`_.
 
-If you need help, come see us in #cakephp. Welcome to CakePHP!
+If you need help, there are many ways to get the help you need - please see the :doc:`/cakephp-overview/where-to-get-help` page. Welcome to CakePHP!
 
 Suggested Follow-up Reading
 ---------------------------
