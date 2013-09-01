@@ -19,7 +19,7 @@ CakeRequest
 a number of features for interrogating and interacting with request data.
 On each request one CakeRequest is created and then passed by reference to the various
 layers of an application that use request data.  By default ``CakeRequest`` is assigned to
-``$this->request``, and is available in Controller, Views and Helpers.  You can
+``$this->request``, and is available in Controllers, Views and Helpers.  You can
 also access it in Components by using the controller reference. Some of the duties
 ``CakeRequest`` performs include:
 
