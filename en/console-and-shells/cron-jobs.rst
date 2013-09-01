@@ -7,6 +7,10 @@ trivial to setup, for example::
 
     # m h dom mon dow command
     */5 *   *   *   * cd /full/path/to/app && Console/cake myshell myparam
+    */5 *   *   *   * cd /full/path/to/app && Console/cake Plugin.another example > /dev/null
+    
+    
+    
 
 .. meta::
     :title lang=en: Running Shells as cronjobs
